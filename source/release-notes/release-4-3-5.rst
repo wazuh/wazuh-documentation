@@ -14,7 +14,7 @@ This section lists the changes in version 4.3.5. Every update of the Wazuh solut
 What's new
 ----------
 
-This release includes new features or enhancements as the following:
+This release includes new features or enhancements.
 
 Wazuh manager
 ^^^^^^^^^^^^^
@@ -31,37 +31,12 @@ Ruleset
 - `#13567 <https://github.com/wazuh/wazuh/pull/13567>`_ Deprecated MITRE tags in rules are removed.
 
 
-Wazuh dashboard
-^^^^^^^^^^^^^^^
-- `#4244 <https://github.com/wazuh/wazuh-kibana-app/pull/4244>`_ When a user goes to test a new rule in **Tools** / **Ruleset Test**, there were API messages that were not displayed. Now, this issue is fixed and the messages are displayed on the screen.
-- `#4261 <https://github.com/wazuh/wazuh-kibana-app/pull/4261>`_ An authorization prompt is added in **MITRE** > **Intelligence**.
-- `#4239 <https://github.com/wazuh/wazuh-kibana-app/pull/4239>`_ The reference from Manager is changed to the Wazuh server in the **Deploy new agent** guide.
-- `#4267 <https://github.com/wazuh/wazuh-kibana-app/pull/4267>`_ The filtered tags are removed because they were not supported by the API endpoint.
-- `#4254 <https://github.com/wazuh/wazuh-kibana-app/pull/4254>`_ The styles in visualizations are changed.
-
-
-Wazuh Kibana plugin for Kibana 7.10.2
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-- `#4244 <https://github.com/wazuh/wazuh-kibana-app/pull/4244>`_ When a user goes to test a new rule in **Tools** / **Ruleset Test**, there were API messages that were not displayed. Now, this issue is fixed and the messages are displayed on the screen.
-- `#4261 <https://github.com/wazuh/wazuh-kibana-app/pull/4261>`_ An authorization prompt is added in **MITRE** > **Intelligence**.
-- `#4239 <https://github.com/wazuh/wazuh-kibana-app/pull/4239>`_ The reference from Manager is changed to the Wazuh server in the **Deploy new agent** guide. 
-- `#4267 <https://github.com/wazuh/wazuh-kibana-app/pull/4267>`_ The filtered tags are removed because they were not supported by the API endpoint.
-- `#4254 <https://github.com/wazuh/wazuh-kibana-app/pull/4254>`_ The styles in visualizations are changed.
-
-
-Wazuh Kibana plugin for Kibana 7.16.x and 7.17.x
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-- `#4244 <https://github.com/wazuh/wazuh-kibana-app/pull/4244>`_ When a user goes to test a new rule in **Tools** / **Ruleset Test**, there were API messages that were not displayed. Now, this issue is fixed and the messages are displayed on the screen.
-- `#4261 <https://github.com/wazuh/wazuh-kibana-app/pull/4261>`_ An authorization prompt is added in **MITRE** > **Intelligence**.
-- `#4239 <https://github.com/wazuh/wazuh-kibana-app/pull/4239>`_ The reference from Manager is changed to the Wazuh server in the **Deploy new agent** guide.
-- `#4267 <https://github.com/wazuh/wazuh-kibana-app/pull/4267>`_ The filtered tags are removed because they were not supported by the API endpoint.
-- `#4254 <https://github.com/wazuh/wazuh-kibana-app/pull/4254>`_ The styles in visualizations are changed.
-
-
-Wazuh Splunk app
-^^^^^^^^^^^^^^^^
-- `#1292 <https://github.com/wazuh/wazuh-splunk/pull/1292>`_ The status Pending to the Agents sections is added.
-- `#1276 <https://github.com/wazuh/wazuh-splunk/pull/1276>`_ A disabled state to the Apply changes button on the Agents group editor when no changes on the group are made is added.
+Wazuh dashboard / Wazuh Kibana app
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+- `#4267 <https://github.com/wazuh/wazuh-kibana-app/pull/4267>`_ The behavior of the selector of tags used to filter log messages is changed to make this feature more flexible, allowing users to filter freely. 
+- `#13841 <https://github.com/wazuh/wazuh/issues/13841>`_ The API logs endpoint tags filtering is refactored.
+- `#4254 <https://github.com/wazuh/wazuh-kibana-app/pull/4254>`_ The text size of the dashboard is aligned with the tables below to improve the overall page design.
+- `#4239 <https://github.com/wazuh/wazuh-kibana-app/pull/4239>`_ The reference from Wazuh Manager is changed to Wazuh Server on the agents' deployment page.
 
 
 Packages
@@ -131,51 +106,14 @@ Reference                                                         Description
 ==============================================================    =============
 
 
-Wazuh dashboard
-^^^^^^^^^^^^^^^
+Wazuh dashboard / Wazuh Kibana app
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 ==============================================================    =============
 Reference                                                         Description
 ==============================================================    =============
-`#4233 <https://github.com/wazuh/wazuh-kibana-app/pull/4233>`_    Type error when changing screen size in agents section is fixed.
-`#4235 <https://github.com/wazuh/wazuh-kibana-app/pull/4235>`_    A logged error that appeared when the ``statistics`` tasks tried to create an index with the same name, causing the second task to fail on the creation of the index because it already exists, is removed.
-`#4237 <https://github.com/wazuh/wazuh-kibana-app/pull/4237>`_    A UI crash due to a query with syntax errors in ``Modules/Security events`` is fixed.
-`#4240 <https://github.com/wazuh/wazuh-kibana-app/pull/4240>`_    An error when generating a module report after changing the selected agent is fixed.
-`#4266 <https://github.com/wazuh/wazuh-kibana-app/pull/4266>`_    An unhandled error when a Wazuh API request failed in the dev tools is fixed.
-`#4264 <https://github.com/wazuh/wazuh-kibana-app/pull/4264>`_    An error related to ``API not available`` when saving the manager configuration and restarting the manager from ``Management/Configuration/Edit configuration`` on manager mode is fixed.
-`#4253 <https://github.com/wazuh/wazuh-kibana-app/pull/4253>`_    A UI problem that required scrolling to see the logs in Management/Logs and Settings/Logs is fixed.
-==============================================================    =============
-
-
-Wazuh Kibana plugin for Kibana 7.10.2
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-
-==============================================================    =============
-Reference                                                         Description
-==============================================================    =============
-`#4233 <https://github.com/wazuh/wazuh-kibana-app/pull/4233>`_    Type error when changing screen size in agents section is fixed.
-`#4235 <https://github.com/wazuh/wazuh-kibana-app/pull/4235>`_    A logged error that appeared when the ``statistics`` tasks tried to create an index with the same name, causing the second task to fail on the creation of the index because it already exists, is removed.
-`#4237 <https://github.com/wazuh/wazuh-kibana-app/pull/4237>`_    A UI crash due to a query with syntax errors in ``Modules/Security events`` is fixed.
-`#4240 <https://github.com/wazuh/wazuh-kibana-app/pull/4240>`_    An error when generating a module report after changing the selected agent is fixed.
-`#4266 <https://github.com/wazuh/wazuh-kibana-app/pull/4266>`_    An unhandled error when a Wazuh API request failed in the dev tools is fixed.
-`#4264 <https://github.com/wazuh/wazuh-kibana-app/pull/4264>`_    An error related to ``API not available`` when saving the manager configuration and restarting the manager from ``Management/Configuration/Edit configuration`` on manager mode is fixed.
-`#4253 <https://github.com/wazuh/wazuh-kibana-app/pull/4253>`_    A UI problem that required scrolling to see the logs in Management/Logs and Settings/Logs is fixed.
-==============================================================    =============
-
-
-Wazuh Kibana plugin for Kibana 7.16.x and 7.17.x
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-
-==============================================================    =============
-Reference                                                         Description
-==============================================================    =============
-`#4233 <https://github.com/wazuh/wazuh-kibana-app/pull/4233>`_    Type error when changing screen size in agents section is fixed.
-`#4235 <https://github.com/wazuh/wazuh-kibana-app/pull/4235>`_    A logged error that appeared when the ``statistics`` tasks tried to create an index with the same name, causing the second task to fail on the creation of the index because it already exists, is removed.
-`#4237 <https://github.com/wazuh/wazuh-kibana-app/pull/4237>`_    A UI crash due to a query with syntax errors in ``Modules/Security events`` is fixed.
-`#4240 <https://github.com/wazuh/wazuh-kibana-app/pull/4240>`_    An error when generating a module report after changing the selected agent is fixed.
-`#4266 <https://github.com/wazuh/wazuh-kibana-app/pull/4266>`_    An unhandled error when a Wazuh API request failed in the dev tools is fixed.
-`#4264 <https://github.com/wazuh/wazuh-kibana-app/pull/4264>`_    An error related to ``API not available`` when saving the manager configuration and restarting the manager from ``Management/Configuration/Edit configuration`` on manager mode is fixed.
-`#4253 <https://github.com/wazuh/wazuh-kibana-app/pull/4253>`_    A UI problem that required scrolling to see the logs in Management/Logs and Settings/Logs is fixed.
+`#4233 <https://github.com/wazuh/wazuh-kibana-app/pull/4233>`_    The type error when changing screen size in the agent section is fixed.
+`#4235 <https://github.com/wazuh/wazuh-kibana-app/pull/4235>`_    A logged error that appeared when the statistics tasks tried to create an index with the same name, causing the second task to fail on the creation of the index because it already exists is fixed.
 ==============================================================    =============
 
 
