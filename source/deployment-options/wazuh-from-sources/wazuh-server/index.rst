@@ -64,19 +64,6 @@ Installing dependencies
             # curl -OL https://packages.wazuh.com/utils/cmake/cmake-3.18.3.tar.gz && tar -zxf cmake-3.18.3.tar.gz && cd cmake-3.18.3 && ./bootstrap --no-system-curl && make -j$(nproc) && make install
             # cd .. && rm -rf cmake-*
             
-    .. group-tab:: ZYpp
-    
-        .. code-block:: console
-        
-            # zypper install -y make cmake gcc gcc-c++ policycoreutils-python automake autoconf libtool libopenssl-devel curl
-            
-        CMake 3.18 installation
-        
-        .. code-block:: console
-        
-            # curl -OL https://packages.wazuh.com/utils/cmake/cmake-3.18.3.tar.gz && tar -zxf  cmake-3.18.3.tar.gz && cd cmake-3.18.3 && ./bootstrap --no-system-curl && make -j$(nproc) && make install
-            # cd .. && rm -rf cmake-*
-            
     .. group-tab:: Pacman
     
         GCC/G++ 9.4 is the recommended version to build wazuh.
@@ -105,13 +92,6 @@ To install the required dependencies to build the python interpreter, follow the
             # echo "deb-src http://archive.ubuntu.com/ubuntu $(lsb_release -cs) main" >> /etc/apt/sources.list
             # apt-get update
             # apt-get build-dep python3 -y
-
-    .. group-tab:: ZYpp
-    
-        .. code-block:: console
-        
-            # zypper install epel-release yum-utils -y
-            # zypper-builddep python34 -y
 
 .. note::
   
