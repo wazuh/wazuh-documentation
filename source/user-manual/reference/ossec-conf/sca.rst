@@ -151,7 +151,7 @@ The SCA module will perform the scan immediately when started.
 interval
 ^^^^^^^^
 
-Interval between module executions.
+The interval between module executions.
 
 +--------------------+----------------------------------------------------------------------------------------------------------------------------------------------------------------+
 | **Default value**  | 12h                                                                                                                                                            |

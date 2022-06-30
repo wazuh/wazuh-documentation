@@ -15,7 +15,7 @@ The first thing you need to do is to set up a system with the requirements neede
 
 .. note::
    
-   Root user privileges required to execute all the commands described below.
+   Root user privileges are required to execute all the commands described below.
 
 Requirements
 ------------
@@ -33,7 +33,7 @@ It is recommended to configure the Docker host preferences to give at least 6GB 
 Increase max_map_count on your host (Linux)
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-Wazuh Indexer needs to be able to create many memory-mapped areas. So the kernel has to be set to give a process at least 262,144 memory-mapped areas.
+Wazuh Indexer needs to be able to create many memory-mapped areas. So the kernel has to be set to give a process of at least 262,144 memory-mapped areas.
 
 1. You need to increase ``max_map_count`` on your Docker host:
 
@@ -47,7 +47,7 @@ Wazuh Indexer needs to be able to create many memory-mapped areas. So the kernel
 
    .. warning::
 
-      If you don’t set the ``max_map_count`` on your host, Wazuh indexer will NOT work properly.
+      If you don’t set the ``max_map_count`` on your host, the Wazuh indexer will NOT work properly.
 
 
 Docker engine

@@ -118,7 +118,7 @@ Certificates creation and deployment
 
     .. include:: ../../../_templates/installations/basic/elastic/common/generate_elastic_credentials.rst
 
-To check that the installation was made successfully, run the following command replacing ``<elastic_password>`` by the password generated on the previous step for ``elastic`` user:
+To check that the installation was made successfully, run the following command replacing ``<elastic_password>`` with the password generated in the previous step for ``elastic`` user:
 
 
 .. code-block:: console
@@ -155,7 +155,7 @@ This command should have an output like this:
 Installing Wazuh server
 -----------------------
 
-The Wazuh server collects and analyzes data from deployed agents. It runs the Wazuh manager, the Wazuh API and Filebeat. The first step to set up Wazuh is to add the Wazuh repository to the server. Alternatively, the Wazuh manager package can be downloaded directly and compatible versions can be checked :doc:`here </installation-guide/packages-list>`.
+The Wazuh server collects and analyzes data from deployed agents. It runs the Wazuh manager, the Wazuh API and Filebeat. The first step in setting up Wazuh is to add the Wazuh repository to the server. Alternatively, the Wazuh manager package can be downloaded directly, and compatible versions can be checked :doc:`here </installation-guide/packages-list>`.
 
 
 Adding the Wazuh repository

@@ -86,7 +86,11 @@ By default, when Wazuh starts it will only read all log content from GitHub sinc
 interval
 ^^^^^^^^
 
-Interval between Wazuh wodle executions.
+The interval between Wazuh wodle executions.
+
+.. note::
+
+    When Wazuh starts, it waits for the configured time interval before running the first scan, unless the module has already been running before and the ``only_future_events`` option is set to no.
 
 +--------------------+-----------------------------------------------------------------------------------------------------------------------------------------+
 | **Default value**  | 10m                                                                                                                                     |
@@ -127,6 +131,10 @@ This block configures the credential for the **authentication** with the GitHub 
 
 - `api_auth\\org_name`_
 - `api_auth\\api_token`_
+
+.. warning::
+
+    In case of invalid configuration, after the third scan attempt, a warning message is generated in the log file and an alert is triggered.
 
 +----------------------------------------+----------------------------------------------+
 | Options                                | Allowed values                               |

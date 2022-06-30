@@ -32,7 +32,7 @@ Wazuh server and Elastic Stack are installed on the same host. This type of depl
 
     - Elastic Stack, including Elasticsearch as a single-node cluster, and Kibana, including the Wazuh Kibana plugin.
 
-    The communication is be encrypted using certificates. Follow the installation guide to install and configure all the required components.
+    The communication is encrypted using certificates. Follow the installation guide to install and configure all the required components.
 
 
 

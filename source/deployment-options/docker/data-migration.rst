@@ -8,7 +8,7 @@ Open Distro data migration to Wazuh indexer on Docker
 
 For users using Wazuh version 4.2.x with Open Distro for Elasticsearch. This procedure explains how to migrate data from Open Distro for Elasticsearch to Wazuh Indexer in Docker production deployments (v4.2.x to v|WAZUH_LATEST_MINOR|).
 
-Assuming that version 4.2.x production cluster was previously deployed.
+Assuming that the version 4.2.x production cluster was previously deployed.
 
 #. From the ``wazuh-docker`` directory, stop the current v4.2.x environment:
 
