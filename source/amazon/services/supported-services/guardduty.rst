@@ -63,7 +63,7 @@ Amazon configuration
       :align: center
       :width: 70%
 
-#. The following page is just a summary of the Firehose stream created, go to the bottom of the page and click on the *Create delivery stream* button:
+#. The following page is just a summary of the Firehose stream created. Go to the bottom of the page and click on the **Create delivery stream** button.
 
     .. thumbnail:: ../../../images/aws/aws-create-firehose-11.png
       :align: center
