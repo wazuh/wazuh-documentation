@@ -185,7 +185,7 @@ IAM Roles can also be used to access the S3 bucket. Follow these steps to create
       :align: center
       :width: 70%
 
-9. Add your user to the *Principal* tag and click on **Update Trust Policy** button:
+9. Add your user to the *Principal* tag and click on the **Update Trust Policy** button:
 
     .. thumbnail:: ../../../images/aws/aws-create-role-10.png
       :align: center
