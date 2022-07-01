@@ -179,7 +179,7 @@ IAM Roles can also be used to access the S3 bucket. Follow these steps to create
       :align: center
       :width: 70%
 
-8. Come back to the role's summary, go to *Trust relationships* tab and click on **Edit trust relationship** button:
+8. Come back to the role summary, go to the *Trust relationships* tab and click on the **Edit trust relationship** button:
 
     .. thumbnail:: ../../../images/aws/aws-create-role-9.png
       :align: center
