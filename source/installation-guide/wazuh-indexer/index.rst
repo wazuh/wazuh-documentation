@@ -18,10 +18,48 @@ Check the requirements below and choose an installation method to start installi
 
 - :doc:`Step-by-step installation <step-by-step>`: Install this component following detailed step-by-step instructions.
 
-.. thumbnail:: /images/installation/Wazuh-Indexer-Installation-1.png
-    :alt: Wazuh indexer installation
-    :align: center
-    :width: 100%
+.. raw:: html
+
+  <div class="link-boxes-group layout-3" data-step="1">
+    <div class="link-boxes-item">
+      <a class="link-boxes-link vertical-content" href="#">
+        <p class="link-boxes-label">Install the Wazuh indexer</p>
+
+.. image:: ../../images/installation/Indexer-Circle.png
+     :align: center
+     :height: 61px
+
+.. raw:: html
+
+      </a>
+    </div>
+  
+    <div class="link-boxes-item">
+      <a class="link-boxes-link vertical-content" href="../wazuh-server/index.html">
+        <p class="link-boxes-label">Install the Wazuh server</p>
+
+.. image:: ../../images/installation/Server-noBG.png
+     :align: center
+     :height: 61px
+
+.. raw:: html
+
+      </a>
+    </div>
+  
+    <div class="link-boxes-item">
+      <a class="link-boxes-link vertical-content" href="../wazuh-dashboard/index.html">
+        <p class="link-boxes-label">Install the Wazuh dashboard</p>
+
+.. image:: ../../images/installation/Dashboard-noBG.png
+     :align: center
+     :height: 61px
+     
+.. raw:: html
+
+      </a>
+    </div>
+  </div>
 
 Requirements
 ------------

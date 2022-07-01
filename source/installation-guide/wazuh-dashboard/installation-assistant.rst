@@ -58,9 +58,47 @@ Next steps
 
 All the Wazuh central components are successfully installed.
 
-.. thumbnail:: /images/installation/Wazuh-Installation-workflow-complete.png
-   :alt: Wazuh installation workflow
-   :align: center
-   :width: 100%
+.. raw:: html
+
+  <div class="link-boxes-group layout-3" data-step="4">
+    <div class="link-boxes-item">
+      <a class="link-boxes-link vertical-content" href="../wazuh-indexer/index.html">
+        <p class="link-boxes-label">Install the Wazuh indexer</p>
+
+.. image:: ../../images/installation/Indexer-Circle.png
+     :align: center
+     :height: 61px
+
+.. raw:: html
+
+      </a>
+    </div>
+  
+    <div class="link-boxes-item">
+      <a class="link-boxes-link vertical-content" href="../wazuh-server/index.html">
+        <p class="link-boxes-label">Install the Wazuh server</p>
+
+.. image:: ../../images/installation/Server-Circle.png
+     :align: center
+     :height: 61px
+
+.. raw:: html
+
+      </a>
+    </div>
+  
+    <div class="link-boxes-item">
+      <a class="link-boxes-link vertical-content" href="index.html">
+        <p class="link-boxes-label">Install the Wazuh dashboard</p>
+
+.. image:: ../../images/installation/Dashboard-Circle.png
+     :align: center
+     :height: 61px
+     
+.. raw:: html
+
+      </a>
+    </div>
+  </div>
 
 The Wazuh environment is now ready and you can proceed with installing the Wazuh agent on the endpoints to be monitored. To perform this action, see the :doc:`Wazuh agent </installation-guide/wazuh-agent/index>` section.
