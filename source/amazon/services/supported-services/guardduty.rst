@@ -51,7 +51,7 @@ Amazon configuration
       :align: center
       :width: 70%
 
-#. You can select the compression your prefer. Wazuh supports any kind of compression but Snappy. After that, click on *Create new or choose*:
+#. You can select the compression you prefer. Wazuh supports any kind of compression but Snappy. After that, click on **Create new or choose**:
 
     .. thumbnail:: ../../../images/aws/aws-create-firehose-9.png
       :align: center
