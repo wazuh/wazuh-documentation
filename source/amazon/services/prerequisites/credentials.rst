@@ -149,7 +149,7 @@ IAM Roles can also be used to access the S3 bucket. Follow these steps to create
       :align: center
       :width: 70%
 
-3. Select S3 service and click on **Next: Permissions** button:
+3. Select S3 service and click on the **Next: Permissions** button:
 
     .. thumbnail:: ../../../images/aws/aws-create-role-4.png
       :align: center
