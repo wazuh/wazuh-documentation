@@ -16,6 +16,10 @@ To set your Learning Wazuh environment, you can install the Wazuh central compon
 
 Check our :ref:`Installation guide <installation_guide>` for more details and other installation options.
 
+.. note::
+   
+   Root user privileges are required to execute all the commands below.
+
 Install Wazuh using the Wazuh installation assistant
 ----------------------------------------------------
 
@@ -26,7 +30,7 @@ Hardware requirements highly depend on the number of protected endpoints and clo
 
 Wazuh central components can be installed on a 64-bit Linux operating system, the recommended operating systems are:
  
--  Red Hat Enterprise Linux 7, 8
+-  Red Hat Enterprise Linux 7, 8, 9
 -  CentOS 7, 8
 -  Amazon Linux 2
 -  Ubuntu 16.04, 18.04, 20.04, 22.04
@@ -63,10 +67,6 @@ When you access the Wazuh dashboard for the first time, the browser shows a warn
 
 Configure the Wazuh manager to allow self registration of new agents with authentication
 ----------------------------------------------------------------------------------------
-
-.. note::
-   
-   Root user privileges are required to execute all the commands below.
 
 #. Run the following commands to enable authentication and set the password for agent registration.  
 
