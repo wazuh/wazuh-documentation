@@ -78,7 +78,7 @@ Amazon configuration
       :align: center
       :width: 70%
 
-#. Select the services you want to get logs from using the *Service name* slider, then, click on the *Add target* button and add the previously created Firehose delivery stream there. Also, create a new role to access the delivery stream:
+#. Select the services you want to get logs from using the **Service name** slider, then, click on the **Add target** button and add the previously created Firehose delivery stream there. Also, create a new role to access the delivery stream.
 
     .. thumbnail:: ../../../images/aws/aws-create-firehose-14.png
       :align: center
