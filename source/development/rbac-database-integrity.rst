@@ -1,18 +1,16 @@
 .. Copyright (C) 2022 Wazuh, Inc.
 
-.. _rbac_database_integrity:
-
 RBAC database integrity
 =======================
 
-The RBAC database integrity is checked every time the Wazuh API starts to determine if the database should be updated. The integrity check allows us to cover the following cases:
+The integrity of the RBAC database is checked before determining if the database should be updated. The integrity check allows us the following:
 
-- Upgrade to a Wazuh version with breaking changes in the RBAC database structure or with new default resources.
-- Restore the RBAC database with its default RBAC resources if it was manually deleted, being able to restore the RBAC database to a fresh install state if needed.
+-  Upgrade to a Wazuh version when this version includes breaking changes in the RBAC database structure or new default resources.
+-  Restore the RBAC database with its default RBAC resources if it was manually deleted. This allows restoring the RBAC database to a fresh install state if needed.
 
-.. warning::
-  If the RBAC database is manually deleted, it is restored with the default resources. Other resources created by the user are, therefore, lost.
+   .. warning::
 
+      User-created resources are lost when the database is restored with default resources. 
 
 How the database upgrade process works
 --------------------------------------
@@ -27,13 +25,13 @@ Here is an abridged list of steps performed during the database upgrade process:
 
 #. In case a user-created RBAC resource coincides with one of the new default Wazuh RBAC resource:
 
-   #. If the user-created **user** has the same **name** as the default user, both are considered the same. The user-created user is renamed to its name + '_user'.
+   #. If the user-created *user* has the same *name* as the default user, both are considered the same. The user-created user is renamed appending *'_user'* to its name.
 
-   #. If the user-created **role** has the same **name** as the default role, both are considered the same. The user-created role is renamed to its name + '_user'.
+   #. If the user-created *role* has the same *name* as the default role, both are considered the same. The user-created role is renamed appending *'_user'* to its name.
 
-   #. If the user-created **rule** has the same **name** or **body** as the default rule, both are considered the same. The user-created rule relationships are migrated to the new default rule.
+   #. If the user-created *rule* has the same *name* or *body* as the default rule, both are considered the same. The user-created rule relationships are migrated to the new default rule.
 
-   #. If the user-created **policy** has the same **name** or **body** as the default policy, both are considered the same. The user-created policy relationships are migrated to the new default policy.
+   #. If the user-created *policy* has the same *name* or *body* as the default policy, both are considered the same. The user-created policy relationships are migrated to the new default policy.
 
 #. Any relationships between RBAC user-created resources are added to the new database.
 
