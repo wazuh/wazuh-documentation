@@ -10,7 +10,7 @@ WPK
 
 Wazuh provides an automated way of building WPK packages using docker so there is no need for any other dependency.
 
-To generate a WPK package, an X509 certificate, and CA, see :ref:`Custom WPK packages creation <create-wpk-key>`.
+To generate a WPK package, you need an X509 certificate, and CA, see :ref:`Custom WPK packages creation <create-wpk-key>` to learn more.
 
 To create a WPK package, follow these steps:
 

@@ -157,6 +157,14 @@ th .line {
   font-weight: 500;
 }
 
+cite {
+  font-style: italic;
+  &:after {
+    content: '';
+    padding-right: 3px;
+  }
+}
+
 /* Light theme -------------------------------------------------------------- */
 
 body {
