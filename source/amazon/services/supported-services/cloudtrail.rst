@@ -104,8 +104,8 @@ CloudTrail use cases
   - `Allocate a new Elastic IP address`_
   - `Associate a new Elastic IP address`_
 `IAM`_
-  - `Create user account`_
-  - `Create user account without permissions`_
+  - `Create a user account`_
+  - `Create a user account without permissions`_
   - `User login failed`_
   - `Possible break-in attempt`_
   - `Login success`_
