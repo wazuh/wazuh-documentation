@@ -116,7 +116,7 @@ If the Wazuh central components are already installed in your environment, selec
 Packages list
 -------------
 
-In the :doc:`Packages list </installation-guide/packages-list>` section, you will find all the packages required for the installation of Wazuh |WAZUH_LATEST|.
+In the :doc:`Packages list </installation-guide/packages-list>` section, you will find all the packages required for the installation of Wazuh.
 
 Other installation alternatives
 -------------------------------

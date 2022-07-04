@@ -7,7 +7,7 @@
 Change the rules
 ================
 
-The `Wazuh Ruleset <https://github.com/wazuh/wazuh/tree/|WAZUH_LATEST_MINOR|/ruleset>`_ is maintained by Wazuh and is contributed to by the Wazuh community.  These stock rules are located in various files in ``/var/ossec/ruleset/rules/`` on the Wazuh Manager and should not be edited in that location because they are overwritten when you make an upgrade.
+The `Wazuh Ruleset <https://github.com/wazuh/wazuh/tree/|WAZUH_CURRENT_MINOR|/ruleset>`_ is maintained by Wazuh and is contributed to by the Wazuh community.  These stock rules are located in various files in ``/var/ossec/ruleset/rules/`` on the Wazuh Manager and should not be edited in that location because they are overwritten when you make an upgrade.
 
 Custom changes to the ruleset must be done within files in the  ``/var/ossec/etc/rules/`` folder. To change a default rule, then the ``overwrite="yes"`` option must be used when declaring the rule.
 
