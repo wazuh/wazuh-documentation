@@ -31,13 +31,8 @@ Indicate your deployment configuration, create the SSL certificates to encrypt c
 
       .. code-block:: console
 
-<<<<<<< HEAD
           # curl -sO https://packages.wazuh.com/|WAZUH_LATEST_MINOR|/wazuh-install.sh
           # curl -sO https://packages.wazuh.com/|WAZUH_LATEST_MINOR|/wazuh-config.yml
-=======
-          # curl -sO https://packages.wazuh.com/|WAZUH_CURRENT_MINOR|/wazuh-install.sh
-          # curl -sO https://packages.wazuh.com/|WAZUH_CURRENT_MINOR|/config.yml
->>>>>>> 4.3
        
 #. Edit ``./wazuh-config.yml`` and replace the node names and IP values with the corresponding names and IP addresses. You need to do this for all the Wazuh server, the Wazuh indexer, and the Wazuh dashboard nodes. Add as many node fields as needed.
 
