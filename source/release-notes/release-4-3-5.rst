@@ -18,7 +18,7 @@ This release includes new features or enhancements as the following:
 
 Wazuh manager
 ^^^^^^^^^^^^^
-- `#13915 <https://github.com/wazuh/wazuh/pull/13915>`_ The Vulnerability Detector log is improved when the agent OS data is unavailable.
+- `#13915 <https://github.com/wazuh/wazuh/pull/13915>`_ The Vulnerability Detector log is improved for the case when the agent OS data is unavailable.
 
 Wazuh agent
 ^^^^^^^^^^^
