@@ -42,7 +42,7 @@ is_latest_release = True
 
 # The full version, including alpha/beta/rc tags
 # Important: use a valid branch (4.0) or, preferably, tag name (v4.0.0)
-release = '4.3'
+release = '4.3.5'
 api_tag = 'v4.3.5'
 apiURL = 'https://raw.githubusercontent.com/wazuh/wazuh/'+api_tag+'/api/api/spec/spec.yaml'
 
@@ -478,90 +478,132 @@ def customReplacements(app, docname, source):
     source[0] = result
 
 custom_replacements = {
-    "|CURRENT_MAJOR|" : "4.x",
-    "|WAZUH_LATEST|" : "4.3.5",
-    "|WAZUH_LATEST_MINOR|" : "4.3",
-    "|WAZUH_PACKAGES_BRANCH|" : "4.3",
-    "|WAZUH_INDEXER_CURRENT|" : "4.3.5",
-    "|WAZUH_INDEXER_CURRENT_REV|" : "1",
-    "|WAZUH_INDEXER_x64_RPM|" : "x86_64",
-    "|WAZUH_INDEXER_x64_DEB|" : "amd64",
-    "|WAZUH_DASHBOARD_CURRENT|" : "4.3.5",
-    "|WAZUH_DASHBOARD_CURRENT_REV_RPM|" : "1",
-    "|WAZUH_DASHBOARD_CURRENT_REV_DEB|" : "1",
-    "|WAZUH_DASHBOARD_x64_RPM|" : "x86_64",
-    "|WAZUH_DASHBOARD_x64_DEB|" : "amd64",
-    "|WAZUH_LATEST_ANSIBLE|" : "4.3.5",
-    "|WAZUH_LATEST_MINOR_ANSIBLE|" : "4.3",
-    "|WAZUH_LATEST_KUBERNETES|" : "4.3.5",
-    "|WAZUH_LATEST_PUPPET|" : "4.3.5",
-    "|WAZUH_LATEST_OVA|" : "4.3.5",
-    "|WAZUH_LATEST_AMI|" : "4.3.5",
-    "|WAZUH_LATEST_DOCKER|" : "4.3.5",
-    "|WAZUH_LATEST_AIX|" : "4.3.5",
-    "|WAZUH_LATEST_MINOR_AIX|" : "4.3",
-    "|WAZUH_LATEST_FROM_SOURCES|" : "4.3.5",
-    "|WAZUH_LATEST_MINOR_FROM_SOURCES|" : "4.3",
-    "|WAZUH_LATEST_WIN_FROM_SOURCES|" : "4.3.5",
-    "|WAZUH_LATEST_WIN_REV_FROM_SOURCES|" : "1",
-    "|OPEN_DISTRO_LATEST|" : "1.13.2",
-    "|ELASTICSEARCH_LATEST|" : "7.10.2",
-    "|ELASTICSEARCH_LATEST_OVA|" : "7.10.2",
-    "|ELASTICSEARCH_LATEST_ANSIBLE|" : "7.10.2",
-    "|ELASTICSEARCH_LATEST_KUBERNETES|" : "7.10.2",
-    "|ELASTICSEARCH_LATEST_PUPPET|" : "7.10.2",
-    "|ELASTICSEARCH_LATEST_DOCKER|" : "7.10.2",
-    "|KIBANA_VERSION_AMI|" : "7.10.2",
-    "|FILEBEAT_LATEST_AMI|" : "7.10.2",
-    "|OPENDISTRO_LATEST_DOCKER|" : "1.13.2",
-    "|OPENDISTRO_LATEST_AMI|" : "1.13.2",
-    "|OPENDISTRO_LATEST_KUBERNETES|" : "1.13.2",
-    "|DOCKER_COMPOSE_VERSION|" : "1.28.3",
-    "|SPLUNK_LATEST|" : "8.2.6",
-    "|WAZUH_SPLUNK_LATEST|" : "4.3.5",
-    "|ELASTIC_6_LATEST|" : "6.8.8",
-    "|WAZUH_REVISION_DEB_AGENT_PPC|" : "1",
-    "|WAZUH_REVISION_YUM_AGENT_PPC|" : "1",
+    # === URLs and base URLs
+    "|CHECKSUMS_URL|" : "https://packages.wazuh.com/4.x/checksums/wazuh/",
+    "|RPM_AGENT_URL|" : "https://packages.wazuh.com/4.x/yum/wazuh-agent",
+    "|RPM_MANAGER_URL|" : "https://packages.wazuh.com/4.x/yum/wazuh-manager",
+    "|DEB_AGENT_URL|" : "https://packages.wazuh.com/4.x/apt/pool/main/w/wazuh-agent/wazuh-agent",
+    "|DEB_MANAGER_URL|" : "https://packages.wazuh.com/4.x/apt/pool/main/w/wazuh-manager/wazuh-manager",
+    #
+    # === Global and Wazuh version (wazuh agent, manager, indexer, and dashboard)
+    "|WAZUH_CURRENT_MAJOR|" : "4.x",
+    "|WAZUH_CURRENT_MINOR|" : version,
+    "|WAZUH_CURRENT|" : release,
+    # --- Revision numbers for Wazuh agent and manager packages versions
+    # Yum packages revisions
     "|WAZUH_REVISION_YUM_AGENT_I386|" : "1",
     "|WAZUH_REVISION_YUM_MANAGER_I386|" : "1",
+    "|WAZUH_REVISION_YUM_AGENT_I386_EL5|" : "1",
+    #"|WAZUH_REVISION_YUM_MANAGER_I386_EL5|" :
     "|WAZUH_REVISION_YUM_AGENT_X86|" : "1",
     "|WAZUH_REVISION_YUM_MANAGER_X86|" : "1",
-    "|WAZUH_REVISION_YUM_API_X86|" : "1",
+    "|WAZUH_REVISION_YUM_AGENT_X86_EL5|" : "1",
+    #|WAZUH_REVISION_YUM_MANAGER_X86_EL5|
     "|WAZUH_REVISION_YUM_AGENT_AARCH64|" : "1",
     "|WAZUH_REVISION_YUM_MANAGER_AARCH64|" : "1",
-    "|WAZUH_REVISION_YUM_API_AARCH64|" : "1",
     "|WAZUH_REVISION_YUM_AGENT_ARMHF|" : "1",
     "|WAZUH_REVISION_YUM_MANAGER_ARMHF|" : "1",
-    "|WAZUH_REVISION_YUM_API_ARMHF|" : "1",
-    "|WAZUH_REVISION_YUM_AGENT_I386_EL5|" : "1",
-    "|WAZUH_REVISION_YUM_AGENT_X86_EL5|" : "1",
+    "|WAZUH_REVISION_YUM_AGENT_PPC|" : "1",
+    #|WAZUH_REVISION_YUM_MANAGER_PPC|" :
+    # Deb packages revisions
     "|WAZUH_REVISION_DEB_AGENT_I386|" : "1",
     "|WAZUH_REVISION_DEB_MANAGER_I386|" : "1",
     "|WAZUH_REVISION_DEB_AGENT_X86|" : "1",
     "|WAZUH_REVISION_DEB_MANAGER_X86|" : "1",
-    "|WAZUH_REVISION_DEB_API_X86|" : "1",
     "|WAZUH_REVISION_DEB_AGENT_AARCH64|" : "1",
     "|WAZUH_REVISION_DEB_MANAGER_AARCH64|" : "1",
-    "|WAZUH_REVISION_DEB_API_AARCH64|" : "1",
     "|WAZUH_REVISION_DEB_AGENT_ARMHF|" : "1",
     "|WAZUH_REVISION_DEB_MANAGER_ARMHF|" : "1",
-    "|WAZUH_REVISION_DEB_API_ARMHF|" : "1",
-    "|WAZUH_REVISION_HPUX|" : "1",
-    "|WAZUH_REVISION_OSX|" : "1",
+    "|WAZUH_REVISION_DEB_AGENT_PPC|" : "1",
+    #"|WAZUH_REVISION_DEB_MANAGER_PPC|" : 
+    #
+    # === Wazuh indexer version revisions
+    "|WAZUH_INDEXER_CURRENT_REV|" : "1", # RPM and Deb
+    #"|WAZUH_INDEXER_CURRENT_REV_DEB|" :
+    # --- Architectures for Wazuh indexer packages
+    "|WAZUH_INDEXER_x64_RPM|" : "x86_64",
+    "|WAZUH_INDEXER_x64_DEB|" : "amd64",
+    #
+    # === Wazuh dashboard version revisions
+    "|WAZUH_DASHBOARD_CURRENT_REV_RPM|" : "1",
+    "|WAZUH_DASHBOARD_CURRENT_REV_DEB|" : "1",
+    # --- Architectures for Wazuh dashboard packages
+    "|WAZUH_DASHBOARD_x64_RPM|" : "x86_64",
+    "|WAZUH_DASHBOARD_x64_DEB|" : "amd64",
+    #
+    # === Versions and revisions for other Wazuh deployments
+    #"|WAZUH_CURRENT_MAJOR_AMI|" :
+    #"|WAZUH_CURRENT_MINOR_AMI|" :
+    "|WAZUH_CURRENT_AMI|" : release,
+    "|WAZUH_CURRENT_MAJOR_OVA|" : "4.x",
+    #"|WAZUH_CURRENT_MINOR_OVA|" :
+    "|WAZUH_CURRENT_OVA|" : release,
+    #"|WAZUH_CURRENT_MAJOR_DOCKER|" :
+    "|WAZUH_CURRENT_MINOR_DOCKER|" : version,
+    "|WAZUH_CURRENT_DOCKER|" : release,
+    #"|WAZUH_CURRENT_MAJOR_KUBERNETES|" :
+    #"|WAZUH_CURRENT_MINOR_KUBERNETES|" :
+    "|WAZUH_CURRENT_KUBERNETES|" : release,
+    #"|WAZUH_CURRENT_MAJOR_ANSIBLE|" :
+    "|WAZUH_CURRENT_MINOR_ANSIBLE|" : version,
+    "|WAZUH_CURRENT_ANSIBLE|" : release,
+    #"|WAZUH_CURRENT_MAJOR_PUPPET|" :
+    #"|WAZUH_CURRENT_MINOR_PUPPET|" :
+    "|WAZUH_CURRENT_PUPPET|" : release,
+    #"|WAZUH_CURRENT_MAJOR_FROM_SOURCES|" :
+    "|WAZUH_CURRENT_MINOR_FROM_SOURCES|" : version,
+    "|WAZUH_CURRENT_FROM_SOURCES|" : release,
+    #"|WAZUH_CURRENT_MAJOR_WIN_FROM_SOURCES|" :
+    #"|WAZUH_CURRENT_MINOR_WIN_FROM_SOURCES|" :
+    "|WAZUH_CURRENT_WIN_FROM_SOURCES|" : release,
+    "|WAZUH_CURRENT_WIN_FROM_SOURCES_REV|" : "1",
+    #
+    # === Versions and revisions for packages of specific operating systems
+    "|WAZUH_CURRENT_MAJOR_WINDOWS|" : "4.x",
+    #"|WAZUH_CURRENT_MINOR_WINDOWS|" :
+    "|WAZUH_CURRENT_WINDOWS|" : release,
     "|WAZUH_REVISION_WINDOWS|" : "1",
+    "|WAZUH_CURRENT_MAJOR_OSX|" : "4.x",
+    #"|WAZUH_CURRENT_MINOR_OSX|" :
+    "|WAZUH_CURRENT_OSX|" : release,
+    "|WAZUH_REVISION_OSX|" : "1",
+    "|WAZUH_CURRENT_MAJOR_SOLARIS|" : "4.x",
+    #"|WAZUH_CURRENT_MINOR_SOLARIS|" :
+    "|WAZUH_CURRENT_SOLARIS|" : release, # The lesser of WAZUH_CURRENT_MAJOR_SOLARIS10 and 11
+    #"|WAZUH_REVISION_SOLARIS|" : "1",
+    "|WAZUH_CURRENT_MAJOR_SOLARIS10|" : "4.x",
+    #"|WAZUH_CURRENT_MINOR_SOLARIS10|" :
+    "|WAZUH_CURRENT_SOLARIS10|" : release,
+    #"|WAZUH_REVISION_SOLARIS10|" : "1",
+    "|WAZUH_CURRENT_MAJOR_SOLARIS11|" : "4.x",
+    #"|WAZUH_CURRENT_MINOR_SOLARIS11|" :
+    "|WAZUH_CURRENT_SOLARIS11|" : release,
+    #"|WAZUH_REVISION_SOLARIS11|" : "1",
+    "|WAZUH_CURRENT_MAJOR_AIX|" : "4.x",
+    #"|WAZUH_CURRENT_MINOR_AIX|" :
+    "|WAZUH_CURRENT_AIX|" : release,
     "|WAZUH_REVISION_AIX|" : "1",
-    "|CHECKSUMS_URL|" : "https://packages.wazuh.com/4.x/checksums/wazuh/",
-    "|RPM_AGENT|" : "https://packages.wazuh.com/4.x/yum/wazuh-agent",
-    "|RPM_MANAGER|" : "https://packages.wazuh.com/4.x/yum/wazuh-manager",
-    "|DEB_AGENT|" : "https://packages.wazuh.com/4.x/apt/pool/main/w/wazuh-agent/wazuh-agent",
-    "|DEB_MANAGER|" : "https://packages.wazuh.com/4.x/apt/pool/main/w/wazuh-manager/wazuh-manager",
-    "|DEB_API|" : "https://packages.wazuh.com/4.x/apt/pool/main/w/wazuh-api/wazuh-api",
-    # Variables for Elastic's Elasticsearch
-    "|ELASTICSEARCH_ELK_LATEST|" : "7.17.4",
-    "|ELASTICSEARCH_ELK_LATEST_ANSIBLE|" : "7.10.2",
-    "|ELASTICSEARCH_ELK_LATEST_KUBERNETES|" : "7.10.2",
-    "|ELASTICSEARCH_ELK_LATEST_PUPPET|" : "7.10.2",
-    "|ELASTICSEARCH_ELK_LATEST_DOCKER|" : "7.10.2",
+    "|WAZUH_CURRENT_MAJOR_HPUX|" : "4.x",
+    #"|WAZUH_CURRENT_MINOR_HPUX|" :
+    "|WAZUH_CURRENT_HPUX|" : release,
+    "|WAZUH_REVISION_HPUX|" : "1",
+    #
+    # === Elastic
+    # --- Filebeat
+    "|FILEBEAT_LATEST|" : "7.10.2",
+    "|FILEBEAT_LATEST_AMI|" : "7.10.2",
+    "|FILEBEAT_LATEST_OVA|" : "7.10.2",
+    # --- Open Distro for Elasticsearch
+    "|OPEN_DISTRO_LATEST|" : "1.13.2",
+    # --- Elasticsearch
+    "|ELASTICSEARCH_ELK_LATEST|" : "7.17.4", # Basic license
+    "|ELASTICSEARCH_LATEST|" : "7.10.2",
+    # --- Other Elastic
+    "|ELASTIC_6_LATEST|" : "6.8.8",
+    #
+    # === Splunk
+    "|SPLUNK_LATEST|" : "8.2.6",
+    "|WAZUH_SPLUNK_CURRENT|" : release,
 }
 
 # -- Customizations ---------------------------------------------------------

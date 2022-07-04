@@ -89,27 +89,27 @@ Wazuh is preconfigured with the following scripts for Linux, located at ``/var/o
 +---------------------------------------------------------------------------------------------------------------------------------------+---------------------------------------------------------------+
 | Script name                                                                                                                           |                          Description                          |
 +=======================================================================================================================================+===============================================================+
-| `disable-account <https://github.com/wazuh/wazuh/blob/|WAZUH_LATEST_MINOR|/src/active-response/disable-account.c>`_                                    | Disables an account by setting ``passwd-l``                   |
+| `disable-account <https://github.com/wazuh/wazuh/blob/|WAZUH_CURRENT_MINOR|/src/active-response/disable-account.c>`_                                    | Disables an account by setting ``passwd-l``                   |
 +---------------------------------------------------------------------------------------------------------------------------------------+---------------------------------------------------------------+
-| `firewall-drop <https://github.com/wazuh/wazuh/blob/|WAZUH_LATEST_MINOR|/src/active-response/firewalls/default-firewall-drop.c>`_                      | Adds an IP to the iptables deny list                          |
+| `firewall-drop <https://github.com/wazuh/wazuh/blob/|WAZUH_CURRENT_MINOR|/src/active-response/firewalls/default-firewall-drop.c>`_                      | Adds an IP to the iptables deny list                          |
 +---------------------------------------------------------------------------------------------------------------------------------------+---------------------------------------------------------------+
-| `firewalld-drop <https://github.com/wazuh/wazuh/blob/|WAZUH_LATEST_MINOR|/src/active-response/firewalld-drop.c>`_                                      | Adds an IP to the firewalld drop list                         |
+| `firewalld-drop <https://github.com/wazuh/wazuh/blob/|WAZUH_CURRENT_MINOR|/src/active-response/firewalld-drop.c>`_                                      | Adds an IP to the firewalld drop list                         |
 +---------------------------------------------------------------------------------------------------------------------------------------+---------------------------------------------------------------+
-| `host-deny <https://github.com/wazuh/wazuh/blob/|WAZUH_LATEST_MINOR|/src/active-response/host-deny.c>`_                                                | Adds an IP to the /etc/hosts.deny file                        |
+| `host-deny <https://github.com/wazuh/wazuh/blob/|WAZUH_CURRENT_MINOR|/src/active-response/host-deny.c>`_                                                | Adds an IP to the /etc/hosts.deny file                        |
 +---------------------------------------------------------------------------------------------------------------------------------------+---------------------------------------------------------------+
-| `ip-customblock <https://github.com/wazuh/wazuh/blob/|WAZUH_LATEST_MINOR|/src/active-response/ip-customblock.c>`_                                      | Custom OSSEC block, easily modifiable for custom response     |
+| `ip-customblock <https://github.com/wazuh/wazuh/blob/|WAZUH_CURRENT_MINOR|/src/active-response/ip-customblock.c>`_                                      | Custom OSSEC block, easily modifiable for custom response     |
 +---------------------------------------------------------------------------------------------------------------------------------------+---------------------------------------------------------------+
-| `ipfw <https://github.com/wazuh/wazuh/blob/|WAZUH_LATEST_MINOR|/src/active-response/firewalls/ipfw.c>`_                                                | Firewall-drop response script created for ipfw                |
+| `ipfw <https://github.com/wazuh/wazuh/blob/|WAZUH_CURRENT_MINOR|/src/active-response/firewalls/ipfw.c>`_                                                | Firewall-drop response script created for ipfw                |
 +---------------------------------------------------------------------------------------------------------------------------------------+---------------------------------------------------------------+
-| `npf <https://github.com/wazuh/wazuh/blob/|WAZUH_LATEST_MINOR|/src/active-response/firewalls/npf.c>`_                                                  | Firewall-drop response script created for npf                 |
+| `npf <https://github.com/wazuh/wazuh/blob/|WAZUH_CURRENT_MINOR|/src/active-response/firewalls/npf.c>`_                                                  | Firewall-drop response script created for npf                 |
 +---------------------------------------------------------------------------------------------------------------------------------------+---------------------------------------------------------------+
-| `wazuh-slack <https://github.com/wazuh/wazuh/blob/|WAZUH_LATEST_MINOR|/src/active-response/wazuh-slack.c>`_                                            | Posts modifications on Slack                                  |
+| `wazuh-slack <https://github.com/wazuh/wazuh/blob/|WAZUH_CURRENT_MINOR|/src/active-response/wazuh-slack.c>`_                                            | Posts modifications on Slack                                  |
 +---------------------------------------------------------------------------------------------------------------------------------------+---------------------------------------------------------------+
-| `pf <https://github.com/wazuh/wazuh/blob/|WAZUH_LATEST_MINOR|/src/active-response/firewalls/pf.c>`_                                                    | Firewall-drop response script created for pf                  |
+| `pf <https://github.com/wazuh/wazuh/blob/|WAZUH_CURRENT_MINOR|/src/active-response/firewalls/pf.c>`_                                                    | Firewall-drop response script created for pf                  |
 +---------------------------------------------------------------------------------------------------------------------------------------+---------------------------------------------------------------+
-| `restart-wazuh <https://github.com/wazuh/wazuh/blob/|WAZUH_LATEST_MINOR|/src/active-response/restart-wazuh.c>`_                                        | Automatically restarts Wazuh when ossec.conf has been changed |
+| `restart-wazuh <https://github.com/wazuh/wazuh/blob/|WAZUH_CURRENT_MINOR|/src/active-response/restart-wazuh.c>`_                                        | Automatically restarts Wazuh when ossec.conf has been changed |
 +---------------------------------------------------------------------------------------------------------------------------------------+---------------------------------------------------------------+
-| `route-null <https://github.com/wazuh/wazuh/blob/|WAZUH_LATEST_MINOR|/src/active-response/route-null.c>`_                                              | Adds an IP address to null route                              |
+| `route-null <https://github.com/wazuh/wazuh/blob/|WAZUH_CURRENT_MINOR|/src/active-response/route-null.c>`_                                              | Adds an IP address to null route                              |
 +---------------------------------------------------------------------------------------------------------------------------------------+---------------------------------------------------------------+
 
 The following preconfigured scripts for Windows are located at ``C:\Program Files\ossec-agent\active-response\bin``. Click each script name to see its source code.
@@ -117,9 +117,9 @@ The following preconfigured scripts for Windows are located at ``C:\Program File
 +--------------------------------------------------------------------------------------------------------+---------------------------------------------------------------+
 | Script name                                                                                            |                          Description                          |
 +========================================================================================================+===============================================================+
-| `netsh.exe <https://github.com/wazuh/wazuh/blob/|WAZUH_LATEST_MINOR|/src/active-response/netsh.c>`_                     | Blocks an ip using netsh                                      |
+| `netsh.exe <https://github.com/wazuh/wazuh/blob/|WAZUH_CURRENT_MINOR|/src/active-response/netsh.c>`_                     | Blocks an ip using netsh                                      |
 +--------------------------------------------------------------------------------------------------------+---------------------------------------------------------------+
-| `restart-wazuh.exe <https://github.com/wazuh/wazuh/blob/|WAZUH_LATEST_MINOR|/src/active-response/restart-wazuh.c>`_     | Restarts wazuh agent                                          |
+| `restart-wazuh.exe <https://github.com/wazuh/wazuh/blob/|WAZUH_CURRENT_MINOR|/src/active-response/restart-wazuh.c>`_     | Restarts wazuh agent                                          |
 +--------------------------------------------------------------------------------------------------------+---------------------------------------------------------------+
-| `route-null.exe <https://github.com/wazuh/wazuh/blob/|WAZUH_LATEST_MINOR|/src/active-response/route-null.c>`_           | Adds an IP to null route                                      |
+| `route-null.exe <https://github.com/wazuh/wazuh/blob/|WAZUH_CURRENT_MINOR|/src/active-response/route-null.c>`_           | Adds an IP to null route                                      |
 +--------------------------------------------------------------------------------------------------------+---------------------------------------------------------------+
