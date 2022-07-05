@@ -15,6 +15,18 @@
       position: relative;
       padding-left: 60px;
     }
+    .link-boxes-item {
+      .link-boxes-link {
+        padding-top: 15px;
+        padding-bottom: 15px;
+        img {
+          max-width: unset;
+          @include media-only(xl,wzh-xl){
+            max-height: 50px;
+          }
+        }
+      }
+    }
   }
   
   .steps-line {
@@ -154,14 +166,20 @@
     display: flex;
     justify-content: center;
     align-items: center;
+    
+    &:last-child {
+      padding-right: 0;
+    }
+    &.current-step {
+      cursor: default;
+      .link-boxes-label {
+        display: none;
+      }
+    }
     img {
       display: inline-block;
       margin: 10px;
       border: none;
-    }
-    
-    &:last-child {
-      padding-right: 0;
     }
 
     .link-boxes-link, .doc {
@@ -263,7 +281,7 @@
           }
         }
       }
-      .link-boxes-link {
+      a.link-boxes-link {
         &:hover {
           box-shadow: 0 0 0 10px $light-color-primary inset, 3px 3px 7px rgba(0, 0, 0, .1);
           .link-boxes-label {
@@ -315,7 +333,7 @@
           }
         }
       }
-      .link-boxes-link {
+      a.link-boxes-link {
         &:hover {
           box-shadow: 0 0 0 10px $dark-color-primary inset;
           .link-boxes-label {

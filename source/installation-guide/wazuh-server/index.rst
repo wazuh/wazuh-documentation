@@ -21,7 +21,7 @@ Check the requirements below and choose an installation method to start installi
 
   <div class="link-boxes-group layout-3" data-step="2">
     <div class="link-boxes-item">
-      <a class="link-boxes-link vertical-content" href="../wazuh-indexer/index.html">
+      <a class="link-boxes-link" href="../wazuh-indexer/index.html">
         <p class="link-boxes-label">Install the Wazuh indexer</p>
 
 .. image:: ../../images/installation/Indexer-Circle.png
@@ -34,7 +34,7 @@ Check the requirements below and choose an installation method to start installi
     </div>
   
     <div class="link-boxes-item">
-      <a class="link-boxes-link vertical-content" href="#">
+      <div class="link-boxes-link" href="#">
         <p class="link-boxes-label">Install the Wazuh server</p>
 
 .. image:: ../../images/installation/Server-Circle.png
@@ -43,11 +43,11 @@ Check the requirements below and choose an installation method to start installi
 
 .. raw:: html
 
-      </a>
+      </div>
     </div>
   
     <div class="link-boxes-item">
-      <a class="link-boxes-link vertical-content" href="../wazuh-dashboard/index.html">
+      <a class="link-boxes-link" href="../wazuh-dashboard/index.html">
         <p class="link-boxes-label">Install the Wazuh dashboard</p>
 
 .. image:: ../../images/installation/Dashboard-noBG.png

@@ -62,7 +62,7 @@ All the Wazuh central components are successfully installed.
 
   <div class="link-boxes-group layout-3" data-step="4">
     <div class="link-boxes-item">
-      <a class="link-boxes-link vertical-content" href="../wazuh-indexer/index.html">
+      <a class="link-boxes-link" href="../wazuh-indexer/index.html">
         <p class="link-boxes-label">Install the Wazuh indexer</p>
 
 .. image:: ../../images/installation/Indexer-Circle.png
@@ -75,7 +75,7 @@ All the Wazuh central components are successfully installed.
     </div>
   
     <div class="link-boxes-item">
-      <a class="link-boxes-link vertical-content" href="../wazuh-server/index.html">
+      <a class="link-boxes-link" href="../wazuh-server/index.html">
         <p class="link-boxes-label">Install the Wazuh server</p>
 
 .. image:: ../../images/installation/Server-Circle.png
@@ -88,7 +88,7 @@ All the Wazuh central components are successfully installed.
     </div>
   
     <div class="link-boxes-item">
-      <a class="link-boxes-link vertical-content" href="index.html">
+      <a class="link-boxes-link" href="index.html">
         <p class="link-boxes-label">Install the Wazuh dashboard</p>
 
 .. image:: ../../images/installation/Dashboard-Circle.png
