@@ -64,14 +64,6 @@ Installing dependencies
             # curl -OL https://packages.wazuh.com/utils/cmake/cmake-3.18.3.tar.gz && tar -zxf cmake-3.18.3.tar.gz && cd cmake-3.18.3 && ./bootstrap --no-system-curl && make -j$(nproc) && make install
             # cd .. && rm -rf cmake-*
             
-    .. group-tab:: Pacman
-    
-        GCC/G++ 9.4 is the recommended version to build wazuh.
-        
-        .. code-block:: console
-        
-            # pacman --noconfirm -Syu curl gcc make sudo wget expect gnupg perl-base perl fakeroot python brotli automake autoconf libtool gawk libsigsegv nodejs base-devel inetutils cmake
-
 **Optional**. Install the following dependencies only when compiling the CPython from sources. Since v4.2.0, ``make deps TARGET=server`` will download a portable version of CPython ready to be installed. Nevertheless, you can download the CPython sources by adding the ``PYTHON_SOURCE`` flag when running ``make deps``.
 
 To install the required dependencies to build the python interpreter, follow these steps:
