@@ -3,7 +3,7 @@
 RBAC database integrity
 =======================
 
-The integrity of the RBAC database is checked before determining if the database should be updated. The integrity check allows us the following:
+The integrity of the RBAC database is checked when the API starts. The result of this check determines whether the database needs an update or not. The integrity check allows us the following:
 
 -  Upgrade to a Wazuh version when this version includes breaking changes in the RBAC database structure or new default resources.
 -  Restore the RBAC database with its default RBAC resources if it was manually deleted. This allows restoring the RBAC database to a fresh install state if needed.
