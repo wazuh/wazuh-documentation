@@ -20,7 +20,12 @@ Check the requirements below and choose an installation method to start installi
 .. raw:: html
 
   <div class="link-boxes-group layout-3" data-step="2">
-    <div class="link-boxes-item">
+    <div class="steps-line">
+      <div class="steps-number past-step">1</div>
+      <div class="steps-number current-step">2</div>
+      <div class="steps-number future-step">3</div>
+    </div>
+    <div class="link-boxes-item past-step">
       <a class="link-boxes-link" href="../wazuh-indexer/index.html">
         <p class="link-boxes-label">Install the Wazuh indexer</p>
 
@@ -33,7 +38,7 @@ Check the requirements below and choose an installation method to start installi
       </a>
     </div>
   
-    <div class="link-boxes-item">
+    <div class="link-boxes-item current-step">
       <div class="link-boxes-link" href="#">
         <p class="link-boxes-label">Install the Wazuh server</p>
 
@@ -46,7 +51,7 @@ Check the requirements below and choose an installation method to start installi
       </div>
     </div>
   
-    <div class="link-boxes-item">
+    <div class="link-boxes-item future-step">
       <a class="link-boxes-link" href="../wazuh-dashboard/index.html">
         <p class="link-boxes-label">Install the Wazuh dashboard</p>
 

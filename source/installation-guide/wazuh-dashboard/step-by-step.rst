@@ -273,7 +273,12 @@ All the Wazuh central components are successfully installed and secured.
 .. raw:: html
 
   <div class="link-boxes-group layout-3" data-step="4">
-    <div class="link-boxes-item">
+    <div class="steps-line">
+      <div class="steps-number past-step">1</div>
+      <div class="steps-number past-step">2</div>
+      <div class="steps-number past-step">3</div>
+    </div>
+    <div class="link-boxes-item past-step">
       <a class="link-boxes-link" href="../wazuh-indexer/index.html">
         <p class="link-boxes-label">Install the Wazuh indexer</p>
 
@@ -286,7 +291,7 @@ All the Wazuh central components are successfully installed and secured.
       </a>
     </div>
   
-    <div class="link-boxes-item">
+    <div class="link-boxes-item past-step">
       <a class="link-boxes-link" href="../wazuh-server/index.html">
         <p class="link-boxes-label">Install the Wazuh server</p>
 
@@ -299,7 +304,7 @@ All the Wazuh central components are successfully installed and secured.
       </a>
     </div>
   
-    <div class="link-boxes-item">
+    <div class="link-boxes-item past-step">
       <a class="link-boxes-link" href="index.html">
         <p class="link-boxes-label">Install the Wazuh dashboard</p>
 

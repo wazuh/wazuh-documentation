@@ -28,7 +28,12 @@ This is the installation workflow you will follow:
 .. raw:: html
 
   <div class="link-boxes-group layout-3" data-step="0">
-    <div class="link-boxes-item">
+    <div class="steps-line">
+      <div class="steps-number future-step">1</div>
+      <div class="steps-number future-step">2</div>
+      <div class="steps-number future-step">3</div>
+    </div>
+    <div class="link-boxes-item future-step">
       <a class="link-boxes-link" href="wazuh-indexer/index.html">
         <p class="link-boxes-label">Install the Wazuh indexer</p>
 
@@ -41,7 +46,7 @@ This is the installation workflow you will follow:
       </a>
     </div>
   
-    <div class="link-boxes-item">
+    <div class="link-boxes-item future-step">
       <a class="link-boxes-link" href="wazuh-server/index.html">
         <p class="link-boxes-label">Install the Wazuh server</p>
 
@@ -54,7 +59,7 @@ This is the installation workflow you will follow:
       </a>
     </div>
   
-    <div class="link-boxes-item">
+    <div class="link-boxes-item future-step">
       <a class="link-boxes-link" href="wazuh-dashboard/index.html">
         <p class="link-boxes-label">Install the Wazuh dashboard</p>
 
