@@ -149,7 +149,7 @@ Deploying certificates
   .. note::
     Make sure that a copy of ``wazuh-certificates.tar``, created during the Wazuh indexer installation, is placed in your working directory.
 
-  #. Replace ``<server-node-name>`` with your Wazuh server node certificate name, the same used in ``config.yml`` when creating the certificates. Then, move the certificates to their corresponding location.
+  #. Replace ``<server-node-name>`` with your Wazuh server node certificate name, the same used in ``wazuh-config.yml`` when creating the certificates. Then, move the certificates to their corresponding location.
 
       .. include:: /_templates/installations/filebeat/opensearch/copy_certificates_filebeat_wazuh_cluster.rst
 
