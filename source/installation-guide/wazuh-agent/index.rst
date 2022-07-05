@@ -104,7 +104,7 @@ To install a Wazuh agent, select your operating system and follow the instructio
   </div>
 
 
-If you are deploying Wazuh in a large environment, with a high number of servers or endpoints, keep in mind that this deployment might be easier using automation tools such as :ref:`Puppet <wazuh_puppet>`, `Chef <https://github.com/wazuh/wazuh-chef>`_, SCCM, or :ref:`Ansible <wazuh_ansible_guide>`.
+If you are deploying Wazuh in a large environment, with a high number of servers or endpoints, keep in mind that this deployment might be easier using automation tools such as :doc:`Puppet </deployment-options/deploying-with-puppet/index>`, `Chef <https://github.com/wazuh/wazuh-chef>`_, SCCM, or :doc:`Ansible </deployment-options/deploying-with-ansible/installation-guide>`.
 
 .. note:: Compatibility between the Wazuh agent and the Wazuh manager is guaranteed when the Wazuh manager version is later than or equal to that of the Wazuh agent.
 

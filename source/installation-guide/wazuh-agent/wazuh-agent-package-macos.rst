@@ -25,9 +25,9 @@ The agent runs on the host you want to monitor and communicates with the Wazuh m
     
                   # launchctl setenv WAZUH_MANAGER "10.0.0.2" && installer -pkg wazuh-agent-|WAZUH_CURRENT_OSX|-|WAZUH_REVISION_OSX|.pkg -target /
     
-                For additional deployment options such as agent name, agent group, and registration password, see the :ref:`Deployment variables for macOS <deployment_variables_macos>` section.
+                For additional deployment options such as agent name, agent group, and registration password, see the :doc:`Deployment variables for macOS </user-manual/deployment-variables/deployment-variables-macos>` section.
                 
-                .. note:: Alternatively, if you want to install an agent without registering it, omit the deployment variables. To learn more about the different registration methods, see the :ref:`Wazuh agent enrollment <agent_enrollment>` section.
+                .. note:: Alternatively, if you want to install an agent without registering it, omit the deployment variables. To learn more about the different registration methods, see the :doc:`Wazuh agent enrollment </user-manual/agent-enrollment/index>` section.
 
              #. To complete the installation process, start the Wazuh agent.
     
@@ -52,7 +52,7 @@ The agent runs on the host you want to monitor and communicates with the Wazuh m
     
                   # sudo /Library/Ossec/bin/wazuh-control start
  
-            The installation process is now complete and the Wazuh agent is successfully installed on your macOS system. The next step is to register and configure the agent to communicate with the Wazuh manager. To perform this action, see the :ref:`Wazuh agent enrollment <agent_enrollment>` section. 
+            The installation process is now complete and the Wazuh agent is successfully installed on your macOS system. The next step is to register and configure the agent to communicate with the Wazuh manager. To perform this action, see the :doc:`Wazuh agent enrollment </user-manual/agent-enrollment/index>` section.  
 
 By default, all agent files are stored in ``/Library/Ossec/`` after the installation.
     
