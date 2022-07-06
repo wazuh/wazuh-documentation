@@ -25,10 +25,53 @@ The Wazuh indexer and Wazuh server can be installed on a single host or be distr
 
 This is the installation workflow you will follow:
 
-.. thumbnail:: ../images/installation/Wazuh-Installation-workflow.png
-  :title: Wazuh installation workflow
-  :align: center
-  :width: 100%
+.. raw:: html
+
+  <div class="link-boxes-group layout-3" data-step="0">
+    <div class="steps-line">
+      <div class="steps-number future-step">1</div>
+      <div class="steps-number future-step">2</div>
+      <div class="steps-number future-step">3</div>
+    </div>
+    <div class="link-boxes-item future-step">
+      <a class="link-boxes-link" href="wazuh-indexer/index.html">
+        <p class="link-boxes-label">Install the Wazuh indexer</p>
+
+.. image:: ../images/installation/Indexer-noBG.png
+     :align: center
+     :height: 61px
+
+.. raw:: html
+
+      </a>
+    </div>
+  
+    <div class="link-boxes-item future-step">
+      <a class="link-boxes-link" href="wazuh-server/index.html">
+        <p class="link-boxes-label">Install the Wazuh server</p>
+
+.. image:: ../images/installation/Server-noBG.png
+     :align: center
+     :height: 61px
+
+.. raw:: html
+
+      </a>
+    </div>
+  
+    <div class="link-boxes-item future-step">
+      <a class="link-boxes-link" href="wazuh-dashboard/index.html">
+        <p class="link-boxes-label">Install the Wazuh dashboard</p>
+
+.. image:: ../images/installation/Dashboard-noBG.png
+     :align: center
+     :height: 61px
+     
+.. raw:: html
+
+      </a>
+    </div>
+  </div>
 
 
 Installing the Wazuh agent
