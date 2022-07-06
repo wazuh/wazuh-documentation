@@ -23,15 +23,15 @@ Here is an abridged list of steps performed during the database upgrade process:
 
 #. Every user-created RBAC resource is migrated from the old database to the new one, maintaining its ID, name and so forth.
 
-#. In case a user-created RBAC resource coincides with one of the new default Wazuh RBAC resource:
+#. In case a user-created RBAC resource coincides with one of the new default Wazuh RBAC resources:
 
-   #. If the user-created *user* has the same *name* as the default user, both are considered the same. The user-created user is renamed appending *'_user'* to its name.
+   #. If the user-created *user* has the same *name* as a default user, the first one is renamed appending *‘_user’* to its name.
 
-   #. If the user-created *role* has the same *name* as the default role, both are considered the same. The user-created role is renamed appending *'_user'* to its name.
+   #. If the user-created *role* has the same *name* as a default role, the first one is renamed appending *'_user'* to its name.
 
-   #. If the user-created *rule* has the same *name* or *body* as the default rule, both are considered the same. The user-created rule relationships are migrated to the new default rule.
+   #. If the user-created *rule* has the same *name* or *body* as a default rule, the relationships of the first one are migrated to the new default rule.
 
-   #. If the user-created *policy* has the same *name* or *body* as the default policy, both are considered the same. The user-created policy relationships are migrated to the new default policy.
+   #. If the user-created *policy* has the same *name* or *body* as a default policy, the relationships of the first one are migrated to the new default policy.
 
 #. Any relationships between RBAC user-created resources are added to the new database.
 
