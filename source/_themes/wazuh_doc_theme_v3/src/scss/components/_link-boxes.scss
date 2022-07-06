@@ -83,6 +83,18 @@
       position: relative;
       overflow: hidden;
       &.past-step {
+        &:before {
+          content: '';
+          width: 23px;
+          height: 23px;
+          display: block;
+          background: white;
+          position: absolute;
+          top: 6px;
+          left: 6px;
+          border: 7px solid transparent;
+          border-radius: 50%;
+        }
         &:after {
           content: '';
           display: block;
@@ -249,9 +261,9 @@
     .steps-line {
       .steps-number { 
         &.past-step {
-          box-shadow: 0 0 0 2px $light-color-primary-lighter inset, 3px 3px 7px rgba(0, 0, 0, .1);
+          box-shadow: 0 0 0 5px $light-color-primary-lighter inset, 3px 3px 7px rgba(0, 0, 0, .1);
           border-color: $light-color-primary-lighter;
-          background-color: $light-color-base-space;
+          background-color: $light-color-primary-lighter;
           color: $light-color-base-space;
           &:after {
             background: url("#{$ico-path}svg-icons.svg#circle-check-lt");
@@ -301,9 +313,9 @@
     .steps-line {
       .steps-number { 
         &.past-step {
-          box-shadow: 0 0 0 2px $dark-color-primary-lighter inset;
+          box-shadow: 0 0 0 5px $dark-color-primary-lighter inset;
           border-color: $dark-color-primary-lighter;
-          background: $light-color-base-space;
+          background: $dark-color-primary-lighter;
           color: $light-color-base-space;
           &:after {
             background: url("#{$ico-path}svg-icons.svg#circle-check-dt");
