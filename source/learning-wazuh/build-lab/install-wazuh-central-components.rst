@@ -42,7 +42,7 @@ Installing Wazuh
 
     .. code-block:: console
 
-        $ curl -sO https://packages.wazuh.com/|WAZUH_LATEST_MINOR|/wazuh-install.sh && sudo bash ./wazuh-install.sh -a
+        $ curl -sO https://packages.wazuh.com/|WAZUH_CURRENT_MINOR|/wazuh-install.sh && sudo bash ./wazuh-install.sh -a
 
 
     Once the assistant finishes the installation, the output shows the access credentials and a message that confirms that the installation was successful.
