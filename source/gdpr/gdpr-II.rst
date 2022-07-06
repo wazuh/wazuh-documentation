@@ -14,7 +14,7 @@ Chapter II, Article 5 Head 1(f)
 
 The article ensures the ongoing confidentiality, integrity, availability and resilience of processing systems and services, verifying its modifications, accesses, locations while guaranteeing the safety of them. File sharing protection and file sharing technologies that meet data protection requirements.
 
-Wazuh’s File integrity monitoring (FIM) helps on this task by watching specific files and triggering alerts when these are modified. The component responsible for this task is called `Syscheck <https://documentation.wazuh.com/|CURRENT_MAJOR|/user-manual/reference/ossec-conf/syscheck.html>`_. It stores the cryptographic checksum and other attributes from file or Windows registry keys and regularly compares it to the file's current checksum.
+Wazuh’s File integrity monitoring (FIM) helps on this task by watching specific files and triggering alerts when these are modified. The component responsible for this task is called `Syscheck <https://documentation.wazuh.com/|WAZUH_CURRENT_MAJOR|/user-manual/reference/ossec-conf/syscheck.html>`_. It stores the cryptographic checksum and other attributes from file or Windows registry keys and regularly compares it to the file's current checksum.
 
 Here are some Wazuh rules examples tagged as gdpr_II_5.1.f:
 

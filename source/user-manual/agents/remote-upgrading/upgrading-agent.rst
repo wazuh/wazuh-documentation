@@ -48,7 +48,7 @@ To upgrade agents using the command line, use the :doc:`agent_upgrade <../../ref
         Upgrading...
 
         Upgraded agents:
-            Agent 002 upgraded: Wazuh v3.13.2 -> |WAZUH_LATEST|
+            Agent 002 upgraded: Wazuh v3.13.2 -> |WAZUH_CURRENT|
 
 
 3. Following the upgrade, the agent is automatically restarted.  Check the agent version to ensure it has been properly upgraded as follows:
@@ -202,11 +202,11 @@ Using the RESTful API
             "affected_items": [
               {
                 "id": "002",
-                "version": "Wazuh |WAZUH_LATEST|"
+                "version": "Wazuh |WAZUH_CURRENT|"
               },
               {
                 "id": "003",
-                "version": "Wazuh |WAZUH_LATEST|"
+                "version": "Wazuh |WAZUH_CURRENT|"
               }
             ],
             "total_affected_items": 2,

@@ -128,7 +128,7 @@ Integrity thread
 
 This thread is in charge of synchronizing master's integrity information among all worker nodes. The communication is started by the worker node and it has the following stages:
 
-1. The worker asks the master for permission. The permission will be granted only after any previous synchronization process is finished. This is important to prevent overlapping, where a new synchronization process starts while another one is still running. Synchronization processes taking too long are considered locked due to errors. Once the process is flagged as locked, new integrity synchronization permissions can be granted. The maximum time a synchronization process is allowed to run is 1000 seconds by default. This can be modified with the ``max_locked_integrity_time`` variable in the `cluster.json <https://github.com/wazuh/wazuh/blob/|WAZUH_LATEST_MINOR|/framework/wazuh/core/cluster/cluster.json>`_ file.
+1. The worker asks the master for permission. The permission will be granted only after any previous synchronization process is finished. This is important to prevent overlapping, where a new synchronization process starts while another one is still running. Synchronization processes taking too long are considered locked due to errors. Once the process is flagged as locked, new integrity synchronization permissions can be granted. The maximum time a synchronization process is allowed to run is 1000 seconds by default. This can be modified with the ``max_locked_integrity_time`` variable in the `cluster.json <https://github.com/wazuh/wazuh/blob/|WAZUH_CURRENT_MINOR|/framework/wazuh/core/cluster/cluster.json>`_ file.
 2. The worker sends the master a JSON file containing the following information:
 
     * Path
@@ -434,7 +434,7 @@ The master node in the cluster is under a heavy workload, especially in large en
 
 Multiprocessing is implemented in the cluster process of both the master node and the worker nodes, and `concurrent.futures.ProcessPoolExecutor <https://docs.python.org/3/library/concurrent.futures.html#concurrent.futures.ProcessPoolExecutor>`_ is used for this purpose. Cluster tasks can use any free process in the process pool to delegate and execute in parallel those parts of their logic that are more CPU intensive. With this, it is possible to take advantage of more CPU cores and increase the overall performance of the cluster process. When combined with asyncio, best results are obtained.
 
-Child processes are created when the parent `wazuh-clusterd` starts. They stay in the process pool waiting for new jobs to be assigned to them. There are two child processes by default within the master node pool. This value can be changed in the `process_pool_size` variable in the `cluster.json <https://github.com/wazuh/wazuh/blob/|WAZUH_LATEST_MINOR|/framework/wazuh/core/cluster/cluster.json>`_ file. The worker nodes, on the other hand, create a single child process and this number is not modifiable. The tasks that use multiprocessing in the cluster are the following.
+Child processes are created when the parent `wazuh-clusterd` starts. They stay in the process pool waiting for new jobs to be assigned to them. There are two child processes by default within the master node pool. This value can be changed in the `process_pool_size` variable in the `cluster.json <https://github.com/wazuh/wazuh/blob/|WAZUH_CURRENT_MINOR|/framework/wazuh/core/cluster/cluster.json>`_ file. The worker nodes, on the other hand, create a single child process and this number is not modifiable. The tasks that use multiprocessing in the cluster are the following.
 
 Master node
 ###########
@@ -469,7 +469,7 @@ Let's review the integrity synchronization process to see how asyncio tasks are 
     :width: 80%
 
 
-* **1**: The worker's ``sync_integrity`` task wakes up after sleeping during *interval* seconds (which is defined in the `cluster.json <https://github.com/wazuh/wazuh/blob/|WAZUH_LATEST_MINOR|/framework/wazuh/core/cluster/cluster.json>`_ file). The first thing it does is checking whether the previous synchronization process is finished or not using the ``syn_i_w_m_p`` command. The master replies with a boolean value specifying that the previous synchronization process is finished and, therefore, the worker can start a new one.
+* **1**: The worker's ``sync_integrity`` task wakes up after sleeping during *interval* seconds (which is defined in the `cluster.json <https://github.com/wazuh/wazuh/blob/|WAZUH_CURRENT_MINOR|/framework/wazuh/core/cluster/cluster.json>`_ file). The first thing it does is checking whether the previous synchronization process is finished or not using the ``syn_i_w_m_p`` command. The master replies with a boolean value specifying that the previous synchronization process is finished and, therefore, the worker can start a new one.
 * **2**: The worker starts the synchronization process using ``syn_i_w_m`` command. When the master receives the command, it creates an asyncio task to process the received integrity from the worker node. But since no file has been received yet, the task keeps waiting until the worker sends the file. The master sends the worker the task ID so the worker can notify the master to wake it up once the file has been sent.
 * **3**: The worker starts the sending file process. Which has three steps: ``new_file``, ``file_upd`` and ``file_end``.
 * **4**: The worker notifies the master that the integrity file has already been sent. In that moment, the master wakes the previously created task up and compares the worker files with its own. In this example the master finds out the worker integrity is outdated.
@@ -488,7 +488,7 @@ Another example that can show how asynchronous tasks are used is Distributed API
 * ``local_master``: The request can be solved by the master node. These requests are usually information about the global status/management of the cluster such as agent information/status/management, agent groups management, cluster information, etc.
 * ``distributed_master``: The master must forward the request to the most suitable node to solve it.
 
-The type association with every endpoint can be found here: `API controllers <https://github.com/wazuh/wazuh/tree/|WAZUH_LATEST_MINOR|/api/api/controllers>`_.
+The type association with every endpoint can be found here: `API controllers <https://github.com/wazuh/wazuh/tree/|WAZUH_CURRENT_MINOR|/api/api/controllers>`_.
 
 Imagine a cluster with two nodes, where there is an agent reporting to the worker node with id *020*. The following diagram shows the process of requesting ``GET/syscollector/020/os`` API endpoint:
 
@@ -554,9 +554,9 @@ If the log error message isn't clarifying enough, the traceback can be logged se
 
     2019/04/10 15:50:37 wazuh-clusterd: ERROR: [Cluster] [Main] Could not get checksum of file client.keys: [Errno 13] Permission denied: '/var/ossec/etc/client.keys'
     Traceback (most recent call last):
-    File "/var/ossec/framework/python/lib/python3.9/site-packages/wazuh-|WAZUH_LATEST|-py3.7.egg/wazuh/core/cluster/cluster.py", line 217, in walk_dir
+    File "/var/ossec/framework/python/lib/python3.9/site-packages/wazuh-|WAZUH_CURRENT|-py3.7.egg/wazuh/core/cluster/cluster.py", line 217, in walk_dir
         entry_metadata['blake2b'] = blake2b(os.path.join(common.ossec_path, full_path))
-    File "/var/ossec/framework/python/lib/python3.9/site-packages/wazuh-|WAZUH_LATEST|-py3.7.egg/wazuh/core/utils.py", line 555, in blake2b
+    File "/var/ossec/framework/python/lib/python3.9/site-packages/wazuh-|WAZUH_CURRENT|-py3.7.egg/wazuh/core/utils.py", line 555, in blake2b
         with open(fname, "rb") as f:
     PermissionError: [Errno 13] Permission denied: '/var/ossec/etc/client.keys'
 
