@@ -59,7 +59,7 @@ If your SMTP server uses authentication (like Gmail, for instance), a server rel
 
    .. note::
 
-      The password must be an `app password <https://security.google.com/settings/security/apppasswords>`__. App passwords are created specifically for applications after enabling `2-step verification in Gmail <https://myaccount.google.com/signinoptions/two-step-verification>`__.
+      The password must be an `App Password <https://security.google.com/settings/security/apppasswords>`__. App Passwords can only be used with accounts that have `2-Step Verification <https://myaccount.google.com/signinoptions/two-step-verification>`__ turned on.
 
 #. Secure the DB password:
 
