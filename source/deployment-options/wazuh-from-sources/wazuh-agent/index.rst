@@ -108,20 +108,20 @@ The Wazuh agent is a single and lightweight monitoring software. It is a multi-p
 
             .. code-block:: console
 
-                # curl -Ls https://github.com/wazuh/wazuh/archive/v|WAZUH_LATEST_FROM_SOURCES|.tar.gz | tar zx
+                # curl -Ls https://github.com/wazuh/wazuh/archive/v|WAZUH_CURRENT_FROM_SOURCES|.tar.gz | tar zx
 
         #.  Run the ``install.sh`` script. This will run a wizard that will guide you through the installation process using the Wazuh sources:
 
             .. code-block:: console
 
-                # cd wazuh-|WAZUH_LATEST_FROM_SOURCES|
+                # cd wazuh-|WAZUH_CURRENT_FROM_SOURCES|
                 # ./install.sh
 
             If you have previously compiled for another platform, you must clean the build using the Makefile in ``src``:
 
             .. code-block:: console
 
-                # cd wazuh-|WAZUH_LATEST_FROM_SOURCES|
+                # cd wazuh-|WAZUH_CURRENT_FROM_SOURCES|
                 # make -C src clean
                 # make -C src clean-deps
 
@@ -217,8 +217,8 @@ The Wazuh agent is a single and lightweight monitoring software. It is a multi-p
 
             .. code-block:: console
 
-                # curl -Ls https://github.com/wazuh/wazuh/archive/v|WAZUH_LATEST_FROM_SOURCES|.tar.gz | tar zx
-                # cd wazuh-|WAZUH_LATEST_FROM_SOURCES|/src
+                # curl -Ls https://github.com/wazuh/wazuh/archive/v|WAZUH_CURRENT_FROM_SOURCES|.tar.gz | tar zx
+                # cd wazuh-|WAZUH_CURRENT_FROM_SOURCES|/src
 
         #.  Compile the Agent by running the ``make`` command:
 
@@ -238,13 +238,13 @@ The Wazuh agent is a single and lightweight monitoring software. It is a multi-p
 
             .. code-block:: console
 
-                # cd ../.. && zip -r wazuh.zip wazuh-|WAZUH_LATEST_FROM_SOURCES|
+                # cd ../.. && zip -r wazuh.zip wazuh-|WAZUH_CURRENT_FROM_SOURCES|
 
         #.  Decompress the repository on the Windows machine, run the ``wazuh-installer-build-msi.bat`` script from the win32 folder.
 
             .. code-block:: doscon
 
-                > cd wazuh-|WAZUH_LATEST_FROM_SOURCES|\src\win32
+                > cd wazuh-|WAZUH_CURRENT_FROM_SOURCES|\src\win32
                 > .\wazuh-installer-build-msi.bat
 
             If you do not want to sign the installer, you will have to comment or delete the signtool line in the previous script.
@@ -253,21 +253,21 @@ The Wazuh agent is a single and lightweight monitoring software. It is a multi-p
 
                 :: signtool sign /a /tr http://rfc3161timestamp.globalsign.com/advanced /d "%MSI_NAME%" /td SHA256 "%MSI_NAME%"
                 
-        #.  Specify the version and the revision number when prompted. This will also generate the Windows installer file. In the following output, the version is set as |WAZUH_LATEST_WIN_FROM_SOURCES| and the revision is set as |WAZUH_LATEST_WIN_REV_FROM_SOURCES|. This generates the Windows installer ``wazuh-agent-|WAZUH_LATEST_WIN_FROM_SOURCES|-|WAZUH_LATEST_WIN_REV_FROM_SOURCES|.msi``
+        #.  Specify the version and the revision number when prompted. This will also generate the Windows installer file. In the following output, the version is set as |WAZUH_CURRENT_WIN_FROM_SOURCES| and the revision is set as |WAZUH_CURRENT_WIN_FROM_SOURCES_REV|. This generates the Windows installer ``wazuh-agent-|WAZUH_CURRENT_WIN_FROM_SOURCES|-|WAZUH_CURRENT_WIN_FROM_SOURCES_REV|.msi``
         
             .. code-block:: doscon
             
-                C:\wazuh\wazuh-|WAZUH_LATEST_FROM_SOURCES|\src\win32>REM IF VERSION or REVISION are empty, ask for their value
+                C:\wazuh\wazuh-|WAZUH_CURRENT_FROM_SOURCES|\src\win32>REM IF VERSION or REVISION are empty, ask for their value
 
-                C:\wazuh\wazuh-|WAZUH_LATEST_FROM_SOURCES|\src\win32>IF [] == [] set /p VERSION=Enter the version of the Wazuh agent (x.y.z):
-                Enter the version of the Wazuh agent (x.y.z):|WAZUH_LATEST_WIN_FROM_SOURCES|
+                C:\wazuh\wazuh-|WAZUH_CURRENT_FROM_SOURCES|\src\win32>IF [] == [] set /p VERSION=Enter the version of the Wazuh agent (x.y.z):
+                Enter the version of the Wazuh agent (x.y.z):|WAZUH_CURRENT_WIN_FROM_SOURCES|
 
-                C:\wazuh\wazuh-|WAZUH_LATEST_FROM_SOURCES|\src\win32>IF [] == [] set /p REVISION=Enter the revision of the Wazuh agent:
+                C:\wazuh\wazuh-|WAZUH_CURRENT_FROM_SOURCES|\src\win32>IF [] == [] set /p REVISION=Enter the revision of the Wazuh agent:
                 Enter the revision of the Wazuh agent:1
 
-                C:\wazuh\wazuh-|WAZUH_LATEST_FROM_SOURCES|\src\win32>SET MSI_NAME=wazuh-agent-|WAZUH_LATEST_WIN_FROM_SOURCES|-|WAZUH_LATEST_WIN_REV_FROM_SOURCES|.msi
+                C:\wazuh\wazuh-|WAZUH_CURRENT_FROM_SOURCES|\src\win32>SET MSI_NAME=wazuh-agent-|WAZUH_CURRENT_WIN_FROM_SOURCES|-|WAZUH_CURRENT_WIN_FROM_SOURCES_REV|.msi
 
-        #.   Proceed to install wazuh-agent-|WAZUH_LATEST_FROM_SOURCES|-|WAZUH_LATEST_WIN_REV_FROM_SOURCES|.msi  by following the :doc:`installation guide </installation-guide/wazuh-agent/wazuh-agent-package-windows>`.
+        #.   Proceed to install wazuh-agent-|WAZUH_CURRENT_FROM_SOURCES|-|WAZUH_CURRENT_WIN_FROM_SOURCES_REV|.msi  by following the :doc:`installation guide </installation-guide/wazuh-agent/wazuh-agent-package-windows>`.
 
         .. rubric:: Next steps
            :class: h2
@@ -282,7 +282,7 @@ The Wazuh agent is a single and lightweight monitoring software. It is a multi-p
 
         .. code-block:: doscon
 
-            msiexec.exe /x wazuh-agent-|WAZUH_LATEST_WIN_FROM_SOURCES|-|WAZUH_LATEST_WIN_REV_FROM_SOURCES|.msi /qn
+            msiexec.exe /x wazuh-agent-|WAZUH_CURRENT_WIN_FROM_SOURCES|-|WAZUH_CURRENT_WIN_FROM_SOURCES_REV|.msi /qn
 
     .. group-tab:: macOS
 
@@ -300,7 +300,7 @@ The Wazuh agent is a single and lightweight monitoring software. It is a multi-p
 
             .. code-block:: console
 
-                # curl -Ls https://github.com/wazuh/wazuh/archive/v|WAZUH_LATEST_FROM_SOURCES|.tar.gz | tar zx
+                # curl -Ls https://github.com/wazuh/wazuh/archive/v|WAZUH_CURRENT_FROM_SOURCES|.tar.gz | tar zx
 
             .. note::
             
@@ -310,7 +310,7 @@ The Wazuh agent is a single and lightweight monitoring software. It is a multi-p
 
             .. code-block:: console
 
-                # cd wazuh-|WAZUH_LATEST_FROM_SOURCES|
+                # cd wazuh-|WAZUH_CURRENT_FROM_SOURCES|
                 # USER_DIR="/Library/Ossec" ./install.sh
 
             .. note::
@@ -321,7 +321,7 @@ The Wazuh agent is a single and lightweight monitoring software. It is a multi-p
 
             .. code-block:: console
 
-                # cd wazuh-|WAZUH_LATEST_FROM_SOURCES|
+                # cd wazuh-|WAZUH_CURRENT_FROM_SOURCES|
                 # make -C src clean
                 # make -C src clean-deps
 
@@ -402,7 +402,7 @@ The Wazuh agent is a single and lightweight monitoring software. It is a multi-p
 
                 .. code-block:: console
 
-                    # wget https://raw.githubusercontent.com/wazuh/wazuh-packages/|WAZUH_LATEST_MINOR_FROM_SOURCES|/aix/generate_wazuh_packages.sh --no-check-certificate
+                    # wget https://raw.githubusercontent.com/wazuh/wazuh-packages/|WAZUH_CURRENT_MINOR_FROM_SOURCES|/aix/generate_wazuh_packages.sh --no-check-certificate
 
                 .. note::
                 
@@ -430,7 +430,7 @@ The Wazuh agent is a single and lightweight monitoring software. It is a multi-p
 
             .. code-block:: console
 
-                # wget -O wazuh.tar.gz --no-check-certificate https://api.github.com/repos/wazuh/wazuh/tarball/v|WAZUH_LATEST_FROM_SOURCES| 
+                # wget -O wazuh.tar.gz --no-check-certificate https://api.github.com/repos/wazuh/wazuh/tarball/v|WAZUH_CURRENT_FROM_SOURCES| 
                 # gunzip -c wazuh.tar.gz | tar -xvf -
 
             .. note::
@@ -441,7 +441,7 @@ The Wazuh agent is a single and lightweight monitoring software. It is a multi-p
 
             .. code-block:: console
 
-                # cd wazuh-|WAZUH_LATEST_FROM_SOURCES|
+                # cd wazuh-|WAZUH_CURRENT_FROM_SOURCES|
                 # cd src
                 # gmake clean-deps
                 # gmake clean
@@ -578,7 +578,7 @@ The Wazuh agent is a single and lightweight monitoring software. It is a multi-p
 
             .. code-block:: console
 
-                # /usr/local/bin/curl -k -L -O https://github.com/wazuh/wazuh/archive/v|WAZUH_LATEST_FROM_SOURCES|.zip && /usr/local/bin/unzip v|WAZUH_LATEST_FROM_SOURCES|
+                # /usr/local/bin/curl -k -L -O https://github.com/wazuh/wazuh/archive/v|WAZUH_CURRENT_FROM_SOURCES|.zip && /usr/local/bin/unzip v|WAZUH_CURRENT_FROM_SOURCES|
 
             .. note::
             
@@ -588,7 +588,7 @@ The Wazuh agent is a single and lightweight monitoring software. It is a multi-p
 
             .. code-block:: console
 
-                # cd wazuh-|WAZUH_LATEST_FROM_SOURCES|
+                # cd wazuh-|WAZUH_CURRENT_FROM_SOURCES|
                 # /usr/local/bin/gmake -C src deps RESOURCES_URL=http://packages.wazuh.com/deps/14 TARGET=agent
                 # /usr/local/bin/gmake -C src TARGET=agent USE_SELINUX=no
 
@@ -750,7 +750,7 @@ The Wazuh agent is a single and lightweight monitoring software. It is a multi-p
 
                     .. code-block:: console
 
-                        # /opt/csw/bin/git clone -b v|WAZUH_LATEST_FROM_SOURCES| https://github.com/wazuh/wazuh.git
+                        # /opt/csw/bin/git clone -b v|WAZUH_CURRENT_FROM_SOURCES| https://github.com/wazuh/wazuh.git
 
                 #.  Compile the sources.
 
@@ -929,7 +929,7 @@ The Wazuh agent is a single and lightweight monitoring software. It is a multi-p
 
                     .. code-block:: console
 
-                        # git clone -b v|WAZUH_LATEST_FROM_SOURCES| https://github.com/wazuh/wazuh.git
+                        # git clone -b v|WAZUH_CURRENT_FROM_SOURCES| https://github.com/wazuh/wazuh.git
 
                     .. note::
                     
