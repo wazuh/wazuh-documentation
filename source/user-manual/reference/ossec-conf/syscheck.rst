@@ -743,7 +743,8 @@ this parameter is ignored.
 
 **interval**
 
-Specifies the initial time between every inventory synchronization.
+Specifies the initial time between every inventory synchronization. If synchronization fails the value will be duplicated until it reaches the value of ``max_interval``.
+If a synchronization is completed successfuly the configured value is restored.
 
 +--------------------+----------------------------------------------------------------------+
 | **Default value**  | 5 m                                                                  |
@@ -753,18 +754,18 @@ Specifies the initial time between every inventory synchronization.
 
 **response_timeout**
 
-Waiting time since a sync message is sent or received for the next synchronization to be started. If no message are sent or received by the agent in this interval the synchronization is marked as successful.
+Waiting time (seconds) since a sync message is sent or received for the next synchronization to be started. If no message are sent or received by the agent in this interval the synchronization is marked as successful.
 If a synchronization is unsuccessful, the synchronization interval is doubled until ``max_interval`` is reached. This mechanism avoids synchronization overlapping.
 
 +--------------------+----------------------------------------------------------------------+
 | **Default value**  | 30                                                                   |
 +--------------------+----------------------------------------------------------------------+
-| **Allowed values** | Any number between 0 and ``interval``. Allowed sufixes (s, m, h, d). |
+| **Allowed values** | Any number between 0 and ``interval``.                               |
 +--------------------+----------------------------------------------------------------------+
 
 **max_interval**
 
-Maximum interval value for a synchronization to be triggered.
+Maximum interval value for a synchronization to be triggered. When a synchronization fails the interval is duplicated until this threshold is reached.
 
 +--------------------+----------------------------------------------------------------------+
 | **Default value**  | 1 h                                                                  |
@@ -784,12 +785,12 @@ Specifies the queue size of the manager synchronization responses.
 
 **thread_pool**
 
-Specifices the number of thread used by the FIM database synchronization.
+Specifices the number of threads used by the FIM database synchronization. FIM will use the minimum between the configured value and the number of CPU cores of the system.
 
 +--------------------+-----------------------------------------------------+
 | **Default value**  | 1                                                   |
 +--------------------+-----------------------------------------------------+
-| **Allowed values** | Integer number between 1 and the number of cores.   |
+| **Allowed values** |  Any integer greater than 0.                        |
 +--------------------+-----------------------------------------------------+
 
 **max_eps**
