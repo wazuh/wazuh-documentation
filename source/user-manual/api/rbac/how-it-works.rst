@@ -1,14 +1,14 @@
 .. Copyright (C) 2022 Wazuh, Inc.
 
 .. meta::
-    :description: The operation of RBAC is based on the relationship between four components: users, roles, rules and policies. Learn more here.
+    :description: The operation of RBAC is based on the relationship between four components: users, roles, rules, and policies. Learn more here.
 
 .. _api_rbac_how_it_works:
 
 How it works
 ============
 
-The operation of RBAC is based on the relationship between four components: **users**, **roles**, **rules** and **policies**. Policies and rules are associated with roles, and each user can belong to one or more roles.
+The operation of RBAC is based on the relationship between four components: **users**, **roles**, **rules**, and **policies**. Policies and rules are associated with roles, and each user can belong to one or more roles.
 
 Since the policies are not directly related to users, it is not necessary to assign them to each user. Simply assign the user to the appropriate role. The process of updating the permissions of an entire group of users is also made easier thanks to this structure.
 

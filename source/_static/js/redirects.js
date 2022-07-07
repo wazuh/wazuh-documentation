@@ -99,6 +99,8 @@ newUrls['4.4'] = [
   '/amazon/services/supported-services/elastic-load-balancing/alb.html',
   '/amazon/services/supported-services/elastic-load-balancing/nlb.html',
   '/amazon/services/supported-services/elastic-load-balancing/clb.html',
+  '/development/rbac-database-integrity.html',
+  '/user-manual/reference/tools/rbac-control.html',
 ];
 
 removedUrls['4.4'] = [
