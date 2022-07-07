@@ -1,7 +1,7 @@
 .. Copyright (C) 2022 Wazuh, Inc.
 
 .. meta::
-  :description: Wazuh helps to increase the security of cloud platforms.  Learn more about Wazuh Cloud security in this section.
+  :description: Wazuh helps to increase the security of cloud platforms. Learn more about Wazuh Cloud security in this section.
 
 
 .. _monitoring:
