@@ -735,6 +735,10 @@ The database synchronization settings are configured inside this tag.
     <synchronization>
       <enabled>yes</enabled>
       <interval>5m</interval>
+      <max_interval>1h</max_interval>
+      <response_timeout>30</response_timeout>
+      <queue_size>16384</queue_size>
+      <thread_pool>1</thread_pool>
       <max_eps>10</max_eps>
     </synchronization>
 
@@ -764,7 +768,8 @@ this parameter is ignored.
 
 **interval**
 
-Specifies the elapsed time between every inventory synchronization.
+Specifies the initial time between every inventory synchronization. If synchronization fails the value will be duplicated until it reaches the value of ``max_interval``.
+If a synchronization is completed successfuly the configured value is restored.
 
 +--------------------+----------------------------------------------------------------------+
 | **Default value**  | 5 m                                                                  |
@@ -772,16 +777,46 @@ Specifies the elapsed time between every inventory synchronization.
 | **Allowed values** | Any number greater than or equal to 0. Allowed sufixes (s, m, h, d). |
 +--------------------+----------------------------------------------------------------------+
 
-**min_interval**
+**response_timeout**
 
-Defines the minimum interval between two synchronizations. A new sync process is blocked if less than ``min_interval``
-seconds have elapsed since the last sync message was sent by the agent.
+Waiting time (seconds) since a sync message is sent or received for the next synchronization to be started. If no message are sent or received by the agent in this interval the synchronization is marked as successful.
+If a synchronization is unsuccessful, the synchronization interval is doubled until ``max_interval`` is reached. This mechanism avoids synchronization overlapping.
 
 +--------------------+----------------------------------------------------------------------+
-| **Default value**  | 1 m                                                                  |
+| **Default value**  | 30                                                                   |
 +--------------------+----------------------------------------------------------------------+
-| **Allowed values** | Any number between 0 and ``interval``. Allowed sufixes (s, m, h, d). |
+| **Allowed values** | Any number between 0 and ``interval``.                               |
 +--------------------+----------------------------------------------------------------------+
+
+**max_interval**
+
+Maximum interval value for a synchronization to be triggered. When a synchronization fails the interval is duplicated until this threshold is reached.
+
++--------------------+----------------------------------------------------------------------+
+| **Default value**  | 1 h                                                                  |
++--------------------+----------------------------------------------------------------------+
+| **Allowed values** | Integer value. Allowed sufixes (s, m, h, d).                         |
++--------------------+----------------------------------------------------------------------+
+
+**queue_size**
+
+Specifies the queue size of the manager synchronization responses.
+
++--------------------+---------------------------------------+
+| **Default value**  | 16384                                 |
++--------------------+---------------------------------------+
+| **Allowed values** | Integer number between 2 and 1000000. |
++--------------------+---------------------------------------+
+
+**thread_pool**
+
+Specifices the number of threads used by the FIM database synchronization. FIM will use the minimum between the configured value and the number of CPU cores of the system.
+
++--------------------+-----------------------------------------------------+
+| **Default value**  | 1                                                   |
++--------------------+-----------------------------------------------------+
+| **Allowed values** |  Any integer greater than 0.                        |
++--------------------+-----------------------------------------------------+
 
 **max_eps**
 
