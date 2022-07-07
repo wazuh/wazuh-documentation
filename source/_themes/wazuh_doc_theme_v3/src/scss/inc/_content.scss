@@ -57,6 +57,14 @@
     display: table;
     margin-left: auto;
   }
+  
+  .table-responsive {
+    &.align-left,
+    &.align-center,
+    &.align-right {
+      display: block;
+    }
+  }
 
   .topic-title {
     font-weight: 600;
@@ -517,7 +525,13 @@
           tr:nth-child(even) {
             td,
             th {
-              background-color: $dark-color-table-alt-background;
+              background-color: $dark-color-table-row-even;
+            }
+          }
+          tr:nth-child(odd) {
+            td,
+            th {
+              background-color: $dark-color-table-row-odd;
             }
           }
         }
