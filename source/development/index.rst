@@ -8,8 +8,7 @@
 Development
 ===========
 
-
-This section contains technical documentation for developers.
+This section contains technical development documentation. Here developers can learn about specialized topics such as how to create a Wazuh cluster, Standard OSSEC message format, or instructions to customize the installation of Wazuh.
 
 .. topic:: Contents
 
