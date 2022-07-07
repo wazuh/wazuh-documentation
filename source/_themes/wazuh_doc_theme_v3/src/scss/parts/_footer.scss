@@ -133,6 +133,11 @@ footer {
         }
       }
     }
+    .logo-link {
+      svg {
+        fill: $light-color-main-text-extra;
+      }
+    }
   }
 }
 
@@ -156,6 +161,11 @@ footer {
         &:focus {
           color: $dark-color-primary-lighter;
         }
+      }
+    }
+    .logo-link {
+      svg {
+        fill: $dark-color-main-text;
       }
     }
   }
