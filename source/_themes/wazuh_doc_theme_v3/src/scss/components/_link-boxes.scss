@@ -6,41 +6,231 @@
 
 .link-boxes-group {
   display: flex;
-  display: grid;
+  flex-wrap: wrap;
   justify-content: space-between;
-  grid-template-columns: repeat(3, 1fr);
   margin: 2rem auto;
-  grid-gap: 1rem;
-
-  @include media-min(lg) {
-    grid-template-columns: repeat(6, 1fr);
+  
+  &[data-step] {
+    @include media-max(md){
+      position: relative;
+      padding-left: 60px;
+    }
+    .link-boxes-item {
+      .link-boxes-link {
+        padding-top: 15px;
+        padding-bottom: 15px;
+        img {
+          max-width: unset;
+          @include media-only(xl,wzh-xl){
+            max-height: 50px;
+          }
+        }
+      }
+    }
+  }
+  
+  .steps-line {
+    position: relative;
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+    height: 48px;
+    margin-bottom: 32px;
+    justify-content: space-around;
+    align-items: center;
+    z-index: 1;
+    @include media-max(md){
+      position: absolute;
+      top: 0;
+      left: 0;
+      bottom: 0;
+      width: 48px;
+      height: calc(100% - 15px);
+      margin-bottom: 0;
+      flex-direction: column;
+    }
+    
+    &::before {
+      position: absolute;
+      top: 24px;
+      left: 0;
+      right: 0;
+      content: '';
+      width: 100%;
+      height: 3px;
+      background-color: $color-steps-link-boxes;
+      display: block;
+      z-index: 2;
+      @include media-max(md){
+        top: 0;
+        bottom: 0;
+        left: 24px;
+        width: 3px;
+        height: 100%;
+      }
+    }
+    
+    .steps-number {
+      font-size: 18px;
+      display: flex;
+      width: 39px;
+      height: 39px;
+      border: 2px solid;
+      border-radius: 25px;
+      z-index: 4;
+      justify-content: center;
+      align-items: center;
+      position: relative;
+      overflow: hidden;
+      &.past-step {
+        &:before {
+          content: '';
+          width: 23px;
+          height: 23px;
+          display: block;
+          background: white;
+          position: absolute;
+          top: 6px;
+          left: 6px;
+          border: 7px solid transparent;
+          border-radius: 50%;
+        }
+        &:after {
+          content: '';
+          display: block;
+          width: 35px;
+          height: 35px;
+          background-position: center;
+          background-size: cover;
+          position: absolute;
+          top: 0;
+          bottom: 0;
+          right: 0;
+          left: 0;
+        }
+      }
+      &.current-step {
+        font-size: 22px;
+        width: 48px;
+        height: 48px;
+      }
+    }
+  }
+  
+  &.layout-2x2,
+  &.layout-2 {
+    .link-boxes-item {
+      width: calc(calc(100% - 15px) / 2 );
+      @include media-max(md) {
+        width: calc(calc(100% - 15px) / 2 );
+      }
+      @include media-max(sm) {
+        width: 100%;
+      }
+    }
+  }
+  
+  &.layout-3 {
+    .link-boxes-item {
+      width: calc(calc(100% - 15px * 2) / 3 );
+      @include media-max(md) {
+        width: 100%;
+      }
+    }
+  }
+  
+  &.layout-4 {
+    .link-boxes-item {
+      width: calc(calc(100% - 15px * 3) / 4 );
+      @include media-max(md) {
+        width: calc(calc(100% - 15px) / 2 );
+      }
+      @include media-max(sm) {
+        width: 100%;
+      }
+    }
+  }
+  
+  
+  &.layout-5 {
+    .link-boxes-item {
+      width: calc(calc(100% - 15px * 4) / 5 );
+      @include media-max(md) {
+        width: calc(calc(100% - 15px) / 2 );
+      }
+      @include media-max(sm) {
+        width: 100%;
+      }
+    }
+  }
+  
+  &.layout-6 {
+    .link-boxes-item {
+      width: calc(calc(100% - 15px * 5) / 6);
+      @include media-max(lg) {
+        width: calc(calc(100% - 15px * 2) / 3);
+      }
+    }
   }
 
   .link-boxes-item {
+    padding-bottom: 15px;
     display: flex;
     justify-content: center;
     align-items: center;
+    
+    &:last-child {
+      padding-right: 0;
+    }
+    &.current-step {
+      cursor: default;
+      .link-boxes-label {
+        display: none;
+      }
+    }
     img {
       display: inline-block;
-      margin-bottom: 0;
-      margin-top: 0;
+      margin: 10px;
       border: none;
     }
 
-    a {
+    .link-boxes-link, .doc {
+      background-color: $light-color-base-space;
       position: relative;
       box-sizing: border-box;
-      min-width: 70px;
-      max-width: 150px;
-      padding: 0;
+      min-width: 60px;
+      padding: 10px;
       overflow: hidden;
-      border: 2px solid;
+      color: $light-color-main-text;
+      box-shadow: 3px 3px 7px rgba(0, 0, 0, .1);
       border-radius: $rounded-corners;
       display: flex;
       align-items: center;
       justify-content: center;
       width: 100%;
       height: 100%;
+            
+      &.vertical-content {
+        flex-direction: column;
+        img {
+          margin-top: 0;
+          margin-bottom: 0;
+        }
+      }
+      
+      &.horizontal-content {}
+      
+      &:hover {
+        .link-boxes-label {
+          opacity: 1;
+        }
+      }
+      
+      p {
+        padding: 10px;
+        margin-top: 0;
+        margin-bottom: 0;
+      }
     }
     .link-boxes-label {
       position: absolute;
@@ -58,12 +248,7 @@
       text-align: center;
       letter-spacing: 0;
       opacity: 0;
-    }
-
-    &:hover {
-      .link-boxes-label {
-        opacity: 1;
-      }
+      padding: 15px;
     }
   }
 }
@@ -71,14 +256,49 @@
 /* Light theme -------------------------------------------------------------- */
 
 .light-theme {
+  @include link-boxes-steps-progress(6,$light-color-primary-lighter,$color-steps-link-boxes,md);
   .link-boxes-group {
-    .link-boxes-item a {
-      border-color: $light-color-border-deeper;
-      &:hover {
-        border-color: $light-color-primary;
-        box-shadow: 0 0 0 10px $light-color-primary inset;
-        .link-boxes-label {
-          background-color: $light-color-primary;
+    .steps-line {
+      .steps-number { 
+        &.past-step {
+          box-shadow: 0 0 0 5px $light-color-primary-lighter inset, 3px 3px 7px rgba(0, 0, 0, .1);
+          border-color: $light-color-primary-lighter;
+          background-color: $light-color-primary-lighter;
+          color: $light-color-base-space;
+          &:after {
+            background: url("#{$ico-path}svg-icons.svg#circle-check-lt");
+          }
+        }
+        &.current-step {
+          border-color: $light-color-primary-lighter;
+          background-color: $light-color-base-space;
+          color: $light-color-primary-lighter;
+        }
+        &.future-step {
+          background-color: $color-steps-link-boxes;
+          border-color: $color-steps-link-boxes;
+          color: $light-color-base-space;
+        }
+      }
+    }
+    .link-boxes-item {
+      &.past-step,
+      &.current-step {
+        .link-boxes-link {
+          box-shadow: 0 0 0 10px $light-color-primary-lighter inset, 3px 3px 7px rgba(0, 0, 0, .1);
+          background-color: $light-color-primary-lighter;
+          .link-boxes-label,
+          img {
+            background-color: $light-color-primary-lighter;
+          }
+        }
+      }
+      a.link-boxes-link {
+        &:hover {
+          box-shadow: 0 0 0 10px $light-color-primary inset, 3px 3px 7px rgba(0, 0, 0, .1);
+          .link-boxes-label {
+            background-color: $light-color-primary;
+          }
         }
       }
     }
@@ -88,15 +308,49 @@
 /* Dark- theme -------------------------------------------------------------- */
 
 .dark-theme {
+  @include link-boxes-steps-progress(6,$dark-color-primary-lighter,$color-steps-link-boxes,md);
   .link-boxes-group {
-    .link-boxes-item a {
-      background-color: #fff;
-      border-color: $dark-color-border-deeper;
-      &:hover {
-        border-color: $dark-color-primary;
-        box-shadow: 0 0 0 10px $dark-color-primary inset;
-        .link-boxes-label {
-          background-color: $dark-color-primary;
+    .steps-line {
+      .steps-number { 
+        &.past-step {
+          box-shadow: 0 0 0 5px $dark-color-primary-lighter inset;
+          border-color: $dark-color-primary-lighter;
+          background: $dark-color-primary-lighter;
+          color: $light-color-base-space;
+          &:after {
+            background: url("#{$ico-path}svg-icons.svg#circle-check-dt");
+          }
+        }
+        &.current-step {
+          border-color: $dark-color-primary-lighter;
+          background-color: $light-color-base-space;
+          color: $dark-color-primary-lighter;
+        }
+        &.future-step {
+          background-color: $color-steps-link-boxes;
+          border-color: $color-steps-link-boxes;
+          color: $light-color-base-space;
+        }
+      }
+    }
+    .link-boxes-item {
+      &.past-step,
+      &.current-step {
+        .link-boxes-link {
+          box-shadow: 0 0 0 10px $dark-color-primary-lighter inset;
+          background-color: $dark-color-primary-lighter;
+          .link-boxes-label,
+          img {
+            background-color: $dark-color-primary-lighter;
+          }
+        }
+      }
+      a.link-boxes-link {
+        &:hover {
+          box-shadow: 0 0 0 10px $dark-color-primary inset;
+          .link-boxes-label {
+            background-color: $dark-color-primary;
+          }
         }
       }
     }

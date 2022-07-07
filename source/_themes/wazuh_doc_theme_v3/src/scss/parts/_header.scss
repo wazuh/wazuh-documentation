@@ -27,6 +27,18 @@ header {
       height: $header-height-xl;
     }
   }
+  
+  .logo-link {
+    @include media-max(sm){
+      max-width: 180px;
+      font-size: .8rem;
+    }
+    svg {
+      @include media-max(sm){
+        max-width: 180px;
+      }
+    }
+  }
 
   .mobile-primary-header {
     display: flex;
@@ -39,6 +51,7 @@ header {
   }
 
   .mobile-secondary-header {
+    padding-right: 15px;
     display: flex;
     align-items: center;
     height: $secondary-mobile-bar;
@@ -121,7 +134,6 @@ header {
       }
     }
     .mobile-secondary-header {
-      padding-right: 15px;
       @include media-max(xl){
         background-color: $light-color-sidebar-space;
       }
@@ -130,6 +142,9 @@ header {
       .search-toggler-icon {
         background: url("#{$ico-path}svg-icons.svg#search-lt");
       }
+    }
+    svg {
+      fill: $light-color-main-text-extra;
     }
   }
 }
@@ -156,6 +171,9 @@ header {
       .search-toggler-icon {
         background: url("#{$ico-path}svg-icons.svg#search-dt");
       }
+    }
+    svg {
+      fill: $dark-color-main-text;
     }
   }
 }

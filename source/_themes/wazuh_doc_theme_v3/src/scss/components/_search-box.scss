@@ -24,6 +24,7 @@
       font-size: 18px;
       font-weight: 500;
       border: none;
+      padding-right: 40px;
     }
 
     .btn-search {
@@ -40,6 +41,10 @@
       border-radius: calc(#{$rounded-corners} - 2px);
     }
   }
+}
+
+header .search-box {
+  min-width: 380px;
 }
 
 /* Light theme -------------------------------------------------------------- */
