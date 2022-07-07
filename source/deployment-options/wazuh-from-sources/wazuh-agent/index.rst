@@ -293,7 +293,7 @@ The Wazuh agent is a single and lightweight monitoring software. It is a multi-p
                 $ /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
 
             .. warning::
-                In some macOS versions this first command may fail reporting that `homebrew/core` is shallow clone. If this happens, run the following commands to solve it.
+                In some macOS versions, this first command may fail reporting that `homebrew/core` is shallow clone. If this happens, run the following commands to solve it.
 
                 .. code-block:: console
 
