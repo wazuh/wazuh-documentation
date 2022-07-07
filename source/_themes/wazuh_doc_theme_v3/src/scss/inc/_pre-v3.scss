@@ -127,11 +127,11 @@
         justify-content: center;
         align-items: center;
         a {
-          border: 2px solid $light-color-border-deeper;
+          box-shadow: 3px 3px 7px 0px rgba(0, 0, 0, .1);
           background-color: #fff;
           border-radius: $rounded-corners;
           overflow: hidden;
-          padding: 0;
+          padding: 10px;
           position: relative;
           min-width: 70px;
           max-width: 150px;
@@ -143,6 +143,13 @@
             text-align: center;
             margin: 0;
             position: absolute;
+            left: 0;
+            right: 0;
+            top: 0;
+            bottom: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
             width: 100%;
             opacity: 0;
           }
@@ -188,9 +195,8 @@
     }
     .agent-os {
       .item-agent a {
-        border: 2px solid $light-color-border-deeper;
         &:hover {
-          border-color:  $light-color-primary;
+          box-shadow: 0 0 0 10px $light-color-primary inset, 3px 3px 7px 0 rgba(0, 0, 0, .1);
           background-color:  $light-color-primary;
         }
       }
@@ -209,9 +215,8 @@
     }
     .agent-os {
       .item-agent a {
-        border: 2px solid $dark-color-border-deeper;
         &:hover {
-          border-color: $dark-color-primary;
+          box-shadow: 0 0 0 10px $dark-color-primary inset;
           background-color: $dark-color-primary;
         }
       }

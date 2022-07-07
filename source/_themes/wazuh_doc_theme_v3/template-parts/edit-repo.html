@@ -25,6 +25,7 @@
 {% endif %}
 
 {% block breadcrumbs_aside %}
+{% if theme_include_edit_repo == True %}
 {% if display_github or display_bitbucket or display_gitlab  %}
   <span class="edit-repo d-none d-xl-inline-block">
     {% if hasdoc(pagename) %}
@@ -56,5 +57,6 @@
     {% endif %}
     {% endif %}
   </span>
+  {% endif %}
   {% endif %}
   {% endblock %}
