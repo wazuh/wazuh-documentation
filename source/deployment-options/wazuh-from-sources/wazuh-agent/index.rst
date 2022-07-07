@@ -295,16 +295,16 @@ The Wazuh agent is a single and lightweight monitoring software. It is a multi-p
             .. warning::
                 In some macOS versions this first command may fail reporting that `homebrew/core` is shallow clone. If this happens, run the following commands to solve it.
 
-            .. code-block:: console
+                .. code-block:: console
 
-                $ rm -rf "/usr/local/Homebrew/Library/Taps/homebrew/homebrew-core"
-                $ brew tap homebrew/core
+                    $ rm -rf "/usr/local/Homebrew/Library/Taps/homebrew/homebrew-core"
+                    $ brew tap homebrew/core
 
-            After that, run again the first one to properly install brew:
+                After that, run again the first one to properly install brew:
 
-            .. code-block:: console
+                .. code-block:: console
 
-                $ /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
+                    $ /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
 
         #. Install development tools and compilers through brew.
 
