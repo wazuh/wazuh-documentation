@@ -8,7 +8,7 @@
 User manual
 ===========
 
-Welcome to the Wazuh user manual. Use it as your reference library once your basic Wazuh installation is ready. In this section, you will find important content on topics such as Wazuh server administration, Wazuh agent enrollment, Wazuh capabilities, and many others that are listed below:
+Welcome to the Wazuh user manual. Use it as your reference library once your basic Wazuh installation is ready. In this section, you will find content on topics such as Wazuh server administration, Wazuh agent enrollment, Wazuh capabilities, and many others that are listed below.
 
 
 .. topic:: Contents
