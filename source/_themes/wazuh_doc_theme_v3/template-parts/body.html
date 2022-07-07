@@ -22,7 +22,7 @@
           {% include "template-parts/no-latest-notice.html" %}
         {% endblock latest %}
 
-        {% if pagename not in special_pages %}
+        {% if pagename not in special_pages or theme_breadcrumb_root_title == 'Training' and pagename == 'index' %}
           <div class="breadcrumb-wrapper">
             {% include "template-parts/breadcrumbs.html" %}
           </div>
@@ -31,7 +31,7 @@
         {# Main content #}
         <main role="main">
         {{ body }}
-        {% if pagename not in special_pages %}
+        {% if pagename not in special_pages or theme_breadcrumb_root_title == 'Training' and pagename == 'index' %}
         {% include "template-parts/navigation.html" %}
         {% endif %}
         </main>
