@@ -149,7 +149,8 @@ if ( $('.search') ) {
     }
 
     const a = $(document.createElement('a'));
-    a.attr('href', $('.logo-link.docs').attr('href')).text('Documentation').addClass('breadcrumb-link');
+    const homeIcon = $('#home-icon svg');
+    a.attr('href', DOCUMENTATION_OPTIONS.URL_ROOT).append(homeIcon.clone(true)).addClass('breadcrumb-link');
     breadcrumb.prepend(a);
     return breadcrumb;
   }
