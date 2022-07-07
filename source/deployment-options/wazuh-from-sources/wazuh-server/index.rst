@@ -64,27 +64,6 @@ Installing dependencies
             # curl -OL https://packages.wazuh.com/utils/cmake/cmake-3.18.3.tar.gz && tar -zxf cmake-3.18.3.tar.gz && cd cmake-3.18.3 && ./bootstrap --no-system-curl && make -j$(nproc) && make install
             # cd .. && rm -rf cmake-*
             
-    .. group-tab:: ZYpp
-    
-        .. code-block:: console
-        
-            # zypper install -y make cmake gcc gcc-c++ policycoreutils-python automake autoconf libtool libopenssl-devel curl
-            
-        CMake 3.18 installation
-        
-        .. code-block:: console
-        
-            # curl -OL https://packages.wazuh.com/utils/cmake/cmake-3.18.3.tar.gz && tar -zxf  cmake-3.18.3.tar.gz && cd cmake-3.18.3 && ./bootstrap --no-system-curl && make -j$(nproc) && make install
-            # cd .. && rm -rf cmake-*
-            
-    .. group-tab:: Pacman
-    
-        GCC/G++ 9.4 is the recommended version to build wazuh.
-        
-        .. code-block:: console
-        
-            # pacman --noconfirm -Syu curl gcc make sudo wget expect gnupg perl-base perl fakeroot python brotli automake autoconf libtool gawk libsigsegv nodejs base-devel inetutils cmake
-
 **Optional**. Install the following dependencies only when compiling the CPython from sources. Since v4.2.0, ``make deps TARGET=server`` will download a portable version of CPython ready to be installed. Nevertheless, you can download the CPython sources by adding the ``PYTHON_SOURCE`` flag when running ``make deps``.
 
 To install the required dependencies to build the python interpreter, follow these steps:
@@ -106,13 +85,6 @@ To install the required dependencies to build the python interpreter, follow the
             # apt-get update
             # apt-get build-dep python3 -y
 
-    .. group-tab:: ZYpp
-    
-        .. code-block:: console
-        
-            # zypper install epel-release yum-utils -y
-            # zypper-builddep python34 -y
-
 .. note::
   
     The Python version from the previous command may change depending on the OS used to build the binaries. More information in `Install dependencies <https://devguide.python.org/setup/#install-dependencies>`_.
@@ -125,7 +97,7 @@ Installing the Wazuh manager
 
     .. code-block:: console
 
-        # curl -Ls https://github.com/wazuh/wazuh/archive/v|WAZUH_LATEST_FROM_SOURCES|.tar.gz | tar zx
+        # curl -Ls https://github.com/wazuh/wazuh/archive/v|WAZUH_CURRENT_FROM_SOURCES|.tar.gz | tar zx
 
 #.  Run the ``install.sh`` script. This will display a wizard to guide you through the installation process using the Wazuh sources:
 
@@ -135,14 +107,14 @@ Installing the Wazuh manager
 
     .. code-block:: console
 
-        # cd wazuh-|WAZUH_LATEST_FROM_SOURCES|
+        # cd wazuh-|WAZUH_CURRENT_FROM_SOURCES|
         # ./install.sh
 
     If you have previously compiled for another platform, you must clean the build using the Makefile  in ``src``:
 
     .. code-block:: console
 
-        # cd wazuh-|WAZUH_LATEST_FROM_SOURCES|
+        # cd wazuh-|WAZUH_CURRENT_FROM_SOURCES|
         # make -C src clean
         # make -C src clean-deps
 

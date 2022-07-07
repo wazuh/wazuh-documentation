@@ -22,7 +22,7 @@ Download our wazuh-packages repository from GitHub and go to the macos directory
 
 .. code-block:: console
 
-  $ git clone https://github.com/wazuh/wazuh-packages && cd wazuh-packages/macos && git checkout v|WAZUH_LATEST|
+  $ git clone https://github.com/wazuh/wazuh-packages && cd wazuh-packages/macos && git checkout v|WAZUH_CURRENT_OSX|
 
 Execute the ``generate_wazuh_packages.sh`` script, with the different options you desire.
 
@@ -60,19 +60,19 @@ Below, you will find some examples of how to build macOS packages.
 
 .. code-block:: console
 
-  # ./generate_wazuh_packages.sh -b v|WAZUH_LATEST| -s /tmp
+  # ./generate_wazuh_packages.sh -b v|WAZUH_CURRENT_OSX| -s /tmp
 
-This will build a |WAZUH_LATEST| Wazuh agent macOS  package and store it in ``/tmp``.
-
-.. code-block:: console
-
-  # ./generate_wazuh_packages.sh -b v|WAZUH_LATEST| -s /tmp -j 6
-
-This will also build a |WAZUH_LATEST| Wazuh agent macOS package and store it in ``/tmp`` but will use 6 jobs to compile the sources.
+This will build a |WAZUH_CURRENT_OSX| Wazuh agent macOS  package and store it in ``/tmp``.
 
 .. code-block:: console
 
-  # ./generate_wazuh_packages.sh -b v|WAZUH_LATEST| -s /tmp -j 6 -c
+  # ./generate_wazuh_packages.sh -b v|WAZUH_CURRENT_OSX| -s /tmp -j 6
+
+This will also build a |WAZUH_CURRENT_OSX| Wazuh agent macOS package and store it in ``/tmp`` but will use 6 jobs to compile the sources.
+
+.. code-block:: console
+
+  # ./generate_wazuh_packages.sh -b v|WAZUH_CURRENT_OSX| -s /tmp -j 6 -c
 
 In addition to the previous settings this will generate a ``.sha512`` file containing the checksum of the package.
 
@@ -90,7 +90,7 @@ Once you have set up the environment, you can build and notarize the package as 
 
 .. code-block:: console
 
-  $ sudo ./generate_wazuh_packages.sh -b v|WAZUH_LATEST| -j 4 -r 1 --notarize \
+  $ sudo ./generate_wazuh_packages.sh -b v|WAZUH_CURRENT_OSX| -j 4 -r 1 --notarize \
       --keychain "/Users/your-user/Library/Keychains/login.keychain-db" \
       --application-certificate "Your Developer ID Application" \
       --installer-certificate "Your Developer ID Installer" \

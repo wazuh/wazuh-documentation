@@ -11,13 +11,13 @@ Virtual Machine (OVA)
 Wazuh provides a pre-built virtual machine image in Open Virtual Appliance (OVA) format. This can be directly imported to VirtualBox or other OVA compatible virtualization systems. Take into account that this VM only runs on 64-bit systems. It does not provide high availability and scalability out of the box. However, these can be implemented by using :doc:`distributed deployment </installation-guide/index>`.
 
 
-Download the `virtual appliance (OVA) <https://packages.wazuh.com/|CURRENT_MAJOR|/vm/wazuh-|WAZUH_LATEST_OVA|.ova>`_, which contains the following components:
+Download the `virtual appliance (OVA) <https://packages.wazuh.com/|WAZUH_CURRENT_MAJOR_OVA|/vm/wazuh-|WAZUH_CURRENT_OVA|.ova>`_, which contains the following components:
 
     - CentOS 7
-    - Wazuh manager |WAZUH_LATEST_OVA|
-    - Wazuh indexer |WAZUH_LATEST_OVA|
-    - Filebeat-OSS |ELASTICSEARCH_LATEST_OVA|
-    - Wazuh dashboard |WAZUH_LATEST_OVA|
+    - Wazuh manager |WAZUH_CURRENT_OVA|
+    - Wazuh indexer |WAZUH_CURRENT_OVA|
+    - Filebeat-OSS |FILEBEAT_LATEST_OVA|
+    - Wazuh dashboard |WAZUH_CURRENT_OVA|
 
 
 Hardware requirements
@@ -31,7 +31,7 @@ The following requirements have to be in place before the Wazuh VM can be import
 
 Out of the box, the Wazuh VM is configured with the following specifications:
 
-.. |OVA_COMPONENT| replace:: Wazuh v|WAZUH_LATEST_OVA| OVA
+.. |OVA_COMPONENT| replace:: Wazuh v|WAZUH_CURRENT_OVA| OVA
 
 +------------------+----------------+--------------+--------------+
 |    Component     |   CPU (cores)  |   RAM (GB)   | Storage (GB) |

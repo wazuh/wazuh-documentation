@@ -18,7 +18,7 @@ Download our wazuh-packages repository from GitHub and go to the ``solaris`` dir
 
 .. code-block:: console
 
-  $ git clone https://github.com/wazuh/wazuh-packages && cd wazuh-packages/solaris && git checkout v|WAZUH_LATEST|
+  $ git clone https://github.com/wazuh/wazuh-packages && cd wazuh-packages/solaris && git checkout v|WAZUH_CURRENT_SOLARIS|
 
 Choose the version of solaris you want to build the package for and go to that directory.
 
@@ -52,7 +52,7 @@ Download and build the sources:
 
 .. code-block:: console
 
-  # ./generate_wazuh_packages.sh -b v|WAZUH_LATEST|
+  # ./generate_wazuh_packages.sh -b v|WAZUH_CURRENT_SOLARIS|
 
 To build a SPARC package you just need to run the same script in a SPARC system.
 
@@ -81,7 +81,7 @@ Bring the machine up ``vagrant [OPTION] ... up solaris10/solaris11/both``:
       vagrant [OPTION] ... ssh/provision/delete
 
       Example:
-      vagrant --branch-tag=v|WAZUH_LATEST| --ram=1024 --cpus=4 up solaris10 solaris11
+      vagrant --branch-tag=v|WAZUH_CURRENT_SOLARIS| --ram=1024 --cpus=4 up solaris10 solaris11
 
       -h, --help:
       Show help
@@ -110,7 +110,7 @@ Clone our wazuh-packages repository from GitHub and switch to your target branch
 
     .. code-block:: console
 
-      $ git clone https://github.com/wazuh/wazuh-packages && cd wazuh-packages/solaris && git checkout v|WAZUH_LATEST|
+      $ git clone https://github.com/wazuh/wazuh-packages && cd wazuh-packages/solaris && git checkout v|WAZUH_CURRENT_SOLARIS10|
       $ cp solaris10 package_generation/src/
       $ cd package_generation
 
@@ -118,7 +118,7 @@ Clone our wazuh-packages repository from GitHub and switch to your target branch
 
     .. code-block:: console
 
-      $ git clone https://github.com/wazuh/wazuh-packages && cd wazuh-packages/solaris && git checkout v|WAZUH_LATEST|
+      $ git clone https://github.com/wazuh/wazuh-packages && cd wazuh-packages/solaris && git checkout v|WAZUH_CURRENT_SOLARIS11|
       $ cp solaris11 package_generation/src/
       $ cd package_generation
 
@@ -126,21 +126,21 @@ Below, you will find some examples of how to build a Solaris package using this 
 
 .. code-block:: console
 
-  # vagrant --branch-tag=v|WAZUH_LATEST| up solaris10_cmake
+  # vagrant --branch-tag=v|WAZUH_CURRENT_SOLARIS10| up solaris10_cmake
 
-This will generate a |WAZUH_LATEST| Wazuh agent package for Solaris 10
-
-.. code-block:: console
-
-  # vagrant --branch-tag=v|WAZUH_LATEST| up solaris11_cmake
-
-This will generate a |WAZUH_LATEST| Wazuh agent package for Solaris 11
+This will generate a |WAZUH_CURRENT_SOLARIS10| Wazuh agent package for Solaris 10
 
 .. code-block:: console
 
-  # vagrant --branch-tag=v|WAZUH_LATEST| up solaris10_cmake solaris11_cmake
+  # vagrant --branch-tag=v|WAZUH_CURRENT_SOLARIS11| up solaris11_cmake
 
-This will generate a |WAZUH_LATEST| Wazuh agent package for Solaris 10 and Solaris 11
+This will generate a |WAZUH_CURRENT_SOLARIS11| Wazuh agent package for Solaris 11
+
+.. code-block:: console
+
+  # vagrant --branch-tag=v|WAZUH_CURRENT_SOLARIS| up solaris10_cmake solaris11_cmake
+
+This will generate a |WAZUH_CURRENT_SOLARIS| Wazuh agent package for Solaris 10 and Solaris 11
 
 After the process has ended the package will be stored in the ``src`` folder.
 
