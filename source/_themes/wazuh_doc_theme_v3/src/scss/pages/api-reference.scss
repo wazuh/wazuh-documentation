@@ -589,6 +589,11 @@ redoc[spec-url] .beRszf {
       display: none;
     }
   }
+  .kwnyAC {
+    background: transparent;
+    width: calc(100% - 40px);
+    margin: 0 auto;
+  }
 
   // Central and right content columns
   .api-content {
@@ -1077,6 +1082,13 @@ redoc[spec-url] .beRszf {
           background-color: $light-color-global-toc-highlight;
         }
       }
+      .kwnyAC {
+        label[role="menuitem"] {
+          &:hover {
+            background: transparent
+          }
+        }
+      }
     }
 
     // Search box
@@ -1088,6 +1100,11 @@ redoc[spec-url] .beRszf {
       }
       ::placeholder {
         color: $light-color-focus-shade;
+      }
+    }
+    .kwnyAC {
+      & > li {
+        background: rgba(255,255,255,.55);
       }
     }
 
@@ -1380,6 +1397,13 @@ redoc[spec-url] .beRszf {
           background-color: $dark-color-base-space;
         }
       }
+      .kwnyAC {
+        label[role="menuitem"] {
+          &:hover {
+            background: transparent
+          }
+        }
+      }
     }
 
     // Search box
@@ -1391,6 +1415,11 @@ redoc[spec-url] .beRszf {
       }
       ::placeholder {
         color: $light-color-focus-shade;
+      }
+    }
+    .kwnyAC {
+      & > li {
+        background: rgba(0,0,0,.1);
       }
     }
 
