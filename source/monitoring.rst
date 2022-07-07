@@ -5,6 +5,10 @@
 Cloud security
 ==============
 
+Wazuh helps to increase the security of some of the most comprehensive and broadly adopted cloud platforms such as AWS, Microsoft Azure, or GCP.
+
+Learn more about Wazuh Cloud security in the below sections.
+
 .. toctree::
    :maxdepth: 2
 
