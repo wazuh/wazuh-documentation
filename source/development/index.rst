@@ -3,12 +3,13 @@
 .. meta::
   :description: Find useful technical documentation about how Wazuh works, suitable for developers and tech enthusiasts.
 
+
 .. _development:
 
 Development
 ===========
 
-This section contains technical development documentation. Here developers can learn about specialized topics such as how to create a Wazuh cluster, Standard OSSEC message format, or instructions to customize the installation of Wazuh.
+This section contains technical development documentation. Here developers can learn about topics such as how to create a Wazuh cluster, Standard OSSEC message format, or instructions to customize the installation of Wazuh.
 
 .. topic:: Contents
 

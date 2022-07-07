@@ -1,5 +1,9 @@
 .. Copyright (C) 2022 Wazuh, Inc.
 
+.. meta::
+  :description: Wazuh helps to provide regulatory compliance support. Learn more about compliance with Wazuh in this section.
+
+
 .. _compliance:
 
 Compliance
