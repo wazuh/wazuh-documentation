@@ -9,7 +9,7 @@
 Compliance
 ==========
 
-Wazuh helps to implement compliance requirements to provide regulatory compliance support. Learn more about compliance with Wazuh in the  sections below:
+Wazuh helps to implement compliance requirements to provide regulatory compliance support. Learn more about compliance with Wazuh in the sections below:
 
 
 .. toctree::
