@@ -111,7 +111,7 @@ Run evaluation immediately when service is started.
 interval
 ^^^^^^^^
 
-Interval between OpenSCAP executions.
+The interval between OpenSCAP executions.
 
 +--------------------+------------------------------------------------------------------------------------------------------------------------------------------------------+
 | **Default value**  | 1d                                                                                                                                                   |

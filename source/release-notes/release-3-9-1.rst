@@ -5,8 +5,8 @@
 
 .. _release_3_9_1:
 
-3.9.1 Release notes
-===================
+3.9.1 Release notes - 21 May 2019
+=================================
 
 This section shows the most relevant improvements and fixes in version 3.9.1. More details about these changes are provided in each component changelog:
 

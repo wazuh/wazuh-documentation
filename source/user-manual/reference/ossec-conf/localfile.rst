@@ -637,7 +637,7 @@ Windows configuration:
       <reconnect_time>10s</reconnect_time>
     </localfile>
 
-MacOS configuration:
+macOS configuration:
 
 .. code-block:: xml
 

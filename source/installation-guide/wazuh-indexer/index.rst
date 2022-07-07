@@ -18,10 +18,53 @@ Check the requirements below and choose an installation method to start installi
 
 - :doc:`Step-by-step installation <step-by-step>`: Install this component following detailed step-by-step instructions.
 
-.. thumbnail:: /images/installation/Wazuh-Indexer-Installation-1.png
-    :alt: Wazuh indexer installation
-    :align: center
-    :width: 100%
+.. raw:: html
+
+  <div class="link-boxes-group layout-3" data-step="1">
+    <div class="steps-line">
+      <div class="steps-number current-step">1</div>
+      <div class="steps-number future-step">2</div>
+      <div class="steps-number future-step">3</div>
+    </div>
+    <div class="link-boxes-item current-step">
+      <div class="link-boxes-link" href="#">
+        <p class="link-boxes-label">Install the Wazuh indexer</p>
+
+.. image:: ../../images/installation/Indexer-Circle.png
+     :align: center
+     :height: 61px
+
+.. raw:: html
+
+      </div>
+    </div>
+  
+    <div class="link-boxes-item future-step">
+      <a class="link-boxes-link" href="../wazuh-server/index.html">
+        <p class="link-boxes-label">Install the Wazuh server</p>
+
+.. image:: ../../images/installation/Server-noBG.png
+     :align: center
+     :height: 61px
+
+.. raw:: html
+
+      </a>
+    </div>
+  
+    <div class="link-boxes-item future-step">
+      <a class="link-boxes-link" href="../wazuh-dashboard/index.html">
+        <p class="link-boxes-label">Install the Wazuh dashboard</p>
+
+.. image:: ../../images/installation/Dashboard-noBG.png
+     :align: center
+     :height: 61px
+     
+.. raw:: html
+
+      </a>
+    </div>
+  </div>
 
 Requirements
 ------------
@@ -38,8 +81,8 @@ Wazuh can be installed on a 64-bit Linux operating system. Wazuh supports the fo
    
     * - Amazon Linux 2
       - CentOS 7, 8
-    * - Red Hat Enterprise Linux 7, 8
-      - Ubuntu 16.04, 18.04, 20.04
+    * - Red Hat Enterprise Linux 7, 8, 9
+      - Ubuntu 16.04, 18.04, 20.04, 22.04
 
 Hardware recommendations
 ^^^^^^^^^^^^^^^^^^^^^^^^

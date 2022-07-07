@@ -1,4 +1,5 @@
 .. Copyright (C) 2021 Wazuh, Inc.
+
 .. meta::
   :description: The Wazuh GCP Storage module allows you to fetch logs from Google Storage. Learn more about the module's usage in this section.
 

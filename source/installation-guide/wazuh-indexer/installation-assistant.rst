@@ -31,8 +31,8 @@ Indicate your deployment configuration, create the SSL certificates to encrypt c
 
       .. code-block:: console
 
-          # curl -sO https://packages.wazuh.com/|WAZUH_LATEST_MINOR|/wazuh-install.sh
-          # curl -sO https://packages.wazuh.com/|WAZUH_LATEST_MINOR|/config.yml
+          # curl -sO https://packages.wazuh.com/|WAZUH_CURRENT_MINOR|/wazuh-install.sh
+          # curl -sO https://packages.wazuh.com/|WAZUH_CURRENT_MINOR|/config.yml
        
 #. Edit ``./config.yml`` and replace the node names and IP values with the corresponding names and IP addresses. You need to do this for all the Wazuh server, the Wazuh indexer, and the Wazuh dashboard nodes. Add as many node fields as needed.
 
@@ -63,7 +63,7 @@ Indicate your deployment configuration, create the SSL certificates to encrypt c
              - name: dashboard
                ip: <dashboard-node-ip>
 
-#. Run the assistant with the option ``--generate-config-files`` to generate the  Wazuh cluster key, certificates, and passwords necessary for installation. 
+#. Run the assistant with the option ``--generate-config-files`` to generate the  Wazuh cluster key, certificates, and passwords necessary for installation. You can find these files in ``./wazuh-install-files.tar``.
 
       .. code-block:: console
 
@@ -83,7 +83,7 @@ Install and configure the Wazuh indexer nodes.
 
       .. code-block:: console
 
-        # curl -sO https://packages.wazuh.com/|WAZUH_LATEST_MINOR|/wazuh-install.sh
+        # curl -sO https://packages.wazuh.com/|WAZUH_CURRENT_MINOR|/wazuh-install.sh
 
 
 #. Run the assistant with the option ``--wazuh-indexer`` and the node name to install and configure the Wazuh indexer. The node name must be the same used in ``config.yml`` for the initial configuration, for example, ``node-1``.

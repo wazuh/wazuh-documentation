@@ -5,8 +5,8 @@
 
 .. _release_4_3_0:
 
-4.3.0 Release notes
-===================
+4.3.0 Release notes - 5 May 2022
+================================
 
 This section lists the changes in version 4.3.0. Every update of the Wazuh solution is cumulative and includes all enhancements and fixes from previous releases.
 
@@ -479,7 +479,7 @@ Reference                                                         Description
 `#11440 <https://github.com/wazuh/wazuh/pull/11440>`_             A false positive for MySQL in Vulnerability Detector is prevented.
 `#11448 <https://github.com/wazuh/wazuh/pull/11448>`_             The segmentation fault when the wrong configuration is set is fixed.
 `#11440 <https://github.com/wazuh/wazuh/pull/11440>`_             A false positive in Vulnerability Detector is fixed when scanning OVAl for Ubuntu Xenial and Bionic.
-`#11835 <https://github.com/wazuh/wazuh/pull/11835>`_             An argument injection hazard is fixed in the Pagerduty integration script.
+`#11835 <https://github.com/wazuh/wazuh/pull/11835>`_             An argument injection hazard is fixed in the Pagerduty integration script. Thank you Jose Maria Zaragoza (@JoseMariaZ) for reporting this issue.
 `#11863 <https://github.com/wazuh/wazuh/pull/11863>`_             Memory leaks in the feed parser at Vulnerability Detector are fixed. Architecture data member from the RHEL 5 feed. RHSA items containing no CVEs. Unused RHSA data member when parsing Debian feeds.
 `#12368 <https://github.com/wazuh/wazuh/pull/12368>`_             Now, Authd ignores the pipe signal if Wazuh DB gets closed.
 `#12415 <https://github.com/wazuh/wazuh/pull/12415>`_             A buffer handling bug is fixed in Remoted that left the syslog TCP server stuck. 

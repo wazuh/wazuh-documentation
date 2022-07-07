@@ -33,7 +33,7 @@ Any modification related to these files will also be made in the associated volu
 Change the image of the container
 ---------------------------------
 
-The only step to update Wazuh is to change the image of the pod in each file that deploys each node of the Wazuh cluster.
+The only step to updating Wazuh is to change the image of the pod in each file that deploys each node of the Wazuh cluster.
 
 These files are the *StatefulSet* files:
 
@@ -46,7 +46,7 @@ For example:
 
     containers:
     - name: wazuh-manager
-      image: 'wazuh/wazuh:|WAZUH_LATEST_KUBERNETES|'
+      image: 'wazuh/wazuh:|WAZUH_CURRENT_KUBERNETES|'
 
 
 Apply the new configuration
@@ -72,4 +72,4 @@ The last step is to apply the new configuration:
 
      statefulset.apps "wazuh-manager-master" configured
 
-This process will end the old pod while creating a new one with the new version, linked to the same volume. Once the Pods are booted, the update will be ready and we can check the new version of Wazuh installed, the cluster and the changes that have been maintained through the use of the volumes.
+This process will end the old pod while creating a new one with the new version, linked to the same volume. Once the Pods are booted, the update will be ready, and we can check the new version of Wazuh installed, the cluster, and the changes that have been maintained through the use of the volumes.

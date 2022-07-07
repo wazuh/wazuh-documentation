@@ -54,7 +54,7 @@ Wazuh dashboard
 |
 | **Variable**: ``wazuh_version``
 | **Description**: Wazuh APP compatible version to install.
-| **Default value**: ``|WAZUH_LATEST_ANSIBLE|``
+| **Default value**: ``|WAZUH_CURRENT_ANSIBLE|``
 |
 
 .. _wazuh_ansible_reference_filebeat:
@@ -99,35 +99,35 @@ Wazuh Manager
 | **Default value**: ``true``
 |
 | **Variable**: ``wazuh_manager_json_output``
-| **Description**: Configures the :ref:`jsonout_output <reference_ossec_global>` section in  ``ossec.conf``. This is a string, not a bool.
+| **Description**: Configures the :doc:`jsonout_output </user-manual/reference/ossec-conf/global>` section in  ``ossec.conf``. This is a string, not a bool.
 | **Default value**: ``yes``
 |
 | **Variable**: ``wazuh_manager_alerts_log``
-| **Description**: Configures the :ref:`alerts_log <reference_ossec_global>` section in ``ossec.conf``. This is a string, not a bool.
+| **Description**: Configures the :doc:`alerts_log </user-manual/reference/ossec-conf/global>` section in ``ossec.conf``. This is a string, not a bool.
 | **Default value**: ``yes``
 |
 | **Variable**: ``wazuh_manager_logall``
-| **Description**: Configures the :ref:`logall <reference_ossec_global>` section in ``ossec.conf``. This is a string, not a bool.
+| **Description**: Configures the :doc:`logall </user-manual/reference/ossec-conf/global>` section in ``ossec.conf``. This is a string, not a bool.
 | **Default value**: ``yes``
 |
 | **Variable**: ``wazuh_manager_email_notification``
-| **Description**: Configures the :ref:`email_notification <reference_ossec_global>` section in ``ossec.conf``. This is a string, not a bool.
+| **Description**: Configures the :doc:`email_notification </user-manual/reference/ossec-conf/global>` section in ``ossec.conf``. This is a string, not a bool.
 | **Default value**: ``yes``
 |
 | **Variable**: ``wazuh_manager_mailto``
-| **Description**: Configures the :ref:`email_to <reference_ossec_global>` items in ``ossec.conf``.
+| **Description**: Configures the :doc:`email_to </user-manual/reference/ossec-conf/global>` items in ``ossec.conf``.
 | **Default value**: ``[‘admin@example.net’]``
 |
 | **Variable**: ``wazuh_manager_email_smtp_server``
-| **Description**: Configures the :ref:`smtp_server <reference_ossec_global>` section in ``ossec.conf``.
+| **Description**: Configures the :doc:`smtp_server </user-manual/reference/ossec-conf/global>` section in ``ossec.conf``.
 | **Default value**: ``smtp.example.wazuh.com``
 |
 | **Variable**: ``wazuh_manager_email_from``
-| **Description**: Configures the :ref:`email_from <reference_ossec_global>` section in ``ossec.conf``.
+| **Description**: Configures the :doc:`email_from </user-manual/reference/ossec-conf/global>` section in ``ossec.conf``.
 | **Default value**: ``wazuh@example.wazuh.com``
 |
 | **Variable**: ``wazuh_manager_email_maxperhour``
-| **Description**: Configures the :ref:`email_maxperhour <reference_ossec_global>` section in ``ossec.conf``.
+| **Description**: Configures the :doc:`email_maxperhour </user-manual/reference/ossec-conf/global>` section in ``ossec.conf``.
 | **Default value**: ``12``
 |
 | **Variable**: ``wazuh_manager_email_queue_size``
@@ -135,11 +135,11 @@ Wazuh Manager
 | **Default value**: ``131072``
 |
 | **Variable**: ``wazuh_manager_email_log_source``
-| **Description**: Configures the :ref:`email_log_source <reference_ossec_global>` section from ``ossec.conf``.
+| **Description**: Configures the :doc:`email_log_source </user-manual/reference/ossec-conf/global>` section from ``ossec.conf``.
 | **Default value**: ``alerts.log``
 |
 | **Variable**: ``wazuh_manager_globals``
-| **Description**: Configures the :ref:`white_list <reference_ossec_global>` section from ``ossec.conf``.
+| **Description**: Configures the :doc:`white_list </user-manual/reference/ossec-conf/global>` section from ``ossec.conf``.
 | **Default values**:
 
 .. code-block:: yaml
@@ -285,7 +285,7 @@ Wazuh Manager
 
 |
 | **Variable**: ``wazuh_manager_monitor_aws``
-| **Description**: Configures the :ref:`wodle <wodle_s3>` item named ``aws-s3`` from ``ossec.conf``.
+| **Description**: Configures the :doc:`AWS S3 module </user-manual/reference/ossec-conf/wodle-s3>` item named ``aws-s3`` from ``ossec.conf``.
 | **Default values**:  
 
 .. code-block:: yaml
@@ -630,11 +630,11 @@ Wazuh Manager
 
 .. warning::
 
-    We recommend the use of `Ansible Vault <https://docs.ansible.com/ansible/latest/user_guide/vault.html>`_ to protect Wazuh agentless and authd credentials..
+    We recommend the use of `Ansible Vault <https://docs.ansible.com/ansible/latest/user_guide/vault.html>`_ to protect Wazuh agentless and authd credentials.
 
 |
 | **Variable**: ``wazuh_manager_config``
-| **Description**: Stores the Wazuh Manager configuration. This variable is provided for backwards compatibility. Newer deployments should use the newly introduced variables described above.
+| **Description**: Stores the Wazuh Manager configuration. This variable is provided for backward compatibility. Newer deployments should use the newly introduced variables described above.
 | **Example**:
 
 .. code-block:: yaml
@@ -806,7 +806,7 @@ Wazuh Manager
 
 |
 | **Variable**: ``wazuh_agent_configs``
-| **Description**: This store the different settings and profiles for centralized agent configuration via Wazuh Manager.
+| **Description**: This stores the different settings and profiles for centralized agent configuration via Wazuh Manager.
 | **Example**:
 
 .. code-block:: yaml
@@ -919,7 +919,7 @@ Wazuh Agent
 ===========
 
 | **Variable**: ``wazuh_managers``
-| **Description**: Set Wazuh Manager servers IP address, protocol, and port to be used by the agent. If a specific manager is used for registration, we can  indicate which one it is  by adding register set to true. If the register option is missing, the first manager on the list will be used for registration.
+| **Description**: Set the Wazuh Manager servers IP address, protocol, and port to be used by the agent. If a specific manager is used for registration, we can indicate which one it is by adding the register option set to true. If the register option is missing, the first manager on the list will be used for registration.
 | **Example**:
 
 .. code-block:: yaml
@@ -956,7 +956,7 @@ Wazuh Agent
 
 |
 | **Variable**: ``wazuh_agent_authd``
-| **Description**: Set the agent-authd facility. This will enable or not the automatic agent registration, you could set various options in accordance of the authd service configured in the Wazuh Manager. This Ansible role will use the address defined on ``registration_address`` as the authd registration server.
+| **Description**: Set the agent-authd facility. This will enable or not the automatic agent registration, you could set various options in accordance with the authd service configured in the Wazuh Manager. This Ansible role will use the address defined on ``registration_address`` as the authd registration server.
 | **Example**:
 
     .. code-block:: yaml
@@ -1242,7 +1242,7 @@ Wazuh Agent
 | **Default value**: ``plain``
 |
 | **Variable**: ``wazuh_agent_config``
-| **Description**: Wazuh Agent related configuration. This variable is provided for backwards compatibility. Newer deployments should use the newly introduced variables described above.
+| **Description**: Wazuh Agent related configuration. This variable is provided for backward compatibility. Newer deployments should use the newly introduced variables described above.
 | **Example**:
 
 .. code-block:: yaml

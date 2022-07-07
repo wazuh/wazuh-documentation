@@ -8,12 +8,12 @@
 Amazon ALB
 ==========
 
-`Application Load Balancers <https://docs.aws.amazon.com/elasticloadbalancing/latest/application/introduction.html>`_ (Amazon ALB) Elastic Load Balancing automatically distributes the incoming traffic across multiple targets, such as EC2 instances, containers, and IP addresses, in one or more Availability Zones. It monitors the health of its registered targets and routes traffic only to the healthy targets. Users can select the type of load balancer that best suits their needs. An Application Load Balancer functions at the application layer, the seventh layer of the Open Systems Interconnection (OSI) model. After the load balancer receives a request, it evaluates the listener rules in priority order to determine which rule to apply, and then selects a target from the target group for the rule action.
+`Application Load Balancers <https://docs.aws.amazon.com/elasticloadbalancing/latest/application/introduction.html>`_ (Amazon ALB) Elastic Load Balancing automatically distributes the incoming traffic across multiple targets, such as EC2 instances, containers, and IP addresses, in one or more Availability Zones. It monitors the health of its registered targets and routes traffic only to the healthy targets. Users can select the type of load balancer that best suits their needs. An Application Load Balancer functions at the application layer, the seventh layer of the Open Systems Interconnection (OSI) model. After the load balancer receives a request, it evaluates the listener rules in priority order to determine which rule to apply and then selects a target from the target group for the rule action.
 
 Amazon configuration
 --------------------
 
-#. Select an existing S3 Bucket or :ref:`create a new one. <S3_bucket>`
+#. Select an existing S3 Bucket or :doc:`create a new one </amazon/services/prerequisites/S3-bucket>`.
 
 #. Go to Services > Compute > EC2:
 
@@ -65,7 +65,7 @@ Wazuh configuration
       </wodle>
 
     .. note::
-      Check the :ref:`AWS S3 module <wodle_s3>` reference manual to learn more about each setting.
+      Check the :doc:`AWS S3 module </user-manual/reference/ossec-conf/wodle-s3>` reference manual to learn more about each setting.
 
 #. Restart Wazuh in order to apply the changes:
 

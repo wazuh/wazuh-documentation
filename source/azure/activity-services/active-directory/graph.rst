@@ -135,7 +135,7 @@ Here is an example of how to get the audit log of the Azure Active Directory usi
 
     </wodle>
 
-Check the :ref:`azure-logs <wodle_azure_logs>` module reference for more information about how to use the different parameters available.
+Check the :doc:`azure-logs </user-manual/reference/ossec-conf/wodle-azure-logs>` module reference for more information about how to use the different parameters available.
 
 .. note:: If an authentication file is used, as in this example, its content must follow the format ``field = value``. Here is an example of this format:
 

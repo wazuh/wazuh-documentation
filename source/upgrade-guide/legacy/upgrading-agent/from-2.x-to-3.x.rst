@@ -49,7 +49,7 @@ To upgrade the Wazuh agent choose the appropriate tab for the desired operating 
 
         .. code-block:: console
 
-          # echo "deb https://packages.wazuh.com/|CURRENT_MAJOR|/apt/ stable main" | tee -a /etc/apt/sources.list.d/wazuh.list
+          # echo "deb https://packages.wazuh.com/|WAZUH_CURRENT_MAJOR|/apt/ stable main" | tee -a /etc/apt/sources.list.d/wazuh.list
 
         Upgrade the Wazuh agent:
 
@@ -103,7 +103,7 @@ To upgrade the Wazuh agent choose the appropriate tab for the desired operating 
 
       .. group-tab:: Windows
 
-        The Wazuh agent upgrade process for Windows systems requires to download the latest available installer from the :ref:`packages list <packages>`. There are two ways of using it, both require ``administrator rights``:
+        The Wazuh agent upgrade process for Windows systems requires to download the latest available installer from the :doc:`packages list </installation-guide/packages-list>`. There are two ways of using it, both require ``administrator rights``:
 
         - Using the GUI installer:
 
@@ -121,7 +121,7 @@ To upgrade the Wazuh agent choose the appropriate tab for the desired operating 
 
             .. code-block:: console
 
-              # wazuh-agent-|WAZUH_LATEST|-|WAZUH_REVISION_WINDOWS|.msi /q
+              # wazuh-agent-|WAZUH_CURRENT_WINDOWS|-|WAZUH_REVISION_WINDOWS|.msi /q
 
           .. note::
             To learn more about the unattended installation process, please read the :ref:`Windows installation guide <wazuh_agent_package_windows>`.

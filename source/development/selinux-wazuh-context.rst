@@ -1,10 +1,12 @@
 .. Copyright (C) 2021 Wazuh, Inc.
 
+.. meta::
+   :description: Learn how to use Security-Enhanced Linux (SELinux) with Wazuh to define access controls for the applications, processes, and files on a system.
+
 .. _selinux-wazuh-context:
 
 SELinux Wazuh context
 ======================
-
 
 Security-Enhanced Linux (SELinux) defines access controls for the applications, processes, and files on a system.
 
@@ -935,8 +937,8 @@ Steps to build and load the new SELinux policy module
 
     .. code-block:: console
 
-        # curl -sO https://raw.githubusercontent.com/wazuh/wazuh-documentation/|WAZUH_LATEST_MINOR|/resources/selinux/manager/wazuhT.fc
-        # curl -sO https://raw.githubusercontent.com/wazuh/wazuh-documentation/|WAZUH_LATEST_MINOR|/resources/selinux/manager/wazuhT.te
+        # curl -sO https://raw.githubusercontent.com/wazuh/wazuh-documentation/|WAZUH_CURRENT_MINOR|/resources/selinux/manager/wazuhT.fc
+        # curl -sO https://raw.githubusercontent.com/wazuh/wazuh-documentation/|WAZUH_CURRENT_MINOR|/resources/selinux/manager/wazuhT.te
         # make -f /usr/share/selinux/devel/Makefile
 
 #. Install the new policy module.

@@ -1,5 +1,8 @@
 .. Copyright (C) 2022 Wazuh, Inc.
 
+.. meta::
+  :description: The wazuh-reportd program creates reports from Wazuh alerts. Learn more about it in this section of the documentation.
+
 .. _wazuh-reportd:
 
 wazuh-reportd
@@ -7,7 +10,7 @@ wazuh-reportd
 
 .. versionadded:: 4.2
 
-The wazuh-reportd program creates reports from Wazuh alerts.  It accepts alerts on ``stdin`` and outputs a report on ``stderr``.
+The wazuh-reportd program creates reports from Wazuh alerts. It accepts alerts on ``stdin`` and outputs a report on ``stderr``.
 
 .. note::
   Since the wazuh-reportd daemon outputs to ``stderr``, some utilities like ``less`` will not work if the output is not redirected.  To do this, end the wazuh-reportd with ``2>&1`` to redirect ``stderr`` to ``stdout``. Following this redirect, ``more`` or ``less`` can be used with ease.

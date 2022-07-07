@@ -1,5 +1,8 @@
 .. Copyright (C) 2022 Wazuh, Inc.
 
+.. meta::
+  :description: This section contains instructions to describe the Standard OSSEC message format Wazuh accepts and sends between its components.
+
 .. _message-format:
 
 .. highlight:: none

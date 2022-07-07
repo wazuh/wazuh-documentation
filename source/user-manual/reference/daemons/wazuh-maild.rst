@@ -1,5 +1,8 @@
 .. Copyright (C) 2022 Wazuh, Inc.
 
+.. meta::
+  :description: Learn about the wazuh-maild program that sends alerts via email in this section of the documentation.
+
 .. _wazuh-maild:
 
 wazuh-maild

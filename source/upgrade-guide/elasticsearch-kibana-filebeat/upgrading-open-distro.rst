@@ -42,13 +42,11 @@ Preparing the upgrade
 Upgrading the Wazuh manager
 ---------------------------
 
+When upgrading a multi-node Wazuh manager cluster, run the upgrade in every node to make all the Wazuh manager nodes join the cluster. Start with the master node to reduce server downtime.
+
+.. note:: Upgrading from Wazuh 4.2.x or lower creates the ``wazuh`` operating system user and group to replace ``ossec``. To avoid upgrade conflicts, make sure that the ``wazuh`` user and group are not present in your operating system.  
+
 #. Upgrade the Wazuh manager to the latest version.
-
-   -  When upgrading a multi-node Wazuh manager cluster, run the upgrade in every node to make all the Wazuh manager nodes join the cluster. Start with the master node to reduce server downtime.
-
-   .. note::
-
-      If the ``/var/ossec/etc/ossec.conf`` configuration file was modified, it will not be replaced by the upgrade. You will therefore have to add the settings of the new capabilities manually. More information can be found in :doc:`/user-manual/index`.
 
    .. tabs::
 
@@ -63,6 +61,10 @@ Upgrading the Wazuh manager
          .. code-block:: console
 
             # apt-get install wazuh-manager
+
+   .. note::
+
+      If the ``/var/ossec/etc/ossec.conf`` configuration file was modified, it will not be replaced by the upgrade. You will therefore have to add the settings of the new capabilities manually. More information can be found in :doc:`/user-manual/index`.        
 
 #. Repeat the previous steps for every Wazuh manager node.
 
@@ -300,14 +302,14 @@ Upgrading Filebeat
 
     .. code-block:: console
 
-      # curl -so /etc/filebeat/wazuh-template.json https://raw.githubusercontent.com/wazuh/wazuh/v|WAZUH_LATEST|/extensions/elasticsearch/7.x/wazuh-template.json
+      # curl -so /etc/filebeat/wazuh-template.json https://raw.githubusercontent.com/wazuh/wazuh/v|WAZUH_CURRENT|/extensions/elasticsearch/7.x/wazuh-template.json
       # chmod go+r /etc/filebeat/wazuh-template.json
 
 #. Download the Wazuh module for Filebeat:
 
     .. code-block:: console
 
-      # curl -s https://packages.wazuh.com/4.x/filebeat/wazuh-filebeat-0.1.tar.gz | sudo tar -xvz -C /usr/share/filebeat/module
+      # curl -s https://packages.wazuh.com/4.x/filebeat/wazuh-filebeat-0.2.tar.gz | sudo tar -xvz -C /usr/share/filebeat/module
 
 #. Edit the ``/etc/filebeat/filebeat.yml`` configuration file. This step is only needed for the upgrade of a ``Distributed installation``. In case of having an ``All-in-one`` installation, the file is already configured:
 
@@ -340,9 +342,9 @@ Upgrading Filebeat
 
 #. Upload the new Wazuh template to Elasticsearch. This step can be omitted in Wazuh single-node installations:
 
-  .. code-block:: console
+   .. code-block:: console
 
-    # filebeat setup --index-management -E output.logstash.enabled=false    
+      # filebeat setup --index-management -E output.logstash.enabled=false    
 
 Upgrading Kibana
 ----------------
@@ -480,14 +482,14 @@ Upgrading Kibana
         .. code-block:: console
 
           # cd /usr/share/kibana/
-          # sudo -u kibana /usr/share/kibana/bin/kibana-plugin install https://packages.wazuh.com/4.x/ui/kibana/wazuh_kibana-|WAZUH_LATEST|_|ELASTICSEARCH_LATEST|-1.zip
+          # sudo -u kibana /usr/share/kibana/bin/kibana-plugin install https://packages.wazuh.com/4.x/ui/kibana/wazuh_kibana-|WAZUH_CURRENT|_|ELASTICSEARCH_LATEST|-1.zip
 
       .. group-tab:: From the package
 
         .. code-block:: console
 
           # cd /usr/share/kibana/
-          # sudo -u kibana bin/kibana-plugin install file:///path/wazuh_kibana-|WAZUH_LATEST|_|ELASTICSEARCH_LATEST|-1.zip
+          # sudo -u kibana bin/kibana-plugin install file:///path/wazuh_kibana-|WAZUH_CURRENT|_|ELASTICSEARCH_LATEST|-1.zip
 
 
 

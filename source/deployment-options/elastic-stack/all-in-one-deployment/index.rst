@@ -8,7 +8,7 @@
 All-in-one deployment
 =====================
 
-This document guides through an installation of the Wazuh server and Elastic Stack components in an all-in-one configuration. This guide provides instructions to configure the official repositories to do the installations, alternatively, all the available packages can be found :ref:`here <packages>`. 
+This document guides through an installation of the Wazuh server and Elastic Stack components in an all-in-one configuration. This guide provides instructions to configure the official repositories to do the installations, alternatively, all the available packages can be found :doc:`here </installation-guide/packages-list>`.
 
 .. note:: Root user privileges are required to execute all the commands described below.
 
@@ -58,14 +58,14 @@ Elasticsearch installation and configuration
 
          .. code-block:: console
 
-           # yum install elasticsearch-7.17.3
+           # yum install elasticsearch-7.17.4
 
 
       .. group-tab:: APT
 
          .. code-block:: console
 
-           # apt-get install elasticsearch=7.17.3
+           # apt-get install elasticsearch=7.17.4
 
 
 #. Download the configuration file ``/etc/elasticsearch/elasticsearch.yml`` as follows:
@@ -82,7 +82,7 @@ Certificates creation and deployment
 
     .. code-block:: console
 
-        # curl -so /usr/share/elasticsearch/instances.yml https://packages.wazuh.com/|WAZUH_LATEST_MINOR|/tpl/elastic-basic/instances_aio.yml
+        # curl -so /usr/share/elasticsearch/instances.yml https://packages.wazuh.com/|WAZUH_CURRENT_MINOR|/tpl/elastic-basic/instances_aio.yml
     
     
     In the following steps, a file that contains a folder named after the instance defined here will be created. This folder will contain the certificates and the keys necessary to communicate with the Elasticsearch node using SSL.
@@ -118,7 +118,7 @@ Certificates creation and deployment
 
     .. include:: ../../../_templates/installations/basic/elastic/common/generate_elastic_credentials.rst
 
-To check that the installation was made successfully, run the following command replacing ``<elastic_password>`` by the password generated on the previous step for ``elastic`` user:
+To check that the installation was made successfully, run the following command replacing ``<elastic_password>`` with the password generated in the previous step for ``elastic`` user:
 
 
 .. code-block:: console
@@ -128,25 +128,25 @@ To check that the installation was made successfully, run the following command 
 This command should have an output like this:
 
 .. code-block:: console
-  :class: output
+   :class: output
   
-  {
-    "name" : "elasticsearch",
-    "cluster_name" : "elasticsearch",
-    "cluster_uuid" : "upF9h1afQN2TfHtt0h3Kuw",
-    "version" : {
-      "number" : "7.17.3",
-      "build_flavor" : "default",
-      "build_type" : "rpm",
-      "build_hash" : "6bc13727ce758c0e943c3c21653b3da82f627f75",
-      "build_date" : "2021-09-15T10:18:09.722761972Z",
-      "build_snapshot" : false,
-      "lucene_version" : "8.9.0",
-      "minimum_wire_compatibility_version" : "6.8.0",
-      "minimum_index_compatibility_version" : "6.0.0-beta1"
-    },
-    "tagline" : "You Know, for Search"
-  }
+   {
+     "name" : "elasticsearch",
+     "cluster_name" : "elasticsearch",
+     "cluster_uuid" : "BLpIwJvXQnGCIORGrsAxLA",
+     "version" : {
+       "number" : "7.17.4",
+       "build_flavor" : "default",
+       "build_type" : "rpm",
+       "build_hash" : "79878662c54c886ae89206c685d9f1051a9d6411",
+       "build_date" : "2022-05-18T18:04:20.964345128Z",
+       "build_snapshot" : false,
+       "lucene_version" : "8.11.1",
+       "minimum_wire_compatibility_version" : "6.8.0",
+       "minimum_index_compatibility_version" : "6.0.0-beta1"
+     },
+     "tagline" : "You Know, for Search"
+   }
 
   
 
@@ -155,7 +155,7 @@ This command should have an output like this:
 Installing Wazuh server
 -----------------------
 
-The Wazuh server collects and analyzes data from deployed agents. It runs the Wazuh manager, the Wazuh API and Filebeat. The first step to set up Wazuh is to add the Wazuh repository to the server. Alternatively, the Wazuh manager package can be downloaded directly and compatible versions can be checked :ref:`here <packages>`.
+The Wazuh server collects and analyzes data from deployed agents. It runs the Wazuh manager, the Wazuh API and Filebeat. The first step in setting up Wazuh is to add the Wazuh repository to the server. Alternatively, the Wazuh manager package can be downloaded directly, and compatible versions can be checked :doc:`here </installation-guide/packages-list>`.
 
 
 Adding the Wazuh repository
@@ -242,20 +242,20 @@ Filebeat installation and configuration
 
     .. code-block:: console
 
-      # curl -so /etc/filebeat/filebeat.yml https://packages.wazuh.com/|WAZUH_LATEST_MINOR|/tpl/elastic-basic/filebeat_all_in_one.yml
+      # curl -so /etc/filebeat/filebeat.yml https://packages.wazuh.com/|WAZUH_CURRENT_MINOR|/tpl/elastic-basic/filebeat_all_in_one.yml
 
 #. Download the alerts template for Elasticsearch:
 
     .. code-block:: console
 
-      # curl -so /etc/filebeat/wazuh-template.json https://raw.githubusercontent.com/wazuh/wazuh/|WAZUH_LATEST_MINOR|/extensions/elasticsearch/7.x/wazuh-template.json
+      # curl -so /etc/filebeat/wazuh-template.json https://raw.githubusercontent.com/wazuh/wazuh/|WAZUH_CURRENT_MINOR|/extensions/elasticsearch/7.x/wazuh-template.json
       # chmod go+r /etc/filebeat/wazuh-template.json
 
 #. Download the Wazuh module for Filebeat:
 
     .. code-block:: console
 
-      # curl -s https://packages.wazuh.com/4.x/filebeat/wazuh-filebeat-0.1.tar.gz | tar -xvz -C /usr/share/filebeat/module
+      # curl -s https://packages.wazuh.com/4.x/filebeat/wazuh-filebeat-0.2.tar.gz | tar -xvz -C /usr/share/filebeat/module
 
 #. Edit the file ``/etc/filebeat/filebeat.yml`` and add the following line:
 
@@ -301,7 +301,7 @@ This command should have an output like this:
           TLS version: TLSv1.3
           dial up... OK
         talk to server... OK
-        version: 7.17.3
+        version: 7.17.4
 
 
 Kibana installation and configuration
@@ -347,7 +347,7 @@ Kibana is a flexible and intuitive web interface for mining and visualizing the 
     .. code-block:: console
 
         # cd /usr/share/kibana
-        # sudo -u kibana /usr/share/kibana/bin/kibana-plugin install https://packages.wazuh.com/4.x/ui/kibana/wazuh_kibana-|WAZUH_LATEST|_|ELASTICSEARCH_ELK_LATEST|-1.zip
+        # sudo -u kibana /usr/share/kibana/bin/kibana-plugin install https://packages.wazuh.com/4.x/ui/kibana/wazuh_kibana-|WAZUH_CURRENT|_|ELASTICSEARCH_ELK_LATEST|-1.zip
 
 #. Link Kibana's socket to privileged port 443:
 
@@ -400,4 +400,4 @@ To uninstall all the components of the all in one installation, visit the :ref:`
 Next steps
 ----------
 
-Once the Wazuh environment is ready, a Wazuh agent can be installed on every endpoint to be monitored. The Wazuh agent installation guide is available for most operating systems and can be found :ref:`here<installation_agents>`.
+Once the Wazuh environment is ready, a Wazuh agent can be installed on every endpoint to be monitored. The :doc:`Wazuh agent installation guide </installation-guide/wazuh-agent/index>` is available for most operating systems.

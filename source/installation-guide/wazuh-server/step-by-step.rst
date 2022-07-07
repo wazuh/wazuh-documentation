@@ -112,7 +112,7 @@ Configuring Filebeat
 
       .. code-block:: console
 
-        # curl -so /etc/filebeat/filebeat.yml https://packages.wazuh.com/|WAZUH_LATEST_MINOR|/tpl/wazuh/filebeat/filebeat.yml
+        # curl -so /etc/filebeat/filebeat.yml https://packages.wazuh.com/|WAZUH_CURRENT_MINOR|/tpl/wazuh/filebeat/filebeat.yml
         
         
   #. Edit the ``/etc/filebeat/filebeat.yml`` configuration file and replace the following value:
@@ -141,7 +141,7 @@ Configuring Filebeat
 
       .. code-block:: console
 
-        # curl -s https://packages.wazuh.com/4.x/filebeat/wazuh-filebeat-0.1.tar.gz | tar -xvz -C /usr/share/filebeat/module
+        # curl -s https://packages.wazuh.com/4.x/filebeat/wazuh-filebeat-0.2.tar.gz | tar -xvz -C /usr/share/filebeat/module
 
 Deploying certificates
 ^^^^^^^^^^^^^^^^^^^^^^

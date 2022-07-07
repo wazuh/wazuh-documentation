@@ -1,5 +1,8 @@
 .. Copyright (C) 2021 Wazuh, Inc.
 
+.. meta::
+  :description: MacOS unified logging system (ULS) events can be gathered and forwarded to the manager. Learn how to collect macOS ULS logs with Wazuh in this section.
+
 .. _how-to-collect-macoslogs:
 
 How to collect macOS ULS logs
@@ -7,7 +10,7 @@ How to collect macOS ULS logs
 
 .. versionadded:: 4.3.0
 
-MacOS unified logging system (ULS) events can be gathered and forwarded to the manager.
+macOS unified logging system (ULS) events can be gathered and forwarded to the manager.
 
 The ULS centralizes the management and storage of the logs across all the system levels, from Apps to the Kernel itself, rather than writing the data to text-based log files. Because of this, it is necessary to use specific methods to retrieve logs from this particular system.
 
@@ -34,7 +37,7 @@ To filter the system logs, it is necessary, but not mandatory, to use the ``quer
 - ``<query>process == "sshd" OR message CONTAINS "invalid"</query>``: The query is used directly as the ULS predicate, which is used to filter the logs. For more information about the predicates, see `macOS ULS Predicates`_.
 
 .. warning::
-    Be sure to be as restrictive as possible when filtering the logs. MacOS ULS produces a lot of data that might result overwhelming, and some logs of interest could be lost.
+    Be sure to be as restrictive as possible when filtering the logs. macOS ULS produces a lot of data that might result overwhelming, and some logs of interest could be lost.
 
 
 macOS ULS Logs Levels

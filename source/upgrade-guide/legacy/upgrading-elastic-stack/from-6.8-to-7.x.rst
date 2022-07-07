@@ -220,21 +220,21 @@ Upgrading Filebeat
     .. code-block:: console
 
       # cp /etc/filebeat/filebeat.yml <back-up-directory>/filebeat.yml.backup
-      # curl -so /etc/filebeat/filebeat.yml https://raw.githubusercontent.com/wazuh/wazuh/v|WAZUH_LATEST|/extensions/filebeat/7.x/filebeat.yml
+      # curl -so /etc/filebeat/filebeat.yml https://raw.githubusercontent.com/wazuh/wazuh/v|WAZUH_CURRENT|/extensions/filebeat/7.x/filebeat.yml
       # chmod go+r /etc/filebeat/filebeat.yml
 
 #. Download the alerts template for Elasticsearch:
 
     .. code-block:: console
 
-      # curl -so /etc/filebeat/wazuh-template.json https://raw.githubusercontent.com/wazuh/wazuh/v|WAZUH_LATEST|/extensions/elasticsearch/7.x/wazuh-template.json
+      # curl -so /etc/filebeat/wazuh-template.json https://raw.githubusercontent.com/wazuh/wazuh/v|WAZUH_CURRENT|/extensions/elasticsearch/7.x/wazuh-template.json
       # chmod go+r /etc/filebeat/wazuh-template.json
 
 #. Download the Wazuh module for Filebeat:
 
     .. code-block:: console
 
-      # curl -s https://packages.wazuh.com/4.x/filebeat/wazuh-filebeat-0.1.tar.gz | sudo tar -xvz -C /usr/share/filebeat/module
+      # curl -s https://packages.wazuh.com/4.x/filebeat/wazuh-filebeat-0.2.tar.gz | sudo tar -xvz -C /usr/share/filebeat/module
 
 #. Edit the ``/etc/filebeat/filebeat.yml`` configuration file and replace ``YOUR_ELASTIC_SERVER_IP`` with the IP address or the hostname of the Elasticsearch server:
 
@@ -293,7 +293,7 @@ Upgrading Kibana
         .. code-block:: console
 
           # cd /usr/share/kibana/
-          # sudo -u kibana bin/kibana-plugin install https://packages.wazuh.com/wazuhapp/wazuhapp-|WAZUH_LATEST|_|ELASTICSEARCH_LATEST|.zip
+          # sudo -u kibana bin/kibana-plugin install https://packages.wazuh.com/wazuhapp/wazuhapp-|WAZUH_CURRENT|_|ELASTICSEARCH_LATEST|.zip
 
 
       .. group-tab:: From the package
@@ -301,7 +301,7 @@ Upgrading Kibana
         .. code-block:: console
 
           # cd /usr/share/kibana/
-          # sudo -u kibana bin/kibana-plugin install file:///path/wazuhapp-|WAZUH_LATEST|_|ELASTICSEARCH_LATEST|.zip
+          # sudo -u kibana bin/kibana-plugin install file:///path/wazuhapp-|WAZUH_CURRENT|_|ELASTICSEARCH_LATEST|.zip
 
 
 #. For installations on Kibana 7.6.x version and higher, it is recommended to increase the heap size of Kibana to ensure the Kibana's plugins installation:
