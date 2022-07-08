@@ -23,3 +23,4 @@ This section contains technical documentation for developers.
         packaging/index
         wazuh-logtest
         selinux-wazuh-context
+        rbac-database-integrity
