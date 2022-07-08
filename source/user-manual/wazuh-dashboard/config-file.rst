@@ -300,6 +300,8 @@ Extensions
 
     These options are only applied for newly inserted APIs on the *Settings* tab, not for the existing ones.
 
+    Extensions are configured outside the host configuration at the same level as the word hosts
+
 extensions.pci
 ^^^^^^^^^^^^^^
 
