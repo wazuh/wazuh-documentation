@@ -53,6 +53,14 @@
   }
 }
 
+.index .navigation-buttons {
+  a {
+    &:last-of-type {
+      margin-left: auto;
+    }
+  }
+}
+
 /* Light theme -------------------------------------------------------------- */
 
 .light-theme {
