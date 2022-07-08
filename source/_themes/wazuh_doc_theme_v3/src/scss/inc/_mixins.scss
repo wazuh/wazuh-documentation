@@ -59,3 +59,31 @@
     $elements: $elements + " > ul > li";
   }
 }
+
+/* -- Link-boxes ----------------------------------------------------------------------- */
+
+@mixin link-boxes-steps-progress($max-layout,$progress-color,$empty-color, $breakpoint){
+  @for $layout from 2 through $max-layout {
+    @for $step from 0 through $max-layout {
+      @if $step < $layout {
+        $progress: (($step*2)-1)/($layout*2);
+        .link-boxes-group.layout-#{$layout}[data-step='#{$step}'] {
+          .steps-line::before {
+            background: $empty-color;
+            background: linear-gradient(90deg, $progress-color $progress * 100%, $empty-color $progress * 100%);
+            @include media-max($breakpoint) {
+              background: linear-gradient(180deg, $progress-color $progress * 100%, $empty-color $progress * 100%);
+            }
+          }
+        }
+      }
+      @if $step >= $layout {
+        .link-boxes-group.layout-#{$layout}[data-step='#{$step}'] {
+          .steps-line::before {
+            background: $progress-color;
+          }
+        }
+      }
+    }
+  }
+}
