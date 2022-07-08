@@ -10,7 +10,6 @@ Migration guide
 
 This guide gives instructions to make the following migration actions:
 
-
 .. toctree::
    :maxdepth: 2
 
