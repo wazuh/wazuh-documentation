@@ -43,7 +43,7 @@ Amazon configuration
       :align: center
       :width: 100%
 
-#. Select which service do you want to get logs from using the Service name slider, then, click on the Add target button and add the previously created Firehose delivery stream there. Also, create a new role to access the delivery stream:
+#. Select the services you want to get logs from using the Service name slider, then, click on the Add target button and add the previously created Firehose delivery stream there. Also, create a new role to access the delivery stream:
 
     .. thumbnail:: ../../../images/aws/aws-create-firehose-14.png
       :align: center
@@ -55,7 +55,7 @@ Amazon configuration
       :align: center
       :width: 100%
 
-#. Once the rule is created, data will start to be sent to the previously created S3 bucket. Remember to first enable the service you want to monitor, otherwise you won't get any data.
+#. Once the rule is created, data will start to be sent to the previously created S3 bucket. Remember to first enable the service you want to monitor, otherwise, you won't get any data.
 
 
 Wazuh configuration

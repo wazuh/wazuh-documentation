@@ -9,6 +9,7 @@
   <nav class="d-xl-flex align-items-center justify-content-between"> 
     <div class="mobile-primary-header navbar navbar-expand-xl d-flex">
       {% include "template-parts/brand.html" %}
+      {% if pagename != 'index' %}
       <div class="toggle-buttons d-flex d-xl-none">
         <button class="navbar-toggler search-toggler" type="button" data-toggle="collapse" data-target="#search-box-wrapper" aria-controls="search-box-wrapper" aria-expanded="false" aria-label="Toggle search bar">
           <span class="search-toggler-icon"></span>
@@ -17,13 +18,14 @@
           <span class="navbar-toggler-icon"></span>
         </button>
       </div>
+      {% endif %}
     </div>
     
     <div class="mobile-secondary-header version-zone">
     {% if theme_breadcrumb_root_title == 'Documentation' %}
       <ul class="navbar-nav ml-auto d-none d-xl-flex flex-row">
         <li class="nav-item">
-          <a class="nav-link" href="{{ theme_wazuh_web_url + '/product/' }}" target="_blank" rel="noreferrer noopener">Product</a>
+          <a class="nav-link" href="{{ theme_wazuh_web_url + '/platform/' }}" target="_blank" rel="noreferrer noopener">Platform</a>
         </li>
         <li class="nav-item">
           <a class="nav-link" href="{{ theme_wazuh_web_url + '/cloud/' }}" target="_blank" rel="noreferrer noopener">Cloud</a>
@@ -56,7 +58,7 @@
         </li>
       </ul>
         
-      {% if theme_include_version_selector %}
+      {% if theme_include_version_selector and pagename != 'index' %}
       {% include "template-parts/version-selector.html" %}
       {% endif %}
     {% else %}

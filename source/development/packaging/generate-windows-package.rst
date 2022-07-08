@@ -28,7 +28,7 @@ Download our wazuh-packages repository from GitHub and go to the ``windows`` dir
 
 .. code-block:: console
 
-    $ git clone https://github.com/wazuh/wazuh-packages && cd wazuh-packages/windows && git checkout v|WAZUH_LATEST|
+    $ git clone https://github.com/wazuh/wazuh-packages && cd wazuh-packages/windows && git checkout v|WAZUH_CURRENT_WINDOWS|
 
 Execute the ``generate_compiled_windows_agent.sh`` script, with the different options you desire. This script will build a Docker
 image with all the necessary tools to compile and obtain the Windows agent compiled in a zip file :
@@ -53,7 +53,7 @@ Below, you will find an example of how to build a compiled Windows agent.
 
 .. code-block:: console
 
-  # ./generate_compiled_windows_agent.sh -b v|WAZUH_LATEST| -s /tmp -r myrevision
+  # ./generate_compiled_windows_agent.sh -b v|WAZUH_CURRENT_WINDOWS| -s /tmp -r myrevision
 
 .. note::
     The ``-s`` parameter needs an absolute path. In this path you will get the zip with the compiled agent

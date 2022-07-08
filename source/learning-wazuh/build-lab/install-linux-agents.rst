@@ -1,28 +1,18 @@
 .. Copyright (C) 2015, Wazuh, Inc.
 
 .. meta::
-  :description: Learn more about how to prepare your Wazuh Lab Environment. In this section, we show you how to install the Linux Wazuh agent. 
+  :description: Learn more about how to prepare your Wazuh Lab Environment. In this section, we show you how to install the Wazuh agent for Linux. 
 
 .. _build_lab_install_linux_agents:
 
-Install the Linux Wazuh agents
-==============================
+Install the Wazuh agent on a Linux system
+=========================================
 
-Use the following procedure separately on your **Linux Agent** and **Elastic Server**
-instances to install, register and configure them to connect to the Wazuh manager.
+Use the following procedure to install, register and configure a Wazuh agent on a Linux system.
 
-Log in and sudo to root
------------------------
+We recommend using `CentOS 7` as the instructions throughout this Lab have been designed and tested for this operating system. 
 
-Remember to do this on both your Linux Agent and on your Elastic Server:
-
-    .. code-block:: console
-
-        [user@user_machine]$ ssh -i Wazuh_Lab.pem centos@ELASTIC_SERVER_IP
-        [root@elastic-server ~]$ sudo su -
-
-        [user@user_machine]$ ssh -i Wazuh_Lab.pem centos@LINUX_AGENT_IP
-        [centos@linux-agent ~]$ sudo su -
+.. note:: To execute all the commands, root user privileges are required.
 
 Add the Wazuh yum repository
 ----------------------------
@@ -39,41 +29,38 @@ Add the Wazuh yum repository
          protect=1
          EOF
 
+Install and connect the Wazuh agent to the manager
+--------------------------------------------------
 
-Install and connect Wazuh agent to Manager
-------------------------------------------
+#. Edit the ``WAZUH_MANAGER`` variable to contain your Wazuh manager IP address or hostname and execute the following command to install and configure your Wazuh agent: 
 
-Install and start the Wazuh agent software
+   .. code-block:: console
 
-  .. code-block:: console
+      # WAZUH_MANAGER="<WAZUH_MANAGER_IP_ADDRESS>" WAZUH_REGISTRATION_PASSWORD="please123" yum -y install wazuh-agent
 
-    # WAZUH_MANAGER="172.30.0.10" WAZUH_REGISTRATION_PASSWORD="please123" \
-    WAZUH_PROTOCOL="tcp" yum -y install wazuh-agent
-    # systemctl start wazuh-agent
+#. Enable and start the Wazuh agent service.
 
-Verify the agent has properly connected:
+   .. include:: /_templates/installations/wazuh/common/enable_wazuh_agent_service.rst    
 
-  .. code-block:: console
+#. Verify the agent has properly connected:
 
-    # grep ^status /var/ossec/var/run/wazuh-agentd.state
+   .. code-block:: console
 
-You should see output like this:
+      # grep ^status /var/ossec/var/run/wazuh-agentd.state
 
-  .. code-block:: none
-    :class: output
+   You should see output like this:
 
-    status='connected'
+   .. code-block:: none
+      :class: output
+
+      status='connected'
 
 .. note::
-  The **/var/ossec/var/run/wazuh-agentd.state** file on Unix-like platforms and the
-  **C:\\Program Files (x86)\\ossec-agent\\wazuh-agent.state** file on Windows
-  platforms contain several useful pieces of information about the state of the
-  Wazuh agent's connection with the Wazuh manager.  See the file content itself
-  for more information.
+   
+   The ``wazuh-agentd.state`` file contains several useful pieces of information about the state of the Wazuh agent connection with the Wazuh manager.  See the file content itself for more information.
 
-Now disable the Wazuh repository in order to prevent a future unintended upgrade
-that may cause a version conflict with the current installation.
+Now disable the Wazuh repository in order to prevent a future unintended upgrade that may cause a version conflict with the current installation.
 
-  .. code-block:: console
+   .. code-block:: console
 
-    # sed -i "s/^enabled=1/enabled=0/" /etc/yum.repos.d/wazuh.repo
+      # sed -i "s/^enabled=1/enabled=0/" /etc/yum.repos.d/wazuh.repo

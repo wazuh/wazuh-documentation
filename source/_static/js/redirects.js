@@ -78,6 +78,7 @@ newUrls['4.3'] = [
   '/release-notes/release-4-3-2.html',
   '/release-notes/release-4-3-3.html',
   '/release-notes/release-4-3-4.html',
+  '/release-notes/release-4-3-5.html',
   '/getting-started/use-cases/container-security.html',
   '/user-manual/agents/query-configuration.html',
   '/user-manual/elasticsearch/configure-indices.html',
@@ -219,6 +220,7 @@ newUrls['4.3'] = [
   '/deployment-options/deploying-with-puppet/wazuh-puppet-module/reference-wazuh-puppet/wazuh-manager-class.html',
   '/deployment-options/amazon-machine-images/amazon-machine-images.html',
   '/release-notes/release-4-3-0.html',
+  '/learning-wazuh/build-lab/install-wazuh-central-components.html', 
 ];
 
 removedUrls['4.3'] = [
@@ -338,6 +340,12 @@ removedUrls['4.3'] = [
   '/migrating-from-ossec/index.html',
   '/migrating-from-ossec/ossec-server.html',
   '/migrating-from-ossec/ossec-agent.html',
+  '/learning-wazuh/build-lab/access-ec2-instances.html',
+  '/learning-wazuh/build-lab/build-vpc.html', 
+  '/learning-wazuh/build-lab/launch-ec2-instances.html',
+  '/learning-wazuh/build-lab/xpack-security-setup.html',
+  '/learning-wazuh/build-lab/install-elastic-stack.html',
+  '/learning-wazuh/build-lab/install-wazuh-manager.html',
 ];
 
 

@@ -8,7 +8,7 @@
 Prerequisites
 =============
 
-This module requires the right credentials to access to the services. 
+This module requires the right credentials to access the services. 
 
 .. topic:: Contents
 

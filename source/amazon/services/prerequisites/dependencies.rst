@@ -32,7 +32,7 @@ b) For Debian/Ubuntu operating systems:
 
   # apt-get update && apt-get install python3
 
-The required modules can be installed with Pip, the Python package manager. Most of UNIX distributions have this tool available in their software repositories:
+The required modules can be installed with Pip, the Python package manager. Most UNIX distributions have this tool available in their software repositories:
 
 a) For CentOS/RHEL/Fedora operating systems:
 

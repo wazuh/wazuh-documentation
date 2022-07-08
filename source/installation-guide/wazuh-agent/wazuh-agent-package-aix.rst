@@ -12,13 +12,13 @@ The agent runs on the host you want to monitor and communicates with the Wazuh m
 
 The deployment of a Wazuh agent on an AIX system uses deployment variables that facilitate the task of installing, registering, and configuring the agent. 
 
-#. To start the deployment process, download the `AIX installer <https://packages.wazuh.com/|CURRENT_MAJOR|/aix/wazuh-agent-|WAZUH_LATEST_AIX|-|WAZUH_REVISION_AIX|.aix.ppc.rpm>`_. 
+#. To start the deployment process, download the `AIX installer <https://packages.wazuh.com/|WAZUH_CURRENT_MAJOR_AIX|/aix/wazuh-agent-|WAZUH_CURRENT_AIX|-|WAZUH_REVISION_AIX|.aix.ppc.rpm>`_. 
 
 #. To deploy the Wazuh agent to your system, edit the ``WAZUH_MANAGER`` variable so that it contains the Wazuh manager IP address or hostname.
 
    .. code-block:: console
    
-      # WAZUH_MANAGER="10.0.0.2" rpm -ivh wazuh-agent-|WAZUH_LATEST_AIX|-|WAZUH_REVISION_AIX|.aix.ppc.rpm
+      # WAZUH_MANAGER="10.0.0.2" rpm -ivh wazuh-agent-|WAZUH_CURRENT_AIX|-|WAZUH_REVISION_AIX|.aix.ppc.rpm
 
    For additional deployment options such as agent name, agent group, and registration password, see :ref:`Deployment variables for AIX <deployment_variables_aix>` section.   
    

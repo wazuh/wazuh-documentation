@@ -10,7 +10,7 @@ Monitoring AWS instances
 
 Installing the Wazuh agent on the AWS EC2 instances provides information and monitoring about what's going on inside of them.
 
-The agent runs as a service on the instance, and collects different types of system and application data that forwards to the Wazuh manager through an encrypted and authenticated channel.
+The agent runs as a service on the instance and collects different types of system and application data that forwards to the Wazuh manager through an encrypted and authenticated channel.
 
 Thanks to the Wazuh agent, there are some capabilities available to monitor the instances:
 
@@ -24,4 +24,4 @@ Thanks to the Wazuh agent, there are some capabilities available to monitor the 
 To learn more about the different Wazuh capabilities, check out :doc:`this section </user-manual/index>`.
 
 .. note::
-  To install the Wazuh agent, follow the instructions available on the :doc:`agent installation guide </installation-guide/wazuh-agent/index>`.
+  To install the Wazuh agent, follow the instructions available in the :doc:`agent installation guide </installation-guide/wazuh-agent/index>`.

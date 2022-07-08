@@ -15,7 +15,7 @@ Download and install the Wazuh module from Puppet Forge:
 
   .. code-block:: console
 
-    # puppet module install wazuh-wazuh --version |WAZUH_LATEST_PUPPET|
+    # puppet module install wazuh-wazuh --version |WAZUH_CURRENT_PUPPET|
 
   .. code-block:: none
     :class: output
@@ -24,7 +24,7 @@ Download and install the Wazuh module from Puppet Forge:
     Notice: Downloading from https://forgeapi.puppet.com ...
     Notice: Installing -- do not interrupt ...
     /etc/puppetlabs/code/environments/production/modules
-    └─┬ wazuh-wazuh (v4.3.4)
+    └─┬ wazuh-wazuh (v4.3.5)
       ├── puppet-nodejs (v7.0.1)
       ├── puppet-selinux (v3.4.1)
       ├── puppetlabs-apt (v7.7.1)
