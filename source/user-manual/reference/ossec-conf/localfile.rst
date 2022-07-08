@@ -322,7 +322,7 @@ Set the format of the log to be read. **field is required**
 +                    +--------------------+--------------------------------------------------------------------------------------------------+
 |                    | eventchannel       | Used for Microsoft Windows event logs, returns the events in JSON format.                        |
 |                    |                    |                                                                                                  |
-|                    |                    | Monitors every channel specified at the configuration file and shows every field included in it. |
+|                    |                    | Monitors every channel specified in the configuration file and shows every field included in it. |
 |                    |                    |                                                                                                  |
 |                    |                    | This can be used to monitor standard “Windows” event logs and "Application and Services" logs.   |
 +                    +--------------------+--------------------------------------------------------------------------------------------------+
