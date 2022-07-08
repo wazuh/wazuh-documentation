@@ -18,11 +18,8 @@ if ( $('.index') ) {
   quickstart.parent().prepend(quickstart);
 
   /* Hide specific subtrees from the index */
-  const nodesToHide = [
-    'learning-wazuh/index.html',
-    'development/index.html',
-    'migrating-from-ossec/index.html',
-  ];
+  const nodesToHide = [];
+  
   hideSectionsFromIndex(nodesToHide);
   /**
    * Hides particular nodes and their subrees from the index page only
