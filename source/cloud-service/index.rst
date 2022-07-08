@@ -1,4 +1,4 @@
-.. Copyright (C) 2022 Wazuh, Inc.
+.. Copyright (C) 2015, Wazuh, Inc.
 
 .. meta::
   :description: Wazuh offers cloud-delivered protection. Prevent, detect, and respond to threats in real-time. Learn more about Wazuh Cloud in this section. 

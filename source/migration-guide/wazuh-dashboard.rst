@@ -1,4 +1,4 @@
-.. Copyright (C) 2022 Wazuh, Inc.
+.. Copyright (C) 2015, Wazuh, Inc.
 
 .. meta::
   :description: Follow this guide to migrate from Open Distro for Elasticsearch Kibana to the Wazuh dashboard.

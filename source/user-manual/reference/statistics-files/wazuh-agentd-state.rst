@@ -1,4 +1,4 @@
-.. Copyright (C) 2022 Wazuh, Inc.
+.. Copyright (C) 2015, Wazuh, Inc.
 
 .. meta::
   :description: The wazuh-agentd.state file provides information about the agent. Learn more about it in this section of the Wazuh documentation.

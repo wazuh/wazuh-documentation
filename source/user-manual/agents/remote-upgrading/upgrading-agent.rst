@@ -1,4 +1,4 @@
-.. Copyright (C) 2022 Wazuh, Inc.
+.. Copyright (C) 2015, Wazuh, Inc.
 
 .. meta::
   :description: Upgrading an agent remotely can be performed at the command line and through the Wazuh API. Learn more about it in this section. 

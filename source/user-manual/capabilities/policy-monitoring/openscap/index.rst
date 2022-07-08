@@ -1,4 +1,4 @@
-.. Copyright (C) 2022 Wazuh, Inc.
+.. Copyright (C) 2015, Wazuh, Inc.
 
 .. meta::
     :description: The OpenSCAP wodle is an integration of OpenSCAP with Wazuh HIDS that provides the ability to perform configuration and vulnerability scans of an agent. Learn more about it here. 

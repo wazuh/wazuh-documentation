@@ -1,4 +1,4 @@
-.. Copyright (C) 2022 Wazuh, Inc.
+.. Copyright (C) 2015, Wazuh, Inc.
 
 .. meta::
   :description: Learn more about the configuration options for policy monitoring and anomaly detection in the rootcheck section of the Wazuh documentation.

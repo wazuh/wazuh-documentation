@@ -1,4 +1,4 @@
-.. Copyright (C) 2022 Wazuh, Inc.
+.. Copyright (C) 2015, Wazuh, Inc.
 
 Copy the Elasticsearch certificates into the Filebeat configuration folder:
 

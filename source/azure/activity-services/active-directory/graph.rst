@@ -1,4 +1,4 @@
-.. Copyright (C) 2021 Wazuh, Inc.
+.. Copyright (C) 2015, Wazuh, Inc.
 
 .. meta::
   :description: Learn how the Wazuh Azure module works in conjunction with the Microsoft Graph REST API in this section of the documentation.

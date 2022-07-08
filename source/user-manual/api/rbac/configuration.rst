@@ -1,4 +1,4 @@
-.. Copyright (C) 2022 Wazuh, Inc.
+.. Copyright (C) 2015, Wazuh, Inc.
 
 .. meta::
   :description: Check out how to configure the Role-Based Access Control (RBAC) with Wazuh in this step-by-step guide of our documentation. 

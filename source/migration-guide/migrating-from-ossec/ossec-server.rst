@@ -1,4 +1,4 @@
-.. Copyright (C) 2022 Wazuh, Inc.
+.. Copyright (C) 2015, Wazuh, Inc.
 
 .. meta::
    :description: If you want to know how to migrate from OSSEC to Wazuh, check this section where we explain how to do it without losing configuration data or agent keys.
