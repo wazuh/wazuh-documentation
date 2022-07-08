@@ -6,7 +6,7 @@
 
 -#}
 
-{%- if pagename == 'index' -%}
+{%- if pagename == 'index' and theme_breadcrumb_root_title == 'Documentation' -%}
   {%- include 'index.html' -%}
 {%- else -%}
   {%- include 'template-parts/body.html' -%}
