@@ -56,21 +56,21 @@
     }
 
     .item {
-      padding: 1.4286em calc(1.4286em + .15%);
+      padding: 23px calc(23px + .15%);
       margin: 0;
       font-weight: 500;
       border: 1px solid;
       border-radius: $rounded-corners $rounded-corners 0 0 !important;/* stylelint-disable-line declaration-no-important */
       @include media-max(sm){
-        padding: .8em calc(.8em + .15%);
+        padding: 12px calc(12px + .15%);
       }
 
       &.active {
-        padding: 1.4286em;
+        padding: 23px;
         font-weight: 600;
         border-radius: $rounded-corners $rounded-corners 0 0 !important;/* stylelint-disable-line declaration-no-important */
         @include media-max(sm){
-          padding: .8em;
+          padding: 12px;
         }
 
         &:first-child ::after {
@@ -108,6 +108,8 @@
         background-color: $light-color-sidebar-space;
         border-color: $light-color-sidebar-space;
         &.active {
+          // position: relative;
+          // top: 1px;
           color: $light-color-primary;
           background-color: $light-color-base-space;
           border-color: $light-color-primary $light-color-primary $light-color-base-space $light-color-primary;
