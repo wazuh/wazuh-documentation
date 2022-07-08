@@ -1,4 +1,4 @@
-.. Copyright (C) 2022 Wazuh, Inc.
+.. Copyright (C) 2015, Wazuh, Inc.
 
 .. meta::
   :description: Learn how the wazuh-agentlessd program allows integrity checks to be run on systems without an agent installed in this section of the documentation.

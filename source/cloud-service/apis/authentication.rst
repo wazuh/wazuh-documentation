@@ -1,4 +1,4 @@
-.. Copyright (C) 2022 Wazuh, Inc.
+.. Copyright (C) 2015, Wazuh, Inc.
 
 .. meta::
   :description: Wazuh Cloud supports API key-based authentication. Learn how to obtain and revoke an API key directly from the Wazuh Cloud Console in this section.

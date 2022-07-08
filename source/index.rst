@@ -1,4 +1,4 @@
-.. Copyright (C) 2022 Wazuh, Inc.
+.. Copyright (C) 2015, Wazuh, Inc.
 
 .. meta::
   :description: Welcome to the Wazuh documentation. Here you can find the installation guide, the user manual, and everything you need to deploy Wazuh.

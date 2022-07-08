@@ -1,4 +1,4 @@
-.. Copyright (C) 2022 Wazuh, Inc.
+.. Copyright (C) 2015, Wazuh, Inc.
 
 .. meta::
     :description: Wazuh incorporates an integrated decoder for JSON logs that enables the extraction of data from any source in this format. Learn more about it here.

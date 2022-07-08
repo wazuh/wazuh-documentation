@@ -1,4 +1,4 @@
-.. Copyright (C) 2022 Wazuh, Inc.
+.. Copyright (C) 2015, Wazuh, Inc.
 
 .. meta::
   :description: Learn how to configure the manager to connect Wazuh to external APIs. Check out the options, optional filters, and configuration examples. 

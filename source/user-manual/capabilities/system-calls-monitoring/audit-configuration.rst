@@ -1,4 +1,4 @@
-.. Copyright (C) 2022 Wazuh, Inc.
+.. Copyright (C) 2015, Wazuh, Inc.
 
 .. meta::
   :description: Learn more about how to monitor system calls with Wazuh: its configuration, basic usage, how to monitor user actions, and more. 

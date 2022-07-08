@@ -1,5 +1,9 @@
+<<<<<<< HEAD
 .. Copyright (C) 2022 Wazuh, Inc.
 
+=======
+.. Copyright (C) 2015, Wazuh, Inc.
+>>>>>>> origin/4.3
 .. meta::
   :description: Check out this section of the Wazuh documentation to learn about Docker installation: how to install the Docker engine and the Docker compose. 
   

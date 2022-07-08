@@ -1,4 +1,4 @@
-.. Copyright (C) 2022 Wazuh, Inc.
+.. Copyright (C) 2015, Wazuh, Inc.
 
 .. meta::
    :description: Learn how to install Wazuh dashboard, a flexible and intuitive web interface for mining and visualizing the events and archives. 
@@ -271,10 +271,53 @@ Next steps
 
 All the Wazuh central components are successfully installed and secured.
 
-.. thumbnail:: ../../images/installation/Wazuh-Installation-workflow-complete.png
-    :alt: Wazuh installation workflow
-    :align: center
-    :width: 100%
+.. raw:: html
+
+  <div class="link-boxes-group layout-3" data-step="4">
+    <div class="steps-line">
+      <div class="steps-number past-step">1</div>
+      <div class="steps-number past-step">2</div>
+      <div class="steps-number past-step">3</div>
+    </div>
+    <div class="link-boxes-item past-step">
+      <a class="link-boxes-link" href="../wazuh-indexer/index.html">
+        <p class="link-boxes-label">Install the Wazuh indexer</p>
+
+.. image:: ../../images/installation/Indexer-Circle.png
+     :align: center
+     :height: 61px
+
+.. raw:: html
+
+      </a>
+    </div>
+  
+    <div class="link-boxes-item past-step">
+      <a class="link-boxes-link" href="../wazuh-server/index.html">
+        <p class="link-boxes-label">Install the Wazuh server</p>
+
+.. image:: ../../images/installation/Server-Circle.png
+     :align: center
+     :height: 61px
+
+.. raw:: html
+
+      </a>
+    </div>
+  
+    <div class="link-boxes-item past-step">
+      <a class="link-boxes-link" href="index.html">
+        <p class="link-boxes-label">Install the Wazuh dashboard</p>
+
+.. image:: ../../images/installation/Dashboard-Circle.png
+     :align: center
+     :height: 61px
+     
+.. raw:: html
+
+      </a>
+    </div>
+  </div>
 
 
 The Wazuh environment is now ready and you can proceed with installing the Wazuh agent on the endpoints to be monitored. To perform this action, see the :doc:`Wazuh agent </installation-guide/wazuh-agent/index>` section.

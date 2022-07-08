@@ -1,4 +1,4 @@
-.. Copyright (C) 2020 Wazuh, Inc.
+.. Copyright (C) 2015, Wazuh, Inc.
 
 .. meta::
   :description: Learn how to check out the billing history and the current billing cycle information of your Wazuh Cloud environments in this section.  

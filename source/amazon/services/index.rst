@@ -1,4 +1,4 @@
-.. Copyright (C) 2022 Wazuh, Inc.
+.. Copyright (C) 2015, Wazuh, Inc.
 
 .. meta::
   :description: The Wazuh for AWS module provides capabilities for monitoring AWS-based services. Learn how to install and configure it to monitor Amazon instances and services.  

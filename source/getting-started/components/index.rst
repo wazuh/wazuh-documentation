@@ -1,4 +1,4 @@
-.. Copyright (C) 2015–2022 Wazuh, Inc.
+.. Copyright (C) 2015, Wazuh, Inc.
 
 .. meta::
     :description: The Wazuh components are the Wazuh agent, the Wazuh server, the Wazuh indexer, and the Wazuh dashboard. Learn more about them in this section of our documentation.

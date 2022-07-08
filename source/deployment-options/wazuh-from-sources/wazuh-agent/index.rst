@@ -1,4 +1,4 @@
-.. Copyright (C) 2015–2022 Wazuh, Inc.
+.. Copyright (C) 2015, Wazuh, Inc.
 
 .. meta::
   :description: Learn more about how to install the Wazuh agent from sources. Wazuh can be installed on all major operating systems, including Linux, Windows, macOS, among others.
@@ -286,11 +286,27 @@ The Wazuh agent is a single and lightweight monitoring software. It is a multi-p
 
     .. group-tab:: macOS
 
-        #.  Install development tools and compilers. In macOS, this can be easily done by installing brew, a package manager for macOS:
+        #. Install brew, a package manager for macOS:
 
             .. code-block:: console
 
                 $ /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
+
+            .. warning::
+                In some macOS versions, this first command may fail reporting that `homebrew/core` is shallow clone. If this happens, run the following commands to solve it.
+
+                .. code-block:: console
+
+                    $ rm -rf "/usr/local/Homebrew/Library/Taps/homebrew/homebrew-core"
+                    $ brew tap homebrew/core
+
+                After that, run again the first one to properly install brew:
+
+                .. code-block:: console
+
+                    $ /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
+
+        #. Install development tools and compilers through brew.
 
             .. code-block:: console
 

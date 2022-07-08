@@ -1,4 +1,4 @@
-.. Copyright (C) 2022 Wazuh, Inc.
+.. Copyright (C) 2015, Wazuh, Inc.
 
 .. meta::
   :description: Tenants are useful for safely sharing your work with other users. Learn how to enable multi-tenancy in the Wazuh dashboard. 

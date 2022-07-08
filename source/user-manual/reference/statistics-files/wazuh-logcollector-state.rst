@@ -1,4 +1,4 @@
-.. Copyright (C) 2022 Wazuh, Inc.
+.. Copyright (C) 2015, Wazuh, Inc.
 
 .. meta::
   :description: The wazuh-logcollector.state file can be helpful to identify and measure if Wazuh is collecting and sending logs consistently. Learn more about it here.

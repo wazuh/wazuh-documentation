@@ -1,4 +1,4 @@
-.. Copyright (C) 2022 Wazuh, Inc.
+.. Copyright (C) 2015, Wazuh, Inc.
 
 .. meta::
    :description: The client.keys file stores the data used to authenticate secure agents. For more information, check this section of the Wazuh documentation.

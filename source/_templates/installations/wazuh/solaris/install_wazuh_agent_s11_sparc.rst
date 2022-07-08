@@ -1,4 +1,4 @@
-.. Copyright (C) 2022 Wazuh, Inc.
+.. Copyright (C) 2015, Wazuh, Inc.
 
 #. Download the `Wazuh agent for Solaris 11 Sparc <https://packages.wazuh.com/4.x/solaris/sparc/11/wazuh-agent_v4.3.5-sol11-sparc.p5p>`_. 
 
