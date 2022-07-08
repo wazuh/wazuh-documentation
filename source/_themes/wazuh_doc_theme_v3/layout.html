@@ -69,6 +69,7 @@
 {%- set temp_css_files = []  -%}
 {%- set unwanted_css = ['tabs.css']  -%}
 {%- for cssfile in css_files -%}
+  {%- if cssfile != '' %}
   {%- if pagename in special_pages %}
     {#- Remove extension files for this template -#}
     {%- if 'sphinx_tabs' not in cssfile and 'wazuh-doc-images' not in cssfile -%}
@@ -80,6 +81,7 @@
         {{- temp_css_files.append(cssfile)|default("", True) -}}
       {%- endif -%}
     {%- endfor -%}
+  {% endif -%}
   {% endif -%}
 {%- endfor -%}
 {%- set css_files = temp_css_files -%}
@@ -115,10 +117,12 @@
 
 {#- Insert the script tags -#}
 {%- for scriptfile in script_files -%}
+    {%- if scriptfile != '' %}
     {%- if "redirects.min.js" in scriptfile and not theme_local_redirects_file %}
     <script src="{{ url_root + '../current/' + scriptfile }}"></script>
     {%- else -%}
     <script src="{{ pathto(scriptfile, 1) }}"></script>
+    {%- endif -%}
     {%- endif -%}
 {% endfor -%}
 {%- endmacro -%}
@@ -161,6 +165,8 @@
     {% if theme_include_mode|tobool %}
     <meta name="color-scheme" content="dark light">
     {% endif %}
+    
+    {{- metatags }}
     
     {%- block social_cards -%}
     <meta property="og:image" content="{{ theme_wazuh_doc_url + '/current/_static/images/wazuh-docs-card.png' }}">
@@ -226,8 +232,8 @@
     <link rel="icon" href="{{ pathto('_static/images/dark-favicon.png', 1) }}" media="(prefers-color-scheme:dark)" sizes="any" type="image/png"/>
     <link rel="icon" href="{{ pathto('_static/images/favicon.png', 1) }}" media="(prefers-color-scheme:light)" sizes="any" type="image/png"/>
     <link rel="apple-touch-icon" href="{{ pathto('_static/images/favicon.svg', 1) }}">
-
-    {%- if production -%}
+    
+    {%- if production and theme_breadcrumb_root_title == 'Documentation' -%}
     {#- Google Tag Manager - Head -#}
     {%- block gtm_head -%}
     <!-- Google Tag Manager -->
@@ -252,7 +258,7 @@
   {%- set body_class = 'document' -%}
   {% endif -%}
   
-  {%- if not is_latest_release %}
+  {%- if not is_latest_release and theme_breadcrumb_root_title == 'Documentation' %}
     {%- set body_class = body_class + ' no-latest-docs' -%}
   {% endif -%}
   
@@ -261,7 +267,7 @@
   {% endif -%}
 
   <body class="{{ body_class }}"  data-path="{{ pagename }}" data-spy="scroll" data-target="#local-toc" data-offset="200">
-  {%- if production -%}
+  {%- if production and theme_breadcrumb_root_title == 'Documentation' -%}
     {#- Google Tag Manager - Body -#}
     {%- block gtm_body -%}
     <!-- Google Tag Manager (noscript) -->
