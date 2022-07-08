@@ -19,7 +19,7 @@
 
                     .. code-block:: console
 
-                        # apt install curl apt-transport-https unzip wget software-properties-common
+                        # apt-get install curl apt-transport-https unzip wget software-properties-common
 
                 #. Add the repository for Java Development Kit (JDK):
 
@@ -40,7 +40,7 @@
 
                     .. code-block:: console
 
-                        # apt update
+                        # apt-get update
 
                 #. Install all the required utilities:
 

@@ -4,7 +4,7 @@
 
     .. code-block:: console
 
-      # apt install curl apt-transport-https unzip wget software-properties-common
+      # apt-get install curl apt-transport-https unzip wget software-properties-common
 
 #. Install the GPG key.
 

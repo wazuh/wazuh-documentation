@@ -4,7 +4,7 @@
 
     .. code-block:: console
 
-      # apt install curl apt-transport-https unzip wget libcap2-bin software-properties-common lsb-release gnupg
+      # apt-get install curl apt-transport-https unzip wget libcap2-bin software-properties-common lsb-release gnupg
 
 #. Install the GPG key:
 
