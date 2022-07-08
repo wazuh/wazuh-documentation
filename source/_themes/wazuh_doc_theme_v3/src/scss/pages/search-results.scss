@@ -56,9 +56,6 @@ h1 {
     }
     .context {
       margin: 1rem 0;
-      .highlighted {
-        display: inline-block;
-      }
     }
 
     .hidden-result {
@@ -100,9 +97,6 @@ h1 {
           color: $light-color-primary-lighter;
         }
       }
-      .context .highlighted {
-        background-color: $light-color-global-toc-highlight;
-      }
     }
   }
   #toggle-results {
@@ -139,10 +133,6 @@ h1 {
         &:focus {
           color: $dark-color-primary-lighter;
         }
-      }
-      .context .highlighted {
-        color: $dark-color-highlight-inline-text;
-        background-color: $dark-color-shadow;
       }
     }
   }
