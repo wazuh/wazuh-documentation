@@ -131,7 +131,10 @@ html_theme = 'wazuh_doc_theme_v3'
 html_theme_options = {
     'wazuh_web_url': 'https://wazuh.com',
     'wazuh_doc_url': 'https://documentation.wazuh.com',
-    'collapse_navigation': False, # Only for Wazuh documentation theme v2.0v
+    'collapse_navigation': False, # Only for Wazuh documentation theme v2.0
+    'include_edit_repo': True,
+    'include_version_selector': True,
+    'breadcrumb_root_title': 'Documentation',
 }
 
 if html_theme == 'wazuh_doc_theme_v3':
@@ -195,6 +198,7 @@ html_static_path = ['_static']
 # If true, SmartyPants will be used to convert quotes and dashes to
 # typographically correct entities.
 #html_use_smartypants = True
+smartquotes = False
 
 # Custom sidebar templates, must be a dictionary that maps document names
 # to template names.
@@ -212,8 +216,14 @@ html_additional_pages = {}
 
 html_additional_pages['not_found'] = 'not-found.html'
 
-if version >= '4.0':
+if version >= '4.0' and html_theme_options['breadcrumb_root_title'] == 'Documentation':
     html_additional_pages['user-manual/api/reference'] = 'api-redoc.html'
+
+if version >= '4.2' and html_theme_options['breadcrumb_root_title'] == 'Documentation':
+    html_additional_pages['cloud-service/apis/reference'] = 'cloud-api-redoc.html'
+
+if is_latest_release == True and html_theme_options['breadcrumb_root_title'] == 'Documentation':
+    html_additional_pages['moved-content'] = 'moved-content.html'
 
 # If false, no module index is generated.
 #html_domain_indices = True
@@ -562,19 +572,20 @@ def setup(app):
 
     current_path = os.path.join(os.path.dirname(os.path.realpath(__file__)), theme_assets_path)
     static_path_str = os.path.join(os.path.dirname(os.path.realpath(__file__)), html_static_path[0])
-    
+
     if not os.path.exists(app.srcdir + '/' + html_static_path[0] + '/'):
         os.mkdir(app.srcdir + '/' + html_static_path[0] + '/')
-    
+
     if html_theme == 'wazuh_doc_theme_v3':
         
         # Minify redirects.js
-        with open(os.path.join(static_path_str, "js/redirects.js")) as redirects_file:
-            minified = jsmin(redirects_file.read())
-            
-            # Create redirects.min.js file
-            with open(os.path.join(current_path, "static/js/min/redirects.min.js"), 'w') as redirects_min_file:
-                redirects_min_file.write(minified)
+        if html_theme_options['include_version_selector'] == True:
+            with open(os.path.join(static_path_str, "js/redirects.js")) as redirects_file:
+                minified = jsmin(redirects_file.read())
+                
+                # Create redirects.min.js file
+                with open(os.path.join(current_path, "static/js/min/redirects.min.js"), 'w') as redirects_min_file:
+                    redirects_min_file.write(minified)
         
         # CSS files
         app.add_css_file("css/min/bootstrap.min.css?ver=%s" % os.stat(
@@ -589,7 +600,7 @@ def setup(app):
             os.path.join(current_path, "static/js/min/bootstrap.bundle.min.js")).st_mtime)
         app.add_js_file("js/underscore.js?ver=%s" % os.stat(
             os.path.join(current_path, "static/js/underscore.js")).st_mtime)
-    
+
     if html_theme == 'wazuh_doc_theme':
         minification(current_path)
 
@@ -647,13 +658,15 @@ def insert_inline_js(app, pagename, templatename, context, doctree):
             inline_scripts.append(reader.read())
     context['inline_scripts'] = inline_scripts
 
-
 def manage_assets(app, pagename, templatename, context, doctree):
     theme_dir = os.path.join(os.path.dirname(os.path.realpath(__file__)), theme_assets_path)
     static = '_static/'
-    conditional_redirects = static + "js/min/redirects.min.js?ver=%s" % os.stat(os.path.join(theme_dir, "static/js/min/redirects.min.js")).st_mtime
-    if tags.has("production") or tags.has("dev"):
-        conditional_redirects = static + "js/min/redirects.min.js?ver=%s" % str(time.time())
+    if html_theme_options['include_version_selector'] == True:
+        conditional_redirects = static + "js/min/redirects.min.js?ver=%s" % os.stat(os.path.join(theme_dir, "static/js/min/redirects.min.js")).st_mtime
+        if tags.has("production") or tags.has("dev"):
+            conditional_redirects = static + "js/min/redirects.min.js?ver=%s" % str(time.time())
+    else:
+        conditional_redirects = ''
     # Full list of non-common javascript files
     individual_js_files = {
         "redirects": conditional_redirects,
@@ -679,6 +692,9 @@ def manage_assets(app, pagename, templatename, context, doctree):
             'not_found': "css/min/not-found.min.css?ver=%s" % os.stat(os.path.join(theme_dir, "static/css/min/not-found.min.css")).st_mtime
         }
         default = "css/min/wazuh-documentation.min.css?ver=%s" % os.stat(os.path.join(theme_dir, "static/css/min/wazuh-documentation.min.css")).st_mtime
+        
+        if html_theme_options['breadcrumb_root_title'] == 'Training':
+            css_map['index'] = default
 
         if pagename in css_map.keys():
             return css_map[pagename]
@@ -724,6 +740,9 @@ def manage_assets(app, pagename, templatename, context, doctree):
             # tabs (extension)
             # lightbox (extension)
         ]
+        
+        if html_theme_options['breadcrumb_root_title'] == 'Training':
+            js_map['index'] = default
 
         if pagename in js_map.keys():
             return js_map[pagename]
@@ -739,7 +758,6 @@ list_compiled_html = []
 
 def finish_and_clean(app, exception):
     ''' Performs the final tasks after the compilation '''
-
     # Create additional files such as the `.doclist` and the sitemap
     creating_file_list(app, exception)
 
@@ -752,7 +770,7 @@ def finish_and_clean(app, exception):
 
     if html_theme == 'wazuh_doc_theme_v3':
         # Remove map files and sourcMapping line in production
-        if production:
+        if production or html_theme_options['breadcrumb_root_title'] == 'Training':
             mapFiles = glob.glob(app.outdir + '/_static/*/min/*.map')
             assetsFiles = glob.glob(app.outdir + '/_static/js/min/*.min.js') + glob.glob(app.outdir + '/_static/css/min/*.min.css')
             # Remove map files
@@ -777,7 +795,7 @@ def finish_and_clean(app, exception):
                     
 def collect_compiled_pagename(app, pagename, templatename, context, doctree):
     ''' Runs once per page, storing the pagename (full page path) extracted from the context
-        It store the path of all compiled documents except the orphans and the ones in exclude_doc'''
+        It stores the path of all compiled documents except the orphans and the ones in exclude_doc '''
     if templatename == "page.html" and pagename not in exclude_doc:
         if not context['meta'] or ( context['meta']['orphan'] ):
             list_compiled_html.append(context['pagename']+'.html')
@@ -792,14 +810,14 @@ def creating_file_list(app, exception):
         sitemap_version = version
         if is_latest_release == True:
             sitemap_version = 'current'
-            
+
         # Create the release sitemap content
         sitemap = '<?xml version=\'1.0\' encoding=\'utf-8\'?>'+separator
         sitemap += '<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">'+separator
-         
+
         for compiled_html in list_compiled_html:
             sitemap += '\t<url><loc>' + requote_uri(html_theme_options.get('wazuh_doc_url') + '/' + sitemap_version + '/' + compiled_html) + '</loc></url>' + separator
-        # Close sitemap content    
+        # Close sitemap content
         sitemap += '</urlset>'
 
         # Create .doclist file
