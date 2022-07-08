@@ -9,40 +9,74 @@
 @import "../components/brand";
 @import "../components/mode-switch";
 @import "../components/search-box";
+@import "../parts/header";
 @import "../parts/footer";
 
-body {
-  margin-top: $index-header-height-xl;
-}
-
-.navbar {
-  margin: 0 auto 27px;
-  .navbar-brand {
-    padding: 0;
-    margin: 0;
-    img {
-      height: 35px;
-    }
-    .logo-link {
-      height: 34px;
+.index {
+  header .mobile-secondary-header {
+    @include media-max(xl){
+      display: none;
     }
   }
 }
 
-.search-box {
-  .search-form {
-    height: 46px;
-    .btn-search {
-      width: 44px;
-      height: 44px;
-      background-size: 41px 41px;
+body {
+  margin-top: $header-height-xs;
+  @include media-min(xl){
+    margin-top: $header-height-xl;
+  }
+}
+
+header .navbar-nav .dropdown-menu {
+  position: absolute;
+  left: -30px;
+  &:before {
+    left: 40px;
+  }
+}
+
+#large-search-box {
+
+  // top: $header-height-xs;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  height: $index-header-height-xs;
+  @include media-min(xl){
+    // top: $header-height-xl;
+    height: $index-header-height-xl;
+  }
+  @include media-max(lg){
+    padding-bottom: 1.5em;
+  }
+  .title {
+    text-align: center;
+    margin-bottom: 1.5rem;
+    @include media-max(sm){
+      font-size: 1.5rem;
+    }
+  }
+  .search-box {
+    max-width: 850px;
+    margin-right: auto;
+    margin-left: auto;
+    .form-control {
+      box-shadow: none;
+    }
+    .search-form {
+      height: 46px;
+      .btn-search {
+        width: 44px;
+        height: 44px;
+        background-size: 41px 41px;
+      }
     }
   }
 }
 
 main {
   min-height: calc(100vh - #{$index-header-height-xl} - #{$footer-height});
-  padding-top: 60px;
+  padding-top: 50px;
   padding-right: 0;
   padding-left: 0;
 
@@ -50,6 +84,7 @@ main {
     width: 0;
     height: 0;
     overflow: hidden;
+    margin: 3px 0;
   }
 
   .toctree-wrapper {
@@ -98,7 +133,7 @@ main {
               display: inline-block;
               width: 48px;
               height: 22px;
-              content: "More";
+              content: "Less";
             }
 
             &::after {
@@ -117,6 +152,9 @@ main {
           &.collapsed {
             ul {
               position: relative;
+            }
+            .toggle::before {
+              content: "More";
             }
             .toggle::after {
               transform: rotateX(0);
@@ -224,41 +262,9 @@ main {
   overflow-y: hidden;
 }
 
-#header {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  height: $index-header-height-xl;
-  @include media-max(md){
-    padding-bottom: 3em;
-  }
-
-  .form-control {
-    box-shadow: none;
-  }
-
-  .navbar-brand {
-    font-size: 22px;
-
-    .logo-link.web {
-      padding-bottom: 0;
-      margin-right: 10px;
-    }
-    .logo-link.docs {
-      line-height: 50px;
-    }
-  }
-
-  .search-box {
-    max-width: 850px;
-    margin-right: auto;
-    margin-left: auto;
-  }
-}
-
 #right-sidebar {
   position: fixed;
-  top: $index-header-height-xl;
+  top: $index-header-height-xl + $header-height-xl;
   right: 0;
   width: calc((100% - 1140px) / 2);
   min-width: 160px;
@@ -267,8 +273,8 @@ main {
   @include media-max(sm){
     min-width: 115px;
   }  
-  @include media-max(md){
-    top: calc(#{$index-header-height-xl} - 3em);
+  @include media-max(lg){
+    top: $index-header-height-xl + $header-height-xs;
   }
 }
 
@@ -389,6 +395,12 @@ main {
     .form-control {
       background: $light-color-index-header-background;
     }
+    svg {
+      fill: $light-color-main-text-extra;
+    }
+  }
+  #large-search-box {
+    background: $light-color-index-header-background;
   }
 
   /* Getting started */
@@ -444,6 +456,12 @@ main {
   [data-href$="container-security/index.html"]::before {
     background-image: url("#{$ico-path}index-icons.svg#containers-lt");
   }
+  
+  /* Development */
+  [href$="development/index.html"]::before,
+  [data-href$="development/index.html"]::before {
+    background-image: url("#{$ico-path}index-icons.svg#development-lt");
+  }
 
   /* Deployment */
   [href$="deployment.html"]::before,
@@ -455,6 +473,12 @@ main {
   [href$="compliance.html"]::before,
   [data-href$="compliance.html"]::before {
     background-image: url("#{$ico-path}index-icons.svg#compliance-lt");
+  }
+
+  /* Learning Wazuh */
+  [href$="learning-wazuh/index.html"]::before,
+  [data-href$="learning-wazuh/index.html"]::before {
+    background-image: url("#{$ico-path}index-icons.svg#learning-lt");
   }
 
   /* Cloud security */
@@ -544,6 +568,15 @@ main {
     .form-control {
       background: $dark-color-index-header-background;
     }
+    svg {
+      fill: $dark-color-main-text;
+    }
+  }
+  #large-search-box {
+    background: $dark-color-sidebar-space;
+    .form-control {
+      background: $dark-color-sidebar-space;
+    }
   }
 
   /* Getting started */
@@ -599,6 +632,12 @@ main {
     background-image: url("#{$ico-path}index-icons.svg#containers-dt");
   }
 
+  /* Development */
+  [href$="development/index.html"]::before,
+  [data-href$="development/index.html"]::before {
+    background-image: url("#{$ico-path}index-icons.svg#development-dt");
+  }
+
   /* Deployment */
   [href$="deployment.html"]::before,
   [data-href$="deployment.html"]::before {
@@ -609,6 +648,12 @@ main {
   [href$="compliance.html"]::before,
   [data-href$="compliance.html"]::before {
     background-image: url("#{$ico-path}index-icons.svg#compliance-dt");
+  }
+
+  /* Learning Wazuh */
+  [href$="learning-wazuh/index.html"]::before,
+  [data-href$="learning-wazuh/index.html"]::before {
+    background-image: url("#{$ico-path}index-icons.svg#learning-dt");
   }
 
   /* Cloud security */
