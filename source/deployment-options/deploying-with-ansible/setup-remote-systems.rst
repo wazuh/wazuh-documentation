@@ -1,5 +1,8 @@
 .. Copyright (C) 2015–2022 Wazuh, Inc.
 
+.. meta::
+  :Description: Ansible is an agentless automation platform. Learn more about remote endpoints connections in this section of the Wazuh documentation.
+  
 Remote endpoints connection
 ===========================
 

@@ -1,7 +1,7 @@
 .. Copyright (C) 2015–2022 Wazuh, Inc.
 
 .. meta::
-	:description: Check out this guide to learn how to install the Wazuh agent if you are deploying Wazuh with Ansible, an open source platform designed for automating tasks.
+   :description: Check out this guide to learn how to install the Wazuh agent if you are deploying Wazuh with Ansible, an open source platform designed for automating tasks.
 
 Install Wazuh Agent
 ===================

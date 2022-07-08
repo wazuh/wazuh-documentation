@@ -1,5 +1,8 @@
 .. Copyright (C) 2022 Wazuh, Inc.
 
+.. meta::
+   :description: Learn about Wazuh manager class in this section of the Wazuh documentation. 
+
 .. _reference_wazuh_manager_class:
 
 Wazuh manager class

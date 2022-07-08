@@ -5,7 +5,6 @@
 
 .. _wazuh_agent_solaris:
 
-
 Installing Wazuh agents on Solaris systems
 ==========================================
 

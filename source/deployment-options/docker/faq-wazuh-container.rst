@@ -1,5 +1,8 @@
 .. Copyright (C) 2022 Wazuh, Inc.
 
+.. meta::
+  :description: Get answers to the most frequently asked questions about the Wazuh deployment on Docker in this FAQ. 
+    
 .. _wazuh-container_faq:
 
 FAQ

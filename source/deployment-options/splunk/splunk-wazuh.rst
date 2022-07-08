@@ -1,6 +1,7 @@
 .. Copyright (C) 2015–2022 Wazuh, Inc.
 
-.. meta:: :description: Learn how to install Elastic Stack for using Wazuh on Debian
+.. meta::
+   :description: Learn how to install Elastic Stack for using Wazuh on Debian
 
 Wazuh manager installation
 ==========================

@@ -1,5 +1,8 @@
 .. Copyright (C) 2022 Wazuh, Inc.
 
+.. meta::
+   :description: Learn how to install *puppet-master* in this section of the Wazuh documentation. 
+
 .. _setup_puppet_master:
 
 Installing Puppet master

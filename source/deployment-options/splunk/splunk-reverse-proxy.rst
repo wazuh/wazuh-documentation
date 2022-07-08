@@ -1,6 +1,7 @@
 .. Copyright (C) 2015–2022 Wazuh, Inc.
 
-.. meta:: :description: Splunk for Wazuh installation guide
+.. meta::
+   :description: Splunk for Wazuh installation guide
 
 Set up reverse proxy configuration for Splunk
 =============================================

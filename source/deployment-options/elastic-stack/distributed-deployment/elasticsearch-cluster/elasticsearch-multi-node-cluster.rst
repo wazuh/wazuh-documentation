@@ -4,7 +4,6 @@
 
 .. _basic_elasticsearch_multi_node_cluster:
 
-
 Elasticsearch multi-node cluster
 =================================
 

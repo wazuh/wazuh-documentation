@@ -1,5 +1,8 @@
 .. Copyright (C) 2022 Wazuh, Inc.
 
+.. meta::
+   :description: Learn about Wazuh agent class in this section of the Wazuh documentation. 
+
 .. _reference_wazuh_agent_class:
 
 Wazuh agent class

@@ -4,7 +4,6 @@
 
 .. _basic_wazuh_single_node_cluster:
 
-
 Wazuh single-node cluster
 =========================
 

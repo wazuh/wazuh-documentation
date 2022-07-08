@@ -1,5 +1,8 @@
 .. Copyright (C) 2022 Wazuh, Inc.
 
+.. meta::
+   :description: Learn about Wazuh Puppet module in this section of the Wazuh documentation. 
+
 .. _wazuh_puppet_module:
 
 Wazuh Puppet module

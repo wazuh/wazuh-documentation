@@ -4,7 +4,6 @@
 
 .. _basic_wazuh_multi_node_cluster:
 
-
 Wazuh multi-node cluster
 =========================
 
