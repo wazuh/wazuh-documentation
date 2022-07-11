@@ -7,7 +7,7 @@ Ansible is an agentless automation platform. Hence, it relies on SSH connections
 
 .. note::
 
-   We recommend the :ref:`passwords <ansible_connection_passwords>` method, to avoid sharing your public SSH Key among several hosts.
+   We recommend the :doc:`passwords </deployment-options/deploying-with-ansible/setup-remote-systems>` method, to avoid sharing your public SSH Key among several hosts.
 
 .. _ansible_connection_passwords:
 
