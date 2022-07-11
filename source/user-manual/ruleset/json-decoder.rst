@@ -223,7 +223,7 @@ We can set several children decoders from a parent specifying a plugin decoder a
     <decoder name="json_child">
         <parent>json_parent</parent>
         <regex>@(\S+)"</regex>
-        <order>email.domain</order>
+        <order>email_domain</order>
     </decoder>
 
 The output of the *wazuh-logtest* tool shows the decoded fields by the JSON decoder, as well as the matched field from the regex expression:
@@ -244,5 +244,6 @@ The output of the *wazuh-logtest* tool shows the decoded fields by the JSON deco
             name: 'json_parent'
             parent: 'json_parent'
             email: 'curry@gmail.com'
+            email_domain: 'gmail.com'
             name: 'Stephen'
             surname: 'Curry'
