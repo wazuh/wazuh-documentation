@@ -300,8 +300,6 @@ Extensions
 
     These options are only applied for newly inserted APIs on the *Settings* tab, not for the existing ones.
 
-    Extensions are configured outside the host configuration at the same level as the word hosts
-
 extensions.pci
 ^^^^^^^^^^^^^^
 
@@ -443,3 +441,74 @@ Define the number of replicas to use for the ``wazuh-monitoring-*`` indices.
 +--------------------+----------------------------+
 | **Allowed values** | Any number starting from 0 |
 +--------------------+----------------------------+
+
+
+Example
+----------
+
+This is an example of the wazuh.yml configuration:
+
+.. code-block:: yaml
+    
+    #Basic options
+
+    hosts:
+        - env-1:
+            url: https://env-1.example
+            port: 55000
+            username: wazuh-wui
+            password: wazuh-wui
+            run_as: true
+        - env-2:
+            url: https://env-2.example
+            port: 55000
+            username: wazuh-wui
+            password: wazuh-wui
+            run_as: true
+
+    pattern: 'wazuh-alerts-*'
+    timeout: 20000
+    api.selector: true
+    ip.selector: true
+    ip.ignore: []
+    logs.level: info
+    hideManagerAlerts: true
+
+    #Monitoring
+
+    wazuh.monitoring.enabled: true
+    wazuh.monitoring.frequency: 900
+    wazuh.monitoring.pattern: wazuh-monitoring-*
+    wazuh.monitoring.creation: w
+
+    #Checks
+
+    checks.pattern : true
+    checks.template: true
+    checks.api     : true
+    checks.setup   : true
+    checks.metaFields: true
+
+    #Extensions
+
+    extensions.pci       : true
+    extensions.gdpr      : true
+    extensions.hipaa     : true
+    extensions.nist      : true
+    extensions.tsc       : true
+    extensions.audit     : true
+    extensions.oscap     : false
+    extensions.ciscat    : false
+    extensions.aws       : false
+    extensions.gcp       : false
+    extensions.virustotal: false
+    extensions.osquery   : false
+    extensions.docker    : false
+
+    #Advanced index options
+
+    wazuh-version.shards: 1
+    wazuh-version.replicas: 1
+    wazuh.monitoring.shards: 1
+    wazuh.monitoring.replicas: 0    
+    
