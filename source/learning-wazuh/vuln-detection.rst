@@ -1,8 +1,8 @@
 .. Copyright (C) 2015, Wazuh, Inc.
 
 .. meta::
-  :description: Learn more about how to perform the offline update of the Wazuh Vulnerability Detector in this section of our documentation. 
-  
+  :description: Learn more about how to perform the offline update of the Wazuh Vulnerability Detector in this section of our documentation.
+
 .. _learning_wazuh_vuln_detection:
 
 Track down vulnerable applications
