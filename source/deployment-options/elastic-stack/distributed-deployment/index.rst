@@ -12,17 +12,17 @@ Every component described below will be installed on a dedicated host, except Ki
 
 - **Elasticsearch cluster**
     
-    - :ref:`Elasticsearch single-node cluster <basic_elasticsearch_single_node_cluster>`
-    - :ref:`Elasticsearch multi-node cluster <basic_elasticsearch_multi_node_cluster>`
+    - :doc:`Elasticsearch single-node cluster </deployment-options/elastic-stack/distributed-deployment/elasticsearch-cluster/elasticsearch-single-node-cluster>` 
+    - :doc:`Elasticsearch multi-node cluster </deployment-options/elastic-stack/distributed-deployment/elasticsearch-cluster/elasticsearch-multi-node-cluster>`
 
 - **Wazuh cluster**
 
-    - :ref:`Wazuh single-node cluster <basic_wazuh_single_node_cluster>`
-    - :ref:`Wazuh multi-node cluster <basic_wazuh_multi_node_cluster>`
+    - :doc:`Wazuh single-node cluster </deployment-options/elastic-stack/distributed-deployment/wazuh-cluster/wazuh-single-node-cluster>` 
+    - :doc:`Wazuh multi-node cluster </deployment-options/elastic-stack/distributed-deployment/wazuh-cluster/wazuh-multi-node-cluster>`
 
 - **Kibana**
 
-    - :ref:`Kibana installation <basic_kibana>`
+    - :doc:`Kibana installation </deployment-options/elastic-stack/distributed-deployment/kibana/index>` 
 
 
 .. toctree::

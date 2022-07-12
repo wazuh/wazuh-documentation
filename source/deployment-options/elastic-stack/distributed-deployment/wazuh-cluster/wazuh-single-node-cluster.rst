@@ -189,9 +189,9 @@ Disabling repositories
 
 
 
-To uninstall Wazuh and Filebeat, visit the :ref:`uninstalling section <user_manual_uninstall_wazuh_installation_basic>`.
+To uninstall Wazuh and Filebeat, visit the :doc:`uninstalling section </user-manual/uninstall/elastic-stack>`.
 
 Next steps
 ----------
 
-The next step consists of :ref:`installing Kibana <basic_kibana>`.
+The next step consists of :doc:`installing Kibana </deployment-options/elastic-stack/distributed-deployment/kibana/index>`.
