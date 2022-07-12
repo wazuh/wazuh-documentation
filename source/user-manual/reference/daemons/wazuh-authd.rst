@@ -15,6 +15,16 @@ The ``wazuh-authd`` program can automatically add a Wazuh agent to a Wazuh manag
 .. warning::
   By default, there is no authentication or authorization involved in this transaction, so it is recommended that this daemon only be run when a new agent is being added.
 
+.. versionadded:: 5.0
+
+``wazuh-authd`` is able to generate the manager certificates even if openssl is not installed on the system. The parameters of the certificate are specified in the CLI:
+
+   .. code-block:: console
+
+     # wazuh-authd -C 265 -B 2048 -K /var/ossec/etc/sslmanager.key -X /var/ossec/etc/sslmanager.cert -S "/C=US/ST=California/CN=wazuh/"
+
+If one of the parameters related with the certificate generation is missing, an error will be triggered and the certificate generation will be aborted.
+
 +------------------+-------------------------------------------------------------------------------------------------------+
 | **-V**           | Version and license message.                                                                          |
 +------------------+-------------------------------------------------------------------------------------------------------+
@@ -61,6 +71,16 @@ The ``wazuh-authd`` program can automatically add a Wazuh agent to a Wazuh manag
 |                  | **Default** | TLS v1.2 only (if supported by the server).                                             |
 +------------------+-------------+-----------------------------------------------------------------------------------------+
 | **-L**           | Force insertion even though agent limit has been reached.                                             |
++------------------+-------------------------------------------------------------------------------------------------------+
+| **-C**           | Specify the manager certificate validity in days.                                                     |
++------------------+-------------------------------------------------------------------------------------------------------+
+| **-B**           | Set the manager certificate key size in bits.                                                         |
++------------------+-------------------------------------------------------------------------------------------------------+
+| **-K**           | Path to store the manager certificate key.                                                            |
++------------------+-------------------------------------------------------------------------------------------------------+
+| **-X**           | Path to store the manager certificate.                                                                |
++------------------+-------------------------------------------------------------------------------------------------------+
+| **-S**           | Subject of the manager certificate.                                                                   |
 +------------------+-------------------------------------------------------------------------------------------------------+
 
 .. note::
