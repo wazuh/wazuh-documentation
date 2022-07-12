@@ -6,7 +6,7 @@
 .. _release_3_13_5:
 
 3.13.5 Release notes - 20 July 2022
-==================================
+===================================
 
 This section lists the changes in version 3.13.5. More details about these changes are provided in each component changelog:
 
