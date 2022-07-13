@@ -9,7 +9,7 @@
 Using Azure Storage
 ===================
 
-`Azure Storage <https://docs.microsoft.com/en-us/azure/storage/common/storage-introduction>`_ refers to Microsoft Azure cloud storage solution, a service that provides a massively scalable object store for data objects, a messaging store for reliable messaging, a file system service for the cloud, and a NoSQL store.
+`Azure Storage <https://docs.microsoft.com/en-us/azure/storage/common/storage-introduction>`_ refers to the Microsoft Azure cloud storage solution, a service that provides a massively scalable object store for data objects, a messaging store for reliable messaging, a file system service for the cloud, and a NoSQL store.
 
 .. thumbnail:: ../../../images/azure/storage-activity-log.png
     :title: Storage
@@ -125,7 +125,7 @@ Thanks to the following rules, already included in Wazuh ruleset by default, it 
 Alert visualization
 ^^^^^^^^^^^^^^^^^^^
 
-Once the Wazuh configuration is set and the ``azure-logs`` module is running using the previous configuration, the event from the user creation example exported to Storage will be processed. The results can be check in Wazuh UI. 
+Once the Wazuh configuration is set and the ``azure-logs`` module is running using the previous configuration, the event from the user creation example exported to Storage will be processed. The results can be checked in the Wazuh UI. 
 
 .. thumbnail:: ../../../images/azure/storage-kibana.png
     :title: Storage
