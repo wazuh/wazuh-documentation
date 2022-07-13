@@ -15,15 +15,15 @@ The ``wazuh-authd`` program can automatically add a Wazuh agent to a Wazuh manag
 .. warning::
   By default, there is no authentication or authorization involved in this transaction, so it is recommended that this daemon only be run when a new agent is being added.
 
-.. versionadded:: 5.0
 
-``wazuh-authd`` is able to generate the manager certificates even if openssl is not installed on the system. The parameters of the certificate are specified in the CLI:
+``wazuh-authd`` is able to generate X.509 certificates even if OpenSSL is not installed on the system. The parameters of the certificate are specified in the CLI:
 
    .. code-block:: console
 
      # wazuh-authd -C 265 -B 2048 -K /var/ossec/etc/sslmanager.key -X /var/ossec/etc/sslmanager.cert -S "/C=US/ST=California/CN=wazuh/"
 
-If one of the parameters related with the certificate generation is missing, an error will be triggered and the certificate generation will be aborted.
+If any of the parameters related to the certificate generation is missing, an error will be triggered and the certificates are not generated.
+This certificate is used for the manager verification.
 
 +------------------+-------------------------------------------------------------------------------------------------------+
 | **-V**           | Version and license message.                                                                          |
@@ -72,15 +72,15 @@ If one of the parameters related with the certificate generation is missing, an 
 +------------------+-------------+-----------------------------------------------------------------------------------------+
 | **-L**           | Force insertion even though agent limit has been reached.                                             |
 +------------------+-------------------------------------------------------------------------------------------------------+
-| **-C**           | Specify the manager certificate validity in days.                                                     |
+| **-C**           | Specify the number of days cert is valid for.                                                         |
 +------------------+-------------------------------------------------------------------------------------------------------+
-| **-B**           | Set the manager certificate key size in bits.                                                         |
+| **-B**           | Set the X.509 certificate key size in bits.                                                           |
 +------------------+-------------------------------------------------------------------------------------------------------+
-| **-K**           | Path to store the manager certificate key.                                                            |
+| **-K**           | Path to store the X.509 certificate key.                                                              |
 +------------------+-------------------------------------------------------------------------------------------------------+
-| **-X**           | Path to store the manager certificate.                                                                |
+| **-X**           | Path to store the X.509 certificate.                                                                  |
 +------------------+-------------------------------------------------------------------------------------------------------+
-| **-S**           | Subject of the manager certificate.                                                                   |
+| **-S**           | Subject of the X.509 certificate. The arg must be formatted as /type0=value0/type1=value1/type2=..    |
 +------------------+-------------------------------------------------------------------------------------------------------+
 
 .. note::
