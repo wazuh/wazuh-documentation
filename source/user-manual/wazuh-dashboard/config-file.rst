@@ -13,44 +13,10 @@ The configuration file shows the default values for all of the possible options.
 
 The configuration file reference is organized by sections:
 
-`Basic options`_
-    - `hosts`_
-    - `pattern`_
-    - `timeout`_
-    - `ip.selector`_
-    - `ip.ignore`_
-    - `admin`_
-    - `logs.level`_
-    - `hideManagerAlerts`_
-
-`Monitoring`_
-    - `wazuh.monitoring.enabled`_
-    - `wazuh.monitoring.frequency`_
-    - `wazuh.monitoring.pattern`_
-    - `wazuh.monitoring.creation`_
-
-`Checks`_
-    - `checks.pattern`_
-    - `checks.template`_
-    - `checks.api`_
-    - `checks.setup`_
-    - `checks.fields`_
-
-`Extensions`_
-    - `extensions.pci`_
-    - `extensions.gdpr`_
-    - `extensions.audit`_
-    - `extensions.ciscat`_
-    - `extensions.aws`_
-    - `extensions.virustotal`_
-    - `extensions.osquery`_
-    - `extensions.docker`_
-
-`Advanced index options`_
-    - `wazuh-version.shards`_
-    - `wazuh-version.replicas`_
-    - `wazuh.monitoring.shards`_
-    - `wazuh.monitoring.replicas`_
+.. contents::
+   :local:
+   :depth: 2
+   :backlinks: none
 
 Basic options
 -------------
@@ -441,3 +407,73 @@ Define the number of replicas to use for the ``wazuh-monitoring-*`` indices.
 +--------------------+----------------------------+
 | **Allowed values** | Any number starting from 0 |
 +--------------------+----------------------------+
+
+
+Example
+-------
+
+This is an example of the wazuh.yml configuration:
+
+.. code-block:: yaml
+    
+   #Basic options
+
+   hosts:
+       - env-1:
+           url: https://env-1.example
+           port: 55000
+           username: wazuh-wui
+           password: wazuh-wui
+           run_as: true
+       - env-2:
+           url: https://env-2.example
+           port: 55000
+           username: wazuh-wui
+           password: wazuh-wui
+           run_as: true
+
+   pattern: 'wazuh-alerts-*'
+   timeout: 20000
+   api.selector: true
+   ip.selector: true
+   ip.ignore: []
+   logs.level: info
+   hideManagerAlerts: true
+
+   #Monitoring
+
+   wazuh.monitoring.enabled: true
+   wazuh.monitoring.frequency: 900
+   wazuh.monitoring.pattern: wazuh-monitoring-*
+   wazuh.monitoring.creation: w
+
+   #Checks
+
+   checks.pattern : true
+   checks.template: true
+   checks.api     : true
+   checks.setup   : true
+   checks.metaFields: true
+
+   #Extensions
+
+   extensions.pci       : true
+   extensions.gdpr      : true
+   extensions.hipaa     : true
+   extensions.nist      : true
+   extensions.tsc       : true
+   extensions.audit     : true
+   extensions.oscap     : false
+   extensions.ciscat    : false
+   extensions.aws       : false
+   extensions.gcp       : false
+   extensions.virustotal: false
+   extensions.osquery   : false
+   extensions.docker    : false
+
+   #Advanced index options
+
+   wazuh-version.shards: 1
+   wazuh-version.replicas: 1
+   wazuh.monitoring.shards: 1
+   wazuh.monitoring.replicas: 0
