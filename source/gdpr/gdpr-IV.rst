@@ -63,7 +63,7 @@ Chapter IV, Article 28, Head 3 (c)
 
 Entities must ensure data protection during data processing through technical and organizational measures. While processing data, it is necessary to ensure its protection and integrity in order to avoid any alteration that may be harmful to the individual to whom the information belongs.
 
-By using `Syscheck <https://documentation.wazuh.com/|CURRENT_MAJOR|/user-manual/reference/ossec-conf/syscheck.html>`_ and through technical measures, Wazuh can ensure the protection measures established are met.
+By using `Syscheck <https://documentation.wazuh.com/|WAZUH_CURRENT_MAJOR|/user-manual/reference/ossec-conf/syscheck.html>`_ and through technical measures, Wazuh can ensure the protection measures established are met.
 
 Use cases
 ^^^^^^^^^

@@ -15,7 +15,7 @@ Download and install the Wazuh module from Puppet Forge:
 
   .. code-block:: console
 
-    # puppet module install wazuh-wazuh --version |WAZUH_LATEST_PUPPET|
+    # puppet module install wazuh-wazuh --version |WAZUH_CURRENT_PUPPET|
 
   .. code-block:: none
     :class: output
