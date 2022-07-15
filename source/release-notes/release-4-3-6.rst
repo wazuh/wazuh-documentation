@@ -91,7 +91,7 @@ Wazuh agent
 Reference                                                         Description
 ==============================================================    =============
 `#13941 <https://github.com/wazuh/wazuh/pull/13941>`_             The agent shutdown when syncing Syscollector data is fixed.
-`#14207 <https://github.com/wazuh/wazuh/pull/14207>`_             A bug in the agent installer that that incorrectly detected the Wazuh username is fixed.
+`#14207 <https://github.com/wazuh/wazuh/pull/14207>`_             A bug in the agent installer that incorrectly detected the Wazuh username is fixed.
 `#14100 <https://github.com/wazuh/wazuh/pull/14100>`_             The macOS vendor data retrieval in Syscollector is fixed.
 `#14106 <https://github.com/wazuh/wazuh/pull/14106>`_             A bug in the Syscollector data sync when the agent gets disconnected is fixed.
 `#13980 <https://github.com/wazuh/wazuh/pull/13980>`_             A crash in the Windows agent caused by the Syscollector SMBIOS parser for Windows agents is fixed.
