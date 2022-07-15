@@ -1,4 +1,4 @@
-.. Copyright (C) 2022 Wazuh, Inc.
+.. Copyright (C) 2015, Wazuh, Inc.
 
 .. meta::
   :description: There are several PCI DSS requirements to verify that systems are properly hardened. Learn more about policy monitoring here.

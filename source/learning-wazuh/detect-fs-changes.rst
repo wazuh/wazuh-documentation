@@ -1,4 +1,4 @@
-.. Copyright (C) 2022 Wazuh, Inc.
+.. Copyright (C) 2015, Wazuh, Inc.
 .. meta::
   :description: Check out how to configure syscheck on windows-agent to make changes to specific directories, monitor their behavior, and observe generated alerts. 
   

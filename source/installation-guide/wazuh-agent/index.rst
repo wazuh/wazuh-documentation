@@ -1,4 +1,4 @@
-.. Copyright (C) 2022 Wazuh, Inc.
+.. Copyright (C) 2015, Wazuh, Inc.
 
 .. meta::
   :description: Find out in this section more about the Wazuh agent, its capabilities, and the options for installing the agent on different operating systems.

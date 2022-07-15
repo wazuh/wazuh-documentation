@@ -1,4 +1,4 @@
-.. Copyright (C) 2022 Wazuh, Inc.
+.. Copyright (C) 2015, Wazuh, Inc.
 
 .. meta::
   :description: Find out more about the Wazuh Security Configuration Assessment capability. What is SCA, how it works and how to configure it, a use case and more.

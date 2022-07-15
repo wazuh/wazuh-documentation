@@ -1,4 +1,4 @@
-.. Copyright (C) 2015-2022 Wazuh, Inc.
+.. Copyright (C) 2015, Wazuh, Inc.
 
 #. Download the ``wazuh-certs-tool.sh`` script and the ``wazuh-config.yml`` configuration file. This is to create the certificates that will encrypt communications between the Wazuh central components.
 

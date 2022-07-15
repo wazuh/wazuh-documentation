@@ -1,4 +1,4 @@
-.. Copyright (C) 2022 Wazuh, Inc.
+.. Copyright (C) 2015, Wazuh, Inc.
 
 .. meta::
   :description: Learn about local configuration (ossec.conf) and how to configure the active response. Check out the options and a sample configuration in this section of the Wazuh documentation.

@@ -1,4 +1,4 @@
-.. Copyright (C) 2021 Wazuh, Inc.
+.. Copyright (C) 2015, Wazuh, Inc.
 
 .. meta::
   :description: MacOS unified logging system (ULS) events can be gathered and forwarded to the manager. Learn how to collect macOS ULS logs with Wazuh in this section.

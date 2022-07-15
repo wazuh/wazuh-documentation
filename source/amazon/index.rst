@@ -1,4 +1,4 @@
-.. Copyright (C) 2022 Wazuh, Inc.
+.. Copyright (C) 2015, Wazuh, Inc.
 
 .. meta::
   :description: Learn how Wazuh helps to increase the security of AWS infrastructure, monitoring AWS instances and AWS services, in this section of our documentation. 

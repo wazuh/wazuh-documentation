@@ -1,4 +1,4 @@
-.. Copyright (C) 2022 Wazuh, Inc.
+.. Copyright (C) 2015, Wazuh, Inc.
 
 .. meta::
   :description: The Wazuh GCP module allows you to collect and process logs from several Google service. Learn more about the supported services in this section.

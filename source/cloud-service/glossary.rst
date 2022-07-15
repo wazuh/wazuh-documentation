@@ -1,4 +1,4 @@
-.. Copyright (C) 2022 Wazuh, Inc.
+.. Copyright (C) 2015, Wazuh, Inc.
 
 .. meta::
   :description: Check cloud-related terms in this glossary to expand your knowledge and get the most out of the Wazuh Cloud service. Learn more about it in this section. 

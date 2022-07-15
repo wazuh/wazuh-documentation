@@ -1,4 +1,4 @@
-.. Copyright (C) 2015–2022 Wazuh, Inc.
+.. Copyright (C) 2015, Wazuh, Inc.
 
 .. meta::
   :description: Install and configure Wazuh, the open source security platform, in just a few minutes using the Wazuh installation assistant. 

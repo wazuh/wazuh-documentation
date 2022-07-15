@@ -1,4 +1,4 @@
-.. Copyright (C) 2021 Wazuh, Inc.
+.. Copyright (C) 2015, Wazuh, Inc.
 
 .. meta::
    :description: Learn how to use Security-Enhanced Linux (SELinux) with Wazuh to define access controls for the applications, processes, and files on a system.

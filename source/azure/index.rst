@@ -1,4 +1,4 @@
-.. Copyright (C) 2022 Wazuh, Inc.
+.. Copyright (C) 2015, Wazuh, Inc.
 
 .. meta::
   :description: Learn more about how to use Wazuh to monitor Microsoft Azure infrastructures in this section of the Wazuh documentation. 

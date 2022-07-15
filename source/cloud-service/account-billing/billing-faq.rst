@@ -1,4 +1,4 @@
-.. Copyright (C) 2020 Wazuh, Inc.
+.. Copyright (C) 2015, Wazuh, Inc.
 
 .. meta::
   :description: Get answers to the most frequently asked questions about billing in this FAQ. Explore the potential of Wazuh Cloud and the Wazuh Cloud Console.

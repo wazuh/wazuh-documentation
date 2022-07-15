@@ -1,4 +1,4 @@
-.. Copyright (C) 2022 Wazuh, Inc.
+.. Copyright (C) 2015, Wazuh, Inc.
 
 .. meta::
   :description: The CIS-CAT wodle has been developed in order to integrate CIS benchmark assessments into Wazuh agents. Learn more about it. 

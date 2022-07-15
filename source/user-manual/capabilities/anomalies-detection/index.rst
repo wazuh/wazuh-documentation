@@ -1,4 +1,4 @@
-.. Copyright (C) 2022 Wazuh, Inc.
+.. Copyright (C) 2015, Wazuh, Inc.
 .. meta::
   :description: Learn more about how you can detect anomalies and malware using Wazuh in this section of our documentation. 
   
