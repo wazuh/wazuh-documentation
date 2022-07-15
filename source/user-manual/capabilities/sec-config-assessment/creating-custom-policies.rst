@@ -312,7 +312,7 @@ Existence checks are created by setting rules without a content operator, the ge
 
 Examples of existence checks:
 
-- ``f:/etc/sshd_config`` checks the existence of file */etc/ssh_config*
+- ``f:/etc/sshd_config`` checks the existence of file */etc/sshd_config*
 - ``d:/etc`` checks the existence of directory */etc*
 - ``not p:sshd`` will test the presence of processes called *sshd* and fail if one is found.
 - ``r:HKEY_LOCAL_MACHINE\System\CurrentControlSet\Control\Lsa`` checks for the existence of that key.
