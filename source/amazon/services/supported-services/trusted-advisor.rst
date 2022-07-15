@@ -1,4 +1,4 @@
-.. Copyright (C) 2022 Wazuh, Inc.
+.. Copyright (C) 2015, Wazuh, Inc.
 
 .. meta::
   :description: AWS Trusted Advisor is a service that helps users reduce cost by optimizing their AWS environment. Learn how to configure and monitor it with Wazuh.

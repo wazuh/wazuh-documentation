@@ -1,4 +1,4 @@
-.. Copyright (C) 2022 Wazuh, Inc.
+.. Copyright (C) 2015, Wazuh, Inc.
 
 .. meta::
    :description: Wazuh is a comprehensive open source cybersecurity platform. Check out the user manual to find out how to configure and get the most out of the solution. 
@@ -8,7 +8,7 @@
 User manual
 ===========
 
-Welcome to the Wazuh user manual. Use it as your Wazuh reference library once you have a basic Wazuh installation in place. In the same way that the main components of Wazuh are a fork of the renowned OSSEC HIDS project, so this user manual has been derived from the `OSSEC documentation <http://ossec.github.io/docs/>`_. Kudos to the OSSEC team for their huge contribution to the IT security community.
+Welcome to the Wazuh user manual. Use it as your reference library once your basic Wazuh installation is ready. In this section, you will find content on topics such as Wazuh server administration, Wazuh agent enrollment, Wazuh capabilities, and many others that are listed below.
 
 .. topic:: Contents
 

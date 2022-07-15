@@ -1,4 +1,4 @@
-.. Copyright (C) 2022 Wazuh, Inc.
+.. Copyright (C) 2015, Wazuh, Inc.
 
 .. meta::
   :description: AWS Config is a service that records the configuration of AWS resources easing auditing tasks. Learn how to configure and monitor it with Wazuh.

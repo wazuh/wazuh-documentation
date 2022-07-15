@@ -1,4 +1,4 @@
-.. Copyright (C) 2020 Wazuh, Inc.
+.. Copyright (C) 2015, Wazuh, Inc.
 
 .. meta::
   :description: Get answers to the most frequently asked questions about the Wazuh Cloud in this technical FAQ and get the most out of the Wazuh Cloud service.  

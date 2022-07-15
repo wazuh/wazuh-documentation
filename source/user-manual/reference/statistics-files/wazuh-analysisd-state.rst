@@ -1,4 +1,4 @@
-.. Copyright (C) 2022 Wazuh, Inc.
+.. Copyright (C) 2015, Wazuh, Inc.
 
 .. meta::
   :description: The wazuh-analysisd.state file can be useful when benchmarking our Wazuh manager analysis engine in highly loaded environments. Learn more about it here.

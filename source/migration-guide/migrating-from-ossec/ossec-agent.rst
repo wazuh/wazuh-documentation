@@ -1,4 +1,4 @@
-.. Copyright (C) 2022 Wazuh, Inc.
+.. Copyright (C) 2015, Wazuh, Inc.
 
 .. meta::
    :description: Learn in this section how to migrate OSSEC agents to Wazuh agents on Linux systems without losing any configuration data. 

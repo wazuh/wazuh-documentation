@@ -1,4 +1,4 @@
-.. Copyright (C) 2020 Wazuh, Inc.
+.. Copyright (C) 2015, Wazuh, Inc.
 
 .. meta::
   :description: The Wazuh Cloud Command Line Interface lets you interact with Wazuh Cloud using commands in your command-line shell. Learn more about it in this section. 

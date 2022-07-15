@@ -1,4 +1,4 @@
-.. Copyright (C) 2022 Wazuh, Inc.
+.. Copyright (C) 2015, Wazuh, Inc.
 
 .. meta::
   :description: Check out the prerequisites to monitor AWS-based services with Wazuh. See how to configure an S3 Bucket and AWS credentials, and how to install dependencies.

@@ -1,4 +1,4 @@
-.. Copyright (C) 2022 Wazuh, Inc.
+.. Copyright (C) 2015, Wazuh, Inc.
 
 .. meta::
   :description: Learn how to deploy the Wazuh agent on AIX using deployment variables that facilitate the task of installing, registering, and configuring the agent. 

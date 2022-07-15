@@ -1,4 +1,4 @@
-.. Copyright (C) 2020 Wazuh, Inc.
+.. Copyright (C) 2015, Wazuh, Inc.
 
 .. meta::
   :description: Check how to update billing and operational contacts through the Wazuh Cloud Console. Learn more about it in this section of the documentation.
