@@ -1,4 +1,4 @@
-.. Copyright (C) 2022 Wazuh, Inc.
+.. Copyright (C) 2015, Wazuh, Inc.
 
 .. meta::
     :description: Learn more in this section about monitoring containers activity with Wazuh as well as the requirements, configuration, and helpful use cases. 

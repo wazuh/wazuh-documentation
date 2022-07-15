@@ -1,4 +1,4 @@
-.. Copyright (C) 2015–2022 Wazuh, Inc.
+.. Copyright (C) 2015, Wazuh, Inc.
 
 .. meta::
   :Description: Ansible is an open source platform designed for automating tasks. Learn more about the variable references in this section of the Wazuh documentation.
@@ -54,7 +54,7 @@ Wazuh dashboard
 |
 | **Variable**: ``wazuh_version``
 | **Description**: Wazuh APP compatible version to install.
-| **Default value**: ``|WAZUH_LATEST_ANSIBLE|``
+| **Default value**: ``|WAZUH_CURRENT_ANSIBLE|``
 |
 
 .. _wazuh_ansible_reference_filebeat:

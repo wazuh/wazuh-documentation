@@ -1,4 +1,4 @@
-.. Copyright (C) 2022 Wazuh, Inc.
+.. Copyright (C) 2015, Wazuh, Inc.
 
 .. meta::
   :description: Wazuh is a free, open source, and enterprise-ready security monitoring solution for threat detection, integrity monitoring, incident response and compliance.
@@ -18,10 +18,53 @@ Check the requirements below and choose an installation method to start installi
 - :doc:`Step-by-step installation <step-by-step>`: Install this component following detailed step-by-step instructions.
 
 
-.. thumbnail:: /images/installation/Wazuh-Dashboard-Installation-3.png
-    :alt: Wazuh dashboard installation
-    :align: center
-    :width: 100%
+.. raw:: html
+
+  <div class="link-boxes-group layout-3" data-step="3">
+    <div class="steps-line">
+      <div class="steps-number past-step">1</div>
+      <div class="steps-number past-step">2</div>
+      <div class="steps-number current-step">3</div>
+    </div>
+    <div class="link-boxes-item past-step">
+      <a class="link-boxes-link" href="../wazuh-indexer/index.html">
+        <p class="link-boxes-label">Install the Wazuh indexer</p>
+
+.. image:: ../../images/installation/Indexer-Circle.png
+     :align: center
+     :height: 61px
+
+.. raw:: html
+
+      </a>
+    </div>
+  
+    <div class="link-boxes-item past-step">
+      <a class="link-boxes-link" href="../wazuh-server/index.html">
+        <p class="link-boxes-label">Install the Wazuh server</p>
+
+.. image:: ../../images/installation/Server-Circle.png
+     :align: center
+     :height: 61px
+
+.. raw:: html
+
+      </a>
+    </div>
+  
+    <div class="link-boxes-item current-step">
+      <div class="link-boxes-link" href="#">
+        <p class="link-boxes-label">Install the Wazuh dashboard</p>
+
+.. image:: ../../images/installation/Dashboard-Circle.png
+     :align: center
+     :height: 61px
+     
+.. raw:: html
+
+      </div>
+    </div>
+  </div>
 
 
 Requirements

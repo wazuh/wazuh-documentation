@@ -1,4 +1,4 @@
-.. Copyright (C) 2015–2022 Wazuh, Inc.
+.. Copyright (C) 2015, Wazuh, Inc.
 
 .. meta::
    :description: Learn how to install the Ansible server in this section of the Wazuh documentation. Check out this step-by-step guide. 
@@ -292,7 +292,7 @@ On the Ansible server, the following commands are run:
 .. code-block:: console
 
    # cd /etc/ansible/roles/
-   # sudo git clone --branch |WAZUH_LATEST_MINOR_ANSIBLE| https://github.com/wazuh/wazuh-ansible.git
+   # sudo git clone --branch |WAZUH_CURRENT_MINOR_ANSIBLE| https://github.com/wazuh/wazuh-ansible.git
    # ls
 
 .. code-block:: none

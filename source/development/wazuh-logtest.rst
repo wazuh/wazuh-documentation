@@ -1,4 +1,4 @@
-.. Copyright (C) 2022 Wazuh, Inc.
+.. Copyright (C) 2015, Wazuh, Inc.
 
 .. meta::
   :description: The Wazuh-Logtest solution is distributed by different components of the Wazuh environment: core logtest, wazuh RESTful API, and wazuh-logtest tool. 

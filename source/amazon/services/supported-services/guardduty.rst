@@ -1,4 +1,4 @@
-.. Copyright (C) 2022 Wazuh, Inc.
+.. Copyright (C) 2015, Wazuh, Inc.
 
 .. meta::
   :description: The Wazuh module for AWS provides capabilities to monitor AWS based services. See more about how to configure GuardDuty and some practical use cases.
@@ -45,13 +45,13 @@ Amazon configuration
       :align: center
       :width: 70%
 
-#. Select *Amazon S3* as destination, then select the previously created S3 bucket and add a prefix where logs will be stored. AWS Firehose creates a file structure *YYYY/MM/DD/HH*, if a prefix is used the created file structure would be *firehose/YYYY/MM/DD/HH*. If a prefix is used it must be specified under the Wazuh Bucket configuration:
+#. Select *Amazon S3* as the destination, then select the previously created S3 bucket and add a prefix where logs will be stored. AWS Firehose creates a file structure *YYYY/MM/DD/HH*, if a prefix is used the created file structure would be *firehose/YYYY/MM/DD/HH*. If a prefix is used it must be specified under the Wazuh Bucket configuration:
 
     .. thumbnail:: ../../../images/aws/aws-create-firehose-8.png
       :align: center
       :width: 70%
 
-#. You can select which compression do your prefer. Wazuh supports any kind of compression but Snappy. After that, click on *Create new or choose*:
+#. You can select the compression you prefer. Wazuh supports any kind of compression but Snappy. After that, click on **Create new or choose**:
 
     .. thumbnail:: ../../../images/aws/aws-create-firehose-9.png
       :align: center
@@ -63,7 +63,7 @@ Amazon configuration
       :align: center
       :width: 70%
 
-#. The following page is just a summary about the Firehose stream created, go to the bottom of the page and click on the *Create delivery stream* button:
+#. The following page is just a summary of the Firehose stream created. Go to the bottom of the page and click on the **Create delivery stream** button.
 
     .. thumbnail:: ../../../images/aws/aws-create-firehose-11.png
       :align: center
@@ -81,7 +81,7 @@ Amazon configuration
       :align: center
       :width: 70%
 
-#. Select which service do you want to get logs from using the *Service name* slider, then, click on the *Add target* button and add the previously created Firehose delivery stream there. Also, create a new role to access the delivery stream:
+#. Select the services you want to get logs from using the **Service name** slider, then, click on the **Add target** button and add the previously created Firehose delivery stream there. Also, create a new role to access the delivery stream.
 
     .. thumbnail:: ../../../images/aws/aws-create-firehose-14.png
       :align: center
@@ -93,7 +93,7 @@ Amazon configuration
       :align: center
       :width: 70%
 
-#. Once the rule is created, data will start to be sent to the previously created S3 bucket. Remember to first enable the service you want to monitor, otherwise you won't get any data.
+#. Once the rule is created, data will start to be sent to the previously created S3 bucket. Remember to first enable the service you want to monitor, otherwise, you won't get any data.
 
 Policy configuration
 ^^^^^^^^^^^^^^^^^^^^
@@ -158,7 +158,7 @@ GuardDuty use cases
 -------------------
 
 - `Brute force attacks`_
-- `EC2 API Calls made from unsual network`_
+- `EC2 API Calls made from unusual network`_
 - `Compromised EC2 instance`_
 
 Amazon EC2 (Elastic Compute Cloud) provides scalable computing capacity in the cloud. When using this service, it is highly recommended to monitor it for intrusion attempts or other unauthorized actions performed against your cloud infrastructure.
@@ -168,16 +168,16 @@ Below are some use cases for Wazuh rules built for EC2.
 Brute force attacks
 ^^^^^^^^^^^^^^^^^^^
 
-If an instance has any open port which is receiving a brute force attack, the following alert will be shown on the Wazuh dashboard. It shows information about the attacked host, about the attacker and which port is being attacked:
+If an instance has an open port that is receiving a brute force attack, the following alert will be shown on the Wazuh dashboard. It shows information about the attacked host, the attacker, and which port is being attacked:
 
 .. thumbnail:: ../../../images/aws/aws-ec2-guardduty.png
   :align: center
   :width: 70%
 
-EC2 API Calls made from unsual network
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+EC2 API Calls made from unusual network
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-If an API call is made from an unsual network, the following alert will be shown on the Wazuh dashboard. It shows the location of the unusual network, the user who did the API calls and which API calls it did:
+If an API call is made from an unusual network, the following alert will be shown on the Wazuh dashboard. It shows the location of the unusual network, the user who did the API calls, and which API calls it did:
 
 .. thumbnail:: ../../../images/aws/aws-ec2-guardduty2.png
   :align: center
@@ -186,7 +186,7 @@ If an API call is made from an unsual network, the following alert will be shown
 Compromised EC2 instance
 ^^^^^^^^^^^^^^^^^^^^^^^^
 
-If there is any indicator of a compromised EC2 instance, an alert will be shown on the Wazuh dashboard explaining what's happening. Some example of alerts are shown below:
+If there is any indicator of a compromised EC2 instance, an alert will be shown on the Wazuh dashboard explaining what's happening. Some examples of alerts are shown below:
 
 .. thumbnail:: ../../../images/aws/aws-ec2-guardduty3.png
   :align: center

@@ -1,4 +1,4 @@
-.. Copyright (C) 2022 Wazuh, Inc.
+.. Copyright (C) 2015, Wazuh, Inc.
 
 .. meta::
     :description: Learn more about the local configuration of Wazuh. In this section of the documentation you can learn more about the configuration options of the Wazuh integration with AWS.

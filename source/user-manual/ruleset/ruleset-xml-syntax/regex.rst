@@ -1,4 +1,4 @@
-.. Copyright (C) 2022 Wazuh, Inc.
+.. Copyright (C) 2015, Wazuh, Inc.
 .. meta::
   :description: Learn more about regular expressions or regex. The Wazuh Ruleset is used to analyze incoming events and generate alerts when appropriate. 
   

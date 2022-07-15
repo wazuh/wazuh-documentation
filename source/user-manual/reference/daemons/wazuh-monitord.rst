@@ -1,4 +1,4 @@
-.. Copyright (C) 2022 Wazuh, Inc.
+.. Copyright (C) 2015, Wazuh, Inc.
 
 .. meta::
   :description: The wazuh-monitord program monitors agent connectivity. Learn more about it in this section of the documentation.

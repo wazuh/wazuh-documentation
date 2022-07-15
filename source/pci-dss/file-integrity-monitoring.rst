@@ -1,4 +1,4 @@
-.. Copyright (C) 2022 Wazuh, Inc.
+.. Copyright (C) 2015, Wazuh, Inc.
 
 .. meta::
   :description: Wazuh helps to implement PCI DSS by performing file integrity checking, among other capabilities. Check out some use cases in this section.

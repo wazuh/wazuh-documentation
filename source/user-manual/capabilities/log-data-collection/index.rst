@@ -1,4 +1,4 @@
-.. Copyright (C) 2022 Wazuh, Inc.
+.. Copyright (C) 2015, Wazuh, Inc.
 
 .. meta::
   :description: Know more about the Wazuh Log Data Collection capability in this section of our documentation: how it works, how to configure it, FAQs, and more. 

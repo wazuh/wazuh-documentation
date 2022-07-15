@@ -1,4 +1,4 @@
-.. Copyright (C) 2022 Wazuh, Inc.
+.. Copyright (C) 2015, Wazuh, Inc.
 
 .. meta::
   :description: Cisco Umbrella is a cloud-based Secure Internet Gateway platform that provides you with multiple levels of defense against internet-based threats. Learn how to configure and monitor it with Wazuh.
@@ -26,7 +26,7 @@ Wazuh configuration
 -------------------
 
 .. note::
-  It is required to append the type of logs inside ``path`` tag as in the next example. `dnslogs`, `proxylogs`, and `iplogs` are currently supported. Each one require to be defined in an independent ``bucket`` tag.
+  It is required to append the type of logs inside the ``path`` tag as in the next example. `dnslogs`, `proxylogs`, and `iplogs` are currently supported. Each one requires to be defined in an independent ``bucket`` tag.
 
 #. Open the Wazuh configuration file (``/var/ossec/etc/agent.conf``) and add the following block below. This example is for `dnslogs` and `proxylogs` and it is not required to add both.
 

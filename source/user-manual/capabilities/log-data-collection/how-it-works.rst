@@ -1,4 +1,4 @@
-.. Copyright (C) 2022 Wazuh, Inc.
+.. Copyright (C) 2015, Wazuh, Inc.
 
 .. meta::
   :description: Here you can see how the Log Data Collection capability of Wazuh works and learn how to collect log files and Windows event logs.

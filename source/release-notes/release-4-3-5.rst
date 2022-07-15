@@ -1,4 +1,4 @@
-.. Copyright (C) 2022 Wazuh, Inc.
+.. Copyright (C) 2015, Wazuh, Inc.
 
 
 .. meta::
@@ -18,11 +18,11 @@ This release includes new features or enhancements as the following:
 
 Wazuh manager
 ^^^^^^^^^^^^^
-- `#13915 <https://github.com/wazuh/wazuh/pull/13915>`_ The Vulnerability Detector's log when the agent's OS data is unavailable is improved.
+- `#13915 <https://github.com/wazuh/wazuh/pull/13915>`_ The Vulnerability Detector log is improved for the case when the agent OS data is unavailable.
 
 Wazuh agent
 ^^^^^^^^^^^
-- `#13749 <https://github.com/wazuh/wazuh/pull/13749>`_ Package data support in Syscollector for modern RPM agents is extended.
+- `#13749 <https://github.com/wazuh/wazuh/pull/13749>`_ Package data support is extended in `Syscollector` for modern RPM agents.
 - `#13898 <https://github.com/wazuh/wazuh/pull/13898>`_ Verbosity of the GitHub module logs is improved.
 
 
@@ -61,7 +61,7 @@ Wazuh Kibana plugin for Kibana 7.16.x and 7.17.x
 Wazuh Splunk app
 ^^^^^^^^^^^^^^^^
 - `#1292 <https://github.com/wazuh/wazuh-splunk/pull/1292>`_ The status Pending to the Agents sections is added.
-- `#1276 <https://github.com/wazuh/wazuh-splunk/pull/1276>`_ A disabled state to the Apply changes button on the Agents group editor when no changes on the group are made is added.
+- `#1276 <https://github.com/wazuh/wazuh-splunk/pull/1276>`_ A disabled state to the **Apply changes** button on the Agents group editor is added when no changes on the group are made.
 
 
 Packages
@@ -89,11 +89,11 @@ Wazuh manager
 ==============================================================    =============
 Reference                                                         Description
 ==============================================================    =============
-`#13662 <https://github.com/wazuh/wazuh/pull/13662>`_             The upgrade module's response message has been fixed not to include null values.
+`#13662 <https://github.com/wazuh/wazuh/pull/13662>`_             The upgrade module response message has been fixed not to include null values.
 `#13863 <https://github.com/wazuh/wazuh/pull/13863>`_             A string truncation warning log in wazuh-authd when enabling password authentication is fixed.
 `#13587 <https://github.com/wazuh/wazuh/pull/13587>`_             A memory leak in wazuh-analysisd when overwriting a rule multiple times is fixed.
-`#13907 <https://github.com/wazuh/wazuh/pull/13907>`_             The wazuh-agentd and client-auth are prevented from performing enrollment if the agent fails to validate the manager's certificate.
-`#13694 <https://github.com/wazuh/wazuh/pull/13694>`_             Manager's compilation when enabling GeoIP support is fixed.
+`#13907 <https://github.com/wazuh/wazuh/pull/13907>`_             The wazuh-agentd and client-auth are prevented from performing enrollment if the agent fails to validate the manager certificate.
+`#13694 <https://github.com/wazuh/wazuh/pull/13694>`_             The manager compilation when enabling GeoIP support is fixed.
 `#13883 <https://github.com/wazuh/wazuh/pull/13883>`_             A crash in wazuh-modulesd when getting stopped while downloading a Vulnerability Detector feed is fixed.
 ==============================================================    =============
 

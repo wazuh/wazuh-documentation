@@ -1,4 +1,4 @@
-.. Copyright (C) 2022 Wazuh, Inc.
+.. Copyright (C) 2015, Wazuh, Inc.
 
 .. _install-custom-wpk:
 
@@ -56,4 +56,4 @@ Output example:
     Upgrading...
 
     Upgraded agents:
-        Agent 001 upgraded: Wazuh v4.2.7 -> Wazuh v|WAZUH_LATEST|
+        Agent 001 upgraded: Wazuh v4.2.7 -> Wazuh v|WAZUH_CURRENT|

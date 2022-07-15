@@ -1,4 +1,4 @@
-.. Copyright (C) 2020 Wazuh, Inc.
+.. Copyright (C) 2015, Wazuh, Inc.
 
 .. meta::
   :description: Wazuh can be configured to send email alerts to one or more email addresses when certain rules are triggered. Learn more about it here. 

@@ -1,4 +1,4 @@
-.. Copyright (C) 2022 Wazuh, Inc.
+.. Copyright (C) 2015, Wazuh, Inc.
 
 .. meta::
   :description: Learn how the wazuh-remoted.state file provides information about the remote daemon as the queue size, discarded messages, and other useful information.

@@ -1,4 +1,4 @@
-.. Copyright (C) 2020 Wazuh, Inc.
+.. Copyright (C) 2015, Wazuh, Inc.
 
 .. meta::
   :description: The Wazuh Cloud environment contains all the Wazuh components running on Wazuh Cloud and is ready to use. Learn more about your environment here. 

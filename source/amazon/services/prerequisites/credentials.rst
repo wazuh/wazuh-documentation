@@ -1,4 +1,4 @@
-.. Copyright (C) 2022 Wazuh, Inc.
+.. Copyright (C) 2015, Wazuh, Inc.
 
 .. meta::
   :description: Learn about the different ways to configure your AWS credentials when monitoring AWS services with Wazuh.
@@ -23,7 +23,7 @@ Create an IAM User
 
 Wazuh requires a user with permissions to pull log data from the different services. The easiest way to accomplish this is by creating a new IAM user in the AWS account.
 
-1. Create new user:
+1. Create a new user:
 
     Navigate to Services > IAM > Users
 
@@ -100,13 +100,13 @@ IAM Roles can also be used to interact with the different AWS services. This sec
       :align: center
       :width: 70%
 
-2. Select Roles in the right menu and click on the *Create role* button:
+2. Select Roles in the right menu and click on the **Create role** button:
 
     .. thumbnail:: ../../../images/aws/aws-create-role-2.png
       :align: center
       :width: 70%
 
-3. Select S3 service and click on *Next: Permissions* button:
+3. Select S3 service and click on the **Next: Permissions** button:
 
     .. thumbnail:: ../../../images/aws/aws-create-role-4.png
       :align: center
@@ -118,7 +118,7 @@ IAM Roles can also be used to interact with the different AWS services. This sec
       :align: center
       :width: 70%
 
-5. Click on *Create role* button:
+5. Click on the **Create role** button:
 
     .. thumbnail:: ../../../images/aws/aws-create-role-6.png
       :align: center
@@ -136,13 +136,13 @@ IAM Roles can also be used to interact with the different AWS services. This sec
       :align: center
       :width: 70%
 
-8. Come back to the role's summary, go to *Trust relationships* tab and click on *Edit trust relationship* button:
+8. Come back to the role summary, go to the *Trust relationships* tab and click on the **Edit trust relationship** button:
 
     .. thumbnail:: ../../../images/aws/aws-create-role-9.png
       :align: center
       :width: 70%
 
-9. Add your user to the *Principal* tag and click on *Update Trust Policy* button:
+9. Add your user to the *Principal* tag and click on the **Update Trust Policy** button:
 
     .. thumbnail:: ../../../images/aws/aws-create-role-10.png
       :align: center

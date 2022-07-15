@@ -1,4 +1,4 @@
-.. Copyright (C) 2015–2022 Wazuh, Inc.
+.. Copyright (C) 2015, Wazuh, Inc.
 
 .. meta:: :description: Learn how to install the Wazuh server using the Wazuh installation assistant. The Wazuh server is in charge of analyzing the data received from the agents and triggering alerts when threats or anomalies are detected. This central component includes the Wazuh manager and Filebeat. 
 
@@ -16,7 +16,7 @@ Wazuh server cluster installation
 
    .. code-block:: console
    
-       # curl -sO https://packages.wazuh.com/|WAZUH_LATEST_MINOR|/wazuh-install.sh
+       # curl -sO https://packages.wazuh.com/|WAZUH_CURRENT_MINOR|/wazuh-install.sh
 
 #. Run the assistant with the option ``--wazuh-server`` followed by the node name to install the Wazuh server. The node name must be the same used in ``config.yml`` for the initial configuration, for example, ``wazuh-1``.
  

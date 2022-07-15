@@ -1,4 +1,4 @@
-.. Copyright (C) 2022 Wazuh, Inc.
+.. Copyright (C) 2015, Wazuh, Inc.
 
 .. meta::
   :description: The agent.conf file is the main configuration file on the Wazuh agent. Learn more about it and check out an example here.
@@ -61,10 +61,10 @@ Example:
 .. code-block:: xml
 
  <alert_new_files>yes</alert_new_files>
- 
+
 .. note::
 
-	This setting only applies in managers.
+	This setting is applied in the manager configuration, but it only takes effect on agents with versions lower than 3.12.
 
 .. _reference_ossec_syscheck_allow_remote_prefilter_cmd:
 

@@ -1,4 +1,4 @@
-.. Copyright (C) 2022 Wazuh, Inc.
+.. Copyright (C) 2015, Wazuh, Inc.
 
 .. meta::
   :description: Learn more about anomaly and malware detection with Wazuh. In this section, we show you a basic example and how to ignore false positives. 

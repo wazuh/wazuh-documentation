@@ -1,4 +1,4 @@
-.. Copyright (C) 2022 Wazuh, Inc.
+.. Copyright (C) 2015, Wazuh, Inc.
 
 .. meta::
   :description: Find useful technical documentation about how Wazuh works, suitable for developers and tech enthusiasts.
@@ -8,8 +8,7 @@
 Development
 ===========
 
-
-This section contains technical documentation for developers.
+This section contains documentation for developers. Here developers can learn about topics such as how to create a Wazuh cluster, the Standard OSSEC message format, and can find instructions to customize the installation of Wazuh, among others.
 
 .. topic:: Contents
 
@@ -23,3 +22,4 @@ This section contains technical documentation for developers.
         packaging/index
         wazuh-logtest
         selinux-wazuh-context
+        rbac-database-integrity

@@ -1,4 +1,4 @@
-.. Copyright (C) 2022 Wazuh, Inc.
+.. Copyright (C) 2015, Wazuh, Inc.
 
 .. meta::
   :description: Learn how to secure Wazuh indexer.
@@ -14,7 +14,7 @@ We  provide a script to simplify the process of changing passwords, start by dow
 
   .. code-block:: console
   
-    # curl -so wazuh-passwords-tool.sh https://packages.wazuh.com/|WAZUH_LATEST_MINOR|/wazuh-passwords-tool.sh
+    # curl -so wazuh-passwords-tool.sh https://packages.wazuh.com/|WAZUH_CURRENT_MINOR|/wazuh-passwords-tool.sh
 
 The script allows changing the password for either a single user or all the users present on the ``/usr/share/wazuh-indexer/plugins/opensearch-security/securityconfig/internal_users.yml`` file. It also offers the option to change the password of more than one user at once, getting them from a formatted file.
 
