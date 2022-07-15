@@ -18,21 +18,22 @@ This release includes new features or enhancements as the following:
 
 Wazuh manager
 ^^^^^^^^^^^^^
-- `#14085 <https://github.com/wazuh/wazuh/pull/14085>`_ Added support for Ubuntu 22 (Jammy) in Vulnerability Detector.
-- `#14117 <https://github.com/wazuh/wazuh/pull/14117>`_ Addded support for Red Hat 9 in Vulnerability Detector.
-- `#14111 <https://github.com/wazuh/wazuh/pull/14111>`_ Improved the shared configuration file handling performance in wazuh-remoted.
+h- `#14085 <https://github.com/wazuh/wazuh/pull/14085>`_ Support for Ubuntu 22 (Jammy) is added in Vulnerability Detector.
+- `#14117 <https://github.com/wazuh/wazuh/pull/14117>`_ Support for Red Hat 9 is added in Vulnerability Detector.
+- `#14111 <https://github.com/wazuh/wazuh/pull/14111>`_ The shared configuration file handling performance is improved in wazuh-remoted.
 
 
 Wazuh agent
 ^^^^^^^^^^^
-- `#13837 <https://github.com/wazuh/wazuh/pull/13837>`_ Updated macOS codename list in Syscollector. (#13837)
-- `#14093 <https://github.com/wazuh/wazuh/pull/14093>`_ Improved GitHub and Office365 integrations log messages. (#14093)
+- `#13837 <https://github.com/wazuh/wazuh/pull/13837>`_ The macOS codename list is updated in Syscollector.
+- `#14093 <https://github.com/wazuh/wazuh/pull/14093>`_ The GitHub and Office365 integrations log messages is improved.
 
 
 Ruleset
 ^^^^^^^
-- `#13893 <https://github.com/wazuh/wazuh/pull/13893>`_ Added Ubuntu Linux 22.04 SCA Policy. (#13893)
-- `#13905 <https://github.com/wazuh/wazuh/pull/13905>`_ Added Apple macOS 12.0 Monterey SCA Policy. (#13905)
+- `#13893 <https://github.com/wazuh/wazuh/pull/13893>`_ Ubuntu Linux 22.04 SCA Policy is added.
+- `#13905 <https://github.com/wazuh/wazuh/pull/13905>`_ Apple macOS 12.0 Monterey SCA Policy is added.
+
 
 Wazuh dashboard
 ^^^^^^^^^^^^^^^
@@ -62,7 +63,7 @@ Packages
 
 Other
 ^^^^^
-- `#14121 <https://github.com/wazuh/wazuh/pull/14121>`_ Disabled filebeat logging metrics. (#14121)
+- `#14121 <https://github.com/wazuh/wazuh/pull/14121>`_ The filebeat logging metrics is disabled.
 
 
 Resolved issues
@@ -77,9 +78,9 @@ Wazuh manager
 ==============================================================    =============
 Reference                                                         Description
 ==============================================================    =============
-`#14098 <https://github.com/wazuh/wazuh/pull/14098>`_             Fixed potential memory leaks in Vulnerability Detector when parsing OVAL with no criteria. (#14098)
-`#13957 <https://github.com/wazuh/wazuh/pull/13957>`_             Fixed a bug in Vulnerability Detector that skipped Windows 8.1 and Windows 8 agents. (#13957)
-`#14061 <https://github.com/wazuh/wazuh/pull/14061>`_             Fixed a bug in wazuh-db that stored duplicate Syscollector package data. (#14061)
+`#14098 <https://github.com/wazuh/wazuh/pull/14098>`_             The potential memory leaks in Vulnerability Detector when parsing OVAL with no criteria is fixed.
+`#13957 <https://github.com/wazuh/wazuh/pull/13957>`_             A bug in Vulnerability Detector that skipped Windows 8.1 and Windows 8 agents is fixed.
+`#14061 <https://github.com/wazuh/wazuh/pull/14061>`_             A bug in wazuh-db that stored duplicate Syscollector package data is fixed.
 ==============================================================    =============
 
 
@@ -89,11 +90,11 @@ Wazuh agent
 ==============================================================    =============
 Reference                                                         Description
 ==============================================================    =============
-`#13941 <https://github.com/wazuh/wazuh/pull/13941>`_             Fixed agent shutdown when syncing Syscollector data. (#13941)
-`#14207 <https://github.com/wazuh/wazuh/pull/14207>`_             Fixed a bug in the agent installer that misdetected the wazuh username. (#14207)
-`#14100 <https://github.com/wazuh/wazuh/pull/14100>`_             Fixed macOS vendor data retrieval in Syscollector. (#14100)
-`#14106 <https://github.com/wazuh/wazuh/pull/14106>`_             Fixed a bug in the Syscollector data sync when the agent gets disconnected. (#14106)
-`#13980 <https://github.com/wazuh/wazuh/pull/13980>`_             Fixed a crash in the Windows agent caused by the Syscollector SMBIOS parser for Windows agents. (#13980)
+`#13941 <https://github.com/wazuh/wazuh/pull/13941>`_             The agent shutdown when syncing Syscollector data is fixed.
+`#14207 <https://github.com/wazuh/wazuh/pull/14207>`_             A bug in the agent installer that misdetected the Wazuh username is fixed.
+`#14100 <https://github.com/wazuh/wazuh/pull/14100>`_             The macOS vendor data retrieval in Syscollector is fixed.
+`#14106 <https://github.com/wazuh/wazuh/pull/14106>`_             A bug in the Syscollector data sync when the agent gets disconnected is fixed.
+`#13980 <https://github.com/wazuh/wazuh/pull/13980>`_             A crash in the Windows agent caused by the Syscollector SMBIOS parser for Windows agents is fixed.
 ==============================================================    =============
 
 
@@ -103,7 +104,7 @@ RESTful API
 ==============================================================    =============
 Reference                                                         Description
 ==============================================================    =============
-`#14152 <https://github.com/wazuh/wazuh/pull/14152>`_             Return an exception when the user asks for agent inventory information where there is no database for it, such as never_connected agents. (#14152)
+`#14152 <https://github.com/wazuh/wazuh/pull/14152>`_             The return of an exception when the user asks for agent inventory information where there is no database for it is fixed, such as never_connected agents.
 ==============================================================    =============
 
 
