@@ -49,7 +49,7 @@ Wazuh Kibana plugin for Kibana 7.10.2
 - `#4301 <https://github.com/wazuh/wazuh-kibana-app/pull/4301>`_ The links to the web documentation are changed and now point to the plugin short version instead of current.
 - `#4301 <https://github.com/wazuh/wazuh-kibana-app/pull/4301>`_ Some prompts that didn't match with the current style are changed.
 - `#4301 <https://github.com/wazuh/wazuh-kibana-app/pull/4301>`_ Some link titles to match their documentation section title are changed.
-- `#4307 <https://github.com/wazuh/wazuh-kibana-app/pull/4307>`_ Now errors on the action buttons of Rules/Decoders/CDB Lists' tables are displayed.
+- `#4307 <https://github.com/wazuh/wazuh-kibana-app/pull/4307>`_ Now, errors on the action buttons of Rules/Decoders/CDB Lists' tables are displayed.
 
 
 Wazuh Kibana plugin for Kibana 7.16.x and 7.17.x
@@ -58,18 +58,13 @@ Wazuh Kibana plugin for Kibana 7.16.x and 7.17.x
 - `#4301 <https://github.com/wazuh/wazuh-kibana-app/pull/4301>`_ The links to the web documentation are changed and now point to the plugin short version instead of current.
 - `#4301 <https://github.com/wazuh/wazuh-kibana-app/pull/4301>`_ Some prompts that didn't match with the current style are changed.
 - `#4301 <https://github.com/wazuh/wazuh-kibana-app/pull/4301>`_ Some link titles to match their documentation section title are changed.
-- `#4307 <https://github.com/wazuh/wazuh-kibana-app/pull/4307>`_ Now errors on the action buttons of Rules/Decoders/CDB Lists' tables are displayed.
+- `#4307 <https://github.com/wazuh/wazuh-kibana-app/pull/4307>`_ Now, errors on the action buttons of Rules/Decoders/CDB Lists' tables are displayed.
 
 
 Wazuh Splunk app
 ^^^^^^^^^^^^^^^^
 - `#1351 <https://github.com/wazuh/wazuh-splunk/pull/1351>`_ The documentation links are updated to match their respective title on the Wazuh documentation page.
-- `#1354 <https://github.com/wazuh/wazuh-splunk/pull/1354>`_ the use of all tags to filter Wazuh Server logs is re-allowed.
-
-Packages
-^^^^^^^^
-
-- `#1635 <https://github.com/wazuh/wazuh-packages/pull/1635>`_ xxx
+- `#1354 <https://github.com/wazuh/wazuh-splunk/pull/1354>`_ The use of all tags to filter Wazuh Server logs is re-allowed.
 
 
 Other
@@ -115,7 +110,7 @@ RESTful API
 ==============================================================    =============
 Reference                                                         Description
 ==============================================================    =============
-`#14152 <https://github.com/wazuh/wazuh/pull/14152>`_             The return of an exception when the user asks for agent inventory information where there is no database for it is fixed, such as never_connected agents.
+`#14152 <https://github.com/wazuh/wazuh/pull/14152>`_             The return of an exception when the user asks for agent inventory information where there is no database for it is fixed, such as ``never_connected`` agents.
 ==============================================================    =============
 
 
@@ -157,15 +152,6 @@ Reference                                                         Description
 ==============================================================    =============
 `#1351 <https://github.com/wazuh/wazuh-splunk/pull/1351>`_        Some links to web documentation that didn't work are fixed.
 `#1296 <https://github.com/wazuh/wazuh-splunk/pull/1296>`_        Some links to web documentation that didn't work are fixed.
-==============================================================    =============
-
-Packages
-^^^^^^^^
-
-==============================================================    =============
-Reference                                                         Description
-==============================================================    =============
-`#1673 <https://github.com/wazuh/wazuh-packages/pull/1673>`_      xxx
 ==============================================================    =============
 
 
