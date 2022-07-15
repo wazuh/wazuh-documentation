@@ -18,7 +18,7 @@ This release includes new features or enhancements as the following:
 
 Wazuh manager
 ^^^^^^^^^^^^^
-h- `#14085 <https://github.com/wazuh/wazuh/pull/14085>`_ Support for Ubuntu 22 (Jammy) is added in Vulnerability Detector.
+- `#14085 <https://github.com/wazuh/wazuh/pull/14085>`_ Support for Ubuntu 22 (Jammy) is added in Vulnerability Detector.
 - `#14117 <https://github.com/wazuh/wazuh/pull/14117>`_ Support for Red Hat 9 is added in Vulnerability Detector.
 - `#14111 <https://github.com/wazuh/wazuh/pull/14111>`_ The shared configuration file handling performance is improved in wazuh-remoted.
 
@@ -26,7 +26,7 @@ h- `#14085 <https://github.com/wazuh/wazuh/pull/14085>`_ Support for Ubuntu 22 (
 Wazuh agent
 ^^^^^^^^^^^
 - `#13837 <https://github.com/wazuh/wazuh/pull/13837>`_ The macOS codename list is updated in Syscollector.
-- `#14093 <https://github.com/wazuh/wazuh/pull/14093>`_ The GitHub and Office365 integrations log messages is improved.
+- `#14093 <https://github.com/wazuh/wazuh/pull/14093>`_ The GitHub and Office365 integrations log messages are improved.
 
 
 Ruleset
@@ -63,7 +63,7 @@ Packages
 
 Other
 ^^^^^
-- `#14121 <https://github.com/wazuh/wazuh/pull/14121>`_ The filebeat logging metrics is disabled.
+- `#14121 <https://github.com/wazuh/wazuh/pull/14121>`_ The filebeat logging metrics are disabled.
 
 
 Resolved issues
@@ -91,7 +91,7 @@ Wazuh agent
 Reference                                                         Description
 ==============================================================    =============
 `#13941 <https://github.com/wazuh/wazuh/pull/13941>`_             The agent shutdown when syncing Syscollector data is fixed.
-`#14207 <https://github.com/wazuh/wazuh/pull/14207>`_             A bug in the agent installer that misdetected the Wazuh username is fixed.
+`#14207 <https://github.com/wazuh/wazuh/pull/14207>`_             A bug in the agent installer that that incorrectly detected the Wazuh username is fixed.
 `#14100 <https://github.com/wazuh/wazuh/pull/14100>`_             The macOS vendor data retrieval in Syscollector is fixed.
 `#14106 <https://github.com/wazuh/wazuh/pull/14106>`_             A bug in the Syscollector data sync when the agent gets disconnected is fixed.
 `#13980 <https://github.com/wazuh/wazuh/pull/13980>`_             A crash in the Windows agent caused by the Syscollector SMBIOS parser for Windows agents is fixed.
