@@ -18,47 +18,51 @@ This release includes new features or enhancements as the following:
 
 Wazuh manager
 ^^^^^^^^^^^^^
-- `#13915 <https://github.com/wazuh/wazuh/pull/13915>`_ The Vulnerability Detector log is improved for the case when the agent OS data is unavailable.
+- `#14085 <https://github.com/wazuh/wazuh/pull/14085>`_ Added support for Ubuntu 22 (Jammy) in Vulnerability Detector.
+- `#14117 <https://github.com/wazuh/wazuh/pull/14117>`_ Addded support for Red Hat 9 in Vulnerability Detector.
+- `#14111 <https://github.com/wazuh/wazuh/pull/14111>`_ Improved the shared configuration file handling performance in wazuh-remoted.
+
 
 Wazuh agent
 ^^^^^^^^^^^
-- `#13749 <https://github.com/wazuh/wazuh/pull/13749>`_ Package data support is extended in `Syscollector` for modern RPM agents.
+- `#13837 <https://github.com/wazuh/wazuh/pull/13837>`_ Updated macOS codename list in Syscollector. (#13837)
+- `#14093 <https://github.com/wazuh/wazuh/pull/14093>`_ Improved GitHub and Office365 integrations log messages. (#14093)
 
 
 Ruleset
 ^^^^^^^
-- `#13567 <https://github.com/wazuh/wazuh/pull/13567>`_ Deprecated MITRE tags in rules are removed.
-
+- `#13893 <https://github.com/wazuh/wazuh/pull/13893>`_ Added Ubuntu Linux 22.04 SCA Policy. (#13893)
+- `#13905 <https://github.com/wazuh/wazuh/pull/13905>`_ Added Apple macOS 12.0 Monterey SCA Policy. (#13905)
 
 Wazuh dashboard
 ^^^^^^^^^^^^^^^
-- `#4244 <https://github.com/wazuh/wazuh-kibana-app/pull/4244>`_ When a user goes to test a new rule in **Tools** / **Ruleset Test**, there were API messages that were not displayed. Now, this issue is fixed and the messages are displayed on the screen.
+- `#4244 <https://github.com/wazuh/wazuh-kibana-app/pull/4244>`_ xxx
 
 
 Wazuh Kibana plugin for Kibana 7.10.2
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-- `#4244 <https://github.com/wazuh/wazuh-kibana-app/pull/4244>`_ When a user goes to test a new rule in **Tools** / **Ruleset Test**, there were API messages that were not displayed. Now, this issue is fixed and the messages are displayed on the screen.
+- `#4244 <https://github.com/wazuh/wazuh-kibana-app/pull/4244>`_ xxx
 
 
 Wazuh Kibana plugin for Kibana 7.16.x and 7.17.x
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-- `#4244 <https://github.com/wazuh/wazuh-kibana-app/pull/4244>`_ When a user goes to test a new rule in **Tools** / **Ruleset Test**, there were API messages that were not displayed. Now, this issue is fixed and the messages are displayed on the screen.
+- `#4244 <https://github.com/wazuh/wazuh-kibana-app/pull/4244>`_ xxx
 
 
 Wazuh Splunk app
 ^^^^^^^^^^^^^^^^
-- `#1292 <https://github.com/wazuh/wazuh-splunk/pull/1292>`_ The status Pending to the Agents sections is added.
+- `#1292 <https://github.com/wazuh/wazuh-splunk/pull/1292>`_ xxx
 
 
 Packages
 ^^^^^^^^
 
-- `#1635 <https://github.com/wazuh/wazuh-packages/pull/1635>`_ Removed dependencies from the wazuh-indexer package.
+- `#1635 <https://github.com/wazuh/wazuh-packages/pull/1635>`_ xxx
 
 
 Other
 ^^^^^
-- `#13811 <https://github.com/wazuh/wazuh/pull/13811>`_ The ``test_agent_PUT_endpoints.tavern.yaml`` API integration test failure in numbered branches is fixed.
+- `#14121 <https://github.com/wazuh/wazuh/pull/14121>`_ Disabled filebeat logging metrics. (#14121)
 
 
 Resolved issues
@@ -73,7 +77,9 @@ Wazuh manager
 ==============================================================    =============
 Reference                                                         Description
 ==============================================================    =============
-`#13662 <https://github.com/wazuh/wazuh/pull/13662>`_             The upgrade module response message has been fixed not to include null values.
+`#14098 <https://github.com/wazuh/wazuh/pull/14098>`_             Fixed potential memory leaks in Vulnerability Detector when parsing OVAL with no criteria. (#14098)
+`#13957 <https://github.com/wazuh/wazuh/pull/13957>`_             Fixed a bug in Vulnerability Detector that skipped Windows 8.1 and Windows 8 agents. (#13957)
+`#14061 <https://github.com/wazuh/wazuh/pull/14061>`_             Fixed a bug in wazuh-db that stored duplicate Syscollector package data. (#14061)
 ==============================================================    =============
 
 
@@ -83,7 +89,11 @@ Wazuh agent
 ==============================================================    =============
 Reference                                                         Description
 ==============================================================    =============
-`#13606 <https://github.com/wazuh/wazuh/pull/13606>`_             Agent auto-restart on shared configuration changes when running on containerized environments is fixed.
+`#13941 <https://github.com/wazuh/wazuh/pull/13941>`_             Fixed agent shutdown when syncing Syscollector data. (#13941)
+`#14207 <https://github.com/wazuh/wazuh/pull/14207>`_             Fixed a bug in the agent installer that misdetected the wazuh username. (#14207)
+`#14100 <https://github.com/wazuh/wazuh/pull/14100>`_             Fixed macOS vendor data retrieval in Syscollector. (#14100)
+`#14106 <https://github.com/wazuh/wazuh/pull/14106>`_             Fixed a bug in the Syscollector data sync when the agent gets disconnected. (#14106)
+`#13980 <https://github.com/wazuh/wazuh/pull/13980>`_             Fixed a crash in the Windows agent caused by the Syscollector SMBIOS parser for Windows agents. (#13980)
 ==============================================================    =============
 
 
@@ -93,7 +103,7 @@ RESTful API
 ==============================================================    =============
 Reference                                                         Description
 ==============================================================    =============
-`#13867 <https://github.com/wazuh/wazuh/pull/13867>`_             The ``tag`` parameter of ``GET /manager/logs`` and ``GET /cluster/{node_id}/logs`` endpoints is updated to accept any string.
+`#14152 <https://github.com/wazuh/wazuh/pull/14152>`_             Return an exception when the user asks for agent inventory information where there is no database for it, such as never_connected agents. (#14152)
 ==============================================================    =============
 
 
@@ -103,7 +113,7 @@ Ruleset
 ==============================================================    =============
 Reference                                                         Description
 ==============================================================    =============
-`#13597 <https://github.com/wazuh/wazuh/pull/13597>`_             Fixed Eventchannel testing and improved reporting capabilities of the runtest tool.
+`#13597 <https://github.com/wazuh/wazuh/pull/13597>`_             xxx
 ==============================================================    =============
 
 
@@ -113,7 +123,7 @@ Wazuh dashboard
 ==============================================================    =============
 Reference                                                         Description
 ==============================================================    =============
-`#4233 <https://github.com/wazuh/wazuh-kibana-app/pull/4233>`_    Type error when changing screen size in agents section is fixed.
+`#4233 <https://github.com/wazuh/wazuh-kibana-app/pull/4233>`_    xxx
 ==============================================================    =============
 
 
@@ -123,7 +133,7 @@ Wazuh Kibana plugin for Kibana 7.10.2
 ==============================================================    =============
 Reference                                                         Description
 ==============================================================    =============
-`#4233 <https://github.com/wazuh/wazuh-kibana-app/pull/4233>`_    Type error when changing screen size in agents section is fixed.
+`#4233 <https://github.com/wazuh/wazuh-kibana-app/pull/4233>`_    xxx
 ==============================================================    =============
 
 
@@ -133,7 +143,7 @@ Wazuh Kibana plugin for Kibana 7.16.x and 7.17.x
 ==============================================================    =============
 Reference                                                         Description
 ==============================================================    =============
-`#4233 <https://github.com/wazuh/wazuh-kibana-app/pull/4233>`_    Type error when changing screen size in agents section is fixed.
+`#4233 <https://github.com/wazuh/wazuh-kibana-app/pull/4233>`_    xxx
 ==============================================================    =============
 
 
@@ -143,7 +153,7 @@ Wazuh Splunk app
 ==============================================================    =============
 Reference                                                         Description
 ==============================================================    =============
-`#1290 <https://github.com/wazuh/wazuh-splunk/pull/1290>`_        Outdated documentation links have been updated.
+`#1290 <https://github.com/wazuh/wazuh-splunk/pull/1290>`_        xxx
 ==============================================================    =============
 
 Packages
@@ -152,7 +162,7 @@ Packages
 ==============================================================    =============
 Reference                                                         Description
 ==============================================================    =============
-`#1673 <https://github.com/wazuh/wazuh-packages/pull/1673>`_      The error with the installation of the file init.d to enable Wazuh service in RHEL 9 systems is fixed.
+`#1673 <https://github.com/wazuh/wazuh-packages/pull/1673>`_      xxx
 ==============================================================    =============
 
 
