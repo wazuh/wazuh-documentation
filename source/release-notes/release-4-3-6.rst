@@ -37,23 +37,34 @@ Ruleset
 
 Wazuh dashboard
 ^^^^^^^^^^^^^^^
-- `#4244 <https://github.com/wazuh/wazuh-kibana-app/pull/4244>`_ xxx
+- `#4301 <https://github.com/wazuh/wazuh-kibana-app/pull/4301>`_ A new documentation link to the Docker Listener module is added.
+- `#4301 <https://github.com/wazuh/wazuh-kibana-app/pull/4301>`_ The links to the web documentation are changed and now point to the plugin short version instead of current.
+- `#4301 <https://github.com/wazuh/wazuh-kibana-app/pull/4301>`_ Some prompts that didn't match with the current style are changed.
+- `#4301 <https://github.com/wazuh/wazuh-kibana-app/pull/4301>`_ Some link titles to match their documentation section title are changed.
 
 
 Wazuh Kibana plugin for Kibana 7.10.2
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-- `#4244 <https://github.com/wazuh/wazuh-kibana-app/pull/4244>`_ xxx
+- `#4301 <https://github.com/wazuh/wazuh-kibana-app/pull/4301>`_ A new documentation link to the Docker Listener module is added.
+- `#4301 <https://github.com/wazuh/wazuh-kibana-app/pull/4301>`_ The links to the web documentation are changed and now point to the plugin short version instead of current.
+- `#4301 <https://github.com/wazuh/wazuh-kibana-app/pull/4301>`_ Some prompts that didn't match with the current style are changed.
+- `#4301 <https://github.com/wazuh/wazuh-kibana-app/pull/4301>`_ Some link titles to match their documentation section title are changed.
+- `#4307 <https://github.com/wazuh/wazuh-kibana-app/pull/4307>`_ Now errors on the action buttons of Rules/Decoders/CDB Lists' tables are displayed.
 
 
 Wazuh Kibana plugin for Kibana 7.16.x and 7.17.x
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-- `#4244 <https://github.com/wazuh/wazuh-kibana-app/pull/4244>`_ xxx
+- `#4301 <https://github.com/wazuh/wazuh-kibana-app/pull/4301>`_ A new documentation link to the Docker Listener module is added.
+- `#4301 <https://github.com/wazuh/wazuh-kibana-app/pull/4301>`_ The links to the web documentation are changed and now point to the plugin short version instead of current.
+- `#4301 <https://github.com/wazuh/wazuh-kibana-app/pull/4301>`_ Some prompts that didn't match with the current style are changed.
+- `#4301 <https://github.com/wazuh/wazuh-kibana-app/pull/4301>`_ Some link titles to match their documentation section title are changed.
+- `#4307 <https://github.com/wazuh/wazuh-kibana-app/pull/4307>`_ Now errors on the action buttons of Rules/Decoders/CDB Lists' tables are displayed.
 
 
 Wazuh Splunk app
 ^^^^^^^^^^^^^^^^
-- `#1292 <https://github.com/wazuh/wazuh-splunk/pull/1292>`_ xxx
-
+- `#1351 <https://github.com/wazuh/wazuh-splunk/pull/1351>`_ The documentation links are updated to match their respective title on the Wazuh documentation page.
+- `#1354 <https://github.com/wazuh/wazuh-splunk/pull/1354>`_ the use of all tags to filter Wazuh Server logs is re-allowed.
 
 Packages
 ^^^^^^^^
@@ -108,23 +119,13 @@ Reference                                                         Description
 ==============================================================    =============
 
 
-Ruleset
-^^^^^^^
-
-==============================================================    =============
-Reference                                                         Description
-==============================================================    =============
-`#13597 <https://github.com/wazuh/wazuh/pull/13597>`_             xxx
-==============================================================    =============
-
-
 Wazuh dashboard
 ^^^^^^^^^^^^^^^
 
 ==============================================================    =============
 Reference                                                         Description
 ==============================================================    =============
-`#4233 <https://github.com/wazuh/wazuh-kibana-app/pull/4233>`_    xxx
+`#4301 <https://github.com/wazuh/wazuh-kibana-app/pull/4301>`_    Some links to web documentation that didn't work are fixed.
 ==============================================================    =============
 
 
@@ -134,7 +135,7 @@ Wazuh Kibana plugin for Kibana 7.10.2
 ==============================================================    =============
 Reference                                                         Description
 ==============================================================    =============
-`#4233 <https://github.com/wazuh/wazuh-kibana-app/pull/4233>`_    xxx
+`#4301 <https://github.com/wazuh/wazuh-kibana-app/pull/4301>`_    Some links to web documentation that didn't work are fixed.
 ==============================================================    =============
 
 
@@ -144,7 +145,7 @@ Wazuh Kibana plugin for Kibana 7.16.x and 7.17.x
 ==============================================================    =============
 Reference                                                         Description
 ==============================================================    =============
-`#4233 <https://github.com/wazuh/wazuh-kibana-app/pull/4233>`_    xxx
+`#4301 <https://github.com/wazuh/wazuh-kibana-app/pull/4301>`_    Some links to web documentation that didn't work are fixed.
 ==============================================================    =============
 
 
@@ -154,7 +155,8 @@ Wazuh Splunk app
 ==============================================================    =============
 Reference                                                         Description
 ==============================================================    =============
-`#1290 <https://github.com/wazuh/wazuh-splunk/pull/1290>`_        xxx
+`#1351 <https://github.com/wazuh/wazuh-splunk/pull/1351>`_        Some links to web documentation that didn't work are fixed.
+`#1296 <https://github.com/wazuh/wazuh-splunk/pull/1296>`_        Some links to web documentation that didn't work are fixed.
 ==============================================================    =============
 
 Packages
