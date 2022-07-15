@@ -1,4 +1,4 @@
-.. Copyright (C) 2022 Wazuh, Inc.
+.. Copyright (C) 2015, Wazuh, Inc.
 
 .. meta::
   :description: Check out our User manual to see the available tools and their supported installations for configuring and using each of the Wazuh components. 

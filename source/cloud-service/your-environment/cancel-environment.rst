@@ -1,4 +1,4 @@
-.. Copyright (C) 2020 Wazuh, Inc.
+.. Copyright (C) 2015, Wazuh, Inc.
 
 .. meta::
   :description: Check out the process to cancel an environment in Wazuh Cloud. Learn more about it in this section of the documentation.

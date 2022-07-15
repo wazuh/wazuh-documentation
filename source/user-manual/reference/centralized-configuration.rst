@@ -1,4 +1,4 @@
-.. Copyright (C) 2022 Wazuh, Inc.
+.. Copyright (C) 2015, Wazuh, Inc.
 
 .. meta::
   :description: Learn how to remotely configure agents using agent.conf. In this section of the Wazuh documentation, you will find which capabilities can be configured remotely.

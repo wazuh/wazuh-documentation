@@ -1,4 +1,4 @@
-.. Copyright (C) 2018 Wazuh, Inc.
+.. Copyright (C) 2015, Wazuh, Inc.
 
 .. _reference_ossec_fluent_forward:
 

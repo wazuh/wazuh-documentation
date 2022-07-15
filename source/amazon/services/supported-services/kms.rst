@@ -1,4 +1,4 @@
-.. Copyright (C) 2022 Wazuh, Inc.
+.. Copyright (C) 2015, Wazuh, Inc.
 
 .. meta::
   :description: AWS KMS is a key management service that allows creating and controlling the keys used to encrypt and sign data. Learn how to configure and monitor it with Wazuh.

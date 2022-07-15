@@ -1,4 +1,4 @@
-.. Copyright (C) 2022 Wazuh, Inc.
+.. Copyright (C) 2015, Wazuh, Inc.
 
 .. meta::
   :description: Learn more about the agent upgrade module of Wazuh, responsible for carrying out the entire agent upgrade process remotely. 

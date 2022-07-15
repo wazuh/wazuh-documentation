@@ -1,5 +1,5 @@
 
-.. Copyright (C) 2021 Wazuh, Inc.
+.. Copyright (C) 2015, Wazuh, Inc.
 
 .. meta::
   :description: AWS Server Access Logging is a service that provides detailed records for the requests made to a bucket. Learn how to configure and monitor it with Wazuh.

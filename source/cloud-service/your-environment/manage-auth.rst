@@ -1,4 +1,4 @@
-.. Copyright (C) 2020 Wazuh, Inc.
+.. Copyright (C) 2015, Wazuh, Inc.
 
 .. meta::
   :description: Learn how to manage access to your Wazuh WUI: authentication and authorization, how to create and set a Wazuh admin user, and more. 

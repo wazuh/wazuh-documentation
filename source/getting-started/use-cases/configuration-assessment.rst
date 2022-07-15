@@ -1,4 +1,4 @@
-.. Copyright (C) 2015–2022 Wazuh, Inc.
+.. Copyright (C) 2015, Wazuh, Inc.
 
 .. meta::
   :description: Automated Security Configuration Assessment is an essential capability to improve the enterprise security posture and to reduce its attack surface. 

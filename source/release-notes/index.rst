@@ -1,4 +1,4 @@
-.. Copyright (C) 2022 Wazuh, Inc.
+.. Copyright (C) 2015, Wazuh, Inc.
 .. meta::
   :description: Check out all the Wazuh release notes. Every update of the solution is cumulative and includes all enhancements and fixes from previous releases.
   

@@ -1,4 +1,4 @@
-.. Copyright (C) 2022 Wazuh, Inc.
+.. Copyright (C) 2015, Wazuh, Inc.
 
 .. meta::
     :description: The operation of RBAC is based on the relationship between four components: users, roles, rules, and policies. Learn more here.

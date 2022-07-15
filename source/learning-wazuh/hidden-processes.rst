@@ -1,4 +1,4 @@
-.. Copyright (C) 2022 Wazuh, Inc.
+.. Copyright (C) 2015, Wazuh, Inc.
 
 .. meta::
     :description: Check out how the Wazuh rootkit detection works and learn how to expose hiding processes with Wazuh. 

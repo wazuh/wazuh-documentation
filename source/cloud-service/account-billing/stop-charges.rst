@@ -1,4 +1,4 @@
-.. Copyright (C) 2020 Wazuh, Inc.
+.. Copyright (C) 2015, Wazuh, Inc.
 
 .. meta::
   :description: You can always cancel a Wazuh Cloud environment you no longer need. Learn more about how to stop charges for an environment here. 

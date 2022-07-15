@@ -1,4 +1,4 @@
-.. Copyright (C) 2022 Wazuh, Inc.
+.. Copyright (C) 2015, Wazuh, Inc.
 
 .. meta::
   :description: This section contains instructions to customize the installation of Wazuh by compiling the source code before executing the installation script. 
