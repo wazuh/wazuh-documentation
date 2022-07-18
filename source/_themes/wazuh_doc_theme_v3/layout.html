@@ -10,10 +10,15 @@
 {% set special_pages = [
   'index', 
   'not_found', 
-  'search',
-  'cloud-service/apis/reference',
-  'user-manual/api/reference'
+  'search'
 ] %}
+
+{%- if version >= '4.0' -%}
+  {% set special_pages = special_pages + [
+    'cloud-service/apis/reference',
+    'user-manual/api/reference'
+  ] %}
+{%- endif -%}
 
 {#- Symbol/char vars -#}
 {%- set dash_separator = " - " -%}
@@ -165,6 +170,8 @@
     {% if theme_include_mode|tobool %}
     <meta name="color-scheme" content="dark light">
     {% endif %}
+    
+    {{- metatags }}
     
     {%- block social_cards -%}
     <meta property="og:image" content="{{ theme_wazuh_doc_url + '/current/_static/images/wazuh-docs-card.png' }}">
