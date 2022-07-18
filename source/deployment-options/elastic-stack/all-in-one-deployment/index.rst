@@ -58,14 +58,14 @@ Elasticsearch installation and configuration
 
          .. code-block:: console
 
-           # yum install elasticsearch-7.17.4
+           # yum install elasticsearch-7.17.5
 
 
       .. group-tab:: APT
 
          .. code-block:: console
 
-           # apt-get install elasticsearch=7.17.4
+           # apt-get install elasticsearch=7.17.5
 
 
 #. Download the configuration file ``/etc/elasticsearch/elasticsearch.yml`` as follows:
