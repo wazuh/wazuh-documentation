@@ -62,7 +62,7 @@ This is an example configuration for the Slack integration:
 
 Telegram 
 ---------
-This integration allows receiving alerts into a Telegram chat on group, channel or personal ` Telegram API <https://core.telegram.org/bots>`_, a simple way to post messages from Wazuh To Telegram chat
+This integration allows receiving alerts into a Telegram chat on group, channel or personal `Telegram API <https://core.telegram.org/bots>`_, a simple way to post messages from Wazuh To Telegram chat
 
 This is an example configuration for the Telegram integration:
 
