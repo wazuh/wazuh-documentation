@@ -58,14 +58,14 @@ Elasticsearch installation and configuration
 
          .. code-block:: console
 
-           # yum install elasticsearch-7.17.4
+           # yum install elasticsearch-7.17.5
 
 
       .. group-tab:: APT
 
          .. code-block:: console
 
-           # apt-get install elasticsearch=7.17.4
+           # apt-get install elasticsearch=7.17.5
 
 
 #. Download the configuration file ``/etc/elasticsearch/elasticsearch.yml`` as follows:
@@ -133,13 +133,13 @@ This command should have an output like this:
    {
      "name" : "elasticsearch",
      "cluster_name" : "elasticsearch",
-     "cluster_uuid" : "BLpIwJvXQnGCIORGrsAxLA",
+     "cluster_uuid" : "RclrSuHuSIeRGf_sZ7mUiw",
      "version" : {
-       "number" : "7.17.4",
+       "number" : "7.17.5",
        "build_flavor" : "default",
        "build_type" : "rpm",
-       "build_hash" : "79878662c54c886ae89206c685d9f1051a9d6411",
-       "build_date" : "2022-05-18T18:04:20.964345128Z",
+       "build_hash" : "8d61b4f7ddf931f219e3745f295ed2bbc50c8e84",
+       "build_date" : "2022-06-23T21:57:28.736740635Z",
        "build_snapshot" : false,
        "lucene_version" : "8.11.1",
        "minimum_wire_compatibility_version" : "6.8.0",
@@ -288,20 +288,20 @@ This command should have an output like this:
 .. code-block:: console
   :class: output
 
-      elasticsearch: https://127.0.0.1:9200...
-        parse url... OK
-        connection...
-          parse host... OK
-          dns lookup... OK
-          addresses: 127.0.0.1
-          dial up... OK
-        TLS...
-          security: server's certificate chain verification is enabled
-          handshake... OK
-          TLS version: TLSv1.3
-          dial up... OK
-        talk to server... OK
-        version: 7.17.4
+   elasticsearch: https://127.0.0.1:9200...
+     parse url... OK
+     connection...
+       parse host... OK
+       dns lookup... OK
+       addresses: 127.0.0.1
+       dial up... OK
+     TLS...
+       security: server's certificate chain verification is enabled
+       handshake... OK
+       TLS version: TLSv1.3
+       dial up... OK
+     talk to server... OK
+     version: 7.17.5
 
 
 Kibana installation and configuration
