@@ -17,17 +17,20 @@ This release includes new features or enhancements as the following:
 
 Wazuh manager
 ^^^^^^^^^^^^^
+
 - `#14085 <https://github.com/wazuh/wazuh/pull/14085>`_ Support for Ubuntu 22 (Jammy) is added in Vulnerability Detector.
 - `#14117 <https://github.com/wazuh/wazuh/pull/14117>`_ Support for Red Hat 9 is added in Vulnerability Detector.
 - `#14111 <https://github.com/wazuh/wazuh/pull/14111>`_ The shared configuration file handling performance is improved in wazuh-remoted.
 
 Wazuh agent
 ^^^^^^^^^^^
+
 - `#13837 <https://github.com/wazuh/wazuh/pull/13837>`_ The macOS codename list is updated in Syscollector.
 - `#14093 <https://github.com/wazuh/wazuh/pull/14093>`_ The GitHub and Office365 integrations log messages are improved.
 
 Ruleset
 ^^^^^^^
+
 - `#13893 <https://github.com/wazuh/wazuh/pull/13893>`_ Ubuntu Linux 22.04 SCA Policy is added.
 - `#13905 <https://github.com/wazuh/wazuh/pull/13905>`_ Apple macOS 12.0 Monterey SCA Policy is added.
 
@@ -48,21 +51,23 @@ Wazuh Kibana plugin for Kibana 7.16.x and 7.17.x
 
 Wazuh Splunk app
 ^^^^^^^^^^^^^^^^
+
 - `#1351 <https://github.com/wazuh/wazuh-splunk/pull/1351>`_ The documentation links are updated to match their respective title on the Wazuh documentation page.
 - `#1354 <https://github.com/wazuh/wazuh-splunk/pull/1354>`_ The use of all tags to filter Wazuh Server logs is re-allowed.
 
 Packages
 ^^^^^^^^
--  `#1706 <https://github.com/wazuh/wazuh-packages/pull/1706>`__ Password tool help improved
--  `#1696 <https://github.com/wazuh/wazuh-packages/pull/1696>`__ passwords.wazuh file renamed
--  `#1697 <https://github.com/wazuh/wazuh-packages/pull/1697>`__ Unused users and roles removed
--  `#1679 <https://github.com/wazuh/wazuh-packages/pull/1679>`__ config.yml renamed to wazuh-config.yml and removed after deployment 
--  `#1718 <https://github.com/wazuh/wazuh-packages/pull/1718>`__ Filebeat metrics disabled
--  `#1683 <https://github.com/wazuh/wazuh-packages/pull/1683>`__ Darwin 21 SCA added
--  `#1684 <https://github.com/wazuh/wazuh-packages/pull/1684>`__ Ubuntu 22 SCA added
+
+-  `#1706 <https://github.com/wazuh/wazuh-packages/pull/1706>`__ The text of the password tool help option is improved.
+-  `#1696 <https://github.com/wazuh/wazuh-packages/pull/1696>`__ The passwords.wazuh file is renamed to wazuh-passwords.txt.
+-  `#1697 <https://github.com/wazuh/wazuh-packages/pull/1697>`__ Wazuh dashboard users wazuh_admin and wazuh_user and roles wazuh_ui_user and wazuh_ui_admin are removed from the installation templates.
+-  `#1718 <https://github.com/wazuh/wazuh-packages/pull/1718>`__ The periodic Filebeat metrics are disabled.
+-  `#1683 <https://github.com/wazuh/wazuh-packages/pull/1683>`__ New Darwin 21 SCA file for macOS 12 added.
+-  `#1684 <https://github.com/wazuh/wazuh-packages/pull/1684>`__ New Ubuntu 22 SCA file added.
 
 Other
 ^^^^^
+
 - `#14121 <https://github.com/wazuh/wazuh/pull/14121>`_ The filebeat logging metrics are disabled.
 
 Resolved issues
@@ -176,6 +181,6 @@ More details about these changes are provided in the changelog of each component
 - `wazuh/wazuh <https://github.com/wazuh/wazuh/blob/v4.3.6/CHANGELOG.md>`_
 - `wazuh/wazuh-dashboard <https://github.com/wazuh/wazuh-kibana-app/blob/v4.3.6-1.2.0-wzd/CHANGELOG.md>`_
 - `wazuh/wazuh-kibana-app 7.10.2 <https://github.com/wazuh/wazuh-kibana-app/blob/v4.3.6-7.10.2/CHANGELOG.md>`_
-- `wazuh/wazuh-kibana-app 7.17.x <https://github.com/wazuh/wazuh-kibana-app/blob/v4.3.6-7.17.4/CHANGELOG.md>`_
+- `wazuh/wazuh-kibana-app 7.17.x <https://github.com/wazuh/wazuh-kibana-app/blob/v4.3.6-7.17.5/CHANGELOG.md>`_
 - `wazuh/wazuh-splunk <https://github.com/wazuh/wazuh-splunk/blob/v4.3.6-8.2.6/CHANGELOG.md>`_
 - `wazuh/wazuh-packages <https://github.com/wazuh/wazuh-packages/releases/tag/v4.3.6>`_
