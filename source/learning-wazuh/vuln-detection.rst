@@ -32,8 +32,7 @@ stored.
 Configure ``syscollector`` for all the agents
 ---------------------------------------------
 
-In the ``/var/ossec/etc/ossec.conf`` file of the Wazuh manager and agents,
-see the default configuration and find the ``syscollector`` section.
+In the ``/var/ossec/etc/ossec.conf`` file of the Wazuh manager and agents, see the default configuration and find the ``syscollector`` section.
 
 - For Linux systems:
 
