@@ -31,23 +31,9 @@ Wazuh agent
 Ruleset
 ^^^^^^^
 
-- `#13893 <https://github.com/wazuh/wazuh/pull/13893>`_ Ubuntu Linux 22.04 SCA Policy is added.
-- `#13905 <https://github.com/wazuh/wazuh/pull/13905>`_ Apple macOS 12.0 Monterey SCA Policy is added.
+- `#13893 <https://github.com/wazuh/wazuh/pull/13893>`_ Ubuntu Linux 22.04 SCA policy is added.
+- `#13905 <https://github.com/wazuh/wazuh/pull/13905>`_ Apple macOS 12.0 Monterey SCA policy is added.
 
-Wazuh dashboard
-^^^^^^^^^^^^^^^
-
--  `#4330 <https://github.com/wazuh/wazuh-kibana-app/pull/4330>`__ Changed reports inputs and usernames.
-
-Wazuh Kibana plugin for Kibana 7.10.2
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-
--  `#4330 <https://github.com/wazuh/wazuh-kibana-app/pull/4330>`__ Changed reports inputs and usernames.
-
-Wazuh Kibana plugin for Kibana 7.16.x and 7.17.x
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-
--  `#4330 <https://github.com/wazuh/wazuh-kibana-app/pull/4330>`__ Changed reports inputs and usernames.
 
 Wazuh Splunk app
 ^^^^^^^^^^^^^^^^
@@ -68,7 +54,7 @@ Packages
 Other
 ^^^^^
 
-- `#14121 <https://github.com/wazuh/wazuh/pull/14121>`_ The filebeat logging metrics are disabled.
+- `#14121 <https://github.com/wazuh/wazuh/pull/14121>`_ The Filebeat logging metrics are disabled.
 
 Resolved issues
 ---------------
@@ -81,7 +67,7 @@ Wazuh manager
 ==============================================================    =============
 Reference                                                         Description
 ==============================================================    =============
-`#14098 <https://github.com/wazuh/wazuh/pull/14098>`_             The potential memory leaks in Vulnerability Detector when parsing OVAL with no criteria is fixed.
+`#14098 <https://github.com/wazuh/wazuh/pull/14098>`_             The potential memory leaks in Vulnerability Detector when parsing OVAL with no criteria are fixed.
 `#13957 <https://github.com/wazuh/wazuh/pull/13957>`_             A bug in Vulnerability Detector that skipped Windows 8.1 and Windows 8 agents is fixed.
 `#14061 <https://github.com/wazuh/wazuh/pull/14061>`_             A bug in wazuh-db that stored duplicate Syscollector package data is fixed.
 ==============================================================    =============
@@ -114,13 +100,14 @@ Wazuh dashboard
 ==============================================================    =============
 Reference                                                         Description
 ==============================================================    =============
-`#4326 <https://github.com/wazuh/wazuh-kibana-app/pull/4326>`__   An error distinguishing conjuntion operators (AND, OR) properly in the search bar component is fixed.
+`#4326 <https://github.com/wazuh/wazuh-kibana-app/pull/4326>`_    An error distinguishing conjunction operators (AND, OR) in the search bar component is fixed.
 `#4301 <https://github.com/wazuh/wazuh-kibana-app/pull/4301>`_    Some link titles  are changed to match their documentation section title.
-`#4301 <https://github.com/wazuh/wazuh-kibana-app/pull/4301>`__   Missing documentation references to the Agent's overview, Agent's Integrity monitoring, and Agent's Inventory data sections, when the agent has never connected is fixed.
+`#4301 <https://github.com/wazuh/wazuh-kibana-app/pull/4301>`_    Missing documentation references to the Agent's overview, Agent's Integrity monitoring, and Agent's Inventory data sections, when the agent has never connected are fixed.
 `#4301 <https://github.com/wazuh/wazuh-kibana-app/pull/4301>`_    The links to the web documentation are changed and now point to the plugin short version instead of current.
-`#4301 <https://github.com/wazuh/wazuh-kibana-app/pull/4301>`_    Missing documentation link to the Docker Listener module is fixed.
+`#4301 <https://github.com/wazuh/wazuh-kibana-app/pull/4301>`_    Missing documentation link in the Docker Listener module is fixed.
 `#4301 <https://github.com/wazuh/wazuh-kibana-app/pull/4301>`_    Some links to web documentation that didn't work are fixed.
 `#4307 <https://github.com/wazuh/wazuh-kibana-app/pull/4307>`_    Now, errors on the action buttons of Rules/Decoders/CDB Lists' tables are displayed.
+`#4330 <https://github.com/wazuh/wazuh-kibana-app/pull/4330>`_    Changed reports inputs and usernames.
 ==============================================================    =============
 
 Wazuh Kibana plugin for Kibana 7.10.2
@@ -129,13 +116,14 @@ Wazuh Kibana plugin for Kibana 7.10.2
 ==============================================================    =============
 Reference                                                         Description
 ==============================================================    =============
-`#4326 <https://github.com/wazuh/wazuh-kibana-app/pull/4326>`__   An error distinguishing conjuntion operators (AND, OR) properly in the search bar component is fixed.
-`#4301 <https://github.com/wazuh/wazuh-kibana-app/pull/4301>`_    Some link titles  are changed to match their documentation section title.
-`#4301 <https://github.com/wazuh/wazuh-kibana-app/pull/4301>`__   Missing documentation references to the Agent's overview, Agent's Integrity monitoring, and Agent's Inventory data sections, when the agent has never connected is fixed.
+`#4326 <https://github.com/wazuh/wazuh-kibana-app/pull/4326>`_    An error distinguishing conjunction operators (AND, OR) in the search bar component is fixed.
+`#4301 <https://github.com/wazuh/wazuh-kibana-app/pull/4301>`_    Some link titles are changed to match their documentation section title.
+`#4301 <https://github.com/wazuh/wazuh-kibana-app/pull/4301>`_    Missing documentation references to the Agent's overview, Agent's Integrity monitoring, and Agent's Inventory data sections, when the agent has never connected are fixed.
 `#4301 <https://github.com/wazuh/wazuh-kibana-app/pull/4301>`_    The links to the web documentation are changed and now point to the plugin short version instead of current.
-`#4301 <https://github.com/wazuh/wazuh-kibana-app/pull/4301>`_    Missing documentation link to the Docker Listener module is fixed.
+`#4301 <https://github.com/wazuh/wazuh-kibana-app/pull/4301>`_    Missing documentation link in the Docker Listener module is fixed.
 `#4301 <https://github.com/wazuh/wazuh-kibana-app/pull/4301>`_    Some links to web documentation that didn't work are fixed.
 `#4307 <https://github.com/wazuh/wazuh-kibana-app/pull/4307>`_    Now, errors on the action buttons of Rules/Decoders/CDB Lists' tables are displayed.
+`#4330 <https://github.com/wazuh/wazuh-kibana-app/pull/4330>`_    Changed reports inputs and usernames.
 ==============================================================    =============
 
 Wazuh Kibana plugin for Kibana 7.16.x and 7.17.x
@@ -144,13 +132,14 @@ Wazuh Kibana plugin for Kibana 7.16.x and 7.17.x
 ==============================================================    =============
 Reference                                                         Description
 ==============================================================    =============
-`#4326 <https://github.com/wazuh/wazuh-kibana-app/pull/4326>`__   An error distinguishing conjuntion operators (AND, OR) properly in the search bar component is fixed.
-`#4301 <https://github.com/wazuh/wazuh-kibana-app/pull/4301>`_    Some link titles  are changed to match their documentation section title.
-`#4301 <https://github.com/wazuh/wazuh-kibana-app/pull/4301>`__   Missing documentation references to the Agent's overview, Agent's Integrity monitoring, and Agent's Inventory data sections, when the agent has never connected is fixed.
+`#4326 <https://github.com/wazuh/wazuh-kibana-app/pull/4326>`_    An error distinguishing conjunction operators (AND, OR) in the search bar component is fixed.
+`#4301 <https://github.com/wazuh/wazuh-kibana-app/pull/4301>`_    Some link titles are changed to match their documentation section title.
+`#4301 <https://github.com/wazuh/wazuh-kibana-app/pull/4301>`_    Missing documentation references to the Agent's overview, Agent's Integrity monitoring, and Agent's Inventory data sections, when the agent has never connected are fixed.
 `#4301 <https://github.com/wazuh/wazuh-kibana-app/pull/4301>`_    The links to the web documentation are changed and now point to the plugin short version instead of current.
 `#4301 <https://github.com/wazuh/wazuh-kibana-app/pull/4301>`_    Missing documentation link to the Docker Listener module is fixed.
 `#4301 <https://github.com/wazuh/wazuh-kibana-app/pull/4301>`_    Some links to web documentation that didn't work are fixed.
 `#4307 <https://github.com/wazuh/wazuh-kibana-app/pull/4307>`_    Now, errors on the action buttons of Rules/Decoders/CDB Lists' tables are displayed.
+`#4330 <https://github.com/wazuh/wazuh-kibana-app/pull/4330>`_    Changed reports inputs and usernames.
 ==============================================================    =============
 
 Wazuh Splunk app
