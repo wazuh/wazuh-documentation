@@ -19,7 +19,7 @@ The integrations are configured on the Wazuh manager ``ossec.conf`` file which i
 
   <integration>
     <name> </name>
-    <hook_url> </hook_url> <!-- Required for Slack, Telegram -->
+    <hook_url> </hook_url> <!-- Required for Slack and Telegram -->
     <api_key> </api_key> <!-- Required for PagerDuty, Telegram and VirusTotal -->
 
     <!-- Optional filters -->
