@@ -75,8 +75,6 @@ This is an example configuration for the Telegram integration:
     <alert_format>json</alert_format>
   </integration>
 
-
-
 PagerDuty
 ---------
 
