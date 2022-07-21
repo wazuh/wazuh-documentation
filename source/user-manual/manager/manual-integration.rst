@@ -70,7 +70,7 @@ This is an example configuration for the Telegram integration:
 
   <integration>
     <name>telegram</name>
-    <hook_url>{ ID chat Telegram Group, Channel Or Personal}</hook_url> <!-- Replace with your Telegram ID chat -->
+    <hook_url>{ ID chat Telegram Group, Channel or Personal}</hook_url> <!-- Replace with your Telegram ID chat -->
     <api_key>{Token Bot Telegram}</api_key>
     <alert_format>json</alert_format>
   </integration>
