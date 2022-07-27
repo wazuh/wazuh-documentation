@@ -20,7 +20,8 @@ To achieve this, the Wazuh agent can collect logs from endpoints it is deployed 
 Use cases
 ---------
 
-- PCI DSS Requirement 10.2.2 requires that audit logs record the following details for each auditable event:  
+PCI DSS Requirement 10.2.2 requires that audit logs record the following details for each auditable event:
+
    - User identification.
    - Type of event.
    - Date and time.
@@ -38,7 +39,7 @@ The following are some Wazuh rules that help achieve this requirement:
     :width: 100%
 
  
-Rule 5715: sshd: authentication success. This rule generates an alert when a user successfully logs into a system via SSH. The generated alert contains the information required by requirement 10.2.2 (user identification, type of event, date and time, success and failure indication, origination of event and identity or name of affected data, system component, resource, or service). The screenshot below shows the alert generated on the dashboard:
+- Rule 5715: sshd: authentication success. This rule generates an alert when a user successfully logs into a system via SSH. The generated alert contains the information required by requirement 10.2.2 (user identification, type of event, date and time, success and failure indication, origination of event and identity or name of affected data, system component, resource, or service). The screenshot below shows the alert generated on the dashboard:
 
 .. thumbnail:: ../images/pci/user-successfully-logs-into-a-system-via-SSH.png
     :title: User successfully logs into a system via SSH
