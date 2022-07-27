@@ -29,6 +29,9 @@ Each check comprises some metadata information, a description of the purpose of 
 if the check is relevant to any compliance specifications, and to which. Most Wazuh policies, especially CIS policies,
 already have their CIS and PCI-DSS controls mapped. See an :ref:`example<check_overview>` below.
 
+.. note::
+     The following example applies to policy ``id: 3064`` and operating system Debian/Linux 9.
+
 
 .. code-block:: yaml
     :name: check_overview
