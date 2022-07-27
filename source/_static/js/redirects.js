@@ -222,6 +222,8 @@ newUrls['4.3'] = [
   '/deployment-options/amazon-machine-images/amazon-machine-images.html',
   '/release-notes/release-4-3-0.html',
   '/learning-wazuh/build-lab/install-wazuh-central-components.html', 
+  '/pci-dss/analysis-engine.html',
+  '/pci-dss/configuration-assessment.html',  
 ];
 
 removedUrls['4.3'] = [
