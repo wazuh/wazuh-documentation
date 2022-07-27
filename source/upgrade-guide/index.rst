@@ -18,7 +18,80 @@ On the other hand, the Open distro for Elasticsearch section describes the upgra
 
 The Elastic Stack basic license section includes instructions to upgrade the Wazuh manager, Filebeat, Elasticsearch and Kibana. The latest supported Elastic Stack basic license version is |ELASTICSEARCH_ELK_LATEST|. 
 
+.. raw:: html
 
+  <div class="link-boxes-group limited-width layout-3">
+    <div class="link-boxes-item">
+    <div>
+    
+.. image:: /images/upgrade-guide/computer-wazuh.png
+
+.. raw:: html
+
+      <a class="link-boxes-link horizontal-content" href="upgrading-central-components.html">
+
+        <p class="link-boxes-label">Upgrade Wazuh central components</p>
+
+
+.. image:: /images/upgrade-guide/wazuh.svg
+   :width: 40px
+     
+Wazuh central components
+
+.. raw:: html
+
+      </a>
+      </div>
+    </div>
+    
+    <div class="link-boxes-item">
+    <div>
+    
+.. image:: /images/upgrade-guide/computer-open-distro.png
+
+.. raw:: html
+
+      <a class="link-boxes-link horizontal-content" href="elasticsearch-kibana-filebeat/upgrading-open-distro.html">
+
+        <p class="link-boxes-label">Upgrade Open Distro for Elasticsearch</p>
+
+
+.. image:: /images/upgrade-guide/opendistro.svg
+   :width: 30px
+     
+Open Distro for Elasticsearch
+
+.. raw:: html
+
+      </a>
+      </div>
+    </div>
+    
+    <div class="link-boxes-item">
+    <div>
+    
+.. image:: /images/upgrade-guide/computer-elastic-stack.png
+
+.. raw:: html
+
+      <a class="link-boxes-link horizontal-content" href="elasticsearch-kibana-filebeat/upgrading-elastic-stack.html">
+
+        <p class="link-boxes-label">Upgrade Elastic stack basic license</p>
+
+
+.. image:: /images/upgrade-guide/elasticsearch.svg
+   :width: 30px
+     
+Elastic stack basic license
+
+.. raw:: html
+
+      </a>
+      </div>
+    </div>
+    
+  </div>
+  
 .. note::
 
    If you are unsure of what is your Wazuh installation, on the web user interface go to **Wazuh** > **Settings** > **About**. If you see "Welcome to the Wazuh dashboard" you have the default Wazuh installation. Select the Wazuh server, indexer and dashboard option and follow the instructions to upgrade your environment.    
