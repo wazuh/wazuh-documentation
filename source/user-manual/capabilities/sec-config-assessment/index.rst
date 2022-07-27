@@ -24,7 +24,7 @@ There are multiple Wazuh integrations that perform configuration assessment scan
 The Security Configuration Assessment (SCA) module aims to provide the user with the best possible experience when performing scans about hardening and configuration policies. Some of its key features include:
 
 - The last state of each scanned check of every policy is stored in the manager and can be consulted by the SCA tab in the Wazuh App.
-- To avoid alert flooding and repeated alerts in each scan. Now, only state changes and new checks are alerted, being those states updated in the manager database.
+- Only state changes and new checks are alerted, being those states updated in the manager database to avoid alert flooding and repeated alerts in each scan.
 - Current policies used by *Rootcheck* have been enriched and updated to a new YAML format. CIS policies are based on CIS benchmarks.
 
 Further information is available in the following sections:

@@ -186,23 +186,23 @@ The condition field specifies how rule results are aggregated in order to calcul
 
 - ``none``: the check will be evaluated as **passed** if **none** of its rules are satisfied and as **failed** as soon as one evaluates to **passed**.
 
-Special mention deserves how rules evaluated as **non-applicable** are treated by the aforementioned aggregators.
+Special mention deserves how rules evaluated as **Not applicable** are treated by the aforementioned aggregators.
 
-- ``all``: If any rule returns **non-applicable**, and no rule returns **failed**, the result will be **non-applicable**.
+- ``all``: If any rule returns **Not applicable**, and no rule returns **failed**, the result will be **Not applicable**.
 
-- ``any``: The check will be evaluated as **non-applicable** if no rule evaluates to **passed** and any returns **non-applicable**.
+- ``any``: The check will be evaluated as **Not applicable** if no rule evaluates to **passed** and any returns **Not applicable**.
 
-- ``none``: The check will be evaluated as **non-applicable** if no rule evaluates to **passed** and any returns **non-applicable**.
+- ``none``: The check will be evaluated as **Not applicable** if no rule evaluates to **passed** and any returns **Not applicable**.
 
 .. table:: Condition truth-table
     :widths: auto
 
     +------------------------------+-------------+-------------+-------------------+--------------------+
-    | Condition \\ Rule evaluation |  passed(s)  |  failed(s)  | non-applicable(s) |     Result         |
+    | Condition \\ Rule evaluation |  passed(s)  |  failed(s)  | Not applicable(s) |     Result         |
     +==============================+=============+=============+===================+====================+
     |            ``all``           |     yes     |      no     |         no        |     **passed**     |
     +------------------------------+-------------+-------------+-------------------+--------------------+
-    |            ``all``           | indifferent |      no     |        yes        | **non-applicable** |
+    |            ``all``           | indifferent |      no     |        yes        | **Not applicable** |
     +------------------------------+-------------+-------------+-------------------+--------------------+
     |            ``all``           | indifferent |     yes     |    indifferent    |     **failed**     |
     +------------------------------+-------------+-------------+-------------------+--------------------+
@@ -210,11 +210,11 @@ Special mention deserves how rules evaluated as **non-applicable** are treated b
     +------------------------------+-------------+-------------+-------------------+--------------------+
     |            ``any``           |      no     |     yes     |         no        |     **failed**     |
     +------------------------------+-------------+-------------+-------------------+--------------------+
-    |            ``any``           |      no     | indifferent |        yes        | **non-applicable** |
+    |            ``any``           |      no     | indifferent |        yes        | **Not applicable** |
     +------------------------------+-------------+-------------+-------------------+--------------------+
     |           ``none``           |     yes     | indifferent |    indifferent    |     **failed**     |
     +------------------------------+-------------+-------------+-------------------+--------------------+
-    |           ``none``           |      no     | indifferent |        yes        | **non-applicable** |
+    |           ``none``           |      no     | indifferent |        yes        | **Not applicable** |
     +------------------------------+-------------+-------------+-------------------+--------------------+
     |           ``none``           |      no     |     yes     |         no        |     **passed**     |
     +------------------------------+-------------+-------------+-------------------+--------------------+
@@ -331,7 +331,7 @@ The general form of a rule testing for contents is as follows:
     - The context of a content check is limited to a **line**.
     - Content checks are case-sensitive.
     - It is **mandatory** to respect the spaces around the ``->`` and ``compare`` separators.
-    - If the **target** of a rule that checks for contents does not exist, the result will be **non-applicable** as it could not be checked.
+    - If the **target** of a rule that checks for contents does not exist, the result will be **Not applicable** as it could not be checked.
 
 Content check operator results can be negated by adding a ``!`` before then, for example:
 

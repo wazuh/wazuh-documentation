@@ -27,11 +27,10 @@ Overview of an SCA check
 Each check comprises some metadata information, a description of the purpose of the check, and its logical description
 (fields **condition** and **rules**). On its metadata, it can contain an optional **compliance** field used to specify
 if the check is relevant to any compliance specifications, and to which. Most Wazuh policies, especially CIS policies,
-already have their CIS and PCI-DSS controls mapped. See an :ref:`example<check_overview>` below.
+already have their CIS and PCI-DSS controls mapped. In addition, NIST and TSC controls are also mapped. See an :ref:`example<check_overview>` below.
 
 .. note::
      The following example applies to policy ``id: 3064`` and operating system Debian/Linux 9.
-
 
 .. code-block:: yaml
     :name: check_overview
