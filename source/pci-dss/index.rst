@@ -24,6 +24,7 @@ In the following sections, we have some use cases that show how to use the Wazuh
 
     log-analysis
     analysis-engine
+    configuration-assessment
     policy-monitoring
     rootkit-detection
     file-integrity-monitoring
