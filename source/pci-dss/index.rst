@@ -23,6 +23,7 @@ In the following sections, we have some use cases that show how to use the Wazuh
     :caption: Contents
 
     log-analysis
+    analysis-engine
     policy-monitoring
     rootkit-detection
     file-integrity-monitoring
