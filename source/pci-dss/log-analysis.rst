@@ -33,18 +33,18 @@ The following are some Wazuh rules that help achieve this requirement:
 
 - Rule 5710: sshd: Attempt to login using a non-existent user. This rule generates an alert when a non-existent user tries to login to a system via SSH. The generated alert contains the information required by requirement 10.2.2 (user identification, type of event, date and time, success and failure indication, origination of event and identity or name of affected data, system component, resource, or service). The screenshot below shows the alert generated on the dashboard:
 
-.. thumbnail:: ../images/pci/attempt-to-login-using-non-existent-user.png
-    :title: Attempt to login using a non-existent user
-    :align: center
-    :width: 100%
+	.. thumbnail:: ../images/pci/attempt-to-login-using-non-existent-user.png
+		:title: Attempt to login using a non-existent user
+		:align: center
+		:width: 100%
 
  
 - Rule 5715: sshd: authentication success. This rule generates an alert when a user successfully logs into a system via SSH. The generated alert contains the information required by requirement 10.2.2 (user identification, type of event, date and time, success and failure indication, origination of event and identity or name of affected data, system component, resource, or service). The screenshot below shows the alert generated on the dashboard:
 
-.. thumbnail:: ../images/pci/user-successfully-logs-into-a-system-via-SSH.png
-    :title: User successfully logs into a system via SSH
-    :align: center
-    :width: 100%
+	.. thumbnail:: ../images/pci/user-successfully-logs-into-a-system-via-SSH.png
+		:title: User successfully logs into a system via SSH
+		:align: center
+		:width: 100%
 
 
 - PCI DSS requirement 10.5.1 requires that audit log history is retained for at least 12 months, with at least the most recent three months immediately available for analysis. This can be achieved by enabling Wazuh log archives and configuring `index management policies <https://wazuh.com/blog/wazuh-index-management/>`_. To enable Wazuh log archives, the following steps are taken:
@@ -66,6 +66,44 @@ The following are some Wazuh rules that help achieve this requirement:
       
        systemctl restart wazuh-manager
 
-#. Go to OpenSearch Plugins -> index management -> indices and verify wazuh-archives-x.x-xxxx.xx.xx is present.
-#. Go to Management -> stack management -> index pattern and select Create index pattern. Use wazuh-archives-* as index pattern name.
-#. Go to OpenSearch Dashboards -> discover and verify archives events are being reported.
+
+#. Go to the Wazuh dashboard URL in a browser, open the menu and select “Index Management” under “OpenSearch Plugins”.
+
+	.. thumbnail:: ../images/pci/select-index-management.png
+		:title: Select Index Management
+		:align: center
+		:width: 100%
+
+#. Under “Index Management”, select indices and verify that ``wazuh-archives-x.x-xxxx.xx.xx`` is present.
+
+	.. thumbnail:: ../images/pci/select-indices.png
+		:title: Select indices
+		:align: center
+		:width: 100%
+
+#. Go to open the dashboard menu and select “Stack Management” under “Management”.
+
+	.. thumbnail:: ../images/pci/select-stack-management.png
+		:title: Select Stack Management
+		:align: center
+		:width: 100%
+    
+#. Choose “Index Patterns” and select “Create index pattern”. Use ``wazuh-archives-*`` as the index pattern name.
+
+	.. thumbnail:: ../images/pci/select-create-index-pattern.png
+		:title: Select Create index pattern
+		:align: center
+		:width: 100%
+    
+#. Open the menu and select “Discover” under “OpenSearch Dashboards”. Events should be getting reported there.
+
+	.. thumbnail:: ../images/pci/select-discover-1.png
+		:title: Select Discover
+		:align: center
+		:width: 100%
+		
+	.. thumbnail:: ../images/pci/select-discover-2.png
+		:title: Select Discover
+		:align: center
+		:width: 100%
+    
