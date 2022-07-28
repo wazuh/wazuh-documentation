@@ -352,6 +352,8 @@ removedUrls['4.3'] = [
   '/learning-wazuh/build-lab/xpack-security-setup.html',
   '/learning-wazuh/build-lab/install-elastic-stack.html',
   '/learning-wazuh/build-lab/install-wazuh-manager.html',
+  '/pci-dss/policy-monitoring.html',
+  '/pci-dss/rootkit-detection.html',
 ];
 
 
