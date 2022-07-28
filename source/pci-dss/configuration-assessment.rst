@@ -29,19 +29,19 @@ Below are some PCI DSS requirement use cases that can be met with the SCA module
 
 In order to perform checks for this specific use case, the SCA module has check 18081 - ``Ensure IP forwarding is disabled``. When an SCA scan is run, we are able to detect if this use case is satisfied.
 
-.. thumbnail:: ../images/pci/ensure-ip-forwarding-is-disabled.png
-    :title: Ensure IP forwarding is disabled
-    :align: center
-    :width: 100%
+  .. thumbnail:: ../images/pci/ensure-ip-forwarding-is-disabled.png
+      :title: Ensure IP forwarding is disabled
+      :align: center
+      :width: 100%
 
 - PCI DSS 8.3.7 states that individuals are not allowed to submit a new password/passphrase that is the same as any of the last four passwords/passphrases used.
 
 In order to check the password reuse policy and help meet requirement 8.3.7, we have the SCA check 18157 - ``Ensure password reuse is limited``. As such, when an SCA scan is run we are able to detect if the password history policy meets the requirement.
 
-.. thumbnail:: ../images/pci/ensure-password-reuse-is-limited.png
-    :title: Ensure password reuse is limited
-    :align: center
-    :width: 100%
+  .. thumbnail:: ../images/pci/ensure-password-reuse-is-limited.png
+      :title: Ensure password reuse is limited
+      :align: center
+      :width: 100%
 
 
 

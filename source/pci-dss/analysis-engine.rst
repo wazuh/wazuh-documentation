@@ -31,15 +31,15 @@ This requirement ensures that logs are analyzed for indicators of compromise at 
 
 - Rule 61138: New Windows Service Created. This rule generates an alert after the system logs from a Windows endpoint have been analyzed by the analysis engine and it has been determined that a new service was created.
 
-.. thumbnail:: ../images/pci/new-windows-service-created.png
-    :title: New Windows Service Created
-    :align: center
-    :width: 100%
+  .. thumbnail:: ../images/pci/new-windows-service-created.png
+      :title: New Windows Service Created
+      :align: center
+      :width: 100%
 
 - Rule 31168: Shellshock attack detected. This rule will generate an alert when logs indicating a shellshock attack from a WAF or web application are analyzed by the analysis engine.
 
-.. thumbnail:: ../images/pci/shellshock-attack-detected.png
-    :title: Shellshock attack detected
-    :align: center
-    :width: 100%
+  .. thumbnail:: ../images/pci/shellshock-attack-detected.png
+      :title: Shellshock attack detected
+      :align: center
+      :width: 100%
 
