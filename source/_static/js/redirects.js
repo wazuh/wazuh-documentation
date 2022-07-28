@@ -226,6 +226,7 @@ newUrls['4.3'] = [
   '/pci-dss/configuration-assessment.html', 
   '/pci-dss/malware-detection.html',
   '/pci-dss/vulnerability-detection.html',
+  '/pci-dss/system-inventory.html',
 ];
 
 removedUrls['4.3'] = [

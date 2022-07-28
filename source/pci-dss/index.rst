@@ -29,6 +29,7 @@ In the following sections, we have some use cases that show how to use the Wazuh
     file-integrity-monitoring
     vulnerability-detection
     active-response
+    system-inventory
+    elastic
     policy-monitoring
     rootkit-detection
-    elastic
