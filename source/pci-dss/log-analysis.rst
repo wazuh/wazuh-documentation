@@ -12,9 +12,9 @@ In many cases, evidence of an attack can be found in the log messages of devices
 
 The log collector module can help meet the following PCI DSS requirement:
 
-- **Requirement 10 - Log and Monitor All Access to System Components and Cardholder Data**: This control requires that  user activities, including those by employees, contractors, consultants, and internal and external vendors, and other third parties are logged and monitored, and the log data stored for a specified period of time.
+- **Requirement 10 - Log and Monitor All Access to System Components and Cardholder Data**: This control requires that user activities, including those by employees, contractors, consultants, internal and external vendors, and other third parties are logged and monitored, and the log data stored for a specified period of time.
 
-To achieve this, the Wazuh agent can collect logs from endpoints it is deployed on. Logs can also be collected via Syslog for network and other syslog enabled devices. Wazuh can also hold logs of events that do not generate an alert using the archive feature and the indexer long term storage. More information on configuring log collection can be found in the documentation :doc:`here </user-manual/capabilities/log-data-collection/index>`.
+To achieve this, the Wazuh agent can collect logs from the endpoints it is deployed on. Logs can also be collected via Syslog for network and other syslog enabled devices. Wazuh can also hold logs of events that do not generate an alert using the archive feature and the indexer long term storage. More information on configuring log collection can be found in the documentation :doc:`here </user-manual/capabilities/log-data-collection/index>`.
 
 
 Use cases
@@ -31,7 +31,7 @@ PCI DSS Requirement 10.2.2 requires that audit logs record the following details
 
 The following are some Wazuh rules that help achieve this requirement:
 
-- Rule 5710: sshd: Attempt to login using a non-existent user. This rule generates an alert when a non-existent user tries to login to a system via SSH. The generated alert contains the information required by requirement 10.2.2 (user identification, type of event, date and time, success and failure indication, origination of event and identity or name of affected data, system component, resource, or service). The screenshot below shows the alert generated on the dashboard:
+- Rule 5710: sshd: Attempt to login using a non-existent user. This rule generates an alert when a non-existent user tries to log in to a system via SSH. The generated alert contains the information required by requirement 10.2.2 (user identification, type of event, date and time, success and failure indication, origination of event and identity or name of affected data, system component, resource, or service). The screenshot below shows the alert generated on the dashboard:
 
 	.. thumbnail:: ../images/pci/attempt-to-login-using-non-existent-user.png
 		:title: Attempt to login using a non-existent user
