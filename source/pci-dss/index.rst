@@ -27,6 +27,7 @@ In the following sections, we have some use cases that show how to use the Wazuh
     configuration-assessment
     malware-detection
     file-integrity-monitoring
+    vulnerability-detection
     active-response
     policy-monitoring
     rootkit-detection

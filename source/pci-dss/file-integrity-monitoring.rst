@@ -32,7 +32,7 @@ Detect changes in a file
 
 For this use case, we configure Wazuh to detect when changes are made to a file in the directory ``/root/credit_cards``.
 
-**On the agent:**
+**On the agent**
 
 #. Determine the full file path for the file or directory to be monitored. In this case, we are monitoring the directory ``/root/credit_cards`` for changes.
 
@@ -88,7 +88,7 @@ In this use case, we configure Syscheck to detect when changes have been made to
 	- Depending on the number of files/directories configured for scans, and the frequency of syscheck scans, you may observe increased CPU and memory usage. Please use the frequency option carefully.
 
 
-**On the agent:**
+**On the agent**
 
 #.  Determine the full file path for the file to be monitored. In this case, we are monitoring the file ``/root/credit_cards/cardholder_data.txt`` for changes.
 
@@ -133,12 +133,14 @@ In this use case, we configure Syscheck to detect when changes have been made to
 
 In the alert details, we can see the changes made in ``syscheck.diff``, the file modified, the PCI DSS requirement violated, the differences in the file checksum, the modification time, and other details.
 
+
 Detect file deletion
 ^^^^^^^^^^^^^^^^^^^^
 
 In this scenario, Syscheck detects when a file in a monitored directory is deleted. To illustrate this, in the steps below, Syscheck is configured to monitor the ``/root/credit_cards/`` directory for changes.
 
-**On the agent:**
+**On the agent**
+
 #. Determine the full file path for the file or directory to be monitored. In this case, we are monitoring the directory ``/root/credit_cards``.
 #. We add the following configuration to the syscheck block of the agent configuration file ``/var/ossec/etc/ossec.conf``. This will enable monitoring of the file and ensure that Wazuh generates an alert if the file is deleted.
 
