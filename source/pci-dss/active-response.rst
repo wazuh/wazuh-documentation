@@ -25,22 +25,22 @@ First, we configure the active response executable to be run (in this case it is
 
    .. code-block:: xml
 
-		<command>
+      <command>
          <name>firewall-drop</name>
          <executable>firewall-drop</executable>
          <timeout_allowed>yes</timeout_allowed>
-		</command>
+      </command>
 
 The active response is subsequently configured to execute the firewall drop command when the rule for attempts to log in to a non-existent user is triggered (rule 5710):
 
    .. code-block:: xml
 
-		<active-response>
+      <active-response>
          <command>firewall-drop</command>
          <location>local</location>
          <rules_id>5710</rules_id>
          <timeout>100</timeout>
-		</active-response>
+      </active-response>
 
 When we attempt to SSH with a non-existent user, rule 5710 generates an alert followed by the active response getting triggered.
 

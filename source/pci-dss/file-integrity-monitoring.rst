@@ -36,37 +36,37 @@ For this use case, we configure Wazuh to detect when changes are made to a file 
 
 #. Determine the full file path for the file or directory to be monitored. In this case, we are monitoring the directory ``/root/credit_cards`` for changes.
 
-	.. code-block:: console 
-     
-		# ls -l  /root/credit_cards/
+   .. code-block:: console 
+      
+      # ls -l  /root/credit_cards/
 
    .. code-block:: none
      :class: output      		
 
-		total 4
-		-rw-r--r--. 1 root root 14 May 16 14:53 cardholder_data.txt
-		# cat /root/credit_cards/cardholder_data.txt
+      total 4
+      -rw-r--r--. 1 root root 14 May 16 14:53 cardholder_data.txt
+      # cat /root/credit_cards/cardholder_data.txt
 
    .. code-block:: none
      :class: output    		
 
-		User1 = card4
+      User1 = card4
 
 #. We add the following configuration to the syscheck block of the agent configuration file ``/var/ossec/etc/ossec.conf``. This will enable real-time monitoring of the file and ensures that when the file is modified, Wazuh generates an alert:
 
-	.. code-block:: xml
-      
-		<syscheck>
-			<directories check_all="yes" realtime="yes">/root/credit_cards</directories>
-		</syscheck>
+   .. code-block:: xml
+
+      <syscheck>
+         <directories check_all="yes" realtime="yes">/root/credit_cards</directories>
+      </syscheck>
 
 
 #. Restart the Wazuh agent to apply the changes.
 #. Proceed to modify the file. In this case, we added new content.
 
-	.. code-block:: console 
+   .. code-block:: console 
 
-		echo "User1 = card6" > credit_cards/cardholder_data.txt
+      echo "User1 = card6" > credit_cards/cardholder_data.txt
 
 
 We can see an alert generated to show that a file in the monitored directory was modified.
@@ -97,26 +97,26 @@ In this use case, we configure Syscheck to detect when changes have been made to
 
 #. Update the frequency option of the ``syscheck`` block to your desired scan interval in seconds. In this case, our desired scan interval is every 1 hour (3600 seconds).
 
-	.. code-block:: console 
+   .. code-block:: console 
 
-		<frequency>3600</frequency>
+      <frequency>3600</frequency>
 
 #. We add the following configuration to the ``syscheck`` block of the agent configuration file ``/var/ossec/etc/ossec.conf``. This will enable monitoring of the file and ensure that when the file is modified, Wazuh generates an alert with the differences.
 
-	.. code-block:: xml
+   .. code-block:: xml
 
-		<syscheck>
-			<directories check_all="yes" report_changes="yes" >/root/credit_cards/cardholder_data.txt</directories>
-		</syscheck>
+      <syscheck>
+         <directories check_all="yes" report_changes="yes" >/root/credit_cards/cardholder_data.txt</directories>
+      </syscheck>
 
 	.. note::
 	   If you prefer that the changes are monitored in real-time, you can use the configuration below to monitor the directory where the file is saved and disregard making the frequency modification.
 
-	.. code-block:: xml
+   .. code-block:: xml
 
-		<syscheck>
-			<directories check_all="yes" report_changes="yes" realtime="yes" >/root/credit_cards</directories>
-		</syscheck>
+      <syscheck>
+         <directories check_all="yes" report_changes="yes" realtime="yes" >/root/credit_cards</directories>
+      </syscheck>
 
 #. Restart the Wazuh agent to apply the changes.
 #. Proceed to modify the file. In this case, we removed some content. An alert is generated on the next Syscheck scan about the modified file.
@@ -144,11 +144,11 @@ In this scenario, Syscheck detects when a file in a monitored directory is delet
 #. Determine the full file path for the file or directory to be monitored. In this case, we are monitoring the directory ``/root/credit_cards``.
 #. We add the following configuration to the syscheck block of the agent configuration file ``/var/ossec/etc/ossec.conf``. This will enable monitoring of the file and ensure that Wazuh generates an alert if the file is deleted.
 
-	.. code-block:: xml
+   .. code-block:: xml
 
-		<syscheck>
-			<directories check_all="yes" realtime="yes" >/root/credit_cards</directories>
-		</syscheck>
+      <syscheck>
+         <directories check_all="yes" realtime="yes" >/root/credit_cards</directories>
+      </syscheck>
 
 #. Restart the Wazuh agent to apply the changes.
 #. Proceed to delete a file from the directory. In this case, we deleted the file ``cardholder_data.txt``. We can see an alert generated for the file deleted.
