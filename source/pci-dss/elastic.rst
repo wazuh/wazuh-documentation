@@ -11,7 +11,7 @@ The following PCI DSS requirements can be met with the Wazuh dashboard:
 
 - **Requirement 10 - Log and Monitor All Access to System Components and Cardholder Data**: This control requires that user activities, including those by employees, contractors, consultants, and internal and external vendors, and other third parties are logged, monitored, and any generated alerts are reviewed periodically.
 
-The Visualization and dashboard module can help meet this requirement by showing events, alerts, configuration assessment results, and other information relevant to achieving PCI DSS compliance.
+   The Visualization and dashboard module can help meet this requirement by showing events, alerts, configuration assessment results, and other information relevant to achieving PCI DSS compliance.
 
 Use cases
 ---------

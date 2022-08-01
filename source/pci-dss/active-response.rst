@@ -11,7 +11,7 @@ The active response module can help meet the following PCI DSS requirement:
 
 - **Requirement 11 - Test Security of Systems and Networks Regularly**: Vulnerabilities are being discovered continually by malicious individuals and researchers, and being introduced by new software. System components, processes, and bespoke and custom software should be tested frequently to ensure security controls continue to reflect a changing environment. 
 
-The goal of this requirement is to ensure that systems and networks are regularly tested to confirm their security status and possible intrusions are detected and responded to. Response to intrusions and unauthorized file changes can be achieved with the active response module. More details on configuring the active response module can be found in the :doc:`active response </user-manual/capabilities/active-response/index>` documentation section.
+   The goal of this requirement is to ensure that systems and networks are regularly tested to confirm their security status and possible intrusions are detected and responded to. Response to intrusions and unauthorized file changes can be achieved with the active response module. More details on configuring the active response module can be found in the :doc:`active response </user-manual/capabilities/active-response/index>` documentation section.
 
 
 Use cases
