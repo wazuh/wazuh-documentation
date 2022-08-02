@@ -107,6 +107,140 @@ Starting Wazuh 4.0 the Wazuh API username variable changed from ``user`` to ``us
         password: wazuh-wui
         run_as: false
 
+Saved object for the index pattern can not be found
+---------------------------------------------------
+
+This indicates that there is a problem with the integrity of saved objects that can not be found. The index that stores the saved objects could not have the expected field mappings for the ``type`` field.
+
+Remediantions:
+
+1. Restart the Wazuh dashboard service.
+
+.. tabs::
+
+  .. group-tab:: Systemd
+
+    .. code-block:: console
+
+      # systemctl restart wazuh-dashboard
+
+  .. group-tab:: SysV
+
+    .. code-block:: console
+
+      # service wazuh-dashboard restart
+
+This could create a new index to store the saved objects with the expected field mappings.
+
+.. note::
+      When Wazuh dashboard starts, it could migrate the data of these indices to others that have the valid field mappings.
+      
+2. Delete the index that stores the saved objects and has wrong field mappings. This depends on user or selected tenant.
+
+Stop the Wazuh dashboard service.
+
+.. tabs::
+
+  .. group-tab:: Systemd
+
+    .. code-block:: console
+
+      # systemctl stop wazuh-dashboard
+
+  .. group-tab:: SysV
+
+    .. code-block:: console
+
+      # service wazuh-dashboard stop
+
+Identify the index/indices that store the saved objects and have the wrong field mappings. this depends on the logged user that experiences the problem or the selected tenant. By default the index name should start with ``.kibana``.
+
+Get the field mapping for the ``type`` field for the indices that store the saved objects.
+
+.. code-block:: console
+
+  # curl https://<WAZUH_INDEXER_IP>:9200/.kibana*/_mapping/field/type?pretty -u <wazuh_indexer_user>:<wazuh_indexer_password> -k
+
+.. code-block:: none
+          :class: output
+
+          {
+            ".kibana" : {
+              "mappings" : {
+                "type" : {
+                  "full_name" : "type",
+                  "mapping" : {
+                    "type" : {
+                      "type" : "text",
+                      "fields" : {
+                        "keyword" : {
+                          "type" : "keyword",
+                          "ignore_above" : 256
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            },
+            ".kibana_92668751_admin_1" : {
+              "mappings" : {
+                "type" : {
+                  "full_name" : "type",
+                  "mapping" : {
+                    "type" : {
+                      "type" : "text",
+                      "fields" : {
+                        "keyword" : {
+                          "type" : "keyword",
+                          "ignore_above" : 256
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+
+In the output, we can see field mapping type for the ``type`` field is ``text`` and should be ``keyword`` for the ``.kibana`` and ``.kibana_92668751_admin_1`` indices. These indices have wrong field mappings and should be removed.
+
+Delete the index/indices that store the saved objects with wrong field mapping.
+  
+.. code-block:: console
+
+  # curl https://<WAZUH_INDEXER_IP>:9200/<INDEX/INDICES_SEPARATED_BY_COMMAS> -u <wazuh_indexer_user>:<wazuh_indexer_password> -k -XDELETE
+
+.. code-block:: none
+          :class: output
+
+          {"acknowledged":true}
+
+
+Restart the Wazuh dashboard service.
+
+.. tabs::
+
+
+  .. group-tab:: Systemd
+
+
+    .. code-block:: console
+
+      # systemctl restart wazuh-dashboard
+
+
+
+  .. group-tab:: SysV
+
+    .. code-block:: console
+
+      # service wazuh-dashboard restart
+
+.. note::
+      These remediations take in account that the index that stores the saved objects have the valid field mappings. The field mappings are defined through a template, so it should exist before the index is created. This template could be added when Wazuh dashboard starts if it doesn't exist.
+
+
 None of the above solutions are fixing my problem
 -------------------------------------------------
 
