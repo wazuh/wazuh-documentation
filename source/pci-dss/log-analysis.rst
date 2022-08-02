@@ -67,35 +67,35 @@ The following are some Wazuh rules that help achieve this requirement:
        systemctl restart wazuh-manager
 
 
-#. Go to the Wazuh dashboard URL in a browser, open the menu and select “Index Management” under “OpenSearch Plugins”.
+#. Go to the Wazuh dashboard URL in a browser, open the menu and select **Index Management** under **OpenSearch Plugins**.
 
 	.. thumbnail:: ../images/pci/select-index-management.png
 		:title: Select Index Management
 		:align: center
 		:width: 100%
 
-#. Under “Index Management”, select indices and verify that ``wazuh-archives-x.x-xxxx.xx.xx`` is present.
+#. Under **Index Management**, select indices and verify that ``wazuh-archives-x.x-xxxx.xx.xx`` is present.
 
 	.. thumbnail:: ../images/pci/select-indices.png
 		:title: Select indices
 		:align: center
 		:width: 100%
 
-#. Go to open the dashboard menu and select “Stack Management” under “Management”.
+#. Go to open the dashboard menu and select **Stack Management** under **Management**.
 
 	.. thumbnail:: ../images/pci/select-stack-management.png
 		:title: Select Stack Management
 		:align: center
 		:width: 100%
     
-#. Choose “Index Patterns” and select “Create index pattern”. Use ``wazuh-archives-*`` as the index pattern name.
+#. Choose **Index Patterns** and select **Create index pattern**. Use ``wazuh-archives-*`` as the index pattern name.
 
 	.. thumbnail:: ../images/pci/select-create-index-pattern.png
 		:title: Select Create index pattern
 		:align: center
 		:width: 100%
     
-#. Open the menu and select “Discover” under “OpenSearch Dashboards”. Events should be getting reported there.
+#. Open the menu and select **Discover** under **OpenSearch Dashboards**. Events should be getting reported there.
 
 	.. thumbnail:: ../images/pci/select-discover-1.png
 		:title: Select Discover

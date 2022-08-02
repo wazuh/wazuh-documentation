@@ -27,7 +27,7 @@ Below are some PCI DSS requirement use cases that can be met with the SCA module
 
 - PCI DSS 2.2.6 requires that system security parameters are configured to prevent misuse. An example of a system security parameter that may be abused if it is misconfigured is IP forwarding. When IP forwarding is configured on a device, it may serve as a router and can be abused.
 
-   In order to perform checks for this specific use case, the SCA module has check 18081 - ``Ensure IP forwarding is disabled``. When an SCA scan is run, we are able to detect if this use case is satisfied.
+   In order to perform checks for this specific use case, the SCA module has check 18081 - **Ensure IP forwarding is disabled**. When an SCA scan is run, we are able to detect if this use case is satisfied.
 
    .. thumbnail:: ../images/pci/ensure-ip-forwarding-is-disabled.png
          :title: Ensure IP forwarding is disabled
