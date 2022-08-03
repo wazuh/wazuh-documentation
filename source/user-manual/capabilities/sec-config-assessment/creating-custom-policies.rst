@@ -180,43 +180,43 @@ Condition
 
 The condition field specifies how rule results are aggregated in order to calculate the final value of a check. There are three options:
 
-- ``all``: the check will be evaluated as **passed** if **all** of its rules are satisfied and as **failed** as soon as one evaluates to **failed**,
+- ``all``: the check will be evaluated as **Passed** if **all** of its rules are satisfied and as **Failed** as soon as one evaluates to **Failed**,
 
-- ``any``: the check will be evaluated as **passed** as soon as **any** of its rules is satisfied,
+- ``any``: the check will be evaluated as **Passed** as soon as **any** of its rules is satisfied,
 
-- ``none``: the check will be evaluated as **passed** if **none** of its rules are satisfied and as **failed** as soon as one evaluates to **passed**.
+- ``none``: the check will be evaluated as **Passed** if **none** of its rules are satisfied and as **Failed** as soon as one evaluates to **Passed**.
 
 Special mention deserves how rules evaluated as **Not applicable** are treated by the aforementioned aggregators.
 
-- ``all``: If any rule returns **Not applicable**, and no rule returns **failed**, the result will be **Not applicable**.
+- ``all``: If any rule returns **Not applicable**, and no rule returns **Failed**, the result will be **Not applicable**.
 
-- ``any``: The check will be evaluated as **Not applicable** if no rule evaluates to **passed** and any returns **Not applicable**.
+- ``any``: The check will be evaluated as **Not applicable** if no rule evaluates to **Passed** and any returns **Not applicable**.
 
-- ``none``: The check will be evaluated as **Not applicable** if no rule evaluates to **passed** and any returns **Not applicable**.
+- ``none``: The check will be evaluated as **Not applicable** if no rule evaluates to **Passed** and any returns **Not applicable**.
 
 .. table:: Condition truth-table
     :widths: auto
 
     +------------------------------+-------------+-------------+-------------------+--------------------+
-    | Condition \\ Rule evaluation |  passed(s)  |  failed(s)  | Not applicable(s) |     Result         |
+    | Condition \\ Rule evaluation |  Passed(s)  |  Failed(s)  | Not applicable(s) |     Result         |
     +==============================+=============+=============+===================+====================+
-    |            ``all``           |     yes     |      no     |         no        |     **passed**     |
+    |            ``all``           |     yes     |      no     |         no        |     **Passed**     |
     +------------------------------+-------------+-------------+-------------------+--------------------+
     |            ``all``           | indifferent |      no     |        yes        | **Not applicable** |
     +------------------------------+-------------+-------------+-------------------+--------------------+
-    |            ``all``           | indifferent |     yes     |    indifferent    |     **failed**     |
+    |            ``all``           | indifferent |     yes     |    indifferent    |     **Failed**     |
     +------------------------------+-------------+-------------+-------------------+--------------------+
-    |            ``any``           |     yes     | indifferent |    indifferent    |     **passed**     |
+    |            ``any``           |     yes     | indifferent |    indifferent    |     **Passed**     |
     +------------------------------+-------------+-------------+-------------------+--------------------+
-    |            ``any``           |      no     |     yes     |         no        |     **failed**     |
+    |            ``any``           |      no     |     yes     |         no        |     **Failed**     |
     +------------------------------+-------------+-------------+-------------------+--------------------+
     |            ``any``           |      no     | indifferent |        yes        | **Not applicable** |
     +------------------------------+-------------+-------------+-------------------+--------------------+
-    |           ``none``           |     yes     | indifferent |    indifferent    |     **failed**     |
+    |           ``none``           |     yes     | indifferent |    indifferent    |     **Failed**     |
     +------------------------------+-------------+-------------+-------------------+--------------------+
     |           ``none``           |      no     | indifferent |        yes        | **Not applicable** |
     +------------------------------+-------------+-------------+-------------------+--------------------+
-    |           ``none``           |      no     |     yes     |         no        |     **passed**     |
+    |           ``none``           |      no     |     yes     |         no        |     **Passed**     |
     +------------------------------+-------------+-------------+-------------------+--------------------+
 
 
@@ -340,8 +340,8 @@ Content check operator results can be negated by adding a ``!`` before then, for
     f:/etc/ssh_config -> !r:PermitRootLogin
 
 .. warning::
-    Be careful when negating content operators as that will make them evaluate as **passed** for **anything** that does not match with the check specified.
-    For example rule ```f:/etc/ssh_config -> !r:PermitRootLogin``` will be evaluated as **passed** if it finds **any line** that does not contain ``PermitRootLogin``.
+    Be careful when negating content operators as that will make them evaluate as **Passed** for **anything** that does not match with the check specified.
+    For example rule ```f:/etc/ssh_config -> !r:PermitRootLogin``` will be evaluated as **Passed** if it finds **any line** that does not contain ``PermitRootLogin``.
 
 Content check operators can be chained using the operator ``&&`` (AND) as follows:
 
