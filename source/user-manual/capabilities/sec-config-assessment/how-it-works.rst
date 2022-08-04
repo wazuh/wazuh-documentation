@@ -31,139 +31,48 @@ Take the following check from policy ``cis_debian9.yml`` as an example.
 
 .. code-block:: yaml
 
-  - id: 2100
-    title: "Ensure auditd service is enabled"
-    description: "Turn on the auditd daemon to record system events."
-    rationale: "The capturing of system events provides system administrators with information to allow them to determine if unauthorized access to their system is occurring."
-    remediation: "Run the following command to enable auditd: # systemctl enable auditd"
-    compliance:
-      - cis: ["4.1.2"]
-      - cis_csc: ["6.2", "6.3"]
-      - pci_dss: ["10.1","10.7"]
-      - tsc: [CC6.1", "CC6.2", "CC6.3", "CC7.2", "CC7.3", "CC7.4"]
-    condition: all
-    rules:
-      - 'c:systemctl is-enabled auditd -> enabled'
-
+   - id: 2100
+     title: "Ensure auditd service is enabled"
+     description: "Turn on the auditd daemon to record system events."
+     rationale: "The capturing of system events provides system administrators with information to allow them to determine if unauthorized access to their system is occurring."
+     remediation: "Run the following command to enable auditd: # systemctl enable auditd"
+     compliance:
+       - cis: ["4.1.2"]
+       - cis_csc: ["6.2", "6.3"]
+       - pci_dss: ["10.1","10.7"]
+       - tsc: [CC6.1", "CC6.2", "CC6.3", "CC7.2", "CC7.3", "CC7.4"]
+     condition: all
+     rules:
+       - 'c:systemctl is-enabled auditd -> enabled'
 
 After evaluating the aforementioned check, the following event is generated:
 
 .. code-block:: JSON
 
-   {
-     "_index": "wazuh-alerts-4.x-env-1-2022.07.20",
-     "_type": "_doc",
-     "_id": "FXzxGoIBzH8x6PVkGY0T",
-     "_version": 1,
-     "_score": null,
-     "_source": {
-       "cluster": {
-         "node": "master",
-         "name": "wazuh1"
-       },
-       "input": {
-         "type": "log"
-       },
-       "agent": {
-         "ip": "10.0.1.127",
-         "name": "Debian",
-         "id": "001"
-       },
-       "manager": {
-         "name": "wazuh-manager-master-0"
-       },
-       "data": {
-         "sca": {
-           "scan_id": "697507169",
-           "check": {
-             "result": "failed",
-             "remediation": "Run the following command to enable auditd: # systemctl enable auditd",
-             "compliance": {
-               "pci_dss": "10.1,10.7",
-               "tsc": "CC6.1\",CC6.2,CC6.3,CC7.2,CC7.3,CC7.4",
-               "cis_csc": "6.2,6.3",
-               "cis": "4.1.2"
-             },
-             "description": "Turn on the auditd daemon to record system events.",
-             "id": "2100",
-             "title": "Ensure auditd service is enabled",
-             "rationale": "The capturing of system events provides system administrators with information to allow them to determine if unauthorized access to their system is occurring.",
-             "command": [
-               "systemctl is-enabled auditd"
-             ]
-           },
-           "type": "check",
-           "policy": "CIS Benchmark for Debian/Linux 9"
-         }
-       },
-       "rule": {
-         "firedtimes": 321,
-         "mail": false,
-         "level": 7,
-         "pci_dss": [
-           "2.2",
-           "10.1",
-           "10.7"
-         ],
-         "tsc": [
-           "CC7.1",
-           "CC7.2",
-           "CC6.1\"",
-           "CC6.2",
-           "CC6.3",
-           "CC7.2",
-           "CC7.3",
-           "CC7.4"
-         ],
-         "cis_csc": [
-           "6.2",
-           "6.3"
-         ],
-         "description": "CIS Benchmark for Debian/Linux 9: Ensure auditd service is enabled",
-         "groups": [
-           "sca"
-         ],
-         "id": "19007",
-         "cis": [
-           "4.1.2"
-         ],
-         "nist_800_53": [
-           "CM.1"
-         ],
-         "gdpr": [
-           "IV_35.7.d"
+   "data": {
+     "sca": {
+       "scan_id": "697507169",
+       "check": {
+         "result": "failed",
+         "remediation": "Run the following command to enable auditd: # systemctl enable auditd",
+         "compliance": {
+           "pci_dss": "10.1,10.7",
+           "tsc": "CC6.1\",CC6.2,CC6.3,CC7.2,CC7.3,CC7.4",
+           "cis_csc": "6.2,6.3",
+           "cis": "4.1.2"
+         },
+         "description": "Turn on the auditd daemon to record system events.",
+         "id": "2100",
+         "title": "Ensure auditd service is enabled",
+         "rationale": "The capturing of system events provides system administrators with information to allow them to determine if unauthorized access to their system is occurring.",
+         "command": [
+           "systemctl is-enabled auditd"
          ]
        },
-       "location": "sca",
-       "decoder": {
-         "name": "sca"
-       },
-       "id": "1658309382.3418893",
-       "timestamp": "2022-07-20T09:29:42.813+0000"
-     },
-     "fields": {
-       "timestamp": [
-         "2022-07-20T09:29:42.813Z"
-       ]
-     },
-     "highlight": {
-       "cluster.name": [
-         "@opensearch-dashboards-highlighted-field@wazuh1@/opensearch-dashboards-highlighted-field@"
-       ],
-       "agent.id": [
-         "@opensearch-dashboards-highlighted-field@001@/opensearch-dashboards-highlighted-field@"
-       ],
-       "data.sca.check.id": [
-         "@opensearch-dashboards-highlighted-field@2100@/opensearch-dashboards-highlighted-field@"
-       ],
-       "rule.groups": [
-         "@opensearch-dashboards-highlighted-field@sca@/opensearch-dashboards-highlighted-field@"
-       ]
-     },
-     "sort": [
-       1658309382813
-     ]
-   }
+       "type": "check",
+       "policy": "CIS Benchmark for Debian/Linux 9"
+     }
+   },
 
 The ``result`` is ``Failed`` because the rule did not find ``enabled`` in the output of command ``systemctl is-enabled auditd``.
 
