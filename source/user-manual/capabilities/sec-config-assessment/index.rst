@@ -30,10 +30,11 @@ The Security Configuration Assessment (SCA) module aims to provide the user with
 Further information is available in the following sections:
 
 .. toctree::
-    :maxdepth: 2
+   :maxdepth: 2
+   :hidden:
 
-    what-is-it
-    how-it-works
-    how-to-configure
-    creating-custom-policies
-    use-case
+   what-is-it
+   how-it-works
+   how-to-configure
+   creating-custom-policies
+   use-case

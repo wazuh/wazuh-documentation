@@ -4,48 +4,56 @@ Creating custom SCA policies
 .. meta::
     :description: Learn more about how to create custom Security Configuration Assessment (SCA) policies with Wazuh and discover some examples. 
 
-.. contents:: Table of Contents
-   :depth: 10
-
 An SCA policy looks like the following:
 
-.. code-block:: yaml
+.. code-block:: YAML
 
-    policy:
-      id: "unix_audit"
-      file: "sca_unix_audit.yml"
-      name: "System audit for Unix based systems"
-      description: "Guidance for establishing a secure configuration for Unix based systems."
-      references:
-        - https://www.ssh.com/ssh/
+   # Security Configuration Assessment
+   # Audit for UNIX systems
+   # Copyright (C) 2015, Wazuh Inc.
+   #
+   # This program is free software; you can redistribute it
+   # and/or modify it under the terms of the GNU General Public
+   # License (version 2) as published by the FSF - Free Software
+   # Foundation
 
-    variables:
-      $sshd_file: /etc/ssh/sshd_config,/opt/ssh/etc/sshd_config
-      $pam_d_files: /etc/pam.d/common-password,/etc/pam.d/password-auth,/etc/pam.d/system-auth,/etc/pam.d/system-auth-ac,/etc/pam.d/passwd
+   policy:
+     id: "unix_audit"
+     file: "sca_unix_audit.yml"
+     name: "System audit for Unix based systems"
+     description: "Guidance for establishing a secure configuration for Unix based systems."
+     references:
+       - https://www.ssh.com/ssh/
 
-    requirements:
-      title: "Check that the SSH service is installed on the system and password-related files are present on the system"
-      description: "Requirements for running the SCA scan against the Unix based systems policy."
-      condition: any
-      rules:
-        - 'f:$sshd_file'
-        - 'f:/etc/passwd'
-        - 'f:/etc/shadow'
+   requirements:
+     title: "Check that the SSH service and password-related files are present on the system"
+     description: "Requirements for running the SCA scan against the Unix based systems policy."
+     condition: any
+     rules:
+       - 'f:$sshd_file'
+       - 'f:/etc/passwd'
+       - 'f:/etc/shadow'
 
-    checks:
-      - id: 4004
-        title: "SSH Hardening - 5: Password Authentication should be disabled"
-        description: "The option PasswordAuthentication should be set to no."
-        rationale: "The option PasswordAuthentication specifies whether we should use password-based authentication. Use public key authentication instead of passwords."
-        remediation: "Change the PasswordAuthentication option value in the sshd_config file."
-        compliance:
-          - pci_dss: ["2.2.4"]
-          - nist_800_53: ["CM.1"]
-        condition: all
-        rules:
-         - 'f:$sshd_file -> r:^\s*PasswordAuthentication\s*\t*no'
+   variables:
+     $sshd_file: /etc/ssh/sshd_config
+     $pam_d_files: /etc/pam.d/common-password,/etc/pam.d/password-auth,/etc/pam.d/system-auth,/etc/pam.d/system-auth-ac,/etc/pam.d/passwd
 
-      - id: [...]
+   checks:
+     - id: 3000
+       title: "SSH Hardening: Port should not be 22"
+       description: "The ssh daemon should not be listening on port 22 (the default value) for incoming connections."
+       rationale: "Changing the default port you may reduce the number of successful attacks from zombie bots, an attacker or bot doing port-scanning can quickly identify your SSH port."
+       remediation: "Change the Port option value in the sshd_config file."
+       compliance:
+         - pci_dss: ["2.2.4"]
+         - nist_800_53: ["CM.1"]
+       condition: all
+       rules:
+         - 'f:$sshd_file -> !r:^# && r:Port && !r:\s*\t*22$'
+
+     - id: 3001
+       title: "SSH Hardening: Protocol should be set to 2"
+       ...
 
 As shown in this example, policy files are comprised by four sections, although not all of them are required, as
 detailed in the :ref:`sca_policy_file_sections` table.
@@ -198,7 +206,7 @@ Special mention deserves how rules evaluated as **Not applicable** are treated b
     :widths: auto
 
     +------------------------------+-------------+-------------+-------------------+--------------------+
-    | Condition \\ Rule evaluation |  Passed(s)  |  Failed(s)  | Not applicable(s) |     Result         |
+    | Condition \\ Rule evaluation |  Passed     |  Failed     | Not applicable    |     Result         |
     +==============================+=============+=============+===================+====================+
     |            ``all``           |     yes     |      no     |         no        |     **Passed**     |
     +------------------------------+-------------+-------------+-------------------+--------------------+

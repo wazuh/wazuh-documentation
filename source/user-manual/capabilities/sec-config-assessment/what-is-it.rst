@@ -4,9 +4,6 @@ What is SCA
 .. meta::
   :description: Learn more about the Security Configuration Assessment capability of Wazuh: what is SCA, overview of an SCA check, and how to interpret SCA scan results. 
   
-.. contents:: Table of Contents
-   :depth: 10
-
 One of the most certain ways to secure hosts is by reducing their vulnerability surface. That process is commonly
 known as hardening, and configuration assessment is an effective way to determine opportunities where hosts could
 have their attack surface reduced, and here is where SCA comes into play.
@@ -26,13 +23,12 @@ Overview of an SCA check
 
 Each check definition comprises:
 
--  Metadata information.
--  A description of the purpose of the check.
+-  Metadata information including a description of the purpose of the check.
 -  A logical description with fields ``condition`` and ``rules``.
 
 As part of the metadata, it can contain an optional ``compliance`` field used to specify if the check is relevant to any compliance specifications. Most Wazuh policies, especially CIS policies, already have their CIS and PCI-DSS controls mapped. In addition, NIST and TSC controls are mapped as well.
 
-See policy ``id 2094`` for Debian 9 operating systems as an example of a policy definition.
+See below policy ``id 2094`` for Debian 9 operating systems as an example of a policy definition.
 
 .. code-block:: YAML
 
