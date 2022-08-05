@@ -18,7 +18,7 @@ To configure the execution of the SCA module with a policy file, it is necessary
 
 SCA will load all the policies present on the default policy folder; this folder is ``/var/ossec/ruleset/sca`` on Unix environments and ``C:\\Program files (x86)\\ossec-agent\\ruleset\\sca`` on Windows.
 
-Results of the first scan are reported and alerts such as the following one are fired for every check:
+Results of the first scan are reported and alerts with SCA scan data are fired for every check.
 
 .. code-block:: JSON
 
@@ -72,7 +72,7 @@ In addition to the check events, SCA will issue an alert that summarizes the res
          }
        },
 
-The alert for check ``id 2139`` appears above. It checks the contents of file ``/etc/ssh/sshd_config``. We can see it does not verify that that SSH root login is disabled.
+The first example of SCA scan data above corresponds to an alert for check ``id 2139``. It checks the contents of file ``/etc/ssh/sshd_config``. We can see in that example that it does not verify that SSH root login is disabled.
 
 Disabling the ``PermitRootLogin`` makes the check to be passed.
 
@@ -81,7 +81,7 @@ Disabling the ``PermitRootLogin`` makes the check to be passed.
    # sed -i 's/PermitRootLogin yes/PermitRootLogin no/g' /etc/ssh/sshd_config
 
 
-The next SCA scan for that policy generates the following alert.
+The next SCA scan for that policy generates an alert with the following SCA scan data.
 
 .. code-block:: JSON
    :emphasize-lines: 5, 7
@@ -114,7 +114,7 @@ The next SCA scan for that policy generates the following alert.
          }
        },
 
-The alert shows how the check has changed from Passed to Failed. This state is updated on the manager side and the last result scanned is available from the SCA tab in the Wazuh dashboard.
+The alert shows how the check has changed from ``Passed`` to ``Failed``. This state is updated on the manager side and the last result scanned is available from the SCA tab in the Wazuh dashboard.
 
 .. thumbnail:: /images/sca/sca-alert-ssh-permit-root-login.png
     :title: Alert generated due to SSH configuration change.

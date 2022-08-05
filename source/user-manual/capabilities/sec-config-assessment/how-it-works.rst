@@ -6,8 +6,7 @@
 How SCA works
 =============
 
-Each agent has its own local database where it stores the current state of each check. Agents only send the differences detected between scans. If there has been no change, only the scan summary event will be sent, thus avoiding unnecessary network traffic while keeping
-the manager up to date. The manager will then use those updates to issue alerts that will be shown in the Wazuh dashboard.
+Each agent has its own local database where it stores the current state of each check. Agents only send the differences detected between scans. If there has been no change, only the scan summary event will be sent, thus avoiding unnecessary network traffic while keeping the manager up to date. The manager will then use those updates to issue alerts that will be shown in the Wazuh dashboard.
 
 Integrity and alerting flow are depicted in the sequence diagram below:
 

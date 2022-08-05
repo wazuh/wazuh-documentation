@@ -51,7 +51,7 @@ See below policy ``id 2094`` for Debian 9 operating systems as an example of a p
 Interpreting SCA scan results
 ----------------------------------
 
-SCA scan results appear as alerts whenever a particular check changes its status between scans. Moreover, Wazuh agents only send those events necessary to keep the global status of the scan updated, avoiding potential events flooding.
+SCA scan results appear as alerts with SCA scan data whenever a particular check changes its status between scans. Moreover, Wazuh agents only send those events necessary to keep the global status of the scan updated, avoiding potential events flooding.
 
 .. code-block:: JSON
 
