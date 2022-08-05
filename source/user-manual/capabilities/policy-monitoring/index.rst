@@ -12,6 +12,9 @@ Policy monitoring is the process of verifying that all systems conform to a set 
 
 Wazuh uses three components to perform this task: *Rootcheck*, *OpenSCAP*, and *CIS-CAT*.
 
+.. note::
+    Since OpenSCAP was deprecated from version 4.0, we recommend using :ref:`Security Configuration Assessment (SCA) <manual_sec_config_assessment>` instead. The SCA was specially created by Wazuh to overcome limitations inherent to the other integrations such as OpenSCAP.
+
 .. topic:: Contents
 
     .. toctree::

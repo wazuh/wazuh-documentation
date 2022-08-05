@@ -1075,6 +1075,8 @@ $wazuh_api_experimental_features
 Wodle OpenSCAP variables
 ------------------------
 
+.. deprecated:: 4.0
+
 $configure_wodle_openscap
   Enables the Wodle OpenSCAP section rendering on this host. If this variable is not set to *true* the complete open-scap wodle tag will not be added to *ossec.conf*.
 

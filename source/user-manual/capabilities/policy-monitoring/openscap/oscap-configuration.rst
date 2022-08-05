@@ -8,6 +8,9 @@
 Configuration
 =============
 
+.. note::
+    Since OpenSCAP was deprecated from version 4.0, we recommend using :ref:`Security Configuration Assessment (SCA) <manual_sec_config_assessment>` instead. The SCA was specially created by Wazuh to overcome limitations inherent to the other integrations such as OpenSCAP.
+
 #. `Basic usage`_
 #. `Evaluate PCI-DSS compliance on RHEL7`_
 #. `Auditing Security Vulnerabilities of Red Hat Products`_

@@ -8,6 +8,9 @@
 FAQ
 ===
 
+.. note::
+    Since OpenSCAP was deprecated from version 4.0, we recommend using :ref:`Security Configuration Assessment (SCA) <manual_sec_config_assessment>` instead. The SCA was specially created by Wazuh to overcome limitations inherent to the other integrations such as OpenSCAP.
+
 #. `Is there a noticeable performance impact when the OpenSCAP wodle is enabled on an agent?`_
 #. `Are evaluations executed in parallel?`_
 #. `How does the interval work?`_
