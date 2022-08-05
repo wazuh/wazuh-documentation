@@ -226,7 +226,7 @@ Linux configuration:
 .. code-block:: xml
 
     <gcp-bucket>
-        <pull_on_start>yes</pull_on_start>
+        <run_on_start>yes</run_on_start>
         <interval>1m</interval>
         <project_id>wazuh-dev</project_id>
         <subscription_name>wazuhdns</subscription_name>
