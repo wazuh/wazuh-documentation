@@ -3,26 +3,24 @@
 .. meta::
   :description: Learn more about how to monitor Google Cloud Platform services with Wazuh in this section of our documentation. 
   
-.. _gcp:
-
 Using Wazuh to monitor GCP services
 ===================================
 
-Wazuh helps to increase the security of a GCP infrastructure by collecting and analyzing log data. This can be achieved by using the Pub/Sub and Storage integration modules.
+Wazuh helps to increase the security of a GCP infrastructure by collecting and analyzing log data.
 
-Each section below contains detailed instructions to configure and set up all of the supported services, and also the required Wazuh configuration to collect the logs.
+In the :doc:`/gcp/prerequisites/index` section there is information on:
 
-This module requires dependencies in order to work, and also the right credentials to access the services. Take a look at the :ref:`gcp_prerequisites` section before proceeding.
+-  The required dependencies and credentials to access the services.
 
+The :doc:`/gcp/supported-services/index` section contains detailed instructions to:
 
-.. topic:: Contents
+-  Configure and set up all the supported services.
+-  Configure Wazuh to collect the logs.
 
-  .. toctree::
-    :maxdepth: 2
-
-    prerequisites/index
-    supported-services/index
-
+ Collecting and analyzing log data to increase the security of a GCP infrastructure can be achieved by using:
+ 
+ -  The Pub/Sub integration module.
+ -  The Storage integration module.
 
 Google Cloud Storage
 --------------------
@@ -30,14 +28,12 @@ Google Cloud Storage
 
 Wazuh can process logs stored in a Google Cloud Storage bucket using the ``gcp-buckets`` module, a highly configurable module that collects any log stored in the bucket and process the events using the defined `threat detection rules and decoders <../user-manual/ruleset/index.html>`__.
 
-
 Google Pub/Sub
 --------------
 
 Wazuh can use the Google Cloud Pub/Sub messaging and ingestion service. It is widely used for event-driven systems and streaming analytics. It allows to send and receive messages between applications. The Wazuh module uses it to fetch different kinds of events (Data access, Admin activity, System events, DNS queries, etc.) from the Google Cloud infrastructure. Once events are collected, Wazuh processes them using its `threat detection rules <../user-manual/ruleset/index.html>`__.
 
-The Wazuh module for GCP (``gcp-pubsub``) provides the capability to monitor GCP-based services. 
-
+The Wazuh module for GCP ``gcp-pubsub`` provides the capability to monitor GCP-based services. 
 
 Data flow
 ~~~~~~~~~
@@ -66,3 +62,11 @@ The Wazuh module for GCP Pub/Sub uses a `Python library <https://googleapis.dev/
 The module's performance benefits from horizontal scaling. To achieve the performance boost, it is necessary to configure the module for the same subscription on different machines (either managers or agents).
 
 In addition, it is possible to use multiple threads to pull a larger number of messages using the ``num_threads`` parameter in the :ref:`module configuration <num_threads>`.
+
+.. topic:: Contents
+
+   .. toctree::
+      :hidden:
+
+      prerequisites/index
+      supported-services/index

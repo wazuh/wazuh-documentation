@@ -58,11 +58,12 @@ Currently the GCP integration only allows the credentials to be provided using a
 Using an authentication file
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-As explained before, the GCP integration requires a credentials file in JSON format containing the private key to access **Google Cloud Pub/Sub** or **Google Cloud Storage bucket**.
+As explained before, the GCP integration requires a credentials file in JSON format containing the private key to access Google Cloud Pub/Sub or Google Cloud Storage bucket.
 
-Regardless of the service the authentication file is always specified in the ``ossec.conf`` configuration using the ``credentials_file`` tag. Take a look to the following example:
+Regardless of the service the authentication file is always specified in the ``ossec.conf`` configuration file using the ``<credentials_file>`` tag. Take a look to the following example:
 
 .. code-block:: xml
+   :emphasize-lines: 7, 16
 
     <gcp-pubsub>
         <pull_on_start>yes</pull_on_start>
@@ -84,5 +85,5 @@ Regardless of the service the authentication file is always specified in the ``o
 
 
 
-Check the :doc:`gcp-pubsub </user-manual/reference/ossec-conf/gcp-pubsub>` and :doc:`gcp-bucket </user-manual/reference/ossec-conf/gcp-bucket>` sections from ``ossec.conf`` reference page for more information about the ``credentials_file`` and many other available parameters.
+Check the :doc:`gcp-pubsub </user-manual/reference/ossec-conf/gcp-pubsub>` and :doc:`gcp-bucket </user-manual/reference/ossec-conf/gcp-bucket>` sections from the ossec.conf reference page for more information about the ``<credentials_file>`` and many other available parameters.
 
