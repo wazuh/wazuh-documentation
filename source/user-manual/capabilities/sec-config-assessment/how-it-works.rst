@@ -89,8 +89,7 @@ two integrity mechanisms have been included in SCA, one for policy files and the
 Integrity of policy files
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-This mechanism is in charge of keeping policy files and scan results aligned. Whenever a change in a policy
-files is detected, SCA will invalidate the results stored in the database for that policy and request a
+This mechanism is in charge of keeping policy files and scan results aligned. Whenever a change in a policy file is detected, SCA will invalidate the results stored in the database for that policy and request a
 fresh dump of them.
 
 In a nutshell, whenever the hash of a policy file changes, the recovery steps performed are:
