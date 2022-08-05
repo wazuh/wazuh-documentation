@@ -313,6 +313,7 @@ agent:read
 - :api-ref:`GET /agents/summary/os <operation/api.controllers.agent_controller.get_agent_summary_os>` (`agent:id`_, `agent:group`_)
 - :api-ref:`GET /agents/summary/status <operation/api.controllers.agent_controller.get_agent_summary_status>` (`agent:id`_, `agent:group`_)
 - :api-ref:`GET /agents/{agent_id}/config/{component}/{configuration} <operation/api.controllers.agent_controller.get_agent_config>` (`agent:id`_, `agent:group`_)
+- :api-ref:`GET /agents/{agent_id}/daemons/stats <operation/api.controllers.agent_controller.get_daemon_stats>` (`agent:id`_, `agent:group`_)
 - :api-ref:`GET /agents/{agent_id}/group/is_sync <operation/api.controllers.agent_controller.get_sync_agent>` (`agent:id`_, `agent:group`_)
 - :api-ref:`GET /agents/{agent_id}/key <operation/api.controllers.agent_controller.get_agent_key>` (`agent:id`_, `agent:group`_)
 - :api-ref:`GET /groups/{group_id}/agents <operation/api.controllers.agent_controller.get_agents_in_group>` (`agent:id`_, `agent:group`_)
@@ -360,6 +361,7 @@ cluster:read
 - :api-ref:`GET /cluster/nodes <operation/api.controllers.cluster_controller.get_cluster_nodes>` (`node:id`_)
 - :api-ref:`GET /cluster/{node_id}/configuration <operation/api.controllers.cluster_controller.get_configuration_node>` (`node:id`_)
 - :api-ref:`GET /cluster/{node_id}/configuration/{component}/{configuration} <operation/api.controllers.cluster_controller.get_node_config>` (`node:id`_)
+- :api-ref:`GET /cluster/{node_id}/daemons/stats <operation/api.controllers.cluster_controller.get_daemon_stats_node>` (`node:id`_)
 - :api-ref:`GET /cluster/{node_id}/info <operation/api.controllers.cluster_controller.get_info_node>` (`node:id`_)
 - :api-ref:`GET /cluster/{node_id}/logs <operation/api.controllers.cluster_controller.get_log_node>` (`node:id`_)
 - :api-ref:`GET /cluster/{node_id}/logs/summary <operation/api.controllers.cluster_controller.get_log_summary_node>` (`node:id`_)
@@ -476,6 +478,7 @@ manager:read
 - :api-ref:`GET /manager/configuration <operation/api.controllers.manager_controller.get_configuration>` (`*:*`_)
 - :api-ref:`GET /manager/configuration/validation <operation/api.controllers.manager_controller.get_conf_validation>` (`*:*`_)
 - :api-ref:`GET /manager/configuration/{component}/{configuration} <operation/api.controllers.manager_controller.get_manager_config_ondemand>` (`*:*`_)
+- :api-ref:`GET /manager/daemons/stats <operation/api.controllers.manager_controller.get_daemon_stats>` (`*:*`_)`
 - :api-ref:`GET /manager/info <operation/api.controllers.manager_controller.get_info>` (`*:*`_)
 - :api-ref:`GET /manager/logs <operation/api.controllers.manager_controller.get_log>` (`*:*`_)
 - :api-ref:`GET /manager/logs/summary <operation/api.controllers.manager_controller.get_log_summary>` (`*:*`_)
