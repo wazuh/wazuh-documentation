@@ -77,19 +77,7 @@ Use Logstash on a Windows host with a Wazuh agent to receive syslog, log to a fi
    #. `Download the Logstash <https://www.elastic.co/downloads/logstash>`_ ZIP package.
    #. Extract the ZIP contents into a local folder, for example, to ``C:\logstash\``.
 
-2. Install ``logstash-input-syslog`` and ``logstash-output-file`` plugins.
-
-   .. code-block::
-      
-      C:\logstash\bin>logstash-plugin install logstash-input-syslog
-
-   .. code-block::
-               
-      C:\logstash\bin>logstash-plugin install logstash-output-file
-
-   If you are using PowerShell, make sure to add ``.\`` before the executable: ``.\logstash-plugin``
-
-3. Configure Logstash.
+2. Configure Logstash.
 
    Create the following file: ``C:\logstash\config\logstash.conf``
 
@@ -110,9 +98,9 @@ Use Logstash on a Windows host with a Wazuh agent to receive syslog, log to a fi
 
 To perform the following steps, make sure to replace ``file_name.log`` with the name chosen for this log.
 
-4. Deploy a Wazuh agent on the same host that has Logstash.
+3. Deploy a Wazuh agent on the same host that has Logstash.
    
-5. Configure the agent to read the Logstash output file.
+4. Configure the agent to read the Logstash output file.
 
    Edit ``C:\Program Files (x86)\ossec-agent\ossec.conf`` by adding the following configuration:
 
@@ -125,7 +113,7 @@ To perform the following steps, make sure to replace ``file_name.log`` with the 
       </localfile>
       </ossec_config>
 
-6. Restart Logstash.
+5. Restart Logstash.
 
    #. Run Logstash from the command line:
 
@@ -135,7 +123,7 @@ To perform the following steps, make sure to replace ``file_name.log`` with the 
    
    #. `Install Logstash as a Windows Service <https://www.elastic.co/guide/en/logstash/current/running-logstash-windows.html#running-logstash-windows>`_ either using `NSSM <https://www.elastic.co/guide/en/logstash/current/running-logstash-windows.html#running-logstash-windows-nssm>`_ or `Windows Task Scheduler <https://www.elastic.co/guide/en/logstash/current/running-logstash-windows.html#running-logstash-windows-scheduledtask>`_.
 
-7. Restart the Wazuh agent. If you are running PowerShell, use the following command:
+6. Restart the Wazuh agent. If you are running PowerShell, use the following command:
 
    .. code-block:: console
       
