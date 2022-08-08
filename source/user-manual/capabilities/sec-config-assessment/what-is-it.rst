@@ -23,12 +23,12 @@ Overview of an SCA check
 
 Each check definition comprises:
 
--  Metadata information including a description of the purpose of the check.
+-  Metadata information including a rationale, a remediation and a description of the check.
 -  A logical description with fields ``condition`` and ``rules``.
 
-As part of the metadata, it can contain an optional ``compliance`` field used to specify if the check is relevant to any compliance specifications. Most Wazuh policies, especially CIS policies, already have their CIS and PCI-DSS controls mapped. In addition, NIST and TSC controls are mapped as well.
+As part of the metadata, it can contain an optional ``compliance`` field used to specify if the check is relevant to any compliance specifications. Most Wazuh policies, especially CIS policies, have their CIS and PCI-DSS controls mapped. In addition, NIST and TSC controls are mapped as well.
 
-See below policy ``id 2094`` for Debian 9 operating systems as an example of a policy definition.
+See below policy ``id 2094`` for Debian 9 operating system as an example of a policy definition.
 
 .. code-block:: YAML
 
@@ -49,36 +49,38 @@ See below policy ``id 2094`` for Debian 9 operating systems as an example of a p
        - 'c:ip6tables -L -> r:^Chain OUTPUT && r:policy DROP'
 
 Interpreting SCA scan results
-----------------------------------
+-----------------------------
 
 SCA scan results appear as alerts with SCA scan data whenever a particular check changes its status between scans. Moreover, Wazuh agents only send those events necessary to keep the global status of the scan updated, avoiding potential events flooding.
 
 .. code-block:: JSON
 
-   "data": {
-     "sca": {
-       "scan_id": "697507169",
-       "check": {
-         "result": "failed",
-         "remediation": "Run the following commands to implement a default DROP policy: # ip6tables -P INPUT DROP # ip6tables -P OUTPUT DROP # ip6tables -P FORWARD DROP. Notes: Changing firewall settings while connected over network can result in being locked out of the system. Remediation will only affect the active system firewall, be sure to configure the default policy in your firewall management to apply on boot as well.",
-         "compliance": {
-           "pci_dss": "1.2.1",
-           "tsc": "CC8.1",
-           "cis_csc": "9.4",
-           "cis": "3.5.2.1"
+   {
+     "data": {
+       "sca": {
+         "scan_id": "697507169",
+         "check": {
+           "result": "failed",
+           "remediation": "Run the following commands to implement a default DROP policy: # ip6tables -P INPUT DROP # ip6tables -P OUTPUT DROP # ip6tables -P FORWARD DROP. Notes: Changing firewall settings while connected over network can result in being locked out of the system. Remediation will only affect the active system firewall, be sure to configure the default policy in your firewall management to apply on boot as well.",
+           "compliance": {
+             "pci_dss": "1.2.1",
+             "tsc": "CC8.1",
+             "cis_csc": "9.4",
+             "cis": "3.5.2.1"
+           },
+           "description": "A default deny all policy on connections ensures that any unconfigured network usage will be rejected.",
+           "id": "2094",
+           "title": "Ensure IPv6 default deny firewall policy",
+           "rationale": "With a default accept policy the firewall will accept any packet that is not configured to be denied. It is easier to white list acceptable usage than to black list unacceptable usage.",
+           "command": [
+             "ip6tables -L"
+           ]
          },
-         "description": "A default deny all policy on connections ensures that any unconfigured network usage will be rejected.",
-         "id": "2094",
-         "title": "Ensure IPv6 default deny firewall policy",
-         "rationale": "With a default accept policy the firewall will accept any packet that is not configured to be denied. It is easier to white list acceptable usage than to black list unacceptable usage.",
-         "command": [
-           "ip6tables -L"
-         ]
-       },
-       "type": "check",
-       "policy": "CIS Benchmark for Debian/Linux 9"
+         "type": "check",
+         "policy": "CIS Benchmark for Debian/Linux 9"
+       }
      }
-   },
+   }
 
 Scan results summaries are then shown on the Wazuh dashboard, within the Security configuration assessment module.
 

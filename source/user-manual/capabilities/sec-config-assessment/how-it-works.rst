@@ -20,9 +20,9 @@ Scan Results
 
 Any given check event has three possible results:
 
--  ``Passed``
--  ``Failed``
--  ``Not applicable``
+-  Passed
+-  Failed
+-  Not applicable
 
 This result is determined by the set of rules and the rule result aggregator of the check.
 
@@ -48,32 +48,34 @@ After evaluating the aforementioned check, the following event is generated:
 
 .. code-block:: JSON
 
-   "data": {
-     "sca": {
-       "scan_id": "697507169",
-       "check": {
-         "result": "failed",
-         "remediation": "Run the following command to enable auditd: # systemctl enable auditd",
-         "compliance": {
-           "pci_dss": "10.1,10.7",
-           "tsc": "CC6.1\",CC6.2,CC6.3,CC7.2,CC7.3,CC7.4",
-           "cis_csc": "6.2,6.3",
-           "cis": "4.1.2"
+   {
+     "data": {
+       "sca": {
+         "scan_id": "697507169",
+         "check": {
+           "result": "failed",
+           "remediation": "Run the following command to enable auditd: # systemctl enable auditd",
+           "compliance": {
+             "pci_dss": "10.1,10.7",
+             "tsc": "CC6.1,CC6.2,CC6.3,CC7.2,CC7.3,CC7.4",
+             "cis_csc": "6.2,6.3",
+             "cis": "4.1.2"
+           },
+           "description": "Turn on the auditd daemon to record system events.",
+           "id": "2100",
+           "title": "Ensure auditd service is enabled",
+           "rationale": "The capturing of system events provides system administrators with information to allow them to determine if unauthorized access to their system is occurring.",
+           "command": [
+             "systemctl is-enabled auditd"
+           ]
          },
-         "description": "Turn on the auditd daemon to record system events.",
-         "id": "2100",
-         "title": "Ensure auditd service is enabled",
-         "rationale": "The capturing of system events provides system administrators with information to allow them to determine if unauthorized access to their system is occurring.",
-         "command": [
-           "systemctl is-enabled auditd"
-         ]
-       },
-       "type": "check",
-       "policy": "CIS Benchmark for Debian/Linux 9"
+         "type": "check",
+         "policy": "CIS Benchmark for Debian/Linux 9"
+       }
      }
-   },
+   }
 
-The ``result`` is ``Failed`` because the rule did not find ``enabled`` in the output of command ``systemctl is-enabled auditd``.
+The result is `failed` because the rule did not find ``enabled`` in the output of command ``systemctl is-enabled auditd``.
 
 .. note::
   A **check** will be marked as ``Not applicable`` in case an error occurs while performing the check.
@@ -121,13 +123,13 @@ database and the manager-side differ. This scenario could happen due to, for ins
     +----------+------------------+--------------------+
     | Check ID | Agent-side state | Manager-side state |
     +==========+==================+====================+
-    | 1000     | ``Passed``       | ``Passed``         |
+    | 1000     | Passed           | Passed             |
     +----------+------------------+--------------------+
-    | 1001     | ``Failed``       | ``Failed``         |
+    | 1001     | Failed           | Failed             |
     +----------+------------------+--------------------+
-    | 1002     | ``Failed``       | Missing            |
+    | 1002     | Failed           | Missing            |
     +----------+------------------+--------------------+
-    | 1003     | ``Passed``       | ``Passed``         |
+    | 1003     | Passed           | Passed             |
     +----------+------------------+--------------------+
 
 For those databases, the corresponding SHA256 hashes are:

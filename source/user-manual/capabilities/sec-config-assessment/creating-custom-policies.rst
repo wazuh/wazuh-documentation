@@ -188,48 +188,49 @@ Condition
 
 The condition field specifies how rule results are aggregated in order to calculate the final value of a check. There are three options:
 
-- ``all``: the check will be evaluated as ``Passed`` if **all** of its rules are satisfied and as ``Failed`` as soon as one evaluates to ``Failed``,
+- ``all``: the check will be evaluated as `Passed` if `all` of its rules are satisfied and as `Failed` as soon as one rule is not satisfied,
 
-- ``any``: the check will be evaluated as ``Passed`` as soon as **any** of its rules is satisfied,
+- ``any``: the check will be evaluated as `Passed` as soon as `any` of its rules is satisfied,
 
-- ``none``: the check will be evaluated as ``Passed`` if **none** of its rules are satisfied and as ``Failed`` as soon as one evaluates to ``Passed``.
+- ``none``: the check will be evaluated as `Passed` if `none` of its rules are satisfied and as `Failed` as soon as one rule is satisfied.
 
-Special mention deserves how rules evaluated as ``Not applicable`` are treated by the aforementioned aggregators.
+Special mention deserves how rules evaluated as `Not applicable` are treated by the aforementioned aggregators.
 
-- ``all``: If any rule returns ``Not applicable``, and no rule returns ``Failed``, the result will be ``Not applicable``.
+- ``all``: If any rule returns `Not applicable`, and no rule returns `Failed`, the result will be `Not applicable`.
 
-- ``any``: The check will be evaluated as ``Not applicable`` if no rule evaluates to ``Passed`` and any returns ``Not applicable``.
+- ``any``: The check will be evaluated as `Not applicable` if no rule is evaluated as `Passed` and any returns `Not applicable`.
 
-- ``none``: The check will be evaluated as ``Not applicable`` if no rule evaluates to ``Passed`` and any returns ``Not applicable``.
+- ``none``: The check will be evaluated as `Not applicable` if no rule is evaluated as `Passed` and any returns `Not applicable`.
 
-.. table:: Condition truth-table
+.. table:: 
     :widths: auto
 
     +------------------------------+-------------+-------------+-------------------+--------------------+
     | Condition \\ Rule evaluation |  Passed     |  Failed     | Not applicable    |     Result         |
     +==============================+=============+=============+===================+====================+
-    |            ``all``           |     yes     |      no     |         no        |     ``Passed``     |
+    |            ``all``           |     yes     |      no     |         no        |     Passed         |
     +------------------------------+-------------+-------------+-------------------+--------------------+
-    |            ``all``           | indifferent |      no     |        yes        | ``Not applicable`` |
+    |            ``all``           | \*          |      no     |        yes        |  Not applicable    |
     +------------------------------+-------------+-------------+-------------------+--------------------+
-    |            ``all``           | indifferent |     yes     |    indifferent    |     ``Failed``     |
+    |            ``all``           | \*          |     yes     | \*                |     Failed         |
     +------------------------------+-------------+-------------+-------------------+--------------------+
-    |            ``any``           |     yes     | indifferent |    indifferent    |     ``Passed``     |
+    |            ``any``           |     yes     | \*          | \*                |     Passed         |
     +------------------------------+-------------+-------------+-------------------+--------------------+
-    |            ``any``           |      no     |     yes     |         no        |     ``Failed``     |
+    |            ``any``           |      no     |     yes     |         no        |     Failed         |
     +------------------------------+-------------+-------------+-------------------+--------------------+
-    |            ``any``           |      no     | indifferent |        yes        | ``Not applicable`` |
+    |            ``any``           |      no     |  \*         |        yes        |  Not applicable    |
     +------------------------------+-------------+-------------+-------------------+--------------------+
-    |           ``none``           |     yes     | indifferent |    indifferent    |     ``Failed``     |
+    |           ``none``           |     yes     |  \*         | \*                |     Failed         |
     +------------------------------+-------------+-------------+-------------------+--------------------+
-    |           ``none``           |      no     | indifferent |        yes        | ``Not applicable`` |
+    |           ``none``           |      no     |  \*         |        yes        |  Not applicable    |
     +------------------------------+-------------+-------------+-------------------+--------------------+
-    |           ``none``           |      no     |     yes     |         no        |     ``Passed``     |
+    |           ``none``           |      no     |     yes     |         no        |     Passed         |
     +------------------------------+-------------+-------------+-------------------+--------------------+
 
+\* This result does not affect the final result. 
 
 Rules
-~~~~~~~~~~~~~~~~~~~
+~~~~~
 
 Rules can check for the existence of files, directories, registry keys and values, running processes, and recursively
 test for the existence of files inside directories. When it comes to content checking, they are able to check for file

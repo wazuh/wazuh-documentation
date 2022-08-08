@@ -25,13 +25,12 @@ The Security Configuration Assessment (SCA) module aims to provide the user with
 
 -  State of the last SCA scan. The results of the checks for every enabled policy are stored in the Wazuh manager. They can be consulted at the SCA tab in the Wazuh dashboard.
 -  Alerts on SCA state changes. Only state changes and new checks are alerted to avoid alert flooding and repeated alerts with every new scan. State changes are updated in the Wazuh manager database.
--  YAML format for policy files. Policies used by *Rootcheck* are enriched and use the YAML format. CIS policies are based on CIS benchmarks.
+-  YAML format for policy files. CIS policies are based on CIS benchmarks.
 
 Further information is available in the following sections:
 
 .. toctree::
    :maxdepth: 2
-   :hidden:
 
    what-is-it
    how-it-works
