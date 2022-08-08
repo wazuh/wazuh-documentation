@@ -349,8 +349,8 @@ Content check operator results can be negated by adding a ``!`` before then, for
     f:/etc/ssh_config -> !r:PermitRootLogin
 
 .. warning::
-    Be careful when negating content operators as that will make them evaluate as ``Passed`` for **anything** that does not match with the check specified.
-    For example rule ```f:/etc/ssh_config -> !r:PermitRootLogin``` will be evaluated as ``Passed`` if it finds **any line** that does not contain ``PermitRootLogin``.
+    Be careful when negating content operators as that will make them evaluate as `Passed` for **anything** that does not match with the check specified.
+    For example rule ```f:/etc/ssh_config -> !r:PermitRootLogin``` will be evaluated as `Passed` if it finds **any line** that does not contain ``PermitRootLogin``.
 
 Content check operators can be chained using the operator ``&&`` (AND) as follows:
 
