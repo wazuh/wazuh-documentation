@@ -55,7 +55,7 @@ An SCA policy looks like the following:
        title: "SSH Hardening: Protocol should be set to 2"
        ...
 
-As shown in this example, policy files are comprised by four sections, although not all of them are required, as
+As shown in this example, policy files are comprised of four sections, although not all of them are required, as
 detailed in the :ref:`sca_policy_file_sections` table.
 
 .. _sca_policy_file_sections:
