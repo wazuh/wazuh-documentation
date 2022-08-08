@@ -55,32 +55,30 @@ SCA scan results appear as alerts with SCA scan data whenever a particular check
 
 .. code-block:: JSON
 
-   {
-     "data": {
-       "sca": {
-         "scan_id": "697507169",
-         "check": {
-           "result": "failed",
-           "remediation": "Run the following commands to implement a default DROP policy: # ip6tables -P INPUT DROP # ip6tables -P OUTPUT DROP # ip6tables -P FORWARD DROP. Notes: Changing firewall settings while connected over network can result in being locked out of the system. Remediation will only affect the active system firewall, be sure to configure the default policy in your firewall management to apply on boot as well.",
-           "compliance": {
-             "pci_dss": "1.2.1",
-             "tsc": "CC8.1",
-             "cis_csc": "9.4",
-             "cis": "3.5.2.1"
-           },
-           "description": "A default deny all policy on connections ensures that any unconfigured network usage will be rejected.",
-           "id": "2094",
-           "title": "Ensure IPv6 default deny firewall policy",
-           "rationale": "With a default accept policy the firewall will accept any packet that is not configured to be denied. It is easier to white list acceptable usage than to black list unacceptable usage.",
-           "command": [
-             "ip6tables -L"
-           ]
+   "data": {
+     "sca": {
+       "scan_id": "697507169",
+       "check": {
+         "result": "failed",
+         "remediation": "Run the following commands to implement a default DROP policy: # ip6tables -P INPUT DROP # ip6tables -P OUTPUT DROP # ip6tables -P FORWARD DROP. Notes: Changing firewall settings while connected over network can result in being locked out of the system. Remediation will only affect the active system firewall, be sure to configure the default policy in your firewall management to apply on boot as well.",
+         "compliance": {
+           "pci_dss": "1.2.1",
+           "tsc": "CC8.1",
+           "cis_csc": "9.4",
+           "cis": "3.5.2.1"
          },
-         "type": "check",
-         "policy": "CIS Benchmark for Debian/Linux 9"
-       }
+         "description": "A default deny all policy on connections ensures that any unconfigured network usage will be rejected.",
+         "id": "2094",
+         "title": "Ensure IPv6 default deny firewall policy",
+         "rationale": "With a default accept policy the firewall will accept any packet that is not configured to be denied. It is easier to white list acceptable usage than to black list unacceptable usage.",
+         "command": [
+           "ip6tables -L"
+         ]
+       },
+       "type": "check",
+       "policy": "CIS Benchmark for Debian/Linux 9"
      }
-   }
+   },
 
 Scan results summaries are then shown on the Wazuh dashboard, within the Security configuration assessment module.
 

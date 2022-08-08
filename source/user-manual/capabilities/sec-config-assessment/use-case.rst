@@ -21,35 +21,33 @@ SCA will load all the policies present on the default policy folder; this folder
 Results of the first scan are reported and alerts with SCA scan data are fired for every check.
 
 .. code-block:: JSON
-
-   {    
-     "data": {
-       "sca": {
-         "scan_id": "107317899",
-         "check": {
-           "result": "failed",
-           "remediation": "Edit the /etc/ssh/sshd_config file to set the parameter as follows: PermitRootLogin no",
-           "compliance": {
-             "pci_dss": "4.1",
-             "hipaa": "164.312.a.2.IV,164.312.e.1,164.312.e.2.I,164.312.e.2.II",
-             "tsc": "CC6.7",
-             "cis_csc": "4.3",
-             "cis": "5.2.10",
-             "nist_800_53": "SC.8"
-           },
-           "description": "The PermitRootLogin parameter specifies if the root user can log in using ssh(1). The default is no.",
-           "id": "2139",
-           "title": "Ensure SSH root login is disabled",
-           "rationale": "Disallowing root logins over SSH requires server admins to authenticate using their own individual account, then escalating to root via sudo or su. This in turn limits opportunity for non-repudiation and provides a clear audit trail in the event of a security incident.",
-           "command": [
-             "sshd -T"
-           ]
+    
+   "data": {
+     "sca": {
+       "scan_id": "107317899",
+       "check": {
+         "result": "failed",
+         "remediation": "Edit the /etc/ssh/sshd_config file to set the parameter as follows: PermitRootLogin no",
+         "compliance": {
+           "pci_dss": "4.1",
+           "hipaa": "164.312.a.2.IV,164.312.e.1,164.312.e.2.I,164.312.e.2.II",
+           "tsc": "CC6.7",
+           "cis_csc": "4.3",
+           "cis": "5.2.10",
+           "nist_800_53": "SC.8"
          },
-         "type": "check",
-         "policy": "CIS Benchmark for Debian/Linux 9"
-       }
+         "description": "The PermitRootLogin parameter specifies if the root user can log in using ssh(1). The default is no.",
+         "id": "2139",
+         "title": "Ensure SSH root login is disabled",
+         "rationale": "Disallowing root logins over SSH requires server admins to authenticate using their own individual account, then escalating to root via sudo or su. This in turn limits opportunity for non-repudiation and provides a clear audit trail in the event of a security incident.",
+         "command": [
+           "sshd -T"
+         ]
+       },
+       "type": "check",
+       "policy": "CIS Benchmark for Debian/Linux 9"
      }
-   }     
+   }, 
 
 Those alerts will inform about the initial status of checks. Furthermore, no additional alerts will be
 issued unless the state of a check changes between successive scans.
@@ -58,23 +56,21 @@ In addition to the check events, SCA will issue an alert that summarizes the res
 
 .. code-block:: JSON
 
-   {
-     "data": {
-       "sca": {
-         "score": "38",
-         "total_checks": "175",
-         "file": "cis_debian9.yml",
-         "policy_id": "cis_debian9",
-         "invalid": "7",
-         "description": "This document provides prescriptive guidance for establishing a secure configuration posture for Debian Linux 9.",
-         "scan_id": "107317899",
-         "passed": "64",
-         "failed": "104",
-         "type": "summary",
-         "policy": "CIS Benchmark for Debian/Linux 9"
-       }
+   "data": {
+     "sca": {
+       "score": "38",
+       "total_checks": "175",
+       "file": "cis_debian9.yml",
+       "policy_id": "cis_debian9",
+       "invalid": "7",
+       "description": "This document provides prescriptive guidance for establishing a secure configuration posture for Debian Linux 9.",
+       "scan_id": "107317899",
+       "passed": "64",
+       "failed": "104",
+       "type": "summary",
+       "policy": "CIS Benchmark for Debian/Linux 9"
      }
-   }       
+   },      
 
 The first example of SCA scan data above corresponds to an alert for check ``id 2139``. It checks the contents of file ``/etc/ssh/sshd_config``. We can see in that example that it does not verify that SSH root login is disabled.
 
@@ -88,37 +84,35 @@ Disabling the ``PermitRootLogin`` makes the check to be passed.
 The next SCA scan for that policy generates an alert with the following SCA scan data.
 
 .. code-block:: JSON
-   :emphasize-lines: 6, 8
+   :emphasize-lines: 5, 7
 
-   {
-     "data": {
-        "sca": {
-          "scan_id": "1427001503",
-          "check": {
-            "result": "passed",
-            "remediation": "Edit the /etc/ssh/sshd_config file to set the parameter as follows: PermitRootLogin no",
-            "previous_result": "failed",
-            "compliance": {
-              "pci_dss": "4.1",
-              "hipaa": "164.312.a.2.IV,164.312.e.1,164.312.e.2.I,164.312.e.2.II",
-              "tsc": "CC6.7",
-              "cis_csc": "4.3",
-              "cis": "5.2.10",
-              "nist_800_53": "SC.8"
-            },
-            "description": "The PermitRootLogin parameter specifies if the root user can log in using ssh(1). The default is no.",
-            "id": "2139",
-            "title": "Ensure SSH root login is disabled",
-            "rationale": "Disallowing root logins over SSH requires server admins to authenticate using their own individual account, then escalating to root via sudo or su. This in turn limits opportunity for non-repudiation and provides a clear audit trail in the event of a security incident.",
-            "command": [
-              "sshd -T"
-            ]
+   "data": {
+      "sca": {
+        "scan_id": "1427001503",
+        "check": {
+          "result": "passed",
+          "remediation": "Edit the /etc/ssh/sshd_config file to set the parameter as follows: PermitRootLogin no",
+          "previous_result": "failed",
+          "compliance": {
+            "pci_dss": "4.1",
+            "hipaa": "164.312.a.2.IV,164.312.e.1,164.312.e.2.I,164.312.e.2.II",
+            "tsc": "CC6.7",
+            "cis_csc": "4.3",
+            "cis": "5.2.10",
+            "nist_800_53": "SC.8"
           },
-          "type": "check",
-          "policy": "CIS Benchmark for Debian/Linux 9"
-        }
+          "description": "The PermitRootLogin parameter specifies if the root user can log in using ssh(1). The default is no.",
+          "id": "2139",
+          "title": "Ensure SSH root login is disabled",
+          "rationale": "Disallowing root logins over SSH requires server admins to authenticate using their own individual account, then escalating to root via sudo or su. This in turn limits opportunity for non-repudiation and provides a clear audit trail in the event of a security incident.",
+          "command": [
+            "sshd -T"
+          ]
+        },
+        "type": "check",
+        "policy": "CIS Benchmark for Debian/Linux 9"
       }
-    }
+    },
 
 The alert shows how the check has changed from `Passed` to `Failed`. This state is updated on the manager side and the last result scanned is available from the SCA tab in the Wazuh dashboard.
 

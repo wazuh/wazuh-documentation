@@ -48,32 +48,30 @@ After evaluating the aforementioned check, the following event is generated:
 
 .. code-block:: JSON
 
-   {
-     "data": {
-       "sca": {
-         "scan_id": "697507169",
-         "check": {
-           "result": "failed",
-           "remediation": "Run the following command to enable auditd: # systemctl enable auditd",
-           "compliance": {
-             "pci_dss": "10.1,10.7",
-             "tsc": "CC6.1,CC6.2,CC6.3,CC7.2,CC7.3,CC7.4",
-             "cis_csc": "6.2,6.3",
-             "cis": "4.1.2"
-           },
-           "description": "Turn on the auditd daemon to record system events.",
-           "id": "2100",
-           "title": "Ensure auditd service is enabled",
-           "rationale": "The capturing of system events provides system administrators with information to allow them to determine if unauthorized access to their system is occurring.",
-           "command": [
-             "systemctl is-enabled auditd"
-           ]
+   "data": {
+     "sca": {
+       "scan_id": "697507169",
+       "check": {
+         "result": "failed",
+         "remediation": "Run the following command to enable auditd: # systemctl enable auditd",
+         "compliance": {
+           "pci_dss": "10.1,10.7",
+           "tsc": "CC6.1,CC6.2,CC6.3,CC7.2,CC7.3,CC7.4",
+           "cis_csc": "6.2,6.3",
+           "cis": "4.1.2"
          },
-         "type": "check",
-         "policy": "CIS Benchmark for Debian/Linux 9"
-       }
+         "description": "Turn on the auditd daemon to record system events.",
+         "id": "2100",
+         "title": "Ensure auditd service is enabled",
+         "rationale": "The capturing of system events provides system administrators with information to allow them to determine if unauthorized access to their system is occurring.",
+         "command": [
+           "systemctl is-enabled auditd"
+         ]
+       },
+       "type": "check",
+       "policy": "CIS Benchmark for Debian/Linux 9"
      }
-   }
+   },
 
 The result is `failed` because the rule did not find ``enabled`` in the output of command ``systemctl is-enabled auditd``.
 
