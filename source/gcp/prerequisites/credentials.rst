@@ -9,9 +9,9 @@
 Configuring GCP credentials
 ===========================
 
-In order to make the Wazuh GCP module pull log data from Google Pub/Sub or Google Storage, it will be necessary to provide access credentials so it can connect to them.
+In order to make the Wazuh GCP module pull log data from Google Pub/Sub or Google Storage, it will be necessary to provide access credentials so that it can connect to them.
 
-To do this, it is recommended to create a service account with the Pub/Sub or Storage permissions and then create a key. It is important to save this key as a JSON file as this file will be used as the authentication method for the GCP module.
+To do this, it is recommended to create a service account with the Pub/Sub or Storage permissions and then create a key. It is important to save this key as a JSON file as it will be used as the authentication method for the GCP module.
 
 Creating a service account
 --------------------------
@@ -19,7 +19,7 @@ Creating a service account
 Within the **Service Accounts** section, create a new service account and add the following roles depending on which module to use: ``gcp-pubsub``, ``gcp-bucket``, or both.
 
 - For ``gcp-pubsub``, add two roles with *Pub/Sub* permissions: **Pub/Sub Publisher** and **Pub/Sub Subscriber**.
-- For ``gcp-bucket``, add the following role with *Google Cloud Storage bucket* permissions: **Storage Legacy Bucket Writer**
+- For ``gcp-bucket``, add the following role with *Google Cloud Storage bucket* permissions: **Storage Legacy Bucket Writer**.
 
 
 Creating a private key
@@ -48,19 +48,19 @@ The new key should have this format:
 	   "client_x509_cert_url": "https://www.googleapis.com/robot/v1/metadata/x509/wazuh-gcloud-acc%40wazuh-gcloud-123456.iam.gserviceaccount.com"
 	}
 
-Check the official `Google Cloud Pub/Sub <https://cloud.google.com/pubsub/docs/building-pubsub-messaging-system#create_service_account_credentials>`_ documentation to learn more about how to configur the GCP credentials JSON file.
+Check the official `Google Cloud Pub/Sub <https://cloud.google.com/pubsub/docs/building-pubsub-messaging-system#create_service_account_credentials>`_ documentation to learn more about how to configure the GCP credentials JSON file.
 
 Authentication options
 ----------------------
 
-Currently the GCP integration only allows the credentials to be provided using an authentication file.
+Currently, the GCP integration only allows the credentials to be provided using an authentication file.
 
 Using an authentication file
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 As explained before, the GCP integration requires a credentials file in JSON format containing the private key to access Google Cloud Pub/Sub or Google Cloud Storage bucket.
 
-Regardless of the service the authentication file is always specified in the ``ossec.conf`` configuration file using the ``<credentials_file>`` tag. Take a look to the following example:
+Regardless of the service, the authentication file is always specified in the ``ossec.conf`` configuration file using the ``<credentials_file>`` tag. Take a look to the following example:
 
 .. code-block:: xml
    :emphasize-lines: 7, 16
@@ -85,5 +85,5 @@ Regardless of the service the authentication file is always specified in the ``o
 
 
 
-Check the :doc:`gcp-pubsub </user-manual/reference/ossec-conf/gcp-pubsub>` and :doc:`gcp-bucket </user-manual/reference/ossec-conf/gcp-bucket>` sections from the ossec.conf reference page for more information about the ``<credentials_file>`` and many other available parameters.
+Check the :doc:`gcp-pubsub </user-manual/reference/ossec-conf/gcp-pubsub>` and :doc:`gcp-bucket </user-manual/reference/ossec-conf/gcp-bucket>` sections from the ossec.conf reference page for more information about the ``<credentials_file>`` and other available parameters.
 

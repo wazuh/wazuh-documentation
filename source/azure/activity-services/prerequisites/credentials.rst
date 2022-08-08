@@ -67,7 +67,7 @@ The file must contain only two lines, one for the account name and the other one
    account_key = <YOUR_ACCOUNT_KEY>
 
 
-Regardless of the service or activity to be monitored, the authentication file is always specified in the ``ossec.conf`` configuration file using the ``<auth_path>`` tag. Take a look to the following example:
+Regardless of the service or activity to be monitored, the authentication file is always specified in the ``ossec.conf`` configuration file using the ``<auth_path>`` tag. Take a look at the following example:
 
 .. code-block:: none
    :emphasize-lines: 6, 17, 27
@@ -109,7 +109,7 @@ Regardless of the service or activity to be monitored, the authentication file i
    </wodle>
 
 
-Check the :doc:`azure-logs wodle </user-manual/reference/ossec-conf/wodle-azure-logs>` section from the ossec.conf reference page for more information about the ``<auth_path>`` and many other available parameters.
+Check the :doc:`azure-logs wodle </user-manual/reference/ossec-conf/wodle-azure-logs>` section from the ossec.conf reference page for more information about the ``<auth_path>`` and other available parameters.
 
 
 Inserting the credentials into the configuration
