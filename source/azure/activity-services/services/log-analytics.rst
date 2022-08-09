@@ -198,7 +198,7 @@ The following rules are already included in Wazuh by default. With them, it it p
 Alert visualization
 ^^^^^^^^^^^^^^^^^^^
 
-Once the Wazuh configuration is set and the ``azure-logs`` module is running using the previous configuration, the event will be processed. The results can be checked in the Wazuh UI:
+Once the Wazuh configuration is set and the ``azure-logs`` module is running using the previous configuration, the event will be processed. The results can be checked in the Wazuh dashboard:
 
 .. thumbnail:: ../../../images/azure/new-user-event.png
     :title: Log Analytics App

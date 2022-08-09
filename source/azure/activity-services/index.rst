@@ -12,9 +12,9 @@ The Wazuh ``azure-logs`` module for Azure provides capabilities to monitor all t
 
 From a wider perspective, the Microsoft Azure infrastructure resources can be divided into three types of logs:
 
-- **Activity logs** keep track of the operations performed on a resource from outside of the infrastructure.
-- **Resource logs**, previously known as **Diagnostic logs**, provide insight into the operations performed within an Azure resource.
-- **Azure Active Directory logs** contain the history of sign-in activity and audit information about the changes made to the Azure AD for a given tenant domain.
+- `Activity logs` keep track of the operations performed on a resource from outside of the infrastructure.
+- `Resource logs`, previously known as `Diagnostic logs`, provide insight into the operations performed within an Azure resource.
+- `Azure Active Directory logs` contain the history of sign-in activity and audit information about the changes made to the Azure AD for a given tenant domain.
 
 
 .. topic:: Contents

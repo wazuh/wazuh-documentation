@@ -125,7 +125,7 @@ Thanks to the following rules, already included in Wazuh ruleset by default, it 
 Alert visualization
 ^^^^^^^^^^^^^^^^^^^
 
-Once the Wazuh configuration is set and the ``azure-logs`` module is running using the previous configuration, the event from the user creation example exported to Storage will be processed. The results can be checked in the Wazuh UI. 
+Once the Wazuh configuration is set and the ``azure-logs`` module is running using the previous configuration, the event from the user creation example exported to Storage will be processed. The results can be checked in the Wazuh dashboard. 
 
 .. thumbnail:: ../../../images/azure/storage-kibana.png
     :title: Storage
