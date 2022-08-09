@@ -1,7 +1,7 @@
 .. Copyright (C) 2015, Wazuh, Inc.
 
 .. meta::
-   :description: Learn about Wazuh agent class in this section of the Wazuh documentation. 
+   :description: Learn about the Wazuh agent class and its variables to configure the Wazuh agent in this section of the Wazuh documentation. 
 
 .. _reference_wazuh_agent_class:
 

@@ -1,7 +1,7 @@
 .. Copyright (C) 2015, Wazuh, Inc.
 
 .. meta::
-   :description: Create and map users in the Wazuh app for Splunk
+   :description: Create and map users in a Wazuh with Splunk installation.
 
 Create and map internal users (RBAC)
 ====================================
