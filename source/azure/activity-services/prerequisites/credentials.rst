@@ -18,7 +18,7 @@ There are different ways to configure the Azure authentication:
 Using an authentication file
 ----------------------------
 
-It is possible to store the credentials in a **file** for authentication as long as the file's content follows the `field = value` format explained below.
+It is possible to store the credentials in a `file` for authentication as long as the file's content follows the `field = value` format explained below.
 
 The fields expected to be present in the credentials file will change depending on the type of service or activity to be monitored:
 
