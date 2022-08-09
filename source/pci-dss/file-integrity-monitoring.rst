@@ -45,7 +45,10 @@ For this use case, we configure Wazuh to detect when changes are made to a file 
 
       total 4
       -rw-r--r--. 1 root root 14 May 16 14:53 cardholder_data.txt
+   .. code-block:: console
+   
       # cat /root/credit_cards/cardholder_data.txt
+
 
    .. code-block:: none
      :class: output    		
