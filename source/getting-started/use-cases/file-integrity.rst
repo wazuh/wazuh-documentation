@@ -108,4 +108,4 @@ In the Integrity Monitoring section of the Wazuh dashboard, users can see all of
    :align: center
    :width: 80%
 
-You can find more information on how Wazuh monitors file integrity in the :ref:`user manual <manual_file_integrity>`.
+You can find more information on how Wazuh monitors file integrity in the :doc:`user manual </user-manual/capabilities/file-integrity/index>`.

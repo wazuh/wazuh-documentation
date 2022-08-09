@@ -71,7 +71,7 @@ Let's suppose that we want to add a new index pattern (``my-custom-alerts-*``) a
 
     .. code-block:: console
 
-      # curl -XPUT 'http://localhost:9200/_template/wazuh' -H 'Content-Type: application/json' -d @template.json
+      # curl -XPUT -k -u <user>:<pass> 'https://localhost:9200/_template/wazuh' -H 'Content-Type: application/json' -d @template.json
 
     .. code-block:: json
       :class: output
