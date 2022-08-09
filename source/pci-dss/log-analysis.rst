@@ -58,7 +58,7 @@ The following are some Wazuh rules that help achieve this requirement:
     .. code-block:: console
 
        archives:
-       enabled: trusted
+       enabled: true
 
 #. Restart the Wazuh manager: 
 
