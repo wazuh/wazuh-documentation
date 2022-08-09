@@ -5,7 +5,6 @@
 
 .. _wazuh_agent_package_macos:
 
-
 Installing Wazuh agents on macOS systems
 ========================================
 

@@ -1,6 +1,7 @@
 .. Copyright (C) 2015, Wazuh, Inc.
 
-.. meta:: :description: Learn how to install Elastic Stack for using Wazuh on Debian
+.. meta::
+   :description: Install the Wazuh manager for a Wazuh with Splunk installation
 
 Wazuh manager installation
 ==========================

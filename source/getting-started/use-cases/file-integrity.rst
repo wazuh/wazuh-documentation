@@ -1,7 +1,7 @@
 .. Copyright (C) 2015, Wazuh, Inc.
 
 .. meta::
-    :description: File Integrity Monitoring is one of the key capabilities of Wazuh. In this section, we show you an example of an alert generated when a monitored file changes. Check it out here. 
+   :description: Check an example of an alert generated when a monitored file changes using the FIM capability in this section of the documentation.
     
 File integrity monitoring
 =========================

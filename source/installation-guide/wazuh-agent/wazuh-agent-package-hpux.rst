@@ -5,7 +5,6 @@
 
 .. _wazuh_agent_package_hpux:
 
-
 Installing Wazuh agents on HP-UX systems
 ========================================
 
