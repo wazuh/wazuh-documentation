@@ -178,7 +178,7 @@ For the previous example, rule 5715 is matched:
 
 .. note::
 
-  For more information, see the :ref:`Wazuh Ruleset <ruleset>`
+  For more information, see the :doc:`Wazuh Ruleset </user-manual/ruleset/index>`
 
 Alert
 -----

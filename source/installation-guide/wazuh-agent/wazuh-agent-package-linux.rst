@@ -73,9 +73,9 @@ Deploy a Wazuh agent
       
     
     
-    For additional deployment options such as agent name, agent group, and registration password, see the :ref:`Deployment variables for Linux <deployment_variables_linux>` section.
+    For additional deployment options such as agent name, agent group, and registration password, see the :doc:`Deployment variables for Linux </user-manual/deployment-variables/deployment-variables-linux>` section.
     
-    .. note:: Alternatively, if you want to install an agent without registering it, omit the deployment variables. To learn more about the different registration methods, see the :ref:`Wazuh agent enrollment <agent_enrollment>` section. 
+    .. note:: Alternatively, if you want to install an agent without registering it, omit the deployment variables. To learn more about the different registration methods, see the :doc:`Wazuh agent enrollment </user-manual/agent-enrollment/index>` section. 
          
 
 #. Enable and start the Wazuh agent service.

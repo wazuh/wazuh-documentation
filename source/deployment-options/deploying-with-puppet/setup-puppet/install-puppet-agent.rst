@@ -1,5 +1,8 @@
 .. Copyright (C) 2015, Wazuh, Inc.
 
+.. meta::
+   :description: Learn how to install a Puppet agent in this section of the Wazuh documentation. 
+
 .. _setup_puppet_agent:
 
 Installing Puppet agent
