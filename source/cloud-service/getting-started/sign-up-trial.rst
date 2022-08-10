@@ -48,4 +48,4 @@ Follow these steps to quickly set up and run your environment:
 
 Once the environment is ready, you can :ref:`access the Wazuh WUI <cloud_wui_access>`  and register the agents. 
 
-If you have any questions about the Wazuh Cloud, see the :ref:`Cloud service FAQ <cloud_getting-started_starting_faq>`.
+If you have any questions about the Wazuh Cloud, see the :doc:`Cloud service FAQ </cloud-service/getting-started/starting-faq>`.
