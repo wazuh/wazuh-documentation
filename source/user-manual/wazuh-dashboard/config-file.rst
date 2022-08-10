@@ -623,7 +623,7 @@ Define the name of the sidebar logo saved in the path ``/plugins/wazuh/public/as
 customization.logo.healthcheck
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-Define the name of the healthcheck logo saved in the path ``/plugins/wazuh/public/assets/``.
+Define the name of the health check logo saved in the path ``/plugins/wazuh/public/assets/``.
 
 +--------------------+----------------------------+
 | **Default value**  | ''                         |
