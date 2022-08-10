@@ -4,15 +4,11 @@ How to configure SCA
 .. meta::
     :description: Check out this section of our documentation to learn more about how to configure Security Configuration Assessment in Wazuh.
 
-.. contents:: Table of Contents
-   :depth: 10
-
 Upon installation, agents will include the appropriate policies for their particular Operating System.
 For the full list of **Officially supported policy files** see table :ref:`available_sca_policies`.
 These policies are included with the Wazuh Manager installation so that they can be easily enabled.
 
-For a detailed description of the various configuration parameters of SCA, please check the
-:ref:`reference_sec_config_assessment`.
+For a detailed description of the various configuration parameters of SCA, please check the :ref:`SCA reference <reference_sec_config_assessment>`.
 
 Enabling and disabling policies
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
@@ -169,15 +165,15 @@ The ``<sca>`` block will be merged with the ``<sca>`` block on the Wazuh agent s
     +-----------------------------+------------------------------------------------------------+-------------------------------+
     | cis_mysql5-6_enterprise     |  CIS Benchmark for Oracle MySQL Enterprise 5.6             | MySQL configuration files     |
     +-----------------------------+------------------------------------------------------------+-------------------------------+
-    | cis_sqlserver2012           |  CIS Microsoft SQL Server 2012                             | Microsoft SQL Server 2012     |
+    | cis_sqlserver_2012          |  CIS Microsoft SQL Server 2012                             | Microsoft SQL Server 2012     |
     +-----------------------------+------------------------------------------------------------+-------------------------------+
-    | cis_sqlserver2014           |  CIS Microsoft SQL Server 2014                             | Microsoft SQL Server 2014     |
+    | cis_sqlserver_2014          |  CIS Microsoft SQL Server 2014                             | Microsoft SQL Server 2014     |
     +-----------------------------+------------------------------------------------------------+-------------------------------+
     | cis_sqlserver_2016          |  CIS Microsoft SQL Server 2016                             | Microsoft SQL Server 2016     |
     +-----------------------------+------------------------------------------------------------+-------------------------------+
-    | cis_sqlserver2017           |  CIS Microsoft SQL Server 2017                             | Microsoft SQL Server 2017     |
+    | cis_sqlserver_2017          |  CIS Microsoft SQL Server 2017                             | Microsoft SQL Server 2017     |
     +-----------------------------+------------------------------------------------------------+-------------------------------+
-    | cis_sqlserver2019           |  CIS Microsoft SQL Server 2019                             | Microsoft SQL Server 2019     |
+    | cis_sqlserver_2019          |  CIS Microsoft SQL Server 2019                             | Microsoft SQL Server 2019     |
     +-----------------------------+------------------------------------------------------------+-------------------------------+
     | cis_iis_10                  |  CIS Checks for Microsoft IIS 10                           | Microsoft IIS 10              |
     +-----------------------------+------------------------------------------------------------+-------------------------------+

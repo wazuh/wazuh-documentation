@@ -1,10 +1,10 @@
 .. Copyright (C) 2015, Wazuh, Inc.
 
-.. meta:: :description: Learn how to install the Wazuh server using the Wazuh installation assistant. The Wazuh server is in charge of analyzing the data received from the agents and triggering alerts when threats or anomalies are detected. This central component includes the Wazuh manager and Filebeat. 
+.. meta:: 
+   :description: Learn how to install the Wazuh server using the Wazuh installation assistant. The Wazuh server is in charge of analyzing the data received from the agents and triggering alerts when threats or anomalies are detected. This central component includes the Wazuh manager and Filebeat. 
 
 Installing the Wazuh server using the assistant
 ===============================================
-
 
 Install the Wazuh server as a single-node or multi-node cluster with the aid of the Wazuh installation assistant. The Wazuh server is in charge of analyzing the data received from the agents and triggering alerts when threats or anomalies are detected. This central component includes the Wazuh manager and Filebeat.
 

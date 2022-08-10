@@ -1,5 +1,8 @@
 .. Copyright (C) 2015, Wazuh, Inc.
 
+.. meta::
+   :description: Learn about the Wazuh manager class and its variables to configure the Wazuh manager in this section of the Wazuh documentation. 
+
 .. _reference_wazuh_manager_class:
 
 Wazuh manager class

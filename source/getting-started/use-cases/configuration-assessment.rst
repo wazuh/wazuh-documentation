@@ -83,4 +83,4 @@ Below is an example of the results of a configuration assessment evaluation. The
    :align: center
    :width: 80%
           
-You can find more information about security configuration assessment in the :ref:`user manual <manual_sec_config_assessment>`.
+You can find more information about security configuration assessment in the :doc:`user manual </user-manual/capabilities/sec-config-assessment/index>`.

@@ -4,7 +4,6 @@
 
 .. _basic_wazuh_cluster:
 
-
 Wazuh cluster
 =============
 
