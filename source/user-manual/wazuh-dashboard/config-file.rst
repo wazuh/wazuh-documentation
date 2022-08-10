@@ -349,7 +349,7 @@ extensions.oscap
 Enable or disable the OSCAP tab on *Overview* and *Agents*.
 
 +--------------------+------------+
-| **Default value**  | true       |
+| **Default value**  | false      |
 +--------------------+------------+
 | **Allowed values** | true,false |
 +--------------------+------------+
