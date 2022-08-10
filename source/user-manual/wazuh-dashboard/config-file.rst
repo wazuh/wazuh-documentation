@@ -546,7 +546,7 @@ cron.statistics.interval
 Define the frequency of task execution using cron schedule expressions.
 
 +--------------------+----------------------------+
-| **Default value**  | 0 */5 * * * *              |
+| **Default value**  | ``0 */5 * * * *``          |
 +--------------------+----------------------------+
 | **Allowed values** | Any cron expressions       |
 +--------------------+----------------------------+
