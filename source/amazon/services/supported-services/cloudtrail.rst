@@ -1,4 +1,4 @@
-.. Copyright (C) 2022 Wazuh, Inc.
+.. Copyright (C) 2015, Wazuh, Inc.
 
 .. meta::
   :description: AWS CloudTrail is a service supported by Wazuh that enables auditing AWS accounts. Check out this section of our documentation to learn more about it. 
@@ -8,7 +8,7 @@
 AWS CloudTrail
 ==============
 
-`AWS CloudTrail <https://aws.amazon.com/cloudtrail/>`_ is a service that enables auditing of your AWS account. With CloudTrail, you can log, monitor, and retain account activity related to actions across your AWS infrastructure. This service provides event history of your AWS account activity, such as actions taken through the AWS Management Console, AWS SDKs, command line tools, and other AWS services.
+`AWS CloudTrail <https://aws.amazon.com/cloudtrail/>`_ is a service that enables auditing of your AWS account. With CloudTrail, you can log, monitor, and retain account activity related to actions across your AWS infrastructure. This service provides the event history of your AWS account activity, such as actions taken through the AWS Management Console, AWS SDKs, command line tools, and other AWS services.
 
 Amazon configuration
 --------------------
@@ -38,7 +38,7 @@ Amazon configuration
 
         <bucket_name>/<prefix>/AWSLogs/<account_id>/CloudTrail/<region>/<year>/<month>/<day>
 
-      The structure may change depending on the different configuration of the services, and the user may only change the **bucket_name** & **prefix** values.
+      The structure may change depending on the different configurations of the services, and the user may only change the **bucket_name** & **prefix** values.
 
 Wazuh configuration
 -------------------
@@ -58,10 +58,10 @@ Wazuh configuration
         </bucket>
       </wodle>
 
-    To monitor logs for multiple AWS accounts, configure multiple ``<bucket>`` options within the ``aws-s3`` wodle. Bucket tags must have a ``type`` attribute which depends on the service which is monitored.
+    To monitor logs for multiple AWS accounts, configure multiple ``<bucket>`` options within the ``aws-s3`` wodle. Bucket tags must have a ``type`` attribute which depends on the service that is monitored.
 
     .. note::
-      Check the :ref:`AWS S3 module <wodle_s3>` reference manual to learn more about each setting.
+      Check the :doc:`AWS S3 module </user-manual/reference/ossec-conf/wodle-s3>` reference manual to learn more about each setting.
 
 #. Restart Wazuh in order to apply the changes:
 
@@ -104,8 +104,8 @@ CloudTrail use cases
   - `Allocate a new Elastic IP address`_
   - `Associate a new Elastic IP address`_
 `IAM`_
-  - `Create user account`_
-  - `Create user account without permissions`_
+  - `Create a user account`_
+  - `Create a user account without permissions`_
   - `User login failed`_
   - `Possible break-in attempt`_
   - `Login success`_
@@ -120,13 +120,13 @@ Below are some use cases for Wazuh rules built for EC2.
 Run a new instance in EC2
 +++++++++++++++++++++++++
 
-When an user runs a new instance in EC2, an AWS event is generated. As previously mentioned, the log message is collected by the Wazuh agent, and forwarded to the manager for analysis. The following alert will be shown in the Wazuh dashboard, it shows data such as instance type, the user who created it or creation date:
+When a user runs a new instance in EC2 an AWS event is generated. As previously mentioned, the log message is collected by the Wazuh agent, and forwarded to the manager for analysis. The following alert will be shown in the Wazuh dashboard, it shows data such as instance type, the user who created it, or creation date:
 
 .. thumbnail:: ../../../images/aws/aws-ec2-1.png
   :align: center
   :width: 70%
 
-When an user tries to run an instance **without relevant permissions**, then the following alert will be shown in Kibana:
+When a user tries to run an instance **without relevant permissions**, then the following alert will be shown in Kibana:
 
 .. thumbnail:: ../../../images/aws/aws-ec2-2.png
   :align: center
@@ -141,7 +141,7 @@ When an instance in EC2 is started, the following alert will be shown on the Waz
   :align: center
   :width: 70%
 
-If an user tries to start instances **without relevant permissions** the following alert will be shown on Kibana:
+If a user tries to start instances **without relevant permissions** the following alert will be shown on Kibana:
 
 .. thumbnail:: ../../../images/aws/aws-ec2-4.png
   :align: center
@@ -156,7 +156,7 @@ When an instance in EC2 is stopped, the following alert will be shown on Kibana:
   :align: center
   :width: 70%
 
-If an user tries to stop instances **without relevant permissions**, the following alert will be show on Kibana:
+If a user tries to stop instances **without relevant permissions**, the following alert will be shown on Kibana:
 
 .. thumbnail:: ../../../images/aws/aws-ec2-6.png
   :align: center
@@ -194,21 +194,21 @@ IAM
 
 AWS Identity and Access Management (IAM) log data can be used to monitor user access to AWS services and resources. Using IAM, you can create and manage AWS users and groups, and manage permissions to allow and deny their access to AWS resources.
 
-Below are some use cases for Wazuh alerts built used for IAM events.
+Below are some use cases for Wazuh alerts built and used for IAM events.
 
-Create user account
-+++++++++++++++++++
+Create a user account
++++++++++++++++++++++
 
-When we create a new user account in IAM, an AWS event is generated. As previously mentioned, the log message is collected by the Wazuh agent, and forwarded to the manager for analysis. When an user account is created, the following alert will appear on the Wazuh dashboard. You can see the username of the created user and who created it:
+When we create a new user account in IAM an AWS event is generated. As previously mentioned, the log message is collected by the Wazuh agent, and forwarded to the manager for analysis. When a user account is created, the following alert will appear on the Wazuh dashboard. You can see the username of the created user and who created it:
 
 .. thumbnail:: ../../../images/aws/aws-login-1.png
   :align: center
   :width: 70%
 
-Create user account without permissions
-+++++++++++++++++++++++++++++++++++++++
+Create a user account without permissions
++++++++++++++++++++++++++++++++++++++++++
 
-If an unauthorized user attempts to create new users, the following alert will be shown in the Wazuh dashboard. It will show you which user has tried to create an user account and the username it tried to create:
+If an unauthorized user attempts to create new users, the following alert will be shown in the Wazuh dashboard. It will show you which user has tried to create a user account and the username it tried to create:
 
 .. thumbnail:: ../../../images/aws/aws-login-2.png
   :align: center
@@ -217,7 +217,7 @@ If an unauthorized user attempts to create new users, the following alert will b
 User login failed
 +++++++++++++++++
 
-When an user tries to log in with an invalid password, the following alert will be shown in the Wazuh dashboard. There will be shown data such as the user who tried to login or the browser it was using:
+When a user tries to log in with an invalid password, the following alert will be shown in the Wazuh dashboard. There will be shown data such as the user who tried to log in or the browser it was using:
 
 .. thumbnail:: ../../../images/aws/aws-login-3.png
   :align: center
@@ -235,13 +235,13 @@ When more than 4 authentication failures occur in a **360** second time window, 
 Login success
 +++++++++++++
 
-After a successful login, the following event will be shown in the Wazuh dashboard. It shows the user who logged in, the browser it used and many other useful information:
+After a successful login, the following event will be shown in the Wazuh dashboard. It shows the user who logged in, the browser it used, and other useful information:
 
 .. thumbnail:: ../../../images/aws/aws-login-5.png
   :align: center
   :width: 70%
 
-And here are the Wazuh dashboard charts for IAM events:
+Here are the Wazuh dashboard charts for IAM events:
 
 +----------------------------------------------------------+------------------------------------------------------------+
 | Pie Chart                                                | Stacked Groups                                             |

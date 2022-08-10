@@ -1,12 +1,12 @@
-.. Copyright (C) 2020 Wazuh, Inc.
+.. Copyright (C) 2015, Wazuh, Inc.
+
+.. meta::
+  :description: Check out the process to cancel an environment in Wazuh Cloud. Learn more about it in this section of the documentation.
 
 .. _cloud_your_environment_cancel_environment:
 
 Cancellation
 =============
-
-.. meta::
-  :description: Check out the process to cancel an environment in Wazuh Cloud. The environment will be removed at the end of the billing cycle.
 
 To cancel your environment:
 

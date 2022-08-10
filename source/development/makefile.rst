@@ -1,4 +1,4 @@
-.. Copyright (C) 2022 Wazuh, Inc.
+.. Copyright (C) 2015, Wazuh, Inc.
 
 .. meta::
   :description: This section contains instructions to customize the installation of Wazuh by compiling the source code before executing the installation script. 
@@ -12,10 +12,11 @@ This section contains instructions to customize the installation of Wazuh by com
 
 You can also find here the different settings available for the ``Makefile``. Each setting is described and includes the default and allowed values that you can use.
 
+
 Compiling the source code
 -------------------------
 
-When following the official documentation to install the Wazuh manager or agent:ref:`from sources <_installation_agents>`, the user runs the ``install.sh`` script. This will automatically compile the source code before installing it, but some customizations can be made prior to the script execution.
+When following the official documentation to install the Wazuh :doc:`server </deployment-options/wazuh-from-sources/wazuh-server/index>` or the :doc:`agent </deployment-options/wazuh-from-sources/wazuh-agent/index>` from sources, the user runs the ``install.sh`` script. This will automatically compile the source code before installing it, but some customizations can be made prior to the script execution.
 
 To compile the code with ``make``, the working directory must be where the ``MAKEFILE`` resides, in this case, the ``/src`` directory of the installation folder:
 

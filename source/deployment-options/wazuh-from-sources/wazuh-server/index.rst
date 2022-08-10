@@ -1,12 +1,14 @@
-.. Copyright (C) 2015–2022 Wazuh, Inc.
+.. Copyright (C) 2015, Wazuh, Inc.
 
 .. meta::
-  :description: Check out how to install the Wazuh server from sources in this section of our documentation. 
+   :description: Check out how to install the Wazuh manager from sources in this section of our documentation. 
 
-Installing Wazuh server from sources
-====================================
+Installing the Wazuh manager from sources
+=========================================
 
-The Wazuh server collects and analyzes data received from deployed agents. It runs the Wazuh manager, the Wazuh API, and Filebeat. Alternatively, the Wazuh manager package and compatible agent  packages can be checked or downloaded :doc:`here </installation-guide/packages-list>`.
+The Wazuh server collects and analyzes data received from deployed agents. It runs the Wazuh manager, the Wazuh API, and Filebeat.
+
+The Wazuh manager package and compatible agent packages can be checked or downloaded from the :doc:`/installation-guide/packages-list` section.
 
 Installing dependencies
 -----------------------
@@ -52,6 +54,7 @@ Installing dependencies
       
         .. code-block:: console
         
+            # apt-get update
             # apt-get install python gcc g++ make libc6-dev curl policycoreutils automake autoconf libtool libssl-dev
             
         CMake 3.18 installation
@@ -61,27 +64,6 @@ Installing dependencies
             # curl -OL https://packages.wazuh.com/utils/cmake/cmake-3.18.3.tar.gz && tar -zxf cmake-3.18.3.tar.gz && cd cmake-3.18.3 && ./bootstrap --no-system-curl && make -j$(nproc) && make install
             # cd .. && rm -rf cmake-*
             
-    .. group-tab:: ZYpp
-    
-        .. code-block:: console
-        
-            # zypper install -y make cmake gcc gcc-c++ policycoreutils-python automake autoconf libtool libopenssl-devel curl
-            
-        CMake 3.18 installation
-        
-        .. code-block:: console
-        
-            # curl -OL https://packages.wazuh.com/utils/cmake/cmake-3.18.3.tar.gz && tar -zxf  cmake-3.18.3.tar.gz && cd cmake-3.18.3 && ./bootstrap --no-system-curl && make -j$(nproc) && make install
-            # cd .. && rm -rf cmake-*
-            
-    .. group-tab:: Pacman
-    
-        GCC/G++ 9.4 is the recommended version to build wazuh.
-        
-        .. code-block:: console
-        
-            # pacman --noconfirm -Syu curl gcc make sudo wget expect gnupg perl-base perl fakeroot python brotli automake autoconf libtool gawk libsigsegv nodejs base-devel inetutils cmake
-
 **Optional**. Install the following dependencies only when compiling the CPython from sources. Since v4.2.0, ``make deps TARGET=server`` will download a portable version of CPython ready to be installed. Nevertheless, you can download the CPython sources by adding the ``PYTHON_SOURCE`` flag when running ``make deps``.
 
 To install the required dependencies to build the python interpreter, follow these steps:
@@ -99,30 +81,23 @@ To install the required dependencies to build the python interpreter, follow the
     
         .. code-block:: console
         
-            # echo "deb-src http://deb.debian.org/debian $(lsb_release -cs) main" >> /etc/apt/sources.list
+            # echo "deb-src http://archive.ubuntu.com/ubuntu $(lsb_release -cs) main" >> /etc/apt/sources.list
             # apt-get update
-            # apt-get build-dep python3.5 -y
-
-    .. group-tab:: ZYpp
-    
-        .. code-block:: console
-        
-            # zypper install epel-release yum-utils -y
-            # zypper-builddep python34 -y
+            # apt-get build-dep python3 -y
 
 .. note::
   
     The Python version from the previous command may change depending on the OS used to build the binaries. More information in `Install dependencies <https://devguide.python.org/setup/#install-dependencies>`_.
 
 
-Installing Wazuh manager
-------------------------
+Installing the Wazuh manager
+----------------------------
 
 #.  Download and extract the latest version:
 
     .. code-block:: console
 
-        # curl -Ls https://github.com/wazuh/wazuh/archive/v|WAZUH_LATEST_FROM_SOURCES|.tar.gz | tar zx
+        # curl -Ls https://github.com/wazuh/wazuh/archive/v|WAZUH_CURRENT_FROM_SOURCES|.tar.gz | tar zx
 
 #.  Run the ``install.sh`` script. This will display a wizard to guide you through the installation process using the Wazuh sources:
 
@@ -132,14 +107,14 @@ Installing Wazuh manager
 
     .. code-block:: console
 
-        # cd wazuh-*
+        # cd wazuh-|WAZUH_CURRENT_FROM_SOURCES|
         # ./install.sh
 
     If you have previously compiled for another platform, you must clean the build using the Makefile  in ``src``:
 
     .. code-block:: console
 
-        # cd wazuh-*
+        # cd wazuh-|WAZUH_CURRENT_FROM_SOURCES|
         # make -C src clean
         # make -C src clean-deps
 
@@ -177,12 +152,12 @@ Installing Wazuh manager
 Installing other Wazuh components
 ---------------------------------
 
-Once the Wazuh manager is installed, you may install Filebeat, the Wazuh indexer and the Wazuh dashboard using :doc:`packages </installation-guide/packages-list>`.
+Once the Wazuh manager is installed from sources, you may install the Wazuh indexer, Filebeat, and the Wazuh dashboard following the :doc:`Installation guide </installation-guide/index>`.
 
 Uninstall
 ---------
 
-#. To uninstall Wazuh manager, set ``WAZUH_HOME`` with the current installation path:
+#. To uninstall the Wazuh manager, set ``WAZUH_HOME`` with the current installation path:
 
    .. code-block:: console
    

@@ -1,11 +1,11 @@
-.. Copyright (C) 2022 Wazuh, Inc.
+.. Copyright (C) 2015, Wazuh, Inc.
 
 .. meta::
   :description: Wazuh 4.1.5 has been released. Check out our release notes to discover the changes and additions of this release.
 .. _release_4_1_5:
 
-4.1.5 Release notes
-===================
+4.1.5 Release notes - 22 April 2021
+===================================
 
 This section lists the changes in version 4.1.5. More details about these changes are provided in the changelog of each component:
 

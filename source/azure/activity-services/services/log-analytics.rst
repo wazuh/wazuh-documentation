@@ -1,4 +1,4 @@
-.. Copyright (C) 2021 Wazuh, Inc.
+.. Copyright (C) 2015, Wazuh, Inc.
 
 .. _azure_log_analytics:
 
@@ -27,7 +27,7 @@ A qualified application or client is required to use the Azure Log Analytics RES
 Setting up the application
 ---------------------------
 
-The process explained below details the creation of an application that will use the of Azure Log Analytics REST API. It is also possible to configure an existing application. If this is the case, skip the **Creating the application** step.
+The process explained below details the creation of an application that will use the Azure Log Analytics REST API. It is also possible to configure an existing application. If this is the case, skip the **Creating the application** step.
 
 Creating the application
 ^^^^^^^^^^^^^^^^^^^^^^^^
@@ -114,7 +114,7 @@ Giving our application access to the Log Analytics API
     :align: center
     :width: 100%
 
-3. Fill in the required fields and click **save**. It is important choose the ``User, group, or service principal`` option in the drop down menu and to type the full application name in the **Select** field.
+3. Fill in the required fields and click **save**. It is important to choose the **User, group, or service principal** option in the drop down menu and to type the full application name in the **Select** field.
 
 .. thumbnail:: ../../../images/azure/log-analytics-workspace-4.png
     :title: Log Analytics App
@@ -139,7 +139,7 @@ An easy way to test this is to create a new user in Azure Active Directory. A fe
 Wazuh configuration
 ^^^^^^^^^^^^^^^^^^^
 
-Proceed with configuring the ``azure-logs`` module in the local configuration (``ossec.conf``). The **key and ID of the application** saved during the configuration of the application will be used here, as well as **workspace ID**. In this case, both fields were saved in a **file** for authentication. Check the :ref:`credentials <azure_credentials>` reference for more information about this topic.
+Proceed with configuring the ``azure-logs`` module in the local configuration (``ossec.conf``). The `key and ID of the application` saved during the configuration of the application will be used here, as well as the `workspace ID`. In this case, both fields were saved in a `file` for authentication. Check the :doc:`credentials </azure/activity-services/prerequisites/credentials>` reference for more information about this topic.
 
 Through the following configuration, Wazuh is ready to search for any query accepted by Azure Log Analytics. This example configuration includes a representative ``tag`` and will be scheduled for every Monday at 02:00, using an offset of one day, which means only the log data from the last day will be parsed:
 
@@ -165,9 +165,9 @@ Through the following configuration, Wazuh is ready to search for any query acce
 
     </wodle>
 
-Check the reference for more information about the azure module :ref:`here <wodle_azure_logs>`.
+Check the reference for more information about the :doc:`Azure module </user-manual/reference/ossec-conf/wodle-azure-logs>`.
 
-.. warning:: The field ``tenantdomain`` is mandatory. It can be obtain from the **Overview** section in the Azure Active Directory.
+.. warning:: The field ``tenantdomain`` is mandatory. It can be obtained from the **Overview** section in the Azure Active Directory.
 
 Wazuh Rules
 ^^^^^^^^^^^
@@ -198,7 +198,7 @@ The following rules are already included in Wazuh by default. With them, it it p
 Alert visualization
 ^^^^^^^^^^^^^^^^^^^
 
-Once the Wazuh configuration is set and the ``azure-logs`` module is running using the previous configuration, the event will be processed. The results can be check in the Wazuh UI:
+Once the Wazuh configuration is set and the ``azure-logs`` module is running using the previous configuration, the event will be processed. The results can be checked in the Wazuh dashboard:
 
 .. thumbnail:: ../../../images/azure/new-user-event.png
     :title: Log Analytics App

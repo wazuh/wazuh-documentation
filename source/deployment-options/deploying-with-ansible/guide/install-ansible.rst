@@ -1,4 +1,4 @@
-.. Copyright (C) 2015–2022 Wazuh, Inc.
+.. Copyright (C) 2015, Wazuh, Inc.
 
 .. meta::
    :description: Learn how to install the Ansible server in this section of the Wazuh documentation. Check out this step-by-step guide. 
@@ -6,7 +6,7 @@
 Install Ansible
 ===============
 
-In this section we will proceed to install the Ansible server. To be able to deploy using Ansible, we need to have the tool installed on a single server. From this control server, Ansible will access other endpoints and execute the playbooks configured for any type of deployment or installation.
+In this section, we will proceed to install the Ansible server. To be able to deploy using Ansible, we need to have the tool installed on a single server. From this control server, Ansible will access other endpoints and execute the playbooks configured for any type of deployment or installation.
 
 In the example we will follow in this guide, we have the following infrastructure.
 
@@ -55,7 +55,7 @@ Installation is done using yum from `EPEL <http://fedoraproject.org/wiki/EPEL>`_
 Installation on Debian/Ubuntu
 -----------------------------
 
-For Debian and Ubuntu we will use the Ansible PPA repository. The steps are as follows:
+For Debian and Ubuntu, we will use the Ansible PPA repository. The steps are as follows:
 
 #. Install required dependencies:
 
@@ -246,7 +246,7 @@ Testing the Ansible connection to remote endpoints
 
 #. Add endpoints for management by Ansible.
 
-   This is done by including the hostname or IP Address in ``/etc/ansible/hosts`` on our Ansible server. In this case, we intend to use the Ansible playbooks to deploy the Wazuh indexer, dashboard and manager on one server (all-in-one deployment). The IP address of the server is ``192.168.33.31`` and the user is ``centos``.
+   This is done by including the hostname or IP Address in ``/etc/ansible/hosts`` on our Ansible server. In this case, we intend to use the Ansible playbooks to deploy the Wazuh indexer, dashboard, and manager on one server (all-in-one deployment). The IP address of the server is ``192.168.33.31`` and the user is ``centos``.
    
    We proceed to add the following entry to the ``/etc/ansible/hosts`` file:
 
@@ -292,7 +292,7 @@ On the Ansible server, the following commands are run:
 .. code-block:: console
 
    # cd /etc/ansible/roles/
-   # sudo git clone --branch |WAZUH_LATEST_MINOR_ANSIBLE| https://github.com/wazuh/wazuh-ansible.git
+   # sudo git clone --branch |WAZUH_CURRENT_MINOR_ANSIBLE| https://github.com/wazuh/wazuh-ansible.git
    # ls
 
 .. code-block:: none

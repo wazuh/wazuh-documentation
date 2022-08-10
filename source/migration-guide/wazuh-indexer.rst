@@ -1,4 +1,4 @@
-.. Copyright (C) 2022 Wazuh, Inc.
+.. Copyright (C) 2015, Wazuh, Inc.
 
 .. meta::
   :description: Follow this guide to migrate from Open Distro for Elasticsearch to the Wazuh indexer.
@@ -16,7 +16,7 @@ Follow this guide to migrate from Open Distro for Elasticsearch 1.13 to the Wazu
 
    .. code-block:: console
 
-     curl -X PUT "https://<elasticsearch_IP>:9200/_cluster/settings"  -u <username>:<password> -k -H 'Content-Type: application/json' -d'
+     curl -X PUT "https://<elasticsearch_IP>:9200/_cluster/settings" -u <username>:<password> -k -H 'Content-Type: application/json' -d'
      {
        "persistent": {
          "cluster.routing.allocation.enable": "primaries"
@@ -151,7 +151,9 @@ Follow this guide to migrate from Open Distro for Elasticsearch 1.13 to the Wazu
          - "CN=node-1,OU=Docu,O=Wazuh,L=California,C=US"
          #- "CN=node-2,OU=Wazuh,O=Wazuh,L=California,C=US"
          #- "CN=node-3,OU=Wazuh,O=Wazuh,L=California,C=US"      
-            
+
+#. **Optional**. Port any custom configurations, for example, the  ``-Xms`` and ``-Xmx`` settings, from ``/etc/elasticsearch/jvm.options`` to ``/etc/wazuh-indexer/jvm.options``.
+
 #. Enable and start the Wazuh indexer.
 
    .. include:: /_templates/installations/indexer/common/enable_indexer.rst
@@ -204,13 +206,13 @@ Follow this guide to migrate from Open Distro for Elasticsearch 1.13 to the Wazu
 
    .. code-block:: console
 
-     curl -X GET "https://<Wazuh_indexer_IP>:9200/_cluster/health" -u <username>:<password> -k
+     curl -X GET "https://<Wazuh_indexer_IP>:9200/_cluster/health?pretty" -u <username>:<password> -k
 
 #. Re-enable shard allocation.
 
    .. code-block:: console
 
-      curl -X PUT "https://<Wazuh_indexer_IP>:9200/_cluster/settings"  -u <username>:<password> -k -H 'Content-Type: application/json' -d'
+      curl -X PUT "https://<Wazuh_indexer_IP>:9200/_cluster/settings" -u <username>:<password> -k -H 'Content-Type: application/json' -d'
       {
         "persistent": {
           "cluster.routing.allocation.enable": null
@@ -218,7 +220,7 @@ Follow this guide to migrate from Open Distro for Elasticsearch 1.13 to the Wazu
       }
       '
 
-#. Verify that the indexed data in Open Distro is now searchable and indexable in the Wazuh indexer.
+#. Verify that the indexed data in Open Distro is now searchable and indexable in the Wazuh indexer. You may enter the web interface, search for old data and verify that new alerts are coming in. 
 
 
 #. Uninstall Open Distro for Elasticsearch on all nodes.

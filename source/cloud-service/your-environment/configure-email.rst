@@ -1,9 +1,9 @@
-.. Copyright (C) 2020 Wazuh, Inc.
-
-.. _cloud_your_environment_configure_email_alerts:
+.. Copyright (C) 2015, Wazuh, Inc.
 
 .. meta::
-  :description: Wazuh can be configured to send email alerts to one or more email addresses when certain rules are triggered or for daily event reports. Learn more about it here. 
+  :description: Wazuh can be configured to send email alerts to one or more email addresses when certain rules are triggered. Learn more about it here. 
+
+.. _cloud_your_environment_configure_email_alerts:
 
 SMTP configuration
 ==================

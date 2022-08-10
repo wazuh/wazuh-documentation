@@ -1,4 +1,4 @@
-.. Copyright (C) 2022 Wazuh, Inc.
+.. Copyright (C) 2015, Wazuh, Inc.
 
 .. _install-custom-wpk:
 
@@ -45,6 +45,9 @@ Where:
     - **-f path/to/myagent.wpk** designates the path to the WPK package.
     - **-x upgrade.sh** is the name of the upgrading script contained in the package.
 
+.. note::
+   To upgrade a Windows agent, you must use ``upgrade.bat`` instead of ``upgrade.sh``.
+
 Output example:
 
 .. code-block:: none
@@ -53,4 +56,4 @@ Output example:
     Upgrading...
 
     Upgraded agents:
-        Agent 002 upgraded: Wazuh v3.10.1 -> 4.0.0
+        Agent 001 upgraded: Wazuh v4.2.7 -> Wazuh v|WAZUH_CURRENT|

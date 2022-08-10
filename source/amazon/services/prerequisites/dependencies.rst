@@ -1,4 +1,4 @@
-.. Copyright (C) 2022 Wazuh, Inc.
+.. Copyright (C) 2015, Wazuh, Inc.
 
 .. meta::
   :description: Learn more about how to monitor AWS based services with Wazuh. In this section, you will learn more about installing dependencies. 
@@ -32,7 +32,7 @@ b) For Debian/Ubuntu operating systems:
 
   # apt-get update && apt-get install python3
 
-The required modules can be installed with Pip, the Python package manager. Most of UNIX distributions have this tool available in their software repositories:
+The required modules can be installed with Pip, the Python package manager. Most UNIX distributions have this tool available in their software repositories:
 
 a) For CentOS/RHEL/Fedora operating systems:
 

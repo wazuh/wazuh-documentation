@@ -1,4 +1,4 @@
-.. Copyright (C) 2022 Wazuh, Inc.
+.. Copyright (C) 2015, Wazuh, Inc.
 
 .. meta::
   :description: In this section of the Wazuh documentation, you will find all the information related to the internal configuration of Wazuh. 
@@ -72,7 +72,7 @@ Agent
 +                           +----------------+----------------------------------------------------------------------------------+
 |                           | Allowed value  | Any integer between 1 and 600.                                                   |
 +---------------------------+----------------+----------------------------------------------------------------------------------+
-| **agent.state_interval**  | Description    | Interval between the updates of the agent status file in seconds.                |
+| **agent.state_interval**  | Description    | The interval between the updates of the agent status file in seconds.            |
 +                           +----------------+----------------------------------------------------------------------------------+
 |                           | Default value  | 5                                                                                |
 +                           +----------------+----------------------------------------------------------------------------------+
@@ -804,14 +804,6 @@ Remoted
 |                                   | Default value | 0                                                            |
 +                                   +---------------+--------------------------------------------------------------+
 |                                   | Allowed values| 0, 1                                                         |
-+-----------------------------------+---------------+--------------------------------------------------------------+
-| **remoted.group_data_flush**      | Description   | Interval between multigroup residual file cleanups.          |
-+                                   +---------------+--------------------------------------------------------------+
-|                                   | Default value | 86400                                                        |
-+                                   +---------------+--------------------------------------------------------------+
-|                                   | Allowed values| 0: Disable residual file cleanups                            |
-+                                   +               +--------------------------------------------------------------+
-|                                   |               | Any other integer between 1 and 2592000                      |
 +-----------------------------------+---------------+--------------------------------------------------------------+
 | **remoted.receive_chunk**         | Description   | | Reception buffer size for TCP (bytes).                     |
 |                                   |               | | Amount of data that Remoted can receive per operation.     |

@@ -1,4 +1,7 @@
-.. Copyright (C) 2022 Wazuh, Inc.
+.. Copyright (C) 2015, Wazuh, Inc.
+
+.. meta::
+   :description: Learn about the Wazuh manager class and its variables to configure the Wazuh manager in this section of the Wazuh documentation. 
 
 .. _reference_wazuh_manager_class:
 
@@ -679,7 +682,7 @@ $vulnerability_detector_provider_canonical
    Depends on **configure_vulnerability_detector**
 
 $vulnerability_detector_provider_canonical_enabled
-  Enables updating from canonical feed.
+  Enables updating from Canonical feed.
 
   `Default no`
 
@@ -706,7 +709,7 @@ $vulnerability_detector_provider_canonical_update_interval
    Depends on **configure_vulnerability_detector**
 
 $vulnerability_detector_provider_debian
-  Enables debian as feed to update.
+  Enables Debian as feed to update.
 
   `Default yes`
 
@@ -715,7 +718,7 @@ $vulnerability_detector_provider_debian
    Depends on **configure_vulnerability_detector**
 
 $vulnerability_detector_provider_debian_enabled
-  Enables updating from debian feed.
+  Enables updating from Debian feed.
 
   `Default no`
 
@@ -742,7 +745,7 @@ $vulnerability_detector_provider_debian_update_interval
    Depends on **configure_vulnerability_detector**
 
 $vulnerability_detector_provider_redhat
-  Enables redhat as feed to update.
+  Enables Red Hat as feed to update.
 
   `Default yes`
 
@@ -752,7 +755,7 @@ $vulnerability_detector_provider_redhat
 
 
 $vulnerability_detector_provider_redhat_enabled
-  Enables updating from redhat feed.
+  Enables updating from Red Hat feed.
 
   `Default no`
 
@@ -1101,7 +1104,7 @@ $wodle_openscap_timeout
    Depends on **wodle_openscap_disabled**
 
 $wodle_openscap_interval
-  Interval between OpenSCAP executions.
+  The interval between OpenSCAP executions.
 
   `Default 1d`
   
@@ -1150,7 +1153,7 @@ $wodle_ciscat_timeout
    Depends on **configure_wodle_cis_cat**
 
 $wodle_ciscat_interval
-  Interval between CIS-CAT executions.
+  The interval between CIS-CAT executions.
 
   `Default 1d`
   
@@ -1290,7 +1293,7 @@ $wodle_syscollector_network
   `Type String`
 
 $wodle_syscollector_packages
-  Enables the packages scan.
+  Enables the scan of the packages.
 
   `Default yes`
   
@@ -1304,7 +1307,7 @@ $wodle_syscollector_ports
   `Type String`
 
 $wodle_syscollector_processes
-  Enables the processes scan.
+  Enables the scan of the processes.
 
   `Default yes`
   
@@ -1319,7 +1322,7 @@ Misc Variables
 $server_package_version
   Modified client.pp and server.pp to accept package versions as a parameter.
 
-  `Default 4.3.0-1`
+  `Default 4.3.6-1`
 
   `Type String`
 
@@ -1338,14 +1341,14 @@ $manage_client_keys
   `Type String`
 
 $local_decoder_template
-  Allow to use a custom local_decoder.xml in the manager.
+  Allow using a custom local_decoder.xml in the manager.
 
   `Default wazuh/local_decoder.xml.erb`
 
   `Type String`
 
 $local_rules_template
-  Allow to use a custom local_rules.xml in the manager.
+  Allow using a custom local_rules.xml in the manager.
 
   `Default wazuh/local_rules.xml.erb`
 

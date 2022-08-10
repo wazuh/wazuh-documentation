@@ -42,8 +42,8 @@ is_latest_release = True
 
 # The full version, including alpha/beta/rc tags
 # Important: use a valid branch (4.0) or, preferably, tag name (v4.0.0)
-release = '4.3'
-api_tag = 'v4.3.0'
+release = '4.3.6'
+api_tag = 'v4.3.6'
 apiURL = 'https://raw.githubusercontent.com/wazuh/wazuh/'+api_tag+'/api/api/spec/spec.yaml'
 
 # -- General configuration ------------------------------------------------
@@ -57,8 +57,8 @@ needs_sphinx = '1.8'
 extensions = [
     'sphinx.ext.autodoc',
     'sphinx.ext.extlinks', # Sphinx built-in extension
-    'wazuh-doc-images',  # Custom extension
-    'sphinx_tabs.tabs'
+    'sphinx_tabs.tabs',
+    'wazuh-doc-images', # Custom extension
 ]
 
 # Add any paths that contain templates here, relative to this directory.
@@ -135,7 +135,10 @@ html_theme = 'wazuh_doc_theme_v3'
 html_theme_options = {
     'wazuh_web_url': 'https://wazuh.com',
     'wazuh_doc_url': 'https://documentation.wazuh.com',
-    'collapse_navigation': False, # Only for Wazuh documentation theme v2.0v
+    'collapse_navigation': False, # Only for Wazuh documentation theme v2.0
+    'include_edit_repo': True,
+    'include_version_selector': True,
+    'breadcrumb_root_title': 'Documentation',
 }
 
 if html_theme == 'wazuh_doc_theme_v3':
@@ -199,6 +202,7 @@ html_static_path = ['_static']
 # If true, SmartyPants will be used to convert quotes and dashes to
 # typographically correct entities.
 #html_use_smartypants = True
+smartquotes = False
 
 # Custom sidebar templates, must be a dictionary that maps document names
 # to template names.
@@ -216,13 +220,7 @@ html_additional_pages = {}
 
 html_additional_pages['not_found'] = 'not-found.html'
 
-if version >= '4.0':
-    html_additional_pages['user-manual/api/reference'] = 'api-redoc.html'
-
-if version >= '4.2':
-    html_additional_pages['cloud-service/apis/reference'] = 'cloud-api-redoc.html'
-
-if is_latest_release == True:
+if is_latest_release == True and html_theme_options['breadcrumb_root_title'] == 'Documentation':
     html_additional_pages['moved-content'] = 'moved-content.html'
 
 # If false, no module index is generated.
@@ -363,7 +361,7 @@ epub_author = author
 epub_publisher = author
 epub_copyright = copyright
 
-# The unique identifier of the text. This can be a ISBN number
+# The unique identifier of the text. This can be an ISBN number
 # or the project homepage.
 #
 # epub_identifier = ''
@@ -474,89 +472,132 @@ def customReplacements(app, docname, source):
     source[0] = result
 
 custom_replacements = {
-    "|CURRENT_MAJOR|" : "4.x",
-    "|WAZUH_LATEST|" : "4.3.0",
-    "|WAZUH_LATEST_MINOR|" : "4.3",
-    "|WAZUH_PACKAGES_BRANCH|" : "4.3",
-    "|WAZUH_INDEXER_CURRENT|" : "4.3.0",
-    "|WAZUH_INDEXER_CURRENT_REV|" : "1",
-    "|WAZUH_INDEXER_x64_RPM|" : "x86_64",
-    "|WAZUH_INDEXER_x64_DEB|" : "amd64",
-    "|WAZUH_DASHBOARD_CURRENT|" : "4.3.0",
-    "|WAZUH_DASHBOARD_CURRENT_REV|" : "1",
-    "|WAZUH_DASHBOARD_x64_RPM|" : "x86_64",
-    "|WAZUH_DASHBOARD_x64_DEB|" : "amd64",
-    "|WAZUH_LATEST_ANSIBLE|" : "4.3.0",
-    "|WAZUH_LATEST_MINOR_ANSIBLE|" : "4.3",
-    "|WAZUH_LATEST_KUBERNETES|" : "4.3.0",
-    "|WAZUH_LATEST_PUPPET|" : "4.3.0",
-    "|WAZUH_LATEST_OVA|" : "4.3.0",
-    "|WAZUH_LATEST_AMI|" : "4.3.0",
-    "|WAZUH_LATEST_DOCKER|" : "4.3.0",
-    "|WAZUH_LATEST_AIX|" : "4.3.0",
-    "|WAZUH_LATEST_MINOR_AIX|" : "4.3",
-    "|WAZUH_LATEST_FROM_SOURCES|" : "4.3.0",
-    "|WAZUH_LATEST_MINOR_FROM_SOURCES|" : "4.3",
-    "|WAZUH_LATEST_WIN_FROM_SOURCES|" : "4.3.0",
-    "|WAZUH_LATEST_WIN_REV_FROM_SOURCES|" : "1",
-    "|OPEN_DISTRO_LATEST|" : "1.13.2",
-    "|ELASTICSEARCH_LATEST|" : "7.10.2",
-    "|ELASTICSEARCH_LATEST_OVA|" : "7.10.2",
-    "|ELASTICSEARCH_LATEST_ANSIBLE|" : "7.10.2",
-    "|ELASTICSEARCH_LATEST_KUBERNETES|" : "7.10.2",
-    "|ELASTICSEARCH_LATEST_PUPPET|" : "7.10.2",
-    "|ELASTICSEARCH_LATEST_DOCKER|" : "7.10.2",
-    "|KIBANA_VERSION_AMI|" : "7.10.2",
-    "|FILEBEAT_LATEST_AMI|" : "7.10.2",
-    "|OPENDISTRO_LATEST_DOCKER|" : "1.13.2",
-    "|OPENDISTRO_LATEST_AMI|" : "1.13.2",
-    "|OPENDISTRO_LATEST_KUBERNETES|" : "1.13.2",
-    "|DOCKER_COMPOSE_VERSION|" : "1.28.3",
-    "|SPLUNK_LATEST|" : "8.2.6",
-    "|WAZUH_SPLUNK_LATEST|" : "4.3.0",
-    "|ELASTIC_6_LATEST|" : "6.8.8",
-    "|WAZUH_REVISION_DEB_AGENT_PPC|" : "1",
-    "|WAZUH_REVISION_YUM_AGENT_PPC|" : "1",
+    # === URLs and base URLs
+    "|CHECKSUMS_URL|" : "https://packages.wazuh.com/4.x/checksums/wazuh/",
+    "|RPM_AGENT_URL|" : "https://packages.wazuh.com/4.x/yum/wazuh-agent",
+    "|RPM_MANAGER_URL|" : "https://packages.wazuh.com/4.x/yum/wazuh-manager",
+    "|DEB_AGENT_URL|" : "https://packages.wazuh.com/4.x/apt/pool/main/w/wazuh-agent/wazuh-agent",
+    "|DEB_MANAGER_URL|" : "https://packages.wazuh.com/4.x/apt/pool/main/w/wazuh-manager/wazuh-manager",
+    #
+    # === Global and Wazuh version (wazuh agent, manager, indexer, and dashboard)
+    "|WAZUH_CURRENT_MAJOR|" : "4.x",
+    "|WAZUH_CURRENT_MINOR|" : version,
+    "|WAZUH_CURRENT|" : release,
+    # --- Revision numbers for Wazuh agent and manager packages versions
+    # Yum packages revisions
     "|WAZUH_REVISION_YUM_AGENT_I386|" : "1",
     "|WAZUH_REVISION_YUM_MANAGER_I386|" : "1",
+    "|WAZUH_REVISION_YUM_AGENT_I386_EL5|" : "1",
+    #"|WAZUH_REVISION_YUM_MANAGER_I386_EL5|" :
     "|WAZUH_REVISION_YUM_AGENT_X86|" : "1",
     "|WAZUH_REVISION_YUM_MANAGER_X86|" : "1",
-    "|WAZUH_REVISION_YUM_API_X86|" : "1",
+    "|WAZUH_REVISION_YUM_AGENT_X86_EL5|" : "1",
+    #|WAZUH_REVISION_YUM_MANAGER_X86_EL5|
     "|WAZUH_REVISION_YUM_AGENT_AARCH64|" : "1",
     "|WAZUH_REVISION_YUM_MANAGER_AARCH64|" : "1",
-    "|WAZUH_REVISION_YUM_API_AARCH64|" : "1",
     "|WAZUH_REVISION_YUM_AGENT_ARMHF|" : "1",
     "|WAZUH_REVISION_YUM_MANAGER_ARMHF|" : "1",
-    "|WAZUH_REVISION_YUM_API_ARMHF|" : "1",
-    "|WAZUH_REVISION_YUM_AGENT_I386_EL5|" : "1",
-    "|WAZUH_REVISION_YUM_AGENT_X86_EL5|" : "1",
+    "|WAZUH_REVISION_YUM_AGENT_PPC|" : "1",
+    #|WAZUH_REVISION_YUM_MANAGER_PPC|" :
+    # Deb packages revisions
     "|WAZUH_REVISION_DEB_AGENT_I386|" : "1",
     "|WAZUH_REVISION_DEB_MANAGER_I386|" : "1",
     "|WAZUH_REVISION_DEB_AGENT_X86|" : "1",
     "|WAZUH_REVISION_DEB_MANAGER_X86|" : "1",
-    "|WAZUH_REVISION_DEB_API_X86|" : "1",
     "|WAZUH_REVISION_DEB_AGENT_AARCH64|" : "1",
     "|WAZUH_REVISION_DEB_MANAGER_AARCH64|" : "1",
-    "|WAZUH_REVISION_DEB_API_AARCH64|" : "1",
     "|WAZUH_REVISION_DEB_AGENT_ARMHF|" : "1",
     "|WAZUH_REVISION_DEB_MANAGER_ARMHF|" : "1",
-    "|WAZUH_REVISION_DEB_API_ARMHF|" : "1",
-    "|WAZUH_REVISION_HPUX|" : "1",
-    "|WAZUH_REVISION_OSX|" : "1",
+    "|WAZUH_REVISION_DEB_AGENT_PPC|" : "1",
+    #"|WAZUH_REVISION_DEB_MANAGER_PPC|" : 
+    #
+    # === Wazuh indexer version revisions
+    "|WAZUH_INDEXER_CURRENT_REV|" : "1", # RPM and Deb
+    #"|WAZUH_INDEXER_CURRENT_REV_DEB|" :
+    # --- Architectures for Wazuh indexer packages
+    "|WAZUH_INDEXER_x64_RPM|" : "x86_64",
+    "|WAZUH_INDEXER_x64_DEB|" : "amd64",
+    #
+    # === Wazuh dashboard version revisions
+    "|WAZUH_DASHBOARD_CURRENT_REV_RPM|" : "1",
+    "|WAZUH_DASHBOARD_CURRENT_REV_DEB|" : "1",
+    # --- Architectures for Wazuh dashboard packages
+    "|WAZUH_DASHBOARD_x64_RPM|" : "x86_64",
+    "|WAZUH_DASHBOARD_x64_DEB|" : "amd64",
+    #
+    # === Versions and revisions for other Wazuh deployments
+    #"|WAZUH_CURRENT_MAJOR_AMI|" :
+    #"|WAZUH_CURRENT_MINOR_AMI|" :
+    "|WAZUH_CURRENT_AMI|" : release,
+    "|WAZUH_CURRENT_MAJOR_OVA|" : "4.x",
+    #"|WAZUH_CURRENT_MINOR_OVA|" :
+    "|WAZUH_CURRENT_OVA|" : release,
+    #"|WAZUH_CURRENT_MAJOR_DOCKER|" :
+    "|WAZUH_CURRENT_MINOR_DOCKER|" : version,
+    "|WAZUH_CURRENT_DOCKER|" : release,
+    #"|WAZUH_CURRENT_MAJOR_KUBERNETES|" :
+    #"|WAZUH_CURRENT_MINOR_KUBERNETES|" :
+    "|WAZUH_CURRENT_KUBERNETES|" : release,
+    #"|WAZUH_CURRENT_MAJOR_ANSIBLE|" :
+    "|WAZUH_CURRENT_MINOR_ANSIBLE|" : version,
+    "|WAZUH_CURRENT_ANSIBLE|" : release,
+    #"|WAZUH_CURRENT_MAJOR_PUPPET|" :
+    #"|WAZUH_CURRENT_MINOR_PUPPET|" :
+    "|WAZUH_CURRENT_PUPPET|" : release,
+    #"|WAZUH_CURRENT_MAJOR_FROM_SOURCES|" :
+    "|WAZUH_CURRENT_MINOR_FROM_SOURCES|" : version,
+    "|WAZUH_CURRENT_FROM_SOURCES|" : release,
+    #"|WAZUH_CURRENT_MAJOR_WIN_FROM_SOURCES|" :
+    #"|WAZUH_CURRENT_MINOR_WIN_FROM_SOURCES|" :
+    "|WAZUH_CURRENT_WIN_FROM_SOURCES|" : release,
+    "|WAZUH_CURRENT_WIN_FROM_SOURCES_REV|" : "1",
+    #
+    # === Versions and revisions for packages of specific operating systems
+    "|WAZUH_CURRENT_MAJOR_WINDOWS|" : "4.x",
+    #"|WAZUH_CURRENT_MINOR_WINDOWS|" :
+    "|WAZUH_CURRENT_WINDOWS|" : release,
     "|WAZUH_REVISION_WINDOWS|" : "1",
+    "|WAZUH_CURRENT_MAJOR_OSX|" : "4.x",
+    #"|WAZUH_CURRENT_MINOR_OSX|" :
+    "|WAZUH_CURRENT_OSX|" : release,
+    "|WAZUH_REVISION_OSX|" : "1",
+    "|WAZUH_CURRENT_MAJOR_SOLARIS|" : "4.x",
+    #"|WAZUH_CURRENT_MINOR_SOLARIS|" :
+    "|WAZUH_CURRENT_SOLARIS|" : release, # The lesser of WAZUH_CURRENT_MAJOR_SOLARIS10 and 11
+    #"|WAZUH_REVISION_SOLARIS|" : "1",
+    "|WAZUH_CURRENT_MAJOR_SOLARIS10|" : "4.x",
+    #"|WAZUH_CURRENT_MINOR_SOLARIS10|" :
+    "|WAZUH_CURRENT_SOLARIS10|" : release,
+    #"|WAZUH_REVISION_SOLARIS10|" : "1",
+    "|WAZUH_CURRENT_MAJOR_SOLARIS11|" : "4.x",
+    #"|WAZUH_CURRENT_MINOR_SOLARIS11|" :
+    "|WAZUH_CURRENT_SOLARIS11|" : release,
+    #"|WAZUH_REVISION_SOLARIS11|" : "1",
+    "|WAZUH_CURRENT_MAJOR_AIX|" : "4.x",
+    #"|WAZUH_CURRENT_MINOR_AIX|" :
+    "|WAZUH_CURRENT_AIX|" : release,
     "|WAZUH_REVISION_AIX|" : "1",
-    "|CHECKSUMS_URL|" : "https://packages.wazuh.com/4.x/checksums/wazuh/",
-    "|RPM_AGENT|" : "https://packages.wazuh.com/4.x/yum/wazuh-agent",
-    "|RPM_MANAGER|" : "https://packages.wazuh.com/4.x/yum/wazuh-manager",
-    "|DEB_AGENT|" : "https://packages.wazuh.com/4.x/apt/pool/main/w/wazuh-agent/wazuh-agent",
-    "|DEB_MANAGER|" : "https://packages.wazuh.com/4.x/apt/pool/main/w/wazuh-manager/wazuh-manager",
-    "|DEB_API|" : "https://packages.wazuh.com/4.x/apt/pool/main/w/wazuh-api/wazuh-api",
-    # Variables for Elastic's Elasticsearch
-    "|ELASTICSEARCH_ELK_LATEST|" : "7.17.3",
-    "|ELASTICSEARCH_ELK_LATEST_ANSIBLE|" : "7.10.2",
-    "|ELASTICSEARCH_ELK_LATEST_KUBERNETES|" : "7.10.2",
-    "|ELASTICSEARCH_ELK_LATEST_PUPPET|" : "7.10.2",
-    "|ELASTICSEARCH_ELK_LATEST_DOCKER|" : "7.10.2",
+    "|WAZUH_CURRENT_MAJOR_HPUX|" : "4.x",
+    #"|WAZUH_CURRENT_MINOR_HPUX|" :
+    "|WAZUH_CURRENT_HPUX|" : release,
+    "|WAZUH_REVISION_HPUX|" : "1",
+    #
+    # === Elastic
+    # --- Filebeat
+    "|FILEBEAT_LATEST|" : "7.10.2",
+    "|FILEBEAT_LATEST_AMI|" : "7.10.2",
+    "|FILEBEAT_LATEST_OVA|" : "7.10.2",
+    # --- Open Distro for Elasticsearch
+    "|OPEN_DISTRO_LATEST|" : "1.13.2",
+    # --- Elasticsearch
+    "|ELASTICSEARCH_ELK_LATEST|" : "7.17.5", # Basic license
+    "|ELASTICSEARCH_LATEST|" : "7.10.2",
+    # --- Other Elastic
+    "|ELASTIC_6_LATEST|" : "6.8.8",
+    #
+    # === Splunk
+    "|SPLUNK_LATEST|" : "8.2.6",
+    "|WAZUH_SPLUNK_CURRENT|" : release,
 }
 
 # -- Customizations ---------------------------------------------------------
@@ -564,19 +605,14 @@ custom_replacements = {
 ## emptyTocNodes ##
 emptyTocNodes = json.dumps([
     'amazon/configuration/index',
-    'compliance',
     'containers',
     'deployment',
-    'development/index',
     'docker-monitor/index',
-    'migration-guide/index',
     'installation-guide/elasticsearch-cluster/index',
     'installation-guide/wazuh-cluster/index',
     'installation-guide/upgrading/legacy/index',
     'installation-guide/packages-list/linux/linux-index',
     'installation-guide/packages-list/solaris/solaris-index',
-    'monitoring',
-    'user-manual/index',
     'user-manual/agents/index',
     'user-manual/agents/remove-agents/index',
     'user-manual/agents/listing/index',
@@ -602,12 +638,13 @@ def setup(app):
     if html_theme == 'wazuh_doc_theme_v3':
         
         # Minify redirects.js
-        with open(os.path.join(static_path_str, "js/redirects.js")) as redirects_file:
-            minified = jsmin(redirects_file.read())
-            
-            # Create redirects.min.js file
-            with open(os.path.join(current_path, "static/js/min/redirects.min.js"), 'w') as redirects_min_file:
-                redirects_min_file.write(minified)
+        if html_theme_options['include_version_selector'] == True:
+            with open(os.path.join(static_path_str, "js/redirects.js")) as redirects_file:
+                minified = jsmin(redirects_file.read())
+                
+                # Create redirects.min.js file
+                with open(os.path.join(current_path, "static/js/min/redirects.min.js"), 'w') as redirects_min_file:
+                    redirects_min_file.write(minified)
         
         # CSS files
         app.add_css_file("css/min/bootstrap.min.css?ver=%s" % os.stat(
@@ -683,9 +720,12 @@ def insert_inline_js(app, pagename, templatename, context, doctree):
 def manage_assets(app, pagename, templatename, context, doctree):
     theme_dir = os.path.join(os.path.dirname(os.path.realpath(__file__)), theme_assets_path)
     static = '_static/'
-    conditional_redirects = static + "js/min/redirects.min.js?ver=%s" % os.stat(os.path.join(theme_dir, "static/js/min/redirects.min.js")).st_mtime
-    if tags.has("production") or tags.has("dev"):
-        conditional_redirects = static + "js/min/redirects.min.js?ver=%s" % str(time.time())
+    if html_theme_options['include_version_selector'] == True:
+        conditional_redirects = static + "js/min/redirects.min.js?ver=%s" % os.stat(os.path.join(theme_dir, "static/js/min/redirects.min.js")).st_mtime
+        if tags.has("production") or tags.has("dev"):
+            conditional_redirects = static + "js/min/redirects.min.js?ver=%s" % str(time.time())
+    else:
+        conditional_redirects = ''
     # Full list of non-common javascript files
     individual_js_files = {
         "redirects": conditional_redirects,
@@ -711,6 +751,12 @@ def manage_assets(app, pagename, templatename, context, doctree):
             'not_found': "css/min/not-found.min.css?ver=%s" % os.stat(os.path.join(theme_dir, "static/css/min/not-found.min.css")).st_mtime
         }
         default = "css/min/wazuh-documentation.min.css?ver=%s" % os.stat(os.path.join(theme_dir, "static/css/min/wazuh-documentation.min.css")).st_mtime
+        
+        if version < '4.0':
+            css_map['user-manual/api/reference'] = default
+        
+        if html_theme_options['breadcrumb_root_title'] == 'Training':
+            css_map['index'] = default
 
         if pagename in css_map.keys():
             return css_map[pagename]
@@ -756,6 +802,9 @@ def manage_assets(app, pagename, templatename, context, doctree):
             # tabs (extension)
             # lightbox (extension)
         ]
+        
+        if html_theme_options['breadcrumb_root_title'] == 'Training':
+            js_map['index'] = default
 
         if pagename in js_map.keys():
             return js_map[pagename]
@@ -783,7 +832,7 @@ def finish_and_clean(app, exception):
 
     if html_theme == 'wazuh_doc_theme_v3':
         # Remove map files and sourcMapping line in production
-        if production:
+        if production or html_theme_options['breadcrumb_root_title'] == 'Training':
             mapFiles = glob.glob(app.outdir + '/_static/*/min/*.map')
             assetsFiles = glob.glob(app.outdir + '/_static/js/min/*.min.js') + glob.glob(app.outdir + '/_static/css/min/*.min.css')
             # Remove map files
@@ -808,7 +857,7 @@ def finish_and_clean(app, exception):
                     
 def collect_compiled_pagename(app, pagename, templatename, context, doctree):
     ''' Runs once per page, storing the pagename (full page path) extracted from the context
-        It store the path of all compiled documents except the orphans and the ones in exclude_doc'''
+        It stores the path of all compiled documents except the orphans and the ones in exclude_doc '''
     if templatename == "page.html" and pagename not in exclude_doc:
         if not context['meta'] or ( context['meta']['orphan'] ):
             list_compiled_html.append(context['pagename']+'.html')

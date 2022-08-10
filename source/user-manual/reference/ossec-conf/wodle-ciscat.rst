@@ -1,4 +1,4 @@
-.. Copyright (C) 2022 Wazuh, Inc.
+.. Copyright (C) 2015, Wazuh, Inc.
 
 .. _wodle_ciscat:
 
@@ -158,7 +158,7 @@ Run evaluation immediately when service is started.
 interval
 ^^^^^^^^
 
-Interval between CIS-CAT executions.
+The interval between CIS-CAT executions.
 
 +--------------------+----------------------------------------------------------------------------------------------------------------------------------------------------------------+
 | **Default value**  | 1d                                                                                                                                                             |

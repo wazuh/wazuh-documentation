@@ -6,8 +6,23 @@
 
 -#}
 
-{%- if pagename == 'index' -%}
+{% set api_pages = [
+  'cloud-service/apis/reference',
+  'user-manual/api/reference'
+] %}
+
+{%- if pagename == 'index' and theme_breadcrumb_root_title == 'Documentation' -%}
   {%- include 'index.html' -%}
 {%- else -%}
-  {%- include 'template-parts/body.html' -%}
+  {% if version >= '4.0' and pagename in api_pages %}
+    {# Redoc template #}
+    {% if pagename == 'user-manual/api/reference' %}
+      {% include "api-redoc.html" %}
+    {% endif %}
+    {% if pagename == 'cloud-service/apis/reference' %}
+      {% include "cloud-api-redoc.html" %}
+    {% endif %}
+  {%- else -%}
+    {%- include 'template-parts/body.html' -%}
+  {% endif -%}
 {% endif -%}

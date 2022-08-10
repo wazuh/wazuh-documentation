@@ -1,4 +1,4 @@
-.. Copyright (C) 2022 Wazuh, Inc.
+.. Copyright (C) 2015, Wazuh, Inc.
 
 .. meta::
   :description: The cluster_control tool allows you to get real-time information about the health of the cluster. Learn more about deploying a Wazuh cluster in this section.
@@ -18,9 +18,9 @@ For example, the following snippet shows the connected nodes in the cluster:
     :class: output
 
     NAME      TYPE    VERSION  ADDRESS
-    worker-1  worker  |WAZUH_LATEST|    172.17.0.101
-    worker-2  worker  |WAZUH_LATEST|    172.17.0.102
-    master    master  |WAZUH_LATEST|    172.17.0.100
+    worker-1  worker  |WAZUH_CURRENT|    172.17.0.101
+    worker-2  worker  |WAZUH_CURRENT|    172.17.0.102
+    master    master  |WAZUH_CURRENT|    172.17.0.100
 
 This information can also be obtained using the Wazuh API endpoint :api-ref:`GET /cluster/nodes <operation/api.controllers.cluster_controller.get_cluster_nodes>`:
 
@@ -36,19 +36,19 @@ This information can also be obtained using the Wazuh API endpoint :api-ref:`GET
             "affected_items": [
                 {
                     "ip": "192.168.56.103",
-                    "version": "|WAZUH_LATEST|",
+                    "version": "|WAZUH_CURRENT|",
                     "type": "worker",
                     "name": "node02",
                 },
                 {
                     "ip": "192.168.56.105",
-                    "version": "|WAZUH_LATEST|",
+                    "version": "|WAZUH_CURRENT|",
                     "type": "worker",
                     "name": "node03",
                 },
                 {
                     "ip": "192.168.56.101",
-                    "version": "|WAZUH_LATEST|",
+                    "version": "|WAZUH_CURRENT|",
                     "type": "master",
                     "name": "node01",
                 },

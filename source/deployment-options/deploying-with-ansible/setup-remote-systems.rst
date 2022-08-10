@@ -1,5 +1,8 @@
-.. Copyright (C) 2015–2022 Wazuh, Inc.
+.. Copyright (C) 2015, Wazuh, Inc.
 
+.. meta::
+  :Description: Ansible is an agentless automation platform. Learn more about remote endpoints deployments in this section of the Wazuh documentation.
+  
 Remote endpoints connection
 ===========================
 
@@ -35,7 +38,7 @@ This will set the connection user as ``foo``. Also, it will ask for the connecti
 Using SSH key-pairing
 ---------------------
 
-You can setup an SSH key-pair to provide a passwordless authentication mechanism. First, create an OpenSSH key-pair on the Ansible server:
+You can set up an SSH key-pair to provide a passwordless authentication mechanism. First, create an OpenSSH key-pair on the Ansible server:
 
 .. code-block:: console
 
@@ -44,7 +47,7 @@ You can setup an SSH key-pair to provide a passwordless authentication mechanism
 .. note::
   
    -  To improve security on this setup, please ensure you provide a passphrase for this key.
-   -  Using ssh-agent, we can avoid repeatedly asking for the key password on every Ansible deployment. Ssh-agent will cache the key to be used in further actions, until you logout.
+   -  Using ssh-agent, we can avoid repeatedly asking for the key password on every Ansible deployment. Ssh-agent will cache the key to be used in further actions, until you log out.
 
 Adding the public key to remote systems
 ---------------------------------------
@@ -139,4 +142,4 @@ If you see the above, then Ansible is fully usable.
 Windows authentication
 ----------------------
 
-Windows hosts use a different mechanism to perform authentication. Please refer to `Authentication Options <http://docs.ansible.com/ansible/latest/intro_windows.html#authentication-options>`_ in the Ansible documentation order to setup the adequate option.
+Windows hosts use a different mechanism to perform authentication. Please refer to `Authentication Options <http://docs.ansible.com/ansible/latest/intro_windows.html#authentication-options>`_ in the Ansible documentation order to set up the adequate option.

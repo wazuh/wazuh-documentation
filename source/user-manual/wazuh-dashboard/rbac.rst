@@ -1,4 +1,4 @@
-.. Copyright (C) 2022 Wazuh, Inc.
+.. Copyright (C) 2015, Wazuh, Inc.
 
 .. meta::
   :description: This section of the Wazuh documentation explains what a role-based access control system is and how you can use it with Wazuh. 
@@ -8,7 +8,7 @@
 Wazuh RBAC - How to create and map internal users
 =================================================
 
-Wazuh RBAC allows access to Wazuh resources based on the roles and policies assigned to the users. It is an easy-to-use administration system that enables to manage users' or entities' permissions to the system resources. To learn more, see the :ref:`Role-Based Access Control <api_rbac>` section. 
+Wazuh RBAC allows access to Wazuh resources based on the roles and policies assigned to the users. It is an easy-to-use administration system that enables to manage users' or entities' permissions to the system resources. To learn more, see the :doc:`Role-Based Access Control </user-manual/api/rbac/index>` section. 
 
 Learn how to create internal users and map them with Wazuh in the below sections.
 
@@ -160,7 +160,7 @@ In this example, we have an environment with five agents. Agents **001**, **002*
 Adding an agents group label
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-To prepare the environment, add a label in the ``Team_A`` centralized configuration ``agent.conf``. To learn more, see :ref:`Agent labels <labels>`.
+To prepare the environment, add a label in the ``Team_A`` centralized configuration ``agent.conf``. To learn more, see :doc:`Agent labels </user-manual/capabilities/labels>`.
 
 #. Log into Wazuh dashboard as administrator.
 

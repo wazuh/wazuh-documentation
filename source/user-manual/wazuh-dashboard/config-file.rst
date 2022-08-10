@@ -13,75 +13,10 @@ The configuration file shows the default values for all of the possible options.
 
 The configuration file reference is organized by sections:
 
-`Basic options`_
-    - `hosts`_
-    - `pattern`_
-    - `timeout`_
-    - `ip.selector`_
-    - `ip.ignore`_
-    - `logs.level`_
-    - `hideManagerAlerts`_
-
-`Monitoring`_
-    - `wazuh.monitoring.enabled`_
-    - `wazuh.monitoring.frequency`_
-    - `wazuh.monitoring.pattern`_
-    - `wazuh.monitoring.creation`_
-
-`Checks`_
-    - `checks.pattern`_
-    - `checks.template`_
-    - `checks.api`_
-    - `checks.setup`_
-    - `checks.fields`_
-    - `checks.metaFields`_
-    - `checks.timeFilter`_
-    - `checks.maxBuckets`_
-
-`Extensions`_
-    - `extensions.pci`_
-    - `extensions.gdpr`_
-    - `extensions.hipaa`_
-    - `extensions.nist`_
-    - `extensions.tsc`_
-    - `extensions.audit`_
-    - `extensions.oscap`_
-    - `extensions.ciscat`_
-    - `extensions.aws`_
-    - `extensions.gcp`_
-    - `extensions.virustotal`_
-    - `extensions.osquery`_
-    - `extensions.docker`_
-
-`Unauthorized roles`_
-    - `disabled_roles`_
-
-`Sample alerts`_
-    - `alerts.sample.prefix`_
-
-`Enrollment DNS`_
-    - `enrollment.dns`_
-    - `enrollment.password`_
-
-`Cron`_
-    - `cron.prefix`_
-    - `cron.statistics.status`_
-    - `cron.statistics.apis`_
-    - `cron.statistics.interval`_
-    - `cron.statistics.index.name`_
-    - `cron.statistics.index.creation`_
-    - `cron.statistics.shards`_
-    - `cron.statistics.replicas`_
-
-`Logo customization`_
-    - `customization.logo.app`_
-    - `customization.logo.sidebar`_
-    - `customization.logo.healthcheck`_
-    - `customization.logo.reports`_
-
-`Advanced index options`_
-    - `wazuh.monitoring.shards`_
-    - `wazuh.monitoring.replicas`_
+.. contents::
+   :local:
+   :depth: 2
+   :backlinks: none
 
 Basic options
 -------------
@@ -808,4 +743,3 @@ This is an example of the wazuh.yml configuration:
 
     enrollment.dns: ''
     enrollment.password: ''
-    

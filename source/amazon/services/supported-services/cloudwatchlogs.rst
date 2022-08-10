@@ -1,4 +1,4 @@
-.. Copyright (C) 2022 Wazuh, Inc.
+.. Copyright (C) 2015, Wazuh, Inc.
 
 .. meta::
   :description: The Wazuh module for AWS provides capabilities to monitor AWS based services. See more about how to configure CloudWatch Logs and some practical use cases.
@@ -46,7 +46,7 @@ Wazuh configuration
     Users must specify at least one AWS log group from where the logs will be extracted. Multiple regions can be added separated by commas. If no region is specified the module will look for the log group in every available region.
 
     .. note::
-      Check the :ref:`AWS S3 module <wodle_s3>` reference manual to learn more about each setting.
+      Check the :doc:`AWS S3 module </user-manual/reference/ossec-conf/wodle-s3>` reference manual to learn more about each setting.
 
 #. Restart Wazuh in order to apply the changes:
 
@@ -82,4 +82,4 @@ Wazuh configuration
 CloudWatch Logs use cases
 -------------------------
 
-Check the :ref:`Amazon ECR Image scanning <amazon_image_scanning>` section to learn how to use the CloudWatch Logs integration to pull logs from Amazon ECR Image scans.
+Check the :doc:`Amazon ECR Image scanning </amazon/services/supported-services/ecr-image-scanning>` section to learn how to use the CloudWatch Logs integration to pull logs from Amazon ECR Image scans.

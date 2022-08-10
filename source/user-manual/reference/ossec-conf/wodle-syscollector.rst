@@ -1,4 +1,4 @@
-.. Copyright (C) 2022 Wazuh, Inc.
+.. Copyright (C) 2015, Wazuh, Inc.
 
 .. meta::
 	:description: Check out this section about the local configuration of Wazuh and learn about the configuration options of the syscollector wodle.
@@ -128,7 +128,7 @@ Enables the network scan.
 packages
 ^^^^^^^^
 
-Enables the packages scan.
+Enables the scan of the packages.
 
 +--------------------+---------+
 | **Default value**  | yes     |
@@ -158,7 +158,7 @@ With option **all='no'** it will only scan listening ports.
 processes
 ^^^^^^^^^
 
-Enables the processes scan.
+Enables the scan of the processes.
 
 +--------------------+---------+
 | **Default value**  | yes     |

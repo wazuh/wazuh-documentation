@@ -1,6 +1,7 @@
-.. Copyright (C) 2015–2022 Wazuh, Inc.
+.. Copyright (C) 2015, Wazuh, Inc.
 
-.. meta:: :description: Splunk for Wazuh installation guide
+.. meta::
+   :description: Learn how to place Splunk web behind a proxy with an NGINX setup in this section of the documentation.
 
 Set up reverse proxy configuration for Splunk
 =============================================

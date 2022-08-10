@@ -1,4 +1,4 @@
-.. Copyright (C) 2022 Wazuh, Inc.
+.. Copyright (C) 2015, Wazuh, Inc.
 
 .. meta::
    :description: Check out this guide to learn how to build an environment composed of a Wazuh cluster integrated with the Elastic Stack using Kubernetes. 

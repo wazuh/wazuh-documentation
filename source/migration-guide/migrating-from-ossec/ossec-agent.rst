@@ -1,4 +1,4 @@
-.. Copyright (C) 2022 Wazuh, Inc.
+.. Copyright (C) 2015, Wazuh, Inc.
 
 .. meta::
    :description: Learn in this section how to migrate OSSEC agents to Wazuh agents on Linux systems without losing any configuration data. 
@@ -60,12 +60,13 @@ Remove your current installation
 Install Wazuh agent
 -------------------
 
-Now it's time to install the Wazuh agent component. This can be done from sources or from binary packages. Go to our documentation to :ref:`Installing Wazuh agent <installation_agents>` section for detailed instructions on this process.
+Now it's time to install the Wazuh agent component. This can be done from sources or from binary packages. Go to our documentation to :doc:`Wazuh agent </installation-guide/wazuh-agent/index>` section for detailed instructions on this process.
+
 
 Restore configuration
 ---------------------
 
-Before restoring our previous settings please note that some configuration options have been deprecated or use a different syntax, what can cause the agent not to start properly. To avoid this, you can manually try to migrate your settings. Same thing happens with rules and decoders. In case of doubt take a look at our :ref:`User manual <user_manual>`.
+Before restoring our previous settings please note that some configuration options have been deprecated or use a different syntax, what can cause the agent not to start properly. To avoid this, you can manually try to migrate your settings. Same thing happens with rules and decoders. In case of doubt take a look at our :doc:`User manual </user-manual/index>`.
 
 The first step is to stop the agent processes:
 

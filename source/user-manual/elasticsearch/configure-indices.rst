@@ -1,4 +1,4 @@
-.. Copyright (C) 2022 Wazuh, Inc.
+.. Copyright (C) 2015, Wazuh, Inc.
 
 .. _kibana_configure_indices:
 
@@ -49,7 +49,7 @@ Let's suppose that we want to add a new index pattern (``my-custom-alerts-*``) a
 
     .. code-block:: console
 
-      # curl -so template.json https://raw.githubusercontent.com/wazuh/wazuh/v|WAZUH_LATEST|/extensions/elasticsearch/7.x/wazuh-template.json
+      # curl -so template.json https://raw.githubusercontent.com/wazuh/wazuh/v|WAZUH_CURRENT|/extensions/elasticsearch/7.x/wazuh-template.json
 
 #. Open the template file and locate this line:
 
@@ -71,7 +71,7 @@ Let's suppose that we want to add a new index pattern (``my-custom-alerts-*``) a
 
     .. code-block:: console
 
-      # curl -XPUT 'http://localhost:9200/_template/wazuh' -H 'Content-Type: application/json' -d @template.json
+      # curl -XPUT -k -u <user>:<pass> 'https://localhost:9200/_template/wazuh' -H 'Content-Type: application/json' -d @template.json
 
     .. code-block:: json
       :class: output

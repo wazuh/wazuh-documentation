@@ -1,4 +1,7 @@
-.. Copyright (C) 2022 Wazuh, Inc.
+.. Copyright (C) 2015, Wazuh, Inc.
+
+.. meta::
+  :description: AWS Config is a service that allows users to evaluate the configurations of their AWS resources. Learn more about it in this section of the documentation.
 
 .. _amazon_config:
 
@@ -20,7 +23,7 @@ Amazon configuration
     .. note::
       For more information about these options, see `Selecting Which Resources AWS Config Records. <https://docs.aws.amazon.com/config/latest/developerguide/select-resources.html>`_
 
-#. Select an existing S3 Bucket or :ref:`create a new one. <S3_bucket>`
+#. Select an existing S3 Bucket or :doc:`create a new one </amazon/services/prerequisites/S3-bucket>`.
 
     .. thumbnail:: ../../../images/aws/aws-create-config-1.png
       :align: center
@@ -40,7 +43,7 @@ Amazon configuration
       :align: center
       :width: 100%
 
-#. Select which service do you want to get logs from using the Service name slider, then, click on the Add target button and add the previously created Firehose delivery stream there. Also, create a new role to access the delivery stream:
+#. Select the services you want to get logs from using the Service name slider, then, click on the Add target button and add the previously created Firehose delivery stream there. Also, create a new role to access the delivery stream:
 
     .. thumbnail:: ../../../images/aws/aws-create-firehose-14.png
       :align: center
@@ -52,7 +55,7 @@ Amazon configuration
       :align: center
       :width: 100%
 
-#. Once the rule is created, data will start to be sent to the previously created S3 bucket. Remember to first enable the service you want to monitor, otherwise you won't get any data.
+#. Once the rule is created, data will start to be sent to the previously created S3 bucket. Remember to first enable the service you want to monitor, otherwise, you won't get any data.
 
 
 Wazuh configuration
@@ -75,7 +78,7 @@ Wazuh configuration
       </wodle>
 
     .. note::
-      Check the :ref:`AWS S3 module <wodle_s3>` reference manual to learn more about each setting.
+      Check the :doc:`AWS S3 module </user-manual/reference/ossec-conf/wodle-s3>` reference manual to learn more about each setting.
 
 #. Restart Wazuh in order to apply the changes:
 

@@ -1,9 +1,8 @@
-.. Copyright (C) 2022 Wazuh, Inc.
+.. Copyright (C) 2015, Wazuh, Inc.
 
 .. meta:: :description: Learn how to install a Wazuh multi-node cluster
 
 .. _basic_wazuh_multi_node_cluster:
-
 
 Wazuh multi-node cluster
 =========================
@@ -22,12 +21,12 @@ Before installing the Wazuh servers and Filebeat, some extra packages must be in
 Installing Wazuh server
 -----------------------
 
-The Wazuh server collects and analyzes data from deployed agents. It runs the Wazuh manager, the Wazuh API and Filebeat. The first step to set up Wazuh is adding Wazuh's repository to the servers. Alternatively, the Wazuh manager package can be downloaded directly and compatible versions can be checked :ref:`here <packages>`.
+The Wazuh server collects and analyzes data from deployed agents. It runs the Wazuh manager, the Wazuh API and Filebeat. The first step in setting up Wazuh is adding Wazuh repository to the servers. Alternatively, the Wazuh manager package can be downloaded directly, and compatible versions can be checked :doc:`here </installation-guide/packages-list>`.
 
 Adding the Wazuh repository
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-This section describes how to add the Wazuh repository. It will be used for Wazuh manager and Wazuh API installation. These steps must be followed in all the servers that will be part of the Wazuh multi-node cluster.
+This section describes how to add the Wazuh repository. It will be used for the Wazuh manager and Wazuh API installation. These steps must be followed in all the servers that will be part of the Wazuh multi-node cluster.
 
 .. tabs::
 
@@ -49,7 +48,7 @@ This section describes how to add the Wazuh repository. It will be used for Wazu
 Installing the Wazuh manager
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-#. Install the Wazuh manager package. This step must be applied in all servers that will act as a Wazuh cluster nodes:
+#. Install the Wazuh manager package. This step must be applied in all servers that will act as Wazuh cluster nodes:
 
 .. tabs::
 
@@ -160,20 +159,20 @@ Filebeat installation and configuration
 
     .. code-block:: console
 
-      # curl -so /etc/filebeat/filebeat.yml https://packages.wazuh.com/|WAZUH_LATEST_MINOR|/tpl/elastic-basic/filebeat.yml
+      # curl -so /etc/filebeat/filebeat.yml https://packages.wazuh.com/|WAZUH_CURRENT_MINOR|/tpl/elastic-basic/filebeat.yml
 
 #. Download the alerts template for Elasticsearch:
 
     .. code-block:: console
 
-      # curl -so /etc/filebeat/wazuh-template.json https://raw.githubusercontent.com/wazuh/wazuh/|WAZUH_LATEST_MINOR|/extensions/elasticsearch/7.x/wazuh-template.json
+      # curl -so /etc/filebeat/wazuh-template.json https://raw.githubusercontent.com/wazuh/wazuh/|WAZUH_CURRENT_MINOR|/extensions/elasticsearch/7.x/wazuh-template.json
       # chmod go+r /etc/filebeat/wazuh-template.json
 
 #. Download the Wazuh module for Filebeat:
 
     .. code-block:: console
 
-      # curl -s https://packages.wazuh.com/4.x/filebeat/wazuh-filebeat-0.1.tar.gz | tar -xvz -C /usr/share/filebeat/module
+      # curl -s https://packages.wazuh.com/4.x/filebeat/wazuh-filebeat-0.2.tar.gz | tar -xvz -C /usr/share/filebeat/module
 
 #. Configure Filebeat certificates:
 

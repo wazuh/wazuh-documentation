@@ -1,5 +1,5 @@
 
-.. Copyright (C) 2021 Wazuh, Inc.
+.. Copyright (C) 2015, Wazuh, Inc.
 
 .. _amazon_server_access:
 
@@ -11,7 +11,7 @@ S3 Server Access
 Amazon configuration
 --------------------
 
-#. :ref:`Create a new <S3_bucket>` S3 bucket to store the access logs in it. If you want to use an existing one, skip this step.
+#. :doc:`Create a new </amazon/services/prerequisites/S3-bucket>` S3 bucket to store the access logs in it. If you want to use an existing one, skip this step.
 
 #. Go to Services > Storage > S3:
 
@@ -25,7 +25,7 @@ Amazon configuration
       :align: center
       :width: 70%
 
-#. Go to the *Properties* tab, scroll down until you find the *Server access logging* and click on the *Edit* button:
+#. Go to the **Properties** tab, scroll down until you find the **Server access logging**, and click on the **Edit** button:
 
     .. thumbnail::  ../../../images/aws/aws-server-access-3.png
       :align: center
@@ -35,7 +35,7 @@ Amazon configuration
       :align: center
       :width: 70%
 
-#. Check the *Enable* option, click on the *Browse S3* button to look for the bucket in which you want S3 Server Access logs to be stored:
+#. Check the **Enable** option, and click on the **Browse S3** button to look for the bucket in which you want S3 Server Access logs to be stored:
 
     .. thumbnail::  ../../../images/aws/aws-server-access-5.png
       :align: center
@@ -45,7 +45,7 @@ Amazon configuration
       It is possible to store the S3 Server Access logs in the same bucket to be monitored. It is also possible to specify a custom path inside the bucket to store the logs in it.
 
 
-#. Finally, click on the *Save changes*. S3 Server Access logs will start to be stored in the specified path.
+#. Finally, click on the **Save changes**. S3 Server Access logs will start to be stored in the specified path.
 
 
 Wazuh configuration
@@ -68,7 +68,7 @@ Wazuh configuration
       </wodle>
 
     .. note::
-      Check the :ref:`AWS S3 module <wodle_s3>` reference manual to learn more about each setting.
+      Check the :doc:`AWS S3 module </user-manual/reference/ossec-conf/wodle-s3>` reference manual to learn more about each setting.
 
 #. Restart Wazuh in order to apply the changes:
 

@@ -1,4 +1,4 @@
-.. Copyright (C) 2022 Wazuh, Inc.
+.. Copyright (C) 2015, Wazuh, Inc.
 .. meta::
   :description: Learn more about client configuration, connection to the manager, and its configuring options in this section of the Wazuh documentation.
 
@@ -83,7 +83,7 @@ Specifies the protocol to use when connecting to the manager.
 max_retries
 ^^^^^^^^^^^
 
-Number of connection retries.
+The number of connection retries.
 
 +--------------------+--------------------+
 | **Default value**  | 5                  |

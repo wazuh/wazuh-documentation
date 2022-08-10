@@ -1,6 +1,7 @@
-.. Copyright (C) 2022 Wazuh, Inc.
+.. Copyright (C) 2015, Wazuh, Inc.
+
 .. meta::
-  :description: Learn more about Kubernetes deployment with Wazuh. 
+   :description: Learn more about Kubernetes deployment with Wazuh in this section of the Wazuh documentation. 
 
 .. _kubernetes_deployment:
 
@@ -11,7 +12,7 @@ Clone this repository to deploy the necessary services and pods.
 
     .. code-block:: console
 
-        $ git clone https://github.com/wazuh/wazuh-kubernetes.git -b v|WAZUH_LATEST_KUBERNETES| --depth=1
+        $ git clone https://github.com/wazuh/wazuh-kubernetes.git -b v|WAZUH_CURRENT_KUBERNETES| --depth=1
         $ cd wazuh-kubernetes
 
 
@@ -67,9 +68,9 @@ The provisioner column displays microk8s.io/hostpath, you must edit the file ``e
 Apply all manifests using kustomize
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-There are two variants of the manifest: ``eks`` and ``local-env``. The eks manifest should be used if you are using the EKS cluster while the local-env manifest should be used for other cluster types.
+There are two variants of the manifest: ``eks`` and ``local-env``. The eks manifest should be used if you are using the EKS cluster, while the local-env manifest should be used for other cluster types.
 
-It is possible to adjust resources for the cluster by editing patches on ``envs/eks/`` or ``envs/local-env/`` depending on which manifest you want to deploy. You can tune CPU, memory as well as storage for persistent volumes of each of the cluster objects. This could be undone by removing these patches from the ``kustomization.yaml`` or alter the patches themselves with different values.
+It is possible to adjust resources for the cluster by editing patches on ``envs/eks/`` or ``envs/local-env/``, depending on which manifest you want to deploy. You can tune CPU, memory as well as storage for persistent volumes of each of the cluster objects. This could be undone by removing these patches from the ``kustomization.yaml`` or altering the patches themselves with different values.
 
 We can deploy the cluster with a single command by using the customization file:
 
@@ -188,7 +189,7 @@ In case you created domain names for the services, you should be able to access 
   
 The Wazuh dashboard will be accessible on ``https://localhost:8443``.
 
-The default credentials are ``admin:admin``.
+The default credentials are ``admin:SecretPassword``.
 
 
 Agents
@@ -196,7 +197,7 @@ Agents
 
 Wazuh agents are designed to monitor hosts. To start using them:
 
-#. :ref:`Install the agent <installation_agents>`.
+#. :doc:`Install the agent </installation-guide/wazuh-agent/index>`.
 #. Enroll the agent by modifying the file ``/var/ossec/etc/ossec.conf``. Change the “transport protocol” to TCP and replace the ``MANAGER_IP`` with the external IP address of the service pointing to port 1514 or with the hostname provided by the cloud provider
 
-To learn more about registering agents, see the :ref:`Wazuh agent enrollment <agent_enrollment>` section of the documentation.
+To learn more about registering agents, see the :doc:`Wazuh agent enrollment </user-manual/agent-enrollment/index>` section of the documentation.

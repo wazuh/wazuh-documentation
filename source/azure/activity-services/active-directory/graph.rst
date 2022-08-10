@@ -1,4 +1,4 @@
-.. Copyright (C) 2021 Wazuh, Inc.
+.. Copyright (C) 2015, Wazuh, Inc.
 
 .. meta::
   :description: Learn how the Wazuh Azure module works in conjunction with the Microsoft Graph REST API in this section of the documentation.
@@ -8,13 +8,13 @@
 Using Microsoft Graph
 =====================
 
-Learn how to configure an application from the Microsoft Azure portal to be able to use the **Microsoft Graph REST API**. In this section you will find:
+Learn how to configure an application from the Microsoft Azure portal to be able to use the `Microsoft Graph REST API`. In this section you will find:
 
 - `Azure configuration`_
 - `Wazuh configuration`_
 - `Microsoft Graph use case`_
 
-In order to know how the Wazuh Azure module works in conjunction with the **Microsoft Graph REST API**, it is important to understand first what are the Azure AD activity reports and what kind of information they provide. Wazuh can process the logs from the following Azure AD activity reports, each one of them requiring a different query to be executed:
+In order to know how the Wazuh Azure module works in conjunction with the `Microsoft Graph REST API`, it is important to understand first what are the Azure AD activity reports and what kind of information they provide. Wazuh can process the logs from the following Azure AD activity reports, each one of them requiring a different query to be executed:
 
 +---------------------------------------------------------------------------------------------------------------------------+-------------------------------+
 | **Report type**                                                                                                           | **Query**                     |
@@ -107,7 +107,7 @@ Wazuh configuration
 azure-logs module configuration
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-Proceed with configuring the ``azure-logs`` module in the local configuration (``ossec.conf``). The **key and ID of the application** saved during the previous steps will be used here. In this case, both fields were saved in a **file** for authentication.
+Proceed with configuring the ``azure-logs`` module in the local configuration (``ossec.conf``). The `key and ID of the application` saved during the previous steps will be used here. In this case, both fields were saved in a `file` for authentication.
 
 Here is an example of how to get the audit log of the Azure Active Directory using Microsoft Graph. This example configuration includes a representative ``tag`` and is scheduled for every Monday at 02:00, using an offset of one day, which means only the log data from the last day is parsed:
 
@@ -135,7 +135,7 @@ Here is an example of how to get the audit log of the Azure Active Directory usi
 
     </wodle>
 
-Check the :ref:`azure-logs <wodle_azure_logs>` module reference for more information about how to use the different parameters available.
+Check the :doc:`azure-logs </user-manual/reference/ossec-conf/wodle-azure-logs>` module reference for more information about how to use the different parameters available.
 
 .. note:: If an authentication file is used, as in this example, its content must follow the format ``field = value``. Here is an example of this format:
 
