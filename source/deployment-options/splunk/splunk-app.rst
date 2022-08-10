@@ -1,6 +1,7 @@
 .. Copyright (C) 2015, Wazuh, Inc.
 
-.. meta:: :description: Splunk for Wazuh installation guide
+.. meta::
+   :description: Wazuh installation guide for Splunk.
 
 Install the Wazuh app for Splunk
 ================================
