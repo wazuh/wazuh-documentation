@@ -6,15 +6,17 @@
 Upgrade guide
 =============
 
-This guide includes instructions to upgrade your Wazuh installation. The Wazuh solution is based on the Wazuh agent, which is deployed on the monitored endpoints, and on three central components: the Wazuh server, the Wazuh indexer, and the Wazuh dashboard.
+This guide includes instructions to upgrade the Wazuh agent, the Wazuh server, the Wazuh indexer and the Wazuh dashboard as well as the Wazuh integrations with Open Distro for Elasticsearch and Elastic Stack basic license. 
 
 
 Upgrade the Wazuh central components
 ------------------------------------
 
-Select an option below and follow the instructions to upgrade the Wazuh components. The Wazuh server, indexer and dashboard section includes instructions to upgrade the default Wazuh installation starting with Wazuh v4.3.0. 
+Select an option below and follow the instructions to upgrade the Wazuh components. 
 
-On the other hand, the Open distro for Elasticsearch section describes the upgrade process for the Wazuh manager, Filebeat-OSS, Open distro for Elasticsearch and Kibana. This was the default Wazuh installation from Wazuh v4.0.0 to 4.2.7. 
+The Wazuh central component section includes instructions to upgrade the Wazuh server, the Wazuh indexer and the Wazuh dashboard. This is the default Wazuh installation starting with Wazuh v4.3.0. 
+
+On the other hand, the Open Distro for Elasticsearch section describes the upgrade process for the Wazuh manager, Filebeat-OSS, Open distro for Elasticsearch and Kibana. This was the default Wazuh installation from Wazuh v4.0.0 to 4.2.7. 
 
 The Elastic Stack basic license section includes instructions to upgrade the Wazuh manager, Filebeat, Elasticsearch and Kibana. The latest supported Elastic Stack basic license version is |ELASTICSEARCH_ELK_LATEST|. 
 
@@ -92,16 +94,19 @@ Elastic stack basic license
     
   </div>
   
-.. note::
 
-   If you are unsure of what is your Wazuh installation, on the web user interface go to **Wazuh** > **Settings** > **About**. If you see "Welcome to the Wazuh dashboard" you have the default Wazuh installation. Select the Wazuh server, indexer and dashboard option and follow the instructions to upgrade your environment.    
+If you are unsure of what is your Wazuh installation, on the web user interface go to **Wazuh** > **Settings** > **About** to find out your installation type. 
 
-   If you see "Welcome to the Wazuh app for Kibana", go to the top left menu  **☰** > **Dev tools**. Use ``GET /`` to get your Elasticsearch version, and look for the "build_flavor". If the build flavor is "OSS" you have Open distro for Elasticsearch, and if the build flavor is "default" then you have Elastic Stack basic license.  
+- If you see the "Welcome to the Wazuh dashboard" message, you have the default Wazuh installation. Select the **Wazuh central components** option above and follow the instructions to upgrade your environment.    
+
+- If you see the "Welcome to the Wazuh app for Kibana" message, go to the top left menu  **☰** > **Dev tools**. Use ``GET /`` to get your Elasticsearch version, and look for the ``build_flavor``. If the build flavor is ``OSS`` you have Open Distro for Elasticsearch, and if the build flavor is ``default`` then you have Elastic Stack basic license.  
 
 Upgrade the Wazuh agents
 ------------------------
 
-To upgrade a Wazuh agent, select your operating system and follow the instructions.
+Wazuh agents can be upgraded either remotely from the Wazuh manager or locally. Upgrading the Wazuh agents remotely is possible by using the ``agent_upgrade`` tool and the Wazuh API, see the :doc:`Remote agent upgrade </user-manual/agents/remote-upgrading/upgrading-agent>` section to learn more.
+
+To perform the upgrade locally, select your operating system and follow the instructions. 
 
 .. raw:: html
 
