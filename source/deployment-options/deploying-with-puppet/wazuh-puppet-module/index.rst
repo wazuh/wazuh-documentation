@@ -1,5 +1,8 @@
 .. Copyright (C) 2015, Wazuh, Inc.
 
+.. meta::
+   :description: Learn about Wazuh Puppet module in this section of the Wazuh documentation. 
+
 .. _wazuh_puppet_module:
 
 Wazuh Puppet module
@@ -24,7 +27,7 @@ Download and install the Wazuh module from Puppet Forge:
     Notice: Downloading from https://forgeapi.puppet.com ...
     Notice: Installing -- do not interrupt ...
     /etc/puppetlabs/code/environments/production/modules
-    └─┬ wazuh-wazuh (v4.3.5)
+    └─┬ wazuh-wazuh (v4.3.6)
       ├── puppet-nodejs (v7.0.1)
       ├── puppet-selinux (v3.4.1)
       ├── puppetlabs-apt (v7.7.1)

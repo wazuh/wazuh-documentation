@@ -32,8 +32,7 @@ stored.
 Configure ``syscollector`` for all the agents
 ---------------------------------------------
 
-In the ``/var/ossec/etc/ossec.conf`` file of the Wazuh manager and agents, 
-see the default configuration and find the ``syscollector`` section.
+In the ``/var/ossec/etc/ossec.conf`` file of the Wazuh manager and agents, see the default configuration and find the ``syscollector`` section.
 
 - For Linux systems:
 
@@ -55,7 +54,7 @@ see the default configuration and find the ``syscollector`` section.
         <synchronization>
           <max_eps>10</max_eps>
         </synchronization>
-      </wodle>      
+      </wodle>
 
 - For Windows, you should enable the ``hotfixes`` option, to report the Windows updates installed:
 
@@ -73,7 +72,7 @@ see the default configuration and find the ``syscollector`` section.
         <packages>yes</packages>
         <ports all="no">yes</ports>
         <processes>yes</processes>
-        <hotfixes>yes</hotfixes>      
+        <hotfixes>yes</hotfixes>
 
         <!-- Database synchronization settings -->
         <synchronization>
@@ -170,14 +169,14 @@ a. For Systemd:
   .. code-block:: console
 
    .. code-block:: xml
-      :emphasize-lines: 2, 28, 52, 58 
+      :emphasize-lines: 2, 28, 52, 58
 
       <vulnerability-detector>
         <enabled>yes</enabled>
         <interval>5m</interval>
         <min_full_scan_interval>6h</min_full_scan_interval>
         <run_on_start>yes</run_on_start>
-    
+
         <!-- Ubuntu OS vulnerabilities -->
         <provider name="canonical">
           <enabled>no</enabled>
@@ -188,7 +187,7 @@ a. For Systemd:
           <os>jammy</os>
           <update_interval>1h</update_interval>
         </provider>
-    
+
         <!-- Debian OS vulnerabilities -->
         <provider name="debian">
           <enabled>no</enabled>
@@ -197,7 +196,7 @@ a. For Systemd:
           <os>bullseye</os>
           <update_interval>1h</update_interval>
         </provider>
-    
+
         <!-- RedHat OS vulnerabilities -->
         <provider name="redhat">
           <enabled>yes</enabled>
@@ -205,9 +204,10 @@ a. For Systemd:
           <os>6</os>
           <os>7</os>
           <os>8</os>
+          <os>9</os>
           <update_interval>1h</update_interval>
         </provider>
-    
+
         <!-- Amazon Linux OS vulnerabilities -->
         <provider name="alas">
           <enabled>no</enabled>
@@ -215,26 +215,26 @@ a. For Systemd:
           <os>amazon-linux-2</os>
           <update_interval>1h</update_interval>
         </provider>
-    
+
         <!-- Arch OS vulnerabilities -->
         <provider name="arch">
           <enabled>no</enabled>
           <update_interval>1h</update_interval>
         </provider>
-    
+
         <!-- Windows OS vulnerabilities -->
         <provider name="msu">
           <enabled>yes</enabled>
           <update_interval>1h</update_interval>
         </provider>
-    
+
         <!-- Aggregate vulnerabilities -->
         <provider name="nvd">
           <enabled>yes</enabled>
           <update_from_year>2010</update_from_year>
           <update_interval>1h</update_interval>
         </provider>
-    
+
       </vulnerability-detector>
 
    In the example above we have enabled the feeds for RedHat, which will allow us to monitor CentOS systems, the National Vulnerability Database (NVD), and the Microsoft Security Update which will allow us to monitor Windows systems. More information on this module and how to configure it can be found in the :ref:`Vulnerability Detection Section <vulnerability-detection>` of the documentation.
@@ -246,7 +246,7 @@ a. For Systemd:
 
 .. note::
 
-   Updating the Vulnerability database for the first time may take a while. 
+   Updating the Vulnerability database for the first time may take a while.
 
 
 Look at the logs
@@ -306,7 +306,7 @@ The ``vulnerability-detector`` module generates logs on the manager, and ``sysco
 See the alerts in the Wazuh dashboard
 -------------------------------------
 
-Search the Wazuh dashboard for "vulnerability-detector", selecting some of the more helpful fields for viewing the alerts. 
+Search the Wazuh dashboard for "vulnerability-detector", selecting some of the more helpful fields for viewing the alerts.
 
 .. thumbnail:: ../images/learning-wazuh/labs/vulnerabilities-found-list.png
     :title: Found Vulnerabilities
@@ -359,10 +359,10 @@ hardware and operating system data is also tracked.
        ID: 002, Name: windows-agent, IP: 172.30.0.40, Active
 
 
-#. From the Wazuh Manager, request a token and export it to an environment variable to use it in the authorization header of future API requests. Replace ``<user>:<password>`` with your Wazuh API credentials. 
+#. From the Wazuh Manager, request a token and export it to an environment variable to use it in the authorization header of future API requests. Replace ``<user>:<password>`` with your Wazuh API credentials.
 
    .. code-block:: none
-      
+
       TOKEN=$(curl -u <user>:<password> -k -X GET "https://localhost:55000/security/user/authenticate?raw=true")
 
 #. Query the Wazuh API for scanned hardware data about agent 002 using endpoint :api-ref:`GET /syscollector/{agent_id}/hardware <operation/api.controllers.syscollector_controller.get_hardware_info>`:
@@ -541,14 +541,14 @@ Agent-specific databases on the Wazuh manager store, among other things, the ``s
    .. code-block:: none
       :class: output
 
-      ciscat_results        sca_scan_info         sys_osinfo          
-      fim_entry             scan_info             sys_ports           
-      metadata              sync_info             sys_processes       
-      pm_event              sys_hotfixes          sys_programs        
-      sca_check             sys_hwinfo            vuln_cves           
-      sca_check_compliance  sys_netaddr           vuln_metadata       
-      sca_check_rules       sys_netiface        
-      sca_policy            sys_netproto   
+      ciscat_results        sca_scan_info         sys_osinfo
+      fim_entry             scan_info             sys_ports
+      metadata              sync_info             sys_processes
+      pm_event              sys_hotfixes          sys_programs
+      sca_check             sys_hwinfo            vuln_cves
+      sca_check_compliance  sys_netaddr           vuln_metadata
+      sca_check_rules       sys_netiface
+      sca_policy            sys_netproto
 
 
    The ``sys_`` tables are populated by ``syscollector``.

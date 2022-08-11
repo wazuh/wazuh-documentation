@@ -1,5 +1,8 @@
 .. Copyright (C) 2015, Wazuh, Inc.
 
+.. meta::
+   :description: Learn about the Wazuh manager class and its variables to configure the Wazuh manager in this section of the Wazuh documentation. 
+
 .. _reference_wazuh_manager_class:
 
 Wazuh manager class
@@ -1324,7 +1327,7 @@ Misc Variables
 $server_package_version
   Modified client.pp and server.pp to accept package versions as a parameter.
 
-  `Default 4.3.5-1`
+  `Default 4.3.6-1`
 
   `Type String`
 

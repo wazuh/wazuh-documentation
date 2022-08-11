@@ -10,10 +10,15 @@
 {% set special_pages = [
   'index', 
   'not_found', 
-  'search',
-  'cloud-service/apis/reference',
-  'user-manual/api/reference'
+  'search'
 ] %}
+
+{%- if version >= '4.0' -%}
+  {% set special_pages = special_pages + [
+    'cloud-service/apis/reference',
+    'user-manual/api/reference'
+  ] %}
+{%- endif -%}
 
 {#- Symbol/char vars -#}
 {%- set dash_separator = " - " -%}
