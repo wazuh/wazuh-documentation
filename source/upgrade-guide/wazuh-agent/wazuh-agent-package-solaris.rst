@@ -13,16 +13,20 @@ Select your Solaris Intel version and follow the steps to upgrade the Wazuh agen
 
    .. group-tab:: Solaris 11
    
-      The Wazuh agent upgrading process for Solaris 11 systems requires to download the latest `Solaris 11 i386 installer <https://packages.wazuh.com/|WAZUH_CURRENT_MAJOR_SOLARIS11|/solaris/i386/11/wazuh-agent_v|WAZUH_CURRENT_SOLARIS11|-sol11-i386.p5p>`_ or `Solaris 11 sparc installer <https://packages.wazuh.com/|WAZUH_CURRENT_MAJOR_SOLARIS11|/solaris/sparc/11/wazuh-agent_v|WAZUH_CURRENT_SOLARIS11|-sol11-sparc.p5p>`_ depending on the Solaris 11 host architecture.
+      #. Download the latest Solaris 11 installer. Choose one option depending on the host architecture. 
+      
+         * `Solaris 11 i386 installer <https://packages.wazuh.com/|WAZUH_CURRENT_MAJOR_SOLARIS11|/solaris/i386/11/wazuh-agent_v|WAZUH_CURRENT_SOLARIS11|-sol11-i386.p5p>`_ 
+
+         * `Solaris 11 sparc installer <https://packages.wazuh.com/|WAZUH_CURRENT_MAJOR_SOLARIS11|/solaris/sparc/11/wazuh-agent_v|WAZUH_CURRENT_SOLARIS11|-sol11-sparc.p5p>`_
    
-      #. Stop the Wazuh agent:
+      #. Stop the Wazuh agent. 
    
          .. code-block:: console
    
             # /var/ossec/bin/wazuh-control stop
    
    
-      #. After that, upgrade the Wazuh agent. Choose one option depending on the host architecture:
+      #. Upgrade the Wazuh agent. Choose one option depending on the host architecture. 
    
          * Solaris 11 i386:
    
@@ -37,7 +41,7 @@ Select your Solaris Intel version and follow the steps to upgrade the Wazuh agen
                # pkg install -g wazuh-agent_v|WAZUH_CURRENT_SOLARIS11|-sol11-sparc.p5p wazuh-agent
    
    
-      #. Start the Wazuh agent:
+      #. Start the Wazuh agent. 
    
          .. code-block:: console
    
@@ -45,17 +49,21 @@ Select your Solaris Intel version and follow the steps to upgrade the Wazuh agen
    
    
    .. group-tab:: Solaris 10
+
+      #. Download the latest Solaris 10 installer. Choose one option depending on the host architecture.
    
-      The Wazuh agent upgrading process for Solaris 10 systems requires to download the latest `Solaris 10 i386 installer <https://packages.wazuh.com/|WAZUH_CURRENT_MAJOR_SOLARIS10|/solaris/i386/10/wazuh-agent_v|WAZUH_CURRENT_SOLARIS10|-sol10-i386.pkg>`_ or `Solaris 10 sparc installer <https://packages.wazuh.com/|WAZUH_CURRENT_MAJOR_SOLARIS10|/solaris/sparc/10/wazuh-agent_v|WAZUH_CURRENT_SOLARIS10|-sol10-sparc.pkg>`_ depending on the Solaris 10 host architecture.
+         * `Solaris 10 i386 installer <https://packages.wazuh.com/|WAZUH_CURRENT_MAJOR_SOLARIS10|/solaris/i386/10/wazuh-agent_v|WAZUH_CURRENT_SOLARIS10|-sol10-i386.pkg>`_ 
+
+         * `Solaris 10 sparc installer <https://packages.wazuh.com/|WAZUH_CURRENT_MAJOR_SOLARIS10|/solaris/sparc/10/wazuh-agent_v|WAZUH_CURRENT_SOLARIS10|-sol10-sparc.pkg>`_ 
    
-      #. Stop the Wazuh agent:
+      #. Stop the Wazuh agent.
    
          .. code-block:: console
    
             # /var/ossec/bin/wazuh-control stop
    
    
-      #. Backup the ``ossec.conf`` and ``client.keys`` files:
+      #. Backup the ``ossec.conf`` and ``client.keys`` files.
    
            .. code-block:: console
    
@@ -63,14 +71,14 @@ Select your Solaris Intel version and follow the steps to upgrade the Wazuh agen
              # cp /var/ossec/etc/client.keys ~/client.keys.bk
    
    
-      #. Remove the Wazuh agent:
+      #. Remove the Wazuh agent.
    
          .. code-block:: console
    
             # pkgrm wazuh-agent
    
    
-      #. After that, install the Wazuh agent. Choose one option depending on the host architecture:
+      #. Install the Wazuh agent. Choose one option depending on the host architecture.
    
          * Solaris 10 i386:
    
@@ -85,7 +93,7 @@ Select your Solaris Intel version and follow the steps to upgrade the Wazuh agen
                # pkgadd -d wazuh-agent_v|WAZUH_CURRENT_SOLARIS10|-sol10-sparc.pkg wazuh-agent
    
    
-      #. Restore the ``ossec.conf`` and ``client.keys`` files:
+      #. Restore the ``ossec.conf`` and ``client.keys`` files.
    
          .. code-block:: console
    
@@ -95,7 +103,7 @@ Select your Solaris Intel version and follow the steps to upgrade the Wazuh agen
             # chown root:wazuh /var/ossec/etc/client.keys
    
    
-      #. Start the wazuh-agent:
+      #. Start the wazuh-agent.
    
          .. code-block:: console
    
@@ -103,16 +111,6 @@ Select your Solaris Intel version and follow the steps to upgrade the Wazuh agen
 
 
 .. note::
+   :class: not-long
 
-   Once the Wazuh agent is upgraded, if it still uses UDP, which was the default protocol for versions prior to Wazuh 4.x, it must be changed to TCP in the ``ossec.conf`` file:
-   
-   .. code-block:: console
-     :emphasize-lines: 6
-   
-     <ossec_config>
-       <client>
-         <server>
-           <address>172.16.1.17</address>
-           <port>1514</port>
-           <protocol>udp</protocol>
-         </server>                     
+   When updating agents from versions earlier than 4.x, make sure that the communication protocol is compatible. Up to that point, UDP was the default protocol and it was switched to TCP for later versions. Edit the agent configuration file ``ossec.conf`` to update the :ref:`protocol <server_protocol>` or make sure that your Wazuh manager accepts :ref:`both protocols<manager_protocol>`. 

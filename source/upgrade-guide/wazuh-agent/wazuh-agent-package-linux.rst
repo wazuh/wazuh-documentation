@@ -7,19 +7,23 @@
 Ugrading Wazuh agents on Linux systems
 ======================================
 
-Select your package manager and follow the instructions to upgrade the Wazuh agent. 
+Select your package manager and follow the instructions to upgrade the Wazuh agent locally. If you want to perform a remote upgrade, check the :doc:`Remote agent upgrade </user-manual/agents/remote-upgrading/upgrading-agent>` section to learn more. 
+
+.. note::
+   
+   Root user privileges are required to execute all the commands described below.
 
 .. tabs::
 
   .. group-tab:: Yum
 
-    #. Import the GPG key:
+    #. Import the GPG key.
 
        .. code-block:: console
 
         # rpm --import https://packages.wazuh.com/key/GPG-KEY-WAZUH
 
-    #. Add the repository:
+    #. Add the Wazuh repository. 
 
        .. code-block:: console
 
@@ -33,21 +37,21 @@ Select your package manager and follow the instructions to upgrade the Wazuh age
          protect=1
          EOF
 
-    #. Clean the YUM cache:
+    #. Clean the YUM cache.
 
        .. code-block:: console
 
          # yum clean all
 
 
-    #. Upgrade the Wazuh agent to the latest version:
+    #. Upgrade the Wazuh agent to the latest version.
 
        .. code-block:: console
 
           # yum upgrade wazuh-agent
 
 
-    #. It is recommended to disable the Wazuh repository in order to avoid undesired upgrades and compatibility issues as the Wazuh agent should always be in the same or an older version than the Wazuh manager:
+    #. It is recommended to disable the Wazuh repository in order to avoid undesired upgrades and compatibility issues as the Wazuh agent should always be in the same or an older version than the Wazuh manager.
 
         .. code-block:: console
 
@@ -56,20 +60,20 @@ Select your package manager and follow the instructions to upgrade the Wazuh age
 
   .. group-tab:: APT
 
-    #. Install the GPG key:
+    #. Install the GPG key.
 
        .. code-block:: console
 
          # curl -s https://packages.wazuh.com/key/GPG-KEY-WAZUH | apt-key add -
 
-    #. Add the repository:
+    #. Add the Wazuh repository.
 
        .. code-block:: console
 
          # echo "deb https://packages.wazuh.com/4.x/apt/ stable main" | tee -a /etc/apt/sources.list.d/wazuh.list
 
 
-    #. Upgrade the Wazuh agent to the latest version:
+    #. Upgrade the Wazuh agent to the latest version.
 
         .. code-block:: console
 
@@ -77,7 +81,7 @@ Select your package manager and follow the instructions to upgrade the Wazuh age
           # apt-get install wazuh-agent
 
 
-    #. It is recommended to disable the Wazuh repository in order to avoid undesired upgrades and compatibility issues as the Wazuh agent should always be in the same or an older version than the Wazuh manager. Skip this step if the package is set to a ``hold`` state:
+    #. It is recommended to disable the Wazuh repository in order to avoid undesired upgrades and compatibility issues as the Wazuh agent should always be in the same or an older version than the Wazuh manager. Skip this step if the package is set to a ``hold`` state.
 
         .. code-block:: console
 
@@ -87,13 +91,13 @@ Select your package manager and follow the instructions to upgrade the Wazuh age
 
   .. group-tab:: ZYpp
 
-    #. Import the GPG key:
+    #. Import the GPG key.
 
        .. code-block:: console
 
          # rpm --import https://packages.wazuh.com/key/GPG-KEY-WAZUH
 
-    #. Add the repository:
+    #. Add the Wazuh repository. 
 
        .. code-block:: console
 
@@ -107,37 +111,27 @@ Select your package manager and follow the instructions to upgrade the Wazuh age
          protect=1
          EOF
 
-    #. Refresh the repository:
+    #. Refresh the repository. 
 
        .. code-block:: console
 
          # zypper refresh
 
 
-    #. Upgrade the Wazuh agent to the latest version:
+    #. Upgrade the Wazuh agent to the latest version.
 
         .. code-block:: console
 
           # zypper update wazuh-agent
 
 
-    #. It is recommended to disable the Wazuh repository in order to avoid undesired upgrades and compatibility issues as the Wazuh agent should always be in the same or an older version than the Wazuh manager:
+    #. It is recommended to disable the Wazuh repository in order to avoid undesired upgrades and compatibility issues as the Wazuh agent should always be in the same or an older version than the Wazuh manager. 
 
         .. code-block:: console
 
           # sed -i "s/^enabled=1/enabled=0/" /etc/zypp/repos.d/wazuh.repo
 
 .. note::
+   :class: not-long
 
-   Once the Wazuh agent is upgraded, if it still uses UDP, which was the default protocol for versions prior to Wazuh 4.x, it must be changed to TCP in the ``ossec.conf`` file:
-   
-   .. code-block:: console
-     :emphasize-lines: 6
-   
-     <ossec_config>
-       <client>
-         <server>
-           <address>172.16.1.17</address>
-           <port>1514</port>
-           <protocol>udp</protocol>
-         </server>         
+   When updating agents from versions earlier than 4.x, make sure that the communication protocol is compatible. Up to that point, UDP was the default protocol and it was switched to TCP for later versions. Edit the agent configuration file ``ossec.conf`` to update the :ref:`protocol <server_protocol>` or make sure that your Wazuh manager accepts :ref:`both protocols<manager_protocol>`.         
