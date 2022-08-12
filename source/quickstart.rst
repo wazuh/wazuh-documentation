@@ -91,7 +91,7 @@ You can find the passwords for all the Wazuh indexer and Wazuh API users in the 
 
    .. code-block:: console
    
-      # tar -O -xvf wazuh-install-files.tar wazuh-install-files/wazuh-passwords.txt
+      $ tar -O -xvf wazuh-install-files.tar wazuh-install-files/wazuh-passwords.txt
 
 If you want to uninstall the Wazuh central components, run the Wazuh installation assistant using the option ``-u`` or ``–-uninstall``.
 
