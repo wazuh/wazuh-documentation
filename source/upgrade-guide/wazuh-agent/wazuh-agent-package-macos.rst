@@ -30,7 +30,7 @@ Follow these steps to upgrade Wazuh agents locally on macOS systems. If you want
 
          Using the GUI will perform a simple upgrade. Double click on the downloaded file and follow the wizard. If you are not sure how to answer some of the prompts, simply use the default answers.
 
-         .. image:: ../images/installation/macos.png
+         .. image:: /images/installation/macos.png
             :align: center
             :scale: 50 %
 
