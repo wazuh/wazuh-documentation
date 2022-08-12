@@ -60,7 +60,7 @@ Using an authentication file
 
 As explained before, the GCP integration requires a credentials file in JSON format containing the private key to access Google Cloud Pub/Sub or Google Cloud Storage bucket.
 
-Regardless of the service, the authentication file is always specified in the ``ossec.conf`` configuration file using the ``<credentials_file>`` tag. Take a look to the following example:
+Regardless of the service, the authentication file is always specified in the ``ossec.conf`` configuration file using the ``<credentials_file>`` tag. Take a look at the following example:
 
 .. code-block:: xml
    :emphasize-lines: 7, 16
