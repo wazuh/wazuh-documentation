@@ -112,7 +112,7 @@ To perform the upgrade locally, select your operating system and follow the inst
 
   <div class="link-boxes-group layout-6">
     <div class="link-boxes-item">
-      <a class="link-boxes-link" href="./wazuh-agent-package-linux.html">
+      <a class="link-boxes-link" href="./wazuh-agent/wazuh-agent-package-linux.html">
         <p class="link-boxes-label">Linux</p>
 
 .. image:: /images/installation/linux.png
@@ -123,7 +123,7 @@ To perform the upgrade locally, select your operating system and follow the inst
       </a>
     </div>
     <div class="link-boxes-item">
-      <a class="link-boxes-link" href="./wazuh-agent-package-windows.html">
+      <a class="link-boxes-link" href="./wazuh-agent/wazuh-agent-package-windows.html">
         <p class="link-boxes-label">Windows</p>
 
 .. image:: /images/installation/windows-logo.png
@@ -134,7 +134,7 @@ To perform the upgrade locally, select your operating system and follow the inst
       </a>
     </div>
     <div class="link-boxes-item">
-      <a class="link-boxes-link" href="./wazuh-agent-package-macos.html">
+      <a class="link-boxes-link" href="./wazuh-agent/wazuh-agent-package-macos.html">
         <p class="link-boxes-label">macOS</p>
 
 .. image:: /images/installation/macOS-logo.png
@@ -145,7 +145,7 @@ To perform the upgrade locally, select your operating system and follow the inst
       </a>
     </div>
     <div class="link-boxes-item">
-      <a class="link-boxes-link" href="./wazuh-agent-package-solaris.html">
+      <a class="link-boxes-link" href="./wazuh-agent/wazuh-agent-package-solaris.html">
         <p class="link-boxes-label">Solaris</p>
 
 .. image:: /images/installation/solaris.png
@@ -157,7 +157,7 @@ To perform the upgrade locally, select your operating system and follow the inst
       </a>
     </div>
     <div class="link-boxes-item">
-      <a class="link-boxes-link" href="./wazuh-agent-package-aix.html">
+      <a class="link-boxes-link" href="./wazuh-agent/wazuh-agent-package-aix.html">
         <p class="link-boxes-label">AIX</p>
 
 .. image:: /images/installation/AIX.png
@@ -168,7 +168,7 @@ To perform the upgrade locally, select your operating system and follow the inst
       </a>
     </div>
     <div class="link-boxes-item">
-      <a class="link-boxes-link" href="./wazuh-agent-package-hpux.html">
+      <a class="link-boxes-link" href="./wazuh-agent/wazuh-agent-package-hpux.html">
         <p class="link-boxes-label">HP-UX</p>
 
 .. image:: /images/installation/hpux.png
