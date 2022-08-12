@@ -1,5 +1,8 @@
 .. Copyright (C) 2015, Wazuh, Inc.
 
+.. meta::
+  :description: Amazon ALB Elastic Load Balancing automatically distributes the incoming traffic across multiple targets. Check out this section of our documentation to learn more about it. 
+  
 .. _amazon_alb:
 
 Amazon ALB
