@@ -180,4 +180,4 @@ The tags to use are different depending on the type of service or activity to be
      </storage>
    </wodle>
 
-Take a look at the :doc:`azure-logs wodle </user-manual/reference/ossec-conf/wodle-azure-logs>` entry from the ossec.conf reference page for more information about the parameters.
+Take a look at the :doc:`azure-logs wodle </user-manual/reference/ossec-conf/wodle-azure-logs>` entry from the ``ossec.conf`` reference page for more information about the parameters.
