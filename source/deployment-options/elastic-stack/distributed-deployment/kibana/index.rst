@@ -5,7 +5,6 @@
 
 .. _basic_kibana:
 
-
 Kibana
 ======
 
