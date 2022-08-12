@@ -25,7 +25,8 @@ Set up Suricata on your Linux agent
    
        # cd /root
        # yum -y install epel-release wget jq
-       # curl -O https://copr.fedorainfracloud.org/coprs/jasonish/suricata-6.0/repo/epel-7/jasonish-suricata-6.0-epel-7.repo
+       # yum-config-manager --add-repo https://copr.fedorainfracloud.org/coprs/g/oisf/suricata-latest/repo/epel-7/group_oisf-suricata-latest-epel-7.repo
+       # yum-config-manager --enable /etc/yum.repos.d/group_oisf-suricata-latest-epel-7.repo
        # yum -y install suricata
        # wget https://rules.emergingthreats.net/open/suricata-6.0.3/emerging.rules.tar.gz
        # tar zxvf emerging.rules.tar.gz
