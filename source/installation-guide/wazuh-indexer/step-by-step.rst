@@ -105,8 +105,14 @@ Repeat this stage of the installation process for every Wazuh indexer node in yo
 
       # /usr/share/wazuh-indexer/bin/indexer-security-init.sh
 
+   If you have configured domain names for the nodes addresses, run the following command instead.
+   
+   .. code-block:: console
+
+      # /usr/share/wazuh-indexer/bin/indexer-security-init.sh -ho <DOMAIN.NAME.OF.YOUR.NODE>
+
    .. note:: You only have to initialize the cluster `once`, there is no need to run this command on every node. 
-      
+   
 Testing the cluster installation
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
