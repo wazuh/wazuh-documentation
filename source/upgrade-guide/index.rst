@@ -194,6 +194,6 @@ The :doc:`compatibility-matrix/index` section explains compatibility requirement
    upgrading-central-components
    elasticsearch-kibana-filebeat/upgrading-open-distro
    elasticsearch-kibana-filebeat/upgrading-elastic-stack
-   upgrading-agent
+   wazuh-agent/index
    legacy/index
    compatibility-matrix/index
