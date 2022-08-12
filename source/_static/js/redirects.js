@@ -222,6 +222,13 @@ newUrls['4.3'] = [
   '/deployment-options/amazon-machine-images/amazon-machine-images.html',
   '/release-notes/release-4-3-0.html',
   '/learning-wazuh/build-lab/install-wazuh-central-components.html', 
+  '/upgrade-guide/wazuh-agent/wazuh-agent-package-linux.html',
+  '/upgrade-guide/wazuh-agent/wazuh-agent-package-windows.html',
+  '/upgrade-guide/wazuh-agent/wazuh-agent-package-macos.html',
+  '/upgrade-guide/wazuh-agent/wazuh-agent-package-solaris.html',
+  '/upgrade-guide/wazuh-agent/wazuh-agent-package-aix.html',
+  '/upgrade-guide/wazuh-agent/wazuh-agent-package-hpux.html',
+  '/upgrade-guide/wazuh-agent/index.html',
 ];
 
 removedUrls['4.3'] = [
@@ -347,10 +354,16 @@ removedUrls['4.3'] = [
   '/learning-wazuh/build-lab/xpack-security-setup.html',
   '/learning-wazuh/build-lab/install-elastic-stack.html',
   '/learning-wazuh/build-lab/install-wazuh-manager.html',
+  '/upgrade-guide/upgrading-agent.html', 
 ];
 
 
 redirections.push(
+  {
+    'target': ['4.2=>4.3', '4.3=>4.2'],
+    '4.2': '/upgrade-guide/upgrading-agent.html',
+    '4.3': '/upgrade-guide/wazuh-agent/index.html',
+  },
   {
     'target': ['4.2=>4.3'],
     '4.2': '/upgrade-guide/upgrading-wazuh.html',
