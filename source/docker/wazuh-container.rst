@@ -120,6 +120,7 @@ This configuration is provided as-is for testing purposes only. It is designed f
 
 .. note::
   Wazuh-kibana container will run multiple queries to Elasticsearch API using curl, to learn when Elasticsearch is up. It is expected to see several ``Failed to connect to elasticsearch port 9200`` log messages, until Elasticsearch is started. Then the set up process will continue normally.
+  Note: Use user/password as admin/admin to login elastic dashboard.
 
 
 Production deployment
