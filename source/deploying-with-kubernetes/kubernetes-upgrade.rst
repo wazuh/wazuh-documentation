@@ -52,7 +52,7 @@ The last step is to apply the new configuration:
 
 .. code-block:: console
 
-    $ kubectl apply -k .
+    $ kubectl apply -k envs/eks/
 
 .. code-block:: none
     :class: output
