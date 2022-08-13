@@ -5,7 +5,7 @@
 Change the rules
 ================
 
-The `Wazuh Ruleset <https://github.com/wazuh/wazuh-ruleset>`_ is maintained by Wazuh, Inc.
+The `Wazuh Ruleset <https://github.com/wazuh/wazuh/tree/master/ruleset>`_ is maintained by Wazuh, Inc.
 and is contributed to by the Wazuh community.  These stock rules are located in various files
 in ``/var/ossec/ruleset/rules/`` on the Wazuh manager and should not be edited in that location
 because they are overwritten when you upgrade Wazuh manager or perform a Wazuh Ruleset update.
