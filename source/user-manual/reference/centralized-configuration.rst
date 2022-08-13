@@ -237,11 +237,12 @@ The following is an example of how a centralized configuration can be done.
 Precedence
 ----------
 
-It's important to understand which configuration file takes precedence between ``ossec.conf`` and ``agent.conf`` when central configuration is used. When central configuration is utilized, the local and the shared configuration are merged, however, the ``ossec.conf`` file is read before the shared ``agent.conf`` and the last configuration of any setting will overwrite the previous. Also, if a file path for a particular setting is set in both of the configuration files, both paths will be included in the final configuration.
+It's important to understand which configuration file takes precedence between ``ossec.conf`` and ``agent.conf`` when central configuration is used.
+When central configuration is utilized, the local and the shared configuration are merged, however, the ``ossec.conf`` file is read before the shared ``agent.conf`` and the last configuration of any setting will overwrite the previous. Also, if a file path for a particular setting is set in both of the configuration files, both paths will be included in the final configuration.
 
-For example:
+In the example below, the final configuration will enable the ``Security Configuration Assessment`` module. In addition, it will add the ``cis_debian_linux_rcl.yml`` to the list of scanned policies as a new entry.
 
-Let's say we have this configuration in the ``ossec.conf`` file:
+The configuration in the ``ossec.conf`` file:
 
 .. code-block:: xml
 
@@ -250,7 +251,6 @@ Let's say we have this configuration in the ``ossec.conf`` file:
     <scan_on_start>yes</scan_on_start>
     <interval>12h</interval>
     <skip_nfs>yes</skip_nfs>
-
     <policies>
       <policy>system_audit_rcl.yml</policy>
       <policy>system_audit_ssh.yml</policy>
@@ -258,20 +258,69 @@ Let's say we have this configuration in the ``ossec.conf`` file:
     </policies>
   </sca>
 
-and this configuration in the ``agent.conf`` file.
+The configuration in the ``agent.conf`` file:
 
 .. code-block:: xml
 
   <sca>
     <enabled>yes</enabled>
-
     <policies>
       <policy>cis_debian_linux_rcl.yml</policy>
     </policies>
   </sca>
 
-The final configuration will enable the Security Configuration Assessment module. In addition, it will add the `cis_debian_linux_rcl.yml` to the list of scanned policies.
-In other words, the configuration located at ``agent.conf`` will overwrite the one of the ``ossec.conf``.
+The result after merging:
+
+.. code-block:: xml
+
+  <sca>
+    <enabled>yes</enabled>
+    <scan_on_start>yes</scan_on_start>
+    <interval>12h</interval>
+    <skip_nfs>yes</skip_nfs>
+    <policies>
+      <policy>cis_debian_linux_rcl.yml</policy>
+      <policy>system_audit_rcl.yml</policy>
+      <policy>system_audit_ssh.yml</policy>
+      <policy>system_audit_pw.yml</policy>
+    </policies>
+  </sca>
+
+In the example below, the value of the ``<query>`` tag cannot be merged, so its value is directly ``overridden``.
+
+The configuration in the ``ossec.conf`` file:
+
+.. code-block:: xml
+
+  <localfile>
+    <location>Security</location>
+    <log_format>eventchannel</log_format>
+    <query>Event/System[EventID != 5145 and EventID != 5156 and EventID != 5447 and
+      EventID != 4656 and EventID != 4658 and EventID != 4663 and EventID != 4660 and
+      EventID != 4670 and EventID != 4690 and EventID != 4703 and EventID != 4907 and
+      EventID != 5152 and EventID != 5157]</query>
+  </localfile>
+
+The configuration in the ``agent.conf`` file:
+
+.. code-block:: xml
+
+  <localfile>
+    <location>Security</location>
+    <log_format>eventchannel</log_format>
+    <query>Event/System[EventID != 5158 and EventID != 4658 and EventID != 4663]</query>
+  </localfile>
+
+The result after merging:
+
+.. code-block:: xml
+
+  <localfile>
+    <location>Security</location>
+    <log_format>eventchannel</log_format>
+    <query>Event/System[EventID != 5158 and EventID != 4658 and EventID != 4663]</query>
+  </localfile>
+
 
 How to ignore shared configuration
 ----------------------------------
