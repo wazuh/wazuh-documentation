@@ -19,19 +19,28 @@ This release includes new features or enhancements as the following:
 Wazuh manager
 ^^^^^^^^^^^^^
 
-- `#14085 <https://github.com/wazuh/wazuh/pull/14085>`_ aaa
+- `#14540 <https://github.com/wazuh/wazuh/pull/14540>`_ Added cluster command to obtain custom ruleset files and their hash.
 
 
 Wazuh agent
 ^^^^^^^^^^^
 
-- `#13837 <https://github.com/wazuh/wazuh/pull/13837>`_ aaa
+- `#13958 <https://github.com/wazuh/wazuh/pull/13958>`_ Improved Office365 integration module logs.
+  
+
+RESTful API
+^^^^^^^^^^^
+
+- `#14551 <https://github.com/wazuh/wazuh/pull/14551>`_ Added endpoint GET /cluster/ruleset/synchronization to check ruleset synchronization status in a cluster.
 
 
 Ruleset
 ^^^^^^^
 
-- `#13893 <https://github.com/wazuh/wazuh/pull/13893>`_ aaa
+- `#13087 <https://github.com/wazuh/wazuh/pull/13087>`_ Added SCA Policy for CIS Microsoft Windows 11 Enterprise Benchmark v1.0.0.
+- `#13191 <https://github.com/wazuh/wazuh/pull/13191>`_ Added SCA Policy for CIS Microsoft Windows 10 Enterprise Release 21H2 Benchmark v1.12.0.
+- `#13756 <https://github.com/wazuh/wazuh/pull/13756>`_ Added SCA policy for Red Hat Enterprise Linux 9 (RHEL9).
+- `#13895 <https://github.com/wazuh/wazuh/pull/13895>`_ Added SCA policy for CIS Microsoft Windows Server 2022 Benchmark 1.0.0.
 
 
 Wazuh Splunk app
@@ -62,7 +71,10 @@ Wazuh manager
 ==============================================================    =============
 Reference                                                         Description
 ==============================================================    =============
-`#14098 <https://github.com/wazuh/wazuh/pull/14098>`_             aaa
+`#13956 <https://github.com/wazuh/wazuh/pull/13956>`_             Fixed a bug in Analysisd that may make it crash when decoding regexes with more than 14 or-ed subpatterns.
+`#14366 <https://github.com/wazuh/wazuh/pull/14366>`_             Fixed a crash hazard in Vulnerability Detector when parsing OVAL feeds.
+`#14436 <https://github.com/wazuh/wazuh/pull/14436>`_             Fixed busy-looping in wazuh-maild when monitoring alerts.json.
+`#14417 <https://github.com/wazuh/wazuh/pull/14417>`_             Fixed a segmentation fault in wazuh-maild when parsing alerts exceeding the nesting limit.
 ==============================================================    =============
 
 Wazuh agent
@@ -71,7 +83,8 @@ Wazuh agent
 ==============================================================    =============
 Reference                                                         Description
 ==============================================================    =============
-`#13941 <https://github.com/wazuh/wazuh/pull/13941>`_             aaa
+`#14368 <https://github.com/wazuh/wazuh/pull/14368>`_             Fixed a code defect in the GitHub integration module reported by Coverity.
+`#14518 <https://github.com/wazuh/wazuh/pull/14518>`_             Fixed an undefined behavior in the agent unit tests.
 ==============================================================    =============
 
 RESTful API
@@ -80,8 +93,21 @@ RESTful API
 ==============================================================    =============
 Reference                                                         Description
 ==============================================================    =============
-`#14152 <https://github.com/wazuh/wazuh/pull/14152>`_             aaa
+`#14208 <https://github.com/wazuh/wazuh/pull/14208>`_             Improved performance for MITRE API endpoints.
 ==============================================================    =============
+
+Ruleset
+^^^^^^^
+
+==============================================================    =============
+Reference                                                         Description
+==============================================================    =============
+`#14235 <https://github.com/wazuh/wazuh/pull/14235>`_             Fixed rule regular expression bug on Ubuntu 20.04 Linux SCA policy control ID 19137.
+`#14258 <https://github.com/wazuh/wazuh/pull/14258>`_             Fixed AWS Amazon Linux SCA policy. Fixed bug when wazuh-agent tries to run the policy.
+`#13949 <https://github.com/wazuh/wazuh/pull/13949>`_             Fixed AWS Amazon Linux 2 SCA policy. Limit journalctl to kernel events and only since boot.
+`#14481 <https://github.com/wazuh/wazuh/pull/14481>`_             Added missing SCA files during Wazuh-manager installation.
+==============================================================    =============
+
 
 Wazuh dashboard
 ^^^^^^^^^^^^^^^
