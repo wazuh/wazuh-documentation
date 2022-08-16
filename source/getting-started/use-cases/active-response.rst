@@ -59,4 +59,4 @@ Below you can find a screenshot with two Wazuh alerts: one that is triggered whe
    :width: 80%
    :wrap_image: No    
     
-You can find more information on how Wazuh protects systems using the active response feature in the :ref:`user manual <automatic_remediation>`.
+You can find more information on how Wazuh protects systems using the active response feature in the :doc:`user manual </user-manual/capabilities/active-response/index>`.

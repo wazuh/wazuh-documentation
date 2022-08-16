@@ -1,5 +1,8 @@
 .. Copyright (C) 2015, Wazuh, Inc.
 
+.. meta::
+   :description: Learn how to install the different instances of Puppet in this section of the Wazuh documentation. 
+
 .. _setup_puppet:
 
 Set up Puppet

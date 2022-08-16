@@ -395,7 +395,7 @@ Disabling repositories
 
 
 
-To uninstall all the components of the all in one installation, visit the :ref:`uninstalling section <user_manual_uninstall_wazuh_installation_basic>`.
+To uninstall all the components of the all in one installation, visit the :doc:`uninstalling section </user-manual/uninstall/elastic-stack>`.
 
 Next steps
 ----------
