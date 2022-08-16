@@ -5,7 +5,7 @@
   :description: Wazuh 4.3.7 has been released. Check out our release notes to discover the changes and additions of this release.
 
 
-4.3.7 Release notes - 5 August 2022
+4.3.7 Release notes - 22 August 2022
 ===================================
 
 This section lists the changes in version 4.3.7. Every update of the Wazuh solution is cumulative and includes all enhancements and fixes from previous releases.
@@ -15,24 +15,20 @@ What's new
 
 This release includes new features or enhancements as the following:
 
-
 Wazuh manager
 ^^^^^^^^^^^^^
 
 - `#14540 <https://github.com/wazuh/wazuh/pull/14540>`_ Added cluster command to obtain custom ruleset files and their hash.
 
-
 Wazuh agent
 ^^^^^^^^^^^
 
 - `#13958 <https://github.com/wazuh/wazuh/pull/13958>`_ Improved Office365 integration module logs.
-  
 
 RESTful API
 ^^^^^^^^^^^
 
 - `#14551 <https://github.com/wazuh/wazuh/pull/14551>`_ Added endpoint GET /cluster/ruleset/synchronization to check ruleset synchronization status in a cluster.
-
 
 Ruleset
 ^^^^^^^
@@ -42,23 +38,26 @@ Ruleset
 - `#13756 <https://github.com/wazuh/wazuh/pull/13756>`_ Added SCA policy for Red Hat Enterprise Linux 9 (RHEL9).
 - `#13895 <https://github.com/wazuh/wazuh/pull/13895>`_ Added SCA policy for CIS Microsoft Windows Server 2022 Benchmark 1.0.0.
 
+Wazuh dashboard
+^^^^^^^^^^^^^^^
+
+- `#4350 <https://github.com/wazuh/wazuh-kibana-app/pull/4350>`_ Removed the use of ``manager_host`` field related to agent information of Wazuh API responses, which is obsolete.
+
+Wazuh Kibana plugin for Kibana 7.10.2
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+- `#4350 <https://github.com/wazuh/wazuh-kibana-app/pull/4350>`_ Removed the use of ``manager_host`` field related to agent information of Wazuh API responses, which is obsolete.
+
+Wazuh Kibana plugin for Kibana 7.16.x and 7.17.x
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+- `#4350 <https://github.com/wazuh/wazuh-kibana-app/pull/4350>`_ Removed the use of ``manager_host`` field related to agent information of Wazuh API responses, which is obsolete.
 
 Wazuh Splunk app
 ^^^^^^^^^^^^^^^^
 
-- `#1351 <https://github.com/wazuh/wazuh-splunk/pull/1351>`_ aaa
+- Wazuh Splunk app is now compatible with Wazuh 4.3.7.
 
-
-Packages
-^^^^^^^^
-
--  `#1706 <https://github.com/wazuh/wazuh-packages/pull/1706>`__ aaa
-
-
-Other
-^^^^^
-
-- `#14121 <https://github.com/wazuh/wazuh/pull/14121>`_ aaa
 
 Resolved issues
 ---------------
@@ -108,14 +107,23 @@ Reference                                                         Description
 `#14481 <https://github.com/wazuh/wazuh/pull/14481>`_             Added missing SCA files during Wazuh-manager installation.
 ==============================================================    =============
 
-
 Wazuh dashboard
 ^^^^^^^^^^^^^^^
 
 ==============================================================    =============
 Reference                                                         Description
 ==============================================================    =============
-`#4326 <https://github.com/wazuh/wazuh-kibana-app/pull/4326>`_    aaa
+`#4378 <https://github.com/wazuh/wazuh-kibana-app/pull/4378>`_    ``Wazuh.yml`` review: fixed link to web documentation, improved in-file documentation and fixed some grammatical errors.
+`#4399 <https://github.com/wazuh/wazuh-kibana-app/pull/4399>`_    ``Wazuh.yml`` review: fixed link to web documentation, improved in-file documentation and fixed some grammatical errors.
+`#4350 <https://github.com/wazuh/wazuh-kibana-app/pull/4350>`_    Fixed an error during the generation of a group's report, if the request to the Wazuh API fails.
+`#4350 <https://github.com/wazuh/wazuh-kibana-app/pull/4350>`_    Fixed a problem with the group's report, when the group has no agents.
+`#4352 <https://github.com/wazuh/wazuh-kibana-app/pull/4352>`_    Fixed path in logo customization section.
+`#4362 <https://github.com/wazuh/wazuh-kibana-app/pull/4362>`_    Fixed a TypeError in Firefox. Change the Get request that was made with a Kibana core.http.get(/api/check-wazuh) resource to the WzRequest.genericReq resource and it no longer fails, also add a test capture to public/plugin.ts that wraps the request and in case of failure, the error is detected when the browser does not work with the V8 engine.
+`#4358 <https://github.com/wazuh/wazuh-kibana-app/pull/4358>`_    Fixed an error of an undefined username hash related to reporting when using Kibana with X-Pack and security was disabled.
+`#4359 <https://github.com/wazuh/wazuh-kibana-app/pull/4359>`_    Fixed persistence of the plugin registry file between updates.
+`#4367 <https://github.com/wazuh/wazuh-kibana-app/pull/4367>`_    Fixed searchbar error on SCA Inventory table.
+`#4373 <https://github.com/wazuh/wazuh-kibana-app/pull/4373>`_    Fixed a routes loop when reinstalling Wazuh indexer.
+`#4365 <https://github.com/wazuh/wazuh-kibana-app/pull/4365>`_    Fixed Wazuh restart UI.
 ==============================================================    =============
 
 Wazuh Kibana plugin for Kibana 7.10.2
@@ -124,7 +132,17 @@ Wazuh Kibana plugin for Kibana 7.10.2
 ==============================================================    =============
 Reference                                                         Description
 ==============================================================    =============
-`#4326 <https://github.com/wazuh/wazuh-kibana-app/pull/4326>`_    aaa
+`#4378 <https://github.com/wazuh/wazuh-kibana-app/pull/4378>`_    ``Wazuh.yml`` review: fixed link to web documentation, improved in-file documentation and fixed some grammatical errors.
+`#4399 <https://github.com/wazuh/wazuh-kibana-app/pull/4399>`_    ``Wazuh.yml`` review: fixed link to web documentation, improved in-file documentation and fixed some grammatical errors.
+`#4350 <https://github.com/wazuh/wazuh-kibana-app/pull/4350>`_    Fixed an error during the generation of a group's report, if the request to the Wazuh API fails.
+`#4350 <https://github.com/wazuh/wazuh-kibana-app/pull/4350>`_    Fixed a problem with the group's report, when the group has no agents.
+`#4352 <https://github.com/wazuh/wazuh-kibana-app/pull/4352>`_    Fixed path in logo customization section.
+`#4362 <https://github.com/wazuh/wazuh-kibana-app/pull/4362>`_    Fixed a TypeError in Firefox. Change the Get request that was made with a Kibana core.http.get(/api/check-wazuh) resource to the WzRequest.genericReq resource and it no longer fails, also add a test capture to public/plugin.ts that wraps the request and in case of failure, the error is detected when the browser does not work with the V8 engine.
+`#4358 <https://github.com/wazuh/wazuh-kibana-app/pull/4358>`_    Fixed an error of an undefined username hash related to reporting when using Kibana with X-Pack and security was disabled.
+`#4359 <https://github.com/wazuh/wazuh-kibana-app/pull/4359>`_    Fixed persistence of the plugin registry file between updates.
+`#4367 <https://github.com/wazuh/wazuh-kibana-app/pull/4367>`_    Fixed searchbar error on SCA Inventory table.
+`#4373 <https://github.com/wazuh/wazuh-kibana-app/pull/4373>`_    Fixed a routes loop when reinstalling Wazuh indexer.
+`#4365 <https://github.com/wazuh/wazuh-kibana-app/pull/4365>`_    Fixed Wazuh restart UI.
 ==============================================================    =============
 
 Wazuh Kibana plugin for Kibana 7.16.x and 7.17.x
@@ -133,7 +151,17 @@ Wazuh Kibana plugin for Kibana 7.16.x and 7.17.x
 ==============================================================    =============
 Reference                                                         Description
 ==============================================================    =============
-`#4326 <https://github.com/wazuh/wazuh-kibana-app/pull/4326>`_    aaa
+`#4378 <https://github.com/wazuh/wazuh-kibana-app/pull/4378>`_    ``Wazuh.yml`` review: fixed link to web documentation, improved in-file documentation and fixed some grammatical errors.
+`#4399 <https://github.com/wazuh/wazuh-kibana-app/pull/4399>`_    ``Wazuh.yml`` review: fixed link to web documentation, improved in-file documentation and fixed some grammatical errors.
+`#4350 <https://github.com/wazuh/wazuh-kibana-app/pull/4350>`_    Fixed an error during the generation of a group's report, if the request to the Wazuh API fails.
+`#4350 <https://github.com/wazuh/wazuh-kibana-app/pull/4350>`_    Fixed a problem with the group's report, when the group has no agents.
+`#4352 <https://github.com/wazuh/wazuh-kibana-app/pull/4352>`_    Fixed path in logo customization section.
+`#4362 <https://github.com/wazuh/wazuh-kibana-app/pull/4362>`_    Fixed a TypeError in Firefox. Change the Get request that was made with a Kibana core.http.get(/api/check-wazuh) resource to the WzRequest.genericReq resource and it no longer fails, also add a test capture to public/plugin.ts that wraps the request and in case of failure, the error is detected when the browser does not work with the V8 engine.
+`#4358 <https://github.com/wazuh/wazuh-kibana-app/pull/4358>`_    Fixed an error of an undefined username hash related to reporting when using Kibana with X-Pack and security was disabled.
+`#4359 <https://github.com/wazuh/wazuh-kibana-app/pull/4359>`_    Fixed persistence of the plugin registry file between updates.
+`#4367 <https://github.com/wazuh/wazuh-kibana-app/pull/4367>`_    Fixed searchbar error on SCA Inventory table.
+`#4373 <https://github.com/wazuh/wazuh-kibana-app/pull/4373>`_    Fixed a routes loop when reinstalling Wazuh indexer.
+`#4365 <https://github.com/wazuh/wazuh-kibana-app/pull/4365>`_    Fixed Wazuh restart UI.
 ==============================================================    =============
 
 Wazuh Splunk app
@@ -142,16 +170,9 @@ Wazuh Splunk app
 ==============================================================    =============
 Reference                                                         Description
 ==============================================================    =============
-`#1351 <https://github.com/wazuh/wazuh-splunk/pull/1351>`_        aaa
+`#1359 <https://github.com/wazuh/wazuh-splunk/pull/1359>`_        Fixed the API console suggestions, as they were not working in 4.3.6.
 ==============================================================    =============
 
-Packages
-^^^^^^^^
-==============================================================    =============
-Reference                                                         Description
-==============================================================    =============
-`#1713 <https://github.com/wazuh/wazuh-packages/pull/1713>`__     aaa
-==============================================================    =============
 
 Changelogs
 ----------
