@@ -222,12 +222,12 @@ newUrls['4.3'] = [
   '/deployment-options/amazon-machine-images/amazon-machine-images.html',
   '/release-notes/release-4-3-0.html',
   '/learning-wazuh/build-lab/install-wazuh-central-components.html', 
-  '/upgrade-guide/wazuh-agent/wazuh-agent-package-linux.html',
-  '/upgrade-guide/wazuh-agent/wazuh-agent-package-windows.html',
-  '/upgrade-guide/wazuh-agent/wazuh-agent-package-macos.html',
-  '/upgrade-guide/wazuh-agent/wazuh-agent-package-solaris.html',
-  '/upgrade-guide/wazuh-agent/wazuh-agent-package-aix.html',
-  '/upgrade-guide/wazuh-agent/wazuh-agent-package-hpux.html',
+  '/upgrade-guide/wazuh-agent/linux.html',
+  '/upgrade-guide/wazuh-agent/windows.html',
+  '/upgrade-guide/wazuh-agent/macos.html',
+  '/upgrade-guide/wazuh-agent/solaris.html',
+  '/upgrade-guide/wazuh-agent/aix.html',
+  '/upgrade-guide/wazuh-agent/hpux.html',
   '/upgrade-guide/wazuh-agent/index.html',
 ];
 

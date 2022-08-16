@@ -17,10 +17,10 @@ To perform the upgrade locally, select your operating system and follow the inst
 .. toctree::
    :maxdepth: 1
 
-    Linux <wazuh-agent-package-linux>
-    Windows <wazuh-agent-package-windows>
-    macOS <wazuh-agent-package-macos>
-    Solaris <wazuh-agent-package-solaris>
-    AIX <wazuh-agent-package-aix>
-    HP-UX <wazuh-agent-package-hpux>
+    Linux <linux>
+    Windows <windows>
+    macOS <macos>
+    Solaris <solaris>
+    AIX <aix>
+    HP-UX <hpux>
 
