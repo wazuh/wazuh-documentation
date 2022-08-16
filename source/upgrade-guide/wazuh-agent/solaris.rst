@@ -7,7 +7,7 @@
 Ugrading Wazuh agents on Solaris systems
 ========================================
 
-Select your Solaris Intel version and follow the steps to upgrade the Wazuh agent. 
+Select your Solaris version and follow the steps to upgrade the Wazuh agent. 
 
 .. tabs::
 
@@ -103,7 +103,7 @@ Select your Solaris Intel version and follow the steps to upgrade the Wazuh agen
             # chown root:wazuh /var/ossec/etc/client.keys
    
    
-      #. Start the wazuh-agent.
+      #. Start the Wazuh agent.
    
          .. code-block:: console
    
@@ -113,4 +113,4 @@ Select your Solaris Intel version and follow the steps to upgrade the Wazuh agen
 .. note::
    :class: not-long
 
-   When updating agents from versions earlier than 4.x, make sure that the communication protocol is compatible. Up to that point, UDP was the default protocol and it was switched to TCP for later versions. Edit the agent configuration file ``ossec.conf`` to update the :ref:`protocol <server_protocol>` or make sure that your Wazuh manager accepts :ref:`both protocols<manager_protocol>`. 
+   When upgrading agents from versions earlier than 4.x, make sure that the communication protocol is compatible. Up to that point, UDP was the default protocol and it was switched to TCP for later versions. Edit the agent configuration file ``ossec.conf`` to update the :ref:`protocol <server_protocol>` or make sure that your Wazuh manager accepts :ref:`both protocols<manager_protocol>`. 

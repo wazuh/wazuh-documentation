@@ -6,17 +6,17 @@
 Upgrade guide
 =============
 
-This guide includes instructions to upgrade the Wazuh agent, the Wazuh server, the Wazuh indexer and the Wazuh dashboard as well as the Wazuh integrations with Open Distro for Elasticsearch and Elastic Stack basic license. 
+This guide includes instructions to upgrade the :doc:`Wazuh components </getting-started/components/index>` as well as the Wazuh integrations with Open Distro for Elasticsearch and Elastic Stack basic license. 
 
 
 Upgrade the Wazuh central components
 ------------------------------------
 
-Select an option below and follow the instructions to upgrade the Wazuh components. 
+Select an option below according to your Wazuh installation and follow the instructions. 
 
 The Wazuh central component section includes instructions to upgrade the Wazuh server, the Wazuh indexer and the Wazuh dashboard. This is the default Wazuh installation starting with Wazuh v4.3.0. 
 
-On the other hand, the Open Distro for Elasticsearch section describes the upgrade process for the Wazuh manager, Filebeat-OSS, Open distro for Elasticsearch and Kibana. This was the default Wazuh installation from Wazuh v4.0.0 to 4.2.7. 
+The Open Distro for Elasticsearch section describes the upgrade process for the Wazuh manager, Filebeat-OSS, Open Distro for Elasticsearch and Kibana. This was the default Wazuh installation from Wazuh v4.0.0 to 4.2.7. 
 
 The Elastic Stack basic license section includes instructions to upgrade the Wazuh manager, Filebeat, Elasticsearch and Kibana. The latest supported Elastic Stack basic license version is |ELASTICSEARCH_ELK_LATEST|. 
 
@@ -183,9 +183,9 @@ To perform the upgrade locally, select your operating system and follow the inst
 
 
 
-The :doc:`compatibility-matrix/index` section explains compatibility requirements between components.
+Check the :doc:`compatibility-matrix/index` section to learn about the compatibility requirements between components.
 
-:doc:`legacy/index` describes the upgrading process from Wazuh 1.x and 2.x.
+For upgrades from Wazuh 1.x and 2.x, check the :doc:`legacy/index` guide.
 
 .. toctree::
    :maxdepth: 1

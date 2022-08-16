@@ -20,7 +20,7 @@ Follow these steps to upgrade Wazuh agents locally on Windows systems. If you wa
     
       .. group-tab:: CLI
 
-         To upgrade the Wazuh agent from the command line, run the installer using Windows PowerShell or the command prompt. The ``/q`` argument is used for unattended installations:
+         To upgrade the Wazuh agent from the command line, run the installer using Windows PowerShell or the command prompt. The ``/q`` argument is used for unattended installations.
 
             .. code-block:: none
 
@@ -29,7 +29,7 @@ Follow these steps to upgrade Wazuh agents locally on Windows systems. If you wa
 
       .. group-tab:: GUI
 
-         Open the installer and follow the instructions to upgrade the Wazuh agent:
+         Open the installer and follow the instructions to upgrade the Wazuh agent.
 
             .. thumbnail:: /images/installation/windows.png
               :title: Windows agent
@@ -40,5 +40,5 @@ Follow these steps to upgrade Wazuh agents locally on Windows systems. If you wa
 .. note::
    :class: not-long
 
-   When updating agents from versions earlier than 4.x, make sure that the communication protocol is compatible. Up to that point, UDP was the default protocol and it was switched to TCP for later versions. Edit the agent configuration file ``ossec.conf`` to update the :ref:`protocol <server_protocol>` or make sure that your Wazuh manager accepts :ref:`both protocols<manager_protocol>`. 
+   When upgrading agents from versions earlier than 4.x, make sure that the communication protocol is compatible. Up to that point, UDP was the default protocol and it was switched to TCP for later versions. Edit the agent configuration file ``ossec.conf`` to update the :ref:`protocol <server_protocol>` or make sure that your Wazuh manager accepts :ref:`both protocols<manager_protocol>`. 
                
