@@ -812,7 +812,7 @@ Specifies the queue size of the manager synchronization responses.
 
 **thread_pool**
 
-Specifices the number of threads used by the FIM database synchronization. FIM will use the minimum between the configured value and the number of CPU cores of the system.
+Specifies the number of threads used by the FIM database synchronization. FIM will use the minimum between the configured value and the number of CPU cores of the system.
 
 +--------------------+-----------------------------------------------------+
 | **Default value**  | 1                                                   |
@@ -877,7 +877,7 @@ Set the disk quota limit option to enabled or disabled.
 
 .. versionadded:: 4.0
 
-Specifices the limit for the size of the ``queue/diff/local`` folder.
+Specifies the limit for the size of the ``queue/diff/local`` folder.
 
 +--------------------+---------------------------------------------+
 | **Default value**  | 1GB                                         |
@@ -908,7 +908,7 @@ Set the size limit of a file to enabled or disabled.
 
 .. versionadded:: 4.0
 
-Specifices the limit for the size of files monitored with ``report_changes``.
+Specifies the limit for the size of files monitored with ``report_changes``.
 
 +--------------------+---------------------------------------------+
 | **Default value**  | 50MB                                        |
