@@ -1,4 +1,4 @@
-.. Copyright (C) 2022 Wazuh, Inc.
+.. Copyright (C) 2015, Wazuh, Inc.
 
 .. meta::
   :description: Follow this guide to migrate from Open Distro for Elasticsearch Kibana to the Wazuh dashboard.
@@ -68,7 +68,9 @@ To guarantee a correct operation of Wazuh, make sure to also migrate from Open D
               .. include:: /_templates/installations/dashboard/apt/install_dashboard.rst
 
 
-    ..  note:: Make sure that your Wazuh manager is updated to the latest version. To learn more, see the :doc:`Upgrading the Wazuh manager </upgrade-guide/upgrading-wazuh>` documentation. 
+   .. note::
+
+      Make sure that your Wazuh manager is updated to the latest version. To learn more, see :ref:`upgrading_wazuh_server`. 
 
 #. Create the ``/etc/wazuh-dashboard/certs`` directory, copy your old certificates to the new location and change ownership and permissions.    
 

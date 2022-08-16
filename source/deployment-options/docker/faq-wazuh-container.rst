@@ -1,5 +1,8 @@
-.. Copyright (C) 2022 Wazuh, Inc.
+.. Copyright (C) 2015, Wazuh, Inc.
 
+.. meta::
+  :description: Get answers to the most frequently asked questions about the Wazuh deployment on Docker in this FAQ. 
+    
 .. _wazuh-container_faq:
 
 FAQ
@@ -24,7 +27,7 @@ Read `here <https://opensearch.org/docs/latest/security-plugin/configuration/yam
 How can I tune the Wazuh indexer configuration?
 -----------------------------------------------
 
-The Wazuh indexer container uses the default configuration and it is not exposed by default.
+The Wazuh indexer container uses the default configuration, and it is not exposed by default.
 
 If you want to override the default configuration, create a file ``config/wazuh_indexer/<new_wazuh_indexer>.yml`` and put your custom version of the configuration in it.
 

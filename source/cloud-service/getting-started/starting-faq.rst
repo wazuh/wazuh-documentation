@@ -1,4 +1,4 @@
-.. Copyright (C) 2020 Wazuh, Inc.
+.. Copyright (C) 2015, Wazuh, Inc.
 
 .. _cloud_getting-started_starting_faq:
 
@@ -76,7 +76,7 @@ The oldest events are removed from your index when the tier limit is reached. Th
 Can I cancel at any time?
 -------------------------
 
-Yes, you can cancel at any time with no penalty. You can keep using your environment until the end of your :ref:`current billing cycle <cloud_billing_history>`, and no future charges are incurred after this period.
+Yes, you can cancel at any time with no penalty. You can keep using your environment until the end of your :doc:`current billing cycle </cloud-service/account-billing/billing-history>`, and no future charges are incurred after this period.
 
 How can I get help?
 -------------------

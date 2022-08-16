@@ -1,4 +1,4 @@
-.. Copyright (C) 2015–2022 Wazuh, Inc.
+.. Copyright (C) 2015, Wazuh, Inc.
 
 .. meta::
   :description: Learn more about the rootkit component of Wazuh. The Wazuh agent periodically scans the monitored system to detect rootkits both at the kernel and the user space level.  
@@ -30,4 +30,4 @@ Example of running processes:
     :align: center
     :wrap_image: No
 
-You can find more information about the Wazuh system inventory module in the :ref:`user manual <syscollector>`.
+You can find more information about the Wazuh system inventory module in the :doc:`user manual </user-manual/capabilities/syscollector>`.

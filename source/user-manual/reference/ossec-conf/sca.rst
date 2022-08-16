@@ -1,4 +1,4 @@
-.. Copyright (C) 2022 Wazuh, Inc.
+.. Copyright (C) 2015, Wazuh, Inc.
 
 .. meta::
   :description: Learn more about the configuration of the Security Configuration Assessment module. Check out the options and a sample configuration in this section.
@@ -151,7 +151,7 @@ The SCA module will perform the scan immediately when started.
 interval
 ^^^^^^^^
 
-Interval between module executions.
+The interval between module executions.
 
 +--------------------+----------------------------------------------------------------------------------------------------------------------------------------------------------------+
 | **Default value**  | 12h                                                                                                                                                            |

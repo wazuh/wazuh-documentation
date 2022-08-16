@@ -1,4 +1,4 @@
-.. Copyright (C) 2015–2022 Wazuh, Inc.
+.. Copyright (C) 2015, Wazuh, Inc.
 
 .. meta::
   :description: Get started with Wazuh. Learn about our open source community of developers, the Wazuh components, architecture, and deployment.
@@ -20,7 +20,7 @@ Community and support
 How to install Wazuh
 --------------------
 
-The Wazuh solution is composed of three :doc:`central platform components <components/index>` and a single universal :ref:`agent <installation_agents>`. For installing Wazuh in your infrastructure, you can check the following sections of our documentation:
+The Wazuh solution is composed of three :doc:`central platform components <components/index>` and a single universal :doc:`agent </installation-guide/wazuh-agent/index>`. For installing Wazuh in your infrastructure, you can check the following sections of our documentation:
 
 -  The :doc:`Quickstart </quickstart>` is an automated way of installing Wazuh in just a few minutes.
 -  The :doc:`Installation guide </installation-guide/index>` provides instructions on how to install each central component and how to deploy the Wazuh agents.
@@ -28,7 +28,7 @@ The Wazuh solution is composed of three :doc:`central platform components <compo
 Wazuh Cloud
 -----------
 
-The `Wazuh Cloud <https://wazuh.com/cloud/>`_ is our software as a service (SaaS) solution. We provide a `14-day free trial <https://console.cloud.wazuh.com/sign-up?landing=trial>`_ for you to create a cloud environment and get the best out of our SaaS solution. Check the :ref:`Cloud service <cloud_service>` documentation for more information.
+The `Wazuh Cloud <https://wazuh.com/cloud/>`_ is our software as a service (SaaS) solution. We provide a `14-day free trial <https://console.cloud.wazuh.com/sign-up?landing=trial>`_ for you to create a cloud environment and get the best out of our SaaS solution. Check the :doc:`Cloud service </cloud-service/index>` documentation for more information.
 
 Screenshots
 -----------

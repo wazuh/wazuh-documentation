@@ -1,4 +1,4 @@
-.. Copyright (C) 2022 Wazuh, Inc.
+.. Copyright (C) 2015, Wazuh, Inc.
 
 .. meta::
   :description: Learn how to secure Opendistro for Elasticsearch.
@@ -14,7 +14,7 @@ We  provide a script to simplify the process of changing passwords, start by dow
 
   .. code-block:: console
   
-    # curl -so wazuh-opendistro-passwords-tool https://packages.wazuh.com/|WAZUH_LATEST_MINOR|/wazuh-opendistro-passwords-tool.sh
+    # curl -so wazuh-opendistro-passwords-tool https://packages.wazuh.com/|WAZUH_CURRENT_MINOR|/wazuh-opendistro-passwords-tool.sh
 
 The script allows changing the password for either a single user or all the users present on the ``/usr/share/elasticsearch/plugins/opendistro_security/securityconfig/internal_users.yml`` file. It also offers the option to change the password of more than one user at once, getting them from a formatted file. All the available options to run the script are:
 

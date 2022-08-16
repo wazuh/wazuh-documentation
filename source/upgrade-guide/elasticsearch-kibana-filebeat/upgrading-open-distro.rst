@@ -1,19 +1,78 @@
-.. Copyright (C) 2022 Wazuh, Inc.
+.. Copyright (C) 2015, Wazuh, Inc.
 
 .. meta::
-  :description: This section of the Wazuh documentation guides through the upgrade process of Elasticsearch, Filebeat, and Kibana for Open Distro for Elasticsearch distribution.
+   :description: This section of the Wazuh documentation guides through the upgrade process of the Wazuh server with Elasticsearch and Kibana for Open Distro for Elasticsearch distribution.
   
 .. _upgrading_open_distro:
 
-Upgrading Open Distro for Elasticsearch
+Wazuh and Open Distro for Elasticsearch
 =======================================
 
-This section guides through the upgrade process of Elasticsearch, Filebeat, and Kibana for *Open Distro for Elasticsearch* distribution. 
+This section guides through the upgrade process of the Wazuh server, Elasticsearch, and Kibana for the *Open Distro for Elasticsearch* distribution. 
 
-.. note:: Root user privileges are required to execute all the commands described below.
+.. note::
+   
+   Root user privileges are required to execute all the commands described below.
 
-Preparing Open Distro for Elasticsearch
+Preparing the upgrade
+---------------------
+
+#. Add the Wazuh repository. You can skip this step if the repository is already present and enabled on the node. 
+
+   .. tabs::
+
+
+     .. group-tab:: Yum
+
+
+       .. include:: /_templates/installations/common/yum/add-repository.rst
+
+
+
+     .. group-tab:: APT
+
+
+       .. include:: /_templates/installations/common/deb/add-repository.rst
+
+
+
+
+#. Repeat the previous step for every Wazuh node.
+
+Upgrading the Wazuh manager
+---------------------------
+
+When upgrading a multi-node Wazuh manager cluster, run the upgrade in every node to make all the Wazuh manager nodes join the cluster. Start with the master node to reduce server downtime.
+
+.. note:: Upgrading from Wazuh 4.2.x or lower creates the ``wazuh`` operating system user and group to replace ``ossec``. To avoid upgrade conflicts, make sure that the ``wazuh`` user and group are not present in your operating system.  
+
+#. Upgrade the Wazuh manager to the latest version.
+
+   .. tabs::
+
+      .. group-tab:: Yum
+
+         .. code-block:: console
+
+            # yum upgrade wazuh-manager
+
+      .. group-tab:: APT
+
+         .. code-block:: console
+
+            # apt-get install wazuh-manager
+
+   .. note::
+
+      If the ``/var/ossec/etc/ossec.conf`` configuration file was modified, it will not be replaced by the upgrade. You will therefore have to add the settings of the new capabilities manually. More information can be found in :doc:`/user-manual/index`.        
+
+#. Repeat the previous steps for every Wazuh manager node.
+
+Upgrading Open Distro for Elasticsearch
 ---------------------------------------
+
+Preparations
+^^^^^^^^^^^^
 
 #. Stop the services:
 
@@ -105,8 +164,8 @@ Preparing Open Distro for Elasticsearch
 
 
 
-Upgrading Elasticsearch
------------------------
+Upgrade
+^^^^^^^
 
 This guide explains how to perform a rolling upgrade, which allows you to shut down one node at a time for minimal disruption of service.The cluster remains available throughout the process.
 
@@ -243,14 +302,14 @@ Upgrading Filebeat
 
     .. code-block:: console
 
-      # curl -so /etc/filebeat/wazuh-template.json https://raw.githubusercontent.com/wazuh/wazuh/v|WAZUH_LATEST|/extensions/elasticsearch/7.x/wazuh-template.json
+      # curl -so /etc/filebeat/wazuh-template.json https://raw.githubusercontent.com/wazuh/wazuh/v|WAZUH_CURRENT|/extensions/elasticsearch/7.x/wazuh-template.json
       # chmod go+r /etc/filebeat/wazuh-template.json
 
 #. Download the Wazuh module for Filebeat:
 
     .. code-block:: console
 
-      # curl -s https://packages.wazuh.com/4.x/filebeat/wazuh-filebeat-0.1.tar.gz | sudo tar -xvz -C /usr/share/filebeat/module
+      # curl -s https://packages.wazuh.com/4.x/filebeat/wazuh-filebeat-0.2.tar.gz | sudo tar -xvz -C /usr/share/filebeat/module
 
 #. Edit the ``/etc/filebeat/filebeat.yml`` configuration file. This step is only needed for the upgrade of a ``Distributed installation``. In case of having an ``All-in-one`` installation, the file is already configured:
 
@@ -283,9 +342,9 @@ Upgrading Filebeat
 
 #. Upload the new Wazuh template to Elasticsearch. This step can be omitted in Wazuh single-node installations:
 
-  .. code-block:: console
+   .. code-block:: console
 
-    # filebeat setup --index-management -E output.logstash.enabled=false    
+      # filebeat setup --index-management -E output.logstash.enabled=false    
 
 Upgrading Kibana
 ----------------
@@ -423,14 +482,14 @@ Upgrading Kibana
         .. code-block:: console
 
           # cd /usr/share/kibana/
-          # sudo -u kibana /usr/share/kibana/bin/kibana-plugin install https://packages.wazuh.com/4.x/ui/kibana/wazuh_kibana-|WAZUH_LATEST|_|ELASTICSEARCH_LATEST|-1.zip
+          # sudo -u kibana /usr/share/kibana/bin/kibana-plugin install https://packages.wazuh.com/4.x/ui/kibana/wazuh_kibana-|WAZUH_CURRENT|_|ELASTICSEARCH_LATEST|-1.zip
 
       .. group-tab:: From the package
 
         .. code-block:: console
 
           # cd /usr/share/kibana/
-          # sudo -u kibana bin/kibana-plugin install file:///path/wazuh_kibana-|WAZUH_LATEST|_|ELASTICSEARCH_LATEST|-1.zip
+          # sudo -u kibana bin/kibana-plugin install file:///path/wazuh_kibana-|WAZUH_CURRENT|_|ELASTICSEARCH_LATEST|-1.zip
 
 
 
@@ -483,10 +542,11 @@ Upgrading Kibana
 #. Clear the browser's cache and cookies.
 
 
-Disabling the repository
-^^^^^^^^^^^^^^^^^^^^^^^^
-It is recommended to disable the Wazuh repository to prevent an upgrade to the newest Elastic Stack version due to the possibility of undoing changes with the Wazuh Kibana plugin:
+Finishing the upgrade
+---------------------
 
+#. **Recommended action** - Disable the Wazuh repository when finished upgrading the Wazuh installation in the node to prevent  an upgrade to the newest Elastic Stack version due to the possibility of undoing changes with the Wazuh Kibana plugin.
+  
       .. tabs::
 
         .. group-tab:: Yum
@@ -508,7 +568,7 @@ It is recommended to disable the Wazuh repository to prevent an upgrade to the n
 
             # sed -i "s/^enabled=1/enabled=0/" /etc/zypp/repos.d/wazuh.repo
 
-Next step
----------
+Next steps
+----------
 
 The next step consists in :ref:`upgrading the Wazuh agents<upgrading_wazuh_agent>`.

@@ -283,7 +283,6 @@ redoc[spec-url] .beRszf {
     // Bordered table style
     &.table-bordered {
       border: none;
-      border-radius: $rounded-corners $rounded-corners 0 0;
       th {
         font-weight: 500;
         border: 2px solid;
@@ -327,6 +326,7 @@ redoc[spec-url] .beRszf {
     color: #fff;
   }
   .token {
+    color: $dark-color-main-text;
     font-family: "Fira mono", monospace;
     font-size: 14px;
     &.property, 
@@ -589,6 +589,11 @@ redoc[spec-url] .beRszf {
       display: none;
     }
   }
+  .kwnyAC {
+    background: transparent;
+    width: calc(100% - 40px);
+    margin: 0 auto;
+  }
 
   // Central and right content columns
   .api-content {
@@ -718,33 +723,6 @@ redoc[spec-url] .beRszf {
     }
     .header-right {
       border-bottom-color: $light-color-global-toc-highlight;
-    }
-  }
-  #version-selector {
-    .dropdown-btn,
-    .dropdown-menu {
-      color: $light-color-main-text;
-      @media screen and (min-width: 50.01rem) {
-        background-color: $light-color-base-space;
-        border-color: $light-color-accent;
-      }
-    }
-    .dropdown-menu {
-      background-color: $light-color-sidebar-space;
-      @media screen and (min-width: 50.01rem) {
-        background-color: $light-color-base-space;
-        border-color: $light-color-accent;
-      }
-      > li > a {
-        color: $light-color-main-text;
-        &:hover,
-        &:focus {
-          background-color: $light-color-highlight-background;
-        }
-        &.disabled {
-          color: $light-color-border-deeper;
-        }
-      }
     }
   }
   redoc[spec-url] .beRszf {
@@ -1025,11 +1003,6 @@ redoc[spec-url] .beRszf {
         .hoverable {
           color: $dark-color-main-text;
         }
-
-        // Code blocks tokens
-        .token {
-          color: $dark-color-main-text;
-        }
       }
     }
 
@@ -1077,6 +1050,13 @@ redoc[spec-url] .beRszf {
           background-color: $light-color-global-toc-highlight;
         }
       }
+      .kwnyAC {
+        label[role="menuitem"] {
+          &:hover {
+            background: transparent
+          }
+        }
+      }
     }
 
     // Search box
@@ -1088,6 +1068,11 @@ redoc[spec-url] .beRszf {
       }
       ::placeholder {
         color: $light-color-focus-shade;
+      }
+    }
+    .kwnyAC {
+      & > li {
+        background: rgba(255,255,255,.55);
       }
     }
 
@@ -1279,6 +1264,33 @@ redoc[spec-url] .beRszf {
     .imibLw {
       color: $dark-color-primary-lighter;
     }
+    
+    // Properties connecting line
+    tr:first-of-type > .eAybih,
+    tr:first-of-type > .jMEzIu {
+      background-image: linear-gradient(transparent 0%, transparent 28px, $dark-color-primary-lighter 28px, $dark-color-primary-lighter 100%);
+    }
+    .eAybih,
+    .gtEarq {
+      border-left-color: $dark-color-primary-lighter;
+    }
+    tr.last + tr > .gtEarq {
+      border-left-color: transparent;
+    }
+    tr.last {
+      & > .eAybih,
+      & > .jMEzIu {
+        background-image: linear-gradient($dark-color-primary-lighter 0%, $dark-color-primary-lighter 29px, transparent 29px, transparent 100%);
+      }
+      &:first-of-type > .eAybih,
+      &:first-of-type > .jMEzIu {
+        background-image: none;
+      }
+    }
+    .bcLONg::before,
+    .bcLONg::after {
+      background-color: $dark-color-primary-lighter;
+    }
 
     // Array of <Type>
     .sc-TOsTZ.fKyGWc {
@@ -1328,11 +1340,89 @@ redoc[spec-url] .beRszf {
       background-color: $dark-color-redoc-base-space;
     }
 
+    // Responses (central column): 200, 400, etc
+    .sc-ibxdXY {
+      &.gxJjxJ {
+        background-color: rgba($dark-color-success-dark, .2);
+        strong {
+          color: $dark-color-success-dark;
+        }
+        svg polygon {
+          fill: $dark-color-success-dark;
+        }
+      }
+      &.dUFXgZ {
+        background-color: rgba($dark-color-danger-dark, .2);
+        strong {
+          color: $dark-color-danger-dark;
+        }
+        svg polygon {
+          fill: $dark-color-danger-dark;
+        }
+      }
+    }
+
     // Inline code value
     .bMfIUD {
       color: $dark-color-main-text;
       background-color: $dark-color-redoc-table-heading;
       border-color: $dark-color-redoc-table-heading;
+    }
+    
+    // Samples tabs (in dark background part)
+    .dOwpAS {
+      .react-tabs__tab-list {
+        & > [role="tab"].react-tabs__tab--selected {
+          color: $light-color-main-text;
+          background-color: $light-color-base-space;
+        }
+        [role="tab"] {
+          color: $dark-color-main-text;
+          background-color: $dark-color-code-block-background;
+          &.tab-success::before {
+            background-color: $light-color-success-dark;
+            box-shadow: 0 0 3px 0 $dark-color-success-dark;
+          }
+          &.tab-error::before {
+            background-color: $dark-color-danger;
+            box-shadow: 0 0 3px 0 $dark-color-danger;
+          }
+          &.tab-redirect::before {
+            background-color: $dark-color-warning;
+            box-shadow: 0 0 3px 0 $dark-color-warning;
+          }
+          &.tab-info::before {
+            background-color: $dark-color-primary;
+            box-shadow: 0 0 3px 0 $dark-color-primary;
+          }
+        }
+      }
+      
+      // Samples tab content
+      & > .react-tabs__tab-panel {
+        background-color: $dark-color-code-block-background;
+      }
+    }
+    
+    // Code block area container
+    .sc-gisBJw.gwfZGU {
+      // Code block content
+      .jCgylq {
+        background-color: $dark-color-code-block-background;
+        code {
+          background-color: $dark-color-code-block-background;
+        }
+        a {
+          color: $dark-color-primary;
+          &:hover,
+          &:focus {
+            color: $dark-color-primary-lighter;
+          }
+        }
+        .hoverable {
+          color: $dark-color-main-text;
+        }
+      }
     }
 
     // Download button
@@ -1380,6 +1470,13 @@ redoc[spec-url] .beRszf {
           background-color: $dark-color-base-space;
         }
       }
+      .kwnyAC {
+        label[role="menuitem"] {
+          &:hover {
+            background: transparent
+          }
+        }
+      }
     }
 
     // Search box
@@ -1393,6 +1490,11 @@ redoc[spec-url] .beRszf {
         color: $light-color-focus-shade;
       }
     }
+    .kwnyAC {
+      & > li {
+        background: rgba(0,0,0,.1);
+      }
+    }
 
     // Central and right conten columns
     .api-content {
@@ -1404,6 +1506,12 @@ redoc[spec-url] .beRszf {
       }
     }
     .celZWI {
+      h1,
+      h2,
+      h3,
+      h4 {
+        color: $dark-color-main-text;
+      }
       // Endpoint dropdown
       .hvYMHo,
       .fKwhsn {

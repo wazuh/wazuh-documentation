@@ -1,14 +1,14 @@
-.. Copyright (C) 2022 Wazuh, Inc.
+.. Copyright (C) 2015, Wazuh, Inc.
 
 .. meta::
   :description: In this section of the Wazuh documentation, you will find more information on how to tune Elasticsearch: changing user passwords, memory locking, and shards and replicas.
-  
+
 .. _elastic_tuning:
 
 Elasticsearch tuning
 ====================
 
-This guide summarizes the relevant settings that enable Elasticsearch optimization. To change the default passwords, see the :doc:`/user-manual/securing-wazuh/index` section. 
+This guide summarizes the relevant settings that enable Elasticsearch optimization. To change the default passwords, see the :doc:`/user-manual/securing-wazuh/index` section.
 
 - `Memory locking`_
 - `Shards and replicas`_
@@ -49,7 +49,7 @@ Elasticsearch malfunctions when the system is swapping memory. It is crucial for
             # cat > /etc/systemd/system/elasticsearch.service.d/elasticsearch.conf << EOF
             [Service]
             LimitMEMLOCK=infinity
-            EOF            
+            EOF
 
         .. group-tab:: SysV Init
 
@@ -107,7 +107,7 @@ After starting Elasticsearch, run the following request to verify that the setti
 
 .. code-block:: console
 
-    # curl "http://localhost:9200/_nodes?filter_path=**.mlockall&pretty"
+    # curl -k -u <username>:<password> "https://localhost:9200/_nodes?filter_path=**.mlockall&pretty"
 
 .. code-block:: json
     :class: output
@@ -154,7 +154,7 @@ In addition, Elasticsearch allows the user to make one or more copies of the ind
 
 .. warning::
 
-  The number of shards and replicas can be defined per index at the time of their creation. Once the index is created, the number of replicas must be changed dynamically, whereas the number of fragments cannot be changed afterward. 
+  The number of shards and replicas can be defined per index at the time of their creation. Once the index is created, the number of replicas must be changed dynamically, whereas the number of fragments cannot be changed afterward.
 
 How many shards should an index have?
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
@@ -187,7 +187,7 @@ To change these settings, the Elasticsearch's template will have to be edited. I
 
     .. code-block:: console
 
-      # curl https://raw.githubusercontent.com/wazuh/wazuh/v|WAZUH_LATEST|/extensions/elasticsearch/7.x/wazuh-template.json -o w-elastic-template.json
+      # curl https://raw.githubusercontent.com/wazuh/wazuh/v|WAZUH_CURRENT|/extensions/elasticsearch/7.x/wazuh-template.json -o w-elastic-template.json
 
 #. Edit the template ``w-elastic-template.json`` in order to set one shard with no replicas:
 

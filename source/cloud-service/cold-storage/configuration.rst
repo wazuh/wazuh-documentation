@@ -1,3 +1,5 @@
+.. Copyright (C) 2015, Wazuh, Inc.
+
 .. meta::
   :description: Wazuh provides two types of storage for your indexed data: hot storage and cold storage. Learn more about the cold storage configuration in this section. 
 

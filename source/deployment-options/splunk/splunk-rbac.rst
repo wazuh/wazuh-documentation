@@ -1,6 +1,7 @@
-.. Copyright (C) 2015–2022 Wazuh, Inc.
+.. Copyright (C) 2015, Wazuh, Inc.
 
-.. meta:: :description: Create and map users in the Wazuh app for Splunk
+.. meta::
+   :description: Create and map users in a Wazuh with Splunk installation.
 
 Create and map internal users (RBAC)
 ====================================
@@ -26,9 +27,9 @@ In the following sections, we learn how to create internal users and map them wi
 
 Before any user role mapping can be done, the Wazuh API connection inside the Splunk app must be configured with the wazuh-wui credentials. To do this follow the steps below:
 
-#. Open Splunk in your desired browser and login with the username and password created when the Splunk package was installed. Click on the Wazuh app icon.
+#. Open Splunk in your desired browser and log in with the username and password created when the Splunk package was installed. Click on the Wazuh app icon.
 
-#. Click on the “Settings” tab. Fill the form with your wazuh-wui API credentials. Use the URL and port from your Wazuh API server.
+#. Click on the “Settings” tab. Fill out the form with your wazuh-wui API credentials. Use the URL and port from your Wazuh API server.
 
    By default, the Wazuh API port is ``55000``. The default wazuh-wui username and password is ``wazuh-wui:wazuh-wui``. Ensure that the **Run as** option is checked. Once the API has been added, it is possible to check the connection by pressing the `Check connection` button on each Wazuh API entry. A successful message appears on the bottom right corner if the connection is established.
     
@@ -45,7 +46,7 @@ Before any user role mapping can be done, the Wazuh API connection inside the Sp
 Creating and setting a Wazuh admin user
 ---------------------------------------
 
-#. Login to Splunk from your preferred browser.
+#. Log in to Splunk from your preferred browser.
 
 #. Select the Wazuh app for Splunk.
 
@@ -64,7 +65,7 @@ Creating and setting a Wazuh admin user
 Creating and setting a Wazuh read-only user
 -------------------------------------------
 
-#. Login to Splunk from your preferred browser.
+#. Log in to Splunk from your preferred browser.
 
 #. Select the Wazuh app for Splunk.
 
@@ -83,7 +84,7 @@ Creating and setting a Wazuh read-only user
 Creating roles
 --------------
 
-#. Login to Splunk from your preferred browser.
+#. Log in to Splunk from your preferred browser.
 
 #. Select the Wazuh app for Splunk.
 
@@ -102,7 +103,7 @@ Creating roles
 Creating policies
 -----------------
 
-#. Login to Splunk from your preferred browser.
+#. Log in to Splunk from your preferred browser.
 
 #. Select the Wazuh app for Splunk.
 
@@ -125,7 +126,7 @@ Creating policies
 Mapping roles to users
 ----------------------
 
-#. Login to Splunk from your preferred browser.
+#. Log in to Splunk from your preferred browser.
 
 #. Select the Wazuh app for Splunk.
 
@@ -135,13 +136,13 @@ Mapping roles to users
       :align: left
       :width: 100%   
 
-#. Complete the empty fields with the requested information. Where
+#. Complete the empty fields with the requested information:
 
-   Role mapping name: Assign a name to the role mapping.
+   - Role mapping name: Assign a name to the role mapping.
 
-   Roles: The roles to be mapped to a user.
+   - Roles: The roles to be mapped to a user.
 
-   Internal users: The internal user to map a role to.
+   - Internal users: The internal users to map a role to.
 
 
    .. thumbnail:: /images/splunk-app/34.png

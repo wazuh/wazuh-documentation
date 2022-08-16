@@ -1,4 +1,4 @@
-.. Copyright (C) 2022 Wazuh, Inc.
+.. Copyright (C) 2015, Wazuh, Inc.
 
 .. _wodle_azure_logs:
 
@@ -151,7 +151,7 @@ Disables the Azure-Logs wodle.
 interval
 ^^^^^^^^
 
-Interval between Azure-Logs executions.
+The interval between Azure-Logs executions.
 
 +--------------------+----------------------------------------------------------------------------------------------------------------------------------------------------------------+
 | **Default value**  | 1d                                                                                                                                                             |
@@ -481,7 +481,7 @@ Key to the application we will use for authentication and to be able to make use
 graph\\auth_path
 ^^^^^^^^^^^^^^^^
 
-Path of the file that contains the application identifier and the application key for authentication in order to use the AAD Graph API. Incompatible with the ``application_id`` and ``application_key`` options. Check the :ref:`credentials <azure_credentials>` reference for more information about this topic.
+Path of the file that contains the application identifier and the application key for authentication in order to use the AAD Graph API. Incompatible with the ``application_id`` and ``application_key`` options. Check the :doc:`credentials </azure/activity-services/prerequisites/credentials>` reference for more information about this topic.
 
 +--------------------+--------------------+
 | **Default value**  | N/A                |

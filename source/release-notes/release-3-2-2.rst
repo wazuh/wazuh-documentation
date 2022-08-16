@@ -1,11 +1,11 @@
-.. Copyright (C) 2022 Wazuh, Inc.
+.. Copyright (C) 2015, Wazuh, Inc.
 
 .. meta::
   :description: Wazuh 3.2.2 has been released. Check out our release notes to discover the changes and additions of this release.
 .. _release_3_2_2:
 
-3.2.2 Release notes
-===================
+3.2.2 Release notes - 7 May 2018
+================================
 
 From the Wazuh team, we continue working hard improving the existing features as well as fixing bugs. This section shows the most relevant improvements and fixes in version 3.2.2. Find more details in each component changelog.
 

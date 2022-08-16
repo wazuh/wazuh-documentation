@@ -1,7 +1,7 @@
-.. Copyright (C) 2022 Wazuh, Inc.
+.. Copyright (C) 2015, Wazuh, Inc.
 
 .. meta::
-  :description: Learn more about how the Log Data Collection capability of Wazuh works: how to collect log files and Windows event logs, how to receive log events through syslog, and more.
+  :description: Here you can see how the Log Data Collection capability of Wazuh works and learn how to collect log files and Windows event logs.
 
 How it works
 ============
@@ -64,7 +64,7 @@ Wazuh can monitor classic Windows event logs, as well as the newer Windows event
     </localfile>
 
 
-MacOS ULS logs
+macOS ULS logs
 ^^^^^^^^^^^^^^
 
 .. versionadded:: 4.3.0
@@ -178,7 +178,7 @@ For the previous example, rule 5715 is matched:
 
 .. note::
 
-  For more information, see the :ref:`Wazuh Ruleset <ruleset>`
+  For more information, see the :doc:`Wazuh Ruleset </user-manual/ruleset/index>`
 
 Alert
 -----

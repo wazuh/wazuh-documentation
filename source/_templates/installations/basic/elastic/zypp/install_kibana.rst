@@ -1,7 +1,7 @@
-.. Copyright (C) 2022 Wazuh, Inc.
+.. Copyright (C) 2015, Wazuh, Inc.
 
 .. code-block:: console
 
-  # zypper install kibana-7.17.3
+  # zypper install kibana-7.17.5
 
 .. End of include file

@@ -1,4 +1,5 @@
-.. Copyright (C) 2022 Wazuh, Inc.
+.. Copyright (C) 2015, Wazuh, Inc.
+
 .. meta::
   :description: Check out how to install Wazuh with Elastic Stack basic license, deployment types, installation methods, and more. 
   
@@ -32,7 +33,7 @@ Wazuh server and Elastic Stack are installed on the same host. This type of depl
 
     - Elastic Stack, including Elasticsearch as a single-node cluster, and Kibana, including the Wazuh Kibana plugin.
 
-    The communication is be encrypted using certificates. Follow the installation guide to install and configure all the required components.
+    The communication is encrypted using certificates. Follow the installation guide to install and configure all the required components.
 
 
 
@@ -62,7 +63,7 @@ Start deploying Wazuh and Elastic Stack
 ---------------------------------------
 
 .. toctree::
-    :maxdepth: 2
+    :maxdepth: 1
 
     all-in-one-deployment/index
     distributed-deployment/index

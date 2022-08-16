@@ -1,4 +1,4 @@
-.. Copyright (C) 2022 Wazuh, Inc.
+.. Copyright (C) 2015, Wazuh, Inc.
 
 .. _create-hpux:
 
@@ -19,7 +19,7 @@ Download our wazuh-packages repository from GitHub and go to the ``hpux`` direct
 
 .. code-block:: console
 
- $ curl -L https://github.com/wazuh/wazuh-packages/tarball/|WAZUH_PACKAGES_BRANCH| | tar zx
+ $ curl -L https://github.com/wazuh/wazuh-packages/tarball/v|WAZUH_CURRENT| | tar zx
  $ cd wazuh-wazuh-packages-*
  $ cd hp-ux
 
@@ -35,7 +35,7 @@ Execute the ``generate_wazuh_packages.sh`` script, with the different options yo
   Usage: ./generate_wazuh_packages.sh [OPTIONS]
 
       -e Install all the packages necessaries to build the TAR package
-      -b <branch> Select Git branch. Example v|WAZUH_LATEST|
+      -b <branch> Select Git branch. Example v|WAZUH_CURRENT_HPUX|
       -s <tar_directory> Directory to store the resulting tar package. By default, an output folder will be created.
       -p <tar_home> Installation path for the package. By default: /var
       -c, --checksum Compute the SHA512 checksum of the TAR package.
@@ -54,18 +54,18 @@ Below, you will find some examples of how to build an HPUX package.
 
 .. code-block:: console
 
-  # ./generate_wazuh_packages.sh -b v|WAZUH_LATEST|
+  # ./generate_wazuh_packages.sh -b v|WAZUH_CURRENT_HPUX|
 
-This will generate a |WAZUH_LATEST| Wazuh agent HPUX package.
-
-.. code-block:: console
-
-  # ./generate_wazuh_packages.sh -b v|WAZUH_LATEST| -c
-
-This will generate a |WAZUH_LATEST| Wazuh agent HPUX package with checksum.
+This will generate a |WAZUH_CURRENT_HPUX| Wazuh agent HPUX package.
 
 .. code-block:: console
 
-  # ./generate_wazuh_packages.sh -b v|WAZUH_LATEST|  -p /opt/ossec
+  # ./generate_wazuh_packages.sh -b v|WAZUH_CURRENT_HPUX| -c
 
-This will generate a |WAZUH_LATEST| Wazuh agent HPUX package with ``/opt/ossec`` as installation directory.
+This will generate a |WAZUH_CURRENT_HPUX| Wazuh agent HPUX package with checksum.
+
+.. code-block:: console
+
+  # ./generate_wazuh_packages.sh -b v|WAZUH_CURRENT_HPUX|  -p /opt/ossec
+
+This will generate a |WAZUH_CURRENT_HPUX| Wazuh agent HPUX package with ``/opt/ossec`` as installation directory.

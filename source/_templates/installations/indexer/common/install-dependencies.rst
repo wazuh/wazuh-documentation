@@ -1,4 +1,4 @@
-.. Copyright (C) 2015-2022 Wazuh, Inc.
+.. Copyright (C) 2015, Wazuh, Inc.
 
 #. Install the following packages if missing.
 
@@ -8,7 +8,7 @@
 
                   .. code-block:: console
 
-                      # yum install coreutils initscripts chkconfig
+                      # yum install coreutils
 
           .. group-tab:: APT
 

@@ -1,4 +1,4 @@
-.. Copyright (C) 2021 Wazuh, Inc.
+.. Copyright (C) 2015, Wazuh, Inc.
 
 .. _github-module:
 
@@ -9,7 +9,7 @@ github
 
 .. note::
 
-    This module only works on Windows, Linux and MacOS. It is recommended to have it enabled only in one agent to avoid repeated logs.
+    This module only works on Windows, Linux and macOS. It is recommended to have it enabled only in one agent to avoid repeated logs.
 
 .. topic:: XML section name
 
@@ -86,7 +86,11 @@ By default, when Wazuh starts it will only read all log content from GitHub sinc
 interval
 ^^^^^^^^
 
-Interval between Wazuh wodle executions.
+The interval between Wazuh wodle executions.
+
+.. note::
+
+    When Wazuh starts, it waits for the configured time interval before running the first scan, unless the module has already been running before and the ``only_future_events`` option is set to no.
 
 +--------------------+-----------------------------------------------------------------------------------------------------------------------------------------+
 | **Default value**  | 10m                                                                                                                                     |
@@ -97,10 +101,14 @@ Interval between Wazuh wodle executions.
 time_delay
 ^^^^^^^^^^
 
-Specifies the delay time of the scan respect to the current time, by default it is 1 second.
+Specifies the delay time of the scan respect to the current time, by default it is 30 seconds.
+
+.. note::
+
+    This parameter represents how close to the current time the module will collect events, the smaller the value, the closer to real time the collection will be. The problem is that sometimes the GitHub delay increases the chance of missing events. It is recommended to use values greater than 30 seconds.
 
 +--------------------+-----------------------------------------------------------------------------------------------------------------------------------------+
-| **Default value**  | 1s                                                                                                                                      |
+| **Default value**  | 30s                                                                                                                                     |
 +--------------------+-----------------------------------------------------------------------------------------------------------------------------------------+
 | **Allowed values** | A positive number that should contain a suffix character indicating a time unit, such as, s (seconds), m (minutes), h (hours), d (days) |
 +--------------------+-----------------------------------------------------------------------------------------------------------------------------------------+
@@ -123,6 +131,10 @@ This block configures the credential for the **authentication** with the GitHub 
 
 - `api_auth\\org_name`_
 - `api_auth\\api_token`_
+
+.. warning::
+
+    In case of invalid configuration, after the third scan attempt, a warning message is generated in the log file and an alert is triggered.
 
 +----------------------------------------+----------------------------------------------+
 | Options                                | Allowed values                               |
@@ -194,7 +206,7 @@ Example of configuration
     <github>
         <enabled>yes</enabled>
         <interval>1m</interval>
-        <time_delay>1s</time_delay>
+        <time_delay>30s</time_delay>
         <curl_max_size>1M</curl_max_size>
         <only_future_events>yes</only_future_events>
         <api_auth>
@@ -214,7 +226,7 @@ Example of multiple organizations
     <github>
         <enabled>yes</enabled>
         <interval>1m</interval>
-        <time_delay>10s</time_delay>
+        <time_delay>1m</time_delay>
         <curl_max_size>1M</curl_max_size>
         <only_future_events>no</only_future_events>
         <api_auth>

@@ -1,4 +1,5 @@
-.. Copyright (C) 2022 Wazuh, Inc.
+.. Copyright (C) 2015, Wazuh, Inc.
+
 .. meta::
   :description: The ossec.conf file is the main configuration file on the Wazuh manager and it also plays an important role on the agents. Learn more about it and check out an example here.
 
@@ -65,7 +66,7 @@ Example:
 
 .. note::
 
-	This setting only applies in managers.
+	This setting is applied in the manager configuration, but it only takes effect on agents with versions lower than 3.12.
 
 .. _reference_ossec_syscheck_allow_remote_prefilter_cmd:
 
@@ -650,7 +651,7 @@ Example:
 
 
 file_limit
---------------
+----------
 
 Specifies a limit on the number of files that will be monitored by FIM. Files added when the database has reached the limit will be ignored.
 
@@ -688,8 +689,7 @@ Specifies the maximum number of files to be monitored.
 registry_limit
 --------------
 
-Specifies a limit on the number of registry entries that will be monitored by syscheck. Registry values created when the database has reached the limit will be ignored.
-This option only applies to Windows.
+Specifies a limit on the number of registry entries that will be monitored by FIM. Registry values created when the database has reached the limit will be ignored.
 
 .. code-block:: xml
 
@@ -699,6 +699,8 @@ This option only applies to Windows.
       <entries>100000</entries>
     </registry_limit>
 
+.. note::
+  This section only applies to Windows agents.
 
 **enabled**
 
@@ -713,7 +715,7 @@ Specifies whether there will be a limit on the number of monitored entries.
 
 **entries**
 
-Specifies the maximum number of files to be monitored.
+Specifies the maximum number of registry entries to be monitored.
 
 +--------------------+------------------------------------------+
 | **Default value**  | 100000                                   |
@@ -745,7 +747,7 @@ The database synchronization settings are configured inside this tag.
 
 **enabled**
 
-Specifies whether there will be periodic inventory synchronizations or not.
+Specifies whether there will be periodic inventory synchronizations.
 
 +--------------------+---------------------------------------+
 | **Default value**  | yes                                   |

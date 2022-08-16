@@ -1,12 +1,12 @@
-.. Copyright (C) 2022 Wazuh, Inc.
+.. Copyright (C) 2015, Wazuh, Inc.
 
 .. meta::
   :description: Wazuh 3.8.2 has been released. Check out our release notes to discover the changes and additions of this release.
 
 .. _release_3_8_2:
 
-3.8.2 Release notes
-===================
+3.8.2 Release notes - 31 January 2019
+=====================================
 
 This section shows the most relevant fixes in version 3.8.2. A complete list of changes is provided in the `change log <https://github.com/wazuh/wazuh/blob/v3.8.2/CHANGELOG.md>`_.
 

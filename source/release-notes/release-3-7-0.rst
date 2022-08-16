@@ -1,11 +1,11 @@
-.. Copyright (C) 2022 Wazuh, Inc.
+.. Copyright (C) 2015, Wazuh, Inc.
 
 .. meta::
   :description: Wazuh 3.7.0 has been released. Check out our release notes to discover the changes and additions of this release.
 .. _release_3_7_0:
 
-3.7.0 Release notes
-===================
+3.7.0 Release notes - 10 November 2018
+======================================
 
 This section shows the most relevant improvements and fixes in version 3.7.0. More details about these changes are provided in each component changelog:
 
@@ -154,7 +154,7 @@ The Wazuh app for Kibana includes new features and interface redesigns to make u
 
   - Get the current manager/agent configuration on the redesigned tabs.
   - Added support for multiple groups feature.
-  - The :ref:`Amazon AWS <amazon>` tab has been redesigned to include better visualizations and the module configuration.
+  - The :doc:`Amazon AWS </amazon/index>` tab has been redesigned to include better visualizations and the module configuration.
   - The new :ref:`Osquery <osquery>` extension shows scans results from this Wazuh module.
   - Added a new selector to check the cluster nodes’ status and logs on the *Management > Status/Logs* tabs.
   - Several bugfixes, performance improvements, and compatibility with the latest Elastic Stack version.

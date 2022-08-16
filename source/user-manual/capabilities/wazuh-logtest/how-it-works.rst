@@ -1,4 +1,4 @@
-.. Copyright (C) 2022 Wazuh, Inc.
+.. Copyright (C) 2015, Wazuh, Inc.
 .. meta::
   :description: The Wazuh-Logtest solution was designed to replace ossec-logtest. It allows to test and verify rules and decoders remotely. Learn how it works here. 
   
@@ -17,7 +17,7 @@ There are two use cases to evaluate rules through Wazuh-Logtest:
 
 .. note::
 
-  For more information about rules and decoders, see the :ref:`Wazuh Ruleset <ruleset>`
+  For more information about rules and decoders, see the :doc:`Wazuh Ruleset </user-manual/ruleset/index>`
 
 Use cases: Test log from Wazuh-Logtest Tool
 -------------------------------------------
@@ -306,7 +306,7 @@ Then the request is send to logtest
 As in :ref:`wazuh-logtest tool <wazuh-logtest>`, this indicates that rule 5710 level 5 matches, and an alert is generated.
 The messages field gives information that a session was initialized with the ``95375d4c`` token.
 This token should be added to the next requests to keep the session, including its event history, rules and
-docoders loaded. If the token field is not added to the next request, a new session will be initialized,
+decoders loaded. If the token field is not added to the next request, a new session will be initialized,
 reloading the rules and decoders.
 
 
