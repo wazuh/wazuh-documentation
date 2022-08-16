@@ -22,5 +22,5 @@ To perform the upgrade locally, select your operating system and follow the inst
     macOS <macos>
     Solaris <solaris>
     AIX <aix>
-    HP-UX <hpux>
+    HP-UX <hp-ux>
 
