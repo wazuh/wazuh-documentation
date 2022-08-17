@@ -21,7 +21,7 @@ PCI DSS 11.5 requires that network intrusions and unexpected file changes are de
 
 Using the steps below, we configure the active response module to execute an IP block when an attempt to log in with a non-existent user via SSH occurs.
 
-#. Configure the active response to execute the firewall-drop command when the rule for attempts to log in to a non-existent user is triggered (rule 5710) by adding the following block in the manager configuration file (``/var/ossec/etc/ossec.conf``):
+#. Configure the active response to execute the ``firewall-drop`` command when the rule for attempts to log in to a non-existent user is triggered (rule 5710) by adding the following block in the manager configuration file (``/var/ossec/etc/ossec.conf``):
 
 	.. code-block:: xml 
 
