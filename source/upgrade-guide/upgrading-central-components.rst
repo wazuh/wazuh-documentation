@@ -226,4 +226,4 @@ Next steps
 
 The Wazuh server, indexer, and dashboard are now successfully upgraded. The next step consists in upgrading the Wazuh agents. Follow the instructions in:
 
--  :doc:`Upgrading the Wazuh agent <upgrading-agent>`.
+-  :doc:`Upgrading the Wazuh agent </upgrade-guide/wazuh-agent/index>`.
