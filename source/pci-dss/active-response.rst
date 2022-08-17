@@ -26,10 +26,10 @@ Using the steps below, we configure the active response module to execute an IP 
 	.. code-block:: xml 
 
 		<active-response>
-			<command>firewall-drop</command>
-			<location>local</location>
-			<rules_id>5710</rules_id>
-			<timeout>100</timeout>
+         <command>firewall-drop</command>
+         <location>local</location>
+         <rules_id>5710</rules_id>
+         <timeout>100</timeout>
 		</active-response>
 
    .. note::      
@@ -41,7 +41,7 @@ Using the steps below, we configure the active response module to execute an IP 
 
       systemctl restart wazuh-manager
 
-When we attempt to SSH with a non-existent user, rule 5710 generates an alert followed by the active response getting triggered.
+   When we attempt to SSH with a non-existent user, rule 5710 generates an alert followed by the active response getting triggered.
 
 	.. thumbnail:: ../images/pci/rule-5710 generates-an-alert-01.png
 		:title: Rule 5710 generates an alert
