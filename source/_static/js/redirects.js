@@ -227,7 +227,7 @@ newUrls['4.3'] = [
   '/upgrade-guide/wazuh-agent/macos.html',
   '/upgrade-guide/wazuh-agent/solaris.html',
   '/upgrade-guide/wazuh-agent/aix.html',
-  '/upgrade-guide/wazuh-agent/hpux.html',
+  '/upgrade-guide/wazuh-agent/hp-ux.html',
   '/upgrade-guide/wazuh-agent/index.html',
 ];
 
