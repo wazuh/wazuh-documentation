@@ -167,7 +167,7 @@ To perform the upgrade locally, select your operating system and follow the inst
       </a>
     </div>
     <div class="link-boxes-item">
-      <a class="link-boxes-link" href="./wazuh-agent/hpux.html">
+      <a class="link-boxes-link" href="./wazuh-agent/hp-ux.html">
         <p class="link-boxes-label">HP-UX</p>
 
 .. image:: /images/installation/hpux.png
