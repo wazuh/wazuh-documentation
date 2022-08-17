@@ -50,7 +50,7 @@ The following are some Wazuh rules that help achieve this requirement:
 - PCI DSS requirement 10.5.1 requires that audit log history is retained for at least 12 months, with at least the most recent three months immediately available for analysis. This can be achieved by enabling Wazuh log archives and configuring `index management policies <https://wazuh.com/blog/wazuh-index-management/>`_. To enable Wazuh log archives, the following steps are taken:
 
 
-**Enable archives monitoring in OpenSearch**:
+**Enable archives monitoring in the Wazuh indexer**:
 
 #. Set ``<logall_json>yes</logall_json>`` in ``/var/ossec/etc/ossec.conf``
 #. Set archives: enabled to true in ``/etc/filebeat/filebeat.yml``:
@@ -60,26 +60,19 @@ The following are some Wazuh rules that help achieve this requirement:
        archives:
        enabled: true
 
+
+#. Restart filebeat: 
+
+    .. code-block:: console 
+      
+       systemctl restart filebeat
+
+
 #. Restart the Wazuh manager: 
 
     .. code-block:: console 
       
        systemctl restart wazuh-manager
-
-
-#. Go to the Wazuh dashboard URL in a browser, open the menu and select **Index Management** under **OpenSearch Plugins**.
-
-	.. thumbnail:: ../images/pci/select-index-management.png
-		:title: Select Index Management
-		:align: center
-		:width: 100%
-
-#. Under **Index Management**, select indices and verify that ``wazuh-archives-x.x-xxxx.xx.xx`` is present.
-
-	.. thumbnail:: ../images/pci/select-indices.png
-		:title: Select indices
-		:align: center
-		:width: 100%
 
 #. Go to open the dashboard menu and select **Stack Management** under **Management**.
 
@@ -94,7 +87,19 @@ The following are some Wazuh rules that help achieve this requirement:
 		:title: Select Create index pattern
 		:align: center
 		:width: 100%
-    
+
+	.. thumbnail:: ../images/pci/define-an-index-pattern.png
+		:title: Select Create index pattern
+		:align: center
+		:width: 100%
+        
+#. Select **timestamp** as the primary time field for use with the global time filter then proceed to create the index pattern.
+
+	.. thumbnail:: ../images/pci/configure-settings.png
+		:title: Select Create index pattern
+		:align: center
+		:width: 100%
+
 #. Open the menu and select **Discover** under **OpenSearch Dashboards**. Events should be getting reported there.
 
 	.. thumbnail:: ../images/pci/select-discover-1.png
