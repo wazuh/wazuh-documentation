@@ -8,7 +8,13 @@
 Checking connection with the Wazuh manager
 ==========================================
 
-Locally, you can check the :doc:`wazuh-agentd.state </user-manual/reference/statistics-files/wazuh-agentd-state>` file. The Wazuh agent keeps reporting its status in this file. To check the current status and verify the agent is connected to the manager, run the following command on the endpoint.
+Locally, you can check the :doc:`wazuh-agentd.state </user-manual/reference/statistics-files/wazuh-agentd-state>` file to know about the status as reported by the agent. The Wazuh agent keeps reporting its status in this file as follows.
+
+-  ``pending``: Waiting for a connection acknowledgment from the Wazuh manager.
+-  ``disconnected``: The connection is lost or there was no acknowledgement signal received for 60 seconds.
+-  ``connected``: The connection acknowledgement was received.
+
+To check the current status and verify the agent is connected to the manager, run the following command on the endpoint.
 
 .. tabs::
 
@@ -37,6 +43,8 @@ Remotely, from the Wazuh server, you can check the status of any agent using the
    :class: output
 
       Status:     Active
+
+An ``Active`` status means the Wazuh manager received the `keepalive` signal from the agent. A ``Disconnected`` status means this signal was not received in the last 10 minutes.
 
 In addition, you can check the status of an agent requesting to the Wazuh API the `statistical information of an agent <https://documentation.wazuh.com/current/user-manual/api/reference.html#operation/api.controllers.agent_controller.get_component_stats>`_.
 
