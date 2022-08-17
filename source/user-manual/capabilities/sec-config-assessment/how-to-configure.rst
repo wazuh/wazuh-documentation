@@ -49,6 +49,8 @@ the `ossec.conf` by adding a line such as the following:
 
 to the **policies section** of the **SCA** module.
 
+.. _share_policy_files_and_configuration_with_the_Wazuh_agents:
+
 How to share policy files and configuration with the Wazuh agents
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
