@@ -8,7 +8,7 @@
 Checking connection with the Wazuh manager
 ==========================================
 
-Locally, you can check the :doc:`wazuh-agentd.state </user-manual/reference/statistics-files/wazuh-agentd-state>` file. The Wazuh agent keeps its status reported in this file. To check the current status and verify the agent is connected to the manager, run the following command on the endpoint.
+Locally, you can check the :doc:`wazuh-agentd.state </user-manual/reference/statistics-files/wazuh-agentd-state>` file. The Wazuh agent keeps reporting its status in this file. To check the current status and verify the agent is connected to the manager, run the following command on the endpoint.
 
 .. tabs::
 
@@ -23,11 +23,15 @@ Locally, you can check the :doc:`wazuh-agentd.state </user-manual/reference/stat
 
    status='connected'
 
-Remotely, from the Wazuh server, you can check the status of any agent using the ``agent_control`` utility. To get the status of an agent, run the following command replacing the parameter for ``-i`` with your agent ID.
+Remotely, from the Wazuh server, you can check the status of any agent using the :doc:`agent_control <../reference/tools/agent-control>` utility. To get the status of an agent, run the following command replacing the ``-i`` parameter with your agent ID.
 
-.. code-block:: console
+.. tabs::
 
-  # /var/ossec/bin/agent_control -i <YOUR_AGENT_ID> | grep ^\s+Status
+   .. group-tab:: Linux
+
+      .. code-block:: console
+
+         # /var/ossec/bin/agent_control -i <YOUR_AGENT_ID> | grep ^\s+Status
 
 .. code-block:: console
    :class: output
@@ -64,45 +68,20 @@ In addition, you can check the status of an agent requesting to the Wazuh API th
      "error": 0
    }
 
-Before you check the agent's connection with the manager, first ensure the agent is pointing to the manager IP address. This is set in ``ossec.conf`` using the ``<client>`` XML tag. For more on this, see :ref:`Client reference <reference_ossec_client>`.
+Agent communication with the manager requires outbound connectivity from agent to manager. It uses the port ``1514/TCP`` by default.
 
-.. code-block:: xml
+If the agent is not connected it may mean it was not enrolled succesfully. Check the :doc:`/user-manual/agent-enrollment/index` for details. You can also check to see if an agent is connected correctly by verifying if the TCP connection to the manager is established. The result should match the agent and manager IP addresses.
 
-  <ossec_config>
-    <client>
-      <server>
-        <address>10.0.0.10</address>
-        <protocol>tcp</protocol>
-      </server>
-    </client>
-  </ossec_config>
+.. tabs::
 
-This will set 10.0.0.10 as the Wazuh server. Once this is done, you will need to restart the Agent:
+   .. group-tab:: Linux
 
-  a. For Systemd:
+      .. code-block:: console
 
-    .. code-block:: console
+         # netstat -vatunp|grep wazuh-agentd
 
-      # systemctl restart wazuh-agent
-
-  b. For SysV Init:
-
-    .. code-block:: console
-
-      # service wazuh-agent restart
-
-After you register the agent and it has successfully connected, you can see a list of agents that are connected to the manager with:
 
 .. code-block:: console
+   :class: output
 
-  # /var/ossec/bin/agent_control -lc
-
-You can also check to see if an agent is connected correctly by verifying if the TCP connection to the manager is established:
-
-.. code-block:: console
-
-  # netstat -vatunp|grep wazuh-agentd
-
-The result should match the agent and manager IP addresses.
-
-In the :doc:`agent_control section <../reference/tools/agent-control>`, you can find information about the status of the agents that are registered with the manager.
+   tcp        0      0 172.16.1.211:48364      172.16.1.11:1514        ESTABLISHED 796/wazuh-agentd
