@@ -8,6 +8,8 @@ Upgrade guide
 
 This guide includes instructions to upgrade the :doc:`Wazuh components </getting-started/components/index>` as well as the Wazuh integrations with Open Distro for Elasticsearch and Elastic Stack basic license. 
 
+Check the :doc:`compatibility-matrix/index` section to learn about the compatibility requirements between components.
+
 Upgrade the Wazuh central components
 ------------------------------------
 
@@ -178,11 +180,6 @@ To perform the upgrade locally, select your operating system and follow the inst
       </a>
     </div>
   </div>
-
-
-
-
-Check the :doc:`compatibility-matrix/index` section to learn about the compatibility requirements between components.
 
 For upgrades from Wazuh 1.x and 2.x, check the :doc:`legacy/index` guide.
 
