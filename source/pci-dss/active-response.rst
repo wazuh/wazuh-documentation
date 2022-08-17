@@ -19,28 +19,27 @@ Use cases
 
 PCI DSS 11.5 requires that network intrusions and unexpected file changes are detected and responded to. These intrusions can be responded to by configuring scripts to execute when certain actions occur. Wazuh comes with some preconfigured active response scripts. These scripts can be found :ref:`here <active_response_scripts>`.
 
-In the example below, we configure the active response module to execute an IP block when an attempt to log in with a non-existent user via SSH occurs.
+Using the steps below, we configure the active response module to execute an IP block when an attempt to log in with a non-existent user via SSH occurs.
 
-First, we configure the active response executable to be run (in this case it is firewall-drop) by adding the following block in the agent configuration file (ossec.conf):
+#. Configure the active response to execute the firewall-drop command when the rule for attempts to log in to a non-existent user is triggered (rule 5710) by adding the following block in the manager configuration file (``/var/ossec/etc/ossec.conf``):
 
-   .. code-block:: xml
+	.. code-block:: xml 
 
-      <command>
-         <name>firewall-drop</name>
-         <executable>firewall-drop</executable>
-         <timeout_allowed>yes</timeout_allowed>
-      </command>
+		<active-response>
+			<command>firewall-drop</command>
+			<location>local</location>
+			<rules_id>5710</rules_id>
+			<timeout>100</timeout>
+		</active-response>
 
-The active response is subsequently configured to execute the firewall drop command when the rule for attempts to log in to a non-existent user is triggered (rule 5710):
+   .. note::      
+      The ``firewall-drop`` command is included in the manager configuration file by default.
 
-   .. code-block:: xml
+#. Restart the Wazuh manager to apply the configuration:
 
-      <active-response>
-         <command>firewall-drop</command>
-         <location>local</location>
-         <rules_id>5710</rules_id>
-         <timeout>100</timeout>
-      </active-response>
+   .. code-block:: console 
+
+      systemctl restart wazuh-manager
 
 When we attempt to SSH with a non-existent user, rule 5710 generates an alert followed by the active response getting triggered.
 
