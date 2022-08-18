@@ -1,0 +1,3 @@
+# pagefind.yml
+source: build/html
+bundle_dir: _pagefind

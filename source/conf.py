@@ -822,6 +822,16 @@ def finish_and_clean(app, exception):
     ''' Performs the final tasks after the compilation '''
     # Create additional files such as the `.doclist` and the sitemap
     creating_file_list(app, exception)
+    
+    
+    import subprocess
+    try:
+        subprocess.run(["npx", "pagefind"])
+    except Exception as e:
+        print (e)
+        print ()
+        print ("The search using Pagefind won't be included")
+        
 
     if html_theme == 'wazuh_doc_theme':
         # Remove extra minified files

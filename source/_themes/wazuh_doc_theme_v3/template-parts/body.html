@@ -29,7 +29,7 @@
         {% endif %}
         
         {# Main content #}
-        <main role="main">
+        <main role="main" data-pagefind-body>
         {{ body }}
         {% if pagename not in special_pages or theme_breadcrumb_root_title == 'Training' and pagename == 'index' %}
         {% include "template-parts/navigation.html" %}
