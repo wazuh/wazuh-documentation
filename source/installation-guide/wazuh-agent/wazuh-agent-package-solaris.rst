@@ -5,7 +5,6 @@
 
 .. _wazuh_agent_solaris:
 
-
 Installing Wazuh agents on Solaris systems
 ==========================================
 
@@ -58,7 +57,7 @@ To start the installation process, select your architecture: i386 or Sparc. Alte
         
 
         
-The installation process is now complete and the Wazuh agent is successfully installed on your Solaris system. The next step is to register and configure the agent to communicate with the Wazuh manager. To perform this action, see the :ref:`Wazuh agent enrollment <agent_enrollment>` section.
+The installation process is now complete and the Wazuh agent is successfully installed on your Solaris system. The next step is to register and configure the agent to communicate with the Wazuh manager. To perform this action, see the :doc:`Wazuh agent enrollment </user-manual/agent-enrollment/index>` section.
 
 
 

@@ -1,6 +1,7 @@
 .. Copyright (C) 2015, Wazuh, Inc.
 
-.. meta:: :description: Learn how to install Wazuh dashboard, a flexible and intuitive web interface for mining and visualizing the events and archives. 
+.. meta::
+   :description: Learn how to install Wazuh dashboard, a flexible and intuitive web interface for mining and visualizing the events and archives. 
 
 .. _wazuh_dashboard_step_by_step:
 

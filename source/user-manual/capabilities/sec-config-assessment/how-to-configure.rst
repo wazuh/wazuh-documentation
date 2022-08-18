@@ -4,15 +4,11 @@ How to configure SCA
 .. meta::
     :description: Check out this section of our documentation to learn more about how to configure Security Configuration Assessment in Wazuh.
 
-.. contents:: Table of Contents
-   :depth: 10
-
 Upon installation, agents will include the appropriate policies for their particular Operating System.
 For the full list of **Officially supported policy files** see table :ref:`available_sca_policies`.
 These policies are included with the Wazuh Manager installation so that they can be easily enabled.
 
-For a detailed description of the various configuration parameters of SCA, please check the
-:ref:`reference_sec_config_assessment`.
+For a detailed description of the various configuration parameters of SCA, please check the :ref:`SCA reference <reference_sec_config_assessment>`.
 
 Enabling and disabling policies
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
@@ -91,11 +87,15 @@ The ``<sca>`` block will be merged with the ``<sca>`` block on the Wazuh agent s
     +=============================+============================================================+===============================+
     | cis_win2012r2               |  CIS Benchmark for Windows 2012 R2                         | Windows Server 2012 R2        |
     +-----------------------------+------------------------------------------------------------+-------------------------------+
-    | cis_win10_enterprise        |  CIS Benchmark for Windows 10 Enterprise (Release 1803)    | Windows 10                    |
+    | cis_win10_enterprise        |  CIS Benchmark for Windows 10 Enterprise                   | Windows 10                    |
     +-----------------------------+------------------------------------------------------------+-------------------------------+
+    | cis_win11_enterprise        |  CIS Benchmark for Windows 11 Enterprise                   | Windows 11                    |
+    +-----------------------------+------------------------------------------------------------+-------------------------------+    
     | cis_win2016                 |  CIS Benchmark for Windows Server 2016                     | Windows Server 2016           |
     +-----------------------------+------------------------------------------------------------+-------------------------------+
     | cis_win2019                 |  CIS Benchmark for Windows Server 2019 RTM                 | Windows Server 2019           |
+    +-----------------------------+------------------------------------------------------------+-------------------------------+
+    | cis_win2022                 |  CIS Benchmark for Windows Server 2022                     | Windows Server 2022           |
     +-----------------------------+------------------------------------------------------------+-------------------------------+
     | sca_win_audit               |  Benchmark for Windows auditing                            | Windows                       |
     +-----------------------------+------------------------------------------------------------+-------------------------------+
@@ -113,6 +113,8 @@ The ``<sca>`` block will be merged with the ``<sca>`` block on the Wazuh agent s
     +-----------------------------+------------------------------------------------------------+-------------------------------+
     | cis_rhel8_linux             |  CIS Benchmark for Red Hat Enterprise Linux 8              | Red Hat Enterprise Linux 8    |
     +-----------------------------+------------------------------------------------------------+-------------------------------+
+    | cis_rhel9_linux             |  CIS Benchmark for Red Hat Enterprise Linux 9              | Red Hat Enterprise Linux 9    |
+    +-----------------------------+------------------------------------------------------------+-------------------------------+    
     | cis_debian7                 |  CIS Benchmark for Debian/Linux 7                          | Debian 7                      |
     +-----------------------------+------------------------------------------------------------+-------------------------------+
     | cis_debian8                 |  CIS Benchmark for Debian/Linux 8                          | Debian 8                      |
@@ -169,15 +171,15 @@ The ``<sca>`` block will be merged with the ``<sca>`` block on the Wazuh agent s
     +-----------------------------+------------------------------------------------------------+-------------------------------+
     | cis_mysql5-6_enterprise     |  CIS Benchmark for Oracle MySQL Enterprise 5.6             | MySQL configuration files     |
     +-----------------------------+------------------------------------------------------------+-------------------------------+
-    | cis_sqlserver2012           |  CIS Microsoft SQL Server 2012                             | Microsoft SQL Server 2012     |
+    | cis_sqlserver_2012          |  CIS Microsoft SQL Server 2012                             | Microsoft SQL Server 2012     |
     +-----------------------------+------------------------------------------------------------+-------------------------------+
-    | cis_sqlserver2014           |  CIS Microsoft SQL Server 2014                             | Microsoft SQL Server 2014     |
+    | cis_sqlserver_2014          |  CIS Microsoft SQL Server 2014                             | Microsoft SQL Server 2014     |
     +-----------------------------+------------------------------------------------------------+-------------------------------+
     | cis_sqlserver_2016          |  CIS Microsoft SQL Server 2016                             | Microsoft SQL Server 2016     |
     +-----------------------------+------------------------------------------------------------+-------------------------------+
-    | cis_sqlserver2017           |  CIS Microsoft SQL Server 2017                             | Microsoft SQL Server 2017     |
+    | cis_sqlserver_2017          |  CIS Microsoft SQL Server 2017                             | Microsoft SQL Server 2017     |
     +-----------------------------+------------------------------------------------------------+-------------------------------+
-    | cis_sqlserver2019           |  CIS Microsoft SQL Server 2019                             | Microsoft SQL Server 2019     |
+    | cis_sqlserver_2019          |  CIS Microsoft SQL Server 2019                             | Microsoft SQL Server 2019     |
     +-----------------------------+------------------------------------------------------------+-------------------------------+
     | cis_iis_10                  |  CIS Checks for Microsoft IIS 10                           | Microsoft IIS 10              |
     +-----------------------------+------------------------------------------------------------+-------------------------------+
