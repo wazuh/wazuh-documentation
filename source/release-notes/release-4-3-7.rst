@@ -28,7 +28,7 @@ Wazuh agent
 RESTful API
 ^^^^^^^^^^^
 
-- `#14551 <https://github.com/wazuh/wazuh/pull/14551>`_ The endpoint GET /cluster/ruleset/synchronization to check ruleset synchronization status in a cluster is added.
+- `#14551 <https://github.com/wazuh/wazuh/pull/14551>`_ The endpoint ``GET /cluster/ruleset/synchronization`` to check ruleset synchronization status in a cluster is added.
 
 Ruleset
 ^^^^^^^
@@ -41,17 +41,17 @@ Ruleset
 Wazuh dashboard
 ^^^^^^^^^^^^^^^
 
-- `#4350 <https://github.com/wazuh/wazuh-kibana-app/pull/4350>`_ The use of ``manager_host`` field related to agent information of Wazuh API responses, which is obsolete is removed.
+- `#4350 <https://github.com/wazuh/wazuh-kibana-app/pull/4350>`_ The use of ``manager_host`` field related to agent information of Wazuh API responses, which is obsolete, is removed.
 
 Wazuh Kibana plugin for Kibana 7.10.2
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-- `#4350 <https://github.com/wazuh/wazuh-kibana-app/pull/4350>`_ The use of ``manager_host`` field related to agent information of Wazuh API responses, which is obsolete is removed.
+- `#4350 <https://github.com/wazuh/wazuh-kibana-app/pull/4350>`_ The use of ``manager_host`` field related to agent information of Wazuh API responses, which is obsolete, is removed.
 
 Wazuh Kibana plugin for Kibana 7.16.x and 7.17.x
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-- `#4350 <https://github.com/wazuh/wazuh-kibana-app/pull/4350>`_ The use of ``manager_host`` field related to agent information of Wazuh API responses, which is obsolete is removed.
+- `#4350 <https://github.com/wazuh/wazuh-kibana-app/pull/4350>`_ The use of ``manager_host`` field related to agent information of Wazuh API responses, which is obsolete, is removed.
 
 Wazuh Splunk app
 ^^^^^^^^^^^^^^^^
@@ -64,11 +64,9 @@ Packages
 
 -  `#1737 <https://github.com/wazuh/wazuh-packages/pull/1737>`_ Passwords-tool tests are added.
 -  `#1742 <https://github.com/wazuh/wazuh-packages/pull/1742>`_ Check port status to installation assistant is added.
--  `#1754 <https://github.com/wazuh/wazuh-packages/pull/1754>`_ wazuh-install.sh skip checking OS when downloading is added.
--  `#1731 <https://github.com/wazuh/wazuh-packages/pull/1731>`_ IP error in the distributed configuration when installing every component in the same host is fixed.
+-  `#1754 <https://github.com/wazuh/wazuh-packages/pull/1754>`_ ``wazuh-install.sh`` skip checking OS when downloading is added.
 -  `#1629 <https://github.com/wazuh/wazuh-packages/pull/1629>`_ ``tmp`` directory parameter is added.
 -  `#1685 <https://github.com/wazuh/wazuh-packages/pull/1685>`_ RHEL 9 SCA is added.
--  `#1619 <https://github.com/wazuh/wazuh-packages/pull/1619>`_ All warnings on the Wazuh installation assistant when running shellcheck manually are fixed.
 -  `#1734 <https://github.com/wazuh/wazuh-packages/pull/1734>`_ Zypper references are removed.
 -  `#1753 <https://github.com/wazuh/wazuh-packages/pull/1753>`_ Lower versions than TLSv1.2 are disabled.
 -  `#1641 <https://github.com/wazuh/wazuh-packages/pull/1641>`_ Avoid using revision variable in Wazuh installation assistant.
@@ -87,10 +85,10 @@ Wazuh manager
 ==============================================================    =============
 Reference                                                         Description
 ==============================================================    =============
-`#13956 <https://github.com/wazuh/wazuh/pull/13956>`_             A bug in Analysisd that may make it crash when decoding regexes with more than 14 or-ed subpatterns is fixed.
+`#13956 <https://github.com/wazuh/wazuh/pull/13956>`_             A bug in Analysisd that may make it crash when decoding regexes with more than 14 subpatterns is fixed.
 `#14366 <https://github.com/wazuh/wazuh/pull/14366>`_             A crash hazard in Vulnerability Detector when parsing OVAL feeds is fixed.
-`#14436 <https://github.com/wazuh/wazuh/pull/14436>`_             A busy-looping in wazuh-maild when monitoring ``alerts.json`` is fixed.
-`#14417 <https://github.com/wazuh/wazuh/pull/14417>`_             A segmentation fault in wazuh-maild when parsing alerts exceeding the nesting limit is fixed.
+`#14436 <https://github.com/wazuh/wazuh/pull/14436>`_             A busy-looping in ``wazuh-maild`` when monitoring ``alerts.json`` is fixed.
+`#14417 <https://github.com/wazuh/wazuh/pull/14417>`_             A segmentation fault in ``wazuh-maild`` when parsing alerts exceeding the nesting limit is fixed.
 ==============================================================    =============
 
 Wazuh agent
@@ -119,8 +117,8 @@ Ruleset
 Reference                                                         Description
 ==============================================================    =============
 `#14235 <https://github.com/wazuh/wazuh/pull/14235>`_             A rule regular expression bug on Ubuntu 20.04 Linux SCA policy control ID 19137 is fixed.
-`#14258 <https://github.com/wazuh/wazuh/pull/14258>`_             A bug when wazuh-agent tries to run an AWS Amazon Linux SCA policy is fixed.
-`#13949 <https://github.com/wazuh/wazuh/pull/13949>`_             A limit journalctl to kernel events and only since boot in AWS Amazon Linux 2 SCA policy is fixed.
+`#14258 <https://github.com/wazuh/wazuh/pull/14258>`_             A bug when a Wazuh agent tries to run an AWS Amazon Linux SCA policy is fixed.
+`#13949 <https://github.com/wazuh/wazuh/pull/13949>`_             Amazon Linux 2 SCA policy is modified to resolve rules and conditions on control.
 `#14481 <https://github.com/wazuh/wazuh/pull/14481>`_             Missing SCA files during Wazuh-manager installation are added.
 ==============================================================    =============
 
@@ -130,15 +128,15 @@ Wazuh dashboard
 ==============================================================    =============
 Reference                                                         Description
 ==============================================================    =============
-`#4378 <https://github.com/wazuh/wazuh-kibana-app/pull/4378>`_    Review: ``Wazuh.yml`` file link to web documentation, improved in-file documentation, and fixed some grammatical errors.
-`#4399 <https://github.com/wazuh/wazuh-kibana-app/pull/4399>`_    Review: ``Wazuh.yml`` file link to web documentation, improved in-file documentation, and fixed some grammatical errors.
-`#4350 <https://github.com/wazuh/wazuh-kibana-app/pull/4350>`_    An error during the generation of a group's report, if the request to the Wazuh API fails is fixed.
-`#4350 <https://github.com/wazuh/wazuh-kibana-app/pull/4350>`_    A problem with the group's report, when the group has no agents is fixed.
+`#4378 <https://github.com/wazuh/wazuh-kibana-app/pull/4378>`_    The file ``Wazuh.yml`` link in the web documentation, the in-file documentation, and some grammatical errors are fixed.
+`#4399 <https://github.com/wazuh/wazuh-kibana-app/pull/4399>`_    The file ``Wazuh.yml`` link in the web documentation, the in-file documentation, and some grammatical errors are fixed.
+`#4350 <https://github.com/wazuh/wazuh-kibana-app/pull/4350>`_    An error during the generation of a group's report, if the request to the Wazuh API fails, is fixed.
+`#4350 <https://github.com/wazuh/wazuh-kibana-app/pull/4350>`_    A problem with the group's report, when the group has no agents, is fixed.
 `#4352 <https://github.com/wazuh/wazuh-kibana-app/pull/4352>`_    A path in the logo customization section is fixed.
 `#4362 <https://github.com/wazuh/wazuh-kibana-app/pull/4362>`_    A TypeError in a resource that fails in Chrome and Firefox browsers is fixed.
 `#4358 <https://github.com/wazuh/wazuh-kibana-app/pull/4358>`_    An error of an undefined username hash related to reporting when using Kibana with X-Pack and security was disabled is fixed.
 `#4359 <https://github.com/wazuh/wazuh-kibana-app/pull/4359>`_    The persistence of the plugin registry file between updates is fixed.
-`#4367 <https://github.com/wazuh/wazuh-kibana-app/pull/4367>`_    A searchbar error on the SCA Inventory table is fixed.
+`#4367 <https://github.com/wazuh/wazuh-kibana-app/pull/4367>`_    A search bar error on the SCA Inventory table is fixed.
 `#4373 <https://github.com/wazuh/wazuh-kibana-app/pull/4373>`_    A routing loop when reinstalling the Wazuh indexer is fixed.
 `#4365 <https://github.com/wazuh/wazuh-kibana-app/pull/4365>`_    Wazuh restart UI is fixed.
 ==============================================================    =============
@@ -149,15 +147,15 @@ Wazuh Kibana plugin for Kibana 7.10.2
 ==============================================================    =============
 Reference                                                         Description
 ==============================================================    =============
-`#4378 <https://github.com/wazuh/wazuh-kibana-app/pull/4378>`_    Review: ``Wazuh.yml`` file link to web documentation, improved in-file documentation, and fixed some grammatical errors.
-`#4399 <https://github.com/wazuh/wazuh-kibana-app/pull/4399>`_    Review: ``Wazuh.yml`` file link to web documentation, improved in-file documentation, and fixed some grammatical errors.
-`#4350 <https://github.com/wazuh/wazuh-kibana-app/pull/4350>`_    An error during the generation of a group's report, if the request to the Wazuh API fails is fixed.
-`#4350 <https://github.com/wazuh/wazuh-kibana-app/pull/4350>`_    A problem with the group's report, when the group has no agents is fixed.
+`#4378 <https://github.com/wazuh/wazuh-kibana-app/pull/4378>`_    The file ``Wazuh.yml`` link in the web documentation, the in-file documentation, and some grammatical errors are fixed.
+`#4399 <https://github.com/wazuh/wazuh-kibana-app/pull/4399>`_    The file ``Wazuh.yml`` link in the web documentation, the in-file documentation, and some grammatical errors are fixed.
+`#4350 <https://github.com/wazuh/wazuh-kibana-app/pull/4350>`_    An error during the generation of a group's report, if the request to the Wazuh API fails, is fixed.
+`#4350 <https://github.com/wazuh/wazuh-kibana-app/pull/4350>`_    A problem with the group's report, when the group has no agents, is fixed.
 `#4352 <https://github.com/wazuh/wazuh-kibana-app/pull/4352>`_    A path in the logo customization section is fixed.
 `#4362 <https://github.com/wazuh/wazuh-kibana-app/pull/4362>`_    A TypeError in a resource that fails in Chrome and Firefox browsers is fixed.
 `#4358 <https://github.com/wazuh/wazuh-kibana-app/pull/4358>`_    An error of an undefined username hash related to reporting when using Kibana with X-Pack and security was disabled is fixed.
 `#4359 <https://github.com/wazuh/wazuh-kibana-app/pull/4359>`_    The persistence of the plugin registry file between updates is fixed.
-`#4367 <https://github.com/wazuh/wazuh-kibana-app/pull/4367>`_    A searchbar error on the SCA Inventory table is fixed.
+`#4367 <https://github.com/wazuh/wazuh-kibana-app/pull/4367>`_    A search bar error on the SCA Inventory table is fixed.
 `#4373 <https://github.com/wazuh/wazuh-kibana-app/pull/4373>`_    A routing loop when reinstalling the Wazuh indexer is fixed.
 `#4365 <https://github.com/wazuh/wazuh-kibana-app/pull/4365>`_    Wazuh restart UI is fixed.
 ==============================================================    =============
@@ -168,15 +166,15 @@ Wazuh Kibana plugin for Kibana 7.16.x and 7.17.x
 ==============================================================    =============
 Reference                                                         Description
 ==============================================================    =============
-`#4378 <https://github.com/wazuh/wazuh-kibana-app/pull/4378>`_    Review: ``Wazuh.yml`` file link to web documentation, improved in-file documentation, and fixed some grammatical errors.
-`#4399 <https://github.com/wazuh/wazuh-kibana-app/pull/4399>`_    Review: ``Wazuh.yml`` file link to web documentation, improved in-file documentation, and fixed some grammatical errors.
-`#4350 <https://github.com/wazuh/wazuh-kibana-app/pull/4350>`_    An error during the generation of a group's report, if the request to the Wazuh API fails is fixed.
-`#4350 <https://github.com/wazuh/wazuh-kibana-app/pull/4350>`_    A problem with the group's report, when the group has no agents is fixed.
+`#4378 <https://github.com/wazuh/wazuh-kibana-app/pull/4378>`_    The file ``Wazuh.yml`` link in the web documentation, the in-file documentation, and some grammatical errors are fixed.
+`#4399 <https://github.com/wazuh/wazuh-kibana-app/pull/4399>`_    The file ``Wazuh.yml`` link in the web documentation, the in-file documentation, and some grammatical errors are fixed.
+`#4350 <https://github.com/wazuh/wazuh-kibana-app/pull/4350>`_    An error during the generation of a group's report, if the request to the Wazuh API fails, is fixed.
+`#4350 <https://github.com/wazuh/wazuh-kibana-app/pull/4350>`_    A problem with the group's report, when the group has no agents, is fixed.
 `#4352 <https://github.com/wazuh/wazuh-kibana-app/pull/4352>`_    A path in the logo customization section is fixed.
 `#4362 <https://github.com/wazuh/wazuh-kibana-app/pull/4362>`_    A TypeError in a resource that fails in Chrome and Firefox browsers is fixed.
 `#4358 <https://github.com/wazuh/wazuh-kibana-app/pull/4358>`_    An error of an undefined username hash related to reporting when using Kibana with X-Pack and security was disabled is fixed.
 `#4359 <https://github.com/wazuh/wazuh-kibana-app/pull/4359>`_    The persistence of the plugin registry file between updates is fixed.
-`#4367 <https://github.com/wazuh/wazuh-kibana-app/pull/4367>`_    A searchbar error on the SCA Inventory table is fixed.
+`#4367 <https://github.com/wazuh/wazuh-kibana-app/pull/4367>`_    A search bar error on the SCA Inventory table is fixed.
 `#4373 <https://github.com/wazuh/wazuh-kibana-app/pull/4373>`_    A routing loop when reinstalling the Wazuh indexer is fixed.
 `#4365 <https://github.com/wazuh/wazuh-kibana-app/pull/4365>`_    Wazuh restart UI is fixed.
 ==============================================================    =============
@@ -187,7 +185,7 @@ Wazuh Splunk app
 ==============================================================    =============
 Reference                                                         Description
 ==============================================================    =============
-`#1359 <https://github.com/wazuh/wazuh-splunk/pull/1359>`_        The API console suggestions were not working in 4.3.6 and are fixed now.
+`#1359 <https://github.com/wazuh/wazuh-splunk/pull/1359>`_        The API console suggestions were not working in version 4.3.6 and are now fixed.
 ==============================================================    =============
 
 Packages
@@ -195,9 +193,11 @@ Packages
 ==============================================================    =============
 Reference                                                         Description
 ==============================================================    =============
-`#1762 <https://github.com/wazuh/wazuh-packages/pull/1762>`__     The GPG key when uninstalling with the Wazuh assistant is removed.
+`#1762 <https://github.com/wazuh/wazuh-packages/pull/1762>`__     Remove the GPG key when uninstalling with the Wazuh assistant is now fixed.
 `#1765 <https://github.com/wazuh/wazuh-packages/pull/1765>`__     Some errors in filebeat installation are fixed.
 `#1766 <https://github.com/wazuh/wazuh-packages/pull/1766>`__     An indentation issue in ``config.yml`` is fixed.
+`#1731 <https://github.com/wazuh/wazuh-packages/pull/1731>`_      IP error in the distributed configuration when installing every component in the same host is fixed.
+`#1619 <https://github.com/wazuh/wazuh-packages/pull/1619>`_      All warnings on the Wazuh installation assistant when running ``shellcheck`` manually are fixed.
 ==============================================================    =============
 
 
