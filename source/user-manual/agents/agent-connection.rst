@@ -3,48 +3,92 @@
 .. meta::
   :description: Find out more about how to check the connection to the Wazuh Manager in this section of our documentation. 
   
-.. _agent-connection:
-
 Checking connection with the Wazuh manager
 ==========================================
 
-Locally, you can check the :doc:`wazuh-agentd.state </user-manual/reference/statistics-files/wazuh-agentd-state>` file to know about the status as reported by the agent. The Wazuh agent keeps reporting its status in this file as follows.
+Using the Wazuh dashboard
+-------------------------
 
--  ``pending``: Waiting for a connection acknowledgment from the Wazuh manager.
--  ``disconnected``: The connection is lost or there was no acknowledgement signal received for 60 seconds.
--  ``connected``: The connection acknowledgement was received.
+You can check the connection status of any agent selecting the **Agents** menu option of the Wazuh dashboard.
 
-To check the current status and verify the agent is connected to the manager, run the following command on the endpoint.
+.. thumbnail:: /images/manual/managing-agents/agents-menu.png
+   :title: Wazuh dashboard agents menu option
+   :align: center
+   :width: 80%
+
+This option shows the **Agents** dashboard with a list of all registered agents. This list includes the connection status of each agent. This dashboard also shows the amount of agents found for each possible connection status.
+
+.. thumbnail:: /images/manual/managing-agents/agents-dashboard.png
+   :title: Wazuh dashboard agents menu option
+   :align: center
+   :width: 80%
+
+Reading the local `wazuh-agentd.state` file
+-------------------------------------------
+
+You can read the :doc:`wazuh-agentd.state </user-manual/reference/statistics-files/wazuh-agentd-state>` file found in the endpoint to check the status of the connection. The Wazuh agent keeps reporting its connection status in this file as follows.
+
+-  ``pending``: Waiting for acknowledgement from the Wazuh manager about connection established.
+-  ``disconnected``: No acknowledgement signal received during the last 60 seconds or lost connection.
+-  ``connected``: Acknowledgement about connection established received from the Wazuh manager.
+
+To check the current status and verify the connection of the agent with the manager, run the following command on the endpoint.
 
 .. tabs::
 
-   .. group-tab:: Linux
+   .. group-tab:: Linux/Unix
 
       .. code-block:: console
 
          $ sudo grep ^status /var/ossec/var/run/wazuh-agentd.state
 
-.. code-block:: console
-   :class: output
+      .. code-block:: console
+         :class: output
 
-   status='connected'
+         status='connected'
 
-Remotely, from the Wazuh server, you can check the status of any agent using the :doc:`agent_control <../reference/tools/agent-control>` utility. To get the status of an agent, run the following command replacing the ``-i`` parameter with your agent ID.
+   .. group-tab:: Windows
 
-.. tabs::
+      .. code-block:: Powershell
 
-   .. group-tab:: Linux
+         > Select-String -Path C:\Program Files (x86)\ossec-agent\wazuh-agent.state -Pattern "^status"
+
+      .. code-block:: console
+         :class: output
+
+         wazuh-agent.state:7:status='connected'
+
+
+   .. group-tab:: macOS
 
       .. code-block:: console
 
-         # /var/ossec/bin/agent_control -i <YOUR_AGENT_ID> | grep ^\s+Status
+         # sudo grep ^status /Library/Ossec/var/run/wazuh-agentd.state
+
+      .. code-block:: console
+         :class: output
+
+         status='connected'
+
+Using the `agent_control` utility from the server
+-------------------------------------------------
+
+You can check the status of any agent remotely by using the :doc:`agent_control <../reference/tools/agent-control>` utility found with the Wazuh server. To get the status of an agent, run the following command replacing the ``-i`` parameter with your agent ID.
+
+.. code-block:: console
+
+   # /var/ossec/bin/agent_control -i <YOUR_AGENT_ID> | grep ^\s+Status
 
 .. code-block:: console
    :class: output
 
       Status:     Active
 
-An ``Active`` status means the Wazuh manager received the `keepalive` signal from the agent. A ``Disconnected`` status means this signal was not received in the last 10 minutes.
+-  ``Active``: The Wazuh manager received the `keepalive` signal from the agent.
+-  ``Disconnected``: The Wazuh manager didn't receive the `keepalive` signal during the last 10 minutes.
+
+Using the Wazuh API
+-------------------
 
 In addition, you can check the status of an agent requesting to the Wazuh API the `statistical information of an agent <https://documentation.wazuh.com/current/user-manual/api/reference.html#operation/api.controllers.agent_controller.get_component_stats>`_.
 
@@ -76,20 +120,47 @@ In addition, you can check the status of an agent requesting to the Wazuh API th
      "error": 0
    }
 
+Checking network communication
+------------------------------
+
 Agent communication with the manager requires outbound connectivity from agent to manager. It uses the port ``1514/TCP`` by default.
 
-If the agent is not connected it may mean it was not enrolled succesfully. Check the :doc:`/user-manual/agent-enrollment/index` for details. You can also check to see if an agent is connected correctly by verifying if the TCP connection to the manager is established. The result should match the agent and manager IP addresses.
+If the agent isn't connected, it may possibly mean the enrollment wasn't succesful. Check the :doc:`/user-manual/agent-enrollment/index` section for details on this. You can also check if a TCP connection to the manager is established to verify if an agent can connect to it. The result should match the agent and manager IP addresses.
 
 .. tabs::
 
-   .. group-tab:: Linux
+   .. group-tab:: Linux/Unix
 
       .. code-block:: console
 
          # netstat -vatunp|grep wazuh-agentd
 
+      .. code-block:: console
+         :class: output
 
-.. code-block:: console
-   :class: output
+         tcp        0      0 10.0.2.15:48364      10.0.2.1:1514        ESTABLISHED 796/wazuh-agentd
 
-   tcp        0      0 172.16.1.211:48364      172.16.1.11:1514        ESTABLISHED 796/wazuh-agentd
+   .. group-tab:: Windows
+
+      .. code-block:: Powershell
+
+         > Get-NetTCPConnection -RemotePort 1514
+
+
+      .. code-block:: console
+         :class: output
+
+         LocalAddress                        LocalPort RemoteAddress                       RemotePort State       AppliedSetting OwningProcess
+         ------------                        --------- -------------                       ---------- -----       -------------- -------------
+         10.0.2.15                           48364     10.0.2.1                            1514       Established Internet       2840
+
+   .. group-tab:: macOS
+
+      .. code-block:: console
+
+         # netstat -vatunp|grep wazuh-agentd
+
+      .. code-block:: console
+         :class: output
+
+         tcp        0      0 10.0.2.15:48364      10.0.2.1:1514        ESTABLISHED 796/wazuh-agentd
