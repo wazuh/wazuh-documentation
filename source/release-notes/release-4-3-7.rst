@@ -139,7 +139,7 @@ Reference                                                         Description
 `#4358 <https://github.com/wazuh/wazuh-kibana-app/pull/4358>`_    An error of an undefined username hash related to reporting when using Kibana with X-Pack and security was disabled is fixed.
 `#4359 <https://github.com/wazuh/wazuh-kibana-app/pull/4359>`_    The persistence of the plugin registry file between updates is fixed.
 `#4367 <https://github.com/wazuh/wazuh-kibana-app/pull/4367>`_    A searchbar error on the SCA Inventory table is fixed.
-`#4373 <https://github.com/wazuh/wazuh-kibana-app/pull/4373>`_    A routes loop when reinstalling the Wazuh indexer is fixed.
+`#4373 <https://github.com/wazuh/wazuh-kibana-app/pull/4373>`_    A routing loop when reinstalling the Wazuh indexer is fixed.
 `#4365 <https://github.com/wazuh/wazuh-kibana-app/pull/4365>`_    Wazuh restart UI is fixed.
 ==============================================================    =============
 
@@ -158,7 +158,7 @@ Reference                                                         Description
 `#4358 <https://github.com/wazuh/wazuh-kibana-app/pull/4358>`_    An error of an undefined username hash related to reporting when using Kibana with X-Pack and security was disabled is fixed.
 `#4359 <https://github.com/wazuh/wazuh-kibana-app/pull/4359>`_    The persistence of the plugin registry file between updates is fixed.
 `#4367 <https://github.com/wazuh/wazuh-kibana-app/pull/4367>`_    A searchbar error on the SCA Inventory table is fixed.
-`#4373 <https://github.com/wazuh/wazuh-kibana-app/pull/4373>`_    A routes loop when reinstalling the Wazuh indexer is fixed.
+`#4373 <https://github.com/wazuh/wazuh-kibana-app/pull/4373>`_    A routing loop when reinstalling the Wazuh indexer is fixed.
 `#4365 <https://github.com/wazuh/wazuh-kibana-app/pull/4365>`_    Wazuh restart UI is fixed.
 ==============================================================    =============
 
@@ -196,8 +196,8 @@ Packages
 Reference                                                         Description
 ==============================================================    =============
 `#1762 <https://github.com/wazuh/wazuh-packages/pull/1762>`__     The GPG key when uninstalling with the Wazuh assistant is removed.
-`#1765 <https://github.com/wazuh/wazuh-packages/pull/1765>`__     An errors in filebeat installation is fixed.
-`#1766 <https://github.com/wazuh/wazuh-packages/pull/1766>`__     An indentation issues in ``config.yml`` is fixed.
+`#1765 <https://github.com/wazuh/wazuh-packages/pull/1765>`__     Some errors in filebeat installation are fixed.
+`#1766 <https://github.com/wazuh/wazuh-packages/pull/1766>`__     An indentation issue in ``config.yml`` is fixed.
 ==============================================================    =============
 
 
