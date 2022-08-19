@@ -5,8 +5,8 @@
 
 .. _release_3_13_5:
 
-3.13.5 Release notes - 11 August 2022
-=====================================
+3.13.5 Release notes
+====================
 
 This section lists the changes in version 3.13.5. More details about these changes are provided in each component changelog:
 
@@ -22,7 +22,7 @@ Wazuh core
 Wazuh Kibana app
 ----------------
 
-- `#4336 <https://github.com/wazuh/wazuh-kibana-app/pull/4336>`_  Sanitize report's inputs and usernames.
+- `#4336 <https://github.com/wazuh/wazuh-kibana-app/pull/4336>`_  Sanitize the report's inputs and usernames.
 
 Wazuh Splunk
 ------------
