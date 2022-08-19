@@ -59,12 +59,11 @@ Wazuh Splunk app
 
 - Wazuh Splunk app is now compatible with Wazuh 4.3.7.
 
-
 Packages
 ^^^^^^^^
 
 -  `#1737 <https://github.com/wazuh/wazuh-packages/pull/1737>`_ Passwords-tool tests are added with the files ``passwords-tool.yml`` and ``tests-stack.sh``.
--  `#1742 <https://github.com/wazuh/wazuh-packages/pull/1742>`_ Check port status is added to the Wazuh installation assistant, to avoid the installation would end up in failure if one of the ports that Wazuh uses were already in use. 
+-  `#1742 <https://github.com/wazuh/wazuh-packages/pull/1742>`_ Check port status is added to the Wazuh installation assistant, to avoid the installation would end up in failure if one of the ports that Wazuh uses is already in use. 
 -  `#1754 <https://github.com/wazuh/wazuh-packages/pull/1754>`_ ``wazuh-install.sh`` skip checking OS when downloading is added.
 -  `#1629 <https://github.com/wazuh/wazuh-packages/pull/1629>`_ The ``wazuh-certs-tool`` to add the ``-tmp`` option is modified in order to specify the ``tmp`` directory.
 -  `#1685 <https://github.com/wazuh/wazuh-packages/pull/1685>`_ The RHEL 9 SCA files are added to the specs.
@@ -73,7 +72,6 @@ Packages
 -  `#1641 <https://github.com/wazuh/wazuh-packages/pull/1641>`_ Avoid using revision variable in Wazuh installation assistant.
 -  `#1750 <https://github.com/wazuh/wazuh-packages/pull/1750>`_ The OVA generation scripts are modified to adapt them to the newest changes in ``wazuh-passwords-tool.sh``.
 -  `#1769 <https://github.com/wazuh/wazuh-packages/pull/1769>`_ Versions in fedora SCA files are changed. A path error when copying SCA files is fixed.
-
 
 Resolved issues
 ---------------
@@ -101,7 +99,6 @@ Reference                                                         Description
 `#14368 <https://github.com/wazuh/wazuh/pull/14368>`_             A code defect in the GitHub integration module reported by Coverity is fixed.
 `#14518 <https://github.com/wazuh/wazuh/pull/14518>`_             An undefined behavior in the agent unit tests is fixed.
 ==============================================================    =============
-
 
 Ruleset
 ^^^^^^^
@@ -188,13 +185,11 @@ Packages
 Reference                                                         Description
 ==============================================================    =============
 `#1762 <https://github.com/wazuh/wazuh-packages/pull/1762>`__     Wazuh GPG key is now removed when uninstalling all wazuh components with the installation assistant.
-`#1765 <https://github.com/wazuh/wazuh-packages/pull/1765>`__     Some errors related with filebeat downloaded files in filebeat installation are fixed.
+`#1765 <https://github.com/wazuh/wazuh-packages/pull/1765>`__     Some errors related to filebeat downloaded files in filebeat installation are fixed.
 `#1766 <https://github.com/wazuh/wazuh-packages/pull/1766>`__     An indentation issue in ``config.yml`` is fixed because certificates were not created correctly if they have a bad indentation.
 `#1731 <https://github.com/wazuh/wazuh-packages/pull/1731>`_      IP error in the distributed configuration when installing every component in the same host is fixed.
 `#1619 <https://github.com/wazuh/wazuh-packages/pull/1619>`_      All warnings on the Wazuh installation assistant when running ``shellcheck`` manually are fixed.
 ==============================================================    =============
-
-
 
 Changelogs
 ----------
