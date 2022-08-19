@@ -9,7 +9,7 @@ Checking connection with the Wazuh manager
 Using the Wazuh dashboard
 -------------------------
 
-You can check the connection status of any agent selecting the **Agents** menu option of the Wazuh dashboard.
+You can check the connection status of any agent by selecting the **Agents** menu option of the Wazuh dashboard.
 
 .. thumbnail:: /images/manual/managing-agents/agents-menu.png
    :title: Wazuh dashboard agents menu option
@@ -90,7 +90,7 @@ You can check the status of any agent remotely by using the :doc:`agent_control 
 Using the Wazuh API
 -------------------
 
-In addition, you can check the status of an agent requesting to the Wazuh API the `statistical information of an agent <https://documentation.wazuh.com/current/user-manual/api/reference.html#operation/api.controllers.agent_controller.get_component_stats>`_.
+In addition, you can check the status of an agent by requesting to the Wazuh API the `statistical information of an agent <https://documentation.wazuh.com/current/user-manual/api/reference.html#operation/api.controllers.agent_controller.get_component_stats>`_.
 
 .. code-block:: none
 
@@ -125,7 +125,7 @@ Checking network communication
 
 Agent communication with the manager requires outbound connectivity from agent to manager. It uses the port ``1514/TCP`` by default.
 
-If the agent isn't connected, it may possibly mean the enrollment wasn't succesful. Check the :doc:`/user-manual/agent-enrollment/index` section for details on this. You can also check if a TCP connection to the manager is established to verify if an agent can connect to it. The result should match the agent and manager IP addresses.
+If the agent isn't connected, it may possibly mean the enrollment wasn't successful. Check the :doc:`/user-manual/agent-enrollment/index` section for details on this. You can also check if a TCP connection to the manager is established to verify if an agent can connect to it. The result should match the agent and manager IP addresses.
 
 .. tabs::
 
