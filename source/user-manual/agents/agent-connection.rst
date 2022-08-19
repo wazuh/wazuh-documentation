@@ -16,7 +16,7 @@ You can check the connection status of any agent by selecting the **Agents** men
    :align: center
    :width: 80%
 
-This option shows the **Agents** dashboard with a list of all registered agents. This list includes the connection status of each agent. This dashboard also shows the amount of agents found for each possible connection status.
+This option shows the **Agents** dashboard with a list of all registered agents. The list includes the connection status of each agent. The dashboard also shows the amount of agents found for each possible connection status.
 
 .. thumbnail:: /images/manual/managing-agents/agents-dashboard.png
    :title: Wazuh dashboard agents menu option
@@ -28,9 +28,9 @@ Reading the local `wazuh-agentd.state` file
 
 You can read the :doc:`wazuh-agentd.state </user-manual/reference/statistics-files/wazuh-agentd-state>` file found in the endpoint to check the status of the connection. The Wazuh agent keeps reporting its connection status in this file as follows.
 
--  ``pending``: Waiting for acknowledgement from the Wazuh manager about connection established.
--  ``disconnected``: No acknowledgement signal received during the last 60 seconds or lost connection.
--  ``connected``: Acknowledgement about connection established received from the Wazuh manager.
+-  ``pending``: Waiting for acknowledgment from the Wazuh manager about connection established.
+-  ``disconnected``: No acknowledgment signal received during the last 60 seconds or lost connection.
+-  ``connected``: Acknowledgment about connection established received from the Wazuh manager.
 
 To check the current status and verify the connection of the agent with the manager, run the following command on the endpoint.
 
