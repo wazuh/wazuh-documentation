@@ -29,14 +29,15 @@ RESTful API
 ^^^^^^^^^^^
 
 - `#14551 <https://github.com/wazuh/wazuh/pull/14551>`_ The endpoint ``GET /cluster/ruleset/synchronization`` to check ruleset synchronization status in a cluster is added.
+- `#14208 <https://github.com/wazuh/wazuh/pull/14208>`_ The performance for MITRE API endpoints is improved.
 
 Ruleset
 ^^^^^^^
 
-- `#13087 <https://github.com/wazuh/wazuh/pull/13087>`_ An SCA Policy for CIS Microsoft Windows 11 Enterprise Benchmark v1.0.0 is added.
-- `#13191 <https://github.com/wazuh/wazuh/pull/13191>`_ An SCA Policy for CIS Microsoft Windows 10 Enterprise Release 21H2 Benchmark v1.12.0 is added.
-- `#13756 <https://github.com/wazuh/wazuh/pull/13756>`_ An SCA policy for Red Hat Enterprise Linux 9 (RHEL9) is added.
-- `#13895 <https://github.com/wazuh/wazuh/pull/13895>`_ An SCA policy for CIS Microsoft Windows Server 2022 Benchmark 1.0.0 is added.
+- `#13806 <https://github.com/wazuh/wazuh/pull/13806>`_ An SCA Policy for CIS Microsoft Windows 11 Enterprise Benchmark v1.0.0 is added.
+- `#13879 <https://github.com/wazuh/wazuh/pull/13879>`_ An SCA Policy for CIS Microsoft Windows 10 Enterprise Release 21H2 Benchmark v1.12.0 is added.
+- `#13843 <https://github.com/wazuh/wazuh/pull/13843>`_ An SCA policy for Red Hat Enterprise Linux 9 (RHEL9) is added.
+- `#13899 <https://github.com/wazuh/wazuh/pull/13899>`_ An SCA policy for CIS Microsoft Windows Server 2022 Benchmark 1.0.0 is added.
 
 Wazuh dashboard
 ^^^^^^^^^^^^^^^
@@ -63,7 +64,7 @@ Packages
 ^^^^^^^^
 
 -  `#1737 <https://github.com/wazuh/wazuh-packages/pull/1737>`_ Passwords-tool tests are added.
--  `#1742 <https://github.com/wazuh/wazuh-packages/pull/1742>`_ Check port status to installation assistant is added.
+-  `#1742 <https://github.com/wazuh/wazuh-packages/pull/1742>`_ Check port status is added to the Wazuh installation assistant. 
 -  `#1754 <https://github.com/wazuh/wazuh-packages/pull/1754>`_ ``wazuh-install.sh`` skip checking OS when downloading is added.
 -  `#1629 <https://github.com/wazuh/wazuh-packages/pull/1629>`_ ``tmp`` directory parameter is added.
 -  `#1685 <https://github.com/wazuh/wazuh-packages/pull/1685>`_ RHEL 9 SCA is added.
@@ -101,14 +102,6 @@ Reference                                                         Description
 `#14518 <https://github.com/wazuh/wazuh/pull/14518>`_             An undefined behavior in the agent unit tests is fixed.
 ==============================================================    =============
 
-RESTful API
-^^^^^^^^^^^
-
-==============================================================    =============
-Reference                                                         Description
-==============================================================    =============
-`#14208 <https://github.com/wazuh/wazuh/pull/14208>`_             The performance for MITRE API endpoints is improved.
-==============================================================    =============
 
 Ruleset
 ^^^^^^^
@@ -116,10 +109,11 @@ Ruleset
 ==============================================================    =============
 Reference                                                         Description
 ==============================================================    =============
-`#14235 <https://github.com/wazuh/wazuh/pull/14235>`_             A rule regular expression bug on Ubuntu 20.04 Linux SCA policy control ID 19137 is fixed.
-`#14258 <https://github.com/wazuh/wazuh/pull/14258>`_             A bug when a Wazuh agent tries to run an AWS Amazon Linux SCA policy is fixed.
-`#13949 <https://github.com/wazuh/wazuh/pull/13949>`_             Amazon Linux 2 SCA policy is modified to resolve rules and conditions on control.
+`#14513 <https://github.com/wazuh/wazuh/pull/14513>`_             A rule regular expression bug on Ubuntu 20.04 Linux SCA policy control ID 19137 is fixed.
+`#14483 <https://github.com/wazuh/wazuh/pull/14483>`_             A bug when a Wazuh agent tries to run an AWS Amazon Linux SCA policy is fixed.
+`#13950 <https://github.com/wazuh/wazuh/pull/13950>`_             Amazon Linux 2 SCA policy is modified to resolve rules and conditions on control.
 `#14481 <https://github.com/wazuh/wazuh/pull/14481>`_             Missing SCA files during Wazuh-manager installation are added.
+`#14678 <https://github.com/wazuh/wazuh/pull/14678>`_             OS detection in Ubuntu 20.04 LTS SCA policy is now fixed. 
 ==============================================================    =============
 
 Wazuh dashboard
@@ -128,8 +122,8 @@ Wazuh dashboard
 ==============================================================    =============
 Reference                                                         Description
 ==============================================================    =============
-`#4378 <https://github.com/wazuh/wazuh-kibana-app/pull/4378>`_    The file ``Wazuh.yml`` link in the web documentation, the in-file documentation, and some grammatical errors are fixed.
-`#4399 <https://github.com/wazuh/wazuh-kibana-app/pull/4399>`_    The file ``Wazuh.yml`` link in the web documentation, the in-file documentation, and some grammatical errors are fixed.
+`#4378 <https://github.com/wazuh/wazuh-kibana-app/pull/4378>`_    The file ``wazuh.yml`` link in the web documentation, the in-file documentation, and some grammatical errors are fixed.
+`#4399 <https://github.com/wazuh/wazuh-kibana-app/pull/4399>`_    The file ``wazuh.yml`` link in the web documentation, the in-file documentation, and some grammatical errors are fixed.
 `#4350 <https://github.com/wazuh/wazuh-kibana-app/pull/4350>`_    An error during the generation of a group's report, if the request to the Wazuh API fails, is fixed.
 `#4350 <https://github.com/wazuh/wazuh-kibana-app/pull/4350>`_    A problem with the group's report, when the group has no agents, is fixed.
 `#4352 <https://github.com/wazuh/wazuh-kibana-app/pull/4352>`_    A path in the logo customization section is fixed.
@@ -147,8 +141,8 @@ Wazuh Kibana plugin for Kibana 7.10.2
 ==============================================================    =============
 Reference                                                         Description
 ==============================================================    =============
-`#4378 <https://github.com/wazuh/wazuh-kibana-app/pull/4378>`_    The file ``Wazuh.yml`` link in the web documentation, the in-file documentation, and some grammatical errors are fixed.
-`#4399 <https://github.com/wazuh/wazuh-kibana-app/pull/4399>`_    The file ``Wazuh.yml`` link in the web documentation, the in-file documentation, and some grammatical errors are fixed.
+`#4378 <https://github.com/wazuh/wazuh-kibana-app/pull/4378>`_    The file ``wazuh.yml`` link in the web documentation, the in-file documentation, and some grammatical errors are fixed.
+`#4399 <https://github.com/wazuh/wazuh-kibana-app/pull/4399>`_    The file ``wazuh.yml`` link in the web documentation, the in-file documentation, and some grammatical errors are fixed.
 `#4350 <https://github.com/wazuh/wazuh-kibana-app/pull/4350>`_    An error during the generation of a group's report, if the request to the Wazuh API fails, is fixed.
 `#4350 <https://github.com/wazuh/wazuh-kibana-app/pull/4350>`_    A problem with the group's report, when the group has no agents, is fixed.
 `#4352 <https://github.com/wazuh/wazuh-kibana-app/pull/4352>`_    A path in the logo customization section is fixed.
@@ -166,8 +160,8 @@ Wazuh Kibana plugin for Kibana 7.16.x and 7.17.x
 ==============================================================    =============
 Reference                                                         Description
 ==============================================================    =============
-`#4378 <https://github.com/wazuh/wazuh-kibana-app/pull/4378>`_    The file ``Wazuh.yml`` link in the web documentation, the in-file documentation, and some grammatical errors are fixed.
-`#4399 <https://github.com/wazuh/wazuh-kibana-app/pull/4399>`_    The file ``Wazuh.yml`` link in the web documentation, the in-file documentation, and some grammatical errors are fixed.
+`#4378 <https://github.com/wazuh/wazuh-kibana-app/pull/4378>`_    The file ``wazuh.yml`` link in the web documentation, the in-file documentation, and some grammatical errors are fixed.
+`#4399 <https://github.com/wazuh/wazuh-kibana-app/pull/4399>`_    The file ``wazuh.yml`` link in the web documentation, the in-file documentation, and some grammatical errors are fixed.
 `#4350 <https://github.com/wazuh/wazuh-kibana-app/pull/4350>`_    An error during the generation of a group's report, if the request to the Wazuh API fails, is fixed.
 `#4350 <https://github.com/wazuh/wazuh-kibana-app/pull/4350>`_    A problem with the group's report, when the group has no agents, is fixed.
 `#4352 <https://github.com/wazuh/wazuh-kibana-app/pull/4352>`_    A path in the logo customization section is fixed.
