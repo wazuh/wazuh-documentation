@@ -68,7 +68,6 @@ In addition, it is possible to use multiple threads to pull a larger number of m
 .. topic:: Contents
 
    .. toctree::
-      :hidden:
 
       prerequisites/index
       supported-services/index
