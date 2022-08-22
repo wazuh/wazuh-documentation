@@ -34,7 +34,7 @@ Below are some PCI DSS requirement use cases that can be met with the SCA module
          :align: center
          :width: 100%
   
-Note that the SCA check IDs for the same requirement may vary depending on the endpoint the SCA scan is being run on.
+   Note that the SCA check IDs for the same requirement may vary depending on the endpoint the SCA scan is being run on.
 
 - PCI DSS 8.3.7 states that individuals are not allowed to submit a new password/passphrase that is the same as any of the last four passwords/passphrases used.
 
