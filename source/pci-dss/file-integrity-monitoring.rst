@@ -170,7 +170,7 @@ In this use case, we configure Syscheck to detect when changes have been made to
 		:align: center
 		:width: 100%
 
-In the alert details, we can see the changes made in ``syscheck.diff``, the file modified, the PCI DSS requirement met, the differences in the file checksum, the modification time, and other details.
+   In the alert details, we can see the changes made in ``syscheck.diff``, the file modified, the PCI DSS requirement met, the differences in the file checksum, the modification time, and other details.
 
 Detect file deletion
 ^^^^^^^^^^^^^^^^^^^^
@@ -196,6 +196,6 @@ In this scenario, Syscheck detects when a file in a monitored directory is delet
 		:align: center
 		:width: 100%
 
-In the alert details, we can see the file deleted, the PCI DSS requirement met, the deletion time, and other details.
+   In the alert details, we can see the file deleted, the PCI DSS requirement met, the deletion time, and other details.
 
-These activities can be tracked from the PCI DSS module dashboard. The dashboard will show all activities that trigger a PCI DSS requirement including FIM changes.
+   These activities can be tracked from the PCI DSS module dashboard. The dashboard will show all activities that trigger a PCI DSS requirement including FIM changes.
