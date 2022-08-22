@@ -83,7 +83,7 @@ Wazuh manager
 Reference                                                         Description
 ==============================================================    =============
 `#13956 <https://github.com/wazuh/wazuh/pull/13956>`_             A bug in Analysisd that may make it crash when decoding regexes with more than 14 subpatterns is fixed.
-`#14366 <https://github.com/wazuh/wazuh/pull/14366>`_             A crash hazard in Vulnerability Detector when parsing OVAL feeds is fixed.
+`#14366 <https://github.com/wazuh/wazuh/pull/14366>`_             The risk of a crash when Vulnerability Detector parses OVAL feeds is fixed.
 `#14436 <https://github.com/wazuh/wazuh/pull/14436>`_             A busy-looping in ``wazuh-maild`` when monitoring ``alerts.json`` is fixed.
 `#14417 <https://github.com/wazuh/wazuh/pull/14417>`_             A segmentation fault in ``wazuh-maild`` when parsing alerts exceeding the nesting limit is fixed.
 ==============================================================    =============
@@ -124,7 +124,7 @@ Reference                                                         Description
 `#4352 <https://github.com/wazuh/wazuh-kibana-app/pull/4352>`_    A path in the logo customization section is fixed.
 `#4362 <https://github.com/wazuh/wazuh-kibana-app/pull/4362>`_    A TypeError in a resource that fails in Chrome and Firefox browsers is fixed.
 `#4358 <https://github.com/wazuh/wazuh-kibana-app/pull/4358>`_    An error creating PDF reports when using Kibana with X-Pack without authentication context is fixed.
-`#4359 <https://github.com/wazuh/wazuh-kibana-app/pull/4359>`_    The persistence of the plugin registry file between updates is fixed.
+`#4359 <https://github.com/wazuh/wazuh-kibana-app/pull/4359>`_    Module settings not persisting between updates is fixed.
 `#4367 <https://github.com/wazuh/wazuh-kibana-app/pull/4367>`_    A search bar error on the SCA Inventory table is fixed.
 `#4373 <https://github.com/wazuh/wazuh-kibana-app/pull/4373>`_    A routing loop when reinstalling the Wazuh indexer is fixed.
 `#4365 <https://github.com/wazuh/wazuh-kibana-app/pull/4365>`_    Centralized service to restart the Wazuh managers is added.
@@ -162,7 +162,7 @@ Reference                                                         Description
 `#4352 <https://github.com/wazuh/wazuh-kibana-app/pull/4352>`_    A path in the logo customization section is fixed.
 `#4362 <https://github.com/wazuh/wazuh-kibana-app/pull/4362>`_    A TypeError in a resource that fails in Chrome and Firefox browsers is fixed.
 `#4358 <https://github.com/wazuh/wazuh-kibana-app/pull/4358>`_    An error creating PDF reports when using Kibana with X-Pack without authentication context is fixed.
-`#4359 <https://github.com/wazuh/wazuh-kibana-app/pull/4359>`_    The persistence of the plugin registry file between updates is fixed.
+`#4359 <https://github.com/wazuh/wazuh-kibana-app/pull/4359>`_    Module settings not persisting between updates is fixed.
 `#4367 <https://github.com/wazuh/wazuh-kibana-app/pull/4367>`_    A search bar error on the SCA Inventory table is fixed.
 `#4373 <https://github.com/wazuh/wazuh-kibana-app/pull/4373>`_    A routing loop when reinstalling the Wazuh indexer is fixed.
 `#4365 <https://github.com/wazuh/wazuh-kibana-app/pull/4365>`_    Centralized service to restart the Wazuh managers is added.
@@ -183,9 +183,9 @@ Packages
 ==============================================================    =============
 Reference                                                         Description
 ==============================================================    =============
-`#1762 <https://github.com/wazuh/wazuh-packages/pull/1762>`__     Wazuh GPG key is now removed when uninstalling all wazuh components with the installation assistant.
+`#1762 <https://github.com/wazuh/wazuh-packages/pull/1762>`__     The Wazuh GPG key is now removed when uninstalling all the Wazuh components using the installation assistant.
 `#1765 <https://github.com/wazuh/wazuh-packages/pull/1765>`__     Handling of errors that might happen when downloading Filebeat files is added.
-`#1766 <https://github.com/wazuh/wazuh-packages/pull/1766>`__     An indentation issue in ``config.yml`` is fixed because certificates were not created correctly if they have a bad indentation.
+`#1766 <https://github.com/wazuh/wazuh-packages/pull/1766>`__     A check of the indentation of the ``config.yml`` file is added.
 `#1731 <https://github.com/wazuh/wazuh-packages/pull/1731>`_      An error when installing every component of a distributed installation in the same host using the 127.0.0.1 IP address is fixed.
 `#1619 <https://github.com/wazuh/wazuh-packages/pull/1619>`_      The code of the Wazuh installation assistant has been improved.
 ==============================================================    =============
