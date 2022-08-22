@@ -34,4 +34,4 @@ PCI DSS 2.2.4 requires that only necessary services, protocols, daemons, and fun
    :align: center
    :width: 100%
 
-The system inventory module is enabled by default in all compatible systems including all the available scans.
+The system inventory module is enabled with all available scans by default in all compatible systems.
