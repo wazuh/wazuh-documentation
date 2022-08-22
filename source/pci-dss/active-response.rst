@@ -26,10 +26,10 @@ Using the steps below, we configure the active response module to execute an IP 
 	.. code-block:: xml 
 
 		<active-response>
-         <command>firewall-drop</command>
-         <location>local</location>
-         <rules_id>5710</rules_id>
-         <timeout>100</timeout>
+			<command>firewall-drop</command>
+			<location>local</location>
+			<rules_id>5710</rules_id>
+			<timeout>100</timeout>
 		</active-response>
 
    .. note::      
