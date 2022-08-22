@@ -40,17 +40,17 @@ Ruleset
 Wazuh dashboard
 ^^^^^^^^^^^^^^^
 
-- `#4350 <https://github.com/wazuh/wazuh-kibana-app/pull/4350>`_ The deprecated ``manager_host`` field related to agent information of Wazuh API responses is no longer used.
+- `#4350 <https://github.com/wazuh/wazuh-kibana-app/pull/4350>`_ The deprecated ``manager_host`` field in Wazuh API responses about agent information is no longer used.
 
 Wazuh Kibana plugin for Kibana 7.10.2
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-- `#4350 <https://github.com/wazuh/wazuh-kibana-app/pull/4350>`_ The deprecated ``manager_host`` field related to agent information of Wazuh API responses is no longer used.
+- `#4350 <https://github.com/wazuh/wazuh-kibana-app/pull/4350>`_ The deprecated ``manager_host`` field in Wazuh API responses about agent information is no longer used.
 
 Wazuh Kibana plugin for Kibana 7.16.x and 7.17.x
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-- `#4350 <https://github.com/wazuh/wazuh-kibana-app/pull/4350>`_ The deprecated ``manager_host`` field in Wazuh API responses about an agent is removed.
+- `#4350 <https://github.com/wazuh/wazuh-kibana-app/pull/4350>`_ The deprecated ``manager_host`` field in Wazuh API responses about agent information is no longer used.
 
 Wazuh Splunk app
 ^^^^^^^^^^^^^^^^
