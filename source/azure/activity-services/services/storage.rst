@@ -1,10 +1,9 @@
 .. Copyright (C) 2015, Wazuh, Inc.
 
-.. _azure_storage:
-
 .. meta::
-  :description: Discover the numerous ways that Wazuh provides to monitor your Microsoft Azure infrastructure activity.
+  :description: Discover the numerous ways that Wazuh provides to monitor your Microsoft Azure infrastructure activity in this section of the Wazuh documentation.
 
+.. _azure_storage:
 
 Using Azure Storage
 ===================
