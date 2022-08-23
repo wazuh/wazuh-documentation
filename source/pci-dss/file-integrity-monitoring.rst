@@ -93,23 +93,23 @@ For this use case, we configure Wazuh to detect when changes are made to a file 
 
 #. Proceed to modify the file. In this case, we added new content.
 
-   .. code-block:: console 
+      .. code-block:: console 
 
-      nano credit_cards/cardholder_data.txt
+         nano credit_cards/cardholder_data.txt
 
-We can see an alert generated to show that a file in the monitored directory was modified.
+   We can see an alert generated to show that a file in the monitored directory was modified.
 
-	.. thumbnail:: ../images/pci/file-modified-in-the-monitored-directory.png
-		:title: File modified in the monitored directory
-		:align: center
-		:width: 100%
+      .. thumbnail:: ../images/pci/file-modified-in-the-monitored-directory.png
+         :title: File modified in the monitored directory
+         :align: center
+         :width: 100%
 
- 	.. thumbnail:: ../images/pci/file-modified-in-the-monitored-directory-2.png
-		:title: File modified in the monitored directory
-		:align: center
-		:width: 100%     
+      .. thumbnail:: ../images/pci/file-modified-in-the-monitored-directory-2.png
+         :title: File modified in the monitored directory
+         :align: center
+         :width: 100%     
 
-In the alert details, we can see the PCI DSS requirement met, the differences in the file checksum, the file modified, the modification time, the ``whodata`` showing the process and user that made the modification, and other details.
+   In the alert details, we can see the PCI DSS requirement met, the differences in the file checksum, the file modified, the modification time, the ``whodata`` showing the process and user that made the modification, and other details.
 
 Perform critical file comparisons at specified intervals
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^

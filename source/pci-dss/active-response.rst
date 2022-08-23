@@ -17,7 +17,7 @@ The active response module can help meet the following PCI DSS requirement:
 Use cases
 ---------
 
-PCI DSS 11.5 requires that network intrusions and unexpected file changes are detected and responded to. These intrusions can be responded to by configuring scripts to execute when certain actions occur. Wazuh comes with some preconfigured active response scripts. These scripts can be found :ref:`here <active_response_scripts>`.
+PCI DSS 11.5 requires that network intrusions and unexpected file changes are detected and responded to. These intrusions can be responded to by configuring scripts to execute when certain actions occur. Wazuh comes with some preconfigured active response scripts. Refer to the :ref:`Default Active response scripts section <active_response_scripts>` to access these scripts.
 
 Using the steps below, we configure the active response module to execute an IP block when an attempt to log in with a non-existent user via SSH occurs.
 
