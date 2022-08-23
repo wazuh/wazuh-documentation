@@ -1,5 +1,9 @@
 .. Copyright (C) 2015, Wazuh, Inc.
 
+.. meta::
+  :description: Learn about AWS Supported services and the most relevant information about configuring each service, in this section of our documentation.
+  
+
 .. _amazon_supported_services:
 
 Supported services

@@ -1,6 +1,9 @@
 
 .. Copyright (C) 2015, Wazuh, Inc.
 
+.. meta::
+  :description: The Wazuh module for AWS provides capabilities to monitor AWS based services. Learn about S3 Server Access in this section of our documentation.
+
 .. _amazon_server_access:
 
 S3 Server Access

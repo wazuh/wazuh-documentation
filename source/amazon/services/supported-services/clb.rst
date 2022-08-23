@@ -1,8 +1,8 @@
 .. Copyright (C) 2015, Wazuh, Inc.
 
 .. meta::
-  :description: Amazon CLB Elastic Load Balancing automatically distributes the incoming traffic across multiple targets. Check out this section of our documentation to learn more about it. 
-  
+  :description: The Wazuh module for AWS provides capabilities to monitor AWS based services. Learn about Amazon CLB in this section of our documentation.
+
 .. _amazon_clb:
 
 Amazon CLB

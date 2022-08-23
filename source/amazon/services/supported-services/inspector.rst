@@ -1,5 +1,8 @@
 .. Copyright (C) 2015, Wazuh, Inc.
 
+.. meta::
+  :description: The Wazuh module for AWS provides capabilities to monitor AWS based services. See how to configure Amazon Inspector in this section of our documentation.
+
 .. _amazon_inspector:
 
 Amazon Inspector
