@@ -535,7 +535,7 @@ Events per second limits example block:
 limits\\eps\\maximum
 ^^^^^^^^^^^^^^^^^^^^
 
-Maximum number of events per second allowed to process by decoders.
+Maximum number of events per second allowed to be processed by decoders.
 
 +--------------------+-----------------------------------------------------------------+
 | **Default value**  | 0                                                               |
@@ -546,7 +546,7 @@ Maximum number of events per second allowed to process by decoders.
 limits\\eps\\timeframe
 ^^^^^^^^^^^^^^^^^^^^^^
 
-A positive number expressed in seconds, that indicate the time period where the events per second processed are increased and restored.
+A positive number expressed in seconds that indicates the time period where the events per second processed are increased and restored.
 
 +--------------------+-------------------------------------+
 | **Default value**  | 10                                  |
