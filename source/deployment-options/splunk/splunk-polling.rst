@@ -1,6 +1,7 @@
 .. Copyright (C) 2015, Wazuh, Inc.
 
-.. meta:: :description: Splunk for Wazuh installation guide
+.. meta::
+   :description: Learn how to customize the polling of the agents status data in a Wazuh for Splunk installation in this section of the documentation.
 
 Customize agents status indexation
 ==================================

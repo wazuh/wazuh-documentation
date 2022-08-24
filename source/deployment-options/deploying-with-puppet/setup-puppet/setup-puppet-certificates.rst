@@ -1,5 +1,8 @@
 .. Copyright (C) 2015, Wazuh, Inc.
 
+.. meta::
+   :description: Learn how to set up Puppet certificates in this section of the Wazuh documentation. 
+
 .. _setup_puppet_certificates:
 
 Setting up Puppet certificates

@@ -6,25 +6,7 @@
 Packages list
 =============
 
-This download page contains packages required for the Wazuh installation:
-
-- `Wazuh manager and Wazuh agent`_
-
-   - `Linux`_
-   - `Windows`_
-   - `macOS`_
-   - `Solaris`_
-   - `AIX`_
-   - `HP-UX`_
-
-- `Wazuh indexer`_
-- `Wazuh dashboard`_
-- `Wazuh Kibana plugin`_
-- `Wazuh Splunk app`_
-- `Filebeat`_
-- `Virtual machine`_
-- `Amazon Machine Image`_
-- `MSU`_
+This download page contains packages required for the Wazuh installation.
 
 .. _Wazuh_manager_agent_packages_list:
 
@@ -439,6 +421,8 @@ For Wazuh |WAZUH_CURRENT|:
 
 .. |WAZUH_KIBANA_7.17.4| replace:: `wazuh_kibana-|WAZUH_CURRENT|_7.17.4.zip <https://packages.wazuh.com/|WAZUH_CURRENT_MAJOR|/ui/kibana/wazuh_kibana-|WAZUH_CURRENT|_7.17.4-1.zip>`__ (`sha512 <https://packages.wazuh.com/|WAZUH_CURRENT_MAJOR|/checksums/wazuh/|WAZUH_CURRENT|/wazuh_kibana-|WAZUH_CURRENT|_7.17.4-1.zip.sha512>`__)
 
+.. |WAZUH_KIBANA_7.17.5| replace:: `wazuh_kibana-|WAZUH_CURRENT|_7.17.5.zip <https://packages.wazuh.com/|WAZUH_CURRENT_MAJOR|/ui/kibana/wazuh_kibana-|WAZUH_CURRENT|_7.17.5-1.zip>`__ (`sha512 <https://packages.wazuh.com/|WAZUH_CURRENT_MAJOR|/checksums/wazuh/|WAZUH_CURRENT|/wazuh_kibana-|WAZUH_CURRENT|_7.17.5-1.zip.sha512>`__)
+
 +------------------+-----------------------+--------------------------+
 | Kibana Version   | Open Distro Version   | Package                  |
 +==================+=======================+==========================+
@@ -461,6 +445,8 @@ For Wazuh |WAZUH_CURRENT|:
 | 7.17.3           |                       | |WAZUH_KIBANA_7.17.3|    |
 +------------------+-----------------------+--------------------------+
 | 7.17.4           |                       | |WAZUH_KIBANA_7.17.4|    |
++------------------+-----------------------+--------------------------+
+| 7.17.5           |                       | |WAZUH_KIBANA_7.17.5|    |
 +------------------+-----------------------+--------------------------+
 
 For a complete list of the available versions, see the `Wazuh Kibana plugin compatibility matrix <https://github.com/wazuh/wazuh-kibana-app/wiki/Compatibility>`_.
@@ -594,3 +580,42 @@ MSU
 +===================+==============+=======================================================================================================================================================================================================================================+
 |  4.0.0 or later   |   32/64bits  | `msu-updates.json.gz <https://feed.wazuh.com/vulnerability-detector/windows/msu-updates.json.gz>`_ (`sha256 <https://feed.wazuh.com/vulnerability-detector/windows/msu-updates.meta>`__)                                              |
 +-------------------+--------------+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+
+WPK
+---
+
+Linux
+^^^^^
+
+.. |WPK_Linux| replace:: `wazuh_agent_v|WAZUH_CURRENT|_linux_x86_64.wpk <https://packages.wazuh.com/4.x/wpk/linux/x86_64/wazuh_agent_v|WAZUH_CURRENT|_linux_x86_64.wpk>`__ (`sha512 <https://packages.wazuh.com/|WAZUH_CURRENT_MAJOR|/checksums/wazuh/|WAZUH_CURRENT|/wazuh_agent_v|WAZUH_CURRENT|_linux_x86_64.wpk.sha512>`__)
+.. |W_Current| replace:: |WAZUH_CURRENT|
+
++--------------+------------------+--------------+-------------------------+
+| Distribution | Version          | Architecture | WPK Package             |
++==============+==================+==============+=========================+
+|    Linux     | |W_Current|      |    64bit     | |WPK_Linux|             |
++--------------+------------------+--------------+-------------------------+
+
+Windows
+^^^^^^^
+
+.. |WPK_Windows| replace:: `wazuh_agent_v|WAZUH_CURRENT_WINDOWS|_windows.wpk <https://packages.wazuh.com/4.x/wpk/windows/wazuh_agent_v|WAZUH_CURRENT_WINDOWS|_windows.wpk>`__ (`sha512 <https://packages.wazuh.com/|WAZUH_CURRENT_MAJOR_WINDOWS|/checksums/wazuh/|WAZUH_CURRENT_WINDOWS|/wazuh_agent_v|WAZUH_CURRENT_WINDOWS|_windows.wpk.sha512>`__)
+.. |W_Current_Windows| replace:: |WAZUH_CURRENT_WINDOWS|
+
++--------------+-----------------------+--------------+--------------------+
+| Distribution | Version               | Architecture | WPK Package        |
++==============+=======================+==============+====================+
+|   Windows    |  |W_Current_Windows|  |   32/64bit   |  |WPK_Windows|     |
++--------------+-----------------------+--------------+--------------------+
+
+macOS
+^^^^^
+
+.. |WPK_macOS| replace:: `wazuh_agent_v|WAZUH_CURRENT_OSX|_macos_x86_64.wpk <https://packages.wazuh.com/4.x/wpk/macos/x86_64/pkg/wazuh_agent_v|WAZUH_CURRENT_OSX|_macos_x86_64.wpk>`__ (`sha512 <https://packages.wazuh.com/|WAZUH_CURRENT_MAJOR_OSX|/checksums/wazuh/|WAZUH_CURRENT_OSX|/wazuh_agent_v|WAZUH_CURRENT_OSX|_macos_x86_64.wpk.sha512>`__)
+.. |W_Current_OSX| replace:: |WAZUH_CURRENT_OSX|
+
++--------------+------------------+--------------+-------------------------+
+| Distribution | Version          | Architecture | WPK Package             |
++==============+==================+==============+=========================+
+|    macOS     | |W_Current_OSX|  |    64bit     | |WPK_macOS|             |
++--------------+------------------+--------------+-------------------------+
