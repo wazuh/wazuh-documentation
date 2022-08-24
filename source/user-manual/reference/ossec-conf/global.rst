@@ -540,7 +540,7 @@ Maximum number of events per second allowed to be processed by decoders.
 +--------------------+-----------------------------------------------------------------+
 | **Default value**  | 0                                                               |
 +--------------------+-----------------------------------------------------------------+
-| **Allowed values** | A number between 0 to 100000, Zero to disable the functionality |
+| **Allowed values** | A number between 0 and 100000. Zero to disable the functionality|
 +--------------------+-----------------------------------------------------------------+
 
 limits\\eps\\timeframe
