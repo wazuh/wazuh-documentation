@@ -127,7 +127,6 @@ Reference                                                         Description
 `#4359 <https://github.com/wazuh/wazuh-kibana-app/pull/4359>`_    Module settings not persisting between updates is fixed.
 `#4367 <https://github.com/wazuh/wazuh-kibana-app/pull/4367>`_    A search bar error on the SCA Inventory table is fixed.
 `#4373 <https://github.com/wazuh/wazuh-kibana-app/pull/4373>`_    A routing loop when reinstalling the Wazuh indexer is fixed.
-`#4365 <https://github.com/wazuh/wazuh-kibana-app/pull/4365>`_    Centralized service to restart the Wazuh managers is added.
 ==============================================================    =============
 
 Wazuh Kibana plugin for Kibana 7.10.2
@@ -146,7 +145,6 @@ Reference                                                         Description
 `#4359 <https://github.com/wazuh/wazuh-kibana-app/pull/4359>`_    The persistence of the plugin registry file between updates is fixed.
 `#4367 <https://github.com/wazuh/wazuh-kibana-app/pull/4367>`_    A search bar error on the SCA Inventory table is fixed.
 `#4373 <https://github.com/wazuh/wazuh-kibana-app/pull/4373>`_    A routing loop when reinstalling the Wazuh indexer is fixed.
-`#4365 <https://github.com/wazuh/wazuh-kibana-app/pull/4365>`_    Centralized service to restart the Wazuh managers is added.
 ==============================================================    =============
 
 Wazuh Kibana plugin for Kibana 7.16.x and 7.17.x
@@ -165,7 +163,6 @@ Reference                                                         Description
 `#4359 <https://github.com/wazuh/wazuh-kibana-app/pull/4359>`_    Module settings not persisting between updates is fixed.
 `#4367 <https://github.com/wazuh/wazuh-kibana-app/pull/4367>`_    A search bar error on the SCA Inventory table is fixed.
 `#4373 <https://github.com/wazuh/wazuh-kibana-app/pull/4373>`_    A routing loop when reinstalling the Wazuh indexer is fixed.
-`#4365 <https://github.com/wazuh/wazuh-kibana-app/pull/4365>`_    Centralized service to restart the Wazuh managers is added.
 ==============================================================    =============
 
 Wazuh Splunk app
