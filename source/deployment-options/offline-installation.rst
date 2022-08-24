@@ -24,35 +24,25 @@ Prerequisites
 Download the packages and configuration files
 ---------------------------------------------
 
-#.  Replace ``<deb|rpm>`` in the following command with your choice of package format and run it from a Linux system with Internet connection. This action executes a script that downloads all required files for the offline installation on x86_64 architectures.
+#. Replace ``<deb|rpm>`` in the following command with your choice of package format and run it from a Linux system with Internet connection. This action executes a script that downloads all required files for the offline installation on x86_64 architectures.
 
-    .. code-block:: console
-      
-        # curl -sO https://packages.wazuh.com/|WAZUH_CURRENT_MINOR|/wazuh-install.sh
-        # chmod 744 wazuh-install.sh
-        # ./wazuh-install.sh -dw <deb|rpm>
+   .. code-block:: console
+
+      # curl -sO https://packages.wazuh.com/|WAZUH_CURRENT_MINOR|/wazuh-install.sh
+      # chmod 744 wazuh-install.sh
+      # ./wazuh-install.sh -dw <deb|rpm>
           
-#.  Prepare the certificate configuration file.
+#. Download the certificates configuration file.
 
-    -   All-in-one deployment
-    
-        If you are performing an all-in-one deployment, do the following:
+      .. code-block:: console
         
-        .. code-block:: console
+         # curl -sO https://packages.wazuh.com/|WAZUH_CURRENT_MINOR|/config.yml
+
+#. Edit ``config.yml`` to prepare the certificates creation.
+
+   -  If you are performing an all-in-one deployment, replace ``<indexer-node-ip>``, ``<wazuh-manager-ip>``, and ``<dashboard-node-ip>`` with ``127.0.0.1``.
         
-            # curl -sO https://packages.wazuh.com/|WAZUH_CURRENT_MINOR|/config.yml
-            
-        Edit ``config.yml`` and replace ``<indexer-node-ip>``, ``<wazuh-manager-ip>``, and ``<dashboard-node-ip>`` with ``127.0.0.1``.
-        
-    -   Distributed deployment
-        
-        If you are performing a distributed deployment, do the following:
-        
-        .. code-block:: console
-        
-            # curl -sO https://packages.wazuh.com/|WAZUH_CURRENT_MINOR|/config.yml
-            
-        Edit ``config.yml`` and replace the node names and IP values with the corresponding names and IP addresses. You need to do this for all the Wazuh server, the Wazuh indexer, and the Wazuh dashboard nodes. Add as many node fields as needed.
+   -  If you are performing a distributed deployment, replace the node names and IP values with the corresponding names and IP addresses. You need to do this for all the Wazuh server, the Wazuh indexer, and the Wazuh dashboard nodes. Add as many node fields as needed.
 
 
 #.  Run the ``./wazuh-certs-tool.sh`` to create the certificates. For a multi-node cluster, these certificates need to be later deployed to all Wazuh instances in your cluster.
@@ -68,10 +58,6 @@ Download the packages and configuration files
 
 Install Wazuh components from local files
 -----------------------------------------
-
-.. note::
-
-    In the host where the installation is taking place, make sure to change the working directory to the folder where the downloaded installation files were placed.
 
 In the working directory where you placed ``wazuh-offline.tar.gz`` and ``./wazuh-certificates/``, execute the following command to decompress the installation files:
 
@@ -98,24 +84,25 @@ Installing the Wazuh indexer
         
                 # dpkg -i ./wazuh-offline/wazuh-packages/wazuh-indexer*.deb
 
-#.  Run the following commands replacing ``<indexer-node-name>`` with the name of the Wazuh indexer node you are configuring as defined in ``config.yml``. For example, ``node-1``. This deploys the SSL certificates to encrypt communications between the Wazuh central components.
+#. Run the following commands replacing ``<indexer-node-name>`` with the name of the Wazuh indexer node you are configuring as defined in ``config.yml``. For example, ``node-1``. This deploys the SSL certificates to encrypt communications between the Wazuh central components.
 
-    .. code-block:: console
+   .. code-block:: console
 
-        # NODE_NAME=<indexer-node-name>
+      # NODE_NAME=<indexer-node-name>
 
-    .. code-block:: console
+   .. code-block:: console
     
-        # mkdir /etc/wazuh-indexer/certs
-        # mv -n wazuh-certificates/$NODE_NAME.pem /etc/wazuh-indexer/certs/indexer.pem
-        # mv -n wazuh-certificates/$NODE_NAME-key.pem /etc/wazuh-indexer/certs/indexer-key.pem
-        # mv wazuh-certificates/admin-key.pem /etc/wazuh-indexer/certs/
-        # mv wazuh-certificates/admin.pem /etc/wazuh-indexer/certs/
-        # cp wazuh-certificates/root-ca.pem /etc/wazuh-indexer/certs/
-        # chmod 500 /etc/wazuh-indexer/certs
-        # chmod 400 /etc/wazuh-indexer/certs/*
-        # chown -R wazuh-indexer:wazuh-indexer /etc/wazuh-indexer/certs
+      # mkdir /etc/wazuh-indexer/certs
+      # mv -n wazuh-certificates/$NODE_NAME.pem /etc/wazuh-indexer/certs/indexer.pem
+      # mv -n wazuh-certificates/$NODE_NAME-key.pem /etc/wazuh-indexer/certs/indexer-key.pem
+      # mv wazuh-certificates/admin-key.pem /etc/wazuh-indexer/certs/
+      # mv wazuh-certificates/admin.pem /etc/wazuh-indexer/certs/
+      # cp wazuh-certificates/root-ca.pem /etc/wazuh-indexer/certs/
+      # chmod 500 /etc/wazuh-indexer/certs
+      # chmod 400 /etc/wazuh-indexer/certs/*
+      # chown -R wazuh-indexer:wazuh-indexer /etc/wazuh-indexer/certs
 
+   Notice that the `root-ca.pem` certificate is not moved but copied to the Wazuh indexer `certs` folder. This way it is kept to deploy it to other nodes and components folders in next steps as well. This is not the case with the Wazuh indexer node certificate and key files, however. They are no longer needed once placed in the Wazuh indexer `certs` folder. For example, the `node-1.pem` and `node-1-key.pem` files for the first node.
 
 #. Edit ``/etc/wazuh-indexer/opensearch.yml`` and replace the following values: 
 
