@@ -10,7 +10,6 @@
 
 This section lists the changes in version 3.13.5. More details about these changes are provided in each component changelog:
 
-- `wazuh/wazuh <https://github.com/wazuh/wazuh/blob/v3.13.5/CHANGELOG.md>`_
 - `wazuh/wazuh-kibana-app <https://github.com/wazuh/wazuh-kibana-app/blob/v3.13.5-7.9.2/CHANGELOG.md>`_
 - `wazuh/wazuh-splunk <https://github.com/wazuh/wazuh-splunk/blob/v3.13.5-8.0.4/CHANGELOG.md>`_
 
