@@ -551,7 +551,7 @@ A positive number expressed in seconds that indicates the time period where the 
 +--------------------+-------------------------------------+
 | **Default value**  | 10                                  |
 +--------------------+-------------------------------------+
-| **Allowed values** | A positive number between 1 to 3600 |
+| **Allowed values** | A positive number between 1 and 3600|
 +--------------------+-------------------------------------+
 
 
