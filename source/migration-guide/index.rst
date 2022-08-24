@@ -8,7 +8,9 @@
 Migration guide
 ================
 
-This guide includes instructions for three different types of migrations. The first one is related to the :doc:`Wazuh indexer </getting-started/components/wazuh-indexer>`, a highly scalable, full-text search and analytics engine. The second is related to the :doc:`Wazuh dashboard </getting-started/components/wazuh-dashboard>`, the flexible and intuitive new web interface for mining, analyzing, and visualizing data. From Wazuh version 4.3.0 onwards, users can take full advantage of these two new components that have been added to the platform. 
+This guide includes instructions for three different types of migrations. The first option below is related to the :doc:`Wazuh indexer </getting-started/components/wazuh-indexer>`, a highly scalable, full-text search and analytics engine. The second is related to the :doc:`Wazuh dashboard </getting-started/components/wazuh-dashboard>`, the flexible and intuitive new web interface for mining, analyzing, and visualizing data. 
+
+From Wazuh version 4.3.0 onwards, users can take full advantage of these two new components that have been added to the platform. Finally, on the thirst option, you get instructions for migrating from OSSEC to Wazuh.
 
 - :doc:`Migrating to the Wazuh indexer </migration-guide/wazuh-indexer>`: Follow this section to migrate from Open Distro for Elasticsearch 1.13 to the Wazuh indexer. This new component consists of a distribution of `Opensearch <https://github.com/opensearch-project/OpenSearch>`_ with additional tools that Wazuh has created to assist with the installation and configuration of the search engine. 
 
