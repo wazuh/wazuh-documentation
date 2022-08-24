@@ -483,6 +483,10 @@ Installing the Wazuh dashboard
                   password: wazuh-wui
                   run_as: false
 
+#.  Run the following command to verify the Wazuh dashboard service is active.
+
+    .. include:: /_templates/installations/wazuh/common/check_wazuh_dashboard.rst    
+
 #.  Access the web interface. 
 
     -   URL: *https://<wazuh_server_ip>*
