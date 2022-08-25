@@ -102,7 +102,7 @@ Installing the Wazuh indexer
       # chmod 400 /etc/wazuh-indexer/certs/*
       # chown -R wazuh-indexer:wazuh-indexer /etc/wazuh-indexer/certs
 
-   Notice that the `root-ca.pem` certificate is not moved but copied to the Wazuh indexer `certs` folder. This way it is kept to deploy it to other nodes and components folders in next steps as well. This is not the case with the Wazuh indexer node certificate and key files, however. They are no longer needed once placed in the Wazuh indexer `certs` folder. For example, the `node-1.pem` and `node-1-key.pem` files for the first node.
+   Here you move the certificate and key files for the node, such as `node-1.pem` and `node-1-key.pem`, to their corresponding `certs` folder. They're specific to the node and not required on the other nodes. Yet, note that the `root-ca.pem` certificate isn't moved but copied to the `certs` folder. This way, you can continue deploying them to other nodes and component folders in next steps.
 
 #. Edit ``/etc/wazuh-indexer/opensearch.yml`` and replace the following values: 
 
