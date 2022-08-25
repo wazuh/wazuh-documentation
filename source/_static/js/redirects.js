@@ -120,6 +120,7 @@ newUrls['4.3'] = [
   '/release-notes/release-4-3-4.html',
   '/release-notes/release-4-3-5.html',
   '/release-notes/release-4-3-6.html',
+  '/release-notes/release-4-3-7.html',
   '/getting-started/use-cases/container-security.html',
   '/user-manual/agents/query-configuration.html',
   '/user-manual/elasticsearch/configure-indices.html',
@@ -262,6 +263,13 @@ newUrls['4.3'] = [
   '/deployment-options/amazon-machine-images/amazon-machine-images.html',
   '/release-notes/release-4-3-0.html',
   '/learning-wazuh/build-lab/install-wazuh-central-components.html', 
+  '/upgrade-guide/wazuh-agent/linux.html',
+  '/upgrade-guide/wazuh-agent/windows.html',
+  '/upgrade-guide/wazuh-agent/macos.html',
+  '/upgrade-guide/wazuh-agent/solaris.html',
+  '/upgrade-guide/wazuh-agent/aix.html',
+  '/upgrade-guide/wazuh-agent/hp-ux.html',
+  '/upgrade-guide/wazuh-agent/index.html',
 ];
 
 removedUrls['4.3'] = [
@@ -387,10 +395,16 @@ removedUrls['4.3'] = [
   '/learning-wazuh/build-lab/xpack-security-setup.html',
   '/learning-wazuh/build-lab/install-elastic-stack.html',
   '/learning-wazuh/build-lab/install-wazuh-manager.html',
+  '/upgrade-guide/upgrading-agent.html', 
 ];
 
 
 redirections.push(
+  {
+    'target': ['4.2=>4.3', '4.3=>4.2'],
+    '4.2': '/upgrade-guide/upgrading-agent.html',
+    '4.3': '/upgrade-guide/wazuh-agent/index.html',
+  },
   {
     'target': ['4.2=>4.3'],
     '4.2': '/upgrade-guide/upgrading-wazuh.html',
@@ -3060,6 +3074,7 @@ redirections.push(
 );
 
 newUrls['3.13'] = [
+  '/release-notes/release-3-13-5.html', 
   '/release-notes/release-3-13-4.html',  
   '/release-notes/release_3_13_3.html',
   '/release-notes/release_3_13_2.html',

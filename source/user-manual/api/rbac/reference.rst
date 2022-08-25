@@ -371,6 +371,7 @@ cluster:read
 - :api-ref:`GET /cluster/{node_id}/status <operation/api.controllers.cluster_controller.get_status_node>` (`node:id`_)
 - :api-ref:`PUT /agents/node/{node_id}/restart <operation/api.controllers.agent_controller.restart_agents_by_node>` (`node:id`_)
 - :api-ref:`PUT /cluster/restart <operation/api.controllers.cluster_controller.put_restart>` (`node:id`_)
+- :api-ref:`GET /cluster/ruleset/synchronization <operation/api.controllers.cluster_controller.get_nodes_ruleset_sync_status>` (`node:id`_)
 
 cluster:restart
 ~~~~~~~~~~~~~~~~~~~~~~~~~~
