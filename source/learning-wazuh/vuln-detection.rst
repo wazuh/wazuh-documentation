@@ -111,7 +111,6 @@ In the ``/var/ossec/etc/manager.conf`` file of the Wazuh manager, scroll down to
       </provider>
       <provider name="debian">
         <enabled>no</enabled>
-        <os>stretch</os>
         <os>buster</os>
         <os>bullseye</os>
         <update_interval>1h</update_interval>
@@ -192,7 +191,6 @@ a. For Systemd:
         <!-- Debian OS vulnerabilities -->
         <provider name="debian">
           <enabled>no</enabled>
-          <os>stretch</os>
           <os>buster</os>
           <os>bullseye</os>
           <update_interval>1h</update_interval>

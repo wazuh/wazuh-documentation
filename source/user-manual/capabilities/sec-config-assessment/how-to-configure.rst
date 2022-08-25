@@ -87,11 +87,15 @@ The ``<sca>`` block will be merged with the ``<sca>`` block on the Wazuh agent s
     +=============================+============================================================+===============================+
     | cis_win2012r2               |  CIS Benchmark for Windows 2012 R2                         | Windows Server 2012 R2        |
     +-----------------------------+------------------------------------------------------------+-------------------------------+
-    | cis_win10_enterprise        |  CIS Benchmark for Windows 10 Enterprise (Release 1803)    | Windows 10                    |
+    | cis_win10_enterprise        |  CIS Benchmark for Windows 10 Enterprise                   | Windows 10                    |
     +-----------------------------+------------------------------------------------------------+-------------------------------+
+    | cis_win11_enterprise        |  CIS Benchmark for Windows 11 Enterprise                   | Windows 11                    |
+    +-----------------------------+------------------------------------------------------------+-------------------------------+    
     | cis_win2016                 |  CIS Benchmark for Windows Server 2016                     | Windows Server 2016           |
     +-----------------------------+------------------------------------------------------------+-------------------------------+
     | cis_win2019                 |  CIS Benchmark for Windows Server 2019 RTM                 | Windows Server 2019           |
+    +-----------------------------+------------------------------------------------------------+-------------------------------+
+    | cis_win2022                 |  CIS Benchmark for Windows Server 2022                     | Windows Server 2022           |
     +-----------------------------+------------------------------------------------------------+-------------------------------+
     | sca_win_audit               |  Benchmark for Windows auditing                            | Windows                       |
     +-----------------------------+------------------------------------------------------------+-------------------------------+
@@ -109,6 +113,8 @@ The ``<sca>`` block will be merged with the ``<sca>`` block on the Wazuh agent s
     +-----------------------------+------------------------------------------------------------+-------------------------------+
     | cis_rhel8_linux             |  CIS Benchmark for Red Hat Enterprise Linux 8              | Red Hat Enterprise Linux 8    |
     +-----------------------------+------------------------------------------------------------+-------------------------------+
+    | cis_rhel9_linux             |  CIS Benchmark for Red Hat Enterprise Linux 9              | Red Hat Enterprise Linux 9    |
+    +-----------------------------+------------------------------------------------------------+-------------------------------+    
     | cis_debian7                 |  CIS Benchmark for Debian/Linux 7                          | Debian 7                      |
     +-----------------------------+------------------------------------------------------------+-------------------------------+
     | cis_debian8                 |  CIS Benchmark for Debian/Linux 8                          | Debian 8                      |
