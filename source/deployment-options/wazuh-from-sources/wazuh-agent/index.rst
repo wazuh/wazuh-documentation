@@ -103,6 +103,11 @@ The Wazuh agent is a single and lightweight monitoring software. It is a multi-p
 
                         # pacman --noconfirm -Syu curl gcc make sudo wget expect gnupg perl-base perl fakeroot python brotli automake autoconf libtool gawk libsigsegv nodejs base-devel inetutils cmake
 
+                .. group-tab:: APK
+
+                    .. code-block:: console
+
+                        # apk --update add git less openssh openssl openssl-dev libgcc bash make gcc g++ cmake curl automake linux-headers autoconf libtool procps python3 gettext-dev
 
         #.  Download and extract the latest version:
 
