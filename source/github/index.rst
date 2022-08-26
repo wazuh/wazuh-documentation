@@ -1,12 +1,12 @@
 .. Copyright (C) 2015, Wazuh, Inc.
 
+.. meta::
+  :description: Discover how Wazuh can help you to monitor your GitHub organizations. Check out this section of our documentation to learn more about it. 
+
 .. _github:
 
 Using Wazuh to monitor GitHub
 =============================
-
-.. meta::
-  :description: Discover how Wazuh can help you to monitor your GitHub organizations.
 
 .. versionadded:: 4.3.0
 
