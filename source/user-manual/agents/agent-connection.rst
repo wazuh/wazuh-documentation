@@ -6,6 +6,15 @@
 Checking connection with the Wazuh manager
 ==========================================
 
+The status of the connection of an agent with the Wazuh manager can be checked in at least four ways.
+
+-  Navigating the Wazuh dashboard.
+-  Reading the agent state file in the endpoint.
+-  Using the agents utility in the Wazuh server.
+-  Requesting the status to the Wazuh API.
+
+Also, connectivity of the agent endpoint with the server must be verified in case of problems.
+
 Using the Wazuh dashboard
 -------------------------
 
@@ -16,7 +25,7 @@ You can check the connection status of any agent by selecting the **Agents** men
    :align: center
    :width: 80%
 
-This option shows the **Agents** dashboard with a list of all registered agents. The list includes the connection status of each agent. The dashboard also shows the amount of agents found for each possible connection status.
+This option shows the **Agents** dashboard with a list of all registered agents. The list includes the connection status of each agent. The dashboard also shows a summary with the amount of agents found for each possible connection status: `Active`, `Disconnected`, `Pending`, `Never connected`.
 
 .. thumbnail:: /images/manual/managing-agents/agents-dashboard.png
    :title: Wazuh dashboard agents menu option
@@ -73,11 +82,11 @@ To check the current status and verify the connection of the agent with the mana
 Using the `agent_control` utility from the server
 -------------------------------------------------
 
-You can check the status of any agent remotely by using the :doc:`agent_control <../reference/tools/agent-control>` utility found with the Wazuh server. To get the status of an agent, run the following command replacing the ``-i`` parameter with your agent ID.
+You can check the status of any agent remotely by using the :doc:`agent_control <../reference/tools/agent-control>` utility found with the Wazuh server. To get the status of an agent, run the following command replacing the ``-i`` parameter with your agent ID, for example `001`.
 
 .. code-block:: console
 
-   # /var/ossec/bin/agent_control -i <YOUR_AGENT_ID> | grep ^\s+Status
+   # /var/ossec/bin/agent_control -i <YOUR_AGENT_ID> | grep Status
 
 .. code-block:: console
    :class: output
@@ -85,7 +94,7 @@ You can check the status of any agent remotely by using the :doc:`agent_control 
       Status:     Active
 
 -  ``Active``: The Wazuh manager received the `keepalive` signal from the agent.
--  ``Disconnected``: The Wazuh manager didn't receive the `keepalive` signal during the last 10 minutes.
+-  ``Disconnected``: The Wazuh manager didn't receive the `keepalive` signal during the last :ref:`Agents disconnection time <reference_agents_disconnection_time>` period. This time is configurable through :doc:`/user-manual/reference/ossec-conf/index` and set initially to 10 minutes by default.
 
 Using the Wazuh API
 -------------------
