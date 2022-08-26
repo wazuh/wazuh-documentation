@@ -1,7 +1,7 @@
 .. Copyright (C) 2015, Wazuh, Inc.
 
 .. meta::
-   :description: This section of the Wazuh documentation guides through the process of upgrading the Wazuh server installations from versions prior to 3.0,
+   :description: This section of the Wazuh documentation guides through the process of upgrading the Wazuh server installations from versions prior to 3.0.
 
 .. _upgrading_wazuh_server_legacy:
 

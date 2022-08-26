@@ -1,7 +1,7 @@
 .. Copyright (C) 2015, Wazuh, Inc.
 
 .. meta::
-  :description: Learn considerations about configuring multiple services with the Wazuh Azure module in this section of the Wazuh documentation. 
+  :description: Learn considerations for configuring multiple services with the Wazuh Azure module in this section of the Wazuh documentation. 
 
 .. _azure_considerations:
 
