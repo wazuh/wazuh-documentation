@@ -128,6 +128,10 @@ Follow this guide to migrate from Open Distro for Elasticsearch 1.13 to the Wazu
       # chown wazuh-indexer:wazuh-indexer -R /var/log/wazuh-indexer/
       # chown wazuh-indexer:wazuh-indexer -R /var/lib/wazuh-indexer/
 
+   .. note::
+
+      If you have the Open Distro for Elasticsearch performance analyzer plugin installed, change the ownership of the ``/dev/shm/performanceanalyzer/`` directory by running the following command: ``chown wazuh-indexer:wazuh-indexer -R /dev/shm/performanceanalyzer/``.
+
 #. Port your settings from ``/etc/elasticsearch/elasticsearch.yml`` to ``/etc/wazuh-indexer/opensearch.yml``. Most settings use the same names.
 
    Take into account the following considerations: 

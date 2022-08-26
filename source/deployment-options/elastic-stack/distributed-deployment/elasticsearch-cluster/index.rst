@@ -4,7 +4,6 @@
 
 .. _basic_elasticsearch_cluster:
 
-
 Elasticsearch cluster
 =====================
 

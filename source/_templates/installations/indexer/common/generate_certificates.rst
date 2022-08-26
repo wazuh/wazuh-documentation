@@ -1,6 +1,6 @@
 .. Copyright (C) 2015, Wazuh, Inc.
 
-#. Download the ``wazuh-certs-tool.sh`` script and the ``config.yml`` configuration file. This is to create the certificates that will encrypt communications between the Wazuh central components.
+#. Download the ``wazuh-certs-tool.sh`` script and the ``config.yml`` configuration file. This creates the certificates that encrypt communications between the Wazuh central components.
 
    .. code-block:: console
 
