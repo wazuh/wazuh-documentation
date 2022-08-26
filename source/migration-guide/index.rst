@@ -8,7 +8,7 @@
 Migration guide
 ================
 
-From Wazuh 4.0.0 to Wazuh 4.2.7, the default Wazuh installation included the Wazuh server and `Open Distro for Elasticsearch <https://opendistro.github.io/for-elasticsearch/>`_, project that is now archived and has been succeeded by OpenSearch. This guide includes instructions to migrate from Open Distro for Elasticsearch to the :doc:`Wazuh indexer </getting-started/components/wazuh-indexer>` and :doc:`Wazuh dashboard </getting-started/components/wazuh-dashboard>`, the new Wazuh components introduced in Wazuh 4.3.0.
+From Wazuh 4.0.0 to Wazuh 4.2.7, the default Wazuh installation included the Wazuh server and `Open Distro for Elasticsearch <https://opendistro.github.io/for-elasticsearch/>`_, a project that is now archived and has been succeeded by OpenSearch. This guide includes instructions to migrate from Open Distro for Elasticsearch to the :doc:`Wazuh indexer </getting-started/components/wazuh-indexer>` and :doc:`Wazuh dashboard </getting-started/components/wazuh-dashboard>`, the new components introduced in Wazuh 4.3.0.
 
 - :doc:`Migrating to the Wazuh indexer </migration-guide/wazuh-indexer>`: Follow this section to migrate from Open Distro for Elasticsearch 1.13 to the Wazuh indexer. This new component consists of a distribution of `Opensearch <https://github.com/opensearch-project/OpenSearch>`_ with additional tools that Wazuh has created to assist with the installation and configuration of the search engine. 
 
