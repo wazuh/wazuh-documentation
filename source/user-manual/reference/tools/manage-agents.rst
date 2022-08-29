@@ -1,5 +1,8 @@
 .. Copyright (C) 2015, Wazuh, Inc.
 
+.. meta::
+  :description: The purpose of manage_agents is to provide an easy-to-use interface to handle authentication keys for Wazuh agents. Learn more about it here.
+
 .. _manage_agents:
 
 manage_agents

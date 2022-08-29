@@ -1,5 +1,8 @@
 .. Copyright (C) 2015, Wazuh, Inc.
 
+.. meta::
+  :description: Check out how the Wazuh SCA scanner detects and reports changes in the check results using a simple use case in this section of our documentation.
+
 Use case: Getting an alert when a check changes its result value
 ================================================================
 
