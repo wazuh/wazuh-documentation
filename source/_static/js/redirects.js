@@ -83,6 +83,7 @@ newUrls['4.3'] = [
   '/release-notes/release-4-3-7.html',
   '/getting-started/use-cases/container-security.html',
   '/user-manual/agents/query-configuration.html',
+  '/user-manual/wazuh-indexer-tuning.html',
   '/user-manual/elasticsearch/configure-indices.html',
   '/user-manual/elasticsearch/elasticsearch.html',
   '/user-manual/elasticsearch/index.html',
