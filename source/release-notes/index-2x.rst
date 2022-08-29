@@ -1,7 +1,8 @@
 .. Copyright (C) 2015, Wazuh, Inc.
+
 .. meta::
   :description: Check out Wazuh 2.x release notes.
-  
+    
 2.x
 ===
 

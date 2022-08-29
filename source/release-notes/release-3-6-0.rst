@@ -2,6 +2,7 @@
 
 .. meta::
   :description: Wazuh 3.6.0 has been released. Check out our release notes to discover the changes and additions of this release.
+  
 .. _release_3_6_0:
 
 3.6.0 Release notes - 29 August 2018
