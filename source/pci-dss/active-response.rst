@@ -11,7 +11,7 @@ The active response module can help meet the following PCI DSS requirement:
 
 - **Requirement 11 - Test Security of Systems and Networks Regularly**: Vulnerabilities are being discovered continually by malicious individuals and researchers, and being introduced by new software. System components, processes, and bespoke and custom software should be tested frequently to ensure security controls continue to reflect a changing environment. 
 
-   The goal of this requirement is to ensure that systems and networks are regularly tested to confirm their security status and possible intrusions are detected and responded to. Response to intrusions and unauthorized file changes can be achieved with the active response module. More details on configuring the active response module can be found in the :doc:`active response </user-manual/capabilities/active-response/index>` documentation section.
+The goal of this requirement is to ensure that systems and networks are regularly tested to confirm their security status and possible intrusions are detected and responded to. Response to intrusions and unauthorized file changes can be achieved with the active response module. More details on configuring the active response module can be found in the :doc:`active response </user-manual/capabilities/active-response/index>` documentation section.
 
 
 Use cases
@@ -26,10 +26,10 @@ Using the steps below, we configure the active response module to execute an IP 
 	.. code-block:: xml 
 
 		<active-response>
-			<command>firewall-drop</command>
-			<location>local</location>
-			<rules_id>5710</rules_id>
-			<timeout>100</timeout>
+		  <command>firewall-drop</command>
+		  <location>local</location>
+		  <rules_id>5710</rules_id>
+		  <timeout>100</timeout>
 		</active-response>
 
    .. note::      
@@ -42,22 +42,22 @@ Using the steps below, we configure the active response module to execute an IP 
    When we attempt to SSH with a non-existent user, rule 5710 generates an alert followed by the active response getting triggered.
 
 	.. thumbnail:: ../images/pci/rule-5710 generates-an-alert-01.png
-		:title: Rule 5710 generates an alert
+		:title: Attempt to login using a non-existent user and Host blocked by firewall-drop alerts
 		:align: center
-		:width: 100%
+		:width: 80%
 
 	.. thumbnail:: ../images/pci/rule-5710 generates-an-alert-02.png
-		:title: Rule 5710 generates an alert
+		:title: Rule 651 Host Blocked by firewall-drop Active Response
 		:align: center
-		:width: 100%
+		:width: 80%
 
 	.. thumbnail:: ../images/pci/rule-5710 generates-an-alert-03.png
-		:title: Rule 5710 generates an alert
+		:title: Rule 651 Host Blocked by firewall-drop Active Response
 		:align: center
-		:width: 100%
+		:width: 80%
 
 	.. thumbnail:: ../images/pci/rule-5710 generates-an-alert-04.png
-		:title: Rule 5710 generates an alert
+		:title: Rule 651 Host Blocked by firewall-drop Active Response
 		:align: center
-		:width: 100%
+		:width: 80%
 

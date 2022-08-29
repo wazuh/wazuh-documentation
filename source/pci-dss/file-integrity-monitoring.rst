@@ -59,17 +59,17 @@ For this use case, we configure Wazuh to detect when changes are made to a file 
 
       total 4
       -rw-r--r--. 1 root root 14 May 16 14:53 cardholder_data.txt
+
    .. code-block:: console
    
       # cat /root/credit_cards/cardholder_data.txt
-
 
    .. code-block:: none
      :class: output    		
 
       User1 = card4
 
-#. We add the following configuration to the syscheck block of the agent configuration file ``/var/ossec/etc/ossec.conf``. This will enable real-time monitoring of the directory and ensures that when a file in the directory is modified, Wazuh generates an alert with the details of the user who made the changes on the monitored files and the program name or process used to carry them out:
+#. Add the following configuration to the syscheck block of the agent configuration file ``/var/ossec/etc/ossec.conf``. This will enable real-time monitoring of the directory and ensures that when a file in the directory is modified, Wazuh generates an alert with the details of the user who made the changes on the monitored files and the program name or process used to carry them out. 
 
    .. code-block:: xml
 
@@ -81,7 +81,7 @@ For this use case, we configure Wazuh to detect when changes are made to a file 
 
    .. include:: /_templates/common/restart_agent.rst
 
-#. We can check if the Audit rule for monitoring the selected folder is applied. To check that, we need to execute the following command:
+#. Check if the Audit rule for monitoring the selected folder is applied. To do so, execute the following command:
 
    .. code-block:: console 
 
@@ -104,12 +104,12 @@ For this use case, we configure Wazuh to detect when changes are made to a file 
       .. thumbnail:: ../images/pci/file-modified-in-the-monitored-directory.png
          :title: File modified in the monitored directory
          :align: center
-         :width: 100%
+         :width: 80%
 
       .. thumbnail:: ../images/pci/file-modified-in-the-monitored-directory-2.png
          :title: File modified in the monitored directory
          :align: center
-         :width: 100%     
+         :width: 80%     
 
    In the alert details, we can see the PCI DSS requirement met, the differences in the file checksum, the file modified, the modification time, the ``whodata`` showing the process and user that made the modification, and other details.
 
@@ -132,13 +132,13 @@ In this use case, we configure Syscheck to detect when changes have been made to
 	    Showing the changes made in a file is limited to only text files at this time.
 
 
-#. Update the frequency option of the ``syscheck`` block to your desired scan interval in seconds. In this case, our desired scan interval is every 1 hour (3600 seconds).
+#. In the agent configuration file ``/var/ossec/etc/ossec.conf``, update the frequency option of the ``syscheck`` block to your desired scan interval in seconds. In this case, our desired scan interval is every 1 hour (3600 seconds).
 
    .. code-block:: console 
 
        <frequency>3600</frequency>
 
-#. We add the following configuration to the ``syscheck`` block of the agent configuration file ``/var/ossec/etc/ossec.conf``. This will enable monitoring of the file and ensure that when the file is modified, Wazuh generates an alert with the differences.
+#. Add the following configuration to the ``syscheck`` block of the agent configuration file ``/var/ossec/etc/ossec.conf``. This will enable monitoring of the file and ensure that when the file is modified, Wazuh generates an alert with the differences.
 
    .. code-block:: xml
 
@@ -168,12 +168,12 @@ In this use case, we configure Syscheck to detect when changes have been made to
 	.. thumbnail:: ../images/pci/alert-generated-on-the-next- syscheck-scan-01.png
 		:title: Alert generated on the next Syscheck scan
 		:align: center
-		:width: 100%
+		:width: 80%
 
 	.. thumbnail:: ../images/pci/alert-generated-on-the-next- syscheck-scan-02.png
 		:title: Alert generated on the next Syscheck scan
 		:align: center
-		:width: 100%
+		:width: 80%
 
    In the alert details, we can see the changes made in ``syscheck.diff``, the file modified, the PCI DSS requirement met, the differences in the file checksum, the modification time, and other details.
 
@@ -185,7 +185,7 @@ In this scenario, Syscheck detects when a file in a monitored directory is delet
 **On the agent**
 
 #. Determine the full file path for the file or directory to be monitored. In this case, we are monitoring the directory ``/root/credit_cards``.
-#. We add the following configuration to the syscheck block of the agent configuration file ``/var/ossec/etc/ossec.conf``. This will enable monitoring of the file and ensure that Wazuh generates an alert if the file is deleted.
+#. Add the following configuration to the syscheck block of the agent configuration file ``/var/ossec/etc/ossec.conf``. This will enable monitoring of the file and ensure that Wazuh generates an alert if the file is deleted.
 
    .. code-block:: xml
 
@@ -202,7 +202,7 @@ In this scenario, Syscheck detects when a file in a monitored directory is delet
 	.. thumbnail:: ../images/pci/alert-generated-for-the-file-deleted.png
 		:title: Alert generated for the file deleted
 		:align: center
-		:width: 100%
+		:width: 80%
 
    In the alert details, we can see the file deleted, the PCI DSS requirement met, the deletion time, and other details.
 

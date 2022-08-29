@@ -30,5 +30,5 @@ In the following sections, we have some use cases that show how to use the Wazuh
     vulnerability-detection
     active-response
     system-inventory
-    elastic
+    dashboard
 

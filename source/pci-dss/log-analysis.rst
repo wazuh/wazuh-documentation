@@ -14,7 +14,7 @@ The log collector module can help meet the following PCI DSS requirement:
 
 - **Requirement 10 - Log and Monitor All Access to System Components and Cardholder Data**: This control requires that user activities, including those by employees, contractors, consultants, internal and external vendors, and other third parties are logged and monitored, and the log data stored for a specified period of time.
 
-   To achieve this, the Wazuh agent can collect logs from the endpoints it is deployed on. Logs can also be collected via Syslog for network and other syslog enabled devices. Wazuh can also hold logs of events that do not generate an alert using the archive feature and the indexer long term storage. For more information on configuring log collection, see the :doc:`Log data collection section </user-manual/capabilities/log-data-collection/index>`.
+To achieve this, the Wazuh agent can collect logs from the endpoints it is deployed on. Logs can also be collected via Syslog for network and other syslog enabled devices. Wazuh can also hold logs of events that do not generate an alert using the archive feature and the indexer long term storage. For more information on configuring log collection, see the :doc:`Log data collection section </user-manual/capabilities/log-data-collection/index>`.
 
 
 Use cases
@@ -36,7 +36,7 @@ The following are some Wazuh rules that help achieve this requirement:
 	.. thumbnail:: ../images/pci/attempt-to-login-using-non-existent-user.png
 		:title: Attempt to login using a non-existent user
 		:align: center
-		:width: 100%
+		:width: 80%
 
  
 - **Rule 5715 - sshd: authentication success**: This rule generates an alert when a user successfully logs into a system via SSH. The generated alert contains the information required by requirement 10.2.2 (user identification, type of event, date and time, success and failure indication, origination of event and identity or name of affected data, system component, resource, or service). The screenshot below shows the alert generated on the dashboard:
@@ -44,67 +44,67 @@ The following are some Wazuh rules that help achieve this requirement:
 	.. thumbnail:: ../images/pci/user-successfully-logs-into-a-system-via-SSH.png
 		:title: User successfully logs into a system via SSH
 		:align: center
-		:width: 100%
+		:width: 80%
 
 
-- PCI DSS requirement 10.5.1 requires that audit log history is retained for at least 12 months, with at least the most recent three months immediately available for analysis. This can be achieved by enabling Wazuh log archives and configuring `index management policies <https://wazuh.com/blog/wazuh-index-management/>`_. To enable Wazuh log archives, the following steps are taken:
+- PCI DSS requirement 10.5.1 requires that audit log history is retained for at least 12 months, with at least the most recent three months immediately available for analysis. This can be achieved by enabling Wazuh log archives and configuring `index management policies <https://wazuh.com/blog/wazuh-index-management/>`_. To enable Wazuh log archives, follow the instructions below. 
 
 
 **Enable archives monitoring in the Wazuh indexer**:
 
-#. Set ``<logall_json>yes</logall_json>`` in ``/var/ossec/etc/ossec.conf``
-#. Set archives: enabled to true in ``/etc/filebeat/filebeat.yml``:
+#. Set ``<logall_json>yes</logall_json>`` in ``/var/ossec/etc/ossec.conf``.
 
-    .. code-block:: console
+#. Set archives enabled to true in ``/etc/filebeat/filebeat.yml``.
 
-       archives:
-       enabled: true
+   .. code-block:: console
 
+      archives:
+      enabled: true
 
-#. Restart filebeat: 
+#. Restart Filebeat. 
 
    .. include:: /_templates/common/restart_filebeat.rst
 
 
-#. Restart the Wazuh manager: 
+#. Restart the Wazuh manager.
 
    .. include:: /_templates/common/restart_manager.rst
 
-#. Go to open the dashboard menu and select **Stack Management** under **Management**.
+#. Open the dashboard menu and select **Stack Management** under **Management**.
 
 	.. thumbnail:: ../images/pci/select-stack-management.png
 		:title: Select Stack Management
 		:align: center
-		:width: 100%
+		:width: 80%
     
 #. Choose **Index Patterns** and select **Create index pattern**. Use ``wazuh-archives-*`` as the index pattern name.
 
 	.. thumbnail:: ../images/pci/select-create-index-pattern.png
 		:title: Select Create index pattern
 		:align: center
-		:width: 100%
+		:width: 80%
 
 	.. thumbnail:: ../images/pci/define-an-index-pattern.png
 		:title: Select Create index pattern
 		:align: center
-		:width: 100%
+		:width: 80%
         
 #. Select **timestamp** as the primary time field for use with the global time filter then proceed to create the index pattern.
 
 	.. thumbnail:: ../images/pci/configure-settings.png
 		:title: Select Create index pattern
 		:align: center
-		:width: 100%
+		:width: 80%
 
 #. Open the menu and select **Discover** under **OpenSearch Dashboards**. Events should be getting reported there.
 
 	.. thumbnail:: ../images/pci/select-discover-1.png
 		:title: Select Discover
 		:align: center
-		:width: 100%
+		:width: 80%
 		
 	.. thumbnail:: ../images/pci/select-discover-2.png
 		:title: Select Discover
 		:align: center
-		:width: 100%
+		:width: 80%
     

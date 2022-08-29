@@ -12,7 +12,7 @@ The system inventory module can help meet the following PCI DSS requirement:
 
 - **Requirement 2 - Apply Secure Configuration to All System Components**: Malicious individuals, both external and internal to an entity, often use default passwords and other vendor default settings to compromise systems. These passwords and settings are well known and are easily determined via public information. Applying secure configurations to system components reduces the means available to an attacker to compromise the system. Changing default passwords, removing unnecessary software, functions, and accounts, and disabling or removing unnecessary services all help to reduce the potential attack surface. 
 
-   The system inventory module of Wazuh can help in achieving some of the objectives of this requirement by keeping an inventory of all endpoints and the processes/daemons running on them. The system inventory module will also get information about the endpoint hardware, OS, and network details. This will provide individuals in an organization with visibility into the PCI DSS relevant assets, their enabled network ports, and running processes/daemons.
+The system inventory module of Wazuh can help in achieving some of the objectives of this requirement by keeping an inventory of all endpoints and the processes/daemons running on them. The system inventory module will also get information about the endpoint hardware, OS, and network details. This will provide individuals in an organization with visibility into the PCI DSS relevant assets, their enabled network ports, and running processes/daemons.
 
 Use cases
 ---------
@@ -22,16 +22,16 @@ PCI DSS 2.2.4 requires that only necessary services, protocols, daemons, and fun
 .. thumbnail:: ../images/pci/processes-are-running-on-a-specific-endpoint-01.png
    :title: Processes running on a specific endpoint 
    :align: center
-   :width: 100%
+   :width: 80%
 
 .. thumbnail:: ../images/pci/processes-are-running-on-a-specific-endpoint-02.png
    :title: Processes running on a specific endpoint 
    :align: center
-   :width: 100%
+   :width: 80%
 
 .. thumbnail:: ../images/pci/processes-are-running-on-a-specific-endpoint-03.png
    :title: Processes running on a specific endpoint 
    :align: center
-   :width: 100%
+   :width: 80%
 
 The system inventory module is enabled with all available scans by default in all compatible systems.

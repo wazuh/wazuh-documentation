@@ -14,7 +14,7 @@ The analysis engine can help meet the following PCI DSS requirement:
 
 - **Requirement 10 - Log and Monitor All Access to System Components and Cardholder Data**: This control requires that user activities, including those by employees, contractors, consultants, internal and external vendors, and other third parties are logged and monitored, and the log data stored for a specified period of time. Requirement 10.4 (Audit logs are reviewed to identify anomalies or suspicious activity) additionally specifies that audit logs are reviewed to identify anomalies or suspicious activity. These reviews can be automated by harvesting, parsing and alerting tools.
   
-   To help meet this requirement, the Wazuh analysis engine collects logs from various sources and decodes them to extract relevant information from its fields. After that, the extracted information is compared to the ruleset to look for matches. Where the extracted information matches a rule, an alert is generated. Refer to the :doc:`Ruleset section </user-manual/ruleset/index>` for more information.
+To help meet this requirement, the Wazuh analysis engine collects logs from various sources and decodes them to extract relevant information from its fields. After that, the extracted information is compared to the ruleset to look for matches. Where the extracted information matches a rule, an alert is generated. Refer to the :doc:`Ruleset section </user-manual/ruleset/index>` for more information.
 
 
 Use cases
@@ -34,12 +34,12 @@ This requirement ensures that logs are analyzed for indicators of compromise at 
   .. thumbnail:: ../images/pci/new-windows-service-created.png
       :title: New Windows Service Created
       :align: center
-      :width: 100%
+      :width: 80%
 
-- **Rule 31168 - Shellshock attack detected**: This rule will generate an alert when logs indicating a shellshock attack from a WAF or web application are analyzed by the analysis engine.
+- **Rule 31168 - Shellshock attack detected**: This rule will generate an alert when logs indicating a Shellshock attack from a Web Application Firewall (WAF) or web application are analyzed by the analysis engine.
 
   .. thumbnail:: ../images/pci/shellshock-attack-detected.png
       :title: Shellshock attack detected
       :align: center
-      :width: 100%
+      :width: 80%
 
