@@ -63,16 +63,12 @@ The following are some Wazuh rules that help achieve this requirement:
 
 #. Restart filebeat: 
 
-    .. code-block:: console 
-      
-       systemctl restart filebeat
+   .. include:: /_templates/common/restart_filebeat.rst
 
 
 #. Restart the Wazuh manager: 
 
-    .. code-block:: console 
-      
-       systemctl restart wazuh-manager
+   .. include:: /_templates/common/restart_manager.rst
 
 #. Go to open the dashboard menu and select **Stack Management** under **Management**.
 

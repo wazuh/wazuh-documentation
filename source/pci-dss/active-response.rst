@@ -35,11 +35,9 @@ Using the steps below, we configure the active response module to execute an IP 
    .. note::      
       The ``firewall-drop`` command is included in the manager configuration file by default.
 
-#. Restart the Wazuh manager to apply the configuration:
+#. Restart the Wazuh manager to apply the configuration.
 
-   .. code-block:: console 
-
-      systemctl restart wazuh-manager
+   .. include:: /_templates/common/restart_manager.rst
 
    When we attempt to SSH with a non-existent user, rule 5710 generates an alert followed by the active response getting triggered.
 
