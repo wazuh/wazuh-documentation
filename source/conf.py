@@ -823,7 +823,7 @@ def finish_and_clean(app, exception):
     # Create additional files such as the `.doclist` and the sitemap
     creating_file_list(app, exception)
     
-    
+    # Try to create a search index for Pagefind
     import subprocess
     try:
         subprocess.run(["npx", "-y", "pagefind@v0.8.0"])
@@ -831,13 +831,7 @@ def finish_and_clean(app, exception):
         print (e)
         print ()
         print ("The search using Pagefind won't be included")
-        print ()
-        pagefind_path = app.outdir + '/_pagefind/'
-        if not os.path.exists(pagefind_path):
-            os.mkdir(pagefind_path)
-        with open(pagefind_path + '/pagefind-ui.js', "w") as f:
-            f.write("/* Pagefind not available */")
-        
+        print ()        
 
     if html_theme == 'wazuh_doc_theme':
         # Remove extra minified files
