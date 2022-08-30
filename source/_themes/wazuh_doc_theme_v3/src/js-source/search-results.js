@@ -3,7 +3,7 @@
 ----------------------------------------------------------------------------- */
 
 const excludedSearchFolders = ['release-notes'];
-const pagefindUrl = location.href.split("search.html")[0] + "_pagefind/pagefind.js";
+const pagefindUrl = location.protocol === "file:" ? "" : location.href.split("search.html")[0] + "_pagefind/pagefind.js";
 
 if ( $('.search') ) {
   /* List of folders that will be excluded from search */
@@ -11,113 +11,120 @@ if ( $('.search') ) {
   const urlParams = new URLSearchParams(window.location.search);
   const resultsContainer = "#search-results";
 
-  fetch(pagefindUrl, {
-    method: 'HEAD'
-  })
-  .then((response) => {
-    if ( response.status !== 200 || response.redirected === true ) {
-      /* Fallback to Sphinx search */
-      loadSphinxSearch();
-    } else {      
-      window.pagefind = import(pagefindUrl);
-      let resultsFound = 0;
-      let excludedResultsCount = 0;
-            
-      pagefind.then(
-        function(data) {
-          const search = data.search;
-          const queryTerm = urlParams.get('q');
-          if ( typeof(queryTerm) !== 'string' ) {
-            return;
-          } 
-          let highlightstring = '?highlight=' + queryTerm;
-          pagefindSearch(queryTerm);
-          
-          function pagefindSearch(query) {
-            if ( query.length === 0 ) {
-              updateUI([], resultsContainer, query);
+  if ( pagefindUrl.length ) {    
+    fetch(pagefindUrl, {
+      method: 'HEAD'
+    })
+    .then((response) => {
+      if ( response.status !== 200 || response.redirected === true ) {
+        /* Fallback to Sphinx search */
+        loadSphinxSearch();
+      } else {      
+        window.pagefind = import(pagefindUrl);
+        let resultsFound = 0;
+        let excludedResultsCount = 0;
+        
+        pagefind.then(
+          function(data) {
+            const search = data.search;
+            const queryTerm = urlParams.get('q');
+            if ( typeof(queryTerm) !== 'string' ) {
               return;
+            } 
+            let highlightstring = '?highlight=' + queryTerm;
+            pagefindSearch(queryTerm);
+            
+            function pagefindSearch(query) {
+              if ( query.length === 0 ) {
+                updateUI([], resultsContainer, query);
+                return;
+              }
+              search(query)
+              .then((res) => res.results)
+              .then((allresults) => updateUI(allresults, resultsContainer, query));
             }
-            search(query)
-            .then((res) => res.results)
-            .then((allresults) => updateUI(allresults, resultsContainer, query));
-          }
-          
-          function updateUI(results, element, query) {
-          resultsFound = results.length;
             
-            const elementObj = $(resultsContainer);
-            const pageTitle = document.createElement('h1');
-            $(pageTitle).text('Search results for: ');
-            $('<span class="query-term">' + queryTerm  + '</span>').appendTo(pageTitle);
-            elementObj.append(pageTitle);
-            const status = $('<p class="search-summary" style="display: none;">&nbsp;</p>').appendTo(elementObj);
-            const resultList = $('<ul class="search"/>').appendTo(elementObj);
-            
-            status.fadeIn(500);
-            let dataPromises = [];
-            for ( let i = 0; i < resultsFound; i++ ) {
-              dataPromises.push(results[i].data()
-              .then((singleResult) => {
-                
-                let listItem = $('<li style="display:none"></li>');
-                let requestUrl = "";
-                let linkUrl = "";
-                let titleLink, breadcrumb, context;
-                
-                /* Display result [i] */
-                path = singleResult.url.substring(1);
-                linkUrl = path;
-                if ( DOCUMENTATION_OPTIONS.URL_ROOT !== "./" ) {
-                  linkUrl = DOCUMENTATION_OPTIONS.URL_ROOT + path;
-                }
-                
-                // Title
-                titleLink = $('<a/>').attr('href', linkUrl + highlightstring)
+            function updateUI(results, element, query) {
+              resultsFound = results.length;
+              
+              const elementObj = $(resultsContainer);
+              const pageTitle = document.createElement('h1');
+              $(pageTitle).text('Search results for: ');
+              $('<span class="query-term">' + queryTerm  + '</span>').appendTo(pageTitle);
+              elementObj.append(pageTitle);
+              const status = $('<p class="search-summary" style="display: none;">&nbsp;</p>').appendTo(elementObj);
+              const resultList = $('<ul class="search"/>').appendTo(elementObj);
+              
+              status.fadeIn(500);
+              let dataPromises = [];
+              const origin = location.href.split("search.html")[0];
+              const folder = origin.split(location.host)[1];
+              
+              for ( let i = 0; i < resultsFound; i++ ) {
+                dataPromises.push(results[i].data()
+                .then((singleResult) => {
+                  
+                  let listItem = $('<li style="display:none"></li>');
+                  let requestUrl = "";
+                  let linkUrl = "";
+                  let titleLink, breadcrumb, context;
+                  
+                  /* Display result [i] */
+                  path = (folder == "" || folder == "/") ? singleResult.url.substring(1) : singleResult.url.split(folder)[1];
+                  linkUrl = path;
+                  if ( DOCUMENTATION_OPTIONS.URL_ROOT !== "./" ) {
+                    linkUrl = DOCUMENTATION_OPTIONS.URL_ROOT + path;
+                  }
+                  
+                  // Title
+                  titleLink = $('<a/>').attr('href', linkUrl + highlightstring)
                   .text(singleResult.meta.title).addClass('result-link');
                   
-                // Breadcrumb
-                breadcrumb = createResultBreadcrumb(titleLink);
-                
-                // Context
-                let excerpt_range = results[i].excerpt_range;
-                let excerpt = (excerpt_range[0] > 0) ? "..." : "";
-                excerpt = excerpt + singleResult.excerpt;
-                excerpt = excerpt + ((excerpt_range[0]+excerpt_range[1]-1 < singleResult.content.split(" ").length) ? "..." : "");
-
-                context = $('<div/>').addClass('context').html(excerpt);
-                
-                listItem.append(titleLink);
-                listItem.append(breadcrumb);
-                listItem.append(context);
-                
-                
-                $.each(excludedSearchFolders, function(index, value) {
-                  if ( path.includes(value+"/") ) {
-                    excludedResultsCount++;
-                    listItem.addClass('excluded-search-result'); /* Marks initially excluded result */
-                    listItem.addClass('hidden-result'); /* Hides the excluded result */
-                    return false; /* breaks the $.each loop */
+                  // Breadcrumb
+                  breadcrumb = createResultBreadcrumb(titleLink);
+                  
+                  // Context
+                  let excerpt_range = results[i].excerpt_range;
+                  let excerpt = (excerpt_range[0] > 0) ? "..." : "";
+                  excerpt = excerpt + singleResult.excerpt;
+                  excerpt = excerpt + ((excerpt_range[0]+excerpt_range[1]-1 < singleResult.content.split(" ").length) ? "..." : "");
+                  
+                  context = $('<div/>').addClass('context').html(excerpt);
+                  
+                  listItem.append(titleLink);
+                  listItem.append(breadcrumb);
+                  listItem.append(context);
+                  
+                  
+                  $.each(excludedSearchFolders, function(index, value) {
+                    if ( path.includes(value+"/") ) {
+                      excludedResultsCount++;
+                      listItem.addClass('excluded-search-result'); /* Marks initially excluded result */
+                      listItem.addClass('hidden-result'); /* Hides the excluded result */
+                      return false; /* breaks the $.each loop */
+                    }
+                  });
+                  
+                  resultList.append(listItem);
+                  if ( !listItem.hasClass('hidden-result') ) {
+                    listItem.fadeIn(100);
                   }
-                });
-                
-                resultList.append(listItem);
-                if ( !listItem.hasClass('hidden-result') ) {
-                  listItem.fadeIn(100);
-                }
-                
-              }));
+                  
+                }));
+              }
+              
+              Promise.allSettled(dataPromises).then(([result]) => {
+                updateSearchStatus(status, resultsFound, excludedResultsCount)
+              });
             }
-            
-            Promise.allSettled(dataPromises).then(([result]) => {
-              updateSearchStatus(status, resultsFound, excludedResultsCount)
-            });
           }
-        }
-      );
-
-    }
-  });
+        );
+        
+      }
+    });
+  } else {
+    loadSphinxSearch();
+  }
 
   function loadSphinxSearch() {
     getScript(DOCUMENTATION_OPTIONS.URL_ROOT + "_static/js/min/sphinx-search-ui.min.js");
