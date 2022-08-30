@@ -105,6 +105,8 @@ newUrls['4.4'] = [
   '/amazon/services/supported-services/elastic-load-balancing/nlb.html',
   '/amazon/services/supported-services/elastic-load-balancing/clb.html',
   '/user-manual/agents/key-request.html',
+  '/user-manual/manager/manual-backup-restore.html',
+  '/user-manual/reference/ossec-conf/wazuh-db-config.html',
 ];
 
 /* Pages removed in 4.4 */
@@ -121,6 +123,13 @@ removedUrls['4.4'] = [
 /* Pages added in 4.3 */
 
 newUrls['4.3'] = [
+  '/release-notes/release-4-3-1.html',
+  '/release-notes/release-4-3-2.html',
+  '/release-notes/release-4-3-3.html',
+  '/release-notes/release-4-3-4.html',
+  '/release-notes/release-4-3-5.html',
+  '/release-notes/release-4-3-6.html',
+  '/release-notes/release-4-3-7.html',
   '/getting-started/use-cases/container-security.html',
   '/user-manual/agents/query-configuration.html',
   '/user-manual/elasticsearch/configure-indices.html',
@@ -137,6 +146,7 @@ newUrls['4.3'] = [
   '/user-manual/securing-wazuh/wazuh-indexer.html',
   '/user-manual/securing-wazuh/opendistro.html',
   '/user-manual/securing-wazuh/elastic-stack.html',
+  '/upgrade-guide/upgrading-central-components.html',
   '/migration-guide/index.html',
   '/migration-guide/wazuh-indexer.html',
   '/migration-guide/wazuh-dashboard.html',
@@ -224,6 +234,7 @@ newUrls['4.3'] = [
   '/deployment-options/docker/container-usage.html',
   '/deployment-options/docker/wazuh-container.html',
   '/deployment-options/docker/docker-installation.html',
+  '/deployment-options/docker/data-migration.html',
   '/deployment-options/elastic-stack/index.html',
   '/deployment-options/elastic-stack/distributed-deployment/index.html',
   '/deployment-options/elastic-stack/distributed-deployment/index.html',
@@ -260,6 +271,14 @@ newUrls['4.3'] = [
   '/deployment-options/deploying-with-puppet/wazuh-puppet-module/reference-wazuh-puppet/wazuh-manager-class.html',
   '/deployment-options/amazon-machine-images/amazon-machine-images.html',
   '/release-notes/release-4-3-0.html',
+  '/learning-wazuh/build-lab/install-wazuh-central-components.html', 
+  '/upgrade-guide/wazuh-agent/linux.html',
+  '/upgrade-guide/wazuh-agent/windows.html',
+  '/upgrade-guide/wazuh-agent/macos.html',
+  '/upgrade-guide/wazuh-agent/solaris.html',
+  '/upgrade-guide/wazuh-agent/aix.html',
+  '/upgrade-guide/wazuh-agent/hp-ux.html',
+  '/upgrade-guide/wazuh-agent/index.html',
 ];
 
 removedUrls['4.3'] = [
@@ -375,13 +394,36 @@ removedUrls['4.3'] = [
   '/user-manual/kibana-app/reference/custom-dashboard.html',
   '/user-manual/kibana-app/reference/index.html',
   '/virtual-machine/virtual-machine.html',
+  '/upgrade-guide/upgrading-wazuh.html',
   '/migrating-from-ossec/index.html',
   '/migrating-from-ossec/ossec-server.html',
   '/migrating-from-ossec/ossec-agent.html',
+  '/learning-wazuh/build-lab/access-ec2-instances.html',
+  '/learning-wazuh/build-lab/build-vpc.html', 
+  '/learning-wazuh/build-lab/launch-ec2-instances.html',
+  '/learning-wazuh/build-lab/xpack-security-setup.html',
+  '/learning-wazuh/build-lab/install-elastic-stack.html',
+  '/learning-wazuh/build-lab/install-wazuh-manager.html',
+  '/upgrade-guide/upgrading-agent.html', 
 ];
 
 
 redirections.push(
+  {
+    'target': ['4.2=>4.3', '4.3=>4.2'],
+    '4.2': '/upgrade-guide/upgrading-agent.html',
+    '4.3': '/upgrade-guide/wazuh-agent/index.html',
+  },
+  {
+    'target': ['4.2=>4.3'],
+    '4.2': '/upgrade-guide/upgrading-wazuh.html',
+    '4.3': '/upgrade-guide/index.html',
+  },
+  {
+    'target': ['4.2=>4.3'],
+    '4.2': '/upgrade-guide/elasticsearch-kibana-filebeat/index.html',
+    '4.3': '/upgrade-guide/index.html',
+  },
   {
     'target': ['4.2=>4.3', '4.3=>4.2'],
     '4.2': '/migrating-from-ossec/index.html',
@@ -1107,6 +1149,7 @@ newUrls['4.2'] = [
   '/release-notes/release-4-2-4.html',
   '/release-notes/release-4-2-5.html',
   '/release-notes/release-4-2-6.html',
+  '/release-notes/release-4-2-7.html',
   '/user-manual/api/securing-api.html',
   '/user-manual/configuring-cluster/cluster-management.html',
   '/user-manual/manager/manual-email-report/smtp-authentication.html',
@@ -3040,6 +3083,8 @@ redirections.push(
 );
 
 newUrls['3.13'] = [
+  '/release-notes/release-3-13-5.html', 
+  '/release-notes/release-3-13-4.html',  
   '/release-notes/release_3_13_3.html',
   '/release-notes/release_3_13_2.html',
   '/getting-started/use_cases/index.html',

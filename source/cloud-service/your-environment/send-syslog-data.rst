@@ -1,9 +1,9 @@
-.. Copyright (C) 2020 Wazuh, Inc.
-
-.. _cloud_your_environment_send_syslog:
+.. Copyright (C) 2015, Wazuh, Inc.
 
 .. meta::
   :description: Wazuh agents work on a wide range of operating systems, but if this is not possible, you can forward syslog events to your environment.  
+
+.. _cloud_your_environment_send_syslog:
 
 Forward syslog events
 =====================

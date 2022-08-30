@@ -1,9 +1,8 @@
-.. Copyright (C) 2022 Wazuh, Inc.
+.. Copyright (C) 2015, Wazuh, Inc.
 
 .. meta:: :description: Learn how to install Elastic Stack for using Wazuh on Debian
 
 .. _basic_elasticsearch_single_node_cluster:
-
 
 Elasticsearch single-node cluster
 =================================
@@ -91,7 +90,7 @@ Certificates creation and deployment
       # chmod 400 /etc/elasticsearch/certs/ca/ca.* /etc/elasticsearch/certs/elasticsearch.*
       # rm -rf ~/certs/
 
-#. If Kibana will be installed in this node, keep the certificates file. Otherwise, if the file has been copied already to all the instances of the distributed deployment, remove it to increase security  ``rm -f ~/certs.zip``.
+#. If you are going to install Kibana in this node, keep the certificates file. Otherwise, if the file has been copied already to all the instances of the distributed deployment, remove it to increase security  ``rm -f ~/certs.zip``.
 
 #. Enable and start the Elasticsearch service:
 
@@ -131,5 +130,6 @@ Next steps
 
 The next step is the installation of the Wazuh server, select the cluster mode:
 
-- :ref:`Wazuh single-node cluster<basic_wazuh_single_node_cluster>`
-- :ref:`Wazuh multi-node cluster<basic_wazuh_multi_node_cluster>`
+- :doc:`Wazuh single-node cluster</deployment-options/elastic-stack/distributed-deployment/wazuh-cluster/wazuh-single-node-cluster>`
+- :doc:`Wazuh multi-node cluster</deployment-options/elastic-stack/distributed-deployment/wazuh-cluster/wazuh-multi-node-cluster>`
+

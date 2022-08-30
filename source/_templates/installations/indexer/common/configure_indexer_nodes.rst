@@ -1,4 +1,4 @@
-.. Copyright (C) 2015-2022 Wazuh, Inc.
+.. Copyright (C) 2015, Wazuh, Inc.
 
 
 #. Edit ``/etc/wazuh-indexer/opensearch.yml`` and replace the following values: 
@@ -6,11 +6,11 @@
     
    #. ``network.host``:  Sets the address of this node for both HTTP and transport traffic. The node will bind to this address and will also use it as its publish address. Accepts an IP address or a hostname. 
    
-      Use the same node address set in ``config.yml`` to create the SSL certificates. 
+      Use the same node address set in ``wazuh-config.yml`` to create the SSL certificates. 
 
-   #. ``node.name``: Name of the Wazuh indexer node as defined in the ``config.yml`` file. For example, ``node-1``.
+   #. ``node.name``: Name of the Wazuh indexer node as defined in the ``wazuh-config.yml`` file. For example, ``node-1``.
 
-   #. ``cluster.initial_master_nodes``: List of the names of the master-eligible nodes. These names are defined in the ``config.yml`` file. Uncomment the ``node-2`` and ``node-3`` lines, change the names, or add more lines, according to your ``config.yml`` definitions.
+   #. ``cluster.initial_master_nodes``: List of the names of the master-eligible nodes. These names are defined in the ``wazuh-config.yml`` file. Uncomment the ``node-2`` and ``node-3`` lines, change the names, or add more lines, according to your ``wazuh-config.yml`` definitions.
 
       .. code-block:: yaml
 
@@ -20,7 +20,7 @@
         - "node-3"
 
    #. ``discovery.seed_hosts:`` List of the addresses of the master-eligible nodes. Each element can be either an IP address or a hostname. 
-      You may leave this setting commented if your are the configuring the Wazuh indexer as a single-node. For multi-node configurations, uncomment this setting and set your master-eligible nodes addresses. 
+      You may leave this setting commented if you are configuring the Wazuh indexer as a single-node. For multi-node configurations, uncomment this setting and set your master-eligible nodes addresses. 
 
        .. code-block:: yaml
 
@@ -29,7 +29,7 @@
           - "10.0.0.2"
           - "10.0.0.3"
   
-   #. ``plugins.security.nodes_dn``: List of the Distinguished Names of the certificates of all the Wazuh indexer cluster nodes. Uncomment the lines for ``node-2`` and ``node-3`` and change the common names (CN) and values according to your settings and your ``config.yml`` definitions.
+   #. ``plugins.security.nodes_dn``: List of the Distinguished Names of the certificates of all the Wazuh indexer cluster nodes. Uncomment the lines for ``node-2`` and ``node-3`` and change the common names (CN) and values according to your settings and your ``wazuh-config.yml`` definitions.
 
       .. code-block:: yaml
 

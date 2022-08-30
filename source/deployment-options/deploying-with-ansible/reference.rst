@@ -1,4 +1,4 @@
-.. Copyright (C) 2015–2022 Wazuh, Inc.
+.. Copyright (C) 2015, Wazuh, Inc.
 
 .. meta::
   :Description: Ansible is an open source platform designed for automating tasks. Learn more about the variable references in this section of the Wazuh documentation.
@@ -54,7 +54,7 @@ Wazuh dashboard
 |
 | **Variable**: ``wazuh_version``
 | **Description**: Wazuh APP compatible version to install.
-| **Default value**: ``|WAZUH_LATEST_ANSIBLE|``
+| **Default value**: ``|WAZUH_CURRENT_ANSIBLE|``
 |
 
 .. _wazuh_ansible_reference_filebeat:
@@ -99,47 +99,47 @@ Wazuh Manager
 | **Default value**: ``true``
 |
 | **Variable**: ``wazuh_manager_json_output``
-| **Description**: Configures the :ref:`jsonout_output <reference_ossec_global>` section in  ``ossec.conf``. This is a string, not a bool.
+| **Description**: Configures the :doc:`jsonout_output </user-manual/reference/ossec-conf/global>` section in  ``ossec.conf``. This is a string, not a bool.
 | **Default value**: ``yes``
 |
 | **Variable**: ``wazuh_manager_alerts_log``
-| **Description**: Configures the :ref:`alerts_log <reference_ossec_global>` section in ``ossec.conf``. This is a string, not a bool.
+| **Description**: Configures the :doc:`alerts_log </user-manual/reference/ossec-conf/global>` section in ``ossec.conf``. This is a string, not a bool.
 | **Default value**: ``yes``
 |
 | **Variable**: ``wazuh_manager_logall``
-| **Description**: Configures the :ref:`logall <reference_ossec_global>` section in ``ossec.conf``. This is a string, not a bool.
+| **Description**: Configures the :doc:`logall </user-manual/reference/ossec-conf/global>` section in ``ossec.conf``. This is a string, not a bool.
 | **Default value**: ``yes``
 |
 | **Variable**: ``wazuh_manager_email_notification``
-| **Description**: Configures the :ref:`email_notification <reference_ossec_global>` section in ``ossec.conf``. This is a string, not a bool.
+| **Description**: Configures the :doc:`email_notification </user-manual/reference/ossec-conf/global>` section in ``ossec.conf``. This is a string, not a bool.
 | **Default value**: ``yes``
 |
 | **Variable**: ``wazuh_manager_mailto``
-| **Description**: Configures the :ref:`email_to <reference_ossec_global>` items in ``ossec.conf``.
+| **Description**: Configures the :doc:`email_to </user-manual/reference/ossec-conf/global>` items in ``ossec.conf``.
 | **Default value**: ``[‘admin@example.net’]``
 |
 | **Variable**: ``wazuh_manager_email_smtp_server``
-| **Description**: Configures the :ref:`smtp_server <reference_ossec_global>` section in ``ossec.conf``.
+| **Description**: Configures the :doc:`smtp_server </user-manual/reference/ossec-conf/global>` section in ``ossec.conf``.
 | **Default value**: ``smtp.example.wazuh.com``
 |
 | **Variable**: ``wazuh_manager_email_from``
-| **Description**: Configures the :ref:`email_from <reference_ossec_global>` section in ``ossec.conf``.
+| **Description**: Configures the :doc:`email_from </user-manual/reference/ossec-conf/global>` section in ``ossec.conf``.
 | **Default value**: ``wazuh@example.wazuh.com``
 |
 | **Variable**: ``wazuh_manager_email_maxperhour``
-| **Description**: Configures the :ref:`email_maxperhour <reference_ossec_global>` section in ``ossec.conf``.
+| **Description**: Configures the :doc:`email_maxperhour </user-manual/reference/ossec-conf/global>` section in ``ossec.conf``.
 | **Default value**: ``12``
 |
 | **Variable**: ``wazuh_manager_email_queue_size``
-| **Description**: Configures the :ref:`queue_size <reference_ossec_remote>` section from ``ossec.conf``.
+| **Description**: Configures the :doc:`queue_size </user-manual/reference/ossec-conf/remote>` section from ``ossec.conf``.
 | **Default value**: ``131072``
 |
 | **Variable**: ``wazuh_manager_email_log_source``
-| **Description**: Configures the :ref:`email_log_source <reference_ossec_global>` section from ``ossec.conf``.
+| **Description**: Configures the :doc:`email_log_source </user-manual/reference/ossec-conf/global>` section from ``ossec.conf``.
 | **Default value**: ``alerts.log``
 |
 | **Variable**: ``wazuh_manager_globals``
-| **Description**: Configures the :ref:`white_list <reference_ossec_global>` section from ``ossec.conf``.
+| **Description**: Configures the :doc:`white_list </user-manual/reference/ossec-conf/global>` section from ``ossec.conf``.
 | **Default values**:
 
 .. code-block:: yaml
@@ -151,19 +151,19 @@ Wazuh Manager
 
 |
 | **Variable**: ``wazuh_manager_log_level``
-| **Description**: Configures the :ref:`log_alert_level <reference_ossec_alerts>` section from ``ossec.conf``.
+| **Description**: Configures the :doc:`log_alert_level </user-manual/reference/ossec-conf/alerts>` section from ``ossec.conf``.
 | **Default value**: ``3``
 |
 | **Variable**: ``wazuh_manager_email_level``
-| **Description**: Configures the :ref:`email_alert_level <reference_ossec_alerts>` section from ``ossec.conf``.
+| **Description**: Configures the :doc:`email_alert_level </user-manual/reference/ossec-conf/alerts>` section from ``ossec.conf``.
 | **Default value**: ``12``
 |
 | **Variable**: ``wazuh_manager_log_format``
-| **Description**: Configures :ref:`log_format<reference_ossec_logging>` inside logging section from ``ossec.conf``.
+| **Description**: Configures :doc:`log_format</user-manual/reference/ossec-conf/logging>` inside logging section from ``ossec.conf``.
 | **Default value**: ``plain``
 |
 | **Variable**: ``wazuh_manager_extra_emails``
-| **Description**: Configures one or more :ref:`email_alerts <reference_ossec_email_alerts>` sections from ``ossec.conf``.
+| **Description**: Configures one or more :doc:`email_alerts </user-manual/reference/ossec-conf/email-alerts>` sections from ``ossec.conf``.
 | **Default values**:
 
 .. code-block:: yaml
@@ -181,7 +181,7 @@ Wazuh Manager
 
 |
 | **Variable**: ``wazuh_manager_connection``
-| **Description**: Configures one or more :ref:`remote <reference_ossec_remote>` sections from ``ossec.conf``.
+| **Description**: Configures one or more :doc:`remote </user-manual/reference/ossec-conf/remote>` sections from ``ossec.conf``.
 | **Default values**:
 
 .. code-block:: yaml
@@ -194,7 +194,7 @@ Wazuh Manager
 
 |
 | **Variable**: ``wazuh_manager_reports``
-| **Description**: Configures one or more :ref:`reports <reference_ossec_reports>` sections from ``ossec.conf``.
+| **Description**: Configures one or more :doc:`reports </user-manual/reference/ossec-conf/reports>` sections from ``ossec.conf``.
 | **Default values**:
 
 .. code-block:: yaml
@@ -214,7 +214,7 @@ Wazuh Manager
 
 |
 | **Variable**: ``wazuh_manager_rootcheck``
-| **Description**: Configures the :ref:`rootcheck <reference_ossec_rootcheck>` section from ``ossec.conf``.
+| **Description**: Configures the :doc:`rootcheck </user-manual/reference/ossec-conf/rootcheck>` section from ``ossec.conf``.
 | **Default value**:
 
 .. code-block:: yaml
@@ -224,7 +224,7 @@ Wazuh Manager
 
 |
 | **Variable**: ``wazuh_manager_openscap``
-| **Description**: Configures the :ref:`wodle <wodle_openscap>` item named ``open-scap`` from ``ossec.conf``.
+| **Description**: Configures the :doc:`wodle </user-manual/reference/ossec-conf/wodle-openscap>` item named ``open-scap`` from ``ossec.conf``.
 | **Default values**:
 
 .. code-block:: yaml
@@ -237,7 +237,7 @@ Wazuh Manager
 
 |
 | **Variable**: ``wazuh_manager_ciscat``
-| **Description**: Configures the :ref:`wodle <wodle_ciscat>` item named ``cis-cat`` from ``ossec.conf``.
+| **Description**: Configures the :doc:`wodle </user-manual/reference/ossec-conf/wodle-ciscat>` item named ``cis-cat`` from ``ossec.conf``.
 | **Default value**:
 
 .. code-block:: yaml
@@ -253,7 +253,7 @@ Wazuh Manager
 
 |
 | **Variable**: ``wazuh_manager_osquery``
-| **Description**: Configures the :ref:`wodle<wodle-osquery>` item named ``osquery`` from ``ossec.conf``.
+| **Description**: Configures the :doc:`wodle</user-manual/reference/ossec-conf/wodle-osquery>` item named ``osquery`` from ``ossec.conf``.
 | **Default values**:
 
 .. code-block:: yaml
@@ -267,7 +267,7 @@ Wazuh Manager
 
 |
 | **Variable**: ``wazuh_manager_syscollector``
-| **Description**: Configures the :ref:`wodle <wodle-syscollector>` item named ``syscollector`` from ``ossec.conf``.
+| **Description**: Configures the :doc:`wodle </user-manual/reference/ossec-conf/wodle-syscollector>` item named ``syscollector`` from ``ossec.conf``.
 | **Default values**:
 
 .. code-block:: yaml
@@ -285,7 +285,7 @@ Wazuh Manager
 
 |
 | **Variable**: ``wazuh_manager_monitor_aws``
-| **Description**: Configures the :ref:`wodle <wodle_s3>` item named ``aws-s3`` from ``ossec.conf``.
+| **Description**: Configures the :doc:`AWS S3 module </user-manual/reference/ossec-conf/wodle-s3>` item named ``aws-s3`` from ``ossec.conf``.
 | **Default values**:  
 
 .. code-block:: yaml
@@ -305,7 +305,7 @@ Wazuh Manager
 
 |
 | **Variable**: ``wazuh_manager_sca``
-| **Description**: Configures the :ref:`sca <reference_sec_config_assessment>` section from ``ossec.conf``.
+| **Description**: Configures the :doc:`sca </user-manual/reference/ossec-conf/sca>` section from ``ossec.conf``.
 | **Default values**:
 
 .. code-block:: yaml
@@ -321,7 +321,7 @@ Wazuh Manager
 
 |
 | **Variable**: ``wazuh_manager_vulnerability_detector``
-| **Description**: Configures the :ref:`vulnerability-detector <vuln_detector>` section from ``ossec.conf``.
+| **Description**: Configures the :doc:`vulnerability-detector </user-manual/reference/ossec-conf/vuln-detector>` section from ``ossec.conf``.
 | **Default values**:
 
 .. code-block:: yaml
@@ -358,7 +358,7 @@ Wazuh Manager
 
 |
 | **Variable**: ``wazuh_manager_syscheck``
-| **Description**: Configures the :ref:`syscheck <reference_ossec_syscheck>` section from ``ossec.conf``.
+| **Description**: Configures the :doc:`syscheck </user-manual/reference/ossec-conf/syscheck>` section from ``ossec.conf``.
 | **Default values**:
 
 .. code-block:: yaml
@@ -407,7 +407,7 @@ Wazuh Manager
 
 |
 | **Variable**: ``wazuh_manager_commands``
-| **Description**: Configures the :ref:`command <reference_ossec_commands>` section from ``ossec.conf``.
+| **Description**: Configures the :doc:`command </user-manual/reference/ossec-conf/commands>` section from ``ossec.conf``.
 | **Default values**:
 
 .. code-block:: yaml
@@ -439,7 +439,7 @@ Wazuh Manager
 
 |
 | **Variable**: ``wazuh_manager_localfiles``
-| **Description**: Configures the :ref:`localfile <reference_ossec_localfile>` section from ``ossec.conf`` for each platform.
+| **Description**: Configures the :doc:`localfile </user-manual/reference/ossec-conf/localfile>` section from ``ossec.conf`` for each platform.
 | **Default values**:
 
 .. code-block:: yaml
@@ -479,7 +479,7 @@ Wazuh Manager
 
 |
 | **Variable**: ``wazuh_manager_syslog_outputs``
-| **Description**: Configures the :ref:`syslog_output <reference_ossec_syslog_output>` section from ``ossec.conf``.
+| **Description**: Configures the :doc:`syslog_output </user-manual/reference/ossec-conf/syslog-output>` section from ``ossec.conf``.
 | **Default values**:
 
 .. code-block:: yaml
@@ -491,7 +491,7 @@ Wazuh Manager
 
 |
 | **Variable**: ``wazuh_manager_integrations``
-| **Description**: Configures the :ref:`integration <reference_ossec_integration>` section from ``ossec.conf``.
+| **Description**: Configures the :doc:`integration </user-manual/reference/ossec-conf/integration>` section from ``ossec.conf``.
 | **Default values**:
 
 .. code-block:: yaml
@@ -510,7 +510,7 @@ Wazuh Manager
 
 |
 | **Variable**: ``wazuh_manager_labels``
-| **Description**: Configures the :ref:`labels <reference_ossec_labels>` section from ``ossec.conf``.
+| **Description**: Configures the :doc:`labels </user-manual/reference/ossec-conf/labels>` section from ``ossec.conf``.
 | **Default values**:
 
 .. code-block:: yaml
@@ -523,7 +523,7 @@ Wazuh Manager
 
 |
 | **Variable**: ``wazuh_manager_ruleset``
-| **Description**: Configures the :ref:`ruleset <reference_ossec_rules>` section from ``ossec.conf``.
+| **Description**: Configures the :doc:`ruleset </user-manual/reference/ossec-conf/ruleset>` section from ``ossec.conf``.
 | **Default values**:
 
 .. code-block:: yaml
@@ -538,7 +538,7 @@ Wazuh Manager
 
 |
 | **Variable**: ``wazuh_manager_rule_exclude``
-| **Description**: Configures the :ref:`rule_exclude <reference_ossec_rules>` section from ``ossec.conf``.
+| **Description**: Configures the :doc:`rule_exclude </user-manual/reference/ossec-conf/ruleset>` section from ``ossec.conf``.
 | **Default values**:
 
 .. code-block:: yaml
@@ -548,7 +548,7 @@ Wazuh Manager
 
 |
 | **Variable**: ``wazuh_manager_authd``
-| **Description**: Configures the :ref:`auth <reference_ossec_auth>` section from ``ossec.conf``.
+| **Description**: Configures the :doc:`auth </user-manual/reference/ossec-conf/auth>` section from ``ossec.conf``.
 | **Default values**:
 
 .. code-block:: yaml
@@ -571,7 +571,7 @@ Wazuh Manager
 
 |
 | **Variable**: ``wazuh_manager_cluster``
-| Configures the :ref:`cluster <reference_ossec_cluster>` section from ``ossec.conf``.
+| Configures the :doc:`cluster </user-manual/reference/ossec-conf/cluster>` section from ``ossec.conf``.
 | **Default values**:
 
 .. code-block:: yaml
@@ -590,7 +590,7 @@ Wazuh Manager
 
 |
 | **Variable**: ``wazuh_manager_api``
-| **Description**: Configures the :ref:`Wazuh API <api_configuration>` file called ``api.yaml``.
+| **Description**: Configures the :doc:`Wazuh API </user-manual/api/configuration>` file called ``api.yaml``.
 | **Default values**:
 
 .. code-block:: yaml
@@ -630,11 +630,11 @@ Wazuh Manager
 
 .. warning::
 
-    We recommend the use of `Ansible Vault <https://docs.ansible.com/ansible/latest/user_guide/vault.html>`_ to protect Wazuh agentless and authd credentials..
+    We recommend the use of `Ansible Vault <https://docs.ansible.com/ansible/latest/user_guide/vault.html>`_ to protect Wazuh agentless and authd credentials.
 
 |
 | **Variable**: ``wazuh_manager_config``
-| **Description**: Stores the Wazuh Manager configuration. This variable is provided for backwards compatibility. Newer deployments should use the newly introduced variables described above.
+| **Description**: Stores the Wazuh Manager configuration. This variable is provided for backward compatibility. Newer deployments should use the newly introduced variables described above.
 | **Example**:
 
 .. code-block:: yaml
@@ -806,7 +806,7 @@ Wazuh Manager
 
 |
 | **Variable**: ``wazuh_agent_configs``
-| **Description**: This store the different settings and profiles for centralized agent configuration via Wazuh Manager.
+| **Description**: This stores the different settings and profiles for centralized agent configuration via Wazuh Manager.
 | **Example**:
 
 .. code-block:: yaml
@@ -919,7 +919,7 @@ Wazuh Agent
 ===========
 
 | **Variable**: ``wazuh_managers``
-| **Description**: Set Wazuh Manager servers IP address, protocol, and port to be used by the agent. If a specific manager is used for registration, we can  indicate which one it is  by adding register set to true. If the register option is missing, the first manager on the list will be used for registration.
+| **Description**: Set the Wazuh Manager servers IP address, protocol, and port to be used by the agent. If a specific manager is used for registration, we can indicate which one it is by adding the register option set to true. If the register option is missing, the first manager on the list will be used for registration.
 | **Example**:
 
 .. code-block:: yaml
@@ -956,7 +956,7 @@ Wazuh Agent
 
 |
 | **Variable**: ``wazuh_agent_authd``
-| **Description**: Set the agent-authd facility. This will enable or not the automatic agent registration, you could set various options in accordance of the authd service configured in the Wazuh Manager. This Ansible role will use the address defined on ``registration_address`` as the authd registration server.
+| **Description**: Set the agent-authd facility. This will enable or not the automatic agent registration, you could set various options in accordance with the authd service configured in the Wazuh Manager. This Ansible role will use the address defined on ``registration_address`` as the authd registration server.
 | **Example**:
 
     .. code-block:: yaml
@@ -993,7 +993,7 @@ Wazuh Agent
 
 |
 | **Variable**: ``wazuh_agent_enrollment``
-| **Description**: Configures the :ref:`enrollment <reference_ossec_client>` section in the agent ``ossec.conf``.
+| **Description**: Configures the :doc:`enrollment </user-manual/reference/ossec-conf/client>` section in the agent ``ossec.conf``.
 | **Example**:
 
 .. code-block:: yaml
@@ -1016,7 +1016,7 @@ Wazuh Agent
 
 |
 | **Variable**: ``wazuh_agent_client_buffer``
-| **Description**: Configures the :ref:`client_buffer <reference_client_buffer>` section from agent ``ossec.conf``.
+| **Description**: Configures the :doc:`client_buffer </user-manual/reference/ossec-conf/client-buffer>` section from agent ``ossec.conf``.
 | **Example**:
 
 .. code-block:: yaml
@@ -1028,7 +1028,7 @@ Wazuh Agent
 
 |
 | **Variable**: ``wazuh_agent_rootcheck``
-| **Description**: Configures the :ref:`rootcheck <reference_ossec_rootcheck>` section from agent ``ossec.conf``.
+| **Description**: Configures the :doc:`rootcheck </user-manual/reference/ossec-conf/rootcheck>` section from agent ``ossec.conf``.
 | **Example**:
 
 .. code-block:: yaml
@@ -1038,7 +1038,7 @@ Wazuh Agent
 
 |
 | **Variable**: ``wazuh_agent_openscap``
-| **Description**: Configures the :ref:`wodle <wodle_openscap>` item named ``open-scap`` from ``ossec.conf``.
+| **Description**: Configures the :doc:`wodle </user-manual/reference/ossec-conf/wodle-openscap>` item named ``open-scap`` from ``ossec.conf``.
 | **Default values**:
 
 .. code-block:: yaml
@@ -1051,7 +1051,7 @@ Wazuh Agent
 
 |
 | **Variable**: ``wazuh_agent_cis_cat``
-| **Description**: Configures the :ref:`wodle <wodle_ciscat>` item named ``cis-cat`` from ``ossec.conf``.
+| **Description**: Configures the :doc:`wodle </user-manual/reference/ossec-conf/wodle-ciscat>` item named ``cis-cat`` from ``ossec.conf``.
 | **Default values**:
 
 .. code-block:: yaml
@@ -1069,7 +1069,7 @@ Wazuh Agent
 
 |
 | **Variable**: ``wazuh_agent_osquery``
-| **Description**: Configures the :ref:`wodle<wodle-osquery>` item named ``osquery`` from ``ossec.conf``.
+| **Description**: Configures the :doc:`wodle</user-manual/reference/ossec-conf/wodle-osquery>` item named ``osquery`` from ``ossec.conf``.
 | **Default values**:
 
 .. code-block:: yaml
@@ -1086,7 +1086,7 @@ Wazuh Agent
 
 |
 | **Variable**: ``wazuh_agent_syscollector``
-| **Description**: Configures the :ref:`wodle <wodle-syscollector>` item named ``syscollector`` from ``ossec.conf``.
+| **Description**: Configures the :doc:`wodle </user-manual/reference/ossec-conf/wodle-syscollector>` item named ``syscollector`` from ``ossec.conf``.
 | **Default values**:
 
 .. code-block:: yaml
@@ -1104,7 +1104,7 @@ Wazuh Agent
 
 |
 | **Variable**: ``wazuh_agent_sca``
-| **Description**: Configures the :ref:`sca <reference_sec_config_assessment>` section from ``ossec.conf``.
+| **Description**: Configures the :doc:`sca </user-manual/reference/ossec-conf/sca>` section from ``ossec.conf``.
 | **Default values**:
 
 .. code-block:: yaml
@@ -1120,7 +1120,7 @@ Wazuh Agent
 
 |
 | **Variable**: ``wazuh_agent_syscheck``
-| **Description**: Configures the :ref:`syscheck <reference_ossec_syscheck>` section from ``ossec.conf``.
+| **Description**: Configures the :doc:`syscheck </user-manual/reference/ossec-conf/syscheck>` section from ``ossec.conf``.
 | **Default values**:
 
 .. code-block:: yaml
@@ -1162,7 +1162,7 @@ Wazuh Agent
 
 |
 | **Variable**: ``wazuh_agent_localfiles``
-| **Description**: Configures the :ref:`localfile <reference_ossec_localfile>` section from ``ossec.conf``.
+| **Description**: Configures the :doc:`localfile </user-manual/reference/ossec-conf/localfile>` section from ``ossec.conf``.
 | **Default values**:
 
 .. code-block:: yaml
@@ -1212,7 +1212,7 @@ Wazuh Agent
 
 |
 | **Variable**: ``wazuh_agent_labels``
-| **Description**: Configures the :ref:`labels <reference_ossec_labels>` section from ``ossec.conf``.
+| **Description**: Configures the :doc:`labels </user-manual/reference/ossec-conf/labels>` section from ``ossec.conf``.
 | **Default values**:
 
 .. code-block:: yaml
@@ -1225,7 +1225,7 @@ Wazuh Agent
 
 |
 | **Variable**: ``wazuh_agent_active_response``
-| **Description**: Configures the :ref:`active-response <reference_ossec_active_response>` section from ``ossec.conf``.
+| **Description**: Configures the :doc:`active-response </user-manual/reference/ossec-conf/active-response>` section from ``ossec.conf``.
 | **Default values**:
 
 .. code-block:: yaml
@@ -1238,11 +1238,11 @@ Wazuh Agent
 
 |
 | **Variable**: ``wazuh_agent_log_format``
-| **Description**: Configures the :ref:`log_format <reference_ossec_logging>` section from ``ossec.conf``.
+| **Description**: Configures the :doc:`log_format </user-manual/reference/ossec-conf/logging>` section from ``ossec.conf``.
 | **Default value**: ``plain``
 |
 | **Variable**: ``wazuh_agent_config``
-| **Description**: Wazuh Agent related configuration. This variable is provided for backwards compatibility. Newer deployments should use the newly introduced variables described above.
+| **Description**: Wazuh Agent related configuration. This variable is provided for backward compatibility. Newer deployments should use the newly introduced variables described above.
 | **Example**:
 
 .. code-block:: yaml

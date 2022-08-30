@@ -1,4 +1,4 @@
-.. Copyright (C) 2022 Wazuh, Inc.
+.. Copyright (C) 2015, Wazuh, Inc.
 
 .. meta::
    :description: If you want to know how to migrate from OSSEC to Wazuh, check this section where we explain how to do it without losing configuration data or agent keys.
@@ -63,7 +63,7 @@ Now it's time to install the Wazuh server component. Read the :doc:`Installing W
 Restore configuration
 ---------------------
 
-Before restoring our previous settings please note that some configuration options have been deprecated or use a different syntax, what can cause the manager not to start properly. To avoid this, you can manually try to migrate your settings. Same thing happens with rules and decoders. In case of doubt take a look at our :ref:`User manual <user_manual>`.
+Before restoring our previous settings please note that some configuration options have been deprecated or use a different syntax, what can cause the manager not to start properly. To avoid this, you can manually try to migrate your settings. Same thing happens with rules and decoders. In case of doubt take a look at our :doc:`User manual </user-manual/index>`.
 
 The first step is to stop the manager processes:
 

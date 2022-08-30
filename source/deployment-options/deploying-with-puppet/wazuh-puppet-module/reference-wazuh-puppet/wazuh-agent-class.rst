@@ -1,4 +1,7 @@
-.. Copyright (C) 2022 Wazuh, Inc.
+.. Copyright (C) 2015, Wazuh, Inc.
+
+.. meta::
+   :description: Learn about the Wazuh agent class and its variables to configure the Wazuh agent in this section of the Wazuh documentation. 
 
 .. _reference_wazuh_agent_class:
 
@@ -15,7 +18,7 @@ This contains variables that can be used to configure the Wazuh agent.
 Active-Response variables
 -------------------------
 $configure_active_response
-  Enables activeresponse on this host.
+  Enables active response on this host.
 
   `Default true`
 
@@ -212,7 +215,7 @@ $ossec_protocol
   `Type String`
   
 $wazuh_max_retries
-  Number of connection retries.
+  The number of connection retries.
 
   `Default 5`
 
@@ -435,7 +438,7 @@ $sca_amazon_scan_on_start
    Depends on **configure_sca and apply_template_os**
 
 $sca_amazon_interval
-  Interval between module executions.
+  The interval between module executions.
 
   `Default 12h`
 
@@ -474,7 +477,7 @@ $sca_rhel_scan_on_start
    Depends on **configure_sca and apply_template_os**
 
 $sca_rhel_interval
-  Interval between module executions.
+  The interval between module executions.
 
   `Default 12h`
 
@@ -507,7 +510,7 @@ $sca_else_scan_on_start
    Depends on **configure_sca and apply_template_os**
 
 $sca_else_interval
-  Interval between module executions.
+  The interval between module executions.
 
   `Default 12h`
 
@@ -707,7 +710,7 @@ $wodle_openscap_timeout
   `Type String`
 
 $wodle_openscap_interval
-  Interval between OpenSCAP executions.
+  The interval between OpenSCAP executions.
 
   `Default 1d`
 
@@ -740,14 +743,14 @@ $wodle_ciscat_disabled
   `Type String`
 
 $wodle_ciscat_timeout
-  Timeout for each evaluation. In case the execution takes longer that the specified timeout, it stops.
+  Timeout for each evaluation. In case the execution takes longer than the specified timeout, it stops.
 
   `Default 1800`
 
   `Type String`
 
 $wodle_ciscat_interval
-  Interval between CIS-CAT executions.
+  The interval between CIS-CAT executions.
 
   `Default 1d`
 
@@ -855,7 +858,7 @@ $wodle_syscollector_hardware
   `Type String`
 
 $wodle_syscollector_os
-  Enables the OS scan.
+  Enables the scan of the OS.
 
   `Default yes`
 
@@ -869,21 +872,21 @@ $wodle_syscollector_network
   `Type String`
 
 $wodle_syscollector_packages
-  Enables the packages scan.
+  Enables the scan of the packages.
 
   `Default yes`
 
   `Type String`
 
 $wodle_syscollector_ports
-  Enables the ports scan.
+  Enables the scan of the ports.
 
   `Default yes`
 
   `Type String`
 
 $wodle_syscollector_processes
-  Enables the processes scan.
+  Enables the scan of the processes.
 
   `Default yes`
 
@@ -904,7 +907,7 @@ $agent_package_name
 $agent_package_version
   Define package version
 
-  `Default 4.3.0-1`
+  `Default 4.3.7-1`
 
   `Type String`
 

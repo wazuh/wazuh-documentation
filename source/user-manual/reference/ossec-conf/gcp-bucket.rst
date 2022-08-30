@@ -1,4 +1,4 @@
-.. Copyright (C) 2021 Wazuh, Inc.
+.. Copyright (C) 2015, Wazuh, Inc.
 .. meta::
   :description: The Wazuh GCP Storage module allows you to process logs stored in Google Cloud Storage buckets. Learn more about how to configure the module in this section.
 
@@ -154,7 +154,7 @@ Trigger the module in case the Wazuh service starts or restarts.
 interval
 ^^^^^^^^
 
-Interval between module executions.
+The interval between module executions.
 
 +--------------------+----------------------------------------------------------------------------------------------------------------------------------------------------------------+
 | **Default value**  | 1h                                                                                                                                                             |
@@ -222,7 +222,7 @@ Linux configuration:
 .. code-block:: xml
 
     <gcp-bucket>
-        <pull_on_start>yes</pull_on_start>
+        <run_on_start>yes</run_on_start>
         <interval>1m</interval>
         <project_id>wazuh-dev</project_id>
         <subscription_name>wazuhdns</subscription_name>

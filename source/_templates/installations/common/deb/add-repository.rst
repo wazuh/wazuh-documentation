@@ -1,10 +1,10 @@
-.. Copyright (C) 2015-2022 Wazuh, Inc.
+.. Copyright (C) 2015, Wazuh, Inc.
 
-#. Install the following package if missing.
+#. Install the following packages if missing.
 
     .. code-block:: console
 
-      # apt install gnupg
+      # apt install gnupg apt-transport-https
 
 #. Install the GPG key.
 
@@ -18,7 +18,7 @@
 
        # echo "deb https://packages.wazuh.com/4.x/apt/ stable main" | tee -a /etc/apt/sources.list.d/wazuh.list
 
-#. Update the package information.
+#. Update the packages information.
 
     .. code-block:: console
 

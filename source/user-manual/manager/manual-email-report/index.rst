@@ -1,4 +1,4 @@
-.. Copyright (C) 2022 Wazuh, Inc.
+.. Copyright (C) 2015, Wazuh, Inc.
 
 .. meta::
   :description: Learn more about how to configure Wazuh to send email alerts to one or more email addresses when certain rules are triggered or for daily event reports.
@@ -50,7 +50,7 @@ In order to configure Wazuh to send email alerts, the email settings must be con
       ...
   </ossec_config>
 
-To see all of the available email configuration options, go to the :ref:`global section <reference_ossec_global>`.
+To see all of the available email configuration options, go to the :doc:`global section </user-manual/reference/ossec-conf/global>`.
 
 Once the above has been configured, the ``email_alert_level`` needs to be set to the minimum alert level that will trigger an email. By default, this level is set to 12.
 

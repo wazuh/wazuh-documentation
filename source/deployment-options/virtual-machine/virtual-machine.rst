@@ -1,4 +1,4 @@
-.. Copyright (C) 2022 Wazuh, Inc.
+.. Copyright (C) 2015, Wazuh, Inc.
 
 .. meta::
   :description: The pre-built Wazuh Virtual Machine includes all Wazuh components ready-to-use. Test all Wazuh capabilities with our OVA.  
@@ -11,13 +11,13 @@ Virtual Machine (OVA)
 Wazuh provides a pre-built virtual machine image in Open Virtual Appliance (OVA) format. This can be directly imported to VirtualBox or other OVA compatible virtualization systems. Take into account that this VM only runs on 64-bit systems. It does not provide high availability and scalability out of the box. However, these can be implemented by using :doc:`distributed deployment </installation-guide/index>`.
 
 
-Download the `virtual appliance (OVA) <https://packages.wazuh.com/|CURRENT_MAJOR|/vm/wazuh-|WAZUH_LATEST_OVA|.ova>`_, which contains the following components:
+Download the `virtual appliance (OVA) <https://packages.wazuh.com/|WAZUH_CURRENT_MAJOR_OVA|/vm/wazuh-|WAZUH_CURRENT_OVA|.ova>`_, which contains the following components:
 
     - CentOS 7
-    - Wazuh manager |WAZUH_LATEST|
-    - Wazuh indexer |WAZUH_INDEXER_CURRENT|
-    - Filebeat-OSS |ELASTICSEARCH_LATEST_OVA|
-    - Wazuh dashboard |WAZUH_DASHBOARD_CURRENT|
+    - Wazuh manager |WAZUH_CURRENT_OVA|
+    - Wazuh indexer |WAZUH_CURRENT_OVA|
+    - Filebeat-OSS |FILEBEAT_LATEST_OVA|
+    - Wazuh dashboard |WAZUH_CURRENT_OVA|
 
 
 Hardware requirements
@@ -31,11 +31,13 @@ The following requirements have to be in place before the Wazuh VM can be import
 
 Out of the box, the Wazuh VM is configured with the following specifications:
 
-  +------------------+----------------+--------------+--------------+
-  |    Component     |   CPU (cores)  |   RAM (GB)   | Storage (GB) |
-  +==================+================+==============+==============+
-  | Wazuh v4.3.0 OVA |       4        |      8       |     50       |
-  +------------------+----------------+--------------+--------------+
+.. |OVA_COMPONENT| replace:: Wazuh v|WAZUH_CURRENT_OVA| OVA
+
++------------------+----------------+--------------+--------------+
+|    Component     |   CPU (cores)  |   RAM (GB)   | Storage (GB) |
++==================+================+==============+==============+
+| |OVA_COMPONENT|  |       4        |      8       |     50       |
++------------------+----------------+--------------+--------------+
 
 However, this hardware configuration can be modified depending on the number of protected endpoints and indexed alert data. More information about requirements can be found :doc:`here </quickstart>`. 
 
@@ -99,7 +101,7 @@ In case of using VirtualBox, once the virtual machine is imported it may run int
   By default, the network interface type is set to Bridged Adapter. The VM will attempt to obtain an IP address from the network DHCP server. Alternatively, a static IP address can be set by configuring the appropriate network files in the CentOS operating system on which the VM is based.
 
 
-Once the virtual machine is imported and running, the next step is to :ref:`deploy the Wazuh agents <installation_agents>` on the systems to be monitored.
+Once the virtual machine is imported and running, the next step is to :doc:`deploy the Wazuh agents </installation-guide/wazuh-agent/index>` on the systems to be monitored.
 
 
 Upgrading the VM

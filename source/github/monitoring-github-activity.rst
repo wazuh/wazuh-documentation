@@ -1,4 +1,4 @@
-.. Copyright (C) 2021 Wazuh, Inc.
+.. Copyright (C) 2015, Wazuh, Inc.
 
 .. _github_monitoring_activity:
 
@@ -45,7 +45,7 @@ Proceed to configure the ``github`` module in the Wazuh manager or in the Wazuh 
     <github>
         <enabled>yes</enabled>
         <interval>1m</interval>
-        <time_delay>1s</time_delay>
+        <time_delay>1m</time_delay>
         <curl_max_size>1M</curl_max_size>
         <only_future_events>yes</only_future_events>
         <api_auth>

@@ -1,4 +1,4 @@
-.. Copyright (C) 2022 Wazuh, Inc.
+.. Copyright (C) 2015, Wazuh, Inc.
 
 .. meta::
   :description: Follow this guide to migrate from Open Distro for Elasticsearch to the Wazuh indexer.
@@ -151,7 +151,9 @@ Follow this guide to migrate from Open Distro for Elasticsearch 1.13 to the Wazu
          - "CN=node-1,OU=Docu,O=Wazuh,L=California,C=US"
          #- "CN=node-2,OU=Wazuh,O=Wazuh,L=California,C=US"
          #- "CN=node-3,OU=Wazuh,O=Wazuh,L=California,C=US"      
-            
+
+#. **Optional**. Port any custom configurations, for example, the  ``-Xms`` and ``-Xmx`` settings, from ``/etc/elasticsearch/jvm.options`` to ``/etc/wazuh-indexer/jvm.options``.
+
 #. Enable and start the Wazuh indexer.
 
    .. include:: /_templates/installations/indexer/common/enable_indexer.rst

@@ -1,4 +1,4 @@
-.. Copyright (C) 2022 Wazuh, Inc.
+.. Copyright (C) 2015, Wazuh, Inc.
 
 .. meta::
   :description: Learn more about the cluster node configuration in Wazuh: master and worker nodes, labels, Filebeat, Splunk forwarder installation, and more. 
@@ -97,8 +97,8 @@ Deploying a Wazuh cluster
             :class: output
 
             NAME           TYPE    VERSION  ADDRESS
-            master-node    master  |WAZUH_LATEST|   wazuh-master
-            worker01-node  worker  |WAZUH_LATEST|   172.22.0.3
+            master-node    master  |WAZUH_CURRENT|   wazuh-master
+            worker01-node  worker  |WAZUH_CURRENT|   172.22.0.3
 
 
 .. topic:: Forwarder installation

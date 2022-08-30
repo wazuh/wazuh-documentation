@@ -1,4 +1,4 @@
-.. Copyright (C) 2022 Wazuh, Inc.
+.. Copyright (C) 2015, Wazuh, Inc.
 
 .. _restful-api-listing:
 
@@ -34,21 +34,22 @@ The request :api-ref:`GET /agents <operation/api.controllers.agent_controller.ge
                    "lastKeepAlive": "9999-12-31T23:59:59Z",
                    "ip": "127.0.0.1",
                    "id": "000",
-                   "version": "Wazuh v4.0.0",
+                   "version": "Wazuh v|WAZUH_CURRENT|",
                    "name": "wazuh-master",
                    "registerIP": "127.0.0.1",
                    "dateAdd": "2020-10-26T09:52:01Z",
+                   "group_config_status": "synced"
                },
                {
                    "status": "never_connected",
                    "node_name": "unknown",
-                   "group": ["default", "group1", "dbms"],
                    "ip": "any",
                    "id": "009",
                    "name": "wazuh-agent9",
                    "registerIP": "any",
                    "dateAdd": "1970-01-01T00:00:00Z",
-               },
+                   "group_config_status": "not synced"
+               }
            ],
            "total_affected_items": 2,
            "total_failed_items": 0,

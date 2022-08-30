@@ -1,6 +1,10 @@
 <div id="left-sidebar" class="sidebar">
   <div class="sidebar-container">
+    {% if theme_breadcrumb_root_title == 'Documentation' %}
     <div id="search-box-wrapper" class="collapse navbar-collapse">
+    {% else %}
+    <div id="search-box-wrapper" class="collapse navbar-collapse d-xl-none">
+    {%- endif -%}
       {% include "template-parts/search-box.html" %}
     </div>
     {% block menu_toc -%}

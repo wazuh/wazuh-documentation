@@ -1,4 +1,4 @@
-.. Copyright (C) 2022 Wazuh, Inc.
+.. Copyright (C) 2015, Wazuh, Inc.
 
 .. meta::
   :description: Learn how agentless monitoring can help you monitor systems with no agent via SSH, such as routers, firewalls, switches, and Linux/BSD systems.  

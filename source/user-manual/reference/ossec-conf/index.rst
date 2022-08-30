@@ -1,7 +1,7 @@
-.. Copyright (C) 2022 Wazuh, Inc.
+.. Copyright (C) 2015, Wazuh, Inc.
 .. meta::
-  :description: Learn more about the Wazuh local configuration, including configuration sections and supported installations, in this section of our documentation. 
-  
+  :description: Learn more about the Wazuh local configuration, including configuration sections and supported installations, in this section of our documentation.
+
 .. _reference_ossec_conf:
 
 Local configuration (ossec.conf)
@@ -90,6 +90,8 @@ Wazuh can be installed in two ways: as a manager by using the "server/manager" i
 +---------------------------------------------------------------------+------------------------+
 | :doc:`vulnerability-detector <vuln-detector>`                       | manager                |
 +---------------------------------------------------------------------+------------------------+
+| :doc:`wazuh_db <wazuh-db-config>`                                   | manager                |
++---------------------------------------------------------------------+------------------------+
 | :doc:`wodle name="agent-key-polling" <wodle-agent-key-polling>`     | manager                |
 +---------------------------------------------------------------------+------------------------+
 | :doc:`wodle name="aws-s3" <wodle-s3>`                               | manager, agent         |
@@ -158,6 +160,7 @@ All of the above sections must be located within the top-level ``<ossec_config>`
    wodle-s3
    wodle-syscollector
    vuln-detector
+   wazuh-db-config
    wodle-osquery
    wodle-docker
    wodle-azure-logs

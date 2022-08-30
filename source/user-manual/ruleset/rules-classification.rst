@@ -1,4 +1,4 @@
-.. Copyright (C) 2022 Wazuh, Inc.
+.. Copyright (C) 2015, Wazuh, Inc.
 .. Original content from the OSSEC documentation, available at http://www.ossec.net/docs/manual/rules-decoders/rule-levels.html
 
 .. _rules_classification:
@@ -35,7 +35,7 @@ The rules are classified in multiple levels, from the lowest (0) to the maximum 
 |       |                                  |                                                                                                                    |
 |       |                                  | These events are most of the time unclassified and may have some security relevance.                               |
 +-------+----------------------------------+--------------------------------------------------------------------------------------------------------------------+
-| 8     | First time seen                  | Include first time seen events. First time an IDS event is fired or the first time an user logged in.              |
+| 8     | First time seen                  | Include first time seen events. First time an IDS event is fired or the first time a user logged in.               |
 |       |                                  |                                                                                                                    |
 |       |                                  | It also includes security relevant actions (like the starting of a sniffer or something like that).                |
 +-------+----------------------------------+--------------------------------------------------------------------------------------------------------------------+

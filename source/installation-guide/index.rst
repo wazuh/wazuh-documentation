@@ -1,4 +1,4 @@
-.. Copyright (C) 2022 Wazuh, Inc.
+.. Copyright (C) 2015, Wazuh, Inc.
 
 .. meta::
   :description: Visit the Wazuh installation guide and learn more about the deployment process, available installation alternatives, and requirements.
@@ -13,7 +13,7 @@ Wazuh is a security platform that provides unified XDR and SIEM protection for e
 
 Wazuh is free and open source. Its components abide by the `GNU General Public License, version 2 <https://www.gnu.org/licenses/old-licenses/gpl-2.0.en.html>`_, and the `Apache License, Version 2.0 <https://www.apache.org/licenses/LICENSE-2.0>`_ (ALv2). 
 
-In this installation guide, you will learn how to install Wazuh in your infrastructure. We also offer `Wazuh Cloud <https://wazuh.com/cloud/>`_, our software as a service (SaaS) solution. Check the :ref:`Cloud service <cloud_service>` documentation for more information.
+In this installation guide, you will learn how to install Wazuh in your infrastructure. We also offer `Wazuh Cloud <https://wazuh.com/cloud/>`_, our software as a service (SaaS) solution. Check the :doc:`Cloud service </cloud-service/index>` documentation for more information.
 
 
 Installing the Wazuh central components
@@ -25,10 +25,53 @@ The Wazuh indexer and Wazuh server can be installed on a single host or be distr
 
 This is the installation workflow you will follow:
 
-.. thumbnail:: ../images/installation/Wazuh-Installation-workflow.png
-  :title: Wazuh installation workflow
-  :align: center
-  :width: 100%
+.. raw:: html
+
+  <div class="link-boxes-group layout-3" data-step="0">
+    <div class="steps-line">
+      <div class="steps-number future-step">1</div>
+      <div class="steps-number future-step">2</div>
+      <div class="steps-number future-step">3</div>
+    </div>
+    <div class="link-boxes-item future-step">
+      <a class="link-boxes-link" href="wazuh-indexer/index.html">
+        <p class="link-boxes-label">Install the Wazuh indexer</p>
+
+.. image:: ../images/installation/Indexer-noBG.png
+     :align: center
+     :height: 61px
+
+.. raw:: html
+
+      </a>
+    </div>
+  
+    <div class="link-boxes-item future-step">
+      <a class="link-boxes-link" href="wazuh-server/index.html">
+        <p class="link-boxes-label">Install the Wazuh server</p>
+
+.. image:: ../images/installation/Server-noBG.png
+     :align: center
+     :height: 61px
+
+.. raw:: html
+
+      </a>
+    </div>
+  
+    <div class="link-boxes-item future-step">
+      <a class="link-boxes-link" href="wazuh-dashboard/index.html">
+        <p class="link-boxes-label">Install the Wazuh dashboard</p>
+
+.. image:: ../images/installation/Dashboard-noBG.png
+     :align: center
+     :height: 61px
+     
+.. raw:: html
+
+      </a>
+    </div>
+  </div>
 
 
 Installing the Wazuh agent
@@ -41,7 +84,7 @@ If the Wazuh central components are already installed in your environment, selec
 
 .. raw:: html
 
-  <div class="link-boxes-group">
+  <div class="link-boxes-group layout-6">
     <div class="link-boxes-item">
       <a class="link-boxes-link" href="./wazuh-agent/wazuh-agent-package-linux.html">
         <p class="link-boxes-label">Linux</p>
@@ -81,6 +124,7 @@ If the Wazuh central components are already installed in your environment, selec
 
 .. image:: /images/installation/solaris.png
       :align: center
+      :width: 150px
 
 .. raw:: html
 
@@ -115,12 +159,12 @@ If the Wazuh central components are already installed in your environment, selec
 Packages list
 -------------
 
-In the :ref:`Packages list <packages>` section, you will find all the packages required for the installation of Wazuh |WAZUH_LATEST|.
+In the :doc:`Packages list </installation-guide/packages-list>` section, you will find all the packages required for the installation of Wazuh.
 
 Other installation alternatives
 -------------------------------
 
-Wazuh provides other :ref:`installation alternatives <deployment>`. These are complementary to the installation methods of this installation guide. You will find instructions on how to deploy Wazuh using ready-to-use machines, containers, and orchestration tools. There is also information on how to install the solution offline, from sources, and with commercial options.
+Wazuh provides other :doc:`installation alternatives </deployment-options/index>`. These are complementary to the installation methods of this installation guide. You will find instructions on how to deploy Wazuh using ready-to-use machines, containers, and orchestration tools. There is also information on how to install the solution offline, from sources, and with commercial options.
 
 
 .. toctree::

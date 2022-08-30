@@ -1,4 +1,4 @@
-.. Copyright (C) 2022 Wazuh, Inc.
+.. Copyright (C) 2015, Wazuh, Inc.
 
 Configure the cluster node by editing the following settings in ``/var/ossec/etc/ossec.conf``:
 
@@ -25,7 +25,7 @@ The parameters:
 +-------------------------------------+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
 |:ref:`node_name <cluster_node_name>` | Name of the current node.                                                                                                                                                                                                                           |
 +-------------------------------------+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-|:ref:`key <cluster_key>`             | Key that will be used to encrypt communication between cluster nodes. The key must be 32 characters long and same for all of the nodes in the cluster. You may use the following command to generate a random key: ``openssl rand -hex 16``         |
+|:ref:`key <cluster_key>`             | Key that will be used to encrypt communication between cluster nodes. The key must be 32 characters long and the same for all of the nodes in the cluster. You may use the following command to generate a random key: ``openssl rand -hex 16``     |
 +-------------------------------------+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
 |:ref:`node_type <cluster_node_type>` | Node type (master/worker).                                                                                                                                                                                                                          |
 +-------------------------------------+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+

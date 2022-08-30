@@ -1,6 +1,7 @@
-.. Copyright (C) 2015–2022 Wazuh, Inc.
+.. Copyright (C) 2015, Wazuh, Inc.
 
-.. meta:: :description: Learn how to install the Wazuh indexer using the Wazuh installation assistant. The Wazuh indexer is a highly scalable full-text search engine and offers advanced security, alerting, index management, deep performance analysis, and several other features.
+.. meta::
+   :description: Learn how to install the Wazuh indexer using the Wazuh installation assistant. The Wazuh indexer is a highly scalable full-text search engine and offers advanced security, alerting, index management, deep performance analysis, and several other features.
 
 Installing the Wazuh indexer using the assistant
 ================================================
@@ -32,9 +33,9 @@ Indicate your deployment configuration, create the SSL certificates to encrypt c
       .. code-block:: console
 
           # curl -sO https://packages.wazuh.com/|WAZUH_LATEST_MINOR|/wazuh-install.sh
-          # curl -sO https://packages.wazuh.com/|WAZUH_LATEST_MINOR|/config.yml
+          # curl -sO https://packages.wazuh.com/|WAZUH_LATEST_MINOR|/wazuh-config.yml
        
-#. Edit ``./config.yml`` and replace the node names and IP values with the corresponding names and IP addresses. You need to do this for all the Wazuh server, the Wazuh indexer, and the Wazuh dashboard nodes. Add as many node fields as needed.
+#. Edit ``./wazuh-config.yml`` and replace the node names and IP values with the corresponding names and IP addresses. You need to do this for all the Wazuh server, the Wazuh indexer, and the Wazuh dashboard nodes. Add as many node fields as needed.
 
       .. code-block:: yaml
 
@@ -63,11 +64,11 @@ Indicate your deployment configuration, create the SSL certificates to encrypt c
              - name: dashboard
                ip: <dashboard-node-ip>
 
-#. Run the assistant with the option ``-g`` to generate the  Wazuh cluster key, certificates, and passwords necessary for installation. 
+#. Run the assistant with the option ``--generate-config-files`` to generate the  Wazuh cluster key, certificates, and passwords necessary for installation. You can find these files in ``./wazuh-install-files.tar``.
 
       .. code-block:: console
 
-        # bash ./wazuh-install.sh -g
+        # bash wazuh-install.sh --generate-config-files
 
 
 #.  Copy the ``wazuh-install-files.tar`` file to all the servers of the distributed deployment, including the Wazuh server, the Wazuh indexer, and the Wazuh dashboard nodes. This can be done by using, for example, ``scp``.
@@ -83,16 +84,16 @@ Install and configure the Wazuh indexer nodes.
 
       .. code-block:: console
 
-        # curl -sO https://packages.wazuh.com/|WAZUH_LATEST_MINOR|/wazuh-install.sh
+        # curl -sO https://packages.wazuh.com/|WAZUH_CURRENT_MINOR|/wazuh-install.sh
 
 
-#. Run the assistant with the option ``-wi`` and the node name to install and configure the Wazuh indexer. The node name must be the same used in ``config.yml`` for the initial configuration, for example, ``node-1``.
+#. Run the assistant with the option ``--wazuh-indexer`` and the node name to install and configure the Wazuh indexer. The node name must be the same used in ``wazuh-config.yml`` for the initial configuration, for example, ``node-1``.
       
       .. note:: Make sure that a copy of ``wazuh-install-files.tar``, created during the initial configuration step, is placed in your working directory.
 
       .. code-block:: console
 
-        # bash ./wazuh-install.sh -wi node-1 
+        # bash wazuh-install.sh --wazuh-indexer node-1 
 
 
 Repeat this process on each Wazuh indexer node and proceed with initializing the cluster.             
@@ -104,12 +105,13 @@ Repeat this process on each Wazuh indexer node and proceed with initializing the
 
 The final stage of the process for installing the Wazuh indexer cluster consists in running the security admin script. 
 
-Run the Wazuh installation assistant with option ``-s`` on any Wazuh indexer node to load the new certificates information and start the cluster. 
+#. Run the Wazuh installation assistant with option ``--start-cluster`` on `any` Wazuh indexer node to load the new certificates information and start the cluster. 
 
-  .. code-block:: console
-
-    # bash ./wazuh-install.sh -s
-
+   .. code-block:: console
+ 
+     # bash wazuh-install.sh --start-cluster
+ 
+   .. note:: You only have to initialize the cluster `once`, there is no need to run this command on every node. 
 
 Next steps
 ----------

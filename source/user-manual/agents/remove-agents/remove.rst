@@ -1,4 +1,4 @@
-.. Copyright (C) 2022 Wazuh, Inc.
+.. Copyright (C) 2015, Wazuh, Inc.
 .. meta::
   :description: Learn how to remove agents using the command line interface (CLI) in Wazuh.
   
@@ -19,7 +19,7 @@ If the user would like confirmation before removing the agent, use the following
     :class: output
 
     ****************************************
-    * Wazuh v|WAZUH_LATEST| Agent manager.          *
+    * Wazuh v|WAZUH_CURRENT| Agent manager.          *
     * The following options are available: *
     ****************************************
        (A)dd an agent (A).
@@ -47,7 +47,7 @@ If the user would like to remove the agent without confirmation, use the option 
     :class: output
 
     ****************************************
-    * Wazuh v|WAZUH_LATEST| Agent manager.          *
+    * Wazuh v|WAZUH_CURRENT| Agent manager.          *
     * The following options are available: *
     ****************************************
        (A)dd an agent (A).

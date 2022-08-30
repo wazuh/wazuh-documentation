@@ -1,4 +1,7 @@
-.. Copyright (C) 2022 Wazuh, Inc.
+.. Copyright (C) 2015, Wazuh, Inc.
+
+.. meta::
+    :description: You can install Wazuh using different deployment options. Learn more about Wazuh installation alternatives in this section of the Wazuh documentation.
 
 .. _deployment:
 
@@ -25,7 +28,7 @@ All the alternatives include instructions on how to install the :doc:`Wazuh cent
 
     <h3>Containers</h3>
 
-- :doc:`docker/index`: Docker is a set of platform-as-a-service (PaaS) products that delivers software in packages called containers. Using Docker, you can install and configure the Wazuh deployment as a single-host architecture. 
+- :doc:`docker/index`: Docker is a set of platform-as-a-service (PaaS) products that deliver software in packages called containers. Using Docker, you can install and configure the Wazuh deployment as a single-host architecture. 
 
   
 - :doc:`deploying-with-kubernetes/index`: Kubernetes is an open-source system for automating deployment, scaling, and managing containerized applications. This deployment type uses Wazuh images from Docker and allows you to build the Wazuh environment. 
@@ -50,7 +53,7 @@ All the alternatives include instructions on how to install the :doc:`Wazuh cent
 
     <h3>Commercial options</h3>
 
-- :doc:`Installation with Elastic Stack basic license <elastic-stack/index>`: As an alternative to Wazuh indexer, you can install Wazuh using the Elastic Stack basic license option. It contains everything included in the open source version under the `Apache License, Version 2.0 <https://www.apache.org/licenses/LICENSE-2.0>`_, plus additional capabilities such as Elastic Stack Security features, Kibana alerting, and others. According to your chosen configuration, Wazuh and Elastic Stack are installed on the same host, as an all-in-one deployment, on a separate host as a single-node or multi-node cluster.
+- :doc:`Installation with Elastic Stack basic license <elastic-stack/index>`: As an alternative to the Wazuh indexer, you can install Wazuh using the Elastic Stack basic license option. It contains everything included in the open source version under the `Apache License, Version 2.0 <https://www.apache.org/licenses/LICENSE-2.0>`_, plus additional capabilities such as Elastic Stack Security features, Kibana alerting, and others. According to your chosen configuration, Wazuh and Elastic Stack are installed on the same host, as an all-in-one deployment, on a separate host as a single-node or multi-node cluster.
 
 - :doc:`Installation with Splunk <splunk/index>`: You install Wazuh along with Splunk Enterprise, including the Splunk forwarder and the Wazuh Splunk app. This can be done as a single instance or as a multi-instance cluster.
 
@@ -58,14 +61,14 @@ All the alternatives include instructions on how to install the :doc:`Wazuh cent
 Installing the Wazuh agent
 --------------------------
 
-The :doc:`/installation-guide/wazuh-agent/index` is a single and lightweight monitoring software. It is a multi-platform component that can be deployed to laptops, desktops, servers, cloud instances, containers, or virtual machines. It provides visibility into the endpoint's security by collecting critical system and application records, inventory data, and detecting potential anomalies. 
+The :doc:`/installation-guide/wazuh-agent/index` is a single and lightweight monitoring software. It is a multi-platform component that can be deployed to laptops, desktops, servers, cloud instances, containers, or virtual machines. It provides visibility into the endpoint security by collecting critical system and application records, inventory data, and detecting potential anomalies. 
 
 If the Wazuh central components are already installed in your environment, select your operating system below and follow the installation steps to deploy the agent on the endpoints. 
 
 
 .. raw:: html
 
-  <div class="link-boxes-group">
+  <div class="link-boxes-group layout-6">
     <div class="link-boxes-item">
       <a class="link-boxes-link" href="../installation-guide/wazuh-agent/wazuh-agent-package-linux.html">
         <p class="link-boxes-label">Linux</p>
@@ -105,6 +108,7 @@ If the Wazuh central components are already installed in your environment, selec
 
 .. image:: /images/installation/solaris.png
       :align: center
+      :width: 150px
 
 .. raw:: html
 

@@ -1,12 +1,12 @@
-.. Copyright (C) 2022 Wazuh, Inc.
+.. Copyright (C) 2015, Wazuh, Inc.
 
 .. meta::
   :description: Wazuh 3.13.1 has been released. Check out our release notes to discover the changes and additions of this release.
 
 .. _release_3_13_1:
 
-3.13.1 Release notes
-====================
+3.13.1 Release notes - 15 July 2020
+===================================
 
 This section lists the changes in version 3.13.1. More details about these changes are provided in each component changelog:
 

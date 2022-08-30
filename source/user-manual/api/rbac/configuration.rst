@@ -1,4 +1,4 @@
-.. Copyright (C) 2022 Wazuh, Inc.
+.. Copyright (C) 2015, Wazuh, Inc.
 
 .. meta::
   :description: Check out how to configure the Role-Based Access Control (RBAC) with Wazuh in this step-by-step guide of our documentation. 
@@ -12,7 +12,7 @@ Configuration
 
 Set RBAC mode
 -------------
-As explained in the :ref:`How it works <api_rbac_how_it_works>` section, it is possible to modify the RBAC mode and change it to ``white`` or ``black``. This can be done using the :api-ref:`PUT /security/config <operation/api.controllers.security_controller.put_security_config>` Wazuh API endpoint. It can also be restored to default using :api-ref:`DELETE /security/config <operation/api.controllers.security_controller.delete_security_config>`.
+As explained in the :doc:`How it works </user-manual/api/rbac/how-it-works>` section, it is possible to modify the RBAC mode and change it to ``white`` or ``black``. This can be done using the :api-ref:`PUT /security/config <operation/api.controllers.security_controller.put_security_config>` Wazuh API endpoint. It can also be restored to default using :api-ref:`DELETE /security/config <operation/api.controllers.security_controller.delete_security_config>`.
 
 Here is an example of how to change RBAC mode using a cURL command. It is recommended to export the token to a variable as explained in :ref:`Getting started <api_getting-started>` section. Replace ``DESIRED_RBAC_MODE`` with the mode to enable (``white`` or ``black``):
 
