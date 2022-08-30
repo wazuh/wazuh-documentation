@@ -8,103 +8,202 @@
 File integrity monitoring
 =========================
 
-File integrity monitoring (Syscheck) is performed by comparing the cryptographic checksum and other attributes of a known good file against the checksum and attributes of that file after it has been modified.
+File integrity monitoring (Syscheck) is performed by comparing the cryptographic checksum and other attributes of a known file against the checksum and attributes of that file after it has been modified.
 
-First, the Wazuh agent scans the system at an interval you specify, and it sends the checksums of the monitored files and registry keys (for Windows systems) to the Wazuh server. Then, the server stores the checksums and looks for modifications by comparing the newly received checksums against the historical checksum values for those files and/or registry keys. An alert is sent if the checksum (or another file attribute) changes.  Wazuh also supports near real-time file integrity checking where this is desired.
+First, the Wazuh agent scans the system periodically at a specified interval, then it sends the checksums of the monitored files and registry keys (for Windows systems) to the Wazuh server. The server stores the checksums and looks for modifications by comparing the newly received checksums against the historical checksum values for those files and/or registry keys. An alert is generated if the checksum (or another file attribute) changes. Wazuh also supports near real-time file integrity monitoring.
 
-:ref:`Syscheck <reference_ossec_syscheck>`  can be used to meet PCI DSS requirement 11.5:
+The :doc:`file integrity monitoring </user-manual/reference/ossec-conf/syscheck>` module can be used to meet some sub-requirements of PCI DSS requirement 11 which requires testing the security of systems and networks regularly. This requirement aims to ensure that system components, processes, and bespoke and custom software are tested frequently to ensure security controls continue to reflect a changing environment. Some of the changes in the environment may include the modification and deletion of critical files. This module can help monitor these file changes and assist in achieving PCI DSS compliance.
 
-    | **11.5** Deploy a change-detection mechanism (for example, file-integrity monitoring tools) to alert personnel to unauthorized modification (including changes, additions, and deletions) of critical system files, configuration files, or content files; and configure the software to perform critical file comparisons at least weekly.
-    |
 
 Use cases
 ---------
 
-In this example, we have configured Wazuh to detect changes in the file ``/root/credit_cards``.
+PCI DSS 11.5.2 requires the deployment of a change-detection mechanism (for example, file integrity monitoring tools) to alert personnel of unauthorized modification (including changes, additions, and deletions) of critical system files, configuration files, or content files; and to configure the software to perform critical file comparisons at least weekly.
 
-.. code-block:: xml
+In the following sections, we look at configuring Wazuh to do the following:
 
-    <syscheck>
-        <directories check_all="yes" report_changes="yes">/root/credit_cards</directories>
-    </syscheck>
+- Detect changes in a file
+- Perform critical file comparisons at specified intervals
+- Detect file deletion
 
-So, when we modify the file, Wazuh generates an alert.
 
-.. code-block:: console
+Detect changes in a file
+^^^^^^^^^^^^^^^^^^^^^^^^
 
-    [root@centos ~]# ls -l credit_cards
+For this use case, we configure Wazuh to detect when changes are made to a file in the directory ``/root/credit_cards`` and the details of the user that made the changes.
 
-.. code-block:: none
-    :class: output
+**On the agent**
 
-    +total 4
-    -rw-r--r--. 1 root root 14 Jan 10 19:33 cardholder_data.txt
+#. Firstly we need to check if the Audit daemon is installed in our system.
 
-.. code-block:: console
+   In RedHat based systems, Auditd is commonly installed by default. If it's not installed, we need to install it using the following command:
 
-    [root@centos ~]# cat credit_cards/cardholder_data.txt
+   .. code-block:: console 
 
-.. code-block:: none
-    :class: output
+     # yum install audit
 
-    User1 = card4
+   For Debian based systems, use the following:
 
-.. code-block:: console
+   .. code-block:: console 
 
-    [root@centos ~]# echo "User1 = card5" > credit_cards/cardholder_data.txt
-    [root@centos ~]# cat credit_cards/cardholder_data.txt
+     # apt install auditd
 
-.. code-block:: none
-    :class: output
+#. Determine the full file path for the file or directory to be monitored. In this case, we are monitoring the directory ``/root/credit_cards`` for changes.
 
-    User1 = card5
+   .. code-block:: console 
+      
+      # ls -l  /root/credit_cards/
 
-As you can see, syscheck alerts are tagged with the requirement 11.5.
+   .. code-block:: none
+     :class: output      		
 
-.. code-block:: console
+      total 4
+      -rw-r--r--. 1 root root 14 May 16 14:53 cardholder_data.txt
 
-    root@ubuntu:~# tail -n28 /var/ossec/logs/alerts/alerts.log
+   .. code-block:: console
+   
+      # cat /root/credit_cards/cardholder_data.txt
 
-.. code-block:: none
-    :class: output
+   .. code-block:: none
+     :class: output    		
 
-    ** Alert 1484071804.77110: - ossec,syscheck,pci_dss_11.5,
-    2017 Jan 10 19:10:04 (CentOS) 192.168.56.4->syscheck
-    Rule: 550 (level 7) -> 'Integrity checksum changed.'
-    Integrity checksum changed for: '/root/credit_cards/cardholder_data.txt'
-    Old md5sum was: '713f9c28cee03fc39f611d8e6ded6333'
-    New md5sum is : '313eba655eba3ebd814deee1b7bd7be1'
-    Old sha1sum was: '41f840a0f1335144d973e2bebb496e48fd3592e9'
-    New sha1sum is : 'a4e70ed0ca7bf67b4f5559a9d34a0d6a200927b2'
+      User1 = card4
 
-    File: /root/credit_cards/cardholder_data.txt
-    New size: 14
-    New permissions: 100644
-    New user: root (0)
-    New group: root (0)
-    Old MD5: 713f9c28cee03fc39f611d8e6ded6333
-    New MD5: 313eba655eba3ebd814deee1b7bd7be1
-    Old SHA1: 41f840a0f1335144d973e2bebb496e48fd3592e9
-    New SHA1: a4e70ed0ca7bf67b4f5559a9d34a0d6a200927b2
-    Old date: Tue Jan 10 19:02:07 2017
-    New date: Tue Jan 10 19:09:58 2017
-    New inode: 1110
-    What changed: 1c1
-    < User1 = card4
-    ---
-    > User1 = card5
+#. Add the following configuration to the syscheck block of the agent configuration file ``/var/ossec/etc/ossec.conf``. This will enable real-time monitoring of the directory and ensures that when a file in the directory is modified, Wazuh generates an alert with the details of the user who made the changes on the monitored files and the program name or process used to carry them out. 
 
-.. thumbnail:: ../images/pci/fim-1.png
-    :title: Alert visualization at the Wazuh dashboard
-    :align: center
-    :width: 100%
+   .. code-block:: xml
 
-.. thumbnail:: ../images/pci/fim-2.png
-    :title: Filtering alerts by PCI DSS and file path
-    :align: center
-    :width: 100%
+      <syscheck>
+         <directories check_all="yes" whodata="yes">/root/credit_cards</directories>
+      </syscheck>
 
-.. thumbnail:: ../images/pci/fim-pci.png
-    :title: Filtering alerts by PCI DSS on Wazuh App
-    :align: center
-    :width: 100%
+#. Restart the Wazuh agent to apply the changes.
+
+   .. include:: /_templates/common/restart_agent.rst
+
+#. Check if the Audit rule for monitoring the selected folder is applied. To do so, execute the following command:
+
+   .. code-block:: console 
+
+      auditctl -l | grep wazuh_fim
+
+   And check in the command output that the rule was added:
+
+   .. code-block:: console 
+
+      auditctl -w /root/credit_cards -p wa -k wazuh_fim
+
+#. Proceed to modify the file. In this case, we added new content.
+
+      .. code-block:: console 
+
+         nano credit_cards/cardholder_data.txt
+
+   We can see an alert generated to show that a file in the monitored directory was modified.
+
+      .. thumbnail:: ../images/pci/file-modified-in-the-monitored-directory.png
+         :title: File modified in the monitored directory
+         :align: center
+         :width: 80%
+
+      .. thumbnail:: ../images/pci/file-modified-in-the-monitored-directory-2.png
+         :title: File modified in the monitored directory
+         :align: center
+         :width: 80%     
+
+   In the alert details, we can see the PCI DSS requirement met, the differences in the file checksum, the file modified, the modification time, the ``whodata`` showing the process and user that made the modification, and other details.
+
+Perform critical file comparisons at specified intervals
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+In this use case, we configure Syscheck to detect when changes have been made to monitored files over specific time intervals and show the differences in the file between the last check and the present check. To illustrate this, in the steps below, we configure syscheck to perform a scan every 1 hour and generate an alert for every file change detected.
+
+.. note::	
+	- Syscheck runs scans every 12 hours by default. The scan frequency set is for all monitored files/directories except directories with real-time monitoring enabled.
+	- Depending on the number of files/directories configured for scans, and the frequency of syscheck scans, you may observe increased CPU and memory usage. Please use the frequency option carefully.
+
+
+**On the agent**
+
+#.  Determine the full file path for the file to be monitored. In this case, we are monitoring the file ``/root/credit_cards/cardholder_data.txt`` for changes.
+
+	.. note::
+      
+	    Showing the changes made in a file is limited to only text files at this time.
+
+
+#. In the agent configuration file ``/var/ossec/etc/ossec.conf``, update the frequency option of the ``syscheck`` block to your desired scan interval in seconds. In this case, our desired scan interval is every 1 hour (3600 seconds).
+
+   .. code-block:: console 
+
+       <frequency>3600</frequency>
+
+#. Add the following configuration to the ``syscheck`` block of the agent configuration file ``/var/ossec/etc/ossec.conf``. This will enable monitoring of the file and ensure that when the file is modified, Wazuh generates an alert with the differences.
+
+   .. code-block:: xml
+
+       <syscheck>
+          <directories check_all="yes" report_changes="yes" >/root/credit_cards/cardholder_data.txt</directories>
+       </syscheck>
+
+
+   .. note::
+
+	    If you prefer that the changes are monitored in real-time, you can use the configuration below to monitor the directory where the file is saved and disregard making the frequency modification.
+
+
+   .. code-block:: xml
+
+       <syscheck>
+          <directories check_all="yes" report_changes="yes" realtime="yes" >/root/credit_cards</directories>
+       </syscheck>
+
+
+#. Restart the Wazuh agent to apply the changes.
+
+   .. include:: /_templates/common/restart_agent.rst
+
+#. Proceed to modify the file. In this case, we removed some content. An alert is generated on the next Syscheck scan about the modified file.
+
+	.. thumbnail:: ../images/pci/alert-generated-on-the-next- syscheck-scan-01.png
+		:title: Alert generated on the next Syscheck scan
+		:align: center
+		:width: 80%
+
+	.. thumbnail:: ../images/pci/alert-generated-on-the-next- syscheck-scan-02.png
+		:title: Alert generated on the next Syscheck scan
+		:align: center
+		:width: 80%
+
+   In the alert details, we can see the changes made in ``syscheck.diff``, the file modified, the PCI DSS requirement met, the differences in the file checksum, the modification time, and other details.
+
+Detect file deletion
+^^^^^^^^^^^^^^^^^^^^
+
+In this scenario, Syscheck detects when a file in a monitored directory is deleted. To illustrate this, in the steps below, Syscheck is configured to monitor the ``/root/credit_cards/`` directory for changes.
+
+**On the agent**
+
+#. Determine the full file path for the file or directory to be monitored. In this case, we are monitoring the directory ``/root/credit_cards``.
+#. Add the following configuration to the syscheck block of the agent configuration file ``/var/ossec/etc/ossec.conf``. This will enable monitoring of the file and ensure that Wazuh generates an alert if the file is deleted.
+
+   .. code-block:: xml
+
+      <syscheck>
+         <directories check_all="yes" realtime="yes" >/root/credit_cards</directories>
+      </syscheck>
+
+#. Restart the Wazuh agent to apply the changes.
+
+   .. include:: /_templates/common/restart_agent.rst
+
+#. Proceed to delete a file from the directory. In this case, we deleted the file ``cardholder_data.txt``. We can see an alert generated for the file deleted.
+
+	.. thumbnail:: ../images/pci/alert-generated-for-the-file-deleted.png
+		:title: Alert generated for the file deleted
+		:align: center
+		:width: 80%
+
+   In the alert details, we can see the file deleted, the PCI DSS requirement met, the deletion time, and other details.
+
+   These activities can be tracked from the PCI DSS module dashboard. The dashboard will show all activities that trigger a PCI DSS requirement including FIM changes.
