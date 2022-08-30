@@ -167,9 +167,9 @@ If the agent isn't connected, it may possibly mean the enrollment wasn't success
 
       .. code-block:: console
 
-         # netstat -vatunp|grep wazuh-agentd
+         # lsof -i -P | grep ESTABLISHED | grep 1514
 
       .. code-block:: console
          :class: output
 
-         tcp        0      0 10.0.2.15:48364      10.0.2.1:1514        ESTABLISHED 796/wazuh-agentd
+         wazuh-age  1763          wazuh    7u  IPv4 0xca59cd921b0f1ccb      0t0    TCP 10.0.2.15:49326->10.0.2.1:1514 (ESTABLISHED)
