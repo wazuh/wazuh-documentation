@@ -39,7 +39,7 @@ Configure your environment as follows to test the PoC.
 
     .. code-block:: console
 
-        # apt install ncat nmap -y
+        # apt-get install ncat nmap -y
 
 #. Add following rules to ``/var/ossec/etc/rules/local_rules.xml`` at the Wazuh manager.
 
