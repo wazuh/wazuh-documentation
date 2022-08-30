@@ -1,7 +1,7 @@
 .. Copyright (C) 2015, Wazuh, Inc.
 
 .. meta::
-  :description: Wazuh provides an automated way of building our Wazuh Splunk app packages. Learn how to build Wazuh Splunk app packages in this section of our documentation.
+  :description: Wazuh provides an automated way of building Wazuh Splunk app packages. Learn how to build Wazuh Splunk app packages in this section of our documentation.
 
 .. _create-splunk-app:
 

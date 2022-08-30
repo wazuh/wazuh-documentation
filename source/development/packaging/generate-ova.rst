@@ -1,7 +1,7 @@
 .. Copyright (C) 2015, Wazuh, Inc.
 
 .. meta::
-  :description: Wazuh provides an automated way of generating a Virtual machine in OVA format. Learn how to build a Virtual machine in OVA format in this section of our documentation.
+  :description: Wazuh provides an automated way of generating a Virtual machine in OVA format. Learn how to build a Virtual machine in OVA format in this section.  
 
 .. _create-ova:
 

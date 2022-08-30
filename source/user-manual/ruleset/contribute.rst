@@ -1,7 +1,7 @@
 .. Copyright (C) 2015, Wazuh, Inc.
 
 .. meta::
-  :description: In this section of our documentation, learn more about contributing to the ruleset if you have created new rules, decoders, or rootchecks. 
+  :description: Learn more about contributing to the ruleset if you have created new rules, decoders, or rootchecks in this section of our documentation. 
 
 .. _ruleset_contribute:
 

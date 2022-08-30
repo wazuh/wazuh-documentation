@@ -1,7 +1,7 @@
 .. Copyright (C) 2015, Wazuh, Inc.
 
 .. meta::
-  :description: Learn how to monitoring Docker servers and container events with Wazuh in this section of our documentation.
+  :description: Learn how to monitor Docker servers and container events with Wazuh in this section of our documentation.
 
 .. _docker-monitor-index:
 
