@@ -74,7 +74,7 @@ Packages
 
 RPM revision 2
 ~~~~~~~~~~~~~~
--  `v4.3.7-2 <https://github.com/wazuh/wazuh-packages/releases/tag/v4.3.7-2>`_ An error that caused RHEL 9 SCA policies to be installed in RHEL 8 is fixed.
+-  `v4.3.7-2 <https://github.com/wazuh/wazuh-packages/releases/tag/v4.3.7-2>`_ A bug related to the installation of the SCA policy in RHEL8 is fixed. This error caused the RHEL 9 SCA policy to be installed in RHEL 8 machines instead of the correct one.
 
 
 Resolved issues
