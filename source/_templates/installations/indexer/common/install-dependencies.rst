@@ -14,6 +14,6 @@
 
                   .. code-block:: console
 
-                      # apt install debconf adduser procps
+                      # apt-get install debconf adduser procps
 
 .. End of include file

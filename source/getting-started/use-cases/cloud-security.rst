@@ -227,4 +227,4 @@ See below an example of an alert generated when a known bad actor (a source IP a
      "timestamp": "2020-08-17T17:09:25.832+0000"
    }
 
-You can find more information on how to use Wazuh to monitor the Google cloud platform in our :doc:`documentation </gcp/index>`. 
+You can find more information on how to use Wazuh to monitor the Google cloud platform in :doc:`/gcp/index`.

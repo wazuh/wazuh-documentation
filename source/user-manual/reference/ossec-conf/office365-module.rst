@@ -91,6 +91,10 @@ interval
 
 The interval between Wazuh wodle executions.
 
+.. note::
+
+    When Wazuh starts, it waits for the configured time interval before running the first scan, unless the module has already been running before and the ``only_future_events`` option is set to no.
+
 +--------------------+-----------------------------------------------------------------------------------------------------------------------------------------+
 | **Default value**  | 10m                                                                                                                                     |
 +--------------------+-----------------------------------------------------------------------------------------------------------------------------------------+
@@ -117,6 +121,10 @@ This block configures the credential for the **authentication** with the Office3
 - `api_auth\\client_id`_
 - `api_auth\\client_secret_path`_
 - `api_auth\\client_secret`_
+
+.. warning::
+
+    In case of invalid configuration, after the third scan attempt, a warning message is generated in the log file and an alert is triggered.
 
 +----------------------------------------+----------------------------------------------+
 | Options                                | Allowed values                               |

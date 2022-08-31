@@ -42,7 +42,7 @@ Uninstall the Wazuh dashboard
 
         .. code:: console
 
-          # apt remove --purge wazuh-dashboard -y
+          # apt-get remove --purge wazuh-dashboard -y
 
 .. _uninstall_server:
 
@@ -64,7 +64,7 @@ Uninstall the Wazuh server
 
         .. code-block:: console
         
-          # apt remove --purge wazuh-manager -y
+          # apt-get remove --purge wazuh-manager -y
 
 #. Disable the Wazuh manager service.
 
@@ -87,7 +87,7 @@ Uninstall the Wazuh server
 
         .. code:: console
       
-          # apt remove --purge filebeat -y
+          # apt-get remove --purge filebeat -y
 
 
 .. _uninstall_indexer:
@@ -112,4 +112,4 @@ Uninstall the Wazuh indexer
 
         .. code:: console
 
-          # apt remove --purge wazuh-indexer -y
+          # apt-get remove --purge wazuh-indexer -y
