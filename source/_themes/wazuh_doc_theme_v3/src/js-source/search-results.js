@@ -84,10 +84,17 @@ if ( $('.search') ) {
                   breadcrumb = createResultBreadcrumb(titleLink);
                   
                   // Context
-                  let excerpt_range = results[i].excerpt_range;
-                  let excerpt = (excerpt_range[0] > 0) ? "..." : "";
-                  excerpt = excerpt + singleResult.excerpt;
-                  excerpt = excerpt + ((excerpt_range[0]+excerpt_range[1]-1 < singleResult.content.split(" ").length) ? "..." : "");
+                  let excerptRange = results[i].excerpt_range;
+                  let higlightedWords = results[i].words;
+                  let escapedContent = _.escape(singleResult.content).split(" ");
+
+                  for (var wordIndex = 0; wordIndex < higlightedWords.length; wordIndex++) {
+                    escapedContent[higlightedWords[wordIndex]] = "<mark>" + escapedContent[higlightedWords[wordIndex]] + "</mark>";
+                  }
+
+                  let excerpt = (excerptRange[0] > 0) ? "..." : "";
+                  excerpt = excerpt + escapedContent.slice(results[i].excerpt_range[0], results[i].excerpt_range[0]+results[i].excerpt_range[1]).join(" ");
+                  excerpt = excerpt + ((excerptRange[0]+excerptRange[1]-1 < escapedContent.length) ? "..." : "");
                   
                   context = $('<div/>').addClass('context').html(excerpt);
                   
