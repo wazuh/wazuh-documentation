@@ -29,8 +29,9 @@
         {% endif %}
         
         {# Main content #}
+        {% set is_orphan = meta and meta.orphan is defined %}
         <main role="main" 
-        {%- if pagename in ignore_page_search -%}
+        {%- if pagename in ignore_page_search or is_orphan -%}
           data-pagefind-ignore="all"
         {%- else -%}
           data-pagefind-body
