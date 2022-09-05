@@ -1,7 +1,7 @@
 .. Copyright (C) 2015, Wazuh, Inc.
 
 .. meta::
-  :description: The Wazuh module for AWS provides capabilities to monitor AWS based services. Learn about Amazon VPC in this section of our documentation.
+  :description: Amazon VPC lets users provision a logically isolated section of the AWS Cloud where they can launch AWS resources. Learn more about it in this section.
 
 .. _amazon_vpc:
 

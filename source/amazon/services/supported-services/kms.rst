@@ -1,7 +1,7 @@
 .. Copyright (C) 2015, Wazuh, Inc.
 
 .. meta::
-  :description: The Wazuh module for AWS provides capabilities to monitor AWS based services. Learn about AWS Key Management Service in this section of our documentation.
+  :description: AWS Key Management Service makes it easy for users to create and manage keys and control the use of encryption. Learn more about it in this section.
 
 .. _amazon_kms:
 

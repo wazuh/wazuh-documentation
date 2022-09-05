@@ -1,7 +1,7 @@
 .. Copyright (C) 2015, Wazuh, Inc.
 
 .. meta::
-  :description: The Wazuh module for AWS provides capabilities to monitor AWS based services. Learn about Amazon Macie in this section of our documentation.
+  :description: Amazon Macie is a security service that uses machine learning to automatically discover and protect sensitive data in AWS. Learn more about it here.
 
 .. _amazon_macie:
 

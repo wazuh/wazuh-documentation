@@ -1,7 +1,7 @@
 .. Copyright (C) 2015, Wazuh, Inc.
 
 .. meta::
-  :description: The Wazuh module for AWS provides capabilities to monitor AWS based services. Learn about Amazon ALB in this section of our documentation.
+  :description: Amazon ALB automatically distributes the incoming traffic across multiple targets. Learn more about Amazon ALB in this section of our documentation.
 
 .. _amazon_alb:
 

@@ -1,14 +1,14 @@
 .. Copyright (C) 2015, Wazuh, Inc.
 
 .. meta::
-  :description: The Wazuh module for AWS provides capabilities to monitor AWS based services. Learn about AWS Trusted Advisor in this section of our documentation.
+  :description: AWS Trusted Advisor is an online resource to help users reduce costs, increase performance, and improve security. Learn more about it in this section.
 
 .. _amazon_trusted_advisor:
 
 AWS Trusted Advisor
 ===================
 
-`AWS Trusted Advisor <https://aws.amazon.com/premiumsupport/trustedadvisor/>`_ is an online resource to help users reduce cost, increase performance, and improve security by optimizing their AWS environment, Trusted Advisor provides real time guidance to help users provision their resources following AWS best practices.
+`AWS Trusted Advisor <https://aws.amazon.com/premiumsupport/trustedadvisor/>`_ is an online resource to help users reduce cost, increase performance, and improve security by optimizing their AWS environment. Trusted Advisor provides real time guidance to help users provision their resources following AWS best practices.
 
 Amazon configuration
 --------------------

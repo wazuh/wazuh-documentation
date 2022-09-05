@@ -1,7 +1,7 @@
 .. Copyright (C) 2015, Wazuh, Inc.
 
 .. meta::
-  :description: The Wazuh module for AWS provides capabilities to monitor AWS based services. Learn about Amazon CLB in this section of our documentation.
+  :description: A Classic Load Balancer makes routing decisions at either the transport layer or the application layer. Learn more about Amazon CLB in this section.
 
 .. _amazon_clb:
 

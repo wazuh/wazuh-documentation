@@ -2,7 +2,7 @@
 .. Copyright (C) 2015, Wazuh, Inc.
 
 .. meta::
-  :description: The Wazuh module for AWS provides capabilities to monitor AWS based services. Learn about Amazon WAF in this section of our documentation.
+  :description: Amazon WAF is a web application firewall that helps protect your web applications from common web exploits. Learn more about it in this section.
 
 .. _amazon_waf:
 
