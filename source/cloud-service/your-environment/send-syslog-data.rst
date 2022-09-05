@@ -127,4 +127,4 @@ To perform the following steps, make sure to replace ``file_name.log`` with the 
 
    .. code-block:: console
       
-      Restart-Service OssecSvc
+      Restart-Service WazuhSvc
