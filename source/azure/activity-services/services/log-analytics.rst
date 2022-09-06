@@ -78,68 +78,73 @@ Giving permissions to the application
     :width: 100%
 
 
-Giving our application access to the Log Analytics API
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+Giving the application access to the Log Analytics API
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-1. Access **Log Analytics workspaces** and create a new workspace or choose an existing one. Then, copy the ``Workspace Id`` value from the **Overview** section. This will be used in the Wazuh configuration to allow making requests to the API.
+#. Access **Log Analytics workspaces** and create a new workspace or choose an existing one.
 
-.. thumbnail:: ../../../images/azure/log-analytics-workspace-1.png
-    :title: Log Analytics App
-    :align: center
-    :width: 100%
+   .. thumbnail:: /images/azure/log-analytics-workspace-1.png
+      :title: Log Analytics App
+      :align: center
+      :width: 100%
 
-.. thumbnail:: ../../../images/azure/log-analytics-workspace-2.png
-    :title: Log Analytics App
-    :align: center
-    :width: 100%
+#. In the **Overview** section, copy the ``Workspace Id`` value. The Wazuh configuration needs it to make requests to the API.
 
-2. Add the required role to the application in the **Access control (IAM)** section by clicking the **Add** and selecting **add role assignment**.
+   .. thumbnail:: /images/azure/log-analytics-workspace-2.png
+      :title: Log Analytics App
+      :align: center
+      :width: 100%
 
-.. thumbnail:: ../../../images/azure/log-analytics-workspace-3.png
-    :title: Log Analytics App
-    :align: center
-    :width: 100%
+#. In the **Access control (IAM)** section, click **Add** and select **Add role assignment** to add the required role to the application.
 
-3. In the **Role** tab look for the **Log Analytics Reader** role and select it.
+   .. thumbnail:: /images/azure/log-analytics-workspace-3.png
+      :title: Log Analytics App
+      :align: center
+      :width: 100%
 
-.. thumbnail:: ../../../images/azure/log-analytics-workspace-4.png
-    :title: Log Analytics App
-    :align: center
-    :width: 100%
+#. In the **Role** tab, select the **Log Analytics Reader** role.
 
-4. In the **Members** assign access to **User, group or service principal**, then click on **Select members** and look for the App registration created previously. Once done, click on **Review + assign**.
+   .. thumbnail:: /images/azure/log-analytics-workspace-4.png
+      :title: Log Analytics App
+      :align: center
+      :width: 100%
 
-.. thumbnail:: ../../../images/azure/log-analytics-workspace-5.png
-    :title: Log Analytics App
-    :align: center
-    :width: 100%
+#. In the **Members** tab, select **User, group, or service principal** under **Assign access to**. Then, click **Select members** under **Members** and find the App registration created previously.
 
+   .. thumbnail:: /images/azure/log-analytics-workspace-5.png
+      :title: Log Analytics App
+      :align: center
+      :width: 100%
+
+#. Click **Review + assign** to finish.
 
 Sending logs to the Workspace
 -----------------------------
 
-To enable Azure to send the desired logs to the Log Analytics Workspace created in previous steps it is necessary to create a **diagnostic setting**. To do so, follow these steps:
+To collect logs and send them to the Log Analytics Workspace created in the previous steps, you need to create a **diagnostic setting**.
 
-1. Go back to **Azure Active Directory**, scroll down on the left menu bar, look for the **Diagnostic Settings** tab and click on **Add diagnostic settings**:
+#. Go back to **Azure Active Directory**, scroll down on the left menu bar, and select the **Diagnostic settings** section. Click on **Add diagnostic setting**.
 
-.. thumbnail:: ../../../images/azure/log-analytics-diagnostic-1.png
-    :title: Log Analytics App
-    :align: center
-    :width: 100%
+   .. thumbnail:: /images/azure/log-analytics-diagnostic-1.png
+      :title: Log Analytics App
+      :align: center
+      :width: 100%
 
-2. Check the desired log types to collect from the **Categories** list, check the **Send to Log Analytics workspace** option, choose the Log Analytics Workspace created in previous steps and click on save.
+#. Choose the log categories you want to collect from, under **Logs Categories**. Check the **Send to Log Analytics workspace** option under **Destination details**. Select the Log Analytics Workspace you created in previous steps.
 
-.. thumbnail:: ../../../images/azure/log-analytics-diagnostic-2.png
-    :title: Log Analytics App
-    :align: center
-    :width: 100%
+   .. thumbnail:: /images/azure/log-analytics-diagnostic-2.png
+      :title: Log Analytics App
+      :align: center
+      :width: 100%
 
-Once done, future Log Analytics logs generated for the selected categories will be send to the workspace.
+#. Click on **Save**.
+
+Now, Azure Log Analytics can stream new logs in the selected categories to your workspace.
 
 Obtaining the application key for authentication
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-Wazuh requires valid credentials to be able to pull logs from Log Analytics. Take a look at the :ref:`credentials <azure_credentials>` section to learn how to generate a client secret to access the App registration.
+Wazuh requires valid credentials to pull logs from Log Analytics. Take a look at the :ref:`credentials <graph_and_log_analytics_credentials>` section to learn how to generate a client secret so you can access the App registration.
 
 
 Azure Log Analytics use case
