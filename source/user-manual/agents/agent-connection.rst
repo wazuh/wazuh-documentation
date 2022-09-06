@@ -6,7 +6,7 @@
 Checking connection with the Wazuh manager
 ==========================================
 
-This guide shows different ways to check the connection status between an agent and the Wazuh manager as well as instructions to verify the connectivity between both servers. 
+This guide shows different ways to check the connection status between an agent and the Wazuh manager. It also has instructions to verify the connectivity between the endpoint and the server.
 
 -  Navigating the Wazuh dashboard.
 -  Reading the agent state file in the endpoint.
