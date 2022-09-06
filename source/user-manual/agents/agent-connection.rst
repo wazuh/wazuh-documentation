@@ -81,7 +81,7 @@ To check the current status and verify the connection of the agent with the mana
 Using the `agent_control` utility from the server
 -------------------------------------------------
 
-You can check the :ref:`status <agent-status-cycle>` of any agent remotely by using the :doc:`agent_control <../reference/tools/agent-control>` utility found with the Wazuh server. To get the status of an agent, run the following command replacing the ``-i`` parameter with your agent ID, for example, `001`. To list all the available agents, use option ``-l`` instead. 
+You can check the :ref:`status <agent-status-cycle>` of any agent remotely by using the :doc:`agent_control <../reference/tools/agent-control>` utility found with the Wazuh server. To get the status of an agent, run the following command replacing the ``-i`` parameter with your agent ID, for example, `001`. To list all the available agents and their status, use ``/var/ossec/bin/agent_control -l`` instead. 
 
 .. code-block:: console
 
