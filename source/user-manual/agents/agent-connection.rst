@@ -6,12 +6,9 @@
 Checking connection with the Wazuh manager
 ==========================================
 
-This guide shows different ways to check the connection status between an agent and the Wazuh manager. It also has instructions to verify the connectivity between the endpoint and the server.
+This guide shows different ways to check the connection status between an agent and the Wazuh manager, including navigating the Wazuh dashboard, using the agent control utility, querying the Wazuh API and reading the agent state file. It also contains instructions to verify the :ref:`network communication <check_network_communication>` between the endpoint and the server.
 
--  Navigating the Wazuh dashboard.
--  Reading the agent state file in the endpoint.
--  Using the agents utility in the Wazuh server.
--  Requesting the agent status to the Wazuh API.
+To learn more about installing and enrolling the Wazuh agent, see the :doc:`Wazuh agent installation guide </installation-guide/wazuh-agent/index>` and the :doc:`Agent enrollment </user-manual/agent-enrollment/index>` section. 
 
 
 Using the Wazuh dashboard
@@ -30,6 +27,57 @@ This option shows the **Agents** dashboard with a list of all registered agents.
    :title: Wazuh dashboard agents menu option
    :align: center
    :width: 80%
+
+
+Using the `agent_control` utility from the server
+-------------------------------------------------
+
+You can check the :ref:`status <agent-status-cycle>` of any agent remotely by using the :doc:`agent_control <../reference/tools/agent-control>` utility found with the Wazuh server. To get the status of an agent, run the following command replacing the ``-i`` parameter with your agent ID, for example, `001`. 
+
+.. code-block:: console
+
+   # /var/ossec/bin/agent_control -i 001 | grep Status
+
+.. code-block:: console
+   :class: output
+
+      Status:     Active
+
+To list all the available agents and their status, use ``/var/ossec/bin/agent_control -l``.       
+
+
+Using the Wazuh API
+-------------------
+
+In addition, you can check the :ref:`status <agent-status-cycle>` of an agent by requesting to the Wazuh API the `statistical information of an agent <https://documentation.wazuh.com/current/user-manual/api/reference.html#operation/api.controllers.agent_controller.get_component_stats>`_.
+
+.. code-block:: none
+
+   GET /agents/<YOUR_AGENT_ID>/stats/agent
+
+.. code-block:: JSON
+   :emphasize-lines: 5
+
+   {
+     "data": {
+       "affected_items": [
+         {
+           "status": "connected",
+           "last_keepalive": "2022-08-16T20:36:27Z",
+           "last_ack": "2022-08-16T20:36:30Z",
+           "msg_count": 1441,
+           "msg_sent": 2326,
+           "msg_buffer": 0,
+           "buffer_enabled": true
+         }
+       ],
+       "total_affected_items": 1,
+       "total_failed_items": 0,
+       "failed_items": []
+     },
+     "message": "Statistical information for each agent was successfully read",
+     "error": 0
+   }
 
 Reading the local `wazuh-agentd.state` file
 -------------------------------------------
@@ -78,60 +126,14 @@ To check the current status and verify the connection of the agent with the mana
 
          status='connected'
 
-Using the `agent_control` utility from the server
--------------------------------------------------
-
-You can check the :ref:`status <agent-status-cycle>` of any agent remotely by using the :doc:`agent_control <../reference/tools/agent-control>` utility found with the Wazuh server. To get the status of an agent, run the following command replacing the ``-i`` parameter with your agent ID, for example, `001`. To list all the available agents and their status, use ``/var/ossec/bin/agent_control -l`` instead. 
-
-.. code-block:: console
-
-   # /var/ossec/bin/agent_control -i <YOUR_AGENT_ID> | grep Status
-
-.. code-block:: console
-   :class: output
-
-      Status:     Active
-
-
-Using the Wazuh API
--------------------
-
-In addition, you can check the :ref:`status <agent-status-cycle>` of an agent by requesting to the Wazuh API the `statistical information of an agent <https://documentation.wazuh.com/current/user-manual/api/reference.html#operation/api.controllers.agent_controller.get_component_stats>`_.
-
-.. code-block:: none
-
-   GET /agents/<YOUR_AGENT_ID>/stats/agent
-
-.. code-block:: JSON
-   :emphasize-lines: 5
-
-   {
-     "data": {
-       "affected_items": [
-         {
-           "status": "connected",
-           "last_keepalive": "2022-08-16T20:36:27Z",
-           "last_ack": "2022-08-16T20:36:30Z",
-           "msg_count": 1441,
-           "msg_sent": 2326,
-           "msg_buffer": 0,
-           "buffer_enabled": true
-         }
-       ],
-       "total_affected_items": 1,
-       "total_failed_items": 0,
-       "failed_items": []
-     },
-     "message": "Statistical information for each agent was successfully read",
-     "error": 0
-   }
+.. _check_network_communication:
 
 Checking network communication
 ------------------------------
 
 Agent communication with the manager requires outbound connectivity from agent to manager. It uses the port ``1514/TCP`` by default.
 
-If the agent isn't connected, it may possibly mean the enrollment wasn't successful. Check the :doc:`/user-manual/agent-enrollment/index` section for details on this. You can also check if a TCP connection to the manager is established to verify if an agent can connect to it. The result should match the agent and manager IP addresses.
+Use the following commands to verify if a connection to the Wazuh manager is established. The result should match the agent and manager IP addresses.
 
 .. tabs::
 
@@ -172,10 +174,12 @@ If the agent isn't connected, it may possibly mean the enrollment wasn't success
          wazuh-age  1763          wazuh    7u  IPv4 0xca59cd921b0f1ccb      0t0    TCP 10.0.2.15:49326->10.0.2.1:1514 (ESTABLISHED)
 
 
-For troubleshooting purposes, look for error or warnings in the corresponding agent log files:
+For troubleshooting purposes, search for error or warnings in the corresponding agent log files. 
 
 - Linux/Unix: ``/var/ossec/logs/ossec.log``
 
-- Windows: ``/Library/Ossec/logs/ossec.log``
+- Windows: ``C:\Program Files (x86)\ossec-agent\ossec.log``
 
-- macOS: ``C:\Program Files (x86)\ossec-agent\ossec.log`` 
+- macOS: ``/Library/Ossec/logs/ossec.log``
+
+To learn more, see the :doc:`Troubleshooting agent enrollment </user-manual/agent-enrollment/troubleshooting>` section. 
