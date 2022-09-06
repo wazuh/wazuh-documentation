@@ -1,14 +1,18 @@
 .. Copyright (C) 2015, Wazuh, Inc.
 
 .. meta::
-  :description: Find out more about agent key polling, the Wazuh module that allows you to fetch keys stored in an external database.
+  :description: Find out more about key request, the Wazuh feature that allows you to fetch keys stored in an external database.
   
-.. _agent-key-polling:
+.. _key-request:
 
-Agent key polling
+Agent key request
 =================
 
-Wazuh module that allows fetching the keys stored on an external database.
+.. versionadded:: 4.4.0
+
+.. note:: The key request feature replaces the old :doc:`agent-key-polling <../reference/ossec-conf/wodle-agent-key-polling>` wodle.
+
+The key request feature allows fetching the agent keys stored on an external database.
 
 - `How it works`_
 - `Input`_
@@ -18,39 +22,41 @@ Wazuh module that allows fetching the keys stored on an external database.
 How it works
 ------------
 
-This module allows retrieving the agent information from an external database, like MySQL or any database engine, for registering it to the ``client.keys`` file.
+The key request feature allows fetching agent keys from an external source, for example, a database. This provides a mechanism to auto-register agents when they are not registered on a manager instance but reporting to it.
 
-To do this, it is necessary to create a binary or script in any language that can be integrated into your database engine and thus request the agents' information. The ``wazuh-authd`` daemon must be running.
+Once the ``<key_request>`` tag is enabled in the Authd configuration, it allows retrieving the agent information from an external database, like MySQL or any database engine, for registering it to the ``client.keys`` file.
+
+To do this, it is necessary to create a binary or script in any language that can be integrated into your database engine and thus request the agents' information. The ``key_request`` tag must be added to the Authd configuration block.
 
 Below you can see the flow diagram:
 
-.. thumbnail:: ../../images/manual/key-polling/key-polling-flow.png
-  :title: Agent key polling module flow diagram
+.. thumbnail:: ../../images/manual/key-request/key-request-flow.png
+  :title: Agent key request module flow diagram
   :align: center
   :width: 100%
 
 Input
 -----
 
-If the ``socket`` tag is not specified in the configuration block, the key polling module will call the executable with the following parameters, depending on the polling type:
+If the ``socket`` tag is not specified in the configuration block, the key request feature calls the executable with the following parameters, depending on the fetching type:
 
-- Poll agent by ID
-- Poll agent by IP
+- Fetch agent information by ID
+- Fetch agent information by IP
 
-When polling by ID, the manager will retrieve the agent key by querying its ID. So the input parameters that the program will receive are as the following:
-
-::
-
-  ./agent_key_pull.py id 001
-
-When polling by IP address, the manager will retrieve the agent key by querying his IP address, so the input parameters that the program will receive are as the following:
+When polling by ID, the manager retrieves the agent key by querying its ID. The input parameters that the program receives are as the following:
 
 ::
 
-  ./agent_key_pull.py ip 192.168.1.100
+  ./agent_key_request.py id 001
 
-.. thumbnail:: ../../images/manual/key-polling/key-polling-1.png
-  :title: No socket method: one program call per request.
+When fetching by IP address, the manager retrieves the agent key by querying his IP address. The input parameters that the program receives are as the following:
+
+::
+
+  ./agent_key_request.py ip 192.168.1.100
+
+.. thumbnail:: ../../images/manual/key-request/key-request-1.png
+  :title: Executable method: one program call per request.
   :align: center
   :width: 100%
 
@@ -59,14 +65,14 @@ When polling by IP address, the manager will retrieve the agent key by querying 
 
 When the ``socket`` tag is specified the module will send the parameters through the specified socket and read the response. The performance improvement over executing the program, as it is explained above, is significant.
 
-The format in which the program will receive the data is ``option:value``, where option can be ``id`` or ``ip`` depending on the polling type.
+The format in which the program receives the data is ``option:value``, where option can be ``id`` or ``ip`` depending on the fetching type.
 
-.. thumbnail:: ../../images/manual/key-polling/key-polling-0.png
+.. thumbnail:: ../../images/manual/key-request/key-request-0.png
   :title: Method with socket: requests directly to the socket.
   :align: center
   :width: 100%
 
-An **empty input** must be allowed. The Agent Key Polling module performs a socket health-check on startup. If the connection is established successfully, it's immediately closed.
+An **empty input** must be allowed. The key request feature performs a socket health check on startup. If the connection is established successfully, it's immediately closed.
 
 .. note::
   If the socket option is specified, and the socket is not available, the program that has to be turned on will be called in case it has been specified.
@@ -209,7 +215,7 @@ Suppose you have a table named ``agent`` in your database with the following str
 +--------------------+----------------------+
 
 .. note::
-  If your executable is a script that does not include shebang, you must include its interpreter in the `sexec_path` parameter of the configuration.
+  If your executable is a script that does not include shebang, you must include its interpreter in the `exec_path` parameter of the configuration.
 
 The python script below shows an example of an agent key retrieval from the database (MySQL).
 

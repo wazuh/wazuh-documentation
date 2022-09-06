@@ -22,3 +22,4 @@ This section describes how to manage the agents using the command line (CLI), th
         grouping-agents
         remote-upgrading/index
         query-configuration
+        key-request

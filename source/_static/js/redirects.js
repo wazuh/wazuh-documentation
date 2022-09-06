@@ -89,6 +89,11 @@ redirections.push(
       'target': ['4.3=>4.4', '4.4=>4.3'],
       '4.3': '/amazon/services/supported-services/clb.html',
       '4.4': '/amazon/services/supported-services/elastic-load-balancing/clb.html',
+    },
+    {
+      'target': ['4.3=>4.4', '4.4=>4.3'],
+      '4.3': '/user-manual/capabilities/agent-key-polling.html',
+      '4.4': '/user-manual/agents/key-request.html',
     }
 );
 
@@ -99,14 +104,18 @@ newUrls['4.4'] = [
   '/amazon/services/supported-services/elastic-load-balancing/alb.html',
   '/amazon/services/supported-services/elastic-load-balancing/nlb.html',
   '/amazon/services/supported-services/elastic-load-balancing/clb.html',
+  '/user-manual/agents/key-request.html',
   '/user-manual/manager/manual-backup-restore.html',
   '/user-manual/reference/ossec-conf/wazuh-db-config.html',
 ];
+
+/* Pages removed in 4.4 */
 
 removedUrls['4.4'] = [
   '/amazon/services/supported-services/alb.html',
   '/amazon/services/supported-services/nlb.html',
   '/amazon/services/supported-services/clb.html',
+  '/user-manual/capabilities/agent-key-polling.html',
 ];
 
   /* *** RELEASE 4.3 ****/
