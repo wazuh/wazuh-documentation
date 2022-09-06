@@ -23,7 +23,7 @@ Every publishing application sends messages to topics. Wazuh will retrieve the l
 Create a subscription
 ---------------------
 
-Use the button below the topic details (choose *pull* delivery). You can create as many subscriptions as you wish.
+Use the button below the topic details (choose **Pull** in **Delivery type**). You can create as many subscriptions as you wish.
 
 .. thumbnail:: ../../images/gcp/gcp-subscription.png
     :align: center
