@@ -117,8 +117,7 @@ Check the :doc:`azure-logs wodle </user-manual/reference/ossec-conf/wodle-azure-
 Inserting the credentials into the configuration
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-.. warning::
-   This authentication method is not recommended for production environments and will be deprecated in future releases.
+.. deprecated:: 4.4.0
 
 Another authentication option is to set up credentials by storing them directly into the Wazuh configuration file ``/var/ossec/etc/ossec.conf``, inside of the ``<graph>``, ``<log_analytics>`` and ``<storage>`` blocks on the module configuration.
 
