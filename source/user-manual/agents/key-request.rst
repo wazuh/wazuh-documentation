@@ -10,7 +10,7 @@ Agent key request
 
 .. versionadded:: 4.4.0
 
-.. note:: Since 4.4.0, the key request feature deprecates the old :doc:`agent-key-polling <../reference/ossec-conf/wodle-agent-key-polling>` wodle.
+.. note:: The key request feature replaces the old :doc:`agent-key-polling <../reference/ossec-conf/wodle-agent-key-polling>` wodle.
 
 The key request feature allows fetching the agent keys stored on an external database.
 
@@ -22,7 +22,7 @@ The key request feature allows fetching the agent keys stored on an external dat
 How it works
 ------------
 
-The key request feature allows to fetch agent keys from an external source, for example, a database. This provides a mechanism to auto-register agents when they are not registered on a manager instance but reporting to it.
+The key request feature allows fetching agent keys from an external source, for example, a database. This provides a mechanism to auto-register agents when they are not registered on a manager instance but reporting to it.
 
 Once the ``<key_request>`` tag is enabled in the Authd configuration, it allows retrieving the agent information from an external database, like MySQL or any database engine, for registering it to the ``client.keys`` file.
 
@@ -38,18 +38,18 @@ Below you can see the flow diagram:
 Input
 -----
 
-If the ``socket`` tag is not specified in the configuration block, the key request module will call the executable with the following parameters, depending on the fetching type:
+If the ``socket`` tag is not specified in the configuration block, the key request feature calls the executable with the following parameters, depending on the fetching type:
 
 - Fetch agent information by ID
 - Fetch agent information by IP
 
-When polling by ID, the manager will retrieve the agent key by querying its ID. So the input parameters that the program will receive are as the following:
+When polling by ID, the manager retrieves the agent key by querying its ID. The input parameters that the program receives are as the following:
 
 ::
 
   ./agent_key_request.py id 001
 
-When fetching by IP address, the manager will retrieve the agent key by querying his IP address. So the input parameters that the program will receive are as the following:
+When fetching by IP address, the manager retrieves the agent key by querying his IP address. The input parameters that the program receives are as the following:
 
 ::
 
@@ -65,14 +65,14 @@ When fetching by IP address, the manager will retrieve the agent key by querying
 
 When the ``socket`` tag is specified the module will send the parameters through the specified socket and read the response. The performance improvement over executing the program, as it is explained above, is significant.
 
-The format in which the program will receive the data is ``option:value``, where option can be ``id`` or ``ip`` depending on the fetching type.
+The format in which the program receives the data is ``option:value``, where option can be ``id`` or ``ip`` depending on the fetching type.
 
 .. thumbnail:: ../../images/manual/key-request/key-request-0.png
   :title: Method with socket: requests directly to the socket.
   :align: center
   :width: 100%
 
-An **empty input** must be allowed. The key request module performs a socket health-check on startup. If the connection is established successfully, it's immediately closed.
+An **empty input** must be allowed. The key request feature performs a socket health check on startup. If the connection is established successfully, it's immediately closed.
 
 .. note::
   If the socket option is specified, and the socket is not available, the program that has to be turned on will be called in case it has been specified.

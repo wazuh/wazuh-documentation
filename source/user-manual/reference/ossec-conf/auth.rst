@@ -257,8 +257,6 @@ In older systems, where the **manager does not support TLS v1.2**, this option w
 ciphers
 ^^^^^^^
 
-.. versionadded:: 3.0.0
-
 Sets the list of ciphers for network communication using SSL.
 
 +--------------------+----------------------------------------------------+
@@ -333,12 +331,12 @@ Full path to the executable.
 socket
 ^^^^^^
 
-Full path to the unix domain socket.
+Full path to the Unix domain socket.
 
 +--------------------+-----------------------------------------------------------+
 | **Default value**  | none                                                      |
 +--------------------+-----------------------------------------------------------+
-| **Allowed values** | A string indicating the full path to a unix domain socket |
+| **Allowed values** | A string indicating the full path to a Unix domain socket |
 +--------------------+-----------------------------------------------------------+
 
 threads
