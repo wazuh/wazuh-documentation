@@ -23,7 +23,15 @@ Every publishing application sends messages to topics. Wazuh will retrieve the l
 Create a subscription
 ---------------------
 
-Use the button below the topic details (choose **Pull** in **Delivery type**). You can create as many subscriptions as you wish.
+Follow the steps below to fill in the **Create subscription** form:
+
+#. Fill in the **Subscription ID**.
+#. Select a topic from **Select a Cloud Pub/Sub topic**.
+#. Choose **Pull** in the **Delivery type** field.
+#. Select the duration of the **Message retention duration**.
+#. Select the duration in days of the **Expiration period**.
+
+You can create as many subscriptions as you wish.
 
 .. thumbnail:: ../../images/gcp/gcp-subscription.png
     :align: center
