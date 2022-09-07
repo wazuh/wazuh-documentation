@@ -1,6 +1,6 @@
 .. Copyright (C) 2015, Wazuh, Inc.
 .. meta::
-  :description: Learn more about how to configure the collection of log data from files, Windows events, and from the output of commands with Wazuh. 
+  :description: Learn more about how to configure the collection of log data from files, Windows events, and from the output of commands with Wazuh.
 
 .. _reference_ossec_localfile:
 
@@ -34,6 +34,8 @@ Options
 - `exclude`_
 - `reconnect_time`_
 - `multiline_regex`_
+- `ignore_log`_
+- `restrict_log`_
 
 
 location
@@ -177,13 +179,13 @@ The attributes below are optional.
   If collecting logs with ``<log_format>`` set as ``macos``, then ``max-size`` is ignored.
 
 .. note::
-  If the log rotates while ``wazuh-logcollector`` is stopped and ``only-future-events`` is set to ``no``, it will start reading from the beginning of the log. 
+  If the log rotates while ``wazuh-logcollector`` is stopped and ``only-future-events`` is set to ``no``, it will start reading from the beginning of the log.
 
 
 query
 ^^^^^
 
-This label can be used to filter *Windows* ``eventchannel`` events or *macOS* ULS logs (``macos``) that Wazuh will process. 
+This label can be used to filter *Windows* ``eventchannel`` events or *macOS* ULS logs (``macos``) that Wazuh will process.
 
 To filter *Windows* ``eventchannel`` events, *XPATH* format is used to make the queries following the event schema.
 
@@ -594,6 +596,60 @@ For example, we may want to read a Python Traceback output as one single log, re
       <location>/var/logs/my_python_app.log</location>
       <multiline_regex replace="wspace">^Traceback</multiline_regex>
    </localfile>
+
+ignore_log
+^^^^^^^^^^^^^^^
+
+This allows you to configure a pcre2 expression to ignore specific log lines.
+
++--------------------+--------------------------------------------------------------------------------------------+
+| **Default value**  | n/a                                                                                        |
++--------------------+--------------------------------------------------------------------------------------------+
+| **Allowed values** | Any `PCRE2 regular expression <../../ruleset/ruleset-xml-syntax/regex.html#pcre2-syntax>`_ |
++--------------------+--------------------------------------------------------------------------------------------+
+
+For example, to ignore events related to configuration changes in the audit log:
+
+.. code-block:: xml
+
+  <localfile>
+      <log_format>audit</log_format>
+      <location>/var/log/audit/audit.log</location>
+      <ignore_log>type=.+_CHANGE</ignore_log>
+  </localfile>
+
+.. note::
+  For formats that group multiple lines, the entire group will be counted as a single log to check if it should be ignored.
+
+.. note::
+  On Windows, the ``eventchannel`` format already provides a way to ignore logs through queries, so this setting ``does not apply`` to this format.
+
+restrict_log
+^^^^^^^^^^^^^^^
+
+This allows you to configure a pcre2 expression to restrict specific log lines, avoiding to generate alerts for those logs that do not match.
+
++--------------------+--------------------------------------------------------------------------------------------+
+| **Default value**  | n/a                                                                                        |
++--------------------+--------------------------------------------------------------------------------------------+
+| **Allowed values** | Any `PCRE2 regular expression <../../ruleset/ruleset-xml-syntax/regex.html#pcre2-syntax>`_ |
++--------------------+--------------------------------------------------------------------------------------------+
+
+For example, to restrict syslog events related to a particular user name:
+
+.. code-block:: xml
+
+  <localfile>
+      <log_format>syslog</log_format>
+      <location>/custom/file/path</location>
+      <restrict_log>username_{1}</restrict_log>
+  </localfile>
+
+.. note::
+  For formats that group multiple lines, the entire group will be counted as a single log to check if it should be restricted.
+
+.. note::
+  On Windows, the ``eventchannel`` format already provides a way to restrict logs through queries, so this setting ``does not apply`` to this format.
 
 
 Configuration examples
