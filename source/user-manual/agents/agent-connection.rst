@@ -6,7 +6,7 @@
 Checking connection with the Wazuh manager
 ==========================================
 
-This guide shows different ways to check the connection status between an agent and the Wazuh manager, including navigating the Wazuh dashboard, using the agent control utility, querying the Wazuh API and reading the agent state file. It also contains instructions to verify the :ref:`network communication <check_network_communication>` between the endpoint and the server.
+This guide shows different ways to check the connection status between an agent and the Wazuh manager. This includes navigating the Wazuh dashboard, using the agent control utility, querying the Wazuh API, and reading the agent state file. It also contains instructions to verify the network communication between the endpoint and the server.
 
 To learn more about installing and enrolling the Wazuh agent, see the :doc:`Wazuh agent installation guide </installation-guide/wazuh-agent/index>` and the :doc:`Agent enrollment </user-manual/agent-enrollment/index>` section. 
 
@@ -36,7 +36,7 @@ You can check the :ref:`status <agent-status-cycle>` of any agent remotely by us
 
 .. code-block:: console
 
-   # /var/ossec/bin/agent_control -i 001 | grep Status
+   # /var/ossec/bin/agent_control -i <YOUR_AGENT_ID> | grep Status
 
 .. code-block:: console
    :class: output
