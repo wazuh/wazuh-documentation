@@ -29,7 +29,13 @@
         {% endif %}
         
         {# Main content #}
-        <main role="main">
+        {% set is_orphan = meta and meta.orphan is defined %}
+        <main role="main" 
+        {%- if pagename in ignore_page_search or is_orphan -%}
+          data-pagefind-ignore="all"
+        {%- else -%}
+          data-pagefind-body
+        {%- endif -%}>
         {{ body }}
         {% if pagename not in special_pages or theme_breadcrumb_root_title == 'Training' and pagename == 'index' %}
         {% include "template-parts/navigation.html" %}

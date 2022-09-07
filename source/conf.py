@@ -733,7 +733,7 @@ def manage_assets(app, pagename, templatename, context, doctree):
         "index": static + "js/min/index.min.js?ver=%s" % os.stat(os.path.join(theme_dir, "static/js/min/index.min.js")).st_mtime,
         "index-redirect": static + "js/min/index-redirect.min.js?ver=%s" % os.stat(os.path.join(theme_dir, "static/js/min/index-redirect.min.js")).st_mtime,
         "search-results": static + "js/min/search-results.min.js?ver=%s" % os.stat(os.path.join(theme_dir, "static/js/min/search-results.min.js")).st_mtime,
-        "searchIndex": "searchindex.js",
+        # "searchIndex": "searchindex.js",
         "not-found": static + "js/min/not-found.min.js?ver=%s" % os.stat(os.path.join(theme_dir, "static/js/min/not-found.min.js")).st_mtime,
         "api-reference": static + "js/min/api-reference.min.js?ver=%s" % os.stat(os.path.join(theme_dir, "static/js/min/api-reference.min.js")).st_mtime,
         "redoc-standalone": static + "js/redoc.standalone.js?ver=%s" % os.stat(os.path.join(theme_dir, "static/js/redoc.standalone.js")).st_mtime,
@@ -775,7 +775,7 @@ def manage_assets(app, pagename, templatename, context, doctree):
             'search': [
                 individual_js_files['redirects'],
                 individual_js_files['search-results'],
-                individual_js_files['searchIndex']
+                # individual_js_files['searchIndex']
             ],
             'not_found': [
                 individual_js_files['redirects'],
