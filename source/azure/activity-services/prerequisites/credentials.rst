@@ -3,13 +3,13 @@
 .. meta::
   :description: Learn what you need to provide access credentials to the Wazuh Azure module so it can successfully connect to Azure in this section of the Wazuh documentation.
 
-.. _azure_credentials:
-
 Configuring Azure credentials
 =============================
 
 It is necessary to provide access credentials to the Wazuh Azure module so it can successfully connect to Azure. The credentials required vary depending on the type of monitoring.
 
+
+.. _graph_and_log_analytics_credentials:
 
 Getting access credentials for Microsoft Graph and Log Analytics
 ----------------------------------------------------------------
