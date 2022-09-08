@@ -1,4 +1,4 @@
-.. Copyright (C) 2022 Wazuh, Inc.
+.. Copyright (C) 2015, Wazuh, Inc.
 
 .. meta::
     :description: Wazuh scans monitored files looking for malicious content. This is possible thanks to its integration with VirusTotal. Learn more in this section of the Wazuh documentation.

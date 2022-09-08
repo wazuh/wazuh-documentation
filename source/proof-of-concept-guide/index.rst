@@ -33,23 +33,22 @@ Proofs of concept
    :width: 100%
    :widths: 50 50
 
-   * - :ref:`poc_audit_commands`
-     - :ref:`poc_aws_monitoring`
-   * - :ref:`poc_detect_bruteforce`
-     - :ref:`poc_monitoring_docker`
-   * - :ref:`poc_fim`
-     - :ref:`poc_block_actor_IP_reputation`
-   * - :ref:`poc_detect_unauthorized_process_netcat`
-     - :ref:`poc_integrate_osquery`
-   * - :ref:`poc_ids_integration_suricata`
-     - :ref:`poc_detect_web_attack_shellshock`
-   * - :ref:`poc_detect_web_attack_sql_injection`
-     - :ref:`poc_slack_integration`
-   * - :ref:`poc_trojan_detection`
-     - :ref:`poc_detect_remove_malware_virustotal`
-   * - :ref:`poc_vulnerability_detector`
-     - :ref:`poc_detect_yara`
-
+   * - :doc:`audit-commands-run-by-user`
+     - :doc:`aws-infrastructure-monitoring`
+   * - :doc:`detect-brute-force-attack`
+     - :doc:`monitoring-docker`
+   * - :doc:`poc-file-integrity-monitoring`
+     - :doc:`block-malicious-actor-ip-reputation`
+   * - :doc:`detect-unauthorized-processes-netcat`
+     - :doc:`integrate-osquery`
+   * - :doc:`integrate-network-ids-suricata`
+     - :doc:`detect-web-attack-shellshock`
+   * - :doc:`detect-web-attack-sql-injection`
+     - :doc:`poc-integrate-slack`
+   * - :doc:`poc-detect-trojan`
+     - :doc:`detect-remove-malware-virustotal`
+   * - :doc:`poc-vulnerability-detection`
+     - :doc:`detect-malware-yara-integration`
 
 
 .. toctree::

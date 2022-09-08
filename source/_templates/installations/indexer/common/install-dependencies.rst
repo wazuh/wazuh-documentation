@@ -8,7 +8,7 @@
 
                   .. code-block:: console
 
-                      # yum install coreutils initscripts chkconfig
+                      # yum install coreutils
 
           .. group-tab:: APT
 

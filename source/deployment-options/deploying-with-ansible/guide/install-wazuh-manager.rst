@@ -1,4 +1,4 @@
-.. Copyright (C) 2015–2022 Wazuh, Inc.
+.. Copyright (C) 2015, Wazuh, Inc.
 
 .. meta::
 	:description: Check out this guide to learn how to install the Wazuh manager if you are deploying Wazuh with Ansible, an open source platform designed for automating tasks.

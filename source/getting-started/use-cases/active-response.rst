@@ -1,4 +1,4 @@
-.. Copyright (C) 2015–2022 Wazuh, Inc.
+.. Copyright (C) 2015, Wazuh, Inc.
 
 .. meta::
   :description: Check out a use case about Incident Response, one of the key capabilities of the Wazuh platform. Learn more about it in this section of our documentation.
@@ -59,4 +59,4 @@ Below you can find a screenshot with two Wazuh alerts: one that is triggered whe
    :width: 80%
    :wrap_image: No    
     
-You can find more information on how Wazuh protects systems using the active response feature in the :ref:`user manual <automatic_remediation>`.
+You can find more information on how Wazuh protects systems using the active response feature in the :doc:`user manual </user-manual/capabilities/active-response/index>`.

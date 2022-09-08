@@ -1,4 +1,4 @@
-.. Copyright (C) 2022 Wazuh, Inc.
+.. Copyright (C) 2015, Wazuh, Inc.
 
 .. _create-aix:
 
@@ -18,7 +18,7 @@ Download our wazuh-packages repository from GitHub and go to the aix directory.
 
 .. code-block:: console
 
- $ curl -L https://github.com/wazuh/wazuh-packages/tarball/v|WAZUH_LATEST| | tar zx
+ $ curl -L https://github.com/wazuh/wazuh-packages/tarball/v|WAZUH_CURRENT| | tar zx
  $ cd wazuh-wazuh-packages-*
  $ cd aix
 
@@ -33,7 +33,7 @@ Execute the ``generate_wazuh_packages.sh`` script, with the different options yo
 
   Usage: ./generate_wazuh_packages.sh [OPTIONS]
 
-      -b, --branch <branch>               Select Git branch or tag e.g. v|WAZUH_LATEST|
+      -b, --branch <branch>               Select Git branch or tag e.g. v|WAZUH_CURRENT_AIX|
       -e, --environment                   Install all the packages necessaries to build the RPM package
       -s, --store  <rpm_directory>        Directory to store the resulting RPM package. By default: /tmp/build
       -p, --install-path <rpm_home>       Installation path for the package. By default: /var
@@ -51,18 +51,18 @@ Below, you will find some examples of how to build an AIX package.
 
 .. code-block:: console
 
-  # ./generate_wazuh_packages.sh -b v|WAZUH_LATEST_AIX|
+  # ./generate_wazuh_packages.sh -b v|WAZUH_CURRENT_AIX|
 
-This will generate a |WAZUH_LATEST_AIX| Wazuh agent AIX package.
-
-.. code-block:: console
-
-  # ./generate_wazuh_packages.sh -b v|WAZUH_LATEST_AIX| -c
-
-This will generate a |WAZUH_LATEST_AIX| Wazuh agent AIX package with checksum.
+This will generate a |WAZUH_CURRENT_AIX| Wazuh agent AIX package.
 
 .. code-block:: console
 
-  # ./generate_wazuh_packages.sh -b v|WAZUH_LATEST_AIX|  -p /opt/ossec
+  # ./generate_wazuh_packages.sh -b v|WAZUH_CURRENT_AIX| -c
 
-This will generate a |WAZUH_LATEST_AIX| Wazuh agent AIX package with ``/opt/ossec`` as installation directory.
+This will generate a |WAZUH_CURRENT_AIX| Wazuh agent AIX package with checksum.
+
+.. code-block:: console
+
+  # ./generate_wazuh_packages.sh -b v|WAZUH_CURRENT_AIX|  -p /opt/ossec
+
+This will generate a |WAZUH_CURRENT_AIX| Wazuh agent AIX package with ``/opt/ossec`` as installation directory.

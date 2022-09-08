@@ -1,6 +1,6 @@
-.. Copyright (C) 2015-2022 Wazuh, Inc.
+.. Copyright (C) 2015, Wazuh, Inc.
 
-#. Replace ``<dashboard-node-name>`` with your Wazuh dashboard node name, the same used in ``config.yml`` to create the certificates, and move the certificates to their corresponding location. 
+#. Replace ``<dashboard-node-name>`` with your Wazuh dashboard node name, the same used in ``wazuh-config.yml`` to create the certificates, and move the certificates to their corresponding location. 
 
     .. code-block:: console
 

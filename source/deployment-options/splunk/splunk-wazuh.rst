@@ -1,6 +1,7 @@
-.. Copyright (C) 2015–2022 Wazuh, Inc.
+.. Copyright (C) 2015, Wazuh, Inc.
 
-.. meta:: :description: Learn how to install Elastic Stack for using Wazuh on Debian
+.. meta::
+   :description: Install the Wazuh manager for a Wazuh with Splunk installation
 
 Wazuh manager installation
 ==========================
@@ -21,7 +22,7 @@ Before installing the Wazuh manager, some extra packages must be installed:
 Installation
 ------------
 
-The Wazuh server collects and analyzes data from deployed Wazuh agents. It runs the Wazuh manager and the Splunk forwarder. The first step to set up Wazuh is adding the Wazuh repository to the server. All the Wazuh packages can be found :doc:`here </installation-guide/packages-list>`. 
+The Wazuh server collects and analyzes data from deployed Wazuh agents. It runs the Wazuh manager and the Splunk forwarder. The first step in setting up Wazuh is adding the Wazuh repository to the server. All the Wazuh packages can be found :doc:`here </installation-guide/packages-list>`. 
 
 #. Add the Wazuh repository
 
@@ -116,7 +117,7 @@ Choose the corresponding tab to configure the installation as a single-node or m
          +-------------------------------------+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
          |:ref:`node_type <cluster_node_type>` | It specifies the role of the node. It has to be set to ``master``.                                                                                                                                                                                   |
          +-------------------------------------+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-         |:ref:`key <cluster_key>`             |The key that will be used to encrypt communication between cluster nodes. The key must be 32 characters long and same for all of the nodes in the cluster. The following command can be used to generate a random key: ``openssl rand -hex 16``.      |
+         |:ref:`key <cluster_key>`             |The key that will be used to encrypt communication between cluster nodes. The key must be 32 characters long and the same for all of the nodes in the cluster. The following command can be used to generate a random key: ``openssl rand -hex 16``.  |
          +-------------------------------------+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
          |:ref:`port <cluster_port>`           | Destination port for cluster communication.                                                                                                                                                                                                          |
          +-------------------------------------+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+

@@ -1,4 +1,4 @@
-.. Copyright (C) 2022 Wazuh, Inc.
+.. Copyright (C) 2015, Wazuh, Inc.
 
 .. meta::
   :description: This section of the Wazuh documentation lists the common installation or usage issues with the Wazuh dashboard and how to resolve them. 

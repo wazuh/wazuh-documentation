@@ -1,4 +1,7 @@
-.. Copyright (C) 2022 Wazuh, Inc.
+.. Copyright (C) 2015, Wazuh, Inc.
+
+.. meta::
+  :description: The wazuh-remoted program is the server side daemon that communicates with the agents. Learn more about it in this section of the documentation.
 
 .. _wazuh-remoted:
 

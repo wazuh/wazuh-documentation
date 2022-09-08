@@ -1,4 +1,4 @@
-.. Copyright (C) 2022 Wazuh, Inc.
+.. Copyright (C) 2015, Wazuh, Inc.
 .. meta::
   :description: Learn more about regular expressions or regex. The Wazuh Ruleset is used to analyze incoming events and generate alerts when appropriate. 
   
@@ -35,13 +35,13 @@ This library is designed to be simple while still supporting the most common reg
   +------------+-----------------------------------------+
   | \\p        | ()*+,-.:;<=>?[]!"'#$%&|{}               |
   +------------+-----------------------------------------+
-  | \\W        | Anything not \w                         |
+  | \\W        | Anything not \\w                        |
   +------------+-----------------------------------------+
-  | \\D        | Anything not \d                         |
+  | \\D        | Anything not \\d                        |
   +------------+-----------------------------------------+
-  | \\S        | Anything not \s                         |
+  | \\S        | Anything not \\s                        |
   +------------+-----------------------------------------+
-  | \\\\.      | Anything                                |
+  | \\.        | Anything                                |
   +------------+-----------------------------------------+
 
 

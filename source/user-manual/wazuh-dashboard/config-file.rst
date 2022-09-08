@@ -1,54 +1,22 @@
-.. Copyright (C) 2022 Wazuh, Inc.
+.. Copyright (C) 2015, Wazuh, Inc.
 
 .. _wazuh_dashboard_config_file:
 
 Configuration file
 ==================
 
-The Wazuh dashboard includes a configuration file (located at ``/usr/share/wazuh-dashboard/data/wazuh/config/wazuh.yml``) where you can define custom values for several options. This section describes all the settings available in this file.
+The Wazuh dashboard includes a configuration file located at ``/usr/share/wazuh-dashboard/data/wazuh/config/wazuh.yml`` where you can define custom values for several options. This section describes all the settings available in this file.
+
+If you are using the Wazuh Kibana plugin, you can find this configuration file at ``/usr/share/kibana/data/wazuh/config/wazuh.yml``. 
 
 The configuration file shows the default values for all of the possible options. You can edit the file, uncomment any of them and apply the desired values. You can also edit these settings from the Wazuh dashboard in *Settings > Configuration*.
 
 The configuration file reference is organized by sections:
 
-`Basic options`_
-    - `hosts`_
-    - `pattern`_
-    - `timeout`_
-    - `ip.selector`_
-    - `ip.ignore`_
-    - `admin`_
-    - `logs.level`_
-    - `hideManagerAlerts`_
-
-`Monitoring`_
-    - `wazuh.monitoring.enabled`_
-    - `wazuh.monitoring.frequency`_
-    - `wazuh.monitoring.pattern`_
-    - `wazuh.monitoring.creation`_
-
-`Checks`_
-    - `checks.pattern`_
-    - `checks.template`_
-    - `checks.api`_
-    - `checks.setup`_
-    - `checks.fields`_
-
-`Extensions`_
-    - `extensions.pci`_
-    - `extensions.gdpr`_
-    - `extensions.audit`_
-    - `extensions.ciscat`_
-    - `extensions.aws`_
-    - `extensions.virustotal`_
-    - `extensions.osquery`_
-    - `extensions.docker`_
-
-`Advanced index options`_
-    - `wazuh-version.shards`_
-    - `wazuh-version.replicas`_
-    - `wazuh.monitoring.shards`_
-    - `wazuh.monitoring.replicas`_
+.. contents::
+   :local:
+   :depth: 2
+   :backlinks: none
 
 Basic options
 -------------
@@ -107,20 +75,9 @@ timeout
 Defines the maximum time the app will wait for an API response when making requests to it. It will be ignored if the value is set under 1500 milliseconds.
 
 +--------------------+-------------------------------+
-| **Default value**  | 8000 (milliseconds)           |
+| **Default value**  | 20000 (milliseconds)          |
 +--------------------+-------------------------------+
 | **Allowed values** | Any number starting from 1500 |
-+--------------------+-------------------------------+
-
-api.selector
-^^^^^^^^^^^^
-
-Defines if the user is allowed to change the selected API directly from the Wazuh app top menu.
-
-+--------------------+-------------------------------+
-| **Default value**  | false                         |
-+--------------------+-------------------------------+
-| **Allowed values** | true,false                    |
 +--------------------+-------------------------------+
 
 ip.selector
@@ -144,17 +101,6 @@ Disable certain index pattern names from being available in index pattern select
 +--------------------+---------------------------------------------+
 | **Allowed values** | Array of strings. Eg: ["wazuh-archives-\*"] |
 +--------------------+---------------------------------------------+
-
-admin
-^^^^^
-
-Enable or disable administrator requests to the Wazuh API when using the app. This makes ``PUT``, ``POST`` and ``DELETE`` requests available on the Dev tools tab.
-
-+--------------------+------------+
-| **Default value**  | true       |
-+--------------------+------------+
-| **Allowed values** | true,false |
-+--------------------+------------+
 
 logs.level
 ^^^^^^^^^^
@@ -228,7 +174,7 @@ wazuh.monitoring.creation
 Configure wazuh-monitoring-* indices custom creation interval.
 
 +--------------------+------------------------------------------------+
-| **Default value**  | d (daily)                                      |
+| **Default value**  | w (weekly)                                     |
 +--------------------+------------------------------------------------+
 | **Allowed values** | h (hourly), d (daily), w (weekly), m (monthly) |
 +--------------------+------------------------------------------------+
@@ -291,6 +237,39 @@ Enable or disable the known fields health check when opening the app.
 | **Allowed values** | true,false |
 +--------------------+------------+
 
+checks.metaFields
+^^^^^^^^^^^^^^^^^
+
+Enable or disable the metaFields health check when opening the app.
+
++--------------------+------------+
+| **Default value**  | true       |
++--------------------+------------+
+| **Allowed values** | true,false |
++--------------------+------------+
+
+checks.timeFilter
+^^^^^^^^^^^^^^^^^
+
+Enable or disable the timeFilter health check when opening the app.
+
++--------------------+------------+
+| **Default value**  | true       |
++--------------------+------------+
+| **Allowed values** | true,false |
++--------------------+------------+
+
+checks.maxBuckets
+^^^^^^^^^^^^^^^^^
+
+Enable or disable the maxBuckets health check when opening the app.
+
++--------------------+------------+
+| **Default value**  | true       |
++--------------------+------------+
+| **Allowed values** | true,false |
++--------------------+------------+
+
 Extensions
 ----------
 
@@ -320,6 +299,39 @@ Enable or disable the GDPR tab on *Overview* and *Agents*.
 | **Allowed values** | true,false |
 +--------------------+------------+
 
+extensions.hipaa
+^^^^^^^^^^^^^^^^
+
+Enable or disable the HIPAA tab on *Overview* and *Agents*.
+
++--------------------+------------+
+| **Default value**  | true       |
++--------------------+------------+
+| **Allowed values** | true,false |
++--------------------+------------+
+
+extensions.nist
+^^^^^^^^^^^^^^^
+
+Enable or disable the NIST tab on *Overview* and *Agents*.
+
++--------------------+------------+
+| **Default value**  | true       |
++--------------------+------------+
+| **Allowed values** | true,false |
++--------------------+------------+
+
+extensions.tsc
+^^^^^^^^^^^^^^
+
+Enable or disable the TSC tab on *Overview* and *Agents*.
+
++--------------------+------------+
+| **Default value**  | true       |
++--------------------+------------+
+| **Allowed values** | true,false |
++--------------------+------------+
+
 extensions.audit
 ^^^^^^^^^^^^^^^^
 
@@ -327,6 +339,17 @@ Enable or disable the Audit tab on *Overview* and *Agents*.
 
 +--------------------+------------+
 | **Default value**  | true       |
++--------------------+------------+
+| **Allowed values** | true,false |
++--------------------+------------+
+
+extensions.oscap
+^^^^^^^^^^^^^^^^
+
+Enable or disable the OSCAP tab on *Overview* and *Agents*.
+
++--------------------+------------+
+| **Default value**  | false      |
 +--------------------+------------+
 | **Allowed values** | true,false |
 +--------------------+------------+
@@ -346,6 +369,17 @@ extensions.aws
 ^^^^^^^^^^^^^^
 
 Enable or disable the Amazon (AWS) tab on *Overview* and *Agents*.
+
++--------------------+------------+
+| **Default value**  | false      |
++--------------------+------------+
+| **Allowed values** | true,false |
++--------------------+------------+
+
+extensions.gcp
+^^^^^^^^^^^^^^
+
+Enable or disable the GCP tab on *Overview* and *Agents*.
 
 +--------------------+------------+
 | **Default value**  | false      |
@@ -395,28 +429,6 @@ Advanced index options
 
     You can read more about configuring the shards and replicas in :ref:`elastic_tuning`.
 
-wazuh-version.shards
-^^^^^^^^^^^^^^^^^^^^
-
-Define the number of shards to use for the ``wazuh-version`` index.
-
-+--------------------+----------------------------+
-| **Default value**  | 1                          |
-+--------------------+----------------------------+
-| **Allowed values** | Any number starting from 1 |
-+--------------------+----------------------------+
-
-wazuh-version.replicas
-^^^^^^^^^^^^^^^^^^^^^^
-
-Define the number of replicas to use for the ``wazuh-version`` index.
-
-+--------------------+----------------------------+
-| **Default value**  | 1                          |
-+--------------------+----------------------------+
-| **Allowed values** | Any number starting from 0 |
-+--------------------+----------------------------+
-
 
 wazuh.monitoring.shards
 ^^^^^^^^^^^^^^^^^^^^^^^
@@ -424,7 +436,7 @@ wazuh.monitoring.shards
 Define the number of shards to use for the ``wazuh-monitoring-*`` indices.
 
 +--------------------+----------------------------+
-| **Default value**  | 2                          |
+| **Default value**  | 1                          |
 +--------------------+----------------------------+
 | **Allowed values** | Any number starting from 1 |
 +--------------------+----------------------------+
@@ -439,3 +451,295 @@ Define the number of replicas to use for the ``wazuh-monitoring-*`` indices.
 +--------------------+----------------------------+
 | **Allowed values** | Any number starting from 0 |
 +--------------------+----------------------------+
+
+Unauthorized roles
+------------------
+
+disabled_roles
+^^^^^^^^^^^^^^
+
+Disable Wazuh for the Elasticsearch / OpenSearch roles defined here.
+
+.. code-block:: yaml
+
+    disabled_roles: 
+        - wazuh_disabled
+
+Sample alerts
+-------------
+
+alerts.sample.prefix
+^^^^^^^^^^^^^^^^^^^^
+
+Define the index name prefix of sample alerts. It must match the template used by the index pattern to avoid unknown fields in dashboards.
+
++--------------------+----------------------------+
+| **Default value**  | wazuh-alerts-4.x-          |
++--------------------+----------------------------+
+| **Allowed values** | Any valid index pattern    |
++--------------------+----------------------------+
+
+Enrollment DNS
+--------------
+
+enrollment.dns
+^^^^^^^^^^^^^^
+
+Specifies the Wazuh registration server, used for the agent enrollment.
+
++--------------------+----------------------------+
+| **Default value**  | ''                         |
++--------------------+----------------------------+
+| **Allowed values** | Any string                 |
++--------------------+----------------------------+
+
+enrollment.password
+^^^^^^^^^^^^^^^^^^^
+
+Specifies the password used to authenticate during the agent enrollment.
+
++--------------------+----------------------------+
+| **Default value**  | ''                         |
++--------------------+----------------------------+
+| **Allowed values** | Any string                 |
++--------------------+----------------------------+
+
+Cron
+----
+
+cron.prefix
+^^^^^^^^^^^
+
+Define the index prefix of predefined jobs.
+
++--------------------+----------------------------+
+| **Default value**  | ''                         |
++--------------------+----------------------------+
+| **Allowed values** | Any string                 |
++--------------------+----------------------------+
+
+cron.statistics.status
+^^^^^^^^^^^^^^^^^^^^^^
+
+Enable or disable the statistics tasks.
+
++--------------------+----------------------------+
+| **Default value**  | true                       |
++--------------------+----------------------------+
+| **Allowed values** | true,false                 |
++--------------------+----------------------------+
+
+cron.statistics.apis
+^^^^^^^^^^^^^^^^^^^^
+
+Enter the ID of the hosts you want to save data from, leave this empty to run the task on every host.
+
++--------------------+----------------------------+
+| **Default value**  | []                         |
++--------------------+----------------------------+
+| **Allowed values** | Array of APIs              |
++--------------------+----------------------------+
+
+cron.statistics.interval
+^^^^^^^^^^^^^^^^^^^^^^^^
+
+Define the frequency of task execution using cron schedule expressions.
+
++--------------------+----------------------------+
+| **Default value**  | ``0 */5 * * * *``          |
++--------------------+----------------------------+
+| **Allowed values** | Any cron expressions       |
++--------------------+----------------------------+
+
+cron.statistics.index.name
+^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Define the name of the index in which the documents will be saved.
+
++--------------------+----------------------------+
+| **Default value**  | statistics                 |
++--------------------+----------------------------+
+| **Allowed values** | Any valid index pattern    |
++--------------------+----------------------------+
+
+cron.statistics.index.creation
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Define the interval in which a new index will be created.
+
++--------------------+-------------------------------------------------+
+| **Default value**  | w                                               |
++--------------------+-------------------------------------------------+
+| **Allowed values** | h (hourly), d (daily), w (weekly), m (monthly)  |
++--------------------+-------------------------------------------------+
+
+cron.statistics.shards
+^^^^^^^^^^^^^^^^^^^^^^
+
+Define the number of shards to use for the statistics indices.
+
++--------------------+----------------------------+
+| **Default value**  | 1                          |
++--------------------+----------------------------+
+| **Allowed values** | Any number starting from 1 |
++--------------------+----------------------------+
+
+cron.statistics.replicas
+^^^^^^^^^^^^^^^^^^^^^^^^
+
+Define the number of replicas to use for the statistics indices.
+
++--------------------+----------------------------+
+| **Default value**  | 0                          |
++--------------------+----------------------------+
+| **Allowed values** | Any number starting from 0 |
++--------------------+----------------------------+
+
+Logo customization
+------------------
+
+customization.logo.app
+^^^^^^^^^^^^^^^^^^^^^^
+
+Define the name of the app logo saved in the path ``/plugins/wazuh/public/assets/``.
+
++--------------------+----------------------------+
+| **Default value**  | ''                         |
++--------------------+----------------------------+
+| **Allowed values** | Any string                 |
++--------------------+----------------------------+
+
+customization.logo.sidebar
+^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Define the name of the sidebar logo saved in the path ``/plugins/wazuh/public/assets/``.
+
++--------------------+----------------------------+
+| **Default value**  | ''                         |
++--------------------+----------------------------+
+| **Allowed values** | Any string                 |
++--------------------+----------------------------+
+
+customization.logo.healthcheck
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Define the name of the health check logo saved in the path ``/plugins/wazuh/public/assets/``.
+
++--------------------+----------------------------+
+| **Default value**  | ''                         |
++--------------------+----------------------------+
+| **Allowed values** | Any string                 |
++--------------------+----------------------------+
+
+customization.logo.reports
+^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Define the name of the reports logo saved in the path ``/plugins/wazuh/public/assets/``.
+
++--------------------+----------------------------+
+| **Default value**  |''                          |
++--------------------+----------------------------+
+| **Allowed values** | Any string                 |
++--------------------+----------------------------+
+
+
+Example
+-------
+
+This is an example of the wazuh.yml configuration:
+
+.. code-block:: yaml
+    
+    #Basic options
+
+    hosts:
+        - env-1:
+            url: https://env-1.example
+            port: 55000
+            username: wazuh-wui
+            password: wazuh-wui
+            run_as: true
+        - env-2:
+            url: https://env-2.example
+            port: 55000
+            username: wazuh-wui
+            password: wazuh-wui
+            run_as: true
+
+    pattern: 'wazuh-alerts-*'
+    timeout: 20000
+    ip.selector: true
+    ip.ignore: []
+    logs.level: info
+    hideManagerAlerts: true
+
+    #Monitoring
+
+    wazuh.monitoring.enabled: true
+    wazuh.monitoring.frequency: 900
+    wazuh.monitoring.pattern: wazuh-monitoring-*
+    wazuh.monitoring.creation: w
+
+    #Checks
+
+    checks.pattern : true
+    checks.template: true
+    checks.fields  : true
+    checks.api     : true
+    checks.setup   : true
+    checks.metaFields: true
+    checks.timeFilter: true
+    checks.maxBuckets: true
+
+    #Extensions
+
+    extensions.pci       : true
+    extensions.gdpr      : true
+    extensions.hipaa     : true
+    extensions.nist      : true
+    extensions.tsc       : true
+    extensions.audit     : true
+    extensions.oscap     : false
+    extensions.ciscat    : false
+    extensions.aws       : false
+    extensions.gcp       : false
+    extensions.virustotal: false
+    extensions.osquery   : false
+    extensions.docker    : false
+
+    #Advanced index options
+
+    wazuh.monitoring.shards: 1
+    wazuh.monitoring.replicas: 0    
+
+    #Logo customization
+
+    customization.logo.app: ''
+    customization.logo.sidebar: ''
+    customization.logo.healthcheck: ''
+    customization.logo.reports: ''
+
+    #Unauthorized roles
+
+    disabled_roles: 
+        - wazuh_disabled
+
+    #Sample alerts
+
+    alerts.sample.prefix: wazuh-alerts-4.x-
+
+    #Cron
+
+    cron.prefix: wazuh
+    cron.statistics.status: true
+    cron.statistics.apis: []
+    cron.statistics.interval: 0 */5 * * * *
+    cron.statistics.index.name: statistics
+    cron.statistics.index.creation: w
+    cron.statistics.shards: 1
+    cron.statistics.replicas: 0
+
+    #Enrollment DNS
+
+    enrollment.dns: ''
+    enrollment.password: ''

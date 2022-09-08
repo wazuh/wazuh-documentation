@@ -1,17 +1,20 @@
-.. Copyright (C) 2022 Wazuh, Inc.
+.. Copyright (C) 2015, Wazuh, Inc.
 
+.. meta::
+   :description: Learn more about Kubernetes configuration for Wazuh: steps to perform a clean up of all deployments, services and volumes.
+   
 .. _kubernetes_clean_up:
 
 Clean Up
 ========
 
-Steps to perform a clean up of all deployments, services and volumes.
+Steps to perform a clean up of all deployments, services, and volumes.
 
 1. Remove the entire cluster
 
 The deployment of the Wazuh cluster of managers involves the use of different `StatefulSet <https://kubernetes.io/docs/concepts/workloads/controllers/statefulset/>`_ elements as well as configuration maps and services.
 
-To delete your Wazuh cluster just execute the following command from this repository directory.    
+To delete your Wazuh cluster, just execute the following command from this repository directory.    
 
 - EKS cluster
   

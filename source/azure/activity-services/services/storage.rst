@@ -1,4 +1,4 @@
-.. Copyright (C) 2021 Wazuh, Inc.
+.. Copyright (C) 2015, Wazuh, Inc.
 
 .. _azure_storage:
 
@@ -9,7 +9,7 @@
 Using Azure Storage
 ===================
 
-`Azure Storage <https://docs.microsoft.com/en-us/azure/storage/common/storage-introduction>`_ refers to Microsoft Azure cloud storage solution, a service that provides a massively scalable object store for data objects, a messaging store for reliable messaging, a file system service for the cloud, and a NoSQL store.
+`Azure Storage <https://docs.microsoft.com/en-us/azure/storage/common/storage-introduction>`_ refers to the Microsoft Azure cloud storage solution, a service that provides a massively scalable object store for data objects, a messaging store for reliable messaging, a file system service for the cloud, and a NoSQL store.
 
 .. thumbnail:: ../../../images/azure/storage-activity-log.png
     :title: Storage
@@ -69,7 +69,7 @@ An easy way to test this configuration is to create a new user in Azure Active D
 Wazuh configuration
 ^^^^^^^^^^^^^^^^^^^
 
-Proceed to configure the ``azure-logs`` module in the local configuration (``ossec.conf``). It is important to set the **account_name** and **account_key** of the Storage account to authenticate. This information can be found in the **Access keys** section of **Storage accounts**. Check the :ref:`credentials <azure_credentials>` reference for more information about the different authentication options available.
+Proceed to configure the ``azure-logs`` module in the local configuration (``ossec.conf``). It is important to set the **account_name** and **account_key** of the Storage account to authenticate. This information can be found in the **Access keys** section of **Storage accounts**. Check the :doc:`credentials </azure/activity-services/prerequisites/credentials>` reference for more information about the different authentication options available.
 
 .. thumbnail:: ../../../images/azure/account-credentials.png
     :title: Storage
@@ -100,7 +100,7 @@ Applying the following configuration, the integration will be executed every day
         </storage>
     </wodle>
 
-Check the :ref:`Azure module <wodle_azure_logs>` reference page to learn more about the parameters available and how to use them.
+Check the :doc:`Azure module </user-manual/reference/ossec-conf/wodle-azure-logs>` reference page to learn more about the parameters available and how to use them.
 
 Wazuh rules
 ^^^^^^^^^^^
@@ -125,7 +125,7 @@ Thanks to the following rules, already included in Wazuh ruleset by default, it 
 Alert visualization
 ^^^^^^^^^^^^^^^^^^^
 
-Once the Wazuh configuration is set and the ``azure-logs`` module is running using the previous configuration, the event from the user creation example exported to Storage will be processed. The results can be check in Wazuh UI. 
+Once the Wazuh configuration is set and the ``azure-logs`` module is running using the previous configuration, the event from the user creation example exported to Storage will be processed. The results can be checked in the Wazuh dashboard. 
 
 .. thumbnail:: ../../../images/azure/storage-kibana.png
     :title: Storage

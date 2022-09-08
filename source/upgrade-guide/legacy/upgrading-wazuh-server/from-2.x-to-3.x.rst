@@ -1,4 +1,4 @@
-.. Copyright (C) 2022 Wazuh, Inc.
+.. Copyright (C) 2015, Wazuh, Inc.
 
 .. _upgrading_wazuh_server_2.x_3.x:
 
@@ -31,7 +31,7 @@ To upgrade the Wazuh server, choose the appropriate tab for the desired package 
 
         .. code-block:: console
 
-          # echo "deb https://packages.wazuh.com/|CURRENT_MAJOR|/apt/ stable main" | tee -a /etc/apt/sources.list.d/wazuh.list
+          # echo "deb https://packages.wazuh.com/|WAZUH_CURRENT_MAJOR|/apt/ stable main" | tee -a /etc/apt/sources.list.d/wazuh.list
 
       .. group-tab:: ZYpp
 
@@ -74,7 +74,7 @@ To upgrade the Wazuh server, choose the appropriate tab for the desired package 
 
 .. note::
 
-  The installation of the updated packages will automatically ``restart the services`` for the Wazuh manager and the Wazuh API. The Wazuh manager configuration file will be ``unmodified``, so the user will need to manually add the settings for the new capabilities. More information can be found in the :ref:`User manual <user_manual>`.
+  The installation of the updated packages will automatically ``restart the services`` for the Wazuh manager and the Wazuh API. The Wazuh manager configuration file will be ``unmodified``, so the user will need to manually add the settings for the new capabilities. More information can be found in the :doc:`User manual </user-manual/index>`.
 
   After the upgrade, the old alerts will not be visualized in Kibana due to a change in the Wazuh alerts’ template. In order to access the old alerts and visualize them along with the new ones, the indices need to be reindexed to apply the new mapping. The process is described in the :ref:`Restore the Wazuh alerts from Wazuh 2.x <restore_alerts_2.x_3.x>` section.
 

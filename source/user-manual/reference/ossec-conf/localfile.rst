@@ -1,4 +1,4 @@
-.. Copyright (C) 2022 Wazuh, Inc.
+.. Copyright (C) 2015, Wazuh, Inc.
 .. meta::
   :description: Learn more about how to configure the collection of log data from files, Windows events, and from the output of commands with Wazuh. 
 
@@ -322,7 +322,7 @@ Set the format of the log to be read. **field is required**
 +                    +--------------------+--------------------------------------------------------------------------------------------------+
 |                    | eventchannel       | Used for Microsoft Windows event logs, returns the events in JSON format.                        |
 |                    |                    |                                                                                                  |
-|                    |                    | Monitors every channel specified at the configuration file and shows every field included in it. |
+|                    |                    | Monitors every channel specified in the configuration file and shows every field included in it. |
 |                    |                    |                                                                                                  |
 |                    |                    | This can be used to monitor standard “Windows” event logs and "Application and Services" logs.   |
 +                    +--------------------+--------------------------------------------------------------------------------------------------+
@@ -637,7 +637,7 @@ Windows configuration:
       <reconnect_time>10s</reconnect_time>
     </localfile>
 
-MacOS configuration:
+macOS configuration:
 
 .. code-block:: xml
 

@@ -1,4 +1,4 @@
-.. Copyright (C) 2022 Wazuh, Inc.
+.. Copyright (C) 2015, Wazuh, Inc.
 
 .. meta::
   :description: Learn how to remotely configure agents using agent.conf. In this section of the Wazuh documentation, you will find which capabilities can be configured remotely.
@@ -317,57 +317,47 @@ The ``files.yml`` has the following structure as shown in the following example:
                 agent.conf: https://example.com/agent.conf
             poll: 200
 
-    agents:
-        001: my_group_1
-        002: my_group_2
-        003: another_group
-
-Here we can distinct the two main blocks: ``groups`` and ``agents``.
-
-
-1. In the ``groups`` block we define the group name from which we want to download the files.
+The ``groups`` block is used to define the group name from which we want to download the files.
 
     - If the group doesn't exist, it will be created.
     - If a file has the name ``merged.mg``, only this file will be downloaded. Then it will be validated.
     - The ``poll`` label indicates the download rate in seconds of the specified files.
 
-2. In the ``agents`` block, we define for each agent the group to which we want it to belong.
+This configuration can be changed on the fly. The **manager** will reload the file and parse it again so there is no need to restart the **manager** every time.
 
-    This configuration can be changed on the fly. The **manager** will reload the file and parse it again so there is no need to restart the **manager** every time.
+The information about the parsing is shown on the ``/var/ossec/logs/ossec.log`` file. For example:
 
-    The information about the parsing is shown on the ``/var/ossec/logs/ossec.log`` file. For example:
+-  Parsing is successful:
 
-    - Parsing is successful:
+   .. code-block:: none
+      :class: output
 
-    .. code-block:: none
-        :class: output
+      INFO: Successfully parsed of yaml file: /etc/shared/files.yml
 
-        INFO: Successfully parsed of yaml file: /etc/shared/files.yml
+-  File has been changed:
 
-    - File has been changed:
+   .. code-block:: none
+      :class: output
 
-    .. code-block:: none
-        :class: output
+      INFO: File '/etc/shared/files.yml' changed. Reloading data
 
-        INFO: File '/etc/shared/files.yml' changed. Reloading data
+-  Parsing failed due to bad token:
 
-    - Parsing failed due to bad token:
+   .. code-block:: none
+      :class: output
 
-    .. code-block:: none
-        :class: output
+      INFO: Parsing file '/etc/shared/files.yml': unexpected identifier: 'group'
 
-        INFO: Parsing file '/etc/shared/files.yml': unexpected identifier: 'group'
+-  Download of file failed:
 
-    - Download of file failed:
+   .. code-block:: none
+      :class: output
 
-    .. code-block:: none
-        :class: output
+      ERROR: Failed to download file from url: https://example.com/merged.mg
 
-        ERROR: Failed to download file from url: https://example.com/merged.mg
+-  Downloaded ``merged.mg`` file is corrupted or not valid:
 
-    - Downloaded ``merged.mg`` file is corrupted or not valid:
+   .. code-block:: none
+      :class: output
 
-    .. code-block:: none
-        :class: output
-
-        ERROR: The downloaded file '/var/download/merged.mg' is corrupted.
+      ERROR: The downloaded file '/var/download/merged.mg' is corrupted.

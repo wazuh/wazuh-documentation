@@ -4,50 +4,58 @@ Creating custom SCA policies
 .. meta::
     :description: Learn more about how to create custom Security Configuration Assessment (SCA) policies with Wazuh and discover some examples. 
 
-.. contents:: Table of Contents
-   :depth: 10
-
 An SCA policy looks like the following:
 
-.. code-block:: yaml
+.. code-block:: YAML
 
-    policy:
-      id: "unix_audit"
-      file: "sca_unix_audit.yml"
-      name: "System audit for Unix based systems"
-      description: "Guidance for establishing a secure configuration for Unix based systems."
-      references:
-        - https://www.ssh.com/ssh/
+   # Security Configuration Assessment
+   # Audit for UNIX systems
+   # Copyright (C) 2015, Wazuh Inc.
+   #
+   # This program is free software; you can redistribute it
+   # and/or modify it under the terms of the GNU General Public
+   # License (version 2) as published by the FSF - Free Software
+   # Foundation
 
-    variables:
-      $sshd_file: /etc/ssh/sshd_config,/opt/ssh/etc/sshd_config
-      $pam_d_files: /etc/pam.d/common-password,/etc/pam.d/password-auth,/etc/pam.d/system-auth,/etc/pam.d/system-auth-ac,/etc/pam.d/passwd
+   policy:
+     id: "unix_audit"
+     file: "sca_unix_audit.yml"
+     name: "System audit for Unix based systems"
+     description: "Guidance for establishing a secure configuration for Unix based systems."
+     references:
+       - https://www.ssh.com/ssh/
 
-    requirements:
-      title: "Check that the SSH service is installed on the system and password-related files are present on the system"
-      description: "Requirements for running the SCA scan against the Unix based systems policy."
-      condition: any
-      rules:
-        - 'f:$sshd_file'
-        - 'f:/etc/passwd'
-        - 'f:/etc/shadow'
+   requirements:
+     title: "Check that the SSH service and password-related files are present on the system"
+     description: "Requirements for running the SCA scan against the Unix based systems policy."
+     condition: any
+     rules:
+       - 'f:$sshd_file'
+       - 'f:/etc/passwd'
+       - 'f:/etc/shadow'
 
-    checks:
-      - id: 4004
-        title: "SSH Hardening - 5: Password Authentication should be disabled"
-        description: "The option PasswordAuthentication should be set to no."
-        rationale: "The option PasswordAuthentication specifies whether we should use password-based authentication. Use public key authentication instead of passwords."
-        remediation: "Change the PasswordAuthentication option value in the sshd_config file."
-        compliance:
-          - pci_dss: ["2.2.4"]
-          - nist_800_53: ["CM.1"]
-        condition: all
-        rules:
-         - 'f:$sshd_file -> r:^\s*PasswordAuthentication\s*\t*no'
+   variables:
+     $sshd_file: /etc/ssh/sshd_config
+     $pam_d_files: /etc/pam.d/common-password,/etc/pam.d/password-auth,/etc/pam.d/system-auth,/etc/pam.d/system-auth-ac,/etc/pam.d/passwd
 
-      - id: [...]
+   checks:
+     - id: 3000
+       title: "SSH Hardening: Port should not be 22"
+       description: "The ssh daemon should not be listening on port 22 (the default value) for incoming connections."
+       rationale: "Changing the default port you may reduce the number of successful attacks from zombie bots, an attacker or bot doing port-scanning can quickly identify your SSH port."
+       remediation: "Change the Port option value in the sshd_config file."
+       compliance:
+         - pci_dss: ["2.2.4"]
+         - nist_800_53: ["CM.1"]
+       condition: all
+       rules:
+         - 'f:$sshd_file -> !r:^# && r:Port && !r:\s*\t*22$'
 
-As shown in this example, policy files are comprised by four sections, although not all of them are required, as
+     - id: 3001
+       title: "SSH Hardening: Protocol should be set to 2"
+       ...
+
+As shown in this example, policy files are comprised of four sections, although not all of them are required, as
 detailed in the :ref:`sca_policy_file_sections` table.
 
 .. _sca_policy_file_sections:
@@ -180,48 +188,49 @@ Condition
 
 The condition field specifies how rule results are aggregated in order to calculate the final value of a check. There are three options:
 
-- ``all``: the check will be evaluated as **passed** if **all** of its rules are satisfied and as **failed** as soon as one evaluates to **failed**,
+- ``all``: the check will be evaluated as `Passed` if `all` of its rules are satisfied and as `Failed` as soon as one rule is not satisfied,
 
-- ``any``: the check will be evaluated as **passed** as soon as **any** of its rules is satisfied,
+- ``any``: the check will be evaluated as `Passed` as soon as `any` of its rules is satisfied,
 
-- ``none``: the check will be evaluated as **passed** if **none** of its rules are satisfied and as **failed** as soon as one evaluates to **passed**.
+- ``none``: the check will be evaluated as `Passed` if `none` of its rules are satisfied and as `Failed` as soon as one rule is satisfied.
 
-Special mention deserves how rules evaluated as **non-applicable** are treated by the aforementioned aggregators.
+Special mention deserves how rules evaluated as `Not applicable` are treated by the aforementioned aggregators.
 
-- ``all``: If any rule returns **non-applicable**, and no rule returns **failed**, the result will be **non-applicable**.
+- ``all``: If any rule returns `Not applicable`, and no rule returns `Failed`, the result will be `Not applicable`.
 
-- ``any``: The check will be evaluated as **non-applicable** if no rule evaluates to **passed** and any returns **non-applicable**.
+- ``any``: The check will be evaluated as `Not applicable` if no rule is evaluated as `Passed` and any returns `Not applicable`.
 
-- ``none``: The check will be evaluated as **non-applicable** if no rule evaluates to **passed** and any returns **non-applicable**.
+- ``none``: The check will be evaluated as `Not applicable` if no rule is evaluated as `Passed` and any returns `Not applicable`.
 
-.. table:: Condition truth-table
+.. table:: 
     :widths: auto
 
     +------------------------------+-------------+-------------+-------------------+--------------------+
-    | Condition \\ Rule evaluation |  passed(s)  |  failed(s)  | non-applicable(s) |     Result         |
+    | Condition \\ Rule evaluation |  Passed     |  Failed     | Not applicable    |     Result         |
     +==============================+=============+=============+===================+====================+
-    |            ``all``           |     yes     |      no     |         no        |     **passed**     |
+    |            ``all``           |     yes     |      no     |         no        |     Passed         |
     +------------------------------+-------------+-------------+-------------------+--------------------+
-    |            ``all``           | indifferent |      no     |        yes        | **non-applicable** |
+    |            ``all``           | \*          |      no     |        yes        |  Not applicable    |
     +------------------------------+-------------+-------------+-------------------+--------------------+
-    |            ``all``           | indifferent |     yes     |    indifferent    |     **failed**     |
+    |            ``all``           | \*          |     yes     | \*                |     Failed         |
     +------------------------------+-------------+-------------+-------------------+--------------------+
-    |            ``any``           |     yes     | indifferent |    indifferent    |     **passed**     |
+    |            ``any``           |     yes     | \*          | \*                |     Passed         |
     +------------------------------+-------------+-------------+-------------------+--------------------+
-    |            ``any``           |      no     |     yes     |         no        |     **failed**     |
+    |            ``any``           |      no     |     yes     |         no        |     Failed         |
     +------------------------------+-------------+-------------+-------------------+--------------------+
-    |            ``any``           |      no     | indifferent |        yes        | **non-applicable** |
+    |            ``any``           |      no     |  \*         |        yes        |  Not applicable    |
     +------------------------------+-------------+-------------+-------------------+--------------------+
-    |           ``none``           |     yes     | indifferent |    indifferent    |     **failed**     |
+    |           ``none``           |     yes     |  \*         | \*                |     Failed         |
     +------------------------------+-------------+-------------+-------------------+--------------------+
-    |           ``none``           |      no     | indifferent |        yes        | **non-applicable** |
+    |           ``none``           |      no     |  \*         |        yes        |  Not applicable    |
     +------------------------------+-------------+-------------+-------------------+--------------------+
-    |           ``none``           |      no     |     yes     |         no        |     **passed**     |
+    |           ``none``           |      no     |     yes     |         no        |     Passed         |
     +------------------------------+-------------+-------------+-------------------+--------------------+
 
+\* This result does not affect the final result. 
 
 Rules
-~~~~~~~~~~~~~~~~~~~
+~~~~~
 
 Rules can check for the existence of files, directories, registry keys and values, running processes, and recursively
 test for the existence of files inside directories. When it comes to content checking, they are able to check for file
@@ -312,7 +321,7 @@ Existence checks are created by setting rules without a content operator, the ge
 
 Examples of existence checks:
 
-- ``f:/etc/sshd_config`` checks the existence of file */etc/ssh_config*
+- ``f:/etc/sshd_config`` checks the existence of file */etc/sshd_config*
 - ``d:/etc`` checks the existence of directory */etc*
 - ``not p:sshd`` will test the presence of processes called *sshd* and fail if one is found.
 - ``r:HKEY_LOCAL_MACHINE\System\CurrentControlSet\Control\Lsa`` checks for the existence of that key.
@@ -331,7 +340,7 @@ The general form of a rule testing for contents is as follows:
     - The context of a content check is limited to a **line**.
     - Content checks are case-sensitive.
     - It is **mandatory** to respect the spaces around the ``->`` and ``compare`` separators.
-    - If the **target** of a rule that checks for contents does not exist, the result will be **non-applicable** as it could not be checked.
+    - If the **target** of a rule that checks for contents does not exist, the result will be ``Not applicable`` as it could not be checked.
 
 Content check operator results can be negated by adding a ``!`` before then, for example:
 
@@ -340,8 +349,8 @@ Content check operator results can be negated by adding a ``!`` before then, for
     f:/etc/ssh_config -> !r:PermitRootLogin
 
 .. warning::
-    Be careful when negating content operators as that will make them evaluate as **passed** for **anything** that does not match with the check specified.
-    For example rule ```f:/etc/ssh_config -> !r:PermitRootLogin``` will be evaluated as **passed** if it finds **any line** that does not contain ``PermitRootLogin``.
+    Be careful when negating content operators as that will make them evaluate as `Passed` for **anything** that does not match with the check specified.
+    For example rule ```f:/etc/ssh_config -> !r:PermitRootLogin``` will be evaluated as `Passed` if it finds **any line** that does not contain ``PermitRootLogin``.
 
 Content check operators can be chained using the operator ``&&`` (AND) as follows:
 

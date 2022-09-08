@@ -1,4 +1,4 @@
-.. Copyright (C) 2022 Wazuh, Inc.
+.. Copyright (C) 2015, Wazuh, Inc.
 
 To verify that the Wazuh cluster is enabled and all the nodes are connected, execute the following command:
 
@@ -12,9 +12,9 @@ An example output of the command looks as follows:
     :class: output
     
       NAME         TYPE    VERSION  ADDRESS
-      master-node  master  4.3.1    10.0.0.3
-      worker-node1 worker  4.3.1    10.0.0.4
-      worker-node2 worker  4.3.1    10.0.0.5
+      master-node  master  4.3.7    10.0.0.3
+      worker-node1 worker  4.3.7    10.0.0.4
+      worker-node2 worker  4.3.7    10.0.0.5
 
 Note that ``10.0.0.3``, ``10.0.0.4``, ``10.0.0.5`` are example IPs.
 

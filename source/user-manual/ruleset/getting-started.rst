@@ -1,4 +1,4 @@
-.. Copyright (C) 2022 Wazuh, Inc.
+.. Copyright (C) 2015, Wazuh, Inc.
 .. meta::
   :description: Wazuh supports more than 3000 rules that accomplish a variety of technologies. Check them out here. 
   
@@ -51,7 +51,7 @@ Currently, Wazuh supports more than 3k rules that accomplish technologies such:
 - Junos
 - Panda Advanced Protection Service (PAPS)
 - CheckPoint Smart-1 Firewalls
-- MacOS SSH
+- macOS SSH
 - Google Cloud Pub/Sub
 
 
@@ -70,7 +70,7 @@ In the Wazuh repository you will find:
 
 Resources
 ^^^^^^^^^
-* Visit our repository to view the rules in detail at `GitHub Wazuh <https://github.com/wazuh/wazuh/tree/|WAZUH_LATEST_MINOR|/ruleset>`_
+* Visit our repository to view the rules in detail at `GitHub Wazuh <https://github.com/wazuh/wazuh/tree/|WAZUH_CURRENT_MINOR|/ruleset>`_
 * Find a complete description of the available rules at `Wazuh Ruleset Summary <http://www.wazuh.com/resources/Wazuh_Ruleset.pdf>`_
 
 

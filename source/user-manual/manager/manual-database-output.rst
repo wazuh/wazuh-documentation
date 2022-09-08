@@ -1,4 +1,4 @@
-.. Copyright (C) 2015–2022 Wazuh, Inc.
+.. Copyright (C) 2015, Wazuh, Inc.
 
 .. meta::
   :description: In order to configure Wazuh so it outputs alerts to a database, users must compile Wazuh with the database type desired. Learn more about this process here.
@@ -58,7 +58,7 @@ Execute the following command before **step 3** from the installation guide:
 
 .. code-block:: console
 
-  # cd wazuh-*/src
+  # cd wazuh-|WAZUH_CURRENT_FROM_SOURCES|/src
   # make deps && make TARGET=server DATABASE=<mysql/pgsql>
 
 To indicate what kind of database users will use, users need the ``DATABASE`` flag. The allowed values are *mysql* or *pgsql*.

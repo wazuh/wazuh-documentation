@@ -1,17 +1,16 @@
-.. Copyright (C) 2022 Wazuh, Inc.
+.. Copyright (C) 2015, Wazuh, Inc.
 
 .. meta::
   :description: Learn more about how to successfully install the Wazuh agent on Solaris systems in this section of our Installation Guide.
 
 .. _wazuh_agent_solaris:
 
-
 Installing Wazuh agents on Solaris systems
 ==========================================
 
 The agent runs on the host you want to monitor and communicates with the Wazuh manager, sending data in near real time through an encrypted and authenticated channel. 
 
-To start the installation process, select your architecture: i386 or Sparc. Alternatively, if you want to download the Wazuh agent package directly, see the :ref:`packages list <packages>` section. 
+To start the installation process, select your architecture: i386 or Sparc. Alternatively, if you want to download the Wazuh agent package directly, see the :doc:`packages list </installation-guide/packages-list>` section. 
 
 .. tabs::
 
@@ -58,7 +57,7 @@ To start the installation process, select your architecture: i386 or Sparc. Alte
         
 
         
-The installation process is now complete and the Wazuh agent is successfully installed on your Solaris system. The next step is to register and configure the agent to communicate with the Wazuh manager. To perform this action, see the :ref:`Wazuh agent enrollment <agent_enrollment>` section.
+The installation process is now complete and the Wazuh agent is successfully installed on your Solaris system. The next step is to register and configure the agent to communicate with the Wazuh manager. To perform this action, see the :doc:`Wazuh agent enrollment </user-manual/agent-enrollment/index>` section.
 
 
 

@@ -1,4 +1,4 @@
-.. Copyright (C) 2022 Wazuh, Inc.
+.. Copyright (C) 2015, Wazuh, Inc.
 
 .. _restful-api-listing:
 
@@ -34,7 +34,7 @@ The request :api-ref:`GET /agents <operation/api.controllers.agent_controller.ge
                    "lastKeepAlive": "9999-12-31T23:59:59Z",
                    "ip": "127.0.0.1",
                    "id": "000",
-                   "version": "Wazuh v|WAZUH_LATEST|",
+                   "version": "Wazuh v|WAZUH_CURRENT|",
                    "name": "wazuh-master",
                    "registerIP": "127.0.0.1",
                    "dateAdd": "2020-10-26T09:52:01Z",

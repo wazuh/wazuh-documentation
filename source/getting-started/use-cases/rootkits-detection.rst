@@ -1,4 +1,4 @@
-.. Copyright (C) 2015–2022 Wazuh, Inc.
+.. Copyright (C) 2015, Wazuh, Inc.
 
 .. meta::
   :description: Learn more about the rootkit component of Wazuh. The Wazuh agent periodically scans the monitored system to detect rootkits both at the kernel and the user space level.  
@@ -70,4 +70,4 @@ See below an example of an alert generated when a hidden process is found. In th
      "timestamp": "2020-07-12T18:07:00-0800"
    }
 
-You can find more information on how Wazuh detects rootkits in the :ref:`user manual <manual_anomaly_detection>`.
+You can find more information on how Wazuh detects rootkits in the :doc:`user manual </user-manual/capabilities/anomalies-detection/index>`.

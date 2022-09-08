@@ -1,4 +1,4 @@
-.. Copyright (C) 2022 Wazuh, Inc.
+.. Copyright (C) 2015, Wazuh, Inc.
 
 .. meta::
   :description: Check out this section to see a complete reference of all the configurations and settings that can be customized on Wazuh, for both managers and agents.

@@ -1,4 +1,4 @@
-.. Copyright (C) 2020 Wazuh, Inc.
+.. Copyright (C) 2015, Wazuh, Inc.
 
 .. meta::
   :description: Learn more about how to get started with Wazuh Cloud Service. Explore the potential of Wazuh Cloud with your 14-day free trial.

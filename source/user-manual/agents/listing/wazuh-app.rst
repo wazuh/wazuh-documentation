@@ -1,7 +1,7 @@
-.. Copyright (C) 2022 Wazuh, Inc.
+.. Copyright (C) 2015, Wazuh, Inc.
 
 .. meta::
-  :description: You can list and see basic information about registered agents in the Agent tab. Learn more about listing agents using the Wazuh dashboard in our documentation. 
+  :description: You can list and see basic information about registered agents in the Agent tab. Learn more about it in this section of the documentation. 
 
 .. _wazuh-app:
 

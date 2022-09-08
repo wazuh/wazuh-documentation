@@ -1,4 +1,4 @@
-.. Copyright (C) 2022 Wazuh, Inc.
+.. Copyright (C) 2015, Wazuh, Inc.
 
 .. meta::
   :description: In this section of the Wazuh documentation, you will find all the information related to the internal configuration of Wazuh.
@@ -72,7 +72,7 @@ Agent
 +                           +----------------+----------------------------------------------------------------------------------+
 |                           | Allowed value  | Any integer between 1 and 600.                                                   |
 +---------------------------+----------------+----------------------------------------------------------------------------------+
-| **agent.state_interval**  | Description    | Interval between the updates of the agent status file in seconds.                |
+| **agent.state_interval**  | Description    | The interval between the updates of the agent status file in seconds.            |
 +                           +----------------+----------------------------------------------------------------------------------+
 |                           | Default value  | 5                                                                                |
 +                           +----------------+----------------------------------------------------------------------------------+

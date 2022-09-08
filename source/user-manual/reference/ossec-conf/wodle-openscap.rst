@@ -1,4 +1,4 @@
-.. Copyright (C) 2022 Wazuh, Inc.
+.. Copyright (C) 2015, Wazuh, Inc.
 
 .. _wodle_openscap:
 
@@ -111,7 +111,7 @@ Run evaluation immediately when service is started.
 interval
 ^^^^^^^^
 
-Interval between OpenSCAP executions.
+The interval between OpenSCAP executions.
 
 +--------------------+------------------------------------------------------------------------------------------------------------------------------------------------------+
 | **Default value**  | 1d                                                                                                                                                   |
