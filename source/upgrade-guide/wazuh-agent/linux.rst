@@ -64,13 +64,13 @@ Select your package manager and follow the instructions to upgrade the Wazuh age
 
        .. code-block:: console
 
-         # curl -s https://packages.wazuh.com/key/GPG-KEY-WAZUH | apt-key add -
+         # curl -s https://packages.wazuh.com/key/GPG-KEY-WAZUH | gpg --no-default-keyring --keyring gnupg-ring:/usr/share/keyrings/wazuh.gpg --import && chmod 644 /usr/share/keyrings/wazuh.gpg
 
     #. Add the Wazuh repository.
 
        .. code-block:: console
 
-         # echo "deb https://packages.wazuh.com/4.x/apt/ stable main" | tee -a /etc/apt/sources.list.d/wazuh.list
+         # echo "deb [signed-by=/usr/share/keyrings/wazuh.gpg] https://packages.wazuh.com/4.x/apt/ stable main" | tee -a /etc/apt/sources.list.d/wazuh.list
 
 
     #. Upgrade the Wazuh agent to the latest version.
@@ -84,6 +84,20 @@ Select your package manager and follow the instructions to upgrade the Wazuh age
     #. It is recommended to disable the Wazuh repository in order to avoid undesired upgrades and compatibility issues as the Wazuh agent should always be in the same or an older version than the Wazuh manager. Skip this step if the package is set to a ``hold`` state.
 
         .. code-block:: console
+
+          # sed -i "s/^deb/#deb/" /etc/apt/sources.list.d/wazuh.list
+          # apt-get update
+
+    .. note::
+
+       For Debian 7, 8, and Ubuntu 14 systems run the following commands instead.
+
+       .. code-block:: console
+
+          # apt-get install gnupg apt-transport-https
+          # curl -s https://packages.wazuh.com/key/GPG-KEY-WAZUH | apt-key add -
+          # echo "deb https://packages.wazuh.com/4.x/apt/ stable main" | tee -a /etc/apt/sources.list.d/wazuh.list
+          # apt-get update
 
           # sed -i "s/^deb/#deb/" /etc/apt/sources.list.d/wazuh.list
           # apt-get update
