@@ -52,6 +52,25 @@ Below there is an example of a manual execution of the module using the ``--repa
 
 The ``--debug 2`` parameter was used to get a verbose output since by default the script won't print anything on the terminal, and it could seem like it's not working when it could be handling a great amount of data instead.
 
+
+Connection configuration for retries
+------------------------------------
+
+It is possible that very congested environments cause AWS services internal errors and the :ref:`boto-3` client failure raising **ClientError** exceptions describing those errors. To assist in retrying client calls to AWS services Boto3 provides `Retries <https://boto3.amazonaws.com/v1/documentation/api/latest/guide/retries.html>`_.
+
+The ``max_attempts`` and ``mode`` values should be defined inside your configuration file  (``~/.aws/config``). In case this file is not present in the system, Wazuh defines the following default values: ``mode=standard`` and ``max_attempts=10``.
+
+.. note::
+  A region must be also specified on the ``config`` file in order to make it work.
+
+Below there is an example of a ``~/.aws/config`` file defining retry parameters for the *dev* profile:
+
+.. code-block:: ini
+  [profile dev]
+  region=us-east-1
+  max_attempts=5
+  retry_mode=standard
+  
 Configuring multiple services
 -----------------------------
 
