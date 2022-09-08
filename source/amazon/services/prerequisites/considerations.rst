@@ -56,21 +56,44 @@ The ``--debug 2`` parameter was used to get a verbose output since by default th
 Connection configuration for retries
 ------------------------------------
 
-It is possible that very congested environments cause AWS services internal errors and the :ref:`boto-3` client failure raising **ClientError** exceptions describing those errors. To assist in retrying client calls to AWS services Boto3 provides `Retries <https://boto3.amazonaws.com/v1/documentation/api/latest/guide/retries.html>`_.
+It is possible that very congested environments cause AWS services internal errors and the :ref:`boto-3` client failure raising **ClientError** exceptions describing those errors. To assist in retrying client calls to AWS services Boto3 provides `Retries <https://boto3.amazonaws.com/v1/documentation/api/latest/guide/retries.html>`_.  This feature allows retrying client calls to AWS services when errors like ``ThrottlingException`` are experienced defining the following fields:
 
-The ``max_attempts`` and ``mode`` values should be defined inside your configuration file  (``~/.aws/config``). In case this file is not present in the system, Wazuh defines the following default values: ``mode=standard`` and ``max_attempts=10``.
+- ``retry_mode``: This tells Boto3 which retry mode to use. There are `three retry modes available <https://boto3.amazonaws.com/v1/documentation/api/latest/guide/retries.html#available-retry-modes>`_: legacy (default), standard, and adaptive.
+- ``max_attempts``: This provides Boto3\’s retry handler with a value of maximum retry attempts.
+
+The modes are briefly explained below:
+
+- **Legacy**
+
+  Legacy mode is the default mode used by any Boto3 client created. As its name implies, legacy mode uses an older (v1) retry handler that has limited functionality.
+  The default value for maximum retry attempts is 5 and these are for a limited number of errors/exceptions.
+
+
+- **Standard**
+
+  Standard mode is a retry mode that was introduced with the updated retry handler (v2). It extends the functionality of retries over that found in legacy mode.
+  It has a default value of 3 for maximum retry attempts and these are for an expanded list of errors/exceptions.
+
+- **Adaptive**
+
+  Adaptive retry mode is an **experimental retry mode** that includes all the features of standard mode. This mode offers flexibility in client-side retries that adapts to the error/exception state response from an AWS service.
+
+
+It is highly recommended to define the ``max_attempts`` and ``retry_mode`` values inside your configuration file (``~/.aws/config``). In case this file is not present in the system, Wazuh defines the following default values: ``mode=standard`` and ``max_attempts=10`` overriding the already explained ``legacy`` mode.
 
 .. note::
   A region must be also specified on the ``config`` file in order to make it work.
 
-Below there is an example of a ``~/.aws/config`` file defining retry parameters for the *dev* profile:
+The following example of a ``~/.aws/config`` file defines retry parameters for the *dev* profile:
 
 .. code-block:: ini
+
   [profile dev]
   region=us-east-1
   max_attempts=5
   retry_mode=standard
-  
+
+
 Configuring multiple services
 -----------------------------
 
