@@ -41,13 +41,17 @@ macOS
 Debug symbols
 -------------
 
-+--------------+---------+--------------+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-| Distribution | Version | Architecture | Package                                                                                                                                                                                                                                                                                     |
-+==============+=========+==============+=============================================================================================================================================================================================================================================================================================+
-|    Linux     |  |WAZUH_LATEST|  |     64bits   | `wazuh-agent-linux-x86_64-debug-info-v|WAZUH_LATEST|-|WAZUH_REVISION_WPK_AGENT_LINUX|.tar.gz <https://packages.wazuh.com/4.x/wpk/linux/x86_64/wazuh-agent-linux-x86_64-debug-info-v|WAZUH_LATEST|-|WAZUH_REVISION_WPK_AGENT_LINUX|.tar.gz>`_ (`sha512 <|CHECKSUMS_URL||WAZUH_LATEST|/wazuh-agent-linux-x86_64-debug-info-v|WAZUH_LATEST|-|WAZUH_REVISION_WPK_AGENT_LINUX|.tar.gz.sha512>`__) |
-+--------------+---------+--------------+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-|    Windows   |  |WAZUH_LATEST|  |   32/64bits  | `wazuh-agent-windows-x86_64-debug-info-v|WAZUH_LATEST|-|WAZUH_REVISION_WPK_AGENT_WINDOWS|.zip <https://packages.wazuh.com/4.x/wpk/windows/wazuh-agent-windows-x86_64-debug-info-v|WAZUH_LATEST|-|WAZUH_REVISION_WPK_AGENT_WINDOWS|.zip>`_ (`sha512 <|CHECKSUMS_URL||WAZUH_LATEST|/wazuh-agent-windows-x86_64-debug-info-v|WAZUH_LATEST|-|WAZUH_REVISION_WPK_AGENT_WINDOWS|.zip.sha512>`__)         |
-+--------------+---------+--------------+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-|    macOS     |  |WAZUH_LATEST|  |     64bits   | `wazuh-agent-macos-amd64-debug-info-|WAZUH_LATEST|-|WAZUH_REVISION_WPK_AGENT_MACOS|.tar.gz <https://packages.wazuh.com/4.x/wpk/macos/x86_64/pkg/wazuh-agent-macos-amd64-debug-info-|WAZUH_LATEST|-|WAZUH_REVISION_WPK_AGENT_MACOS|.tar.gz>`_ (`sha512 <|CHECKSUMS_URL||WAZUH_LATEST|/wazuh-agent-macos-amd64-debug-info-|WAZUH_LATEST|-|WAZUH_REVISION_WPK_AGENT_MACOS|.tar.gz.sha512>`__)   |
-+--------------+---------+--------------+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+.. |WPK_Linux_DBG| replace:: `wazuh-agent-linux-x86_64-debug-info-v|WAZUH_CURRENT|.tar.gz <https://packages.wazuh.com/4.x/wpk/linux/x86_64/wazuh-agent-linux-x86_64-debug-info-v|WAZUH_CURRENT|-|WAZUH_REVISION_WPK_AGENT_LINUX|.tar.gz>`__ (`sha512 <|CHECKSUMS_URL||WAZUH_CURRENT|/wazuh-agent-linux-x86_64-debug-info-v|WAZUH_CURRENT|.tar.gz.sha512>`__)
+.. |WPK_Windows_DBG| replace:: `wazuh-agent-windows-x86_64-debug-info-v|WAZUH_CURRENT_WINDOWS|.zip <https://packages.wazuh.com/4.x/wpk/windows/wazuh-agent-windows-x86_64-debug-info-v|WAZUH_CURRENT_WINDOWS|-|WAZUH_REVISION_WPK_AGENT_WINDOWS|.zip>`__ (`sha512 <|CHECKSUMS_URL||WAZUH_CURRENT_WINDOWS|/wazuh-agent-windows-x86_64-debug-info-v|WAZUH_CURRENT_WINDOWS|.zip.sha512>`__)
+.. |WPK_MacOS_DBG| replace:: `wazuh-agent-macos-amd64-debug-info-|WAZUH_CURRENT_OSX|.tar.gz <https://packages.wazuh.com/4.x/wpk/macos/x86_64/pkg/wazuh-agent-macos-amd64-debug-info-|WAZUH_CURRENT_OSX|-|WAZUH_REVISION_WPK_AGENT_MACOS|.tar.gz>`__ (`sha512 <|CHECKSUMS_URL||WAZUH_CURRENT_OSX|/wazuh-agent-macos-amd64-debug-info-|WAZUH_CURRENT_OSX|.tar.gz.sha512>`__)
+
++--------------+---------+--------------+-------------------------+
+| Distribution | Version | Architecture | Package                 |
++==============+=========+==============+=========================+
+|    Linux     |  |WAZUH_CURRENT|  |     64bits   |  |WPK_Linux_DBG|        |
++--------------+---------+--------------+-------------------------+
+|    Windows   |  |WAZUH_CURRENT_WINDOWS|  |   32/64bits  |  |WPK_Windows_DBG|      |
++--------------+---------+--------------+-------------------------+
+|    macOS     |  |WAZUH_CURRENT_OSX|  |     64bits   |  |WPK_MacOS_DBG|        |
++--------------+---------+--------------+-------------------------+
 

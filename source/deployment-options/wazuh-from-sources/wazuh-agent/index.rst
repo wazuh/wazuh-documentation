@@ -3,6 +3,8 @@
 .. meta::
   :description: Learn more about how to install the Wazuh agent from sources. Wazuh can be installed on all major operating systems, including Linux, Windows, macOS, among others.
 
+.. _wazuh_agent_source_installation:
+
 Installing the Wazuh agent from sources
 =======================================
 

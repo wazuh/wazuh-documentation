@@ -3,6 +3,8 @@
 .. meta::
    :description: Check out how to install the Wazuh manager from sources in this section of our documentation. 
 
+.. _wazuh_server_source_installation:
+
 Installing the Wazuh manager from sources
 =========================================
 

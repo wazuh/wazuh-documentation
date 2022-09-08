@@ -496,7 +496,6 @@ custom_replacements = {
     "|WAZUH_REVISION_YUM_AGENT_AARCH64|" : "1",
     "|WAZUH_REVISION_YUM_MANAGER_AARCH64|" : "1",
     "|WAZUH_REVISION_YUM_AGENT_ARMHF|" : "1",
-    "|WAZUH_REVISION_YUM_AGENT_PPC64|" : "1",
     "|WAZUH_REVISION_YUM_MANAGER_ARMHF|" : "1",
     "|WAZUH_REVISION_YUM_AGENT_PPC|" : "1",
     #|WAZUH_REVISION_YUM_MANAGER_PPC|" :
@@ -508,7 +507,6 @@ custom_replacements = {
     "|WAZUH_REVISION_DEB_AGENT_AARCH64|" : "1",
     "|WAZUH_REVISION_DEB_MANAGER_AARCH64|" : "1",
     "|WAZUH_REVISION_DEB_AGENT_ARMHF|" : "1",
-    "|WAZUH_REVISION_DEB_AGENT_PPC64|" : "1",
     "|WAZUH_REVISION_DEB_MANAGER_ARMHF|" : "1",
     "|WAZUH_REVISION_DEB_AGENT_PPC|" : "1",
     #"|WAZUH_REVISION_DEB_MANAGER_PPC|" : 
@@ -579,27 +577,6 @@ custom_replacements = {
     #"|WAZUH_CURRENT_MINOR_AIX|" :
     "|WAZUH_CURRENT_AIX|" : release,
     "|WAZUH_REVISION_AIX|" : "1",
-<<<<<<< HEAD
-    "|WAZUH_REVISION_WPK_AGENT_LINUX|" : "1",
-    "|WAZUH_REVISION_WPK_AGENT_WINDOWS|" : "1",
-    "|WAZUH_REVISION_WPK_AGENT_MACOS|" : "1",
-    "|CHECKSUMS_URL|" : "https://packages.wazuh.com/4.x/checksums/wazuh/",
-    "|RPM_AGENT|" : "https://packages.wazuh.com/4.x/yum/wazuh-agent",
-    "|RPM_MANAGER|" : "https://packages.wazuh.com/4.x/yum/wazuh-manager",
-    "|RPM_AGENT_DEBUG_SYMBOLS|" : "https://packages.wazuh.com/4.x/yum/wazuh-agent-debuginfo",
-    "|RPM_MANAGER_DEBUG_SYMBOLS|" : "https://packages.wazuh.com/4.x/yum/wazuh-manager-debuginfo",
-    "|DEB_AGENT|" : "https://packages.wazuh.com/4.x/apt/pool/main/w/wazuh-agent/wazuh-agent",
-    "|DEB_MANAGER|" : "https://packages.wazuh.com/4.x/apt/pool/main/w/wazuh-manager/wazuh-manager",
-    "|DEB_MANAGER_DEBUG_SYMBOLS|" : "https://packages.wazuh.com/4.x/apt/pool/main/w/wazuh-manager/wazuh-manager-dbg",
-    "|DEB_AGENT_DEBUG_SYMBOLS|" : "https://packages.wazuh.com/4.x/apt/pool/main/w/wazuh-agent/wazuh-agent-dbg",
-    "|DEB_API|" : "https://packages.wazuh.com/4.x/apt/pool/main/w/wazuh-api/wazuh-api",
-    # Variables for Elastic's Elasticsearch
-    "|ELASTICSEARCH_ELK_LATEST|" : "7.17.3",
-    "|ELASTICSEARCH_ELK_LATEST_ANSIBLE|" : "7.10.2",
-    "|ELASTICSEARCH_ELK_LATEST_KUBERNETES|" : "7.10.2",
-    "|ELASTICSEARCH_ELK_LATEST_PUPPET|" : "7.10.2",
-    "|ELASTICSEARCH_ELK_LATEST_DOCKER|" : "7.10.2",
-=======
     "|WAZUH_CURRENT_MAJOR_HPUX|" : "4.x",
     #"|WAZUH_CURRENT_MINOR_HPUX|" :
     "|WAZUH_CURRENT_HPUX|" : release,
@@ -621,7 +598,6 @@ custom_replacements = {
     # === Splunk
     "|SPLUNK_LATEST|" : "8.2.6",
     "|WAZUH_SPLUNK_CURRENT|" : release,
->>>>>>> develop
 }
 
 # -- Customizations ---------------------------------------------------------
