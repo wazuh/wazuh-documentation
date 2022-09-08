@@ -29,6 +29,77 @@ AWS configuration
 
 AWS provides a `template <https://github.com/aws-samples/ecr-image-scan-findings-logger/blob/main/Template-ECR-SFL.yml>`_ for creating a stack in CloudFormation that loads the image scan findings from Amazon ECR in CloudWatch using an AWS Lambda function.
 
+Policy configuration
+^^^^^^^^^^^^^^^^^^^^
+.. include:: /_templates/cloud/amazon/create_policy.rst
+
+.. note::
+      The permissions inside the ``RoleCreator`` section of the policy are necessary in order to create/delete the stack and can and should be deactivated once the creation process is finished.
+
+.. note::
+      The permissions part of the ``ImagePush`` section are required by Amazon ECR to `push images <https://docs.aws.amazon.com/AmazonECR/latest/userguide/image-push.html#image-push-iam>`_ and are scoped down to a specific repository. The steps to push Docker images is also described in the `Amazon ECR - Pushing a Docker image <https://docs.aws.amazon.com/AmazonECR/latest/userguide/docker-push-ecr-image.html>`_ documentation.
+
+
+.. code-block:: json
+
+  {
+    "Version": "2012-10-17",
+    "Statement": [
+      {
+        "Sid": "RoleCreator",
+        "Effect": "Allow",
+        "Action": [
+          "iam:CreateRole",
+          "iam:PutRolePolicy",
+          "iam:AttachRolePolicy",
+          "iam:DeleteRolePolicy",
+          "iam:DeleteRole",
+          "iam:GetRole",
+          "iam:GetRolePolicy"
+        ],
+        "Resource": "*"
+      },
+      {
+        "Sid": "CloudFormationActions",
+        "Effect": "Allow",
+        "Action": [
+            "cloudformation:CreateStack",
+            "cloudformation:ValidateTemplate",
+            "cloudformation:CreateUploadBucket",
+            "cloudformation:GetTemplateSummary",
+            "cloudformation:DescribeStackEvents",
+            "cloudformation:DescribeStackResources",
+            "cloudformation:ListStacks",
+            "cloudformation:DeleteStack",
+            "s3:PutObject",
+            "s3:ListBucket",
+            "s3:GetObject",
+            "s3:CreateBucket"
+        ],
+        "Resource": "*"   
+      },
+      {
+        "Sid": "ImagePush",
+        "Effect": "Allow",
+        "Action": [
+            "ecr:CompleteLayerUpload",
+            "ecr:UploadLayerPart",
+            "ecr:InitiateLayerUpload",
+            "ecr:BatchCheckLayerAvailability",
+            "ecr:PutImage"
+        ],
+        "Resource": "arn:aws:ecr:region:111122223333:repository/repository-name"
+      },
+      {
+        "Sid": "ECRAuthToken",
+        "Effect": "Allow",
+        "Action": "ecr:GetAuthorizationToken",
+        "Resource": "*"
+      }
+    ]
+  }
+
+
 How to create the CloudFormation Stack
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
