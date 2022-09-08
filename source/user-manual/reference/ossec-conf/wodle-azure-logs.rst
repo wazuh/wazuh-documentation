@@ -135,7 +135,7 @@ Options
 +----------------------------------------+----------------------------------------------+
 | `storage\\container\\time_offset`_     | A positive number + suffix                   |
 +----------------------------------------+----------------------------------------------+
-| `storage\\container\\prefix`_          | Any string                                   |
+| `storage\\container\\path`_            | Any string                                   |
 +----------------------------------------+----------------------------------------------+
 
 
@@ -681,7 +681,7 @@ storage\\container
 +-----------------------------------------+----------------------------------------------+
 | `storage\\container\\time_offset`_      | A positive number + suffix                   |
 +-----------------------------------------+----------------------------------------------+
-| `storage\\container\\prefix`_           | Any string                                   |
+| `storage\\container\\path`_             | Any string                                   |
 +-----------------------------------------+----------------------------------------------+
 
 storage\\container name
@@ -755,10 +755,10 @@ This option sets the time delay in which we will perform the query. For example,
 +--------------------+----------------------------------------------------------------------------------------------------------------------------+
 
 
-storage\\container\\prefix
+storage\\container\\path
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-If is defined, the prefix for the container to search into.
+If is defined, the path for the container to search into.
 
 +--------------------+----------------------------------------------------------------------------------------------------------------------------+
 | **Default value**  | N/A                                                                                                                        |
