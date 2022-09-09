@@ -32,6 +32,24 @@ Logging level
 To switch between different logging levels for debugging and troubleshooting purposes, the Google Cloud integration uses the :ref:`wazuh_modules.debug <wazuh_modules_options>` level to set its verbosity level.
 
 
+Reparse
+-------
+
+.. warning::
+  Using the ``reparse`` option will fetch and process every log from the starting date until the present. This process may generate duplicate alerts.
+
+To process older logs, it's necessary to manually execute the module using the ``--reparse`` option. Executing the module with this option will use the ``only_logs_after`` value provided to fetch and process every log from that date until the present. If no ``only_logs_after`` value was provided, it will use the date of the first file processed.
+
+Below there is an example of a manual execution of the module using the ``--reparse`` option on a manager, being ``/var/ossec`` the Wazuh installation path:
+
+.. code-block:: console
+
+  # cd /var/ossec/wodles/gcloud
+  # ./gcloud --integration_type access_logs -b 'wazuh-example-bucket' -c credentials.json --reparse --only_logs_after '2021-Jun-10' --debug 2
+
+The ``--debug 2`` parameter was used to get a verbose output since by default the script won't print anything on the terminal, and it could seem like it's not working when it could be handling a great amount of data instead.
+
+
 Configuring multiple Google Cloud Storage bucket
 ------------------------------------------------
 

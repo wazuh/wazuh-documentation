@@ -33,10 +33,7 @@ On the other hand, the ``CloudWatch Logs`` module can process logs older than th
 
 
 Reparse
-~~~~~~~
-
-.. note::
-  Option not available for CloudWatch Logs.
+-------
 
 .. warning::
   Using the ``reparse`` option will fetch and process every log from the starting date until the present. This process may generate duplicate alerts.
