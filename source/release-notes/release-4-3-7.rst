@@ -71,6 +71,12 @@ Packages
 -  `#1750 <https://github.com/wazuh/wazuh-packages/pull/1750>`_ The OVA generation scripts are modified to adapt them to the newest changes in ``wazuh-passwords-tool.sh``.
 -  `#1769 <https://github.com/wazuh/wazuh-packages/pull/1769>`_ The path when copying Fedora SCA files is fixed with the new versions.
 
+
+RPM revision 2
+~~~~~~~~~~~~~~
+-  `v4.3.7-2 <https://github.com/wazuh/wazuh-packages/releases/tag/v4.3.7-2>`_ A bug related to the installation of the SCA policy in RHEL8 is fixed. This error caused the RHEL 9 SCA policy to be installed in RHEL 8 machines instead of the correct one.
+
+
 Resolved issues
 ---------------
 

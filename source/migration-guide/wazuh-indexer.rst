@@ -100,7 +100,7 @@ Follow this guide to migrate from Open Distro for Elasticsearch 1.13 to the Wazu
 
           .. code-block:: console
 
-            # apt -y install wazuh-indexer
+            # apt-get -y install wazuh-indexer
 
 
 #. Create the ``/etc/wazuh-indexer/certs`` directory, copy your old certificates to the new location and change ownership and permissions. Note that the ``admin.pem`` and ``admin-key.pem`` certificates do not exist on every Elasticsearch node.
@@ -127,6 +127,10 @@ Follow this guide to migrate from Open Distro for Elasticsearch 1.13 to the Wazu
       # mv /var/log/elasticsearch/ /var/log/wazuh-indexer/
       # chown wazuh-indexer:wazuh-indexer -R /var/log/wazuh-indexer/
       # chown wazuh-indexer:wazuh-indexer -R /var/lib/wazuh-indexer/
+
+   .. note::
+
+      If you have the Open Distro for Elasticsearch performance analyzer plugin installed, change the ownership of the ``/dev/shm/performanceanalyzer/`` directory by running the following command: ``chown wazuh-indexer:wazuh-indexer -R /dev/shm/performanceanalyzer/``.
 
 #. Port your settings from ``/etc/elasticsearch/elasticsearch.yml`` to ``/etc/wazuh-indexer/opensearch.yml``. Most settings use the same names.
 

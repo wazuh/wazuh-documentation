@@ -272,6 +272,12 @@ newUrls['4.3'] = [
   '/deployment-options/amazon-machine-images/amazon-machine-images.html',
   '/release-notes/release-4-3-0.html',
   '/learning-wazuh/build-lab/install-wazuh-central-components.html', 
+  '/pci-dss/analysis-engine.html',
+  '/pci-dss/configuration-assessment.html', 
+  '/pci-dss/malware-detection.html',
+  '/pci-dss/vulnerability-detection.html',
+  '/pci-dss/system-inventory.html',
+  '/pci-dss/dashboard.html',
   '/upgrade-guide/wazuh-agent/linux.html',
   '/upgrade-guide/wazuh-agent/windows.html',
   '/upgrade-guide/wazuh-agent/macos.html',
@@ -404,11 +410,20 @@ removedUrls['4.3'] = [
   '/learning-wazuh/build-lab/xpack-security-setup.html',
   '/learning-wazuh/build-lab/install-elastic-stack.html',
   '/learning-wazuh/build-lab/install-wazuh-manager.html',
+  '/pci-dss/policy-monitoring.html',
+  '/pci-dss/rootkit-detection.html',
+  '/pci-dss/elastic.html',
   '/upgrade-guide/upgrading-agent.html', 
 ];
 
 
 redirections.push(
+  {
+    'target': ['4.2=>4.3', '4.3=>4.2'],
+    '4.2': '/pci-dss/elastic.html',
+    '4.3': '/pci-dss/dashboard.html',
+  },
+
   {
     'target': ['4.2=>4.3', '4.3=>4.2'],
     '4.2': '/upgrade-guide/upgrading-agent.html',

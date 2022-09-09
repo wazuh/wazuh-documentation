@@ -45,7 +45,7 @@ Before installing the Splunk indexer, some extra packages must be installed on t
       
       .. code-block:: console
       
-         # apt install curl apt-transport-https lsb-release gnupg
+         # apt-get install curl apt-transport-https lsb-release gnupg
    
 
 .. warning::
