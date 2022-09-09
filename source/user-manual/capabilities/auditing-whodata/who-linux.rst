@@ -29,7 +29,7 @@ For Debian based systems, use the following:
 
 .. code-block:: console
 
-    # apt install auditd
+    # apt-get install auditd
 
 The next step is to configure syscheck to enable who-data monitoring in the selected folder in our ``agent.conf`` file:
 

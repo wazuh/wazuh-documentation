@@ -183,8 +183,7 @@ If you're using a single AWS account for all your buckets this could be the most
 Insert the credentials into the configuration
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-.. warning::
-   This authentication method is not recommended for production environments and will be deprecated in future releases.
+.. deprecated:: 4.4.0
 
 Another available option to set up credentials is writing them right into the Wazuh configuration file (``/var/ossec/etc/agent.conf``), inside of the ``<bucket>`` block on the module configuration.
 

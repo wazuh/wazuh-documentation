@@ -6,7 +6,7 @@
         
         .. code-block:: console
 
-            # apt install unzip wget
+            # apt-get install unzip wget
 
     .. group-tab:: Yum
         

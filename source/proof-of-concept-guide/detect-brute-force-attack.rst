@@ -33,7 +33,7 @@ Configure your environment as follows to test the PoC.
 
         .. code-block:: XML
 
-            # apt install -y hydra
+            # apt-get install -y hydra
 
 
 Steps to generate the alerts

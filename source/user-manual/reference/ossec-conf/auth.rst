@@ -36,6 +36,7 @@ Options
 - `ssl_manager_key`_
 - `ssl_auto_negotiate`_
 - `ciphers`_
+- `key_request`_
 
 disabled
 ^^^^^^^^
@@ -263,6 +264,102 @@ Sets the list of ciphers for network communication using SSL.
 +--------------------+----------------------------------------------------+
 
 The format of this parameter is described in `SSL ciphers <https://www.openssl.org/docs/man1.1.1/man1/ciphers.html>`_.
+
+key_request
+^^^^^^^^^^^
+
+.. versionadded:: 4.4.0
+
+The key request settings are configured inside this tag. Read more about this feature at :doc:`agent key request <../../agents/key-request>`.
+
+.. code-block:: xml
+    
+    <key_request>
+      <enabled>yes</enabled>
+      <exec_path>/usr/bin/python /home/script.py</exec_path>
+      <socket>/path/to/socket</socket>
+      <timeout>60</timeout>
+      <threads>1</threads>
+      <queue_size>1024</queue_size>
+    </key_request>
+
+Configuration options of the ``key request`` feature.
+
+Options
+-------
+
+- `enabled`_
+- `timeout`_
+- `exec_path`_
+- `socket`_
+- `threads`_
+- `queue_size`_
+
+enabled
+^^^^^^^
+
+Enable the key request.
+
++--------------------+-----------------------------+
+| **Default value**  | no                          |
++--------------------+-----------------------------+
+| **Allowed values** | yes, no                     |
++--------------------+-----------------------------+
+
+timeout
+^^^^^^^
+
+Maximum time for waiting a response from the executable.
+
++--------------------+------------------------------+
+| **Default value**  | 60                           |
++--------------------+------------------------------+
+| **Allowed values** | A positive number in seconds |
++--------------------+------------------------------+
+
+exec_path
+^^^^^^^^^
+
+Full path to the executable.
+
++--------------------+-----------------------------------+
+| **Default value**  | none                              |
++--------------------+-----------------------------------+
+| **Allowed values** | A string indicating the full path |
++--------------------+-----------------------------------+
+
+socket
+^^^^^^
+
+Full path to the Unix domain socket.
+
++--------------------+-----------------------------------------------------------+
+| **Default value**  | none                                                      |
++--------------------+-----------------------------------------------------------+
+| **Allowed values** | A string indicating the full path to a Unix domain socket |
++--------------------+-----------------------------------------------------------+
+
+threads
+^^^^^^^
+
+Number of threads for dispatching the external keys requests.
+
++--------------------+------------------------------------------------------------+
+| **Default value**  | 1                                                          |
++--------------------+------------------------------------------------------------+
+| **Allowed values** | A positive number indicating the number of threads [1..32] |
++--------------------+------------------------------------------------------------+
+
+queue_size
+^^^^^^^^^^
+
+Indicates the maximum size of the queue for fetching external keys.
+
++--------------------+------------------------------------------------------------+
+| **Default value**  | 1024                                                       |
++--------------------+------------------------------------------------------------+
+| **Allowed values** | A positive number indicating the queue size [1..220000]    |
++--------------------+------------------------------------------------------------+
 
 Default configuration
 ---------------------
