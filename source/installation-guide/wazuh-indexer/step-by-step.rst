@@ -14,7 +14,7 @@ The installation process is divided into three stages.
 
 #. Nodes installation
 
-#. Initialization
+#. Cluster initialization
 
 
 .. note:: Root user privileges are required to run the commands described below.
@@ -89,11 +89,11 @@ Starting the service
 
       .. include:: /_templates/installations/indexer/common/enable_indexer.rst
     
-Repeat this stage of the installation process for every Wazuh indexer node in your multi-node cluster. Then proceed to the initialization stage.
+Repeat this stage of the installation process for every Wazuh indexer node in your cluster. Then proceed to the single-node or multi-node cluster initialization stage.
 
 
-3. Initialization
-------------------
+3. Cluster initialization
+-------------------------
 .. raw:: html
 
     <div class="accordion-section open">
@@ -107,8 +107,8 @@ Repeat this stage of the installation process for every Wazuh indexer node in yo
 
    .. note:: You only have to initialize the cluster `once`, there is no need to run this command on every node. 
       
-Testing the installation
-^^^^^^^^^^^^^^^^^^^^^^^^^
+Testing the cluster installation
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
   #. Replace ``<WAZUH_INDEXER_IP>`` and run the following commands to confirm that the installation is successful.
 

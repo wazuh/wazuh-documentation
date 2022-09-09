@@ -9,8 +9,8 @@ Installing the Wazuh indexer using the assistant
 Install and configure the Wazuh indexer as a single-node or multi-node cluster with the aid of the Wazuh installation assistant. The Wazuh indexer is a highly scalable full-text search engine and offers advanced security, alerting, index management, deep performance analysis, and several other features.
 
 
-Wazuh indexer installation
---------------------------
+Wazuh indexer cluster installation
+----------------------------------
 
 The installation process is divided into three stages. 
 
@@ -18,7 +18,7 @@ The installation process is divided into three stages.
 
 #. Wazuh indexer nodes installation
 
-#. Initialization
+#. Cluster initialization
 
 .. note:: Root user privileges are required to run the commands described below.
 
@@ -99,11 +99,11 @@ Install and configure the Wazuh indexer nodes.
 Repeat this process on each Wazuh indexer node and proceed with initializing the single-node or multi-node cluster.
 
 
-3. Initialization 
-------------------
+3. Cluster initialization 
+-------------------------
 
 
-The final stage of the process for installing the Wazuh indexer consists in running the security admin script. 
+The final stage of the process for installing the Wazuh indexer single-node or multi-node cluster consists in running the security admin script. 
 
 #. Run the Wazuh installation assistant with option ``--start-cluster`` on `any` Wazuh indexer node to load the new certificates information and start the single-node or multi-node cluster. 
 
