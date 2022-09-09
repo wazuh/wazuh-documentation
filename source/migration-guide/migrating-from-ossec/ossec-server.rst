@@ -102,7 +102,7 @@ To:
     <port>1514</port>
     <protocol>tcp,udp</protocol>
 
-Also note note that the ``agent.conf`` file directory has now changed to ``/var/ossec/etc/shared/default``.
+Also note that the ``agent.conf`` file directory has now changed to ``/var/ossec/etc/shared/default``.
 
 Optionally the following files can be restored to preserve alert log files and syscheck/rootcheck databases:
 
