@@ -13,6 +13,12 @@
   'search'
 ] %}
 
+{% set ignore_page_search = [
+  'index', 
+  'not_found', 
+  'search'
+] %}
+
 {%- if version >= '4.0' -%}
   {% set special_pages = special_pages + [
     'cloud-service/apis/reference',

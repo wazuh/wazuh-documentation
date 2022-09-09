@@ -4,7 +4,7 @@
 
     .. code-block:: console
 
-      # apt install curl apt-transport-https libcap2-bin
+      # apt-get install curl apt-transport-https libcap2-bin
 
 #. Install the GPG key.
 
