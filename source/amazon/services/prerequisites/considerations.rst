@@ -79,7 +79,7 @@ The modes are briefly explained below:
   Adaptive retry mode is an **experimental retry mode** that includes all the features of standard mode. This mode offers flexibility in client-side retries that adapts to the error/exception state response from an AWS service.
 
 
-It is highly recommended to define the ``max_attempts`` and ``retry_mode`` values inside your `configuration file <https://boto3.amazonaws.com/v1/documentation/api/latest/guide/configuration.html#using-a-configuration-file>`_ (``~/.aws/config``). The retry configuration must be placed inside a profile section. It is important to use the same profile as the one you chosed as your :ref:`authentication method <authentication_method>`. If no profiles are being used as the authentication method then the configuration must be placed in the `[Default]` profile. 
+The desired retry configuration values of ``max_attempts`` and ``retry_mode`` can be specified inside your `configuration file <https://boto3.amazonaws.com/v1/documentation/api/latest/guide/configuration.html#using-a-configuration-file>`_ (``~/.aws/config``). The retry configuration must be placed inside a profile section. It is important to use the same profile as the one you chosed as your :ref:`authentication method <authentication_method>`. If no profiles are being used as the authentication method then the configuration must be placed in the `[Default]` profile. 
 In case this file is not present in the system, the ``aws-s3`` Wazuh module defines the following default values: ``mode=standard`` and ``max_attempts=10`` overriding the already explained ``legacy`` mode.
 
 .. note::
