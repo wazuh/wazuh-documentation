@@ -199,7 +199,7 @@ The Wazuh agent is a single and lightweight monitoring software. It is a multi-p
 
         .. note::
         
-            The following procedure has been tested on Ubuntu 20.04 and may work with other Debian/Ubuntu versions as well. It is recommended to use MinGW 9.
+            The following procedure has been tested on Ubuntu 22.04 and may work with other Debian/Ubuntu versions as well. It is required to use MinGW 10.
 
         #.  Set up the Ubuntu build environment. Install these dependencies to build the Windows Wazuh agent installer on Ubuntu:
 
