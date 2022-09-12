@@ -1,7 +1,7 @@
 .. Copyright (C) 2015, Wazuh, Inc.
 
 .. meta::
-  :description: Azure Storage refers to the Microsoft Azure cloud storage solution. Learn more about it in this section of our documentation.
+  :description: Azure Storage refers to the Microsoft Azure cloud storage solution. Learn how to use Azure Storage with Wazuh in this section of our documentation.
 
 .. _azure_storage:
 

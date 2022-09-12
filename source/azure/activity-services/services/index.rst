@@ -1,7 +1,7 @@
 .. Copyright (C) 2015, Wazuh, Inc.
 
 .. meta::
-  :description: The Azure Monitor Logs collects and organizes logs and performance data from monitored resources. Learn more about it in this section of our documentation. 
+  :description: The Azure Monitor Logs collects and organizes logs and performance data from monitored resources. Learn how to use Monitor Logs with Wazuh in this section. 
 
 .. _azure_monitoring_activity:
 
