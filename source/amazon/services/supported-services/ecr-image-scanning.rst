@@ -33,19 +33,15 @@ Policy configuration
 ^^^^^^^^^^^^^^^^^^^^
 .. include:: /_templates/cloud/amazon/create_policy.rst
 
-.. note::
-      The permissions inside the ``RoleCreator`` section of the policy are necessary in order to create/delete the stack and can and should be deactivated once the creation process is finished.
+IAM permissions
+~~~~~~~~~~~~~~~
 
-.. note::
-      The permissions part of the ``ImagePush`` section are required by Amazon ECR to `push images <https://docs.aws.amazon.com/AmazonECR/latest/userguide/image-push.html#image-push-iam>`_ and are scoped down to a specific repository. The steps to push Docker images is also described in the `Amazon ECR - Pushing a Docker image <https://docs.aws.amazon.com/AmazonECR/latest/userguide/docker-push-ecr-image.html>`_ documentation.
-
+.. warning::
+      The permissions inside the ``RoleCreator`` section of the policy are necessary in order to create/delete the stack and can and should be deactivated once the creation process is finished due to overly permissive actions.
 
 .. code-block:: json
-
+  
   {
-    "Version": "2012-10-17",
-    "Statement": [
-      {
         "Sid": "RoleCreator",
         "Effect": "Allow",
         "Action": [
@@ -58,8 +54,14 @@ Policy configuration
           "iam:GetRolePolicy"
         ],
         "Resource": "*"
-      },
-      {
+      }
+
+CloudFormation Stack permissions
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+.. code-block:: json
+
+  {
         "Sid": "CloudFormationActions",
         "Effect": "Allow",
         "Action": [
@@ -77,8 +79,17 @@ Policy configuration
             "s3:CreateBucket"
         ],
         "Resource": "*"   
-      },
-      {
+      }
+
+Image Pushing permissions
+~~~~~~~~~~~~~~~~~~~~~~~~~
+
+.. note::
+      The permissions part of the ``ImagePush`` section are required by Amazon ECR to `push images <https://docs.aws.amazon.com/AmazonECR/latest/userguide/image-push.html#image-push-iam>`_ and are scoped down to a specific repository. The steps to push Docker images is also described in the `Amazon ECR - Pushing a Docker image <https://docs.aws.amazon.com/AmazonECR/latest/userguide/docker-push-ecr-image.html>`_ documentation.
+
+.. code-block:: json
+
+  {
         "Sid": "ImagePush",
         "Effect": "Allow",
         "Action": [
@@ -89,14 +100,23 @@ Policy configuration
             "ecr:PutImage"
         ],
         "Resource": "arn:aws:ecr:region:111122223333:repository/repository-name"
-      },
-      {
-        "Sid": "ECRAuthToken",
-        "Effect": "Allow",
-        "Action": "ecr:GetAuthorizationToken",
-        "Resource": "*"
       }
-    ]
+
+
+Registry permissions
+~~~~~~~~~~~~~~~~~~~~
+
+.. note::
+      The permissions part of the ``ECRAuthToken`` section are required by `Amazon ECR <https://docs.aws.amazon.com/AmazonECR/latest/userguide/set-repository-policy.html>`_ for users to have permission to make calls to the ``ecr:GetAuthorizationToken`` API through an IAM policy before they can authenticate to a registry and push or pull any images from any Amazon ECR repository. 
+
+
+.. code-block:: json
+
+  {
+    "Sid": "ECRAuthToken",
+    "Effect": "Allow",
+    "Action": "ecr:GetAuthorizationToken",
+    "Resource": "*"
   }
 
 
