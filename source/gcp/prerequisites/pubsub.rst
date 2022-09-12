@@ -49,12 +49,13 @@ Export logs via sink
 
 Log activities should appear under the **Logs Router** section. Cloud Audit logs can be published to a Cloud Pub/Sub topic through the sinks. Create a sink and use the topic as a destination.
 
-Follow the instructions below to complete the **Create logs routing sink** steps:
+Follow the steps below to complete the **Create logs routing sink** form:
 
 #. **Sink details**: provide a name and description for logs routing sink
 #. **Sink destination**: select the sink service type and destination
 #. **Choose logs to include in sink**: create an inclusion filter to determine which logs are included
 #. **Choose logs to filter out to sink**: create exclusion filters to determine which logs are excluded
+#. Push the **CREATE SINK** button.
 
 .. thumbnail:: ../../images/gcp/gcp-sink.png
     :align: center
