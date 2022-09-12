@@ -2,7 +2,7 @@
 
 .. meta::
   :description: Frequently asked questions about the Wazuh module for Amazon. Learn more about it in this section of the documentation.
-  
+
 .. _amazon_troubleshooting:
 
 Troubleshooting
@@ -65,7 +65,7 @@ Follow these steps to enable debug mode:
         wazuh_modules.debug=2
 
 
-#. Restart the Wazuh service. 
+#. Restart the Wazuh service.
 
 .. include:: ../../_templates/common/restart_manager_or_agent.rst
 
@@ -191,7 +191,7 @@ Take into account that Wazuh does not provide default rules for the different lo
 Interval overtaken message is present in the ossec.log
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-The ``Interval overtaken`` message is present in the ``ossec.log`` file. 
+The ``Interval overtaken`` message is present in the ``ossec.log`` file.
 
 **Solution**
 
@@ -211,7 +211,7 @@ Error codes reference
     | 1         | Unknown error                                                     | Programming error. Please, open an issue in the `Wazuh GitHub repository <https://github.com/wazuh/wazuh/issues/new/choose>`_ with the trace of the  |
     |           |                                                                   | error.                                                                                                                                               |
     +-----------+-------------------------------------------------------------------+------------------------------------------------------------------------------------------------------------------------------------------------------+
-    | 2         | Error parsing configuration (bucket name, keys, etc.)             | Check the wodle configuration in ``ossec.conf`` file.                                                                                                |
+    | 2         | SIGINT                                                            | The module stopped due to an interrupt signal.                                                                                                       |
     +-----------+-------------------------------------------------------------------+------------------------------------------------------------------------------------------------------------------------------------------------------+
     | 3         | Invalid credentials to access S3 bucket                           | Make sure that your credentials are OK. For more information, see the :ref:`Configuring AWS credentials <amazon_credentials>` section.               |
     +-----------+-------------------------------------------------------------------+------------------------------------------------------------------------------------------------------------------------------------------------------+
@@ -225,11 +225,11 @@ Error codes reference
     +-----------+-------------------------------------------------------------------+------------------------------------------------------------------------------------------------------------------------------------------------------+
     | 8         | Failed to decompress file                                         | Only ``.gz`` and ``.zip`` compression formats are supported.                                                                                         |
     +-----------+-------------------------------------------------------------------+------------------------------------------------------------------------------------------------------------------------------------------------------+
-    | 9         | Failed to parse file                                              | Check the type of the bucket.                                                                                                                        |
+    | 9         | Failed to parse file                                              | Ensure that the file has the expected schema.                                                                                                        |
     +-----------+-------------------------------------------------------------------+------------------------------------------------------------------------------------------------------------------------------------------------------+
     | 11        | Unable to connect to Wazuh                                        | Ensure that Wazuh is running.                                                                                                                        |
     +-----------+-------------------------------------------------------------------+------------------------------------------------------------------------------------------------------------------------------------------------------+
-    | 12        | SIGINT                                                            | The module stopped due to an interrupt signal.                                                                                                       |
+    | 12        | Invalid type of bucket                                            | Check the type of the bucket.                                                                                                                        |
     +-----------+-------------------------------------------------------------------+------------------------------------------------------------------------------------------------------------------------------------------------------+
     | 13        | Error sending message to Wazuh                                    | Make sure that Wazuh is running.                                                                                                                     |
     +-----------+-------------------------------------------------------------------+------------------------------------------------------------------------------------------------------------------------------------------------------+
@@ -241,4 +241,8 @@ Error codes reference
     +-----------+-------------------------------------------------------------------+------------------------------------------------------------------------------------------------------------------------------------------------------+
     | 17        | Invalid file key format                                           | Ensure that the file path follows the format specified in the                                                                                        |
     |           |                                                                   | `Wazuh documentation <https://documentation.wazuh.com/current/amazon/services/supported-services/index.html>`_.                                      |
+    +-----------+-------------------------------------------------------------------+------------------------------------------------------------------------------------------------------------------------------------------------------+
+    | 18        | Invalid prefix                                                    | Make sure that the indicated path exists in the S3 bucket.                                                                                           |
+    +-----------+-------------------------------------------------------------------+------------------------------------------------------------------------------------------------------------------------------------------------------+
+    | 19        | The server datetime and datetime of the AWS environment differ    | Make sure that the server datetime is correctly setted.                                                                                              |
     +-----------+-------------------------------------------------------------------+------------------------------------------------------------------------------------------------------------------------------------------------------+
