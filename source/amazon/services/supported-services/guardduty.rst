@@ -1,7 +1,7 @@
 .. Copyright (C) 2015, Wazuh, Inc.
 
 .. meta::
-  :description: Amazon GuardDuty is a threat detection service that continuously monitors for malicious behavior. Learn how to configure GuardDuty in this section.
+  :description: Amazon GuardDuty is a threat detection service that continuously monitors for malicious behavior. Learn how to use GuardDuty with Wazuh in this section.
 
 .. _amazon_guardduty:
 

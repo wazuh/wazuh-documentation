@@ -1,7 +1,7 @@
 .. Copyright (C) 2015, Wazuh, Inc.
 
 .. meta::
-  :description: Amazon Macie is a security service that uses machine learning to automatically discover and protect sensitive data in AWS. Learn more about it here.
+  :description: Amazon Macie is a security service that uses machine learning to protect sensitive data in AWS. Learn how to use Amazon Macie with Wazuh in this section.
 
 .. _amazon_macie:
 

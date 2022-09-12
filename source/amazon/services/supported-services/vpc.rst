@@ -1,7 +1,7 @@
 .. Copyright (C) 2015, Wazuh, Inc.
 
 .. meta::
-  :description: Amazon VPC lets users provision a logically isolated section of the AWS Cloud where they can launch AWS resources. Learn more about it in this section.
+  :description: Amazon VPC lets users provision a logically isolated section of the AWS Cloud where they can launch AWS resources. Learn how to use Amazon VPC with Wazuh here.
 
 .. _amazon_vpc:
 

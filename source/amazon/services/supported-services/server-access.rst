@@ -2,7 +2,7 @@
 .. Copyright (C) 2015, Wazuh, Inc.
 
 .. meta::
-  :description: Amazon S3 Server Access Logging provides detailed records for the requests that are made to a bucket. Learn more about it in this section.
+  :description: Amazon S3 Server Access provides detailed records for the requests that are made to a bucket. Learn how to use Amazon S3 Server Access with Wazuh here.
 
 .. _amazon_server_access:
 

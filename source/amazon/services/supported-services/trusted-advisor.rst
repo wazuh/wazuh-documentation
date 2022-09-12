@@ -1,7 +1,7 @@
 .. Copyright (C) 2015, Wazuh, Inc.
 
 .. meta::
-  :description: AWS Trusted Advisor is an online resource to help users reduce costs, increase performance, and improve security. Learn more about it in this section.
+  :description: AWS Trusted Advisor is an online resource to help users reduce costs and improve security. Learn how to use AWS Trusted Advisor with Wazuh in this section.
 
 .. _amazon_trusted_advisor:
 

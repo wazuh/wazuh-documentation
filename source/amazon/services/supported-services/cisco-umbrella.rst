@@ -1,7 +1,7 @@
 .. Copyright (C) 2015, Wazuh, Inc.
 
 .. meta::
-  :description: Cisco Umbrella uses the internet infrastructure to block malicious destinations before a connection is ever established. Check out this section of our documentation to learn more about it. 
+  :description: Cisco Umbrella uses the internet infrastructure to block malicious destinations. Learn how to use Cisco Umbrella with Wazuh in this section. 
   
 .. _cisco_umbrella:
 

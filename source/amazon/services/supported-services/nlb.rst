@@ -1,7 +1,7 @@
 .. Copyright (C) 2015, Wazuh, Inc.
 
 .. meta::
-  :description: Amazon NLB automatically distributes the incoming traffic across multiple targets. Learn more about Amazon NLB in this section of our documentation.
+  :description: Amazon NLB automatically distributes the incoming traffic across multiple targets. Learn how to use Amazon NLB with Wazuh in this section.
 
 .. _amazon_nlb:
 

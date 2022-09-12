@@ -2,7 +2,7 @@
 .. Copyright (C) 2015, Wazuh, Inc.
 
 .. meta::
-  :description: Amazon WAF is a web application firewall that helps protect your web applications from common web exploits. Learn more about it in this section.
+  :description: Amazon WAF is a web application firewall that helps protect your web applications from common web exploits. Learn how to use Amazon WAF with Wazuh here.
 
 .. _amazon_waf:
 
