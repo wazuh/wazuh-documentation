@@ -96,7 +96,7 @@ Install and configure the Wazuh indexer nodes.
         # bash wazuh-install.sh --wazuh-indexer node-1 
 
 
-Repeat this process on each Wazuh indexer node and proceed with initializing the single-node or multi-node cluster.
+Repeat this stage of the installation process for every Wazuh indexer node in your cluster. Then proceed with initializing your single-node or multi-node cluster in the next stage.
 
 
 3. Cluster initialization 
@@ -105,7 +105,7 @@ Repeat this process on each Wazuh indexer node and proceed with initializing the
 
 The final stage of the process for installing the Wazuh indexer single-node or multi-node cluster consists in running the security admin script. 
 
-#. Run the Wazuh installation assistant with option ``--start-cluster`` on `any` Wazuh indexer node to load the new certificates information and start the single-node or multi-node cluster. 
+#. Run the Wazuh installation assistant with option ``--start-cluster`` on `any` Wazuh indexer node to load the new certificates information and start the cluster. 
 
    .. code-block:: console
  
