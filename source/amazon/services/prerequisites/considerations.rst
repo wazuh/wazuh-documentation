@@ -56,43 +56,39 @@ The ``--debug 2`` parameter was used to get a verbose output since by default th
 Connection configuration for retries
 ------------------------------------
 
-It is possible that very congested environments cause AWS services internal errors and the :ref:`boto-3` client failure raising **ClientError** exceptions describing those errors. To assist in retrying client calls to AWS services Boto3 provides `Retries <https://boto3.amazonaws.com/v1/documentation/api/latest/guide/retries.html>`_.  This feature allows retrying client calls to AWS services when errors like ``ThrottlingException`` are experienced defining the following fields:
+Some calls to AWS services may fail when made under highly congested environments. The :ref:`boto-3` client raises `ClientError` exceptions describing the errors. These kind  of exceptions often need repeating the call only, without further handling. To help retrying these calls, Boto3 provides `Retries <https://boto3.amazonaws.com/v1/documentation/api/latest/guide/retries.html>`__.  This feature allows retrying client calls to AWS services when errors like ``ThrottlingException`` are experienced.
 
-- ``retry_mode``: This tells Boto3 which retry mode to use. There are `three retry modes available <https://boto3.amazonaws.com/v1/documentation/api/latest/guide/retries.html#available-retry-modes>`_: legacy (default), standard, and adaptive.
-- ``max_attempts``: This provides Boto3\’s retry handler with a value of maximum retry attempts.
+Users can customize two retry configurations.
 
-The modes are briefly explained below:
+-  ``retry_mode``: legacy, standard, and adaptive.
 
-- **Legacy**
+   -  **Legacy** mode is the default retry mode. It sets the older version 1 for the retry handler. This includes:
+      
+      -  Retry attempts for a limited number of errors/exceptions.
+      -  A default value of 5 for maximum call attempts.
 
-  Legacy mode is the default mode used by any Boto3 client created. As its name implies, legacy mode uses an older (v1) retry handler that has limited functionality.
-  The default value for maximum retry attempts is 5 and these are for a limited number of errors/exceptions.
+   -  **Standard** mode sets the updated version 2 for the retry handler. It includes:
 
+      -  Extended functionality over that found in legacy mode where retry attempts apply to an expanded list of errors/exceptions.
+      -  A default value of 3 for maximum call attempts.
 
-- **Standard**
+   -  **Adaptive** mode is an experimental retry mode. It includes all the features of standard mode. This mode offers flexibility in client-side retries. Retries adapt to the error/exception state response from an AWS service.
 
-  Standard mode is a retry mode that was introduced with the updated retry handler (v2). It extends the functionality of retries over that found in legacy mode.
-  It has a default value of 3 for maximum retry attempts and these are for an expanded list of errors/exceptions.
+-  ``max_attempts``: The maximum number of attempts including the initial call. This configuration can override the default value set by the retry mode.
 
-- **Adaptive**
+You can specify  the retry configuration in the ``~/.aws/config`` `configuration file <https://boto3.amazonaws.com/v1/documentation/api/latest/guide/configuration.html#using-a-configuration-file>`__.  The profile section must include the ``max_attempts``, ``retry_mode``, and ``region`` settings. It is important to use the same profile as the one you chose as your :ref:`authentication method <authentication_method>`. If the authentication method doesn't have a profile, then the ``[Default]`` profile must include the configurations. In case the system doesn't have this file, the `aws-s3` Wazuh module defines the following values by default:
 
-  Adaptive retry mode is an **experimental retry mode** that includes all the features of standard mode. This mode offers flexibility in client-side retries that adapts to the error/exception state response from an AWS service.
+-  ``mode=standard``
+-  ``max_attempts=10``.
 
-
-The desired retry configuration values of ``max_attempts`` and ``retry_mode`` can be specified inside your `configuration file <https://boto3.amazonaws.com/v1/documentation/api/latest/guide/configuration.html#using-a-configuration-file>`_ (``~/.aws/config``). The retry configuration must be placed inside a profile section. It is important to use the same profile as the one you chosed as your :ref:`authentication method <authentication_method>`. If no profiles are being used as the authentication method then the configuration must be placed in the `[Default]` profile. 
-In case this file is not present in the system, the ``aws-s3`` Wazuh module defines the following default values: ``mode=standard`` and ``max_attempts=10`` overriding the already explained ``legacy`` mode.
-
-.. note::
-  A region must also be specified on the ``config`` file in order to make it work.
-
-The following example of a ``~/.aws/config`` file defines retry parameters for the *dev* profile:
+The following example of a ``~/.aws/config`` file sets retry parameters for the *dev* profile:
 
 .. code-block:: ini
 
-  [profile dev]
-  region=us-east-1
-  max_attempts=5
-  retry_mode=standard
+   [profile dev]
+   region=us-east-1
+   max_attempts=5
+   retry_mode=standard
 
 
 Configuring multiple services
