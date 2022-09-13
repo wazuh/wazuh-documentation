@@ -13,15 +13,10 @@ What's new
 
 This release includes new features or enhancements as the following:
 
-Wazuh manager
-^^^^^^^^^^^^^
-
-- `#14540 <https://github.com/wazuh/wazuh/pull/14540>`_ Text.
-
 Wazuh agent
 ^^^^^^^^^^^
 
-- `#13958 <https://github.com/wazuh/wazuh/pull/13958>`_ Text.
+- `#14842 <https://github.com/wazuh/wazuh/pull/14842>`_ Updated root CA certificate in agents to validate WPK upgrades.
 
 RESTful API
 ^^^^^^^^^^^
@@ -70,7 +65,9 @@ Wazuh manager
 ==============================================================    =============
 Reference                                                         Description
 ==============================================================    =============
-`#13956 <https://github.com/wazuh/wazuh/pull/13956>`_             Text
+`#14752 <https://github.com/wazuh/wazuh/pull/14752>`_             Fixed wrong field assignation in Audit decoders (thanks to @pyama86).
+`#14825 <https://github.com/wazuh/wazuh/pull/14825>`_             Prevented wazuh-remoted from cleaning the multigroup folder in worker nodes.
+`#14772 <https://github.com/wazuh/wazuh/pull/14772>`_             Fixed rule skipping in wazuh-analysisd when the option if_sid is invalid.
 ==============================================================    =============
 
 Wazuh agent
@@ -79,7 +76,7 @@ Wazuh agent
 ==============================================================    =============
 Reference                                                         Description
 ==============================================================    =============
-`#14368 <https://github.com/wazuh/wazuh/pull/14368>`_             Text
+`#14801 <https://github.com/wazuh/wazuh/pull/14801>`_             Fixed a path traversal flaw in Active Response affecting agents from v3.6.1 to v4.3.7 (reported by @guragainroshan0).
 ==============================================================    =============
 
 Ruleset
