@@ -78,7 +78,7 @@ Users can customize two retry configurations.
 
 You can specify  the retry configuration in the ``~/.aws/config`` `configuration file <https://boto3.amazonaws.com/v1/documentation/api/latest/guide/configuration.html#using-a-configuration-file>`__.  The profile section must include the ``max_attempts``, ``retry_mode``, and ``region`` settings. It is important to use the same profile as the one you chose as your :ref:`authentication method <authentication_method>`. If the authentication method doesn't have a profile, then the ``[Default]`` profile must include the configurations. In case the system doesn't have this file, the `aws-s3` Wazuh module defines the following values by default:
 
--  ``mode=standard``
+-  ``retry_mode=standard``
 -  ``max_attempts=10``.
 
 The following example of a ``~/.aws/config`` file sets retry parameters for the *dev* profile:
