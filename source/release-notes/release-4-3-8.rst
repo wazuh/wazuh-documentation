@@ -3,7 +3,7 @@
 .. meta::
   :description: Wazuh 4.3.8 has been released. Check out our release notes to discover the changes and additions of this release.
 
-4.3.8 Release notes - 15 September 2022
+4.3.8 Release notes - 19 September 2022
 =======================================
 
 This section lists the changes in version 4.3.8. Every update of the Wazuh solution is cumulative and includes all enhancements and fixes from previous releases.
@@ -18,40 +18,26 @@ Wazuh agent
 
 - `#14842 <https://github.com/wazuh/wazuh/pull/14842>`_ Updated root CA certificate in agents to validate WPK upgrades.
 
-RESTful API
-^^^^^^^^^^^
-
-- `#14551 <https://github.com/wazuh/wazuh/pull/14551>`_ Text
-
-Ruleset
-^^^^^^^
-
-- `#13806 <https://github.com/wazuh/wazuh/pull/13806>`_ Text
   
 Wazuh dashboard
 ^^^^^^^^^^^^^^^
 
-- `#4350 <https://github.com/wazuh/wazuh-kibana-app/pull/4350>`_ Text
+- Wazuh dashboard is now compatible with Wazuh 4.3.8.
 
 Wazuh Kibana plugin for Kibana 7.10.2
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-- `#4350 <https://github.com/wazuh/wazuh-kibana-app/pull/4350>`_ Text
+- Wazuh Kibana plugin is now compatible with Wazuh 4.3.8.
 
 Wazuh Kibana plugin for Kibana 7.16.x and 7.17.x
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-- `#4350 <https://github.com/wazuh/wazuh-kibana-app/pull/4350>`_ Text
+- Wazuh Kibana plugin is now compatible with Wazuh 4.3.8.
 
 Wazuh Splunk app
 ^^^^^^^^^^^^^^^^
 
 - Wazuh Splunk app is now compatible with Wazuh 4.3.8.
-
-Packages
-^^^^^^^^
-
--  `#1737 <https://github.com/wazuh/wazuh-packages/pull/1737>`_ Text
 
 
 Resolved issues
@@ -77,60 +63,6 @@ Wazuh agent
 Reference                                                         Description
 ==============================================================    =============
 `#14801 <https://github.com/wazuh/wazuh/pull/14801>`_             Fixed a path traversal flaw in Active Response affecting agents from v3.6.1 to v4.3.7 (reported by @guragainroshan0).
-==============================================================    =============
-
-Ruleset
-^^^^^^^
-
-==============================================================    =============
-Reference                                                         Description
-==============================================================    =============
-`#14513 <https://github.com/wazuh/wazuh/pull/14513>`_             Text 
-==============================================================    =============
-
-Wazuh dashboard
-^^^^^^^^^^^^^^^
-
-==============================================================    =============
-Reference                                                         Description
-==============================================================    =============
-`#4378 <https://github.com/wazuh/wazuh-kibana-app/pull/4378>`_    Text
-==============================================================    =============
-
-Wazuh Kibana plugin for Kibana 7.10.2
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-
-==============================================================    =============
-Reference                                                         Description
-==============================================================    =============
-`#4378 <https://github.com/wazuh/wazuh-kibana-app/pull/4378>`_    Text
-==============================================================    =============
-
-Wazuh Kibana plugin for Kibana 7.16.x and 7.17.x
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-
-==============================================================    =============
-Reference                                                         Description
-==============================================================    =============
-`#4378 <https://github.com/wazuh/wazuh-kibana-app/pull/4378>`_    Text
-==============================================================    =============
-
-Wazuh Splunk app
-^^^^^^^^^^^^^^^^
-
-==============================================================    =============
-Reference                                                         Description
-==============================================================    =============
-`#1359 <https://github.com/wazuh/wazuh-splunk/pull/1359>`_        Text
-==============================================================    =============
-
-Packages
-^^^^^^^^
-
-==============================================================    =============
-Reference                                                         Description
-==============================================================    =============
-`#1762 <https://github.com/wazuh/wazuh-packages/pull/1762>`__     Text
 ==============================================================    =============
 
 Changelogs
