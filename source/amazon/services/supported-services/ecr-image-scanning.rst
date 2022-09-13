@@ -33,11 +33,13 @@ Policy configuration
 ^^^^^^^^^^^^^^^^^^^^
 .. include:: /_templates/cloud/amazon/create_policy.rst
 
-IAM permissions
-~~~~~~~~~~~~~~~
+Template specific permissions
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+IAM 
+"""
 
 .. warning::
-      The permissions inside the ``RoleCreator`` section of the policy are necessary in order to create/delete the stack and can and should be deactivated once the creation process is finished due to overly permissive actions.
+      The permissions inside the ``IAMRole`` section and the ``PassRole`` section are necessary in order to create/delete the stack based on the named template and can and should be deactivated once the creation process is finished due to overly permissive actions.
 
 .. code-block:: json
   
@@ -53,71 +55,119 @@ IAM permissions
           "iam:GetRole",
           "iam:GetRolePolicy"
         ],
-        "Resource": "*"
-      }
-
-CloudFormation Stack permissions
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-
-.. code-block:: json
-
-  {
-        "Sid": "CloudFormationActions",
+        "Resource": "*",
+        "Condition": {
+          "StringEquals": {"iam:PassedToService": "replicator.lambda.amazonaws.com"}
+        }
+      },
+      {
+        "Sid": "PassRole",
         "Effect": "Allow",
-        "Action": [
-            "cloudformation:CreateStack",
-            "cloudformation:ValidateTemplate",
-            "cloudformation:CreateUploadBucket",
-            "cloudformation:GetTemplateSummary",
-            "cloudformation:DescribeStackEvents",
-            "cloudformation:DescribeStackResources",
-            "cloudformation:ListStacks",
-            "cloudformation:DeleteStack",
-            "s3:PutObject",
-            "s3:ListBucket",
-            "s3:GetObject",
-            "s3:CreateBucket"
-        ],
-        "Resource": "*"   
+        "Action": "iam:PassRole",
+        "Resource": "*",
+        "Condition": {
+          "StringEquals": {"iam:PassedToService": "replicator.lambda.amazonaws.com"}
+        }
       }
 
-Image Pushing permissions
-~~~~~~~~~~~~~~~~~~~~~~~~~
+Amazon Lambda and Amazon EventBridge
+""""""""""""""""""""""""""""""""""""
 
-.. note::
-      The permissions part of the ``ImagePush`` section are required by Amazon ECR to `push images <https://docs.aws.amazon.com/AmazonECR/latest/userguide/image-push.html#image-push-iam>`_ and are scoped down to a specific repository. The steps to push Docker images is also described in the `Amazon ECR - Pushing a Docker image <https://docs.aws.amazon.com/AmazonECR/latest/userguide/docker-push-ecr-image.html>`_ documentation.
-
+The following permissions are required to create/delete the resources handled by the Scan Findings Logger template
+  
 .. code-block:: json
 
   {
-        "Sid": "ImagePush",
-        "Effect": "Allow",
-        "Action": [
-            "ecr:CompleteLayerUpload",
-            "ecr:UploadLayerPart",
-            "ecr:InitiateLayerUpload",
-            "ecr:BatchCheckLayerAvailability",
-            "ecr:PutImage"
-        ],
-        "Resource": "arn:aws:ecr:region:111122223333:repository/repository-name"
-      }
-
-
-Registry permissions
-~~~~~~~~~~~~~~~~~~~~
-
-.. note::
-      The permissions part of the ``ECRAuthToken`` section are required by `Amazon ECR <https://docs.aws.amazon.com/AmazonECR/latest/userguide/set-repository-policy.html>`_ for users to have permission to make calls to the ``ecr:GetAuthorizationToken`` API through an IAM policy before they can authenticate to a registry and push or pull any images from any Amazon ECR repository. 
-
-
-.. code-block:: json
-
-  {
-    "Sid": "ECRAuthToken",
+    "Sid": "TemplateRequired",
     "Effect": "Allow",
-    "Action": "ecr:GetAuthorizationToken",
+    "Action": [
+      "lambda:RemovePermission",
+      "lambda:DeleteFunction",
+      "lambda:GetFunction",
+      "lambda:CreateFunction",
+      "lambda:AddPermission",
+      "events:RemoveTargets",
+      "events:DeleteRule",
+      "events:PutRule",
+      "events:DescribeRule",
+      "events:PutTargets"
+    ],
     "Resource": "*"
   }
+
+
+
+CloudFormation Stack
+~~~~~~~~~~~~~~~~~~~~
+
+The following permissions are required to create/delete any template based CloudFormation stack
+
+.. code-block:: json
+
+  {
+    "Sid": "CloudFormationStackCreation",
+    "Effect": "Allow",
+    "Action": [
+      "cloudformation:CreateStack",
+      "cloudformation:ValidateTemplate",
+      "cloudformation:CreateUploadBucket",
+      "cloudformation:GetTemplateSummary",
+      "cloudformation:DescribeStackEvents",
+      "cloudformation:DescribeStackResources",
+      "cloudformation:ListStacks",
+      "cloudformation:DeleteStack",
+      "s3:PutObject",
+      "s3:ListBucket",
+      "s3:GetObject",
+      "s3:CreateBucket"
+    ],
+    "Resource": "*"   
+  }
+
+Amazon ECR usage permissions
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+Image Pushing and Scanning
+""""""""""""""""""""""""""
+
+  The following permissions are required by Amazon ECR to `push images <https://docs.aws.amazon.com/AmazonECR/latest/userguide/image-push.html#image-push-iam>`_ and are scoped down to a specific repository. The steps to push Docker images is also described in the `Amazon ECR - Pushing a Docker image <https://docs.aws.amazon.com/AmazonECR/latest/userguide/docker-push-ecr-image.html>`_ documentation.
+
+.. code-block:: json
+
+    {
+      "Sid": "ScanPushImage",
+      "Effect": "Allow",
+      "Action": [
+        "ecr:CompleteLayerUpload",
+        "ecr:UploadLayerPart",
+        "ecr:InitiateLayerUpload",
+        "ecr:BatchCheckLayerAvailability",
+        "ecr:PutImage",
+        "ecr:ListImages",
+        "ecr:DescribeImages",
+        "ecr:DescribeImageScanFindings",
+        "ecr:StartImageScan"
+      ],
+      "Resource": "arn:aws:ecr:region:user-id:repository/repository-name"
+    }
+
+ECR Registry and Repository
+"""""""""""""""""""""""""""
+
+.. note::
+      The permission "ecr:GetAuthorizationToken" is required by `Amazon ECR <https://docs.aws.amazon.com/AmazonECR/latest/userguide/set-repository-policy.html>`_ for users to have permission to make calls to the ``ecr:GetAuthorizationToken`` API through an IAM policy before they can authenticate to a registry and push or pull any images from any Amazon ECR repository.
+
+
+.. code-block:: json
+
+    { 
+      "Sid": "ECRUtilities",
+      "Effect": "Allow",
+      "Action": [
+        "ecr:GetAuthorizationToken",  
+        "ecr:DescribeRepositories"    
+      ],
+      "Resource": "*"
+    }
 
 
 How to create the CloudFormation Stack
