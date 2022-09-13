@@ -51,9 +51,9 @@ Wazuh manager
 ==============================================================    =============
 Reference                                                         Description
 ==============================================================    =============
-`#14752 <https://github.com/wazuh/wazuh/pull/14752>`_             Fixed wrong field assignation in Audit decoders (thanks to @pyama86).
-`#14825 <https://github.com/wazuh/wazuh/pull/14825>`_             Prevented wazuh-remoted from cleaning the multigroup folder in worker nodes.
-`#14772 <https://github.com/wazuh/wazuh/pull/14772>`_             Fixed rule skipping in wazuh-analysisd when the option if_sid is invalid.
+`#14752 <https://github.com/wazuh/wazuh/pull/14752>`_             A wrong field assignation in Audit decoders is fixed.
+`#14825 <https://github.com/wazuh/wazuh/pull/14825>`_             A performance problem related to the synchronization of files through the cluster is fixed. Avoiding ``wazuh-remoted`` from cleaning the multigroup folder in worker nodes.
+`#14772 <https://github.com/wazuh/wazuh/pull/14772>`_             The rule skipping in ``wazuh-analysisd`` when the option ``if_sid`` is invalid is fixed.
 ==============================================================    =============
 
 Wazuh agent
@@ -62,7 +62,7 @@ Wazuh agent
 ==============================================================    =============
 Reference                                                         Description
 ==============================================================    =============
-`#14801 <https://github.com/wazuh/wazuh/pull/14801>`_             Fixed a path traversal flaw in Active Response affecting agents from v3.6.1 to v4.3.7 (reported by @guragainroshan0).
+`#14801 <https://github.com/wazuh/wazuh/pull/14801>`_             A path traversal flaw in Active Response affecting agents from v3.6.1 to v4.3.7 is fixed. Thanks to Roshan Guragain for reporting this vulnerability.
 ==============================================================    =============
 
 Changelogs
