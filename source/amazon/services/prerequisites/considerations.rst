@@ -44,8 +44,7 @@ Below there is an example of a manual execution of the module using the ``--repa
 
 .. code-block:: console
 
-  # cd /var/ossec/wodles/aws
-  # ./aws-s3 -b 'wazuh-example-bucket' --reparse --only_logs_after '2021-Jun-10' --debug 2
+  # /var/ossec/wodles/aws/aws-s3 -b 'wazuh-example-bucket' --reparse --only_logs_after '2021-Jun-10' --debug 2
 
 The ``--debug 2`` parameter was used to get a verbose output since by default the script won't print anything on the terminal, and it could seem like it's not working when it could be handling a great amount of data instead.
 
