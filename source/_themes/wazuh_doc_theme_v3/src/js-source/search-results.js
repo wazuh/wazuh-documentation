@@ -50,7 +50,7 @@ if ( $('.search') ) {
               const elementObj = $(resultsContainer);
               const pageTitle = document.createElement('h1');
               $(pageTitle).text('Search results for: ');
-              $('<span class="query-term">' + queryTerm  + '</span>').appendTo(pageTitle);
+              $('<span class="query-term"></span>').appendTo(pageTitle).text(queryTerm);
               elementObj.append(pageTitle);
               const status = $('<p class="search-summary" style="display: none;">&nbsp;</p>').appendTo(elementObj);
               const resultList = $('<ul class="search"/>').appendTo(elementObj);
