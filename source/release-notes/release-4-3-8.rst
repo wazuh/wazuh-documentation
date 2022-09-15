@@ -32,7 +32,7 @@ Reference                                                         Description
 ==============================================================    =============
 `#14752 <https://github.com/wazuh/wazuh/pull/14752>`_             A wrong field assignation in Audit decoders is fixed.
 `#14825 <https://github.com/wazuh/wazuh/pull/14825>`_             A performance problem related to the synchronization of files through the cluster is fixed. Avoiding ``wazuh-remoted`` from cleaning the multigroup folder in worker nodes.
-`#14772 <https://github.com/wazuh/wazuh/pull/14772>`_             The rule skipping in ``wazuh-analysisd`` when the option ``if_sid`` is invalid is fixed.
+`#14772 <https://github.com/wazuh/wazuh/pull/14772>`_             The rule skipped in ``wazuh-analysisd`` when the option ``if_sid`` is invalid is fixed.
 ==============================================================    =============
 
 Wazuh agent
@@ -50,7 +50,7 @@ Packages
 ==============================================================    =============
 Reference                                                         Description
 ==============================================================    =============
-`#1798 <https://github.com/wazuh/wazuh-packages/pull/1798>`__     Some erros on the ``wazuh-certs-tool.sh`` are fixed.
+`#1798 <https://github.com/wazuh/wazuh-packages/pull/1798>`__     Some errors on the ``wazuh-certs-tool.sh`` are fixed.
 `#1806 <https://github.com/wazuh/wazuh-packages/pull/1806>`__     An error in the ``wazuh-dashboard`` API is fixed.
 ==============================================================    =============
 
