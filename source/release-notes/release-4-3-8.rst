@@ -44,6 +44,16 @@ Reference                                                         Description
 `#14801 <https://github.com/wazuh/wazuh/pull/14801>`_             A path traversal flaw in Active Response affecting agents from v3.6.1 to v4.3.7 is fixed. Thanks to Roshan Guragain for reporting this vulnerability.
 ==============================================================    =============
 
+Packages
+^^^^^^^^
+
+==============================================================    =============
+Reference                                                         Description
+==============================================================    =============
+`#1798 <https://github.com/wazuh/wazuh-packages/pull/1798>`__     Some erros on the ``wazuh-certs-tool.sh`` are fixed.
+`#1806 <https://github.com/wazuh/wazuh-packages/pull/1806>`__     An error in the ``wazuh-dashboard`` API is fixed.
+==============================================================    =============
+
 Changelogs
 ----------
 
