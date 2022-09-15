@@ -18,27 +18,6 @@ Wazuh agent
 
 - `#14842 <https://github.com/wazuh/wazuh/pull/14842>`_ Updated root CA certificate in agents to validate WPK upgrades.
 
-  
-Wazuh dashboard
-^^^^^^^^^^^^^^^
-
-- Wazuh dashboard is now compatible with Wazuh 4.3.8.
-
-Wazuh Kibana plugin for Kibana 7.10.2
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-
-- Wazuh Kibana plugin is now compatible with Wazuh 4.3.8.
-
-Wazuh Kibana plugin for Kibana 7.16.x and 7.17.x
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-
-- Wazuh Kibana plugin is now compatible with Wazuh 4.3.8.
-
-Wazuh Splunk app
-^^^^^^^^^^^^^^^^
-
-- Wazuh Splunk app is now compatible with Wazuh 4.3.8.
-
 
 Resolved issues
 ---------------
