@@ -31,8 +31,8 @@ Wazuh manager
 Reference                                                         Description
 ==============================================================    =============
 `#14752 <https://github.com/wazuh/wazuh/pull/14752>`_             A wrong field assignation in Audit decoders is now fixed.
-`#14825 <https://github.com/wazuh/wazuh/pull/14825>`_             A performance problem related to the synchronization of files through the cluster is fixed. Avoiding ``wazuh-remoted`` from cleaning the multigroup folder in worker nodes.
-`#14772 <https://github.com/wazuh/wazuh/pull/14772>`_             The rule skipped in ``wazuh-analysisd`` when the option ``if_sid`` is invalid is fixed.
+`#14825 <https://github.com/wazuh/wazuh/pull/14825>`_             A performance problem when synchronizing files through the cluster is fixed. The multigroup folder in worker nodes is no longer cleaned upon node restart.
+`#14772 <https://github.com/wazuh/wazuh/pull/14772>`_             A problem when using an invalid syntax with the if_sid label is fixed. Now the rule is ignored if the listed if_sid rules are not separated by ` ` or `,`.
 ==============================================================    =============
 
 Wazuh agent
