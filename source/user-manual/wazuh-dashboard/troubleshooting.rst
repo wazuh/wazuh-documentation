@@ -115,6 +115,7 @@ This error means that the Wazuh manager and Wazuh dashboard versions do not matc
 
 To solve this issue, you need to either upgrade the component with the lower version or downgrade the component with the higher version. You can see more information about upgrading in our :doc:`upgrade guide</upgrade-guide/index>`.
 
+
 None of the above solutions are fixing my problem
 -------------------------------------------------
 
