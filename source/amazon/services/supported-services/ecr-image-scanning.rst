@@ -43,21 +43,21 @@ IAM
 
 .. code-block:: json
   
-  {
-          "Sid": "RoleCreator",
-          "Effect": "Allow",
-          "Action": [
-              "iam:CreateRole",
-              "iam:PutRolePolicy",
-              "iam:AttachRolePolicy",
-              "iam:DeleteRolePolicy",
-              "iam:DeleteRole",
-              "iam:GetRole",
-              "iam:GetRolePolicy",
-              "iam:PassRole"
-          ],
-          "Resource": "arn:aws:iam::user-id:role/*"
-      }
+   {
+      "Sid": "RoleCreator",
+      "Effect": "Allow",
+      "Action": [
+         "iam:CreateRole",
+         "iam:PutRolePolicy",
+         "iam:AttachRolePolicy",
+         "iam:DeleteRolePolicy",
+         "iam:DeleteRole",
+         "iam:GetRole",
+         "iam:GetRolePolicy",
+         "iam:PassRole"
+      ],
+      "Resource": "arn:aws:iam::user-id:role/*"
+   }
 
 Amazon Lambda and Amazon EventBridge
 """"""""""""""""""""""""""""""""""""
@@ -66,30 +66,30 @@ The following permissions are required to create/delete the resources handled by
   
 .. code-block:: json
 
-  {
-          "Sid": "TemplateRequired0",
-          "Effect": "Allow",
-          "Action": [
-              "lambda:RemovePermission",
-              "lambda:DeleteFunction",
-              "lambda:GetFunction",
-              "lambda:CreateFunction",
-              "lambda:AddPermission"
-          ],
-          "Resource": "arn:aws:lambda:region:user-id:*"
-      },
-      {
-          "Sid": "TemplateRequired1",
-          "Effect": "Allow",
-          "Action": [
-              "events:RemoveTargets",
-              "events:DeleteRule",
-              "events:PutRule",
-              "events:DescribeRule",
-              "events:PutTargets"
-          ],
-          "Resource": "arn:aws:events:region:user-id:*"
-      }
+   {
+      "Sid": "TemplateRequired0",
+      "Effect": "Allow",
+      "Action": [
+         "lambda:RemovePermission",
+         "lambda:DeleteFunction",
+         "lambda:GetFunction",
+         "lambda:CreateFunction",
+         "lambda:AddPermission"
+      ],
+      "Resource": "arn:aws:lambda:region:user-id:*"
+   },
+   {
+      "Sid": "TemplateRequired1",
+      "Effect": "Allow",
+      "Action": [
+         "events:RemoveTargets",
+         "events:DeleteRule",
+         "events:PutRule",
+         "events:DescribeRule",
+         "events:PutTargets"
+      ],
+      "Resource": "arn:aws:events:region:user-id:*"
+    }
 
 
 
@@ -100,25 +100,25 @@ The following permissions are required to create/delete any template based Cloud
 
 .. code-block:: json
 
-  {
-    "Sid": "CloudFormationStackCreation",
-    "Effect": "Allow",
-    "Action": [
-      "cloudformation:CreateStack",
-      "cloudformation:ValidateTemplate",
-      "cloudformation:CreateUploadBucket",
-      "cloudformation:GetTemplateSummary",
-      "cloudformation:DescribeStackEvents",
-      "cloudformation:DescribeStackResources",
-      "cloudformation:ListStacks",
-      "cloudformation:DeleteStack",
-      "s3:PutObject",
-      "s3:ListBucket",
-      "s3:GetObject",
-      "s3:CreateBucket"
-    ],
-    "Resource": "*"   
-  }
+   {
+      "Sid": "CloudFormationStackCreation",
+      "Effect": "Allow",
+      "Action": [
+         "cloudformation:CreateStack",
+         "cloudformation:ValidateTemplate",
+         "cloudformation:CreateUploadBucket",
+         "cloudformation:GetTemplateSummary",
+         "cloudformation:DescribeStackEvents",
+         "cloudformation:DescribeStackResources",
+         "cloudformation:ListStacks",
+         "cloudformation:DeleteStack",
+         "s3:PutObject",
+         "s3:ListBucket",
+         "s3:GetObject",
+         "s3:CreateBucket"
+      ],
+      "Resource": "*"   
+   }
 
 Amazon ECR usage permissions
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -129,22 +129,22 @@ The following permissions are required by Amazon ECR to `push images <https://do
 
 .. code-block:: json
 
-    {
+   {
       "Sid": "ScanPushImage",
       "Effect": "Allow",
       "Action": [
-        "ecr:CompleteLayerUpload",
-        "ecr:UploadLayerPart",
-        "ecr:InitiateLayerUpload",
-        "ecr:BatchCheckLayerAvailability",
-        "ecr:PutImage",
-        "ecr:ListImages",
-        "ecr:DescribeImages",
-        "ecr:DescribeImageScanFindings",
-        "ecr:StartImageScan"
+         "ecr:CompleteLayerUpload",
+         "ecr:UploadLayerPart",
+         "ecr:InitiateLayerUpload",
+         "ecr:BatchCheckLayerAvailability",
+         "ecr:PutImage",
+         "ecr:ListImages",
+         "ecr:DescribeImages",
+         "ecr:DescribeImageScanFindings",
+         "ecr:StartImageScan"
       ],
       "Resource": "arn:aws:ecr:region:user-id:repository/repository-name"
-    }
+   }
 
 ECR Registry and Repository
 """""""""""""""""""""""""""
@@ -155,15 +155,15 @@ ECR Registry and Repository
 
 .. code-block:: json
 
-    { 
+   { 
       "Sid": "ECRUtilities",
       "Effect": "Allow",
       "Action": [
-        "ecr:GetAuthorizationToken",  
-        "ecr:DescribeRepositories"    
+         "ecr:GetAuthorizationToken",  
+         "ecr:DescribeRepositories"    
       ],
       "Resource": "*"
-    }
+   }
 
 
 How to create the CloudFormation Stack
