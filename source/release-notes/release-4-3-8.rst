@@ -16,7 +16,7 @@ This release includes new features or enhancements as the following:
 Wazuh agent
 ^^^^^^^^^^^
 
-- `#14842 <https://github.com/wazuh/wazuh/pull/14842>`_ Updated root CA certificate in agents to validate WPK upgrades.
+- `#14842 <https://github.com/wazuh/wazuh/pull/14842>`_ Updated the WPK upgrade root CA certificate.
 
 
 Resolved issues
@@ -30,7 +30,7 @@ Wazuh manager
 ==============================================================    =============
 Reference                                                         Description
 ==============================================================    =============
-`#14752 <https://github.com/wazuh/wazuh/pull/14752>`_             A wrong field assignation in Audit decoders is fixed.
+`#14752 <https://github.com/wazuh/wazuh/pull/14752>`_             A wrong field assignation in Audit decoders is now fixed.
 `#14825 <https://github.com/wazuh/wazuh/pull/14825>`_             A performance problem related to the synchronization of files through the cluster is fixed. Avoiding ``wazuh-remoted`` from cleaning the multigroup folder in worker nodes.
 `#14772 <https://github.com/wazuh/wazuh/pull/14772>`_             The rule skipped in ``wazuh-analysisd`` when the option ``if_sid`` is invalid is fixed.
 ==============================================================    =============
@@ -50,8 +50,8 @@ Packages
 ==============================================================    =============
 Reference                                                         Description
 ==============================================================    =============
-`#1798 <https://github.com/wazuh/wazuh-packages/pull/1798>`__     Some errors in management and IP values extraction function in the ``wazuh-certs-tool.sh`` are fixed.
-`#1806 <https://github.com/wazuh/wazuh-packages/pull/1806>`__     An error while changing the password in the Wazuh dashboard configuration using ``wazuh-dashboard`` is fixed.
+`#1798 <https://github.com/wazuh/wazuh-packages/pull/1798>`__     Improved error management and IP values extraction function in the ``wazuh-certs-tool.sh``.
+`#1806 <https://github.com/wazuh/wazuh-packages/pull/1806>`__     An error while changing the password in the Wazuh dashboard configuration using ``wazuh-dashboard`` is now fixed.
 ==============================================================    =============
 
 Changelogs
