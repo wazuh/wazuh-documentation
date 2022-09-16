@@ -50,8 +50,8 @@ Packages
 ==============================================================    =============
 Reference                                                         Description
 ==============================================================    =============
-`#1798 <https://github.com/wazuh/wazuh-packages/pull/1798>`__     Some errors on the ``wazuh-certs-tool.sh`` are fixed.
-`#1806 <https://github.com/wazuh/wazuh-packages/pull/1806>`__     An error in the ``wazuh-dashboard`` API is fixed.
+`#1798 <https://github.com/wazuh/wazuh-packages/pull/1798>`__     Some errors in management and IP values extraction function in the ``wazuh-certs-tool.sh`` are fixed.
+`#1806 <https://github.com/wazuh/wazuh-packages/pull/1806>`__     An error while changing the password in the Wazuh dashboard configuration using ``wazuh-dashboard`` is fixed.
 ==============================================================    =============
 
 Changelogs
