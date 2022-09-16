@@ -1,7 +1,7 @@
 .. Copyright (C) 2015, Wazuh, Inc.
 
 .. meta::
-  :description: Discover how Wazuh can help you monitor the Office 365 audit log for your organization. Learn more about it in this section of our documentation.
+  :description: Discover how Wazuh helps you monitor the Office 365 audit log for your organization. Learn more about it in this section of our documentation.
   
 .. _office365:
 
