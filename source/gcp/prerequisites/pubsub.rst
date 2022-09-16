@@ -55,7 +55,7 @@ Follow the steps below to complete the **Create logs routing sink** form:
 #. **Sink destination**: select the sink service type and destination
 #. **Choose logs to include in sink**: create an inclusion filter to determine which logs are included
 #. **Choose logs to filter out to sink**: create exclusion filters to determine which logs are excluded
-#. Push the **CREATE SINK** button.
+#. Click the **CREATE SINK** button.
 
 .. thumbnail:: ../../images/gcp/gcp-sink.png
     :align: center
