@@ -39,68 +39,64 @@ IAM
 """
 
 .. warning::
-      The permissions inside the ``IAMRole`` section and the ``PassRole`` section are necessary in order to create/delete the stack based on the named template and can and should be deactivated once the creation process is finished due to overly permissive actions.
+      The permissions inside the ``RoleCreator`` section are necessary in order to create/delete the stack based on the named template and can and should be deactivated once the creation process is finished due to overly permissive actions.
 
 .. code-block:: json
   
   {
-        "Sid": "RoleCreator",
-        "Effect": "Allow",
-        "Action": [
-          "iam:CreateRole",
-          "iam:PutRolePolicy",
-          "iam:AttachRolePolicy",
-          "iam:DeleteRolePolicy",
-          "iam:DeleteRole",
-          "iam:GetRole",
-          "iam:GetRolePolicy"
-        ],
-        "Resource": "*",
-        "Condition": {
-          "StringEquals": {"iam:PassedToService": "replicator.lambda.amazonaws.com"}
-        }
-      },
-      {
-        "Sid": "PassRole",
-        "Effect": "Allow",
-        "Action": "iam:PassRole",
-        "Resource": "*",
-        "Condition": {
-          "StringEquals": {"iam:PassedToService": "replicator.lambda.amazonaws.com"}
-        }
+          "Sid": "RoleCreator",
+          "Effect": "Allow",
+          "Action": [
+              "iam:CreateRole",
+              "iam:PutRolePolicy",
+              "iam:AttachRolePolicy",
+              "iam:DeleteRolePolicy",
+              "iam:DeleteRole",
+              "iam:GetRole",
+              "iam:GetRolePolicy",
+              "iam:PassRole"
+          ],
+          "Resource": "arn:aws:iam::user-id:role/*"
       }
 
 Amazon Lambda and Amazon EventBridge
 """"""""""""""""""""""""""""""""""""
 
-The following permissions are required to create/delete the resources handled by the Scan Findings Logger template
+The following permissions are required to create/delete the resources handled by the Scan Findings Logger template.
   
 .. code-block:: json
 
   {
-    "Sid": "TemplateRequired",
-    "Effect": "Allow",
-    "Action": [
-      "lambda:RemovePermission",
-      "lambda:DeleteFunction",
-      "lambda:GetFunction",
-      "lambda:CreateFunction",
-      "lambda:AddPermission",
-      "events:RemoveTargets",
-      "events:DeleteRule",
-      "events:PutRule",
-      "events:DescribeRule",
-      "events:PutTargets"
-    ],
-    "Resource": "*"
-  }
+          "Sid": "TemplateRequired0",
+          "Effect": "Allow",
+          "Action": [
+              "lambda:RemovePermission",
+              "lambda:DeleteFunction",
+              "lambda:GetFunction",
+              "lambda:CreateFunction",
+              "lambda:AddPermission"
+          ],
+          "Resource": "arn:aws:lambda:region:user-id:*"
+      },
+      {
+          "Sid": "TemplateRequired1",
+          "Effect": "Allow",
+          "Action": [
+              "events:RemoveTargets",
+              "events:DeleteRule",
+              "events:PutRule",
+              "events:DescribeRule",
+              "events:PutTargets"
+          ],
+          "Resource": "arn:aws:events:region:user-id:*"
+      }
 
 
 
 CloudFormation Stack
 ~~~~~~~~~~~~~~~~~~~~
 
-The following permissions are required to create/delete any template based CloudFormation stack
+The following permissions are required to create/delete any template based CloudFormation stack.
 
 .. code-block:: json
 
@@ -129,7 +125,7 @@ Amazon ECR usage permissions
 Image Pushing and Scanning
 """"""""""""""""""""""""""
 
-  The following permissions are required by Amazon ECR to `push images <https://docs.aws.amazon.com/AmazonECR/latest/userguide/image-push.html#image-push-iam>`_ and are scoped down to a specific repository. The steps to push Docker images is also described in the `Amazon ECR - Pushing a Docker image <https://docs.aws.amazon.com/AmazonECR/latest/userguide/docker-push-ecr-image.html>`_ documentation.
+The following permissions are required by Amazon ECR to `push images <https://docs.aws.amazon.com/AmazonECR/latest/userguide/image-push.html#image-push-iam>`_ and are scoped down to a specific repository. The steps to push Docker images is also described in the `Amazon ECR - Pushing a Docker image <https://docs.aws.amazon.com/AmazonECR/latest/userguide/docker-push-ecr-image.html>`_ documentation.
 
 .. code-block:: json
 
@@ -154,7 +150,7 @@ ECR Registry and Repository
 """""""""""""""""""""""""""
 
 .. note::
-      The permission "ecr:GetAuthorizationToken" is required by `Amazon ECR <https://docs.aws.amazon.com/AmazonECR/latest/userguide/set-repository-policy.html>`_ for users to have permission to make calls to the ``ecr:GetAuthorizationToken`` API through an IAM policy before they can authenticate to a registry and push or pull any images from any Amazon ECR repository.
+      The permission ``ecr:GetAuthorizationToken`` is required by `Amazon ECR <https://docs.aws.amazon.com/AmazonECR/latest/userguide/set-repository-policy.html>`_ for users to have permission to make calls to the API through an IAM policy before they can authenticate to a registry and push or pull any images from any Amazon ECR repository.
 
 
 .. code-block:: json
