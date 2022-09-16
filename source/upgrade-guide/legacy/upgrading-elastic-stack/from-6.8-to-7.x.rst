@@ -1,5 +1,8 @@
 .. Copyright (C) 2015, Wazuh, Inc.
 
+.. meta::
+   :description: This section of the Wazuh documentation guides through the upgrade process of the Elastic Stack from 6.8 to 7.x.
+
 .. _upgrading_elastic_stack_6.8_7.x:
 
 Upgrading Elastic Stack from 6.8 to 7.x

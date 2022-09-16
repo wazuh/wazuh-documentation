@@ -1,5 +1,8 @@
 .. Copyright (C) 2015, Wazuh, Inc.
 
+.. meta::
+  :description: Amazon CLB makes routing decisions at either the transport layer or the application layer. Learn how to use Amazon CLB with Wazuh in this section.
+
 .. _amazon_clb:
 
 Amazon CLB

@@ -1,5 +1,8 @@
 .. Copyright (C) 2015, Wazuh, Inc.
 
+.. meta::
+   :description: This section of the Wazuh documentation guides through the upgrade process of the Wazuh agent from 1.x to 2.x.
+  
 .. _upgrading_agent_1.x_2.x:
 
 Upgrading the Wazuh agent from 1.x to 2.x

@@ -1,9 +1,9 @@
 .. Copyright (C) 2015, Wazuh, Inc.
 
-.. _azure_log_analytics:
-
 .. meta::
-  :description: Discover the numerous ways that Wazuh provides to monitor your Microsoft Azure infrastructure activity.
+  :description: Azure Log Analytics is a service that monitors Azure infrastructures offering query capabilities. Learn how to use Log Analytics with Wazuh in this section.
+  
+.. _azure_log_analytics:
 
 Using Azure Log Analytics
 =========================

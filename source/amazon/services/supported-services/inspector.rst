@@ -1,5 +1,8 @@
 .. Copyright (C) 2015, Wazuh, Inc.
 
+.. meta::
+  :description: Amazon Inspector is an automated security assessment service. Learn how to use Amazon Inspector with Wazuh in this section of our documentation.
+
 .. _amazon_inspector:
 
 Amazon Inspector
