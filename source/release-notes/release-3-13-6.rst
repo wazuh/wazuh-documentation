@@ -19,6 +19,11 @@ Wazuh core
 
 - `#14823 <https://github.com/wazuh/wazuh/pull/14823>`_  A path traversal flaw in Active Response affecting agents from v3.6.1 is fixed.
 
+Wazuh Kibana app
+----------------
+
+- Support for Wazuh v3.13.6.
+  
 Wazuh Splunk
 ------------
 
