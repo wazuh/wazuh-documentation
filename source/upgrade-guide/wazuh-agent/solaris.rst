@@ -15,9 +15,9 @@ Select your Solaris version and follow the steps to upgrade the Wazuh agent.
    
       #. Download the latest Solaris 11 installer. Choose one option depending on the host architecture. 
       
-         * `Solaris 11 i386 installer <https://packages.wazuh.com/|WAZUH_CURRENT_MAJOR_SOLARIS11|/solaris/i386/11/wazuh-agent_v|WAZUH_CURRENT_SOLARIS11|-sol11-i386.p5p>`_ 
+         * `Solaris 11 i386 installer <https://packages.wazuh.com/|WAZUH_CURRENT_MAJOR_SOLARIS11_i386|/solaris/i386/11/wazuh-agent_v|WAZUH_CURRENT_SOLARIS11_i386|-sol11-i386.p5p>`_ 
 
-         * `Solaris 11 sparc installer <https://packages.wazuh.com/|WAZUH_CURRENT_MAJOR_SOLARIS11|/solaris/sparc/11/wazuh-agent_v|WAZUH_CURRENT_SOLARIS11|-sol11-sparc.p5p>`_
+         * `Solaris 11 sparc installer <https://packages.wazuh.com/|WAZUH_CURRENT_MAJOR_SOLARIS11_SPARC|/solaris/sparc/11/wazuh-agent_v|WAZUH_CURRENT_SOLARIS11_SPARC|-sol11-sparc.p5p>`_
    
       #. Stop the Wazuh agent. 
    
@@ -32,13 +32,13 @@ Select your Solaris version and follow the steps to upgrade the Wazuh agent.
    
             .. code-block:: console
    
-               # pkg install -g wazuh-agent_v|WAZUH_CURRENT_SOLARIS11|-sol11-i386.p5p wazuh-agent
+               # pkg install -g wazuh-agent_v|WAZUH_CURRENT_SOLARIS11_i386|-sol11-i386.p5p wazuh-agent
    
          * Solaris 11 sparc:
    
             .. code-block:: console
    
-               # pkg install -g wazuh-agent_v|WAZUH_CURRENT_SOLARIS11|-sol11-sparc.p5p wazuh-agent
+               # pkg install -g wazuh-agent_v|WAZUH_CURRENT_SOLARIS11_SPARC|-sol11-sparc.p5p wazuh-agent
    
    
       #. Start the Wazuh agent. 
@@ -52,9 +52,9 @@ Select your Solaris version and follow the steps to upgrade the Wazuh agent.
 
       #. Download the latest Solaris 10 installer. Choose one option depending on the host architecture.
    
-         * `Solaris 10 i386 installer <https://packages.wazuh.com/|WAZUH_CURRENT_MAJOR_SOLARIS10|/solaris/i386/10/wazuh-agent_v|WAZUH_CURRENT_SOLARIS10|-sol10-i386.pkg>`_ 
+         * `Solaris 10 i386 installer <https://packages.wazuh.com/|WAZUH_CURRENT_MAJOR_SOLARIS10_i386|/solaris/i386/10/wazuh-agent_v|WAZUH_CURRENT_SOLARIS10_i386|-sol10-i386.pkg>`_ 
 
-         * `Solaris 10 sparc installer <https://packages.wazuh.com/|WAZUH_CURRENT_MAJOR_SOLARIS10|/solaris/sparc/10/wazuh-agent_v|WAZUH_CURRENT_SOLARIS10|-sol10-sparc.pkg>`_ 
+         * `Solaris 10 sparc installer <https://packages.wazuh.com/|WAZUH_CURRENT_MAJOR_SOLARIS10_SPARC|/solaris/sparc/10/wazuh-agent_v|WAZUH_CURRENT_SOLARIS10_SPARC|-sol10-sparc.pkg>`_ 
    
       #. Stop the Wazuh agent.
    
@@ -84,13 +84,13 @@ Select your Solaris version and follow the steps to upgrade the Wazuh agent.
    
             .. code-block:: console
    
-               # pkgadd -d wazuh-agent_v|WAZUH_CURRENT_SOLARIS10|-sol10-i386.pkg wazuh-agent
+               # pkgadd -d wazuh-agent_v|WAZUH_CURRENT_SOLARIS10_i386|-sol10-i386.pkg wazuh-agent
    
          * Solaris 10 sparc:
    
             .. code-block:: console
    
-               # pkgadd -d wazuh-agent_v|WAZUH_CURRENT_SOLARIS10|-sol10-sparc.pkg wazuh-agent
+               # pkgadd -d wazuh-agent_v|WAZUH_CURRENT_SOLARIS10_SPARC|-sol10-sparc.pkg wazuh-agent
    
    
       #. Restore the ``ossec.conf`` and ``client.keys`` files.
