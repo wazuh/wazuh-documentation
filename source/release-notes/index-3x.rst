@@ -10,6 +10,7 @@ This section summarizes the most important features of each Wazuh 3.x release.
 =============================================  ====================
 Wazuh version                                  Release date
 =============================================  ====================
+:doc:`3.13.6 </release-notes/release-3-13-6>`  19 September 2022
 :doc:`3.13.5 </release-notes/release-3-13-5>`  24 August 2022
 :doc:`3.13.4 </release-notes/release-3-13-4>`  30 May 2022
 :doc:`3.13.3 </release-notes/release-3-13-3>`  28 April 2021  
@@ -60,6 +61,7 @@ Wazuh version                                  Release date
 
    .. toctree::
 
+       3.13.6 Release notes <release-3-13-6>
        3.13.5 Release notes <release-3-13-5>
        3.13.4 Release notes <release-3-13-4>
        3.13.3 Release notes <release-3-13-3>
