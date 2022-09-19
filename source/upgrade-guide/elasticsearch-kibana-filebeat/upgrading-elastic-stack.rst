@@ -41,7 +41,45 @@ Preparing the upgrade
 
 
 
-#. Repeat the previous step for every Wazuh node.
+#. **Recommended** — Backup the following configuration files and data.
+
+   **Elasticsearch**
+
+   |  ``/etc/elasticsearch/elasticsearch.yml``
+   |  ``/usr/lib/sysctl.d/elasticsearch.conf``
+   |  ``/etc/elasticsearch/jvm.options``
+   |
+   |  If your are using x-pack, you need to save certificates and role mappings.
+
+   **Wazuh manager**
+
+   |  ``/var/ossec/api/configuration/``
+   |  ``/var/ossec/etc/``
+   |  ``/var/ossec/logs/``
+   |
+   |  ``/var/ossec/queue/agent-groups/``
+   |
+   |  
+   |  ``/var/ossec/queue/agentless/``
+   |  ``/var/ossec/queue/cluster/``
+   |  ``/var/ossec/queue/rids/``
+   |  ``/var/ossec/queue/fts/``
+   |  ``/var/ossec/var/multigroups/``
+
+   The following folder must be copied with the Wazuh manager service stopped.
+
+   |  ``/var/ossec/queue/db``
+
+   **Kibana**
+
+   |  ``/etc/kibana/kibana.yml``
+   |  ``/usr/share/kibana/data/wazuh/config/wazuh.yml``
+
+   ..
+      You can also export dashboard from **Management > Saved Objects**
+      Dashboards are stored in the .kibana index.
+
+#. Repeat the previous steps for every Wazuh node.
 
 Upgrading the Wazuh manager
 ---------------------------

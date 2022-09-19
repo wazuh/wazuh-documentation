@@ -55,6 +55,44 @@ In the case Wazuh is installed in a multi-node cluster configuration, repeat the
             # service filebeat stop
             # service wazuh-dashboard stop
 
+#. **Recommended** — Backup the following configuration files and data.
+
+   **Wazuh indexer**
+
+   |  ``/etc/wazuh-indexer/opensearch.yml``
+   |  ``/usr/lib/sysctl.d/wazuh-indexer.conf``
+   |  ``/etc/wazuh-indexer/jvm.options``
+   |  Certificates and role mapping files
+
+   **Wazuh manager**
+
+   |  ``/var/ossec/api/configuration/``
+   |  ``/var/ossec/etc/``
+   |  ``/var/ossec/logs/``
+   |
+   |  ``/var/ossec/queue/agent-groups/``
+   |
+   |  ``/var/ossec/queue/agents-timestamp``
+   |  ``/var/ossec/queue/agentless/``
+   |  ``/var/ossec/queue/cluster/``
+   |  ``/var/ossec/queue/rids/``
+   |  ``/var/ossec/queue/fts/``
+   |  ``/var/ossec/var/multigroups/``
+
+   The following folder must be copied with the Wazuh manager service stopped.
+
+   |  ``/var/ossec/queue/db``
+   
+   **Wazuh dashboard**
+
+   |  ``/etc/wazuh-dashboard/opensearch_dashboards.yml``
+   |  ``/usr/share/wazuh-dashboard/data/wazuh/config/wazuh.yml``
+
+..
+   You can also export dashboard from **Management > Saved Objects**
+   Dashboards are stored in the .kibana index.
+
+
 Upgrading the Wazuh indexer
 ---------------------------
 
