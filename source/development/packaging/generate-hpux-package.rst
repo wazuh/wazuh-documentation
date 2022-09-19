@@ -1,7 +1,7 @@
 .. Copyright (C) 2015, Wazuh, Inc.
 
 .. meta::
-  :description: Wazuh provides an automated way of building HPUX packages. Learn how to build HPUX packages in this section of our documentation.
+  :description: Wazuh provides an automated way of building HPUX packages. Learn how to build your own Wazuh HPUX packages in this section of our documentation.
 
 .. _create-hpux:
 

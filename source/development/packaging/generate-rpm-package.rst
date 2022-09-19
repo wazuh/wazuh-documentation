@@ -1,7 +1,7 @@
 .. Copyright (C) 2015, Wazuh, Inc.
 
 .. meta::
-  :description: Wazuh provides an automated way of building RPM packages. Learn how to build RPM packages in this section of our documentation.
+  :description: Wazuh provides an automated way of building RPM packages. Learn how to build your own Wazuh RPM packages in this section of our documentation.
 
 .. _create-rpm:
 

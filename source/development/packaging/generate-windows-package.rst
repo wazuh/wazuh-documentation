@@ -1,7 +1,7 @@
 .. Copyright (C) 2015, Wazuh, Inc.
 
 .. meta::
-  :description: Wazuh provides an automated way of building Windows packages. Learn how to build Windows packages in this section of our documentation.
+  :description: Wazuh provides an automated way of building Windows packages. Learn how to build your own Wazuh Windows packages in this section of our documentation.
 
 .. _create-windows:
 
