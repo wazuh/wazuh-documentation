@@ -32,7 +32,7 @@ Reference                                                         Description
 ==============================================================    =============
 `#14752 <https://github.com/wazuh/wazuh/pull/14752>`_             A wrong field assignation in Audit decoders is now fixed.
 `#14825 <https://github.com/wazuh/wazuh/pull/14825>`_             A performance problem when synchronizing files through the cluster is fixed. The multigroup folder in worker nodes is no longer cleaned upon node restart.
-`#14772 <https://github.com/wazuh/wazuh/pull/14772>`_             A problem when using an invalid syntax with the if_sid label is fixed. Now the rule is ignored if the listed if_sid rules are not separated by ` ` or `,`.
+`#14772 <https://github.com/wazuh/wazuh/pull/14772>`_             A problem when using an invalid syntax with the ``if_sid`` label is fixed. Now the rule is ignored if the listed ``if_sid`` rules are not separated by spaces or commas.
 ==============================================================    =============
 
 Wazuh agent
@@ -51,7 +51,7 @@ Packages
 Reference                                                         Description
 ==============================================================    =============
 `#1798 <https://github.com/wazuh/wazuh-packages/pull/1798>`__     Improved error management and IP values extraction function in the ``wazuh-certs-tool.sh``.
-`#1806 <https://github.com/wazuh/wazuh-packages/pull/1806>`__     An error while changing the password in the Wazuh dashboard configuration using ``wazuh-dashboard`` is now fixed.
+`#1806 <https://github.com/wazuh/wazuh-packages/pull/1806>`__     An error while changing the password in the Wazuh dashboard configuration using ``wazuh-install.sh`` is now fixed.
 ==============================================================    =============
 
 Changelogs
