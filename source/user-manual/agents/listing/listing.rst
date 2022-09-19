@@ -1,7 +1,7 @@
 .. Copyright (C) 2015, Wazuh, Inc.
 
 .. meta::
-   :description: Find out how to list Wazuh agents using the Wazuh API in this section of the Wazuh documentation.  
+   :description: Find out how to list Wazuh agents using the Wazuh API. Learn more about it in this section of the Wazuh documentation.  
  
 .. _restful-api-listing:
 
