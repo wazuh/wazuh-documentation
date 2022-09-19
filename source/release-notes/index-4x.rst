@@ -1,4 +1,5 @@
 .. Copyright (C) 2015, Wazuh, Inc.
+
 .. meta::
   :description: Check out Wazuh 4.x release notes. Every update of the solution is cumulative and includes all enhancements and fixes from previous releases.
   

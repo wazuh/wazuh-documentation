@@ -1,5 +1,8 @@
 .. Copyright (C) 2015, Wazuh, Inc.
 
+.. meta::
+  :description: Active response allows the execution of scripts when an event matches certain rules in the Wazuh ruleset. Learn more about it in this section.
+
 .. _pci_dss_active_response:
 
 Active response
