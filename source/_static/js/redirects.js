@@ -2169,6 +2169,7 @@ redirections.push(
 );
 
 newUrls['3.13'] = [
+  '/release-notes/release-3-13-6.html', 
   '/release-notes/release-3-13-5.html', 
   '/release-notes/release-3-13-4.html',  
   '/release-notes/release_3_13_3.html',
