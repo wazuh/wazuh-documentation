@@ -39,7 +39,7 @@ IAM
 """
 
 .. warning::
-      The permissions inside the ``RoleCreator`` section are necessary in order to create/delete the stack based on the named template and can and should be deactivated once the creation process is finished due to overly permissive actions.
+      The permissions inside the ``RoleCreator`` and ``PassRole`` sections are necessary in order to create/delete the stack based on the named template and must be bound to the described specific resources due to overly permissive actions.
 
 .. code-block:: json
   
@@ -57,6 +57,12 @@ IAM
          "iam:PassRole"
       ],
       "Resource": "arn:aws:iam::user-id:role/*"
+   },
+   {
+      "Sid": "PassRole",
+      "Effect": "Allow",
+      "Action": "iam:PassRole",
+      "Resource": "arn:aws:iam::user-id:role/*-LambdaExecutionRole*"
    }
 
 Amazon Lambda and Amazon EventBridge
