@@ -1,5 +1,8 @@
 .. Copyright (C) 2015, Wazuh, Inc.
 
+.. meta::
+  :description: Find out configuration options of the OpenSCAP wodle. Learn more about it in this section of the Wazuh documentation.
+  
 .. _wodle_openscap:
 
 wodle name="open-scap"

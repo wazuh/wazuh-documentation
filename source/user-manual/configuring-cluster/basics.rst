@@ -1,7 +1,7 @@
 .. Copyright (C) 2015, Wazuh, Inc.
 
 .. meta::
-    :description: A Wazuh cluster is a group of Wazuh managers that work together to enhance the availability and scalability of the service. Learn more about it here. 
+  :description: A Wazuh cluster is a group of Wazuh managers that work together to enhance the availability and scalability of the service. Learn more about it here. 
     
 .. _wazuh-cluster-introduction:
 

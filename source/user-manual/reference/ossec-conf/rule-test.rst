@@ -1,5 +1,8 @@
 .. Copyright (C) 2015, Wazuh, Inc.
 
+.. meta::
+  :description: Find out how to configure the Wazuh-Logtest solution to test rules and decoders from Wazuh API. Learn more about it in this section.
+
 .. _reference_ossec_rule_test:
 
 rule_test

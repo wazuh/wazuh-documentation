@@ -1,7 +1,7 @@
 .. Copyright (C) 2015, Wazuh, Inc.
 
 .. meta::
-    :description: Learn how the agent_control program allows you to query the manager for information about any agent and initiate a syscheck/rootcheck scan on an agent. 
+  :description: Learn how the agent_control program allows you to query the manager for information about any agent and initiate a syscheck/rootcheck scan on an agent. 
 
 .. _agent_control:
 

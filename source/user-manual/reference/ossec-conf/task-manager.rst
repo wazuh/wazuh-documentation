@@ -1,5 +1,8 @@
 .. Copyright (C) 2015, Wazuh, Inc.
 
+.. meta::
+  :description: The task manager module is responsible for managing all the tasks that run on the agents. Learn more about it in this section of the Wazuh documentation.
+
 .. _reference_ossec_task_manager:
 
 task-manager

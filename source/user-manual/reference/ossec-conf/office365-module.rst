@@ -1,5 +1,8 @@
 .. Copyright (C) 2015, Wazuh, Inc.
 
+.. meta::
+  :description: Find out how to configure the Wazuh Office365 module. Learn more about it in this section of the Wazuh documentation.
+  
 .. _office365-module:
 
 office365

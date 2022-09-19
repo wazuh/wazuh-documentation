@@ -1,5 +1,8 @@
 .. Copyright (C) 2015, Wazuh, Inc.
 
+.. meta::
+  :description: Find out how to configure the severity level threshold for logging or to send alerts and the geolocation feature. Learn more about it in this section.
+
 .. _reference_ossec_alerts:
 
 alerts
