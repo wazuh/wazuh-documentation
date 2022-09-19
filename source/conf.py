@@ -42,8 +42,8 @@ is_latest_release = True
 
 # The full version, including alpha/beta/rc tags
 # Important: use a valid branch (4.0) or, preferably, tag name (v4.0.0)
-release = '4.3.7'
-api_tag = 'v4.3.7'
+release = '4.3.8'
+api_tag = 'v4.3.8'
 apiURL = 'https://raw.githubusercontent.com/wazuh/wazuh/'+api_tag+'/api/api/spec/spec.yaml'
 
 # -- General configuration ------------------------------------------------
@@ -563,16 +563,32 @@ custom_replacements = {
     "|WAZUH_REVISION_OSX|" : "1",
     "|WAZUH_CURRENT_MAJOR_SOLARIS|" : "4.x",
     #"|WAZUH_CURRENT_MINOR_SOLARIS|" :
-    "|WAZUH_CURRENT_SOLARIS|" : release, # The lesser of WAZUH_CURRENT_MAJOR_SOLARIS10 and 11
+    "|WAZUH_CURRENT_SOLARIS|" : "4.3.7", # The lesser of WAZUH_CURRENT_MAJOR_SOLARIS10 and 11
     #"|WAZUH_REVISION_SOLARIS|" : "1",
     "|WAZUH_CURRENT_MAJOR_SOLARIS10|" : "4.x",
     #"|WAZUH_CURRENT_MINOR_SOLARIS10|" :
-    "|WAZUH_CURRENT_SOLARIS10|" : release,
+    "|WAZUH_CURRENT_SOLARIS10|" : "4.3.7",
     #"|WAZUH_REVISION_SOLARIS10|" : "1",
     "|WAZUH_CURRENT_MAJOR_SOLARIS11|" : "4.x",
     #"|WAZUH_CURRENT_MINOR_SOLARIS11|" :
-    "|WAZUH_CURRENT_SOLARIS11|" : release,
+    "|WAZUH_CURRENT_SOLARIS11|" : "4.3.7",
     #"|WAZUH_REVISION_SOLARIS11|" : "1",
+    "|WAZUH_CURRENT_MAJOR_SOLARIS10_i386|" : "4.x",
+    #"|WAZUH_CURRENT_MINOR_SOLARIS10_i386|" :
+    "|WAZUH_CURRENT_SOLARIS10_i386|" : release,
+    #"|WAZUH_REVISION_SOLARIS10_i386|" : "1",
+    "|WAZUH_CURRENT_MAJOR_SOLARIS10_SPARC|" : "4.x",
+    #"|WAZUH_CURRENT_MINOR_SOLARIS10_SPARC|" :
+    "|WAZUH_CURRENT_SOLARIS10_SPARC|" : "4.3.7",
+    #"|WAZUH_REVISION_SOLARIS10_SPARC|" : "1",
+    "|WAZUH_CURRENT_MAJOR_SOLARIS11_i386|" : "4.x",
+    #"|WAZUH_CURRENT_MINOR_SOLARIS11_i386|" :
+    "|WAZUH_CURRENT_SOLARIS11_i386|" : release,
+    #"|WAZUH_REVISION_SOLARIS11_i386|" : "1",
+    "|WAZUH_CURRENT_MAJOR_SOLARIS11_SPARC|" : "4.x",
+    #"|WAZUH_CURRENT_MINOR_SOLARIS11_SPARC|" :
+    "|WAZUH_CURRENT_SOLARIS11_SPARC|" : "4.3.7",
+    #"|WAZUH_REVISION_SOLARIS11_SPARC|" : "1",
     "|WAZUH_CURRENT_MAJOR_AIX|" : "4.x",
     #"|WAZUH_CURRENT_MINOR_AIX|" :
     "|WAZUH_CURRENT_AIX|" : release,
