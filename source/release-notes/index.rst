@@ -25,6 +25,7 @@ This section summarizes the most important features of each Wazuh release.
         release_4_0_2
         release_4_0_1
         release_4_0_0
+        release-3-13-6
         release-3-13-5
         release-3-13-4
         release_3_13_3
