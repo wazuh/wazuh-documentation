@@ -469,16 +469,16 @@ def customReplacements(app, docname, source):
     source[0] = result
 
 custom_replacements = {
-    "|WAZUH_LATEST|" : "3.13.5",
+    "|WAZUH_LATEST|" : "3.13.6",
     "|WAZUH_LATEST_MINOR|" : "3.13",
     "|WAZUH_PACKAGES_BRANCH|" : "legacy",
-    "|WAZUH_LATEST_ANSIBLE|" : "3.13.5",
-    "|WAZUH_LATEST_KUBERNETES|" : "3.13.5",
-    "|WAZUH_LATEST_PUPPET|" : "3.13.5",
-    "|WAZUH_LATEST_OVA|" : "3.13.5",
-    "|WAZUH_LATEST_HPUX|": "3.13.5",
+    "|WAZUH_LATEST_ANSIBLE|" : "3.13.6",
+    "|WAZUH_LATEST_KUBERNETES|" : "3.13.6",
+    "|WAZUH_LATEST_PUPPET|" : "3.13.6",
+    "|WAZUH_LATEST_OVA|" : "3.13.6",
+    "|WAZUH_LATEST_HPUX|": "3.13.6",
     "|WAZUH_LATEST_SPARC|": "3.13.5",
-    "|WAZUH_LATEST_DOCKER|" : "3.13.5",
+    "|WAZUH_LATEST_DOCKER|" : "3.13.6",
     "|ELASTICSEARCH_LATEST|" : "7.9.2",
     "|ELASTICSEARCH_ODFE|" : "7.8.0",
     "|ELASTICSEARCH_LATEST_OVA|" : "7.9.2",
