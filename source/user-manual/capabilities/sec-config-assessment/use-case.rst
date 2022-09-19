@@ -1,5 +1,8 @@
 .. Copyright (C) 2015, Wazuh, Inc.
 
+.. meta::
+  :description: Find out how to get an alert when a check changes its result value. Learn more in this section of the Wazuh documentation.
+
 Use case: Getting an alert when a check changes its result value
 ================================================================
 
