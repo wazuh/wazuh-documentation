@@ -29,7 +29,6 @@ const pageSpecificJS = {
     SRC_PATH + "components/local-toc.js",
     SRC_PATH + "components/code-blocks.js",
     SRC_PATH + "content.js"
-    // + JS files for different parts/components of the theme (only functionality for regular documentation content pages) + tabs (extension) + lightbox (extension)
   ],
   "index": [
     SRC_PATH + "components/doctools.js",
@@ -57,6 +56,9 @@ const pageSpecificJS = {
   "api-reference": [
     SRC_PATH + "components/version-selector.js",
     SRC_PATH + "custom-redoc.js"
+  ],
+  "sphinx-tabs": [
+    SRC_PATH + "components/sphinx-tabs/tabs.js"
   ]
 };
 
@@ -76,7 +78,7 @@ if (pageSpecificJS.hasOwnProperty(FILE)) {
   
   let scriptFiles;
   
-  if (FILE !== "sphinx-search-ui" ) {
+  if (FILE !== "sphinx-search-ui" && FILE !== "sphinx-tabs" ) {
     scriptFiles = commonJS.concat(pageSpecificJS[FILE]);
   } else {
     scriptFiles = pageSpecificJS[FILE];

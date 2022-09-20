@@ -22,7 +22,8 @@
           {% include "template-parts/no-latest-notice.html" %}
         {% endblock latest %}
 
-        {% if pagename not in special_pages or theme_breadcrumb_root_title == 'Training' and pagename == 'index' %}
+        {% if pagename not in special_pages or (theme_breadcrumb_root_title == 'Training' and pagename == 'index')
+          or pagename == 'user-manual/api/reference' and version < '4.0' %}
           <div class="breadcrumb-wrapper">
             {% include "template-parts/breadcrumbs.html" %}
           </div>
