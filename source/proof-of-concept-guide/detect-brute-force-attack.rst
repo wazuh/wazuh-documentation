@@ -1,3 +1,4 @@
+.. Copyright (C) 2015, Wazuh, Inc.
 
 .. meta::
   :description: This PoC shows how Wazuh provides out-of-the-box rules capable of identifying brute-force attacks. Learn more about it in this section of the documentation.
