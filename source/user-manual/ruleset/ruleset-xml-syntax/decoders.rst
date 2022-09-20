@@ -1,5 +1,8 @@
 .. Copyright (C) 2015, Wazuh, Inc.
 
+.. meta::
+  :description: The decoders extract the information from the received events. Learn more about Decoders syntax in this section of the Wazuh documentation.
+
 .. _decoders_syntax:
 
 Decoders Syntax
