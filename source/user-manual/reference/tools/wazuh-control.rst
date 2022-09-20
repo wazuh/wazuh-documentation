@@ -1,7 +1,7 @@
 .. Copyright (C) 2015, Wazuh, Inc.
 
 .. meta::
-  :description: The wazuh-control script is used to start, stop, configure, and check on the status of Wazuh processes. Learn more about it in this section.
+  :description: The wazuh-control script is used to start, stop, configure, and check the status of Wazuh processes. Learn more about it in this section.
   
 .. _wazuh-control:
 
