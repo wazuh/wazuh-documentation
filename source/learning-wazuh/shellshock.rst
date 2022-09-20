@@ -1,8 +1,7 @@
 .. Copyright (C) 2015, Wazuh, Inc.
 
 .. meta::
-    :description: In this lab, you will send a Shellshock probe to a web server monitored by Wazuh. Check out how the Active Response capability of Wazuh works here. 
-
+  :description: In this lab, you will send a Shellshock probe to a web server monitored by Wazuh. Check out how the Active Response capability of Wazuh works here. 
   
 .. _learning_wazuh_shellshock:
 
