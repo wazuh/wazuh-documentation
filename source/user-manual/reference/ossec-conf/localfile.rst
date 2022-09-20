@@ -34,8 +34,8 @@ Options
 - `exclude`_
 - `reconnect_time`_
 - `multiline_regex`_
-- `ignore_log`_
-- `restrict_log`_
+- `ignore`_
+- `restrict`_
 
 
 location
@@ -597,16 +597,30 @@ For example, we may want to read a Python Traceback output as one single log, re
       <multiline_regex replace="wspace">^Traceback</multiline_regex>
    </localfile>
 
-ignore_log
+ignore
 ^^^^^^^^^^^^^^^
 
 This allows you to configure a pcre2 expression to ignore specific log lines.
 
-+--------------------+--------------------------------------------------------------------------------------------+
-| **Default value**  | n/a                                                                                        |
-+--------------------+--------------------------------------------------------------------------------------------+
-| **Allowed values** | Any `PCRE2 regular expression <../../ruleset/ruleset-xml-syntax/regex.html#pcre2-syntax>`_ |
-+--------------------+--------------------------------------------------------------------------------------------+
++--------------------+---------------------------------------------------------------+
+| **Default Value**  | n/a                                                           |
++--------------------+---------------------------------------------------------------+
+| **Allowed values** | Any `regex <regex.html#regex-os-regex-syntax>`_,              |
+|                    | `sregex <regex.html#sregex-os-match-syntax>`_ or              |
+|                    | `pcre2 <regex.html#pcre2-syntax>`_ expression.                |
++--------------------+---------------------------------------------------------------+
+
+The attribute type is optional.
+
++-------------+-----------------------------------------+-------------+---------------+
+| Attribute   |              Description                | Value range | Default value |
++=============+=========================================+=============+===============+
+| **type**    | Allows to set regular expression type   |   osregex   |     pcre2     |
+|             |                                         +-------------+               |
+|             |                                         |   osmatch   |               |
+|             |                                         +-------------+               |
+|             |                                         |   pcre2     |               |
++-------------+-----------------------------------------+-------------+---------------+
 
 For example, to ignore events related to configuration changes in the audit log:
 
@@ -615,7 +629,7 @@ For example, to ignore events related to configuration changes in the audit log:
   <localfile>
       <log_format>audit</log_format>
       <location>/var/log/audit/audit.log</location>
-      <ignore_log>type=.+_CHANGE</ignore_log>
+      <ignore type="osregex">type=\.+_CHANGE</ignore>
   </localfile>
 
 .. note::
@@ -624,16 +638,30 @@ For example, to ignore events related to configuration changes in the audit log:
 .. note::
   On Windows, the ``eventchannel`` format already provides a way to ignore logs through queries, so this setting ``does not apply`` to this format.
 
-restrict_log
+restrict
 ^^^^^^^^^^^^^^^
 
 This allows you to configure a pcre2 expression to restrict specific log lines, avoiding to generate alerts for those logs that do not match.
 
-+--------------------+--------------------------------------------------------------------------------------------+
-| **Default value**  | n/a                                                                                        |
-+--------------------+--------------------------------------------------------------------------------------------+
-| **Allowed values** | Any `PCRE2 regular expression <../../ruleset/ruleset-xml-syntax/regex.html#pcre2-syntax>`_ |
-+--------------------+--------------------------------------------------------------------------------------------+
++--------------------+---------------------------------------------------------------+
+| **Default Value**  | n/a                                                           |
++--------------------+---------------------------------------------------------------+
+| **Allowed values** | Any `regex <regex.html#regex-os-regex-syntax>`_,              |
+|                    | `sregex <regex.html#sregex-os-match-syntax>`_ or              |
+|                    | `pcre2 <regex.html#pcre2-syntax>`_ expression.                |
++--------------------+---------------------------------------------------------------+
+
+The attribute type is optional.
+
++-------------+-----------------------------------------+-------------+---------------+
+| Attribute   |              Description                | Value range | Default value |
++=============+=========================================+=============+===============+
+| **type**    | Allows to set regular expression type   |   osregex   |     pcre2     |
+|             |                                         +-------------+               |
+|             |                                         |   osmatch   |               |
+|             |                                         +-------------+               |
+|             |                                         |   pcre2     |               |
++-------------+-----------------------------------------+-------------+---------------+
 
 For example, to restrict syslog events related to a particular user name:
 
@@ -642,7 +670,7 @@ For example, to restrict syslog events related to a particular user name:
   <localfile>
       <log_format>syslog</log_format>
       <location>/custom/file/path</location>
-      <restrict_log>username_{1}</restrict_log>
+      <restrict type="osregex">username_\.+</restrict>
   </localfile>
 
 .. note::
