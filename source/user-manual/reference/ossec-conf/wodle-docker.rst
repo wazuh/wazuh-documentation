@@ -1,7 +1,7 @@
 .. Copyright (C) 2015, Wazuh, Inc.
 
 .. meta::
-  :description: Find out configuration options of the Docker wodle. Learn more about it in this section of the Wazuh documentation.
+  :description: Find out the configuration options of the Docker wodle. Learn more about it in this section of the Wazuh documentation.
 
 .. _wodle_docker:
 
