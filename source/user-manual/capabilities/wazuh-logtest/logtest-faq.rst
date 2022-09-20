@@ -1,8 +1,8 @@
 .. Copyright (C) 2015, Wazuh, Inc.
 
 .. meta::
-  :description: Get answers to the most frequently asked questions about Wazuh-Logtest in this FAQ section of the Wazuh documentation.  
-   
+  :description:  Get answers to the most frequently asked questions about Wazuh-Logtest in this technical FAQ and get the most out of Wazuh.
+  
 .. _logtest_faq:
 
 FAQ
