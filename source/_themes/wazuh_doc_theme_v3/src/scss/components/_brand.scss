@@ -38,6 +38,11 @@
 /* Dark- theme -------------------------------------------------------------- */
 
 .dark-theme {
+  header {
+    svg {
+      fill: $dark-color-main-text;
+    }
+  }
   .logo-link {
     &.docs {
       color: $dark-color-main-text;
