@@ -68,6 +68,10 @@ The documentation will be available at `/wazuh-documentation/build/html/index.ht
 ```
 This will delete the contents from `/wazuh-documentation/build/html`.
 
+## Alternative Pagefind search engine
+
+To compile the documentation with the alternative Pagefind search engine you need to have NodeJS 16+ in you system and follow the steps listed in the previous section but using `make html-search` instead of `make html` in the step 3.
+
 ## How the branches work
 
 - Our latest stable documentation is found on `master`. **You should never submit a pull request to this branch.**
