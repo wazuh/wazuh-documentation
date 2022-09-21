@@ -9,6 +9,11 @@
 ----------------------------------------------------------------------------- */
 
 .pre-v3 {
+  &.api-reference {
+    #central-column {
+      padding-top: calc(#{$breadcrumbs-height-xl} + #{$no-latest-notice-height-xl});
+    }
+  }
   #central-column {
     dl dd {
       padding-left: 0;
