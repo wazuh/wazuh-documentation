@@ -133,7 +133,8 @@
     .caption-text {
       color: $light-color-shaded-text;
     }
-    .highlighted {
+    .highlighted, 
+    mark {
       background-color: $light-color-search-highlight-background;
     }
   }
@@ -149,7 +150,8 @@
     .caption-text {
       color: $dark-color-shaded-text-lighter;
     }
-    .highlighted {
+    .highlighted, 
+    mark {
       color: $dark-color-main-text;
       background-color: $dark-color-search-highlight-background;
     }
