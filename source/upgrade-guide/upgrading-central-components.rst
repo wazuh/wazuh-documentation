@@ -55,42 +55,78 @@ In the case Wazuh is installed in a multi-node cluster configuration, repeat the
             # service filebeat stop
             # service wazuh-dashboard stop
 
-#. **Recommended** — Backup the following configuration files and data.
+#. **Recommended** — Backup configuration files and data.
 
-   **Wazuh indexer**
+   .. code-block:: console
+      :caption: Destination folder
 
-   |  ``/etc/wazuh-indexer/opensearch.yml``
-   |  ``/usr/lib/sysctl.d/wazuh-indexer.conf``
-   |  ``/etc/wazuh-indexer/jvm.options``
-   |  Certificates and role mapping files
+      # bkp_folder=~/wazuh_files_backup/$(date +%F_%H:%M)
+      # mkdir -p $bkp_folder
 
-   **Wazuh manager**
+   .. code-block:: console
+      :caption: Wazuh indexer files
 
-   |  ``/var/ossec/api/configuration/``
-   |  ``/var/ossec/etc/``
-   |  ``/var/ossec/logs/``
-   |
-   |  ``/var/ossec/queue/agent-groups/``
-   |
-   |  ``/var/ossec/queue/agents-timestamp``
-   |  ``/var/ossec/queue/agentless/``
-   |  ``/var/ossec/queue/cluster/``
-   |  ``/var/ossec/queue/rids/``
-   |  ``/var/ossec/queue/fts/``
-   |  ``/var/ossec/var/multigroups/``
+      # cp --parents /etc/wazuh-indexer/opensearch.yml $bkp_folder
+      # cp --parents /usr/lib/sysctl.d/wazuh-indexer.conf $bkp_folder
+      # cp --parents /etc/wazuh-indexer/jvm.options $bkp_folder
 
-   The following folder must be copied with the Wazuh manager service stopped.
+   .. code-block:: console
+      :caption: Certificate files
 
-   |  ``/var/ossec/queue/db``
+      # cp --parents /etc/filebeat/certs/wazuh-server.pem $bkp_folder
+      # cp --parents /etc/filebeat/certs/wazuh-server-key.pem $bkp_folder
+      # cp --parents /etc/wazuh-dashboard/certs/wazuh-dashboard.pem $bkp_folder
+      # cp --parents /etc/wazuh-dashboard/certs/wazuh-dashboard-key.pem $bkp_folder
+      # cp --parents /etc/wazuh-indexer/certs/wazuh-indexer.pem $bkp_folder
+      # cp --parents /etc/wazuh-indexer/certs/wazuh-indexer-key.pem $bkp_folder
+
+   ..
+      Certificates and role mapping files
+
+   .. code-block:: console
+      :caption: Wazuh manager files
+
+      # cp -r --parents /var/ossec/api/configuration/ $bkp_folder
+      # cp -r --parents /var/ossec/etc/ $bkp_folder
+      # cp -r --parents /var/ossec/logs/ $bkp_folder
+      #
+      # cp -r --parents /var/ossec/queue/agent-groups/ $bkp_folder
+      #
+      # cp -r --parents /var/ossec/queue/agents-timestamp $bkp_folder
+      # cp -r --parents /var/ossec/queue/agentless/ $bkp_folder
+      # cp -r --parents /var/ossec/queue/cluster/ $bkp_folder
+      # cp -r --parents /var/ossec/queue/rids/ $bkp_folder
+      # cp -r --parents /var/ossec/queue/fts/ $bkp_folder
+      # cp -r --parents /var/ossec/var/multigroups/ $bkp_folder
+
+   .. tabs::
+
+      .. group-tab:: Systemd
+
+         .. code-block:: console
+            :caption: Wazuh manager files
+
+            # systemctl stop wazuh-manager
+            # cp -r --parents /var/ossec/queue/db/ $bkp_folder
+            # systemctl start wazuh-manager
+
+      .. group-tab:: SysV init
+
+         .. code-block:: console
+            :caption: Wazuh manager files
+
+            # service wazuh-manager stop
+            # cp -r --parents /var/ossec/queue/db/ $bkp_folder
+            # service wazuh-manager start
    
-   **Wazuh dashboard**
+   .. code-block:: console
+      :caption: Wazuh dashboard files
 
-   |  ``/etc/wazuh-dashboard/opensearch_dashboards.yml``
-   |  ``/usr/share/wazuh-dashboard/data/wazuh/config/wazuh.yml``
+      # cp --parents /etc/wazuh-dashboard/opensearch_dashboards.yml $bkp_folder
+      # cp --parents /usr/share/wazuh-dashboard/data/wazuh/config/wazuh.yml $bkp_folder
 
-..
-   You can also export dashboard from **Management > Saved Objects**
-   Dashboards are stored in the .kibana index.
+   |  You can also export dashboard from **Management > Saved Objects**
+   |  Dashboards are stored in the ``.kibana`` index.
 
 
 Upgrading the Wazuh indexer

@@ -41,43 +41,68 @@ Preparing the upgrade
 
 
 
-#. **Recommended** — Backup the following configuration files and data.
+#. **Recommended** — Backup configuration files and data.
 
-   **Elasticsearch**
+   .. code-block:: console
+      :caption: Destination folder
 
-   |  ``/etc/elasticsearch/elasticsearch.yml``
-   |  ``/usr/lib/sysctl.d/elasticsearch.conf``
-   |  ``/etc/elasticsearch/jvm.options``
-   |
-   |  If your are using x-pack, you need to save certificates and role mappings.
+      # bkp_folder=~/wazuh_files_backup/$(date +%F_%H:%M)
+      # mkdir -p $bkp_folder
 
-   **Wazuh manager**
+   .. code-block:: console
+      :caption: Elasticsearch files
 
-   |  ``/var/ossec/api/configuration/``
-   |  ``/var/ossec/etc/``
-   |  ``/var/ossec/logs/``
-   |
-   |  ``/var/ossec/queue/agent-groups/``
-   |
-   |  
-   |  ``/var/ossec/queue/agentless/``
-   |  ``/var/ossec/queue/cluster/``
-   |  ``/var/ossec/queue/rids/``
-   |  ``/var/ossec/queue/fts/``
-   |  ``/var/ossec/var/multigroups/``
+      # cp /etc/elasticsearch/elasticsearch.yml $bkp_folder
+      # cp /usr/lib/sysctl.d/elasticsearch.conf $bkp_folder
+      # cp /etc/elasticsearch/jvm.options $bkp_folder
 
-   The following folder must be copied with the Wazuh manager service stopped.
+   -  If your are using x-pack, save certificates and role mapping files.
 
-   |  ``/var/ossec/queue/db``
+   .. code-block:: console
+      :caption: Wazuh manager files
 
-   **Kibana**
+      # cp -r /var/ossec/api/configuration/ $bkp_folder
+      # cp -r /var/ossec/etc/ $bkp_folder
+      # cp -r /var/ossec/logs/ $bkp_folder
+      #
+      # cp -r /var/ossec/queue/agent-groups/ $bkp_folder
+      #
+      #
+      # cp -r /var/ossec/queue/agentless/ $bkp_folder
+      # cp -r /var/ossec/queue/cluster/ $bkp_folder
+      # cp -r /var/ossec/queue/rids/ $bkp_folder
+      # cp -r /var/ossec/queue/fts/ $bkp_folder
+      # cp -r /var/ossec/var/multigroups/ $bkp_folder
+      
+   .. tabs::
 
-   |  ``/etc/kibana/kibana.yml``
-   |  ``/usr/share/kibana/data/wazuh/config/wazuh.yml``
+      .. group-tab:: Systemd
 
-   ..
-      You can also export dashboard from **Management > Saved Objects**
-      Dashboards are stored in the .kibana index.
+         .. code-block:: console
+            :caption: Wazuh manager files
+
+            # systemctl stop wazuh-manager
+            # cp -r /var/ossec/queue/db/ $bkp_folder
+            # systemctl start wazuh-manager
+
+      .. group-tab:: SysV init
+
+         .. code-block:: console
+            :caption: Wazuh manager files
+
+            # service wazuh-manager stop
+            # cp -r /var/ossec/queue/db/ $bkp_folder
+            # service wazuh-manager start
+
+
+   .. code-block:: console
+      :caption: Kibana files
+
+      # cp /etc/kibana/kibana.yml $bkp_folder
+      # cp /usr/share/kibana/data/wazuh/config/wazuh.yml $bkp_folder
+
+   |  You can also export dashboard from **Management > Saved Objects**
+   |  Dashboards are stored in the ``.kibana`` index.
 
 #. Repeat the previous steps for every Wazuh node.
 
