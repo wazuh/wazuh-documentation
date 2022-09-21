@@ -27,6 +27,10 @@ You can also join our [users mailing list](https://groups.google.com/d/forum/waz
 - [sphinx-tabs](https://github.com/djungelorm/sphinx-tabs) 1.2.1
 - [jsmin](https://github.com/tikitu/jsmin) 3.0.1
 
+### Optional software to run the alternative Pagefind search engine
+
+- [NodeJS](https://nodejs.org/) 16+
+
 ## Copyright & License
 
 Copyright © 2020 Wazuh, Inc.
