@@ -9,6 +9,11 @@
   flex-wrap: wrap;
   justify-content: space-between;
   margin: 2rem auto;
+  &.limited-width {
+    @include media-max(md) {
+      flex-direction: column;
+    }
+  }
   
   &[data-step] {
     @include media-max(md){
@@ -136,7 +141,21 @@
       @include media-max(md) {
         width: 100%;
       }
+      
+      .link-boxes-link {
+        p:not(.link-boxes-label) {
+          min-width: 135px;
+          flex-basis: 0;
+          text-align: center;
+        }
+      }
     }
+    &.limited-width {
+      .link-boxes-item {
+        max-width: 320px;
+      }
+    }
+    
   }
   
   &.layout-4 {
@@ -147,6 +166,13 @@
       }
       @include media-max(sm) {
         width: 100%;
+      }
+      .link-boxes-link {
+        p:not(.link-boxes-label) {
+          min-width: 135px;
+          flex-basis: 0;
+          text-align: center;
+        }
       }
     }
   }
@@ -161,14 +187,31 @@
       @include media-max(sm) {
         width: 100%;
       }
+      .link-boxes-link {
+        p:not(.link-boxes-label) {
+          min-width: 135px;
+          flex-basis: 0;
+          text-align: center;
+        }
+      }
     }
   }
   
   &.layout-6 {
     .link-boxes-item {
       width: calc(calc(100% - 15px * 5) / 6);
-      @include media-max(lg) {
+      @include media-max(md) {
+        width: calc(calc(100% - 15px) / 2);
+      }
+      @include media-only(md,lg) {
         width: calc(calc(100% - 15px * 2) / 3);
+      }
+      .link-boxes-link {
+        p:not(.link-boxes-label) {
+          min-width: 135px;
+          flex-basis: 0;
+          text-align: center;
+        }
       }
     }
   }
@@ -178,6 +221,7 @@
     display: flex;
     justify-content: center;
     align-items: center;
+    margin: 0 auto;
     
     &:last-child {
       padding-right: 0;
@@ -189,9 +233,19 @@
       }
     }
     img {
-      display: inline-block;
-      margin: 10px;
       border: none;
+    }
+    .link-boxes-link {
+      @include media-min(md){
+        min-height: 90px;
+      }
+      img {
+        display: inline-block;
+        margin: 10px 6px;
+        @include media-only(xl,wzh-xl){
+          margin: 0;
+        }
+      }
     }
 
     .link-boxes-link, .doc {
@@ -227,9 +281,10 @@
       }
       
       p {
-        padding: 10px;
+        padding: 7px;
         margin-top: 0;
         margin-bottom: 0;
+        line-height: 26px;
       }
     }
     .link-boxes-label {
