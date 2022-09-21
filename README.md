@@ -27,6 +27,10 @@ You can also join our [users mailing list](https://groups.google.com/d/forum/waz
 - [sphinx-tabs](https://github.com/djungelorm/sphinx-tabs) 1.2.1
 - [jsmin](https://github.com/tikitu/jsmin) 3.0.1
 
+## Alternative Pagefind search engine
+
+To compile the documentation with the alternative Pagefind search engine you need to have NodeJS 16+ in you system and follow the steps listed in the previous section but using `make html-search` instead of `make html` in the step 3.
+
 ## Copyright & License
 
 Copyright © 2019 Wazuh, Inc.
