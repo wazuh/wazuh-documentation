@@ -211,12 +211,6 @@ html_additional_pages = {}
 
 html_additional_pages['not_found'] = 'not-found.html'
 
-if version >= '4.0' and html_theme_options['breadcrumb_root_title'] == 'Documentation':
-    html_additional_pages['user-manual/api/reference'] = 'api-redoc.html'
-
-if version >= '4.2' and html_theme_options['breadcrumb_root_title'] == 'Documentation':
-    html_additional_pages['cloud-service/apis/reference'] = 'cloud-api-redoc.html'
-
 if is_latest_release == True and html_theme_options['breadcrumb_root_title'] == 'Documentation':
     html_additional_pages['moved-content'] = 'moved-content.html'
 
@@ -662,7 +656,6 @@ def manage_assets(app, pagename, templatename, context, doctree):
         "index": static + "js/min/index.min.js?ver=%s" % os.stat(os.path.join(theme_dir, "static/js/min/index.min.js")).st_mtime,
         "index-redirect": static + "js/min/index-redirect.min.js?ver=%s" % os.stat(os.path.join(theme_dir, "static/js/min/index-redirect.min.js")).st_mtime,
         "search-results": static + "js/min/search-results.min.js?ver=%s" % os.stat(os.path.join(theme_dir, "static/js/min/search-results.min.js")).st_mtime,
-        "searchIndex": "searchindex.js",
         "not-found": static + "js/min/not-found.min.js?ver=%s" % os.stat(os.path.join(theme_dir, "static/js/min/not-found.min.js")).st_mtime,
         "api-reference": static + "js/min/api-reference.min.js?ver=%s" % os.stat(os.path.join(theme_dir, "static/js/min/api-reference.min.js")).st_mtime,
         "redoc-standalone": static + "js/redoc.standalone.js?ver=%s" % os.stat(os.path.join(theme_dir, "static/js/redoc.standalone.js")).st_mtime,
@@ -680,6 +673,9 @@ def manage_assets(app, pagename, templatename, context, doctree):
             'not_found': "css/min/not-found.min.css?ver=%s" % os.stat(os.path.join(theme_dir, "static/css/min/not-found.min.css")).st_mtime
         }
         default = "css/min/wazuh-documentation.min.css?ver=%s" % os.stat(os.path.join(theme_dir, "static/css/min/wazuh-documentation.min.css")).st_mtime
+        
+        if version < '4.0':
+            css_map['user-manual/api/reference'] = default
         
         if html_theme_options['breadcrumb_root_title'] == 'Training':
             css_map['index'] = default
@@ -700,8 +696,7 @@ def manage_assets(app, pagename, templatename, context, doctree):
             ],
             'search': [
                 individual_js_files['redirects'],
-                individual_js_files['search-results'],
-                individual_js_files['searchIndex']
+                individual_js_files['search-results']
             ],
             'not_found': [
                 individual_js_files['redirects'],
@@ -725,8 +720,6 @@ def manage_assets(app, pagename, templatename, context, doctree):
         default = [
             individual_js_files['redirects'],
             individual_js_files['wazuh-documentation']
-            # tabs (extension)
-            # lightbox (extension)
         ]
         
         if html_theme_options['breadcrumb_root_title'] == 'Training':
