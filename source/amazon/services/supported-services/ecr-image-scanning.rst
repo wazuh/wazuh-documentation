@@ -27,19 +27,17 @@ The following sections cover how to configure AWS to store the scan findings in 
 AWS configuration
 -----------------
 
-AWS provides a `template <https://github.com/aws-samples/ecr-image-scan-findings-logger/blob/main/Template-ECR-SFL.yml>`_ for creating a stack in CloudFormation that loads the image scan findings from Amazon ECR in CloudWatch using an AWS Lambda function.
+AWS provides a `template <https://github.com/aws-samples/ecr-image-scan-findings-logger/blob/main/Template-ECR-SFL.yml>`_ for creating a stack in CloudFormation that loads the image scan findings from Amazon ECR in CloudWatch using an AWS Lambda function. To be able to use this template, create the stack and upload images to Amazon ECR, it is necessary to create a custom policy granting the necessary permissions. 
 
-Policy configuration
-^^^^^^^^^^^^^^^^^^^^
 .. include:: /_templates/cloud/amazon/create_policy.rst
 
 Template specific permissions
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 IAM 
-"""
+~~~
 
 .. warning::
-      The permissions inside the ``RoleCreator`` and ``PassRole`` sections are necessary in order to create/delete the stack based on the named template and must be bound to the described specific resources due to overly permissive actions.
+      The permissions inside the ``RoleCreator`` and ``PassRole`` sections are necessary in order to create and delete the stack based on the named template and must be bound to the described specific resources due to overly permissive actions.
 
 .. code-block:: json
   
@@ -56,19 +54,19 @@ IAM
          "iam:GetRolePolicy",
          "iam:PassRole"
       ],
-      "Resource": "arn:aws:iam::user-id:role/*"
+      "Resource": "arn:aws:iam::<account-ID>:role/*"
    },
    {
       "Sid": "PassRole",
       "Effect": "Allow",
       "Action": "iam:PassRole",
-      "Resource": "arn:aws:iam::user-id:role/*-LambdaExecutionRole*"
+      "Resource": "arn:aws:iam::<account-ID>:role/*-LambdaExecutionRole*"
    }
 
 Amazon Lambda and Amazon EventBridge
-""""""""""""""""""""""""""""""""""""
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-The following permissions are required to create/delete the resources handled by the Scan Findings Logger template.
+The following permissions are required to create and delete the resources handled by the Scan Findings Logger template.
   
 .. code-block:: json
 
@@ -82,7 +80,7 @@ The following permissions are required to create/delete the resources handled by
          "lambda:CreateFunction",
          "lambda:AddPermission"
       ],
-      "Resource": "arn:aws:lambda:region:user-id:*"
+      "Resource": "arn:aws:lambda:<region>:<account-ID>:*"
    },
    {
       "Sid": "TemplateRequired1",
@@ -94,15 +92,15 @@ The following permissions are required to create/delete the resources handled by
          "events:DescribeRule",
          "events:PutTargets"
       ],
-      "Resource": "arn:aws:events:region:user-id:*"
+      "Resource": "arn:aws:events:<region>:<account-ID>:*"
     }
 
 
 
 CloudFormation Stack
-~~~~~~~~~~~~~~~~~~~~
+^^^^^^^^^^^^^^^^^^^^
 
-The following permissions are required to create/delete any template based CloudFormation stack.
+The following permissions are required to create and delete any template based CloudFormation stack.
 
 .. code-block:: json
 
@@ -127,9 +125,9 @@ The following permissions are required to create/delete any template based Cloud
    }
 
 Amazon ECR usage permissions
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 Image Pushing and Scanning
-""""""""""""""""""""""""""
+~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 The following permissions are required by Amazon ECR to `push images <https://docs.aws.amazon.com/AmazonECR/latest/userguide/image-push.html#image-push-iam>`_ and are scoped down to a specific repository. The steps to push Docker images is also described in the `Amazon ECR - Pushing a Docker image <https://docs.aws.amazon.com/AmazonECR/latest/userguide/docker-push-ecr-image.html>`_ documentation.
 
@@ -149,11 +147,11 @@ The following permissions are required by Amazon ECR to `push images <https://do
          "ecr:DescribeImageScanFindings",
          "ecr:StartImageScan"
       ],
-      "Resource": "arn:aws:ecr:region:user-id:repository/repository-name"
+      "Resource": "arn:aws:ecr:<region>:<account-ID>:repository/<repository-name>"
    }
 
 ECR Registry and Repository
-"""""""""""""""""""""""""""
+~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 .. note::
       The permission ``ecr:GetAuthorizationToken`` is required by `Amazon ECR <https://docs.aws.amazon.com/AmazonECR/latest/userguide/set-repository-policy.html>`_ for users to have permission to make calls to the API through an IAM policy before they can authenticate to a registry and push or pull any images from any Amazon ECR repository.
