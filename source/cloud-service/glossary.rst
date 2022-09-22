@@ -83,6 +83,8 @@ Available regions:
 
 * Singapore: ``ap-southeast-1``
 
+* Sydney: ``ap-southeast-2``
+
 .. _cloud_glossary_wazuh_cloud_api:
 
 Wazuh Cloud API

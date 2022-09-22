@@ -1,7 +1,9 @@
 .. Copyright (C) 2015, Wazuh, Inc.
 
-.. _docker_monitoring_dependencies:
+.. meta::
+  :description: Learn the steps necessary when configuring a Docker integration in a Wazuh agent, in this section of our documentation.
 
+.. _docker_monitoring_dependencies:
 
 Installing dependencies
 =======================

@@ -28,7 +28,7 @@ Overview
 --------
 
 StatefulSet and deployment controllers
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 As a *Deployment*, a *StatefulSet* manages Pods that are based on an identical container specification, but it maintains an identity attached to each of its pods. These pods are created from the same specification, but they are not interchangeable: each one has a persistent identifier maintained across any rescheduling.
 
@@ -40,7 +40,7 @@ Persistent volumes (PV) are pieces of storage in the provisioned cluster. It is 
 
 Here, we use persistent volumes to store data from both the Wazuh manager and the Wazuh indexer.
 
-Read more about persistent volumes `here <https://kubernetes.io/docs/concepts/storage/persistent-volumes/>`_.
+Refer to the `persistent volumes <https://kubernetes.io/docs/concepts/storage/persistent-volumes/>`_ page for more information.
 
 Pods
 ^^^^

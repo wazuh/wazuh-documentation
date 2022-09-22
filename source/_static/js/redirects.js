@@ -132,6 +132,7 @@ newUrls['4.3'] = [
   '/release-notes/release-4-3-5.html',
   '/release-notes/release-4-3-6.html',
   '/release-notes/release-4-3-7.html',
+  '/release-notes/release-4-3-8.html',
   '/getting-started/use-cases/container-security.html',
   '/user-manual/agents/query-configuration.html',
   '/user-manual/elasticsearch/configure-indices.html',
@@ -3100,6 +3101,7 @@ redirections.push(
 );
 
 newUrls['3.13'] = [
+  '/release-notes/release-3-13-6.html', 
   '/release-notes/release-3-13-5.html', 
   '/release-notes/release-3-13-4.html',  
   '/release-notes/release_3_13_3.html',

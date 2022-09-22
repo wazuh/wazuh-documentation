@@ -203,7 +203,7 @@ Installing the Wazuh manager
 
             .. code-block:: console
         
-                # apt-key add ./wazuh-offline/wazuh-files/GPG-KEY-WAZUH
+                # gpg --no-default-keyring --keyring gnupg-ring:/usr/share/keyrings/wazuh.gpg --import ./wazuh-offline/wazuh-files/GPG-KEY-WAZUH && chmod 644 /usr/share/keyrings/wazuh.gpg
                 # dpkg -i ./wazuh-offline/wazuh-packages/wazuh-manager*.deb
 
 #.  Enable and start the Wazuh manager service.
