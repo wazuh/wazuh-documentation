@@ -215,9 +215,9 @@ To fix this you need to:
 Wazuh API and Wazuh app version mismatch
 ----------------------------------------------
 
-This error means that the Wazuh manager and Wazuh kibana app versions do not match. To work properly, the Wazuh kibana app and Wazuh manager versions should coincide at least in the major and minor. I.e.: Wazuh kibana app 4.3.x is only compatible with Wazuh manager 4.3.x.
+This error indicates a mismatch in the versions of the Wazuh manager and the Wazuh app. In order to ensure the correct operation and intercommunication of these components, we highly recommend they are up to the same version, even if the app can connect to managers from a different patch version. In these cases, the major and minor version of the components must be equal.
 
-To solve this issue, you need to either upgrade the component with the lower version or downgrade the component with the higher version. You can see more information about upgrading in our :doc:`upgrade guide</upgrade-guide/index>`.
+To solve this issue, you need to upgrade the component with the lower version. Learn how to upgrade Wazuh in our :doc:`upgrade guide</upgrade-guide/index>`.
 
 
 None of the above solutions are fixing my problem
