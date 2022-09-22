@@ -1,5 +1,8 @@
 .. Copyright (C) 2015, Wazuh, Inc.
 
+.. meta::
+  :description: Get answers to the most frequently asked questions about the Wazuh Cloud in this FAQ. Explore the potential of the Wazuh Cloud service.
+
 .. _cloud_getting-started_starting_faq:
 
 Cloud service FAQ

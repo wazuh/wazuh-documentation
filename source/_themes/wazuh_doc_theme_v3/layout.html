@@ -115,7 +115,11 @@
     {%- else -%}
       {%- if pagename not in special_pages %}
         {# Extension files disabled from special pages #}
-        {{- extensions_script_files.append(scriptfile)|default("", True) -}}
+        {%- if "tabs.js" in scriptfile %}
+          {{- extensions_script_files.append("_static/js/min/sphinx-tabs.min.js")|default("", True) -}}
+        {%- else -%}
+          {{- extensions_script_files.append(scriptfile)|default("", True) -}}
+        {%- endif -%}
       {%- endif -%}
     {%- endif -%}
   {%- endif -%}

@@ -89,7 +89,7 @@ Starting the service
 
       .. include:: /_templates/installations/indexer/common/enable_indexer.rst
     
-Repeat this stage of the installation process for every Wazuh indexer node in your multi-node cluster. Then proceed to the cluster initialization stage.
+Repeat this stage of the installation process for every Wazuh indexer node in your cluster. Then proceed with initializing your single-node or multi-node cluster in the next stage.
 
 
 3. Cluster initialization
@@ -99,7 +99,7 @@ Repeat this stage of the installation process for every Wazuh indexer node in yo
     <div class="accordion-section open">
 
 
-#. Run the Wazuh indexer ``indexer-security-init.sh`` script on `any` Wazuh indexer node to load the new certificates information and start the cluster. 
+#. Run the Wazuh indexer ``indexer-security-init.sh`` script on `any` Wazuh indexer node to load the new certificates information and start the single-node or multi-node cluster. 
     
    .. code-block:: console
 
@@ -137,7 +137,7 @@ Testing the cluster installation
           }
           
 
-  #. Replace ``<WAZUH_INDEXER_IP>`` and run the following command to check if the cluster is working correctly. 
+  #. Replace ``<WAZUH_INDEXER_IP>`` and run the following command to check if the single-node or multi-node cluster is working correctly. 
   
       .. code-block:: console
 

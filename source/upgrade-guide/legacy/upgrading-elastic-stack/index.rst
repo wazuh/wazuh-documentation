@@ -1,5 +1,8 @@
 .. Copyright (C) 2015, Wazuh, Inc.
 
+.. meta::
+   :description: This section of the Wazuh documentation guides through the process of upgrading the Elastic Stack components from versions prior to 7.0.
+
 .. _upgrading_elastic_stack_legacy:
 
 Upgrading Elastic Stack
