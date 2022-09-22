@@ -600,7 +600,7 @@ For example, we may want to read a Python Traceback output as one single log, re
 ignore
 ^^^^^^^^^^^^^^^
 
-This allows you to configure a pcre2 expression to ignore specific log lines.
+This allows you to configure a pcre2 expression to ignore specific log lines. Multiple expressions can be configured by repeating the ignore label. The log will be ignored as soon as one of the expressions matches, OR behavior.
 
 +--------------------+---------------------------------------------------------------+
 | **Default Value**  | n/a                                                           |
@@ -630,10 +630,14 @@ For example, to ignore events related to configuration changes in the audit log:
       <log_format>audit</log_format>
       <location>/var/log/audit/audit.log</location>
       <ignore type="osregex">type=\.+_CHANGE</ignore>
+      <ignore type="osregex">type=CONFIG_\.+</ignore>
   </localfile>
 
 .. note::
   For formats that group multiple lines, the entire group will be counted as a single log to check if it should be ignored.
+
+.. note::
+  The ignore label is checked before the restrict label, so if you set identical expressions for both settings, no log will be processed.
 
 .. note::
   On Windows, the ``eventchannel`` format already provides a way to ignore logs through queries, so this setting ``does not apply`` to this format.
@@ -641,7 +645,7 @@ For example, to ignore events related to configuration changes in the audit log:
 restrict
 ^^^^^^^^^^^^^^^
 
-This allows you to configure a pcre2 expression to restrict specific log lines, avoiding to generate alerts for those logs that do not match.
+This allows you to configure a pcre2 expression to restrict specific log lines, avoiding to generate alerts for those logs that do not match. Multiple expressions can be configured by repeating the restrict label. The log will be processed only if all expressions match.
 
 +--------------------+---------------------------------------------------------------+
 | **Default Value**  | n/a                                                           |
@@ -671,10 +675,14 @@ For example, to restrict syslog events related to a particular user name:
       <log_format>syslog</log_format>
       <location>/custom/file/path</location>
       <restrict type="osregex">username_\.+</restrict>
+      <restrict type="osregex">Jun\.+</restrict>
   </localfile>
 
 .. note::
   For formats that group multiple lines, the entire group will be counted as a single log to check if it should be restricted.
+
+.. note::
+  The ignore label is checked before the restrict label, so if you set identical expressions for both settings, no log will be processed.
 
 .. note::
   On Windows, the ``eventchannel`` format already provides a way to restrict logs through queries, so this setting ``does not apply`` to this format.
