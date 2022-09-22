@@ -41,7 +41,7 @@ Preparing the upgrade
 
 
 
-#. **Recommended** — Backup configuration files and data.
+#. **Recommended** — Backup data and configuration files.
 
    .. code-block:: console
       :caption: Destination folder
@@ -50,7 +50,7 @@ Preparing the upgrade
       # mkdir -p $bkp_folder
 
    .. code-block:: console
-      :caption: Elasticsearch files
+      :caption: Elasticsearch configuration files
 
       # cp /etc/elasticsearch/elasticsearch.yml $bkp_folder
       # cp /usr/lib/sysctl.d/elasticsearch.conf $bkp_folder
@@ -59,50 +59,57 @@ Preparing the upgrade
    -  If your are using x-pack, save certificates and role mapping files.
 
    .. code-block:: console
-      :caption: Wazuh manager files
+      :caption: Kibana configuration files
 
-      # cp -r /var/ossec/api/configuration/ $bkp_folder
-      # cp -r /var/ossec/etc/ $bkp_folder
-      # cp -r /var/ossec/logs/ $bkp_folder
-      #
-      # cp -r /var/ossec/queue/agent-groups/ $bkp_folder
-      #
-      #
-      # cp -r /var/ossec/queue/agentless/ $bkp_folder
-      # cp -r /var/ossec/queue/cluster/ $bkp_folder
-      # cp -r /var/ossec/queue/rids/ $bkp_folder
-      # cp -r /var/ossec/queue/fts/ $bkp_folder
-      # cp -r /var/ossec/var/multigroups/ $bkp_folder
-      
+      # cp /etc/kibana/kibana.yml $bkp_folder
+      # cp /usr/share/kibana/data/wazuh/config/wazuh.yml $bkp_folder
+
+
    .. tabs::
 
       .. group-tab:: Systemd
 
          .. code-block:: console
-            :caption: Wazuh manager files
+            :caption: Wazuh manager data and configuration files
 
             # systemctl stop wazuh-manager
+            # cp -r /var/ossec/api/configuration/ $bkp_folder
+            # cp -r /var/ossec/etc/ $bkp_folder
+            # cp -r /var/ossec/logs/ $bkp_folder
+            #
+            # cp -r /var/ossec/queue/agent-groups/ $bkp_folder
+            #
+            #
+            # cp -r /var/ossec/queue/agentless/ $bkp_folder
+            # cp -r /var/ossec/queue/cluster/ $bkp_folder
+            # cp -r /var/ossec/queue/rids/ $bkp_folder
+            # cp -r /var/ossec/queue/fts/ $bkp_folder
+            # cp -r /var/ossec/var/multigroups/ $bkp_folder
             # cp -r /var/ossec/queue/db/ $bkp_folder
             # systemctl start wazuh-manager
 
       .. group-tab:: SysV init
 
          .. code-block:: console
-            :caption: Wazuh manager files
+            :caption: Wazuh manager data and configuration files
 
             # service wazuh-manager stop
+            # cp -r /var/ossec/api/configuration/ $bkp_folder
+            # cp -r /var/ossec/etc/ $bkp_folder
+            # cp -r /var/ossec/logs/ $bkp_folder
+            #
+            # cp -r /var/ossec/queue/agent-groups/ $bkp_folder
+            #
+            #
+            # cp -r /var/ossec/queue/agentless/ $bkp_folder
+            # cp -r /var/ossec/queue/cluster/ $bkp_folder
+            # cp -r /var/ossec/queue/rids/ $bkp_folder
+            # cp -r /var/ossec/queue/fts/ $bkp_folder
+            # cp -r /var/ossec/var/multigroups/ $bkp_folder
             # cp -r /var/ossec/queue/db/ $bkp_folder
             # service wazuh-manager start
 
-
-   .. code-block:: console
-      :caption: Kibana files
-
-      # cp /etc/kibana/kibana.yml $bkp_folder
-      # cp /usr/share/kibana/data/wazuh/config/wazuh.yml $bkp_folder
-
-   |  You can also export dashboard from **Management > Saved Objects**
-   |  Dashboards are stored in the ``.kibana`` index.
+   Also, follow the instructions in `Elasticsearch snapshots <https://www.elastic.co/guide/en/elasticsearch/reference/7.17/snapshot-restore.html>`__ to take and restore snapshots of indices and the state of the Wazuh indexer and dashboard.
 
 #. Repeat the previous steps for every Wazuh node.
 
