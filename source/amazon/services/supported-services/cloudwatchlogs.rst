@@ -1,7 +1,7 @@
 .. Copyright (C) 2015, Wazuh, Inc.
 
 .. meta::
-  :description: The Wazuh module for AWS provides capabilities to monitor AWS based services. See more about how to configure CloudWatch Logs and some practical use cases.
+  :description: AWS CloudWatch Logs is a service that allows users to centralize the logs from all their systems. Learn how to use CloudWatch Logs with Wazuh here.
 
 .. _aws_cloudwatchlogs:
 

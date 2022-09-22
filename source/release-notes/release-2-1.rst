@@ -2,6 +2,7 @@
 
 .. meta::
   :description: Wazuh 2.1 has been released. Check out our release notes to discover the changes and additions of this release.
+  
 .. _release_2_1:
 
 2.1 Release notes - 17 August 2017

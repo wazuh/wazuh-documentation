@@ -321,13 +321,13 @@ macOS
 Solaris
 ^^^^^^^
 
-.. |Solaris10_i386| replace:: `wazuh-agent_v|WAZUH_CURRENT_SOLARIS10|-sol10-i386.pkg <https://packages.wazuh.com/|WAZUH_CURRENT_MAJOR_SOLARIS10|/solaris/i386/10/wazuh-agent_v|WAZUH_CURRENT_SOLARIS10|-sol10-i386.pkg>`__ (`sha512 <https://packages.wazuh.com/|WAZUH_CURRENT_MAJOR_SOLARIS10|/checksums/wazuh/|WAZUH_CURRENT_SOLARIS10|/wazuh-agent_v|WAZUH_CURRENT_SOLARIS10|-sol10-i386.pkg.sha512>`__)
+.. |Solaris10_i386| replace:: `wazuh-agent_v|WAZUH_CURRENT_SOLARIS10_i386|-sol10-i386.pkg <https://packages.wazuh.com/|WAZUH_CURRENT_MAJOR_SOLARIS10_i386|/solaris/i386/10/wazuh-agent_v|WAZUH_CURRENT_SOLARIS10_i386|-sol10-i386.pkg>`__ (`sha512 <https://packages.wazuh.com/|WAZUH_CURRENT_MAJOR_SOLARIS10_i386|/checksums/wazuh/|WAZUH_CURRENT_SOLARIS10_i386|/wazuh-agent_v|WAZUH_CURRENT_SOLARIS10_i386|-sol10-i386.pkg.sha512>`__)
 
-.. |Solaris10_SPARC| replace:: `wazuh-agent_v|WAZUH_CURRENT_SOLARIS10|-sol10-sparc.pkg <https://packages.wazuh.com/|WAZUH_CURRENT_MAJOR_SOLARIS10|/solaris/sparc/10/wazuh-agent_v|WAZUH_CURRENT_SOLARIS10|-sol10-sparc.pkg>`__ (`sha512 <https://packages.wazuh.com/|WAZUH_CURRENT_MAJOR_SOLARIS10|/checksums/wazuh/|WAZUH_CURRENT_SOLARIS10|/wazuh-agent_v|WAZUH_CURRENT_SOLARIS10|-sol10-sparc.pkg.sha512>`__)
+.. |Solaris10_SPARC| replace:: `wazuh-agent_v|WAZUH_CURRENT_SOLARIS10_SPARC|-sol10-sparc.pkg <https://packages.wazuh.com/|WAZUH_CURRENT_MAJOR_SOLARIS10_SPARC|/solaris/sparc/10/wazuh-agent_v|WAZUH_CURRENT_SOLARIS10_SPARC|-sol10-sparc.pkg>`__ (`sha512 <https://packages.wazuh.com/|WAZUH_CURRENT_MAJOR_SOLARIS10_SPARC|/checksums/wazuh/|WAZUH_CURRENT_SOLARIS10_SPARC|/wazuh-agent_v|WAZUH_CURRENT_SOLARIS10_SPARC|-sol10-sparc.pkg.sha512>`__)
 
-.. |Solaris11_i386| replace:: `wazuh-agent_v|WAZUH_CURRENT_SOLARIS11|-sol11-i386.p5p <https://packages.wazuh.com/|WAZUH_CURRENT_MAJOR_SOLARIS11|/solaris/i386/11/wazuh-agent_v|WAZUH_CURRENT_SOLARIS11|-sol11-i386.p5p>`__ (`sha512 <https://packages.wazuh.com/|WAZUH_CURRENT_MAJOR_SOLARIS11|/checksums/wazuh/|WAZUH_CURRENT_SOLARIS11|/wazuh-agent_v|WAZUH_CURRENT_SOLARIS11|-sol11-i386.p5p.sha512>`__)
+.. |Solaris11_i386| replace:: `wazuh-agent_v|WAZUH_CURRENT_SOLARIS11_i386|-sol11-i386.p5p <https://packages.wazuh.com/|WAZUH_CURRENT_MAJOR_SOLARIS11_i386|/solaris/i386/11/wazuh-agent_v|WAZUH_CURRENT_SOLARIS11_i386|-sol11-i386.p5p>`__ (`sha512 <https://packages.wazuh.com/|WAZUH_CURRENT_MAJOR_SOLARIS11_i386|/checksums/wazuh/|WAZUH_CURRENT_SOLARIS11_i386|/wazuh-agent_v|WAZUH_CURRENT_SOLARIS11_i386|-sol11-i386.p5p.sha512>`__)
 
-.. |Solaris11_SPARC| replace:: `wazuh-agent_v|WAZUH_CURRENT_SOLARIS11|-sol11-sparc.p5p <https://packages.wazuh.com/|WAZUH_CURRENT_MAJOR_SOLARIS11|/solaris/sparc/11/wazuh-agent_v|WAZUH_CURRENT_SOLARIS11|-sol11-sparc.p5p>`__ (`sha512 <https://packages.wazuh.com/|WAZUH_CURRENT_MAJOR_SOLARIS11|/checksums/wazuh/|WAZUH_CURRENT_SOLARIS11|/wazuh-agent_v|WAZUH_CURRENT_SOLARIS11|-sol11-sparc.p5p.sha512>`__)
+.. |Solaris11_SPARC| replace:: `wazuh-agent_v|WAZUH_CURRENT_SOLARIS11_SPARC|-sol11-sparc.p5p <https://packages.wazuh.com/|WAZUH_CURRENT_MAJOR_SOLARIS11_SPARC|/solaris/sparc/11/wazuh-agent_v|WAZUH_CURRENT_SOLARIS11_SPARC|-sol11-sparc.p5p>`__ (`sha512 <https://packages.wazuh.com/|WAZUH_CURRENT_MAJOR_SOLARIS11_SPARC|/checksums/wazuh/|WAZUH_CURRENT_SOLARIS11_SPARC|/wazuh-agent_v|WAZUH_CURRENT_SOLARIS11_SPARC|-sol11-sparc.p5p.sha512>`__)
 
 +---------+--------------+-------------------------+
 | Version | Architecture | Package                 |

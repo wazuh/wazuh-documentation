@@ -1,5 +1,8 @@
 .. Copyright (C) 2015, Wazuh, Inc.
 
+.. meta::
+  :description: Wazuh dashboard provides a web dashboard for data visualization and analysis. Learn more about it in this section of our documentation.
+  
 .. _pci_dss_elastic:
 
 Visualization and dashboard

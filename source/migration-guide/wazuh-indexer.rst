@@ -164,7 +164,7 @@ Follow this guide to migrate from Open Distro for Elasticsearch 1.13 to the Wazu
 
 #. For multi-node deployments, repeat steps 4–10 until the upgrade is performed on all the nodes. 
 
-#. Once all the nodes have been been upgraded, restart Filebeat.   
+#. Once all the nodes have been upgraded, restart Filebeat.   
 
    .. tabs::
    

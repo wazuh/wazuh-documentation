@@ -1,5 +1,8 @@
 .. Copyright (C) 2015, Wazuh, Inc.
 
+.. meta::
+   :description: This section of the Wazuh documentation guides through the process of restoring the Wazuh alerts after upgrading Wazuh from 2.x to 3.x.
+
 .. _restore_alerts_2.x_3.x:
 
 Restore the Wazuh alerts from Wazuh 2.x

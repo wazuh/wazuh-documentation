@@ -43,6 +43,8 @@ Save the credentials, you will use them later to configure the module.
 
 Depending on the service that will be monitored, the Wazuh user will need a different set of permissions. The permissions required for each service are explained on the page of each service listed in the :ref:`supported services <amazon_supported_services>` section.
 
+.. _authentication_method:
+
 Authenticating options
 ----------------------
 

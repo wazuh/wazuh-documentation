@@ -1,7 +1,7 @@
 .. Copyright (C) 2015, Wazuh, Inc.
 
 .. meta::
-  :description: AWS Classic Load Balancer is a service that distributes incoming application traffic across multiple targets. Learn how to configure and monitor it with Wazuh.
+  :description: Amazon NLB automatically distributes the incoming traffic across multiple targets. Learn how to use Amazon NLB with Wazuh in this section.
 
 .. _amazon_nlb:
 
