@@ -108,13 +108,19 @@ Starting Wazuh 4.0 the Wazuh API username variable changed from ``user`` to ``us
         run_as: false
 
 
-Wazuh API and Wazuh dashboard version mismatch
-----------------------------------------------
+"Wazuh API and Wazuh dashboard version mismatch" error is displayed
+-------------------------------------------------------------------
 
-This error indicates a mismatch in the versions of the Wazuh manager and the Wazuh dashboard. In order to ensure the correct operation and intercommunication of these components, we highly recommend they are up to the same version, even if the dashboard can connect to managers from a different patch version. In these cases, the major and minor version of the components must be equal.
+This error shows a mismatch between the Wazuh server and the Wazuh dashboard versions.
 
-To solve this issue, you need to upgrade the component with the lower version. Learn how to upgrade Wazuh in our :doc:`upgrade guide</upgrade-guide/index>`.
+The Wazuh server and the Wazuh dashboard must run the same major and minor versions. For example:
 
+-  `Wazuh server |WAZUH_CURRENT_MINOR|.x`
+-  `Wazuh dashboard |WAZUH_CURRENT_MINOR|.y`
+
+Moreover, we recommend both server and dashboard run the same full version, for example |WAZUH_CURRENT|. Running the same full version ensures the correct operation and communication between these components.
+
+Check out how to upgrade Wazuh in our :doc:`upgrade guide</upgrade-guide/index>`.
 
 None of the above solutions are fixing my problem
 -------------------------------------------------
