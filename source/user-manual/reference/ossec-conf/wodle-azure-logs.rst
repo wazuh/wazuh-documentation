@@ -758,7 +758,7 @@ This option sets the time delay in which we will perform the query. For example,
 storage\\container\\path
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-Defines for the container a path to search into. If isn't present the module retrieves all the blobs at the root level.
+Defines, for the container, a path to search into. If it isn't present, the module retrieves all the blobs at the root level.
 
 +--------------------+----------------------------------------------------------------------------------------------------------------------------+
 | **Default value**  | N/A                                                                                                                        |
