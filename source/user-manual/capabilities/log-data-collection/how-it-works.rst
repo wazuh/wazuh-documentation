@@ -90,11 +90,11 @@ Remote syslog
 
 In order to integrate network devices such as routers, firewalls, etc, the log analysis component can be configured to receive log events through syslog. To do that, we have two methods available:
 
-- Receiving Syslog logs
-- Storing logs
+- Receiving Syslog logs in a custom port
+- Storing logs in a plaintext file
 
-Receiving Syslog logs
-~~~~~~~~~~~~~~~~~~~~~
+Receiving Syslog logs in a custom port
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 In this method Wazuh receives syslog logs in a custom port:
 
@@ -118,8 +118,8 @@ In this method Wazuh receives syslog logs in a custom port:
 
       The ``allowed-ips`` label is mandatory, without it the configuration will not take effect. 
 
-Storing logs
-~~~~~~~~~~~~
+Storing logs in a plaintext file
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 This method consists of storing the logs in a plaintext file and monitoring that file with Wazuh. If a ``/etc/rsyslog.conf`` configuration file is being used and we have defined where to store the syslog logs we can monitor them in Wazuh ``ossec.conf`` using a ``<localfile>`` block with ``syslog`` as the log format.
 
