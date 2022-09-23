@@ -32,7 +32,7 @@ To enable multi-tenancy, follow the instructions below.
       :emphasize-lines: 2,3
 
        opensearch.requestHeadersWhitelist: ["securitytenant","Authorization"]
-       opensearch_security.multitenancy.enabled: false
+       opensearch_security.multitenancy.enabled: true
        opensearch_security.multitenancy.tenants.preferred: ["Global", "Private"]
        opensearch_security.readonly_mode.roles: ["kibana_read_only"]
 
