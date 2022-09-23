@@ -613,7 +613,10 @@ custom_replacements = {
     #
     # === Splunk
     "|SPLUNK_LATEST|" : "8.2.6",
+    "|SPLUNK_LATEST_MINOR|" : "8.2",
     "|WAZUH_SPLUNK_CURRENT|" : release,
+    "|WAZUH_SPLUNK_REV_CURRENT_8.1|" : "1",
+    "|WAZUH_SPLUNK_REV_CURRENT_8.2|" : "1",
 }
 
 # -- Customizations ---------------------------------------------------------
