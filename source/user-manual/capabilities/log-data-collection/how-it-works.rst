@@ -90,11 +90,11 @@ Remote syslog
 
 In order to integrate network devices such as routers, firewalls, etc, the log analysis component can be configured to receive log events through syslog. To do that, we have two methods available:
 
-- Receiving Syslog logs in a custom port
+- Receiving logs in a custom port
 - Storing logs in a plaintext file
 
-Receiving Syslog logs in a custom port
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+Receiving logs in a custom port
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 In this method Wazuh receives syslog logs in a custom port:
 
