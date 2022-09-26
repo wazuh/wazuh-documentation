@@ -27,17 +27,23 @@ The following sections cover how to configure AWS to store the scan findings in 
 AWS configuration
 -----------------
 
-AWS provides a `template <https://github.com/aws-samples/ecr-image-scan-findings-logger/blob/main/Template-ECR-SFL.yml>`_ for creating a stack in CloudFormation that loads the image scan findings from Amazon ECR in CloudWatch using an AWS Lambda function. To be able to use this template, create the stack and upload images to Amazon ECR, it is necessary to create a custom policy granting the necessary permissions. 
+AWS provides a `template <https://github.com/aws-samples/ecr-image-scan-findings-logger/blob/main/Template-ECR-SFL.yml>`_ for creating a stack in CloudFormation. The template has an AWS Lambda function. It logs the image scan findings from Amazon ECR in CloudWatch.
+
+Create the stack and upload images to Amazon ECR to use this template. You need to create a custom policy to grant the necessary permissions.
 
 .. include:: /_templates/cloud/amazon/create_policy.rst
 
 Template specific permissions
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
 IAM 
 ~~~
 
+You need the permissions listed below inside the sections for  ``RoleCreator`` and ``PassRole`` to create and delete the stack based on the template.
+
 .. warning::
-      The permissions inside the ``RoleCreator`` and ``PassRole`` sections are necessary in order to create and delete the stack based on the named template and must be bound to the described specific resources due to overly permissive actions.
+
+   These permissions must be bound to the specific resources due to overly permissive actions.
 
 .. code-block:: json
   
@@ -66,7 +72,7 @@ IAM
 Amazon Lambda and Amazon EventBridge
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-The following permissions are required to create and delete the resources handled by the Scan Findings Logger template.
+You need the following permissions to create and delete the resources handled by the Scan Findings Logger template.
   
 .. code-block:: json
 
@@ -100,7 +106,7 @@ The following permissions are required to create and delete the resources handle
 CloudFormation Stack
 ^^^^^^^^^^^^^^^^^^^^
 
-The following permissions are required to create and delete any template based CloudFormation stack.
+You need the following permissions to create and delete any template-based CloudFormation stack.
 
 .. code-block:: json
 
@@ -126,10 +132,11 @@ The following permissions are required to create and delete any template based C
 
 Amazon ECR usage permissions
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
 Image Pushing and Scanning
 ~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-The following permissions are required by Amazon ECR to `push images <https://docs.aws.amazon.com/AmazonECR/latest/userguide/image-push.html#image-push-iam>`_ and are scoped down to a specific repository. The steps to push Docker images is also described in the `Amazon ECR - Pushing a Docker image <https://docs.aws.amazon.com/AmazonECR/latest/userguide/docker-push-ecr-image.html>`_ documentation.
+You need the following Amazon ECR permissions to `push images <https://docs.aws.amazon.com/AmazonECR/latest/userguide/image-push.html#image-push-iam>`__. They are scoped down to a specific repository. The steps to push Docker images are described in the `Amazon ECR - Pushing a Docker image <https://docs.aws.amazon.com/AmazonECR/latest/userguide/docker-push-ecr-image.html>`_ documentation.
 
 .. code-block:: json
 
@@ -154,8 +161,8 @@ ECR Registry and Repository
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 .. note::
-      The permission ``ecr:GetAuthorizationToken`` is required by `Amazon ECR <https://docs.aws.amazon.com/AmazonECR/latest/userguide/set-repository-policy.html>`_ for users to have permission to make calls to the API through an IAM policy before they can authenticate to a registry and push or pull any images from any Amazon ECR repository.
 
+   Before authenticating to a registry and pushing or pulling any images from any Amazon ECR repository, you need  ``ecr:GetAuthorizationToken``. This `Amazon ECR <https://docs.aws.amazon.com/AmazonECR/latest/userguide/set-repository-policy.html>`__ permission allows calls to the API through an IAM policy.
 
 .. code-block:: json
 
