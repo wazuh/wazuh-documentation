@@ -12,7 +12,7 @@ Google Cloud Pub/Sub is a fully-managed real-time messaging service that allows 
 
 We use it to get security events from the Google Cloud instances without creating a special logic to avoid reprocessing events.
 
-In this section, we will see how to create a topic, a subscription, and a sink to fully configure Google Cloud Pub/Sub to work with Wazuh.
+In this section, we see how to create a topic, a subscription, and a sink to fully configure Google Cloud Pub/Sub to work with Wazuh.
 
 Create a topic
 --------------
