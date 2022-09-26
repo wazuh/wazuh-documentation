@@ -2,7 +2,7 @@
 .. Original content from the OSSEC documentation, available at http://www.ossec.net/docs/manual/rules-decoders/rule-levels.html
 
 .. meta::
-  :description: The rules are classified into multiple levels, from the lowest (0) to the maximum (16). Learn more about Wazuh and Rules classification in this section. 
+  :description: The rules are classified into multiple levels, from 0 to 16. Learn more about Wazuh and Rules classification in this section. 
 
 .. _rules_classification:
 
