@@ -1,5 +1,8 @@
 .. Copyright (C) 2015, Wazuh, Inc.
 
+.. meta::
+  :description: The Wazuh dashboard includes a configuration file where you can define custom values for several options. Learn more about it in this section.
+
 .. _wazuh_dashboard_config_file:
 
 Configuration file

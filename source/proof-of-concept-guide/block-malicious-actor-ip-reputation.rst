@@ -1,3 +1,4 @@
+.. Copyright (C) 2015, Wazuh, Inc.
 
 .. meta::
   :description: In this PoC, you identify the monitored Windows endpoint IP address as a bad reputation one. Learn more about it in our documentation.
