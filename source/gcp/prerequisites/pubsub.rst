@@ -1,5 +1,8 @@
-.. Copyright (C) 2022 Wazuh, Inc.
+.. Copyright (C) 2015, Wazuh, Inc.
 
+.. meta::
+  :description: Google Cloud Pub/Sub is a real-time messaging service to send and receive messages between applications. Learn how to use this service with Wazuh here.
+  
 .. _pubsub:
 
 Configuring Google Cloud Pub/Sub
