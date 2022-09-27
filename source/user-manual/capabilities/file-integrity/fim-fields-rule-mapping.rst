@@ -1,7 +1,7 @@
 .. Copyright (C) 2015, Wazuh, Inc.
 
 .. meta::
-  :description: Learn more about how FIM fields can be mapped into rules with the FIM fields rule mapping in this section of our documentation.   
+  :description: Wazuh File integrity monitoring triggers alerts when monitored files change. Learn how to map FIM fields into rules in this section of our documentation.   
 
 FIM fields rule mapping
 =======================

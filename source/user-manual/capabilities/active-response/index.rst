@@ -1,7 +1,7 @@
 .. Copyright (C) 2015, Wazuh, Inc.
 
 .. meta::
-  :description: Active responses execute a script in response to the triggering of specific alerts based on the alert level or rule group. Learn more about it here. 
+  :description: Active responses execute a script in response to specific alerts. It's based on the alert level or rule group. Learn more about it here.
 
 .. _automatic_remediation:
 

@@ -1,7 +1,7 @@
 .. Copyright (C) 2015, Wazuh, Inc.
 
 .. meta::
-  :description: Wazuh allows managing the Osquery tool from the Wazuh agents. Learn how to use Osquery with Wazuh in this section of the Wazuh documentation.
+  :description: Osquery exposes operating system data. Learn how to explore this data with Wazuh in this section of the Wazuh documentation.
   
 .. _osquery:
 

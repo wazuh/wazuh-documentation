@@ -1,7 +1,7 @@
 .. Copyright (C) 2015, Wazuh, Inc.
 
 .. meta::
-  :description: Learn more about how to create custom Security Configuration Assessment (SCA) policies with Wazuh and discover some examples. 
+  :description: Learn more about how to create custom Security Configuration Assessment (SCA) policies in Wazuh and discover some examples. 
 
 Creating custom SCA policies
 ----------------------------

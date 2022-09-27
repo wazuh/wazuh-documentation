@@ -1,7 +1,7 @@
 .. Copyright (C) 2015, Wazuh, Inc.
 
 .. meta::
-  :description:Learn how to remove agents in this section of the Wazuh documentation.
+  :description: Learn how to remove agents in this section of the Wazuh documentation.
   
 .. _remove_agents:
 

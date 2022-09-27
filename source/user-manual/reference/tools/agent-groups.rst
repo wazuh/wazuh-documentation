@@ -1,7 +1,7 @@
 .. Copyright (C) 2015, Wazuh, Inc.
 
 .. meta::
-  :description: Find out how the agent_groups program allows you to list agents assigned to a group. Learn more about it in this section of the Wazuh documentation.
+  :description: Find out how to list agents assigned to a group using the agent_groups program. Learn more about it in this section of the Wazuh documentation.
   
 .. _agent_groups:
 

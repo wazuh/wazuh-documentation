@@ -1,7 +1,7 @@
 .. Copyright (C) 2015, Wazuh, Inc.
 
 .. meta::
-  :description: Find out how to get an alert when a check changes its result value. Learn more in this section of the Wazuh documentation.
+  :description: Follow a use case to see how Wazuh runs SCA checks and triggers alerts in this section of the documentation.
 
 Use case: Getting an alert when a check changes its result value
 ================================================================

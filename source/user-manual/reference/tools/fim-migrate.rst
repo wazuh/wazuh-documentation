@@ -1,7 +1,7 @@
 .. Copyright (C) 2015, Wazuh, Inc.
 
 .. meta::
-  :description: The fim_migrate tool allows to migrate FIM databases older than Wazuh v3.7.0 to the new format included in Wazuh-DB. Learn more about it in this section.
+  :description: Migrate FIM databases older than Wazuh v3.7.0 to the new format included in Wazuh-DB using the fim_migrate tool. Learn more about it in this section.
   
 .. _fim_migrate:
 
