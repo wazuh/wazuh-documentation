@@ -88,41 +88,54 @@ Wazuh can monitor logs from the macOS Unified Logging System.
 Remote syslog
 ^^^^^^^^^^^^^
 
-In order to integrate network devices such as routers, firewalls, etc, the log analysis component can be configured to receive log events through syslog. To do that, we have two methods available:
+To integrate network devices such as routers and firewalls, among others, the log analysis component can be configured to receive log events through syslog. To do that, we have two methods available:
 
-One option is for Wazuh to receive syslog logs by a custom port:
+- Receiving syslog logs in a custom port
+- Storing syslog logs in a plaintext file and monitoring it with Wazuh
 
-  .. code-block:: xml
+Receiving syslog logs in a custom port
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-    <ossec_config>
-      <remote>
-        <connection>syslog</connection>
-        <port>513</port>
-        <protocol>tcp</protocol>
-        <allowed-ips>192.168.2.0/24</allowed-ips>
-      </remote>
-    </ossec_config>
+Configure Wazuh as follows to receive logs in a given port: 
 
-- ``<connection>syslog</connection>`` indicates that the manager will accept incoming syslog messages from across the network.
-- ``<port>513</port>`` defines the port that Wazuh will listen to retrieve the logs. The port must be free.
-- ``<protocol>tcp</protocol>`` defines the protocol to listen the port. It can be UDP or TCP.
-- ``<allowed-ips>192.168.2.0/24</allowed-ips>`` defines the network or IP address from which syslog messages will be accepted.
+    .. code-block:: xml
 
-The other option stores the logs in a plaintext file and monitors that file with Wazuh. If a ``/etc/rsyslog.conf`` configuration file is being used and we have defined where to store the syslog logs we can monitor them in Wazuh ``ossec.conf`` using a ``<localfile>`` block with ``syslog`` as the log format.
+      <ossec_config>
+        <remote>
+          <connection>syslog</connection>
+          <port>513</port>
+          <protocol>tcp</protocol>
+          <allowed-ips>192.168.2.0/24</allowed-ips>
+        </remote>
+      </ossec_config>
 
-.. code-block:: xml
+    - ``<connection>syslog</connection>`` indicates that the manager will accept incoming syslog messages from across the network.
+    - ``<port>513</port>`` defines the port that Wazuh will listen to retrieve the logs. The port must be free.
+    - ``<protocol>tcp</protocol>`` defines the protocol to listen the port. It can be UDP or TCP.
+    - ``<allowed-ips>192.168.2.0/24</allowed-ips>`` defines the network or IP address from which syslog messages will be accepted.
 
-  <localfile>
-    <log_format>syslog</log_format>
-    <location>/custom/file/path</location>
-  </localfile>
+    .. note::
 
-- ``<log_format>syslog</log_format>`` indicates the source log format, in this case, syslog format.
-- ``<location>/custom/file/path</location>`` indicates where we have stored the syslog logs.
+      The ``allowed-ips`` label is mandatory, without it the configuration will not take effect. 
 
-.. note::
+Storing syslog logs in a plaintext file and monitoring it with Wazuh
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-  For more information about the ``localfile`` label, see the :ref:`Local configuration's localfile <reference_ossec_localfile>`.
+This method consists of storing the logs in a plaintext file and monitoring that file. If a ``/etc/rsyslog.conf`` configuration file is being used and we have defined where to store the syslog logs, we can monitor them with Wazuh by configuring a ``<localfile>`` block with ``syslog`` as the log format.
+
+    .. code-block:: xml
+
+      <localfile>
+        <log_format>syslog</log_format>
+        <location>/custom/file/path</location>
+      </localfile>
+
+    - ``<log_format>syslog</log_format>`` indicates the source log format, in this case, syslog format.
+    - ``<location>/custom/file/path</location>`` indicates where we have stored the syslog logs.
+
+    .. note::
+
+      For more information about the ``localfile`` label, see the :ref:`Local configuration localfile <reference_ossec_localfile>`.
 
 Analysis
 --------
@@ -130,7 +143,7 @@ Analysis
 Pre-decoding
 ^^^^^^^^^^^^
 
-In the pre-decoding phase of analysis, static information from well-known fields all that is extracted from the log header.
+In the pre-decoding phase of analysis, static information from well-known fields is extracted from the log header.
 
 .. code-block:: none
   :class: output
