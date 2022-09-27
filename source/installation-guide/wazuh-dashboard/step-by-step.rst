@@ -138,7 +138,7 @@ Select your deployment type and follow the instructions to change the default pa
 
    .. group-tab:: All-in-one deployment
 
-       #. Use the Wazuh password tool to change all the internal users passwords. 
+       #. Use the Wazuh passwords tool to change all the internal users passwords. 
       
           .. code-block:: console
          
@@ -161,7 +161,7 @@ Select your deployment type and follow the instructions to change the default pa
     
    .. group-tab:: Distributed deployment
 
-       #. On `any Wazuh indexer node`,  use the Wazuh password tool to change all the internal users passwords. 
+       #. On `any Wazuh indexer` node, use the Wazuh passwords tool to change all the Wazuh indexer user passwords. 
 
           .. code-block:: console
   
@@ -179,7 +179,7 @@ Select your deployment type and follow the instructions to change the default pa
              INFO: The password for user snapshotrestore is Mb2EHw8SIc1d.oz.nM?dHiPBGk7s?UZB
              WARNING: Wazuh indexer passwords changed. Remember to update the password in the Wazuh dashboard and Filebeat nodes if necessary, and restart the services.
 
-       #. On your `Wazuh master` node,  download the Wazuh password tool and use it to change the default users passwords.
+       #. On your `Wazuh master` node, download the Wazuh passwords tool and use it to change the Wazuh API user passwords.
 
           .. code-block:: console
   
@@ -192,7 +192,7 @@ Select your deployment type and follow the instructions to change the default pa
              INFO: The password for Wazuh API user wazuh is ivLOfmj7.jL6*7Ev?UJoFjrkGy9t6Je.
              INFO: The password for Wazuh API user wazuh-wui is fL+f?sFRPEv5pYRE559rqy9b6G4Z5pVi                    
 
-       #. On your `Wazuh servers`, update the `admin` password in the Filebeat keystore. Replace ``<admin-password>`` with the random password generated in the previous step and run the following command:  
+       #. On your `Wazuh servers`, update the `admin` password in the Filebeat keystore. Replace ``<admin-password>`` with the random password generated in the first step and run the following command:  
       
           .. code-block:: console
 
@@ -202,7 +202,15 @@ Select your deployment type and follow the instructions to change the default pa
 
           .. include:: /_templates/common/restart_filebeat.rst
 
-       #. On your `Wazuh dashboard` server, update ``/usr/share/wazuh-dashboard/data/wazuh/config/wazuh.yml`` with your new password.  
+          .. note:: Update the `admin` password and restart Filebeat on every Wazuh server node.   
+       
+       #. On your `Wazuh dashboard` server, update the `kibanaserver` password in the Wazuh dashboard keystore. Replace ``<kibanaserver-password>`` with the random password generated in the first step and run the following command:   
+
+          .. code-block:: console
+
+             # echo <kibanaserver-password> | /usr/share/wazuh-dashboard/bin/opensearch-dashboards-keystore --allow-root add -f --stdin opensearch.password         
+
+       #. Update the ``/usr/share/wazuh-dashboard/data/wazuh/config/wazuh.yml`` configuration file with the new `wazuh-wui` password generated in the second step.  
 
           .. code-block:: yaml
             :emphasize-lines: 6
@@ -212,14 +220,8 @@ Select your deployment type and follow the instructions to change the default pa
                  url: https://localhost
                  port: 55000
                  username: wazuh-wui
-                 password: SuperS3cretPassword!
+                 password: <wazuh-wui-password>
                  run_as: false 
-       
-       #. On your `Wazuh dashboard` server, update the `kibanaserver` password in the Wazuh dashboard keystore. Replace ``<kibanaserver-password>`` with the random password generated in the previous step and run the following command:   
-
-          .. code-block:: console
-
-             # echo <kibanaserver-password> | /usr/share/wazuh-dashboard/bin/opensearch-dashboards-keystore --allow-root add -f --stdin opensearch.password         
 
        #. Restart the Wazuh dashboard. 
 
