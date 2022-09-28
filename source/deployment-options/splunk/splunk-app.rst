@@ -21,9 +21,6 @@ The following sections show how to install it, update it, and troubleshoot event
    :align: center
    :width: 80%
 
-Install the Wazuh app for Splunk in an all-in-one architecture
---------------------------------------------------------------
-
 .. note::      
 
       - This guide will install and configure the Wazuh app for Splunk |SPLUNK_LATEST_MINOR|. If you intend to configure another version such as 8.1, change the Splunk version number in the requests for the configuration files and the Wazuh app for Splunk. For example:
@@ -39,6 +36,8 @@ Install the Wazuh app for Splunk in an all-in-one architecture
             
             # curl -o SplunkAppForWazuh.tar.gz https://packages.wazuh.com/4.x/ui/splunk/wazuh_splunk-|WAZUH_SPLUNK_CURRENT|_8.1-|WAZUH_SPLUNK_REV_CURRENT_8.1|.tar.gz
 
+Install the Wazuh app for Splunk in an all-in-one architecture
+--------------------------------------------------------------
 
 #. Download the latest Wazuh app for Splunk to the all-in-one server:
 
@@ -112,22 +111,6 @@ Install the Wazuh app for Splunk in an all-in-one architecture
 Install the Wazuh app for Splunk in a minimal distributed architecture
 ----------------------------------------------------------------------
 
-.. note::      
-
-      - This guide will install and configure the Wazuh app for Splunk |SPLUNK_LATEST_MINOR|. If you intend to configure a different version of Splunk with the Wazuh app, change the Splunk version number in the requests for the configuration files and the Wazuh app for Splunk. For example, if you intend to configure Splunk 8.1:
-
-         .. code-block:: console
-
-            # curl -o SplunkAppForWazuh.tar.gz https://packages.wazuh.com/4.x/ui/splunk/wazuh_splunk-|WAZUH_SPLUNK_CURRENT|_|SPLUNK_LATEST_MINOR|-|WAZUH_SPLUNK_REV_CURRENT_LATEST|.tar.gz
-
-
-         Becomes
-
-         .. code-block:: console
-            
-            # curl -o SplunkAppForWazuh.tar.gz https://packages.wazuh.com/4.x/ui/splunk/wazuh_splunk-|WAZUH_SPLUNK_CURRENT|_8.1-|WAZUH_SPLUNK_REV_CURRENT_8.1|.tar.gz
-
-
 #. Download the latest Wazuh app for Splunk to the indexer node:
 
          .. code-block:: console
@@ -192,26 +175,6 @@ Install the Wazuh app for Splunk in a minimal distributed architecture
 
 Install the Wazuh app for Splunk in a multi-instance cluster
 ------------------------------------------------------------
-
-.. note::
-
-   -  We can install the Wazuh app for Splunk in each search-head manually, but in cases where there are many search-heads, it is more convenient to install it automatically. For this purpose, the ``deployer`` will be used. The deployer is an endpoint that installs the Wazuh app for Splunk in every search-head automatically.
-    
-   -  The official Splunk documentation for deploying a search head cluster is `here <https://docs.splunk.com/Documentation/Splunk/|SPLUNK_LATEST|/Deploy/SHCwithindexers>`__.
-
-   -  This guide will install and configure the Wazuh app for Splunk |SPLUNK_LATEST_MINOR|. If you intend to configure a different version of Splunk with the Wazuh app, change the Splunk version number in the requests for the configuration files and the Wazuh app for Splunk. For example, if you intend to configure Splunk 8.1:
-
-         .. code-block:: console
-
-            # curl -o SplunkAppForWazuh.tar.gz https://packages.wazuh.com/4.x/ui/splunk/wazuh_splunk-|WAZUH_SPLUNK_CURRENT|_|SPLUNK_LATEST_MINOR|-|WAZUH_SPLUNK_REV_CURRENT_LATEST|.tar.gz
-
-
-         Becomes
-
-         .. code-block:: console
-            
-            # curl -o SplunkAppForWazuh.tar.gz https://packages.wazuh.com/4.x/ui/splunk/wazuh_splunk-|WAZUH_SPLUNK_CURRENT|_8.1-|WAZUH_SPLUNK_REV_CURRENT_8.1|.tar.gz
-
 
 Install the Wazuh app for Splunk on the ``deployer`` machine and follow the steps below:
 

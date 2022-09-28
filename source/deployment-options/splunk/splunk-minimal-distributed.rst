@@ -48,6 +48,23 @@ Before installing the Splunk indexer, some extra packages must be installed on t
          # apt-get install curl apt-transport-https lsb-release gnupg
    
 
+.. note::
+
+      - Splunk is not open source software, and it requires a registered user and license in order to work. You can also use a free trial license.
+
+      - This guide will install and configure Splunk |SPLUNK_LATEST_MINOR|. If you intend to configure another version of Splunk such as 8.1, change the Splunk version number in the requests for the configuration files and the Wazuh app for Splunk. For example:
+
+         .. code-block:: console
+
+            # curl -so /opt/splunk/etc/system/local/indexes.conf https://raw.githubusercontent.com/wazuh/wazuh-splunk/v|WAZUH_SPLUNK_CURRENT|-|SPLUNK_LATEST_MINOR|/setup/indexer/indexes.conf
+
+
+         Becomes
+
+         .. code-block:: console
+            
+            # curl -so /opt/splunk/etc/system/local/indexes.conf https://raw.githubusercontent.com/wazuh/wazuh-splunk/v|WAZUH_SPLUNK_CURRENT|-8.1/setup/indexer/indexes.conf
+
 .. warning::
    
    This section will install Splunk using the minimal Splunk deployment schema. If you want a more advanced installation, check out the :doc:`multi-instance <splunk-distributed>` deployment schema.
@@ -60,24 +77,6 @@ This component receives the data flow streamed by a forwarder and stores it in a
 
 #. Download the Splunk package from `its official website <https://www.splunk.com/en_us/download/partners/splunk-enterprise.html>`__. The versions of Splunk compatible with Wazuh and the Wazuh app for Splunk can be found :ref:`here <wazuh_and_splunk_app>`.
 
-   .. note::
-
-         - Splunk is not open source software, and it requires a registered user and license in order to work. You can also use a free trial license.
-
-         - This guide will install and configure Splunk |SPLUNK_LATEST_MINOR|. If you intend to configure another version of Splunk such as 8.1, change the Splunk version number in the requests for the configuration files and the Wazuh app for Splunk. For example:
-
-            .. code-block:: console
-
-               # curl -so /opt/splunk/etc/system/local/indexes.conf https://raw.githubusercontent.com/wazuh/wazuh-splunk/v|WAZUH_SPLUNK_CURRENT|-|SPLUNK_LATEST_MINOR|/setup/indexer/indexes.conf
-
-
-            Becomes
-
-            .. code-block:: console
-               
-               # curl -so /opt/splunk/etc/system/local/indexes.conf https://raw.githubusercontent.com/wazuh/wazuh-splunk/v|WAZUH_SPLUNK_CURRENT|-8.1/setup/indexer/indexes.conf
-
-      
 #. Install the Splunk package:
 
    #. For RPM based distributions:
@@ -161,24 +160,6 @@ A Splunk forwarder is required in order to send alerts to the Splunk indexer.
 Depending on the type of architecture that you’re installing, the Splunk forwarder is configured differently.
 
 #. Download the Splunk package from `its official website <https://www.splunk.com/en_us/download/partners/splunk-enterprise.html>`__. The versions of Splunk compatible with Wazuh and the Wazuh app for Splunk can be found :ref:`here <wazuh_and_splunk_app>`.
-
-   .. note::
-
-         - Splunk is not open source software, and it requires a registered user and license in order to work. You can also use a free trial license.
-
-         - This guide will install and configure Splunk |SPLUNK_LATEST_MINOR|. If you intend to configure another version of Splunk such as 8.1, change the Splunk version number in the requests for the configuration files and the Wazuh app for Splunk. For example:
-
-            .. code-block:: console
-
-               # curl -so /opt/splunk/etc/system/local/indexes.conf https://raw.githubusercontent.com/wazuh/wazuh-splunk/v|WAZUH_SPLUNK_CURRENT|-|SPLUNK_LATEST_MINOR|/setup/indexer/indexes.conf
-
-
-            Becomes
-
-            .. code-block:: console
-               
-               # curl -so /opt/splunk/etc/system/local/indexes.conf https://raw.githubusercontent.com/wazuh/wazuh-splunk/v|WAZUH_SPLUNK_CURRENT|-8.1/setup/indexer/indexes.conf
-
 
 #. Install the Splunk forwarder package on the Wazuh manager:
 
