@@ -161,7 +161,7 @@ Select your deployment type and follow the instructions to change the default pa
     
    .. group-tab:: Distributed deployment
 
-      #. On `any Wazuh indexer node`, use the Wazuh passwords tool to change all the Wazuh indexer user passwords. 
+      #. On `any Wazuh indexer node`, use the Wazuh passwords tool to change the passwords of the Wazuh indexer users. 
 
          .. code-block:: console
   
@@ -179,7 +179,7 @@ Select your deployment type and follow the instructions to change the default pa
             INFO: The password for user snapshotrestore is Mb2EHw8SIc1d.oz.nM?dHiPBGk7s?UZB
             WARNING: Wazuh indexer passwords changed. Remember to update the password in the Wazuh dashboard and Filebeat nodes if necessary, and restart the services.
 
-      #. On your `Wazuh server master node`, download the Wazuh passwords tool and use it to change the Wazuh API users passwords.
+      #. On your `Wazuh server master node`, download the Wazuh passwords tool and use it to change the passwords of the Wazuh API users.
 
          .. code-block:: console
   
@@ -198,13 +198,13 @@ Select your deployment type and follow the instructions to change the default pa
 
             # echo <admin-password> | filebeat keystore add password --stdin --force
 
-      #. Restart Filebeat on `all your Wazuh server nodes`.
+      #. Restart Filebeat to apply the change.
 
          .. include:: /_templates/common/restart_filebeat.rst
 
          .. note:: Repeat steps 3 and 4 on `every Wazuh server node`.
        
-      #. On your `Wazuh dashboard server`, run the following command to update the `kibanaserver` password in the Wazuh dashboard keystore. Replace ``<kibanaserver-password>`` with the random password generated in the first step.
+      #. On your `Wazuh dashboard node`, run the following command to update the `kibanaserver` password in the Wazuh dashboard keystore. Replace ``<kibanaserver-password>`` with the random password generated in the first step.
 
          .. code-block:: console
 
@@ -216,14 +216,14 @@ Select your deployment type and follow the instructions to change the default pa
             :emphasize-lines: 6
            
             hosts:
-            - default:
-               url: https://localhost
-               port: 55000
-               username: wazuh-wui
-               password: <wazuh-wui-password>
-               run_as: false
+              - default:
+                 url: https://localhost
+                 port: 55000
+                 username: wazuh-wui
+                 password: <wazuh-wui-password>
+                 run_as: false
 
-      #. Restart the Wazuh dashboard.
+      #. Restart the Wazuh dashboard to apply the changes.
 
          .. include:: /_templates/common/restart_dashboard.rst
 
