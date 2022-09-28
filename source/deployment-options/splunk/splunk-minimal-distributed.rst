@@ -64,7 +64,7 @@ This component receives the data flow streamed by a forwarder and stores it in a
 
          - Splunk is not open source software, and it requires a registered user and license in order to work. You can also use a free trial license.
 
-         - This guide will install and configure Splunk |SPLUNK_LATEST|. If you intend to configure a different version of Splunk |SPLUNK_LATEST_MINOR| with Wazuh, change the Splunk version number in the requests for the configuration files and the Wazuh app for Splunk. For example, if you intend to configure Splunk 8.1:
+         - This guide will install and configure Splunk |SPLUNK_LATEST_MINOR|. If you intend to configure another version of Splunk such as 8.1, change the Splunk version number in the requests for the configuration files and the Wazuh app for Splunk. For example:
 
             .. code-block:: console
 
@@ -166,7 +166,7 @@ Depending on the type of architecture that you’re installing, the Splunk forwa
 
          - Splunk is not open source software, and it requires a registered user and license in order to work. You can also use a free trial license.
 
-         - This guide will install and configure Splunk |SPLUNK_LATEST|. If you intend to configure a different version of Splunk |SPLUNK_LATEST_MINOR| with Wazuh, change the Splunk version number in the requests for the configuration files and the Wazuh app for Splunk. For example, if you intend to configure Splunk 8.1:
+         - This guide will install and configure Splunk |SPLUNK_LATEST_MINOR|. If you intend to configure another version of Splunk such as 8.1, change the Splunk version number in the requests for the configuration files and the Wazuh app for Splunk. For example:
 
             .. code-block:: console
 

@@ -26,7 +26,7 @@ Install the Wazuh app for Splunk in an all-in-one architecture
 
 .. note::      
 
-      - This guide will install and configure the Wazuh app for Splunk |SPLUNK_LATEST_MINOR|. If you intend to configure a different version of Splunk with the Wazuh app, change the Splunk version number in the requests for the configuration files and the Wazuh app for Splunk. For example, if you intend to configure Splunk 8.1:
+      - This guide will install and configure the Wazuh app for Splunk |SPLUNK_LATEST_MINOR|. If you intend to configure another version such as 8.1, change the Splunk version number in the requests for the configuration files and the Wazuh app for Splunk. For example:
 
          .. code-block:: console
 
