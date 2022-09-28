@@ -1,5 +1,8 @@
 .. Copyright (C) 2015, Wazuh, Inc.
 
+.. meta::
+  :description: Test and verify rules providing log examples in a sandbox using the wazuh-logtest tool. Learn more about it in this section.
+  
 .. _wazuh-logtest:
 
 wazuh-logtest

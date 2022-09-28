@@ -1,5 +1,8 @@
 .. Copyright (C) 2015, Wazuh, Inc.
 
+.. meta::
+  :description: Find out how to configure the Wazuh database_output feature. Learn more about it in this section of the Wazuh documentation.
+
 .. _reference_ossec_database_output:
 
 database_output

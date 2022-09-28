@@ -3,7 +3,6 @@
 .. meta::
   :description: Learn more about the configuration options of the key polling wodle in this section of the Wazuh documentation.
 
-
 .. _wodle-agentkeypolling:
 
 wodle name="agent-key-polling"

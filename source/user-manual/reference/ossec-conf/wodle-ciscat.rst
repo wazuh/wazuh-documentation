@@ -1,5 +1,8 @@
 .. Copyright (C) 2015, Wazuh, Inc.
 
+.. meta::
+  :description: Find out the configuration options of the cis-cat wodle. Learn more about it in this section of the Wazuh documentation.
+
 .. _wodle_ciscat:
 
 wodle name="cis-cat"

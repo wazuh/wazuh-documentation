@@ -3,7 +3,6 @@
 .. meta::
   :description: The ossec.conf file is the main configuration file on the Wazuh manager and it also plays an important role on the agents. Learn more about it here.
 
-
 .. _reference_ossec_syscheck:
 
 syscheck

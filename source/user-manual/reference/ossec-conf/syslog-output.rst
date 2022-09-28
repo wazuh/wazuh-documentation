@@ -1,5 +1,8 @@
 .. Copyright (C) 2015, Wazuh, Inc.
 
+.. meta::
+  :description: Find out how to configure options for sending alerts to a syslog server. Learn more about it in this section of the Wazuh documentation.
+  
 .. _reference_ossec_syslog_output:
 
 syslog_output
