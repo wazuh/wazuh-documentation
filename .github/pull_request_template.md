@@ -14,9 +14,10 @@ Add a clear description of how the problem has been solved.
 If your PR closes an issue, please use the "closes" keyword indicating the issue.
 -->
 ## Checks
-- [ ] It compiles without warnings.
-- [ ] Use present tense, active voice, and semi-formal registry. Write short sentences, simple sentences.
-- [ ] Use **bold** for user interface elements, _italics_ for key terms or emphasis, and `Code` font for Bash commands, file names, REST paths, and code.
-- [ ] Add meta descriptions to new pages.
-- [ ] Indent using three spaces.
-- [ ] The `redirect.js` script is updated (check [this guide](https://github.com/wazuh/wazuh-documentation/blob/master/NEW_RELEASE.md)).
+- [ ] Compiles without warnings.
+- [ ] Uses present tense, active voice, and semi-formal registry.
+- [ ] Uses short, simple sentences.
+- [ ] Uses **bold** for user interface elements, _italics_ for key terms or emphasis, and `code` font for Bash commands, file names, REST paths, and code.
+- [ ] Uses three spaces indentation.
+- [ ] Adds or updates meta descriptions accordingly.
+- [ ] Updates the `redirect.js` script if necessary (check [this guide](https://github.com/wazuh/wazuh-documentation/blob/master/NEW_RELEASE.md)).
