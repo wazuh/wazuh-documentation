@@ -1,7 +1,7 @@
 .. Copyright (C) 2015, Wazuh, Inc.
 
 .. meta::
-  :description: Find out how to verify several types of configurations. Learn more about it in this section of the Wazuh documentation.
+  :description: Find out how to verify sections of the Wazuh configuration in this section of the Wazuh documentation.
 
 .. _verifying_configuration:
 
