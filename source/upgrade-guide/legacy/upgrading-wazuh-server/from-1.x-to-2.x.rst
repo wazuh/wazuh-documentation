@@ -1,11 +1,14 @@
 .. Copyright (C) 2015, Wazuh, Inc.
 
+.. meta::
+   :description: This section of the Wazuh documentation guides through the upgrade process of the Wazuh server from 1.x to 2.x.
+
 .. _upgrading_wazuh_server_1.x_2.x:
 
 Upgrading the Wazuh server from 1.x to 2.x
 ============================================
 
-Follow these steps to update the Wazuh server 1.x  to the Wazuh server 2.x.
+Follow these steps to update the Wazuh server 1.x to the Wazuh server 2.x.
 
 #. Stop the processes:
 

@@ -1,9 +1,9 @@
 .. Copyright (C) 2015, Wazuh, Inc.
 
-.. _azure_monitoring_activity:
-
 .. meta::
-  :description: Discover the numerous ways that Wazuh provides to monitor your Microsoft Azure infrastructure activity.
+  :description: The Azure Monitor Logs collects and organizes logs and performance data from monitored resources. Learn how to use Monitor Logs with Wazuh in this section. 
+
+.. _azure_monitoring_activity:
 
 Monitoring Azure platform and services
 ======================================

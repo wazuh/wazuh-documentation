@@ -1,5 +1,8 @@
 .. Copyright (C) 2015, Wazuh, Inc.
 
+.. meta::
+  :description: Check out this section to learn more about how to use Wazuh for GDPR II (The General Data Protection Regulation of the European Union). 
+  
 .. _gdpr_II:
 
 GDPR II, Principles <gdpr_II>

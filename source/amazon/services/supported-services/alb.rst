@@ -1,5 +1,8 @@
 .. Copyright (C) 2015, Wazuh, Inc.
 
+.. meta::
+  :description: Amazon ALB automatically distributes the incoming traffic across multiple targets. Learn how to use Amazon ALB with Wazuh in this section.
+
 .. _amazon_alb:
 
 Amazon ALB

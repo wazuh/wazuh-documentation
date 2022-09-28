@@ -42,8 +42,8 @@ is_latest_release = True
 
 # The full version, including alpha/beta/rc tags
 # Important: use a valid branch (4.0) or, preferably, tag name (v4.0.0)
-release = '4.3.7'
-api_tag = 'v4.3.7'
+release = '4.3.8'
+api_tag = 'v4.3.8'
 apiURL = 'https://raw.githubusercontent.com/wazuh/wazuh/'+api_tag+'/api/api/spec/spec.yaml'
 
 # -- General configuration ------------------------------------------------
@@ -485,19 +485,19 @@ custom_replacements = {
     "|WAZUH_CURRENT|" : release,
     # --- Revision numbers for Wazuh agent and manager packages versions
     # Yum packages revisions
-    "|WAZUH_REVISION_YUM_AGENT_I386|" : "2",
+    "|WAZUH_REVISION_YUM_AGENT_I386|" : "1",
     "|WAZUH_REVISION_YUM_MANAGER_I386|" : "1",
     "|WAZUH_REVISION_YUM_AGENT_I386_EL5|" : "1",
     #"|WAZUH_REVISION_YUM_MANAGER_I386_EL5|" :
-    "|WAZUH_REVISION_YUM_AGENT_X86|" : "2",
-    "|WAZUH_REVISION_YUM_MANAGER_X86|" : "2",
+    "|WAZUH_REVISION_YUM_AGENT_X86|" : "1",
+    "|WAZUH_REVISION_YUM_MANAGER_X86|" : "1",
     "|WAZUH_REVISION_YUM_AGENT_X86_EL5|" : "1",
     #|WAZUH_REVISION_YUM_MANAGER_X86_EL5|
-    "|WAZUH_REVISION_YUM_AGENT_AARCH64|" : "2",
-    "|WAZUH_REVISION_YUM_MANAGER_AARCH64|" : "2",
-    "|WAZUH_REVISION_YUM_AGENT_ARMHF|" : "2",
-    #"|WAZUH_REVISION_YUM_MANAGER_ARMHF|" : "2",
-    "|WAZUH_REVISION_YUM_AGENT_PPC|" : "2",
+    "|WAZUH_REVISION_YUM_AGENT_AARCH64|" : "1",
+    "|WAZUH_REVISION_YUM_MANAGER_AARCH64|" : "1",
+    "|WAZUH_REVISION_YUM_AGENT_ARMHF|" : "1",
+    #"|WAZUH_REVISION_YUM_MANAGER_ARMHF|" : "1",
+    "|WAZUH_REVISION_YUM_AGENT_PPC|" : "1",
     #|WAZUH_REVISION_YUM_MANAGER_PPC|" :
     # Deb packages revisions
     "|WAZUH_REVISION_DEB_AGENT_I386|" : "1",
@@ -563,16 +563,32 @@ custom_replacements = {
     "|WAZUH_REVISION_OSX|" : "1",
     "|WAZUH_CURRENT_MAJOR_SOLARIS|" : "4.x",
     #"|WAZUH_CURRENT_MINOR_SOLARIS|" :
-    "|WAZUH_CURRENT_SOLARIS|" : release, # The lesser of WAZUH_CURRENT_MAJOR_SOLARIS10 and 11
+    "|WAZUH_CURRENT_SOLARIS|" : "4.3.7", # The lesser of WAZUH_CURRENT_MAJOR_SOLARIS10 and 11
     #"|WAZUH_REVISION_SOLARIS|" : "1",
     "|WAZUH_CURRENT_MAJOR_SOLARIS10|" : "4.x",
     #"|WAZUH_CURRENT_MINOR_SOLARIS10|" :
-    "|WAZUH_CURRENT_SOLARIS10|" : release,
+    "|WAZUH_CURRENT_SOLARIS10|" : "4.3.7",
     #"|WAZUH_REVISION_SOLARIS10|" : "1",
     "|WAZUH_CURRENT_MAJOR_SOLARIS11|" : "4.x",
     #"|WAZUH_CURRENT_MINOR_SOLARIS11|" :
-    "|WAZUH_CURRENT_SOLARIS11|" : release,
+    "|WAZUH_CURRENT_SOLARIS11|" : "4.3.7",
     #"|WAZUH_REVISION_SOLARIS11|" : "1",
+    "|WAZUH_CURRENT_MAJOR_SOLARIS10_i386|" : "4.x",
+    #"|WAZUH_CURRENT_MINOR_SOLARIS10_i386|" :
+    "|WAZUH_CURRENT_SOLARIS10_i386|" : release,
+    #"|WAZUH_REVISION_SOLARIS10_i386|" : "1",
+    "|WAZUH_CURRENT_MAJOR_SOLARIS10_SPARC|" : "4.x",
+    #"|WAZUH_CURRENT_MINOR_SOLARIS10_SPARC|" :
+    "|WAZUH_CURRENT_SOLARIS10_SPARC|" : "4.3.7",
+    #"|WAZUH_REVISION_SOLARIS10_SPARC|" : "1",
+    "|WAZUH_CURRENT_MAJOR_SOLARIS11_i386|" : "4.x",
+    #"|WAZUH_CURRENT_MINOR_SOLARIS11_i386|" :
+    "|WAZUH_CURRENT_SOLARIS11_i386|" : release,
+    #"|WAZUH_REVISION_SOLARIS11_i386|" : "1",
+    "|WAZUH_CURRENT_MAJOR_SOLARIS11_SPARC|" : "4.x",
+    #"|WAZUH_CURRENT_MINOR_SOLARIS11_SPARC|" :
+    "|WAZUH_CURRENT_SOLARIS11_SPARC|" : "4.3.7",
+    #"|WAZUH_REVISION_SOLARIS11_SPARC|" : "1",
     "|WAZUH_CURRENT_MAJOR_AIX|" : "4.x",
     #"|WAZUH_CURRENT_MINOR_AIX|" :
     "|WAZUH_CURRENT_AIX|" : release,
@@ -733,7 +749,7 @@ def manage_assets(app, pagename, templatename, context, doctree):
         "index": static + "js/min/index.min.js?ver=%s" % os.stat(os.path.join(theme_dir, "static/js/min/index.min.js")).st_mtime,
         "index-redirect": static + "js/min/index-redirect.min.js?ver=%s" % os.stat(os.path.join(theme_dir, "static/js/min/index-redirect.min.js")).st_mtime,
         "search-results": static + "js/min/search-results.min.js?ver=%s" % os.stat(os.path.join(theme_dir, "static/js/min/search-results.min.js")).st_mtime,
-        "searchIndex": "searchindex.js",
+        # "searchIndex": "searchindex.js",
         "not-found": static + "js/min/not-found.min.js?ver=%s" % os.stat(os.path.join(theme_dir, "static/js/min/not-found.min.js")).st_mtime,
         "api-reference": static + "js/min/api-reference.min.js?ver=%s" % os.stat(os.path.join(theme_dir, "static/js/min/api-reference.min.js")).st_mtime,
         "redoc-standalone": static + "js/redoc.standalone.js?ver=%s" % os.stat(os.path.join(theme_dir, "static/js/redoc.standalone.js")).st_mtime,
@@ -775,7 +791,7 @@ def manage_assets(app, pagename, templatename, context, doctree):
             'search': [
                 individual_js_files['redirects'],
                 individual_js_files['search-results'],
-                individual_js_files['searchIndex']
+                # individual_js_files['searchIndex']
             ],
             'not_found': [
                 individual_js_files['redirects'],

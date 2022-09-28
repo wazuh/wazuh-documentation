@@ -1,7 +1,7 @@
 .. Copyright (C) 2015, Wazuh, Inc.
 
 .. meta::
-  :description: Discover the tools Wazuh provides to monitor Azure Active Directory.
+  :description: Discover the tools Wazuh provides to monitor Azure Active Directory in this section of the documentation.
 
 .. _azure_monitoring_services:
 

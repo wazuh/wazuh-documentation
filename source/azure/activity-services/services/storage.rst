@@ -1,10 +1,9 @@
 .. Copyright (C) 2015, Wazuh, Inc.
 
-.. _azure_storage:
-
 .. meta::
-  :description: Discover the numerous ways that Wazuh provides to monitor your Microsoft Azure infrastructure activity.
+  :description: Azure Storage refers to the Microsoft Azure cloud storage solution. Learn how to use Azure Storage with Wazuh in this section of our documentation.
 
+.. _azure_storage:
 
 Using Azure Storage
 ===================

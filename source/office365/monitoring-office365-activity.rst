@@ -1,9 +1,9 @@
 .. Copyright (C) 2015, Wazuh, Inc.
 
-.. _office365_monitoring_activity:
-
 .. meta::
-  :description: Discover the way that Wazuh provides to monitor your organization's Office 365 activity.
+  :description: Learn how to monitor your organization's Office 365 activity with Wazuh in this section of our documentation.
+
+.. _office365_monitoring_activity:
 
 Monitoring Office 365 Activity
 ==============================

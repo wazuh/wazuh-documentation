@@ -1,4 +1,5 @@
 .. Copyright (C) 2015, Wazuh, Inc.
+
 .. meta::
   :description: Suricata integrates with Wazuh. Learn more about how to set up Suricata and how Wazuh decodes Suricata events in this section of the documentation.
   

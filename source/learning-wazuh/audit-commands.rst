@@ -1,7 +1,7 @@
 .. Copyright (C) 2015, Wazuh, Inc.
 
 .. meta::
-    :description: Learn more about how to watch for malicious command execution in this section of the Wazuh documentation.
+  :description: Learn more about how to watch for malicious command execution in this section of the Wazuh documentation.
     
 .. _learning_wazuh_audit_commands:
 

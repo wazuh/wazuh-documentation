@@ -1,5 +1,8 @@
 .. Copyright (C) 2015, Wazuh, Inc.
 
+.. meta::
+  :description: Amazon KMS makes it easy for users to create and manage keys and control the use of encryption. Learn how to use Amazon KMS with Wazuh in this section.
+
 .. _amazon_kms:
 
 AWS Key Management Service
