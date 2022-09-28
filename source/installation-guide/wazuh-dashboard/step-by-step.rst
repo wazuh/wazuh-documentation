@@ -217,11 +217,11 @@ Select your deployment type and follow the instructions to change the default pa
            
             hosts:
               - default:
-                 url: https://localhost
-                 port: 55000
-                 username: wazuh-wui
-                 password: <wazuh-wui-password>
-                 run_as: false
+                  url: https://localhost
+                  port: 55000
+                  username: wazuh-wui
+                  password: <wazuh-wui-password>
+                  run_as: false
 
       #. Restart the Wazuh dashboard to apply the changes.
 
