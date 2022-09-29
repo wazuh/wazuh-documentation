@@ -470,7 +470,7 @@ For Wazuh Splunk app |WAZUH_SPLUNK_CURRENT|:
 | |SPLUNK_LATEST_MIN|  | |SPLUNK_LATEST_PKG|  |
 +----------------------+----------------------+
 
-\* The Wazuh Splunk app is not compatible with Splunk 8.1.0
+\* The Wazuh Splunk app is not compatible with Splunk 8.1.0.
 
 Filebeat
 ---------------

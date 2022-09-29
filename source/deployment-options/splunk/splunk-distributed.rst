@@ -41,7 +41,7 @@ The structure of a basic Splunk Cluster is formed by the following elements:
 
       - Splunk is not open source software, and it requires a registered user and license in order to work. You can also use a free trial license.
 
-      - This guide will configure Wazuh with Splunk |SPLUNK_LATEST_MINOR|. If you intend to configure it with another version of Splunk such as 8.1, change the Splunk version number in the requests for the configuration files and the Wazuh app for Splunk. For example:
+      - This guide configures Wazuh with Splunk |SPLUNK_LATEST_MINOR|. If you intend to configure it with another version of Splunk, such as 8.1, change the Splunk version number in the requests for the configuration files and the Wazuh app for Splunk. For example:
 
          .. code-block:: console
 
