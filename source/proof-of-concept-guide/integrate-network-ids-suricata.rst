@@ -1,3 +1,5 @@
+.. Copyright (C) 2015, Wazuh, Inc.
+
 .. meta::
   :description: Wazuh can be integrated with Suricata, a NIDS that can detect threats by monitoring network traffic. Learn more about this in this PoC.
 

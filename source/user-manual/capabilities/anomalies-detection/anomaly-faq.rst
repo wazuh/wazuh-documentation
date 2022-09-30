@@ -1,7 +1,7 @@
 .. Copyright (C) 2015, Wazuh, Inc.
 
 .. meta::
-  :description: Check out the Frequently Asked Questions (FAQ) section on anomaly and malware detection with Wazuh in this section of our documentation.
+  :description: Get answers to the most frequently asked questions about Anomaly and malware detection in this FAQ section of the Wazuh documentation.
 
 .. _intrusion-faq:
 

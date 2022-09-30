@@ -1,6 +1,9 @@
 .. Copyright (C) 2015, Wazuh, Inc.
 
-.. _kibana_configure_indices:
+.. meta::
+  :description: Learn how to configure the name of the indices that Elasticsearch generates to store the Wazuh alerts in this section of the Wazuh documentation.
+ 
+.. _kibana_configure_indices: 
 
 Indices configuration
 =====================

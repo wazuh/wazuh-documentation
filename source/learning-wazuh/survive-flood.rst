@@ -1,7 +1,7 @@
 .. Copyright (C) 2015, Wazuh, Inc.
 
 .. meta::
-    :description: Check out how to survive a log flood using Wazuh. We create a small log flood and observe how the Wazuh agent works. Learn to get the most out of Wazuh. 
+  :description: Check out how to survive a log flood using Wazuh. We create a small log flood and observe how the Wazuh agent works. Learn to get the most out of Wazuh. 
     
 .. _learning_wazuh_survive_flood:
 

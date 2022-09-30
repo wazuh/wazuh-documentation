@@ -2,7 +2,6 @@
 
 .. meta::
   :description: Learn more about the Wazuh Anomaly Detection capability and the checks performed to find the anomalies caused by an intruder or malware.
-
   
 How it works
 ============
