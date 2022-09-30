@@ -282,7 +282,7 @@ Filebeat must be installed and configured on the same server as the Wazuh manage
     
         # tar -xzf ./wazuh-offline/wazuh-files/wazuh-filebeat-0.2.tar.gz -C /usr/share/filebeat/module
 
-#.  Replace ``<server-node-name>`` with your Wazuh server node certificate name, the same used in ``config.yml`` when creating the certificates. Then, move the certificates to their corresponding location.
+#.  Replace ``<server-node-name>`` with your Wazuh server node certificate name, the same used in ``config.yml`` when creating the certificates. For example, ``wazuh-1``. Then, move the certificates to their corresponding location.
 
      .. code-block:: console
         
@@ -412,7 +412,7 @@ Installing the Wazuh dashboard
        
                 # dpkg -i ./wazuh-offline/wazuh-packages/wazuh-dashboard*.deb
 
-#.  Replace ``<dashboard-node-name>`` with your Wazuh dashboard node name, the same used in ``config.yml`` to create the certificates, and move the certificates to their corresponding location.
+#.  Replace ``<dashboard-node-name>`` with your Wazuh dashboard node name, the same used in ``config.yml`` to create the certificates. For example, ``dashboard``. Then, move the certificates to their corresponding location.
 
     .. code-block:: console
 
