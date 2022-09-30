@@ -471,13 +471,143 @@ Installing the Wazuh dashboard
 
 Upon the first access to the Wazuh dashboard, the browser shows a warning message stating that the certificate was not issued by a trusted authority. An exception can be added in the advanced options of the web browser or, for increased security, the ``root-ca.pem`` file previously generated can be imported to the certificate manager of the browser. Alternatively, a certificate from a trusted authority can be configured.
 
-.. note::
-  
-   It is highly recommended to change the default Wazuh indexer passwords. To perform this action, see the :doc:`/user-manual/securing-wazuh/wazuh-indexer` section.
+Securing your Wazuh installation
+--------------------------------
 
-To uninstall all the Wazuh central components, see the :doc:`/user-manual/uninstall/central-components` section.
+
+You have now installed and configured all the Wazuh central components. We recommend changing the default credentials to protect your infrastructure from possible attacks. 
+
+Select your deployment type and follow the instructions to change the default passwords for both the Wazuh API and the Wazuh indexer users.
+
+
+.. tabs::
+
+   .. group-tab:: All-in-one deployment
+
+      #. Use the Wazuh passwords tool to change all the internal users passwords.
+      
+         .. code-block:: console
+         
+            # /usr/share/wazuh-indexer/plugins/opensearch-security/tools/wazuh-passwords-tool.sh --change-all --admin-user wazuh --admin-password wazuh
+         
+         .. code-block:: console
+            :class: output
+       
+            INFO: The password for user admin is yWOzmNA.?Aoc+rQfDBcF71KZp?1xd7IO
+            INFO: The password for user kibanaserver is nUa+66zY.eDF*2rRl5GKdgLxvgYQA+wo
+            INFO: The password for user kibanaro is 0jHq.4i*VAgclnqFiXvZ5gtQq1D5LCcL
+            INFO: The password for user logstash is hWW6U45rPoCT?oR.r.Baw2qaWz2iH8Ml
+            INFO: The password for user readall is PNt5K+FpKDMO2TlxJ6Opb2D0mYl*I7FQ
+            INFO: The password for user snapshotrestore is +GGz2noZZr2qVUK7xbtqjUup049tvLq.
+            WARNING: Wazuh indexer passwords changed. Remember to update the password in the Wazuh dashboard and Filebeat nodes if necessary, and restart the services.
+            INFO: The password for Wazuh API user wazuh is JYWz5Zdb3Yq+uOzOPyUU4oat0n60VmWI
+            INFO: The password for Wazuh API user wazuh-wui is +fLddaCiZePxh24*?jC0nyNmgMGCKE+2
+            INFO: Updated wazuh-wui user password in wazuh dashboard. Remember to restart the service.
+       
+    
+   .. group-tab:: Distributed deployment
+
+      #. On `any Wazuh indexer node`, use the Wazuh passwords tool to change the passwords of the Wazuh indexer users. 
+
+         .. code-block:: console
+  
+            # /usr/share/wazuh-indexer/plugins/opensearch-security/tools/wazuh-passwords-tool.sh --change-all
+  
+         .. code-block:: console
+            :class: output
+
+            INFO: Wazuh API admin credentials not provided, Wazuh API passwords not changed.
+            INFO: The password for user admin is wcAny.XUwOVWHFy.+7tW9l8gUW1L8N3j
+            INFO: The password for user kibanaserver is qy6fBrNOI4fD9yR9.Oj03?pihN6Ejfpp
+            INFO: The password for user kibanaro is Nj*sSXSxwntrx3O7m8ehrgdHkxCc0dna
+            INFO: The password for user logstash is nQg1Qw0nIQFZXUJc8r8+zHVrkelch33h
+            INFO: The password for user readall is s0iWAei?RXObSDdibBfzSgXdhZCD9kH4
+            INFO: The password for user snapshotrestore is Mb2EHw8SIc1d.oz.nM?dHiPBGk7s?UZB
+            WARNING: Wazuh indexer passwords changed. Remember to update the password in the Wazuh dashboard and Filebeat nodes if necessary, and restart the services.
+
+
+
+      #. On your `Wazuh server master node`, change the default password of the admin users: `wazuh` and `wazuh-wui`. Note that the commands below use localhost, set your Wazuh manager IP address if necessary. 
+
+         #. Get an authorization TOKEN. 
+
+            .. code-block:: console
+
+               # TOKEN=$(curl -u wazuh-wui:wazuh-wui -k -X GET "https://localhost:55000/security/user/authenticate?raw=true")
+
+         #. Change the `wazuh` user credentials (ID 1). Select a password between 8 and 64 characters long, it should contain at least one uppercase and one lowercase letter, a number, and a symbol. See :api-ref:`PUT /security/users/{user_id} <operation/api.controllers.security_controller.update_user>` to learn more. 
+
+            .. code-block:: console
+
+               curl -k -X PUT "https://localhost:55000/security/users/1" -H "Authorization: Bearer $TOKEN" -H 'Content-Type: application/json' -d' 
+               {
+                 "password": "SuperS3cretPassword!"
+               }'
+
+            .. code-block:: console
+               :class: output
+
+               {"data": {"affected_items": [{"id": 1, "username": "wazuh", "allow_run_as": true, "roles": [1]}], "total_affected_items": 1, "total_failed_items": 0, "failed_items": []}, "message": "User was successfully updated", "error": 0}  
+    
+        
+         #. Change the `wazuh-wui` user credentials (ID 2). 
+
+            .. code-block:: console
+
+               curl -k -X PUT "https://localhost:55000/security/users/2" -H "Authorization: Bearer $TOKEN" -H 'Content-Type: application/json' -d' 
+               {
+                 "password": "SuperS3cretPassword!"
+               }'
+
+            .. code-block:: console
+               :class: output   
+
+               {"data": {"affected_items": [{"id": 2, "username": "wazuh-wui", "allow_run_as": true, "roles": [1]}], "total_affected_items": 1, "total_failed_items": 0, "failed_items": []}, "message": "User was successfully updated", "error": 0}
+   
+         See the :doc:`Securing the Wazuh API </user-manual/api/securing-api>` section for additional security configurations. 
+
+         .. note:: Remember to store these passwords securely. 
+
+
+      #. On `all your Wazuh server nodes`, run the following command to update the `admin` password in the Filebeat keystore. Replace ``<admin-password>`` with the random password generated in the first step.
+      
+         .. code-block:: console
+
+            # echo <admin-password> | filebeat keystore add password --stdin --force
+
+      #. Restart Filebeat to apply the change.
+
+         .. include:: /_templates/common/restart_filebeat.rst
+
+         .. note:: Repeat steps 3 and 4 on `every Wazuh server node`.
+       
+      #. On your `Wazuh dashboard node`, run the following command to update the `kibanaserver` password in the Wazuh dashboard keystore. Replace ``<kibanaserver-password>`` with the random password generated in the first step.
+
+         .. code-block:: console
+
+            # echo <kibanaserver-password> | /usr/share/wazuh-dashboard/bin/opensearch-dashboards-keystore --allow-root add -f --stdin opensearch.password
+
+      #. Update the ``/usr/share/wazuh-dashboard/data/wazuh/config/wazuh.yml`` configuration file with the new `wazuh-wui` password generated in the second step.
+
+         .. code-block:: yaml
+            :emphasize-lines: 6
+           
+            hosts:
+              - default:
+                  url: https://localhost
+                  port: 55000
+                  username: wazuh-wui
+                  password: <wazuh-wui-password>
+                  run_as: false
+
+      #. Restart the Wazuh dashboard to apply the changes.
+
+         .. include:: /_templates/common/restart_dashboard.rst
+
 
 Next steps
 ----------
 
 Once the Wazuh environment is ready, Wazuh agents can be installed on every endpoint to be monitored. To install the Wazuh agents and start monitoring the endpoints, see the :doc:`Wazuh agent </installation-guide/wazuh-agent/index>` installation section. If you need to install them offline, you can check the appropriate agent package to download for your monitored system in the :ref:`Wazuh agent packages list <Wazuh_manager_agent_packages_list>` section.
+
+To uninstall all the Wazuh central components, see the :doc:`/user-manual/uninstall/central-components` section.
