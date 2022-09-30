@@ -449,14 +449,15 @@ Installing the Wazuh dashboard
 #. **Only for distributed deployments**:  Edit the file ``/usr/share/wazuh-dashboard/data/wazuh/config/wazuh.yml`` and replace the ``url`` value with the IP address or hostname of the Wazuh server master node.
           
             .. code-block:: yaml
+               :emphasize-lines: 3
             
-              hosts:
-                - default:
-                  url: https://localhost
-                  port: 55000
-                  username: wazuh-wui
-                  password: wazuh-wui
-                  run_as: false
+               hosts:
+                 - default:
+                     url: https://localhost
+                     port: 55000
+                     username: wazuh-wui
+                     password: wazuh-wui
+                     run_as: false
 
 #.  Run the following command to verify the Wazuh dashboard service is active.
 
