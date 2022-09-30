@@ -10,6 +10,11 @@ Remove agents using the Wazuh API
 
 The request :api-ref:`DELETE /agents <operation/api.controllers.agent_controller.delete_agents>` removes the specified agents.
 
+Removing agents in a list
+^^^^^^^^^^^^^^^^^^^^^^^^^
+
+You can remove specific agents using a list. Use the parameter ``agents_list`` to set a list of agent IDs separated by commas. For example, to remove agents ID ``005``, ``006``, and ``007``, run a query like the following one.
+
 .. code-block:: console
 
     # curl -k -X DELETE "https://localhost:55000/agents?pretty=true&older_than=0s&agents_list=005,006,007&status=all" -H  "Authorization: Bearer $TOKEN"
@@ -31,3 +36,30 @@ The request :api-ref:`DELETE /agents <operation/api.controllers.agent_controller
         "message": "All selected agents were deleted",
         "error": 0,
     }
+
+.. _remove_disconnected_agents:
+
+Removing agents not connecting
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+You can remove agents which never connected or which have been disconnected for a long time. Use the parameter ``older_than`` to set a period of time of no known activity. Use ``status`` to select the `Never connected` and `Disconnected` agents. For example, to remove agents inactive for more than 21 days, run a query like the following one.
+
+.. code-block:: console
+
+    # curl -k -X DELETE "https://localhost:55000/agents?pretty=true&older_than=21d&agents_list=all&status=never_connected,disconnected," -H  "Authorization: Bearer $TOKEN"
+
+.. code-block:: json
+   :class: output
+
+   {
+      "data": {
+         "affected_items": [
+            "003"
+         ],
+         "total_affected_items": 1,
+         "total_failed_items": 0,
+         "failed_items": []
+      },
+      "message": "All selected agents were deleted",
+      "error": 0
+   }
