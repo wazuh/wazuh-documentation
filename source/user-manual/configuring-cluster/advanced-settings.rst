@@ -1,7 +1,7 @@
 .. Copyright (C) 2015, Wazuh, Inc.
 
 .. meta::
-    :description: Learn more about how to deploy a Wazuh cluster. In this section of our documentation we explain more about the agents connections. 
+  :description: Learn more about how to deploy a Wazuh cluster. In this section of our documentation we explain more about the agents connections. 
     
 .. _cluster_agents_connections:
 

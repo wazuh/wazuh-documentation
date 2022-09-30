@@ -1,5 +1,8 @@
 .. Copyright (C) 2015, Wazuh, Inc.
 
+.. meta::
+  :description: Find out the configuration options of the azure-logs wodle. Learn more about it in this section of the Wazuh documentation.
+  
 .. _wodle_azure_logs:
 
 wodle name="azure-logs"
@@ -134,6 +137,8 @@ Options
 | `storage\\container\\timeout`_         | A positive number (seconds)                  |
 +----------------------------------------+----------------------------------------------+
 | `storage\\container\\time_offset`_     | A positive number + suffix                   |
++----------------------------------------+----------------------------------------------+
+| `storage\\container\\path`_            | Any string                                   |
 +----------------------------------------+----------------------------------------------+
 
 
@@ -679,6 +684,8 @@ storage\\container
 +-----------------------------------------+----------------------------------------------+
 | `storage\\container\\time_offset`_      | A positive number + suffix                   |
 +-----------------------------------------+----------------------------------------------+
+| `storage\\container\\path`_             | Any string                                   |
++-----------------------------------------+----------------------------------------------+
 
 storage\\container name
 ^^^^^^^^^^^^^^^^^^^^^^^
@@ -694,7 +701,7 @@ Specifies the name of the container. Enter ``*`` to access all account container
 storage\\container\\blobs
 ^^^^^^^^^^^^^^^^^^^^^^^^^
 
-Specifies the extension of the blobs like ``.json``. Enter "*" to access all the containers' blobs. 
+Specifies the extension of the blobs like ``.json``. Enter "*" to access all the containers' blobs.
 
 .. note::
 
@@ -716,7 +723,7 @@ This parameter indicates the format of the blobs' content. The available values 
 - **json_inline**. Each line is a log in json format.
 
 The format of logs stored in Azure accounts is **inline JSON**.
-	
+
 .. note::
 
 	When the ``day`` option is set, the interval value must be a multiple of months. By default, the interval is set to a month.
@@ -748,6 +755,18 @@ This option sets the time delay in which we will perform the query. For example,
 | **Default value**  | Date of execution at ``00:00:00``                                                                                          |
 +--------------------+----------------------------------------------------------------------------------------------------------------------------+
 | **Allowed values** | A positive number that should contain a suffix character indicating a time unit, such as, m (minutes), h (hours), d (days) |
++--------------------+----------------------------------------------------------------------------------------------------------------------------+
+
+
+storage\\container\\path
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Defines, for the container, a path to search into. If it isn't present, the module retrieves all the blobs at the root level.
+
++--------------------+----------------------------------------------------------------------------------------------------------------------------+
+| **Default value**  | N/A                                                                                                                        |
++--------------------+----------------------------------------------------------------------------------------------------------------------------+
+| **Allowed values** | Valid path                                                                                                                 |
 +--------------------+----------------------------------------------------------------------------------------------------------------------------+
 
 Example of storage configuration

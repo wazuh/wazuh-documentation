@@ -1,4 +1,5 @@
 .. Copyright (C) 2015, Wazuh, Inc.
+
 .. meta::
   :description: Learn more about the Active Response capability, how it works, and how to configure it in this section of the Wazuh documentation. 
 

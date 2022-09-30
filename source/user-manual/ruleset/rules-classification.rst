@@ -1,6 +1,9 @@
 .. Copyright (C) 2015, Wazuh, Inc.
 .. Original content from the OSSEC documentation, available at http://www.ossec.net/docs/manual/rules-decoders/rule-levels.html
 
+.. meta::
+  :description: The rules are classified into multiple levels, from 0 to 16. Learn more about Wazuh and Rules classification in this section. 
+
 .. _rules_classification:
 
 Rules classification

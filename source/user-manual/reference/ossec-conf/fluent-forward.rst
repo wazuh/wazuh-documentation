@@ -1,5 +1,8 @@
 .. Copyright (C) 2015, Wazuh, Inc.
 
+.. meta::
+  :description: Find out how to configure the Fluentd forwarder module. Learn more about it in this section of the Wazuh documentation.
+
 .. _reference_ossec_fluent_forward:
 
 fluent-forward

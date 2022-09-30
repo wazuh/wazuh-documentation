@@ -1,5 +1,8 @@
 .. Copyright (C) 2015, Wazuh, Inc.
 
+.. meta::
+  :description: Find out how to configure the Wazuh API in this section of the Wazuh documentation.
+  
 .. _api_configuration:
 
 Configuration

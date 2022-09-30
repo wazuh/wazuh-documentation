@@ -1,7 +1,7 @@
 .. Copyright (C) 2015, Wazuh, Inc.
 
 .. meta::
-  :description: The Wazuh Ruleset is used to analyze incoming events and generate alerts when appropriate. Learn more about it in the Wazuh documentation.
+  :description: The Wazuh Ruleset is used to analyze incoming events and generate alerts when appropriate. Learn more about Rules syntax in this section.
 
 .. _rules_syntax:
 

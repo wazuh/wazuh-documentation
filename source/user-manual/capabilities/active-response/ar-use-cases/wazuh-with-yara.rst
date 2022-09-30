@@ -1,12 +1,12 @@
 .. Copyright (C) 2015, Wazuh, Inc.
 
+.. meta::
+  :description: Learn how to integrate Wazuh with YARA, a versatile Open Source pattern-matching tool that aims to detect malware samples based on rule descriptions.
+
 .. _wazuh_with_yara:
 
 How to integrate Wazuh with YARA
 ================================
-
-.. meta::
-  :description: Learn how to integrate Wazuh with YARA, a versatile Open Source pattern-matching tool that aims to detect malware samples based on rule descriptions.
 
 Wazuh can integrate with YARA in different ways. YARA is a versatile Open Source pattern-matching tool aimed to detect malware samples based on rule descriptions, although it is not limited to that use case alone.
 

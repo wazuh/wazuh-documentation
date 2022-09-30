@@ -1,3 +1,4 @@
+.. Copyright (C) 2015, Wazuh, Inc.
 
 .. meta::
   :description: This PoC shows how Wazuh is capable of detecting if Netcat is running on a monitored host. Learn more about this in this section of the documentation.

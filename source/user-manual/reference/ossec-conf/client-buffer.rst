@@ -1,5 +1,8 @@
 .. Copyright (C) 2015, Wazuh, Inc.
 
+.. meta::
+  :description: Find out how to configure the agent bucket parameters in order to avoid events flooding. Learn more about it in this section of the Wazuh documentation.
+
 .. _reference_client_buffer:
 
 client_buffer
