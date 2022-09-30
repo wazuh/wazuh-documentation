@@ -259,34 +259,22 @@ Filebeat must be installed and configured on the same server as the Wazuh manage
           ...
         }      
 
-#.  Edit Filebeat configuration file ``/etc/filebeat/filebeat.yml``:
+#. Edit the ``/etc/filebeat/filebeat.yml`` configuration file and replace the following value:
 
-    -   All-in-one deployment
+   .. include:: /_templates/installations/filebeat/opensearch/configure_filebeat.rst
 
-        Change the value of ``username`` and ``password`` to the configured credentials. The default username and password is ``admin``.
-        
-        .. code-block:: yaml
-        
-            # Wazuh - Filebeat configuration file
-            output.elasticsearch:
-            hosts: ["127.0.0.1:9200"]
-            username: admin
-            password: admin
-            
-    -   Distributed deployment
-    
-        Change the value of ``hosts`` to the IP address of the Wazuh indexer node. In case of having more than one Wazuh indexer node, you can separate the addresses using commas. For example, ``hosts: ["10.0.0.1:9200", "10.0.0.2:9200", "10.0.0.3:9200"]``. Ensure to replace the ``<indexer-node-*-ip>`` with the addresses or hostnames of the Wazuh indexer nodes specified in ``config.yml``.
+#. Create a Filebeat keystore to securely store authentication credentials.
 
-        Also change the value of ``username`` and ``password`` to the configured credentials. The default username and password is ``admin``.
-        
-        .. code-block:: yaml
-           :emphasize-lines: 3
-        
-            # Wazuh - Filebeat configuration file
-            output.elasticsearch:
-            hosts: ["<indexer-node-1-ip>:9200", "<indexer-node-2-ip>:9200", "<indexer-node-3-ip>:9200"]
-            username: admin
-            password: admin
+   .. code-block:: console
+     
+      # filebeat keystore create
+
+#. Add the username and password ``admin``:``admin`` to the secrets keystore.
+      
+   .. code-block:: console
+
+      # echo admin | filebeat keystore add username --stdin --force
+      # echo admin | filebeat keystore add password --stdin --force              
 
 #.  Install the Wazuh module for Filebeat.
 
