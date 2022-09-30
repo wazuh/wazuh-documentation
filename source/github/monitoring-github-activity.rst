@@ -1,9 +1,9 @@
 .. Copyright (C) 2015, Wazuh, Inc.
 
-.. _github_monitoring_activity:
-
 .. meta::
-  :description: Discover the way that Wazuh provides to monitor your organization's GitHub activity.
+  :description: Discover the way that Wazuh provides to monitor your organization's GitHub activity. Check out this section of our documentation to learn more about it.
+
+.. _github_monitoring_activity:
 
 Monitoring GitHub Activity
 ==========================

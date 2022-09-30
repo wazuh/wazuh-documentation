@@ -1,7 +1,7 @@
 .. Copyright (C) 2015, Wazuh, Inc.
 
 .. meta::
-  :description: The Wazuh Ruleset is used to analyze incoming events and generate alerts when appropriate. Learn more about it in the Wazuh documentation.
+  :description: The Wazuh Ruleset is used to analyze incoming events and generate alerts when appropriate. Learn more about Rules syntax in this section.
 
 .. _rules_syntax:
 
@@ -124,8 +124,6 @@ The **xml labels** used to configure ``rules`` are listed here.
 | `same_user`_            | None.                                                         | The decoded ``user`` must be the same.                                                               |
 +-------------------------+---------------------------------------------------------------+------------------------------------------------------------------------------------------------------+
 | `different_user`_       | None.                                                         | The decoded ``user`` must be different.                                                              |
-+-------------------------+---------------------------------------------------------------+------------------------------------------------------------------------------------------------------+
-| `not_same_agent`_       | None.                                                         | The decoded ``agent`` must be different.                                                             |
 +-------------------------+---------------------------------------------------------------+------------------------------------------------------------------------------------------------------+
 | `same_field`_           | None.                                                         | The decoded ``field`` must be the same as the previous ones.                                         |
 +-------------------------+---------------------------------------------------------------+------------------------------------------------------------------------------------------------------+
@@ -1557,16 +1555,6 @@ This option is used in conjunction with ``frequency`` and ``timeframe``.
 +--------------------+---------------------+
 | **Example of use** | <different_user />  |
 +--------------------+---------------------+
-
-not_same_agent
-^^^^^^^^^^^^^^
-
-Specifies that the decoded agent must be different.
-This option is used in conjunction with ``frequency`` and ``timeframe``.
-
-+--------------------+--------------------+
-| **Example of use** | <not_same_agent /> |
-+--------------------+--------------------+
 
 same_field
 ^^^^^^^^^^

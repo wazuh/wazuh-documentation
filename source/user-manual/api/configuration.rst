@@ -1,5 +1,8 @@
 .. Copyright (C) 2015, Wazuh, Inc.
 
+.. meta::
+  :description: Find out how to configure the Wazuh API in this section of the Wazuh documentation.
+  
 .. _api_configuration:
 
 Configuration
@@ -41,6 +44,8 @@ Here are all the available settings for the ``api.yaml`` configuration file. For
      logs:
         level: "info"
         format: "plain"
+        max_size:
+         enabled: false
 
      cors:
         enabled: no
@@ -238,6 +243,21 @@ logs
 |                           |                                                                                        |               |                                                 |
 |                           |                                                                                        |               | Set the format of the Wazuh API logs.           |
 +---------------------------+----------------------------------------------------------------------------------------+---------------+-------------------------------------------------+
+
+max_size
+~~~~~~~~~~~~~~~~~~~~~~
+
+.. versionadded:: 4.5.0
+
++------------+-----------------------------------------------+---------------+-------------------------------------------------------------------------------------------------------------------+
+| Sub-fields | Allowed values                                | Default value | Description                                                                                                       |
++============+===============================================+===============+===================================================================================================================+
+| enabled    | yes, true, no, false                          | false         | Enable or disable log file rotation based on file size. This option will disable log file rotation based on time. |
++------------+-----------------------------------------------+---------------+-------------------------------------------------------------------------------------------------------------------+
+| size       | Any positive number followed by a valid unit. | 1M            | Set a file size to trigger log rotation.                                                                          |
+|            | K/k for kilobytes, M/m for megabytes.         |               |                                                                                                                   |
++------------+-----------------------------------------------+---------------+-------------------------------------------------------------------------------------------------------------------+
+
 
 cors
 ^^^^^^^^^^^^^^^^^^^^^^

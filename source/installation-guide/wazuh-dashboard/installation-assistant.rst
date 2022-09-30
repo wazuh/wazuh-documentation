@@ -1,7 +1,7 @@
 .. Copyright (C) 2015, Wazuh, Inc.
 
-.. meta:: :description: Learn how to install the Wazuh dashboard using the Wazuh installation assistant. The Wazuh dashboard is a flexible and intuitive web interface for mining and visualizing security events and archives. 
-
+.. meta::
+   :description: Learn how to install the Wazuh dashboard using the Wazuh installation assistant. The Wazuh dashboard is a flexible and intuitive web interface for mining and visualizing security events and archives. 
 
 Installing the Wazuh dashboard using the assistant
 ==================================================
@@ -17,7 +17,7 @@ Wazuh dashboard installation
 
       # curl -sO https://packages.wazuh.com/|WAZUH_CURRENT_MINOR|/wazuh-install.sh
 
-#. Run the assistant with the option ``--wazuh-dashboard`` and the node name to install and configure the Wazuh dashboard. The node name must be the same used in ``config.yml`` for the initial configuration, for example, ``dashboard``.
+#. Run the assistant with the option ``--wazuh-dashboard`` and the node name to install and configure the Wazuh dashboard. The node name must be the same used in ``wazuh-config.yml`` for the initial configuration, for example, ``dashboard``.
    
    .. note::
       

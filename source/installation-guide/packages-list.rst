@@ -6,25 +6,7 @@
 Packages list
 =============
 
-This download page contains packages required for the Wazuh installation:
-
-- `Wazuh manager and Wazuh agent`_
-
-   - `Linux`_
-   - `Windows`_
-   - `macOS`_
-   - `Solaris`_
-   - `AIX`_
-   - `HP-UX`_
-
-- `Wazuh indexer`_
-- `Wazuh dashboard`_
-- `Wazuh Kibana plugin`_
-- `Wazuh Splunk app`_
-- `Filebeat`_
-- `Virtual machine`_
-- `Amazon Machine Image`_
-- `MSU`_
+This download page contains packages required for the Wazuh installation.
 
 .. _Wazuh_manager_agent_packages_list:
 
@@ -339,13 +321,13 @@ macOS
 Solaris
 ^^^^^^^
 
-.. |Solaris10_i386| replace:: `wazuh-agent_v|WAZUH_CURRENT_SOLARIS10|-sol10-i386.pkg <https://packages.wazuh.com/|WAZUH_CURRENT_MAJOR_SOLARIS10|/solaris/i386/10/wazuh-agent_v|WAZUH_CURRENT_SOLARIS10|-sol10-i386.pkg>`__ (`sha512 <https://packages.wazuh.com/|WAZUH_CURRENT_MAJOR_SOLARIS10|/checksums/wazuh/|WAZUH_CURRENT_SOLARIS10|/wazuh-agent_v|WAZUH_CURRENT_SOLARIS10|-sol10-i386.pkg.sha512>`__)
+.. |Solaris10_i386| replace:: `wazuh-agent_v|WAZUH_CURRENT_SOLARIS10_i386|-sol10-i386.pkg <https://packages.wazuh.com/|WAZUH_CURRENT_MAJOR_SOLARIS10_i386|/solaris/i386/10/wazuh-agent_v|WAZUH_CURRENT_SOLARIS10_i386|-sol10-i386.pkg>`__ (`sha512 <https://packages.wazuh.com/|WAZUH_CURRENT_MAJOR_SOLARIS10_i386|/checksums/wazuh/|WAZUH_CURRENT_SOLARIS10_i386|/wazuh-agent_v|WAZUH_CURRENT_SOLARIS10_i386|-sol10-i386.pkg.sha512>`__)
 
-.. |Solaris10_SPARC| replace:: `wazuh-agent_v|WAZUH_CURRENT_SOLARIS10|-sol10-sparc.pkg <https://packages.wazuh.com/|WAZUH_CURRENT_MAJOR_SOLARIS10|/solaris/sparc/10/wazuh-agent_v|WAZUH_CURRENT_SOLARIS10|-sol10-sparc.pkg>`__ (`sha512 <https://packages.wazuh.com/|WAZUH_CURRENT_MAJOR_SOLARIS10|/checksums/wazuh/|WAZUH_CURRENT_SOLARIS10|/wazuh-agent_v|WAZUH_CURRENT_SOLARIS10|-sol10-sparc.pkg.sha512>`__)
+.. |Solaris10_SPARC| replace:: `wazuh-agent_v|WAZUH_CURRENT_SOLARIS10_SPARC|-sol10-sparc.pkg <https://packages.wazuh.com/|WAZUH_CURRENT_MAJOR_SOLARIS10_SPARC|/solaris/sparc/10/wazuh-agent_v|WAZUH_CURRENT_SOLARIS10_SPARC|-sol10-sparc.pkg>`__ (`sha512 <https://packages.wazuh.com/|WAZUH_CURRENT_MAJOR_SOLARIS10_SPARC|/checksums/wazuh/|WAZUH_CURRENT_SOLARIS10_SPARC|/wazuh-agent_v|WAZUH_CURRENT_SOLARIS10_SPARC|-sol10-sparc.pkg.sha512>`__)
 
-.. |Solaris11_i386| replace:: `wazuh-agent_v|WAZUH_CURRENT_SOLARIS11|-sol11-i386.p5p <https://packages.wazuh.com/|WAZUH_CURRENT_MAJOR_SOLARIS11|/solaris/i386/11/wazuh-agent_v|WAZUH_CURRENT_SOLARIS11|-sol11-i386.p5p>`__ (`sha512 <https://packages.wazuh.com/|WAZUH_CURRENT_MAJOR_SOLARIS11|/checksums/wazuh/|WAZUH_CURRENT_SOLARIS11|/wazuh-agent_v|WAZUH_CURRENT_SOLARIS11|-sol11-i386.p5p.sha512>`__)
+.. |Solaris11_i386| replace:: `wazuh-agent_v|WAZUH_CURRENT_SOLARIS11_i386|-sol11-i386.p5p <https://packages.wazuh.com/|WAZUH_CURRENT_MAJOR_SOLARIS11_i386|/solaris/i386/11/wazuh-agent_v|WAZUH_CURRENT_SOLARIS11_i386|-sol11-i386.p5p>`__ (`sha512 <https://packages.wazuh.com/|WAZUH_CURRENT_MAJOR_SOLARIS11_i386|/checksums/wazuh/|WAZUH_CURRENT_SOLARIS11_i386|/wazuh-agent_v|WAZUH_CURRENT_SOLARIS11_i386|-sol11-i386.p5p.sha512>`__)
 
-.. |Solaris11_SPARC| replace:: `wazuh-agent_v|WAZUH_CURRENT_SOLARIS11|-sol11-sparc.p5p <https://packages.wazuh.com/|WAZUH_CURRENT_MAJOR_SOLARIS11|/solaris/sparc/11/wazuh-agent_v|WAZUH_CURRENT_SOLARIS11|-sol11-sparc.p5p>`__ (`sha512 <https://packages.wazuh.com/|WAZUH_CURRENT_MAJOR_SOLARIS11|/checksums/wazuh/|WAZUH_CURRENT_SOLARIS11|/wazuh-agent_v|WAZUH_CURRENT_SOLARIS11|-sol11-sparc.p5p.sha512>`__)
+.. |Solaris11_SPARC| replace:: `wazuh-agent_v|WAZUH_CURRENT_SOLARIS11_SPARC|-sol11-sparc.p5p <https://packages.wazuh.com/|WAZUH_CURRENT_MAJOR_SOLARIS11_SPARC|/solaris/sparc/11/wazuh-agent_v|WAZUH_CURRENT_SOLARIS11_SPARC|-sol11-sparc.p5p>`__ (`sha512 <https://packages.wazuh.com/|WAZUH_CURRENT_MAJOR_SOLARIS11_SPARC|/checksums/wazuh/|WAZUH_CURRENT_SOLARIS11_SPARC|/wazuh-agent_v|WAZUH_CURRENT_SOLARIS11_SPARC|-sol11-sparc.p5p.sha512>`__)
 
 +---------+--------------+-------------------------+
 | Version | Architecture | Package                 |
@@ -598,3 +580,42 @@ MSU
 +===================+==============+=======================================================================================================================================================================================================================================+
 |  4.0.0 or later   |   32/64bits  | `msu-updates.json.gz <https://feed.wazuh.com/vulnerability-detector/windows/msu-updates.json.gz>`_ (`sha256 <https://feed.wazuh.com/vulnerability-detector/windows/msu-updates.meta>`__)                                              |
 +-------------------+--------------+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+
+WPK
+---
+
+Linux
+^^^^^
+
+.. |WPK_Linux| replace:: `wazuh_agent_v|WAZUH_CURRENT|_linux_x86_64.wpk <https://packages.wazuh.com/4.x/wpk/linux/x86_64/wazuh_agent_v|WAZUH_CURRENT|_linux_x86_64.wpk>`__ (`sha512 <https://packages.wazuh.com/|WAZUH_CURRENT_MAJOR|/checksums/wazuh/|WAZUH_CURRENT|/wazuh_agent_v|WAZUH_CURRENT|_linux_x86_64.wpk.sha512>`__)
+.. |W_Current| replace:: |WAZUH_CURRENT|
+
++--------------+------------------+--------------+-------------------------+
+| Distribution | Version          | Architecture | WPK Package             |
++==============+==================+==============+=========================+
+|    Linux     | |W_Current|      |    64bit     | |WPK_Linux|             |
++--------------+------------------+--------------+-------------------------+
+
+Windows
+^^^^^^^
+
+.. |WPK_Windows| replace:: `wazuh_agent_v|WAZUH_CURRENT_WINDOWS|_windows.wpk <https://packages.wazuh.com/4.x/wpk/windows/wazuh_agent_v|WAZUH_CURRENT_WINDOWS|_windows.wpk>`__ (`sha512 <https://packages.wazuh.com/|WAZUH_CURRENT_MAJOR_WINDOWS|/checksums/wazuh/|WAZUH_CURRENT_WINDOWS|/wazuh_agent_v|WAZUH_CURRENT_WINDOWS|_windows.wpk.sha512>`__)
+.. |W_Current_Windows| replace:: |WAZUH_CURRENT_WINDOWS|
+
++--------------+-----------------------+--------------+--------------------+
+| Distribution | Version               | Architecture | WPK Package        |
++==============+=======================+==============+====================+
+|   Windows    |  |W_Current_Windows|  |   32/64bit   |  |WPK_Windows|     |
++--------------+-----------------------+--------------+--------------------+
+
+macOS
+^^^^^
+
+.. |WPK_macOS| replace:: `wazuh_agent_v|WAZUH_CURRENT_OSX|_macos_x86_64.wpk <https://packages.wazuh.com/4.x/wpk/macos/x86_64/pkg/wazuh_agent_v|WAZUH_CURRENT_OSX|_macos_x86_64.wpk>`__ (`sha512 <https://packages.wazuh.com/|WAZUH_CURRENT_MAJOR_OSX|/checksums/wazuh/|WAZUH_CURRENT_OSX|/wazuh_agent_v|WAZUH_CURRENT_OSX|_macos_x86_64.wpk.sha512>`__)
+.. |W_Current_OSX| replace:: |WAZUH_CURRENT_OSX|
+
++--------------+------------------+--------------+-------------------------+
+| Distribution | Version          | Architecture | WPK Package             |
++==============+==================+==============+=========================+
+|    macOS     | |W_Current_OSX|  |    64bit     | |WPK_macOS|             |
++--------------+------------------+--------------+-------------------------+

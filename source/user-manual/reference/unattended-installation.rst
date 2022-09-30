@@ -1,5 +1,8 @@
 .. Copyright (C) 2015, Wazuh, Inc.
 
+.. meta::
+  :description: The unattended installation allows the user to predefine several installation variables. Learn more about it in this section of the Wazuh documentation.
+  
 .. _unattended-installation:
 
 Unattended Installation

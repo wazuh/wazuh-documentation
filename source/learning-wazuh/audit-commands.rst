@@ -1,7 +1,7 @@
 .. Copyright (C) 2015, Wazuh, Inc.
 
 .. meta::
-    :description: Learn more about how to watch for malicious command execution in this section of the Wazuh documentation.
+  :description: Learn more about how to watch for malicious command execution in this section of the Wazuh documentation.
     
 .. _learning_wazuh_audit_commands:
 
@@ -139,12 +139,12 @@ Look over the relevant Wazuh rule
 
     .. code-block:: xml
 
-      <rule id="80789" level="3">
-        <if_sid>80700</if_sid>
-        <list field="audit.key" lookup="match_key_value" check_value="execute">etc/lists/audit-keys</list>
-        <description>Audit: Watch - Execute access: $(audit.file.name).</description>
-        <group>audit_watch_execute,gdpr_IV_30.1.g,</group>
-      </rule>  
+       <rule id="80792" level="3">
+         <if_sid>80700</if_sid>
+         <list field="audit.key" lookup="match_key_value" check_value="command">etc/lists/audit-keys</list>
+         <description>Audit: Command: $(audit.exe).</description>
+         <group>audit_command,gdpr_IV_30.1.g,</group>
+       </rule>
           
     Parent rule 80700 catches all auditd events, while this rule focuses on auditd command events.  Notice how the ``<list>`` line in this rule takes the decoded ``audit.key`` value which all our auditd rules set to "audit-wazuh-c" presently, and looks this up in a CDB list called ``audit-keys`` to see if the ``audit.key`` value is listed with a value of "command".
 

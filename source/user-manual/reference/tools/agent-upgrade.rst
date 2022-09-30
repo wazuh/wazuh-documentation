@@ -1,5 +1,8 @@
 .. Copyright (C) 2015, Wazuh, Inc.
 
+.. meta::
+  :description: List outdated agents and upgrade them using the agent_upgrade program. Learn more about it in this section of the Wazuh documentation.
+  
 .. _agent_upgrade:
 
 agent_upgrade

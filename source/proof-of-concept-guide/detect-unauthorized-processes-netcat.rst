@@ -1,3 +1,4 @@
+.. Copyright (C) 2015, Wazuh, Inc.
 
 .. meta::
   :description: This PoC shows how Wazuh is capable of detecting if Netcat is running on a monitored host. Learn more about this in this section of the documentation.
@@ -16,7 +17,7 @@ Configuration
 
 Configure your environment as follows to test the PoC.
 
-#. Add the following configuration block under the ``<localfile>`` section of the ``/var/ossec/etc/ossec.conf`` file at the monitored Ubuntu 20 endpoint. This is to periodically get a list of running processes.
+#. Add the following configuration block under the ``<localfile>`` section of the ``/var/ossec/etc/ossec.conf`` file at the monitored Ubuntu 20 endpoint. This periodically gets a list of running processes.
 
     .. code-block:: XML
 
@@ -39,7 +40,7 @@ Configure your environment as follows to test the PoC.
 
     .. code-block:: console
 
-        # apt install ncat nmap -y
+        # apt-get install ncat nmap -y
 
 #. Add following rules to ``/var/ossec/etc/rules/local_rules.xml`` at the Wazuh manager.
 

@@ -1,6 +1,9 @@
 .. Copyright (C) 2015, Wazuh, Inc.
 
-.. _kibana_configure_indices:
+.. meta::
+  :description: Learn how to configure the name of the indices that Elasticsearch generates to store the Wazuh alerts in this section of the Wazuh documentation.
+ 
+.. _kibana_configure_indices: 
 
 Indices configuration
 =====================
@@ -71,7 +74,7 @@ Let's suppose that we want to add a new index pattern (``my-custom-alerts-*``) a
 
     .. code-block:: console
 
-      # curl -XPUT 'http://localhost:9200/_template/wazuh' -H 'Content-Type: application/json' -d @template.json
+      # curl -XPUT -k -u <user>:<pass> 'https://localhost:9200/_template/wazuh' -H 'Content-Type: application/json' -d @template.json
 
     .. code-block:: json
       :class: output

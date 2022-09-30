@@ -1,4 +1,5 @@
 .. Copyright (C) 2015, Wazuh, Inc.
+
 .. meta::
   :description: The Wazuh manager is the system that analyzes the data received from all registered agents. Find out more about how to define an alert level threshold.
   

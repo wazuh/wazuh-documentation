@@ -1,3 +1,5 @@
+.. Copyright (C) 2015, Wazuh, Inc.
+
 .. meta::
   :description: The Wazuh module for Docker can be used to identify security incidents across containers, alerting in real time. Learn more about this in this PoC.
 

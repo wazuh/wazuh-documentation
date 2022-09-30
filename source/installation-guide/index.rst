@@ -13,7 +13,7 @@ Wazuh is a security platform that provides unified XDR and SIEM protection for e
 
 Wazuh is free and open source. Its components abide by the `GNU General Public License, version 2 <https://www.gnu.org/licenses/old-licenses/gpl-2.0.en.html>`_, and the `Apache License, Version 2.0 <https://www.apache.org/licenses/LICENSE-2.0>`_ (ALv2). 
 
-In this installation guide, you will learn how to install Wazuh in your infrastructure. We also offer `Wazuh Cloud <https://wazuh.com/cloud/>`_, our software as a service (SaaS) solution. Check the :ref:`Cloud service <cloud_service>` documentation for more information.
+In this installation guide, you will learn how to install Wazuh in your infrastructure. We also offer `Wazuh Cloud <https://wazuh.com/cloud/>`_, our software as a service (SaaS) solution. Check the :doc:`Cloud service </cloud-service/index>` documentation for more information.
 
 
 Installing the Wazuh central components
@@ -164,7 +164,7 @@ In the :doc:`Packages list </installation-guide/packages-list>` section, you wil
 Other installation alternatives
 -------------------------------
 
-Wazuh provides other :ref:`installation alternatives <deployment>`. These are complementary to the installation methods of this installation guide. You will find instructions on how to deploy Wazuh using ready-to-use machines, containers, and orchestration tools. There is also information on how to install the solution offline, from sources, and with commercial options.
+Wazuh provides other :doc:`installation alternatives </deployment-options/index>`. These are complementary to the installation methods of this installation guide. You will find instructions on how to deploy Wazuh using ready-to-use machines, containers, and orchestration tools. There is also information on how to install the solution offline, from sources, and with commercial options.
 
 
 .. toctree::

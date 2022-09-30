@@ -1,5 +1,8 @@
 .. Copyright (C) 2015, Wazuh, Inc.
 
+.. meta::
+   :description: This section of the Wazuh documentation guides through the upgrade process of the Elastic Stack from 2.x to 5.x.
+  
 .. _upgrading_elastic_stack_2.x_5.x:
 
 Upgrading Elastic Stack from 2.x to 5.x

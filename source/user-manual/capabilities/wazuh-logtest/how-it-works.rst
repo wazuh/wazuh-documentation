@@ -1,4 +1,5 @@
 .. Copyright (C) 2015, Wazuh, Inc.
+
 .. meta::
   :description: The Wazuh-Logtest solution was designed to replace ossec-logtest. It allows to test and verify rules and decoders remotely. Learn how it works here. 
   
@@ -17,7 +18,7 @@ There are two use cases to evaluate rules through Wazuh-Logtest:
 
 .. note::
 
-  For more information about rules and decoders, see the :ref:`Wazuh Ruleset <ruleset>`
+  For more information about rules and decoders, see the :doc:`Wazuh Ruleset </user-manual/ruleset/index>`
 
 Use cases: Test log from Wazuh-Logtest Tool
 -------------------------------------------

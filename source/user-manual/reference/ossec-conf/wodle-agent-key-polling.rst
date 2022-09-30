@@ -3,11 +3,14 @@
 .. meta::
   :description: Learn more about the configuration options of the key polling wodle in this section of the Wazuh documentation.
 
-
 .. _wodle-agentkeypolling:
 
 wodle name="agent-key-polling"
 ==============================
+
+.. deprecated:: 4.4.0
+
+.. note:: The agent-key-polling wodle is deprecated in favor of the :doc:`agent key request <../../agents/key-request>` feature. Although this configuration block is still usable, we highly recommend to use the agent key request dedicated block in :doc:`auth <auth>`.
 
 .. topic:: XML section name
 

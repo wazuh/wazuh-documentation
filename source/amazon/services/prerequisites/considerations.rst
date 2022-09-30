@@ -33,24 +33,62 @@ On the other hand, the ``CloudWatch Logs`` module can process logs older than th
 
 
 Reparse
-~~~~~~~
-
-.. note::
-  Option not available for CloudWatch Logs.
+-------
 
 .. warning::
-  Using the ``reparse`` option will fetch and process every log from the starting date until the present. This process may generate duplicate alerts.
+  
+   Using the ``reparse`` option will fetch and process all the logs from the starting date until the present. This process may generate duplicate alerts.
 
-To process older logs, it's necessary to manually execute the module using the ``--reparse`` or ``-o`` option. Executing the module with this option will use the ``only_logs_after`` value provided to fetch and process every log from that date until the present. If no ``only_logs_after`` value was provided, it will use the date of the first file processed.
+To fetch and process older logs, you need to manually run the module using the ``--reparse`` option.
 
-Below there is an example of a manual execution of the module using the ``--reparse`` option on a manager, being ``/var/ossec`` the Wazuh installation path:
+The ``only_logs_after`` value sets the time for the starting point. If you don't provide an ``only_logs_after`` value, the module uses the date of the first file processed.
+
+Find an example of running the module on a manager using the ``--reparse`` option. ``/var/ossec`` is the Wazuh installation path.
 
 .. code-block:: console
 
-  # cd /var/ossec/wodles/aws
-  # ./aws-s3 -b 'wazuh-example-bucket' --reparse --only_logs_after '2021-Jun-10' --debug 2
+  # /var/ossec/wodles/aws/aws-s3 -b 'wazuh-example-bucket' --reparse --only_logs_after '2021-Jun-10' --debug 2
 
-The ``--debug 2`` parameter was used to get a verbose output since by default the script won't print anything on the terminal, and it could seem like it's not working when it could be handling a great amount of data instead.
+The ``--debug 2`` parameter gets a verbose output. This is useful to show the script is working, specially when handling a large amount of data.
+
+
+Connection configuration for retries
+------------------------------------
+
+Some calls to AWS services may fail when made in highly congested environments. The :ref:`boto-3` client raises `ClientError` exceptions describing the errors. This kind of exception often needs repeating the call, without further handling. To help retry these calls, Boto3 provides `Retries <https://boto3.amazonaws.com/v1/documentation/api/latest/guide/retries.html>`__. This feature allows retrying client calls to AWS services when errors like ``ThrottlingException`` are experienced.
+
+Users can customize two retry configurations.
+
+-  ``retry_mode``: legacy, standard, and adaptive.
+
+   -  **Legacy** mode is the default retry mode. It sets the older version 1 for the retry handler. This includes:
+      
+      -  Retry attempts for a limited number of errors/exceptions.
+      -  A default value of 5 for maximum call attempts.
+
+   -  **Standard** mode sets the updated version 2 for the retry handler. It includes:
+
+      -  Extended functionality over that found in the legacy mode where retry attempts apply to an expanded list of errors/exceptions.
+      -  A default value of 3 for maximum call attempts.
+
+   -  **Adaptive** mode is an experimental retry mode. It includes all the features of the standard mode. This mode offers flexibility in client-side retries. Retries adapt to the error/exception state response from an AWS service.
+
+-  ``max_attempts``: The maximum number of attempts including the initial call. This configuration can override the default value set by the retry mode.
+
+You can specify the retry configuration in the ``~/.aws/config`` `configuration file <https://boto3.amazonaws.com/v1/documentation/api/latest/guide/configuration.html#using-a-configuration-file>`__. The profile section must include the ``max_attempts``, ``retry_mode``, and ``region`` settings. It is important to use the same profile as the one you chose as your :ref:`authentication method <authentication_method>`. If the authentication method doesn't have a profile, then the ``[Default]`` profile must include the configurations. In case the system doesn't have this file, the `aws-s3` Wazuh module defines the following values by default:
+
+-  ``retry_mode=standard``
+-  ``max_attempts=10``.
+
+The following example of a ``~/.aws/config`` file sets retry parameters for the *dev* profile:
+
+.. code-block:: ini
+
+   [profile dev]
+   region=us-east-1
+   max_attempts=5
+   retry_mode=standard
+
 
 Configuring multiple services
 -----------------------------

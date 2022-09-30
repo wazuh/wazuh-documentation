@@ -1,3 +1,5 @@
+.. Copyright (C) 2015, Wazuh, Inc.
+
 .. meta::
   :description: Wazuh agent can be integrated with Osquery, making it easy to capture additional information from the endpoint. Learn more about this in this PoC.
 
@@ -21,7 +23,7 @@ Configure your environment as follows to test the PoC.
     .. code-block:: console
 
         # wget https://pkg.osquery.io/deb/osquery_4.5.1_1.linux.amd64.deb
-        # apt install ./osquery_4.5.1_1.linux.amd64.deb -y
+        # apt-get install ./osquery_4.5.1_1.linux.amd64.deb -y
 
 #. Add this content block to the Osquery configuration file ``/etc/osquery/osquery.conf``
 

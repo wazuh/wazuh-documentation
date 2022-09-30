@@ -53,6 +53,8 @@ It is recommended to use a pip version greater than or equal to 19.3 to ease the
 
   # pip3 install --upgrade pip
 
+.. _boto-3:
+
 Boto3
 -----
 

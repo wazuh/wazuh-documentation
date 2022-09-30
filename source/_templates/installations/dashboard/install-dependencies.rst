@@ -14,6 +14,6 @@
 
                   .. code-block:: console
 
-                      # apt install debhelper tar curl libcap2-bin #debhelper version 9 or later
+                      # apt-get install debhelper tar curl libcap2-bin #debhelper version 9 or later
 
 .. End of include file

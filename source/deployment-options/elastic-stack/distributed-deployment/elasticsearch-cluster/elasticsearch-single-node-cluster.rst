@@ -1,9 +1,9 @@
 .. Copyright (C) 2015, Wazuh, Inc.
 
-.. meta:: :description: Learn how to install Elastic Stack for using Wazuh on Debian
-
+.. meta::
+  :description: Learn how to install the Elastic Stack components in a single-node cluster. In this section, we explain the process you need to follow.
+  
 .. _basic_elasticsearch_single_node_cluster:
-
 
 Elasticsearch single-node cluster
 =================================
@@ -131,5 +131,6 @@ Next steps
 
 The next step is the installation of the Wazuh server, select the cluster mode:
 
-- :ref:`Wazuh single-node cluster<basic_wazuh_single_node_cluster>`
-- :ref:`Wazuh multi-node cluster<basic_wazuh_multi_node_cluster>`
+- :doc:`Wazuh single-node cluster</deployment-options/elastic-stack/distributed-deployment/wazuh-cluster/wazuh-single-node-cluster>`
+- :doc:`Wazuh multi-node cluster</deployment-options/elastic-stack/distributed-deployment/wazuh-cluster/wazuh-multi-node-cluster>`
+

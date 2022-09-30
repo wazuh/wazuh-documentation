@@ -1,12 +1,12 @@
 .. Copyright (C) 2015, Wazuh, Inc.
 
+.. meta::
+  :description: Active Response allows to run commands on an agent in response to certain triggers. Learn how to block an sshd brute force attack using Wazuh.
+
 .. _blocking_attacks_active_response:
 
 Blocking attacks with Active Response
 =====================================
-
-.. meta::
-  :description: Active Response allows to run commands on an agent in response to certain triggers. Learn how to block an sshd brute force attack using Wazuh.
 
 Active response allows Wazuh to run commands on an agent in response to certain triggers. In this use case, we simulate an SSH Brute Force attack and configure an active response to block the IP address of the attacker. 
 

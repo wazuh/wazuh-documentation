@@ -1,3 +1,5 @@
+.. Copyright (C) 2015, Wazuh, Inc.
+
 .. meta::
   :description: Wazuh is capable of detecting a Shellshock attack by analyzing web server logs collected from a monitored endpoint. Learn more about this in this PoC.
 

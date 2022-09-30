@@ -1,6 +1,7 @@
 .. Copyright (C) 2015, Wazuh, Inc.
 
-
+.. meta::
+  :description: Once you've installed the Wazuh Kibana plugin, some new indices will be generated in Elasticsearch. Learn more about it in this section.
 
 Elasticsearch indices
 =====================

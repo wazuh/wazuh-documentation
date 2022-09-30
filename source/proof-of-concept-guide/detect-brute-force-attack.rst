@@ -1,3 +1,4 @@
+.. Copyright (C) 2015, Wazuh, Inc.
 
 .. meta::
   :description: This PoC shows how Wazuh provides out-of-the-box rules capable of identifying brute-force attacks. Learn more about it in this section of the documentation.
@@ -33,7 +34,7 @@ Configure your environment as follows to test the PoC.
 
         .. code-block:: XML
 
-            # apt install -y hydra
+            # apt-get install -y hydra
 
 
 Steps to generate the alerts
