@@ -1,5 +1,8 @@
 .. Copyright (C) 2015, Wazuh, Inc.
 
+.. meta::
+  :description: The agent-upgrade module is responsible for carrying out the entire agent upgrade process remotely. Learn more about it in this section.
+  
 .. _reference_ossec_agent_upgrade:
 
 agent-upgrade

@@ -1,4 +1,5 @@
 .. Copyright (C) 2015, Wazuh, Inc.
+
 .. meta::
   :description: Learn more about client configuration, connection to the manager, and its configuring options in this section of the Wazuh documentation.
 

@@ -1,5 +1,8 @@
 .. Copyright (C) 2015, Wazuh, Inc.
 
+.. meta::
+  :description: Find out how to configure Active responses in this section of the Wazuh documentation. 
+
 .. _remediation-examples:
 
 Configuration

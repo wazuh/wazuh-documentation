@@ -1,3 +1,5 @@
+.. Copyright (C) 2015, Wazuh, Inc.
+
 .. meta::
   :description: Wazuh provides you with powerful anomaly and malware detection capabilities to detect trojaned system binaries by using signatures. Learn more about this in this PoC.
 

@@ -1,4 +1,5 @@
 .. Copyright (C) 2015, Wazuh, Inc.
+
 .. meta::
   :description: Learn more about the Wazuh local configuration, including configuration sections and supported installations, in this section of our documentation.
 

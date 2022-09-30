@@ -1,5 +1,8 @@
 .. Copyright (C) 2015, Wazuh, Inc.
 
+.. meta::
+  :description: Find out how to detect an RDP brute force attack. Learn more about it in the Learning Wazuh section of our documentation.
+
 .. _learning_wazuh_rdp_brute_force:
 
 Detect an RDP brute force attack
