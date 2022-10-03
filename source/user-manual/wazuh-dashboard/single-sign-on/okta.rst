@@ -113,25 +113,47 @@ Okta Configuration
         :width: 100%   
 
 #. Add the new app to the new group.
-   Navigate to Directory → Groups → <YOUR GROUP>. Click on Applications, select Assign Applications, from here, assign the app created in step 5 and click on Done to save the changes.
+
+   Navigate to **Directory** → **Groups** → **<YOUR GROUP>**. Click on **Applications**, select **Assign Applications**, from here, assign the app created in step 5 and click on **Done** to save the changes.
+   
+     .. thumbnail:: /images/manual/okta/12-navigate-to-directory-groups.png
+        :title: Navigate to Directory - Groups - <YOUR GROUP>
+        :align: center
+        :width: 100%
+
+     .. thumbnail:: /images/manual/okta/13-select-assign-applications.png
+        :title: Select Assign Applications
+        :align: center
+        :width: 100%
 
 #. Note the necessary parameters from the SAML settings of the new app.
+
    The parameters already obtained during the integration are:
-   sp.entity_id
-   roles_key
-   kibana_url
-   To obtain the remaining parameters navigate to Applications → Applications → <YOUR APP> → Sign On. 
-   Under SAML Signing Certificates, select View IdP metadata of the active certificate. This will open in a new tab, copy the URL as this will be the idp.metadata_url.
-   Now, on the same page, click on  View SAML setup instructions. Copy the Identity Provider Issuer URL, it will be the idp.entity_id.
-   The X.509 Certificate will be used as the exchange_key:
+
+   - ``sp.entity_id``
+   - ``roles_key``
+   - ``kibana_url``
+
+   To obtain the remaining parameters navigate to **Applications** → **Applications** → **<YOUR APP>** → **Sign On**. 
+
+   Under **SAML Signing Certificates**, select **View IdP metadata** of the active certificate. This will open in a new tab, copy the URL as this will be the ``idp.metadata_url``.
+
+   Now, on the same page, click on  **View SAML setup instructions**. Copy the **Identity Provider Issuer URL**, it will be the ``idp.entity_id``.
+
+   The **X.509 Certificate** will be used as the ``exchange_key``:
+
+     .. thumbnail:: /images/manual/okta/14-navigate-to-applications.png
+        :title: Navigate to Applications - Applications - <YOUR APP> - Sign On
+        :align: center
+        :width: 100%
 
    This information can also be found in the metadata XML file.
-
 
 Wazuh indexer configuration
 ---------------------------
 
 #. Configure Wazuh indexer security configuration files.
+
    The file path to the Wazuh indexer security configuration is /usr/share/wazuh-indexer/plugins/opensearch-security/securityconfig/. The files to configure are config.yml and roles_mapping.yml. It is recommended to back up these files before the configuration is carried out.
 
    #. config.yml
