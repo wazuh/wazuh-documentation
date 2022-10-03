@@ -154,10 +154,11 @@ Wazuh indexer configuration
 
 #. Configure Wazuh indexer security configuration files.
 
-   The file path to the Wazuh indexer security configuration is /usr/share/wazuh-indexer/plugins/opensearch-security/securityconfig/. The files to configure are config.yml and roles_mapping.yml. It is recommended to back up these files before the configuration is carried out.
+   The file path to the Wazuh indexer security configuration is ``/usr/share/wazuh-indexer/plugins/opensearch-security/securityconfig/``. The files to configure are ``config.yml`` and ``roles_mapping.yml``. It is recommended to back up these files before the configuration is carried out.
 
-   #. config.yml
-      To configure the config.yml file, the order in basic_internal_auth_domain should be set to 0, and the challenge flag must be set to false. Include a saml_auth_domain configuration under the authc section similar to the following:
+   #. ``config.yml``
+      
+      To configure the ``config.yml`` file, the ``order`` in ``basic_internal_auth_domain`` should be set to ``0``, and the ``challenge`` flag must be set to ``false``. Include a ``saml_auth_domain`` configuration under the ``authc`` section similar to the following:
 
       .. code-block:: console
                
@@ -193,19 +194,22 @@ Wazuh indexer configuration
                type: noop
 
       Ensure to change the following parameters to their corresponding value 
-      idp.metadata_url  
-      idp.entity_id
-      sp.entity_id
-      kibana_url
-      roles_key
-      exchange_key
-      After modifying the config.yml file, it is necessary to use the securityadmin script to load the configuration changes with the following command:
+
+      - ``idp.metadata_url``  
+      - ``idp.entity_id``
+      - ``sp.entity_id``
+      - ``kibana_url``
+      - ``roles_key``
+      - ``exchange_key``
+      
+      After modifying the ``config.yml`` file, it is necessary to use the ``securityadmin`` script to load the configuration changes with the following command:
 
       .. code-block:: console
       
-         # export JAVA_HOME=/usr/share/wazuh-indexer/jdk/ && bash /usr/share/wazuh-indexer/plugins/opensearch-security/tools/securityadmin.sh -f /usr/share/wazuh-indexer/plugins/opensearch-security/securityconfig/config.yml -icl -key /etc/wazuh-indexer/certs/admin-key.pem -cert /etc/wazuh-indexer/certs/admin.pem -cacert /etc/wazuh-indexer/certs/root-ca.pem -h localhost -nhnv
+            # export JAVA_HOME=/usr/share/wazuh-indexer/jdk/ && bash /usr/share/wazuh-indexer/plugins/opensearch-security/tools/securityadmin.sh -f /usr/share/wazuh-indexer/plugins/opensearch-security/securityconfig/config.yml -icl -key /etc/wazuh-indexer/certs/admin-key.pem -cert /etc/wazuh-indexer/certs/admin.pem -cacert /etc/wazuh-indexer/certs/root-ca.pem -h localhost -nhnv
 
       The "-h" flag is used to specify the hostname or the IP address of the Wazuh indexer node.
+
       The command output must be similar to the following:
 
       .. code-block:: console
@@ -226,28 +230,29 @@ Wazuh indexer configuration
                SUCC: Configuration for 'config' created or updated
             Done with success
 
-   #. roles_mapping.yml
+   #. ``roles_mapping.yml``
    
-      Configure the roles_mapping.yml file to map the Okta group to the appropriate Wazuh indexer role, in our case, we map it to the  all_access role:
+      Configure the ``roles_mapping.yml`` file to map the Okta group to the appropriate Wazuh indexer role, in our case, we map it to the  ``all_access`` role:
 
       .. code-block:: console
 
-         all_access:
-         reserved: false
-         hidden: false
-         backend_roles:
-         - "admin"
-         - "<GROUP_NAME>"
+            all_access:
+            reserved: false
+            hidden: false
+            backend_roles:
+            - "admin"
+            - "<GROUP_NAME>"
 
-      Replace <GROUP_NAME> with the name you gave to your group in Step 3, in our case, this is wazuh-admin. 
-      After modifying the roles_mapping.yml file, it is necessary to use the securityadmin script to load the configuration changes with the following command:
+      Replace ``<GROUP_NAME>`` with the name you gave to your group in Step 3, in our case, this is ``wazuh-admin``.
 
+      After modifying the ``roles_mapping.yml`` file, it is necessary to use the ``securityadmin`` script to load the configuration changes with the following command:
 
       .. code-block:: console
 
-         # export JAVA_HOME=/usr/share/wazuh-indexer/jdk/ && bash /usr/share/wazuh-indexer/plugins/opensearch-security/tools/securityadmin.sh -f /usr/share/wazuh-indexer/plugins/opensearch-security/securityconfig/roles_mapping.yml -icl -key /etc/wazuh-indexer/certs/admin-key.pem -cert /etc/wazuh-indexer/certs/admin.pem -cacert /etc/wazuh-indexer/certs/root-ca.pem -h localhost -nhnv
+            # export JAVA_HOME=/usr/share/wazuh-indexer/jdk/ && bash /usr/share/wazuh-indexer/plugins/opensearch-security/tools/securityadmin.sh -f /usr/share/wazuh-indexer/plugins/opensearch-security/securityconfig/roles_mapping.yml -icl -key /etc/wazuh-indexer/certs/admin-key.pem -cert /etc/wazuh-indexer/certs/admin.pem -cacert /etc/wazuh-indexer/certs/root-ca.pem -h localhost -nhnv
 
       The "-h" flag is used to specify the hostname or the IP address of your Wazuh indexer node.
+
       The command output must be similar to the following:
 
       .. code-block:: console
@@ -273,7 +278,8 @@ Wazuh dashboard configuration
 -----------------------------
 
 #. Configure the Wazuh dashboard configuration file.
-   Add these configurations to the opensearch_dashboards.yml, the file path is /etc/wazuh-dashboard/opensearch_dashboards.yml. It is recommended to back up this file before the configuration is made.
+
+   Add these configurations to the ``opensearch_dashboards.yml``, the file path is ``/etc/wazuh-dashboard/opensearch_dashboards.yml``. It is recommended to back up this file before the configuration is made.
 
    .. code-block:: console
 
@@ -281,7 +287,8 @@ Wazuh dashboard configuration
       server.xsrf.whitelist: ["/_plugins/_security/saml/acs", "/_plugins/_security/saml/logout", "/_opendistro/_security/saml/acs", "/_opendistro/_security/saml/logout", "/_opendistro/_security/saml/acs/idpinitiated"]
 
 #. Change the logout configuration in the Wazuh dashboard. 
-   To change the logout configuration, replace the this.router.get({path: `auth/logout` section of the   route.js file with the following setting. The file path is /usr/share/wazuh-dashboard/plugins/securityDashboards/server/auth/types/saml/routes.js. It is recommended to back up this file before the configuration is made.
+   
+   To change the logout configuration, replace the ``this.router.get({path: `auth/logout` `` section of the ``route.js`` file with the following setting. The file path is ``/usr/share/wazuh-dashboard/plugins/securityDashboards/server/auth/types/saml/routes.js``. It is recommended to back up this file before the configuration is made.
 
    .. code-block:: console
 
@@ -326,11 +333,10 @@ Wazuh dashboard configuration
 
 #. Restart the Wazuh dashboard service using this command:
 
-   .. code-block:: console
-
-      systemctl restart wazuh-dashboard
+       .. include:: /_templates/common/restart_dashboard.rst
 
 #. Test the configuration.
+
    To test the Okta SSO configuration, go to your Wazuh dashboard URL and log in with your Okta account.
 
 
