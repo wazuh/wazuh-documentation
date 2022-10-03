@@ -37,7 +37,7 @@ The following parameters are required to make the configurations on the Wazuh da
 .. topic:: Identity Providers
 
     .. toctree::
-        :maxdepth: 2
+        :maxdepth: 1
 
         okta
         
