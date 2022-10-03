@@ -94,6 +94,8 @@ newUrls['4.3'] = [
   '/user-manual/wazuh-dashboard/rbac.html',
   '/user-manual/wazuh-dashboard/troubleshooting.html',
   '/user-manual/wazuh-dashboard/multi-tenancy.html',
+  '/user-manual/wazuh-dashboard/single-sign-on/index.html',
+  '/user-manual/wazuh-dashboard/single-sign-on/okta.html',
   '/user-manual/securing-wazuh/index.html',
   '/user-manual/securing-wazuh/wazuh-indexer.html',
   '/user-manual/securing-wazuh/opendistro.html',
