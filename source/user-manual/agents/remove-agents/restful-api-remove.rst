@@ -10,6 +10,12 @@ Remove agents using the Wazuh API
 
 The request :api-ref:`DELETE /agents <operation/api.controllers.agent_controller.delete_agents>` removes the specified agents.
 
+The examples in this section :ref:`use a token <api_log_in>` for authentication to the Wazuh API. Run the following command to get your token for the API calls below.
+
+.. code-block:: console
+
+   # TOKEN=$(curl -u <user>:<password> -k -X GET "https://localhost:55000/security/user/authenticate?raw=true")
+
 Removing agents in a list
 ^^^^^^^^^^^^^^^^^^^^^^^^^
 
@@ -39,14 +45,14 @@ You can remove specific agents using a list. Use the parameter ``agents_list`` t
 
 .. _remove_disconnected_agents:
 
-Removing agents not connecting
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+Removing disconnected agents
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 You can remove agents which never connected or which have been disconnected for a long time. Use the parameter ``older_than`` to set a period of time of no known activity. Use ``status`` to select the `Never connected` and `Disconnected` agents. For example, to remove agents inactive for more than 21 days, run a query like the following one.
 
 .. code-block:: console
 
-    # curl -k -X DELETE "https://localhost:55000/agents?pretty=true&older_than=21d&agents_list=all&status=never_connected,disconnected," -H  "Authorization: Bearer $TOKEN"
+    # curl -k -X DELETE "https://localhost:55000/agents?pretty=true&older_than=21d&agents_list=all&status=never_connected,disconnected" -H  "Authorization: Bearer $TOKEN"
 
 .. code-block:: json
    :class: output
