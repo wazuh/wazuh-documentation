@@ -600,27 +600,25 @@ For example, we may want to read a Python Traceback output as one single log, re
 ignore
 ^^^^^^^^^^^^^^^
 
-This allows you to configure a pcre2 expression to ignore specific log lines. Multiple expressions can be configured by repeating the ignore label. The log will be ignored as soon as one of the expressions matches, OR behavior.
+Specify a regular expression to ignore log lines or command outputs when matching. Whether several `ignore` labels are defined, entries are ignored when matching any of the specified ones.
 
 +--------------------+---------------------------------------------------------------+
 | **Default Value**  | n/a                                                           |
 +--------------------+---------------------------------------------------------------+
 | **Allowed values** | Any `regex <regex.html#regex-os-regex-syntax>`_,              |
 |                    | `sregex <regex.html#sregex-os-match-syntax>`_ or              |
-|                    | `pcre2 <regex.html#pcre2-syntax>`_ expression.                |
+|                    | `PCRE2 <regex.html#pcre2-syntax>`_ expression.                |
 +--------------------+---------------------------------------------------------------+
 
-The attribute type is optional.
+Use the `type` attribute to define the regular expression type. By default, PCRE2 is applied.
 
-+-------------+-----------------------------------------+-------------+---------------+
-| Attribute   |              Description                | Value range | Default value |
-+=============+=========================================+=============+===============+
-| **type**    | Allows to set regular expression type   |   osregex   |     pcre2     |
-|             |                                         +-------------+               |
-|             |                                         |   osmatch   |               |
-|             |                                         +-------------+               |
-|             |                                         |   pcre2     |               |
-+-------------+-----------------------------------------+-------------+---------------+
++----------+--------------------------------------------------------------------------------+
+| **type** | Allows to set regular expression type                                          |
++          +------------------+-------------------------------------------------------------+
+|          | Default value    | PCRE2                                                       |
+|          +------------------+-------------------------------------------------------------+
+|          | Allowed values   | osregex, osmatch, PCRE2                                     |
++----------+------------------+-------------------------------------------------------------+
 
 For example, to ignore events related to configuration changes in the audit log:
 
@@ -629,43 +627,32 @@ For example, to ignore events related to configuration changes in the audit log:
   <localfile>
       <log_format>audit</log_format>
       <location>/var/log/audit/audit.log</location>
-      <ignore type="osregex">type=\.+_CHANGE</ignore>
+      <ignore type="PCRE2">type=.+_CHANGE</ignore>
       <ignore type="osregex">type=CONFIG_\.+</ignore>
   </localfile>
-
-.. note::
-  For formats that group multiple lines, the entire group will be counted as a single log to check if it should be ignored.
-
-.. note::
-  The ignore label is checked before the restrict label, so if you set identical expressions for both settings, no log will be processed.
-
-.. note::
-  On Windows, the ``eventchannel`` format already provides a way to ignore logs through queries, so this setting ``does not apply`` to this format.
 
 restrict
 ^^^^^^^^^^^^^^^
 
-This allows you to configure a pcre2 expression to restrict specific log lines, avoiding to generate alerts for those logs that do not match. Multiple expressions can be configured by repeating the restrict label. The log will be processed only if all expressions match.
+Specify a regular expression to restrict processed log lines or command outputs. Whether several `restrict` labels are defined, entries are processed when matching all of them.
 
 +--------------------+---------------------------------------------------------------+
 | **Default Value**  | n/a                                                           |
 +--------------------+---------------------------------------------------------------+
 | **Allowed values** | Any `regex <regex.html#regex-os-regex-syntax>`_,              |
 |                    | `sregex <regex.html#sregex-os-match-syntax>`_ or              |
-|                    | `pcre2 <regex.html#pcre2-syntax>`_ expression.                |
+|                    | `PCRE2 <regex.html#pcre2-syntax>`_ expression.                |
 +--------------------+---------------------------------------------------------------+
 
-The attribute type is optional.
+Use the `type` attribute to define the regular expression type. By default, PCRE2 is applied.
 
-+-------------+-----------------------------------------+-------------+---------------+
-| Attribute   |              Description                | Value range | Default value |
-+=============+=========================================+=============+===============+
-| **type**    | Allows to set regular expression type   |   osregex   |     pcre2     |
-|             |                                         +-------------+               |
-|             |                                         |   osmatch   |               |
-|             |                                         +-------------+               |
-|             |                                         |   pcre2     |               |
-+-------------+-----------------------------------------+-------------+---------------+
++----------+--------------------------------------------------------------------------------+
+| **type** | Allows to set regular expression type                                          |
++          +------------------+-------------------------------------------------------------+
+|          | Default value    | PCRE2                                                       |
+|          +------------------+-------------------------------------------------------------+
+|          | Allowed values   | osregex, osmatch, PCRE2                                     |
++----------+------------------+-------------------------------------------------------------+
 
 For example, to restrict syslog events related to a particular user name:
 
@@ -674,18 +661,18 @@ For example, to restrict syslog events related to a particular user name:
   <localfile>
       <log_format>syslog</log_format>
       <location>/custom/file/path</location>
-      <restrict type="osregex">username_\.+</restrict>
+      <restrict type="PCRE2">username_\d?</restrict>
       <restrict type="osregex">Jun\.+</restrict>
   </localfile>
 
 .. note::
-  For formats that group multiple lines, the entire group will be counted as a single log to check if it should be restricted.
+  For formats that group multiple lines, the entire group is treated as a single log when evaluating the regex.
 
 .. note::
-  The ignore label is checked before the restrict label, so if you set identical expressions for both settings, no log will be processed.
+  Whether the same log entry matches an ignore and also a restrict configured for the same `localfile`, the entry is discarded. In other words, the `ignore` has precedence over `restrict`. Said that, if the same expression is defined in both `ignore` and `restrict`, no log will be processed for that `localfile`.
 
 .. note::
-  On Windows, the ``eventchannel`` format already provides a way to restrict logs through queries, so this setting ``does not apply`` to this format.
+  The `eventchannel` format already provides a way to filter logs through queries. Therefore, `ignore` and `restrict` settings don't apply to this format.
 
 
 Configuration examples
