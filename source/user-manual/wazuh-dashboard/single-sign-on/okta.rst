@@ -24,20 +24,20 @@ Okta Configuration
 
     To create a new user, from your okta admin console page, navigate to **Directory** → **People**   
 
-    .. thumbnail:: /images/manual/single-sign-on/okta/01-navigate-to-directory-people.png
+    .. thumbnail:: /images/single-sign-on/okta/01-navigate-to-directory-people.png
         :title: Navigate to Directory - People
         :align: center
         :width: 80%
      
     From the **People** section, select **Add Person**, fill in the details of the new user and click **Save** as seen in the following screenshots.
 
-    .. thumbnail:: /images/manual/single-sign-on/okta/02-select-add-person.png
+    .. thumbnail:: /images/single-sign-on/okta/02-select-add-person.png
         :title: Select add person
         :align: center
         :width: 80%
      
   
-    .. thumbnail:: /images/manual/single-sign-on/okta/03-click-save.png
+    .. thumbnail:: /images/single-sign-on/okta/03-click-save.png
         :title: Click save
         :align: center
         :width: 80%
@@ -46,7 +46,7 @@ Okta Configuration
     
     To create a new group where the user will be added, navigate to **Directory** → **Groups** and add a group.
    
-     .. thumbnail:: /images/manual/single-sign-on/okta/04-navigate-to-directory-groups.png
+     .. thumbnail:: /images/single-sign-on/okta/04-navigate-to-directory-groups.png
         :title: Navigate to directory groups
         :align: center
         :width: 80%    
@@ -58,7 +58,7 @@ Okta Configuration
    Navigate to **Directory** → **Groups** → **<YOUR GROUP>**. To add a user to the group, click on **Assign People** and add the user to the group created.
 
 
-     .. thumbnail:: /images/manual/single-sign-on/okta/05-navigate-to-directory-groups.png
+     .. thumbnail:: /images/single-sign-on/okta/05-navigate-to-directory-groups.png
         :title: Navigate to Directory - Groups - <YOUR GROUP>
         :align: center
         :width: 80%   
@@ -67,21 +67,21 @@ Okta Configuration
    
    To create a new app, navigate to the **Applications** section in Okta. Select **Create App Integration**.
 
-     .. thumbnail:: /images/manual/single-sign-on/okta/06-navigate-to-applications-section.png
+     .. thumbnail:: /images/single-sign-on/okta/06-navigate-to-applications-section.png
         :title: Navigate to the Applications section in Okta
         :align: center
         :width: 80%   
 
    In the ``Create a new application integration`` window, select ``SAML 2.0`` and click on next.
 
-     .. thumbnail:: /images/manual/single-sign-on/okta/07-create-new-application.png
+     .. thumbnail:: /images/single-sign-on/okta/07-create-new-application.png
         :title: Create a new application integration
         :align: center
         :width: 80%   
 
    This leads to the application configuration page. Assign a name to the application, in our case, we assign the name ``wazuh-sso-app``:
 
-     .. thumbnail:: /images/manual/single-sign-on/okta/08-assign-name.png
+     .. thumbnail:: /images/single-sign-on/okta/08-assign-name.png
         :title: Assign a name to the application
         :align: center
         :width: 80%   
@@ -93,21 +93,21 @@ Okta Configuration
    
    The rest of the values can be left as default.
 
-     .. thumbnail:: /images/manual/single-sign-on/okta/09-saml-settings-section.png
+     .. thumbnail:: /images/single-sign-on/okta/09-saml-settings-section.png
         :title: SAML settings section
         :align: center
         :width: 80%   
 
    In the **Group Attribute Statements** section put ``Roles`` as the name. The value for ``Roles`` will be used as the ``roles_key`` parameter in the Wazuh indexer configuration. For  the filter field, select **Matches regex** and type ``.*``. 
 
-     .. thumbnail:: /images/manual/single-sign-on/okta/10-group-attribute-statements-section.png
+     .. thumbnail:: /images/single-sign-on/okta/10-group-attribute-statements-section.png
         :title: Group Attribute Statements section
         :align: center
         :width: 80%   
 
    Proceed by clicking next and on the feedback page, select the options seen in the screenshot below. Click on **Finish** and proceed to the next step.
 
-     .. thumbnail:: /images/manual/single-sign-on/okta/11-click-on-finish.png
+     .. thumbnail:: /images/single-sign-on/okta/11-click-on-finish.png
         :title: Click on Finish and proceed to the next step
         :align: center
         :width: 80%   
@@ -116,12 +116,12 @@ Okta Configuration
 
    Navigate to **Directory** → **Groups** → **<YOUR GROUP>**. Click on **Applications**, select **Assign Applications**, from here, assign the app created in step 5 and click on **Done** to save the changes.
    
-     .. thumbnail:: /images/manual/single-sign-on/okta/12-navigate-to-directory-groups.png
+     .. thumbnail:: /images/single-sign-on/okta/12-navigate-to-directory-groups.png
         :title: Navigate to Directory - Groups - <YOUR GROUP>
         :align: center
         :width: 80%
 
-     .. thumbnail:: /images/manual/single-sign-on/okta/13-select-assign-applications.png
+     .. thumbnail:: /images/single-sign-on/okta/13-select-assign-applications.png
         :title: Select Assign Applications
         :align: center
         :width: 80%
@@ -142,7 +142,7 @@ Okta Configuration
 
    The **X.509 Certificate** will be used as the ``exchange_key``:
 
-     .. thumbnail:: /images/manual/single-sign-on/okta/14-navigate-to-applications.png
+     .. thumbnail:: /images/single-sign-on/okta/14-navigate-to-applications.png
         :title: Navigate to Applications - Applications - <YOUR APP> - Sign On
         :align: center
         :width: 80%
