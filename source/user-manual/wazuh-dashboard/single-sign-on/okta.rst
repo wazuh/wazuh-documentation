@@ -27,20 +27,20 @@ Okta Configuration
     .. thumbnail:: /images/manual/okta/01-navigate-to-directory-people.png
         :title: Navigate to Directory - People
         :align: center
-        :width: 100%
+        :width: 70%
      
     From the **People** section, select **Add Person**, fill in the details of the new user and click **Save** as seen in the following screenshots.
 
     .. thumbnail:: /images/manual/okta/02-select-add-person.png
         :title: Select add person
         :align: center
-        :width: 100%
+        :width: 70%
      
   
     .. thumbnail:: /images/manual/okta/03-click-save.png
         :title: Click save
         :align: center
-        :width: 100%
+        :width: 70%
          
 #. Create a new group.
     
@@ -49,19 +49,19 @@ Okta Configuration
      .. thumbnail:: /images/manual/okta/04-navigate-to-directory-groups.png
         :title: Navigate to directory groups
         :align: center
-        :width: 100%    
+        :width: 70%    
  
     Create a new group using any name, in our case, we name it ``wazuh-admin``. This name will be used as our ``backend_roles`` in ``roles_mapping.yml``
 
 #. Add the new user to the new group.
    
-   Navigate to **Directory* → **Groups** → **<YOUR GROUP>**. To add a user to the group, click on **Assign People** and add the user to the group created.
+   Navigate to **Directory** → **Groups** → **<YOUR GROUP>**. To add a user to the group, click on **Assign People** and add the user to the group created.
 
 
      .. thumbnail:: /images/manual/okta/05-navigate-to-directory-groups.png
         :title: Navigate to Directory - Groups - <YOUR GROUP>
         :align: center
-        :width: 100%   
+        :width: 70%   
 
 #. Create a new app. Configure the SAML settings while you create the app.
    
@@ -70,21 +70,21 @@ Okta Configuration
      .. thumbnail:: /images/manual/okta/06-navigate-to-applications-section.png
         :title: Navigate to the Applications section in Okta
         :align: center
-        :width: 100%   
+        :width: 70%   
 
    In the ``Create a new application integration`` window, select ``SAML 2.0`` and click on next.
 
      .. thumbnail:: /images/manual/okta/07-create-new-application.png
         :title: Create a new application integration
         :align: center
-        :width: 100%   
+        :width: 70%   
 
    This leads to the application configuration page. Assign a name to the application, in our case, we assign the name ``wazuh-sso-app``:
 
      .. thumbnail:: /images/manual/okta/08-assign-name.png
         :title: Assign a name to the application
         :align: center
-        :width: 100%   
+        :width: 70%   
 
    - In the SAML settings section, for **Single sign on URL**: input ``https://<WAZUH_DASHBOARD_URL>/_opendistro/_security/saml/acs/idpinitiated`` and replace the ``WAZUH_DASHBOARD_URL`` field with the corresponding URL. 
    - Select the **"Allow this app to request other SSO URLs"** option.
@@ -96,21 +96,21 @@ Okta Configuration
      .. thumbnail:: /images/manual/okta/09-saml-settings-section.png
         :title: SAML settings section
         :align: center
-        :width: 100%   
+        :width: 70%   
 
    In the **Group Attribute Statements** section put ``Roles`` as the name. The value for ``Roles`` will be used as the ``roles_key`` parameter in the Wazuh indexer configuration. For  the filter field, select **Matches regex** and type ``.*``. 
 
      .. thumbnail:: /images/manual/okta/10-group-attribute-statements-section.png
         :title: Group Attribute Statements section
         :align: center
-        :width: 100%   
+        :width: 70%   
 
    Proceed by clicking next and on the feedback page, select the options seen in the screenshot below. Click on **Finish** and proceed to the next step.
 
      .. thumbnail:: /images/manual/okta/11-click-on-finish.png
         :title: Click on Finish and proceed to the next step
         :align: center
-        :width: 100%   
+        :width: 70%   
 
 #. Add the new app to the new group.
 
@@ -119,12 +119,12 @@ Okta Configuration
      .. thumbnail:: /images/manual/okta/12-navigate-to-directory-groups.png
         :title: Navigate to Directory - Groups - <YOUR GROUP>
         :align: center
-        :width: 100%
+        :width: 70%
 
      .. thumbnail:: /images/manual/okta/13-select-assign-applications.png
         :title: Select Assign Applications
         :align: center
-        :width: 100%
+        :width: 70%
 
 #. Note the necessary parameters from the SAML settings of the new app.
 
@@ -145,7 +145,7 @@ Okta Configuration
      .. thumbnail:: /images/manual/okta/14-navigate-to-applications.png
         :title: Navigate to Applications - Applications - <YOUR APP> - Sign On
         :align: center
-        :width: 100%
+        :width: 70%
 
    This information can also be found in the metadata XML file.
 
@@ -161,37 +161,39 @@ Wazuh indexer configuration
       To configure the ``config.yml`` file, the ``order`` in ``basic_internal_auth_domain`` should be set to ``0``, and the ``challenge`` flag must be set to ``false``. Include a ``saml_auth_domain`` configuration under the ``authc`` section similar to the following:
 
       .. code-block:: console
-               
-            authc:
-         ...
-               basic_internal_auth_domain:
-               description: "Authenticate via HTTP Basic against internal users database"
-               http_enabled: true
-               transport_enabled: true
-               order: 0
-               http_authenticator:
-                  type: "basic"
-                  challenge: false
-               authentication_backend:
-                  type: "intern"
-            saml_auth_domain:
-               http_enabled: true
-               transport_enabled: false
-               order: 1
-               http_authenticator:
-               type: saml
-               challenge: true
-               config:
-                  idp:
-                     metadata_url: ""
-                     entity_id: ""
-                  sp:
-                     entity_id: wazuh-saml
-                  kibana_url: https://<WAZUH_DASHBOARD_URL>
-                  roles_key: Roles
-                  exchange_key: ''
-               authentication_backend:
-               type: noop
+          :emphasize-lines: 7,10,22,23,25,26,27,28
+
+                authc:
+            ...
+                  basic_internal_auth_domain:
+                  description: "Authenticate via HTTP Basic against internal users database"
+                  http_enabled: true
+                  transport_enabled: true
+                  order: 0
+                  http_authenticator:
+                     type: "basic"
+                     challenge: false
+                  authentication_backend:
+                     type: "intern"
+               saml_auth_domain:
+                  http_enabled: true
+                  transport_enabled: false
+                  order: 1
+                  http_authenticator:
+                  type: saml
+                  challenge: true
+                  config:
+                     idp:
+                        metadata_url: ""
+                        entity_id: ""
+                     sp:
+                        entity_id: wazuh-saml
+                     kibana_url: https://<WAZUH_DASHBOARD_URL>
+                     roles_key: Roles
+                     exchange_key: ''
+                  authentication_backend:
+                  type: noop
+
 
       Ensure to change the following parameters to their corresponding value 
 
@@ -235,6 +237,7 @@ Wazuh indexer configuration
       Configure the ``roles_mapping.yml`` file to map the Okta group to the appropriate Wazuh indexer role, in our case, we map it to the  ``all_access`` role:
 
       .. code-block:: console
+          :emphasize-lines: 6
 
             all_access:
             reserved: false
@@ -288,7 +291,7 @@ Wazuh dashboard configuration
 
 #. Change the logout configuration in the Wazuh dashboard. 
    
-   To change the logout configuration, replace the ``this.router.get({path: `auth/logout` `` section of the ``route.js`` file with the following setting. The file path is ``/usr/share/wazuh-dashboard/plugins/securityDashboards/server/auth/types/saml/routes.js``. It is recommended to back up this file before the configuration is made.
+   To change the logout configuration, replace the ``this.router.get({path: `auth/logout`\`` section of the ``route.js`` file with the following setting. The file path is ``/usr/share/wazuh-dashboard/plugins/securityDashboards/server/auth/types/saml/routes.js``. It is recommended to back up this file before the configuration is made.
 
    .. code-block:: console
 

@@ -17,8 +17,8 @@ Required parameters
 
 The following parameters are required to make the configurations on the Wazuh dashboard instance:
 
-- ``idp.metadata_url``: URL to an XML file that contains metadata information about the application configured on the IdP side. It can be used instead of idp.metadata_file.
-- ``idp.metadata_file``: XML File that contains the metadata information about the application configured on the IdP side. It can be used instead of idp.metadata_url.
+- ``idp.metadata_url``: URL to an XML file that contains metadata information about the application configured on the IdP side. It can be used instead of ``idp.metadata_file``.
+- ``idp.metadata_file``: XML File that contains the metadata information about the application configured on the IdP side. It can be used instead of ``idp.metadata_url``.
 - ``idp.entity_id``: Entity ID of the Identity Provider.
 - ``sp.entity_id``: Entity ID of the Service Provider.
 - ``kibana_url``: URL to access Wazuh dashboard.
