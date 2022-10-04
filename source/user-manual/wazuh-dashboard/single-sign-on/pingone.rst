@@ -3,12 +3,10 @@
 .. meta::
    :description: PingOne is a platform that that enable enterprises to give their users federated access to applications.
 
-.. _pingone:
-
 PingOne
 =======
 
-`PingOnea <https://www.pingidentity.com/>`_ for Enterpriseis an identity-as-a-service (IDaaS) and single sign-on (SSO) platform that that enable enterprises to give their users federated access to applications. In this guide, we integrate the PingOne IdP to authenticate users into the Wazuh platform.
+`PingOne for Enterprise <https://www.pingidentity.com/>`_ is an identity-as-a-service (IDaaS) and single sign-on (SSO) platform. It allows enterprises to give their users federated access to applications. In this guide, we integrate the PingOne IdP to authenticate users into the Wazuh platform.
 
 The single sign-on integration process is divided into three stages.
 
