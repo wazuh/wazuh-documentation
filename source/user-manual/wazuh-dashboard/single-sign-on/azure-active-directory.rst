@@ -1,7 +1,7 @@
 .. Copyright (C) 2015, Wazuh, Inc.
 
 .. meta::
-   :description: Okta Inc. is an identity and access management company that provides technologies which enable secure user authentication into applications.
+   :description: Azure Active Directory is a cloud-based identity and access management service by Microsoft.
 
 .. _azure-active-directory:
 
@@ -54,18 +54,18 @@ Azure Active Directory Configuration
 
     .. code-block:: console
 
-      {
-               "allowedMemberTypes": [
-                  "User"
-               ],
-               "description": "Wazuh role",
-               "displayName": "Wazuh_role",
-               "id": "<application_id>",
-               "isEnabled": true,
-               "lang": null,
-               "origin": "Application",
-               "value": "Wazuh_role"
-            },
+         {
+                  "allowedMemberTypes": [
+                     "User"
+                  ],
+                  "description": "Wazuh role",
+                  "displayName": "Wazuh_role",
+                  "id": "<application_id>",
+                  "isEnabled": true,
+                  "lang": null,
+                  "origin": "Application",
+                  "value": "Wazuh_role"
+               },
 
    - ``description``: can be any value that you want.
    - ``id`` should be the ID of your application. You can find it in the application's overview menu or at the top of the Manifest in the field ``appId``.
@@ -120,3 +120,185 @@ Azure Active Directory Configuration
       :width: 80%
 
    - In option 1, under  **Basic SAML Configuration**, click **edit** and set ``wazuh-saml`` as **Identifier (Entity ID)** and ``https://WAZUH_DASHBOARD_URL/_opendistro/_security/saml/acs`` as **Reply URL (Assertion Consumer Service URL)**. Save and proceed to the next step.
+
+   .. thumbnail:: /images/single-sign-on/azure-active-directory/11-click-edit-and-set-wazuh-saml.png
+      :title: Click edit and set wazuh-saml
+      :align: center
+      :width: 80%
+
+   - In option 2 under **User Attributes & Claims**, click **edit** and select **Add new claim**. Select **Roles** as the name and user. **assignedroles** as **Source attribute**. This claim will be mapped with ``roles_key`` on the Wazuh indexer configuration.
+
+   .. thumbnail:: /images/single-sign-on/azure-active-directory/12-click-edit-and-select-add-new-claim.png
+      :title: Click edit and select Add new claim
+      :align: center
+      :width: 80%
+
+#. Note the necessary parameters.
+
+   Still in the same menu **Enterprise applications** → **<YOUR APPLICATION>** → **Single sign-on**, let's note some parameters that will be used in the Wazuh indexer configuration.
+
+   - In option **3 SAML Signing Certificate**, the **App Federation Metadata Url** will be the ``idp.metadata_url`` in the Wazuh indexer configuration file.
+
+   - Go to the metadata URL using your web browser and note the **X509Certificate**. It will be our ``exchange_key``:
+
+   .. thumbnail:: /images/single-sign-on/azure-active-directory/13-go-to-the-metadata-url.png
+      :title: Go to the metadata URL
+      :align: center
+      :width: 80%
+
+
+   In option 4 **Set up <YOUR APPLICATION>**, the **Azure AD Identifier** will be our ``idp.entity_id``.
+
+
+Wazuh indexer configuration
+---------------------------
+
+#. Configure Wazuh indexer security configuration files.
+
+   The file path to the Wazuh indexer security configuration is ``/usr/share/wazuh-indexer/plugins/opensearch-security/securityconfig/``. The files to configure are ``config.yml`` and ``roles_mapping.yml``. It is recommended to back up these files before the configuration is carried out.
+
+   a. ``config.yml``
+
+      To configure the ``config.yml`` file, the ``order`` in ``basic_internal_auth_domain`` must be set to ``0``, and the ``challenge`` flag must be set to ``false``. Include a ``saml_auth_domain`` configuration under the ``authc`` section similar to the following:
+      authc:
+
+      .. code-block:: console
+         :emphasize-lines: 6,9,21,22,24,25
+
+         ...
+               basic_internal_auth_domain:
+               description: "Authenticate via HTTP Basic against internal users database"
+               http_enabled: true
+               transport_enabled: true
+               order: 0
+               http_authenticator:
+                  type: "basic"
+                  challenge: false
+               authentication_backend:
+                  type: "intern"
+               saml_auth_domain:
+               http_enabled: true
+               transport_enabled: false
+               order: 1
+               http_authenticator:
+                  type: saml
+                  challenge: true
+                  config:
+                     idp:
+                     metadata_url: https://login.microsoftonline.com/...
+                     entity_id: https://sts.windows.net/...
+                     sp:
+                     entity_id: wazuh-saml
+                     kibana_url: https://<WAZUH_DASHBOARD_URL>
+                     roles_key: Roles
+                     exchange_key: '...'
+               authentication_backend:
+                  type: noop
+
+      The ``roles_key`` must be the same value that we used in the Azure AD configuration.
+
+      After modifying the ``config.yml`` file, it is necessary to use the ``securityadmin`` script to load the configuration changes with the following command:
+
+
+      .. code-block:: console
+
+         # export JAVA_HOME=/usr/share/wazuh-indexer/jdk/ && bash /usr/share/wazuh-indexer/plugins/opensearch-security/tools/securityadmin.sh -f /usr/share/wazuh-indexer/plugins/opensearch-security/securityconfig/config.yml -icl -key /etc/wazuh-indexer/certs/admin-key.pem -cert /etc/wazuh-indexer/certs/admin.pem -cacert /etc/wazuh-indexer/certs/root-ca.pem -h localhost -nhnv
+
+      The "-h" flag is used to specify the hostname or the IP address of the Wazuh indexer node.
+
+      The command output must be similar to the following:
+
+
+      .. code-block:: console
+         :class: output
+
+            Will connect to localhost:9300 ... done
+            Connected as CN=admin,OU=Wazuh,O=Wazuh,L=California,C=US
+            OpenSearch Version: 1.2.4
+            OpenSearch Security Version: 1.2.4.0
+            Contacting opensearch cluster 'opensearch' and wait for YELLOW clusterstate ...
+            Clustername: wazuh-cluster
+            Clusterstate: GREEN
+            Number of nodes: 1
+            Number of data nodes: 1
+            .opendistro_security index already exists, so we do not need to create one.
+            Populate config from /home/wazuh
+            Will update '_doc/config' with /usr/share/wazuh-indexer/plugins/opensearch-security/securityconfig/config.yml 
+               SUCC: Configuration for 'config' created or updated
+            Done with success
+
+
+   b. ``roles_mapping.yml``
+
+      We configure the ``roles_mapping.yml`` file to map the role we have in Azure AD to the appropriate Wazuh indexer role. In this case, we map the ``Wazuh_role`` in Azure AD to the ``all_access`` role in Wazuh indexer:
+
+      .. code-block:: console
+
+            all_access:
+            reserved: false
+            hidden: false
+            backend_roles:
+            - "admin"
+            - "Wazuh_role"
+            description: "Maps admin to all_access"
+
+      After modifying the ``roles_mapping.yml`` file, it is necessary to use the ``securityadmin`` script to load the configuration changes with the following command:
+
+      .. code-block:: console
+
+            # export JAVA_HOME=/usr/share/wazuh-indexer/jdk/ && bash /usr/share/wazuh-indexer/plugins/opensearch-security/tools/securityadmin.sh -f /usr/share/wazuh-indexer/plugins/opensearch-security/securityconfig/roles_mapping.yml -icl -key /etc/wazuh-indexer/certs/admin-key.pem -cert /etc/wazuh-indexer/certs/admin.pem -cacert /etc/wazuh-indexer/certs/root-ca.pem -h localhost -nhnv
+
+      The "-h" flag is used to specify the hostname or the IP address of your Wazuh indexer node.
+
+      The command output must be similar to the following:
+
+      .. code-block:: console
+
+            Security Admin v7
+            Will connect to localhost:9300 ... done
+            Connected as CN=admin,OU=Wazuh,O=Wazuh,L=California,C=US
+            OpenSearch Version: 1.2.4
+            OpenSearch Security Version: 1.2.4.0
+            Contacting opensearch cluster 'opensearch' and wait for YELLOW clusterstate ...
+            Clustername: wazuh-cluster
+            Clusterstate: GREEN
+            Number of nodes: 1
+            Number of data nodes: 1
+            .opendistro_security index already exists, so we do not need to create one.
+            Populate config from /home/wazuh
+            Will update '_doc/rolesmapping' with /usr/share/wazuh-indexer/plugins/opensearch-security/securityconfig/roles_mapping.yml 
+               SUCC: Configuration for 'rolesmapping' created or updated
+            Done with success
+
+
+Wazuh dashboard configuration
+-----------------------------
+
+#. Configure the Wazuh dashboard configuration file.
+
+   Add these configurations to ``opensearch_dashboards.yml``, the file path is ``/etc/wazuh-dashboard/opensearch_dashboards.yml``. It is recommended to back up this file before the configuration is made.
+
+    .. code-block:: console  
+
+         opensearch_security.auth.type: "saml"
+         server.xsrf.whitelist: ["/_plugins/_security/saml/acs", "/_plugins/_security/saml/logout", "/_opendistro/_security/saml/acs", "/_opendistro/_security/saml/logout", "/_opendistro/_security/saml/acs/idpinitiated"]
+
+#. Change the logout configuration in the Wazuh dashboard. 
+
+   To change the logout configuration, edit the ``path: /auth/logout`` section of the ``route.js`` file. The file path is ``/usr/share/wazuh-dashboard/plugins/securityDashboards/server/auth/types/saml/routes.js``. It is recommended to back up this file before the configuration is made. The configuration must be similar to this:
+
+    .. code-block:: console  
+
+         ...
+            this.router.get({
+               path: `/logout`,
+               validate: false
+         ...
+
+#. Restart the Wazuh dashboard service using this command:
+
+       .. include:: /_templates/common/restart_dashboard.rst
+
+#. Test the configuration.
+   
+   To test the configuration, go to your Wazuh dashboard URL and log in with your Microsoft account. 

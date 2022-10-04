@@ -41,3 +41,4 @@ The following parameters are required to make the configurations on the Wazuh da
 
         okta
         azure-active-directory
+        pingone
