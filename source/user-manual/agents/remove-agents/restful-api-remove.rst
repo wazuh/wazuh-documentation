@@ -8,9 +8,9 @@
 Remove agents using the Wazuh API
 ----------------------------------
 
-The request :api-ref:`DELETE /agents <operation/api.controllers.agent_controller.delete_agents>` removes the specified agents.
+This section includes examples of how to use the :api-ref:`DELETE /agents <operation/api.controllers.agent_controller.delete_agents>` request to either delete a list of agents or agents that have been disconnected for a given period of time. 
 
-The examples in this section :ref:`use a token <api_log_in>` for authentication to the Wazuh API. Run the following command to get your token for the API calls below.
+The examples use :ref:`an authentication token <api_log_in>`. To get your token, replace ``<user>:<password>`` with your Wazuh API credentials and run the following command:
 
 .. code-block:: console
 
@@ -48,7 +48,7 @@ You can remove specific agents using a list. Use the parameter ``agents_list`` t
 Removing disconnected agents
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-You can remove agents which never connected or which have been disconnected for a long time. Use the parameter ``older_than`` to set a period of time of no known activity. Use ``status`` to select the `Never connected` and `Disconnected` agents. For example, to remove agents inactive for more than 21 days, run a query like the following one.
+You can remove agents which never connected or which have been disconnected for a given period of time. Use the parameter ``older_than`` to set a period of no known activity. Use ``status`` to select the `Never connected` and `Disconnected` agents. For example, to remove agents inactive for more than 21 days, run a query like the following one.
 
 .. code-block:: console
 
