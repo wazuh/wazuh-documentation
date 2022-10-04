@@ -97,6 +97,25 @@ This is an example configuration for the VirusTotal integration:
     <alert_format>json</alert_format>
   </integration>
 
+Shuffle
+-------
+
+`Shuffle <https://shuffler.io/>`_ is an Open Source interpretation of SOAR. It aims to bring all the capabilities necessary to transfer data throughout an enterprise with plug-and-play Apps. This integration allows sending alerts into a Shuffle workflow thanks to the `Wazuh Webhook <https://shuffler.io/docs/extensions#wazuh>`_, a simple way to send alerts from Wazuh to Shuffle.
+
+This is an example configuration for the Shuffle integration:
+
+.. code-block:: xml
+
+   <integration>
+      <name>shuffle</name>
+      <hook_url>http://IP:3001/api/v1/hooks/HOOK_ID</hook_url> <!-- Replace with your Shuffle hook URL -->
+      <level>3</level>
+      <alert_format>json</alert_format>
+   </integration>
+
+.. note::
+   The configuration is intended for a Shuffle deployment in a separate Docker environment. If all systems are on the same Docker network, the use of port ``3001`` in the ``<hook url>`` section should not take place.
+
 Custom integration
 ------------------
 
