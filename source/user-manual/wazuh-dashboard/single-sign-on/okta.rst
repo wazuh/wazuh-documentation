@@ -1,7 +1,7 @@
 .. Copyright (C) 2015, Wazuh, Inc.
 
 .. meta::
-   :description: This section describes how Wazuh can be integrated with several Identity Providers (IdP) to implement Single Sign-On (SSO). 
+   :description: Okta Inc. is an identity and access management company that provides technologies which enable secure user authentication into applications.
 
 .. _okta:
 
@@ -24,32 +24,32 @@ Okta Configuration
 
     To create a new user, from your okta admin console page, navigate to **Directory** → **People**   
 
-    .. thumbnail:: /images/manual/okta/01-navigate-to-directory-people.png
+    .. thumbnail:: /images/manual/single-sign-on/okta/01-navigate-to-directory-people.png
         :title: Navigate to Directory - People
         :align: center
-        :width: 70%
+        :width: 80%
      
     From the **People** section, select **Add Person**, fill in the details of the new user and click **Save** as seen in the following screenshots.
 
-    .. thumbnail:: /images/manual/okta/02-select-add-person.png
+    .. thumbnail:: /images/manual/single-sign-on/okta/02-select-add-person.png
         :title: Select add person
         :align: center
-        :width: 70%
+        :width: 80%
      
   
-    .. thumbnail:: /images/manual/okta/03-click-save.png
+    .. thumbnail:: /images/manual/single-sign-on/okta/03-click-save.png
         :title: Click save
         :align: center
-        :width: 70%
+        :width: 80%
          
 #. Create a new group.
     
     To create a new group where the user will be added, navigate to **Directory** → **Groups** and add a group.
    
-     .. thumbnail:: /images/manual/okta/04-navigate-to-directory-groups.png
+     .. thumbnail:: /images/manual/single-sign-on/okta/04-navigate-to-directory-groups.png
         :title: Navigate to directory groups
         :align: center
-        :width: 70%    
+        :width: 80%    
  
     Create a new group using any name, in our case, we name it ``wazuh-admin``. This name will be used as our ``backend_roles`` in ``roles_mapping.yml``
 
@@ -58,33 +58,33 @@ Okta Configuration
    Navigate to **Directory** → **Groups** → **<YOUR GROUP>**. To add a user to the group, click on **Assign People** and add the user to the group created.
 
 
-     .. thumbnail:: /images/manual/okta/05-navigate-to-directory-groups.png
+     .. thumbnail:: /images/manual/single-sign-on/okta/05-navigate-to-directory-groups.png
         :title: Navigate to Directory - Groups - <YOUR GROUP>
         :align: center
-        :width: 70%   
+        :width: 80%   
 
 #. Create a new app. Configure the SAML settings while you create the app.
    
    To create a new app, navigate to the **Applications** section in Okta. Select **Create App Integration**.
 
-     .. thumbnail:: /images/manual/okta/06-navigate-to-applications-section.png
+     .. thumbnail:: /images/manual/single-sign-on/okta/06-navigate-to-applications-section.png
         :title: Navigate to the Applications section in Okta
         :align: center
-        :width: 70%   
+        :width: 80%   
 
    In the ``Create a new application integration`` window, select ``SAML 2.0`` and click on next.
 
-     .. thumbnail:: /images/manual/okta/07-create-new-application.png
+     .. thumbnail:: /images/manual/single-sign-on/okta/07-create-new-application.png
         :title: Create a new application integration
         :align: center
-        :width: 70%   
+        :width: 80%   
 
    This leads to the application configuration page. Assign a name to the application, in our case, we assign the name ``wazuh-sso-app``:
 
-     .. thumbnail:: /images/manual/okta/08-assign-name.png
+     .. thumbnail:: /images/manual/single-sign-on/okta/08-assign-name.png
         :title: Assign a name to the application
         :align: center
-        :width: 70%   
+        :width: 80%   
 
    - In the SAML settings section, for **Single sign on URL**: input ``https://<WAZUH_DASHBOARD_URL>/_opendistro/_security/saml/acs/idpinitiated`` and replace the ``WAZUH_DASHBOARD_URL`` field with the corresponding URL. 
    - Select the **"Allow this app to request other SSO URLs"** option.
@@ -93,38 +93,38 @@ Okta Configuration
    
    The rest of the values can be left as default.
 
-     .. thumbnail:: /images/manual/okta/09-saml-settings-section.png
+     .. thumbnail:: /images/manual/single-sign-on/okta/09-saml-settings-section.png
         :title: SAML settings section
         :align: center
-        :width: 70%   
+        :width: 80%   
 
    In the **Group Attribute Statements** section put ``Roles`` as the name. The value for ``Roles`` will be used as the ``roles_key`` parameter in the Wazuh indexer configuration. For  the filter field, select **Matches regex** and type ``.*``. 
 
-     .. thumbnail:: /images/manual/okta/10-group-attribute-statements-section.png
+     .. thumbnail:: /images/manual/single-sign-on/okta/10-group-attribute-statements-section.png
         :title: Group Attribute Statements section
         :align: center
-        :width: 70%   
+        :width: 80%   
 
    Proceed by clicking next and on the feedback page, select the options seen in the screenshot below. Click on **Finish** and proceed to the next step.
 
-     .. thumbnail:: /images/manual/okta/11-click-on-finish.png
+     .. thumbnail:: /images/manual/single-sign-on/okta/11-click-on-finish.png
         :title: Click on Finish and proceed to the next step
         :align: center
-        :width: 70%   
+        :width: 80%   
 
 #. Add the new app to the new group.
 
    Navigate to **Directory** → **Groups** → **<YOUR GROUP>**. Click on **Applications**, select **Assign Applications**, from here, assign the app created in step 5 and click on **Done** to save the changes.
    
-     .. thumbnail:: /images/manual/okta/12-navigate-to-directory-groups.png
+     .. thumbnail:: /images/manual/single-sign-on/okta/12-navigate-to-directory-groups.png
         :title: Navigate to Directory - Groups - <YOUR GROUP>
         :align: center
-        :width: 70%
+        :width: 80%
 
-     .. thumbnail:: /images/manual/okta/13-select-assign-applications.png
+     .. thumbnail:: /images/manual/single-sign-on/okta/13-select-assign-applications.png
         :title: Select Assign Applications
         :align: center
-        :width: 70%
+        :width: 80%
 
 #. Note the necessary parameters from the SAML settings of the new app.
 
@@ -142,10 +142,10 @@ Okta Configuration
 
    The **X.509 Certificate** will be used as the ``exchange_key``:
 
-     .. thumbnail:: /images/manual/okta/14-navigate-to-applications.png
+     .. thumbnail:: /images/manual/single-sign-on/okta/14-navigate-to-applications.png
         :title: Navigate to Applications - Applications - <YOUR APP> - Sign On
         :align: center
-        :width: 70%
+        :width: 80%
 
    This information can also be found in the metadata XML file.
 
@@ -291,7 +291,7 @@ Wazuh dashboard configuration
 
 #. Change the logout configuration in the Wazuh dashboard. 
    
-   To change the logout configuration, replace the ``this.router.get({path: `auth/logout`\`` section of the ``route.js`` file with the following setting. The file path is ``/usr/share/wazuh-dashboard/plugins/securityDashboards/server/auth/types/saml/routes.js``. It is recommended to back up this file before the configuration is made.
+   To change the logout configuration, replace the ``this.router.get({path: `auth/logout``` section of the ``route.js`` file with the following setting. The file path is ``/usr/share/wazuh-dashboard/plugins/securityDashboards/server/auth/types/saml/routes.js``. It is recommended to back up this file before the configuration is made.
 
    .. code-block:: console
 

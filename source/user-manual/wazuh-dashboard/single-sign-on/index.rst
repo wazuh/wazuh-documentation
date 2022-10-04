@@ -40,4 +40,4 @@ The following parameters are required to make the configurations on the Wazuh da
         :maxdepth: 1
 
         okta
-        
+        azure-active-directory

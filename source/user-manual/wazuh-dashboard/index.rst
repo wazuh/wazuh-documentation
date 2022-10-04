@@ -16,9 +16,9 @@ The Wazuh dashboard is a powerful web user interface for data visualization and 
         :maxdepth: 1
 
         rbac
+        single-sign-on/index
         multi-tenancy
         settings
         config-file
         troubleshooting
-        single-sign-on/index
         
