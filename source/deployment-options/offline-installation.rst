@@ -102,7 +102,7 @@ Installing the Wazuh indexer
       # chmod 400 /etc/wazuh-indexer/certs/*
       # chown -R wazuh-indexer:wazuh-indexer /etc/wazuh-indexer/certs
 
-   Here you move the node certificate and key files, such as `node-1.pem` and `node-1-key.pem`, to their corresponding `certs` folder. They're specific to the node and are not required on the other nodes. However, note that the `root-ca.pem` certificate isn't moved but copied to the `certs` folder. This way, you can continue deploying it to other nodes and component folders in the next steps.
+   Here you move the node certificate and key files, such as `node-1.pem` and `node-1-key.pem`, to their corresponding `certs` folder. They're specific to the node and are not required on the other nodes. However, note that the `root-ca.pem` certificate isn't moved but copied to the `certs` folder. This way, you can continue deploying it to other component folders in the next steps.
 
 #. Edit ``/etc/wazuh-indexer/opensearch.yml`` and replace the following values: 
 
@@ -145,15 +145,15 @@ Installing the Wazuh indexer
 
     .. include:: /_templates/installations/indexer/common/enable_indexer.rst
 
-#. For multi-node clusters, repeat the previous steps on every Wazuh indexer node. Then proceed to the cluster initialization stage.
+#. For multi-node clusters, repeat the previous steps on every Wazuh indexer node. 
 
-#.  When all Wazuh indexer nodes are running, run the Wazuh indexer ``indexer-security-init.sh`` script on any Wazuh indexer node to load the new certificates information and start the cluster:
+#. When all Wazuh indexer nodes are running, run the Wazuh indexer ``indexer-security-init.sh`` script on `any Wazuh indexer node` to load the new certificates information and start the cluster. 
 
     .. code-block:: console
 
         # /usr/share/wazuh-indexer/bin/indexer-security-init.sh
   
-#.  Run the following command to check that the installation is successful.
+#.  Run the following command to check that the installation is successful. Note that this command uses localhost, set your Wazuh indexer address if necessary. 
 
     .. code-block:: console
 
@@ -329,7 +329,7 @@ Filebeat must be installed and configured on the same server as the Wazuh manage
           talk to server... OK
           version: 7.10.2
 
-    To check the number of shards that have been configured, you can run the following command.
+    To check the number of shards that have been configured, you can run the following command. Note that this command uses localhost, set your Wazuh indexer address if necessary. 
     
     .. code-block:: console
 
