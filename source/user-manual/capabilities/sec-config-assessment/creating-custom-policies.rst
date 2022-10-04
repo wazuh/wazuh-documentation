@@ -103,6 +103,15 @@ Each section has its fields as described in the tables
     +--------------------+----------------+-------------------+------------------------+------------------------+
     | references         | No             | Array of strings  | Any string             | Any string             |
     +--------------------+----------------+-------------------+------------------------+------------------------+
+    | regex_type         | No             | String            | "pcre2" or "osregex"   | Policy regex engine    |
+    +--------------------+----------------+-------------------+------------------------+------------------------+
+
+
+.. note::
+  If the **regex_type** is configured in this section the checks will be run with the configured engine.
+
+.. note::
+  If the **regex_type** is not configured in this section the checks will be run with "osregex" engine.
 
 .. _sca_policy_file_requirements_section:
 .. table:: Requirements section
@@ -181,9 +190,18 @@ Each check is comprised by several fields as described in the table :ref:`sca_po
     +-------------+-----------+----------------------------+--------------------+
     |    rules    |    Yes    |      Array of strings      |     Any string     |
     +-------------+-----------+----------------------------+--------------------+
+    | regex_type  |    No     |           String           |"pcre2" or "osregex"|
+    +-------------+-----------+----------------------------+--------------------+
+
 
 Check evaluation is governed by its `rule result aggregation strategy`, as set in its ``condition`` field, and the results of
 the evaluation of its rules.
+
+.. note::
+  If the **regex_type** is configured in this section the check will be run with the configured engine.
+  
+.. note::
+  By default it uses the global engine.
 
 Condition
 ~~~~~~~~~~~~~~~~~~~
