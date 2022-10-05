@@ -471,7 +471,7 @@ custom_replacements = {
     "|WAZUH_LATEST_PUPPET|" : "3.13.6",
     "|WAZUH_LATEST_OVA|" : "3.13.6",
     "|WAZUH_LATEST_HPUX|": "3.13.6",
-    "|WAZUH_LATEST_SPARC|": "3.13.5",
+    "|WAZUH_LATEST_SPARC|": "3.13.6",
     "|WAZUH_LATEST_DOCKER|" : "3.13.6",
     "|ELASTICSEARCH_LATEST|" : "7.9.2",
     "|ELASTICSEARCH_ODFE|" : "7.8.0",
