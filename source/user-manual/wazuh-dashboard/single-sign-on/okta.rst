@@ -161,38 +161,38 @@ Wazuh indexer configuration
       To configure the ``config.yml`` file, the ``order`` in ``basic_internal_auth_domain`` should be set to ``0``, and the ``challenge`` flag must be set to ``false``. Include a ``saml_auth_domain`` configuration under the ``authc`` section similar to the following:
 
       .. code-block:: console
-          :emphasize-lines: 7,10,22,23,25,26,27,28
+         :emphasize-lines: 7,10,22,23,25,26,27,28
 
-                authc:
-            ...
-                  basic_internal_auth_domain:
-                  description: "Authenticate via HTTP Basic against internal users database"
-                  http_enabled: true
-                  transport_enabled: true
-                  order: 0
-                  http_authenticator:
-                     type: "basic"
-                     challenge: false
-                  authentication_backend:
-                     type: "intern"
-               saml_auth_domain:
-                  http_enabled: true
-                  transport_enabled: false
-                  order: 1
-                  http_authenticator:
-                  type: saml
-                  challenge: true
-                  config:
-                     idp:
-                        metadata_url: ""
-                        entity_id: ""
-                     sp:
-                        entity_id: wazuh-saml
-                     kibana_url: https://<WAZUH_DASHBOARD_URL>
-                     roles_key: Roles
-                     exchange_key: ''
-                  authentication_backend:
-                  type: noop
+               authc:
+         ...
+               basic_internal_auth_domain:
+               description: "Authenticate via HTTP Basic against internal users database"
+               http_enabled: true
+               transport_enabled: true
+               order: 0
+               http_authenticator:
+                  type: "basic"
+                  challenge: false
+               authentication_backend:
+                  type: "intern"
+            saml_auth_domain:
+               http_enabled: true
+               transport_enabled: false
+               order: 1
+               http_authenticator:
+               type: saml
+               challenge: true
+               config:
+                  idp:
+                     metadata_url: ""
+                     entity_id: ""
+                  sp:
+                     entity_id: wazuh-saml
+                  kibana_url: https://<WAZUH_DASHBOARD_URL>
+                  roles_key: Roles
+                  exchange_key: ''
+               authentication_backend:
+               type: noop
 
 
       Ensure to change the following parameters to their corresponding value 
@@ -208,7 +208,7 @@ Wazuh indexer configuration
 
       .. code-block:: console
       
-            # export JAVA_HOME=/usr/share/wazuh-indexer/jdk/ && bash /usr/share/wazuh-indexer/plugins/opensearch-security/tools/securityadmin.sh -f /usr/share/wazuh-indexer/plugins/opensearch-security/securityconfig/config.yml -icl -key /etc/wazuh-indexer/certs/admin-key.pem -cert /etc/wazuh-indexer/certs/admin.pem -cacert /etc/wazuh-indexer/certs/root-ca.pem -h localhost -nhnv
+         # export JAVA_HOME=/usr/share/wazuh-indexer/jdk/ && bash /usr/share/wazuh-indexer/plugins/opensearch-security/tools/securityadmin.sh -f /usr/share/wazuh-indexer/plugins/opensearch-security/securityconfig/config.yml -icl -key /etc/wazuh-indexer/certs/admin-key.pem -cert /etc/wazuh-indexer/certs/admin.pem -cacert /etc/wazuh-indexer/certs/root-ca.pem -h localhost -nhnv
 
       The "-h" flag is used to specify the hostname or the IP address of the Wazuh indexer node.
 
@@ -217,34 +217,34 @@ Wazuh indexer configuration
       .. code-block:: console
          :class: output
 
-            Will connect to localhost:9300 ... done
-            Connected as CN=admin,OU=Wazuh,O=Wazuh,L=California,C=US
-            OpenSearch Version: 1.2.4
-            OpenSearch Security Version: 1.2.4.0
-            Contacting opensearch cluster 'opensearch' and wait for YELLOW clusterstate ...
-            Clustername: wazuh-cluster
-            Clusterstate: GREEN
-            Number of nodes: 1
-            Number of data nodes: 1
-            .opendistro_security index already exists, so we do not need to create one.
-            Populate config from /home/wazuh
-            Will update '_doc/config' with /usr/share/wazuh-indexer/plugins/opensearch-security/securityconfig/config.yml 
-               SUCC: Configuration for 'config' created or updated
-            Done with success
+         Will connect to localhost:9300 ... done
+         Connected as CN=admin,OU=Wazuh,O=Wazuh,L=California,C=US
+         OpenSearch Version: 1.2.4
+         OpenSearch Security Version: 1.2.4.0
+         Contacting opensearch cluster 'opensearch' and wait for YELLOW clusterstate ...
+         Clustername: wazuh-cluster
+         Clusterstate: GREEN
+         Number of nodes: 1
+         Number of data nodes: 1
+         .opendistro_security index already exists, so we do not need to create one.
+         Populate config from /home/wazuh
+         Will update '_doc/config' with /usr/share/wazuh-indexer/plugins/opensearch-security/securityconfig/config.yml 
+            SUCC: Configuration for 'config' created or updated
+         Done with success
 
    #. ``roles_mapping.yml``
    
       Configure the ``roles_mapping.yml`` file to map the Okta group to the appropriate Wazuh indexer role, in our case, we map it to the  ``all_access`` role:
 
       .. code-block:: console
-          :emphasize-lines: 6
+         :emphasize-lines: 6
 
-            all_access:
-            reserved: false
-            hidden: false
-            backend_roles:
-            - "admin"
-            - "<GROUP_NAME>"
+         all_access:
+         reserved: false
+         hidden: false
+         backend_roles:
+         - "admin"
+         - "<GROUP_NAME>"
 
       Replace ``<GROUP_NAME>`` with the name you gave to your group in Step 3, in our case, this is ``wazuh-admin``.
 
@@ -252,7 +252,7 @@ Wazuh indexer configuration
 
       .. code-block:: console
 
-            # export JAVA_HOME=/usr/share/wazuh-indexer/jdk/ && bash /usr/share/wazuh-indexer/plugins/opensearch-security/tools/securityadmin.sh -f /usr/share/wazuh-indexer/plugins/opensearch-security/securityconfig/roles_mapping.yml -icl -key /etc/wazuh-indexer/certs/admin-key.pem -cert /etc/wazuh-indexer/certs/admin.pem -cacert /etc/wazuh-indexer/certs/root-ca.pem -h localhost -nhnv
+         # export JAVA_HOME=/usr/share/wazuh-indexer/jdk/ && bash /usr/share/wazuh-indexer/plugins/opensearch-security/tools/securityadmin.sh -f /usr/share/wazuh-indexer/plugins/opensearch-security/securityconfig/roles_mapping.yml -icl -key /etc/wazuh-indexer/certs/admin-key.pem -cert /etc/wazuh-indexer/certs/admin.pem -cacert /etc/wazuh-indexer/certs/root-ca.pem -h localhost -nhnv
 
       The "-h" flag is used to specify the hostname or the IP address of your Wazuh indexer node.
 
@@ -261,21 +261,21 @@ Wazuh indexer configuration
       .. code-block:: console
          :class: output
 
-            Security Admin v7
-            Will connect to localhost:9300 ... done
-            Connected as CN=admin,OU=Wazuh,O=Wazuh,L=California,C=US
-            OpenSearch Version: 1.2.4
-            OpenSearch Security Version: 1.2.4.0
-            Contacting opensearch cluster 'opensearch' and wait for YELLOW clusterstate ...
-            Clustername: wazuh-cluster
-            Clusterstate: GREEN
-            Number of nodes: 1
-            Number of data nodes: 1
-            .opendistro_security index already exists, so we do not need to create one.
-            Populate config from /home/wazuh
-            Will update '_doc/rolesmapping' with /usr/share/wazuh-indexer/plugins/opensearch-security/securityconfig/roles_mapping.yml 
-               SUCC: Configuration for 'rolesmapping' created or updated
-            Done with success
+         Security Admin v7
+         Will connect to localhost:9300 ... done
+         Connected as CN=admin,OU=Wazuh,O=Wazuh,L=California,C=US
+         OpenSearch Version: 1.2.4
+         OpenSearch Security Version: 1.2.4.0
+         Contacting opensearch cluster 'opensearch' and wait for YELLOW clusterstate ...
+         Clustername: wazuh-cluster
+         Clusterstate: GREEN
+         Number of nodes: 1
+         Number of data nodes: 1
+         .opendistro_security index already exists, so we do not need to create one.
+         Populate config from /home/wazuh
+         Will update '_doc/rolesmapping' with /usr/share/wazuh-indexer/plugins/opensearch-security/securityconfig/roles_mapping.yml 
+            SUCC: Configuration for 'rolesmapping' created or updated
+         Done with success
 
 Wazuh dashboard configuration
 -----------------------------

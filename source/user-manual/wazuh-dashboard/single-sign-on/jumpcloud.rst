@@ -174,20 +174,20 @@ Wazuh indexer configuration
          .. code-block:: console
             :class: output
 
-               Will connect to localhost:9300 ... done
-               Connected as CN=admin,OU=Wazuh,O=Wazuh,L=California,C=US
-               OpenSearch Version: 1.2.4
-               OpenSearch Security Version: 1.2.4.0
-               Contacting opensearch cluster 'opensearch' and wait for YELLOW clusterstate ...
-               Clustername: wazuh-cluster
-               Clusterstate: GREEN
-               Number of nodes: 1
-               Number of data nodes: 1
-               .opendistro_security index already exists, so we do not need to create one.
-               Populate config from /home/wazuh
-               Will update '_doc/config' with /usr/share/wazuh-indexer/plugins/opensearch-security/securityconfig/config.yml 
-                  SUCC: Configuration for 'config' created or updated
-               Done with success
+            Will connect to localhost:9300 ... done
+            Connected as CN=admin,OU=Wazuh,O=Wazuh,L=California,C=US
+            OpenSearch Version: 1.2.4
+            OpenSearch Security Version: 1.2.4.0
+            Contacting opensearch cluster 'opensearch' and wait for YELLOW clusterstate ...
+            Clustername: wazuh-cluster
+            Clusterstate: GREEN
+            Number of nodes: 1
+            Number of data nodes: 1
+            .opendistro_security index already exists, so we do not need to create one.
+            Populate config from /home/wazuh
+            Will update '_doc/config' with /usr/share/wazuh-indexer/plugins/opensearch-security/securityconfig/config.yml 
+               SUCC: Configuration for 'config' created or updated
+            Done with success
    
    #. ``roles_mapping.yml``
 
@@ -196,19 +196,19 @@ Wazuh indexer configuration
          .. code-block:: console
             :emphasize-lines: 6
 
-               all_access:
-               reserved: false
-               hidden: false
-               backend_roles:
-               - "admin"
-               - "Wazuh admins"
-               description: "Maps admin to all_access"
+            all_access:
+            reserved: false
+            hidden: false
+            backend_roles:
+            - "admin"
+            - "Wazuh admins"
+            description: "Maps admin to all_access"
 
       After modifying the ``roles_mapping.yml`` file, it is necessary to use the ``securityadmin`` script to load the configuration changes with the following command:
 
          .. code-block:: console
 
-               # export JAVA_HOME=/usr/share/wazuh-indexer/jdk/ && bash /usr/share/wazuh-indexer/plugins/opensearch-security/tools/securityadmin.sh -f /usr/share/wazuh-indexer/plugins/opensearch-security/securityconfig/roles_mapping.yml -icl -key /etc/wazuh-indexer/certs/admin-key.pem -cert /etc/wazuh-indexer/certs/admin.pem -cacert /etc/wazuh-indexer/certs/root-ca.pem -h localhost -nhnv      
+            # export JAVA_HOME=/usr/share/wazuh-indexer/jdk/ && bash /usr/share/wazuh-indexer/plugins/opensearch-security/tools/securityadmin.sh -f /usr/share/wazuh-indexer/plugins/opensearch-security/securityconfig/roles_mapping.yml -icl -key /etc/wazuh-indexer/certs/admin-key.pem -cert /etc/wazuh-indexer/certs/admin.pem -cacert /etc/wazuh-indexer/certs/root-ca.pem -h localhost -nhnv      
 
       The "-h" flag is used to specify the hostname or the IP address of your Wazuh indexer node.
       The command output must be similar to the following:
@@ -216,25 +216,39 @@ Wazuh indexer configuration
          .. code-block:: console
             :class: output
 
-               Security Admin v7
-               Will connect to localhost:9300 ... done
-               Connected as CN=admin,OU=Wazuh,O=Wazuh,L=California,C=US
-               OpenSearch Version: 1.2.4
-               OpenSearch Security Version: 1.2.4.0
-               Contacting opensearch cluster 'opensearch' and wait for YELLOW clusterstate ...
-               Clustername: wazuh-cluster
-               Clusterstate: GREEN
-               Number of nodes: 1
-               Number of data nodes: 1
-               .opendistro_security index already exists, so we do not need to create one.
-               Populate config from /home/wazuh
-               Will update '_doc/rolesmapping' with /usr/share/wazuh-indexer/plugins/opensearch-security/securityconfig/roles_mapping.yml 
-                  SUCC: Configuration for 'rolesmapping' created or updated
-               Done with success
+            Security Admin v7
+            Will connect to localhost:9300 ... done
+            Connected as CN=admin,OU=Wazuh,O=Wazuh,L=California,C=US
+            OpenSearch Version: 1.2.4
+            OpenSearch Security Version: 1.2.4.0
+            Contacting opensearch cluster 'opensearch' and wait for YELLOW clusterstate ...
+            Clustername: wazuh-cluster
+            Clusterstate: GREEN
+            Number of nodes: 1
+            Number of data nodes: 1
+            .opendistro_security index already exists, so we do not need to create one.
+            Populate config from /home/wazuh
+            Will update '_doc/rolesmapping' with /usr/share/wazuh-indexer/plugins/opensearch-security/securityconfig/roles_mapping.yml 
+               SUCC: Configuration for 'rolesmapping' created or updated
+            Done with success
 
 Wazuh dashboard configuration
 -----------------------------
 
 #. Configure the Wazuh dashboard configuration file.
 
-   Add these configurations to the opensearch_dashboards.yml, the file path is /etc/wazuh-dashboard/opensearch_dashboards.yml. It is recommended to back up this file before the configuration is made.
+   Add these configurations to the ``opensearch_dashboards.yml``, the file path is ``/etc/wazuh-dashboard/opensearch_dashboards.yml``. It is recommended to back up this file before the configuration is made.
+
+      .. code-block:: console
+          
+         opensearch_security.auth.type: "saml"
+         server.xsrf.whitelist: ["/_plugins/_security/saml/acs", "/_plugins/_security/saml/logout", "/_opendistro/_security/saml/acs", "/_opendistro/_security/saml/logout", "/_opendistro/_security/saml/acs/idpinitiated"]
+   
+#. Restart the Wazuh dashboard service using this command:
+
+   .. include:: /_templates/common/restart_dashboard.rst
+
+#. Test the configuration.
+
+   To test the configuration, go to your Wazuh dashboard URL and log in with your Jumpcloud account.
+

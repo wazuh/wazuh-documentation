@@ -54,18 +54,18 @@ Azure Active Directory Configuration
 
     .. code-block:: console
 
-         {
-                  "allowedMemberTypes": [
-                     "User"
-                  ],
-                  "description": "Wazuh role",
-                  "displayName": "Wazuh_role",
-                  "id": "<application_id>",
-                  "isEnabled": true,
-                  "lang": null,
-                  "origin": "Application",
-                  "value": "Wazuh_role"
-               },
+      {
+               "allowedMemberTypes": [
+                  "User"
+               ],
+               "description": "Wazuh role",
+               "displayName": "Wazuh_role",
+               "id": "<application_id>",
+               "isEnabled": true,
+               "lang": null,
+               "origin": "Application",
+               "value": "Wazuh_role"
+            },
 
    - ``description``: can be any value that you want.
    - ``id`` should be the ID of your application. You can find it in the application's overview menu or at the top of the Manifest in the field ``appId``.
@@ -212,20 +212,20 @@ Wazuh indexer configuration
       .. code-block:: console
          :class: output
 
-            Will connect to localhost:9300 ... done
-            Connected as CN=admin,OU=Wazuh,O=Wazuh,L=California,C=US
-            OpenSearch Version: 1.2.4
-            OpenSearch Security Version: 1.2.4.0
-            Contacting opensearch cluster 'opensearch' and wait for YELLOW clusterstate ...
-            Clustername: wazuh-cluster
-            Clusterstate: GREEN
-            Number of nodes: 1
-            Number of data nodes: 1
-            .opendistro_security index already exists, so we do not need to create one.
-            Populate config from /home/wazuh
-            Will update '_doc/config' with /usr/share/wazuh-indexer/plugins/opensearch-security/securityconfig/config.yml 
-               SUCC: Configuration for 'config' created or updated
-            Done with success
+         Will connect to localhost:9300 ... done
+         Connected as CN=admin,OU=Wazuh,O=Wazuh,L=California,C=US
+         OpenSearch Version: 1.2.4
+         OpenSearch Security Version: 1.2.4.0
+         Contacting opensearch cluster 'opensearch' and wait for YELLOW clusterstate ...
+         Clustername: wazuh-cluster
+         Clusterstate: GREEN
+         Number of nodes: 1
+         Number of data nodes: 1
+         .opendistro_security index already exists, so we do not need to create one.
+         Populate config from /home/wazuh
+         Will update '_doc/config' with /usr/share/wazuh-indexer/plugins/opensearch-security/securityconfig/config.yml 
+            SUCC: Configuration for 'config' created or updated
+         Done with success
 
 
    b. ``roles_mapping.yml``
@@ -234,13 +234,13 @@ Wazuh indexer configuration
 
       .. code-block:: console
 
-            all_access:
-            reserved: false
-            hidden: false
-            backend_roles:
-            - "admin"
-            - "Wazuh_role"
-            description: "Maps admin to all_access"
+         all_access:
+         reserved: false
+         hidden: false
+         backend_roles:
+         - "admin"
+         - "Wazuh_role"
+         description: "Maps admin to all_access"
 
       After modifying the ``roles_mapping.yml`` file, it is necessary to use the ``securityadmin`` script to load the configuration changes with the following command:
 
@@ -254,21 +254,21 @@ Wazuh indexer configuration
 
       .. code-block:: console
 
-            Security Admin v7
-            Will connect to localhost:9300 ... done
-            Connected as CN=admin,OU=Wazuh,O=Wazuh,L=California,C=US
-            OpenSearch Version: 1.2.4
-            OpenSearch Security Version: 1.2.4.0
-            Contacting opensearch cluster 'opensearch' and wait for YELLOW clusterstate ...
-            Clustername: wazuh-cluster
-            Clusterstate: GREEN
-            Number of nodes: 1
-            Number of data nodes: 1
-            .opendistro_security index already exists, so we do not need to create one.
-            Populate config from /home/wazuh
-            Will update '_doc/rolesmapping' with /usr/share/wazuh-indexer/plugins/opensearch-security/securityconfig/roles_mapping.yml 
-               SUCC: Configuration for 'rolesmapping' created or updated
-            Done with success
+         Security Admin v7
+         Will connect to localhost:9300 ... done
+         Connected as CN=admin,OU=Wazuh,O=Wazuh,L=California,C=US
+         OpenSearch Version: 1.2.4
+         OpenSearch Security Version: 1.2.4.0
+         Contacting opensearch cluster 'opensearch' and wait for YELLOW clusterstate ...
+         Clustername: wazuh-cluster
+         Clusterstate: GREEN
+         Number of nodes: 1
+         Number of data nodes: 1
+         .opendistro_security index already exists, so we do not need to create one.
+         Populate config from /home/wazuh
+         Will update '_doc/rolesmapping' with /usr/share/wazuh-indexer/plugins/opensearch-security/securityconfig/roles_mapping.yml 
+            SUCC: Configuration for 'rolesmapping' created or updated
+         Done with success
 
 
 Wazuh dashboard configuration
@@ -280,8 +280,8 @@ Wazuh dashboard configuration
 
     .. code-block:: console  
 
-         opensearch_security.auth.type: "saml"
-         server.xsrf.whitelist: ["/_plugins/_security/saml/acs", "/_plugins/_security/saml/logout", "/_opendistro/_security/saml/acs", "/_opendistro/_security/saml/logout", "/_opendistro/_security/saml/acs/idpinitiated"]
+      opensearch_security.auth.type: "saml"
+      server.xsrf.whitelist: ["/_plugins/_security/saml/acs", "/_plugins/_security/saml/logout", "/_opendistro/_security/saml/acs", "/_opendistro/_security/saml/logout", "/_opendistro/_security/saml/acs/idpinitiated"]
 
 #. Change the logout configuration in the Wazuh dashboard. 
 
@@ -289,11 +289,11 @@ Wazuh dashboard configuration
 
     .. code-block:: console  
 
-         ...
-            this.router.get({
-               path: `/logout`,
-               validate: false
-         ...
+      ...
+         this.router.get({
+            path: `/logout`,
+            validate: false
+      ...
 
 #. Restart the Wazuh dashboard service using this command:
 
