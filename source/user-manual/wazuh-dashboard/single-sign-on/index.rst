@@ -43,3 +43,4 @@ The following parameters are required to make the configurations on the Wazuh da
         azure-active-directory
         pingone
         google
+        jumpcloud
