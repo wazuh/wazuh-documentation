@@ -430,7 +430,7 @@ Installing the Wazuh dashboard
 
 #. Edit the ``/etc/wazuh-dashboard/opensearch_dashboards.yml`` file and replace the following values:
 
-   #. ``server.host``: This setting specifies the host of the back end server. To allow remote users to connect, set the value to the IP address or DNS name of the Kibana server.  The value ``0.0.0.0`` will accept all the available IP addresses of the host.
+   #. ``server.host``: This setting specifies the host of the back end server. To allow remote users to connect, set the value to the IP address or DNS name of the Wazuh dashboard.  The value ``0.0.0.0`` will accept all the available IP addresses of the host.
 
    #. ``opensearch.hosts``: The URLs of the Wazuh indexer instances to use for all your queries. The Wazuh dashboard can be configured to connect to multiple Wazuh indexer nodes in the same cluster. The addresses of the nodes can be separated by commas. For example,  ``["https://10.0.0.2:9200", "https://10.0.0.3:9200","https://10.0.0.4:9200"]``
 
