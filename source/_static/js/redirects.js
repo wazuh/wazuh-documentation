@@ -97,6 +97,8 @@ newUrls['4.3'] = [
   '/user-manual/wazuh-dashboard/single-sign-on/index.html',
   '/user-manual/wazuh-dashboard/single-sign-on/okta.html',
   '/user-manual/wazuh-dashboard/single-sign-on/azure-active-directory.html',
+  '/user-manual/wazuh-dashboard/single-sign-on/pingone.html',
+  '/user-manual/wazuh-dashboard/single-sign-on/google.html',
   '/user-manual/securing-wazuh/index.html',
   '/user-manual/securing-wazuh/wazuh-indexer.html',
   '/user-manual/securing-wazuh/opendistro.html',
