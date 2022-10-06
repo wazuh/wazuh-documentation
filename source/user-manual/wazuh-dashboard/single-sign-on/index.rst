@@ -44,3 +44,4 @@ The following parameters are required to make the configurations on the Wazuh da
         pingone
         google
         jumpcloud
+        onelogin
