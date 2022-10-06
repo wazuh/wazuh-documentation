@@ -1,7 +1,7 @@
 .. Copyright (C) 2015, Wazuh, Inc.
 
 .. meta::
-   :description: Jumpcloud is a Unified Device and Identity Access Management platform that provides services such as Multi-Factor Authentication (MFA).
+   :description: Jumpcloud is a Unified Device and Identity Access Management platform. Learn more about it in this section of the Wazuh documentation.
 
 .. _jumpcloud:
 

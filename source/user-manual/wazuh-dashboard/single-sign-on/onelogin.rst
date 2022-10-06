@@ -1,15 +1,14 @@
 .. Copyright (C) 2015, Wazuh, Inc.
 
 .. meta::
-   :description: OneLogin is a cloud-based identity and access management provider that provides a unified access management platform to enterprise-level businesses and organizations.
+   :description: OneLogin is a cloud-based identity and access management provider. Learn more about it in this section of the Wazuh documentation.
 
 .. _onelogin:
 
 OneLogin
 ========
 
-Website: https://www.onelogin.com
-OneLogin is a cloud-based identity and access management provider that provides a unified access management platform to enterprise-level businesses and organizations. In this guide, we integrate the OneLogin SSO to authenticate users into the Wazuh platform. 
+`OneLogin <hhttps://www.onelogin.com>`_ is a cloud-based identity and access management provider that provides a unified access management platform to enterprise-level businesses and organizations. In this guide, we integrate the OneLogin SSO to authenticate users into the Wazuh platform. 
 The single sign-on integration process is divided into three stages.
 
 #. OneLogin Configuration
@@ -266,4 +265,34 @@ Wazuh indexer configuration
             SUCC: Configuration for 'rolesmapping' created or updated
          Done with success
 
-      
+Wazuh dashboard configuration
+-----------------------------
+
+#. Configure the Wazuh dashboard configuration file.
+
+   Add these configurations to the ``opensearch_dashboards.yml``, the file path is ``/etc/wazuh-dashboard/opensearch_dashboards.yml``. It is recommended to back up this file before the configuration is made.
+
+   .. code-block:: console 
+         
+      opensearch_security.auth.type: "saml"
+      server.xsrf.whitelist: ["/_plugins/_security/saml/acs", "/_plugins/_security/saml/logout", "/_opendistro/_security/saml/acs", "/_opendistro/_security/saml/logout", "/_opendistro/_security/saml/acs/idpinitiated"]
+
+#. Change the logout configuration in the Wazuh dashboard. 
+
+   To change the logout configuration, edit the ``path: /auth/logout`` section of the ``route.js`` file. The file path is ``/usr/share/wazuh-dashboard/plugins/securityDashboards/server/auth/types/saml/routes.js``. It is recommended to back up this file before the configuration is made. The configuration must be similar to this:
+  
+   .. code-block:: console
+      :emphasize-lines: 3
+
+      ...
+         this.router.get({
+            path: `/logout`,
+            validate: false
+      ...
+#. Restart the Wazuh dashboard service using this command:
+ 
+   .. include:: /_templates/common/restart_dashboard.rst
+
+#. Test the configuration.
+
+   To test the configuration, go to your Wazuh dashboard URL and log in with your OneLogin account.
