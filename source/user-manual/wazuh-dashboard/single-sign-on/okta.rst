@@ -29,7 +29,7 @@ Okta Configuration
         :align: center
         :width: 80%
      
-    From the **People** section, select **Add Person**, fill in the details of the new user and click **Save** as seen in the following screenshots.
+    From the **People** section, select **Add Person**, fill in the details of the new user, and click **Save** as seen in the following screenshots.
 
     .. thumbnail:: /images/single-sign-on/okta/02-select-add-person.png
         :title: Select add person
@@ -51,7 +51,7 @@ Okta Configuration
         :align: center
         :width: 80%    
  
-    Create a new group using any name, in our case, we name it ``wazuh-admin``. This name will be used as our ``backend_roles`` in ``roles_mapping.yml``
+    Create a new group using any name. In our case, we name it ``wazuh-admin``. This name will be used as our ``backend_roles`` in ``roles_mapping.yml``
 
 #. Add the new user to the new group.
    
@@ -79,7 +79,7 @@ Okta Configuration
         :align: center
         :width: 80%   
 
-   This leads to the application configuration page. Assign a name to the application, in our case, we assign the name ``wazuh-sso-app``:
+   This leads to the application configuration page. Assign a name to the application. In our case, we assign the name ``wazuh-sso-app``:
 
      .. thumbnail:: /images/single-sign-on/okta/08-assign-name.png
         :title: Assign a name to the application
@@ -98,7 +98,7 @@ Okta Configuration
         :align: center
         :width: 80%   
 
-   In the **Group Attribute Statements** section put ``Roles`` as the name. The value for ``Roles`` will be used as the ``roles_key`` parameter in the Wazuh indexer configuration. For  the filter field, select **Matches regex** and type ``.*``. 
+   In the **Group Attribute Statements** section, put ``Roles`` as the name. The value for ``Roles`` will be used as the ``roles_key`` parameter in the Wazuh indexer configuration. For the filter field, select **Matches regex** and type ``.*``. 
 
      .. thumbnail:: /images/single-sign-on/okta/10-group-attribute-statements-section.png
         :title: Group Attribute Statements section
@@ -114,7 +114,7 @@ Okta Configuration
 
 #. Add the new app to the new group.
 
-   Navigate to **Directory** → **Groups** → **<YOUR GROUP>**. Click on **Applications**, select **Assign Applications**, from here, assign the app created in step 5 and click on **Done** to save the changes.
+   Navigate to **Directory** → **Groups** → **<YOUR GROUP>**. Click on **Applications** and select **Assign Applications**. From here, assign the app created in step 5 and click on **Done** to save the changes.
    
      .. thumbnail:: /images/single-sign-on/okta/12-navigate-to-directory-groups.png
         :title: Navigate to Directory - Groups - <YOUR GROUP>
@@ -134,9 +134,9 @@ Okta Configuration
    - ``roles_key``
    - ``kibana_url``
 
-   To obtain the remaining parameters navigate to **Applications** → **Applications** → **<YOUR APP>** → **Sign On**. 
+   To obtain the remaining parameters, navigate to **Applications** → **Applications** → **<YOUR APP>** → **Sign On**. 
 
-   Under **SAML Signing Certificates**, select **View IdP metadata** of the active certificate. This will open in a new tab, copy the URL as this will be the ``idp.metadata_url``.
+   Under **SAML Signing Certificates**, select **View IdP metadata** of the active certificate. This will open in a new tab. Copy the URL as this will be the ``idp.metadata_url``.
 
    Now, on the same page, click on  **View SAML setup instructions**. Copy the **Identity Provider Issuer URL**, it will be the ``idp.entity_id``.
 
@@ -234,7 +234,7 @@ Wazuh indexer configuration
 
    #. ``roles_mapping.yml``
    
-      Configure the ``roles_mapping.yml`` file to map the Okta group to the appropriate Wazuh indexer role, in our case, we map it to the  ``all_access`` role:
+      Configure the ``roles_mapping.yml`` file to map the Okta group to the appropriate Wazuh indexer role. In our case, we map it to the  ``all_access`` role:
 
       .. code-block:: console
          :emphasize-lines: 6
@@ -246,7 +246,7 @@ Wazuh indexer configuration
          - "admin"
          - "<GROUP_NAME>"
 
-      Replace ``<GROUP_NAME>`` with the name you gave to your group in Step 3, in our case, this is ``wazuh-admin``.
+      Replace ``<GROUP_NAME>`` with the name you gave to your group in Step 3. In our case, this is ``wazuh-admin``.
 
       After modifying the ``roles_mapping.yml`` file, it is necessary to use the ``securityadmin`` script to load the configuration changes with the following command:
 
@@ -282,7 +282,7 @@ Wazuh dashboard configuration
 
 #. Configure the Wazuh dashboard configuration file.
 
-   Add these configurations to the ``opensearch_dashboards.yml``, the file path is ``/etc/wazuh-dashboard/opensearch_dashboards.yml``. It is recommended to back up this file before the configuration is made.
+   Add these configurations to the ``opensearch_dashboards.yml``. The file path is ``/etc/wazuh-dashboard/opensearch_dashboards.yml``. It is recommended to back up this file before the configuration is made.
 
    .. code-block:: console
 

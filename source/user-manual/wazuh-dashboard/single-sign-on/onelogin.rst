@@ -52,7 +52,7 @@ OneLogin Configuration
          :align: center
          :width: 80%
 
-   Search for **SAML Custom Connector (Advanced)** application. In **Display Name**,  assign a name, in our case, we assigned the name ``Wazuh``. Navigate to the Configuration tab and fill in the information:
+   Search for **SAML Custom Connector (Advanced)** application. In **Display Name**,  assign a name. In our case, we assigned the name ``Wazuh``. Navigate to the Configuration tab and fill in the information:
 
    - **Audience (EntityID)**: ``wazuh-saml``
    - **Recipient**: ``https://WAZUH_DASHBOARD_URL/_opendistro/_security/saml/acs``

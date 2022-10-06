@@ -191,7 +191,7 @@ Wazuh indexer configuration
    
    #. ``roles_mapping.yml``
 
-      Configure the ``roles_mapping.yml`` file to map the Jumpcloud user group to the appropriate Wazuh indexer role, in our case, we map the ``Wazuh admins`` group to the ``all_access`` role:
+      Configure the ``roles_mapping.yml`` file to map the Jumpcloud user group to the appropriate Wazuh indexer role. In our case, we map the ``Wazuh admins`` group to the ``all_access`` role:
 
          .. code-block:: console
             :emphasize-lines: 6

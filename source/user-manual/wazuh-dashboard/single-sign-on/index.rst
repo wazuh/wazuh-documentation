@@ -21,12 +21,12 @@ The following parameters are required to make the configurations on the Wazuh da
 - ``idp.metadata_file``: XML File that contains the metadata information about the application configured on the IdP side. It can be used instead of ``idp.metadata_url``.
 - ``idp.entity_id``: Entity ID of the Identity Provider.
 - ``sp.entity_id``: Entity ID of the Service Provider.
-- ``kibana_url``: URL to access Wazuh dashboard.
+- ``kibana_url``: URL to access the Wazuh dashboard.
 - ``roles_key``: The attribute in the SAML assertion where the roles/groups are sent.
 - ``exchange_key``: The key that will be used to sign the assertions. It must have at least 32 characters.
   
  .. note::
-    - The group and role names used in this guide can be changed, they do not necessarily have to be the ones we used.
+    - The group and role names used in this guide can be changed. They do not necessarily have to be the ones we used.
     - OpenSearch and the SAML assertion are case sensitive. Therefore the values on the IDP and in the SAML configuration of the Wazuh indexer have to be exactly the same.
     - It is recommended to clear the browser cache and cookies before the integration is carried out.
     - The ``securityadmin`` script has to be executed with root user privileges
