@@ -23,9 +23,9 @@ PingOne Configuration
 #. Go to `PingOne <https://admin.pingone.com/>`_ and sign in with your Ping Identity account.
 #. Create an application in Connections
 
-    Navigate to **Connections** -> **Applications** -> **Add Application** and give it a name. In our case, the name is ``wazuh-sso``.
+    Navigate to **Connections** → **Applications** → **Add Application** and give it a name. In our case, the name is ``wazuh-sso``.
 
-    Proceed to the **Choose Application Type** section, select  **SAML Application** -> **Configure**.
+    Proceed to the **Choose Application Type** section, select  **SAML Application** → **Configure**.
 
         .. thumbnail:: /images/single-sign-on/pingone/01-proceed-to-the-choose-application-type-section.png
             :title: Proceed to the Choose Application Type section

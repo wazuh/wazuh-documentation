@@ -31,7 +31,7 @@ Jumpcloud Configuration
 
 #. Create a new group and assign the user.
 
-   Go to **User Management** -> **User Groups** -> **(+)** and give a name to the group. In our case, this is ``Wazuh admins``.
+   Go to **User Management** → **User Groups** → **(+)** and give a name to the group. In our case, this is ``Wazuh admins``.
 
     .. thumbnail:: /images/single-sign-on/jumpcloud/02-go-to-user-management-user-groups.png
         :title: Go to User Management - User Groups
