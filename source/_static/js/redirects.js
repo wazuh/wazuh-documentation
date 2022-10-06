@@ -107,6 +107,7 @@ newUrls['4.4'] = [
   '/user-manual/agents/key-request.html',
   '/user-manual/manager/manual-backup-restore.html',
   '/user-manual/reference/ossec-conf/wazuh-db-config.html',
+  '/azure/activity-services/prerequisites/dependencies.html',
 ];
 
 /* Pages removed in 4.4 */
@@ -168,7 +169,6 @@ newUrls['4.3'] = [
   '/azure/activity-services/index.html',
   '/azure/activity-services/active-directory/index.html',
   '/azure/activity-services/active-directory/graph.html',
-  '/azure/activity-services/prerequisites/dependencies.html',
   '/azure/activity-services/prerequisites/considerations.html',
   '/azure/activity-services/prerequisites/credentials.html',
   '/azure/activity-services/prerequisites/index.html',
