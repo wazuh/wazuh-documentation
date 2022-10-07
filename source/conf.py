@@ -563,15 +563,15 @@ custom_replacements = {
     "|WAZUH_REVISION_OSX|" : "1",
     "|WAZUH_CURRENT_MAJOR_SOLARIS|" : "4.x",
     #"|WAZUH_CURRENT_MINOR_SOLARIS|" :
-    "|WAZUH_CURRENT_SOLARIS|" : "4.3.7", # The lesser of WAZUH_CURRENT_MAJOR_SOLARIS10 and 11
+    "|WAZUH_CURRENT_SOLARIS|" : release, # The lesser of WAZUH_CURRENT_MAJOR_SOLARIS10 and 11
     #"|WAZUH_REVISION_SOLARIS|" : "1",
     "|WAZUH_CURRENT_MAJOR_SOLARIS10|" : "4.x",
     #"|WAZUH_CURRENT_MINOR_SOLARIS10|" :
-    "|WAZUH_CURRENT_SOLARIS10|" : "4.3.7",
+    "|WAZUH_CURRENT_SOLARIS10|" : release,
     #"|WAZUH_REVISION_SOLARIS10|" : "1",
     "|WAZUH_CURRENT_MAJOR_SOLARIS11|" : "4.x",
     #"|WAZUH_CURRENT_MINOR_SOLARIS11|" :
-    "|WAZUH_CURRENT_SOLARIS11|" : "4.3.7",
+    "|WAZUH_CURRENT_SOLARIS11|" : release,
     #"|WAZUH_REVISION_SOLARIS11|" : "1",
     "|WAZUH_CURRENT_MAJOR_SOLARIS10_i386|" : "4.x",
     #"|WAZUH_CURRENT_MINOR_SOLARIS10_i386|" :
@@ -579,7 +579,7 @@ custom_replacements = {
     #"|WAZUH_REVISION_SOLARIS10_i386|" : "1",
     "|WAZUH_CURRENT_MAJOR_SOLARIS10_SPARC|" : "4.x",
     #"|WAZUH_CURRENT_MINOR_SOLARIS10_SPARC|" :
-    "|WAZUH_CURRENT_SOLARIS10_SPARC|" : "4.3.7",
+    "|WAZUH_CURRENT_SOLARIS10_SPARC|" : release,
     #"|WAZUH_REVISION_SOLARIS10_SPARC|" : "1",
     "|WAZUH_CURRENT_MAJOR_SOLARIS11_i386|" : "4.x",
     #"|WAZUH_CURRENT_MINOR_SOLARIS11_i386|" :
@@ -587,7 +587,7 @@ custom_replacements = {
     #"|WAZUH_REVISION_SOLARIS11_i386|" : "1",
     "|WAZUH_CURRENT_MAJOR_SOLARIS11_SPARC|" : "4.x",
     #"|WAZUH_CURRENT_MINOR_SOLARIS11_SPARC|" :
-    "|WAZUH_CURRENT_SOLARIS11_SPARC|" : "4.3.7",
+    "|WAZUH_CURRENT_SOLARIS11_SPARC|" : release,
     #"|WAZUH_REVISION_SOLARIS11_SPARC|" : "1",
     "|WAZUH_CURRENT_MAJOR_AIX|" : "4.x",
     #"|WAZUH_CURRENT_MINOR_AIX|" :
@@ -612,8 +612,12 @@ custom_replacements = {
     "|ELASTIC_6_LATEST|" : "6.8.8",
     #
     # === Splunk
-    "|SPLUNK_LATEST|" : "8.2.6",
     "|WAZUH_SPLUNK_CURRENT|" : release,
+    #
+    "|SPLUNK_LATEST|" : "8.2.6",
+    "|SPLUNK_LATEST_MINOR|" : "8.2",
+    "|WAZUH_SPLUNK_REV_CURRENT_LATEST|" : "1", # 8.2
+    "|WAZUH_SPLUNK_REV_CURRENT_8.1|" : "1",
 }
 
 # -- Customizations ---------------------------------------------------------
