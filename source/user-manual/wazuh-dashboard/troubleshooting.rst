@@ -116,131 +116,108 @@ This message indicates that there is a problem loading the information of an ind
 
 This situation can happen if the indexer is reinstalled and the previously saved objects are lost, while the dashboard is running and is not restarted in the process.
 
-Remediations:
+Remediation
+^^^^^^^^^^^
 
-The dashboard initializes the missing saved objects with the index definitions when it starts, so the suggested solution is to restarting the service, to initialize them again:
 
-Restart the Wazuh dashboard service.
+The dashboard initializes the saved objects with the index definitions when it starts, so the suggested solution is to restart the service to initialize the saved objects again. 
 
-.. tabs::
+#. Restart the Wazuh dashboard service.
 
-  .. group-tab:: Systemd
+   .. include:: /_templates/common/restart_dashboard.rst
 
-    .. code-block:: console
+   This will initialize the index with the required mappings.
 
-      # systemctl restart wazuh-dashboard
-
-  .. group-tab:: SysV
-
-    .. code-block:: console
-
-      # service wazuh-dashboard restart
-
-This will initialize the index with the required mappings.
-
-.. note::
-  If the index contains data but has missing objects, the dashboard will migrate the data to a new index with the missing objects added.
+   .. note:: If the index contains data but has missing objects, the dashboard will migrate the data to a new index with the missing objects added.
 
 If the restart does not solve the problem, we can execute this process manually:
 
-Stop the Wazuh dashboard service.
+#. Stop the Wazuh dashboard service.
 
-.. tabs::
+   .. tabs::
+   
+      .. group-tab:: Systemd
+   
+         .. code-block:: console
+   
+            # systemctl stop wazuh-dashboard
+   
+      .. group-tab:: SysV
+   
+         .. code-block:: console
+   
+            # service wazuh-dashboard stop
 
-  .. group-tab:: Systemd
+#. Identify the index or indices that have the wrong field mappings, this depends on the logged user that experiences the problem or the selected tenant. By default, the index name should start with ``.kibana``.
 
-    .. code-block:: console
+#. Get the field mapping for the ``type`` field for the indices that store the saved objects.
 
-      # systemctl stop wazuh-dashboard
+   .. code-block:: console
 
-  .. group-tab:: SysV
+      # curl https://<WAZUH_INDEXER_IP>:9200/.kibana*/_mapping/field/type?pretty -u <wazuh_indexer_user>:<wazuh_indexer_password> -k
 
-    .. code-block:: console
+   .. code-block:: none
+     :class: output
 
-      # service wazuh-dashboard stop
+     {
+       ".kibana" : {
+         "mappings" : {
+           "type" : {
+             "full_name" : "type",
+             "mapping" : {
+               "type" : {
+                 "type" : "text",
+                 "fields" : {
+                   "keyword" : {
+                     "type" : "keyword",
+                     "ignore_above" : 256
+                   }
+                 }
+               }
+             }
+           }
+         }
+       },
+       ".kibana_92668751_admin_1" : {
+         "mappings" : {
+           "type" : {
+             "full_name" : "type",
+             "mapping" : {
+               "type" : {
+                 "type" : "text",
+                 "fields" : {
+                   "keyword" : {
+                     "type" : "keyword",
+                     "ignore_above" : 256
+                   }
+                 }
+               }
+             }
+           }
+         }
+       }
+     }
+   
+   
+   In the output, we can see the field mapping type for the type field is ``text`` and should be ``keyword`` for the ``.kibana`` and ``.kibana_92668751_admin_1`` indices. These indices have wrong field mappings and should be removed.
 
-Identify the index/indices that have the wrong field mappings, this depends on the logged user that experiences the problem or the selected tenant. By default the index name should start with `.kibana`.
+#. Delete the index or indices that store the saved objects with the wrong field mapping.
 
-Get the field mapping for the `type` field for the indices that store the saved objects.
+   .. code-block:: console
 
-.. code-block:: console
+      # curl https://<WAZUH_INDEXER_IP>:9200/<INDEX/INDICES_SEPARATED_BY_COMMAS> -u <wazuh_indexer_user>:<wazuh_indexer_password> -k -XDELETE
 
-  # curl https://<WAZUH_INDEXER_IP>:9200/.kibana*/_mapping/field/type?pretty -u <wazuh_indexer_user>:<wazuh_indexer_password> -k
+   .. code-block:: none
+      :class: output
 
-.. code-block:: none
-  :class: output
-
-  {
-    ".kibana" : {
-      "mappings" : {
-        "type" : {
-          "full_name" : "type",
-          "mapping" : {
-            "type" : {
-              "type" : "text",
-              "fields" : {
-                "keyword" : {
-                  "type" : "keyword",
-                  "ignore_above" : 256
-                }
-              }
-            }
-          }
-        }
-      }
-    },
-    ".kibana_92668751_admin_1" : {
-      "mappings" : {
-        "type" : {
-          "full_name" : "type",
-          "mapping" : {
-            "type" : {
-              "type" : "text",
-              "fields" : {
-                "keyword" : {
-                  "type" : "keyword",
-                  "ignore_above" : 256
-                }
-              }
-            }
-          }
-        }
-      }
-    }
-  }
-
-In the output, we can see the field mapping type for the type field is ``text`` and should be ``keyword`` for the ``.kibana`` and ``.kibana_92668751_admin_1`` indices. These indices have wrong field mappings and should be removed.
-
-Delete the index/indices that store the saved objects with the wrong field mapping.
-
-.. code-block:: console
-
-  # curl https://<WAZUH_INDEXER_IP>:9200/<INDEX/INDICES_SEPARATED_BY_COMMAS> -u <wazuh_indexer_user>:<wazuh_indexer_password> -k -XDELETE
-
-.. code-block:: none
-  :class: output
-
-  {“acknowledged”:true}
+      {“acknowledged”:true}
 
 
-Restart the Wazuh dashboard service.
+#. Restart the Wazuh dashboard service.
 
-.. tabs::
+   .. include:: /_templates/common/restart_dashboard.rst
 
-  .. group-tab:: Systemd
-
-    .. code-block:: console
-
-      # systemctl restart wazuh-dashboard
-
-  .. group-tab:: SysV
-
-    .. code-block:: console
-
-      # service wazuh-dashboard restart
-
-.. note::
-These remediations take into account that the index that stores the saved objects must have valid field mappings. The field mappings are defined through a template, so they should exist before the index is created. This template is added when Wazuh dashboard starts if it doesn’t exist.
+.. note:: These actions take into account that the index that stores the saved objects must have valid field mappings. The field mappings are defined through a template, so they should exist before the index is created. This template is added when Wazuh dashboard starts if it doesn’t exist.
 
 None of the above solutions are fixing my problem
 -------------------------------------------------
