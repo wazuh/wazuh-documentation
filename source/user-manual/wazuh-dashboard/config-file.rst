@@ -21,7 +21,7 @@ The configuration file reference is organized by sections:
    :depth: 2
    :backlinks: none
 
-Basic options
+General options
 -------------
 
 hosts
@@ -182,7 +182,7 @@ Configure wazuh-monitoring-* indices custom creation interval.
 | **Allowed values** | h (hourly), d (daily), w (weekly), m (monthly) |
 +--------------------+------------------------------------------------+
 
-Checks
+Health checks
 ------
 
 checks.pattern
@@ -598,8 +598,10 @@ Define the number of replicas to use for the statistics indices.
 | **Allowed values** | Any number starting from 0 |
 +--------------------+----------------------------+
 
-Logo customization
+Custom branding
 ------------------
+
+If you want to use custom branding elements such as logos, you can do so by editing the settings below.
 
 customization.logo.app
 ^^^^^^^^^^^^^^^^^^^^^^
@@ -653,7 +655,7 @@ This is an example of the wazuh.yml configuration:
 
 .. code-block:: yaml
     
-    #Basic options
+    #General options
 
     hosts:
         - env-1:
@@ -683,7 +685,7 @@ This is an example of the wazuh.yml configuration:
     wazuh.monitoring.pattern: wazuh-monitoring-*
     wazuh.monitoring.creation: w
 
-    #Checks
+    #Health checks
 
     checks.pattern : true
     checks.template: true
@@ -715,7 +717,7 @@ This is an example of the wazuh.yml configuration:
     wazuh.monitoring.shards: 1
     wazuh.monitoring.replicas: 0    
 
-    #Logo customization
+    #Custom branding
 
     customization.logo.app: ''
     customization.logo.sidebar: ''
