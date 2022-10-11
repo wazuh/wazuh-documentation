@@ -7,7 +7,47 @@
 How to setup white labeling
 ===========================
         
-Wazuh dashboard white-labeling feature allows to replace Wazuh logos with custom ones and use your own header and footer in PDF reports.
+Wazuh dashboard white-labeling feature allows to easily replace Wazuh logos with custom ones and use your own header and footer in PDF reports. To customize the app you can edit the following settings in the **Settings** **Configuration** tab of the app.
+
+
+PDF reports
+^^^^^^^^^^^^^
+
+The PDF properties you can customize are:
+
+#. ``customization.reports.header`` has a limit of 4 lines and is printed in the top right corner of the PDF reports.
+
+#. ``customization.reports.footer`` has a limit of 2 lines and is printed in the bottom left corner of the PDF reports.
+
+#. ``customization.reports.logo`` has a limit of 1MB and is printed in the top left corner of the PDF reports.
+
+.. thumbnail:: ../../images/kibana-app/features/white-labeling/custom-pdf-report.png
+  :title: Custom PDF report
+  :align: center
+  :width: 100%
+
+
+
+Custom logos
+^^^^^^^^^^^^^
+
+To use your own logos modify these settings:
+
+#. ``customization.logo.app`` has a limit of 1MB and replaces the logo in the Wazuh modules menu located below the breadcrumbs.
+
+#. ``customization.logo.sidebar`` has a limit of 1MB and replaces the square logo.
+
+#. ``customization.logo.healthcheck`` has a limit of 4 lines and is printed in the top right corner of the PDF reports.
+
+.. thumbnail:: ../../images/kibana-app/features/white-labeling/custom-branding-settings.png
+  :align: center
+  :width: 100%
+
+
+
+
+Configuration
+-------------
 
 
 .. note::
@@ -101,55 +141,3 @@ Wazuh dashboard white-labeling feature allows to replace Wazuh logos with custom
     +--------------------+----------------------+
     | Value limit        | 2 lines              |
     +--------------------+----------------------+
-
-
-
-PDF reports
--------------
-
-To customize the PDF reports, you can edit **customization.reports.header** and **customization.reports.footer** in the **Configuration** tab of the app.
-
-- ``customization.reports.header`` has a limit of 4 lines and is printed in the top right corner of the PDF reports.
-
-.. thumbnail:: ../../images/kibana-app/features/white-labeling/custom-header.png
-  :align: center
-  :width: 100%
-
-
-- ``customization.reports.footer`` has a limit of 2 lines and is printed in the bottom left corner of the PDF reports.
-
-.. thumbnail:: ../../images/kibana-app/features/white-labeling/custom-footer.png
-  :align: center
-  :width: 100%
-
-
-- ``customization.reports.logo`` has a limit of 1MB and is printed in the top left corner of the PDF reports.
-
-.. thumbnail:: ../../images/kibana-app/features/white-labeling/custom-report-logo.png
-  :align: center
-  :width: 100%
-
-
-
-Custom logos
--------------
-
-- ``customization.logo.app`` has a limit of 1MB and replaces the logo in the Wazuh modules menu located below the breadcrumbs.
-
-.. thumbnail:: ../../images/kibana-app/features/white-labeling/top-menu.png
-  :align: center
-  :width: 100%
-
-
-- ``customization.logo.sidebar`` has a limit of 1MB and replaces the square logo .
-
-.. thumbnail:: ../../images/kibana-app/features/white-labeling/left-nav.png
-  :align: center
-  :width: 100%
-
-- ``customization.logo.healthcheck`` has a limit of 4 lines and is printed in the top right corner of the PDF reports.
-
-.. thumbnail:: ../../images/kibana-app/features/white-labeling/healthcheck.png
-  :align: center
-  :width: 100%
-
