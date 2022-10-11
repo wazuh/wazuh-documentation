@@ -32,7 +32,7 @@ Wazuh Splunk app
 Other
 ^^^^^
 
-- `#15067 <https://github.com/wazuh/wazuh/pull/15067>`_ The external `protobuf` Python dependency is updated to 3.19.6. 
+- `#15067 <https://github.com/wazuh/wazuh/pull/15067>`_ The requirement of a specific version of the external `protobuf` Python dependency is changed to 3.19.6. 
 
  
 Resolved issues
@@ -48,7 +48,7 @@ Wazuh agent
 Reference                                                         Description
 ==============================================================    =============
 `#15007 <https://github.com/wazuh/wazuh/pull/15007>`_             The remote policy detection in SCA is fixed. 
-`#15023 <https://github.com/wazuh/wazuh/pull/15023>`_             Fixed agent upgrade module settings parser to set a default CA file. 
+`#15023 <https://github.com/wazuh/wazuh/pull/15023>`_             Fixed agent upgrade module settings parser. Now a default CA file is set. 
 ==============================================================    =============
 
 
