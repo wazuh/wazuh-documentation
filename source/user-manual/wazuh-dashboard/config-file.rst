@@ -610,7 +610,7 @@ If you want to use custom branding elements such as logos, you can do so by edit
 customization.logo.app
 ^^^^^^^^^^^^^^^^^^^^^^
 
-Define the name of the app logo saved in the path ``/plugins/wazuh/public/assets/``.
+Define the name of the app logo saved in the path ``/plugins/wazuh/public/assets/custom/images``.
 
 +--------------------+----------------------------+
 | **Default value**  | ''                         |
@@ -621,7 +621,7 @@ Define the name of the app logo saved in the path ``/plugins/wazuh/public/assets
 customization.logo.sidebar
 ^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-Define the name of the sidebar logo saved in the path ``/plugins/wazuh/public/assets/``.
+Define the name of the sidebar logo saved in the path ``/plugins/wazuh/public/assets/custom/images``.
 
 +--------------------+----------------------------+
 | **Default value**  | ''                         |
@@ -632,7 +632,7 @@ Define the name of the sidebar logo saved in the path ``/plugins/wazuh/public/as
 customization.logo.healthcheck
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-Define the name of the health check logo saved in the path ``/plugins/wazuh/public/assets/``.
+Define the name of the health check logo saved in the path ``/plugins/wazuh/public/assets/custom/images``.
 
 +--------------------+----------------------------+
 | **Default value**  | ''                         |
@@ -643,7 +643,7 @@ Define the name of the health check logo saved in the path ``/plugins/wazuh/publ
 customization.logo.reports
 ^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-Define the name of the reports logo saved in the path ``/plugins/wazuh/public/assets/``.
+Define the name of the reports logo saved in the path ``/plugins/wazuh/public/assets/custom/images``.
 
 +--------------------+----------------------------+
 | **Default value**  |''                          |
