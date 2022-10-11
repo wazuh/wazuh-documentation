@@ -119,7 +119,6 @@ This situation can happen if the indexer is reinstalled and the previously saved
 Remediation
 ^^^^^^^^^^^
 
-
 The dashboard initializes the saved objects with the index definitions when it starts, so the suggested solution is to restart the service to initialize the saved objects again. 
 
 #. Restart the Wazuh dashboard service.
