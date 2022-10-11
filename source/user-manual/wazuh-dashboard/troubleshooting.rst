@@ -200,7 +200,9 @@ If the restart does not solve the problem, we can execute this process manually:
      }
    
    
-   In the output, we can see the field mapping type for the **type** field is ``text`` and also has a subfield called **keyword** for the ``.kibana`` and ``.kibana_92668751_admin_1`` indices. The **type** field should be a ``keyword`` and does not include the **keyword** field. These field mappings was generated due to when the saved object data was indexed, did not exist a template that defined the correct field mappings. It is required to rebuild the index so we remove it.
+   In the output, we can see `type` field mapping for the ``.kibana`` and ``.kibana_92668751_admin_1`` indices.  Note that the field mapping type for the `type` field is ``text`` and that it contains a subfield called `keyword`. This is not the expected result, the `type` field should be ``keyword``, not ``text``, and it should not include the `keyword` subfield. 
+   
+   These errors happened because there was no template that specified the appropriate field mappings at the time the saved object data was indexed. To solve the errors, we need to remove the index and rebuild it. 
 
 #. Delete the index or indices that store the saved objects with the wrong field mapping.
 
