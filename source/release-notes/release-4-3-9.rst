@@ -19,6 +19,11 @@ Wazuh agent
 - `#14497 <https://github.com/wazuh/wazuh/issues/14497>`_ An obsolete Windows Audit SCA policy file is removed. 
 
 
+Wazuh Kibana plugin
+^^^^^^^^^^^^^^^^^^^
+
+- Support for Kibana 7.17.6. 
+
 Wazuh Splunk app
 ^^^^^^^^^^^^^^^^
 
