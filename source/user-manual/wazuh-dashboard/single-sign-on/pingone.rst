@@ -196,6 +196,7 @@ Wazuh indexer configuration
       To configure the ``roles_mapping.yml`` file, map the Group (Role) that is in PingOne to the ``all_access`` role in Wazuh indexer:
 
       .. code-block:: console
+         :emphasize-lines: 6
 
          all_access:
             reserved: false

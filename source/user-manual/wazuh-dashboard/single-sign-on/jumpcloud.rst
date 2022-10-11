@@ -51,15 +51,15 @@ Jumpcloud Configuration
 
    Under the User Authentication section, go to **SSO**, select **(+)**  and click on **Custom SAML App** and add a **Display Label**.
 
-    .. thumbnail:: /images/single-sign-on/jumpcloud/04-go-to-SSO.png
-        :title: Under the User Authentication section, go to SSO 
-        :align: center
-        :width: 80%
-
     .. thumbnail:: /images/single-sign-on/jumpcloud/05-click-on-custom-saml.png
         :title: Click on Custom SAML App and add a Display Label
         :align: center
-        :width: 80%        
+        :width: 80%    
+
+    .. thumbnail:: /images/single-sign-on/jumpcloud/04-go-to-SSO.png
+        :title: Under the User Authentication section, go to SSO 
+        :align: center
+        :width: 80%    
 
    Complete the SSO tab with the appropriate information.
 
@@ -117,40 +117,40 @@ Wazuh indexer configuration
 
       To configure the ``config.yml`` file, the ``order`` in ``basic_internal_auth_domain`` must be set to ``0``, and the ``challenge`` flag must be set to ``false``. Include a ``saml_auth_domain`` configuration under the ``authc`` section similar to the following:
 
-         .. code-block:: console
-            :emphasize-lines: 7,10,22,23,25,26,27,28
+      .. code-block:: console
+         :emphasize-lines: 7,10,22,23,25,26,27,28,29
 
-               authc:
-            ...
-                  basic_internal_auth_domain:
-                  description: "Authenticate via HTTP Basic against internal users database"
-                  http_enabled: true
-                  transport_enabled: true
-                  order: 0
-                  http_authenticator:
-                     type: "basic"
-                     challenge: false
-                  authentication_backend:
-                     type: "intern"
-                  saml_auth_domain:
-                  http_enabled: true
-                  transport_enabled: true
-                  order: 1
-                  http_authenticator:
-                     type: saml
-                     challenge: true
-                     config:
-                        idp:
-                        metadata_file: “/usr/share/wazuh-indexer/plugins/opensearch-security/securityconfig/metadata_jumpcloud.xml”
-                        entity_id: wazuh
-                        sp:
-                        entity_id: wazuh-saml
-                        forceAuthn: true
-                        kibana_url: https://<WAZUH_DASHBOARD_URL>
-                        roles_key: Roles
-                        exchange_key: '...'
-                  authentication_backend:
-                     type: noop
+            authc:
+         ...
+               basic_internal_auth_domain:
+               description: "Authenticate via HTTP Basic against internal users database"
+               http_enabled: true
+               transport_enabled: true
+               order: 0
+               http_authenticator:
+                  type: "basic"
+                  challenge: false
+               authentication_backend:
+                  type: "intern"
+               saml_auth_domain:
+               http_enabled: true
+               transport_enabled: true
+               order: 1
+               http_authenticator:
+                  type: saml
+                  challenge: true
+                  config:
+                     idp:
+                     metadata_file: “/usr/share/wazuh-indexer/plugins/opensearch-security/securityconfig/metadata_jumpcloud.xml”
+                     entity_id: wazuh
+                     sp:
+                     entity_id: wazuh-saml
+                     forceAuthn: true
+                     kibana_url: https://<WAZUH_DASHBOARD_URL>
+                     roles_key: Roles
+                     exchange_key: '...'
+               authentication_backend:
+                  type: noop
 
       Ensure to change the following parameters to their corresponding value:
 
@@ -211,6 +211,7 @@ Wazuh indexer configuration
             # export JAVA_HOME=/usr/share/wazuh-indexer/jdk/ && bash /usr/share/wazuh-indexer/plugins/opensearch-security/tools/securityadmin.sh -f /usr/share/wazuh-indexer/plugins/opensearch-security/securityconfig/roles_mapping.yml -icl -key /etc/wazuh-indexer/certs/admin-key.pem -cert /etc/wazuh-indexer/certs/admin.pem -cacert /etc/wazuh-indexer/certs/root-ca.pem -h localhost -nhnv      
 
       The "-h" flag is used to specify the hostname or the IP address of your Wazuh indexer node.
+      
       The command output must be similar to the following:
        
          .. code-block:: console

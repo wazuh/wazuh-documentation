@@ -43,7 +43,7 @@ Google Configuration
       :align: center
       :width: 80%
    
-   After this, select CONTINUE and configure the following:
+   After this, select **CONTINUE** and configure the following:
 
    - **ACS URL**: ``https://<WAZUH_DASHBOARD_URL>/_opendistro/_security/saml/acs``. Replace the Wazuh dashboard URL field with the appropriate URL or IP address.
    - **Entity ID**: Use any name here. This will be the ``sp.entity_id`` in the Wazuh indexer configuration file. In our case, the value is ``wazuh-saml``.
@@ -252,6 +252,7 @@ Wazuh dashboard configuration
    To change the logout configuration, edit the ``path: /auth/logout`` section of the ``route.js`` file. The file path is ``/usr/share/wazuh-dashboard/plugins/securityDashboards/server/auth/types/saml/routes.js``. It is recommended to back up this file before the configuration is made. The configuration must be similar to this:
 
    .. code-block:: console
+      :emphasize-lines: 3
 
       ...
          this.router.get({

@@ -157,14 +157,14 @@ Wazuh indexer configuration
 
    The file path to the Wazuh indexer security configuration is ``/usr/share/wazuh-indexer/plugins/opensearch-security/securityconfig/``. The files to configure are ``config.yml`` and ``roles_mapping.yml``. It is recommended to back up these files before the configuration is carried out.
 
-   a. ``config.yml``
+   #. ``config.yml``
 
       To configure the ``config.yml`` file, the ``order`` in ``basic_internal_auth_domain`` must be set to ``0``, and the ``challenge`` flag must be set to ``false``. Include a ``saml_auth_domain`` configuration under the ``authc`` section similar to the following:
-      authc:
 
       .. code-block:: console
-         :emphasize-lines: 6,9,21,22,24,25
+         :emphasize-lines: 7,10,22,23,25,26,27,28,29
 
+            authc:
          ...
                basic_internal_auth_domain:
                description: "Authenticate via HTTP Basic against internal users database"
@@ -194,6 +194,7 @@ Wazuh indexer configuration
                      exchange_key: '...'
                authentication_backend:
                   type: noop
+
 
       The ``roles_key`` must be the same value that we used in the Azure AD configuration.
 
@@ -227,7 +228,7 @@ Wazuh indexer configuration
          Done with success
 
 
-   b. ``roles_mapping.yml``
+   #. ``roles_mapping.yml``
 
       We configure the ``roles_mapping.yml`` file to map the role we have in Azure AD to the appropriate Wazuh indexer role. In this case, we map the ``Wazuh_role`` in Azure AD to the ``all_access`` role in Wazuh indexer:
 
