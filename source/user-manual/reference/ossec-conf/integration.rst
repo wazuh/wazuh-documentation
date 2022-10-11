@@ -15,7 +15,7 @@ integration
     <integration>
     </integration>
 
-This configures the manager to :ref:`connect Wazuh to external APIs <manual_integration>` and alerting tools such as Slack, PagerDuty and VirusTotal.
+This configures the manager to :ref:`connect Wazuh to external APIs <manual_integration>` and alerting tools such as Slack, PagerDuty, VirusTotal and Shuffle.
 
 Options
 -------
@@ -35,11 +35,11 @@ name
 
 This indicates the service to integrate with.
 
-+--------------------+---------------------------------------------------------------------+
-| **Default value**  | n/a                                                                 |
-+--------------------+---------------------------------------------------------------------+
-| **Allowed values** | slack, pagerduty, virustotal, any string that begins with 'custom-' |
-+--------------------+---------------------------------------------------------------------+
++--------------------+------------------------------------------------------------------------------+
+| **Default value**  | n/a                                                                          |
++--------------------+------------------------------------------------------------------------------+
+| **Allowed values** | slack, pagerduty, virustotal, shuffle, any string that begins with 'custom-' |
++--------------------+------------------------------------------------------------------------------+
 
 .. note::
   In the case of custom external integration, name must begin with ``custom-`` for example: ``custom-myintegration``. Read the `How to integrate external software using Integrator <https://wazuh.com/blog/how-to-integrate-external-software-using-integrator//>`_ document for more information.
@@ -47,13 +47,13 @@ This indicates the service to integrate with.
 hook_url
 ^^^^^^^^
 
-This is the URL provided by Slack when integration is enabled on the Slack side. This is **mandatory for Slack.**
+This is the URL provided by Slack when integration is enabled on the Slack side. This is **mandatory for Slack.** As of version 4.4, this field is also **required for the Shuffle integration.**
 
-+--------------------+-----------+
-| **Default value**  | n/a       |
-+--------------------+-----------+
-| **Allowed values** | Slack URL |
-+--------------------+-----------+
++--------------------+------------------------+
+| **Default value**  | n/a                    |
++--------------------+------------------------+
+| **Allowed values** | Slack URL, Shuffle URL |
++--------------------+------------------------+
 
 api_key
 ^^^^^^^
@@ -124,7 +124,7 @@ This writes the alert file in the JSON format. The Integrator makes use this fil
 | **Allowed values** | json                                                      |
 +--------------------+-----------------------------------------------------------+
 
-.. note:: This option must be set to ``json`` for Slack and VirusTotal integrations.
+.. note:: This option must be set to ``json`` for Slack, VirusTotal and Shuffle integrations.
 
 max_log
 ^^^^^^^
@@ -164,6 +164,14 @@ Configuration example
     <name>virustotal</name>
     <api_key>API_KEY</api_key> <!-- Replace with your VirusTotal API key -->
     <group>syscheck</group>
+    <alert_format>json</alert_format>
+  </integration>
+
+  <!-- Integration with Shuffle -->
+  <integration>
+    <name>shuffle</name>
+    <hook_url>http://IP:3001/api/v1/hooks/HOOK_ID</hook_url> <!-- Replace with your Shuffle hook URL -->
+    <level>3</level>
     <alert_format>json</alert_format>
   </integration>
 
