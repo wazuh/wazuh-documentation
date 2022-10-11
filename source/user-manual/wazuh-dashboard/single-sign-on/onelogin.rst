@@ -225,7 +225,7 @@ Wazuh indexer configuration
       To configure the ``roles_mapping.yml`` file, we map the ``Department`` field from step 3 to the admin role on Wazuh indexer. In this case, ``wazuh-admin``:
 
       .. code-block:: console 
-
+         
          ...
          all_access:
             reserved: false

@@ -36,7 +36,7 @@ Azure Active Directory Configuration
 
 #. Create a role for your application.
 
-   Go back to Azure Active Directory and click on App registrations:
+   Go back to **Azure Active Directory** and click on **App registrations**:
 
    .. thumbnail:: /images/single-sign-on/azure-active-directory/02-click-on-app-registrations.png
       :title: Click on App registrations
@@ -50,7 +50,7 @@ Azure Active Directory Configuration
       :align: center
       :width: 80%
 
-   Add a new role to your application's Manifest:
+   Add a new role to your application's **Manifest**:
 
     .. code-block:: console
 
@@ -81,7 +81,7 @@ Azure Active Directory Configuration
 
 #. Assign a user to the app.
 
-   In **Azure Active Directory**, go to **Enterprise applications** > **<YOUR APPLICATION>** > **Assign users and groups** (or **Users and Groups** in the panel to the left):
+   In **Azure Active Directory**, go to **Enterprise applications**, select your application and then click on **Assign users and groups** (or **Users and Groups** in the panel to the left):
 
    .. thumbnail:: /images/single-sign-on/azure-active-directory/05-assign-a-user-to-the-app.png
       :title: Assign a user to the app
@@ -97,7 +97,7 @@ Azure Active Directory Configuration
 
 #. Configure Single sign-on.
 
-   Go to **Enterprise applications** > **<YOUR APPLICATION>** > **Set up single sign on > SAML**.
+   Go to **Enterprise applications** , select your application and then click on **Set up single sign on > SAML**.
 
    .. thumbnail:: /images/single-sign-on/azure-active-directory/07-configure-single-sign-on.png
       :title: Configure Single sign-on
@@ -135,7 +135,7 @@ Azure Active Directory Configuration
 
 #. Note the necessary parameters.
 
-   Still in the same menu **Enterprise applications** > **<YOUR APPLICATION>** > **Single sign-on**, let's note some parameters that will be used in the Wazuh indexer configuration.
+   Still in the same menu **Enterprise applications**, select your application and then click on **Single sign-on**. Let's note some parameters that will be used in the Wazuh indexer configuration.
 
    - In option **3 SAML Signing Certificate**, the **App Federation Metadata Url** will be the ``idp.metadata_url`` in the Wazuh indexer configuration file.
 
@@ -208,7 +208,6 @@ Wazuh indexer configuration
 
       The command output must be similar to the following:
 
-
       .. code-block:: console
          :class: output
 
@@ -233,6 +232,7 @@ Wazuh indexer configuration
       We configure the ``roles_mapping.yml`` file to map the role we have in Azure AD to the appropriate Wazuh indexer role. In this case, we map the ``Wazuh_role`` in Azure AD to the ``all_access`` role in Wazuh indexer:
 
       .. code-block:: console
+         :emphasize-lines: 6
 
          all_access:
          reserved: false
@@ -253,6 +253,7 @@ Wazuh indexer configuration
       The command output must be similar to the following:
 
       .. code-block:: console
+         :class: output        
 
          Security Admin v7
          Will connect to localhost:9300 ... done
@@ -288,12 +289,13 @@ Wazuh dashboard configuration
    To change the logout configuration, edit the ``path: /auth/logout`` section of the ``route.js`` file. The file path is ``/usr/share/wazuh-dashboard/plugins/securityDashboards/server/auth/types/saml/routes.js``. It is recommended to back up this file before the configuration is made. The configuration must be similar to this:
 
     .. code-block:: console  
+      :emphasize-lines: 3
 
-      ...
-         this.router.get({
-            path: `/logout`,
-            validate: false
-      ...
+         ...
+            this.router.get({
+               path: `/logout`,
+               validate: false
+         ...
 
 #. Restart the Wazuh dashboard service using this command:
 

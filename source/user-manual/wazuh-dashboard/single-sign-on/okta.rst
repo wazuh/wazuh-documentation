@@ -55,11 +55,11 @@ Okta Configuration
 
 #. Add the new user to the new group.
    
-   Navigate to **Directory** > **Groups** > **<YOUR GROUP>**. To add a user to the group, click on **Assign People** and add the user to the group created.
+   Navigate to **Directory** > **Groups** > **<YOUR_GROUP>**. To add a user to the group, click on **Assign People** and add the user to the group created.
 
 
      .. thumbnail:: /images/single-sign-on/okta/05-navigate-to-directory-groups.png
-        :title: Navigate to Directory - Groups - <YOUR GROUP>
+        :title: Navigate to Directory - Groups - <YOUR_GROUP>
         :align: center
         :width: 80%   
 
@@ -114,10 +114,10 @@ Okta Configuration
 
 #. Add the new app to the new group.
 
-   Navigate to **Directory** > **Groups** > **<YOUR GROUP>**. Click on **Applications** and select **Assign Applications**. From here, assign the app created in step 5 and click on **Done** to save the changes.
+   Navigate to **Directory** > **Groups** > **<YOUR_GROUP>**. Click on **Applications** and select **Assign Applications**. From here, assign the app created in step 5 and click on **Done** to save the changes.
    
      .. thumbnail:: /images/single-sign-on/okta/12-navigate-to-directory-groups.png
-        :title: Navigate to Directory - Groups - <YOUR GROUP>
+        :title: Navigate to Directory - Groups - <YOUR_GROUP>
         :align: center
         :width: 80%
 
@@ -134,7 +134,7 @@ Okta Configuration
    - ``roles_key``
    - ``kibana_url``
 
-   To obtain the remaining parameters, navigate to **Applications** > **Applications** > **<YOUR APP>** > **Sign On**. 
+   To obtain the remaining parameters, navigate to **Applications** > **Applications**, select your app and click **Sign On**. 
 
    Under **SAML Signing Certificates**, select **View IdP metadata** of the active certificate. This will open in a new tab. Copy the URL as this will be the ``idp.metadata_url``.
 
@@ -143,7 +143,7 @@ Okta Configuration
    The **X.509 Certificate** will be used as the ``exchange_key``:
 
      .. thumbnail:: /images/single-sign-on/okta/14-navigate-to-applications.png
-        :title: Navigate to Applications - Applications - <YOUR APP> - Sign On
+        :title: Navigate to Applications - Applications - <YOUR_APP> - Sign On
         :align: center
         :width: 80%
 
