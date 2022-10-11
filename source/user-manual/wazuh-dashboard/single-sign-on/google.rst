@@ -26,10 +26,10 @@ Google Configuration
 #. Go to https://admin.google.com/ac/apps/unified and sign in with your Google Admin account.
 #. Create an app with **Add custom SAML app**.
 
-   Go to **Apps** → **Website and mobile apps** →  **Add App**, then **Add custom SAML app**. Enter an **App name** and click **CONTINUE**.
+   Go to **Apps** > **Website and mobile apps** > **Add App**, then **Add custom SAML app**. Enter an **App name** and click **CONTINUE**.
 
    .. thumbnail:: /images/single-sign-on/google/01-go-to-apps.png
-      :title: Go to Apps → Website and mobile apps
+      :title: Go to Apps > Website and mobile apps
       :align: center
       :width: 80%
 

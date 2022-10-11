@@ -22,7 +22,7 @@ OneLogin Configuration
 #. Add the OneLogin extension in your browser.
 #. Create a new user. 
 
-   Log in to **OneLogin** web console, select **Administration** → **Users** → **New User**
+   Log in to **OneLogin** web console, select **Administration** > **Users** > **New User**
 
       .. thumbnail:: /images/single-sign-on/onelogin/01-log-in-to-onelogin-web-console.png
          :title: Log in to OneLogin web console
@@ -45,7 +45,7 @@ OneLogin Configuration
 
 #. Create a new app using the **SAML Custom Connector (Advanced)** template and configure the SAML settings.
 
-   Go to **Applications** tab → **Applications** and then click on **Add app**.
+   Go to **Applications** tab > **Applications** and then click on **Add app**.
 
       .. thumbnail:: /images/single-sign-on/onelogin/04-create-a-new-app.png
          :title: Create a new app using the SAML Custom Connector (Advanced)
@@ -105,7 +105,7 @@ OneLogin Configuration
 
 #. Get the ``metada_onelogin.xml`` file and ``X.509 certificate`` from the application.
 
-   Go to **Applications**, →  **Applications** then select the **Wazuh** app. Click on **More Actions** and then select **SAML Metadata**.
+   Go to **Applications**, >  **Applications** then select the **Wazuh** app. Click on **More Actions** and then select **SAML Metadata**.
 
       .. thumbnail:: /images/single-sign-on/onelogin/10-click-on-more-actions.png
          :title: Click on More Actions and then select SAML Metadata

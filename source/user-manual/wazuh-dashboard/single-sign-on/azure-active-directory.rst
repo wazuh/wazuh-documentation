@@ -25,7 +25,7 @@ Azure Active Directory Configuration
 #. Go to `Azure Active Directory <https://portal.azure.com/>`_/ and sign in with your Microsoft account.
 #. Create an app in **Azure Active Directory**:
 
-   Go to **Azure Active Directory** → **Enterprise applications** → **New application** and **create your own application**:
+   Go to **Azure Active Directory** > **Enterprise applications** > **New application** and **create your own application**:
 
    Select **Integrate any other application you don't find in the gallery**. Give a name to your application and click **Add**. In our case, we name this application ``wazuh-sso``.
 
@@ -81,7 +81,7 @@ Azure Active Directory Configuration
 
 #. Assign a user to the app.
 
-   In **Azure Active Directory**, go to **Enterprise applications** → **<YOUR APPLICATION>** → **Assign users and groups** (or **Users and Groups** in the panel to the left):
+   In **Azure Active Directory**, go to **Enterprise applications** > **<YOUR APPLICATION>** > **Assign users and groups** (or **Users and Groups** in the panel to the left):
 
    .. thumbnail:: /images/single-sign-on/azure-active-directory/05-assign-a-user-to-the-app.png
       :title: Assign a user to the app
@@ -97,7 +97,7 @@ Azure Active Directory Configuration
 
 #. Configure Single sign-on.
 
-   Go to **Enterprise applications** → **<YOUR APPLICATION>** → **Set up single sign on → SAML**.
+   Go to **Enterprise applications** > **<YOUR APPLICATION>** > **Set up single sign on > SAML**.
 
    .. thumbnail:: /images/single-sign-on/azure-active-directory/07-configure-single-sign-on.png
       :title: Configure Single sign-on
@@ -105,17 +105,17 @@ Azure Active Directory Configuration
       :width: 80%
 
    .. thumbnail:: /images/single-sign-on/azure-active-directory/08-set-up-single-sign-on-SAML.png
-      :title: Set up single sign on → SAML
+      :title: Set up single sign on > SAML
       :align: center
       :width: 80%
 
    .. thumbnail:: /images/single-sign-on/azure-active-directory/09-set-up-single-sign-on-SAML.png
-      :title: Set up single sign on → SAML 
+      :title: Set up single sign on > SAML 
       :align: center
       :width: 80%
 
    .. thumbnail:: /images/single-sign-on/azure-active-directory/10-set-up-single-sign-on-SAML.png
-      :title: Set up single sign on → SAML
+      :title: Set up single sign on > SAML
       :align: center
       :width: 80%
 
@@ -135,7 +135,7 @@ Azure Active Directory Configuration
 
 #. Note the necessary parameters.
 
-   Still in the same menu **Enterprise applications** → **<YOUR APPLICATION>** → **Single sign-on**, let's note some parameters that will be used in the Wazuh indexer configuration.
+   Still in the same menu **Enterprise applications** > **<YOUR APPLICATION>** > **Single sign-on**, let's note some parameters that will be used in the Wazuh indexer configuration.
 
    - In option **3 SAML Signing Certificate**, the **App Federation Metadata Url** will be the ``idp.metadata_url`` in the Wazuh indexer configuration file.
 

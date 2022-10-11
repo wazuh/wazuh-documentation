@@ -23,9 +23,9 @@ PingOne Configuration
 #. Go to `PingOne <https://admin.pingone.com/>`_ and sign in with your Ping Identity account.
 #. Create an application in Connections
 
-    Navigate to **Connections** → **Applications** → **Add Application** and give it a name. In our case, the name is ``wazuh-sso``.
+    Navigate to **Connections** > **Applications** > **Add Application** and give it a name. In our case, the name is ``wazuh-sso``.
 
-    Proceed to the **Choose Application Type** section, select  **SAML Application** → **Configure**.
+    Proceed to the **Choose Application Type** section, select  **SAML Application** > **Configure**.
 
         .. thumbnail:: /images/single-sign-on/pingone/01-proceed-to-the-choose-application-type-section.png
             :title: Proceed to the Choose Application Type section
@@ -69,10 +69,10 @@ PingOne Configuration
 
 #. Create a group and assign users
  
-    Navigate to **Identities** → **Groups**, and click on the **+** sign. Select the name of the **Group**, in this case, ``Role``.
+    Navigate to **Identities** > **Groups**, and click on the **+** sign. Select the name of the **Group**, in this case, ``Role``.
 
         .. thumbnail:: /images/single-sign-on/pingone/05-navigate-to-identities-groups.png
-            :title: Navigate to Identities → Groups
+            :title: Navigate to Identities > Groups
             :align: center
             :width: 80%
 

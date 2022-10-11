@@ -22,7 +22,7 @@ Okta Configuration
 #. Create an account on Okta. Request a free trial if you don't have a paid license.
 #. Create a new user: 
 
-    To create a new user, from your okta admin console page, navigate to **Directory** → **People**   
+    To create a new user, from your okta admin console page, navigate to **Directory** > **People**   
 
     .. thumbnail:: /images/single-sign-on/okta/01-navigate-to-directory-people.png
         :title: Navigate to Directory - People
@@ -44,7 +44,7 @@ Okta Configuration
          
 #. Create a new group.
     
-    To create a new group where the user will be added, navigate to **Directory** → **Groups** and add a group.
+    To create a new group where the user will be added, navigate to **Directory** > **Groups** and add a group.
    
      .. thumbnail:: /images/single-sign-on/okta/04-navigate-to-directory-groups.png
         :title: Navigate to directory groups
@@ -55,7 +55,7 @@ Okta Configuration
 
 #. Add the new user to the new group.
    
-   Navigate to **Directory** → **Groups** → **<YOUR GROUP>**. To add a user to the group, click on **Assign People** and add the user to the group created.
+   Navigate to **Directory** > **Groups** > **<YOUR GROUP>**. To add a user to the group, click on **Assign People** and add the user to the group created.
 
 
      .. thumbnail:: /images/single-sign-on/okta/05-navigate-to-directory-groups.png
@@ -114,7 +114,7 @@ Okta Configuration
 
 #. Add the new app to the new group.
 
-   Navigate to **Directory** → **Groups** → **<YOUR GROUP>**. Click on **Applications** and select **Assign Applications**. From here, assign the app created in step 5 and click on **Done** to save the changes.
+   Navigate to **Directory** > **Groups** > **<YOUR GROUP>**. Click on **Applications** and select **Assign Applications**. From here, assign the app created in step 5 and click on **Done** to save the changes.
    
      .. thumbnail:: /images/single-sign-on/okta/12-navigate-to-directory-groups.png
         :title: Navigate to Directory - Groups - <YOUR GROUP>
@@ -134,7 +134,7 @@ Okta Configuration
    - ``roles_key``
    - ``kibana_url``
 
-   To obtain the remaining parameters, navigate to **Applications** → **Applications** → **<YOUR APP>** → **Sign On**. 
+   To obtain the remaining parameters, navigate to **Applications** > **Applications** > **<YOUR APP>** > **Sign On**. 
 
    Under **SAML Signing Certificates**, select **View IdP metadata** of the active certificate. This will open in a new tab. Copy the URL as this will be the ``idp.metadata_url``.
 
