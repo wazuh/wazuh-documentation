@@ -67,7 +67,7 @@ PingOne Configuration
 
     Click on **Required** checkbox, and click on **save**.
 
-#. Create a group and assign users
+#. Create a group and assign users.
  
     Navigate to **Identities** > **Groups**, and click on the **+** sign. Select the name of the **Group**, in this case, ``Role``.
 
@@ -107,3 +107,150 @@ PingOne Configuration
             :title: Take note of parameters from the configuration page
             :align: center
             :width: 80%
+
+
+Wazuh indexer configuration
+---------------------------
+
+#. Configure Wazuh indexer security configuration files.
+
+   The file path to the Wazuh indexer security configuration is ``/usr/share/wazuh-indexer/plugins/opensearch-security/securityconfig/``. The files to configure are ``config.yml`` and ``roles_mapping.yml``. It is recommended to back up these files before the configuration is carried out.
+
+   #. ``config.yml``
+   
+      To configure the ``config.yml`` file, the ``order`` in ``basic_internal_auth_domain`` must be set to ``0``, and the ``challenge`` flag must be set to ``false``.  Include a ``saml_auth_domain`` configuration under the ``authc`` section similar to the following:
+  
+      .. code-block:: console
+         :emphasize-lines: 7,10,22,23,25,26,27,28
+
+            authc:
+         ...
+               basic_internal_auth_domain:
+               description: "Authenticate via HTTP Basic against internal users database"
+               http_enabled: true
+               transport_enabled: true
+               order: 0
+               http_authenticator:
+                  type: "basic"
+                  challenge: false
+               authentication_backend:
+                  type: "intern"
+               saml_auth_domain:
+               http_enabled: true
+               transport_enabled: false
+               order: 1
+               http_authenticator:
+                  type: saml
+                  challenge: true
+                  config:
+                     idp:
+                     metadata_file: “/usr/share/wazuh-indexer/plugins/opensearch-security/securityconfig/Google_Metadata.xml”
+                     entity_id: “https://accounts.google.com/o/saml2?idpid=C02…”
+                     sp:
+                     entity_id: wazuh-saml
+                     kibana_url: https://<WAZUH_DASHBOARD_URL>
+                     roles_key: Roles
+                     exchange_key: 'X509Certificate'
+               authentication_backend:
+                  type: noop
+
+      Ensure to change the following parameters to their corresponding value:
+
+      - ``idp.metadata_file``
+      - ``idp.entity_id``
+      - ``sp.entity_id``
+      - ``kibana_url``
+      - ``roles_key``
+      - ``exchange_key``
+
+      After modifying the ``config.yml`` file, it is necessary to use the ``securityadmin`` script to load the configuration changes with the following command:
+
+      .. code-block:: console
+
+         # export JAVA_HOME=/usr/share/wazuh-indexer/jdk/ && bash /usr/share/wazuh-indexer/plugins/opensearch-security/tools/securityadmin.sh -f /usr/share/wazuh-indexer/plugins/opensearch-security/securityconfig/config.yml -icl -key /etc/wazuh-indexer/certs/admin-key.pem -cert /etc/wazuh-indexer/certs/admin.pem -cacert /etc/wazuh-indexer/certs/root-ca.pem -h localhost -nhnv
+
+      The "-h" flag is used to specify the hostname or the IP address of the Wazuh indexer node.
+
+      The command output must be similar to the following:
+
+      .. code-block:: console
+         :class: output
+
+         Will connect to localhost:9300 ... done
+         Connected as CN=admin,OU=Wazuh,O=Wazuh,L=California,C=US
+         OpenSearch Version: 1.2.4
+         OpenSearch Security Version: 1.2.4.0
+         Contacting opensearch cluster 'opensearch' and wait for YELLOW clusterstate ...
+         Clustername: wazuh-cluster
+         Clusterstate: GREEN
+         Number of nodes: 1
+         Number of data nodes: 1
+         .opendistro_security index already exists, so we do not need to create one.
+         Populate config from /home/wazuh
+         Will update '_doc/config' with /usr/share/wazuh-indexer/plugins/opensearch-security/securityconfig/config.yml 
+            SUCC: Configuration for 'config' created or updated
+         Done with success
+
+   #. ``roles_mapping.yml``
+   
+      To configure the ``roles_mapping.yml`` file, map the Group (Role) that is in PingOne to the ``all_access`` role in Wazuh indexer:
+
+      .. code-block:: console
+
+         all_access:
+            reserved: false
+            hidden: false
+            backend_roles:
+            - "admin"
+            - "Role"
+            description: "Maps admin to all_access"
+
+      After modifying the ``roles_mapping.yml`` file, it is necessary to use the ``securityadmin`` script to load the configuration changes with the following command:
+
+      .. code-block:: console
+
+         # export JAVA_HOME=/usr/share/wazuh-indexer/jdk/ && bash /usr/share/wazuh-indexer/plugins/opensearch-security/tools/securityadmin.sh -f /usr/share/wazuh-indexer/plugins/opensearch-security/securityconfig/roles_mapping.yml -icl -key /etc/wazuh-indexer/certs/admin-key.pem -cert /etc/wazuh-indexer/certs/admin.pem -cacert /etc/wazuh-indexer/certs/root-ca.pem -h localhost -nhnv
+
+      The "-h" flag is used to specify the hostname or the IP address of your Wazuh indexer node.
+
+      The command output must be similar to the following:
+
+      .. code-block:: console
+         :class: output
+            
+         Security Admin v7
+         Will connect to localhost:9300 ... done
+         Connected as CN=admin,OU=Wazuh,O=Wazuh,L=California,C=US
+         OpenSearch Version: 1.2.4
+         OpenSearch Security Version: 1.2.4.0
+         Contacting opensearch cluster 'opensearch' and wait for YELLOW clusterstate ...
+         Clustername: wazuh-cluster
+         Clusterstate: GREEN
+         Number of nodes: 1
+         Number of data nodes: 1
+         .opendistro_security index already exists, so we do not need to create one.
+         Populate config from /home/wazuh
+         Will update '_doc/rolesmapping' with /usr/share/wazuh-indexer/plugins/opensearch-security/securityconfig/roles_mapping.yml 
+            SUCC: Configuration for 'rolesmapping' created or updated
+         Done with success
+
+Wazuh dashboard configuration
+-----------------------------
+
+#. Configure the Wazuh dashboard configuration file.
+
+   Add these configurations to the ``opensearch_dashboards.yml``, the file path is ``/etc/wazuh-dashboard/opensearch_dashboards.yml``. It is recommended to back up this file before the configuration is made.
+
+   .. code-block:: console
+
+      opensearch_security.auth.type: "saml"
+      server.xsrf.whitelist: ["/_plugins/_security/saml/acs", "/_plugins/_security/saml/logout", "/_opendistro/_security/saml/acs", "/_opendistro/_security/saml/logout", "/_opendistro/_security/saml/acs/idpinitiated"]
+
+
+#. Restart the Wazuh dashboard service using this command:
+
+    .. include:: /_templates/common/restart_dashboard.rst
+
+#. Test the configuration.
+ 
+   To test the PingOne SSO configuration, go to your Wazuh dashboard URL and log in with your Ping One account.
