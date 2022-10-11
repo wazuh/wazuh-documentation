@@ -114,7 +114,7 @@ This is an example configuration for the Shuffle integration:
    </integration>
 
 .. note::
-   The configuration is intended for a Shuffle deployment in a separate Docker environment. If all systems are on the same Docker network, the use of port ``3001`` in the ``<hook url>`` section should not take place.
+   The Shuffle default installation is done using `docker-compose`. If the Wazuh installation is done on the same network as Shuffle, port ``3001`` should not be used in the ``<hook url>`` field.
 
 Custom integration
 ------------------
