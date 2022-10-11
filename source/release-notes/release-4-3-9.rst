@@ -16,7 +16,7 @@ This release includes new features or enhancements as the following:
 Wazuh agent
 ^^^^^^^^^^^
 
-- `#14497 <https://github.com/wazuh/wazuh/issues/14497>`_ Removed obsolete Windows Audit SCA policy file. 
+- `#14497 <https://github.com/wazuh/wazuh/issues/14497>`_ An obsolete Windows Audit SCA policy file is removed. 
 
 
 Wazuh Splunk app
@@ -27,9 +27,9 @@ Wazuh Splunk app
 Other
 ^^^^^
 
-- `#15067 <https://github.com/wazuh/wazuh/pull/15067>`_ Updated external protobuf python dependency to 3.19.6. 
+- `#15067 <https://github.com/wazuh/wazuh/pull/15067>`_ The external `protobuf` Python dependency is updated to 3.19.6. 
 
-
+ 
 Resolved issues
 ---------------
 
