@@ -145,6 +145,10 @@ Enable or disable the ``wazuh-monitoring`` index creation and/or visualization:
 | **Allowed values** | true,false,worker |
 +--------------------+-------------------+
 
+.. warning::
+
+    In the user interface only ``true`` or ``false`` can be selected. If you want to use ``worker`` you must edit the configuration file directly.
+
 wazuh.monitoring.frequency
 ^^^^^^^^^^^^^^^^^^^^^^^^^^
 

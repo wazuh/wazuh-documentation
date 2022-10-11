@@ -32,7 +32,7 @@ Wazuh dashboard white-labeling feature allows to replace Wazuh logos with custom
     +--------------------+----------------------------+
     | Allowed format     | jpeg, jpg, png, svg        |
     +--------------------+----------------------------+
-    | Default value      | _empty_                    |
+    | Default value      | ''                         |
     +--------------------+----------------------------+
     | Maximum file size  | 1MB                        |
     +--------------------+----------------------------+
@@ -45,7 +45,7 @@ Wazuh dashboard white-labeling feature allows to replace Wazuh logos with custom
     +--------------------+----------------------------+
     | Allowed format     | jpeg, jpg, png, svg        |
     +--------------------+----------------------------+
-    | Default value      | _empty_                    |
+    | Default value      | ''                         |
     +--------------------+----------------------------+
     | Maximum file size  | 1MB                        |
     +--------------------+----------------------------+
@@ -58,7 +58,7 @@ Wazuh dashboard white-labeling feature allows to replace Wazuh logos with custom
     +--------------------+----------------------------+
     | Allowed format     | jpeg, jpg, png, svg        |
     +--------------------+----------------------------+
-    | Default value      | _empty_                    |
+    | Default value      | ''                         |
     +--------------------+----------------------------+
     | Maximum file size  | 1MB                        |
     +--------------------+----------------------------+
@@ -71,75 +71,85 @@ Wazuh dashboard white-labeling feature allows to replace Wazuh logos with custom
     +--------------------+----------------------------+
     | Allowed format     | jpeg, jpg, png, svg        |
     +--------------------+----------------------------+
-    | Default value      | _empty_                    |
+    | Default value      | ''                         |
     +--------------------+----------------------------+
     | Maximum file size  | 1MB                        |
     +--------------------+----------------------------+
 
 
-**customization.reports.footer**
-
- 		Set the footer of the reports. To use an empty footer, type a space in the field ``&nbsp;``.
-
-    +--------------------+----------------------+
-    | Allowed characters | Printable characters |
-    +--------------------+----------------------+
-    | Default value      | _empty_              |
-    +--------------------+----------------------+
-
-
 **customization.reports.header**
 
-    Set the header of the reports. To use an empty header, type a space in the field ``&nbsp;``.
+    Set the header of the reports. To use an empty header, type a space " " in the field. If this field is empty, the default header will be used.
 
     +--------------------+------------------------+
     | Allowed characters | Printable characters   |
     +--------------------+------------------------+
-    | Default value      | _empty_                |
+    | Default value      | ''                     |
+    +--------------------+------------------------+
+    | Value limit        | 4 lines                |
     +--------------------+------------------------+
 
- 
 
-Configuration
+**customization.reports.footer**
+
+ 		Set the footer of the reports. To use an empty footer, type a space " " in the field. If this field is empty, the default footer will be used.
+
+    +--------------------+----------------------+
+    | Allowed characters | Printable characters |
+    +--------------------+----------------------+
+    | Default value      | ''                   |
+    +--------------------+----------------------+
+    | Value limit        | 2 lines              |
+    +--------------------+----------------------+
+
+
+
+PDF reports
 -------------
 
-To enable multi-tenancy, follow the instructions below. 
+To customize the PDF reports, you can edit **customization.reports.header** and **customization.reports.footer** in the **Configuration** tab of the app.
 
-#. Edit the ``/etc/wazuh-dashboard/opensearch_dashboards.yml`` configuration file and make the following changes: 
- 
-   - Set the ``opensearch_security.multitenancy.enabled`` setting to `true`. 
+- ``customization.reports.header`` has a limit of 4 lines and is printed in the top right corner of the PDF reports.
 
-   - Add the following line: ``opensearch_security.multitenancy.tenants.preferred: ["Global", "Private"]``. 
+.. thumbnail:: ../../images/kibana-app/features/white-labeling/custom-header.png
+  :align: center
+  :width: 100%
 
-     This setting lets you change ordering in the Tenants tab of the Wazuh dashboard. By default, the list starts with global and private (if enabled) and then proceeds alphabetically. You can add tenants here to move them to the top of the list.
 
-    .. code-block:: yaml
-      :emphasize-lines: 2,3
+- ``customization.reports.footer`` has a limit of 2 lines and is printed in the bottom left corner of the PDF reports.
 
-       opensearch.requestHeadersWhitelist: ["securitytenant","Authorization"]
-       opensearch_security.multitenancy.enabled: true
-       opensearch_security.multitenancy.tenants.preferred: ["Global", "Private"]
-       opensearch_security.readonly_mode.roles: ["kibana_read_only"]
+.. thumbnail:: ../../images/kibana-app/features/white-labeling/custom-footer.png
+  :align: center
+  :width: 100%
 
-    Additionally, you can edit the ``uiSettings.overrides.defaultRoute`` to set a default tenant, for example, `global`, each time a user logs in. 
 
-    .. code-block:: yaml
-      :emphasize-lines: 1
+- ``customization.reports.logo`` has a limit of 1MB and is printed in the top left corner of the PDF reports.
 
-        uiSettings.overrides.defaultRoute: /app/wazuh?security_tenant=global
+.. thumbnail:: ../../images/kibana-app/features/white-labeling/custom-report-logo.png
+  :align: center
+  :width: 100%
 
-#. Restart the Wazuh dashboard so changes can take effect. 
 
-   .. tabs::
-   
-    .. group-tab:: Systemd
-   
-     .. code-block:: console
-   
-      # systemctl restart wazuh-dashboard
-   
-    .. group-tab:: SysV init
-   
-     .. code-block:: console
-   
-      # service wazuh-dashboard restart
+
+Custom logos
+-------------
+
+- ``customization.logo.app`` has a limit of 1MB and replaces the logo in the Wazuh modules menu located below the breadcrumbs.
+
+.. thumbnail:: ../../images/kibana-app/features/white-labeling/top-menu.png
+  :align: center
+  :width: 100%
+
+
+- ``customization.logo.sidebar`` has a limit of 1MB and replaces the square logo .
+
+.. thumbnail:: ../../images/kibana-app/features/white-labeling/left-nav.png
+  :align: center
+  :width: 100%
+
+- ``customization.logo.healthcheck`` has a limit of 4 lines and is printed in the top right corner of the PDF reports.
+
+.. thumbnail:: ../../images/kibana-app/features/white-labeling/healthcheck.png
+  :align: center
+  :width: 100%
+
