@@ -22,7 +22,7 @@ OneLogin Configuration
 #. Add the OneLogin extension in your browser.
 #. Create a new user. 
 
-   Log in to **OneLogin** web console, select **Administration** > **Users** > **New User**
+   Log in to **OneLogin** web console, select **Administration** > **Users** > **New User**.
 
       .. thumbnail:: /images/single-sign-on/onelogin/01-log-in-to-onelogin-web-console.png
          :title: Log in to OneLogin web console
@@ -147,7 +147,7 @@ Wazuh indexer configuration
 
    #. ``config.yml``
 
-      To configure the ``config.yml`` file, the order in ``basic_internal_auth_domain`` must be set to ``0``, and the ``challenge`` flag must be set to ``false``.  Include a ``saml_auth_domain`` configuration under the ``authc`` section similar to the following:
+      To configure the ``config.yml`` file, the ``order`` in ``basic_internal_auth_domain`` must be set to ``0``, and the ``challenge`` flag must be set to ``false``.  Include a ``saml_auth_domain`` configuration under the ``authc`` section similar to the following:
 
       .. code-block:: console
          :emphasize-lines: 7,10,22,23,25,26,27,28
@@ -204,6 +204,7 @@ Wazuh indexer configuration
       The command output must be similar to the following:
 
       .. code-block:: console
+         :class: output
          
          Will connect to localhost:9300 ... done
          Connected as CN=admin,OU=Wazuh,O=Wazuh,L=California,C=US
@@ -248,6 +249,7 @@ Wazuh indexer configuration
       The command output must be similar to the following:
 
       .. code-block:: console 
+         :class: output
           
          Security Admin v7
          Will connect to localhost:9300 ... done
