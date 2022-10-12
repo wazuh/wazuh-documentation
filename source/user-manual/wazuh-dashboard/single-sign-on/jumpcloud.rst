@@ -8,7 +8,7 @@
 Jumpcloud
 =========
 
-`Jumpcloud <https://jumpcloud.com/>`_, is a Unified Device and Identity Access Management platform that provides services such as Multi-Factor Authentication (MFA), Single Sign-On, password management and cloud directory. In this guide, we integrate the Jumpcloud SSO to authenticate users into the Wazuh platform.
+`Jumpcloud <https://jumpcloud.com/>`__, is a Unified Device and Identity Access Management platform that provides services such as Multi-Factor Authentication (MFA), Single Sign-On, password management and cloud directory. In this guide, we integrate the Jumpcloud SSO to authenticate users into the Wazuh platform.
 
 The single sign-on integration process is divided into three stages.
 
