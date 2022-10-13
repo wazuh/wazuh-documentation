@@ -28,7 +28,6 @@ There are two options for enrolling agents with the Wazuh manager.
 
 #. :doc:`Enrollment via manager API <via-manager-API/index>`: The user requests the key from the manager API and then manually imports it to the agent.
 
-
 Requirements
 ------------
 
@@ -43,6 +42,15 @@ The following has to be in place to ensure the Wazuh agent enrollment is done:
    - 1514/TCP for agent communication.
    - 1515/TCP for enrollment via automatic agent request.
    - 55000/TCP for enrollment via manager API.
+
+.. note::
+
+      You can deploy a new agent from UI. Once you have a Wazuh installation running, open the Wazuh dashboard, go to **Wazuh** > **Agents**, and press the **Deploy new agent** button.
+ 
+   .. thumbnail::  /images/manual/deploy-a-new-agent-from-ui.png
+      :align: center
+      :width: 80%
+      :title: Deploy a new agent from UI
 
 
 Troubleshooting
