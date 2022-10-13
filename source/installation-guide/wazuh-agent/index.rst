@@ -106,6 +106,21 @@ To install a Wazuh agent, select your operating system and follow the instructio
 
 If you are deploying Wazuh in a large environment, with a high number of servers or endpoints, keep in mind that this deployment might be easier using automation tools such as :doc:`Puppet </deployment-options/deploying-with-puppet/index>`, `Chef <https://github.com/wazuh/wazuh-chef>`_, SCCM, or :doc:`Ansible </deployment-options/deploying-with-ansible/installation-guide>`.
 
+You can deploy a new agent from the Wazuh dashboard, you need to go to **Wazuh** > **Agents**, and click on **Deploy new agent**.
+ 
+  .. thumbnail::  /images/manual/deploy-a-new-agent-from-ui.png
+    :align: center
+    :width: 80%
+    :title: Deploy a new agent from UI
+
+Then follow the steps listed in the image below.
+
+  .. thumbnail::  /images/manual/deploy-a-new-agent-from-ui-02.png
+    :align: center
+    :width: 80%
+    :title: Deploy a new agent from UI
+
+
 .. note:: Compatibility between the Wazuh agent and the Wazuh manager is guaranteed when the Wazuh manager version is later than or equal to that of the Wazuh agent.
 
 .. rst-class:: d-none
