@@ -59,16 +59,18 @@ Download the packages and configuration files
 Install Wazuh components from local files
 -----------------------------------------
 
-In the working directory where you placed ``wazuh-offline.tar.gz`` and ``./wazuh-certificates/``, execute the following command to decompress the installation files:
+#. In the working directory where you placed ``wazuh-offline.tar.gz`` and ``./wazuh-certificates/``, execute the following command to decompress the installation files:
 
-.. code-block:: console
+   .. code-block:: console
 
-    # tar xf wazuh-offline.tar.gz
+      # tar xf wazuh-offline.tar.gz
+
+   Check the SHA512 of the decompressed package files in ``wazuh-offline/wazuh-packages/``. You can find the SHA512 checksums in :doc:`/installation-guide/packages-list`.
 
 Installing the Wazuh indexer
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-#.  Run the following command to install the Wazuh indexer.
+#.  Run the following commands to install the Wazuh indexer.
 
     .. tabs::
 
@@ -76,7 +78,8 @@ Installing the Wazuh indexer
 
             .. code-block:: console
         
-                # rpm -ivh ./wazuh-offline/wazuh-packages/wazuh-indexer*.rpm
+               # rpm --import https://packages.wazuh.com/key/GPG-KEY-WAZUH
+               # rpm -ivh ./wazuh-offline/wazuh-packages/wazuh-indexer*.rpm
 
         .. group-tab:: DEB
 
@@ -203,7 +206,6 @@ Installing the Wazuh manager
 
             .. code-block:: console
         
-                # gpg --no-default-keyring --keyring gnupg-ring:/usr/share/keyrings/wazuh.gpg --import ./wazuh-offline/wazuh-files/GPG-KEY-WAZUH && chmod 644 /usr/share/keyrings/wazuh.gpg
                 # dpkg -i ./wazuh-offline/wazuh-packages/wazuh-manager*.deb
 
 #.  Enable and start the Wazuh manager service.
@@ -396,7 +398,7 @@ Testing Wazuh server cluster
 Installing the Wazuh dashboard
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-#.  Run the following command to install the Wazuh dashboard.
+#.  Run the following commands to install the Wazuh dashboard.
 
     .. tabs::
 
@@ -404,6 +406,7 @@ Installing the Wazuh dashboard
 
             .. code-block:: console
        
+                # rpm --import ./wazuh-offline/wazuh-files/GPG-KEY-WAZUH
                 # rpm -ivh ./wazuh-offline/wazuh-packages/wazuh-dashboard*.rpm
 
         .. group-tab:: DEB
