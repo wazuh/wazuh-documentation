@@ -38,7 +38,7 @@ The following Elastic Stack and Open Distro for Elasticsearch versions are compa
 +--------------------------+---------------------------+
 | 7.16.0–7.16.3            |                           |
 +--------------------------+---------------------------+
-| 7.17.0–7.17.5            |                           |
+| 7.17.0–7.17.6            |                           |
 +--------------------------+---------------------------+
 
 You can find more information on the `Wazuh Kibana plugin repository <https://github.com/wazuh/wazuh-kibana-app/wiki/Compatibility>`_.
@@ -55,7 +55,7 @@ The following Splunk versions are compatible with the Wazuh manager |WAZUH_CURRE
 +==================+
 | 8.1.1–8.1.10     |
 +------------------+
-| 8.2.0–8.2.6      |
+| 8.2.0–8.2.8      |
 +------------------+
 
 You can find more information on the `Wazuh Splunk app repository <https://github.com/wazuh/wazuh-splunk#installation>`__.
