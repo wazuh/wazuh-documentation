@@ -71,7 +71,16 @@ removedUrls['x.y'] = [
 
 /* *** RELEASE 4.3 ****/
 
-/* Pages added in 4.3 */
+/* Pages changed within the same release */
+
+redirectSameRelease['4.3'] = {
+   '/user-manual/capabilities/vulnerability-detection/compatibility-matrix.html':
+     '/user-manual/capabilities/vulnerability-detection/how-it-works.html',
+   '/user-manual/capabilities/vulnerability-detection/running-vu-scan.html':
+     '/user-manual/capabilities/vulnerability-detection/configuring-scans.html',
+ };
+ 
+ /* Pages added in 4.3 */
 
 newUrls['4.3'] = [
   '/release-notes/release-4-3-1.html',
@@ -237,6 +246,7 @@ newUrls['4.3'] = [
   '/upgrade-guide/wazuh-agent/aix.html',
   '/upgrade-guide/wazuh-agent/hp-ux.html',
   '/upgrade-guide/wazuh-agent/index.html',
+  '/user-manual/capabilities/vulnerability-detection/configuring-scans.html',
 ];
 
 removedUrls['4.3'] = [
@@ -340,6 +350,8 @@ removedUrls['4.3'] = [
   '/installation-guide/wazuh-agent/deployment-variables/deployment-variables-macos.html',
   '/installation-guide/wazuh-agent/deployment-variables/deployment-variables-windows.html',
   '/user-manual/overview.html',
+  '/user-manual/capabilities/vulnerability-detection/compatibility-matrix.html',
+  '/user-manual/capabilities/vulnerability-detection/running-vu-scan.html',
   '/user-manual/kibana-app/index.html',
   '/user-manual/kibana-app/features/app-overview.html',
   '/user-manual/kibana-app/features/dev-tools.html',

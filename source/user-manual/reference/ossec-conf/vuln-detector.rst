@@ -8,7 +8,7 @@
 vulnerability-detector
 ======================
 
-This section covers the configuration for the :ref:`vulnerability-detection` module.
+This section covers the configuration for the :doc:`/user-manual/capabilities/vulnerability-detection/index` module.
 
 .. topic:: XML section name
 
@@ -86,7 +86,7 @@ Runs updates and vulnerabilities scans immediately when service is started.
 min_full_scan_interval
 ^^^^^^^^^^^^^^^^^^^^^^^
 
-The time during which a full scan will not be performed even if the database of vulnerabilities is updated. When this time expires, a :ref:`full scan <vuln_det_scan_types>` will be performed only if the CVEs database has changed.
+The time during which a full scan will not be performed even if the database of vulnerabilities is updated. When this time expires, a :doc:`full scan </user-manual/capabilities/vulnerability-detection/scan-types>` will be performed only if the CVEs database has changed.
 
 +----------------------+------------------------------------------------------------------------------------------------------------------------------------+
 | **Default value**    | 6 hours                                                                                                                            |
