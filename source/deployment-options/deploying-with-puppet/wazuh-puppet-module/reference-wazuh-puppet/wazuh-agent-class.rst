@@ -907,7 +907,7 @@ $agent_package_name
 $agent_package_version
   Define package version
 
-  `Default 4.3.8-1`
+  `Default 4.3.9-1`
 
   `Type String`
 

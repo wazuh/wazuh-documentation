@@ -134,6 +134,7 @@ newUrls['4.3'] = [
   '/release-notes/release-4-3-6.html',
   '/release-notes/release-4-3-7.html',
   '/release-notes/release-4-3-8.html',
+  '/release-notes/release-4-3-9.html',
   '/getting-started/use-cases/container-security.html',
   '/user-manual/agents/query-configuration.html',
   '/user-manual/elasticsearch/configure-indices.html',
