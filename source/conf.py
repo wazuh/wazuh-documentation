@@ -606,15 +606,15 @@ custom_replacements = {
     # --- Open Distro for Elasticsearch
     "|OPEN_DISTRO_LATEST|" : "1.13.2",
     # --- Elasticsearch
-    "|ELASTICSEARCH_ELK_LATEST|" : "7.17.5", # Basic license
+    "|ELASTICSEARCH_ELK_LATEST|" : "7.17.6", # Basic license
     "|ELASTICSEARCH_LATEST|" : "7.10.2",
     # --- Other Elastic
     "|ELASTIC_6_LATEST|" : "6.8.8",
     #
     # === Splunk
+    "|SPLUNK_LATEST|" : "8.2.8",
     "|WAZUH_SPLUNK_CURRENT|" : release,
     #
-    "|SPLUNK_LATEST|" : "8.2.6",
     "|SPLUNK_LATEST_MINOR|" : "8.2",
     "|WAZUH_SPLUNK_REV_CURRENT_LATEST|" : "1", # 8.2
     "|WAZUH_SPLUNK_REV_CURRENT_8.1|" : "1",
