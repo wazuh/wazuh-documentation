@@ -24,7 +24,7 @@ Wazuh generates alerts when there are violations of the HIPAA sections. The Wazu
    :align: center
    :width: 80%
 
-   The Wazuh dashboard comes with a dedicated module to track HIPAA related events.
+The Wazuh dashboard comes with a dedicated module to track HIPAA related events.
 
 .. thumbnail:: /images/hipaa/visualization-and-dashboard/02-hipaa-module.png    
    :title: The Wazuh dashboard comes with a dedicated module to track HIPAA related events
