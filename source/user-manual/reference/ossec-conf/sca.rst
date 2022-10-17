@@ -227,7 +227,7 @@ Configuration example
 
         <policies>
           <policy>etc/shared/cis_debian10.yml</policy>
-          <policy enabled="no">ruleset/sca/cis_debian9.yml/policy>
+          <policy enabled="no">ruleset/sca/cis_debian9.yml</policy>
           <policy>/my/custom/policy/path/my_policy.yaml</policy>
         </policies>
       </sca>
