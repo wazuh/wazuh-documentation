@@ -33,46 +33,46 @@ On the Ubuntu endpoint
 
 #. Create the ``health_data`` directory in the ``/root directory``:
 
-  .. code-block:: none
+   .. code-block:: console
 
-      # mkdir /root/health_data
+         # mkdir /root/health_data
 
 
 #. Create the file ``patient_data.txt`` in the ``/root/health_data`` directory and include some content:
 
-  .. code-block:: none
+   .. code-block:: console
 
-      # touch /root/health_data/patient_data.txt
-      # echo "User1 = medication" >> /root/health_data/patient_data.txt 
+         # touch /root/health_data/patient_data.txt
+         # echo "User1 = medication" >> /root/health_data/patient_data.txt 
 
 #. Add the following configuration to the ``syscheck`` block of the agent configuration file ``/var/ossec/etc/ossec.conf`` to monitor the ``/root/health_data`` directory for changes:
 
-  .. code-block:: none
+   .. code-block:: console
 
-      <syscheck>
-         <directories check_all="yes" realtime="yes">/root/health_data</directories>
-      </syscheck>
+         <syscheck>
+            <directories check_all="yes" realtime="yes">/root/health_data</directories>
+         </syscheck>
 
 #. Restart the Wazuh agent to apply the changes:
 
-  .. code-block:: none
+   .. code-block:: console
 
-      # sudo systemctl restart wazuh-agent
+         # sudo systemctl restart wazuh-agent
 
 #. Modify the file by adding new content:
  
-  .. code-block:: none
+   .. code-block:: console
 
-      # echo "User2 = medication3" >> /root/health_data/patient_data.txt
+         # echo "User2 = medication3" >> /root/health_data/patient_data.txt
 
-You can see an alert generated to show that a file in the monitored directory was modified.
+   You can see an alert generated to show that a file in the monitored directory was modified.
 
-.. thumbnail:: /images/hipaa/visualization-and-dashboard/04-file-integrity-monitoring.png    
-   :title: Alert generated to show that a file in the monitored directory was modified 
-   :align: center
-   :width: 80%
+      .. thumbnail:: /images/hipaa/04-file-integrity-monitoring.png    
+         :title: Alert generated to show that a file in the monitored directory was modified 
+         :align: center
+         :width: 80%
 
-The alert details include the differences in the file checksum, the file modified, the modification time, and other information.
+   The alert details include the differences in the file checksum, the file modified, the modification time, and other information.
 
 Detect file deletion
 ^^^^^^^^^^^^^^^^^^^^
@@ -84,35 +84,34 @@ On the Ubuntu endpoint
 
 #. Create the ``health_data`` directory in the ``/root`` directory if it is not present:
  
-  .. code-block:: none
+   .. code-block:: console
 
-      # mkdir /root/health_data
+         # mkdir /root/health_data
 
 #. Create the file ``patient_data.txt`` in the ``/root/health_data`` directory and include some content:
 
-  .. code-block:: none
+   .. code-block:: console
 
-      # touch /root/health_data/patient_data.txt
-      # echo "User1 = medication" > /root/health_data/patient_data.txt 
+         # touch /root/health_data/patient_data.txt
+         # echo "User1 = medication" > /root/health_data/patient_data.txt 
 
 #. Add the following configuration to the ``syscheck`` block of the agent configuration file ``/var/ossec/etc/ossec.conf`` to monitor the ``/root/health_data`` directory for changes: 
 
-  .. code-block:: none
+   .. code-block:: console
 
-      <syscheck>
-         <directories check_all="yes" realtime="yes" >/root/health_data</directories>
-      </syscheck>
+         <syscheck>
+            <directories check_all="yes" realtime="yes" >/root/health_data</directories>
+         </syscheck>
 
 #. Restart the Wazuh agent to apply the changes:
 
-  .. code-block:: none
+   .. code-block:: console
 
-      # sudo systemctl restart wazuh-agent
-
+         # sudo systemctl restart wazuh-agent
 
    Delete a file from the monitored directory. In this case, delete ``patient_data.txt``. You can see an alert generated for the file deleted.
 
-   .. thumbnail:: /images/hipaa/visualization-and-dashboard/05-file-integrity-monitoring.png    
+   .. thumbnail:: /images/hipaa/05-file-integrity-monitoring.png    
       :title: You can see an alert generated for the file deleted 
       :align: center
       :width: 80%
