@@ -177,7 +177,7 @@ Enables the hotfixes scan. It reports the Windows updates installed.
 +--------------------+---------+
 
 .. note::
-  This option is enabled by default but no included in the initial configuration.
+  This option is enabled by default but not included in the initial configuration.
 
 
 Example of configuration
