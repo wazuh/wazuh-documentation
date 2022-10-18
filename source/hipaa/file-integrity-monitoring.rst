@@ -100,7 +100,7 @@ On the Ubuntu endpoint
    .. code-block:: console
 
          <syscheck>
-            <directories check_all="yes" realtime="yes" >/root/health_data</directories>
+            <directories check_all="yes" realtime="yes">/root/health_data</directories>
          </syscheck>
 
 #. Restart the Wazuh agent to apply the changes:
