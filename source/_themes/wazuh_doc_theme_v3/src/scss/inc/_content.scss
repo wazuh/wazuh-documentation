@@ -139,6 +139,11 @@
   code.literal {
     padding: 5px 7px 3px;
     line-height: 1rem;
+    span.pre {
+      @include media-max(md){
+        word-break: break-word;
+      }
+    }
   }
 
   .toctree-wrapper {
