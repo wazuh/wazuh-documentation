@@ -1,8 +1,8 @@
 .. Copyright (C) 2015, Wazuh, Inc.
 
 .. meta::
-    :description: Learn more about how to audit who-data in Windows with Wazuh. In this section, we explain how it works, it configuration and some alert examples. 
-    
+    :description: Learn more about how to audit who-data in Windows with Wazuh. In this section, we explain how it works, it configuration and some alert examples.
+
 .. _who-windows:
 
 Auditing who-data in Windows
@@ -11,14 +11,9 @@ Auditing who-data in Windows
 How it works
 ^^^^^^^^^^^^
 
-The who-data monitoring functionality uses the Microsoft Windows auditing subsystem to get the related information about who made modifications in a monitored directory.
-These changes produce audit events that are processed by *syscheck* and reported to the manager. This feature is only compatible with systems greater than Windows Vista.
+The who-data monitoring functionality uses the Microsoft Windows auditing subsystem to get the related information about who made modifications in a monitored directory. These changes produce audit events that are processed by *syscheck* and reported to the manager. This feature is only compatible with systems greater than Windows Vista.
 
-Configuration
-^^^^^^^^^^^^^
-
-To enable the Whodata feature, the SACL of the directory to be monitored must be properly configured. Wazuh automatically performs this task when 
-the tag ``whodata="yes"`` is declared within the ``directories`` statement in the ``ossec.conf`` file:
+For the correct operation of this auditing subsystem, it is necessary to have configured some Local Audit Policies and the SACLs of each configured directory from which to receive these events. Wazuh automatically performs this task when the tag ``whodata="yes"`` is declared within the ``directories`` statement in the ``ossec.conf`` file:
 
 .. code-block:: xml
 
@@ -26,8 +21,12 @@ the tag ``whodata="yes"`` is declared within the ``directories`` statement in th
       <directories check_all="yes" whodata="yes">C:\Windows\System32\drivers\etc</directories>
     </syscheck>
 
-System audit policies also need to be properly configured. This part is also automatically done for most supported Windows systems. If your system is
-superior to Windows Vista but the audit policies cannot be self-configured, see :ref:`the guide to configure Local Audit Policies<who-windows-policies>`.
+However, other processes could modify some of these configurations, preventing syscheck from receiving the necessary information. In this case the directories configured in whodata mode will be reconfigured to realtime mode, so that syscheck will continue to generate alerts. Wazuh detects these changes in two different ways:
+
+#. Windows generates specific events (ID 4719) when one of the Audit Policies is modified (Success removed).
+#. Periodically, Wazuh checks that the Audit Policies and the SACLs are configured as expected. It is possible to modify this interval, see :ref:`the configuration section of windows_audit_interval<reference_ossec_syscheck_windows_audit_interval>`.
+
+To manually configure Local Audit Policies and SACLs, see :ref:`the guide to configure Local Audit Policies and SACLs<who-windows-policies>`.
 
 Alert fields
 ^^^^^^^^^^^^

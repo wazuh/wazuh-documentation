@@ -971,7 +971,7 @@ For more information, please read :ref:`auditing who-data <auditing-whodata>`
 windows_audit_interval
 ----------------------
 
-Sets the frequency in seconds with which the Windows agent will check that the SACLs of the directories monitored in whodata mode are correct.
+Sets the frequency in seconds with which the Windows agent will check that the Local Audit Policies and the SACLs of the directories monitored in whodata mode are correct.
 
 +--------------------+------------------------------------+
 | **Default value**  | 300 seconds                        |
