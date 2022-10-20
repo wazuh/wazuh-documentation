@@ -260,6 +260,11 @@
       <!-- End Google Tag Manager -->
     {%- endblock gtm_head %}
     {%- endif -%}
+
+    {%- if is_latest_release %}
+    <link rel="canonical" href="{{ theme_wazuh_doc_url + '/' + pagename + '.html' }}">
+    {% endif -%}
+
     {% endblock head -%}
   </head>
 
