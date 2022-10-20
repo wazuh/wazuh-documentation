@@ -22,21 +22,21 @@ OneLogin Configuration
 #. Add the OneLogin extension in your browser.
 #. Create a new user. 
 
-   Log in to **OneLogin** web console, select **Administration** > **Users** > **New User**.
+   #. Log in to **OneLogin** web console, select **Administration** > **Users** > **New User**.
 
       .. thumbnail:: /images/single-sign-on/onelogin/01-log-in-to-onelogin-web-console.png
          :title: Log in to OneLogin web console
          :align: center
          :width: 80%
 
-   On the created user complete the mandatory fields, and assign a value in the **Department** field. In our case, this is ``wazuh-admin``. This field will be used later in the Wazuh indexer configuration as the backend role.
+   #. On the created user complete the mandatory fields, and assign a value in the **Department** field. In our case, this is ``wazuh-admin``. This field will be used later in the Wazuh indexer configuration as the backend role.
 
       .. thumbnail:: /images/single-sign-on/onelogin/02-complete-the-mandatory-fields.png
          :title: Complete the mandatory fields
          :align: center
          :width: 80%
 
-   Click on **Save User**, select the user, navigate to **More Actions** and click on **Change Password** to assign a password to the user.
+   #. Click on **Save User**, select the user, navigate to **More Actions** and click on **Change Password** to assign a password to the user.
 
       .. thumbnail:: /images/single-sign-on/onelogin/03-click-on-save-user.png
          :title: Click on Save User
@@ -45,28 +45,28 @@ OneLogin Configuration
 
 #. Create a new app using the **SAML Custom Connector (Advanced)** template and configure the SAML settings.
 
-   Go to **Applications** tab > **Applications** and then click on **Add app**.
+   #. Go to **Applications** tab > **Applications** and then click on **Add app**.
 
       .. thumbnail:: /images/single-sign-on/onelogin/04-create-a-new-app.png
          :title: Create a new app using the SAML Custom Connector (Advanced)
          :align: center
          :width: 80%
 
-   Search for **SAML Custom Connector (Advanced)** application. In **Display Name**,  assign a name. In our case, we assigned the name ``Wazuh``. Navigate to the Configuration tab and fill in the information:
+   #. Search for **SAML Custom Connector (Advanced)** application. In **Display Name**,  assign a name. In our case, we assigned the name ``Wazuh``. Navigate to the Configuration tab and fill in the information:
 
-   - **Audience (EntityID)**: ``wazuh-saml``
-   - **Recipient**: ``https://WAZUH_DASHBOARD_URL/_opendistro/_security/saml/acs``
-   - **ACS (Consumer) URL Validator**: ``https://WAZUH_DASHBOARD_URL/_opendistro/_security/saml/acs``
-   - **ACS (Consumer) URL**: ``https://WAZUH_DASHBOARD_URL/_opendistro/_security/saml/acs``
-   - **Login URL**: ``https://WAZUH_DASHBOARD_URL/app/wazuh``
-   - **SAML initiator**: ``Service Provider``
-   - **SAML nameID format**: ``Unspecified``
-   - **SAML issuer type**: ``Specific``
-   - **SAML signature element**: ``Response``
+      - **Audience (EntityID)**: ``wazuh-saml``
+      - **Recipient**: ``https://WAZUH_DASHBOARD_URL/_opendistro/_security/saml/acs``
+      - **ACS (Consumer) URL Validator**: ``https://WAZUH_DASHBOARD_URL/_opendistro/_security/saml/acs``
+      - **ACS (Consumer) URL**: ``https://WAZUH_DASHBOARD_URL/_opendistro/_security/saml/acs``
+      - **Login URL**: ``https://WAZUH_DASHBOARD_URL/app/wazuh``
+      - **SAML initiator**: ``Service Provider``
+      - **SAML nameID format**: ``Unspecified``
+      - **SAML issuer type**: ``Specific``
+      - **SAML signature element**: ``Response``
    
-   Replace the ``WAZUH_DASHBOARD_URL`` field with the corresponding URL of your Wazuh dashboard instance.
+      Replace the ``WAZUH_DASHBOARD_URL`` field with the corresponding URL of your Wazuh dashboard instance.
 
-   The configuration must be similar to the highlighted blue rectangles:
+      The configuration must be similar to the highlighted blue rectangles:
 
       .. thumbnail:: /images/single-sign-on/onelogin/05-search-for-saml-custom-connector.png
          :title: Search for SAML Custom Connector (Advanced) application
@@ -78,21 +78,21 @@ OneLogin Configuration
          :align: center
          :width: 80%   
 
-   Go to the **Parameters** tab and click on **+** to add a new parameter to the app:
+   #. Go to the **Parameters** tab and click on **+** to add a new parameter to the app:
 
       .. thumbnail:: /images/single-sign-on/onelogin/07-go-to-the-parameters-tab.png
          :title: Go to the Parameters tab
          :align: center
          :width: 80%   
 
-   In our own case, we named the new parameter as **Roles**, then we select the value **Department** and **Include in SAML assertion**.
+      In our own case, we named the new parameter as **Roles**, then we select the value **Department** and **Include in SAML assertion**.
 
       .. thumbnail:: /images/single-sign-on/onelogin/08-we-named-the-new-parameter-as-roles.png
          :title: We named the new parameter as Roles
          :align: center
          :width: 80%   
 
-   The rest of the app configuration is left as default. Click on **Save** to apply the configuration.
+   #. The rest of the app configuration is left as default. Click on **Save** to apply the configuration.
 
 #. Add the created user to the new app.
 
@@ -105,23 +105,23 @@ OneLogin Configuration
 
 #. Get the ``metada_onelogin.xml`` file and ``X.509 certificate`` from the application.
 
-   Go to **Applications**, >  **Applications** then select the **Wazuh** app. Click on **More Actions** and then select **SAML Metadata**.
+   #. Go to **Applications**, >  **Applications** then select the **Wazuh** app. Click on **More Actions** and then select **SAML Metadata**.
 
       .. thumbnail:: /images/single-sign-on/onelogin/10-click-on-more-actions.png
          :title: Click on More Actions and then select SAML Metadata
          :align: center
          :width: 80%
    
-   Save the file as ``XML``. This will be the ``idp.metadata_file`` in the Wazuh indexer security configuration.
+   #. Save the file as ``XML``. This will be the ``idp.metadata_file`` in the Wazuh indexer security configuration.
 
-   The **Issuer URL** will be the ``idp.entity_id`` in the Wazuh indexer security configuration.
+   #. The **Issuer URL** will be the ``idp.entity_id`` in the Wazuh indexer security configuration.
 
       .. thumbnail:: /images/single-sign-on/onelogin/11-save-the-file-as-xml.png
          :title: Save the file as XML
          :align: center
          :width: 80%
    
-   The **Audience (EntityID)** will be the ``sp.entity_id`` in  the Wazuh indexer security configuration.
+   #. The **Audience (EntityID)** will be the ``sp.entity_id`` in  the Wazuh indexer security configuration.
 
       .. thumbnail:: /images/single-sign-on/onelogin/12-the-Audience-entityid.png
          :title: The Audience (EntityID) will be the sp.entity_id in  the Wazuh indexer security configuration
@@ -129,9 +129,9 @@ OneLogin Configuration
          :width: 80%
 
 
-   The ``roles_key`` is the name of the parameter added in the **Wazuh** app. In our example, this is ``Roles``. 
+   #. The ``roles_key`` is the name of the parameter added in the **Wazuh** app. In our example, this is ``Roles``. 
 
-   Finally, to obtain the ``exchange_key``, go to the **SSO** tab of the **Wazuh** app and select **View Details** in ``X.509 Certificate``. Copy the blob of the certificate excluding the ``-----BEGIN CERTIFICATE-----`` and ``-----END CERTIFICATE-----`` lines:
+   #. Finally, to obtain the ``exchange_key``, go to the **SSO** tab of the **Wazuh** app and select **View Details** in ``X.509 Certificate``. Copy the blob of the certificate excluding the ``-----BEGIN CERTIFICATE-----`` and ``-----END CERTIFICATE-----`` lines:
 
       .. thumbnail:: /images/single-sign-on/onelogin/13-go-to-the-sso-tab.png
          :title: Go to the SSO tab of the Wazuh app and select View Details in X.509 Certificate
@@ -141,138 +141,137 @@ OneLogin Configuration
 Wazuh indexer configuration
 ---------------------------
 
-#. Configure Wazuh indexer security configuration files.
+Configure Wazuh indexer security configuration files. The file path to the Wazuh indexer security configuration is ``/usr/share/wazuh-indexer/plugins/opensearch-security/securityconfig/``. The files to configure are ``config.yml`` and ``roles_mapping.yml``. It is recommended to back up these files before the configuration is carried out.
 
-   The file path to the Wazuh indexer security configuration is ``/usr/share/wazuh-indexer/plugins/opensearch-security/securityconfig/``. The files to configure are ``config.yml`` and ``roles_mapping.yml``. It is recommended to back up these files before the configuration is carried out.
+#. Edit the ``/usr/share/wazuh-indexer/plugins/opensearch-security/securityconfig/config.yml`` file and change the following values:
 
-   #. ``config.yml``
+   - Set the ``order`` in ``basic_internal_auth_domain`` to ``0`` and the ``challenge`` flag to ``false``. 
 
-      To configure the ``config.yml`` file, the ``order`` in ``basic_internal_auth_domain`` must be set to ``0``, and the ``challenge`` flag must be set to ``false``.  Include a ``saml_auth_domain`` configuration under the ``authc`` section similar to the following:
+   - Include a ``saml_auth_domain`` configuration under the ``authc`` section similar to the following:
 
-      .. code-block:: console
-         :emphasize-lines: 7,10,22,23,25,26,27,28
+   .. code-block:: console
+      :emphasize-lines: 7,10,22,23,25,26,27,28
 
-            authc:
-         ...
-               basic_internal_auth_domain:
-               description: "Authenticate via HTTP Basic against internal users database"
-               http_enabled: true
-               transport_enabled: true
-               order: 0
-               http_authenticator:
-                  type: "basic"
-                  challenge: false
-               authentication_backend:
-                  type: "intern"
-               saml_auth_domain2:
-               http_enabled: true
-               transport_enabled: true
-               order: 1
-               http_authenticator:
-                  type: saml
-                  challenge: true
-                  config:
-                     idp:
-                     metadata_file: "/usr/share/wazuh-indexer/plugins/opensearch-security/securityconfig/metadata_onelogin.xml"
-                     entity_id: "https://app.onelogin.com/saml/metadata/xxxxxxx"
-                     sp:
-                     entity_id: wazuh-saml
-                     kibana_url: https://<WAZUH_DASHBOARD_URL>
-                     roles_key: Roles
-                     exchange_key: 'X.509 Certificate'
-               authentication_backend:
-                  type: noop
-         ...
+         authc:
+      ...
+            basic_internal_auth_domain:
+            description: "Authenticate via HTTP Basic against internal users database"
+            http_enabled: true
+            transport_enabled: true
+            order: 0
+            http_authenticator:
+               type: "basic"
+               challenge: false
+            authentication_backend:
+               type: "intern"
+            saml_auth_domain2:
+            http_enabled: true
+            transport_enabled: true
+            order: 1
+            http_authenticator:
+               type: saml
+               challenge: true
+               config:
+                  idp:
+                  metadata_file: "/usr/share/wazuh-indexer/plugins/opensearch-security/securityconfig/metadata_onelogin.xml"
+                  entity_id: "https://app.onelogin.com/saml/metadata/xxxxxxx"
+                  sp:
+                  entity_id: wazuh-saml
+                  kibana_url: https://<WAZUH_DASHBOARD_URL>
+                  roles_key: Roles
+                  exchange_key: 'X.509 Certificate'
+            authentication_backend:
+               type: noop
+      ...
    
-      Ensure to change the following parameters to their corresponding value:
+   Ensure to change the following parameters to their corresponding value:
 
-      - ``idp.metadata_file``
-      - ``idp.entity_id``
-      - ``sp.entity_id``
-      - ``kibana_url`` 
-      - ``roles_key``
-      - ``exchange_key``
+   - ``idp.metadata_file``
+   - ``idp.entity_id``
+   - ``sp.entity_id``
+   - ``kibana_url`` 
+   - ``roles_key``
+   - ``exchange_key``
 
-      After modifying the ``config.yml`` file, it is necessary to use the ``securityadmin`` script to load the configuration changes with the following command:
+#. Run the ``securityadmin`` script to load the configuration changes.
 
-      .. code-block:: console
+   .. code-block:: console
 
-         # export JAVA_HOME=/usr/share/wazuh-indexer/jdk/ && bash /usr/share/wazuh-indexer/plugins/opensearch-security/tools/securityadmin.sh -f /usr/share/wazuh-indexer/plugins/opensearch-security/securityconfig/config.yml -icl -key /etc/wazuh-indexer/certs/admin-key.pem -cert /etc/wazuh-indexer/certs/admin.pem -cacert /etc/wazuh-indexer/certs/root-ca.pem -h localhost -nhnv
+      # export JAVA_HOME=/usr/share/wazuh-indexer/jdk/ && bash /usr/share/wazuh-indexer/plugins/opensearch-security/tools/securityadmin.sh -f /usr/share/wazuh-indexer/plugins/opensearch-security/securityconfig/config.yml -icl -key /etc/wazuh-indexer/certs/admin-key.pem -cert /etc/wazuh-indexer/certs/admin.pem -cacert /etc/wazuh-indexer/certs/root-ca.pem -h localhost -nhnv
 
-      The "-h" flag is used to specify the hostname or the IP address of the Wazuh indexer node.
+   The ``-h`` flag is used to specify the hostname or the IP address of the Wazuh indexer node. Note that this command uses localhost, set your Wazuh indexer address if necessary.
 
-      The command output must be similar to the following:
+   The command output must be similar to the following:
 
-      .. code-block:: console
-         :class: output
+   .. code-block:: console
+      :class: output
          
-         Will connect to localhost:9300 ... done
-         Connected as CN=admin,OU=Wazuh,O=Wazuh,L=California,C=US
-         OpenSearch Version: 1.2.4
-         OpenSearch Security Version: 1.2.4.0
-         Contacting opensearch cluster 'opensearch' and wait for YELLOW clusterstate ...
-         Clustername: wazuh-cluster
-         Clusterstate: GREEN
-         Number of nodes: 1
-         Number of data nodes: 1
-         .opendistro_security index already exists, so we do not need to create one.
-         Populate config from /home/wazuh
-         Will update '_doc/config' with /usr/share/wazuh-indexer/plugins/opensearch-security/securityconfig/config.yml 
-            SUCC: Configuration for 'config' created or updated
-         Done with success
+      Will connect to localhost:9300 ... done
+      Connected as CN=admin,OU=Wazuh,O=Wazuh,L=California,C=US
+      OpenSearch Version: 1.2.4
+      OpenSearch Security Version: 1.2.4.0
+      Contacting opensearch cluster 'opensearch' and wait for YELLOW clusterstate ...
+      Clustername: wazuh-cluster
+      Clusterstate: GREEN
+      Number of nodes: 1
+      Number of data nodes: 1
+      .opendistro_security index already exists, so we do not need to create one.
+      Populate config from /home/wazuh
+      Will update '_doc/config' with /usr/share/wazuh-indexer/plugins/opensearch-security/securityconfig/config.yml 
+         SUCC: Configuration for 'config' created or updated
+      Done with success
    
-   #. ``roles_mapping.yml``
+#. Edit ``/usr/share/wazuh-indexer/plugins/opensearch-security/securityconfig/roles_mapping.yml`` file and change the following values:
      
-      To configure the ``roles_mapping.yml`` file, we map the ``Department`` field from step 3 to the admin role on Wazuh indexer. In this case, ``wazuh-admin``:
+   To configure the ``roles_mapping.yml`` file, we map the ``Department`` field from step 3 to the admin role on Wazuh indexer. In this case, ``wazuh-admin``:
 
-      .. code-block:: console 
+   .. code-block:: console 
          
-         ...
-         all_access:
-            reserved: false
-            hidden: false
-            backend_roles:
-            - "admin"
-            - "wazuh-admin"
-            description: "Maps admin to all_access"
-         ...
+      ...
+      all_access:
+         reserved: false
+         hidden: false
+         backend_roles:
+         - "admin"
+         - "wazuh-admin"
+         description: "Maps admin to all_access"
+      ...
 
+#. Run the ``securityadmin`` script to load the configuration changes.
 
-      After modifying the ``roles_mapping.yml`` file, it is necessary to use the ``securityadmin`` script to load the configuration changes with the following command:
-
-      .. code-block:: console 
+   .. code-block:: console 
           
-         # export JAVA_HOME=/usr/share/wazuh-indexer/jdk/ && bash /usr/share/wazuh-indexer/plugins/opensearch-security/tools/securityadmin.sh -f /usr/share/wazuh-indexer/plugins/opensearch-security/securityconfig/roles_mapping.yml -icl -key /etc/wazuh-indexer/certs/admin-key.pem -cert /etc/wazuh-indexer/certs/admin.pem -cacert /etc/wazuh-indexer/certs/root-ca.pem -h localhost -nhnv
+      # export JAVA_HOME=/usr/share/wazuh-indexer/jdk/ && bash /usr/share/wazuh-indexer/plugins/opensearch-security/tools/securityadmin.sh -f /usr/share/wazuh-indexer/plugins/opensearch-security/securityconfig/roles_mapping.yml -icl -key /etc/wazuh-indexer/certs/admin-key.pem -cert /etc/wazuh-indexer/certs/admin.pem -cacert /etc/wazuh-indexer/certs/root-ca.pem -h localhost -nhnv
 
-      The "-h" flag is used to specify the hostname or the IP address of your Wazuh indexer node.
+   The ``-h`` flag is used to specify the hostname or the IP address of the Wazuh indexer node. Note that this command uses localhost, set your Wazuh indexer address if necessary.
 
-      The command output must be similar to the following:
+   The command output must be similar to the following:
 
-      .. code-block:: console 
-         :class: output
-          
-         Security Admin v7
-         Will connect to localhost:9300 ... done
-         Connected as CN=admin,OU=Wazuh,O=Wazuh,L=California,C=US
-         OpenSearch Version: 1.2.4
-         OpenSearch Security Version: 1.2.4.0
-         Contacting opensearch cluster 'opensearch' and wait for YELLOW clusterstate ...
-         Clustername: wazuh-cluster
-         Clusterstate: GREEN
-         Number of nodes: 1
-         Number of data nodes: 1
-         .opendistro_security index already exists, so we do not need to create one.
-         Populate config from /home/wazuh
-         Will update '_doc/rolesmapping' with /usr/share/wazuh-indexer/plugins/opensearch-security/securityconfig/roles_mapping.yml 
-            SUCC: Configuration for 'rolesmapping' created or updated
-         Done with success
+   .. code-block:: console 
+      :class: output
+       
+      Security Admin v7
+      Will connect to localhost:9300 ... done
+      Connected as CN=admin,OU=Wazuh,O=Wazuh,L=California,C=US
+      OpenSearch Version: 1.2.4
+      OpenSearch Security Version: 1.2.4.0
+      Contacting opensearch cluster 'opensearch' and wait for YELLOW clusterstate ...
+      Clustername: wazuh-cluster
+      Clusterstate: GREEN
+      Number of nodes: 1
+      Number of data nodes: 1
+      .opendistro_security index already exists, so we do not need to create one.
+      Populate config from /home/wazuh
+      Will update '_doc/rolesmapping' with /usr/share/wazuh-indexer/plugins/opensearch-security/securityconfig/roles_mapping.yml 
+         SUCC: Configuration for 'rolesmapping' created or updated
+      Done with success
 
 Wazuh dashboard configuration
 -----------------------------
 
-#. Configure the Wazuh dashboard configuration file.
+#. Edit the Wazuh dashboard configuration file.
 
-   Add these configurations to the ``opensearch_dashboards.yml``, the file path is ``/etc/wazuh-dashboard/opensearch_dashboards.yml``. It is recommended to back up this file before the configuration is made.
+   Add these configurations to ``/etc/wazuh-dashboard/opensearch_dashboards.yml``. It is recommended to back up this file before the configuration is changed.
 
    .. code-block:: console 
          
@@ -281,7 +280,7 @@ Wazuh dashboard configuration
 
 #. Change the logout configuration in the Wazuh dashboard. 
 
-   To change the logout configuration, edit the ``path: /auth/logout`` section of the ``route.js`` file. The file path is ``/usr/share/wazuh-dashboard/plugins/securityDashboards/server/auth/types/saml/routes.js``. It is recommended to back up this file before the configuration is made. The configuration must be similar to this:
+   To change the logout configuration, edit the ``path: /auth/logout`` section of the ``route.js`` file. The file path is ``/usr/share/wazuh-dashboard/plugins/securityDashboards/server/auth/types/saml/routes.js``. It is recommended to back up this file before the configuration is changed. The configuration must be similar to this:
   
    .. code-block:: console
       :emphasize-lines: 3
@@ -291,7 +290,8 @@ Wazuh dashboard configuration
             path: `/logout`,
             validate: false
       ...
-#. Restart the Wazuh dashboard service using this command:
+
+#. Restart the Wazuh dashboard service.
  
    .. include:: /_templates/common/restart_dashboard.rst
 

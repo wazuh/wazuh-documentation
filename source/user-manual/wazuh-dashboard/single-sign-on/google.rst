@@ -26,221 +26,221 @@ Google Configuration
 #. Go to https://admin.google.com/ac/apps/unified and sign in with your Google Admin account.
 #. Create an app with **Add custom SAML app**.
 
-   Go to **Apps** > **Website and mobile apps** > **Add App**, then **Add custom SAML app**. Enter an **App name** and click **CONTINUE**.
+   #. Go to **Apps** > **Website and mobile apps** > **Add App**, then **Add custom SAML app**. Enter an **App name** and click **CONTINUE**.
 
-   .. thumbnail:: /images/single-sign-on/google/01-go-to-apps.png
-      :title: Go to Apps > Website and mobile apps
-      :align: center
-      :width: 80%
+      .. thumbnail:: /images/single-sign-on/google/01-go-to-apps.png
+         :title: Go to Apps > Website and mobile apps
+         :align: center
+         :width: 80%
 
-   Take note of the following parameters, as they will be used during the Wazuh indexer configuration:
+   #. Take note of the following parameters, as they will be used during the Wazuh indexer configuration:
 
-   - **Entity ID**: This will be used later as the ``idp.entity_id``
-   - Select **DOWNLOAD METADATA** and place the metadata file in the ``configuration`` directory of Wazuh indexer. The path to the directory is ``/usr/share/wazuh-indexer/plugins/opensearch-security/securityconfig/``.
+      - **Entity ID**: This will be used later as the ``idp.entity_id``
+      - Select **DOWNLOAD METADATA** and place the metadata file in the ``configuration`` directory of Wazuh indexer. The path to the directory is ``/usr/share/wazuh-indexer/plugins/opensearch-security/securityconfig/``.
 
-   .. thumbnail:: /images/single-sign-on/google/02-take-note-of-the-parameters.png
-      :title: Take note of the parameters
-      :align: center
-      :width: 80%
+      .. thumbnail:: /images/single-sign-on/google/02-take-note-of-the-parameters.png
+         :title: Take note of the parameters
+         :align: center
+         :width: 80%
    
-   After this, select **CONTINUE** and configure the following:
+   #. Select **CONTINUE** and configure the following:
 
-   - **ACS URL**: ``https://<WAZUH_DASHBOARD_URL>/_opendistro/_security/saml/acs``. Replace the Wazuh dashboard URL field with the appropriate URL or IP address.
-   - **Entity ID**: Use any name here. This will be the ``sp.entity_id`` in the Wazuh indexer configuration file. In our case, the value is ``wazuh-saml``.
-   - **Certificate**: Copy the blob of the certificate excluding the ``-----BEGIN CERTIFICATE-----`` and ``-----END CERTIFICATE-----`` lines. This will be our ``exchange_key`` in the Wazuh indexer configuration file.
+      - **ACS URL**: ``https://<WAZUH_DASHBOARD_URL>/_opendistro/_security/saml/acs``. Replace the Wazuh dashboard URL field with the appropriate URL or IP address.
+      - **Entity ID**: Use any name here. This will be the ``sp.entity_id`` in the Wazuh indexer configuration file. In our case, the value is ``wazuh-saml``.
+      - **Certificate**: Copy the blob of the certificate excluding the ``-----BEGIN CERTIFICATE-----`` and ``-----END CERTIFICATE-----`` lines. This will be our ``exchange_key`` in the Wazuh indexer configuration file.
 
-   .. thumbnail:: /images/single-sign-on/google/03-select-continue-and-configure.png
-      :title: Select CONTINUE and configure
-      :align: center
-      :width: 80%
+      .. thumbnail:: /images/single-sign-on/google/03-select-continue-and-configure.png
+         :title: Select CONTINUE and configure
+         :align: center
+         :width: 80%
 
-   Leave the remaining parameters with their default values, then select **CONTINUE**.
+   #. Leave the remaining parameters with their default values, then select **CONTINUE**.
 
-   Google doesn't support sending the Group membership attribute as part of the SAML Assertion (as the other Identity Providers do), so in this example we are going to use **Department** as the attribute whose value will be used as our ``roles_key`` in the Wazuh indexer configuration. In this case, the value for the **Department** attribute will be stored as ``Roles``.
+   #. Click on **ADD MAPPING**, under Employee details, choose **Department**, under App attributes, type **Roles**, and select **FINISH**. 
 
-   Click on **ADD MAPPING**, under Employee details, choose **Department**, under App attributes, type **Roles**, and select **FINISH**. 
+      Google doesn't support sending the Group membership attribute as part of the SAML Assertion (as the other Identity Providers do), so in this example we are going to use **Department** as the attribute whose value will be used as our ``roles_key`` in the Wazuh indexer configuration. In this case, the value for the **Department** attribute will be stored as ``Roles``.
 
-   .. thumbnail:: /images/single-sign-on/google/04-click-on-add-mapping.png
-      :title: Click on ADD MAPPING under Employee details
-      :align: center
-      :width: 80%
+      .. thumbnail:: /images/single-sign-on/google/04-click-on-add-mapping.png
+         :title: Click on ADD MAPPING under Employee details
+         :align: center
+         :width: 80%
 
 #. Turn ON access for everyone.
 
-   Select the recently created app and click on **User access**.
+   #. Select the recently created app and click on **User access**.
 
-   .. thumbnail:: /images/single-sign-on/google/05-turn-on-access-for-everyone.png
-      :title: Turn ON access for everyone
-      :align: center
-      :width: 80%
+      .. thumbnail:: /images/single-sign-on/google/05-turn-on-access-for-everyone.png
+         :title: Turn ON access for everyone
+         :align: center
+         :width: 80%
 
-   Select **ON for everyone** and click **SAVE**.
+   #. Select **ON for everyone** and click **SAVE**.
 
-   .. thumbnail:: /images/single-sign-on/google/06-select-on-for-everyone.png
-      :title: Select ON for everyone and click SAVE
-      :align: center
-      :width: 80%
+      .. thumbnail:: /images/single-sign-on/google/06-select-on-for-everyone.png
+         :title: Select ON for everyone and click SAVE
+         :align: center
+         :width: 80%
 
 #. Define the attribute for users.
 
-   Go to **Directory** then **Users**.
+   #. Go to **Directory** then **Users**.
 
-   .. thumbnail:: /images/single-sign-on/google/07-define-the-attribute-for-users.png
-      :title: Define the attribute for users
-      :align: center
-      :width: 80%
+      .. thumbnail:: /images/single-sign-on/google/07-define-the-attribute-for-users.png
+         :title: Define the attribute for users
+         :align: center
+         :width: 80%
 
-   Select a user,  go to **User information**, then edit **Employee information**.
+   #. Select a user,  go to **User information**, then edit **Employee information**.
 
-   .. thumbnail:: /images/single-sign-on/google/08-select-a-user.png
-      :title: Select a user
-      :align: center
-      :width: 80%
+      .. thumbnail:: /images/single-sign-on/google/08-select-a-user.png
+         :title: Select a user
+         :align: center
+         :width: 80%
 
-   .. thumbnail:: /images/single-sign-on/google/09-edit-employee-information.png
-      :title: Edit Employee information
-      :align: center
-      :width: 80%
+      .. thumbnail:: /images/single-sign-on/google/09-edit-employee-information.png
+         :title: Edit Employee information
+         :align: center
+         :width: 80%
 
-   Add a value to the **Department** field, in this example, we add ``Wazuh_access``, click on **SAVE**. This value will be used in the ``role_mapping`` file configuration.
+   #. Add a value to the **Department** field, in this example, we add ``Wazuh_access``, click on **SAVE**. This value will be used in the ``role_mapping`` file configuration.
 
-    .. thumbnail:: /images/single-sign-on/google/10-add-a-value-to-the-department-field.png
-      :title:  Add a value to the Department field
-      :align: center
-      :width: 80%
+      .. thumbnail:: /images/single-sign-on/google/10-add-a-value-to-the-department-field.png
+        :title:  Add a value to the Department field
+        :align: center
+        :width: 80%
 
 
 Wazuh indexer configuration
 ---------------------------
 
-#. Configure Wazuh indexer security configuration files.
+Configure Wazuh indexer security configuration files. The file path to the Wazuh indexer security configuration is ``/usr/share/wazuh-indexer/plugins/opensearch-security/securityconfig/``. The files to configure are ``config.yml`` and ``roles_mapping.yml``. It is recommended to back up these files before the configuration is carried out.
 
-   The file path to the Wazuh indexer security configuration is ``/usr/share/wazuh-indexer/plugins/opensearch-security/securityconfig/``. The files to configure are ``config.yml`` and ``roles_mapping.yml``. It is recommended to back up these files before the configuration is carried out.
-
-   #. ``config.yml``
+#. Edit the ``/usr/share/wazuh-indexer/plugins/opensearch-security/securityconfig/config.yml`` file and change the following values:
    
-      To configure the ``config.yml`` file, the ``order`` in ``basic_internal_auth_domain`` must be set to ``0``, and the ``challenge`` flag must be set to ``false``.  Include a ``saml_auth_domain`` configuration under the ``authc`` section similar to the following:
+   - Set the ``order`` in ``basic_internal_auth_domain`` to ``0`` and the ``challenge`` flag to ``false``. 
+
+   - Include a ``saml_auth_domain`` configuration under the ``authc`` section similar to the following:
   
-      .. code-block:: console
-         :emphasize-lines: 7,10,22,23,25,26,27,28
+   .. code-block:: console
+      :emphasize-lines: 7,10,22,23,25,26,27,28
 
-            authc:
-         ...
-               basic_internal_auth_domain:
-               description: "Authenticate via HTTP Basic against internal users database"
-               http_enabled: true
-               transport_enabled: true
-               order: 0
-               http_authenticator:
-                  type: "basic"
-                  challenge: false
-               authentication_backend:
-                  type: "intern"
-               saml_auth_domain:
-               http_enabled: true
-               transport_enabled: false
-               order: 1
-               http_authenticator:
-                  type: saml
-                  challenge: true
-                  config:
-                     idp:
-                     metadata_file: “/usr/share/wazuh-indexer/plugins/opensearch-security/securityconfig/Google_Metadata.xml”
-                     entity_id: “https://accounts.google.com/o/saml2?idpid=C02…”
-                     sp:
-                     entity_id: wazuh-saml
-                     kibana_url: https://<WAZUH_DASHBOARD_URL>
-                     roles_key: Roles
-                     exchange_key: 'X509Certificate'
-               authentication_backend:
-                  type: noop
+         authc:
+      ...
+            basic_internal_auth_domain:
+            description: "Authenticate via HTTP Basic against internal users database"
+            http_enabled: true
+            transport_enabled: true
+            order: 0
+            http_authenticator:
+               type: "basic"
+               challenge: false
+            authentication_backend:
+               type: "intern"
+            saml_auth_domain:
+            http_enabled: true
+            transport_enabled: false
+            order: 1
+            http_authenticator:
+               type: saml
+               challenge: true
+               config:
+                  idp:
+                  metadata_file: “/usr/share/wazuh-indexer/plugins/opensearch-security/securityconfig/Google_Metadata.xml”
+                  entity_id: “https://accounts.google.com/o/saml2?idpid=C02…”
+                  sp:
+                  entity_id: wazuh-saml
+                  kibana_url: https://<WAZUH_DASHBOARD_URL>
+                  roles_key: Roles
+                  exchange_key: 'X509Certificate'
+            authentication_backend:
+               type: noop
 
-      Ensure to change the following parameters to their corresponding value:
+   Ensure to change the following parameters to their corresponding value:
 
-      - ``idp.metadata_file``
-      - ``idp.entity_id``
-      - ``sp.entity_id``
-      - ``kibana_url``
-      - ``roles_key``
-      - ``exchange_key``
+   - ``idp.metadata_file``
+   - ``idp.entity_id``
+   - ``sp.entity_id``
+   - ``kibana_url``
+   - ``roles_key``
+   - ``exchange_key``
 
-      After modifying the ``config.yml`` file, it is necessary to use the ``securityadmin`` script to load the configuration changes with the following command:
+#. Run the ``securityadmin`` script to load the configuration changes.
 
-      .. code-block:: console
+   .. code-block:: console
 
-         # export JAVA_HOME=/usr/share/wazuh-indexer/jdk/ && bash /usr/share/wazuh-indexer/plugins/opensearch-security/tools/securityadmin.sh -f /usr/share/wazuh-indexer/plugins/opensearch-security/securityconfig/config.yml -icl -key /etc/wazuh-indexer/certs/admin-key.pem -cert /etc/wazuh-indexer/certs/admin.pem -cacert /etc/wazuh-indexer/certs/root-ca.pem -h localhost -nhnv
+      # export JAVA_HOME=/usr/share/wazuh-indexer/jdk/ && bash /usr/share/wazuh-indexer/plugins/opensearch-security/tools/securityadmin.sh -f /usr/share/wazuh-indexer/plugins/opensearch-security/securityconfig/config.yml -icl -key /etc/wazuh-indexer/certs/admin-key.pem -cert /etc/wazuh-indexer/certs/admin.pem -cacert /etc/wazuh-indexer/certs/root-ca.pem -h localhost -nhnv
 
-      The "-h" flag is used to specify the hostname or the IP address of the Wazuh indexer node.
+   The ``-h`` flag is used to specify the hostname or the IP address of the Wazuh indexer node. Note that this command uses localhost, set your Wazuh indexer address if necessary.
 
-      The command output must be similar to the following:
+   The command output must be similar to the following:
 
-      .. code-block:: console
-         :class: output
+   .. code-block:: console
+      :class: output
 
-         Will connect to localhost:9300 ... done
-         Connected as CN=admin,OU=Wazuh,O=Wazuh,L=California,C=US
-         OpenSearch Version: 1.2.4
-         OpenSearch Security Version: 1.2.4.0
-         Contacting opensearch cluster 'opensearch' and wait for YELLOW clusterstate ...
-         Clustername: wazuh-cluster
-         Clusterstate: GREEN
-         Number of nodes: 1
-         Number of data nodes: 1
-         .opendistro_security index already exists, so we do not need to create one.
-         Populate config from /home/wazuh
-         Will update '_doc/config' with /usr/share/wazuh-indexer/plugins/opensearch-security/securityconfig/config.yml 
-            SUCC: Configuration for 'config' created or updated
-         Done with success
+      Will connect to localhost:9300 ... done
+      Connected as CN=admin,OU=Wazuh,O=Wazuh,L=California,C=US
+      OpenSearch Version: 1.2.4
+      OpenSearch Security Version: 1.2.4.0
+      Contacting opensearch cluster 'opensearch' and wait for YELLOW clusterstate ...
+      Clustername: wazuh-cluster
+      Clusterstate: GREEN
+      Number of nodes: 1
+      Number of data nodes: 1
+      .opendistro_security index already exists, so we do not need to create one.
+      Populate config from /home/wazuh
+      Will update '_doc/config' with /usr/share/wazuh-indexer/plugins/opensearch-security/securityconfig/config.yml 
+         SUCC: Configuration for 'config' created or updated
+      Done with success
 
-   #. ``roles_mapping.yml``
+#. Edit ``/usr/share/wazuh-indexer/plugins/opensearch-security/securityconfig/roles_mapping.yml`` file and change the following values:
    
-      Map the ``Department`` field value that was obtained in Google IdP to the ``all_access`` role in Wazuh indexer:
+   Map the ``Department`` field value that was obtained in Google IdP to the ``all_access`` role in Wazuh indexer:
 
-      .. code-block:: console
+   .. code-block:: console
 
-         all_access:
-         reserved: false
-         hidden: false
-         backend_roles:
-         - "admin"
-         - "Wazuh_access"
-         description: "Maps admin and Wazuh_access to all_access"
+      all_access:
+      reserved: false
+      hidden: false
+      backend_roles:
+      - "admin"
+      - "Wazuh_access"
+      description: "Maps admin and Wazuh_access to all_access"
 
-      After modifying the ``roles_mapping.yml`` file, it is necessary to use the ``securityadmin`` script to load the configuration changes with the following command:
+#. Run the ``securityadmin`` script to load the configuration changes.
 
-      .. code-block:: console
+   .. code-block:: console
 
-         # export JAVA_HOME=/usr/share/wazuh-indexer/jdk/ && bash /usr/share/wazuh-indexer/plugins/opensearch-security/tools/securityadmin.sh -f /usr/share/wazuh-indexer/plugins/opensearch-security/securityconfig/roles_mapping.yml -icl -key /etc/wazuh-indexer/certs/admin-key.pem -cert /etc/wazuh-indexer/certs/admin.pem -cacert /etc/wazuh-indexer/certs/root-ca.pem -h localhost -nhnv
+      # export JAVA_HOME=/usr/share/wazuh-indexer/jdk/ && bash /usr/share/wazuh-indexer/plugins/opensearch-security/tools/securityadmin.sh -f /usr/share/wazuh-indexer/plugins/opensearch-security/securityconfig/roles_mapping.yml -icl -key /etc/wazuh-indexer/certs/admin-key.pem -cert /etc/wazuh-indexer/certs/admin.pem -cacert /etc/wazuh-indexer/certs/root-ca.pem -h localhost -nhnv
 
-      The "-h" flag is used to specify the hostname or the IP address of your Wazuh indexer node.
+   The ``-h`` flag is used to specify the hostname or the IP address of the Wazuh indexer node. Note that this command uses localhost, set your Wazuh indexer address if necessary.
 
-      The command output must be similar to the following:
+   The command output must be similar to the following:
 
-      .. code-block:: console
-         :class: output
+   .. code-block:: console
+      :class: output
             
-         Security Admin v7
-         Will connect to localhost:9300 ... done
-         Connected as CN=admin,OU=Wazuh,O=Wazuh,L=California,C=US
-         OpenSearch Version: 1.2.4
-         OpenSearch Security Version: 1.2.4.0
-         Contacting opensearch cluster 'opensearch' and wait for YELLOW clusterstate ...
-         Clustername: wazuh-cluster
-         Clusterstate: GREEN
-         Number of nodes: 1
-         Number of data nodes: 1
-         .opendistro_security index already exists, so we do not need to create one.
-         Populate config from /home/wazuh
-         Will update '_doc/rolesmapping' with /usr/share/wazuh-indexer/plugins/opensearch-security/securityconfig/roles_mapping.yml 
-            SUCC: Configuration for 'rolesmapping' created or updated
-         Done with success
+      Security Admin v7
+      Will connect to localhost:9300 ... done
+      Connected as CN=admin,OU=Wazuh,O=Wazuh,L=California,C=US
+      OpenSearch Version: 1.2.4
+      OpenSearch Security Version: 1.2.4.0
+      Contacting opensearch cluster 'opensearch' and wait for YELLOW clusterstate ...
+      Clustername: wazuh-cluster
+      Clusterstate: GREEN
+      Number of nodes: 1
+      Number of data nodes: 1
+      .opendistro_security index already exists, so we do not need to create one.
+      Populate config from /home/wazuh
+      Will update '_doc/rolesmapping' with /usr/share/wazuh-indexer/plugins/opensearch-security/securityconfig/roles_mapping.yml 
+         SUCC: Configuration for 'rolesmapping' created or updated
+      Done with success
 
 Wazuh dashboard configuration
 -----------------------------
 
-#. Configure the Wazuh dashboard configuration file.
+#. Edit the Wazuh dashboard configuration file.
 
-   Add these configurations to the ``opensearch_dashboards.yml``, the file path is ``/etc/wazuh-dashboard/opensearch_dashboards.yml``. It is recommended to back up this file before the configuration is made.
+   Add these configurations to ``/etc/wazuh-dashboard/opensearch_dashboards.yml``. It is recommended to back up this file before the configuration is changed.
 
    .. code-block:: console
 
@@ -249,7 +249,7 @@ Wazuh dashboard configuration
 
 #. Change the logout configuration in the Wazuh dashboard. 
 
-   To change the logout configuration, edit the ``path: /auth/logout`` section of the ``route.js`` file. The file path is ``/usr/share/wazuh-dashboard/plugins/securityDashboards/server/auth/types/saml/routes.js``. It is recommended to back up this file before the configuration is made. The configuration must be similar to this:
+   To change the logout configuration, edit the ``path: /auth/logout`` section of the ``route.js`` file. The file path is ``/usr/share/wazuh-dashboard/plugins/securityDashboards/server/auth/types/saml/routes.js``. It is recommended to back up this file before the configuration is changed. The configuration must be similar to this:
 
    .. code-block:: console
       :emphasize-lines: 3
@@ -260,7 +260,7 @@ Wazuh dashboard configuration
             validate: false
       ...
 
-#. Restart the Wazuh dashboard service using this command:
+#. Restart the Wazuh dashboard service.
 
     .. include:: /_templates/common/restart_dashboard.rst
 
