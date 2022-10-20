@@ -10,7 +10,7 @@ Wazuh offers a web dashboard for data visualization and analysis. The Wazuh dash
 
 The Wazuh dashboard assists in meeting the following HIPAA section:
 
-- **Security Management Process §164.308(a)(1) - Information System Activity Review**: “Implement procedures to regularly review records of information system activity, such as audit logs, access reports, and security incident tracking reports.”
+- **Security Management Process §164.308(a)(1) - Information System Activity Review**: *“Implement procedures to regularly review records of information system activity, such as audit logs, access reports, and security incident tracking reports.”*
 
 This section of the HIPAA standard requires reviewing the activities performed on endpoints that hold health data regularly. This is to view malicious behavior or security violations.
 
