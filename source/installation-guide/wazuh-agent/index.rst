@@ -108,6 +108,20 @@ If you are deploying Wazuh in a large environment, with a high number of servers
 
 .. note:: Compatibility between the Wazuh agent and the Wazuh manager is guaranteed when the Wazuh manager version is later than or equal to that of the Wazuh agent.
 
+You can also deploy a new agent following the instructions in the Wazuh dashboard. Go to **Wazuh** > **Agents**, and click on **Deploy new agent**.
+ 
+  .. thumbnail::  /images/manual/deploy-a-new-agent-from-ui.png
+    :align: center
+    :width: 80%
+    :title: Deploy a new agent from UI
+
+Then the Wazuh dashboard will show you the steps to deploy a new agent.
+
+  .. thumbnail::  /images/manual/deploy-a-new-agent-from-ui-02.png
+    :align: center
+    :width: 80%
+    :title: Deploy a new agent from UI
+
 .. rst-class:: d-none
 
 .. toctree::
