@@ -56,6 +56,18 @@ Wazuh central components can be installed on a 64-bit Linux operating system. Wa
     * - Red Hat Enterprise Linux 7, 8, 9
       - Ubuntu 16.04, 18.04, 20.04, 22.04
 
+
+Browser compatibility
+^^^^^^^^^^^^^^^^^^^^^
+
+Wazuh dashboard supports the following web browsers:
+
+- Chrome 95 or later
+- Firefox 93 or later
+- Safari 13.7 or later
+
+Other Chromium-based browsers might work, as well. Internet Explorer 11 is not supported.
+
 Installing Wazuh
 ----------------
 
