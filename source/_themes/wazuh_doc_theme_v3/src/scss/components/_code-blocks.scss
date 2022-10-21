@@ -350,6 +350,13 @@ main {
       }
     }
   }
+  .highlight-console {
+    .highlight {
+      pre .nb {
+        color: $light-color-code-default;
+      }
+    }
+  }
 }
 
 /* Dark- theme -------------------------------------------------------------- */
@@ -455,6 +462,13 @@ main {
       .na,
       .no {
         color: $dark-color-code-variable;
+      }
+    }
+  }
+  .highlight-console {
+    .highlight {
+      pre .nb {
+        color: $dark-color-code-default;
       }
     }
   }
