@@ -20,7 +20,7 @@ The Wazuh log data analysis module can help comply with the following HIPAA sect
 
 - **Person or Entity Authentication §164.312(d)**: *“A covered entity or business associate must, in accordance with § 164.306 implement procedures to verify that a person or entity seeking access to electronic protected health information is the one claimed.”*
 
-  This section of the HIPAA standard requires you to log in and review user authentication activities. The analysis of these activities helps determine if they are legitimate. The Wazuh log data analysis module analyzes logs to generate alerts when suspicious activities are detected. 
+  This section of the HIPAA standard requires you to log and review user authentication activities. The analysis of these activities helps determine if they are legitimate. The Wazuh log data analysis module analyzes logs to generate alerts when suspicious activities are detected. 
 
 Use case: SSH authentication
 ----------------------------

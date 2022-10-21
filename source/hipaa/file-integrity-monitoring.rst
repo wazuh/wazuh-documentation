@@ -29,7 +29,6 @@ Detect file changes
 In this use case, the Wazuh agent detects changes made to the ``patient_data.txt`` file in the ``/root/health_data`` directory.
 
 On the Ubuntu endpoint
-^^^^^^^^^^^^^^^^^^^^^^
 
 #. Create the ``health_data`` directory in the ``/root directory``:
 
@@ -57,7 +56,7 @@ On the Ubuntu endpoint
 
    .. code-block:: console
 
-         # sudo systemctl restart wazuh-agent
+         # systemctl restart wazuh-agent
 
 #. Modify the file by adding new content:
  
@@ -80,7 +79,6 @@ Detect file deletion
 In this use case, you configure the Wazuh agent to detect file deletion in a monitored directory. Using the steps below, configure the FIM module to monitor the ``/root/health_data/`` directory for changes.
 
 On the Ubuntu endpoint 
-^^^^^^^^^^^^^^^^^^^^^^
 
 #. Create the ``health_data`` directory in the ``/root`` directory if it is not present:
  
@@ -107,7 +105,7 @@ On the Ubuntu endpoint
 
    .. code-block:: console
 
-         # sudo systemctl restart wazuh-agent
+         # systemctl restart wazuh-agent
 
    Delete a file from the monitored directory. In this case, delete ``patient_data.txt``. You can see an alert generated for the file deleted.
 

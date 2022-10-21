@@ -40,7 +40,7 @@ In this use case, you configure the active response module to block an IP addres
 
    .. code-block:: console
 
-      # sudo systemctl restart wazuh-manager
+      # systemctl restart wazuh-manager
 
    When you attempt to SSH with a non-existent user, rule ``5710`` generates an alert followed by an active response event.
 

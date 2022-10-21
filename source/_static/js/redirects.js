@@ -245,7 +245,7 @@ newUrls['4.3'] = [
   '/hipaa/malware-detection.html',
   '/hipaa/file-integrity-monitoring.html',
   '/hipaa/vulnerability-detection.html',
-  '/hipaa/ active-response.html',
+  '/hipaa/active-response.html',
 ];
 
 removedUrls['4.3'] = [
