@@ -307,19 +307,19 @@ Configuration block to specify vulnerability updates.
 Example of configuration
 ------------------------
 
-The following configuration will update the vulnerability database for Ubuntu, Debian, Redhat and Microsoft Windows.
+The following configuration updates the vulnerability database for Ubuntu, Debian, Red Hat, Amazon Linux, Arch, and Microsoft Windows.
 
 .. code-block:: xml
 
     <vulnerability-detector>
-        <enabled>no</enabled>
+        <enabled>yes</enabled>
         <interval>5m</interval>
         <min_full_scan_interval>6h</min_full_scan_interval>
         <run_on_start>yes</run_on_start>
 
         <!-- Ubuntu OS vulnerabilities -->
         <provider name="canonical">
-          <enabled>no</enabled>
+          <enabled>yes</enabled>
           <os>trusty</os>
           <os>xenial</os>
           <os>bionic</os>
@@ -330,7 +330,7 @@ The following configuration will update the vulnerability database for Ubuntu, D
 
         <!-- Debian OS vulnerabilities -->
         <provider name="debian">
-          <enabled>no</enabled>
+          <enabled>yes</enabled>
           <os>buster</os>
           <os>bullseye</os>
           <update_interval>1h</update_interval>
@@ -338,7 +338,7 @@ The following configuration will update the vulnerability database for Ubuntu, D
 
         <!-- RedHat OS vulnerabilities -->
         <provider name="redhat">
-          <enabled>no</enabled>
+          <enabled>yes</enabled>
           <os>5</os>
           <os>6</os>
           <os>7</os>
@@ -349,7 +349,7 @@ The following configuration will update the vulnerability database for Ubuntu, D
 
         <!-- Amazon Linux OS vulnerabilities -->
         <provider name="alas">
-            <enabled>no</enabled>
+            <enabled>yes</enabled>
             <os>amazon-linux</os>
             <os>amazon-linux-2</os>
             <os>amazon-linux-2022</os>
