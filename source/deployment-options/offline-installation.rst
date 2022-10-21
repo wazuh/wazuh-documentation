@@ -65,7 +65,7 @@ Install Wazuh components from local files
 
       # tar xf wazuh-offline.tar.gz
 
-   Check the SHA512 of the decompressed package files in ``wazuh-offline/wazuh-packages/``. You can find the SHA512 checksums in :doc:`/installation-guide/packages-list`.
+   You can check the SHA512 of the decompressed package files in ``wazuh-offline/wazuh-packages/``. Find the SHA512 checksums in :doc:`/installation-guide/packages-list`.
 
 Installing the Wazuh indexer
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
@@ -78,7 +78,7 @@ Installing the Wazuh indexer
 
             .. code-block:: console
         
-               # rpm --import https://packages.wazuh.com/key/GPG-KEY-WAZUH
+               # rpm --import ./wazuh-offline/wazuh-files/GPG-KEY-WAZUH
                # rpm -ivh ./wazuh-offline/wazuh-packages/wazuh-indexer*.rpm
 
         .. group-tab:: DEB
