@@ -233,7 +233,8 @@ jQuery(function($) {
    */
   function normalizeUrl(originalUrl) {
     if (!Array.isArray(originalUrl)) {
-      let normalizedURL = originalUrl.trim().replace('index.html', '');
+      let normalizedURL = originalUrl.trim();
+      normalizedURL = normalizedURL.replace(/\/$/, '/index.html');
       normalizedURL = normalizedURL.replace(/\/{2,}/, '/');
 
       if (normalizedURL.charAt(normalizedURL.length-1) == '#' ) {
