@@ -38,9 +38,7 @@ In this use case, you configure the active response module to block an IP addres
 
 #. Restart the Wazuh server to apply the configuration:
 
-   .. code-block:: console
-
-      # systemctl restart wazuh-manager
+   .. include:: /_templates/common/restart_manager.rst
 
    When you attempt to SSH with a non-existent user, rule ``5710`` generates an alert followed by an active response event.
 

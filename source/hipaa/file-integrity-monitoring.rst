@@ -54,9 +54,7 @@ On the Ubuntu endpoint
 
 #. Restart the Wazuh agent to apply the changes:
 
-   .. code-block:: console
-
-         # systemctl restart wazuh-agent
+   .. include:: /_templates/common/restart_agent.rst
 
 #. Modify the file by adding new content:
  
@@ -103,9 +101,7 @@ On the Ubuntu endpoint
 
 #. Restart the Wazuh agent to apply the changes:
 
-   .. code-block:: console
-
-         # systemctl restart wazuh-agent
+   .. include:: /_templates/common/restart_agent.rst
 
    Delete a file from the monitored directory. In this case, delete ``patient_data.txt``. You can see an alert generated for the file deleted.
 
