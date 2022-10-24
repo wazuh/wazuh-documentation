@@ -61,6 +61,8 @@ You can visualize the alert data in the Wazuh dashboard. To do this, go to the *
 
 * ``rule.id:31103``
 
+.. note::  
+   Child rules of 31103 can be triggered depending on the Apache server setup.
 
 .. thumbnail:: ../images/poc/Detecting-an-SQL-Injection-attack.png
           :title: Detecting an SQL Injection attack
