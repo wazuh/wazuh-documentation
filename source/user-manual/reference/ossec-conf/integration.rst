@@ -47,7 +47,7 @@ This indicates the service to integrate with.
 hook_url
 ^^^^^^^^
 
-This is the URL provided by Slack when integration is enabled on the Slack side. This is **mandatory for Slack.** As of version 4.4, this field is also **required for the Shuffle integration.**
+This is the URL that is used for communication with the software being integrated. It's mandatory for the `Slack` and `Shuffle` integrations.
 
 +--------------------+------------------------+
 | **Default value**  | n/a                    |
