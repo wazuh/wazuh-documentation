@@ -65,7 +65,7 @@ Install Wazuh components from local files
 
       # tar xf wazuh-offline.tar.gz
 
-   You can check the SHA512 of the decompressed package files in ``wazuh-offline/wazuh-packages/``. Find the SHA512 checksums in :doc:`/installation-guide/packages-list`.
+   You can check the SHA512 of the decompressed package files in ``wazuh-offline/wazuh-packages/``. Find the SHA512 checksums in the :doc:`/installation-guide/packages-list`.
 
 Installing the Wazuh indexer
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
