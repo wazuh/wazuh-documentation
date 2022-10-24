@@ -103,7 +103,7 @@ On the Ubuntu endpoint
 
    .. include:: /_templates/common/restart_agent.rst
 
-   Delete a file from the monitored directory. In this case, delete ``patient_data.txt``. You can see an alert generated for the file deleted.
+#. Delete a file from the monitored directory. In this case, delete ``patient_data.txt``. You can see an alert generated for the file deleted.
 
    .. thumbnail:: /images/hipaa/05-file-integrity-monitoring.png    
       :title: You can see an alert generated for the file deleted 
