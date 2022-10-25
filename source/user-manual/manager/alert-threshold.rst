@@ -27,14 +27,5 @@ This will set the minimum severity level that will trigger alerts that will be s
 
 When any value is changed in the ``ossec.conf`` file, the service must be restarted before the changes will take effect.
 
-a. For Systemd:
+.. include:: /_templates/common/restart_manager.rst
 
-.. code-block:: console
-
-  # systemctl restart wazuh-manager
-
-b. For SysV Init:
-
-.. code-block:: console
-
-  # service wazuh-manager restart
