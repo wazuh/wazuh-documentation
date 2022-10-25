@@ -166,20 +166,7 @@ Follow this guide to migrate from Open Distro for Elasticsearch 1.13 to the Wazu
 
 #. Once all the nodes have been upgraded, restart Filebeat.   
 
-   .. tabs::
-   
-    .. group-tab:: Systemd
-   
-     .. code-block:: console
-   
-      # systemctl restart filebeat
-   
-    .. group-tab:: SysV init
-   
-     .. code-block:: console
-   
-      # service filebeat restart  
-
+   .. include:: /_templates/common/restart_filebeat.rst
 
 #. Run the following command to verify that the communication between Filebeat and the Wazuh indexer is working as expected. 
 
