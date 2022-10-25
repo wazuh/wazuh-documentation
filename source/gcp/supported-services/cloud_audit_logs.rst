@@ -8,7 +8,13 @@
 Audited resources
 =================
 
-Google Cloud maintains three `audit logs <https://cloud.google.com/monitoring/api/resources#tag_audited_resource>`__ for each Google Cloud project, folder, and organization: **Admin Activity**, **Data Access**, and **System Event**. Wazuh supports collecting those logs by using the **gcp-pubsub** module. Details on how to configure the module can be found :ref:`gcp-pubsub configuration reference <gcp-pubsub>`.
+Google Cloud maintains three `audit logs <https://cloud.google.com/monitoring/api/resources#tag_audited_resource>`__ for each Google Cloud project, folder, and organization:
+
+- **Admin Activity**
+- **Data Access**
+- **System Event**
+
+Wazuh supports collecting those logs by using the ``gcp-pubsub`` module. Details on how to configure the module can be found :ref:`gcp-pubsub configuration reference <gcp-pubsub>`.
 
 .. thumbnail:: ../../images/gcp/gcp-overview.png
     :align: center
