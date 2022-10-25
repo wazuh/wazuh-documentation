@@ -29,14 +29,14 @@ OneLogin Configuration
          :align: center
          :width: 80%
 
-   #. On the created user complete the mandatory fields, and assign a value in the **Department** field. In our case, this is ``wazuh-admin``. This field will be used later in the Wazuh indexer configuration as the backend role.
+   #. Complete the mandatory fields, assign a value in the **Department** field and click on **Save User**. In our case, the department is ``wazuh-admin``. This field will be used later in the Wazuh indexer configuration as the backend role.
 
       .. thumbnail:: /images/single-sign-on/onelogin/02-complete-the-mandatory-fields.png
          :title: Complete the mandatory fields
          :align: center
          :width: 80%
 
-   #. Click on **Save User**, select the user, navigate to **More Actions** and click on **Change Password** to assign a password to the user.
+   #. Select the user, navigate to **More Actions** and click on **Change Password** to assign a password to the user.
 
       .. thumbnail:: /images/single-sign-on/onelogin/03-click-on-save-user.png
          :title: Click on Save User
@@ -85,18 +85,18 @@ OneLogin Configuration
          :align: center
          :width: 80%   
 
-      In our own case, we named the new parameter as **Roles**, then we select the value **Department** and **Include in SAML assertion**.
+   #. Edit the parameter details. In our own case, we named the new parameter as **Roles**, then we selected the value **Department** and marked the  **Include in SAML assertion** checkbox. The rest of the app configuration is left as default. 
 
       .. thumbnail:: /images/single-sign-on/onelogin/08-we-named-the-new-parameter-as-roles.png
          :title: We named the new parameter as Roles
          :align: center
          :width: 80%   
 
-   #. The rest of the app configuration is left as default. Click on **Save** to apply the configuration.
+   #. Click on **Save** to apply the configuration.
 
 #. Add the created user to the new app.
 
-   Go to **Users** and select the created user. Go to **Applications** and click on **+**, select the **Allow the user to sign in** checkbox, and click on **Save**:
+   #. Go to **Users** and select the created user. Go to **Applications** and click on **+**, select the **Allow the user to sign in** checkbox, and click on **Save**:
 
       .. thumbnail:: /images/single-sign-on/onelogin/09-add-the-created-user-to-the-new-app.png
          :title: Add the created user to the new app
@@ -105,7 +105,7 @@ OneLogin Configuration
 
 #. Get the ``metada_onelogin.xml`` file and ``X.509 certificate`` from the application.
 
-   #. Go to **Applications**, >  **Applications** then select the **Wazuh** app. Click on **More Actions** and then select **SAML Metadata**.
+   #. Go to **Applications** >  **Applications** then select the **Wazuh** app. Click on **More Actions** and then select **SAML Metadata**.
 
       .. thumbnail:: /images/single-sign-on/onelogin/10-click-on-more-actions.png
          :title: Click on More Actions and then select SAML Metadata
