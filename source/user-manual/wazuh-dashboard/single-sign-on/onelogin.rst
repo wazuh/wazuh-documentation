@@ -19,7 +19,7 @@ OneLogin Configuration
 ----------------------
 
 #. Create an account in OneLogin. Request a free trial if you don't have a paid license.
-#. Add the OneLogin extension in your browser.
+#. Add the OneLogin extension to your browser.
 #. Create a new user. 
 
    #. Log in to **OneLogin** web console, select **Administration** > **Users** > **New User**.
