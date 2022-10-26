@@ -21,6 +21,7 @@ The integrations are configured on the Wazuh manager ``ossec.conf`` file which i
     <name> </name>
     <hook_url> </hook_url> <!-- Required for Slack -->
     <api_key> </api_key> <!-- Required for PagerDuty and VirusTotal -->
+    <alert_format>json</alert_format> <!-- Required for Slack, VirusTotal and Shuffle -->
 
     <!-- Optional filters -->
     <rule_id> </rule_id>
@@ -29,9 +30,24 @@ The integrations are configured on the Wazuh manager ``ossec.conf`` file which i
     <event_location> </event_location>
   </integration>
 
+
 After enabling the daemon and configure the integrations, restart the Wazuh manager to apply the changes:
 
 .. include:: /_templates/common/restart_manager.rst
+
+
+Optional filters
+^^^^^^^^^^^^^^^^
+
+These fields are used by ``Integrator`` to apply certain filters to the alerts being processed and sent to the external platforms. 
+The following considerations must be taken into account when the filters are set:
+   
+   - The behavior of the ``<group>`` field when multiple values are defined is that of an OR operation. If any of the defined groups matches the alert group, the alert is processed.
+   - The behavior of the ``<rule_id>`` field when multiple values are defined is that of an OR operation. If any of the defined rule ids matches the alert id, the alert is processed. If the alert does not contain an id or does not match with the defined ones, then it is skipped.
+   - The behavior between the ``<rule_id>`` and ``<group>`` fields when both are defined. If the alert being processed does not match any of the set values or just the values present in one of the fields but not any of the other, it is skipped. If the alert matches at least one of the values of each filter, the alert is processed by the integration.
+
+.. note::
+  It is recommended to carefully check the groups and rule identifiers mentioned above, as defining them incorrectly will result in expected alerts not being sent to the integration.
 
 The full configuration reference for the Integrator daemon can be found :ref:`here <reference_ossec_integration>`.
 
@@ -120,7 +136,7 @@ This is an example configuration for a custom integration:
     <name>custom-integration</name>
     <hook_url>WEBHOOK</hook_url>
     <level>10</level>
-    <group>multiple_drops|authentication_failures</group>
+    <group>multiple_drops,authentication_failures</group>
     <api_key>APIKEY</api_key> <!-- Replace with your external service API key -->
     <alert_format>json</alert_format>
   </integration>
