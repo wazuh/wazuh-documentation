@@ -70,19 +70,7 @@ Choose the corresponding tab to configure the installation as a single-node or m
 
       #. Run the following command to check if the Wazuh manager is active: 
 
-         .. tabs::
-
-            .. group-tab:: Systemd
-
-               .. code-block:: console
-
-                  # systemctl status wazuh-manager
-
-            .. group-tab:: SysV Init
-
-               .. code-block:: console
-
-                  # service wazuh-manager status
+         .. include:: /_templates/installations/wazuh/common/check_wazuh_manager.rst
 
    .. group-tab:: Multi-node cluster
 
