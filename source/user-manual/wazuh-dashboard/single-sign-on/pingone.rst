@@ -23,7 +23,7 @@ PingOne Configuration
 
    #. Navigate to **Connections** > **Applications** > **Add Application** and give it a name. In our case, the name is ``wazuh-sso``.
 
-   #. Proceed to the **Choose Application Type** section, select  **SAML Application** > **Configure**.
+   #. Proceed to the **Choose Application Type** section, and select  **SAML Application** > **Configure**.
 
       .. thumbnail:: /images/single-sign-on/pingone/01-proceed-to-the-choose-application-type-section.png
           :title: Proceed to the Choose Application Type section
@@ -88,7 +88,7 @@ PingOne Configuration
 
 #. Activate the application and note the necessary parameters.
 
-   #. Navigate to **Connections**, select **Applications** and enable the application.
+   #. Navigate to **Connections**, select **Applications**, and enable the application.
 
       .. thumbnail:: /images/single-sign-on/pingone/08-navigate-to-connections.png
           :title: Navigate to Connections

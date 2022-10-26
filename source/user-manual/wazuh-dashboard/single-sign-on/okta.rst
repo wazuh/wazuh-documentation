@@ -8,7 +8,7 @@
 Okta
 ====
 
-`Okta Inc. <https://www.okta.com/>`_ is an identity and access management company that provides technologies which enable secure user authentication into applications. In this guide, we integrate the Okta IdP to authenticate users into the Wazuh platform.
+`Okta Inc. <https://www.okta.com/>`_ is an identity and access management company that provides technologies that enable secure user authentication into applications. In this guide, we integrate the Okta IdP to authenticate users into the Wazuh platform.
 
 The single sign-on integration process is divided into three stages.
 
@@ -84,7 +84,7 @@ Okta Configuration
 
    #. In the **SAML settings** section, modify the following parameters:
 
-      - **Single sign on URL**: input ``https://<WAZUH_DASHBOARD_URL>/_opendistro/_security/saml/acs/idpinitiated`` and replace the ``WAZUH_DASHBOARD_URL`` field with the corresponding URL. 
+      - **Single sign-on URL**: input ``https://<WAZUH_DASHBOARD_URL>/_opendistro/_security/saml/acs/idpinitiated`` and replace the ``WAZUH_DASHBOARD_URL`` field with the corresponding URL. 
       - Select the **"Allow this app to request other SSO URLs"** option.
       - **Requestable SSO URLs**: input ``https://<WAZUH_DASHBOARD_URL>/_opendistro/_security/saml/acs`` and replace the ``WAZUH_DASHBOARD_URL`` field with the corresponding URL.
       - **Audience URI (SP Entity ID)** is the ``SP Entity ID`` (wazuh-saml) which will be used later in the ``config.yml`` on the Wazuh indexer instance.
@@ -96,7 +96,7 @@ Okta Configuration
          :align: center
          :width: 80%   
 
-   #. In the **Group Attribute Statements** section, put ``Roles`` as the name. The value for ``Roles`` will be used as the ``roles_key`` parameter in the Wazuh indexer configuration. For the filter field, select **Matches regex** and type ``.*``. 
+   #. In the **Group Attribute Statements** section put ``Roles`` as the name. The value for ``Roles`` will be used as the ``roles_key`` parameter in the Wazuh indexer configuration. For the filter field, select **Matches regex** and type ``.*``. 
 
       .. thumbnail:: /images/single-sign-on/okta/10-group-attribute-statements-section.png
          :title: Group Attribute Statements section

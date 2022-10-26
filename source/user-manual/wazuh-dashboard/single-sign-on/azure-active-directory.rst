@@ -97,7 +97,7 @@ Azure Active Directory Configuration
 
 #. Configure Single sign-on.
 
-   #. Go to **Enterprise applications**, select your application and then click on **Set up single sign on > SAML**.
+   #. Go to **Enterprise applications**, select your application and then click on **Set up single sign-on > SAML**.
 
       .. thumbnail:: /images/single-sign-on/azure-active-directory/07-configure-single-sign-on.png
          :title: Configure Single sign-on
@@ -105,17 +105,17 @@ Azure Active Directory Configuration
          :width: 80%
 
       .. thumbnail:: /images/single-sign-on/azure-active-directory/08-set-up-single-sign-on-SAML.png
-         :title: Set up single sign on > SAML
+         :title: Set up single sign-on > SAML
          :align: center
          :width: 80%
     
       .. thumbnail:: /images/single-sign-on/azure-active-directory/09-set-up-single-sign-on-SAML.png
-         :title: Set up single sign on > SAML 
+         :title: Set up single sign-on > SAML 
          :align: center
          :width: 80%
     
       .. thumbnail:: /images/single-sign-on/azure-active-directory/10-set-up-single-sign-on-SAML.png
-         :title: Set up single sign on > SAML
+         :title: Set up single sign-on > SAML
          :align: center
          :width: 80%
 

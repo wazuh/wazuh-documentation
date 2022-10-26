@@ -36,7 +36,7 @@ Google Configuration
    #. Take note of the following parameters, as they will be used during the Wazuh indexer configuration:
 
       - **Entity ID**: This will be used later as the ``idp.entity_id``
-      - Select **DOWNLOAD METADATA** and place the metadata file in the ``configuration`` directory of Wazuh indexer. The path to the directory is ``/usr/share/wazuh-indexer/plugins/opensearch-security/securityconfig/``.
+      - Select **DOWNLOAD METADATA** and place the metadata file in the ``configuration`` directory of the Wazuh indexer. The path to the directory is ``/usr/share/wazuh-indexer/plugins/opensearch-security/securityconfig/``.
 
       .. thumbnail:: /images/single-sign-on/google/02-take-note-of-the-parameters.png
          :title: Take note of the parameters
