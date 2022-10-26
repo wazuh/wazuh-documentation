@@ -36,17 +36,19 @@ Let's suppose that we want to add a new index pattern (``my-custom-alerts-*``) a
 
 #. First of all, stop the Filebeat service:
 
-    a. For Systemd:
+    .. tabs::
 
-       .. code-block:: console
+      .. group-tab:: Systemd
 
-        # systemctl stop filebeat
+        .. code-block:: console
+      
+            # systemctl stop filebeat
+    
+      .. group-tab:: SysV init
 
-    b. For SysV Init:
-
-       .. code-block:: console
-
-        # service filebeat stop
+        .. code-block:: console
+      
+          # service filebeat stop
 
 #. Download the Wazuh template for Elasticsearch and save it into a file (for example, *template.json*):
 
