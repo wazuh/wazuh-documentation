@@ -26,43 +26,17 @@ Follow this guide to migrate from Open Distro for Elasticsearch 1.13 to the Wazu
 
 #. Stop indexing, and perform a flush: indexing/searching should be stopped and _flush can be used to permanently store information into the index which will prevent any data loss during the upgrade.
 
-
    .. code-block:: console
 
         curl -X POST "https://<elasticsearch_IP>:9200/_flush/synced" -u <username>:<password> -k
 
-
 #. Stop Filebeat.
 
-   .. tabs::
-   
-    .. group-tab:: Systemd
-   
-     .. code-block:: console
-   
-      # systemctl stop filebeat
-   
-    .. group-tab:: SysV init
-   
-     .. code-block:: console
-   
-      # service filebeat stop          
+      .. include:: /_templates/installations/basic/elastic/common/stop_filebeat.rst
 
 #. Shutdown Elasticsearch. For distributed deployments, you can shut down a single node at a time: first data nodes and later master nodes.
 
-   .. tabs::
-   
-    .. group-tab:: Systemd
-   
-     .. code-block:: console
-   
-      # systemctl stop elasticsearch
-   
-    .. group-tab:: SysV init
-   
-     .. code-block:: console
-   
-      # service elasticsearch stop 
+      .. include:: /_templates/installations/basic/elastic/common/stop_elasticsearch.rst
 
 #. Add the Wazuh repository. You can skip this step if the repository is already present and enabled on your server. 
 

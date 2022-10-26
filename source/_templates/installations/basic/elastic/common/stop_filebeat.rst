@@ -6,12 +6,12 @@
 
     .. code-block:: console
 
-      # systemctl stop elasticsearch
+      # systemctl stop filebeat      
 
   .. group-tab:: SysV Init
 
     .. code-block:: console
 
-      # service elasticsearch stop
+      # service filebeat stop
 
 .. End of include file
