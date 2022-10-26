@@ -69,7 +69,7 @@ Azure Active Directory Configuration
    
       - ``description``: can be any value that you want.
       - ``id``: should be the ID of your application. You can find it in the application's overview menu or at the top of the Manifest in the field ``appId``.
-      - ``value``: will define the name of the role. In this case ``Wazuh_role``, which will be the value for the role to be mapped on the ``roles_mapping.yml`` file.
+      - ``value``: defines the name of the role. In this case ``Wazuh_role``, which will be the value for the role to be mapped on the ``roles_mapping.yml`` file.
       - ``displayName``: can be the same as ``value``.
 
       .. thumbnail:: /images/single-sign-on/azure-active-directory/04-add-a-new-role.png
@@ -119,14 +119,14 @@ Azure Active Directory Configuration
          :align: center
          :width: 80%
 
-   #. In option 1, under  **Basic SAML Configuration**, click **edit** and set ``wazuh-saml`` as **Identifier (Entity ID)** and ``https://WAZUH_DASHBOARD_URL/_opendistro/_security/saml/acs`` as **Reply URL (Assertion Consumer Service URL)**. Save and proceed to the next step.
+   #. In option 1, under  **Basic SAML Configuration**, click **edit** and set ``wazuh-saml`` as **Identifier (Entity ID)** and ``https://<WAZUH_DASHBOARD_URL>/_opendistro/_security/saml/acs`` as **Reply URL (Assertion Consumer Service URL)**. Replace ``<WAZUH_DASHBOARD_URL>`` with the corresponding value. Save and proceed to the next step.
 
       .. thumbnail:: /images/single-sign-on/azure-active-directory/11-click-edit-and-set-wazuh-saml.png
          :title: Click edit and set wazuh-saml
          :align: center
          :width: 80%
 
-   #. In option 2 under **User Attributes & Claims**, click **edit** and select **Add new claim**. Select **Roles** as the name and **user. assignedroles** as **Source attribute**. This claim will be mapped with ``roles_key`` on the Wazuh indexer configuration.
+   #. In option 2 under **User Attributes & Claims**, click **edit** and select **Add new claim**. Select **Roles** as the name and **user.assignedroles** as **Source attribute**. This claim will be mapped with ``roles_key`` on the Wazuh indexer configuration.
 
       .. thumbnail:: /images/single-sign-on/azure-active-directory/12-click-edit-and-select-add-new-claim.png
          :title: Click edit and select Add new claim
@@ -135,7 +135,7 @@ Azure Active Directory Configuration
 
 #. Note the necessary parameters.
 
-   Still in the same menu **Enterprise applications**, select your application and then click on **Single sign-on**. Let's note some parameters that will be used in the Wazuh indexer configuration.
+   In the **Enterprise applications** menu, select your application and then click on **Single sign-on**. Note some parameters that will be used in the Wazuh indexer configuration.
 
    - In option **3 SAML Signing Certificate**, the **App Federation Metadata Url** will be the ``idp.metadata_url`` in the Wazuh indexer configuration file.
 
@@ -147,13 +147,13 @@ Azure Active Directory Configuration
       :width: 80%
 
 
-   In option 4 **Set up <YOUR APPLICATION>**, the **Azure AD Identifier** will be our ``idp.entity_id``.
+   - In option 4 **Set up <YOUR APPLICATION>**, the **Azure AD Identifier** will be our ``idp.entity_id``.
 
 
 Wazuh indexer configuration
 ---------------------------
 
-Edit the Wazuh indexer security configuration files. The file path to the Wazuh indexer security configuration is ``/usr/share/wazuh-indexer/plugins/opensearch-security/securityconfig/``. The files to configure are ``config.yml`` and ``roles_mapping.yml``. It is recommended to back up these files before the configuration is carried out.
+Edit the Wazuh indexer security configuration files. It is recommended to back up these files before the configuration is carried out.
 
 #. Edit the ``/usr/share/wazuh-indexer/plugins/opensearch-security/securityconfig/config.yml`` file and change the following values:
 
@@ -162,7 +162,7 @@ Edit the Wazuh indexer security configuration files. The file path to the Wazuh 
    - Include a ``saml_auth_domain`` configuration under the ``authc`` section similar to the following:
 
       .. code-block:: console
-         :emphasize-lines: 7,10,22,23,25,26,27,28,29
+         :emphasize-lines: 7,10,22,23,25,26,27,28
 
             authc:
          ...
@@ -198,7 +198,7 @@ Edit the Wazuh indexer security configuration files. The file path to the Wazuh 
 
    - The ``roles_key`` must be the same value that we used in the Azure AD configuration.
 
-#. Run the ``securityadmin`` script to load the configuration changes. 
+#. Run the ``securityadmin`` script to load the configuration changes made in the ``config.yml`` file. 
 
 
    .. code-block:: console
@@ -243,7 +243,7 @@ Edit the Wazuh indexer security configuration files. The file path to the Wazuh 
       - "Wazuh_role"
       description: "Maps admin to all_access"
 
-#. Run the ``securityadmin`` script to load the configuration changes.       
+#. Run the ``securityadmin`` script to load the configuration changes made in the ``roles_mapping.yml`` file.       
 
 
    .. code-block:: console

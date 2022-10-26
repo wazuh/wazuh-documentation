@@ -96,7 +96,7 @@ OneLogin Configuration
 
 #. Add the created user to the new app.
 
-   #. Go to **Users** and select the created user. Go to **Applications** and click on **+**, select the **Allow the user to sign in** checkbox, and click on **Save**:
+   #. Go to **Users** and select the created user. Go to **Applications** and click on **+**, select the **Allow the user to sign in** checkbox, and click on **Save**.
 
       .. thumbnail:: /images/single-sign-on/onelogin/09-add-the-created-user-to-the-new-app.png
          :title: Add the created user to the new app
@@ -141,7 +141,7 @@ OneLogin Configuration
 Wazuh indexer configuration
 ---------------------------
 
-Configure Wazuh indexer security configuration files. The file path to the Wazuh indexer security configuration is ``/usr/share/wazuh-indexer/plugins/opensearch-security/securityconfig/``. The files to configure are ``config.yml`` and ``roles_mapping.yml``. It is recommended to back up these files before the configuration is carried out.
+Edit the Wazuh indexer security configuration files. It is recommended to back up these files before the configuration is carried out.
 
 #. Edit the ``/usr/share/wazuh-indexer/plugins/opensearch-security/securityconfig/config.yml`` file and change the following values:
 
@@ -193,7 +193,7 @@ Configure Wazuh indexer security configuration files. The file path to the Wazuh
    - ``roles_key``
    - ``exchange_key``
 
-#. Run the ``securityadmin`` script to load the configuration changes.
+#. Run the ``securityadmin`` script to load the configuration changes made in the ``config.yml`` file. 
 
    .. code-block:: console
 
@@ -237,7 +237,7 @@ Configure Wazuh indexer security configuration files. The file path to the Wazuh
          description: "Maps admin to all_access"
       ...
 
-#. Run the ``securityadmin`` script to load the configuration changes.
+#. Run the ``securityadmin`` script to load the configuration changes made in the ``roles_mapping.yml`` file. 
 
    .. code-block:: console 
           

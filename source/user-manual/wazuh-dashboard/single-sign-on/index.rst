@@ -8,9 +8,9 @@
 Single sign-on
 ==============
 
-This section describes how Wazuh can be integrated with several Identity Providers (IdP) to implement Single Sign-On (SSO).
+This section describes how Wazuh can be integrated with several Identity Providers (IdP) to implement Single Sign-On (SSO). 
 
-The guide assumes you already have a Wazuh indexer installation. Instructions to install the Wazuh indexer can be found in our :doc:`documentation </index>`.
+The guide assumes you already have a Wazuh indexer and a Wazuh dashboard installation. To learn more, see the :doc:`installation guide </installation-guide/index>`.
 
 Required parameters
 -------------------

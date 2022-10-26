@@ -113,7 +113,7 @@ Google Configuration
 Wazuh indexer configuration
 ---------------------------
 
-Configure Wazuh indexer security configuration files. The file path to the Wazuh indexer security configuration is ``/usr/share/wazuh-indexer/plugins/opensearch-security/securityconfig/``. The files to configure are ``config.yml`` and ``roles_mapping.yml``. It is recommended to back up these files before the configuration is carried out.
+Edit the Wazuh indexer security configuration files. It is recommended to back up these files before the configuration is carried out.
 
 #. Edit the ``/usr/share/wazuh-indexer/plugins/opensearch-security/securityconfig/config.yml`` file and change the following values:
    
@@ -164,7 +164,7 @@ Configure Wazuh indexer security configuration files. The file path to the Wazuh
    - ``roles_key``
    - ``exchange_key``
 
-#. Run the ``securityadmin`` script to load the configuration changes.
+#. Run the ``securityadmin`` script to load the configuration changes made in the ``config.yml`` file. 
 
    .. code-block:: console
 
@@ -206,7 +206,7 @@ Configure Wazuh indexer security configuration files. The file path to the Wazuh
       - "Wazuh_access"
       description: "Maps admin and Wazuh_access to all_access"
 
-#. Run the ``securityadmin`` script to load the configuration changes.
+#. Run the ``securityadmin`` script to load the configuration changes made in the ``roles_mapping.yml`` file. 
 
    .. code-block:: console
 

@@ -30,7 +30,7 @@ PingOne Configuration
           :align: center
           :width: 80%
 
-   #. Select **Manually Enter** on the **Provide App Metadata** page and add the following configuration, replacing ``WAZUH_DASHBOARD_URL`` with the corresponding value:
+   #. Select **Manually Enter** on the **Provide App Metadata** page and add the following configuration, replacing ``<WAZUH_DASHBOARD_URL>`` with the corresponding value:
 
       - ACS URLs: ``https://<WAZUH_DASHBOARD_URL>/_opendistro/_security/saml/acs``
       - ENTITY ID: ``wazuh-saml``
@@ -63,7 +63,7 @@ PingOne Configuration
 
       The ``Roles`` attribute will be used later as the ``sp.entity_id`` in the Wazuh indexer configuration file.
 
-   #. Click on **Required** checkbox, and click on **Save**.
+   #. Click on the **Required** checkbox, and click on **Save**.
 
 #. Create a group and assign users.
  
@@ -74,7 +74,7 @@ PingOne Configuration
           :align: center
           :width: 80%
 
-   #. To assign users, open the created **Group** and go to the **Users** tab and select **Add Users Individually**. Add all the members that must log in to the Wazuh dashboard, and click on save when done.
+   #. To assign users, open the created **Group**, go to the **Users** tab and select **Add Users Individually**. Add all the members that must log in to the Wazuh dashboard, and click on **Save** when done.
 
       .. thumbnail:: /images/single-sign-on/pingone/06-assign-users.png
           :title: Assign users
@@ -95,7 +95,7 @@ PingOne Configuration
           :align: center
           :width: 80%
     
-   #. Now we must take note of the following parameters from the configuration page of the application, this will be used in the next step:
+   #. Take note of the following parameters from the configuration page of the application. This information will be used in the next step. 
 
       - **ISSUER ID**: It'll be in the form “https://auth.pingone.com/....”
       - **IDP METADATA URL**: It’ll be in the form “https://auth.pingone.com/....”
@@ -110,7 +110,7 @@ PingOne Configuration
 Wazuh indexer configuration
 ---------------------------
 
-Configure Wazuh indexer security configuration files. The file path to the Wazuh indexer security configuration is ``/usr/share/wazuh-indexer/plugins/opensearch-security/securityconfig/``. The files to configure are ``config.yml`` and ``roles_mapping.yml``. It is recommended to back up these files before the configuration is carried out.
+Edit the Wazuh indexer security configuration files. It is recommended to back up these files before the configuration is carried out.
 
 #. Edit the ``/usr/share/wazuh-indexer/plugins/opensearch-security/securityconfig/config.yml`` file and change the following values:
 
@@ -162,7 +162,7 @@ Configure Wazuh indexer security configuration files. The file path to the Wazuh
    - ``roles_key``
    - ``exchange_key``
 
-#. Run the ``securityadmin`` script to load the configuration changes.
+#. Run the ``securityadmin`` script to load the configuration changes made in the ``config.yml`` file. 
 
    .. code-block:: console
 
@@ -205,7 +205,7 @@ Configure Wazuh indexer security configuration files. The file path to the Wazuh
          - "Role"
          description: "Maps admin to all_access"
 
-#. Run the ``securityadmin`` script to load the configuration changes.
+#. Run the ``securityadmin`` script to load the configuration changes made in the ``roles_mapping.yml`` file. 
 
    .. code-block:: console
 
