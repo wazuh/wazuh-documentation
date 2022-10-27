@@ -34,7 +34,8 @@ The following parameters are required to make the configurations on the Wazuh da
     - Each group that is generated in the IDPs can only be used as one  ``backend_role``. In a case where other roles such as ``read-only`` are needed, a new group will have to be created for this purpose.
 
 
-.. topic:: Identity Providers
+Identity providers
+------------------
 
     .. toctree::
         :maxdepth: 1
