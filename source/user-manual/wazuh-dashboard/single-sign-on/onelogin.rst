@@ -55,16 +55,16 @@ OneLogin Configuration
    #. Search for **SAML Custom Connector (Advanced)** application. In **Display Name**,  assign a name. In our case, we assigned the name ``Wazuh``. Navigate to the Configuration tab and fill in the information:
 
       - **Audience (EntityID)**: ``wazuh-saml``
-      - **Recipient**: ``https://WAZUH_DASHBOARD_URL/_opendistro/_security/saml/acs``
-      - **ACS (Consumer) URL Validator**: ``https://WAZUH_DASHBOARD_URL/_opendistro/_security/saml/acs``
-      - **ACS (Consumer) URL**: ``https://WAZUH_DASHBOARD_URL/_opendistro/_security/saml/acs``
-      - **Login URL**: ``https://WAZUH_DASHBOARD_URL/app/wazuh``
+      - **Recipient**: ``https://<WAZUH_DASHBOARD_URL>/_opendistro/_security/saml/acs``
+      - **ACS (Consumer) URL Validator**: ``https://<WAZUH_DASHBOARD_URL>/_opendistro/_security/saml/acs``
+      - **ACS (Consumer) URL**: ``https://<WAZUH_DASHBOARD_URL>/_opendistro/_security/saml/acs``
+      - **Login URL**: ``https://<WAZUH_DASHBOARD_URL>/app/wazuh``
       - **SAML initiator**: ``Service Provider``
       - **SAML nameID format**: ``Unspecified``
       - **SAML issuer type**: ``Specific``
       - **SAML signature element**: ``Response``
    
-      Replace the ``WAZUH_DASHBOARD_URL`` field with the corresponding URL of your Wazuh dashboard instance.
+      Replace the ``<WAZUH_DASHBOARD_URL>`` field with the corresponding URL of your Wazuh dashboard instance.
 
       The configuration must be similar to the highlighted blue rectangles:
 
