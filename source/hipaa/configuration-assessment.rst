@@ -16,7 +16,7 @@ The SCA module can help to implement the following HIPAA sections:
 
 - **Access Control §164.312(a)(1) - Automatic Logoff**: *“Implement electronic procedures that terminate an electronic session after a predetermined time of inactivity.”*
 
-  This section of the HIPAA standard requires you to implement measures that will terminate log-on sessions in systems that contain healthcare information after a specified period of inactivity. This includes making sure that an RDP or SSH session is automatically terminated after a predetermined duration of inactivity.
+  This section of the HIPAA standard requires you to implement measures that will terminate login sessions in systems that contain healthcare information after a specified period of inactivity. This includes making sure that an RDP or SSH session is automatically terminated after a predetermined duration of inactivity.
 
   The Wazuh SCA module scans endpoints on a regular basis to ensure they comply with specified security policies. These scans also find missing access control policies like automatic logoff configurations. Refer to the Wazuh :doc:`SCA documentation  </user-manual/capabilities/sec-config-assessment/index>` for more details on configuring SCA checks.
 
