@@ -245,6 +245,14 @@ newUrls['4.3'] = [
   '/upgrade-guide/wazuh-agent/aix.html',
   '/upgrade-guide/wazuh-agent/hp-ux.html',
   '/upgrade-guide/wazuh-agent/index.html',
+  '/hipaa/index.html',
+  '/hipaa/visualization-and-dashboard.html',
+  '/hipaa/log-data-analysis.html',
+  '/hipaa/configuration-assessment.html',
+  '/hipaa/malware-detection.html',
+  '/hipaa/file-integrity-monitoring.html',
+  '/hipaa/vulnerability-detection.html',
+  '/hipaa/active-response.html',
 ];
 
 removedUrls['4.3'] = [
