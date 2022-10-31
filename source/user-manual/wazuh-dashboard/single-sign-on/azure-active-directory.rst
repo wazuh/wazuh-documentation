@@ -54,18 +54,20 @@ Azure Active Directory Configuration
 
       .. code-block:: console
 
-         {
-            "allowedMemberTypes": [
-               "User"
-            ],
-            "description": "Wazuh role",
-            "displayName": "Wazuh_role",
-            "id": "<application_id>",
-            "isEnabled": true,
-            "lang": null,
-            "origin": "Application",
-            "value": "Wazuh_role"
-         },
+          {
+                "allowedMemberTypes": [
+                  "User"
+                ],
+                "description": "Wazuh role",
+                "displayName": "Wazuh_role",
+                "id": "<application_id>",
+                "isEnabled": true,
+                "lang": null,
+                "origin": "Application",
+                "value": "Wazuh_role"
+              },
+
+
    
       - ``description``: can be any value that you want.
       - ``id``: should be the ID of your application. You can find it in the application's overview menu or at the top of the Manifest in the field ``appId``.
@@ -236,12 +238,12 @@ Edit the Wazuh indexer security configuration files. It is recommended to back u
       :emphasize-lines: 6
 
       all_access:
-      reserved: false
-      hidden: false
-      backend_roles:
-      - "admin"
-      - "Wazuh_role"
-      description: "Maps admin to all_access"
+        reserved: false
+        hidden: false
+        backend_roles:
+        - "admin"
+        - "Wazuh_role"
+        description: "Maps admin to all_access"
 
 #. Run the ``securityadmin`` script to load the configuration changes made in the ``roles_mapping.yml`` file.       
 
@@ -291,12 +293,14 @@ Wazuh dashboard configuration
 
    .. code-block:: console  
       :emphasize-lines: 3
+              
+        ...
+            this.router.get({
+              path: `/logout`,
+              validate: false
+        ...
 
-      ...
-         this.router.get({
-            path: `/logout`,
-            validate: false
-      ...
+
 
 #. Restart the Wazuh dashboard service.
 
