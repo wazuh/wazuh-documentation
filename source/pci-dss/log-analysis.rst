@@ -116,11 +116,11 @@ The following are some Wazuh rules that help achieve this requirement:
   - All security events.
   - Logs of all system components that store, process, or transmit cardholder data (CHD) and/or sensitive authentication data (SAD).
   - Logs of all critical system components.
-  - Logs of all servers and system components that perform security functions (for example, network security controls, intrusion-detection systems/intrusion-prevention systems (IDS/IPS), authentication servers).
+  - Logs of all servers and system components that perform security functions (for example, network security controls, intrusion-detection systems/intrusion-prevention systems (IDS/IPS), and authentication servers).
 
    This requirement ensures that logs are analyzed for indicators of compromise at least once daily. The following are some Wazuh rules that may help in achieving this requirement:
 
-    - **Rule 61138**: New Windows Service Created. This rule generates an alert after the system logs from a Windows endpoint have been analyzed by the analysis engine and it has been determined that a new service was created.
+    - **Rule 61138**: New Windows Service Created. This rule generates an alert after the system logs from a Windows endpoint have been analyzed by the analysis engine, and it has been determined that a new service was created.
 
     	.. thumbnail:: ../images/pci/pci-dss-requirement-10.4.1-1.png
     		:title: PCI DSS requirement 10.4.1
