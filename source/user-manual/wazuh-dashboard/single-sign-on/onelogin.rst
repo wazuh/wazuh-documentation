@@ -152,36 +152,36 @@ Edit the Wazuh indexer security configuration files. It is recommended to back u
    .. code-block:: console
       :emphasize-lines: 7,10,22,23,25,26,27,28
 
-         authc:
+          authc:
       ...
             basic_internal_auth_domain:
-            description: "Authenticate via HTTP Basic against internal users database"
-            http_enabled: true
-            transport_enabled: true
-            order: 0
-            http_authenticator:
-               type: "basic"
-               challenge: false
-            authentication_backend:
-               type: "intern"
+              description: "Authenticate via HTTP Basic against internal users database"
+              http_enabled: true
+              transport_enabled: true
+              order: 0
+              http_authenticator:
+                type: "basic"
+                challenge: false
+              authentication_backend:
+                type: "intern"
             saml_auth_domain2:
-            http_enabled: true
-            transport_enabled: true
-            order: 1
-            http_authenticator:
-               type: saml
-               challenge: true
-               config:
+              http_enabled: true
+              transport_enabled: true
+              order: 1
+              http_authenticator:
+                type: saml
+                challenge: true
+                config:
                   idp:
-                  metadata_file: "/usr/share/wazuh-indexer/plugins/opensearch-security/securityconfig/metadata_onelogin.xml"
-                  entity_id: "https://app.onelogin.com/saml/metadata/xxxxxxx"
+                    metadata_file: "/usr/share/wazuh-indexer/plugins/opensearch-security/securityconfig/metadata_onelogin.xml"
+                    entity_id: "https://app.onelogin.com/saml/metadata/xxxxxxx"
                   sp:
-                  entity_id: wazuh-saml
-                  kibana_url: https://<WAZUH_DASHBOARD_URL>
+                    entity_id: wazuh-saml
+                  kibana_url: https://<WAZUH_DASHBOARD_ADDRESS>
                   roles_key: Roles
                   exchange_key: 'X.509 Certificate'
-            authentication_backend:
-               type: noop
+              authentication_backend:
+                type: noop
       ...
    
    Ensure to change the following parameters to their corresponding value:
