@@ -199,12 +199,12 @@ Edit the Wazuh indexer security configuration files. It is recommended to back u
    .. code-block:: console
 
       all_access:
-      reserved: false
-      hidden: false
-      backend_roles:
-      - "admin"
-      - "Wazuh_access"
-      description: "Maps admin and Wazuh_access to all_access"
+        reserved: false
+        hidden: false
+        backend_roles:
+        - "admin"
+        - "Wazuh_access"
+        description: "Maps admin and Wazuh_access to all_access"
 
 #. Run the ``securityadmin`` script to load the configuration changes made in the ``roles_mapping.yml`` file. 
 
@@ -253,12 +253,13 @@ Wazuh dashboard configuration
 
    .. code-block:: console
       :emphasize-lines: 3
-
+      
       ...
-         this.router.get({
+          this.router.get({
             path: `/logout`,
             validate: false
       ...
+
 
 #. Restart the Wazuh dashboard service.
 
