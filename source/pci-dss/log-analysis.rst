@@ -8,7 +8,7 @@
 Log data analysis
 =================
 
-In many cases, evidence of an attack can be found in the log messages of devices, systems, and applications. The Wazuh log data analysis module can receive logs through text files or Windows event logs. It can also directly receive logs via remote syslog which is useful for firewalls and other such devices.
+In many cases, evidence of an attack can be found in the log messages of devices, systems, and applications. The Wazuh log data analysis module can receive logs through text files or Windows event logs. It can also directly receive logs via remote syslog, which is useful for firewalls and other such devices.
 
 Additionally, the log data analysis module analyzes the log data received from agents. It performs decoding and rule matching on the received data to process it. This processed log data can then be used for threat detection, prevention, and active response. 
 
