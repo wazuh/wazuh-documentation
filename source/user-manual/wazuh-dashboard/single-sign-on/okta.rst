@@ -235,12 +235,12 @@ Edit the Wazuh indexer security configuration files. It is recommended to back u
       .. code-block:: console
          :emphasize-lines: 6
 
-            all_access:
-              reserved: false
-              hidden: false
-              backend_roles:
-              - "admin"
-              - "<GROUP_NAME>"
+          all_access:
+            reserved: false
+            hidden: false
+            backend_roles:
+            - "admin"
+            - "<GROUP_NAME>"
 
    Replace ``<GROUP_NAME>`` with the name you gave to your group in Step 3. In our case, this is ``wazuh-admin``.
 
