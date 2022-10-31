@@ -158,39 +158,39 @@ Edit the Wazuh indexer security configuration files. It is recommended to back u
    - Include a ``saml_auth_domain`` configuration under the ``authc`` section similar to the following:
 
    .. code-block:: console
-      :emphasize-lines: 7,10,22,23,25,26,27,2   
+      :emphasize-lines: 7,10,22,23,25,26,27,2
 
-            authc:
+        authc:
       ...
-            basic_internal_auth_domain:
+          basic_internal_auth_domain:
             description: "Authenticate via HTTP Basic against internal users database"
             http_enabled: true
             transport_enabled: true
             order: 0
             http_authenticator:
-               type: "basic"
-               challenge: false
+              type: "basic"
+              challenge: false
             authentication_backend:
-               type: "intern"
-         saml_auth_domain:
+              type: "intern"
+          saml_auth_domain:
             http_enabled: true
             transport_enabled: false
             order: 1
             http_authenticator:
-            type: saml
-            challenge: true
-            config:
-               idp:
-                  metadata_url: ""
-                  entity_id: ""
-               sp:
-                  entity_id: wazuh-saml
-               kibana_url: https://<WAZUH_DASHBOARD_URL>
-               roles_key: Roles
-               exchange_key: ''
+              type: saml
+              challenge: true
+              config:
+                  idp:
+                    metadata_url: ""
+                    entity_id: ""
+                  sp:
+                    entity_id: wazuh-saml
+                  kibana_url: https://<WAZUH_DASHBOARD_ADDRESS>
+                  roles_key: Roles
+                  exchange_key: ''
             authentication_backend:
-            type: noo   
-   
+              type: noop               
+         
    Ensure to change the following parameters to their corresponding value:
 
       - ``idp.metadata_url``  
