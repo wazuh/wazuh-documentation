@@ -5,17 +5,20 @@
   
 .. _pci_dss_log_analysis:
 
-Log collector
-=============
+Log data analysis
+=================
 
-In many cases, evidence of an attack can be found in the log messages of devices, systems, and applications. The Wazuh log collector can receive logs through text files or Windows event logs. It can also directly receive logs via remote syslog which is useful for firewalls and other such devices. This log data can then be used for management and analysis to accelerate threat detection. 
+In many cases, evidence of an attack can be found in the log messages of devices, systems, and applications. The Wazuh log data analysis module can receive logs through text files or Windows event logs. It can also directly receive logs via remote syslog which is useful for firewalls and other such devices.
+
+Additionally, the log data analysis module analyzes the log data received from agents. It performs decoding and rule matching on the received data to process it. This processed log data can then be used for threat detection, prevention, and active response. 
 
 The log collector module can help meet the following PCI DSS requirement:
 
 - **Requirement 10 - Log and Monitor All Access to System Components and Cardholder Data**: This control requires that user activities, including those by employees, contractors, consultants, internal and external vendors, and other third parties are logged and monitored, and the log data stored for a specified period of time.
 
-To achieve this, the Wazuh agent can collect logs from the endpoints it is deployed on. Logs can also be collected via Syslog for network and other syslog enabled devices. Wazuh can also hold logs of events that do not generate an alert using the archive feature and the indexer long term storage. For more information on configuring log collection, see the :doc:`Log data collection section </user-manual/capabilities/log-data-collection/index>`.
+To help meet this requirement, the Wazuh agent collects logs from the endpoints it is deployed on. The log analysis module also receives logs via syslog for network and other syslog-enabled devices. The logs received are decoded to extract relevant information from its fields. After that, the extracted information is compared to the ruleset to look for matches. Where the extracted information matches a rule, an alert is generated. Refer to the :doc:`ruleset section  </user-manual/ruleset/index>` for more information.
 
+Wazuh can also hold logs of events that do not generate an alert using the archive feature and the indexer long term storage. For more information on configuring log collection, see the :doc:`Log data collection section </user-manual/capabilities/log-data-collection/index>`.
 
 Use cases
 ---------
@@ -108,3 +111,25 @@ The following are some Wazuh rules that help achieve this requirement:
 		:align: center
 		:width: 80%
     
+- PCI DSS requirement 10.4.1 requires that the following audit logs are reviewed at least once daily:
+
+    - All security events.
+    - Logs of all system components that store, process, or transmit cardholder data (CHD) and/or sensitive authentication data (SAD).
+    - Logs of all critical system components.
+    - Logs of all servers and system components that perform security functions (for example, network security controls, intrusion-detection systems/intrusion-prevention systems (IDS/IPS), authentication servers).
+
+   This requirement ensures that logs are analyzed for indicators of compromise at least once daily. The following are some Wazuh rules that may help in achieving this requirement:
+
+    - **Rule 61138**: New Windows Service Created. This rule generates an alert after the system logs from a Windows endpoint have been analyzed by the analysis engine and it has been determined that a new service was created.
+
+    	.. thumbnail:: ../images/pci/pci-dss-requirement-10.4.1-1.png
+    		:title: PCI DSS requirement 10.4.1
+    		:align: center
+    		:width: 80%
+
+    - **Rule 31168**: Shellshock attack detected. This rule will generate an alert when logs indicating a shellshock attack from a WAF or web application are analyzed by the analysis engine.
+      
+    	.. thumbnail:: ../images/pci/pci-dss-requirement-10.4.1-2.png
+    		:title: PCI DSS requirement 10.4.1
+    		:align: center
+    		:width: 80%
