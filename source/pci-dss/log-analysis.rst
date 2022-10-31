@@ -34,7 +34,7 @@ PCI DSS Requirement 10.2.2 requires that audit logs record the following details
 
 The following are some Wazuh rules that help achieve this requirement:
 
-- **Rule 5710 - sshd: attempt to login using a non-existent user**: This rule generates an alert when a non-existent user tries to log in to a system via SSH. The generated alert contains the information required by requirement 10.2.2 (user identification, type of event, date and time, success and failure indication, origination of event and identity or name of affected data, system component, resource, or service). The screenshot below shows the alert generated on the dashboard:
+- **Rule 5710 - sshd: attempt to login using a non-existent user**: This rule generates an alert when a non-existent user tries to log in to a system via SSH. The generated alert contains the information required by requirement 10.2.2 (user identification, type of event, date and time, success and failure indication, origination of event, and identity or name of affected data, system component, resource, or service). The screenshot below shows the alert generated on the dashboard:
 
 	.. thumbnail:: ../images/pci/attempt-to-login-using-non-existent-user.png
 		:title: Attempt to login using a non-existent user
@@ -42,7 +42,7 @@ The following are some Wazuh rules that help achieve this requirement:
 		:width: 80%
 
  
-- **Rule 5715 - sshd: authentication success**: This rule generates an alert when a user successfully logs into a system via SSH. The generated alert contains the information required by requirement 10.2.2 (user identification, type of event, date and time, success and failure indication, origination of event and identity or name of affected data, system component, resource, or service). The screenshot below shows the alert generated on the dashboard:
+- **Rule 5715 - sshd: authentication success**: This rule generates an alert when a user successfully logs into a system via SSH. The generated alert contains the information required by requirement 10.2.2 (user identification, type of event, date and time, success and failure indication, origination of event, and identity or name of affected data, system component, resource, or service). The screenshot below shows the alert generated on the dashboard:
 
 	.. thumbnail:: ../images/pci/user-successfully-logs-into-a-system-via-SSH.png
 		:title: User successfully logs into a system via SSH
@@ -92,7 +92,7 @@ The following are some Wazuh rules that help achieve this requirement:
 		:align: center
 		:width: 80%
         
-#. Select **timestamp** as the primary time field for use with the global time filter then proceed to create the index pattern.
+#. Select **timestamp** as the primary time field for use with the global time filter, then proceed to create the index pattern.
 
 	.. thumbnail:: ../images/pci/configure-settings.png
 		:title: Select Create index pattern

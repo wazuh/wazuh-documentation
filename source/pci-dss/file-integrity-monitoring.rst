@@ -204,6 +204,6 @@ In this scenario, Syscheck detects when a file in a monitored directory is delet
 		:align: center
 		:width: 80%
 
-   In the alert details, we can see the file deleted, the PCI DSS requirement met, the deletion time, and other details.
+   In the alert details, we can see the file deleted, the PCI DSS requirement met the deletion time, and other details.
 
    These activities can be tracked from the PCI DSS module dashboard. The dashboard will show all activities that trigger a PCI DSS requirement including FIM changes.
