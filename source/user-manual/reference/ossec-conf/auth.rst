@@ -88,7 +88,7 @@ force
 
 .. versionadded:: 4.3.0
 
-The agent replacement options are configured inside this tag. All conditions must be satisfied to perform the replacement.
+This tag holds the agent replacement configuration options. All conditions must be satisfied to perform the replacement. If using multiple ``<force>`` tags, the longest ``disconnected_time`` and the longest ``after_registration_time`` must be met.
 
 .. code-block:: xml
 
