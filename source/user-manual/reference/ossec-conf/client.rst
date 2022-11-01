@@ -350,7 +350,7 @@ Groups name to which the agent belongs.
 agent_address
 ^^^^^^^^^^^^^
 
-Force IP address from the agent. If this is not set manager will extract source IP address from enrollment message.
+Force IP address from the agent. If this is not set manager will extract the source IP address from the enrollment message.
 
 +--------------------+---------------------------------------------+
 | **Default value**  | src                                         |
@@ -385,7 +385,7 @@ Used for manager verification. If no CA certificate is set server will not be ve
 +--------------------+---------------------------------------------+
 
 .. note::
-  Paths can be referred to relative paths under the Wazuh installation directory, or full paths.
+  Paths can be referred to as relative paths under the Wazuh installation directory or full paths.
 
 .. _enrollment_agent_certificate_path:
 

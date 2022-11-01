@@ -74,7 +74,7 @@ Specifies the role of the node.
 
 .. warning::
 
-	Using ``client`` as ``node_type`` in configuration is still valid but a warning message will be shown in logs.
+	Using ``client`` as ``node_type`` in configuration is still valid, but a warning message will be shown in logs.
 
 .. _cluster_key:
 
@@ -132,7 +132,7 @@ Lists all master nodes in the cluster using the ``<node>`` tag for each one.
 +--------------------+--------------------------------------------------+
 
 .. note::
-	The current cluster only allows one master node, therefore this list must have only one element. If more elements are found, **the first one will be used as master** and the rest will be ignored.
+	The current cluster only allows one master node. Therefore, this list must have only one element. If more elements are found, **the first one will be used as master**, and the rest will be ignored.
 
 .. _cluster_hidden:
 
