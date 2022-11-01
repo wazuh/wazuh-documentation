@@ -37,7 +37,7 @@ type
 |                    | ssh_integrity_check_linux |                                                                        |
 |                    |                           | The system will alert if these files have changed.                     |
 +                    +---------------------------+------------------------------------------------------------------------+
-|                    | ssh_generic_diff          | Supply an <arguments> value that consists of a set of commands to run. |
+|                    | ssh_generic_diff          | Supply a <arguments> value that consists of a set of commands to run.  |
 |                    |                           |                                                                        |
 |                    |                           | Their output is then processed, looking for changes or rule matches.   |
 +                    +---------------------------+------------------------------------------------------------------------+

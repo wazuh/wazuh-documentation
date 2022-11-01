@@ -85,7 +85,7 @@ Indicates which system(s) the command should be executed on.
 
 Example:
 
-If the application that interfaces with your edge firewall runs on one of your agents, you might have a firewall-block-edge command that runs a script on that agent to blacklist an offending IP address on the edge firewall.
+If the application that interfaces with your edge firewall run on one of your agents, you might have a firewall-block-edge command that runs a script on that agent to blacklist an offending IP address on the edge firewall.
 
 .. note::
     If it is desired to trigger a particular active response on every agent and
@@ -141,7 +141,7 @@ Limits the command execution to only when one or more listed rules fire.
 +--------------------+---------------------------------------------------------------------------------+
 
 .. note::
-    When setting ``level``, ``rules_group`` and ``rules_id`` together, the active response will be triggered always that any rule matches with **one** of these options. In other words,
+    When setting ``level``, ``rules_group``, and ``rules_id`` together, the active response will be triggered always that any rule matches with **one** of these options. In other words,
     they are accumulative options, not restrictive.
 
 

@@ -18,7 +18,7 @@ client
 This section explains how to configure the connection to the manager.
 
 .. note::
-  To avoid a permanent lost of communication with the manager, the only setting included in the shared configuration of this section is **force_reconnect_interval**.
+  To avoid a permanent loss of communication with the manager, the only setting included in the shared configuration of this section is **force_reconnect_interval**.
 
 Subsections
 -----------
@@ -58,7 +58,7 @@ Specifies the IP address or the hostname of the Wazuh manager.
 port
 ^^^^
 
-Specifies the port to send events to on the manager.  This must match the associated listening port configured on the Wazuh manager.
+Specifies the port to send events to the manager.  This must match the associated listening port configured on the Wazuh manager.
 
 +--------------------+---------------------------------------------+
 | **Default value**  | 1514                                        |
