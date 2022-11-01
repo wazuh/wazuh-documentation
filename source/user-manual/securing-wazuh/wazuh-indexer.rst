@@ -29,14 +29,14 @@ All the available options to run the script are:
 | -A,  --api                                   | Change the Wazuh API password given the current password.                                                   |
 |                                              | Requires -u|--user, and -p|--password, -au|--admin-user and -ap|--admin-password.                           |
 +----------------------------------------------+-------------------------------------------------------------------------------------------------------------+
-| -au,--admin-user <adminUser>                 | Admin user for the Wazuh API. Required to change the Wazuh API passwords.                                   |
+| -au,--admin-user <adminUser>                 | Admin user for the Wazuh API. Required changing the Wazuh API passwords.                                    |
 +----------------------------------------------+-------------------------------------------------------------------------------------------------------------+
-| -ap, --admin-password <adminPassword>        | Password for the Wazuh API admin user. Required to change the Wazuh API passwords.                          |
+| -ap, --admin-password <adminPassword>        | Password for the Wazuh API admin user. Required changing the Wazuh API passwords.                           |
 +----------------------------------------------+-------------------------------------------------------------------------------------------------------------+
 | -u / --user <user>                           | Indicates the name of the user whose password will be changed.                                              |
 |                                              | If no password is specified, it will generate a random one.                                                 |
 +----------------------------------------------+-------------------------------------------------------------------------------------------------------------+
-| -p / --password <password>                   | Indicates the new password, must be used with option -u.                                                    |
+| -p / --password <password>                   | Indicates the new password, which must be used with option -u.                                              |
 +----------------------------------------------+-------------------------------------------------------------------------------------------------------------+    
 | -c / --cert <route-admin-certificate>        | Indicates route to the admin certificate.                                                                   |
 +----------------------------------------------+-------------------------------------------------------------------------------------------------------------+
@@ -66,7 +66,7 @@ All the available options to run the script are:
 Change the password for single user
 -----------------------------------
 
-To change the password for a single user, run the script with the ``-u`` option. You may indicate the new password with option ``-p``. If no password is specified, the script will generate a random one. 
+To change the password for a single user, run the script with the ``-u`` option. You may indicate the new password with the option ``-p``. If no password is specified, the script will generate a random one. 
 
   .. code-block:: console
   
@@ -104,7 +104,7 @@ This is the output of the script:
     28/04/2022 10:25:31 INFO: The password for user wazuh_user is oCwLLG88wb7x5OpnxOPjclVpqWgq9s7W
     28/04/2022 10:25:31 WARNING: Passwords changed. Remember to update the password in the Wazuh dashboard and Filebeat nodes if necessary, and restart the services.
 
-If the options ``-au`` and ``-ap`` are used and Wazuh manager is installed the script will also change the passwords for the API users.
+If the options ``-au`` and ``-ap`` are used, and the Wazuh manager is installed, the script will also change the passwords for the API users.
 
 Change the passwords using a formatted file
 --------------------------------------------
@@ -131,5 +131,5 @@ If the ``-a`` option is used in combination with the ``-f`` option, all users no
 
 The options ``-au`` and ``-ap`` are necessary to change the passwords for the API users.
 
-In distributed deployments you will need to change the passwords in the nodes running Wazuh dashboard and Filebeat, you can use ``wazuh-passwords-tool.sh`` to do this.
+In distributed deployments you will need to change the passwords in the nodes running the Wazuh dashboard and Filebeat, you can use ``wazuh-passwords-tool.sh`` to do this.
 
