@@ -53,21 +53,19 @@ Azure Active Directory Configuration
    #. Add a new role to your application's **Manifest**:
 
       .. code-block:: console
-
+         
          {
-             "allowedMemberTypes": [
-              "User"
-             ],
-             "description": "Wazuh role",
-             "displayName": "Wazuh_role",
-             "id": "<application_id>",
-             "isEnabled": true,
-             "lang": null,
-             "origin": "Application",
-             "value": "Wazuh_role"
-            },
-
-
+            "allowedMemberTypes": [
+               "User"
+            ],
+            "description": "Wazuh role",
+            "displayName": "Wazuh_role",
+            "id": "<application_id>",
+            "isEnabled": true,
+            "lang": null,
+            "origin": "Application",
+            "value": "Wazuh_role"
+         },
    
       - ``description``: can be any value that you want.
       - ``id``: should be the ID of your application. You can find it in the application's overview menu or at the top of the Manifest in the field ``appId``.
