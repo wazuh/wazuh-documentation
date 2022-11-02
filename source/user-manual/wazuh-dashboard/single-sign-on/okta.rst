@@ -330,7 +330,6 @@ Wazuh dashboard configuration
         }
       }
 
-
 #. Restart the Wazuh dashboard service.
 
        .. include:: /_templates/common/restart_dashboard.rst

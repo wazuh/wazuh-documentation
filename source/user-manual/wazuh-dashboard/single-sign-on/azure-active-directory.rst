@@ -298,8 +298,6 @@ Wazuh dashboard configuration
             validate: false
       ...
 
-
-
 #. Restart the Wazuh dashboard service.
 
    .. include:: /_templates/common/restart_dashboard.rst
