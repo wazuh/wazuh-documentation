@@ -15,9 +15,9 @@ PDF reports
 
 The PDF properties you can customize are:
 
-#. ``customization.reports.header`` has a limit of 3 lines and is printed in the top right corner of the PDF reports.
+#. ``customization.reports.header`` has a limit of 3 lines of 20 characters each and is printed in the top right corner of the PDF reports.
 
-#. ``customization.reports.footer`` has a limit of 2 lines and is printed in the bottom left corner of the PDF reports.
+#. ``customization.reports.footer`` has a limit of 2 lines of 30 characters each and is printed in the bottom left corner of the PDF reports.
 
 #. ``customization.reports.logo`` has a limit of 1MB and is printed in the top left corner of the PDF reports. **Suggested size: width 190 pixels and height 40 pixels.**
 
@@ -126,7 +126,8 @@ Configuration
     +--------------------+------------------------+
     | Default value      | ''                     |
     +--------------------+------------------------+
-    | Value limit        | 3 lines                |
+    | Value limit        | 3 lines of             |
+    |                    | 20 characters each     |
     +--------------------+------------------------+
 
 
@@ -139,5 +140,6 @@ Configuration
     +--------------------+----------------------+
     | Default value      | ''                   |
     +--------------------+----------------------+
-    | Value limit        | 2 lines              |
+    | Value limit        | 2 lines of           |
+    |                    | 30 characters each   |
     +--------------------+----------------------+
