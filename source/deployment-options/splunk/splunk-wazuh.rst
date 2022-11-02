@@ -72,6 +72,8 @@ Choose the corresponding tab to configure the installation as a single-node or m
 
          .. include:: /_templates/installations/wazuh/common/check_wazuh_manager.rst
 
+            
+
    .. group-tab:: Multi-node cluster
 
       One Wazuh server has to be chosen as a master, the rest will be workers. So, the section ``Wazuh server master node`` will be added in the configuration file of the server chosen for the master role. For all the other servers, the section ``Wazuh server worker node`` should be applied.

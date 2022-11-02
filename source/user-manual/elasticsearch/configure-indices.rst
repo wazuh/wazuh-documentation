@@ -36,11 +36,11 @@ Let's suppose that we want to add a new index pattern (``my-custom-alerts-*``) a
 
 #. First of all, stop the Filebeat service:
 
-    .. include:: /_templates/common/stop_filebeat.rst
+   .. include:: /_templates/installations/basic/elastic/common/stop_filebeat.rst
 
 #. Download the Wazuh template for Elasticsearch and save it into a file (for example, *template.json*):
 
-    .. code-block:: console
+   .. code-block:: console
 
       # curl -so template.json https://raw.githubusercontent.com/wazuh/wazuh/v|WAZUH_CURRENT|/extensions/elasticsearch/7.x/wazuh-template.json
 
