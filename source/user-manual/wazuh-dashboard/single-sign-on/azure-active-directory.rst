@@ -53,7 +53,7 @@ Azure Active Directory Configuration
    #. Add a new role to your application's **Manifest**:
 
       .. code-block:: console
-         
+
          {
             "allowedMemberTypes": [
                "User"
@@ -292,11 +292,11 @@ Wazuh dashboard configuration
    .. code-block:: console  
       :emphasize-lines: 3
               
-        ...
-            this.router.get({
-              path: `/logout`,
-              validate: false
-        ...
+      ...
+          this.router.get({
+            path: `/logout`,
+            validate: false
+      ...
 
 
 
