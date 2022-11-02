@@ -54,18 +54,18 @@ Azure Active Directory Configuration
 
       .. code-block:: console
 
-          {
-                "allowedMemberTypes": [
-                  "User"
-                ],
-                "description": "Wazuh role",
-                "displayName": "Wazuh_role",
-                "id": "<application_id>",
-                "isEnabled": true,
-                "lang": null,
-                "origin": "Application",
-                "value": "Wazuh_role"
-              },
+         {
+             "allowedMemberTypes": [
+              "User"
+             ],
+             "description": "Wazuh role",
+             "displayName": "Wazuh_role",
+             "id": "<application_id>",
+             "isEnabled": true,
+             "lang": null,
+             "origin": "Application",
+             "value": "Wazuh_role"
+            },
 
 
    
