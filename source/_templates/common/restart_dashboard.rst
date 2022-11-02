@@ -2,16 +2,16 @@
 
 .. tabs::
 
- .. group-tab:: Systemd
+   .. group-tab:: Systemd
 
-  .. code-block:: console
+      .. code-block:: console
 
-   # systemctl restart wazuh-dashboard
+         # systemctl restart wazuh-dashboard
 
- .. group-tab:: SysV init
+   .. group-tab:: SysV init
 
-  .. code-block:: console
+      .. code-block:: console
 
-   # service wazuh-dashboard restart
+         # service wazuh-dashboard restart
 
 .. End of include file
