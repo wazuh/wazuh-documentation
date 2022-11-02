@@ -8,7 +8,7 @@
 Monitoring GitHub Activity
 ==========================
 
-The ``audit log`` allows organization admins to quickly review the actions performed by members of your organization. It includes details such as who performed the action, what the action was, and when it was performed.
+The `audit log` allows organization admins to quickly review the actions performed by members of your organization. It includes details such as who performed the action, what the action was, and when it was performed.
 This Wazuh module allows you to collect all the logs from GitHub using its API:
 
 .. code-block:: xml
@@ -19,7 +19,7 @@ The GitHub API description can be found in this `link <https://docs.github.com/e
 
 .. note::
 
-    To access Git events in the ``audit log``, you must use the ``audit log`` REST API. The ``audit log`` REST API is available for users of GitHub Enterprise Cloud only.
+    To access Git events in the `audit log`, you must use the `audit log` REST API. The `audit log` REST API is available for users of GitHub Enterprise Cloud only.
 
 GitHub requirements
 ^^^^^^^^^^^^^^^^^^^
