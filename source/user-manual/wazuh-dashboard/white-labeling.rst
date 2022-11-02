@@ -15,11 +15,11 @@ PDF reports
 
 The PDF properties you can customize are:
 
-#. ``customization.reports.header`` has a limit of 4 lines and is printed in the top right corner of the PDF reports.
+#. ``customization.reports.header`` has a limit of 3 lines and is printed in the top right corner of the PDF reports.
 
 #. ``customization.reports.footer`` has a limit of 2 lines and is printed in the bottom left corner of the PDF reports.
 
-#. ``customization.reports.logo`` has a limit of 1MB and is printed in the top left corner of the PDF reports.
+#. ``customization.reports.logo`` has a limit of 1MB and is printed in the top left corner of the PDF reports. **Suggested size: width 190 pixels and height 40 pixels.**
 
 .. thumbnail:: ../../images/kibana-app/features/white-labeling/custom-pdf-report.png
   :title: Custom PDF report
@@ -33,11 +33,11 @@ Custom logos
 
 To use your own logos modify these settings:
 
-#. ``customization.logo.app`` has a limit of 1MB and replaces the logo in the Wazuh modules menu located below the breadcrumbs.
+#. ``customization.logo.app`` has a limit of 1MB and replaces the logo in the Wazuh modules menu located below the breadcrumbs.  **Suggested size: width 300 pixels and height 70 pixels.**
 
-#. ``customization.logo.sidebar`` has a limit of 1MB and replaces the square logo.
+#. ``customization.logo.sidebar`` has a limit of 1MB and replaces the left navigation menu square logo. **Suggested size: width 80 pixels and height 80 pixels.**
 
-#. ``customization.logo.healthcheck`` has a limit of 4 lines and is printed in the top right corner of the PDF reports.
+#. ``cuomization.logo.healthcheck`` has a limit of 1MB and replaces the logo on top of health-check routine of the app. **Suggested size: width 300 pixels and height 70 pixels.**
 
 .. thumbnail:: ../../images/kibana-app/features/white-labeling/custom-branding-settings.png
   :align: center
@@ -126,7 +126,7 @@ Configuration
     +--------------------+------------------------+
     | Default value      | ''                     |
     +--------------------+------------------------+
-    | Value limit        | 4 lines                |
+    | Value limit        | 3 lines                |
     +--------------------+------------------------+
 
 

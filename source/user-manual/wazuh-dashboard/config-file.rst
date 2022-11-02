@@ -651,6 +651,28 @@ Define the name of the reports logo saved in the path ``/plugins/wazuh/public/as
 | **Allowed values** | Any string                 |
 +--------------------+----------------------------+
 
+customization.reports.header
+^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Set the header of the PDF reports. To use an empty header, type a space " " in the field. If this field is empty, the default header will be used.
+
++--------------------+----------------------------+
+| **Default value**  |''                          |
++--------------------+----------------------------+
+| **Allowed values** | Any string                 |
++--------------------+----------------------------+
+
+customization.reports.footer
+^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Set the footer of the PDF reports. To use an empty footer, type a space " " in the field. If this field is empty, the default footer will be used.
+
++--------------------+----------------------------+
+| **Default value**  |''                          |
++--------------------+----------------------------+
+| **Allowed values** | Any string                 |
++--------------------+----------------------------+
+
 
 Example
 -------
