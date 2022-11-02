@@ -14,7 +14,7 @@ Google Cloud maintains three `audit logs <https://cloud.google.com/monitoring/ap
 - **Data Access**
 - **System Event**
 
-Wazuh supports collecting those logs by using the ``gcp-pubsub`` module. Details on how to configure the module can be found :ref:`gcp-pubsub configuration reference <gcp-pubsub>`.
+Wazuh supports collecting those logs by using the ``gcp-pubsub`` module. Details on how to configure the module can be found in the :ref:`gcp-pubsub configuration reference <gcp-pubsub>`.
 
 .. thumbnail:: ../../images/gcp/gcp-overview.png
     :align: center
