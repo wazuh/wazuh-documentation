@@ -37,7 +37,7 @@ To use your own logos modify these settings:
 
 #. ``customization.logo.sidebar`` has a limit of 1MB and replaces the left navigation menu square logo. **Suggested size: width 80 pixels and height 80 pixels.**
 
-#. ``cuomization.logo.healthcheck`` has a limit of 1MB and replaces the logo on top of health-check routine of the app. **Suggested size: width 300 pixels and height 70 pixels.**
+#. ``customization.logo.healthcheck`` has a limit of 1MB and replaces the logo on top of health-check routine of the app. **Suggested size: width 300 pixels and height 70 pixels.**
 
 .. thumbnail:: ../../images/kibana-app/features/white-labeling/custom-branding-settings.jpg
   :align: center
