@@ -108,7 +108,7 @@ newUrls['4.4'] = [
   '/user-manual/manager/manual-backup-restore.html',
   '/user-manual/reference/ossec-conf/wazuh-db-config.html',
   '/azure/activity-services/prerequisites/dependencies.html',
-  '/user-manual/wazuh-dashboard/white-labeling.html',
+  '/user-manual/wazuh-dashboard/custom-branding.html',
 ];
 
 /* Pages removed in 4.4 */

@@ -147,7 +147,7 @@ Enable or disable the ``wazuh-monitoring`` index creation and/or visualization:
 
 .. warning::
 
-    In the user interface only ``true`` or ``false`` can be selected. If you want to use ``worker`` you must edit the configuration file directly.
+    The Wazuh dashboard user interface allows selecting ``true`` and ``false`` only. To set the ``worker`` value, you must edit the configuration file instead.
 
 wazuh.monitoring.frequency
 ^^^^^^^^^^^^^^^^^^^^^^^^^^
@@ -605,7 +605,7 @@ Define the number of replicas to use for the statistics indices.
 Custom branding
 ---------------
 
-If you want to use custom branding elements such as logos, you can do so by editing the settings below.
+Edit the settings shown below to use custom branding elements such as logos, and header and footer text.
 
 customization.logo.app
 ^^^^^^^^^^^^^^^^^^^^^^
@@ -654,7 +654,7 @@ Define the name of the reports logo saved in the path ``/plugins/wazuh/public/as
 customization.reports.header
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-Set the header of the PDF reports. To use an empty header, type a space " " in the field. If this field is empty, the default header will be used.
+Set the header of the PDF reports. To use an empty header, type a space " " in the field. If this field is empty, it uses the default header.
 
 +--------------------+----------------------------+
 | **Default value**  |''                          |
@@ -665,7 +665,7 @@ Set the header of the PDF reports. To use an empty header, type a space " " in t
 customization.reports.footer
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-Set the footer of the PDF reports. To use an empty footer, type a space " " in the field. If this field is empty, the default footer will be used.
+Set the footer of the PDF reports. To use an empty footer, type a space " " in the field. If this field is empty, it uses the default footer.
 
 +--------------------+----------------------------+
 | **Default value**  |''                          |
