@@ -35,12 +35,10 @@
              #  ip: <wazuh-manager-ip>
              #  node_type: worker
 
-
           # Wazuh dashboard nodes
           dashboard:
             - name: dashboard
               ip: <dashboard-node-ip>
-
 
           # Wazuh dashboard nodes
           dashboard:

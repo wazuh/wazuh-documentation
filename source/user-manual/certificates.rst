@@ -48,8 +48,8 @@ To create the certificates, edit the ``config.yml`` file and replace the node na
              #  ip: <indexer-node-ip>
 
            # Wazuh server nodes
-           # If there is more than one Wazuh server 
-           # node each one must have a node_type
+           # If there is more than one Wazuh server
+           # node, each one must have a node_type
            server:
              - name: wazuh-1
                ip: <wazuh-manager-ip>
@@ -61,12 +61,10 @@ To create the certificates, edit the ``config.yml`` file and replace the node na
              #  ip: <wazuh-manager-ip>
              #  node_type: worker
 
-
           # Wazuh dashboard nodes
           dashboard:
             - name: dashboard
               ip: <dashboard-node-ip>
-
 
           # Wazuh dashboard nodes
           dashboard:

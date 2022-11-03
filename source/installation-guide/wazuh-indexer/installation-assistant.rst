@@ -50,8 +50,8 @@ Indicate your deployment configuration, create the SSL certificates to encrypt c
              #  ip: <indexer-node-ip>
 
            # Wazuh server nodes
-           # If there is more than one Wazuh server 
-           # node each one must have a node_type
+           # If there is more than one Wazuh server
+           # node, each one must have a node_type
            server:
              - name: wazuh-1
                ip: <wazuh-manager-ip>
@@ -63,12 +63,10 @@ Indicate your deployment configuration, create the SSL certificates to encrypt c
              #  ip: <wazuh-manager-ip>
              #  node_type: worker
 
-
           # Wazuh dashboard nodes
           dashboard:
             - name: dashboard
               ip: <dashboard-node-ip>
-
 
           # Wazuh dashboard nodes
           dashboard:
