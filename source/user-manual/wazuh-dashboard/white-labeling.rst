@@ -17,9 +17,9 @@ The PDF properties you can customize are:
 
 #. ``customization.reports.logo`` has a limit of 1MB and is printed in the top left corner of the PDF reports. **Suggested size: width 190 pixels and height 40 pixels.**
 
-#. ``customization.reports.header`` has a limit of 3 lines of 20 characters each and is printed in the top right corner of the PDF reports.
+#. ``customization.reports.header`` has a limit of 3 lines of 40 characters each and is printed in the top right corner of the PDF reports.
 
-#. ``customization.reports.footer`` has a limit of 2 lines of 30 characters each and is printed in the bottom left corner of the PDF reports.
+#. ``customization.reports.footer`` has a limit of 2 lines of 50 characters each and is printed in the bottom left corner of the PDF reports.
 
 .. thumbnail:: ../../images/kibana-app/features/white-labeling/custom-pdf-report.jpg
   :title: Custom PDF report
@@ -127,7 +127,7 @@ Configuration
     | Default value      | ''                     |
     +--------------------+------------------------+
     | Value limit        | 3 lines of             |
-    |                    | 20 characters each     |
+    |                    | 40 characters each     |
     +--------------------+------------------------+
 
 
@@ -141,5 +141,5 @@ Configuration
     | Default value      | ''                   |
     +--------------------+----------------------+
     | Value limit        | 2 lines of           |
-    |                    | 30 characters each   |
+    |                    | 50 characters each   |
     +--------------------+----------------------+
