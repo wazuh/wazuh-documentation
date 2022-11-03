@@ -2,14 +2,11 @@
 
 .. tabs::
 
-
   .. group-tab:: Systemd
-
 
     .. code-block:: console
 
       # systemctl status wazuh-manager
-
 
   .. group-tab:: SysV Init
 

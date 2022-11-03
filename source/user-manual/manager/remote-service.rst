@@ -29,14 +29,5 @@ This will set the manager to listen on IP address ``10.0.0.10``.
 
 When you change any value in the ``ossec.conf`` file, you must restart the service before these changes will take effect.
 
-a. For Systemd:
+.. include:: /_templates/common/restart_manager.rst
 
-.. code-block:: console
-
-  # systemctl restart wazuh-manager
-
-b. For SysV Init:
-
-.. code-block:: console
-
-  # service wazuh-manager restart

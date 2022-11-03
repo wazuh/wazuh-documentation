@@ -15,24 +15,7 @@ Wazuh API seems to be down
 
 This issue means that your Wazuh API might be unavailable. Check the status of the Wazuh manager to check if the service is active: 
 
-.. tabs::
-
-
-  .. group-tab:: Systemd
-
-
-    .. code-block:: console
-
-      # systemctl status wazuh-manager
-
-
-
-  .. group-tab:: SysV init
-
-    .. code-block:: console
-
-      # service wazuh-manager status
-
+.. include:: /_templates/installations/wazuh/common/check_wazuh_manager.rst
 
 If the Wazuh API is running, try to fetch data using the CLI from the Wazuh dashboard server:
 

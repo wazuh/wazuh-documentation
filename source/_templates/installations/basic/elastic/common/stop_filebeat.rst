@@ -2,16 +2,16 @@
 
 .. tabs::
 
-   .. group-tab:: Yum
+   .. group-tab:: Systemd
 
       .. code-block:: console
 
-         # yum -y install wazuh-manager
+         # systemctl stop filebeat      
 
-   .. group-tab:: APT
+   .. group-tab:: SysV Init
 
       .. code-block:: console
 
-         # apt-get -y install wazuh-manager
-      
+         # service filebeat stop
+
 .. End of include file

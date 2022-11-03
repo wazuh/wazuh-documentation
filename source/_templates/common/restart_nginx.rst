@@ -2,16 +2,16 @@
 
 .. tabs::
 
-   .. group-tab:: Yum
+   .. group-tab:: Systemd
 
       .. code-block:: console
 
-         # yum -y install wazuh-manager
+         # systemctl restart nginx
 
-   .. group-tab:: APT
+   .. group-tab:: SysV init
 
       .. code-block:: console
 
-         # apt-get -y install wazuh-manager
-      
+         # service nginx restart
+
 .. End of include file
