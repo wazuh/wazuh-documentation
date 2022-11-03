@@ -107,19 +107,7 @@ Let's suppose that we want to add a new index pattern (``my-custom-alerts-*``) a
 
     Restart the Kibana service:
 
-    .. tabs::
-   
-      .. group-tab:: Systemd
-    
-        .. code-block:: console
-      
-            # systemctl restart kibana
-    
-      .. group-tab:: SysV init
-    
-        .. code-block:: console
-      
-          # service kibana restart
+    .. include:: /_templates/installations/basic/elastic/common/restart_kibana.rst
 
 #. Restart the Filebeat service:
 
