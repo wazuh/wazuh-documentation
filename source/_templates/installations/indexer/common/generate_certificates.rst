@@ -23,7 +23,7 @@
 
            # Wazuh server nodes
            # If there is more than one Wazuh server 
-           # node each one must have a node_type
+           # node, each one must have a node_type
            server:
              - name: wazuh-1
                ip: <wazuh-manager-ip>
