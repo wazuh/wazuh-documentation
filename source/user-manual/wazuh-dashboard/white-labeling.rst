@@ -15,13 +15,13 @@ PDF reports
 
 The PDF properties you can customize are:
 
+#. ``customization.reports.logo`` has a limit of 1MB and is printed in the top left corner of the PDF reports. **Suggested size: width 190 pixels and height 40 pixels.**
+
 #. ``customization.reports.header`` has a limit of 3 lines of 20 characters each and is printed in the top right corner of the PDF reports.
 
 #. ``customization.reports.footer`` has a limit of 2 lines of 30 characters each and is printed in the bottom left corner of the PDF reports.
 
-#. ``customization.reports.logo`` has a limit of 1MB and is printed in the top left corner of the PDF reports. **Suggested size: width 190 pixels and height 40 pixels.**
-
-.. thumbnail:: ../../images/kibana-app/features/white-labeling/custom-pdf-report.png
+.. thumbnail:: ../../images/kibana-app/features/white-labeling/custom-pdf-report.jpg
   :title: Custom PDF report
   :align: center
   :width: 100%
@@ -39,7 +39,7 @@ To use your own logos modify these settings:
 
 #. ``cuomization.logo.healthcheck`` has a limit of 1MB and replaces the logo on top of health-check routine of the app. **Suggested size: width 300 pixels and height 70 pixels.**
 
-.. thumbnail:: ../../images/kibana-app/features/white-labeling/custom-branding-settings.png
+.. thumbnail:: ../../images/kibana-app/features/white-labeling/custom-branding-settings.jpg
   :align: center
   :width: 100%
 

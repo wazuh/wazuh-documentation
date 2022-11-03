@@ -22,7 +22,7 @@ The configuration file reference is organized by sections:
    :backlinks: none
 
 General options
--------------
+---------------
 
 hosts
 ^^^^^
@@ -187,7 +187,7 @@ Configure wazuh-monitoring-* indices custom creation interval.
 +--------------------+------------------------------------------------+
 
 Health checks
-------
+-------------
 
 checks.pattern
 ^^^^^^^^^^^^^^
@@ -603,7 +603,7 @@ Define the number of replicas to use for the statistics indices.
 +--------------------+----------------------------+
 
 Custom branding
-------------------
+---------------
 
 If you want to use custom branding elements such as logos, you can do so by editing the settings below.
 
@@ -652,7 +652,7 @@ Define the name of the reports logo saved in the path ``/plugins/wazuh/public/as
 +--------------------+----------------------------+
 
 customization.reports.header
-^^^^^^^^^^^^^^^^^^^^^^^^^^
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 Set the header of the PDF reports. To use an empty header, type a space " " in the field. If this field is empty, the default header will be used.
 
@@ -663,7 +663,7 @@ Set the header of the PDF reports. To use an empty header, type a space " " in t
 +--------------------+----------------------------+
 
 customization.reports.footer
-^^^^^^^^^^^^^^^^^^^^^^^^^^
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 Set the footer of the PDF reports. To use an empty footer, type a space " " in the field. If this field is empty, the default footer will be used.
 
