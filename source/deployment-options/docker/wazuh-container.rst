@@ -276,6 +276,14 @@ It is possible to generate a hash using the same Docker image, type in a secure 
    docker run --rm -ti wazuh/wazuh-indexer:|WAZUH_CURRENT| bash /usr/share/wazuh-indexer/plugins/opensearch-security/tools/hash.sh
 
 
+If you decide to update __kibanaserver__'s password, do not forget to set the __DASHBOARD_PASSWORD__ environment variable for the dashboard container.
+
+.. code-block:: yaml
+
+ environment:
+   - DASHBOARD_PASSWORD=your_new_password
+
+
 Exposed ports
 -------------
 
