@@ -18,11 +18,11 @@ Custom logos in the Wazuh dashboard
 
 To use your own logos in the Wazuh dashboard, set up the following properties.
 
-#. ``customization.logo.app``. This property sets the `App main logo` image. It has a size limit of 1 MB. It replaces the logo image in the Wazuh main menu located top left. Recommended size: 300 pixels width, 70 pixels height.
+-  ``customization.logo.app``. This property sets the `App main logo` image. It has a size limit of 1 MB. It replaces the logo image in the Wazuh main menu located top left. Recommended size: 300 pixels width, 70 pixels height. See #1 in the image below.
 
-#. ``customization.logo.healthcheck``. This property sets the `Health check logo` image. It has a size limit of 1 MB. It replaces the logo on top of the check list displayed for the health check routine. Recommended size: 300 pixels width, 70 pixels height.
+-  ``customization.logo.healthcheck``. This property sets the `Health check logo` image. It has a size limit of 1 MB. It replaces the logo on top of the check list displayed for the health check routine. Recommended size: 300 pixels width, 70 pixels height. See #2 in the image below.
 
-#. ``customization.logo.sidebar``. This property sets the `Navigation drawer logo` image. It has a size limit of 1 MB. It replaces the left navigation menu logo image. Recommended size: 80 pixels width, 80 pixels height.
+-  ``customization.logo.sidebar``. This property sets the `Navigation drawer logo` image. It has a size limit of 1 MB. It replaces the left navigation menu logo image. Recommended size: 80 pixels width, 80 pixels height. See #3 in the image below.
 
 .. thumbnail:: /images/kibana-app/features/white-labeling/custom-branding-settings.jpg
    :align: center
@@ -35,11 +35,11 @@ Custom branding of the PDF reports
 
 To customize the branding of the PDF reports, set up the following properties.
 
--  ``customization.reports.logo``. This property sets the `PDF reports logo` image. It the  has a size limit of 1 MB. It's printed in the top left corner of the PDF reports. Recommended size: 190 pixels width, 40 pixels height.
+-  ``customization.reports.logo``. This property sets the `PDF reports logo` image. It the  has a size limit of 1 MB. It's printed in the top left corner of the PDF reports. Recommended size: 190 pixels width, 40 pixels height. See #1 in the image below.
 
--  ``customization.reports.footer``. This property sets the `Reports footer` text block. It has a size limit of 2 lines of 50 characters each. It's printed in the bottom left corner of the PDF reports.
+-  ``customization.reports.footer``. This property sets the `Reports footer` text block. It has a size limit of 2 lines of 50 characters each. It's printed in the bottom left corner of the PDF reports. See #2 in the image below.
 
--  ``customization.reports.header``. This property sets the `Reports header` text block. It has a size limit of 3 lines of 40 characters each. It's printed in the top right corner of the PDF reports.
+-  ``customization.reports.header``. This property sets the `Reports header` text block. It has a size limit of 3 lines of 40 characters each. It's printed in the top right corner of the PDF reports. See #3 in the image below.
 
 .. thumbnail:: /images/kibana-app/features/white-labeling/custom-pdf-report.jpg
    :title: Custom PDF report
