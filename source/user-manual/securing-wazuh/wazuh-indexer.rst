@@ -133,7 +133,4 @@ The options ``-au`` and ``-ap`` are necessary to change the passwords for the AP
 
 In distributed deployments you will need to change the passwords in the nodes running Wazuh dashboard and Filebeat, you can use ``wazuh-passwords-tool.sh`` to do this.
 
-With docker images
----------------------------------
-
-When using Wazuh's Docker images, if you change __kibanaserver__'s password, you need to set the __DASHBOARD_PASSWORD__ environment variable for the dashboard container.
+.. note:: If you're using Docker, read the :doc:`Wazuh Docker deployment page <../../deployment-options/docker/wazuh-container>` for more information.
