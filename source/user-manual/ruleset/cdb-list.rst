@@ -64,17 +64,7 @@ Each list must be defined in the ``manager.conf`` file using the following synta
 
 Restart Wazuh to apply the changes:
 
-  a. For Systemd:
-
-  .. code-block:: console
-
-    # systemctl restart wazuh-manager
-
-  b. For SysV Init:
-
-  .. code-block:: console
-
-    # service wazuh-manager restart
+  .. include:: /_templates/common/restart_manager.rst
 
 Using the CDB list in the rules
 -------------------------------

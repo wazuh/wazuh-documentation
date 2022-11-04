@@ -142,16 +142,6 @@ Last steps
 
 The setup process for the database output is finished. Now the only thing left is to restart the Wazuh manager:
 
-  a. For Systemd:
-
-  .. code-block:: console
-
-    # systemctl restart wazuh-manager
-
-  b. For SysV Init:
-
-  .. code-block:: console
-
-    # service wazuh-manager restart
+  .. include:: /_templates/common/restart_manager.rst
 
 Now the database will start being filled with data provided by the manager.

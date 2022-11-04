@@ -64,17 +64,7 @@ For this use case, we will show how to monitor the folder ``/media/user/software
 
 2. After applying the configuration, you must restart the Wazuh manager:
 
-    a. For Systemd:
-
-      .. code-block:: console
-
-        # systemctl restart wazuh-manager
-
-    b. For SysV Init:
-
-      .. code-block:: console
-
-        # service wazuh-manager restart
+    .. include:: /_templates/common/restart_manager.rst
 
 After restarting, FIM will apply the new configuration and the specified folder will be monitored in real-time. The alert below appears when a file is added to the monitored directory:
 

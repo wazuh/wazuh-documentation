@@ -33,7 +33,7 @@ Set up Suricata on your Linux agent
        # rm /etc/suricata/rules/* -f
        # mv rules/*.rules /etc/suricata/rules/
        # rm -f /etc/suricata/suricata.yaml
-       # wget -O /etc/suricata/suricata.yaml http://www.branchnetconsulting.com/wazuh/suricata.yaml
+       # wget -O /etc/suricata/suricata.yaml https://packages.wazuh.com/|WAZUH_CURRENT_MINOR|/suricata.yaml
        # systemctl daemon-reload
        # systemctl enable suricata
        # systemctl start suricata

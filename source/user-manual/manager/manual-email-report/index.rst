@@ -67,18 +67,7 @@ This example will set the minimum level to 10. For more information, see the :re
 
 After the ``alert_level`` has been configured, Wazuh needs to be restarted for the change to take effect.
 
-a) For Systemd:
-
-.. code-block:: console
-
-  # systemctl restart wazuh-manager
-
-b) For SysV Init:
-
-.. code-block:: console
-
-  # service wazuh-manager restart
-
+.. include:: /_templates/common/restart_manager.rst
 
 .. warning::
  Wazuh doesn't handle SMTP authentication. If your email service uses this, you will need to :ref:`configure a server relay<smtp_authentication>`.
