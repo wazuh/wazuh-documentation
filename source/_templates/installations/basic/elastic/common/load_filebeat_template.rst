@@ -2,6 +2,6 @@
 
 .. code-block:: console
 
-  # filebeat setup --index-management -E setup.template.json.enabled=false
+   # filebeat setup --index-management -E setup.template.json.enabled=false
 
 .. End of include file
