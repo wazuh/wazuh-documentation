@@ -153,6 +153,15 @@ Configuration example
     <alert_format>json</alert_format>
   </integration>
 
+  <!-- Integration with Telegram -->
+  <integration>
+    <name>telegram</name>
+    <level>7</level>
+    <hook_url>-100xxxxxxxx</hook_url> <!-- Replace with your Telegram ID chat -->
+    <api_key>1653xxxxxx:AAFXU-zdztW_-xxxxxxxxxxxxxxxxx</api_key> <!-- Replace with your Telegram Bot Token -->
+    <alert_format>json</alert_format>
+  </integration>
+
   <!-- Integration with PagerDuty -->
   <integration>
     <name>pagerduty</name>

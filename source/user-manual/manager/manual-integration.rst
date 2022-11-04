@@ -19,8 +19,8 @@ The integrations are configured on the Wazuh manager ``ossec.conf`` file which i
 
   <integration>
     <name> </name>
-    <hook_url> </hook_url> <!-- Required for Slack -->
-    <api_key> </api_key> <!-- Required for PagerDuty and VirusTotal -->
+    <hook_url> </hook_url> <!-- Required for Slack and Telegram -->
+    <api_key> </api_key> <!-- Required for PagerDuty, Telegram and VirusTotal -->
 
     <!-- Optional filters -->
     <rule_id> </rule_id>
@@ -57,6 +57,21 @@ This is an example configuration for the Slack integration:
   <integration>
     <name>slack</name>
     <hook_url>https://hooks.slack.com/services/...</hook_url> <!-- Replace with your Slack hook URL -->
+    <alert_format>json</alert_format>
+  </integration>
+
+Telegram 
+---------
+This integration allows receiving Wazuh alerts into a Telegram chat on a group, channel, or personal `Telegram API <https://core.telegram.org/bots>`_.
+
+This is an example configuration for the Telegram integration:
+
+.. code-block:: xml
+
+  <integration>
+    <name>telegram</name>
+    <hook_url>{ ID chat Telegram Group, Channel or Personal}</hook_url> <!-- Replace with your Telegram ID chat -->
+    <api_key>{Token Bot Telegram}</api_key>
     <alert_format>json</alert_format>
   </integration>
 
@@ -115,3 +130,4 @@ This is an example configuration for a custom integration:
     <api_key>APIKEY</api_key> <!-- Replace with your external service API key -->
     <alert_format>json</alert_format>
   </integration>
+
