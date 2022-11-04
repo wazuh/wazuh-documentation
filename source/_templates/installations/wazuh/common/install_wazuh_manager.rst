@@ -13,6 +13,5 @@
       .. code-block:: console
 
          # apt-get -y install wazuh-manager
-
       
 .. End of include file
