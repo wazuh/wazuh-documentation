@@ -88,7 +88,7 @@ Disables the CIS-CAT wodle.
 timeout
 ^^^^^^^
 
-Timeout for each evaluation. In case the execution takes longer that the specified timeout, it stops.
+Timeout for each evaluation. In case the execution takes longer than the specified timeout, it stops.
 
 +--------------------+-----------------------------+
 | **Default value**  | 1800                        |

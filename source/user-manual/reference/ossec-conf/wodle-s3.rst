@@ -141,7 +141,7 @@ Bucket options
 type
 ^^^^
 
-Specifies type of bucket. It is an attribute of the ``bucket`` tag.
+Specifies the type of bucket. It is an attribute of the ``bucket`` tag.
 
 +--------------------+------------------------------------------------+
 | **Default value**  | N/A                                            |
@@ -257,7 +257,7 @@ If defined, the path or prefix for the bucket.
 bucket\\path_suffix
 ^^^^^^^^^^^^^^^^^^^
 
-If defined, the suffix for the bucket. Only works with buckets which contain the folder named AWSLogs (Cloudtrail, VPC and Macie).
+If defined, the suffix for the bucket. Only works with buckets that contain the folder named AWSLogs (Cloudtrail, VPC, and Macie).
 
 +--------------------+---------------+
 | **Default value**  | N/A           |
