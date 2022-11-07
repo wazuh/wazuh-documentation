@@ -172,18 +172,18 @@ Download and extract the latest version of Wazuh sources:
 
   # curl -Ls https://github.com/wazuh/wazuh/archive/v|WAZUH_CURRENT|.tar.gz | tar zx
 
-Download the latest version of the Wazuh PKG package:
-
-.. code-block:: console
-
-  # curl -Ls https://packages.wazuh.com/|WAZUH_CURRENT_MAJOR_OSX|/macos/wazuh-agent-|WAZUH_CURRENT_OSX|-|WAZUH_REVISION_OSX|.pkg --output wazuh-agent-|WAZUH_CURRENT_OSX|-|WAZUH_REVISION_OSX|.pkg
-
 Install the root CA if you want to overwrite the root CA with the file you created previously:
 
 .. code-block:: console
 
   # cd ../
   # cp path/to/wpk_root.pem etc/wpk_root.pem
+
+Download the latest version of the Wazuh PKG package:
+
+.. code-block:: console
+
+  # curl -Ls https://packages.wazuh.com/|WAZUH_CURRENT_MAJOR_OSX|/macos/wazuh-agent-|WAZUH_CURRENT_OSX|-|WAZUH_REVISION_OSX|.pkg --output wazuh-agent-|WAZUH_CURRENT_OSX|-|WAZUH_REVISION_OSX|.pkg
 
 Copy the necessary scripts to the current folder to compile the WPK correctly:
 
@@ -203,7 +203,7 @@ Definitions:
     - ``output/myagent.wpk`` is the name of the output WPK package.
     - ``path/to/wpkcert.pem`` is the path to the SSL certificate.
     - ``path/to/wpkcert.key`` is the path to the SSL certificate's key.
-    - ``wazuh-agent-|WAZUH_CURRENT_OSX|-|WAZUH_REVISION_OSX|.pkg`` is the PKG file downloaded in step 3.
+    - ``wazuh-agent-|WAZUH_CURRENT_OSX|-|WAZUH_REVISION_OSX|.pkg`` is the PKG file downloaded in step 4.
     - ``upgrade.sh`` is the upgrade.sh file. Find an example at the base directory in the Wazuh repository.
     - ``pkg_installer_mac.sh`` is the pkg_installer_mac.sh file. Find an example in src/init in the Wazuh repository.
 
