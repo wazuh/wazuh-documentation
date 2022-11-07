@@ -39,13 +39,13 @@ After enabling the daemon and configure the integrations, restart the Wazuh mana
 Optional filters
 ^^^^^^^^^^^^^^^^
 
-The *optional filters* fields are used by ``Integrator`` to apply certain filters to the alerts being processed to determine which ones should be sent to the external platforms. Only the alerts that meet the filter conditions are sent. If no filters are specified, all alerts are sent.
+The `Integrator` daemon uses the `optional filters` fields to determine which alerts should be sent to the external platforms. Only the alerts that meet the filter conditions are sent. If no filters are specified, all alerts are sent.
 
 The following considerations must be taken into account when the filters are set:
    
    - It is possible to specify multiple group names using the ``<group>`` field with a comma-separated list. If the alert's group matches any of the groups in the list, the alert is sent. Otherwise, it is ignored.
-   - It is possible to specify multiple rule ids using the ``<rule_id>`` field with a comma-separated list. If the alert's rule id matches any of the ids in the list, the alert is sent. Otherwise, it is ignored.
-   - It is possible to specify the previously described fields together. If the alert's rule id and group match any of the ids and groups in the lists, the alert is sent. Otherwise, it is ignored.
+   - It is possible to specify multiple rule IDs using the ``<rule_id>`` field with a comma-separated list. If the alert's rule ID matches any of the IDs in the list, the alert is sent. Otherwise, it is ignored.
+   - It is possible to specify the previously described fields together. If both the alert's rule ID and group match any of the IDs and groups in the lists, the alert is sent. Otherwise, it is ignored.
 
 .. note::
   It is recommended to carefully check the groups and rule identifiers mentioned above, as defining them incorrectly will result in expected alerts not being sent to the integration.
