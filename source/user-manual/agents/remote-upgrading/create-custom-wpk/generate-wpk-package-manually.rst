@@ -185,20 +185,27 @@ Install the root CA if you want to overwrite the root CA with the file you creat
   # cd ../
   # cp path/to/wpk_root.pem etc/wpk_root.pem
 
+Copy the necessary scripts to the current folder to compile the WPK correctly:
+
+.. code-block:: console
+
+  # cp path/to/upgrade.sh .
+  # cp path/to/pkg_installer_mac.sh .
+
 Compile the WPK package using the PKG package and, your SSL certificate and key:
 
 .. code-block:: console
 
-  # tools/agent-upgrade/wpkpack.py output/myagent.wpk path/to/wpkcert.pem path/to/wpkcert.key path/to/wazuhagent.pkg path/to/upgrade.sh path/to/pkg_installer_mac.sh
+  # tools/agent-upgrade/wpkpack.py output/myagent.wpk path/to/wpkcert.pem path/to/wpkcert.key wazuh-agent-|WAZUH_CURRENT_OSX|-|WAZUH_REVISION_OSX|.pkg upgrade.sh pkg_installer_mac.sh
 
 
 Definitions:
     - ``output/myagent.wpk`` is the name of the output WPK package.
     - ``path/to/wpkcert.pem`` is the path to the SSL certificate.
     - ``path/to/wpkcert.key`` is the path to the SSL certificate's key.
-    - ``path/to/wazuhagent.pkg`` is the path to the PKG file downloaded in step 3.
-    - ``path/to/upgrade.sh`` is the path to the upgrade.sh file. Find an example at the base directory in the Wazuh repository.
-    - ``path/to/pkg_installer_mac.sh`` is the path to the pkg_installer_mac.sh file. Find an example in src/init in the Wazuh repository.
+    - ``wazuh-agent-|WAZUH_CURRENT_OSX|-|WAZUH_REVISION_OSX|.pkg`` is the PKG file downloaded in step 3.
+    - ``upgrade.sh`` is the upgrade.sh file. Find an example at the base directory in the Wazuh repository.
+    - ``pkg_installer_mac.sh`` is the pkg_installer_mac.sh file. Find an example in src/init in the Wazuh repository.
 
 .. note::
  These are only examples. If you want to distribute a WPK package using these methods, it's important to begin with an empty directory.
