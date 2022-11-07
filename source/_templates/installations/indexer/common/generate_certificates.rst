@@ -40,10 +40,6 @@
             - name: dashboard
               ip: <dashboard-node-ip>
 
-          # Wazuh dashboard nodes
-          dashboard:
-            - name: dashboard
-              ip: <dashboard-node-ip>
            
       To learn more about how to create and configure the certificates, see the :doc:`/user-manual/certificates` section.
 

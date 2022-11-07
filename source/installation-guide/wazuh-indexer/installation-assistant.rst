@@ -68,10 +68,6 @@ Indicate your deployment configuration, create the SSL certificates to encrypt c
             - name: dashboard
               ip: <dashboard-node-ip>
 
-          # Wazuh dashboard nodes
-          dashboard:
-            - name: dashboard
-              ip: <dashboard-node-ip>
 
 #. Run the assistant with the option ``--generate-config-files`` to generate the  Wazuh cluster key, certificates, and passwords necessary for installation. You can find these files in ``./wazuh-install-files.tar``.
 

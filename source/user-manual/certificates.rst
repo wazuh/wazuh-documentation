@@ -66,10 +66,6 @@ To create the certificates, edit the ``config.yml`` file and replace the node na
             - name: dashboard
               ip: <dashboard-node-ip>
 
-          # Wazuh dashboard nodes
-          dashboard:
-            - name: dashboard
-              ip: <dashboard-node-ip>
 
 After configuring the ``config.yml``, run the script with option ``-A`` to create all the certificates. 
 
