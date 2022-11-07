@@ -6,18 +6,18 @@
 Elasticsearch indices
 =====================
 
-Once you've installed the Wazuh Kibana plugin some new indices will be generated in Elasticsearch. Let's see a more in deep view about them.
-The user shouldn't take care about them and shouldn't modify them unless the Wazuh team suggest it.
+Once you've installed the Wazuh Kibana plugin some new indices will be generated in Elasticsearch. Let's see a more in deep view of them.
+The user shouldn't take care of them and shouldn't modify them unless the Wazuh team suggests it.
 
 The ``.kibana`` index
 ---------------------
 
-This index is mainly used by Kibana itself. It's useful to tell Kibana how are the index patterns we are using along other technical details. This index should be similar for any user and it's a bit long to show its content here. Also its content is useless for the user knowledge.
+This index is mainly used by Kibana itself. It's useful to tell Kibana how are the index patterns we are using along with other technical details. This index should be similar for any user, and it's a bit long to show its content here. Also, its content is useless for the user knowledge.
 
 The ``wazuh-alerts-`` indices
 -----------------------------
 
-They are auto-generated and they store the Wazuh alerts. Filebeat will send data to Elasticsearch and will create an index per day.
+They are auto-generated, and they store the Wazuh alerts. Filebeat will send data to Elasticsearch and will create an index per day.
 
 If you want to change the name of these indices with a custom one, you can follow :ref:`this guide <kibana_configure_indices>`.
 

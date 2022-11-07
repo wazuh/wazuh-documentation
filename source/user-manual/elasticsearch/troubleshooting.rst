@@ -42,7 +42,7 @@ An example output of the command looks as follows:
 
   WAZUH_VERSION="v|WAZUH_CURRENT|"
 
-Using the Kibana version and the Wazuh version, you can find the correct plugin in `compatibility matrix <https://github.com/wazuh/wazuh-kibana-app/#wazuh---kibana---open-distro-version-compatibility-matrix>`_.
+Using the Kibana version and the Wazuh version, you can find the correct plugin in the `compatibility matrix <https://github.com/wazuh/wazuh-kibana-app/#wazuh---kibana---open-distro-version-compatibility-matrix>`_.
 
 No template found for the selected index pattern
 ------------------------------------------------
