@@ -401,7 +401,10 @@ Using Syscollector information to trigger alerts
 
 .. warning::
    
-   This functionality is not currently supported. It will be available starting with version 4.4.
+   This capability is not available in Wazuh 4.2 and Wazuh 4.3 versions. It will be available starting with version 4.4.
+
+   In Wazuh 4.2 changes were made to the syscollector that greatly improves the flow of information between agent and manager for information synchronization.
+   Once this stage is finished, the tasks to enable the alerts will start, since the information received is sufficient to activate them.
 
 Since Wazuh 3.9 version, ``Syscollector`` module information can be used to trigger alerts and show that information in the alerts' description.
 
