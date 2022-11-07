@@ -8,7 +8,7 @@
 Visualization and dashboard
 ===========================
 
-Wazuh provides a web dashboard for data visualization and analysis. The dashboard comes with out-of-the-box modules for security events, PCI DSS compliance, detected vulnerable applications, file integrity monitoring data, configuration assessment results, cloud infrastructure monitoring events, and others. It can be used to perform forensic and historical analysis of your alerts.
+Wazuh provides a web dashboard for data visualization and analysis. The dashboard comes with out-of-the-box modules for security events, PCI DSS compliance, detected vulnerable applications, file integrity monitoring data, configuration assessment results, cloud infrastructure monitoring events, and others. It is used to perform forensic and historical analysis of your alerts.
 
 Wazuh also provides a PCI DSS compliance dashboard under the regulatory compliance module.
 
@@ -17,7 +17,7 @@ Wazuh also provides a PCI DSS compliance dashboard under the regulatory complian
    :align: center
    :width: 80%
 
-The PCI DSS compliance dashboard can be used to monitor and track events that trigger PCI DSS requirements. This dashboard offers a quick view of the PCI DSS controls and visualizations of related events and requirements.
+Thanks to the PCI DSS compliance dashboard, it is possible to monitor and track events that trigger PCI DSS requirements. This dashboard offers a quick view of the PCI DSS controls and visualizations of related events and requirements.
 
 .. thumbnail:: ../images/pci/regulatory-compliance-module-02.png
    :title: Regulatory compliance module 
@@ -29,7 +29,7 @@ The PCI DSS compliance dashboard can be used to monitor and track events that tr
    :align: center
    :width: 80%
 
-The following PCI DSS requirements can be met with the Wazuh dashboard:
+The following PCI DSS requirements are met with the Wazuh dashboard:
 
 - **Requirement 10 - Log and Monitor All Access to System Components and Cardholder Data**: This control requires that user activities, including those by employees, contractors, consultants, and internal and external vendors, and other third parties are logged, monitored, and any generated alerts are reviewed periodically.
 
