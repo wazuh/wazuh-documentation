@@ -37,9 +37,9 @@ Below are some PCI DSS requirement use cases that can be met with the SCA module
    Note that the SCA check IDs for the same requirement may vary depending on the endpoint the SCA scan is being run on.
 
 - PCI DSS 8.3.7 states that individuals are not allowed to submit a new password/passphrase that is the same as any of the last four passwords/passphrases used.
-
-   In order to check the password reuse policy and help meet requirement 8.3.7, we have the SCA check 18157 **Ensure password reuse is limited** for Ubuntu 14.04 endpoints. As such, when an SCA scan runs, you are able to detect if the password history policy meets the requirement.
-
+  
+   We have the SCA check 18157 **Ensure password reuse is limited** for Ubuntu 14.04 endpoints. It checks the password reuse policy and helps meet requirement 8.3.7. So, when an SCA scan runs, you can detect if the password history policy meets the requirement.
+   
    .. thumbnail:: ../images/pci/ensure-password-reuse-is-limited.png
          :title: Ensure password reuse is limited
          :align: center
