@@ -203,8 +203,8 @@ Definitions:
     - ``path/to/wpkcert.pem`` is the path to the SSL certificate.
     - ``path/to/wpkcert.key`` is the path to the SSL certificate's key.
     - ``wazuh-agent-|WAZUH_CURRENT_OSX|-|WAZUH_REVISION_OSX|.pkg`` is the PKG file downloaded in step 3.
-    - ``upgrade.sh`` is the upgrade.sh file. Find an example at the base directory in the Wazuh repository.
-    - ``pkg_installer_mac.sh`` is the pkg_installer_mac.sh file. Find an example in src/init in the Wazuh repository.
+    - ``upgrade.sh`` is the script that run first when the WPK is deployed in the target agent. Find an example at the base directory in the Wazuh repository.
+    - ``pkg_installer_mac.sh`` is the script that manages the WPK upgrade procedure. Find an example in `src/init` in the Wazuh repository.
 
 .. note::
  These are only examples. If you want to distribute a WPK package using these methods, it's important to begin with an empty directory.
