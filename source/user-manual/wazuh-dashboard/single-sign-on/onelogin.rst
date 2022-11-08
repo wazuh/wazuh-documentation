@@ -22,7 +22,7 @@ OneLogin Configuration
 #. Add the OneLogin extension to your browser.
 #. Create a new user. 
 
-   #. Log in to **OneLogin** web console, select **Administration** > **Users** > **New User**.
+   #. Log in to **OneLogin** web console, and select **Administration** > **Users** > **New User**.
 
       .. thumbnail:: /images/single-sign-on/onelogin/01-log-in-to-onelogin-web-console.png
          :title: Log in to OneLogin web console
@@ -223,7 +223,7 @@ Edit the Wazuh indexer security configuration files. It is recommended to back u
    
 #. Edit ``/usr/share/wazuh-indexer/plugins/opensearch-security/securityconfig/roles_mapping.yml`` file and change the following values:
      
-   To configure the ``roles_mapping.yml`` file, we map the ``Department`` field from step 3 to the admin role on Wazuh indexer. In this case, ``wazuh-admin``:
+   To configure the ``roles_mapping.yml`` file, we map the ``Department`` field from step 3 to the admin role on the Wazuh indexer. In this case, ``wazuh-admin``:
 
    .. code-block:: console 
          
