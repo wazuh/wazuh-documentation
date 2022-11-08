@@ -258,7 +258,7 @@ Check the following log files:
       The Wazuh indexer uses the ``/var/log`` folder to store logs by default.
 
     .. warning::
-      By default, Wazuh dashboard doesn't store logs on a file. You can change this by configuring ``logging.dest`` setting in the ``opensearch_dashboard.yml`` configuration file.
+      By default, the Wazuh dashboard doesn't store logs on a file. You can change this by configuring ``logging.dest`` setting in the ``opensearch_dashboard.yml`` configuration file.
 
 
 
