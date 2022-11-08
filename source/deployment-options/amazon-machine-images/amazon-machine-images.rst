@@ -104,7 +104,7 @@ Once the instance is running and the process to initialize passwords is complete
 
 .. warning::
    
-   It is highly recommended to change the default users passwords in the first SSH access. To perform this action, see the :doc:`/user-manual/securing-wazuh/wazuh-indexer` section.
+   It is highly recommended to change the default users passwords in the first SSH access. To perform this action, see the :doc:`/user-manual/user-administration/password-management/wazuh-indexer` section.
 
 
 Security considerations about SSH

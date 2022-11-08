@@ -30,7 +30,7 @@ The following parameters are required to make the configurations on the Wazuh da
     - OpenSearch and the SAML assertion are case sensitive. Therefore the values on the IDP and in the SAML configuration of the Wazuh indexer have to be exactly the same.
     - It is recommended to clear the browser cache and cookies before the integration is carried out.
     - The ``securityadmin`` script has to be executed with root user privileges
-    - Administrator permissions are being assigned in this integration. The :doc:`RBAC guide </user-manual/wazuh-dashboard/rbac>` can be used to configure any other necessary roles based on the user requirements.
+    - Administrator permissions are being assigned in this integration. The :doc:`RBAC guide </user-manual/user-administration/rbac>` can be used to configure any other necessary roles based on the user requirements.
     - Each group that is generated in the IDPs can only be used as one  ``backend_role``. In a case where other roles such as ``read-only`` are needed, a new group will have to be created for this purpose.
 
 

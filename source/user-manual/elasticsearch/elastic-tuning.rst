@@ -8,7 +8,7 @@
 Elasticsearch tuning
 ====================
 
-This guide summarizes the relevant settings that enable Elasticsearch optimization. To change the default passwords, see the :doc:`/user-manual/securing-wazuh/index` section.
+This guide summarizes the relevant settings that enable Elasticsearch optimization. To change the default passwords, see the :doc:`/user-manual/user-administration/password-management/index` section.
 
 - `Memory locking`_
 - `Shards and replicas`_

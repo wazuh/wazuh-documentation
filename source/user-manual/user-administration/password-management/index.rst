@@ -5,8 +5,8 @@
 
 .. _user_manual_secure:
 
-Securing Wazuh
-===============
+Password management
+===================
 
 This document includes instructions to secure your Wazuh deployments. To change the internal users passwords, select an option according to your Wazuh installation and follow the instructions. 
 
@@ -17,4 +17,4 @@ This document includes instructions to secure your Wazuh deployments. To change 
         opendistro
         elastic-stack
 
-To secure the Wazuh API, see the :doc:`Securing the Wazuh API <../api/securing-api>` document.
+To secure the Wazuh API, see the :doc:`Securing the Wazuh API </user-manual/api/securing-api>` document.
