@@ -19,75 +19,75 @@ Requirements
  * Python 2.7 or 3.5+
  * The Python ``cryptography`` package. This may be obtained using the following command:
 
-.. code-block:: console
-
-  $ pip install cryptography
+   .. code-block:: console
+   
+     $ pip install cryptography
 
 Linux WPK
 ^^^^^^^^^
 
-Install the development tools and compilers. In Linux, this can easily be done using your distribution package manager:
+#. Install the development tools and compilers. In Linux, this can easily be done using your distribution package manager. 
 
-a) For RPM-based distributions:
+   - For RPM-based distributions:
 
-.. code-block:: console
+      .. code-block:: console
+      
+        # yum install make gcc policycoreutils-python automake autoconf libtool unzip
 
-  # yum install make gcc policycoreutils-python automake autoconf libtool unzip
+   - For Debian-based distributions:
 
-b) For Debian-based distributions:
+      .. code-block:: console
+      
+        # apt-get install make gcc libc6-dev curl policycoreutils automake autoconf libtool unzip
 
-.. code-block:: console
+#. Download and extract the latest version. 
 
-  # apt-get install make gcc libc6-dev curl policycoreutils automake autoconf libtool unzip
+   .. code-block:: console
+   
+     # curl -Ls https://github.com/wazuh/wazuh/archive/v|WAZUH_CURRENT|.tar.gz | tar zx
 
-Download and extract the latest version:
+#. Modify the ``wazuh-|WAZUH_CURRENT|/etc/preloaded-vars.conf`` file that was downloaded to deploy an :ref:`unattended update <unattended-installation>` in the agent by uncommenting the following lines:
 
-.. code-block:: console
+   .. code-block:: pkgconfig
+   
+     USER_LANGUAGE="en"
+     USER_NO_STOP="y"
+     USER_UPDATE="y"
+     USER_BINARYINSTALL="y"
 
-  # curl -Ls https://github.com/wazuh/wazuh/archive/v|WAZUH_CURRENT|.tar.gz | tar zx
+#. Compile the project from the ``src`` folder. 
 
-Modify the ``wazuh-|WAZUH_CURRENT|/etc/preloaded-vars.conf`` file that was downloaded to deploy an :ref:`unattended update <unattended-installation>` in the agent by uncommenting the following lines:
+   .. code-block:: console
+   
+     # cd wazuh-|WAZUH_CURRENT|/src
+     # make deps TARGET=agent
+     # make TARGET=agent
 
-.. code-block:: pkgconfig
+#. Delete the files that are no longer needed. This step can be skipped, but the size of the WPK will be considerably larger. 
 
-  USER_LANGUAGE="en"
-  USER_NO_STOP="y"
-  USER_UPDATE="y"
-  USER_BINARYINSTALL="y"
+   .. code-block:: console
+   
+     $ rm -rf ./{api,framework}
+     $ rm -rf gen_ossec.sh add_localfiles.sh
+     $ rm -rf src/{addagent,analysisd,client-agent,config,error_messages,external/*,headers,logcollector,monitord,os_auth,os_crypto,os_csyslogd,os_dbd,os_execd}
+     $ rm -rf src/{os_integrator,os_maild,os_net,os_regex,os_xml,os_zlib,remoted,reportd,shared,syscheckd,unit_tests,wazuh_db}
+     $ rm -rf src/win32
+     $ rm -rf src/*.a
+     $ find etc/templates/config -not -name "sca.files" -delete 2>/dev/null
+     $ find etc/templates/* -maxdepth 0 -not -name "en" -not -name "config" | xargs rm -rf
 
-Compile the project from the ``src`` folder:
+#. Install the root CA if you want to overwrite the root CA with the file you created previously.
 
-.. code-block:: console
+   .. code-block:: console
+   
+     # cd ../
+     # cp path/to/wpk_root.pem etc/wpk_root.pem
 
-  # cd wazuh-|WAZUH_CURRENT|/src
-  # make deps TARGET=agent
-  # make TARGET=agent
+#. Compile the WPK package using your SSL certificate and key. 
 
-Delete the files that are no longer needed. This step can be skipped, but the size of the WPK will be considerably larger:
-
-.. code-block:: console
-
-  $ rm -rf ./{api,framework}
-  $ rm -rf gen_ossec.sh add_localfiles.sh
-  $ rm -rf src/{addagent,analysisd,client-agent,config,error_messages,external/*,headers,logcollector,monitord,os_auth,os_crypto,os_csyslogd,os_dbd,os_execd}
-  $ rm -rf src/{os_integrator,os_maild,os_net,os_regex,os_xml,os_zlib,remoted,reportd,shared,syscheckd,unit_tests,wazuh_db}
-  $ rm -rf src/win32
-  $ rm -rf src/*.a
-  $ find etc/templates/config -not -name "sca.files" -delete 2>/dev/null
-  $ find etc/templates/* -maxdepth 0 -not -name "en" -not -name "config" | xargs rm -rf
-
-Install the root CA if you want to overwrite the root CA with the file you created previously:
-
-.. code-block:: console
-
-  # cd ../
-  # cp path/to/wpk_root.pem etc/wpk_root.pem
-
-Compile the WPK package using your SSL certificate and key:
-
-.. code-block:: console
-
-  # tools/agent-upgrade/wpkpack.py output/myagent.wpk path/to/wpkcert.pem path/to/wpkcert.key *
+   .. code-block:: console
+   
+     # tools/agent-upgrade/wpkpack.py output/myagent.wpk path/to/wpkcert.pem path/to/wpkcert.key *
 
 In this example, the Wazuh project's root directory contains the proper ``upgrade.sh`` file.
 
@@ -101,45 +101,45 @@ Definitions:
 Windows WPK
 ^^^^^^^^^^^
 
-Install the development tools and compilers. In Linux, this can easily be done using your distribution package manager:
+#. Install the development tools and compilers. In Linux, this can easily be done using your distribution package manager. 
 
-For RPM-based distributions:
+   - For RPM-based distributions:
 
-.. code-block:: console
+      .. code-block:: console
+      
+        # yum install make gcc policycoreutils-python automake autoconf libtool unzip
 
-  # yum install make gcc policycoreutils-python automake autoconf libtool unzip
+   - For Debian-based distributions:
 
-For Debian-based distributions:
+      .. code-block:: console
+      
+        # apt-get install make gcc libc6-dev curl policycoreutils automake autoconf libtool unzip
 
-.. code-block:: console
+#. Download and extract the latest version of Wazuh sources. 
 
-  # apt-get install make gcc libc6-dev curl policycoreutils automake autoconf libtool unzip
+   .. code-block:: console
+   
+     # curl -Ls https://github.com/wazuh/wazuh/archive/v|WAZUH_CURRENT|.tar.gz | tar zx
 
-Download and extract the latest version of wazuh sources:
+#. Download the latest version of the Wazuh MSI package. 
 
-.. code-block:: console
+   .. code-block:: console
+   
+     # curl -Ls https://packages.wazuh.com/|WAZUH_CURRENT_MAJOR_WINDOWS|/windows/wazuh-agent-|WAZUH_CURRENT_WINDOWS|-|WAZUH_REVISION_WINDOWS|.msi --output wazuh-agent-|WAZUH_CURRENT_WINDOWS|-|WAZUH_REVISION_WINDOWS|.msi
+   
+#. Install the root CA if you want to overwrite the root CA with the file you created previously. 
 
-  # curl -Ls https://github.com/wazuh/wazuh/archive/v|WAZUH_CURRENT|.tar.gz | tar zx
+   .. code-block:: console
+   
+     # cd ../
+     # cp path/to/wpk_root.pem etc/wpk_root.pem
 
-Download the latest version of the wazuh MSI package:
+#. Compile the WPK package using the MSI package and, your SSL certificate and key. 
 
-.. code-block:: console
-
-  # curl -Ls https://packages.wazuh.com/|WAZUH_CURRENT_MAJOR_WINDOWS|/windows/wazuh-agent-|WAZUH_CURRENT_WINDOWS|-|WAZUH_REVISION_WINDOWS|.msi --output wazuh-agent-|WAZUH_CURRENT_WINDOWS|-|WAZUH_REVISION_WINDOWS|.msi
-
-Install the root CA if you want to overwrite the root CA with the file you created previously:
-
-.. code-block:: console
-
-  # cd ../
-  # cp path/to/wpk_root.pem etc/wpk_root.pem
-
-Compile the WPK package using the MSI package and, your SSL certificate and key:
-
-.. code-block:: console
-
-  # tools/agent-upgrade/wpkpack.py output/myagent.wpk path/to/wpkcert.pem path/to/wpkcert.key path/to/wazuhagent.msi path/to/upgrade.bat path/to/do_upgrade.ps1
-
+   .. code-block:: console
+   
+     # tools/agent-upgrade/wpkpack.py output/myagent.wpk path/to/wpkcert.pem path/to/wpkcert.key path/to/wazuhagent.msi path/to/upgrade.bat path/to/do_upgrade.ps1
+   
 Definitions:
     - ``output/myagent.wpk`` is the name of the output WPK package.
     - ``path/to/wpkcert.pem`` is the path to the SSL certificate.
@@ -152,50 +152,50 @@ Definitions:
 macOS WPK
 ^^^^^^^^^
 
-Install development tools and compilers. In Linux, this can easily be done using your distribution package manager:
+#. Install development tools and compilers. In Linux, this can easily be done using your distribution package manager.
 
-For RPM-based distributions:
+   - For RPM-based distributions:
 
-.. code-block:: console
+      .. code-block:: console
+      
+        # yum install make gcc policycoreutils-python automake autoconf libtool unzip
 
-  # yum install make gcc policycoreutils-python automake autoconf libtool unzip
+    - For Debian-based distributions:
 
-For Debian-based distributions:
+      .. code-block:: console
 
-.. code-block:: console
+         # apt-get install make gcc libc6-dev curl policycoreutils automake autoconf libtool unzip
 
-  # apt-get install make gcc libc6-dev curl policycoreutils automake autoconf libtool unzip
+#. Download and extract the latest version of Wazuh sources.
 
-Download and extract the latest version of Wazuh sources:
+   .. code-block:: console
+   
+     # curl -Ls https://github.com/wazuh/wazuh/archive/v|WAZUH_CURRENT|.tar.gz | tar zx
+     # cd wazuh-|WAZUH_CURRENT|
 
-.. code-block:: console
+#. Download the latest version of the Wazuh PKG package.
 
-  # curl -Ls https://github.com/wazuh/wazuh/archive/v|WAZUH_CURRENT|.tar.gz | tar zx
-  # cd wazuh-|WAZUH_CURRENT|
+   .. code-block:: console
+   
+     # curl -Ls https://packages.wazuh.com/|WAZUH_CURRENT_MAJOR_OSX|/macos/wazuh-agent-|WAZUH_CURRENT_OSX|-|WAZUH_REVISION_OSX|.pkg --output wazuh-agent-|WAZUH_CURRENT_OSX|-|WAZUH_REVISION_OSX|.pkg
+   
+#. Install the root CA if you want to overwrite the root CA with the file you created previously.
 
-Download the latest version of the Wazuh PKG package:
+   .. code-block:: console
+   
+     # cp path/to/wpk_root.pem etc/wpk_root.pem
 
-.. code-block:: console
+#. Copy the necessary script to the Wazuh sources folder to compile the WPK.
 
-  # curl -Ls https://packages.wazuh.com/|WAZUH_CURRENT_MAJOR_OSX|/macos/wazuh-agent-|WAZUH_CURRENT_OSX|-|WAZUH_REVISION_OSX|.pkg --output wazuh-agent-|WAZUH_CURRENT_OSX|-|WAZUH_REVISION_OSX|.pkg
+   .. code-block:: console
+   
+     # cp src/init/pkg_installer_mac.sh .
 
-Install the root CA if you want to overwrite the root CA with the file you created previously:
+#. Compile the WPK package using the PKG package and, your SSL certificate and key.
 
-.. code-block:: console
-
-  # cp path/to/wpk_root.pem etc/wpk_root.pem
-
-Copy the necessary script to the Wazuh sources folder to compile the WPK correctly:
-
-.. code-block:: console
-
-  # cp src/init/pkg_installer_mac.sh .
-
-Compile the WPK package using the PKG package and, your SSL certificate and key:
-
-.. code-block:: console
-
-  # tools/agent-upgrade/wpkpack.py output/myagent.wpk path/to/wpkcert.pem path/to/wpkcert.key wazuh-agent-|WAZUH_CURRENT_OSX|-|WAZUH_REVISION_OSX|.pkg upgrade.sh pkg_installer_mac.sh
+   .. code-block:: console
+   
+     # tools/agent-upgrade/wpkpack.py output/myagent.wpk path/to/wpkcert.pem path/to/wpkcert.key wazuh-agent-|WAZUH_CURRENT_OSX|-|WAZUH_REVISION_OSX|.pkg upgrade.sh pkg_installer_mac.sh
 
 
 Definitions:
