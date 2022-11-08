@@ -8,7 +8,7 @@ System inventory
 
 Wazuh is able to gather information relevant to the monitored endpoint using the system inventory module. The information gathered for each endpoint includes hardware details, OS information, network details, and running processes. The agent runs periodic scans on the endpoint and sends the information gathered to the manager for updates of the appropriate system information. See the :doc:`System inventory section </user-manual/capabilities/syscollector>` for more information about the system inventory module.
 
-The system inventory module can help meet the following PCI DSS requirement:
+The system inventory module helps to meet the following PCI DSS requirement:
 
 - **Requirement 2 - Apply Secure Configuration to All System Components**: Malicious individuals, both external and internal to an entity, often use default passwords and other vendor default settings to compromise systems. These passwords and settings are well known and are easily determined via public information. Applying secure configurations to system components reduces the means available to an attacker to compromise the system. Changing default passwords, removing unnecessary software, functions, and accounts, and disabling or removing unnecessary services all help to reduce the potential attack surface. 
 

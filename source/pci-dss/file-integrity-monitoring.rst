@@ -12,7 +12,7 @@ File integrity monitoring (Syscheck) is performed by comparing the cryptographic
 
 First, the Wazuh agent scans the system periodically at a specified interval, then it sends the checksums of the monitored files and registry keys (for Windows systems) to the Wazuh server. The server stores the checksums and looks for modifications by comparing the newly received checksums against the historical checksum values for those files and/or registry keys. An alert is generated if the checksum (or another file attribute) changes. Wazuh also supports near real-time file integrity monitoring.
 
-The :doc:`file integrity monitoring </user-manual/reference/ossec-conf/syscheck>` module can be used to meet some sub-requirements of PCI DSS requirement 11 which requires testing the security of systems and networks regularly. This requirement aims to ensure that system components, processes, and bespoke and custom software are tested frequently to ensure security controls continue to reflect a changing environment. Some of the changes in the environment may include the modification and deletion of critical files. This module can help monitor these file changes and assist in achieving PCI DSS compliance.
+The :doc:`file integrity monitoring </user-manual/reference/ossec-conf/syscheck>` module is used to meet some sub-requirements of PCI DSS requirement 11 which requires testing the security of systems and networks regularly. This requirement aims to ensure that system components, processes, and bespoke and custom software are tested frequently to ensure security controls continue to reflect a changing environment. Some of the changes in the environment may include the modification and deletion of critical files. This module helps to monitor these file changes and assist in achieving PCI DSS compliance.
 
 
 Use cases
@@ -81,13 +81,13 @@ For this use case, we configure Wazuh to detect when changes are made to a file 
 
    .. include:: /_templates/common/restart_agent.rst
 
-#. Check if the Audit rule for monitoring the selected folder is applied. To do so, execute the following command:
+#. You can check if the Audit rule for monitoring the selected folder is applied. To check that, you need to execute the following command:
 
    .. code-block:: console 
 
       auditctl -l | grep wazuh_fim
 
-   And check in the command output that the rule was added:
+   Check in the command output that the rule was added:
 
    .. code-block:: console 
 
@@ -99,7 +99,7 @@ For this use case, we configure Wazuh to detect when changes are made to a file 
 
          nano credit_cards/cardholder_data.txt
 
-   We can see an alert generated to show that a file in the monitored directory was modified.
+   You can see an alert generated to show that a file in the monitored directory was modified.
 
       .. thumbnail:: ../images/pci/file-modified-in-the-monitored-directory.png
          :title: File modified in the monitored directory
@@ -111,7 +111,7 @@ For this use case, we configure Wazuh to detect when changes are made to a file 
          :align: center
          :width: 80%     
 
-   In the alert details, we can see the PCI DSS requirement met, the differences in the file checksum, the file modified, the modification time, the ``whodata`` showing the process and user that made the modification, and other details.
+   In the alert details, you can see the PCI DSS requirement met, the differences in the file checksum, the file modified, the modification time, the ``whodata`` showing the process and user that made the modification, and other details.
 
 Perform critical file comparisons at specified intervals
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
@@ -175,7 +175,7 @@ In this use case, we configure Syscheck to detect when changes have been made to
 		:align: center
 		:width: 80%
 
-   In the alert details, we can see the changes made in ``syscheck.diff``, the file modified, the PCI DSS requirement met, the differences in the file checksum, the modification time, and other details.
+   In the alert details, you can see the changes made in ``syscheck.diff``, the file modified, the PCI DSS requirement met, the differences in the file checksum, the modification time, and other details.
 
 Detect file deletion
 ^^^^^^^^^^^^^^^^^^^^
@@ -197,13 +197,13 @@ In this scenario, Syscheck detects when a file in a monitored directory is delet
 
    .. include:: /_templates/common/restart_agent.rst
 
-#. Proceed to delete a file from the directory. In this case, we deleted the file ``cardholder_data.txt``. We can see an alert generated for the file deleted.
+#. Proceed to delete a file from the directory. In this case, we deleted the file ``cardholder_data.txt``. You can see an alert generated for the file deleted.
 
 	.. thumbnail:: ../images/pci/alert-generated-for-the-file-deleted.png
 		:title: Alert generated for the file deleted
 		:align: center
 		:width: 80%
 
-   In the alert details, we can see the file deleted, the PCI DSS requirement met, the deletion time, and other details.
+   In the alert details, you can see the file deleted, the PCI DSS requirement met, the deletion time, and other details.
 
-   These activities can be tracked from the PCI DSS module dashboard. The dashboard will show all activities that trigger a PCI DSS requirement including FIM changes.
+   You can track these activities from the PCI DSS module dashboard. The dashboard will show all activities that trigger a PCI DSS requirement including FIM changes.

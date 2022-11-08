@@ -8,22 +8,22 @@
 Log data analysis
 =================
 
-In many cases, evidence of an attack can be found in the log messages of devices, systems, and applications. The Wazuh log data analysis module can receive logs through text files or Windows event logs. It can also directly receive logs via remote syslog, which is useful for firewalls and other such devices.
+In many cases, you can find evidence of an attack in the log messages of devices, systems, and applications. The Wazuh log data analysis module receive logs through text files or Windows event logs. It can also directly receive logs via remote syslog, which is useful for firewalls and other such devices.
 
-Additionally, the log data analysis module analyzes the log data received from agents. It performs decoding and rule matching on the received data to process it. This processed log data can then be used for threat detection, prevention, and active response. 
+Additionally, the log data analysis module analyzes the log data received from agents. It performs decoding and rule matching on the received data to process it. You can then use this processed log data for threat detection, prevention, and active response. 
 
-The log collector module can help meet the following PCI DSS requirement:
+The log collector module helps to meet the following PCI DSS requirement:
 
 - **Requirement 10 - Log and Monitor All Access to System Components and Cardholder Data**: This control requires that user activities, including those by employees, contractors, consultants, internal and external vendors, and other third parties are logged and monitored, and the log data stored for a specified period of time.
 
 To help meet this requirement, the Wazuh agent collects logs from the endpoints it is deployed on. The log analysis module also receives logs via syslog for network and other syslog-enabled devices. The logs received are decoded to extract relevant information from its fields. After that, the extracted information is compared to the ruleset to look for matches. Where the extracted information matches a rule, an alert is generated. Refer to the :doc:`ruleset section  </user-manual/ruleset/index>` for more information.
 
-Wazuh can also hold logs of events that do not generate an alert using the archive feature and the indexer long term storage. For more information on configuring log collection, see the :doc:`Log data collection section </user-manual/capabilities/log-data-collection/index>`.
+Wazuh also hold logs of events that do not generate an alert using the archive feature and the indexer long term storage. For more information on configuring log collection, see the :doc:`Log data collection section </user-manual/capabilities/log-data-collection/index>`.
 
 Use cases
 ---------
 
-PCI DSS Requirement 10.2.2 requires that audit logs record the following details for each auditable event:
+PCI DSS 10.2.2 requires that audit logs record the following details for each auditable event:
 
    - User identification.
    - Type of event.
@@ -50,7 +50,7 @@ The following are some Wazuh rules that help achieve this requirement:
 		:width: 80%
 
 
-- PCI DSS requirement 10.5.1 requires that audit log history is retained for at least 12 months, with at least the most recent three months immediately available for analysis. This can be achieved by enabling Wazuh log archives and configuring `index management policies <https://wazuh.com/blog/wazuh-index-management/>`_. To enable Wazuh log archives, follow the instructions below. 
+- PCI DSS 10.5.1 requires that you retain audit log history for at least 12 months, with at least the most recent three months immediately available for analysis. You can achieve this by enabling Wazuh log archives and configuring `index management policies <https://wazuh.com/blog/wazuh-index-management/>`_. To enable Wazuh log archives, take the following steps: 
 
 
 **Enable archives monitoring in the Wazuh indexer**:
