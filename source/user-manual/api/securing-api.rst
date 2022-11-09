@@ -42,17 +42,7 @@ Recommended changes to secure the Wazuh API
 
     After setting these parameters, it will be necessary to restart the Wazuh API using the ``wazuh-manager`` service:
 
-      * For Systemd:
-
-        .. code-block:: console
-
-          # systemctl restart wazuh-manager
-
-      * For SysV Init:
-
-        .. code-block:: console
-
-          # service wazuh-manager restart
+      .. include:: /_templates/common/restart_manager.rst
 
 #. Change the default password of the admin users (**wazuh** and **wazuh-wui**): 
 
@@ -82,17 +72,7 @@ Recommended changes to secure the Wazuh API
 
     After configuring these parameters, it will be necessary to restart the Wazuh API using the ``wazuh-manager`` service.
 
-      * For Systemd:
-
-        .. code-block:: console
-
-          # systemctl restart wazuh-manager
-
-      * For SysV Init:
-
-        .. code-block:: console
-
-          # service wazuh-manager restart
+      .. include:: /_templates/common/restart_manager.rst
 
 #. Set maximum number of requests per minute:
 

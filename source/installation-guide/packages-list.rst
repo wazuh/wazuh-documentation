@@ -423,6 +423,8 @@ For Wazuh |WAZUH_CURRENT|:
 
 .. |WAZUH_KIBANA_7.17.5| replace:: `wazuh_kibana-|WAZUH_CURRENT|_7.17.5.zip <https://packages.wazuh.com/|WAZUH_CURRENT_MAJOR|/ui/kibana/wazuh_kibana-|WAZUH_CURRENT|_7.17.5-1.zip>`__ (`sha512 <https://packages.wazuh.com/|WAZUH_CURRENT_MAJOR|/checksums/wazuh/|WAZUH_CURRENT|/wazuh_kibana-|WAZUH_CURRENT|_7.17.5-1.zip.sha512>`__)
 
+.. |WAZUH_KIBANA_7.17.6| replace:: `wazuh_kibana-|WAZUH_CURRENT|_7.17.6.zip <https://packages.wazuh.com/|WAZUH_CURRENT_MAJOR|/ui/kibana/wazuh_kibana-|WAZUH_CURRENT|_7.17.6-1.zip>`__ (`sha512 <https://packages.wazuh.com/|WAZUH_CURRENT_MAJOR|/checksums/wazuh/|WAZUH_CURRENT|/wazuh_kibana-|WAZUH_CURRENT|_7.17.6-1.zip.sha512>`__)
+
 +------------------+-----------------------+--------------------------+
 | Kibana Version   | Open Distro Version   | Package                  |
 +==================+=======================+==========================+
@@ -447,6 +449,8 @@ For Wazuh |WAZUH_CURRENT|:
 | 7.17.4           |                       | |WAZUH_KIBANA_7.17.4|    |
 +------------------+-----------------------+--------------------------+
 | 7.17.5           |                       | |WAZUH_KIBANA_7.17.5|    |
++------------------+-----------------------+--------------------------+
+| 7.17.6           |                       | |WAZUH_KIBANA_7.17.6|    |
 +------------------+-----------------------+--------------------------+
 
 For a complete list of the available versions, see the `Wazuh Kibana plugin compatibility matrix <https://github.com/wazuh/wazuh-kibana-app/wiki/Compatibility>`_.
@@ -494,6 +498,10 @@ For Wazuh Splunk app |WAZUH_SPLUNK_CURRENT|:
 
 .. |SPLUNK_8.2.6_PKG| replace:: `wazuh_splunk-|WAZUH_SPLUNK_CURRENT|_8.2.6.tar.gz <https://packages.wazuh.com/4.x/ui/splunk/wazuh_splunk-|WAZUH_SPLUNK_CURRENT|_8.2.6-1.tar.gz>`__ (`sha512 <https://packages.wazuh.com/4.x/checksums/wazuh/|WAZUH_SPLUNK_CURRENT|/wazuh_splunk-|WAZUH_SPLUNK_CURRENT|_8.2.6-1.tar.gz.sha512>`__)
 
+.. |SPLUNK_8.2.7.1_PKG| replace:: `wazuh_splunk-|WAZUH_SPLUNK_CURRENT|_8.2.7.1.tar.gz <https://packages.wazuh.com/4.x/ui/splunk/wazuh_splunk-|WAZUH_SPLUNK_CURRENT|_8.2.7.1-1.tar.gz>`__ (`sha512 <https://packages.wazuh.com/4.x/checksums/wazuh/|WAZUH_SPLUNK_CURRENT|/wazuh_splunk-|WAZUH_SPLUNK_CURRENT|_8.2.7.1.tar.gz.sha512>`__)
+
+.. |SPLUNK_8.2.8_PKG| replace:: `wazuh_splunk-|WAZUH_SPLUNK_CURRENT|_8.2.8.tar.gz <https://packages.wazuh.com/4.x/ui/splunk/wazuh_splunk-|WAZUH_SPLUNK_CURRENT|_8.2.8-1.tar.gz>`__ (`sha512 <https://packages.wazuh.com/4.x/checksums/wazuh/|WAZUH_SPLUNK_CURRENT|/wazuh_splunk-|WAZUH_SPLUNK_CURRENT|_8.2.8-1.tar.gz.sha512>`__)  
+
 +----------------------+----------------------+
 | Splunk version       | Package              |
 +======================+======================+
@@ -534,6 +542,10 @@ For Wazuh Splunk app |WAZUH_SPLUNK_CURRENT|:
 | 8.2.5                | |SPLUNK_8.2.5_PKG|   |
 +----------------------+----------------------+
 | 8.2.6                | |SPLUNK_8.2.6_PKG|   |
++----------------------+----------------------+
+| 8.2.7.1              | |SPLUNK_8.2.7.1_PKG| |
++----------------------+----------------------+
+| 8.2.8                | |SPLUNK_8.2.8_PKG|   |
 +----------------------+----------------------+
 
 Filebeat

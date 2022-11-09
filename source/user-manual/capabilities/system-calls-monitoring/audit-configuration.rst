@@ -94,17 +94,7 @@ Restarting Wazuh
 
 Finally, we must restart the Wazuh agent in order to apply the changes:
 
-a. For Systemd:
-
-  .. code-block:: console
-
-    # systemctl restart wazuh-agent
-
-b. For SysV Init:
-
-  .. code-block:: console
-
-    # service wazuh-agent restart
+.. include:: /_templates/common/restart_agent.rst
 
 Now everything is ready to process audit events. You only need to create the proper audit rules (via *auditctl* or */etc/audit/audit.rules*). In the next section we will describe some good use cases.
 

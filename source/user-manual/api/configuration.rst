@@ -75,17 +75,8 @@ Here are all the available settings for the ``api.yaml`` configuration file. For
 
 Make sure to restart the Wazuh API using the **wazuh-manager** service after editing the configuration file:
 
-  a. For Systemd:
+  .. include:: /_templates/common/restart_manager.rst
 
-  .. code-block:: console
-
-    # systemctl restart wazuh-manager
-
-  b. For SysV Init:
-
-  .. code-block:: console
-
-    # service wazuh-manager restart
 
 Security configuration
 ----------------------

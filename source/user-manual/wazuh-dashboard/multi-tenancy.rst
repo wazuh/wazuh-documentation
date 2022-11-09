@@ -45,16 +45,4 @@ To enable multi-tenancy, follow the instructions below.
 
 #. Restart the Wazuh dashboard so changes can take effect. 
 
-   .. tabs::
-   
-    .. group-tab:: Systemd
-   
-     .. code-block:: console
-   
-      # systemctl restart wazuh-dashboard
-   
-    .. group-tab:: SysV init
-   
-     .. code-block:: console
-   
-      # service wazuh-dashboard restart
+   .. include:: /_templates/common/restart_dashboard.rst

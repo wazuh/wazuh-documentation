@@ -19,3 +19,5 @@ Learn more about achieving compliance with Wazuh in the sections below:
 
     pci-dss/index
     gdpr/index
+    hipaa/index
+

@@ -64,4 +64,4 @@ Follow the steps below to complete the **Create logs routing sink** form:
     :align: center
     :width: 100%
 
-After you set everything up, you should see activity in the ``Log Viewer`` section. Follow the `link <https://cloud.google.com/pubsub/docs/building-pubsub-messaging-system#set_up_your_project_and_topic_and_subscriptions>`__ if you need help to set up Cloud Pub/Sub topic and subscription.
+After you set everything up, you should see activity in the ``Log Viewer`` section. Follow the `link <https://cloud.google.com/pubsub/docs/building-pubsub-messaging-system#set_up_your_project_and_topic_and_subscriptions>`__ if you need help setting up Cloud Pub/Sub topic and subscription.

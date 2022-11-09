@@ -52,31 +52,11 @@ Wazuh configuration
 
     * If you are configuring a Wazuh manager:
 
-      a. For Systemd:
-
-      .. code-block:: console
-
-        # systemctl restart wazuh-manager
-
-      b. For SysV Init:
-
-      .. code-block:: console
-
-        # service wazuh-manager restart
+      .. include:: /_templates/common/restart_manager.rst
 
     * If you are configuring a Wazuh agent:
 
-      a. For Systemd:
-
-      .. code-block:: console
-
-        # systemctl restart wazuh-agent
-
-      b. For SysV Init:
-
-      .. code-block:: console
-
-        # service wazuh-agent restart
+      .. include:: /_templates/common/restart_agent.rst
 
 
 CloudWatch Logs use cases
