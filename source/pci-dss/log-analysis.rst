@@ -23,14 +23,14 @@ Wazuh also holds logs of events that do not generate an alert using the archive 
 Use cases
 ---------
 
-PCI DSS 10.2.2 requires that audit logs record the following details for each auditable event:
+- PCI DSS 10.2.2 requires that audit logs record the following details for each auditable event:
 
-   - User identification.
-   - Type of event.
-   - Date and time.
-   - Success and failure indication.
-   - Origination of event.
-   - Identity or name of affected data, system component, resource, or service (for example, name and protocol).
+  - User identification.
+  - Type of event.
+  - Date and time.
+  - Success and failure indication.
+  - Origination of event.
+  - Identity or name of affected data, system component, resource, or service (for example, name and protocol).
 
 The following are some Wazuh rules that help achieve this requirement:
 
@@ -57,23 +57,23 @@ The following are some Wazuh rules that help achieve this requirement:
 
 #. Set ``<logall_json>yes</logall_json>`` in ``/var/ossec/etc/ossec.conf``.
 
-#. Set archives enabled to true in ``/etc/filebeat/filebeat.yml``.
+#. Set archives enabled to true in ``/etc/filebeat/filebeat.yml``:
 
    .. code-block:: console
 
       archives:
       enabled: true
 
-#. Restart Filebeat. 
+#. Restart Filebeat: 
 
    .. include:: /_templates/common/restart_filebeat.rst
 
 
-#. Restart the Wazuh manager.
+#. Restart the Wazuh manager:
 
    .. include:: /_templates/common/restart_manager.rst
 
-#. Open the dashboard menu and select **Stack Management** under **Management**.
+#. Go to open the dashboard menu and select **Stack Management** under **Management**.
 
 	.. thumbnail:: ../images/pci/select-stack-management.png
 		:title: Select Stack Management

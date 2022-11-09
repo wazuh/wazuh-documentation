@@ -8,7 +8,7 @@
 File integrity monitoring
 =========================
 
-File integrity monitoring (Syscheck) is performed by comparing the cryptographic checksum and other attributes of a known file against the checksum and attributes of that file after it has been modified.
+File integrity monitoring is performed by comparing the cryptographic checksum and other attributes of a known file against the checksum and attributes of that file after it has been modified.
 
 First, the Wazuh agent scans the system periodically at a specified interval, then it sends the checksums of the monitored files and registry keys (for Windows systems) to the Wazuh server. The server stores the checksums and looks for modifications by comparing the newly received checksums against the historical checksum values for those files and/or registry keys. An alert is generated if the checksum (or another file attribute) changes. Wazuh also supports near real-time file integrity monitoring.
 
@@ -48,7 +48,7 @@ For this use case, we configure Wazuh to detect when changes are made to a file 
 
      # apt install auditd
 
-#. Determine the full file path for the file or directory to be monitored. In this case, we are monitoring the directory ``/root/credit_cards`` for changes.
+#. Determine the full file path for the file or directory to be monitored. In this case, we are monitoring the directory ``/root/credit_cards`` for changes:
 
    .. code-block:: console 
       
@@ -77,7 +77,7 @@ For this use case, we configure Wazuh to detect when changes are made to a file 
          <directories check_all="yes" whodata="yes">/root/credit_cards</directories>
       </syscheck>
 
-#. Restart the Wazuh agent to apply the changes.
+#. Restart the Wazuh agent to apply the changes:
 
    .. include:: /_templates/common/restart_agent.rst
 
@@ -93,7 +93,7 @@ For this use case, we configure Wazuh to detect when changes are made to a file 
 
       auditctl -w /root/credit_cards -p wa -k wazuh_fim
 
-#. Proceed to modify the file. In this case, we added new content.
+#. Proceed to modify the file. In this case, we added new content:
 
       .. code-block:: console 
 
