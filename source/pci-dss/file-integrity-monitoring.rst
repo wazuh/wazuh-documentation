@@ -69,7 +69,7 @@ For this use case, we configure Wazuh to detect when changes are made to a file 
 
       User1 = card4
 
-#. Add the following configuration to the syscheck block of the agent configuration file ``/var/ossec/etc/ossec.conf``. This will enable real-time monitoring of the directory and ensures that when a file in the directory is modified, Wazuh generates an alert with the details of the user who made the changes on the monitored files and the program name or process used to carry them out. 
+#. Add the following configuration to the syscheck block of the agent configuration file (``/var/ossec/etc/ossec.conf``). This will enable real-time monitoring of the directory and ensures that when a file in the directory is modified. Wazuh generates an alert with the details of the user who made the changes on the monitored files and the program name or process used to carry them out: 
 
    .. code-block:: xml
 
@@ -132,13 +132,13 @@ In this use case, we configure Syscheck to detect when changes have been made to
 	    Showing the changes made in a file is limited to only text files at this time.
 
 
-#. In the agent configuration file ``/var/ossec/etc/ossec.conf``, update the frequency option of the ``syscheck`` block to your desired scan interval in seconds. In this case, our desired scan interval is every 1 hour (3600 seconds).
+#. In the agent configuration file (``/var/ossec/etc/ossec.conf``), update the frequency option of the ``syscheck`` block to your desired scan interval in seconds. In this case, our desired scan interval is every 1 hour (3600 seconds):
 
    .. code-block:: console 
 
        <frequency>3600</frequency>
 
-#. Add the following configuration to the ``syscheck`` block of the agent configuration file ``/var/ossec/etc/ossec.conf``. This will enable monitoring of the file and ensure that when the file is modified, Wazuh generates an alert with the differences.
+#. Add the following configuration to the ``syscheck`` block of the agent configuration file (``/var/ossec/etc/ossec.conf``). This will enable monitoring of the file and ensure that when the file is modified, Wazuh generates an alert with the differences.
 
    .. code-block:: xml
 
@@ -185,7 +185,7 @@ In this scenario, Syscheck detects when a file in a monitored directory is delet
 **On the agent**
 
 #. Determine the full file path for the file or directory to be monitored. In this case, we are monitoring the directory ``/root/credit_cards``.
-#. Add the following configuration to the syscheck block of the agent configuration file ``/var/ossec/etc/ossec.conf``. This will enable monitoring of the file and ensure that Wazuh generates an alert if the file is deleted.
+#. Add the following configuration to the syscheck block of the agent configuration file (``/var/ossec/etc/ossec.conf``). This will enable monitoring of the file and ensure that Wazuh generates an alert if the file is deleted.
 
    .. code-block:: xml
 

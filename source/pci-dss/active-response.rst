@@ -26,19 +26,20 @@ Using the steps below, we configure the active response module to execute an IP 
 
 #. Configure the active response to execute the ``firewall-drop`` command when the rule for attempts to log in to a non-existent user is triggered (rule 5710) by adding the following block in the manager configuration file (``/var/ossec/etc/ossec.conf``):
 
-	.. code-block:: xml 
+   .. code-block:: xml
+      :emphasize-lines: 4
 
-		<active-response>
-		  <command>firewall-drop</command>
-		  <location>local</location>
-		  <rules_id>5710</rules_id>
-		  <timeout>100</timeout>
-		</active-response>
+      <active-response>
+         <command>firewall-drop</command>
+         <location>local</location>
+         <rules_id>5710</rules_id>
+         <timeout>100</timeout>
+      </active-response>
 
    .. note::      
       The ``firewall-drop`` command is included in the manager configuration file by default.
 
-#. Restart the Wazuh manager to apply the configuration.
+#. Restart the Wazuh manager to apply the configuration:
 
    .. include:: /_templates/common/restart_manager.rst
 

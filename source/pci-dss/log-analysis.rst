@@ -57,7 +57,7 @@ The following are some Wazuh rules that help achieve this requirement:
 
 #. Set ``<logall_json>yes</logall_json>`` in ``/var/ossec/etc/ossec.conf``.
 
-#. Set archives enabled to true in ``/etc/filebeat/filebeat.yml``:
+#. Set ``archives:`` ``enabled`` to true in ``/etc/filebeat/filebeat.yml``:
 
    .. code-block:: console
 
