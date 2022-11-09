@@ -6,8 +6,7 @@
 Elasticsearch indices
 =====================
 
-Once you've installed the Wazuh Kibana plugin some new indices will be generated in Elasticsearch. Let's see a more in deep view of them.
-The user shouldn't take care of them and shouldn't modify them unless the Wazuh team suggests it.
+Once you've installed the Wazuh Kibana plugin, some new indices will be generated in Elasticsearch. Let's see a more in deep view of them. The user shouldn't take care of or modify them unless the Wazuh team suggests it.
 
 The ``.kibana`` index
 ---------------------

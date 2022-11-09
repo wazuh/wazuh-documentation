@@ -248,7 +248,7 @@ The following is an example of how a centralized configuration can be done.
 Precedence
 ----------
 
-It's important to understand which configuration file takes precedence between ``ossec.conf`` and ``agent.conf`` when the central configuration is used. When the central configuration is utilized, the local and the shared configuration are merged, however, the ``ossec.conf`` file is read before the shared ``agent.conf`` and the last configuration of any setting will overwrite the previous. Also, if a file path for a particular setting is set in both of the configuration files, both paths will be included in the final configuration.
+It's important to understand which configuration file takes precedence between ``ossec.conf`` and ``agent.conf`` when the central configuration is used. When this configuration is utilized, the local and the shared configuration are merged, however, the ``ossec.conf`` file is read before the shared ``agent.conf`` and the last configuration of any setting will overwrite the previous. Also, if a file path for a particular setting is set in both of the configuration files, both paths will be included in the final configuration.
 
 For example:
 
