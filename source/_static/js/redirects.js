@@ -75,7 +75,7 @@ removedUrls['x.y'] = [
 
 redirectSameRelease['4.3'] = {
    '/user-manual/capabilities/vulnerability-detection/compatibility-matrix.html':
-     '/user-manual/capabilities/vulnerability-detection/how-it-works.html',
+     '/user-manual/capabilities/vulnerability-detection/how-it-works.html#compatibility-matrix',
    '/user-manual/capabilities/vulnerability-detection/running-vu-scan.html':
      '/user-manual/capabilities/vulnerability-detection/configuring-scans.html',
  };
