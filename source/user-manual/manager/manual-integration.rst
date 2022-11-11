@@ -21,6 +21,7 @@ The integrations are configured on the Wazuh manager's ``manager.conf`` file whi
     <name> </name>
     <hook_url> </hook_url> <!-- Required for Slack -->
     <api_key> </api_key> <!-- Required for PagerDuty and VirusTotal -->
+    <alert_format>json</alert_format> <!-- Required for Slack, VirusTotal and Shuffle -->
 
     <!-- Optional filters -->
     <rule_id> </rule_id>
@@ -29,9 +30,25 @@ The integrations are configured on the Wazuh manager's ``manager.conf`` file whi
     <event_location> </event_location>
   </integration>
 
+
 After enabling the daemon and configure the integrations, restart the Wazuh manager to apply the changes:
 
 .. include:: /_templates/common/restart_manager.rst
+
+
+Optional filters
+^^^^^^^^^^^^^^^^
+
+The `Integrator` daemon uses the `optional filters` fields to determine which alerts should be sent to the external platforms. Only the alerts that meet the filter conditions are sent. If no filters are specified, all alerts are sent.
+
+The following considerations must be taken into account when the filters are set:
+   
+   - It is possible to specify multiple group names using the ``<group>`` field with a comma-separated list. If the alert's group matches any of the groups in the list, the alert is sent. Otherwise, it is ignored.
+   - It is possible to specify multiple rule IDs using the ``<rule_id>`` field with a comma-separated list. If the alert's rule ID matches any of the IDs in the list, the alert is sent. Otherwise, it is ignored.
+   - It is possible to specify the previously described fields together. If both the alert's rule ID and group match any of the IDs and groups in the lists, the alert is sent. Otherwise, it is ignored.
+
+.. note::
+  It is recommended to carefully check the groups and rule identifiers mentioned above, as defining them incorrectly will result in expected alerts not being sent to the integration.
 
 The full configuration reference for the Integrator daemon can be found :ref:`here <reference_ossec_integration>`.
 
@@ -120,7 +137,7 @@ This is an example configuration for a custom integration:
     <name>custom-integration</name>
     <hook_url>WEBHOOK</hook_url>
     <level>10</level>
-    <group>multiple_drops|authentication_failures</group>
+    <group>multiple_drops,authentication_failures</group>
     <api_key>APIKEY</api_key> <!-- Replace with your external service API key -->
     <alert_format>json</alert_format>
   </integration>
