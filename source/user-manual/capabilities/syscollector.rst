@@ -399,9 +399,9 @@ The following table shows the operating systems that this module currently suppo
 Using Syscollector information to trigger alerts
 ------------------------------------------------
 
-.. warning::
+.. note::
    
-   This functionality is not currently supported. It will be available starting with version 4.4.
+   Enabled again in Wazuh |WAZUH_CURRENT_MINOR|. All the information required for these alerts is now available and allows this feature.
 
 Since Wazuh 3.9 version, ``Syscollector`` module information can be used to trigger alerts and show that information in the alerts' description.
 
@@ -435,7 +435,7 @@ As an example, the rules in the following set of custom rules trigger when a por
       </rule>
     </group>
 
-.. warning::
+.. note::
 
     The tag ``<if_sid>221</if_sid>`` is necessary because the events from Syscollector are muted by default with that rule.
 
