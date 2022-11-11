@@ -26,7 +26,7 @@ Below you can find a table describing the variables used by Wazuh installers on 
 +----------------------------------+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
 |   WAZUH_REGISTRATION_PORT        |  Specifies the port used by the Wazuh registration server. See :ref:`port <enrollment_manager_port>`.                                                                                                |
 +----------------------------------+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-|   WAZUH_REGISTRATION_PASSWORD    |  Sets password used to authenticate during register, stored in ``authd.pass``. See :ref:`authorization_pass_path <enrollment_authorization_pass_path>`                                               |
+|   WAZUH_REGISTRATION_PASSWORD    |  Sets the registration password by storing it in the ``authd.pass`` file. See :ref:`authorization_pass_path <enrollment_authorization_pass_path>`.                                                   |
 +----------------------------------+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
 |   WAZUH_KEEP_ALIVE_INTERVAL      |  Sets the time between agent checks for manager connection. See :ref:`notify_time <notify_time>`.                                                                                                    |
 +----------------------------------+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
@@ -48,6 +48,8 @@ Below you can find a table describing the variables used by Wazuh installers on 
 +----------------------------------+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
 | \/l\*v installer.log             |  Generates a log of the installation process, including verbose messages.                                                                                                                            |
 +----------------------------------+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+
+.. note:: In PowerShell, use ``"""`` or ``'""`` if the deployment variable contains spaces. For example, ``WAZUH_REGISTRATION_PASSWORD="""TOP SECRET"""``                                                        
 
 Below there are some examples to install and register a Windows agent.
 

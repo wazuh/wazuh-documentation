@@ -8,23 +8,23 @@
 Monitoring GitHub Activity
 ==========================
 
-The **audit log** allows organization admins to quickly review the actions performed by members of your organization. It includes details such as who performed the action, what the action was, and when it was performed.
+The `audit log` allows organization admins to quickly review the actions performed by members of your organization. It includes details such as who performed the action, what the action was, and when it was performed.
 This Wazuh module allows you to collect all the logs from GitHub using its API:
 
 .. code-block:: xml
 
     GET /orgs/{org}/audit-log
 
-GitHub API description can be found in this `link <https://docs.github.com/en/rest>`_.
+The GitHub API description can be found in this `link <https://docs.github.com/en/rest>`_.
 
 .. note::
 
-    To access Git events in the **audit log**, you must use the audit log REST API. The audit log REST API is available for users of GitHub Enterprise Cloud only.
+    To access Git events in the `audit log`, you must use the `audit log` REST API. The `audit log` REST API is available for users of GitHub Enterprise Cloud only.
 
 GitHub requirements
 ^^^^^^^^^^^^^^^^^^^
 
-For **Wazuh** to successfully connect to the **GitHub API**, an authentication process is required. To do this, we must provide the name of the organization on Github and personal access tokens.
+For **Wazuh** to successfully connect to the **GitHub API**, an authentication process is required. To do this, we must provide the name of the organization on GitHub and personal access tokens.
 The Personal Access Tokens (PATs) are an alternative to using passwords for authentication on GitHub when using the GitHub API.
 
 .. note::
@@ -57,14 +57,14 @@ Proceed to configure the ``github`` module in the Wazuh manager or in the Wazuh 
         </api_parameters>
     </github>
 
-Module reference can be found :ref:`here <github-module>`.
+The module references can be found :ref:`here <github-module>`.
 
 Using the configuration mentioned above, we will see an example of monitoring GitHub activity.
 
 Generate activity on GitHub
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-For this example, we will start by generating some activity in our GitHub Organization, in this case let's add a new member to our team. If we do that, we can see that GitHub will generate a new json event, something like this:
+For this example, we will start by generating some activity in our GitHub Organization, in this case, let's add a new member to our team. If we do that, we can see that GitHub will generate a new json event, something like this:
 
 .. code-block:: json
     :class: output
