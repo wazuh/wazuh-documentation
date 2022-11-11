@@ -430,7 +430,7 @@ Using Syscollector information to trigger alerts
 
 .. warning::
 
-   Disabled in Wazuh |WAZUH_CURRENT_MINOR|. *Syscollector* doesn't support this feature in version |WAZUH_CURRENT_MINOR|. A new version of Wazuh that makes available all the information required for these alerts is under development.
+   Disabled in Wazuh |WAZUH_CURRENT_MINOR|. Currently, *Syscollector* doesn't support this feature. A new version of Wazuh that makes available all the information required for these alerts is under development.
 
 Since Wazuh 3.9 version, ``Syscollector`` module information can be used to trigger alerts and show that information in the alerts' description.
 
