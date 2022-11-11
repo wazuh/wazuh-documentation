@@ -287,6 +287,10 @@ Wazuh dashboard configuration
 
 #. Change the logout configuration in the Wazuh dashboard. 
    
+   .. warning::
+   
+      This step should not be done in versions equal or higher than 4.3.10
+
    To change the logout configuration, replace the ``this.router.get({path: `auth/logout``` section of the ``/usr/share/wazuh-dashboard/plugins/securityDashboards/server/auth/types/saml/routes.js`` file with the following setting. It is recommended to back up this file before the configuration is changed.
 
    .. code-block:: console
@@ -333,7 +337,7 @@ Wazuh dashboard configuration
 #. Restart the Wazuh dashboard service.
 
        .. include:: /_templates/common/restart_dashboard.rst
-
+ 
 #. Test the configuration.
 
    To test the Okta SSO configuration, go to your Wazuh dashboard URL and log in with your Okta account.

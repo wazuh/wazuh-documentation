@@ -280,6 +280,10 @@ Wazuh dashboard configuration
 
 #. Change the logout configuration in the Wazuh dashboard. 
 
+   .. warning::
+   
+      This step should not be done in versions equal or higher than 4.3.10
+
    To change the logout configuration, edit the ``path: /auth/logout`` section of the ``route.js`` file. The file path is ``/usr/share/wazuh-dashboard/plugins/securityDashboards/server/auth/types/saml/routes.js``. It is recommended to back up this file before the configuration is changed. The configuration must be similar to this:
   
    .. code-block:: console
