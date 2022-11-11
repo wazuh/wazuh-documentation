@@ -13,27 +13,31 @@ What's new
 
 This release includes new features or enhancements as the following:
 
-Wazuh agent
-^^^^^^^^^^^
-
-
 Wazuh Kibana plugin
 ^^^^^^^^^^^^^^^^^^^
 
+- Support for Kibana 7.17.6. 
 
 Wazuh Splunk app
 ^^^^^^^^^^^^^^^^
 
+- Support for Splunk 8.2.7.1 and 8.2.8.
 
-Other
-^^^^^
-
- 
 Resolved issues
 ---------------
 
 This release resolves known issues as the following: 
 
+Wazuh manager
+^^^^^^^^^^^^^
+
+==============================================================    =============
+Reference                                                         Description
+==============================================================    =============
+`#15219 <https://github.com/wazuh/wazuh/pull/15219>`_             The Arch Linux feed URL in Vulnerability Detector is updated.
+`#15197 <https://github.com/wazuh/wazuh/pull/15197>`_             A bug in Vulnerability Detector related to internal database access is fixed.
+`#15303 <https://github.com/wazuh/wazuh/pull/15303>`_             A crash hazard in Analysisd when parsing an invalid ``<if_sid>`` value in the ruleset is fixed.
+==============================================================    =============
 
 Wazuh agent
 ^^^^^^^^^^^
@@ -41,10 +45,36 @@ Wazuh agent
 ==============================================================    =============
 Reference                                                         Description
 ==============================================================    =============
-`#15007 <https://github.com/wazuh/wazuh/pull/15007>`_             (text). 
+`#15259 <https://github.com/wazuh/wazuh/pull/15259>`_             The agent upgrade configuration has been restricted to local settings.
+`#15262 <https://github.com/wazuh/wazuh/pull/15262>`_             An unwanted Windows agent configuration modification on upgrade is fixed.
 ==============================================================    =============
 
+Wazuh dashboard
+^^^^^^^^^^^^^^^
 
+==============================================================    =============
+Reference                                                         Description
+==============================================================    =============
+`#4815 <https://github.com/wazuh/wazuh-kibana-app/pull/4815>`_    An issue when logging out from Wazuh when SAML is enabled is fixed.
+==============================================================    =============
+
+Wazuh Kibana plugin for Kibana 7.10.2
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+==============================================================    =============
+Reference                                                         Description
+==============================================================    =============
+`#4815 <https://github.com/wazuh/wazuh-kibana-app/pull/4815>`_    An issue when logging out from Wazuh when SAML is enabled is fixed.
+==============================================================    =============
+
+Wazuh Kibana plugin for Kibana 7.16.x and 7.17.x
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+==============================================================    =============
+Reference                                                         Description
+==============================================================    =============
+`#4815 <https://github.com/wazuh/wazuh-kibana-app/pull/4815>`_    An issue when logging out from Wazuh when SAML is enabled is fixed.
+==============================================================    =============
 
 Changelogs
 ----------
