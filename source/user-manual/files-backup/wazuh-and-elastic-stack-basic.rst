@@ -3,8 +3,8 @@
 .. meta::
    :description: Learn how to keep a backup of key files of your Wazuh with Elastic Stack basic installation.
   
-Wazuh with Elastic Stack basic
-==============================
+Wazuh and Elastic Stack basic licence
+=====================================
 
 Once you've backed up the Wazuh server and agents files, follow these steps if you have installed Elastic Stack basic along with Wazuh.
 
