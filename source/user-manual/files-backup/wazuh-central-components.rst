@@ -59,17 +59,20 @@ Backing up the Wazuh server
       /var/ossec/integrations/<custom_integration_script> \
       /var/ossec/wodles/<custom_wodle_script> $bkp_folder
 
-#. Back up Wazuh databases which hold collected data from agents. These files must be saved with the Wazuh manager service stopped to prevent modification attempts while copying.
+#. Stop the Wazuh manager service to prevent modification attempts while copying Wazuh databases.
 
    .. include:: /_templates/common/stop_manager.rst
+
+#. Back up Wazuh databases which hold collected data from agents.
 
    .. code-block:: console
 
       # cp -rp --parents \
       /var/ossec/queue/db/ $bkp_folder
 
-   .. include:: /_templates/common/start_manager.rst
+#. Start the Wazuh manager service.
 
+   .. include:: /_templates/common/start_manager.rst
 
 Backing up the Wazuh indexer and dashboard
 ------------------------------------------
