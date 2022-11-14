@@ -84,9 +84,12 @@ Backing up the Wazuh indexer and dashboard
       # cp -rp --parents \
       /etc/wazuh-indexer/certs/ \
       /etc/wazuh-indexer/jvm.options \
+      /etc/wazuh-indexer/jvm.options.d \
       /etc/wazuh-indexer/log4j2.properties \
       /etc/wazuh-indexer/opensearch.yml \
       /etc/wazuh-indexer/opensearch.keystore \
+      /etc/wazuh-indexer/opensearch-observability/ \
+      /etc/wazuh-indexer/opensearch-reports-scheduler/ \
       /usr/share/wazuh-indexer/plugins/opensearch-security/securityconfig \
       /usr/lib/sysctl.d/wazuh-indexer.conf $bkp_folder
 
@@ -98,8 +101,9 @@ Backing up the Wazuh indexer and dashboard
       /etc/wazuh-dashboard/certs/ \
       /etc/wazuh-dashboard/opensearch_dashboards.yml \
       /usr/share/wazuh-dashboard/config/opensearch_dashboards.keystore \
-      /usr/share/wazuh-dashboard/data/wazuh/downloads \
-      /usr/share/wazuh-dashboard/data/wazuh/config/wazuh.yml $bkp_folder
+      /usr/share/wazuh-dashboard/data/wazuh/downloads/ \
+      /usr/share/wazuh-dashboard/data/wazuh/config/wazuh.yml \
+      /usr/share/wazuh-dashboard/plugins/wazuh/public/assets/custom/images/ $bkp_folder
 
 Check the backup
 ----------------
