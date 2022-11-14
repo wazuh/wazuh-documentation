@@ -36,7 +36,7 @@ Reference                                                         Description
 ==============================================================    =============
 `#15219 <https://github.com/wazuh/wazuh/pull/15219>`_             The Arch Linux feed URL in Vulnerability Detector is updated.
 `#15197 <https://github.com/wazuh/wazuh/pull/15197>`_             A bug in Vulnerability Detector related to the internal database access is fixed.
-`#15303 <https://github.com/wazuh/wazuh/pull/15303>`_             A crash hazard in Analysisd when parsing an invalid ``<if_sid>`` value in the ruleset is fixed.
+`#15303 <https://github.com/wazuh/wazuh/pull/15303>`_             A crash hazard in Analysisd when parsing an invalid ``<if_sid>`` value in the ruleset is now fixed.
 ==============================================================    =============
 
 Wazuh agent
