@@ -285,54 +285,50 @@ Wazuh dashboard configuration
       opensearch_security.auth.type: "saml"
       server.xsrf.whitelist: ["/_plugins/_security/saml/acs", "/_plugins/_security/saml/logout", "/_opendistro/_security/saml/acs", "/_opendistro/_security/saml/logout", "/_opendistro/_security/saml/acs/idpinitiated"]
 
-#. Change the logout configuration in the Wazuh dashboard. 
-   
-   .. warning::
-   
-      This step should not be done in versions equal or higher than 4.3.10
+   .. note::
 
-   To change the logout configuration, replace the ``this.router.get({path: `auth/logout``` section of the ``/usr/share/wazuh-dashboard/plugins/securityDashboards/server/auth/types/saml/routes.js`` file with the following setting. It is recommended to back up this file before the configuration is changed.
+      *For versions 4.3.9 and earlier*, also change the logout configuration in the Wazuh dashboard. Replace the ``this.router.get({path: `auth/logout``` section of the ``/usr/share/wazuh-dashboard/plugins/securityDashboards/server/auth/types/saml/routes.js`` file with the following setting.
 
-   .. code-block:: console
-
-          this.router.get({
-            path: `/logout`,
-            validate: false
-          }, async (context, request, response) => {
-            try {
-              const authInfo = await this.securityClient.authinfo(request);
-              this.sessionStorageFactory.asScoped(request).clear(); // TODO: need a default logout page
-              const redirectUrl = `${this.coreSetup.http.basePath.serverBasePath}/app/wazuh`
-              return response.redirected({
-                headers: {
-                  location: redirectUrl
-                }
-              });
-            } catch (error) {
-              context.security_plugin.logger.error(`SAML logout failed: ${error}`);
-              return response.badRequest();
-            }
-          });
-          this.router.get({
-            path: `/auth/logout`,
-            validate: false
-          }, async (context, request, response) => {
-            try {
-              const authInfo = await this.securityClient.authinfo(request);
-              this.sessionStorageFactory.asScoped(request).clear(); // TODO: need a default logout page
-              const redirectUrl = `${this.coreSetup.http.basePath.serverBasePath}/app/wazuh`
-              return response.redirected({
-                headers: {
-                  location: redirectUrl
-                }
-              });
-            } catch (error) {
-              context.security_plugin.logger.error(`SAML logout failed: ${error}`);
-              return response.badRequest();
-            }
-          });
-        }
-      }
+      .. code-block:: console
+      
+             this.router.get({
+               path: `/logout`,
+               validate: false
+             }, async (context, request, response) => {
+               try {
+                 const authInfo = await this.securityClient.authinfo(request);
+                 this.sessionStorageFactory.asScoped(request).clear(); // TODO: need a default logout page
+                 const redirectUrl = `${this.coreSetup.http.basePath.serverBasePath}/app/wazuh`
+                 return response.redirected({
+                   headers: {
+                     location: redirectUrl
+                   }
+                 });
+               } catch (error) {
+                 context.security_plugin.logger.error(`SAML logout failed: ${error}`);
+                 return response.badRequest();
+               }
+             });
+             this.router.get({
+               path: `/auth/logout`,
+               validate: false
+             }, async (context, request, response) => {
+               try {
+                 const authInfo = await this.securityClient.authinfo(request);
+                 this.sessionStorageFactory.asScoped(request).clear(); // TODO: need a default logout page
+                 const redirectUrl = `${this.coreSetup.http.basePath.serverBasePath}/app/wazuh`
+                 return response.redirected({
+                   headers: {
+                     location: redirectUrl
+                   }
+                 });
+               } catch (error) {
+                 context.security_plugin.logger.error(`SAML logout failed: ${error}`);
+                 return response.badRequest();
+               }
+             });
+           }
+         }
 
 #. Restart the Wazuh dashboard service.
 
