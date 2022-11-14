@@ -8,21 +8,6 @@
 
 This section lists the changes in version 4.3.10. Every update of the Wazuh solution is cumulative and includes all enhancements and fixes from previous releases.
 
-What's new
-----------
-
-This release includes new features or enhancements as the following:
-
-Wazuh Kibana plugin
-^^^^^^^^^^^^^^^^^^^
-
-- Support for Kibana 7.17.6. 
-
-Wazuh Splunk app
-^^^^^^^^^^^^^^^^
-
-- Support for Splunk 8.2.7.1 and 8.2.8.
-
 Resolved issues
 ---------------
 
