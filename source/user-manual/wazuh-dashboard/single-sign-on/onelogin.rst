@@ -297,4 +297,4 @@ Wazuh dashboard configuration
 
 #. Test the configuration.
    
-   To test the configuration, go to your Wazuh dashboard URL and log in with your Onelogin account. 
+   To test the configuration, go to your Wazuh dashboard URL and log in with your OneLogin account. 
