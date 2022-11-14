@@ -240,16 +240,31 @@ Wazuh dashboard configuration
 
    Add these configurations to ``/etc/wazuh-dashboard/opensearch_dashboards.yml``. It is recommended to back up this file before the configuration is changed.
 
+   .. code-block:: console  
+
+      opensearch_security.auth.type: "saml"
+      server.xsrf.whitelist: ["/_plugins/_security/saml/acs", "/_plugins/_security/saml/logout", "/_opendistro/_security/saml/acs", "/_opendistro/_security/saml/logout", "/_opendistro/_security/saml/acs/idpinitiated"]
+
+   .. note::
+
+      *For versions 4.3.9 and earlier*, also change the logout configuration in the Wazuh dashboard. Edit the ``path: /auth/logout`` section of ``/usr/share/wazuh-dashboard/plugins/securityDashboards/server/auth/types/saml/routes.js``.
+
       .. code-block:: console
-          
-         opensearch_security.auth.type: "saml"
-         server.xsrf.whitelist: ["/_plugins/_security/saml/acs", "/_plugins/_security/saml/logout", "/_opendistro/_security/saml/acs", "/_opendistro/_security/saml/logout", "/_opendistro/_security/saml/acs/idpinitiated"]
-   
+         :emphasize-lines: 3
+
+         ...
+            this.router.get({
+               path: `/logout`,
+               validate: false
+         ...
+
 #. Restart the Wazuh dashboard service.
 
    .. include:: /_templates/common/restart_dashboard.rst
 
 #. Test the configuration.
+   
+   To test the configuration, go to your Wazuh dashboard URL and log in with your Jumpcloud account. 
 
-   To test the configuration, go to your Wazuh dashboard URL and log in with your Jumpcloud account.
+
 
