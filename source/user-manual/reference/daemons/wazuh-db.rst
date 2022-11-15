@@ -151,11 +151,13 @@ Data needed to upgrade the agent's database
 | **value**             | Field value                 | 3                                         |
 +-----------------------+-----------------------------+-------------------------------------------+
 
-.. note:: Two new key-value rows added since version 4.5.0:
+.. versionadded:: 4.5.0
 
-  - **last_vacuum_time** value for the ``key`` field: its ``value`` field stores the time of the last time the vacuum was performed.
+The ``key`` field can also store the following values:
 
-  - **last_vacuum_value** value for the ``key`` field: its ``value`` field stores the fragmentation value that the database was left with after the last vacuum was performed.
+  - **last_vacuum_time**: its ``value`` field stores the time of the last time the vacuum was performed.
+
+  - **last_vacuum_value**: its ``value`` field stores the fragmentation value that the database was left with after the last vacuum was performed.
 
 .. Uncomment when necessary
 ..
