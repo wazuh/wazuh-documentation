@@ -8,149 +8,134 @@
 Wazuh Docker deployment
 =======================
 
-- `Usage`_
-- `Exposed ports`_
-
-
 Usage
 -----
 
-Wazuh can be deployed as a single-node or multi-node stack:
+You can deploy Wazuh as a single-node or multi-node stack.
 
-- **Single-node deployment**: A Wazuh manager node, Wazuh indexer node, and Wazuh dashboard node will be deployed. 
-- **Multi-node deployment**: Two Wazuh manager nodes (one master and one worker), three Wazuh indexer nodes, and a Wazuh dashboard node will be deployed.
+-  Single-node deployment: Deploys one Wazuh manager, indexer, and dashboard node.
+-  Multi-node deployment: Deploys two Wazuh manager nodes (one master and one worker), three Wazuh indexer nodes, and a Wazuh dashboard node.
   
 Both deployments use persistence and allow configuring certificates to secure communications between nodes. The multi-node stack is the only deployment that contains high availability.
-
-
-.. _single-node-deployment:
 
 Single-node Deployment
 ^^^^^^^^^^^^^^^^^^^^^^
 
-1. Clone the Wazuh repository to your system:
+#. Clone the Wazuh repository to your system:
 
-    .. code-block:: console
+   .. code-block:: console
 
-      $ git clone https://github.com/wazuh/wazuh-docker.git -b v|WAZUH_CURRENT_DOCKER| --depth=1
+      # git clone https://github.com/wazuh/wazuh-docker.git -b |WAZUH_CURRENT_MINOR|
 
+   Then enter into the ``single-node`` directory to execute all the commands described below within this directory.
 
-    Then enter into the ``single-node`` directory. All the commands described below are executed within this directory. For :ref:`additional security <customize-default-users>`, the default password for the Wazuh indexer administrator user can be changed.
+#. Provide a group of certificates for each node in the stack to secure communication between the nodes. You have two alternatives to provide these certificates:
 
-
-2. Secure traffic between the deployment nodes using certificates:
-
-
-   To secure communication between the nodes, you need to provide a group of certificates for each node in the stack. There are two alternatives to provide these certificates:
-
-    a. Generate self-signed certificates for each node of the cluster.
+   #. Generate self-signed certificates for each node of the cluster. 
     
-        We have created a Docker image to automate certificate generation using the Wazuh certs gen tool. If your system uses a proxy, add the following to the ``generate-indexer-certs.yml`` file. If not, skip this particular step:
-        
-        .. code-block:: yaml
-        
-           environment:
-             - HTTP_PROXY=YOUR_PROXY_ADDRESS_OR_DNS
+      We have created a Docker image to automate certificate generation using the Wazuh certs gen tool.
 
-        A completed example looks like:
+      If your system uses a proxy, add the following to the ``generate-indexer-certs.yml`` file. If not, skip this particular step:
         
-        .. code-block:: yaml
+      .. code-block:: yaml
         
-           # Wazuh App Copyright (C) 2021 Wazuh Inc. (License GPLv2)
-           version: '3'
+         environment:
+           - HTTP_PROXY=YOUR_PROXY_ADDRESS_OR_DNS
 
-           services:
-             generator:
-               image: wazuh/wazuh-certs-generator:0.0.1
-               hostname: wazuh-certs-generator
-               volumes:
-                 - ./config/wazuh_indexer_ssl_certs/:/certificates/
-                 - ./config/certs.yml:/config/certs.yml
-               environment:
-                 - HTTP_PROXY=YOUR_PROXY_ADDRESS_OR_DNS
+      A completed example looks like:
         
-        Modify the file ``config/certs.yml`` and execute the following command to obtain the desired certificates:
+      .. code-block:: yaml
+        
+         # Wazuh App Copyright (C) 2021 Wazuh Inc. (License GPLv2)
+         version: '3'
+
+         services:
+           generator:
+             image: wazuh/wazuh-certs-generator:0.0.1
+             hostname: wazuh-certs-generator
+             volumes:
+               - ./config/wazuh_indexer_ssl_certs/:/certificates/
+               - ./config/certs.yml:/config/certs.yml
+             environment:
+               - HTTP_PROXY=YOUR_PROXY_ADDRESS_OR_DNS
+        
+      Execute the following command to get the desired certificates:
       
          .. code-block:: console
          
-             $ docker-compose -f generate-indexer-certs.yml run --rm generator
+            # docker-compose -f generate-indexer-certs.yml run --rm generator
 
+      This saves the certificates into the ``config/wazuh_indexer_ssl_certs`` directory.
 
-        This will save the certificates into the ``config/wazuh_indexer_ssl_certs`` directory.
+   #. Provide your own certificates for each node.
 
-    b. Provide your own certificates for each node.
+      In case you have your own certificates, provision them as follows:
 
-        In the case of having your own certificates, they must be provisioned as follows:
-
-        Wazuh Indexer: 
+      Wazuh indexer: 
       
-        .. code-block:: console
+      .. code-block:: none
 
-          config/wazuh_indexer_ssl_certs/root-ca.pem
-          config/wazuh_indexer_ssl_certs/wazuh.indexer-key.pem
-          config/wazuh_indexer_ssl_certs/wazuh.indexer.pem
-          config/wazuh_indexer_ssl_certs/admin.pem
-          config/wazuh_indexer_ssl_certs/admin-key.pem
+         config/wazuh_indexer_ssl_certs/root-ca.pem
+         config/wazuh_indexer_ssl_certs/wazuh.indexer-key.pem
+         config/wazuh_indexer_ssl_certs/wazuh.indexer.pem
+         config/wazuh_indexer_ssl_certs/admin.pem
+         config/wazuh_indexer_ssl_certs/admin-key.pem
 
+      Wazuh manager:
 
-        Wazuh Manager:
+      .. code-block:: none
 
-        .. code-block:: console  
+         config/wazuh_indexer_ssl_certs/root-ca-manager.pem
+         config/wazuh_indexer_ssl_certs/wazuh.manager.pem
+         config/wazuh_indexer_ssl_certs/wazuh.manager-key.pem
 
-          config/wazuh_indexer_ssl_certs/root-ca-manager.pem
-          config/wazuh_indexer_ssl_certs/wazuh.manager.pem
-          config/wazuh_indexer_ssl_certs/wazuh.manager-key.pem
+      Wazuh dashboard:
 
+      .. code-block:: none
 
-        Wazuh Dashboard:
-
-        .. code-block:: console  
-
-          config/wazuh_indexer_ssl_certs/wazuh.dashboard.pem
-          config/wazuh_indexer_ssl_certs/wazuh.dashboard-key.pem
-          config/wazuh_indexer_ssl_certs/root-ca.pem
-
+         config/wazuh_indexer_ssl_certs/wazuh.dashboard.pem
+         config/wazuh_indexer_ssl_certs/wazuh.dashboard-key.pem
+         config/wazuh_indexer_ssl_certs/root-ca.pem
  
-3. Check that there is a ``docker-compose.yml`` file. Start Wazuh using ``docker-compose``:
+#. Start the Wazuh single-node deployment using docker-compose:
 
-   a) Foreground::
+   -  Foreground:
 
-      $ docker-compose up
+      .. code-block:: console  
 
-   b) Background::
+         # docker-compose up
 
-      $ docker-compose up -d
+   -  Background:
 
+      .. code-block:: console  
 
-   The default username and password for the Wazuh dashboard are “admin” and “SecretPassword”.
+         # docker-compose up -d
+
+   The default username and password for the Wazuh dashboard are ``admin`` and ``SecretPassword``. For :ref:`additional security <change-pwd-existing-usr>`, you can change the default password for the Wazuh indexer *admin* user.
 
 
 .. note::
-   The Wazuh dashboard container will run multiple queries to the Wazuh indexer API using curl, to verify if the Wazuh indexer is up. It is expected to see several ``Failed to connect to Wazuh indexer port 9200`` log messages or “Wazuh dashboard server is not ready yet” until the Wazuh indexer is started. Then the setup process will continue normally, it takes about 1 minute for the Wazuh indexer to start up. The default Wazuh indexer credentials are in the ``docker-compose.yml`` file.
 
-
-.. _multi-node-deployment:
+   To know when the Wazuh indexer is up, the Wazuh dashboard container uses ``curl`` to run multiple queries to the Wazuh indexer API. You can expect to see several ``Failed to connect to Wazuh indexer port 9200`` log messages or “ *Wazuh dashboard server is not ready yet* ” until the Wazuh indexer is started. Then the setup process continues normally. It takes about 1 minute for the Wazuh indexer to start up. You can find the default Wazuh indexer credentials in the ``docker-compose.yml`` file.
 
 Multi-node deployment
 ^^^^^^^^^^^^^^^^^^^^^
 
-1. Clone the Wazuh repository to your system:
+#. Clone the Wazuh repository to your system:
 
-    .. code-block:: console
+   .. code-block:: console
 
-      $ git clone https://github.com/wazuh/wazuh-docker.git -b v|WAZUH_CURRENT_DOCKER| --depth=1
-
+      $ git clone https://github.com/wazuh/wazuh-docker.git -b |WAZUH_CURRENT_MINOR|
    
-  Then enter into the ``multi-node`` directory, all the commands described below are executed within this directory. For :ref:`additional security <customize-default-users>`, the default password for the Wazuh indexer admin user can be changed.
+   Then enter into the ``multi-node`` directory to execute all the commands described below within this directory.
 
+#. Provide a group of certificates for each node in the stack to secure communications between the nodes. You have two alternatives to provide these certificates:
 
-2. Secure traffic between the deployment nodes using certificates:
+   -  Generate self-signed certificates for each node of the cluster.
 
-   To secure communications between the nodes, you need to provide a group of certificates for each node in the stack. There are two alternatives to provide these certificates:
+      We have created a Docker image to automate certificate generation using the Wazuh certs gen tool.
 
-   a. Generate self-signed certificates for each node of the cluster.
-
-      We have created a Docker image to automate certificate generation using the Wazuh certs gen tool. If your system uses a proxy, add the following to the ``generate-indexer-certs.yml`` file. If not skip to skip this particular step:
+      If your system uses a proxy, add the following to the ``generate-indexer-certs.yml`` file. If not, skip this particular step:
       
       .. code-block:: yaml
       
@@ -174,107 +159,149 @@ Multi-node deployment
              environment:
                - HTTP_PROXY=YOUR_PROXY_ADDRESS_OR_DNS
       
-      Modify the file ``config/certs.yml`` and execute the following command to obtain the desired certificates:
+      Execute the following command to get the desired certificates:
         
-         .. code-block:: console
+      .. code-block:: console
 
-             $ docker-compose -f generate-indexer-certs.yml run --rm generator
+         # docker-compose -f generate-indexer-certs.yml run --rm generator
 
+      This saves the certificates into the ``config/wazuh_indexer_ssl_certs`` directory.
 
-      This will save the certificates into the ``config/wazuh_indexer_ssl_certs`` directory.
+   -  Provide your own certificates for each node.
 
-   b. Provide your own certificates for each node. 
-
-      In the case of having your own certificates, they must be provisioned as follows:
+      In case you have your own certificates, provision them as follows:
       
-      Wazuh Indexer: 
+      Wazuh indexer: 
     
-        .. code-block:: console
+      .. code-block:: none
 
-            config/wazuh_indexer_ssl_certs/root-ca.pem
-            config/wazuh_indexer_ssl_certs/wazuh1.indexer-key.pem
-            config/wazuh_indexer_ssl_certs/wazuh1.indexer.pem
-            config/wazuh_indexer_ssl_certs/wazuh2.indexer-key.pem
-            config/wazuh_indexer_ssl_certs/wazuh2.indexer.pem
-            config/wazuh_indexer_ssl_certs/wazuh3.indexer-key.pem
-            config/wazuh_indexer_ssl_certs/wazuh3.indexer.pem
-            config/wazuh_indexer_ssl_certs/admin.pem
-            config/wazuh_indexer_ssl_certs/admin-key.pem
+         config/wazuh_indexer_ssl_certs/root-ca.pem
+         config/wazuh_indexer_ssl_certs/wazuh1.indexer-key.pem
+         config/wazuh_indexer_ssl_certs/wazuh1.indexer.pem
+         config/wazuh_indexer_ssl_certs/wazuh2.indexer-key.pem
+         config/wazuh_indexer_ssl_certs/wazuh2.indexer.pem
+         config/wazuh_indexer_ssl_certs/wazuh3.indexer-key.pem
+         config/wazuh_indexer_ssl_certs/wazuh3.indexer.pem
+         config/wazuh_indexer_ssl_certs/admin.pem
+         config/wazuh_indexer_ssl_certs/admin-key.pem
+
+      Wazuh manager:
+
+      .. code-block:: none
+
+         config/wazuh_indexer_ssl_certs/root-ca-manager.pem
+         config/wazuh_indexer_ssl_certs/wazuh.master.pem
+         config/wazuh_indexer_ssl_certs/wazuh.master-key.pem
+         config/wazuh_indexer_ssl_certs/wazuh.worker.pem
+         config/wazuh_indexer_ssl_certs/wazuh.worker-key.pem
+
+      Wazuh dashboard:
+
+      .. code-block:: none
+
+         config/wazuh_indexer_ssl_certs/wazuh.dashboard.pem
+         config/wazuh_indexer_ssl_certs/wazuh.dashboard-key.pem
+         config/wazuh_indexer_ssl_certs/root-ca.pem
 
 
-      Wazuh Manager:
+#. Start the Wazuh multi-node deployment using ``docker-compose``:
 
-        .. code-block:: console
+   -  Foreground:
 
-            config/wazuh_indexer_ssl_certs/root-ca-manager.pem
-            config/wazuh_indexer_ssl_certs/wazuh.master.pem
-            config/wazuh_indexer_ssl_certs/wazuh.master-key.pem
-            config/wazuh_indexer_ssl_certs/wazuh.worker.pem
-            config/wazuh_indexer_ssl_certs/wazuh.worker-key.pem
+      .. code-block:: console
 
+         # docker-compose up
 
-      Wazuh Dashboard:
+   -  Background:
 
-        .. code-block:: console
+      .. code-block:: console
 
-            config/wazuh_indexer_ssl_certs/wazuh.dashboard.pem
-            config/wazuh_indexer_ssl_certs/wazuh.dashboard-key.pem
-            config/wazuh_indexer_ssl_certs/root-ca.pem
- 
+         # docker-compose up -d
 
-3. Check that there is a ``docker-compose.yml`` file. Start Wazuh using ``docker-compose``:
-
-   a) Foreground::
-
-      $ docker-compose up
-
-   b) Background::
-
-      $ docker-compose up -d
-
-   The default username and password for the Wazuh dashboard are “admin” and “SecretPassword”.
+   The default username and password for the Wazuh dashboard are ``admin`` and ``SecretPassword``. For :ref:`additional security <change-pwd-existing-usr>`, you can change the default password for the Wazuh indexer *admin* user.
 
 .. note::
-  The Wazuh dashboard container will run multiple queries to the Wazuh indexer API using curl, to verify if the Wazuh indexer is up. It is expected to see several ``Failed to connect to Wazuh indexer port 9200`` log messages or “Wazuh dashboard server is not ready yet”, until the Wazuh indexer is started. Then the setup process will continue normally, it takes about 1 minute for the Wazuh indexer to start up. The default Wazuh indexer credentials are in the ``docker-compose.yml`` file.
 
+   To know when the Wazuh indexer is up, the Wazuh dashboard container uses ``curl`` to run multiple queries to the Wazuh indexer API. You can expect to see several ``Failed to connect to Wazuh indexer port 9200`` log messages or “Wazuh dashboard server is not ready yet” until the Wazuh indexer is started. Then the setup process continues normally. It takes about 1 minute for the Wazuh indexer to start up. You can find the default Wazuh indexer credentials in the ``docker-compose.yml`` file.
 
 Build docker images locally
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-The Wazuh manager, indexer, and dashboard images can be modified and built locally.
+You can modify and build the Wazuh manager, indexer, and dashboard images locally.
 
-1. Clone the Wazuh repository to your system:
+#. Clone the Wazuh repository to your system:
 
-.. code-block:: console
+   .. code-block:: console
   
-   $ git clone https://github.com/wazuh/wazuh-docker.git -b v|WAZUH_CURRENT_DOCKER| --depth=1
+      # git clone https://github.com/wazuh/wazuh-docker.git -b |WAZUH_CURRENT_MINOR|
 
-
-2. Enter into the ``build-docker-images`` directory and build the Wazuh manager, indexer, and dashboard images:
+#. For versions up to 4.3.4, enter into the ``build-docker-images`` directory and build the Wazuh manager, indexer, and dashboard images:
   
-.. code-block:: console
+   .. code-block:: console
   
-   $  docker-compose build
+      # docker-compose build
 
+   For version 4.3.5 and above, run the image creation script:
 
-.. _customize-default-users:
+   .. code-block:: console
+  
+      # build-docker-images/build-images.sh
 
-Customize default users
-^^^^^^^^^^^^^^^^^^^^^^^
+.. _change-pwd-existing-usr:
 
-You can customize users on the Wazuh indexer container by mounting your own ``internal_users.yml``. The default password for the Wazuh indexer administrator user can be changed to provide additional security:
+Change the password of an existing user
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-.. code-block:: console
+.. note::
 
-   - ./config/wazuh-indexer/internal_users.yml:/usr/share/wazuh-indexer/plugins/opensearch-security/securityconfig/internal_users.yml
+   You must add all users created on the Wazuh dashboard to the ``internal_users.yml`` file. If not, executing this procedure deletes them.
 
+You can change the default password of an existing user to improve security. For example, you can change the default password of the Wazuh indexer *admin* user.
 
-It is possible to generate a hash using the same Docker image, type in a secure password when prompted and replace the hash in ``internal_users.yml``:
+#. Stop the deployment stack if it’s running:
 
-.. code-block:: console
+   .. code-block:: console
+  
+      # docker-compose stop
 
-   docker run --rm -ti wazuh/wazuh-indexer:|WAZUH_CURRENT| bash /usr/share/wazuh-indexer/plugins/opensearch-security/tools/hash.sh
+#. Run this command to generate a hash of your new password. Once the container launches, input the new password and press **enter**:
 
+   .. code-block:: console
+  
+      # docker run --rm -ti wazuh/wazuh-indexer:4.3.6 bash /usr/share/wazuh-indexer/plugins/opensearch-security/tools/hash.sh
+
+#. Copy the generated hash. Replace the current ``admin`` user hash in the ``/single-node/config/wazuh_indexer/internal_users.yml`` file if using *single-node* deployment.
+
+#. Change all occurrences of the default ``INDEXER_PASSWORD`` in the ``docker-compose.yml`` file to the new password.
+
+#. Start the deployment stack:
+
+   .. code-block:: console
+  
+      # docker-compose start
+
+#. Run ``docker ps`` and note the name of the Wazuh indexer container.
+
+#. Run ``docker exec -it single-node_wazuh.indexer_1 bash`` to enter the container. ``single-node_wazuh.indexer_1`` is the container name obtained in the previous step.
+
+#. Set the following variables:
+
+   .. code-block:: console
+  
+      export INSTALLATION_DIR=/usr/share/wazuh-indexer
+      export OPENSEARCH_PATH_CONF=${INSTALLATION_DIR}/config
+      CACERT=$OPENSEARCH_PATH_CONF/certs/root-ca.pem
+      KEY=$OPENSEARCH_PATH_CONF/certs/admin-key.pem
+      CERT=$OPENSEARCH_PATH_CONF/certs/admin.pem
+      export JAVA_HOME=/usr/share/wazuh-indexer/jdk
+
+#. Run the ``securityadmin.sh`` script to apply all changes:
+
+   .. code-block:: console
+
+      # bash /usr/share/wazuh-indexer/plugins/opensearch-security/tools/securityadmin.sh -cd /usr/share/wazuh-indexer/plugins/opensearch-security/securityconfig/ -nhnv -cacert  $CACERT -cert $CERT -key $KEY -p 9300 -icl
+
+#. Exit the Wazuh indexer container and login with the new credentials on the Wazuh dashboard.
 
 Exposed ports
 -------------
@@ -296,4 +323,5 @@ By default, the stack exposes the following ports:
 +-----------+-----------------------------+
 
 .. note::
-  Configuration is not dynamically reloaded, so it is necessary to restart the stack after changing the configuration of a component.
+
+   Docker doesn’t reload the configuration dynamically. You need to restart the stack after changing the configuration of a component.
