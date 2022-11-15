@@ -5,11 +5,10 @@
 
 .. _wazuh_agent_package_hpux:
 
-Installing Wazuh agents on HP-UX systems
-========================================
+Installing Wazuh agents on HP-UX endpoints
+==========================================
 
-The installed agent runs on the host you want to monitor and communicates with the Wazuh manager, sending data in near real time through an encrypted and authenticated channel. 
-
+The installed agent runs on the endpoint you want to monitor and communicates with the Wazuh server, sending data in near real-time through an encrypted and authenticated channel.
 
 #. To start the installation process, download the `HP-UX installer <https://packages.wazuh.com/|WAZUH_CURRENT_MAJOR_HPUX|/hp-ux/wazuh-agent-|WAZUH_CURRENT_HPUX|-|WAZUH_REVISION_HPUX|-hpux-11v3-ia64.tar>`_. 
 
@@ -70,4 +69,4 @@ To uninstall the agent, follow these steps:
 
       # rm -rf /var/ossec
 
-The Wazuh agent is now completely removed from your HP-UX system.
+The Wazuh agent is now completely removed from your HP-UX endpoint.

@@ -5,8 +5,8 @@
 
 .. _wazuh_agent_package_linux:
 
-Deploying Wazuh agents on Linux systems
-=======================================
+Deploying Wazuh agents on Linux endpoints
+=========================================
 
 The agent runs on the host you want to monitor and communicates with the Wazuh server, sending data in near real-time through an encrypted and authenticated channel. 
 
