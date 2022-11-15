@@ -158,17 +158,7 @@ Enable authentication by htpasswd
 
 #. Restart NGINX:
 
-   #. For Systemd:
-
-      .. code-block:: console
-
-         # systemctl restart nginx
-
-   #. For SysV Init:
-
-      .. code-block:: console
-
-         # service nginx restart
+   .. include:: /_templates/common/restart_nginx.rst
 
 Now, access the Splunk web interface via HTTPS. It will prompt you for the username and password that you created in the steps above.
 
@@ -242,17 +232,7 @@ Enable authentication by htpasswd
 
 #. Restart NGINX:
 
-   #. For Systemd:
-
-      .. code-block:: console
-
-         # systemctl restart nginx
-
-   #. For SysV Init:
-
-      .. code-block:: console
-
-         # service nginx restart
+   .. include:: /_templates/common/restart_nginx.rst
 
 Now, access the Splunk web interface via HTTPS. It will prompt you for the username and password that you created in the steps above.
 

@@ -65,7 +65,7 @@ Disables the AWS-S3 wodle.
 skip_on_error
 ^^^^^^^^^^^^^
 
-When unable to process and parse a CloudTrail log, skip the log and continue processing
+When unable to process and parse a log, skip the log and continue processing.
 
 +--------------------+---------+
 | **Default value**  | yes     |

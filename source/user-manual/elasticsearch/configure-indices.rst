@@ -36,21 +36,11 @@ Let's suppose that we want to add a new index pattern (``my-custom-alerts-*``) a
 
 #. First of all, stop the Filebeat service:
 
-    a. For Systemd:
-
-       .. code-block:: console
-
-        # systemctl stop filebeat
-
-    b. For SysV Init:
-
-       .. code-block:: console
-
-        # service filebeat stop
+   .. include:: /_templates/installations/basic/elastic/common/stop_filebeat.rst
 
 #. Download the Wazuh template for Elasticsearch and save it into a file (for example, *template.json*):
 
-    .. code-block:: console
+   .. code-block:: console
 
       # curl -so template.json https://raw.githubusercontent.com/wazuh/wazuh/v|WAZUH_CURRENT|/extensions/elasticsearch/7.x/wazuh-template.json
 
@@ -117,31 +107,11 @@ Let's suppose that we want to add a new index pattern (``my-custom-alerts-*``) a
 
     Restart the Kibana service:
 
-    a. For Systemd:
-
-       .. code-block:: console
-
-        # systemctl restart kibana
-
-    b. For SysV Init:
-
-       .. code-block:: console
-
-        # service kibana restart
+    .. include:: /_templates/installations/basic/elastic/common/restart_kibana.rst
 
 #. Restart the Filebeat service:
 
-    a. For Systemd:
-
-       .. code-block:: console
-
-        # systemctl restart filebeat
-
-    b. For SysV Init:
-
-       .. code-block:: console
-
-        # service filebeat restart
+    .. include:: /_templates/common/restart_filebeat.rst    
 
 If the pattern is not present in Kibana UI, you may create a new one using the same name used on the Elasticsearch template, and make sure to use ``timestamp`` as the Time Filter field name.
 

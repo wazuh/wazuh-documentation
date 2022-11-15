@@ -8,7 +8,7 @@
 DNS queries
 ===========
 
-Wazuh has default rules for `DNS queries <https://cloud.google.com/monitoring/api/resources#tag_dns_query>`__ to a private DNS handled by the `Google Cloud DNS <https://cloud.google.com/dns/docs>`__ service. Those logs can be collected using the **gcp-pubsub** module. Details on how to configure the module can be found :ref:`gcp-pubsub configuration reference <gcp-pubsub>`.
+Wazuh has default rules for `DNS queries <https://cloud.google.com/monitoring/api/resources#tag_dns_query>`__ to a private DNS handled by the `Google Cloud DNS <https://cloud.google.com/dns/docs>`__ service. Those logs can be collected using the ``gcp-pubsub`` module. Details on how to configure the module can be found in the :ref:`gcp-pubsub configuration reference <gcp-pubsub>`.
 
 .. thumbnail:: ../../images/gcp/gcp-dns-query.png
     :align: center

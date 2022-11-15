@@ -2,19 +2,16 @@
 
 .. tabs::
 
+   .. group-tab:: Systemd
 
-  .. tab:: Systemd
+      .. code-block:: console
 
+         # systemctl stop elasticsearch
 
-    .. code-block:: console
+   .. group-tab:: SysV Init
 
-      # systemctl stop elasticsearch
+      .. code-block:: console
 
-
-  .. tab:: SysV Init
-
-    .. code-block:: console
-
-      # service elasticsearch stop
+         # service elasticsearch stop
 
 .. End of include file

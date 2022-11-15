@@ -5,13 +5,13 @@
    .. group-tab:: Systemd
 
       .. code-block:: console
-
-         # systemctl restart filebeat
+  
+         # systemctl restart kibana
 
    .. group-tab:: SysV init
 
       .. code-block:: console
-
-         # service filebeat restart
+  
+         # service kibana restart
 
 .. End of include file

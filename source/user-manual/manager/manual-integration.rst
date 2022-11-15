@@ -31,17 +31,7 @@ The integrations are configured on the Wazuh manager ``ossec.conf`` file which i
 
 After enabling the daemon and configure the integrations, restart the Wazuh manager to apply the changes:
 
-a. For Systemd:
-
-.. code-block:: console
-
-  # systemctl restart wazuh-manager
-
-b. For SysV Init:
-
-.. code-block:: console
-
-  # service wazuh-manager restart
+.. include:: /_templates/common/restart_manager.rst
 
 The full configuration reference for the Integrator daemon can be found :ref:`here <reference_ossec_integration>`.
 

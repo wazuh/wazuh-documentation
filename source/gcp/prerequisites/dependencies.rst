@@ -8,7 +8,7 @@ Installing dependencies
 =======================
 
 .. note::
-  The GCP module can be configured in both Wazuh manager and agent. The choice merely depends on where do you want to reach the GCP services from.
+  The GCP module can be configured in both the Wazuh manager and the agent. The choice merely depends on where you want to reach the GCP services from.
 
 .. warning::
   The Wazuh manager includes all dependencies installed, the following steps are only necessary when configuring the integration in a Wazuh agent.
