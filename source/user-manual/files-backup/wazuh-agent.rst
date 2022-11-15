@@ -8,6 +8,10 @@ Wazuh agent
 
 To create a backup of your Wazuh agent installation follow these steps.
 
+.. note::
+
+   You need root user privileges to execute the commands below.
+
 Preparing the backup
 --------------------
 
@@ -20,16 +24,14 @@ Preparing the backup
          .. code-block:: console
 
             # bkp_folder=~/wazuh_files_backup/$(date +%F_%H:%M)
-            # mkdir --parents $bkp_folder
-            # echo $bkp_folder
+            # mkdir --parents $bkp_folder && echo $bkp_folder
 
       .. group-tab:: Windows
 
          .. code-block:: doscon
 
-            > set bkp_folder=%userprofile%\\wazuh_files_backup\\%date:~10%%date:~4,2%%date:~7,2%%time:~0,2%%time:~3,2%
-            > mkdir %bkp_folder%
-            > echo %bkp_folder%
+            > set bkp_folder=%userprofile%\wazuh_files_backup\%date:~6,4%-%date:~3,2%-%date:~0,2%_%time:~0,2%-%time:~3,2%
+            > mkdir %bkp_folder% && echo %bkp_folder%
 
 Backing up a Wazuh agent
 ------------------------
@@ -55,33 +57,20 @@ Backing up a Wazuh agent
 
          .. code-block:: doscon
 
-            > xcopy C:\Program Files (x86)\ossec-agent\client.keys %bkp_folder% /I /S /H /X /K
-            > xcopy C:\Program Files (x86)\ossec-agent\ossec.conf %bkp_folder% /I /S /H /X /K
-            > xcopy C:\Program Files (x86)\ossec-agent\ossec.log %bkp_folder% /I /S /H /X /K
-            > xcopy C:\Program Files (x86)\ossec-agent\internal_options.conf %bkp_folder% /I /S /H /X /K
-            > xcopy C:\Program Files (x86)\ossec-agent\local_internal_options.conf %bkp_folder% /I /S /H /X /K
-            > xcopy C:\Program Files (x86)\ossec-agent\*.pem %bkp_folder% /I /S /H /X /K
-            > xcopy C:\Program Files (x86)\ossec-agent\rids\*  %bkp_folder% /I /S /H /X /K
+            > xcopy "C:\Program Files (x86)\ossec-agent\client.keys" %bkp_folder% /H /I /K /S /X
+            > xcopy "C:\Program Files (x86)\ossec-agent\ossec.conf" %bkp_folder% /H /I /K /S /X
+            > xcopy "C:\Program Files (x86)\ossec-agent\internal_options.conf" %bkp_folder% /H /I /K /S /X
+            > xcopy "C:\Program Files (x86)\ossec-agent\local_internal_options.conf" %bkp_folder% /H /I /K /S /X
+            > xcopy "C:\Program Files (x86)\ossec-agent\*.pem" %bkp_folder% /H /I /K /S /X
+            > xcopy "C:\Program Files (x86)\ossec-agent\ossec.log" %bkp_folder% /H /I /K /S /X
+            > xcopy "C:\Program Files (x86)\ossec-agent\logs\*"  %bkp_folder%\logs\ /H /I /K /S /X
+            > xcopy "C:\Program Files (x86)\ossec-agent\rids\*"  %bkp_folder%\rids\ /H /I /K /S /X
 
 Checking the backup
 -------------------
 
 #. Check everything is in place and working
 
-
-   .. tabs::
-
-      .. group-tab:: Systemd
-
-         .. code-block:: console
-
-            # systemctl status wazuh-manager
-
-      .. group-tab:: SysV init
-
-         .. code-block:: console
-
-            # service wazuh-manager status
 
    .. tabs::
 
@@ -95,4 +84,4 @@ Checking the backup
 
          .. code-block:: doscon
 
-            > type $bkp_folder | more
+            > tree %bkp_folder% /f

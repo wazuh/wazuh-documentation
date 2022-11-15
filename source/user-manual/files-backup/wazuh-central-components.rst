@@ -8,6 +8,10 @@ Wazuh central components
 
 To create a backup of the central components of your Wazuh installation, follow these steps.
 
+.. note::
+
+   You need root user privileges to execute the commands below.
+
 Preparing the backup
 --------------------
 
@@ -104,6 +108,10 @@ Backing up the Wazuh indexer and dashboard
       /usr/share/wazuh-dashboard/data/wazuh/downloads/ \
       /usr/share/wazuh-dashboard/data/wazuh/config/wazuh.yml \
       /usr/share/wazuh-dashboard/plugins/wazuh/public/assets/custom/images/ $bkp_folder
+
+.. note::
+
+   To take snapshots of indices and state, follow the instructions in `OpenSearch snapshots <https://opensearch.org/docs/1.2/opensearch/snapshot-restore/>`__.
 
 Check the backup
 ----------------

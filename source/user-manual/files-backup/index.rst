@@ -12,5 +12,4 @@ In this section you can find instructions on how to create a backup of your Wazu
    :maxdepth: 1
 
    wazuh-central-components
-   wazuh-and-elastic-stack-basic
    wazuh-agent
