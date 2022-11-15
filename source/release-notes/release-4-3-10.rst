@@ -40,7 +40,7 @@ Wazuh dashboard
 ==============================================================    =============
 Reference                                                         Description
 ==============================================================    =============
-`#4815 <https://github.com/wazuh/wazuh-kibana-app/pull/4815>`_    An issue when logging out from Wazuh when SAML is enabled is fixed.
+`#4815 <https://github.com/wazuh/wazuh-kibana-app/pull/4815>`_    An issue with logging out from Wazuh when SAML is enabled is now fixed.
 ==============================================================    =============
 
 Wazuh Kibana plugin for Kibana 7.10.2
@@ -49,7 +49,7 @@ Wazuh Kibana plugin for Kibana 7.10.2
 ==============================================================    =============
 Reference                                                         Description
 ==============================================================    =============
-`#4815 <https://github.com/wazuh/wazuh-kibana-app/pull/4815>`_    An issue when logging out from Wazuh when SAML is enabled is fixed.
+`#4815 <https://github.com/wazuh/wazuh-kibana-app/pull/4815>`_    An issue with logging out from Wazuh when SAML is enabled is now fixed.
 ==============================================================    =============
 
 Wazuh Kibana plugin for Kibana 7.16.x and 7.17.x
@@ -58,7 +58,7 @@ Wazuh Kibana plugin for Kibana 7.16.x and 7.17.x
 ==============================================================    =============
 Reference                                                         Description
 ==============================================================    =============
-`#4815 <https://github.com/wazuh/wazuh-kibana-app/pull/4815>`_    An issue when logging out from Wazuh when SAML is enabled is fixed.
+`#4815 <https://github.com/wazuh/wazuh-kibana-app/pull/4815>`_    An issue with logging out from Wazuh when SAML is enabled is now fixed.
 ==============================================================    =============
 
 Packages
