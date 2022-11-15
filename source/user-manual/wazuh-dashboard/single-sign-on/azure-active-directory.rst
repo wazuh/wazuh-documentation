@@ -285,18 +285,19 @@ Wazuh dashboard configuration
       opensearch_security.auth.type: "saml"
       server.xsrf.whitelist: ["/_plugins/_security/saml/acs", "/_plugins/_security/saml/logout", "/_opendistro/_security/saml/acs", "/_opendistro/_security/saml/logout", "/_opendistro/_security/saml/acs/idpinitiated"]
 
-#. Change the logout configuration in the Wazuh dashboard. 
+   .. note::
+      :class: not-long
 
-   Edit the ``path: /auth/logout`` section of the ``/usr/share/wazuh-dashboard/plugins/securityDashboards/server/auth/types/saml/routes.js`` file. It is recommended to back up this file before the configuration is changed. The configuration must be similar to this:
+      *For versions 4.3.9 and earlier*, also replace ``path: `/auth/logout``` with ``path: `/logout``` in ``/usr/share/wazuh-dashboard/plugins/securityDashboards/server/auth/types/saml/routes.js``.
 
-   .. code-block:: console  
-      :emphasize-lines: 3
-              
-      ...
-          this.router.get({
-            path: `/logout`,
-            validate: false
-      ...
+      .. code-block:: console
+         :emphasize-lines: 3
+
+         ...
+            this.router.get({
+               path: `/logout`,
+               validate: false
+         ...
 
 #. Restart the Wazuh dashboard service.
 
