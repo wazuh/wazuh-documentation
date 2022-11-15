@@ -30,7 +30,7 @@ Okta Configuration
           :align: center
           :width: 80%
      
-   #. From the **People** section, select **Add Person**, fill in the details of the new user and click **Save** as seen in the following screenshots.
+   #. From the **People** section, select **Add Person**, fill in the details of the new user, and click **Save** as seen in the following screenshots.
 
       .. thumbnail:: /images/single-sign-on/okta/02-select-add-person.png
           :title: Select add person

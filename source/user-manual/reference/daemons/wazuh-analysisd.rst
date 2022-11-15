@@ -88,7 +88,7 @@ The image below shows the flow for a Rootcheck event that generates an alert.
     :align: center
     :width: 100%
 
-As you can see, every part of the Analysisd multithreaded engine is independent from one another, except for the rule matching threads that share the same queue.
+As you can see, every part of the Analysisd multithreaded engine is independent of one another, except for the rule-matching threads that share the same queue.
 
 Automatic leveling of the threads
 ----------------------------------
@@ -158,4 +158,4 @@ This default configuration can be changed on the ``internal_options.conf`` file 
 |                                              |               | Any integer between 0 and 32.                                       |
 +----------------------------------------------+---------------+---------------------------------------------------------------------+
 
-For example, if the manager receives few Rootcheck events, we can decrease the number of threads for the Rootcheck decoder.
+For example, if the manager receives a few Rootcheck events, we can decrease the number of threads for the Rootcheck decoder.
