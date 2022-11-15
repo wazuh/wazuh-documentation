@@ -156,4 +156,4 @@ Testing the cluster installation
 Next steps
 ----------
 
-The Wazuh indexer is now successfully installed and you can proceed with installing the Wazuh server. To perform this action, see the :doc:`Installing the Wazuh server using the installation assistant <../wazuh-server/installation-assistant>` section.
+The Wazuh indexer is now successfully installed, and you can proceed with installing the Wazuh server. To perform this action, see the :doc:`Installing the Wazuh server using the installation assistant <../wazuh-server/installation-assistant>` section.

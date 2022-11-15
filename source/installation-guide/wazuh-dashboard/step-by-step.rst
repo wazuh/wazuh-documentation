@@ -88,7 +88,7 @@ Deploying certificates
 ^^^^^^^^^^^^^^^^^^^^^^
 
   .. note::
-    Make sure that a copy of the ``wazuh-certificates.tar``file, created during the initial configuration step, is placed in your working directory.
+    Make sure that a copy of the ``wazuh-certificates.tar`` file, created during the initial configuration step, is placed in your working directory.
 
   .. include:: /_templates/installations/dashboard/deploy_certificates.rst
 
@@ -282,6 +282,6 @@ All the Wazuh central components are successfully installed and secured.
   </div>
 
 
-The Wazuh environment is now ready and you can proceed with installing the Wazuh agent on the endpoints to be monitored. To perform this action, see the :doc:`Wazuh agent </installation-guide/wazuh-agent/index>` section.
+The Wazuh environment is now ready, and you can proceed with installing the Wazuh agent on the endpoints to be monitored. To perform this action, see the :doc:`Wazuh agent </installation-guide/wazuh-agent/index>` section.
 
 If you want to uninstall the Wazuh dashboard, see :ref:`uninstall_dashboard`.

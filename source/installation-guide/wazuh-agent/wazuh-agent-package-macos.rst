@@ -35,7 +35,7 @@ The agent runs on the endpoint you want to monitor and communicates with the Waz
                   # sudo /Library/Ossec/bin/wazuh-control start
 
 
-            The installation process is now complete and the Wazuh agent is successfully deployed and running on your macOS endpoint.
+            The installation process is now complete, and the Wazuh agent is successfully deployed and running on your macOS endpoint.
 
             
           .. group-tab:: GUI
@@ -51,7 +51,7 @@ The agent runs on the endpoint you want to monitor and communicates with the Waz
     
                   # sudo /Library/Ossec/bin/wazuh-control start
  
-            The installation process is now complete and the Wazuh agent is successfully installed on your macOS endpoint. The next step is to register and configure the agent to communicate with the Wazuh server. To perform this action, see the :doc:`Wazuh agent enrollment </user-manual/agent-enrollment/index>` section.  
+            The installation process is now complete, and the Wazuh agent is successfully installed on your macOS endpoint. The next step is to register and configure the agent to communicate with the Wazuh server. To perform this action, see the :doc:`Wazuh agent enrollment </user-manual/agent-enrollment/index>` section.  
 
 By default, all agent files are stored in ``/Library/Ossec/`` after the installation.
     

@@ -233,6 +233,6 @@ Testing Wazuh server cluster
 Next steps
 ----------
 
-The Wazuh server installation is now complete and you can proceed with :doc:`../wazuh-dashboard/step-by-step`.
+The Wazuh server installation is now complete, and you can proceed with :doc:`../wazuh-dashboard/step-by-step`.
 
 If you want to uninstall the Wazuh server, see :ref:`uninstall_server`.

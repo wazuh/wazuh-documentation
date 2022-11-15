@@ -25,7 +25,7 @@ The installed agent runs on the endpoint you want to monitor and communicates wi
    
        # tar -xvf wazuh-agent-|WAZUH_CURRENT_HPUX|-|WAZUH_REVISION_HPUX|-hpux-11v3-ia64.tar
 
-#. Edit ``/var/ossec/etc/ossec.conf`` and add the Wazuh manager IP address. The agent registers automatically with the manager through enrollment, configuration details can be found on the :doc:`Enrollment section </user-manual/reference/ossec-conf/client>`.
+#. Edit ``/var/ossec/etc/ossec.conf`` and add the Wazuh manager IP address. The agent registers automatically with the manager through enrollment, configuration details can be found in the :doc:`Enrollment section </user-manual/reference/ossec-conf/client>`.
 
    .. code-block:: console
    
@@ -43,7 +43,7 @@ The installed agent runs on the endpoint you want to monitor and communicates wi
        # /sbin/init.d/wazuh-agent start
 
 
-The installation process is now complete and the Wazuh agent is successfully installed and registered.  
+The installation process is now complete, and the Wazuh agent is successfully installed and registered.  
 
 Uninstall a Wazuh agent
 -----------------------

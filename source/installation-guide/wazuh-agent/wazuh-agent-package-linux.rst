@@ -82,7 +82,7 @@ Deploy a Wazuh agent
 
    .. include:: ../../_templates/installations/wazuh/common/enable_wazuh_agent_service.rst
 
-The deployment process is now complete and the Wazuh agent is successfully running on your Linux system. 
+The deployment process is now complete, and the Wazuh agent is successfully running on your Linux system. 
 
 - **Recommended action** -  Disable Wazuh updates
 
