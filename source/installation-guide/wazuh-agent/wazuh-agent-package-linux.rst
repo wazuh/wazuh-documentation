@@ -8,7 +8,7 @@
 Deploying Wazuh agents on Linux systems
 =======================================
 
-The agent runs on the host you want to monitor and communicates with the Wazuh manager, sending data in near real time through an encrypted and authenticated channel. 
+The agent runs on the host you want to monitor and communicates with the Wazuh server, sending data in near real-time through an encrypted and authenticated channel. 
 
 The deployment of a Wazuh agent on a Linux system uses deployment variables that facilitate the task of installing, registering, and configuring the agent. Alternatively, if you want to download the Wazuh agent package directly, see the :doc:`packages list </installation-guide/packages-list>` section. 
 
@@ -46,7 +46,7 @@ Add the Wazuh repository to download the official packages.
 Deploy a Wazuh agent
 --------------------
 
-#. To deploy the Wazuh agent to your system, select your package manager and edit the ``WAZUH_MANAGER`` variable to contain your Wazuh manager IP address or hostname.   
+#. To deploy the Wazuh agent on your endpoint, select your package manager and edit the ``WAZUH_MANAGER`` variable to contain your Wazuh manager IP address or hostname.   
 
           
       .. tabs::
@@ -146,4 +146,4 @@ To uninstall the agent, run the following commands:
 
    .. include:: ../../_templates/installations/wazuh/common/disable_wazuh_agent_service.rst
 
-The Wazuh agent is now completely removed from your Linux system.
+The Wazuh agent is now completely removed from your Linux endpoint.
