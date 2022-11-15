@@ -17,6 +17,6 @@
      # chmod 400 /etc/wazuh-indexer/certs/*
      # chown -R wazuh-indexer:wazuh-indexer /etc/wazuh-indexer/certs
     
-#. **Recommended action** - If no other Wazuh components are going to be installed on this node, remove the ``wazuh-certificates.tar`` file by running ``rm -f ./wazuh-certificates.tar`` to increase security.
+#. **Recommended action**: If no other Wazuh components are going to be installed on this node, remove the ``wazuh-certificates.tar`` file by running ``rm -f ./wazuh-certificates.tar`` to increase security.
 
 .. End of include file
