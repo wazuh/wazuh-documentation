@@ -69,9 +69,9 @@ Configuring the Wazuh dashboard
 
   #. Edit the ``/etc/wazuh-dashboard/opensearch_dashboards.yml`` file and replace the following values:
 
-     #. ``server.host``: This setting specifies the host of the back end server. To allow remote users to connect, set the value to the IP address or DNS name of the Wazuh dashboard server.  The value ``0.0.0.0`` will accept all the available IP addresses of the host.
+     #. ``server.host``: This setting specifies the host of the Wazuh dashboard server. To allow remote users to connect, set the value to the IP address or DNS name of the Wazuh dashboard server. The value ``0.0.0.0`` will accept all the available IP addresses of the host.
 
-     #. ``opensearch.hosts``: The URLs of the Wazuh indexer instances to use for all your queries. Wazuh dashboard can be configured to connect to multiple Wazuh indexer nodes in the same cluster. The addresses of the nodes can be separated by commas. For example,  ``["https://10.0.0.2:9200", "https://10.0.0.3:9200","https://10.0.0.4:9200"]``
+     #. ``opensearch.hosts``: The URLs of the Wazuh indexer instances to use for all your queries. The Wazuh dashboard can be configured to connect to multiple Wazuh indexer nodes in the same cluster. The addresses of the nodes can be separated by commas. For example,  ``["https://10.0.0.2:9200", "https://10.0.0.3:9200","https://10.0.0.4:9200"]``
 
         .. code-block:: yaml
           :emphasize-lines: 1,3
@@ -88,7 +88,7 @@ Deploying certificates
 ^^^^^^^^^^^^^^^^^^^^^^
 
   .. note::
-    Make sure that a copy of ``wazuh-certificates.tar``, created in the previous stage of the installation process, is placed in your working directory.
+    Make sure that a copy of the ``wazuh-certificates.tar``file, created during the initial configuration step, is placed in your working directory.
 
   .. include:: /_templates/installations/dashboard/deploy_certificates.rst
 
@@ -103,7 +103,7 @@ Starting the Wazuh dashboard service
       
       **Only for distributed deployments**  
       
-          Edit the file ``/usr/share/wazuh-dashboard/data/wazuh/config/wazuh.yml`` and replace the ``url`` value with the IP address or hostname of the Wazuh server master node.
+          Edit the ``/usr/share/wazuh-dashboard/data/wazuh/config/wazuh.yml`` file and replace the ``url`` value with the IP address or hostname of the Wazuh server master node.
           
             .. code-block:: yaml
             
@@ -118,11 +118,11 @@ Starting the Wazuh dashboard service
 
   #. Access the Wazuh web interface with your credentials.
 
-      - URL: *https://<dashboard_ip>*
+      - URL: *https://<WAZUH_DASHBOARD_IP>*
       - **Username**: *admin*
       - **Password**: *admin*
 
-    When you access the Wazuh dashboard for the first time, the browser shows a warning message stating that the certificate was not issued by a trusted authority. An exception can be added in the advanced options of the web browser or, for increased security, the ``root-ca.pem`` file previously generated can be imported to the certificate manager of the browser. Alternatively, a certificate from a trusted authority can be configured. 
+    When you access the Wazuh dashboard for the first time, the browser shows a warning message stating that the certificate was not issued by a trusted authority. An exception can be added in the advanced options of the web browser. For increased security, the ``root-ca.pem``  file previously generated can be imported to the certificate manager of the browser. Alternatively, a certificate from a trusted authority can be configured. 
 
 
 Securing your Wazuh installation
@@ -138,7 +138,7 @@ Select your deployment type and follow the instructions to change the default pa
 
    .. group-tab:: All-in-one deployment
 
-      #. Use the Wazuh passwords tool to change all the internal users passwords.
+      #. Use the Wazuh passwords tool to change all the internal users' passwords.
       
          .. code-block:: console
          
