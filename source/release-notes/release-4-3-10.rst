@@ -61,6 +61,17 @@ Reference                                                         Description
 `#4815 <https://github.com/wazuh/wazuh-kibana-app/pull/4815>`_    An issue when logging out from Wazuh when SAML is enabled is fixed.
 ==============================================================    =============
 
+Packages
+^^^^^^^^
+
+==============================================================    =============
+Reference                                                         Description
+==============================================================    =============
+`#1901 <https://github.com/wazuh/wazuh-packages/pull/1901>`__     Improved the `config.yml` template to prevent indentation issues.
+`#1910 <https://github.com/wazuh/wazuh-packages/pull/1910>`__     Fixed the *clean* function in the WPK generation.
+==============================================================    =============
+
+
 Changelogs
 ----------
 
