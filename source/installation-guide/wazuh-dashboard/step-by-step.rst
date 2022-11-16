@@ -118,7 +118,7 @@ Starting the Wazuh dashboard service
 
   #. Access the Wazuh web interface with your credentials.
 
-      - URL: *https://<WAZUH_DASHBOARD_IP>*
+      - URL: *https://<wazuh-dashboard-ip>*
       - **Username**: *admin*
       - **Password**: *admin*
 

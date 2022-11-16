@@ -6,7 +6,7 @@
 Wazuh server
 ============
 
-The Wazuh server analyzes the data received from the Wazuh agents, triggering alerts when threats or anomalies are detected. It is also used to remotely manage the agents' configuration and monitor their status. If you want to learn more about Wazuh components, check the :doc:`Getting started <../../getting-started/components/index>` section.
+The Wazuh server analyzes the data received from the Wazuh agents, triggering alerts when threats or anomalies are detected. It is also used to remotely manage the agents' configuration and monitor their status. If you want to learn more about the Wazuh components, check the :doc:`Getting started <../../getting-started/components/index>` section.
 
 You can install the Wazuh server on a single host. Alternatively, you can install it distributed in multiple nodes in a cluster configuration. Multi-node configurations provide high availability and improved performance. And if combined with a network load balancer an efficient use of its capacity can be achieved. 
 

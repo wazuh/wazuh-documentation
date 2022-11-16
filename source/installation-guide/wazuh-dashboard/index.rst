@@ -8,7 +8,7 @@ Wazuh dashboard
 
 This central component is a flexible and intuitive web interface for mining, analyzing, and visualizing security data. It provides out-of-the-box dashboards, allowing you to seamlessly navigate through the user interface. 
 
-With the Wazuh dashboard, users can visualize security events, detected vulnerabilities, file integrity monitoring data, configuration assessment results, cloud infrastructure monitoring events, and regulatory compliance standards. If you want to learn more about Wazuh components, see the :doc:`Getting started <../../getting-started/components/index>` section.
+With the Wazuh dashboard, users can visualize security events, detected vulnerabilities, file integrity monitoring data, configuration assessment results, cloud infrastructure monitoring events, and regulatory compliance standards. If you want to learn more about the Wazuh components, see the :doc:`Getting started <../../getting-started/components/index>` section.
 
 Check the requirements below and choose an installation method to start installing the Wazuh dashboard.
 

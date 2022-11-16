@@ -30,7 +30,7 @@ Wazuh dashboard installation
    Once the assistant finishes the installation, the output shows the access credentials and a message that confirms that the installation was successful.
 
    .. code-block:: none
-      :emphasize-lines: 3          
+      :emphasize-lines: 3,4          
     
       INFO: --- Summary ---
       INFO: You can access the web interface https://<wazuh-dashboard-ip>
@@ -47,7 +47,7 @@ Wazuh dashboard installation
 
 #. Access the Wazuh web interface with your credentials. 
 
-   -  URL: *https://<WAZUH_DASHBOARD_IP>*
+   -  URL: *https://<wazuh-dashboard-ip>*
    -  **Username**: *admin*
    -  **Password**: *<ADMIN_PASSWORD>*
 
