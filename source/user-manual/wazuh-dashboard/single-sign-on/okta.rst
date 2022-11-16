@@ -278,64 +278,33 @@ Wazuh dashboard configuration
 
 #. Edit the Wazuh dashboard configuration file.
 
-   Add these configurations to the ``/etc/wazuh-dashboard/opensearch_dashboards.yml`` file. It is recommended to back up this file before the configuration is changed.
+   Add these configurations to ``/etc/wazuh-dashboard/opensearch_dashboards.yml``. It is recommended to back up this file before the configuration is changed.
 
-   .. code-block:: console
+   .. code-block:: console  
 
       opensearch_security.auth.type: "saml"
       server.xsrf.whitelist: ["/_plugins/_security/saml/acs", "/_plugins/_security/saml/logout", "/_opendistro/_security/saml/acs", "/_opendistro/_security/saml/logout", "/_opendistro/_security/saml/acs/idpinitiated"]
 
-#. Change the logout configuration in the Wazuh dashboard. 
-   
-   To change the logout configuration, replace the ``this.router.get({path: `auth/logout``` section of the ``/usr/share/wazuh-dashboard/plugins/securityDashboards/server/auth/types/saml/routes.js`` file with the following setting. It is recommended to back up this file before the configuration is changed.
+   .. note::
+      :class: not-long
 
-   .. code-block:: console
+      *For versions 4.3.9 and earlier*, also replace ``path: `/auth/logout``` with ``path: `/logout``` in ``/usr/share/wazuh-dashboard/plugins/securityDashboards/server/auth/types/saml/routes.js``.
 
-          this.router.get({
-            path: `/logout`,
-            validate: false
-          }, async (context, request, response) => {
-            try {
-              const authInfo = await this.securityClient.authinfo(request);
-              this.sessionStorageFactory.asScoped(request).clear(); // TODO: need a default logout page
-              const redirectUrl = `${this.coreSetup.http.basePath.serverBasePath}/app/wazuh`
-              return response.redirected({
-                headers: {
-                  location: redirectUrl
-                }
-              });
-            } catch (error) {
-              context.security_plugin.logger.error(`SAML logout failed: ${error}`);
-              return response.badRequest();
-            }
-          });
-          this.router.get({
-            path: `/auth/logout`,
-            validate: false
-          }, async (context, request, response) => {
-            try {
-              const authInfo = await this.securityClient.authinfo(request);
-              this.sessionStorageFactory.asScoped(request).clear(); // TODO: need a default logout page
-              const redirectUrl = `${this.coreSetup.http.basePath.serverBasePath}/app/wazuh`
-              return response.redirected({
-                headers: {
-                  location: redirectUrl
-                }
-              });
-            } catch (error) {
-              context.security_plugin.logger.error(`SAML logout failed: ${error}`);
-              return response.badRequest();
-            }
-          });
-        }
-      }
+      .. code-block:: console
+         :emphasize-lines: 3
+
+         ...
+            this.router.get({
+               path: `/logout`,
+               validate: false
+         ...
 
 #. Restart the Wazuh dashboard service.
 
-       .. include:: /_templates/common/restart_dashboard.rst
+   .. include:: /_templates/common/restart_dashboard.rst
 
 #. Test the configuration.
-
-   To test the Okta SSO configuration, go to your Wazuh dashboard URL and log in with your Okta account.
+   
+   To test the configuration, go to your Wazuh dashboard URL and log in with your Okta account. 
 
 
