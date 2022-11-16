@@ -81,14 +81,12 @@ Okta Configuration
          :title: Assign a name to the application
          :align: center
          :width: 80%   
-
-   #. In the **SAML settings** section, modify the following parameters:
-
-      - **Single sign-on URL**: input ``https://<WAZUH_DASHBOARD_URL>/_opendistro/_security/saml/acs/idpinitiated`` and replace the ``<WAZUH_DASHBOARD_URL>`` field with the corresponding URL. 
-      - Select the **"Allow this app to request other SSO URLs"** option.
-      - **Requestable SSO URLs**: input ``https://<WAZUH_DASHBOARD_URL>/_opendistro/_security/saml/acs`` and replace the ``<WAZUH_DASHBOARD_URL>`` field with the corresponding URL.
-      - **Audience URI (SP Entity ID)** is the ``SP Entity ID`` (wazuh-saml) which will be used later in the ``config.yml`` on the Wazuh indexer instance.
+     
+   #. In the **Configure SAML menu**, you’ll find the **SAML Settings** section, modify the following parameters:
    
+      - **Single sign on URL**: input ``https://<WAZUH_DASHBOARD_URL>/_opendistro/_security/saml/acs`` and replace the ``<WAZUH_DASHBOARD_URL>`` field with the corresponding URL.
+      - **Audience URI (SP Entity ID)**: input ``wazuh-saml``. This is the ``SP Entity ID`` value which will be used later in the ``config.yml`` on the Wazuh indexer instance.
+
       The rest of the values can be left as default.
 
       .. thumbnail:: /images/single-sign-on/okta/09-saml-settings-section.png
@@ -285,11 +283,10 @@ Wazuh dashboard configuration
       opensearch_security.auth.type: "saml"
       server.xsrf.whitelist: ["/_plugins/_security/saml/acs", "/_plugins/_security/saml/logout", "/_opendistro/_security/saml/acs", "/_opendistro/_security/saml/logout", "/_opendistro/_security/saml/acs/idpinitiated"]
 
-   .. note::
-      :class: not-long
-
-      *For versions 4.3.9 and earlier*, also replace ``path: `/auth/logout``` with ``path: `/logout``` in ``/usr/share/wazuh-dashboard/plugins/securityDashboards/server/auth/types/saml/routes.js``.
-
+#. Change the logout configuration in the Wazuh dashboard.
+ 
+   To change the logout configuration, edit the ``path: /auth/logout`` section of the ``route.js`` file. The file path is ``/usr/share/wazuh-dashboard/plugins/securityDashboards/server/auth/types/saml/routes.js``. It is recommended to back up this file before the configuration is made. The configuration must be similar to this:
+   
       .. code-block:: console
          :emphasize-lines: 3
 
