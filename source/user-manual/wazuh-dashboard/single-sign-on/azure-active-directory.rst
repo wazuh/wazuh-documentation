@@ -137,7 +137,7 @@ Azure Active Directory Configuration
 
    In the **Enterprise applications** menu, select your application and then click on **Single sign-on**. Note some parameters that will be used in the Wazuh indexer configuration.
 
-   - In option **3 SAML Signing Certificate**, the **App Federation Metadata Url** will be the ``idp.metadata_url`` in the Wazuh indexer configuration file.
+   - In option 3 **SAML Certificate**, the **App Federation Metadata Url** will be the ``idp.metadata_url`` in the Wazuh indexer configuration file.
 
    - Go to the metadata URL using your web browser and note the **X509Certificate**. It will be our ``exchange_key``:
 

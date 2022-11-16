@@ -82,7 +82,7 @@ Okta Configuration
          :align: center
          :width: 80%   
      
-   #. In the **Configure SAML menu**, you’ll find the **SAML Settings** section, modify the following parameters:
+   #. In the **Configure SAML** menu, you’ll find the **SAML Settings** section, modify the following parameters:
    
       - **Single sign on URL**: input ``https://<WAZUH_DASHBOARD_URL>/_opendistro/_security/saml/acs`` and replace the ``<WAZUH_DASHBOARD_URL>`` field with the corresponding URL.
       - **Audience URI (SP Entity ID)**: input ``wazuh-saml``. This is the ``SP Entity ID`` value which will be used later in the ``config.yml`` on the Wazuh indexer instance.
