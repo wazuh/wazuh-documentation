@@ -195,6 +195,7 @@ newUrls['4.3'] = [
   '/deployment-options/docker/wazuh-container.html',
   '/deployment-options/docker/docker-installation.html',
   '/deployment-options/docker/data-migration.html',
+  '/deployment-options/docker/upgrading-wazuh-docker.html',
   '/deployment-options/elastic-stack/index.html',
   '/deployment-options/elastic-stack/distributed-deployment/index.html',
   '/deployment-options/elastic-stack/distributed-deployment/index.html',

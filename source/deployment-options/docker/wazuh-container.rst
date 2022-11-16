@@ -25,7 +25,7 @@ Single-node Deployment
 
    .. code-block:: console
 
-      # git clone https://github.com/wazuh/wazuh-docker.git -b |WAZUH_CURRENT_MINOR|
+      # git clone https://github.com/wazuh/wazuh-docker.git -b |WAZUH_CURRENT_DOCKER|
 
    Then enter into the ``single-node`` directory to execute all the commands described below within this directory.
 
@@ -125,7 +125,7 @@ Multi-node deployment
 
    .. code-block:: console
 
-      $ git clone https://github.com/wazuh/wazuh-docker.git -b |WAZUH_CURRENT_MINOR|
+      $ git clone https://github.com/wazuh/wazuh-docker.git -b |WAZUH_CURRENT_DOCKER|
    
    Then enter into the ``multi-node`` directory to execute all the commands described below within this directory.
 
@@ -233,7 +233,7 @@ You can modify and build the Wazuh manager, indexer, and dashboard images locall
 
    .. code-block:: console
   
-      # git clone https://github.com/wazuh/wazuh-docker.git -b |WAZUH_CURRENT_MINOR|
+      # git clone https://github.com/wazuh/wazuh-docker.git -b |WAZUH_CURRENT_DOCKER|
 
 #. For versions up to 4.3.4, enter into the ``build-docker-images`` directory and build the Wazuh manager, indexer, and dashboard images:
   

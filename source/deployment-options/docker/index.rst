@@ -22,5 +22,6 @@ In the :doc:`/deployment-options/docker/docker-installation` section, you can se
    docker-installation
    wazuh-container
    container-usage
-   Data migration to Wazuh indexer <data-migration>
+   upgrading-wazuh-docker
+   data-migration
    faq-wazuh-container
