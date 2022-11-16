@@ -115,7 +115,7 @@ The final stage of installing the Wazuh indexer single-node or multi-node cluste
 Testing the cluster installation
 --------------------------------
 
-#. Run the following command to get the Wazuh indexer username and password used for the deployment:
+#. Run the following command to get the *admin* password:
 
    .. code-block:: console
 
