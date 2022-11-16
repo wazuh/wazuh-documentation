@@ -2,7 +2,7 @@
 
 #. Download the `Wazuh agent for Solaris 11 i386 <https://packages.wazuh.com/4.x/solaris/i386/11/wazuh-agent_v4.3.10-sol11-i386.p5p>`_. 
 
-#. Install the agent:
+#. Install the Wazuh agent.
 
    .. code-block:: console
    

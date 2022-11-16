@@ -2,7 +2,7 @@
 
 #. Download the `Wazuh agent for Solaris 11 Sparc <https://packages.wazuh.com/4.x/solaris/sparc/11/wazuh-agent_v4.3.10-sol11-sparc.p5p>`_. 
 
-#. Install the agent:
+#. Install the Wazuh agent.
    
    .. code-block:: console
    
