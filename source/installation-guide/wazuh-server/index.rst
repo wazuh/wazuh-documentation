@@ -6,7 +6,7 @@
 Wazuh server
 ============
 
-The Wazuh server is in charge of analyzing the data received from the Wazuh agents, triggering alerts when threats or anomalies are detected. It is also used to manage the agents' configuration remotely and to monitor their status. If you want to learn more about Wazuh components, check the :doc:`Getting started <../../getting-started/components/index>` section.
+The Wazuh server analyzes the data received from the Wazuh agents, triggering alerts when threats or anomalies are detected. It is also used to remotely manage the agents' configuration and monitor their status. If you want to learn more about the Wazuh components, check the :doc:`Getting started <../../getting-started/components/index>` section.
 
 You can install the Wazuh server on a single host. Alternatively, you can install it distributed in multiple nodes in a cluster configuration. Multi-node configurations provide high availability and improved performance. And if combined with a network load balancer an efficient use of its capacity can be achieved. 
 
@@ -74,7 +74,7 @@ Check the supported operating systems and the recommended hardware requirements 
 Recommended operating systems
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-Wazuh can be installed on a 64-bit Linux operating system. Wazuh supports the following operating system versions:
+Wazuh server can be installed on a 64-bit Linux operating system. Wazuh supports the following operating system versions:
 
 .. list-table::
     :width: 100%
@@ -105,7 +105,7 @@ The Wazuh server can be installed as a single-node or as a multi-node cluster.
   The amount of data depends on the generated alerts per second (APS). This table details the estimated disk space needed per agent to store 90 days of alerts on a Wazuh server, depending on the type of monitored endpoints.
 
   +-------------------------------------------------+-----+-----------------------------+
-  | Monitored endpoints                             | APS || Storage in Wazuh Manager   | 
+  | Monitored endpoints                             | APS || Storage in Wazuh Server    | 
   |                                                 |     || (GB/90 days)               |  
   +=================================================+=====+=============================+
   | Servers                                         | 0.25|    0.1                      |
