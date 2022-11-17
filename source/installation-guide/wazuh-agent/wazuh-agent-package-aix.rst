@@ -5,16 +5,16 @@
 
 .. _wazuh_agent_package_aix:
 
-Deploying Wazuh agents on AIX systems
-=====================================
+Deploying Wazuh agents on AIX endpoints
+=======================================
 
-The agent runs on the host you want to monitor and communicates with the Wazuh manager, sending data in near real time through an encrypted and authenticated channel. 
+The agent runs on the endpoint you want to monitor and communicates with the Wazuh server, sending data in near real-time through an encrypted and authenticated channel. 
 
 The deployment of a Wazuh agent on an AIX system uses deployment variables that facilitate the task of installing, registering, and configuring the agent. 
 
 #. To start the deployment process, download the `AIX installer <https://packages.wazuh.com/|WAZUH_CURRENT_MAJOR_AIX|/aix/wazuh-agent-|WAZUH_CURRENT_AIX|-|WAZUH_REVISION_AIX|.aix.ppc.rpm>`_. 
 
-#. To deploy the Wazuh agent to your system, edit the ``WAZUH_MANAGER`` variable so that it contains the Wazuh manager IP address or hostname.
+#. To deploy the Wazuh agent to your endpoint, edit the ``WAZUH_MANAGER`` variable so that it contains the Wazuh manager IP address or hostname.
 
    .. code-block:: console
    
@@ -31,7 +31,7 @@ The deployment of a Wazuh agent on an AIX system uses deployment variables that 
       # /var/ossec/bin/wazuh-control start
 
       
-The deployment process is now complete and the Wazuh agent is successfully running on your AIX system.
+The deployment process is now complete, and the Wazuh agent is successfully running on your AIX endpoint.
       
 
 Uninstall a Wazuh agent
