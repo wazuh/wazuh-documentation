@@ -80,15 +80,15 @@ Attaching a volume for the storage of Wazuh indexer data is also possible. By de
 
 .. code-block:: yaml
 
-    wazuh.indexer:
-      . . .
-      volumes:
-        - wazuh-indexer-data:/var/lib/wazuh-indexer
+   wazuh.indexer:
+       . . .
+        volumes:
+          - wazuh-indexer-data:/var/lib/wazuh-indexer
 
-      . . .
+       . . .
 
-  volumes:
-    wazuh-indexer-data
+   volumes:
+     wazuh-indexer-data
 
 
 Custom commands and scripts

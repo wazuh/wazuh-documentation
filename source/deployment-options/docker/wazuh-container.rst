@@ -31,7 +31,7 @@ Single-node Deployment
 
 #. Provide a group of certificates for each node in the stack to secure communication between the nodes. You have two alternatives to provide these certificates:
 
-   #. Generate self-signed certificates for each node of the cluster. 
+   -  Generate self-signed certificates for each node of the cluster. 
     
       We have created a Docker image to automate certificate generation using the Wazuh certs gen tool.
 
@@ -67,9 +67,9 @@ Single-node Deployment
 
       This saves the certificates into the ``config/wazuh_indexer_ssl_certs`` directory.
 
-   #. Provide your own certificates for each node.
+   -  Provide your own certificates for each node.
 
-      In case you have your own certificates, provision them as follows:
+      In case you have your own certificates, provision them as follows in the ``config/wazuh_indexer_ssl_certs`` directory:
 
       Wazuh indexer: 
       
@@ -252,7 +252,7 @@ You can modify and build the Wazuh manager, indexer, and dashboard images locall
 Change the password of an existing user
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-.. note::
+.. warning::
 
    You must add all users created on the Wazuh dashboard to the ``internal_users.yml`` file. If not, executing this procedure deletes them.
 
@@ -268,7 +268,7 @@ You can change the default password of an existing user to improve security. For
 
    .. code-block:: console
   
-      # docker run --rm -ti wazuh/wazuh-indexer:4.3.6 bash /usr/share/wazuh-indexer/plugins/opensearch-security/tools/hash.sh
+      # docker run --rm -ti wazuh/wazuh-indexer:|WAZUH_CURRENT_DOCKER| bash /usr/share/wazuh-indexer/plugins/opensearch-security/tools/hash.sh
 
 #. Copy the generated hash. Replace the current ``admin`` user hash in the ``/single-node/config/wazuh_indexer/internal_users.yml`` file if using *single-node* deployment.
 

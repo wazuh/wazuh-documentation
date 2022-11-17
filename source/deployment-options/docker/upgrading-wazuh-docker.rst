@@ -6,7 +6,7 @@
 Upgrading Wazuh Docker
 ======================
 
-This section describes how to upgrade Wazuh Docker deployments starting from version 4.3. To upgrade Wazuh deployments below version 4.3 (production deployment), refer to :doc:`/deployment-options/docker/data-migration`.
+This section describes how to upgrade Wazuh Docker deployments starting from version 4.3. To upgrade Wazuh deployments below version 4.3 (production deployment), refer to the :doc:`/deployment-options/docker/data-migration` documentation.
 
 #. Run the following command from the ``wazuh-docker`` directory to stop the current v4.3.x environment:
 
