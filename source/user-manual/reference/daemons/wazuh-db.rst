@@ -155,7 +155,7 @@ Data needed to upgrade the agent's database
 
 The ``key`` field can also store the following values:
 
-  - **last_vacuum_time**: its ``value`` field stores the time of the last time the vacuum was performed.
+  - **last_vacuum_time**: its ``value`` field stores the last time the vacuum was performed.
 
   - **last_vacuum_value**: its ``value`` field stores the fragmentation value that the database was left with after the last vacuum was performed.
 
