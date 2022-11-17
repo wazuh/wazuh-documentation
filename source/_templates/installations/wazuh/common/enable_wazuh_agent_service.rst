@@ -17,14 +17,14 @@
 
     Choose one option according to your operating system.
 
-    a) RPM based operating systems:
+    a) RPM-based operating systems:
 
       .. code-block:: console
 
         # chkconfig --add wazuh-agent
         # service wazuh-agent start
 
-    b) Debian based operating systems:
+    b) Debian-based operating systems:
 
       .. code-block:: console
 
