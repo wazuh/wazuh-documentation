@@ -1,7 +1,7 @@
 .. Copyright (C) 2015, Wazuh, Inc.
 
 .. meta::
-  :description: The Security configuration assessment module is used to create configuration policies on agents. Learn more about it in this section.
+  :description: You can use the Security configuration assessment module to create configuration policies on agents. Learn more about it in this section.
   
 .. _configuration_assessment:
 
@@ -27,7 +27,7 @@ Below are some PCI DSS requirement use cases that can be met with the SCA module
 
 - PCI DSS 2.2.4 requires that only necessary services, protocols, daemons, and functions are enabled, and all unnecessary functionality is removed or disabled. An example of a system service that may be abused if it is misconfigured is IP forwarding. When IP forwarding is configured on a device, it may serve as a router to be abused.
 
-   In order to perform checks for this specific use case, the SCA module has check 18081 **Ensure IP forwarding is disabled** for Ubuntu 14.04 endpoints. When an SCA scan is run, you are able to detect if this use case is satisfied.
+   In order to perform checks for this specific use case, the SCA module has check 18081 **Ensure IP forwarding is disabled** for Ubuntu 14.04 endpoints. When an SCA scan runs, you can detect if this use case is satisfied.
 
    .. thumbnail:: ../images/pci/ensure-ip-forwarding-is-disabled.png
          :title: Ensure IP forwarding is disabled
