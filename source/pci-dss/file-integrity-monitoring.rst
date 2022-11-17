@@ -93,7 +93,7 @@ For this use case, we configure Wazuh to detect when changes are made to a file 
 
       auditctl -w /root/credit_cards -p wa -k wazuh_fim
 
-#. Proceed to modify the file. In this case, we added new content:
+#. Edit the file and add new content:
 
       .. code-block:: console 
 
@@ -132,13 +132,13 @@ In this use case, we configure Syscheck to detect when changes have been made to
 	    Showing the changes made in a file is limited to only text files at this time.
 
 
-#. In the agent configuration file (``/var/ossec/etc/ossec.conf``), update the frequency option of the ``syscheck`` block to your desired scan interval in seconds. In this case, our desired scan interval is every 1 hour (3600 seconds):
+#. Update the frequency option of the ``syscheck`` block in the ``/var/ossec/etc/ossec.conf`` agent configuration file. Set a scan interval in seconds. For example, every 3600 seconds:
 
    .. code-block:: console 
 
        <frequency>3600</frequency>
 
-#. Add the following configuration to the ``syscheck`` block of the agent configuration file (``/var/ossec/etc/ossec.conf``). This will enable monitoring of the file and ensure that when the file is modified, Wazuh generates an alert with the differences.
+#. Add the following configuration to the ``syscheck`` block of the ``/var/ossec/etc/ossec.conf`` agent configuration file. This enables monitoring of the file. It also ensures that Wazuh generates an alert with the differences when the file is modified.
 
    .. code-block:: xml
 
@@ -185,7 +185,7 @@ In this scenario, Syscheck detects when a file in a monitored directory is delet
 **On the agent**
 
 #. Determine the full file path for the file or directory to be monitored. In this case, we are monitoring the directory ``/root/credit_cards``.
-#. Add the following configuration to the syscheck block of the agent configuration file (``/var/ossec/etc/ossec.conf``). This will enable monitoring of the file and ensure that Wazuh generates an alert if the file is deleted.
+#. Add the following configuration to the syscheck block of the ``/var/ossec/etc/ossec.conf`` agent configuration file. This enables monitoring of the file. It also ensures that Wazuh generates an alert if the file is deleted.
 
    .. code-block:: xml
 
@@ -197,7 +197,7 @@ In this scenario, Syscheck detects when a file in a monitored directory is delet
 
    .. include:: /_templates/common/restart_agent.rst
 
-#. Proceed to delete a file from the directory. In this case, we deleted the file ``cardholder_data.txt``. You can see an alert generated for the file deleted.
+#. Delete a file from the directory. For example, ``cardholder_data.txt``. You can see an alert generated for the file deleted.
 
 	.. thumbnail:: ../images/pci/alert-generated-for-the-file-deleted.png
 		:title: Alert generated for the file deleted
@@ -206,4 +206,4 @@ In this scenario, Syscheck detects when a file in a monitored directory is delet
 
    In the alert details, you can see the file deleted, the PCI DSS requirement met, the deletion time, and other details.
 
-   You can track these activities from the PCI DSS module dashboard. The dashboard will show all activities that trigger a PCI DSS requirement including FIM changes.
+   You can track these activities from the PCI DSS module dashboard. The dashboard shows all activities that trigger a PCI DSS requirement including FIM changes.

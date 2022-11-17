@@ -16,7 +16,7 @@ This guide explains how Wazuh capabilities and modules assist with meeting **PCI
 
 - `Wazuh for PCI DSS V4.0 Guide (PDF) <https://wazuh.com/resources/WAZUH-PCI-DSS-V4.0-guide.pdf>`_
 
-In the following sections, there are some use cases that show how to use the Wazuh capabilities and modules to meet **PCI DSS version 4.0** requirements.
+In the following sections, you can find some use cases that show how to use the Wazuh capabilities and modules to meet **PCI DSS version 4.0** requirements.
 
 
 .. toctree::
