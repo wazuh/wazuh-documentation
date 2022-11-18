@@ -16,9 +16,9 @@ The log collector module helps to meet the following PCI DSS requirement:
 
 - **Requirement 10 - Log and Monitor All Access to System Components and Cardholder Data**: This control requires that user activities, including those by employees, contractors, consultants, internal and external vendors, and other third parties are logged and monitored, and the log data stored for a specified period of time.
 
-To help meet this requirement, the Wazuh agent collects logs from the endpoints it is deployed on. The log analysis module also receives logs via syslog for network and other syslog-enabled devices. It decodes the logs received to extract relevant information from its fields. After that, it compares the extracted information to the ruleset to look for matches. When the extracted information matches a rule, Wazuh generates an alert. Refer to the :doc:`ruleset section  </user-manual/ruleset/index>` for more information.
+	To help meet this requirement, the Wazuh agent collects logs from the endpoints it is deployed on. The log analysis module also receives logs via syslog for network and other syslog-enabled devices. It decodes the logs received to extract relevant information from its fields. After that, it compares the extracted information to the ruleset to look for matches. When the extracted information matches a rule, Wazuh generates an alert. Refer to the :doc:`ruleset section  </user-manual/ruleset/index>` for more information.
 
-Wazuh also holds logs of events that don't generate an alert. For this it uses its archive feature and the indexer long term storage. For more information on configuring log collection, see the :doc:`Log data collection section </user-manual/capabilities/log-data-collection/index>`.
+	Wazuh also holds logs of events that don't generate an alert. For this it uses its archive feature and the indexer long term storage. For more information on configuring log collection, see the :doc:`Log data collection section </user-manual/capabilities/log-data-collection/index>`.
 
 Use cases
 ---------
@@ -32,25 +32,25 @@ Use cases
   - Origination of event.
   - Identity or name of affected data, system component, resource, or service (for example, name and protocol).
 
-The following are some Wazuh rules that help achieve this requirement:
+	The following are some Wazuh rules that help achieve this requirement:
 
-- **Rule 5710 - sshd: attempt to login using a non-existent user**: This rule generates an alert when a non-existent user tries to log in to a system via SSH. The generated alert contains the information required by requirement 10.2.2 (user identification, type of event, date and time, success and failure indication, origination of event, and identity or name of affected data, system component, resource, or service). The screenshot below shows the alert generated on the dashboard:
+  - **Rule 5710 - sshd: attempt to login using a non-existent user**: This rule generates an alert when a non-existent user tries to log in to a system via SSH. The generated alert contains the information required by requirement 10.2.2 (user identification, type of event, date and time, success and failure indication, origination of event, and identity or name of affected data, system component, resource, or service). The screenshot below shows the alert generated on the dashboard:
 
-	.. thumbnail:: ../images/pci/attempt-to-login-using-non-existent-user.png
-		:title: Attempt to login using a non-existent user
-		:align: center
-		:width: 80%
+  	.. thumbnail:: ../images/pci/attempt-to-login-using-non-existent-user.png
+  		:title: Attempt to login using a non-existent user
+  		:align: center
+  		:width: 80%
 
- 
-- **Rule 5715 - sshd: authentication success**: This rule generates an alert when a user successfully logs into a system via SSH. The generated alert contains the information required by requirement 10.2.2 (user identification, type of event, date and time, success and failure indication, origination of event, and identity or name of affected data, system component, resource, or service). The screenshot below shows the alert generated on the dashboard:
+   
+  - **Rule 5715 - sshd: authentication success**: This rule generates an alert when a user successfully logs into a system via SSH. The generated alert contains the information required by requirement 10.2.2 (user identification, type of event, date and time, success and failure indication, origination of event, and identity or name of affected data, system component, resource, or service). The screenshot below shows the alert generated on the dashboard:
 
-	.. thumbnail:: ../images/pci/user-successfully-logs-into-a-system-via-SSH.png
-		:title: User successfully logs into a system via SSH
-		:align: center
-		:width: 80%
+  	.. thumbnail:: ../images/pci/user-successfully-logs-into-a-system-via-SSH.png
+  		:title: User successfully logs into a system via SSH
+  		:align: center
+  		:width: 80%
 
 
-- PCI DSS 10.5.1 requires that you retain audit log history for at least 12 months, with at least the most recent three months immediately available for analysis. You can achieve this by enabling Wazuh log archives and configuring `index management policies <https://wazuh.com/blog/wazuh-index-management/>`_. To enable Wazuh log archives, take the following steps: 
+  - PCI DSS 10.5.1 requires that you retain audit log history for at least 12 months, with at least the most recent three months immediately available for analysis. You can achieve this by enabling Wazuh log archives and configuring `index management policies <https://wazuh.com/blog/wazuh-index-management/>`_. To enable Wazuh log archives, take the following steps: 
 
 
 **Enable archives monitoring in the Wazuh indexer**:
