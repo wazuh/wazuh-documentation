@@ -25,7 +25,7 @@ Use cases
 
 Below are some PCI DSS requirement use cases that can be met with the SCA module.
 
-- PCI DSS 2.2.4 requires that only necessary services, protocols, daemons, and functions are enabled, and all unnecessary functionality is removed or disabled. An example of a system service that may be abused if it is misconfigured is IP forwarding. When IP forwarding is configured on a device, it may serve as a router to be abused.
+- PCI DSS 2.2.4 requires enabling only necessary services, protocols, daemons, and functions to remove or disable all unnecessary functionality. IP forwarding is an example of a system service that may be abused if misconfigured. When IP forwarding is configured on a device, it may serve as a router to be abused.
 
    In order to perform checks for this specific use case, the SCA module has check 18081 **Ensure IP forwarding is disabled** for Ubuntu 14.04 endpoints. When an SCA scan runs, you can detect if this use case is satisfied.
 

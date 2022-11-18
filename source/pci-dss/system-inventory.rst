@@ -17,7 +17,7 @@ The system inventory module helps to achieve some of the objectives of this requ
 Use cases
 ---------
 
-PCI DSS 2.2.4 requires that only necessary services, protocols, daemons, and functions are enabled, and all unnecessary functionality is removed or disabled. Using the system inventory module, you can see what processes are running on a specific endpoint and determine if the running process or protocol is necessary for the operation of the asset. You can find this information on the Wazuh dashboard for a specific agent:
+PCI DSS 2.2.4 requires keeping only necessary services, protocols, daemons, and functions enabled and removing or disabling all unnecessary functionality. Using the system inventory module, you can see what processes are running on a specific endpoint and determine if the running process or protocol is necessary for the operation of the asset. You can find this information on the Wazuh dashboard for a specific agent:
 
 .. thumbnail:: ../images/pci/processes-are-running-on-a-specific-endpoint-01.png
    :title: Processes running on a specific endpoint 
