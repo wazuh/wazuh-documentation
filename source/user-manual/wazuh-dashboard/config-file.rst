@@ -64,7 +64,7 @@ This is an example of a multi-host configuration:
 pattern
 ^^^^^^^
 
-Default index pattern to use on the app. If there's no valid index patterns on Elasticsearch, the app will automatically create one with the name indicated in this option.
+Default index pattern to use on the app. If there are no valid index patterns on Elasticsearch, the app will automatically create one with the name indicated in this option.
 
 +--------------------+-------------------------+
 | **Default value**  | wazuh-alerts-*          |
@@ -97,7 +97,7 @@ Defines if the user is allowed to change the selected index pattern directly fro
 ip.ignore
 ^^^^^^^^^
 
-Disable certain index pattern names from being available in index pattern selector from the Wazuh dashboard. An empty list (the default value) won't ignore any valid index pattern.
+Disable certain index pattern names from being available in the index pattern selector from the Wazuh dashboard. An empty list (the default value) won't ignore any valid index pattern.
 
 +--------------------+---------------------------------------------+
 | **Default value**  | []                                          |
@@ -163,7 +163,7 @@ Define in seconds the frequency of API requests to get the state of the agents t
 wazuh.monitoring.pattern
 ^^^^^^^^^^^^^^^^^^^^^^^^
 
-Default Wazuh monitoring index pattern to use for the app. This setting does not remove any existing patterns or templates, it just updates the app to add the new ones.
+Default Wazuh monitoring index pattern to use for the app. This setting does not remove any existing patterns or templates, it just updates the app to add new ones.
 
 +--------------------+-------------------------+
 | **Default value**  | wazuh-monitoring-*      |
@@ -428,7 +428,7 @@ Advanced index options
 
 .. warning::
 
-    These options are only valid if they're modified before starting Wazuh dashboard for the very first time.
+    These options are only valid if they're modified before starting the Wazuh dashboard for the very first time.
 
     You can read more about configuring the shards and replicas in :ref:`elastic_tuning`.
 
@@ -535,7 +535,7 @@ Enable or disable the statistics tasks.
 cron.statistics.apis
 ^^^^^^^^^^^^^^^^^^^^
 
-Enter the ID of the hosts you want to save data from, leave this empty to run the task on every host.
+Enter the ID of the hosts you want to save data from, and leave this empty to run the task on every host.
 
 +--------------------+----------------------------+
 | **Default value**  | []                         |

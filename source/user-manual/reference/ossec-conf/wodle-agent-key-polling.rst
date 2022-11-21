@@ -37,7 +37,7 @@ Options
 +----------------------+-----------------------------+
 | `exec_path`_         | Full path to executable     |
 +----------------------+-----------------------------+
-| `socket`_            | Full path to unix socket    |
+| `socket`_            | Full path to Unix socket    |
 +----------------------+-----------------------------+
 | `threads`_           | A positive number           |
 +----------------------+-----------------------------+
@@ -82,12 +82,12 @@ Full path to the executable.
 socket
 ^^^^^^
 
-Full path to the unix domain socket.
+Full path to the Unix domain socket.
 
 +--------------------+-----------------------------------------------------------+
 | **Default value**  | none                                                      |
 +--------------------+-----------------------------------------------------------+
-| **Allowed values** | A string indicating the full path to a unix domain socket |
+| **Allowed values** | A string indicating the full path to a Unix domain socket |
 +--------------------+-----------------------------------------------------------+
 
 threads

@@ -23,17 +23,17 @@ Creating and setting a Wazuh admin user
 
 Follow these steps to create an internal user, create a new role mapping, and give administrator permissions to the user.
 
-#. Log into Wazuh dashboard as administrator.
+#. Log into the Wazuh dashboard as administrator.
 
-#. Click the upper-left menu icon to open the options, select **Security** and then **Internal users** to open the internal users page.
+#. Click the upper-left menu icon to open the options, select **Security**, and then **Internal users** to open the internal users page.
 
 #. Click **Create internal user**, provide a username and password, and click **Create** to complete the action.
 
 #. To map the user to the admin role, follow these steps:
 
-   #. Click the upper-left menu icon to open the options, select **Security** and then **Roles** to open the roles page.
+   #. Click the upper-left menu icon to open the options, select **Security**, and then **Roles** to open the roles page.
 
-   #. Search for the **all_access** role in the roles' list and select it to open the details window.
+   #. Search for the **all_access** role in the roles list and select it to open the details window.
 
    #. Select the **Mapped users** tab and click **Manage mapping**.
    
@@ -41,8 +41,8 @@ Follow these steps to create an internal user, create a new role mapping, and gi
 
 #. To map the user with Wazuh, follow these steps:
 
-   #. Click the upper-left menu icon to open the available options and click **Wazuh**.   
-   #. Click **Wazuh** to open the Wazuh dashboard menu, select **Security** and then **Roles mapping** to open the page.
+   #. Click the upper-left menu icon to open the available options, and click **Wazuh**.   
+   #. Click **Wazuh** to open the Wazuh dashboard menu, select **Security**, and then **Roles mapping** to open the page.
    #. Click **Create Role mapping** and complete the empty fields with the following parameters:
    
       - **Role mapping name**: Assign a name to the role mapping.
@@ -58,15 +58,15 @@ Creating and setting a Wazuh read-only user
 
 Follow these steps to create an internal user, create a new role mapping, and give read-only permissions to the user.
 
-#. Log into Wazuh dashboard as administrator.
+#. Log into the Wazuh dashboard as administrator.
 
-#. Click the upper-left menu icon to open the options, select **Security** and then **Internal users** to open the internal users page.
+#. Click the upper-left menu icon to open the options, select **Security**, and then **Internal users** to open the internal users page.
 
 #. Click **Create internal user**, provide a username and password, and click **Create** to complete the action.
 
 #. To map the user to the appropriate role, follow these steps:
 
-   #. Click the upper-left menu icon to open the options, select **Security** and then **Roles** to open the roles page.
+   #. Click the upper-left menu icon to open the options, select **Security**, and then **Roles** to open the roles page.
 
    #. Click **Create role**, complete the empty fields with the following parameters, and then click **Create** to complete the task. 
      
@@ -88,7 +88,7 @@ Follow these steps to create an internal user, create a new role mapping, and gi
 
    #. Click the upper-left menu icon to open the available options and click **Wazuh**.  
 
-   #. Click **Wazuh** to open the menu, select **Security** and then **Roles mapping** to open the page.
+   #. Click **Wazuh** to open the menu, select **Security**, and then **Roles mapping** to open the page.
 
    #. Click **Create Role mapping** and complete the empty fields with the following parameters:
 
@@ -106,9 +106,9 @@ Creating an internal user and mapping it to Wazuh
 
 Follow these steps to create an internal user and map it to a role of your choice. 
 
-#. Log into Wazuh dashboard as administrator.
+#. Log into the Wazuh dashboard as administrator.
 
-#. Click the upper-left menu icon to open the options, select **Security** and then **Internal users** to open the internal users page.
+#. Click the upper-left menu icon to open the options, select **Security**, and then **Internal users** to open the internal users page.
 
 #. Click **Create internal user**, provide a username and password, and click **Create** to complete the action.
 
@@ -121,7 +121,7 @@ Follow these steps to create an internal user and map it to a role of your choic
 #. To map the user with Wazuh, follow these steps:
 
    #. Click the upper-left menu icon to open the available options and click **Wazuh**.   
-   #. Click **Wazuh** to open the Wazuh dashboard menu, select **Security** and then **Roles mapping** to open the page.
+   #. Click **Wazuh** to open the Wazuh dashboard menu, select **Security**, and then **Roles mapping** to open the page.
    #. Click **Create Role mapping** and complete the empty fields with the following parameters:
    
       - **Role mapping name**: Assign a name to the role mapping.
@@ -146,9 +146,9 @@ This process involves adding a label in the agent group's centralized configurat
 
 It also involves mapping this user with the Wazuh API, creating a custom policy that includes permissions to read, restart, upgrade, among other actions over a group of agents, and finally creating a custom role and mapping it to our internal user.
 
-As a final result, we will have a new user with permission to manage a group of agents and read the documents regarding said group.
+As a final result, we will have a new user with permission to manage a group of agents and read the documents regarding the said group.
 
-In this example, we have an environment with five agents. Agents **001**, **002**, and **005** belong to the ``Team_A`` group whereas agents **003**, **004**, and **005** belong to the ``Team_B`` group. To learn more on how to create agents groups see :ref:`Grouping agents <grouping-agents>`. We will describe how to create a new user and give it permissions to manage agents from ``Team_A``.
+In this example, we have an environment with five agents. Agents **001**, **002**, and **005** belong to the ``Team_A`` group whereas agents **003**, **004**, and **005** belong to the ``Team_B`` group. To learn more on how to create agents groups see :ref:`Grouping agents <grouping-agents>`. We will describe how to create a new user and give it permission to manage agents from ``Team_A``.
 
 
 .. thumbnail:: ../../images/kibana-app/rbac/environment.png
@@ -162,7 +162,7 @@ Adding an agents group label
 
 To prepare the environment, add a label in the ``Team_A`` centralized configuration ``agent.conf``. To learn more, see :doc:`Agent labels </user-manual/capabilities/labels>`.
 
-#. Log into Wazuh dashboard as administrator.
+#. Log into the Wazuh dashboard as administrator.
 
 #. Click **Wazuh** to open the Wazuh dashboard menu, select **Management** and then **Groups** to open the page.
 
@@ -189,7 +189,7 @@ Creating and mapping an internal user
 
 Follow these steps to create an internal user, create a custom role and map it to the new user.  
 
-#. Click the upper-left menu icon to open the available options, select **Security** and then **Internal users** to open the internal users page.
+#. Click the upper-left menu icon to open the available options, select **Security**, and then **Internal users** to open the internal users page.
 
 #. Click **Create internal user**, provide a username and password, and click **Create** to complete the action.
 
@@ -262,7 +262,7 @@ Mapping with Wazuh
 To map the user with Wazuh, follow these steps:
 
 #. Click the upper-left menu icon to open the available options and click **Wazuh**.
-#. Click **Wazuh** to open the Wazuh dashboard menu, select **Security** and then **Policies** to open the policies page.
+#. Click **Wazuh** to open the Wazuh dashboard menu, select **Security**, and then **Policies** to open the policies page.
 #. Click **Create policy** and complete the empty fields with the requested information.
    
       - **Policy name**: Assign a name to the new policy. 
@@ -277,7 +277,7 @@ To map the user with Wazuh, follow these steps:
           :width: 100%
     
 #. Click **Create policy** to complete the action.
-#. Click **Roles** to open the tab, click **Create Role**, and fill the empty fields with the requested information. 
+#. Click **Roles** to open the tab, click **Create Role**, and fill in the empty fields with the requested information. 
 
       - **Role name**: Assign a name to the new role. 
       - **Policies**: Select the policy created previously. 

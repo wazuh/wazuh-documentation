@@ -69,7 +69,7 @@ Azure Active Directory Configuration
    
       - ``description``: can be any value that you want.
       - ``id``: should be the ID of your application. You can find it in the application's overview menu or at the top of the Manifest in the field ``appId``.
-      - ``value``: defines the name of the role. In this case ``Wazuh_role``, which will be the value for the role to be mapped on the ``roles_mapping.yml`` file.
+      - ``value``: defines the name of the role. In this case, ``Wazuh_role``, which will be the value for the role to be mapped on the ``roles_mapping.yml`` file.
       - ``displayName``: can be the same as ``value``.
 
       .. thumbnail:: /images/single-sign-on/azure-active-directory/04-add-a-new-role.png

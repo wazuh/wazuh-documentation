@@ -248,7 +248,7 @@ The following is an example of how a centralized configuration can be done.
 Precedence
 ----------
 
-It's important to understand which configuration file takes precedence between ``ossec.conf`` and ``agent.conf`` when central configuration is used. When central configuration is utilized, the local and the shared configuration are merged, however, the ``ossec.conf`` file is read before the shared ``agent.conf`` and the last configuration of any setting will overwrite the previous. Also, if a file path for a particular setting is set in both of the configuration files, both paths will be included in the final configuration.
+It's important to understand which configuration file takes precedence between ``ossec.conf`` and ``agent.conf`` when the central configuration is used. When this configuration is utilized, the local and the shared configuration are merged, however, the ``ossec.conf`` file is read before the shared ``agent.conf`` and the last configuration of any setting will overwrite the previous. Also, if a file path for a particular setting is set in both of the configuration files, both paths will be included in the final configuration.
 
 For example:
 
@@ -296,7 +296,7 @@ Whether for any reason you don't want to apply the shared configuration in a spe
 Download configuration files from remote location
 -------------------------------------------------
 
-The Wazuh manager has the capability to download configuration files like ``merged.mg`` as well as other files to be merged for the groups that you want to.
+The Wazuh manager has the capability to download configuration files like ``merged.mg`` as well as other files to be merged for the groups that you want.
 
 To use this feature, we need to put a yaml file named ``files.yml`` under the directory ``/var/ossec/etc/shared/``. When the **manager** starts, it will read and parse the file.
 
@@ -322,7 +322,7 @@ The ``files.yml`` has the following structure as shown in the following example:
         002: my_group_2
         003: another_group
 
-Here we can distinct the two main blocks: ``groups`` and ``agents``.
+Here we can distinguish the two main blocks: ``groups`` and ``agents``.
 
 
 1. In the ``groups`` block we define the group name from which we want to download the files.
