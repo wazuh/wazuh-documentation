@@ -99,7 +99,7 @@ The time during which a full scan will not be performed even if the database of 
 retry_interval
 ^^^^^^^^^^^^^^
 
-The time to wait after a scan completes to retry the agents that had a problem being scanned.
+The time to wait after a scan is completed to retry the agents that had a problem being scanned.
 
 +----------------------+------------------------------------------------------------------------------------------------------------------------------------+
 | **Default value**    | 30 seconds                                                                                                                         |

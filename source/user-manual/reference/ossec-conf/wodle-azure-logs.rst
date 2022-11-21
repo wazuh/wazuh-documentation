@@ -269,7 +269,7 @@ This block configures the integration with Azure Log Analytics REST API.
 log_analytics\\application_id
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-Identifier of the application that we will use for the authentication and be able to make use of the Azure Log Analytics API. It must be used next to the ``application_key`` option obligatorily. Incompatible with ``auth_path`` option.
+Identifier of the application that we will use for the authentication and to be able to use the Azure Log Analytics API. It must be used next to the ``application_key`` option obligatorily. Incompatible with ``auth_path`` option.
 
 +--------------------+--------------------+
 | **Default value**  | N/A                |
@@ -280,7 +280,7 @@ Identifier of the application that we will use for the authentication and be abl
 log_analytics\\application_key
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-Key to the application we will use for authentication and be able to make use of the Azure Log Analytics API. It must be used next to the ``application_id`` option obligatorily. Incompatible with ``auth_path`` option.
+Key to the application we will use for authentication and to be able to use the Azure Log Analytics API. It must be used next to the ``application_id`` option obligatorily. Incompatible with ``auth_path`` option.
 
 +--------------------+--------------------+
 | **Default value**  | N/A                |
@@ -462,7 +462,7 @@ This block configures the integration with Azure Active Directory Graph REST API
 graph\\application_id
 ^^^^^^^^^^^^^^^^^^^^^
 
-Identifier of the application that we will use for the authentication and be able to make use of the AAD Graph API. It must be used next to the ``application_key`` option obligatorily. Incompatible with ``auth_path`` option.
+Identifier of the application that we will use for the authentication and to be able to use the AAD Graph API. It must be used next to the ``application_key`` option obligatorily. Incompatible with ``auth_path`` option.
 
 +--------------------+--------------------+
 | **Default value**  | N/A                |
@@ -473,7 +473,7 @@ Identifier of the application that we will use for the authentication and be abl
 graph\\application_key
 ^^^^^^^^^^^^^^^^^^^^^^
 
-Key to the application we will use for authentication and be able to make use of the AAD Graph API. It must be used next to the ``application_id`` option obligatorily. Incompatible with ``auth_path`` option.
+Key to the application we will use for authentication and to be able to use the AAD Graph API. It must be used next to the ``application_id`` option obligatorily. Incompatible with ``auth_path`` option.
 
 +--------------------+--------------------+
 | **Default value**  | N/A                |

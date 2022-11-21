@@ -29,14 +29,14 @@ All the available options to run the script are:
 | -A,  --api                                   | Change the Wazuh API password given the current password.                                                   |
 |                                              | Requires -u|--user, and -p|--password, -au|--admin-user and -ap|--admin-password.                           |
 +----------------------------------------------+-------------------------------------------------------------------------------------------------------------+
-| -au,--admin-user <adminUser>                 | Admin user for the Wazuh API. Required changing the Wazuh API passwords.                                    |
+| -au,--admin-user <adminUser>                 | Admin user for the Wazuh API. Required for changing the Wazuh API passwords.                                |
 +----------------------------------------------+-------------------------------------------------------------------------------------------------------------+
-| -ap, --admin-password <adminPassword>        | Password for the Wazuh API admin user. Required changing the Wazuh API passwords.                           |
+| -ap, --admin-password <adminPassword>        | Password for the Wazuh API admin user. Required for changing the Wazuh API passwords.                       |
 +----------------------------------------------+-------------------------------------------------------------------------------------------------------------+
 | -u / --user <user>                           | Indicates the name of the user whose password will be changed.                                              |
 |                                              | If no password is specified, it will generate a random one.                                                 |
 +----------------------------------------------+-------------------------------------------------------------------------------------------------------------+
-| -p / --password <password>                   | Indicates the new password, which must be used with option -u.                                              |
+| -p / --password <password>                   | Indicates the new password. Must be used with option -u.                                                    |
 +----------------------------------------------+-------------------------------------------------------------------------------------------------------------+    
 | -c / --cert <route-admin-certificate>        | Indicates route to the admin certificate.                                                                   |
 +----------------------------------------------+-------------------------------------------------------------------------------------------------------------+
