@@ -6,17 +6,15 @@
 How to set up custom branding
 =============================
         
-The Wazuh dashboard white-labeling feature allows you to replace the following elements with your own custom ones.
+The Wazuh dashboard white-labeling feature allows you to replace the following elements with custom ones.
 
 -  Logos in the Wazuh dashboard.
 -  Logo, header, and footer in PDF reports.
 
-To customize the branding of your Wazuh dashboard and PDF reports, go to **Settings** > **Configuration** and edit the settings under the **Custom branding** section.
-
 Custom logos in the Wazuh dashboard 
 -----------------------------------
 
-To use your own logos in the Wazuh dashboard, set up the following properties.
+To use your own logos in the Wazuh dashboard, click on the `App main logo` and go to **Settings** > **Configuration**. Under the **Custom branding** section, set up the following properties:
 
 -  ``customization.logo.app``. This property sets the `App main logo` image. It has a size limit of 1 MB. It replaces the logo image in the Wazuh main menu located top left. Recommended size: 300 pixels width, 70 pixels height. See #1 in the image below.
 
@@ -26,16 +24,16 @@ To use your own logos in the Wazuh dashboard, set up the following properties.
 
 .. thumbnail:: /images/kibana-app/features/white-labeling/custom-branding-settings.jpg
    :align: center
-   :width: 70%
+   :width: 80%
 
-Once you are done with setting your custom logo images, you can find them saved in ``/usr/share/wazuh-dashboard/plugins/wazuh/public/assets/custom/images/``.
+Once you are done setting your custom logo images, you can find them saved in ``/usr/share/wazuh-dashboard/plugins/wazuh/public/assets/custom/images/``.
 
 Custom branding of the PDF reports
 ----------------------------------
 
-To customize the branding of the PDF reports, set up the following properties.
+To customize the PDF reports, click on the `App main logo` and go to **Settings** > **Configuration**. Under the **Custom branding** section, set up the following properties:
 
--  ``customization.reports.logo``. This property sets the `PDF reports logo` image. It the  has a size limit of 1 MB. It's printed in the top left corner of the PDF reports. Recommended size: 190 pixels width, 40 pixels height. See #1 in the image below.
+-  ``customization.reports.logo``. This property sets the `PDF reports logo` image. It has a size limit of 1 MB. It's printed in the top left corner of the PDF reports. Recommended size: 190 pixels width, 40 pixels height. See #1 in the image below.
 
 -  ``customization.reports.footer``. This property sets the `Reports footer` text block. It has a size limit of 2 lines of 50 characters each. It's printed in the bottom left corner of the PDF reports. See #2 in the image below.
 
@@ -44,24 +42,27 @@ To customize the branding of the PDF reports, set up the following properties.
 .. thumbnail:: /images/kibana-app/features/white-labeling/custom-pdf-report.jpg
    :title: Custom PDF report
    :align: center
-   :width: 70%
+   :width: 80%
 
 Configuration
-^^^^^^^^^^^^^
+-------------
+
+The following settings correspond to the custom branding feature. You can edit them from the user interface as explained in the previous sections, or by editing the  ``/usr/share/wazuh-dashboard/data/wazuh/config/wazuh.yml`` configuration file. 
+
 
 **customization.enabled**
 
     Enables and disables custom branding of the Wazuh dashboard and PDF reports.
 
     +--------------------+-----------------------+
-    | Allowed values     | ``true``, ``false``   |
+    | Allowed values     |  true, false          |
     +--------------------+-----------------------+
-    | Default value      | ``true``              |
+    | Default value      |  true                 |
     +--------------------+-----------------------+
 
 **customization.logo.app**
 
-    Logo for the main menu at the top left corner.
+    Defines the name of the main app logo saved in ``/usr/share/wazuh-dashboard/plugins/wazuh/public/assets/custom/images/``.
 
     +--------------------+----------------------------+
     | Allowed format     | jpeg, jpg, png, svg        |
@@ -73,7 +74,7 @@ Configuration
 
 **customization.logo.healthcheck**
 
-    Logo displayed during the health check.
+    Defines the name of the health check logo saved in ``/usr/share/wazuh-dashboard/plugins/wazuh/public/assets/custom/images/``.
 
     +--------------------+----------------------------+
     | Allowed format     | jpeg, jpg, png, svg        |
@@ -85,7 +86,7 @@ Configuration
 
 **customization.logo.sidebar**
 
-    Logo for the navigation drawer menu at the sidebar.
+    Defines the name of the sidebar logo saved in ``/usr/share/wazuh-dashboard/plugins/wazuh/public/assets/custom/images/``.
 
     +--------------------+----------------------------+
     | Allowed format     | jpeg, jpg, png, svg        |
@@ -97,7 +98,7 @@ Configuration
 
 **customization.logo.reports**
 
-    Logo for the PDF reports generated by the Wazuh dashboard. It's placed at the top left corner of every report page.
+    Defines the name of the reports logo saved in ``/usr/share/wazuh-dashboard/plugins/wazuh/public/assets/custom/images/``.
 
     +--------------------+----------------------------+
     | Allowed format     | jpeg, jpg, png             |
@@ -122,7 +123,7 @@ Configuration
 
 **customization.reports.footer**
 
- 		Footer of the PDF reports. To use an empty footer, type a space " " in the field. If the field is empty, it uses the default footer.
+ 	Footer of the PDF reports. To use an empty footer, type a space " " in the field. If the field is empty, it uses the default footer.
 
     +--------------------+----------------------+
     | Allowed characters | Printable characters |
