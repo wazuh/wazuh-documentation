@@ -15,6 +15,7 @@ After the installation, the Wazuh manager and the Wazuh agent have defined a :re
 #. `Configuring real-time monitoring`_
 #. `Configuring who-data monitoring`_
 #. `Configuring Windows registry`_
+#. `Configuring Windows directories`_
 #. `Configuring reporting file and registry value changes`_
 #. `Configuring ignoring files and Windows registry entries`_
 #. `Configuring ignoring files via rules`_
@@ -57,7 +58,6 @@ FIM directories can be configured using ``*`` and ``?`` wildcards in the same wa
 .. note::
 
   Directories and files that match the configured pattern and are created after the initial FIM scan will be added for monitoring after the next scheduled scan is run.
-
 
 Configuring scheduled scans
 ---------------------------
@@ -179,6 +179,44 @@ To configure the Windows registries, it is necessary to create a list of those r
     <windows_registry arch="32bit" check_all="no" check_mtime="yes">HKEY_LOCAL_MACHINE\SYSTEM\Setup</windows_registry>
   </syscheck>
 
+
+.. _how_to_fim_windows_directories:
+
+Configuring Windows directories
+-------------------------------
+
+To configure directories within the Windows directory (Also known as ``%WINDIR%``), it is necessary to take into account that in 64-bit architecture systems, there are two special folders: ``System32`` which is reserved for those 64-bit DLLs, and ``SysWOW64`` for all 32-bit DLLs.
+The 32-bit processes running in a 64-bit environment, when they want to access Sytem32, they do it through a virtual folder called ``Sysnative``.
+
+From version 4.4.0 of Wazuh, this redirection has been disabled and it is possible to access directly to ``System32``, so those configurations that have as monitoring directory ``%WINDIR%/Sysnative`` from now on will generate alerts, synchronizations with the database and other functions with ``%WINDIR%/System32``. That means, ``%WINDIR%/Sysnative`` or ``%WINDIR%/System32`` represent the same directory and both path are valids.
+This implies that ``SysWOW64`` is a separate directory, and in case you want to monitor it, it must be added as such in ``ossec.conf``. 
+
+It's possible configure the monitoring in any mode, for example, scheduled mode:
+
+.. code-block:: xml
+
+  <syscheck>
+    <directories>%WINDIR%/System32</directories>
+    <directories>%WINDIR%/SysWOW64</directories>
+  </syscheck>
+
+Realtime mode:
+
+.. code-block:: xml
+
+  <syscheck>
+    <directories realtime="yes">%WINDIR%/System32</directories>
+    <directories realtime="yes">%WINDIR%/SysWOW64</directories>
+  </syscheck>
+
+And Whodata mode:
+
+.. code-block:: xml
+
+  <syscheck>
+    <directories whodata="yes">%WINDIR%/System32</directories>
+    <directories whodata="yes">%WINDIR%/SysWOW64</directories>
+  </syscheck>
 
 .. _how_to_fim_report_changes:
 
