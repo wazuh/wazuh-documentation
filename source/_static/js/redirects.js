@@ -71,7 +71,16 @@ removedUrls['x.y'] = [
 
 /* *** RELEASE 4.3 ****/
 
-/* Pages added in 4.3 */
+/* Pages changed within the same release */
+
+redirectSameRelease['4.3'] = {
+   '/user-manual/capabilities/vulnerability-detection/compatibility-matrix.html':
+     '/user-manual/capabilities/vulnerability-detection/how-it-works.html#compatibility-matrix',
+   '/user-manual/capabilities/vulnerability-detection/running-vu-scan.html':
+     '/user-manual/capabilities/vulnerability-detection/configuring-scans.html',
+ };
+ 
+ /* Pages added in 4.3 */
 
 newUrls['4.3'] = [
   '/release-notes/release-4-3-1.html',
@@ -83,6 +92,7 @@ newUrls['4.3'] = [
   '/release-notes/release-4-3-7.html',
   '/release-notes/release-4-3-8.html',
   '/release-notes/release-4-3-9.html',
+  '/release-notes/release-4-3-10.html',
   '/getting-started/use-cases/container-security.html',
   '/user-manual/agents/query-configuration.html',
   '/user-manual/elasticsearch/configure-indices.html',
@@ -123,6 +133,7 @@ newUrls['4.3'] = [
   '/office365/monitoring-office365-activity.html',
   '/user-manual/reference/ossec-conf/office365-module.html',
   '/user-manual/capabilities/log-data-collection/how-to-collect-macoslogs.html',
+  '/user-manual/capabilities/vulnerability-detection/configuring-scans.html',
   '/user-manual/uninstall/central-components.html',
   '/azure/activity-services/index.html',
   '/azure/activity-services/active-directory/index.html',
@@ -356,6 +367,8 @@ removedUrls['4.3'] = [
   '/installation-guide/wazuh-agent/deployment-variables/deployment-variables-macos.html',
   '/installation-guide/wazuh-agent/deployment-variables/deployment-variables-windows.html',
   '/user-manual/overview.html',
+  '/user-manual/capabilities/vulnerability-detection/compatibility-matrix.html',
+  '/user-manual/capabilities/vulnerability-detection/running-vu-scan.html',
   '/user-manual/kibana-app/index.html',
   '/user-manual/kibana-app/features/app-overview.html',
   '/user-manual/kibana-app/features/dev-tools.html',

@@ -17,7 +17,7 @@ task-manager
 
 The task manager module is responsible for managing all the tasks that run on the agents.
 
-This module is only available on the manager side, on a stand-alone manager or on a master node in a cluster configuration.
+This module is only available on the manager side, on a stand-alone manager, or on a master node in a cluster configuration.
 
 This configuration section only needs to be defined in order to change the default values.
 
@@ -27,7 +27,7 @@ Options
 - `cleanup_time`_
 - `task_timeout`_
 
-.. note:: This module will be always enabled and cannot be deactivated.
+.. note:: This module will always be enabled and cannot be deactivated.
 
 
 cleanup_time
@@ -47,7 +47,7 @@ Maximum time that the task information will remain stored in the task database.
 task_timeout
 ^^^^^^^^^^^^
 
-Maximum time that a task with status "In progress" will be keeped before changing its state to "Timeout".
+Maximum time that a task with the status "In progress" will be kept before changing its state to "Timeout".
 
 +--------------------+------------------------------------------------------------------------------------------------------------------------------------+
 | **Default value**  | 15m                                                                                                                                |

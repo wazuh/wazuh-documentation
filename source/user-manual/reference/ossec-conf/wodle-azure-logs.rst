@@ -167,7 +167,7 @@ The interval option is conditioned by the following described options ``day``, `
 run_on_start
 ^^^^^^^^^^^^^
 
-Run evaluation immediately when service is started.
+Run evaluation immediately when the service is started.
 
 +--------------------+---------+
 | **Default value**  | yes     |
@@ -231,7 +231,7 @@ Time of the day to run the Azure-Logs. It has to be represented in the format *h
 timeout
 ^^^^^^^
 
-Timeout for each evaluation. In case the execution takes longer that the specified timeout, it stops.
+Timeout for each evaluation. In case the execution takes longer than the specified timeout, it stops.
 
 +--------------------+-----------------------------+
 | **Default value**  | 0                           |
@@ -269,7 +269,7 @@ This block configures the integration with Azure Log Analytics REST API.
 log_analytics\\application_id
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-Identifier of the application that we will use for the authentication and to be able to make use of the Azure Log Analytics API. It must be used next to the ``application_key`` option obligatorily. Incompatible with ``auth_path`` option.
+Identifier of the application that we will use for the authentication and to be able to use the Azure Log Analytics API. It must be used next to the ``application_key`` option obligatorily. Incompatible with ``auth_path`` option.
 
 +--------------------+--------------------+
 | **Default value**  | N/A                |
@@ -280,7 +280,7 @@ Identifier of the application that we will use for the authentication and to be 
 log_analytics\\application_key
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-Key to the application we will use for authentication and to be able to make use of the Azure Log Analytics API. It must be used next to the ``application_id`` option obligatorily. Incompatible with ``auth_path`` option.
+Key to the application we will use for authentication and to be able to use the Azure Log Analytics API. It must be used next to the ``application_id`` option obligatorily. Incompatible with ``auth_path`` option.
 
 +--------------------+--------------------+
 | **Default value**  | N/A                |
@@ -385,7 +385,7 @@ Defines the workspace where we will perform the queries.
 log_analytics\\request\\timeout
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-Timeout for each request evaluation. This option overwrites the general `timeout`_ option. In case the execution takes longer that the specified timeout, it stops.
+Timeout for each request evaluation. This option overwrites the general `timeout`_ option. In case the execution takes longer than the specified timeout, it stops.
 
 +--------------------+-----------------------------+
 | **Default value**  | 0                           |
@@ -462,7 +462,7 @@ This block configures the integration with Azure Active Directory Graph REST API
 graph\\application_id
 ^^^^^^^^^^^^^^^^^^^^^
 
-Identifier of the application that we will use for the authentication and to be able to make use of the AAD Graph API. It must be used next to the ``application_key`` option obligatorily. Incompatible with ``auth_path`` option.
+Identifier of the application that we will use for the authentication and to be able to use the AAD Graph API. It must be used next to the ``application_key`` option obligatorily. Incompatible with ``auth_path`` option.
 
 +--------------------+--------------------+
 | **Default value**  | N/A                |
@@ -473,7 +473,7 @@ Identifier of the application that we will use for the authentication and to be 
 graph\\application_key
 ^^^^^^^^^^^^^^^^^^^^^^
 
-Key to the application we will use for authentication and to be able to make use of the AAD Graph API. It must be used next to the ``application_id`` option obligatorily. Incompatible with ``auth_path`` option.
+Key to the application we will use for authentication and to be able to use the AAD Graph API. It must be used next to the ``application_id`` option obligatorily. Incompatible with ``auth_path`` option.
 
 +--------------------+--------------------+
 | **Default value**  | N/A                |
@@ -549,7 +549,7 @@ The query used to obtain the logs from the Microsoft Graph API. The query value 
 graph\\request\\timeout
 ^^^^^^^^^^^^^^^^^^^^^^^
 
-Timeout for each request evaluation. This option overwrites the general `timeout`_ option. In case the execution takes longer that the specified timeout, it stops.
+Timeout for each request evaluation. This option overwrites the general `timeout`_ option. In case the execution takes longer than the specified timeout, it stops.
 
 +--------------------+-----------------------------+
 | **Default value**  | 0                           |
@@ -715,7 +715,7 @@ storage\\container\\content_type
 This parameter indicates the format of the blobs' content. The available values are:
 
 - **text**. Plain text. Each line is a log.
-- **json_file**. The blob contain records of logs in standard json format.
+- **json_file**. The blob contains records of logs in standard json format.
 - **json_inline**. Each line is a log in json format.
 
 The format of logs stored in Azure accounts is **inline JSON**.
@@ -733,7 +733,7 @@ The format of logs stored in Azure accounts is **inline JSON**.
 storage\\container\\timeout
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-Timeout for each request evaluation. This option overwrites the general `timeout`_ option. In case the execution takes longer that the specified timeout, it stops.
+Timeout for each request evaluation. This option overwrites the general `timeout`_ option. In case the execution takes longer than the specified timeout, it stops.
 
 +--------------------+-----------------------------+
 | **Default value**  | 0                           |

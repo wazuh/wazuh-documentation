@@ -24,7 +24,7 @@ The agent_upgrade program allows you to list outdated agents and upgrade them.
 +--------------------------------------------+--------------------------------------------------------------------------------+
 | -a AGENT_IDs, --agents AGENT_IDs           | Agent IDs to upgrade. When upgrading multiple agents, separate IDs with spaces.|
 +--------------------------------------------+--------------------------------------------------------------------------------+
-| -F, --force                                | Allows reinstall same version and downgrade version.                           |
+| -F, --force                                | Allows reinstalling the same version and downgrading the version.              |
 +--------------------------------------------+--------------------------------------------------------------------------------+
 | -s, --silent                               | Do not show output.                                                            |
 +--------------------------------------------+--------------------------------------------------------------------------------+

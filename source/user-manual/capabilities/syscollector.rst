@@ -428,7 +428,9 @@ The following table shows the operating systems that this module currently suppo
 Using Syscollector information to trigger alerts
 ------------------------------------------------
 
-.. note:: This capability is not available in Wazuh 4.2 but will be included in a future version.
+.. warning::
+
+   Disabled in Wazuh |WAZUH_CURRENT_MINOR|. Currently, *Syscollector* doesn't support this feature. A new version of Wazuh that makes available all the information required for these alerts is under development.
 
 Since Wazuh 3.9 version, ``Syscollector`` module information can be used to trigger alerts and show that information in the alerts' description.
 
@@ -445,7 +447,7 @@ As an example, this rule will be triggered when the interface ``eth0`` of an age
       <description>eth0 interface enabled. IP: $(netinfo.iface.ipv4.address)</description>
     </rule>
 
-.. warning::
+.. note::
 
     The tag ``<if_sid>221</if_sid>`` is necessary because the events from Syscollector are muted by default with that rule.
 

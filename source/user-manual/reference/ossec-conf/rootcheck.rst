@@ -96,7 +96,7 @@ Change the location of the rootkit files database.
 +--------------------+------------------------------------------+
 
 .. note::
-  Paths can be referred to relative paths under the Wazuh installation directory, or full paths.
+  Paths can be referred to as relative paths under the Wazuh installation directory or full paths.
 
 .. _reference_ossec_rootcheck_rootkit_trojans:
 

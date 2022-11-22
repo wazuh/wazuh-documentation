@@ -44,7 +44,7 @@ PingOne Configuration
 
       - SLO ENDPOINT: ``https://<WAZUH_DASHBOARD_URL>/``
       - SLO BINDING: ``HTTP Redirect``
-      - ASSERTION VALIDITY DURATION: ``3600`` (for 1 hour token validity)
+      - ASSERTION VALIDITY DURATION: ``3600`` (for one hour token validity)
       - VERIFICATION CERTIFICATE (OPTIONAL): Load a PUBLIC CERTIFICATE that corresponds to the PRIVATE KEY that is going to be used on the ``sp.signature_private_key_filepath`` of the ``config.yml`` configuration file on the Wazuh indexer instance. This is necessary as all the logout requests must be signed.
 
       .. thumbnail:: /images/single-sign-on/pingone/03-on-the-configuration-tab.png
@@ -242,16 +242,29 @@ Wazuh dashboard configuration
 
    Add these configurations to ``/etc/wazuh-dashboard/opensearch_dashboards.yml``. It is recommended to back up this file before the configuration is changed.
 
-   .. code-block:: console
+   .. code-block:: console  
 
       opensearch_security.auth.type: "saml"
       server.xsrf.whitelist: ["/_plugins/_security/saml/acs", "/_plugins/_security/saml/logout", "/_opendistro/_security/saml/acs", "/_opendistro/_security/saml/logout", "/_opendistro/_security/saml/acs/idpinitiated"]
 
+   .. note::
+      :class: not-long
+
+      *For versions 4.3.9 and earlier*, also replace ``path: `/auth/logout``` with ``path: `/logout``` in ``/usr/share/wazuh-dashboard/plugins/securityDashboards/server/auth/types/saml/routes.js``.
+
+      .. code-block:: console
+         :emphasize-lines: 3
+
+         ...
+            this.router.get({
+               path: `/logout`,
+               validate: false
+         ...
 
 #. Restart the Wazuh dashboard service.
 
-    .. include:: /_templates/common/restart_dashboard.rst
+   .. include:: /_templates/common/restart_dashboard.rst
 
 #. Test the configuration.
- 
-   To test the PingOne SSO configuration, go to your Wazuh dashboard URL and log in with your Ping One account.
+   
+   To test the configuration, go to your Wazuh dashboard URL and log in with your Ping One account. 

@@ -8,7 +8,7 @@
 Google
 ======
 
-`Google Workspace <https://workspace.google.com/>`_, developed and marketed by Google, is a collection of cloud computing, productivity, and collaboration tools.  In this guide, we integrate the Google IdP to authenticate users into the Wazuh platform. 
+`Google Workspace <https://workspace.google.com/>`_, developed and marketed by Google, is a collection of cloud computing, productivity, and collaboration tools.  In this guide, we integrate Google IdP to authenticate users into the Wazuh platform. 
 
 The single sign-on integration process is divided into three stages.
 
@@ -58,7 +58,7 @@ Google Configuration
 
    #. Click on **ADD MAPPING**, under Employee details, choose **Department**, under App attributes, type **Roles**, and select **FINISH**. 
 
-      Google doesn't support sending the Group membership attribute as part of the SAML Assertion (as the other Identity Providers do), so in this example we are going to use **Department** as the attribute whose value will be used as our ``roles_key`` in the Wazuh indexer configuration. In this case, the value for the **Department** attribute will be stored as ``Roles``.
+      Google doesn't support sending the Group membership attribute as part of the SAML Assertion (as the other Identity Providers do). So in this example, we are going to use **Department** as the attribute whose value will be used as our ``roles_key`` in the Wazuh indexer configuration. In this case, the value for the **Department** attribute will be stored as ``Roles``.
 
       .. thumbnail:: /images/single-sign-on/google/04-click-on-add-mapping.png
          :title: Click on ADD MAPPING under Employee details
@@ -194,7 +194,7 @@ Edit the Wazuh indexer security configuration files. It is recommended to back u
 
 #. Edit ``/usr/share/wazuh-indexer/plugins/opensearch-security/securityconfig/roles_mapping.yml`` file and change the following values:
    
-   Map the ``Department`` field value that was obtained in Google IdP to the ``all_access`` role in Wazuh indexer:
+   Map the ``Department`` field value that was obtained in Google IdP to the ``all_access`` role in the Wazuh indexer:
 
    .. code-block:: console
 
@@ -242,28 +242,29 @@ Wazuh dashboard configuration
 
    Add these configurations to ``/etc/wazuh-dashboard/opensearch_dashboards.yml``. It is recommended to back up this file before the configuration is changed.
 
-   .. code-block:: console
+   .. code-block:: console  
 
       opensearch_security.auth.type: "saml"
       server.xsrf.whitelist: ["/_plugins/_security/saml/acs", "/_plugins/_security/saml/logout", "/_opendistro/_security/saml/acs", "/_opendistro/_security/saml/logout", "/_opendistro/_security/saml/acs/idpinitiated"]
 
-#. Change the logout configuration in the Wazuh dashboard. 
+   .. note::
+      :class: not-long
 
-   To change the logout configuration, edit the ``path: /auth/logout`` section of the ``route.js`` file. The file path is ``/usr/share/wazuh-dashboard/plugins/securityDashboards/server/auth/types/saml/routes.js``. It is recommended to back up this file before the configuration is changed. The configuration must be similar to this:
+      *For versions 4.3.9 and earlier*, also replace ``path: `/auth/logout``` with ``path: `/logout``` in ``/usr/share/wazuh-dashboard/plugins/securityDashboards/server/auth/types/saml/routes.js``.
 
-   .. code-block:: console
-      :emphasize-lines: 3
-      
-      ...
-          this.router.get({
-            path: `/logout`,
-            validate: false
-      ...
+      .. code-block:: console
+         :emphasize-lines: 3
+
+         ...
+            this.router.get({
+               path: `/logout`,
+               validate: false
+         ...
 
 #. Restart the Wazuh dashboard service.
 
-    .. include:: /_templates/common/restart_dashboard.rst
+   .. include:: /_templates/common/restart_dashboard.rst
 
 #. Test the configuration.
- 
-   To test the configuration, go to your Wazuh dashboard URL and log in with your Google Workspace account.
+   
+   To test the configuration, go to your Wazuh dashboard URL and log in with your Google Workspace account. 
