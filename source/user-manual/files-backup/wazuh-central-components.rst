@@ -6,7 +6,7 @@
 Wazuh central components
 ========================
 
-To create a backup of the central components of your Wazuh installation, follow these steps.
+To create a backup of the central components of your Wazuh installation, follow these steps. Repeat them for every cluster node you're doing the back up.
 
 .. note::
 
@@ -15,13 +15,19 @@ To create a backup of the central components of your Wazuh installation, follow 
 Preparing the backup
 --------------------
 
-#. On the cluster nodes you're doing the back up on, run the following commands to create the destination folder where to store the files. These commands use date and time references for the folder name to keep files separated from old backups you might have.
+#. Create the destination folder where to store the files. These commands use date and time references for the folder name to keep files separated from old backups you might have.
 
    .. code-block:: console
 
       # bkp_folder=~/wazuh_files_backup/$(date +%F_%H:%M)
-      # mkdir --parents $bkp_folder
-      # echo $bkp_folder
+      # mkdir --parents $bkp_folder && echo $bkp_folder
+
+#. Save host information.
+
+   .. code-block:: console
+
+      # cat /etc/*release* > $bkp_folder/host-info.txt
+      # echo -e "\n$(hostname): $(hostname -I)" >> $bkp_folder/host-info.txt
 
 Backing up the Wazuh server
 ---------------------------
@@ -67,7 +73,7 @@ Backing up the Wazuh server
 
    .. include:: /_templates/common/stop_manager.rst
 
-#. Back up Wazuh databases which hold collected data from agents.
+#. Back up Wazuh databases. They hold collected data from agents.
 
    .. code-block:: console
 
