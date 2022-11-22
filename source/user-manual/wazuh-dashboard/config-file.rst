@@ -607,6 +607,17 @@ Custom branding
 
 Edit the settings shown below to use custom branding elements such as logos, and header and footer text.
 
+customization.enabled
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Enable or disable the custom branding.
+
++--------------------+----------------------------+
+| **Default value**  | true                       |
++--------------------+----------------------------+
+| **Allowed values** | true,false                 |
++--------------------+----------------------------+
+
 customization.logo.app
 ^^^^^^^^^^^^^^^^^^^^^^
 
