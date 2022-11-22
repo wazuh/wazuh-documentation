@@ -123,18 +123,13 @@ The Wazuh Docker deployment requires Docker Compose 1.29 or later. Follow these 
 
    .. code-block:: console
 
-      # curl -L "https://github.com/docker/compose/releases/download/1.29.2/docker-compose-$(uname -s)-$(uname -m)" -o /usr/local/bin/docker-compose
+      # curl -L "https://github.com/docker/compose/releases/download/v2.12.2/docker-compose-$(uname -s)-$(uname -m)" -o /usr/local/bin/docker-compose
 
 #. Grant execution permissions:
 
    .. code-block:: console
 
       # chmod +x /usr/local/bin/docker-compose
-
-
-   .. note::
-
-      If the command ``docker-compose`` fails after installation. Create a symbolic link to ``/usr/bin`` or any other directory in your path: ``ln -s /usr/local/bin/docker-compose /usr/bin/docker-compose``
 
 #. Test the installation to ensure everything is fine:
 
@@ -145,4 +140,8 @@ The Wazuh Docker deployment requires Docker Compose 1.29 or later. Follow these 
    .. code-block:: none
       :class: output
 
-      docker-compose version 1.29.2, build 5becea4c
+      Docker Compose version v2.12.2
+
+   .. note::
+
+      If the command ``docker-compose`` fails after installation. Create a symbolic link to ``/usr/bin`` or any other directory in your path: ``ln -s /usr/local/bin/docker-compose /usr/bin/docker-compose``

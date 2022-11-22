@@ -25,7 +25,7 @@ Single-node Deployment
 
    .. code-block:: console
 
-      # git clone https://github.com/wazuh/wazuh-docker.git -b |WAZUH_CURRENT_DOCKER|
+      # git clone https://github.com/wazuh/wazuh-docker.git -b v|WAZUH_CURRENT_DOCKER|
 
    Then enter into the ``single-node`` directory to execute all the commands described below within this directory.
 
@@ -125,7 +125,7 @@ Multi-node deployment
 
    .. code-block:: console
 
-      $ git clone https://github.com/wazuh/wazuh-docker.git -b |WAZUH_CURRENT_DOCKER|
+      $ git clone https://github.com/wazuh/wazuh-docker.git -b v|WAZUH_CURRENT_DOCKER|
    
    Then enter into the ``multi-node`` directory to execute all the commands described below within this directory.
 
@@ -233,7 +233,7 @@ You can modify and build the Wazuh manager, indexer, and dashboard images locall
 
    .. code-block:: console
   
-      # git clone https://github.com/wazuh/wazuh-docker.git -b |WAZUH_CURRENT_DOCKER|
+      # git clone https://github.com/wazuh/wazuh-docker.git -b v|WAZUH_CURRENT_DOCKER|
 
 #. For versions up to 4.3.4, enter into the ``build-docker-images`` directory and build the Wazuh manager, indexer, and dashboard images:
   
@@ -270,7 +270,7 @@ You can change the default password of an existing user to improve security. For
   
       # docker run --rm -ti wazuh/wazuh-indexer:|WAZUH_CURRENT_DOCKER| bash /usr/share/wazuh-indexer/plugins/opensearch-security/tools/hash.sh
 
-#. Copy the generated hash. Replace the current ``admin`` user hash in the ``/single-node/config/wazuh_indexer/internal_users.yml`` file if using *single-node* deployment.
+#. Copy the generated hash. Replace the current ``admin`` user hash in the ``config/wazuh_indexer/internal_users.yml`` file if using *single-node* deployment.
 
 #. Change all occurrences of the default ``INDEXER_PASSWORD`` in the ``docker-compose.yml`` file to the new password.
 
@@ -282,7 +282,7 @@ You can change the default password of an existing user to improve security. For
 
 #. Run ``docker ps`` and note the name of the Wazuh indexer container.
 
-#. Run ``docker exec -it single-node_wazuh.indexer_1 bash`` to enter the container. ``single-node_wazuh.indexer_1`` is the container name obtained in the previous step.
+#. Run ``docker exec -it single-node-wazuh.indexer-1 bash`` to enter the container. ``single-node-wazuh.indexer-1`` is the container name obtained in the previous step.
 
 #. Set the following variables:
 

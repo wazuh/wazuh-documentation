@@ -21,7 +21,7 @@ This section describes how to upgrade Wazuh Docker deployments starting from ver
 
       .. code-block::
 
-         # git checkout |WAZUH_CURRENT_DOCKER|
+         # git checkout v|WAZUH_CURRENT_DOCKER|
 
 #. Start the new version of Wazuh using ``docker-compose``:
 
