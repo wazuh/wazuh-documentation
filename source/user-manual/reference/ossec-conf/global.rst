@@ -46,6 +46,7 @@ Options
 - `geoipdb`_
 - `rotate_interval`_
 - `max_output_size`_
+- `queue_size`_
 - `agents_disconnection_time`_
 - `agents_disconnection_alert_time`_
 
@@ -428,6 +429,7 @@ Example:
 
 queue_size
 ^^^^^^^^^^
+.. deprecated:: 3.7.0
 
 This sets the size of the message input buffer in Analysisd (number of events).
 
