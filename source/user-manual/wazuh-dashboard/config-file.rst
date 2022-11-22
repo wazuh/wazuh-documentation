@@ -769,8 +769,8 @@ This is an example of the wazuh.yml configuration:
     customization.logo.sidebar: 'custom/images/customization.logo.sidebar.png'
     customization.logo.healthcheck: 'custom/images/customization.logo.healthcheck.svg'
     customization.logo.reports: 'custom/images/customization.logo.reports.jpg'
-    customization.reports.footer: 'Custom footer\nSecond line'
-    customization.reports.header: 'Custom header\nSecond line'
+    customization.reports.footer: '123 Custom footer Ave.\nSan Jose, CA 95148'
+    customization.reports.header: 'Custom Company\ninfo@custom.com\n@social_reference'
 
     #Unauthorized roles
 
