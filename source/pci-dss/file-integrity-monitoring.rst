@@ -14,11 +14,10 @@ First, the Wazuh agent scans the system periodically at a specified interval, th
 
 The :doc:`file integrity monitoring </user-manual/reference/ossec-conf/syscheck>` module is used to meet some sub-requirements of PCI DSS requirement 11 which requires testing the security of systems and networks regularly. This requirement aims to ensure that system components, processes, and bespoke and custom software are tested frequently to ensure security controls continue to reflect a changing environment. Some of the changes in the environment may include the modification and deletion of critical files. This module helps to monitor these file changes and assist in achieving PCI DSS compliance.
 
-
 Use cases
 ---------
 
-- PCI DSS 11.5.2 requires the deployment of a change-detection mechanism (for example, file integrity monitoring tools) to alert personnel of unauthorized modification (including changes, additions, and deletions) of critical system files, configuration files, or content files; and to configure the software to perform critical file comparisons at least weekly.
+-  PCI DSS 11.5.2 requires the deployment of a change-detection mechanism (for example, file integrity monitoring tools) to alert personnel of unauthorized modification (including changes, additions, and deletions) of critical system files, configuration files, or content files; and to configure the software to perform critical file comparisons at least weekly.
 
    In the following sections, we look at configuring Wazuh to do the following:
 
@@ -40,13 +39,13 @@ For this use case, we configure Wazuh to detect when changes are made to a file 
 
    .. code-block:: console 
 
-     # yum install audit
+      # yum install audit
 
    For Debian based systems, use the following:
 
    .. code-block:: console 
 
-     # apt install auditd
+      # apt install auditd
 
 #. Check the full file path for the file or directory to be monitored. In this case, the module monitors the directory ``/root/credit_cards`` for changes:
 
@@ -55,7 +54,7 @@ For this use case, we configure Wazuh to detect when changes are made to a file 
       # ls -l  /root/credit_cards/
 
    .. code-block:: none
-     :class: output      		
+      :class: output      		
 
       total 4
       -rw-r--r--. 1 root root 14 May 16 14:53 cardholder_data.txt
@@ -65,7 +64,7 @@ For this use case, we configure Wazuh to detect when changes are made to a file 
       # cat /root/credit_cards/cardholder_data.txt
 
    .. code-block:: none
-     :class: output    		
+      :class: output    		
 
       User1 = card4
 
@@ -119,8 +118,8 @@ Perform critical file comparisons at specified intervals
 In this use case, we configure Syscheck to detect when changes have been made to monitored files over specific time intervals and show the differences in the file between the last check and the present check. To illustrate this, in the steps below, we configure syscheck to perform a scan every 1 hour and generate an alert for every file change detected.
 
 .. note::	
-	- Syscheck runs scans every 12 hours by default. The scan frequency set is for all monitored files/directories except directories with real-time monitoring enabled.
-	- Depending on the number of files/directories configured for scans, and the frequency of syscheck scans, you may observe increased CPU and memory usage. Please use the frequency option carefully.
+	-  Syscheck runs scans every 12 hours by default. The scan frequency set is for all monitored files/directories except directories with real-time monitoring enabled.
+	-  Depending on the number of files/directories configured for scans, and the frequency of syscheck scans, you may observe increased CPU and memory usage. Please use the frequency option carefully.
 
 
 **On the agent**
@@ -136,27 +135,27 @@ In this use case, we configure Syscheck to detect when changes have been made to
 
    .. code-block:: console 
 
-       <frequency>3600</frequency>
+      <frequency>3600</frequency>
 
 #. Add the following configuration to the ``syscheck`` block of the ``/var/ossec/etc/ossec.conf`` agent configuration file. This enables monitoring of the file. It also ensures that Wazuh generates an alert with the differences when the file is modified.
 
    .. code-block:: xml
 
-       <syscheck>
-          <directories check_all="yes" report_changes="yes" >/root/credit_cards/cardholder_data.txt</directories>
-       </syscheck>
+      <syscheck>
+         <directories check_all="yes" report_changes="yes" >/root/credit_cards/cardholder_data.txt</directories>
+      </syscheck>
 
 
    .. note::
 
-	    If you prefer that the changes are monitored in real-time, you can use the configuration below to monitor the directory where the file is saved and disregard making the frequency modification.
+	   If you prefer that the changes are monitored in real-time, you can use the configuration below to monitor the directory where the file is saved and disregard making the frequency modification.
 
 
    .. code-block:: xml
 
-       <syscheck>
-          <directories check_all="yes" report_changes="yes" realtime="yes" >/root/credit_cards</directories>
-       </syscheck>
+      <syscheck>
+         <directories check_all="yes" report_changes="yes" realtime="yes" >/root/credit_cards</directories>
+      </syscheck>
 
 
 #. Restart the Wazuh agent to apply the changes.

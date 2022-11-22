@@ -10,14 +10,14 @@ Wazuh  uses the system inventory module to gather information about a monitored 
 
 The system inventory module helps to meet the following PCI DSS requirement:
 
-- **Requirement 2 - Apply Secure Configuration to All System Components**: Malicious individuals, both external and internal to an entity, often use default passwords and other vendor default settings to compromise systems. These passwords and settings are well known and are easily determined via public information. Applying secure configurations to system components reduces the means available to an attacker to compromise the system. Changing default passwords, removing unnecessary software, functions, and accounts, and disabling or removing unnecessary services all help to reduce the potential attack surface. 
+-  **Requirement 2 - Apply Secure Configuration to All System Components**: Malicious individuals, both external and internal to an entity, often use default passwords and other vendor default settings to compromise systems. These passwords and settings are well known and are easily determined via public information. Applying secure configurations to system components reduces the means available to an attacker to compromise the system. Changing default passwords, removing unnecessary software, functions, and accounts, and disabling or removing unnecessary services all help to reduce the potential attack surface. 
 
 The system inventory module helps to achieve some of the objectives of this requirement. It keeps an inventory of all endpoints and the processes/daemons running on them. The system inventory module also gets information about the endpoint hardware, OS, and network details. This allows visibility into the PCI DSS relevant assets, enabled network ports, and running processes/daemons, to individuals in an organization.
 
 Use cases
 ---------
 
-- PCI DSS 2.2.4 requires keeping only necessary services, protocols, daemons, and functions enabled and removing or disabling all unnecessary functionality. Using the system inventory module, you can see what processes are running on a specific endpoint and determine if the running process or protocol is necessary for the operation of the asset. You can find this information on the Wazuh dashboard for a specific agent:
+-  PCI DSS 2.2.4 requires keeping only necessary services, protocols, daemons, and functions enabled and removing or disabling all unnecessary functionality. Using the system inventory module, you can see what processes are running on a specific endpoint and determine if the running process or protocol is necessary for the operation of the asset. You can find this information on the Wazuh dashboard for a specific agent:
 
    .. thumbnail:: ../images/pci/processes-are-running-on-a-specific-endpoint-01.png
       :title: Processes running on a specific endpoint 

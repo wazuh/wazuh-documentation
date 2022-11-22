@@ -14,21 +14,21 @@ Wazuh helps ensure PCI DSS compliance by performing log collection, file integri
 
 This guide explains how Wazuh capabilities and modules assist with meeting **PCI DSS version 4.0** requirements:
 
-- `Wazuh for PCI DSS V4.0 Guide (PDF) <https://wazuh.com/resources/WAZUH-PCI-DSS-V4.0-guide.pdf>`_
+-  `Wazuh for PCI DSS V4.0 Guide (PDF) <https://wazuh.com/resources/WAZUH-PCI-DSS-V4.0-guide.pdf>`_
 
 In the following sections, you can find some use cases that show how to use the Wazuh capabilities and modules to meet **PCI DSS version 4.0** requirements.
 
 
 .. toctree::
-    :maxdepth: 1
-    :caption: Contents
+   :maxdepth: 1
+   :caption: Contents
 
-    log-analysis
-    configuration-assessment
-    malware-detection
-    file-integrity-monitoring
-    vulnerability-detection
-    active-response
-    system-inventory
-    dashboard
+   log-analysis
+   configuration-assessment
+   malware-detection
+   file-integrity-monitoring
+   vulnerability-detection
+   active-response
+   system-inventory
+   dashboard
 
