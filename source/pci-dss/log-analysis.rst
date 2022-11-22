@@ -16,9 +16,9 @@ The log collector module helps to meet the following PCI DSS requirement:
 
 - **Requirement 10 - Log and Monitor All Access to System Components and Cardholder Data**: This control requires that user activities, including those by employees, contractors, consultants, internal and external vendors, and other third parties are logged and monitored, and the log data stored for a specified period of time.
 
-	To help meet this requirement, the Wazuh agent collects logs from the endpoints it is deployed on. The log analysis module also receives logs via syslog for network and other syslog-enabled devices. It decodes the logs received to extract relevant information from its fields. After that, it compares the extracted information to the ruleset to look for matches. When the extracted information matches a rule, Wazuh generates an alert. Refer to the :doc:`ruleset section  </user-manual/ruleset/index>` for more information.
+To help meet this requirement, the Wazuh agent collects logs from the endpoints it is deployed on. The log analysis module also receives logs via syslog for network and other syslog-enabled devices. It decodes the logs received to extract relevant information from its fields. After that, it compares the extracted information to the ruleset to look for matches. When the extracted information matches a rule, Wazuh generates an alert. Refer to the :doc:`ruleset section  </user-manual/ruleset/index>` for more information.
 
-	Wazuh also holds logs of events that don't generate an alert. For this it uses its archive feature and the indexer long term storage. For more information on configuring log collection, see the :doc:`Log data collection section </user-manual/capabilities/log-data-collection/index>`.
+Wazuh also holds logs of events that don't generate an alert. For this it uses its archive feature and the indexer long term storage. For more information on configuring log collection, see the :doc:`Log data collection section </user-manual/capabilities/log-data-collection/index>`.
 
 Use cases
 ---------
@@ -49,68 +49,66 @@ Use cases
   		:align: center
   		:width: 80%
 
+- PCI DSS 10.5.1 requires that you retain audit log history for at least 12 months, with at least the most recent three months immediately available for analysis. You can achieve this by enabling Wazuh log archives and configuring `index management policies <https://wazuh.com/blog/wazuh-index-management/>`_. To enable Wazuh log archives, take the following steps: 
 
-  - PCI DSS 10.5.1 requires that you retain audit log history for at least 12 months, with at least the most recent three months immediately available for analysis. You can achieve this by enabling Wazuh log archives and configuring `index management policies <https://wazuh.com/blog/wazuh-index-management/>`_. To enable Wazuh log archives, take the following steps: 
+	**Enable archives monitoring in the Wazuh indexer**:
 
+	#. Set ``<logall_json>yes</logall_json>`` in ``/var/ossec/etc/ossec.conf``.
 
-**Enable archives monitoring in the Wazuh indexer**:
+	#. Set ``archives:`` ``enabled`` to true in ``/etc/filebeat/filebeat.yml``:
 
-#. Set ``<logall_json>yes</logall_json>`` in ``/var/ossec/etc/ossec.conf``.
+		.. code-block:: console
 
-#. Set ``archives:`` ``enabled`` to true in ``/etc/filebeat/filebeat.yml``:
+			archives:
+			enabled: true
 
-   .. code-block:: console
+	#. Restart Filebeat: 
 
-      archives:
-        enabled: true
-
-#. Restart Filebeat: 
-
-   .. include:: /_templates/common/restart_filebeat.rst
+		.. include:: /_templates/common/restart_filebeat.rst
 
 
-#. Restart the Wazuh manager:
+	#. Restart the Wazuh manager:
 
-   .. include:: /_templates/common/restart_manager.rst
+		.. include:: /_templates/common/restart_manager.rst
 
-#. Select **☰** > **Management** > **Stack Management** in the Wazuh dashboard.
+	#. Select **☰** > **Management** > **Stack Management** in the Wazuh dashboard.
 
-	.. thumbnail:: ../images/pci/select-stack-management.png
-		:title: Select Stack Management
-		:align: center
-		:width: 80%
-    
-#. Choose **Index Patterns** and select **Create index pattern**. Use ``wazuh-archives-*`` as the index pattern name.
-
-	.. thumbnail:: ../images/pci/select-create-index-pattern.png
-		:title: Select Create index pattern
-		:align: center
-		:width: 80%
-
-	.. thumbnail:: ../images/pci/define-an-index-pattern.png
-		:title: Select Create index pattern
-		:align: center
-		:width: 80%
-        
-#. Select **timestamp** as the primary time field for use with the global time filter, then proceed to create the index pattern.
-
-	.. thumbnail:: ../images/pci/configure-settings.png
-		:title: Select Create index pattern
-		:align: center
-		:width: 80%
-
-#. Open the menu and select **Discover** under **OpenSearch Dashboards**. Events should be getting reported there.
-
-	.. thumbnail:: ../images/pci/select-discover-1.png
-		:title: Select Discover
-		:align: center
-		:width: 80%
+		.. thumbnail:: ../images/pci/select-stack-management.png
+			:title: Select Stack Management
+			:align: center
+			:width: 80%
 		
-	.. thumbnail:: ../images/pci/select-discover-2.png
-		:title: Select Discover
-		:align: center
-		:width: 80%
-    
+	#. Choose **Index Patterns** and select **Create index pattern**. Use ``wazuh-archives-*`` as the index pattern name.
+
+		.. thumbnail:: ../images/pci/select-create-index-pattern.png
+			:title: Select Create index pattern
+			:align: center
+			:width: 80%
+
+		.. thumbnail:: ../images/pci/define-an-index-pattern.png
+			:title: Select Create index pattern
+			:align: center
+			:width: 80%
+			
+	#. Select **timestamp** as the primary time field for use with the global time filter, then proceed to create the index pattern.
+
+		.. thumbnail:: ../images/pci/configure-settings.png
+			:title: Select Create index pattern
+			:align: center
+			:width: 80%
+
+	#. Open the menu and select **Discover** under **OpenSearch Dashboards**. Events should be getting reported there.
+
+		.. thumbnail:: ../images/pci/select-discover-1.png
+			:title: Select Discover
+			:align: center
+			:width: 80%
+			
+		.. thumbnail:: ../images/pci/select-discover-2.png
+			:title: Select Discover
+			:align: center
+			:width: 80%
+		
 - PCI DSS requirement 10.4.1 requires to review the following audit logs at least once daily:
   
   - All security events.

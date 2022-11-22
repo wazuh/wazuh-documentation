@@ -17,21 +17,21 @@ The system inventory module helps to meet the following PCI DSS requirement:
 Use cases
 ---------
 
-PCI DSS 2.2.4 requires keeping only necessary services, protocols, daemons, and functions enabled and removing or disabling all unnecessary functionality. Using the system inventory module, you can see what processes are running on a specific endpoint and determine if the running process or protocol is necessary for the operation of the asset. You can find this information on the Wazuh dashboard for a specific agent:
+- PCI DSS 2.2.4 requires keeping only necessary services, protocols, daemons, and functions enabled and removing or disabling all unnecessary functionality. Using the system inventory module, you can see what processes are running on a specific endpoint and determine if the running process or protocol is necessary for the operation of the asset. You can find this information on the Wazuh dashboard for a specific agent:
 
-.. thumbnail:: ../images/pci/processes-are-running-on-a-specific-endpoint-01.png
-   :title: Processes running on a specific endpoint 
-   :align: center
-   :width: 80%
+   .. thumbnail:: ../images/pci/processes-are-running-on-a-specific-endpoint-01.png
+      :title: Processes running on a specific endpoint 
+      :align: center
+      :width: 80%
 
-.. thumbnail:: ../images/pci/processes-are-running-on-a-specific-endpoint-02.png
-   :title: Processes running on a specific endpoint 
-   :align: center
-   :width: 80%
+   .. thumbnail:: ../images/pci/processes-are-running-on-a-specific-endpoint-02.png
+      :title: Processes running on a specific endpoint 
+      :align: center
+      :width: 80%
 
-.. thumbnail:: ../images/pci/processes-are-running-on-a-specific-endpoint-03.png
-   :title: Processes running on a specific endpoint 
-   :align: center
-   :width: 80%
+   .. thumbnail:: ../images/pci/processes-are-running-on-a-specific-endpoint-03.png
+      :title: Processes running on a specific endpoint 
+      :align: center
+      :width: 80%
 
-The system inventory module is enabled with all available scans by default in all compatible systems.
+   The system inventory module is enabled with all available scans by default in all compatible systems.

@@ -18,13 +18,13 @@ The :doc:`file integrity monitoring </user-manual/reference/ossec-conf/syscheck>
 Use cases
 ---------
 
-PCI DSS 11.5.2 requires the deployment of a change-detection mechanism (for example, file integrity monitoring tools) to alert personnel of unauthorized modification (including changes, additions, and deletions) of critical system files, configuration files, or content files; and to configure the software to perform critical file comparisons at least weekly.
+- PCI DSS 11.5.2 requires the deployment of a change-detection mechanism (for example, file integrity monitoring tools) to alert personnel of unauthorized modification (including changes, additions, and deletions) of critical system files, configuration files, or content files; and to configure the software to perform critical file comparisons at least weekly.
 
-In the following sections, we look at configuring Wazuh to do the following:
+   In the following sections, we look at configuring Wazuh to do the following:
 
-- Detect changes in a file
-- Perform critical file comparisons at specified intervals
-- Detect file deletion
+   - Detect changes in a file
+   - Perform critical file comparisons at specified intervals
+   - Detect file deletion
 
 
 Detect changes in a file
