@@ -20,4 +20,4 @@ If your PR closes an issue, please use the "closes" keyword indicating the issue
 - [ ] Uses **bold** for user interface elements, _italics_ for key terms or emphasis, and `code` font for Bash commands, file names, REST paths, and code.
 - [ ] Uses three spaces indentation.
 - [ ] Adds or updates meta descriptions accordingly.
-- [ ] Updates the `redirect.js` script if necessary (check [this guide](https://github.com/wazuh/wazuh-documentation/blob/master/NEW_RELEASE.md)).
+- [ ] Updates the `redirects.js` script if necessary (check [this guide](https://github.com/wazuh/wazuh-documentation/blob/master/NEW_RELEASE.md)).
