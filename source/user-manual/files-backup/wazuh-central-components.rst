@@ -6,7 +6,7 @@
 Wazuh central components
 ========================
 
-To create a backup of the central components of your Wazuh installation, follow these steps. Repeat them for every cluster node you're doing the back up.
+To create a backup of the central components of your Wazuh installation, follow these steps. Repeat them on every cluster node you're doing the back up for.
 
 .. note::
 
@@ -117,7 +117,7 @@ Backing up the Wazuh indexer and dashboard
 
 .. note::
 
-   To take snapshots of indices and state, follow the instructions in `OpenSearch snapshots <https://opensearch.org/docs/1.2/opensearch/snapshot-restore/>`__.
+   While you're already backing up alert files, consider backing up the cluster indices and state as well. State includes cluster settings, node information, index metadata, and shard allocation.
 
 Check the backup
 ----------------

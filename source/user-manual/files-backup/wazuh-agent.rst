@@ -15,7 +15,7 @@ To create a backup of your Wazuh agent installation follow these steps.
 Preparing the backup
 --------------------
 
-#. On the agent machine you're doing the back up, run the following commands to create the destination folder where to store the files. These commands use date and time references for the folder name to keep files separated from old backups you might have.
+#. On the agent machine you're doing the back up for, run the following commands to create the destination folder where to store the files. These commands use date and time references for the folder name to keep files separated from old backups you might have.
 
    .. tabs::
 
@@ -30,8 +30,20 @@ Preparing the backup
 
          .. code-block:: doscon
 
-            > set bkp_folder=%userprofile%\wazuh_files_backup\%date:~6,4%-%date:~3,2%-%date:~0,2%_%time:~0,2%-%time:~3,2%
+            > set datetime=%date%-%time%
+            > set datetime=%datetime: =_%
+            > set datetime=%datetime:/=-%
+            > set datetime=%datetime::=_%
+            > set datetime=%datetime:.=_%
+            > set bkp_folder=%userprofile%\wazuh_files_backup\%datetime%
             > mkdir %bkp_folder% && echo %bkp_folder%
+      
+      .. group-tab:: macOS
+
+         .. code-block:: console
+
+            # bkp_folder=~/wazuh_files_backup/$(date +%F_%H:%M)
+            # mkdir --parents $bkp_folder && echo $bkp_folder
 
 Backing up a Wazuh agent
 ------------------------
@@ -66,6 +78,19 @@ Backing up a Wazuh agent
             > xcopy "C:\Program Files (x86)\ossec-agent\logs\*"  %bkp_folder%\logs\ /H /I /K /S /X
             > xcopy "C:\Program Files (x86)\ossec-agent\rids\*"  %bkp_folder%\rids\ /H /I /K /S /X
 
+      .. group-tab:: macOS
+
+         .. code-block:: console
+
+            # cp -rp --parents \
+            /Library/Ossec/etc/client.keys \
+            /Library/Ossec/etc/ossec.conf \
+            /Library/Ossec/etc/internal_options.conf \
+            /Library/Ossec/etc/local_internal_options.conf \
+            /Library/Ossec/etc/*.pem \
+            /Library/Ossec/logs/ \
+            /Library/Ossec/queue/rids/ $bkp_folder
+
 Checking the backup
 -------------------
 
@@ -85,3 +110,9 @@ Checking the backup
          .. code-block:: doscon
 
             > tree %bkp_folder% /f
+
+      .. group-tab:: macOS
+
+         .. code-block:: console
+
+            # find $bkp_folder -type f | sed "s|$bkp_folder/||" | less
