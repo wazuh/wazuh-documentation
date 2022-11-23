@@ -1,9 +1,9 @@
 .. Copyright (C) 2015, Wazuh, Inc.
 
+:orphan:
+
 .. meta::
   :description: Check out how to secure the Wazuh components in this section of our documentation. 
-
-.. _user_manual_secure:
 
 Password management
 ===================

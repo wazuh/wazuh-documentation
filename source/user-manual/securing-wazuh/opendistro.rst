@@ -1,9 +1,9 @@
 .. Copyright (C) 2015, Wazuh, Inc.
 
+:orphan:
+
 .. meta::
   :description: Learn how to secure Opendistro for Elasticsearch.
-
-.. _user_manual_secure_opendistro:
 
 Change the Open Distro for Elasticsearch passwords 
 ==================================================
