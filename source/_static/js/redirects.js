@@ -95,11 +95,11 @@ redirectSameRelease['4.3'] = {
    '/user-manual/securing-wazuh/index.html':
      '/user-manual/user-administration/password-management/index.html',
    '/user-manual/securing-wazuh/wazuh-indexer.html':
-     '/user-manual/user-administration/password-management/wazuh-indexer.html',
+     '/user-manual/user-administration/password-management.html',
    '/user-manual/securing-wazuh/opendistro.html':
-     '/user-manual/user-administration/password-management/opendistro.html',
+     '/user-manual/user-administration/password-management.html',
    '/user-manual/securing-wazuh/elastic-stack.html':  
-     '/user-manual/user-administration/password-management/elastic-stack.html',
+     '/user-manual/user-administration/password-management.html',
    '/user-manual/wazuh-dashboard/rbac.html':
      '/user-manual/user-administration/user-administration/rbac.html', 
  };
@@ -129,8 +129,7 @@ newUrls['4.3'] = [
   '/user-manual/wazuh-dashboard/troubleshooting.html',
   '/user-manual/wazuh-dashboard/multi-tenancy.html',
   '/user-manual/user-administration/index.html',
-  '/user-manual/user-administration/password-management/index.html',
-  '/user-manual/user-administration/password-management/wazuh-indexer.html',
+  '/user-manual/user-administration/password-management.html',
   '/user-manual/user-administration/rbac.html',
   '/user-manual/user-administration/single-sign-on/index.html',
   '/user-manual/user-administration/single-sign-on/okta.html',
