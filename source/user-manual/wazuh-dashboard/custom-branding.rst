@@ -1,7 +1,7 @@
 .. Copyright (C) 2015, Wazuh, Inc.
 
 .. meta::
-   :description: Explore Wazuh dashboard white-labeling capabilities. 
+   :description: Discover how to customize the appearance of your Wazuh dashboard and PDF reports.
 
 How to set up custom branding
 =============================
@@ -18,7 +18,7 @@ To use your own logos in the Wazuh dashboard, click on the `App main logo` and g
 
 -  ``customization.logo.app``. This property sets the `App main logo` image. It has a size limit of 1 MB. It replaces the logo image in the Wazuh main menu located top left. Recommended size: 300 pixels width, 70 pixels height. See #1 in the image below.
 
--  ``customization.logo.healthcheck``. This property sets the `Health check logo` image. It has a size limit of 1 MB. It replaces the logo on top of the check list displayed for the health check routine. Recommended size: 300 pixels width, 70 pixels height. See #2 in the image below.
+-  ``customization.logo.healthcheck``. This property sets the `Health check logo` image. It has a size limit of 1 MB. It replaces the logo on top of the check list displayed during the health check routine. Recommended size: 300 pixels width, 70 pixels height. See #2 in the image below.
 
 -  ``customization.logo.sidebar``. This property sets the `Navigation drawer logo` image. It has a size limit of 1 MB. It replaces the left navigation menu logo image. Recommended size: 80 pixels width, 80 pixels height. See #3 in the image below.
 
@@ -47,8 +47,7 @@ To customize the PDF reports, click on the `App main logo` and go to **Settings*
 Configuration
 -------------
 
-The following settings correspond to the custom branding feature. You can edit them from the user interface as explained in the previous sections, or by editing the  ``/usr/share/wazuh-dashboard/data/wazuh/config/wazuh.yml`` configuration file. 
-
+The following settings correspond to the custom branding feature. Edit them using the user interface as explained above. 
 
 **customization.enabled**
 
