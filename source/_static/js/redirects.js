@@ -101,7 +101,7 @@ redirectSameRelease['4.3'] = {
    '/user-manual/securing-wazuh/elastic-stack.html':  
      '/user-manual/user-administration/password-management.html',
    '/user-manual/wazuh-dashboard/rbac.html':
-     '/user-manual/user-administration/user-administration/rbac.html', 
+     '/user-manual/user-administration/rbac.html', 
  };
  
  /* Pages added in 4.3 */
