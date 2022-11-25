@@ -34,18 +34,16 @@ Access to services and containers
    .. code-block:: none
       :class: output
 
-              Name                           Command               State                                                         Ports
-       ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-       single-node_wazuh.dashboard_1   /entrypoint.sh                   Up      0.0.0.0:443->443/tcp,:::443->443/tcp
-       single-node_wazuh.indexer_1     /entrypoint.sh opensearchw ...   Up      0.0.0.0:9200->9200/tcp,:::9200->9200/tcp
-       single-node_wazuh.manager_1     /init                            Up      0.0.0.0:1514->1514/tcp,:::1514->1514/tcp, 0.0.0.0:1515->1515/tcp,:::1515->1515/tcp, 1516/tcp,
-                                                                                0.0.0.0:514->514/udp,:::514->514/udp, 0.0.0.0:55000->55000/tcp,:::55000->55000/tcp
+      NAME                            COMMAND                  SERVICE             STATUS              PORTS
+      single-node-wazuh.dashboard-1   "/entrypoint.sh"         wazuh.dashboard     running             443/tcp, 0.0.0.0:443->5601/tcp
+      single-node-wazuh.indexer-1     "/entrypoint.sh open…"   wazuh.indexer       running             0.0.0.0:9200->9200/tcp
+      single-node-wazuh.manager-1     "/init"                  wazuh.manager       running             0.0.0.0:1514-1515->1514-1515/tcp, 0.0.0.0:514->514/udp, 0.0.0.0:55000->55000/tcp, 1516/tcp
 
 #. Run the command below from the directory where the ``docker-compose.yml`` file is located to access the command line of each container:
 
    .. code-block:: console
 
-      # docker-compose exec <container name> /bin/bash
+      # docker-compose -it exec <container name> bash
 
 Wazuh service data volumes
 --------------------------
@@ -98,6 +96,6 @@ To execute commands in the Wazuh manager container, you can execute a shell:
 
 .. code-block:: console
 
-   # docker exec -it single-node_wazuh.manager_1 bash
+   # docker exec -it single-node-wazuh.manager-1 bash
 
 Every change made on this shell persists as long as you have the data volumes configured correctly.

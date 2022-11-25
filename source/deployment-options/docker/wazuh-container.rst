@@ -258,6 +258,8 @@ Change the password of an existing user
 
 You can change the default password of an existing user to improve security. For example, you can change the default password of the Wazuh indexer *admin* user.
 
+Perform the following steps from your ``single-node`` directory. If you have a multi-node deployment, you must adapt them and perform them from your ``multi-node`` directory.
+
 #. Stop the deployment stack if it’s running:
 
    .. code-block:: console
@@ -270,7 +272,7 @@ You can change the default password of an existing user to improve security. For
   
       # docker run --rm -ti wazuh/wazuh-indexer:|WAZUH_CURRENT_DOCKER| bash /usr/share/wazuh-indexer/plugins/opensearch-security/tools/hash.sh
 
-#. Copy the generated hash. Replace the current ``admin`` user hash in the ``config/wazuh_indexer/internal_users.yml`` file if using *single-node* deployment.
+#. Copy the generated hash. Replace the current ``admin`` user hash in the ``/single-node/config/wazuh_indexer/internal_users.yml`` file.
 
 #. Change all occurrences of the default ``INDEXER_PASSWORD`` in the ``docker-compose.yml`` file to the new password.
 
