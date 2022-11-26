@@ -46,7 +46,7 @@ Load a single rule file.
 rule_dir
 ^^^^^^^^
 
-Load a directory of rules. The files will be loaded in alphabetical order and any duplicate filenames will be skipped.
+Load a directory of rules. The files will be loaded in alphabetical order, and any duplicate filenames will be skipped.
 
 +--------------------+------------------------------------+
 | **Default value**  | ruleset/rules                      |

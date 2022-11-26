@@ -74,7 +74,7 @@ Bucket options
 type
 ^^^^
 
-Specifies type of bucket. It is an attribute of the ``bucket`` tag.
+Specifies the type of bucket. It is an attribute of the ``bucket`` tag.
 
 +--------------------+-------------+
 | **Default value**  | N/A         |

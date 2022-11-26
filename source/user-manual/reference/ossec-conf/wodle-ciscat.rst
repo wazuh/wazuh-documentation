@@ -91,7 +91,7 @@ Disables the CIS-CAT wodle.
 timeout
 ^^^^^^^
 
-Timeout for each evaluation. In case the execution takes longer that the specified timeout, it stops.
+Timeout for each evaluation. In case the execution takes longer than the specified timeout, it stops.
 
 +--------------------+-----------------------------+
 | **Default value**  | 1800                        |
@@ -112,7 +112,7 @@ Define where Java is located. If this parameter is not set, the wodle will searc
 +--------------------+------------------+
 
 .. warning::
-    For this field, it can be set a full path or a relative path. Whether you specify a relative path, it concatenates to the Wazuh installation path. ``ciscat_path`` has the same behavior.
+    For this field, it can be set as a full path or a relative path. Whether you specify a relative path, it concatenates with the Wazuh installation path. ``ciscat_path`` has the same behavior.
 
 ciscat_path
 ^^^^^^^^^^^^

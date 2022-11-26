@@ -162,7 +162,7 @@ Verify the SHA256 sum of the binary or the script specified on the command optio
 skip_verification
 ^^^^^^^^^^^^^^^^^
 
-Run the command defined although the checksum does not match.
+Run the command defined, although the checksum does not match.
 In this case, the agent will log that the checksum verification failed but will run the application.
 
 +--------------------+---------+

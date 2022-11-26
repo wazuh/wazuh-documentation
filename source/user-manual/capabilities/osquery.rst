@@ -45,15 +45,17 @@ A complete list of all the available tables can be found `here <https://osquery.
 Configuration
 -------------
 
-You need a working Osquery installation in your system. See `downloads page <https://osquery.io/downloads/official/4.1.2>`_ for details.
+You need a working Osquery installation in your system. See `downloads page <https://osquery.io/downloads/official/>`_ for details.
 
 Red Hat, CentOS and Fedora:
+
+-  For some distributions, you might need to install ``yum-utils`` first.
 
 .. code-block:: console
 
     # curl -L https://pkg.osquery.io/rpm/GPG | tee /etc/pki/rpm-gpg/RPM-GPG-KEY-osquery
     # yum-config-manager --add-repo https://pkg.osquery.io/rpm/osquery-s3-rpm.repo
-    # yum-config-manager --enable osquery-s3-rpm
+    # yum-config-manager --enable osquery-s3-rpm-repo
     # yum install osquery
 
 Debian and Ubuntu based Linux distributions:

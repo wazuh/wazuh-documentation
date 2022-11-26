@@ -72,7 +72,7 @@ Daemon multithreaded internal structure
 
 4. Each writer thread:
     a. Takes the event from the queue.
-    b. Stores the element in memory to be written on it's own log file.
+    b. Stores the element in memory to be written on its own log file.
 
 5. Logging:
     a. Every 1 second, all the log files are written to the HDD.
@@ -88,14 +88,14 @@ The image below shows the flow for a Rootcheck event that generates an alert.
     :align: center
     :width: 100%
 
-As you can see, every part of the Analysisd multithreaded engine is independent from one another, except for the rule matching threads that shares the same queue.
+As you can see, every part of the Analysisd multithreaded engine is independent of one another, except for the rule-matching threads that share the same queue.
 
 Automatic leveling of the threads
 ----------------------------------
 
 By default, when Analysisd starts it will spawn the number of threads based on the number of CPU cores of the machine where it's running. For example, if the machine has 4 physical cores, the following threads will be created:
 
-    - 4 threads for **decoders** (4 for Syscheck, 4 for Syscollector, 4 for Rootcheck, 4 for Hostinfo and 4 for others).
+    - 4 threads for **decoders** (4 for Syscheck, 4 for Syscollector, 4 for Rootcheck, 4 for Hostinfo, and 4 for others).
     - 4 threads for **rule matching**.
 
 This default configuration can be changed on the ``internal_options.conf`` file by changing the fields from the table below:
@@ -105,7 +105,7 @@ This default configuration can be changed on the ``internal_options.conf`` file 
 +                                              +---------------+---------------------------------------------------------------------+
 |                                              | Default value | 0                                                                   |
 +                                              +---------------+---------------------------------------------------------------------+
-|                                              | Allowed value | 0: Sets the number of threads according to the number of cpu cores. |
+|                                              | Allowed value | 0: Sets the number of threads according to the number of CPU cores. |
 +                                              +               +---------------------------------------------------------------------+
 |                                              |               | Any integer between 0 and 32.                                       |
 +----------------------------------------------+---------------+---------------------------------------------------------------------+
@@ -113,7 +113,7 @@ This default configuration can be changed on the ``internal_options.conf`` file 
 +                                              +---------------+---------------------------------------------------------------------+
 |                                              | Default value | 0                                                                   |
 +                                              +---------------+---------------------------------------------------------------------+
-|                                              | Allowed value | 0: Sets the number of threads according to the number of cpu cores. |
+|                                              | Allowed value | 0: Sets the number of threads according to the number of CPU cores. |
 +                                              +               +---------------------------------------------------------------------+
 |                                              |               | Any integer between 0 and 32.                                       |
 +----------------------------------------------+---------------+---------------------------------------------------------------------+
@@ -121,7 +121,7 @@ This default configuration can be changed on the ``internal_options.conf`` file 
 +                                              +---------------+---------------------------------------------------------------------+
 |                                              | Default value | 0                                                                   |
 +                                              +---------------+---------------------------------------------------------------------+
-|                                              | Allowed value | 0: Sets the number of threads according to the number of cpu cores. |
+|                                              | Allowed value | 0: Sets the number of threads according to the number of CPU cores. |
 +                                              +               +---------------------------------------------------------------------+
 |                                              |               | Any integer between 0 and 32.                                       |
 +----------------------------------------------+---------------+---------------------------------------------------------------------+
@@ -129,7 +129,7 @@ This default configuration can be changed on the ``internal_options.conf`` file 
 +                                              +---------------+---------------------------------------------------------------------+
 |                                              | Default value | 0                                                                   |
 +                                              +---------------+---------------------------------------------------------------------+
-|                                              | Allowed value | 0: Sets the number of threads according to the number of cpu cores. |
+|                                              | Allowed value | 0: Sets the number of threads according to the number of CPU cores. |
 +                                              +               +---------------------------------------------------------------------+
 |                                              |               | Any integer between 0 and 32.                                       |
 +----------------------------------------------+---------------+---------------------------------------------------------------------+
@@ -137,7 +137,7 @@ This default configuration can be changed on the ``internal_options.conf`` file 
 +                                              +---------------+---------------------------------------------------------------------+
 |                                              | Default value | 0                                                                   |
 +                                              +---------------+---------------------------------------------------------------------+
-|                                              | Allowed value | 0: Sets the number of threads according to the number of cpu cores. |
+|                                              | Allowed value | 0: Sets the number of threads according to the number of CPU cores. |
 +                                              +               +---------------------------------------------------------------------+
 |                                              |               | Any integer between 0 and 32.                                       |
 +----------------------------------------------+---------------+---------------------------------------------------------------------+
@@ -145,7 +145,7 @@ This default configuration can be changed on the ``internal_options.conf`` file 
 +                                              +---------------+---------------------------------------------------------------------+
 |                                              | Default value | 0                                                                   |
 +                                              +---------------+---------------------------------------------------------------------+
-|                                              | Allowed value | 0: Sets the number of threads according to the number of cpu cores. |
+|                                              | Allowed value | 0: Sets the number of threads according to the number of CPU cores. |
 +                                              +               +---------------------------------------------------------------------+
 |                                              |               | Any integer between 0 and 32.                                       |
 +----------------------------------------------+---------------+---------------------------------------------------------------------+
@@ -153,9 +153,9 @@ This default configuration can be changed on the ``internal_options.conf`` file 
 +                                              +---------------+---------------------------------------------------------------------+
 |                                              | Default value | 0                                                                   |
 +                                              +---------------+---------------------------------------------------------------------+
-|                                              | Allowed value | 0: Sets the number of threads according to the number of cpu cores. |
+|                                              | Allowed value | 0: Sets the number of threads according to the number of CPU cores. |
 +                                              +               +---------------------------------------------------------------------+
 |                                              |               | Any integer between 0 and 32.                                       |
 +----------------------------------------------+---------------+---------------------------------------------------------------------+
 
-For example, if the mananger receives little Rootcheck events, we can decrease the number of threads for the Rootcheck decoder.
+For example, if the manager receives a few Rootcheck events, we can decrease the number of threads for the Rootcheck decoder.

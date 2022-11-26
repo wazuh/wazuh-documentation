@@ -83,7 +83,7 @@ Time between system scans.
 scan_on_start
 ^^^^^^^^^^^^^
 
-Run a system scan immediately when service is started.
+Run a system scan immediately when the service is started.
 
 +--------------------+---------+
 | **Default value**  | yes     |

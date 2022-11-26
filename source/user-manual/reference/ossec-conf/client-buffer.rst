@@ -36,7 +36,7 @@ Toggles the agent buffer on and off. When set to ``yes``, the agent will send ev
 +--------------------+---------------------+
 
 .. warning::
-	Disabling this functionality in large environments may overwhelm the manager and the network causing them to fail.
+	Disabling this functionality in large environments may overwhelm the manager and the network, causing them to fail.
 
 queue_size
 ^^^^^^^^^^
