@@ -110,21 +110,27 @@
   h5,
   h6 {
     .headerlink {
-      display: inline-block;
+      display: inline-flex;
       line-height: 1;
       text-decoration: none;
+      word-break: keep-all;
+      white-space: nowrap;
+      width: 24px;
+      overflow: hidden;
+      align-items: center;
+      justify-content: flex-end;
 
       &::after {
         display: inline-block;
         width: 1rem;
         height: 1rem;
-        padding-left: 10px;
         font: normal 700 normal .95rem/1 FontAwesome, sans-serif;
         text-align: right;
         vertical-align: middle;
         content: "\f0c1";
         opacity: 0;
         transition: opacity ease-in .1s;
+        margin-left: 20px;
       }
     }
 
