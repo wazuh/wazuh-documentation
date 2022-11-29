@@ -63,27 +63,28 @@ All the available options to run the script are:
 | -h / --help                                  | Shows help.                                                                                                 |
 +----------------------------------------------+-------------------------------------------------------------------------------------------------------------+
 
-Change the password for single user
------------------------------------
+Changing the password for single user
+-------------------------------------
 
-To change the password for a single user, run the script with the ``-u`` option. You may indicate the new password with the option ``-p``. If no password is specified, the script will generate a random one. 
+To change the password for a single user, run the script with the ``-u`` option. You may indicate the new password with the option ``-p``. The password must have a length between 8 and 64 characters and contain at least one upper and lower case letter, a number and one of the following symbols: ``.*+?-``. If no password is specified, the script will generate a random one. 
 
   .. code-block:: console
   
-    # bash wazuh-passwords-tool.sh -u admin -p mypassword
+    # bash wazuh-passwords-tool.sh -u admin -p Secr3tP4ssw*rd
 
 This is the output of the script:
 
-  .. code-block:: none
-    :class: output 
+   .. code-block:: none
+      :class: output 
 
-    28/04/2022 10:17:50 INFO: Generating password hash
-    28/04/2022 10:17:55 WARNING: Passwords changed. Remember to update the password in the Wazuh dashboard and Filebeat nodes if necessary, and restart the services.
-    
-Change the passwords for all users
-----------------------------------
+      INFO: Generating password hash
+      WARNING: Password changed. Remember to update the password in the Wazuh dashboard and Filebeat nodes if necessary, and restart the services.
 
-To generate and change passwords for all users, run the script with the ``-a`` option:
+  
+Changing the passwords for all users
+------------------------------------
+
+To generate and change passwords for all the Wazuh indexer users, run the script with the ``-a`` option:
 
   .. code-block:: console
   
@@ -94,20 +95,42 @@ This is the output of the script:
   .. code-block:: none
     :class: output 
 
-    28/04/2022 10:25:31 INFO: The password for user admin is EYzV0Q07poX53W395uChGVKYNEGMEkfe
-    28/04/2022 10:25:31 INFO: The password for user kibanaserver is PoXXlnylEcV3VKdJWqFzVAomHEmb1WO4
-    28/04/2022 10:25:31 INFO: The password for user kibanaro is Kp6Xtohsz7dMUATguwf2bD80MTUnrZC9
-    28/04/2022 10:25:31 INFO: The password for user logstash is C1uDj6FZCyrPQKPp2KzazX7TAkdRmRjz
-    28/04/2022 10:25:31 INFO: The password for user readall is gmDRDY7J4R3zt85BLiY0NS23oIUhvkd2
-    28/04/2022 10:25:31 INFO: The password for user snapshotrestore is U5MZg6WeXNUP9NPPophRoMtA9GQNEvdR
-    28/04/2022 10:25:31 INFO: The password for user wazuh_admin is WrWzM8egHJY2CfxngapAeSchA3yq3X3t
-    28/04/2022 10:25:31 INFO: The password for user wazuh_user is oCwLLG88wb7x5OpnxOPjclVpqWgq9s7W
-    28/04/2022 10:25:31 WARNING: Passwords changed. Remember to update the password in the Wazuh dashboard and Filebeat nodes if necessary, and restart the services.
+    INFO: Wazuh API admin credentials not provided, Wazuh API passwords not changed.
+    INFO: The password for user admin is kwd139yG?YoIK?lRnqcXQ4R4gJDlAqKn
+    INFO: The password for user kibanaserver is Bu1WIELh9RdRlf*oGjinN1?yhF6XzA7V
+    INFO: The password for user kibanaro is 7kZvau11cPn6Y1SbOsdr8Kwr*BRiK3u+
+    INFO: The password for user logstash is SUbk4KTmLl*geQbUg0c5tyfwahjDMhx5
+    INFO: The password for user readall is ?w*Itj1Lgz.5w.C7vOw0Kxi7G94G8bG*
+    INFO: The password for user snapshotrestore is Z6UXgM8Sr0bfV.i*6yPPEUY3H6Du2rdz
+    WARNING: Wazuh indexer passwords changed. Remember to update the password in the Wazuh dashboard and Filebeat nodes if necessary, and restart the services.
+
 
 If the options ``-au`` and ``-ap`` are used, and the Wazuh manager is installed, the script will also change the passwords for the API users.
 
-Change the passwords using a formatted file
---------------------------------------------
+  .. code-block:: console
+  
+    # sudo bash wazuh-passwords-tool.sh -a -au wazuh -ap KTb+Md+rR74J2yHfoGGnFGHGm03Gadyu 
+
+This is the output of the script:
+
+   .. code-block:: none
+      :class: output 
+
+      INFO: The password for user admin is Wkw+b2rM6BEOwUmGfr*m*i1ithWw.dg2
+      INFO: The password for user kibanaserver is 5Y0lIfCwmjkus9nWAAVxMInI+Eth25hr
+      INFO: The password for user kibanaro is kJG7fHX18.UJIZoNip5nDo*34DN+cGBL
+      INFO: The password for user logstash is wuabgegtKsQABems5RNJfV0AOmxT?81T
+      INFO: The password for user readall is gKSuQFGG.Sa0L9gzJX5WZHPP3Y4Es+sU
+      INFO: The password for user snapshotrestore is UdyI8ToXkgVCNOPfJ*FX*a5vybeB.rUw
+      WARNING: Wazuh indexer passwords changed. Remember to update the password in the Wazuh dashboard and Filebeat nodes if necessary, and restart the services.
+      INFO: The password for Wazuh API user wazuh is zG0yTsAiettOXWEB79Aca1jbQ5.UeW3M
+      INFO: The password for Wazuh API user wazuh-wui is JmKiaCBQo?4Ne0yrM4+n7kGdXGfCmVjO
+      INFO: Updated wazuh-wui user password in wazuh dashboard. Remember to restart the service.
+
+
+
+Changing the passwords using a formatted file
+---------------------------------------------
 
 To use a formatted file to indicate the passwords, run the script with the ``-f`` option followed by the file path. Use the following pattern to indicate the users and passwords in the formatted file: 
 
@@ -131,5 +154,72 @@ If the ``-a`` option is used in combination with the ``-f`` option, all users no
 
 The options ``-au`` and ``-ap`` are necessary to change the passwords for the API users.
 
-In distributed deployments you will need to change the passwords in the nodes running the Wazuh dashboard and Filebeat, you can use ``wazuh-passwords-tool.sh`` to do this.
 
+Changing the passwords in a distributed environment
+---------------------------------------------------
+
+#. On `any Wazuh indexer node`, use the Wazuh passwords tool to change the passwords of the Wazuh indexer users. 
+
+   .. code-block:: console
+  
+      # /usr/share/wazuh-indexer/plugins/opensearch-security/tools/wazuh-passwords-tool.sh --change-all
+  
+   .. code-block:: console
+      :class: output
+
+      INFO: Wazuh API admin credentials not provided, Wazuh API passwords not changed.
+      INFO: The password for user admin is wcAny.XUwOVWHFy.+7tW9l8gUW1L8N3j
+      INFO: The password for user kibanaserver is qy6fBrNOI4fD9yR9.Oj03?pihN6Ejfpp
+      INFO: The password for user kibanaro is Nj*sSXSxwntrx3O7m8ehrgdHkxCc0dna
+      INFO: The password for user logstash is nQg1Qw0nIQFZXUJc8r8+zHVrkelch33h
+      INFO: The password for user readall is s0iWAei?RXObSDdibBfzSgXdhZCD9kH4
+      INFO: The password for user snapshotrestore is Mb2EHw8SIc1d.oz.nM?dHiPBGk7s?UZB
+      WARNING: Wazuh indexer passwords changed. Remember to update the password in the Wazuh dashboard and Filebeat nodes if necessary, and restart the services.
+
+#. On your `Wazuh server master node`, download the Wazuh passwords tool and use it to change the passwords of the Wazuh API users.
+
+   .. code-block:: console
+  
+      # curl -sO https://packages.wazuh.com/|WAZUH_CURRENT_MINOR|/wazuh-passwords-tool.sh
+      # bash wazuh-passwords-tool.sh --change-all --admin-user wazuh --admin-password wazuh
+  
+   .. code-block:: console
+      :class: output
+
+      INFO: The password for Wazuh API user wazuh is ivLOfmj7.jL6*7Ev?UJoFjrkGy9t6Je.
+      INFO: The password for Wazuh API user wazuh-wui is fL+f?sFRPEv5pYRE559rqy9b6G4Z5pVi
+
+#. On `all your Wazuh server nodes`, run the following command to update the `admin` password in the Filebeat keystore. Replace ``<admin-password>`` with the random password generated in the first step.
+      
+   .. code-block:: console
+
+      # echo <admin-password> | filebeat keystore add password --stdin --force
+
+#. Restart Filebeat to apply the change.
+
+   .. include:: /_templates/common/restart_filebeat.rst
+
+   .. note:: Repeat steps 3 and 4 on `every Wazuh server node`.
+       
+#. On your `Wazuh dashboard node`, run the following command to update the `kibanaserver` password in the Wazuh dashboard keystore. Replace ``<kibanaserver-password>`` with the random password generated in the first step.
+
+   .. code-block:: console
+
+      # echo <kibanaserver-password> | /usr/share/wazuh-dashboard/bin/opensearch-dashboards-keystore --allow-root add -f --stdin opensearch.password
+
+#. Update the ``/usr/share/wazuh-dashboard/data/wazuh/config/wazuh.yml`` configuration file with the new `wazuh-wui` password generated in the second step.
+
+   .. code-block:: yaml
+      :emphasize-lines: 6
+     
+      hosts:
+        - default:
+            url: https://localhost
+            port: 55000
+            username: wazuh-wui
+            password: <wazuh-wui-password>
+            run_as: false
+
+#. Restart the Wazuh dashboard to apply the changes.
+
+   .. include:: /_templates/common/restart_dashboard.rst
