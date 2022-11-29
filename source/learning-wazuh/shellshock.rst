@@ -88,7 +88,7 @@ Send a Shellshock probe to the web server and see the resulting alert
 
       <rule id="31168" level="15">
         <if_sid>31108</if_sid>
-        <regex>"\(\)\s*{\s*\w*:;\s*}\s*;|"\(\)\s*{\s*\w*;\s*}\s*;</regex>
+        <regex>\(\)\s*{\s*\w*:;\s*}\s*;|"\(\)\s*{\s*\w*;\s*}\s*;</regex>
         <description>Shellshock attack detected</description>
         <mitre>
           <id>T1068</id>
