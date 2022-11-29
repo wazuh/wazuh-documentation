@@ -8,7 +8,7 @@ File integrity monitoring
 
 File Integrity Monitoring (FIM) helps in auditing sensitive files and meeting regulatory compliance requirements. Wazuh has an inbuilt :doc:`FIM </user-manual/capabilities/file-integrity/index>` module that monitors file system changes to detect the creation, modification, and deletion of files.
 
-In this use case, we use the Wazuh FIM module to detect changes in monitored directories on Ubuntu and Windows endpoints. The Wazuh FIM module enriches alert data by fetching information about the user and process that made the changes using :doc:`who-data audit </user-manual/capabilities/auditing-whodata/index>`.
+This use case uses the Wazuh FIM module to detect changes in monitored directories on Ubuntu and Windows endpoints. The Wazuh FIM module enriches alert data by fetching information about the user and process that made the changes using :doc:`who-data audit </user-manual/capabilities/auditing-whodata/index>`.
 
 Infrasctructure
 ---------------
@@ -27,9 +27,9 @@ Configuration
 Ubuntu endpoint
 ^^^^^^^^^^^^^^^
 
-Take the following steps to configure the Ubuntu endpoint to monitor filesystem changes in the ``/root`` directory.
+Perform the following steps to configure the Wazuh agent to monitor filesystem changes in the ``/root`` directory.
 
-#. Edit the Wazuh agent ``/var/ossec/etc/ossec.conf`` configuration file. Add the directories for monitoring within the ``<syscheck>`` block. For this use case, we monitor the ``/root`` directory. To get additional information about the user and process that made the changes, enable :doc:`who-data audit </user-manual/capabilities/auditing-whodata/who-linux>`:
+#. Edit the Wazuh agent ``/var/ossec/etc/ossec.conf`` configuration file. Add the directories for monitoring within the ``<syscheck>`` block. For this use case, you configure Wazuh to monitor the ``/root`` directory. To get additional information about the user and process that made the changes, enable :doc:`who-data audit </user-manual/capabilities/auditing-whodata/who-linux>`:
 
    .. code-block:: xml
 
@@ -49,9 +49,9 @@ Take the following steps to configure the Ubuntu endpoint to monitor filesystem 
 Windows endpoint
 ^^^^^^^^^^^^^^^^
 
-Take the following steps to configure the Windows endpoint to monitor filesystem changes in the ``C:\Users\Administrator\Desktop`` directory.
+Take the following steps to configure the Wazuh agent to monitor filesystem changes in the ``C:\Users\Administrator\Desktop`` directory.
 
-#. Edit the ``C:\Program Files (x86)\ossec-agent\ossec.conf`` configuration file on the monitored Windows endpoint. Add the directories for monitoring within the ``<syscheck>`` block. For this use case, we monitor the ``C:\Users\Administrator\Desktop`` directory. To get additional information about the user and process that made the changes, enable :doc:`who-data audit </user-manual/capabilities/auditing-whodata/who-windows>`:
+#. Edit the ``C:\Program Files (x86)\ossec-agent\ossec.conf`` configuration file on the monitored Windows endpoint. Add the directories for monitoring within the ``<syscheck>`` block. For this use case, you  configure Wazuh to monitor the ``C:\Users\Administrator\Desktop`` directory. To get additional information about the user and process that made the changes, enable :doc:`who-data audit </user-manual/capabilities/auditing-whodata/who-windows>`:
 
    .. code-block:: xml
 
@@ -72,16 +72,16 @@ As an alternative to local configurations on the Wazuh agents, you can :doc:`cen
 Test the configuration
 ----------------------
 
-#. Create a text file in the monitored directory and save it.
+#. Create a text file in the monitored directory then wait for 5 seconds.
 
-#. Wait for 5 seconds then add content to the text file and save it.
+#. Add content to the text file and save it. Wait for 5 seconds.
 
 #. Delete the text file from the monitored directory.
 
 Visualize the alerts
 --------------------
 
-You can visualize the alert data in the Wazuh dashboard. To do this, go to the Security events module and add the filters in the search bar to query the alerts:
+You can visualize the alert data in the Wazuh dashboard. To do this, go to the **Security events** module and add the filters in the search bar to query the alerts:
 
 -  Ubuntu - ``rule.id: is one of 550,553,554``
 

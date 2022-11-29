@@ -6,26 +6,24 @@
 Blocking a known malicious actor
 ================================
 
-In this use case, we demonstrate how to block malicious IP addresses from accessing web resources on a web server. We set up Apache web servers on Ubuntu and Windows endpoints, and then try to access them from a RHEL endpoint.
+In this use case, we demonstrate how to block malicious IP addresses from accessing web resources on a web server. You set up Apache web servers on Ubuntu and Windows endpoints, and try to access them from a RHEL endpoint.
 
-We make use of a public IP reputation database that contains the IP addresses of some malicious actors. An IP reputation database is a collection of IP addresses that have been flagged as malicious. We consider the RHEL endpoint as the malicious actor, therefore we add its IP address to the reputation database.
+This case uses a public IP reputation database that contains the IP addresses of some malicious actors. An IP reputation database is a collection of IP addresses that have been flagged as malicious. The RHEL endpoint plays the role of the malicious actor here, therefore you add its IP address to the reputation database. Then, configure Wazuh to block the RHEL endpoint from accessing web resources on the Apache web servers for 60 seconds. It’s a way of discouraging attackers from continuing to carry out their malicious activities.
 
-We configure Wazuh to block the RHEL endpoint from accessing web resources on the Apache web servers for 60 seconds. It is a way of discouraging attackers from continuing to carry out their malicious activities.
-
-In this use case, we make use of the Wazuh :doc:`CDB list </user-manual/ruleset/cdb-list>` and :doc:`active response </getting-started/use-cases/active-response>` capabilities.
+In this use case, you use the Wazuh :doc:`CDB list </user-manual/ruleset/cdb-list>` and :doc:`active response </getting-started/use-cases/active-response>` capabilities.
 
 Infrastructure
 --------------
 
-+-----------+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-| Endpoint  | Description                                                                                                                                                                |
-+===========+============================================================================================================================================================================+
-| RHEL      | This is the attacker endpoint that connects to the victim's web server. We make use of the Wazuh CDB list capability to flag its IP address as malicious.                  |
-+-----------+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-| Ubuntu    | Victim endpoint running an Apache 2.4.54 web server. We make use of the Wazuh active response capabilities to automatically block connections from the attacker endpoint.  |
-+-----------+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-| Windows   | Victim endpoint running an Apache 2.4.54 web server. We make use of the Wazuh active response capability to block connections from the attacker endpoint.                  |
-+-----------+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
++-----------+---------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| Endpoint  | Description                                                                                                                                                         |
++===========+=====================================================================================================================================================================+
+| RHEL      | Attacker endpoint connecting to the victim's web server on which you use Wazuh CDB list capability to flag its IP address as malicious.                             |
++-----------+---------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| Ubuntu    | Victim endpoint running an Apache 2.4.54 web server. Here, you use the Wazuh active response module to automatically block connections from the attacker endpoint.  |
++-----------+---------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| Windows   | Victim endpoint running an Apache 2.4.54 web server. Here, you use the Wazuh active response module to automatically block connections from the attacker endpoint.  |
++-----------+---------------------------------------------------------------------------------------------------------------------------------------------------------------------+
 
 Configuration
 -------------
@@ -33,38 +31,36 @@ Configuration
 Ubuntu endpoint
 ^^^^^^^^^^^^^^^
 
-Take the following steps to install and configure an Apache web server on the Ubuntu endpoint.
+Perform the following steps to install an Apache web server and monitor its logs with the Wazuh agent.
 
-#. Install the Apache web server:
-
-   #. Update local packages and install the Apache web server:
-
-      .. code-block:: console
-
-         $ sudo apt update
-         $ sudo apt install apache2
-
-   #. Modify the firewall to allow external access to web ports. Skip this step if the firewall is disabled:
-
-      .. code-block:: console
-
-         $ sudo ufw status
-         $ sudo ufw app list
-         $ sudo ufw allow 'Apache'
-
-   #. Check the status of the Apache service to verify that the web server is running:
-
-      .. code-block:: console
-
-         $ sudo systemctl status apache2
-
-   #. Verify the installation by opening ``http://<UBUNTU_IP>`` in a browser to view the Apache landing page or use the ``curl`` command:
+#. Update local packages and install the Apache web server:
 
    .. code-block:: console
 
+      $ sudo apt update
+      $ sudo apt install apache2
+
+#. If the firewall is enabled, modify the firewall to allow external access to web ports. Skip this step if the firewall is disabled:
+
+   .. code-block:: console
+
+      $ sudo ufw status
+      $ sudo ufw app list
+      $ sudo ufw allow 'Apache'
+
+#. Check the status of the Apache service to verify that the web server is running:
+
+   .. code-block:: console
+
+      $ sudo systemctl status apache2
+
+#. Use the ``curl`` command or open ``http://<UBUNTU_IP>`` in a browser to view the Apache landing page and verify the installation:
+
+   .. code-block:: console
+   
       $ curl http://<UBUNTU_IP>
 
-#. Configure the Wazuh agent to monitor the Apache access logs by adding the following to the configuration file ``/var/ossec/etc/ossec.conf``:
+#. Add the following to ``/var/ossec/etc/ossec.conf`` file to configure the Wazuh agent and monitor the Apache access logs:
 
    .. code-block:: xml
 
@@ -82,29 +78,35 @@ Take the following steps to install and configure an Apache web server on the Ub
 Windows endpoint
 ^^^^^^^^^^^^^^^^
 
-Take the following steps to install and configure an Apache web server on the Windows endpoint.
+Install the Apache web server
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-#. Install the Apache web server:
+Perform the following steps to install and configure an Apache web server.
 
-   #. Install the latest `Visual C++ Redistributable package <https://aka.ms/vs/17/release/vc_redist.x64.exe>`__.
+#. Install the latest `Visual C++ Redistributable package <https://aka.ms/vs/17/release/vc_redist.x64.exe>`__.
 
-   #. Download the Apache web server `ZIP installation file <https://www.apachelounge.com/download/VS16/binaries/httpd-2.4.54-win64-VS16.zip>`__. This is an already compiled binary for Windows operating systems.
+#. Download the Apache web server `ZIP installation file <https://www.apachelounge.com/download/VS16/binaries/httpd-2.4.54-win64-VS16.zip>`__. This is an already compiled binary for Windows operating systems.
 
-   #. Unzip the contents of the Apache web server zip file.
+#. Unzip the contents of the Apache web server zip file and copy the extracted ``Apache24`` folder to the ``C:`` directory.
 
-   #. Copy the extracted ``Apache24`` folder to the ``C:`` directory.
+#. Navigate to the ``C:\Apache24\bin`` folder and run the following command in a PowerShell terminal with administrator privileges:
 
-   #. Navigate to the ``C:\Apache24\bin`` folder and run the following command in a PowerShell terminal with administrator privileges:
+   .. code-block:: doscon
 
-      .. code-block:: doscon
+      > C:\Apache24\bin>httpd.exe
 
-         > C:\Apache24\bin>httpd.exe
-   
-   #. There will be a Windows Defender Firewall pop-up the first time the Apache binary is run. Click on Allow Access to allow the Apache HTTP server to communicate on your private or public networks depending on your network setting. This creates an inbound rule in your firewall to allow incoming traffic on port 80.
+   The first time you run the Apache binary a Windows Defender Firewall pops up.
 
-   #. Verify the installation by opening ``http://<WINDOWS_IP>`` in a browser to view the Apache landing page. Also, verify that this URL can be reached from the attacker endpoint.
+#. Click on **Allow Access**. This allows the Apache HTTP server to communicate on your private or public networks depending on your network setting. It creates an inbound rule in your firewall to allow incoming traffic on port 80.
 
-#. Configure the Wazuh agent to monitor the Apache access logs by adding the following to the configuration file ``C:\Program Files (x86)\ossec-agent\ossec.conf``:
+#. Open ``http://<WINDOWS_IP>`` in a browser to view the Apache landing page and verify the installation. Also, verify that this URL can be reached from the attacker endpoint.
+
+Configure the Wazuh agent
+~~~~~~~~~~~~~~~~~~~~~~~~~
+
+Perform the steps below to configure the Wazuh agent to monitor Apache web server logs.
+
+#. Add the following to ``C:\Program Files (x86)\ossec-agent\ossec.conf`` to configure the Wazuh agent and monitor the Apache access logs:
 
    .. code-block:: xml
 
@@ -122,9 +124,9 @@ Take the following steps to install and configure an Apache web server on the Wi
 Wazuh server
 ^^^^^^^^^^^^
 
-The following steps are performed on the Wazuh server to add the IP address of the RHEL endpoint to a CDB list, and then configure rules and active response.
+The following steps are performed on the Wazuh server to add the IP address of the RHEL endpoint to a CYou need to perform the following steps on the Wazuh server to add the IP address of the RHEL endpoint to a CDB list, and then configure rules and active response.
 
-#. Install the ``wget`` utility in order to download the necessary artifacts using the command line interface:
+#. Install the ``wget`` utility in order to download the necessary artifacts using the command line interface:¿
 
    .. code-block:: console
 
@@ -200,7 +202,7 @@ The following steps are performed on the Wazuh server to add the IP address of t
 
       </ossec_config>
 
-#. There are two active response blocks below depending on the configured endpoint. Add the respective active response block to the Wazuh server ``/var/ossec/etc/ossec.conf`` file:
+#. Add the active response block to the Wazuh server ``/var/ossec/etc/ossec.conf`` file:
 
    **For the Ubuntu endpoint**
 
@@ -220,7 +222,7 @@ The following steps are performed on the Wazuh server to add the IP address of t
 
    **For the Windows endpoint**
 
-   The ``netsh`` command is used to block the attacker IP address on the Windows endpoint. The active response script is set to run for 60 seconds:
+   The active response script uses the ``netsh`` command to block the attacker IP address on the Windows endpoint. It runs for 60 seconds:
 
       .. code-block:: xml
          :emphasize-lines: 3
@@ -234,13 +236,13 @@ The following steps are performed on the Wazuh server to add the IP address of t
            </active-response>
          </ossec_config>
 
-#. Restart the Wazuh server to apply the changes:
+#. Restart the Wazuh manager to apply the changes:
 
    .. code-block:: console
 
       $ sudo systemctl restart wazuh-manager
 
-Attack Emulation
+Attack emulation
 ----------------
 
 #. Access any of the web servers from the RHEL endpoint using the corresponding IP address. Replace ``<WEBSERVER_IP>`` with the appropriate value and execute the following command from the attacker endpoint:
@@ -249,12 +251,12 @@ Attack Emulation
 
       $ curl http://<WEBSERVER_IP>
 
-The attacker endpoint will be able to connect to the victim web servers the first time. After the first connection, the Wazuh active response temporarily blocks any successive connection to the web servers for 60 seconds.
+The attacker endpoint connects to the victim web servers the first time. After the first connection, the Wazuh active response module temporarily blocks any successive connection to the web servers for 60 seconds.
 
 Visualize the alerts
 --------------------
 
-You can visualize the alert data in the Wazuh dashboard. To do this, go to the Security events module and add the filters in the search bar to query the alerts.
+You can visualize the alert data in the Wazuh dashboard. To do this, go to the **Security events** module and add the filters in the search bar to query the alerts.
 
 -  Ubuntu - ``rule.id:(651 OR 100100)``
 

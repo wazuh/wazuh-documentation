@@ -13,44 +13,44 @@ Preparing your lab environment
 
 The Wazuh solution consists of security agents, which are deployed on monitored endpoints, and the Wazuh central components, which collect and analyze data gathered by the agents.
 
-We recommend that you use virtual machines and take snapshots immediately after setting up the infrastructure. This is done so that you can get a clean environment whenever you want to test a new use case. A clean environment is important because it prevents the various tests from interfering with each other.
+We recommend that you use virtual machines and take snapshots immediately after setting up the infrastructure. Doing this you can get a clean environment whenever you want to test a new use case. A clean environment is important because it prevents the different tests from interfering with each other.
 
 The diagram below illustrates the architecture of the Wazuh lab environment that is required to test the use cases described in this document.
 
 .. thumbnail:: /images/poc/poc-lab-env-arch.png
-      :title: Wazuh lab environment architecture
-      :align: center
-      :width: 80%
+   :title: Wazuh lab environment architecture
+   :align: center
+   :width: 80%
 
 Wazuh central components
 ^^^^^^^^^^^^^^^^^^^^^^^^
 
-In our lab, the Wazuh central components (server, indexer, and dashboard) will all be running on one system. This is because we are monitoring a small scale environment and there is no need for a distributed architecture.
+In these use cases, the Wazuh central components (server, indexer, and dashboard) run on one system. This is because you’re monitoring a small scale environment and there’s no need for a distributed architecture.
 
-To install the Wazuh central components on a single host, it is recommended to use one of the following options:
+To install the Wazuh central components on a single system, it’s recommended to use one of the following options:
 
--  The :doc:`Quickstart guide </quickstart>`: Using this guide, you can install all the components on the same host in approximately 5 minutes.
+-  The :doc:`Quickstart guide </quickstart>`: Using this guide, you can install all the components on the same system in approximately 5 minutes.
 -  Our preconfigured :doc:`Virtual Machine </deployment-options/virtual-machine/virtual-machine>`: Wazuh provides a pre-built virtual machine image in Open Virtual Appliance (OVA) format. It can be imported to VirtualBox or other OVA-compatible virtualization systems.
 
 Monitored endpoints
 ^^^^^^^^^^^^^^^^^^^
 
-The following endpoints will be monitored by the Wazuh agent. Depending on the use case, the endpoints will act as victims of an attack, or as malicious actors (attackers).
+The Wazuh agent monitors the following endpoints. Depending on the use case, the endpoints act as victims of an attack, or as malicious actors (attackers).
 
 +-----------+--------------------------------+-------------+--------+--------+
 | Endpoint  | Operating system (64-bits)     | CPU cores   | RAM    | Disk   |
 +===========+================================+=============+========+========+
 | Ubuntu    | Ubuntu 22.04 LTS               | 1 vCPU      | 2 GB   | 10 GB  |
 +-----------+--------------------------------+-------------+--------+--------+
-| RHEL      | Red Hat Enterprise Linux 9.0   | 1 vCPU      | 2 GiB  | 10 GB  |
+| RHEL      | Red Hat Enterprise Linux 9.0   | 1 vCPU      | 2 GB   | 10 GB  |
 +-----------+--------------------------------+-------------+--------+--------+
-| Windows   | Windows 11                     | 2 vCPU      | 4 GiB  | 25 GB  |
+| Windows   | Windows 11                     | 2 vCPU      | 4 GB   | 25 GB  |
 +-----------+--------------------------------+-------------+--------+--------+
 
-You can see our :doc:`installation guide </installation-guide/wazuh-agent/index>` for information on how to install the Wazuh agent on these endpoints. Internet access is needed to perform some integrations and download the software used in these labs.
+You can see our :doc:`installation guide </installation-guide/wazuh-agent/index>` for information on how to install the Wazuh agent on these endpoints. You need Internet access to perform some integrations and download the software used in these use cases.
 
-Labs
-----
+Use cases
+---------
 
 .. toctree::
    :maxdepth: 1
@@ -58,11 +58,11 @@ Labs
    block-malicious-actor-ip-reputation
    poc-file-integrity-monitoring
    detect-brute-force-attack
+   monitoring-docker
 
 ..
    audit-commands-run-by-user
    aws-infrastructure-monitoring
-   monitoring-docker
    detect-unauthorized-processes-netcat
    integrate-osquery
    integrate-network-ids-suricata
