@@ -242,7 +242,7 @@ html_show_sphinx = False
 html_show_copyright = True
 
 # If empty string, we eliminate permalinks from documentation.
-html_add_permalinks = 'Permalink to this headline'
+html_add_permalinks = ' '
 
 # If true, an OpenSearch description file will be output, and all pages will
 # contain a <link> tag referring to it.  The value of this option must be the
