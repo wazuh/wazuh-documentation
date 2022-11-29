@@ -567,3 +567,93 @@ macOS
 +==============+==================+==============+=========================+
 |    macOS     | |W_Current_OSX|  |    64bit     | |WPK_macOS|             |
 +--------------+------------------+--------------+-------------------------+
+
+
+Wazuh debug symbols
+-------------------
+
+.. _linux-dbg-symbols-packages:
+
+Linux debug symbols
+^^^^^^^^^^^^^^^^^^^
+
+.. |agent_yum_el5_x86_64_DBG| replace:: `wazuh-agent-debuginfo-|WAZUH_CURRENT|-|WAZUH_REVISION_YUM_AGENT_X86_EL5|.el5.x86_64.rpm <https://packages.wazuh.com/|CURRENT_MAJOR|/yum5/x86_64/wazuh-agent-debuginfo-|WAZUH_CURRENT|-|WAZUH_REVISION_YUM_AGENT_X86_EL5|.el5.x86_64.rpm>`__ (`sha512 <|CHECKSUMS_URL||WAZUH_CURRENT|/wazuh-agent-debuginfo-|WAZUH_CURRENT|-|WAZUH_REVISION_YUM_AGENT_X86_EL5|.el5.x86_64.rpm.sha512>`__)
+.. |agent_yum_el5_i386_DBG| replace:: `wazuh-agent-debuginfo-|WAZUH_CURRENT|-|WAZUH_REVISION_YUM_AGENT_I386_EL5|.el5.i386.rpm <https://packages.wazuh.com/|CURRENT_MAJOR|/yum5/i386/wazuh-agent-debuginfo-|WAZUH_CURRENT|-|WAZUH_REVISION_YUM_AGENT_I386_EL5|.el5.i386.rpm>`__ (`sha512 <|CHECKSUMS_URL||WAZUH_CURRENT|/wazuh-agent-debuginfo-|WAZUH_CURRENT|-|WAZUH_REVISION_YUM_AGENT_I386_EL5|.el5.i386.rpm.sha512>`__)
+.. |agent_yum_x86_64_DBG| replace:: `wazuh-agent-debuginfo-|WAZUH_CURRENT|-|WAZUH_REVISION_YUM_AGENT_X86|.x86_64.rpm <|RPM_AGENT_DEBUG_SYMBOLS|-|WAZUH_CURRENT|-|WAZUH_REVISION_YUM_AGENT_X86|.x86_64.rpm>`__ (`sha512 <|CHECKSUMS_URL||WAZUH_CURRENT|/wazuh-agent-debuginfo-|WAZUH_CURRENT|-|WAZUH_REVISION_YUM_AGENT_X86|.x86_64.rpm.sha512>`__)
+.. |manager_yum_x86_64_DBG| replace:: `wazuh-manager-debuginfo-|WAZUH_CURRENT|-|WAZUH_REVISION_YUM_MANAGER_X86|.x86_64.rpm <|RPM_MANAGER_DEBUG_SYMBOLS|-|WAZUH_CURRENT|-|WAZUH_REVISION_YUM_MANAGER_X86|.x86_64.rpm>`__ (`sha512 <|CHECKSUMS_URL||WAZUH_CURRENT|/wazuh-manager-debuginfo-|WAZUH_CURRENT|-|WAZUH_REVISION_YUM_MANAGER_X86|.x86_64.rpm.sha512>`__)
+.. |agent_yum_i386_DBG| replace:: `wazuh-agent-debuginfo-|WAZUH_CURRENT|-|WAZUH_REVISION_YUM_AGENT_I386|.i386.rpm <|RPM_AGENT_DEBUG_SYMBOLS|-|WAZUH_CURRENT|-|WAZUH_REVISION_YUM_AGENT_I386|.i386.rpm>`__ (`sha512 <|CHECKSUMS_URL||WAZUH_CURRENT|/wazuh-agent-debuginfo-|WAZUH_CURRENT|-|WAZUH_REVISION_YUM_AGENT_I386|.i386.rpm.sha512>`__)
+.. |agent_yum_aarch64_DBG| replace:: `wazuh-agent-debuginfo-|WAZUH_CURRENT|-|WAZUH_REVISION_YUM_AGENT_AARCH64|.aarch64.rpm <|RPM_AGENT_DEBUG_SYMBOLS|-|WAZUH_CURRENT|-|WAZUH_REVISION_YUM_AGENT_AARCH64|.aarch64.rpm>`__ (`sha512 <|CHECKSUMS_URL||WAZUH_CURRENT|/wazuh-agent-debuginfo-|WAZUH_CURRENT|-|WAZUH_REVISION_YUM_AGENT_AARCH64|.aarch64.rpm.sha512>`__)
+.. |manager_yum_aarch64_DBG| replace:: `wazuh-manager-debuginfo-|WAZUH_CURRENT|-|WAZUH_REVISION_YUM_MANAGER_AARCH64|.aarch64.rpm <|RPM_MANAGER_DEBUG_SYMBOLS|-|WAZUH_CURRENT|-|WAZUH_REVISION_YUM_MANAGER_AARCH64|.aarch64.rpm>`__ (`sha512 <|CHECKSUMS_URL||WAZUH_CURRENT|/wazuh-manager-debuginfo-|WAZUH_CURRENT|-|WAZUH_REVISION_YUM_MANAGER_AARCH64|.aarch64.rpm.sha512>`__)
+.. |agent_yum_armv7hl_DBG| replace:: `wazuh-agent-debuginfo-|WAZUH_CURRENT|-|WAZUH_REVISION_YUM_AGENT_ARMHF|.armv7hl.rpm <|RPM_AGENT_DEBUG_SYMBOLS|-|WAZUH_CURRENT|-|WAZUH_REVISION_YUM_AGENT_ARMHF|.armv7hl.rpm>`__ (`sha512 <|CHECKSUMS_URL||WAZUH_CURRENT|/wazuh-agent-debuginfo-|WAZUH_CURRENT|-|WAZUH_REVISION_YUM_AGENT_ARMHF|.armv7hl.rpm.sha512>`__)
+.. |agent_yum_ppc64le_DBG| replace:: `wazuh-agent-debuginfo-|WAZUH_CURRENT|-|WAZUH_REVISION_YUM_AGENT_PPC|.ppc64le.rpm <|RPM_AGENT_DEBUG_SYMBOLS|-|WAZUH_CURRENT|-|WAZUH_REVISION_YUM_AGENT_PPC64|.ppc64le.rpm>`__ (`sha512 <|CHECKSUMS_URL||WAZUH_CURRENT|/wazuh-agent-debuginfo-|WAZUH_CURRENT|-|WAZUH_REVISION_YUM_AGENT_PPC64|.ppc64le.rpm.sha512>`__)
+.. |agent_deb_x86_64_DBG| replace:: `wazuh-agent-dbg_|WAZUH_CURRENT|-|WAZUH_REVISION_DEB_AGENT_X86|_amd64.deb <|DEB_AGENT_DEBUG_SYMBOLS|_|WAZUH_CURRENT|-|WAZUH_REVISION_DEB_AGENT_X86|_amd64.deb>`__ (`sha512 <|CHECKSUMS_URL||WAZUH_CURRENT|/wazuh-agent-dbg_|WAZUH_CURRENT|-|WAZUH_REVISION_DEB_AGENT_X86|_amd64.deb.sha512>`__)
+.. |manager_deb_x86_64_DBG| replace:: `wazuh-manager-dbg_|WAZUH_CURRENT|-|WAZUH_REVISION_DEB_MANAGER_X86|_amd64.deb <|DEB_MANAGER_DEBUG_SYMBOLS|_|WAZUH_CURRENT|-|WAZUH_REVISION_DEB_MANAGER_X86|_amd64.deb>`__ (`sha512 <|CHECKSUMS_URL||WAZUH_CURRENT|/wazuh-manager-dbg_|WAZUH_CURRENT|-|WAZUH_REVISION_DEB_MANAGER_X86|_amd64.deb.sha512>`__)
+.. |agent_deb_i386_DBG| replace:: `wazuh-agent-dbg_|WAZUH_CURRENT|-|WAZUH_REVISION_DEB_AGENT_I386|_i386.deb <|DEB_AGENT_DEBUG_SYMBOLS|_|WAZUH_CURRENT|-|WAZUH_REVISION_DEB_AGENT_I386|_i386.deb>`__ (`sha512 <|CHECKSUMS_URL||WAZUH_CURRENT|/wazuh-agent-dbg_|WAZUH_CURRENT|-|WAZUH_REVISION_DEB_AGENT_I386|_i386.deb.sha512>`__)
+.. |agent_deb_aarch64_DBG| replace:: `wazuh-agent-dbg_|WAZUH_CURRENT|-|WAZUH_REVISION_DEB_AGENT_AARCH64|_arm64.deb <|DEB_AGENT_DEBUG_SYMBOLS|_|WAZUH_CURRENT|-|WAZUH_REVISION_DEB_AGENT_AARCH64|_arm64.deb>`__ (`sha512 <|CHECKSUMS_URL||WAZUH_CURRENT|/wazuh-agent-dbg_|WAZUH_CURRENT|-|WAZUH_REVISION_DEB_AGENT_AARCH64|_arm64.deb.sha512>`__)
+.. |manager_deb_aarch64_DBG| replace:: `wazuh-manager-dbg_|WAZUH_CURRENT|-|WAZUH_REVISION_DEB_MANAGER_AARCH64|_arm64.deb <|DEB_MANAGER_DEBUG_SYMBOLS|_|WAZUH_CURRENT|-|WAZUH_REVISION_DEB_MANAGER_AARCH64|_arm64.deb>`__ (`sha512 <|CHECKSUMS_URL||WAZUH_CURRENT|/wazuh-manager-dbg_|WAZUH_CURRENT|-|WAZUH_REVISION_DEB_MANAGER_AARCH64|_arm64.deb.sha512>`__)
+.. |agent_deb_armv7hl_DBG| replace:: `wazuh-agent-dbg_|WAZUH_CURRENT|-|WAZUH_REVISION_DEB_AGENT_ARMHF|_armhf.deb <|DEB_AGENT_DEBUG_SYMBOLS|_|WAZUH_CURRENT|-|WAZUH_REVISION_DEB_AGENT_ARMHF|_armhf.deb>`__ (`sha512 <|CHECKSUMS_URL||WAZUH_CURRENT|/wazuh-agent-dbg_|WAZUH_CURRENT|-|WAZUH_REVISION_DEB_AGENT_ARMHF|_armhf.deb.sha512>`__)
+.. |agent_deb_ppc64le_DBG| replace:: `wazuh-agent-dbg_|WAZUH_CURRENT|-|WAZUH_REVISION_DEB_AGENT_PPC|_ppc64el.deb <|DEB_AGENT_DEBUG_SYMBOLS|_|WAZUH_CURRENT|-|WAZUH_REVISION_DEB_AGENT_PPC64|_ppc64el.deb>`__ (`sha512 <|CHECKSUMS_URL||WAZUH_CURRENT|/wazuh-agent-dbg_|WAZUH_CURRENT|-|WAZUH_REVISION_DEB_AGENT_PPC64|_ppc64el.deb.sha512>`__)
+
++---------------+------------------------------------+--------------+----------------------------+
+| Package type  |                 OS                 | Architecture | Packages                   |
++===============+====================================+==============+============================+
+|               |  CentOS 5, SUSE 11, Oracle Linux 5 |    x86_64    | |agent_yum_el5_x86_64_DBG| |
++               +                                    +--------------+----------------------------+
+|               |     Red Hat Enterprise Linux 5     |     i386     | |agent_yum_el5_i386_DBG|   |
++               +------------------------------------+--------------+----------------------------+
+|               |           Amazon Linux             |              | |agent_yum_x86_64_DBG|     |
++               +                                    +    x86_64    +----------------------------+
+|               |            CentOS, Fedora          |              | |manager_yum_x86_64_DBG|   |
++               +                                    +--------------+----------------------------+
+|               |             OpenSUSE               |     i386     | |agent_yum_i386_DBG|       |
++      RPM      +                                    +--------------+----------------------------+
+|               |           Oracle Linux             |              | |agent_yum_aarch64_DBG|    |
++               +                                    +    aarch64   +----------------------------+
+|               |       Red Hat Enterprise Linux     |              | |manager_yum_aarch64_DBG|  |
++               +                                    +--------------+----------------------------+
+|               |               SUSE                 |     armhf    | |agent_yum_armv7hl_DBG|    |
++               +                                    +--------------+----------------------------+
+|               |                                    |    powerpc   | |agent_yum_ppc64le_DBG|    |
++---------------+------------------------------------+--------------+----------------------------+
+|               |                                    |              | |agent_deb_x86_64_DBG|     |
++               +                                    +    x86_64    +----------------------------+
+|               |              Debian                |              | |manager_deb_x86_64_DBG|   |
++               +                                    +--------------+----------------------------+
+|               |                                    |     i386     | |agent_deb_i386_DBG|       |
++      DEB      +                                    +--------------+----------------------------+
+|               |              Ubuntu                |              | |agent_deb_aarch64_DBG|    |
++               +                                    +    aarch64   +----------------------------+
+|               |                                    |              | |manager_deb_aarch64_DBG|  |
++               +                                    +--------------+----------------------------+
+|               |            Raspbian OS             |     armhf    | |agent_deb_armv7hl_DBG|    |
++               +                                    +--------------+----------------------------+
+|               |                                    |    powerpc   | |agent_deb_ppc64le_DBG|    |
++---------------+------------------------------------+--------------+----------------------------+
+
+.. _win-dbg-symbols-packages:
+
+Windows debug symbols
+^^^^^^^^^^^^^^^^^^^^^
+
+.. |windows_DBG| replace:: `wazuh-agent-windows-x86_64-debug-info-|WAZUH_CURRENT_WINDOWS|-|WAZUH_REVISION_WINDOWS|.zip <https://packages.wazuh.com/|CURRENT_MAJOR|/windows/wazuh-agent-windows-x86_64-debug-info-|WAZUH_CURRENT_WINDOWS|-|WAZUH_REVISION_WINDOWS|.zip>`__ (`sha512 <https://packages.wazuh.com/|CURRENT_MAJOR|/checksums/wazuh/|WAZUH_CURRENT_WINDOWS|/wazuh-agent-windows-x86_64-debug-info-|WAZUH_CURRENT_WINDOWS|-|WAZUH_REVISION_WINDOWS|.zip.sha512>`__)
+
++---------------+--------------+----------------+
+|    Version    | Architecture | Package        |
++===============+==============+================+
+| XP or greater |   32/64bits  | |windows_DBG|  |
++---------------+--------------+----------------+
+
+.. _macos-dbg-symbols-packages:
+
+macOS debug symbols
+^^^^^^^^^^^^^^^^^^^
+
+.. |macOS_DBG| replace:: `wazuh-agent-macos-amd64-debug-info-|WAZUH_CURRENT_OSX|-|WAZUH_REVISION_OSX|.tar.gz <https://packages.wazuh.com/|CURRENT_MAJOR|/macos/wazuh-agent-macos-amd64-debug-info-|WAZUHCURRENT_OSXT|-|WAZUH_REVISION_OSX|.tar.gz>`__ (`sha512 <https://packages.wazuh.com/|CURRENT_MAJOR|/checksums/wazuh/|WAZUCURRENT_OSX_T|/wazuh-agent-macos-amd64-debug-info-|WAZCURRENT_OSXH_T|-|WAZUH_REVISION_OSX|.tar.gz.sha512>`__)
+
++--------------+-----------------+
+| Architecture | Package         |
++==============+=================+
+|    64bits    | |macOS_DBG|     |
++--------------+-----------------+
+
+
