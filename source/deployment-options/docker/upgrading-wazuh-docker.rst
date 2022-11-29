@@ -17,7 +17,7 @@ This section describes how to upgrade Wazuh Docker deployments starting from ver
 #. Set the new version of Wazuh:
 
    -  If you have a customized ``docker-compose.yml`` file and want to preserve it. Edit it and change the version of the images to the new version.
-   -  If you want to use the default ``docker-compose.yml`` file of the new version. Navigate to the Git branch of the new version:
+   -  If you want to use the default ``docker-compose.yml`` file of the new version. Navigate to the Git branch of the latest version:
 
       .. code-block::
 

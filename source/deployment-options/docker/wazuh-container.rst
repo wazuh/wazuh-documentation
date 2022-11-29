@@ -13,8 +13,8 @@ Usage
 
 You can deploy Wazuh as a single-node or multi-node stack.
 
--  Single-node deployment: Deploys one Wazuh manager, indexer, and dashboard node.
--  Multi-node deployment: Deploys two Wazuh manager nodes (one master and one worker), three Wazuh indexer nodes, and a Wazuh dashboard node.
+-  **Single-node deployment**: Deploys one Wazuh manager, indexer, and dashboard node.
+-  **Multi-node deployment**: Deploys two Wazuh manager nodes (one master and one worker), three Wazuh indexer nodes, and a Wazuh dashboard node.
   
 Both deployments use persistence and allow configuring certificates to secure communications between nodes. The multi-node stack is the only deployment that contains high availability.
 
@@ -31,7 +31,7 @@ Single-node Deployment
 
 #. Provide a group of certificates for each node in the stack to secure communication between the nodes. You have two alternatives to provide these certificates:
 
-   -  Generate self-signed certificates for each node of the cluster. 
+   -  Generate self-signed certificates for each cluster node. 
     
       We have created a Docker image to automate certificate generation using the Wazuh certs gen tool.
 
@@ -71,7 +71,7 @@ Single-node Deployment
 
       In case you have your own certificates, provision them as follows in the ``config/wazuh_indexer_ssl_certs`` directory:
 
-      Wazuh indexer: 
+      **Wazuh indexer**: 
       
       .. code-block:: none
 
@@ -81,7 +81,7 @@ Single-node Deployment
          config/wazuh_indexer_ssl_certs/admin.pem
          config/wazuh_indexer_ssl_certs/admin-key.pem
 
-      Wazuh manager:
+      **Wazuh manager**:
 
       .. code-block:: none
 
@@ -89,7 +89,7 @@ Single-node Deployment
          config/wazuh_indexer_ssl_certs/wazuh.manager.pem
          config/wazuh_indexer_ssl_certs/wazuh.manager-key.pem
 
-      Wazuh dashboard:
+      **Wazuh dashboard**:
 
       .. code-block:: none
 
@@ -99,13 +99,13 @@ Single-node Deployment
  
 #. Start the Wazuh single-node deployment using docker-compose:
 
-   -  Foreground:
+   -  **Foreground**:
 
       .. code-block:: console  
 
          # docker-compose up
 
-   -  Background:
+   -  **Background**:
 
       .. code-block:: console  
 
@@ -131,7 +131,7 @@ Multi-node deployment
 
 #. Provide a group of certificates for each node in the stack to secure communications between the nodes. You have two alternatives to provide these certificates:
 
-   -  Generate self-signed certificates for each node of the cluster.
+   -  Generate self-signed certificates for each cluster node.
 
       We have created a Docker image to automate certificate generation using the Wazuh certs gen tool.
 
@@ -171,7 +171,7 @@ Multi-node deployment
 
       In case you have your own certificates, provision them as follows:
       
-      Wazuh indexer: 
+      **Wazuh indexer**: 
     
       .. code-block:: none
 
@@ -185,7 +185,7 @@ Multi-node deployment
          config/wazuh_indexer_ssl_certs/admin.pem
          config/wazuh_indexer_ssl_certs/admin-key.pem
 
-      Wazuh manager:
+      **Wazuh manager**:
 
       .. code-block:: none
 
@@ -195,7 +195,7 @@ Multi-node deployment
          config/wazuh_indexer_ssl_certs/wazuh.worker.pem
          config/wazuh_indexer_ssl_certs/wazuh.worker-key.pem
 
-      Wazuh dashboard:
+      **Wazuh dashboard**:
 
       .. code-block:: none
 
@@ -206,13 +206,13 @@ Multi-node deployment
 
 #. Start the Wazuh multi-node deployment using ``docker-compose``:
 
-   -  Foreground:
+   -  **Foreground**:
 
       .. code-block:: console
 
          # docker-compose up
 
-   -  Background:
+   -  **Background**:
 
       .. code-block:: console
 

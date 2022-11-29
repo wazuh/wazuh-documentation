@@ -8,7 +8,7 @@ Deployment on Docker
 
 This section details the process of installing Wazuh on Docker.
 
-`Docker <https://www.docker.com/>`_ is an open platform for building, delivering, and running applications inside software containers. Docker containers package up software including everything needed to run: code, runtime, system tools, system libraries, and settings. Docker enables separating applications from infrastructure. This guarantees that the application always runs the same, regardless of the environment the container is running on. Containers run in the cloud or on-premises.
+`Docker <https://www.docker.com/>`_ is an open platform for building, delivering, and running applications inside software containers. Docker containers package up software, including everything needed to run: code, runtime, system tools, system libraries, and settings. Docker enables separating applications from infrastructure. This guarantees that the application always runs the same, regardless of the environment the container is running on. Containers run in the cloud or on-premises.
 
 You can install Wazuh using the Docker images we have created, such as ``wazuh/wazuh-manager``, ``wazuh/wazuh-indexer`` and ``wazuh/wazuh-dashboard``. You can find all the Wazuh Docker images in the `Docker hub <https://hub.docker.com/u/wazuh>`_.
 
