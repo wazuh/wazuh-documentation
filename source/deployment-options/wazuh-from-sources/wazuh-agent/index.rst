@@ -174,7 +174,7 @@ The Wazuh agent is a single and lightweight monitoring software. It is a multi-p
         
         .. tabs::
           
-            .. tab:: SysV init:
+            .. tab:: SysV init
 
                 .. code-block:: console
 
