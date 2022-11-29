@@ -125,7 +125,7 @@ Then, start your Puppet Server:
       # systemctl enable puppetserver
       # systemctl status puppetserver
 
-  b) For SysV Init:
+  b) For SysV init:
 
     .. code-block:: console
 

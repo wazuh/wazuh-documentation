@@ -50,7 +50,7 @@ Choose the corresponding tab to configure the installation as a single-node or m
                   # systemctl enable wazuh-manager
                   # systemctl start wazuh-manager
 
-            .. group-tab:: SysV Init
+            .. group-tab:: SysV init
 
                Choose one option according to your operating system:
 

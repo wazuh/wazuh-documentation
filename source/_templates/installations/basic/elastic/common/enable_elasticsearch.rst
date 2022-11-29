@@ -14,7 +14,7 @@
 
 
 
-  .. tab:: SysV Init
+  .. tab:: SysV init
 
     Choose one option according to the OS used:
 
