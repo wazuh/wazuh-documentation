@@ -104,7 +104,7 @@ For Linux/Unix machines, Docker requires an amd64 architecture system running ke
 
             # systemctl start docker
 
-      .. group-tab:: For SysV Init
+      .. group-tab:: For SysV init
 
          .. code-block:: console
 

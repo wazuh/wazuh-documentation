@@ -51,7 +51,7 @@ Elasticsearch malfunctions when the system is swapping memory. It is crucial for
             LimitMEMLOCK=infinity
             EOF
 
-        .. group-tab:: SysV Init
+        .. group-tab:: SysV init
 
           Edit the proper file ``/etc/sysconfig/elasticsearch`` for RPM or ``/etc/default/elasticsearch`` for Debian:
 
@@ -96,7 +96,7 @@ Elasticsearch malfunctions when the system is swapping memory. It is crucial for
 
 
 
-    .. group-tab:: SysV Init
+    .. group-tab:: SysV init
 
 
       .. code-block:: console

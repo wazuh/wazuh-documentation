@@ -23,7 +23,7 @@ Check the Wazuh manager service:
       # systemctl status wazuh-manager
 
 
-  .. tab:: SysV Init
+  .. tab:: SysV init
 
     .. code-block:: console
 
@@ -44,7 +44,7 @@ Check the Wazuh API service:
       # systemctl status wazuh-api
 
 
-  .. tab:: SysV Init
+  .. tab:: SysV init
 
     .. code-block:: console
 
@@ -65,7 +65,7 @@ Check the Filebeat service:
       # systemctl status filebeat
 
 
-  .. tab:: SysV Init
+  .. tab:: SysV init
 
     .. code-block:: console
 
