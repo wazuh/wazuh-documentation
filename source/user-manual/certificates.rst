@@ -33,7 +33,7 @@ These certificates are created with the following additional information:
 - ``CN``: Name of the node
 
 
-To create the certificates, edit the ``wazuh-config.yml`` file and replace the node names and IP values with the corresponding names and IP addresses. The ``<node-ip>`` can be either an IP address or a DNS name. The ``wazuh-config.yml`` template can be found here: `wazuh-config.yml <https://packages.wazuh.com/|WAZUH_LATEST_MINOR|/wazuh-config.yml>`_. 
+To create the certificates, edit the ``wazuh-config.yml`` file and replace the node names and IP values with the corresponding names and IP addresses. The ``<node-ip>`` can be either an IP address or a DNS name. The ``wazuh-config.yml`` template can be found here: `wazuh-config.yml <https://packages.wazuh.com/|WAZUH_CURRENT_MINOR|/wazuh-config.yml>`_. 
 
     .. code-block:: yaml
 
