@@ -151,7 +151,7 @@ Data needed to upgrade the agent's database
 | **value**             | Field value                 | 3                                         |
 +-----------------------+-----------------------------+-------------------------------------------+
 
-.. versionadded:: 4.5.0
+.. versionadded:: 4.4.0
 
 The ``key`` field can also store the following values:
 
