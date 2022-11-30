@@ -119,6 +119,7 @@
       overflow: hidden;
       align-items: center;
       justify-content: flex-end;
+      user-select: none;
 
       &::after {
         display: inline-block;
