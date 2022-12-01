@@ -66,11 +66,12 @@ Use cases
    poc-detect-trojan
    detect-remove-malware-virustotal
    poc-vulnerability-detection
+   detect-malware-yara-integration
+   poc-detect-hidden-process
+   audit-commands-run-by-user
+   detect-web-attack-shellshock
 
 ..
-   audit-commands-run-by-user
    integrate-osquery
-   detect-web-attack-shellshock
    poc-integrate-slack
-   detect-malware-yara-integration
 

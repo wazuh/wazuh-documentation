@@ -88,7 +88,6 @@ You can visualize the alert data in the Wazuh dashboard. To do this, go to the *
 
 -  Additionally, using the **Filter by type** search field, apply the ``full_log`` filter.
 
-
    .. thumbnail:: /images/poc/suspicious-binary-alerts.png
       :title: Suspicious binary alerts
       :align: center

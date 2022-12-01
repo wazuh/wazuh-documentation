@@ -263,6 +263,7 @@ newUrls['4.3'] = [
   '/hipaa/file-integrity-monitoring.html',
   '/hipaa/vulnerability-detection.html',
   '/hipaa/active-response.html',
+  '/proof-of-concept-guide/poc-detect-hidden-process.html',
 ];
 
 removedUrls['4.3'] = [

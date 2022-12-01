@@ -91,7 +91,7 @@ Perform the following steps to install and configure an Apache web server.
 
 #. Navigate to the ``C:\Apache24\bin`` folder and run the following command in a PowerShell terminal with administrator privileges:
 
-   .. code-block:: doscon
+   .. code-block:: powershell
 
       > C:\Apache24\bin>httpd.exe
 
@@ -117,20 +117,23 @@ Perform the steps below to configure the Wazuh agent to monitor Apache web serve
 
 #. Restart the Wazuh agent in a PowerShell terminal with administrator privileges to apply the changes:
 
-   .. code-block:: doscon
+   .. code-block:: powershell
 
       > Restart-Service -Name wazuh
 
 Wazuh server
 ^^^^^^^^^^^^
 
-The following steps are performed on the Wazuh server to add the IP address of the RHEL endpoint to a CYou need to perform the following steps on the Wazuh server to add the IP address of the RHEL endpoint to a CDB list, and then configure rules and active response.
+You need to perform the following steps on the Wazuh server to add the IP address of the RHEL endpoint to a CDB list, and then configure rules and active response.
 
-#. Install the ``wget`` utility in order to download the necessary artifacts using the command line interface:¿
+Download the utilities and configure the CDB list
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+#. Install the ``wget`` utility in order to download the necessary artifacts using the command line interface:
 
    .. code-block:: console
 
-      $ sudo yum update && yum install -y wget
+      $ sudo yum update && sudo yum install -y wget
 
 #. Download the Alienvault IP reputation database:
 
@@ -168,6 +171,9 @@ The following steps are performed on the Wazuh server to add the IP address of t
    .. code-block:: console
 
       $ sudo chown wazuh:wazuh /var/ossec/etc/lists/blacklist-alienvault
+
+Configure the active response module to block the malicious IP address
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 #. Add a custom rule to trigger a Wazuh :doc:`active response </user-manual/capabilities/active-response/how-it-works>` script. Do this in the Wazuh server ``/var/ossec/etc/rules/local_rules.xml`` custom ruleset file:
 

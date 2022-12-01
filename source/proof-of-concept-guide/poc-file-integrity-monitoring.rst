@@ -63,7 +63,7 @@ Take the following steps to configure the Wazuh agent to monitor filesystem chan
 
 #. Restart the Wazuh agent using Powershell with administrator privileges to apply the changes:
 
-   .. code-block:: doscon
+   .. code-block:: powershell
 
       > Restart-Service -Name wazuh
 
