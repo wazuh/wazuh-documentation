@@ -59,18 +59,18 @@ Use cases
    poc-file-integrity-monitoring
    detect-brute-force-attack
    monitoring-docker
-
-..
-   audit-commands-run-by-user
    aws-infrastructure-monitoring
    detect-unauthorized-processes-netcat
-   integrate-osquery
    integrate-network-ids-suricata
-   detect-web-attack-shellshock
    detect-web-attack-sql-injection
-   poc-integrate-slack
    poc-detect-trojan
    detect-remove-malware-virustotal
    poc-vulnerability-detection
+
+..
+   audit-commands-run-by-user
+   integrate-osquery
+   detect-web-attack-shellshock
+   poc-integrate-slack
    detect-malware-yara-integration
 
