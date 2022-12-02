@@ -29,4 +29,10 @@
 
         # update-rc.d -f wazuh-agent remove
 
+
+
+  .. group-tab:: No service manager
+
+    No action required in this case.
+
 .. End of include file
