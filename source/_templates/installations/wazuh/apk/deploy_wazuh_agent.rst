@@ -11,7 +11,7 @@
 
    .. code-block:: console
 
-      # sed -i 's|MANAGER_IP|10.0.0.2|g' /var/ossec/etc/ossec.conf
+      # export WAZUH_MANAGER="10.0.0.2" && sed -i "s|MANAGER_IP|$WAZUH_MANAGER|g" /var/ossec/etc/ossec.conf
   
    To customize your agent configuration, see the :doc:`Linux/Unix endpoint configuration </user-manual/agent-enrollment/via-agent-configuration/linux-endpoint>` page.
 
