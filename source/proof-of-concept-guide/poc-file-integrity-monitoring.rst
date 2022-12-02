@@ -10,8 +10,8 @@ File Integrity Monitoring (FIM) helps in auditing sensitive files and meeting re
 
 This use case uses the Wazuh FIM module to detect changes in monitored directories on Ubuntu and Windows endpoints. The Wazuh FIM module enriches alert data by fetching information about the user and process that made the changes using :doc:`who-data audit </user-manual/capabilities/auditing-whodata/index>`.
 
-Infrasctructure
----------------
+Infrastructure 
+--------------
 
 +-----------+-----------------------------------------------------------------------------------------------------------------+
 | Endpoint  | Description                                                                                                     |

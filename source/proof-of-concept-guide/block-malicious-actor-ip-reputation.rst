@@ -6,7 +6,7 @@
 Blocking a known malicious actor
 ================================
 
-In this use case, we demonstrate how to block malicious IP addresses from accessing web resources on a web server. You set up Apache web servers on Ubuntu and Windows endpoints, and try to access them from a RHEL endpoint.
+In this use case, we demonstrate how to block malicious IP addresses from accessing web resources on a web server. You set up Apache web servers on Ubuntu and Windows endpoints, and try to access them from an RHEL endpoint.
 
 This case uses a public IP reputation database that contains the IP addresses of some malicious actors. An IP reputation database is a collection of IP addresses that have been flagged as malicious. The RHEL endpoint plays the role of the malicious actor here, therefore you add its IP address to the reputation database. Then, configure Wazuh to block the RHEL endpoint from accessing web resources on the Apache web servers for 60 seconds. It’s a way of discouraging attackers from continuing to carry out their malicious activities.
 
@@ -129,7 +129,7 @@ You need to perform the following steps on the Wazuh server to add the IP addres
 Download the utilities and configure the CDB list
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-#. Install the ``wget`` utility in order to download the necessary artifacts using the command line interface:
+#. Install the ``wget`` utility to download the necessary artifacts using the command line interface:
 
    .. code-block:: console
 
@@ -228,7 +228,7 @@ Configure the active response module to block the malicious IP address
 
    **For the Windows endpoint**
 
-   The active response script uses the ``netsh`` command to block the attacker IP address on the Windows endpoint. It runs for 60 seconds:
+   The active response script uses the ``netsh`` command to block the attacker's IP address on the Windows endpoint. It runs for 60 seconds:
 
       .. code-block:: xml
          :emphasize-lines: 3
@@ -257,7 +257,7 @@ Attack emulation
 
       $ curl http://<WEBSERVER_IP>
 
-The attacker endpoint connects to the victim web servers the first time. After the first connection, the Wazuh active response module temporarily blocks any successive connection to the web servers for 60 seconds.
+The attacker endpoint connects to the victim's web servers the first time. After the first connection, the Wazuh active response module temporarily blocks any successive connection to the web servers for 60 seconds.
 
 Visualize the alerts
 --------------------
