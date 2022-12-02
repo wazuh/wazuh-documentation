@@ -474,12 +474,12 @@ def customReplacements(app, docname, source):
 custom_replacements = {
     # === URLs and base URLs
     "|CHECKSUMS_URL|" : "https://packages.wazuh.com/4.x/checksums/wazuh/",
-    "|APK_CHECKSUMS_I386_URL|" : "https://packages.wazuh.com/4.x/checksums/wazuh/alpine/x86/",
-    "|APK_CHECKSUMS_X86_64_URL|" : "https://packages.wazuh.com/4.x/checksums/wazuh/alpine/x86_64/",
-    "|APK_CHECKSUMS_AARCH64_URL|" : "https://packages.wazuh.com/4.x/checksums/wazuh/alpine/aarch64/",
-    "|APK_CHECKSUMS_ARMV7_URL|" : "https://packages.wazuh.com/4.x/checksums/wazuh/alpine/armv7/",
-    "|APK_CHECKSUMS_ARMHF_URL|" : "https://packages.wazuh.com/4.x/checksums/wazuh/alpine/armhf/",
-    "|APK_CHECKSUMS_PPC_URL|" : "https://packages.wazuh.com/4.x/checksums/wazuh/alpine/ppc64le/",
+    "|APK_CHECKSUMS_I386_URL|" : "alpine/x86",
+    "|APK_CHECKSUMS_X86_64_URL|" : "alpine/x86_64",
+    "|APK_CHECKSUMS_AARCH64_URL|" : "alpine/aarch64",
+    "|APK_CHECKSUMS_ARMV7_URL|" : "alpine/armv7",
+    "|APK_CHECKSUMS_ARMHF_URL|" : "alpine/armhf",
+    "|APK_CHECKSUMS_PPC_URL|" : "alpine/ppc64le",
     "|APK_AGENT_I386_URL|" : "https://packages.wazuh.com/4.x/alpine/v3.12/main/x86/wazuh-agent",
     "|APK_AGENT_X86_64_URL|" : "https://packages.wazuh.com/4.x/alpine/v3.12/main/x86_64/wazuh-agent",
     "|APK_AGENT_AARCH64_URL|" : "https://packages.wazuh.com/4.x/alpine/v3.12/main/aarch64/wazuh-agent",

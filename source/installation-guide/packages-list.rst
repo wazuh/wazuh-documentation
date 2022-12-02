@@ -16,17 +16,17 @@ Wazuh manager and Wazuh agent
 Linux
 ^^^^^
 
-.. |Alpine_i386_agent| replace:: `wazuh-agent-|WAZUH_CURRENT|-|WAZUH_REVISION_APK_AGENT_I386|.apk <|APK_AGENT_I386_URL|-|WAZUH_CURRENT|-|WAZUH_REVISION_APK_AGENT_I386|.apk>`__ (`sha512 <|APK_CHECKSUMS_I386_URL||WAZUH_CURRENT|/wazuh-agent-|WAZUH_CURRENT|-|WAZUH_REVISION_APK_AGENT_I386|.apk.sha512>`__)
+.. |Alpine_i386_agent| replace:: `wazuh-agent-|WAZUH_CURRENT|-|WAZUH_REVISION_APK_AGENT_I386|.apk <|APK_AGENT_I386_URL|-|WAZUH_CURRENT|-|WAZUH_REVISION_APK_AGENT_I386|.apk>`__ (`sha512 <|CHECKSUMS_URL||WAZUH_CURRENT|/|APK_CHECKSUMS_I386_URL|/wazuh-agent-|WAZUH_CURRENT|-|WAZUH_REVISION_APK_AGENT_I386|.apk.sha512>`__)
 
-.. |Alpine_x86_64_agent| replace:: `wazuh-agent-|WAZUH_CURRENT|-|WAZUH_REVISION_APK_AGENT_X86_64|.apk <|APK_AGENT_X86_64_URL|-|WAZUH_CURRENT|-|WAZUH_REVISION_APK_AGENT_X86_64|.apk>`__ (`sha512 <|APK_CHECKSUMS_X86_64_URL||WAZUH_CURRENT|/wazuh-agent-|WAZUH_CURRENT|-|WAZUH_REVISION_APK_AGENT_X86_64|.apk.sha512>`__)
+.. |Alpine_x86_64_agent| replace:: `wazuh-agent-|WAZUH_CURRENT|-|WAZUH_REVISION_APK_AGENT_X86_64|.apk <|APK_AGENT_X86_64_URL|-|WAZUH_CURRENT|-|WAZUH_REVISION_APK_AGENT_X86_64|.apk>`__ (`sha512 <|CHECKSUMS_URL||WAZUH_CURRENT|/|APK_CHECKSUMS_X86_64_URL|/wazuh-agent-|WAZUH_CURRENT|-|WAZUH_REVISION_APK_AGENT_X86_64|.apk.sha512>`__)
 
-.. |Alpine_aarch64_agent| replace:: `wazuh-agent-|WAZUH_CURRENT|-|WAZUH_REVISION_APK_AGENT_AARCH64|.apk <|APK_AGENT_AARCH64_URL|-|WAZUH_CURRENT|-|WAZUH_REVISION_APK_AGENT_AARCH64|.apk>`__ (`sha512 <|APK_CHECKSUMS_AARCH64_URL||WAZUH_CURRENT|/wazuh-agent-|WAZUH_CURRENT|-|WAZUH_REVISION_APK_AGENT_AARCH64|.apk.sha512>`__)
+.. |Alpine_aarch64_agent| replace:: `wazuh-agent-|WAZUH_CURRENT|-|WAZUH_REVISION_APK_AGENT_AARCH64|.apk <|APK_AGENT_AARCH64_URL|-|WAZUH_CURRENT|-|WAZUH_REVISION_APK_AGENT_AARCH64|.apk>`__ (`sha512 <|CHECKSUMS_URL||WAZUH_CURRENT|/|APK_CHECKSUMS_AARCH64_URL|/wazuh-agent-|WAZUH_CURRENT|-|WAZUH_REVISION_APK_AGENT_AARCH64|.apk.sha512>`__)
 
-.. |Alpine_armv7_agent| replace:: `wazuh-agent-|WAZUH_CURRENT|-|WAZUH_REVISION_APK_AGENT_ARMV7|.apk <|APK_AGENT_ARMV7_URL|-|WAZUH_CURRENT|-|WAZUH_REVISION_APK_AGENT_ARMV7|.apk>`__ (`sha512 <|APK_CHECKSUMS_ARMV7_URL||WAZUH_CURRENT|/wazuh-agent-|WAZUH_CURRENT|-|WAZUH_REVISION_APK_AGENT_ARMV7|.apk.sha512>`__)
+.. |Alpine_armv7_agent| replace:: `wazuh-agent-|WAZUH_CURRENT|-|WAZUH_REVISION_APK_AGENT_ARMV7|.apk <|APK_AGENT_ARMV7_URL|-|WAZUH_CURRENT|-|WAZUH_REVISION_APK_AGENT_ARMV7|.apk>`__ (`sha512 <|CHECKSUMS_URL||WAZUH_CURRENT|/|APK_CHECKSUMS_ARMV7_URL|/wazuh-agent-|WAZUH_CURRENT|-|WAZUH_REVISION_APK_AGENT_ARMV7|.apk.sha512>`__)
 
-.. |Alpine_armhf_agent| replace:: `wazuh-agent-|WAZUH_CURRENT|-|WAZUH_REVISION_APK_AGENT_ARMHF|.apk <|APK_AGENT_ARMHF_URL|-|WAZUH_CURRENT|-|WAZUH_REVISION_APK_AGENT_ARMHF|.apk>`__ (`sha512 <|APK_CHECKSUMS_ARMHF_URL||WAZUH_CURRENT|/wazuh-agent-|WAZUH_CURRENT|-|WAZUH_REVISION_APK_AGENT_ARMHF|.apk.sha512>`__)
+.. |Alpine_armhf_agent| replace:: `wazuh-agent-|WAZUH_CURRENT|-|WAZUH_REVISION_APK_AGENT_ARMHF|.apk <|APK_AGENT_ARMHF_URL|-|WAZUH_CURRENT|-|WAZUH_REVISION_APK_AGENT_ARMHF|.apk>`__ (`sha512 <|CHECKSUMS_URL||WAZUH_CURRENT|/|APK_CHECKSUMS_ARMHF_URL|/wazuh-agent-|WAZUH_CURRENT|-|WAZUH_REVISION_APK_AGENT_ARMHF|.apk.sha512>`__)
 
-.. |Alpine_powerpc_agent| replace:: `wazuh-agent-|WAZUH_CURRENT|-|WAZUH_REVISION_APK_AGENT_PPC|.apk <|APK_AGENT_PPC_URL|-|WAZUH_CURRENT|-|WAZUH_REVISION_APK_AGENT_ARMHF|.apk>`__ (`sha512 <|APK_CHECKSUMS_PPC_URL||WAZUH_CURRENT|/wazuh-agent-|WAZUH_CURRENT|-|WAZUH_REVISION_APK_AGENT_PPC|.apk.sha512>`__)
+.. |Alpine_powerpc_agent| replace:: `wazuh-agent-|WAZUH_CURRENT|-|WAZUH_REVISION_APK_AGENT_PPC|.apk <|APK_AGENT_PPC_URL|-|WAZUH_CURRENT|-|WAZUH_REVISION_APK_AGENT_PPC|.apk>`__ (`sha512 <|CHECKSUMS_URL||WAZUH_CURRENT|/|APK_CHECKSUMS_PPC_URL|/wazuh-agent-|WAZUH_CURRENT|-|WAZUH_REVISION_APK_AGENT_PPC|.apk.sha512>`__)
 
 
 
@@ -180,6 +180,8 @@ Linux
 |                       |                   |    armv7     | |Alpine_armv7_agent|                     |
 +                       +                   +--------------+------------------------------------------+
 |                       |                   |    armhf     | |Alpine_armhf_agent|                     |
++                       +                   +--------------+------------------------------------------+
+|                       |                   |    powerpc   | |Alpine_powerpc_agent|                   |
 +-----------------------+-------------------+--------------+------------------------------------------+
 |                       |                   |    i386      | |Amazon_i386_agent|                      |
 + Amazon Linux          +  1 and 2          +--------------+------------------------------------------+
