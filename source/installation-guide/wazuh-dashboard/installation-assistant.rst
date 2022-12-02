@@ -17,7 +17,7 @@ Wazuh dashboard installation
 
       # curl -sO https://packages.wazuh.com/|WAZUH_CURRENT_MINOR|/wazuh-install.sh
 
-#. Run the assistant with the option ``--wazuh-dashboard`` and the node name to install and configure the Wazuh dashboard. The node name must be the same one used in ``wazuh-config.yml`` for the initial configuration, for example, ``dashboard``.
+#. Run the assistant with the option ``--wazuh-dashboard`` and the node name to install and configure the Wazuh dashboard. The node name must be the same one used in ``config.yml`` for the initial configuration, for example, ``dashboard``.
    
    .. note::
       
