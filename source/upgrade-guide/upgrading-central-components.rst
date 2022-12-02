@@ -12,6 +12,20 @@ This section guides through the upgrade process of the Wazuh indexer, the Wazuh 
    
    Root user privileges are required to execute all the commands described below.
 
+Upgrade with the Wazuh installation assistant
++++++++++++++++++++++++++++++++++++++++++++++
+
+You can use the installation assistant to upgrade the Wazuh central components. The assistant will detect which components are installed and upgrade them if necessary.
+
+To upgrade execute the following command:
+
+.. code-block:: bash
+
+   curl -sO https://packages.wazuh.com/4.3/wazuh-install.sh && sudo bash ./wazuh-install.sh -up
+
+Step-by-step upgrade
++++++++++++++++++++++
+
 Preparing the upgrade
 ---------------------
 
