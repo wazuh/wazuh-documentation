@@ -9,7 +9,7 @@
          # systemctl stop filebeat
          # systemctl stop kibana
 
-   .. group-tab:: SysV Init
+   .. group-tab:: SysV init
 
       .. code-block:: console
 

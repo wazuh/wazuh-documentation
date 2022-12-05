@@ -12,7 +12,7 @@
       # systemctl daemon-reload
 
 
-  .. group-tab:: SysV Init
+  .. group-tab:: SysV init
 
     Choose one option according to your operating system.
 

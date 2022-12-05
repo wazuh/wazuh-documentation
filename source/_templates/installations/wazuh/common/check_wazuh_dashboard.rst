@@ -11,7 +11,7 @@
       # systemctl status wazuh-dashboard
 
 
-  .. group-tab:: SysV Init
+  .. group-tab:: SysV init
 
     .. code-block:: console
 

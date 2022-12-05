@@ -3,6 +3,7 @@
 .. meta::
   :description: Wazuh agent can be integrated with Osquery, making it easy to capture additional information from the endpoint. Learn more about this in this PoC.
 
+:orphan:
 
 .. _poc_integrate_osquery:
 
