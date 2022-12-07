@@ -33,6 +33,6 @@
 
   .. group-tab:: No service manager
 
-    No action required in this case.
+     No action required.
 
 .. End of include file

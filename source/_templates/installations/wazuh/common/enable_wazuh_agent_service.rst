@@ -35,10 +35,10 @@
 
   .. group-tab:: No service manager
 
-    Some systems like Alpine Linux will require manual start:
+     On some system, like Alpine Linux, you need to start the agent manually: 
 
-    .. code-block:: console
+     .. code-block:: console
 
-      # /var/ossec/bin/wazuh-control start
+       # /var/ossec/bin/wazuh-control start
 
 .. End of include file
