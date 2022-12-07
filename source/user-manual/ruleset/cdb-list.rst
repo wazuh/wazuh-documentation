@@ -23,7 +23,7 @@ The list file is a plain text file. Each line has a unique key followed by a col
 	key1:
 	key2:
 
-Following the separator, you can optionally add a value. The value can be identical to others, but the key must remain unique.
+Following the separator, you can optionally add a value. Values can be repeated, but the keys must be unique.
 
 .. code-block:: none
 
