@@ -31,4 +31,14 @@
         # update-rc.d wazuh-agent defaults 95 10
         # service wazuh-agent start
 
+
+
+  .. group-tab:: No service manager
+
+     On some system, like Alpine Linux, you need to start the agent manually: 
+
+     .. code-block:: console
+
+       # /var/ossec/bin/wazuh-control start
+
 .. End of include file
