@@ -80,6 +80,8 @@ Wazuh configuration
 
       .. include:: /_templates/common/restart_agent.rst
 
+.. _cloudtrail-use-cases:
+
 CloudTrail use cases
 --------------------
 
