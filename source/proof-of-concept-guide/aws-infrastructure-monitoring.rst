@@ -16,7 +16,7 @@ Infrastructure
 +--------------------+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
 | Cloud service      | Description                                                                                                                                                                             |
 +====================+=========================================================================================================================================================================================+
-| Amazon CloudTrail  | AWS Cloudtrail, like all other supported AWS services, requires providing a valid authentication method. For this PoC, we use the :ref:`profile authentication <profiles>` method.      |
+| Amazon CloudTrail  | AWS Cloudtrail, like all other supported AWS services, requires providing a valid authentication method. For this PoC, we use the :ref:`profile authentication <aws_profile>` method.   |
 +--------------------+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
 
 Configuration
