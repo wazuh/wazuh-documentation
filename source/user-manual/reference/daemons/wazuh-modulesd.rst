@@ -16,9 +16,9 @@ The wazuh-modulesd program manages the Wazuh modules described below.
 
   In order to provide well-structured data that can be accessed by the user or the Wazuh API, new **SQLite-based databases** have been introduced in the Wazuh manager. The Database Synchronization Module is a **user-transparent component** that collects the following information from the core:
 
-    - Agent information: name, address, encryption key, last connection time, operating system, version and shared configuration hash.
-    - FIM data: creation, modification and deletion of regular files and Windows registry entries.
-    - Rootcheck detected defects: issue message, first detection date and last alert time.
+    - Agent information: name, address, encryption key, last connection time, operating system, version, and shared configuration hash.
+    - FIM data: creation, modification, and deletion of regular files and Windows registry entries.
+    - Rootcheck detected defects: issue message, first detection date, and last alert time.
     - Static core settings: maximum permitted agents or SSL being enabled for Authd.
 
 .. topic:: CIS-CAT wodle
@@ -51,7 +51,7 @@ The wazuh-modulesd program manages the Wazuh modules described below.
 
 .. topic:: Osquery wodle
 
-  The Osquery wodle provides the user an operating system instrumentation tool that makes low-level operating system analytics and monitoring both efficient and intuitive using SQL-based queries. For more information, read through the documentation for :doc:`osquery integration <../../capabilities/osquery>`.
+  The Osquery wodle provides the user with an operating system instrumentation tool that makes low-level operating system analytics and monitoring both efficient and intuitive using SQL-based queries. For more information, read through the documentation for :doc:`osquery integration <../../capabilities/osquery>`.
 
 .. topic:: SCA module
 
@@ -59,11 +59,11 @@ The wazuh-modulesd program manages the Wazuh modules described below.
 
 .. topic:: Agent upgrade module
 
-  The agent upgrade module manages, validates, executes and checks the result of all the agent upgrade requests. It uses the WPK files.
+  The agent upgrade module manages, validates, executes, and checks the result of all the agent upgrade requests. It uses the WPK files.
 
 .. topic:: Task manager module
 
-  The task manager module creates, updates and manages all the tasks performed on the agents.
+  The task manager module creates, updates, and manages all the tasks performed on the agents.
 
 wazuh-modulesd options
 ----------------------

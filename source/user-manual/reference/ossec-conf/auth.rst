@@ -116,7 +116,7 @@ The agent replacement options are configured inside this tag. All conditions mus
 
 **enabled**
 
-Toggles whether or not to force the insertion of an agent if there is a duplicate name or IP address. This will remove the old agent with same name or IP address.
+Toggles whether or not to force the insertion of an agent if there is a duplicate name or IP address. This will remove the old agent with the same name or IP address.
 
 +--------------------+---------------------+
 | **Default value**  | yes                 |
@@ -199,7 +199,7 @@ If this file does not exist, a **random password** will be generated.
 ssl_agent_ca
 ^^^^^^^^^^^^
 
-Specifies the path to the CA certificate used to verify clients. It can be referred to a relative path under the Wazuh installation directory, or a full path.
+Specifies the path to the CA certificate used to verify clients. It can be referred to a relative path under the Wazuh installation directory or a full path.
 
 +--------------------+---------------------+
 | **Allowed values** | Any valid path      |
@@ -219,7 +219,7 @@ Toggles source host verification on and off when a CA certificate is specified. 
 ssl_manager_cert
 ^^^^^^^^^^^^^^^^
 
-Specifies the path to the server SSL certificate. It can be referred to a relative path under the Wazuh installation directory, or a full path.
+Specifies the path to the server SSL certificate. It can be referred to a relative path under the Wazuh installation directory or a full path.
 
 +--------------------+--------------------------------+
 | **Default value**  | etc/sslmanager.cert            |
@@ -230,7 +230,7 @@ Specifies the path to the server SSL certificate. It can be referred to a relati
 ssl_manager_key
 ^^^^^^^^^^^^^^^
 
-Specifies the path to the server's SSL key. It can be referred to a relative path under the Wazuh installation directory, or a full path.
+Specifies the path to the server's SSL key. It can be referred to a relative path under the Wazuh installation directory or a full path.
 
 +--------------------+--------------------------------+
 | **Default value**  | etc/sslmanager.key             |

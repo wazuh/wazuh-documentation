@@ -151,7 +151,7 @@ Data needed to upgrade the agent's database
 | **value**             | Field value                 | 3                                         |
 +-----------------------+-----------------------------+-------------------------------------------+
 
-.. versionadded:: 4.5.0
+.. versionadded:: 4.4.0
 
 The ``key`` field can also store the following values:
 
@@ -275,7 +275,7 @@ The possible statuses of a task are the following:
 
 - **Done**: The execution of the task finished successfully.
 
-- **Failed**: The execution of the task finished with error. It should have an error message with more information.
+- **Failed**: The execution of the task finished with an error. It should have an error message with more information.
 
 - **Cancelled**: The task was canceled and will not run.
 

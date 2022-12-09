@@ -48,7 +48,7 @@ In the case Wazuh is installed in a multi-node cluster configuration, repeat the
             # systemctl stop filebeat
             # systemctl stop wazuh-dashboard
 
-      .. tab:: SysV Init
+      .. tab:: SysV init
 
          .. code-block:: console
 
@@ -92,7 +92,7 @@ In the case of having a Wazuh indexer cluster with multiple nodes, the cluster w
 
             # systemctl stop wazuh-indexer
 
-      .. tab:: SysV Init
+      .. tab:: SysV init
 
          .. code-block:: console
 

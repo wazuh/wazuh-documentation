@@ -8,7 +8,7 @@
 vulnerability-detector
 ======================
 
-This section covers the configuration for the :ref:`vulnerability-detection` module.
+This section covers the configuration for the :doc:`/user-manual/capabilities/vulnerability-detection/index` module.
 
 .. topic:: XML section name
 
@@ -73,7 +73,7 @@ Time between vulnerabilities scans.
 run_on_start
 ^^^^^^^^^^^^
 
-Runs updates and vulnerabilities scans immediately when service is started.
+Runs updates and vulnerabilities scans immediately when the service is started.
 
 +----------------------+-----------+
 | **Default value**    | yes       |
@@ -86,7 +86,7 @@ Runs updates and vulnerabilities scans immediately when service is started.
 min_full_scan_interval
 ^^^^^^^^^^^^^^^^^^^^^^^
 
-The time during which a full scan will not be performed even if the database of vulnerabilities is updated. When this time expires, a :ref:`full scan <vuln_det_scan_types>` will be performed only if the CVEs database has changed.
+The time during which a full scan will not be performed even if the database of vulnerabilities is updated. When this time expires, a :doc:`full scan </user-manual/capabilities/vulnerability-detection/scan-types>` will be performed only if the CVEs database has changed.
 
 +----------------------+------------------------------------------------------------------------------------------------------------------------------------+
 | **Default value**    | 6 hours                                                                                                                            |
@@ -99,7 +99,7 @@ The time during which a full scan will not be performed even if the database of 
 retry_interval
 ^^^^^^^^^^^^^^
 
-The time to wait after a scan completes to retry the agents that had a problem to be scanned.
+The time to wait after a scan is completed to retry the agents that had a problem being scanned.
 
 +----------------------+------------------------------------------------------------------------------------------------------------------------------------+
 | **Default value**    | 30 seconds                                                                                                                         |
@@ -110,7 +110,7 @@ The time to wait after a scan completes to retry the agents that had a problem t
 provider
 ^^^^^^^^
 
-.. note:: The NVD provider must be always enabled since it aggregates vulnerabilities for all the OS supported. Otherwise, the scanner will not work properly.
+.. note:: The NVD provider must always be enabled since it aggregates vulnerabilities for all the OS supported. Otherwise, the scanner will not work properly.
 
 Configuration block to specify vulnerability updates.
 
@@ -281,7 +281,7 @@ Configuration block to specify vulnerability updates.
 |                    |                           |                    | start        +---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
 |                    |                           |                    |              | **Allowed values** | A numeric value that in substitution with the tag forms a valid link.                                                                                                                                                                                |
 |                    |                           | **Allowed tags**   +--------------+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-|                    |                           |                    |              | Defines the last value which the tag will be substituted.                                                                                                                                                                                                                 |
+|                    |                           |                    |              | Defines the last value for which the tag will be substituted.                                                                                                                                                                                                             |
 |                    |                           |                    | end          +---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
 |                    |                           |                    |              | **Allowed values** | A numeric value that in substitution with the tag forms a valid link.                                                                                                                                                                                |
 |                    |                           |                    +--------------+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
@@ -289,7 +289,7 @@ Configuration block to specify vulnerability updates.
 |                    |                           |                    | port         +---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
 |                    |                           |                    |              | **Allowed values** | A valid port.                                                                                                                                                                                                                                        |
 |                    +---------------------------+--------------------+--------------+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-|                    |                           | Defines the path to an alternative feed files.                                                                                                                                                                                                                                                                |
+|                    |                           | Defines the path to an alternative feed file.                                                                                                                                                                                                                                                                 |
 |                    |                           +--------------------+--------------+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
 |                    |                           |                    | **provider** | **value**                                                                                                                                                                                                                                                                 |
 |                    |                           |                    +--------------+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+

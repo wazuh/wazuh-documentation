@@ -12,7 +12,7 @@
       # systemctl daemon-reload
 
 
-  .. group-tab:: SysV Init
+  .. group-tab:: SysV init
 
     Choose one option according to your operating system.
 
@@ -28,5 +28,11 @@
       .. code-block:: console
 
         # update-rc.d -f wazuh-agent remove
+
+
+
+  .. group-tab:: No service manager
+
+     No action required.
 
 .. End of include file

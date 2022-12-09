@@ -8,7 +8,7 @@
 
       # systemctl status wazuh-manager
 
-  .. group-tab:: SysV Init
+  .. group-tab:: SysV init
 
     .. code-block:: console
 

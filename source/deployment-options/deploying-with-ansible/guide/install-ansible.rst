@@ -165,7 +165,7 @@ Our Ansible server will need to connect to the other endpoints. Let’s see how 
 
                # systemctl start sshd
 
-         .. group-tab:: SysV Init:
+         .. group-tab:: SysV init
 
             .. code-block:: console
 
@@ -227,7 +227,7 @@ Our Ansible server will need to connect to the other endpoints. Let’s see how 
 
                # systemctl restart sshd
 
-         .. group-tab:: SysV Init:
+         .. group-tab:: SysV init
 
             .. code-block:: console
 

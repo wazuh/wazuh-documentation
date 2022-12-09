@@ -75,7 +75,7 @@ Rule group of the alerts to be forwarded.
 +--------------------+--------------------------------------------------------------------------+
 
 .. note::
-	Observe that all groups must be finished by comma.
+	Observe that all groups must be finished with a comma.
 
 
 rule_id
@@ -92,7 +92,7 @@ The rule_id of the alerts to be forwarded.
 location
 ^^^^^^^^
 
-The location field refers to the origin of the alert, that it could be:
+The location field refers to the origin of the alert, it could be:
 
 - syscheck
 - rootcheck

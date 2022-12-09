@@ -669,6 +669,10 @@ vulnerability:read
 - :api-ref:`GET /vulnerability/{agent_id}/last_scan <operation/api.controllers.vulnerability_controller.get_last_scan_agent>` (`agent:id`_, `agent:group`_)
 - :api-ref:`GET /vulnerability/{agent_id}/summary/{field} <operation/api.controllers.vulnerability_controller.get_vulnerabilities_field_summary>` (`agent:id`_, `agent:group`_)
 
+vulnerability:run
+~~~~~~~~~~~~~~~~~~
+- :api-ref:`PUT /vulnerability <operation/api.controllers.vulnerability_controller.run_vulnerability_scan>` (`*:*`_)
+
 .. _api_rbac_reference_default_policies:
 
 Default policies
@@ -1101,6 +1105,19 @@ Allow reading agents' vulnerabilities information.
         - agent:id:*
       effect: allow
 
+vulnerability_run
+^^^^^^^^^^^^^^^^^^
+Allow running a vulnerability detector scan.
+
+.. code-block:: yaml
+
+    resourceless:
+      actions:
+        - vulnerability:run
+      resources:
+        - '*:*:*'
+      effect: allow
+
 
 .. _api_rbac_reference_default_roles:
 
@@ -1127,6 +1144,7 @@ Policies
     - `syscollector_read`_
     - `task_status`_
     - `vulnerability_read`_
+    - `vulnerability_run`_
 
 Rules
     - `wui_elastic_admin`_
