@@ -1,13 +1,13 @@
 .. Copyright (C) 2015, Wazuh, Inc.
 
-#. Download the ``wazuh-certs-tool.sh`` script and the ``wazuh-config.yml`` configuration file. This creates the certificates that encrypt communications between the Wazuh central components.
+#. Download the ``wazuh-certs-tool.sh`` script and the ``config.yml`` configuration file. This creates the certificates that encrypt communications between the Wazuh central components.
 
    .. code-block:: console
 
-    # curl -sO https://packages.wazuh.com/4.3/wazuh-certs-tool.sh
-    # curl -sO https://packages.wazuh.com/4.3/wazuh-config.yml
+    # curl -sO https://packages.wazuh.com/4.4/wazuh-certs-tool.sh
+    # curl -sO https://packages.wazuh.com/4.4/config.yml
 
-#. Edit ``./wazuh-config.yml`` and replace the node names and IP values with the corresponding names and IP addresses. You need to do this for all Wazuh server, Wazuh indexer, and Wazuh dashboard nodes. Add as many node fields as needed.
+#. Edit ``./config.yml`` and replace the node names and IP values with the corresponding names and IP addresses. You need to do this for all Wazuh server, Wazuh indexer, and Wazuh dashboard nodes. Add as many node fields as needed.
 
       .. code-block:: yaml
 

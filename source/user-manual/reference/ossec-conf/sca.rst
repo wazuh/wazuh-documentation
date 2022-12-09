@@ -125,7 +125,7 @@ Attributes
   Since Wazuh v3.10.0, although this section is missing, the Wazuh Agent will run scans for every policy (.yaml or .yml files) present in their ruleset folder.
 
 .. warning::
-  Since Wazuh v4.2.0, when a policy is defined by a relative path, this path is relative to the Wazuh installation directory. If the policy is located outside the installation directory a full path can be used.
+  Since Wazuh v4.2.0, when a policy is defined by a relative path, this path is relative to the Wazuh installation directory. If the policy is located outside the installation directory, a full path can be used.
 
 Example
 

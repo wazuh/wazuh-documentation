@@ -44,7 +44,7 @@ PingOne Configuration
 
       - SLO ENDPOINT: ``https://<WAZUH_DASHBOARD_URL>/``
       - SLO BINDING: ``HTTP Redirect``
-      - ASSERTION VALIDITY DURATION: ``3600`` (for 1 hour token validity)
+      - ASSERTION VALIDITY DURATION: ``3600`` (for one hour token validity)
       - VERIFICATION CERTIFICATE (OPTIONAL): Load a PUBLIC CERTIFICATE that corresponds to the PRIVATE KEY that is going to be used on the ``sp.signature_private_key_filepath`` of the ``config.yml`` configuration file on the Wazuh indexer instance. This is necessary as all the logout requests must be signed.
 
       .. thumbnail:: /images/single-sign-on/pingone/03-on-the-configuration-tab.png

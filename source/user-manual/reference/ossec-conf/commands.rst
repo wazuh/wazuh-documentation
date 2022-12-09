@@ -60,12 +60,12 @@ expect
 
 Specifies the lists of extracted fields that are to be passed as parameters to the command. If any of the listed fields were not declared in a certain instance, those field values would be passed as a dash (``-``) instead of as no value at all. The command requires finding the expected fields in the alert, otherwise, the AR will be skipped.
 
-A good example is the firewall-block command which expects the ``srcip`` field in order to knows which IP address to block.  Multiple expected field names are comma separated.
+A good example is the firewall-block command which expects the ``srcip`` field in order to know which IP address to block.  Multiple expected field names are comma separated.
 
 +--------------------+------------------------------------------------------------------------------------------------------+
 | **Default value**  | n/a                                                                                                  |
 +--------------------+------------------------------------------------------------------------------------------------------+
-| **Allowed values** | Extracted fields: **srcip**, **user** or **filename** separated by commas if there is more than one. |
+| **Allowed values** | Extracted fields: **srcip**, **user**, or **filename** separated by commas if there is more than one.|
 +--------------------+------------------------------------------------------------------------------------------------------+
 | **use**            | Not required                                                                                         |
 +--------------------+------------------------------------------------------------------------------------------------------+

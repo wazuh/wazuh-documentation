@@ -156,11 +156,7 @@ In the ``/var/ossec/etc/manager.conf`` file of the Wazuh manager, scroll down to
       </provider>
     </vulnerability-detector>
 
-In the example above we have enabled the feeds for RedHat, which will allow us
-to monitor CentOS systems, and NVD, the National Vulnerability Database, which
-will allow us to monitor Windows systems. More information on this module and
-how to configure it can be found in the
-:ref:`Vulnerability Detection Section <vulnerability-detection>` of the documentation.
+In the example above we have enabled the feeds for RedHat, which will allow us to monitor CentOS systems, and NVD, the National Vulnerability Database, which will allow us to monitor Windows systems. More information on this module and how to configure it can be found in the :doc:`Vulnerability Detection Section </user-manual/capabilities/vulnerability-detection/index>` of the documentation.
 
 Restart the Wazuh manager.
 
@@ -236,7 +232,7 @@ a. For Systemd:
 
       </vulnerability-detector>
 
-   In the example above we have enabled the feeds for RedHat, which will allow us to monitor CentOS systems, the National Vulnerability Database (NVD), and the Microsoft Security Update which will allow us to monitor Windows systems. More information on this module and how to configure it can be found in the :ref:`Vulnerability Detection Section <vulnerability-detection>` of the documentation.
+   In the example above we have enabled the feeds for RedHat, which will allow us to monitor CentOS systems, the National Vulnerability Database (NVD), and the Microsoft Security Update which will allow us to monitor Windows systems. More information on this module and how to configure it can be found in the :doc:`Vulnerability Detection Section </user-manual/capabilities/vulnerability-detection/index>` of the documentation.
 
 #. Restart the Wazuh manager.
 

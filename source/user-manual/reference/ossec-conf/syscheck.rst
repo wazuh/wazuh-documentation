@@ -310,7 +310,7 @@ The above block will set the ``Downloads`` folder of all users to be monitored i
 
   <directories realtime="yes">C:\Users\vagrant\Downloads</directories>
 
-Even though the above block is included in the previous one, ``C:\Users\vagrant\Downloads`` will be monitored in realtime because it has no wildcards.
+Even though the above block is included in the previous one, ``C:\Users\vagrant\Downloads`` will be monitored in real time because it has no wildcards.
 
 .. _reference_ossec_syscheck_disabled:
 
@@ -367,11 +367,11 @@ List of files or directories to be ignored. Introduced as one entry per line. Mu
 
 Attributes:
 
-+----------+---------------------------------------------------------------------------------+
-| **type** | This is a simple regex pattern to filter out files so alerts are not generated. |
-+          +--------------------------------------------+------------------------------------+
-|          | Allowed values                             | sregex                             |
-+----------+--------------------------------------------+------------------------------------+
++----------+----------------------------------------------------------------------------------+
+| **type** | This is a simple regex pattern to filter out files, so alerts are not generated. |
++          +--------------------------------------------+-------------------------------------+
+|          | Allowed values                             | sregex                              |
++----------+--------------------------------------------+-------------------------------------+
 
 Example:
 
@@ -634,7 +634,7 @@ Example:
 skip_sys
 --------
 
-Specifies if syscheck should scan the ``/sys`` directory. This option works on Linux system.
+Specifies if syscheck should scan the ``/sys`` directory. This option works on Linux systems.
 
 +--------------------+----------+
 | **Default value**  | yes      |
@@ -734,21 +734,21 @@ this parameter is ignored.
 Specifies the initial number of seconds between every inventory synchronization. If synchronization fails
 the value will be duplicated until it reaches the value of ``max_interval``.
 
-+--------------------+----------------------------------------------------------------------+
-| **Default value**  | 300 s                                                                |
-+--------------------+----------------------------------------------------------------------+
-| **Allowed values** | Any number greater than or equal to 0. Allowed sufixes (s, m, h, d). |
-+--------------------+----------------------------------------------------------------------+
++--------------------+-----------------------------------------------------------------------+
+| **Default value**  | 300 s                                                                 |
++--------------------+-----------------------------------------------------------------------+
+| **Allowed values** | Any number greater than or equal to 0. Allowed suffixes (s, m, h, d). |
++--------------------+-----------------------------------------------------------------------+
 
 **max_interval**
 
 Specifies the maximum number of seconds between every inventory synchronization.
 
-+--------------------+-----------------------------------------------------------------------------+
-| **Default value**  | 1 h                                                                         |
-+--------------------+-----------------------------------------------------------------------------+
-| **Allowed values** | Any number greater than or equal to interval. Allowed sufixes (s, m, h, d). |
-+--------------------+-----------------------------------------------------------------------------+
++--------------------+------------------------------------------------------------------------------+
+| **Default value**  | 1 h                                                                          |
++--------------------+------------------------------------------------------------------------------+
+| **Allowed values** | Any number greater than or equal to interval. Allowed suffixes (s, m, h, d). |
++--------------------+------------------------------------------------------------------------------+
 
 **response_timeout**
 
@@ -829,7 +829,7 @@ Set the disk quota limit option to enabled or disabled.
 
 .. versionadded:: 4.0
 
-Specifices the limit for the size of the ``queue/diff/local`` folder.
+Specifies the limit for the size of the ``queue/diff/local`` folder.
 
 +--------------------+---------------------------------------------+
 | **Default value**  | 1GB                                         |
@@ -860,7 +860,7 @@ Set the size limit of a file to enabled or disabled.
 
 .. versionadded:: 4.0
 
-Specifices the limit for the size of files monitored with ``report_changes``.
+Specifies the limit for the size of files monitored with ``report_changes``.
 
 +--------------------+---------------------------------------------+
 | **Default value**  | 50MB                                        |
@@ -873,7 +873,7 @@ Specifices the limit for the size of files monitored with ``report_changes``.
 nodiff
 """"""
 
-List of files to not compute the diff (one entry per line). It could be used for sensitive files like a private key, credentials stored in a file or database configuration, avoiding data leaking by sending the file content changes through alerts.
+List of files to not compute the diff (one entry per line). It could be used for sensitive files like a private key, credentials stored in a file, or database configuration, avoiding data leaking by sending the file content changes through alerts.
 
 +--------------------+----------------------+
 | **Allowed values** | Any file name.       |
@@ -929,7 +929,7 @@ The Whodata options will be configured inside this tag.
 
 **restart_audit**
 
-Allows the system to restart ``Auditd`` after installing the plugin. Note that setting this field to ``no`` the new
+Allows the system to restart ``Auditd`` after installing the plugin. Note that by setting this field to ``no`` the new
 whodata rules won't be applied automatically.
 
 +--------------------+---------+
@@ -955,7 +955,7 @@ Sets up the FIM engine to collect the Audit events using keys with ``audit_key``
 
 **startup_healthcheck**
 
-Allows to disable the Audit health check during the Whodata engine starting. This option is only available for **Linux systems with Audit**.
+Allows disabling the Audit health check during the Whodata engine starting. This option is only available for **Linux systems with Audit**.
 
 +--------------------+------------+
 | **Default value**  | yes        |

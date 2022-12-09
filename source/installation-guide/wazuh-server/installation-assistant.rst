@@ -18,7 +18,7 @@ Wazuh server cluster installation
    
        # curl -sO https://packages.wazuh.com/|WAZUH_CURRENT_MINOR|/wazuh-install.sh
 
-#. Run the assistant with the option ``--wazuh-server`` followed by the node name to install the Wazuh server. The node name must be the same one used in ``wazuh-config.yml`` for the initial configuration, for example, ``wazuh-1``.
+#. Run the assistant with the option ``--wazuh-server`` followed by the node name to install the Wazuh server. The node name must be the same one used in ``config.yml`` for the initial configuration, for example, ``wazuh-1``.
  
    .. note:: Make sure that a copy of the ``wazuh-install-files.tar``, created during the initial configuration step, is placed in your working directory.
 

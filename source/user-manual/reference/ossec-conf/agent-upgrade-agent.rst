@@ -38,7 +38,7 @@ Options
 enabled
 ^^^^^^^
 
-Disabling this option will block the agent for upgrading.
+Disabling this option will block the agent from upgrading.
 
 +--------------------+----------+
 | **Default value**  | yes      |
@@ -85,7 +85,7 @@ Maximum time allowed between successive notifications. Can use second, minute an
 +--------------------+--------------------------------------------------------------------------------------------------------------------------+
 | **Default value**  | 1h                                                                                                                       |
 +--------------------+--------------------------------------------------------------------------------------------------------------------------+
-| **Allowed values** | A positive number that should contain a suffix character indicating a time unit: s (seconds), m (minutes) or h (hours).  |
+| **Allowed values** | A positive number that should contain a suffix character indicating a time unit: s (seconds), m (minutes), or h (hours). |
 +--------------------+--------------------------------------------------------------------------------------------------------------------------+
 | **Required**       | no                                                                                                                       |
 +--------------------+--------------------------------------------------------------------------------------------------------------------------+
@@ -109,7 +109,7 @@ Configuration block to specify CA certificates to validate WPK files.
 |                           +--------------------+-----------------------------------------------------------------------------------------------------------------------------------------------------------------+
 |  **ca_store**             | **Default value**  | etc/wpk_root.pem                                                                                                                                                |
 |                           +--------------------+-----------------------------------------------------------------------------------------------------------------------------------------------------------------+
-|                           | **Allowed values** | Path to root CA certificate. It can be referred to a relative path under the Wazuh installation directory, or a full path.                                      |
+|                           | **Allowed values** | Path to root CA certificate. It can be referred to a relative path under the Wazuh installation directory or a full path.                                       |
 +---------------------------+--------------------+-----------------------------------------------------------------------------------------------------------------------------------------------------------------+
 
 

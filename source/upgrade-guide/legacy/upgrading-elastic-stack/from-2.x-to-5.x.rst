@@ -116,7 +116,7 @@ Follow these steps to upgrade Elastic Stack to version 5.x:
             # systemctl stop elasticsearch
             # systemctl stop kibana
 
-      .. group-tab:: SysV Init
+      .. group-tab:: SysV init
 
         .. code-block:: console
 

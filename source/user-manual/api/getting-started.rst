@@ -464,7 +464,7 @@ Often when an alert fires, it is helpful to know details about the rule itself. 
                 },
                 "pci_dss": [],
                 "gpg13": [
-                   "4.3"
+                   "4.4"
                 ],
                 "gdpr": [],
                 "hipaa": [],

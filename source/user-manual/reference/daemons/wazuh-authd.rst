@@ -85,6 +85,6 @@ If any of the parameters related to the certificate generation is missing, an er
 +------------------+-------------------------------------------------------------------------------------------------------+
 
 .. note::
-  Paths can be referred to relative paths under the Wazuh installation directory, or full paths.
+  Paths can be referred to as relative paths under the Wazuh installation directory or full paths.
 
 .. _`SSL ciphers`: https://www.openssl.org/docs/man1.1.1/man1/ciphers.html

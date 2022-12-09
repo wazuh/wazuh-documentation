@@ -36,9 +36,9 @@ Download the packages and configuration files
 
       .. code-block:: console
         
-         # curl -sO https://packages.wazuh.com/|WAZUH_CURRENT_MINOR|/wazuh-config.yml
+         # curl -sO https://packages.wazuh.com/|WAZUH_CURRENT_MINOR|/config.yml
 
-#. Edit ``wazuh-config.yml`` to prepare the certificates creation.
+#. Edit ``config.yml`` to prepare the certificates creation.
 
    -  If you are performing an all-in-one deployment, replace ``<indexer-node-ip>``, ``<wazuh-manager-ip>``, and ``<dashboard-node-ip>`` with ``127.0.0.1``.
         
@@ -87,7 +87,7 @@ Installing the Wazuh indexer
         
                 # dpkg -i ./wazuh-offline/wazuh-packages/wazuh-indexer*.deb
 
-#. Run the following commands replacing ``<indexer-node-name>`` with the name of the Wazuh indexer node you are configuring as defined in ``wazuh-config.yml``. For example, ``node-1``. This deploys the SSL certificates to encrypt communications between the Wazuh central components.
+#. Run the following commands replacing ``<indexer-node-name>`` with the name of the Wazuh indexer node you are configuring as defined in ``config.yml``. For example, ``node-1``. This deploys the SSL certificates to encrypt communications between the Wazuh central components.
 
    .. code-block:: console
 
@@ -112,11 +112,11 @@ Installing the Wazuh indexer
     
    #. ``network.host``:  Sets the address of this node for both HTTP and transport traffic. The node will bind to this address and will also use it as its publish address. Accepts an IP address or a hostname. 
    
-      Use the same node address set in ``wazuh-config.yml`` to create the SSL certificates. 
+      Use the same node address set in ``config.yml`` to create the SSL certificates. 
 
-   #. ``node.name``: Name of the Wazuh indexer node as defined in the ``wazuh-config.yml`` file. For example, ``node-1``.
+   #. ``node.name``: Name of the Wazuh indexer node as defined in the ``config.yml`` file. For example, ``node-1``.
 
-   #. ``cluster.initial_master_nodes``: List of the names of the master-eligible nodes. These names are defined in the ``wazuh-config.yml`` file. Uncomment the ``node-2`` and ``node-3`` lines, change the names, or add more lines, according to your ``wazuh-config.yml`` definitions.
+   #. ``cluster.initial_master_nodes``: List of the names of the master-eligible nodes. These names are defined in the ``config.yml`` file. Uncomment the ``node-2`` and ``node-3`` lines, change the names, or add more lines, according to your ``config.yml`` definitions.
 
       .. code-block:: yaml
 
@@ -135,7 +135,7 @@ Installing the Wazuh indexer
           - "10.0.0.2"
           - "10.0.0.3"
   
-   #. ``plugins.security.nodes_dn``: List of the Distinguished Names of the certificates of all the Wazuh indexer cluster nodes. Uncomment the lines for ``node-2`` and ``node-3`` and change the common names (CN) and values according to your settings and your ``wazuh-config.yml`` definitions.
+   #. ``plugins.security.nodes_dn``: List of the Distinguished Names of the certificates of all the Wazuh indexer cluster nodes. Uncomment the lines for ``node-2`` and ``node-3`` and change the common names (CN) and values according to your settings and your ``config.yml`` definitions.
 
       .. code-block:: yaml
 
@@ -284,7 +284,7 @@ Filebeat must be installed and configured on the same server as the Wazuh manage
     
         # tar -xzf ./wazuh-offline/wazuh-files/wazuh-filebeat-0.2.tar.gz -C /usr/share/filebeat/module
 
-#.  Replace ``<server-node-name>`` with your Wazuh server node certificate name, the same used in ``wazuh-config.yml`` when creating the certificates. For example, ``wazuh-1``. Then, move the certificates to their corresponding location.
+#.  Replace ``<server-node-name>`` with your Wazuh server node certificate name, the same used in ``config.yml`` when creating the certificates. For example, ``wazuh-1``. Then, move the certificates to their corresponding location.
 
      .. code-block:: console
         
@@ -415,7 +415,7 @@ Installing the Wazuh dashboard
        
                 # dpkg -i ./wazuh-offline/wazuh-packages/wazuh-dashboard*.deb
 
-#.  Replace ``<dashboard-node-name>`` with your Wazuh dashboard node name, the same used in ``wazuh-config.yml`` to create the certificates. For example, ``dashboard``. Then, move the certificates to their corresponding location.
+#.  Replace ``<dashboard-node-name>`` with your Wazuh dashboard node name, the same used in ``config.yml`` to create the certificates. For example, ``dashboard``. Then, move the certificates to their corresponding location.
 
     .. code-block:: console
 
