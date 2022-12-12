@@ -6,7 +6,7 @@
 Wazuh central components
 ========================
 
-To create a backup of the central components of your Wazuh installation, follow these steps. Repeat them on every cluster node you're doing the back up for.
+To create a backup of the central components of your Wazuh installation, follow these steps. Repeat them on every cluster node you want to back up. 
 
 .. note::
 
@@ -15,14 +15,14 @@ To create a backup of the central components of your Wazuh installation, follow 
 Preparing the backup
 --------------------
 
-#. Create the destination folder where to store the files. These commands use date and time references for the folder name to keep files separated from old backups you might have.
+#. Create the destination folder to store the files. For version control, the name of the folder consists of the date and time of the backup.
 
    .. code-block:: console
 
       # bkp_folder=~/wazuh_files_backup/$(date +%F_%H:%M)
       # mkdir --parents $bkp_folder && echo $bkp_folder
 
-#. Save host information.
+#. Save the host information.
 
    .. code-block:: console
 
@@ -32,7 +32,7 @@ Preparing the backup
 Backing up the Wazuh server
 ---------------------------
 
-#. Back up Wazuh server data, certificate and configuration files.
+#. Back up the Wazuh server data, certificates and configuration files.
 
    .. code-block:: console
 
@@ -59,7 +59,7 @@ Backing up the Wazuh server
       /var/ossec/var/db/agents/ \
       /var/ossec/var/multigroups/ $bkp_folder
 
-#. Back up your custom files. You need to adjust the command first by using the names of your own custom files.
+#. Back up your custom files. If you have custom active responses, CDB lists, integrations or wodles, adapt the following command accordingly and copy them in the backup folder.  
 
    .. code-block:: console
 
@@ -69,11 +69,11 @@ Backing up the Wazuh server
       /var/ossec/integrations/<custom_integration_script> \
       /var/ossec/wodles/<custom_wodle_script> $bkp_folder
 
-#. Stop the Wazuh manager service to prevent modification attempts while copying Wazuh databases.
+#. Stop the Wazuh manager service to prevent modification attempts while copying the Wazuh databases.
 
    .. include:: /_templates/common/stop_manager.rst
 
-#. Back up Wazuh databases. They hold collected data from agents.
+#. Back up the Wazuh databases. They hold collected data from agents.
 
    .. code-block:: console
 
@@ -87,7 +87,7 @@ Backing up the Wazuh server
 Backing up the Wazuh indexer and dashboard
 ------------------------------------------
 
-#. Back up Wazuh indexer certificate and configuration files.
+#. Back up the Wazuh indexer certificates and configuration files.
 
    .. code-block:: console
 
@@ -103,7 +103,7 @@ Backing up the Wazuh indexer and dashboard
       /usr/share/wazuh-indexer/plugins/opensearch-security/securityconfig \
       /usr/lib/sysctl.d/wazuh-indexer.conf $bkp_folder
 
-#. Back up Wazuh dashboard certificate and configuration files
+#. Back up the Wazuh dashboard certificates and configuration files.
 
    .. code-block:: console
 
@@ -122,7 +122,7 @@ Backing up the Wazuh indexer and dashboard
 Check the backup
 ----------------
 
-#. Check everything is in place and working
+#. Verify that the Wazuh manager is active and list all the backup files:  
 
    .. tabs::
 
