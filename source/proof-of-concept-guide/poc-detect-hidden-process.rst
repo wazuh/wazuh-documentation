@@ -114,9 +114,9 @@ Ubuntu endpoint
 
       diamorphine            13155  0
 
-   When using these last commands, you can expect an empty output. In the case of Diamorphine, any kill signal ``-63`` sent to any process whether it exists or not, toggles the Diamorphine kernel module to hide or unhide.
+   When using these last commands, you can expect an empty output. In the case of Diamorphine, any kill signal ``63`` sent to any process whether it exists or not, toggles the Diamorphine kernel module to hide or unhide.
 
-#. Run the following commands to see how the ``rsyslogd`` process is first visible and then no longer visible. This rootkit allows you to hide selected processes from the ``ps`` command. Sending a kill signal ``-31`` hides/unhides any process.
+#. Run the following commands to see how the ``rsyslogd`` process is first visible and then no longer visible. This rootkit allows you to hide selected processes from the ``ps`` command. Sending a kill signal ``31`` hides/unhides any process.
 
    .. code-block:: console
 
