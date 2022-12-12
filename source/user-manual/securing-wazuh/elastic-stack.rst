@@ -1,9 +1,10 @@
 .. Copyright (C) 2015, Wazuh, Inc.
 
+:orphan:
+
 .. meta::
   :description: Learn how to secure Elasticsearch.
 
-.. _user_manual_secure_elasticsearch:
 
 Change the Elasticsearch passwords
 ==================================

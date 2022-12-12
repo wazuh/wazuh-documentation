@@ -1,9 +1,9 @@
 .. Copyright (C) 2015, Wazuh, Inc.
 
-:orphan:
-
 .. meta::
    :description: Jumpcloud is a Unified Device and Identity Access Management platform. Learn more about it in this section of the Wazuh documentation.
+
+.. _jumpcloud:
 
 Jumpcloud
 =========

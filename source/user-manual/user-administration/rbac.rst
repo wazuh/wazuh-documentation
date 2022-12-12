@@ -1,10 +1,9 @@
 .. Copyright (C) 2015, Wazuh, Inc.
 
-:orphan:
-
 .. meta::
   :description: This section of the Wazuh documentation explains what a role-based access control system is and how you can use it with Wazuh. 
   
+.. _wazuh-rbac:
 
 Wazuh RBAC - How to create and map internal users
 =================================================
@@ -129,12 +128,14 @@ Follow these steps to create an internal user and map it to a role of your choic
       - **Roles**: Select the Wazuh roles that you want to map the user with.
       - **Internal users**: Select the internal user created previously.
 
-      Wazuh includes an extensive list of :ref:`default policies<api_rbac_reference_default_policies>` and :ref:`roles <api_rbac_reference_default_roles>`. Additionally, you can create custom policies and roles to suit your needs. To see an example, check our `Use case: Give a user permissions to manage a group of agents` below. 
+      Wazuh includes an extensive list of :ref:`default policies<api_rbac_reference_default_policies>` and :ref:`roles <api_rbac_reference_default_roles>`. Additionally, you can create custom policies and roles to suit your needs. To see an example, check our :ref:`Use case: Give a user permissions to manage a group of agents <wazuh-rbac-use-case-agents-group>` below. 
   
    #. Click **Save role mapping** to save and map the user with Wazuh.
 
    For the role mapping to take effect, make sure that ``run_as`` is set to ``true`` in the ``/usr/share/wazuh-dashboard/data/wazuh/config/wazuh.yml`` configuration file. Restart the Wazuh dashboard service and clear your browser cache and cookies.
 
+
+.. _wazuh-rbac-use-case-agents-group:
 
 Use case: Give a user permissions to read and manage a group of agents
 -----------------------------------------------------------------------

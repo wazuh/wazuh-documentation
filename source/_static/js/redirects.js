@@ -129,6 +129,30 @@ redirectSameRelease['4.3'] = {
      '/user-manual/capabilities/vulnerability-detection/how-it-works.html#compatibility-matrix',
    '/user-manual/capabilities/vulnerability-detection/running-vu-scan.html':
      '/user-manual/capabilities/vulnerability-detection/configuring-scans.html',
+   '/user-manual/wazuh-dashboard/single-sign-on/index.html':
+     '/user-manual/user-administration/single-sign-on/index.html', 
+   '/user-manual/wazuh-dashboard/single-sign-on/okta.html':
+     '/user-manual/user-administration/single-sign-on/okta.html',
+   '/user-manual/wazuh-dashboard/single-sign-on/azure-active-directory.html':
+     '/user-manual/user-administration/single-sign-on/azure-active-directory.html',
+   '/user-manual/wazuh-dashboard/single-sign-on/pingone.html':
+     '/user-manual/user-administration/single-sign-on/pingone.html', 
+   '/user-manual/wazuh-dashboard/single-sign-on/google.html':
+     '/user-manual/user-administration/single-sign-on/google.html',
+   '/user-manual/wazuh-dashboard/single-sign-on/jumpcloud.html':
+     '/user-manual/user-administration/single-sign-on/jumpcloud.html',
+   '/user-manual/wazuh-dashboard/single-sign-on/onelogin.html':
+     '/user-manual/user-administration/single-sign-on/onelogin.html',     
+   '/user-manual/securing-wazuh/index.html':
+     '/user-manual/user-administration/password-management/index.html',
+   '/user-manual/securing-wazuh/wazuh-indexer.html':
+     '/user-manual/user-administration/password-management.html',
+   '/user-manual/securing-wazuh/opendistro.html':
+     '/user-manual/user-administration/password-management.html',
+   '/user-manual/securing-wazuh/elastic-stack.html':  
+     '/user-manual/user-administration/password-management.html',
+   '/user-manual/wazuh-dashboard/rbac.html':
+     '/user-manual/user-administration/rbac.html', 
    '/learning-wazuh/build-lab/install-wazuh-central-components.html':
      '/proof-of-concept-guide/index.html',
    '/learning-wazuh/index.html':
@@ -195,20 +219,18 @@ newUrls['4.3'] = [
   '/user-manual/wazuh-dashboard/settings.html',
   '/user-manual/wazuh-dashboard/config-file.html',
   '/user-manual/wazuh-dashboard/index.html',
-  '/user-manual/wazuh-dashboard/rbac.html',
   '/user-manual/wazuh-dashboard/troubleshooting.html',
   '/user-manual/wazuh-dashboard/multi-tenancy.html',
-  '/user-manual/wazuh-dashboard/single-sign-on/index.html',
-  '/user-manual/wazuh-dashboard/single-sign-on/okta.html',
-  '/user-manual/wazuh-dashboard/single-sign-on/azure-active-directory.html',
-  '/user-manual/wazuh-dashboard/single-sign-on/pingone.html',
-  '/user-manual/wazuh-dashboard/single-sign-on/google.html',
-  '/user-manual/wazuh-dashboard/single-sign-on/jumpcloud.html',
-  '/user-manual/wazuh-dashboard/single-sign-on/onelogin.html',
-  '/user-manual/securing-wazuh/index.html',
-  '/user-manual/securing-wazuh/wazuh-indexer.html',
-  '/user-manual/securing-wazuh/opendistro.html',
-  '/user-manual/securing-wazuh/elastic-stack.html',
+  '/user-manual/user-administration/index.html',
+  '/user-manual/user-administration/password-management.html',
+  '/user-manual/user-administration/rbac.html',
+  '/user-manual/user-administration/single-sign-on/index.html',
+  '/user-manual/user-administration/single-sign-on/okta.html',
+  '/user-manual/user-administration/single-sign-on/azure-active-directory.html',
+  '/user-manual/user-administration/single-sign-on/pingone.html',
+  '/user-manual/user-administration/single-sign-on/google.html',
+  '/user-manual/user-administration/single-sign-on/jumpcloud.html',
+  '/user-manual/user-administration/single-sign-on/onelogin.html',
   '/upgrade-guide/upgrading-central-components.html',
   '/migration-guide/index.html',
   '/migration-guide/wazuh-indexer.html',
@@ -1041,7 +1063,7 @@ redirections.push(
   {
     'target': ['4.2=>4.3'],
     '4.2': '/user-manual/kibana-app/wazuh-rbac.html',
-    '4.3': '/user-manual/wazuh-dashboard/rbac.html',
+    '4.3': '/user-manual/user-administration/rbac.html',
   },
   {
     'target': ['4.2=>4.3'],
