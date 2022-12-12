@@ -1,9 +1,10 @@
 .. Copyright (C) 2015, Wazuh, Inc.
 
+:orphan: 
+
 .. meta::
   :description: Learn how to secure Wazuh indexer.
 
-.. _user_manual_secure_wazuh_indexer:
 
 Change the Wazuh indexer passwords
 ==================================

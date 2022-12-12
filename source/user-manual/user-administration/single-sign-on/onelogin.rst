@@ -1,9 +1,9 @@
 .. Copyright (C) 2015, Wazuh, Inc.
 
-:orphan:
-
 .. meta::
    :description: OneLogin is a cloud-based identity and access management provider. Learn more about it in this section of the Wazuh documentation.
+
+.. _onelogin:
 
 OneLogin
 ========

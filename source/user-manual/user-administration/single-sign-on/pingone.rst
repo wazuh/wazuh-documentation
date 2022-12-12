@@ -1,113 +1,110 @@
 .. Copyright (C) 2015, Wazuh, Inc.
 
-:orphan:
-
 .. meta::
-   :description: Google Workspace is a collection of cloud computing, productivity and collaboration tools. Learn more about it in this section of the Wazuh documentation.
+   :description: PingOne is a platform that enables enterprises to give their users federated access to applications. Learn more about it in this section of our documentation.
 
-Google
-======
+PingOne
+=======
 
-`Google Workspace <https://workspace.google.com/>`_, developed and marketed by Google, is a collection of cloud computing, productivity, and collaboration tools.  In this guide, we integrate Google IdP to authenticate users into the Wazuh platform. 
+`PingOne for Enterprise <https://www.pingidentity.com/>`_ is an identity-as-a-service (IDaaS) and single sign-on (SSO) platform. It allows enterprises to give their users federated access to applications. In this guide, we integrate the PingOne IdP to authenticate users into the Wazuh platform.
 
 The single sign-on integration process is divided into three stages.
 
-#. Google Configuration
+#. PingOne Configuration
 #. Wazuh indexer configuration
 #. Wazuh dashboard configuration
 
-Google Configuration
---------------------
+PingOne Configuration
+---------------------
 
-#. Create an account in Google Workspace.
+#. Create an account in Ping Identity. Request a free trial if you don't have a paid license.
+#. Go to `PingOne <https://admin.pingone.com/>`_ and sign in with your Ping Identity account.
+#. Create an application in **Connections**.
 
-   A Google Workspace account is required for this configuration. Request a free trial if you don't have a paid license.
+   #. Navigate to **Connections** > **Applications** > **Add Application** and give it a name. In our case, the name is ``wazuh-sso``.
 
-#. Go to https://admin.google.com/ac/apps/unified and sign in with your Google Admin account.
-#. Create an app with **Add custom SAML app**.
+   #. Proceed to the **Choose Application Type** section, and select  **SAML Application** > **Configure**.
 
-   #. Go to **Apps** > **Website and mobile apps** > **Add App**, then **Add custom SAML app**. Enter an **App name** and click **CONTINUE**.
+      .. thumbnail:: /images/single-sign-on/pingone/01-proceed-to-the-choose-application-type-section.png
+          :title: Proceed to the Choose Application Type section
+          :align: center
+          :width: 80%
 
-      .. thumbnail:: /images/single-sign-on/google/01-go-to-apps.png
-         :title: Go to Apps > Website and mobile apps
-         :align: center
-         :width: 80%
+   #. Select **Manually Enter** on the **Provide App Metadata** page and add the following configuration, replacing ``<WAZUH_DASHBOARD_URL>`` with the corresponding value:
 
-   #. Take note of the following parameters, as they will be used during the Wazuh indexer configuration:
+      - ACS URLs: ``https://<WAZUH_DASHBOARD_URL>/_opendistro/_security/saml/acs``
+      - ENTITY ID: ``wazuh-saml``
 
-      - **Entity ID**: This will be used later as the ``idp.entity_id``
-      - Select **DOWNLOAD METADATA** and place the metadata file in the ``configuration`` directory of the Wazuh indexer. The path to the directory is ``/usr/share/wazuh-indexer/plugins/opensearch-security/securityconfig/``.
+      .. thumbnail:: /images/single-sign-on/pingone/02-select-manually-enter-on-the-provide-app-metadata.png
+          :title: Select Manually Enter on the Provide App Metadata
+          :align: center
+          :width: 80%
 
-      .. thumbnail:: /images/single-sign-on/google/02-take-note-of-the-parameters.png
-         :title: Take note of the parameters
-         :align: center
-         :width: 80%
-   
-   #. Select **CONTINUE** and configure the following:
+   #. On the **Configuration** tab, click on the edit icon and add the following information:
 
-      - **ACS URL**: ``https://<WAZUH_DASHBOARD_URL>/_opendistro/_security/saml/acs``. Replace the Wazuh dashboard URL field with the appropriate URL or IP address.
-      - **Entity ID**: Use any name here. This will be the ``sp.entity_id`` in the Wazuh indexer configuration file. In our case, the value is ``wazuh-saml``.
-      - **Certificate**: Copy the blob of the certificate excluding the ``-----BEGIN CERTIFICATE-----`` and ``-----END CERTIFICATE-----`` lines. This will be our ``exchange_key`` in the Wazuh indexer configuration file.
+      - SLO ENDPOINT: ``https://<WAZUH_DASHBOARD_URL>/``
+      - SLO BINDING: ``HTTP Redirect``
+      - ASSERTION VALIDITY DURATION: ``3600`` (for one hour token validity)
+      - VERIFICATION CERTIFICATE (OPTIONAL): Load a PUBLIC CERTIFICATE that corresponds to the PRIVATE KEY that is going to be used on the ``sp.signature_private_key_filepath`` of the ``config.yml`` configuration file on the Wazuh indexer instance. This is necessary as all the logout requests must be signed.
 
-      .. thumbnail:: /images/single-sign-on/google/03-select-continue-and-configure.png
-         :title: Select CONTINUE and configure
-         :align: center
-         :width: 80%
+      .. thumbnail:: /images/single-sign-on/pingone/03-on-the-configuration-tab.png
+          :title: On the Configuration tab
+          :align: center
+          :width: 80%
 
-   #. Leave the remaining parameters with their default values, then select **CONTINUE**.
+   #. Click on the **Attribute Mappings** tab,  select the edit icon, click on **Add** and insert the following configuration:
 
-   #. Click on **ADD MAPPING**, under Employee details, choose **Department**, under App attributes, type **Roles**, and select **FINISH**. 
+      ``Roles`` = ``Group Names`` 
 
-      Google doesn't support sending the Group membership attribute as part of the SAML Assertion (as the other Identity Providers do). So in this example, we are going to use **Department** as the attribute whose value will be used as our ``roles_key`` in the Wazuh indexer configuration. In this case, the value for the **Department** attribute will be stored as ``Roles``.
+      .. thumbnail:: /images/single-sign-on/pingone/04-click-on-the-attribute-mappings-tab.png
+          :title: Click on the Attribute Mappings tab
+          :align: center
+          :width: 80%
 
-      .. thumbnail:: /images/single-sign-on/google/04-click-on-add-mapping.png
-         :title: Click on ADD MAPPING under Employee details
-         :align: center
-         :width: 80%
+      The ``Roles`` attribute will be used later as the ``sp.entity_id`` in the Wazuh indexer configuration file.
 
-#. Turn ON access for everyone.
+   #. Click on the **Required** checkbox, and click on **Save**.
 
-   #. Select the recently created app and click on **User access**.
+#. Create a group and assign users.
+ 
+   #. Navigate to **Identities** > **Groups**, and click on the **+** sign. Select the name of the **Group**, in this case, ``Role``.
 
-      .. thumbnail:: /images/single-sign-on/google/05-turn-on-access-for-everyone.png
-         :title: Turn ON access for everyone
-         :align: center
-         :width: 80%
+      .. thumbnail:: /images/single-sign-on/pingone/05-navigate-to-identities-groups.png
+          :title: Navigate to Identities > Groups
+          :align: center
+          :width: 80%
 
-   #. Select **ON for everyone** and click **SAVE**.
+   #. To assign users, open the created **Group**, go to the **Users** tab and select **Add Users Individually**. Add all the members that must log in to the Wazuh dashboard, and click on **Save** when done.
 
-      .. thumbnail:: /images/single-sign-on/google/06-select-on-for-everyone.png
-         :title: Select ON for everyone and click SAVE
-         :align: center
-         :width: 80%
+      .. thumbnail:: /images/single-sign-on/pingone/06-assign-users.png
+          :title: Assign users
+          :align: center
+          :width: 80%
 
-#. Define the attribute for users.
+      .. thumbnail:: /images/single-sign-on/pingone/07-assign-users.png
+          :title: Assign users
+          :align: center
+          :width: 80%
 
-   #. Go to **Directory** then **Users**.
+#. Activate the application and note the necessary parameters.
 
-      .. thumbnail:: /images/single-sign-on/google/07-define-the-attribute-for-users.png
-         :title: Define the attribute for users
-         :align: center
-         :width: 80%
+   #. Navigate to **Connections**, select **Applications**, and enable the application.
 
-   #. Select a user,  go to **User information**, then edit **Employee information**.
+      .. thumbnail:: /images/single-sign-on/pingone/08-navigate-to-connections.png
+          :title: Navigate to Connections
+          :align: center
+          :width: 80%
+    
+   #. Take note of the following parameters from the configuration page of the application. This information will be used in the next step. 
 
-      .. thumbnail:: /images/single-sign-on/google/08-select-a-user.png
-         :title: Select a user
-         :align: center
-         :width: 80%
+      - **ISSUER ID**: It'll be in the form “https://auth.pingone.com/....”
+      - **IDP METADATA URL**: It’ll be in the form “https://auth.pingone.com/....”
+      - ``exchange_key``: If you open IDP **IDP METADATA URL** you'll find the X509 Certificate  section, this will be used as the ``exchange_key``.
 
-      .. thumbnail:: /images/single-sign-on/google/09-edit-employee-information.png
-         :title: Edit Employee information
-         :align: center
-         :width: 80%
-
-   #. Add a value to the **Department** field, in this example, we add ``Wazuh_access``, click on **SAVE**. This value will be used in the ``role_mapping`` file configuration.
-
-      .. thumbnail:: /images/single-sign-on/google/10-add-a-value-to-the-department-field.png
-        :title:  Add a value to the Department field
-        :align: center
-        :width: 80%
+      .. thumbnail:: /images/single-sign-on/pingone/09-take-note-of-parameters.png
+          :title: Take note of parameters from the configuration page
+          :align: center
+          :width: 80%
 
 
 Wazuh indexer configuration
@@ -116,11 +113,12 @@ Wazuh indexer configuration
 Edit the Wazuh indexer security configuration files. It is recommended to back up these files before the configuration is carried out.
 
 #. Edit the ``/usr/share/wazuh-indexer/plugins/opensearch-security/securityconfig/config.yml`` file and change the following values:
-   
+
    - Set the ``order`` in ``basic_internal_auth_domain`` to ``0`` and the ``challenge`` flag to ``false``. 
 
    - Include a ``saml_auth_domain`` configuration under the ``authc`` section similar to the following:
-  
+
+
    .. code-block:: console
       :emphasize-lines: 7,10,22,23,25,26,27,28
 
@@ -194,17 +192,19 @@ Edit the Wazuh indexer security configuration files. It is recommended to back u
 
 #. Edit ``/usr/share/wazuh-indexer/plugins/opensearch-security/securityconfig/roles_mapping.yml`` file and change the following values:
    
-   Map the ``Department`` field value that was obtained in Google IdP to the ``all_access`` role in the Wazuh indexer:
+   Map the Group (Role) that is in PingOne to the ``all_access`` role in Wazuh indexer:
 
    .. code-block:: console
+      :emphasize-lines: 6
 
       all_access:
         reserved: false
         hidden: false
         backend_roles:
         - "admin"
-        - "Wazuh_access"
-        description: "Maps admin and Wazuh_access to all_access"
+        - "Role"
+        description: "Maps admin to all_access"
+
 
 #. Run the ``securityadmin`` script to load the configuration changes made in the ``roles_mapping.yml`` file. 
 
@@ -267,4 +267,4 @@ Wazuh dashboard configuration
 
 #. Test the configuration.
    
-   To test the configuration, go to your Wazuh dashboard URL and log in with your Google Workspace account. 
+   To test the configuration, go to your Wazuh dashboard URL and log in with your Ping One account. 

@@ -24,7 +24,7 @@ Welcome to the Wazuh user manual. Use it as your reference library once your bas
         capabilities/index
         ruleset/index
         api/index
-        securing-wazuh/index
+        user-administration/index
         reference/index
         elasticsearch/index
         wazuh-dashboard/index
