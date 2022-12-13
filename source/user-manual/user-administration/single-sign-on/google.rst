@@ -10,7 +10,7 @@ Google
 
 `Google Workspace <https://workspace.google.com/>`_, developed and marketed by Google, is a collection of cloud computing, productivity, and collaboration tools.  In this guide, we integrate Google IdP to authenticate users into the Wazuh platform. 
 
-The single sign-on integration process is divided into three stages.
+There are three stages in the single sign-on integration.
 
 #. Google Configuration
 #. Wazuh indexer configuration
@@ -36,7 +36,7 @@ Google Configuration
    #. Take note of the following parameters, as they will be used during the Wazuh indexer configuration:
 
       - **Entity ID**: This will be used later as the ``idp.entity_id``
-      - Select **DOWNLOAD METADATA** and place the metadata file in the ``configuration`` directory of the Wazuh indexer. The path to the directory is ``/usr/share/wazuh-indexer/plugins/opensearch-security/securityconfig/``.
+      - Select **DOWNLOAD METADATA** and place the metadata file in the ``configuration`` directory of the Wazuh indexer. The path to the directory is ``/etc/wazuh-indexer/opensearch-security/``.
 
       .. thumbnail:: /images/single-sign-on/google/02-take-note-of-the-parameters.png
          :title: Take note of the parameters
@@ -113,9 +113,9 @@ Google Configuration
 Wazuh indexer configuration
 ---------------------------
 
-Edit the Wazuh indexer security configuration files. It is recommended to back up these files before the configuration is carried out.
+Edit the Wazuh indexer security configuration files. We recommend that you back up these files before you carry out the configuration.
 
-#. Edit the ``/usr/share/wazuh-indexer/plugins/opensearch-security/securityconfig/config.yml`` file and change the following values:
+#. Edit the ``/etc/wazuh-indexer/opensearch-security/config.yml`` file and change the following values:
    
    - Set the ``order`` in ``basic_internal_auth_domain`` to ``0`` and the ``challenge`` flag to ``false``. 
 
@@ -145,15 +145,16 @@ Edit the Wazuh indexer security configuration files. It is recommended to back u
                 challenge: true
                 config:
                   idp:
-                    metadata_file: “/usr/share/wazuh-indexer/plugins/opensearch-security/securityconfig/Google_Metadata.xml”
+                    metadata_file: “/etc/wazuh-indexer/opensearch-security/Google_Metadata.xml”
                     entity_id: “https://accounts.google.com/o/saml2?idpid=C02…”
                   sp:
                     entity_id: wazuh-saml
-                  kibana_url: https://<WAZUH_DASHBOARD_ADDRESS>
+                  kibana_url: https://<WAZUH_DASHBOARD_URL>
                   roles_key: Roles
-                  exchange_key: 'X509Certificate'
+                  exchange_key: 'MIICajCCAdOgAwIBAgIBAD.........'
               authentication_backend:
                 type: noop
+
 
    Ensure to change the following parameters to their corresponding value:
 
@@ -168,31 +169,32 @@ Edit the Wazuh indexer security configuration files. It is recommended to back u
 
    .. code-block:: console
 
-      # export JAVA_HOME=/usr/share/wazuh-indexer/jdk/ && bash /usr/share/wazuh-indexer/plugins/opensearch-security/tools/securityadmin.sh -f /usr/share/wazuh-indexer/plugins/opensearch-security/securityconfig/config.yml -icl -key /etc/wazuh-indexer/certs/admin-key.pem -cert /etc/wazuh-indexer/certs/admin.pem -cacert /etc/wazuh-indexer/certs/root-ca.pem -h localhost -nhnv
+      # export JAVA_HOME=/usr/share/wazuh-indexer/jdk/ && bash /usr/share/wazuh-indexer/plugins/opensearch-security/tools/securityadmin.sh -f /etc/wazuh-indexer/opensearch-security/config.yml -icl -key /etc/wazuh-indexer/certs/admin-key.pem -cert /etc/wazuh-indexer/certs/admin.pem -cacert /etc/wazuh-indexer/certs/root-ca.pem -h localhost -nhnv
 
-   The ``-h`` flag is used to specify the hostname or the IP address of the Wazuh indexer node. Note that this command uses localhost, set your Wazuh indexer address if necessary.
+   The ``-h`` flag specifies the hostname or the IP address of the Wazuh indexer node. Note that this command uses localhost, set your Wazuh indexer address if necessary.
 
    The command output must be similar to the following:
 
    .. code-block:: console
       :class: output
 
-      Will connect to localhost:9300 ... done
-      Connected as CN=admin,OU=Wazuh,O=Wazuh,L=California,C=US
-      OpenSearch Version: 1.2.4
-      OpenSearch Security Version: 1.2.4.0
+      Security Admin v7
+      Will connect to localhost:9200 ... done
+      Connected as "CN=admin,OU=Wazuh,O=Wazuh,L=California,C=US"
+      OpenSearch Version: 2.4.0
       Contacting opensearch cluster 'opensearch' and wait for YELLOW clusterstate ...
       Clustername: wazuh-cluster
       Clusterstate: GREEN
       Number of nodes: 1
       Number of data nodes: 1
       .opendistro_security index already exists, so we do not need to create one.
-      Populate config from /home/wazuh
-      Will update '_doc/config' with /usr/share/wazuh-indexer/plugins/opensearch-security/securityconfig/config.yml 
+      Populate config from /etc/wazuh-indexer/opensearch-security
+      Will update '/config' with /etc/wazuh-indexer/opensearch-security/config.yml 
          SUCC: Configuration for 'config' created or updated
       Done with success
 
-#. Edit ``/usr/share/wazuh-indexer/plugins/opensearch-security/securityconfig/roles_mapping.yml`` file and change the following values:
+
+#. Edit the ``/etc/wazuh-indexer/opensearch-security/roles_mapping.yml`` file and change the following values:
    
    Map the ``Department`` field value that was obtained in Google IdP to the ``all_access`` role in the Wazuh indexer:
 
@@ -210,9 +212,9 @@ Edit the Wazuh indexer security configuration files. It is recommended to back u
 
    .. code-block:: console
 
-      # export JAVA_HOME=/usr/share/wazuh-indexer/jdk/ && bash /usr/share/wazuh-indexer/plugins/opensearch-security/tools/securityadmin.sh -f /usr/share/wazuh-indexer/plugins/opensearch-security/securityconfig/roles_mapping.yml -icl -key /etc/wazuh-indexer/certs/admin-key.pem -cert /etc/wazuh-indexer/certs/admin.pem -cacert /etc/wazuh-indexer/certs/root-ca.pem -h localhost -nhnv
+      # export JAVA_HOME=/usr/share/wazuh-indexer/jdk/ && bash /usr/share/wazuh-indexer/plugins/opensearch-security/tools/securityadmin.sh -f /etc/wazuh-indexer/opensearch-security/roles_mapping.yml -icl -key /etc/wazuh-indexer/certs/admin-key.pem -cert /etc/wazuh-indexer/certs/admin.pem -cacert /etc/wazuh-indexer/certs/root-ca.pem -h localhost -nhnv
 
-   The ``-h`` flag is used to specify the hostname or the IP address of the Wazuh indexer node. Note that this command uses localhost, set your Wazuh indexer address if necessary.
+   The ``-h`` flag specifies the hostname or the IP address of the Wazuh indexer node. Note that this command uses localhost, set your Wazuh indexer address if necessary.
 
    The command output must be similar to the following:
 
@@ -220,27 +222,27 @@ Edit the Wazuh indexer security configuration files. It is recommended to back u
       :class: output
             
       Security Admin v7
-      Will connect to localhost:9300 ... done
-      Connected as CN=admin,OU=Wazuh,O=Wazuh,L=California,C=US
-      OpenSearch Version: 1.2.4
-      OpenSearch Security Version: 1.2.4.0
+      Will connect to localhost:9200 ... done
+      Connected as "CN=admin,OU=Wazuh,O=Wazuh,L=California,C=US"
+      OpenSearch Version: 2.4.0
       Contacting opensearch cluster 'opensearch' and wait for YELLOW clusterstate ...
       Clustername: wazuh-cluster
       Clusterstate: GREEN
       Number of nodes: 1
       Number of data nodes: 1
       .opendistro_security index already exists, so we do not need to create one.
-      Populate config from /home/wazuh
-      Will update '_doc/rolesmapping' with /usr/share/wazuh-indexer/plugins/opensearch-security/securityconfig/roles_mapping.yml 
+      Populate config from /etc/wazuh-indexer/opensearch-security
+      Will update '/rolesmapping' with /etc/wazuh-indexer/opensearch-security/roles_mapping.yml 
          SUCC: Configuration for 'rolesmapping' created or updated
       Done with success
+
 
 Wazuh dashboard configuration
 -----------------------------
 
 #. Edit the Wazuh dashboard configuration file.
 
-   Add these configurations to ``/etc/wazuh-dashboard/opensearch_dashboards.yml``. It is recommended to back up this file before the configuration is changed.
+   Add these configurations to ``/etc/wazuh-dashboard/opensearch_dashboards.yml``. We recommend that you back up these files before you carry out the configuration.
 
    .. code-block:: console  
 
