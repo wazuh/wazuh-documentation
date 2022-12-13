@@ -13,11 +13,11 @@ In this use case, we demonstrate how to integrate Suricata with Wazuh. Suricata 
 Infrastructure
 --------------
 
-+------------+-------------------------------------------------------------------------------------------------------------------------------------------------+
-| Endpoint   | Description                                                                                                                                     |
-+============+=================================================================================================================================================+
-| Ubuntu     | This is the endpoint where you install Suricata. In this use case, Wazuh monitors and analyzes the network traffic generated on this endpoint.  |
-+------------+-------------------------------------------------------------------------------------------------------------------------------------------------+
++---------------+-------------------------------------------------------------------------------------------------------------------------------------------------+
+| Endpoint      | Description                                                                                                                                     |
++===============+=================================================================================================================================================+
+| Ubuntu 22.04  | This is the endpoint where you install Suricata. In this use case, Wazuh monitors and analyzes the network traffic generated on this endpoint.  |
++---------------+-------------------------------------------------------------------------------------------------------------------------------------------------+
 
 Configuration
 -------------
@@ -131,6 +131,7 @@ Troubleshooting
 -  **Error log**:
 
    .. code-block:: none
+      :emphasize-lines: 2
 
       16/9/2022 -- 12:32:16 - <Notice> - all 2 packet processing threads, 4 management threads initialized, engine started.
       16/9/2022 -- 12:32:16 - <Error> - [ERRCODE: SC_ERR_AFP_CREATE(190)] - Unable to find iface eth0: No such device
