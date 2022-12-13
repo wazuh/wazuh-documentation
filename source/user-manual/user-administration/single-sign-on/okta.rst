@@ -131,9 +131,9 @@ Okta Configuration
 
    The parameters already obtained during the integration are:
 
-   - ``sp.entity_id: wazuh-saml``
-   - ``roles_key: Roles``
-   - ``kibana_url: https://<WAZUH_DASHBOARD_URL>``
+   - ``sp.entity_id``: ``wazuh-saml``
+   - ``roles_key``: ``Roles``
+   - ``kibana_url``: ``https://<WAZUH_DASHBOARD_URL>``
 
    To obtain the remaining parameters, navigate to **Applications** > **Applications**, select your app and click **Sign On**. 
 
@@ -162,7 +162,7 @@ Edit the Wazuh indexer security configuration files. We recommend that you back 
    - Include a ``saml_auth_domain`` configuration under the ``authc`` section similar to the following:
 
    .. code-block:: console
-      :emphasize-lines: 7,10,22,23,25,26,27,2
+      :emphasize-lines: 7,10,22,23,25,26,27,28
 
           authc:
       ...
