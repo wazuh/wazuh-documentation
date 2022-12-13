@@ -15,12 +15,12 @@ To create a backup of the central components of your Wazuh installation, follow 
 Preparing the backup
 --------------------
 
-#. Create the destination folder to store the files. For version control, the name of the folder consists of the date and time of the backup.
+#. Create the destination folder to store the files. For version control, add the date and time of the backup to the name of the folder.
 
    .. code-block:: console
 
       # bkp_folder=~/wazuh_files_backup/$(date +%F_%H:%M)
-      # mkdir --parents $bkp_folder && echo $bkp_folder
+      # mkdir -p $bkp_folder && echo $bkp_folder
 
 #. Save the host information.
 
@@ -32,11 +32,11 @@ Preparing the backup
 Backing up the Wazuh server
 ---------------------------
 
-#. Back up the Wazuh server data, certificates and configuration files.
+#. Back up the Wazuh server data, certificates, and configuration files.
 
    .. code-block:: console
 
-      # cp -rp --parents \
+      # rsync -aREz \
       /etc/filebeat/ \
       /etc/postfix/ \
       /var/ossec/api/configuration/ \
@@ -59,11 +59,11 @@ Backing up the Wazuh server
       /var/ossec/var/db/agents/ \
       /var/ossec/var/multigroups/ $bkp_folder
 
-#. Back up your custom files. If you have custom active responses, CDB lists, integrations or wodles, adapt the following command accordingly and copy them in the backup folder.  
+#. Back up your custom files. If you have custom active responses, CDB lists, integrations, or wodles, adapt the following command accordingly.
 
    .. code-block:: console
 
-      # cp -rp --parents \
+      # rsync -aREz \
       /var/ossec/active-response/bin/<custom_AR_script> \
       /var/ossec/etc/lists/<user_cdb_list>.cdb \
       /var/ossec/integrations/<custom_integration_script> \
@@ -77,7 +77,7 @@ Backing up the Wazuh server
 
    .. code-block:: console
 
-      # cp -rp --parents \
+      # rsync -aREz \
       /var/ossec/queue/db/ $bkp_folder
 
 #. Start the Wazuh manager service.
@@ -91,7 +91,7 @@ Backing up the Wazuh indexer and dashboard
 
    .. code-block:: console
 
-      # cp -rp --parents \
+      # rsync -aREz \
       /etc/wazuh-indexer/certs/ \
       /etc/wazuh-indexer/jvm.options \
       /etc/wazuh-indexer/jvm.options.d \
@@ -107,7 +107,7 @@ Backing up the Wazuh indexer and dashboard
 
    .. code-block:: console
 
-      # cp -rp --parents \
+      # rsync -aREz \
       /etc/wazuh-dashboard/certs/ \
       /etc/wazuh-dashboard/opensearch_dashboards.yml \
       /usr/share/wazuh-dashboard/config/opensearch_dashboards.keystore \

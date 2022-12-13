@@ -24,7 +24,7 @@ Preparing the backup
          .. code-block:: console
 
             # bkp_folder=~/wazuh_files_backup/$(date +%F_%H:%M)
-            # mkdir --parents $bkp_folder && echo $bkp_folder
+            # mkdir -p $bkp_folder && echo $bkp_folder
 
       .. group-tab:: Windows
 
@@ -43,7 +43,7 @@ Preparing the backup
          .. code-block:: console
 
             # bkp_folder=~/wazuh_files_backup/$(date +%F_%H:%M)
-            # mkdir --parents $bkp_folder && echo $bkp_folder
+            # mkdir -p $bkp_folder && echo $bkp_folder
 
 Backing up a Wazuh agent
 ------------------------
@@ -56,7 +56,7 @@ Backing up a Wazuh agent
 
          .. code-block:: console
 
-            # cp -rp --parents \
+            # rsync -aREz \
             /var/ossec/etc/client.keys \
             /var/ossec/etc/ossec.conf \
             /var/ossec/etc/internal_options.conf \
@@ -82,7 +82,7 @@ Backing up a Wazuh agent
 
          .. code-block:: console
 
-            # cp -rp --parents \
+            # rsync -aREz \
             /Library/Ossec/etc/client.keys \
             /Library/Ossec/etc/ossec.conf \
             /Library/Ossec/etc/internal_options.conf \
