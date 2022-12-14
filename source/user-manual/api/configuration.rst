@@ -61,14 +61,17 @@ Here are all the available settings for the ``api.yaml`` configuration file. For
         block_time: 300
         max_request_per_minute: 300
 
-     remote_commands:
-        localfile:
-           enabled: yes
-           exceptions: []
-
-       wodle_command:
-          enabled: yes
-          exceptions: []
+     upload_configuration:
+        remote_commands:
+           localfile:
+              allow: yes
+              exceptions: []
+           wodle_command:
+              allow: yes
+              exceptions: []
+        limits:
+           eps:
+              allow: yes
 
 .. warning::
 
