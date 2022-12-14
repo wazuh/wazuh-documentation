@@ -109,7 +109,7 @@ The table below shows available channels and providers to monitor included in th
 | Terminal Services             | Service                                                      |                                    |                                                                                |
 |                               | Microsoft-Windows-TerminalServices-RemoteConnectionManager   |                                    |                                                                                |
 +-------------------------------+--------------------------------------------------------------+------------------------------------+--------------------------------------------------------------------------------+
-| Powershell                    | Microsoft-Windows-PowerShell/Operational                     | Microsoft-Windows-PowerShell       | This channel collects and audits Powershell activity                           |
+| Powershell                    | Microsoft-Windows-PowerShell/Operational                     | Microsoft-Windows-PowerShell       | This channel collects and audits Powershell activity.                          |
 +-------------------------------+--------------------------------------------------------------+------------------------------------+--------------------------------------------------------------------------------+
 
 When monitoring a channel, events from different providers can be gathered. In the ruleset, this is taken into account to monitor logs from McAfee, Eventlog or Security Essentials.
