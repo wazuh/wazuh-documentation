@@ -104,46 +104,6 @@ redirectSameRelease['4.3'] = {
      '/user-manual/user-administration/rbac.html', 
    '/learning-wazuh/build-lab/install-wazuh-central-components.html':
      '/proof-of-concept-guide/index.html',
-   '/learning-wazuh/index.html':
-     '/proof-of-concept-guide/index.html',
-   '/learning-wazuh/build-lab/index.html':
-     '/proof-of-concept-guide/index.html',
-   '/learning-wazuh/build-lab/build-vpc.html':
-     '/proof-of-concept-guide/index.html',
-   '/learning-wazuh/build-lab/launch-ec2-instances.html':
-     '/proof-of-concept-guide/index.html',
-   '/learning-wazuh/build-lab/access-ec2-instances.html':
-     '/proof-of-concept-guide/index.html',
-   '/learning-wazuh/build-lab/install-wazuh-manager.html':
-     '/proof-of-concept-guide/index.html',
-   '/learning-wazuh/build-lab/install-elastic-stack.html':
-     '/proof-of-concept-guide/index.html',
-   '/learning-wazuh/build-lab/xpack-security-setup.html':
-     '/proof-of-concept-guide/index.html',
-   '/learning-wazuh/build-lab/install-linux-agents.html':
-     '/proof-of-concept-guide/index.html',
-   '/learning-wazuh/build-lab/install-windows-agent.html':
-     '/proof-of-concept-guide/index.html',
-   '/learning-wazuh/ssh-brute-force.html':
-      '/proof-of-concept-guide/detect-brute-force-attack.html',
-   '/learning-wazuh/rdp-brute-force.html':
-      '/proof-of-concept-guide/detect-brute-force-attack.html',
-   '/learning-wazuh/hidden-processes.html':
-      '/proof-of-concept-guide/poc-detect-hidden-process.html',
-   '/learning-wazuh/detect-fs-changes.html':
-      '/proof-of-concept-guide/poc-file-integrity-monitoring.html',
-   '/learning-wazuh/replace-stock-rule.html':
-      '/user-manual/ruleset/custom.html',
-   '/learning-wazuh/survive-flood.html':
-      '/user-manual/capabilities/antiflooding.html',
-   '/learning-wazuh/shellshock.html':
-      '/proof-of-concept-guide/detect-web-attack-shellshock.html',
-   '/learning-wazuh/audit-commands.html':
-      '/proof-of-concept-guide/audit-commands-run-by-user.html',
-   '/learning-wazuh/suricata.html':
-      '/proof-of-concept-guide/integrate-network-ids-suricata.html',
-   '/learning-wazuh/vuln-detection.html':
-      '/proof-of-concept-guide/poc-vulnerability-detection.html',
  };
  
  /* Pages added in 4.3 */
@@ -460,7 +420,6 @@ removedUrls['4.3'] = [
   '/learning-wazuh/build-lab/index.html',
   '/learning-wazuh/build-lab/install-linux-agents.html',
   '/learning-wazuh/build-lab/install-windows-agent.html',
-  '/learning-wazuh/build-lab/install-wazuh-central-components.html',
   '/learning-wazuh/ssh-brute-force.html',
   '/learning-wazuh/rdp-brute-force.html',
   '/learning-wazuh/hidden-processes.html',
@@ -1034,11 +993,6 @@ redirections.push(
     'target': ['4.2=>4.3'],
     '4.2': '/user-manual/kibana-app/reference/configure-indices.html',
     '4.3': '/user-manual/elasticsearch/configure-indices.html',
-  },
-  {
-    'target': ['4.2=>4.3'],
-    '4.2': '/learning-wazuh/build-lab/install-wazuh-central-components.html',
-    '4.3': '/proof-of-concept-guide/index.html',
   },
   {
     'target': ['4.2=>4.3'],
