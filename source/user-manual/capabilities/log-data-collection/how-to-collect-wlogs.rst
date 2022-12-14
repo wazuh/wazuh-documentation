@@ -119,7 +119,7 @@ Windows ruleset redesign
 
 In order to ease the addition of new rules, the eventchannel ruleset has been classified according to the channel from which events belong. This will ensure an easier way of maintaining the ruleset organized and finding a better place for custom rules. To accomplish this, several modifications have been added:
 
-- Each eventchannel file contains a specific channel's rules.
+- Each event channel has one or more files with rules specific to it. For example, you can find the rules specific to the ``System`` channel in the ``0590-win-system_rules.xml`` file.
 - A base file includes every parent rule filtering by the specific channels monitored.
 - Rules have been updated and improved to match the new JSON events, showing relevant information in the rule's description and facilitating the way of filtering them.
 - New channel rules have been added. By default, the monitored channels are System, Security, and Application. These channels have their own file now and include a fair set of rules.
