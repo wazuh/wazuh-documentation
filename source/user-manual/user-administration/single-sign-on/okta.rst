@@ -10,7 +10,7 @@ Okta
 
 `Okta Inc. <https://www.okta.com/>`_ is an identity and access management company that provides technologies that enable secure user authentication into applications. In this guide, we integrate the Okta IdP to authenticate users into the Wazuh platform.
 
-The single sign-on integration process is divided into three stages.
+There are three stages in the single sign-on integration.
 
 #. Okta Configuration
 #. Wazuh indexer configuration
@@ -49,7 +49,7 @@ Okta Configuration
         :align: center
         :width: 80%    
  
-    Create a new group using any name. In our case, we name it ``wazuh-admin``. This name will be used as our ``backend_roles`` in ``roles_mapping.yml``.
+    Create a new group using any name. In our case, we name it ``wazuh-admins``. This name will be used as our ``backend_roles`` in ``roles_mapping.yml``.
 
 #. Add the new user to the new group. Navigate to **Directory** > **Groups**  and select your group. Click on **Assign People** and add the user to the group created.
 
@@ -84,15 +84,21 @@ Okta Configuration
      
    #. In the **Configure SAML** menu, you’ll find the **SAML Settings** section, modify the following parameters:
    
-      - **Single sign on URL**: input ``https://<WAZUH_DASHBOARD_URL>/_opendistro/_security/saml/acs`` and replace the ``<WAZUH_DASHBOARD_URL>`` field with the corresponding URL.
+      - **Single sign on URL**: input ``https://<WAZUH_DASHBOARD_URL>/_opendistro/_security/saml/acs/idpinitiated`` and replace the ``<WAZUH_DASHBOARD_URL>`` field with the corresponding URL.
       - **Audience URI (SP Entity ID)**: input ``wazuh-saml``. This is the ``SP Entity ID`` value which will be used later in the ``config.yml`` on the Wazuh indexer instance.
+      - **Other Requestable SSO URLs**: click on **Show Advanced Settings** to access this option. Input ``https://<WAZUH_DASHBOARD_URL>/_opendistro/_security/saml/acs/`` and replace the ``<WAZUH_DASHBOARD_URL>`` field with the corresponding URL.
 
-      The rest of the values can be left as default.
+      You can leave the rest of the values as default.
 
       .. thumbnail:: /images/single-sign-on/okta/09-saml-settings-section.png
          :title: SAML settings section
          :align: center
-         :width: 80%   
+         :width: 80%
+
+      .. thumbnail:: /images/single-sign-on/okta/09b-other-requestable-sso-urls.png
+         :title: Other Requestable SSO URLs
+         :align: center
+         :width: 80%        
 
    #. In the **Group Attribute Statements** section put ``Roles`` as the name. The value for ``Roles`` will be used as the ``roles_key`` parameter in the Wazuh indexer configuration. For the filter field, select **Matches regex** and type ``.*``. 
 
@@ -125,9 +131,9 @@ Okta Configuration
 
    The parameters already obtained during the integration are:
 
-   - ``sp.entity_id``
-   - ``roles_key``
-   - ``kibana_url``
+   - ``sp.entity_id``: ``wazuh-saml``
+   - ``roles_key``: ``Roles``
+   - ``kibana_url``: ``https://<WAZUH_DASHBOARD_URL>``
 
    To obtain the remaining parameters, navigate to **Applications** > **Applications**, select your app and click **Sign On**. 
 
@@ -135,7 +141,7 @@ Okta Configuration
 
    Now, on the same page, click on  **View SAML setup instructions**. Copy the **Identity Provider Issuer URL**, it will be the ``idp.entity_id``.
 
-   The **X.509 Certificate** will be used as the ``exchange_key``:
+   Copy the blob of the **X.509 Certificate** excluding the ``-----BEGIN CERTIFICATE-----`` and ``-----END CERTIFICATE-----`` lines. This will be used as the ``exchange_key``:
 
      .. thumbnail:: /images/single-sign-on/okta/14-navigate-to-applications.png
         :title: Navigate to Applications - Applications - <YOUR_APP> - Sign On
@@ -147,16 +153,16 @@ Okta Configuration
 Wazuh indexer configuration
 ---------------------------
 
-Edit the Wazuh indexer security configuration files. It is recommended to back up these files before the configuration is carried out.
+Edit the Wazuh indexer security configuration files. We recommend that you back up these files before you carry out the configuration.
 
-#. Edit ``/usr/share/wazuh-indexer/plugins/opensearch-security/securityconfig/config.yml`` file and change the following values: 
+#. Edit the ``/etc/wazuh-indexer/opensearch-security/config.yml`` file and change the following values: 
             
    - Set the ``order`` in ``basic_internal_auth_domain`` to ``0`` and the ``challenge`` flag to ``false``. 
 
    - Include a ``saml_auth_domain`` configuration under the ``authc`` section similar to the following:
 
    .. code-block:: console
-      :emphasize-lines: 7,10,22,23,25,26,27,2
+      :emphasize-lines: 7,10,22,23,25,26,27,28
 
           authc:
       ...
@@ -179,13 +185,13 @@ Edit the Wazuh indexer security configuration files. It is recommended to back u
                 challenge: true
                 config:
                   idp:
-                    metadata_url: ""
-                    entity_id: ""
+                    metadata_url: "https://....okta.com/app/..../sso/saml/metadata"
+                    entity_id: "http://www.okta.com/...."
                   sp:
                     entity_id: wazuh-saml
-                  kibana_url: https://<WAZUH_DASHBOARD_ADDRESS>
+                  kibana_url: https://<WAZUH_DASHBOARD_URL>
                   roles_key: Roles
-                  exchange_key: ''
+                  exchange_key: 'MIIDqjCCApKgAwIBAgIGAYJZY4p.........'
               authentication_backend:
                 type: noop               
          
@@ -202,31 +208,32 @@ Edit the Wazuh indexer security configuration files. It is recommended to back u
 
    .. code-block:: console
          
-      # export JAVA_HOME=/usr/share/wazuh-indexer/jdk/ && bash /usr/share/wazuh-indexer/plugins/opensearch-security/tools/securityadmin.sh -f /usr/share/wazuh-indexer/plugins/opensearch-security/securityconfig/config.yml -icl -key /etc/wazuh-indexer/certs/admin-key.pem -cert /etc/wazuh-indexer/certs/admin.pem -cacert /etc/wazuh-indexer/certs/root-ca.pem -h localhost -nhnv
+      # export JAVA_HOME=/usr/share/wazuh-indexer/jdk/ && bash /usr/share/wazuh-indexer/plugins/opensearch-security/tools/securityadmin.sh -f /etc/wazuh-indexer/opensearch-security/config.yml -icl -key /etc/wazuh-indexer/certs/admin-key.pem -cert /etc/wazuh-indexer/certs/admin.pem -cacert /etc/wazuh-indexer/certs/root-ca.pem -h localhost -nhnv
 
-   The ``-h`` flag is used to specify the hostname or the IP address of the Wazuh indexer node. Note that this command uses localhost, set your Wazuh indexer address if necessary.
+   The ``-h`` flag specifies the hostname or the IP address of the Wazuh indexer node. Note that this command uses localhost, set your Wazuh indexer address if necessary.
 
    The command output must be similar to the following:
    
    .. code-block:: console
       :class: output
 
-      Will connect to localhost:9300 ... done
-      Connected as CN=admin,OU=Wazuh,O=Wazuh,L=California,C=US
-      OpenSearch Version: 1.2.4
-      OpenSearch Security Version: 1.2.4.0
+      Security Admin v7
+      Will connect to localhost:9200 ... done
+      Connected as "CN=admin,OU=Wazuh,O=Wazuh,L=California,C=US"
+      OpenSearch Version: 2.4.0
       Contacting opensearch cluster 'opensearch' and wait for YELLOW clusterstate ...
       Clustername: wazuh-cluster
       Clusterstate: GREEN
       Number of nodes: 1
       Number of data nodes: 1
       .opendistro_security index already exists, so we do not need to create one.
-      Populate config from /home/wazuh
-      Will update '_doc/config' with /usr/share/wazuh-indexer/plugins/opensearch-security/securityconfig/config.yml 
+      Populate config from /etc/wazuh-indexer/opensearch-security
+      Will update '/config' with /etc/wazuh-indexer/opensearch-security/config.yml 
          SUCC: Configuration for 'config' created or updated
       Done with success
+
    
-#. Edit ``/usr/share/wazuh-indexer/plugins/opensearch-security/securityconfig/roles_mapping.yml`` file and change the following values:
+#. Edit the ``/etc/wazuh-indexer/opensearch-security/roles_mapping.yml`` file and change the following values:
 
    Configure the ``roles_mapping.yml`` file to map the Okta group to the appropriate Wazuh indexer role. In our case, we map it to the  ``all_access`` role:
 
@@ -246,37 +253,38 @@ Edit the Wazuh indexer security configuration files. It is recommended to back u
 
    .. code-block:: console
 
-      # export JAVA_HOME=/usr/share/wazuh-indexer/jdk/ && bash /usr/share/wazuh-indexer/plugins/opensearch-security/tools/securityadmin.sh -f /usr/share/wazuh-indexer/plugins/opensearch-security/securityconfig/roles_mapping.yml -icl -key /etc/wazuh-indexer/certs/admin-key.pem -cert /etc/wazuh-indexer/certs/admin.pem -cacert /etc/wazuh-indexer/certs/root-ca.pem -h localhost -nhnv
+      # export JAVA_HOME=/usr/share/wazuh-indexer/jdk/ && bash /usr/share/wazuh-indexer/plugins/opensearch-security/tools/securityadmin.sh -f /etc/wazuh-indexer/opensearch-security/roles_mapping.yml -icl -key /etc/wazuh-indexer/certs/admin-key.pem -cert /etc/wazuh-indexer/certs/admin.pem -cacert /etc/wazuh-indexer/certs/root-ca.pem -h localhost -nhnv
 
-   The ``-h`` flag is used to specify the hostname or the IP address of the Wazuh indexer node. Note that this command uses localhost, set your Wazuh indexer address if necessary.
+   The ``-h`` flag specifies the hostname or the IP address of the Wazuh indexer node. Note that this command uses localhost, set your Wazuh indexer address if necessary.
 
    The command output must be similar to the following:
 
    .. code-block:: console
       :class: output
-
+      
       Security Admin v7
-      Will connect to localhost:9300 ... done
-      Connected as CN=admin,OU=Wazuh,O=Wazuh,L=California,C=US
-      OpenSearch Version: 1.2.4
-      OpenSearch Security Version: 1.2.4.0
+      Will connect to localhost:9200 ... done
+      Connected as "CN=admin,OU=Wazuh,O=Wazuh,L=California,C=US"
+      OpenSearch Version: 2.4.0
       Contacting opensearch cluster 'opensearch' and wait for YELLOW clusterstate ...
       Clustername: wazuh-cluster
       Clusterstate: GREEN
       Number of nodes: 1
       Number of data nodes: 1
       .opendistro_security index already exists, so we do not need to create one.
-      Populate config from /home/wazuh
-      Will update '_doc/rolesmapping' with /usr/share/wazuh-indexer/plugins/opensearch-security/securityconfig/roles_mapping.yml 
+      Populate config from /etc/wazuh-indexer/opensearch-security
+      Will update '/rolesmapping' with /etc/wazuh-indexer/opensearch-security/roles_mapping.yml 
          SUCC: Configuration for 'rolesmapping' created or updated
       Done with success
+
+
 
 Wazuh dashboard configuration
 -----------------------------
 
 #. Edit the Wazuh dashboard configuration file.
 
-   Add these configurations to ``/etc/wazuh-dashboard/opensearch_dashboards.yml``. It is recommended to back up this file before the configuration is changed.
+   Add these configurations to ``/etc/wazuh-dashboard/opensearch_dashboards.yml``. We recommend that you back up these files before you carry out the configuration.
 
    .. code-block:: console  
 

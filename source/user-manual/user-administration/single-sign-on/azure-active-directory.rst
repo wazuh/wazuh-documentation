@@ -9,7 +9,8 @@ Azure Active Directory
 ======================
 
 `Azure Active Directory <https://portal.azure.com/>`_ (Azure AD) is a cloud-based identity and access management service by Microsoft. It provides single sign-on, multifactor authentication, and access to internal and cloud developed applications. In this guide, we integrate the Azure Active Directory IdP to authenticate users into the Wazuh platform.
-The single sign-on integration process is divided into three stages.
+
+There are three stages in the single sign-on integration.
 
 #. Azure Active Directory Configuration
 #. Wazuh indexer configuration
@@ -153,9 +154,9 @@ Azure Active Directory Configuration
 Wazuh indexer configuration
 ---------------------------
 
-Edit the Wazuh indexer security configuration files. It is recommended to back up these files before the configuration is carried out.
+Edit the Wazuh indexer security configuration files. We recommend that you back up these files before you carry out the configuration.
 
-#. Edit the ``/usr/share/wazuh-indexer/plugins/opensearch-security/securityconfig/config.yml`` file and change the following values:
+#. Edit the ``/etc/wazuh-indexer/opensearch-security/config.yml`` file and change the following values:
 
    - Set the ``order`` in ``basic_internal_auth_domain`` to ``0`` and the ``challenge`` flag to ``false``. 
 
@@ -189,46 +190,51 @@ Edit the Wazuh indexer security configuration files. It is recommended to back u
                     entity_id: https://sts.windows.net/...
                   sp:
                     entity_id: wazuh-saml
-                  kibana_url: https://<WAZUH_DASHBOARD_ADDRESS>
+                  kibana_url: https://<WAZUH_DASHBOARD_URL>
                   roles_key: Roles
-                  exchange_key: '...'
+                  exchange_key: 'MIIC8DCCAdigAwIBAgIQXzg.........'
               authentication_backend:
                 type: noop
 
 
-   - The ``roles_key`` must be the same value that we used in the Azure AD configuration.
+   Ensure to change the following parameters to their corresponding value: 
 
-#. Run the ``securityadmin`` script to load the configuration changes made in the ``config.yml`` file. 
+   - ``idp.metadata_url`` 
+   - ``idp.entity_id``
+   - ``sp.entity_id``
+   - ``kibana_url``
+   - ``roles_key``
+   - ``exchange_key``
 
+#. Run the ``securityadmin`` script to load the configuration changes made in the ``config.yml`` file.
 
    .. code-block:: console
 
-      # export JAVA_HOME=/usr/share/wazuh-indexer/jdk/ && bash /usr/share/wazuh-indexer/plugins/opensearch-security/tools/securityadmin.sh -f /usr/share/wazuh-indexer/plugins/opensearch-security/securityconfig/config.yml -icl -key /etc/wazuh-indexer/certs/admin-key.pem -cert /etc/wazuh-indexer/certs/admin.pem -cacert /etc/wazuh-indexer/certs/root-ca.pem -h localhost -nhnv
+      # export JAVA_HOME=/usr/share/wazuh-indexer/jdk/ && bash /usr/share/wazuh-indexer/plugins/opensearch-security/tools/securityadmin.sh -f /etc/wazuh-indexer/opensearch-security/config.yml -icl -key /etc/wazuh-indexer/certs/admin-key.pem -cert /etc/wazuh-indexer/certs/admin.pem -cacert /etc/wazuh-indexer/certs/root-ca.pem -h localhost -nhnv
 
-   The ``-h`` flag is used to specify the hostname or the IP address of the Wazuh indexer node. Note that this command uses localhost, set your Wazuh indexer address if necessary.
+   The ``-h`` flag specifies the hostname or the IP address of the Wazuh indexer node. Note that this command uses localhost, set your Wazuh indexer address if necessary.
 
    The command output must be similar to the following:
 
    .. code-block:: console
       :class: output
 
-      Will connect to localhost:9300 ... done
-      Connected as CN=admin,OU=Wazuh,O=Wazuh,L=California,C=US
-      OpenSearch Version: 1.2.4
-      OpenSearch Security Version: 1.2.4.0
+      Security Admin v7
+      Will connect to localhost:9200 ... done
+      Connected as "CN=admin,OU=Wazuh,O=Wazuh,L=California,C=US"
+      OpenSearch Version: 2.4.0
       Contacting opensearch cluster 'opensearch' and wait for YELLOW clusterstate ...
       Clustername: wazuh-cluster
       Clusterstate: GREEN
       Number of nodes: 1
       Number of data nodes: 1
       .opendistro_security index already exists, so we do not need to create one.
-      Populate config from /home/wazuh
-      Will update '_doc/config' with /usr/share/wazuh-indexer/plugins/opensearch-security/securityconfig/config.yml 
+      Populate config from /etc/wazuh-indexer/opensearch-security
+      Will update '/config' with /etc/wazuh-indexer/opensearch-security/config.yml 
          SUCC: Configuration for 'config' created or updated
       Done with success
 
-
-#. Edit the ``/usr/share/wazuh-indexer/plugins/opensearch-security/securityconfig/roles_mapping.yml`` file and change the following values:
+#. Edit the ``/etc/wazuh-indexer/opensearch-security/roles_mapping.yml`` file and change the following values:
 
    Configure the ``roles_mapping.yml`` file to map the role we have in Azure AD to the appropriate Wazuh indexer role. In this case, we map the ``Wazuh_role`` in Azure AD to the ``all_access`` role in Wazuh indexer:
 
@@ -245,12 +251,11 @@ Edit the Wazuh indexer security configuration files. It is recommended to back u
 
 #. Run the ``securityadmin`` script to load the configuration changes made in the ``roles_mapping.yml`` file.       
 
-
    .. code-block:: console
 
-      # export JAVA_HOME=/usr/share/wazuh-indexer/jdk/ && bash /usr/share/wazuh-indexer/plugins/opensearch-security/tools/securityadmin.sh -f /usr/share/wazuh-indexer/plugins/opensearch-security/securityconfig/roles_mapping.yml -icl -key /etc/wazuh-indexer/certs/admin-key.pem -cert /etc/wazuh-indexer/certs/admin.pem -cacert /etc/wazuh-indexer/certs/root-ca.pem -h localhost -nhnv
+      # export JAVA_HOME=/usr/share/wazuh-indexer/jdk/ && bash /usr/share/wazuh-indexer/plugins/opensearch-security/tools/securityadmin.sh -f /etc/wazuh-indexer/opensearch-security/roles_mapping.yml -icl -key /etc/wazuh-indexer/certs/admin-key.pem -cert /etc/wazuh-indexer/certs/admin.pem -cacert /etc/wazuh-indexer/certs/root-ca.pem -h localhost -nhnv
 
-   The ``-h`` flag is used to specify the hostname or the IP address of the Wazuh indexer node. Note that this command uses localhost, set your Wazuh indexer address if necessary.
+   The ``-h`` flag specifies the hostname or the IP address of the Wazuh indexer node. Note that this command uses localhost, set your Wazuh indexer address if necessary.
 
    The command output must be similar to the following:
 
@@ -258,27 +263,27 @@ Edit the Wazuh indexer security configuration files. It is recommended to back u
       :class: output        
 
       Security Admin v7
-      Will connect to localhost:9300 ... done
-      Connected as CN=admin,OU=Wazuh,O=Wazuh,L=California,C=US
-      OpenSearch Version: 1.2.4
-      OpenSearch Security Version: 1.2.4.0
+      Will connect to localhost:9200 ... done
+      Connected as "CN=admin,OU=Wazuh,O=Wazuh,L=California,C=US"
+      OpenSearch Version: 2.4.0
       Contacting opensearch cluster 'opensearch' and wait for YELLOW clusterstate ...
       Clustername: wazuh-cluster
       Clusterstate: GREEN
       Number of nodes: 1
       Number of data nodes: 1
       .opendistro_security index already exists, so we do not need to create one.
-      Populate config from /home/wazuh
-      Will update '_doc/rolesmapping' with /usr/share/wazuh-indexer/plugins/opensearch-security/securityconfig/roles_mapping.yml 
+      Populate config from /etc/wazuh-indexer/opensearch-security
+      Will update '/rolesmapping' with /etc/wazuh-indexer/opensearch-security/roles_mapping.yml 
          SUCC: Configuration for 'rolesmapping' created or updated
       Done with success
+
 
 Wazuh dashboard configuration
 -----------------------------
 
 #. Edit the Wazuh dashboard configuration file.
 
-   Add these configurations to ``/etc/wazuh-dashboard/opensearch_dashboards.yml``. It is recommended to back up this file before the configuration is changed.
+   Add these configurations to ``/etc/wazuh-dashboard/opensearch_dashboards.yml``. We recommend that you back up these files before you carry out the configuration.
 
    .. code-block:: console  
 
