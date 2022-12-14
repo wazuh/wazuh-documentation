@@ -86,7 +86,7 @@ Okta Configuration
    
       - **Single sign on URL**: input ``https://<WAZUH_DASHBOARD_URL>/_opendistro/_security/saml/acs/idpinitiated`` and replace the ``<WAZUH_DASHBOARD_URL>`` field with the corresponding URL.
       - **Audience URI (SP Entity ID)**: input ``wazuh-saml``. This is the ``SP Entity ID`` value which will be used later in the ``config.yml`` on the Wazuh indexer instance.
-      - **Other Requestable SSO URLs**: click on Show Advanced Settings to access this option. Input ``https://<WAZUH_DASHBOARD_URL>/_opendistro/_security/saml/acs/`` and replace the ``<WAZUH_DASHBOARD_URL>`` field with the corresponding URL.
+      - **Other Requestable SSO URLs**: click on **Show Advanced Settings** to access this option. Input ``https://<WAZUH_DASHBOARD_URL>/_opendistro/_security/saml/acs/`` and replace the ``<WAZUH_DASHBOARD_URL>`` field with the corresponding URL.
 
       You can leave the rest of the values as default.
 
