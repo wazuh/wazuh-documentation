@@ -15,13 +15,13 @@ In this use case, you simulate an SQL injection attack against an Ubuntu endpoin
 Infrastructure
 --------------
 
-+------------+-------------------------------------------------------------+
-| Endpoint   | Description                                                 |
-+============+=============================================================+
-| Ubuntu     | Victim endpoint running an Apache 2.4.54 web server.        |
-+------------+-------------------------------------------------------------+
-| RHEL       | Attacker endpoint that launches the SQL injection attack.   |
-+------------+-------------------------------------------------------------+
++---------------+-------------------------------------------------------------+
+| Endpoint      | Description                                                 |
++===============+=============================================================+
+| Ubuntu 22.04  | Victim endpoint running an Apache 2.4.54 web server.        |
++---------------+-------------------------------------------------------------+
+| RHEL 9.0      | Attacker endpoint that launches the SQL injection attack.   |
++---------------+-------------------------------------------------------------+
 
 Configuration
 -------------
