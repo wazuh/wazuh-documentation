@@ -113,16 +113,13 @@ Google Configuration
 Wazuh indexer configuration
 ---------------------------
 
-.. note::
-   :class: not-long
-
-   Place the ``Google_Metadata.xml`` file within the ``/etc/wazuh-indexer/opensearch-security/`` directory. Set the file ownership to ``wazuh-indexer`` using the following command:
-
-.. code-block:: console
-
-   # chown wazuh-indexer:wazuh-indexer /etc/wazuh-indexer/opensearch-security/Google_Metadata.xml
-
 Edit the Wazuh indexer security configuration files. We recommend that you back up these files before you carry out the configuration.
+
+#. Place the ``Google_Metadata.xml`` file within the ``/etc/wazuh-indexer/opensearch-security/`` directory. Set the file ownership to ``wazuh-indexer`` using the following command:
+
+   .. code-block:: console
+
+      # chown wazuh-indexer:wazuh-indexer /etc/wazuh-indexer/opensearch-security/Google_Metadata.xml
 
 #. Edit the ``/etc/wazuh-indexer/opensearch-security/config.yml`` file and change the following values:
    

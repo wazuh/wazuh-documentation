@@ -109,16 +109,14 @@ Jumpcloud Configuration
 Wazuh indexer configuration
 ---------------------------
 
-.. note::
-   :class: not-long
+Edit the Wazuh indexer security configuration files. We recommend that you back up these files before you carry out the configuration. 
 
-   Place the ``metadata_jumpcloud.xml`` file within the ``/etc/wazuh-indexer/opensearch-security/`` directory. Set the file ownership to ``wazuh-indexer`` using the following command:
 
-.. code-block:: console
+#. Place the ``metadata_jumpcloud.xml`` file within the ``/etc/wazuh-indexer/opensearch-security/`` directory. Set the file ownership to ``wazuh-indexer`` using the following command:
 
-   # chown wazuh-indexer:wazuh-indexer /etc/wazuh-indexer/opensearch-security/metadata_jumpcloud.xml
+   .. code-block:: console
 
-Edit the Wazuh indexer security configuration files. We recommend that you back up these files before you carry out the configuration.
+      # chown wazuh-indexer:wazuh-indexer /etc/wazuh-indexer/opensearch-security/metadata_jumpcloud.xml
 
 #. Edit the ``/etc/wazuh-indexer/opensearch-security/config.yml`` file and change the following values:
 
@@ -150,16 +148,18 @@ Edit the Wazuh indexer security configuration files. We recommend that you back 
                 challenge: true
                 config:
                   idp:
-                    metadata_file: “/usr/share/wazuh-indexer/plugins/opensearch-security/securityconfig/metadata_jumpcloud.xml”
+                    metadata_file: “/etc/wazuh-indexer/opensearch-security/metadata_jumpcloud.xml”
                     entity_id: wazuh
                   sp:
                     entity_id: wazuh-saml
                     forceAuthn: true
-                  kibana_url: https://<WAZUH_DASHBOARD_ADDRESS>
+                  kibana_url: https://<WAZUH_DASHBOARD_URL>
                   roles_key: Roles
                   exchange_key: 'MIIBkTCB+wIBADBSMQs......'
               authentication_backend:
                 type: noop
+
+
 
    Ensure to change the following parameters to their corresponding value:
 

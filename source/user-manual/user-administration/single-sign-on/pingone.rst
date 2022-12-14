@@ -110,17 +110,13 @@ PingOne Configuration
 Wazuh indexer configuration
 ---------------------------
 
-.. note::
-   :class: not-long
+Edit the Wazuh indexer security configuration files. We recommend that you back up these files before you carry out the configuration.
 
-   Place the private key file within the ``/etc/wazuh-indexer/opensearch-security/`` directory. Set the file ownership to ``wazuh-indexer`` using the following command:
+#. Place the private key file within the ``/etc/wazuh-indexer/opensearch-security/`` directory. Set the file ownership to ``wazuh-indexer`` using the following command:
 
    .. code-block:: console
 
       # chown wazuh-indexer:wazuh-indexer /etc/wazuh-indexer/opensearch-security/securityconfig/PRIVATE_KEY
-
-
-Edit the Wazuh dashboard configuration file. We recommend that you back up these files before you carry out the configuration.
 
 #. Edit the ``/etc/wazuh-indexer/opensearch-security/config.yml`` file and change the following values:
 
@@ -152,8 +148,8 @@ Edit the Wazuh dashboard configuration file. We recommend that you back up these
                 challenge: true
                 config:
                   idp:
-                    metadata_file: “/usr/share/wazuh-indexer/plugins/opensearch-security/securityconfig/Google_Metadata.xml”
-                    entity_id: “https://accounts.google.com/o/saml2?idpid=C02…”
+                    metadata_url: IDP METADATA URL
+                    entity_id: ISSUER ID
                   sp:
                     entity_id: wazuh-saml
                     signature_private_key_filepath: /etc/wazuh-indexer/opensearch-security/PRIVATE_KEY
@@ -163,6 +159,8 @@ Edit the Wazuh dashboard configuration file. We recommend that you back up these
                   exchange_key: 'MIIJ6DLSAAbAmAJHSgIWYia.........'
               authentication_backend:
                 type: noop
+
+          
 
    Ensure to change the following parameters to their corresponding value:
 

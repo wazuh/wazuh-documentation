@@ -190,7 +190,7 @@ Edit the Wazuh indexer security configuration files. We recommend that you back 
                     entity_id: https://sts.windows.net/...
                   sp:
                     entity_id: wazuh-saml
-                  kibana_url: https://<WAZUH_DASHBOARD_ADDRESS>
+                  kibana_url: https://<WAZUH_DASHBOARD_URL>
                   roles_key: Roles
                   exchange_key: 'MIIC8DCCAdigAwIBAgIQXzg.........'
               authentication_backend:
