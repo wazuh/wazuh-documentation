@@ -3,7 +3,7 @@
 .. meta::
   :description: The agent-upgrade module is responsible for carrying out the entire agent upgrade process remotely. Learn more about it in this section.
   
-.. _reference_ossec_agent_upgrade:
+.. _reference_ossec_agent_upgrade_agent:
 
 agent-upgrade
 =============
