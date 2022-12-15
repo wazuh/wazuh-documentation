@@ -232,7 +232,7 @@ Edit the Wazuh indexer security configuration files. We recommend that you back 
    
 #. Edit the ``/etc/wazuh-indexer/opensearch-security/roles_mapping.yml`` file and change the following values:
      
-   To configure the ``roles_mapping.yml`` file, we map the ``Department`` field from step 3 to the admin role on the Wazuh indexer. In this case, ``wazuh-admin``:
+   To configure the ``roles_mapping.yml`` file, we map the ``Department`` field from step 3 to the ``all_access`` role on the Wazuh indexer. In this case, ``wazuh-admin``:
 
    .. code-block:: console
       :emphasize-lines: 7
