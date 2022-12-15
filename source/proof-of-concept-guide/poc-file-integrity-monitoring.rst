@@ -13,13 +13,13 @@ This use case uses the Wazuh FIM module to detect changes in monitored directori
 Infrastructure 
 --------------
 
-+-----------+-----------------------------------------------------------------------------------------------------------------+
-| Endpoint  | Description                                                                                                     |
-+===========+=================================================================================================================+
-| Ubuntu    | The Wazuh FIM module monitors a directory on this endpoint to detect file creation, changes, and deletion.      |
-+-----------+-----------------------------------------------------------------------------------------------------------------+
-| Windows   | The Wazuh FIM module monitors a directory on this endpoint to detect file creation, changes, and deletion.      |
-+-----------+-----------------------------------------------------------------------------------------------------------------+
++---------------+-----------------------------------------------------------------------------------------------------------------+
+| Endpoint      | Description                                                                                                     |
++===============+=================================================================================================================+
+| Ubuntu 22.04  | The Wazuh FIM module monitors a directory on this endpoint to detect file creation, changes, and deletion.      |
++---------------+-----------------------------------------------------------------------------------------------------------------+
+| Windows 11    | The Wazuh FIM module monitors a directory on this endpoint to detect file creation, changes, and deletion.      |
++---------------+-----------------------------------------------------------------------------------------------------------------+
 
 Configuration
 -------------

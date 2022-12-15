@@ -1,9 +1,9 @@
 .. Copyright (C) 2015, Wazuh, Inc.
 
-:orphan:
-
 .. meta::
    :description: Wazuh can be integrated with several Identity Providers (IdP) to implement Single Sign-On (SSO). Learn more about it in this section of the Wazuh documentation.
+
+.. _single-sign-on:
 
 Single sign-on
 ==============

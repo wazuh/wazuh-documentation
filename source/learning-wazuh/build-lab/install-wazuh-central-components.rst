@@ -3,6 +3,8 @@
 .. meta::
   :description: Install the Wazuh central components by using the installation assistant.
 
+:orphan:
+
 Install the Wazuh central components
 ====================================
 

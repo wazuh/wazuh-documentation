@@ -15,15 +15,15 @@ In this use case, you use the Wazuh :doc:`CDB list </user-manual/ruleset/cdb-lis
 Infrastructure
 --------------
 
-+-----------+---------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-| Endpoint  | Description                                                                                                                                                         |
-+===========+=====================================================================================================================================================================+
-| RHEL      | Attacker endpoint connecting to the victim's web server on which you use Wazuh CDB list capability to flag its IP address as malicious.                             |
-+-----------+---------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-| Ubuntu    | Victim endpoint running an Apache 2.4.54 web server. Here, you use the Wazuh active response module to automatically block connections from the attacker endpoint.  |
-+-----------+---------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-| Windows   | Victim endpoint running an Apache 2.4.54 web server. Here, you use the Wazuh active response module to automatically block connections from the attacker endpoint.  |
-+-----------+---------------------------------------------------------------------------------------------------------------------------------------------------------------------+
++---------------+---------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| Endpoint      | Description                                                                                                                                                         |
++===============+=====================================================================================================================================================================+
+| RHEL 9.0      | Attacker endpoint connecting to the victim's web server on which you use Wazuh CDB list capability to flag its IP address as malicious.                             |
++---------------+---------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| Ubuntu 22.04  | Victim endpoint running an Apache 2.4.54 web server. Here, you use the Wazuh active response module to automatically block connections from the attacker endpoint.  |
++---------------+---------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| Windows 11    | Victim endpoint running an Apache 2.4.54 web server. Here, you use the Wazuh active response module to automatically block connections from the attacker endpoint.  |
++---------------+---------------------------------------------------------------------------------------------------------------------------------------------------------------------+
 
 Configuration
 -------------
@@ -190,7 +190,7 @@ Configure the active response module to block the malicious IP address
 #. Edit the Wazuh server ``/var/ossec/etc/ossec.conf`` configuration file and add the ``etc/lists/blacklist-alienvault`` list to the ``<ruleset>`` section:
 
    .. code-block:: xml
-      :emphasize-lines: 8
+      :emphasize-lines: 10
 
       <ossec_config>
         <ruleset>
@@ -199,6 +199,8 @@ Configure the active response module to block the malicious IP address
           <rule_dir>ruleset/rules</rule_dir>
           <rule_exclude>0215-policy_rules.xml</rule_exclude>
           <list>etc/lists/audit-keys</list>
+          <list>etc/lists/amazon/aws-eventnames</list>
+          <list>etc/lists/security-eventchannel</list>
           <list>etc/lists/blacklist-alienvault</list>
  
           <!-- User-defined ruleset -->
