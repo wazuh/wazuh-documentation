@@ -91,7 +91,7 @@ Take the following steps to configure Suricata on the Ubuntu endpoint and send t
 
       <ossec_config>
         <localfile>
-          <log_format>syslog</log_format>
+          <log_format>json</log_format>
           <location>/var/log/suricata/eve.json</location>
         </localfile>
       </ossec_config>
