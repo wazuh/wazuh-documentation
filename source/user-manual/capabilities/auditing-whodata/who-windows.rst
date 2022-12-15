@@ -11,9 +11,9 @@ Auditing who-data in Windows
 How it works
 ^^^^^^^^^^^^
 
-The who-data monitoring functionality uses the Microsoft Windows auditing subsystem to get the related information about who made modifications in a monitored directory. These changes produce audit events that are processed by *syscheck* and reported to the manager. This feature is only compatible with systems greater than Windows Vista.
+The who-data monitoring functionality uses the Microsoft Windows auditing subsystem. It gets the related information about who made modifications in a monitored directory. These changes produce audit events that are processed by *syscheck* and reported to the manager. This feature is only compatible with systems later than Windows Vista.
 
-For the correct operation of the who-data feature, it is necessary to have configured some Local Audit Policies as well as the SACLs of each monitored directory. Wazuh automatically performs this task when the tag ``whodata="yes"`` is declared within the ``directories`` statement in the ``ossec.conf`` file:
+For the correct operation of the who-data feature, it's necessary to have Local Audit Policies and the SACLs of each monitored directory properly configured. Wazuh automatically performs this task when you declare the tag ``whodata="yes"`` within the ``directories`` statement in the ``ossec.conf`` file:
 
 .. code-block:: xml
 
@@ -21,10 +21,10 @@ For the correct operation of the who-data feature, it is necessary to have confi
       <directories check_all="yes" whodata="yes">C:\Windows\System32\drivers\etc</directories>
     </syscheck>
 
-Even though FIM configures the needed Local Audit Policies and SASLs when launched, other services may change this configuration preventing who-data from receiving the monitored events. In this case, FIM detects this configuration change and switches all the directories configured with who-data to real-time mode. The two available mechanisms to detect these configuration changes are:
+FIM configures the required Local Audit Policies and SACLs when launched. However, other services might change this configuration which would prevent who-data from receiving the monitored events. To overcome this, FIM detects this configuration change and switches all the directories monitoring with who-data to real-time mode. The two available mechanisms to detect these configuration changes are:
 
-#. Windows generates specific events (ID 4719) when one of the Audit Policies is modified (Success removed).
-#. Periodically, Wazuh checks that the Audit Policies and the SACLs are configured as expected. It is possible to modify the frequency of this verification with :ref:`windows_audit_interval<reference_ossec_syscheck_windows_audit_interval>`.
+#. Wazuh monitors specific events (ID 4719) that Windows generates when one of the Audit Policies is modified (Success removed).
+#. Periodically, Wazuh checks that the Audit Policies and the SACLs are configured as expected. You can modify the frequency of this verification with :ref:`windows_audit_interval<reference_ossec_syscheck_windows_audit_interval>`.
 
 To manually configure Local Audit Policies and SACLs, see :ref:`the guide to configure Local Audit Policies and SACLs<who-windows-policies>`.
 
