@@ -247,7 +247,7 @@ Edit the Wazuh indexer security configuration files. We recommend that you back 
            - "admin"
            - "<GROUP_NAME>"
 
-   Replace ``<GROUP_NAME>`` with the name you gave to your group in Step 3. In our case, this is ``wazuh-admin``.
+   Replace ``<GROUP_NAME>`` with the name you gave to your group in Step 3. In our case, this is ``wazuh-admins``.
 
 #. Run the ``securityadmin`` script to load the configuration changes made in the ``roles_mapping.yml`` file. 
 
