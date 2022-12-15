@@ -36,7 +36,7 @@ If your system doesn't allow configuring subcategories through *Advanced Audit P
     :width: 60%
 
 SACLs in Windows
-^^^^^^^^^^^^^^^^
+----------------
 
 A system access control list (SACL) enables administrators to log attempts to access a secured object.
 You can check and modify SACLs of each directory through **Properties**, selecting the **Security** tab, and clicking on **Advanced**:
