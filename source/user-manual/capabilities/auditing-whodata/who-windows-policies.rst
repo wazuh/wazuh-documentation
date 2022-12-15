@@ -28,7 +28,7 @@ Go to **Security Settings** -> **Advanced Audit Policy Configuration** and confi
     :align: center
     :width: 60%
 
-If your system doesn't allow configuring subcategories through *Advanced Audit Policy Configuration*, you can configure to *Success* the entire category. These policies are part of the *Audit object access* category. Go to to **Security Settings** -> **Local Policies** -> **Audit Policy** and configure this category.
+If your system doesn't allow configuring subcategories through *Advanced Audit Policy Configuration*, you can configure to *Success* the entire category. These policies are part of the *Audit object access* category. Go to **Security Settings** -> **Local Policies** -> **Audit Policy** and configure this category.
 
 .. thumbnail:: ../../../images/whodata/audit-policies-old-method.png
     :title: Audit policies configuration (old method)
