@@ -13,15 +13,15 @@ The section on :doc:`Blocking attacks with Active Response </user-manual/capabil
 Infrastructure
 --------------
 
-+-----------+-----------------------------------------------------------------------------------------------------------------------------+
-| Endpoint  | Description                                                                                                                 |
-+===========+=============================================================================================================================+
-| Ubuntu    | Attacker endpoint that performs brute-force attacks. It’s required to have an SSH client installed on this endpoint.        |
-+-----------+-----------------------------------------------------------------------------------------------------------------------------+
-| RHEL      | Victim endpoint of SSH brute-force attacks. It’s required to have an SSH server installed and enabled on this endpoint.     |
-+-----------+-----------------------------------------------------------------------------------------------------------------------------+
-| Windows   | Victim endpoint of RDP brute-force attacks. It’s required to enable RDP on this endpoint.                                   |
-+-----------+-----------------------------------------------------------------------------------------------------------------------------+
++---------------+-----------------------------------------------------------------------------------------------------------------------------+
+| Endpoint      | Description                                                                                                                 |
++===============+=============================================================================================================================+
+| Ubuntu 22.04  | Attacker endpoint that performs brute-force attacks. It’s required to have an SSH client installed on this endpoint.        |
++---------------+-----------------------------------------------------------------------------------------------------------------------------+
+| RHEL 9.0      | Victim endpoint of SSH brute-force attacks. It’s required to have an SSH server installed and enabled on this endpoint.     |
++---------------+-----------------------------------------------------------------------------------------------------------------------------+
+| Windows 11    | Victim endpoint of RDP brute-force attacks. It’s required to enable RDP on this endpoint.                                   |
++---------------+-----------------------------------------------------------------------------------------------------------------------------+
 
 Configuration
 -------------
