@@ -130,7 +130,7 @@ Time of the day to run the scan. It has to be in the hh:mm format.
 
 .. note::
 
-    When only the ``time`` option is set, the interval value must be a multiple of days, weeks, or months. By default, the interval is set to a day.
+    If only the ``time`` option is set, the interval value must be a multiple of days, weeks, or months. By default, the interval is set to a day.
 
 remove_from_bucket
 ~~~~~~~~~~~~~~~~~~
