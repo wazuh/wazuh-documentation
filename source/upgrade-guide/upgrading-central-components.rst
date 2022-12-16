@@ -55,7 +55,6 @@ In the case Wazuh is installed in a multi-node cluster configuration, repeat the
             # service filebeat stop
             # service wazuh-dashboard stop
 
-
 Upgrading the Wazuh indexer
 ---------------------------
 

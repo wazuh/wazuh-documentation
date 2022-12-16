@@ -48,7 +48,7 @@ Preparing the backup
 Backing up a Wazuh agent
 ------------------------
 
-#. Backup Wazuh agent data, certificate and configuration files.
+#. Back up Wazuh agent data, certificates, and configuration files.
 
    .. tabs::
 
@@ -90,6 +90,8 @@ Backing up a Wazuh agent
             /Library/Ossec/etc/*.pem \
             /Library/Ossec/logs/ \
             /Library/Ossec/queue/rids/ $bkp_folder
+
+#. Back up your custom files such as local SCA policies, active response scripts, and wodles.
 
 Checking the backup
 -------------------

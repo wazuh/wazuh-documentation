@@ -32,7 +32,7 @@ Preparing the backup
 Backing up the Wazuh server
 ---------------------------
 
-#. Back up the Wazuh server data, certificates, and configuration files.
+#. Back up the Wazuh server data and configuration files.
 
    .. code-block:: console
 
@@ -42,7 +42,6 @@ Backing up the Wazuh server
       /var/ossec/api/configuration/ \
       /var/ossec/etc/client.keys \
       /var/ossec/etc/sslmanager* \
-      /var/ossec/etc/*.pem \
       /var/ossec/etc/ossec.conf \
       /var/ossec/etc/internal_options.conf \
       /var/ossec/etc/local_internal_options.conf \
@@ -59,6 +58,14 @@ Backing up the Wazuh server
       /var/ossec/var/db/agents/ \
       /var/ossec/var/multigroups/ $bkp_folder
 
+#. If present, back up certificates and additional configuration files.
+
+   .. code-block:: console
+
+      # rsync -aREz \
+      /var/ossec/etc/*.pem \
+      /var/ossec/etc/authd.pass $bkp_folder
+   
 #. Back up your custom files. If you have custom active responses, CDB lists, integrations, or wodles, adapt the following command accordingly.
 
    .. code-block:: console
@@ -111,8 +118,14 @@ Backing up the Wazuh indexer and dashboard
       /etc/wazuh-dashboard/certs/ \
       /etc/wazuh-dashboard/opensearch_dashboards.yml \
       /usr/share/wazuh-dashboard/config/opensearch_dashboards.keystore \
+      /usr/share/wazuh-dashboard/data/wazuh/config/wazuh.yml $bkp_folder
+
+#. If present, back up your downloads and custom images.
+
+   .. code-block:: console
+
+      # rsync -aREz \
       /usr/share/wazuh-dashboard/data/wazuh/downloads/ \
-      /usr/share/wazuh-dashboard/data/wazuh/config/wazuh.yml \
       /usr/share/wazuh-dashboard/plugins/wazuh/public/assets/custom/images/ $bkp_folder
 
 .. note::
@@ -122,7 +135,7 @@ Backing up the Wazuh indexer and dashboard
 Check the backup
 ----------------
 
-#. Verify that the Wazuh manager is active and list all the backup files:  
+#. Verify that the Wazuh manager is active and list all the backed up files:  
 
    .. tabs::
 
