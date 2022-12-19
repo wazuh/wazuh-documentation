@@ -37,6 +37,7 @@ Server subsection options
 - `address`_
 - :ref:`port <server_port>`
 - :ref:`protocol <server_protocol>`
+- `interface_index`_
 - `max_retries`_
 - `retry_interval`_
 
@@ -79,7 +80,21 @@ Specifies the protocol to use when connecting to the manager.
 | **Allowed values** | udp, tcp |
 +--------------------+----------+
 
+.. _interface_index:
+
+interface_index
+^^^^^^^^^^^^^^^
+
+Specifies the index by which the agent should try to connect to the server if the configured IP is a link-local IPv6. This option has no effect if the configured IP is not a link-local IPv6.
+
++--------------------+--------------------+
+| **Default value**  | n/a                |
++--------------------+--------------------+
+| **Allowed values** | A positive number. |
++--------------------+--------------------+
+
 .. _server_max_retries:
+
 
 max_retries
 ^^^^^^^^^^^
@@ -256,6 +271,26 @@ Sample configuration
       <auto_restart>yes</auto_restart>
     </client>
 
+
+Sample link-local IPv6 configuration
+------------------------------------
+
+.. code-block:: xml
+
+    <client>
+      <server>
+        <address>fe80:0000:0000:0000:a00:27ff:feff:6b0b</address>
+        <interface_index>3</interface_index>
+        <port>1514</port>
+        <protocol>tcp</protocol>
+      </server>
+      <config-profile>ubuntu, ubuntu22, ubuntu22.04</config-profile>
+      <notify_time>10</notify_time>
+      <time-reconnect>60</time-reconnect>
+      <auto_restart>yes</auto_restart>
+      <crypto_method>aes</crypto_method>
+    </client>
+
 .. _enrollment:
 
 enrollment
@@ -270,6 +305,7 @@ Options
 - `enabled`_
 - `manager_address`_
 - :ref:`port <enrollment_manager_port>`
+- `interface_index`_
 - `agent_name`_
 - `groups`_
 - `agent_address`_
@@ -318,6 +354,19 @@ Specifies the port on the manager to send enrollment request.  This must match t
 +--------------------+---------------------------------------------+
 | **Allowed values** | Any port number from 0 to 65535 is allowed. |
 +--------------------+---------------------------------------------+
+
+.. _enrollment_interface_index:
+
+interface_index
+^^^^^^^^^^^^^^^
+
+Specifies the index by which the agent should try to send enrollment request to the server if the configured IP is a link-local IPv6. This option has no effect if the configured IP is not a link-local IPv6.
+
++--------------------+--------------------+
+| **Default value**  | n/a                |
++--------------------+--------------------+
+| **Allowed values** | A positive number. |
++--------------------+--------------------+
 
 .. _enrollment_agent_name:
 
@@ -487,5 +536,20 @@ Sample configuration
         <auto_method>no</auto_method>
         <delay_after_enrollment>20</delay_after_enrollment>
         <use_source_ip>no</use_source_ip>
+      </enrollment>
+    </client>
+
+
+Sample enrollment link-local IPv6 configuration
+-----------------------------------------------
+
+.. code-block:: xml
+
+    <client>
+      <enrollment>
+        <enabled>yes</enabled>
+        <manager_address>fe80:0000:0000:0000:a00:27ff:feff:6b0b</manager_address>
+        <interface_index>7</interface_index>
+        <port>1515</port>
       </enrollment>
     </client>
