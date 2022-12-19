@@ -261,6 +261,7 @@ Set up data forwarding
       #. Fill it with the content below:
 
          .. code-block:: console
+            :emphasize-lines: 5, 10
          
                [tcpout]
                defaultGroup = default-autolb-group
@@ -274,7 +275,7 @@ Set up data forwarding
                [tcpout-server://<INDEXER_IP>:9997]
 
             
-         - ``INDEXER_IP`` is the IP address of the Splunk indexer.
+         - ``<INDEXER_IP>`` is the IP address of the Splunk indexer.
 
       #. Start the Splunk forwarder service:
 
@@ -333,8 +334,8 @@ Set up data forwarding
                
             This command will prompt for the Splunk indexer username and password.
 
-               -  ``INDEXER_IP`` is the IP address of the Splunk Indexer.
-               -  ``INDEXER_PORT`` is the port of the Splunk indexer earlier configured in receiving. The default value is 9997.
+               -  ``<INDEXER_IP>`` is the IP address of the Splunk Indexer.
+               -  ``<INDEXER_PORT>`` is the port of the Splunk indexer earlier configured in receiving. The default value is 9997.
 
       #. Restart the Splunk Forwarder service:
 
