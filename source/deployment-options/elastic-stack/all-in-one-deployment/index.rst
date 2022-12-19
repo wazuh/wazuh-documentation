@@ -265,7 +265,7 @@ Filebeat installation and configuration
 #. Copy the certificates into ``/etc/filebeat/certs/``
 
     .. code-block:: console
-
+        # mkdir /etc/filebeat/certs/
         # cp -r /etc/elasticsearch/certs/ca/ /etc/filebeat/certs/
         # cp /etc/elasticsearch/certs/elasticsearch.crt /etc/filebeat/certs/filebeat.crt
         # cp /etc/elasticsearch/certs/elasticsearch.key /etc/filebeat/certs/filebeat.key
