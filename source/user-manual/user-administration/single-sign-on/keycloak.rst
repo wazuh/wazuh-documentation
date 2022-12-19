@@ -358,3 +358,39 @@ The command output must be similar to the following:
       Done with success
 
 
+Wazuh dashboard configuration
+-----------------------------
+
+#. Edit the Wazuh dashboard configuration file.
+
+   Add these configurations to ``/etc/wazuh-dashboard/opensearch_dashboards.yml``. We recommend that you back up these files before you carry out the configuration.
+
+   .. code-block:: console  
+
+      opensearch_security.auth.type: "saml"
+      server.xsrf.whitelist: ["/_plugins/_security/saml/acs", "/_plugins/_security/saml/logout", "/_opendistro/_security/saml/acs", "/_opendistro/_security/saml/logout", "/_opendistro/_security/saml/acs/idpinitiated"]
+
+
+   .. note::
+      :class: not-long
+
+      *For versions 4.3.9 and earlier*, also replace ``path: `/auth/logout``` with ``path: `/logout``` in ``/usr/share/wazuh-dashboard/plugins/securityDashboards/server/auth/types/saml/routes.js``. We recommend that you back up these files before you carry out the configuration.
+
+      .. code-block:: console
+         :emphasize-lines: 3
+
+         ...
+            this.router.get({
+               path: `/logout`,
+               validate: false
+         ...
+
+#. Restart the Wazuh dashboard service using this command:
+
+   .. include:: /_templates/common/restart_dashboard.rst
+
+#. Test the configuration.
+   
+   To test the configuration, go to your Wazuh dashboard URL and log in with your Keycloak account. 
+
+
