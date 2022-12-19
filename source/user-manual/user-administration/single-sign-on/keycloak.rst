@@ -3,8 +3,6 @@
 .. meta::
    :description: Keycloak is an open source identity and access management tool. Learn more about it in this section of the Wazuh documentation.
 
-.. _keycloak:
-
 Keycloak
 ========
 
