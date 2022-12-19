@@ -221,3 +221,140 @@ KeyCloak configuration
          :title: The exchange_key parameter
          :align: center
          :width: 80% 
+
+
+Wazuh indexer configuration
+---------------------------
+
+Edit the Wazuh indexer security configuration files. We recommend that you back up these files before you carry out the configuration.
+
+#. Place the ``idp.metadata.xml`` and ``sp.metadata.xml`` files within the ``/etc/wazuh-indexer/opensearch-security/`` directory. Set the file ownership to wazuh-indexer using the following command:
+
+   .. code-block:: console
+
+      chown wazuh-indexer:wazuh-indexer /etc/wazuh-indexer/opensearch-security/idp.metadata.xml
+      chown wazuh-indexer:wazuh-indexer /etc/wazuh-indexer/opensearch-security/sp.metadata.xml
+
+#. Edit the ``/etc/wazuh-indexer/opensearch-security/config.yml`` file and change the following values:
+ 
+   Set the ``order`` in ``basic_internal_auth_domain`` to ``0``, and set the ``challenge`` flag to ``false``.  
+
+   Include a ``saml_auth_domain`` configuration under the ``authc`` section similar to the following:
+
+   .. code-block:: console
+      :emphasize-lines: 7,10,22,23,25,26,27,28
+
+          authc:
+      ...
+            basic_internal_auth_domain:
+              description: "Authenticate via HTTP Basic against internal users database"
+              http_enabled: true
+              transport_enabled: true
+              order: 0
+              http_authenticator:
+                type: "basic"
+                challenge: false
+              authentication_backend:
+                type: "intern"
+            saml_auth_domain:
+              http_enabled: true
+              transport_enabled: false
+              order: 1
+              http_authenticator:
+                type: saml
+                challenge: true
+                config:
+                  idp:
+                    metadata_file: “/etc/wazuh-indexer/opensearch-security/idp_metadata.xml”
+                    entity_id: “http://192.168.XX.XX:8080/realms/Wazuh”
+                  sp:
+                    entity_id: wazuh-saml
+                    metadata_file: /etc/wazuh-indexer/opensearch-security/sp_metadata.xml
+                  kibana_url: https://<WAZUH_DASHBOARD_ADDRESS>
+                  roles_key: Roles
+                  exchange_key: 'MIICajCCAdOgAwIBAgIBAD.........'
+              authentication_backend:
+                type: noop
+      
+
+   Ensure to change the following parameters to their corresponding value:
+
+   - ``idp.metadata_file``  
+   - ``idp.entity_id``
+   - ``sp.entity_id``
+   - ``sp.metadata_file``
+   - ``kibana_url``
+   - ``roles_key``
+   - ``exchange_key``
+
+#. Run the ``securityadmin`` script to load the configuration changes made in the ``config.yml`` file.
+
+   .. code-block:: console
+
+      # export JAVA_HOME=/usr/share/wazuh-indexer/jdk/ && bash /usr/share/wazuh-indexer/plugins/opensearch-security/tools/securityadmin.sh -f /etc/wazuh-indexer/opensearch-security/config.yml -icl -key /etc/wazuh-indexer/certs/admin-key.pem -cert /etc/wazuh-indexer/certs/admin.pem -cacert /etc/wazuh-indexer/certs/root-ca.pem -h localhost -nhnv
+
+
+   The "-h" flag specifies the hostname or the IP address of the Wazuh indexer node. Note that this command uses localhost, set your Wazuh indexer address if necessary.
+
+   The command output must be similar to the following:
+
+   .. code-block:: console
+      :class: output
+
+      Security Admin v7
+      Will connect to localhost:9200 ... done
+      Connected as "CN=admin,OU=Wazuh,O=Wazuh,L=California,C=US"
+      OpenSearch Version: 2.4.0
+      Contacting opensearch cluster 'opensearch' and wait for YELLOW clusterstate ...
+      Clustername: wazuh-cluster
+      Clusterstate: GREEN
+      Number of nodes: 1
+      Number of data nodes: 1
+      .opendistro_security index already exists, so we do not need to create one.
+      Populate config from /etc/wazuh-indexer/opensearch-security
+      Will update '/config' with /etc/wazuh-indexer/opensearch-security/config.yml 
+         SUCC: Configuration for 'config' created or updated
+      Done with success
+
+#. Edit the ``/etc/wazuh-indexer/opensearch-security/roles_mapping.yml`` file and change the following values:
+
+   Configure the ``roles_mapping.yml`` file to map the realm role in Keycloak to the appropriate Wazuh indexer role; in our case, we map this to the ``all_access`` role.
+
+      .. code-block:: console
+         :emphasize-lines: 5
+
+         all_access:
+         reserved: false
+         hidden: false
+         backend_roles:
+         - "admin"   
+
+
+#. Run the ``securityadmin`` script to load the configuration changes made in the ``roles_mapping.yml`` file.
+
+   .. code-block:: console
+
+      # export JAVA_HOME=/usr/share/wazuh-indexer/jdk/ && bash /usr/share/wazuh-indexer/plugins/opensearch-security/tools/securityadmin.sh -f /etc/wazuh-indexer/opensearch-security/roles_mapping.yml -icl -key /etc/wazuh-indexer/certs/admin-key.pem -cert /etc/wazuh-indexer/certs/admin.pem -cacert /etc/wazuh-indexer/certs/root-ca.pem -h localhost -nhnv
+
+The "-h" flag specifies the hostname or the IP address of the Wazuh indexer node. Note that this command uses localhost, set your Wazuh indexer address if necessary.
+
+The command output must be similar to the following:
+
+   .. code-block:: console
+
+      Security Admin v7
+      Will connect to localhost:9200 ... done
+      Connected as "CN=admin,OU=Wazuh,O=Wazuh,L=California,C=US"
+      OpenSearch Version: 2.4.0
+      Contacting opensearch cluster 'opensearch' and wait for YELLOW clusterstate ...
+      Clustername: wazuh-cluster
+      Clusterstate: GREEN
+      Number of nodes: 1
+      Number of data nodes: 1
+      .opendistro_security index already exists, so we do not need to create one.
+      Populate config from /etc/wazuh-indexer/opensearch-security
+      Will update '/config' with /etc/wazuh-indexer/opensearch-security/config.yml 
+         SUCC: Configuration for 'config' created or updated
+      Done with success
+
+
