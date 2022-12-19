@@ -87,7 +87,7 @@ KeyCloak configuration
 
    #. Navigate to **Clients > Keys** and complete the section with these parameters:
    
-      - **Client signature required**: Off
+      - **Client signature required**: ``Off``
 
       .. thumbnail:: /images/single-sign-on/keycloak/07-client-signature-required.png
          :title: Client signature required
@@ -99,12 +99,12 @@ KeyCloak configuration
       - **Assertion Consumer Service POST Binding URL**: ``https://<WAZUH_DASHBOARD_URL>/_opendistro/_security/saml/acs/idpinitiated``
       - **Logout Service Redirect Binding URL**: ``https://<WAZUH_DASHBOARD_URL>/app/wazuh``
 
-      You can leave the rest of the values as default. Click Save to apply the configuration.
-
       .. thumbnail:: /images/single-sign-on/keycloak/08-fine-grain-saml-endpoint-configuration.png
          :title: Fine Grain SAML Endpoint Configuration
          :align: center
          :width: 80%  
+
+      You can leave the rest of the values as default. Click Save to apply the configuration.
 
 #. Create a new role
    
@@ -128,7 +128,7 @@ KeyCloak configuration
          :align: center
          :width: 80% 
 
-      Click on Create to apply the configuration.
+      Click on **Create** to apply the configuration.
 
    #. Navigate to **Users > Credentials > Set password** and input a password for the newly created user. You will use these credentials to log in to the Wazuh dashboard.
 
@@ -141,7 +141,7 @@ KeyCloak configuration
 
 #. Create a new group and assign the user
 
-   #. Go to **Groups > Create group** and assign a name to the group. In our case, this is ``Wazuh-admins``.
+   #. Go to **Groups > Create group** and assign a name to the group. In our case, this is **Wazuh-admins**.
    
       .. thumbnail:: /images/single-sign-on/keycloak/12-create-a-new-group.png
          :title: Create a new group
@@ -237,12 +237,11 @@ Edit the Wazuh indexer security configuration files. We recommend that you back 
 
 #. Edit the ``/etc/wazuh-indexer/opensearch-security/config.yml`` file and change the following values:
  
-   Set the ``order`` in ``basic_internal_auth_domain`` to ``0``, and set the ``challenge`` flag to ``false``.  
-
-   Include a ``saml_auth_domain`` configuration under the ``authc`` section similar to the following:
+   - Set the ``order`` in ``basic_internal_auth_domain`` to ``0``, and set the ``challenge`` flag to ``false``.  
+   - Include a ``saml_auth_domain`` configuration under the ``authc`` section similar to the following:
 
    .. code-block:: console
-      :emphasize-lines: 7,10,22,23,25,26,27,28
+      :emphasize-lines: 7,10,22,23,25,26,27,28,29
 
           authc:
       ...
@@ -324,10 +323,10 @@ Edit the Wazuh indexer security configuration files. We recommend that you back 
          :emphasize-lines: 5
 
          all_access:
-         reserved: false
-         hidden: false
-         backend_roles:
-         - "admin"   
+           reserved: false
+           hidden: false
+           backend_roles:
+           - "admin"   
 
 
 #. Run the ``securityadmin`` script to load the configuration changes made in the ``roles_mapping.yml`` file.
