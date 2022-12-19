@@ -231,6 +231,7 @@ newUrls['4.3'] = [
   '/user-manual/user-administration/single-sign-on/google.html',
   '/user-manual/user-administration/single-sign-on/jumpcloud.html',
   '/user-manual/user-administration/single-sign-on/onelogin.html',
+  '/user-manual/user-administration/single-sign-on/keycloak.html',
   '/upgrade-guide/upgrading-central-components.html',
   '/migration-guide/index.html',
   '/migration-guide/wazuh-indexer.html',
