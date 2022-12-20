@@ -1,7 +1,7 @@
 .. Copyright (C) 2015, Wazuh, Inc.
 
 .. meta::
-  :description: The Wazuh module for AWS provides capabilities to monitor AWS based services. See more about how to configure GuardDuty and some practical use cases.
+  :description: Amazon GuardDuty is a threat detection service that continuously monitors for malicious behavior. Learn how to use GuardDuty with Wazuh in this section.
 
 .. _amazon_guardduty:
 
@@ -128,31 +128,12 @@ Wazuh configuration
 
     * If you're configuring a Wazuh manager:
 
-      a. For Systemd:
-
-      .. code-block:: console
-
-        # systemctl restart wazuh-manager
-
-      b. For SysV Init:
-
-      .. code-block:: console
-
-        # service wazuh-manager restart
+      .. include:: /_templates/common/restart_manager.rst
 
     * If you're configuring a Wazuh agent:
 
-      a. For Systemd:
-
-      .. code-block:: console
-
-        # systemctl restart wazuh-agent
-
-      b. For SysV Init:
-
-      .. code-block:: console
-
-        # service wazuh-agent restart
+      .. include:: /_templates/common/restart_agent.rst
+        
 
 GuardDuty use cases
 -------------------

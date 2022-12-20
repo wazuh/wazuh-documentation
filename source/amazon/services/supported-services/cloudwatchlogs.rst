@@ -1,7 +1,7 @@
 .. Copyright (C) 2015, Wazuh, Inc.
 
 .. meta::
-  :description: The Wazuh module for AWS provides capabilities to monitor AWS based services. See more about how to configure CloudWatch Logs and some practical use cases.
+  :description: AWS CloudWatch Logs is a service that allows users to centralize the logs from all their systems. Learn how to use CloudWatch Logs with Wazuh here.
 
 .. _aws_cloudwatchlogs:
 
@@ -106,31 +106,11 @@ Wazuh configuration
 
     * If you are configuring a Wazuh manager:
 
-      a. For Systemd:
-
-      .. code-block:: console
-
-        # systemctl restart wazuh-manager
-
-      b. For SysV Init:
-
-      .. code-block:: console
-
-        # service wazuh-manager restart
+      .. include:: /_templates/common/restart_manager.rst
 
     * If you are configuring a Wazuh agent:
 
-      a. For Systemd:
-
-      .. code-block:: console
-
-        # systemctl restart wazuh-agent
-
-      b. For SysV Init:
-
-      .. code-block:: console
-
-        # service wazuh-agent restart
+      .. include:: /_templates/common/restart_agent.rst
 
 
 CloudWatch Logs use cases

@@ -2,6 +2,7 @@
 
 .. meta::
   :description: Wazuh 3.2.3 has been released. Check out our release notes to discover the changes and additions of this release.
+  
 .. _release_3_2_3:
 
 3.2.3 Release notes - 28 May 2018
@@ -38,7 +39,7 @@ Core improvements
 
 These are the most relevant changes in the Wazuh core:
 
-- :ref:`Vulnerability-detector <vulnerability-detection>` continues to expand its scope, now adding support for Amazon Linux. A bug when comparing epoch versions has also been fixed.
+- :doc:`Vulnerability-detector </user-manual/capabilities/vulnerability-detection/index>` continues to expand its scope, now adding support for Amazon Linux. A bug when comparing epoch versions has also been fixed.
 - The agent limit has been increased to ``14000`` by default, improving the manager availability in large environments.
 - More internal bugs reported by the community have been fixed for this version.
 

@@ -14,7 +14,7 @@
 
             .. code-block:: console
 
-                # apt install elasticsearch-oss opendistroforelasticsearch
+                # apt-get install elasticsearch-oss opendistroforelasticsearch
 
 
 

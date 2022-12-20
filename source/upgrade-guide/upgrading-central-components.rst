@@ -8,6 +8,25 @@ Wazuh central components
 
 This section guides through the upgrade process of the Wazuh indexer, the Wazuh server, and the Wazuh dashboard. To migrate from Open Distro for Elasticsearch 1.13 to the Wazuh indexer and dashboard components, read the corresponding :doc:`/migration-guide/wazuh-indexer` and :doc:`/migration-guide/wazuh-dashboard` sections.
 
+You can choose one of two methods to upgrade the Wazuh central components.
+
+-  **Wazuh installation assistant**: Use an assistant that automates the upgrade process.
+-  **Step by step**: Follow detailed step-by-step instructions.
+
+Upgrade with the Wazuh installation assistant
++++++++++++++++++++++++++++++++++++++++++++++
+
+You can use the installation assistant to upgrade the Wazuh central components. The assistant detects which components are installed in the node and upgrades them if possible.
+
+To perform an automated upgrade execute the following command. This command downloads and runs the Wazuh installation assistant passing the upgrading option.
+
+.. code-block:: bash
+
+   curl -sO https://packages.wazuh.com/4.3/wazuh-install.sh && sudo bash ./wazuh-install.sh --upgrade
+
+Step-by-step upgrade
++++++++++++++++++++++
+
 .. note::
    
    Root user privileges are required to execute all the commands described below.
@@ -48,7 +67,7 @@ In the case Wazuh is installed in a multi-node cluster configuration, repeat the
             # systemctl stop filebeat
             # systemctl stop wazuh-dashboard
 
-      .. tab:: SysV Init
+      .. tab:: SysV init
 
          .. code-block:: console
 
@@ -92,7 +111,7 @@ In the case of having a Wazuh indexer cluster with multiple nodes, the cluster w
 
             # systemctl stop wazuh-indexer
 
-      .. tab:: SysV Init
+      .. tab:: SysV init
 
          .. code-block:: console
 
@@ -226,4 +245,4 @@ Next steps
 
 The Wazuh server, indexer, and dashboard are now successfully upgraded. The next step consists in upgrading the Wazuh agents. Follow the instructions in:
 
--  :doc:`Upgrading the Wazuh agent <upgrading-agent>`.
+-  :doc:`Upgrading the Wazuh agent </upgrade-guide/wazuh-agent/index>`.

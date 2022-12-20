@@ -1,14 +1,14 @@
 .. Copyright (C) 2015, Wazuh, Inc.
 
-.. _office365_monitoring_activity:
-
 .. meta::
-  :description: Discover the way that Wazuh provides to monitor your organization's Office 365 activity.
+  :description: Learn how to monitor your organization's Office 365 activity with Wazuh in this section of our documentation.
+
+.. _office365_monitoring_activity:
 
 Monitoring Office 365 Activity
 ==============================
 
-The **audit log** allows organization admins to quickly review the actions performed by members of your organization. It includes details such as who performed the action, what the action was, and when it was performed.
+The `audit log` allows organization admins to quickly review the actions performed by members of your organization. It includes details such as who performed the action, what the action was, and when it was performed.
 This Wazuh module allows you to collect all the logs from Office 365 using its API. The Office 365 Management Activity API aggregates actions and events into tenant-specific content blobs, which are classified by the type and source of the content they contain. 
 
 **List available content:**
@@ -36,7 +36,7 @@ For **Wazuh** to successfully connect to the **Office365 API**, an authenticatio
 
 #. Register your app
 
-   To authenticate with the Microsoft identity platform endpoint you need to register an app in your `Microsoft Azure portal app registrations <https://portal.azure.com/#blade/Microsoft_AAD_RegisteredApps/ApplicationsListBlade>`_  section. Once there click on **New registration**:
+   To authenticate with the Microsoft identity platform endpoint, you need to register an app in your `Microsoft Azure portal app registrations <https://portal.azure.com/#blade/Microsoft_AAD_RegisteredApps/ApplicationsListBlade>`_  section. Once there click on **New registration**:
 
    .. thumbnail:: ../images/office365/0-azure-app-new-registration.png
        :title: Register your app
@@ -50,7 +50,7 @@ For **Wazuh** to successfully connect to the **Office365 API**, an authenticatio
        :align: center
        :width: 100%
 
-   The app is now registered and you can see information about it in its **Overview** section, at this point we can get the ``client`` and ``tenant`` IDs:
+   The app is now registered, and you can see information about it in its **Overview** section, at this point we can get the ``client`` and ``tenant`` IDs:
 
    .. thumbnail:: ../images/office365/2-azure-wazuh-app-overview.png
        :title: Register your app
@@ -93,7 +93,7 @@ For **Wazuh** to successfully connect to the **Office365 API**, an authenticatio
        :align: center
        :width: 100%
    
-   .. note:: Admin consent is required to API permission changes.
+   .. note:: Admin consent is required for API permission changes.
    
    .. thumbnail:: ../images/office365/4-azure-wazuh-app-configure-permissions-admin-consent.png
        :title: API permissions admin consent
@@ -106,7 +106,7 @@ Wazuh configuration
 
 Next, we will see the options we have to configure for the Wazuh integration.
 
-Proceed to configure the ``office365`` module in the Wazuh manager or in the Wazuh agent. Through the following configuration, Wazuh is ready to search for logs created by Office 365 audit-log. In this case, we will search only the type of ``Audit.SharePoint`` events within an interval of ``1m``. Those logs will be only those that were created after the module was started:
+Proceed to configure the ``office365`` module in the Wazuh manager or in the Wazuh agent. Through the following configuration, Wazuh is ready to search for logs created by Office 365 audit-log. In this case, we will only search for the ``Audit.SharePoint`` type events within an interval of ``1m``. Those logs will be only those that were created after the module was started:
 
 .. code-block:: xml
 

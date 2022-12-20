@@ -1,5 +1,8 @@
 .. Copyright (C) 2015, Wazuh, Inc.
 
+.. meta::
+  :description: Find out the configuration options of the azure-logs wodle. Learn more about it in this section of the Wazuh documentation.
+  
 .. _wodle_azure_logs:
 
 wodle name="azure-logs"
@@ -135,6 +138,8 @@ Options
 +----------------------------------------+----------------------------------------------+
 | `storage\\container\\time_offset`_     | A positive number + suffix                   |
 +----------------------------------------+----------------------------------------------+
+| `storage\\container\\path`_            | Any string                                   |
++----------------------------------------+----------------------------------------------+
 
 
 disabled
@@ -164,7 +169,7 @@ The interval option is conditioned by the following described options ``day``, `
 run_on_start
 ^^^^^^^^^^^^^
 
-Run evaluation immediately when service is started.
+Run evaluation immediately when the service is started.
 
 +--------------------+---------+
 | **Default value**  | yes     |
@@ -228,7 +233,7 @@ Time of the day to run the Azure-Logs. It has to be represented in the format *h
 timeout
 ^^^^^^^
 
-Timeout for each evaluation. In case the execution takes longer that the specified timeout, it stops.
+Timeout for each evaluation. In case the execution takes longer than the specified timeout, it stops.
 
 +--------------------+-----------------------------+
 | **Default value**  | 0                           |
@@ -266,7 +271,7 @@ This block configures the integration with Azure Log Analytics REST API.
 log_analytics\\application_id
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-Identifier of the application that we will use for the authentication and to be able to make use of the Azure Log Analytics API. It must be used next to the ``application_key`` option obligatorily. Incompatible with ``auth_path`` option.
+Identifier of the application that we will use for the authentication and to be able to use the Azure Log Analytics API. It must be used next to the ``application_key`` option obligatorily. Incompatible with ``auth_path`` option.
 
 +--------------------+--------------------+
 | **Default value**  | N/A                |
@@ -277,7 +282,7 @@ Identifier of the application that we will use for the authentication and to be 
 log_analytics\\application_key
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-Key to the application we will use for authentication and to be able to make use of the Azure Log Analytics API. It must be used next to the ``application_id`` option obligatorily. Incompatible with ``auth_path`` option.
+Key to the application we will use for authentication and to be able to use the Azure Log Analytics API. It must be used next to the ``application_id`` option obligatorily. Incompatible with ``auth_path`` option.
 
 +--------------------+--------------------+
 | **Default value**  | N/A                |
@@ -382,7 +387,7 @@ Defines the workspace where we will perform the queries.
 log_analytics\\request\\timeout
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-Timeout for each request evaluation. This option overwrites the general `timeout`_ option. In case the execution takes longer that the specified timeout, it stops.
+Timeout for each request evaluation. This option overwrites the general `timeout`_ option. In case the execution takes longer than the specified timeout, it stops.
 
 +--------------------+-----------------------------+
 | **Default value**  | 0                           |
@@ -459,7 +464,7 @@ This block configures the integration with Azure Active Directory Graph REST API
 graph\\application_id
 ^^^^^^^^^^^^^^^^^^^^^
 
-Identifier of the application that we will use for the authentication and to be able to make use of the AAD Graph API. It must be used next to the ``application_key`` option obligatorily. Incompatible with ``auth_path`` option.
+Identifier of the application that we will use for the authentication and to be able to use the AAD Graph API. It must be used next to the ``application_key`` option obligatorily. Incompatible with ``auth_path`` option.
 
 +--------------------+--------------------+
 | **Default value**  | N/A                |
@@ -470,7 +475,7 @@ Identifier of the application that we will use for the authentication and to be 
 graph\\application_key
 ^^^^^^^^^^^^^^^^^^^^^^
 
-Key to the application we will use for authentication and to be able to make use of the AAD Graph API. It must be used next to the ``application_id`` option obligatorily. Incompatible with ``auth_path`` option.
+Key to the application we will use for authentication and to be able to use the AAD Graph API. It must be used next to the ``application_id`` option obligatorily. Incompatible with ``auth_path`` option.
 
 +--------------------+--------------------+
 | **Default value**  | N/A                |
@@ -546,7 +551,7 @@ The query used to obtain the logs from the Microsoft Graph API. The query value 
 graph\\request\\timeout
 ^^^^^^^^^^^^^^^^^^^^^^^
 
-Timeout for each request evaluation. This option overwrites the general `timeout`_ option. In case the execution takes longer that the specified timeout, it stops.
+Timeout for each request evaluation. This option overwrites the general `timeout`_ option. In case the execution takes longer than the specified timeout, it stops.
 
 +--------------------+-----------------------------+
 | **Default value**  | 0                           |
@@ -679,6 +684,8 @@ storage\\container
 +-----------------------------------------+----------------------------------------------+
 | `storage\\container\\time_offset`_      | A positive number + suffix                   |
 +-----------------------------------------+----------------------------------------------+
+| `storage\\container\\path`_             | Any string                                   |
++-----------------------------------------+----------------------------------------------+
 
 storage\\container name
 ^^^^^^^^^^^^^^^^^^^^^^^
@@ -694,7 +701,7 @@ Specifies the name of the container. Enter ``*`` to access all account container
 storage\\container\\blobs
 ^^^^^^^^^^^^^^^^^^^^^^^^^
 
-Specifies the extension of the blobs like ``.json``. Enter "*" to access all the containers' blobs. 
+Specifies the extension of the blobs like ``.json``. Enter "*" to access all the containers' blobs.
 
 .. note::
 
@@ -712,11 +719,11 @@ storage\\container\\content_type
 This parameter indicates the format of the blobs' content. The available values are:
 
 - **text**. Plain text. Each line is a log.
-- **json_file**. The blob contain records of logs in standard json format.
+- **json_file**. The blob contains records of logs in standard json format.
 - **json_inline**. Each line is a log in json format.
 
 The format of logs stored in Azure accounts is **inline JSON**.
-	
+
 .. note::
 
 	When the ``day`` option is set, the interval value must be a multiple of months. By default, the interval is set to a month.
@@ -730,7 +737,7 @@ The format of logs stored in Azure accounts is **inline JSON**.
 storage\\container\\timeout
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-Timeout for each request evaluation. This option overwrites the general `timeout`_ option. In case the execution takes longer that the specified timeout, it stops.
+Timeout for each request evaluation. This option overwrites the general `timeout`_ option. In case the execution takes longer than the specified timeout, it stops.
 
 +--------------------+-----------------------------+
 | **Default value**  | 0                           |
@@ -748,6 +755,18 @@ This option sets the time delay in which we will perform the query. For example,
 | **Default value**  | Date of execution at ``00:00:00``                                                                                          |
 +--------------------+----------------------------------------------------------------------------------------------------------------------------+
 | **Allowed values** | A positive number that should contain a suffix character indicating a time unit, such as, m (minutes), h (hours), d (days) |
++--------------------+----------------------------------------------------------------------------------------------------------------------------+
+
+
+storage\\container\\path
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Defines, for the container, a path to search into. If it isn't present, the module retrieves all the blobs at the root level.
+
++--------------------+----------------------------------------------------------------------------------------------------------------------------+
+| **Default value**  | N/A                                                                                                                        |
++--------------------+----------------------------------------------------------------------------------------------------------------------------+
+| **Allowed values** | Valid path                                                                                                                 |
 +--------------------+----------------------------------------------------------------------------------------------------------------------------+
 
 Example of storage configuration

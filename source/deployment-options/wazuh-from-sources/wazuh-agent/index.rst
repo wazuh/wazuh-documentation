@@ -103,6 +103,13 @@ The Wazuh agent is a single and lightweight monitoring software. It is a multi-p
 
                         # pacman --noconfirm -Syu curl gcc make sudo wget expect gnupg perl-base perl fakeroot python brotli automake autoconf libtool gawk libsigsegv nodejs base-devel inetutils cmake
 
+                .. group-tab:: APK
+
+                    Alpine Package Keeper is the default package manager that Alpine Linux uses to manage its packages.
+
+                    .. code-block:: console
+
+                        # apk --update add automake autoconf cmake curl gcc gettext-dev g++ linux-headers libgcc libtool make procps python3 openssl-dev 
 
         #.  Download and extract the latest version:
 
@@ -174,7 +181,7 @@ The Wazuh agent is a single and lightweight monitoring software. It is a multi-p
         
         .. tabs::
           
-            .. tab:: SysV Init:
+            .. tab:: SysV init
 
                 .. code-block:: console
 
@@ -199,7 +206,7 @@ The Wazuh agent is a single and lightweight monitoring software. It is a multi-p
 
         .. note::
         
-            The following procedure has been tested on Ubuntu 20.04 and may work with other Debian/Ubuntu versions as well. It is recommended to use MinGW 9.
+            The following procedure has been tested on Ubuntu 22.04 and may work with other Debian/Ubuntu versions as well. It is required to use MinGW 10.
 
         #.  Set up the Ubuntu build environment. Install these dependencies to build the Windows Wazuh agent installer on Ubuntu:
 

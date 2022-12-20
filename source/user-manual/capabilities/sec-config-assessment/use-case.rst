@@ -1,5 +1,8 @@
 .. Copyright (C) 2015, Wazuh, Inc.
 
+.. meta::
+  :description: Follow a use case to see how Wazuh runs SCA checks and triggers alerts in this section of the documentation.
+
 Use case: Getting an alert when a check changes its result value
 ================================================================
 

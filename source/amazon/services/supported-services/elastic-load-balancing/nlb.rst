@@ -1,7 +1,7 @@
 .. Copyright (C) 2015, Wazuh, Inc.
 
 .. meta::
-  :description: AWS Classic Load Balancer is a service that distributes incoming application traffic across multiple targets. Learn how to configure and monitor it with Wazuh.
+  :description: Amazon NLB automatically distributes the incoming traffic across multiple targets. Learn how to use Amazon NLB with Wazuh in this section.
 
 .. _amazon_nlb:
 
@@ -71,28 +71,9 @@ Wazuh configuration
 
     * If you're configuring a Wazuh manager:
 
-      a. For Systemd:
-
-      .. code-block:: console
-
-        # systemctl restart wazuh-manager
-
-      b. For SysV Init:
-
-      .. code-block:: console
-
-        # service wazuh-manager restart
+      .. include:: /_templates/common/restart_manager.rst
 
     * If you're configuring a Wazuh agent:
 
-      a. For Systemd:
+      .. include:: /_templates/common/restart_agent.rst
 
-      .. code-block:: console
-
-        # systemctl restart wazuh-agent
-
-      b. For SysV Init:
-
-      .. code-block:: console
-
-        # service wazuh-agent restart

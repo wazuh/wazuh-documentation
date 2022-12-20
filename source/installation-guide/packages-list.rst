@@ -6,25 +6,7 @@
 Packages list
 =============
 
-This download page contains packages required for the Wazuh installation:
-
-- `Wazuh manager and Wazuh agent`_
-
-   - `Linux`_
-   - `Windows`_
-   - `macOS`_
-   - `Solaris`_
-   - `AIX`_
-   - `HP-UX`_
-
-- `Wazuh indexer`_
-- `Wazuh dashboard`_
-- `Wazuh Kibana plugin`_
-- `Wazuh Splunk app`_
-- `Filebeat`_
-- `Virtual machine`_
-- `Amazon Machine Image`_
-- `MSU`_
+This download page contains packages required for the Wazuh installation.
 
 .. _Wazuh_manager_agent_packages_list:
 
@@ -33,6 +15,20 @@ Wazuh manager and Wazuh agent
 
 Linux
 ^^^^^
+
+.. |Alpine_i386_agent| replace:: `wazuh-agent-|WAZUH_CURRENT|-|WAZUH_REVISION_APK_AGENT_I386|.apk <|APK_AGENT_I386_URL|-|WAZUH_CURRENT|-|WAZUH_REVISION_APK_AGENT_I386|.apk>`__ (`sha512 <|CHECKSUMS_URL||WAZUH_CURRENT|/|APK_CHECKSUMS_I386_URL|/wazuh-agent-|WAZUH_CURRENT|-|WAZUH_REVISION_APK_AGENT_I386|.apk.sha512>`__)
+
+.. |Alpine_x86_64_agent| replace:: `wazuh-agent-|WAZUH_CURRENT|-|WAZUH_REVISION_APK_AGENT_X86_64|.apk <|APK_AGENT_X86_64_URL|-|WAZUH_CURRENT|-|WAZUH_REVISION_APK_AGENT_X86_64|.apk>`__ (`sha512 <|CHECKSUMS_URL||WAZUH_CURRENT|/|APK_CHECKSUMS_X86_64_URL|/wazuh-agent-|WAZUH_CURRENT|-|WAZUH_REVISION_APK_AGENT_X86_64|.apk.sha512>`__)
+
+.. |Alpine_aarch64_agent| replace:: `wazuh-agent-|WAZUH_CURRENT|-|WAZUH_REVISION_APK_AGENT_AARCH64|.apk <|APK_AGENT_AARCH64_URL|-|WAZUH_CURRENT|-|WAZUH_REVISION_APK_AGENT_AARCH64|.apk>`__ (`sha512 <|CHECKSUMS_URL||WAZUH_CURRENT|/|APK_CHECKSUMS_AARCH64_URL|/wazuh-agent-|WAZUH_CURRENT|-|WAZUH_REVISION_APK_AGENT_AARCH64|.apk.sha512>`__)
+
+.. |Alpine_armv7_agent| replace:: `wazuh-agent-|WAZUH_CURRENT|-|WAZUH_REVISION_APK_AGENT_ARMV7|.apk <|APK_AGENT_ARMV7_URL|-|WAZUH_CURRENT|-|WAZUH_REVISION_APK_AGENT_ARMV7|.apk>`__ (`sha512 <|CHECKSUMS_URL||WAZUH_CURRENT|/|APK_CHECKSUMS_ARMV7_URL|/wazuh-agent-|WAZUH_CURRENT|-|WAZUH_REVISION_APK_AGENT_ARMV7|.apk.sha512>`__)
+
+.. |Alpine_armhf_agent| replace:: `wazuh-agent-|WAZUH_CURRENT|-|WAZUH_REVISION_APK_AGENT_ARMHF|.apk <|APK_AGENT_ARMHF_URL|-|WAZUH_CURRENT|-|WAZUH_REVISION_APK_AGENT_ARMHF|.apk>`__ (`sha512 <|CHECKSUMS_URL||WAZUH_CURRENT|/|APK_CHECKSUMS_ARMHF_URL|/wazuh-agent-|WAZUH_CURRENT|-|WAZUH_REVISION_APK_AGENT_ARMHF|.apk.sha512>`__)
+
+.. |Alpine_powerpc_agent| replace:: `wazuh-agent-|WAZUH_CURRENT|-|WAZUH_REVISION_APK_AGENT_PPC|.apk <|APK_AGENT_PPC_URL|-|WAZUH_CURRENT|-|WAZUH_REVISION_APK_AGENT_PPC|.apk>`__ (`sha512 <|CHECKSUMS_URL||WAZUH_CURRENT|/|APK_CHECKSUMS_PPC_URL|/wazuh-agent-|WAZUH_CURRENT|-|WAZUH_REVISION_APK_AGENT_PPC|.apk.sha512>`__)
+
+
 
 .. |Amazon_i386_agent| replace:: `wazuh-agent-|WAZUH_CURRENT|-|WAZUH_REVISION_YUM_AGENT_I386|.i386.rpm <|RPM_AGENT_URL|-|WAZUH_CURRENT|-|WAZUH_REVISION_YUM_AGENT_I386|.i386.rpm>`__ (`sha512 <|CHECKSUMS_URL||WAZUH_CURRENT|/wazuh-agent-|WAZUH_CURRENT|-|WAZUH_REVISION_YUM_AGENT_I386|.i386.rpm.sha512>`__)
 
@@ -175,6 +171,18 @@ Linux
 +-----------------------+-------------------+--------------+------------------------------------------+
 | Distribution          | Version           | Architecture | Package                                  |
 +=======================+===================+==============+==========================================+
+|                       |                   |    i386      | |Alpine_i386_agent|                      |
++ Alpine Linux          +  v3.12 or later   +--------------+------------------------------------------+
+|                       |                   |    x86_64    | |Alpine_x86_64_agent|                    |
++                       +                   +--------------+------------------------------------------+
+|                       |                   |    aarch64   | |Alpine_aarch64_agent|                   |
++                       +                   +--------------+------------------------------------------+
+|                       |                   |    armv7     | |Alpine_armv7_agent|                     |
++                       +                   +--------------+------------------------------------------+
+|                       |                   |    armhf     | |Alpine_armhf_agent|                     |
++                       +                   +--------------+------------------------------------------+
+|                       |                   |    powerpc   | |Alpine_powerpc_agent|                   |
++-----------------------+-------------------+--------------+------------------------------------------+
 |                       |                   |    i386      | |Amazon_i386_agent|                      |
 + Amazon Linux          +  1 and 2          +--------------+------------------------------------------+
 |                       |                   |              | |Amazon_x86_64_agent|                    |
@@ -339,13 +347,13 @@ macOS
 Solaris
 ^^^^^^^
 
-.. |Solaris10_i386| replace:: `wazuh-agent_v|WAZUH_CURRENT_SOLARIS10|-sol10-i386.pkg <https://packages.wazuh.com/|WAZUH_CURRENT_MAJOR_SOLARIS10|/solaris/i386/10/wazuh-agent_v|WAZUH_CURRENT_SOLARIS10|-sol10-i386.pkg>`__ (`sha512 <https://packages.wazuh.com/|WAZUH_CURRENT_MAJOR_SOLARIS10|/checksums/wazuh/|WAZUH_CURRENT_SOLARIS10|/wazuh-agent_v|WAZUH_CURRENT_SOLARIS10|-sol10-i386.pkg.sha512>`__)
+.. |Solaris10_i386| replace:: `wazuh-agent_v|WAZUH_CURRENT_SOLARIS10_i386|-sol10-i386.pkg <https://packages.wazuh.com/|WAZUH_CURRENT_MAJOR_SOLARIS10_i386|/solaris/i386/10/wazuh-agent_v|WAZUH_CURRENT_SOLARIS10_i386|-sol10-i386.pkg>`__ (`sha512 <https://packages.wazuh.com/|WAZUH_CURRENT_MAJOR_SOLARIS10_i386|/checksums/wazuh/|WAZUH_CURRENT_SOLARIS10_i386|/wazuh-agent_v|WAZUH_CURRENT_SOLARIS10_i386|-sol10-i386.pkg.sha512>`__)
 
-.. |Solaris10_SPARC| replace:: `wazuh-agent_v|WAZUH_CURRENT_SOLARIS10|-sol10-sparc.pkg <https://packages.wazuh.com/|WAZUH_CURRENT_MAJOR_SOLARIS10|/solaris/sparc/10/wazuh-agent_v|WAZUH_CURRENT_SOLARIS10|-sol10-sparc.pkg>`__ (`sha512 <https://packages.wazuh.com/|WAZUH_CURRENT_MAJOR_SOLARIS10|/checksums/wazuh/|WAZUH_CURRENT_SOLARIS10|/wazuh-agent_v|WAZUH_CURRENT_SOLARIS10|-sol10-sparc.pkg.sha512>`__)
+.. |Solaris10_SPARC| replace:: `wazuh-agent_v|WAZUH_CURRENT_SOLARIS10_SPARC|-sol10-sparc.pkg <https://packages.wazuh.com/|WAZUH_CURRENT_MAJOR_SOLARIS10_SPARC|/solaris/sparc/10/wazuh-agent_v|WAZUH_CURRENT_SOLARIS10_SPARC|-sol10-sparc.pkg>`__ (`sha512 <https://packages.wazuh.com/|WAZUH_CURRENT_MAJOR_SOLARIS10_SPARC|/checksums/wazuh/|WAZUH_CURRENT_SOLARIS10_SPARC|/wazuh-agent_v|WAZUH_CURRENT_SOLARIS10_SPARC|-sol10-sparc.pkg.sha512>`__)
 
-.. |Solaris11_i386| replace:: `wazuh-agent_v|WAZUH_CURRENT_SOLARIS11|-sol11-i386.p5p <https://packages.wazuh.com/|WAZUH_CURRENT_MAJOR_SOLARIS11|/solaris/i386/11/wazuh-agent_v|WAZUH_CURRENT_SOLARIS11|-sol11-i386.p5p>`__ (`sha512 <https://packages.wazuh.com/|WAZUH_CURRENT_MAJOR_SOLARIS11|/checksums/wazuh/|WAZUH_CURRENT_SOLARIS11|/wazuh-agent_v|WAZUH_CURRENT_SOLARIS11|-sol11-i386.p5p.sha512>`__)
+.. |Solaris11_i386| replace:: `wazuh-agent_v|WAZUH_CURRENT_SOLARIS11_i386|-sol11-i386.p5p <https://packages.wazuh.com/|WAZUH_CURRENT_MAJOR_SOLARIS11_i386|/solaris/i386/11/wazuh-agent_v|WAZUH_CURRENT_SOLARIS11_i386|-sol11-i386.p5p>`__ (`sha512 <https://packages.wazuh.com/|WAZUH_CURRENT_MAJOR_SOLARIS11_i386|/checksums/wazuh/|WAZUH_CURRENT_SOLARIS11_i386|/wazuh-agent_v|WAZUH_CURRENT_SOLARIS11_i386|-sol11-i386.p5p.sha512>`__)
 
-.. |Solaris11_SPARC| replace:: `wazuh-agent_v|WAZUH_CURRENT_SOLARIS11|-sol11-sparc.p5p <https://packages.wazuh.com/|WAZUH_CURRENT_MAJOR_SOLARIS11|/solaris/sparc/11/wazuh-agent_v|WAZUH_CURRENT_SOLARIS11|-sol11-sparc.p5p>`__ (`sha512 <https://packages.wazuh.com/|WAZUH_CURRENT_MAJOR_SOLARIS11|/checksums/wazuh/|WAZUH_CURRENT_SOLARIS11|/wazuh-agent_v|WAZUH_CURRENT_SOLARIS11|-sol11-sparc.p5p.sha512>`__)
+.. |Solaris11_SPARC| replace:: `wazuh-agent_v|WAZUH_CURRENT_SOLARIS11_SPARC|-sol11-sparc.p5p <https://packages.wazuh.com/|WAZUH_CURRENT_MAJOR_SOLARIS11_SPARC|/solaris/sparc/11/wazuh-agent_v|WAZUH_CURRENT_SOLARIS11_SPARC|-sol11-sparc.p5p>`__ (`sha512 <https://packages.wazuh.com/|WAZUH_CURRENT_MAJOR_SOLARIS11_SPARC|/checksums/wazuh/|WAZUH_CURRENT_SOLARIS11_SPARC|/wazuh-agent_v|WAZUH_CURRENT_SOLARIS11_SPARC|-sol11-sparc.p5p.sha512>`__)
 
 +---------+--------------+-------------------------+
 | Version | Architecture | Package                 |
@@ -441,6 +449,8 @@ For Wazuh |WAZUH_CURRENT|:
 
 .. |WAZUH_KIBANA_7.17.5| replace:: `wazuh_kibana-|WAZUH_CURRENT|_7.17.5.zip <https://packages.wazuh.com/|WAZUH_CURRENT_MAJOR|/ui/kibana/wazuh_kibana-|WAZUH_CURRENT|_7.17.5-1.zip>`__ (`sha512 <https://packages.wazuh.com/|WAZUH_CURRENT_MAJOR|/checksums/wazuh/|WAZUH_CURRENT|/wazuh_kibana-|WAZUH_CURRENT|_7.17.5-1.zip.sha512>`__)
 
+.. |WAZUH_KIBANA_7.17.6| replace:: `wazuh_kibana-|WAZUH_CURRENT|_7.17.6.zip <https://packages.wazuh.com/|WAZUH_CURRENT_MAJOR|/ui/kibana/wazuh_kibana-|WAZUH_CURRENT|_7.17.6-1.zip>`__ (`sha512 <https://packages.wazuh.com/|WAZUH_CURRENT_MAJOR|/checksums/wazuh/|WAZUH_CURRENT|/wazuh_kibana-|WAZUH_CURRENT|_7.17.6-1.zip.sha512>`__)
+
 +------------------+-----------------------+--------------------------+
 | Kibana Version   | Open Distro Version   | Package                  |
 +==================+=======================+==========================+
@@ -466,6 +476,8 @@ For Wazuh |WAZUH_CURRENT|:
 +------------------+-----------------------+--------------------------+
 | 7.17.5           |                       | |WAZUH_KIBANA_7.17.5|    |
 +------------------+-----------------------+--------------------------+
+| 7.17.6           |                       | |WAZUH_KIBANA_7.17.6|    |
++------------------+-----------------------+--------------------------+
 
 For a complete list of the available versions, see the `Wazuh Kibana plugin compatibility matrix <https://github.com/wazuh/wazuh-kibana-app/wiki/Compatibility>`_.
 
@@ -474,85 +486,29 @@ Wazuh Splunk app
 
 For Wazuh Splunk app |WAZUH_SPLUNK_CURRENT|:
 
-.. |SPLUNK_8.1.1_PKG| replace:: `wazuh_splunk-|WAZUH_SPLUNK_CURRENT|_8.1.1.tar.gz <https://packages.wazuh.com/4.x/ui/splunk/wazuh_splunk-|WAZUH_SPLUNK_CURRENT|_8.1.1-1.tar.gz>`__ (`sha512 <https://packages.wazuh.com/4.x/checksums/wazuh/|WAZUH_SPLUNK_CURRENT|/wazuh_splunk-|WAZUH_SPLUNK_CURRENT|_8.1.1-1.tar.gz.sha512>`__)
+.. |SPLUNK_LATEST_MIN| replace:: |SPLUNK_LATEST_MINOR|
 
-.. |SPLUNK_8.1.2_PKG| replace:: `wazuh_splunk-|WAZUH_SPLUNK_CURRENT|_8.1.2.tar.gz <https://packages.wazuh.com/4.x/ui/splunk/wazuh_splunk-|WAZUH_SPLUNK_CURRENT|_8.1.2-1.tar.gz>`__ (`sha512 <https://packages.wazuh.com/4.x/checksums/wazuh/|WAZUH_SPLUNK_CURRENT|/wazuh_splunk-|WAZUH_SPLUNK_CURRENT|_8.1.2-1.tar.gz.sha512>`__)
+.. |SPLUNK_LATEST_PKG| replace:: `wazuh_splunk-|WAZUH_SPLUNK_CURRENT|_|SPLUNK_LATEST_MINOR|-|WAZUH_SPLUNK_REV_CURRENT_LATEST|.tar.gz <https://packages.wazuh.com/4.x/ui/splunk/wazuh_splunk-|WAZUH_SPLUNK_CURRENT|_|SPLUNK_LATEST_MINOR|-|WAZUH_SPLUNK_REV_CURRENT_LATEST|.tar.gz>`__ (`sha512 <https://packages.wazuh.com/4.x/checksums/wazuh/|WAZUH_SPLUNK_CURRENT|/wazuh_splunk-|WAZUH_SPLUNK_CURRENT|_|SPLUNK_LATEST_MINOR|-|WAZUH_SPLUNK_REV_CURRENT_LATEST|.tar.gz.sha512>`__)
 
-.. |SPLUNK_8.1.3_PKG| replace:: `wazuh_splunk-|WAZUH_SPLUNK_CURRENT|_8.1.3.tar.gz <https://packages.wazuh.com/4.x/ui/splunk/wazuh_splunk-|WAZUH_SPLUNK_CURRENT|_8.1.3-1.tar.gz>`__ (`sha512 <https://packages.wazuh.com/4.x/checksums/wazuh/|WAZUH_SPLUNK_CURRENT|/wazuh_splunk-|WAZUH_SPLUNK_CURRENT|_8.1.3-1.tar.gz.sha512>`__)
+.. |SPLUNK_8.1_PKG| replace:: `wazuh_splunk-|WAZUH_SPLUNK_CURRENT|_8.1-|WAZUH_SPLUNK_REV_CURRENT_8.1|.tar.gz <https://packages.wazuh.com/4.x/ui/splunk/wazuh_splunk-|WAZUH_SPLUNK_CURRENT|_8.1-|WAZUH_SPLUNK_REV_CURRENT_8.1|.tar.gz>`__ (`sha512 <https://packages.wazuh.com/4.x/checksums/wazuh/|WAZUH_SPLUNK_CURRENT|/wazuh_splunk-|WAZUH_SPLUNK_CURRENT|_8.1-|WAZUH_SPLUNK_REV_CURRENT_8.1|.tar.gz.sha512>`__)
 
-.. |SPLUNK_8.1.4_PKG| replace:: `wazuh_splunk-|WAZUH_SPLUNK_CURRENT|_8.1.4.tar.gz <https://packages.wazuh.com/4.x/ui/splunk/wazuh_splunk-|WAZUH_SPLUNK_CURRENT|_8.1.4-1.tar.gz>`__ (`sha512 <https://packages.wazuh.com/4.x/checksums/wazuh/|WAZUH_SPLUNK_CURRENT|/wazuh_splunk-|WAZUH_SPLUNK_CURRENT|_8.1.4-1.tar.gz.sha512>`__)
+.. |SPLUNK_8.2.7.1_PKG| replace:: `wazuh_splunk-|WAZUH_SPLUNK_CURRENT|_8.2.7.1.tar.gz <https://packages.wazuh.com/4.x/ui/splunk/wazuh_splunk-|WAZUH_SPLUNK_CURRENT|_8.2.7.1-1.tar.gz>`__ (`sha512 <https://packages.wazuh.com/4.x/checksums/wazuh/|WAZUH_SPLUNK_CURRENT|/wazuh_splunk-|WAZUH_SPLUNK_CURRENT|_8.2.7.1.tar.gz.sha512>`__)
 
-.. |SPLUNK_8.1.5_PKG| replace:: `wazuh_splunk-|WAZUH_SPLUNK_CURRENT|_8.1.5.tar.gz <https://packages.wazuh.com/4.x/ui/splunk/wazuh_splunk-|WAZUH_SPLUNK_CURRENT|_8.1.5-1.tar.gz>`__ (`sha512 <https://packages.wazuh.com/4.x/checksums/wazuh/|WAZUH_SPLUNK_CURRENT|/wazuh_splunk-|WAZUH_SPLUNK_CURRENT|_8.1.5-1.tar.gz.sha512>`__)
-
-.. |SPLUNK_8.1.6_PKG| replace:: `wazuh_splunk-|WAZUH_SPLUNK_CURRENT|_8.1.6.tar.gz <https://packages.wazuh.com/4.x/ui/splunk/wazuh_splunk-|WAZUH_SPLUNK_CURRENT|_8.1.6-1.tar.gz>`__ (`sha512 <https://packages.wazuh.com/4.x/checksums/wazuh/|WAZUH_SPLUNK_CURRENT|/wazuh_splunk-|WAZUH_SPLUNK_CURRENT|_8.1.6-1.tar.gz.sha512>`__)
-
-.. |SPLUNK_8.1.7_PKG| replace:: `wazuh_splunk-|WAZUH_SPLUNK_CURRENT|_8.1.7.tar.gz <https://packages.wazuh.com/4.x/ui/splunk/wazuh_splunk-|WAZUH_SPLUNK_CURRENT|_8.1.7-1.tar.gz>`__ (`sha512 <https://packages.wazuh.com/4.x/checksums/wazuh/|WAZUH_SPLUNK_CURRENT|/wazuh_splunk-|WAZUH_SPLUNK_CURRENT|_8.1.7-1.tar.gz.sha512>`__)
-
-.. |SPLUNK_8.1.7.1_PKG| replace:: `wazuh_splunk-|WAZUH_SPLUNK_CURRENT|_8.1.7.1.tar.gz <https://packages.wazuh.com/4.x/ui/splunk/wazuh_splunk-|WAZUH_SPLUNK_CURRENT|_8.1.7.1-1.tar.gz>`__ (`sha512 <https://packages.wazuh.com/4.x/checksums/wazuh/|WAZUH_SPLUNK_CURRENT|/wazuh_splunk-|WAZUH_SPLUNK_CURRENT|_8.1.7.1-1.tar.gz.sha512>`__)
-
-.. |SPLUNK_8.1.7.2_PKG| replace:: `wazuh_splunk-|WAZUH_SPLUNK_CURRENT|_8.1.7.2.tar.gz <https://packages.wazuh.com/4.x/ui/splunk/wazuh_splunk-|WAZUH_SPLUNK_CURRENT|_8.1.7.2-1.tar.gz>`__ (`sha512 <https://packages.wazuh.com/4.x/checksums/wazuh/|WAZUH_SPLUNK_CURRENT|/wazuh_splunk-|WAZUH_SPLUNK_CURRENT|_8.1.7.2-1.tar.gz.sha512>`__)
-
-.. |SPLUNK_8.1.8_PKG| replace:: `wazuh_splunk-|WAZUH_SPLUNK_CURRENT|_8.1.8.tar.gz <https://packages.wazuh.com/4.x/ui/splunk/wazuh_splunk-|WAZUH_SPLUNK_CURRENT|_8.1.8-1.tar.gz>`__ (`sha512 <https://packages.wazuh.com/4.x/checksums/wazuh/|WAZUH_SPLUNK_CURRENT|/wazuh_splunk-|WAZUH_SPLUNK_CURRENT|_8.1.8-1.tar.gz.sha512>`__)
-
-.. |SPLUNK_8.1.9_PKG| replace:: `wazuh_splunk-|WAZUH_SPLUNK_CURRENT|_8.1.9.tar.gz <https://packages.wazuh.com/4.x/ui/splunk/wazuh_splunk-|WAZUH_SPLUNK_CURRENT|_8.1.9-1.tar.gz>`__ (`sha512 <https://packages.wazuh.com/4.x/checksums/wazuh/|WAZUH_SPLUNK_CURRENT|/wazuh_splunk-|WAZUH_SPLUNK_CURRENT|_8.1.9-1.tar.gz.sha512>`__)
-
-.. |SPLUNK_8.1.10_PKG| replace:: `wazuh_splunk-|WAZUH_SPLUNK_CURRENT|_8.1.10.tar.gz <https://packages.wazuh.com/4.x/ui/splunk/wazuh_splunk-|WAZUH_SPLUNK_CURRENT|_8.1.10-1.tar.gz>`__ (`sha512 <https://packages.wazuh.com/4.x/checksums/wazuh/|WAZUH_SPLUNK_CURRENT|/wazuh_splunk-|WAZUH_SPLUNK_CURRENT|_8.1.10-1.tar.gz.sha512>`__)
-
-.. |SPLUNK_8.2.0_PKG| replace:: `wazuh_splunk-|WAZUH_SPLUNK_CURRENT|_8.2.0.tar.gz <https://packages.wazuh.com/4.x/ui/splunk/wazuh_splunk-|WAZUH_SPLUNK_CURRENT|_8.2.0-1.tar.gz>`__ (`sha512 <https://packages.wazuh.com/4.x/checksums/wazuh/|WAZUH_SPLUNK_CURRENT|/wazuh_splunk-|WAZUH_SPLUNK_CURRENT|_8.2.0-1.tar.gz.sha512>`__)
-
-.. |SPLUNK_8.2.1_PKG| replace:: `wazuh_splunk-|WAZUH_SPLUNK_CURRENT|_8.2.1.tar.gz <https://packages.wazuh.com/4.x/ui/splunk/wazuh_splunk-|WAZUH_SPLUNK_CURRENT|_8.2.1-1.tar.gz>`__ (`sha512 <https://packages.wazuh.com/4.x/checksums/wazuh/|WAZUH_SPLUNK_CURRENT|/wazuh_splunk-|WAZUH_SPLUNK_CURRENT|_8.2.1-1.tar.gz.sha512>`__)
-
-.. |SPLUNK_8.2.2_PKG| replace:: `wazuh_splunk-|WAZUH_SPLUNK_CURRENT|_8.2.2.tar.gz <https://packages.wazuh.com/4.x/ui/splunk/wazuh_splunk-|WAZUH_SPLUNK_CURRENT|_8.2.2-1.tar.gz>`__ (`sha512 <https://packages.wazuh.com/4.x/checksums/wazuh/|WAZUH_SPLUNK_CURRENT|/wazuh_splunk-|WAZUH_SPLUNK_CURRENT|_8.2.2-1.tar.gz.sha512>`__)
-
-.. |SPLUNK_8.2.3_PKG| replace:: `wazuh_splunk-|WAZUH_SPLUNK_CURRENT|_8.2.3.tar.gz <https://packages.wazuh.com/4.x/ui/splunk/wazuh_splunk-|WAZUH_SPLUNK_CURRENT|_8.2.3-1.tar.gz>`__ (`sha512 <https://packages.wazuh.com/4.x/checksums/wazuh/|WAZUH_SPLUNK_CURRENT|/wazuh_splunk-|WAZUH_SPLUNK_CURRENT|_8.2.3-1.tar.gz.sha512>`__)
-
-.. |SPLUNK_8.2.4_PKG| replace:: `wazuh_splunk-|WAZUH_SPLUNK_CURRENT|_8.2.4.tar.gz <https://packages.wazuh.com/4.x/ui/splunk/wazuh_splunk-|WAZUH_SPLUNK_CURRENT|_8.2.4-1.tar.gz>`__ (`sha512 <https://packages.wazuh.com/4.x/checksums/wazuh/|WAZUH_SPLUNK_CURRENT|/wazuh_splunk-|WAZUH_SPLUNK_CURRENT|_8.2.4-1.tar.gz.sha512>`__)
-
-.. |SPLUNK_8.2.5_PKG| replace:: `wazuh_splunk-|WAZUH_SPLUNK_CURRENT|_8.2.5.tar.gz <https://packages.wazuh.com/4.x/ui/splunk/wazuh_splunk-|WAZUH_SPLUNK_CURRENT|_8.2.5-1.tar.gz>`__ (`sha512 <https://packages.wazuh.com/4.x/checksums/wazuh/|WAZUH_SPLUNK_CURRENT|/wazuh_splunk-|WAZUH_SPLUNK_CURRENT|_8.2.5-1.tar.gz.sha512>`__)
-
-.. |SPLUNK_8.2.6_PKG| replace:: `wazuh_splunk-|WAZUH_SPLUNK_CURRENT|_8.2.6.tar.gz <https://packages.wazuh.com/4.x/ui/splunk/wazuh_splunk-|WAZUH_SPLUNK_CURRENT|_8.2.6-1.tar.gz>`__ (`sha512 <https://packages.wazuh.com/4.x/checksums/wazuh/|WAZUH_SPLUNK_CURRENT|/wazuh_splunk-|WAZUH_SPLUNK_CURRENT|_8.2.6-1.tar.gz.sha512>`__)
+.. |SPLUNK_8.2.8_PKG| replace:: `wazuh_splunk-|WAZUH_SPLUNK_CURRENT|_8.2.8.tar.gz <https://packages.wazuh.com/4.x/ui/splunk/wazuh_splunk-|WAZUH_SPLUNK_CURRENT|_8.2.8-1.tar.gz>`__ (`sha512 <https://packages.wazuh.com/4.x/checksums/wazuh/|WAZUH_SPLUNK_CURRENT|/wazuh_splunk-|WAZUH_SPLUNK_CURRENT|_8.2.8-1.tar.gz.sha512>`__)  
 
 +----------------------+----------------------+
 | Splunk version       | Package              |
 +======================+======================+
-| 8.1.1                | |SPLUNK_8.1.1_PKG|   |
+| 8.1*                 | |SPLUNK_8.1_PKG|     |
 +----------------------+----------------------+
-| 8.1.2                | |SPLUNK_8.1.2_PKG|   |
+| |SPLUNK_LATEST_MIN|  | |SPLUNK_LATEST_PKG|  |
 +----------------------+----------------------+
-| 8.1.3                | |SPLUNK_8.1.3_PKG|   |
+| 8.2.7.1              | |SPLUNK_8.2.7.1_PKG| |
 +----------------------+----------------------+
-| 8.1.4                | |SPLUNK_8.1.4_PKG|   |
+| 8.2.8                | |SPLUNK_8.2.8_PKG|   |
 +----------------------+----------------------+
-| 8.1.5                | |SPLUNK_8.1.5_PKG|   |
-+----------------------+----------------------+
-| 8.1.6                | |SPLUNK_8.1.6_PKG|   |
-+----------------------+----------------------+
-| 8.1.7                | |SPLUNK_8.1.7_PKG|   |
-+----------------------+----------------------+
-| 8.1.7.1              | |SPLUNK_8.1.7.1_PKG| |
-+----------------------+----------------------+
-| 8.1.7.2              | |SPLUNK_8.1.7.2_PKG| |
-+----------------------+----------------------+
-| 8.1.8                | |SPLUNK_8.1.8_PKG|   |
-+----------------------+----------------------+
-| 8.1.9                | |SPLUNK_8.1.9_PKG|   |
-+----------------------+----------------------+
-| 8.1.10               | |SPLUNK_8.1.10_PKG|  |
-+----------------------+----------------------+
-| 8.2.0                | |SPLUNK_8.2.0_PKG|   |
-+----------------------+----------------------+
-| 8.2.1                | |SPLUNK_8.2.1_PKG|   |
-+----------------------+----------------------+
-| 8.2.2                | |SPLUNK_8.2.2_PKG|   |
-+----------------------+----------------------+
-| 8.2.3                | |SPLUNK_8.2.3_PKG|   |
-+----------------------+----------------------+
-| 8.2.4                | |SPLUNK_8.2.4_PKG|   |
-+----------------------+----------------------+
-| 8.2.5                | |SPLUNK_8.2.5_PKG|   |
-+----------------------+----------------------+
-| 8.2.6                | |SPLUNK_8.2.6_PKG|   |
-+----------------------+----------------------+
+
+\* The Wazuh Splunk app is not compatible with Splunk 8.1.0.
 
 Filebeat
 ---------------
@@ -598,3 +554,42 @@ MSU
 +===================+==============+=======================================================================================================================================================================================================================================+
 |  4.0.0 or later   |   32/64bits  | `msu-updates.json.gz <https://feed.wazuh.com/vulnerability-detector/windows/msu-updates.json.gz>`_ (`sha256 <https://feed.wazuh.com/vulnerability-detector/windows/msu-updates.meta>`__)                                              |
 +-------------------+--------------+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+
+WPK
+---
+
+Linux
+^^^^^
+
+.. |WPK_Linux| replace:: `wazuh_agent_v|WAZUH_CURRENT|_linux_x86_64.wpk <https://packages.wazuh.com/4.x/wpk/linux/x86_64/wazuh_agent_v|WAZUH_CURRENT|_linux_x86_64.wpk>`__ (`sha512 <https://packages.wazuh.com/|WAZUH_CURRENT_MAJOR|/checksums/wazuh/|WAZUH_CURRENT|/wazuh_agent_v|WAZUH_CURRENT|_linux_x86_64.wpk.sha512>`__)
+.. |W_Current| replace:: |WAZUH_CURRENT|
+
++--------------+------------------+--------------+-------------------------+
+| Distribution | Version          | Architecture | WPK Package             |
++==============+==================+==============+=========================+
+|    Linux     | |W_Current|      |    64bit     | |WPK_Linux|             |
++--------------+------------------+--------------+-------------------------+
+
+Windows
+^^^^^^^
+
+.. |WPK_Windows| replace:: `wazuh_agent_v|WAZUH_CURRENT_WINDOWS|_windows.wpk <https://packages.wazuh.com/4.x/wpk/windows/wazuh_agent_v|WAZUH_CURRENT_WINDOWS|_windows.wpk>`__ (`sha512 <https://packages.wazuh.com/|WAZUH_CURRENT_MAJOR_WINDOWS|/checksums/wazuh/|WAZUH_CURRENT_WINDOWS|/wazuh_agent_v|WAZUH_CURRENT_WINDOWS|_windows.wpk.sha512>`__)
+.. |W_Current_Windows| replace:: |WAZUH_CURRENT_WINDOWS|
+
++--------------+-----------------------+--------------+--------------------+
+| Distribution | Version               | Architecture | WPK Package        |
++==============+=======================+==============+====================+
+|   Windows    |  |W_Current_Windows|  |   32/64bit   |  |WPK_Windows|     |
++--------------+-----------------------+--------------+--------------------+
+
+macOS
+^^^^^
+
+.. |WPK_macOS| replace:: `wazuh_agent_v|WAZUH_CURRENT_OSX|_macos_x86_64.wpk <https://packages.wazuh.com/4.x/wpk/macos/x86_64/pkg/wazuh_agent_v|WAZUH_CURRENT_OSX|_macos_x86_64.wpk>`__ (`sha512 <https://packages.wazuh.com/|WAZUH_CURRENT_MAJOR_OSX|/checksums/wazuh/|WAZUH_CURRENT_OSX|/wazuh_agent_v|WAZUH_CURRENT_OSX|_macos_x86_64.wpk.sha512>`__)
+.. |W_Current_OSX| replace:: |WAZUH_CURRENT_OSX|
+
++--------------+------------------+--------------+-------------------------+
+| Distribution | Version          | Architecture | WPK Package             |
++==============+==================+==============+=========================+
+|    macOS     | |W_Current_OSX|  |    64bit     | |WPK_macOS|             |
++--------------+------------------+--------------+-------------------------+

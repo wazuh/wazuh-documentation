@@ -1,5 +1,8 @@
 .. Copyright (C) 2015, Wazuh, Inc.
 
+.. meta::
+  :description: Find out how to configure the severity level threshold for logging or sending alerts and how to configure the geolocation feature in this section.
+
 .. _reference_ossec_alerts:
 
 alerts
@@ -57,7 +60,7 @@ use_geoip
 
 .. deprecated:: 2.0
 
-This option has no effect, and will result in a parsing error unless compiled with `LIBGEOIP_ENABLED <https://github.com/wazuh/wazuh/blob/master/src/config/alerts-config.c#L61>`_.
+This option has no effect and will result in a parsing error unless compiled with `LIBGEOIP_ENABLED <https://github.com/wazuh/wazuh/blob/master/src/config/alerts-config.c#L61>`_.
 
 +--------------------+-------------+
 | **Default value**  | n/a         |

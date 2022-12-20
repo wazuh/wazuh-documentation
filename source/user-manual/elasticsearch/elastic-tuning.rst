@@ -8,7 +8,7 @@
 Elasticsearch tuning
 ====================
 
-This guide summarizes the relevant settings that enable Elasticsearch optimization. To change the default passwords, see the :doc:`/user-manual/securing-wazuh/index` section.
+This guide summarizes the relevant settings that enable Elasticsearch optimization. To change the default passwords, see the :doc:`/user-manual/user-administration/password-management` section.
 
 - `Memory locking`_
 - `Shards and replicas`_
@@ -18,7 +18,7 @@ This guide summarizes the relevant settings that enable Elasticsearch optimizati
 Memory locking
 --------------
 
-Elasticsearch malfunctions when the system is swapping memory. It is crucial for the health of the node that none of the JVM is ever swapped out to disk. The following steps show how to set the ``bootstrap.memory_lock`` setting to true so Elasticsearch will lock the process address space into RAM. This prevents any Elasticsearch memory from being swapped out.
+Elasticsearch malfunctions when the system is swapping memory. It is crucial for the health of the node that none of the JVM is ever swapped out to disk. The following steps show how to set the ``bootstrap.memory_lock`` setting to true, so Elasticsearch will lock the process address space into RAM. This prevents any Elasticsearch memory from being swapped out.
 
 #. Set ``bootstrap.memory_lock``:
 
@@ -51,7 +51,7 @@ Elasticsearch malfunctions when the system is swapping memory. It is crucial for
             LimitMEMLOCK=infinity
             EOF
 
-        .. group-tab:: SysV Init
+        .. group-tab:: SysV init
 
           Edit the proper file ``/etc/sysconfig/elasticsearch`` for RPM or ``/etc/default/elasticsearch`` for Debian:
 
@@ -96,7 +96,7 @@ Elasticsearch malfunctions when the system is swapping memory. It is crucial for
 
 
 
-    .. group-tab:: SysV Init
+    .. group-tab:: SysV init
 
 
       .. code-block:: console
@@ -142,7 +142,7 @@ Shards and replicas
 
 Elasticsearch offers the possibility to split an index into multiple segments called shards. Each shard is in itself a fully functional and independent "index" that can be hosted on any node in the cluster. The splitting is important for two main reasons:
 
-- Horizontal scalation.
+- Horizontal escalation.
 
 - Distribute and parallelize operations across shards, increasing the performance and throughput.
 

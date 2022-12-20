@@ -1,9 +1,9 @@
 .. Copyright (C) 2015, Wazuh, Inc.
 
+:orphan:
+
 .. meta::
   :description: Learn how to secure Opendistro for Elasticsearch.
-
-.. _user_manual_secure_opendistro:
 
 Change the Open Distro for Elasticsearch passwords 
 ==================================================
@@ -42,7 +42,7 @@ The script allows changing the password for either a single user or all the user
 Change the password for single user
 -----------------------------------
 
-To change the password for a single user, run the script with the ``-u`` option. You may indicate the new password with option ``-p``. If no password is specified, the script will generate a random one. 
+To change the password for a single user, run the script with the ``-u`` option. You may indicate the new password with the option ``-p``. If no password is specified, the script will generate a random one. 
   
   .. code-block:: console
 
@@ -118,6 +118,6 @@ To use a formatted file to indicate the passwords, run the script with the ``-f`
 
 If the ``-a`` option is used in combination with the ``-f`` option, all users not included in the file are given a random password.
 
-In distributed deployments you will need to change update the passwords in both ``/etc/filebeat/filebeat.yml`` and ``/etc/kibana/kibana.yml``. After changing the configuration files, remember to restart the corresponding services.
+In distributed deployments, you will need to change or update the passwords in both ``/etc/filebeat/filebeat.yml`` and ``/etc/kibana/kibana.yml``. After changing the configuration files, remember to restart the corresponding services.
 
 

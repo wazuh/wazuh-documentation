@@ -50,7 +50,7 @@ Choose the corresponding tab to configure the installation as a single-node or m
                   # systemctl enable wazuh-manager
                   # systemctl start wazuh-manager
 
-            .. group-tab:: SysV Init
+            .. group-tab:: SysV init
 
                Choose one option according to your operating system:
 
@@ -70,19 +70,9 @@ Choose the corresponding tab to configure the installation as a single-node or m
 
       #. Run the following command to check if the Wazuh manager is active: 
 
-         .. tabs::
+         .. include:: /_templates/installations/wazuh/common/check_wazuh_manager.rst
 
-            .. group-tab:: Systemd
-
-               .. code-block:: console
-
-                  # systemctl status wazuh-manager
-
-            .. group-tab:: SysV Init
-
-               .. code-block:: console
-
-                  # service wazuh-manager status
+            
 
    .. group-tab:: Multi-node cluster
 

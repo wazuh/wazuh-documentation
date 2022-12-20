@@ -1,5 +1,8 @@
 .. Copyright (C) 2015, Wazuh, Inc.
 
+.. meta::
+  :description: The Wazuh dashboard includes a configuration file where you can define custom values for several options. Learn more about it in this section.
+
 .. _wazuh_dashboard_config_file:
 
 Configuration file
@@ -18,8 +21,8 @@ The configuration file reference is organized by sections:
    :depth: 2
    :backlinks: none
 
-Basic options
--------------
+General options
+---------------
 
 hosts
 ^^^^^
@@ -61,7 +64,7 @@ This is an example of a multi-host configuration:
 pattern
 ^^^^^^^
 
-Default index pattern to use on the app. If there's no valid index patterns on Elasticsearch, the app will automatically create one with the name indicated in this option.
+Default index pattern to use on the app. If there are no valid index patterns on Elasticsearch, the app will automatically create one with the name indicated in this option.
 
 +--------------------+-------------------------+
 | **Default value**  | wazuh-alerts-*          |
@@ -94,7 +97,7 @@ Defines if the user is allowed to change the selected index pattern directly fro
 ip.ignore
 ^^^^^^^^^
 
-Disable certain index pattern names from being available in index pattern selector from the Wazuh dashboard. An empty list (the default value) won't ignore any valid index pattern.
+Disable certain index pattern names from being available in the index pattern selector from the Wazuh dashboard. An empty list (the default value) won't ignore any valid index pattern.
 
 +--------------------+---------------------------------------------+
 | **Default value**  | []                                          |
@@ -142,6 +145,10 @@ Enable or disable the ``wazuh-monitoring`` index creation and/or visualization:
 | **Allowed values** | true,false,worker |
 +--------------------+-------------------+
 
+.. warning::
+
+    The Wazuh dashboard user interface allows selecting ``true`` and ``false`` only. To set the ``worker`` value, you must edit the configuration file instead.
+
 wazuh.monitoring.frequency
 ^^^^^^^^^^^^^^^^^^^^^^^^^^
 
@@ -160,7 +167,7 @@ Define in seconds the frequency of API requests to get the state of the agents t
 wazuh.monitoring.pattern
 ^^^^^^^^^^^^^^^^^^^^^^^^
 
-Default Wazuh monitoring index pattern to use for the app. This setting does not remove any existing patterns or templates, it just updates the app to add the new ones.
+Default Wazuh monitoring index pattern to use for the app. This setting does not remove any existing patterns or templates, it just updates the app to add new ones.
 
 +--------------------+-------------------------+
 | **Default value**  | wazuh-monitoring-*      |
@@ -179,8 +186,8 @@ Configure wazuh-monitoring-* indices custom creation interval.
 | **Allowed values** | h (hourly), d (daily), w (weekly), m (monthly) |
 +--------------------+------------------------------------------------+
 
-Checks
-------
+Health checks
+-------------
 
 checks.pattern
 ^^^^^^^^^^^^^^
@@ -425,7 +432,7 @@ Advanced index options
 
 .. warning::
 
-    These options are only valid if they're modified before starting Wazuh dashboard for the very first time.
+    These options are only valid if they're modified before starting the Wazuh dashboard for the very first time.
 
     You can read more about configuring the shards and replicas in :ref:`elastic_tuning`.
 
@@ -532,7 +539,7 @@ Enable or disable the statistics tasks.
 cron.statistics.apis
 ^^^^^^^^^^^^^^^^^^^^
 
-Enter the ID of the hosts you want to save data from, leave this empty to run the task on every host.
+Enter the ID of the hosts you want to save data from, and leave this empty to run the task on every host.
 
 +--------------------+----------------------------+
 | **Default value**  | []                         |
@@ -595,13 +602,34 @@ Define the number of replicas to use for the statistics indices.
 | **Allowed values** | Any number starting from 0 |
 +--------------------+----------------------------+
 
-Logo customization
-------------------
+Custom branding
+---------------
+
+Edit the settings shown below to use custom branding elements such as logos, and header and footer text.
+
+.. warning::
+
+    Please, take into consideration the following notes: 
+        - The value of any  ``customization.logo.*`` setting must follow the pattern ``custom/images/<setting_name>.<image_format>``.
+        - The path ``custom/images/`` included in every ``customization.logo.*`` setting is relative to the ``/plugins/wazuh/public/assets/`` folder.
+        - Setting or modifying any ``customization.logo.*`` setting by hand is not recommended. Use the UI instead.
+        - The in-file ``customization.logo.*`` settings are flagged for deprecation, and will be no longer supported in future releases.
+
+customization.enabled
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Enable or disable the custom branding.
+
++--------------------+----------------------------+
+| **Default value**  | true                       |
++--------------------+----------------------------+
+| **Allowed values** | true,false                 |
++--------------------+----------------------------+
 
 customization.logo.app
 ^^^^^^^^^^^^^^^^^^^^^^
 
-Define the name of the app logo saved in the path ``/plugins/wazuh/public/assets/``.
+Define the image's path, name and extension for the main menu logo.
 
 +--------------------+----------------------------+
 | **Default value**  | ''                         |
@@ -612,7 +640,7 @@ Define the name of the app logo saved in the path ``/plugins/wazuh/public/assets
 customization.logo.sidebar
 ^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-Define the name of the sidebar logo saved in the path ``/plugins/wazuh/public/assets/``.
+Define the image's path, name and extension for the logo to display in the platform's navigation drawer, this is, the main sidebar collapsible menu.
 
 +--------------------+----------------------------+
 | **Default value**  | ''                         |
@@ -623,7 +651,7 @@ Define the name of the sidebar logo saved in the path ``/plugins/wazuh/public/as
 customization.logo.healthcheck
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-Define the name of the health check logo saved in the path ``/plugins/wazuh/public/assets/``.
+Define the image's path, name and extension for the Healthcheck logo.
 
 +--------------------+----------------------------+
 | **Default value**  | ''                         |
@@ -634,7 +662,29 @@ Define the name of the health check logo saved in the path ``/plugins/wazuh/publ
 customization.logo.reports
 ^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-Define the name of the reports logo saved in the path ``/plugins/wazuh/public/assets/``.
+Define the image's path, name and extension for the logo to use in the PDF reports generated by the app.
+
++--------------------+----------------------------+
+| **Default value**  |''                          |
++--------------------+----------------------------+
+| **Allowed values** | Any string                 |
++--------------------+----------------------------+
+
+customization.reports.header
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Set the header of the PDF reports. To use an empty header, type a space " " in the field. If this field is empty, it uses the default header.
+
++--------------------+----------------------------+
+| **Default value**  |''                          |
++--------------------+----------------------------+
+| **Allowed values** | Any string                 |
++--------------------+----------------------------+
+
+customization.reports.footer
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Set the footer of the PDF reports. To use an empty footer, type a space " " in the field. If this field is empty, it uses the default footer.
 
 +--------------------+----------------------------+
 | **Default value**  |''                          |
@@ -650,7 +700,7 @@ This is an example of the wazuh.yml configuration:
 
 .. code-block:: yaml
     
-    #Basic options
+    #General options
 
     hosts:
         - env-1:
@@ -680,7 +730,7 @@ This is an example of the wazuh.yml configuration:
     wazuh.monitoring.pattern: wazuh-monitoring-*
     wazuh.monitoring.creation: w
 
-    #Checks
+    #Health checks
 
     checks.pattern : true
     checks.template: true
@@ -712,12 +762,15 @@ This is an example of the wazuh.yml configuration:
     wazuh.monitoring.shards: 1
     wazuh.monitoring.replicas: 0    
 
-    #Logo customization
+    #Custom branding
 
-    customization.logo.app: ''
-    customization.logo.sidebar: ''
-    customization.logo.healthcheck: ''
-    customization.logo.reports: ''
+    customization.enabled: true
+    customization.logo.app: 'custom/images/customization.logo.app.jpg'
+    customization.logo.sidebar: 'custom/images/customization.logo.sidebar.png'
+    customization.logo.healthcheck: 'custom/images/customization.logo.healthcheck.svg'
+    customization.logo.reports: 'custom/images/customization.logo.reports.jpg'
+    customization.reports.footer: '123 Custom footer Ave.\nSan Jose, CA 95148'
+    customization.reports.header: 'Custom Company\ninfo@custom.com\n@social_reference'
 
     #Unauthorized roles
 

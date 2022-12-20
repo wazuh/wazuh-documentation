@@ -1,4 +1,5 @@
 .. Copyright (C) 2015, Wazuh, Inc.
+
 .. meta::
   :description: Learn more about client configuration, connection to the manager, and its configuring options in this section of the Wazuh documentation.
 
@@ -17,7 +18,7 @@ client
 This section explains how to configure the connection to the manager.
 
 .. note::
-  To avoid a permanent lost of communication with the manager, the only setting included in the shared configuration of this section is **force_reconnect_interval**.
+  To avoid a permanent loss of communication with the manager, the only setting included in the shared configuration of this section is **force_reconnect_interval**.
 
 Subsections
 -----------
@@ -57,7 +58,7 @@ Specifies the IP address or the hostname of the Wazuh manager.
 port
 ^^^^
 
-Specifies the port to send events to on the manager.  This must match the associated listening port configured on the Wazuh manager.
+Specifies the port to send events to the manager.  This must match the associated listening port configured on the Wazuh manager.
 
 +--------------------+---------------------------------------------+
 | **Default value**  | 1514                                        |
@@ -337,7 +338,7 @@ Groups name to which the agent belongs.
 agent_address
 ^^^^^^^^^^^^^
 
-Force IP address from the agent. If this is not set manager will extract source IP address from enrollment message.
+Force IP address from the agent. If this is not set manager will extract the source IP address from the enrollment message.
 
 +--------------------+---------------------------------------------+
 | **Default value**  | src                                         |
@@ -372,7 +373,7 @@ Used for manager verification. If no CA certificate is set server will not be ve
 +--------------------+---------------------------------------------+
 
 .. note::
-  Paths can be referred to relative paths under the Wazuh installation directory, or full paths.
+  Paths can be referred to as relative paths under the Wazuh installation directory or full paths.
 
 .. _enrollment_agent_certificate_path:
 

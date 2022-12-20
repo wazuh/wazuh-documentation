@@ -3,7 +3,6 @@
 .. meta::
   :description: Wazuh 4.3.4 has been released. Check out our release notes to discover the changes and additions of this release.
 
-
 4.3.4 Release notes - 8 June 2022
 =================================
 

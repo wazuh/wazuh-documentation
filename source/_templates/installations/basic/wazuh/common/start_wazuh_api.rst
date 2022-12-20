@@ -11,7 +11,7 @@
       # systemctl start wazuh-api
 
 
-  .. tab:: SysV Init
+  .. tab:: SysV init
 
     .. code-block:: console
 

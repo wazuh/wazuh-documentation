@@ -1,8 +1,8 @@
 .. Copyright (C) 2015, Wazuh, Inc.
 
 .. meta::
-  :description: The ossec.conf file is the main configuration file on the Wazuh manager and plays an important role on the agents. Learn more about the global configuration here. 
-  
+  :description: The ossec.conf file is the main configuration file on the Wazuh manager and plays an important role on the agents. Learn more about the global configuration here.
+
 .. _reference_ossec_global:
 
 global
@@ -48,6 +48,7 @@ Options
 - `max_output_size`_
 - `agents_disconnection_time`_
 - `agents_disconnection_alert_time`_
+- `limits`_
 
 alerts_log
 ^^^^^^^^^^
@@ -81,7 +82,7 @@ This specifies the email recipient for alerts.
 
 .. note::
 
-  A base configuration must be included in the section in order to use granular email configurations, .
+  A base configuration must be included in the section in order to use granular email configurations.
 
 +--------------------+-------------------------+
 | **Default value**  | n/a                     |
@@ -425,22 +426,6 @@ Example:
 
   <max_output_size>20M</max_output_size>
 
-queue_size
-^^^^^^^^^^
-
-This sets the size of the message input buffer in Analysisd (number of events).
-
-+-------------------------+---------------------------------------------------------------------------------------+
-| **Default value**       | 131072                                                                                |
-+-------------------------+---------------------------------------------------------------------------------------+
-| **Allowed values**      | A positive number. The minimum allowed is 1. The recommended range is [16384..262144] |
-+-------------------------+---------------------------------------------------------------------------------------+
-
-Example:
-
-.. code-block:: xml
-
-  <queue_size>16384</queue_size>
 
 .. _reference_agents_disconnection_time:
 
@@ -488,6 +473,72 @@ Example:
 .. code-block:: xml
 
   <agents_disconnection_alert_time>1h</agents_disconnection_alert_time>
+
+
+limits
+------
+
+This block configures the limits section.
+
+- `limits\\eps`_
+
++----------------------------+
+| Options                    |
++============================+
+| `limits\\eps`_             |
++----------------------------+
+
+
+limits\\eps
+^^^^^^^^^^^
+
+This block configures the events per second limitation functionality.
+
+- `limits\\eps\\maximum`_
+- `limits\\eps\\timeframe`_
+
++----------------------------------------+----------------------------------------------+
+| Options                                | Allowed values                               |
++========================================+==============================================+
+| `limits\\eps\\maximum`_                | Zero or a positive number                    |
++----------------------------------------+----------------------------------------------+
+| `limits\\eps\\timeframe`_              | A positive number                            |
++----------------------------------------+----------------------------------------------+
+
+Events per second limits example block:
+
+.. code-block:: xml
+
+    <limits>
+      <eps>
+        <maximum>500</maximum>
+        <timeframe>10</timeframe>
+      </eps>
+    </limits>
+
+limits\\eps\\maximum
+^^^^^^^^^^^^^^^^^^^^
+
+Maximum number of events per second allowed to be processed by decoders.
+
++--------------------+-----------------------------------------------------------------+
+| **Default value**  | 0                                                               |
++--------------------+-----------------------------------------------------------------+
+| **Allowed values** | A number between 0 and 100000. Zero to disable the functionality|
++--------------------+-----------------------------------------------------------------+
+
+limits\\eps\\timeframe
+^^^^^^^^^^^^^^^^^^^^^^
+
+A positive number expressed in seconds that indicates the time period where the events per second processed are increased and restored.
+
++--------------------+-------------------------------------+
+| **Default value**  | 10                                  |
++--------------------+-------------------------------------+
+| **Allowed values** | A positive number between 1 and 3600|
++--------------------+-------------------------------------+
+
+
 
 Default configuration
 ---------------------

@@ -43,6 +43,8 @@ Save the credentials, you will use them later to configure the module.
 
 Depending on the service that will be monitored, the Wazuh user will need a different set of permissions. The permissions required for each service are explained on the page of each service listed in the :ref:`supported services <amazon_supported_services>` section.
 
+.. _authentication_method:
+
 Authenticating options
 ----------------------
 
@@ -182,6 +184,8 @@ If you're using a single AWS account for all your buckets this could be the most
 
 Insert the credentials into the configuration
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+.. deprecated:: 4.4.0
 
 Another available option to set up credentials is writing them right into the Wazuh configuration file (``/var/ossec/etc/ossec.conf``), inside of the ``<bucket>`` block on the module configuration.
 

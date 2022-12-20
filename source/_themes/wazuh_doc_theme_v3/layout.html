@@ -13,6 +13,12 @@
   'search'
 ] %}
 
+{% set ignore_page_search = [
+  'index', 
+  'not_found', 
+  'search'
+] %}
+
 {%- if version >= '4.0' -%}
   {% set special_pages = special_pages + [
     'cloud-service/apis/reference',
@@ -109,7 +115,11 @@
     {%- else -%}
       {%- if pagename not in special_pages %}
         {# Extension files disabled from special pages #}
-        {{- extensions_script_files.append(scriptfile)|default("", True) -}}
+        {%- if "tabs.js" in scriptfile %}
+          {{- extensions_script_files.append("_static/js/min/sphinx-tabs.min.js")|default("", True) -}}
+        {%- else -%}
+          {{- extensions_script_files.append(scriptfile)|default("", True) -}}
+        {%- endif -%}
       {%- endif -%}
     {%- endif -%}
   {%- endif -%}
@@ -232,11 +242,11 @@
     {% endblock css %}
     
     {#- FAVICON -#}
-    <link rel="mask-icon" href="{{ pathto('_static/images/favicon.svg', 1) }}" color="#000000">
-    <link rel="icon" href="{{ pathto('_static/images/favicon.png', 1) }}" media="(prefers-color-scheme:no-preference)" sizes="any" type="image/png"/>
-    <link rel="icon" href="{{ pathto('_static/images/dark-favicon.png', 1) }}" media="(prefers-color-scheme:dark)" sizes="any" type="image/png"/>
-    <link rel="icon" href="{{ pathto('_static/images/favicon.png', 1) }}" media="(prefers-color-scheme:light)" sizes="any" type="image/png"/>
-    <link rel="apple-touch-icon" href="{{ pathto('_static/images/favicon.svg', 1) }}">
+    <link rel="mask-icon" href="{{ pathto('_static/images/favicon.svg', 1) }}?v={{ compilation_ts }}" color="#000000">
+    <link rel="icon" href="{{ pathto('_static/images/favicon.png', 1) }}?v={{ compilation_ts }}" media="(prefers-color-scheme:no-preference)" sizes="any" type="image/png"/>
+    <link rel="icon" href="{{ pathto('_static/images/dark-favicon.png', 1) }}?v={{ compilation_ts }}" media="(prefers-color-scheme:dark)" sizes="any" type="image/png"/>
+    <link rel="icon" href="{{ pathto('_static/images/favicon.png', 1) }}?v={{ compilation_ts }}" media="(prefers-color-scheme:light)" sizes="any" type="image/png"/>
+    <link rel="apple-touch-icon" href="{{ pathto('_static/images/favicon.svg', 1) }}?v={{ compilation_ts }}">
     
     {%- if production and theme_breadcrumb_root_title == 'Documentation' -%}
     {#- Google Tag Manager - Head -#}
@@ -250,6 +260,11 @@
       <!-- End Google Tag Manager -->
     {%- endblock gtm_head %}
     {%- endif -%}
+
+    {%- if is_latest_release %}
+    <link rel="canonical" href="{{ theme_wazuh_doc_url + '/current/' + pagename + '.html' }}">
+    {% endif -%}
+
     {% endblock head -%}
   </head>
 

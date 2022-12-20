@@ -1,5 +1,8 @@
 .. Copyright (C) 2015, Wazuh, Inc.
 
+.. meta::
+  :description: Learn more about Custom Active Response. A personalized script configured to be executed when a specific alert, alert level, or rule group is triggered. 
+
 .. _custom-active-response:
 
 Custom Active Response

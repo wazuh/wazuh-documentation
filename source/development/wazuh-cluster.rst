@@ -358,6 +358,8 @@ This communication protocol is used by the API to forward requests to other clus
 +-------------------+-------------+-----------------------+-------------------------------------------------------------------------------------------------+
 | ``get_health``    | Both        | Arguments<Dict>       | Request sent from ``cluster_control -i``.                                                       |
 +-------------------+-------------+-----------------------+-------------------------------------------------------------------------------------------------+
+| ``get_hash``      | Both        | None                  | Receive a request to obtain custom ruleset files and their hashes.                              |
++-------------------+-------------+-----------------------+-------------------------------------------------------------------------------------------------+
 | ``send_file``     | Both        | Filepath<str>,        | Request used to test send file protocol.                                                        |
 |                   |             | Node name<str>        | Node name parameter is ignored in worker nodes (it's always sent to the master node).           |
 +-------------------+-------------+-----------------------+-------------------------------------------------------------------------------------------------+

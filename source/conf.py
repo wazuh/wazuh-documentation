@@ -474,6 +474,18 @@ def customReplacements(app, docname, source):
 custom_replacements = {
     # === URLs and base URLs
     "|CHECKSUMS_URL|" : "https://packages.wazuh.com/4.x/checksums/wazuh/",
+    "|APK_CHECKSUMS_I386_URL|" : "alpine/x86",
+    "|APK_CHECKSUMS_X86_64_URL|" : "alpine/x86_64",
+    "|APK_CHECKSUMS_AARCH64_URL|" : "alpine/aarch64",
+    "|APK_CHECKSUMS_ARMV7_URL|" : "alpine/armv7",
+    "|APK_CHECKSUMS_ARMHF_URL|" : "alpine/armhf",
+    "|APK_CHECKSUMS_PPC_URL|" : "alpine/ppc64le",
+    "|APK_AGENT_I386_URL|" : "https://packages.wazuh.com/4.x/alpine/v3.12/main/x86/wazuh-agent",
+    "|APK_AGENT_X86_64_URL|" : "https://packages.wazuh.com/4.x/alpine/v3.12/main/x86_64/wazuh-agent",
+    "|APK_AGENT_AARCH64_URL|" : "https://packages.wazuh.com/4.x/alpine/v3.12/main/aarch64/wazuh-agent",
+    "|APK_AGENT_ARMV7_URL|" : "https://packages.wazuh.com/4.x/alpine/v3.12/main/armv7/wazuh-agent",
+    "|APK_AGENT_ARMHF_URL|" : "https://packages.wazuh.com/4.x/alpine/v3.12/main/armhf/wazuh-agent",
+    "|APK_AGENT_PPC_URL|" : "https://packages.wazuh.com/4.x/alpine/v3.12/main/ppc64le/wazuh-agent",
     "|RPM_AGENT_URL|" : "https://packages.wazuh.com/4.x/yum/wazuh-agent",
     "|RPM_MANAGER_URL|" : "https://packages.wazuh.com/4.x/yum/wazuh-manager",
     "|DEB_AGENT_URL|" : "https://packages.wazuh.com/4.x/apt/pool/main/w/wazuh-agent/wazuh-agent",
@@ -484,6 +496,13 @@ custom_replacements = {
     "|WAZUH_CURRENT_MINOR|" : version,
     "|WAZUH_CURRENT|" : release,
     # --- Revision numbers for Wazuh agent and manager packages versions
+    # Alpine APK packages revisions
+    "|WAZUH_REVISION_APK_AGENT_I386|" : "r1",
+    "|WAZUH_REVISION_APK_AGENT_X86_64|" : "r1",
+    "|WAZUH_REVISION_APK_AGENT_AARCH64|" : "r1",
+    "|WAZUH_REVISION_APK_AGENT_ARMV7|" : "r1",
+    "|WAZUH_REVISION_APK_AGENT_ARMHF|" : "r1",
+    "|WAZUH_REVISION_APK_AGENT_PPC|" : "r1",
     # Yum packages revisions
     "|WAZUH_REVISION_YUM_AGENT_I386|" : "1",
     "|WAZUH_REVISION_YUM_MANAGER_I386|" : "1",
@@ -496,7 +515,7 @@ custom_replacements = {
     "|WAZUH_REVISION_YUM_AGENT_AARCH64|" : "1",
     "|WAZUH_REVISION_YUM_MANAGER_AARCH64|" : "1",
     "|WAZUH_REVISION_YUM_AGENT_ARMHF|" : "1",
-    "|WAZUH_REVISION_YUM_MANAGER_ARMHF|" : "1",
+    #"|WAZUH_REVISION_YUM_MANAGER_ARMHF|" : "1",
     "|WAZUH_REVISION_YUM_AGENT_PPC|" : "1",
     #|WAZUH_REVISION_YUM_MANAGER_PPC|" :
     # Deb packages revisions
@@ -573,6 +592,22 @@ custom_replacements = {
     #"|WAZUH_CURRENT_MINOR_SOLARIS11|" :
     "|WAZUH_CURRENT_SOLARIS11|" : release,
     #"|WAZUH_REVISION_SOLARIS11|" : "1",
+    "|WAZUH_CURRENT_MAJOR_SOLARIS10_i386|" : "4.x",
+    #"|WAZUH_CURRENT_MINOR_SOLARIS10_i386|" :
+    "|WAZUH_CURRENT_SOLARIS10_i386|" : release,
+    #"|WAZUH_REVISION_SOLARIS10_i386|" : "1",
+    "|WAZUH_CURRENT_MAJOR_SOLARIS10_SPARC|" : "4.x",
+    #"|WAZUH_CURRENT_MINOR_SOLARIS10_SPARC|" :
+    "|WAZUH_CURRENT_SOLARIS10_SPARC|" : release,
+    #"|WAZUH_REVISION_SOLARIS10_SPARC|" : "1",
+    "|WAZUH_CURRENT_MAJOR_SOLARIS11_i386|" : "4.x",
+    #"|WAZUH_CURRENT_MINOR_SOLARIS11_i386|" :
+    "|WAZUH_CURRENT_SOLARIS11_i386|" : release,
+    #"|WAZUH_REVISION_SOLARIS11_i386|" : "1",
+    "|WAZUH_CURRENT_MAJOR_SOLARIS11_SPARC|" : "4.x",
+    #"|WAZUH_CURRENT_MINOR_SOLARIS11_SPARC|" :
+    "|WAZUH_CURRENT_SOLARIS11_SPARC|" : release,
+    #"|WAZUH_REVISION_SOLARIS11_SPARC|" : "1",
     "|WAZUH_CURRENT_MAJOR_AIX|" : "4.x",
     #"|WAZUH_CURRENT_MINOR_AIX|" :
     "|WAZUH_CURRENT_AIX|" : release,
@@ -590,14 +625,18 @@ custom_replacements = {
     # --- Open Distro for Elasticsearch
     "|OPEN_DISTRO_LATEST|" : "1.13.2",
     # --- Elasticsearch
-    "|ELASTICSEARCH_ELK_LATEST|" : "7.17.5", # Basic license
+    "|ELASTICSEARCH_ELK_LATEST|" : "7.17.6", # Basic license
     "|ELASTICSEARCH_LATEST|" : "7.10.2",
     # --- Other Elastic
     "|ELASTIC_6_LATEST|" : "6.8.8",
     #
     # === Splunk
-    "|SPLUNK_LATEST|" : "8.2.6",
+    "|SPLUNK_LATEST|" : "8.2.8",
     "|WAZUH_SPLUNK_CURRENT|" : release,
+    #
+    "|SPLUNK_LATEST_MINOR|" : "8.2",
+    "|WAZUH_SPLUNK_REV_CURRENT_LATEST|" : "1", # 8.2
+    "|WAZUH_SPLUNK_REV_CURRENT_8.1|" : "1",
 }
 
 # -- Customizations ---------------------------------------------------------
@@ -733,7 +772,7 @@ def manage_assets(app, pagename, templatename, context, doctree):
         "index": static + "js/min/index.min.js?ver=%s" % os.stat(os.path.join(theme_dir, "static/js/min/index.min.js")).st_mtime,
         "index-redirect": static + "js/min/index-redirect.min.js?ver=%s" % os.stat(os.path.join(theme_dir, "static/js/min/index-redirect.min.js")).st_mtime,
         "search-results": static + "js/min/search-results.min.js?ver=%s" % os.stat(os.path.join(theme_dir, "static/js/min/search-results.min.js")).st_mtime,
-        "searchIndex": "searchindex.js",
+        # "searchIndex": "searchindex.js",
         "not-found": static + "js/min/not-found.min.js?ver=%s" % os.stat(os.path.join(theme_dir, "static/js/min/not-found.min.js")).st_mtime,
         "api-reference": static + "js/min/api-reference.min.js?ver=%s" % os.stat(os.path.join(theme_dir, "static/js/min/api-reference.min.js")).st_mtime,
         "redoc-standalone": static + "js/redoc.standalone.js?ver=%s" % os.stat(os.path.join(theme_dir, "static/js/redoc.standalone.js")).st_mtime,
@@ -775,7 +814,7 @@ def manage_assets(app, pagename, templatename, context, doctree):
             'search': [
                 individual_js_files['redirects'],
                 individual_js_files['search-results'],
-                individual_js_files['searchIndex']
+                # individual_js_files['searchIndex']
             ],
             'not_found': [
                 individual_js_files['redirects'],

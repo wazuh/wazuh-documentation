@@ -89,6 +89,11 @@ redirections.push(
       'target': ['4.3=>4.4', '4.4=>4.3'],
       '4.3': '/amazon/services/supported-services/clb.html',
       '4.4': '/amazon/services/supported-services/elastic-load-balancing/clb.html',
+    },
+    {
+      'target': ['4.3=>4.4', '4.4=>4.3'],
+      '4.3': '/user-manual/capabilities/agent-key-polling.html',
+      '4.4': '/user-manual/agents/key-request.html',
     }
 );
 
@@ -101,19 +106,60 @@ newUrls['4.4'] = [
   '/amazon/services/supported-services/elastic-load-balancing/clb.html',
   '/development/rbac-database-integrity.html',
   '/user-manual/reference/tools/rbac-control.html',
+  '/user-manual/agents/key-request.html',
   '/user-manual/manager/manual-backup-restore.html',
   '/user-manual/reference/ossec-conf/wazuh-db-config.html',
+  '/azure/activity-services/prerequisites/dependencies.html',
+  '/user-manual/wazuh-dashboard/custom-branding.html',
 ];
+
+/* Pages removed in 4.4 */
 
 removedUrls['4.4'] = [
   '/amazon/services/supported-services/alb.html',
   '/amazon/services/supported-services/nlb.html',
   '/amazon/services/supported-services/clb.html',
+  '/user-manual/capabilities/agent-key-polling.html',
 ];
 
   /* *** RELEASE 4.3 ****/
 
-/* Pages added in 4.3 */
+/* Pages changed within the same release */
+
+redirectSameRelease['4.3'] = {
+   '/user-manual/capabilities/vulnerability-detection/compatibility-matrix.html':
+     '/user-manual/capabilities/vulnerability-detection/how-it-works.html#compatibility-matrix',
+   '/user-manual/capabilities/vulnerability-detection/running-vu-scan.html':
+     '/user-manual/capabilities/vulnerability-detection/configuring-scans.html',
+   '/user-manual/wazuh-dashboard/single-sign-on/index.html':
+     '/user-manual/user-administration/single-sign-on/index.html', 
+   '/user-manual/wazuh-dashboard/single-sign-on/okta.html':
+     '/user-manual/user-administration/single-sign-on/okta.html',
+   '/user-manual/wazuh-dashboard/single-sign-on/azure-active-directory.html':
+     '/user-manual/user-administration/single-sign-on/azure-active-directory.html',
+   '/user-manual/wazuh-dashboard/single-sign-on/pingone.html':
+     '/user-manual/user-administration/single-sign-on/pingone.html', 
+   '/user-manual/wazuh-dashboard/single-sign-on/google.html':
+     '/user-manual/user-administration/single-sign-on/google.html',
+   '/user-manual/wazuh-dashboard/single-sign-on/jumpcloud.html':
+     '/user-manual/user-administration/single-sign-on/jumpcloud.html',
+   '/user-manual/wazuh-dashboard/single-sign-on/onelogin.html':
+     '/user-manual/user-administration/single-sign-on/onelogin.html',     
+   '/user-manual/securing-wazuh/index.html':
+     '/user-manual/user-administration/password-management/index.html',
+   '/user-manual/securing-wazuh/wazuh-indexer.html':
+     '/user-manual/user-administration/password-management.html',
+   '/user-manual/securing-wazuh/opendistro.html':
+     '/user-manual/user-administration/password-management.html',
+   '/user-manual/securing-wazuh/elastic-stack.html':  
+     '/user-manual/user-administration/password-management.html',
+   '/user-manual/wazuh-dashboard/rbac.html':
+     '/user-manual/user-administration/rbac.html', 
+   '/learning-wazuh/build-lab/install-wazuh-central-components.html':
+     '/proof-of-concept-guide/index.html',
+ };
+ 
+ /* Pages added in 4.3 */
 
 newUrls['4.3'] = [
   '/release-notes/release-4-3-1.html',
@@ -122,6 +168,10 @@ newUrls['4.3'] = [
   '/release-notes/release-4-3-4.html',
   '/release-notes/release-4-3-5.html',
   '/release-notes/release-4-3-6.html',
+  '/release-notes/release-4-3-7.html',
+  '/release-notes/release-4-3-8.html',
+  '/release-notes/release-4-3-9.html',
+  '/release-notes/release-4-3-10.html',
   '/getting-started/use-cases/container-security.html',
   '/user-manual/agents/query-configuration.html',
   '/user-manual/elasticsearch/configure-indices.html',
@@ -131,13 +181,18 @@ newUrls['4.3'] = [
   '/user-manual/wazuh-dashboard/settings.html',
   '/user-manual/wazuh-dashboard/config-file.html',
   '/user-manual/wazuh-dashboard/index.html',
-  '/user-manual/wazuh-dashboard/rbac.html',
   '/user-manual/wazuh-dashboard/troubleshooting.html',
   '/user-manual/wazuh-dashboard/multi-tenancy.html',
-  '/user-manual/securing-wazuh/index.html',
-  '/user-manual/securing-wazuh/wazuh-indexer.html',
-  '/user-manual/securing-wazuh/opendistro.html',
-  '/user-manual/securing-wazuh/elastic-stack.html',
+  '/user-manual/user-administration/index.html',
+  '/user-manual/user-administration/password-management.html',
+  '/user-manual/user-administration/rbac.html',
+  '/user-manual/user-administration/single-sign-on/index.html',
+  '/user-manual/user-administration/single-sign-on/okta.html',
+  '/user-manual/user-administration/single-sign-on/azure-active-directory.html',
+  '/user-manual/user-administration/single-sign-on/pingone.html',
+  '/user-manual/user-administration/single-sign-on/google.html',
+  '/user-manual/user-administration/single-sign-on/jumpcloud.html',
+  '/user-manual/user-administration/single-sign-on/onelogin.html',
   '/upgrade-guide/upgrading-central-components.html',
   '/migration-guide/index.html',
   '/migration-guide/wazuh-indexer.html',
@@ -155,11 +210,11 @@ newUrls['4.3'] = [
   '/office365/monitoring-office365-activity.html',
   '/user-manual/reference/ossec-conf/office365-module.html',
   '/user-manual/capabilities/log-data-collection/how-to-collect-macoslogs.html',
+  '/user-manual/capabilities/vulnerability-detection/configuring-scans.html',
   '/user-manual/uninstall/central-components.html',
   '/azure/activity-services/index.html',
   '/azure/activity-services/active-directory/index.html',
   '/azure/activity-services/active-directory/graph.html',
-  '/azure/activity-services/prerequisites/dependencies.html',
   '/azure/activity-services/prerequisites/considerations.html',
   '/azure/activity-services/prerequisites/credentials.html',
   '/azure/activity-services/prerequisites/index.html',
@@ -227,6 +282,7 @@ newUrls['4.3'] = [
   '/deployment-options/docker/wazuh-container.html',
   '/deployment-options/docker/docker-installation.html',
   '/deployment-options/docker/data-migration.html',
+  '/deployment-options/docker/upgrading-wazuh-docker.html',
   '/deployment-options/elastic-stack/index.html',
   '/deployment-options/elastic-stack/distributed-deployment/index.html',
   '/deployment-options/elastic-stack/distributed-deployment/index.html',
@@ -264,6 +320,27 @@ newUrls['4.3'] = [
   '/deployment-options/amazon-machine-images/amazon-machine-images.html',
   '/release-notes/release-4-3-0.html',
   '/learning-wazuh/build-lab/install-wazuh-central-components.html', 
+  '/pci-dss/configuration-assessment.html', 
+  '/pci-dss/malware-detection.html',
+  '/pci-dss/vulnerability-detection.html',
+  '/pci-dss/system-inventory.html',
+  '/pci-dss/dashboard.html',
+  '/upgrade-guide/wazuh-agent/linux.html',
+  '/upgrade-guide/wazuh-agent/windows.html',
+  '/upgrade-guide/wazuh-agent/macos.html',
+  '/upgrade-guide/wazuh-agent/solaris.html',
+  '/upgrade-guide/wazuh-agent/aix.html',
+  '/upgrade-guide/wazuh-agent/hp-ux.html',
+  '/upgrade-guide/wazuh-agent/index.html',
+  '/hipaa/index.html',
+  '/hipaa/visualization-and-dashboard.html',
+  '/hipaa/log-data-analysis.html',
+  '/hipaa/configuration-assessment.html',
+  '/hipaa/malware-detection.html',
+  '/hipaa/file-integrity-monitoring.html',
+  '/hipaa/vulnerability-detection.html',
+  '/hipaa/active-response.html',
+  '/proof-of-concept-guide/poc-detect-hidden-process.html',
 ];
 
 removedUrls['4.3'] = [
@@ -367,6 +444,8 @@ removedUrls['4.3'] = [
   '/installation-guide/wazuh-agent/deployment-variables/deployment-variables-macos.html',
   '/installation-guide/wazuh-agent/deployment-variables/deployment-variables-windows.html',
   '/user-manual/overview.html',
+  '/user-manual/capabilities/vulnerability-detection/compatibility-matrix.html',
+  '/user-manual/capabilities/vulnerability-detection/running-vu-scan.html',
   '/user-manual/kibana-app/index.html',
   '/user-manual/kibana-app/features/app-overview.html',
   '/user-manual/kibana-app/features/dev-tools.html',
@@ -389,10 +468,39 @@ removedUrls['4.3'] = [
   '/learning-wazuh/build-lab/xpack-security-setup.html',
   '/learning-wazuh/build-lab/install-elastic-stack.html',
   '/learning-wazuh/build-lab/install-wazuh-manager.html',
+  '/learning-wazuh/index.html',
+  '/learning-wazuh/build-lab/index.html',
+  '/learning-wazuh/build-lab/install-linux-agents.html',
+  '/learning-wazuh/build-lab/install-windows-agent.html',
+  '/learning-wazuh/ssh-brute-force.html',
+  '/learning-wazuh/rdp-brute-force.html',
+  '/learning-wazuh/hidden-processes.html',
+  '/learning-wazuh/detect-fs-changes.html',
+  '/learning-wazuh/replace-stock-rule.html',
+  '/learning-wazuh/survive-flood.html',
+  '/learning-wazuh/shellshock.html',
+  '/learning-wazuh/audit-commands.html',
+  '/learning-wazuh/suricata.html',
+  '/learning-wazuh/vuln-detection.html',
+  '/pci-dss/policy-monitoring.html',
+  '/pci-dss/rootkit-detection.html',
+  '/pci-dss/elastic.html',
+  '/upgrade-guide/upgrading-agent.html', 
 ];
 
 
 redirections.push(
+  {
+    'target': ['4.2=>4.3', '4.3=>4.2'],
+    '4.2': '/pci-dss/elastic.html',
+    '4.3': '/pci-dss/dashboard.html',
+  },
+
+  {
+    'target': ['4.2=>4.3', '4.3=>4.2'],
+    '4.2': '/upgrade-guide/upgrading-agent.html',
+    '4.3': '/upgrade-guide/wazuh-agent/index.html',
+  },
   {
     'target': ['4.2=>4.3'],
     '4.2': '/upgrade-guide/upgrading-wazuh.html',
@@ -916,7 +1024,7 @@ redirections.push(
   {
     'target': ['4.2=>4.3'],
     '4.2': '/user-manual/kibana-app/wazuh-rbac.html',
-    '4.3': '/user-manual/wazuh-dashboard/rbac.html',
+    '4.3': '/user-manual/user-administration/rbac.html',
   },
   {
     'target': ['4.2=>4.3'],
@@ -937,6 +1045,106 @@ redirections.push(
     'target': ['4.2=>4.3'],
     '4.2': '/user-manual/kibana-app/reference/configure-indices.html',
     '4.3': '/user-manual/elasticsearch/configure-indices.html',
+  },
+  {
+    'target': ['4.2=>4.3'],
+    '4.2': '/learning-wazuh/index.html',
+    '4.3': '/proof-of-concept-guide/index.html',
+  },
+  {
+    'target': ['4.2=>4.3'],
+    '4.2': '/learning-wazuh/build-lab/index.html',
+    '4.3': '/proof-of-concept-guide/index.html',
+  },
+  {
+    'target': ['4.2=>4.3'],
+    '4.2': '/learning-wazuh/build-lab/build-vpc.html',
+    '4.3': '/proof-of-concept-guide/index.html',
+  },
+  {
+    'target': ['4.2=>4.3'],
+    '4.2': '/learning-wazuh/build-lab/launch-ec2-instances.html',
+    '4.3': '/proof-of-concept-guide/index.html',
+  },
+  {
+    'target': ['4.2=>4.3'],
+    '4.2': '/learning-wazuh/build-lab/access-ec2-instances.html',
+    '4.3': '/proof-of-concept-guide/index.html',
+  },
+  {
+    'target': ['4.2=>4.3'],
+    '4.2': '/learning-wazuh/build-lab/install-wazuh-manager.html',
+    '4.3': '/proof-of-concept-guide/index.html',
+  },
+  {
+    'target': ['4.2=>4.3'],
+    '4.2': '/learning-wazuh/build-lab/install-elastic-stack.html',
+    '4.3': '/proof-of-concept-guide/index.html',
+  },
+  {
+    'target': ['4.2=>4.3'],
+    '4.2': '/learning-wazuh/build-lab/xpack-security-setup.html',
+    '4.3': '/proof-of-concept-guide/index.html',
+  },
+  {
+    'target': ['4.2=>4.3'],
+    '4.2': '/learning-wazuh/build-lab/install-linux-agents.html',
+    '4.3': '/proof-of-concept-guide/index.html',
+  },
+  {
+    'target': ['4.2=>4.3'],
+    '4.2': '/learning-wazuh/build-lab/install-windows-agent.html',
+    '4.3': '/proof-of-concept-guide/index.html',
+  },
+  {
+    'target': ['4.2=>4.3'],
+    '4.2': '/learning-wazuh/ssh-brute-force.html',
+    '4.3': '/proof-of-concept-guide/detect-brute-force-attack.html',
+  },
+  {
+    'target': ['4.2=>4.3'],
+    '4.2': '/learning-wazuh/rdp-brute-force.html',
+    '4.3': '/proof-of-concept-guide/detect-brute-force-attack.html',
+  },
+  {
+    'target': ['4.2=>4.3'],
+    '4.2': '/learning-wazuh/hidden-processes.html',
+    '4.3': '/proof-of-concept-guide/poc-detect-hidden-process.html',
+  },
+  {
+    'target': ['4.2=>4.3'],
+    '4.2': '/learning-wazuh/detect-fs-changes.html',
+    '4.3': '/proof-of-concept-guide/poc-file-integrity-monitoring.html',
+  },
+  {
+    'target': ['4.2=>4.3'],
+    '4.2': '/learning-wazuh/replace-stock-rule.html',
+    '4.3': '/user-manual/ruleset/custom.html',
+  },
+  {
+    'target': ['4.2=>4.3'],
+    '4.2': '/learning-wazuh/survive-flood.html',
+    '4.3': '/user-manual/capabilities/antiflooding.html',
+  },
+  {
+    'target': ['4.2=>4.3'],
+    '4.2': '/learning-wazuh/shellshock.html',
+    '4.3': '/proof-of-concept-guide/detect-web-attack-shellshock.html',
+  },
+  {
+    'target': ['4.2=>4.3'],
+    '4.2': '/learning-wazuh/audit-commands.html',
+    '4.3': '/proof-of-concept-guide/audit-commands-run-by-user.html',
+  },
+  {
+    'target': ['4.2=>4.3'],
+    '4.2': '/learning-wazuh/suricata.html',
+    '4.3': '/proof-of-concept-guide/integrate-network-ids-suricata.html',
+  },
+  {
+    'target': ['4.2=>4.3'],
+    '4.2': '/learning-wazuh/vuln-detection.html',
+    '4.3': '/proof-of-concept-guide/poc-vulnerability-detection.html',
   },
 );
 
@@ -3062,6 +3270,8 @@ redirections.push(
 );
 
 newUrls['3.13'] = [
+  '/release-notes/release-3-13-6.html', 
+  '/release-notes/release-3-13-5.html', 
   '/release-notes/release-3-13-4.html',  
   '/release-notes/release_3_13_3.html',
   '/release-notes/release_3_13_2.html',

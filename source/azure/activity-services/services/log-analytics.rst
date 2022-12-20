@@ -1,9 +1,9 @@
 .. Copyright (C) 2015, Wazuh, Inc.
 
-.. _azure_log_analytics:
-
 .. meta::
-  :description: Discover the numerous ways that Wazuh provides to monitor your Microsoft Azure infrastructure activity.
+  :description: Azure Log Analytics is a service that monitors Azure infrastructures offering query capabilities. Learn how to use Log Analytics with Wazuh in this section.
+  
+.. _azure_log_analytics:
 
 Using Azure Log Analytics
 =========================
@@ -77,49 +77,75 @@ Giving permissions to the application
     :align: center
     :width: 100%
 
+
+Giving the application access to the Log Analytics API
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+#. Access **Log Analytics workspaces** and create a new workspace or choose an existing one.
+
+   .. thumbnail:: /images/azure/log-analytics-workspace-1.png
+      :title: Log Analytics App
+      :align: center
+      :width: 100%
+
+#. In the **Overview** section, copy the ``Workspace Id`` value. The Wazuh configuration needs it to make requests to the API.
+
+   .. thumbnail:: /images/azure/log-analytics-workspace-2.png
+      :title: Log Analytics App
+      :align: center
+      :width: 100%
+
+#. In the **Access control (IAM)** section, click **Add** and select **Add role assignment** to add the required role to the application.
+
+   .. thumbnail:: /images/azure/log-analytics-workspace-3.png
+      :title: Log Analytics App
+      :align: center
+      :width: 100%
+
+#. In the **Role** tab, select the **Log Analytics Reader** role.
+
+   .. thumbnail:: /images/azure/log-analytics-workspace-4.png
+      :title: Log Analytics App
+      :align: center
+      :width: 100%
+
+#. In the **Members** tab, select **User, group, or service principal** under **Assign access to**. Then, click **Select members** under **Members** and find the App registration created previously.
+
+   .. thumbnail:: /images/azure/log-analytics-workspace-5.png
+      :title: Log Analytics App
+      :align: center
+      :width: 100%
+
+#. Click **Review + assign** to finish.
+
+Sending logs to the Workspace
+-----------------------------
+
+To collect logs and send them to the Log Analytics Workspace created in the previous steps, you need to create a **diagnostic setting**.
+
+#. Go back to **Azure Active Directory**, scroll down on the left menu bar, and select the **Diagnostic settings** section. Click on **Add diagnostic setting**.
+
+   .. thumbnail:: /images/azure/log-analytics-diagnostic-1.png
+      :title: Log Analytics App
+      :align: center
+      :width: 100%
+
+#. Choose the log categories you want to collect from, under **Logs Categories**. Check the **Send to Log Analytics workspace** option under **Destination details**. Select the Log Analytics Workspace you created in previous steps.
+
+   .. thumbnail:: /images/azure/log-analytics-diagnostic-2.png
+      :title: Log Analytics App
+      :align: center
+      :width: 100%
+
+#. Click on **Save**.
+
+Now, Azure Log Analytics can stream new logs in the selected categories to your workspace.
+
 Obtaining the application key for authentication
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-Select **Certificates & secrets** and fill in the **Description** and **Expires** fields. Copy the **value** once the key is saved. This is required to authenticate the application in order to use the Log Analytics API.
+Wazuh requires valid credentials to pull logs from Log Analytics. Take a look at the :ref:`credentials <graph_and_log_analytics_credentials>` section to learn how to generate a client secret so you can access the App registration.
 
-.. thumbnail:: ../../../images/azure/log-analytics-create-key.png
-    :title: Log Analytics App
-    :align: center
-    :width: 100%
-
-.. thumbnail:: ../../../images/azure/log-analytics-key-created.png
-    :title: Log Analytics App
-    :align: center
-    :width: 100%
-
-Giving our application access to the Log Analytics API
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-
-1. Access **Log Analytics workspaces** and create a new workspace or choose an existing one. Then, copy the ``Workspace Id`` value from the **Overview** section. This will be used in the Wazuh configuration to allow making requests to the API.
-
-.. thumbnail:: ../../../images/azure/log-analytics-workspace-1.png
-    :title: Log Analytics App
-    :align: center
-    :width: 100%
-
-.. thumbnail:: ../../../images/azure/log-analytics-workspace-2.png
-    :title: Log Analytics App
-    :align: center
-    :width: 100%
-
-2. Add the required role to the application in the **Access control (IAM)** section by clicking the **Add** and selecting **add role assignment**.
-
-.. thumbnail:: ../../../images/azure/log-analytics-workspace-3.png
-    :title: Log Analytics App
-    :align: center
-    :width: 100%
-
-3. Fill in the required fields and click **save**. It is important to choose the **User, group, or service principal** option in the drop down menu and to type the full application name in the **Select** field.
-
-.. thumbnail:: ../../../images/azure/log-analytics-workspace-4.png
-    :title: Log Analytics App
-    :align: center
-    :width: 100%
 
 Azure Log Analytics use case
 ----------------------------
@@ -150,8 +176,7 @@ Through the following configuration, Wazuh is ready to search for any query acce
         <run_on_start>no</run_on_start>
 
         <log_analytics>
-
-            <auth_path>/home/manager/Azure/log_analytics_auth.txt</auth_path>
+            <auth_path>/var/ossec/wodles/credentials/log_analytics_credentials</auth_path>
             <tenantdomain>wazuh.onmicrosoft.com</tenantdomain>
 
             <request>
@@ -162,7 +187,6 @@ Through the following configuration, Wazuh is ready to search for any query acce
             </request>
 
         </log_analytics>
-
     </wodle>
 
 Check the reference for more information about the :doc:`Azure module </user-manual/reference/ossec-conf/wodle-azure-logs>`.

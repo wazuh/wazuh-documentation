@@ -1,6 +1,9 @@
 .. Copyright (C) 2015, Wazuh, Inc.
 
-.. _kibana_configure_indices:
+.. meta::
+  :description: Learn how to configure the name of the indices that Elasticsearch generates to store the Wazuh alerts in this section of the Wazuh documentation.
+ 
+.. _kibana_configure_indices: 
 
 Indices configuration
 =====================
@@ -15,14 +18,14 @@ The process involves the modification of the Elasticsearch template used to give
 Considerations
 --------------
 
-Using a custom index name is possible on the latest versions of the Elastic Stack and the Wazuh Kibana plugin. We always recommend updating the installation to the latest version in order get the latest features and bugfixes, so in case you need to update yours, check out the :ref:`upgrading guide <upgrading_wazuh_server>`.
+Using a custom index name is possible on the latest versions of the Elastic Stack and the Wazuh Kibana plugin. We always recommend updating the installation to the latest version in order to get the latest features and bugfixes, so in case you need to update yours, check out the :ref:`upgrading guide <upgrading_wazuh_server>`.
 
 .. note::
   This tutorial **won't work** on Wazuh 2.x and Elastic Stack 5.x.
 
 Also, keep in mind that this process **will be restored** after upgrading the Wazuh Kibana plugin, or any of the Elastic Stack components involved during the process. The reason for this depends on each component:
 
-- On Elasticsearch, every new upgrade requires to update the Wazuh template, so the default index pattern will be restored.
+- On Elasticsearch, every new upgrade requires updating the Wazuh template, so the default index pattern will be restored.
 - On Filebeat, every new upgrade requires to update the Wazuh configuration file, so the default name will be used to create indices.
 - On Kibana and the Wazuh Kibana plugin, the configuration file is removed when installing a new version of the plugin, so it's necessary to apply again the custom settings.
 
@@ -33,21 +36,11 @@ Let's suppose that we want to add a new index pattern (``my-custom-alerts-*``) a
 
 #. First of all, stop the Filebeat service:
 
-    a. For Systemd:
-
-       .. code-block:: console
-
-        # systemctl stop filebeat
-
-    b. For SysV Init:
-
-       .. code-block:: console
-
-        # service filebeat stop
+   .. include:: /_templates/installations/basic/elastic/common/stop_filebeat.rst
 
 #. Download the Wazuh template for Elasticsearch and save it into a file (for example, *template.json*):
 
-    .. code-block:: console
+   .. code-block:: console
 
       # curl -so template.json https://raw.githubusercontent.com/wazuh/wazuh/v|WAZUH_CURRENT|/extensions/elasticsearch/7.x/wazuh-template.json
 
@@ -81,7 +74,7 @@ Let's suppose that we want to add a new index pattern (``my-custom-alerts-*``) a
     .. note::
       ``{"acknowledged":true}`` indicates that the template was inserted correctly.
 
-#. Open the Wazuh configuration file for Wazuh filebeat module for alerts (``/usr/share/filebeat/module/wazuh/alerts/manifest.yml``) and archives (``/usr/share/filebeat/module/wazuh/archives/manifest.yml``) and replace the index name:
+#. Open the Wazuh configuration file for the Wazuh filebeat module for alerts (``/usr/share/filebeat/module/wazuh/alerts/manifest.yml``) and archives (``/usr/share/filebeat/module/wazuh/archives/manifest.yml``) and replace the index name:
 
     For example, from
 
@@ -110,35 +103,15 @@ Let's suppose that we want to add a new index pattern (``my-custom-alerts-*``) a
 
       pattern: my-custom-alerts-*
 
-    This will make the Wazuh Kibana plugin to automatically create and/or select the new index pattern.
+    This will make the Wazuh Kibana plugin automatically create and/or select the new index pattern.
 
     Restart the Kibana service:
 
-    a. For Systemd:
-
-       .. code-block:: console
-
-        # systemctl restart kibana
-
-    b. For SysV Init:
-
-       .. code-block:: console
-
-        # service kibana restart
+    .. include:: /_templates/installations/basic/elastic/common/restart_kibana.rst
 
 #. Restart the Filebeat service:
 
-    a. For Systemd:
-
-       .. code-block:: console
-
-        # systemctl restart filebeat
-
-    b. For SysV Init:
-
-       .. code-block:: console
-
-        # service filebeat restart
+    .. include:: /_templates/common/restart_filebeat.rst    
 
 If the pattern is not present in Kibana UI, you may create a new one using the same name used on the Elasticsearch template, and make sure to use ``timestamp`` as the Time Filter field name.
 

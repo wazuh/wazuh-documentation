@@ -1,8 +1,11 @@
-How to configure SCA
-------------------------------------
+
+.. Copyright (C) 2015, Wazuh, Inc.
 
 .. meta::
-    :description: Check out this section of our documentation to learn more about how to configure Security Configuration Assessment in Wazuh.
+  :description: Check out this section of our documentation to learn more about how to configure Security Configuration Assessment in Wazuh.
+
+How to configure SCA
+--------------------
 
 Upon installation, agents will include the appropriate policies for their particular Operating System.
 For the full list of **Officially supported policy files** see table :ref:`available_sca_policies`.
@@ -44,6 +47,8 @@ the `ossec.conf` by adding a line such as the following:
     <policy enabled="no">etc/shared/policy_file_to_disable.yml</policy>
 
 to the **policies section** of the **SCA** module.
+
+.. _share_policy_files_and_configuration_with_the_Wazuh_agents:
 
 How to share policy files and configuration with the Wazuh agents
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
@@ -87,11 +92,15 @@ The ``<sca>`` block will be merged with the ``<sca>`` block on the Wazuh agent s
     +=============================+============================================================+===============================+
     | cis_win2012r2               |  CIS Benchmark for Windows 2012 R2                         | Windows Server 2012 R2        |
     +-----------------------------+------------------------------------------------------------+-------------------------------+
-    | cis_win10_enterprise        |  CIS Benchmark for Windows 10 Enterprise (Release 1803)    | Windows 10                    |
+    | cis_win10_enterprise        |  CIS Benchmark for Windows 10 Enterprise                   | Windows 10                    |
     +-----------------------------+------------------------------------------------------------+-------------------------------+
+    | cis_win11_enterprise        |  CIS Benchmark for Windows 11 Enterprise                   | Windows 11                    |
+    +-----------------------------+------------------------------------------------------------+-------------------------------+    
     | cis_win2016                 |  CIS Benchmark for Windows Server 2016                     | Windows Server 2016           |
     +-----------------------------+------------------------------------------------------------+-------------------------------+
     | cis_win2019                 |  CIS Benchmark for Windows Server 2019 RTM                 | Windows Server 2019           |
+    +-----------------------------+------------------------------------------------------------+-------------------------------+
+    | cis_win2022                 |  CIS Benchmark for Windows Server 2022                     | Windows Server 2022           |
     +-----------------------------+------------------------------------------------------------+-------------------------------+
     | sca_win_audit               |  Benchmark for Windows auditing                            | Windows                       |
     +-----------------------------+------------------------------------------------------------+-------------------------------+
@@ -109,6 +118,8 @@ The ``<sca>`` block will be merged with the ``<sca>`` block on the Wazuh agent s
     +-----------------------------+------------------------------------------------------------+-------------------------------+
     | cis_rhel8_linux             |  CIS Benchmark for Red Hat Enterprise Linux 8              | Red Hat Enterprise Linux 8    |
     +-----------------------------+------------------------------------------------------------+-------------------------------+
+    | cis_rhel9_linux             |  CIS Benchmark for Red Hat Enterprise Linux 9              | Red Hat Enterprise Linux 9    |
+    +-----------------------------+------------------------------------------------------------+-------------------------------+    
     | cis_debian7                 |  CIS Benchmark for Debian/Linux 7                          | Debian 7                      |
     +-----------------------------+------------------------------------------------------------+-------------------------------+
     | cis_debian8                 |  CIS Benchmark for Debian/Linux 8                          | Debian 8                      |

@@ -69,7 +69,7 @@ Follow these steps to create an internal user, create a new role mapping, and gi
 
    #. Click the upper-left menu icon to open the options, select **Security**, and then **Roles** to open the roles page.
 
-   #. Search for the **all_access** role in the roles' list and select it to open the details window.
+   #. Search for the **all_access** role in the roles list and select it to open the details window.
 
    #. Select the **Mapped users** tab and click **Manage mapping**.
    

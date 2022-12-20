@@ -210,13 +210,13 @@ The IP address ``127.0.0.1`` is used in the commands below. If Elasticsearch is 
 
           .. code-block:: console
 
-            # apt install elasticsearch-oss=|ELASTICSEARCH_LATEST|
+            # apt-get install elasticsearch-oss=|ELASTICSEARCH_LATEST|
 
           Upgrade Open Distro for Elasticsearch:
 
           .. code-block:: console
 
-            # apt install opendistroforelasticsearch=|OPEN_DISTRO_LATEST|-1
+            # apt-get install opendistroforelasticsearch=|OPEN_DISTRO_LATEST|-1
 
 
         .. group-tab:: ZYpp

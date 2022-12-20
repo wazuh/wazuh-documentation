@@ -1,4 +1,5 @@
 .. Copyright (C) 2015, Wazuh, Inc.
+
 .. meta::
   :description: Check out Wazuh 4.x release notes. Every update of the solution is cumulative and includes all enhancements and fixes from previous releases.
   
@@ -7,9 +8,13 @@
 
 This section summarizes the most important features of each Wazuh 4.x release.
 
-============================================   ====================
+=============================================  ====================
 Wazuh version                                  Release date
-============================================   ====================
+=============================================  ====================
+:doc:`4.3.10 </release-notes/release-4-3-10>`  16 November 2022
+:doc:`4.3.9 </release-notes/release-4-3-9>`    13 October 2022
+:doc:`4.3.8 </release-notes/release-4-3-8>`    19 September 2022
+:doc:`4.3.7 </release-notes/release-4-3-7>`    24 August 2022
 :doc:`4.3.6 </release-notes/release-4-3-6>`    20 July 2022
 :doc:`4.3.5 </release-notes/release-4-3-5>`    29 June 2022
 :doc:`4.3.4 </release-notes/release-4-3-4>`    8 June 2022
@@ -36,12 +41,16 @@ Wazuh version                                  Release date
 :doc:`4.0.2 </release-notes/release-4-0-2>`    24 November 2020
 :doc:`4.0.1 </release-notes/release-4-0-1>`    11 November 2020
 :doc:`4.0.0 </release-notes/release-4-0-0>`    23 October 2020
-============================================   ====================
+=============================================  ====================
 
 .. rst-class:: d-none
 
    .. toctree::
 
+       4.3.10 Release notes <release-4-3-10>
+       4.3.9 Release notes <release-4-3-9>
+       4.3.8 Release notes <release-4-3-8>
+       4.3.7 Release notes <release-4-3-7>
        4.3.6 Release notes <release-4-3-6>
        4.3.5 Release notes <release-4-3-5>
        4.3.4 Release notes <release-4-3-4>

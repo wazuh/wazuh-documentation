@@ -3,7 +3,6 @@
 .. meta::
   :description: This section of the Wazuh Documentation shows the options for the agents registration service.
 
-
 .. _reference_ossec_auth:
 
 auth
@@ -36,6 +35,7 @@ Options
 - `ssl_manager_key`_
 - `ssl_auto_negotiate`_
 - `ciphers`_
+- `key_request`_
 
 disabled
 ^^^^^^^^
@@ -116,7 +116,7 @@ The agent replacement options are configured inside this tag. All conditions mus
 
 **enabled**
 
-Toggles whether or not to force the insertion of an agent if there is a duplicate name or IP address. This will remove the old agent with same name or IP address.
+Toggles whether or not to force the insertion of an agent if there is a duplicate name or IP address. This will remove the old agent with the same name or IP address.
 
 +--------------------+---------------------+
 | **Default value**  | yes                 |
@@ -199,7 +199,7 @@ If this file does not exist, a **random password** will be generated.
 ssl_agent_ca
 ^^^^^^^^^^^^
 
-Specifies the path to the CA certificate used to verify clients. It can be referred to a relative path under the Wazuh installation directory, or a full path.
+Specifies the path to the CA certificate used to verify clients. It can be referred to a relative path under the Wazuh installation directory or a full path.
 
 +--------------------+---------------------+
 | **Allowed values** | Any valid path      |
@@ -219,7 +219,7 @@ Toggles source host verification on and off when a CA certificate is specified. 
 ssl_manager_cert
 ^^^^^^^^^^^^^^^^
 
-Specifies the path to the server SSL certificate. It can be referred to a relative path under the Wazuh installation directory, or a full path.
+Specifies the path to the server SSL certificate. It can be referred to a relative path under the Wazuh installation directory or a full path.
 
 +--------------------+--------------------------------+
 | **Default value**  | etc/sslmanager.cert            |
@@ -230,7 +230,7 @@ Specifies the path to the server SSL certificate. It can be referred to a relati
 ssl_manager_key
 ^^^^^^^^^^^^^^^
 
-Specifies the path to the server's SSL key. It can be referred to a relative path under the Wazuh installation directory, or a full path.
+Specifies the path to the server's SSL key. It can be referred to a relative path under the Wazuh installation directory or a full path.
 
 +--------------------+--------------------------------+
 | **Default value**  | etc/sslmanager.key             |
@@ -263,6 +263,102 @@ Sets the list of ciphers for network communication using SSL.
 +--------------------+----------------------------------------------------+
 
 The format of this parameter is described in `SSL ciphers <https://www.openssl.org/docs/man1.1.1/man1/ciphers.html>`_.
+
+key_request
+^^^^^^^^^^^
+
+.. versionadded:: 4.4.0
+
+The key request settings are configured inside this tag. Read more about this feature at :doc:`agent key request <../../agents/key-request>`.
+
+.. code-block:: xml
+    
+    <key_request>
+      <enabled>yes</enabled>
+      <exec_path>/usr/bin/python /home/script.py</exec_path>
+      <socket>/path/to/socket</socket>
+      <timeout>60</timeout>
+      <threads>1</threads>
+      <queue_size>1024</queue_size>
+    </key_request>
+
+Configuration options of the ``key request`` feature.
+
+Options
+-------
+
+- `enabled`_
+- `timeout`_
+- `exec_path`_
+- `socket`_
+- `threads`_
+- `queue_size`_
+
+enabled
+^^^^^^^
+
+Enable the key request.
+
++--------------------+-----------------------------+
+| **Default value**  | no                          |
++--------------------+-----------------------------+
+| **Allowed values** | yes, no                     |
++--------------------+-----------------------------+
+
+timeout
+^^^^^^^
+
+Maximum time for waiting a response from the executable.
+
++--------------------+------------------------------+
+| **Default value**  | 60                           |
++--------------------+------------------------------+
+| **Allowed values** | A positive number in seconds |
++--------------------+------------------------------+
+
+exec_path
+^^^^^^^^^
+
+Full path to the executable.
+
++--------------------+-----------------------------------+
+| **Default value**  | none                              |
++--------------------+-----------------------------------+
+| **Allowed values** | A string indicating the full path |
++--------------------+-----------------------------------+
+
+socket
+^^^^^^
+
+Full path to the Unix domain socket.
+
++--------------------+-----------------------------------------------------------+
+| **Default value**  | none                                                      |
++--------------------+-----------------------------------------------------------+
+| **Allowed values** | A string indicating the full path to a Unix domain socket |
++--------------------+-----------------------------------------------------------+
+
+threads
+^^^^^^^
+
+Number of threads for dispatching the external keys requests.
+
++--------------------+------------------------------------------------------------+
+| **Default value**  | 1                                                          |
++--------------------+------------------------------------------------------------+
+| **Allowed values** | A positive number indicating the number of threads [1..32] |
++--------------------+------------------------------------------------------------+
+
+queue_size
+^^^^^^^^^^
+
+Indicates the maximum size of the queue for fetching external keys.
+
++--------------------+------------------------------------------------------------+
+| **Default value**  | 1024                                                       |
++--------------------+------------------------------------------------------------+
+| **Allowed values** | A positive number indicating the queue size [1..220000]    |
++--------------------+------------------------------------------------------------+
 
 Default configuration
 ---------------------
