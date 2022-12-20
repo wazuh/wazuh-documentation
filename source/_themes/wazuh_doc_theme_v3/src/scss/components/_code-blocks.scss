@@ -129,7 +129,9 @@ main {
     right: 7px;
     z-index: 10;
     padding: 8px;
-    font: 400 14px/1 FontAwesome, sans-serif;
+    width: 28.25px;
+    height: 30px;
+    display: flex;
     cursor: pointer;
     border: 0;
     border-radius: $rounded-corners;
@@ -148,6 +150,10 @@ main {
       display: none;
       font-family: Manrope, sans-serif;
       font-size: .9rem;
+    }
+    svg {
+      width: 12.25px;
+      height: 14px;
     }
   }
 
@@ -268,13 +274,22 @@ main {
     .copy-to-clipboard {
       color: $light-color-main-text;
       background-color: $light-color-sidebar-space;
+      svg {
+        fill: $light-color-main-text;
+      }
       &:hover {
         color: $light-color-base-space;
         background-color: $light-color-primary-lighter;
+        svg {
+          fill: $light-color-base-space;
+        }
       }
       &.copied {
         color: $light-color-base-space;
         background-color: $light-color-primary;
+        svg {
+          fill: $light-color-base-space;
+        }
       }
     }
     .linenodiv {
@@ -379,13 +394,22 @@ main {
     .copy-to-clipboard {
       color: $dark-color-main-text;
       background-color: $dark-color-sidebar-space;
+      svg {
+        fill: $dark-color-main-text;
+      }
       &:hover {
         color: $dark-color-base-space;
         background-color: $dark-color-primary-lighter;
+        svg {
+          fill: $dark-color-base-space;
+        }
       }
       &.copied {
         color: $dark-color-base-space;
         background-color: $dark-color-primary;
+        svg {
+          fill: $dark-color-base-space;
+        }
       }
     }
     .linenodiv {
