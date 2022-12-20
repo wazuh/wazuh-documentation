@@ -217,8 +217,6 @@
       {{- inline_js() }}
     {%- endif %}
     {{- fonts() }}
-    <link rel="preload" href="{{ url_root }}_static/fonts/fa-solid-900.woff2" as="font" type="font/woff2" crossorigin>
-    <link rel="preload" href="{{ url_root }}_static/fonts/fa-brands-400.woff2" as="font" type="font/woff2" crossorigin>
     {% endblock preload -%}
     
     {%- block linktags %}
@@ -297,6 +295,12 @@
     {%- endblock gtm_body %}
   {%- endif -%}
   {% block body %} {% endblock %}
+  <div class="icon-assets">
+    {%- block icons %} 
+      {% include "template-parts/icons/social-icons.svg" %}
+      {% include "template-parts/icons/copy.svg" %}
+    {% endblock icons -%}
+  </div>
   {%- block after_footer %}
     <script id="documentation_options" data-url_root="{{ pathto('', 1) }}" src="{{ pathto('_static/js/documentation_options.js', 1) }}"></script>
     <script>
