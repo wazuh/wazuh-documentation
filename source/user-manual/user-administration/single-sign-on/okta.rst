@@ -10,7 +10,7 @@ Okta
 
 `Okta Inc. <https://www.okta.com/>`_ is an identity and access management company that provides technologies that enable secure user authentication into applications. In this guide, we integrate the Okta IdP to authenticate users into the Wazuh platform.
 
-The single sign-on integration process is divided into three stages.
+There are three stages in the single sign-on integration.
 
 #. Okta Configuration
 #. Wazuh indexer configuration
