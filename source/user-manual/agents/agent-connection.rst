@@ -21,7 +21,7 @@ Before you check the agent's connection with the manager, first ensure the agent
     </client>
   </ossec_config>
 
-This will set 10.0.0.10 as the Wazuh server. Once this is done, you will need restart the Agent:
+This will set 10.0.0.10 as the Wazuh server. Once this is done, you will need to restart the Agent:
 
   a. For Systemd:
 
@@ -45,7 +45,7 @@ You can also check to see if an agent connected correctly by verifying if the TC
 
 .. code-block:: console
 
-  # netstat -vatunp|grep wazuh-agentd
+  # netstat -vatunp | grep wazuh-remote
 
 The result should match the agent and manager IP addresses.
 
