@@ -46,3 +46,4 @@ Identity providers
         google
         jumpcloud
         onelogin
+        keycloak
