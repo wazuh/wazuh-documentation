@@ -20,17 +20,6 @@
   }
 }
 
-.icon-assets {
-  position: relative;
-  svg {
-    position: absolute;
-    left: -9999px;
-    overflow: hidden;
-    width: 0;
-    height: 0;
-  }
-}
-
 body {
   margin-top: $header-height-xs;
   @include media-min(xl){
