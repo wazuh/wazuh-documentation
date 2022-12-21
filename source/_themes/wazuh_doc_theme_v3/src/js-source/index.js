@@ -8,8 +8,9 @@ if ( $('.index') ) {
   $('.loading').removeClass('loading');
 
   /* Changes in release notes */
-  const arrowMore = document.createElement('i');
-  arrowMore.setAttribute('class', 'fas fa-long-arrow-alt-right');
+  const arrowMore = document.createElement('span');
+  const useElement = document.createElement('use');
+  arrowMore.setAttribute('class', 'ico-long-arrow-right');
   $('.toctree-wrapper:last-of-type .toctree-l1:last-of-type .toctree-l2:first-of-type > a').text('More').append(arrowMore);
 
   /* Move Quickstart */

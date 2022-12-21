@@ -117,12 +117,14 @@
     
     &::after {
       display: inline-block;
-      width: 1rem;
-      height: 1rem;
-      font: normal 700 normal .95rem/1 FontAwesome, sans-serif;
+      width: 15px;
+      height: 15px;
+      min-width: 15px;
+      min-height: 15px;
+      background-size: 15px 15px;
       text-align: right;
       vertical-align: middle;
-      content: "\f0c1";
+      content: '';
       opacity: 0;
       transition: opacity ease-in .1s;
       margin-left: 20px;
@@ -418,6 +420,7 @@
     .headerlink {
       &::after {
         color: $light-color-shaded-text;
+        background-image: url("#{$ico-path}link.svg#link-lt");
       }
     }
     code {
@@ -495,6 +498,7 @@
     .headerlink {
       &::after {
         color: $dark-color-shaded-text;
+        background-image: url("#{$ico-path}link.svg#link-dt");
       }
     }
     code {
