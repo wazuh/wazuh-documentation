@@ -7,6 +7,7 @@ Keycloak
 ========
 
 `Keycloak <https://www.keycloak.org/>`_ is an open source identity and access management tool. It provides user federation, strong authentication, user management, and fine-grained authorization for modern applications and services. In this guide, we integrate the KeyCloak IdP to authenticate users into the Wazuh platform.
+
 There are three stages in the single sign-on integration:
 
 #. KeyCloak configuration
@@ -102,7 +103,7 @@ KeyCloak configuration
          :align: center
          :width: 80%  
 
-      You can leave the rest of the values as default. Click Save to apply the configuration.
+      You can leave the rest of the values as default. Click **Save** to apply the configuration.
 
 #. Create a new role
    
