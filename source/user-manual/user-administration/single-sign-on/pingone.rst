@@ -126,7 +126,7 @@ Edit the Wazuh indexer security configuration files. We recommend that you back 
 
 
    .. code-block:: console
-      :emphasize-lines: 7,10,22,23,25,26,27,28
+      :emphasize-lines: 7,10,22,23,25,26,27,28,29,30
 
           authc:
       ...

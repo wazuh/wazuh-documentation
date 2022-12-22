@@ -233,6 +233,7 @@ Edit the Wazuh indexer security configuration files. It is recommended to back u
    To configure the ``roles_mapping.yml`` file, we map the ``Department`` field from step 3 to the ``all_access`` role on Wazuh indexer. In this case, ``wazuh-admin``:
 
    .. code-block:: console 
+      :emphasize-lines: 7
          
       ...
       all_access:
