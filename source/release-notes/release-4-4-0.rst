@@ -52,12 +52,12 @@ Wazuh manager
 - `#11702 <https://github.com/wazuh/wazuh/pull/11702>`_ Prevented agents with the same ID from connecting to the manager simultaneously. 
 - `#13713 <https://github.com/wazuh/wazuh/pull/13713>`_ wazuh-analysisd, wazuh-remoted and wazuh-db metrics have been extended. 
 - `#11753 <https://github.com/wazuh/wazuh/pull/11753>`_ Minimized and optimized wazuh-clusterd number of messages from workers to master related to agent-info and agent-groups tasks. 
-- `#14244 <https://github.com/wazuh/wazuh/pull/14244>`_ Improved performance of the agent_groups CLI when listing agents belonging to a group. 
+- `#14244 <https://github.com/wazuh/wazuh/pull/14244>`_ Improved performance of the ``agent_groups`` CLI when listing agents belonging to a group. 
 - `#14475 <https://github.com/wazuh/wazuh/pull/14475>`_ Changed wazuh-clusterd binary behaviour to kill any existing cluster processes when executed. 
 - `#14791 <https://github.com/wazuh/wazuh/pull/14791>`_ Changed wazuh-clusterd tasks to wait asynchronously for responses coming from wazuh-db. 
 - `#11190 <https://github.com/wazuh/wazuh/pull/11190>`_ Use zlib for zip compression in cluster synchronization. 
 - `#12241 <https://github.com/wazuh/wazuh/pull/12241>`_ Added mechanism to dynamically adjust zip size limit in Integrity sync.
-- `#12409 <https://github.com/wazuh/wazuh/pull/12409>`_ Removed the unused internal option wazuh_db.sock_queue_size.
+- `#12409 <https://github.com/wazuh/wazuh/pull/12409>`_ Removed the unused internal option ``wazuh_db.sock_queue_size``.
 - `#10940 <https://github.com/wazuh/wazuh/pull/10940>`_ Removed all the unused exceptions from the exceptions.py file.
 - `#10740 <https://github.com/wazuh/wazuh/pull/10740>`_ Removed unused execute method from core/utils.py. 
 - `#13119 <https://github.com/wazuh/wazuh/pull/13119>`_ Removed unused set_user_name function in framework. 
@@ -91,45 +91,45 @@ Wazuh agent
 - `#12404 <https://github.com/wazuh/wazuh/pull/12404>`_ Improved the reparse performance by removing unnecessary queries from external integrations.
 - `#12478 <https://github.com/wazuh/wazuh/pull/12478>`_ Updated and expanded Azure module logging functionality to use the ossec.log file.
 - `#12647 <https://github.com/wazuh/wazuh/pull/12647>`_ Improved the error management of the Google Cloud integration. 
-- `#12769 <https://github.com/wazuh/wazuh/pull/12769>`_ Deprecated logging tag in GCloud integration. It now uses wazuh_modules debug value to set the verbosity level.
+- `#12769 <https://github.com/wazuh/wazuh/pull/12769>`_ Deprecated ``logging`` tag in GCloud integration. It now uses ``wazuh_modules`` debug value to set the verbosity level.
 - `#12849 <https://github.com/wazuh/wazuh/pull/12849>`_ The last_dates.json file of the Azure module has been deprecated in favour of a new ORM and database.
-- `#12929 <https://github.com/wazuh/wazuh/pull/12929>`_ Improved the error handling in AWS integration's decompress_file method.
+- `#12929 <https://github.com/wazuh/wazuh/pull/12929>`_ Improved the error handling in AWS integration's ``decompress_file`` method.
 - `#11190 <https://github.com/wazuh/wazuh/pull/11190>`_ Use zlib for zip compression in cluster synchronization.
 - `#11354 <https://github.com/wazuh/wazuh/pull/11354>`_ The exception handling on Wazuh Agent for Windows has been changed to DWARF2.
 - `#14696 <https://github.com/wazuh/wazuh/pull/14696>`_ The root CA certificate for WPK upgrade has been updated. 
 - `#14822 <https://github.com/wazuh/wazuh/pull/14822>`_ Agents on macOS now report the OS name as "macOS" instead of "Mac OS X".
 - `#14816 <https://github.com/wazuh/wazuh/pull/14816>`_ The Systemd service stopping policy has been updated. 
-- `#14793 <https://github.com/wazuh/wazuh/pull/14793>`_ Changed how the AWS module handles ThrottlingException adding default values for connection retries in case no config file is set.
+- `#14793 <https://github.com/wazuh/wazuh/pull/14793>`_ Changed how the AWS module handles ``ThrottlingException`` adding default values for connection retries in case no config file is set.
 - `#14543 <https://github.com/wazuh/wazuh/pull/14543>`_ Deprecated Azure and AWS credentials in the configuration authentication option.
 
 RESTful API
 ^^^^^^^^^^^
 
 - `#10620 <https://github.com/wazuh/wazuh/pull/10620>`_ Added new API integration tests for a Wazuh environment without a cluster configuration.
-- `#11731 <https://github.com/wazuh/wazuh/pull/11731>`_ Added wazuh-modulesd tags to GET /manager/logs and GET /cluster/{node_id}/logs endpoints.
+- `#11731 <https://github.com/wazuh/wazuh/pull/11731>`_ Added wazuh-modulesd tags to ``GET /manager/logs`` and ``GET /cluster/{node_id}/logs`` endpoints.
 - `#12438 <https://github.com/wazuh/wazuh/pull/12438>`_ Added python decorator to soft deprecate API endpoints adding deprecation headers to their responses.
 - `#12486 <https://github.com/wazuh/wazuh/pull/12486>`_ Added new exception to inform that /proc directory is not found or permissions to see its status are not granted.
-- `#12362 <https://github.com/wazuh/wazuh/pull/12362>`_ Added new field and filter to GET /agents response to retrieve agent groups configuration synchronization status.
-- `#12498 <https://github.com/wazuh/wazuh/pull/12498>`_ Added agent groups configuration synchronization status to GET /agents/summary/status endpoint. 
+- `#12362 <https://github.com/wazuh/wazuh/pull/12362>`_ Added new field and filter to ``GET /agents`` response to retrieve agent groups configuration synchronization status.
+- `#12498 <https://github.com/wazuh/wazuh/pull/12498>`_ Added agent groups configuration synchronization status to ``GET /agents/summary/status`` endpoint. 
 - `#11171 <https://github.com/wazuh/wazuh/pull/11171>`_ Added JSON log handling.
 - `#12029 <https://github.com/wazuh/wazuh/pull/12029>`_ Added integration tests for IPv6 agent's registration.
-- `#12887 <https://github.com/wazuh/wazuh/pull/12887>`_ Enable ordering by Agents count in /groups endpoints.
+- `#12887 <https://github.com/wazuh/wazuh/pull/12887>`_ Enable ordering by Agents count in ``/groups`` endpoints.
 - `#12092 <https://github.com/wazuh/wazuh/pull/12092>`_ Added hash to API logs to identify users logged in with authorization context. 
-- `#14119 <https://github.com/wazuh/wazuh/pull/14119>`_ Added new limits section to the upload_wazuh_configuration section in the Wazuh API configuration.
+- `#14119 <https://github.com/wazuh/wazuh/pull/14119>`_ Added new ``limits`` section to the ``upload_wazuh_configuration`` section in the Wazuh API configuration.
 - `#14295 <https://github.com/wazuh/wazuh/pull/14295>`_ Added logic to API logger to renew its streams if needed on every request.
-- `#14401 <https://github.com/wazuh/wazuh/pull/14401>`_ Added GET /manager/daemons/stats and GET /cluster/{node_id}/daemons/stats API endpoints. 
-- `#14464 <https://github.com/wazuh/wazuh/pull/14464>`_ Added GET /agents/{agent_id}/daemons/stats API endpoint. 
-- `#14471 <https://github.com/wazuh/wazuh/pull/14471>`_ Added the possibility to get the configuration of the wazuh-db component in active configuration endpoints.
+- `#14401 <https://github.com/wazuh/wazuh/pull/14401>`_ Added ``GET /manager/daemons/stats`` and ``GET /cluster/{node_id}/daemons/stats`` API endpoints. 
+- `#14464 <https://github.com/wazuh/wazuh/pull/14464>`_ Added ``GET /agents/{agent_id}/daemons/stats`` API endpoint. 
+- `#14471 <https://github.com/wazuh/wazuh/pull/14471>`_ Added the possibility to get the configuration of the ``wazuh-db`` component in active configuration endpoints.
 - `#15084 <https://github.com/wazuh/wazuh/pull/15084>`_ Added distinct and select parameters to GET /sca/{agent_id} and GET /sca/{agent_id}/checks/{policy_id} endpoints.
-- `#15290 <https://github.com/wazuh/wazuh/pull/15290>`_ Added new endpoint to run vulnerability detector on-demand scans (PUT /vulnerability).
-- `#11341 <https://github.com/wazuh/wazuh/pull/11341>`_ Improved GET /cluster/healthcheck endpoint and cluster_control -i more CLI call in loaded cluster environments. 
-- `#12595 <https://github.com/wazuh/wazuh/pull/12595>`_ Removed never_connected agent status limitation when trying to assign agents to groups.
+- `#15290 <https://github.com/wazuh/wazuh/pull/15290>`_ Added new endpoint to run vulnerability detector on-demand scans (``PUT /vulnerability``).
+- `#11341 <https://github.com/wazuh/wazuh/pull/11341>`_ Improved ``GET /cluster/healthcheck`` endpoint and ``cluster_control -i more`` CLI call in loaded cluster environments. 
+- `#12595 <https://github.com/wazuh/wazuh/pull/12595>`_ Removed ``never_connected`` agent status limitation when trying to assign agents to groups.
 - `#12551 <https://github.com/wazuh/wazuh/pull/12551>`_ Changed API version and upgrade_version filters to work with different version formats.
-- `#9413 <https://github.com/wazuh/wazuh/pull/9413>`_ Renamed GET /agents/{agent_id}/group/is_sync endpoint to GET /agents/group/is_sync and added new agents_list parameter.
-- `#10397 <https://github.com/wazuh/wazuh/pull/10397>`_ Added POST /security/user/authenticate endpoint and marked GET /security/user/authenticate endpoint as deprecated.
+- `#9413 <https://github.com/wazuh/wazuh/pull/9413>`_ Renamed ``GET /agents/{agent_id}/group/is_sync`` endpoint to ``GET /agents/group/is_sync`` and added new ``agents_list`` parameter.
+- `#10397 <https://github.com/wazuh/wazuh/pull/10397>`_ Added ``POST /security/user/authenticate`` endpoint and marked ``GET /security/user/authenticate`` endpoint as deprecated.
 - `#12526 <https://github.com/wazuh/wazuh/pull/12526>`_ Adapted framework code to agent-group changes to use the new wazuh-db commands.
-- `#13791 <https://github.com/wazuh/wazuh/pull/13791>`_ Updated default timeout for GET /mitre/software to avoid timing out in slow environments after the MITRE DB update to v11.2.
-- `#14119 <https://github.com/wazuh/wazuh/pull/14119>`_ Changed API settings related to remote commands. The remote_commands section will be hold within upload_wazuh_configuration.
+- `#13791 <https://github.com/wazuh/wazuh/pull/13791>`_ Updated default timeout for ``GET /mitre/software`` to avoid timing out in slow environments after the MITRE DB update to v11.2.
+- `#14119 <https://github.com/wazuh/wazuh/pull/14119>`_ Changed API settings related to remote commands. The ``remote_commands`` section will be hold within ``upload_wazuh_configuration``.
 - `#14233 <https://github.com/wazuh/wazuh/pull/14233>`_ Improved API unauthorized responses to be more accurate.
 - `#14259 <https://github.com/wazuh/wazuh/pull/14259>`_ Updated framework functions that communicate with the request socket to use remote instead.
 - `#14766 <https://github.com/wazuh/wazuh/pull/14766>`_ Improved parameter validation for API endpoints that require component and configuration parameters.
@@ -137,14 +137,14 @@ RESTful API
 - `#15334 <https://github.com/wazuh/wazuh/pull/15334>`_ Improved exception handling when trying to connect to Wazuh sockets.
 - `#15671 <https://github.com/wazuh/wazuh/pull/15671>`_ Modified _group_names and _group_names_or_all regexes to avoid invalid group names.
 - `#12053 <https://github.com/wazuh/wazuh/pull/12053>`_ Removed null remediations from failed API responses.
-- `#12365 <https://github.com/wazuh/wazuh/pull/12365>`_ Deprecated GET /agents/{agent_id}/group/is_sync endpoint.
-- `#14230 <https://github.com/wazuh/wazuh/pull/14230>`_ Deprecated GET /manager/stats/analysisd, GET /manager/stats/remoted, GET /cluster/{node_id}stats/analysisd, and GET /cluster/{node_id}stats/remoted API endpoints.
+- `#12365 <https://github.com/wazuh/wazuh/pull/12365>`_ Deprecated ``GET /agents/{agent_id}/group/is_sync`` endpoint.
+- `#14230 <https://github.com/wazuh/wazuh/pull/14230>`_ Deprecated ``GET /manager/stats/analysisd``, ``GET /manager/stats/remoted``, ``GET /cluster/{node_id}stats/analysisd``, and ``GET /cluster/{node_id}stats/remoted`` API endpoints.
 
 Other
 ^^^^^
 
 - `#12733 <https://github.com/wazuh/wazuh/pull/12733>`_ Added unit tests to the component in Analysisd that extracts the IP address from events.
-- `#12518 <https://github.com/wazuh/wazuh/pull/12518>`_ Added python-json-logger dependency.
+- `#12518 <https://github.com/wazuh/wazuh/pull/12518>`_ Added ``python-json-logger`` dependency.
 - `#10773 <https://github.com/wazuh/wazuh/pull/10773>`_  Prevented the Ruleset test suite from restarting the manager.
 - `#14839 <https://github.com/wazuh/wazuh/pull/14839>`_ The pthread's rwlock has been replaced with a FIFO-queueing read-write lock.
 
@@ -200,9 +200,9 @@ Reference                                                         Description
 `#12148 <https://github.com/wazuh/wazuh/pull/12148>`_             Fixed internal exception handling issues on Solaris 10.
 `#12300 <https://github.com/wazuh/wazuh/pull/12300>`_             Fixed duplicate error message IDs in the log. 
 `#12691 <https://github.com/wazuh/wazuh/pull/12691>`_             Fixed compilation warnings in the agent.
-`#12147 <https://github.com/wazuh/wazuh/pull/12147>`_             Fixed the skip_on_error parameter of the AWS integration module, which was set to True by default.
+`#12147 <https://github.com/wazuh/wazuh/pull/12147>`_             Fixed the ``skip_on_error`` parameter of the AWS integration module, which was set to ``True`` by default.
 `#12381 <https://github.com/wazuh/wazuh/pull/12381>`_             Fixed AWS DB maintenance with Load Balancer Buckets.
-`#12650 <https://github.com/wazuh/wazuh/pull/12650>`_             Fixed AWS integration's test_config_format_created_date unit test. 
+`#12650 <https://github.com/wazuh/wazuh/pull/12650>`_             Fixed AWS integration's ``test_config_format_created_date`` unit test. 
 `#12630 <https://github.com/wazuh/wazuh/pull/12630>`_             Fixed created_date field for LB and Umbrella integrations.
 `#13185 <https://github.com/wazuh/wazuh/pull/13185>`_             Fixed AWS integration database maintenance error managament.
 `#13674 <https://github.com/wazuh/wazuh/pull/13674>`_             The default delay at GitHub integration has been increased to 30 seconds. 
@@ -211,8 +211,8 @@ Reference                                                         Description
 `#14190 <https://github.com/wazuh/wazuh/pull/14190>`_             The C++ standard library and the GCC runtime library is included with Wazuh.
 `#13877 <https://github.com/wazuh/wazuh/pull/13877>`_             Fixed missing inventory cleaning message in Syscollector.
 `#15322 <https://github.com/wazuh/wazuh/pull/15322>`_             Fixed WPK upgrade issue on Windows agents due to process locking. 
-`#13044 <https://github.com/wazuh/wazuh/pull/13044>`_             Fixed FIM injection vulnerabilty when using prefilter_cmd option.
-`#14525 <https://github.com/wazuh/wazuh/pull/14525>`_             Fixed the parse of ALB logs splitting client_port, target_port and target_port_list in separated ip and port for each key.
+`#13044 <https://github.com/wazuh/wazuh/pull/13044>`_             Fixed FIM injection vulnerabilty when using ``prefilter_cmd`` option.
+`#14525 <https://github.com/wazuh/wazuh/pull/14525>`_             Fixed the parse of ALB logs splitting ``client_port``, ``target_port`` and ``target_port_list`` in separated ``ip`` and ``port`` for each key.
 `#15335 <https://github.com/wazuh/wazuh/pull/15335>`_             Fixed a bug that prevent processing Macie logs with problematic ipGeolocation values.
 `#15584 <https://github.com/wazuh/wazuh/pull/15584>`_             Fixed GCP integration module error messages.
 ==============================================================    =============
@@ -226,14 +226,14 @@ Reference                                                         Description
 ==============================================================    =============
 `#12302 <https://github.com/wazuh/wazuh/pull/12302>`_             Fixed copy functions used for the backup files and upload endpoints to prevent incorrent metadata.
 `#11010 <https://github.com/wazuh/wazuh/pull/11010>`_             Fixed a bug regarding ids not being sorted with cluster disabled in Active Response and Agent endpoints.
-`#10736 <https://github.com/wazuh/wazuh/pull/10736>`_             Fixed a bug where null values from wazuh-db where returned in API responses.
-`#12063 <https://github.com/wazuh/wazuh/pull/12063>`_             Connections through WazuhQueue will be closed gracefully in all situations. 
+`#10736 <https://github.com/wazuh/wazuh/pull/10736>`_             Fixed a bug where ``null`` values from wazuh-db where returned in API responses.
+`#12063 <https://github.com/wazuh/wazuh/pull/12063>`_             Connections through ``WazuhQueue`` will be closed gracefully in all situations. 
 `#12450 <https://github.com/wazuh/wazuh/pull/12450>`_             Fixed exception handling when trying to get the active configuration of a valid but not configured component.
 `#12700 <https://github.com/wazuh/wazuh/pull/12700>`_             Fixed api.yaml path suggested as remediation at exception.py
 `#12768 <https://github.com/wazuh/wazuh/pull/12768>`_             Fixed /tmp access error in containers of API integration tests environment. 
 `#13096 <https://github.com/wazuh/wazuh/pull/13096>`_             The API will return an exception when the user asks for agent inventory information and there is no database for it (never connected agents). 
-`#13171 <https://github.com/wazuh/wazuh/pull/13171>`_             Improved regex used for the q parameter on API requests with special characters and brackets.
-`#13386 <https://github.com/wazuh/wazuh/pull/13386>`_             Improved regex used for the q parameter on API requests with special characters and brackets.
+`#13171 <https://github.com/wazuh/wazuh/pull/13171>`_             Improved regex used for the ``q`` parameter on API requests with special characters and brackets.
+`#13386 <https://github.com/wazuh/wazuh/pull/13386>`_             Improved regex used for the ``q`` parameter on API requests with special characters and brackets.
 `#12592 <https://github.com/wazuh/wazuh/pull/12592>`_             Removed board_serial from syscollector integration tests expected responses.
 `#12557 <https://github.com/wazuh/wazuh/pull/12557>`_             Removed cmd field from expected responses of syscollector integration tests.
 `#12611 <https://github.com/wazuh/wazuh/pull/12611>`_             Reduced maximum number of groups per agent to 128 and adjusted group name validation.
