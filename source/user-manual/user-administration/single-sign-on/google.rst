@@ -203,6 +203,7 @@ Edit the Wazuh indexer security configuration files. We recommend that you back 
    Map the ``Department`` field value that was obtained in Google IdP to the ``all_access`` role in the Wazuh indexer:
 
    .. code-block:: console
+      :emphasize-lines: 6
 
       all_access:
         reserved: false
@@ -267,7 +268,7 @@ Wazuh dashboard configuration
                validate: false
          ...
 
-#. Restart the Wazuh dashboard service.
+#. Restart the Wazuh dashboard service using this command:
 
    .. include:: /_templates/common/restart_dashboard.rst
 
