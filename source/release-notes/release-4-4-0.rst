@@ -22,8 +22,8 @@ What's new
 
 This release includes new features or enhancements.
 
-Manager
-^^^^^^^
+Wazuh manager
+^^^^^^^^^^^^^
 
 - `#9995 <https://github.com/wazuh/wazuh/pull/9995>`_ Added new unit tests for cluster python module and increased coverage to 99%.
 - `#11190 <https://github.com/wazuh/wazuh/pull/11190>`_ Added file size limitation on cluster integrity sync.
@@ -63,6 +63,44 @@ Manager
 - `#13119 <https://github.com/wazuh/wazuh/pull/13119>`_ Removed unused set_user_name function in framework. 
 - `#12370 <https://github.com/wazuh/wazuh/pull/12370>`_ Unused internal calls to wazuh-db have been deprecated. 
 - `#14542 <https://github.com/wazuh/wazuh/pull/14542>`_ Debian Stretch support in Vulnerability Detector has been deprecated.
+
+Wazuh agent
+^^^^^^^^^^^
+
+- `#11756 <https://github.com/wazuh/wazuh/pull/11756>`_ Added support of CPU frequency data provided by Syscollector on Raspberry Pi.
+- `#11450 <https://github.com/wazuh/wazuh/pull/11450>`_ Added support for IPv6 address collection in the agent.
+- `#11833 <https://github.com/wazuh/wazuh/pull/11833>`_ Added the process startup time data provided by Syscollector on macOS.
+- `#11571 <https://github.com/wazuh/wazuh/pull/11571>`_ Added support of package retrieval in Syscollector for OpenSUSE Tumbleweed and Fedora 34.
+- `#11640 <https://github.com/wazuh/wazuh/pull/11640>`_ Added the process startup time data provided by Syscollector on macOS. Thanks to @LubinLew.
+- `#11796 <https://github.com/wazuh/wazuh/pull/11796>`_ Added support for package data provided by Syscollector on Solaris.
+- `#10843 <https://github.com/wazuh/wazuh/pull/10843>`_ Added support for delta events in Syscollector when data gets changed. 
+- `#12035 <https://github.com/wazuh/wazuh/pull/12035>`_ Added support for pre-installed Windows packages in Syscollector. 
+- `#11268 <https://github.com/wazuh/wazuh/pull/11268>`_ Added support for IPv6 on agent-manager connection and enrollment. 
+- `#12582 <https://github.com/wazuh/wazuh/pull/12582>`_ Added support for CIS-CAT Pro v3 and v4 to the CIS-CAT integration module. Thanks to @hustliyilin.
+- `#10870 <https://github.com/wazuh/wazuh/pull/10870>`_ Added support for the use of the Azure integration module in Linux agents. 
+- `#11852 <https://github.com/wazuh/wazuh/pull/11852>`_ Added new error messages when using invalid credentials with the Azure integration.
+- `#12515 <https://github.com/wazuh/wazuh/pull/12515>`_ Added reparse option to CloudWatchLogs and Google Cloud Storage integrations. 
+- `#14726 <https://github.com/wazuh/wazuh/pull/14726>`_ Wazuh Agent can now be built and run on Alpine Linux. 
+- `#15054 <https://github.com/wazuh/wazuh/pull/15054>`_ Added native Shuffle integration. 
+- `#11587 <https://github.com/wazuh/wazuh/pull/11587>`_ Improved the free RAM data provided by Syscollector. 
+- `#12752 <https://github.com/wazuh/wazuh/pull/12752>`_ The Windows installer (MSI) now provides signed DLL files.
+- `#12748 <https://github.com/wazuh/wazuh/pull/12748>`_ Changed the group ownership of the Modulesd process to root.
+- `#12750 <https://github.com/wazuh/wazuh/pull/12750>`_ Some parts of Agentd and Execd have got refactored.
+- `#10478 <https://github.com/wazuh/wazuh/pull/10478>`_ Handled new exception in the external integration modules.
+- `#11828 <https://github.com/wazuh/wazuh/pull/11828>`_ Optimized the number of calls to DB maintenance tasks performed by the AWS integration. 
+- `#12404 <https://github.com/wazuh/wazuh/pull/12404>`_ Improved the reparse performance by removing unnecessary queries from external integrations.
+- `#12478 <https://github.com/wazuh/wazuh/pull/12478>`_ Updated and expanded Azure module logging functionality to use the ossec.log file.
+- `#12647 <https://github.com/wazuh/wazuh/pull/12647>`_ Improved the error management of the Google Cloud integration. 
+- `#12769 <https://github.com/wazuh/wazuh/pull/12769>`_ Deprecated logging tag in GCloud integration. It now uses wazuh_modules debug value to set the verbosity level.
+- `#12849 <https://github.com/wazuh/wazuh/pull/12849>`_ The last_dates.json file of the Azure module has been deprecated in favour of a new ORM and database.
+- `#12929 <https://github.com/wazuh/wazuh/pull/12929>`_ Improved the error handling in AWS integration's decompress_file method.
+- `#11190 <https://github.com/wazuh/wazuh/pull/11190>`_ Use zlib for zip compression in cluster synchronization.
+- `#11354 <https://github.com/wazuh/wazuh/pull/11354>`_ The exception handling on Wazuh Agent for Windows has been changed to DWARF2.
+- `#14696 <https://github.com/wazuh/wazuh/pull/14696>`_ The root CA certificate for WPK upgrade has been updated. 
+- `#14822 <https://github.com/wazuh/wazuh/pull/14822>`_ Agents on macOS now report the OS name as "macOS" instead of "Mac OS X".
+- `#14816 <https://github.com/wazuh/wazuh/pull/14816>`_ The Systemd service stopping policy has been updated. 
+- `#14793 <https://github.com/wazuh/wazuh/pull/14793>`_ Changed how the AWS module handles ThrottlingException adding default values for connection retries in case no config file is set.
+- `#14543 <https://github.com/wazuh/wazuh/pull/14543>`_ Deprecated Azure and AWS credentials in the configuration authentication option.
 
 
 Resolved issues
@@ -107,7 +145,31 @@ Wazuh agent
 ==============================================================    =============
 Reference                                                         Description
 ==============================================================    =============
-`#15259 <https://github.com/wazuh/wazuh/pull/15259>`_             aaa
+`#7687 <https://github.com/wazuh/wazuh/pull/7687>`_               Fixed collection of maximum user data length. Thanks to @LubinLew.
+`#10772 <https://github.com/wazuh/wazuh/pull/10772>`_             Fixed missing fields in Syscollector on Windows 10.
+`#11227 <https://github.com/wazuh/wazuh/pull/11227>`_             Fixed the process startup time data provided by Syscollector on Linux. Thanks to @LubinLew.
+`#11837 <https://github.com/wazuh/wazuh/pull/11837>`_             Fixed network data reporting by Syscollector related to tunnel or VPN interfaces.
+`#12066 <https://github.com/wazuh/wazuh/pull/12066>`_             Skipped V9FS file system at Rootcheck to prevent false positives on WSL.
+`#9067 <https://github.com/wazuh/wazuh/pull/9067>`_               Fixed double file handle closing in Logcollector on Windows. 
+`#11949 <https://github.com/wazuh/wazuh/pull/11949>`_             Fixed a bug in Syscollector that may prevent the agent from stopping when the manager connection is lost.
+`#12148 <https://github.com/wazuh/wazuh/pull/12148>`_             Fixed internal exception handling issues on Solaris 10.
+`#12300 <https://github.com/wazuh/wazuh/pull/12300>`_             Fixed duplicate error message IDs in the log. 
+`#12691 <https://github.com/wazuh/wazuh/pull/12691>`_             Fixed compilation warnings in the agent.
+`#12147 <https://github.com/wazuh/wazuh/pull/12147>`_             Fixed the skip_on_error parameter of the AWS integration module, which was set to True by default.
+`#12381 <https://github.com/wazuh/wazuh/pull/12381>`_             Fixed AWS DB maintenance with Load Balancer Buckets.
+`#12650 <https://github.com/wazuh/wazuh/pull/12650>`_             Fixed AWS integration's test_config_format_created_date unit test. 
+`#12630 <https://github.com/wazuh/wazuh/pull/12630>`_             Fixed created_date field for LB and Umbrella integrations.
+`#13185 <https://github.com/wazuh/wazuh/pull/13185>`_             Fixed AWS integration database maintenance error managament.
+`#13674 <https://github.com/wazuh/wazuh/pull/13674>`_             The default delay at GitHub integration has been increased to 30 seconds. 
+`#14706 <https://github.com/wazuh/wazuh/pull/14706>`_             Logcollector has been fixed to allow locations containing colons (:). 
+`#13835 <https://github.com/wazuh/wazuh/pull/13835>`_             Fixed system architecture reporting in Logcollector on Apple Silicon devices.
+`#14190 <https://github.com/wazuh/wazuh/pull/14190>`_             The C++ standard library and the GCC runtime library is included with Wazuh.
+`#13877 <https://github.com/wazuh/wazuh/pull/13877>`_             Fixed missing inventory cleaning message in Syscollector.
+`#15322 <https://github.com/wazuh/wazuh/pull/15322>`_             Fixed WPK upgrade issue on Windows agents due to process locking. 
+`#13044 <https://github.com/wazuh/wazuh/pull/13044>`_             Fixed FIM injection vulnerabilty when using prefilter_cmd option.
+`#14525 <https://github.com/wazuh/wazuh/pull/14525>`_             Fixed the parse of ALB logs splitting client_port, target_port and target_port_list in separated ip and port for each key.
+`#15335 <https://github.com/wazuh/wazuh/pull/15335>`_             Fixed a bug that prevent processing Macie logs with problematic ipGeolocation values.
+`#15584 <https://github.com/wazuh/wazuh/pull/15584>`_             Fixed GCP integration module error messages.
 ==============================================================    =============
 
 Wazuh dashboard
