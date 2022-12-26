@@ -114,18 +114,19 @@ Okta Configuration
          :align: center
          :width: 80%   
 
-#. Add the new app to the new group. Navigate to **Directory** > **Groups**  and select your group. Click on **Applications** and select **Assign Applications**. From here, assign the app created in step 5 and click on **Done** to save the changes.
+#. Add the new app to the new group. 
+
+   Navigate to **Directory** > **Groups**  and select your group. Click on **Applications** and select **Assign Applications**. From here, assign the app created in step 5 and click on **Done** to save the changes.
    
+   .. thumbnail:: /images/single-sign-on/okta/13-navigate-to-directory-groups.png
+      :title: Navigate to Directory - Groups - <YOUR_GROUP>
+      :align: center
+      :width: 80%   
+
    .. thumbnail:: /images/single-sign-on/okta/12-select-assign-applications.png
       :title: Select Assign Applications
       :align: center
       :width: 80%
-
-   .. thumbnail:: /images/single-sign-on/okta/13-navigate-to-directory-groups.png
-      :title: Navigate to Directory - Groups - <YOUR_GROUP>
-      :align: center
-      :width: 80%
-
 
 #. Note the necessary parameters from the SAML settings of the new app.
 
@@ -141,9 +142,7 @@ Okta Configuration
 
    Now, on the same page, click on  **View SAML setup instructions**. Copy the **Identity Provider Issuer URL**, it will be the ``idp.entity_id``.
 
-   Copy the blob of the **X.509 Certificate** excluding the ``-----BEGIN CERTIFICATE-----`` and ``-----END CERTIFICATE-----`` lines. This will be used as the exchange_key:
-
-   The **X.509 Certificate** will be used as the ``exchange_key``:
+   Copy the blob of the **X.509 Certificate** excluding the ``-----BEGIN CERTIFICATE-----`` and ``-----END CERTIFICATE-----`` lines. This will be used as the ``exchange_key``:
 
      .. thumbnail:: /images/single-sign-on/okta/14-navigate-to-applications.png
         :title: Navigate to Applications - Applications - <YOUR_APP> - Sign On

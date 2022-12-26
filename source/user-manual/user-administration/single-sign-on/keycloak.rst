@@ -203,7 +203,7 @@ KeyCloak configuration
    #. To obtain the remaining parameters
    
       #. Navigate to **Clients** and select the name of your client. In our case, this is **wazuh-saml**. 
-      #. Navigate to **Action > Download adapter config**, and ensure the Format option is Mod Auth Mellon files. 
+      #. Navigate to **Action > Download adapter config**, and ensure the Format option is **Mod Auth Mellon files**. 
       #. Click on **Download** to download the remaining files.
 
       .. thumbnail:: /images/single-sign-on/keycloak/18-download-adapter-config.png
