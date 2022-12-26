@@ -8,7 +8,7 @@ PingOne
 
 `PingOne for Enterprise <https://www.pingidentity.com/>`_ is an identity-as-a-service (IDaaS) and single sign-on (SSO) platform. It allows enterprises to give their users federated access to applications. In this guide, we integrate the PingOne IdP to authenticate users into the Wazuh platform.
 
-The single sign-on integration process is divided into three stages.
+There are three stages in the single sign-on integration.
 
 #. PingOne Configuration
 #. Wazuh indexer configuration
@@ -97,8 +97,8 @@ PingOne Configuration
     
    #. Take note of the following parameters from the configuration page of the application. This information will be used in the next step. 
 
-      - **ISSUER ID**: It'll be in the form “https://auth.pingone.com/....”
-      - **IDP METADATA URL**: It’ll be in the form “https://auth.pingone.com/....”
+      - **ISSUER ID**: It'll be in the form \https://auth.pingone.com/...
+      - **IDP METADATA URL**: It’ll be in the form \https://auth.pingone.com/...
       - ``exchange_key``: If you open IDP **IDP METADATA URL** you'll find the X509 Certificate  section, this will be used as the ``exchange_key``.
 
       .. thumbnail:: /images/single-sign-on/pingone/09-take-note-of-parameters.png
@@ -110,7 +110,13 @@ PingOne Configuration
 Wazuh indexer configuration
 ---------------------------
 
-Edit the Wazuh indexer security configuration files. It is recommended to back up these files before the configuration is carried out.
+Edit the Wazuh indexer security configuration files. We recommend that you back up these files before you carry out the configuration.
+
+#. Place the private key file within the ``/usr/share/wazuh-indexer/plugins/opensearch-security/securityconfig/`` directory. Set the file ownership to ``wazuh-indexer`` using the following command:
+
+   .. code-block:: console
+
+      # chown wazuh-indexer:wazuh-indexer /usr/share/wazuh-indexer/plugins/opensearch-security/securityconfig/PRIVATE_KEY
 
 #. Edit the ``/usr/share/wazuh-indexer/plugins/opensearch-security/securityconfig/config.yml`` file and change the following values:
 
@@ -120,7 +126,7 @@ Edit the Wazuh indexer security configuration files. It is recommended to back u
 
 
    .. code-block:: console
-      :emphasize-lines: 7,10,22,23,25,26,27,28
+      :emphasize-lines: 7,10,22,23,25,26,27,28,29,30
 
           authc:
       ...
@@ -147,17 +153,21 @@ Edit the Wazuh indexer security configuration files. It is recommended to back u
                     entity_id: “https://accounts.google.com/o/saml2?idpid=C02…”
                   sp:
                     entity_id: wazuh-saml
+                    signature_private_key_filepath: /usr/share/wazuh-indexer/plugins/opensearch-security/securityconfig/PRIVATE_KEY
+                    forceAuthn: true
                   kibana_url: https://<WAZUH_DASHBOARD_ADDRESS>
                   roles_key: Roles
-                  exchange_key: 'X509Certificate'
-              authentication_backend:
-                type: noop
+                  exchange_key: 'MIIJ6DLSAAbAmAJHSgIWYia.........'
+               authentication_backend:
+                 type: noop
+
 
    Ensure to change the following parameters to their corresponding value:
 
    - ``idp.metadata_file``
    - ``idp.entity_id``
    - ``sp.entity_id``
+   - ``sp.signature_private_key_filepath``
    - ``kibana_url``
    - ``roles_key``
    - ``exchange_key``
@@ -168,7 +178,7 @@ Edit the Wazuh indexer security configuration files. It is recommended to back u
 
       # export JAVA_HOME=/usr/share/wazuh-indexer/jdk/ && bash /usr/share/wazuh-indexer/plugins/opensearch-security/tools/securityadmin.sh -f /usr/share/wazuh-indexer/plugins/opensearch-security/securityconfig/config.yml -icl -key /etc/wazuh-indexer/certs/admin-key.pem -cert /etc/wazuh-indexer/certs/admin.pem -cacert /etc/wazuh-indexer/certs/root-ca.pem -h localhost -nhnv
 
-   The ``-h`` flag is used to specify the hostname or the IP address of the Wazuh indexer node. Note that this command uses localhost, set your Wazuh indexer address if necessary.
+   The ``-h`` flag specifies the hostname or the IP address of the Wazuh indexer node. Note that this command uses localhost, set your Wazuh indexer address if necessary.
 
    The command output must be similar to the following:
 
@@ -212,7 +222,7 @@ Edit the Wazuh indexer security configuration files. It is recommended to back u
 
       # export JAVA_HOME=/usr/share/wazuh-indexer/jdk/ && bash /usr/share/wazuh-indexer/plugins/opensearch-security/tools/securityadmin.sh -f /usr/share/wazuh-indexer/plugins/opensearch-security/securityconfig/roles_mapping.yml -icl -key /etc/wazuh-indexer/certs/admin-key.pem -cert /etc/wazuh-indexer/certs/admin.pem -cacert /etc/wazuh-indexer/certs/root-ca.pem -h localhost -nhnv
 
-   The ``-h`` flag is used to specify the hostname or the IP address of the Wazuh indexer node. Note that this command uses localhost, set your Wazuh indexer address if necessary.
+   The ``-h`` flag specifies the hostname or the IP address of the Wazuh indexer node. Note that this command uses localhost, set your Wazuh indexer address if necessary.
 
    The command output must be similar to the following:
 
@@ -240,7 +250,7 @@ Wazuh dashboard configuration
 
 #. Edit the Wazuh dashboard configuration file.
 
-   Add these configurations to ``/etc/wazuh-dashboard/opensearch_dashboards.yml``. It is recommended to back up this file before the configuration is changed.
+   Add these configurations to ``/etc/wazuh-dashboard/opensearch_dashboards.yml``. We recommend that you back up these files before you carry out the configuration.
 
    .. code-block:: console  
 
@@ -250,7 +260,7 @@ Wazuh dashboard configuration
    .. note::
       :class: not-long
 
-      *For versions 4.3.9 and earlier*, also replace ``path: `/auth/logout``` with ``path: `/logout``` in ``/usr/share/wazuh-dashboard/plugins/securityDashboards/server/auth/types/saml/routes.js``.
+      *For versions 4.3.9 and earlier*, also replace ``path: `/auth/logout``` with ``path: `/logout``` in ``/usr/share/wazuh-dashboard/plugins/securityDashboards/server/auth/types/saml/routes.js``. We recommend that you back up these files before you carry out the configuration.
 
       .. code-block:: console
          :emphasize-lines: 3
