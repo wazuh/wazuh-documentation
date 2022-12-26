@@ -258,8 +258,8 @@ Wazuh Kibana plugin for Kibana 7.16.x and 7.17.x
 Wazuh Splunk app
 ^^^^^^^^^^^^^^^^
 
-- `#1355 <https://github.com/wazuh/wazuh-splunk/pull/1355>`_ Added agent's synchronization statistics. #1355
-- `#1355 <https://github.com/wazuh/wazuh-splunk/pull/1355>`_ Updated the response handlers for the ``/agents/summary/status`` endpoint. #1355
+- `#1355 <https://github.com/wazuh/wazuh-splunk/pull/1355>`_ Added agent's synchronization statistics.
+- `#1355 <https://github.com/wazuh/wazuh-splunk/pull/1355>`_ Updated the response handlers for the ``/agents/summary/status`` endpoint.
 
 Resolved issues
 ---------------
@@ -283,7 +283,7 @@ Reference                                                         Description
 `#10544 <https://github.com/wazuh/wazuh/pull/10544>`_             Fixed code flaw regarding temporary directory names. 
 `#11951 <https://github.com/wazuh/wazuh/pull/11951>`_             Fixed code flaw regarding try, except and pass block in ``wazuh-clusterd``. 
 `#10782 <https://github.com/wazuh/wazuh/pull/10782>`_             Fixed framework datetime transformations to UTC. 
-`#11866 <https://github.com/wazuh/wazuh/pull/11866>`_             Fixed a cluster error when Master-Worker tasks where not properly stopped after an exception occurred in one or both parts.
+`#11866 <https://github.com/wazuh/wazuh/pull/11866>`_             Fixed a cluster error when Master-Worker tasks were not properly stopped after an exception occurred in one or both parts.
 `#12831 <https://github.com/wazuh/wazuh/pull/12831>`_             Fixed cluster logger issue printing 'NoneType: None' in error logs.
 `#13419 <https://github.com/wazuh/wazuh/pull/13419>`_             Fixed unhandled cluster error when reading a malformed configuration. 
 `#13368 <https://github.com/wazuh/wazuh/pull/13368>`_             Fixed framework unit test failures when they are run by the root user. 
@@ -317,14 +317,14 @@ Reference                                                         Description
 `#12381 <https://github.com/wazuh/wazuh/pull/12381>`_             Fixed AWS DB maintenance with Load Balancer Buckets.
 `#12650 <https://github.com/wazuh/wazuh/pull/12650>`_             Fixed AWS integration's ``test_config_format_created_date`` unit test. 
 `#12630 <https://github.com/wazuh/wazuh/pull/12630>`_             Fixed created_date field for LB and Umbrella integrations.
-`#13185 <https://github.com/wazuh/wazuh/pull/13185>`_             Fixed AWS integration database maintenance error managament.
+`#13185 <https://github.com/wazuh/wazuh/pull/13185>`_             Fixed AWS integration database maintenance error management.
 `#13674 <https://github.com/wazuh/wazuh/pull/13674>`_             The default delay at GitHub integration has been increased to 30 seconds. 
 `#14706 <https://github.com/wazuh/wazuh/pull/14706>`_             Logcollector has been fixed to allow locations containing colons (:). 
 `#13835 <https://github.com/wazuh/wazuh/pull/13835>`_             Fixed system architecture reporting in Logcollector on Apple Silicon devices.
 `#14190 <https://github.com/wazuh/wazuh/pull/14190>`_             The C++ standard library and the GCC runtime library is included with Wazuh.
 `#13877 <https://github.com/wazuh/wazuh/pull/13877>`_             Fixed missing inventory cleaning message in Syscollector.
 `#15322 <https://github.com/wazuh/wazuh/pull/15322>`_             Fixed WPK upgrade issue on Windows agents due to process locking. 
-`#13044 <https://github.com/wazuh/wazuh/pull/13044>`_             Fixed FIM injection vulnerabilty when using ``prefilter_cmd`` option.
+`#13044 <https://github.com/wazuh/wazuh/pull/13044>`_             Fixed FIM injection vulnerability when using ``prefilter_cmd`` option.
 `#14525 <https://github.com/wazuh/wazuh/pull/14525>`_             Fixed the parse of ALB logs splitting ``client_port``, ``target_port`` and ``target_port_list`` in separated ``ip`` and ``port`` for each key.
 `#15335 <https://github.com/wazuh/wazuh/pull/15335>`_             Fixed a bug that prevent processing Macie logs with problematic ipGeolocation values.
 `#15584 <https://github.com/wazuh/wazuh/pull/15584>`_             Fixed GCP integration module error messages.
@@ -343,8 +343,8 @@ Reference                                                         Description
 `#12063 <https://github.com/wazuh/wazuh/pull/12063>`_             Connections through ``WazuhQueue`` will be closed gracefully in all situations. 
 `#12450 <https://github.com/wazuh/wazuh/pull/12450>`_             Fixed exception handling when trying to get the active configuration of a valid but not configured component.
 `#12700 <https://github.com/wazuh/wazuh/pull/12700>`_             Fixed api.yaml path suggested as remediation at exception.py
-`#12768 <https://github.com/wazuh/wazuh/pull/12768>`_             Fixed /tmp access error in containers of API integration tests environment. 
-`#13096 <https://github.com/wazuh/wazuh/pull/13096>`_             The API will return an exception when the user asks for agent inventory information and there is no database for it (never connected agents). 
+`#12768 <https://github.com/wazuh/wazuh/pull/12768>`_             Fixed ``/tmp`` access error in containers of API integration tests environment. 
+`#13096 <https://github.com/wazuh/wazuh/pull/13096>`_             The API will return an exception when the user asks for agent inventory information, and there is no database for it (never connected agents). 
 `#13171 <https://github.com/wazuh/wazuh/pull/13171>`_             Improved regex used for the ``q`` parameter on API requests with special characters and brackets.
 `#13386 <https://github.com/wazuh/wazuh/pull/13386>`_             Improved regex used for the ``q`` parameter on API requests with special characters and brackets.
 `#12592 <https://github.com/wazuh/wazuh/pull/12592>`_             Removed board_serial from syscollector integration tests expected responses.
@@ -352,7 +352,7 @@ Reference                                                         Description
 `#12611 <https://github.com/wazuh/wazuh/pull/12611>`_             Reduced maximum number of groups per agent to 128 and adjusted group name validation.
 `#14204 <https://github.com/wazuh/wazuh/pull/14204>`_             Reduced amount of memory required to read CDB lists using the API.
 `#14237 <https://github.com/wazuh/wazuh/pull/14237>`_             Fixed a bug where the cluster health check endpoint and CLI would add an extra active agent to the master node.
-`#15311 <https://github.com/wazuh/wazuh/pull/15311>`_             Fixed bug that prevent updating the configuration when using various <ossec_conf> blocks from the API.
+`#15311 <https://github.com/wazuh/wazuh/pull/15311>`_             Fixed bug that prevents updating the configuration when using various <ossec_conf> blocks from the API.
 `#15194 <https://github.com/wazuh/wazuh/pull/15194>`_             Fixed vulnerability API integration tests' healthcheck.
 ==============================================================    =============
 
@@ -371,7 +371,7 @@ Other
 ==============================================================    =============
 Reference                                                         Description
 ==============================================================    =============
-`#14165 <https://github.com/wazuh/wazuh/pull/14165>`_             Fixed Makefile to detect CPU archivecture on Gentoo Linux.          
+`#14165 <https://github.com/wazuh/wazuh/pull/14165>`_             Fixed Makefile to detect CPU architecture on Gentoo Linux.          
 ==============================================================    =============
 
 Wazuh dashboard
@@ -388,15 +388,15 @@ Reference                                                         Description
 `#4710 <https://github.com/wazuh/wazuh-kibana-app/pull/4710>`_    Fixed server errors with code 500 when the Wazuh API is not reachable / up.
 `#4653 <https://github.com/wazuh/wazuh-kibana-app/pull/4653>`_    Fixed pagination to SCA table.
 `#4849 <https://github.com/wazuh/wazuh-kibana-app/pull/4849>`_    Fixed WAZUH_PROTOCOL param suggestion.
-`#4876 <https://github.com/wazuh/wazuh-kibana-app/pull/4876>`_    Raspbian OS, Ubuntu, Amazon Linux and Amazon Linux 2 commands in the wizard deploy agent now change when a different architecture is selected.
+`#4876 <https://github.com/wazuh/wazuh-kibana-app/pull/4876>`_    Raspbian OS, Ubuntu, Amazon Linux, and Amazon Linux 2 commands in the wizard deploy agent now change when a different architecture is selected.
 `#4929 <https://github.com/wazuh/wazuh-kibana-app/pull/4929>`_    Disabled unmapped fields filter in Security Events alerts table.
-`#4933 <https://github.com/wazuh/wazuh-kibana-app/pull/4933>`_    Deploy new agent section: Fixed the way macos versions and architectures were displayed, fixed the way agents were displayed, fixed the way ubuntu versions were displayed.
+`#4933 <https://github.com/wazuh/wazuh-kibana-app/pull/4933>`_    Deploy new agent section: Fixed the way macOS versions and architectures were displayed, fixed the way agents were displayed, fixed the way ubuntu versions were displayed.
 `#4943 <https://github.com/wazuh/wazuh-kibana-app/pull/4943>`_    Fixed agent deployment instructions for HP-UX and Solaris. 
 `#4638 <https://github.com/wazuh/wazuh-kibana-app/pull/4638>`_    Fixed a bug that caused the flyouts to close when clicking inside them.
 `#4981 <https://github.com/wazuh/wazuh-kibana-app/pull/4981>`_    Fixed the manager option in the agent deployment section.
 `#4962 <https://github.com/wazuh/wazuh-kibana-app/pull/4962>`_    Fixed commands in the deploy new agent section(most of the commands are missing '-1').
 `#4968 <https://github.com/wazuh/wazuh-kibana-app/pull/4968>`_    Fixed agent installation command for macOS in the deploy new agent section.
-`#4933 <https://github.com/wazuh/wazuh-kibana-app/pull/4933>`_    Deploy new agent section: Fixed the way macos versions and architectures were displayed, fixed the way agents were displayed, fixed the way ubuntu versions were displayed.
+`#4933 <https://github.com/wazuh/wazuh-kibana-app/pull/4933>`_    Deploy new agent section: Fixed the way macOS versions and architectures were displayed, fixed the way agents were displayed, fixed the way ubuntu versions were displayed.
 `#4943 <https://github.com/wazuh/wazuh-kibana-app/pull/4943>`_    Fixed agent deployment instructions for HP-UX and Solaris.
 `#4999 <https://github.com/wazuh/wazuh-kibana-app/pull/4999>`_    Fixed Inventory checks table filters by stats.
 `#4942 <https://github.com/wazuh/wazuh-kibana-app/pull/4942>`_    Fixed agent graph in opensearch dashboard.
@@ -420,16 +420,16 @@ Reference                                                         Description
 `#4710 <https://github.com/wazuh/wazuh-kibana-app/pull/4710>`_    Fixed server errors with code 500 when the Wazuh API is not reachable / up.
 `#4653 <https://github.com/wazuh/wazuh-kibana-app/pull/4653>`_    Fixed pagination to SCA table.
 `#4849 <https://github.com/wazuh/wazuh-kibana-app/pull/4849>`_    Fixed WAZUH_PROTOCOL param suggestion.
-`#4876 <https://github.com/wazuh/wazuh-kibana-app/pull/4876>`_    Raspbian OS, Ubuntu, Amazon Linux and Amazon Linux 2 commands in the wizard deploy agent now change when a different architecture is selected.
+`#4876 <https://github.com/wazuh/wazuh-kibana-app/pull/4876>`_    Raspbian OS, Ubuntu, Amazon Linux, and Amazon Linux 2 commands in the wizard deploy agent now change when a different architecture is selected.
 `#4929 <https://github.com/wazuh/wazuh-kibana-app/pull/4929>`_    Disabled unmapped fields filter in Security Events alerts table.
 `#4981 <https://github.com/wazuh/wazuh-kibana-app/pull/4981>`_    Fixed the manager option in the agent deployment section.
 `#4962 <https://github.com/wazuh/wazuh-kibana-app/pull/4962>`_    Fixed commands in the deploy new agent section(most of the commands are missing '-1').
 `#4968 <https://github.com/wazuh/wazuh-kibana-app/pull/4968>`_    Fixed agent installation command for macOS in the deploy new agent section.
-`#4933 <https://github.com/wazuh/wazuh-kibana-app/pull/4933>`_    Deploy new agent section: Fixed the way macos versions and architectures were displayed, fixed the way agents were displayed, fixed the way ubuntu versions were displayed.
+`#4933 <https://github.com/wazuh/wazuh-kibana-app/pull/4933>`_    Deploy new agent section: Fixed the way macOS versions and architectures were displayed, fixed the way agents were displayed, fixed the way ubuntu versions were displayed.
 `#4943 <https://github.com/wazuh/wazuh-kibana-app/pull/4943>`_    Fixed agent deployment instructions for HP-UX and Solaris.
 `#4999 <https://github.com/wazuh/wazuh-kibana-app/pull/4999>`_    Fixed Inventory checks table filters by stats.
 `#4975 <https://github.com/wazuh/wazuh-kibana-app/pull/4975>`_    Fixed vulnerabilities default last scan date formatter.
-`#5035 <https://github.com/wazuh/wazuh-kibana-app/pull/5035>`_    A solaris command has been fixed.
+`#5035 <https://github.com/wazuh/wazuh-kibana-app/pull/5035>`_    A Solaris command has been fixed.
 ==============================================================    =============
 
 Wazuh Kibana plugin for Kibana 7.16.x and 7.17.x
@@ -442,17 +442,17 @@ Reference                                                         Description
 `#4428 <https://github.com/wazuh/wazuh-kibana-app/pull/4428>`_    Fixed nested field rendering in security alerts table details.
 `#4539 <https://github.com/wazuh/wazuh-kibana-app/pull/4539>`_    Fixed a bug where the Wazuh logo was used instead of the custom one.
 `#4516 <https://github.com/wazuh/wazuh-kibana-app/pull/4516>`_    Fixed rendering problems of the ``Agent Overview`` section in low resolutions.
-`#4595 <https://github.com/wazuh/wazuh-kibana-app/pull/4595>`_    Fixed issue when logging out from Wazuh when SAML is enabled #4595
+`#4595 <https://github.com/wazuh/wazuh-kibana-app/pull/4595>`_    Fixed issue when logging out from Wazuh when SAML is enabled.
 `#4710 <https://github.com/wazuh/wazuh-kibana-app/pull/4710>`_    Fixed server errors with code 500 when the Wazuh API is not reachable / up.
 `#4653 <https://github.com/wazuh/wazuh-kibana-app/pull/4653>`_    Fixed pagination to SCA table.
 `#4849 <https://github.com/wazuh/wazuh-kibana-app/pull/4849>`_    Fixed WAZUH_PROTOCOL param suggestion.
-`#4876 <https://github.com/wazuh/wazuh-kibana-app/pull/4876>`_    Raspbian OS, Ubuntu, Amazon Linux and Amazon Linux 2 commands in the wizard deploy agent now change when a different architecture is selected.
+`#4876 <https://github.com/wazuh/wazuh-kibana-app/pull/4876>`_    Raspbian OS, Ubuntu, Amazon Linux, and Amazon Linux 2 commands in the wizard deploy agent now change when a different architecture is selected.
 `#4929 <https://github.com/wazuh/wazuh-kibana-app/pull/4929>`_    Disabled unmapped fields filter in Security Events alerts table.
 `#4832 <https://github.com/wazuh/wazuh-kibana-app/pull/4832>`_    Fixed the agents wizard OS styles and their versions.
 `#4981 <https://github.com/wazuh/wazuh-kibana-app/pull/4981>`_    Fixed the manager option in the agent deployment section.
 `#4962 <https://github.com/wazuh/wazuh-kibana-app/pull/4962>`_    Fixed commands in the deploy new agent section(most of the commands are missing '-1').
 `#4968 <https://github.com/wazuh/wazuh-kibana-app/pull/4968>`_    Fixed agent installation command for macOS in the deploy new agent section.
-`#4933 <https://github.com/wazuh/wazuh-kibana-app/pull/4933>`_    Deploy new agent section: Fixed the way macos versions and architectures were displayed, fixed the way agents were displayed, fixed the way ubuntu versions were displayed.
+`#4933 <https://github.com/wazuh/wazuh-kibana-app/pull/4933>`_    Deploy new agent section: Fixed the way macOS versions and architectures were displayed, fixed the way agents were displayed, and fixed the way ubuntu versions were displayed.
 `#4943 <https://github.com/wazuh/wazuh-kibana-app/pull/4943>`_    Fixed agent deployment instructions for HP-UX and Solaris.
 `#4999 <https://github.com/wazuh/wazuh-kibana-app/pull/4999>`_    Fixed Inventory checks table filters by stats.
 `#4983 <https://github.com/wazuh/wazuh-kibana-app/pull/4983>`_    Fixed agent installation command for macOS in the deploy new agent section.
