@@ -27,15 +27,15 @@ Wazuh manager
 
 - `#9995 <https://github.com/wazuh/wazuh/pull/9995>`_ Added new unit tests for cluster python module and increased coverage to 99%.
 - `#11190 <https://github.com/wazuh/wazuh/pull/11190>`_ Added file size limitation on cluster integrity sync.
-- `#13424 <https://github.com/wazuh/wazuh/pull/13424>`_ Added unittests for CLIs script files.
+- `#13424 <https://github.com/wazuh/wazuh/pull/13424>`_ Added ``unittests`` for CLIs script files.
 - `#9962 <https://github.com/wazuh/wazuh/pull/9962>`_ Added support for SUSE in Vulnerability Detector.
 - `#13263 <https://github.com/wazuh/wazuh/pull/13263>`_ Added support for Ubuntu Jammy in Vulnerability Detector.
 - `#13608 <https://github.com/wazuh/wazuh/pull/13608>`_ Added a software limit to limit the number of EPS that a manager can process.
-- `#11753 <https://github.com/wazuh/wazuh/pull/11753>`_ Added a new wazuh-clusterd task for agent-groups info synchronization.
+- `#11753 <https://github.com/wazuh/wazuh/pull/11753>`_ Added a new ``wazuh-clusterd`` task for agent-groups info synchronization.
 - `#14950 <https://github.com/wazuh/wazuh/pull/14950>`_ Added unit tests for functions in charge of getting ruleset sync status.
-- `#14950 <https://github.com/wazuh/wazuh/pull/14950>`_ Added auto-vacuum mechanism in wazuh-db.
-- `#10822 <https://github.com/wazuh/wazuh/pull/10822>`_ wazuh-logtest now shows warnings about ruleset issues.
-- `#12206 <https://github.com/wazuh/wazuh/pull/12206>`_ Modulesd memory is now managed by jemalloc, this helps reduce memory fragmentation.
+- `#14950 <https://github.com/wazuh/wazuh/pull/14950>`_ Added auto-vacuum mechanism in ``wazuh-db``.
+- `#10822 <https://github.com/wazuh/wazuh/pull/10822>`_ ``wazuh-logtest`` now shows warnings about ruleset issues.
+- `#12206 <https://github.com/wazuh/wazuh/pull/12206>`_ ``Modulesd`` memory is now managed by ``jemalloc``. This helps reduce memory fragmentation.
 - `#11702 <https://github.com/wazuh/wazuh/pull/11702>`_ The manager now refuses multiple connections from the same agent. 
 - `#12117 <https://github.com/wazuh/wazuh/pull/12117>`_ Updated the Vulnerability Detector configuration reporting to include MSU and skip JSON Red Hat feed.
 - `#12352 <https://github.com/wazuh/wazuh/pull/12352>`_ Improved the shared configuration file handling performance. 
@@ -46,22 +46,22 @@ Wazuh manager
 - `#11124 <https://github.com/wazuh/wazuh/pull/11124>`_ Limit the maximum zip size that can be created while synchronizing cluster Integrity.
 - `#13065 <https://github.com/wazuh/wazuh/pull/13065>`_ Refactored the functions in charge of synchronizing files in the cluster. 
 - `#13079 <https://github.com/wazuh/wazuh/pull/13079>`_ Changed MD5 hash function to BLAKE2 for cluster file comparison. 
-- `#12926 <https://github.com/wazuh/wazuh/pull/12926>`_ Renamed wazuh-logtest and wazuh-clusterd scripts to follow the same scheme as the other scripts (spaces symbolized with _ instead of -).
-- `#10865 <https://github.com/wazuh/wazuh/pull/10865>`_ The agent key polling module has been ported to wazuh-authd. 
+- `#12926 <https://github.com/wazuh/wazuh/pull/12926>`_ Renamed ``wazuh-logtest`` and ``wazuh-clusterd`` scripts to follow the same scheme as the other scripts (spaces symbolized with _ instead of -).
+- `#10865 <https://github.com/wazuh/wazuh/pull/10865>`_ The agent key polling module has been ported to ``wazuh-authd``. 
 - `#13741 <https://github.com/wazuh/wazuh/pull/13741>`_ Added the update field in the CPE Helper for Vulnerability Detector. 
 - `#11702 <https://github.com/wazuh/wazuh/pull/11702>`_ Prevented agents with the same ID from connecting to the manager simultaneously. 
-- `#13713 <https://github.com/wazuh/wazuh/pull/13713>`_ wazuh-analysisd, wazuh-remoted and wazuh-db metrics have been extended. 
+- `#13713 <https://github.com/wazuh/wazuh/pull/13713>`_ ``wazuh-analysisd``, ``wazuh-remoted``, and ``wazuh-db`` metrics have been extended. 
 - `#11753 <https://github.com/wazuh/wazuh/pull/11753>`_ Minimized and optimized wazuh-clusterd number of messages from workers to master related to agent-info and agent-groups tasks. 
 - `#14244 <https://github.com/wazuh/wazuh/pull/14244>`_ Improved performance of the ``agent_groups`` CLI when listing agents belonging to a group. 
-- `#14475 <https://github.com/wazuh/wazuh/pull/14475>`_ Changed wazuh-clusterd binary behaviour to kill any existing cluster processes when executed. 
-- `#14791 <https://github.com/wazuh/wazuh/pull/14791>`_ Changed wazuh-clusterd tasks to wait asynchronously for responses coming from wazuh-db. 
-- `#11190 <https://github.com/wazuh/wazuh/pull/11190>`_ Use zlib for zip compression in cluster synchronization. 
+- `#14475 <https://github.com/wazuh/wazuh/pull/14475>`_ Changed ``wazuh-clusterd`` binary behavior to kill any existing cluster processes when executed. 
+- `#14791 <https://github.com/wazuh/wazuh/pull/14791>`_ Changed ``wazuh-clusterd`` tasks to wait asynchronously for responses coming from ``wazuh-db``. 
+- `#11190 <https://github.com/wazuh/wazuh/pull/11190>`_ Use ``zlib`` for ``zip`` compression in cluster synchronization. 
 - `#12241 <https://github.com/wazuh/wazuh/pull/12241>`_ Added mechanism to dynamically adjust zip size limit in Integrity sync.
 - `#12409 <https://github.com/wazuh/wazuh/pull/12409>`_ Removed the unused internal option ``wazuh_db.sock_queue_size``.
 - `#10940 <https://github.com/wazuh/wazuh/pull/10940>`_ Removed all the unused exceptions from the exceptions.py file.
 - `#10740 <https://github.com/wazuh/wazuh/pull/10740>`_ Removed unused execute method from core/utils.py. 
 - `#13119 <https://github.com/wazuh/wazuh/pull/13119>`_ Removed unused set_user_name function in framework. 
-- `#12370 <https://github.com/wazuh/wazuh/pull/12370>`_ Unused internal calls to wazuh-db have been deprecated. 
+- `#12370 <https://github.com/wazuh/wazuh/pull/12370>`_ Unused internal calls to ``wazuh-db`` have been deprecated. 
 - `#14542 <https://github.com/wazuh/wazuh/pull/14542>`_ Debian Stretch support in Vulnerability Detector has been deprecated.
 
 Wazuh agent
@@ -85,16 +85,16 @@ Wazuh agent
 - `#11587 <https://github.com/wazuh/wazuh/pull/11587>`_ Improved the free RAM data provided by Syscollector. 
 - `#12752 <https://github.com/wazuh/wazuh/pull/12752>`_ The Windows installer (MSI) now provides signed DLL files.
 - `#12748 <https://github.com/wazuh/wazuh/pull/12748>`_ Changed the group ownership of the Modulesd process to root.
-- `#12750 <https://github.com/wazuh/wazuh/pull/12750>`_ Some parts of Agentd and Execd have got refactored.
+- `#12750 <https://github.com/wazuh/wazuh/pull/12750>`_ Some parts of ``Agentd`` and Execd have got refactored.
 - `#10478 <https://github.com/wazuh/wazuh/pull/10478>`_ Handled new exception in the external integration modules.
 - `#11828 <https://github.com/wazuh/wazuh/pull/11828>`_ Optimized the number of calls to DB maintenance tasks performed by the AWS integration. 
 - `#12404 <https://github.com/wazuh/wazuh/pull/12404>`_ Improved the reparse performance by removing unnecessary queries from external integrations.
 - `#12478 <https://github.com/wazuh/wazuh/pull/12478>`_ Updated and expanded Azure module logging functionality to use the ossec.log file.
 - `#12647 <https://github.com/wazuh/wazuh/pull/12647>`_ Improved the error management of the Google Cloud integration. 
 - `#12769 <https://github.com/wazuh/wazuh/pull/12769>`_ Deprecated ``logging`` tag in GCloud integration. It now uses ``wazuh_modules`` debug value to set the verbosity level.
-- `#12849 <https://github.com/wazuh/wazuh/pull/12849>`_ The last_dates.json file of the Azure module has been deprecated in favour of a new ORM and database.
+- `#12849 <https://github.com/wazuh/wazuh/pull/12849>`_ The last_dates.json file of the Azure module has been deprecated in favor of a new ORM and database.
 - `#12929 <https://github.com/wazuh/wazuh/pull/12929>`_ Improved the error handling in AWS integration's ``decompress_file`` method.
-- `#11190 <https://github.com/wazuh/wazuh/pull/11190>`_ Use zlib for zip compression in cluster synchronization.
+- `#11190 <https://github.com/wazuh/wazuh/pull/11190>`_ Use ``zlib`` for ``zip`` compression in cluster synchronization.
 - `#11354 <https://github.com/wazuh/wazuh/pull/11354>`_ The exception handling on Wazuh Agent for Windows has been changed to DWARF2.
 - `#14696 <https://github.com/wazuh/wazuh/pull/14696>`_ The root CA certificate for WPK upgrade has been updated. 
 - `#14822 <https://github.com/wazuh/wazuh/pull/14822>`_ Agents on macOS now report the OS name as "macOS" instead of "Mac OS X".
@@ -106,7 +106,7 @@ RESTful API
 ^^^^^^^^^^^
 
 - `#10620 <https://github.com/wazuh/wazuh/pull/10620>`_ Added new API integration tests for a Wazuh environment without a cluster configuration.
-- `#11731 <https://github.com/wazuh/wazuh/pull/11731>`_ Added wazuh-modulesd tags to ``GET /manager/logs`` and ``GET /cluster/{node_id}/logs`` endpoints.
+- `#11731 <https://github.com/wazuh/wazuh/pull/11731>`_ Added ``wazuh-modulesd`` tags to ``GET /manager/logs`` and ``GET /cluster/{node_id}/logs`` endpoints.
 - `#12438 <https://github.com/wazuh/wazuh/pull/12438>`_ Added python decorator to soft deprecate API endpoints adding deprecation headers to their responses.
 - `#12486 <https://github.com/wazuh/wazuh/pull/12486>`_ Added new exception to inform that /proc directory is not found or permissions to see its status are not granted.
 - `#12362 <https://github.com/wazuh/wazuh/pull/12362>`_ Added new field and filter to ``GET /agents`` response to retrieve agent groups configuration synchronization status.
@@ -114,26 +114,26 @@ RESTful API
 - `#11171 <https://github.com/wazuh/wazuh/pull/11171>`_ Added JSON log handling.
 - `#12029 <https://github.com/wazuh/wazuh/pull/12029>`_ Added integration tests for IPv6 agent's registration.
 - `#12887 <https://github.com/wazuh/wazuh/pull/12887>`_ Enable ordering by Agents count in ``/groups`` endpoints.
-- `#12092 <https://github.com/wazuh/wazuh/pull/12092>`_ Added hash to API logs to identify users logged in with authorization context. 
+- `#12092 <https://github.com/wazuh/wazuh/pull/12092>`_ Added a hash to API logs to identify users logged in with authorization context. 
 - `#14119 <https://github.com/wazuh/wazuh/pull/14119>`_ Added new ``limits`` section to the ``upload_wazuh_configuration`` section in the Wazuh API configuration.
 - `#14295 <https://github.com/wazuh/wazuh/pull/14295>`_ Added logic to API logger to renew its streams if needed on every request.
 - `#14401 <https://github.com/wazuh/wazuh/pull/14401>`_ Added ``GET /manager/daemons/stats`` and ``GET /cluster/{node_id}/daemons/stats`` API endpoints. 
 - `#14464 <https://github.com/wazuh/wazuh/pull/14464>`_ Added ``GET /agents/{agent_id}/daemons/stats`` API endpoint. 
 - `#14471 <https://github.com/wazuh/wazuh/pull/14471>`_ Added the possibility to get the configuration of the ``wazuh-db`` component in active configuration endpoints.
-- `#15084 <https://github.com/wazuh/wazuh/pull/15084>`_ Added distinct and select parameters to GET /sca/{agent_id} and GET /sca/{agent_id}/checks/{policy_id} endpoints.
+- `#15084 <https://github.com/wazuh/wazuh/pull/15084>`_ Added distinct and select parameters to ``GET /sca/{agent_id}`` and ``GET /sca/{agent_id}/checks/{policy_id}`` endpoints.
 - `#15290 <https://github.com/wazuh/wazuh/pull/15290>`_ Added new endpoint to run vulnerability detector on-demand scans (``PUT /vulnerability``).
 - `#11341 <https://github.com/wazuh/wazuh/pull/11341>`_ Improved ``GET /cluster/healthcheck`` endpoint and ``cluster_control -i more`` CLI call in loaded cluster environments. 
 - `#12595 <https://github.com/wazuh/wazuh/pull/12595>`_ Removed ``never_connected`` agent status limitation when trying to assign agents to groups.
 - `#12551 <https://github.com/wazuh/wazuh/pull/12551>`_ Changed API version and upgrade_version filters to work with different version formats.
 - `#9413 <https://github.com/wazuh/wazuh/pull/9413>`_ Renamed ``GET /agents/{agent_id}/group/is_sync`` endpoint to ``GET /agents/group/is_sync`` and added new ``agents_list`` parameter.
 - `#10397 <https://github.com/wazuh/wazuh/pull/10397>`_ Added ``POST /security/user/authenticate`` endpoint and marked ``GET /security/user/authenticate`` endpoint as deprecated.
-- `#12526 <https://github.com/wazuh/wazuh/pull/12526>`_ Adapted framework code to agent-group changes to use the new wazuh-db commands.
+- `#12526 <https://github.com/wazuh/wazuh/pull/12526>`_ Adapted framework code to agent-group changes to use the new ``wazuh-db`` commands.
 - `#13791 <https://github.com/wazuh/wazuh/pull/13791>`_ Updated default timeout for ``GET /mitre/software`` to avoid timing out in slow environments after the MITRE DB update to v11.2.
-- `#14119 <https://github.com/wazuh/wazuh/pull/14119>`_ Changed API settings related to remote commands. The ``remote_commands`` section will be hold within ``upload_wazuh_configuration``.
+- `#14119 <https://github.com/wazuh/wazuh/pull/14119>`_ Changed API settings related to remote commands. The ``remote_commands`` section will be held within ``upload_wazuh_configuration``.
 - `#14233 <https://github.com/wazuh/wazuh/pull/14233>`_ Improved API unauthorized responses to be more accurate.
 - `#14259 <https://github.com/wazuh/wazuh/pull/14259>`_ Updated framework functions that communicate with the request socket to use remote instead.
 - `#14766 <https://github.com/wazuh/wazuh/pull/14766>`_ Improved parameter validation for API endpoints that require component and configuration parameters.
-- `#15017 <https://github.com/wazuh/wazuh/pull/15017>`_ Improved GET /sca/{agent_id}/checks/{policy_id} API endpoint performance.
+- `#15017 <https://github.com/wazuh/wazuh/pull/15017>`_ Improved ``GET /sca/{agent_id}/checks/{policy_id}`` API endpoint performance.
 - `#15334 <https://github.com/wazuh/wazuh/pull/15334>`_ Improved exception handling when trying to connect to Wazuh sockets.
 - `#15671 <https://github.com/wazuh/wazuh/pull/15671>`_ Modified _group_names and _group_names_or_all regexes to avoid invalid group names.
 - `#12053 <https://github.com/wazuh/wazuh/pull/12053>`_ Removed null remediations from failed API responses.
@@ -154,20 +154,20 @@ Wazuh dashboard
 - `#4323 <https://github.com/wazuh/wazuh-kibana-app/pull/4323>`_ Added the option to sort by the agents count in the group table.
 - `#3874 <https://github.com/wazuh/wazuh-kibana-app/pull/3874>`_ Added agent synchronization status in the agent module.
 - `#4739 <https://github.com/wazuh/wazuh-kibana-app/pull/4739>`_ The input name was added and when the user adds a value the variable WAZUH_AGENT_NAME with its value appears in the installation command.
-- `#4512 <https://github.com/wazuh/wazuh-kibana-app/pull/4512>`_ Redesign the SCA table from agent's dashboard.
+- `#4512 <https://github.com/wazuh/wazuh-kibana-app/pull/4512>`_ Redesign the SCA table from the agent's dashboard.
 - `#4501 <https://github.com/wazuh/wazuh-kibana-app/pull/4501>`_ Enhanced the plugin setting description displayed in the UI and the configuration file.
 - `#4503 <https://github.com/wazuh/wazuh-kibana-app/pull/4503>`_ `#4785 <https://github.com/wazuh/wazuh-kibana-app/pull/4785>`_ Added validation to the plugin settings in the form of ``Settings/Configuration`` and the endpoint to update the plugin configuration.
 - `#4505 <https://github.com/wazuh/wazuh-kibana-app/pull/4505>`_ `#4798 <https://github.com/wazuh/wazuh-kibana-app/pull/4798>`_ `#4805 <https://github.com/wazuh/wazuh-kibana-app/pull/4805>`_ Added new plugin settings to customize the header and footer on the PDF reports.
 - `#4507 <https://github.com/wazuh/wazuh-kibana-app/pull/4507>`_ Added a new plugin setting to enable or disable the customization.
 - `#4504 <https://github.com/wazuh/wazuh-kibana-app/pull/4504>`_ Added the ability to upload an image for the ``customization.logo.*`` settings in ``Settings/Configuration``.
 - `#4867 <https://github.com/wazuh/wazuh-kibana-app/pull/4867>`_ Added macOS version to wizard deploy agent.
-- `#4833 <https://github.com/wazuh/wazuh-kibana-app/pull/4833>`_ Added powerPC architecture in redhat7, in the section 'Deploy new agent'.
+- `#4833 <https://github.com/wazuh/wazuh-kibana-app/pull/4833>`_ Added PowerPC architecture in redhat7, in the section **Deploy new agent**.
 - `#4831 <https://github.com/wazuh/wazuh-kibana-app/pull/4831>`_ Added a centralized service to handle the requests.
 - `#4873 <https://github.com/wazuh/wazuh-kibana-app/pull/4873>`_ Added data-test-subj create policy.
-- `#4933 <https://github.com/wazuh/wazuh-kibana-app/pull/4933>`_ Added extra steps message and new command for windows xp and windows server 2008, added alpine agent with all its steps.
+- `#4933 <https://github.com/wazuh/wazuh-kibana-app/pull/4933>`_ Added extra steps message and a new command for Windows XP and Windows server 2008, added alpine agent with all its steps.
 - `#4933 <https://github.com/wazuh/wazuh-kibana-app/pull/4933>`_ Deploy new agent section: Added link for additional steps to alpine os.
 - `#4970 <https://github.com/wazuh/wazuh-kibana-app/pull/4970>`_ Added file saving conditions in File Editor.
-- `#5021 <https://github.com/wazuh/wazuh-kibana-app/pull/5021>`_ `#5028 <https://github.com/wazuh/wazuh-kibana-app/pull/5028>`_ Added character validation to avoid invalid agent names in the section 'Deploy new agent'. 
+- `#5021 <https://github.com/wazuh/wazuh-kibana-app/pull/5021>`_ `#5028 <https://github.com/wazuh/wazuh-kibana-app/pull/5028>`_ Added character validation to avoid invalid agent names in the section **Deploy new agent**. 
 - `#4933 <https://github.com/wazuh/wazuh-kibana-app/pull/4933>`_ Deploy new agent section: Added link for additional steps to alpine os.
 - `#4103 <https://github.com/wazuh/wazuh-kibana-app/pull/4103>`_ Changed the HTTP verb from ``GET`` to ``POST`` in the requests to login to the Wazuh API.
 - `#4376 <https://github.com/wazuh/wazuh-kibana-app/pull/4376>`_ Improved alerts summary performance.
@@ -175,9 +175,9 @@ Wazuh dashboard
 - `#4529 <https://github.com/wazuh/wazuh-kibana-app/pull/4529>`_ `#4964 <https://github.com/wazuh/wazuh-kibana-app/pull/4964>`_ Improved the message displayed when there is a versions mismatch between the Wazuh API and the Wazuh APP.
 - `#4363 <https://github.com/wazuh/wazuh-kibana-app/pull/4363>`_ Independently load each dashboard from the ``Agents Overview`` page.
 - `#3874 <https://github.com/wazuh/wazuh-kibana-app/pull/3874>`_ The endpoint ``/agents/summary/status`` response was adapted. 
-- `#4458 <https://github.com/wazuh/wazuh-kibana-app/pull/4458>`_ Updated and added operating systems, versions, architectures commands of Install and enroll the agent and commands of Start the agent in the deploy new agent section.
+- `#4458 <https://github.com/wazuh/wazuh-kibana-app/pull/4458>`_ Updated and added operating systems, versions, and architectures commands of install and enroll the agent and commands of Start the agent in the deploy new agent section.
 - `#4776 <https://github.com/wazuh/wazuh-kibana-app/pull/4776>`_ `#4954 <https://github.com/wazuh/wazuh-kibana-app/pull/4954>`_ Added cluster's IP and protocol as suggestions in the agent deployment wizard.
-- `#4851 <https://github.com/wazuh/wazuh-kibana-app/pull/4851>`_ Show OS name and OS version in the agent installation wizard.
+- `#4851 <https://github.com/wazuh/wazuh-kibana-app/pull/4851>`_ Show the OS name and OS version in the agent installation wizard.
 - `#4501 <https://github.com/wazuh/wazuh-kibana-app/pull/4501>`_ Changed the endpoint that updates the plugin configuration to support multiple settings.
 - `#4985 <https://github.com/wazuh/wazuh-kibana-app/pull/4985>`_ Updated the ``winston`` dependency to ``3.5.1``.
 - `#4985 <https://github.com/wazuh/wazuh-kibana-app/pull/4985>`_ Updated the ``pdfmake`` dependency to ``0.2.6``.
@@ -191,29 +191,29 @@ Wazuh Kibana plugin for Kibana 7.10.2
 - `#4323 <https://github.com/wazuh/wazuh-kibana-app/pull/4323>`_ Added the option to sort by the agents count in the group table.
 - `#3874 <https://github.com/wazuh/wazuh-kibana-app/pull/3874>`_ Added agent synchronization status in the agent module.
 - `#4739 <https://github.com/wazuh/wazuh-kibana-app/pull/4739>`_ Added the ability to set the name of the agent using the deployment wizard.
-- `#4512 <https://github.com/wazuh/wazuh-kibana-app/pull/4512>`_ Redesign the SCA table from agent's dashboard.
+- `#4512 <https://github.com/wazuh/wazuh-kibana-app/pull/4512>`_ Redesign the SCA table from the agent's dashboard.
 - `#4501 <https://github.com/wazuh/wazuh-kibana-app/pull/4501>`_ Enhanced the plugin setting description displayed in the UI and the configuration file.
 - `#4503 <https://github.com/wazuh/wazuh-kibana-app/pull/4503>`_ `#4785 <https://github.com/wazuh/wazuh-kibana-app/pull/4785>`_ Added validation to the plugin settings in the form of ``Settings/Configuration`` and the endpoint to update the plugin configuration.
 - `#4505 <https://github.com/wazuh/wazuh-kibana-app/pull/4505>`_ `#4798 <https://github.com/wazuh/wazuh-kibana-app/pull/4798>`_ `#4805 <https://github.com/wazuh/wazuh-kibana-app/pull/4805>`_ Added new plugin settings to customize the header and footer on the PDF reports.
 - `#4507 <https://github.com/wazuh/wazuh-kibana-app/pull/4507>`_ Added a new plugin setting to enable or disable the customization.
 - `#4504 <https://github.com/wazuh/wazuh-kibana-app/pull/4504>`_ Added the ability to upload an image for the ``customization.logo.*`` settings in ``Settings/Configuration``.
 - `#4867 <https://github.com/wazuh/wazuh-kibana-app/pull/4867>`_ Added macOS version to wizard deploy agent.
-- `#4833 <https://github.com/wazuh/wazuh-kibana-app/pull/4833>`_ Added powerPC architecture in redhat7, in the section 'Deploy new agent'.
+- `#4833 <https://github.com/wazuh/wazuh-kibana-app/pull/4833>`_ Added PowerPC architecture in redhat7, in the section **Deploy new agent**.
 - `#4831 <https://github.com/wazuh/wazuh-kibana-app/pull/4831>`_ Added a centralized service to handle the requests.
 - `#4873 <https://github.com/wazuh/wazuh-kibana-app/pull/4873>`_ Added data-test-subj create policy.
-- `#4933 <https://github.com/wazuh/wazuh-kibana-app/pull/4933>`_ Added extra steps message and new command for windows xp and windows server 2008, added alpine agent with all its steps.
+- `#4933 <https://github.com/wazuh/wazuh-kibana-app/pull/4933>`_ Added extra steps message and a new command for Windows XP and Windows Server 2008, added alpine agent with all its steps.
 - `#4933 <https://github.com/wazuh/wazuh-kibana-app/pull/4933>`_ Deploy new agent section: Added link for additional steps to alpine os.
 - `#4970 <https://github.com/wazuh/wazuh-kibana-app/pull/4970>`_ Added file saving conditions in File Editor.
-- `#5021 <https://github.com/wazuh/wazuh-kibana-app/pull/5021>`_ `#5028 <https://github.com/wazuh/wazuh-kibana-app/pull/5028>`_ Added character validation to avoid invalid agent names in the section 'Deploy new agent'. 
+- `#5021 <https://github.com/wazuh/wazuh-kibana-app/pull/5021>`_ `#5028 <https://github.com/wazuh/wazuh-kibana-app/pull/5028>`_ Added character validation to avoid invalid agent names in the section **Deploy new agent**. 
 - `#4103 <https://github.com/wazuh/wazuh-kibana-app/pull/4103>`_ Changed the HTTP verb from ``GET`` to ``POST`` in the requests to login to the Wazuh API.
 - `#4376 <https://github.com/wazuh/wazuh-kibana-app/pull/4376>`_ Improved alerts summary performance.
 - `#4363 <https://github.com/wazuh/wazuh-kibana-app/pull/4363>`_ Improved ``Agents Overview`` performance.
 - `#4529 <https://github.com/wazuh/wazuh-kibana-app/pull/4529>`_ `#4964 <https://github.com/wazuh/wazuh-kibana-app/pull/4964>`_ Improved the message displayed when there is a versions mismatch between the Wazuh API and the Wazuh APP.
 - `#4363 <https://github.com/wazuh/wazuh-kibana-app/pull/4363>`_ Independently load each dashboard from the ``Agents Overview`` page.
 - `#3874 <https://github.com/wazuh/wazuh-kibana-app/pull/3874>`_ The endpoint ``/agents/summary/status`` response was adapted. 
-- `#4458 <https://github.com/wazuh/wazuh-kibana-app/pull/4458>`_ Updated and added operating systems, versions, architectures commands of Install and enroll the agent and commands of Start the agent in the deploy new agent section.
+- `#4458 <https://github.com/wazuh/wazuh-kibana-app/pull/4458>`_ Updated and added operating systems, versions, and architectures commands of install and enroll the agent and commands of Start the agent in the deploy new agent section.
 - `#4776 <https://github.com/wazuh/wazuh-kibana-app/pull/4776>`_ `#4954 <https://github.com/wazuh/wazuh-kibana-app/pull/4954>`_ Added cluster's IP and protocol as suggestions in the agent deployment wizard.
-- `#4851 <https://github.com/wazuh/wazuh-kibana-app/pull/4851>`_ Show OS name and OS version in the agent installation wizard.
+- `#4851 <https://github.com/wazuh/wazuh-kibana-app/pull/4851>`_ Show the OS name and OS version in the agent installation wizard.
 - `#4501 <https://github.com/wazuh/wazuh-kibana-app/pull/4501>`_ Changed the endpoint that updates the plugin configuration to support multiple settings.
 - `#4972 <https://github.com/wazuh/wazuh-kibana-app/pull/4972>`_ The button to export the app logs is now disabled when there are no results, instead of showing an error toast.
 - `#5014 <https://github.com/wazuh/wazuh-kibana-app/pull/5014>`_ Updated the ``winston`` dependency to ``3.5.1``.
@@ -225,29 +225,29 @@ Wazuh Kibana plugin for Kibana 7.16.x and 7.17.x
 - `#4323 <https://github.com/wazuh/wazuh-kibana-app/pull/4323>`_ Added the option to sort by the agents count in the group table.
 - `#3874 <https://github.com/wazuh/wazuh-kibana-app/pull/3874>`_ Added agent synchronization status in the agent module.
 - `#4739 <https://github.com/wazuh/wazuh-kibana-app/pull/4739>`_ The input name was added and when the user adds a value the variable WAZUH_AGENT_NAME with its value appears in the installation command.
-- `#4512 <https://github.com/wazuh/wazuh-kibana-app/pull/4512>`_ Redesign the SCA table from agent's dashboard.
+- `#4512 <https://github.com/wazuh/wazuh-kibana-app/pull/4512>`_ Redesign the SCA table from the agent's dashboard.
 - `#4501 <https://github.com/wazuh/wazuh-kibana-app/pull/4501>`_ Enhanced the plugin setting description displayed in the UI and the configuration file.
 - `#4503 <https://github.com/wazuh/wazuh-kibana-app/pull/4503>`_ `#4785 <https://github.com/wazuh/wazuh-kibana-app/pull/4785>`_ Added validation to the plugin settings in the form of ``Settings/Configuration`` and the endpoint to update the plugin configuration.
 - `#4505 <https://github.com/wazuh/wazuh-kibana-app/pull/4505>`_ `#4798 <https://github.com/wazuh/wazuh-kibana-app/pull/4798>`_ `#4805 <https://github.com/wazuh/wazuh-kibana-app/pull/4805>`_ Added new plugin settings to customize the header and footer on the PDF reports.
 - `#4507 <https://github.com/wazuh/wazuh-kibana-app/pull/4507>`_ Added a new plugin setting to enable or disable the customization.
 - `#4504 <https://github.com/wazuh/wazuh-kibana-app/pull/4504>`_ Added the ability to upload an image for the ``customization.logo.*`` settings in ``Settings/Configuration``.
 - `#4867 <https://github.com/wazuh/wazuh-kibana-app/pull/4867>`_ Added macOS version to wizard deploy agent.
-- `#4833 <https://github.com/wazuh/wazuh-kibana-app/pull/4833>`_ Added powerPC architecture in redhat7, in the section 'Deploy new agent'.
+- `#4833 <https://github.com/wazuh/wazuh-kibana-app/pull/4833>`_ Added PowerPC architecture in redhat7, in the section **Deploy new agent**.
 - `#4831 <https://github.com/wazuh/wazuh-kibana-app/pull/4831>`_ Added a centralized service to handle the requests.
 - `#4873 <https://github.com/wazuh/wazuh-kibana-app/pull/4873>`_ Added data-test-subj create policy.
-- `#4933 <https://github.com/wazuh/wazuh-kibana-app/pull/4933>`_ Added extra steps message and new command for windows xp and windows server 2008, added alpine agent with all its steps.
+- `#4933 <https://github.com/wazuh/wazuh-kibana-app/pull/4933>`_ Added extra steps message and a new command for Windows XP and Windows server 2008, added alpine agent with all its steps.
 - `#4933 <https://github.com/wazuh/wazuh-kibana-app/pull/4933>`_ Deploy new agent section: Added link for additional steps to alpine os.
 - `#4970 <https://github.com/wazuh/wazuh-kibana-app/pull/4970>`_ Added file saving conditions in File Editor.
-- `#5021 <https://github.com/wazuh/wazuh-kibana-app/pull/5021>`_ `#5028 <https://github.com/wazuh/wazuh-kibana-app/pull/5028>`_ Added character validation to avoid invalid agent names in the section 'Deploy new agent'. 
+- `#5021 <https://github.com/wazuh/wazuh-kibana-app/pull/5021>`_ `#5028 <https://github.com/wazuh/wazuh-kibana-app/pull/5028>`_ Added character validation to avoid invalid agent names in the section **Deploy new agent**. 
 - `#4103 <https://github.com/wazuh/wazuh-kibana-app/pull/4103>`_ Changed the HTTP verb from ``GET`` to ``POST`` in the requests to login to the Wazuh API.
 - `#4376 <https://github.com/wazuh/wazuh-kibana-app/pull/4376>`_ Improved alerts summary performance.
 - `#4363 <https://github.com/wazuh/wazuh-kibana-app/pull/4363>`_ `#4996 <https://github.com/wazuh/wazuh-kibana-app/pull/4996>`_ Improved ``Agents Overview`` performance.
 - `#4529 <https://github.com/wazuh/wazuh-kibana-app/pull/4529>`_ `#4964 <https://github.com/wazuh/wazuh-kibana-app/pull/4964>`_ Improved the message displayed when there is a versions mismatch between the Wazuh API and the Wazuh APP.
 - `#4363 <https://github.com/wazuh/wazuh-kibana-app/pull/4363>`_ Independently load each dashboard from the ``Agents Overview`` page.
 - `#3874 <https://github.com/wazuh/wazuh-kibana-app/pull/3874>`_ The endpoint ``/agents/summary/status`` response was adapted. 
-- `#4458 <https://github.com/wazuh/wazuh-kibana-app/pull/4458>`_ Updated and added operating systems, versions, architectures commands of Install and enroll the agent and commands of Start the agent in the deploy new agent section.
+- `#4458 <https://github.com/wazuh/wazuh-kibana-app/pull/4458>`_ Updated and added operating systems, versions, and architectures commands of install and enroll the agent and commands of Start the agent in the deploy new agent section.
 - `#4776 <https://github.com/wazuh/wazuh-kibana-app/pull/4776>`_ `#4954 <https://github.com/wazuh/wazuh-kibana-app/pull/4954>`_ Added cluster's IP and protocol as suggestions in the agent deployment wizard.
-- `#4851 <https://github.com/wazuh/wazuh-kibana-app/pull/4851>`_ Show OS name and OS version in the agent installation wizard.
+- `#4851 <https://github.com/wazuh/wazuh-kibana-app/pull/4851>`_ Show the OS name and OS version in the agent installation wizard.
 - `#4501 <https://github.com/wazuh/wazuh-kibana-app/pull/4501>`_ Changed the endpoint that updates the plugin configuration to support multiple settings.
 - `#4972 <https://github.com/wazuh/wazuh-kibana-app/pull/4972>`_ The button to export the app logs is now disabled when there are no results, instead of showing an error toast.
 - `#4985 <https://github.com/wazuh/wazuh-kibana-app/pull/4985>`_ Updated the ``winston`` dependency to ``3.5.1``.
@@ -272,7 +272,7 @@ Wazuh manager
 ==============================================================    =============
 Reference                                                         Description
 ==============================================================    =============
-`#10873 <https://github.com/wazuh/wazuh/pull/10873>`_             Fixed wazuh-dbd halt procedure.
+`#10873 <https://github.com/wazuh/wazuh/pull/10873>`_             Fixed ``wazuh-dbd`` halt procedure.
 `#12098 <https://github.com/wazuh/wazuh/pull/12098>`_             Fixed compilation warnings in the manager. 
 `#12516 <https://github.com/wazuh/wazuh/pull/12516>`_             Fixed a bug in the manager that did not send shared folders correctly to agents belonging to multiple groups. 
 `#12834 <https://github.com/wazuh/wazuh/pull/12834>`_             Fixed the Active Response decoders to support back the top entries for source IP in reports.
@@ -281,7 +281,7 @@ Reference                                                         Description
 `#10635 <https://github.com/wazuh/wazuh/pull/10635>`_             Fixed code flaw regarding the use of XML package. 
 `#10636 <https://github.com/wazuh/wazuh/pull/10636>`_             Fixed code flaw regarding permissions at group directories. 
 `#10544 <https://github.com/wazuh/wazuh/pull/10544>`_             Fixed code flaw regarding temporary directory names. 
-`#11951 <https://github.com/wazuh/wazuh/pull/11951>`_             Fixed code flaw regarding try, except and pass block in wazuh-clusterd. 
+`#11951 <https://github.com/wazuh/wazuh/pull/11951>`_             Fixed code flaw regarding try, except and pass block in ``wazuh-clusterd``. 
 `#10782 <https://github.com/wazuh/wazuh/pull/10782>`_             Fixed framework datetime transformations to UTC. 
 `#11866 <https://github.com/wazuh/wazuh/pull/11866>`_             Fixed a cluster error when Master-Worker tasks where not properly stopped after an exception occurred in one or both parts.
 `#12831 <https://github.com/wazuh/wazuh/pull/12831>`_             Fixed cluster logger issue printing 'NoneType: None' in error logs.
@@ -289,7 +289,7 @@ Reference                                                         Description
 `#13368 <https://github.com/wazuh/wazuh/pull/13368>`_             Fixed framework unit test failures when they are run by the root user. 
 `#13405 <https://github.com/wazuh/wazuh/pull/13405>`_             Fixed a memory leak in analysisd when parsing a disabled Active Response. 
 `#13590 <https://github.com/wazuh/wazuh/pull/13590>`_             Fixed Syscollector delta message handling. 
-`#13892 <https://github.com/wazuh/wazuh/pull/13892>`_             Prevented wazuh-db from deleting queue/diff when cleaning databases. 
+`#13892 <https://github.com/wazuh/wazuh/pull/13892>`_             Prevented ``wazuh-db`` from deleting queue/diff when cleaning databases. 
 `#14981 <https://github.com/wazuh/wazuh/pull/14981>`_             Fixed multiple data race conditions in Remoted reported by ThreadSanitizer.
 `#15151 <https://github.com/wazuh/wazuh/pull/15151>`_             Fixed aarch64 OS collection in Remoted to allow WPK upgrades. 
 `#15165 <https://github.com/wazuh/wazuh/pull/15165>`_             Fixed a race condition in Remoted that was blocking agent connections. 
@@ -339,7 +339,7 @@ Reference                                                         Description
 ==============================================================    =============
 `#12302 <https://github.com/wazuh/wazuh/pull/12302>`_             Fixed copy functions used for the backup files and upload endpoints to prevent incorrent metadata.
 `#11010 <https://github.com/wazuh/wazuh/pull/11010>`_             Fixed a bug regarding ids not being sorted with cluster disabled in Active Response and Agent endpoints.
-`#10736 <https://github.com/wazuh/wazuh/pull/10736>`_             Fixed a bug where ``null`` values from wazuh-db where returned in API responses.
+`#10736 <https://github.com/wazuh/wazuh/pull/10736>`_             Fixed a bug where ``null`` values from ``wazuh-db`` where returned in API responses.
 `#12063 <https://github.com/wazuh/wazuh/pull/12063>`_             Connections through ``WazuhQueue`` will be closed gracefully in all situations. 
 `#12450 <https://github.com/wazuh/wazuh/pull/12450>`_             Fixed exception handling when trying to get the active configuration of a valid but not configured component.
 `#12700 <https://github.com/wazuh/wazuh/pull/12700>`_             Fixed api.yaml path suggested as remediation at exception.py
