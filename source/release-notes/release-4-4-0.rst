@@ -255,6 +255,12 @@ Wazuh Kibana plugin for Kibana 7.16.x and 7.17.x
 - `#4992 <https://github.com/wazuh/wazuh-kibana-app/pull/4992>`_ The button to export the app logs is now disabled when there are no results, instead of showing an error toast.
 - `#4985 <https://github.com/wazuh/wazuh-kibana-app/pull/4985>`_ Removed the ``angular-chart.js`` dependency.
 
+Wazuh Splunk app
+^^^^^^^^^^^^^^^^
+
+- `#1355 <https://github.com/wazuh/wazuh-splunk/pull/1355>`_ Added agent's synchronization statistics. #1355
+- `#1355 <https://github.com/wazuh/wazuh-splunk/pull/1355>`_ Updated the response handlers for the ``/agents/summary/status`` endpoint. #1355
+
 Resolved issues
 ---------------
 
