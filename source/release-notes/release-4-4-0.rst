@@ -460,15 +460,6 @@ Reference                                                         Description
 `#4975 <https://github.com/wazuh/wazuh-kibana-app/pull/4975>`_    Fixed vulnerabilities default last scan date formatter.
 ==============================================================    =============
 
-Packages
-^^^^^^^^
-
-==============================================================    =============
-Reference                                                         Description
-==============================================================    =============
-`#1901 <https://github.com/wazuh/wazuh-packages/pull/1901>`__     aaa
-==============================================================    =============
-
 
 Changelogs
 ----------
