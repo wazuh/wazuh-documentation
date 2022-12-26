@@ -191,7 +191,7 @@ To configure Windows special directory ``%WINDIR%\system32``, it is necessary to
 
 The 32-bit processes running in a 64-bit environment, when they want to access Sytem32, they do it through a virtual folder called ``Sysnative``.
 
-From version 4.4.0 of Wazuh, this redirection has been disabled and it is possible to access directly to ``System32``, so those configurations that have as monitoring directory ``%WINDIR%/Sysnative`` from now on will generate alerts, synchronizations with the database and other functions with ``%WINDIR%/System32``. That means, ``%WINDIR%/Sysnative`` or ``%WINDIR%/System32`` represent the same directory and both path are valids.
+From version 4.4.0 of Wazuh, this redirection has been disabled and it is possible to access directly to ``System32``, so monitoring directories ``%WINDIR%/System32`` or ``%WINDIR%/Sysnative`` will be equivalent, and the path shown in the alerts will be ``%WINDIR%/System32``.
 This implies that ``SysWOW64`` is a separate directory, and in case you want to monitor it, it must be added as such in ``ossec.conf``. 
 
 It's possible configure the monitoring in any mode, for example, scheduled mode:
