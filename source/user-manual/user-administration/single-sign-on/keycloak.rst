@@ -103,7 +103,7 @@ KeyCloak configuration
          :align: center
          :width: 80%  
 
-      You can leave the rest of the values as default. Click Save to apply the configuration.
+      You can leave the rest of the values as default. Click **Save** to apply the configuration.
 
 #. Create a new role
    
