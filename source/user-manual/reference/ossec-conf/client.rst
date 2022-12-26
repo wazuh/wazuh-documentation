@@ -93,8 +93,9 @@ Specifies the index by which the agent should try to connect to the server if th
 | **Allowed values** | A positive number. |
 +--------------------+--------------------+
 
-.. _server_max_retries:
+ .. note:: It may be necessary to manually change this setting if the interface number changes for any reason.
 
+.. _server_max_retries:
 
 max_retries
 ^^^^^^^^^^^
@@ -367,6 +368,8 @@ Specifies the index by which the agent should try to send enrollment request to 
 +--------------------+--------------------+
 | **Allowed values** | A positive number. |
 +--------------------+--------------------+
+
+ .. note:: It may be necessary to manually change this setting if the interface number changes for any reason.
 
 .. _enrollment_agent_name:
 
