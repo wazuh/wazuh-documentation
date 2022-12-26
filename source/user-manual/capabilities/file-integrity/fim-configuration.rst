@@ -185,7 +185,10 @@ To configure the Windows registries, it is necessary to create a list of those r
 Configuring Windows directories
 -------------------------------
 
-To configure directories within the Windows directory (Also known as ``%WINDIR%``), it is necessary to take into account that in 64-bit architecture systems, there are two special folders: ``System32`` which is reserved for those 64-bit DLLs, and ``SysWOW64`` for all 32-bit DLLs.
+To configure Windows special directory ``%WINDIR%\system32``, it is necessary to take into account that in 64-bit architecture systems: 
+1) **System32** is reserved for those 64-bit DLLs.
+2) **SysWOW64** for all 32-bit DLLs.
+
 The 32-bit processes running in a 64-bit environment, when they want to access Sytem32, they do it through a virtual folder called ``Sysnative``.
 
 From version 4.4.0 of Wazuh, this redirection has been disabled and it is possible to access directly to ``System32``, so those configurations that have as monitoring directory ``%WINDIR%/Sysnative`` from now on will generate alerts, synchronizations with the database and other functions with ``%WINDIR%/System32``. That means, ``%WINDIR%/Sysnative`` or ``%WINDIR%/System32`` represent the same directory and both path are valids.
