@@ -8,14 +8,12 @@
 
 This section lists the changes in version 4.4.0. Every update of the Wazuh solution is cumulative and includes all enhancements and fixes from previous releases.
 
-
 Highlights
 ----------
 
 - `#10843 <https://github.com/wazuh/wazuh/pull/10843>`_ Added support for delta events in Syscollector when data gets changed.
 - `#11268 <https://github.com/wazuh/wazuh/pull/11268>`_ Added support for IPv6 on agent-manager connection and enrollment.
 - `#9962 <https://github.com/wazuh/wazuh/pull/9962>`_ Vulnerability Detector now supports SUSE agents.
-
 
 What's new
 ----------
@@ -330,7 +328,6 @@ Reference                                                         Description
 `#15584 <https://github.com/wazuh/wazuh/pull/15584>`_             Fixed GCP integration module error messages.
 ==============================================================    =============
 
-
 RESTful API
 ^^^^^^^^^^^
 
@@ -459,7 +456,6 @@ Reference                                                         Description
 `#4962 <https://github.com/wazuh/wazuh-kibana-app/pull/4962>`_    Fixed commands in the deploy new agent section(most of the commands are missing '-1').
 `#4975 <https://github.com/wazuh/wazuh-kibana-app/pull/4975>`_    Fixed vulnerabilities default last scan date formatter.
 ==============================================================    =============
-
 
 Changelogs
 ----------
