@@ -50,7 +50,7 @@ The ``agent-auth`` program is the client application used along with :ref:`wazuh
 +----------------------------+------------------------------------------------------------------------------------------------------+
 | **-m <manager_ip>**        | IP address of the manager.                                                                           |
 +----------------------------+------------------------------------------------------------------------------------------------------+
-| **-n <network_interface>** | Network interface to use in an IPv6 connection (only necessary in case of use of link-local address).|
+| **-n <network_interface>** | Network interface to be used in an IPv6 connection (only necessary when using a link-local address). |
 +----------------------------+------------------------------------------------------------------------------------------------------+
 | **-P <password>**          | Use the specified password instead of searching for it at ``authd.pass``.                            |
 |                            |                                                                                                      |

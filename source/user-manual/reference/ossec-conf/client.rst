@@ -85,7 +85,7 @@ Specifies the protocol to use when connecting to the manager.
 interface_index
 ^^^^^^^^^^^^^^^
 
-Specifies the index by which the agent should try to connect to the server if the configured IP is a link-local IPv6. This option has no effect if the configured IP is not a link-local IPv6.
+The index by which the agent must try to connect to the server when setting link-local IPv6 addresses. If the configured IP address is not link-local IPv6 the ``interface_index`` option has no effect.
 
 +--------------------+--------------------+
 | **Default value**  | n/a                |
@@ -93,7 +93,7 @@ Specifies the index by which the agent should try to connect to the server if th
 | **Allowed values** | A positive number. |
 +--------------------+--------------------+
 
- .. note:: It may be necessary to manually change this setting if the interface number changes for any reason.
+.. note:: In the case that the interface number changes, you must change this setting mannually.
 
 .. _server_max_retries:
 
@@ -272,25 +272,24 @@ Sample configuration
       <auto_restart>yes</auto_restart>
     </client>
 
-
 Sample link-local IPv6 configuration
 ------------------------------------
 
 .. code-block:: xml
 
-    <client>
-      <server>
-        <address>fe80:0000:0000:0000:a00:27ff:feff:6b0b</address>
-        <interface_index>3</interface_index>
-        <port>1514</port>
-        <protocol>tcp</protocol>
-      </server>
-      <config-profile>ubuntu, ubuntu22, ubuntu22.04</config-profile>
-      <notify_time>10</notify_time>
-      <time-reconnect>60</time-reconnect>
-      <auto_restart>yes</auto_restart>
-      <crypto_method>aes</crypto_method>
-    </client>
+   <client>
+     <server>
+       <address>fe80:0000:0000:0000:a00:27ff:feff:6b0b</address>
+       <interface_index>3</interface_index>
+       <port>1514</port>
+       <protocol>tcp</protocol>
+     </server>
+     <config-profile>ubuntu, ubuntu22, ubuntu22.04</config-profile>
+     <notify_time>10</notify_time>
+     <time-reconnect>60</time-reconnect>
+     <auto_restart>yes</auto_restart>
+     <crypto_method>aes</crypto_method>
+   </client>
 
 .. _enrollment:
 
@@ -306,7 +305,7 @@ Options
 - `enabled`_
 - `manager_address`_
 - :ref:`port <enrollment_manager_port>`
-- `interface_index`_
+- :ref:`interface_index <enrollment_interface_index>`
 - `agent_name`_
 - `groups`_
 - `agent_address`_
@@ -361,7 +360,7 @@ Specifies the port on the manager to send enrollment request.  This must match t
 interface_index
 ^^^^^^^^^^^^^^^
 
-Specifies the index by which the agent should try to send enrollment request to the server if the configured IP is a link-local IPv6. This option has no effect if the configured IP is not a link-local IPv6.
+The index by which the agent must send enrollment requests to the server when setting link-local IPv6 addresses. If the configured IP address is not link-local IPv6 the ``interface_index`` option has no effect.
 
 +--------------------+--------------------+
 | **Default value**  | n/a                |
@@ -369,7 +368,7 @@ Specifies the index by which the agent should try to send enrollment request to 
 | **Allowed values** | A positive number. |
 +--------------------+--------------------+
 
- .. note:: It may be necessary to manually change this setting if the interface number changes for any reason.
+ .. note:: In the case that the interface number changes, you must change this setting mannually.
 
 .. _enrollment_agent_name:
 
@@ -543,16 +542,16 @@ Sample configuration
     </client>
 
 
-Sample enrollment link-local IPv6 configuration
+Sample link-local IPv6 enrollment configuration
 -----------------------------------------------
 
 .. code-block:: xml
 
-    <client>
-      <enrollment>
-        <enabled>yes</enabled>
-        <manager_address>fe80:0000:0000:0000:a00:27ff:feff:6b0b</manager_address>
-        <interface_index>7</interface_index>
-        <port>1515</port>
-      </enrollment>
-    </client>
+   <client>
+     <enrollment>
+       <enabled>yes</enabled>
+       <manager_address>fe80:0000:0000:0000:a00:27ff:feff:6b0b</manager_address>
+       <interface_index>7</interface_index>
+       <port>1515</port>
+     </enrollment>
+   </client>
