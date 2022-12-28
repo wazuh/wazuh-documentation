@@ -158,7 +158,7 @@ Wazuh indexer configuration
 
 Edit the Wazuh indexer security configuration files. We recommend that you back up these files before you carry out the configuration.
 
-#. Edit ``/usr/share/wazuh-indexer/plugins/opensearch-security/securityconfig/config.yml`` file and change the following values: 
+#. Edit the ``/usr/share/wazuh-indexer/plugins/opensearch-security/securityconfig/config.yml`` file and change the following values: 
             
    - Set the ``order`` in ``basic_internal_auth_domain`` to ``0`` and the ``challenge`` flag to ``false``. 
 
@@ -235,7 +235,7 @@ Edit the Wazuh indexer security configuration files. We recommend that you back 
          SUCC: Configuration for 'config' created or updated
       Done with success
    
-#. Edit ``/usr/share/wazuh-indexer/plugins/opensearch-security/securityconfig/roles_mapping.yml`` file and change the following values:
+#. Edit the ``/usr/share/wazuh-indexer/plugins/opensearch-security/securityconfig/roles_mapping.yml`` file and change the following values:
 
    Configure the ``roles_mapping.yml`` file to map the Okta group to the appropriate Wazuh indexer role. In our case, we map it to the  ``all_access`` role:
 

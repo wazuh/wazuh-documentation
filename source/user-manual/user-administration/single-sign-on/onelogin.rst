@@ -228,7 +228,7 @@ Edit the Wazuh indexer security configuration files. We recommend that you back 
          SUCC: Configuration for 'config' created or updated
       Done with success
    
-#. Edit ``/usr/share/wazuh-indexer/plugins/opensearch-security/securityconfig/roles_mapping.yml`` file and change the following values:
+#. Edit the ``/usr/share/wazuh-indexer/plugins/opensearch-security/securityconfig/roles_mapping.yml`` file and change the following values:
      
    To configure the ``roles_mapping.yml`` file, we map the ``Department`` field from step 3 to the ``all_access`` role on Wazuh indexer. In this case, ``wazuh-admin``:
 
