@@ -13,4 +13,4 @@ Listing agents
 
         using-command-line
         listing
-        wazuh-app
+        wazuh-dashboard
