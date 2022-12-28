@@ -156,7 +156,7 @@ Edit the Wazuh indexer security configuration files. We recommend that you back 
 
    - Include a ``saml_auth_domain`` configuration under the ``authc`` section similar to the following:
 
-   .. code-block:: console
+   .. code-block:: yaml
       :emphasize-lines: 7,10,22,23,25,26,27,28
 
           authc:

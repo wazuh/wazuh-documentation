@@ -239,7 +239,7 @@ Edit the Wazuh indexer security configuration files. We recommend that you back 
    - Set the ``order`` in ``basic_internal_auth_domain`` to ``0``, and set the ``challenge`` flag to ``false``.  
    - Include a ``saml_auth_domain`` configuration under the ``authc`` section similar to the following:
 
-   .. code-block:: console
+   .. code-block:: yaml
       :emphasize-lines: 7,10,22,23,25,26,27,28,29
 
           authc:
@@ -291,7 +291,7 @@ Edit the Wazuh indexer security configuration files. We recommend that you back 
 
       # export JAVA_HOME=/usr/share/wazuh-indexer/jdk/ && bash /usr/share/wazuh-indexer/plugins/opensearch-security/tools/securityadmin.sh -f /etc/wazuh-indexer/opensearch-security/config.yml -icl -key /etc/wazuh-indexer/certs/admin-key.pem -cert /etc/wazuh-indexer/certs/admin.pem -cacert /etc/wazuh-indexer/certs/root-ca.pem -h localhost -nhnv
 
-   The "-h" flag specifies the hostname or the IP address of the Wazuh indexer node. Note that this command uses localhost, set your Wazuh indexer address if necessary.
+   The ``-h`` flag specifies the hostname or the IP address of the Wazuh indexer node. Note that this command uses localhost, set your Wazuh indexer address if necessary.
 
    The command output must be similar to the following:
 
@@ -333,7 +333,7 @@ Edit the Wazuh indexer security configuration files. We recommend that you back 
 
       # export JAVA_HOME=/usr/share/wazuh-indexer/jdk/ && bash /usr/share/wazuh-indexer/plugins/opensearch-security/tools/securityadmin.sh -f /etc/wazuh-indexer/opensearch-security/roles_mapping.yml -icl -key /etc/wazuh-indexer/certs/admin-key.pem -cert /etc/wazuh-indexer/certs/admin.pem -cacert /etc/wazuh-indexer/certs/root-ca.pem -h localhost -nhnv
 
-The "-h" flag specifies the hostname or the IP address of the Wazuh indexer node. Note that this command uses localhost, set your Wazuh indexer address if necessary.
+The ``-h`` flag specifies the hostname or the IP address of the Wazuh indexer node. Note that this command uses localhost, set your Wazuh indexer address if necessary.
 
 The command output must be similar to the following:
 

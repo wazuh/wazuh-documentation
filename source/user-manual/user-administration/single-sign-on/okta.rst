@@ -42,7 +42,9 @@ Okta Configuration
           :align: center
           :width: 80%
          
-#. Create a new group. Navigate to **Directory** > **Groups** and add a group.
+#. Create a new group. 
+
+   Navigate to **Directory** > **Groups** and add a group.
    
      .. thumbnail:: /images/single-sign-on/okta/04-navigate-to-directory-groups.png
         :title: Navigate to directory groups
@@ -94,11 +96,6 @@ Okta Configuration
          :title: SAML settings section
          :align: center
          :width: 80%
-
-      .. thumbnail:: /images/single-sign-on/okta/09b-other-requestable-sso-urls.png
-         :title: Other Requestable SSO URLs
-         :align: center
-         :width: 80%        
 
       .. thumbnail:: /images/single-sign-on/okta/09b-saml-settings-section.png
          :title: SAML settings section
@@ -167,7 +164,7 @@ Edit the Wazuh indexer security configuration files. We recommend that you back 
 
    - Include a ``saml_auth_domain`` configuration under the ``authc`` section similar to the following:
 
-   .. code-block:: console
+   .. code-block:: yaml
       :emphasize-lines: 7,10,22,23,25,26,27,28
 
           authc:
