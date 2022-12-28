@@ -9,7 +9,8 @@ OneLogin
 ========
 
 `OneLogin <hhttps://www.onelogin.com>`__ is a cloud-based identity and access management provider that provides a unified access management platform to enterprise-level businesses and organizations. In this guide, we integrate the OneLogin SSO to authenticate users into the Wazuh platform. 
-The single sign-on integration process is divided into three stages.
+
+There are three stages in the single sign-on integration.
 
 #. OneLogin Configuration
 #. Wazuh indexer configuration
@@ -52,7 +53,7 @@ OneLogin Configuration
          :align: center
          :width: 80%
 
-   #. Search for **SAML Custom Connector (Advanced)** application. In **Display Name**,  assign a name. In our case, we assigned the name ``Wazuh``. Navigate to the Configuration tab and fill in the information:
+   #. Search for **SAML Custom Connector (Advanced)** application. In **Display Name**,  assign a name. In our case, we assigned the name ``Wazuh``. Navigate to the **Configuration** tab and fill in the information:
 
       - **Audience (EntityID)**: ``wazuh-saml``
       - **Recipient**: ``https://<WAZUH_DASHBOARD_URL>/_opendistro/_security/saml/acs``
@@ -131,7 +132,7 @@ OneLogin Configuration
 
    #. The ``roles_key`` is the name of the parameter added in the **Wazuh** app. In our example, this is ``Roles``. 
 
-   #. Finally, to obtain the ``exchange_key``, go to the **SSO** tab of the **Wazuh** app and select **View Details** in ``X.509 Certificate``. Copy the blob of the certificate excluding the ``-----BEGIN CERTIFICATE-----`` and ``-----END CERTIFICATE-----`` lines:
+   #. Finally, to obtain the ``exchange_key``, go to the **SSO** tab of the **Wazuh** app and select **View Details** in **X.509 Certificate**. Copy the blob of the certificate excluding the ``-----BEGIN CERTIFICATE-----`` and ``-----END CERTIFICATE-----`` lines:
 
       .. thumbnail:: /images/single-sign-on/onelogin/13-go-to-the-sso-tab.png
          :title: Go to the SSO tab of the Wazuh app and select View Details in X.509 Certificate
@@ -141,7 +142,13 @@ OneLogin Configuration
 Wazuh indexer configuration
 ---------------------------
 
-Edit the Wazuh indexer security configuration files. It is recommended to back up these files before the configuration is carried out.
+Edit the Wazuh indexer security configuration files. We recommend that you back up these files before you carry out the configuration.
+
+#. Place the ``metadata_onelogin.xml`` file within the ``/usr/share/wazuh-indexer/plugins/opensearch-security/securityconfig/`` directory. Set the file ownership to ``wazuh-indexer`` using the following command:
+
+   .. code-block:: console
+
+      # chown wazuh-indexer:wazuh-indexer /usr/share/wazuh-indexer/plugins/opensearch-security/securityconfig/metadata_onelogin.xml
 
 #. Edit the ``/usr/share/wazuh-indexer/plugins/opensearch-security/securityconfig/config.yml`` file and change the following values:
 
@@ -179,7 +186,7 @@ Edit the Wazuh indexer security configuration files. It is recommended to back u
                     entity_id: wazuh-saml
                   kibana_url: https://<WAZUH_DASHBOARD_ADDRESS>
                   roles_key: Roles
-                  exchange_key: 'X.509 Certificate'
+                  exchange_key: 'MIIBkjCB/AIBADBTMQswCQ......'
               authentication_backend:
                 type: noop
       ...
@@ -199,7 +206,7 @@ Edit the Wazuh indexer security configuration files. It is recommended to back u
 
       # export JAVA_HOME=/usr/share/wazuh-indexer/jdk/ && bash /usr/share/wazuh-indexer/plugins/opensearch-security/tools/securityadmin.sh -f /usr/share/wazuh-indexer/plugins/opensearch-security/securityconfig/config.yml -icl -key /etc/wazuh-indexer/certs/admin-key.pem -cert /etc/wazuh-indexer/certs/admin.pem -cacert /etc/wazuh-indexer/certs/root-ca.pem -h localhost -nhnv
 
-   The ``-h`` flag is used to specify the hostname or the IP address of the Wazuh indexer node. Note that this command uses localhost, set your Wazuh indexer address if necessary.
+   The ``-h`` flag specifies the hostname or the IP address of the Wazuh indexer node. Note that this command uses localhost, set your Wazuh indexer address if necessary.
 
    The command output must be similar to the following:
 
@@ -223,9 +230,10 @@ Edit the Wazuh indexer security configuration files. It is recommended to back u
    
 #. Edit ``/usr/share/wazuh-indexer/plugins/opensearch-security/securityconfig/roles_mapping.yml`` file and change the following values:
      
-   To configure the ``roles_mapping.yml`` file, we map the ``Department`` field from step 3 to the admin role on the Wazuh indexer. In this case, ``wazuh-admin``:
+   To configure the ``roles_mapping.yml`` file, we map the ``Department`` field from step 3 to the ``all_access`` role on Wazuh indexer. In this case, ``wazuh-admin``:
 
    .. code-block:: console 
+      :emphasize-lines: 7
          
       ...
       all_access:
@@ -243,7 +251,7 @@ Edit the Wazuh indexer security configuration files. It is recommended to back u
           
       # export JAVA_HOME=/usr/share/wazuh-indexer/jdk/ && bash /usr/share/wazuh-indexer/plugins/opensearch-security/tools/securityadmin.sh -f /usr/share/wazuh-indexer/plugins/opensearch-security/securityconfig/roles_mapping.yml -icl -key /etc/wazuh-indexer/certs/admin-key.pem -cert /etc/wazuh-indexer/certs/admin.pem -cacert /etc/wazuh-indexer/certs/root-ca.pem -h localhost -nhnv
 
-   The ``-h`` flag is used to specify the hostname or the IP address of the Wazuh indexer node. Note that this command uses localhost, set your Wazuh indexer address if necessary.
+   The ``-h`` flag specifies the hostname or the IP address of the Wazuh indexer node. Note that this command uses localhost, set your Wazuh indexer address if necessary.
 
    The command output must be similar to the following:
 
@@ -271,7 +279,7 @@ Wazuh dashboard configuration
 
 #. Edit the Wazuh dashboard configuration file.
 
-   Add these configurations to ``/etc/wazuh-dashboard/opensearch_dashboards.yml``. It is recommended to back up this file before the configuration is changed.
+   Add these configurations to ``/etc/wazuh-dashboard/opensearch_dashboards.yml``. We recommend that you back up these files before you carry out the configuration.
 
    .. code-block:: console  
 
@@ -281,7 +289,7 @@ Wazuh dashboard configuration
    .. note::
       :class: not-long
 
-      *For versions 4.3.9 and earlier*, also replace ``path: `/auth/logout``` with ``path: `/logout``` in ``/usr/share/wazuh-dashboard/plugins/securityDashboards/server/auth/types/saml/routes.js``.
+      *For versions 4.3.9 and earlier*, also replace ``path: `/auth/logout``` with ``path: `/logout``` in ``/usr/share/wazuh-dashboard/plugins/securityDashboards/server/auth/types/saml/routes.js``. We recommend that you back up these files before you carry out the configuration.
 
       .. code-block:: console
          :emphasize-lines: 3

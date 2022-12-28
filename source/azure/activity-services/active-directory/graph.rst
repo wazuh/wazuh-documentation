@@ -45,45 +45,45 @@ In the **Azure Active Directory** panel, select the option **App registrations**
 Giving permissions to the application
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-1. Go to the **Overview** section and save the **Application (client) ID** for later authentication.
+#. Go to the **Overview** section and save the **Application (client) ID** for later authentication.
 
-.. thumbnail:: ../../../images/azure/graph-2.png
-    :title: AAD
-    :align: center
-    :width: 75%
+    .. thumbnail:: ../../../images/azure/graph-2.png
+        :title: AAD
+        :align: center
+        :width: 75%
 
-2. Go to the **API permissions** section and select the **Add a permission** option.
+#. Go to the **API permissions** section and select the **Add a permission** option.
 
-.. thumbnail:: ../../../images/azure/graph-3.png
-    :title: AAD
-    :align: center
-    :width: 100%
+    .. thumbnail:: ../../../images/azure/graph-3.png
+        :title: AAD
+        :align: center
+        :width: 100%
 
-3. Select the API by searching for "Microsoft Graph".
+#. Select the API by searching for "Microsoft Graph".
 
-.. thumbnail:: ../../../images/azure/graph-4.png
-    :title: AAD
-    :align: center
-    :width: 100%
+    .. thumbnail:: ../../../images/azure/graph-4.png
+        :title: AAD
+        :align: center
+        :width: 100%
 
-1. Select the permissions in **Applications permissions** that adapt to our infrastructure. In this case, **AuditLog** permissions will be granted. Then, click **Add permissions**.
+#. Select the permissions in **Applications permissions** that adapt to our infrastructure. In this case, **AuditLog** permissions will be granted. Then, click **Add permissions**.
 
-.. thumbnail:: ../../../images/azure/graph-5.png
-    :title: AAD
-    :align: center
-    :width: 100%
+    .. thumbnail:: ../../../images/azure/graph-5.png
+        :title: AAD
+        :align: center
+        :width: 100%
 
-5. Grant admin consent for the tenant domain used for the permission added in the previous step. This must be done by an admin user.
+#. Grant admin consent for the tenant domain used for the permission added in the previous step. This must be done by an admin user.
 
-.. thumbnail:: ../../../images/azure/graph-6.png
-    :title: AAD
-    :align: center
-    :width: 100%
+    .. thumbnail:: ../../../images/azure/graph-6.png
+        :title: AAD
+        :align: center
+        :width: 100%
 
-.. thumbnail:: ../../../images/azure/graph-7.png
-    :title: AAD
-    :align: center
-    :width: 100%
+    .. thumbnail:: ../../../images/azure/graph-7.png
+        :title: AAD
+        :align: center
+        :width: 100%
 
 Obtaining the application key for authentication
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
