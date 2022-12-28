@@ -42,7 +42,9 @@ Okta Configuration
           :align: center
           :width: 80%
          
-#. Create a new group. Navigate to **Directory** > **Groups** and add a group.
+#. Create a new group. 
+
+   Navigate to **Directory** > **Groups** and add a group.
    
      .. thumbnail:: /images/single-sign-on/okta/04-navigate-to-directory-groups.png
         :title: Navigate to directory groups
@@ -86,7 +88,7 @@ Okta Configuration
    
       - **Single sign on URL**: input ``https://<WAZUH_DASHBOARD_URL>/_opendistro/_security/saml/acs/idpinitiated`` and replace the ``<WAZUH_DASHBOARD_URL>`` field with the corresponding URL.
       - **Audience URI (SP Entity ID)**: input ``wazuh-saml``. This is the ``SP Entity ID`` value which will be used later in the ``config.yml`` on the Wazuh indexer instance.
-      - **Other Requestable SSO URLs**: click on Show Advanced Settings to access this option. Input ``https://<WAZUH_DASHBOARD_URL>/_opendistro/_security/saml/acs/`` and replace the ``<WAZUH_DASHBOARD_URL>`` field with the corresponding URL.
+      - **Other Requestable SSO URLs**: click on **Show Advanced Settings** to access this option. Input ``https://<WAZUH_DASHBOARD_URL>/_opendistro/_security/saml/acs/`` and replace the ``<WAZUH_DASHBOARD_URL>`` field with the corresponding URL.
 
       You can leave the rest of the values as default.
 
@@ -162,7 +164,7 @@ Edit the Wazuh indexer security configuration files. We recommend that you back 
 
    - Include a ``saml_auth_domain`` configuration under the ``authc`` section similar to the following:
 
-   .. code-block:: console
+   .. code-block:: yaml
       :emphasize-lines: 7,10,22,23,25,26,27,28
 
           authc:
