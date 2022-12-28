@@ -100,6 +100,11 @@ Okta Configuration
          :align: center
          :width: 80%        
 
+      .. thumbnail:: /images/single-sign-on/okta/09b-saml-settings-section.png
+         :title: SAML settings section
+         :align: center
+         :width: 80% 
+
    #. In the **Group Attribute Statements** section put ``Roles`` as the name. The value for ``Roles`` will be used as the ``roles_key`` parameter in the Wazuh indexer configuration. For the filter field, select **Matches regex** and type ``.*``. 
 
       .. thumbnail:: /images/single-sign-on/okta/10-group-attribute-statements-section.png
@@ -114,18 +119,19 @@ Okta Configuration
          :align: center
          :width: 80%   
 
-#. Add the new app to the new group. Navigate to **Directory** > **Groups**  and select your group. Click on **Applications** and select **Assign Applications**. From here, assign the app created in step 5 and click on **Done** to save the changes.
+#. Add the new app to the new group. 
+
+   Navigate to **Directory** > **Groups**  and select your group. Click on **Applications** and select **Assign Applications**. From here, assign the app created in step 5 and click on **Done** to save the changes.
    
+   .. thumbnail:: /images/single-sign-on/okta/13-navigate-to-directory-groups.png
+      :title: Navigate to Directory - Groups - <YOUR_GROUP>
+      :align: center
+      :width: 80%   
+
    .. thumbnail:: /images/single-sign-on/okta/12-select-assign-applications.png
       :title: Select Assign Applications
       :align: center
       :width: 80%
-
-   .. thumbnail:: /images/single-sign-on/okta/13-navigate-to-directory-groups.png
-      :title: Navigate to Directory - Groups - <YOUR_GROUP>
-      :align: center
-      :width: 80%
-
 
 #. Note the necessary parameters from the SAML settings of the new app.
 
@@ -294,7 +300,7 @@ Wazuh dashboard configuration
    .. note::
       :class: not-long
 
-      *For versions 4.3.9 and earlier*, also replace ``path: `/auth/logout``` with ``path: `/logout``` in ``/usr/share/wazuh-dashboard/plugins/securityDashboards/server/auth/types/saml/routes.js``.
+      *For versions 4.3.9 and earlier*, also replace ``path: `/auth/logout``` with ``path: `/logout``` in ``/usr/share/wazuh-dashboard/plugins/securityDashboards/server/auth/types/saml/routes.js``. We recommend that you back up these files before you carry out the configuration.
 
       .. code-block:: console
          :emphasize-lines: 3

@@ -97,8 +97,8 @@ PingOne Configuration
     
    #. Take note of the following parameters from the configuration page of the application. This information will be used in the next step. 
 
-      - **ISSUER ID**: It'll be in the form “https://auth.pingone.com/....”
-      - **IDP METADATA URL**: It’ll be in the form “https://auth.pingone.com/....”
+      - **ISSUER ID**: It'll be in the form \https://auth.pingone.com/...
+      - **IDP METADATA URL**: It’ll be in the form \https://auth.pingone.com/...
       - ``exchange_key``: If you open IDP **IDP METADATA URL** you'll find the X509 Certificate  section, this will be used as the ``exchange_key``.
 
       .. thumbnail:: /images/single-sign-on/pingone/09-take-note-of-parameters.png
@@ -159,8 +159,6 @@ Edit the Wazuh indexer security configuration files. We recommend that you back 
                   exchange_key: 'MIIJ6DLSAAbAmAJHSgIWYia.........'
               authentication_backend:
                 type: noop
-
-          
 
    Ensure to change the following parameters to their corresponding value:
 
@@ -261,7 +259,7 @@ Wazuh dashboard configuration
    .. note::
       :class: not-long
 
-      *For versions 4.3.9 and earlier*, also replace ``path: `/auth/logout``` with ``path: `/logout``` in ``/usr/share/wazuh-dashboard/plugins/securityDashboards/server/auth/types/saml/routes.js``.
+      *For versions 4.3.9 and earlier*, also replace ``path: `/auth/logout``` with ``path: `/logout``` in ``/usr/share/wazuh-dashboard/plugins/securityDashboards/server/auth/types/saml/routes.js``. We recommend that you back up these files before you carry out the configuration.
 
       .. code-block:: console
          :emphasize-lines: 3

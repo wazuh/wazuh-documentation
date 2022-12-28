@@ -53,7 +53,7 @@ OneLogin Configuration
          :align: center
          :width: 80%
 
-   #. Search for **SAML Custom Connector (Advanced)** application. In **Display Name**,  assign a name. In our case, we assigned the name ``Wazuh``. Navigate to the Configuration tab and fill in the information:
+   #. Search for **SAML Custom Connector (Advanced)** application. In **Display Name**,  assign a name. In our case, we assigned the name ``Wazuh``. Navigate to the **Configuration** tab and fill in the information:
 
       - **Audience (EntityID)**: ``wazuh-saml``
       - **Recipient**: ``https://<WAZUH_DASHBOARD_URL>/_opendistro/_security/saml/acs``
@@ -132,7 +132,7 @@ OneLogin Configuration
 
    #. The ``roles_key`` is the name of the parameter added in the **Wazuh** app. In our example, this is ``Roles``. 
 
-   #. Finally, to obtain the ``exchange_key``, go to the **SSO** tab of the **Wazuh** app and select **View Details** in ``X.509 Certificate``. Copy the blob of the certificate excluding the ``-----BEGIN CERTIFICATE-----`` and ``-----END CERTIFICATE-----`` lines:
+   #. Finally, to obtain the ``exchange_key``, go to the **SSO** tab of the **Wazuh** app and select **View Details** in **X.509 Certificate**. Copy the blob of the certificate excluding the ``-----BEGIN CERTIFICATE-----`` and ``-----END CERTIFICATE-----`` lines:
 
       .. thumbnail:: /images/single-sign-on/onelogin/13-go-to-the-sso-tab.png
          :title: Go to the SSO tab of the Wazuh app and select View Details in X.509 Certificate
@@ -228,7 +228,6 @@ Edit the Wazuh indexer security configuration files. We recommend that you back 
       Will update '/config' with /etc/wazuh-indexer/opensearch-security/config.yml 
          SUCC: Configuration for 'config' created or updated
       Done with success
-
    
 #. Edit the ``/etc/wazuh-indexer/opensearch-security/roles_mapping.yml`` file and change the following values:
      
@@ -291,7 +290,7 @@ Wazuh dashboard configuration
    .. note::
       :class: not-long
 
-      *For versions 4.3.9 and earlier*, also replace ``path: `/auth/logout``` with ``path: `/logout``` in ``/usr/share/wazuh-dashboard/plugins/securityDashboards/server/auth/types/saml/routes.js``.
+      *For versions 4.3.9 and earlier*, also replace ``path: `/auth/logout``` with ``path: `/logout``` in ``/usr/share/wazuh-dashboard/plugins/securityDashboards/server/auth/types/saml/routes.js``. We recommend that you back up these files before you carry out the configuration.
 
       .. code-block:: console
          :emphasize-lines: 3

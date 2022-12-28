@@ -205,6 +205,7 @@ Edit the Wazuh indexer security configuration files. We recommend that you back 
    Map the ``Department`` field value that was obtained in Google IdP to the ``all_access`` role in the Wazuh indexer:
 
    .. code-block:: console
+      :emphasize-lines: 6
 
       all_access:
         reserved: false
@@ -258,7 +259,7 @@ Wazuh dashboard configuration
    .. note::
       :class: not-long
 
-      *For versions 4.3.9 and earlier*, also replace ``path: `/auth/logout``` with ``path: `/logout``` in ``/usr/share/wazuh-dashboard/plugins/securityDashboards/server/auth/types/saml/routes.js``.
+      *For versions 4.3.9 and earlier*, also replace ``path: `/auth/logout``` with ``path: `/logout``` in ``/usr/share/wazuh-dashboard/plugins/securityDashboards/server/auth/types/saml/routes.js``. We recommend that you back up these files before you carry out the configuration.
 
       .. code-block:: console
          :emphasize-lines: 3
@@ -269,7 +270,7 @@ Wazuh dashboard configuration
                validate: false
          ...
 
-#. Restart the Wazuh dashboard service.
+#. Restart the Wazuh dashboard service using this command:
 
    .. include:: /_templates/common/restart_dashboard.rst
 
