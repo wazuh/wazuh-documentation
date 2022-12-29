@@ -97,8 +97,8 @@ Okta Configuration
          :align: center
          :width: 80%
 
-      .. thumbnail:: /images/single-sign-on/okta/09b-saml-settings-section.png
-         :title: SAML settings section
+      .. thumbnail:: /images/single-sign-on/okta/09b-other-requestable-sso-urls.png
+         :title: Other Requestable SSO URLs
          :align: center
          :width: 80% 
 
