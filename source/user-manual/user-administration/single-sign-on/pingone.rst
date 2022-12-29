@@ -247,9 +247,7 @@ Edit the Wazuh indexer security configuration files. We recommend that you back 
 Wazuh dashboard configuration
 -----------------------------
 
-#. Edit the Wazuh dashboard configuration file.
-
-   Add these configurations to ``/etc/wazuh-dashboard/opensearch_dashboards.yml``. We recommend that you back up these files before you carry out the configuration.
+#. Edit the Wazuh dashboard configuration file. Add these configurations to ``/etc/wazuh-dashboard/opensearch_dashboards.yml``. We recommend that you back up these files before you carry out the configuration.
 
    .. code-block:: console  
 
@@ -274,6 +272,4 @@ Wazuh dashboard configuration
 
    .. include:: /_templates/common/restart_dashboard.rst
 
-#. Test the configuration.
-   
-   To test the configuration, go to your Wazuh dashboard URL and log in with your Ping One account. 
+#. Test the configuration. Go to your Wazuh dashboard URL and log in with your Ping One account. 

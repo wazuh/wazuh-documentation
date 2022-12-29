@@ -134,9 +134,7 @@ Azure Active Directory Configuration
          :align: center
          :width: 80%
 
-#. Note the necessary parameters.
-
-   In the **Enterprise applications** menu, select your application and then click on **Single sign-on**. Note some parameters that will be used in the Wazuh indexer configuration.
+#. Note the necessary parameters. In the **Enterprise applications** menu, select your application and then click on **Single sign-on**. Note some parameters that will be used in the Wazuh indexer configuration.
 
    - In option 3 **SAML Certificate**, the **App Federation Metadata Url** will be the ``idp.metadata_url`` in the Wazuh indexer configuration file.
 
@@ -281,9 +279,7 @@ Edit the Wazuh indexer security configuration files. We recommend that you back 
 Wazuh dashboard configuration
 -----------------------------
 
-#. Edit the Wazuh dashboard configuration file.
-
-   Add these configurations to ``/etc/wazuh-dashboard/opensearch_dashboards.yml``. We recommend that you back up these files before you carry out the configuration.
+#. Edit the Wazuh dashboard configuration file. Add these configurations to ``/etc/wazuh-dashboard/opensearch_dashboards.yml``. We recommend that you back up these files before you carry out the configuration.
 
    .. code-block:: console  
 
@@ -308,6 +304,4 @@ Wazuh dashboard configuration
 
    .. include:: /_templates/common/restart_dashboard.rst
 
-#. Test the configuration.
-   
-   To test the configuration, go to your Wazuh dashboard URL and log in with your Microsoft account. 
+#. Test the configuration. Go to your Wazuh dashboard URL and log in with your Microsoft account. 

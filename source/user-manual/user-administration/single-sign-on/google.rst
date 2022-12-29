@@ -19,9 +19,7 @@ There are three stages in the single sign-on integration.
 Google Configuration
 --------------------
 
-#. Create an account in Google Workspace.
-
-   A Google Workspace account is required for this configuration. Request a free trial if you don't have a paid license.
+#. Create an account in Google Workspace. A Google Workspace account is required for this configuration. Request a free trial if you don't have a paid license.
 
 #. Go to https://admin.google.com/ac/apps/unified and sign in with your Google Admin account.
 #. Create an app with **Add custom SAML app**.
@@ -247,9 +245,7 @@ Edit the Wazuh indexer security configuration files. We recommend that you back 
 Wazuh dashboard configuration
 -----------------------------
 
-#. Edit the Wazuh dashboard configuration file.
-
-   Add these configurations to ``/etc/wazuh-dashboard/opensearch_dashboards.yml``. We recommend that you back up these files before you carry out the configuration.
+#. Edit the Wazuh dashboard configuration file. Add these configurations to ``/etc/wazuh-dashboard/opensearch_dashboards.yml``. We recommend that you back up these files before you carry out the configuration.
 
    .. code-block:: console  
 
@@ -274,6 +270,4 @@ Wazuh dashboard configuration
 
    .. include:: /_templates/common/restart_dashboard.rst
 
-#. Test the configuration.
-   
-   To test the configuration, go to your Wazuh dashboard URL and log in with your Google Workspace account. 
+#. Test the configuration. Go to your Wazuh dashboard URL and log in with your Google Workspace account. 
