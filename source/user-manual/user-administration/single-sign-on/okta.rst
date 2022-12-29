@@ -114,9 +114,7 @@ Okta Configuration
          :align: center
          :width: 80%   
 
-#. Add the new app to the new group. 
-
-   Navigate to **Directory** > **Groups**  and select your group. Click on **Applications** and select **Assign Applications**. From here, assign the app created in step 5 and click on **Done** to save the changes.
+#. Add the new app to the new group. Navigate to **Directory** > **Groups**  and select your group. Click on **Applications** and select **Assign Applications**. From here, assign the app created in step 5 and click on **Done** to save the changes.
    
    .. thumbnail:: /images/single-sign-on/okta/13-navigate-to-directory-groups.png
       :title: Navigate to Directory - Groups - <YOUR_GROUP>
@@ -128,9 +126,7 @@ Okta Configuration
       :align: center
       :width: 80%
 
-#. Note the necessary parameters from the SAML settings of the new app.
-
-   The parameters already obtained during the integration are:
+#. Note the necessary parameters from the SAML settings of the new app. The parameters already obtained during the integration are:
 
    - ``sp.entity_id``: ``wazuh-saml``
    - ``roles_key``: ``Roles``
