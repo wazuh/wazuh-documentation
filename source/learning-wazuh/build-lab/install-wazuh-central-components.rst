@@ -18,9 +18,7 @@ To set your Learning Wazuh environment, you can install the Wazuh central compon
 
 Check our :ref:`Installation guide <installation_guide>` for more details and other installation options.
 
-.. note::
-   
-   Root user privileges are required to execute all the commands below.
+.. note:: You need root user privileges to run all the commands described below.
 
 Install Wazuh using the Wazuh installation assistant
 ----------------------------------------------------

@@ -16,7 +16,8 @@ Before we get started with Puppet, confirm that the following network requiremen
 - **Firewall open ports**: The Puppet master must be reachable on TCP port 8140.
 
 .. note::
-    This guide has been made using Puppet version 7.16. Root user privileges are required to execute all the commands described below.
+
+   We made this guide using Puppet version 7.16. You need root user privileges to run all the commands described below.
 
 .. topic:: Contents
 

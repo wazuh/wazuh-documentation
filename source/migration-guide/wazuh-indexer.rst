@@ -10,7 +10,7 @@ Migrating to the Wazuh indexer
 
 Follow this guide to migrate from Open Distro for Elasticsearch 1.13 to the Wazuh indexer. These instructions are intended for a standard Wazuh installation, you may need to make some changes to adapt them to your environment.
 
-.. note:: Root user privileges are required to execute all the commands described below.
+.. note:: You need root user privileges to run all the commands described below.
 
 #. Disable shard allocation to prevent Elasticsearch from replicating shards as you shut down nodes. Replace ``<elasticsearch_IP>`` with your Elasticsearch IP address or hostname, and ``<username>:<password>`` with your Elasticsearch username and password.  
 

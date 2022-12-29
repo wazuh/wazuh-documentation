@@ -14,7 +14,7 @@ The installation process is divided into two stages.
 
 #. Cluster configuration for multi-node deployment 
 
-.. note:: Root user privileges are required to run the commands described below.
+.. note:: You need root user privileges to run all the commands described below.
 
 1. Wazuh server node installation
 ----------------------------------

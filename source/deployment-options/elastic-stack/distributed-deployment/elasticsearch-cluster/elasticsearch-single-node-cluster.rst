@@ -10,8 +10,7 @@ Elasticsearch single-node cluster
 
 This document will explain how to install the Elastic Stack components in a single-node cluster.
 
-.. note:: Root user privileges are necessary to execute all the commands described below.
-
+.. note:: You need root user privileges to run all the commands described below.
 
 Installing Elasticsearch
 ------------------------

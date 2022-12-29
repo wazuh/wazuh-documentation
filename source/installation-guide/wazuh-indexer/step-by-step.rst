@@ -17,7 +17,7 @@ The installation process is divided into three stages.
 #. Cluster initialization
 
 
-.. note:: Root user privileges are required to run the commands described below.
+.. note:: You need root user privileges to run all the commands described below.
 
 1. Certificates creation
 ------------------------

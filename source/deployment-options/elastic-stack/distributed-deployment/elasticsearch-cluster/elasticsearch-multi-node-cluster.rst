@@ -12,8 +12,7 @@ Elasticsearch is a highly scalable full-text search and analytics engine. This d
 
 For resilience, in case Elasticsearch nodes become unavailable, it is recommended to have an odd number of master eligible nodes, please take this into consideration when deciding the configuration of your Elasticsearch cluster. 
 
-.. note:: Root user privileges are necessary to execute all the commands described below.
-
+.. note:: You need root user privileges to run all the commands described below.
 
 Installing Elasticsearch
 ------------------------

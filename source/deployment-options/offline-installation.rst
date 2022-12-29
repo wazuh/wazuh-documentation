@@ -10,9 +10,7 @@ You can install Wazuh even when there is no connection to the Internet. Installi
 
 For more information about the hardware requirements and the recommended operating systems, check the :ref:`Requirements <installation_requirements>` section.
 
-.. note::
-
-    Root privileges are required to execute all the commands.
+.. note:: You need root user privileges to run all the commands described below.
 
 Prerequisites
 -------------

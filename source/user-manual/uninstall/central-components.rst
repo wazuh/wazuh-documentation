@@ -18,7 +18,7 @@ This will remove the Wazuh indexer, the Wazuh server, and the Wazuh dashboard.
 
 If you want to uninstall one specific central component, follow the instructions below.
 
-.. note:: Root user privileges are required to execute all the commands described below.
+.. note:: You need root user privileges to run all the commands described below.
 
 .. _uninstall_dashboard:
 

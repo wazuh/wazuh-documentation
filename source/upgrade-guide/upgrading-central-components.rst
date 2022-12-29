@@ -8,9 +8,7 @@ Wazuh central components
 
 This section guides through the upgrade process of the Wazuh indexer, the Wazuh server, and the Wazuh dashboard. To migrate from Open Distro for Elasticsearch 1.13 to the Wazuh indexer and dashboard components, read the corresponding :doc:`/migration-guide/wazuh-indexer` and :doc:`/migration-guide/wazuh-dashboard` sections.
 
-.. note::
-   
-   Root user privileges are required to execute all the commands described below.
+.. note:: You need root user privileges to run all the commands described below.
 
 Preparing the upgrade
 ---------------------
