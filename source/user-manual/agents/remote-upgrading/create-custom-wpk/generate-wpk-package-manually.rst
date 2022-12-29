@@ -28,17 +28,20 @@ Linux WPK
 
 #. Install the development tools and compilers. In Linux, this can easily be done using your distribution package manager. 
 
-   - For RPM-based distributions:
+.. tabs::
+
+   .. group-tab:: Yum
 
       .. code-block:: console
-      
-        # yum install make gcc policycoreutils-python automake autoconf libtool unzip
 
-   - For Debian-based distributions:
+         # yum install make gcc policycoreutils-python automake autoconf libtool unzip
+
+   .. group-tab:: APT
 
       .. code-block:: console
-      
-        # apt-get install make gcc libc6-dev curl policycoreutils automake autoconf libtool unzip
+
+         # apt-get install make gcc libc6-dev curl policycoreutils automake autoconf libtool unzip
+
 
 #. Download and extract the latest version. 
 
@@ -103,17 +106,20 @@ Windows WPK
 
 #. Install the development tools and compilers. In Linux, this can easily be done using your distribution package manager. 
 
-   - For RPM-based distributions:
+.. tabs::
+
+   .. group-tab:: Yum
 
       .. code-block:: console
-      
-        # yum install make gcc policycoreutils-python automake autoconf libtool unzip
 
-   - For Debian-based distributions:
+         # yum install make gcc policycoreutils-python automake autoconf libtool unzip
+
+   .. group-tab:: APT
 
       .. code-block:: console
-      
-        # apt-get install make gcc libc6-dev curl policycoreutils automake autoconf libtool unzip
+
+         # apt-get install make gcc libc6-dev curl policycoreutils automake autoconf libtool unzip
+
 
 #. Download and extract the latest version of Wazuh sources. 
 
@@ -154,17 +160,20 @@ macOS WPK
 
 #. Install development tools and compilers. In Linux, this can easily be done using your distribution package manager.
 
-   - For RPM-based distributions:
+.. tabs::
+
+   .. group-tab:: Yum
 
       .. code-block:: console
-      
-        # yum install make gcc policycoreutils-python automake autoconf libtool unzip
 
-    - For Debian-based distributions:
+         # yum install make gcc policycoreutils-python automake autoconf libtool unzip
+
+   .. group-tab:: APT
 
       .. code-block:: console
 
          # apt-get install make gcc libc6-dev curl policycoreutils automake autoconf libtool unzip
+
 
 #. Download and extract the latest version of Wazuh sources.
 
