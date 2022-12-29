@@ -98,11 +98,6 @@ Okta Configuration
       .. thumbnail:: /images/single-sign-on/okta/09b-other-requestable-sso-urls.png
          :title: Other Requestable SSO URLs
          :align: center
-         :width: 80%        
-
-      .. thumbnail:: /images/single-sign-on/okta/09b-saml-settings-section.png
-         :title: SAML settings section
-         :align: center
          :width: 80% 
 
    #. In the **Group Attribute Statements** section put ``Roles`` as the name. The value for ``Roles`` will be used as the ``roles_key`` parameter in the Wazuh indexer configuration. For the filter field, select **Matches regex** and type ``.*``. 
@@ -119,9 +114,7 @@ Okta Configuration
          :align: center
          :width: 80%   
 
-#. Add the new app to the new group. 
-
-   Navigate to **Directory** > **Groups**  and select your group. Click on **Applications** and select **Assign Applications**. From here, assign the app created in step 5 and click on **Done** to save the changes.
+#. Add the new app to the new group. Navigate to **Directory** > **Groups**  and select your group. Click on **Applications** and select **Assign Applications**. From here, assign the app created in step 5 and click on **Done** to save the changes.
    
    .. thumbnail:: /images/single-sign-on/okta/13-navigate-to-directory-groups.png
       :title: Navigate to Directory - Groups - <YOUR_GROUP>
@@ -133,9 +126,7 @@ Okta Configuration
       :align: center
       :width: 80%
 
-#. Note the necessary parameters from the SAML settings of the new app.
-
-   The parameters already obtained during the integration are:
+#. Note the necessary parameters from the SAML settings of the new app. The parameters already obtained during the integration are:
 
    - ``sp.entity_id``: ``wazuh-saml``
    - ``roles_key``: ``Roles``
@@ -167,7 +158,7 @@ Edit the Wazuh indexer security configuration files. We recommend that you back 
 
    - Include a ``saml_auth_domain`` configuration under the ``authc`` section similar to the following:
 
-   .. code-block:: console
+   .. code-block:: yaml
       :emphasize-lines: 7,10,22,23,25,26,27,28
 
           authc:
@@ -288,9 +279,7 @@ Edit the Wazuh indexer security configuration files. We recommend that you back 
 Wazuh dashboard configuration
 -----------------------------
 
-#. Edit the Wazuh dashboard configuration file.
-
-   Add these configurations to ``/etc/wazuh-dashboard/opensearch_dashboards.yml``. We recommend that you back up these files before you carry out the configuration.
+#. Edit the Wazuh dashboard configuration file. Add these configurations to ``/etc/wazuh-dashboard/opensearch_dashboards.yml``. We recommend that you back up these files before you carry out the configuration.
 
    .. code-block:: console  
 
@@ -315,8 +304,6 @@ Wazuh dashboard configuration
 
    .. include:: /_templates/common/restart_dashboard.rst
 
-#. Test the configuration.
-   
-   To test the configuration, go to your Wazuh dashboard URL and log in with your Okta account. 
+#. Test the configuration. Go to your Wazuh dashboard URL and log in with your Okta account. 
 
 
