@@ -125,7 +125,7 @@ Edit the Wazuh indexer security configuration files. We recommend that you back 
    - Include a ``saml_auth_domain`` configuration under the ``authc`` section similar to the following:
 
 
-   .. code-block:: console
+   .. code-block:: yaml
       :emphasize-lines: 7,10,22,23,25,26,27,28,29,30
 
           authc:
@@ -200,7 +200,7 @@ Edit the Wazuh indexer security configuration files. We recommend that you back 
          SUCC: Configuration for 'config' created or updated
       Done with success
 
-#. Edit ``/usr/share/wazuh-indexer/plugins/opensearch-security/securityconfig/roles_mapping.yml`` file and change the following values:
+#. Edit the ``/usr/share/wazuh-indexer/plugins/opensearch-security/securityconfig/roles_mapping.yml`` file and change the following values:
    
    Map the Group (Role) that is in PingOne to the ``all_access`` role in Wazuh indexer:
 
@@ -248,9 +248,7 @@ Edit the Wazuh indexer security configuration files. We recommend that you back 
 Wazuh dashboard configuration
 -----------------------------
 
-#. Edit the Wazuh dashboard configuration file.
-
-   Add these configurations to ``/etc/wazuh-dashboard/opensearch_dashboards.yml``. We recommend that you back up these files before you carry out the configuration.
+#. Edit the Wazuh dashboard configuration file. Add these configurations to ``/etc/wazuh-dashboard/opensearch_dashboards.yml``. We recommend that you back up these files before you carry out the configuration.
 
    .. code-block:: console  
 
@@ -275,6 +273,4 @@ Wazuh dashboard configuration
 
    .. include:: /_templates/common/restart_dashboard.rst
 
-#. Test the configuration.
-   
-   To test the configuration, go to your Wazuh dashboard URL and log in with your Ping One account. 
+#. Test the configuration. Go to your Wazuh dashboard URL and log in with your Ping One account. 

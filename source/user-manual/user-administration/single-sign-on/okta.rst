@@ -86,7 +86,7 @@ Okta Configuration
    
       - **Single sign on URL**: input ``https://<WAZUH_DASHBOARD_URL>/_opendistro/_security/saml/acs/idpinitiated`` and replace the ``<WAZUH_DASHBOARD_URL>`` field with the corresponding URL.
       - **Audience URI (SP Entity ID)**: input ``wazuh-saml``. This is the ``SP Entity ID`` value which will be used later in the ``config.yml`` on the Wazuh indexer instance.
-      - **Other Requestable SSO URLs**: click on Show Advanced Settings to access this option. Input ``https://<WAZUH_DASHBOARD_URL>/_opendistro/_security/saml/acs/`` and replace the ``<WAZUH_DASHBOARD_URL>`` field with the corresponding URL.
+      - **Other Requestable SSO URLs**: click on **Show Advanced Settings** to access this option. Input ``https://<WAZUH_DASHBOARD_URL>/_opendistro/_security/saml/acs/`` and replace the ``<WAZUH_DASHBOARD_URL>`` field with the corresponding URL.
 
       You can leave the rest of the values as default.
 
@@ -95,10 +95,10 @@ Okta Configuration
          :align: center
          :width: 80%   
 
-      .. thumbnail:: /images/single-sign-on/okta/09b-saml-settings-section.png
-         :title: SAML settings section
+      .. thumbnail:: /images/single-sign-on/okta/09b-other-requestable-sso-urls.png
+         :title: Other Requestable SSO URLs
          :align: center
-         :width: 80% 
+         :width: 80%
 
    #. In the **Group Attribute Statements** section put ``Roles`` as the name. The value for ``Roles`` will be used as the ``roles_key`` parameter in the Wazuh indexer configuration. For the filter field, select **Matches regex** and type ``.*``. 
 
@@ -114,9 +114,7 @@ Okta Configuration
          :align: center
          :width: 80%   
 
-#. Add the new app to the new group. 
-
-   Navigate to **Directory** > **Groups**  and select your group. Click on **Applications** and select **Assign Applications**. From here, assign the app created in step 5 and click on **Done** to save the changes.
+#. Add the new app to the new group. Navigate to **Directory** > **Groups**  and select your group. Click on **Applications** and select **Assign Applications**. From here, assign the app created in step 5 and click on **Done** to save the changes.
    
    .. thumbnail:: /images/single-sign-on/okta/13-navigate-to-directory-groups.png
       :title: Navigate to Directory - Groups - <YOUR_GROUP>
@@ -128,9 +126,7 @@ Okta Configuration
       :align: center
       :width: 80%
 
-#. Note the necessary parameters from the SAML settings of the new app.
-
-   The parameters already obtained during the integration are:
+#. Note the necessary parameters from the SAML settings of the new app. The parameters already obtained during the integration are:
 
    - ``sp.entity_id``: ``wazuh-saml``
    - ``roles_key``: ``Roles``
@@ -156,13 +152,13 @@ Wazuh indexer configuration
 
 Edit the Wazuh indexer security configuration files. We recommend that you back up these files before you carry out the configuration.
 
-#. Edit ``/usr/share/wazuh-indexer/plugins/opensearch-security/securityconfig/config.yml`` file and change the following values: 
+#. Edit the ``/usr/share/wazuh-indexer/plugins/opensearch-security/securityconfig/config.yml`` file and change the following values: 
             
    - Set the ``order`` in ``basic_internal_auth_domain`` to ``0`` and the ``challenge`` flag to ``false``. 
 
    - Include a ``saml_auth_domain`` configuration under the ``authc`` section similar to the following:
 
-   .. code-block:: console
+   .. code-block:: yaml
       :emphasize-lines: 7,10,22,23,25,26,27,28
 
           authc:
@@ -233,7 +229,7 @@ Edit the Wazuh indexer security configuration files. We recommend that you back 
          SUCC: Configuration for 'config' created or updated
       Done with success
    
-#. Edit ``/usr/share/wazuh-indexer/plugins/opensearch-security/securityconfig/roles_mapping.yml`` file and change the following values:
+#. Edit the ``/usr/share/wazuh-indexer/plugins/opensearch-security/securityconfig/roles_mapping.yml`` file and change the following values:
 
    Configure the ``roles_mapping.yml`` file to map the Okta group to the appropriate Wazuh indexer role. In our case, we map it to the  ``all_access`` role:
 
@@ -281,9 +277,7 @@ Edit the Wazuh indexer security configuration files. We recommend that you back 
 Wazuh dashboard configuration
 -----------------------------
 
-#. Edit the Wazuh dashboard configuration file.
-
-   Add these configurations to ``/etc/wazuh-dashboard/opensearch_dashboards.yml``. We recommend that you back up these files before you carry out the configuration.
+#. Edit the Wazuh dashboard configuration file. Add these configurations to ``/etc/wazuh-dashboard/opensearch_dashboards.yml``. We recommend that you back up these files before you carry out the configuration.
 
    .. code-block:: console  
 
@@ -308,8 +302,6 @@ Wazuh dashboard configuration
 
    .. include:: /_templates/common/restart_dashboard.rst
 
-#. Test the configuration.
-   
-   To test the configuration, go to your Wazuh dashboard URL and log in with your Okta account. 
+#. Test the configuration. Go to your Wazuh dashboard URL and log in with your Okta account. 
 
 

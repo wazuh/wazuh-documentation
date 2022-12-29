@@ -17,18 +17,14 @@ There are three stages in the single sign-on integration:
 KeyCloak configuration
 ----------------------
 
-#. Create a new realm.
-
-   Log in to the Keycloak admin console, expand the **master** drop-down menu and click **Add Realm**. Input a name in the **Realm name** field; in our case, this is named ``Wazuh``. Click on **Create** to apply this configuration.
+#. Create a new realm. Log in to the Keycloak admin console, expand the **master** drop-down menu and click **Add Realm**. Input a name in the **Realm name** field; in our case, this is named ``Wazuh``. Click on **Create** to apply this configuration.
 
    .. thumbnail:: /images/single-sign-on/keycloak/01-create-a-new-realm.png
       :title: Create a new realm
       :align: center
       :width: 80%    
  
-#. Create a new client. 
-
-   In the newly created realm, navigate to **Clients > Create Client** and  modify the following parameters:
+#. Create a new client. In the newly created realm, navigate to **Clients > Create Client** and  modify the following parameters:
 
       - **Client type**: select ``SAML`` from the drop-down menu. 
       - **Client ID**: input ``wazuh-saml``. This is the ``SP Entity ID`` value which will be used later in the ``config.yml`` on the Wazuh indexer instance.
@@ -105,9 +101,7 @@ KeyCloak configuration
 
       You can leave the rest of the values as default. Click **Save** to apply the configuration.
 
-#. Create a new role
-   
-   Navigate to **Realm roles > Create role** and complete the section with these parameters:
+#. Create a new role. Navigate to **Realm roles > Create role** and complete the section with these parameters:
 
    - **Role name**: Input ``admin``. This will be our backend role in the Wazuh Indexer configuration.
 
@@ -118,7 +112,7 @@ KeyCloak configuration
 
    Click on **Save** to apply the configuration.
 
-#. Create a new user 
+#. Create a new user. 
 
    #. Navigate to **Users > Add user** and fill in the required information.
 
@@ -138,7 +132,7 @@ KeyCloak configuration
 
       Click on **Save** to apply the configuration.
 
-#. Create a new group and assign the user
+#. Create a new group and assign the user.
 
    #. Go to **Groups > Create group** and assign a name to the group. In our case, this is **Wazuh-admins**.
    
@@ -161,7 +155,7 @@ KeyCloak configuration
          :align: center
          :width: 80% 
 
-#. Configure protocol mapper
+#. Configure protocol mapper.
 
    #. Navigate to **Client scopes > role_list > Mappers > Configure a new mapper**. 
 
@@ -200,7 +194,7 @@ KeyCloak configuration
       - ``roles_key``: ``Roles``
       - ``kibana_url``: ``https://<WAZUH_DASHBOARD_URL>``
 
-   #. To obtain the remaining parameters
+   #. To obtain the remaining parameters.
    
       #. Navigate to **Clients** and select the name of your client. In our case, this is **wazuh-saml**. 
       #. Navigate to **Action > Download adapter config**, and ensure the Format option is **Mod Auth Mellon files**. 
@@ -240,7 +234,7 @@ Edit the Wazuh indexer security configuration files. We recommend that you back 
    - Set the ``order`` in ``basic_internal_auth_domain`` to ``0``, and set the ``challenge`` flag to ``false``.  
    - Include a ``saml_auth_domain`` configuration under the ``authc`` section similar to the following:
 
-   .. code-block:: console
+   .. code-block:: yaml
       :emphasize-lines: 7,10,22,23,25,26,27,28,29
 
           authc:
@@ -293,7 +287,7 @@ Edit the Wazuh indexer security configuration files. We recommend that you back 
       # export JAVA_HOME=/usr/share/wazuh-indexer/jdk/ && bash /usr/share/wazuh-indexer/plugins/opensearch-security/tools/securityadmin.sh -f /usr/share/wazuh-indexer/plugins/opensearch-security/securityconfig/config.yml -icl -key /etc/wazuh-indexer/certs/admin-key.pem -cert /etc/wazuh-indexer/certs/admin.pem -cacert /etc/wazuh-indexer/certs/root-ca.pem -h localhost -nhnv
 
 
-   The "-h" flag specifies the hostname or the IP address of the Wazuh indexer node. Note that this command uses localhost, set your Wazuh indexer address if necessary.
+   The ``-h`` flag specifies the hostname or the IP address of the Wazuh indexer node. Note that this command uses localhost, set your Wazuh indexer address if necessary.
 
    The command output must be similar to the following:
 
@@ -336,7 +330,7 @@ Edit the Wazuh indexer security configuration files. We recommend that you back 
 
       # export JAVA_HOME=/usr/share/wazuh-indexer/jdk/ && bash /usr/share/wazuh-indexer/plugins/opensearch-security/tools/securityadmin.sh -f /usr/share/wazuh-indexer/plugins/opensearch-security/securityconfig/roles_mapping.yml -icl -key /etc/wazuh-indexer/certs/admin-key.pem -cert /etc/wazuh-indexer/certs/admin.pem -cacert /etc/wazuh-indexer/certs/root-ca.pem -h localhost -nhnv
 
-The "-h" flag specifies the hostname or the IP address of the Wazuh indexer node. Note that this command uses localhost, set your Wazuh indexer address if necessary.
+The ``-h`` flag specifies the hostname or the IP address of the Wazuh indexer node. Note that this command uses localhost, set your Wazuh indexer address if necessary.
 
 The command output must be similar to the following:
 
@@ -362,9 +356,7 @@ The command output must be similar to the following:
 Wazuh dashboard configuration
 -----------------------------
 
-#. Edit the Wazuh dashboard configuration file.
-
-   Add these configurations to ``/etc/wazuh-dashboard/opensearch_dashboards.yml``. We recommend that you back up these files before you carry out the configuration.
+#. Edit the Wazuh dashboard configuration file. Add these configurations to ``/etc/wazuh-dashboard/opensearch_dashboards.yml``. We recommend that you back up these files before you carry out the configuration.
 
    .. code-block:: console  
 
@@ -390,8 +382,6 @@ Wazuh dashboard configuration
 
    .. include:: /_templates/common/restart_dashboard.rst
 
-#. Test the configuration.
-   
-   To test the configuration, go to your Wazuh dashboard URL and log in with your Keycloak account. 
+#. Test the configuration. Go to your Wazuh dashboard URL and log in with your Keycloak account. 
 
 
