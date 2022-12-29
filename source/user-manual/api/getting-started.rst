@@ -15,17 +15,20 @@ Starting and stopping the Wazuh API
 
 The Wazuh API will be installed along with the Wazuh manager by default. To control or check the **wazuh-api**, use the **wazuh-manager** service with the ``systemctl`` or ``service`` command:
 
-**Systemd systems**
+.. tabs::
 
-.. code-block:: console
+   .. group-tab:: Systemd
 
-    # systemctl start/status/stop/restart wazuh-manager
+      .. code-block:: console
 
-**SysVinit systems**
+         # systemctl start/status/stop/restart wazuh-manager
 
-.. code-block:: console
+   .. group-tab:: SysV init
 
-    # service wazuh-manager start/status/stop/restart
+      .. code-block:: console
+
+         # service wazuh-manager start/status/stop/restart
+
 
 .. note::
     The -k parameter applied to API requests is used to avoid the server connection verification by using server certificates. If these are valid, this parameter can be removed.
