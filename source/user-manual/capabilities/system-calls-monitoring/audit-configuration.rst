@@ -65,17 +65,20 @@ Installing Audit
 
 In order to use the Audit system, you must have the audit package installed on your system. If you do not have this  package installed, execute the following command as the root user to install it.
 
-Red Hat, CentOS and Fedora:
+.. tabs::
 
-.. code-block:: console
+   .. group-tab:: Yum
 
-    # yum install audit
+      .. code-block:: console
 
-Debian and Ubuntu based Linux distributions:
+         # yum install audit
 
-.. code-block:: console
+   .. group-tab:: APT
 
-    # apt-get install auditd
+      .. code-block:: console
+
+         # apt-get install auditd
+
 
 Editing ossec.conf
 ~~~~~~~~~~~~~~~~~~

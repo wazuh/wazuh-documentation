@@ -24,7 +24,7 @@ If your SMTP server uses authentication (like Gmail, for instance), a server rel
 
       .. code-block:: console
 
-         # yum update && yum install postfix mailx cyrus-sasl cyrus-sasl-plain
+          # yum update && yum install postfix mailx cyrus-sasl cyrus-sasl-plain
 
 
 #. Configure Postfix in the ``/etc/postfix/main.cf`` file adding these lines to the end of the file:
