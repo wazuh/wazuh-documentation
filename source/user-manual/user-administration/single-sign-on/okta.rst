@@ -42,9 +42,7 @@ Okta Configuration
           :align: center
           :width: 80%
          
-#. Create a new group. 
-
-   Navigate to **Directory** > **Groups** and add a group.
+#. Create a new group. Navigate to **Directory** > **Groups** and add a group.
    
      .. thumbnail:: /images/single-sign-on/okta/04-navigate-to-directory-groups.png
         :title: Navigate to directory groups
@@ -97,10 +95,10 @@ Okta Configuration
          :align: center
          :width: 80%   
 
-      .. thumbnail:: /images/single-sign-on/okta/09b-saml-settings-section.png
-         :title: SAML settings section
+      .. thumbnail:: /images/single-sign-on/okta/09b-other-requestable-sso-urls.png
+         :title: Other Requestable SSO URLs
          :align: center
-         :width: 80% 
+         :width: 80%
 
    #. In the **Group Attribute Statements** section put ``Roles`` as the name. The value for ``Roles`` will be used as the ``roles_key`` parameter in the Wazuh indexer configuration. For the filter field, select **Matches regex** and type ``.*``. 
 
