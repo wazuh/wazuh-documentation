@@ -474,8 +474,8 @@ Example:
 
   <agents_disconnection_alert_time>1h</agents_disconnection_alert_time>
 
-Sample configuration
---------------------
+Configuration example
+---------------------
 
 .. code-block:: xml
 
