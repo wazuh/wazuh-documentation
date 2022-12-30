@@ -321,13 +321,13 @@ Set the format of the log to be read. **field is required**
 +                    +--------------------+--------------------------------------------------------------------------------------------------+
 |                    | eventlog           | Used for the classic Microsoft Windows event log format.                                         |
 +                    +--------------------+--------------------------------------------------------------------------------------------------+
-|                    | eventchannel       | Used for Microsoft Windows event logs, returns the events in JSON format.                        |
+|                    | eventchannel       | Used for Microsoft Windows event logs, gets the events in JSON format.                           |
 |                    |                    |                                                                                                  |
 |                    |                    | Monitors every channel specified in the configuration file and shows every field included in it. |
 |                    |                    |                                                                                                  |
 |                    |                    | This can be used to monitor standard “Windows” event logs and "Application and Services" logs.   |
 +                    +--------------------+--------------------------------------------------------------------------------------------------+
-|                    | macos              | Used for macOS ULS logs, returns the logs in syslog format.                                      |
+|                    | macos              | Used for macOS ULS logs, gets the logs in syslog format.                                         |
 |                    |                    |                                                                                                  |
 |                    |                    | Monitors all the logs that match the query filter.                                               |
 |                    |                    | See :ref:`How to collect macOS ULS logs <how-to-collect-macoslogs>`.                             |
