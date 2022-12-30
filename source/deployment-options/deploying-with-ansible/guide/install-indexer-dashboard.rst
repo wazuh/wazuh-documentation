@@ -225,7 +225,7 @@ Now, It seems that we are ready to run the playbook and start the installation. 
 
 .. note::
 	
-	- 	The Wazuh dashboard can be accessed by visiting ``https://<wazuh_server_IP>:443``
+	- 	The Wazuh dashboard can be accessed by visiting ``https://<wazuh_server_IP>``
 
 	- 	The default credentials for Wazuh deployed using ansible is:
 		
