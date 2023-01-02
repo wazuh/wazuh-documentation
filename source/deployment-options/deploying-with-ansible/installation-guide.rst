@@ -18,7 +18,7 @@ Requirements
   
 Before we get started with Ansible, confirm the following requirements are met:
 
--  **Private network DNS**: If you intend to use hostname instead of IP Address for remote endpoints definitions, be sure you have correctly set up your own DNS server and it corresponds to the FQDN of your endpoints. Otherwise use your hosts file.
+-  **Private network DNS**: If you intend to use hostname instead of IP Address for remote endpoints definitions, be sure you have correctly set up your DNS server and that it corresponds to the FQDN of your endpoints. Otherwise, use your hosts file.
 
 -  **Firewall settings**: Ansible can work with any TCP port. By default, it uses TCP/22 port to work with Linux endpoints. Ensure this port is open in endpoints and/or firewalls. In addition, you need to configure ``iptables``, ``firewalld``, ``ufw``, ``Security Groups``, or any other firewall settings.
 
