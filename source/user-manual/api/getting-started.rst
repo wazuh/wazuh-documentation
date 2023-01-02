@@ -805,9 +805,9 @@ You can even dump the manager current configuration with the request below (resp
               "logall": "no",
               "logall_json": "no",
               "email_notification": "yes",
-              "email_to": "me@test.com",
-              "smtp_server": "mail.test.com",
-              "email_from": "wazuh@test.com",
+              "email_to": "me@test.example",
+              "smtp_server": "mail.test.example",
+              "email_from": "wazuh@test.example",
               "email_maxperhour": "12",
               "email_log_source": "alerts.log",
               "white_list": [
