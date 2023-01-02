@@ -139,7 +139,7 @@ The module does not work and the following error messages appear in the ``ossec.
 
 **Solution**
 
-Make sure the profile value specified in the configuration matches with an existing one placed in the ``~/.aws/credentials`` file, being ``~/`` the root user's home directory (``/root/``) which is the one that executes the module. Check the :ref:`Configuring AWS credentials <aws_profile>` section to learn more about how to configure a profile for authentication.
+Make sure the profile value specified in the configuration matches with an existing one placed in ``/root/.aws/credentials``. Check the :ref:`Configuring AWS credentials <aws_profile>` section to learn more about how to configure a profile for authentication.
 
 The security token included in the request is invalid
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^

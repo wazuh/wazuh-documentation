@@ -46,7 +46,7 @@ The following example describes the steps to follow to list the files of your co
          }
       }
 
-3. Using the AWS-CLI tool to list the files, add the token to the AWS credentials file ``~/.aws/credentials``.
+3. Using the AWS-CLI tool to list the files, add the token to the AWS credentials file ``/root/.aws/credentials``.
 
    .. code-block:: console
       
