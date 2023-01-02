@@ -20,15 +20,9 @@ Before we get started with Ansible, confirm the following requirements are met:
 
 -  **Private network DNS**: If you intend to use hostname instead of IP Address for remote endpoints definitions, be sure you have correctly set up your DNS server and that it corresponds to the FQDN of your endpoints. Otherwise, use your hosts file.
 
--  **Firewall settings**: Ansible can work with any TCP port. By default, it uses TCP/22 port to work with Linux endpoints. Ensure this port is open in endpoints and/or firewalls. In addition, you need to configure ``iptables``, ``firewalld``, ``ufw``, ``Security Groups``, or any other firewall settings.
+-  **Firewall settings**: Ansible can work with any TCP port. By default, it uses TCP/22 port to work with Linux endpoints. Ensure this port is open in endpoints and/or firewalls. In addition, you need to use and configure ``iptables``, ``firewalld``, ``ufw``, *Security Groups*, or any other firewall settings.
 
--  **Required open ports**: You can access the :ref:`Required ports <default_ports>` list to find out which ports are needed to communicate the Wazuh components with external services such as Ansible. 
-
-
-
-
-
-
+-  **Required open ports**: You can access the :ref:`Required ports <default_ports>` list to find out which ports you need to communicate the Wazuh components with external services such as Ansible. 
 
 .. toctree::
    :maxdepth: 1
