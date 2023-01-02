@@ -97,8 +97,8 @@ PingOne Configuration
     
    #. Take note of the following parameters from the configuration page of the application. This information will be used in the next step. 
 
-      - **ISSUER ID**: It'll be in the form “https://auth.pingone.com/....”
-      - **IDP METADATA URL**: It’ll be in the form “https://auth.pingone.com/....”
+      - **ISSUER ID**: It'll be in the form \https://auth.pingone.com/...
+      - **IDP METADATA URL**: It’ll be in the form \https://auth.pingone.com/...
       - ``exchange_key``: If you open IDP **IDP METADATA URL** you'll find the X509 Certificate  section, this will be used as the ``exchange_key``.
 
       .. thumbnail:: /images/single-sign-on/pingone/09-take-note-of-parameters.png
@@ -124,7 +124,7 @@ Edit the Wazuh indexer security configuration files. We recommend that you back 
 
    - Include a ``saml_auth_domain`` configuration under the ``authc`` section similar to the following:
 
-   .. code-block:: console
+   .. code-block:: yaml
       :emphasize-lines: 7,10,22,23,25,26,27,28,29,30
 
           authc:
@@ -160,8 +160,6 @@ Edit the Wazuh indexer security configuration files. We recommend that you back 
               authentication_backend:
                 type: noop
 
-          
-
    Ensure to change the following parameters to their corresponding value:
 
    - ``idp.metadata_file``
@@ -188,7 +186,7 @@ Edit the Wazuh indexer security configuration files. We recommend that you back 
       Security Admin v7
       Will connect to localhost:9200 ... done
       Connected as "CN=admin,OU=Wazuh,O=Wazuh,L=California,C=US"
-      OpenSearch Version: 2.4.0
+      OpenSearch Version: 2.4.1
       Contacting opensearch cluster 'opensearch' and wait for YELLOW clusterstate ...
       Clustername: wazuh-cluster
       Clusterstate: GREEN
@@ -233,7 +231,7 @@ Edit the Wazuh indexer security configuration files. We recommend that you back 
       Security Admin v7
       Will connect to localhost:9200 ... done
       Connected as "CN=admin,OU=Wazuh,O=Wazuh,L=California,C=US"
-      OpenSearch Version: 2.4.0
+      OpenSearch Version: 2.4.1
       Contacting opensearch cluster 'opensearch' and wait for YELLOW clusterstate ...
       Clustername: wazuh-cluster
       Clusterstate: GREEN
@@ -249,9 +247,7 @@ Edit the Wazuh indexer security configuration files. We recommend that you back 
 Wazuh dashboard configuration
 -----------------------------
 
-#. Edit the Wazuh dashboard configuration file.
-
-   Add these configurations to ``/etc/wazuh-dashboard/opensearch_dashboards.yml``. We recommend that you back up these files before you carry out the configuration.
+#. Edit the Wazuh dashboard configuration file. Add these configurations to ``/etc/wazuh-dashboard/opensearch_dashboards.yml``. We recommend that you back up these files before you carry out the configuration.
 
    .. code-block:: console  
 
@@ -261,7 +257,7 @@ Wazuh dashboard configuration
    .. note::
       :class: not-long
 
-      *For versions 4.3.9 and earlier*, also replace ``path: `/auth/logout``` with ``path: `/logout``` in ``/usr/share/wazuh-dashboard/plugins/securityDashboards/server/auth/types/saml/routes.js``.
+      *For versions 4.3.9 and earlier*, also replace ``path: `/auth/logout``` with ``path: `/logout``` in ``/usr/share/wazuh-dashboard/plugins/securityDashboards/server/auth/types/saml/routes.js``. We recommend that you back up these files before you carry out the configuration.
 
       .. code-block:: console
          :emphasize-lines: 3
@@ -276,6 +272,4 @@ Wazuh dashboard configuration
 
    .. include:: /_templates/common/restart_dashboard.rst
 
-#. Test the configuration.
-   
-   To test the configuration, go to your Wazuh dashboard URL and log in with your Ping One account. 
+#. Test the configuration. Go to your Wazuh dashboard URL and log in with your Ping One account. 
