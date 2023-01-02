@@ -48,7 +48,7 @@ Depending on the service that will be monitored, the Wazuh user will need a diff
 Authenticating options
 ----------------------
 
-Credentials can be loaded from different locations, you can either specify the credentials as they are in the previous block of configuration, assume an IAM role, or load them from other `Boto3 supported locations <http://boto3.readthedocs.io/en/latest/guide/configuration.html#configuring-credentials>`_.
+Credentials can be loaded from different locations, you can either specify the credentials as they are in the previous block of configuration, assume an IAM role, or load them from other `Boto3 supported locations <https://boto3.amazonaws.com/v1/documentation/api/latest/guide/credentials.html#configuring-credentials>`__.
 
 .. _aws_profile:
 
