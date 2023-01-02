@@ -55,35 +55,60 @@ The full configuration reference for the Integrator daemon can be found :ref:`he
 Slack
 -----
 
-This integration allows receiving alerts into a Slack channel thanks to the `Incoming Webhooks <https://api.slack.com/incoming-webhooks>`_, a simple way to post messages from 3rd-party apps (in this case, Wazuh).
+This integration uses Slack Incoming Webhooks and allows posting Wazuh alerts into a Slack channel.
 
-This is an example configuration for the Slack integration:
+To set up this integration follow these steps.
 
-.. code-block:: xml
+#. Enable Incoming Webhooks and create one for your Slack channel. Follow the Slack guide on `Incoming Webhooks <https://api.slack.com/messaging/webhooks>`__ for this.
 
-  <integration>
-    <name>slack</name>
-    <hook_url>https://hooks.slack.com/services/...</hook_url> <!-- Replace with your Slack hook URL -->
-    <alert_format>json</alert_format>
-  </integration>
+#. Edit ``/var/ossec/etc/ossec.conf`` in the Wazuh server and include a configuration block such as the following. Replace ``WEBHOOK_URL`` with your Incoming Webhook URL.
+
+   .. code-block:: xml
+
+     <integration>
+       <name>slack</name>
+       <hook_url>WEBHOOK_URL</hook_url> <!-- Replace with your Slack hook URL -->
+       <alert_format>json</alert_format>
+     </integration>
+
+#. Restart the Wazuh manager to apply the changes.
+
+   .. include:: /_templates/common/restart_manager.rst
+
+Once the configuration is complete, alerts start showing in the selected channel.
+
+.. thumbnail:: /images/manual/integration/slack.png
+  :title: PagerDuty Incidents Dashboard
+  :align: center
+  :width: 50%
 
 PagerDuty
 ---------
 
-`PagerDuty <https://www.pagerduty.com/>`_ is a SaaS incident response platform suitable for IT departments. This integration allows creating a service using its official API in order to receive Wazuh alerts on the Incidents Dashboard.
+`PagerDuty <https://www.pagerduty.com/>`_ is a SaaS incident response platform suitable for IT departments. The Pagerduty integration uses Pagerduty official API to get Wazuh alerts on its Incidents Dashboard.
 
-This is an example configuration for the PagerDuty integration:
+To set up this integration do the following.
 
-.. code-block:: xml
+#. Get your own *Events API v2* integration key from the Pagerduty site.
 
-  <integration>
-    <name>pagerduty</name>
-    <api_key>API_KEY</api_key> <!-- Replace with your PagerDuty API key -->
-  </integration>
+#. Edit ``/var/ossec/etc/ossec.conf`` in the Wazuh server and include a configuration block such as the following. Replace ``API_KEY`` with your Pagerduty integration key. The rule level filter is optional and you can remove it or set another level value for the integration.
 
-As seen on the screenshot below, alerts start coming into the dashboard:
+   .. code-block:: xml
+      :emphasize-lines: 3
 
-.. thumbnail:: ../../images/manual/integration/pagerduty.png
+      <integration>
+        <name>pagerduty</name>
+        <api_key>API_KEY</api_key> <!-- Replace with your PagerDuty API key -->
+        <level>10</level>
+      </integration>
+
+#. Restart the Wazuh manager to apply the changes.
+
+   .. include:: /_templates/common/restart_manager.rst
+
+Once the configuration is complete, alerts start showing into the Pagerduty dashboard.
+
+.. thumbnail:: /images/manual/integration/pagerduty.png
   :title: PagerDuty Incidents Dashboard
   :align: center
   :width: 80%
