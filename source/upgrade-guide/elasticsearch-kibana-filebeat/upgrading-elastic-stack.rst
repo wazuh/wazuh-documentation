@@ -41,7 +41,7 @@ Preparing the upgrade
 
 
 
-#. Repeat the previous step for every Wazuh node.
+#. Repeat the previous steps for every Wazuh node.
 
 Upgrading the Wazuh manager
 ---------------------------
