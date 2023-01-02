@@ -222,7 +222,6 @@ Now, It seems that we are ready to run the playbook and start the installation. 
 
          # systemctl status wazuh-dashboard
 
-
 .. note::
 	
 	- 	The Wazuh dashboard can be accessed by visiting ``https://<wazuh_server_IP>``
@@ -232,8 +231,6 @@ Now, It seems that we are ready to run the playbook and start the installation. 
 		|	Username: admin
 		| Password: changeme
 		| These credentials should be changed using the password changing tool.
-
-
 ..
     Once the Wazuh API is registered we can access it through the Wazuh dashboard.
 
