@@ -28,37 +28,37 @@ Wazuh manager
 - `#13424 <https://github.com/wazuh/wazuh/pull/13424>`_ Added ``unittests`` for CLIs script files.
 - `#9962 <https://github.com/wazuh/wazuh/pull/9962>`_ Added support for SUSE in Vulnerability Detector.
 - `#13263 <https://github.com/wazuh/wazuh/pull/13263>`_ Added support for Ubuntu Jammy in Vulnerability Detector.
-- `#13608 <https://github.com/wazuh/wazuh/pull/13608>`_ Added a software limit to limit the number of EPS that a manager can process.
+- `#13608 <https://github.com/wazuh/wazuh/pull/13608>`_ Added a software limit to restrict the number of ``EPS`` a manager can process.
 - `#11753 <https://github.com/wazuh/wazuh/pull/11753>`_ Added a new ``wazuh-clusterd`` task for agent-groups info synchronization.
 - `#14950 <https://github.com/wazuh/wazuh/pull/14950>`_ Added unit tests for functions in charge of getting ruleset sync status.
 - `#14950 <https://github.com/wazuh/wazuh/pull/14950>`_ Added auto-vacuum mechanism in ``wazuh-db``.
 - `#10822 <https://github.com/wazuh/wazuh/pull/10822>`_ ``wazuh-logtest`` now shows warnings about ruleset issues.
-- `#12206 <https://github.com/wazuh/wazuh/pull/12206>`_ ``Modulesd`` memory is now managed by ``jemalloc``. This helps reduce memory fragmentation.
+- `#12206 <https://github.com/wazuh/wazuh/pull/12206>`_ ``Modulesd`` memory is now managed by ``jemalloc`` to help reduce memory fragmentation.
 - `#11702 <https://github.com/wazuh/wazuh/pull/11702>`_ The manager now refuses multiple connections from the same agent. 
 - `#12117 <https://github.com/wazuh/wazuh/pull/12117>`_ Updated the Vulnerability Detector configuration reporting to include MSU and skip JSON Red Hat feed.
 - `#12352 <https://github.com/wazuh/wazuh/pull/12352>`_ Improved the shared configuration file handling performance. 
 - `#11753 <https://github.com/wazuh/wazuh/pull/11753>`_ The agent group data is now natively handled by Wazuh DB. 
-- `#10710 <https://github.com/wazuh/wazuh/pull/10710>`_ Improved security at cluster zip filenames creation. 
-- `#12390 <https://github.com/wazuh/wazuh/pull/12390>`_ Refactor of the core/common.py module. 
-- `#12497 <https://github.com/wazuh/wazuh/pull/12497>`_ Refactor format_data_into_dictionary method of WazuhDBQuerySyscheck class. 
-- `#11124 <https://github.com/wazuh/wazuh/pull/11124>`_ Limit the maximum zip size that can be created while synchronizing cluster Integrity.
-- `#13065 <https://github.com/wazuh/wazuh/pull/13065>`_ Refactored the functions in charge of synchronizing files in the cluster. 
-- `#13079 <https://github.com/wazuh/wazuh/pull/13079>`_ Changed MD5 hash function to BLAKE2 for cluster file comparison. 
-- `#12926 <https://github.com/wazuh/wazuh/pull/12926>`_ Renamed ``wazuh-logtest`` and ``wazuh-clusterd`` scripts to follow the same scheme as the other scripts (spaces symbolized with _ instead of -).
+- `#10710 <https://github.com/wazuh/wazuh/pull/10710>`_ Improved security at cluster ``zip`` filenames creation. 
+- `#12390 <https://github.com/wazuh/wazuh/pull/12390>`_ The ``core/common.py`` module is refactored. 
+- `#12497 <https://github.com/wazuh/wazuh/pull/12497>`_ The ``format_data_into_dictionary`` method of ``WazuhDBQuerySyscheck`` class is refactored. 
+- `#11124 <https://github.com/wazuh/wazuh/pull/11124>`_ The maximum zip size that can be created while synchronizing cluster Integrity is limited.
+- `#13065 <https://github.com/wazuh/wazuh/pull/13065>`_ The functions in charge of synchronizing files in the cluster is refactored. 
+- `#13079 <https://github.com/wazuh/wazuh/pull/13079>`_ Changed ``MD5`` hash function to ``BLAKE2`` for cluster file comparison. 
+- `#12926 <https://github.com/wazuh/wazuh/pull/12926>`_ Renamed ``wazuh-logtest`` and ``wazuh-clusterd`` scripts to follow the same scheme as the other scripts (spaces symbolized with ``_`` instead of ``-``).
 - `#10865 <https://github.com/wazuh/wazuh/pull/10865>`_ The agent key polling module has been ported to ``wazuh-authd``. 
 - `#13741 <https://github.com/wazuh/wazuh/pull/13741>`_ Added the update field in the CPE Helper for Vulnerability Detector. 
-- `#11702 <https://github.com/wazuh/wazuh/pull/11702>`_ Prevented agents with the same ID from connecting to the manager simultaneously. 
+- `#11702 <https://github.com/wazuh/wazuh/pull/11702>`_ The agents with the same ID are prevented from connecting to the manager simultaneously. 
 - `#13713 <https://github.com/wazuh/wazuh/pull/13713>`_ ``wazuh-analysisd``, ``wazuh-remoted``, and ``wazuh-db`` metrics have been extended. 
-- `#11753 <https://github.com/wazuh/wazuh/pull/11753>`_ Minimized and optimized wazuh-clusterd number of messages from workers to master related to agent-info and agent-groups tasks. 
-- `#14244 <https://github.com/wazuh/wazuh/pull/14244>`_ Improved performance of the ``agent_groups`` CLI when listing agents belonging to a group. 
+- `#11753 <https://github.com/wazuh/wazuh/pull/11753>`_ ``wazuh-clusterd`` number of messages are minimized and optimized from workers to master related to ``agent-info`` and ``agent-groups`` tasks. 
+- `#14244 <https://github.com/wazuh/wazuh/pull/14244>`_ The performance of the ``agent_groups`` CLI is improved when listing agents belonging to a group. 
 - `#14475 <https://github.com/wazuh/wazuh/pull/14475>`_ Changed ``wazuh-clusterd`` binary behavior to kill any existing cluster processes when executed. 
 - `#14791 <https://github.com/wazuh/wazuh/pull/14791>`_ Changed ``wazuh-clusterd`` tasks to wait asynchronously for responses coming from ``wazuh-db``. 
 - `#11190 <https://github.com/wazuh/wazuh/pull/11190>`_ Use ``zlib`` for ``zip`` compression in cluster synchronization. 
-- `#12241 <https://github.com/wazuh/wazuh/pull/12241>`_ Added mechanism to dynamically adjust zip size limit in Integrity sync.
+- `#12241 <https://github.com/wazuh/wazuh/pull/12241>`_ Added mechanism to dynamically adjust ``zip`` size limit in Integrity sync.
 - `#12409 <https://github.com/wazuh/wazuh/pull/12409>`_ Removed the unused internal option ``wazuh_db.sock_queue_size``.
-- `#10940 <https://github.com/wazuh/wazuh/pull/10940>`_ Removed all the unused exceptions from the exceptions.py file.
-- `#10740 <https://github.com/wazuh/wazuh/pull/10740>`_ Removed unused execute method from core/utils.py. 
-- `#13119 <https://github.com/wazuh/wazuh/pull/13119>`_ Removed unused set_user_name function in framework. 
+- `#10940 <https://github.com/wazuh/wazuh/pull/10940>`_ Removed all the unused exceptions from the ``exceptions.py`` file.
+- `#10740 <https://github.com/wazuh/wazuh/pull/10740>`_ Removed unused execute method from ``core/utils.py``. 
+- `#13119 <https://github.com/wazuh/wazuh/pull/13119>`_ Removed unused ``set_user_name`` function in framework. 
 - `#12370 <https://github.com/wazuh/wazuh/pull/12370>`_ Unused internal calls to ``wazuh-db`` have been deprecated. 
 - `#14542 <https://github.com/wazuh/wazuh/pull/14542>`_ Debian Stretch support in Vulnerability Detector has been deprecated.
 
