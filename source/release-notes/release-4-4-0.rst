@@ -29,7 +29,7 @@ Wazuh manager
 - `#9962 <https://github.com/wazuh/wazuh/pull/9962>`_ Added support for SUSE in Vulnerability Detector.
 - `#13263 <https://github.com/wazuh/wazuh/pull/13263>`_ Added support for Ubuntu Jammy in Vulnerability Detector.
 - `#13608 <https://github.com/wazuh/wazuh/pull/13608>`_ Added a software limit to restrict the number of ``EPS`` a manager can process.
-- `#11753 <https://github.com/wazuh/wazuh/pull/11753>`_ Added a new ``wazuh-clusterd`` task for agent-groups info synchronization.
+- `#11753 <https://github.com/wazuh/wazuh/pull/11753>`_ Added a new ``wazuh-clusterd`` task for ``agent-groups`` info synchronization.
 - `#14950 <https://github.com/wazuh/wazuh/pull/14950>`_ Added unit tests for functions in charge of getting ruleset sync status.
 - `#14950 <https://github.com/wazuh/wazuh/pull/14950>`_ Added auto-vacuum mechanism in ``wazuh-db``.
 - `#10822 <https://github.com/wazuh/wazuh/pull/10822>`_ ``wazuh-logtest`` now shows warnings about ruleset issues.
@@ -106,12 +106,12 @@ RESTful API
 - `#10620 <https://github.com/wazuh/wazuh/pull/10620>`_ Added new API integration tests for a Wazuh environment without a cluster configuration.
 - `#11731 <https://github.com/wazuh/wazuh/pull/11731>`_ Added ``wazuh-modulesd`` tags to ``GET /manager/logs`` and ``GET /cluster/{node_id}/logs`` endpoints.
 - `#12438 <https://github.com/wazuh/wazuh/pull/12438>`_ Added python decorator to soft deprecate API endpoints adding deprecation headers to their responses.
-- `#12486 <https://github.com/wazuh/wazuh/pull/12486>`_ Added new exception to inform that /proc directory is not found or permissions to see its status are not granted.
+- `#12486 <https://github.com/wazuh/wazuh/pull/12486>`_ Added new exception to inform that ``/proc`` directory is not found or permissions to see its status are not granted.
 - `#12362 <https://github.com/wazuh/wazuh/pull/12362>`_ Added new field and filter to ``GET /agents`` response to retrieve agent groups configuration synchronization status.
 - `#12498 <https://github.com/wazuh/wazuh/pull/12498>`_ Added agent groups configuration synchronization status to ``GET /agents/summary/status`` endpoint. 
 - `#11171 <https://github.com/wazuh/wazuh/pull/11171>`_ Added JSON log handling.
 - `#12029 <https://github.com/wazuh/wazuh/pull/12029>`_ Added integration tests for IPv6 agent's registration.
-- `#12887 <https://github.com/wazuh/wazuh/pull/12887>`_ Enable ordering by Agents count in ``/groups`` endpoints.
+- `#12887 <https://github.com/wazuh/wazuh/pull/12887>`_ Enable ordering count in ``/groups`` endpoints by Agents.
 - `#12092 <https://github.com/wazuh/wazuh/pull/12092>`_ Added a hash to API logs to identify users logged in with authorization context. 
 - `#14119 <https://github.com/wazuh/wazuh/pull/14119>`_ Added new ``limits`` section to the ``upload_wazuh_configuration`` section in the Wazuh API configuration.
 - `#14295 <https://github.com/wazuh/wazuh/pull/14295>`_ Added logic to API logger to renew its streams if needed on every request.
@@ -121,19 +121,19 @@ RESTful API
 - `#15084 <https://github.com/wazuh/wazuh/pull/15084>`_ Added distinct and select parameters to ``GET /sca/{agent_id}`` and ``GET /sca/{agent_id}/checks/{policy_id}`` endpoints.
 - `#15290 <https://github.com/wazuh/wazuh/pull/15290>`_ Added new endpoint to run vulnerability detector on-demand scans (``PUT /vulnerability``).
 - `#11341 <https://github.com/wazuh/wazuh/pull/11341>`_ Improved ``GET /cluster/healthcheck`` endpoint and ``cluster_control -i more`` CLI call in loaded cluster environments. 
-- `#12595 <https://github.com/wazuh/wazuh/pull/12595>`_ Removed ``never_connected`` agent status limitation when trying to assign agents to groups.
-- `#12551 <https://github.com/wazuh/wazuh/pull/12551>`_ Changed API version and upgrade_version filters to work with different version formats.
+- `#12595 <https://github.com/wazuh/wazuh/pull/12595>`_ Removed ``never_connected`` agent status limitation when assigning agents to groups.
+- `#12551 <https://github.com/wazuh/wazuh/pull/12551>`_ Changed API version and ``upgrade_version`` filters to work with different version formats.
 - `#9413 <https://github.com/wazuh/wazuh/pull/9413>`_ Renamed ``GET /agents/{agent_id}/group/is_sync`` endpoint to ``GET /agents/group/is_sync`` and added new ``agents_list`` parameter.
 - `#10397 <https://github.com/wazuh/wazuh/pull/10397>`_ Added ``POST /security/user/authenticate`` endpoint and marked ``GET /security/user/authenticate`` endpoint as deprecated.
-- `#12526 <https://github.com/wazuh/wazuh/pull/12526>`_ Adapted framework code to agent-group changes to use the new ``wazuh-db`` commands.
+- `#12526 <https://github.com/wazuh/wazuh/pull/12526>`_ Adapted framework code to ``agent-group`` changes to use the new ``wazuh-db`` commands.
 - `#13791 <https://github.com/wazuh/wazuh/pull/13791>`_ Updated default timeout for ``GET /mitre/software`` to avoid timing out in slow environments after the MITRE DB update to v11.2.
 - `#14119 <https://github.com/wazuh/wazuh/pull/14119>`_ Changed API settings related to remote commands. The ``remote_commands`` section will be held within ``upload_wazuh_configuration``.
 - `#14233 <https://github.com/wazuh/wazuh/pull/14233>`_ Improved API unauthorized responses to be more accurate.
 - `#14259 <https://github.com/wazuh/wazuh/pull/14259>`_ Updated framework functions that communicate with the request socket to use remote instead.
 - `#14766 <https://github.com/wazuh/wazuh/pull/14766>`_ Improved parameter validation for API endpoints that require component and configuration parameters.
 - `#15017 <https://github.com/wazuh/wazuh/pull/15017>`_ Improved ``GET /sca/{agent_id}/checks/{policy_id}`` API endpoint performance.
-- `#15334 <https://github.com/wazuh/wazuh/pull/15334>`_ Improved exception handling when trying to connect to Wazuh sockets.
-- `#15671 <https://github.com/wazuh/wazuh/pull/15671>`_ Modified _group_names and _group_names_or_all regexes to avoid invalid group names.
+- `#15334 <https://github.com/wazuh/wazuh/pull/15334>`_ Improved exception handling when connecting to Wazuh sockets.
+- `#15671 <https://github.com/wazuh/wazuh/pull/15671>`_ Modified ``_group_names and _group_names_or_all`` regexes to avoid invalid group names.
 - `#12053 <https://github.com/wazuh/wazuh/pull/12053>`_ Removed null remediations from failed API responses.
 - `#12365 <https://github.com/wazuh/wazuh/pull/12365>`_ ``GET /agents/{agent_id}/group/is_sync`` endpoint is deprecated.
 - `#14230 <https://github.com/wazuh/wazuh/pull/14230>`_ ``GET /manager/stats/analysisd``, ``GET /manager/stats/remoted``, ``GET /cluster/{node_id}stats/analysisd``, and ``GET /cluster/{node_id}stats/remoted`` API endpoints are deprecated.
@@ -144,7 +144,7 @@ Other
 - `#12733 <https://github.com/wazuh/wazuh/pull/12733>`_ Added unit tests to the component in Analysisd that extracts the IP address from events.
 - `#12518 <https://github.com/wazuh/wazuh/pull/12518>`_ Added ``python-json-logger`` dependency.
 - `#10773 <https://github.com/wazuh/wazuh/pull/10773>`_  Prevented the Ruleset test suite from restarting the manager.
-- `#14839 <https://github.com/wazuh/wazuh/pull/14839>`_ The pthread's rwlock has been replaced with a FIFO-queueing read-write lock.
+- `#14839 <https://github.com/wazuh/wazuh/pull/14839>`_ The pthread's ``rwlock`` was replaced with a FIFO-queueing read-write lock.
 
 Wazuh dashboard
 ^^^^^^^^^^^^^^^
