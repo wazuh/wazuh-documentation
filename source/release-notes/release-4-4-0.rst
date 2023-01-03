@@ -151,36 +151,36 @@ Wazuh dashboard
 
 - `#4323 <https://github.com/wazuh/wazuh-kibana-app/pull/4323>`_ Added the option to sort by the agents count in the group table.
 - `#3874 <https://github.com/wazuh/wazuh-kibana-app/pull/3874>`_ Added agent synchronization status in the agent module.
-- `#4739 <https://github.com/wazuh/wazuh-kibana-app/pull/4739>`_ The input name was added and when the user adds a value the variable WAZUH_AGENT_NAME with its value appears in the installation command.
+- `#4739 <https://github.com/wazuh/wazuh-kibana-app/pull/4739>`_ The input name was added so that when the user adds a value, the variable ``WAZUH_AGENT_NAME`` with its value appears in the installation command.
 - `#4512 <https://github.com/wazuh/wazuh-kibana-app/pull/4512>`_ Redesign the SCA table from the agent's dashboard.
-- `#4501 <https://github.com/wazuh/wazuh-kibana-app/pull/4501>`_ Enhanced the plugin setting description displayed in the UI and the configuration file.
+- `#4501 <https://github.com/wazuh/wazuh-kibana-app/pull/4501>`_ The plugin setting description displayed in the UI and the configuration file is enhanced.
 - `#4503 <https://github.com/wazuh/wazuh-kibana-app/pull/4503>`_ `#4785 <https://github.com/wazuh/wazuh-kibana-app/pull/4785>`_ Added validation to the plugin settings in the form of ``Settings/Configuration`` and the endpoint to update the plugin configuration.
 - `#4505 <https://github.com/wazuh/wazuh-kibana-app/pull/4505>`_ `#4798 <https://github.com/wazuh/wazuh-kibana-app/pull/4798>`_ `#4805 <https://github.com/wazuh/wazuh-kibana-app/pull/4805>`_ Added new plugin settings to customize the header and footer on the PDF reports.
 - `#4507 <https://github.com/wazuh/wazuh-kibana-app/pull/4507>`_ Added a new plugin setting to enable or disable the customization.
 - `#4504 <https://github.com/wazuh/wazuh-kibana-app/pull/4504>`_ Added the ability to upload an image for the ``customization.logo.*`` settings in ``Settings/Configuration``.
 - `#4867 <https://github.com/wazuh/wazuh-kibana-app/pull/4867>`_ Added macOS version to wizard deploy agent.
-- `#4833 <https://github.com/wazuh/wazuh-kibana-app/pull/4833>`_ Added PowerPC architecture in redhat7, in the section **Deploy new agent**.
+- `#4833 <https://github.com/wazuh/wazuh-kibana-app/pull/4833>`_ Added PowerPC architecture in Red Hat 7, in the section **Deploy new agent**.
 - `#4831 <https://github.com/wazuh/wazuh-kibana-app/pull/4831>`_ Added a centralized service to handle the requests.
-- `#4873 <https://github.com/wazuh/wazuh-kibana-app/pull/4873>`_ Added data-test-subj create policy.
-- `#4933 <https://github.com/wazuh/wazuh-kibana-app/pull/4933>`_ Added extra steps message and a new command for Windows XP and Windows server 2008, added alpine agent with all its steps.
-- `#4933 <https://github.com/wazuh/wazuh-kibana-app/pull/4933>`_ Deploy new agent section: Added link for additional steps to alpine os.
+- `#4873 <https://github.com/wazuh/wazuh-kibana-app/pull/4873>`_ Added ``data-test-subj`` create policy.
+- `#4933 <https://github.com/wazuh/wazuh-kibana-app/pull/4933>`_ Added extra steps message and a new command for Windows XP and Windows server 2008, added Alpine agent with all its steps.
+- `#4933 <https://github.com/wazuh/wazuh-kibana-app/pull/4933>`_ Deploy new agent section: Added link for additional steps to Alpine os.
 - `#4970 <https://github.com/wazuh/wazuh-kibana-app/pull/4970>`_ Added file saving conditions in File Editor.
 - `#5021 <https://github.com/wazuh/wazuh-kibana-app/pull/5021>`_ `#5028 <https://github.com/wazuh/wazuh-kibana-app/pull/5028>`_ Added character validation to avoid invalid agent names in the section **Deploy new agent**. 
-- `#4933 <https://github.com/wazuh/wazuh-kibana-app/pull/4933>`_ Deploy new agent section: Added link for additional steps to alpine os.
+- `#4933 <https://github.com/wazuh/wazuh-kibana-app/pull/4933>`_ Deploy new agent section: Added link for additional steps to Alpine os.
 - `#4103 <https://github.com/wazuh/wazuh-kibana-app/pull/4103>`_ Changed the HTTP verb from ``GET`` to ``POST`` in the requests to login to the Wazuh API.
 - `#4376 <https://github.com/wazuh/wazuh-kibana-app/pull/4376>`_ Improved alerts summary performance.
 - `#4363 <https://github.com/wazuh/wazuh-kibana-app/pull/4363>`_ Improved ``Agents Overview`` performance.
-- `#4529 <https://github.com/wazuh/wazuh-kibana-app/pull/4529>`_ `#4964 <https://github.com/wazuh/wazuh-kibana-app/pull/4964>`_ Improved the message displayed when there is a versions mismatch between the Wazuh API and the Wazuh APP.
+- `#4529 <https://github.com/wazuh/wazuh-kibana-app/pull/4529>`_ `#4964 <https://github.com/wazuh/wazuh-kibana-app/pull/4964>`_ Improved the message displayed when a version mismatches between the Wazuh API and the Wazuh APP.
 - `#4363 <https://github.com/wazuh/wazuh-kibana-app/pull/4363>`_ Independently load each dashboard from the ``Agents Overview`` page.
 - `#3874 <https://github.com/wazuh/wazuh-kibana-app/pull/3874>`_ The endpoint ``/agents/summary/status`` response was adapted. 
-- `#4458 <https://github.com/wazuh/wazuh-kibana-app/pull/4458>`_ Updated and added operating systems, versions, and architectures commands of install and enroll the agent and commands of Start the agent in the deploy new agent section.
+- `#4647 <https://github.com/wazuh/wazuh-kibana-app/pull/4647>`_ Redesign of the Deploy new agent section. This updates and adds operating systems, versions, architectures, commands to Install and enroll the agents, messages for some operating systems, and links to the documentation.
 - `#4776 <https://github.com/wazuh/wazuh-kibana-app/pull/4776>`_ `#4954 <https://github.com/wazuh/wazuh-kibana-app/pull/4954>`_ Added cluster's IP and protocol as suggestions in the agent deployment wizard.
 - `#4851 <https://github.com/wazuh/wazuh-kibana-app/pull/4851>`_ Show the OS name and OS version in the agent installation wizard.
 - `#4501 <https://github.com/wazuh/wazuh-kibana-app/pull/4501>`_ Changed the endpoint that updates the plugin configuration to support multiple settings.
 - `#4985 <https://github.com/wazuh/wazuh-kibana-app/pull/4985>`_ Updated the ``winston`` dependency to ``3.5.1``.
 - `#4985 <https://github.com/wazuh/wazuh-kibana-app/pull/4985>`_ Updated the ``pdfmake`` dependency to ``0.2.6``.
 - `#4992 <https://github.com/wazuh/wazuh-kibana-app/pull/4992>`_ The button to export the app logs is now disabled when there are no results, instead of showing an error toast.
-- `#4491 <https://github.com/wazuh/wazuh-kibana-app/pull/4491>`_ Removed custom styles from kibana 7.9.0.
+- `#4491 <https://github.com/wazuh/wazuh-kibana-app/pull/4491>`_ Removed custom styles from Kibana 7.9.0.
 - `#4985 <https://github.com/wazuh/wazuh-kibana-app/pull/4985>`_ Removed the ``angular-chart.js`` dependency.
 
 Wazuh Kibana plugin for Kibana 7.10.2
@@ -190,26 +190,26 @@ Wazuh Kibana plugin for Kibana 7.10.2
 - `#3874 <https://github.com/wazuh/wazuh-kibana-app/pull/3874>`_ Added agent synchronization status in the agent module.
 - `#4739 <https://github.com/wazuh/wazuh-kibana-app/pull/4739>`_ Added the ability to set the name of the agent using the deployment wizard.
 - `#4512 <https://github.com/wazuh/wazuh-kibana-app/pull/4512>`_ Redesign the SCA table from the agent's dashboard.
-- `#4501 <https://github.com/wazuh/wazuh-kibana-app/pull/4501>`_ Enhanced the plugin setting description displayed in the UI and the configuration file.
+- `#4501 <https://github.com/wazuh/wazuh-kibana-app/pull/4501>`_ The plugin setting description displayed in the UI and the configuration file is enhanced.
 - `#4503 <https://github.com/wazuh/wazuh-kibana-app/pull/4503>`_ `#4785 <https://github.com/wazuh/wazuh-kibana-app/pull/4785>`_ Added validation to the plugin settings in the form of ``Settings/Configuration`` and the endpoint to update the plugin configuration.
 - `#4505 <https://github.com/wazuh/wazuh-kibana-app/pull/4505>`_ `#4798 <https://github.com/wazuh/wazuh-kibana-app/pull/4798>`_ `#4805 <https://github.com/wazuh/wazuh-kibana-app/pull/4805>`_ Added new plugin settings to customize the header and footer on the PDF reports.
 - `#4507 <https://github.com/wazuh/wazuh-kibana-app/pull/4507>`_ Added a new plugin setting to enable or disable the customization.
 - `#4504 <https://github.com/wazuh/wazuh-kibana-app/pull/4504>`_ Added the ability to upload an image for the ``customization.logo.*`` settings in ``Settings/Configuration``.
 - `#4867 <https://github.com/wazuh/wazuh-kibana-app/pull/4867>`_ Added macOS version to wizard deploy agent.
-- `#4833 <https://github.com/wazuh/wazuh-kibana-app/pull/4833>`_ Added PowerPC architecture in redhat7, in the section **Deploy new agent**.
+- `#4833 <https://github.com/wazuh/wazuh-kibana-app/pull/4833>`_ Added PowerPC architecture in Red Hat 7, in the section **Deploy new agent**.
 - `#4831 <https://github.com/wazuh/wazuh-kibana-app/pull/4831>`_ Added a centralized service to handle the requests.
-- `#4873 <https://github.com/wazuh/wazuh-kibana-app/pull/4873>`_ Added data-test-subj create policy.
-- `#4933 <https://github.com/wazuh/wazuh-kibana-app/pull/4933>`_ Added extra steps message and a new command for Windows XP and Windows Server 2008, added alpine agent with all its steps.
-- `#4933 <https://github.com/wazuh/wazuh-kibana-app/pull/4933>`_ Deploy new agent section: Added link for additional steps to alpine os.
+- `#4873 <https://github.com/wazuh/wazuh-kibana-app/pull/4873>`_ Added ``data-test-subj`` create policy.
+- `#4933 <https://github.com/wazuh/wazuh-kibana-app/pull/4933>`_ Added extra steps message and a new command for Windows XP and Windows Server 2008, added Alpine agent with all its steps.
+- `#4933 <https://github.com/wazuh/wazuh-kibana-app/pull/4933>`_ Deploy new agent section: Added link for additional steps to Alpine os.
 - `#4970 <https://github.com/wazuh/wazuh-kibana-app/pull/4970>`_ Added file saving conditions in File Editor.
 - `#5021 <https://github.com/wazuh/wazuh-kibana-app/pull/5021>`_ `#5028 <https://github.com/wazuh/wazuh-kibana-app/pull/5028>`_ Added character validation to avoid invalid agent names in the section **Deploy new agent**. 
 - `#4103 <https://github.com/wazuh/wazuh-kibana-app/pull/4103>`_ Changed the HTTP verb from ``GET`` to ``POST`` in the requests to login to the Wazuh API.
 - `#4376 <https://github.com/wazuh/wazuh-kibana-app/pull/4376>`_ Improved alerts summary performance.
 - `#4363 <https://github.com/wazuh/wazuh-kibana-app/pull/4363>`_ Improved ``Agents Overview`` performance.
-- `#4529 <https://github.com/wazuh/wazuh-kibana-app/pull/4529>`_ `#4964 <https://github.com/wazuh/wazuh-kibana-app/pull/4964>`_ Improved the message displayed when there is a versions mismatch between the Wazuh API and the Wazuh APP.
+- `#4529 <https://github.com/wazuh/wazuh-kibana-app/pull/4529>`_ `#4964 <https://github.com/wazuh/wazuh-kibana-app/pull/4964>`_ Improved the message displayed when a version mismatches between the Wazuh API and the Wazuh APP.
 - `#4363 <https://github.com/wazuh/wazuh-kibana-app/pull/4363>`_ Independently load each dashboard from the ``Agents Overview`` page.
 - `#3874 <https://github.com/wazuh/wazuh-kibana-app/pull/3874>`_ The endpoint ``/agents/summary/status`` response was adapted. 
-- `#4458 <https://github.com/wazuh/wazuh-kibana-app/pull/4458>`_ Updated and added operating systems, versions, and architectures commands of install and enroll the agent and commands of Start the agent in the deploy new agent section.
+- `#4647 <https://github.com/wazuh/wazuh-kibana-app/pull/4647>`_ Redesign of the Deploy new agent section. This updates and adds operating systems, versions, architectures, commands to Install and enroll the agents, messages for some operating systems, and links to the documentation.
 - `#4776 <https://github.com/wazuh/wazuh-kibana-app/pull/4776>`_ `#4954 <https://github.com/wazuh/wazuh-kibana-app/pull/4954>`_ Added cluster's IP and protocol as suggestions in the agent deployment wizard.
 - `#4851 <https://github.com/wazuh/wazuh-kibana-app/pull/4851>`_ Show the OS name and OS version in the agent installation wizard.
 - `#4501 <https://github.com/wazuh/wazuh-kibana-app/pull/4501>`_ Changed the endpoint that updates the plugin configuration to support multiple settings.
@@ -224,26 +224,26 @@ Wazuh Kibana plugin for Kibana 7.16.x and 7.17.x
 - `#3874 <https://github.com/wazuh/wazuh-kibana-app/pull/3874>`_ Added agent synchronization status in the agent module.
 - `#4739 <https://github.com/wazuh/wazuh-kibana-app/pull/4739>`_ The input name was added and when the user adds a value the variable WAZUH_AGENT_NAME with its value appears in the installation command.
 - `#4512 <https://github.com/wazuh/wazuh-kibana-app/pull/4512>`_ Redesign the SCA table from the agent's dashboard.
-- `#4501 <https://github.com/wazuh/wazuh-kibana-app/pull/4501>`_ Enhanced the plugin setting description displayed in the UI and the configuration file.
+- `#4501 <https://github.com/wazuh/wazuh-kibana-app/pull/4501>`_ The plugin setting description displayed in the UI and the configuration file is enhanced.
 - `#4503 <https://github.com/wazuh/wazuh-kibana-app/pull/4503>`_ `#4785 <https://github.com/wazuh/wazuh-kibana-app/pull/4785>`_ Added validation to the plugin settings in the form of ``Settings/Configuration`` and the endpoint to update the plugin configuration.
 - `#4505 <https://github.com/wazuh/wazuh-kibana-app/pull/4505>`_ `#4798 <https://github.com/wazuh/wazuh-kibana-app/pull/4798>`_ `#4805 <https://github.com/wazuh/wazuh-kibana-app/pull/4805>`_ Added new plugin settings to customize the header and footer on the PDF reports.
 - `#4507 <https://github.com/wazuh/wazuh-kibana-app/pull/4507>`_ Added a new plugin setting to enable or disable the customization.
 - `#4504 <https://github.com/wazuh/wazuh-kibana-app/pull/4504>`_ Added the ability to upload an image for the ``customization.logo.*`` settings in ``Settings/Configuration``.
 - `#4867 <https://github.com/wazuh/wazuh-kibana-app/pull/4867>`_ Added macOS version to wizard deploy agent.
-- `#4833 <https://github.com/wazuh/wazuh-kibana-app/pull/4833>`_ Added PowerPC architecture in redhat7, in the section **Deploy new agent**.
+- `#4833 <https://github.com/wazuh/wazuh-kibana-app/pull/4833>`_ Added PowerPC architecture in Red Hat 7, in the section **Deploy new agent**.
 - `#4831 <https://github.com/wazuh/wazuh-kibana-app/pull/4831>`_ Added a centralized service to handle the requests.
-- `#4873 <https://github.com/wazuh/wazuh-kibana-app/pull/4873>`_ Added data-test-subj create policy.
-- `#4933 <https://github.com/wazuh/wazuh-kibana-app/pull/4933>`_ Added extra steps message and a new command for Windows XP and Windows server 2008, added alpine agent with all its steps.
-- `#4933 <https://github.com/wazuh/wazuh-kibana-app/pull/4933>`_ Deploy new agent section: Added link for additional steps to alpine os.
+- `#4873 <https://github.com/wazuh/wazuh-kibana-app/pull/4873>`_ Added ``data-test-subj`` create policy.
+- `#4933 <https://github.com/wazuh/wazuh-kibana-app/pull/4933>`_ Added extra steps message and a new command for Windows XP and Windows server 2008, added Alpine agent with all its steps.
+- `#4933 <https://github.com/wazuh/wazuh-kibana-app/pull/4933>`_ Deploy new agent section: Added link for additional steps to Alpine os.
 - `#4970 <https://github.com/wazuh/wazuh-kibana-app/pull/4970>`_ Added file saving conditions in File Editor.
 - `#5021 <https://github.com/wazuh/wazuh-kibana-app/pull/5021>`_ `#5028 <https://github.com/wazuh/wazuh-kibana-app/pull/5028>`_ Added character validation to avoid invalid agent names in the section **Deploy new agent**. 
 - `#4103 <https://github.com/wazuh/wazuh-kibana-app/pull/4103>`_ Changed the HTTP verb from ``GET`` to ``POST`` in the requests to login to the Wazuh API.
 - `#4376 <https://github.com/wazuh/wazuh-kibana-app/pull/4376>`_ Improved alerts summary performance.
 - `#4363 <https://github.com/wazuh/wazuh-kibana-app/pull/4363>`_ `#4996 <https://github.com/wazuh/wazuh-kibana-app/pull/4996>`_ Improved ``Agents Overview`` performance.
-- `#4529 <https://github.com/wazuh/wazuh-kibana-app/pull/4529>`_ `#4964 <https://github.com/wazuh/wazuh-kibana-app/pull/4964>`_ Improved the message displayed when there is a versions mismatch between the Wazuh API and the Wazuh APP.
+- `#4529 <https://github.com/wazuh/wazuh-kibana-app/pull/4529>`_ `#4964 <https://github.com/wazuh/wazuh-kibana-app/pull/4964>`_ Improved the message displayed when a version mismatches between the Wazuh API and the Wazuh APP.
 - `#4363 <https://github.com/wazuh/wazuh-kibana-app/pull/4363>`_ Independently load each dashboard from the ``Agents Overview`` page.
 - `#3874 <https://github.com/wazuh/wazuh-kibana-app/pull/3874>`_ The endpoint ``/agents/summary/status`` response was adapted. 
-- `#4458 <https://github.com/wazuh/wazuh-kibana-app/pull/4458>`_ Updated and added operating systems, versions, and architectures commands of install and enroll the agent and commands of Start the agent in the deploy new agent section.
+- `#4647 <https://github.com/wazuh/wazuh-kibana-app/pull/4647>`_ Redesign of the Deploy new agent section. This updates and adds operating systems, versions, architectures, commands to Install and enroll the agents, messages for some operating systems, and links to the documentation.
 - `#4776 <https://github.com/wazuh/wazuh-kibana-app/pull/4776>`_ `#4954 <https://github.com/wazuh/wazuh-kibana-app/pull/4954>`_ Added cluster's IP and protocol as suggestions in the agent deployment wizard.
 - `#4851 <https://github.com/wazuh/wazuh-kibana-app/pull/4851>`_ Show the OS name and OS version in the agent installation wizard.
 - `#4501 <https://github.com/wazuh/wazuh-kibana-app/pull/4501>`_ Changed the endpoint that updates the plugin configuration to support multiple settings.
