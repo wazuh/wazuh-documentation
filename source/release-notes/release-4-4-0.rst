@@ -153,7 +153,7 @@ Wazuh dashboard
 - `#3874 <https://github.com/wazuh/wazuh-kibana-app/pull/3874>`_ Added agent synchronization status in the agent module.
 - `#4739 <https://github.com/wazuh/wazuh-kibana-app/pull/4739>`_ The input name was added so that when the user adds a value, the variable ``WAZUH_AGENT_NAME`` with its value appears in the installation command.
 - `#4512 <https://github.com/wazuh/wazuh-kibana-app/pull/4512>`_ Redesign the SCA table from the agent's dashboard.
-- `#4501 <https://github.com/wazuh/wazuh-kibana-app/pull/4501>`_ The plugin setting description displayed in the UI and the configuration file is enhanced.
+- `#4501 <https://github.com/wazuh/wazuh-kibana-app/pull/4501>`_ The plugin setting description displayed in the UI, and the configuration file are enhanced.
 - `#4503 <https://github.com/wazuh/wazuh-kibana-app/pull/4503>`_ `#4785 <https://github.com/wazuh/wazuh-kibana-app/pull/4785>`_ Added validation to the plugin settings in the form of ``Settings/Configuration`` and the endpoint to update the plugin configuration.
 - `#4505 <https://github.com/wazuh/wazuh-kibana-app/pull/4505>`_ `#4798 <https://github.com/wazuh/wazuh-kibana-app/pull/4798>`_ `#4805 <https://github.com/wazuh/wazuh-kibana-app/pull/4805>`_ Added new plugin settings to customize the header and footer on the PDF reports.
 - `#4507 <https://github.com/wazuh/wazuh-kibana-app/pull/4507>`_ Added a new plugin setting to enable or disable the customization.
@@ -179,7 +179,7 @@ Wazuh dashboard
 - `#4501 <https://github.com/wazuh/wazuh-kibana-app/pull/4501>`_ Changed the endpoint that updates the plugin configuration to support multiple settings.
 - `#4985 <https://github.com/wazuh/wazuh-kibana-app/pull/4985>`_ Updated the ``winston`` dependency to ``3.5.1``.
 - `#4985 <https://github.com/wazuh/wazuh-kibana-app/pull/4985>`_ Updated the ``pdfmake`` dependency to ``0.2.6``.
-- `#4992 <https://github.com/wazuh/wazuh-kibana-app/pull/4992>`_ The button to export the app logs is now disabled when there are no results, instead of showing an error toast.
+- `#4992 <https://github.com/wazuh/wazuh-kibana-app/pull/4992>`_ The button to export the app logs is now disabled when there are no results instead of showing an error toast.
 - `#4491 <https://github.com/wazuh/wazuh-kibana-app/pull/4491>`_ Removed custom styles from Kibana 7.9.0.
 - `#4985 <https://github.com/wazuh/wazuh-kibana-app/pull/4985>`_ Removed the ``angular-chart.js`` dependency.
 
@@ -190,7 +190,7 @@ Wazuh Kibana plugin for Kibana 7.10.2
 - `#3874 <https://github.com/wazuh/wazuh-kibana-app/pull/3874>`_ Added agent synchronization status in the agent module.
 - `#4739 <https://github.com/wazuh/wazuh-kibana-app/pull/4739>`_ Added the ability to set the name of the agent using the deployment wizard.
 - `#4512 <https://github.com/wazuh/wazuh-kibana-app/pull/4512>`_ Redesign the SCA table from the agent's dashboard.
-- `#4501 <https://github.com/wazuh/wazuh-kibana-app/pull/4501>`_ The plugin setting description displayed in the UI and the configuration file is enhanced.
+- `#4501 <https://github.com/wazuh/wazuh-kibana-app/pull/4501>`_ The plugin setting description displayed in the UI, and the configuration file are enhanced.
 - `#4503 <https://github.com/wazuh/wazuh-kibana-app/pull/4503>`_ `#4785 <https://github.com/wazuh/wazuh-kibana-app/pull/4785>`_ Added validation to the plugin settings in the form of ``Settings/Configuration`` and the endpoint to update the plugin configuration.
 - `#4505 <https://github.com/wazuh/wazuh-kibana-app/pull/4505>`_ `#4798 <https://github.com/wazuh/wazuh-kibana-app/pull/4798>`_ `#4805 <https://github.com/wazuh/wazuh-kibana-app/pull/4805>`_ Added new plugin settings to customize the header and footer on the PDF reports.
 - `#4507 <https://github.com/wazuh/wazuh-kibana-app/pull/4507>`_ Added a new plugin setting to enable or disable the customization.
@@ -213,7 +213,7 @@ Wazuh Kibana plugin for Kibana 7.10.2
 - `#4776 <https://github.com/wazuh/wazuh-kibana-app/pull/4776>`_ `#4954 <https://github.com/wazuh/wazuh-kibana-app/pull/4954>`_ Added cluster's IP and protocol as suggestions in the agent deployment wizard.
 - `#4851 <https://github.com/wazuh/wazuh-kibana-app/pull/4851>`_ Show the OS name and OS version in the agent installation wizard.
 - `#4501 <https://github.com/wazuh/wazuh-kibana-app/pull/4501>`_ Changed the endpoint that updates the plugin configuration to support multiple settings.
-- `#4972 <https://github.com/wazuh/wazuh-kibana-app/pull/4972>`_ The button to export the app logs is now disabled when there are no results, instead of showing an error toast.
+- `#4972 <https://github.com/wazuh/wazuh-kibana-app/pull/4972>`_ The button to export the app logs is now disabled when there are no results instead of showing an error toast.
 - `#5014 <https://github.com/wazuh/wazuh-kibana-app/pull/5014>`_ Updated the ``winston`` dependency to ``3.5.1``.
 - `#5014 <https://github.com/wazuh/wazuh-kibana-app/pull/5014>`_ Removed the ``angular-chart.js`` dependency.
 
@@ -222,9 +222,9 @@ Wazuh Kibana plugin for Kibana 7.16.x and 7.17.x
 
 - `#4323 <https://github.com/wazuh/wazuh-kibana-app/pull/4323>`_ Added the option to sort by the agents count in the group table.
 - `#3874 <https://github.com/wazuh/wazuh-kibana-app/pull/3874>`_ Added agent synchronization status in the agent module.
-- `#4739 <https://github.com/wazuh/wazuh-kibana-app/pull/4739>`_ The input name was added and when the user adds a value the variable WAZUH_AGENT_NAME with its value appears in the installation command.
+- `#4739 <https://github.com/wazuh/wazuh-kibana-app/pull/4739>`_ The input name was added so that when the user adds a value, the variable ``WAZUH_AGENT_NAME`` with its value appears in the installation command.
 - `#4512 <https://github.com/wazuh/wazuh-kibana-app/pull/4512>`_ Redesign the SCA table from the agent's dashboard.
-- `#4501 <https://github.com/wazuh/wazuh-kibana-app/pull/4501>`_ The plugin setting description displayed in the UI and the configuration file is enhanced.
+- `#4501 <https://github.com/wazuh/wazuh-kibana-app/pull/4501>`_ The plugin setting description displayed in the UI, and the configuration file are enhanced.
 - `#4503 <https://github.com/wazuh/wazuh-kibana-app/pull/4503>`_ `#4785 <https://github.com/wazuh/wazuh-kibana-app/pull/4785>`_ Added validation to the plugin settings in the form of ``Settings/Configuration`` and the endpoint to update the plugin configuration.
 - `#4505 <https://github.com/wazuh/wazuh-kibana-app/pull/4505>`_ `#4798 <https://github.com/wazuh/wazuh-kibana-app/pull/4798>`_ `#4805 <https://github.com/wazuh/wazuh-kibana-app/pull/4805>`_ Added new plugin settings to customize the header and footer on the PDF reports.
 - `#4507 <https://github.com/wazuh/wazuh-kibana-app/pull/4507>`_ Added a new plugin setting to enable or disable the customization.
@@ -247,10 +247,10 @@ Wazuh Kibana plugin for Kibana 7.16.x and 7.17.x
 - `#4776 <https://github.com/wazuh/wazuh-kibana-app/pull/4776>`_ `#4954 <https://github.com/wazuh/wazuh-kibana-app/pull/4954>`_ Added cluster's IP and protocol as suggestions in the agent deployment wizard.
 - `#4851 <https://github.com/wazuh/wazuh-kibana-app/pull/4851>`_ Show the OS name and OS version in the agent installation wizard.
 - `#4501 <https://github.com/wazuh/wazuh-kibana-app/pull/4501>`_ Changed the endpoint that updates the plugin configuration to support multiple settings.
-- `#4972 <https://github.com/wazuh/wazuh-kibana-app/pull/4972>`_ The button to export the app logs is now disabled when there are no results, instead of showing an error toast.
+- `#4972 <https://github.com/wazuh/wazuh-kibana-app/pull/4972>`_ The button to export the app logs is now disabled when there are no results instead of showing an error toast.
 - `#4985 <https://github.com/wazuh/wazuh-kibana-app/pull/4985>`_ Updated the ``winston`` dependency to ``3.5.1``.
 - `#4985 <https://github.com/wazuh/wazuh-kibana-app/pull/4985>`_ Updated the ``pdfmake`` dependency to ``0.2.6``.
-- `#4992 <https://github.com/wazuh/wazuh-kibana-app/pull/4992>`_ The button to export the app logs is now disabled when there are no results, instead of showing an error toast.
+- `#4992 <https://github.com/wazuh/wazuh-kibana-app/pull/4992>`_ The button to export the app logs is now disabled when there are no results instead of showing an error toast.
 - `#4985 <https://github.com/wazuh/wazuh-kibana-app/pull/4985>`_ Removed the ``angular-chart.js`` dependency.
 
 Wazuh Splunk app
