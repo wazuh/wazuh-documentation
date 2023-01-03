@@ -141,9 +141,9 @@ RESTful API
 Other
 ^^^^^
 
-- `#12733 <https://github.com/wazuh/wazuh/pull/12733>`_ Added unit tests to the component in Analysisd that extracts the IP address from events.
+- `#12733 <https://github.com/wazuh/wazuh/pull/12733>`_ Added unit tests to the component in ``Analysisd`` that extracts the IP address from events.
 - `#12518 <https://github.com/wazuh/wazuh/pull/12518>`_ Added ``python-json-logger`` dependency.
-- `#10773 <https://github.com/wazuh/wazuh/pull/10773>`_  Prevented the Ruleset test suite from restarting the manager.
+- `#10773 <https://github.com/wazuh/wazuh/pull/10773>`_ The Ruleset test suite is prevented from restarting the manager.
 - `#14839 <https://github.com/wazuh/wazuh/pull/14839>`_ The pthread's ``rwlock`` was replaced with a FIFO-queueing read-write lock.
 
 Wazuh dashboard
@@ -279,17 +279,17 @@ Reference                                                         Description
 `#10635 <https://github.com/wazuh/wazuh/pull/10635>`_             Fixed code flaw regarding the use of XML package. 
 `#10636 <https://github.com/wazuh/wazuh/pull/10636>`_             Fixed code flaw regarding permissions at group directories. 
 `#10544 <https://github.com/wazuh/wazuh/pull/10544>`_             Fixed code flaw regarding temporary directory names. 
-`#11951 <https://github.com/wazuh/wazuh/pull/11951>`_             Fixed code flaw regarding try, except and pass block in ``wazuh-clusterd``. 
+`#11951 <https://github.com/wazuh/wazuh/pull/11951>`_             Fixed code flaw regarding ``try``, ``except`` and ``pass`` code block in ``wazuh-clusterd``. 
 `#10782 <https://github.com/wazuh/wazuh/pull/10782>`_             Fixed framework datetime transformations to UTC. 
 `#11866 <https://github.com/wazuh/wazuh/pull/11866>`_             Fixed a cluster error when Master-Worker tasks were not properly stopped after an exception occurred in one or both parts.
-`#12831 <https://github.com/wazuh/wazuh/pull/12831>`_             Fixed cluster logger issue printing 'NoneType: None' in error logs.
+`#12831 <https://github.com/wazuh/wazuh/pull/12831>`_             Fixed cluster logger issue printing ``NoneType: None`` in error logs.
 `#13419 <https://github.com/wazuh/wazuh/pull/13419>`_             Fixed unhandled cluster error when reading a malformed configuration. 
-`#13368 <https://github.com/wazuh/wazuh/pull/13368>`_             Fixed framework unit test failures when they are run by the root user. 
-`#13405 <https://github.com/wazuh/wazuh/pull/13405>`_             Fixed a memory leak in analysisd when parsing a disabled Active Response. 
+`#13368 <https://github.com/wazuh/wazuh/pull/13368>`_             Fixed framework unit test failures when run by the root user. 
+`#13405 <https://github.com/wazuh/wazuh/pull/13405>`_             Fixed a memory leak in ``analysisd`` when parsing a disabled Active Response. 
 `#13590 <https://github.com/wazuh/wazuh/pull/13590>`_             Fixed Syscollector delta message handling. 
-`#13892 <https://github.com/wazuh/wazuh/pull/13892>`_             Prevented ``wazuh-db`` from deleting queue/diff when cleaning databases. 
+`#13892 <https://github.com/wazuh/wazuh/pull/13892>`_             ``wazuh-db`` is prevented from deleting queue/diff when cleaning databases. 
 `#14981 <https://github.com/wazuh/wazuh/pull/14981>`_             Fixed multiple data race conditions in Remoted reported by ThreadSanitizer.
-`#15151 <https://github.com/wazuh/wazuh/pull/15151>`_             Fixed aarch64 OS collection in Remoted to allow WPK upgrades. 
+`#15151 <https://github.com/wazuh/wazuh/pull/15151>`_             Fixed ``aarch64`` OS collection in Remoted to allow WPK upgrades. 
 `#15165 <https://github.com/wazuh/wazuh/pull/15165>`_             Fixed a race condition in Remoted that was blocking agent connections. 
 `#13531 <https://github.com/wazuh/wazuh/pull/13531>`_             Fixed Virustotal integration to support non UTF-8 characters.
 `#14922 <https://github.com/wazuh/wazuh/pull/14922>`_             Fixed a bug masking as Timeout any error that might occur while waiting to receive files in the cluster.
@@ -305,7 +305,7 @@ Reference                                                         Description
 `#10772 <https://github.com/wazuh/wazuh/pull/10772>`_             Fixed missing fields in Syscollector on Windows 10.
 `#11227 <https://github.com/wazuh/wazuh/pull/11227>`_             Fixed the process startup time data provided by Syscollector on Linux.
 `#11837 <https://github.com/wazuh/wazuh/pull/11837>`_             Fixed network data reporting by Syscollector related to tunnel or VPN interfaces.
-`#12066 <https://github.com/wazuh/wazuh/pull/12066>`_             Skipped V9FS file system at Rootcheck to prevent false positives on WSL.
+`#12066 <https://github.com/wazuh/wazuh/pull/12066>`_             V9FS file system is skipped at Rootcheck to prevent false positives on WSL.
 `#9067 <https://github.com/wazuh/wazuh/pull/9067>`_               Fixed double file handle closing in Logcollector on Windows. 
 `#11949 <https://github.com/wazuh/wazuh/pull/11949>`_             Fixed a bug in Syscollector that may prevent the agent from stopping when the manager connection is lost.
 `#12148 <https://github.com/wazuh/wazuh/pull/12148>`_             Fixed internal exception handling issues on Solaris 10.
@@ -314,17 +314,17 @@ Reference                                                         Description
 `#12147 <https://github.com/wazuh/wazuh/pull/12147>`_             Fixed the ``skip_on_error`` parameter of the AWS integration module, which was set to ``True`` by default.
 `#12381 <https://github.com/wazuh/wazuh/pull/12381>`_             Fixed AWS DB maintenance with Load Balancer Buckets.
 `#12650 <https://github.com/wazuh/wazuh/pull/12650>`_             Fixed AWS integration's ``test_config_format_created_date`` unit test. 
-`#12630 <https://github.com/wazuh/wazuh/pull/12630>`_             Fixed created_date field for LB and Umbrella integrations.
+`#12630 <https://github.com/wazuh/wazuh/pull/12630>`_             Fixed ``created_date`` field for LB and Umbrella integrations.
 `#13185 <https://github.com/wazuh/wazuh/pull/13185>`_             Fixed AWS integration database maintenance error management.
 `#13674 <https://github.com/wazuh/wazuh/pull/13674>`_             The default delay at GitHub integration has been increased to 30 seconds. 
 `#14706 <https://github.com/wazuh/wazuh/pull/14706>`_             Logcollector has been fixed to allow locations containing colons (:). 
 `#13835 <https://github.com/wazuh/wazuh/pull/13835>`_             Fixed system architecture reporting in Logcollector on Apple Silicon devices.
-`#14190 <https://github.com/wazuh/wazuh/pull/14190>`_             The C++ standard library and the GCC runtime library is included with Wazuh.
+`#14190 <https://github.com/wazuh/wazuh/pull/14190>`_             The C++ standard library and the GCC runtime library are now included with Wazuh.
 `#13877 <https://github.com/wazuh/wazuh/pull/13877>`_             Fixed missing inventory cleaning message in Syscollector.
 `#15322 <https://github.com/wazuh/wazuh/pull/15322>`_             Fixed WPK upgrade issue on Windows agents due to process locking. 
 `#13044 <https://github.com/wazuh/wazuh/pull/13044>`_             Fixed FIM injection vulnerability when using ``prefilter_cmd`` option.
 `#14525 <https://github.com/wazuh/wazuh/pull/14525>`_             Fixed the parse of ALB logs splitting ``client_port``, ``target_port`` and ``target_port_list`` in separated ``ip`` and ``port`` for each key.
-`#15335 <https://github.com/wazuh/wazuh/pull/15335>`_             Fixed a bug that prevent processing Macie logs with problematic ipGeolocation values.
+`#15335 <https://github.com/wazuh/wazuh/pull/15335>`_             Fixed a bug that prevents processing Macie logs with problematic ipGeolocation values.
 `#15584 <https://github.com/wazuh/wazuh/pull/15584>`_             Fixed GCP integration module error messages.
 ==============================================================    =============
 
@@ -334,22 +334,22 @@ RESTful API
 ==============================================================    =============
 Reference                                                         Description
 ==============================================================    =============
-`#12302 <https://github.com/wazuh/wazuh/pull/12302>`_             Fixed copy functions used for the backup files and upload endpoints to prevent incorrent metadata.
+`#12302 <https://github.com/wazuh/wazuh/pull/12302>`_             Fixed copy functions used for the backup files and upload endpoints to prevent incorrect metadata.
 `#11010 <https://github.com/wazuh/wazuh/pull/11010>`_             Fixed a bug regarding ids not being sorted with cluster disabled in Active Response and Agent endpoints.
-`#10736 <https://github.com/wazuh/wazuh/pull/10736>`_             Fixed a bug where ``null`` values from ``wazuh-db`` where returned in API responses.
+`#10736 <https://github.com/wazuh/wazuh/pull/10736>`_             Fixed a bug where ``null`` values from ``wazuh-db`` were returned in API responses.
 `#12063 <https://github.com/wazuh/wazuh/pull/12063>`_             Connections through ``WazuhQueue`` will be closed gracefully in all situations. 
 `#12450 <https://github.com/wazuh/wazuh/pull/12450>`_             Fixed exception handling when trying to get the active configuration of a valid but not configured component.
-`#12700 <https://github.com/wazuh/wazuh/pull/12700>`_             Fixed api.yaml path suggested as remediation at exception.py
+`#12700 <https://github.com/wazuh/wazuh/pull/12700>`_             Fixed ``api.yaml`` path suggested as remediation at ``exception.py``.
 `#12768 <https://github.com/wazuh/wazuh/pull/12768>`_             Fixed ``/tmp`` access error in containers of API integration tests environment. 
 `#13096 <https://github.com/wazuh/wazuh/pull/13096>`_             The API will return an exception when the user asks for agent inventory information, and there is no database for it (never connected agents). 
 `#13171 <https://github.com/wazuh/wazuh/pull/13171>`_             Improved regex used for the ``q`` parameter on API requests with special characters and brackets.
 `#13386 <https://github.com/wazuh/wazuh/pull/13386>`_             Improved regex used for the ``q`` parameter on API requests with special characters and brackets.
-`#12592 <https://github.com/wazuh/wazuh/pull/12592>`_             Removed board_serial from syscollector integration tests expected responses.
+`#12592 <https://github.com/wazuh/wazuh/pull/12592>`_             Removed ``board_serial`` from syscollector integration tests expected responses.
 `#12557 <https://github.com/wazuh/wazuh/pull/12557>`_             Removed cmd field from expected responses of syscollector integration tests.
-`#12611 <https://github.com/wazuh/wazuh/pull/12611>`_             Reduced maximum number of groups per agent to 128 and adjusted group name validation.
+`#12611 <https://github.com/wazuh/wazuh/pull/12611>`_             Reduced the maximum number of groups per agent to 128 and adjusted group name validation.
 `#14204 <https://github.com/wazuh/wazuh/pull/14204>`_             Reduced amount of memory required to read CDB lists using the API.
 `#14237 <https://github.com/wazuh/wazuh/pull/14237>`_             Fixed a bug where the cluster health check endpoint and CLI would add an extra active agent to the master node.
-`#15311 <https://github.com/wazuh/wazuh/pull/15311>`_             Fixed bug that prevents updating the configuration when using various <ossec_conf> blocks from the API.
+`#15311 <https://github.com/wazuh/wazuh/pull/15311>`_             Fixed bug that prevents updating the configuration when using various ``<ossec_conf>`` blocks from the API.
 `#15194 <https://github.com/wazuh/wazuh/pull/15194>`_             Fixed vulnerability API integration tests' healthcheck.
 ==============================================================    =============
 
