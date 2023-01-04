@@ -384,23 +384,19 @@ Reference                                                         Description
 `#4595 <https://github.com/wazuh/wazuh-kibana-app/pull/4595>`_    Fixed issue when logging out from Wazuh when SAML is enabled.
 `#4710 <https://github.com/wazuh/wazuh-kibana-app/pull/4710>`_    Fixed server errors with code 500 when the Wazuh API is not reachable / up.
 `#4653 <https://github.com/wazuh/wazuh-kibana-app/pull/4653>`_    Fixed pagination to SCA table.
-`#4849 <https://github.com/wazuh/wazuh-kibana-app/pull/4849>`_    Fixed WAZUH_PROTOCOL param suggestion.
-`#4876 <https://github.com/wazuh/wazuh-kibana-app/pull/4876>`_    Raspbian OS, Ubuntu, Amazon Linux, and Amazon Linux 2 commands in the wizard deploy agent now change when a different architecture is selected.
+`#4849 <https://github.com/wazuh/wazuh-kibana-app/pull/4849>`_    Fixed ``WAZUH_PROTOCOL`` param suggestion.
+`#4876 <https://github.com/wazuh/wazuh-kibana-app/pull/4876>`_    Raspbian OS, Ubuntu, Amazon Linux, and Amazon Linux 2 commands now change when a different architecture is selected in the wizard deploy agent.
 `#4929 <https://github.com/wazuh/wazuh-kibana-app/pull/4929>`_    Disabled unmapped fields filter in Security Events alerts table.
-`#4933 <https://github.com/wazuh/wazuh-kibana-app/pull/4933>`_    Deploy new agent section: Fixed the way macOS versions and architectures were displayed, fixed the way agents were displayed, fixed the way ubuntu versions were displayed.
+`#4933 <https://github.com/wazuh/wazuh-kibana-app/pull/4933>`_    Deploy new agent section: Fixed how macOS versions and architectures were displayed, fixed how agents were displayed, and fixed how Ubuntu versions were displayed.
 `#4943 <https://github.com/wazuh/wazuh-kibana-app/pull/4943>`_    Fixed agent deployment instructions for HP-UX and Solaris. 
 `#4638 <https://github.com/wazuh/wazuh-kibana-app/pull/4638>`_    Fixed a bug that caused the flyouts to close when clicking inside them.
 `#4981 <https://github.com/wazuh/wazuh-kibana-app/pull/4981>`_    Fixed the manager option in the agent deployment section.
-`#4962 <https://github.com/wazuh/wazuh-kibana-app/pull/4962>`_    Fixed commands in the deploy new agent section(most of the commands are missing '-1').
+`#4962 <https://github.com/wazuh/wazuh-kibana-app/pull/4962>`_    Fixed commands in the deploy new agent section(most of the commands are missing ``-1``).
 `#4968 <https://github.com/wazuh/wazuh-kibana-app/pull/4968>`_    Fixed agent installation command for macOS in the deploy new agent section.
-`#4933 <https://github.com/wazuh/wazuh-kibana-app/pull/4933>`_    Deploy new agent section: Fixed the way macOS versions and architectures were displayed, fixed the way agents were displayed, fixed the way ubuntu versions were displayed.
-`#4943 <https://github.com/wazuh/wazuh-kibana-app/pull/4943>`_    Fixed agent deployment instructions for HP-UX and Solaris.
 `#4999 <https://github.com/wazuh/wazuh-kibana-app/pull/4999>`_    Fixed Inventory checks table filters by stats.
 `#4942 <https://github.com/wazuh/wazuh-kibana-app/pull/4942>`_    Fixed agent graph in opensearch dashboard.
-`#4962 <https://github.com/wazuh/wazuh-kibana-app/pull/4962>`_    Fixed commands in the deploy new agent section(most of the commands are missing '-1').
-`#4968 <https://github.com/wazuh/wazuh-kibana-app/pull/4968>`_    Fixed agent installation command for macOS in the deploy new agent section.
-`#4984 <https://github.com/wazuh/wazuh-kibana-app/pull/4984>`_    Fixed commands in the deploy new agent section(most of the commands are missing '-1').
-`#4975 <https://github.com/wazuh/wazuh-kibana-app/pull/4975>`_    Fixed vulnerabilities default last scan date formatter.
+`#4984 <https://github.com/wazuh/wazuh-kibana-app/pull/4984>`_    Fixed commands in the deploy new agent section(most of the commands are missing ``-1``).
+`#4975 <https://github.com/wazuh/wazuh-kibana-app/pull/4975>`_    Fixed default last scan date parser to be able to catch dates returned by Wazuh API when no vulnerabilities scan has been made.
 ==============================================================    =============
 
 Wazuh Kibana plugin for Kibana 7.10.2
@@ -416,16 +412,16 @@ Reference                                                         Description
 `#4595 <https://github.com/wazuh/wazuh-kibana-app/pull/4595>`_    Fixed issue when logging out from Wazuh when SAML is enabled.
 `#4710 <https://github.com/wazuh/wazuh-kibana-app/pull/4710>`_    Fixed server errors with code 500 when the Wazuh API is not reachable / up.
 `#4653 <https://github.com/wazuh/wazuh-kibana-app/pull/4653>`_    Fixed pagination to SCA table.
-`#4849 <https://github.com/wazuh/wazuh-kibana-app/pull/4849>`_    Fixed WAZUH_PROTOCOL param suggestion.
-`#4876 <https://github.com/wazuh/wazuh-kibana-app/pull/4876>`_    Raspbian OS, Ubuntu, Amazon Linux, and Amazon Linux 2 commands in the wizard deploy agent now change when a different architecture is selected.
+`#4849 <https://github.com/wazuh/wazuh-kibana-app/pull/4849>`_    Fixed ``WAZUH_PROTOCOL`` param suggestion.
+`#4876 <https://github.com/wazuh/wazuh-kibana-app/pull/4876>`_    Raspbian OS, Ubuntu, Amazon Linux, and Amazon Linux 2 commands now change when a different architecture is selected in the wizard deploy agent.
 `#4929 <https://github.com/wazuh/wazuh-kibana-app/pull/4929>`_    Disabled unmapped fields filter in Security Events alerts table.
 `#4981 <https://github.com/wazuh/wazuh-kibana-app/pull/4981>`_    Fixed the manager option in the agent deployment section.
-`#4962 <https://github.com/wazuh/wazuh-kibana-app/pull/4962>`_    Fixed commands in the deploy new agent section(most of the commands are missing '-1').
+`#4962 <https://github.com/wazuh/wazuh-kibana-app/pull/4962>`_    Fixed commands in the deploy new agent section(most of the commands are missing ``-1``).
 `#4968 <https://github.com/wazuh/wazuh-kibana-app/pull/4968>`_    Fixed agent installation command for macOS in the deploy new agent section.
-`#4933 <https://github.com/wazuh/wazuh-kibana-app/pull/4933>`_    Deploy new agent section: Fixed the way macOS versions and architectures were displayed, fixed the way agents were displayed, fixed the way ubuntu versions were displayed.
+`#4933 <https://github.com/wazuh/wazuh-kibana-app/pull/4933>`_    Deploy new agent section: Fixed how macOS versions and architectures were displayed, fixed how agents were displayed, and fixed how Ubuntu versions were displayed.
 `#4943 <https://github.com/wazuh/wazuh-kibana-app/pull/4943>`_    Fixed agent deployment instructions for HP-UX and Solaris.
 `#4999 <https://github.com/wazuh/wazuh-kibana-app/pull/4999>`_    Fixed Inventory checks table filters by stats.
-`#4975 <https://github.com/wazuh/wazuh-kibana-app/pull/4975>`_    Fixed vulnerabilities default last scan date formatter.
+`#4975 <https://github.com/wazuh/wazuh-kibana-app/pull/4975>`_    Fixed default last scan date parser to be able to catch dates returned by Wazuh API when no vulnerabilities scan has been made.
 `#5035 <https://github.com/wazuh/wazuh-kibana-app/pull/5035>`_    A Solaris command has been fixed.
 ==============================================================    =============
 
@@ -442,19 +438,18 @@ Reference                                                         Description
 `#4595 <https://github.com/wazuh/wazuh-kibana-app/pull/4595>`_    Fixed issue when logging out from Wazuh when SAML is enabled.
 `#4710 <https://github.com/wazuh/wazuh-kibana-app/pull/4710>`_    Fixed server errors with code 500 when the Wazuh API is not reachable / up.
 `#4653 <https://github.com/wazuh/wazuh-kibana-app/pull/4653>`_    Fixed pagination to SCA table.
-`#4849 <https://github.com/wazuh/wazuh-kibana-app/pull/4849>`_    Fixed WAZUH_PROTOCOL param suggestion.
-`#4876 <https://github.com/wazuh/wazuh-kibana-app/pull/4876>`_    Raspbian OS, Ubuntu, Amazon Linux, and Amazon Linux 2 commands in the wizard deploy agent now change when a different architecture is selected.
+`#4849 <https://github.com/wazuh/wazuh-kibana-app/pull/4849>`_    Fixed ``WAZUH_PROTOCOL`` param suggestion.
+`#4876 <https://github.com/wazuh/wazuh-kibana-app/pull/4876>`_    Raspbian OS, Ubuntu, Amazon Linux, and Amazon Linux 2 commands now change when a different architecture is selected in the wizard deploy agent.
 `#4929 <https://github.com/wazuh/wazuh-kibana-app/pull/4929>`_    Disabled unmapped fields filter in Security Events alerts table.
 `#4832 <https://github.com/wazuh/wazuh-kibana-app/pull/4832>`_    Fixed the agents wizard OS styles and their versions.
 `#4981 <https://github.com/wazuh/wazuh-kibana-app/pull/4981>`_    Fixed the manager option in the agent deployment section.
-`#4962 <https://github.com/wazuh/wazuh-kibana-app/pull/4962>`_    Fixed commands in the deploy new agent section(most of the commands are missing '-1').
+`#4962 <https://github.com/wazuh/wazuh-kibana-app/pull/4962>`_    Fixed commands in the deploy new agent section(most of the commands are missing ``-1``).
 `#4968 <https://github.com/wazuh/wazuh-kibana-app/pull/4968>`_    Fixed agent installation command for macOS in the deploy new agent section.
-`#4933 <https://github.com/wazuh/wazuh-kibana-app/pull/4933>`_    Deploy new agent section: Fixed the way macOS versions and architectures were displayed, fixed the way agents were displayed, and fixed the way ubuntu versions were displayed.
+`#4933 <https://github.com/wazuh/wazuh-kibana-app/pull/4933>`_    Deploy new agent section: Fixed how macOS versions and architectures were displayed, fixed how agents were displayed, and fixed how Ubuntu versions were displayed.
 `#4943 <https://github.com/wazuh/wazuh-kibana-app/pull/4943>`_    Fixed agent deployment instructions for HP-UX and Solaris.
 `#4999 <https://github.com/wazuh/wazuh-kibana-app/pull/4999>`_    Fixed Inventory checks table filters by stats.
 `#4983 <https://github.com/wazuh/wazuh-kibana-app/pull/4983>`_    Fixed agent installation command for macOS in the deploy new agent section.
-`#4962 <https://github.com/wazuh/wazuh-kibana-app/pull/4962>`_    Fixed commands in the deploy new agent section(most of the commands are missing '-1').
-`#4975 <https://github.com/wazuh/wazuh-kibana-app/pull/4975>`_    Fixed vulnerabilities default last scan date formatter.
+`#4975 <https://github.com/wazuh/wazuh-kibana-app/pull/4975>`_    Fixed default last scan date parser to be able to catch dates returned by Wazuh API when no vulnerabilities scan has been made.
 ==============================================================    =============
 
 Changelogs
