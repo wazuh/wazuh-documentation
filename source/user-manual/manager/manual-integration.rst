@@ -57,7 +57,7 @@ Slack
 
 This integration uses Slack Incoming Webhooks and allows posting Wazuh alerts into a Slack channel.
 
-To set up this integration follow these steps.
+To set up this integration, follow these steps.
 
 #. Enable Incoming Webhooks and create one for your Slack channel. Follow the Slack guide on `Incoming Webhooks <https://api.slack.com/messaging/webhooks>`__ for this.
 
@@ -87,7 +87,7 @@ PagerDuty
 
 `PagerDuty <https://www.pagerduty.com/>`_ is a SaaS incident response platform suitable for IT departments. The Pagerduty integration uses the Pagerduty API to forward Wazuh alerts to its Incidents Dashboard.
 
-To set up this integration do the following.
+To set up this integration, do the following.
 
 #. Get your own *Events API v2* integration key by creating a `Pagerduty new service <https://support.pagerduty.com/docs/services-and-integrations#create-a-service>`__.
 
@@ -106,7 +106,7 @@ To set up this integration do the following.
 
    .. include:: /_templates/common/restart_manager.rst
 
-Once the configuration is complete, alerts start showing into the Pagerduty dashboard.
+Once the configuration is complete, alerts start showing on the Pagerduty dashboard.
 
 .. thumbnail:: /images/manual/integration/pagerduty.png
    :title: PagerDuty Incidents Dashboard
@@ -116,9 +116,9 @@ Once the configuration is complete, alerts start showing into the Pagerduty dash
 VirusTotal
 ----------
 
-This integration allows the inspection of malicious files using the VirusTotal database. Find more information about this at the :ref:`VirusTotal integration <virustotal-scan>` page.
+This integration allows the inspection of malicious files using the VirusTotal database. Find more information about this on the :ref:`VirusTotal integration <virustotal-scan>` page.
 
-To set up this integration follow these steps.
+To set up this integration, follow these steps.
 
 #. Get your API key from the `Virustotal API key <https://www.virustotal.com/gui/my-apikey>`__ page.
 
@@ -143,7 +143,7 @@ Shuffle
 
 `Shuffle <https://shuffler.io/>`__ is an Open Source interpretation of SOAR. It transfers data throughout the enterprise with plug-and-play Apps. The Shuffle integration allows forwarding Wazuh alerts into a Shuffle Workflow using a `webhook <https://shuffler.io/docs/triggers#webhook>`__.
 
-To set up this integration do the following.
+To set up this integration, do the following.
 
 #. Go to Shuffle and make a Workflow.
 
@@ -153,7 +153,7 @@ To set up this integration do the following.
 
 #. Start the webhook and copy the webhook URL.
 
-#. Edit ``/var/ossec/etc/ossec.conf`` in the Wazuh server and include a configuration block such as the following. Replace ``https://shuffler.io/api/v1/hooks/webhook_WEBHOOK_ID`` with the webhook URL. The rule level filter is optional and you can remove it or set another level value for the integration.
+#. Edit ``/var/ossec/etc/ossec.conf`` in the Wazuh server and include a configuration block such as the following. Replace ``https://shuffler.io/api/v1/hooks/webhook_WEBHOOK_ID`` with the webhook URL. The rule level filter is optional. You can remove it or set another level value for the integration.
 
    .. code-block:: xml
       :emphasize-lines: 3
@@ -169,7 +169,7 @@ To set up this integration do the following.
 
    .. include:: /_templates/common/restart_manager.rst
 
-Once the configuration is complete, alerts start showing into the email inbox.
+Once the configuration is complete, alerts start showing in the email inbox.
 
 .. thumbnail:: /images/manual/integration/shuffle.png
    :title: Shuffle email alert
@@ -181,7 +181,7 @@ Custom integration
 
 The integrator tool is able to connect Wazuh with other external software. Read the `How to integrate external software using Integrator <https://wazuh.com/blog/how-to-integrate-external-software-using-integrator//>`_ document for more information.
 
-Below, you can find an example of a configuration block in the ``ossec.conf`` file for a custom integration.
+Below, you can find an example of a configuration block in the ``ossec.conf`` file for custom integration.
 
 .. code-block:: xml
 
