@@ -1,5 +1,7 @@
 .. Copyright (C) 2015, Wazuh, Inc.
 
+:orphan:
+
 .. meta::
    :description: PingOne is a platform that enables enterprises to give their users federated access to applications. Learn more about it in this section of our documentation.
 

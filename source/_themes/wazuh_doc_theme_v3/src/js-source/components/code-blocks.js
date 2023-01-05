@@ -113,7 +113,7 @@ if ( $('.document').length > 0 ) {
   $('.highlight').each(function() {
     const blockCode = $(this).parent();
     if (!blockCode.closest('[class*="highlight-"]').hasClass('output') && !blockCode.hasClass('no-copy')) {
-      blockCode.prepend('<button type="button" class="copy-to-clipboard" title="Copy to clipboard"><span>Copied to clipboard</span><i class="far fa-copy" aria-hidden="true"></i></button>');
+      blockCode.prepend('<button type="button" class="copy-to-clipboard" title="Copy to clipboard"><span>Copied to clipboard</span><svg class="icon" aria-hidden="true"><use xlink:href="#copy-icon"></use></svg></button>');
     }
   });
 

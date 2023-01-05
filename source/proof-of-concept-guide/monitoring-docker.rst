@@ -13,11 +13,11 @@ See the :doc:`Monitoring container activity </container-security/docker-monitor/
 Infrastructure
 --------------
 
-+-----------+------------------------------------------------------------------+
-| Endpoint  | Description                                                      |
-+===========+==================================================================+
-| Ubuntu    | This is the Docker host where you create and delete containers.  |
-+-----------+------------------------------------------------------------------+
++---------------+------------------------------------------------------------------+
+| Endpoint      | Description                                                      |
++===============+==================================================================+
+| Ubuntu 22.04  | This is the Docker host where you create and delete containers.  |
++---------------+------------------------------------------------------------------+
 
 Configuration
 -------------

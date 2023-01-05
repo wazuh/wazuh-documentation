@@ -1,9 +1,9 @@
 .. Copyright (C) 2015, Wazuh, Inc.
 
+:orphan:
+
 .. meta::
    :description: Azure Active Directory is a cloud-based identity and access management service by Microsoft. Learn more about it in this section of the Wazuh documentation.
-
-.. _azure-active-directory:
 
 Azure Active Directory
 ======================

@@ -1,9 +1,9 @@
 .. Copyright (C) 2015, Wazuh, Inc.
 
+:orphan:
+
 .. meta::
    :description: Okta Inc. provides technologies that enable secure user authentication into applications. Learn more about it in this section of the Wazuh documentation.
-
-.. _okta:
 
 Okta
 ====
@@ -156,7 +156,7 @@ Edit the Wazuh indexer security configuration files. It is recommended to back u
    - Include a ``saml_auth_domain`` configuration under the ``authc`` section similar to the following:
 
    .. code-block:: console
-      :emphasize-lines: 7,10,22,23,25,26,27,2
+      :emphasize-lines: 7,10,22,23,25,26,27,28
 
           authc:
       ...

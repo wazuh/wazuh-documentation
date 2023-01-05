@@ -78,48 +78,32 @@ redirectSameRelease['4.3'] = {
      '/user-manual/capabilities/vulnerability-detection/how-it-works.html#compatibility-matrix',
    '/user-manual/capabilities/vulnerability-detection/running-vu-scan.html':
      '/user-manual/capabilities/vulnerability-detection/configuring-scans.html',
+   '/user-manual/wazuh-dashboard/single-sign-on/index.html':
+     '/user-manual/user-administration/single-sign-on/index.html', 
+   '/user-manual/wazuh-dashboard/single-sign-on/okta.html':
+     '/user-manual/user-administration/single-sign-on/okta.html',
+   '/user-manual/wazuh-dashboard/single-sign-on/azure-active-directory.html':
+     '/user-manual/user-administration/single-sign-on/azure-active-directory.html',
+   '/user-manual/wazuh-dashboard/single-sign-on/pingone.html':
+     '/user-manual/user-administration/single-sign-on/pingone.html', 
+   '/user-manual/wazuh-dashboard/single-sign-on/google.html':
+     '/user-manual/user-administration/single-sign-on/google.html',
+   '/user-manual/wazuh-dashboard/single-sign-on/jumpcloud.html':
+     '/user-manual/user-administration/single-sign-on/jumpcloud.html',
+   '/user-manual/wazuh-dashboard/single-sign-on/onelogin.html':
+     '/user-manual/user-administration/single-sign-on/onelogin.html',     
+   '/user-manual/securing-wazuh/index.html':
+     '/user-manual/user-administration/password-management/index.html',
+   '/user-manual/securing-wazuh/wazuh-indexer.html':
+     '/user-manual/user-administration/password-management.html',
+   '/user-manual/securing-wazuh/opendistro.html':
+     '/user-manual/user-administration/password-management.html',
+   '/user-manual/securing-wazuh/elastic-stack.html':  
+     '/user-manual/user-administration/password-management.html',
+   '/user-manual/wazuh-dashboard/rbac.html':
+     '/user-manual/user-administration/rbac.html', 
    '/learning-wazuh/build-lab/install-wazuh-central-components.html':
      '/proof-of-concept-guide/index.html',
-   '/learning-wazuh/index.html':
-     '/proof-of-concept-guide/index.html',
-   '/learning-wazuh/build-lab/index.html':
-     '/proof-of-concept-guide/index.html',
-   '/learning-wazuh/build-lab/build-vpc.html':
-     '/proof-of-concept-guide/index.html',
-   '/learning-wazuh/build-lab/launch-ec2-instances.html':
-     '/proof-of-concept-guide/index.html',
-   '/learning-wazuh/build-lab/access-ec2-instances.html':
-     '/proof-of-concept-guide/index.html',
-   '/learning-wazuh/build-lab/install-wazuh-manager.html':
-     '/proof-of-concept-guide/index.html',
-   '/learning-wazuh/build-lab/install-elastic-stack.html':
-     '/proof-of-concept-guide/index.html',
-   '/learning-wazuh/build-lab/xpack-security-setup.html':
-     '/proof-of-concept-guide/index.html',
-   '/learning-wazuh/build-lab/install-linux-agents.html':
-     '/proof-of-concept-guide/index.html',
-   '/learning-wazuh/build-lab/install-windows-agent.html':
-     '/proof-of-concept-guide/index.html',
-   '/learning-wazuh/ssh-brute-force.html':
-      '/proof-of-concept-guide/detect-brute-force-attack.html',
-   '/learning-wazuh/rdp-brute-force.html':
-      '/proof-of-concept-guide/detect-brute-force-attack.html',
-   '/learning-wazuh/hidden-processes.html':
-      '/proof-of-concept-guide/poc-detect-hidden-process.html',
-   '/learning-wazuh/detect-fs-changes.html':
-      '/proof-of-concept-guide/poc-file-integrity-monitoring.html',
-   '/learning-wazuh/replace-stock-rule.html':
-      '/user-manual/ruleset/custom.html',
-   '/learning-wazuh/survive-flood.html':
-      '/user-manual/capabilities/antiflooding.html',
-   '/learning-wazuh/shellshock.html':
-      '/proof-of-concept-guide/detect-web-attack-shellshock.html',
-   '/learning-wazuh/audit-commands.html':
-      '/proof-of-concept-guide/audit-commands-run-by-user.html',
-   '/learning-wazuh/suricata.html':
-      '/proof-of-concept-guide/integrate-network-ids-suricata.html',
-   '/learning-wazuh/vuln-detection.html':
-      '/proof-of-concept-guide/poc-vulnerability-detection.html',
  };
  
  /* Pages added in 4.3 */
@@ -137,6 +121,7 @@ newUrls['4.3'] = [
   '/release-notes/release-4-3-10.html',
   '/getting-started/use-cases/container-security.html',
   '/user-manual/agents/query-configuration.html',
+  '/user-manual/agents/listing/wazuh-dashboard.html',
   '/user-manual/elasticsearch/configure-indices.html',
   '/user-manual/elasticsearch/elasticsearch.html',
   '/user-manual/elasticsearch/index.html',
@@ -144,20 +129,19 @@ newUrls['4.3'] = [
   '/user-manual/wazuh-dashboard/settings.html',
   '/user-manual/wazuh-dashboard/config-file.html',
   '/user-manual/wazuh-dashboard/index.html',
-  '/user-manual/wazuh-dashboard/rbac.html',
   '/user-manual/wazuh-dashboard/troubleshooting.html',
   '/user-manual/wazuh-dashboard/multi-tenancy.html',
-  '/user-manual/wazuh-dashboard/single-sign-on/index.html',
-  '/user-manual/wazuh-dashboard/single-sign-on/okta.html',
-  '/user-manual/wazuh-dashboard/single-sign-on/azure-active-directory.html',
-  '/user-manual/wazuh-dashboard/single-sign-on/pingone.html',
-  '/user-manual/wazuh-dashboard/single-sign-on/google.html',
-  '/user-manual/wazuh-dashboard/single-sign-on/jumpcloud.html',
-  '/user-manual/wazuh-dashboard/single-sign-on/onelogin.html',
-  '/user-manual/securing-wazuh/index.html',
-  '/user-manual/securing-wazuh/wazuh-indexer.html',
-  '/user-manual/securing-wazuh/opendistro.html',
-  '/user-manual/securing-wazuh/elastic-stack.html',
+  '/user-manual/user-administration/index.html',
+  '/user-manual/user-administration/password-management.html',
+  '/user-manual/user-administration/rbac.html',
+  '/user-manual/user-administration/single-sign-on/index.html',
+  '/user-manual/user-administration/single-sign-on/okta.html',
+  '/user-manual/user-administration/single-sign-on/azure-active-directory.html',
+  '/user-manual/user-administration/single-sign-on/pingone.html',
+  '/user-manual/user-administration/single-sign-on/google.html',
+  '/user-manual/user-administration/single-sign-on/jumpcloud.html',
+  '/user-manual/user-administration/single-sign-on/onelogin.html',
+  '/user-manual/user-administration/single-sign-on/keycloak.html',
   '/upgrade-guide/upgrading-central-components.html',
   '/migration-guide/index.html',
   '/migration-guide/wazuh-indexer.html',
@@ -410,6 +394,7 @@ removedUrls['4.3'] = [
   '/installation-guide/wazuh-agent/deployment-variables/deployment-variables-macos.html',
   '/installation-guide/wazuh-agent/deployment-variables/deployment-variables-windows.html',
   '/user-manual/overview.html',
+  '/user-manual/agents/listing/wazuh-app.html',
   '/user-manual/capabilities/vulnerability-detection/compatibility-matrix.html',
   '/user-manual/capabilities/vulnerability-detection/running-vu-scan.html',
   '/user-manual/kibana-app/index.html',
@@ -438,7 +423,6 @@ removedUrls['4.3'] = [
   '/learning-wazuh/build-lab/index.html',
   '/learning-wazuh/build-lab/install-linux-agents.html',
   '/learning-wazuh/build-lab/install-windows-agent.html',
-  '/learning-wazuh/build-lab/install-wazuh-central-components.html',
   '/learning-wazuh/ssh-brute-force.html',
   '/learning-wazuh/rdp-brute-force.html',
   '/learning-wazuh/hidden-processes.html',
@@ -991,7 +975,7 @@ redirections.push(
   {
     'target': ['4.2=>4.3'],
     '4.2': '/user-manual/kibana-app/wazuh-rbac.html',
-    '4.3': '/user-manual/wazuh-dashboard/rbac.html',
+    '4.3': '/user-manual/user-administration/rbac.html',
   },
   {
     'target': ['4.2=>4.3'],
@@ -1012,6 +996,111 @@ redirections.push(
     'target': ['4.2=>4.3'],
     '4.2': '/user-manual/kibana-app/reference/configure-indices.html',
     '4.3': '/user-manual/elasticsearch/configure-indices.html',
+  },
+  {
+    'target': ['4.2=>4.3', '4.3=>4.2'],
+    '4.2': '/user-manual/agents/listing/wazuh-app.html',
+    '4.3': '/user-manual/agents/listing/wazuh-dashboard.html',
+  },
+  {
+    'target': ['4.2=>4.3'],
+    '4.2': '/learning-wazuh/index.html',
+    '4.3': '/proof-of-concept-guide/index.html',
+  },
+  {
+    'target': ['4.2=>4.3'],
+    '4.2': '/learning-wazuh/build-lab/index.html',
+    '4.3': '/proof-of-concept-guide/index.html',
+  },
+  {
+    'target': ['4.2=>4.3'],
+    '4.2': '/learning-wazuh/build-lab/build-vpc.html',
+    '4.3': '/proof-of-concept-guide/index.html',
+  },
+  {
+    'target': ['4.2=>4.3'],
+    '4.2': '/learning-wazuh/build-lab/launch-ec2-instances.html',
+    '4.3': '/proof-of-concept-guide/index.html',
+  },
+  {
+    'target': ['4.2=>4.3'],
+    '4.2': '/learning-wazuh/build-lab/access-ec2-instances.html',
+    '4.3': '/proof-of-concept-guide/index.html',
+  },
+  {
+    'target': ['4.2=>4.3'],
+    '4.2': '/learning-wazuh/build-lab/install-wazuh-manager.html',
+    '4.3': '/proof-of-concept-guide/index.html',
+  },
+  {
+    'target': ['4.2=>4.3'],
+    '4.2': '/learning-wazuh/build-lab/install-elastic-stack.html',
+    '4.3': '/proof-of-concept-guide/index.html',
+  },
+  {
+    'target': ['4.2=>4.3'],
+    '4.2': '/learning-wazuh/build-lab/xpack-security-setup.html',
+    '4.3': '/proof-of-concept-guide/index.html',
+  },
+  {
+    'target': ['4.2=>4.3'],
+    '4.2': '/learning-wazuh/build-lab/install-linux-agents.html',
+    '4.3': '/proof-of-concept-guide/index.html',
+  },
+  {
+    'target': ['4.2=>4.3'],
+    '4.2': '/learning-wazuh/build-lab/install-windows-agent.html',
+    '4.3': '/proof-of-concept-guide/index.html',
+  },
+  {
+    'target': ['4.2=>4.3'],
+    '4.2': '/learning-wazuh/ssh-brute-force.html',
+    '4.3': '/proof-of-concept-guide/detect-brute-force-attack.html',
+  },
+  {
+    'target': ['4.2=>4.3'],
+    '4.2': '/learning-wazuh/rdp-brute-force.html',
+    '4.3': '/proof-of-concept-guide/detect-brute-force-attack.html',
+  },
+  {
+    'target': ['4.2=>4.3'],
+    '4.2': '/learning-wazuh/hidden-processes.html',
+    '4.3': '/proof-of-concept-guide/poc-detect-hidden-process.html',
+  },
+  {
+    'target': ['4.2=>4.3'],
+    '4.2': '/learning-wazuh/detect-fs-changes.html',
+    '4.3': '/proof-of-concept-guide/poc-file-integrity-monitoring.html',
+  },
+  {
+    'target': ['4.2=>4.3'],
+    '4.2': '/learning-wazuh/replace-stock-rule.html',
+    '4.3': '/user-manual/ruleset/custom.html',
+  },
+  {
+    'target': ['4.2=>4.3'],
+    '4.2': '/learning-wazuh/survive-flood.html',
+    '4.3': '/user-manual/capabilities/antiflooding.html',
+  },
+  {
+    'target': ['4.2=>4.3'],
+    '4.2': '/learning-wazuh/shellshock.html',
+    '4.3': '/proof-of-concept-guide/detect-web-attack-shellshock.html',
+  },
+  {
+    'target': ['4.2=>4.3'],
+    '4.2': '/learning-wazuh/audit-commands.html',
+    '4.3': '/proof-of-concept-guide/audit-commands-run-by-user.html',
+  },
+  {
+    'target': ['4.2=>4.3'],
+    '4.2': '/learning-wazuh/suricata.html',
+    '4.3': '/proof-of-concept-guide/integrate-network-ids-suricata.html',
+  },
+  {
+    'target': ['4.2=>4.3'],
+    '4.2': '/learning-wazuh/vuln-detection.html',
+    '4.3': '/proof-of-concept-guide/poc-vulnerability-detection.html',
   },
 );
 
