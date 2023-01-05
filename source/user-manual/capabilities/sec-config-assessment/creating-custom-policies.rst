@@ -91,7 +91,7 @@ Each section has its fields as described in the tables
 .. table:: Policy section
 
     +--------------------+----------------+-------------------+------------------------+------------------------+
-    | Field              | Mandatory      | Type              | Allowed values         | Allowed values         |
+    | Field              | Mandatory      | Type              | Allowed values         | Description            |
     +====================+================+===================+========================+========================+
     | id                 | Yes            | String            | Any string             | Policy ID              |
     +--------------------+----------------+-------------------+------------------------+------------------------+
@@ -101,17 +101,14 @@ Each section has its fields as described in the tables
     +--------------------+----------------+-------------------+------------------------+------------------------+
     | description        | Yes            | String            | Any string             | Brief description      |
     +--------------------+----------------+-------------------+------------------------+------------------------+
-    | references         | No             | Array of strings  | Any string             | Any string             |
+    | references         | No             | Array of strings  | Any string             | Links to references    |
     +--------------------+----------------+-------------------+------------------------+------------------------+
     | regex_type         | No             | String            | "pcre2" or "osregex"   | Policy regex engine    |
     +--------------------+----------------+-------------------+------------------------+------------------------+
 
 
 .. note::
-  If the **regex_type** is configured in this section the checks will be run with the configured engine.
-
-.. note::
-  If the **regex_type** is not configured in this section the checks will be run with "osregex" engine.
+  If the **regex_type** is configured in this section, the checks will be run with the configured engine. By default they run with the OSRegex engine.
 
 .. _sca_policy_file_requirements_section:
 .. table:: Requirements section
@@ -198,10 +195,7 @@ Check evaluation is governed by its `rule result aggregation strategy`, as set i
 the evaluation of its rules.
 
 .. note::
-  If the **regex_type** is configured in this section the check will be run with the configured engine.
-  
-.. note::
-  By default it uses the global engine.
+  If the **regex_type** is configured for a particular check, it overwrites the regex engine applied for the whole policy.
 
 Condition
 ~~~~~~~~~~~~~~~~~~~
