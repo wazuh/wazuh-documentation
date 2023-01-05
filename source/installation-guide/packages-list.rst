@@ -416,20 +416,6 @@ Virtual machine
 |   CentOS 7   |    64bits    |      OVA     |  |WAZUH_CURRENT_OVA| | |VM_CentOS7_64_OVA|                  |
 +--------------+--------------+--------------+---------+--------------------------------------+
 
-Amazon Machine Image
---------------------
-
-.. |AMI_PRODUCT_PAGE| replace:: `Wazuh All-In-One Deployment <https://aws.amazon.com/marketplace/pp/prodview-eju4flv5eqmgq>`__
-
-.. |var_WAZUH_CURRENT_AMI| replace:: |WAZUH_CURRENT_AMI|
-
-+------------------+--------------+-------------+-------------------------+---------------------+
-| Distribution     | Architecture | VM Format   | Latest version          | Product page        |
-+==================+==============+=============+=========================+=====================+
-| Amazon Linux 2   | 64-bit       | AWS AMI     | |var_WAZUH_CURRENT_AMI| | |AMI_PRODUCT_PAGE|  |
-+------------------+--------------+-------------+-------------------------+---------------------+
-
-
 MSU
 ---
 
