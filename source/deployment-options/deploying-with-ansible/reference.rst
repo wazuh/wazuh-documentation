@@ -21,7 +21,7 @@ Wazuh indexer
 |
 | **Variable**: ``indexer_http_port``
 | **Description**: Indexer listening port.
-| **Default value**: 9200
+| **Default value**: ``9200``
 |
 | **Variable**: ``indexer_network_host``
 | **Description**: Indexer listening IP address.
@@ -50,7 +50,7 @@ Wazuh dashboard
 |
 | **Variable**: ``dashboard_server_port``
 | **Description**: Listening port of the Wazuh dashboard.
-| **Default value**: ``5601``
+| **Default value**: ``443``
 |
 | **Variable**: ``wazuh_version``
 | **Description**: Wazuh APP compatible version to install.
