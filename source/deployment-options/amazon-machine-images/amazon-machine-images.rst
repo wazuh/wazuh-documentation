@@ -13,7 +13,6 @@ Wazuh provides a pre-built Amazon Machine Image (AMI). An AMI is a pre-configure
 - Wazuh indexer |WAZUH_CURRENT_AMI|
 - Wazuh dashboard |WAZUH_CURRENT_AMI|
 
-
 Packages list
 -------------
 

@@ -31,7 +31,7 @@ Packages list
 This section contains packages required for the Wazuh 4.3.10 installation using the Elastic Stack option:
 
 Wazuh Kibana plugin
--------------------
+^^^^^^^^^^^^^^^^^^^
 
 For Wazuh |WAZUH_CURRENT|:
 
@@ -90,7 +90,7 @@ For Wazuh |WAZUH_CURRENT|:
 For a complete list of the available versions, see the `Wazuh Kibana plugin compatibility matrix <https://github.com/wazuh/wazuh-kibana-app/wiki/Compatibility>`_.
 
 Filebeat
---------
+^^^^^^^^
 
 +--------------+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
 | Package type | Package                                                                                                                                                                                                                                         |

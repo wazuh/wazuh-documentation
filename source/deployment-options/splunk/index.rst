@@ -23,7 +23,7 @@ To learn more about how Splunk works, see the `Splunk documentation <https://doc
 
 
 Compatibility matrix
-====================
+--------------------
 
 The following table shows the Splunk versions compatible with the Wazuh manager |WAZUH_SPLUNK_CURRENT| using the Wazuh Splunk app |WAZUH_SPLUNK_CURRENT|:
 
@@ -35,8 +35,8 @@ The following table shows the Splunk versions compatible with the Wazuh manager 
 | 4.3.10               | 4.3.10               | 8.2.0 – 8.2.8        |
 +----------------------+----------------------+----------------------+
 
-Wazuh Splunk app
-----------------
+Packages list
+-------------
 
 This section contains packages required for the Wazuh Splunk app |WAZUH_SPLUNK_CURRENT| installation:
 
