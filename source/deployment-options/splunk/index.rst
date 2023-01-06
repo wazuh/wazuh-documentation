@@ -27,12 +27,14 @@ Compatibility matrix
 
 The following table shows the Splunk versions compatible with the Wazuh manager |WAZUH_SPLUNK_CURRENT| using the Wazuh Splunk app |WAZUH_SPLUNK_CURRENT|:
 
+.. |SPLUNK_APP| replace:: |WAZUH_SPLUNK_CURRENT|
+
 +----------------------+----------------------+----------------------+
 | Wazuh manager        | Wazuh Splunk app     | Splunk               |
 +======================+======================+======================+
-| 4.3.10               | 4.3.10               |  8.1.1 – 8.1.10      |
+| |SPLUNK_APP|         | |SPLUNK_APP|         | 8.1.1 – 8.1.10       |
 +----------------------+----------------------+----------------------+
-| 4.3.10               | 4.3.10               | 8.2.0 – 8.2.8        |
+| |SPLUNK_APP|         | |SPLUNK_APP|         | 8.2.0 – 8.2.8        |
 +----------------------+----------------------+----------------------+
 
 Packages list
