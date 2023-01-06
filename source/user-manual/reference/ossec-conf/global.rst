@@ -474,21 +474,22 @@ Example:
 
   <agents_disconnection_alert_time>1h</agents_disconnection_alert_time>
 
-Default configuration
+Configuration example
 ---------------------
 
 .. code-block:: xml
 
-    <global>
-      <jsonout_output>yes</jsonout_output>
-      <alerts_log>yes</alerts_log>
-      <logall>no</logall>
-      <logall_json>no</logall_json>
-      <email_notification>yes</email_notification>
-      <smtp_server>smtp.example.wazuh.com</smtp_server>
-      <email_from>wazuh@example.wazuh.com</email_from>
-      <email_to>recipient@example.wazuh.com</email_to>
-      <email_maxperhour>12</email_maxperhour>
-      <agents_disconnection_time>10m</agents_disconnection_time>
-      <agents_disconnection_alert_time>0</agents_disconnection_alert_time>
-    </global>
+   <global>
+     <jsonout_output>yes</jsonout_output>
+     <alerts_log>yes</alerts_log>
+     <logall>no</logall>
+     <logall_json>no</logall_json>
+     <email_notification>no</email_notification>
+     <smtp_server>smtp.example.wazuh.com</smtp_server>
+     <email_from>wazuh@example.wazuh.com</email_from>
+     <email_to>recipient@example.wazuh.com</email_to>
+     <email_maxperhour>12</email_maxperhour>
+     <email_log_source>alerts.log</email_log_source>
+     <agents_disconnection_time>10m</agents_disconnection_time>
+     <agents_disconnection_alert_time>0</agents_disconnection_alert_time>
+   </global>
