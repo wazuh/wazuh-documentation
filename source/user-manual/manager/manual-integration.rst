@@ -78,7 +78,7 @@ To set up this integration, follow these steps.
 Once the configuration is complete, alerts start showing in the selected channel.
 
 .. thumbnail:: /images/manual/integration/slack.png
-  :title: PagerDuty Incidents Dashboard
+  :title: Alerts in Slack channel
   :align: center
   :width: 50%
 
