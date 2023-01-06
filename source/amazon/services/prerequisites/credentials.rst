@@ -8,7 +8,7 @@
 Configuring AWS credentials
 ===========================
 
-In order to make the Wazuh AWS module pull log data from the different services, it will be necessary to provide access credentials so it can connect to them.
+In order to make the Wazuh AWS module pull log data from the different services, it's necessary to provide access credentials to connect to them. The ``.aws/credentials`` file must be placed at the correct location. You need to create the credentials file using ``root``. The root user is the one that runs *wazuh-modulesd*. Thus, the correct location is ``/root/.aws/credentials``, the home directory of the root user.
 
 There are multiple ways to configure the AWS credentials:
 
@@ -48,14 +48,14 @@ Depending on the service that will be monitored, the Wazuh user will need a diff
 Authenticating options
 ----------------------
 
-Credentials can be loaded from different locations, you can either specify the credentials as they are in the previous block of configuration, assume an IAM role, or load them from other `Boto3 supported locations <http://boto3.readthedocs.io/en/latest/guide/configuration.html#configuring-credentials>`_.
+Credentials can be loaded from different locations. You can either specify the credentials as they are in the previous block of configuration, assume an IAM role, or load them from other `Boto3 supported locations <https://boto3.amazonaws.com/v1/documentation/api/latest/guide/credentials.html#configuring-credentials>`__.
 
 .. _aws_profile:
 
 Profiles
 ^^^^^^^^
 
-You can define profiles in your credentials file (``~/.aws/credentials``) and specify those profiles on the bucket configuration.
+You can define profiles in ``/root/.aws/credentials`` and specify those profiles on the bucket configuration.
 
 .. note::
   A region must be also specified on the ``credentials`` file in order to make it work.
