@@ -130,7 +130,7 @@ Time of the day to run the scan. It has to be in the hh:mm format.
 
 .. note::
 
-	When only the ``time`` option is set, the interval value must be a multiple of days or weeks. By default, the interval is set to a day.
+    If only the ``time`` option is set, the interval value must be a multiple of days, weeks, or months. By default, the interval is set to a day.
 
 remove_from_bucket
 ~~~~~~~~~~~~~~~~~~
@@ -242,6 +242,8 @@ A user-friendly name for the AWS account.
 access_key
 ^^^^^^^^^^
 
+.. deprecated:: 4.4.0
+
 The access key ID for the IAM user with the permission to read logs from the bucket.
 
 +--------------------+--------------------------+
@@ -252,8 +254,11 @@ The access key ID for the IAM user with the permission to read logs from the buc
 
 .. _bucket_secret_key:
 
+
 secret_key
 ^^^^^^^^^^
+
+.. deprecated:: 4.4.0
 
 The secret key created for the IAM user with the permission to read logs from the bucket.
 
@@ -449,7 +454,7 @@ The available types are: ``cloudwatchlogs``, and ``inspector``.
 +----------------------------------------+-------------------------------------------------------------+-----------------------------------------------+
 | :ref:`service_access_key`              | Any alphanumerical key                                      | Optional                                      |
 +----------------------------------------+-------------------------------------------------------------+-----------------------------------------------+
-| :ref:`service_secret_key`              | Any alphanumerical key                                      | Optional                                      |       
+| :ref:`service_secret_key`              | Any alphanumerical key                                      | Optional                                      |
 +----------------------------------------+-------------------------------------------------------------+-----------------------------------------------+
 | :ref:`service_aws_profile`             | Valid profile name                                          | Optional                                      |
 +----------------------------------------+-------------------------------------------------------------+-----------------------------------------------+

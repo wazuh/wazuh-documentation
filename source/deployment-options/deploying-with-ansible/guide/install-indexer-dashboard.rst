@@ -210,18 +210,27 @@ Now, It seems that we are ready to run the playbook and start the installation. 
 
 #. We can check the status of our new services on our Wazuh indexer and dashboard server.
 
-   -  Wazuh indexer.
+   -  **Wazuh indexer**
 
       .. code-block:: console
 
          # systemctl status wazuh-indexer
 
-   -  Wazuh dashboard
+   -  **Wazuh dashboard**
     
       .. code-block:: console
 
          # systemctl status wazuh-dashboard
 
+.. note::
+	
+	- 	The Wazuh dashboard can be accessed by visiting ``https://<wazuh_server_IP>``
+
+	- 	The default credentials for Wazuh deployed using ansible is:
+		
+		|	Username: admin
+		| Password: changeme
+		| These credentials should be changed using the password changing tool.
 ..
     Once the Wazuh API is registered we can access it through the Wazuh dashboard.
 
