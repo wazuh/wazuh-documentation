@@ -12,19 +12,19 @@ If your SMTP server uses authentication (like Gmail, for instance), a server rel
 
 #. Install the needed packages:
 
-.. tabs::
+   .. tabs::
 
-   .. group-tab:: APT
+      .. group-tab:: APT
 
-      .. code-block:: console
+         .. code-block:: console
 
-          # apt-get install postfix mailutils libsasl2-2 ca-certificates libsasl2-modules
+            # apt-get install postfix mailutils libsasl2-2 ca-certificates libsasl2-modules
 
-   .. group-tab:: Yum
+      .. group-tab:: Yum
 
-      .. code-block:: console
+         .. code-block:: console
 
-          # yum update && yum install postfix mailx cyrus-sasl cyrus-sasl-plain
+            # yum update && yum install postfix mailx cyrus-sasl cyrus-sasl-plain
 
 
 #. Configure Postfix in the ``/etc/postfix/main.cf`` file adding these lines to the end of the file:
