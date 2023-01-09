@@ -5,8 +5,8 @@
   
 .. _basic_installation_guide:
 
-Installing Wazuh with Elastic Stack basic license
-=================================================
+Installing Wazuh with Elastic Stack
+===================================
 
 This section aims to guide the user through the installation process of Wazuh. This installation guide will use the Elastic Stack basic license option, which contains everything included in the open-source version under the Apache 2.0 license, plus additional capabilities such as Elastic Stack Security features, Kibana alerting, and others. More information about the Wazuh components, including a brief description of each one, can be found :doc:`here </installation-guide/index>`.
 
@@ -85,7 +85,7 @@ Wazuh Kibana plugin
 | 7.17.6           |                       | |WAZUH_KIBANA_7.17.6|    |
 +------------------+-----------------------+--------------------------+
 
-For a complete list of the available versions, see the `Wazuh Kibana plugin compatibility matrix <https://github.com/wazuh/wazuh-kibana-app/wiki/Compatibility>`_.
+For versions older than 4.3.10, check the full list in `Wazuh Kibana plugin compatibility matrix <https://github.com/wazuh/wazuh-kibana-app/wiki/Compatibility>`_.
 
 Filebeat
 ^^^^^^^^
