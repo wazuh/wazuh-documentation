@@ -143,7 +143,7 @@ Analysis
 Pre-decoding
 ^^^^^^^^^^^^
 
-In the pre-decoding phase of analysis, static information from well-known fields is extracted from the log header.
+In the pre-decoding phase of analysis, the log analysis extracts syslog-like information such as time stamp, host name, and program name from the log header.
 
 .. code-block:: none
   :class: output
@@ -158,7 +158,7 @@ Extracted information:
 Decoding
 ^^^^^^^^
 
-In the decoding phase, the log message is evaluated to identify what type of log it is and known fields for that specific log type are then extracted.
+In the decoding phase, the log analysis looks for a decoder matching the log. The matching decoder then extracts defined fields from that specific log.
 
 Sample log and its extracted info:
 
@@ -169,7 +169,6 @@ Sample log and its extracted info:
 
 Extracted information:
 
-  - *program name*: sshd
   - *dstuser*: rromero
   - *srcip*: 192.168.1.133
 
