@@ -149,8 +149,8 @@ Edit the Wazuh indexer security configuration files. We recommend that you back 
                 challenge: true
                 config:
                   idp:
-                    metadata_file: “/usr/share/wazuh-indexer/plugins/opensearch-security/securityconfig/Google_Metadata.xml”
-                    entity_id: “https://accounts.google.com/o/saml2?idpid=C02…”
+                    metadata_url: IDP METADATA URL
+                    entity_id: ISSUER ID
                   sp:
                     entity_id: wazuh-saml
                     signature_private_key_filepath: /usr/share/wazuh-indexer/plugins/opensearch-security/securityconfig/PRIVATE_KEY
