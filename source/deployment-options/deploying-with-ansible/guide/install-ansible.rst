@@ -143,13 +143,13 @@ Our Ansible server will need to connect to the other endpoints. Let’s see how 
 
       .. tabs::
           
-         .. group-tab:: Yum
+         .. group-tab:: CentOS/RHEL/Fedora
 
             .. code-block:: console
 
                # yum install openssh-server
 
-         .. group-tab:: APT
+         .. group-tab:: Ubuntu/Debian
 
             .. code-block:: console
 
