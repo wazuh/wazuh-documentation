@@ -213,7 +213,7 @@ Define that the decoder is related with the ``test``, ``TEST`` or equivalent (ca
 prematch
 ^^^^^^^^^
 
-It defines a regular expression that the log must match to apply the decoder. Only the log  after any syslog-like header is used for the match finding. It's important to be as specific as possible to avoid matching with wrong events.
+It defines a regular expression that the log must match to apply the decoder. Only the log after any syslog-like header is used for the match finding. It's important to be as specific as possible to avoid matching with wrong events.
 
 +--------------------+--------------------------------------------------------------------+
 | **Default Value**  | n/a                                                                |
