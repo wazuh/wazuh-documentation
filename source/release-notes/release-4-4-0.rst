@@ -20,7 +20,7 @@ This new version of Wazuh brings new features and adds support related to differ
 - Rework of Ubuntu Linux 20.04 and 22.04 SCA policies
 - Support for Azure Integration in Linux agents
 
-Below you can find more information about each of these new features.
+Below you can find more information about each of these highlights.
 
 Wazuh 4.4.0 brings IPv6 support when connecting and enrolling an agent to a manager. The IPv6 protocol can handle packets more effectively, enhance performance, and boost security. This new feature allows agents to register and connect through an IPV6 address.
 
