@@ -485,9 +485,9 @@ Changelogs
 
 More details about these changes are provided in the changelog of each component:
 
-- `wazuh/wazuh <https://github.com/wazuh/wazuh/blob/v4.4.0/CHANGELOG.md>`_
-- `wazuh/wazuh-dashboard <https://github.com/wazuh/wazuh-kibana-app/blob/v4.4.0-1.2.0/CHANGELOG.md>`_
-- `wazuh/wazuh-kibana-app 7.10.2 <https://github.com/wazuh/wazuh-kibana-app/blob/v4.4.0-7.10.2/CHANGELOG.md>`_
-- `wazuh/wazuh-kibana-app 7.17.x <https://github.com/wazuh/wazuh-kibana-app/blob/v4.4.0-7.17.6/CHANGELOG.md>`_
-- `wazuh/wazuh-splunk <https://github.com/wazuh/wazuh-splunk/blob/v4.4.0-8.2.8/CHANGELOG.md>`_
+- `wazuh/wazuh <https://github.com/wazuh/wazuh/blob/v4.4.0-alpha2/CHANGELOG.md>`_
+- `wazuh/wazuh-dashboard <https://github.com/wazuh/wazuh-kibana-app/blob/v4.4.0-2.4.1-alpha2/CHANGELOG.md>`_
+- `wazuh/wazuh-kibana-app 7.10.2 <https://github.com/wazuh/wazuh-kibana-app/blob/v4.4.0-7.10.2-alpha2/CHANGELOG.md>`_
+- `wazuh/wazuh-kibana-app 7.17.x <https://github.com/wazuh/wazuh-kibana-app/blob/v4.4.0-7.17.8-alpha2/CHANGELOG.md>`_
+- `wazuh/wazuh-splunk <https://github.com/wazuh/wazuh-splunk/blob/v4.4.0-8.2-rc1/CHANGELOG.md>`_
 - `wazuh/wazuh-packages <https://github.com/wazuh/wazuh-packages/releases/tag/v4.4.0>`_
