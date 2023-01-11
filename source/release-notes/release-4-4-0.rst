@@ -39,6 +39,9 @@ Finally, it’s essential to remark that we maintain support for all installatio
 Breaking changes
 ----------------
 
+RESTful API
+^^^^^^^^^^^
+
 - `#14119 <https://github.com/wazuh/wazuh/pull/14119>`_ Added new ``limits`` section to the ``upload_wazuh_configuration`` section in the Wazuh API configuration.
 - `#14230 <https://github.com/wazuh/wazuh/pull/14230>`_ ``GET /manager/stats/analysisd``, ``GET /manager/stats/remoted``, ``GET /cluster/{node_id}stats/analysisd``, and ``GET /cluster/{node_id}stats/remoted`` API endpoints are deprecated.
 
