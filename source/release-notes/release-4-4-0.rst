@@ -11,12 +11,12 @@ This section lists the changes in version 4.4.0. Every update of the Wazuh solut
 Highlights
 ----------
 
-The new version, Wazuh 4.4.0, enhances the solution with the following main features:
+This new version of Wazuh brings new features and adds support related to different Linux distributions and integrations. For more details, the highlights of Wazuh 4.4.0 are listed below:
 
 - IPv6 support for the enrollment process and the agent-manager connection
 - Vulnerabilities detection support for SUSE agents
-- Support for Alpine Linux
-- Wazuh indexer and dashboard bumped to Opensearch 2.4.1
+- Expanded operating systems support with Alpine Linux agent
+- Wazuh indexer and dashboard based on the latest Opensearch 2.4.1 version
 - Rework of Ubuntu Linux 20.04 and 22.04 SCA policies
 - Support for Azure Integration in Linux agents
 
@@ -28,11 +28,21 @@ SUSE agents now natively support vulnerabilities detection. Wazuh added full sup
 
 Wazuh 4.4.0 adds support for Alpine Linux. As Alpine Linux is a distribution that has gained great popularity among Linux users, we saw the need for the Wazuh agent to support Alpine Linux and ensure the proper support for this distribution. We generated Alpine Linux installers to make it easier to install and thus spare users of this distribution from having to compile the source code locally.
 
+.. thumbnail:: /images/release-notes/4.4.0/alpine-linux.png
+      :align: center
+      :width: 60%
+      :title: This new version adds support for Alpine Linux
+
 Wazuh indexer and dashboard bump to OpenSearch 2.4.1. The Wazuh indexer and the Wazuh dashboard are based on OpenSearch, an open source search and analytics project derived from Elasticsearch and Kibana. We generated and tested the ``wazuh-indexer`` Debian and RPM packages with OpenSearch 2.4.1 and the ``wazuh-dashboard`` Debian and RPM packages with OpenSearch dashboards 2.4.1. This way, we avoid earlier version vulnerabilities, have all OpenSearch new functionalities, and are up to date with the OpenSearch project development.
 
 To solve some errors in the previous Ubuntu Linux 20.04 SCA Policy, we reworked the Ubuntu Linux 20.04 and 22.04 SCA policies. As part of this task, we used the *CIS Ubuntu Linux 22.04 LTS Benchmark v1.0.0* to update Ubuntu Linux 22.04 SCA Policy.
 
 Wazuh added support for Azure Integration in Linux agents. Now this integration can run for both agents and managers. We modified the packages generation process to support Azure in those agents installed using the WPK packages. Each new WPK package contains all the updated binaries and source code, and the installer updates all files and binaries to support Azure integration.
+
+.. thumbnail:: /images/release-notes/4.4.0/azure-integration.png
+      :align: center
+      :width: 60%
+      :title: This new version adds support Azure Integration in Linux agents
 
 Finally, it’s essential to remark that we maintain support for all installation alternatives. Indeed we maintain and extend this support by adding more recent versions.
 
