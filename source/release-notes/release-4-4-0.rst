@@ -11,9 +11,31 @@ This section lists the changes in version 4.4.0. Every update of the Wazuh solut
 Highlights
 ----------
 
-- `#10843 <https://github.com/wazuh/wazuh/pull/10843>`_ Added support for delta events in Syscollector when data changes.
-- `#11268 <https://github.com/wazuh/wazuh/pull/11268>`_ Added support for IPv6 on agent-manager connection and enrollment.
-- `#9962 <https://github.com/wazuh/wazuh/pull/9962>`_ Vulnerability Detector now supports SUSE agents.
+The new version, Wazuh 4.4.0, enhances the solution with the following main features:
+
+- IPv6 support for the enrollment process and the agent-manager connection
+- Vulnerabilities detection support for SUSE agents
+- Support for Alpine Linux
+- Wazuh indexer and dashboard bumped to Opensearch 2.4.1
+- Rework of Ubuntu Linux 20.04 and 22.04 SCA policies
+- Support for Azure Integration in Linux agents
+
+Below you can find more information about each of these new features.
+
+
+Wazuh 4.4.0 brings IPv6 support when connecting and enrolling an agent to a manager. The IPv6 protocol can handle packets more effectively, enhance performance, and boost security. This new feature allows agents to register and connect through an IPV6 address.
+
+SUSE agents now natively support vulnerabilities detection. Wazuh added full support for SUSE Linux Enterprise Server and Desktop 11, 12, and 15 operating systems. The vulnerability Detector now scans the programs identified by ``syscollector``, looking to report vulnerabilities described in the `SUSE OVAL <https://www.suse.com/support/security/oval/>`_ and the `NVD <https://nvd.nist.gov/>`_ databases.
+
+Wazuh 4.4.0 adds support for Alpine Linux. As Alpine Linux is a distribution that has gained great popularity among Linux users, we saw the need for the Wazuh agent to support Alpine Linux and ensure the proper support for this distribution. We generated Alpine Linux installers to make it easier to install and thus spare users of this distribution from having to compile the source code locally.
+
+Wazuh indexer and dashboard bump to OpenSearch 2.4.1. The Wazuh indexer and the Wazuh dashboard are based on OpenSearch, an open source search and analytics project derived from Elasticsearch and Kibana. We generated and tested the ``wazuh-indexer`` Debian and RPM packages with OpenSearch 2.4.1 and the ``wazuh-dashboard`` Debian and RPM packages with OpenSearch dashboards 2.4.1. This way, we avoid earlier version vulnerabilities, have all OpenSearch new functionalities, and are up to date with the OpenSearch project development.
+
+To solve some errors in the previous Ubuntu Linux 20.04 SCA Policy, we reworked the Ubuntu Linux 20.04 and 22.04 SCA policies. As part of this task, we used the *CIS Ubuntu Linux 22.04 LTS Benchmark v1.0.0* to update Ubuntu Linux 22.04 SCA Policy.
+
+Wazuh added support for Azure Integration in Linux agents. Now this integration can run for both agents and managers. We modified the packages generation process to support Azure in those agents installed using the WPK packages. Each new WPK package contains all the updated binaries and source code, and the installer updates all files and binaries to support Azure integration.
+
+Finally, it’s essential to remark that we maintain support for all installation alternatives. Indeed we maintain and extend this support by adding more recent versions.
 
 What's new
 ----------
