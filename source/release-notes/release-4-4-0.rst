@@ -49,6 +49,8 @@ Finally, it’s essential to remark that we maintain support for all installatio
 Breaking changes
 ----------------
 
+This release includes some breaking changes, such as the following:
+
 RESTful API
 ^^^^^^^^^^^
 
@@ -58,7 +60,7 @@ RESTful API
 What's new
 ----------
 
-This release includes new features or enhancements.
+This version includes new features or improvements, such as the following:
 
 Wazuh manager
 ^^^^^^^^^^^^^
@@ -300,7 +302,7 @@ Wazuh Splunk app
 Resolved issues
 ---------------
 
-This release resolves known issues as the following: 
+This release resolves known issues, such as the following: 
 
 Wazuh manager
 ^^^^^^^^^^^^^
