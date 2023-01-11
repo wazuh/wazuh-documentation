@@ -11,7 +11,7 @@ Kibana
 Kibana is a flexible and intuitive web interface for mining and visualizing the events and archives stored in Elasticsearch.
 
 
-.. note:: Root user privileges are required to run all the commands described below.
+.. note:: You need root user privileges to run all the commands described below.
 
 Prerequisites
 ~~~~~~~~~~~~~

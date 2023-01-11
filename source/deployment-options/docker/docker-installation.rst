@@ -16,9 +16,7 @@ The first thing you need to do is to set up a system with the requirements neede
       :depth: 1
       :backlinks: none
 
-.. note::
-   
-   You need root user privileges to execute all the commands described below.
+.. note:: You need root user privileges to run all the commands described below.
 
 Requirements
 ------------
