@@ -138,7 +138,7 @@ Azure Active Directory Configuration
 
    - In option 3 **SAML Certificate**, the **App Federation Metadata Url** will be the ``idp.metadata_url`` in the Wazuh indexer configuration file.
 
-   - Go to the metadata URL using your web browser and note the **X509Certificate**. It will be our ``exchange_key``:
+   - Go to the metadata URL using your web browser. Copy the value of the ``<X509Certificate>`` field. It’s your ``exchange_key`` parameter:
 
    .. thumbnail:: /images/single-sign-on/azure-active-directory/13-go-to-the-metadata-url.png
       :title: Go to the metadata URL
