@@ -1,7 +1,7 @@
 .. Copyright (C) 2015, Wazuh, Inc.
 
 .. meta::
-  :description: The ossec.conf file is the main configuration file on the Wazuh manager and it also plays an important role on the agents. Learn more about it and check out an example here.
+  :description: The ossec.conf file is the main configuration file on the Wazuh manager and also important on the agents. Learn more about syscheck settings with configuration examples here.
 
 .. _reference_ossec_syscheck:
 
@@ -652,7 +652,9 @@ Example:
 file_limit
 ----------
 
-Specifies a limit on the number of files that will be monitored by FIM. Files added when the database has reached the limit will be ignored.
+.. deprecated:: 4.5.0
+
+Specifies a limit on the number of files that FIM monitors. It ignores files added once the database reached the limit.
 
 .. code-block:: xml
 
@@ -665,7 +667,7 @@ Specifies a limit on the number of files that will be monitored by FIM. Files ad
 
 **enabled**
 
-Specifies whether there will be a limit on the number of monitored entries.
+Specifies if the number of monitored entries has a limit.
 
 +--------------------+---------------------------------------+
 | **Default value**  | yes                                   |
@@ -676,7 +678,7 @@ Specifies whether there will be a limit on the number of monitored entries.
 
 **entries**
 
-Specifies the maximum number of files to be monitored.
+Specifies the maximum number of files to monitor.
 
 +--------------------+------------------------------------------+
 | **Default value**  | 100000                                   |
@@ -688,22 +690,23 @@ Specifies the maximum number of files to be monitored.
 registry_limit
 --------------
 
-Specifies a limit on the number of registry entries that will be monitored by FIM. Registry values created when the database has reached the limit will be ignored.
+.. note::
+
+   This section only applies to Windows agents.
+
+Specifies a limit on the number of registry entries that FIM monitors. It ignores registry values created once the database reached the limit.
 
 .. code-block:: xml
 
-    <!-- Maximum number of registries to be monitored -->
-    <registry_limit>
-      <enabled>yes</enabled>
-      <entries>100000</entries>
-    </registry_limit>
-
-.. note::
-  This section only applies to Windows agents.
+   <!-- Maximum number of registries to be monitored -->
+   <registry_limit>
+     <enabled>yes</enabled>
+     <entries>100000</entries>
+   </registry_limit>
 
 **enabled**
 
-Specifies whether there will be a limit on the number of monitored entries.
+Specifies if the number of monitored entries has a limit.
 
 +--------------------+---------------------------------------+
 | **Default value**  | yes                                   |
@@ -711,10 +714,9 @@ Specifies whether there will be a limit on the number of monitored entries.
 | **Allowed values** | yes/no                                |
 +--------------------+---------------------------------------+
 
-
 **entries**
 
-Specifies the maximum number of registry entries to be monitored.
+Specifies the maximum number of registry entries to monitor.
 
 +--------------------+------------------------------------------+
 | **Default value**  | 100000                                   |
@@ -746,7 +748,7 @@ The database synchronization settings are configured inside this tag.
 
 **enabled**
 
-Specifies whether there will be periodic inventory synchronizations.
+Specifies performing periodic inventory synchronizations.
 
 +--------------------+---------------------------------------+
 | **Default value**  | yes                                   |
@@ -769,8 +771,7 @@ this parameter is ignored.
 
 **interval**
 
-Specifies the initial time between every inventory synchronization. If synchronization fails the value will be duplicated until it reaches the value of ``max_interval``.
-If a synchronization is completed successfuly the configured value is restored.
+Specifies the initial time interval between every inventory synchronization. If the synchronization fails the value is duplicated until it reaches the value of ``max_interval``. If the synchronization succeds the value is restored.
 
 +--------------------+-----------------------------------------------------------------------+
 | **Default value**  | 5 m                                                                   |
@@ -780,33 +781,22 @@ If a synchronization is completed successfuly the configured value is restored.
 
 **max_interval**
 
-Specifies the maximum number of seconds between every inventory synchronization.
+Maximum time interval to trigger a synchronization. When a synchronization fails the interval is duplicated up to this maximum value.
 
-+--------------------+------------------------------------------------------------------------------+
-| **Default value**  | 1 h                                                                          |
-+--------------------+------------------------------------------------------------------------------+
-| **Allowed values** | Any number greater than or equal to interval. Allowed suffixes (s, m, h, d). |
-+--------------------+------------------------------------------------------------------------------+
++--------------------+-----------------------------------------------------------------------------------+
+| **Default value**  | 1 h                                                                               |
++--------------------+-----------------------------------------------------------------------------------+
+| **Allowed values** | Any integer greater than or equal to ``interval``. Allowed suffixes (s, m, h, d). |
++--------------------+-----------------------------------------------------------------------------------+
 
 **response_timeout**
 
-Waiting time (seconds) since a sync message is sent or received for the next synchronization to be started. If no message are sent or received by the agent in this interval the synchronization is marked as successful.
-If a synchronization is unsuccessful, the synchronization interval is doubled until ``max_interval`` is reached. This mechanism avoids synchronization overlapping.
+Waiting time in seconds since a sync message is sent or received for the next synchronization activity. If the agent doesn't send or receive a message in this interval the synchronization is marked as successful. If a synchronization is unsuccessful, the synchronization interval is doubled up to the ``max_interval`` value. This mechanism avoids synchronization overlapping.
 
 +--------------------+----------------------------------------------------------------------+
 | **Default value**  | 30                                                                   |
 +--------------------+----------------------------------------------------------------------+
 | **Allowed values** | Any number between 0 and ``interval``.                               |
-+--------------------+----------------------------------------------------------------------+
-
-**max_interval**
-
-Maximum interval value for a synchronization to be triggered. When a synchronization fails the interval is duplicated until this threshold is reached.
-
-+--------------------+----------------------------------------------------------------------+
-| **Default value**  | 1 h                                                                  |
-+--------------------+----------------------------------------------------------------------+
-| **Allowed values** | Integer value. Allowed sufixes (s, m, h, d).                         |
 +--------------------+----------------------------------------------------------------------+
 
 **queue_size**
@@ -821,7 +811,7 @@ Specifies the queue size of the manager synchronization responses.
 
 **thread_pool**
 
-Specifies the number of threads used by the FIM database synchronization. FIM will use the minimum between the configured value and the number of CPU cores of the system.
+Specifies the number of threads that FIM database synchronization uses. FIM uses the lesser value of the configured value and the number of system CPU cores.
 
 +--------------------+-----------------------------------------------------+
 | **Default value**  | 1                                                   |
