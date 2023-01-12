@@ -166,7 +166,6 @@ RESTful API
 - `#15084 <https://github.com/wazuh/wazuh/pull/15084>`_ Added distinct and select parameters to ``GET /sca/{agent_id}`` and ``GET /sca/{agent_id}/checks/{policy_id}`` endpoints.
 - `#15290 <https://github.com/wazuh/wazuh/pull/15290>`_ Added new endpoint to run vulnerability detector on-demand scans (``PUT /vulnerability``).
 - `#11341 <https://github.com/wazuh/wazuh/pull/11341>`_ Improved ``GET /cluster/healthcheck`` endpoint and ``cluster_control -i more`` CLI call in loaded cluster environments. 
-- `#12595 <https://github.com/wazuh/wazuh/pull/12595>`_ Removed ``never_connected`` agent status limitation when assigning agents to groups.
 - `#12551 <https://github.com/wazuh/wazuh/pull/12551>`_ Changed API version and ``upgrade_version`` filters to work with different version formats.
 - `#9413 <https://github.com/wazuh/wazuh/pull/9413>`_ Renamed ``GET /agents/{agent_id}/group/is_sync`` endpoint to ``GET /agents/group/is_sync`` and added new ``agents_list`` parameter.
 - `#10397 <https://github.com/wazuh/wazuh/pull/10397>`_ Added ``POST /security/user/authenticate`` endpoint and marked ``GET /security/user/authenticate`` endpoint as deprecated.
@@ -179,6 +178,7 @@ RESTful API
 - `#15017 <https://github.com/wazuh/wazuh/pull/15017>`_ Improved ``GET /sca/{agent_id}/checks/{policy_id}`` API endpoint performance.
 - `#15334 <https://github.com/wazuh/wazuh/pull/15334>`_ Improved exception handling when connecting to Wazuh sockets.
 - `#15671 <https://github.com/wazuh/wazuh/pull/15671>`_ Modified ``_group_names and _group_names_or_all`` regexes to avoid invalid group names.
+- `#12595 <https://github.com/wazuh/wazuh/pull/12595>`_ Removed ``never_connected`` agent status limitation when assigning agents to groups.
 - `#12053 <https://github.com/wazuh/wazuh/pull/12053>`_ Removed null remediations from failed API responses.
 - `#12365 <https://github.com/wazuh/wazuh/pull/12365>`_ ``GET /agents/{agent_id}/group/is_sync`` endpoint is deprecated.
 
@@ -247,12 +247,12 @@ Wazuh dashboard
 - `#4985 <https://github.com/wazuh/wazuh-kibana-app/pull/4985>`_ Updated the ``winston`` dependency to ``3.5.1``.
 - `#4985 <https://github.com/wazuh/wazuh-kibana-app/pull/4985>`_ Updated the ``pdfmake`` dependency to ``0.2.6``.
 - `#4992 <https://github.com/wazuh/wazuh-kibana-app/pull/4992>`_ The button to export the app logs is now disabled when there are no results instead of showing an error toast.
-- `#4491 <https://github.com/wazuh/wazuh-kibana-app/pull/4491>`_ Removed custom styles from Kibana 7.9.0.
-- `#4985 <https://github.com/wazuh/wazuh-kibana-app/pull/4985>`_ Removed the ``angular-chart.js`` dependency.
 - `#5063 <https://github.com/wazuh/wazuh-kibana-app/pull/5063>`_ Added default selected options in Deploy Agent page.
 - `#5031 <https://github.com/wazuh/wazuh-kibana-app/pull/5031>`_ Unify the SCA check result label name.
 - `#5062 <https://github.com/wazuh/wazuh-kibana-app/pull/5062>`_ Updated ``mocha`` dependency to ``10.1.0``.
 - `#5062 <https://github.com/wazuh/wazuh-kibana-app/pull/5062>`_ Updated ``pdfmake`` dependency to ``0.2.7``.
+- `#4491 <https://github.com/wazuh/wazuh-kibana-app/pull/4491>`_ Removed custom styles from Kibana 7.9.0.
+- `#4985 <https://github.com/wazuh/wazuh-kibana-app/pull/4985>`_ Removed the ``angular-chart.js`` dependency.
 - `#5062 <https://github.com/wazuh/wazuh-kibana-app/pull/5062>`_ `#5089 <https://github.com/wazuh/wazuh-kibana-app/pull/5089>`_ Remove the ``pug-loader`` dependency.
 
 
@@ -289,11 +289,11 @@ Wazuh Kibana plugin for Kibana 7.10.2
 - `#4501 <https://github.com/wazuh/wazuh-kibana-app/pull/4501>`_ Changed the endpoint that updates the plugin configuration to support multiple settings.
 - `#4972 <https://github.com/wazuh/wazuh-kibana-app/pull/4972>`_ The button to export the app logs is now disabled when there are no results instead of showing an error toast.
 - `#5014 <https://github.com/wazuh/wazuh-kibana-app/pull/5014>`_ Updated the ``winston`` dependency to ``3.5.1``.
-- `#5014 <https://github.com/wazuh/wazuh-kibana-app/pull/5014>`_ Removed the ``angular-chart.js`` dependency.
 - `#4985 <https://github.com/wazuh/wazuh-kibana-app/pull/4985>`_ Updated the ``winston`` dependency to ``3.5.1``.
 - `#4992 <https://github.com/wazuh/wazuh-kibana-app/pull/4992>`_ The button to export the app logs is now disabled when there are no results, instead of showing an error toast.
 - `#5062 <https://github.com/wazuh/wazuh-kibana-app/pull/5062>`_ Updated ``mocha`` dependency to ``10.1.0``.
 - `#5031 <https://github.com/wazuh/wazuh-kibana-app/pull/5031>`_ Unify the SCA check result label name.
+- `#5014 <https://github.com/wazuh/wazuh-kibana-app/pull/5014>`_ Removed the ``angular-chart.js`` dependency.
 - `#5062 <https://github.com/wazuh/wazuh-kibana-app/pull/5062>`_ Removed the ``pug-loader`` dependency.
 - `#5102 <https://github.com/wazuh/wazuh-kibana-app/pull/5102>`_ Removed unused file related to agent menu.
 
