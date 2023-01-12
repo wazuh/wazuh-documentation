@@ -11,7 +11,7 @@ This section lists the changes in version 4.4.0. Every update of the Wazuh solut
 Highlights
 ----------
 
-This new version of Wazuh brings new features and adds support related to different Linux distributions and integrations. For more details, the highlights of Wazuh 4.4.0 are listed below:
+This new version of Wazuh brings new features and adds support for some Linux distributions and integrations. For more details, the highlights of Wazuh 4.4.0 are listed below:
 
 - IPv6 support for the enrollment process and the agent-manager connection
 - Vulnerabilities detection support for SUSE agents
