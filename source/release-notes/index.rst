@@ -13,6 +13,7 @@ This section summarizes the most important features of each Wazuh release.
 ==============================================   ====================
 Wazuh version                                    Release date
 ==============================================   ====================
+:doc:`4.4.0 </release-notes/release-4-4-0>`      31 January 2023
 :doc:`4.3.10 </release-notes/release-4-3-10>`    16 November 2022
 :doc:`4.3.9 </release-notes/release-4-3-9>`      13 October 2022
 :doc:`4.3.8 </release-notes/release-4-3-8>`      19 September 2022
