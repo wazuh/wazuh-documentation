@@ -39,11 +39,6 @@ To solve some errors in the previous Ubuntu Linux 20.04 SCA Policy, we reworked 
 
 Wazuh added support for Azure Integration in Linux agents. Now this integration can run for both agents and managers. We modified the packages generation process to support Azure in those agents installed using the WPK packages. Each new WPK package contains all the updated binaries and source code, and the installer updates all files and binaries to support Azure integration.
 
-.. thumbnail:: /images/release-notes/4.4.0/azure-integration.png
-      :align: center
-      :width: 60%
-      :title: This new version adds support Azure Integration in Linux agents
-
 Finally, it’s essential to remark that we maintain support for all installation alternatives. Indeed we maintain and extend this support by adding more recent versions.
 
 Breaking changes
