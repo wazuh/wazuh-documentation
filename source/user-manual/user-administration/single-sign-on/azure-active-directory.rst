@@ -145,9 +145,7 @@ Azure Active Directory Configuration
       :align: center
       :width: 80%
 
-
    - In option 4 **Set up <YOUR APPLICATION>**, the **Azure AD Identifier** will be our ``idp.entity_id``.
-
 
 Wazuh indexer configuration
 ---------------------------

@@ -14,9 +14,7 @@ Prerequisites
 #. A Wazuh manager cluster.
 #. A Splunk cluster.
 
-.. note::
-
-   Most of the commands described below need to be executed with root user privileges.
+.. note:: You need root user privileges to run all the commands described below.
 
 .. note::
 
