@@ -1,7 +1,7 @@
 .. Copyright (C) 2015, Wazuh, Inc.
 
 .. meta::
-  :description: The ossec.conf file is the main configuration file on the Wazuh manager and also important on the agents. Learn more about syscheck settings with configuration examples here.
+  :description: The ossec.conf file is the main configuration file on the Wazuh manager and also important on the agents. Learn more about FIM settings with configuration examples here.
 
 .. _reference_ossec_syscheck:
 
@@ -651,8 +651,6 @@ Example:
 
 file_limit
 ----------
-
-.. deprecated:: 4.5.0
 
 Specifies a limit on the number of files that FIM monitors. It ignores files added once the database reached the limit.
 

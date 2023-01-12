@@ -448,14 +448,19 @@ The main advantage of using in memory database is the performance as reading and
 Configuring synchronization
 ---------------------------
 
-You can configure :ref:`synchronization <reference_ossec_syscheck_synchronization>` to change the synchronization interval and the maximum number of events per second:
+You can configure :ref:`synchronization <reference_ossec_syscheck_synchronization>` to change the synchronization interval, the maximum number of events per second, the queue size, the number of dedicated threads and the response timeout:
 
 .. code-block:: xml
 
   <syscheck>
+    <!-- Database synchronization settings -->
     <synchronization>
       <enabled>yes</enabled>
       <interval>5m</interval>
+      <max_interval>1h</max_interval>
+      <response_timeout>30</response_timeout>
+      <queue_size>16384</queue_size>
+      <thread_pool>1</thread_pool>
       <max_eps>10</max_eps>
     </synchronization>
   </syscheck>
