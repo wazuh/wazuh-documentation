@@ -253,7 +253,7 @@ Wazuh dashboard
 - `#5031 <https://github.com/wazuh/wazuh-kibana-app/pull/5031>`_ Unify the SCA check result label name.
 - `#5062 <https://github.com/wazuh/wazuh-kibana-app/pull/5062>`_ Updated ``mocha`` dependency to ``10.1.0``.
 - `#5062 <https://github.com/wazuh/wazuh-kibana-app/pull/5062>`_ Updated ``pdfmake`` dependency to ``0.2.7``.
-- `#5062 <https://github.com/wazuh/wazuh-kibana-app/pull/5062>`_ `#5089 <https://github.com/wazuh/wazuh-kibana-app/pull/5089>`_ Remove the pug-loader dependency.
+- `#5062 <https://github.com/wazuh/wazuh-kibana-app/pull/5062>`_ `#5089 <https://github.com/wazuh/wazuh-kibana-app/pull/5089>`_ Remove the ``pug-loader`` dependency.
 
 
 Wazuh Kibana plugin for Kibana 7.10.2
@@ -336,7 +336,7 @@ Wazuh Kibana plugin for Kibana 7.16.x and 7.17.x
 - `#5062 <https://github.com/wazuh/wazuh-kibana-app/pull/5062>`_ Updated ``pdfmake`` dependency to ``0.2.7``.
 - `#5031 <https://github.com/wazuh/wazuh-kibana-app/pull/5031>`_ Unify the SCA check result label name.
 - `#4985 <https://github.com/wazuh/wazuh-kibana-app/pull/4985>`_ Removed the ``angular-chart.js`` dependency.
-- `#5062 <https://github.com/wazuh/wazuh-kibana-app/pull/5062>`_ Removed the pug-loader dependency.
+- `#5062 <https://github.com/wazuh/wazuh-kibana-app/pull/5062>`_ Removed the ``pug-loader`` dependency.
 - `#5103 <https://github.com/wazuh/wazuh-kibana-app/pull/5103>`_ Removed unused file related to agent menu. 
 
 Wazuh Splunk app
@@ -557,6 +557,12 @@ Reference                                                                       
 `#4999 <https://github.com/wazuh/wazuh-kibana-app/pull/4999>`_                                                                                                                                   Fixed Inventory checks table filters by stats.
 `#4983 <https://github.com/wazuh/wazuh-kibana-app/pull/4983>`_                                                                                                                                   Fixed agent installation command for macOS in the deploy new agent section.
 `#4975 <https://github.com/wazuh/wazuh-kibana-app/pull/4975>`_                                                                                                                                   Fixed default last scan date parser to be able to catch dates returned by Wazuh API when no vulnerabilities scan has been made.
+`#5035 <https://github.com/wazuh/wazuh-kibana-app/pull/5035>`_                                                                                                                                   A Solaris command has been fixed.     
+`#5045 <https://github.com/wazuh/wazuh-kibana-app/pull/5045>`_                                                                                                                                   Fixed commands: Aix, OpenSUSE, Alpine, Suse11, Fedora, HP, Oracle Linux 5, Amazon Linux 2, Centos5. Changed the word ``or higher`` in buttons to ``+``.Fixed validations for Hp, Solaris and Alpine. 
+`#5069 <https://github.com/wazuh/wazuh-kibana-app/pull/5069>`_                                                                                                                                   Fixed error in Github module PDF report. 
+`#5098 <https://github.com/wazuh/wazuh-kibana-app/pull/5098>`_                                                                                                                                   Fixed password input in deploy new agent section. 
+`#5094 <https://github.com/wazuh/wazuh-kibana-app/pull/5094>`_                                                                                                                                   Fixed error when clicking on the selectors of agents in the group agents management.
+`#5107 <https://github.com/wazuh/wazuh-kibana-app/pull/5107>`_                                                                                                                                   Fixed mispelling in the NIST module.
 =============================================================================================================================================================================================    =============
 
 Changelogs
