@@ -240,7 +240,7 @@ Wazuh dashboard
 - `#4529 <https://github.com/wazuh/wazuh-kibana-app/pull/4529>`_ `#4964 <https://github.com/wazuh/wazuh-kibana-app/pull/4964>`_ Improved the message displayed when a version mismatches between the Wazuh API and the Wazuh APP.
 - `#4363 <https://github.com/wazuh/wazuh-kibana-app/pull/4363>`_ Independently load each dashboard from the ``Agents Overview`` page.
 - `#3874 <https://github.com/wazuh/wazuh-kibana-app/pull/3874>`_ The endpoint ``/agents/summary/status`` response was adapted. 
-- `#4647 <https://github.com/wazuh/wazuh-kibana-app/pull/4647>`_ Redesign of the Deploy new agent section. This updates and adds operating systems, versions, architectures, commands to Install and enroll the agents, messages for some operating systems, and links to the documentation.
+- `#4458 <https://github.com/wazuh/wazuh-kibana-app/pull/4458>`_ Updated and added operating systems, versions, architectures commands of Install and enroll the agent and commands of Start the agent in the deploy new agent section.
 - `#4776 <https://github.com/wazuh/wazuh-kibana-app/pull/4776>`_ `#4954 <https://github.com/wazuh/wazuh-kibana-app/pull/4954>`_ Added cluster's IP and protocol as suggestions in the agent deployment wizard.
 - `#4851 <https://github.com/wazuh/wazuh-kibana-app/pull/4851>`_ Show the OS name and OS version in the agent installation wizard.
 - `#4501 <https://github.com/wazuh/wazuh-kibana-app/pull/4501>`_ Changed the endpoint that updates the plugin configuration to support multiple settings.
@@ -283,12 +283,10 @@ Wazuh Kibana plugin for Kibana 7.10.2
 - `#4529 <https://github.com/wazuh/wazuh-kibana-app/pull/4529>`_ `#4964 <https://github.com/wazuh/wazuh-kibana-app/pull/4964>`_ Improved the message displayed when a version mismatches between the Wazuh API and the Wazuh APP.
 - `#4363 <https://github.com/wazuh/wazuh-kibana-app/pull/4363>`_ Independently load each dashboard from the ``Agents Overview`` page.
 - `#3874 <https://github.com/wazuh/wazuh-kibana-app/pull/3874>`_ The endpoint ``/agents/summary/status`` response was adapted. 
-- `#4647 <https://github.com/wazuh/wazuh-kibana-app/pull/4647>`_ Redesign of the Deploy new agent section. This updates and adds operating systems, versions, architectures, commands to Install and enroll the agents, messages for some operating systems, and links to the documentation.
+- `#4458 <https://github.com/wazuh/wazuh-kibana-app/pull/4458>`_ Updated and added operating systems, versions, architectures commands of Install and enroll the agent and commands of Start the agent in the deploy new agent section.
 - `#4776 <https://github.com/wazuh/wazuh-kibana-app/pull/4776>`_ `#4954 <https://github.com/wazuh/wazuh-kibana-app/pull/4954>`_ Added cluster's IP and protocol as suggestions in the agent deployment wizard.
 - `#4851 <https://github.com/wazuh/wazuh-kibana-app/pull/4851>`_ Show the OS name and OS version in the agent installation wizard.
 - `#4501 <https://github.com/wazuh/wazuh-kibana-app/pull/4501>`_ Changed the endpoint that updates the plugin configuration to support multiple settings.
-- `#4972 <https://github.com/wazuh/wazuh-kibana-app/pull/4972>`_ The button to export the app logs is now disabled when there are no results instead of showing an error toast.
-- `#5014 <https://github.com/wazuh/wazuh-kibana-app/pull/5014>`_ Updated the ``winston`` dependency to ``3.5.1``.
 - `#4985 <https://github.com/wazuh/wazuh-kibana-app/pull/4985>`_ Updated the ``winston`` dependency to ``3.5.1``.
 - `#4992 <https://github.com/wazuh/wazuh-kibana-app/pull/4992>`_ The button to export the app logs is now disabled when there are no results, instead of showing an error toast.
 - `#5062 <https://github.com/wazuh/wazuh-kibana-app/pull/5062>`_ Updated ``mocha`` dependency to ``10.1.0``.
@@ -324,7 +322,7 @@ Wazuh Kibana plugin for Kibana 7.16.x and 7.17.x
 - `#4529 <https://github.com/wazuh/wazuh-kibana-app/pull/4529>`_ `#4964 <https://github.com/wazuh/wazuh-kibana-app/pull/4964>`_ Improved the message displayed when a version mismatches between the Wazuh API and the Wazuh APP.
 - `#4363 <https://github.com/wazuh/wazuh-kibana-app/pull/4363>`_ Independently load each dashboard from the ``Agents Overview`` page.
 - `#3874 <https://github.com/wazuh/wazuh-kibana-app/pull/3874>`_ The endpoint ``/agents/summary/status`` response was adapted. 
-- `#4647 <https://github.com/wazuh/wazuh-kibana-app/pull/4647>`_ Redesign of the Deploy new agent section. This updates and adds operating systems, versions, architectures, commands to Install and enroll the agents, messages for some operating systems, and links to the documentation.
+- `#4458 <https://github.com/wazuh/wazuh-kibana-app/pull/4458>`_ Updated and added operating systems, versions, architectures commands of Install and enroll the agent and commands of Start the agent in the deploy new agent section.
 - `#4776 <https://github.com/wazuh/wazuh-kibana-app/pull/4776>`_ `#4954 <https://github.com/wazuh/wazuh-kibana-app/pull/4954>`_ Added cluster's IP and protocol as suggestions in the agent deployment wizard.
 - `#4851 <https://github.com/wazuh/wazuh-kibana-app/pull/4851>`_ Show the OS name and OS version in the agent installation wizard.
 - `#4501 <https://github.com/wazuh/wazuh-kibana-app/pull/4501>`_ Changed the endpoint that updates the plugin configuration to support multiple settings.
@@ -429,7 +427,6 @@ Reference                                                                       
 `#12768 <https://github.com/wazuh/wazuh/pull/12768>`_                                                           Fixed ``/tmp`` access error in containers of API integration tests environment. 
 `#13096 <https://github.com/wazuh/wazuh/pull/13096>`_                                                           The API will return an exception when the user asks for agent inventory information, and there is no database for it (never connected agents). 
 `#13171 <https://github.com/wazuh/wazuh/pull/13171>`_ `#13386 <https://github.com/wazuh/wazuh/pull/13386>`_     Improved regex used for the ``q`` parameter on API requests with special characters and brackets.
-`#13386 <https://github.com/wazuh/wazuh/pull/13386>`_                                                           Improved regex used for the ``q`` parameter on API requests with special characters and brackets.
 `#12592 <https://github.com/wazuh/wazuh/pull/12592>`_                                                           Removed ``board_serial`` from syscollector integration tests expected responses.
 `#12557 <https://github.com/wazuh/wazuh/pull/12557>`_                                                           Removed cmd field from expected responses of syscollector integration tests.
 `#12611 <https://github.com/wazuh/wazuh/pull/12611>`_                                                           Reduced the maximum number of groups per agent to 128 and adjusted group name validation.
