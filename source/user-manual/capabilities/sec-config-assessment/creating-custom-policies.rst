@@ -186,12 +186,12 @@ Each check is comprised by several fields as described in the table :ref:`sca_po
     | regex_type  |    No     |           String           |"pcre2" or "osregex"|
     +-------------+-----------+----------------------------+--------------------+
 
-
 Check evaluation is governed by its `rule result aggregation strategy`, as set in its ``condition`` field, and the results of
 the evaluation of its rules.
 
 .. note::
-  If the **regex_type** is configured for a particular check, it overwrites the regex engine applied for the whole policy.
+
+    If you set a ``regex_type``, it overrides the regex engine type defined in the policy.
 
 Condition
 ~~~~~~~~~~~~~~~~~~~
