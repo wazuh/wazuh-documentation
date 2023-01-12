@@ -426,8 +426,8 @@ Ruleset
 ==============================================================    =============
 Reference                                                         Description
 ==============================================================    =============
-`#11613 <https://github.com/wazuh/wazuh/pull/11613>`_             Fixed OpenWRT decoder fixed to parse UFW logs.    
-`#14807 <https://github.com/wazuh/wazuh/pull/14807>`_             Bug fix in wazuh-api-fields decoder.
+`#11613 <https://github.com/wazuh/wazuh/pull/11613>`_             Fixed ``OpenWRT`` decoder fixed to parse UFW logs.    
+`#14807 <https://github.com/wazuh/wazuh/pull/14807>`_             Bug fix in ``wazuh-api-fields`` decoder.
 `#13567 <https://github.com/wazuh/wazuh/pull/13567>`_             Fixed deprecated MITRE tags in rules.
 `#15241 <https://github.com/wazuh/wazuh/pull/15241>`_             SCA checks IDs are not unique.
 `#14513 <https://github.com/wazuh/wazuh/pull/14513>`_             Fixed regex in check 5.1.1 of Ubuntu 20.04 SCA.
