@@ -46,11 +46,20 @@ Breaking changes
 
 This release includes some breaking changes, such as the following:
 
+Wazuh manager
+^^^^^^^^^^^^^
+
+- `#10865 <https://github.com/wazuh/wazuh/pull/10865>`_ The agent key polling module has been ported to ``wazuh-authd``. 
+
 RESTful API
 ^^^^^^^^^^^
 
 - `#14119 <https://github.com/wazuh/wazuh/pull/14119>`_ Added new ``limits`` section to the ``upload_wazuh_configuration`` section in the Wazuh API configuration.
 - `#14230 <https://github.com/wazuh/wazuh/pull/14230>`_ ``GET /manager/stats/analysisd``, ``GET /manager/stats/remoted``, ``GET /cluster/{node_id}stats/analysisd``, and ``GET /cluster/{node_id}stats/remoted`` API endpoints are deprecated.
+
+Ruleset
+^^^^^^^
+- Wazuh ruleset has been updated, and you can check the changes in the following :ref:`list <ruleset_whats_new>`. If you have a custom set of decoders and rules, please check the changes done.
 
 What's new
 ----------
@@ -82,7 +91,6 @@ Wazuh manager
 - `#13065 <https://github.com/wazuh/wazuh/pull/13065>`_ The functions in charge of synchronizing files in the cluster are refactored. 
 - `#13079 <https://github.com/wazuh/wazuh/pull/13079>`_ Changed ``MD5`` hash function to ``BLAKE2`` for cluster file comparison. 
 - `#12926 <https://github.com/wazuh/wazuh/pull/12926>`_ Renamed ``wazuh-logtest`` and ``wazuh-clusterd`` scripts to follow the same scheme as the other scripts (spaces symbolized with ``_`` instead of ``-``).
-- `#10865 <https://github.com/wazuh/wazuh/pull/10865>`_ The agent key polling module has been ported to ``wazuh-authd``. 
 - `#13741 <https://github.com/wazuh/wazuh/pull/13741>`_ Added the update field in the CPE Helper for Vulnerability Detector. 
 - `#11702 <https://github.com/wazuh/wazuh/pull/11702>`_ The agents with the same ID are prevented from connecting to the manager simultaneously. 
 - `#13713 <https://github.com/wazuh/wazuh/pull/13713>`_ ``wazuh-analysisd``, ``wazuh-remoted``, and ``wazuh-db`` metrics have been extended. 
@@ -98,6 +106,7 @@ Wazuh manager
 - `#13119 <https://github.com/wazuh/wazuh/pull/13119>`_ Removed unused ``set_user_name`` function in framework. 
 - `#12370 <https://github.com/wazuh/wazuh/pull/12370>`_ Unused internal calls to ``wazuh-db`` have been deprecated. 
 - `#14542 <https://github.com/wazuh/wazuh/pull/14542>`_ Debian Stretch support in Vulnerability Detector has been deprecated.
+- `#15853 <https://github.com/wazuh/wazuh/pull/15853>`_ The status field in SCA is deprecate.
 
 Wazuh agent
 ^^^^^^^^^^^
@@ -172,6 +181,29 @@ RESTful API
 - `#15671 <https://github.com/wazuh/wazuh/pull/15671>`_ Modified ``_group_names and _group_names_or_all`` regexes to avoid invalid group names.
 - `#12053 <https://github.com/wazuh/wazuh/pull/12053>`_ Removed null remediations from failed API responses.
 - `#12365 <https://github.com/wazuh/wazuh/pull/12365>`_ ``GET /agents/{agent_id}/group/is_sync`` endpoint is deprecated.
+
+.. _ruleset_whats_new:
+
+Ruleset
+^^^^^^^
+
+- `#13594 <https://github.com/wazuh/wazuh/pull/13594>`_ Added support for new sysmon events. 
+- `#13595 <https://github.com/wazuh/wazuh/pull/13595>`_ Added new detection rules using Sysmon ID 1 events. 
+- `#13596 <https://github.com/wazuh/wazuh/pull/13596>`_ Added new detection rules using Sysmon ID 3 events. 
+- `#13630 <https://github.com/wazuh/wazuh/pull/13630>`_ Added new detection rules using Sysmon ID 7 events.
+- `#13637 <https://github.com/wazuh/wazuh/pull/13637>`_ Added new detection rules using Sysmon ID 8 events.
+- `#13639 <https://github.com/wazuh/wazuh/pull/13639>`_ Added new detection rules using Sysmon ID 10 events.
+- `#13631 <https://github.com/wazuh/wazuh/pull/13631>`_ Added new detection rules using Sysmon ID 11 events.
+- `#13636 <https://github.com/wazuh/wazuh/pull/13636>`_ Added new detection rules using Sysmon ID 13 events.
+- `#13673 <https://github.com/wazuh/wazuh/pull/13673>`_ Added new detection rules using Sysmon ID 20 events.
+- `#13638 <https://github.com/wazuh/wazuh/pull/13638>`_ Added new PowerShell ScriptBlock detection rules.
+- `#15157 <https://github.com/wazuh/wazuh/pull/15157>`_ Added HPUX 11i SCA policies using bastille and without bastille.
+- `#15072 <https://github.com/wazuh/wazuh/pull/15072>`_ Updated ruleset according to new API log changes when the user is logged in with authorization context.
+- `#13579 <https://github.com/wazuh/wazuh/pull/13579>`_ Updated ``0580-win-security_rules.xml`` rules.
+- `#13622 <https://github.com/wazuh/wazuh/pull/13622>`_ Updated Wazuh MITRE ATT&CK database to version 11.3.
+- `#13633 <https://github.com/wazuh/wazuh/pull/13633>`_ Updated detection rules in ``0840-win_event_channel.xml``.
+- `#15070 <https://github.com/wazuh/wazuh/pull/15070>`_ SCA policy for Ubuntu Linux 20.04 rework.
+- `#15051 <https://github.com/wazuh/wazuh/pull/15051>`_ Updated Ubuntu Linux 22.04 SCA Policy with CIS Ubuntu Linux 22.04 LTS Benchmark v1.0.0.
 
 Other
 ^^^^^
@@ -394,7 +426,13 @@ Ruleset
 ==============================================================    =============
 Reference                                                         Description
 ==============================================================    =============
-`#11613 <https://github.com/wazuh/wazuh/pull/11613>`_             Fixed OpenWRT decoder fixed to parse UFW logs.          
+`#11613 <https://github.com/wazuh/wazuh/pull/11613>`_             Fixed OpenWRT decoder fixed to parse UFW logs.    
+`#14807 <https://github.com/wazuh/wazuh/pull/14807>`_             Bug fix in wazuh-api-fields decoder.
+`#13567 <https://github.com/wazuh/wazuh/pull/13567>`_             Fixed deprecated MITRE tags in rules.
+`#15241 <https://github.com/wazuh/wazuh/pull/15241>`_             SCA checks IDs are not unique.
+`#14513 <https://github.com/wazuh/wazuh/pull/14513>`_             Fixed regex in check 5.1.1 of Ubuntu 20.04 SCA.
+`#15251 <https://github.com/wazuh/wazuh/pull/15251>`_             Removed wrong Fedora Linux SCA default policies.
+`#15156 <https://github.com/wazuh/wazuh/pull/15156>`_             SUSE Linux Enterprise 15 SCA Policy duplicated check ids 7521 and 7522.      
 ==============================================================    =============
 
 Other
