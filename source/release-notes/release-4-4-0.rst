@@ -214,7 +214,8 @@ Other
 - `#12518 <https://github.com/wazuh/wazuh/pull/12518>`_ Added ``python-json-logger`` dependency.
 - `#10773 <https://github.com/wazuh/wazuh/pull/10773>`_ The Ruleset test suite is prevented from restarting the manager.
 - `#14839 <https://github.com/wazuh/wazuh/pull/14839>`_ The pthread's ``rwlock`` was replaced with a FIFO-queueing read-write lock.
-- `#15809 <https://github.com/wazuh/wazuh/pull/15809>`_ Updated python dependency certifi to 2022.12.7. 
+- `#15809 <https://github.com/wazuh/wazuh/pull/15809>`_ Updated python dependency certifi to 2022.12.7.
+- `#15896 <https://github.com/wazuh/wazuh/pull/15896>`_ Updated python dependency future to 0.18.3.
 
 Wazuh dashboard
 ^^^^^^^^^^^^^^^
