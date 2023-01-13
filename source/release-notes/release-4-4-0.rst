@@ -14,7 +14,7 @@ Highlights
 This new version of Wazuh brings new features and adds support for some Linux distributions and integrations. For more details, the highlights of Wazuh 4.4.0 are listed below:
 
 - IPv6 support for the enrollment process and the agent-manager connection
-- Vulnerabilities detection support for SUSE agents
+- Vulnerability detection support for SUSE agents
 - Support for Alpine Linux distribution
 - Wazuh indexer and dashboard based on the latest Opensearch 2.4.1 version
 - Rework of Ubuntu Linux 20.04 and 22.04 SCA policies
@@ -54,8 +54,8 @@ Wazuh manager
 RESTful API
 ^^^^^^^^^^^
 
-- `#14119 <https://github.com/wazuh/wazuh/pull/14119>`_ Added new setting ``upload_wazuh_configuration`` to the Wazuh API configuration. Old parameter ``remote_commands`` is now part of this setting.
-- `#14230 <https://github.com/wazuh/wazuh/pull/14230>`_ Deprecated ``GET /manager/stats/analysisd``, ``GET /manager/stats/remoted``, ``GET /cluster/{node_id}stats/analysisd``, and ``GET /cluster/{node_id}stats/remoted`` API endpoints. Use new endpoints ``GET /manager/daemons/stats`` and ``/cluster/{node_id}/daemons/stats``. respectively. 
+- `#14119 <https://github.com/wazuh/wazuh/pull/14119>`_ Added new setting ``upload_wazuh_configuration`` to the Wazuh API configuration. The old parameter ``remote_commands`` is now part of this setting.
+- `#14230 <https://github.com/wazuh/wazuh/pull/14230>`_ Deprecated ``GET /manager/stats/analysisd``, ``GET /manager/stats/remoted``, ``GET /cluster/{node_id}stats/analysisd``, and ``GET /cluster/{node_id}stats/remoted`` API endpoints. Use new endpoints ``GET /manager/daemons/stats`` and ``/cluster/{node_id}/daemons/stats``, respectively. 
 
 Ruleset
 ^^^^^^^
@@ -78,9 +78,9 @@ Wazuh manager
 - `#11753 <https://github.com/wazuh/wazuh/pull/11753>`_ Added a new ``wazuh-clusterd`` task for ``agent-groups`` info synchronization.
 - `#14950 <https://github.com/wazuh/wazuh/pull/14950>`_ Added unit tests for functions in charge of getting ruleset sync status.
 - `#14950 <https://github.com/wazuh/wazuh/pull/14950>`_ Added auto-vacuum mechanism in ``wazuh-db``.
+- `#10843 <https://github.com/wazuh/wazuh/pull/10843>`_ Delta events in Syscollector when data gets changed may now produce alerts.  
 - `#10822 <https://github.com/wazuh/wazuh/pull/10822>`_ ``wazuh-logtest`` now shows warnings about ruleset issues.
 - `#12206 <https://github.com/wazuh/wazuh/pull/12206>`_ ``Modulesd`` memory is now managed by ``jemalloc`` to help reduce memory fragmentation.
-- `#11702 <https://github.com/wazuh/wazuh/pull/11702>`_ The manager now refuses multiple connections from the same agent. 
 - `#12117 <https://github.com/wazuh/wazuh/pull/12117>`_ Updated the Vulnerability Detector configuration reporting to include MSU and skip JSON Red Hat feed.
 - `#12352 <https://github.com/wazuh/wazuh/pull/12352>`_ Improved the shared configuration file handling performance. 
 - `#11753 <https://github.com/wazuh/wazuh/pull/11753>`_ The agent group data is now natively handled by Wazuh DB. 
@@ -106,7 +106,7 @@ Wazuh manager
 - `#13119 <https://github.com/wazuh/wazuh/pull/13119>`_ Removed unused ``set_user_name`` function in framework. 
 - `#12370 <https://github.com/wazuh/wazuh/pull/12370>`_ Unused internal calls to ``wazuh-db`` have been deprecated. 
 - `#14542 <https://github.com/wazuh/wazuh/pull/14542>`_ Debian Stretch support in Vulnerability Detector has been deprecated.
-- `#15853 <https://github.com/wazuh/wazuh/pull/15853>`_ The status field in SCA is deprecate.
+- `#15853 <https://github.com/wazuh/wazuh/pull/15853>`_ The status field in SCA is deprecated.
 
 Wazuh agent
 ^^^^^^^^^^^
@@ -132,7 +132,7 @@ Wazuh agent
 - `#12750 <https://github.com/wazuh/wazuh/pull/12750>`_ Some parts of ``Agentd`` and Execd were refactored.
 - `#10478 <https://github.com/wazuh/wazuh/pull/10478>`_ Handled new exceptions in the external integration modules.
 - `#11828 <https://github.com/wazuh/wazuh/pull/11828>`_ Optimized the number of calls to DB maintenance tasks performed by the AWS integration. 
-- `#12404 <https://github.com/wazuh/wazuh/pull/12404>`_ Improved the reparse performance by removing unnecessary queries from external integrations.
+- `#12404 <https://github.com/wazuh/wazuh/pull/12404>`_ Improved the reparse setting performance by removing unnecessary queries from external integrations.
 - `#12478 <https://github.com/wazuh/wazuh/pull/12478>`_ Updated and expanded Azure module logging functionality to use the ``ossec.log`` file.
 - `#12647 <https://github.com/wazuh/wazuh/pull/12647>`_ Improved the error management of the Google Cloud integration. 
 - `#12769 <https://github.com/wazuh/wazuh/pull/12769>`_ The ``logging`` tag in GCloud integration is deprecated. It now uses ``wazuh_modules`` debug value to set the verbosity level.
@@ -144,6 +144,7 @@ Wazuh agent
 - `#14822 <https://github.com/wazuh/wazuh/pull/14822>`_ Agents on macOS now report the OS name as "macOS" instead of "Mac OS X".
 - `#14816 <https://github.com/wazuh/wazuh/pull/14816>`_ The Systemd service stopping policy has been updated. 
 - `#14793 <https://github.com/wazuh/wazuh/pull/14793>`_ Changed how the AWS module handles ``ThrottlingException`` adding default values for connection retries in case no config file is set.
+- `#15404 <https://github.com/wazuh/wazuh/pull/15404>`_ The agent for Windows now verifies its libraries to prevent side loading. 
 - `#14543 <https://github.com/wazuh/wazuh/pull/14543>`_ Azure and AWS credentials are deprecated in the configuration authentication option.
 
 RESTful API
@@ -178,6 +179,7 @@ RESTful API
 - `#15017 <https://github.com/wazuh/wazuh/pull/15017>`_ Improved ``GET /sca/{agent_id}/checks/{policy_id}`` API endpoint performance.
 - `#15334 <https://github.com/wazuh/wazuh/pull/15334>`_ Improved exception handling when connecting to Wazuh sockets.
 - `#15671 <https://github.com/wazuh/wazuh/pull/15671>`_ Modified ``_group_names and _group_names_or_all`` regexes to avoid invalid group names.
+- `#15747 <https://github.com/wazuh/wazuh/pull/15747>`_ Changed ``GET /sca/{agent_id}/checks/{policy_id}`` endpoint filters and response to remove the ``status`` field. 
 - `#12595 <https://github.com/wazuh/wazuh/pull/12595>`_ Removed ``never_connected`` agent status limitation when assigning agents to groups.
 - `#12053 <https://github.com/wazuh/wazuh/pull/12053>`_ Removed null remediations from failed API responses.
 - `#12365 <https://github.com/wazuh/wazuh/pull/12365>`_ ``GET /agents/{agent_id}/group/is_sync`` endpoint is deprecated.
@@ -212,6 +214,7 @@ Other
 - `#12518 <https://github.com/wazuh/wazuh/pull/12518>`_ Added ``python-json-logger`` dependency.
 - `#10773 <https://github.com/wazuh/wazuh/pull/10773>`_ The Ruleset test suite is prevented from restarting the manager.
 - `#14839 <https://github.com/wazuh/wazuh/pull/14839>`_ The pthread's ``rwlock`` was replaced with a FIFO-queueing read-write lock.
+- `#15809 <https://github.com/wazuh/wazuh/pull/15809>`_ Updated python dependency certifi to 2022.12.7. 
 
 Wazuh dashboard
 ^^^^^^^^^^^^^^^
@@ -230,7 +233,7 @@ Wazuh dashboard
 - `#4831 <https://github.com/wazuh/wazuh-kibana-app/pull/4831>`_ Added a centralized service to handle the requests.
 - `#4873 <https://github.com/wazuh/wazuh-kibana-app/pull/4873>`_ Added ``data-test-subj`` create policy.
 - `#4933 <https://github.com/wazuh/wazuh-kibana-app/pull/4933>`_ Added extra steps message and a new command for Windows XP and Windows server 2008, added Alpine agent with all its steps.
-- `#4933 <https://github.com/wazuh/wazuh-kibana-app/pull/4933>`_ Deploy new agent section: Added link for additional steps to Alpine os.
+- `#4933 <https://github.com/wazuh/wazuh-kibana-app/pull/4933>`_ Deploy new agent section: Added link for additional steps to Alpine OS.
 - `#4970 <https://github.com/wazuh/wazuh-kibana-app/pull/4970>`_ Added file saving conditions in File Editor.
 - `#5021 <https://github.com/wazuh/wazuh-kibana-app/pull/5021>`_ `#5028 <https://github.com/wazuh/wazuh-kibana-app/pull/5028>`_ Added character validation to avoid invalid agent names in the section **Deploy new agent**. 
 - `#4933 <https://github.com/wazuh/wazuh-kibana-app/pull/4933>`_ Deploy new agent section: Added link for additional steps to Alpine os.
@@ -370,13 +373,13 @@ Reference                                                         Description
 `#13419 <https://github.com/wazuh/wazuh/pull/13419>`_             Fixed unhandled cluster error when reading a malformed configuration. 
 `#13368 <https://github.com/wazuh/wazuh/pull/13368>`_             Fixed framework unit test failures when run by the root user. 
 `#13405 <https://github.com/wazuh/wazuh/pull/13405>`_             Fixed a memory leak in ``analysisd`` when parsing a disabled Active Response. 
-`#13590 <https://github.com/wazuh/wazuh/pull/13590>`_             Fixed Syscollector delta message handling. 
 `#13892 <https://github.com/wazuh/wazuh/pull/13892>`_             ``wazuh-db`` is prevented from deleting queue/diff when cleaning databases. 
 `#14981 <https://github.com/wazuh/wazuh/pull/14981>`_             Fixed multiple data race conditions in Remoted reported by ThreadSanitizer.
 `#15151 <https://github.com/wazuh/wazuh/pull/15151>`_             Fixed ``aarch64`` OS collection in Remoted to allow WPK upgrades. 
 `#15165 <https://github.com/wazuh/wazuh/pull/15165>`_             Fixed a race condition in Remoted that was blocking agent connections. 
 `#13531 <https://github.com/wazuh/wazuh/pull/13531>`_             Fixed Virustotal integration to support non UTF-8 characters.
 `#14922 <https://github.com/wazuh/wazuh/pull/14922>`_             Fixed a bug masking as Timeout any error that might occur while waiting to receive files in the cluster.
+`#15876 <https://github.com/wazuh/wazuh/pull/15876>`_             Fixed a read buffer overflow in ``wazuh-authd`` when parsing requests. 
 ==============================================================    =============
 
 Wazuh agent
