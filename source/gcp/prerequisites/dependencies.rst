@@ -19,32 +19,37 @@ Python
 
 The GCP module requires Python 3. It is compatible with Python 3.6 to Python 3.9. Future Python releases should maintain compatibility although it cannot be guaranteed.
 
-a) For CentOS/RHEL/Fedora operating systems:
+.. tabs::
 
-.. code-block:: console
+   .. group-tab:: Yum
 
-  # yum update && yum install python3
+      .. code-block:: console
 
-b) For Debian/Ubuntu operating systems:
+         # yum update && yum install python3
 
-.. code-block:: console
+   .. group-tab:: APT
 
-  # apt-get update && apt-get install python3
+      .. code-block:: console
+
+         # apt-get update && apt-get install python3
+
 
 The required modules can be installed with Pip, the Python package manager. Most of UNIX distributions have this tool available in their software repositories:
 
-a) For CentOS/RHEL/Fedora operating systems:
+.. tabs::
 
-.. code-block:: console
+   .. group-tab:: Yum
 
-  # yum update && yum install python3-pip
+      .. code-block:: console
 
+         # yum update && yum install python3-pip
 
-b) For Debian/Ubuntu operating systems:
+   .. group-tab:: APT
 
-.. code-block:: console
+      .. code-block:: console
 
-  # apt-get update && apt-get install python3-pip
+         # apt-get update && apt-get install python3-pip
+
 
 It is recommended to use a pip version greater than or equal to 19.3 to ease the installation of the required dependencies.
 
