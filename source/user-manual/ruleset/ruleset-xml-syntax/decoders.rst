@@ -85,7 +85,8 @@ To understand the inner workings of a decoder, it will be easier through example
 At the beginning of the example, you can see the full log of an event. This input log first goes through the pre-decoding phase. In this phase, general information, such as a timestamp, a hostname, and a program name, is extracted when a Syslog-like header is present.
 
 
-In the next stage, the decoder extracts information from the log that is left. In this example, the decoder only analyzes the remaining: ``Connection closed by 192.168.1.33``.
+In the next stage, the decoder extracts information from the remaining log. In this example, the decoder only analyzes: ``Connection closed by 192.168.1.33``.
+
 
 Before making a custom decoder, the first step should always be running the event log through :ref:`wazuh-logtest <wazuh-logtest>` to know where to start.
 

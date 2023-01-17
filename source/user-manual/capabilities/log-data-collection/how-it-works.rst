@@ -158,7 +158,7 @@ Extracted information:
 Decoding
 ^^^^^^^^
 
-In the decoding phase, the log analysis looks for a decoder matching the log. The matching decoder then extracts defined fields from that specific log.
+In the decoding phase, the analysis engine looks for a decoder matching the log. The matching decoder then extracts defined fields from that specific log.
 
 Sample log and its extracted info:
 
