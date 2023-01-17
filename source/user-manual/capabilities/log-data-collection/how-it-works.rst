@@ -152,8 +152,9 @@ In the pre-decoding phase of analysis, the log analysis extracts Syslog-like inf
 
 Extracted information:
 
-  - *hostname*: 'localhost'
-  - *program_name*: 'sshd'
+-  *timestamp*: ``Feb 14 12:19:04``
+-  *hostname*: ``localhost``
+-  *program_name*: ``sshd``
 
 Decoding
 ^^^^^^^^
@@ -169,8 +170,8 @@ Sample log and its extracted info:
 
 Extracted information:
 
-  - *dstuser*: rromero
-  - *srcip*: 192.168.1.133
+-  *dstuser*: ``rromero``
+-  *srcip*: ``192.168.1.133``
 
 Rule matching
 ^^^^^^^^^^^^^
