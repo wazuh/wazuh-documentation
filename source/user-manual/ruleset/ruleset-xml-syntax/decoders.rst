@@ -31,7 +31,6 @@ There are many options to configure in decoders:
 +------------------------+---------------------------------------------------------------+-------------------------------------------------------------------------------------------------+
 | `prematch`_            | Any `regex <regex.html#regex-os-regex-syntax>`_ or            | Sets a regular expression as a condition for applying the decoder. The log must match the       |
 |                        | `pcre2 <regex.html#pcre2-syntax>`_ expression.                | regular expression without considering any Syslog-like header.                                  |
-
 +------------------------+---------------------------------------------------------------+-------------------------------------------------------------------------------------------------+
 | :ref:`regex_decoders`  | Any `regex <regex.html#regex-os-regex-syntax>`_ or            | The decoder will use this option to find fields of interest and extract them.                   |
 |                        | `pcre2 <regex.html#pcre2-syntax>`_ expression.                |                                                                                                 |
