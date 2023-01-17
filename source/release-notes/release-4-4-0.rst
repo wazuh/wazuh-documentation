@@ -350,35 +350,33 @@ Wazuh Splunk app
 
 Packages 
 ^^^^^^^^
-- `#1014 <https://github.com/wazuh/wazuh-packages/pull/1014>`_ Add specs files to build Wazuh 4.4.0.  
-- `#1980 <https://github.com/wazuh/wazuh-packages/pull/1980>`_ Wazuh dashboard 4.4.0 with OpenSearch dashboards 2.4.1 to 4.4.  
-- `#1979 <https://github.com/wazuh/wazuh-packages/pull/1979>`_ Wazuh indexer 4.4.0 with OpenSeach 2.4.1 to 4.4. 
-- `#1715 <https://github.com/wazuh/wazuh-packages/pull/1715>`_ Add Alpine package build.  
-- `#1154 <https://github.com/wazuh/wazuh-packages/pull/1154>`_ Obtain IP of an interface in wazuh passwords tools script.
-- `#1167 <https://github.com/wazuh/wazuh-packages/pull/1167>`_ Add azure wodle to Solaris11 and RPM agent SPEC files.  
-- `#1379 <https://github.com/wazuh/wazuh-packages/pull/1379>`_ Add new ``wodles/gcloud`` files and folders to Solaris11 SPEC.
-- `#1453 <https://github.com/wazuh/wazuh-packages/pull/1453>`_ Add orm.py to Solaris 11 SPEC file.
-- `#1299 <https://github.com/wazuh/wazuh-packages/pull/1299>`_ Changes required for the new agent-group mechanism. 
-- `#1569 <https://github.com/wazuh/wazuh-packages/pull/1569>`_ Remove unnecessary plugins from default Wazuh dashboard to 4.4. 
-- `#1602 <https://github.com/wazuh/wazuh-packages/pull/1602>`_ Simplified splunk packages builder. 
-- `#1687 <https://github.com/wazuh/wazuh-packages/pull/1687>`_ Install open-vm-tools in OVA. 
-- `#1699 <https://github.com/wazuh/wazuh-packages/pull/1699>`_ Add custom path for indexer packages to 4.4. 
-- `#1727 <https://github.com/wazuh/wazuh-packages/pull/1727>`_ Add fix to avoid GLIBC crash.
-- `#1751 <https://github.com/wazuh/wazuh-packages/pull/1751>`_ Increase logo text and size. 
-- `#1770 <https://github.com/wazuh/wazuh-packages/pull/1770>`_ wazuh-certs-tool.sh support for multiple IPs in server nodes. 
-- `#1823 <https://github.com/wazuh/wazuh-packages/pull/1823>`_ Allow DNS names in indexer-security-init.sh. 
-- `#1839 <https://github.com/wazuh/wazuh-packages/pull/1839>`_ Use apt-get instead of apt.
-- `#1831 <https://github.com/wazuh/wazuh-packages/pull/1831>`_ The creation of the base is integrated within the script build_packages.sh.
+- `#1980 <https://github.com/wazuh/wazuh-packages/pull/1980>`_ The Wazuh dashboard is now based on OpenSearch dashboards 2.4.1.  
+- `#1979 <https://github.com/wazuh/wazuh-packages/pull/1979>`_ The Wazuh indexer is now based on OpenSearch 2.4.1. 
+- `#1715 <https://github.com/wazuh/wazuh-packages/pull/1715>`_ Added the Alpine package build.  
+- `#1154 <https://github.com/wazuh/wazuh-packages/pull/1154>`_ Obtain IP of an interface in the Wazuh passwords tools script.
+- `#1167 <https://github.com/wazuh/wazuh-packages/pull/1167>`_ Added the Azure wodle files to the Solaris 11 and RPM agent SPEC files.  
+- `#1379 <https://github.com/wazuh/wazuh-packages/pull/1379>`_ Added the new ``wodles/gcloud`` files and folders to the Solaris 11 SPEC file.
+- `#1453 <https://github.com/wazuh/wazuh-packages/pull/1453>`_ Added ``orm.py`` to the Solaris 11 SPEC file.
+- `#1299 <https://github.com/wazuh/wazuh-packages/pull/1299>`_ Applied the changes required for the new ``agent-group`` mechanism. 
+- `#1569 <https://github.com/wazuh/wazuh-packages/pull/1569>`_ Removed unnecessary plugins from the default Wazuh dashboard. 
+- `#1602 <https://github.com/wazuh/wazuh-packages/pull/1602>`_ Simplified the Splunk packages builder. 
+- `#1687 <https://github.com/wazuh/wazuh-packages/pull/1687>`_ Installed ``open-vm-tools`` in the OVA. 
+- `#1699 <https://github.com/wazuh/wazuh-packages/pull/1699>`_ Added a custom path for the Wazuh indexer packages. 
+- `#1751 <https://github.com/wazuh/wazuh-packages/pull/1751>`_ Updated the Wazuh dashboard loading screen logo. 
+- `#1770 <https://github.com/wazuh/wazuh-packages/pull/1770>`_ The ``wazuh-certs-tool.sh`` now supports multiple IP addresses in server nodes. 
+- `#1823 <https://github.com/wazuh/wazuh-packages/pull/1823>`_ Allow DNS names in the ``indexer-security-init.sh``. 
+- `#1839 <https://github.com/wazuh/wazuh-packages/pull/1839>`_ The Wazuh installation assistant now uses ``apt-get`` instead of ``apt``.
+- `#1831 <https://github.com/wazuh/wazuh-packages/pull/1831>`_ The creation of the base is integrated within the script ``build_packages.sh``.
 - `#1838 <https://github.com/wazuh/wazuh-packages/pull/1838>`_ Changed the internal directory in the base container.
-- `#1473 <https://github.com/wazuh/wazuh-packages/pull/1473>`_ Changed method from `GET` to `POST` in API login requests.
-- `#1882 <https://github.com/wazuh/wazuh-packages/pull/1882>`_ Add changes to distribute the libstdc++ and libgcc_s to wazuh-packages. 
-- `#1890 <https://github.com/wazuh/wazuh-packages/pull/1890>`_ Updating permissions in Wazuh indexer and dashboard. 
-- `#1876 <https://github.com/wazuh/wazuh-packages/pull/1876>`_ Remove deprecated apt-key from the installation assistant.
-- `#1904 <https://github.com/wazuh/wazuh-packages/pull/1904>`_ Parameterize Wazuh dashboard script 4.4. 
-- `#1929 <https://github.com/wazuh/wazuh-packages/pull/1929>`_ Added Wazuh dashboard light loading screen logo in dark mode 4.4. 
-- `#1930 <https://github.com/wazuh/wazuh-packages/pull/1930>`_ Added "Distribution version matrix" section in README.md.
-- `#1950 <https://github.com/wazuh/wazuh-packages/pull/1950>`_ Solve 4.4 versioning. 
-- `#1961 <https://github.com/wazuh/wazuh-packages/pull/1961>`_ Added ossec.conf file generation and improved SPECs.
+- `#1473 <https://github.com/wazuh/wazuh-packages/pull/1473>`_ Changed method from ``GET`` to ``POST`` in the API login requests.
+- `#1882 <https://github.com/wazuh/wazuh-packages/pull/1882>`_ Added changes to distribute the ``libstdc++`` and ``libgcc_s`` to wazuh-packages. 
+- `#1890 <https://github.com/wazuh/wazuh-packages/pull/1890>`_ Updated permissions in the Wazuh indexer and Wazuh dashboard. 
+- `#1876 <https://github.com/wazuh/wazuh-packages/pull/1876>`_ Removed the deprecated ``apt-key`` utility from the Wazuh installation assistant.
+- `#1904 <https://github.com/wazuh/wazuh-packages/pull/1904>`_ Parameterized the Wazuh dashboard script. 
+- `#1929 <https://github.com/wazuh/wazuh-packages/pull/1929>`_ Added the Wazuh dashboard light loading screen logo in dark mode. 
+- `#1930 <https://github.com/wazuh/wazuh-packages/pull/1930>`_ Added the "Distribution version matrix" section in the ``README.md`` file.
+- `#1961 <https://github.com/wazuh/wazuh-packages/pull/1961>`_ Added ``ossec.conf`` file generation and improved SPECs.
+- `#1343 <https://github.com/wazuh/wazuh-packages/pull/1343>`_ Signed the Windows dynamic link library files.
  
 
 
@@ -526,7 +524,7 @@ Reference                                                                       
 `#4984 <https://github.com/wazuh/wazuh-kibana-app/pull/4984>`_                                                                                                                                   Fixed commands in the deploy new agent section(most of the commands are missing ``-1``).
 `#4975 <https://github.com/wazuh/wazuh-kibana-app/pull/4975>`_                                                                                                                                   Fixed default last scan date parser to be able to catch dates returned by Wazuh API when no vulnerabilities scan has been made.
 `#5035 <https://github.com/wazuh/wazuh-kibana-app/pull/5035>`_                                                                                                                                   A solaris command has been fixed. 
-`#5045 <https://github.com/wazuh/wazuh-kibana-app/pull/5045>`_                                                                                                                                   Fixed commands: Aix, OpenSUSE, Alpine, Suse11, Fedora, HP, Oracle Linux 5, Amazon Linux 2, Centos5. Changed the word ``or higher`` in buttons to ``+``.Fixed validations for Hp, Solaris and Alpine. 
+`#5045 <https://github.com/wazuh/wazuh-kibana-app/pull/5045>`_                                                                                                                                   Fixed commands: Aix, OpenSUSE, Alpine, Suse11, Fedora, HP, Oracle Linux 5, Amazon Linux 2, CentOS5. Changed the word ``or higher`` in buttons to ``+``.Fixed validations for Hp, Solaris and Alpine. 
 `#5069 <https://github.com/wazuh/wazuh-kibana-app/pull/5069>`_                                                                                                                                   Fixed error in Github module PDF report. 
 `#5098 <https://github.com/wazuh/wazuh-kibana-app/pull/5098>`_                                                                                                                                   Fixed password input in deploy new agent section. 
 `#5094 <https://github.com/wazuh/wazuh-kibana-app/pull/5094>`_                                                                                                                                   Fixed error when clicking on the selectors of agents in the group agents management.
@@ -560,7 +558,7 @@ Reference                                                                       
 `#4999 <https://github.com/wazuh/wazuh-kibana-app/pull/4999>`_                                                                                                                                   Fixed Inventory checks table filters by stats.
 `#4975 <https://github.com/wazuh/wazuh-kibana-app/pull/4975>`_                                                                                                                                   Fixed default last scan date parser to be able to catch dates returned by Wazuh API when no vulnerabilities scan has been made.
 `#5035 <https://github.com/wazuh/wazuh-kibana-app/pull/5035>`_                                                                                                                                   A Solaris command has been fixed.     
-`#5045 <https://github.com/wazuh/wazuh-kibana-app/pull/5045>`_                                                                                                                                   Fixed commands: Aix, OpenSUSE, Alpine, Suse11, Fedora, HP, Oracle Linux 5, Amazon Linux 2, Centos5. Changed the word ``or higher`` in buttons to ``+``.Fixed validations for Hp, Solaris and Alpine. 
+`#5045 <https://github.com/wazuh/wazuh-kibana-app/pull/5045>`_                                                                                                                                   Fixed commands: Aix, OpenSUSE, Alpine, Suse11, Fedora, HP, Oracle Linux 5, Amazon Linux 2, CentOS5. Changed the word ``or higher`` in buttons to ``+``.Fixed validations for Hp, Solaris and Alpine. 
 `#5069 <https://github.com/wazuh/wazuh-kibana-app/pull/5069>`_                                                                                                                                   Fixed error in Github module PDF report. 
 `#5098 <https://github.com/wazuh/wazuh-kibana-app/pull/5098>`_                                                                                                                                   Fixed password input in deploy new agent section. 
 `#5094 <https://github.com/wazuh/wazuh-kibana-app/pull/5094>`_                                                                                                                                   Fixed error when clicking on the selectors of agents in the group agents management.
@@ -594,7 +592,7 @@ Reference                                                                       
 `#4983 <https://github.com/wazuh/wazuh-kibana-app/pull/4983>`_                                                                                                                                   Fixed agent installation command for macOS in the deploy new agent section.
 `#4975 <https://github.com/wazuh/wazuh-kibana-app/pull/4975>`_                                                                                                                                   Fixed default last scan date parser to be able to catch dates returned by Wazuh API when no vulnerabilities scan has been made.
 `#5035 <https://github.com/wazuh/wazuh-kibana-app/pull/5035>`_                                                                                                                                   A Solaris command has been fixed.     
-`#5045 <https://github.com/wazuh/wazuh-kibana-app/pull/5045>`_                                                                                                                                   Fixed commands: Aix, OpenSUSE, Alpine, Suse11, Fedora, HP, Oracle Linux 5, Amazon Linux 2, Centos5. Changed the word ``or higher`` in buttons to ``+``.Fixed validations for Hp, Solaris and Alpine. 
+`#5045 <https://github.com/wazuh/wazuh-kibana-app/pull/5045>`_                                                                                                                                   Fixed commands: Aix, OpenSUSE, Alpine, Suse11, Fedora, HP, Oracle Linux 5, Amazon Linux 2, CentOS5. Changed the word ``or higher`` in buttons to ``+``.Fixed validations for Hp, Solaris and Alpine. 
 `#5069 <https://github.com/wazuh/wazuh-kibana-app/pull/5069>`_                                                                                                                                   Fixed error in Github module PDF report. 
 `#5098 <https://github.com/wazuh/wazuh-kibana-app/pull/5098>`_                                                                                                                                   Fixed password input in deploy new agent section. 
 `#5094 <https://github.com/wazuh/wazuh-kibana-app/pull/5094>`_                                                                                                                                   Fixed error when clicking on the selectors of agents in the group agents management.
@@ -607,33 +605,34 @@ Packages
 =====================================================================     =============
 Reference                                                                 Description
 =====================================================================     =============
-`#1091 <https://github.com/wazuh/wazuh-packages/pull/1091>`_              Update g++ to fix undefined behavior on opensuse tumbleweed.  
-`#976 <https://github.com/wazuh/wazuh-packages/pull/976>`_                Fix missing tar as dependency in unattended-installation.sh. 
-`#1196 <https://github.com/wazuh/wazuh-packages/pull/1196>`_              Fix RPM wazuh-agent package build. 
-`#1431 <https://github.com/wazuh/wazuh-packages/pull/1431>`_              Fix error compilation for CentOS 5 and 7, and building docker images CentOS 5 for i386. 
-`#1611 <https://github.com/wazuh/wazuh-packages/pull/1611>`_              Fix solaris 11 generation 4.4 branch. 
-`#1653 <https://github.com/wazuh/wazuh-packages/pull/1653>`_              Fix log clean command in ova generation 4.4. 
-`#1661 <https://github.com/wazuh/wazuh-packages/pull/1661>`_              Fixed invoke.rc call. 
-`#1674 <https://github.com/wazuh/wazuh-packages/pull/1674>`_              Fix RHEL9 init.d file installation. 
-`#1675 <https://github.com/wazuh/wazuh-packages/pull/1675>`_              Fix error sysv-init rhel9.
-`#1650 <https://github.com/wazuh/wazuh-packages/pull/1650>`_              Fixing package building for Arch that was broken a few versions ago. 
-`#1688 <https://github.com/wazuh/wazuh-packages/pull/1688>`_              Fix Ubuntu compatibility in generate_ova.sh.  
-`#2019 <https://github.com/wazuh/wazuh-packages/pull/2019>`_              Removed errors logs from OVA to 4.4. 
-`#1905 <https://github.com/wazuh/wazuh-packages/pull/1905>`_              Fixing service enablement in SUSE packages. 
-`#1877 <https://github.com/wazuh/wazuh-packages/pull/1877>`_              Fix package conflicts between `wazuh-manager` and `azure-cli` on CentOS 8.
-`#1779 <https://github.com/wazuh/wazuh-packages/pull/1779>`_              Fix Wazuh installation assistant AIO deployment in Fedora 36. 
-`#1812 <https://github.com/wazuh/wazuh-packages/pull/1812>`_              Copy rhel and centos SCA templates 4.4.
-`#1826 <https://github.com/wazuh/wazuh-packages/pull/1826>`_              Fix wazuh-certs-tool.sh certs generation when it differs from the config.yml.
-`#1824 <https://github.com/wazuh/wazuh-packages/pull/1824>`_              Added daemon-reload at the end of rollback.
-`#1836 <https://github.com/wazuh/wazuh-packages/pull/1836>`_              Fix wazuh offline installation messages.
-`#1898 <https://github.com/wazuh/wazuh-packages/pull/1898>`_              Remove `Wazuh dashboard` and `Wazuh indexer` `init.d` service for `Red Hat 9` 4.4.
-`#1925 <https://github.com/wazuh/wazuh-packages/pull/1925>`_              Remove black square icon from Wazuh dashboard 4.4.
-`#1963 <https://github.com/wazuh/wazuh-packages/pull/1963>`_              Allow installation assistant to create certificates for more than 9 nodes.
-`#1987 <https://github.com/wazuh/wazuh-packages/pull/1987>`_              Removed init.d service for Wazuh dashboard rpm.  
-`#1983 <https://github.com/wazuh/wazuh-packages/pull/1983>`_              `requestHeadersWhitelist` is replaced by `requestHeadersAllowlist` because of deprecation. 
-`#1986 <https://github.com/wazuh/wazuh-packages/pull/1986>`_              Show message when uninstalling wazuh-indexer.
-`#2018 <https://github.com/wazuh/wazuh-packages/pull/2018>`_              Disable expanded header by default in Wazuh dashboard to  4.4. 
-`#1932 <https://github.com/wazuh/wazuh-packages/pull/1932>`_              Add flag mechanism to configure the protection for untrusted libraries verification. 
+`#1091 <https://github.com/wazuh/wazuh-packages/pull/1091>`_              Updated ``g++`` to fix undefined behavior on openSUSE Tumbleweed.  
+`#976 <https://github.com/wazuh/wazuh-packages/pull/976>`_                Added missing ``tar`` dependency in the Wazuh installation assistant.
+`#1196 <https://github.com/wazuh/wazuh-packages/pull/1196>`_              Fixed the RPM wazuh-agent package build. 
+`#1431 <https://github.com/wazuh/wazuh-packages/pull/1431>`_              Fixed a error compilation for CentOS 5 and 7, and building docker images CentOS 5 for i386. 
+`#1611 <https://github.com/wazuh/wazuh-packages/pull/1611>`_              Fixed the Solaris 11 generation branch. 
+`#1653 <https://github.com/wazuh/wazuh-packages/pull/1653>`_              Fixed the log clean command in the OVA generation. 
+`#1661 <https://github.com/wazuh/wazuh-packages/pull/1661>`_              Fixed the ``invoke.rc`` call. 
+`#1674 <https://github.com/wazuh/wazuh-packages/pull/1674>`_              Fixed RHEL9 ``init.d`` file installation. 
+`#1675 <https://github.com/wazuh/wazuh-packages/pull/1675>`_              Fixed RHEL9 ``sysv-init`` error.  
+`#1650 <https://github.com/wazuh/wazuh-packages/pull/1650>`_              Fixed the package building for Arch Linux. 
+`#1688 <https://github.com/wazuh/wazuh-packages/pull/1688>`_              Fixed Ubuntu compatibility in the ``generate_ova.sh`` script.  
+`#2019 <https://github.com/wazuh/wazuh-packages/pull/2019>`_              Removed error logs from the OVA.  
+`#1905 <https://github.com/wazuh/wazuh-packages/pull/1905>`_              Fixed service enablement in SUSE packages. 
+`#1877 <https://github.com/wazuh/wazuh-packages/pull/1877>`_              Fixed package conflicts between the ``wazuh-manager`` and ``azure-cli`` on CentOS 8.
+`#1779 <https://github.com/wazuh/wazuh-packages/pull/1779>`_              Fixed the Wazuh installation assistant all-in-one deployment on Fedora 36. 
+`#1812 <https://github.com/wazuh/wazuh-packages/pull/1812>`_              Fixed the RHEL and CentOS SCA template generation.
+`#1826 <https://github.com/wazuh/wazuh-packages/pull/1826>`_              Fixed the ``wazuh-certs-tool.sh`` behavior when the given command does not match the content of the ``config.yml`` file.
+`#1824 <https://github.com/wazuh/wazuh-packages/pull/1824>`_              Added ``daemon-reload`` at the end of rollback.
+`#1836 <https://github.com/wazuh/wazuh-packages/pull/1836>`_              Fixed the Wazuh offline installation messages.
+`#1898 <https://github.com/wazuh/wazuh-packages/pull/1898>`_              Removed `Wazuh dashboard` and `Wazuh indexer` `init.d` service for RHEL9.
+`#1925 <https://github.com/wazuh/wazuh-packages/pull/1925>`_              Removed black square icon from the Wazuh dashboard.
+`#1963 <https://github.com/wazuh/wazuh-packages/pull/1963>`_              An issue that didn't allow the Wazuh installation assistant to create certificates for more than 9 nodes is now fixed.
+`#1987 <https://github.com/wazuh/wazuh-packages/pull/1987>`_              Removed ``init.d`` service for Wazuh dashboard RPM.  
+`#1983 <https://github.com/wazuh/wazuh-packages/pull/1983>`_              `requestHeadersWhitelist` is deprecated and has been replaced by `requestHeadersAllowlist`. 
+`#1986 <https://github.com/wazuh/wazuh-packages/pull/1986>`_              The Wazuh installation assistant now shows a message indicating that the Wazuh indexer was removed.
+`#2018 <https://github.com/wazuh/wazuh-packages/pull/2018>`_              Disabled the expanded header by default in the Wazuh dashboard. 
+`#1932 <https://github.com/wazuh/wazuh-packages/pull/1932>`_              Added flag mechanism to configure the protection for untrusted libraries verification. 
+`#1727 <https://github.com/wazuh/wazuh-packages/pull/1727>`_              Added a fix to avoid GLIBC crash.
 =====================================================================     =============
 
 Changelogs
