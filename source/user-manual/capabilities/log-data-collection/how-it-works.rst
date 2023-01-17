@@ -143,7 +143,7 @@ Analysis
 Pre-decoding
 ^^^^^^^^^^^^
 
-In the pre-decoding phase of analysis, the log analysis extracts syslog-like information such as time stamp, host name, and program name from the log header.
+In the pre-decoding phase of analysis, the log analysis extracts Syslog-like information such as timestamp, hostname, and program name from the log header.
 
 .. code-block:: none
   :class: output
