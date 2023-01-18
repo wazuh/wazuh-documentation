@@ -195,7 +195,7 @@ When an invalid login attempt triggers rule 5710, you can see the alert below on
 
 .. thumbnail:: /images/gdpr/invalid-ssh-login-attempt1.png
    :title: Invalid SSH login attempt alert visualization
-	:align: center
+   :align: center
    :width: 80%
 
 .. thumbnail:: /images/gdpr/invalid-ssh-login-attempt2.png
