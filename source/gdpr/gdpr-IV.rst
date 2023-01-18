@@ -223,9 +223,9 @@ In this use case, you configure Wazuh to generate an alert and send notification
 		<ossec_config>
 		  <global>
 		    <email_notification>yes</email_notification>
-		    <email_to>data_protection_officer@test.com</email_to>
-		    <smtp_server>mail.test.com</smtp_server>
-		    <email_from>wazuh@test.com</email_from>
+		    <email_to>data_protection_officer@test.example</email_to>
+		    <smtp_server>mail.test.example</smtp_server>
+		    <email_from>wazuh@test.example</email_from>
 		  </global>
 		</ossec_config>
 
@@ -235,13 +235,13 @@ In this use case, you configure Wazuh to generate an alert and send notification
 
 		# systemctl restart wazuh-manager
 
-The changes made enable sending alerts via email to ``data_protection_officer@test.com``.
+The changes made enable sending alerts via email to ``data_protection_officer@test.example``.
 
 The sample email sent after an alert is generated looks like the following:
 
 .. code-block:: none
 
-	From: Wazuh <wazuh@test.com>               5:03 PM (2 minutes ago)
+	From: Wazuh <wazuh@test.example>               5:03 PM (2 minutes ago)
 	to: me
 	-----------------------------
 	Wazuh Notification.
