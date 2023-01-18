@@ -3,34 +3,25 @@
 .. meta::
   :description: Check out this section to learn more about how to use Wazuh for GDPR (The General Data Protection Regulation of the European Union). 
   
-.. _gdpr:
-
 Using Wazuh for GDPR
 ====================
 
-The **General Data Protection Regulation** of the European Union (GDPR) has been drawn up in order to agree on data privacy legislation throughout Europe, focusing mainly on the protection of the data of all citizens of the European Union.
+The European Union's General Data Protection Regulation (GDPR) was created to reach an agreement on data privacy legislation across Europe. Its primary focus is protecting the data of European Union citizens. The regulation aims to improve user data privacy and reform how European Union organizations approach data privacy.
 
-For that purpose, this regulation seeks to improve the privacy of such data and reform the way in which European Union organizations approach data privacy.
+Wazuh assists with GDPR compliance by performing log collection, file integrity monitoring, configuration assessment, intrusion detection, real-time alerting, and automated response to threats.
 
-* Wazuh for GDPR White Paper `(PDF) <https://wazuh.com/resources/Wazuh_GDPR_White_Paper.pdf>`_
+Wazuh includes default rules and decoders for detecting various attacks, system errors, security misconfigurations, and policy violations. By default, these rules are mapped to the associated GDPR requirements. It’s possible to map your custom rules to one or more GDPR requirements by adding the compliance identifier in the ``<group>`` tag of the rule. The syntax to map a rule to a GDPR requirement is ``gdpr_`` followed by the chapter, the article, and, if applicable, the section and paragraph to which the requirement belongs. For example, ``gdpr_II_5.1.f``. Refer to the :ref:`ruleset section <rules_group>` for more information.
 
-Introduction
-------------
-
-Wazuh uses its file integrity control and access control capabilities, along with a new tagging in the Wazuh ruleset. Rules that meet a specific GDPR technical requirement of the GDPR have a label that identifies them.
-
-The syntax used for rule tagging is **gdpr_** followed by the chapter, the article and, if applicable, the section and paragraph to which the requirement belongs. (e.g. gdpr_II_5.1.f).
-
-GDPR formal requirements content is outside the technical scope and, therefore, is not covered in this document.
+The `Wazuh for GDPR white paper (PDF) <https://wazuh.com/resources/Wazuh_GDPR_White_Paper.pdf>`__ guide explains how Wazuh modules assist with GDPR compliance. This document doesn’t cover the GDPR formal requirements because it’s outside of its technical scope.
 
 Contents
 --------
 
-The technical requirements that Wazuh supports can be found in the following chapters:
+You can find the technical requirements that Wazuh supports in the following sections:
 
 .. toctree::
-    :maxdepth: 1
+   :maxdepth: 1
 
-    gdpr-II
-    gdpr-III
-    gdpr-IV
+   gdpr-II
+   gdpr-III
+   gdpr-IV
