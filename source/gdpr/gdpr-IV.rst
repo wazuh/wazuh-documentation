@@ -308,7 +308,7 @@ Wazuh server
 
 	.. code-block:: xml
 
-		<rule id="100001" level="15">
+		<rule id="100002" level="15">
 		    <if_matched_group>syscheck</if_matched_group>
 		    <match>/customers/personal_data</match>
 		    <description>Changes made to a sensitive file - $(file).</description>
