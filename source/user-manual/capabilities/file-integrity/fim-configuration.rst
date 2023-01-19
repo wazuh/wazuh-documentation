@@ -179,47 +179,46 @@ To configure the Windows registries, it is necessary to create a list of those r
     <windows_registry arch="32bit" check_all="no" check_mtime="yes">HKEY_LOCAL_MACHINE\SYSTEM\Setup</windows_registry>
   </syscheck>
 
-
-.. _how_to_fim_windows_directories:
-
 Configuring Windows directories
 -------------------------------
 
-To configure Windows special directory ``%WINDIR%\system32``, it is necessary to take into account that in 64-bit architecture systems: 
-1) **System32** is reserved for those 64-bit DLLs.
-2) **SysWOW64** for all 32-bit DLLs.
+In 64-bit architecture systems, you can locate 32-bit and 64-bit DLLs in a special way.
 
-The 32-bit processes running in a 64-bit environment, when they want to access Sytem32, they do it through a virtual folder called ``Sysnative``.
+-  ``System32`` is reserved for 64-bit DLLs.
+-  ``SysWOW64`` is reserved for all 32-bit DLLs.
 
-Now, this redirection has been disabled and it is possible to access directly to ``System32``, so monitoring directories ``%WINDIR%/System32`` or ``%WINDIR%/Sysnative`` will be equivalent, and the path shown in the alerts will be ``%WINDIR%/System32``.
-This implies that ``SysWOW64`` is a separate directory, and in case you want to monitor it, it must be added as such in ``ossec.conf``. 
+Furthermore, 32-bit processes running in 64-bit environments access ``Sytem32`` through a virtual folder called ``Sysnative``.
 
-It's possible configure the monitoring in any mode, for example, scheduled mode:
+But this redirection has been disabled and you can access ``System32`` directly. Monitoring ``%WINDIR%/System32`` and ``%WINDIR%/Sysnative`` directories is equivalent and Wazuh shows the path ``%WINDIR%/System32`` in the alerts. ``SysWOW64`` is a different directory. To monitor ``%WINDIR%/SysWOW64``, you must add it to the ``ossec.conf`` configuration file.
 
-.. code-block:: xml
+You can monitor the Windows special directories ``%WINDIR%/System32`` and ``%WINDIR%/SysWOW64`` directories configuring them with any of the FIM modes. For example:
 
-  <syscheck>
-    <directories>%WINDIR%/System32</directories>
-    <directories>%WINDIR%/SysWOW64</directories>
-  </syscheck>
+-  Scheduled mode.
 
-Realtime mode:
+   .. code-block:: xml
 
-.. code-block:: xml
+      <syscheck>
+        <directories>%WINDIR%/System32</directories>
+        <directories>%WINDIR%/SysWOW64</directories>
+      </syscheck>
 
-  <syscheck>
-    <directories realtime="yes">%WINDIR%/System32</directories>
-    <directories realtime="yes">%WINDIR%/SysWOW64</directories>
-  </syscheck>
+-  Realtime mode.
 
-And Whodata mode:
+   .. code-block:: xml
 
-.. code-block:: xml
+      <syscheck>
+        <directories realtime="yes">%WINDIR%/System32</directories>
+        <directories realtime="yes">%WINDIR%/SysWOW64</directories>
+      </syscheck>
 
-  <syscheck>
-    <directories whodata="yes">%WINDIR%/System32</directories>
-    <directories whodata="yes">%WINDIR%/SysWOW64</directories>
-  </syscheck>
+-  Whodata mode.
+
+   .. code-block:: xml
+
+      <syscheck>
+        <directories whodata="yes">%WINDIR%/System32</directories>
+        <directories whodata="yes">%WINDIR%/SysWOW64</directories>
+      </syscheck>
 
 .. _how_to_fim_report_changes:
 
