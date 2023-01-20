@@ -172,6 +172,7 @@ newUrls['4.4'] = [
   '/user-manual/reference/ossec-conf/wazuh-db-config.html',
   '/azure/activity-services/prerequisites/dependencies.html',
   '/user-manual/wazuh-dashboard/custom-branding.html',
+  '/release-notes/release-4-4-0.html',
 ];
 
 /* Pages removed in 4.4 */
@@ -235,6 +236,7 @@ newUrls['4.3'] = [
   '/release-notes/release-4-3-10.html',
   '/getting-started/use-cases/container-security.html',
   '/user-manual/agents/query-configuration.html',
+  '/user-manual/agents/listing/wazuh-dashboard.html',
   '/user-manual/elasticsearch/configure-indices.html',
   '/user-manual/elasticsearch/elasticsearch.html',
   '/user-manual/elasticsearch/index.html',
@@ -254,6 +256,7 @@ newUrls['4.3'] = [
   '/user-manual/user-administration/single-sign-on/google.html',
   '/user-manual/user-administration/single-sign-on/jumpcloud.html',
   '/user-manual/user-administration/single-sign-on/onelogin.html',
+  '/user-manual/user-administration/single-sign-on/keycloak.html',
   '/upgrade-guide/upgrading-central-components.html',
   '/migration-guide/index.html',
   '/migration-guide/wazuh-indexer.html',
@@ -505,6 +508,7 @@ removedUrls['4.3'] = [
   '/installation-guide/wazuh-agent/deployment-variables/deployment-variables-macos.html',
   '/installation-guide/wazuh-agent/deployment-variables/deployment-variables-windows.html',
   '/user-manual/overview.html',
+  '/user-manual/agents/listing/wazuh-app.html',
   '/user-manual/capabilities/vulnerability-detection/compatibility-matrix.html',
   '/user-manual/capabilities/vulnerability-detection/running-vu-scan.html',
   '/user-manual/kibana-app/index.html',
@@ -1106,6 +1110,11 @@ redirections.push(
     'target': ['4.2=>4.3'],
     '4.2': '/user-manual/kibana-app/reference/configure-indices.html',
     '4.3': '/user-manual/elasticsearch/configure-indices.html',
+  },
+  {
+    'target': ['4.2=>4.3', '4.3=>4.2'],
+    '4.2': '/user-manual/agents/listing/wazuh-app.html',
+    '4.3': '/user-manual/agents/listing/wazuh-dashboard.html',
   },
   {
     'target': ['4.2=>4.3'],

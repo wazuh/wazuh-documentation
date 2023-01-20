@@ -16,9 +16,7 @@ The first thing you need to do is to set up a system with the requirements neede
       :depth: 1
       :backlinks: none
 
-.. note::
-   
-   You need root user privileges to execute all the commands described below.
+.. note:: You need root user privileges to run all the commands described below.
 
 Requirements
 ------------
@@ -98,13 +96,13 @@ For Linux/Unix machines, Docker requires an amd64 architecture system running ke
 
     .. tabs::
 
-      .. group-tab:: For Systemd
+      .. group-tab:: Systemd
 
          .. code-block:: console
 
             # systemctl start docker
 
-      .. group-tab:: For SysV init
+      .. group-tab:: SysV init
 
          .. code-block:: console
 

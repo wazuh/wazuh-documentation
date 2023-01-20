@@ -25,12 +25,12 @@ There are many options to configure in decoders:
 +------------------------+---------------------------------------------------------------+-------------------------------------------------------------------------------------------------+
 | `accumulate`_          | None                                                          | It allows tracking events over multiple log messages.                                           |
 +------------------------+---------------------------------------------------------------+-------------------------------------------------------------------------------------------------+
-| `program_name`_        | Any `regex <regex.html#regex-os-regex-syntax>`_,              | It defines the name of the program associated with the decoder.                                 |
-|                        | `sregex <regex.html#sregex-os-match-syntax>`_ or              |                                                                                                 |
+| `program_name`_        | Any `regex <regex.html#regex-os-regex-syntax>`_,              | Sets a program name as a condition for applying the decoder. The log header must have a program |
+|                        | `sregex <regex.html#sregex-os-match-syntax>`_ or              | name matching the regular expression.                                                           |
 |                        | `pcre2 <regex.html#pcre2-syntax>`_ expression.                |                                                                                                 |
 +------------------------+---------------------------------------------------------------+-------------------------------------------------------------------------------------------------+
-| `prematch`_            | Any `regex <regex.html#regex-os-regex-syntax>`_ or            | It will look for a match in the log. In case it does, the decoder will be used.                 |
-|                        | `pcre2 <regex.html#pcre2-syntax>`_ expression.                |                                                                                                 |
+| `prematch`_            | Any `regex <regex.html#regex-os-regex-syntax>`_ or            | Sets a regular expression as a condition for applying the decoder. The log must match the       |
+|                        | `pcre2 <regex.html#pcre2-syntax>`_ expression.                | regular expression without considering any Syslog-like header.                                  |
 +------------------------+---------------------------------------------------------------+-------------------------------------------------------------------------------------------------+
 | :ref:`regex_decoders`  | Any `regex <regex.html#regex-os-regex-syntax>`_ or            | The decoder will use this option to find fields of interest and extract them.                   |
 |                        | `pcre2 <regex.html#pcre2-syntax>`_ expression.                |                                                                                                 |
@@ -82,9 +82,11 @@ To understand the inner workings of a decoder, it will be easier through example
           parent: 'sshd'
           srcip: '192.168.1.33'
 
-At the beginning of the example is the full log of an event. The log firstly goes through a pre-decoding phase, where general information will be extracted if possible.
+At the beginning of the example, you can see the full log of an event. This input log first goes through the pre-decoding phase. In this phase, general information, such as a timestamp, a hostname, and a program name, is extracted when a Syslog-like header is present.
 
-Afterward, the decoder will begin extracting information from the log that is left. In this example, the decoder only analyzes: ``Connection closed by 192.168.1.33``.
+
+In the next stage, the decoder extracts information from the remaining log. In this example, the decoder only analyzes: ``Connection closed by 192.168.1.33``.
+
 
 Before making a custom decoder, the first step should always be running the event log through :ref:`wazuh-logtest <wazuh-logtest>` to know where to start.
 
@@ -172,7 +174,7 @@ Allows Wazuh to track events over multiple log messages based on a decoded id.
 program_name
 ^^^^^^^^^^^^^
 
-It defines the name of the program which the decoder is associated with. The program name of a log will be obtained, if possible, in the pre-decoding phase.
+It defines the program name that must be found in the log header to apply the decoder. The pre-decoding phase extracts the program name from input logs with Syslog-like headers.
 
 +--------------------+--------------------------------------------------------------------+
 | **Default Value**  | n/a                                                                |
@@ -213,7 +215,7 @@ Define that the decoder is related with the ``test``, ``TEST`` or equivalent (ca
 prematch
 ^^^^^^^^^
 
-It attempts to find a match within the log for the string defined; if it finds a match, the current decoder will be used, the search for a decoder will stop, and only its child decoders will be able to match. It is important to be as specific as possible to avoid matching with wrong events.
+Defines a regular expression that the log must match to apply the decoder.  It's important to be as specific as possible to avoid matching unwanted events. Note that if the log is Syslog-like, then ``prematch`` only analyzes the log after the Syslog-like header. If the log is not Syslog-like, then it analyzes the entire log.
 
 +--------------------+--------------------------------------------------------------------+
 | **Default Value**  | n/a                                                                |

@@ -10,9 +10,7 @@ Wazuh and Open Distro for Elasticsearch
 
 This section guides through the upgrade process of the Wazuh server, Elasticsearch, and Kibana for the *Open Distro for Elasticsearch* distribution. 
 
-.. note::
-   
-   Root user privileges are required to execute all the commands described below.
+.. note:: You need root user privileges to run all the commands described below.
 
 Preparing the upgrade
 ---------------------

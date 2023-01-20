@@ -1,25 +1,25 @@
 .. Copyright (C) 2015, Wazuh, Inc.
 
 .. meta::
-  :description: Learn more about the Integrator daemon, which allows Wazuh to connect to external APIs, as well as alerting tools such as Slack, PagerDuty, and VirusTotal.
-
+  :description: Learn more about the Integrator daemon, which allows Wazuh to connect to external APIs, as well as alerting tools such as Slack, PagerDuty, VirusTotal, and Shuffle.
+  
 .. _manual_integration:
 
 Integration with external APIs
 ==============================
 
-The **Integrator** daemon allows Wazuh to connect to external APIs and alerting tools such as Slack, PagerDuty, and VirusTotal.
+The *Integrator* daemon allows Wazuh to connect to external APIs and alerting tools such as Slack, PagerDuty, VirusTotal, and Shuffle.
 
 Configuration
 -------------
 
-The integrations are configured on the Wazuh manager's ``manager.conf`` file which is located inside the Wazuh installation folder (``/var/ossec/etc/``). To configure an integration, add the following configuration to the *<wazuh_config>* section:
+The integrations are configured on the Wazuh manager ``ossec.conf`` file. You can find this file in the Wazuh installation folder ``/var/ossec/etc/``. To configure an integration, add the following configuration within the ``<ossec_config>`` section:
 
 .. code-block:: xml
 
   <integration>
     <name> </name>
-    <hook_url> </hook_url> <!-- Required for Slack -->
+    <hook_url> </hook_url> <!-- Required for Slack and Shuffle -->
     <api_key> </api_key> <!-- Required for PagerDuty and VirusTotal -->
     <alert_format>json</alert_format> <!-- Required for Slack, VirusTotal and Shuffle -->
 
@@ -31,7 +31,7 @@ The integrations are configured on the Wazuh manager's ``manager.conf`` file whi
   </integration>
 
 
-After enabling the daemon and configure the integrations, restart the Wazuh manager to apply the changes:
+After enabling the daemon and configuring the integrations, restart the Wazuh manager to apply the changes:
 
 .. include:: /_templates/common/restart_manager.rst
 
@@ -55,89 +55,142 @@ The full configuration reference for the Integrator daemon can be found :ref:`he
 Slack
 -----
 
-This integration allows receiving alerts into a Slack channel thanks to the `Incoming Webhooks <https://api.slack.com/incoming-webhooks>`_, a simple way to post messages from 3rd-party apps (in this case, Wazuh).
+This integration uses Slack Incoming Webhooks and allows posting Wazuh alerts into a Slack channel.
 
-This is an example configuration for the Slack integration:
+To set up this integration, follow these steps.
 
-.. code-block:: xml
+#. Enable Incoming Webhooks and create one for your Slack channel. Follow the Slack guide on `Incoming Webhooks <https://api.slack.com/messaging/webhooks>`__ for this.
 
-  <integration>
-    <name>slack</name>
-    <hook_url>https://hooks.slack.com/services/...</hook_url> <!-- Replace with your Slack hook URL -->
-    <alert_format>json</alert_format>
-  </integration>
+#. Edit ``/var/ossec/etc/ossec.conf`` in the Wazuh server and include a configuration block such as the following. Replace ``WEBHOOK_URL`` with your Incoming Webhook URL.
+
+   .. code-block:: xml
+
+     <integration>
+       <name>slack</name>
+       <hook_url>WEBHOOK_URL</hook_url> <!-- Replace with your Slack hook URL -->
+       <alert_format>json</alert_format>
+     </integration>
+
+#. Restart the Wazuh manager to apply the changes.
+
+   .. include:: /_templates/common/restart_manager.rst
+
+Once the configuration is complete, alerts start showing in the selected channel.
+
+.. thumbnail:: /images/manual/integration/slack.png
+  :title: Alerts in Slack channel
+  :align: center
+  :width: 50%
 
 PagerDuty
 ---------
 
-`PagerDuty <https://www.pagerduty.com/>`_ is a SaaS incident response platform suitable for IT departments. This integration allows creating a service using its official API in order to receive Wazuh alerts on the Incidents Dashboard.
+`PagerDuty <https://www.pagerduty.com/>`_ is a SaaS incident response platform suitable for IT departments. The Pagerduty integration uses the Pagerduty API to forward Wazuh alerts to its Incidents Dashboard.
 
-This is an example configuration for the PagerDuty integration:
+To set up this integration, do the following.
 
-.. code-block:: xml
+#. Get your own *Events API v2* integration key by creating a `Pagerduty new service <https://support.pagerduty.com/docs/services-and-integrations#create-a-service>`__.
 
-  <integration>
-    <name>pagerduty</name>
-    <api_key>API_KEY</api_key> <!-- Replace with your PagerDuty API key -->
-  </integration>
+#. Edit ``/var/ossec/etc/ossec.conf`` in the Wazuh server and include a configuration block such as the following. Replace ``API_KEY`` with your Pagerduty integration key. The rule level filter is optional and you can remove it or set another level value for the integration.
 
-As seen on the screenshot below, alerts start coming into the dashboard:
+   .. code-block:: xml
+      :emphasize-lines: 3
 
-.. thumbnail:: ../../images/manual/integration/pagerduty.png
-  :title: PagerDuty Incidents Dashboard
-  :align: center
-  :width: 80%
+      <integration>
+        <name>pagerduty</name>
+        <api_key>API_KEY</api_key> <!-- Replace with your PagerDuty API key -->
+        <level>10</level>
+      </integration>
+
+#. Restart the Wazuh manager to apply the changes.
+
+   .. include:: /_templates/common/restart_manager.rst
+
+Once the configuration is complete, alerts start showing on the Pagerduty dashboard.
+
+.. thumbnail:: /images/manual/integration/pagerduty.png
+   :title: PagerDuty Incidents Dashboard
+   :align: center
+   :width: 80%
 
 VirusTotal
 ----------
 
-This integration allows the inspection of malicious files using the VirusTotal database. Find more information about this at the :ref:`VirusTotal integration <virustotal-scan>` page.
+This integration allows the inspection of malicious files using the VirusTotal database. Find more information about this on the :ref:`VirusTotal integration <virustotal-scan>` page.
 
-This is an example configuration for the VirusTotal integration:
+To set up this integration, follow these steps.
 
-.. code-block:: xml
+#. Get your API key from the `Virustotal API key <https://www.virustotal.com/gui/my-apikey>`__ page.
 
-  <integration>
-    <name>virustotal</name>
-    <api_key>API_KEY</api_key> <!-- Replace with your VirusTotal API key -->
-    <group>syscheck</group>
-    <alert_format>json</alert_format>
-  </integration>
+#. Edit ``/var/ossec/etc/ossec.conf`` in the Wazuh server and include a configuration block such as the following. Replace ``API_KEY`` with your Virustotal API key.
+
+   .. code-block:: xml
+      :emphasize-lines: 3
+  
+      <integration>
+        <name>virustotal</name>
+        <api_key>API_KEY</api_key> <!-- Replace with your VirusTotal API key -->
+        <group>syscheck</group>
+        <alert_format>json</alert_format>
+      </integration>
+
+#. Restart the Wazuh manager to apply the changes.
+
+   .. include:: /_templates/common/restart_manager.rst
 
 Shuffle
 -------
 
-`Shuffle <https://shuffler.io/>`_ is an Open Source interpretation of SOAR. It aims to bring all the capabilities necessary to transfer data throughout an enterprise with plug-and-play Apps. This integration allows sending alerts into a Shuffle workflow thanks to the `Wazuh Webhook <https://shuffler.io/docs/extensions#wazuh>`_, a simple way to send alerts from Wazuh to Shuffle.
+`Shuffle <https://shuffler.io/>`__ is an Open Source interpretation of SOAR. It transfers data throughout the enterprise with plug-and-play Apps. The Shuffle integration allows forwarding Wazuh alerts into a Shuffle Workflow using a `webhook <https://shuffler.io/docs/triggers#webhook>`__.
 
-This is an example configuration for the Shuffle integration:
+To set up this integration, do the following.
 
-.. code-block:: xml
+#. Go to Shuffle and make a Workflow.
 
-   <integration>
-      <name>shuffle</name>
-      <hook_url>http://IP:3001/api/v1/hooks/HOOK_ID</hook_url> <!-- Replace with your Shuffle hook URL -->
-      <level>3</level>
-      <alert_format>json</alert_format>
-   </integration>
+#. Set **Recipients** and **Subject** in the email configuration. Put ``$exec`` in the **Body** to include the alert information.
 
-.. note::
-   The Shuffle default installation is done using `docker-compose`. If the Wazuh installation is done on the same network as Shuffle, it's not necessary to specify port ``3001`` in the ``<hook_url>`` field.
+#. Add a webhook to the Workflow.
+
+#. Start the webhook and copy the webhook URL.
+
+#. Edit ``/var/ossec/etc/ossec.conf`` in the Wazuh server and include a configuration block such as the following. Replace ``https://shuffler.io/api/v1/hooks/webhook_WEBHOOK_ID`` with the webhook URL. The rule level filter is optional. You can remove it or set another level value for the integration.
+
+   .. code-block:: xml
+      :emphasize-lines: 3
+
+      <integration>
+         <name>shuffle</name>
+         <hook_url>https://shuffler.io/api/v1/hooks/webhook_WEBHOOK_ID</hook_url> <!-- Replace with your Shuffle hook URL -->
+         <level>3</level>
+         <alert_format>json</alert_format>
+      </integration>
+
+#. Restart the Wazuh manager to apply the changes.
+
+   .. include:: /_templates/common/restart_manager.rst
+
+Once the configuration is complete, alerts start showing in the email inbox.
+
+.. thumbnail:: /images/manual/integration/shuffle.png
+   :title: Shuffle email alert
+   :align: center
+   :width: 80%
 
 Custom integration
 ------------------
 
-The integrator tool is able to connect wazuh with other external software. Read the `How to integrate external software using Integrator <https://wazuh.com/blog/how-to-integrate-external-software-using-integrator//>`_ document for more information.
+The integrator tool is able to connect Wazuh with other external software. Read the `How to integrate external software using Integrator <https://wazuh.com/blog/how-to-integrate-external-software-using-integrator//>`_ document for more information.
 
-This is an example configuration for a custom integration:
+Below, you can find an example of a configuration block in the ``ossec.conf`` file for custom integration.
 
 .. code-block:: xml
 
-  <!--Custom external Integration -->
-  <integration>
-    <name>custom-integration</name>
-    <hook_url>WEBHOOK</hook_url>
-    <level>10</level>
+   <!--Custom external Integration -->
+   <integration>
+     <name>custom-integration</name>
+     <hook_url>WEBHOOK</hook_url>
+     <level>10</level>
     <group>multiple_drops,authentication_failures</group>
-    <api_key>APIKEY</api_key> <!-- Replace with your external service API key -->
-    <alert_format>json</alert_format>
-  </integration>
+     <api_key>APIKEY</api_key> <!-- Replace with your external service API key -->
+     <alert_format>json</alert_format>
+   </integration>

@@ -77,9 +77,7 @@ main {
         transition: transform .1s;
       }
     }
-    .linenodiv {
-      top: 60px;
-    }
+
     &.collapsed {
       max-height: 40px;
       transition: max-height .2s;
@@ -100,8 +98,8 @@ main {
 
   .highlighttable {
     width: 100%;
-    margin-top: 0;
-    margin-bottom: 0;
+    margin-top: 20px;
+    margin-bottom: 20px;
     table-layout: fixed;
 
     .highlight {
@@ -117,6 +115,10 @@ main {
     }
   }
 
+  & + .linenodiv {
+    padding-top: 20px;
+  }
+
   &:hover {
     .copy-to-clipboard {
       opacity: 1;
@@ -129,7 +131,9 @@ main {
     right: 7px;
     z-index: 10;
     padding: 8px;
-    font: 400 14px/1 FontAwesome, sans-serif;
+    width: 28.25px;
+    height: 30px;
+    display: flex;
     cursor: pointer;
     border: 0;
     border-radius: $rounded-corners;
@@ -148,6 +152,10 @@ main {
       display: none;
       font-family: Manrope, sans-serif;
       font-size: .9rem;
+    }
+    svg {
+      width: 12.25px;
+      height: 14px;
     }
   }
 
@@ -185,7 +193,7 @@ main {
     position: relative;
     z-index: 0;
     display: flex;
-    padding: 20px 0 0;
+    padding: 0;
     overflow-x: auto;
     font-family: "Fira Mono", monospace;
     line-height: 24px;
@@ -194,6 +202,10 @@ main {
       position: unset;
       padding: 0 20px 20px;
       margin: 0;
+    }
+
+    & > pre {
+      padding-top: 20px;
     }
 
     .hll {
@@ -268,13 +280,22 @@ main {
     .copy-to-clipboard {
       color: $light-color-main-text;
       background-color: $light-color-sidebar-space;
+      svg {
+        fill: $light-color-main-text;
+      }
       &:hover {
         color: $light-color-base-space;
         background-color: $light-color-primary-lighter;
+        svg {
+          fill: $light-color-base-space;
+        }
       }
       &.copied {
         color: $light-color-base-space;
         background-color: $light-color-primary;
+        svg {
+          fill: $light-color-base-space;
+        }
       }
     }
     .linenodiv {
@@ -379,13 +400,22 @@ main {
     .copy-to-clipboard {
       color: $dark-color-main-text;
       background-color: $dark-color-sidebar-space;
+      svg {
+        fill: $dark-color-main-text;
+      }
       &:hover {
         color: $dark-color-base-space;
         background-color: $dark-color-primary-lighter;
+        svg {
+          fill: $dark-color-base-space;
+        }
       }
       &.copied {
         color: $dark-color-base-space;
         background-color: $dark-color-primary;
+        svg {
+          fill: $dark-color-base-space;
+        }
       }
     }
     .linenodiv {

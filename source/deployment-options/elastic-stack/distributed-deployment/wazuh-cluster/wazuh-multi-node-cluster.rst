@@ -9,7 +9,7 @@ Wazuh multi-node cluster
 
 This document will go through the installation of the Wazuh server components in a multi-node cluster.
 
-.. note:: Root user privileges are required to execute all the commands described below.
+.. note:: You need root user privileges to run all the commands described below.
 
 Prerequisites
 -------------

@@ -23,31 +23,37 @@ Prerequisites
 
   a) For MySQL:
 
-    RPM:
+   .. tabs::
 
-    .. code-block:: console
+      .. group-tab:: Yum
 
-      # yum install mysql-devel
+         .. code-block:: console
 
-    Debian:
+            # yum install mysql-devel
 
-    .. code-block:: console
+      .. group-tab:: APT
 
-      # apt-get install libmysqlclient-dev
+         .. code-block:: console
+
+            # apt-get install libmysqlclient-dev
+
 
   b) For PostgreSQL:
 
-    RPM:
+   .. tabs::
 
-    .. code-block:: console
+      .. group-tab:: Yum
 
-      # yum install postgresql-devel
+         .. code-block:: console
 
-    Debian:
+            # yum install postgresql-devel
 
-    .. code-block:: console
+      .. group-tab:: APT
 
-      # apt-get install libpq-dev
+         .. code-block:: console
+
+            # apt-get install libpq-dev
+
 
 Installation
 ------------

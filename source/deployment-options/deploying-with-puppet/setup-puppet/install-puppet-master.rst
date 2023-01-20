@@ -35,7 +35,7 @@ Create a symbolic link between the installed binary file and your default binary
   .. code-block:: console
 
     # ln -s /opt/puppetlabs/bin/puppet /bin
-
+    # ln -s /opt/puppetlabs/server/bin/puppetserver /bin
 
 Installation on Debian/Ubuntu
 -----------------------------
