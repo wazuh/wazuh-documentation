@@ -8,84 +8,10 @@
 Installing Wazuh with Elastic Stack
 ===================================
 
-This section aims to guide the user through the installation process of Wazuh. This installation guide will use the Elastic Stack basic license option, which contains everything included in the open-source version under the Apache 2.0 license, plus additional capabilities such as Elastic Stack Security features, Kibana alerting, and others. More information about the Wazuh components, including a brief description of each one, can be found :doc:`here </installation-guide/index>`.
+This section aims to guide the user through the installation process of Wazuh. This installation guide will use the Elastic Stack basic license option, which contains everything included in the open-source version under the Apache 2.0 license, plus additional capabilities such as Elastic Stack Security features, Kibana alerting, and others.
 
-Compatibility matrix
---------------------
+This guide includes instructions to install Wazuh |WAZUH_CURRENT| and Elastic Stack |ELASTICSEARCH_ELK_LATEST|.  For a complete list of compatible versions, check our :ref:`Compatibility matrix <compatibility_matrix_elk>` and :ref:`Packages list <packages_list_elk>`.  
 
-The following Elastic Stack and Open Distro for Elasticsearch versions are compatible with the Wazuh manager 4.3.10 using the Wazuh Kibana plugin:
-
-+-------------------------+----------------------+
-| Elastic stack version   | Open Distro version  | 
-+=========================+======================+
-| 7.10.2                  | 1.13.2               |  
-+-------------------------+----------------------+
-| 7.16.0–7.16.3           |                      | 
-+-------------------------+----------------------+
-| 7.17.0–7.17.6           |                      | 
-+-------------------------+----------------------+
-
-Packages list
--------------
-
-This section contains packages required for the Wazuh 4.3.10 installation using the Elastic Stack option:
-
-Wazuh Kibana plugin
-^^^^^^^^^^^^^^^^^^^
-
-.. |WAZUH_KIBANA_7.10.2| replace:: `wazuh_kibana-|WAZUH_CURRENT|_7.10.2.zip <https://packages.wazuh.com/|WAZUH_CURRENT_MAJOR|/ui/kibana/wazuh_kibana-|WAZUH_CURRENT|_7.10.2-1.zip>`__ (`sha512 <https://packages.wazuh.com/|WAZUH_CURRENT_MAJOR|/checksums/wazuh/|WAZUH_CURRENT|/wazuh_kibana-|WAZUH_CURRENT|_7.10.2-1.zip.sha512>`__)
-
-.. |WAZUH_KIBANA_7.16.0| replace:: `wazuh_kibana-|WAZUH_CURRENT|_7.16.0.zip <https://packages.wazuh.com/|WAZUH_CURRENT_MAJOR|/ui/kibana/wazuh_kibana-|WAZUH_CURRENT|_7.16.0-1.zip>`__ (`sha512 <https://packages.wazuh.com/|WAZUH_CURRENT_MAJOR|/checksums/wazuh/|WAZUH_CURRENT|/wazuh_kibana-|WAZUH_CURRENT|_7.16.0-1.zip.sha512>`__)
-
-.. |WAZUH_KIBANA_7.16.1| replace:: `wazuh_kibana-|WAZUH_CURRENT|_7.16.1.zip <https://packages.wazuh.com/|WAZUH_CURRENT_MAJOR|/ui/kibana/wazuh_kibana-|WAZUH_CURRENT|_7.16.1-1.zip>`__ (`sha512 <https://packages.wazuh.com/|WAZUH_CURRENT_MAJOR|/checksums/wazuh/|WAZUH_CURRENT|/wazuh_kibana-|WAZUH_CURRENT|_7.16.1-1.zip.sha512>`__)
-
-.. |WAZUH_KIBANA_7.16.2| replace:: `wazuh_kibana-|WAZUH_CURRENT|_7.16.2.zip <https://packages.wazuh.com/|WAZUH_CURRENT_MAJOR|/ui/kibana/wazuh_kibana-|WAZUH_CURRENT|_7.16.2-1.zip>`__ (`sha512 <https://packages.wazuh.com/|WAZUH_CURRENT_MAJOR|/checksums/wazuh/|WAZUH_CURRENT|/wazuh_kibana-|WAZUH_CURRENT|_7.16.2-1.zip.sha512>`__)
-
-.. |WAZUH_KIBANA_7.16.3| replace:: `wazuh_kibana-|WAZUH_CURRENT|_7.16.3.zip <https://packages.wazuh.com/|WAZUH_CURRENT_MAJOR|/ui/kibana/wazuh_kibana-|WAZUH_CURRENT|_7.16.3-1.zip>`__ (`sha512 <https://packages.wazuh.com/|WAZUH_CURRENT_MAJOR|/checksums/wazuh/|WAZUH_CURRENT|/wazuh_kibana-|WAZUH_CURRENT|_7.16.3-1.zip.sha512>`__)
-
-.. |WAZUH_KIBANA_7.17.0| replace:: `wazuh_kibana-|WAZUH_CURRENT|_7.17.0.zip <https://packages.wazuh.com/|WAZUH_CURRENT_MAJOR|/ui/kibana/wazuh_kibana-|WAZUH_CURRENT|_7.17.0-1.zip>`__ (`sha512 <https://packages.wazuh.com/|WAZUH_CURRENT_MAJOR|/checksums/wazuh/|WAZUH_CURRENT|/wazuh_kibana-|WAZUH_CURRENT|_7.17.0-1.zip.sha512>`__)
-
-.. |WAZUH_KIBANA_7.17.1| replace:: `wazuh_kibana-|WAZUH_CURRENT|_7.17.1.zip <https://packages.wazuh.com/|WAZUH_CURRENT_MAJOR|/ui/kibana/wazuh_kibana-|WAZUH_CURRENT|_7.17.1-1.zip>`__ (`sha512 <https://packages.wazuh.com/|WAZUH_CURRENT_MAJOR|/checksums/wazuh/|WAZUH_CURRENT|/wazuh_kibana-|WAZUH_CURRENT|_7.17.1-1.zip.sha512>`__)
-
-.. |WAZUH_KIBANA_7.17.2| replace:: `wazuh_kibana-|WAZUH_CURRENT|_7.17.2.zip <https://packages.wazuh.com/|WAZUH_CURRENT_MAJOR|/ui/kibana/wazuh_kibana-|WAZUH_CURRENT|_7.17.2-1.zip>`__ (`sha512 <https://packages.wazuh.com/|WAZUH_CURRENT_MAJOR|/checksums/wazuh/|WAZUH_CURRENT|/wazuh_kibana-|WAZUH_CURRENT|_7.17.2-1.zip.sha512>`__)
-
-.. |WAZUH_KIBANA_7.17.3| replace:: `wazuh_kibana-|WAZUH_CURRENT|_7.17.3.zip <https://packages.wazuh.com/|WAZUH_CURRENT_MAJOR|/ui/kibana/wazuh_kibana-|WAZUH_CURRENT|_7.17.3-1.zip>`__ (`sha512 <https://packages.wazuh.com/|WAZUH_CURRENT_MAJOR|/checksums/wazuh/|WAZUH_CURRENT|/wazuh_kibana-|WAZUH_CURRENT|_7.17.3-1.zip.sha512>`__)
-
-.. |WAZUH_KIBANA_7.17.4| replace:: `wazuh_kibana-|WAZUH_CURRENT|_7.17.4.zip <https://packages.wazuh.com/|WAZUH_CURRENT_MAJOR|/ui/kibana/wazuh_kibana-|WAZUH_CURRENT|_7.17.4-1.zip>`__ (`sha512 <https://packages.wazuh.com/|WAZUH_CURRENT_MAJOR|/checksums/wazuh/|WAZUH_CURRENT|/wazuh_kibana-|WAZUH_CURRENT|_7.17.4-1.zip.sha512>`__)
-
-.. |WAZUH_KIBANA_7.17.5| replace:: `wazuh_kibana-|WAZUH_CURRENT|_7.17.5.zip <https://packages.wazuh.com/|WAZUH_CURRENT_MAJOR|/ui/kibana/wazuh_kibana-|WAZUH_CURRENT|_7.17.5-1.zip>`__ (`sha512 <https://packages.wazuh.com/|WAZUH_CURRENT_MAJOR|/checksums/wazuh/|WAZUH_CURRENT|/wazuh_kibana-|WAZUH_CURRENT|_7.17.5-1.zip.sha512>`__)
-
-.. |WAZUH_KIBANA_7.17.6| replace:: `wazuh_kibana-|WAZUH_CURRENT|_7.17.6.zip <https://packages.wazuh.com/|WAZUH_CURRENT_MAJOR|/ui/kibana/wazuh_kibana-|WAZUH_CURRENT|_7.17.6-1.zip>`__ (`sha512 <https://packages.wazuh.com/|WAZUH_CURRENT_MAJOR|/checksums/wazuh/|WAZUH_CURRENT|/wazuh_kibana-|WAZUH_CURRENT|_7.17.6-1.zip.sha512>`__)
-
-+------------------+-----------------------+--------------------------+
-| Kibana Version   | Open Distro Version   | Package                  |
-+==================+=======================+==========================+
-| 7.10.2           | 1.13.2                | |WAZUH_KIBANA_7.10.2|    |
-+------------------+-----------------------+--------------------------+
-| 7.16.0           |                       | |WAZUH_KIBANA_7.16.0|    |
-+------------------+-----------------------+--------------------------+
-| 7.16.1           |                       | |WAZUH_KIBANA_7.16.1|    |
-+------------------+-----------------------+--------------------------+
-| 7.16.2           |                       | |WAZUH_KIBANA_7.16.2|    |
-+------------------+-----------------------+--------------------------+
-| 7.16.3           |                       | |WAZUH_KIBANA_7.16.3|    |
-+------------------+-----------------------+--------------------------+
-| 7.17.0           |                       | |WAZUH_KIBANA_7.17.0|    |
-+------------------+-----------------------+--------------------------+
-| 7.17.1           |                       | |WAZUH_KIBANA_7.17.1|    |
-+------------------+-----------------------+--------------------------+
-| 7.17.2           |                       | |WAZUH_KIBANA_7.17.2|    |
-+------------------+-----------------------+--------------------------+
-| 7.17.3           |                       | |WAZUH_KIBANA_7.17.3|    |
-+------------------+-----------------------+--------------------------+
-| 7.17.4           |                       | |WAZUH_KIBANA_7.17.4|    |
-+------------------+-----------------------+--------------------------+
-| 7.17.5           |                       | |WAZUH_KIBANA_7.17.5|    |
-+------------------+-----------------------+--------------------------+
-| 7.17.6           |                       | |WAZUH_KIBANA_7.17.6|    |
-+------------------+-----------------------+--------------------------+
-
-For versions older than 4.3.10, check the full list in `Wazuh Kibana plugin compatibility matrix <https://github.com/wazuh/wazuh-kibana-app/wiki/Compatibility>`_.
 
 Deployment types
 ----------------
@@ -132,6 +58,80 @@ Kibana can be installed on the same server as the Elasticsearch node, or on a se
     - Elastic Stack as a single-node cluster or as a multi-node cluster, and Kibana, including the Wazuh Kibana plugin, on the same host as Elasticsearch node or on a separate one.
 
     The communication will be encrypted using certificates, and the user can follow the installation steps guide to install all required components.
+
+
+.. _compatibility_matrix_elk:
+
+Compatibility matrix
+--------------------
+
+The following Elastic Stack versions are compatible with the Wazuh manager |WAZUH_CURRENT| using the Wazuh Kibana plugin:
+
++-------------------------+
+| Elastic stack version   |
++=========================+
+| 7.16.0–7.16.3           |
++-------------------------+
+| 7.17.0–7.17.6           | 
++-------------------------+
+
+.. _packages_list_elk:
+
+Packages list
+-------------
+
+The following table contains the Wazuh Kibana plugin files for each version of Elastic Stack compatible with Wazuh |WAZUH_CURRENT|:
+
+
+.. |WAZUH_KIBANA_7.16.0| replace:: `wazuh_kibana-|WAZUH_CURRENT|_7.16.0.zip <https://packages.wazuh.com/|WAZUH_CURRENT_MAJOR|/ui/kibana/wazuh_kibana-|WAZUH_CURRENT|_7.16.0-1.zip>`__ (`sha512 <https://packages.wazuh.com/|WAZUH_CURRENT_MAJOR|/checksums/wazuh/|WAZUH_CURRENT|/wazuh_kibana-|WAZUH_CURRENT|_7.16.0-1.zip.sha512>`__)
+
+.. |WAZUH_KIBANA_7.16.1| replace:: `wazuh_kibana-|WAZUH_CURRENT|_7.16.1.zip <https://packages.wazuh.com/|WAZUH_CURRENT_MAJOR|/ui/kibana/wazuh_kibana-|WAZUH_CURRENT|_7.16.1-1.zip>`__ (`sha512 <https://packages.wazuh.com/|WAZUH_CURRENT_MAJOR|/checksums/wazuh/|WAZUH_CURRENT|/wazuh_kibana-|WAZUH_CURRENT|_7.16.1-1.zip.sha512>`__)
+
+.. |WAZUH_KIBANA_7.16.2| replace:: `wazuh_kibana-|WAZUH_CURRENT|_7.16.2.zip <https://packages.wazuh.com/|WAZUH_CURRENT_MAJOR|/ui/kibana/wazuh_kibana-|WAZUH_CURRENT|_7.16.2-1.zip>`__ (`sha512 <https://packages.wazuh.com/|WAZUH_CURRENT_MAJOR|/checksums/wazuh/|WAZUH_CURRENT|/wazuh_kibana-|WAZUH_CURRENT|_7.16.2-1.zip.sha512>`__)
+
+.. |WAZUH_KIBANA_7.16.3| replace:: `wazuh_kibana-|WAZUH_CURRENT|_7.16.3.zip <https://packages.wazuh.com/|WAZUH_CURRENT_MAJOR|/ui/kibana/wazuh_kibana-|WAZUH_CURRENT|_7.16.3-1.zip>`__ (`sha512 <https://packages.wazuh.com/|WAZUH_CURRENT_MAJOR|/checksums/wazuh/|WAZUH_CURRENT|/wazuh_kibana-|WAZUH_CURRENT|_7.16.3-1.zip.sha512>`__)
+
+.. |WAZUH_KIBANA_7.17.0| replace:: `wazuh_kibana-|WAZUH_CURRENT|_7.17.0.zip <https://packages.wazuh.com/|WAZUH_CURRENT_MAJOR|/ui/kibana/wazuh_kibana-|WAZUH_CURRENT|_7.17.0-1.zip>`__ (`sha512 <https://packages.wazuh.com/|WAZUH_CURRENT_MAJOR|/checksums/wazuh/|WAZUH_CURRENT|/wazuh_kibana-|WAZUH_CURRENT|_7.17.0-1.zip.sha512>`__)
+
+.. |WAZUH_KIBANA_7.17.1| replace:: `wazuh_kibana-|WAZUH_CURRENT|_7.17.1.zip <https://packages.wazuh.com/|WAZUH_CURRENT_MAJOR|/ui/kibana/wazuh_kibana-|WAZUH_CURRENT|_7.17.1-1.zip>`__ (`sha512 <https://packages.wazuh.com/|WAZUH_CURRENT_MAJOR|/checksums/wazuh/|WAZUH_CURRENT|/wazuh_kibana-|WAZUH_CURRENT|_7.17.1-1.zip.sha512>`__)
+
+.. |WAZUH_KIBANA_7.17.2| replace:: `wazuh_kibana-|WAZUH_CURRENT|_7.17.2.zip <https://packages.wazuh.com/|WAZUH_CURRENT_MAJOR|/ui/kibana/wazuh_kibana-|WAZUH_CURRENT|_7.17.2-1.zip>`__ (`sha512 <https://packages.wazuh.com/|WAZUH_CURRENT_MAJOR|/checksums/wazuh/|WAZUH_CURRENT|/wazuh_kibana-|WAZUH_CURRENT|_7.17.2-1.zip.sha512>`__)
+
+.. |WAZUH_KIBANA_7.17.3| replace:: `wazuh_kibana-|WAZUH_CURRENT|_7.17.3.zip <https://packages.wazuh.com/|WAZUH_CURRENT_MAJOR|/ui/kibana/wazuh_kibana-|WAZUH_CURRENT|_7.17.3-1.zip>`__ (`sha512 <https://packages.wazuh.com/|WAZUH_CURRENT_MAJOR|/checksums/wazuh/|WAZUH_CURRENT|/wazuh_kibana-|WAZUH_CURRENT|_7.17.3-1.zip.sha512>`__)
+
+.. |WAZUH_KIBANA_7.17.4| replace:: `wazuh_kibana-|WAZUH_CURRENT|_7.17.4.zip <https://packages.wazuh.com/|WAZUH_CURRENT_MAJOR|/ui/kibana/wazuh_kibana-|WAZUH_CURRENT|_7.17.4-1.zip>`__ (`sha512 <https://packages.wazuh.com/|WAZUH_CURRENT_MAJOR|/checksums/wazuh/|WAZUH_CURRENT|/wazuh_kibana-|WAZUH_CURRENT|_7.17.4-1.zip.sha512>`__)
+
+.. |WAZUH_KIBANA_7.17.5| replace:: `wazuh_kibana-|WAZUH_CURRENT|_7.17.5.zip <https://packages.wazuh.com/|WAZUH_CURRENT_MAJOR|/ui/kibana/wazuh_kibana-|WAZUH_CURRENT|_7.17.5-1.zip>`__ (`sha512 <https://packages.wazuh.com/|WAZUH_CURRENT_MAJOR|/checksums/wazuh/|WAZUH_CURRENT|/wazuh_kibana-|WAZUH_CURRENT|_7.17.5-1.zip.sha512>`__)
+
+.. |WAZUH_KIBANA_7.17.6| replace:: `wazuh_kibana-|WAZUH_CURRENT|_7.17.6.zip <https://packages.wazuh.com/|WAZUH_CURRENT_MAJOR|/ui/kibana/wazuh_kibana-|WAZUH_CURRENT|_7.17.6-1.zip>`__ (`sha512 <https://packages.wazuh.com/|WAZUH_CURRENT_MAJOR|/checksums/wazuh/|WAZUH_CURRENT|/wazuh_kibana-|WAZUH_CURRENT|_7.17.6-1.zip.sha512>`__)
+
++------------------+--------------------------+
+| Kibana Version   | Package                  |
++==================+==========================+
+| 7.16.0           | |WAZUH_KIBANA_7.16.0|    |
++------------------+--------------------------+
+| 7.16.1           | |WAZUH_KIBANA_7.16.1|    |
++------------------+--------------------------+
+| 7.16.2           | |WAZUH_KIBANA_7.16.2|    |
++------------------+--------------------------+
+| 7.16.3           | |WAZUH_KIBANA_7.16.3|    |
++------------------+--------------------------+
+| 7.17.0           | |WAZUH_KIBANA_7.17.0|    |
++------------------+--------------------------+
+| 7.17.1           | |WAZUH_KIBANA_7.17.1|    |
++------------------+--------------------------+
+| 7.17.2           | |WAZUH_KIBANA_7.17.2|    |
++------------------+--------------------------+
+| 7.17.3           | |WAZUH_KIBANA_7.17.3|    |
++------------------+--------------------------+
+| 7.17.4           | |WAZUH_KIBANA_7.17.4|    |
++------------------+--------------------------+
+| 7.17.5           | |WAZUH_KIBANA_7.17.5|    |
++------------------+--------------------------+
+| 7.17.6           | |WAZUH_KIBANA_7.17.6|    |
++------------------+--------------------------+
+
+For a complete list of the available versions, see the `Wazuh Kibana plugin compatibility matrix <https://github.com/wazuh/wazuh-kibana-app/wiki/Compatibility>`_.
 
 
 
