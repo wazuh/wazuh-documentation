@@ -8,25 +8,6 @@ Wazuh central components
 
 This section guides through the upgrade process of the Wazuh indexer, the Wazuh server, and the Wazuh dashboard. To migrate from Open Distro for Elasticsearch 1.13 to the Wazuh indexer and dashboard components, read the corresponding :doc:`/migration-guide/wazuh-indexer` and :doc:`/migration-guide/wazuh-dashboard` sections.
 
-You can choose one of two methods to upgrade the Wazuh central components.
-
--  **Wazuh installation assistant**: Use an assistant that automates the upgrade process.
--  **Step by step**: Follow detailed step-by-step instructions.
-
-Upgrade with the Wazuh installation assistant
-+++++++++++++++++++++++++++++++++++++++++++++
-
-You can use the installation assistant to upgrade the Wazuh central components. The assistant detects which components are installed in the node and upgrades them if possible.
-
-To perform an automated upgrade execute the following command. This command downloads and runs the Wazuh installation assistant passing the upgrading option.
-
-.. code-block:: bash
-
-   curl -sO https://packages.wazuh.com/4.3/wazuh-install.sh && sudo bash ./wazuh-install.sh --upgrade
-
-Step-by-step upgrade
-+++++++++++++++++++++
-
 .. note:: You need root user privileges to run all the commands described below.
 
 Preparing the upgrade
