@@ -8,9 +8,7 @@ Wazuh manager installation
 
 This document will go through the installation of the Wazuh manager.
 
-.. note::
-
-   Root user privileges are required to run all the commands described below.
+.. note:: You need root user privileges to run all the commands described below.
 
 Prerequisites
 -------------

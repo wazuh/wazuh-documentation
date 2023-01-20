@@ -10,7 +10,7 @@ Installing Wazuh agents on macOS endpoints
 
 The agent runs on the endpoint you want to monitor and communicates with the Wazuh server, sending data in near real-time through an encrypted and authenticated.
 
-.. note:: To execute all the commands, root user privileges are required.
+.. note:: You need root user privileges to run all the commands described below.
 
 #. To start the installation process, download the `Wazuh agent for macOS <https://packages.wazuh.com/|WAZUH_CURRENT_MAJOR_OSX|/macos/wazuh-agent-|WAZUH_CURRENT_OSX|-|WAZUH_REVISION_OSX|.pkg>`_. The package is suitable for macOS Sierra or later. 
 

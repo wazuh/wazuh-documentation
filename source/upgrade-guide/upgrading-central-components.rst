@@ -27,9 +27,7 @@ To perform an automated upgrade execute the following command. This command down
 Step-by-step upgrade
 +++++++++++++++++++++
 
-.. note::
-   
-   Root user privileges are required to execute all the commands described below.
+.. note:: You need root user privileges to run all the commands described below.
 
 Preparing the upgrade
 ---------------------

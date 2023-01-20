@@ -8,10 +8,7 @@ Install Splunk in an all-in-one architecture
 
 This document will guide you through the installation process for an all-in-one Wazuh Splunk server.
 
-.. note::
-
-   Most of the commands described below need to be executed with root user privileges.
-
+.. note:: You need root user privileges to run all the commands described below.
 
 These are the two main components in this type of multi-tier server:
 
