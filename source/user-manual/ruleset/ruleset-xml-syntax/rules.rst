@@ -2031,6 +2031,8 @@ Example:
         <description>List of logged in users. It will not be alerted by default.</description>
       </rule>
 
+.. _rules_group:
+
 group
 ^^^^^
 
