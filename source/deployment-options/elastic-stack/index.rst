@@ -10,7 +10,7 @@ Installing Wazuh with Elastic Stack
 
 This section aims to guide the user through the installation process of Wazuh. This installation guide will use the Elastic Stack basic license option, which contains everything included in the open-source version under the Apache 2.0 license, plus additional capabilities such as Elastic Stack Security features, Kibana alerting, and others.
 
-This guide includes instructions to install Wazuh |WAZUH_CURRENT| and Elastic Stack |ELASTICSEARCH_ELK_LATEST|.  For a complete list of compatible versions, check our :ref:`Compatibility matrix <compatibility_matrix_elk>` and :ref:`Packages list <packages_list_elk>`.  
+This guide includes instructions to install Wazuh |WAZUH_CURRENT| and Elastic Stack |ELASTICSEARCH_ELK_LATEST|.  For a complete list of compatible versions, check below our :ref:`Compatibility matrix <compatibility_matrix_elk>` and :ref:`Packages list <packages_list_elk>`.  
 
 
 Deployment types
