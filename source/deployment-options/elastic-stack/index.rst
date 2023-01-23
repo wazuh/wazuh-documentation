@@ -131,7 +131,7 @@ The following table contains the Wazuh Kibana plugin files for each version of E
 | 7.17.6           | |WAZUH_KIBANA_7.17.6|    |
 +------------------+--------------------------+
 
-For a complete list of the available versions, see the `Wazuh Kibana plugin compatibility matrix <https://github.com/wazuh/wazuh-kibana-app/wiki/Compatibility>`_.
+For versions older than |WAZUH_CURRENT|, check the full list in `Wazuh Kibana plugin compatibility matrix <https://github.com/wazuh/wazuh-kibana-app/wiki/Compatibility>`__.
 
 
 
