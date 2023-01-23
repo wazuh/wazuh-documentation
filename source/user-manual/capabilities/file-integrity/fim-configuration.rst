@@ -189,7 +189,7 @@ In 64-bit architecture systems, you can locate 32-bit and 64-bit DLLs in a speci
 
 Furthermore, 32-bit processes running in 64-bit environments access ``Sytem32`` through a virtual folder called ``Sysnative``.
 
-But this redirection has been disabled and you can access ``System32`` directly. Monitoring ``%WINDIR%/System32`` and ``%WINDIR%/Sysnative`` directories is equivalent and Wazuh shows the path ``%WINDIR%/System32`` in the alerts. ``SysWOW64`` is a different directory. To monitor ``%WINDIR%/SysWOW64``, you must add it to the ``ossec.conf`` configuration file.
+But we disabled this redirection and you can access ``System32`` directly. Monitoring ``%WINDIR%/System32`` and ``%WINDIR%/Sysnative`` directories is equivalent and Wazuh shows the path ``%WINDIR%/System32`` in the alerts. ``SysWOW64`` is a different directory. To monitor ``%WINDIR%/SysWOW64``, you must add it to the ``ossec.conf`` configuration file.
 
 You can monitor the Windows special directories ``%WINDIR%/System32`` and ``%WINDIR%/SysWOW64`` directories configuring them with any of the FIM modes. For example:
 
