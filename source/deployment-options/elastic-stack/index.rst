@@ -10,7 +10,7 @@ Installing Wazuh with Elastic Stack
 
 This section aims to guide the user through the installation process of Wazuh. This installation guide will use the Elastic Stack basic license option, which contains everything included in the open-source version under the Apache 2.0 license, plus additional capabilities such as Elastic Stack Security features, Kibana alerting, and others.
 
-This guide includes instructions to install Wazuh |WAZUH_CURRENT| and Elastic Stack |ELASTICSEARCH_ELK_LATEST|.  For a complete list of compatible versions, check below our :ref:`Compatibility matrix <compatibility_matrix_elk>` and :ref:`Packages list <packages_list_elk>`.  
+This guide includes instructions to install Wazuh |WAZUH_CURRENT| and Elastic Stack |ELASTICSEARCH_ELK_LATEST|.  For a list of compatible versions, check below our :ref:`Compatibility matrix <compatibility_matrix_elk>` and :ref:`Packages list <packages_list_elk>`.  
 
 
 Deployment types
@@ -70,6 +70,8 @@ The following Elastic Stack versions are compatible with the Wazuh manager |WAZU
 +-------------------------+
 | Elastic stack version   |
 +=========================+
+| 7.10.2                  |
++-------------------------+
 | 7.16.0–7.16.3           |
 +-------------------------+
 | 7.17.0–7.17.6           | 
@@ -82,6 +84,8 @@ Packages list
 
 The following table contains the Wazuh Kibana plugin files for each version of Elastic Stack compatible with Wazuh |WAZUH_CURRENT|:
 
+
+.. |WAZUH_KIBANA_7.10.2| replace:: `wazuh_kibana-|WAZUH_CURRENT|_7.10.2.zip <https://packages.wazuh.com/|WAZUH_CURRENT_MAJOR|/ui/kibana/wazuh_kibana-|WAZUH_CURRENT|_7.10.2-1.zip>`__ (`sha512 <https://packages.wazuh.com/|WAZUH_CURRENT_MAJOR|/checksums/wazuh/|WAZUH_CURRENT|/wazuh_kibana-|WAZUH_CURRENT|_7.10.2-1.zip.sha512>`__)
 
 .. |WAZUH_KIBANA_7.16.0| replace:: `wazuh_kibana-|WAZUH_CURRENT|_7.16.0.zip <https://packages.wazuh.com/|WAZUH_CURRENT_MAJOR|/ui/kibana/wazuh_kibana-|WAZUH_CURRENT|_7.16.0-1.zip>`__ (`sha512 <https://packages.wazuh.com/|WAZUH_CURRENT_MAJOR|/checksums/wazuh/|WAZUH_CURRENT|/wazuh_kibana-|WAZUH_CURRENT|_7.16.0-1.zip.sha512>`__)
 
@@ -108,6 +112,8 @@ The following table contains the Wazuh Kibana plugin files for each version of E
 +------------------+--------------------------+
 | Kibana Version   | Package                  |
 +==================+==========================+
+| 7.10.2           | |WAZUH_KIBANA_7.10.2|    |
++------------------+--------------------------+
 | 7.16.0           | |WAZUH_KIBANA_7.16.0|    |
 +------------------+--------------------------+
 | 7.16.1           | |WAZUH_KIBANA_7.16.1|    |
@@ -131,8 +137,7 @@ The following table contains the Wazuh Kibana plugin files for each version of E
 | 7.17.6           | |WAZUH_KIBANA_7.17.6|    |
 +------------------+--------------------------+
 
-For versions older than |WAZUH_CURRENT|, check the full list in `Wazuh Kibana plugin compatibility matrix <https://github.com/wazuh/wazuh-kibana-app/wiki/Compatibility>`__.
-
+For a full list of the available Wazuh Kibana plugins, check the `Wazuh Kibana plugin compatibility matrix <https://github.com/wazuh/wazuh-kibana-app/wiki/Compatibility>`__.  
 
 
 Start deploying Wazuh and Elastic Stack
