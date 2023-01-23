@@ -93,7 +93,7 @@ To guarantee a correct operation of Wazuh, make sure to also migrate from Open D
       opensearch.ssl.verificationMode: certificate
       #opensearch.username:
       #opensearch.password:
-      opensearch.requestHeadersWhitelist: ["securitytenant","Authorization"]
+      opensearch.requestHeadersAllowlist: ["securitytenant","Authorization"]
       opensearch_security.multitenancy.enabled: false
       opensearch_security.readonly_mode.roles: ["kibana_read_only"]
       server.ssl.enabled: true

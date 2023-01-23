@@ -31,7 +31,7 @@ To enable multi-tenancy, follow the instructions below.
     .. code-block:: yaml
       :emphasize-lines: 2,3
 
-       opensearch.requestHeadersWhitelist: ["securitytenant","Authorization"]
+       opensearch.requestHeadersAllowlist: ["securitytenant","Authorization"]
        opensearch_security.multitenancy.enabled: true
        opensearch_security.multitenancy.tenants.preferred: ["Global", "Private"]
        opensearch_security.readonly_mode.roles: ["kibana_read_only"]
