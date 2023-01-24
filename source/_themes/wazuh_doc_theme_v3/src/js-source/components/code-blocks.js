@@ -124,14 +124,14 @@ if ( $('.document').length > 0 ) {
     data = filterCodeBlock(data, $(copyButton).parent());
     copyToClipboard(data);
     $(copyButton).addClass('copied');
-    $(copyButton).find('i').css({'display': 'none'}).find('span').css({'display': 'block'});
+    $(copyButton).find('svg').css({'display': 'none'}).find('span').css({'display': 'block'});
     $(copyButton).find('span').css({'display': 'block'});
     setTimeout(function() {
       $(copyButton).removeClass('copied');
     }, 700);
     setTimeout(function() {
       $(copyButton).find('span').css({'display': 'none'});
-      $(copyButton).find('i').css({'display': 'block'});
+      $(copyButton).find('svg').css({'display': 'block'});
       $(copyButton).focus();
     }, 1000);
   });

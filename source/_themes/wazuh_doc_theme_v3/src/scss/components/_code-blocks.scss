@@ -131,7 +131,7 @@ main {
     right: 7px;
     z-index: 10;
     padding: 8px;
-    width: 28.25px;
+    min-width: 28.25px;
     height: 30px;
     display: flex;
     cursor: pointer;
@@ -152,6 +152,7 @@ main {
       display: none;
       font-family: Manrope, sans-serif;
       font-size: .9rem;
+      line-height: 1;
     }
     svg {
       width: 12.25px;
