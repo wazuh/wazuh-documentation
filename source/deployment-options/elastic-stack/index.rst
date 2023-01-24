@@ -137,7 +137,7 @@ The following table contains the Wazuh Kibana plugin files for each version of E
 | 7.17.6           | |WAZUH_KIBANA_7.17.6|    |
 +------------------+--------------------------+
 
-For a full list of the available Wazuh Kibana plugins, check the `Wazuh Kibana plugin compatibility matrix <https://github.com/wazuh/wazuh-kibana-app/wiki/Compatibility>`__.  
+For a full list of the available Wazuh Kibana plugin packages, check the `Wazuh Kibana plugin compatibility matrix <https://github.com/wazuh/wazuh-kibana-app/wiki/Compatibility>`__.  
 
 
 Start deploying Wazuh and Elastic Stack
