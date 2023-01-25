@@ -18,6 +18,6 @@ The Wazuh dashboard is a powerful web user interface for data visualization and 
         multi-tenancy
         settings
         config-file
-        configuring-third-party-ssl-certificates/index
+        configuring-third-party-certs/index
         troubleshooting
         

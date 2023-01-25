@@ -1,9 +1,9 @@
 .. Copyright (C) 2015, Wazuh, Inc.
 
 .. meta::
-   :description: In the Wazuh dashboard installation guide, self-signed SSL certificates generated during the Wazuh indexer installation were configured for the Wazuh dashboard. 
+   :description: You can use third-party certificates, instead of self-signed, in the Wazuh dashboard. Learn more about it in this section of the Wazuh documentation.
 
-.. _configuring-third-party-ssl-certificates:
+.. _configuring-third-party-certs:
 
 Configuring third-party SSL certificates
 ========================================
@@ -17,13 +17,13 @@ You can install the SSL certificate directly on the Wazuh dashboard. Alternative
 
 Choose a preferred method to start configuring the SSL/TLS certificate for the Wazuh dashboard:
 
-- :doc:`Configuring SSL certificates directly on the Wazuh dashboard <configuring-ssl-certificates-directly>`
-- :doc:`Configuring SSL certificates on the Wazuh dashboard using NGINX <configuring-ssl-certificates-using-nginx>`
+- :doc:`Configuring SSL certificates directly on the Wazuh dashboard <ssl>`
+- :doc:`Configuring SSL certificates on the Wazuh dashboard using NGINX <ssl-nginx>`
 
     .. toctree::
         :hidden:
         :maxdepth: 1
 
-        configuring-ssl-certificates-directly
-        configuring-ssl-certificates-using-nginx
+        ssl
+        ssl-nginx
         
