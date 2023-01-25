@@ -186,7 +186,7 @@ The generated Let’s Encrypt certificates are valid for ninety days. The certbo
 Configure the renew_hook using the following steps
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-#. Edit the domain configuration file at /etc/letsencrypt/renewal/<YOUR_DOMAIN_NAME>.conf and add the renewal hook at the end of the file:
+#. Edit the domain configuration file at ``/etc/letsencrypt/renewal/<YOUR_DOMAIN_NAME>.conf`` and add the renewal hook at the end of the file:
 
    .. code-block:: console
       :emphasize-lines: 16
