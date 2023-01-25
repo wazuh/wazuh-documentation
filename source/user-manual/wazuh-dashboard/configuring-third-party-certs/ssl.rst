@@ -102,7 +102,7 @@ Configure certbot to generate Let’s Encrypt SSL certificate
 
       # ls -la /etc/letsencrypt/live/<YOUR_DOMAIN_NAME>/
 
-   The output of the command generally returns the following:
+The output of the command generally returns the following:
 
    .. code-block:: console
       :class: output
@@ -113,14 +113,15 @@ Configure certbot to generate Let’s Encrypt SSL certificate
          privkey.pem 
          README
 
-   Where:
+Where:
 
-      - ``README``: contains information about the certificate files.
-      - ``privkey.pem``: This is the private key for the certificate.
-      - ``fullchain.pem``: This is the SSL certificate, bundled with all intermediate certificates.
+   - ``README``: contains information about the certificate files.
+   - ``privkey.pem``: This is the private key for the certificate.
+   - ``fullchain.pem``: This is the SSL certificate, bundled with all intermediate certificates.
+
 
 Configuring Let’s Encrypt SSL certificates in the Wazuh dashboard
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+-----------------------------------------------------------------
 
 #. Copy the generated Let’s Encrypt certificates from the directory ``/etc/letsencrypt/live/<YOUR_DOMAIN_NAME>/`` to the Wazuh dashboard certificate directory ``/etc/wazuh-dashboard/certs``:
 
@@ -178,12 +179,12 @@ Configuring Let’s Encrypt SSL certificates in the Wazuh dashboard
          :width: 80%
 
 Configuring auto-renewal of the certificates
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+--------------------------------------------
 
 The generated Let’s Encrypt certificates are valid for ninety days. The certbot package previously installed renews the certificate by adding a renewal script to the  ``/etc/cron.d`` directory on the Wazuh dashboard. This script runs twice a day and will renew the certificate when it is within thirty days of expiration. Also, a renewal hook, ``renew_hook`` is added to the configuration to restart or reload the Wazuh dashboard for the renewed certificate to apply.
 
 Configure the renew_hook using the following steps
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 #. Edit the domain configuration file at /etc/letsencrypt/renewal/<YOUR_DOMAIN_NAME>.conf and add the renewal hook at the end of the file:
 
