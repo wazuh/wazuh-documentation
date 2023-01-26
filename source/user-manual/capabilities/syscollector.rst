@@ -395,12 +395,14 @@ The following table shows the operating systems that this module currently suppo
 +------------------------+-----------+-----------+-----------+----------+-----------+-----------+-----------+
 |    OpenBSD             |     ✓     |     ✓     |     ✗     |     ✓    |     ✗     |     ✗     |     ✗     |
 +------------------------+-----------+-----------+-----------+----------+-----------+-----------+-----------+
+|    Solaris             |     ✗     |     ✓     |     ✓     |     ✓    |     ✗     |     ✗     |     ✗     |
++------------------------+-----------+-----------+-----------+----------+-----------+-----------+-----------+
 
 Using Syscollector information to trigger alerts
 ------------------------------------------------
 
 .. note::
-   
+
    Enabled again in Wazuh |WAZUH_CURRENT_MINOR|. All the information required for these alerts is now available and allows this feature.
 
 
@@ -448,7 +450,7 @@ The alert for a port opening operation is displayed in the Wazuh dashboard as fo
       :width: 100%
 
 .. note::
-   
+
    The initial scan does not generate alerts. The alerts are triggered **after the second Syscollector scan**, when an information difference (delta) is detected.
 
 New searchable fields for the Wazuh dashboard
