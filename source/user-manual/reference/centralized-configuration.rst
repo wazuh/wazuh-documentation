@@ -154,7 +154,7 @@ The following is an example of how a centralized configuration can be done.
 
         # touch /var/ossec/etc/shared/default/shared.conf
         # chown wazuh:wazuh /var/ossec/etc/shared/default/shared.conf
-        # chmod 640 /var/ossec/etc/shared/default/shared.conf
+        # chmod 660 /var/ossec/etc/shared/default/shared.conf
 
     Several configurations may be created based on the ``name``, ``OS`` or ``profile`` of an agent.
 
