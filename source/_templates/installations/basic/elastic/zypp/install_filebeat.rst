@@ -2,6 +2,6 @@
 
 .. code-block:: console
 
-  # zypper install filebeat-7.17.6
+  # zypper install filebeat-7.17.8
 
 .. End of include file
