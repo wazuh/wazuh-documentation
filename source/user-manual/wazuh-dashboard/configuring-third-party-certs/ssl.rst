@@ -131,7 +131,7 @@ Configuring Let’s Encrypt SSL certificates in the Wazuh dashboard
 
       # cp /etc/letsencrypt/live/<YOUR_DOMAIN_NAME>/privkey.pem /etc/letsencrypt/live/<YOUR_DOMAIN_NAME>/fullchain.pem /etc/wazuh-dashboard/certs/
 
-#. Add the Let’s Encrypt certificates to Wazuh dashboard by editing the OpenSearch YAML file ``/etc/wazuh-dashboard/opensearch_dashboards.yml`` replacing the old certificates with the configuration below:
+#. Add the Let’s Encrypt certificates to the Wazuh dashboard by editing the OpenSearch YAML file ``/etc/wazuh-dashboard/opensearch_dashboards.yml`` replacing the old certificates with the configuration below:
 
    .. code-block:: console
 
