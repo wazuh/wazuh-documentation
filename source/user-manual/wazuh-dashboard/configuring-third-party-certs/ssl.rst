@@ -102,22 +102,24 @@ Configure certbot to generate Let’s Encrypt SSL certificate
 
       # ls -la /etc/letsencrypt/live/<YOUR_DOMAIN_NAME>/
 
-The output of the command generally returns the following:
 
-   .. code-block:: console
-      :class: output
 
-         cert.pem
-         chain.pem 
-         fullchain.pem 
-         privkey.pem 
-         README
+   The output of the command generally returns the following:
 
-Where:
+      .. code-block:: console
+         :class: output
 
-   - ``README``: contains information about the certificate files.
-   - ``privkey.pem``: This is the private key for the certificate.
-   - ``fullchain.pem``: This is the SSL certificate, bundled with all intermediate certificates.
+            cert.pem
+            chain.pem 
+            fullchain.pem 
+            privkey.pem 
+            README
+
+   Where:
+
+      - ``README``: contains information about the certificate files.
+      - ``privkey.pem``: This is the private key for the certificate.
+      - ``fullchain.pem``: This is the SSL certificate, bundled with all intermediate certificates.
 
 
 Configuring Let’s Encrypt SSL certificates in the Wazuh dashboard
