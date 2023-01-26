@@ -108,3 +108,74 @@ After running the script, the directory ``wazuh-certificates`` will be created a
         ├── indexer.pem
         ├── server-key.pem
         └── server.pem
+        
+        
+To update the certificates for each module and to restart:
+
+    .. code-block:: none
+    
+      # Use indexer name from config.yml
+      NODE_NAME=<indexer>
+
+      # Backup
+      mv /etc/wazuh-indexer/certs/wazuh-indexer.pem /etc/wazuh-indexer/certs/wazuh-indexer.pem.old
+      mv /etc/wazuh-indexer/certs/wazuh-indexer-key.pem /etc/wazuh-indexer/certs/wazuh-indexer-key.pem.old
+      mv /etc/wazuh-indexer/certs/admin.pem /etc/wazuh-indexer/certs/admin.pem.old
+      mv /etc/wazuh-indexer/certs/admin-key.pem /etc/wazuh-indexer/certs/admin-key.pem.old
+      mv /etc/wazuh-indexer/certs/root-ca.pem /etc/wazuh-indexer/certs/root-ca.pem.old
+
+
+      # Copy new created cert to destination
+      cp -n wazuh-certificates/$NODE_NAME.pem /etc/wazuh-indexer/certs/wazuh-indexer.pem
+      cp -n wazuh-certificates/$NODE_NAME-key.pem /etc/wazuh-indexer/certs/wazuh-indexer-key.pem
+      cp wazuh-certificates/admin-key.pem /etc/wazuh-indexer/certs/
+      cp wazuh-certificates/admin.pem /etc/wazuh-indexer/certs/
+      cp wazuh-certificates/root-ca.pem /etc/wazuh-indexer/certs/
+
+      # Set Permissions
+      chmod 500 /etc/wazuh-indexer/certs
+      chmod 400 /etc/wazuh-indexer/certs/*
+      chown -R wazuh-indexer:wazuh-indexer /etc/wazuh-indexer/certs
+
+
+      # Restart
+      systemctl restart wazuh-indexer
+
+      # Use server name from config.yml
+      NODE_NAME=<server>
+
+      # Backup 
+      mv /etc/filebeat/certs/wazuh-server.pem /etc/filebeat/certs/wazuh-server.pem.old
+      mv /etc/filebeat/certs/wazuh-server-key.pem /etc/filebeat/certs/wazuh-server-key.pem.old
+      mv /etc/filebeat/certs/root-ca.pem /etc/filebeat/certs/root-ca.pem.old
+
+      cp -n wazuh-certificates/$NODE_NAME.pem /etc/filebeat/certs/wazuh-server.pem
+      cp -n wazuh-certificates/$NODE_NAME-key.pem /etc/filebeat/certs/wazuh-server-key.pem
+      cp wazuh-certificates/root-ca.pem /etc/filebeat/certs/
+      chmod 500 /etc/filebeat/certs
+      chmod 400 /etc/filebeat/certs/*
+      chown -R root:root /etc/filebeat/certs
+
+      # Restart
+      systemctl restart filebeat
+
+
+
+      # Use filebeat name from config.yml
+      NODE_NAME=<filebeat>
+
+      #Backup
+      mv /etc/wazuh-dashboard/certs/wazuh-dashboard.pem /etc/wazuh-dashboard/certs/wazuh-dashboard.pem.old
+      mv /etc/wazuh-dashboard/certs/wazuh-dashboard-key.pem /etc/wazuh-dashboard/certs/wazuh-dashboard-key.pem.old
+      mv /etc/wazuh-dashboard/certs/root-ca.pem /etc/wazuh-dashboard/certs/root-ca.pem.old
+
+      cp -n wazuh-certificates/$NODE_NAME.pem /etc/wazuh-dashboard/certs/wazuh-dashboard.pem
+      cp -n wazuh-certificates/$NODE_NAME-key.pem /etc/wazuh-dashboard/certs/wazuh-dashboard-key.pem
+      cp wazuh-certificates/root-ca.pem /etc/wazuh-dashboard/certs/
+      chmod 500 /etc/wazuh-dashboard/certs
+      chmod 400 /etc/wazuh-dashboard/certs/*
+      chown -R wazuh-dashboard:wazuh-dashboard /etc/wazuh-dashboard/certs
+
+      # Restart
+      systemctl restart wazuh-dashboard
+
