@@ -22,7 +22,7 @@ Installing the NGINX software on the Wazuh dashboard
 
    .. tabs::
 
-      .. group-tab:: YUM
+      .. group-tab:: Yum
 
          .. code-block:: console
 
@@ -47,7 +47,7 @@ Installing the NGINX software on the Wazuh dashboard
 
    .. tabs::
 
-      .. group-tab:: YUM
+      .. group-tab:: Yum
 
          .. code-block:: console
 
@@ -69,7 +69,7 @@ Configure the proxy and the certificates
 
    .. tabs::
 
-      .. group-tab:: YUM
+      .. group-tab:: Yum
 
          .. code-block:: console
 
@@ -91,7 +91,7 @@ Configure the proxy and the certificates
 
    .. tabs::
 
-      .. group-tab:: YUM
+      .. group-tab:: Yum
 
          .. code-block:: console
 
@@ -187,9 +187,7 @@ Configure the proxy and the certificates
 
 #. Restart the NGINX service:
 
-   .. code-block:: console
-
-      # systemctl restart nginx
+   .. include:: /_templates/common/restart_nginx.rst
 
 #. Access the Wazuh dashboard via the configured domain name.
 

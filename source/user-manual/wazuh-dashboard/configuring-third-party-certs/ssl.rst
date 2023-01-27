@@ -28,7 +28,7 @@ Install certbot
 
    .. tabs::
 
-      .. group-tab:: YUM
+      .. group-tab:: Yum
 
          .. code-block:: console
 
@@ -69,7 +69,7 @@ Configure certbot to generate Let’s Encrypt SSL certificate
 
    .. tabs::
 
-      .. group-tab:: YUM
+      .. group-tab:: Yum
 
          .. code-block:: console
 
@@ -109,11 +109,11 @@ Configure certbot to generate Let’s Encrypt SSL certificate
       .. code-block:: console
          :class: output
 
-            cert.pem
-            chain.pem 
-            fullchain.pem 
-            privkey.pem 
-            README
+         cert.pem
+         chain.pem 
+         fullchain.pem 
+         privkey.pem 
+         README
 
    Where:
 
@@ -131,14 +131,14 @@ Configuring Let’s Encrypt SSL certificates in the Wazuh dashboard
 
       # cp /etc/letsencrypt/live/<YOUR_DOMAIN_NAME>/privkey.pem /etc/letsencrypt/live/<YOUR_DOMAIN_NAME>/fullchain.pem /etc/wazuh-dashboard/certs/
 
-#. Add the Let’s Encrypt certificates to the Wazuh dashboard by editing the OpenSearch YAML file ``/etc/wazuh-dashboard/opensearch_dashboards.yml`` replacing the old certificates with the configuration below:
+#. Add the Let’s Encrypt certificates to the Wazuh dashboard by editing the configuration file  ``/etc/wazuh-dashboard/opensearch_dashboards.yml`` replacing the old certificates with the configuration below:
 
    .. code-block:: console
 
       server.ssl.key: "/etc/wazuh-dashboard/certs/privkey.pem"
       server.ssl.certificate: "/etc/wazuh-dashboard/certs/fullchain.pem"
 
-   The file will look like this after editing:
+   After editing, you get a configuration file like the one below:
 
    .. code-block:: console
       :emphasize-lines: 11,12
@@ -169,11 +169,9 @@ Configuring Let’s Encrypt SSL certificates in the Wazuh dashboard
 
 #. Restart the Wazuh dashboard service:
 
-   .. code-block:: console
+   .. include:: /_templates/common/restart_dashboard.rst
 
-      # systemctl restart wazuh-dashboard
-
-   The Let’s Encrypt certificate installation on the Wazuh dashboard is now ready, and you can proceed to access it by using the configured domain name.
+The Let’s Encrypt certificate installation on the Wazuh dashboard is now ready, and you can proceed to access it by using the configured domain name.
 
       .. thumbnail:: /images/configuring-third-party-certs/wazuh-dashboard.png
          :title: Wazuh dashboard
@@ -217,7 +215,7 @@ Configure the renew_hook using the following steps
       # certbot renew --dry-run
 
    
-   The output will look like this:
+   The output looks like this:
 
    .. code-block:: console
       :class: output
