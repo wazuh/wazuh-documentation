@@ -76,7 +76,7 @@ Wazuh email alerts does not support SMTP servers with authentication such as Gma
 
       # systemctl restart postfix
 
-#. Run the following command to test the configuration. Replace ``you@example.com`` with your email address. Check then that you received this test email there.
+#. Run the following command to test the configuration. Replace ``you@example.com`` with your email address. Check, then, that you receive this test email.
 
    .. code-block:: console
 

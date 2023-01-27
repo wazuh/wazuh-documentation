@@ -3,25 +3,22 @@
 .. meta::
   :description: Check out this section to learn more about how to use Wazuh for GDPR II (The General Data Protection Regulation of the European Union). 
   
-.. _gdpr_II:
-
 GDPR II, Principles <gdpr_II>
 =============================
 
-This chapter describes requirements concerning GDPR basic principles, mainly for personal data and how to process it, but also regarding shared data.
+This chapter describes requirements concerning the basic principles of GDPR for processing personal data.
 
 Chapter II, Article 5 Head 1(f)
 -------------------------------
 
-**Article 5**  "Principles relating to processing of personal data. **Head 1(f)**. processed in a manner that ensures appropriate security of the personal data, including protection against unauthorised or unlawful processing and against accidental loss, destruction or damage, using appropriate technical or organisational measures ('integrity and confidentiality')."
+**Principles relating to processing of personal data, Head 1 (f)**: *“Personal data shall be processed in a manner that ensures appropriate security of the personal data, including protection against unauthorized or unlawful processing and against accidental loss, destruction or damage, using appropriate technical or organizational measures (integrity and confidentiality).”*
 
-The article ensures the ongoing confidentiality, integrity, availability and resilience of processing systems and services, verifying its modifications, accesses, locations while guaranteeing the safety of them. File sharing protection and file sharing technologies that meet data protection requirements.
+The article requires confidentiality and integrity when processing user data. The :doc:`File Integrity Monitoring (FIM) </user-manual/capabilities/file-integrity/index>` module of Wazuh helps with this requirement by monitoring files and folders. The Wazuh FIM module generates alerts when it detects file creation, modification, or deletion events. The FIM module keeps a record of the cryptographic checksum and other attributes from a file or a registry key in the case of a Windows endpoint, and regularly compares them to the current attributes of the file.
 
-Wazuh’s File integrity monitoring (FIM) helps on this task by watching specific files and triggering alerts when these are modified. The component responsible for this task is called `Syscheck <https://documentation.wazuh.com/|WAZUH_CURRENT_MAJOR|/user-manual/reference/ossec-conf/syscheck.html>`_. It stores the cryptographic checksum and other attributes from file or Windows registry keys and regularly compares it to the file's current checksum.
-
-Here are some Wazuh rules examples tagged as gdpr_II_5.1.f:
+Below are some examples of Wazuh rules tagged as ``gdpr_II_5.1.f``:
 
 .. code-block:: xml
+	:emphasize-lines: 5, 12
 
 	<rule id="550" level="7">
 	    <category>ossec</category>
@@ -37,93 +34,68 @@ Here are some Wazuh rules examples tagged as gdpr_II_5.1.f:
 	    <group>syscheck,pci_dss_11.5,gpg13_4.11,gdpr_II_5.1.f,</group>
   	</rule>
 
+Use case: Detect file changes
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-Use cases
-^^^^^^^^^
+In this use case, you have to configure the Wazuh agent on an Ubuntu 22.04 endpoint to detect changes in the ``/root/personal_data`` directory. Then, you need to modify a file to trigger an alert.
 
-In this example we configured Wazuh to detect changes in ``/root/personal_data``.
+Ubuntu endpoint
+~~~~~~~~~~~~~~~
 
-.. code-block:: xml
+#. Switch to the ``root`` user:
 
-    <syscheck>
-        <directories check_all="yes" report_changes="yes">/root/personal_data</directories>
-    </syscheck>
+	.. code-block:: console
 
-When we modify the file Wazuh generates an alert.
+		$ sudo su
 
-.. code-block:: console
+#. Create the directory ``personal_data`` in the ``/root`` directory:
 
-	root@agent:~# ls -l personal_data
+	.. code-block:: console
 
-.. code-block:: none
-	:class: output
+		# mkdir /root/personal_data
 
-	total 4
-	-rw-r--r-- 1 root root 18 may 16 11:39 subject_data.txt
+#. Create the file ``subject_data.txt`` in the ``/root/personal_data`` directory  and include some content:
 
-.. code-block:: console
+	.. code-block:: console
 
-	root@agent:~# cat personal_data/subject_data.txt
+		# touch /root/personal_data/subject_data.txt
+		# echo "User01= user03_ID" >> /root/personal_data/subject_data.txt
 
-.. code-block:: none
-	:class: output
+#. Add the configuration highlighted to the ``<syscheck>`` block of the Wazuh agent configuration file ``/var/ossec/etc/ossec.conf``:
 
-	User01= user03_ID
+	.. code-block:: xml
+		:emphasize-lines: 2
 
-.. code-block:: console
+		<syscheck>
+		  <directories realtime="yes" check_all="yes" report_changes="yes">/root/personal_data</directories>
+		</syscheck>
 
-	root@agent:~# echo "User01= user02_ID" > personal_data/subject_data.txt
-	root@agent:~# cat personal_data/subject_data.txt
+#. Restart the Wazuh agent to apply the changes:
 
-.. code-block:: none
-	:class: output
+	.. code-block:: console
 
-	User01= user02_ID
+		# systemctl restart wazuh-agent
 
-As you can see, syscheck alerts are tagged with gdpr_II_5.1.f.
+#. Modify the file by changing the content of ``subject_data.txt`` from ``User01= user03_ID`` to ``User01= user02_ID``:
 
-.. code-block:: none
-	:class: output
+	.. code-block:: console
 
-	** Alert 1526470666.11377: - ossec,syscheck,pci_dss_11.5,gpg13_4.11,gdpr_II_5.1.f,
-	2018 May 16 13:37:46 (agent01) 192.168.1.50->syscheck
-	Rule: 550 (level 7) -> 'Integrity checksum changed.'
-	Integrity checksum changed for: '/root/personal_data/subject_data.txt'
-	Old md5sum was: 'c86fc18b025cb03c698548a5a7e04bc1'
-	New md5sum is : '425e63943d8ae5491f1769033da66456'
-	Old sha1sum was: '3bef1dc414e7fe247cdca4d4900c23047e003a06'
-	New sha1sum is : '048af26252c3b9eb6fd4335d5e218891f90c9037'
-	What changed:
-	1c1
-	< User01= user03_ID
-	---
-	> User01= user02_ID
+		# echo "User01= user02_ID" > /root/personal_data/subject_data.txt
+		# cat /root/personal_data/subject_data.txt
 
-	File: /root/personal_data/subject_data.txt
-	New size: 18
-	New permissions: 100644
-	New user: root (0)
-	New group: root (0)
-	Old MD5: c86fc18b025cb03c698548a5a7e04bc1
-	New MD5: 425e63943d8ae5491f1769033da66456
-	Old SHA1: 3bef1dc414e7fe247cdca4d4900c23047e003a06
-	New SHA1: 048af26252c3b9eb6fd4335d5e218891f90c9037
-	Old date: Wed May 16 12:18:15 2018
-	New date: Wed May 16 13:32:54 2018
-	New inode: 19690
+	.. code-block:: none
+		:class: output
 
+		User01= user02_ID
 
-.. thumbnail:: ../images/gdpr/fim-1.png
-    :title: Alert visualization at the Wazuh dashboard
+On the Wazuh dashboard, an alert detects the modification of the ``subject_data.txt`` file. The alert is also tagged with ``gdpr_II_5.1.f``.
+
+.. thumbnail:: /images/gdpr/fim-file-mod.png
+    :title: File modification alert visualization
     :align: center
-    :width: 100%
+    :width: 80%
 
-.. thumbnail:: ../images/gdpr/fim-2.png
-    :title: Filtering alerts by GDPR and file path
+.. thumbnail:: /images/gdpr/gdprii-tag.png
+    :title: GDPRII tag in file modification alert
     :align: center
-    :width: 100%
-
-.. thumbnail:: ../images/gdpr/fim-3.png
-    :title: Filtering alerts by GDPR on Wazuh App
-    :align: center
-    :width: 100%
+    :width: 80%
