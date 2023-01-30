@@ -8,7 +8,7 @@ SMTP server with authentication
 
 Wazuh email alerts does not support SMTP servers with authentication such as Gmail. However, you can use a server relay, like Postfix, to send these emails. Follow this guide for instructions on configuring Postfix with Gmail.
 
-#. Run this command to install the required packages. Select **No configuration** when prompted about the **Mail server configuration type**.
+#. Run this command to install the required packages. Select **No configuration** if prompted about the **Mail server configuration type**.
 
    .. tabs::
 
