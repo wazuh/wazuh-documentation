@@ -24,7 +24,7 @@ Wazuh email alerts does not support SMTP servers with authentication such as Gma
 
             # apt-get update && apt-get install postfix mailutils libsasl2-2 ca-certificates libsasl2-modules
 
-#. Add these lines to the end of the ``/etc/postfix/main.cf`` file to configure Postfix.  
+#. Append these lines to ``/etc/postfix/main.cf`` to configure Postfix. You have to create the file if missing.
 
    .. tabs::
 
@@ -72,9 +72,20 @@ Wazuh email alerts does not support SMTP servers with authentication such as Gma
 
 #. Restart Postfix.
 
-   .. code-block:: console
 
-      # systemctl restart postfix
+   .. tabs::
+
+      .. group-tab:: Systemd
+
+         .. code-block:: console
+
+            # systemctl restart postfix
+
+      .. group-tab:: SysV init
+
+         .. code-block:: console
+
+            # service postfix restart
 
 #. Run the following command to test the configuration. Replace ``you@example.com`` with your email address. Check, then, that you receive this test email.
 
@@ -82,7 +93,7 @@ Wazuh email alerts does not support SMTP servers with authentication such as Gma
 
       # echo "Test mail from postfix" | mail -s "Test Postfix" -r "you@example.com" you@example.com
 
-#. Configure Wazuh in the Wazuh server ``/var/ossec/etc/ossec.conf`` file as follows:
+#. Configure email notifications in the Wazuh server ``/var/ossec/etc/ossec.conf`` file as follows:
 
    .. code-block:: xml
 
@@ -92,3 +103,7 @@ Wazuh email alerts does not support SMTP servers with authentication such as Gma
         <email_from>USERNAME@gmail.com</email_from>
         <email_to>you@example.com</email_to>
       </global>
+
+#. Restart the Wazuh manager to apply the changes
+
+   .. include:: /_templates/common/restart_manager.rst
