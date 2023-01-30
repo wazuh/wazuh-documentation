@@ -22,7 +22,7 @@ This new version of Wazuh brings new features and adds support for some Linux di
 
 Below you can find more information about each of these highlights.
 
-Wazuh 4.4.0 brings IPv6 support when connecting and enrolling an agent to a manager. The IPv6 protocol can handle packets more effectively, enhance performance, and boost security. This new feature allows agents to register and connect through an IPV6 address.
+Wazuh 4.4.0 brings IPv6 support when connecting and enrolling an agent to a manager. The IPv6 protocol can handle packets more effectively, enhance performance, and boost security. This new feature allows agents to register and connect through an IPv6 address.
 
 SUSE agents now natively support vulnerabilities detection. Wazuh added full support for SUSE Linux Enterprise Server and Desktop operating systems versions 11, 12, and 15. The vulnerability Detector now scans the programs identified by ``syscollector``, looking to report vulnerabilities described in the `SUSE OVAL <https://www.suse.com/support/security/oval/>`_ and the `NVD <https://nvd.nist.gov/>`_ databases.
 
