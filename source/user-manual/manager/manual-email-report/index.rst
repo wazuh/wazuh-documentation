@@ -71,7 +71,7 @@ After the ``alert_level`` has been configured, Wazuh needs to be restarted for t
 
 .. warning::
 
-   Wazuh doesn't handle SMTP authentication. If your email service uses this, you will need to :doc:`configure a server relay <smtp-authentication>`.
+   Wazuh doesn't handle SMTP authentication. If your email service uses this, you need to :doc:`configure a server relay <smtp-authentication>`.
 
 Granular email options
 ----------------------
