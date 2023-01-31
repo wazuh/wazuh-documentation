@@ -66,6 +66,7 @@ Jumpcloud Configuration
       - **IdP Entity ID**: ``wazuh`` (this will be the ``idp.entity_id`` in our Wazuh indexer configuration).
       - **SP Entity ID**: ``wazuh-saml`` (this will be the ``sp.entity_id`` in our Wazuh indexer configuration).
       - **ACS URL**: ``https://<WAZUH_DASHBOARD_URL>/_opendistro/_security/saml/acs``
+      - **Login URL**: ``https://<WAZUH_DIASHBOARD_URL>/app/wazuh``
       - Check **Sign Assertion**.
       - Check **Declare Redirect Endpoint**.
       - Check **include group attribute** and add **Roles** as the attribute. This will be used later in the ``config.yml`` configuration file.
@@ -140,7 +141,7 @@ Edit the Wazuh indexer security configuration files. We recommend that you back 
                 type: "intern"
             saml_auth_domain:
               http_enabled: true
-              transport_enabled: true
+              transport_enabled: false
               order: 1
               http_authenticator:
                 type: saml
