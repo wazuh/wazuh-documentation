@@ -132,18 +132,6 @@ Time of the day to run the scan. It has to be in the hh:mm format.
 
     If only the ``time`` option is set, the interval value must be a multiple of days, weeks, or months. By default, the interval is set to a day.
 
-remove_from_bucket
-~~~~~~~~~~~~~~~~~~
-
-Delete each log file from the S3 bucket once it has been collected by the module.
-
-+--------------------+-----------------------+
-| **Default value**  | no                    |
-+--------------------+-----------------------+
-| **Allowed values** | yes, no               |
-+--------------------+-----------------------+
-| **Mandatory**      | no                    |
-+--------------------+-----------------------+
 
 .. _buckets:
 
@@ -191,6 +179,9 @@ The available types are:  ``cloudtrail``, ``guardduty``, ``vpcflow``, ``config``
 | :ref:`bucket_aws_organization_id`      | Name of AWS organization                                    | Optional (only works with CloudTrail buckets) |
 +----------------------------------------+-------------------------------------------------------------+-----------------------------------------------+
 | :ref:`bucket_discard_regex`            | A regex value to determine if an event should be discarded  | Optional                                      |
++----------------------------------------+-------------------------------------------------------------+-----------------------------------------------+
+| :ref:`bucket_remove_from_bucket`       | A value to determine if each log file is deleted once it    | Optional                                      |
+|                                        | has been collected by the module                            |                                               |
 +----------------------------------------+-------------------------------------------------------------+-----------------------------------------------+
 | :ref:`bucket_sts_endpoint`             | The AWS Security Token Service VPC endpoint URL             | Optional                                      |
 +----------------------------------------+-------------------------------------------------------------+-----------------------------------------------+
@@ -400,6 +391,19 @@ Usage example:
 .. code-block:: console
 
     <discard_regex field="data.configurationItemStatus">REJECT</discard_regex>
+
+.. _bucket_remove_from_bucket:
+
+remove_from_bucket
+~~~~~~~~~~~~~~~~~~
+
+A value to determine if each log file is deleted once it has been collected by the module.
+
++--------------------+-----------------------+
+| **Default value**  | no                    |
++--------------------+-----------------------+
+| **Allowed values** | yes, no               |
++--------------------+-----------------------+
 
 
 .. _bucket_sts_endpoint:
@@ -658,7 +662,6 @@ Example of configuration
 
   <wodle name="aws-s3">
       <disabled>no</disabled>
-      <remove_from_bucket>no</remove_from_bucket>
       <interval>10m</interval>
       <run_on_start>no</run_on_start>
       <skip_on_error>no</skip_on_error>

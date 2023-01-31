@@ -52,7 +52,6 @@ Wazuh server
 
       <wodle name="aws-s3">
         <disabled>no</disabled>
-        <remove_from_bucket>no</remove_from_bucket>
         <interval>30m</interval>
         <run_on_start>yes</run_on_start>
         <skip_on_error>no</skip_on_error>
