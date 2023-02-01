@@ -3,7 +3,7 @@
 .. meta::
   :description: Wazuh 4.4.0 has been released. Check out our release notes to discover the changes and additions of this release.
 
-4.4.0 Release notes - 31 January 2023
+4.4.0 Release notes - 6 February 2023
 =====================================
 
 This section lists the changes in version 4.4.0. Every update of the Wazuh solution is cumulative and includes all enhancements and fixes from previous releases.
@@ -22,7 +22,7 @@ This new version of Wazuh brings new features and adds support for some Linux di
 
 Below you can find more information about each of these highlights.
 
-Wazuh 4.4.0 brings IPv6 support when connecting and enrolling an agent to a manager. The IPv6 protocol can handle packets more effectively, enhance performance, and boost security. This new feature allows agents to register and connect through an IPV6 address.
+Wazuh 4.4.0 brings IPv6 support when connecting and enrolling an agent to a manager. The IPv6 protocol can handle packets more effectively, enhance performance, and boost security. This new feature allows agents to register and connect through an IPv6 address.
 
 SUSE agents now natively support vulnerabilities detection. Wazuh added full support for SUSE Linux Enterprise Server and Desktop operating systems versions 11, 12, and 15. The vulnerability Detector now scans the programs identified by ``syscollector``, looking to report vulnerabilities described in the `SUSE OVAL <https://www.suse.com/support/security/oval/>`_ and the `NVD <https://nvd.nist.gov/>`_ databases.
 
@@ -640,9 +640,10 @@ Changelogs
 
 More details about these changes are provided in the changelog of each component:
 
-- `wazuh/wazuh <https://github.com/wazuh/wazuh/blob/4.4/CHANGELOG.md>`_
-- `wazuh/wazuh-dashboard <https://github.com/wazuh/wazuh-kibana-app/blob/v4.4.0-2.4.1-beta/CHANGELOG.md>`_
-- `wazuh/wazuh-kibana-app 7.10.2 <https://github.com/wazuh/wazuh-kibana-app/blob/v4.4.0-7.10.2-beta/CHANGELOG.md>`_
-- `wazuh/wazuh-kibana-app 7.17.x <https://github.com/wazuh/wazuh-kibana-app/blob/v4.4.0-7.17.8-beta/CHANGELOG.md>`_
-- `wazuh/wazuh-splunk <https://github.com/wazuh/wazuh-splunk/blob/4.4/CHANGELOG.md>`_
+- `wazuh/wazuh <https://github.com/wazuh/wazuh/blob/v4.4.0/CHANGELOG.md>`_
+- `wazuh/wazuh-dashboard <https://github.com/wazuh/wazuh-kibana-app/blob/v4.4.0-2.4.1/CHANGELOG.md>`_
+- `wazuh/wazuh-kibana-app 7.10.2 <https://github.com/wazuh/wazuh-kibana-app/blob/v4.4.0-7.10.2/CHANGELOG.md>`_
+- `wazuh/wazuh-kibana-app 7.17.x <https://github.com/wazuh/wazuh-kibana-app/blob/v4.4.0-7.17.8/CHANGELOG.md>`_
+- `wazuh/wazuh-splunk <https://github.com/wazuh/wazuh-splunk/blob/v4.4.0-8.2/CHANGELOG.md>`_
 - `wazuh/wazuh-packages <https://github.com/wazuh/wazuh-packages/releases/tag/v4.4.0>`_
+

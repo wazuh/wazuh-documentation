@@ -57,14 +57,14 @@ Elasticsearch installation and configuration
 
          .. code-block:: console
 
-           # yum install elasticsearch-7.17.6
+           # yum install elasticsearch-7.17.8
 
 
       .. group-tab:: APT
 
          .. code-block:: console
 
-           # apt-get install elasticsearch=7.17.6
+           # apt-get install elasticsearch=7.17.8
 
 
 #. Download the configuration file ``/etc/elasticsearch/elasticsearch.yml`` as follows:
@@ -132,13 +132,13 @@ This command should have an output like this:
    {
      "name" : "elasticsearch",
      "cluster_name" : "elasticsearch",
-     "cluster_uuid" : "BgdIyCXxSPGeRusvb6-_Qw",
+     "cluster_uuid" : "9hNRUiNbSwy0p0KAhsswdA",
      "version" : {
-       "number" : "7.17.6",
+       "number" : "7.17.8",
        "build_flavor" : "default",
        "build_type" : "rpm",
-       "build_hash" : "f65e9d338dc1d07b642e14a27f338990148ee5b6",
-       "build_date" : "2022-08-23T11:08:48.893373482Z",
+       "build_hash" : "120eabe1c8a0cb2ae87cffc109a5b65d213e9df1",
+       "build_date" : "2022-12-02T17:33:09.727072865Z",
        "build_snapshot" : false,
        "lucene_version" : "8.11.1",
        "minimum_wire_compatibility_version" : "6.8.0",
@@ -146,8 +146,6 @@ This command should have an output like this:
      },
      "tagline" : "You Know, for Search"
    }   
-
-  
 
 .. _basic_all_in_one_wazuh:
 
@@ -300,7 +298,7 @@ This command should have an output like this:
        TLS version: TLSv1.3
        dial up... OK
      talk to server... OK
-     version: 7.17.6
+     version: 7.17.8     
 
 
 Kibana installation and configuration

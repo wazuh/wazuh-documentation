@@ -19,5 +19,6 @@ The Wazuh dashboard is a powerful web user interface for data visualization and 
         settings
         config-file
         custom-branding
+        configuring-third-party-certs/index
         troubleshooting
         
