@@ -85,26 +85,34 @@ Active response::
 Add an IP to the iptables deny list
 -----------------------------------
 
-In this example, the ``firewall-drop`` command is configured to use the ``firewall-drop`` script.  The active response is configured to initiate the ``firewall-drop`` command on all systems when a rule in either the *"authentication_failed"* or *"authentication_failures"* rule group fires.  This is a *Stateful* response with a timeout of 700 seconds.  The ``<repeated_offenders>`` tag increases the timeout period for each subsequent offense by a specific IP address.
-
-.. note:: This parameter is specified in minutes rather than seconds.
+In this example, the ``firewall-drop`` command is configured to use the ``firewall-drop`` script.  The active response is configured to initiate the ``firewall-drop`` command on **all** systems when a rule in either the *"authentication_failed"* or *"authentication_failures"* rule group fires on **any** system.  This is a *Stateful* response with a timeout of 700 seconds.  The ``<repeated_offenders>`` parameter in agent side increases the timeout period for each subsequent offense by a specific IP address.
 
 Command::
 
   <command>
     <name>firewall-drop</name>
     <executable>firewall-drop</executable>
+    <timeout_allowed>yes</timeout_allowed>
   </command>
 
-Active response::
+Active response - on the Manager side::
 
   <active-response>
     <command>firewall-drop</command>
     <location>all</location>
     <rules_group>authentication_failed|authentication_failures</rules_group>
     <timeout>700</timeout>
+  </active-response>
+
+Active response - on the Agent side::
+
+  <active-response>
     <repeated_offenders>30,60,120</repeated_offenders>
   </active-response>
+
+
+.. note:: The ``<repeated_offenders>`` parameter is specified in **minutes** rather than **seconds**.
+
 
 Active response for a specified period of time
 -----------------------------------------------
