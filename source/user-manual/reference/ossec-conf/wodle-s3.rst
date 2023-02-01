@@ -395,7 +395,7 @@ Usage example:
 .. _bucket_remove_from_bucket:
 
 remove_from_bucket
-~~~~~~~~~~~~~~~~~~
+^^^^^^^^^^^^^^^^^^
 
 A value to determine if each log file is deleted once it has been collected by the module.
 
@@ -675,6 +675,7 @@ Example of configuration
           <aws_account_id>123456789012</aws_account_id>
           <aws_account_alias>dev1-account</aws_account_alias>
           <discard_regex field="data.configurationItemStatus">REJECT</discard_regex>
+          <remove_from_bucket>yes<remove_from_bucket>
       </bucket>
       <bucket type="cloudtrail">
           <name>s3-dev-bucket</name>
@@ -702,6 +703,7 @@ Example of configuration
           <aws_account_id>11112222333</aws_account_id>
           <aws_account_alias>prod-account</aws_account_alias>
           <discard_regex field="data.configurationItemStatus">REJECT</discard_regex>
+          <remove_from_bucket>yes<remove_from_bucket>
       </bucket>
       <service type="cloudwatchlogs">
           <access_key>insert_access_key</access_key>

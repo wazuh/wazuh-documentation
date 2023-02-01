@@ -48,7 +48,7 @@ Wazuh server
 #. Enable the Wazuh AWS module in the ``/var/ossec/etc/ossec.conf`` configuration file on the Wazuh server. Add only the AWS buckets of interest. Read our guide on how to :doc:`Configure AWS credentials </amazon/services/prerequisites/credentials>`:
 
    .. code-block:: xml
-      :emphasize-lines: 9, 10
+      :emphasize-lines: 8, 9
 
       <wodle name="aws-s3">
         <disabled>no</disabled>
