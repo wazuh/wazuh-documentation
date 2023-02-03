@@ -150,7 +150,7 @@ As a final result, we will have a new user with permission to manage a group of 
 In this example, we have an environment with five agents. Agents **001**, **002**, and **005** belong to the ``Team_A`` group whereas agents **003**, **004**, and **005** belong to the ``Team_B`` group. To learn more on how to create agents groups see :ref:`Grouping agents <grouping-agents>`. We will describe how to create a new user and give it permission to manage agents from ``Team_A``.
 
 
-.. thumbnail:: ../../images/kibana-app/rbac/environment.png
+.. thumbnail:: /images/manual/user-administration/rbac/environment.png
     :title: Use case: Give a user permissions to manage a group of agents - Environment
     :align: center
     :width: 100%
@@ -270,7 +270,7 @@ To map the user with Wazuh, follow these steps:
       - **Resource identifier**: Write the name of the agents group, for example, ``Team_A``, and click **Add**. You can add as many resources as needed. 
       - **Select an effect**: Select ``Allow``.  
        
-       .. thumbnail:: ../../images/kibana-app/rbac/create-policy.png
+       .. thumbnail:: /images/manual/user-administration/rbac/create-policy.png
           :title: Creating a custom policy 
           :align: center
           :width: 100%
@@ -281,7 +281,7 @@ To map the user with Wazuh, follow these steps:
       - **Role name**: Assign a name to the new role. 
       - **Policies**: Select the policy created previously. 
     
-       .. thumbnail:: ../../images/kibana-app/rbac/create-role.png
+       .. thumbnail:: /images/manual/user-administration/rbac/create-role.png
           :title: Creating a custom role 
           :align: center
           :width: 100%
@@ -294,7 +294,7 @@ To map the user with Wazuh, follow these steps:
       - **Roles**: Select the role created previously. 
       - **Internal users**: Select the internal user created previously.
 
-       .. thumbnail:: ../../images/kibana-app/rbac/create-new-role-mapping.png
+       .. thumbnail:: /images/manual/user-administration/rbac/create-new-role-mapping.png
           :title: Creating a new role mapping 
           :align: center
           :width: 100%
@@ -306,7 +306,7 @@ To map the user with Wazuh, follow these steps:
 You have now created a new internal user and mapped it to manage a Wazuh agents group. Authenticate with the new user and open the Wazuh dashboard, see that only ``Team_A`` agents' alerts and information are displayed.  
 
 
-.. thumbnail:: ../../images/kibana-app/rbac/team_A-agents.png
+.. thumbnail:: /images/manual/user-administration/rbac/team_A-agents.png
     :title: New user's environment - Only information regarding Team_A agents is displayed 
     :align: center
     :width: 100%
