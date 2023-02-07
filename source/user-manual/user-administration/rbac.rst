@@ -27,8 +27,9 @@ Follow these steps to create an internal user, create a new role mapping, and gi
 
 #. Click the upper-left menu icon **☰** to open the options, select **Security**, and then **Internal users** to open the internal users page.
 
-   .. thumbnail:: /images/manual/user-administration/rbac/create-new-internal-user.gif
+   .. thumbnail:: /images/manual/user-administration/rbac/internal-user.gif
       :title: Internal users page 
+      :alt: Internal users page 
       :align: center
       :width: 80%
 
@@ -57,6 +58,7 @@ Follow these steps to create an internal user, create a new role mapping, and gi
 
       .. thumbnail:: /images/manual/user-administration/rbac/role-mapping.gif
          :title: Wazuh role mapping
+         :alt: Wazuh role mapping
          :align: center
          :width: 80%
 
@@ -79,8 +81,9 @@ Follow these steps to create an internal user, create a new role mapping, and gi
 
 #. Click the upper-left menu icon **☰** to open the options, select **Security**, and then **Internal users** to open the internal users page.
 
-   .. thumbnail:: /images/manual/user-administration/rbac/create-new-internal-user.gif
+   .. thumbnail:: /images/manual/user-administration/rbac/internal-user.gif
       :title: Internal users page 
+      :alt: Internal users page 
       :align: center
       :width: 80%
 
@@ -114,6 +117,7 @@ Follow these steps to create an internal user, create a new role mapping, and gi
 
       .. thumbnail:: /images/manual/user-administration/rbac/role-mapping.gif
          :title: Wazuh role mapping
+         :alt: Wazuh role mapping
          :align: center
          :width: 80%
 
@@ -137,8 +141,9 @@ Follow these steps to create an internal user and map it to a role of your choic
 
 #. Click the upper-left menu icon **☰** to open the options, select **Security**, and then **Internal users** to open the internal users page.
 
-   .. thumbnail:: /images/manual/user-administration/rbac/create-new-internal-user.gif
+   .. thumbnail:: /images/manual/user-administration/rbac/internal-user.gif
       :title: Internal users page 
+      :alt: Internal users page 
       :align: center
       :width: 80%
 
@@ -157,6 +162,7 @@ Follow these steps to create an internal user and map it to a role of your choic
 
       .. thumbnail:: /images/manual/user-administration/rbac/role-mapping.gif
          :title: Wazuh role mapping
+         :alt: Wazuh role mapping
          :align: center
          :width: 80%
 
@@ -191,6 +197,7 @@ In this example, we have an environment with five agents. Agents **001**, **002*
 
 .. thumbnail:: /images/manual/user-administration/rbac/environment.png
     :title: Use case: Give a user permissions to manage a group of agents - Environment
+    :alt: Use case: Give a user permissions to manage a group of agents - Environment
     :align: center
     :width: 100%
 
@@ -311,6 +318,7 @@ To map the user with Wazuh, follow these steps:
        
        .. thumbnail:: /images/manual/user-administration/rbac/create-policy.png
           :title: Creating a custom policy 
+          :alt: Creating a custom policy
           :align: center
           :width: 100%
     
@@ -321,7 +329,8 @@ To map the user with Wazuh, follow these steps:
       - **Policies**: Select the policy created previously. 
     
        .. thumbnail:: /images/manual/user-administration/rbac/create-role.png
-          :title: Creating a custom role 
+          :title: Creating a custom role
+          :alt: Creating a custom role 
           :align: center
           :width: 100%
 
@@ -334,7 +343,8 @@ To map the user with Wazuh, follow these steps:
       - **Internal users**: Select the internal user created previously.
 
        .. thumbnail:: /images/manual/user-administration/rbac/create-new-role-mapping.png
-          :title: Creating a new role mapping 
+          :title: Creating a new role mapping
+          :alt: Creating a new role mapping 
           :align: center
           :width: 100%
   
@@ -346,7 +356,8 @@ You have now created a new internal user and mapped it to manage a Wazuh agents 
 
 
 .. thumbnail:: /images/manual/user-administration/rbac/team_A-agents.png
-    :title: New user's environment - Only information regarding Team_A agents is displayed 
+    :title: New user's environment - Only information regarding Team_A agents is displayed
+    :alt: New user's environment - Only information regarding Team_A agents is displayed
     :align: center
     :width: 100%
 
