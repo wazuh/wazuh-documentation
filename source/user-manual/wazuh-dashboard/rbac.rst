@@ -147,7 +147,7 @@ It also involves mapping this user with the Wazuh API, creating a custom policy 
 
 As a final result, we will have a new user with permission to manage a group of agents and read the documents regarding the said group.
 
-In this example, we have an environment with five agents. Agents **001**, **002**, and **005** belong to the ``Team_A`` group whereas agents **003**, **004**, and **005** belong to the ``Team_B`` group. To learn more on how to create agents groups see :ref:`Grouping agents <grouping-agents>`. We will describe how to create a new user and give it permission to manage agents from ``Team_A``.
+In this example, we have an environment with five agents. Agents **001**, **002**, and **005** belong to the ``Team_A`` group whereas agents **003**, **004**, and **005** belong to the ``Team_B`` group. To learn more on how to create agents' groups, see :ref:`Grouping agents <grouping-agents>`. We will describe how to create a new user and give it permission to manage agents from ``Team_A``.
 
 
 .. thumbnail:: /images/manual/user-administration/rbac/environment.png
@@ -267,7 +267,7 @@ To map the user with Wazuh, follow these steps:
       - **Policy name**: Assign a name to the new policy. 
       - **Action**: Select the actions that the user is allowed to perform, for example, ``agent:read``, and click **Add**. Select as many actions as needed. 
       - **Resource**: Select ``agent:group``.
-      - **Resource identifier**: Write the name of the agents group, for example, ``Team_A``, and click **Add**. You can add as many resources as needed. 
+      - **Resource identifier**: Write the name of the agents' group, for example, ``Team_A``, and click **Add**. You can add as many resources as needed. 
       - **Select an effect**: Select ``Allow``.  
        
        .. thumbnail:: /images/manual/user-administration/rbac/create-policy.png
@@ -303,7 +303,7 @@ To map the user with Wazuh, follow these steps:
 
   For the role mapping to take effect, make sure that ``run_as`` is set to ``true`` in the ``/usr/share/wazuh-dashboard/data/wazuh/config/wazuh.yml`` configuration file. Restart the Wazuh dashboard service and clear your browser cache and cookies.
 
-You have now created a new internal user and mapped it to manage a Wazuh agents group. Authenticate with the new user and open the Wazuh dashboard, see that only ``Team_A`` agents' alerts and information are displayed.  
+You have now created a new internal user and mapped it to manage a Wazuh agents' group. Authenticate with the new user and open the Wazuh dashboard, see that only ``Team_A`` agents' alerts and information are displayed.  
 
 
 .. thumbnail:: /images/manual/user-administration/rbac/team_A-agents.png

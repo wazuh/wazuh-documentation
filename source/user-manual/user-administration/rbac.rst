@@ -25,7 +25,7 @@ Follow these steps to create an internal user, create a new role mapping, and gi
 
 #. Log into the Wazuh dashboard as administrator.
 
-#. Click the upper-left menu icon **☰** to open the options, select **Security**, and then **Internal users** to open the internal users page.
+#. Click the upper-left menu icon **☰** to open the options, select **Security**, and then **Internal users** to open the internal users' page.
 
    .. thumbnail:: /images/manual/user-administration/rbac/internal-user.gif
       :title: Internal users page 
@@ -41,7 +41,7 @@ Follow these steps to create an internal user, create a new role mapping, and gi
 
    #. Search for the **all_access** role in the roles list and select it to open the details window.
 
-   #. Click **Duplicate role**, assign a name to the new role then click **Create** to confirm the action.
+   #. Click **Duplicate role**, assign a name to the new role, then click **Create** to confirm the action.
 
    #. Select the newly created role. 
    
@@ -49,7 +49,7 @@ Follow these steps to create an internal user, create a new role mapping, and gi
    
    #. Add the user you created in the previous steps and click **Map** to confirm the action.
 
-   .. note:: Reserved roles are restricted for any permission customizations. You can create a custom role with same permissions or duplicate a reserved role for further customization.
+   .. note:: Reserved roles are restricted for any permission customizations. You can create a custom role with the same permissions or duplicate a reserved role for further customization.
 
 #. To map the user with Wazuh, follow these steps:
 
@@ -79,7 +79,7 @@ Follow these steps to create an internal user, create a new role mapping, and gi
 
 #. Log into the Wazuh dashboard as administrator.
 
-#. Click the upper-left menu icon **☰** to open the options, select **Security**, and then **Internal users** to open the internal users page.
+#. Click the upper-left menu icon **☰** to open the options, select **Security**, and then **Internal users** to open the internal users' page.
 
    .. thumbnail:: /images/manual/user-administration/rbac/internal-user.gif
       :title: Internal users page 
@@ -139,7 +139,7 @@ Follow these steps to create an internal user and map it to a role of your choic
 
 #. Log into the Wazuh dashboard as administrator.
 
-#. Click the upper-left menu icon **☰** to open the options, select **Security**, and then **Internal users** to open the internal users page.
+#. Click the upper-left menu icon **☰** to open the options, select **Security**, and then **Internal users** to open the internal users' page.
 
    .. thumbnail:: /images/manual/user-administration/rbac/internal-user.gif
       :title: Internal users page 
@@ -192,7 +192,7 @@ It also involves mapping this user with the Wazuh API, creating a custom policy 
 
 As a final result, we will have a new user with permission to manage a group of agents and read the documents regarding the said group.
 
-In this example, we have an environment with five agents. Agents **001**, **002**, and **005** belong to the ``Team_A`` group whereas agents **003**, **004**, and **005** belong to the ``Team_B`` group. To learn more on how to create agents groups see :ref:`Grouping agents <grouping-agents>`. We will describe how to create a new user and give it permission to manage agents from ``Team_A``.
+In this example, we have an environment with five agents. Agents **001**, **002**, and **005** belong to the ``Team_A`` group whereas agents **003**, **004**, and **005** belong to the ``Team_B`` group. To learn more about creating agents' groups, see :ref:`Grouping agents <grouping-agents>`. We will describe how to create a new user and give it permission to manage agents from ``Team_A``.
 
 
 .. thumbnail:: /images/manual/user-administration/rbac/environment.png
@@ -234,7 +234,7 @@ Creating and mapping an internal user
 
 Follow these steps to create an internal user, create a custom role and map it to the new user.  
 
-#. Click the upper-left menu icon **☰** to open the available options, select **Security**, and then **Internal users** to open the internal users page.
+#. Click the upper-left menu icon **☰** to open the available options, select **Security**, and then **Internal users** to open the internal users' page.
 
 #. Click **Create internal user**, provide a username and password, and click **Create** to complete the action.
 
@@ -313,7 +313,7 @@ To map the user with Wazuh, follow these steps:
       - **Policy name**: Assign a name to the new policy. 
       - **Action**: Select the actions that the user is allowed to perform, for example, ``agent:read``, and click **Add**. Select as many actions as needed. 
       - **Resource**: Select ``agent:group``.
-      - **Resource identifier**: Write the name of the agents group, for example, ``Team_A``, and click **Add**. You can add as many resources as needed. 
+      - **Resource identifier**: Write the name of the agents' group, for example, ``Team_A``, and click **Add**. You can add as many resources as needed. 
       - **Select an effect**: Select ``Allow``.  
        
        .. thumbnail:: /images/manual/user-administration/rbac/create-policy.png
@@ -352,7 +352,7 @@ To map the user with Wazuh, follow these steps:
 
   For the role mapping to take effect, make sure that ``run_as`` is set to ``true`` in the ``/usr/share/wazuh-dashboard/data/wazuh/config/wazuh.yml`` configuration file. Restart the Wazuh dashboard service and clear your browser cache and cookies.
 
-You have now created a new internal user and mapped it to manage a Wazuh agents group. Authenticate with the new user and open the Wazuh dashboard, see that only ``Team_A`` agents' alerts and information are displayed.  
+You have now created a new internal user and mapped it to manage a Wazuh agents' group. Authenticate with the new user and open the Wazuh dashboard, see that only ``Team_A`` agents' alerts and information are displayed.  
 
 
 .. thumbnail:: /images/manual/user-administration/rbac/team_A-agents.png
