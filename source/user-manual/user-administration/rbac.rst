@@ -32,6 +32,11 @@ Follow these steps to create an internal user, create a new role mapping, and gi
       :align: center
       :width: 80%
 
+   .. thumbnail:: /images/manual/user-administration/rbac/internal_user.gif
+      :title: Internal users page 
+      :align: center
+      :width: 80%
+
 #. Click **Create internal user**, provide a username and password, and click **Create** to complete the action.
 
 #. To map the user to the admin role, follow these steps:
@@ -59,6 +64,11 @@ Follow these steps to create an internal user, create a new role mapping, and gi
          :title: Wazuh role mapping
          :align: center
          :width: 80%
+
+      .. thumbnail:: /images/manual/user-administration/rbac/role_mapping.gif
+         :title: Wazuh role mapping
+         :align: center
+         :width: 80%         
 
    #. Click **Create Role mapping** and complete the empty fields with the following parameters:
    
