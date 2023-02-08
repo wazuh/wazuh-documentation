@@ -16,7 +16,7 @@ This new version of Wazuh brings new features and adds support for some Linux di
 - IPv6 support for the enrollment process and the agent-manager connection
 - Vulnerability detection support for SUSE agents
 - Support for Alpine Linux distribution
-- Wazuh indexer and dashboard based on the OpenSearch 2.4.1 version
+- Wazuh indexer and dashboard are now based on OpenSearch 2.4.1 version
 - Rework of Ubuntu Linux 20.04 and 22.04 SCA policies
 - Support for Azure Integration in Linux agents
 
