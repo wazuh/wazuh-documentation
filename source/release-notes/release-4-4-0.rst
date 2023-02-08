@@ -3,8 +3,8 @@
 .. meta::
   :description: Wazuh 4.4.0 has been released. Check out our release notes to discover the changes and additions of this release.
 
-4.4.0 Release notes - 6 February 2023
-=====================================
+4.4.0 Release notes - 20 February 2023
+======================================
 
 This section lists the changes in version 4.4.0. Every update of the Wazuh solution is cumulative and includes all enhancements and fixes from previous releases.
 
@@ -16,7 +16,7 @@ This new version of Wazuh brings new features and adds support for some Linux di
 - IPv6 support for the enrollment process and the agent-manager connection
 - Vulnerability detection support for SUSE agents
 - Support for Alpine Linux distribution
-- Wazuh indexer and dashboard based on the latest OpenSearch 2.4.1 version
+- Wazuh indexer and dashboard based on the OpenSearch 2.4.1 version
 - Rework of Ubuntu Linux 20.04 and 22.04 SCA policies
 - Support for Azure Integration in Linux agents
 
