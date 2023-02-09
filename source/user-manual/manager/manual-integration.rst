@@ -101,7 +101,7 @@ This is an example configuration for a custom integration:
     <name>custom-integration</name>
     <hook_url>WEBHOOK</hook_url>
     <level>10</level>
-    <group>multiple_drops|authentication_failures</group>
+    <group>multiple_drops,authentication_failures</group>
     <api_key>APIKEY</api_key> <!-- Replace with your external service API key -->
     <alert_format>json</alert_format>
   </integration>
