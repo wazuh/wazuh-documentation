@@ -118,7 +118,7 @@ Keep alive thread
 
 The worker nodes send a keep-alive message to the master every so often. The master keeps the date of the last received keep alive and knows the interval the worker is using to send its keepalives. If the last keep alive received by a worker is older than a determined amount of time, the master considers the worker is disconnected and immediately closes the connection. When a worker realizes the connection has been closed, it automatically tries to reconnect again.
 
-This feature is very useful to drop nodes that are facing a network issue or aren't available at the moment. It was implemented  `here <https://github.com/wazuh/wazuh/issues/1355>`_.
+This feature is very useful to drop nodes that are facing a network issue or aren't available at the moment.
 
 
 Integrity thread
