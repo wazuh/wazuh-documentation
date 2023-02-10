@@ -10,8 +10,44 @@ Amazon GuardDuty
 
 `Amazon GuardDuty <https://aws.amazon.com/guardduty/?nc1=h_ls>`_ is a threat detection service that continuously monitors for malicious or unauthorized behavior to help you protect your AWS accounts and workloads. It monitors for activity such as unusual API calls or potentially unauthorized deployments that indicate a possible account compromise. GuardDuty also detects potentially compromised instances or reconnaissance by attackers.
 
-Amazon configuration
+Amazon S3 Protection
 --------------------
+
+`S3 Protection <https://docs.aws.amazon.com/guardduty/latest/ug/s3-protection.html>`_ enables Amazon GuardDuty to monitor object-level API operations to identify potential security risks for data within your S3 buckets.
+
+Amazon configuration native integration
+---------------------------------------
+
+#. :doc:`Create a new </amazon/services/prerequisites/S3-bucket>` S3 bucket. (If you want to use an already created one, skip this step).
+
+#. Open `AWS Guarduty console <https://console.aws.amazon.com/guardduty>`_ : 
+
+    .. thumbnail:: ../../../images/aws/aws-guarduty-console-1.png
+      :align: center
+      :width: 70%
+
+#. In the navigation pane, under *Settings*, Click on *S3 Protection* :
+
+    .. thumbnail:: ../../../images/aws/aws-guarduty-console-2.png
+      :align: center
+      :width: 70%
+
+#. S3 Protection Pane list the current status of S3 protection for your account, you may enable or disable it at any time selecting *Enable* or *Disable* respectively:
+
+    .. thumbnail:: ../../../images/aws/aws-guarduty-console-3.png
+      :align: center
+      :width: 70%
+
+#. Confirm your selection:
+
+    .. thumbnail:: ../../../images/aws/aws-guarduty-console-4.png
+      :align: center
+      :width: 70%
+
+Amazon configuration with Kinesis, Firehose, CloudWatch integration
+-------------------------------------------------------------------
+
+.. deprecated:: 4.5
 
 #. :doc:`Create a new </amazon/services/prerequisites/S3-bucket>` S3 bucket. (If you want to use an already created one, skip this step).
 
@@ -107,6 +143,25 @@ Wazuh configuration
 
 #. Open the Wazuh configuration file (``/var/ossec/etc/ossec.conf``) and add the following block:
 
+Native Integration
+^^^^^^^^^^^^^^^^^^^
+
+    .. code-block:: xml
+
+      <wodle name="aws-s3">
+        <disabled>no</disabled>
+        <interval>10m</interval>
+        <run_on_start>yes</run_on_start>
+        <skip_on_error>yes</skip_on_error>
+        <bucket type="guardduty">
+          <name>wazuh-aws-wodle</name>
+          <aws_profile>default</aws_profile>
+        </bucket>
+      </wodle>
+
+Firehose, Kinetic, CloudWatch Integration
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
     .. code-block:: xml
 
       <wodle name="aws-s3">
@@ -121,6 +176,7 @@ Wazuh configuration
         </bucket>
       </wodle>
 
+
     .. note::
       Check the :doc:`AWS S3 module </user-manual/reference/ossec-conf/wodle-s3>` reference manual to learn more about each setting.
 
@@ -132,8 +188,7 @@ Wazuh configuration
 
     * If you're configuring a Wazuh agent:
 
-      .. include:: /_templates/common/restart_agent.rst
-        
+      .. include:: /_templates/common/restart_agent.rst        
 
 GuardDuty use cases
 -------------------
