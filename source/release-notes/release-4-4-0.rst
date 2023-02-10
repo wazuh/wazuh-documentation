@@ -568,6 +568,10 @@ Reference                                                                       
 `#5098 <https://github.com/wazuh/wazuh-kibana-app/pull/5098>`_                                                                                                                                   Fixed password input in deploy new agent section. 
 `#5094 <https://github.com/wazuh/wazuh-kibana-app/pull/5094>`_                                                                                                                                   Fixed error when clicking on the selectors of agents in the group agents management.
 `#5107 <https://github.com/wazuh/wazuh-kibana-app/pull/5107>`_                                                                                                                                   Fixed misspelling in the NIST module.
+`#5150 <https://github.com/wazuh/wazuh-kibana-app/pull/5150>`_                                                                                                                                   Fixed Statistic cronjob bulk document insert.
+`#5137 <https://github.com/wazuh/wazuh-kibana-app/pull/5137>`_                                                                                                                                   Fixed the style of the buttons showing more event information in the event view table.
+`#5144 <https://github.com/wazuh/wazuh-kibana-app/pull/5144>`_                                                                                                                                   Fixed Inventory module for Solaris agents.
+`#5200 <https://github.com/wazuh/wazuh-kibana-app/pull/5200>`_                                                                                                                                   Fixed a UI crash due to ``external_references`` field could be missing in some vulnerability data.
 =============================================================================================================================================================================================    =============
 
 Wazuh Kibana plugin for Kibana 7.16.x and 7.17.x
@@ -602,6 +606,10 @@ Reference                                                                       
 `#5098 <https://github.com/wazuh/wazuh-kibana-app/pull/5098>`_                                                                                                                                   Fixed password input in deploy new agent section. 
 `#5094 <https://github.com/wazuh/wazuh-kibana-app/pull/5094>`_                                                                                                                                   Fixed error when clicking on the selectors of agents in the group agents management.
 `#5107 <https://github.com/wazuh/wazuh-kibana-app/pull/5107>`_                                                                                                                                   Fixed misspelling in the NIST module.
+`#5150 <https://github.com/wazuh/wazuh-kibana-app/pull/5150>`_                                                                                                                                   Fixed Statistic cronjob bulk document insert.
+`#5137 <https://github.com/wazuh/wazuh-kibana-app/pull/5137>`_                                                                                                                                   Fixed the style of the buttons showing more event information in the event view table.
+`#5144 <https://github.com/wazuh/wazuh-kibana-app/pull/5144>`_                                                                                                                                   Fixed Inventory module for Solaris agents.
+`#5200 <https://github.com/wazuh/wazuh-kibana-app/pull/5200>`_                                                                                                                                   Fixed a UI crash due to ``external_references`` field could be missing in some vulnerability data.
 =============================================================================================================================================================================================    =============
 
 Packages
