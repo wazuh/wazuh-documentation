@@ -15,7 +15,6 @@ This new version of Wazuh brings new features and adds support for some Linux di
 
 - IPv6 support for the enrollment process and the agent-manager connection
 - Vulnerability detection support for SUSE agents
-- Support for Alpine Linux distribution
 - Wazuh indexer and dashboard are now based on OpenSearch 2.4.1 version
 - Rework of Ubuntu Linux 20.04 and 22.04 SCA policies
 - Support for Azure Integration in Linux agents
@@ -25,13 +24,6 @@ Below you can find more information about each of these highlights.
 Wazuh 4.4.0 brings IPv6 support when connecting and enrolling an agent to a manager. The IPv6 protocol can handle packets more effectively, enhance performance, and boost security. This new feature allows agents to register and connect through an IPv6 address.
 
 SUSE agents now natively support vulnerabilities detection. Wazuh added full support for SUSE Linux Enterprise Server and Desktop operating systems versions 11, 12, and 15. The vulnerability Detector now scans the programs identified by ``syscollector``, looking to report vulnerabilities described in the `SUSE OVAL <https://www.suse.com/support/security/oval/>`_ and the `NVD <https://nvd.nist.gov/>`_ databases.
-
-Wazuh 4.4.0 adds support for Alpine Linux. As Alpine Linux is a distribution that has gained great popularity among Linux users, we saw the need for the Wazuh agent to support Alpine Linux and ensure the proper support for this distribution. We generated Alpine Linux installers to make it easier to install and thus spare users from having to compile the source code locally.
-
-.. thumbnail:: /images/release-notes/4.4.0/alpine-linux.png
-      :align: center
-      :width: 60%
-      :title: Wazuh 4.4.0 adds support for Alpine Linux
 
 Wazuh indexer and dashboard bump to OpenSearch 2.4.1. The Wazuh indexer and the Wazuh dashboard are based on OpenSearch, an open source search and analytics project derived from Elasticsearch and Kibana. We generated and tested the ``wazuh-indexer`` Debian and RPM packages with OpenSearch 2.4.1 and the ``wazuh-dashboard`` Debian and RPM packages with OpenSearch dashboards 2.4.1. This way, we avoid earlier version vulnerabilities, have all OpenSearch new functionalities, and are up to date with the OpenSearch project development.
 
