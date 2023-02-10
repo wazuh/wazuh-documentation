@@ -246,7 +246,7 @@ Wazuh dashboard
 - `#4985 <https://github.com/wazuh/wazuh-kibana-app/pull/4985>`_ Updated the ``winston`` dependency to ``3.5.1``.
 - `#4985 <https://github.com/wazuh/wazuh-kibana-app/pull/4985>`_ Updated the ``pdfmake`` dependency to ``0.2.6``.
 - `#4992 <https://github.com/wazuh/wazuh-kibana-app/pull/4992>`_ The button to export the app logs is now disabled when there are no results instead of showing an error toast.
-- `#5063 <https://github.com/wazuh/wazuh-kibana-app/pull/5063>`_ Added default selected options in Deploy Agent page.- 
+- `#5063 <https://github.com/wazuh/wazuh-kibana-app/pull/5063>`_ Added default selected options in Deploy Agent page. 
 - `#5031 <https://github.com/wazuh/wazuh-kibana-app/pull/5031>`_ Unify the SCA check result label name.
 - `#5062 <https://github.com/wazuh/wazuh-kibana-app/pull/5062>`_ Updated ``mocha`` dependency to ``10.1.0``.
 - `#5062 <https://github.com/wazuh/wazuh-kibana-app/pull/5062>`_ Updated ``pdfmake`` dependency to ``0.2.7``.
