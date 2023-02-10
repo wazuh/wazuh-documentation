@@ -172,7 +172,7 @@ This thread is in charge of synchronizing information of agents' groups assignme
 
 1. When there is new agent-groups information, the master sends a JSON string with it to each worker. This is done only once per node.
 2. The workers send the received information to their local :ref:`wazuh-db <wazuh-db>` service, where it is updated.
-3. The worker compares the checksum of its database with the checksum of the master's.
+3. The worker compares the checksum of its database with the checksum of the master.
 4. If the checksum has been different for 10 consecutive times, the worker notifies the master.
 5. When notified, the master sends to the worker all the agent-groups information.
 6. The worker overwrites its database with the agent-groups information it has received from the master.
