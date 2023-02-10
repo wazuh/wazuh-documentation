@@ -107,6 +107,7 @@ Wazuh manager
 - `#12370 <https://github.com/wazuh/wazuh/pull/12370>`_ Unused internal calls to ``wazuh-db`` have been deprecated. 
 - `#14542 <https://github.com/wazuh/wazuh/pull/14542>`_ Debian Stretch support in Vulnerability Detector has been deprecated.
 - `#15853 <https://github.com/wazuh/wazuh/pull/15853>`_ The status field in SCA is deprecated.
+- `#16066 <https://github.com/wazuh/wazuh/pull/16066>`_ Agent group guessing (based on configuration hash) now writes the new group directly on the master node.
 
 Wazuh agent
 ^^^^^^^^^^^
@@ -447,6 +448,7 @@ Reference                                                         Description
 `#14525 <https://github.com/wazuh/wazuh/pull/14525>`_             Fixed the parse of ALB logs splitting ``client_port``, ``target_port`` and ``target_port_list`` in separated ``ip`` and ``port`` for each key.
 `#15335 <https://github.com/wazuh/wazuh/pull/15335>`_             Fixed a bug that prevents processing Macie logs with problematic ipGeolocation values.
 `#15584 <https://github.com/wazuh/wazuh/pull/15584>`_             Fixed GCP integration module error messages.
+`#15575 <https://github.com/wazuh/wazuh/pull/15575>`_             Fixed an error that prevented the agent on Windows from stopping correctly.
 ==============================================================    =============
 
 RESTful API
