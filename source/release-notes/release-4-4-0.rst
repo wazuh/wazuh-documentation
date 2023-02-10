@@ -250,7 +250,7 @@ Wazuh dashboard
 - `#5031 <https://github.com/wazuh/wazuh-kibana-app/pull/5031>`_ Unify the SCA check result label name.
 - `#5062 <https://github.com/wazuh/wazuh-kibana-app/pull/5062>`_ Updated ``mocha`` dependency to ``10.1.0``.
 - `#5062 <https://github.com/wazuh/wazuh-kibana-app/pull/5062>`_ Updated ``pdfmake`` dependency to ``0.2.7``.
-- `#5166 <https://github.com/wazuh/wazuh-kibana-app/pull/5166>`_ Added server address and Wazuh protocol definition in Deploy agent section. 
+- `#5166 <https://github.com/wazuh/wazuh-kibana-app/pull/5166>`_ Added the server address and Wazuh protocol definition in the **Deploy new agent** section. 
 - `#4491 <https://github.com/wazuh/wazuh-kibana-app/pull/4491>`_ Removed custom styles from Kibana 7.9.0.
 - `#4985 <https://github.com/wazuh/wazuh-kibana-app/pull/4985>`_ Removed the ``angular-chart.js`` dependency.
 - `#5062 <https://github.com/wazuh/wazuh-kibana-app/pull/5062>`_ `#5089 <https://github.com/wazuh/wazuh-kibana-app/pull/5089>`_ Remove the ``pug-loader`` dependency.
