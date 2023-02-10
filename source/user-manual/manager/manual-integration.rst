@@ -185,12 +185,12 @@ Below, you can find an example of a configuration block in the ``ossec.conf`` fi
 
 .. code-block:: xml
 
-   <!--Custom external Integration -->
-   <integration>
-     <name>custom-integration</name>
-     <hook_url>WEBHOOK</hook_url>
-     <level>10</level>
+  <!--Custom external Integration -->
+  <integration>
+    <name>custom-integration</name>
+    <hook_url>WEBHOOK</hook_url>
+    <level>10</level>
     <group>multiple_drops,authentication_failures</group>
-     <api_key>APIKEY</api_key> <!-- Replace with your external service API key -->
-     <alert_format>json</alert_format>
-   </integration>
+    <api_key>APIKEY</api_key> <!-- Replace with your external service API key -->
+    <alert_format>json</alert_format>
+  </integration>
