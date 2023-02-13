@@ -232,9 +232,10 @@ Wazuh dashboard
 - `#4933 <https://github.com/wazuh/wazuh-kibana-app/pull/4933>`_ Deploy new agent section: Added link for additional steps to Alpine OS.
 - `#4970 <https://github.com/wazuh/wazuh-kibana-app/pull/4970>`_ Added file saving conditions in File Editor.
 - `#5021 <https://github.com/wazuh/wazuh-kibana-app/pull/5021>`_ `#5028 <https://github.com/wazuh/wazuh-kibana-app/pull/5028>`_ Added character validation to avoid invalid agent names in the section **Deploy new agent**. 
-- `#4933 <https://github.com/wazuh/wazuh-kibana-app/pull/4933>`_ Deploy new agent section: Added link for additional steps to Alpine os.
+- `#5063 <https://github.com/wazuh/wazuh-kibana-app/pull/5063>`_ Added default selected options in Deploy Agent page. 
+- `#5166 <https://github.com/wazuh/wazuh-kibana-app/pull/5166>`_ Added the server address and Wazuh protocol definition in the **Deploy new agent** section. 
 - `#4103 <https://github.com/wazuh/wazuh-kibana-app/pull/4103>`_ Changed the HTTP verb from ``GET`` to ``POST`` in the requests to login to the Wazuh API.
-- `#4376 <https://github.com/wazuh/wazuh-kibana-app/pull/4376>`_ `#5071 <https://github.com/wazuh/wazuh-kibana-app/pull/5071>`_ Improved alerts summary performance.
+- `#4376 <https://github.com/wazuh/wazuh-kibana-app/pull/4376>`_ `#5071 <https://github.com/wazuh/wazuh-kibana-app/pull/5071>`_ `5131 <https://github.com/wazuh/wazuh-kibana-app/pull/5131>`_ Improved alerts summary performance.
 - `#4363 <https://github.com/wazuh/wazuh-kibana-app/pull/4363>`_ `#5076 <https://github.com/wazuh/wazuh-kibana-app/pull/5076>`_ Improved ``Agents Overview`` performance.
 - `#4529 <https://github.com/wazuh/wazuh-kibana-app/pull/4529>`_ `#4964 <https://github.com/wazuh/wazuh-kibana-app/pull/4964>`_ Improved the message displayed when a version mismatches between the Wazuh API and the Wazuh APP.
 - `#4363 <https://github.com/wazuh/wazuh-kibana-app/pull/4363>`_ Independently load each dashboard from the ``Agents Overview`` page.
@@ -246,15 +247,12 @@ Wazuh dashboard
 - `#4985 <https://github.com/wazuh/wazuh-kibana-app/pull/4985>`_ Updated the ``winston`` dependency to ``3.5.1``.
 - `#4985 <https://github.com/wazuh/wazuh-kibana-app/pull/4985>`_ Updated the ``pdfmake`` dependency to ``0.2.6``.
 - `#4992 <https://github.com/wazuh/wazuh-kibana-app/pull/4992>`_ The button to export the app logs is now disabled when there are no results instead of showing an error toast.
-- `#5063 <https://github.com/wazuh/wazuh-kibana-app/pull/5063>`_ Added default selected options in Deploy Agent page. 
 - `#5031 <https://github.com/wazuh/wazuh-kibana-app/pull/5031>`_ Unify the SCA check result label name.
 - `#5062 <https://github.com/wazuh/wazuh-kibana-app/pull/5062>`_ Updated ``mocha`` dependency to ``10.1.0``.
 - `#5062 <https://github.com/wazuh/wazuh-kibana-app/pull/5062>`_ Updated ``pdfmake`` dependency to ``0.2.7``.
-- `#5166 <https://github.com/wazuh/wazuh-kibana-app/pull/5166>`_ Added the server address and Wazuh protocol definition in the **Deploy new agent** section. 
 - `#4491 <https://github.com/wazuh/wazuh-kibana-app/pull/4491>`_ Removed custom styles from Kibana 7.9.0.
 - `#4985 <https://github.com/wazuh/wazuh-kibana-app/pull/4985>`_ Removed the ``angular-chart.js`` dependency.
 - `#5062 <https://github.com/wazuh/wazuh-kibana-app/pull/5062>`_ `#5089 <https://github.com/wazuh/wazuh-kibana-app/pull/5089>`_ Remove the ``pug-loader`` dependency.
-
 
 Wazuh Kibana plugin for Kibana 7.10.2
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
@@ -278,8 +276,9 @@ Wazuh Kibana plugin for Kibana 7.10.2
 - `#4970 <https://github.com/wazuh/wazuh-kibana-app/pull/4970>`_ Added file saving conditions in File Editor.
 - `#5021 <https://github.com/wazuh/wazuh-kibana-app/pull/5021>`_ `#5028 <https://github.com/wazuh/wazuh-kibana-app/pull/5028>`_ Added character validation to avoid invalid agent names in the section **Deploy new agent**. 
 - `#5063 <https://github.com/wazuh/wazuh-kibana-app/pull/5063>`_ Added default selected options in Deploy Agent page.
+- `#5166 <https://github.com/wazuh/wazuh-kibana-app/pull/5166>`_ Added the server address and Wazuh protocol definition in the **Deploy new agent** section. 
 - `#4103 <https://github.com/wazuh/wazuh-kibana-app/pull/4103>`_ Changed the HTTP verb from ``GET`` to ``POST`` in the requests to login to the Wazuh API.
-- `#4376 <https://github.com/wazuh/wazuh-kibana-app/pull/4376>`_ `#5071 <https://github.com/wazuh/wazuh-kibana-app/pull/5071>`_ Improved alerts summary performance.
+- `#4376 <https://github.com/wazuh/wazuh-kibana-app/pull/4376>`_ `#5071 <https://github.com/wazuh/wazuh-kibana-app/pull/5071>`_ `#5131 <https://github.com/wazuh/wazuh-kibana-app/pull/5131>`_ Improved alerts summary performance.
 - `#4363 <https://github.com/wazuh/wazuh-kibana-app/pull/4363>`_ `#5076 <https://github.com/wazuh/wazuh-kibana-app/pull/5076>`_ Improved ``Agents Overview`` performance.
 - `#4529 <https://github.com/wazuh/wazuh-kibana-app/pull/4529>`_ `#4964 <https://github.com/wazuh/wazuh-kibana-app/pull/4964>`_ Improved the message displayed when a version mismatches between the Wazuh API and the Wazuh APP.
 - `#4363 <https://github.com/wazuh/wazuh-kibana-app/pull/4363>`_ Independently load each dashboard from the ``Agents Overview`` page.
@@ -317,9 +316,10 @@ Wazuh Kibana plugin for Kibana 7.16.x and 7.17.x
 - `#4970 <https://github.com/wazuh/wazuh-kibana-app/pull/4970>`_ Added file saving conditions in File Editor.
 - `#5021 <https://github.com/wazuh/wazuh-kibana-app/pull/5021>`_ `#5028 <https://github.com/wazuh/wazuh-kibana-app/pull/5028>`_ Added character validation to avoid invalid agent names in the section **Deploy new agent**. 
 - `#5063 <https://github.com/wazuh/wazuh-kibana-app/pull/5063>`_ Added default selected options in Deploy Agent page.
+- `#5166 <https://github.com/wazuh/wazuh-kibana-app/pull/5166>`_ Added the server address and Wazuh protocol definition in the **Deploy new agent** section. 
 - `#4103 <https://github.com/wazuh/wazuh-kibana-app/pull/4103>`_ Changed the HTTP verb from ``GET`` to ``POST`` in the requests to login to the Wazuh API.
-- `#4376 <https://github.com/wazuh/wazuh-kibana-app/pull/4376>`_ `#5071 <https://github.com/wazuh/wazuh-kibana-app/pull/5071>`_ Improved alerts summary performance.
-- `#4363 <https://github.com/wazuh/wazuh-kibana-app/pull/4363>`_ `#4996 <https://github.com/wazuh/wazuh-kibana-app/pull/4996>`_ `#5076 <https://github.com/wazuh/wazuh-kibana-app/pull/5076>`_ Improved ``Agents Overview`` performance.
+- `#4376 <https://github.com/wazuh/wazuh-kibana-app/pull/4376>`_ `#5071 <https://github.com/wazuh/wazuh-kibana-app/pull/5071>`_ `#5031 <https://github.com/wazuh/wazuh-kibana-app/pull/5031>`_ Improved alerts summary performance.
+- `#4363 <https://github.com/wazuh/wazuh-kibana-app/pull/4363>`_ `#5076 <https://github.com/wazuh/wazuh-kibana-app/pull/5076>`_ Improved ``Agents Overview`` performance.
 - `#4529 <https://github.com/wazuh/wazuh-kibana-app/pull/4529>`_ `#4964 <https://github.com/wazuh/wazuh-kibana-app/pull/4964>`_ Improved the message displayed when a version mismatches between the Wazuh API and the Wazuh APP.
 - `#4363 <https://github.com/wazuh/wazuh-kibana-app/pull/4363>`_ Independently load each dashboard from the ``Agents Overview`` page.
 - `#3874 <https://github.com/wazuh/wazuh-kibana-app/pull/3874>`_ The endpoint ``/agents/summary/status`` response was adapted. 
@@ -517,9 +517,9 @@ Reference                                                                       
 `#4943 <https://github.com/wazuh/wazuh-kibana-app/pull/4943>`_                                                                                                                                   Fixed agent deployment instructions for HP-UX and Solaris. 
 `#4638 <https://github.com/wazuh/wazuh-kibana-app/pull/4638>`_ `#5046 <https://github.com/wazuh/wazuh-kibana-app/pull/5046>`_                                                                    Fixed a bug that caused the flyouts to close when clicking inside them.
 `#4981 <https://github.com/wazuh/wazuh-kibana-app/pull/4981>`_                                                                                                                                   Fixed the manager option in the agent deployment section.
+`#4999 <https://github.com/wazuh/wazuh-kibana-app/pull/4999>`_ `#5031 <https://github.com/wazuh/wazuh-kibana-app/pull/5031>`_                                                                    Fixed Inventory checks table filters by stats.
 `#4962 <https://github.com/wazuh/wazuh-kibana-app/pull/4962>`_                                                                                                                                   Fixed commands in the deploy new agent section(most of the commands are missing ``-1``).
 `#4968 <https://github.com/wazuh/wazuh-kibana-app/pull/4968>`_                                                                                                                                   Fixed agent installation command for macOS in the deploy new agent section.
-`#4999 <https://github.com/wazuh/wazuh-kibana-app/pull/4999>`_ `#5031 <https://github.com/wazuh/wazuh-kibana-app/pull/5031>`_                                                                    Fixed Inventory checks table filters by stats.
 `#4942 <https://github.com/wazuh/wazuh-kibana-app/pull/4942>`_                                                                                                                                   Fixed agent graph in OpenSearch dashboard.
 `#4984 <https://github.com/wazuh/wazuh-kibana-app/pull/4984>`_                                                                                                                                   Fixed commands in the deploy new agent section(most of the commands are missing ``-1``).
 `#4975 <https://github.com/wazuh/wazuh-kibana-app/pull/4975>`_                                                                                                                                   Fixed default last scan date parser to be able to catch dates returned by Wazuh API when no vulnerabilities scan has been made.
