@@ -143,7 +143,3 @@ Multiple alerts will be raised when a Bucket has been removed. Some examples are
 .. thumbnail:: ../../../images/aws/aws-s3-1.png
   :align: center
   :width: 70%
-
-.. thumbnail:: ../../../images/aws/aws-s3-1.png
-  :align: center
-  :width: 70%
