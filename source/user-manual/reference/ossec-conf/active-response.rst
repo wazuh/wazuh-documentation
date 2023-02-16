@@ -127,7 +127,9 @@ Defines the rule group that a rule must belong to one for the command to be exec
 +--------------------+---------------------------------------------------------------------------------------------+
 
 .. note::
-	All groups must end with a comma.
+	
+  If the group name ends with a comma, you can add it to avoid partial matches. This is usually the case in our default ruleset. 
+
 
 rules_id
 ^^^^^^^^
