@@ -300,7 +300,6 @@ agent:modify_group
 - :api-ref:`DELETE /agents/group <operation/api.controllers.agent_controller.delete_multiple_agent_single_group>` (`agent:id`_, `agent:group`_)
 - :api-ref:`DELETE /agents/{agent_id}/group <operation/api.controllers.agent_controller.delete_single_agent_multiple_groups>` (`agent:id`_, `agent:group`_)
 - :api-ref:`DELETE /agents/{agent_id}/group/{group_id} <operation/api.controllers.agent_controller.delete_single_agent_single_group>` (`agent:id`_, `agent:group`_)
-- :api-ref:`DELETE /groups <operation/api.controllers.agent_controller.delete_groups>` (`agent:id`_, `agent:group`_)
 - :api-ref:`PUT /agents/group <operation/api.controllers.agent_controller.put_multiple_agent_single_group>` (`agent:id`_, `agent:group`_)
 - :api-ref:`PUT /agents/{agent_id}/group/{group_id} <operation/api.controllers.agent_controller.put_agent_single_group>` (`agent:id`_, `agent:group`_)
 
@@ -423,7 +422,6 @@ group:modify_assignments
 - :api-ref:`DELETE /agents/group <operation/api.controllers.agent_controller.delete_multiple_agent_single_group>` (`group:id`_)
 - :api-ref:`DELETE /agents/{agent_id}/group <operation/api.controllers.agent_controller.delete_single_agent_multiple_groups>` (`group:id`_)
 - :api-ref:`DELETE /agents/{agent_id}/group/{group_id} <operation/api.controllers.agent_controller.delete_single_agent_single_group>` (`group:id`_)
-- :api-ref:`DELETE /groups <operation/api.controllers.agent_controller.delete_groups>` (`group:id`_)
 - :api-ref:`PUT /agents/group <operation/api.controllers.agent_controller.put_multiple_agent_single_group>` (`group:id`_)
 - :api-ref:`PUT /agents/{agent_id}/group/{group_id} <operation/api.controllers.agent_controller.put_agent_single_group>` (`group:id`_)
 
