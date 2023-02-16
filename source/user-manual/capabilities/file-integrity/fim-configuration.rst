@@ -184,10 +184,13 @@ To configure the Windows registries, it is necessary to create a list of those r
 Windows registries directories can be configured using ``*`` and ``?`` wildcards in the same way you would use them in a shell or cmd terminal for listing files.
 
 .. code-block:: xml
+
+  <syscheck>
     <windows_registry arch="both">HKEY_CURRENT_USER\Software\*</windows_registry>
     <windows_registry arch="both">HKEY_CURRENT_CONFIG\S?????</windows_registry>
     <windows_registry arch="both">HKEY_USERS\S-?-?-??\*</windows_registry>
-    
+  </syscheck>
+
 .. note::
 
   Registers that match the configured pattern and are created after the initial FIM scan will be added for monitoring after the next scheduled scan is run.
