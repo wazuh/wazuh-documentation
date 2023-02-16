@@ -1040,6 +1040,11 @@ windows_registry
 
 List of registry entries to be monitored. One entry per line. Multiple lines may be entered to include multiple registry entries.
 
+.. versionadded:: 4.5.0
+
+Wildcard characters (``?`` and ``*``) can be used to monitor paths that fulfill the given pattern.
+These wildcards will be reloaded every time a scheduled scan is run.
+
 +--------------------+----------------------------------------------------------------------+
 | **Default value**  | The default configuration may vary depending on the operating system.|
 +--------------------+----------------------------------------------------------------------+
@@ -1216,6 +1221,22 @@ Example:
  <windows_registry arch="both" check_sum="no">HKEY_LOCAL_MACHINE\SOFTWARE\test_key</windows_registry>
  <windows_registry arch="64bit" recursion_level="3">HKEY_LOCAL_MACHINE\SYSTEM\Setup</windows_registry>
 
+
+.. versionadded:: 4.5.0
+
+If there is a conflict between a block with wildcards and another without them, the block without wildcards will be used for the specific case. As an example:
+
+.. code-block:: xml
+
+  <windows_registry arch="both" check_sum="no">HKEY_LOCAL_MACHINE\SOFTWARE\*</windows_registry>
+
+The above block will set the ``SOFTWARE`` key of all users to be monitored in scheduled mode.
+
+.. code-block:: xml
+  
+  <windows_registry arch="both" check_sum="no">HKEY_LOCAL_MACHINE\SOFTWARE\TEST_KEY</windows_registry>
+
+Even though the above block is included in the previous one, ``HKEY_LOCAL_MACHINE\SOFTWARE\TEST_KEY`` will be monitored in realtime because it has no wildcards.
 
 .. _reference_ossec_syscheck_default_configuration:
 

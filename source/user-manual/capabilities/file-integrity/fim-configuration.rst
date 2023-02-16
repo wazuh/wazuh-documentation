@@ -186,7 +186,7 @@ Windows registries directories can be configured using ``*`` and ``?`` wildcards
 .. code-block:: xml
 
   <syscheck>
-    <windows_registry arch="both">HKEY_CURRENT_USER\Software\*</windows_registry>
+    <windows_registry arch="both">HKEY_LOCAL_MACHINE\SOFTWARE\*</windows_registry>
     <windows_registry arch="both">HKEY_CURRENT_CONFIG\S?????</windows_registry>
     <windows_registry arch="both">HKEY_USERS\S-?-?-??\*</windows_registry>
   </syscheck>
