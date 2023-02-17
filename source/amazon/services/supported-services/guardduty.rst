@@ -3,7 +3,7 @@
 .. meta::
   :description: Amazon GuardDuty is a threat detection service that continuously monitors for malicious behavior. Learn how to use GuardDuty with Wazuh in this section.
 
-.. _amazon_guardduty:
+.. _amazon_guardduty_native:
 
 Amazon GuardDuty
 ================
@@ -44,6 +44,8 @@ Amazon configuration native integration
       :align: center
       :width: 70%
 
+.. _amazon_kinesis_guardduty:
+   
 Amazon configuration with Kinesis, Firehose, CloudWatch integration
 -------------------------------------------------------------------
 
@@ -159,7 +161,7 @@ Native Integration
         </bucket>
       </wodle>
 
-Firehose, Kinetic, CloudWatch Integration
+Firehose, Kinesis, CloudWatch Integration
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
     .. code-block:: xml
