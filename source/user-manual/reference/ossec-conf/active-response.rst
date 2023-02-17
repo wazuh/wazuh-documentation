@@ -118,17 +118,17 @@ Defines a minimum severity level required for the command to be executed.
 rules_group
 ^^^^^^^^^^^
 
-Defines the rule group that a rule must belong to one for the command to be executed.
+Defines the rule group that a rule must belong to for the execution of the command.
 
-+--------------------+---------------------------------------------------------------------------------------------+
-| **Default value**  | n/a                                                                                         |
-+--------------------+---------------------------------------------------------------------------------------------+
-| **Allowed values** | Any rule group is allowed. Multiple groups should be separated with a pipe character (“|”). |
-+--------------------+---------------------------------------------------------------------------------------------+
++--------------------+------------------------------------------------------------------------------------------+
+| **Default value**  | n/a                                                                                      |
++--------------------+------------------------------------------------------------------------------------------+
+| **Allowed values** | Any group string. For multiple groups, separate the strings with a pipe character ``|``. |
++--------------------+------------------------------------------------------------------------------------------+
 
 .. note::
 	
-   If the group name ends with a comma, you can add it to avoid partial matches. This is usually the case in our default ruleset. 
+   Add a comma at the end of the string to avoid considering it a sub-string open for partial matches. For example, the string ``authentication`` matches rule groups ``authentication``, ``authentication_success``, and ``authentication_failure`` while the string ``authentication,`` matches only rule group ``authentication``. 
 
 
 rules_id
