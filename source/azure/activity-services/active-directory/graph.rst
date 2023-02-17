@@ -189,12 +189,12 @@ Wazuh dashboard visualization
 
 Once the integration is running, the results will be available in the Wazuh dashboard.
 
-.. thumbnail:: ../../../images/azure/kibana-services-1.png
+.. thumbnail:: /images/azure/kibana-services-1.png
     :title: AAD
     :align: center
-    :width: 100%
+    :width: 90%
 
-.. thumbnail:: ../../../images/azure/kibana-services-2.png
+.. thumbnail:: /images/azure/kibana-services-2.png
     :title: AAD
     :align: center
-    :width: 100%
+    :width: 80%
