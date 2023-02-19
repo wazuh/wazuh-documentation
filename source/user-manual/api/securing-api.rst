@@ -8,7 +8,7 @@
 Securing the Wazuh API
 ======================
 
-The communication between the Wazuh UI and the Wazuh API is encrypted with HTTPS by default, which means that if the users do not provide their own private key and certificate then the Wazuh API will generate its own during the first run. Additionally, the Wazuh API users ``wazuh`` and ``wazuh-wui`` are created by default, with ``wazuh`` and ``wazuh-wui`` as their passwords, respectively. Because of that, it is very important to secure the Wazuh API once the Wazuh Manager has been installed.
+The communication between the Wazuh UI and the Wazuh API is encrypted with HTTPS by default, which means that if the users do not provide their own private key and certificate then the Wazuh API will generate its own during the first run. Additionally, the Wazuh API user ``wazuh`` is created by default, with a unique enrollment password created at install time. This password can be found in the Dashboard config file, whose default location is at ```/usr/share/wazuh-dashboard/data/wazuh/config/wazuh.yml``, under the "hosts" section. It is very important to secure the Wazuh API once the Wazuh Manager has been installed.
 
 .. warning::
   It is highly recommended to change the default passwords and to use your own certificate since the one created by the Wazuh API is self-signed.
@@ -44,7 +44,7 @@ Recommended changes to secure the Wazuh API
 
       .. include:: /_templates/common/restart_manager.rst
 
-#. Change the default password of the admin users (**wazuh** and **wazuh-wui**): 
+#. Change the default password of the admin users: 
 
     The default password can be changed using the following Wazuh API request: :api-ref:`PUT /security/users/{user_id} <operation/api.controllers.security_controller.update_user>`
 
