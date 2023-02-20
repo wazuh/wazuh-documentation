@@ -520,6 +520,12 @@ Logcollector
 +                                          +---------------+----------------------------------------------------------------------------+
 |                                          | Allowed value | Any integer between 1 and 100000                                           |
 +------------------------------------------+---------------+----------------------------------------------------------------------------+
+|      **logcollector.sock_fail_time**     | Description   | Time to reattempt a socket connection after a failure, in seconds.         |
++                                          +---------------+----------------------------------------------------------------------------+
+|                                          | Default value | 300                                                                        |
++                                          +---------------+----------------------------------------------------------------------------+
+|                                          | Allowed value | Any integer between 1 and 3600                                             |
++------------------------------------------+---------------+----------------------------------------------------------------------------+
 |      **logcollector.rlimit_nofile**      | Description   | Maximum number of file descriptors that Logcollector can open.             |
 |                                          |               |                                                                            |
 |                                          |               | This value must be **greater than or equal to**                            |
