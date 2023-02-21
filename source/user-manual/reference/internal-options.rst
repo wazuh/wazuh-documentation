@@ -941,7 +941,7 @@ Syscheck
 +                                      +---------------+--------------------------------------------------------------------------------+
 |                                      | Allowed value | Any integer between 1 and 2592000                                              |
 +--------------------------------------+---------------+--------------------------------------------------------------------------------+
-| **syscheck.file_max_size**           | Description   | Maximum file size for calcuting integrity hashes (in mebibytes).               |
+| **syscheck.file_max_size**           | Description   | Maximum file size for calculating integrity hashes (in mebibytes).             |
 +                                      +---------------+--------------------------------------------------------------------------------+
 |                                      | Default value | 1024                                                                           |
 +                                      +---------------+--------------------------------------------------------------------------------+
