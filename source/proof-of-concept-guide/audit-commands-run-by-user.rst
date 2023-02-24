@@ -57,6 +57,15 @@ Perform the following steps to install Auditd and create the necessary audit rul
       -a always,exit -F arch=b32 -S execve -F auid=1000 -F egid!=994 -F auid!=-1 -F key=audit-wazuh-c
       -a always,exit -F arch=b64 -S execve -F auid=1000 -F egid!=994 -F auid!=-1 -F key=audit-wazuh-c
 
+#. Add the following configuration to the Wazuh agent ``/var/ossec/etc/ossec.conf`` file. This allows the Wazuh agent to read the auditd logs file:
+
+   .. code-block:: xml
+
+      <localfile>
+        <log_format>audit</log_format>
+        <location>/var/log/audit/audit.log</location>
+      </localfile>      
+
 #. Restart the Wazuh agent:
 
    .. code-block:: console
