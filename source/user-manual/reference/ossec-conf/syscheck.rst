@@ -969,6 +969,7 @@ The Whodata options will be configured inside this tag.
         <restart_audit>yes</restart_audit>
         <audit_key>auditkey1,auditkey2</audit_key>
         <startup_healthcheck>yes</startup_healthcheck>
+        <queue_size>100000</queue_size>
     </whodata>
 
 
@@ -1009,6 +1010,19 @@ Allows disabling the Audit health check during the Whodata engine starting. This
 +--------------------+------------+
 
 .. warning:: The health check ensures that the rules required by Whodata can be set in Audit correctly and also that the generated events can be obtained. Disabling the health check may cause functioning problems in Whodata and loss of FIM events.
+
+
+**queue_size**
+
+Sets the maximum capacity of the queue that stores the audit dispatcher events. **Linux systems with Audit**.
+
++--------------------+---------------------------------+
+| **Default value**  | 16384                           |
++--------------------+---------------------------------+
+| **Allowed values** | Any number from 10 to 1048576   |
++--------------------+---------------------------------+
+
+.. warning:: If the queue becomes full, some audit events may be lost. However, the next scheduled scan will generate the missing alerts, without the audit information.
 
 For more information, please read :ref:`auditing who-data <who-data-monitoring>`
 
