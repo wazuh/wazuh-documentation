@@ -69,13 +69,13 @@ Follow these steps to create an internal user, create a new role mapping, and gi
 
    #. Click the upper-left menu icon **☰** to open the options, select **Security**, and then **Roles** to open the roles page.
 
-   #. Search for the **all_access** role in the roles list and select it to open the details window.
+   #. Search for the **all_access** role in the roles list and select it.
 
-   #. Click **Duplicate role**, assign a name to the new role, then click **Create** to confirm the action.
+   #. Click **Actions** and select **Duplicate**.
 
-   #. Select the newly created role. 
-   
-   #. Select the **Mapped users** tab and click **Manage mapping**.
+   #. Assign a name to the new role, then click **Create** to confirm the action.
+
+   #. On the newly created role page, select the **Mapped users** tab and click **Manage mapping**.
    
    #. Add the user you created in the previous steps and click **Map** to confirm the action.
 
