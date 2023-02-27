@@ -22,7 +22,6 @@ We have use cases in the following sections that show how to use Wazuh capabilit
 
 .. toctree::
     :maxdepth: 1
-    :caption: Contents
 
     visualization-and-dashboard
     log-data-analysis
