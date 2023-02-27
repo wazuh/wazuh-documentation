@@ -48,7 +48,7 @@ RESTful API
 
 - `#14119 <https://github.com/wazuh/wazuh/pull/14119>`_ Added new setting ``upload_wazuh_configuration`` to the Wazuh API configuration. The old parameter ``remote_commands`` is now part of this setting.
 - `#14230 <https://github.com/wazuh/wazuh/pull/14230>`_ Deprecated ``GET /manager/stats/analysisd``, ``GET /manager/stats/remoted``, ``GET /cluster/{node_id}stats/analysisd``, and ``GET /cluster/{node_id}stats/remoted`` API endpoints. Use new endpoints ``GET /manager/daemons/stats`` and ``/cluster/{node_id}/daemons/stats``, respectively. 
-- `#16231 <https://github.com/wazuh/wazuh/pull/16231>`_ Removed RBAC group assignments' related permissions from `DELETE /groups` to improve performance and changed response structure.
+- `#16231 <https://github.com/wazuh/wazuh/pull/16231>`_ Removed RBAC group assignments' related permissions from ``DELETE /groups`` to improve performance and changed response structure.
 
 Ruleset
 ^^^^^^^
