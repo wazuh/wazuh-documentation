@@ -294,6 +294,15 @@ newUrls['4.3'] = [
   '/hipaa/vulnerability-detection.html',
   '/hipaa/active-response.html',
   '/proof-of-concept-guide/poc-detect-hidden-process.html',
+  '/user-manual/capabilities/malware-detection/index.html',
+  '/user-manual/capabilities/malware-detection/fim-threat-detection-rules.html',
+  '/user-manual/capabilities/malware-detection/rootkits-behavior-detection.html',
+  '/user-manual/capabilities/malware-detection/cdb-lists-threat-intelligence.html',
+  '/user-manual/capabilities/malware-detection/virus-total-integration.html',
+  '/user-manual/capabilities/malware-detection/fim-yara.html',
+  '/user-manual/capabilities/malware-detection/clam-av-logs-collection.html',
+  '/user-manual/capabilities/malware-detection/win-defender-logs-collection.html',
+  '/user-manual/capabilities/malware-detection/custom-rules-malware-ioc.html',
 ];
 
 removedUrls['4.3'] = [
@@ -440,6 +449,10 @@ removedUrls['4.3'] = [
   '/pci-dss/rootkit-detection.html',
   '/pci-dss/elastic.html',
   '/upgrade-guide/upgrading-agent.html', 
+  '/user-manual/capabilities/anomalies-detection/anomaly-configuration.html',
+  '/user-manual/capabilities/anomalies-detection/anomaly-faq.html',
+  '/user-manual/capabilities/anomalies-detection/how-it-works.html',
+  '/user-manual/capabilities/anomalies-detection/index.html',
 ];
 
 
@@ -1104,6 +1117,26 @@ redirections.push(
     'target': ['4.2=>4.3'],
     '4.2': '/learning-wazuh/vuln-detection.html',
     '4.3': '/proof-of-concept-guide/poc-vulnerability-detection.html',
+  },
+  {
+    'target': ['4.2<=>4.3'],
+    '4.2': '/user-manual/capabilities/anomalies-detection/index.html',
+    '4.3': '/user-manual/capabilities/malware-detection/index.html',
+  },
+  {
+    'target': ['4.2=>4.3'],
+    '4.2': '/user-manual/capabilities/anomalies-detection/anomaly-configuration.html',
+    '4.3': '/user-manual/capabilities/malware-detection/index.html',
+  },
+  {
+    'target': ['4.2=>4.3'],
+    '4.2': '/user-manual/capabilities/anomalies-detection/anomaly-faq.html',
+    '4.3': '/user-manual/capabilities/malware-detection/index.html',
+  },
+  {
+    'target': ['4.2=>4.3'],
+    '4.2': '/user-manual/capabilities/anomalies-detection/how-it-works.html',
+    '4.3': '/user-manual/capabilities/malware-detection/index.html',
   },
 );
 
