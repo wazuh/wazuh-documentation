@@ -119,6 +119,19 @@ removedUrls['4.4'] = [
   '/amazon/services/supported-services/nlb.html',
   '/amazon/services/supported-services/clb.html',
   '/user-manual/capabilities/agent-key-polling.html',
+  '/user-manual/wazuh-dashboard/single-sign-on/index.html',
+  '/user-manual/wazuh-dashboard/single-sign-on/okta.html',
+  '/user-manual/wazuh-dashboard/single-sign-on/azure-active-directory.html',
+  '/user-manual/wazuh-dashboard/single-sign-on/pingone.html',
+  '/user-manual/wazuh-dashboard/single-sign-on/google.html',
+  '/user-manual/wazuh-dashboard/single-sign-on/jumpcloud.html',
+  '/user-manual/wazuh-dashboard/single-sign-on/onelogin.html',
+  '/user-manual/securing-wazuh/index.html',
+  '/user-manual/securing-wazuh/wazuh-indexer.html',
+  '/user-manual/securing-wazuh/opendistro.html',
+  '/user-manual/securing-wazuh/elastic-stack.html',
+  '/user-manual/wazuh-dashboard/rbac.html',
+  '/learning-wazuh/build-lab/install-wazuh-central-components.html',
 ];
 
   /* *** RELEASE 4.3 ****/
