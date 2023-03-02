@@ -74,7 +74,7 @@ As seen on the screenshot below, alerts start coming into the dashboard:
 VirusTotal
 ----------
 
-This integration allows the inspection of malicious files using the VirusTotal database. Find more information about this at the :ref:`VirusTotal integration <virustotal-scan>` page.
+This integration allows the inspection of malicious files using the VirusTotal database. Find more information about this at the :doc:`VirusTotal integration </user-manual/capabilities/malware-detection/virus-total-integration>` page.
 
 This is an example configuration for the VirusTotal integration:
 
