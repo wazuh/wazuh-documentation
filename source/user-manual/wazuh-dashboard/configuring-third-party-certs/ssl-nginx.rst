@@ -112,12 +112,9 @@ Configure the proxy and the certificates
       # ln -s /snap/bin/certbot /usr/bin/certbot
 
 #. Edit the ``/etc/wazuh-dashboard/opensearch_dashboards.yml`` file and change the default dashboard port from ``443`` to another available port number:
-
-   .. code-block:: console
-
-      # nano /etc/wazuh-dashboard/opensearch_dashboards.yml
       
    .. code-block:: yaml
+      :emphasize-lines: 3
 
       server.host: 0.0.0.0
       opensearch.hosts: https://127.0.0.1:9200
