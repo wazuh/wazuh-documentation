@@ -426,7 +426,7 @@ Example:
           <options>no_full_log</options>
       </rule>
 
-This rule, groups events decoded from json that belong to an integration called `VirusTotal <../../capabilities/virustotal-scan/index.html>`_. It checks the field decoded as ``integration`` and if its content is ``virustotal`` the rule is triggered.
+This rule, groups events decoded from json that belong to an integration called :doc:`VirusTotal </user-manual/capabilities/malware-detection/virus-total-integration>`. It checks the field decoded as ``integration`` and if its content is ``virustotal`` the rule is triggered.
 
 srcip
 ^^^^^

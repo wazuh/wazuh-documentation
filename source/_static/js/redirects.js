@@ -182,6 +182,19 @@ removedUrls['4.4'] = [
   '/amazon/services/supported-services/nlb.html',
   '/amazon/services/supported-services/clb.html',
   '/user-manual/capabilities/agent-key-polling.html',
+  '/user-manual/wazuh-dashboard/single-sign-on/index.html',
+  '/user-manual/wazuh-dashboard/single-sign-on/okta.html',
+  '/user-manual/wazuh-dashboard/single-sign-on/azure-active-directory.html',
+  '/user-manual/wazuh-dashboard/single-sign-on/pingone.html',
+  '/user-manual/wazuh-dashboard/single-sign-on/google.html',
+  '/user-manual/wazuh-dashboard/single-sign-on/jumpcloud.html',
+  '/user-manual/wazuh-dashboard/single-sign-on/onelogin.html',
+  '/user-manual/securing-wazuh/index.html',
+  '/user-manual/securing-wazuh/wazuh-indexer.html',
+  '/user-manual/securing-wazuh/opendistro.html',
+  '/user-manual/securing-wazuh/elastic-stack.html',
+  '/user-manual/wazuh-dashboard/rbac.html',
+  '/learning-wazuh/build-lab/install-wazuh-central-components.html',
 ];
 
   /* *** RELEASE 4.3 ****/
@@ -408,6 +421,15 @@ newUrls['4.3'] = [
   '/hipaa/vulnerability-detection.html',
   '/hipaa/active-response.html',
   '/proof-of-concept-guide/poc-detect-hidden-process.html',
+  '/user-manual/capabilities/malware-detection/index.html',
+  '/user-manual/capabilities/malware-detection/fim-threat-detection-rules.html',
+  '/user-manual/capabilities/malware-detection/rootkits-behavior-detection.html',
+  '/user-manual/capabilities/malware-detection/cdb-lists-threat-intelligence.html',
+  '/user-manual/capabilities/malware-detection/virus-total-integration.html',
+  '/user-manual/capabilities/malware-detection/fim-yara.html',
+  '/user-manual/capabilities/malware-detection/clam-av-logs-collection.html',
+  '/user-manual/capabilities/malware-detection/win-defender-logs-collection.html',
+  '/user-manual/capabilities/malware-detection/custom-rules-malware-ioc.html',
 ];
 
 removedUrls['4.3'] = [
@@ -554,6 +576,13 @@ removedUrls['4.3'] = [
   '/pci-dss/rootkit-detection.html',
   '/pci-dss/elastic.html',
   '/upgrade-guide/upgrading-agent.html', 
+  '/user-manual/capabilities/anomalies-detection/anomaly-configuration.html',
+  '/user-manual/capabilities/anomalies-detection/anomaly-faq.html',
+  '/user-manual/capabilities/anomalies-detection/how-it-works.html',
+  '/user-manual/capabilities/anomalies-detection/index.html',
+  '/user-manual/capabilities/virustotal-scan/about.html',
+  '/user-manual/capabilities/virustotal-scan/index.html',
+  '/user-manual/capabilities/virustotal-scan/integration.html',
 ];
 
 
@@ -1218,6 +1247,41 @@ redirections.push(
     'target': ['4.2=>4.3'],
     '4.2': '/learning-wazuh/vuln-detection.html',
     '4.3': '/proof-of-concept-guide/poc-vulnerability-detection.html',
+  },
+  {
+    'target': ['4.2=>4.3', '4.3=>4.2'],
+    '4.2': '/user-manual/capabilities/anomalies-detection/index.html',
+    '4.3': '/user-manual/capabilities/malware-detection/index.html',
+  },
+  {
+    'target': ['4.2=>4.3'],
+    '4.2': '/user-manual/capabilities/anomalies-detection/anomaly-configuration.html',
+    '4.3': '/user-manual/capabilities/malware-detection/index.html',
+  },
+  {
+    'target': ['4.2=>4.3'],
+    '4.2': '/user-manual/capabilities/anomalies-detection/anomaly-faq.html',
+    '4.3': '/user-manual/capabilities/malware-detection/index.html',
+  },
+  {
+    'target': ['4.2=>4.3'],
+    '4.2': '/user-manual/capabilities/anomalies-detection/how-it-works.html',
+    '4.3': '/user-manual/capabilities/malware-detection/index.html',
+  },
+  {
+    'target': ['4.2=>4.3'],
+    '4.2': '/user-manual/capabilities/virustotal-scan/about.html',
+    '4.3': '/user-manual/capabilities/malware-detection/virus-total-integration.html#about-virustotal',
+  },
+  {
+    'target': ['4.2=>4.3','4.3=>4.2'],
+    '4.2': '/user-manual/capabilities/virustotal-scan/index.html',
+    '4.3': '/user-manual/capabilities/malware-detection/virus-total-integration.html',
+  },
+  {
+    'target': ['4.2=>4.3'],
+    '4.2': '/user-manual/capabilities/virustotal-scan/integration.html',
+    '4.3': '/user-manual/capabilities/malware-detection/virus-total-integration.html#how-it-works',
   },
 );
 

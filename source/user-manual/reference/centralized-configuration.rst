@@ -14,7 +14,7 @@ Introduction
 Agents can be configured remotely by using the ``shared.conf`` file. The following capabilities can be configured remotely:
 
 - :doc:`File Integrity monitoring <../capabilities/file-integrity/index>` (**syscheck**)
-- :doc:`Rootkit detection <../capabilities/anomalies-detection/index>` (**rootcheck**)
+- :doc:`Rootkit detection <../capabilities/malware-detection/index>` (**rootcheck**)
 - :doc:`Log data collection <../capabilities/log-data-collection/index>` (**localfile**)
 - :doc:`Security policy monitoring <../capabilities/policy-monitoring/index>` (**wodle name="open-scap"**, **wodle name="cis-cat"**)
 - :doc:`Remote commands <ossec-conf/wodle-command>` (**wodle name="command"**)
