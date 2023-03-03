@@ -116,6 +116,9 @@ Configure the proxy and the certificates
    .. code-block:: console
 
       # nano /etc/wazuh-dashboard/opensearch_dashboards.yml
+      
+   .. code-block:: yaml
+
       server.host: 0.0.0.0
       opensearch.hosts: https://127.0.0.1:9200
       server.port: <PORT_NUMBER>
