@@ -20,27 +20,27 @@ Amazon configuration native integration
 
 #. :doc:`Create a new S3 bucket </amazon/services/prerequisites/S3-bucket>`. If you want to use a previously created bucket, skip this step).
 
-#. Open the `AWS Guarduty console <https://console.aws.amazon.com/guardduty>`_ : 
+#. Go to Services > Security, Identity, & Compliance > GuardDuty: 
 
-    .. thumbnail:: ../../../images/aws/aws-guarduty-console-1.png
+    .. thumbnail:: ../../../images/aws/guardduty-native-1.png
       :align: center
       :width: 70%
 
-#. In the navigation pane, under **Settings**, Click on **S3 Protection** :
+#. In the navigation pane, under **Settings**, Click on **S3 Protection**:
 
-    .. thumbnail:: ../../../images/aws/aws-guarduty-console-2.png
+    .. thumbnail:: ../../../images/aws/guardduty-native-2.png
       :align: center
       :width: 70%
 
 #. The S3 Protection Pane lists the current status of S3 protection for your account, you may enable or disable it at any time by selecting **Enable** or **Disable** respectively:
 
-    .. thumbnail:: ../../../images/aws/aws-guarduty-console-3.png
+    .. thumbnail:: ../../../images/aws/guardduty-native-3.png
       :align: center
       :width: 70%
 
 #. Confirm your selection:
 
-    .. thumbnail:: ../../../images/aws/aws-guarduty-console-4.png
+    .. thumbnail:: ../../../images/aws/guardduty-native-4.png
       :align: center
       :width: 70%
 
@@ -71,91 +71,81 @@ Amazon configuration with Kinesis, Firehose, CloudWatch integration
       :align: center
       :width: 70%
 
+#. Choose a name for your delivery stream, leave Transform and convert records options Disabled:
+
     .. thumbnail:: ../../../images/aws/guardduty-firehose-4.png
-      :align: center
-      :width: 70%
-
-#. Choose a name for your delivery stream, leave Transform and convert records options **Disabled**:
-
-    .. thumbnail:: ../../../images/aws/guardduty-firehose-5.png
       :align: center
       :width: 70%
 
 #. On the *Destination settings* select the previously created S3 bucket and add a prefix where logs will be stored. AWS Firehose creates a file structure *YYYY/MM/DD/HH*, if a prefix is used the created file structure would be *firehose/YYYY/MM/DD/HH*. If a prefix is used it must be specified under the Wazuh Bucket configuration:
 
-    .. thumbnail:: ../../../images/aws/guardduty-firehose-6.png
+    .. thumbnail:: ../../../images/aws/guardduty-firehose-5.png
       :align: center
       :width: 70%
 
 #. You can select the compression you prefer. Wazuh supports any kind of compression but Snappy:
-*
-    .. thumbnail:: ../../../images/aws/guardduty-firehose-7.png
+
+    .. thumbnail:: ../../../images/aws/guardduty-firehose-6.png
       :align: center
       :width: 70%
 
-#. Under the *Advanced settings* section you can set the *Permissions*. By default a new IAM role will be created, if you choose an existing IAM role remember to include the permissions that *Kinesis Data Firehose* needs:
+#. Under the *Advanced settings* section you can set the *Permissions*, By default a new IAM role will be created, if you choose an existing IAM role remember to include the permissions that *Kinesis Data Firehose* needs then Click on **Create delivery stream** :
+
+    .. thumbnail:: ../../../images/aws/guardduty-firehose-7.png
+      :align: center
+      :width: 70%
+   
+#. Go to Services > Management & Governance > CloudWatch:
 
     .. thumbnail:: ../../../images/aws/guardduty-firehose-8.png
       :align: center
       :width: 70%
-   
-#. Go to the bottom of the page and click on the **Create delivery stream** button:
+
+#. In the Cloudwatch pane, under **Events**, Click on **Rules**:
 
     .. thumbnail:: ../../../images/aws/guardduty-firehose-9.png
       :align: center
       :width: 70%
 
-#. Go to Services > Management & Governance > CloudWatch:
+#. Amazon EventBridge pane will load, Click on **Create rule**:
 
     .. thumbnail:: ../../../images/aws/guardduty-firehose-10.png
       :align: center
       :width: 70%
 
-#. In the Cloudwatch pane, under **Rules**, Click on **Rules**:
+#. Under the *Define rule detail* section, Name the rule and Click on **Next**:
 
     .. thumbnail:: ../../../images/aws/guardduty-firehose-11.png
       :align: center
       :width: 70%
 
-#. Amazon EventBridge pane will load, Click on the **Create rule** button:
+#. Under the *Build event pattern* section, Choose AWS events as your event source:
 
     .. thumbnail:: ../../../images/aws/guardduty-firehose-12.png
       :align: center
       :width: 70%
 
-#. Under the *Define rule detail* section, Name the rule and Click on **Next**:
-
-    .. thumbnail:: ../../../images/aws/guarddury-firehose-13.png
-      :align: center
-      :width: 70%
-
-#. On the *Build event pattern* section, under the *Event source* section Choose AWS events as your event source:
-
-    .. thumbnail:: ../../../images/aws/guarddury-firehose-14.png
-      :align: center
-      :width: 70%
-
 #. Under the *Event pattern* section, Choose *GuardDuty* as your *AWS service* and *All Events* as your *Event type* and Click on **Next**:
 
-    .. thumbnail:: ../../../images/aws/guarddury-firehose-15.png
+    .. thumbnail:: ../../../images/aws/guardduty-firehose-13.png
         :align: center
         :width: 70%
 
 #. On the *Select target(s)* section, Choose *AWS service* as your *target types*, select *Firehose delivery stream* as your target type and add the previously created Firehose delivery stream as your *Stream*, Click on **Next**. 
 
-    .. thumbnail:: ../../../images/aws/aws-create-firehose-16.png
+    .. thumbnail:: ../../../images/aws/guardduty-firehose-14.png
       :align: center
       :width: 70%
 
 #. On the *Configure tags section* a tag can be configured to search and filter resources, Click on **Next**:
 
-    .. thumbnail:: ../../../images/aws/aws-create-firehose-17.png
+    .. thumbnail:: ../../../images/aws/guardduty-firehose-15.png
       :align: center
       :width: 70%
 
 #. Last section is a summary of the created rule, confirm the selection is correct, Click on **Create Rule**:
 
-    .. thumbnail:: ../../../images/aws/aws-create-firehose-17.png
+    .. thumbnail:: ../../../images/aws/guardduty-firehose-16.png
       :align: center
       :width: 70%
 
