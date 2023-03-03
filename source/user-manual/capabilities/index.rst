@@ -36,7 +36,6 @@ In this section you will find:
     labels
     syscollector
     vulnerability-detection/index
-    virustotal-scan/index
     osquery
     agent-key-polling
     fluent-forwarder
