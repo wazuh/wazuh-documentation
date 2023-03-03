@@ -18,21 +18,21 @@ Amazon S3 Protection
 Amazon configuration native integration
 ---------------------------------------
 
-#. :doc:`Create a new </amazon/services/prerequisites/S3-bucket>` S3 bucket. (If you want to use an already created one, skip this step).
+#. :doc:`Create a new S3 bucket </amazon/services/prerequisites/S3-bucket>`. If you want to use a previously created bucket, skip this step).
 
-#. Open `AWS Guarduty console <https://console.aws.amazon.com/guardduty>`_ : 
+#. Open the `AWS Guarduty console <https://console.aws.amazon.com/guardduty>`_ : 
 
     .. thumbnail:: ../../../images/aws/aws-guarduty-console-1.png
       :align: center
       :width: 70%
 
-#. In the navigation pane, under *Settings*, Click on *S3 Protection* :
+#. In the navigation pane, under **Settings**, Click on **S3 Protection** :
 
     .. thumbnail:: ../../../images/aws/aws-guarduty-console-2.png
       :align: center
       :width: 70%
 
-#. S3 Protection Pane list the current status of S3 protection for your account, you may enable or disable it at any time selecting *Enable* or *Disable* respectively:
+#. The S3 Protection Pane lists the current status of S3 protection for your account, you may enable or disable it at any time by selecting **Enable** or **Disable** respectively:
 
     .. thumbnail:: ../../../images/aws/aws-guarduty-console-3.png
       :align: center
@@ -51,83 +51,111 @@ Amazon configuration with Kinesis, Firehose, CloudWatch integration
 
 .. deprecated:: 4.5
 
-#. :doc:`Create a new </amazon/services/prerequisites/S3-bucket>` S3 bucket. (If you want to use an already created one, skip this step).
+#. :doc:`Create a new S3 bucket </amazon/services/prerequisites/S3-bucket>`. (If you want to use an already created one, skip this step).
 
 #. Go to Services > Analytics > Kinesis:
 
-    .. thumbnail:: ../../../images/aws/aws-create-firehose-4.png
+    .. thumbnail:: ../../../images/aws/guardduty-firehose-1.png
       :align: center
       :width: 70%
 
-#. If it's the first time you're using this service, you'll see the following screen. Just click on *Get started*:
+#. Click on **Create delivery stream** button:
 
-    .. thumbnail:: ../../../images/aws/aws-create-firehose-4.1.png
+    .. thumbnail:: ../../../images/aws/guardduty-firehose-2.png
       :align: center
       :width: 70%
 
-#. Click on *Create delivery stream* button:
+#. Choose a *Source* and select *Amazon S3* as the *Destination*:
 
-    .. thumbnail:: ../../../images/aws/aws-create-firehose-5.png
+    .. thumbnail:: ../../../images/aws/guardduty-firehose-3.png
       :align: center
       :width: 70%
 
-#. Put a name to your delivery stream and click on the *Next* button at the bottom of the page:
-
-    .. thumbnail:: ../../../images/aws/aws-create-firehose-6.png
+    .. thumbnail:: ../../../images/aws/guardduty-firehose-4.png
       :align: center
       :width: 70%
 
-#. On the next page, leave both options as *Disabled* and click on *Next*:
+#. Choose a name for your delivery stream, leave Transform and convert records options **Disabled**:
 
-    .. thumbnail:: ../../../images/aws/aws-create-firehose-7.png
+    .. thumbnail:: ../../../images/aws/guardduty-firehose-5.png
       :align: center
       :width: 70%
 
-#. Select *Amazon S3* as the destination, then select the previously created S3 bucket and add a prefix where logs will be stored. AWS Firehose creates a file structure *YYYY/MM/DD/HH*, if a prefix is used the created file structure would be *firehose/YYYY/MM/DD/HH*. If a prefix is used it must be specified under the Wazuh Bucket configuration:
+#. On the *Destination settings* select the previously created S3 bucket and add a prefix where logs will be stored. AWS Firehose creates a file structure *YYYY/MM/DD/HH*, if a prefix is used the created file structure would be *firehose/YYYY/MM/DD/HH*. If a prefix is used it must be specified under the Wazuh Bucket configuration:
 
-    .. thumbnail:: ../../../images/aws/aws-create-firehose-8.png
+    .. thumbnail:: ../../../images/aws/guardduty-firehose-6.png
       :align: center
       :width: 70%
 
-#. You can select the compression you prefer. Wazuh supports any kind of compression but Snappy. After that, click on **Create new or choose**:
-
-    .. thumbnail:: ../../../images/aws/aws-create-firehose-9.png
+#. You can select the compression you prefer. Wazuh supports any kind of compression but Snappy:
+*
+    .. thumbnail:: ../../../images/aws/guardduty-firehose-7.png
       :align: center
       :width: 70%
 
-#. Give a proper name to the role and click on the *Allow* button:
+#. Under the *Advanced settings* section you can set the *Permissions*. By default a new IAM role will be created, if you choose an existing IAM role remember to include the permissions that *Kinesis Data Firehose* needs:
 
-    .. thumbnail:: ../../../images/aws/aws-create-firehose-10.png
+    .. thumbnail:: ../../../images/aws/guardduty-firehose-8.png
+      :align: center
+      :width: 70%
+   
+#. Go to the bottom of the page and click on the **Create delivery stream** button:
+
+    .. thumbnail:: ../../../images/aws/guardduty-firehose-9.png
       :align: center
       :width: 70%
 
-#. The following page is just a summary of the Firehose stream created. Go to the bottom of the page and click on the **Create delivery stream** button.
+#. Go to Services > Management & Governance > CloudWatch:
 
-    .. thumbnail:: ../../../images/aws/aws-create-firehose-11.png
+    .. thumbnail:: ../../../images/aws/guardduty-firehose-10.png
       :align: center
       :width: 70%
 
-#. Go to Services > Management Tools > CloudWatch:
+#. In the Cloudwatch pane, under **Rules**, Click on **Rules**:
 
-    .. thumbnail:: ../../../images/aws/aws-create-firehose-12.png
+    .. thumbnail:: ../../../images/aws/guardduty-firehose-11.png
       :align: center
       :width: 70%
 
-#. Select *Rules* on the left menu and click on the *Create rule* button:
+#. Amazon EventBridge pane will load, Click on the **Create rule** button:
 
-    .. thumbnail:: ../../../images/aws/aws-create-firehose-13.png
+    .. thumbnail:: ../../../images/aws/guardduty-firehose-12.png
       :align: center
       :width: 70%
 
-#. Select the services you want to get logs from using the **Service name** slider, then, click on the **Add target** button and add the previously created Firehose delivery stream there. Also, create a new role to access the delivery stream.
+#. Under the *Define rule detail* section, Name the rule and Click on **Next**:
 
-    .. thumbnail:: ../../../images/aws/aws-create-firehose-14.png
+    .. thumbnail:: ../../../images/aws/guarddury-firehose-13.png
       :align: center
       :width: 70%
 
-#. Give the rule some name and click on the *Create rule* button:
+#. On the *Build event pattern* section, under the *Event source* section Choose AWS events as your event source:
 
-    .. thumbnail:: ../../../images/aws/aws-create-firehose-15.png
+    .. thumbnail:: ../../../images/aws/guarddury-firehose-14.png
+      :align: center
+      :width: 70%
+
+#. Under the *Event pattern* section, Choose *GuardDuty* as your *AWS service* and *All Events* as your *Event type* and Click on **Next**:
+
+    .. thumbnail:: ../../../images/aws/guarddury-firehose-15.png
+        :align: center
+        :width: 70%
+
+#. On the *Select target(s)* section, Choose *AWS service* as your *target types*, select *Firehose delivery stream* as your target type and add the previously created Firehose delivery stream as your *Stream*, Click on **Next**. 
+
+    .. thumbnail:: ../../../images/aws/aws-create-firehose-16.png
+      :align: center
+      :width: 70%
+
+#. On the *Configure tags section* a tag can be configured to search and filter resources, Click on **Next**:
+
+    .. thumbnail:: ../../../images/aws/aws-create-firehose-17.png
+      :align: center
+      :width: 70%
+
+#. Last section is a summary of the created rule, confirm the selection is correct, Click on **Create Rule**:
+
+    .. thumbnail:: ../../../images/aws/aws-create-firehose-17.png
       :align: center
       :width: 70%
 
