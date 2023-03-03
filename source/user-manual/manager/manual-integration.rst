@@ -116,7 +116,7 @@ Once the configuration is complete, alerts start showing on the Pagerduty dashbo
 VirusTotal
 ----------
 
-This integration allows the inspection of malicious files using the VirusTotal database. Find more information about this on the :ref:`VirusTotal integration <virustotal-scan>` page.
+This integration allows the inspection of malicious files using the VirusTotal database. Find more information about this on the :doc:`VirusTotal integration </user-manual/capabilities/malware-detection/virus-total-integration>` page.
 
 To set up this integration, follow these steps.
 

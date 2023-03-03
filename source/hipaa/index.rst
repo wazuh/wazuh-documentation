@@ -18,11 +18,10 @@ Wazuh includes default rules and decoders for detecting security incidents, syst
 
 The `Wazuh for HIPAA guide (PDF) <https://wazuh.com/resources/Wazuh-for-IPAA-guide-V2.0.pdf>`_ focuses on part 164, subpart C (Security Standards For The Protection Of Electronic Protected Health Information) of the HIPAA standard. This guide explains how the various Wazuh modules assist in complying with HIPAA standards.
 
-We have use cases in the following sections that show how to use Wazuh capabilities and modules to comply with HIPAA standards.
+We have use cases in the following sections that show how to use Wazuh capabilities and modules to comply with HIPAA standards:
 
 .. toctree::
     :maxdepth: 1
-    :caption: Contents
 
     visualization-and-dashboard
     log-data-analysis

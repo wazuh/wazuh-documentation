@@ -19,4 +19,4 @@ All the features available in an agent can be useful to monitor Docker servers (
     -   :ref:`manual_log_analysis`
     -   :ref:`manual_policy_monitoring`
     -   :ref:`system_call_monitoring`
-    -   :ref:`virustotal-scan`
+    -   :doc:`/user-manual/capabilities/malware-detection/virus-total-integration`
