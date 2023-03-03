@@ -1122,7 +1122,7 @@ redirections.push(
     '4.3': '/proof-of-concept-guide/poc-vulnerability-detection.html',
   },
   {
-    'target': ['4.2<=>4.3'],
+    'target': ['4.2=>4.3', '4.3=>4.2'],
     '4.2': '/user-manual/capabilities/anomalies-detection/index.html',
     '4.3': '/user-manual/capabilities/malware-detection/index.html',
   },
@@ -1142,17 +1142,17 @@ redirections.push(
     '4.3': '/user-manual/capabilities/malware-detection/index.html',
   },
   {
-    'target': ['4.2<=>4.3'],
+    'target': ['4.2=>4.3'],
     '4.2': '/user-manual/capabilities/virustotal-scan/about.html',
     '4.3': '/user-manual/capabilities/malware-detection/virus-total-integration.html#about-virustotal',
   },
   {
-    'target': ['4.2<=>4.3'],
+    'target': ['4.2=>4.3','4.3=>4.2'],
     '4.2': '/user-manual/capabilities/virustotal-scan/index.html',
     '4.3': '/user-manual/capabilities/malware-detection/virus-total-integration.html',
   },
   {
-    'target': ['4.2<=>4.3'],
+    'target': ['4.2=>4.3'],
     '4.2': '/user-manual/capabilities/virustotal-scan/integration.html',
     '4.3': '/user-manual/capabilities/malware-detection/virus-total-integration.html#how-it-works',
   },
