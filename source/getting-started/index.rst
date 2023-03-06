@@ -37,9 +37,9 @@ Screenshots
    :width: 100%
    :widths: 50 50
 
-   * - .. thumbnail:: ../images/getting-started/security-analytics.png
-          :title: Security Analytics 
-          :alt: Security Analytics 
+   * - .. thumbnail:: ../images/getting-started/security-events.png
+          :title: Security events 
+          :alt: Security events 
      - .. thumbnail:: ../images/getting-started/malware-detection.png
           :title: Malware detection
           :alt: Malware detection 
@@ -48,25 +48,25 @@ Screenshots
           :alt: Log data analysis
      - .. thumbnail:: ../images/getting-started/file-integrity-monitoring.png
           :title: File integrity monitoring
-          :alt: File Integrity Monitoring 
+          :alt: File integrity monitoring 
    * - .. thumbnail:: ../images/getting-started/vulnerability-detection.png
-          :title: Vulnerability detection
-          :alt: Vulnerability detection
+          :title: Vulnerability detection  
+          :alt: Vulnerability detection  
      - .. thumbnail:: ../images/getting-started/security-configuration-assessment.png
-          :title: Security Configuration Assessment 
-          :alt: Security Configuration Assessment 
+          :title: Security configuration assessment   
+          :alt: Security configuration assessment   
    * - .. thumbnail:: ../images/getting-started/incident-response.png
-          :title: Incident response
-          :alt: Incident response
+          :title: Incident response 
+          :alt: Incident response 
      - .. thumbnail:: ../images/getting-started/regulatory-compliance.png
-          :title: Regulatory compliance
-          :alt: Regulatory compliance
+          :title: Regulatory compliance 
+          :alt: Regulatory compliance 
    * - .. thumbnail:: ../images/getting-started/cloud-security.png
-          :title: Cloud security
-          :alt: Cloud security
+          :title: Cloud security  
+          :alt: Cloud security  
      - .. thumbnail:: ../images/getting-started/containers-security.png
-          :title: Container security
-          :alt: Container security
+          :title: Containers security 
+          :alt: Containers security 
 
 .. toctree::
    :hidden:
