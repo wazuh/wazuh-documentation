@@ -439,7 +439,7 @@ Reference                                                         Description
 `#13185 <https://github.com/wazuh/wazuh/pull/13185>`_             Fixed AWS integration database maintenance error management.
 `#13674 <https://github.com/wazuh/wazuh/pull/13674>`_             The default delay at GitHub integration has been increased to 30 seconds. 
 `#14706 <https://github.com/wazuh/wazuh/pull/14706>`_             Logcollector has been fixed to allow locations containing colons (:). 
-`#13835 <https://github.com/wazuh/wazuh/pull/13835>`_             Fixed system architecture reporting in Logcollector on Apple Silicon devices.
+`#13835 <https://github.com/wazuh/wazuh/pull/13835>`_             Fixed system architecture reporting in Syscollector on Apple Silicon devices.
 `#14190 <https://github.com/wazuh/wazuh/pull/14190>`_             The C++ standard library and the GCC runtime library are now included with Wazuh.
 `#13877 <https://github.com/wazuh/wazuh/pull/13877>`_             Fixed missing inventory cleaning message in Syscollector.
 `#15322 <https://github.com/wazuh/wazuh/pull/15322>`_             Fixed WPK upgrade issue on Windows agents due to process locking. 
