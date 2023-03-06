@@ -1428,6 +1428,7 @@ newUrls['4.2'] = [
   '/user-manual/capabilities/vulnerability-detection/cpe-helper.html',
   '/user-manual/capabilities/vulnerability-detection/how-it-works.html',
   '/user-manual/capabilities/file-integrity/fim-fields-rule-mapping.html',
+  '/user-manual/capabilities/file-integrity/compatibility-matrix.html',
   '/user-manual/reference/ossec-conf/rule-test.html',
   '/user-manual/reference/ossec-conf/client-buffer.html',
   '/user-manual/reference/ossec-conf/email-alerts.html',
