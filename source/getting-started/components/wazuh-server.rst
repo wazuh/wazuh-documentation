@@ -21,7 +21,7 @@ The diagram below represents the server architecture and components:
 
 .. thumbnail:: /images/getting-started/wazuh-server.png
    :title: Wazuh server
-   :alt: Wazuh Server
+   :alt: Wazuh server
    :align: center
    :width: 80%
 

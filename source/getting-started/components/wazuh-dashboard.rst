@@ -18,35 +18,40 @@ As an example, Wazuh provides out-of-the-box dashboards for regulatory complianc
 .. hlist::
    :columns: 2
 
-   -  .. thumbnail::  /images/getting-started/module_info_management.png 
+   -  .. thumbnail::  /images/getting-started/security-information-management.png 
          :align: center
          :width: 100% 
-         :title: Modules information management
+         :title: Security information management
+         :alt: Security information management
 
-   -  .. thumbnail::  /images/getting-started/module_policy.png 
+   -  .. thumbnail::  /images/getting-started/policy-monitoring.png 
          :align: center
          :width: 100% 
-         :title: Modules policy
+         :title: Auditing and policy monitoring
+         :alt: Auditing and policy monitoring
 
-   -  .. thumbnail::  /images/getting-started/module_threat_detection.png 
+   -  .. thumbnail::  /images/getting-started/thread-detection-and-response.png 
          :align: center
          :width: 100% 
-         :title: Module threat detection
+         :title: Thread detection and response
+         :alt: Thread detection and response
 
-   -  .. thumbnail::  /images/getting-started/module_compliance.png 
+   -  .. thumbnail::  /images/getting-started/dashboard-regulatory-compliance.png 
          :align: center
          :width: 100% 
-         :title: Module compliance
+         :title: Regulatory compliance
+         :alt: Regulatory compliance
 
 Agents monitoring and configuration
 -----------------------------------
 
 The Wazuh dashboard allows users to manage agents configuration and to monitor their status. As an example, for each monitored endpoint, users can define what agent modules will be enabled, what log files will be read, what files will be monitored for integrity changes, or what configuration checks will be performed.
 
-.. thumbnail::  /images/getting-started/dashboard_screenshot_agent.png 
+.. thumbnail::  /images/getting-started/agents-monitoring.png 
    :align: center
    :width: 80% 
-   :title: Agent dashboard overview
+   :title: Agents monitoring
+   :alt: Agents monitoring
 
 Platform management
 -------------------
@@ -56,15 +61,17 @@ The Wazuh dashboard provides a user interface dedicated to manage your Wazuh dep
 .. hlist::
    :columns: 2
 
-   -  .. thumbnail::  /images/getting-started/dashboard_administration.png 
+   -  .. thumbnail::  /images/getting-started/platform-management.png 
          :align: center
          :width: 100% 
-         :title: Administration
+         :title: Platform management
+         :alt: Platform management
 
-   -  .. thumbnail::  /images/getting-started/dashboard_status.png 
+   -  .. thumbnail::  /images/getting-started/status-and-reports.png 
          :align: center
          :width: 100% 
          :title: Status and reports
+         :alt: Status and reports
 
 Developer tools
 ---------------

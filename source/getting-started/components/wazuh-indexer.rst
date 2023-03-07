@@ -30,8 +30,8 @@ Wazuh uses four different indices to store different event types:
 +---------------------------------+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+ 
 
 .. thumbnail:: /images/getting-started/wazuh-indexer.png
-   :title: Wazuh Indexer
-   :alt: Wazuh Indexer
+   :title: Wazuh indexer
+   :alt: Wazuh indexer
    :align: center
    :width: 80%
 
