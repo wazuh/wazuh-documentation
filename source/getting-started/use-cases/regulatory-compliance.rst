@@ -95,16 +95,19 @@ Example alert for rule ``Apache: Attempt to access forbidden directory index``:
 
 Example of regulatory compliance dashboards:
 
-.. thumbnail:: /images/getting-started/use-cases/wazuh-use-cases-regulatory3.png
+.. thumbnail:: /images/getting-started/use-cases/regulatory-compliance.png
    :title: PCI DSS compliance
+   :alt: PCI DSS compliance
    :align: center
 
-.. thumbnail:: /images/getting-started/use-cases/wazuh-use-cases-regulatory2.png
+.. thumbnail:: /images/getting-started/use-cases/regulatory-compliance-dashboard.png
    :title: HIPAA compliance
+   :alt: HIPAA compliance
    :align: center
                     
-.. thumbnail:: /images/getting-started/use-cases/wazuh-use-cases-regulatory1.png
+.. thumbnail:: /images/getting-started/use-cases/compliance-requirements.png
     :title: NIST 800-53 compliance
+    :alt: NIST 800-53 compliance
     :align: center
 
 You can find more information on how Wazuh helps meet compliance requirements at:
