@@ -8,25 +8,23 @@
 Custom rules and decoders
 ===========================
 
-It is possible to modify the default rules and decoders from the Wazuh Ruleset and also to add new ones in order to increase Wazuh's detection capabilities.
+It's possible to modify the default rules and decoders from the Wazuh ruleset and also to add new ones in order to increase Wazuh detection capabilities.
 
 Adding new decoders and rules
 -------------------------------
 
-.. note::
-   
-   The ``<id>`` of custom rules will be in the range from 100000 to 120000.
+.. note:: Use ID numbers between 100000 and 120000 for custom rules. 
 
-   Use ``local_decoder.xml`` and ``local_rules.xml`` to implement small changes. For larger scale changes, we recommend creating new decoder and rule files.
+.. note:: To make minor adjustments, use the ``local_decoder.xml`` and ``local_rules.xml`` files. We recommend creating new decoder and rule files for changes on a larger scale.
 
 
-We are going to describe these procedures using an easy example. Here is a log from a program called ``example``:
+Check out this example of how to create new decoders and rules. Here's a log from a program called ``example``:
 
    .. code-block:: 
 
       Dec 25 20:45:02 MyHost example[12345]: User 'admin' logged from '192.168.1.100'
 
-#. To decode this information, add the new decoder to ``/var/ossec/etc/decoders/local_decoder.xml``:
+#. Add a new decoder to ``/var/ossec/etc/decoders/local_decoder.xml`` to decode the log information:
 
    .. code-block:: xml
 
@@ -80,6 +78,9 @@ We are going to describe these procedures using an easy example. Here is a log f
               firedtimes: '1'
               mail: 'False'
 
+
+   For testing purposes, ``wazuh-logtest`` takes recent changes in the decoders and rules into account. However, to load them into the event processing pipeline, it's necessary to restart the Wazuh manager.
+
 #. Restart the Wazuh manager: 
 
       .. include:: /_templates/installations/manager/restart_wazuh_manager.rst
@@ -87,12 +88,10 @@ We are going to describe these procedures using an easy example. Here is a log f
 Changing an existing rule
 ---------------------------
 
-You can modify the standard rules.
-
 .. warning::
     Changes to any rule file inside the ``/var/ossec/ruleset/rules`` folder will be lost in the update process. Use the following procedure to preserve your changes.
 
-If we want to change the level value of the SSH rule ``5710`` from 5 to 10, we will do the following:
+You can modify the standard rules. Here's an example of to change the level value of the SSH rule ``5710`` from 5 to 10.
 
 #. Open the rule file ``/var/ossec/ruleset/rules/0095-sshd_rules.xml``.
 
@@ -113,6 +112,7 @@ If we want to change the level value of the SSH rule ``5710`` from 5 to 10, we w
 #. Paste the code into ``/var/ossec/etc/rules/local_rules.xml``, modify the level value, and add ``overwrite="yes"`` to indicate that this rule is overwriting an already defined rule:
 
    .. code-block:: xml
+      :emphasize-lines: 1
 
       <rule id="5710" level="10" overwrite="yes">
         <if_sid>5700</if_sid>
@@ -134,20 +134,19 @@ If we want to change the level value of the SSH rule ``5710`` from 5 to 10, we w
 Changing an existing decoder
 -----------------------------
 
-You can also modify the standard decoders.
-
 .. warning::
     Changes in any decoder file in the ``/var/ossec/ruleset/decoders`` folder will be lost in the update process. Use the following procedure to preserve your changes.
 
-Unfortunately, there is no facility for overwriting decoders in the way described in the rules above. However, we can perform changes in any decoder file as follows:
+Unfortunately, it's not possible to overwrite decoders in the manner described in the rules above. To modify the standard decoders, follow the process described below. 
 
-If we want to change something in the decoder file ``0310-ssh_decoders.xml``, we will do the following:
+If you want to customize the decoder file ``0310-ssh_decoders.xml``, do the following:
 
 #. Copy the decoder file ``/var/ossec/ruleset/decoders/0310-ssh_decoders.xml`` from the default folder to the user folder ``/var/ossec/etc/decoders`` in order to keep the changes.
 
-#. Exclude the original decoder file ``ruleset/decoders/0310-ssh_decoders.xml`` from the OSSEC loading list. To do this, use the tag ``<decoder_exclude>`` in the ``ossec.conf`` file. Thus, the specified decoder will not be loaded from the default decoder folder, and the decoder file saved in the user folder will be loaded instead.
+#. Exclude the original decoder file ``ruleset/decoders/0310-ssh_decoders.xml`` from the loading list. To do this, use the tag ``<decoder_exclude>`` in the ``/var/ossec/etc/ossec.conf`` file. Thus, the specified decoder will not be loaded from the default decoder folder, and the decoder file saved in the user folder will be loaded instead.
  
    .. code-block:: xml
+      :emphasize-lines: 11 
 
       <ruleset>
         <!-- Default ruleset -->
@@ -170,4 +169,4 @@ If we want to change something in the decoder file ``0310-ssh_decoders.xml``, we
    .. include:: /_templates/installations/manager/restart_wazuh_manager.rst
 
    .. warning::
-      Note that at this point, if updates to the public Wazuh Ruleset include changes to ``0310-ssh_decoders.xml``, they will not apply to you since you are no longer loading that decoder file from the standard location that gets updates.  At some point, you may have to manually migrate your customized material from 0310-ssh_decoders.xml to a newer copy of that file.  Consider internally documenting your changes in 0310-ssh_decoders.xml so that they are easy to find if they have to be migrated later.
+      Note that at this point, if updates to the public Wazuh ruleset include changes to ``0310-ssh_decoders.xml``, they will not apply to you since you are no longer loading that decoder file from the standard location that gets updates.  At some point, you may have to manually migrate your customized material from ``0310-ssh_decoders.xml`` to a newer copy of that file.  Consider internally documenting your changes in ``0310-ssh_decoders.xml`` so that they are easy to find if they have to be migrated later.
