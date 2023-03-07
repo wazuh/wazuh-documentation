@@ -138,9 +138,9 @@ Configure the proxy and the certificates
 
       # unlink /etc/nginx/sites-enabled/default
       # cd /etc/nginx/conf.d
-      # nano wazuh.conf
+      # touch wazuh.conf
 
-#. Create the following configuration and save it in ``wazuh.conf``:
+#. Edit ``wazuh.conf`` and add the following configuration.
 
    .. code-block:: console
 
