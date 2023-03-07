@@ -78,22 +78,25 @@ Developer tools
 
 The Wazuh dashboard includes a Ruleset Test tool that can process log messages to check how it is decoded and if it matches a threat detection rule or not. This feature is especially useful when custom decoders and rules have been created and the user wants to test them.
 
-.. thumbnail::  /images/getting-started/dashboard_ruleset_test.png 
+.. thumbnail::  /images/getting-started/developer-tools.png 
    :align: center
    :width: 80% 
-   :title: Ruleset test
+   :title: Developer tools
+   :alt: Developer tools
 
 The Wazuh dashboard also includes an API Console for users to interact with the Wazuh API. This can be used to manage the Wazuh deployment (e.g., managing server or agent configurations, monitor status and log messages, adding or removing agents, etc.).
 
 .. hlist::
     :columns: 2
 
-    -  .. thumbnail::  /images/getting-started/dashboard_API_console1.png 
+    -  .. thumbnail::  /images/getting-started/api-console.png 
           :align: center
           :width: 100% 
-          :title: API Console
+          :title: API console
+          :alt: API console
 
-    -  .. thumbnail::  /images/getting-started/dashboard_API_console2.png 
+    -  .. thumbnail::  /images/getting-started/api-console-configurations.png 
           :align: center
           :width: 100% 
-          :title: API Console
+          :title: API console configurations
+          :alt: API console configurations
