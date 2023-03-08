@@ -28,6 +28,7 @@ The integrations are configured on the Wazuh manager ``ossec.conf`` file. You ca
     <level> </level>
     <group> </group>
     <event_location> </event_location>
+    <options></options>
   </integration>
 
 
@@ -58,6 +59,9 @@ Slack
 This integration uses Slack Incoming Webhooks and allows posting Wazuh alerts into a Slack channel.
 
 To set up this integration, follow these steps.
+
+.. note::      
+  For a list of all possibles customizable fields of the options tag, you can visit the API reference `Slack API reference <https://api.slack.com/>`_
 
 #. Enable Incoming Webhooks and create one for your Slack channel. Follow the Slack guide on `Incoming Webhooks <https://api.slack.com/messaging/webhooks>`__ for this.
 
@@ -91,6 +95,9 @@ To set up this integration, do the following.
 
 #. Get your own *Events API v2* integration key by creating a `Pagerduty new service <https://support.pagerduty.com/docs/services-and-integrations#create-a-service>`__.
 
+.. note::      
+  For a list of all possibles customizable fields of the options tag, you can visit the API reference `PagerDuty API reference <https://developer.pagerduty.com/>`_
+
 #. Edit ``/var/ossec/etc/ossec.conf`` in the Wazuh server and include a configuration block such as the following. Replace ``API_KEY`` with your Pagerduty integration key. The rule level filter is optional and you can remove it or set another level value for the integration.
 
    .. code-block:: xml
@@ -121,6 +128,9 @@ This integration allows the inspection of malicious files using the VirusTotal d
 To set up this integration, follow these steps.
 
 #. Get your API key from the `Virustotal API key <https://www.virustotal.com/gui/my-apikey>`__ page.
+
+.. note::      
+  For a list of all possibles customizable fields of the options tag, you can visit the API reference `VirusTotal API reference <https://developers.virustotal.com/>`_
 
 #. Edit ``/var/ossec/etc/ossec.conf`` in the Wazuh server and include a configuration block such as the following. Replace ``API_KEY`` with your Virustotal API key.
 
