@@ -3,19 +3,19 @@
 .. meta::
    :description: Learn how to disable a user account on Linux using active response in this use case.
 
-Use case: Disabling a Linux user account with active response
-=============================================================
+Disabling a Linux user account with active response
+===================================================
 
 Without knowledge of the password for an account, an adversary might opt to systematically guess the password using a repetitive or iterative mechanism. In this use case, we configure the ``disable-account`` active response to disable a Linux/Unix account subject to brute-force attacks. Wazuh uses the ``disable-account`` active response on Linux/Unix endpoints to disable the account for the user in the ``dstuser`` field of a Wazuh alert.
 
 Infrastructure
 --------------
 
-============ ===========
-Endpoint     Description
-============ ===========
-Ubuntu 22.04 The endpoint to monitor for brute-force attacks.
-============ ===========
+================ ===========
+Endpoint         Description
+================ ===========
+**Ubuntu 22.04** The endpoint to monitor for brute-force attacks.
+================ ===========
 
 Wazuh server
 ------------
@@ -34,7 +34,7 @@ Wazuh server
         </rule>
       </group>
 
-This rule checks for 3 failed authentication logins on the same user account within 2 minutes.
+   This rule checks for 3 failed authentication logins on the same user account within 2 minutes.
 
 #. Open the Wazuh server ``/var/ossec/etc/ossec.conf`` file and verify that a ``<command>`` block called ``disable-account`` with the following configuration is present within the ``<ossec_config>`` block:
 

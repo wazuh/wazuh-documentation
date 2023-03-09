@@ -3,19 +3,19 @@
 .. meta::
    :description: Learn how to restart the Wazuh agent to apply configuration changes using active response in this use case.
 
-Use case: Restarting the Wazuh agent with active response
-=========================================================
+Restarting the Wazuh agent with active response
+===============================================
 
 You can use the ``restart-wazuh`` active response script to restart the Wazuh agent on a monitored endpoint. In this use case, we configure it to restart the Wazuh agent whenever the ``/var/ossec/etc/ossec.conf`` configuration file changes.
 
 Infrastructure
 --------------
 
-============ ===========
-Endpoint     Description
-============ ===========
-Ubuntu 22.04 We save changes to the Wazuh agent configuration file on this endpoint to trigger an active response.
-============ ===========
+================ ===========
+Endpoint         Description
+================ ===========
+**Ubuntu 22.04** We save changes to the Wazuh agent configuration file on this endpoint to trigger an active response.
+================ ===========
 
 Wazuh server
 ------------
@@ -48,7 +48,7 @@ Wazuh server
       </ossec_config>
 
    -  ``<command>``: Specifies the command to configure. This is the command name ``restart-wazuh`` defined in the previous step.
-   -  ``<location>``: Specifies where the command executes. Using the local value here means that the command executes on the monitored endpoint where the trigger event occurs.
+   -  ``<location>``: Specifies where the command executes. Using the ``local`` value here means that the command executes on the monitored endpoint where the trigger event occurs.
    -  ``<rules_id>``: The active response module executes the command if rule ID ``100009`` fires.
 
 #. Add the rules below to the Wazuh server ``/var/ossec/etc/rules/local_rules.xml`` configuration file:

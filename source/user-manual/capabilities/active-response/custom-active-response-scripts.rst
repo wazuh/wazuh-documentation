@@ -108,6 +108,8 @@ Wazuh allows you to program stateless custom active responses in any programming
 #. Confirm that the ``command`` field has the ``add`` action.
 #. Extract the necessary information for its execution.
 
+.. _stateful_active_response:
+
 Stateful active response
 ^^^^^^^^^^^^^^^^^^^^^^^^
 
@@ -116,7 +118,7 @@ A stateful active response reverts or stops its action after a specified period 
 #. Read ``STDIN`` to get the JSON message.
 #. Parse the JSON message.
 #. Analyze the ``command`` field to check if it has the ``add`` or ``delete`` actions. If it has the ``add`` action, the active response executes the main action. Conversely, if it has the ``delete`` action, then the active response stops or reverts the main action.
-#. Extract the necessary information for its control and execution. As an example, the ``firewall-drop`` script uses the value in the srcip alert field to block or unblock an IP address.
+#. Extract the necessary information for its control and execution. As an example, the ``firewall-drop`` script uses the value in the ``srcip`` alert field to block or unblock an IP address.
 #. Build a control message in JSON format with keys extracted from alert fields. The control message contains relevant information to identify the specific conditions and assess the active response. For example, it might contain a ``srcip`` key with the IP address to block. The script extracts this value from the alert.
 
    The control message is as follows:
@@ -559,7 +561,7 @@ In this method, the Wazuh active response module executes the ``launcher.cmd`` s
 #. Create a ``launcher.cmd`` file in ``C:\Program Files (x86)\ossec-agent\active-response\bin\`` with the following content. This allows you to run any Windows script through the ``launcher.cmd`` script when triggering an active response.
 
    .. code-block:: batch
-      :emphasize-lines: 24, 48
+      :emphasize-lines: 47, 71
 
       @echo off
 
@@ -573,6 +575,29 @@ In this method, the Wazuh active response module executes the ``launcher.cmd`` s
           set aux=!input:*"extra_args":[=!
           for /f "tokens=1 delims=]" %%a in ("!aux!") do (
               set aux=%%a
+          )
+          set script=!aux:~1,-1!
+
+          if exist "!ARPATH!!script!" (
+              set aux=!input:*"command":=!
+              for /f "tokens=1 delims=," %%a in ("!aux!") do (
+                  set aux=%%a
+              )
+              set command=!aux:~1,-1!
+
+              echo !input! >alert.txt
+
+              start /b cmd /c "%~f0" child !script! !command!
+
+              if "!command!" equ "add" (
+                  call :wait keys.txt
+                  echo(!output!
+                  del keys.txt
+
+                  call :read
+                  echo !input! >result.txt
+              )
+          )
           exit /b
       )
 

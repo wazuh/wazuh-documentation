@@ -3,20 +3,20 @@
 .. meta::
    :description: Learn how to use active response to block an SSH brute-force attack in this use case.
 
-Use case: Blocking SSH brute-force attack with active response
-==============================================================
+Blocking SSH brute-force attack with active response
+====================================================
 
 Wazuh uses the active response module to run scripts or executables on a monitored endpoint, taking action on certain triggers. In this use case, we simulate an SSH brute-force attack against a RHEL endpoint and configure the active response module to block the IP address of the attacker endpoint. The goal is to prevent SSH brute force attacks. The active response module executes a script to block the IP address of the attacker when rule ``5763 - SSHD brute force trying to get access to the system`` triggers.
 
 Infrastructure
 --------------
 
-============ ==============
-Endpoint     Description
-============ ==============
-Ubuntu 22.04 This is the attacker endpoint that performs a brute-force attack. You must install an SSH client on this endpoint.
-RHEL 9.0     We perform an SSH brute-force attack against this victim endpoint. You must install an SSH server on this endpoint.
-============ ==============
+================ ==============
+Endpoint         Description
+================ ==============
+**Ubuntu 22.04** This is the attacker endpoint that performs a brute-force attack. You must install an SSH client on this endpoint.
+**RHEL 9.0**     We perform an SSH brute-force attack against this victim endpoint. You must install an SSH server on this endpoint.
+================ ==============
 
 Wazuh server
 ------------

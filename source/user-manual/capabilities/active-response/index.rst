@@ -47,13 +47,5 @@ Stateless active responses are one-time actions without an event definition to r
    how-to-configure
    default-active-response-scripts
    custom-active-response-scripts
-   blocking-ssh-brute-force
-   restarting-wazuh-agent
-   disabling-user-account
-   additional-information
-..
-   how-it-works
-   remediation-configuration
-   custom-active-response
    ar-use-cases/index
-   remediation-faq
+   additional-information

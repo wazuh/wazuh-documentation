@@ -13,7 +13,7 @@ Configuring the Wazuh server
 
 #. Check the configuration of the ``<command>`` block in the Wazuh server ``/var/ossec/etc/ossec.conf`` configuration file. Add one if it doesn’t exist already.
 
-   The ``<command>`` block sets the script to run in response to a trigger. When using :doc:`out-of-the-box active response <>` scripts, the ``<command>`` blocks for them are present in the Wazuh server ``/var/ossec/etc/ossec.conf`` by default, and you don’t need to add them. But when using :doc:`custom active response <>` scripts, you need to add the required ``<command>`` blocks for them in between the ``<ossec_config>`` tags of the Wazuh server configuration file. For example:
+   The ``<command>`` block sets the script to run in response to a trigger. When using :doc:`out-of-the-box active response <default-active-response-scripts>` scripts, the ``<command>`` blocks for them are present in the Wazuh server ``/var/ossec/etc/ossec.conf`` by default, and you don’t need to add them. But when using :doc:`custom active response <custom-active-response-scripts>` scripts, you need to add the required ``<command>`` blocks for them in between the ``<ossec_config>`` tags of the Wazuh server configuration file. For example:
 
    .. code-block:: xml
 
@@ -27,9 +27,9 @@ Configuring the Wazuh server
 
    -  ``<name>``: Sets a name for the command. In this case, ``host-deny``.
    -  ``<executable>``: Specifies the active response script or executable that must run upon a trigger. You don't need to specify the file name extension unless you have multiple scripts sharing the same name. In this case, it’s the ``host-deny`` executable.
-   -  ``<timeout_allowed>``: Allows a timeout after a period of time. Setting this value to ``yes`` reverts the action after a period of time. Check :doc:`stateful active response <>` below for more details.
+   -  ``<timeout_allowed>``: Allows a timeout after a period of time. Setting this value to ``yes`` reverts the action after a period of time. Check :ref:`stateful active response <stateful_active_response>` below for more details.
 
-   Refer to the :doc:`command section <>` for more information and options used to create a command.
+   Refer to the :doc:`command section </user-manual/reference/ossec-conf/commands>` for more information and options used to create a command.
 
 #. Add an ``<active-response>`` block within the ``<ossec_config>`` tag in the same Wazuh server ``/var/ossec/etc/ossec.conf`` file. The ``<active-response>`` block defines when and where a command executes. For example, when an alert meets response criteria, such as a specific rule ID, alert level, or rule group. This configuration further defines if the command action specified in the previous step executes on the Wazuh agent, Wazuh server, or everywhere. For example:
 
@@ -83,7 +83,7 @@ Configuring the monitored endpoint
 Using out-of-the-box active response scripts
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-No configuration is required. Check out the :ref:`Default active response scripts <>` section for more information on out-of-the-box active response scripts.
+No configuration is required. Check out the :doc:`Default active response scripts <default-active-response-scripts>` section for more information on out-of-the-box active response scripts.
 
 Using custom active response scripts
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
@@ -102,7 +102,9 @@ Linux/Unix
 
 #. Restart the Wazuh agent to apply the changes:
 
-   $ sudo systemctl restart wazuh-agent
+   .. code-block:: console
+
+      $ sudo systemctl restart wazuh-agent
 
 macOS
 ~~~~~
