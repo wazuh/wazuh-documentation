@@ -10,7 +10,7 @@ Monitoring Docker server
 
 All the features available in an agent can be useful to monitor Docker servers (the system that lets you create and run Docker containers):
 
-    -   :ref:`automatic_remediation`
+    -   :doc:`/user-manual/capabilities/active-response/index`
     -   :ref:`manual_agentless`
     -   :ref:`manual_anomaly_detection`
     -   :ref:`auditing-whodata`
