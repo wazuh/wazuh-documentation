@@ -1014,7 +1014,7 @@ Allows disabling the Audit health check during the Whodata engine starting. This
 
 **queue_size**
 
-Sets the maximum capacity of the queue that stores the audit dispatcher events. **Linux systems with Audit**.
+Sets the maximum capacity of the queue that stores the audit dispatcher events. This option applies to **Linux systems with Audit**.
 
 +--------------------+---------------------------------+
 | **Default value**  | 16384                           |
@@ -1022,7 +1022,7 @@ Sets the maximum capacity of the queue that stores the audit dispatcher events. 
 | **Allowed values** | Any number from 10 to 1048576   |
 +--------------------+---------------------------------+
 
-.. warning:: If the queue becomes full, some audit events may be lost. However, the next scheduled scan will generate the missing alerts, without the audit information.
+.. warning:: If the queue fills up, some audit events may be lost. However, the next scheduled scan will generate the missing alerts without the audit information.
 
 For more information, please read :ref:`auditing who-data <who-data-monitoring>`
 
