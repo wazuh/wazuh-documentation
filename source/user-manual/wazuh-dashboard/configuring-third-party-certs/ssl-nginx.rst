@@ -221,19 +221,4 @@ Configure the proxy and the certificates
          :align: center
          :width: 80%
 
-#. You can further prevent access via public IP address by removing the first server block in the NGINX ``/etc/nginx/conf.d/wazuh.conf``:
-
-   .. code-block:: console
-
-      server {
-         listen 80 default_server;
-
-         server_name <YOUR_DOMAIN_NAME>;
-
-         location / {
-            proxy_pass https://<WAZUH_DASHBOARD_IP>:443;
-            proxy_set_header Host $host;
-         }
-      }
-
 The NGINX server has been configured and the Let’s Encrypt certificate installation is active on the Wazuh dashboard. You can proceed to access it by using the configured domain name.
