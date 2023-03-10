@@ -41,7 +41,7 @@ In cases where you need to increase the active response blocking time for repeat
    <ossec_config>
      <active-response>
        <repeated_offenders>10,20,30</repeated_offenders>
-     </active-response>.
+     </active-response>
    </ossec_config>
 
 .. note::
