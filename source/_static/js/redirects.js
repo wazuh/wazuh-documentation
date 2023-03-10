@@ -1200,6 +1200,11 @@ redirections.push(
     '4.2': '/user-manual/capabilities/active-response/remediation-configuration.html',
     '4.3': '/user-manual/capabilities/active-response/how-to-configure.html',
   },
+  {
+    'target': ['4.2=>4.3'],
+    '4.2': '/user-manual/capabilities/active-response/remediation-faq.html',
+    '4.3': '/user-manual/capabilities/active-response/index.html',
+  },
   );
 
 /* *** RELEASE 4.2 ****/
