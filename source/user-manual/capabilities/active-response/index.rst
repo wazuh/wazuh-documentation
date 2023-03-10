@@ -27,8 +27,8 @@ The image below shows the active response workflow.
 
 .. thumbnail:: /images/manual/active-response/active-response-workflow.png
    :title: Active response workflow
-   :align: left
-   :width: 80%
+   :align: center
+   :width: 100%
 
 
 .. rubric:: Types of active response
