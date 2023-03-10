@@ -65,7 +65,7 @@ Configuring the Wazuh server
               </active-response> 
             <ossec_config>
 
-      -  ``all``: Every Wazuh agent and server in the environment must run the script. Use this option with caution. Incorrect configuration can cause problems in your environment.
+      -  ``all``: Every Wazuh agent in the environment must run the script. Use this option with caution. Incorrect configuration can cause problems in your environment.
 
    -  ``<timeout>``: Specifies how long the active response action is effective, in seconds.
 
