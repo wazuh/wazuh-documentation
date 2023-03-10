@@ -20,7 +20,7 @@ This requirement aims to ensure that you test your systems and networks regularl
 Use cases
 ---------
 
--  PCI DSS 11.5 requires that you detect and respond to network intrusions and unexpected file changes. You can configure scripts to run when specific actions occur to respond to these intrusions. Wazuh comes with preconfigured active response scripts. Refer to the :ref:`Default Active response scripts section <active_response_scripts>` to access these scripts.
+-  PCI DSS 11.5 requires that you detect and respond to network intrusions and unexpected file changes. You can configure scripts to run when specific actions occur to respond to these intrusions. Wazuh comes with preconfigured active response scripts. Refer to the :doc:`Default Active response scripts section </user-manual/capabilities/active-response/default-active-response-scripts>` to access these scripts.
 
    Using the steps below, we configure the active response module to execute an IP block when an attempt to log in with a non-existent user via SSH occurs.
 
