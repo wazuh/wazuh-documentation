@@ -30,8 +30,9 @@ The image below shows the active response workflow.
    :align: left
    :width: 80%
 
-Types of active response
-------------------------
+
+.. rubric:: Types of active response
+    :class: h2
 
 An active response can either be:
 
@@ -40,12 +41,14 @@ An active response can either be:
 
 Stateless active responses are one-time actions without an event definition to revert or stop them. Stateful responses revert or stop their actions after a period of time.
 
-.. toctree::
-   :maxdepth: 2
-   :hidden:
 
-   how-to-configure
-   default-active-response-scripts
-   custom-active-response-scripts
-   ar-use-cases/index
-   additional-information
+.. topic:: Contents
+
+   .. toctree::
+      :maxdepth: 2
+
+      how-to-configure
+      default-active-response-scripts
+      custom-active-response-scripts
+      ar-use-cases/index
+      additional-information
