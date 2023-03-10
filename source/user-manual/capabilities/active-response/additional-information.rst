@@ -9,7 +9,7 @@ Additional information
 White list
 ----------
 
-You can set a list of IP addresses that should never be blocked by the active response using the ``<white_list>`` field.  It allows setting one IP address, netblock, or  hostname. Although you must specify only one value for each ``<white_list>`` tag, you can use multiple ``<white_list>`` tags to include multiple values.
+You can set a list of IP addresses that should never be blocked by the active response using the :ref:`white_list <white_list>` field.  It allows setting one IP address, netblock, or  hostname. Although you must specify only one value for each ``<white_list>`` tag, you can use multiple ``<white_list>`` tags to include multiple values.
 
 To configure a white list for the endpoint(s), add the related IP address, netblock, or hostname to the ``<white_list>`` field present in the global section of the Wazuh server ``/var/ossec/etc/ossec.conf`` configuration file:
 
@@ -34,7 +34,7 @@ Restart the Wazuh manager service to apply the changes:
 Increasing blocking time for repeated offenders
 -----------------------------------------------
 
-In cases where you need to increase the active response blocking time for repeated offenders. Add the following configuration in the ``/var/ossec/etc/ossec.conf`` file of the Wazuh agent:
+In cases where you need to increase the active response blocking time for :ref:`repeated offenders <repeated_offenders>`, add the following configuration in the ``/var/ossec/etc/ossec.conf`` file of the Wazuh agent:
 
 .. code-block:: xml
 
