@@ -100,11 +100,6 @@ Linux/Unix
       $ sudo chmod 750 /var/ossec/active-response/bin/<CUSTOM_SCRIPT>
       $ sudo chown root:wazuh /var/ossec/active-response/bin/<CUSTOM_SCRIPT>
 
-#. Restart the Wazuh agent to apply the changes:
-
-   .. code-block:: console
-
-      $ sudo systemctl restart wazuh-agent
 
 macOS
 ~~~~~
@@ -118,22 +113,11 @@ macOS
       $ sudo chmod 750 /Library/Ossec/active-response/bin/<CUSTOM_SCRIPT>
       $ sudo chown root:wazuh /Library/Ossec/active-response/bin/<CUSTOM_SCRIPT>
 
-#. Restart the Wazuh agent to apply the changes:
-
-   .. code-block:: console
-
-      $ sudo /Library/Ossec/bin/wazuh-control restart
 
 Windows
 ~~~~~~~
 
 #. Add your custom active response script or executable to the ``C:\Program Files\ossec-agent\active-response\bin`` directory on Windows endpoints.
-
-#. Restart the Wazuh agent using PowerShell with administrator privileges to apply the changes:
-
-   .. code-block:: powershell
-
-      > Restart-Service -Name wazuh
 
 .. note::
 
