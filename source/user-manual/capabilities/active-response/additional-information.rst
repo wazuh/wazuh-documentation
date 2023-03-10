@@ -46,7 +46,7 @@ In cases where you need to increase the active response blocking time for :ref:`
 
 .. note::
 
-   The ``<repeated offenders>`` timer is in minutes while the active response ``<timeout>`` is in seconds. Also, it can contain a maximum of 5 entries.
+   This option is currently not available for Wazuh agents running on Windows operating endpoints. The ``<repeated offenders>`` timer is in minutes while the active response ``<timeout>`` is in seconds. Also, it can contain a maximum of 5 entries.
 
 Restart the Wazuh agent to apply changes:
 
