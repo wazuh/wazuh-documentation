@@ -109,5 +109,7 @@ Visualize the alerts
 You can visualize the alert data on the Wazuh dashboard.
 
 .. thumbnail:: /images/manual/active-response/ar-alert-fired2.png
+   :title: Active response alert data
+   :alt: Active response alert data
    :align: center
    :width: 80%
