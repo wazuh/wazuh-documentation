@@ -538,7 +538,7 @@ Reference                                                                       
 `#5144 <https://github.com/wazuh/wazuh-kibana-app/pull/5144>`_                                                                                                                                   Fixed Inventory module for Solaris agents.
 `#5167 <https://github.com/wazuh/wazuh-kibana-app/pull/5167>`_                                                                                                                                   Fixed the module information button in Office365 and Github Panel tab to open the nav drawer.
 `#5200 <https://github.com/wazuh/wazuh-kibana-app/pull/5200>`_                                                                                                                                   Fixed a UI crash due to ``external_references`` field could be missing in some vulnerability data.
-`#5273 <https://github.com/wazuh/wazuh-kibana-app/pull/5273>`_                                                                                                                                   Fixed Wazuh main menu not displayed when navigation menu is locked.
+`#5273 <https://github.com/wazuh/wazuh-kibana-app/pull/5273>`_                                                                                                                                   Fixed the Wazuh main menu is not displayed when the navigation menu is locked.
 =============================================================================================================================================================================================    =============
 
 Wazuh Kibana plugin for Kibana 7.10.2
