@@ -149,6 +149,7 @@ Specifies how long in seconds before the reverse command is executed.  When ``re
 | **Allowed values** | A positive number (seconds) |
 +--------------------+-----------------------------+
 
+.. _repeated_offenders:
 
 repeated_offenders
 ^^^^^^^^^^^^^^^^^^

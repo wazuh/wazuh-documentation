@@ -430,6 +430,13 @@ newUrls['4.3'] = [
   '/user-manual/capabilities/malware-detection/clam-av-logs-collection.html',
   '/user-manual/capabilities/malware-detection/win-defender-logs-collection.html',
   '/user-manual/capabilities/malware-detection/custom-rules-malware-ioc.html',
+  '/user-manual/capabilities/active-response/ar-use-cases/blocking-ssh-brute-force.html',
+  '/user-manual/capabilities/active-response/ar-use-cases/disabling-user-account.html',
+  '/user-manual/capabilities/active-response/ar-use-cases/restarting-wazuh-agent.html',
+  '/user-manual/capabilities/active-response/additional-information.html',
+  '/user-manual/capabilities/active-response/custom-active-response-scripts.html',
+  '/user-manual/capabilities/active-response/default-active-response-scripts.html',
+  '/user-manual/capabilities/active-response/how-to-configure.html',
 ];
 
 removedUrls['4.3'] = [
@@ -583,6 +590,13 @@ removedUrls['4.3'] = [
   '/user-manual/capabilities/virustotal-scan/about.html',
   '/user-manual/capabilities/virustotal-scan/index.html',
   '/user-manual/capabilities/virustotal-scan/integration.html',
+  '/user-manual/capabilities/active-response/ar-use-cases/blocking-attacks.html',
+  '/user-manual/capabilities/active-response/ar-use-cases/removing-malware.html',
+  '/user-manual/capabilities/active-response/ar-use-cases/wazuh-with-yara.html',
+  '/user-manual/capabilities/active-response/custom-active-response.html',
+  '/user-manual/capabilities/active-response/how-it-works.html',
+  '/user-manual/capabilities/active-response/remediation-configuration.html',
+  '/user-manual/capabilities/active-response/remediation-faq.html',
 ];
 
 
@@ -1283,7 +1297,42 @@ redirections.push(
     '4.2': '/user-manual/capabilities/virustotal-scan/integration.html',
     '4.3': '/user-manual/capabilities/malware-detection/virus-total-integration.html#how-it-works',
   },
-);
+  {
+    'target': ['4.2=>4.3','4.3=>4.2'],
+    '4.2': '/user-manual/capabilities/active-response/ar-use-cases/blocking-attacks.html',
+    '4.3': '/user-manual/capabilities/active-response/ar-use-cases/blocking-ssh-brute-force.html',
+  },
+  {
+    'target': ['4.2=>4.3'],
+    '4.2': '/user-manual/capabilities/active-response/ar-use-cases/removing-malware.html',
+    '4.3': '/proof-of-concept-guide/detect-remove-malware-virustotal.html',
+  },
+  {
+    'target': ['4.2=>4.3'],
+    '4.2': '/user-manual/capabilities/active-response/ar-use-cases/wazuh-with-yara.html',
+    '4.3': '/user-manual/capabilities/malware-detection/fim-yara.html',
+  },
+  {
+    'target': ['4.2=>4.3','4.3=>4.2'],
+    '4.2': '/user-manual/capabilities/active-response/custom-active-response.html',
+    '4.3': '/user-manual/capabilities/active-response/custom-active-response-scripts.html',
+  },
+  {
+    'target': ['4.2=>4.3'],
+    '4.2': '/user-manual/capabilities/active-response/how-it-works.html',
+    '4.3': '/user-manual/capabilities/active-response/index.html',
+  },
+  {
+    'target': ['4.2=>4.3'],
+    '4.2': '/user-manual/capabilities/active-response/remediation-configuration.html',
+    '4.3': '/user-manual/capabilities/active-response/how-to-configure.html',
+  },
+  {
+    'target': ['4.2=>4.3'],
+    '4.2': '/user-manual/capabilities/active-response/remediation-faq.html',
+    '4.3': '/user-manual/capabilities/active-response/index.html',
+  },
+  );
 
 /* *** RELEASE 4.2 ****/
 

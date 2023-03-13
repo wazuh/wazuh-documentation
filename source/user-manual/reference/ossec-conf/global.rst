@@ -259,6 +259,8 @@ This sets the memory size for the event correlation engine.
 |                    | 2048 will be replaced by 2048.    |
 +--------------------+-----------------------------------+
 
+.. _white_list: 
+
 white_list
 ^^^^^^^^^^
 
