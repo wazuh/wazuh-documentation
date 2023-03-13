@@ -48,11 +48,11 @@ Linux
 
 .. |CentOS6_x86_64_agent| replace:: `wazuh-agent-|WAZUH_CURRENT|-|WAZUH_REVISION_YUM_AGENT_X86|.x86_64.rpm <|RPM_AGENT_URL|-|WAZUH_CURRENT|-|WAZUH_REVISION_YUM_AGENT_X86|.x86_64.rpm>`__ (`sha512 <|CHECKSUMS_URL||WAZUH_CURRENT|/wazuh-agent-|WAZUH_CURRENT|-|WAZUH_REVISION_YUM_AGENT_X86|.x86_64.rpm.sha512>`__)
 
-.. |CentOS6_x86_64_manager| replace:: `wazuh-manager-|WAZUH_CURRENT|-|WAZUH_REVISION_YUM_MANAGER_X86|.x86_64.rpm <|RPM_MANAGER_URL|-|WAZUH_CURRENT|-|WAZUH_REVISION_YUM_MANAGER_X86|.x86_64.rpm>`__ (`sha512 <|CHECKSUMS_URL||WAZUH_CURRENT|/wazuh-manager-|WAZUH_CURRENT|-|WAZUH_REVISION_YUM_MANAGER_X86|.x86_64.rpm.sha512>`__)
+.. |CentOS7_x86_64_manager| replace:: `wazuh-manager-|WAZUH_CURRENT|-|WAZUH_REVISION_YUM_MANAGER_X86|.x86_64.rpm <|RPM_MANAGER_URL|-|WAZUH_CURRENT|-|WAZUH_REVISION_YUM_MANAGER_X86|.x86_64.rpm>`__ (`sha512 <|CHECKSUMS_URL||WAZUH_CURRENT|/wazuh-manager-|WAZUH_CURRENT|-|WAZUH_REVISION_YUM_MANAGER_X86|.x86_64.rpm.sha512>`__)
 
 .. |CentOS6_aarch64_agent| replace:: `wazuh-agent-|WAZUH_CURRENT|-|WAZUH_REVISION_YUM_AGENT_AARCH64|.aarch64.rpm <|RPM_AGENT_URL|-|WAZUH_CURRENT|-|WAZUH_REVISION_YUM_AGENT_AARCH64|.aarch64.rpm>`__ (`sha512 <|CHECKSUMS_URL||WAZUH_CURRENT|/wazuh-agent-|WAZUH_CURRENT|-|WAZUH_REVISION_YUM_AGENT_AARCH64|.aarch64.rpm.sha512>`__)
 
-.. |CentOS6_aarch64_manager| replace:: `wazuh-manager-|WAZUH_CURRENT|-|WAZUH_REVISION_YUM_MANAGER_AARCH64|.aarch64.rpm <|RPM_MANAGER_URL|-|WAZUH_CURRENT|-|WAZUH_REVISION_YUM_MANAGER_AARCH64|.aarch64.rpm>`__ (`sha512 <|CHECKSUMS_URL||WAZUH_CURRENT|/wazuh-manager-|WAZUH_CURRENT|-|WAZUH_REVISION_YUM_MANAGER_AARCH64|.aarch64.rpm.sha512>`__)
+.. |CentOS7_aarch64_manager| replace:: `wazuh-manager-|WAZUH_CURRENT|-|WAZUH_REVISION_YUM_MANAGER_AARCH64|.aarch64.rpm <|RPM_MANAGER_URL|-|WAZUH_CURRENT|-|WAZUH_REVISION_YUM_MANAGER_AARCH64|.aarch64.rpm>`__ (`sha512 <|CHECKSUMS_URL||WAZUH_CURRENT|/wazuh-manager-|WAZUH_CURRENT|-|WAZUH_REVISION_YUM_MANAGER_AARCH64|.aarch64.rpm.sha512>`__)
 
 .. |CentOS6_armhf_agent| replace:: `wazuh-agent-|WAZUH_CURRENT|-|WAZUH_REVISION_YUM_AGENT_ARMHF|.armv7hl.rpm <|RPM_AGENT_URL|-|WAZUH_CURRENT|-|WAZUH_REVISION_YUM_AGENT_ARMHF|.armv7hl.rpm>`__ (`sha512 <|CHECKSUMS_URL||WAZUH_CURRENT|/wazuh-agent-|WAZUH_CURRENT|-|WAZUH_REVISION_YUM_AGENT_ARMHF|.armv7hl.rpm.sha512>`__)
 
@@ -197,17 +197,17 @@ Linux
 +                       +                   +--------------+------------------------------------------+
 |                       |                   |    armhf     | |Amazon_armhf_agent|                     |
 +-----------------------+-------------------+--------------+------------------------------------------+
-|                       |  7 and later      |    powerpc   | |CentOS7_powerpc_agent|                  |
+|                       |  7 and later      |    x86_64    | |CentOS7_x86_64_manager|                 |
++                       +                   +--------------+------------------------------------------+
+|                       |                   |    aarch64   | |CentOS7_aarch64_manager|                | 
++                       +                   +--------------+------------------------------------------+
+|                       |                   |    powerpc   | |CentOS7_powerpc_agent|                  |
 + CentOS                +-------------------+--------------+------------------------------------------+
 |                       |                   |    i386      | |CentOS6_i386_agent|                     |
 +                       +  6 and later      +--------------+------------------------------------------+
-|                       |                   |              | |CentOS6_x86_64_agent|                   |
-+                       +                   +    x86_64    +------------------------------------------+
-|                       |                   |              | |CentOS6_x86_64_manager|                 |
+|                       |                   |    x86_64    | |CentOS6_x86_64_agent|                   |
 +                       +                   +--------------+------------------------------------------+
-|                       |                   |              | |CentOS6_aarch64_agent|                  |
-+                       +                   +    aarch64   +------------------------------------------+
-|                       |                   |              | |CentOS6_aarch64_manager|                |
+|                       |                   |    aarch64   | |CentOS6_aarch64_agent|                  |
 +                       +                   +--------------+------------------------------------------+
 |                       |                   |    armhf     | |CentOS6_armhf_agent|                    |
 +                       +-------------------+--------------+------------------------------------------+
