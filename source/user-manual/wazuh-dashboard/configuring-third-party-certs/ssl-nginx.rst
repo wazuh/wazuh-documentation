@@ -111,15 +111,36 @@ Configure the proxy and the certificates
 
       # ln -s /snap/bin/certbot /usr/bin/certbot
 
-#. Navigate to ``/etc/nginx/conf.d`` and create a ``wazuh.conf`` file for the certificate installation:
+#. Edit the ``/etc/wazuh-dashboard/opensearch_dashboards.yml`` file and change the default dashboard port from ``443`` to another available port number:
+      
+   .. code-block:: yaml
+      :emphasize-lines: 3
+
+      server.host: 0.0.0.0
+      opensearch.hosts: https://127.0.0.1:9200
+      server.port: <PORT_NUMBER>
+      opensearch.ssl.verificationMode: certificate
+      # opensearch.username: kibanaserver
+      # opensearch.password: kibanaserver
+      opensearch.requestHeadersWhitelist: ["securitytenant","Authorization"]
+      opensearch_security.multitenancy.enabled: false
+      opensearch_security.readonly_mode.roles: ["kibana_read_only"]
+      server.ssl.enabled: true
+      server.ssl.key: "/etc/wazuh-dashboard/certs/wazuh-dashboard-key.pem"
+      server.ssl.certificate: "/etc/wazuh-dashboard/certs/wazuh-dashboard.pem"
+      opensearch.ssl.certificateAuthorities: ["/etc/wazuh-dashboard/certs/root-ca.pem"]
+      uiSettings.overrides.defaultRoute: /app/wazuh
+      opensearch_security.cookie.secure: true
+
+#. Navigate to the ``/etc/nginx/conf.d`` directory and create a ``wazuh.conf`` file for the certificate installation:
 
    .. code-block:: console
 
       # unlink /etc/nginx/sites-enabled/default
       # cd /etc/nginx/conf.d
-      # nano wazuh.conf
+      # touch wazuh.conf
 
-#. Create the following configuration and save it in ``wazuh.conf``:
+#. Edit ``wazuh.conf`` and add the following configuration.
 
    .. code-block:: console
 
@@ -129,15 +150,23 @@ Configure the proxy and the certificates
          server_name <YOUR_DOMAIN_NAME>;
 
          location / {
-            proxy_pass https://<WAZUH_DASHBOARD_IP>:443;
+            proxy_pass https://<WAZUH_DASHBOARD_IP>:<PORT_NUMBER>;
             proxy_set_header Host $host;
          }
       }
 
    Replace the following:
 
-   - ``<YOUR_DOMAIN_NAME>`` with your domain name
-   - ``<WAZUH_DASHBOARD_IP>`` with your Wazuh dashboard IP address
+   - ``<YOUR_DOMAIN_NAME>`` with your domain name.
+   - ``<WAZUH_DASHBOARD_IP>`` with your Wazuh dashboard IP address.
+   - ``<PORT_NUMBER>`` with your new port number.
+
+#. Restart the Wazuh dashboard and the Wazuh server
+ 
+   .. code-block:: console
+
+      # systemctl restart wazuh-dashboard
+      # systemctl restart wazuh-manager
 
 #. Use certbot to generate an SSL certificate:
 
@@ -151,39 +180,35 @@ Configure the proxy and the certificates
    .. code-block:: console
 
       server {
+
+         server_name <YOUR_DOMAIN_NAME>;
+
+         location / {
+            proxy_pass https://<WAZUH_DASHBOARD_IP>:<PORT_NUMBER>;
+            proxy_set_header Host $host;
+         }
+
+         listen 443 ssl; # managed by Certbot
+         ssl_certificate /etc/letsencrypt/live/<YOUR_DOMAIN_NAME>/fullchain.pem; # managed by Certbot
+         ssl_certificate_key /etc/letsencrypt/live/<YOUR_DOMAIN_NAME>/privkey.pem; # managed by Certbot
+         include /etc/letsencrypt/options-ssl-nginx.conf; # managed by Certbot
+         ssl_dhparam /etc/letsencrypt/ssl-dhparams.pem; # managed by Certbot
+
+      }
+      server {
+         if ($host = <YOUR_DOMAIN_NAME>) {
+            return 301 https://$host$request_uri;
+         } # managed by Certbot
+
+
          listen 80 default_server;
 
          server_name <YOUR_DOMAIN_NAME>;
+         return 404; # managed by Certbot
 
-         location / {
-            proxy_pass https://<WAZUH_DASHBOARD_IP>:443;
-            proxy_set_header Host $host;
-         }
-      }
-      server {
-         server_name <YOUR_DOMAIN_NAME>; 
-
-         location / {
-            proxy_pass https://<WAZUH_DASHBOARD_IP>:443;
-            proxy_set_header Host $host;
-         }
-
-         listen 443 ssl; 
-         ssl_certificate /etc/letsencrypt/live/<YOUR_DOMAIN_NAME>/fullchain.pem; 
-         ssl_certificate_key /etc/letsencrypt/live/<YOUR_DOMAIN_NAME>/privkey.pem; 
-         include /etc/letsencrypt/options-ssl-nginx.conf; 
-         ssl_dhparam /etc/letsencrypt/ssl-dhparams.pem; 
-
-      }server {
-         if ($host = <YOUR_DOMAIN_NAME>) {
-            return 301 https://$host$request_uri;
-         } 
-
-         listen 80 ;
-         server_name <YOUR_DOMAIN_NAME>;
-         return 404; 
 
       }
+
 
 #. Restart the NGINX service:
 
@@ -195,20 +220,5 @@ Configure the proxy and the certificates
          :title: Wazuh dashboard
          :align: center
          :width: 80%
-
-#. You can further prevent access via public IP address by removing the first server block in the NGINX ``/etc/nginx/conf.d/wazuh.conf``:
-
-   .. code-block:: console
-
-      server {
-         listen 80 default_server;
-
-         server_name <YOUR_DOMAIN_NAME>;
-
-         location / {
-            proxy_pass https://<WAZUH_DASHBOARD_IP>:443;
-            proxy_set_header Host $host;
-         }
-      }
 
 The NGINX server has been configured and the Let’s Encrypt certificate installation is active on the Wazuh dashboard. You can proceed to access it by using the configured domain name.
