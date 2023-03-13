@@ -153,6 +153,9 @@ Shuffle
 
 `Shuffle <https://shuffler.io/>`__ is an Open Source interpretation of SOAR. It transfers data throughout the enterprise with plug-and-play Apps. The Shuffle integration allows forwarding Wazuh alerts into a Shuffle Workflow using a `webhook <https://shuffler.io/docs/triggers#webhook>`__.
 
+.. note::      
+  For a list of all possibles customizable fields of the `options` tag, you can visit the API reference `Shuffle API reference <https://shuffler.io/docs/API>`_
+
 To set up this integration, do the following.
 
 #. Go to Shuffle and make a Workflow.
