@@ -175,7 +175,7 @@ Download the utilities and configure the CDB list
 Configure the active response module to block the malicious IP address
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-#. Add a custom rule to trigger a Wazuh :doc:`active response </user-manual/capabilities/active-response/how-it-works>` script. Do this in the Wazuh server ``/var/ossec/etc/rules/local_rules.xml`` custom ruleset file:
+#. Add a custom rule to trigger a Wazuh :doc:`active response </user-manual/capabilities/active-response/index>` script. Do this in the Wazuh server ``/var/ossec/etc/rules/local_rules.xml`` custom ruleset file:
 
    .. code-block:: xml
 
