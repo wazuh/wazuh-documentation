@@ -8,7 +8,12 @@
 Custom rules and decoders
 ===========================
 
-It's possible to modify the default rules and decoders from the Wazuh ruleset and also to add new ones in order to increase Wazuh detection capabilities.
+Customize the Wazuh ruleset to fit your needs and enhance detection capabilities. To achieve this, you can:
+
+- Modify the default rules and decoders. 
+- Add new custom rules and decoders.  
+
+Find detailed instructions and examples of how to customize the ruleset in the sections below. 
 
 Adding new decoders and rules
 -------------------------------
@@ -79,9 +84,9 @@ Check out this example of how to create new decoders and rules. Here's a log fro
               mail: 'False'
 
 
-   For testing purposes, ``wazuh-logtest`` takes recent changes in the decoders and rules into account. However, to load them into the event processing pipeline, it's necessary to restart the Wazuh manager.
+   To test your rules and decoders using ``wazuh-logtest``, it's enough to save the changes. However, you need to restart the Wazuh manager to generate alerts based on these changes.  
 
-#. Restart the Wazuh manager: 
+#. Restart the Wazuh manager to load the updated rules and decoders:
 
       .. include:: /_templates/installations/manager/restart_wazuh_manager.rst
 
@@ -91,7 +96,9 @@ Changing an existing rule
 .. warning::
     Changes to any rule file inside the ``/var/ossec/ruleset/rules`` folder will be lost in the update process. Use the following procedure to preserve your changes.
 
-You can modify the standard rules. Here's an example of to change the level value of the SSH rule ``5710`` from 5 to 10.
+You can change the default Wazuh rules. To do so, we recommend copying the rules to a file in the ``/var/ossec/etc/rules/`` directory, making the necessary changes, and adding the ``overwrite="yes"`` tag to the modified rules. These steps guarantee that your changes won't be lost during updates.
+
+Here's an example of to change the level value of the SSH rule ``5710`` from 5 to 10.
 
 #. Open the rule file ``/var/ossec/ruleset/rules/0095-sshd_rules.xml``.
 
@@ -125,9 +132,9 @@ You can modify the standard rules. Here's an example of to change the level valu
       </rule>
 
    .. warning::
-      To maintain consistency between loaded rules, currently it is not possible to overwrite the ``if_sid``, ``if_group``, ``if_level``, ``if_matched_sid``, and ``if_matched_group`` labels. These tags are ignored when they are in an overwrite rule, keeping the original values.
+      To maintain consistency between loaded rules, currently it's not possible to overwrite the ``if_sid``, ``if_group``, ``if_level``, ``if_matched_sid``, and ``if_matched_group`` labels. These tags are ignored when they are in an overwrite rule, keeping the original values.
 
-#. Restart the Wazuh manager: 
+#. Restart the Wazuh manager to load the updated rules:
 
    .. include:: /_templates/installations/manager/restart_wazuh_manager.rst
 
@@ -137,13 +144,14 @@ Changing an existing decoder
 .. warning::
     Changes in any decoder file in the ``/var/ossec/ruleset/decoders`` folder will be lost in the update process. Use the following procedure to preserve your changes.
 
-Unfortunately, it's not possible to overwrite decoders in the manner described in the rules above. To modify the standard decoders, follow the process described below. 
 
-If you want to customize the decoder file ``0310-ssh_decoders.xml``, do the following:
+To change a default decoder, you can rewrite its file in the ``/var/ossec/etc/decoders`` directory, make the changes, and exclude the original decoder file from the loading list. 
+
+If you want to customize the decoder file ``0310-ssh_decoders.xml``, follow these steps: 
 
 #. Copy the decoder file ``/var/ossec/ruleset/decoders/0310-ssh_decoders.xml`` from the default folder to the user folder ``/var/ossec/etc/decoders`` in order to keep the changes.
 
-#. Exclude the original decoder file ``ruleset/decoders/0310-ssh_decoders.xml`` from the loading list. To do this, use the tag ``<decoder_exclude>`` in the ``/var/ossec/etc/ossec.conf`` file. Thus, the specified decoder will not be loaded from the default decoder folder, and the decoder file saved in the user folder will be loaded instead.
+#. Use the ``<decoder_exclude>`` tag  in the ``/var/ossec/etc/ossec.conf`` configuration file to exclude the original decoder file ``ruleset/decoders/0310-ssh_decoders.xml`` from the loading list. Thus, the specified decoder will not be loaded from the default decoder folder, and the decoder file saved in the user folder will be loaded instead.
  
    .. code-block:: xml
       :emphasize-lines: 11 
@@ -164,7 +172,7 @@ If you want to customize the decoder file ``0310-ssh_decoders.xml``, do the foll
 
 #. Perform the changes in the file ``/var/ossec/etc/decoders/0310-ssh_decoders.xml``.
 
-#. Restart the Wazuh manager: 
+#. Restart the Wazuh manager so the changes take effect:
 
    .. include:: /_templates/installations/manager/restart_wazuh_manager.rst
 
