@@ -101,8 +101,8 @@ Perform the steps below to perform an SSH brute-force attack against the RHEL en
    Once the attack ends, you can see on the Wazuh dashboard that rule ID ``5763`` fired.
 
    .. thumbnail:: /images/manual/active-response/hydra-attack-alert.png      
-      :title: Hydra attack alert
-      :alt: Hydra attack alert
+      :title: SSH brute-force attack alert
+      :alt: SSH brute-force attack alert
       :align: center
       :width: 80%
 
@@ -136,8 +136,8 @@ Monitored Linux/Unix endpoints have a log file at ``/var/ossec/logs/active-respo
 When the active response triggers, a corresponding alert appears on the Wazuh dashboard.
 
 .. thumbnail:: /images/manual/active-response/ar-alert-fired.png
-   :title: Active response alert fired
-   :alt: Active response alert fired
+   :title: Active response alert: Host Blocked by firewall-drop
+   :alt: Active response alert: Host Blocked by firewall-drop
    :align: center
    :width: 80%
 
