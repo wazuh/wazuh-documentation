@@ -175,4 +175,4 @@ For example, if you want to customize decoders in the ``0310-ssh_decoders.xml`` 
    .. include:: /_templates/installations/manager/restart_wazuh_manager.rst
 
    .. warning::
-      Note that at this point, if updates to the public Wazuh ruleset include changes to ``0310-ssh_decoders.xml``, they will not apply to you since you are no longer loading that decoder file from the standard location that gets updates.  At some point, you may have to manually migrate your customized material from ``0310-ssh_decoders.xml`` to a newer copy of that file.  Consider internally documenting your changes in ``0310-ssh_decoders.xml`` so that they are easy to find if they have to be migrated later.
+      Since you're excluding the original decoder file, you don't benefit from  any updates it might get.  Your custom file remains unchanged during upgrades so consider applying relevant changes manually. 
