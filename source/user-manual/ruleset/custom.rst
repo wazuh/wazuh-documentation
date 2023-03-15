@@ -54,11 +54,9 @@ Check out this example of how to create new decoders and rules. Here's a log fro
       </rule>
 
 
-#. Check if it works by using ``/var/ossec/bin/wazuh-logtest``:
+#. Run ``/var/ossec/bin/wazuh-logtest``. Input the example log above to test the decoder and rule:
 
    .. code-block:: none
-     :class: output
-        
 
       Type one log per line
 
@@ -84,7 +82,7 @@ Check out this example of how to create new decoders and rules. Here's a log fro
               mail: 'False'
 
 
-   To test your rules and decoders using ``wazuh-logtest``, it's enough to save the changes. However, you need to restart the Wazuh manager to generate alerts based on these changes.  
+   To test your rules and decoders using ``wazuh-logtest``, it's enough to save the changes made to the decoder and rule files. However, you need to restart the Wazuh manager to generate alerts based on these changes.  
 
 #. Restart the Wazuh manager to load the updated rules and decoders:
 
@@ -94,7 +92,7 @@ Changing an existing rule
 ---------------------------
 
 .. warning::
-    Changes to any rule file inside the ``/var/ossec/ruleset/rules`` folder will be lost in the update process. Use the following procedure to preserve your changes.
+    Changes to any rule file inside the ``/var/ossec/ruleset/rules`` folder are lost in the update process. Use the following procedure to preserve your changes.
 
 You can change the default Wazuh rules. To do so, we recommend copying the rules to a file in the ``/var/ossec/etc/rules/`` directory, making the necessary changes, and adding the ``overwrite="yes"`` tag to the modified rules. These steps guarantee that your changes won't be lost during updates.
 
@@ -102,7 +100,7 @@ Here's an example of to change the level value of the SSH rule ``5710`` from 5 t
 
 #. Open the rule file ``/var/ossec/ruleset/rules/0095-sshd_rules.xml``.
 
-#. Find and copy the following code from the rule file:
+#. Find and copy the rule definition for rule id ``5710``:
 
    .. code-block:: xml
 
@@ -116,7 +114,7 @@ Here's an example of to change the level value of the SSH rule ``5710`` from 5 t
         <group>invalid_login,authentication_failed,pci_dss_10.2.4,pci_dss_10.2.5,pci_dss_10.6.1,gpg13_7.1,gdpr_IV_35.7.d,gdpr_IV_32.2,hipaa_164.312.b,nist_800_53_AU.14,nist_800_53_AC.7,nist_800_53_AU.6,tsc_CC6.1,tsc_CC6.8,tsc_CC7.2,tsc_CC7.3,</group>
       </rule>
 
-#. Paste the code into ``/var/ossec/etc/rules/local_rules.xml``, modify the level value, and add ``overwrite="yes"`` to indicate that this rule is overwriting an already defined rule:
+#. Paste the copied rule definition into ``/var/ossec/etc/rules/local_rules.xml``. Modify the level value, and add ``overwrite="yes"`` to indicate that this rule is overwriting an already defined rule:
 
    .. code-block:: xml
       :emphasize-lines: 1
@@ -142,16 +140,16 @@ Changing an existing decoder
 -----------------------------
 
 .. warning::
-    Changes in any decoder file in the ``/var/ossec/ruleset/decoders`` folder will be lost in the update process. Use the following procedure to preserve your changes.
+    Changes in any decoder file in the ``/var/ossec/ruleset/decoders`` folder are lost in the update process. Use the following procedure to preserve your changes.
 
 
 To change a default decoder, you can rewrite its file in the ``/var/ossec/etc/decoders`` directory, make the changes, and exclude the original decoder file from the loading list. 
 
-If you want to customize the decoder file ``0310-ssh_decoders.xml``, follow these steps: 
+For example, if you want to customize decoders in the ``0310-ssh_decoders.xml`` file, follow these steps: 
 
-#. Copy the decoder file ``/var/ossec/ruleset/decoders/0310-ssh_decoders.xml`` from the default folder to the user folder ``/var/ossec/etc/decoders`` in order to keep the changes.
+#. Copy the decoder file ``/var/ossec/ruleset/decoders/0310-ssh_decoders.xml`` to the user folder ``/var/ossec/etc/decoders``. This keeps the changes you make when updating to a newer version.
 
-#. Use the ``<decoder_exclude>`` tag  in the ``/var/ossec/etc/ossec.conf`` configuration file to exclude the original decoder file ``ruleset/decoders/0310-ssh_decoders.xml`` from the loading list. Thus, the specified decoder will not be loaded from the default decoder folder, and the decoder file saved in the user folder will be loaded instead.
+#. Edit the ``/var/ossec/etc/ossec.conf`` configuration file. Set the ``<decoder_exclude>`` tag to exclude the original ``ruleset/decoders/0310-ssh_decoders.xml`` decoder file from the loading list. With this configuration, Wazuh loads the decoder file located in the user folder and not the file in the default folder.
  
    .. code-block:: xml
       :emphasize-lines: 11 
@@ -170,7 +168,7 @@ If you want to customize the decoder file ``0310-ssh_decoders.xml``, follow thes
       </ruleset>
 
 
-#. Perform the changes in the file ``/var/ossec/etc/decoders/0310-ssh_decoders.xml``.
+#. Make changes to ``/var/ossec/etc/decoders/0310-ssh_decoders.xml``.
 
 #. Restart the Wazuh manager so the changes take effect:
 
