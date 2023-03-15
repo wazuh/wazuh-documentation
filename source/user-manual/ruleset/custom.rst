@@ -13,7 +13,7 @@ Customize the Wazuh ruleset to fit your needs and enhance detection capabilities
 - Modify the default rules and decoders. 
 - Add new custom rules and decoders.  
 
-Find detailed instructions and examples of how to customize the ruleset in the sections below. 
+Find detailed instructions and examples on how to customize the ruleset in the sections below. 
 
 Adding new decoders and rules
 -------------------------------
@@ -23,7 +23,7 @@ Adding new decoders and rules
 .. note:: To make minor adjustments, use the ``local_decoder.xml`` and ``local_rules.xml`` files. We recommend creating new decoder and rule files for changes on a larger scale.
 
 
-Check out this example of how to create new decoders and rules. Here's a log from a program called ``example``:
+Check out this example on how to create new decoders and rules. The following log corresponds to a program called ``example``:
 
    .. code-block:: 
 
@@ -96,7 +96,7 @@ Changing an existing rule
 
 You can change the default Wazuh rules. To do so, we recommend copying the rules to a file in the ``/var/ossec/etc/rules/`` directory, making the necessary changes, and adding the ``overwrite="yes"`` tag to the modified rules. These steps guarantee that your changes won't be lost during updates.
 
-Here's an example of to change the level value of the SSH rule ``5710`` from 5 to 10.
+Here's an example on how to change the level value of the SSH rule ``5710`` from 5 to 10.
 
 #. Open the rule file ``/var/ossec/ruleset/rules/0095-sshd_rules.xml``.
 
