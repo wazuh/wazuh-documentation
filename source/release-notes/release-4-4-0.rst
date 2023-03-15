@@ -3,7 +3,7 @@
 .. meta::
   :description: Wazuh 4.4.0 has been released. Check out our release notes to discover the changes and additions of this release.
 
-4.4.0 Release notes - 20 February 2023
+4.4.0 Release notes - 22 March 2023
 ======================================
 
 This section lists the changes in version 4.4.0. Every update of the Wazuh solution is cumulative and includes all enhancements and fixes from previous releases.
@@ -539,6 +539,9 @@ Reference                                                                       
 `#5167 <https://github.com/wazuh/wazuh-kibana-app/pull/5167>`_                                                                                                                                   Fixed the module information button in Office365 and Github Panel tab to open the nav drawer.
 `#5200 <https://github.com/wazuh/wazuh-kibana-app/pull/5200>`_                                                                                                                                   Fixed a UI crash due to ``external_references`` field could be missing in some vulnerability data.
 `#5273 <https://github.com/wazuh/wazuh-kibana-app/pull/5273>`_                                                                                                                                   Fixed the Wazuh main menu is not displayed when the navigation menu is locked.
+`#5286 <https://github.com/wazuh/wazuh-kibana-app/pull/5286>`_                                                                                                                                   The event view is now working correctly after fixing a problem that occurred when *Lucene* language was selected in the search bar. 
+`#5285 <https://github.com/wazuh/wazuh-kibana-app/pull/5285>`_ `#5295 <https://github.com/wazuh/wazuh-kibana-app/pull/5295>`_                                                                    Fixed the incorrect use of the connection secure property by Deploy Agent.
+`#5291 <https://github.com/wazuh/wazuh-kibana-app/pull/5291>`_                                                                                                                                   Head rendering in the agent view has been corrected.
 =============================================================================================================================================================================================    =============
 
 Wazuh Kibana plugin for Kibana 7.10.2
@@ -575,6 +578,8 @@ Reference                                                                       
 `#5137 <https://github.com/wazuh/wazuh-kibana-app/pull/5137>`_                                                                                                                                   Fixed the style of the buttons showing more event information in the event view table.
 `#5144 <https://github.com/wazuh/wazuh-kibana-app/pull/5144>`_                                                                                                                                   Fixed Inventory module for Solaris agents.
 `#5200 <https://github.com/wazuh/wazuh-kibana-app/pull/5200>`_                                                                                                                                   Fixed a UI crash due to ``external_references`` field could be missing in some vulnerability data.
+`#5285 <https://github.com/wazuh/wazuh-kibana-app/pull/5285>`_ `#5295 <https://github.com/wazuh/wazuh-kibana-app/pull/5295>`_                                                                    Fixed the incorrect use of the connection secure property by Deploy Agent.
+`#5291 <https://github.com/wazuh/wazuh-kibana-app/pull/5291>`_                                                                                                                                   Head rendering in the agent view has been corrected.
 =============================================================================================================================================================================================    =============
 
 Wazuh Kibana plugin for Kibana 7.16.x and 7.17.x
@@ -613,6 +618,8 @@ Reference                                                                       
 `#5137 <https://github.com/wazuh/wazuh-kibana-app/pull/5137>`_                                                                                                                                   Fixed the style of the buttons showing more event information in the event view table.
 `#5144 <https://github.com/wazuh/wazuh-kibana-app/pull/5144>`_                                                                                                                                   Fixed Inventory module for Solaris agents.
 `#5200 <https://github.com/wazuh/wazuh-kibana-app/pull/5200>`_                                                                                                                                   Fixed a UI crash due to ``external_references`` field could be missing in some vulnerability data.
+`#5285 <https://github.com/wazuh/wazuh-kibana-app/pull/5285>`_ `#5295 <https://github.com/wazuh/wazuh-kibana-app/pull/5295>`_                                                                    Fixed the incorrect use of the connection secure property by Deploy Agent.
+`#5291 <https://github.com/wazuh/wazuh-kibana-app/pull/5291>`_                                                                                                                                   Head rendering in the agent view has been corrected.
 =============================================================================================================================================================================================    =============
 
 Packages
