@@ -31,20 +31,20 @@ See below SCA policy ID ``2651`` for Debian 10 operating system as an example of
 .. code-block:: yaml
 
    - id: 2651
-      title: "Ensure SSH HostbasedAuthentication is disabled"
-      description: "The HostbasedAuthentication parameter specifies if authentication is allowed through trusted hosts via the user of .rhosts, or /etc/hosts.equiv, along with successful public key client host authentication. This option only applies to SSH Protocol Version 2."
-      rationale: "Even though the .rhosts files are ineffective if support is disabled in /etc/pam.conf, disabling the ability to use .rhosts files in SSH provides an additional layer of protection."
-      remediation: "Edit the /etc/ssh/sshd_config file to set the parameter as follows: HostbasedAuthentication no"
-      compliance:
-         - cis: ["5.2.9"]
-         - cis_csc: ["16.3"]
-         - pci_dss: ["4.1"]
-         - hipaa: ["164.312.a.2.IV", "164.312.e.1", "164.312.e.2.I", "164.312.e.2.II"]
-         - nist_800_53: ["SC.8"]
-         - tsc: ["CC6.7"]
-      condition: all
-      rules:
-         - 'c:sshd -T -> r:HostbasedAuthentication\s+no'
+       title: "Ensure SSH HostbasedAuthentication is disabled"
+       description: "The HostbasedAuthentication parameter specifies if authentication is allowed through trusted hosts via the user of .rhosts, or /etc/hosts.equiv, along with successful public key client host authentication. This option only applies to SSH Protocol Version 2."
+       rationale: "Even though the .rhosts files are ineffective if support is disabled in /etc/pam.conf, disabling the ability to use .rhosts files in SSH provides an additional layer of protection."
+       remediation: "Edit the /etc/ssh/sshd_config file to set the parameter as follows: HostbasedAuthentication no"
+       compliance:
+          - cis: ["5.2.9"]
+          - cis_csc: ["16.3"]
+          - pci_dss: ["4.1"]
+          - hipaa: ["164.312.a.2.IV", "164.312.e.1", "164.312.e.2.I", "164.312.e.2.II"]
+          - nist_800_53: ["SC.8"]
+          - tsc: ["CC6.7"]
+       condition: all
+       rules:
+          - 'c:sshd -T -> r:HostbasedAuthentication\s+no'
 
 Scan Results
 ------------
@@ -108,7 +108,7 @@ After evaluating the aforementioned check, the following event is generated:
      }
    },
 
-You can view the scan summaries on the Security configuration assessment tab on the Wazuh dashboard.
+You can view the scan summaries on the **Security configuration assessment** tab on the Wazuh dashboard.
 
   .. thumbnail:: /images/sca/dashboard-sca-tab.png
      :title: Dashboard SCA tab
@@ -186,13 +186,14 @@ The log shows the SCA policy file and the affected Wazuh agent.
 
   Alerts are triggered for every check in a policy when the policy is updated. This way, false negatives are avoided.
 
+
 Integrity of the scan results
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 To illustrate how the integrity of scan results is kept, we use an example in which the agent-side database and the server-side differ. This scenario could happen when there is a network issue.
 
 The table below shows an example of SCA state stored in the Wazuh agent and Wazuh server databases.
 
-.. table:: States stores in the Agent and Manager sides
+.. table:: States stored in the Wazuh agent and Wazuh server databases
     :widths: auto
 
     +----------+------------------+--------------------+
@@ -211,7 +212,7 @@ For those databases, the corresponding SHA256 hashes are:
 
  .. code-block:: none
 
-    Agent:   1642AB1DC478052AC3556B5E700CD82ADB69728008301882B9CBEE0696FF2C84
-    Manager: B43037CA28D95A69B6F9E03FCD826D2B253A6BB1B6AD28C4AE57A3A766ACE610
+    Wazuh agent:   1642AB1DC478052AC3556B5E700CD82ADB69728008301882B9CBEE0696FF2C84
+    Wazuh server: B43037CA28D95A69B6F9E03FCD826D2B253A6BB1B6AD28C4AE57A3A766ACE610
 
-Given that the two hashes do not match, the manager will request the agent for its latest scan data and refresh its database with the newly received status information.
+Given that the two hashes do not match, the Wazuh server requests the latest scan data from the Wazuh agent and refreshes its database with the newly received status information.

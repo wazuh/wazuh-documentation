@@ -4,7 +4,6 @@
 .. meta::
   :description: Check out this section of our documentation to learn about Available SCA policies in Wazuh.
 
-.. _available_sca_policies:
 
 Available SCA policies
 ======================

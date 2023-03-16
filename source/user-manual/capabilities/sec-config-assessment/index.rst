@@ -31,5 +31,6 @@ Further information is available in the following sections:
 
    how-it-works
    how-to-configure
+   available-sca-policies
    creating-custom-policies
    use-case
