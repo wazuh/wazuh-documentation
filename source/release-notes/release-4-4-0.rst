@@ -62,7 +62,7 @@ This version includes new features or improvements, such as the following:
 Wazuh manager
 ^^^^^^^^^^^^^
 
-- `#9995 <https://github.com/wazuh/wazuh/pull/9995>`_ Added new unit tests for cluster python module and increased coverage to 99%.
+- `#9995 <https://github.com/wazuh/wazuh/pull/9995>`_ Added new unit tests for cluster Python module and increased coverage to 99%.
 - `#11190 <https://github.com/wazuh/wazuh/pull/11190>`_ Added file size limitation on cluster integrity sync.
 - `#13424 <https://github.com/wazuh/wazuh/pull/13424>`_ Added ``unittests`` for CLIs script files.
 - `#9962 <https://github.com/wazuh/wazuh/pull/9962>`_ Added support for SUSE in Vulnerability Detector.
@@ -148,7 +148,7 @@ RESTful API
 
 - `#10620 <https://github.com/wazuh/wazuh/pull/10620>`_ Added new API integration tests for a Wazuh environment without a cluster configuration.
 - `#11731 <https://github.com/wazuh/wazuh/pull/11731>`_ Added ``wazuh-modulesd`` tags to ``GET /manager/logs`` and ``GET /cluster/{node_id}/logs`` endpoints.
-- `#12438 <https://github.com/wazuh/wazuh/pull/12438>`_ Added python decorator to soft deprecate API endpoints adding deprecation headers to their responses.
+- `#12438 <https://github.com/wazuh/wazuh/pull/12438>`_ Added Python decorator to soft deprecate API endpoints adding deprecation headers to their responses.
 - `#12486 <https://github.com/wazuh/wazuh/pull/12486>`_ Added new exception to inform that ``/proc`` directory is not found or permissions to see its status are not granted.
 - `#12362 <https://github.com/wazuh/wazuh/pull/12362>`_ Added new field and filter to ``GET /agents`` response to retrieve agent groups configuration synchronization status.
 - `#12498 <https://github.com/wazuh/wazuh/pull/12498>`_ Added agent groups configuration synchronization status to ``GET /agents/summary/status`` endpoint. 
@@ -210,8 +210,14 @@ Other
 - `#12518 <https://github.com/wazuh/wazuh/pull/12518>`_ Added ``python-json-logger`` dependency.
 - `#10773 <https://github.com/wazuh/wazuh/pull/10773>`_ The Ruleset test suite is prevented from restarting the manager.
 - `#14839 <https://github.com/wazuh/wazuh/pull/14839>`_ The pthread's ``rwlock`` was replaced with a FIFO-queueing read-write lock.
-- `#15809 <https://github.com/wazuh/wazuh/pull/15809>`_ Updated python dependency certifi to 2022.12.7.
-- `#15896 <https://github.com/wazuh/wazuh/pull/15896>`_ Updated python dependency future to 0.18.3.
+- `#15809 <https://github.com/wazuh/wazuh/pull/15809>`_ Updated Python dependency certifi to 2022.12.7.
+- `#15896 <https://github.com/wazuh/wazuh/pull/15896>`_ Updated Python dependency future to 0.18.3.
+- `#16317 <https://github.com/wazuh/wazuh/pull/16317>`_ Updated Werkzeug to 2.2.3. 
+- `#16317 <https://github.com/wazuh/wazuh/pull/16317>`_ Updated Flask to 2.0.0. 
+- `#16317 <https://github.com/wazuh/wazuh/pull/16317>`_ Updated itsdangerous to 2.0.0. 
+- `#16317 <https://github.com/wazuh/wazuh/pull/16317>`_ Updated Jinja2 to 3.0.0. 
+- `#16317 <https://github.com/wazuh/wazuh/pull/16317>`_ Updated MarkupSafe to 2.1.2. 
+
 
 Wazuh dashboard
 ^^^^^^^^^^^^^^^
@@ -394,7 +400,7 @@ Reference                                                         Description
 `#12516 <https://github.com/wazuh/wazuh/pull/12516>`_             Fixed a bug in the manager that did not send shared folders correctly to agents belonging to multiple groups. 
 `#12834 <https://github.com/wazuh/wazuh/pull/12834>`_             Fixed the Active Response decoders to support back the top entries for source IP in reports.
 `#13338 <https://github.com/wazuh/wazuh/pull/13338>`_             Fixed the feed update interval option of Vulnerability Detector for the JSON Red Hat feed. 
-`#12127 <https://github.com/wazuh/wazuh/pull/12127>`_             Fixed several code flaws in the python framework. 
+`#12127 <https://github.com/wazuh/wazuh/pull/12127>`_             Fixed several code flaws in the Python framework. 
 `#10635 <https://github.com/wazuh/wazuh/pull/10635>`_             Fixed code flaw regarding the use of XML package. 
 `#10636 <https://github.com/wazuh/wazuh/pull/10636>`_             Fixed code flaw regarding permissions at group directories. 
 `#10544 <https://github.com/wazuh/wazuh/pull/10544>`_             Fixed code flaw regarding temporary directory names. 
@@ -414,6 +420,7 @@ Reference                                                         Description
 `#15876 <https://github.com/wazuh/wazuh/pull/15876>`_             Fixed a read buffer overflow in ``wazuh-authd`` when parsing requests. 
 `#16012 <https://github.com/wazuh/wazuh/pull/16012>`_             Applied workaround for ``bpo-46309`` used in a cluster to ``wazuh-db`` communication.
 `#16233 <https://github.com/wazuh/wazuh/pull/16233>`_             Let the database module synchronize the agent group data before assignments.
+`#16321 <https://github.com/wazuh/wazuh/pull/16321>`_             Fixed memory leaks in wazuh-analysisd when parsing and matching rules. 
 ==============================================================    =============
 
 Wazuh agent
