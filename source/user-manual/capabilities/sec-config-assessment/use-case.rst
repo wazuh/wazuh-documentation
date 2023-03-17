@@ -124,9 +124,9 @@ Take the following steps on your Ubuntu endpoint to create the file ``/usr/share
 
 #. On your Wazuh dashboard, navigate to the **SCA** tab and select the Ubuntu endpoint to view the results of the custom SCA check you have created.
 
-  .. thumbnail:: /images/sca/sca-check-results.png
-     :title: Results of the custom SCA check
-     :alt: Results of the custom SCA check
+  .. thumbnail:: /images/sca/ubuntu-sca-check-results.png
+     :title: Ubuntu results of the custom SCA check
+     :alt: Ubuntu results of the custom SCA check
      :align: center
      :width: 80%
 
@@ -165,7 +165,7 @@ Take the following steps on your Ubuntu endpoint to create the file ``C:\Program
 #. Open Notepad as an administrator, create a new SCA policy file with the following content and save it as ``C:\Program Files (x86)\ossec-agent\custom-sca-files\keywordcheck.yml``:
 
    .. code-block:: YAML
-      :emphasize-lines: 13,14,15,23,24,25
+      :emphasize-lines: 13,14,15,21,22,23
 
       policy:
         id: "keyword_check_windows"
@@ -213,9 +213,9 @@ Take the following steps on your Ubuntu endpoint to create the file ``C:\Program
 
 #. On your Wazuh dashboard, navigate to the **SCA** tab and select the Windows endpoint to view the results of the custom SCA check you have created.
 
-  .. thumbnail:: /images/sca/sca-check-results.png
-     :title: 
-     :alt: 
+  .. thumbnail:: /images/sca/windows-sca-check-results.png
+     :title: Windows results of the custom SCA check
+     :alt: Windows results of the custom SCA check
      :align: center
      :width: 80%
 
@@ -304,9 +304,9 @@ Take the following steps on your macOS endpoint to create the file ``/usr/local/
 
 #. On your Wazuh dashboard, navigate to the SCA tab and select the macOS endpoint to view the results of the custom SCA check you have created.
 
-  .. thumbnail:: /images/sca/sca-check-results.png
-     :title: 
-     :alt: 
+  .. thumbnail:: /images/sca/macos-sca-check-results.png
+     :title: macOS results of the custom SCA check
+     :alt: macOS results of the custom SCA check
      :align: center
      :width: 80%
 
@@ -331,7 +331,7 @@ Netcat is a utility that uses TCP and UDP to read and write data on an IP networ
 #. Create a new SCA policy file ``/var/ossec/etc/custom-sca-files/processcheck.yml`` and add the following content to it:
 
    .. code-block:: YAML
-      :emphasize-lines: 13,14,15,16,17,29,30,31,32
+      :emphasize-lines: 13,14,15,16,17,28,29,30,31
 
       policy:
         id: "process_check"
@@ -405,11 +405,11 @@ Netcat is a utility that uses TCP and UDP to read and write data on an IP networ
 
 #. On your Wazuh dashboard, navigate to the **SCA** tab and select the Ubuntu endpoint to view the results of the custom SCA check you have created.
 
-  .. thumbnail:: /images/sca/sca-check-results.png
-     :title: 
-     :alt: 
+  .. thumbnail:: /images/sca/ubuntu-sca-use-case.png
+     :title: Ubuntu SCA use case to detect running processes
+     :alt: Ubuntu SCA use case to detect running processes
      :align: center
-     :width: 80%
+     :width: 80%     
 
 Windows endpoint
 ^^^^^^^^^^^^^^^^
@@ -487,9 +487,9 @@ System administrators use PowerShell to configure systems. Standard users utiliz
 
 #. On your Wazuh dashboard, navigate to the SCA tab and select the Windows endpoint to view the results of the custom SCA check you have created.
 
-  .. thumbnail:: /images/sca/sca-check-results.png
-     :title: 
-     :alt: 
+  .. thumbnail:: /images/sca/windows-sca-use-case.png
+     :title: Windows SCA use case to detect running processes
+     :alt: Windows SCA use case to detect running processes
      :align: center
      :width: 80%
 
@@ -563,9 +563,9 @@ Netcat is a utility that uses TCP and UDP to read and write data on an IP networ
 
 On your Wazuh dashboard, navigate to the SCA tab and select the macOS endpoint to view the results of the custom SCA check you have created.
 
-  .. thumbnail:: /images/sca/sca-check-results.png
-     :title: 
-     :alt: 
+  .. thumbnail:: /images/sca/macos-sca-use-case.png
+     :title: macOS SCA use case to detect running processes
+     :alt: macOS SCA use case to detect running processes
      :align: center
      :width: 80%
 
