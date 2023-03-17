@@ -1,7 +1,7 @@
 .. Copyright (C) 2015, Wazuh, Inc.
 
 .. meta::
-  :description: Learn more about File Integrity Monitoring, a key capability of Wazuh. Check out how it works and some practical use cases. 
+  :description: This Compatibility Matrix shows the FIM features that are available in each operative system. 
   
 Compatibility matrix
 ====================
@@ -18,7 +18,7 @@ The following matrix aims to describe the different FIM features available in ev
 +----------------------+-----------------------------+-----------------------+-------------------------------------------------+
 |  macOS               |             ✓               |            ✓          |                        ✗                        |
 +----------------------+-----------------------------+-----------------------+-------------------------------------------------+
-|  BSD                 |             ✓               |            ✓          |                        ✗                        |
+|  FreeBSD             |             ✓               |            ✓          |                        ✗                        |
 +----------------------+-----------------------------+-----------------------+-------------------------------------------------+
 |  Solaris             |             ✓               |            ✗          |                        ✗                        | 
 +----------------------+-----------------------------+-----------------------+-------------------------------------------------+
