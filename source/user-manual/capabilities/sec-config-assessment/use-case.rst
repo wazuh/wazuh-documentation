@@ -13,8 +13,9 @@ Prerequisites
 
 You need the following deployment to test the use cases defined in this section:
 
-- A Wazuh server: Follow the instructions in our quickstart guide to set up a Wazuh server.
-- Monitored endpoint(s): Deploy any or all of the following endpoints, install a Wazuh agent on each of them and enroll them to the Wazuh server.
+- A Wazuh server: Follow the instructions in our :doc:`quickstart guide </quickstart>` to set up a Wazuh server.
+- Monitored endpoint(s): Deploy any or all of the following endpoints, install a :doc:`Wazuh agent </installation-guide/wazuh-agent/index>` on each of them and enroll them to the Wazuh server.
+
   - An Ubuntu 22.04 endpoint.
   - A Windows 11 endpoint.
   - A macOS 12 endpoint.
@@ -65,7 +66,7 @@ Take the following steps on your Ubuntu endpoint to create the file ``/usr/share
    
       # mkdir /var/ossec/etc/custom-sca-files/
 
-#. Create a new SCA policy file /var/ossec/etc/custom-sca-files/keywordcheck.yml and add the following content to it:
+#. Create a new SCA policy file ``/var/ossec/etc/custom-sca-files/keywordcheck.yml`` and add the following content to it:
 
    .. code-block:: YAML
       :emphasize-lines: 13,14,15,23,24,25
@@ -165,7 +166,7 @@ Take the following steps on your Ubuntu endpoint to create the file ``C:\Program
 #. Open Notepad as an administrator, create a new SCA policy file with the following content and save it as ``C:\Program Files (x86)\ossec-agent\custom-sca-files\keywordcheck.yml``:
 
    .. code-block:: YAML
-      :emphasize-lines: 13,14,15,21,22,23
+      :emphasize-lines: 12,13,14,21,22,23
 
       policy:
         id: "keyword_check_windows"
@@ -224,7 +225,7 @@ macOS endpoint
 
 Take the following steps on your macOS endpoint to create the file ``/usr/local/testfile.txt`` and monitor it with the Wazuh SCA module:
 
-#. Create the test file and add some text to it, including the phrase password_enabled: yes:
+#. Create the test file and add some text to it, including the phrase ``password_enabled: yes``:
 
    .. code-block:: console
    
@@ -283,9 +284,9 @@ Take the following steps on your macOS endpoint to create the file ``/usr/local/
             - 'f:/usr/local/testfile.txt -> r:^password_enabled: yes$'
 
 
-- We create a requirement to ensure that the policy runs only if the file ``/usr/local/testfile.txt`` exists on the endpoint.
-- Check ID ``10002`` scans the file ``/usr/local/testfile.txt`` to find any line that contains the string ``password_enabled: yes``. The ``none`` condition ensures that the check fails if a match is found.
-  
+   - We create a requirement to ensure that the policy runs only if the file ``/usr/local/testfile.txt`` exists on the endpoint.
+   - Check ID ``10002`` scans the file ``/usr/local/testfile.txt`` to find any line that contains the string ``password_enabled: yes``. The ``none`` condition ensures that the check fails if a match is found.
+      
 #. Enable the policy file by adding the following lines to the ``<ossec_config>`` block of the Wazuh agent configuration file at ``/Library/Ossec/etc/ossec.conf``:
 
      .. code-block:: xml
@@ -331,7 +332,7 @@ Netcat is a utility that uses TCP and UDP to read and write data on an IP networ
 #. Create a new SCA policy file ``/var/ossec/etc/custom-sca-files/processcheck.yml`` and add the following content to it:
 
    .. code-block:: YAML
-      :emphasize-lines: 13,14,15,16,17,28,29,30,31
+      :emphasize-lines: 13,14,15,16,17,19,20,28,29,30,31
 
       policy:
         id: "process_check"
@@ -366,8 +367,8 @@ Netcat is a utility that uses TCP and UDP to read and write data on an IP networ
             - 'p:netcat'
 
 
-- We create a requirement to ensure that the policy runs only on Linux endpoints. The requirement checks for the presence of the ``/etc/ssh/sshd_config``, ``/etc/passwd``, and ``/etc/shadow`` files, and passes if any of them is found.
-- Check ID ``10003`` scans the endpoint for processes named ``nc`` or ``netcat``. The ``none`` condition ensures that the check fails if a match is found.
+   - We create a requirement to ensure that the policy runs only on Linux endpoints. The requirement checks for the presence of the ``/etc/ssh/sshd_config``, ``/etc/passwd``, and ``/etc/shadow`` files, and passes if any of them is found.
+   - Check ID ``10003`` scans the endpoint for processes named ``nc`` or ``netcat``. The ``none`` condition ensures that the check fails if a match is found.
 
 #. Change the ownership of the file so Wazuh has permissions to it:
 
@@ -455,8 +456,8 @@ System administrators use PowerShell to configure systems. Standard users utiliz
             - 'p:powershell.exe'
 
 
-  - We create a requirement to ensure that the policy runs only on Windows 10 endpoints. The requirement checks the registry key ``HKLM\SOFTWARE\Microsoft\Windows NT\CurrentVersion`` for the value ``Windows 10``.
-  - Check ID ``10004`` scans the endpoint for processes named ``powershell.exe``. The ``none`` condition ensures that the check fails if a match is found.
+   - We create a requirement to ensure that the policy runs only on Windows 10 endpoints. The requirement checks the registry key ``HKLM\SOFTWARE\Microsoft\Windows NT\CurrentVersion`` for the value ``Windows 10``.
+   - Check ID ``10004`` scans the endpoint for processes named ``powershell.exe``. The ``none`` condition ensures that the check fails if a match is found.
 
 #. Enable the policy file by adding the following lines to the ``<ossec_config>`` block of the Wazuh agent configuration file at ``/var/ossec/etc/ossec.conf``:
 
@@ -536,8 +537,8 @@ Netcat is a utility that uses TCP and UDP to read and write data on an IP networ
             - 'c:sh -c "ps -e -o command | grep -E \"^(nc|netcat) .*((-.*l.+[0-9]{1,5})|([0-9]{1,5}.*-.*l))\"" -> r:nc'
 
 
-  - We create a requirement to ensure that the policy runs only on macOS endpoints. The requirement runs the ``sw_vers`` command to check if the output contains the string ``ProductName: macOS``.
-  - Check ID ``10005`` runs a command which spawns a shell to run the ``ps`` utility to view all running processes. The command uses the ``grep`` utility to filter the output of the ps command for patterns of the netcat process. The ``none`` condition ensures that the check fails if a match is found.
+   - We create a requirement to ensure that the policy runs only on macOS endpoints. The requirement runs the ``sw_vers`` command to check if the output contains the string ``ProductName: macOS``.
+   - Check ID ``10005`` runs a command which spawns a shell to run the ``ps`` utility to view all running processes. The command uses the ``grep`` utility to filter the output of the ps command for patterns of the netcat process. The ``none`` condition ensures that the check fails if a match is found.
 
 #. Enable the policy file by adding the following lines to the ``<ossec_config>`` block of the Wazuh agent configuration file at ``/Library/Ossec/etc/ossec.conf``:
 
@@ -561,7 +562,7 @@ Netcat is a utility that uses TCP and UDP to read and write data on an IP networ
    
       # /Library/Ossec/bin/wazuh-control restart
 
-On your Wazuh dashboard, navigate to the SCA tab and select the macOS endpoint to view the results of the custom SCA check you have created.
+#. On your Wazuh dashboard, navigate to the SCA tab and select the macOS endpoint to view the results of the custom SCA check you have created.
 
   .. thumbnail:: /images/sca/macos-sca-use-case.png
      :title: macOS SCA use case to detect running processes
