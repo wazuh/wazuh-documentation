@@ -10,7 +10,8 @@ You need to consider four sections when creating custom policy files, although n
 
 .. _sca_policy_file_sections:
 
-**Policy file sections**
+Policy file sections
+--------------------
 
 .. table:: Policy file Sections
     :widths: auto
@@ -84,7 +85,7 @@ Each section has its fields as described in the tables :ref:`Policy section<sca_
 
 
 Policy section
-~~~~~~~~~~~~~~
+^^^^^^^^^^^^^^
 
 .. _sca_policy_file_policy_section:
 .. table:: Policy section
@@ -105,7 +106,7 @@ Policy section
 
 
 Requirements section
-~~~~~~~~~~~~~~~~~~~~
+^^^^^^^^^^^^^^^^^^^^
 
 .. _sca_policy_file_requirements_section:
 .. table:: Requirements section
@@ -158,7 +159,7 @@ Checks
 Checks are the core of an SCA policy, as they describe the scan to be performed in the endpoint. The checks contain fields that define what actions the agent should take to scan the endpoint, and how to evaluate the scan results. Each check is composed of several fields as described in the table below.
 
 Checks section
-~~~~~~~~~~~~~~
+^^^^^^^^^^^^^^
 
 .. _sca_policy_file_checks_section:
 .. table:: Checks section
@@ -202,7 +203,7 @@ There are certain situations in which the aforementioned aggregators are evaluat
 - ``none``: The check is evaluated as **Not applicable** if no rule is evaluated as **Passed** and any rule returns **Not applicable**.
 
 Condition / rule evaluation
-~~~~~~~~~~~~~~~~~~~~~~~~~~~
+^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 .. table:: 
     :widths: auto
@@ -239,7 +240,7 @@ Abstractly, rules start with a location and a type of location that is the targe
 .. _rule_types:
 
 Rule types
-~~~~~~~~~~
+^^^^^^^^^^
 
 There are five main types of rules as described below.
 
@@ -261,7 +262,7 @@ There are five main types of rules as described below.
     +------------------------------+------------------+
 
 Content comparison operators
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 The operators for content checking are shown in the content comparison operators table below.
 
@@ -279,7 +280,7 @@ The operators for content checking are shown in the content comparison operators
     +--------------------------------------------------------------------------------------+-----------------+------------------------------------------------------------+
 
 Numeric comparison operators
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 The operators for numeric comparison are shown in the table below.
 
@@ -383,7 +384,7 @@ The following sections cover each rule type, illustrating them with several exam
 <https://github.com/wazuh/wazuh-qa/tree/master/tests/legacy/test_sca/test_basic_usage/data>`_.
 
 Rule syntax for files
-~~~~~~~~~~~~~~~~~~~~~
+^^^^^^^^^^^^^^^^^^^^^
 
 - Check that a file exists: ``f:/path/to/file``
 - Check that a file does not exist: ``not f:/path/to/file``
@@ -392,7 +393,7 @@ Rule syntax for files
 - Check a numeric value: ``f:/path/to/file -> n:REGEX(\d+) compare <= Number``
 
 Rule syntax for directories
-~~~~~~~~~~~~~~~~~~~~~~~~~~~
+^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 - Check if a directory exists: ``d:/path/to/directory``
 - Check if a directory contains a file: ``d:/path/to/directory -> file``
@@ -400,33 +401,33 @@ Rule syntax for directories
 - Check files matching ``file_name`` for content: ``d:/path/to/directory -> file_name -> content``
 
 Rule syntax for processes
-~~~~~~~~~~~~~~~~~~~~~~~~~
+^^^^^^^^^^^^^^^^^^^^^^^^^
 
 - Check if a process is running ``p:process_name``
 - Check if a process is **not** running ``not p:process_name``
 
 Rule syntax for commands
-~~~~~~~~~~~~~~~~~~~~~~~~
+^^^^^^^^^^^^^^^^^^^^^^^^
 
 - Check the output of a command ``c:command -> output``
 - Check the output of a command using regex ``c:command -> r:REGEX``
 - Check a numeric value ``c:command -> n:REGEX_WITH_A_CAPTURE_GROUP compare >= number``
 
 Rule syntax for Windows Registry
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 - Check if a registry exists ``r:path/to/registry``
 - Check if a registry key exists ``r:path/to/registry -> key``
 - Check registry key contents ``r:path/to/registry -> key -> content``
 
 Composite rules
-~~~~~~~~~~~~~~~
+^^^^^^^^^^^^^^^
 
 - Check if there is a line that does not begin with ``#`` and contains ``Port 22`` ``f:/etc/ssh/sshd_config -> !r:^# && r:Port\.+22``
 - Check if there is no line that does not begin with ``#`` and contains ``Port 22`` ``not f:/etc/ssh/sshd_config -> !r:^# && r:Port\.+22``
 
 Other examples
-~~~~~~~~~~~~~~
+^^^^^^^^^^^^^^
 
 - Check for file contents, whole line match: ``f:/proc/sys/net/ipv4/ip_forward -> 1``
 - Check if a file exists: ``f:/proc/sys/net/ipv4/ip_forward``
