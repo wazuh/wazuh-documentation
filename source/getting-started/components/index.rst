@@ -21,7 +21,7 @@ The diagram below represents the Wazuh components and data flow.
 
 .. thumbnail:: /images/getting-started/wazuh-components-and-data-flow.png
    :title: Wazuh components and data flow
-    :alt: Wazuh components and data flow
+   :alt: Wazuh components and data flow
    :align: center
    :width: 80%
 
