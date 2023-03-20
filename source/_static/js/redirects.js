@@ -5,6 +5,7 @@ const redirectSameRelease = [];
 
 /* Note: new release versions must always be inserted in the first position of the array "versions" */
 const versions = [
+  '4.6',
   '4.4',
   '4.3',
   '4.2',
@@ -69,6 +70,12 @@ removedUrls['x.y'] = [
   '/old-url',
 ];
 */
+
+/**** RELEASE 4.6 ****/
+
+newUrls['4.6'] = [
+  '/user-manual/capabilities/file-integrity/compatibility-matrix.html',
+];
 
 /* *** RELEASE 4.4 ****/
 
@@ -1428,7 +1435,6 @@ newUrls['4.2'] = [
   '/user-manual/capabilities/vulnerability-detection/cpe-helper.html',
   '/user-manual/capabilities/vulnerability-detection/how-it-works.html',
   '/user-manual/capabilities/file-integrity/fim-fields-rule-mapping.html',
-  '/user-manual/capabilities/file-integrity/compatibility-matrix.html',
   '/user-manual/reference/ossec-conf/rule-test.html',
   '/user-manual/reference/ossec-conf/client-buffer.html',
   '/user-manual/reference/ossec-conf/email-alerts.html',
