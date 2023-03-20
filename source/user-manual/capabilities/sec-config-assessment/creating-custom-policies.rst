@@ -159,7 +159,7 @@ There is no limit on the number of variables to add within a rule.
 Checks
 ------
 
-Checks are the core of an SCA policy, as they describe the scan to be performed in the endpoint. The checks contain fields that define what actions the agent should take to scan the endpoint, and how to evaluate the scan results. Each check is composed of several fields as described in the table below.
+Checks are the core of an SCA policy, as they describe the scan to be performed in the endpoint. The checks contain fields that define what actions the agent should take to scan the endpoint, and how to evaluate the scan results. Each check is composed of several fields as described in the table below:
 
 Checks section
 ^^^^^^^^^^^^^^
@@ -188,9 +188,6 @@ Checks section
     +-------------+-----------+----------------------------+--------------------+
     |    rules    |    Yes    |      Array of strings      |     Any string     |
     +-------------+-----------+----------------------------+--------------------+
-
-Check evaluation is governed by its `rule result aggregation strategy`, as set in its ``condition`` field, and the results of
-the evaluation of its rules.
 
 Condition
 ---------
@@ -274,15 +271,15 @@ The operators for content checking are shown in the content comparison operators
 .. table:: Content comparison operators
     :widths: auto
 
-    +--------------------------------------------------------------------------------------+-----------------+------------------------------------------------------------+
-    | Operation                                                                            | Operator        | Example                                                    |
-    +======================================================================================+=================+============================================================+
-    | Literal comparison, exact match                                                      | *by omission*   | ``f:/file -> CONTENT``                                     |
-    +--------------------------------------------------------------------------------------+-----------------+------------------------------------------------------------+
-    | :doc:`Lightweight Regular expression <../../ruleset/ruleset-xml-syntax/regex>` match | ``r:``          | ``f:/file -> r:REGEX``                                     |
-    +--------------------------------------------------------------------------------------+-----------------+------------------------------------------------------------+
-    | Numeric comparison (integers)                                                        | ``n:``          | ``f:/file -> n:REGEX_WITH_CAPTURE_GROUP compare <= VALUE`` |
-    +--------------------------------------------------------------------------------------+-----------------+------------------------------------------------------------+
+    +--------------------------------------------------------------------------------------+-------------------------------------------------------------------------------------------+------------------------------------------------------------+
+    | Operation                                                                            | Operator                                                                                  | Example                                                    |
+    +======================================================================================+===========================================================================================+============================================================+
+    | Literal comparison, exact match                                                      | *by omission (the absence of an operator signifies a literal comparison or exact match)*  | ``f:/file -> CONTENT``                                     |
+    +--------------------------------------------------------------------------------------+-------------------------------------------------------------------------------------------+------------------------------------------------------------+
+    | :doc:`Lightweight Regular expression <../../ruleset/ruleset-xml-syntax/regex>` match | ``r:``                                                                                    | ``f:/file -> r:REGEX``                                     |
+    +--------------------------------------------------------------------------------------+-------------------------------------------------------------------------------------------+------------------------------------------------------------+
+    | Numeric comparison (integers)                                                        | ``n:``                                                                                    | ``f:/file -> n:REGEX_WITH_CAPTURE_GROUP compare <= VALUE`` |
+    +--------------------------------------------------------------------------------------+-------------------------------------------------------------------------------------------+------------------------------------------------------------+
 
 Numeric comparison operators
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
