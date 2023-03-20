@@ -176,7 +176,7 @@ In a nutshell, whenever the hash of a policy file changes, the recovery steps pe
 
       2022/11/01 15:31:23 wazuh-analysisd: INFO: Policy 'cis_debian10' information for agent '001' is outdated. Requested latest scan results.
 
-The log shows the SCA policy file and the affected Wazuh agent.
+  The log shows the SCA policy file and the affected Wazuh agent.
 
 #. The Wazuh server flushes its stored data for that SCA policy.
 #. The Wazuh agent sends the new scan results of the SCA policy.

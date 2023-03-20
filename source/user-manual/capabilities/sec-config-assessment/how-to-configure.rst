@@ -24,7 +24,7 @@ By default, the Wazuh agent runs scans for every policy (``.yaml`` or ``.yml`` f
 .. warning::
     The contents of the aforementioned default ruleset folders are neither kept across installations nor updates. Place them under an alternative folder if you wish to modify or add new policies.
 
-To enable a policy file that's outside the Wazuh agent installation folder, add the policy file path to the ``<sca>`` block in the Wazuh agent configuration file. An example is shown below:
+To enable a policy file outside the Wazuh agent installation folder, add the policy file path to the ``<sca>`` block in the Wazuh agent configuration file. An example is shown below:
 
 .. code-block:: xml
 
@@ -75,7 +75,7 @@ You can enable this feature to push policy files to the Wazuh agents in defined 
     .. note::
         By enabling remote command execution, the Wazuh server gains the ability to execute commands on the monitored endpoint. Remote commands are disabled by default as a security measure, which helps reduce the attack surface in case the Wazuh server is compromised.
 
-        You do not need to enable remote commands if you add the policy files to each agent without using Wazuh to push them. For example you can manually create the policy file directly on the monitored endpoint, or use ``scp`` to copy the policy file to the monitored endpoint.    
+        You do not need to enable remote commands if you add the policy files to each agent without using Wazuh to push them. For example, you can manually create the policy file directly on the monitored endpoint, or use ``scp`` to copy the policy file to the monitored endpoint.    
 
 #. Place a new policy file in the Wazuh server ``/var/ossec/etc/shared/default`` folder. This file must be owned by the user ``wazuh``.
 
@@ -96,5 +96,7 @@ You can enable this feature to push policy files to the Wazuh agents in defined 
             </policies>
           </sca>
         </agent_config>
+
+   All files remotely pushed from the Wazuh server are saved in the ``/<WAZUH_HOME_DIRECTORY>/etc/shared/`` directory on the agent endpoints regardless of the group they belong to. We specify the relative file path of the policy in the configuration because the full file path could differ depending on the operating system of the monitored endpoint.
 
 The new ``<sca>`` block in the Wazuh server ``/var/ossec/etc/shared/default/agent.conf`` file is merged with the ``<sca>`` block on the Wazuh agent side, and the new configuration is added.

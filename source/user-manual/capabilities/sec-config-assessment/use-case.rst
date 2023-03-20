@@ -6,7 +6,7 @@
 Use case
 ========
 
-This section shows some custom SCA use cases for different operating systems. We provide detailed steps of how to replicate the use cases.
+This section shows some custom SCA use cases for different operating systems. We provide detailed steps on how to replicate the use cases.
 
 Prerequisites
 -------------
@@ -101,7 +101,7 @@ Take the following steps on your Ubuntu endpoint to create the file ``/usr/share
    - We create a requirement to ensure that the policy runs only if the file ``/usr/share/testfile.txt`` exists on the endpoint.
    - Check ID ``10000`` scans the file ``/usr/share/testfile.txt`` to find any line that contains the string ``password_enabled: yes``. The ``none`` condition ensures that the check fails if a match is found.
 
-#. Change the ownership of the file so Wazuh has permissions to it:
+#. Change the ownership of the file so Wazuh has permission to it:
 
    .. code-block:: console
    
@@ -370,7 +370,7 @@ Netcat is a utility that uses TCP and UDP to read and write data on an IP networ
    - We create a requirement to ensure that the policy runs only on Linux endpoints. The requirement checks for the presence of the ``/etc/ssh/sshd_config``, ``/etc/passwd``, and ``/etc/shadow`` files, and passes if any of them is found.
    - Check ID ``10003`` scans the endpoint for processes named ``nc`` or ``netcat``. The ``none`` condition ensures that the check fails if a match is found.
 
-#. Change the ownership of the file so Wazuh has permissions to it:
+#. Change the ownership of the file so Wazuh has permission to it:
 
    .. code-block:: console
    
@@ -538,7 +538,7 @@ Netcat is a utility that uses TCP and UDP to read and write data on an IP networ
 
 
    - We create a requirement to ensure that the policy runs only on macOS endpoints. The requirement runs the ``sw_vers`` command to check if the output contains the string ``ProductName: macOS``.
-   - Check ID ``10005`` runs a command which spawns a shell to run the ``ps`` utility to view all running processes. The command uses the ``grep`` utility to filter the output of the ps command for patterns of the netcat process. The ``none`` condition ensures that the check fails if a match is found.
+   - Check ID ``10005`` runs a command which spawns a shell to run the ``ps`` utility to view all running processes. The command uses the ``grep`` utility to filter the output of the ``ps`` command for patterns of the netcat process. The ``none`` condition ensures that the check fails if a match is found.
 
 #. Enable the policy file by adding the following lines to the ``<ossec_config>`` block of the Wazuh agent configuration file at ``/Library/Ossec/etc/ossec.conf``:
 

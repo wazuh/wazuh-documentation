@@ -31,6 +31,7 @@ Policy file sections
 An SCA policy looks like the following:
 
 .. code-block:: YAML
+   :emphasize-lines: 10,18,27,31
 
    # Security Configuration Assessment
    # Audit for UNIX systems
@@ -104,7 +105,6 @@ Policy section
     | references         | No             | Array of strings  | Any string             | Any string             |
     +--------------------+----------------+-------------------+------------------------+------------------------+
 
-
 Requirements section
 ^^^^^^^^^^^^^^^^^^^^
 
@@ -123,6 +123,9 @@ Requirements section
     | rules              | Yes            | Array of strings  | Any string             |
     +--------------------+----------------+-------------------+------------------------+
 
+Variables section
+^^^^^^^^^^^^^^^^^
+
 .. _sca_policy_file_variables_section:
 .. table:: Variables section
 
@@ -140,9 +143,9 @@ Variables
 
 Variables are set in the variables section. Their names are preceded by ``$``. For instance:
 
-- $list_of_files: /etc/ssh/sshd_config,/etc/sysctl.conf,/var/log/dmesg
-- $list_of_folders: /etc,/var,/tmp
-- $program_name: apache2
+- ``$list_of_files``: ``/etc/ssh/sshd_config``, ``/etc/sysctl.conf``, ``/var/log/dmesg``
+- ``$list_of_folders``: ``/etc``, ``/var``, ``/tmp``
+- ``$program_name``: ``apache2``
 
 Variables can be placed anywhere in the left part of the rule. Therefore, regarding the variables above, the following rules could be built:
 
@@ -193,11 +196,13 @@ Condition
 ---------
 
 The result of each SCA check is governed by the conditions set in the ``condition`` field, and the results of the evaluation of its rules. The condition field specifies how rule results are aggregated in order to calculate the final value of a check. There are three options:
+
 - ``all``: The check is evaluated as **Passed** if all of its rules are satisfied and as **Failed** as soon as one rule is not satisfied.
 - ``any``: The check is evaluated as **Passed** as soon as any of its rules are satisfied.
 - ``none``: The check is evaluated as **Passed** if none of its rules are satisfied and as **Failed** as soon as one rule is satisfied.
 
 There are certain situations in which the aforementioned aggregators are evaluated as **Not applicable**.
+
 - ``all``: If any rule returns **Not applicable**, and no rule returns **Failed**, the result is **Not applicable**.
 - ``any``: The check is evaluated as **Not applicable** if no rule is evaluated as **Passed** and any rule returns **Not applicable**.
 - ``none``: The check is evaluated as **Not applicable** if no rule is evaluated as **Passed** and any rule returns **Not applicable**.
@@ -233,7 +238,7 @@ Condition / rule evaluation
 Rules
 -----
 
-Rules can check for the existence of files, directories, registry keys and values, running processes, and recursively test for the existence of files inside directories. When it comes to content checking, they are able to check for file contents, recursively check for the contents of files inside directories, command output and registry value data.
+Rules can check for the existence of files, directories, registry keys and values, running processes, and recursively test for the existence of files inside directories. When it comes to content checking, they are able to check for file contents, recursively check for the contents of files inside directories, command output, and registry value data.
 
 Abstractly, rules start with a location and a type of location that is the target of the test, followed by the actual test specification. Such tests fall into two categories: existence and content checks. The type of location is listed in the :ref:`Rule types<rule_types>` table below, and the location could be a file name, directory, process name, command, or a registry key.
 
@@ -289,7 +294,7 @@ The operators for numeric comparison are shown in the table below.
 
     +--------------------------------+----------+---------------------------------------+
     | Arithmetic relational operator | Operator | Example                               |
-    +--------------------------------+----------+---------------------------------------+
+    +================================+==========+=======================================+
     | less than                      | ``<``    | ``n:SomeProperty (\d) compare < 42``  |
     +--------------------------------+----------+---------------------------------------+
     | less than or equal to          | ``<=``   | ``n:SomeProperty (\d) compare <= 42`` |
@@ -321,13 +326,14 @@ By combining the aforementioned rule types and operators, both existence and con
 Existence checking rules
 ^^^^^^^^^^^^^^^^^^^^^^^^
 
-Existence checks are created by setting rules without a content operator, the general form is as follows:
+Existence checks are created by setting rules without a content operator.The general form is as follows:
 
 .. code-block:: yaml
 
     RULE_TYPE:target
 
 Examples of existence checks:
+
 - ``f:/etc/sshd_config`` checks the existence of ``/etc/sshd_config`` file.
 - ``d:/etc`` checks the existence of the ``/etc`` directory.
 - ``not p:sshd`` tests the presence of processes called ``sshd`` and fails if one is found.
