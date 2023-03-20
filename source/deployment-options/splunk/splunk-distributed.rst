@@ -31,7 +31,9 @@ The structure of a basic Splunk Cluster is formed by the following elements:
 -  The **forwarder** runs on the Wazuh manager instance, it reads local data and sends it to the indexer.
 -  The **deployer** instance installs and configures the Wazuh App into every **search head** instance at the same time.
 
-.. thumbnail:: /images/splunk-cluster/8.png
+.. thumbnail:: /images/splunk-cluster/splunk-multi-instance-cluster.png
+   :title: Install Splunk in a multi-instance cluster
+   :alt: Install Splunk in a multi-instance cluster
    :align: center
    :width: 80%
 

@@ -44,8 +44,10 @@ The agent runs on the endpoint you want to monitor and communicates with the Waz
 
              #. To install the Wazuh agent on your system, run the downloaded file and follow the steps in the installation wizard. If you are not sure how to answer some of the prompts, use the default answers.
 
-                .. thumbnail:: ../../images/installation/macos.png
+                .. thumbnail:: ../../images/installation/macos-agent.png
                    :align: center
+                   :title: macOS agent
+                   :alt: macOS agent
                    
              #. To complete the installation process, start the Wazuh agent.
     
