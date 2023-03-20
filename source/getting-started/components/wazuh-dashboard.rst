@@ -30,11 +30,11 @@ As an example, Wazuh provides out-of-the-box dashboards for regulatory complianc
          :title: Auditing and policy monitoring
          :alt: Auditing and policy monitoring
 
-   -  .. thumbnail::  /images/getting-started/thread-detection-and-response.png 
+   -  .. thumbnail::  /images/getting-started/threat-detection-and-response.png 
          :align: center
          :width: 100% 
-         :title: Thread detection and response
-         :alt: Thread detection and response
+         :title: Threat detection and response
+         :alt: Threat detection and response
 
    -  .. thumbnail::  /images/getting-started/dashboard-regulatory-compliance.png 
          :align: center
