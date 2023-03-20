@@ -470,6 +470,7 @@ removedUrls['4.3'] = [
   '/user-manual/capabilities/active-response/how-it-works.html',
   '/user-manual/capabilities/active-response/remediation-configuration.html',
   '/user-manual/capabilities/active-response/remediation-faq.html',
+  '/user-manual/capabilities/sec-config-assessment/what-is-it.html',
 ];
 
 
@@ -1204,6 +1205,11 @@ redirections.push(
     'target': ['4.2=>4.3'],
     '4.2': '/user-manual/capabilities/active-response/remediation-faq.html',
     '4.3': '/user-manual/capabilities/active-response/index.html',
+  },
+  {
+    'target': ['4.2=>4.3', '4.3=>4.2'],
+    '4.2': '/user-manual/capabilities/sec-config-assessment/what-is-it.html',
+    '4.3': '/user-manual/capabilities/sec-config-assessment/how-it-works.html',
   },
   );
 
