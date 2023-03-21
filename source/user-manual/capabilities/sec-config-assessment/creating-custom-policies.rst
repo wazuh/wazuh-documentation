@@ -216,6 +216,8 @@ There are certain situations in which the aforementioned aggregators are evaluat
     |           ``none``           |      no     |     yes     |         no        |     Passed         |
     +------------------------------+-------------+-------------+-------------------+--------------------+
 
+\* This result does not affect the final result.
+
 Rules
 ^^^^^
 
