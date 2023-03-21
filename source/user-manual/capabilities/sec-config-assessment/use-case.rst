@@ -3,8 +3,8 @@
 .. meta::
   :description: Follow a use case to see how Wazuh runs SCA checks and triggers alerts in this section of the documentation.
 
-Use case
-========
+Use cases
+=========
 
 This section shows some custom SCA use cases for different operating systems. We provide detailed steps on how to replicate the use cases.
 
