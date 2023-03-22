@@ -117,7 +117,6 @@ Starting the Wazuh dashboard service
                      run_as: false
 
 
-
   #. Access the Wazuh web interface with your credentials.
 
       - URL: *https://<wazuh-dashboard-ip>*
