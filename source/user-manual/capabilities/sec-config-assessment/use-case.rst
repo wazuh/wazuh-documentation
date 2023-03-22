@@ -6,7 +6,7 @@
 Use cases
 =========
 
-This section shows some custom SCA use cases for different operating systems. We provide detailed steps on how to replicate the use cases.
+This section shows some custom SCA use cases for various operating systems. We provide detailed steps on how to replicate these use cases. 
 
 Prerequisites
 -------------
@@ -20,11 +20,7 @@ You need the following deployment to test the use cases defined in this section:
   - A Windows 11 endpoint.
   - A macOS 12 endpoint.
 
-List of use cases in this section
----------------------------------
-
-- :ref:`Detecting keyword in a file <detecting_keyword_in_a_file>`
-- :ref:`Detecting a running process <detecting_a_running_process>`
+The use cases covered in this section include :ref:`Detecting keyword in a file <detecting_keyword_in_a_file>` and :ref:`Detecting a running process <detecting_a_running_process>`. 
 
 .. _detecting_keyword_in_a_file:
 

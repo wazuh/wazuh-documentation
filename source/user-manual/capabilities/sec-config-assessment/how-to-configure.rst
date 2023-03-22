@@ -46,7 +46,7 @@ You can also specify a relative path to the Wazuh installation directory:
 
 There are two ways to disable policies on the Wazuh agent. The simplest one is renaming the policy file by adding ``.disabled`` (or anything different from ``.yaml`` or ``.yml``) after their YAML extension. 
 
-The second is to disable them from the Wazuh agent ``/var/ossec/etc/ossec.conf`` file by adding a line such as the following to the ``<policy>`` section of the SCA module:
+The second is to disable them from the Wazuh agent ``ossec.conf`` file by adding a line such as the following to the ``<policy>`` section of the SCA module:
 
 .. code-block:: xml
 
@@ -61,11 +61,11 @@ The second is to disable them from the Wazuh agent ``/var/ossec/etc/ossec.conf``
 How to share policy files and configuration with the Wazuh agents
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-As described in the :doc:`centralized configuration <../../reference/centralized-configuration>` section, the Wazuh manager has the ability to push files and configurations to connected Wazuh agents.
+As described in the :doc:`centralized configuration <../../reference/centralized-configuration>` section, the Wazuh manager can push files and configurations to connected Wazuh agents.
 
 You can enable this feature to push policy files to the Wazuh agents in defined groups. By default, every Wazuh agent belongs to the ``default`` group, which is used here as an example:
 
-#. Edit the Wazuh agent ``local_internal_options.conf`` file to allow the execution of commands in SCA policies sent from the Wazuh server:
+#. On the Wazuh agent, edit the ``local_internal_options.conf`` file to allow the execution of commands in SCA policies sent from the Wazuh server:
 
      .. code-block:: console
 
@@ -75,15 +75,17 @@ You can enable this feature to push policy files to the Wazuh agents in defined 
     .. note::
         By enabling remote command execution, the Wazuh server gains the ability to execute commands on the monitored endpoint. Remote commands are disabled by default as a security measure, which helps reduce the attack surface in case the Wazuh server is compromised.
 
-        You do not need to enable remote commands if you add the policy files to each agent without using Wazuh to push them. For example, you can manually create the policy file directly on the monitored endpoint, or use ``scp`` to copy the policy file to the monitored endpoint.    
+        You do not need to enable remote commands if you add the policy files to each agent without using the Wazuh server to push them. For example, you can manually create the policy file directly on the monitored endpoint, or use ``scp`` to copy the policy file to the monitored endpoint.    
 
-#. Place a new policy file in the Wazuh server ``/var/ossec/etc/shared/default`` folder. This file must be owned by the user ``wazuh``.
+#. On the Wazuh server, place a new policy file in the ``/var/ossec/etc/shared/default`` folder and change its ownership. Replace ``<NEW_POLICY_FILE>`` with your policy name. 
 
      .. code-block:: console
         
         # chown wazuh:wazuh /var/ossec/etc/shared/default/<NEW_POLICY_FILE>
 
-#. Add the configuration block to the Wazuh server ``/var/ossec/etc/shared/default/agent.conf`` file to send the new policy file to the Wazuh agent:
+
+#. Add the following configuration block to the Wazuh server ``/var/ossec/etc/shared/default/agent.conf`` file to configure the new policy file in the Wazuh agent:
+
 
      .. code-block:: xml
         :emphasize-lines: 5

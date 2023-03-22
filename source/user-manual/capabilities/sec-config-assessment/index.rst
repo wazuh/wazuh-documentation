@@ -3,14 +3,6 @@
 .. meta::
   :description: Find out more about the Wazuh Security Configuration Assessment capability. What is SCA, how it works and how to configure it, a use case and more.
 
-.. Section marks used on this document:
-.. h0 ======================================
-.. h1 --------------------------------------
-.. h2 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-.. h3 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-.. h4 ######################################
-.. h5 ::::::::::::::::::::::::::::::::::::::
-
 .. _manual_sec_config_assessment:
 
 Security Configuration Assessment
