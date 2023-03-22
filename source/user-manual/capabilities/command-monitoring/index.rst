@@ -2,7 +2,6 @@
 
 .. meta::
     :description: Learn more about how to monitor commands with Wazuh: how this feature works, its configuration, and frequently asked questions about this capability
-
     
 .. _manual_command_monitoring:
 

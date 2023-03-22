@@ -1,7 +1,8 @@
 .. Copyright (C) 2015, Wazuh, Inc.
 
-.. _listing_agents:
-
+.. meta::
+   :description: Learn how to list agents in this section of our documentation.  
+ 
 Listing agents
 ==================
 
@@ -10,4 +11,4 @@ Listing agents
 
         using-command-line
         listing
-        wazuh-app
+        wazuh-dashboard

@@ -1,5 +1,8 @@
 .. Copyright (C) 2015, Wazuh, Inc.
 
+.. meta::
+  :description: The actual configuration of an agent or the manager can be queried on demand. Learn more about it in this section of the Wazuh documentation.
+
 .. _kibana_query_configuration:
 
 Query configuration

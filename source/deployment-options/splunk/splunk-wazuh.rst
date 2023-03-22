@@ -1,15 +1,14 @@
 .. Copyright (C) 2015, Wazuh, Inc.
 
-.. meta:: :description: Learn how to install Elastic Stack for using Wazuh on Debian
+.. meta::
+   :description: Install the Wazuh manager for a Wazuh with Splunk installation
 
 Wazuh manager installation
 ==========================
 
 This document will go through the installation of the Wazuh manager.
 
-.. note::
-
-   Root user privileges are required to run all the commands described below.
+.. note:: You need root user privileges to run all the commands described below.
 
 Prerequisites
 -------------
@@ -49,7 +48,7 @@ Choose the corresponding tab to configure the installation as a single-node or m
                   # systemctl enable wazuh-manager
                   # systemctl start wazuh-manager
 
-            .. group-tab:: SysV Init
+            .. group-tab:: SysV init
 
                Choose one option according to your operating system:
 
@@ -69,19 +68,9 @@ Choose the corresponding tab to configure the installation as a single-node or m
 
       #. Run the following command to check if the Wazuh manager is active: 
 
-         .. tabs::
+         .. include:: /_templates/installations/wazuh/common/check_wazuh_manager.rst
 
-            .. group-tab:: Systemd
-
-               .. code-block:: console
-
-                  # systemctl status wazuh-manager
-
-            .. group-tab:: SysV Init
-
-               .. code-block:: console
-
-                  # service wazuh-manager status
+            
 
    .. group-tab:: Multi-node cluster
 

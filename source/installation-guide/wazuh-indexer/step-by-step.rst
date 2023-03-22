@@ -1,6 +1,7 @@
 .. Copyright (C) 2015, Wazuh, Inc.
 
-.. meta:: :description: Wazuh indexer is a highly scalable full-text search engine. Install the Wazuh indexer in a single-node or multi-node configuration according to your environment needs. 
+.. meta::
+   :description: Wazuh indexer is a highly scalable full-text search engine. Install the Wazuh indexer in a single-node or multi-node configuration according to your environment needs. 
 
 Installing the Wazuh indexer step by step
 =========================================
@@ -16,7 +17,7 @@ The installation process is divided into three stages.
 #. Cluster initialization
 
 
-.. note:: Root user privileges are required to run the commands described below.
+.. note:: You need root user privileges to run all the commands described below.
 
 1. Certificates creation
 ------------------------
@@ -77,7 +78,7 @@ Deploying certificates
 ^^^^^^^^^^^^^^^^^^^^^^
 
   .. note::
-    Make sure that a copy of ``wazuh-certificates.tar``, created in the previous stage of the installation process, is placed in your working directory.
+    Make sure that a copy of the ``wazuh-certificates.tar`` file, created during the initial configuration step, is placed in your working directory.
 
   .. include:: /_templates/installations/indexer/common/deploy_certificates.rst
 
@@ -88,7 +89,7 @@ Starting the service
 
       .. include:: /_templates/installations/indexer/common/enable_indexer.rst
     
-Repeat this stage of the installation process for every Wazuh indexer node in your multi-node cluster. Then proceed to the cluster initialization stage.
+Repeat this stage of the installation process for every Wazuh indexer node in your cluster. Then proceed with initializing your single-node or multi-node cluster in the next stage.
 
 
 3. Cluster initialization
@@ -98,7 +99,7 @@ Repeat this stage of the installation process for every Wazuh indexer node in yo
     <div class="accordion-section open">
 
 
-#. Run the Wazuh indexer ``indexer-security-init.sh`` script on `any` Wazuh indexer node to load the new certificates information and start the cluster. 
+#. Run the Wazuh indexer ``indexer-security-init.sh`` script on `any` Wazuh indexer node to load the new certificates information and start the single-node or multi-node cluster. 
     
    .. code-block:: console
 
@@ -121,22 +122,23 @@ Testing the cluster installation
           {
             "name" : "node-1",
             "cluster_name" : "wazuh-cluster",
-            "cluster_uuid" : "cMeWTEWxQWeIPDaf1Wx4jw",
+            "cluster_uuid" : "bMz0BKdlRVui5jF-mlt6yg",
             "version" : {
               "number" : "7.10.2",
               "build_type" : "rpm",
-              "build_hash" : "e505b10357c03ae8d26d675172402f2f2144ef0f",
-              "build_date" : "2022-01-14T03:38:06.881862Z",
+              "build_hash" : "f2f809ea280ffba217451da894a5899f1cec02ab",
+              "build_date" : "2022-12-12T22:17:42.341124910Z",
               "build_snapshot" : false,
-              "lucene_version" : "8.10.1",
-              "minimum_wire_compatibility_version" : "6.8.0",
-              "minimum_index_compatibility_version" : "6.0.0-beta1"
+              "lucene_version" : "9.4.2",
+              "minimum_wire_compatibility_version" : "7.10.0",
+              "minimum_index_compatibility_version" : "7.0.0"
             },
             "tagline" : "The OpenSearch Project: https://opensearch.org/"
           }
           
 
-  #. Replace ``<WAZUH_INDEXER_IP>`` and run the following command to check if the cluster is working correctly. 
+
+  #. Replace ``<WAZUH_INDEXER_IP>`` and run the following command to check if the single-node or multi-node cluster is working correctly. 
   
       .. code-block:: console
 
@@ -146,6 +148,6 @@ Testing the cluster installation
 Next steps
 ----------
 
-The Wazuh indexer is now successfully installed on your single-node or multi-node cluster and you can proceed with installing the Wazuh server. To perform this action, see the :doc:`../wazuh-server/step-by-step` section.
+The Wazuh indexer is now successfully installed on your single-node or multi-node cluster, and you can proceed with installing the Wazuh server. To perform this action, see the :doc:`../wazuh-server/step-by-step` section.
 
 If you want to uninstall the Wazuh indexer, see :ref:`uninstall_indexer`.

@@ -79,10 +79,12 @@ jQuery(function($) {
   }
 
   /* Link rel=canonical tag based on the selector */
-  const canonicalTag = !!document.querySelector('link[rel=\'canonical\']') ? document.querySelector('link[rel=\'canonical\']') : document.createElement('link');
-  canonicalTag.setAttribute('rel', 'canonical');
-  canonicalTag.setAttribute('href', document.location.protocol + '//' + document.location.host + '/' + canonicalRelease + canonicalPath);
-  document.head.appendChild(canonicalTag);
+  if ( !document.querySelector('link[rel=\'canonical\']') ) {
+    const canonicalTag = document.createElement('link');
+    canonicalTag.setAttribute('rel', 'canonical');
+    canonicalTag.setAttribute('href', document.location.protocol + '//' + document.location.host + '/' + canonicalRelease + canonicalPath);
+    document.head.appendChild(canonicalTag);
+  }
 
   /* Initialize the tooltip of bootstrap */
   $('#version-selector [data-toggle="tooltip"]').tooltip({container: 'header'});
@@ -231,7 +233,8 @@ jQuery(function($) {
    */
   function normalizeUrl(originalUrl) {
     if (!Array.isArray(originalUrl)) {
-      let normalizedURL = originalUrl.trim().replace('index.html', '');
+      let normalizedURL = originalUrl.trim();
+      normalizedURL = normalizedURL.replace(/\/$/, '/index.html');
       normalizedURL = normalizedURL.replace(/\/{2,}/, '/');
 
       if (normalizedURL.charAt(normalizedURL.length-1) == '#' ) {

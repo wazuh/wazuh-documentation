@@ -16,12 +16,27 @@ Creating a CDB list
 Creating the list file
 ^^^^^^^^^^^^^^^^^^^^^^
 
-The list file is a plain text file where each line has the following format::
+The list file is a plain text file. Each line has a unique key followed by a colon ``:`` separator character.
 
-    key1:value1
-    key2:value2
+.. code-block:: none
 
-Each key must be unique, followed by a colon ``:`` and it can have an optional value. The value can be identical to others, but the key must remain unique.
+	key1:
+	key2:
+
+Following the separator, you can optionally add a value. Values can be repeated, but the keys must be unique.
+
+.. code-block:: none
+
+	key1:value1
+	key2:value2
+	key3:value2
+
+If you need to include the ``:`` character as part of the key, such as with MAC addresses, you must escape the complete key using quotation marks. For example:
+
+.. code-block:: none
+
+	"a0:a0:a0:a0:a0:a0":
+	"b1:b1:b1:b1:b1:b1":
 
 With a key, we can determine the presence or absence of a field in a given list. By adding a value, we can use it as criteria in rules. For example, if we have account names (key) with a department name (value) associated, it would be possible to create an alert that triggers when a user not from the finance department logs into the finance server.
 
@@ -64,17 +79,7 @@ Each list must be defined in the ``ossec.conf`` file using the following syntax:
 
 Restart Wazuh to apply the changes:
 
-  a. For Systemd:
-
-  .. code-block:: console
-
-    # systemctl restart wazuh-manager
-
-  b. For SysV Init:
-
-  .. code-block:: console
-
-    # service wazuh-manager restart
+  .. include:: /_templates/common/restart_manager.rst
 
 Using the CDB list in the rules
 -------------------------------

@@ -1,18 +1,18 @@
 .. Copyright (C) 2015, Wazuh, Inc.
 
+.. meta::
+  :description: Discover how Wazuh helps you to monitor your GitHub organizations. Check out this section of our documentation to learn more about it. 
+
 .. _github:
 
 Using Wazuh to monitor GitHub
 =============================
 
-.. meta::
-  :description: Discover how Wazuh can help you to monitor your GitHub organizations.
-
 .. versionadded:: 4.3.0
 
-This section provides instructions for monitoring the **GitHub** audit log for your organization.
+This section provides instructions for monitoring the GitHub `audit log` for your organization.
 
-The **audit** log allows Wazuh to monitor:
+The `audit log` allows Wazuh to monitor:
 
 - Access to your organization or repository settings.
 - Changes in permissions.

@@ -218,9 +218,9 @@ var Documentation = {
    */
   highlightSearchWords : function() {
     var params = $.getQueryParameters();
-    var terms = (params.highlight) ? params.highlight[0].split(/\s+/) : [];
+    var terms = (params.highlight) ? params.highlight[0].replace(/"/g, "").split(/\s+/) : [];
     if (terms.length) {
-      var body = $('div.body');
+      var body = $('main > .section');
       if (!body.length) {
         body = $('body');
       }

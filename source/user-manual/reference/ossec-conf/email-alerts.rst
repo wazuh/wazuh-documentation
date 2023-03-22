@@ -75,7 +75,7 @@ This limits the sending of emails to only when rules are tripped that belongs to
 +--------------------+---------------------------------------------------------------------------------------------+
 
 .. note::
-	Observe that all groups must be finished by comma.
+	Observe that all groups must be finished with a comma.
 
 
 event_location

@@ -5,13 +5,14 @@
 
 .. _wazuh_agent_solaris:
 
+Installing Wazuh agents on Solaris endpoints
+============================================
 
-Installing Wazuh agents on Solaris systems
-==========================================
+The agent runs on the host you want to monitor and communicates with the Wazuh manager, sending data in near real-time through an encrypted and authenticated channel. 
 
-The agent runs on the host you want to monitor and communicates with the Wazuh manager, sending data in near real time through an encrypted and authenticated channel. 
+To start the installation process, select your architecture: i386 or SPARC.
 
-To start the installation process, select your architecture: i386 or Sparc. Alternatively, if you want to download the Wazuh agent package directly, see the :doc:`packages list </installation-guide/packages-list>` section. 
+.. note:: You need root user privileges to run all the commands described below.
 
 .. tabs::
 
@@ -36,9 +37,9 @@ To start the installation process, select your architecture: i386 or Sparc. Alte
 
 
 
-  .. group-tab:: Sparc
+  .. group-tab:: SPARC
 
-    Select your Solaris Sparc version.
+    Select your Solaris SPARC version.
 
     .. tabs::
 
@@ -58,7 +59,7 @@ To start the installation process, select your architecture: i386 or Sparc. Alte
         
 
         
-The installation process is now complete and the Wazuh agent is successfully installed on your Solaris system. The next step is to register and configure the agent to communicate with the Wazuh manager. To perform this action, see the :ref:`Wazuh agent enrollment <agent_enrollment>` section.
+The installation process is now complete, and the Wazuh agent is successfully installed on your Solaris endpoint. The next step is to register and configure the agent to communicate with the Wazuh server. To perform this action, see the :doc:`Wazuh agent enrollment </user-manual/agent-enrollment/index>` section.
 
 
 
@@ -81,4 +82,4 @@ To uninstall the agent, select your Solaris version.
     .. include:: ../../_templates/installations/wazuh/solaris/uninstall_wazuh_agent_s11.rst
 
 
-The Wazuh agent is now completely removed from your Solaris system.
+The Wazuh agent is now completely removed from your Solaris endpoint.

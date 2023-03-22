@@ -14,13 +14,16 @@ macOS unified logging system (ULS) events can be gathered and forwarded to the m
 
 The ULS centralizes the management and storage of the logs across all the system levels, from Apps to the Kernel itself, rather than writing the data to text-based log files. Because of this, it is necessary to use specific methods to retrieve logs from this particular system.
 
-To gather the logs, Wazuh uses the CLI `log` tool which provides an interesting interface for log collection in a filtered way, since all the ULS logs pass through this single system. These parameters let the user configure the ``level`` of messages to be gathered, filter by the log ``type`` and even use a very specific ``predicate`` to filter the logs given their more specific characteristics.
+Wazuh uses the CLI `log` tool and the `syslog` format to gather the logs. This tool provides an interface for log collection in a filtered way since all the ULS logs pass through this single system. The query parameters in the Wazuh configuration allow the user to:
 
+-  Set the ``level`` of messages to gather.
+-  Filter by the log ``type``.
+-  Use a precise ``predicate`` to filter the logs, given their specific characteristics.
 
 Monitor the macOS ULS Logs with Wazuh
 -------------------------------------
 
-Wazuh interfaces with the ``log`` CLI tool to acquire the logs from the macOS Unified Logging System (**ULS**).
+Wazuh interfaces with the ``log`` CLI tool using the ``--style syslog`` format  to acquire the logs from the macOS ULS.
 
   .. code-block:: xml
 

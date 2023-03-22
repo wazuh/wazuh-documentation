@@ -18,7 +18,7 @@
 
                 .. code-block:: console
 
-                    # apt install curl apt-transport-https lsb-release gnupg
+                    # apt-get install curl apt-transport-https lsb-release gnupg
 
 
                

@@ -1,4 +1,5 @@
 .. Copyright (C) 2015, Wazuh, Inc.
+
 .. meta::
   :description: Learn more about how to configure syslog output in the Wazuh server administration section of our documentation. 
   
@@ -31,14 +32,5 @@ The above configuration will send alerts to ``192.168.1.240`` and, if the alert 
 
 To apply the changes, restart Wazuh:
 
-  a. For Systemd:
+  .. include:: /_templates/common/restart_manager.rst
 
-  .. code-block:: console
-
-    # systemctl restart wazuh-manager
-
-  b. For SysV Init:
-
-  .. code-block:: console
-
-    # service wazuh-manager restart

@@ -224,9 +224,10 @@ main {
               display: inline-block;
               position: absolute;
               height: 22px;
-              bottom: -1em;
+              bottom: -1.5em;
+              line-height: 1.5em;
               border-left: none;
-              padding: 10px 0;
+              padding: 0;
               left: -3px;
               font-size: 18px;
               font-weight: 600;
@@ -253,6 +254,16 @@ main {
           display: none;
         }
       }
+    }
+    .ico-long-arrow-right {
+      height: 15px;
+      width: 17px;
+      display: inline-block;
+      background-size: contain;
+      background-repeat: no-repeat;
+      margin-left: 12px;
+      position: relative;
+      bottom: -2px;
     }
   }
 }
@@ -384,6 +395,9 @@ main {
           border-left-color: $light-color-primary;
         }
       }
+    }
+    .ico-long-arrow-right {
+      background-image: url("#{$ico-path}arrows.svg#ico-long-arrow-right-lt");
     }
   }
 
@@ -557,6 +571,9 @@ main {
           border-left-color: $dark-color-highlight-inline-text;
         }
       }
+    }
+    .ico-long-arrow-right {
+      background-image: url("#{$ico-path}arrows.svg#ico-long-arrow-right-dt");
     }
   }
 

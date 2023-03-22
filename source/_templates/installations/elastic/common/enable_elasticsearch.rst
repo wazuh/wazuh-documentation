@@ -25,7 +25,7 @@
 
 
 
-  .. group-tab:: SysV Init
+  .. group-tab:: SysV init
 
     Choose one option according to the operating system used.
 

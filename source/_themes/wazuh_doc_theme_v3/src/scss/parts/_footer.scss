@@ -22,6 +22,11 @@ footer {
     left: $left-sidebar-width;
   }
 
+  .nav-item svg {
+    height: 15px;
+    width: 17px;
+  }
+
   & > .container {
     @include media-max(xl) {
       flex-direction: column;
@@ -119,9 +124,15 @@ footer {
 
     .nav-link {
       color: $light-color-main-text;
+      svg {
+        fill: $light-color-main-text;
+      }
 
       &:hover {
         color: $light-color-primary-lighter;
+        svg {
+          fill: $light-color-primary-lighter;
+        }
       }
     }
     .website-links {
@@ -149,9 +160,14 @@ footer {
 
     .nav-link {
       color: $dark-color-main-text;
-
+      svg {
+        fill: $dark-color-main-text;
+      }
       &:hover {
         color: $dark-color-primary-lighter;
+        svg {
+          fill: $dark-color-primary-lighter;
+        }
       }
     }
     .website-links {

@@ -1,5 +1,8 @@
 .. Copyright (C) 2015, Wazuh, Inc.
 
+.. meta::
+    :description: You can install Wazuh using different deployment options. Learn more about Wazuh installation alternatives in this section of the Wazuh documentation.
+
 .. _deployment:
 
 Installation alternatives

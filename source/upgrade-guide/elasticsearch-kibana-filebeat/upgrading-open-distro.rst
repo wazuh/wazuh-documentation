@@ -10,9 +10,7 @@ Wazuh and Open Distro for Elasticsearch
 
 This section guides through the upgrade process of the Wazuh server, Elasticsearch, and Kibana for the *Open Distro for Elasticsearch* distribution. 
 
-.. note::
-   
-   Root user privileges are required to execute all the commands described below.
+.. note:: You need root user privileges to run all the commands described below.
 
 Preparing the upgrade
 ---------------------
@@ -210,13 +208,13 @@ The IP address ``127.0.0.1`` is used in the commands below. If Elasticsearch is 
 
           .. code-block:: console
 
-            # apt install elasticsearch-oss=|ELASTICSEARCH_LATEST|
+            # apt-get install elasticsearch-oss=|ELASTICSEARCH_LATEST|
 
           Upgrade Open Distro for Elasticsearch:
 
           .. code-block:: console
 
-            # apt install opendistroforelasticsearch=|OPEN_DISTRO_LATEST|-1
+            # apt-get install opendistroforelasticsearch=|OPEN_DISTRO_LATEST|-1
 
 
         .. group-tab:: ZYpp

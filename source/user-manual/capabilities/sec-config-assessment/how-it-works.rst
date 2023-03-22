@@ -6,18 +6,11 @@
 How SCA works
 =============
 
-.. contents:: Table of Contents
-   :depth: 10
-
-Each agent has its own local database where it stores the current state of each check: *passed*, *failed*,
-or *not-applicable*, allowing agents to only send the differences detected between scans. If there has been no
-change, only the scan ``summary`` event will be sent, thus avoiding unnecessary network traffic while keeping
-the manager up to date. The manager will then use those updates to issue alerts that will be shown in the
-Wazuh dashboard.
+Each agent has its own local database where it stores the current state of each check. Agents only send the differences detected between scans. If there has been no change, only the scan summary event will be sent, thus avoiding unnecessary network traffic while keeping the manager up to date. The manager will then use those updates to issue alerts that will be shown in the Wazuh dashboard.
 
 Integrity and alerting flow are depicted in the sequence diagram below:
 
-  .. thumbnail:: ../../../images/sca/sca-sequence-diagram.png
+  .. thumbnail:: /images/sca/sca-sequence-diagram.png
      :title: SCA integrity and alerting flow
      :align: center
      :width: 80%
@@ -25,58 +18,65 @@ Integrity and alerting flow are depicted in the sequence diagram below:
 Scan Results
 ------------
 
-Any given check event has three possible results (``passed``, ``failed``, and ``not applicable``). This result
-is determined by the set of rules and the rule result aggregator of the check.
+Any given check event has three possible results:
 
-Take the following check from policy  ``cis_debian9_L2.yml`` as an example:
+-  Passed
+-  Failed
+-  Not applicable
+
+This result is determined by the set of rules and the rule result aggregator of the check.
+
+Take the following check from policy ``cis_debian9.yml`` as an example.
 
 .. code-block:: yaml
 
-  - id: 3511
-    title: "Ensure auditd service is enabled"
-    description: "Turn on the auditd daemon to record system events."
-    rationale: "The capturing of system events provides system administrators [...]"
-    remediation: "Run the following command to enable auditd: # systemctl enable auditd"
-    compliance:
-      - cis: ["4.1.2"]
-      - cis_csc: ["6.2", "6.3"]
-    condition: all
-    rules:
-      - 'c:systemctl is-enabled auditd -> r:^enabled'
+   - id: 2100
+     title: "Ensure auditd service is enabled"
+     description: "Turn on the auditd daemon to record system events."
+     rationale: "The capturing of system events provides system administrators with information to allow them to determine if unauthorized access to their system is occurring."
+     remediation: "Run the following command to enable auditd: # systemctl enable auditd"
+     compliance:
+       - cis: ["4.1.2"]
+       - cis_csc: ["6.2", "6.3"]
+       - pci_dss: ["10.1","10.7"]
+       - tsc: [CC6.1", "CC6.2", "CC6.3", "CC7.2", "CC7.3", "CC7.4"]
+     condition: all
+     rules:
+       - 'c:systemctl is-enabled auditd -> enabled'
 
 After evaluating the aforementioned check, the following event is generated:
 
-.. code-block:: json
-  :class: output
+.. code-block:: JSON
 
-  {
-    "type": "check",
-    "id": 355612303,
-    "policy": "CIS benchmark for Debian/Linux 9 L2",
-    "policy_id": "cis_debian9_L2",
-    "check": {
-      "id": 3511,
-      "title": "Ensure auditd service is enabled",
-      "description": "Turn on the auditd daemon to record system events.",
-      "rationale": "The capturing of system events provides system administrators [...]",
-      "remediation": "Run the following command to enable auditd: # systemctl enable auditd",
-      "compliance": {
-        "cis": "4.1.2",
-        "cis_csc": "6.2,6.3"
-      },
-      "rules": [
-        "c:systemctl is-enabled auditd -> r:^enabled"
-      ],
-      "command": "systemctl is-enabled auditd",
-      "result": "passed"
-    }
-  }
+   "data": {
+     "sca": {
+       "scan_id": "697507169",
+       "check": {
+         "result": "failed",
+         "remediation": "Run the following command to enable auditd: # systemctl enable auditd",
+         "compliance": {
+           "pci_dss": "10.1,10.7",
+           "tsc": "CC6.1,CC6.2,CC6.3,CC7.2,CC7.3,CC7.4",
+           "cis_csc": "6.2,6.3",
+           "cis": "4.1.2"
+         },
+         "description": "Turn on the auditd daemon to record system events.",
+         "id": "2100",
+         "title": "Ensure auditd service is enabled",
+         "rationale": "The capturing of system events provides system administrators with information to allow them to determine if unauthorized access to their system is occurring.",
+         "command": [
+           "systemctl is-enabled auditd"
+         ]
+       },
+       "type": "check",
+       "policy": "CIS Benchmark for Debian/Linux 9"
+     }
+   },
 
-The ``result`` is ``passed`` because the rule found "enabled" at the beginning of a line in the output of
-command `systemctl is-enabled auditd`.
+The result is `failed` because the rule did not find ``enabled`` in the output of command ``systemctl is-enabled auditd``.
 
 .. note::
-  A **check** will be marked as ``not applicable`` in case an error occurs while performing the check.
+  A **check** will be marked as ``Not applicable`` in case an error occurs while performing the check.
   In such cases, instead of including the field ``result``, fields: ``status`` and ``reason`` will be included.
 
 
@@ -89,18 +89,17 @@ two integrity mechanisms have been included in SCA, one for policy files and the
 Integrity of policy files
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-This mechanism is in charge of keeping policy files and scan results aligned. Whenever a change in a policy
-files is detected, SCA will invalidate the results stored in the database for that policy and request a
+This mechanism is in charge of keeping policy files and scan results aligned. Whenever a change in a policy file is detected, SCA will invalidate the results stored in the database for that policy and request a
 fresh dump of them.
 
 In a nutshell, whenever the hash of a policy file changes, the recovery steps performed are:
 
 #. A message appears in the manager log file, e.g:
 
-    .. code-block:: none
-        :class: output
+   .. code-block:: none
+      :class: output
 
-        INFO: Policy 'cis_debian9_L2' information for agent '002' is outdated. Requested latest scan results.
+      2022/08/04 17:58:22 wazuh-analysisd: INFO: Policy 'cis_debian9' information for agent '001' is outdated. Requested latest scan results.
 
 #. The manager flushes its stored data for that policy.
 #. The agent sends the scan results for that policy.
@@ -122,13 +121,13 @@ database and the manager-side differ. This scenario could happen due to, for ins
     +----------+------------------+--------------------+
     | Check ID | Agent-side state | Manager-side state |
     +==========+==================+====================+
-    | 1000     | ``passed``       | ``passed``         |
+    | 1000     | Passed           | Passed             |
     +----------+------------------+--------------------+
-    | 1001     | ``failed``       | ``failed``         |
+    | 1001     | Failed           | Failed             |
     +----------+------------------+--------------------+
-    | 1002     | ``failed``       | ``missing``        |
+    | 1002     | Failed           | Missing            |
     +----------+------------------+--------------------+
-    | 1003     | ``passed``       | ``passed``         |
+    | 1003     | Passed           | Passed             |
     +----------+------------------+--------------------+
 
 For those databases, the corresponding SHA256 hashes are:

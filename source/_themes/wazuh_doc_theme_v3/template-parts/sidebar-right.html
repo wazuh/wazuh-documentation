@@ -1,9 +1,12 @@
 <div id="right-sidebar" class="sidebar">
+  <div class="icon-assets">
+    {% include "template-parts/icons/edit.svg" %}
+  </div>
   <div class="sidebar-container">
     {% if theme_include_mode|tobool and theme_include_mode_switch|tobool %}
     {% include "template-parts/light-dark-switch.html" %}
     {% endif %}
-    {%- if pagename != 'index' -%}
+    {%- if pagename != 'index' and pagename != 'search' -%}
       {% include "template-parts/edit-repo.html" %}
       {% if display_toc %}
     <nav id="local-toc" class="navbar d-none d-xl-block">

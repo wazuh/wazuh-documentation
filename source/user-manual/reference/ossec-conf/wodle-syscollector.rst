@@ -2,7 +2,6 @@
 
 .. meta::
 	:description: Check out this section about the local configuration of Wazuh and learn about the configuration options of the syscollector wodle.
-
 	
 .. _wodle-syscollector:
 
@@ -84,7 +83,7 @@ Time between system scans.
 scan_on_start
 ^^^^^^^^^^^^^
 
-Run a system scan immediately when service is started.
+Run a system scan immediately when the service is started.
 
 +--------------------+---------+
 | **Default value**  | yes     |
@@ -178,7 +177,7 @@ Enables the hotfixes scan. It reports the Windows updates installed.
 +--------------------+---------+
 
 .. note::
-  This option is enabled by default but no included in the initial configuration.
+  This option is enabled by default but not included in the initial configuration.
 
 
 synchronization

@@ -1,4 +1,5 @@
 .. Copyright (C) 2015, Wazuh, Inc.
+
 .. meta::
   :description: Learn more about the Wazuh agent lifecycle here: registered agents, the status of the agents, and removed agents.
 

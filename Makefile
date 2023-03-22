@@ -61,15 +61,20 @@ theme:
 	@cd ../../..
 	@echo
 
-html-prod:
+search-index:
+	npx -y pagefind@v0.8.0 --source $(BUILDDIR)/html --force-language en
+
+html-production:
 	$(SPHINXBUILD) -b html $(ALLSPHINXOPTS) $(BUILDDIR)/html -t production
 	@echo
 	@echo "Build finished. The HTML pages are in $(BUILDDIR)/html. (production mode)"
+	@echo
 
-html-dev:
+html-development:
 	$(SPHINXBUILD) -b html $(ALLSPHINXOPTS) $(BUILDDIR)/html -t dev
 	@echo
 	@echo "Build finished. The HTML pages are in $(BUILDDIR)/html. (dev mode)"
+	@echo
 
 html-quick:
 	$(SPHINXBUILD) -j auto -b html $(ALLSPHINXOPTS) $(BUILDDIR)/html
@@ -80,6 +85,13 @@ html:
 	$(SPHINXBUILD) -b html $(ALLSPHINXOPTS) $(BUILDDIR)/html
 	@echo
 	@echo "Build finished. The HTML pages are in $(BUILDDIR)/html."
+	@echo
+
+html-prod: html-production search-index
+	
+html-dev: html-development search-index
+	
+html-search: html search-index
 
 dirhtml:
 	$(SPHINXBUILD) -b dirhtml $(ALLSPHINXOPTS) $(BUILDDIR)/dirhtml

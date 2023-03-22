@@ -55,6 +55,8 @@
         .icon {
           margin-left: 10px;
           font-size: 14px;
+          height: 14px;
+          width: 14px;
         }
       }
     }
@@ -69,6 +71,16 @@
       @include media-min(xl) {
         background-color: $light-color-base-space;
       }
+      a {
+        .icon {
+          fill: $light-color-primary;
+        }
+        &:hover {
+          .icon {
+            fill: $light-color-primary-lighter;
+          }
+        }
+      }
     }
   }
 }
@@ -80,6 +92,16 @@
     .sidebar-container {
       @include media-min(xl) {
         background-color: $dark-color-base-space;
+      }
+      a {
+        .icon {
+          fill: $dark-color-primary;
+        }
+        &:hover {
+          .icon {
+            fill: $dark-color-primary-lighter;
+          }
+        }
       }
     }
   }

@@ -1,20 +1,19 @@
 .. Copyright (C) 2015, Wazuh, Inc.
 
-.. _azure_storage:
-
 .. meta::
-  :description: Discover the numerous ways that Wazuh provides to monitor your Microsoft Azure infrastructure activity.
+  :description: Azure Storage refers to the Microsoft Azure cloud storage solution. Learn how to use Azure Storage with Wazuh in this section of our documentation.
 
+.. _azure_storage:
 
 Using Azure Storage
 ===================
 
-`Azure Storage <https://docs.microsoft.com/en-us/azure/storage/common/storage-introduction>`_ refers to Microsoft Azure cloud storage solution, a service that provides a massively scalable object store for data objects, a messaging store for reliable messaging, a file system service for the cloud, and a NoSQL store.
+`Azure Storage <https://docs.microsoft.com/en-us/azure/storage/common/storage-introduction>`_ refers to the Microsoft Azure cloud storage solution, a service that provides a massively scalable object store for data objects, a messaging store for reliable messaging, a file system service for the cloud, and a NoSQL store.
 
 .. thumbnail:: ../../../images/azure/storage-activity-log.png
     :title: Storage
     :align: center
-    :width: 50%
+    :width: 60%
 
 As an alternative to the Azure Log Analytics REST API, Wazuh offers the possibility to access Azure Storage accounts in a simple way. The activity logs of the Microsoft Azure infrastructure can be exported to the storage accounts.
 
@@ -29,21 +28,21 @@ Configuring the Activity log export
 .. thumbnail:: ../../../images/azure/storage-activity-1.png
     :title: Storage
     :align: center
-    :width: 50%
+    :width: 80%
 
 2. Click on **Add diagnostic setting**.
 
 .. thumbnail:: ../../../images/azure/storage-activity-2.png
     :title: Storage
     :align: center
-    :width: 50%
+    :width: 80%
 
 3. Check the **AuditLogs** box and the **Archive to storage account**, selecting the name of the subscription and the Storage account to export the logs.
 
 .. thumbnail:: ../../../images/azure/storage-activity-3.png
     :title: Storage
     :align: center
-    :width: 50%
+    :width: 80%
 
 
 Azure Storage use case
@@ -59,12 +58,12 @@ An easy way to test this configuration is to create a new user in Azure Active D
 .. thumbnail:: ../../../images/azure/storage-new-user-1.png
     :title: Storage
     :align: center
-    :width: 100%
+    :width: 80%
 
 .. thumbnail:: ../../../images/azure/storage-new-user-2.png
     :title: Storage
     :align: center
-    :width: 100%
+    :width: 80%
 
 Wazuh configuration
 ^^^^^^^^^^^^^^^^^^^
@@ -74,7 +73,7 @@ Proceed to configure the ``azure-logs`` module in the local configuration (``oss
 .. thumbnail:: ../../../images/azure/account-credentials.png
     :title: Storage
     :align: center
-    :width: 50%
+    :width: 80%
 
 Applying the following configuration, the integration will be executed every day using a credentials file for authentication. The contents of the ``insights-operational-logs`` will be processed, downloading every blob available with ``.json`` extension from the last ``24 hours``. The content for these blobs is expected to be in ``json_inline`` format.
 
@@ -125,9 +124,9 @@ Thanks to the following rules, already included in Wazuh ruleset by default, it 
 Alert visualization
 ^^^^^^^^^^^^^^^^^^^
 
-Once the Wazuh configuration is set and the ``azure-logs`` module is running using the previous configuration, the event from the user creation example exported to Storage will be processed. The results can be check in Wazuh UI. 
+Once the Wazuh configuration is set and the ``azure-logs`` module is running using the previous configuration, the event from the user creation example exported to Storage will be processed. The results can be checked in the Wazuh dashboard. 
 
 .. thumbnail:: ../../../images/azure/storage-kibana.png
     :title: Storage
     :align: center
-    :width: 100%
+    :width: 80%

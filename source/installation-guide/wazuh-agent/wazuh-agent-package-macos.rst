@@ -5,11 +5,12 @@
 
 .. _wazuh_agent_package_macos:
 
+Installing Wazuh agents on macOS endpoints
+==========================================
 
-Installing Wazuh agents on macOS systems
-========================================
+The agent runs on the endpoint you want to monitor and communicates with the Wazuh server, sending data in near real-time through an encrypted and authenticated.
 
-The agent runs on the host you want to monitor and communicates with the Wazuh manager, sending data in near real time through an encrypted and authenticated channel.
+.. note:: You need root user privileges to run all the commands described below.
 
 #. To start the installation process, download the `Wazuh agent for macOS <https://packages.wazuh.com/|WAZUH_CURRENT_MAJOR_OSX|/macos/wazuh-agent-|WAZUH_CURRENT_OSX|-|WAZUH_REVISION_OSX|.pkg>`_. The package is suitable for macOS Sierra or later. 
 
@@ -19,24 +20,24 @@ The agent runs on the host you want to monitor and communicates with the Wazuh m
     
           .. group-tab:: CLI
     
-             #. To deploy the Wazuh agent to your system, edit the ``WAZUH_MANAGER`` variable to contain your Wazuh manager IP address or hostname and run the following command. 
+             #. To deploy the Wazuh agent on your endpoint, edit the ``WAZUH_MANAGER`` variable to contain your Wazuh manager IP address or hostname and run the following command. 
 
                 .. code-block:: console
     
                   # launchctl setenv WAZUH_MANAGER "10.0.0.2" && installer -pkg wazuh-agent-|WAZUH_CURRENT_OSX|-|WAZUH_REVISION_OSX|.pkg -target /
     
-                For additional deployment options such as agent name, agent group, and registration password, see the :ref:`Deployment variables for macOS <deployment_variables_macos>` section.
+                For additional deployment options such as agent name, agent group, and registration password, see the :doc:`Deployment variables for macOS </user-manual/deployment-variables/deployment-variables-macos>` section.
                 
-                .. note:: Alternatively, if you want to install an agent without registering it, omit the deployment variables. To learn more about the different registration methods, see the :ref:`Wazuh agent enrollment <agent_enrollment>` section.
+                .. note:: Alternatively, if you want to install an agent without registering it, omit the deployment variables. To learn more about the different registration methods, see the :doc:`Wazuh agent enrollment </user-manual/agent-enrollment/index>` section.
 
              #. To complete the installation process, start the Wazuh agent.
     
                 .. code-block:: console
     
-                  # sudo /Library/Ossec/bin/wazuh-control start
+                  # /Library/Ossec/bin/wazuh-control start
 
 
-            The installation process is now complete and the Wazuh agent is successfully installed, registered, and configured, running on your macOS system.
+            The installation process is now complete, and the Wazuh agent is successfully deployed and running on your macOS endpoint.
 
             
           .. group-tab:: GUI
@@ -52,7 +53,7 @@ The agent runs on the host you want to monitor and communicates with the Wazuh m
     
                   # sudo /Library/Ossec/bin/wazuh-control start
  
-            The installation process is now complete and the Wazuh agent is successfully installed on your macOS system. The next step is to register and configure the agent to communicate with the Wazuh manager. To perform this action, see the :ref:`Wazuh agent enrollment <agent_enrollment>` section. 
+            The installation process is now complete, and the Wazuh agent is successfully installed on your macOS endpoint. The next step is to register and configure the agent to communicate with the Wazuh server. To perform this action, see the :doc:`Wazuh agent enrollment </user-manual/agent-enrollment/index>` section.  
 
 By default, all agent files are stored in ``/Library/Ossec/`` after the installation.
     
@@ -87,7 +88,7 @@ To uninstall the agent, follow these steps:
       # /bin/rm -f /Library/LaunchDaemons/com.wazuh.agent.plist
       # /bin/rm -rf /Library/StartupItems/WAZUH
 
-#. Remove User and Groups.
+#. Remove the Wazuh user and group.
 
     .. code-block:: console
 
@@ -100,4 +101,4 @@ To uninstall the agent, follow these steps:
 
       # /usr/sbin/pkgutil --forget com.wazuh.pkg.wazuh-agent
 
-The Wazuh agent is now completely removed from your macOS system.
+The Wazuh agent is now completely removed from your macOS endpoint.

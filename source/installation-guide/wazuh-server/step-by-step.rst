@@ -1,6 +1,7 @@
 .. Copyright (C) 2015, Wazuh, Inc.
 
-.. meta:: :description: The Wazuh server is in charge of analyzing the data received from the Wazuh agents. Install the Wazuh server in a single-node or multi-node configuration according to your environment needs.
+.. meta::
+   :description: The Wazuh server is in charge of analyzing the data received from the Wazuh agents. Install the Wazuh server in a single-node or multi-node configuration according to your environment needs.
 
 Installing the Wazuh server step by step
 ========================================
@@ -13,7 +14,7 @@ The installation process is divided into two stages.
 
 #. Cluster configuration for multi-node deployment 
 
-.. note:: Root user privileges are required to run the commands described below.
+.. note:: You need root user privileges to run all the commands described below.
 
 1. Wazuh server node installation
 ----------------------------------
@@ -125,7 +126,7 @@ Configuring Filebeat
      
         # filebeat keystore create
 
-  #. Add the username and password ``admin``:``admin`` to the secrets keystore.
+  #. Add the default username and password ``admin``:``admin`` to the secrets keystore.
       
       .. code-block:: console
 
@@ -147,9 +148,9 @@ Deploying certificates
 ^^^^^^^^^^^^^^^^^^^^^^
 
   .. note::
-    Make sure that a copy of ``wazuh-certificates.tar``, created during the Wazuh indexer installation, is placed in your working directory.
+    Make sure that a copy of the ``wazuh-certificates.tar`` file, created during the initial configuration step, is placed in your working directory.
 
-  #. Replace ``<server-node-name>`` with your Wazuh server node certificate name, the same used in ``config.yml`` when creating the certificates. Then, move the certificates to their corresponding location.
+  #. Replace ``<server-node-name>`` with your Wazuh server node certificate name, the same one used in ``config.yml`` when creating the certificates. Then, move the certificates to their corresponding location.
 
       .. include:: /_templates/installations/filebeat/opensearch/copy_certificates_filebeat_wazuh_cluster.rst
 
@@ -188,7 +189,7 @@ Starting the Filebeat service
             version: 7.10.2
 
 
-Your Wazuh server node is now successfully installed. Repeat the steps of this installation process stage for every Wazuh server node in your cluster and carry on then with configuring the Wazuh cluster. If you want a Wazuh server single-node cluster, everything is set and you can proceed directly with :doc:`../wazuh-dashboard/step-by-step`.
+Your Wazuh server node is now successfully installed. Repeat this stage of the installation process for every Wazuh server node in your Wazuh cluster, then proceed with configuring the Wazuh cluster. If you want a Wazuh server single-node cluster, everything is set and you can proceed directly with :doc:`../wazuh-dashboard/step-by-step`.
   
 2. Cluster configuration for multi-node deployment
 --------------------------------------------------
@@ -232,6 +233,6 @@ Testing Wazuh server cluster
 Next steps
 ----------
 
-The Wazuh server installation is now complete and you can proceed with :doc:`../wazuh-dashboard/step-by-step`.
+The Wazuh server installation is now complete, and you can proceed with :doc:`../wazuh-dashboard/step-by-step`.
 
 If you want to uninstall the Wazuh server, see :ref:`uninstall_server`.

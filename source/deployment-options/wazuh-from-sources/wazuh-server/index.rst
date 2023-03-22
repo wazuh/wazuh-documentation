@@ -143,7 +143,7 @@ Installing the Wazuh manager
 
                 # systemctl start wazuh-manager
 
-        .. group-tab:: SysV Init
+        .. group-tab:: SysV init
 
             .. code-block:: console
 
@@ -185,7 +185,7 @@ Uninstall
 
    .. tabs::
      
-       .. group-tab:: SysV Init
+       .. group-tab:: SysV init
    
            .. code-block:: console
    

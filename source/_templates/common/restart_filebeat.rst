@@ -2,16 +2,16 @@
 
 .. tabs::
 
- .. group-tab:: Systemd
+   .. group-tab:: Systemd
 
-  .. code-block:: console
+      .. code-block:: console
 
-   # systemctl restart filebeat
+         # systemctl restart filebeat
 
- .. group-tab:: SysV init
+   .. group-tab:: SysV init
 
-  .. code-block:: console
+      .. code-block:: console
 
-   # service filebeat restart
+         # service filebeat restart
 
 .. End of include file

@@ -12,18 +12,18 @@
       # systemctl daemon-reload
 
 
-  .. group-tab:: SysV Init
+  .. group-tab:: SysV init
 
     Choose one option according to your operating system.
 
-    a) RPM based operating systems:
+    a) RPM-based operating systems:
 
       .. code-block:: console
 
         # chkconfig wazuh-manager off
         # chkconfig --del wazuh-manager
 
-    b) Debian based operating systems:
+    b) Debian-based operating systems:
 
       .. code-block:: console
 

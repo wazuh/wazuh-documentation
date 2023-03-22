@@ -1,5 +1,8 @@
 .. Copyright (C) 2015, Wazuh, Inc.
 
+.. meta::
+  :description: Sibling Decoders can be considered a decoder building strategy for those looking to build their own custom decoders. Learn more about it in this section.
+
 .. _sibling_decoders:
 
 Sibling Decoders

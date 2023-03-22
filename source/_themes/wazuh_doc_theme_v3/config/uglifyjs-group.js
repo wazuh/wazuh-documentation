@@ -29,18 +29,21 @@ const pageSpecificJS = {
     SRC_PATH + "components/local-toc.js",
     SRC_PATH + "components/code-blocks.js",
     SRC_PATH + "content.js"
-    // + JS files for different parts/components of the theme (only functionality for regular documentation content pages) + tabs (extension) + lightbox (extension)
   ],
   "index": [
     SRC_PATH + "components/doctools.js",
     SRC_PATH + "index.js" //JS code only for page "Index" if necessary.
   ],
-  "search-results": [
+  "sphinx-search-ui": [
     SRC_PATH + "components/doctools.js",
-    SRC_PATH + "components/version-selector.js",
-    SRC_PATH + "components/global-toc.js",
     SRC_PATH + "components/sphinx-search/language_data.js",
     SRC_PATH + "components/sphinx-search/searchtools.js",
+    SRC_PATH + "components/sphinx-search/sphinx-search-ui.js"
+    // + JS files only for the sphinx_search
+  ],
+  "search-results": [
+    SRC_PATH + "components/version-selector.js",
+    SRC_PATH + "components/global-toc.js",
     SRC_PATH + "search-results.js"
     // + JS files only for search page
   ],
@@ -53,6 +56,9 @@ const pageSpecificJS = {
   "api-reference": [
     SRC_PATH + "components/version-selector.js",
     SRC_PATH + "custom-redoc.js"
+  ],
+  "sphinx-tabs": [
+    SRC_PATH + "components/sphinx-tabs/tabs.js"
   ]
 };
 
@@ -69,7 +75,14 @@ if (pageSpecificJS.hasOwnProperty(FILE)) {
     }
   };
   // nameCache: JSON.parse(fs.readFileSync(cacheFileName, "utf8"))
-  const scriptFiles = commonJS.concat(pageSpecificJS[FILE]);
+  
+  let scriptFiles;
+  
+  if (FILE !== "sphinx-search-ui" && FILE !== "sphinx-tabs" ) {
+    scriptFiles = commonJS.concat(pageSpecificJS[FILE]);
+  } else {
+    scriptFiles = pageSpecificJS[FILE];
+  }
   const code = {};
   for (let i = 0; i < scriptFiles.length; i++) {
     code[scriptFiles[i]] = fs.readFileSync(path.resolve(__dirname, "../" + scriptFiles[i]), "utf8")

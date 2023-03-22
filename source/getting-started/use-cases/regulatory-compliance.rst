@@ -109,6 +109,6 @@ Example of regulatory compliance dashboards:
 
 You can find more information on how Wazuh helps meet compliance requirements at:
 
-- :ref:`Using Wazuh for PCI DSS <pci_dss>`
-- :ref:`Using Wazuh for GDPR <gdpr>`
-- :ref:`Wazuh rules documentation <ruleset>`
+- :doc:`Using Wazuh for PCI DSS </pci-dss/index>`
+- :doc:`Using Wazuh for GDPR </gdpr/index>`
+- :doc:`Wazuh rules documentation </user-manual/ruleset/index>`

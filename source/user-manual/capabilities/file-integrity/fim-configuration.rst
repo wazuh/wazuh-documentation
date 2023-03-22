@@ -2,7 +2,7 @@
 
 .. meta::
   :description: Learn more about File Integrity Monitoring, one of the Wazuh capabilities. We show you some configuration examples to get the best out of Wazuh.
-  
+
 .. _fim-examples:
 
 Configuration
@@ -15,6 +15,7 @@ After the installation, the Wazuh manager and the Wazuh agent have defined a :re
 #. `Configuring real-time monitoring`_
 #. `Configuring who-data monitoring`_
 #. `Configuring Windows registry`_
+#. `Configuring Windows directories`_
 #. `Configuring reporting file and registry value changes`_
 #. `Configuring ignoring files and Windows registry entries`_
 #. `Configuring ignoring files via rules`_
@@ -57,7 +58,6 @@ FIM directories can be configured using ``*`` and ``?`` wildcards in the same wa
 .. note::
 
   Directories and files that match the configured pattern and are created after the initial FIM scan will be added for monitoring after the next scheduled scan is run.
-
 
 Configuring scheduled scans
 ---------------------------
@@ -179,6 +179,46 @@ To configure the Windows registries, it is necessary to create a list of those r
     <windows_registry arch="32bit" check_all="no" check_mtime="yes">HKEY_LOCAL_MACHINE\SYSTEM\Setup</windows_registry>
   </syscheck>
 
+Configuring Windows directories
+-------------------------------
+
+In 64-bit architecture systems, you can locate 32-bit and 64-bit DLLs in a special way.
+
+-  ``System32`` is reserved for 64-bit DLLs.
+-  ``SysWOW64`` is reserved for all 32-bit DLLs.
+
+Furthermore, 32-bit processes running in 64-bit environments access ``Sytem32`` through a virtual folder called ``Sysnative``.
+
+But we disabled this redirection and you can access ``System32`` directly. Monitoring ``%WINDIR%/System32`` and ``%WINDIR%/Sysnative`` directories is equivalent and Wazuh shows the path ``%WINDIR%/System32`` in the alerts. ``SysWOW64`` is a different directory. To monitor ``%WINDIR%/SysWOW64``, you must add it to the ``ossec.conf`` configuration file.
+
+You can monitor the Windows special directories ``%WINDIR%/System32`` and ``%WINDIR%/SysWOW64`` directories configuring them with any of the FIM modes. For example:
+
+-  Scheduled mode.
+
+   .. code-block:: xml
+
+      <syscheck>
+        <directories>%WINDIR%/System32</directories>
+        <directories>%WINDIR%/SysWOW64</directories>
+      </syscheck>
+
+-  Realtime mode.
+
+   .. code-block:: xml
+
+      <syscheck>
+        <directories realtime="yes">%WINDIR%/System32</directories>
+        <directories realtime="yes">%WINDIR%/SysWOW64</directories>
+      </syscheck>
+
+-  Whodata mode.
+
+   .. code-block:: xml
+
+      <syscheck>
+        <directories whodata="yes">%WINDIR%/System32</directories>
+        <directories whodata="yes">%WINDIR%/SysWOW64</directories>
+      </syscheck>
 
 .. _how_to_fim_report_changes:
 
@@ -448,17 +488,19 @@ The main advantage of using in memory database is the performance as reading and
 Configuring synchronization
 ---------------------------
 
-:ref:`Synchronization <reference_ossec_syscheck_synchronization>` can be configured to change the synchronization interval, the number of events per second, the queue size and the response timeout:
+You can configure :ref:`synchronization <reference_ossec_syscheck_synchronization>` to change the synchronization interval, the maximum number of events per second, the queue size, the number of dedicated threads and the response timeout:
 
 .. code-block:: xml
 
   <syscheck>
+    <!-- Database synchronization settings -->
     <synchronization>
       <enabled>yes</enabled>
       <interval>5m</interval>
       <max_interval>1h</max_interval>
       <response_timeout>30</response_timeout>
       <queue_size>16384</queue_size>
+      <thread_pool>1</thread_pool>
       <max_eps>10</max_eps>
     </synchronization>
   </syscheck>

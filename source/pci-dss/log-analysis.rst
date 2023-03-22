@@ -5,164 +5,129 @@
   
 .. _pci_dss_log_analysis:
 
-Log analysis
-============
+Log data analysis
+=================
 
-Here we will use Wazuh log collection and analysis capabilities to meet the following PCI DSS controls:
+In many cases, you can find evidence of an attack in the log messages of devices, systems, and applications. The Wazuh log data analysis module receives logs through text files or Windows event logs. It can also directly receive logs via remote syslog, which is useful for firewalls and other such devices.
 
-  | **10.2.4**: Invalid logical access attempts.
-  | **10.2.5**: Use of and changes to identification and authentication mechanisms —including but not limited to creation of new accounts and escalation of privileges— and all changes, additions, or deletions to accounts with root or administrative privileges.
-  |
+Additionally, the log data analysis module analyzes the log data received from agents. It performs decoding and rule matching on the received data to process it. You can then use this processed log data for threat detection, prevention, and active response. 
 
-These controls require us to log invalid logical access attempts, multiple invalid login attempts (possible brute force attacks), privilege escalations, changes to accounts, etc. In order to achieve this, we have added PCI DSS tags to OSSEC log analysis rules, mapping them to the corresponding requirement(s). This makes it easy to analyze and visualize our PCI DSS related alerts.
+The log collector module helps to meet the following PCI DSS requirement:
 
-The syntax used for rule tagging is **pci_dss_** followed by the number of the requirement (e.g., **pci_dss_10.2.4** and **pci_dss_10.2.5**).
+-  **Requirement 10 - Log and Monitor All Access to System Components and Cardholder Data**: This control requires that user activities, including those by employees, contractors, consultants, internal and external vendors, and other third parties are logged and monitored, and the log data stored for a specified period of time.
 
-Here are some examples of OSSEC rules tagged for PCI requirements 10.2.4 and 10.2.5:
+To help meet this requirement, the Wazuh agent collects logs from the endpoints it is deployed on. The log analysis module also receives logs via syslog for network and other syslog-enabled devices. It decodes the logs received to extract relevant information from its fields. After that, it compares the extracted information to the ruleset to look for matches. When the extracted information matches a rule, Wazuh generates an alert. Refer to the :doc:`ruleset section  </user-manual/ruleset/index>` for more information.
 
-.. code-block:: xml
-
-    <!--apache: access attempt -->
-    <rule id="30105" level="5">
-        <if_sid>30101</if_sid>
-        <match>denied by server configuration</match>
-        <description>Attempt to access forbidden file or directory.</description>
-        <group>access_denied,pci_dss_6.5.8,pci_dss_10.2.4,</group>
-    </rule>
-
-    <!-- syslog-sudo: elevation of privileges -->
-    <rule id="5401" level="5">
-        <if_sid>5400</if_sid>
-        <match>incorrect password attempt</match>
-        <description>Failed attempt to run sudo</description>
-        <group>pci_dss_10.2.4,pci_dss_10.2.5,</group>
-    </rule>
-
-    <rule id="5402" level="3">
-        <if_sid>5400</if_sid>
-        <regex> ; USER=root ; COMMAND=| ; USER=root ; TSID=\S+ ; COMMAND=</regex>
-        <description>Successful sudo to ROOT executed</description>
-        <group>pci_dss_10.2.5,pci_dss_10.2.2,</group>
-    </rule>
-
-    <!-- ssh: identification and authentication mechanisms -->
-    <rule id="5712" level="10" frequency="6" timeframe="120" ignore="60">
-        <if_matched_sid>5710</if_matched_sid>
-        <description>SSHD brute force trying to get access to </description>
-        <description>the system.</description>
-        <same_source_ip />
-        <group>authentication_failures,pci_dss_11.4,pci_dss_10.2.4,pci_dss_10.2.5,</group>
-    </rule>
-
-    <rule id="5720" level="10" frequency="6">
-        <if_matched_sid>5716</if_matched_sid>
-        <same_source_ip />
-        <description>Multiple SSHD authentication failures.</description>
-        <group>authentication_failures,pci_dss_10.2.4,pci_dss_10.2.5,pci_dss_11.4,</group>
-    </rule>
-
+Wazuh also holds logs of events that don't generate an alert. For this it uses its archive feature and the indexer long term storage. For more information on configuring log collection, see the :doc:`Log data collection section </user-manual/capabilities/log-data-collection/index>`.
 
 Use cases
 ---------
 
-In this scenario, we try to open the file ``cardholder_data.txt``. Since our current user doesn't have read access to the file, we run  ``sudo`` to elevate privileges.
+-  PCI DSS 10.2.2 requires that audit logs record the following details for each auditable event:
 
-.. code-block:: console
+   -  User identification.
+   -  Type of event.
+   -  Date and time.
+   -  Success and failure indication.
+   -  Origination of event.
+   -  Identity or name of affected data, system component, resource, or service (for example, name and protocol).
 
-    [agent@centos ~]# ls -l
+	The following are some Wazuh rules that help achieve this requirement:
 
-.. code-block:: none
-    :class: output
+   -  **Rule 5710 - sshd: attempt to login using a non-existent user**: This rule generates an alert when a non-existent user tries to log in to a system via SSH. The generated alert contains the information required by requirement 10.2.2 (user identification, type of event, date and time, success and failure indication, origination of event, and identity or name of affected data, system component, resource, or service). The screenshot below shows the alert generated on the dashboard:
 
-    total 0
-    drwxrwxr-x. 2 agent agent  6 Jan  5 18:34 centos
-    drwxr-x---  2 root  root  33 Jan  5 18:32 credit_cards
-    drwxrwxr-x. 2 agent agent  6 Jan  5 18:34 user_data
+  	.. thumbnail:: ../images/pci/attempt-to-login-using-non-existent-user.png
+  		:title: Attempt to login using a non-existent user
+  		:align: center
+  		:width: 80%
 
-.. code-block:: console
+   
+   -  **Rule 5715 - sshd: authentication success**: This rule generates an alert when a user successfully logs into a system via SSH. The generated alert contains the information required by requirement 10.2.2 (user identification, type of event, date and time, success and failure indication, origination of event, and identity or name of affected data, system component, resource, or service). The screenshot below shows the alert generated on the dashboard:
 
-    [agent@centos ~]# cat credit_cards/cardholder_data.txt
+  	.. thumbnail:: ../images/pci/user-successfully-logs-into-a-system-via-SSH.png
+  		:title: User successfully logs into a system via SSH
+  		:align: center
+  		:width: 80%
 
-.. code-block:: none
-    :class: output
+-  PCI DSS 10.5.1 requires that you retain audit log history for at least 12 months, with at least the most recent three months immediately available for analysis. You can achieve this by enabling Wazuh log archives and configuring `index management policies <https://wazuh.com/blog/wazuh-index-management/>`_. To enable Wazuh log archives, take the following steps: 
 
-    Number: 0000-0000-0000-0000
-    Holder: Mr. John Smith
+	**Enable archives monitoring in the Wazuh indexer**:
 
-Using the ``sudo`` log analysis decoder and rules, Wazuh will generate an alert for this particular action and write it to ``alerts.log``. Using the rule tags we can see which PCI DSS requirements are specifically related to this alert.
+	#. Set ``<logall_json>yes</logall_json>`` in ``/var/ossec/etc/ossec.conf``.
 
-.. code-block:: console
+	#. Set ``archives:`` ``enabled`` to true in ``/etc/filebeat/filebeat.yml``:
 
-    root@ubuntu:~# tail -n10 /var/ossec/logs/alerts/alerts.log
+		.. code-block:: console
 
-.. code-block:: none
-    :class: output
+			archives:
+			enabled: true
 
-    ** Alert 1483621881.263207: - syslog,sudo,pci_dss_10.2.5,pci_dss_10.2.2,
-    2017 Jan 05 14:11:21 (CentOS) 192.168.56.4->/var/log/secure
-    Rule: 5402 (level 3) -> 'Successful sudo to ROOT executed'
-    User: root
-    Jan  5 14:11:12 centos sudo:   agent : TTY=pts/0 ; PWD=/ ; USER=root ; COMMAND=/bin/cat /root/credit_cards/cardholder_data.txt
-    tty: pts/0
-    pwd: /
-    command: /bin/cat
+	#. Restart Filebeat: 
 
-Since we have JSON output enabled, we can also see the alert in ``alerts.json``:
+		.. include:: /_templates/common/restart_filebeat.rst
 
-.. code-block:: console
 
-    root@ubuntu:~# tail -n1 /var/ossec/logs/alerts/alerts.json | jq
+	#. Restart the Wazuh manager:
 
-.. code-block:: json
-    :class: output
+		.. include:: /_templates/common/restart_manager.rst
 
-    {
-      "rule": {
-        "level": 3,
-        "description": "Successful sudo to ROOT executed",
-        "id": 5402,
-        "firedtimes": 1,
-        "groups": [
-          "syslog",
-          "sudo"
-        ],
-        "pci_dss": [
-          "10.2.5",
-          "10.2.2"
-        ]
-      },
-      "agent": {
-        "id": "031",
-        "name": "CentOS",
-        "ip": "192.168.56.4"
-      },
-      "manager": {
-        "name": "ubuntu"
-      },
-      "srcuser": "agent",
-      "dstuser": "root",
-      "full_log": "Jan  5 14:11:12 centos sudo:   agent : TTY=pts/0 ; PWD=/ ; USER=root ; COMMAND=/bin/cat /root/credit_cards/cardholder_data.txt",
-      "program_name": "sudo",
-      "tty": "pts/0",
-      "pwd": "/",
-      "command": "/bin/cat",
-      "decoder": {
-        "fts": 1792,
-        "parent": "sudo",
-        "name": "sudo"
-      },
-      "timestamp": "2017 Jan 05 14:11:21",
-      "location": "/var/log/secure"
-    }
+	#. Select **☰** > **Management** > **Stack Management** in the Wazuh dashboard.
 
-The Wazuh dashboard displays information in an organized way, allowing filtering by different types of alert fields, including compliance controls. We have also developed a couple of PCI DSS dashboards for convenient viewing of relevant alerts.
+		.. thumbnail:: ../images/pci/select-stack-management.png
+			:title: Select Stack Management
+			:align: center
+			:width: 80%
+		
+	#. Choose **Index Patterns** and select **Create index pattern**. Use ``wazuh-archives-*`` as the index pattern name.
 
-.. thumbnail:: ../images/pci/log-analysis-1.png
-    :title: Alert visualization at the Wazuh dashboard
-    :align: center
-    :width: 100%
+		.. thumbnail:: ../images/pci/select-create-index-pattern.png
+			:title: Select Create index pattern
+			:align: center
+			:width: 80%
 
-.. thumbnail:: ../images/pci/log-analysis-2.png
-    :title: PCI DSS the Wazuh dashboard module
-    :align: center
-    :width: 100%
+		.. thumbnail:: ../images/pci/define-an-index-pattern.png
+			:title: Select Create index pattern
+			:align: center
+			:width: 80%
+			
+	#. Select **timestamp** as the primary time field for use with the global time filter, then proceed to create the index pattern.
+
+		.. thumbnail:: ../images/pci/configure-settings.png
+			:title: Select Create index pattern
+			:align: center
+			:width: 80%
+
+	#. Open the menu and select **Discover** under **OpenSearch Dashboards**. Events should be getting reported there.
+
+		.. thumbnail:: ../images/pci/select-discover-1.png
+			:title: Select Discover
+			:align: center
+			:width: 80%
+			
+		.. thumbnail:: ../images/pci/select-discover-2.png
+			:title: Select Discover
+			:align: center
+			:width: 80%
+		
+- PCI DSS requirement 10.4.1 requires to review the following audit logs at least once daily:
+  
+   -  All security events.
+   -  Logs of all system components that store, process, or transmit cardholder data (CHD) and/or sensitive authentication data (SAD).
+   -  Logs of all critical system components.
+   -  Logs of all servers and system components that perform security functions (for example, network security controls, intrusion-detection systems/intrusion-prevention systems (IDS/IPS), and authentication servers).
+
+   This requirement ensures analyzing logs for indicators of compromise at least once daily. The following are some Wazuh rules that may help in achieving this requirement:
+
+   -  **Rule 61138**: New Windows Service Created. The analysis engine analyzes the Windows system logs to find out if a new service was created generating an alert from this rule.
+
+    	.. thumbnail:: /images/pci/pci-dss-requirement-10.4.1-1.png
+    		:title: PCI DSS requirement 10.4.1
+    		:align: center
+    		:width: 80%
+
+   -  **Rule 31168**: Shellshock attack detected. The analysis engine analyzes logs to find out about shellshock attacks from a WAF or web application generating an alert.
+      
+    	.. thumbnail:: /images/pci/pci-dss-requirement-10.4.1-2.png
+    		:title: PCI DSS requirement 10.4.1
+    		:align: center
+    		:width: 80%

@@ -1,5 +1,8 @@
 .. Copyright (C) 2015, Wazuh, Inc.
 
+.. meta::
+  :description: The Wazuh Ruleset is used to analyze incoming events and generate alerts when appropriate. Learn more about Perl-compatible regular expressions here.
+
 .. _regex_pcre2:
 
 Perl-compatible Regular Expressions

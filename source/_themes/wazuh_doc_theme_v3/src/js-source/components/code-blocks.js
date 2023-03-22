@@ -84,7 +84,7 @@ if ( $('.document').length > 0 ) {
     });
 
     const data = blockCode.html();
-    const codeType = getCodeBlockType(blockCode.parent());
+    const codeType = getCodeBlockType(blockCode.parent()).toLowerCase();
     if ( jQuery.inArray(codeType, ['none', 'bash']) === -1 ) {
       const heredocs = findHeredocs(data);
       const find = data.match(/(?:\$\s|\#)/g);
@@ -113,7 +113,7 @@ if ( $('.document').length > 0 ) {
   $('.highlight').each(function() {
     const blockCode = $(this).parent();
     if (!blockCode.closest('[class*="highlight-"]').hasClass('output') && !blockCode.hasClass('no-copy')) {
-      blockCode.prepend('<button type="button" class="copy-to-clipboard" title="Copy to clipboard"><span>Copied to clipboard</span><i class="far fa-copy" aria-hidden="true"></i></button>');
+      blockCode.prepend('<button type="button" class="copy-to-clipboard" title="Copy to clipboard"><span>Copied to clipboard</span><svg class="icon" aria-hidden="true"><use xlink:href="#copy-icon"></use></svg></button>');
     }
   });
 
@@ -124,14 +124,14 @@ if ( $('.document').length > 0 ) {
     data = filterCodeBlock(data, $(copyButton).parent());
     copyToClipboard(data);
     $(copyButton).addClass('copied');
-    $(copyButton).find('i').css({'display': 'none'}).find('span').css({'display': 'block'});
+    $(copyButton).find('svg').css({'display': 'none'}).find('span').css({'display': 'block'});
     $(copyButton).find('span').css({'display': 'block'});
     setTimeout(function() {
       $(copyButton).removeClass('copied');
     }, 700);
     setTimeout(function() {
       $(copyButton).find('span').css({'display': 'none'});
-      $(copyButton).find('i').css({'display': 'block'});
+      $(copyButton).find('svg').css({'display': 'block'});
       $(copyButton).focus();
     }, 1000);
   });
@@ -147,7 +147,7 @@ if ( $('.document').length > 0 ) {
     codeClone.find('.gp').empty();
     let data = codeClone.text();
     const heredocs = findHeredocs(code);
-    const codeType = getCodeBlockType(parent);
+    const codeType = getCodeBlockType(parent).toLowerCase();
 
     data = String(data);
     if ( jQuery.inArray(codeType, ['none', 'bash']) === -1 ) {

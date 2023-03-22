@@ -1,10 +1,10 @@
 .. Copyright (C) 2015, Wazuh, Inc.
 
 
-#. Edit ``/etc/wazuh-indexer/opensearch.yml`` and replace the following values: 
+#. Edit the ``/etc/wazuh-indexer/opensearch.yml`` configuration file and replace the following values: 
 
     
-   #. ``network.host``:  Sets the address of this node for both HTTP and transport traffic. The node will bind to this address and will also use it as its publish address. Accepts an IP address or a hostname. 
+   #. ``network.host``:  Sets the address of this node for both HTTP and transport traffic. The node will bind to this address and use it as its publish address. Accepts an IP address or a hostname. 
    
       Use the same node address set in ``config.yml`` to create the SSL certificates. 
 
@@ -19,8 +19,7 @@
         - "node-2"
         - "node-3"
 
-   #. ``discovery.seed_hosts:`` List of the addresses of the master-eligible nodes. Each element can be either an IP address or a hostname. 
-      You may leave this setting commented if you are configuring the Wazuh indexer as a single-node. For multi-node configurations, uncomment this setting and set your master-eligible nodes addresses. 
+   #. ``discovery.seed_hosts:`` List of the addresses of the master-eligible nodes. Each element can be either an IP address or a hostname. You may leave this setting commented if you are configuring the Wazuh indexer as a single node. For multi-node configurations, uncomment this setting and set the IP addresses of each master-eligible node. 
 
        .. code-block:: yaml
 

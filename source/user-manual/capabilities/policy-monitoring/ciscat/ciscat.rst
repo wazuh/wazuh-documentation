@@ -32,33 +32,36 @@ The CIS-CAT Wazuh module integrates CIS benchmark assessments into Wazuh agents 
 
 CIS-CAT Pro is written in Java, so it requires a Java Runtime Environment in order to execute it. Currently, the JRE versions supported in CIS-CAT are JRE 6, 7, and 8. Follow these steps to install the OpenJDK platform:
 
-a) For CentOS/RHEL/Fedora:
+.. tabs::
 
-.. code-block:: console
+   .. group-tab:: Yum
 
-  # yum install java-1.8.0-openjdk
+      .. code-block:: console
 
-b) For Debian/Ubuntu:
+         # yum install java-1.8.0-openjdk
 
-.. code-block:: console
+   .. group-tab:: APT
 
-  # apt-get update && apt-get install openjdk-8-jre
+      .. code-block:: console
+
+         # apt-get update && apt-get install openjdk-8-jre
+
+   .. group-tab:: Windows
   
-c) For Windows:
-  
-  1. Download the MSI-based installer of `OpenJDK 8 <https://developers.redhat.com/products/openjdk/download>`_ for your Windows architecture.
-  
-  2. Run the installer and follow the on-screen instructions to install OpenJDK 8.
-  
-  3. Set Environment Variables:
-  
-    - Go to Control Panel -> System and Security -> System -> Advanced system settings -> Environment Variables.
-    
-    - Under System Variables, create or edit ``JAVA_HOME`` variable and add the installation path of the JDK. Example: ``C:\Program Files\java-1.8.0``.
-    
-    - Apply changes.
-    
-    - Open up the Command Prompt and type ``java -version`` to check the newly installed version.
+      1. Download the MSI-based installer of `OpenJDK 8 <https://developers.redhat.com/products/openjdk/download>`_ for your Windows architecture.
+      
+      2. Run the installer and follow the on-screen instructions to install OpenJDK 8.
+      
+      3. Set Environment Variables:
+      
+         - Go to Control Panel -> System and Security -> System -> Advanced system settings -> Environment Variables.
+        
+         - Under System Variables, create or edit ``JAVA_HOME`` variable and add the installation path of the JDK. Example: ``C:\Program Files\java-1.8.0``.
+        
+         - Apply changes.
+        
+         - Open up the Command Prompt and type ``java -version`` to check the newly installed version.
+
 
 .. note::
   If version 8 of the Java Runtime Environment is not available for your operating system, use version 7 or 6 instead.

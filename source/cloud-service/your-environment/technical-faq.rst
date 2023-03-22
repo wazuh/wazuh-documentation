@@ -126,4 +126,6 @@ Available regions:
 
 * Singapore: ``ap-southeast-1``
 
+* Sydney: ``ap-southeast-2``
+
 When selecting a region to host your environment, if you are not sure which one is the best option for you, select one that is the closest to your location since this typically reduces latency for indexing and search requests.

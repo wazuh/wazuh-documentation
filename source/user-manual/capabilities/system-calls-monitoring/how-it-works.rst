@@ -19,9 +19,7 @@ Audit uses a set of rules to define what is to be captured in the log files. The
 
 Audit rules can be specified interactively with the *auditctl* command-line utility, but to make changes persistent, edit */etc/audit/audit.rules*.
 
-.. warning::
-   All commands that interact with the Audit service and the Audit log files require root privileges, so you will need to be root or use sudo to execute these commands.
-
+.. note:: You need root user privileges to run all the commands described below.
 
 Control rules
 --------------

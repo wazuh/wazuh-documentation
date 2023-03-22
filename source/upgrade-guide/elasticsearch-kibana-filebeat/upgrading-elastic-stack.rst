@@ -14,9 +14,7 @@ This section guides through the upgrade process of the Wazuh server, Elasticsear
    
    This guide is meant for upgrades from 7.x to 7.y. The upgrade instructions for Elastic Stack versions prior to 7.0 can be found in the :ref:`Upgrading Elastic Stack from a legacy version <upgrading_elastic_stack_legacy>` section.
 
-.. note::
-   
-   Root user privileges are required to execute all the commands described below.
+.. note:: You need root user privileges to run all the commands described below.
 
 Preparing the upgrade
 ---------------------
@@ -41,7 +39,7 @@ Preparing the upgrade
 
 
 
-#. Repeat the previous step for every Wazuh node.
+#. Repeat the previous steps for every Wazuh node.
 
 Upgrading the Wazuh manager
 ---------------------------

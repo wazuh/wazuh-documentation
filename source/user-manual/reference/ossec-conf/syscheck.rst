@@ -1,8 +1,7 @@
 .. Copyright (C) 2015, Wazuh, Inc.
 
 .. meta::
-  :description: The ossec.conf file is the main configuration file on the Wazuh manager and it also plays an important role on the agents. Learn more about it here.
-
+  :description: The ossec.conf file is the main configuration file on the Wazuh manager and also important on the agents. Learn more about FIM settings with configuration examples here.
 
 .. _reference_ossec_syscheck:
 
@@ -22,6 +21,9 @@ Configuration options for file integrity monitoring:
 - `alert_new_files`_
 - `allow_remote_prefilter_cmd`_
 - `database`_
+- `file_limit`_
+- `registry_limit`_
+- `diff`_
 - `directories`_
 - `disabled`_
 - `frequency`_
@@ -37,12 +39,10 @@ Configuration options for file integrity monitoring:
 - `skip_nfs`_
 - `skip_proc`_
 - `skip_sys`_
-- `file_limit`_
 - `synchronization`_
 - `whodata`_
 - `windows_audit_interval`_
 - `windows_registry`_
-- `diff`_
 
 .. _reference_ossec_syscheck_alert_new_files:
 
@@ -309,7 +309,7 @@ The above block will set the ``Downloads`` folder of all users to be monitored i
 
   <directories realtime="yes">C:\Users\vagrant\Downloads</directories>
 
-Even though the above block is included in the previous one, ``C:\Users\vagrant\Downloads`` will be monitored in realtime because it has no wildcards.
+Even though the above block is included in the previous one, ``C:\Users\vagrant\Downloads`` will be monitored in real time because it has no wildcards.
 
 .. _reference_ossec_syscheck_disabled:
 
@@ -366,11 +366,11 @@ List of files or directories to be ignored. Introduced as one entry per line. Mu
 
 Attributes:
 
-+----------+---------------------------------------------------------------------------------+
-| **type** | This is a simple regex pattern to filter out files so alerts are not generated. |
-+          +--------------------------------------------+------------------------------------+
-|          | Allowed values                             | sregex                             |
-+----------+--------------------------------------------+------------------------------------+
++----------+----------------------------------------------------------------------------------+
+| **type** | This is a simple regex pattern to filter out files, so alerts are not generated. |
++          +--------------------------------------------+-------------------------------------+
+|          | Allowed values                             | sregex                              |
++----------+--------------------------------------------+-------------------------------------+
 
 Example:
 
@@ -633,7 +633,7 @@ Example:
 skip_sys
 --------
 
-Specifies if syscheck should scan the ``/sys`` directory. This option works on Linux system.
+Specifies if syscheck should scan the ``/sys`` directory. This option works on Linux systems.
 
 +--------------------+----------+
 | **Default value**  | yes      |
@@ -652,7 +652,7 @@ Example:
 file_limit
 ----------
 
-Specifies a limit on the number of files that will be monitored by syscheck. Files created when the database has reached the limit will be ignored.
+Specifies a limit on the number of files that FIM monitors. It ignores files added once the database reached the limit.
 
 .. code-block:: xml
 
@@ -665,7 +665,7 @@ Specifies a limit on the number of files that will be monitored by syscheck. Fil
 
 **enabled**
 
-Specifies whether there will be a limit on the number of monitored files or not.
+Specifies if the number of monitored entries has a limit.
 
 +--------------------+---------------------------------------+
 | **Default value**  | yes                                   |
@@ -676,7 +676,45 @@ Specifies whether there will be a limit on the number of monitored files or not.
 
 **entries**
 
-Specifies the number of files to be monitored.
+Specifies the maximum number of files to monitor.
+
++--------------------+------------------------------------------+
+| **Default value**  | 100000                                   |
++--------------------+------------------------------------------+
+| **Allowed values** | Integer number between 1 and 2147483647. |
++--------------------+------------------------------------------+
+
+
+registry_limit
+--------------
+
+.. note::
+
+   This section only applies to Windows agents.
+
+Specifies a limit on the number of registry entries that FIM monitors. It ignores registry values created once the database reached the limit.
+
+.. code-block:: xml
+
+   <!-- Maximum number of registries to be monitored -->
+   <registry_limit>
+     <enabled>yes</enabled>
+     <entries>100000</entries>
+   </registry_limit>
+
+**enabled**
+
+Specifies if the number of monitored entries has a limit.
+
++--------------------+---------------------------------------+
+| **Default value**  | yes                                   |
++--------------------+---------------------------------------+
+| **Allowed values** | yes/no                                |
++--------------------+---------------------------------------+
+
+**entries**
+
+Specifies the maximum number of registry entries to monitor.
 
 +--------------------+------------------------------------------+
 | **Default value**  | 100000                                   |
@@ -701,13 +739,14 @@ The database synchronization settings are configured inside this tag.
       <max_interval>1h</max_interval>
       <response_timeout>30</response_timeout>
       <queue_size>16384</queue_size>
+      <thread_pool>1</thread_pool>
       <max_eps>10</max_eps>
     </synchronization>
 
 
 **enabled**
 
-Specifies whether there will be periodic inventory synchronizations or not.
+Specifies performing periodic inventory synchronizations.
 
 +--------------------+---------------------------------------+
 | **Default value**  | yes                                   |
@@ -730,36 +769,33 @@ this parameter is ignored.
 
 **interval**
 
-Specifies the initial number of seconds between every inventory synchronization. If synchronization fails
-the value will be duplicated until it reaches the value of ``max_interval``.
+Specifies the initial time interval between every inventory synchronization. If the synchronization fails the value is duplicated until it reaches the value of ``max_interval``. If the synchronization succeds the value is restored.
 
-+--------------------+----------------------------------------------------------------------+
-| **Default value**  | 300 s                                                                |
-+--------------------+----------------------------------------------------------------------+
-| **Allowed values** | Any number greater than or equal to 0. Allowed sufixes (s, m, h, d). |
-+--------------------+----------------------------------------------------------------------+
++--------------------+-----------------------------------------------------------------------+
+| **Default value**  | 5 m                                                                   |
++--------------------+-----------------------------------------------------------------------+
+| **Allowed values** | Any number greater than or equal to 0. Allowed suffixes (s, m, h, d). |
++--------------------+-----------------------------------------------------------------------+
 
 **max_interval**
 
-Specifies the maximum number of seconds between every inventory synchronization.
+Maximum time interval to trigger a synchronization. When a synchronization fails the interval is duplicated up to this maximum value.
 
-+--------------------+-----------------------------------------------------------------------------+
-| **Default value**  | 1 h                                                                         |
-+--------------------+-----------------------------------------------------------------------------+
-| **Allowed values** | Any number greater than or equal to interval. Allowed sufixes (s, m, h, d). |
-+--------------------+-----------------------------------------------------------------------------+
++--------------------+-----------------------------------------------------------------------------------+
+| **Default value**  | 1 h                                                                               |
++--------------------+-----------------------------------------------------------------------------------+
+| **Allowed values** | Any integer greater than or equal to ``interval``. Allowed suffixes (s, m, h, d). |
++--------------------+-----------------------------------------------------------------------------------+
 
 **response_timeout**
 
-Specifies the time elapsed in seconds since the agent sends the message to the manager and receives the response.
-If the response is not received in this interval, the message is marked as unanswered (timed-out) and the agent
-may start a new synchronization session at the defined interval.
+Waiting time in seconds since a sync message is sent or received for the next synchronization activity. If the agent doesn't send or receive a message in this interval the synchronization is marked as successful. If a synchronization is unsuccessful, the synchronization interval is doubled up to the ``max_interval`` value. This mechanism avoids synchronization overlapping.
 
-+--------------------+---------------------------------------+
-| **Default value**  | 30                                    |
-+--------------------+---------------------------------------+
-| **Allowed values** | Any number greater than or equal to 0.|
-+--------------------+---------------------------------------+
++--------------------+----------------------------------------------------------------------+
+| **Default value**  | 30                                                                   |
++--------------------+----------------------------------------------------------------------+
+| **Allowed values** | Any number between 0 and ``interval``.                               |
++--------------------+----------------------------------------------------------------------+
 
 **queue_size**
 
@@ -770,6 +806,16 @@ Specifies the queue size of the manager synchronization responses.
 +--------------------+---------------------------------------+
 | **Allowed values** | Integer number between 2 and 1000000. |
 +--------------------+---------------------------------------+
+
+**thread_pool**
+
+Specifies the number of threads that FIM database synchronization uses. FIM uses the lesser value of the configured value and the number of system CPU cores.
+
++--------------------+-----------------------------------------------------+
+| **Default value**  | 1                                                   |
++--------------------+-----------------------------------------------------+
+| **Allowed values** |  Any integer greater than 0.                        |
++--------------------+-----------------------------------------------------+
 
 **max_eps**
 
@@ -828,7 +874,7 @@ Set the disk quota limit option to enabled or disabled.
 
 .. versionadded:: 4.0
 
-Specifices the limit for the size of the ``queue/diff/local`` folder.
+Specifies the limit for the size of the ``queue/diff/local`` folder.
 
 +--------------------+---------------------------------------------+
 | **Default value**  | 1GB                                         |
@@ -859,7 +905,7 @@ Set the size limit of a file to enabled or disabled.
 
 .. versionadded:: 4.0
 
-Specifices the limit for the size of files monitored with ``report_changes``.
+Specifies the limit for the size of files monitored with ``report_changes``.
 
 +--------------------+---------------------------------------------+
 | **Default value**  | 50MB                                        |
@@ -872,7 +918,7 @@ Specifices the limit for the size of files monitored with ``report_changes``.
 nodiff
 """"""
 
-List of files to not compute the diff (one entry per line). It could be used for sensitive files like a private key, credentials stored in a file or database configuration, avoiding data leaking by sending the file content changes through alerts.
+List of files to not compute the diff (one entry per line). It could be used for sensitive files like a private key, credentials stored in a file, or database configuration, avoiding data leaking by sending the file content changes through alerts.
 
 +--------------------+----------------------+
 | **Allowed values** | Any file name.       |
@@ -928,7 +974,7 @@ The Whodata options will be configured inside this tag.
 
 **restart_audit**
 
-Allows the system to restart ``Auditd`` after installing the plugin. Note that setting this field to ``no`` the new
+Allows the system to restart ``Auditd`` after installing the plugin. Note that by setting this field to ``no`` the new
 whodata rules won't be applied automatically.
 
 +--------------------+---------+
@@ -954,7 +1000,7 @@ Sets up the FIM engine to collect the Audit events using keys with ``audit_key``
 
 **startup_healthcheck**
 
-Allows to disable the Audit health check during the Whodata engine starting. This option is only available for **Linux systems with Audit**.
+Allows disabling the Audit health check during the Whodata engine starting. This option is only available for **Linux systems with Audit**.
 
 +--------------------+------------+
 | **Default value**  | yes        |
@@ -972,7 +1018,7 @@ For more information, please read :ref:`auditing who-data <auditing-whodata>`
 windows_audit_interval
 ----------------------
 
-Sets the frequency in seconds with which the Windows agent will check that the SACLs of the directories monitored in whodata mode are correct.
+Sets the frequency in seconds with which the Windows agent checks that the Local Audit Policies and the SACLs of the directories monitored in whodata mode are correct.
 
 +--------------------+------------------------------------+
 | **Default value**  | 300 seconds                        |
@@ -1226,7 +1272,6 @@ Default syscheck configuration:
     <synchronization>
       <enabled>yes</enabled>
       <interval>5m</interval>
-      <max_interval>1h</max_interval>
       <max_eps>10</max_eps>
     </synchronization>
    </syscheck>
@@ -1273,7 +1318,6 @@ Default syscheck configuration:
     <synchronization>
       <enabled>yes</enabled>
       <interval>5m</interval>
-      <max_interval>1h</max_interval>
       <max_eps>10</max_eps>
     </synchronization>
    </syscheck>
@@ -1351,7 +1395,6 @@ Default syscheck configuration:
     <synchronization>
       <enabled>yes</enabled>
       <interval>5m</interval>
-      <max_interval>1h</max_interval>
       <max_eps>10</max_eps>
     </synchronization>
    </syscheck>
@@ -1400,7 +1443,6 @@ Default syscheck configuration:
     <synchronization>
       <enabled>yes</enabled>
       <interval>5m</interval>
-      <max_interval>1h</max_interval>
       <max_eps>10</max_eps>
     </synchronization>
    </syscheck>

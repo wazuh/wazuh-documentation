@@ -3,7 +3,6 @@
 .. meta::
   :description: Check out more about updating the Wazuh ruleset.
 
-
 .. _ruleset_update:
 
 Update ruleset

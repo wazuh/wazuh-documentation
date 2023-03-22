@@ -1,4 +1,5 @@
 .. Copyright (C) 2015, Wazuh, Inc.
+
 .. meta::
   :description: Wazuh supports more than 3000 rules that accomplish a variety of technologies. Check them out here. 
   

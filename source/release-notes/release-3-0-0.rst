@@ -2,6 +2,7 @@
 
 .. meta::
   :description: Wazuh 3.0.0 has been released. Check out our release notes to discover the changes and additions of this release.
+  
 .. _release_3_0_0:
 
 3.0.0 Release notes - 3 December 2017
@@ -145,7 +146,7 @@ Below is an example of an alert triggered from a positive result:
    virustotal.scan_date: 2017-11-14 17:24:37
    integration: virustotal
 
-The complete documentation of this integration is located at :doc:`VirusTotal integration section <../user-manual/capabilities/virustotal-scan/index>`.
+The complete documentation of this integration is located at :doc:`VirusTotal integration section </user-manual/capabilities/malware-detection/virus-total-integration>`.
 
 MSI Windows installer for agents
 --------------------------------

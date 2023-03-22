@@ -19,6 +19,16 @@ Download the `virtual appliance (OVA) <https://packages.wazuh.com/|WAZUH_CURRENT
     - Filebeat-OSS |FILEBEAT_LATEST_OVA|
     - Wazuh dashboard |WAZUH_CURRENT_OVA|
 
+Packages list
+-------------
+
+.. |VM_CentOS7_64_OVA| replace:: `wazuh-|WAZUH_CURRENT_OVA|.ova <https://packages.wazuh.com/|WAZUH_CURRENT_MAJOR_OVA|/vm/wazuh-|WAZUH_CURRENT_OVA|.ova>`__ (`sha512 <https://packages.wazuh.com/|WAZUH_CURRENT_MAJOR_OVA|/checksums/wazuh/|WAZUH_CURRENT_OVA|/wazuh-|WAZUH_CURRENT_OVA|.ova.sha512>`__)
+
++--------------+--------------+--------------+---------+--------------------------------------+
+| Distribution | Architecture | VM Format    | Version | Package                              |
++==============+==============+==============+=========+======================================+
+|   CentOS 7   |    64bits    |      OVA     |  |WAZUH_CURRENT_OVA|  | |VM_CentOS7_64_OVA|                  |
++--------------+--------------+--------------+---------+--------------------------------------+
 
 Hardware requirements
 ---------------------

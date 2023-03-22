@@ -1,5 +1,8 @@
 .. Copyright (C) 2015, Wazuh, Inc.
 
+.. meta::
+  :description: Find out how to configure the Wazuh API in this section of the Wazuh documentation.
+  
 .. _api_configuration:
 
 Configuration
@@ -41,6 +44,8 @@ Here are all the available settings for the ``api.yaml`` configuration file. For
      logs:
         level: "info"
         format: "plain"
+        max_size:
+         enabled: false
 
      cors:
         enabled: no
@@ -58,14 +63,17 @@ Here are all the available settings for the ``api.yaml`` configuration file. For
         block_time: 300
         max_request_per_minute: 300
 
-     remote_commands:
-        localfile:
-           enabled: yes
-           exceptions: []
-
-       wodle_command:
-          enabled: yes
-          exceptions: []
+     upload_configuration:
+        remote_commands:
+           localfile:
+              allow: yes
+              exceptions: []
+           wodle_command:
+              allow: yes
+              exceptions: []
+        limits:
+           eps:
+              allow: yes
 
 .. warning::
 
@@ -73,17 +81,8 @@ Here are all the available settings for the ``api.yaml`` configuration file. For
 
 Make sure to restart the Wazuh API using the **wazuh-manager** service after editing the configuration file:
 
-  a. For Systemd:
+  .. include:: /_templates/common/restart_manager.rst
 
-  .. code-block:: console
-
-    # systemctl restart wazuh-manager
-
-  b. For SysV Init:
-
-  .. code-block:: console
-
-    # service wazuh-manager restart
 
 Security configuration
 ----------------------
@@ -239,6 +238,21 @@ logs
 |                           |                                                                                        |               | Set the format of the Wazuh API logs.           |
 +---------------------------+----------------------------------------------------------------------------------------+---------------+-------------------------------------------------+
 
+max_size
+~~~~~~~~~~~~~~~~~~~~~~
+
+.. versionadded:: 4.5.0
+
++------------+-----------------------------------------------+---------------+-------------------------------------------------------------------------------------------------------------------+
+| Sub-fields | Allowed values                                | Default value | Description                                                                                                       |
++============+===============================================+===============+===================================================================================================================+
+| enabled    | yes, true, no, false                          | false         | Enable or disable log file rotation based on file size. This option will disable log file rotation based on time. |
++------------+-----------------------------------------------+---------------+-------------------------------------------------------------------------------------------------------------------+
+| size       | Any positive number followed by a valid unit. | 1M            | Set a file size to trigger log rotation.                                                                          |
+|            | K/k for kilobytes, M/m for megabytes.         |               |                                                                                                                   |
++------------+-----------------------------------------------+---------------+-------------------------------------------------------------------------------------------------------------------+
+
+
 cors
 ^^^^^^^^^^^^^^^^^^^^^^
 +-------------------+----------------------+---------------+-----------------------------------------------------------------------------------------------+
@@ -277,14 +291,35 @@ access
 | max_request_per_minute | Any positive integer | 300           | Establish a maximum number of requests the Wazuh API can handle per minute (does not include authentication requests). If the number of requests for a given minute is exceeded, all incoming requests (from any user) will be blocked for the remaining time. This feature can be disabled by setting its value to 0.          |
 +------------------------+----------------------+---------------+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
 
+
+upload_configuration
+^^^^^^^^^^^^^^^^^^^^
+
+.. versionadded:: 4.4.0
+
 remote_commands (localfile and wodle "command")
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
 +------------+----------------------+---------------+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
 | Sub-fields | Allowed values       | Default value | Description                                                                                                                                                                                                                                                                                                                                 |
 +============+======================+===============+=============================================================================================================================================================================================================================================================================================================================================+
-| enabled    | yes, true, no, false | true          | Enable or disable uploading configurations with remote commands through the Wazuh API. When this option is disabled it is not possible to upload **ossec.conf** files with the <command> option inside the :ref:`localfile tag <reference_ossec_localfile>` as well as the :ref:`wodle "command" option <wodle_command>`.                   |
+| allow      | yes, true, no, false | true          | Allow uploading configurations with remote commands through the Wazuh API. Setting this option to ``false`` prevents uploading ``ossec.conf`` files that contain the :ref:`wodle "command" option <wodle_command>` or the ``<command>`` option inside the :ref:`localfile tag <reference_ossec_localfile>`.                                 |
 +------------+----------------------+---------------+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-| exceptions | command list         | [ ]           | Set a list of commands allowed to be uploaded through the API. These exceptions could always be uploaded independently of the value of the enabled config                                                                                                                                                                                   |
+| exceptions | command list         | [ ]           | Set a list of commands allowed to be uploaded through the API. These exceptions can always be uploaded regardless of the ``allow`` configuration.                                                                                                                                                                                           |
++------------+----------------------+---------------+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+
+limits
+~~~~~~
+
+.. rubric:: eps
+   :class: h5
+
+.. versionadded:: 4.4.0
+
++------------+----------------------+---------------+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| Sub-fields | Allowed values       | Default value | Description                                                                                                                                                                                                                                                                                                                                 |
++============+======================+===============+=============================================================================================================================================================================================================================================================================================================================================+
+| allow      | yes, true, no, false | true          | Allow uploading configurations with EPS limits through the Wazuh API. Setting this option to ``false`` prevents uploading ``ossec.conf`` files with ``<limits><eps>`` inside the :ref:`global tag <reference_ossec_global>`.                                                                                                                |
 +------------+----------------------+---------------+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
 
 .. _api_security_configuration_options:

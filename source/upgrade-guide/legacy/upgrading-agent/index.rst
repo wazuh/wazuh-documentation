@@ -1,5 +1,8 @@
 .. Copyright (C) 2015, Wazuh, Inc.
 
+.. meta::
+   :description: This section of the Wazuh documentation guides through the process of upgrading the Wazuh agent installations from versions prior to 3.0.
+
 .. _upgrading_wazuh_agent_legacy:
 
 Upgrading the Wazuh agent

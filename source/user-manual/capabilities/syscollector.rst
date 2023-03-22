@@ -395,15 +395,18 @@ The following table shows the operating systems that this module currently suppo
 +------------------------+-----------+-----------+-----------+----------+-----------+-----------+-----------+
 |    OpenBSD             |     ✓     |     ✓     |     ✗     |     ✓    |     ✗     |     ✗     |     ✗     |
 +------------------------+-----------+-----------+-----------+----------+-----------+-----------+-----------+
+|    Solaris             |     ✗     |     ✓     |     ✓     |     ✓    |     ✗     |     ✗     |     ✗     |
++------------------------+-----------+-----------+-----------+----------+-----------+-----------+-----------+
 
 Using Syscollector information to trigger alerts
 ------------------------------------------------
 
-.. warning::
-   
-   This functionality is not currently supported. It will be available starting with version 4.4.
+.. note::
 
-Since Wazuh 3.9 version, ``Syscollector`` module information can be used to trigger alerts and show that information in the alerts' description.
+   Enabled again in Wazuh |WAZUH_CURRENT_MINOR|. All the information required for these alerts is now available and allows this feature.
+
+
+``Syscollector`` module information can be used to trigger alerts and show that information in the alerts' description.
 
 To allow this configuration, in a rule declaration set the ``<decoded_as>`` field as **syscollector**.
 
@@ -435,7 +438,7 @@ As an example, the rules in the following set of custom rules trigger when a por
       </rule>
     </group>
 
-.. warning::
+.. note::
 
     The tag ``<if_sid>221</if_sid>`` is necessary because the events from Syscollector are muted by default with that rule.
 
@@ -447,7 +450,7 @@ The alert for a port opening operation is displayed in the Wazuh dashboard as fo
       :width: 100%
 
 .. note::
-   
+
    The initial scan does not generate alerts. The alerts are triggered **after the second Syscollector scan**, when an information difference (delta) is detected.
 
 New searchable fields for the Wazuh dashboard

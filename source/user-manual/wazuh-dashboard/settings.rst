@@ -13,7 +13,7 @@ The *Settings* page allows you to configure and customize your Wazuh dashboard e
 API
 ---
 
-In this section, you can list all your inserted API credentials. The star icon indicates the currently used API to show information on the app. Each entry has multiple available actions to manage it. Keep in mind that a working API is needed in order to add or edit an entry. Check your API connection status prior to adding them to the app.
+In this section, you can list all your inserted API credentials. The star icon indicates the currently used API to show information on the app. Each entry has multiple available actions to manage it. Keep in mind that a working API is needed to add or edit an entry. Check your API connection status before adding them to the app.
 
 .. thumbnail:: ../../images/kibana-app/features/settings/api.png
   :align: center
@@ -31,7 +31,7 @@ Wazuh dashboard provides multiple integrations and capabilities to monitor and a
 Configuration
 -------------
 
-You can take a quick look to the Wazuh dashboard configuration file here. The documentation for the ``wazuh.yml`` file can be found on the config section.
+You can take a quick look at the Wazuh dashboard configuration file here. The documentation for the ``wazuh.yml`` file can be found in the config section.
 
 .. thumbnail:: ../../images/kibana-app/features/settings/configuration.png
   :align: center

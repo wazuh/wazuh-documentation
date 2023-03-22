@@ -65,17 +65,20 @@ Installing Audit
 
 In order to use the Audit system, you must have the audit package installed on your system. If you do not have this  package installed, execute the following command as the root user to install it.
 
-Red Hat, CentOS and Fedora:
+.. tabs::
 
-.. code-block:: console
+   .. group-tab:: Yum
 
-    # yum install audit
+      .. code-block:: console
 
-Debian and Ubuntu based Linux distributions:
+         # yum install audit
 
-.. code-block:: console
+   .. group-tab:: APT
 
-    # apt-get install auditd
+      .. code-block:: console
+
+         # apt-get install auditd
+
 
 Editing ossec.conf
 ~~~~~~~~~~~~~~~~~~
@@ -94,17 +97,7 @@ Restarting Wazuh
 
 Finally, we must restart the Wazuh agent in order to apply the changes:
 
-a. For Systemd:
-
-  .. code-block:: console
-
-    # systemctl restart wazuh-agent
-
-b. For SysV Init:
-
-  .. code-block:: console
-
-    # service wazuh-agent restart
+.. include:: /_templates/common/restart_agent.rst
 
 Now everything is ready to process audit events. You only need to create the proper audit rules (via *auditctl* or */etc/audit/audit.rules*). In the next section we will describe some good use cases.
 

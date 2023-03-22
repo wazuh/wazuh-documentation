@@ -1,5 +1,8 @@
 .. Copyright (C) 2015, Wazuh, Inc.
 
+.. meta::
+  :description: Manage the Wazuh cluster from any manager using the cluster_control program. Learn more about it in this section of the Wazuh documentation.
+  
 .. _cluster_control:
 
 cluster_control

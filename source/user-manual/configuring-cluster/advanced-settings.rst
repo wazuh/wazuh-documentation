@@ -1,7 +1,7 @@
 .. Copyright (C) 2015, Wazuh, Inc.
 
 .. meta::
-    :description: Learn more about how to deploy a Wazuh cluster. In this section of our documentation we explain more about the agents connections. 
+  :description: Learn more about how to deploy a Wazuh cluster. In this section of our documentation we explain more about the agents connections. 
     
 .. _cluster_agents_connections:
 
@@ -37,18 +37,7 @@ Pointing agents to the cluster with a load balancer
 
     2. Restart the agents:
 
-      a. For Systemd:
-
-        .. code-block:: console
-
-          # systemctl restart wazuh-agent
-
-      b. For SysV Init:
-
-        .. code-block:: console
-
-          # service wazuh-agent restart
-
+      .. include:: /_templates/common/restart_agent.rst
 
     3. Include in the ``Load Balancer`` the IP address of every instance of the cluster we want to deliver events.
 

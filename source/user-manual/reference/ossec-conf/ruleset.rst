@@ -3,7 +3,6 @@
 .. meta::
   :description: Find out more about the configuration options for enabling or disabling rules and decoders with Wazuh.
 
-
 .. _reference_ossec_rules:
 
 ruleset
@@ -47,7 +46,7 @@ Load a single rule file.
 rule_dir
 ^^^^^^^^
 
-Load a directory of rules. The files will be loaded in alphabetical order and any duplicate filenames will be skipped.
+Load a directory of rules. The files will be loaded in alphabetical order, and any duplicate filenames will be skipped.
 
 +--------------------+------------------------------------+
 | **Default value**  | ruleset/rules                      |

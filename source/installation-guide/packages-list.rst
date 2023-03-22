@@ -6,25 +6,7 @@
 Packages list
 =============
 
-This download page contains packages required for the Wazuh installation:
-
-- `Wazuh manager and Wazuh agent`_
-
-   - `Linux`_
-   - `Windows`_
-   - `macOS`_
-   - `Solaris`_
-   - `AIX`_
-   - `HP-UX`_
-
-- `Wazuh indexer`_
-- `Wazuh dashboard`_
-- `Wazuh Kibana plugin`_
-- `Wazuh Splunk app`_
-- `Filebeat`_
-- `Virtual machine`_
-- `Amazon Machine Image`_
-- `MSU`_
+This download page contains packages required for the Wazuh installation.
 
 .. _Wazuh_manager_agent_packages_list:
 
@@ -33,6 +15,20 @@ Wazuh manager and Wazuh agent
 
 Linux
 ^^^^^
+
+.. |Alpine_i386_agent| replace:: `wazuh-agent-|WAZUH_CURRENT|-|WAZUH_REVISION_APK_AGENT_I386|.apk <|APK_AGENT_I386_URL|-|WAZUH_CURRENT|-|WAZUH_REVISION_APK_AGENT_I386|.apk>`__ (`sha512 <|CHECKSUMS_URL||WAZUH_CURRENT|/|APK_CHECKSUMS_I386_URL|/wazuh-agent-|WAZUH_CURRENT|-|WAZUH_REVISION_APK_AGENT_I386|.apk.sha512>`__)
+
+.. |Alpine_x86_64_agent| replace:: `wazuh-agent-|WAZUH_CURRENT|-|WAZUH_REVISION_APK_AGENT_X86_64|.apk <|APK_AGENT_X86_64_URL|-|WAZUH_CURRENT|-|WAZUH_REVISION_APK_AGENT_X86_64|.apk>`__ (`sha512 <|CHECKSUMS_URL||WAZUH_CURRENT|/|APK_CHECKSUMS_X86_64_URL|/wazuh-agent-|WAZUH_CURRENT|-|WAZUH_REVISION_APK_AGENT_X86_64|.apk.sha512>`__)
+
+.. |Alpine_aarch64_agent| replace:: `wazuh-agent-|WAZUH_CURRENT|-|WAZUH_REVISION_APK_AGENT_AARCH64|.apk <|APK_AGENT_AARCH64_URL|-|WAZUH_CURRENT|-|WAZUH_REVISION_APK_AGENT_AARCH64|.apk>`__ (`sha512 <|CHECKSUMS_URL||WAZUH_CURRENT|/|APK_CHECKSUMS_AARCH64_URL|/wazuh-agent-|WAZUH_CURRENT|-|WAZUH_REVISION_APK_AGENT_AARCH64|.apk.sha512>`__)
+
+.. |Alpine_armv7_agent| replace:: `wazuh-agent-|WAZUH_CURRENT|-|WAZUH_REVISION_APK_AGENT_ARMV7|.apk <|APK_AGENT_ARMV7_URL|-|WAZUH_CURRENT|-|WAZUH_REVISION_APK_AGENT_ARMV7|.apk>`__ (`sha512 <|CHECKSUMS_URL||WAZUH_CURRENT|/|APK_CHECKSUMS_ARMV7_URL|/wazuh-agent-|WAZUH_CURRENT|-|WAZUH_REVISION_APK_AGENT_ARMV7|.apk.sha512>`__)
+
+.. |Alpine_armhf_agent| replace:: `wazuh-agent-|WAZUH_CURRENT|-|WAZUH_REVISION_APK_AGENT_ARMHF|.apk <|APK_AGENT_ARMHF_URL|-|WAZUH_CURRENT|-|WAZUH_REVISION_APK_AGENT_ARMHF|.apk>`__ (`sha512 <|CHECKSUMS_URL||WAZUH_CURRENT|/|APK_CHECKSUMS_ARMHF_URL|/wazuh-agent-|WAZUH_CURRENT|-|WAZUH_REVISION_APK_AGENT_ARMHF|.apk.sha512>`__)
+
+.. |Alpine_powerpc_agent| replace:: `wazuh-agent-|WAZUH_CURRENT|-|WAZUH_REVISION_APK_AGENT_PPC|.apk <|APK_AGENT_PPC_URL|-|WAZUH_CURRENT|-|WAZUH_REVISION_APK_AGENT_PPC|.apk>`__ (`sha512 <|CHECKSUMS_URL||WAZUH_CURRENT|/|APK_CHECKSUMS_PPC_URL|/wazuh-agent-|WAZUH_CURRENT|-|WAZUH_REVISION_APK_AGENT_PPC|.apk.sha512>`__)
+
+
 
 .. |Amazon_i386_agent| replace:: `wazuh-agent-|WAZUH_CURRENT|-|WAZUH_REVISION_YUM_AGENT_I386|.i386.rpm <|RPM_AGENT_URL|-|WAZUH_CURRENT|-|WAZUH_REVISION_YUM_AGENT_I386|.i386.rpm>`__ (`sha512 <|CHECKSUMS_URL||WAZUH_CURRENT|/wazuh-agent-|WAZUH_CURRENT|-|WAZUH_REVISION_YUM_AGENT_I386|.i386.rpm.sha512>`__)
 
@@ -175,11 +171,25 @@ Linux
 +-----------------------+-------------------+--------------+------------------------------------------+
 | Distribution          | Version           | Architecture | Package                                  |
 +=======================+===================+==============+==========================================+
+|                       |                   |    i386      | |Alpine_i386_agent|                      |
++ Alpine Linux          + v3.12 and later   +--------------+------------------------------------------+
+|                       |                   |    x86_64    | |Alpine_x86_64_agent|                    |
++                       +                   +--------------+------------------------------------------+
+|                       |                   |    aarch64   | |Alpine_aarch64_agent|                   |
++                       +                   +--------------+------------------------------------------+
+|                       |                   |    armv7     | |Alpine_armv7_agent|                     |
++                       +                   +--------------+------------------------------------------+
+|                       |                   |    armhf     | |Alpine_armhf_agent|                     |
++                       +                   +--------------+------------------------------------------+
+|                       |                   |    powerpc   | |Alpine_powerpc_agent|                   |
++-----------------------+-------------------+--------------+------------------------------------------+
+|                       | 2                 |    powerpc   | |CentOS7_powerpc_agent|                  |
++ Amazon Linux          +-------------------+--------------+------------------------------------------+
 |                       |                   |    i386      | |Amazon_i386_agent|                      |
-+ Amazon Linux          +  1 and 2          +--------------+------------------------------------------+
++                       +                   +--------------+------------------------------------------+
 |                       |                   |              | |Amazon_x86_64_agent|                    |
 +                       +                   +    x86_64    +------------------------------------------+
-|                       |                   |              | |Amazon_x86_64_manager|                  |
+|                       | 1 and later       |              | |Amazon_x86_64_manager|                  |
 +                       +                   +--------------+------------------------------------------+
 |                       |                   |              | |Amazon_aarch64_agent|                   |
 +                       +                   +    aarch64   +------------------------------------------+
@@ -187,10 +197,10 @@ Linux
 +                       +                   +--------------+------------------------------------------+
 |                       |                   |    armhf     | |Amazon_armhf_agent|                     |
 +-----------------------+-------------------+--------------+------------------------------------------+
-|                       |  7 or later       |    powerpc   | |CentOS7_powerpc_agent|                  |
+|                       |  7 and later      |    powerpc   | |CentOS7_powerpc_agent|                  |
 + CentOS                +-------------------+--------------+------------------------------------------+
 |                       |                   |    i386      | |CentOS6_i386_agent|                     |
-+                       +  6 or later       +--------------+------------------------------------------+
++                       +  6 and later      +--------------+------------------------------------------+
 |                       |                   |              | |CentOS6_x86_64_agent|                   |
 +                       +                   +    x86_64    +------------------------------------------+
 |                       |                   |              | |CentOS6_x86_64_manager|                 |
@@ -205,10 +215,10 @@ Linux
 +                       +  5                +--------------+------------------------------------------+
 |                       |                   |    x86_64    | |CentOS5_x86_64_agent|                   |
 +-----------------------+-------------------+--------------+------------------------------------------+
-|                       |  9 or later       |    powerpc   | |Debian9_powerpc_agent|                  |
+|                       |  9 and later      |    powerpc   | |Debian9_powerpc_agent|                  |
 + Debian                +-------------------+--------------+------------------------------------------+
 |                       |                   |    i386      | |Debian7_i386_agent|                     |
-+                       +  7 or later       +--------------+------------------------------------------+
++                       +  7 and later      +--------------+------------------------------------------+
 |                       |                   |              | |Debian7_x86_64_agent|                   |
 +                       +                   +    x86_64    +------------------------------------------+
 |                       |                   |              | |Debian7_x86_64_manager|                 |
@@ -219,8 +229,10 @@ Linux
 +                       +                   +--------------+------------------------------------------+
 |                       |                   |    armhf     | |Debian7_armhf_agent|                    |
 +-----------------------+-------------------+--------------+------------------------------------------+
+|                       |                   |    powerpc   | |CentOS7_powerpc_agent|                  |
++ Fedora                + 22 and later      +--------------+------------------------------------------+
 |                       |                   |    i386      | |Fedora22_i386_agent|                    |
-+ Fedora                +  22 or later      +--------------+------------------------------------------+
++                       +                   +--------------+------------------------------------------+
 |                       |                   |              | |Fedora22_x86_64_agent|                  |
 +                       +                   +    x86_64    +------------------------------------------+
 |                       |                   |              | |Fedora22_x86_64_manager|                |
@@ -232,7 +244,7 @@ Linux
 |                       |                   |    armhf     | |Fedora22_armhf_agent|                   |
 +-----------------------+-------------------+--------------+------------------------------------------+
 |                       |                   |    i386      | |OpenSUSE_i386_agent|                    |
-+ OpenSUSE              +  42 or later      +--------------+------------------------------------------+
++ OpenSUSE              +  42 and later     +--------------+------------------------------------------+
 |                       |                   |              | |OpenSUSE_x86_64_agent|                  |
 +                       +                   +    x86_64    +------------------------------------------+
 |                       |                   |              | |OpenSUSE_x86_64_manager|                |
@@ -244,7 +256,7 @@ Linux
 |                       |                   |    armhf     | |OpenSUSE_armhf_agent|                   |
 +-----------------------+-------------------+--------------+------------------------------------------+
 |                       |                   |    i386      | |Oracle6_i386_agent|                     |
-+ Oracle Linux          +  6 or later       +--------------+------------------------------------------+
++ Oracle Linux          +  6 and later      +--------------+------------------------------------------+
 |                       |                   |              | |Oracle6_x86_64_agent|                   |
 +                       +                   +    x86_64    +------------------------------------------+
 |                       |                   |              | |Oracle6_x86_64_manager|                 |
@@ -260,7 +272,7 @@ Linux
 |                       |                   |    x86_64    | |Oracle5_x86_64_agent|                   |
 +-----------------------+-------------------+--------------+------------------------------------------+
 |                       |                   |    i386      | |RHEL6_i386_agent|                       |
-+ Red Hat               +  6 or later       +--------------+------------------------------------------+
++ Red Hat               +  6 and later      +--------------+------------------------------------------+
 | Enterprise Linux      |                   |              | |RHEL6_x86_64_agent|                     |
 +                       +                   +    x86_64    +------------------------------------------+
 |                       |                   |              | |RHEL6_x86_64_manager|                   |
@@ -292,7 +304,7 @@ Linux
 |                       |                   |    x86_64    | |SUSE11_x86_64_agent|                    |
 +-----------------------+-------------------+--------------+------------------------------------------+
 |                       |                   |    i386      | |Ubuntu12_i386_agent|                    |
-+ Ubuntu                +  12 or later      +--------------+------------------------------------------+
++ Ubuntu                +  12 and later     +--------------+------------------------------------------+
 |                       |                   |              | |Ubuntu12_x86_64_agent|                  |
 +                       +                   +    x86_64    +------------------------------------------+
 |                       |                   |              | |Ubuntu12_x86_64_manager|                |
@@ -303,16 +315,21 @@ Linux
 +                       +                   +--------------+------------------------------------------+
 |                       |                   |    armhf     | |Ubuntu12_armhf_agent|                   |
 +-----------------------+-------------------+--------------+------------------------------------------+
+|                       | Buster and later  |    powerpc   | |Debian9_powerpc_agent|                  |
++ Raspbian OS           +                   +--------------+------------------------------------------+
+|                       |                   |    i386      | |Debian7_i386_agent|                     |
++                       +                   +--------------+------------------------------------------+
 |                       |                   |              | |Raspbian_x86_64_agent|                  |
 +                       +                   +    x86_64    +------------------------------------------+
 |                       |                   |              | |Raspbian_x86_64_manager|                |
-+ Raspbian OS           + Buster or greater +--------------+------------------------------------------+
++                       |                   +--------------+------------------------------------------+
 |                       |                   |              | |Raspbian_aarch64_agent|                 |
 +                       +                   +    aarch64   +------------------------------------------+
 |                       |                   |              | |Raspbian_aarch64_manager|               |
 +                       +                   +--------------+------------------------------------------+
 |                       |                   |    armhf     | |Raspbian_armhf_agent|                   |
 +-----------------------+-------------------+--------------+------------------------------------------+
+
 
 Windows
 ^^^^^^^
@@ -339,13 +356,13 @@ macOS
 Solaris
 ^^^^^^^
 
-.. |Solaris10_i386| replace:: `wazuh-agent_v|WAZUH_CURRENT_SOLARIS10|-sol10-i386.pkg <https://packages.wazuh.com/|WAZUH_CURRENT_MAJOR_SOLARIS10|/solaris/i386/10/wazuh-agent_v|WAZUH_CURRENT_SOLARIS10|-sol10-i386.pkg>`__ (`sha512 <https://packages.wazuh.com/|WAZUH_CURRENT_MAJOR_SOLARIS10|/checksums/wazuh/|WAZUH_CURRENT_SOLARIS10|/wazuh-agent_v|WAZUH_CURRENT_SOLARIS10|-sol10-i386.pkg.sha512>`__)
+.. |Solaris10_i386| replace:: `wazuh-agent_v|WAZUH_CURRENT_SOLARIS10_i386|-sol10-i386.pkg <https://packages.wazuh.com/|WAZUH_CURRENT_MAJOR_SOLARIS10_i386|/solaris/i386/10/wazuh-agent_v|WAZUH_CURRENT_SOLARIS10_i386|-sol10-i386.pkg>`__ (`sha512 <https://packages.wazuh.com/|WAZUH_CURRENT_MAJOR_SOLARIS10_i386|/checksums/wazuh/|WAZUH_CURRENT_SOLARIS10_i386|/wazuh-agent_v|WAZUH_CURRENT_SOLARIS10_i386|-sol10-i386.pkg.sha512>`__)
 
-.. |Solaris10_SPARC| replace:: `wazuh-agent_v|WAZUH_CURRENT_SOLARIS10|-sol10-sparc.pkg <https://packages.wazuh.com/|WAZUH_CURRENT_MAJOR_SOLARIS10|/solaris/sparc/10/wazuh-agent_v|WAZUH_CURRENT_SOLARIS10|-sol10-sparc.pkg>`__ (`sha512 <https://packages.wazuh.com/|WAZUH_CURRENT_MAJOR_SOLARIS10|/checksums/wazuh/|WAZUH_CURRENT_SOLARIS10|/wazuh-agent_v|WAZUH_CURRENT_SOLARIS10|-sol10-sparc.pkg.sha512>`__)
+.. |Solaris10_SPARC| replace:: `wazuh-agent_v|WAZUH_CURRENT_SOLARIS10_SPARC|-sol10-sparc.pkg <https://packages.wazuh.com/|WAZUH_CURRENT_MAJOR_SOLARIS10_SPARC|/solaris/sparc/10/wazuh-agent_v|WAZUH_CURRENT_SOLARIS10_SPARC|-sol10-sparc.pkg>`__ (`sha512 <https://packages.wazuh.com/|WAZUH_CURRENT_MAJOR_SOLARIS10_SPARC|/checksums/wazuh/|WAZUH_CURRENT_SOLARIS10_SPARC|/wazuh-agent_v|WAZUH_CURRENT_SOLARIS10_SPARC|-sol10-sparc.pkg.sha512>`__)
 
-.. |Solaris11_i386| replace:: `wazuh-agent_v|WAZUH_CURRENT_SOLARIS11|-sol11-i386.p5p <https://packages.wazuh.com/|WAZUH_CURRENT_MAJOR_SOLARIS11|/solaris/i386/11/wazuh-agent_v|WAZUH_CURRENT_SOLARIS11|-sol11-i386.p5p>`__ (`sha512 <https://packages.wazuh.com/|WAZUH_CURRENT_MAJOR_SOLARIS11|/checksums/wazuh/|WAZUH_CURRENT_SOLARIS11|/wazuh-agent_v|WAZUH_CURRENT_SOLARIS11|-sol11-i386.p5p.sha512>`__)
+.. |Solaris11_i386| replace:: `wazuh-agent_v|WAZUH_CURRENT_SOLARIS11_i386|-sol11-i386.p5p <https://packages.wazuh.com/|WAZUH_CURRENT_MAJOR_SOLARIS11_i386|/solaris/i386/11/wazuh-agent_v|WAZUH_CURRENT_SOLARIS11_i386|-sol11-i386.p5p>`__ (`sha512 <https://packages.wazuh.com/|WAZUH_CURRENT_MAJOR_SOLARIS11_i386|/checksums/wazuh/|WAZUH_CURRENT_SOLARIS11_i386|/wazuh-agent_v|WAZUH_CURRENT_SOLARIS11_i386|-sol11-i386.p5p.sha512>`__)
 
-.. |Solaris11_SPARC| replace:: `wazuh-agent_v|WAZUH_CURRENT_SOLARIS11|-sol11-sparc.p5p <https://packages.wazuh.com/|WAZUH_CURRENT_MAJOR_SOLARIS11|/solaris/sparc/11/wazuh-agent_v|WAZUH_CURRENT_SOLARIS11|-sol11-sparc.p5p>`__ (`sha512 <https://packages.wazuh.com/|WAZUH_CURRENT_MAJOR_SOLARIS11|/checksums/wazuh/|WAZUH_CURRENT_SOLARIS11|/wazuh-agent_v|WAZUH_CURRENT_SOLARIS11|-sol11-sparc.p5p.sha512>`__)
+.. |Solaris11_SPARC| replace:: `wazuh-agent_v|WAZUH_CURRENT_SOLARIS11_SPARC|-sol11-sparc.p5p <https://packages.wazuh.com/|WAZUH_CURRENT_MAJOR_SOLARIS11_SPARC|/solaris/sparc/11/wazuh-agent_v|WAZUH_CURRENT_SOLARIS11_SPARC|-sol11-sparc.p5p>`__ (`sha512 <https://packages.wazuh.com/|WAZUH_CURRENT_MAJOR_SOLARIS11_SPARC|/checksums/wazuh/|WAZUH_CURRENT_SOLARIS11_SPARC|/wazuh-agent_v|WAZUH_CURRENT_SOLARIS11_SPARC|-sol11-sparc.p5p.sha512>`__)
 
 +---------+--------------+-------------------------+
 | Version | Architecture | Package                 |
@@ -414,148 +431,8 @@ Wazuh dashboard
 |     DEB      | |DashboardDEB|   |
 +--------------+------------------+
 
-Wazuh Kibana plugin
--------------------
-
-For Wazuh |WAZUH_CURRENT|:
-
-.. |WAZUH_KIBANA_7.10.2| replace:: `wazuh_kibana-|WAZUH_CURRENT|_7.10.2.zip <https://packages.wazuh.com/|WAZUH_CURRENT_MAJOR|/ui/kibana/wazuh_kibana-|WAZUH_CURRENT|_7.10.2-1.zip>`__ (`sha512 <https://packages.wazuh.com/|WAZUH_CURRENT_MAJOR|/checksums/wazuh/|WAZUH_CURRENT|/wazuh_kibana-|WAZUH_CURRENT|_7.10.2-1.zip.sha512>`__)
-
-.. |WAZUH_KIBANA_7.16.0| replace:: `wazuh_kibana-|WAZUH_CURRENT|_7.16.0.zip <https://packages.wazuh.com/|WAZUH_CURRENT_MAJOR|/ui/kibana/wazuh_kibana-|WAZUH_CURRENT|_7.16.0-1.zip>`__ (`sha512 <https://packages.wazuh.com/|WAZUH_CURRENT_MAJOR|/checksums/wazuh/|WAZUH_CURRENT|/wazuh_kibana-|WAZUH_CURRENT|_7.16.0-1.zip.sha512>`__)
-
-.. |WAZUH_KIBANA_7.16.1| replace:: `wazuh_kibana-|WAZUH_CURRENT|_7.16.1.zip <https://packages.wazuh.com/|WAZUH_CURRENT_MAJOR|/ui/kibana/wazuh_kibana-|WAZUH_CURRENT|_7.16.1-1.zip>`__ (`sha512 <https://packages.wazuh.com/|WAZUH_CURRENT_MAJOR|/checksums/wazuh/|WAZUH_CURRENT|/wazuh_kibana-|WAZUH_CURRENT|_7.16.1-1.zip.sha512>`__)
-
-.. |WAZUH_KIBANA_7.16.2| replace:: `wazuh_kibana-|WAZUH_CURRENT|_7.16.2.zip <https://packages.wazuh.com/|WAZUH_CURRENT_MAJOR|/ui/kibana/wazuh_kibana-|WAZUH_CURRENT|_7.16.2-1.zip>`__ (`sha512 <https://packages.wazuh.com/|WAZUH_CURRENT_MAJOR|/checksums/wazuh/|WAZUH_CURRENT|/wazuh_kibana-|WAZUH_CURRENT|_7.16.2-1.zip.sha512>`__)
-
-.. |WAZUH_KIBANA_7.16.3| replace:: `wazuh_kibana-|WAZUH_CURRENT|_7.16.3.zip <https://packages.wazuh.com/|WAZUH_CURRENT_MAJOR|/ui/kibana/wazuh_kibana-|WAZUH_CURRENT|_7.16.3-1.zip>`__ (`sha512 <https://packages.wazuh.com/|WAZUH_CURRENT_MAJOR|/checksums/wazuh/|WAZUH_CURRENT|/wazuh_kibana-|WAZUH_CURRENT|_7.16.3-1.zip.sha512>`__)
-
-.. |WAZUH_KIBANA_7.17.0| replace:: `wazuh_kibana-|WAZUH_CURRENT|_7.17.0.zip <https://packages.wazuh.com/|WAZUH_CURRENT_MAJOR|/ui/kibana/wazuh_kibana-|WAZUH_CURRENT|_7.17.0-1.zip>`__ (`sha512 <https://packages.wazuh.com/|WAZUH_CURRENT_MAJOR|/checksums/wazuh/|WAZUH_CURRENT|/wazuh_kibana-|WAZUH_CURRENT|_7.17.0-1.zip.sha512>`__)
-
-.. |WAZUH_KIBANA_7.17.1| replace:: `wazuh_kibana-|WAZUH_CURRENT|_7.17.1.zip <https://packages.wazuh.com/|WAZUH_CURRENT_MAJOR|/ui/kibana/wazuh_kibana-|WAZUH_CURRENT|_7.17.1-1.zip>`__ (`sha512 <https://packages.wazuh.com/|WAZUH_CURRENT_MAJOR|/checksums/wazuh/|WAZUH_CURRENT|/wazuh_kibana-|WAZUH_CURRENT|_7.17.1-1.zip.sha512>`__)
-
-.. |WAZUH_KIBANA_7.17.2| replace:: `wazuh_kibana-|WAZUH_CURRENT|_7.17.2.zip <https://packages.wazuh.com/|WAZUH_CURRENT_MAJOR|/ui/kibana/wazuh_kibana-|WAZUH_CURRENT|_7.17.2-1.zip>`__ (`sha512 <https://packages.wazuh.com/|WAZUH_CURRENT_MAJOR|/checksums/wazuh/|WAZUH_CURRENT|/wazuh_kibana-|WAZUH_CURRENT|_7.17.2-1.zip.sha512>`__)
-
-.. |WAZUH_KIBANA_7.17.3| replace:: `wazuh_kibana-|WAZUH_CURRENT|_7.17.3.zip <https://packages.wazuh.com/|WAZUH_CURRENT_MAJOR|/ui/kibana/wazuh_kibana-|WAZUH_CURRENT|_7.17.3-1.zip>`__ (`sha512 <https://packages.wazuh.com/|WAZUH_CURRENT_MAJOR|/checksums/wazuh/|WAZUH_CURRENT|/wazuh_kibana-|WAZUH_CURRENT|_7.17.3-1.zip.sha512>`__)
-
-.. |WAZUH_KIBANA_7.17.4| replace:: `wazuh_kibana-|WAZUH_CURRENT|_7.17.4.zip <https://packages.wazuh.com/|WAZUH_CURRENT_MAJOR|/ui/kibana/wazuh_kibana-|WAZUH_CURRENT|_7.17.4-1.zip>`__ (`sha512 <https://packages.wazuh.com/|WAZUH_CURRENT_MAJOR|/checksums/wazuh/|WAZUH_CURRENT|/wazuh_kibana-|WAZUH_CURRENT|_7.17.4-1.zip.sha512>`__)
-
-.. |WAZUH_KIBANA_7.17.5| replace:: `wazuh_kibana-|WAZUH_CURRENT|_7.17.5.zip <https://packages.wazuh.com/|WAZUH_CURRENT_MAJOR|/ui/kibana/wazuh_kibana-|WAZUH_CURRENT|_7.17.5-1.zip>`__ (`sha512 <https://packages.wazuh.com/|WAZUH_CURRENT_MAJOR|/checksums/wazuh/|WAZUH_CURRENT|/wazuh_kibana-|WAZUH_CURRENT|_7.17.5-1.zip.sha512>`__)
-
-+------------------+-----------------------+--------------------------+
-| Kibana Version   | Open Distro Version   | Package                  |
-+==================+=======================+==========================+
-| 7.10.2           | 1.13.2                | |WAZUH_KIBANA_7.10.2|    |
-+------------------+-----------------------+--------------------------+
-| 7.16.0           |                       | |WAZUH_KIBANA_7.16.0|    |
-+------------------+-----------------------+--------------------------+
-| 7.16.1           |                       | |WAZUH_KIBANA_7.16.1|    |
-+------------------+-----------------------+--------------------------+
-| 7.16.2           |                       | |WAZUH_KIBANA_7.16.2|    |
-+------------------+-----------------------+--------------------------+
-| 7.16.3           |                       | |WAZUH_KIBANA_7.16.3|    |
-+------------------+-----------------------+--------------------------+
-| 7.17.0           |                       | |WAZUH_KIBANA_7.17.0|    |
-+------------------+-----------------------+--------------------------+
-| 7.17.1           |                       | |WAZUH_KIBANA_7.17.1|    |
-+------------------+-----------------------+--------------------------+
-| 7.17.2           |                       | |WAZUH_KIBANA_7.17.2|    |
-+------------------+-----------------------+--------------------------+
-| 7.17.3           |                       | |WAZUH_KIBANA_7.17.3|    |
-+------------------+-----------------------+--------------------------+
-| 7.17.4           |                       | |WAZUH_KIBANA_7.17.4|    |
-+------------------+-----------------------+--------------------------+
-| 7.17.5           |                       | |WAZUH_KIBANA_7.17.5|    |
-+------------------+-----------------------+--------------------------+
-
-For a complete list of the available versions, see the `Wazuh Kibana plugin compatibility matrix <https://github.com/wazuh/wazuh-kibana-app/wiki/Compatibility>`_.
-
-Wazuh Splunk app
-----------------
-
-For Wazuh Splunk app |WAZUH_SPLUNK_CURRENT|:
-
-.. |SPLUNK_8.1.1_PKG| replace:: `wazuh_splunk-|WAZUH_SPLUNK_CURRENT|_8.1.1.tar.gz <https://packages.wazuh.com/4.x/ui/splunk/wazuh_splunk-|WAZUH_SPLUNK_CURRENT|_8.1.1-1.tar.gz>`__ (`sha512 <https://packages.wazuh.com/4.x/checksums/wazuh/|WAZUH_SPLUNK_CURRENT|/wazuh_splunk-|WAZUH_SPLUNK_CURRENT|_8.1.1-1.tar.gz.sha512>`__)
-
-.. |SPLUNK_8.1.2_PKG| replace:: `wazuh_splunk-|WAZUH_SPLUNK_CURRENT|_8.1.2.tar.gz <https://packages.wazuh.com/4.x/ui/splunk/wazuh_splunk-|WAZUH_SPLUNK_CURRENT|_8.1.2-1.tar.gz>`__ (`sha512 <https://packages.wazuh.com/4.x/checksums/wazuh/|WAZUH_SPLUNK_CURRENT|/wazuh_splunk-|WAZUH_SPLUNK_CURRENT|_8.1.2-1.tar.gz.sha512>`__)
-
-.. |SPLUNK_8.1.3_PKG| replace:: `wazuh_splunk-|WAZUH_SPLUNK_CURRENT|_8.1.3.tar.gz <https://packages.wazuh.com/4.x/ui/splunk/wazuh_splunk-|WAZUH_SPLUNK_CURRENT|_8.1.3-1.tar.gz>`__ (`sha512 <https://packages.wazuh.com/4.x/checksums/wazuh/|WAZUH_SPLUNK_CURRENT|/wazuh_splunk-|WAZUH_SPLUNK_CURRENT|_8.1.3-1.tar.gz.sha512>`__)
-
-.. |SPLUNK_8.1.4_PKG| replace:: `wazuh_splunk-|WAZUH_SPLUNK_CURRENT|_8.1.4.tar.gz <https://packages.wazuh.com/4.x/ui/splunk/wazuh_splunk-|WAZUH_SPLUNK_CURRENT|_8.1.4-1.tar.gz>`__ (`sha512 <https://packages.wazuh.com/4.x/checksums/wazuh/|WAZUH_SPLUNK_CURRENT|/wazuh_splunk-|WAZUH_SPLUNK_CURRENT|_8.1.4-1.tar.gz.sha512>`__)
-
-.. |SPLUNK_8.1.5_PKG| replace:: `wazuh_splunk-|WAZUH_SPLUNK_CURRENT|_8.1.5.tar.gz <https://packages.wazuh.com/4.x/ui/splunk/wazuh_splunk-|WAZUH_SPLUNK_CURRENT|_8.1.5-1.tar.gz>`__ (`sha512 <https://packages.wazuh.com/4.x/checksums/wazuh/|WAZUH_SPLUNK_CURRENT|/wazuh_splunk-|WAZUH_SPLUNK_CURRENT|_8.1.5-1.tar.gz.sha512>`__)
-
-.. |SPLUNK_8.1.6_PKG| replace:: `wazuh_splunk-|WAZUH_SPLUNK_CURRENT|_8.1.6.tar.gz <https://packages.wazuh.com/4.x/ui/splunk/wazuh_splunk-|WAZUH_SPLUNK_CURRENT|_8.1.6-1.tar.gz>`__ (`sha512 <https://packages.wazuh.com/4.x/checksums/wazuh/|WAZUH_SPLUNK_CURRENT|/wazuh_splunk-|WAZUH_SPLUNK_CURRENT|_8.1.6-1.tar.gz.sha512>`__)
-
-.. |SPLUNK_8.1.7_PKG| replace:: `wazuh_splunk-|WAZUH_SPLUNK_CURRENT|_8.1.7.tar.gz <https://packages.wazuh.com/4.x/ui/splunk/wazuh_splunk-|WAZUH_SPLUNK_CURRENT|_8.1.7-1.tar.gz>`__ (`sha512 <https://packages.wazuh.com/4.x/checksums/wazuh/|WAZUH_SPLUNK_CURRENT|/wazuh_splunk-|WAZUH_SPLUNK_CURRENT|_8.1.7-1.tar.gz.sha512>`__)
-
-.. |SPLUNK_8.1.7.1_PKG| replace:: `wazuh_splunk-|WAZUH_SPLUNK_CURRENT|_8.1.7.1.tar.gz <https://packages.wazuh.com/4.x/ui/splunk/wazuh_splunk-|WAZUH_SPLUNK_CURRENT|_8.1.7.1-1.tar.gz>`__ (`sha512 <https://packages.wazuh.com/4.x/checksums/wazuh/|WAZUH_SPLUNK_CURRENT|/wazuh_splunk-|WAZUH_SPLUNK_CURRENT|_8.1.7.1-1.tar.gz.sha512>`__)
-
-.. |SPLUNK_8.1.7.2_PKG| replace:: `wazuh_splunk-|WAZUH_SPLUNK_CURRENT|_8.1.7.2.tar.gz <https://packages.wazuh.com/4.x/ui/splunk/wazuh_splunk-|WAZUH_SPLUNK_CURRENT|_8.1.7.2-1.tar.gz>`__ (`sha512 <https://packages.wazuh.com/4.x/checksums/wazuh/|WAZUH_SPLUNK_CURRENT|/wazuh_splunk-|WAZUH_SPLUNK_CURRENT|_8.1.7.2-1.tar.gz.sha512>`__)
-
-.. |SPLUNK_8.1.8_PKG| replace:: `wazuh_splunk-|WAZUH_SPLUNK_CURRENT|_8.1.8.tar.gz <https://packages.wazuh.com/4.x/ui/splunk/wazuh_splunk-|WAZUH_SPLUNK_CURRENT|_8.1.8-1.tar.gz>`__ (`sha512 <https://packages.wazuh.com/4.x/checksums/wazuh/|WAZUH_SPLUNK_CURRENT|/wazuh_splunk-|WAZUH_SPLUNK_CURRENT|_8.1.8-1.tar.gz.sha512>`__)
-
-.. |SPLUNK_8.1.9_PKG| replace:: `wazuh_splunk-|WAZUH_SPLUNK_CURRENT|_8.1.9.tar.gz <https://packages.wazuh.com/4.x/ui/splunk/wazuh_splunk-|WAZUH_SPLUNK_CURRENT|_8.1.9-1.tar.gz>`__ (`sha512 <https://packages.wazuh.com/4.x/checksums/wazuh/|WAZUH_SPLUNK_CURRENT|/wazuh_splunk-|WAZUH_SPLUNK_CURRENT|_8.1.9-1.tar.gz.sha512>`__)
-
-.. |SPLUNK_8.1.10_PKG| replace:: `wazuh_splunk-|WAZUH_SPLUNK_CURRENT|_8.1.10.tar.gz <https://packages.wazuh.com/4.x/ui/splunk/wazuh_splunk-|WAZUH_SPLUNK_CURRENT|_8.1.10-1.tar.gz>`__ (`sha512 <https://packages.wazuh.com/4.x/checksums/wazuh/|WAZUH_SPLUNK_CURRENT|/wazuh_splunk-|WAZUH_SPLUNK_CURRENT|_8.1.10-1.tar.gz.sha512>`__)
-
-.. |SPLUNK_8.2.0_PKG| replace:: `wazuh_splunk-|WAZUH_SPLUNK_CURRENT|_8.2.0.tar.gz <https://packages.wazuh.com/4.x/ui/splunk/wazuh_splunk-|WAZUH_SPLUNK_CURRENT|_8.2.0-1.tar.gz>`__ (`sha512 <https://packages.wazuh.com/4.x/checksums/wazuh/|WAZUH_SPLUNK_CURRENT|/wazuh_splunk-|WAZUH_SPLUNK_CURRENT|_8.2.0-1.tar.gz.sha512>`__)
-
-.. |SPLUNK_8.2.1_PKG| replace:: `wazuh_splunk-|WAZUH_SPLUNK_CURRENT|_8.2.1.tar.gz <https://packages.wazuh.com/4.x/ui/splunk/wazuh_splunk-|WAZUH_SPLUNK_CURRENT|_8.2.1-1.tar.gz>`__ (`sha512 <https://packages.wazuh.com/4.x/checksums/wazuh/|WAZUH_SPLUNK_CURRENT|/wazuh_splunk-|WAZUH_SPLUNK_CURRENT|_8.2.1-1.tar.gz.sha512>`__)
-
-.. |SPLUNK_8.2.2_PKG| replace:: `wazuh_splunk-|WAZUH_SPLUNK_CURRENT|_8.2.2.tar.gz <https://packages.wazuh.com/4.x/ui/splunk/wazuh_splunk-|WAZUH_SPLUNK_CURRENT|_8.2.2-1.tar.gz>`__ (`sha512 <https://packages.wazuh.com/4.x/checksums/wazuh/|WAZUH_SPLUNK_CURRENT|/wazuh_splunk-|WAZUH_SPLUNK_CURRENT|_8.2.2-1.tar.gz.sha512>`__)
-
-.. |SPLUNK_8.2.3_PKG| replace:: `wazuh_splunk-|WAZUH_SPLUNK_CURRENT|_8.2.3.tar.gz <https://packages.wazuh.com/4.x/ui/splunk/wazuh_splunk-|WAZUH_SPLUNK_CURRENT|_8.2.3-1.tar.gz>`__ (`sha512 <https://packages.wazuh.com/4.x/checksums/wazuh/|WAZUH_SPLUNK_CURRENT|/wazuh_splunk-|WAZUH_SPLUNK_CURRENT|_8.2.3-1.tar.gz.sha512>`__)
-
-.. |SPLUNK_8.2.4_PKG| replace:: `wazuh_splunk-|WAZUH_SPLUNK_CURRENT|_8.2.4.tar.gz <https://packages.wazuh.com/4.x/ui/splunk/wazuh_splunk-|WAZUH_SPLUNK_CURRENT|_8.2.4-1.tar.gz>`__ (`sha512 <https://packages.wazuh.com/4.x/checksums/wazuh/|WAZUH_SPLUNK_CURRENT|/wazuh_splunk-|WAZUH_SPLUNK_CURRENT|_8.2.4-1.tar.gz.sha512>`__)
-
-.. |SPLUNK_8.2.5_PKG| replace:: `wazuh_splunk-|WAZUH_SPLUNK_CURRENT|_8.2.5.tar.gz <https://packages.wazuh.com/4.x/ui/splunk/wazuh_splunk-|WAZUH_SPLUNK_CURRENT|_8.2.5-1.tar.gz>`__ (`sha512 <https://packages.wazuh.com/4.x/checksums/wazuh/|WAZUH_SPLUNK_CURRENT|/wazuh_splunk-|WAZUH_SPLUNK_CURRENT|_8.2.5-1.tar.gz.sha512>`__)
-
-.. |SPLUNK_8.2.6_PKG| replace:: `wazuh_splunk-|WAZUH_SPLUNK_CURRENT|_8.2.6.tar.gz <https://packages.wazuh.com/4.x/ui/splunk/wazuh_splunk-|WAZUH_SPLUNK_CURRENT|_8.2.6-1.tar.gz>`__ (`sha512 <https://packages.wazuh.com/4.x/checksums/wazuh/|WAZUH_SPLUNK_CURRENT|/wazuh_splunk-|WAZUH_SPLUNK_CURRENT|_8.2.6-1.tar.gz.sha512>`__)
-
-+----------------------+----------------------+
-| Splunk version       | Package              |
-+======================+======================+
-| 8.1.1                | |SPLUNK_8.1.1_PKG|   |
-+----------------------+----------------------+
-| 8.1.2                | |SPLUNK_8.1.2_PKG|   |
-+----------------------+----------------------+
-| 8.1.3                | |SPLUNK_8.1.3_PKG|   |
-+----------------------+----------------------+
-| 8.1.4                | |SPLUNK_8.1.4_PKG|   |
-+----------------------+----------------------+
-| 8.1.5                | |SPLUNK_8.1.5_PKG|   |
-+----------------------+----------------------+
-| 8.1.6                | |SPLUNK_8.1.6_PKG|   |
-+----------------------+----------------------+
-| 8.1.7                | |SPLUNK_8.1.7_PKG|   |
-+----------------------+----------------------+
-| 8.1.7.1              | |SPLUNK_8.1.7.1_PKG| |
-+----------------------+----------------------+
-| 8.1.7.2              | |SPLUNK_8.1.7.2_PKG| |
-+----------------------+----------------------+
-| 8.1.8                | |SPLUNK_8.1.8_PKG|   |
-+----------------------+----------------------+
-| 8.1.9                | |SPLUNK_8.1.9_PKG|   |
-+----------------------+----------------------+
-| 8.1.10               | |SPLUNK_8.1.10_PKG|  |
-+----------------------+----------------------+
-| 8.2.0                | |SPLUNK_8.2.0_PKG|   |
-+----------------------+----------------------+
-| 8.2.1                | |SPLUNK_8.2.1_PKG|   |
-+----------------------+----------------------+
-| 8.2.2                | |SPLUNK_8.2.2_PKG|   |
-+----------------------+----------------------+
-| 8.2.3                | |SPLUNK_8.2.3_PKG|   |
-+----------------------+----------------------+
-| 8.2.4                | |SPLUNK_8.2.4_PKG|   |
-+----------------------+----------------------+
-| 8.2.5                | |SPLUNK_8.2.5_PKG|   |
-+----------------------+----------------------+
-| 8.2.6                | |SPLUNK_8.2.6_PKG|   |
-+----------------------+----------------------+
-
 Filebeat
----------------
+--------
 
 +--------------+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
 | Package type | Package                                                                                                                                                                                                                                         |
@@ -564,37 +441,3 @@ Filebeat
 +--------------+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
 |     DEB      | `filebeat-oss-|ELASTICSEARCH_LATEST|-amd64.deb <https://packages.wazuh.com/4.x/apt/pool/main/f/filebeat/filebeat-oss-|ELASTICSEARCH_LATEST|-amd64.deb>`_ (`sha512 <https://packages.wazuh.com/4.x/checksums/elasticsearch/|ELASTICSEARCH_LATEST|/filebeat-oss-|ELASTICSEARCH_LATEST|-amd64.deb.sha512>`__)      |
 +--------------+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-
-Virtual machine
----------------
-
-.. |VM_CentOS7_64_OVA| replace:: `wazuh-|WAZUH_CURRENT_OVA|.ova <https://packages.wazuh.com/|WAZUH_CURRENT_MAJOR_OVA|/vm/wazuh-|WAZUH_CURRENT_OVA|.ova>`__ (`sha512 <https://packages.wazuh.com/|WAZUH_CURRENT_MAJOR_OVA|/checksums/wazuh/|WAZUH_CURRENT_OVA|/wazuh-|WAZUH_CURRENT_OVA|.ova.sha512>`__)
-
-+--------------+--------------+--------------+---------+--------------------------------------+
-| Distribution | Architecture | VM Format    | Version | Package                              |
-+==============+==============+==============+=========+======================================+
-|   CentOS 7   |    64bits    |      OVA     |  |WAZUH_CURRENT_OVA|  | |VM_CentOS7_64_OVA|                  |
-+--------------+--------------+--------------+---------+--------------------------------------+
-
-Amazon Machine Image
---------------------
-
-.. |AMI_PRODUCT_PAGE| replace:: `Wazuh All-In-One Deployment <https://aws.amazon.com/marketplace/pp/prodview-eju4flv5eqmgq>`__
-
-.. |var_WAZUH_CURRENT_AMI| replace:: |WAZUH_CURRENT_AMI|
-
-+------------------+--------------+-------------+-------------------------+---------------------+
-| Distribution     | Architecture | VM Format   | Latest version          | Product page        |
-+==================+==============+=============+=========================+=====================+
-| Amazon Linux 2   | 64-bit       | AWS AMI     | |var_WAZUH_CURRENT_AMI| | |AMI_PRODUCT_PAGE|  |
-+------------------+--------------+-------------+-------------------------+---------------------+
-
-
-MSU
----
-
-+-------------------+--------------+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-| Version           | Architecture | Package                                                                                                                                                                                                                               |
-+===================+==============+=======================================================================================================================================================================================================================================+
-|  4.0.0 or later   |   32/64bits  | `msu-updates.json.gz <https://feed.wazuh.com/vulnerability-detector/windows/msu-updates.json.gz>`_ (`sha256 <https://feed.wazuh.com/vulnerability-detector/windows/msu-updates.meta>`__)                                              |
-+-------------------+--------------+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+

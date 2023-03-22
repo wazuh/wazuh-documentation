@@ -103,30 +103,41 @@
     min-height: calc(100vh - #{$header-height-xl} - #{$breadcrumbs-height-xl} - #{$footer-height});
   }
 
+  .headerlink {
+    display: inline-flex;
+    line-height: 1;
+    text-decoration: none;
+    word-break: keep-all;
+    white-space: nowrap;
+    width: 24px;
+    overflow: hidden;
+    align-items: center;
+    justify-content: flex-end;
+    user-select: none;
+    
+    &::after {
+      display: inline-block;
+      width: 15px;
+      height: 15px;
+      min-width: 15px;
+      min-height: 15px;
+      background-size: 15px 15px;
+      text-align: right;
+      vertical-align: middle;
+      content: '';
+      opacity: 0;
+      transition: opacity ease-in .1s;
+      margin-left: 20px;
+    }
+  }
+  
   h1,
   h2,
   h3,
   h4,
   h5,
-  h6 {
-    .headerlink {
-      display: inline-block;
-      line-height: 1;
-      text-decoration: none;
-
-      &::after {
-        display: inline-block;
-        width: 1rem;
-        height: 1rem;
-        padding-left: 10px;
-        font: normal 700 normal .95rem/1 FontAwesome, sans-serif;
-        text-align: right;
-        vertical-align: middle;
-        content: "\f0c1";
-        opacity: 0;
-        transition: opacity ease-in .1s;
-      }
-    }
+  h6,
+  caption {
 
     &:hover {
       .headerlink::after {
@@ -139,6 +150,11 @@
   code.literal {
     padding: 5px 7px 3px;
     line-height: 1rem;
+    span.pre {
+      @include media-max(md){
+        word-break: break-word;
+      }
+    }
   }
 
   .toctree-wrapper {
@@ -404,6 +420,7 @@
     .headerlink {
       &::after {
         color: $light-color-shaded-text;
+        background-image: url("#{$ico-path}link.svg#link-lt");
       }
     }
     code {
@@ -481,6 +498,7 @@
     .headerlink {
       &::after {
         color: $dark-color-shaded-text;
+        background-image: url("#{$ico-path}link.svg#link-dt");
       }
     }
     code {

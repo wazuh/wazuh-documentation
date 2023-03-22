@@ -3,11 +3,14 @@
 .. meta::
   :description: Learn more about the configuration options of the key polling wodle in this section of the Wazuh documentation.
 
-
 .. _wodle-agentkeypolling:
 
 wodle name="agent-key-polling"
 ==============================
+
+.. deprecated:: 4.4.0
+
+.. note:: The agent-key-polling wodle is deprecated in favor of the :doc:`agent key request <../../agents/key-request>` feature. Although this configuration block is still usable, we highly recommend to use the agent key request dedicated block in :doc:`auth <auth>`.
 
 .. topic:: XML section name
 
@@ -38,7 +41,7 @@ Options
 +----------------------+-----------------------------+
 | `exec_path`_         | Full path to executable     |
 +----------------------+-----------------------------+
-| `socket`_            | Full path to unix socket    |
+| `socket`_            | Full path to Unix socket    |
 +----------------------+-----------------------------+
 | `threads`_           | A positive number           |
 +----------------------+-----------------------------+
@@ -83,12 +86,12 @@ Full path to the executable.
 socket
 ^^^^^^
 
-Full path to the unix domain socket.
+Full path to the Unix domain socket.
 
 +--------------------+-----------------------------------------------------------+
 | **Default value**  | none                                                      |
 +--------------------+-----------------------------------------------------------+
-| **Allowed values** | A string indicating the full path to a unix domain socket |
+| **Allowed values** | A string indicating the full path to a Unix domain socket |
 +--------------------+-----------------------------------------------------------+
 
 threads

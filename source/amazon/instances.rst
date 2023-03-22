@@ -16,7 +16,7 @@ Thanks to the Wazuh agent, there are some capabilities available to monitor the 
 
 - :doc:`Log data collection </user-manual/capabilities/log-data-collection/index>`
 - :doc:`File integrity monitoring </user-manual/capabilities/file-integrity/index>`
-- :doc:`Anomaly and malware detection </user-manual/capabilities/anomalies-detection/index>`
+- :doc:`/user-manual/capabilities/malware-detection/index`
 - :doc:`Security policy monitoring </user-manual/capabilities/policy-monitoring/index>`
 - :doc:`System inventory </user-manual/capabilities/syscollector>`
 - :doc:`Vulnerability detection </user-manual/capabilities/vulnerability-detection/index>`

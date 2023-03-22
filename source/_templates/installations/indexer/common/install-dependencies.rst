@@ -1,6 +1,6 @@
 .. Copyright (C) 2015, Wazuh, Inc.
 
-#. Install the following packages if missing.
+#. Install the following packages if missing:
 
       .. tabs::
 
@@ -14,6 +14,6 @@
 
                   .. code-block:: console
 
-                      # apt install debconf adduser procps
+                      # apt-get install debconf adduser procps
 
 .. End of include file

@@ -1,5 +1,5 @@
 {% if (theme_prev_next_buttons_location == 'bottom' or theme_prev_next_buttons_location == 'both') and (next or prev) %}
-    <div class="navigation-buttons" role="navigation" aria-label="previous/next navigation">
+    <div class="navigation-buttons" role="navigation" aria-label="previous/next navigation" data-pagefind-ignore="all">
       {% if prev %}
       <a href="{{ prev.link|e }}" title="Previous. {{ prev.title|striptags|e }}">
         <span class="chevron left" aria-hidden="true"></span>

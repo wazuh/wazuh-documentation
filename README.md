@@ -27,8 +27,12 @@ You can also join our [users mailing list](https://groups.google.com/d/forum/waz
 - [sphinx-tabs](https://github.com/djungelorm/sphinx-tabs) 1.2.1
 - [jsmin](https://github.com/tikitu/jsmin) 3.0.1
 
+### Optional software to run the alternative Pagefind search engine
+
+- [NodeJS](https://nodejs.org/) 16+
+
 ## Copyright & License
 
-Copyright © 2022 Wazuh, Inc.
+Copyright © 2023 Wazuh, Inc.
 
 Wazuh is free software; you can redistribute it and/or modify it under the terms of the GNU General Public License as published by the Free Software Foundation; either version 2 of the License, or (at your option) any later version.

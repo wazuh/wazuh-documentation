@@ -20,7 +20,7 @@
 
                     .. code-block:: console
 
-                        # apt install curl apt-transport-https unzip wget libcap2-bin software-properties-common lsb-release gnupg
+                        # apt-get install curl apt-transport-https unzip wget libcap2-bin software-properties-common lsb-release gnupg
 
 
                 Add the repository for Java Development Kit (JDK):
@@ -42,13 +42,13 @@
 
                     .. code-block:: console
 
-                        # apt update
+                        # apt-get update
 
                 Install all the required utilities:
 
                 .. code-block:: console
 
-                    # export JAVA_HOME=/usr/ && apt install openjdk-11-jdk    
+                    # export JAVA_HOME=/usr/ && apt-get install openjdk-11-jdk    
 
                 In case JDK 11 is not available for the operating system being used, install the package ``adoptopenjdk-11-hotspot`` using `Adopt Open JDK <https://adoptopenjdk.net/installation.html#x64_linux-jdk>`_.
 

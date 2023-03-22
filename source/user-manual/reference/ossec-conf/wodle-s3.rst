@@ -130,20 +130,8 @@ Time of the day to run the scan. It has to be in the hh:mm format.
 
 .. note::
 
-	When only the ``time`` option is set, the interval value must be a multiple of days or weeks. By default, the interval is set to a day.
+    If only the ``time`` option is set, the interval value must be a multiple of days, weeks, or months. By default, the interval is set to a day.
 
-remove_from_bucket
-~~~~~~~~~~~~~~~~~~
-
-Delete each log file from the S3 bucket once it has been collected by the module.
-
-+--------------------+-----------------------+
-| **Default value**  | no                    |
-+--------------------+-----------------------+
-| **Allowed values** | yes, no               |
-+--------------------+-----------------------+
-| **Mandatory**      | no                    |
-+--------------------+-----------------------+
 
 .. _buckets:
 
@@ -191,6 +179,9 @@ The available types are:  ``cloudtrail``, ``guardduty``, ``vpcflow``, ``config``
 | :ref:`bucket_aws_organization_id`      | Name of AWS organization                                    | Optional (only works with CloudTrail buckets) |
 +----------------------------------------+-------------------------------------------------------------+-----------------------------------------------+
 | :ref:`bucket_discard_regex`            | A regex value to determine if an event should be discarded  | Optional                                      |
++----------------------------------------+-------------------------------------------------------------+-----------------------------------------------+
+| :ref:`bucket_remove_from_bucket`       | A value to determine if each log file is deleted once it    | Optional                                      |
+|                                        | has been collected by the module                            |                                               |
 +----------------------------------------+-------------------------------------------------------------+-----------------------------------------------+
 | :ref:`bucket_sts_endpoint`             | The AWS Security Token Service VPC endpoint URL             | Optional                                      |
 +----------------------------------------+-------------------------------------------------------------+-----------------------------------------------+
@@ -242,6 +233,8 @@ A user-friendly name for the AWS account.
 access_key
 ^^^^^^^^^^
 
+.. deprecated:: 4.4.0
+
 The access key ID for the IAM user with the permission to read logs from the bucket.
 
 +--------------------+--------------------------+
@@ -252,8 +245,11 @@ The access key ID for the IAM user with the permission to read logs from the buc
 
 .. _bucket_secret_key:
 
+
 secret_key
 ^^^^^^^^^^
+
+.. deprecated:: 4.4.0
 
 The secret key created for the IAM user with the permission to read logs from the bucket.
 
@@ -320,7 +316,7 @@ If defined, the path or prefix for the bucket.
 path_suffix
 ^^^^^^^^^^^
 
-If defined, the suffix for the bucket. Only works with buckets which contain the folder named AWSLogs (Cloudtrail, VPC and Macie).
+If defined, the suffix for the bucket. Only works with buckets that contain the folder named AWSLogs (Cloudtrail, VPC, and Macie).
 
 +--------------------+---------------+
 | **Default value**  | N/A           |
@@ -396,6 +392,19 @@ Usage example:
 
     <discard_regex field="data.configurationItemStatus">REJECT</discard_regex>
 
+.. _bucket_remove_from_bucket:
+
+remove_from_bucket
+^^^^^^^^^^^^^^^^^^
+
+A value to determine if each log file is deleted once it has been collected by the module.
+
++--------------------+-----------------------+
+| **Default value**  | no                    |
++--------------------+-----------------------+
+| **Allowed values** | yes, no               |
++--------------------+-----------------------+
+
 
 .. _bucket_sts_endpoint:
 
@@ -449,7 +458,7 @@ The available types are: ``cloudwatchlogs``, and ``inspector``.
 +----------------------------------------+-------------------------------------------------------------+-----------------------------------------------+
 | :ref:`service_access_key`              | Any alphanumerical key                                      | Optional                                      |
 +----------------------------------------+-------------------------------------------------------------+-----------------------------------------------+
-| :ref:`service_secret_key`              | Any alphanumerical key                                      | Optional                                      |       
+| :ref:`service_secret_key`              | Any alphanumerical key                                      | Optional                                      |
 +----------------------------------------+-------------------------------------------------------------+-----------------------------------------------+
 | :ref:`service_aws_profile`             | Valid profile name                                          | Optional                                      |
 +----------------------------------------+-------------------------------------------------------------+-----------------------------------------------+
@@ -653,7 +662,6 @@ Example of configuration
 
   <wodle name="aws-s3">
       <disabled>no</disabled>
-      <remove_from_bucket>no</remove_from_bucket>
       <interval>10m</interval>
       <run_on_start>no</run_on_start>
       <skip_on_error>no</skip_on_error>
@@ -667,6 +675,7 @@ Example of configuration
           <aws_account_id>123456789012</aws_account_id>
           <aws_account_alias>dev1-account</aws_account_alias>
           <discard_regex field="data.configurationItemStatus">REJECT</discard_regex>
+          <remove_from_bucket>yes<remove_from_bucket>
       </bucket>
       <bucket type="cloudtrail">
           <name>s3-dev-bucket</name>
@@ -694,6 +703,7 @@ Example of configuration
           <aws_account_id>11112222333</aws_account_id>
           <aws_account_alias>prod-account</aws_account_alias>
           <discard_regex field="data.configurationItemStatus">REJECT</discard_regex>
+          <remove_from_bucket>yes<remove_from_bucket>
       </bucket>
       <service type="cloudwatchlogs">
           <access_key>insert_access_key</access_key>

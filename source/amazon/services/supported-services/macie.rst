@@ -128,31 +128,12 @@ Wazuh configuration
 
     * If you're configuring a Wazuh manager:
 
-      a. For Systemd:
-
-      .. code-block:: console
-
-        # systemctl restart wazuh-manager
-
-      b. For SysV Init:
-
-      .. code-block:: console
-
-        # service wazuh-manager restart
+      .. include:: /_templates/common/restart_manager.rst
 
     * If you're configuring a Wazuh agent:
 
-      a. For Systemd:
+      .. include:: /_templates/common/restart_agent.rst
 
-      .. code-block:: console
-
-        # systemctl restart wazuh-agent
-
-      b. For SysV Init:
-
-      .. code-block:: console
-
-        # service wazuh-agent restart
 
 Use cases
 ---------
@@ -165,10 +146,6 @@ Bucket removal
 ^^^^^^^^^^^^^^
 
 Multiple alerts will be raised when a Bucket has been removed. Some examples are shown below:
-
-.. thumbnail:: ../../../images/aws/aws-s3-1.png
-  :align: center
-  :width: 70%
 
 .. thumbnail:: ../../../images/aws/aws-s3-1.png
   :align: center

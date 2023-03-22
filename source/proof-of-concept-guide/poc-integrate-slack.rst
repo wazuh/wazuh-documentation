@@ -1,7 +1,10 @@
+.. Copyright (C) 2015, Wazuh, Inc.
+
 .. meta::
   :description: Wazuh can be integrated with Slack to report alerts through messages sent to the platform. Learn more about this in this PoC.
 
-
+:orphan:
+  
 .. _poc_slack_integration:
 
 Slack integration

@@ -27,4 +27,4 @@ The :ref:`Pub/Sub <pubsub>` page explains how to set up a sink to logs for a Pub
 
 .. thumbnail:: ../../images/gcp/gcp-load-balancer-sink.png
     :align: center
-    :width: 50%
+    :width: 100%

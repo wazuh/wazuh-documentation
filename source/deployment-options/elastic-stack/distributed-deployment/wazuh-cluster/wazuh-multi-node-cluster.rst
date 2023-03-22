@@ -4,13 +4,12 @@
 
 .. _basic_wazuh_multi_node_cluster:
 
-
 Wazuh multi-node cluster
 =========================
 
 This document will go through the installation of the Wazuh server components in a multi-node cluster.
 
-.. note:: Root user privileges are required to execute all the commands described below.
+.. note:: You need root user privileges to run all the commands described below.
 
 Prerequisites
 -------------
@@ -218,9 +217,9 @@ Disabling repositories
 
 
 
-To uninstall Wazuh and Filebeat, visit the :ref:`uninstalling section <user_manual_uninstall_wazuh_installation_basic>`.
+To uninstall Wazuh and Filebeat, visit the :doc:`uninstalling section </user-manual/uninstall/elastic-stack>`.
 
 Next steps
 ----------
 
-The next step consists of :ref:`installing Kibana <basic_kibana>`.
+The next step consists of :doc:`installing Kibana </deployment-options/elastic-stack/distributed-deployment/kibana/index>`.

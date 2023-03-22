@@ -1,5 +1,8 @@
 .. Copyright (C) 2015, Wazuh, Inc.
 
+.. meta::
+  :description: Check out how to uninstall Wazuh with Elastic Stack in this section of our documentation.
+
 .. _user_manual_uninstall_wazuh_installation_basic:
 
 Uninstalling Wazuh with Elastic Stack

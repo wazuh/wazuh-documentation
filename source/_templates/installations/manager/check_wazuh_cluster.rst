@@ -6,7 +6,7 @@
 
       # /var/ossec/bin/cluster_control -l
 
-    Expand the output to see an example response. Note that ``10.0.0.3``, ``10.0.0.4``, and ``10.0.0.5`` are example IPs.
+    Expand the output to see an example response. Note that ``10.0.0.3``, ``10.0.0.4``, and ``10.0.0.5`` are example IP addresses.
 
     .. code-block:: none
       :class: output accordion-output

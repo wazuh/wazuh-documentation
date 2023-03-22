@@ -42,7 +42,7 @@ An example output of the command looks as follows:
 
   WAZUH_VERSION="v|WAZUH_CURRENT|"
 
-Using the Kibana version and the Wazuh version, you can find the correct plugin in `compatibility matrix <https://github.com/wazuh/wazuh-kibana-app/#wazuh---kibana---open-distro-version-compatibility-matrix>`_.
+Using the Kibana version and the Wazuh version, you can find the correct plugin in the `compatibility matrix <https://github.com/wazuh/wazuh-kibana-app/#wazuh---kibana---open-distro-version-compatibility-matrix>`_.
 
 No template found for the selected index pattern
 ------------------------------------------------
@@ -88,24 +88,7 @@ Wazuh API seems to be down
 
 This issue means that your Wazuh API might be unavailable. Check the status of the Wazuh manager to check if the service is active: 
 
-.. tabs::
-
-
-  .. group-tab:: Systemd
-
-
-    .. code-block:: console
-
-      # systemctl status wazuh-manager
-
-
-
-  .. group-tab:: SysV init
-
-    .. code-block:: console
-
-      # service wazuh-manager status
-
+.. include:: /_templates/installations/wazuh/common/check_wazuh_manager.rst
 
 If the Wazuh API is running, try to fetch data using the CLI from the Kibana server:
 
@@ -210,6 +193,22 @@ Sometimes, after an upgrade, the Wazuh Kibana plugin displays the "Conflict with
 To fix this you need to:
 
   .. include:: ../../_templates/common/clear_cache.rst
+
+
+"Wazuh API and Wazuh app version mismatch" error is displayed
+-------------------------------------------------------------
+
+This error shows a mismatch between the Wazuh server and the Wazuh Kibana plugin versions.
+
+The Wazuh server and the Wazuh Kibana plugin must run the same major and minor versions. For example:
+
+-  `Wazuh server |WAZUH_CURRENT_MINOR|.x`
+-  `Wazuh Kibana plugin |WAZUH_CURRENT_MINOR|.y`
+
+Moreover, we recommend both server and plugin run the same full version, for example |WAZUH_CURRENT|. Running the same full version ensures the correct operation and communication between these components.
+
+Check out how to upgrade Wazuh in our :doc:`upgrade guide</upgrade-guide/index>`.
+
 
 None of the above solutions are fixing my problem
 -------------------------------------------------

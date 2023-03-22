@@ -1,5 +1,8 @@
 .. Copyright (C) 2015, Wazuh, Inc.
 
+.. meta::
+  :description: Advance filtering is possible using the Wazuh API's queries. Learn more about it in this section of the Wazuh documentation.
+ 
 .. _queries:
 
 Filtering data using queries

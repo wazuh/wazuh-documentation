@@ -1,5 +1,8 @@
 .. Copyright (C) 2015, Wazuh, Inc.
 
+.. meta::
+  :description: Get answers to the most frequently asked questions about Command monitoring in this FAQ section of the Wazuh documentation.
+
 .. _command-faq:
 
 FAQ

@@ -26,6 +26,5 @@ Index
    container-security/index
    development/index
    compliance
-   learning-wazuh/index
    proof-of-concept-guide/index
    release-notes/index

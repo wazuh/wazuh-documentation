@@ -1,5 +1,8 @@
 .. Copyright (C) 2015, Wazuh, Inc.
 
+.. meta::
+   :description: Learn how to install the Puppet server in this section of the Wazuh documentation. 
+
 .. _setup_puppet_master:
 
 Installing Puppet master
@@ -32,7 +35,7 @@ Create a symbolic link between the installed binary file and your default binary
   .. code-block:: console
 
     # ln -s /opt/puppetlabs/bin/puppet /bin
-
+    # ln -s /opt/puppetlabs/server/bin/puppetserver /bin
 
 Installation on Debian/Ubuntu
 -----------------------------
@@ -63,7 +66,7 @@ Install the appropriate Puppet apt repository, and then the “puppetserver” p
 
     # wget https://apt.puppet.com/puppet7-release-focal.deb
     # dpkg -i puppet7-release-focal.deb
-    # apt update
+    # apt-get update
     # apt-get install -y puppetserver
 
 
@@ -114,17 +117,19 @@ For Ubuntu/Debian machines, in case puppetserver does not start. Edit the puppet
 
 Then, start your Puppet Server:
 
-  a) For Systemd:
+   .. tabs::
 
-    .. code-block:: console
+         .. group-tab:: Systemd 
 
-      # systemctl start puppetserver
-      # systemctl enable puppetserver
-      # systemctl status puppetserver
+            .. code-block:: console
 
-  b) For SysV Init:
+               # systemctl start puppetserver
+               # systemctl enable puppetserver
+               # systemctl status puppetserver
 
-    .. code-block:: console
+         .. group-tab:: SysV init
 
-      # service puppetserver start
-      # update-rc.d puppetserver
+            .. code-block:: console
+
+               # service puppetserver start
+               # update-rc.d puppetserver
