@@ -107,13 +107,14 @@ Starting the Wazuh dashboard service
           
             .. code-block:: yaml
             
-              hosts:
-                - default:
-                  url: https://localhost
-                  port: 55000
-                  username: wazuh-wui
-                  password: wazuh-wui
-                  run_as: false
+               hosts:
+                 - default:
+                     url: https://localhost
+                     port: 55000
+                     username: wazuh-wui
+                     password: wazuh-wui
+                     run_as: false
+
 
 
   #. Access the Wazuh web interface with your credentials.
