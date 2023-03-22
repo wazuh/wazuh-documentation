@@ -106,6 +106,7 @@ Starting the Wazuh dashboard service
           Edit the ``/usr/share/wazuh-dashboard/data/wazuh/config/wazuh.yml`` file and replace the ``url`` value with the IP address or hostname of the Wazuh server master node.
           
             .. code-block:: yaml
+               :emphasize-lines: 3
             
                hosts:
                  - default:
