@@ -32,6 +32,7 @@ This use case shows how Wazuh helps meet the **CA-7 Continuous monitoring** NIST
       :align: center
       :width: 80%
 
+
 #. Add a filter for the ``authentication_success`` rule group and click **Save**.
 
    .. thumbnail:: /images/nist/add-a-filter.png    
@@ -39,6 +40,7 @@ This use case shows how Wazuh helps meet the **CA-7 Continuous monitoring** NIST
       :alt: Add a filter
       :align: center
       :width: 80%
+
 
 #. Save the results of the search using any name of your choice.
 
@@ -54,6 +56,7 @@ This use case shows how Wazuh helps meet the **CA-7 Continuous monitoring** NIST
       :align: center
       :width: 80%
 
+
 #. Select **Reporting**, then choose **Generate CSV**. This downloads a report of all successful authentication events as a CSV file for your review.
 
    .. thumbnail:: /images/nist/select-reporting.png    
@@ -61,6 +64,7 @@ This use case shows how Wazuh helps meet the **CA-7 Continuous monitoring** NIST
       :alt: Select Reporting
       :align: center
       :width: 80%
+
 
 Review NIST 800-53 alerts
 ^^^^^^^^^^^^^^^^^^^^^^^^^
@@ -72,7 +76,9 @@ In this use case, Wazuh assists security administrators to meet the **AU-6 Audit
    .. thumbnail:: /images/nist/select-nist-800-53-moduleg.png    
       :title: Select the NIST 800-53 module
       :alt: Select the NIST 800-53 module
+      :align: center
       :width: 80%
+
 
 #. Select the **Events** tab to see all alerts related to NIST 800-53 controls.
 
@@ -82,9 +88,10 @@ In this use case, Wazuh assists security administrators to meet the **AU-6 Audit
       :align: center
       :width: 80%
 
+
 #. Select the **Controls** tab to view available control requirements. 
 
-The **Controls** section of the NIST 800-53 compliance dashboard shows the various NIST 800-53 controls and the related events. For ease of navigation, the Wazuh dashboard groups events according to the NIST 800-53 control they meet or violate.
+   The **Controls** section of the NIST 800-53 compliance dashboard shows the various NIST 800-53 controls and the related events. For ease of navigation, the Wazuh dashboard groups events according to the NIST 800-53 control they meet or violate.
 
    .. thumbnail:: /images/nist/select-the-controls-tab.png    
       :title: Select the Controls tab
