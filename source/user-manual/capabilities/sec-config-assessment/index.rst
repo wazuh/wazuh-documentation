@@ -25,4 +25,4 @@ Further information is available in the following sections:
    how-to-configure
    available-sca-policies
    creating-custom-policies
-   use-case
+   use-cases
