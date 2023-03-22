@@ -25,7 +25,7 @@ The installed agent runs on the endpoint you want to monitor and communicates wi
 
    .. code-block:: console
    
-       # tar -xvf wazuh-agent-|WAZUH_CURRENT_HPUX|-|WAZUH_REVISION_HPUX|-hpux-11v3-ia64.tar -C /
+       # tar -xvf wazuh-agent-|WAZUH_CURRENT_HPUX|-|WAZUH_REVISION_HPUX|-hpux-11v3-ia64.tar
 
 
 The installation process is now complete, and the Wazuh agent is successfully installed on your HP-UX endpoint. The next step is to register and configure the agent to communicate with the Wazuh server. To perform this action, see the :doc:`Linux/Unix agent enrollment via agent configuration </user-manual/agent-enrollment/via-agent-configuration/linux-endpoint>` section. To learn more about agent enrollment, visit :doc:`Wazuh agent enrollment </user-manual/agent-enrollment/index>`.
