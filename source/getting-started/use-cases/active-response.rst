@@ -53,8 +53,9 @@ In this case, rule ``100100`` is used to look for alerts where the source IP add
 
 Below you can find a screenshot with two Wazuh alerts: one that is triggered when a web attack is detected trying to exploit a PHP server vulnerability, and one that informs that the malicious actor has been blocked.
 
-.. thumbnail:: /images/getting-started/use-case-active-response.png
+.. thumbnail:: /images/getting-started/active-response.png
    :title: Active response
+   :alt: Active response
    :align: center
    :width: 80%
    :wrap_image: No    
