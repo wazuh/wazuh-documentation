@@ -113,16 +113,16 @@ You can also deploy a new agent following the instructions in the Wazuh dashboar
   .. thumbnail::  /images/installation/deploy-new-agent-from-ui.png
     :align: center
     :width: 80%
-    :title: Deploy a new agent from the user interface
-    :alt: Deploy a new agent from the user interface
+    :title: Deploy new agent button
+    :alt: Deploy new agent button
 
 Then the Wazuh dashboard will show you the steps to deploy a new agent.
 
   .. thumbnail::  /images/installation/deploy-new-agent-from-ui-options.png
     :align: center
     :width: 80%
-    :title: Deploy a new agent from the user interface
-    :alt: Deploy a new agent from the user interface
+    :title: Deploy a new agent instructions
+    :alt: Deploy a new agent instructions
 
 .. rst-class:: d-none
 
