@@ -38,7 +38,7 @@ copyright = u'&copy; ' + str(datetime.datetime.now().year) + u' &middot; Wazuh I
 
 # The short X.Y version
 version = '4.3'
-is_latest_release = True
+is_latest_release = False
 
 # The full version, including alpha/beta/rc tags
 # Important: use a valid branch (4.0) or, preferably, tag name (v4.0.0)
