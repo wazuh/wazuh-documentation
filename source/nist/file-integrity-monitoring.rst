@@ -70,7 +70,7 @@ In this scenario, the Wazuh FIM monitors the Uncomplicated Firewall (UFW) rule f
         
         <directories report_changes="yes" whodata="yes">/etc/ufw/</directories>
 
-UFW stores its rule files in the ``/etc/ufw/`` directory, and all rule files have the extension ``.rules``. We use the configuration above to monitor the modification, addition, and deletion of any files in the ``/etc/ufw/`` directory.
+   UFW stores its rule files in the ``/etc/ufw/`` directory, and all rule files have the extension ``.rules``. We use the configuration above to monitor the modification, addition, and deletion of any files in the ``/etc/ufw/`` directory.
 
 #. Restart the Wazuh agent to apply the changes:
         

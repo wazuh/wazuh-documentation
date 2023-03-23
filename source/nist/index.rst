@@ -28,7 +28,7 @@ We have some use cases in the following sections that show how to use Wazuh capa
    configuration-assessment
    malware-detection
    file-integrity-monitoring
+   system-inventory
    vulnerability-detection
    active-response
-   system-inventory
    threat-intelligence
