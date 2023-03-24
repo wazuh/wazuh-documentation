@@ -110,17 +110,19 @@ If you are deploying Wazuh in a large environment, with a high number of servers
 
 You can also deploy a new agent following the instructions in the Wazuh dashboard. Go to **Wazuh** > **Agents**, and click on **Deploy new agent**.
  
-  .. thumbnail::  /images/manual/deploy-a-new-agent-from-ui.png
+  .. thumbnail::  /images/installation/deploy-new-agent-from-ui.png
     :align: center
     :width: 80%
-    :title: Deploy a new agent from UI
+    :title: Deploy new agent button
+    :alt: Deploy new agent button
 
 Then the Wazuh dashboard will show you the steps to deploy a new agent.
 
-  .. thumbnail::  /images/manual/deploy-a-new-agent-from-ui-02.png
+  .. thumbnail::  /images/installation/deploy-new-agent-from-ui-options.png
     :align: center
     :width: 80%
-    :title: Deploy a new agent from UI
+    :title: Deploy a new agent instructions
+    :alt: Deploy a new agent instructions
 
 .. rst-class:: d-none
 
