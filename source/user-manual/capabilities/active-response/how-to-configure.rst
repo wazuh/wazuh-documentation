@@ -63,7 +63,7 @@ Configuring the Wazuh server
                 <level>10</level>
                 <timeout>180</timeout>
               </active-response> 
-            <ossec_config>
+            </ossec_config>
 
       -  ``all``: Every Wazuh agent in the environment must run the script. Use this option with caution. Incorrect configuration can cause problems in your environment.
 
