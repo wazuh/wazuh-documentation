@@ -118,6 +118,19 @@
     border-radius: 0 0 $rounded-corners $rounded-corners;
   }
   
+  table.docutils {
+    caption {
+      caption-side: top;
+      border: 1px solid;
+      border-radius: 0;
+      display: table-caption;
+      .caption-text {
+        font-weight: 600;
+        font-size: 18px;
+      }
+    }
+  }
+  
   .highlighted {
     display: inline-block;
   }
@@ -132,6 +145,18 @@
     }
     .caption-text {
       color: $light-color-shaded-text;
+    }
+    table.docutils {
+      caption {
+        border-color: $light-color-table-border;
+        background-color: $light-color-primary;
+        .headerlink::after {
+          filter: brightness(2);
+        }
+        .caption-text {
+          color: $light-color-base-space;
+        }
+      }
     }
     .highlighted, 
     mark {
@@ -149,6 +174,18 @@
     }
     .caption-text {
       color: $dark-color-shaded-text-lighter;
+    }    
+    table.docutils {
+      caption {
+        border-color: $dark-color-table-border;
+        background-color: $dark-color-primary;
+        .headerlink::after {
+          filter: brightness(0.5);
+        }
+        .caption-text {
+          color: $dark-color-base-space;
+        }
+      }
     }
     .highlighted, 
     mark {
