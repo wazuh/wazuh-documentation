@@ -310,16 +310,7 @@ newUrls['4.3'] = [
   '/user-manual/capabilities/active-response/custom-active-response-scripts.html',
   '/user-manual/capabilities/active-response/default-active-response-scripts.html',
   '/user-manual/capabilities/active-response/how-to-configure.html',
-  '/nist/index.html',
-  '/nist/visualization-and-dashboard.html',
-  '/nist/log-data-analysis.html',
-  '/nist/configuration-assessment.html',
-  '/nist/malware-detection.html',
-  '/nist/file-integrity-monitoring.html',
-  '/nist/system-inventory.html',
-  '/nist/vulnerability-detection.html',
-  '/nist/active-response.html',
-  '/nist/threat-intelligence.html',
+  '/user-manual/capabilities/sec-config-assessment/use-cases.html',
 ];
 
 removedUrls['4.3'] = [
@@ -480,16 +471,22 @@ removedUrls['4.3'] = [
   '/user-manual/capabilities/active-response/how-it-works.html',
   '/user-manual/capabilities/active-response/remediation-configuration.html',
   '/user-manual/capabilities/active-response/remediation-faq.html',
+  '/user-manual/capabilities/sec-config-assessment/what-is-it.html',
+  '/user-manual/capabilities/sec-config-assessment/use-case.html',
 ];
 
 
 redirections.push(
   {
     'target': ['4.2=>4.3', '4.3=>4.2'],
+    '4.2': '/user-manual/capabilities/sec-config-assessment/use-case.html',
+    '4.3': '/user-manual/capabilities/sec-config-assessment/use-cases.html',
+  },
+  {
+    'target': ['4.2=>4.3', '4.3=>4.2'],
     '4.2': '/pci-dss/elastic.html',
     '4.3': '/pci-dss/dashboard.html',
   },
-
   {
     'target': ['4.2=>4.3', '4.3=>4.2'],
     '4.2': '/upgrade-guide/upgrading-agent.html',
@@ -1214,6 +1211,11 @@ redirections.push(
     'target': ['4.2=>4.3'],
     '4.2': '/user-manual/capabilities/active-response/remediation-faq.html',
     '4.3': '/user-manual/capabilities/active-response/index.html',
+  },
+  {
+    'target': ['4.2=>4.3', '4.3=>4.2'],
+    '4.2': '/user-manual/capabilities/sec-config-assessment/what-is-it.html',
+    '4.3': '/user-manual/capabilities/sec-config-assessment/how-it-works.html',
   },
   );
 
