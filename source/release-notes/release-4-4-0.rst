@@ -33,6 +33,9 @@ Wazuh added support for Azure Integration in Linux agents. Now this integration 
 
 Finally, it’s essential to remark that we maintain support for all installation alternatives. Indeed we maintain and extend this support by adding more recent versions.
 
+.. Note::
+   Wazuh v4.4 will be the last version with Wazuh Manager support for some currently supported operating systems. Starting from Wazuh v4.5.0, Wazuh Manager will only support officially supported operating systems maintained by their vendors, such as Amazon Linux, RHEL, CentOS, and Ubuntu.
+
 Breaking changes
 ----------------
 
@@ -102,6 +105,7 @@ Wazuh manager
 - `#15853 <https://github.com/wazuh/wazuh/pull/15853>`_ The status field in SCA is deprecated.
 - `#16066 <https://github.com/wazuh/wazuh/pull/16066>`_ Agent group guessing now writes the new group directly on the master node based on the configuration hash.
 - `#16098 <https://github.com/wazuh/wazuh/pull/16098>`_ Added cascading deletion of membership table entries when deleting a group.
+- `#16499 <https://github.com/wazuh/wazuh/pull/16499>`_ Changed ``agent_groups`` CLI output so affected agents are not printed when deleting a group.
 
 
 Wazuh agent
