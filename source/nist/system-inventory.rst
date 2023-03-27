@@ -1,7 +1,7 @@
 .. Copyright (C) 2015, Wazuh, Inc.
 
 .. meta::
-  :description: Check out this section to learn more about how to use Wazuh for NIST 800-53 compliance.
+  :description: The Wazuh System inventory module gathers system resource information from each monitored endpoint. Learn more about it in this section of the documentation.
 
 System inventory
 ================

@@ -1,12 +1,12 @@
 .. Copyright (C) 2015, Wazuh, Inc.
 
 .. meta::
-  :description: Check out this section to learn more about how to use Wazuh for NIST 800-53 compliance.
+  :description: The active response module performs autonomous actions on endpoints to mitigate security threats. Learn more about it in this section of the documentation.
 
 Active response
 ===============
 
-The Wazuh active response module performs  autonomous actions on endpoints to mitigate security threats. You can  configure the module to automatically execute scripts when specific alerts trigger. These scripts execute actions, such as a firewall block or drop, traffic shaping or throttling, and account lockout.
+The Wazuh active response module performs autonomous actions on endpoints to mitigate security threats. You can  configure the module to automatically execute scripts when specific alerts trigger. These scripts execute actions, such as a firewall block or drop, traffic shaping or throttling, and account lockout.
 
 The Wazuh :doc:`active response </user-manual/capabilities/active-response/index>` module assists in meeting the following NIST 800-53 controls: 
 

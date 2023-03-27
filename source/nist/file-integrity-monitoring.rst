@@ -1,7 +1,7 @@
 .. Copyright (C) 2015, Wazuh, Inc.
 
 .. meta::
-  :description: Check out this section to learn more about how to use Wazuh for NIST 800-53 compliance.
+  :description: The FIM module monitors an endpoint filesystem to detect file changes in specified files and directories. Learn more about it in this section.
 
 File integrity monitoring
 =========================

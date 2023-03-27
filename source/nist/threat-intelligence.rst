@@ -1,7 +1,7 @@
 .. Copyright (C) 2015, Wazuh, Inc.
 
 .. meta::
-  :description: Check out this section to learn more about how to use Wazuh for NIST 800-53 compliance.
+  :description: The Wazuh MITRE ATT&CK module provides you with threat intelligence capability. Learn more about it in this section of the documentation.
 
 Threat intelligence
 ===================
