@@ -10,7 +10,7 @@ You need to consider the following four sections when creating custom policy fil
 
 .. _sca_policy_file_sections:
 
-.. table:: Policy file Sections
+.. table:: Policy file sections
     :widths: auto
 
     +--------------------+----------------+
