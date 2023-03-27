@@ -34,7 +34,7 @@ In this use case, Wazuh helps meet the **PM-16 Threat awareness program** requir
 
 #. Select **Framework**. Here, you can see the available MITRE tactics and their associated techniques.
 
-#. Select any technique to display its details as well as the events in your environment associated with that technique. In this example, we choose T1112 Modify Registry.
+#. Select any technique to display its details as well as the events in your environment associated with that technique. In this example, we choose **T1112 Modify Registry**.
 
    .. thumbnail:: /images/nist/select-framework.png    
       :title: Select Framework
@@ -48,7 +48,7 @@ In this use case, Wazuh helps meet the **PM-16 Threat awareness program** requir
       :align: center
       :width: 80%
 
-   You can proceed to review the events for possible malicious activity.
+You can proceed to review the events for possible malicious activity.
 
 Review intelligence on threat actors 
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
