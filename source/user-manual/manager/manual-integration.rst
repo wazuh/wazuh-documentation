@@ -2,7 +2,7 @@
 
 .. meta::
   :description: Learn more about the Integrator daemon, which allows Wazuh to connect to external APIs, as well as alerting tools such as Slack, PagerDuty, VirusTotal, and Shuffle.
-  
+
 .. _manual_integration:
 
 Integration with external APIs
@@ -43,7 +43,7 @@ Optional filters
 The `Integrator` daemon uses the `optional filters` fields to determine which alerts should be sent to the external platforms. Only the alerts that meet the filter conditions are sent. If no filters are specified, all alerts are sent.
 
 The following considerations must be taken into account when the filters are set:
-   
+
    - It is possible to specify multiple group names using the ``<group>`` field with a comma-separated list. If the alert's group matches any of the groups in the list, the alert is sent. Otherwise, it is ignored.
    - It is possible to specify multiple rule IDs using the ``<rule_id>`` field with a comma-separated list. If the alert's rule ID matches any of the IDs in the list, the alert is sent. Otherwise, it is ignored.
    - It is possible to specify the previously described fields together. If both the alert's rule ID and group match any of the IDs and groups in the lists, the alert is sent. Otherwise, it is ignored.
@@ -60,7 +60,7 @@ This integration uses Slack Incoming Webhooks and allows posting Wazuh alerts in
 
 To set up this integration, follow these steps.
 
-.. note::      
+.. note::
   For a list of all possibles customizable fields of the `options` tag, you can visit the API reference `Slack API reference <https://api.slack.com/reference/messaging/attachments#legacy_fields>`_
 
 #. Enable Incoming Webhooks and create one for your Slack channel. Follow the Slack guide on `Incoming Webhooks <https://api.slack.com/messaging/webhooks>`__ for this.
@@ -95,7 +95,7 @@ To set up this integration, do the following.
 
 #. Get your own *Events API v2* integration key by creating a `Pagerduty new service <https://support.pagerduty.com/docs/services-and-integrations#create-a-service>`__.
 
-.. note::      
+.. note::
   For a list of all possibles customizable fields of the `options` tag, you can visit the API reference `PagerDuty API reference <https://developer.pagerduty.com/docs/ZG9jOjExMDI5NTgx-send-an-alert-event>`_
 
 #. Edit ``/var/ossec/etc/ossec.conf`` in the Wazuh server and include a configuration block such as the following. Replace ``API_KEY`` with your Pagerduty integration key. The rule level filter is optional and you can remove it or set another level value for the integration.
@@ -107,6 +107,7 @@ To set up this integration, do the following.
         <name>pagerduty</name>
         <api_key>API_KEY</api_key> <!-- Replace with your PagerDuty API key -->
         <level>10</level>
+        <alert_format>json</alert_format> <!-- With the new script this is mandatory -->
       </integration>
 
 #. Restart the Wazuh manager to apply the changes.
@@ -129,14 +130,11 @@ To set up this integration, follow these steps.
 
 #. Get your API key from the `Virustotal API key <https://www.virustotal.com/gui/my-apikey>`__ page.
 
-.. note::      
-  For a list of all possibles customizable fields of the `options` tag, you can visit the API reference `VirusTotal API reference <https://developers.virustotal.com/v2.0/reference/getting-started>`_
-
 #. Edit ``/var/ossec/etc/ossec.conf`` in the Wazuh server and include a configuration block such as the following. Replace ``API_KEY`` with your Virustotal API key.
 
    .. code-block:: xml
       :emphasize-lines: 3
-  
+
       <integration>
         <name>virustotal</name>
         <api_key>API_KEY</api_key> <!-- Replace with your VirusTotal API key -->
@@ -153,7 +151,7 @@ Shuffle
 
 `Shuffle <https://shuffler.io/>`__ is an Open Source interpretation of SOAR. It transfers data throughout the enterprise with plug-and-play Apps. The Shuffle integration allows forwarding Wazuh alerts into a Shuffle Workflow using a `webhook <https://shuffler.io/docs/triggers#webhook>`__.
 
-.. note::      
+.. note::
   For a list of all possibles customizable fields of the `options` tag, you can visit the API reference `Shuffle API reference <https://shuffler.io/docs/API>`_
 
 To set up this integration, do the following.
