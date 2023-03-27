@@ -33,6 +33,11 @@ Wazuh added support for Azure Integration in Linux agents. Now this integration 
 
 Finally, it’s essential to remark that we maintain support for all installation alternatives. Indeed we maintain and extend this support by adding more recent versions.
 
+
+.. Note::
+   Wazuh v4.4.0 will be the last version with Wazuh Manager support for some currently supported OSs. Starting from Wazuh v4.5.0, Wazuh Manager will only support officially supported OSs maintained by their vendors, such as Amazon Linux, RHEL, CentOS, and Ubuntu.
+
+
 Breaking changes
 ----------------
 
