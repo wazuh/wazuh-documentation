@@ -75,7 +75,7 @@ In this scenario, you review intelligence from MITRE about various threat actors
       :align: center
       :width: 80%
 
-You can see the group description, the software they use, and their associated techniques.
+   You can see the group description, the software they use, and their associated techniques.
 
    .. thumbnail:: /images/nist/group-description.png    
       :title: Group description

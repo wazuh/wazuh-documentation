@@ -19,7 +19,7 @@ The above NIST 800-53 controls require you to monitor system activities in your 
 Use case: Failed authentication attempts on a Windows endpoint 
 --------------------------------------------------------------
 
-This use case shows how Wazuh helps meet the **IA-4 Identifier management** requirement, by using the IP address label as an example identifier. In this scenario, Wazuh detects failed login attempts on a monitored Windows 10 endpoint. 
+This use case shows how Wazuh helps meet the **IA-4 Identifier management** requirement by using the IP address label as an example identifier. In this scenario, Wazuh detects failed login attempts on a monitored Windows 10 endpoint. 
 
 #. Enable RDP on the Windows 10 endpoint. Select **Start > Settings > System > Remote Desktop**, and turn on **Enable Remote Desktop**. Please note that some Windows versions might not support **Remote Desktop**.
 

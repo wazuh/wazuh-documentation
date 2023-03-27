@@ -22,7 +22,7 @@ Use cases
 Generate a report of successful authentications
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-This use case shows how Wazuh helps meet the **CA-7 Continuous monitoring** NIST requirement, by providing security reporting to administrators. Use the Wazuh dashboard to generate a report of all successful authentications in the last 24 hours:
+This use case shows how Wazuh helps meet the **CA-7 Continuous monitoring** NIST requirement by providing security reporting to administrators. Use the Wazuh dashboard to generate a report of all successful authentications in the last 24 hours:
 
 #. Go to the Wazuh dashboard menu and select **Discover** under **OpenSearch Dashboards**.
 
@@ -69,7 +69,7 @@ This use case shows how Wazuh helps meet the **CA-7 Continuous monitoring** NIST
 Review NIST 800-53 alerts
 ^^^^^^^^^^^^^^^^^^^^^^^^^
 
-In this use case, Wazuh assists security administrators to meet the **AU-6 Audit record review, analysis, and reporting** requirement by providing a NIST 800-53 compliance dashboard.
+In this use case, Wazuh assists security administrators in meeting the **AU-6 Audit record review, analysis, and reporting** requirement by providing a NIST 800-53 compliance dashboard.
 
 #. Select the **NIST 800-53** module from your Wazuh dashboard.
 
