@@ -3,7 +3,7 @@
 .. meta::
   :description: Wazuh 4.4.0 has been released. Check out our release notes to discover the changes and additions of this release.
 
-4.4.0 Release notes - 22 March 2023
+4.4.0 Release notes - 27 March 2023
 ======================================
 
 This section lists the changes in version 4.4.0. Every update of the Wazuh solution is cumulative and includes all enhancements and fixes from previous releases.
@@ -107,6 +107,7 @@ Wazuh manager
 - `#15853 <https://github.com/wazuh/wazuh/pull/15853>`_ The status field in SCA is deprecated.
 - `#16066 <https://github.com/wazuh/wazuh/pull/16066>`_ Agent group guessing now writes the new group directly on the master node based on the configuration hash.
 - `#16098 <https://github.com/wazuh/wazuh/pull/16098>`_ Added cascading deletion of membership table entries when deleting a group.
+- `#16499 <https://github.com/wazuh/wazuh/pull/16499>`_ Changed ``agent_groups`` CLI output so affected agents are not printed when deleting a group.
 
 
 Wazuh agent
