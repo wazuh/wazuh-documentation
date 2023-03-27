@@ -311,6 +311,16 @@ newUrls['4.3'] = [
   '/user-manual/capabilities/active-response/default-active-response-scripts.html',
   '/user-manual/capabilities/active-response/how-to-configure.html',
   '/user-manual/capabilities/sec-config-assessment/use-cases.html',
+  '/nist/index.html',
+  '/nist/visualization-and-dashboard.html',
+  '/nist/log-data-analysis.html',
+  '/nist/configuration-assessment.html',
+  '/nist/malware-detection.html',
+  '/nist/file-integrity-monitoring.html',
+  '/nist/system-inventory.html',
+  '/nist/vulnerability-detection.html',
+  '/nist/active-response.html',
+  '/nist/threat-intelligence.html',
 ];
 
 removedUrls['4.3'] = [
