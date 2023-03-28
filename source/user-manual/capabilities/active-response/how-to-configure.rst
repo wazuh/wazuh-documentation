@@ -117,7 +117,7 @@ macOS
 Windows
 ~~~~~~~
 
-#. Add your custom active response script or executable to the ``C:\Program Files\ossec-agent\active-response\bin`` directory on Windows endpoints.
+#. Add your custom active response script or executable to the ``C:\Program Files (x86)\ossec-agent\active-response\bin`` directory on Windows endpoints.
 
 .. note::
 
