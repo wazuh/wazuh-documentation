@@ -43,6 +43,13 @@ Add the Wazuh repository to download the official packages.
 
 
 
+  .. group-tab:: APK
+
+
+    .. include:: ../../_templates/installations/wazuh/apk/add_repository.rst
+
+
+
 Deploy a Wazuh agent
 --------------------
 
@@ -70,12 +77,14 @@ Deploy a Wazuh agent
       
    
           .. include:: ../../_templates/installations/wazuh/zypp/deploy_wazuh_agent.rst
+
+
+
+        .. group-tab:: APK
       
-    
-    
-    For additional deployment options such as agent name, agent group, and registration password, see the :doc:`Deployment variables for Linux </user-manual/deployment-variables/deployment-variables-linux>` section.
-    
-    .. note:: Alternatively, if you want to install an agent without registering it, omit the deployment variables. To learn more about the different registration methods, see the :doc:`Wazuh agent enrollment </user-manual/agent-enrollment/index>` section. 
+   
+          .. include:: ../../_templates/installations/wazuh/apk/deploy_wazuh_agent.rst
+            
          
 
 #. Enable and start the Wazuh agent service.
@@ -110,10 +119,17 @@ The deployment process is now complete, and the Wazuh agent is successfully runn
         .. include:: ../../_templates/installations/wazuh/zypp/disabling_repository.rst
 
 
+
+      .. group-tab:: APK
+
+        .. include:: ../../_templates/installations/wazuh/apk/disabling_repository.rst
+
+
 Uninstall a Wazuh agent
 -----------------------
 
 To uninstall the agent, run the following commands:
+
 
 #. Remove the Wazuh agent installation. 
 
@@ -139,11 +155,19 @@ To uninstall the agent, run the following commands:
  
  
        .. include:: ../../_templates/installations/wazuh/zypp/uninstall_wazuh_agent.rst
+
+
+
+     .. group-tab:: APK
  
  
+       .. include:: ../../_templates/installations/wazuh/apk/uninstall_wazuh_agent.rst
+
+
 
 #. Disable the Wazuh agent service. 
 
    .. include:: ../../_templates/installations/wazuh/common/disable_wazuh_agent_service.rst
+
 
 The Wazuh agent is now completely removed from your Linux endpoint.

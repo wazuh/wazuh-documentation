@@ -27,7 +27,7 @@ Packages list
 +--------------+--------------+--------------+---------+--------------------------------------+
 | Distribution | Architecture | VM Format    | Version | Package                              |
 +==============+==============+==============+=========+======================================+
-|   CentOS 7   |    64bits    |      OVA     |  |WAZUH_CURRENT_OVA| | |VM_CentOS7_64_OVA|                  |
+|   CentOS 7   |    64bits    |      OVA     |  |WAZUH_CURRENT_OVA|  | |VM_CentOS7_64_OVA|                  |
 +--------------+--------------+--------------+---------+--------------------------------------+
 
 Hardware requirements

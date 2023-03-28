@@ -2,12 +2,12 @@
 .. Copyright (C) 2015, Wazuh, Inc.
 
 .. meta::
-  :description: Amazon S3 Server Access provides detailed records for the requests that are made to a bucket. Learn how to use Amazon S3 Server Access with Wazuh here.
+  :description: AWS Server Access Logging is a service that provides detailed records for the requests made to a bucket. Learn how to configure and monitor it with Wazuh.
 
 .. _amazon_server_access:
 
-S3 Server Access
-================
+Amazon S3 Server Access
+=======================
 
 `Amazon S3 Server Access Logging <https://docs.aws.amazon.com/AmazonS3/latest/userguide/ServerLogs.html>`_ provides detailed records for the requests that are made to a bucket. Server access logs are useful for many applications. For example, access log information can be useful in security and access audits. It can also help you learn about your customer base and understand your Amazon S3 bill.
 
@@ -50,6 +50,13 @@ Amazon configuration
 
 #. Finally, click on the **Save changes**. S3 Server Access logs will start to be stored in the specified path.
 
+
+Policy configuration
+++++++++++++++++++++
+
+.. include:: /_templates/cloud/amazon/create_policy.rst
+.. include:: /_templates/cloud/amazon/bucket_policies.rst
+.. include:: /_templates/cloud/amazon/attach_policy.rst
 
 Wazuh configuration
 -------------------

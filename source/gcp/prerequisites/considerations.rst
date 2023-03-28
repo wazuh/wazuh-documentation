@@ -26,6 +26,11 @@ When using the ``only_logs_after`` tag, the Wazuh module checks the creation tim
 
 Any date in the file's name is ignored and only the creation date is used to determine whether or not a file should be processed.
 
+Logging level
+-------------
+
+To switch between different logging levels for debugging and troubleshooting purposes, the Google Cloud integration uses the :ref:`wazuh_modules.debug <wazuh_modules_options>` level to set its verbosity level.
+
 
 Configuring multiple Google Cloud Storage bucket
 ------------------------------------------------
@@ -37,7 +42,6 @@ Below there is an example of a configuration that uses more than one bucket:
  <gcp-bucket>
     <run_on_start>yes</run_on_start>
     <interval>1m</interval>
-    <logging>debug</logging>
 
     <bucket type="access_logs">
         <name>wazuh-test-bucket</name>

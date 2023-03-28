@@ -37,13 +37,13 @@ author = u'Wazuh, Inc.'
 copyright = u'&copy; ' + str(datetime.datetime.now().year) + u' &middot; Wazuh Inc.'
 
 # The short X.Y version
-version = '4.3'
+version = '4.4'
 is_latest_release = True
 
 # The full version, including alpha/beta/rc tags
 # Important: use a valid branch (4.0) or, preferably, tag name (v4.0.0)
-release = '4.3.10'
-api_tag = 'v4.3.10'
+release = '4.4.0'
+api_tag = 'v4.4.0'
 apiURL = 'https://raw.githubusercontent.com/wazuh/wazuh/'+api_tag+'/api/api/spec/spec.yaml'
 
 # -- General configuration ------------------------------------------------
@@ -474,6 +474,18 @@ def customReplacements(app, docname, source):
 custom_replacements = {
     # === URLs and base URLs
     "|CHECKSUMS_URL|" : "https://packages.wazuh.com/4.x/checksums/wazuh/",
+    "|APK_CHECKSUMS_I386_URL|" : "alpine/x86",
+    "|APK_CHECKSUMS_X86_64_URL|" : "alpine/x86_64",
+    "|APK_CHECKSUMS_AARCH64_URL|" : "alpine/aarch64",
+    "|APK_CHECKSUMS_ARMV7_URL|" : "alpine/armv7",
+    "|APK_CHECKSUMS_ARMHF_URL|" : "alpine/armhf",
+    "|APK_CHECKSUMS_PPC_URL|" : "alpine/ppc64le",
+    "|APK_AGENT_I386_URL|" : "https://packages.wazuh.com/4.x/alpine/v3.12/main/x86/wazuh-agent",
+    "|APK_AGENT_X86_64_URL|" : "https://packages.wazuh.com/4.x/alpine/v3.12/main/x86_64/wazuh-agent",
+    "|APK_AGENT_AARCH64_URL|" : "https://packages.wazuh.com/4.x/alpine/v3.12/main/aarch64/wazuh-agent",
+    "|APK_AGENT_ARMV7_URL|" : "https://packages.wazuh.com/4.x/alpine/v3.12/main/armv7/wazuh-agent",
+    "|APK_AGENT_ARMHF_URL|" : "https://packages.wazuh.com/4.x/alpine/v3.12/main/armhf/wazuh-agent",
+    "|APK_AGENT_PPC_URL|" : "https://packages.wazuh.com/4.x/alpine/v3.12/main/ppc64le/wazuh-agent",
     "|RPM_AGENT_URL|" : "https://packages.wazuh.com/4.x/yum/wazuh-agent",
     "|RPM_MANAGER_URL|" : "https://packages.wazuh.com/4.x/yum/wazuh-manager",
     "|DEB_AGENT_URL|" : "https://packages.wazuh.com/4.x/apt/pool/main/w/wazuh-agent/wazuh-agent",
@@ -484,6 +496,13 @@ custom_replacements = {
     "|WAZUH_CURRENT_MINOR|" : version,
     "|WAZUH_CURRENT|" : release,
     # --- Revision numbers for Wazuh agent and manager packages versions
+    # Alpine APK packages revisions
+    "|WAZUH_REVISION_APK_AGENT_I386|" : "r1",
+    "|WAZUH_REVISION_APK_AGENT_X86_64|" : "r1",
+    "|WAZUH_REVISION_APK_AGENT_AARCH64|" : "r1",
+    "|WAZUH_REVISION_APK_AGENT_ARMV7|" : "r1",
+    "|WAZUH_REVISION_APK_AGENT_ARMHF|" : "r1",
+    "|WAZUH_REVISION_APK_AGENT_PPC|" : "r1",
     # Yum packages revisions
     "|WAZUH_REVISION_YUM_AGENT_I386|" : "1",
     "|WAZUH_REVISION_YUM_MANAGER_I386|" : "1",
@@ -606,7 +625,7 @@ custom_replacements = {
     # --- Open Distro for Elasticsearch
     "|OPEN_DISTRO_LATEST|" : "1.13.2",
     # --- Elasticsearch
-    "|ELASTICSEARCH_ELK_LATEST|" : "7.17.6", # Basic license
+    "|ELASTICSEARCH_ELK_LATEST|" : "7.17.9", # Basic license
     "|ELASTICSEARCH_LATEST|" : "7.10.2",
     # --- Other Elastic
     "|ELASTIC_6_LATEST|" : "6.8.8",
@@ -614,6 +633,10 @@ custom_replacements = {
     # === Splunk
     "|SPLUNK_LATEST|" : "8.2.8",
     "|WAZUH_SPLUNK_CURRENT|" : release,
+    #
+    "|SPLUNK_LATEST_MINOR|" : "8.2",
+    "|WAZUH_SPLUNK_REV_CURRENT_LATEST|" : "1", # 8.2
+    "|WAZUH_SPLUNK_REV_CURRENT_8.1|" : "1",
 }
 
 # -- Customizations ---------------------------------------------------------

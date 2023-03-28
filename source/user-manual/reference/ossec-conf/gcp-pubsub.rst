@@ -29,7 +29,6 @@ Main options
 - `credentials_file`_
 - `max_messages`_
 - `num_threads`_
-- `logging`_
 
 Scheduling options
 ^^^^^^^^^^^^^^^^^^
@@ -120,14 +119,9 @@ Number of threads used to pull in each iteration. The number of maximum messages
 logging
 ^^^^^^^^
 
-Toggle between the different logging levels.
+.. deprecated:: 4.4
 
-+--------------------+--------------------------------------------+
-| **Default value**  | info                                       |
-+--------------------+--------------------------------------------+
-| **Allowed values** | disabled/info/debug/warning/error/critical |
-+--------------------+--------------------------------------------+
-
+This option has no effect. The module now uses the :ref:`wazuh_modules.debug <wazuh_modules_options>` level to set its logging level.
 
 pull_on_start
 ^^^^^^^^^^^^^
@@ -216,6 +210,5 @@ Linux configuration:
         <interval>1m</interval>
         <project_id>wazuh-dev</project_id>
         <subscription_name>wazuhdns</subscription_name>
-        <logging>debug</logging>
         <credentials_file>wodles/gcp-pubsub/credentials.json</credentials_file>
     </gcp-pubsub>

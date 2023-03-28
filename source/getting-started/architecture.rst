@@ -14,8 +14,9 @@ For production environments, it is recommended to deploy the Wazuh server and Wa
 
 The diagram below represents a Wazuh deployment architecture. It shows the solution components and how the :doc:`Wazuh server <components/wazuh-server>` and the :doc:`Wazuh indexer <components/wazuh-indexer>` nodes can be configured as clusters, providing load balancing and high availability.
 
-.. thumbnail:: /images/getting-started/deployment.png    
-   :title: Wazuh deployment
+.. thumbnail:: /images/getting-started/deployment-architecture.png    
+   :title: Deployment architecture
+   :alt: Deployment architecture
    :align: center
    :width: 80%
 

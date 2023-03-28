@@ -1,8 +1,8 @@
 .. Copyright (C) 2015, Wazuh, Inc.
 
 .. meta::
-  :description: The ossec.conf file is the main configuration file on the Wazuh manager and plays an important role on the agents. Learn more about the global configuration here. 
-  
+  :description: The ossec.conf file is the main configuration file on the Wazuh manager and plays an important role on the agents. Learn more about the global configuration here.
+
 .. _reference_ossec_global:
 
 global
@@ -48,6 +48,7 @@ Options
 - `max_output_size`_
 - `agents_disconnection_time`_
 - `agents_disconnection_alert_time`_
+- `limits`_
 
 alerts_log
 ^^^^^^^^^^
@@ -233,6 +234,8 @@ This toggles whether to store events even when they do not trip a rule with resu
 | **Allowed values** | yes, no |
 +--------------------+---------+
 
+.. _reference_ossec_global_logall_json:
+
 logall_json
 ^^^^^^^^^^^
 
@@ -261,20 +264,17 @@ This sets the memory size for the event correlation engine.
 white_list
 ^^^^^^^^^^
 
-This specifies an IPv4 address, netblock, or hostname for which Active Responses will not be triggered. Only one of those
-values may be specified for each ``<while_list>`` tag, but several values may be used by including multiple
-``<white_list>`` tags. This configuration is compared against the extracted **srcip** field in the alert.
+This specifies an IPv4/IPv6 address, netblock, or hostname that will not trigger an active response. Only one of those values may be specified for each ``<while_list>`` tag, but several values may be used by including multiple ``<white_list>`` tags. This configuration is compared against the extracted **srcip** field in the alert.
 
-+--------------------+---------------------------------------------------------------+
-| **Default value**  | n/a                                                           |
-+--------------------+---------------------------------------------------------------+
-| **Allowed values** | Any IPv4 address, netblock (i.e.: 192.168.0.0/16) or hostname |
-+--------------------+---------------------------------------------------------------+
++--------------------+--------------------------------------------------------------------+
+| **Default value**  | n/a                                                                |
++--------------------+--------------------------------------------------------------------+
+| **Allowed values** | Any IPv4/IPv6 address, netblock (i.e.: 192.168.0.0/16) or hostname |
++--------------------+--------------------------------------------------------------------+
 
 .. note::
 
-  This option is only valid in server and local installs. IPv4-mapped IPv6 addresses will be compared against any configured
-  IPv4 or netblock.
+  This option is only valid in server and local installs.
 
 host_information
 ^^^^^^^^^^^^^^^^
@@ -475,6 +475,68 @@ Example:
 .. code-block:: xml
 
   <agents_disconnection_alert_time>1h</agents_disconnection_alert_time>
+
+limits
+------
+
+This block configures the limits section.
+
+- `limits\\eps`_
+
++----------------------------+
+| Options                    |
++============================+
+| `limits\\eps`_             |
++----------------------------+
+
+limits\\eps
+^^^^^^^^^^^
+
+This block configures the events per second limitation functionality.
+
+- `limits\\eps\\maximum`_
+- `limits\\eps\\timeframe`_
+
++----------------------------------------+----------------------------------------------+
+| Options                                | Allowed values                               |
++========================================+==============================================+
+| `limits\\eps\\maximum`_                | Zero or a positive number                    |
++----------------------------------------+----------------------------------------------+
+| `limits\\eps\\timeframe`_              | A positive number                            |
++----------------------------------------+----------------------------------------------+
+
+Events per second limits example block:
+
+.. code-block:: xml
+
+    <limits>
+      <eps>
+        <maximum>500</maximum>
+        <timeframe>10</timeframe>
+      </eps>
+    </limits>
+
+limits\\eps\\maximum
+^^^^^^^^^^^^^^^^^^^^
+
+Maximum number of events per second allowed to be processed by decoders.
+
++--------------------+-----------------------------------------------------------------+
+| **Default value**  | 0                                                               |
++--------------------+-----------------------------------------------------------------+
+| **Allowed values** | A number between 0 and 100000. Zero to disable the functionality|
++--------------------+-----------------------------------------------------------------+
+
+limits\\eps\\timeframe
+^^^^^^^^^^^^^^^^^^^^^^
+
+A positive number expressed in seconds that indicates the time period where the events per second processed are increased and restored.
+
++--------------------+-------------------------------------+
+| **Default value**  | 10                                  |
++--------------------+-------------------------------------+
+| **Allowed values** | A positive number between 1 and 3600|
++--------------------+-------------------------------------+
 
 Configuration example
 ---------------------

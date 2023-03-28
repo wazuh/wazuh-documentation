@@ -5,6 +5,7 @@ const redirectSameRelease = [];
 
 /* Note: new release versions must always be inserted in the first position of the array "versions" */
 const versions = [
+  '4.4',
   '4.3',
   '4.2',
   '4.1',
@@ -69,7 +70,71 @@ removedUrls['x.y'] = [
 ];
 */
 
-/* *** RELEASE 4.3 ****/
+/* *** RELEASE 4.4 ****/
+
+/* Redirections from 4.3 to 4.4  */
+
+redirections.push(
+    {
+      'target': ['4.3=>4.4', '4.4=>4.3'],
+      '4.3': '/amazon/services/supported-services/alb.html',
+      '4.4': '/amazon/services/supported-services/elastic-load-balancing/alb.html',
+    },
+    {
+      'target': ['4.3=>4.4', '4.4=>4.3'],
+      '4.3': '/amazon/services/supported-services/nlb.html',
+      '4.4': '/amazon/services/supported-services/elastic-load-balancing/nlb.html',
+    },
+    {
+      'target': ['4.3=>4.4', '4.4=>4.3'],
+      '4.3': '/amazon/services/supported-services/clb.html',
+      '4.4': '/amazon/services/supported-services/elastic-load-balancing/clb.html',
+    },
+    {
+      'target': ['4.3=>4.4', '4.4=>4.3'],
+      '4.3': '/user-manual/capabilities/agent-key-polling.html',
+      '4.4': '/user-manual/agents/key-request.html',
+    }
+);
+
+/* Pages added in 4.4 */
+
+newUrls['4.4'] = [
+  '/amazon/services/supported-services/elastic-load-balancing/index.html',
+  '/amazon/services/supported-services/elastic-load-balancing/alb.html',
+  '/amazon/services/supported-services/elastic-load-balancing/nlb.html',
+  '/amazon/services/supported-services/elastic-load-balancing/clb.html',
+  '/user-manual/agents/key-request.html',
+  '/user-manual/manager/manual-backup-restore.html',
+  '/user-manual/reference/ossec-conf/wazuh-db-config.html',
+  '/azure/activity-services/prerequisites/dependencies.html',
+  '/user-manual/wazuh-dashboard/custom-branding.html',
+  '/release-notes/release-4-4-0.html',
+];
+
+/* Pages removed in 4.4 */
+
+removedUrls['4.4'] = [
+  '/amazon/services/supported-services/alb.html',
+  '/amazon/services/supported-services/nlb.html',
+  '/amazon/services/supported-services/clb.html',
+  '/user-manual/capabilities/agent-key-polling.html',
+  '/user-manual/wazuh-dashboard/single-sign-on/index.html',
+  '/user-manual/wazuh-dashboard/single-sign-on/okta.html',
+  '/user-manual/wazuh-dashboard/single-sign-on/azure-active-directory.html',
+  '/user-manual/wazuh-dashboard/single-sign-on/pingone.html',
+  '/user-manual/wazuh-dashboard/single-sign-on/google.html',
+  '/user-manual/wazuh-dashboard/single-sign-on/jumpcloud.html',
+  '/user-manual/wazuh-dashboard/single-sign-on/onelogin.html',
+  '/user-manual/securing-wazuh/index.html',
+  '/user-manual/securing-wazuh/wazuh-indexer.html',
+  '/user-manual/securing-wazuh/opendistro.html',
+  '/user-manual/securing-wazuh/elastic-stack.html',
+  '/user-manual/wazuh-dashboard/rbac.html',
+  '/learning-wazuh/build-lab/install-wazuh-central-components.html',
+];
+
+  /* *** RELEASE 4.3 ****/
 
 /* Pages changed within the same release */
 
@@ -167,7 +232,6 @@ newUrls['4.3'] = [
   '/azure/activity-services/index.html',
   '/azure/activity-services/active-directory/index.html',
   '/azure/activity-services/active-directory/graph.html',
-  '/azure/activity-services/prerequisites/dependencies.html',
   '/azure/activity-services/prerequisites/considerations.html',
   '/azure/activity-services/prerequisites/credentials.html',
   '/azure/activity-services/prerequisites/index.html',

@@ -148,7 +148,7 @@ Replace `<user>` and `<password>` with yours. By default, the user is `wazuh`, a
 
     .. code-block:: none
 
-        TOKEN=$(curl -u <user>:<password> -k -X GET "https://localhost:55000/security/user/authenticate?raw=true")
+        TOKEN=$(curl -u <user>:<password> -k -X POST "https://localhost:55000/security/user/authenticate?raw=true")
 
 Check that everything works correctly
 

@@ -16,7 +16,7 @@ Infrastructure
 +--------------------+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
 | Cloud service      | Description                                                                                                                                                                             |
 +====================+=========================================================================================================================================================================================+
-| Amazon CloudTrail  | AWS Cloudtrail, like all other supported AWS services, requires providing a valid authentication method. For this PoC, we use the :ref:`profile authentication <profiles>` method.      |
+| Amazon CloudTrail  | AWS Cloudtrail, like all other supported AWS services, requires providing a valid authentication method. For this PoC, we use the :ref:`profile authentication <aws_profile>` method.   |
 +--------------------+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
 
 Configuration
@@ -48,11 +48,10 @@ Wazuh server
 #. Enable the Wazuh AWS module in the ``/var/ossec/etc/ossec.conf`` configuration file on the Wazuh server. Add only the AWS buckets of interest. Read our guide on how to :doc:`Configure AWS credentials </amazon/services/prerequisites/credentials>`:
 
    .. code-block:: xml
-      :emphasize-lines: 9, 10
+      :emphasize-lines: 8, 9
 
       <wodle name="aws-s3">
         <disabled>no</disabled>
-        <remove_from_bucket>no</remove_from_bucket>
         <interval>30m</interval>
         <run_on_start>yes</run_on_start>
         <skip_on_error>no</skip_on_error>

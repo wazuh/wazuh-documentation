@@ -109,6 +109,8 @@ The table below shows available channels and providers to monitor included in th
 | Terminal Services             | Service                                                      |                                    |                                                                                |
 |                               | Microsoft-Windows-TerminalServices-RemoteConnectionManager   |                                    |                                                                                |
 +-------------------------------+--------------------------------------------------------------+------------------------------------+--------------------------------------------------------------------------------+
+| Powershell                    | Microsoft-Windows-PowerShell/Operational                     | Microsoft-Windows-PowerShell       | This channel collects and audits Powershell activity.                          |
++-------------------------------+--------------------------------------------------------------+------------------------------------+--------------------------------------------------------------------------------+
 
 When monitoring a channel, events from different providers can be gathered. In the ruleset, this is taken into account to monitor logs from McAfee, Eventlog or Security Essentials.
 
@@ -117,7 +119,7 @@ Windows ruleset redesign
 
 In order to ease the addition of new rules, the eventchannel ruleset has been classified according to the channel from which events belong. This will ensure an easier way of maintaining the ruleset organized and finding a better place for custom rules. To accomplish this, several modifications have been added:
 
-- Each eventchannel file contains a specific channel's rules.
+- Each event channel has one or more files with rules specific to it. For example, you can find the rules specific to the ``System`` channel in the ``0590-win-system_rules.xml`` file.
 - A base file includes every parent rule filtering by the specific channels monitored.
 - Rules have been updated and improved to match the new JSON events, showing relevant information in the rule's description and facilitating the way of filtering them.
 - New channel rules have been added. By default, the monitored channels are System, Security, and Application. These channels have their own file now and include a fair set of rules.
@@ -125,8 +127,6 @@ In order to ease the addition of new rules, the eventchannel ruleset has been cl
 - If some rules can’t be classified easily, or there are so few belonging to a specific channel, they are included in a generic Windows rule file.
 
 To have a complete view of which events are equivalent to the old ones from ``eventlog`` and the previous version of ``eventchannel``, this table classifies every rule according to the source in which they were recorded, including their range of rule IDs and the file where they are described.
-
-Eventchannel for Wazuh >= 3.9.0
 
 +---------------------+-----------------------------+---------------------------------+
 | Source              | Rule IDs                    |   Rule file                     |
@@ -152,44 +152,8 @@ Eventchannel for Wazuh >= 3.9.0
 +---------------------+-----------------------------+---------------------------------+
 | Others              |   64100 - 64599             | 0620-win-generic_rules.xml      |
 +---------------------+-----------------------------+---------------------------------+
-
-Eventchannel and eventlog for Wazuh < 3.9.0
-
-+---------------------+-----------------------------------+-----------------------------+
-| Source              | Rule IDs                          |   Rule file                 |
-+=====================+===================================+=============================+
-| Base rules          | 18100 - 18103, 7704, 7500         | 0220-msauth_rules.xml,      |
-|                     |                                   | 0230-ms-se_rules.xml,       |
-|                     |                                   | 0225-mcafee_av_rules.xml    |
-+---------------------+-----------------------------------+-----------------------------+
-| Security            | 18100 - 18124, 18127 - 18128,     | 0220-msauth_rules.xml       |
-|                     | 18130 - 18144, 18146 - 18149,     |                             |
-|                     | 18151 - 18155, 18170 - 18181,     |                             |
-|                     | 18200 - 18256, 18260 - 18261      |                             |
-+---------------------+-----------------------------------+-----------------------------+
-| Application         | 18158 - 18160, 18146 - 18147      | 0220-msauth_rules.xml       |
-+---------------------+-----------------------------------+-----------------------------+
-| System              | 18145                             | 0220-msauth_rules.xml       |
-+---------------------+-----------------------------------+-----------------------------+
-| Sysmon              | 184665 - 184776, 184676 - 184678, | 0330-sysmon_rules.xml       |
-|                     | 184686 - 184687, 184696 - 184698, |                             |
-|                     | 184706 - 184707, 184716 - 184717, |                             |
-|                     | 184726 - 184727, 184736 - 184737, |                             |
-|                     | 184746 - 184747, 184766 - 184767, |                             |
-|                     | 184776 - 184777, 185000 - 185013  |                             |
-+---------------------+-----------------------------------+-----------------------------+
-| Windows Defender    | 83000 - 83002                     | 0430-ms_wdefender_rules.xml |
-+---------------------+-----------------------------------+-----------------------------+
-| McAfee              | 7500 - 7514, 7550                 | 0225-mcafee_av_rules.xml    |
-+---------------------+-----------------------------------+-----------------------------+
-| Eventlog            | 83200 - 83202                     | 0435-ms_logs_rules.xml      |
-+---------------------+-----------------------------------+-----------------------------+
-| Microsoft Security  | 7701 - 7720                       | 0230-ms-se_rules.xml        |
-| Essentials          |                                   |                             |
-+---------------------+-----------------------------------+-----------------------------+
-| Others              | 18125 - 18126, 18129,             | 0220-msauth_rules.xml       |
-|                     | 18257 - 18259, 18156 - 18157      |                             |
-+---------------------+-----------------------------------+-----------------------------+
+| Powershell          |   91801 - 92000             | 0915-win-powershell_rules.xml   |
++---------------------+-----------------------------+---------------------------------+
 
 Use case
 ^^^^^^^^

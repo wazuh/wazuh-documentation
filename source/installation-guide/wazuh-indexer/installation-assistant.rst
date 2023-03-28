@@ -34,7 +34,7 @@ Indicate your deployment configuration, create the SSL certificates to encrypt c
           # curl -sO https://packages.wazuh.com/|WAZUH_CURRENT_MINOR|/wazuh-install.sh
           # curl -sO https://packages.wazuh.com/|WAZUH_CURRENT_MINOR|/config.yml
        
-#. Edit the ``./config.yml`` and replace the node names and IP values with the corresponding names and IP addresses. You need to do this for all Wazuh server, Wazuh indexer, and Wazuh dashboard nodes. Add as many node fields as needed.
+#. Edit ``./config.yml`` and replace the node names and IP values with the corresponding names and IP addresses. You need to do this for all Wazuh server, Wazuh indexer, and Wazuh dashboard nodes. Add as many node fields as needed.
 
       .. code-block:: yaml
 
@@ -137,19 +137,20 @@ Testing the cluster installation
       {
         "name" : "node-1",
         "cluster_name" : "wazuh-cluster",
-        "cluster_uuid" : "cMeWTEWxQWeIPDaf1Wx4jw",
+        "cluster_uuid" : "bMz0BKdlRVui5jF-mlt6yg",
         "version" : {
           "number" : "7.10.2",
           "build_type" : "rpm",
-          "build_hash" : "e505b10357c03ae8d26d675172402f2f2144ef0f",
-          "build_date" : "2022-01-14T03:38:06.881862Z",
+          "build_hash" : "f2f809ea280ffba217451da894a5899f1cec02ab",
+          "build_date" : "2022-12-12T22:17:42.341124910Z",
           "build_snapshot" : false,
-          "lucene_version" : "8.10.1",
-          "minimum_wire_compatibility_version" : "6.8.0",
-          "minimum_index_compatibility_version" : "6.0.0-beta1"
+          "lucene_version" : "9.4.2",
+          "minimum_wire_compatibility_version" : "7.10.0",
+          "minimum_index_compatibility_version" : "7.0.0"
         },
         "tagline" : "The OpenSearch Project: https://opensearch.org/"
       }
+
 
 #. Replace ``<WAZUH_INDEXER_IP>`` and ``<ADMIN_PASSWORD>``, and run the following command to check if the cluster is working correctly:
 

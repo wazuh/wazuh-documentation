@@ -35,26 +35,25 @@ The structure of a basic Splunk Cluster is formed by the following elements:
    :align: center
    :width: 80%
 
-Install and configure Splunk enterprise indexer instances
----------------------------------------------------------
-
 .. note::
 
       - Splunk is not open source software, and it requires a registered user and license in order to work. You can also use a free trial license.
 
-      - This guide will install and configure Splunk |SPLUNK_LATEST|. If you intend to configure a different version of Splunk with Wazuh, change the Splunk version number in the requests for the configuration files and the Wazuh app for Splunk. For example, if you intend to configure Splunk 8.2.2:
+      - This guide configures Wazuh with Splunk |SPLUNK_LATEST_MINOR|. If you intend to configure it with another version of Splunk, such as 8.1, change the Splunk version number in the requests for the configuration files and the Wazuh app for Splunk. For example:
 
          .. code-block:: console
 
-            # curl -so /opt/splunk/etc/system/local/indexes.conf https://raw.githubusercontent.com/wazuh/wazuh-splunk/v|WAZUH_SPLUNK_CURRENT|-|SPLUNK_LATEST|/setup/indexer/indexes.conf
+            # curl -so /opt/splunk/etc/system/local/indexes.conf https://raw.githubusercontent.com/wazuh/wazuh-splunk/v|WAZUH_SPLUNK_CURRENT|-|SPLUNK_LATEST_MINOR|/setup/indexer/indexes.conf
 
 
          Becomes
 
          .. code-block:: console
             
-            # curl -so /opt/splunk/etc/system/local/indexes.conf https://raw.githubusercontent.com/wazuh/wazuh-splunk/v|WAZUH_SPLUNK_CURRENT|-8.2.2/setup/indexer/indexes.conf
+            # curl -so /opt/splunk/etc/system/local/indexes.conf https://raw.githubusercontent.com/wazuh/wazuh-splunk/v|WAZUH_SPLUNK_CURRENT|-8.1/setup/indexer/indexes.conf
 
+Install and configure Splunk enterprise indexer instances
+---------------------------------------------------------
 
 Each instance can be configured on different hosts following the steps described below:
 
@@ -104,7 +103,7 @@ In the **Splunk master instance**, users will make the configuration that will b
 
    .. code-block:: console
 
-      # curl -so /opt/splunk/etc/master-apps/_cluster/local/indexes.conf https://raw.githubusercontent.com/wazuh/wazuh-splunk/v|WAZUH_SPLUNK_CURRENT|-|SPLUNK_LATEST|/setup/indexer/indexes.conf  
+      # curl -so /opt/splunk/etc/master-apps/_cluster/local/indexes.conf https://raw.githubusercontent.com/wazuh/wazuh-splunk/v|WAZUH_SPLUNK_CURRENT|-|SPLUNK_LATEST_MINOR|/setup/indexer/indexes.conf  
 
 
 #. Apply the cluster bundle:
@@ -125,24 +124,6 @@ Install and configure Splunk forwarder instances
 A Splunk forwarder is required in order to send alerts to the Splunk indexers. Depending on the type of architecture that you’re installing, the Splunk forwarder is configured differently.
 
 #. Download the Splunk package from `its official website <https://www.splunk.com/en_us/download/partners/splunk-enterprise.html>`__. The versions of Splunk compatible with Wazuh and the Wazuh app for Splunk can be found :ref:`here <wazuh_and_splunk_app>`.
-
-   .. note::
-
-         - Splunk is not open source software, and it requires a registered user and license in order to work. You can also use a free trial license.
-
-         - This guide will install and configure Splunk |SPLUNK_LATEST|. If you intend to configure a different version of Splunk with Wazuh, change the Splunk version number in the requests for the configuration files and the Wazuh app for Splunk. For example, if you intend to configure Splunk 8.2.2:
-
-            .. code-block:: console
-
-               # curl -so /opt/splunk/etc/system/local/indexes.conf https://raw.githubusercontent.com/wazuh/wazuh-splunk/v|WAZUH_SPLUNK_CURRENT|-|SPLUNK_LATEST|/setup/indexer/indexes.conf
-
-
-            Becomes
-
-            .. code-block:: console
-               
-               # curl -so /opt/splunk/etc/system/local/indexes.conf https://raw.githubusercontent.com/wazuh/wazuh-splunk/v|WAZUH_SPLUNK_CURRENT|-8.2.2/setup/indexer/indexes.conf
-
 
 #. Install the Splunk forwarder package on all the Wazuh manager nodes:
 
@@ -178,7 +159,7 @@ Creating the configuration files
 
    .. code-block:: console
       
-      # curl -so /opt/splunkforwarder/etc/system/local/inputs.conf https://raw.githubusercontent.com/wazuh/wazuh-splunk/v|WAZUH_SPLUNK_CURRENT|-|SPLUNK_LATEST|/setup/forwarder/inputs.conf                           
+      # curl -so /opt/splunkforwarder/etc/system/local/inputs.conf https://raw.githubusercontent.com/wazuh/wazuh-splunk/v|WAZUH_SPLUNK_CURRENT|-|SPLUNK_LATEST_MINOR|/setup/forwarder/inputs.conf                           
 
 #. Set the Wazuh manager hostname:
 
@@ -226,7 +207,7 @@ Creating the configuration files
         
    .. code-block:: console
       
-      # curl -so /opt/splunkforwarder/etc/system/local/props.conf https://raw.githubusercontent.com/wazuh/wazuh-splunk/v|WAZUH_SPLUNK_CURRENT|-|SPLUNK_LATEST|/setup/forwarder/props.conf          
+      # curl -so /opt/splunkforwarder/etc/system/local/props.conf https://raw.githubusercontent.com/wazuh/wazuh-splunk/v|WAZUH_SPLUNK_CURRENT|-|SPLUNK_LATEST_MINOR|/setup/forwarder/props.conf          
  
 
 #. To save all the changes, start the Splunk forwarder:
@@ -283,5 +264,5 @@ Set up data forwarding
       
 The next step is installing the :doc:`Wazuh App <splunk-app>` in the search heads instances and configuring them to use the Splunk services.
 
-   -  You can find useful Splunk CLI commands in the `official documentation <http://docs.splunk.com/Documentation/Splunk/8.2.2/Admin/CLIadmincommands>`__.
-   -  To learn more about the Splunk distributed search, check out `this article <http://docs.splunk.com/Documentation/Splunk/8.2.2/DistSearch/Whatisdistributedsearch>`__ from the official documentation.
+   -  You can find useful Splunk CLI commands in the `official documentation <http://docs.splunk.com/Documentation/Splunk/|SPLUNK_LATEST|/Admin/CLIadmincommands>`__.
+   -  To learn more about the Splunk distributed search, check out `this article <http://docs.splunk.com/Documentation/Splunk/|SPLUNK_LATEST|/DistSearch/Whatisdistributedsearch>`__ from the official documentation.

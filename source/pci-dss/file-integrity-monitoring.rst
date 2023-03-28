@@ -164,12 +164,12 @@ In this use case, we configure Syscheck to detect when changes have been made to
 
 #. Proceed to modify the file. In this case, we removed some content. An alert is generated on the next Syscheck scan about the modified file.
 
-	.. thumbnail:: ../images/pci/alert-generated-on-the-next- syscheck-scan-01.png
+	.. thumbnail:: ../images/pci/alert-generated-on-the-next-syscheck-scan-01.png
 		:title: Alert generated on the next Syscheck scan
 		:align: center
 		:width: 80%
 
-	.. thumbnail:: ../images/pci/alert-generated-on-the-next- syscheck-scan-02.png
+	.. thumbnail:: ../images/pci/alert-generated-on-the-next-syscheck-scan-02.png
 		:title: Alert generated on the next Syscheck scan
 		:align: center
 		:width: 80%

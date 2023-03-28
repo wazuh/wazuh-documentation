@@ -3,13 +3,13 @@
 .. meta::
   :description: Learn what you need to provide access credentials to the Wazuh Azure module so it can successfully connect to Azure in this section of the Wazuh documentation.
 
-.. _azure_credentials:
-
 Configuring Azure credentials
 =============================
 
 It is necessary to provide access credentials to the Wazuh Azure module so it can successfully connect to Azure. The credentials required vary depending on the type of monitoring.
 
+
+.. _graph_and_log_analytics_credentials:
 
 Getting access credentials for Microsoft Graph and Log Analytics
 ----------------------------------------------------------------
@@ -117,8 +117,7 @@ Check the :doc:`azure-logs wodle </user-manual/reference/ossec-conf/wodle-azure-
 Inserting the credentials into the configuration
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-.. warning::
-   This authentication method is not recommended for production environments and will be deprecated in future releases.
+.. deprecated:: 4.4.0
 
 Another authentication option is to set up credentials by storing them directly into the Wazuh configuration file ``/var/ossec/etc/ossec.conf``, inside of the ``<graph>``, ``<log_analytics>`` and ``<storage>`` blocks on the module configuration.
 

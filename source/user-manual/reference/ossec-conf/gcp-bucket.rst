@@ -26,7 +26,6 @@ Main options
 ^^^^^^^^^^^^
 
 - `enabled`_
-- `logging`_
 - `bucket type`_
 
 Scheduling options
@@ -53,13 +52,10 @@ This indicates if the module is enabled or disabled.
 logging
 ^^^^^^^^
 
-Toggle between the different logging levels.
+.. deprecated:: 4.4
 
-+--------------------+--------------------------------------------+
-| **Default value**  | info                                       |
-+--------------------+--------------------------------------------+
-| **Allowed values** | disabled/info/debug/warning/error/critical |
-+--------------------+--------------------------------------------+
+This option has no effect. The module now uses the :ref:`wazuh_modules.debug <wazuh_modules_options>` level to set its logging level.
+
 
 bucket type
 ^^^^^^^^^^^
@@ -231,6 +227,5 @@ Linux configuration:
         <interval>1m</interval>
         <project_id>wazuh-dev</project_id>
         <subscription_name>wazuhdns</subscription_name>
-        <logging>debug</logging>
         <credentials_file>wodles/gcp-bucket/credentials.json</credentials_file>
     </gcp-bucket>

@@ -1,17 +1,14 @@
 .. Copyright (C) 2015, Wazuh, Inc.
 
 .. meta::
-  :description: Learn about AWS Supported services with Wazuh, and the most relevant information about configuring each service, in this section of our documentation.  
+  :description: The Wazuh for AWS module provides capabilities for monitoring AWS-based services. Learn how to install and configure it to monitor Amazon instances and services.  
 
 .. _amazon_supported_services:
 
 Supported services
 ==================
 
-.. meta::
-  :description: Supported services
-
-All the services except ``Inspector`` and ``CloudWatch Logs`` get their data from log files stored in an ``S3`` bucket. These services store their data into log files which are configured inside ``<bucket type='TYPE'> </bucket>`` tags, while ``Inspector`` and ``CloudWatch Logs`` services are configured inside ``<service type='inspector'> </service>`` and ``<service type='cloudwatchlogs'> </service>`` tags, respectively.
+All the services except ``Inspector Classic`` and ``CloudWatch Logs`` get their data from log files stored in an ``S3`` bucket. These services store their data into log files which are configured inside ``<bucket type='TYPE'> </bucket>`` tags, while ``Inspector Classic`` and ``CloudWatch Logs`` services are configured inside ``<service type='inspector'> </service>`` and ``<service type='cloudwatchlogs'> </service>`` tags, respectively.
 
 The next table contains the most relevant information about configuring each service in the ``ossec.conf`` file, as well as the path where the logs will be stored in the bucket if the corresponding service uses them as its storage medium:
 
@@ -42,7 +39,7 @@ The next table contains the most relevant information about configuring each ser
 +--------------+----------------------------------------------------------+-----------------------+----------------+------------------------------------------------------------------------------------------------------------------+
 | Amazon       | :ref:`S3 Server Access logs <amazon_server_access>`      | bucket                | server_access  | <bucket_name>/<prefix>                                                                                           |
 +--------------+----------------------------------------------------------+-----------------------+----------------+------------------------------------------------------------------------------------------------------------------+
-| Amazon       | :ref:`Inspector <amazon_inspector>`                      | service               | inspector      |                                                                                                                  |
+| Amazon       | :ref:`Inspector Classic <amazon_inspector>`              | service               | inspector      |                                                                                                                  |
 +--------------+----------------------------------------------------------+-----------------------+----------------+------------------------------------------------------------------------------------------------------------------+
 | Amazon       | :ref:`CloudWatch Logs <aws_cloudwatchlogs>`              | service               | cloudwatchlogs |                                                                                                                  |
 +--------------+----------------------------------------------------------+-----------------------+----------------+------------------------------------------------------------------------------------------------------------------+
@@ -58,9 +55,6 @@ The next table contains the most relevant information about configuring each ser
     cloudtrail
     vpc
     config
-    alb
-    clb
-    nlb
     kms
     macie
     trusted-advisor
@@ -71,3 +65,4 @@ The next table contains the most relevant information about configuring each ser
     cloudwatchlogs
     ecr-image-scanning
     cisco-umbrella
+    elastic-load-balancing/index

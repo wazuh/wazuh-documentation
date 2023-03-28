@@ -1,8 +1,8 @@
 .. Copyright (C) 2015, Wazuh, Inc.
 
 .. meta::
-    :description: Learn more about the agent management in Wazuh. In this section, we will show you how to group agents and how to manage multiple groups. 
-    
+    :description: Learn more about the agent management in Wazuh. In this section, we will show you how to group agents and how to manage multiple groups.
+
 .. _grouping-agents:
 
 Grouping agents
@@ -25,6 +25,8 @@ Below are the steps to assign agents to a group with a specific configuration:
    .. note:: The group must be created and configured before assigning agents.
 
    .. note:: This behavior corresponds to ``v3.7.0`` and later.
+
+   .. note :: The group name can only contain upper/lower case letters, numbers, dots, underscores, and hyphens.
 
 
    .. code-block:: console
@@ -303,7 +305,7 @@ It is also possible to switch between groups overwriting the existing assignment
 
 The ``-f`` parameter resets groups assigned to the agent and forces it to only belong to the new group.
 
-Finally, to check the synchronization status of the group configuration for a single agent, both following methods are available, **agent_groups** and **Wazuh API** endpoint :api-ref:`GET /agents/{agent_id}/group/is_sync <operation/api.controllers.agent_controller.get_sync_agent>`:
+Finally, to check the synchronization status of the group configuration for agents, both following methods are available, **agent_groups** and **Wazuh API** endpoint :api-ref:`GET /agents <operation/api.controllers.agent_controller.get_agents>`:
 
     .. code-block:: console
 
@@ -312,29 +314,29 @@ Finally, to check the synchronization status of the group configuration for a si
     .. code-block:: none
         :class: output
 
-        The agent '001' sync status is: Agent configuration is synced.
+        Agent '001' is synchronized.
 
     .. code-block:: console
 
-        # curl -k -X GET "https://localhost:55000/agents/001/group/is_sync?pretty=true" -H  "Authorization: Bearer $TOKEN"
+        # curl -k -X GET "https://localhost:55000/agents?agents_list=001&select=group_config_status&pretty=true" -H  "Authorization: Bearer $TOKEN"
 
     .. code-block:: json
         :class: output
 
         {
-            "error": 0,
-            "data": {
-                "affected_items": [
-                    {
-                        "id": "001",
-                        "synced": true
-                    }
-                ],
-                "total_affected_items": 1,
-                "total_failed_items": 0,
-                "failed_items": []
-            },
-            "message": "Sync info was returned for all selected agents"
+           "data": {
+              "affected_items": [
+                 {
+                    "group_config_status": "synced",
+                    "id": "001"
+                 }
+              ],
+              "total_affected_items": 1,
+              "total_failed_items": 0,
+              "failed_items": []
+           },
+           "message": "All selected agents information was returned",
+           "error": 0
         }
 
 The rest of the capabilities of **agent_groups** can be found at its :doc:`reference section <../reference/tools/agent-groups>`. The same for the :doc:`Wazuh API <../api/reference>`, which offers calls with similar behavior.

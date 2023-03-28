@@ -10,7 +10,9 @@ Installing Wazuh agents on Solaris endpoints
 
 The agent runs on the host you want to monitor and communicates with the Wazuh manager, sending data in near real-time through an encrypted and authenticated channel. 
 
-To start the installation process, select your architecture: i386 or Sparc. Alternatively, if you want to download the Wazuh agent package directly, see the :doc:`packages list </installation-guide/packages-list>` section. 
+To start the installation process, select your architecture: i386 or SPARC.
+
+.. note:: You need root user privileges to run all the commands described below.
 
 .. tabs::
 
@@ -35,9 +37,9 @@ To start the installation process, select your architecture: i386 or Sparc. Alte
 
 
 
-  .. group-tab:: Sparc
+  .. group-tab:: SPARC
 
-    Select your Solaris Sparc version.
+    Select your Solaris SPARC version.
 
     .. tabs::
 

@@ -18,35 +18,40 @@ As an example, Wazuh provides out-of-the-box dashboards for regulatory complianc
 .. hlist::
    :columns: 2
 
-   -  .. thumbnail::  /images/getting-started/module_info_management.png 
+   -  .. thumbnail::  /images/getting-started/security-information-management.png 
          :align: center
          :width: 100% 
-         :title: Modules information management
+         :title: Security information management
+         :alt: Security information management
 
-   -  .. thumbnail::  /images/getting-started/module_policy.png 
+   -  .. thumbnail::  /images/getting-started/policy-monitoring.png 
          :align: center
          :width: 100% 
-         :title: Modules policy
+         :title: Auditing and policy monitoring
+         :alt: Auditing and policy monitoring
 
-   -  .. thumbnail::  /images/getting-started/module_threat_detection.png 
+   -  .. thumbnail::  /images/getting-started/threat-detection-and-response.png 
          :align: center
          :width: 100% 
-         :title: Module threat detection
+         :title: Threat detection and response
+         :alt: Threat detection and response
 
-   -  .. thumbnail::  /images/getting-started/module_compliance.png 
+   -  .. thumbnail::  /images/getting-started/dashboard-regulatory-compliance.png 
          :align: center
          :width: 100% 
-         :title: Module compliance
+         :title: Regulatory compliance
+         :alt: Regulatory compliance
 
 Agents monitoring and configuration
 -----------------------------------
 
 The Wazuh dashboard allows users to manage agents configuration and to monitor their status. As an example, for each monitored endpoint, users can define what agent modules will be enabled, what log files will be read, what files will be monitored for integrity changes, or what configuration checks will be performed.
 
-.. thumbnail::  /images/getting-started/dashboard_screenshot_agent.png 
+.. thumbnail::  /images/getting-started/agents-monitoring.png 
    :align: center
    :width: 80% 
-   :title: Agent dashboard overview
+   :title: Agents monitoring
+   :alt: Agents monitoring
 
 Platform management
 -------------------
@@ -56,37 +61,42 @@ The Wazuh dashboard provides a user interface dedicated to manage your Wazuh dep
 .. hlist::
    :columns: 2
 
-   -  .. thumbnail::  /images/getting-started/dashboard_administration.png 
+   -  .. thumbnail::  /images/getting-started/platform-management.png 
          :align: center
          :width: 100% 
-         :title: Administration
+         :title: Platform management
+         :alt: Platform management
 
-   -  .. thumbnail::  /images/getting-started/dashboard_status.png 
+   -  .. thumbnail::  /images/getting-started/status-and-reports.png 
          :align: center
          :width: 100% 
          :title: Status and reports
+         :alt: Status and reports
 
 Developer tools
 ---------------
 
 The Wazuh dashboard includes a Ruleset Test tool that can process log messages to check how it is decoded and if it matches a threat detection rule or not. This feature is especially useful when custom decoders and rules have been created and the user wants to test them.
 
-.. thumbnail::  /images/getting-started/dashboard_ruleset_test.png 
+.. thumbnail::  /images/getting-started/ruleset-test.png
    :align: center
    :width: 80% 
    :title: Ruleset test
+   :alt: Ruleset test
 
 The Wazuh dashboard also includes an API Console for users to interact with the Wazuh API. This can be used to manage the Wazuh deployment (e.g., managing server or agent configurations, monitor status and log messages, adding or removing agents, etc.).
 
 .. hlist::
     :columns: 2
 
-    -  .. thumbnail::  /images/getting-started/dashboard_API_console1.png 
+    -  .. thumbnail::  /images/getting-started/api-console.png 
           :align: center
           :width: 100% 
-          :title: API Console
+          :title: API console
+          :alt: API console
 
-    -  .. thumbnail::  /images/getting-started/dashboard_API_console2.png 
+    -  .. thumbnail::  /images/getting-started/creating-security-rules.png  
           :align: center
           :width: 100% 
-          :title: API Console
+          :title: Creating security rules
+          :alt: Creating security rules

@@ -37,6 +37,5 @@ In this section you will find:
     syscollector
     vulnerability-detection/index
     osquery
-    agent-key-polling
     fluent-forwarder
     wazuh-logtest/index

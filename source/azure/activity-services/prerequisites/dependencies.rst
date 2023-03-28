@@ -1,7 +1,5 @@
 .. Copyright (C) 2015, Wazuh, Inc.
 
-:orphan:
-
 .. _azure_monitoring_dependencies:
 
 
@@ -68,4 +66,4 @@ To install the Azure Storage Blobs client library for Python, execute the follow
 
 .. code-block:: console
 
-  # pip3 install azure-common==1.1.25 azure-storage-blob==2.1.0 azure-storage-blob==2.1.0 azure-storage-common==2.1.0 pytz==2020.1 requests==2.25.1
+  # pip3 install azure-storage-blob==2.1.0 azure-storage-common==2.1.0 azure-common==1.1.25 cryptography==3.3.2 cffi==1.14.4 pycparser==2.20 six==1.14.0 python-dateutil==2.8.1 requests==2.25.1 certifi==2022.12.07 chardet==3.0.4 idna==2.9 urllib3==1.26.5 SQLAlchemy==1.3.11 pytz==2020.1
