@@ -71,7 +71,7 @@ Click on the name of each active response to open its source code.
 Windows endpoints
 -----------------
 
-The table below lists out-of-the-box scripts for Windows endpoints, located in the Wazuh agent ``C:\Program Files\ossec-agent\active-response\bin`` directory. Click on the name of each script to see its source code.
+The table below lists out-of-the-box scripts for Windows endpoints, located in the Wazuh agent ``C:\Program Files (x86)\ossec-agent\active-response\bin`` directory. Click on the name of each script to see its source code.
 
 .. |netsh.exe| replace:: `netsh.exe <https://github.com/wazuh/wazuh/blob/|WAZUH_CURRENT_MINOR|/src/active-response/netsh.c>`__
 .. |restart-wazuh.exe| replace:: `restart-wazuh.exe <https://github.com/wazuh/wazuh/blob/|WAZUH_CURRENT_MINOR|/src/active-response/restart-wazuh.c>`__
