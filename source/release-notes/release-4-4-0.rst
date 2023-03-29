@@ -3,7 +3,7 @@
 .. meta::
   :description: Wazuh 4.4.0 has been released. Check out our release notes to discover the changes and additions of this release.
 
-4.4.0 Release notes - 22 March 2023
+4.4.0 Release notes - 28 March 2023
 ======================================
 
 This section lists the changes in version 4.4.0. Every update of the Wazuh solution is cumulative and includes all enhancements and fixes from previous releases.
@@ -32,6 +32,9 @@ To solve some errors in the previous Ubuntu Linux 20.04 SCA Policy, we reworked 
 Wazuh added support for Azure Integration in Linux agents. Now this integration can run for both agents and managers. We modified the packages generation process to support Azure in those agents that are installed using the WPK packages. Each new WPK package contains all the updated binaries and source code, and the installer updates all files and binaries to support Azure integration.
 
 Finally, it’s essential to remark that we maintain support for all installation alternatives. Indeed we maintain and extend this support by adding more recent versions.
+
+.. Note::
+   Wazuh v4.4 will be the last version with central components support for some operating systems. Starting with Wazuh v4.5.0, central components will only support operating systems officially maintained by their vendors, such as Amazon Linux, RHEL, CentOS, and Ubuntu. Wazuh agents will maintain their current support status.
 
 Breaking changes
 ----------------
@@ -102,6 +105,7 @@ Wazuh manager
 - `#15853 <https://github.com/wazuh/wazuh/pull/15853>`_ The status field in SCA is deprecated.
 - `#16066 <https://github.com/wazuh/wazuh/pull/16066>`_ Agent group guessing now writes the new group directly on the master node based on the configuration hash.
 - `#16098 <https://github.com/wazuh/wazuh/pull/16098>`_ Added cascading deletion of membership table entries when deleting a group.
+- `#16499 <https://github.com/wazuh/wazuh/pull/16499>`_ Changed ``agent_groups`` CLI output so affected agents are not printed when deleting a group.
 
 
 Wazuh agent
@@ -673,7 +677,7 @@ More details about these changes are provided in the changelog of each component
 - `wazuh/wazuh <https://github.com/wazuh/wazuh/blob/v4.4.0/CHANGELOG.md>`_
 - `wazuh/wazuh-dashboard <https://github.com/wazuh/wazuh-kibana-app/blob/v4.4.0-2.4.1/CHANGELOG.md>`_
 - `wazuh/wazuh-kibana-app 7.10.2 <https://github.com/wazuh/wazuh-kibana-app/blob/v4.4.0-7.10.2/CHANGELOG.md>`_
-- `wazuh/wazuh-kibana-app 7.17.x <https://github.com/wazuh/wazuh-kibana-app/blob/v4.4.0-7.17.8/CHANGELOG.md>`_
+- `wazuh/wazuh-kibana-app 7.17.x <https://github.com/wazuh/wazuh-kibana-app/blob/v4.4.0-7.17.9/CHANGELOG.md>`_
 - `wazuh/wazuh-splunk <https://github.com/wazuh/wazuh-splunk/blob/v4.4.0-8.2/CHANGELOG.md>`_
 - `wazuh/wazuh-packages <https://github.com/wazuh/wazuh-packages/releases/tag/v4.4.0>`_
 

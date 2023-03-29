@@ -38,7 +38,7 @@ Take the following steps on your Ubuntu endpoint to create the file ``/usr/share
 
    .. code-block:: console
 
-      # echo -e "config_file\nsecond line of configuration\npassword_enabled: yes" > /usr/share/testfile.text
+      # echo -e "config_file\nsecond line of configuration\npassword_enabled: yes" > /usr/share/testfile.txt
 
 #. Verify that the file has been created:
 
