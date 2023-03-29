@@ -684,6 +684,10 @@ The current available type is: ``security_lake``.
 | :ref:`subscriber_iam_role_duration`    | Number of seconds between 900 and 3600                      | Optional (if set, it requires an iam_role_arn |
 |                                        |                                                             | to be provided)                               |
 +----------------------------------------+-------------------------------------------------------------+-----------------------------------------------+
+| :ref:`subscriber_sts_endpoint`         | Any valid VPC endpoint URL for STS                          | Optional                                      |
++----------------------------------------+-------------------------------------------------------------+-----------------------------------------------+
+| :ref:`subscriber_service_endpoint`     | Any valid endpoint URL for the Amazon SQS                   | Optional                                      |
++----------------------------------------+-------------------------------------------------------------+-----------------------------------------------+
 
 .. _subscriber_sqs_name:
 
@@ -736,6 +740,32 @@ A valid number of seconds that defines the duration of the session assumed when 
 +--------------------+------------------------------------------+
 | **Allowed values** | Number of seconds between 900 and 3600   |
 +--------------------+------------------------------------------+
+
+.. _subscriber_sts_endpoint:
+
+sts_endpoint
+^^^^^^^^^^^^
+
+The AWS Security Token Service VPC endpoint URL to be used when an IAM role is provided as the authentication method. Check the :ref:`Considerations for configuration <amazon_considerations>` page to learn more about VPC endpoints.
+
++--------------------+----------------------------------------+
+| **Default value**  | N/A                                    |
++--------------------+----------------------------------------+
+| **Allowed values** | Any valid VPC endpoint URL for STS     |
++--------------------+----------------------------------------+
+
+.. _subscriber_service_endpoint:
+
+service_endpoint
+^^^^^^^^^^^^^^^^
+
+The endpoint URL for the required Amazon SQS to be used to download the data from it. Check the :ref:`Considerations for configuration <amazon_considerations>` page to learn more about VPC and FIPS endpoints.
+
++--------------------+------------------------------------------------+
+| **Default value**  | N/A                                            |
++--------------------+------------------------------------------------+
+| **Allowed values** | Any valid endpoint URL for the Amazon SQS      |
++--------------------+------------------------------------------------+
 
 
 Example of configuration
