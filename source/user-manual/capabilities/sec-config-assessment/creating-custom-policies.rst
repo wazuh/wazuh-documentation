@@ -10,7 +10,7 @@ You need to consider the following four sections when creating custom policy fil
 
 .. _sca_policy_file_sections:
 
-.. table:: Policy file Sections
+.. table:: Policy file sections
     :widths: auto
 
     +--------------------+----------------+
@@ -339,7 +339,6 @@ The general form of a rule testing for contents is as follows:
 
 .. warning::
     - The context of a content check is limited to a **line**.
-    - Content checks are case-sensitive.
     - It is **mandatory** to respect the spaces around the ``->`` and ``compare`` separators.
     - If the **target** of a rule that checks for contents does not exist, the result will be ``Not applicable`` as it could not be checked.
 
