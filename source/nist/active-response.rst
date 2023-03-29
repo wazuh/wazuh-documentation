@@ -40,7 +40,7 @@ Wazuh server
 
    - ``command``: The active response script for the ``disable-account`` command disables a user account when triggered.
    - ``location``: This specifies where to execute the active response command. The ``local`` option executes the script on the monitored endpoint where the event occurred. 
-   - ``rules_id``:  This active response script runs when an alert for rule ID ``5503`` is generated. Rule ID 5503 detects multiple failed terminal login attempts and generates alerts. You can define multiple rules by separating them with a comma.
+   - ``rules_id``:  This active response script runs when an alert for rule ID ``5503`` is generated. Rule ID ``5503`` detects multiple failed terminal login attempts and generates alerts. You can define multiple rules by separating them with a comma.
 
 #. Restart the Wazuh server to apply the configuration changes:
 
@@ -49,7 +49,7 @@ Wazuh server
 Ubuntu endpoint
 ^^^^^^^^^^^^^^^
 
-#. Create 2 users for this use case:
+#. Create two users for this use case:
 
    .. code-block:: console
        
@@ -79,7 +79,7 @@ Ubuntu endpoint
          :width: 80%
 
 
-#. Check that the account was successfully locked using the passwd command on the Ubuntu endpoint:
+#. Check that the account was successfully locked using the ``passwd`` command on the Ubuntu endpoint:
 
    .. code-block:: console
        

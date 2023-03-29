@@ -25,7 +25,7 @@ Using the Wazuh system inventory module for this use case, you can see all packa
 
    .. include:: /_templates/common/restart_agent.rst
 
-#. Select your agent in the Wazuh dashboard and click Inventory data.
+#. Select your agent in the Wazuh dashboard and click **Inventory data**.
 
    .. thumbnail:: /images/nist/inventory-data.png    
       :title: Inventory data

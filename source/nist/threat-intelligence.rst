@@ -22,7 +22,7 @@ Use cases
 Review MITRE ATT&CK techniques in your environment 
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-In this use case, Wazuh helps meet the **PM-16 Threat awareness program** requirement by providing the **MITRE ATT&CK** module for threat information sharing. review various MITRE ATT&CK techniques and see the events associated with those techniques in your environment. To perform this review, follow the steps below:
+In this use case, Wazuh helps meet the **PM-16 Threat awareness program** requirement by providing the **MITRE ATT&CK** module for threat information sharing. Review various MITRE ATT&CK techniques and see the events associated with those techniques in your environment. To perform this review, follow the steps below:
 
 #. Select the **MITRE ATT&CK** module on the Wazuh dashboard.
 
