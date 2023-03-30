@@ -12,7 +12,7 @@ The :doc:`Wazuh System inventory </getting-started/use-cases/system-inventory>` 
 
 - **CM-8 System component inventory**: *“System components are discrete, identifiable information technology assets that include hardware, software, and firmware. Organizations may choose to implement centralized system component inventories that include components from all organizational systems. In such situations, organizations ensure that the inventories include system-specific information required for component accountability. The information necessary for effective accountability of system components includes the system name, software owners, software version numbers, hardware inventory specifications, software license information, and for networked components, the machine names and network addresses across all implemented protocols (e.g., IPv4, IPv6). Inventory specifications include date of receipt, cost, model, serial number, manufacturer, supplier information, component type,  and physical location.”*
 
-The NIST 800-53 controls above require you to maintain an inventory of system components, including ports, protocols, applications, and services, and their authorized usage. The **CM-7 Least functionality** requirement specifies that only the minimum useful set of features necessary for software or systems to perform their required functions should be permitted. The Wazuh system inventory module helps to meet an aspect of this control by providing detailed information on processes, packages, and ports that run on a monitored endpoint.
+The NIST 800-53 controls above require you to maintain an inventory of system components, including ports, protocols, applications, and services, and their authorized usage. The **CM-7 Least functionality** requirement specifies that you must permit only a minimum useful set of features necessary for software or systems functioning. The Wazuh system inventory module helps to meet an aspect of this control by providing detailed information on processes, packages, and ports that run on a monitored endpoint.
 
 Use case: Inventory of applications installed on a Windows endpoint 
 -------------------------------------------------------------------
@@ -23,7 +23,20 @@ Using the Wazuh system inventory module for this use case, you can see all packa
 
 #. Restart the Wazuh agent to trigger a new system inventory scan.
 
-   .. include:: /_templates/common/restart_agent.rst
+   .. tabs::
+      
+      .. group-tab:: PowerShell (as an administrator)
+      
+         .. code-block:: powershell
+         
+            > Restart-Service -Name wazuh      
+      
+      .. group-tab:: CMD (as an administrator)
+      
+         .. code-block:: doscon
+         
+            > net stop wazuh
+            > net start wazuh
 
 #. Select your agent in the Wazuh dashboard and click **Inventory data**.
 

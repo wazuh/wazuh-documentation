@@ -28,13 +28,15 @@ In this scenario, the Wazuh FIM monitors the SSH configuration file ``/etc/ssh/s
 
 #. Add the following configuration to the ``<syscheck>`` block of the Wazuh agent configuration file ``/var/ossec/etc/ossec.conf``. This monitors the ``/etc/ssh/sshd_config`` file for changes:
 
-    .. code-block:: console
+    .. code-block:: xml
         
         <directories report_changes="yes" realtime="yes">/etc/ssh/sshd_config</directories>
 
 #. Restart the Wazuh agent to apply the changes:
         
-   .. include:: /_templates/common/restart_agent.rst
+   .. code-block:: console
+
+      # systemctl restart wazuh-agent
 
 #. Change the ``PasswordAuthentication`` option in the ``/etc/ssh/sshd_config`` file from ``no`` to ``yes`` to create a change in the SSH configuration:
 
@@ -66,15 +68,17 @@ In this scenario, the Wazuh FIM monitors the Uncomplicated Firewall (UFW) rule f
 
 #. Add the following configuration to the ``<syscheck>`` block of the Wazuh agent configuration file ``/var/ossec/etc/ossec.conf``  . This monitors all UFW rule files for changes:
 
-    .. code-block:: console
+   .. code-block:: xml
         
-        <directories report_changes="yes" whodata="yes">/etc/ufw/</directories>
+      <directories report_changes="yes" whodata="yes">/etc/ufw/</directories>
 
    UFW stores its rule files in the ``/etc/ufw/`` directory, and all rule files have the extension ``.rules``. We use the configuration above to monitor the modification, addition, and deletion of any files in the ``/etc/ufw/`` directory.
 
 #. Restart the Wazuh agent to apply the changes:
         
-   .. include:: /_templates/common/restart_agent.rst
+   .. code-block:: console
+
+      # systemctl restart wazuh-agent
 
 #. Modify the permissions for an existing rule file, ``user.rules``, in the ``/etc/ufw`` directory to create a change to the UFW rule files:
 

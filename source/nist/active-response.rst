@@ -28,7 +28,7 @@ Wazuh server
 
 #. Add the following configuration to the ``<ossec-config>`` block of the Wazuh server configuration file ``/var/ossec/etc/ossec.conf``:
 
-   .. code-block:: console
+   .. code-block:: xml
        
       <ossec-config> 
         <active-response>
@@ -87,9 +87,9 @@ Ubuntu endpoint
 
 
 
-   .. code-block:: console
+   .. code-block:: none
       :class: output
 
-         jon L 11/24/2022 0 99999 7 -1
+      jon L 11/24/2022 0 99999 7 -1
 
 The ``L`` flag indicates the account is locked.

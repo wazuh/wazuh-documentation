@@ -25,7 +25,9 @@ This use case shows how Wazuh helps meet the **CM-6 Configuration settings** req
 
 #. Restart the Wazuh agent to trigger a new SCA scan.
 
-   .. include:: /_templates/common/restart_agent.rst
+   .. code-block:: console
+
+      # systemctl restart wazuh-agent
 
 #. Select the **Security configuration assessment** module on your Wazuh dashboard. SCA scans are enabled by default so you don’t require further configuration actions.
 
