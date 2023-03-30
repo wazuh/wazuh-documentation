@@ -6,7 +6,7 @@
 Visualization and dashboard
 ===========================
 
-Wazuh offers a web dashboard for data visualization and analysis. The Wazuh dashboard comes with out-of-the-box modules for: security events, compliance, detected vulnerable applications, file integrity monitoring data, configuration assessment results, and cloud infrastructure monitoring. It’s useful for performing forensic and historical alert analysis.
+Wazuh offers a web dashboard for data visualization and analysis. The Wazuh dashboard comes with out-of-the-box modules for security events, compliance, detected vulnerable applications, file integrity monitoring data, configuration assessment results, and cloud infrastructure monitoring. It’s useful for performing forensic and historical alert analysis.
 
 The Wazuh dashboard assists in meeting the following HIPAA section:
 
