@@ -77,7 +77,7 @@ To achieve this configuration, follow these steps:
 
          WAZUH_MANAGER_IP=nginx_ip WAZUH_PROTOCOL="tcp" \
          WAZUH_PASSWORD="xxxx" \
-         yum install wazuh-agent-4.3.10
+         yum install wazuh-agent-4.3.10-1
          
       In this example, make sure to replace ``<xxxx>`` with your actual password.
 
@@ -114,6 +114,6 @@ In case your agents are located in AWS, you can access our Wazuh Cloud service s
 
       WAZUH_MANAGER_IP=vpce-<aws-endpoint-id>.vpce-svc-<aws-service-id>.<region>.vpce.amazonaws.com WAZUH_PROTOCOL="tcp" \
       WAZUH_PASSWORD="xxxx" \
-      yum install wazuh-agent-4.3.10
+      yum install wazuh-agent-4.3.10-1
 
    In this example, make sure to replace ``<xxxx>`` with your actual password.
