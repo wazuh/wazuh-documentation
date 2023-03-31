@@ -66,7 +66,7 @@ Follow this guide to migrate from Open Distro for Elasticsearch 1.13 to the Wazu
 
           .. code-block:: console
 
-            # yum -y install wazuh-indexer-4.3.10-1
+            # yum -y install wazuh-indexer-|WAZUH_CURRENT|-|WAZUH_INDEXER_CURRENT_REV|
 
 
 
@@ -74,7 +74,7 @@ Follow this guide to migrate from Open Distro for Elasticsearch 1.13 to the Wazu
 
           .. code-block:: console
 
-            # apt-get -y install wazuh-indexer=4.3.10-1
+            # apt-get -y install wazuh-indexer=|WAZUH_CURRENT|-|WAZUH_INDEXER_CURRENT_REV|
 
 
 #. Create the ``/etc/wazuh-indexer/certs`` directory, copy your old certificates to the new location and change ownership and permissions. Note that the ``admin.pem`` and ``admin-key.pem`` certificates do not exist on every Elasticsearch node.
