@@ -46,7 +46,7 @@ Select your package manager and follow the instructions to upgrade the Wazuh age
 
        .. code-block:: console
 
-          # yum upgrade wazuh-agent
+          # yum upgrade wazuh-agent-|WAZUH_CURRENT|-|WAZUH_REVISION_YUM_AGENT_X86|
 
 
     #. It is recommended to disable the Wazuh repository in order to avoid undesired upgrades and compatibility issues as the Wazuh agent should always be in the same or an older version than the Wazuh manager.
@@ -130,7 +130,7 @@ Select your package manager and follow the instructions to upgrade the Wazuh age
 
         .. code-block:: console
 
-          # zypper update wazuh-agent
+          # zypper update wazuh-agent-|WAZUH_CURRENT|-|WAZUH_REVISION_YUM_AGENT_X86|
 
 
     #. It is recommended to disable the Wazuh repository in order to avoid undesired upgrades and compatibility issues as the Wazuh agent should always be in the same or an older version than the Wazuh manager. 

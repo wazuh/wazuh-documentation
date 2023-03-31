@@ -56,13 +56,13 @@ When upgrading a multi-node Wazuh manager cluster, run the upgrade in every node
 
          .. code-block:: console
 
-            # yum upgrade wazuh-manager
+            # yum upgrade wazuh-manager-|WAZUH_CURRENT|-|WAZUH_REVISION_YUM_MANAGER_X86|
 
       .. group-tab:: APT
 
          .. code-block:: console
 
-            # apt-get install wazuh-manager=4.3.10
+            # apt-get install wazuh-manager=|WAZUH_CURRENT|-|WAZUH_REVISION_DEB_MANAGER_X86|
 
    .. note::
 
@@ -393,7 +393,7 @@ Upgrading Kibana
 
           .. code-block:: console
 
-            # zypper update kibana=|ELASTICSEARCH_ELK_LATEST|
+            # zypper update kibana-|ELASTICSEARCH_ELK_LATEST|
 
 #. **(For upgrades from 3.x versions)** Remove generated bundles and the ``wazuh-registry.json`` file:
 

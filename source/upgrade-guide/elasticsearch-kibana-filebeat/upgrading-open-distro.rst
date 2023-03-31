@@ -52,13 +52,13 @@ When upgrading a multi-node Wazuh manager cluster, run the upgrade in every node
 
          .. code-block:: console
 
-            # yum upgrade wazuh-manager
+            # yum upgrade wazuh-manager-|WAZUH_CURRENT|-|WAZUH_REVISION_YUM_MANAGER_X86|
 
       .. group-tab:: APT
 
          .. code-block:: console
 
-            # apt-get install wazuh-manager=4.3.10
+            # apt-get install wazuh-manager=|WAZUH_CURRENT|-|WAZUH_REVISION_DEB_MANAGER_X86|
 
    .. note::
 
