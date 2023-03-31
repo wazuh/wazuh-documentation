@@ -2,6 +2,6 @@
 
 .. code-block:: console
 
-  # zypper install wazuh-agent
+  # zypper install wazuh-agent-4.3.10
 
 .. End of include file

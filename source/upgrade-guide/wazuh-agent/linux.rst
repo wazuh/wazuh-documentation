@@ -76,7 +76,7 @@ Select your package manager and follow the instructions to upgrade the Wazuh age
         .. code-block:: console
 
           # apt-get update
-          # apt-get install wazuh-agent
+          # apt-get install wazuh-agent=|WAZUH_CURRENT|-|WAZUH_REVISION_DEB_AGENT_X86|
 
 
     #. It is recommended to disable the Wazuh repository in order to avoid undesired upgrades and compatibility issues as the Wazuh agent should always be in the same or an older version than the Wazuh manager. Skip this step if the package is set to a ``hold`` state.

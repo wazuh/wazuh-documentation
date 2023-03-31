@@ -58,7 +58,7 @@ When upgrading a multi-node Wazuh manager cluster, run the upgrade in every node
 
          .. code-block:: console
 
-            # apt-get install wazuh-manager
+            # apt-get install wazuh-manager=4.3.10
 
    .. note::
 

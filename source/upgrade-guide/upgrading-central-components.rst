@@ -211,7 +211,7 @@ Upgrading the Wazuh dashboard
 
          .. code-block:: console
 
-            # apt-get install wazuh-dashboard
+            # apt-get install wazuh-dashboard=4.3.10
 
 #. Restart the Wazuh dashboard:
 
