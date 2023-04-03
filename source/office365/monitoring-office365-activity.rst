@@ -240,7 +240,10 @@ If Wazuh successfully connects to Office 365 API, the events raised above will t
         },
         "location":"office365"
     }
-   
-.. note::
-   Once the configuration is complete, you can enable the `Security Information` visualization feature in the **Wazuh Dashboard**. You can read more about it `here <https://documentation.wazuh.com/current/user-manual/wazuh-dashboard/settings.html#modules>`_.
+ 
 
+Enabling dashboard visualization  
+--------------------------------
+
+   Once the configuration is complete, you can enable the `Security Information` visualization feature in the **Wazuh Dashboard**. You can read more about it `here <https://documentation.wazuh.com/current/user-manual/wazuh-dashboard/settings.html#modules>`_.
+  

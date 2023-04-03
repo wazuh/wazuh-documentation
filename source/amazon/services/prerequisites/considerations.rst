@@ -223,6 +223,9 @@ The following is an example of a valid configuration.
 
   </wodle>
   
-.. note::
+  
+Enabling dashboard visualization  
+--------------------------------
+  
    Once the configuration is complete, you can enable the `Security Information` visualization feature in the **Wazuh Dashboard**. You can read more about it `here <https://documentation.wazuh.com/current/user-manual/wazuh-dashboard/settings.html#modules>`_.
 
