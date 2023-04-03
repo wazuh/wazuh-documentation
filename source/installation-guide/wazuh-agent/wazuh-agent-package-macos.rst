@@ -46,8 +46,8 @@ The agent runs on the endpoint you want to monitor and communicates with the Waz
 
                 .. thumbnail:: ../../images/installation/macos-agent.png
                    :align: center
-                   :title: macOS agent
-                   :alt: macOS agent
+                   :title: macOS agent installer
+                   :alt: macOS agent installer
                    
              #. To complete the installation process, start the Wazuh agent.
     
