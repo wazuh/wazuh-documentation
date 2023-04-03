@@ -16,8 +16,8 @@ These are the two main components in this type of multi-tier server:
 -  The **forwarder** runs on the Wazuh manager and the Wazuh API instance. It reads local data and sends it to the indexer.
 
 .. thumbnail:: /images/splunk-cluster/splunk-distributed-architecture.png
-   :title: Splunk distributed architecture
-   :alt: Splunk distributed architecture
+   :title: Minimal Splunk distributed architecture
+   :alt: Minimal Splunk distributed architecture
    :align: center
    :width: 80%
 
