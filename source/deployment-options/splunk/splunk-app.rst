@@ -112,7 +112,7 @@ Install the Wazuh app for Splunk in an all-in-one architecture
 
 #. Open the “Overview” tab, and you should start seeing alerts and events.
 
-   .. thumbnail:: /images/splunk-app/overview-tab.png
+   .. thumbnail:: /images/splunk-app/alerts-dashboard.png
       :align: left
       :width: 100%
       :title: Alerts dashboard
