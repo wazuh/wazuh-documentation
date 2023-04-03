@@ -1,6 +1,6 @@
 .. Copyright (C) 2015, Wazuh, Inc.
 
-#. Download the `Wazuh agent for Solaris 10 i386 <https://packages.wazuh.com/4.x/solaris/i386/10/wazuh-agent_v4.4.0-sol10-i386.pkg>`_ package. 
+#. Download the `Wazuh agent for Solaris 10 i386 <https://packages.wazuh.com/4.x/solaris/i386/10/wazuh-agent_v4.4.1-sol10-i386.pkg>`_ package. 
 
 #. Install the Wazuh agent.
 
