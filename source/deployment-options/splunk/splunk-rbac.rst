@@ -39,7 +39,9 @@ Before any user role mapping can be done, the Wazuh API connection inside the Sp
       -  Ensure that the “wazuh” user API credentials have already been added to the API configuration.
       -  You can get more information about how to set up the credentials at :doc:`Securing the Wazuh API </user-manual/api/securing-api>` section.
     
-   .. thumbnail:: /images/splunk-app/24.png
+   .. thumbnail:: /images/splunk-app/wazuh-api-setting.png
+      :title: Wazuh API setting
+      :alt: Wazuh API setting
       :align: left
       :width: 100%
 
@@ -52,13 +54,17 @@ Creating and setting a Wazuh admin user
 
 #. Go to the “Security” tab. Select “Users” then “Add new user”.
 
-   .. thumbnail:: /images/splunk-app/25.png
+   .. thumbnail:: /images/splunk-app/security-tab.png
+      :title: Security tab
+      :alt: Security tab
       :align: left
       :width: 100%
 
 #. Specify the username and password, then select the “administrator” role for the user and save.
 
-   .. thumbnail:: /images/splunk-app/26.png
+   .. thumbnail:: /images/splunk-app/specify-username-and-password.png
+      :title: Specify the username and password
+      :alt: Specify the username and password
       :align: left
       :width: 100%
 
@@ -71,13 +77,17 @@ Creating and setting a Wazuh read-only user
 
 #. Go to the “Security” tab. Select “Users” then “Add new user”.
 
-   .. thumbnail:: /images/splunk-app/27.png
+   .. thumbnail:: /images/splunk-app/add-new-user.png
+      :title: Add new user
+      :alt: Add new user
       :align: left
       :width: 100%
 
 #. Specify the username and password, then select the “readonly” role for the user and save.
 
-   .. thumbnail:: /images/splunk-app/28.png
+   .. thumbnail:: /images/splunk-app/select-readonly-role.png
+      :title: Select the “readonly” role
+      :alt: Select the “readonly” role
       :align: left
       :width: 100%
 
@@ -90,13 +100,17 @@ Creating roles
 
 #. Go to the “Security” tab. Select “Roles” then “Add new role”.
 
-   .. thumbnail:: /images/splunk-app/29.png
+   .. thumbnail:: /images/splunk-app/add-new-role.png
+      :title: Add new role
+      :alt: Add new role
       :align: left
       :width: 100%
 
 #. Specify the role name and select the policies you want to apply to the role. Then save.
 
-   .. thumbnail:: /images/splunk-app/30.png
+   .. thumbnail:: /images/splunk-app/select-the-policies.png
+      :title: Select the policies
+      :alt: Select the policies
       :align: left
       :width: 100%
 
@@ -109,7 +123,9 @@ Creating policies
 
 #. Go to the “Security” tab. Select “Policies” then “Add new policy”.
 
-   .. thumbnail:: /images/splunk-app/31.png
+   .. thumbnail:: /images/splunk-app/select-policies.png
+      :title: Select Policies
+      :alt: Select Policies
       :align: left
       :width: 100%
 
@@ -117,7 +133,9 @@ Creating policies
 
 #. Proceed to select the resource and resource identifier the policy will apply to.Then select an effect of the policy.
 
-   .. thumbnail:: /images/splunk-app/32.png
+   .. thumbnail:: /images/splunk-app/select-the-resource.png
+      :title: Select the resource
+      :alt: Select the resource
       :align: left
       :width: 100%
 
@@ -132,7 +150,9 @@ Mapping roles to users
 
 #. Go to the “Security” tab. Select “Roles Mapping” then “Add new role mapping”.
 
-   .. thumbnail:: /images/splunk-app/33.png
+   .. thumbnail:: /images/splunk-app/add-new-role-mapping.png
+      :title: Add new role mapping
+      :alt: Add new role mapping
       :align: left
       :width: 100%   
 
@@ -144,8 +164,9 @@ Mapping roles to users
 
    - Internal users: The internal users to map a role to.
 
-
-   .. thumbnail:: /images/splunk-app/34.png
+   .. thumbnail:: /images/splunk-app/complete-roles-mapping-fields.png
+      :title: Complete roles mapping fields
+      :alt: Complete roles mapping fields
       :align: left
       :width: 100%
 
