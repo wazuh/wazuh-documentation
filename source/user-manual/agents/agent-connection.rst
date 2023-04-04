@@ -18,6 +18,7 @@ You can check the connection status of any agent by selecting the **Agents** men
 
 .. thumbnail:: /images/manual/managing-agents/agents-menu.png
    :title: Wazuh dashboard agents menu option
+   :alt: Wazuh dashboard agents menu option
    :align: center
    :width: 80%
 
@@ -25,6 +26,7 @@ This option shows the **Agents** dashboard with a list of all registered agents.
 
 .. thumbnail:: /images/manual/managing-agents/agents-dashboard.png
    :title: Wazuh dashboard agents menu option
+   :alt: Wazuh dashboard agents menu option
    :align: center
    :width: 80%
 

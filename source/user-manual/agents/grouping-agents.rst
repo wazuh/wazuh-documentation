@@ -355,5 +355,6 @@ In the case of belonging to multiple groups, the configuration files of every gr
 
 .. thumbnail:: ../../images/manual/multiple-groups.png
     :title: Multi-group shared files
+    :alt: Multi-group shared files
     :align: center
     :width: 70%

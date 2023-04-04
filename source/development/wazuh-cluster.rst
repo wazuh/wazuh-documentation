@@ -37,6 +37,7 @@ The following diagram shows a typical Wazuh cluster architecture:
 
 .. thumbnail:: ../images/manual/cluster/cluster-infrastructure.png
     :title: Wazuh cluster infrastructure
+    :alt: Wazuh cluster infrastructure
     :align: center
     :width: 80%
 
