@@ -33,6 +33,7 @@ Follow these steps to upgrade Wazuh agents locally on Windows systems. If you wa
 
             .. thumbnail:: /images/installation/windows.png
               :title: Windows agent
+              :alt: Windows agent
               :align: center
               :width: 100%
    

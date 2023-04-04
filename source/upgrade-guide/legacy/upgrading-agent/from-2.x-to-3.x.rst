@@ -114,6 +114,7 @@ To upgrade the Wazuh agent choose the appropriate tab for the desired operating 
 
             .. thumbnail:: ../../../images/installation/windows.png    
               :title: Windows agent
+              :alt: Windows agent
               :align: left
               :width: 100%
 
