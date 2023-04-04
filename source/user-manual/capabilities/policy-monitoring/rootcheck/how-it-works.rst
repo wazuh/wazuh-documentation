@@ -10,6 +10,7 @@ How it works
 
 .. thumbnail:: ../../../../images/manual/policy-compliance/rootcheck-compliance.png
   :title: Rootcheck policies
+  :alt: Rootcheck policies
   :align: center
   :width: 100%
 

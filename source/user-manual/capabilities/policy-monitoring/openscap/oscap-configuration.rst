@@ -113,6 +113,7 @@ Note that each field is extracted to facilitate searches and analysis.
 
 .. thumbnail:: ../../../../images/wodles-oscap/pci-oscap.png
     :title: PCI OpenSCAP
+    :alt: PCI OpenSCAP
     :align: center
     :width: 100%
 
@@ -122,6 +123,7 @@ Finally, you can explore all results using the OpenSCAP module.
 
 .. thumbnail:: ../../../../images/wodles-oscap/pci-dashboard.png
     :title: OpenSCAP module
+    :alt: OpenSCAP module
     :align: center
     :width: 100%
 

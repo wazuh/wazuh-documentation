@@ -81,7 +81,9 @@ How the cluster works
     All cluster logs are written in the file ``logs/cluster.log``.
 
     .. thumbnail:: ../../images/manual/cluster/cluster-flow.png
-      :align: center
+       :title: Wazuh cluster workflow
+       :alt: Wazuh cluster workflow
+       :align: center
 
 Keep alive thread
 ~~~~~~~~~~~~~~~~~

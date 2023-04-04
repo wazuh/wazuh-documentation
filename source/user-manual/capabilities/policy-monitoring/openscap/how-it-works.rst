@@ -83,6 +83,7 @@ Wodle flow
 
 .. thumbnail:: ../../../../images/manual/policy-compliance/openscap-flow.png
   :title: OpenSCAP
+  :alt: OpenSCAP
   :align: center
   :width: 100%
 

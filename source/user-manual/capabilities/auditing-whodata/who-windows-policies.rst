@@ -28,6 +28,7 @@ Recommended option to configure policies. You have to activate the following opt
 
 .. thumbnail:: ../../../images/whodata/audit-policies.png
     :title: Audit policies configuration
+    :alt: Audit policies configuration 
     :align: center
     :width: 60%
 
@@ -41,5 +42,6 @@ Security Settings -> Local Policies -> Audit Policy -> Audit object access
 
 .. thumbnail:: ../../../images/whodata/audit-policies-old-method.png
     :title: Audit policies configuration (old method)
+    :alt: Audit policies configuration (old method)
     :align: center
     :width: 60%

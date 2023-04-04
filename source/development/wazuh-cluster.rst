@@ -84,6 +84,7 @@ The image below shows a schema of how a master node and a worker node interact w
 
 .. thumbnail:: ../images/manual/cluster/cluster-flow.png
     :title: Wazuh cluster workflow
+    :alt: Wazuh cluster workflow
     :align: center
     :width: 80%
 

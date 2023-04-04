@@ -10,6 +10,7 @@ The below image illustrates how events flow through the Wazuh environment.
 
 .. thumbnail:: ../../../images/manual/log-analysis/log-analysis-flow.png
     :title: Log analysis flow
+    :alt: Log analysis flow
     :align: center
     :width: 100%
 

@@ -10,6 +10,7 @@ Since v3.12.0, Wazuh has used the new FIM module. To learn about the functionali
 
 .. thumbnail:: ../../../images/manual/fim/fim-flow.png
   :title: File integrity monitoring
+  :alt: File integrity monitoring
   :align: center
   :width: 100%
 
@@ -55,8 +56,9 @@ By default, each Wazuh agent has the syscheck enabled and preconfigured, but it 
 
 File integrity monitoring results for the whole environment can be observed in the Wazuh dashboard in the *Overview > Integrity monitoring* section:
 
-.. thumbnail:: ../../../images/manual/fim/fim-kibana-overview-1.png
+.. thumbnail:: ../../../images/manual/fim/fim-overview.png
   :title: Wazuh dashboard: Fim overview
+  :alt: Wazuh dashboard: Fim overview
   :align: center
   :width: 100%
 
