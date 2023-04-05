@@ -11,124 +11,213 @@ Amazon Security Lake
 .. versionadded:: 4.5.0
 
 
-Amazon Security Lake is a fully-managed security data lake service that allows you to centrally aggregate, manage, and use security-related log and event data at scale. All logs in Amazon Security Lake are formatted using the OCSF standard.
-You can use the Wazuh integration for Amazon Security Lake to ingest security events from AWS services normalized to the Open Cybersecurity Schema Framework (OCSF) schema. These events will be made available as multi-event Apache Parquet objects in an S3 bucket. Each object will have a corresponding SQS notification, once ready for download. Wazuh will periodically check for new SQS notifications, download new objects, convert the files from Parquet to JSON and index each event into your Wazuh Indexer.
+Amazon Security Lake is a fully-managed security data lake service that consolidates data from multiple AWS and other services optimizing storage costs and performance at scale.
+All logs in Amazon Security Lake use the Open Cybersecurity Schema Framework (OCSF) standard for the formatting. You can use the Wazuh integration for Amazon Security Lake to ingest security events from AWS services.
+These events are available as multi-event Apache Parquet objects in an S3 bucket. Each object has a corresponding SQS notification, once it’s ready for download.
+Wazuh periodically checks for new SQS notifications, downloads new objects, converts the files from Parquet to JSON and indexes each event into the Wazuh indexer.
+To set up the Wazuh integration for Amazon Security Lake as a subscriber, you need to do the following:
 
-
-To set up Amazon Security Lake, you’ll need to:
-
-#. Configure AWS to send data to Wazuh.
-#. Set up Amazon Security Lake in Wazuh.
-#. Verify the configuration.
-
+#. Create a subscriber in Amazon Security Lake.
+#. Set up the Wazuh integration for Amazon Security Lake.
 
 AWS configuration
 -----------------
 
-Step 1: Enable Amazon Security Lake
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+Enabling Amazon Security Lake
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-If you haven’t already, ensure that you have enabled Amazon Security Lake by following the instructions at: https://docs.aws.amazon.com/security-lake/latest/userguide/getting-started.html#enable-service
-If you have (or expect to have) multiple AWS accounts, we strongly encourage you to make use of AWS Organizations and to set up Amazon Security Lake at the Organization level.
+If you haven’t already, ensure that you have enabled Amazon Security Lake by following the instructions at `Getting started - Amazon Security Lake <https://docs.aws.amazon.com/security-lake/latest/userguide/getting-started.html#enable-service>`_ .
 
-
-Step 2: Create a Subscriber in Amazon Security Lake
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-After completing all required AWS prerequisites, configure a subscriber for Amazon Security Lake either via the AWS console or command line interface. This creates the resources needed to make the Amazon Security Lake events available to be consumed into your Wazuh platform deployment.
-
-AWS Console steps
------------------
-
-1. Log into your AWS console.
-2. Set up a subscriber.
-    1. Navigate to Subscribers, and click Add subscribers.
-    2. Click Create custom subscriber.
-    3. On the Create subscriber page, fill out the details that apply to your deployment.
-        1. Create a name for your subscriber.
-        2. Choose to either collect all log and event sources, or only specific log and event sources.
-        3. Select S3 as your data access method.
-        4. Enter your subscriber credentials.
-            1. Enter the Account ID from where you want to collect events.
-            2. Enter a placeholder value as an External ID. External ID is not needed by Wazuh for Amazon Security Lake, but the field must be populated when creating a subscriber. For example, placeholder-ta-value.
-            3. Under Notification details select SQS queue
-        5. Click the Create button.
-    4. On the Subscribers page, navigate to the My subscribers section, and click on your newly created subscriber.
-    5. On the subscriber Details page, check to verify that the subscriber has been created with the correct parameters.
+For multiple AWS accounts, we strongly encourage you to use AWS Organizations and to set up Amazon Security Lake at the Organization level.
 
 
-AWS Command Line Interface Steps
---------------------------------
+Creating a Subscriber in Amazon Security Lake
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-Perform the following CLI command to create a subscriber:
+After completing all required AWS prerequisites, configure a subscriber for Amazon Security Lake via the AWS console. This creates the resources you need to make the Amazon Security Lake events available for consumption into your Wazuh platform deployment.
 
-.. code-block:: console
+Setting up a subscriber in the AWS Console
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-    $ aws securitylake create-subscriber --account-id <> --external-id <placeholder_text> --subscriber-name <subscriber-name> –access-types S3 --source-types awsSourceType=<"ROUTE53" or "VPC_FLOW" or "CLOUD_TRAIL" or "SH_FINDINGS">
-    CLI Output: { "roleArn": "<IAM role ARN>", "s3BucketArn": "<S3 ARN>", "subscriptionId": "<subscription ID>"}
+Logging in and navigating
+~~~~~~~~~~~~~~~~~~~~~~~~~
 
-
-Create an SQS queue
--------------------
-
-Perform the following CLI command to create an SQS Queue:
-.. code-block:: console
-
-  $ aws securitylake create-subscription-notification-configuration --create-sqs --subscription-id <subscription ID from above command>
-  CLI Output: {"queueArn": "arn:aws:" }
-
-.. note::
-
-  For more information, see the create-subscriber and create-subscription-notification-configuration topics in the AWS CLI Command Reference manual.
-  https://awscli.amazonaws.com/v2/documentation/api/latest/reference/securitylake/create-subscriber.html
-  https://awscli.amazonaws.com/v2/documentation/api/latest/reference/securitylake/create-subscription-notification-configuration.html
+#. Log into your AWS console and navigate to Security Lake.
+#. Navigate to Subscribers, and click Create subscriber to get to the Create subscriber page.
 
 
-Verify information in SQS Queue
--------------------------------
+Creating a subscriber
+~~~~~~~~~~~~~~~~~~~~~
 
-Perform the following steps in your Amazon deployment to verify the information in the SQS Queue that Security Lake creates.
+#. Create a descriptive name for your subscriber. For example, Wazuh.
+#. Choose to either collect all log and event sources, or only specific log and event sources.
+#. Select S3 as your data access method.
+#. Enter the AWS account ID for the account you are currently logged into.
+#. Enter a placeholder value in External ID. For example, placeholder-ta-value. While Wazuh doesn’t need an External ID for Amazon Security Lake, you still have to populate the field when creating a subscriber.
+#. Under Notification details select SQS queue.
+#. Click the Create button to get to the Subscribers pages.
 
-1. In your AWS console, navigate to the Amazon SQS service.
-2. In the Queues section, navigate to the SQS Queue that Security Lake created, and click on the name.
-3. On the information page for the SQS Queue that Security Lake created, perform the following validation steps.
-    
-    1. Click on the Monitoring tab to verify that events are flowing into the SQS Queue.
-    2. Click on the Dead-letter queue tab to verify that a dead-letter queue (DLQ) has been created. If a DLQ has not been created, see the Configuring a dead-letter queue (console) topic in the AWS documentation.
+Reviewing the subscriber
+~~~~~~~~~~~~~~~~~~~~~~~~
 
+#. Navigate to My subscribers section, and click on your newly created subscriber to get to the Subscriber Details page.
+#. Check that AWS created the subscriber with the correct parameters.
+#. Save the SQS queue name. You need the name of the Subscription endpoint for later on, when verifying the information in the SQS queue.
 
-Verify events are flowing into S3 bucket
-----------------------------------------
+Verifying information in SQS Queue
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-Perform the following steps in your Amazon deployment to verify that parquet events are flowing into your configured S3 buckets.
+Follow these steps in your Amazon deployment to verify the information for the SQS Queue that Security Lake creates.
 
-1. In your AWS console, navigate to the Amazon S3 service.
-2. Navigate to the Buckets section, and click on the S3 bucket that Security Lake created for each applicable region.
-3. In each applicable bucket, navigate to the Objects tab, and click through the directories to verify that Security Lake has available events flowing into the S3 bucket. If Security Lake is enabled on more than one AWS account, check to see if each applicable account number is listed, and that parquet files exist inside each account.
-4. In each applicable S3 bucket, navigate to the Properties tab.
-5. Navigate to Event notifications, and verify that the Security Lake SQS Queue that was created has event notifications turned on, and the data destination is the Security Lake SQS queue.
+#. In your AWS console, navigate to the Amazon Simple Queue Service.
+#. In the Queues section, navigate to the queue that Security Lake created. Click on its name.
+#. In the information page for the queue, click on the Monitoring tab. Verify that events are flowing in by looking at the Approximate Number Of Messages Visible graph and confirming the number is increasing.
+
+Verifying events are flowing into S3 bucket
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Follow these steps in your Amazon deployment to verify that parquet events are flowing into your configured S3 buckets.
+
+#. In your AWS console, navigate to the Amazon S3 service.
+#. Navigate to the Buckets section, and click on the S3 bucket name that Security Lake created for each applicable region. These bucket names start with the prefix aws-security-data-lake.
+#. In each applicable bucket, navigate to the Objects tab. Click through the directories to verify that Security Lake has available events flowing into the S3 bucket. Check that new files with the .gz.parquet extension appear.
+    #. If you enabled Security Lake on more than one AWS account, check if you see each applicable account number listed. Check that parquet files exist inside each account.
+#. In each applicable S3 bucket, navigate to the Properties tab and verify in the Event notifications section that the data destination is the Security Lake SQS queue.
 
 
 Wazuh configuration
 -------------------
 
-#. Open the Wazuh configuration file (``/var/ossec/etc/ossec.conf``) and add the following configuration block:
+Dependencies
+^^^^^^^^^^^^
 
-    .. code-block:: xml
+PyArrow is a Python package that allows for efficient manipulation of data, particularly Parquet files. Security lake creates Parquet files in the AWS S3 Buckets. PyArrow is useful to read these files containing the events.
+To install the dependency, execute the following command:
+
+.. code-block:: console
+
+  $ <WAZUH_PATH>/framework/python/bin/pip3 install pyarrow==11.0.0
+
+
+Security Lake section in ossec.conf 
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Set the configuration inside the section <subscriber type="security_lake">. You can find this tag inside the <wodle name="aws-s3"> section of the ossec.conf file.
+
+.. code-block:: xml
 
         <wodle name="aws-s3">
-            ...
+            <disabled>no</disabled>
+            <interval>1h</interval>
+            <run_on_start>yes</run_on_start>
             <subscriber type="security_lake">
                 <sqs_name>sqs-security-lake-main-queue</sqs_name>
-                <iam_role_arn>arn:aws:iam::example</iam_role_arn>
-                <iam_role_duration>1300</iam_role_duration> 
+                <iam_role_arn>arn:aws:iam::account-id:role/ASL-Role</iam_role_arn>
+                <iam_role_duration>1300</iam_role_duration>
                 <aws_profile>user_profile</aws_profile>
+                <sts_endpoint>sts-endpoint-IAM</sts_endpoint>
+                <service_endpoint>s3-vpc-endpoint</service_endpoint>     
             </subscriber>
         </wodle>
 
-    
 
-#. Restart Wazuh to apply the configuration changes.
+After setting the required parameters, restart Wazuh in order to apply the changes with the following command:
 
-    .. include:: /_templates/common/restart_manager.rst
+.. code-block:: console
+
+    $ systemctl restart wazuh-manager
+
+Please note that the module’s time of execution varies depending on the number of notifications present in the queue.
+
+
+Parameters
+^^^^^^^^^^
+
+The following fields inside the section allow you to configure the queue and authenticate:
+
+Queue configuration
+~~~~~~~~~~~~~~~~~~~
+
+*   <sqs_name> : The name of the queue
+*   <service_endpoint>- Optional: The AWS S3 endpoint URL to be used to download the data from the bucket. Check the Considerations for configuration page for more information about VPC and FIPS endpoints.
+
+Authentication
+~~~~~~~~~~~~~~
+
+There are two ways to set the authentication for the lake:
+
+Using an IAM role (recommended):
+""""""""""""""""""""""""""""""""
+
+*   <iam_role_arn>: ARN for the corresponding IAM role to assume.
+*   <iam_role_duration> – Optional: The session duration in seconds.
+*   <sts_endpoint>– Optional: The URL of the VPC endpoint of the AWS Security Token Service.
+
+    .. note::
+        Note: This authentication method requires some credentials to be previously added to the configuration using any other authentication method, e.g. using the /root/.aws/credentials file.
+
+Configuring an IAM role
+"""""""""""""""""""""""
+
+If you choose to authenticate using IAM, you must perform the following modifications to the IAM role:
+
+Configuring the role
+
+#. Follow these steps to modify the Security Lake subscriber role. You have to associate an existing user with the role.
+#. In your AWS console, navigate to the Amazon IAM service.
+#. In your Amazon IAM service, navigate to the Roles page.
+#. In the Roles page, select the Role name of the subscription role notification that was created as part of the Security Lake subscriber provisioning process.
+#. In the Summary page, navigate to the Trust relationships tab to modify the Trusted entity policy.
+#. Modify the Trusted entity policy with the following updates:
+#. Remove any reference to the External ID that was created during the Security Lake subscriber provisioning process.
+#. In the stanza containing the ARN, attach the username from your target user account to the end of the ARN. This step connects a user to the role. It lets you configure the Security Lake service with the secret access key. See the following example Trust entity:
+
+    .. code-block:: JSON
+
+        {
+            "Version": "2012-10-17",
+            "Statement": [
+                {
+                    "Sid": "1",
+                    "Effect": "Allow",
+                    "Principal": {
+                        "AWS": "arn:aws:iam::<account-id>:user/<user-account>"
+                    },
+                    "Action": "sts:AssumeRole"
+                }
+            ]
+        }
+
+
+Granting a user permissions to switch roles
+"""""""""""""""""""""""""""""""""""""""""""
+
+Follow these steps to configure the user permissions:
+
+#. In your Amazon IAM service, navigate to the Users page.
+#. In the Users page, select the Username of the user you have connected to the role.
+#. Add the following permission to switch to the new roles:
+
+    .. code-block:: JSON
+
+        {
+            "Version": "2012-10-17",
+            "Statement": [
+                {
+                "Sid": "VisualEditor1",
+                "Effect": "Allow",
+                "Action": "sts:AssumeRole",
+                "Resource": "arn:aws:iam::<account-id>:role/<resource>"
+                }
+            ]
+        }
+
+Using a profile (optional)
+""""""""""""""""""""""""""
+
+*   <aws_profile>: The name of credential profile to use
+
+More information about the different authentication methods can be found: `Configuring AWS credentials - Prerequisites · Wazuh documentation <https://documentation.wazuh.com/current/amazon/services/prerequisites/credentials.html>`_ .
+
 
 
