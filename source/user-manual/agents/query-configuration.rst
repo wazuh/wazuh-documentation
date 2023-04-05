@@ -19,8 +19,8 @@ The actual configuration of an agent, or the manager can be queried on demand by
 The image below shows that the agent configuration is synchronized:
 
 .. thumbnail:: ../../images/kibana-app/features/query-configuration/configuration-synchronized.png
-  :title: Configuration synchronized
-  :alt: Configuration synchronized
+  :title: Configuration is synchronized
+  :alt: Configuration is synchronized
   :align: center
 
 By clicking on the *Log collection* configuration, the active configuration is shown:

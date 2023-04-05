@@ -99,6 +99,7 @@ In this section, it will be shown how the leaky bucket acts when faced with an e
 .. thumbnail:: /images/manual/internal-capabilities/graphic-with-flood.png
     :title: Buffer usage with flooding
     :alt: Buffer usage with flooding
+    :align: center
     :width: 80%
 
 Normal status (green area)
