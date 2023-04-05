@@ -36,6 +36,11 @@ Wazuh Splunk app
 
 - Added support for Wazuh 4.4.1.
 
+Packages
+^^^^^^^^
+- `#2147 <https://github.com/wazuh/wazuh-packages/pull/2147>`_ Added Debian 11 SCA files to specs.
+
+
 Resolved issues
 ---------------
 
