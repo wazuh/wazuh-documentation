@@ -8,6 +8,7 @@ How it works
 
 .. thumbnail:: ../../../images/manual/command-monitoring/command-monitoring.png
   :title: Command monitoring
+  :alt: Command monitoring
   :align: center
   :width: 100%
 

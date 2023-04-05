@@ -123,7 +123,7 @@ Finally, you can explore all results using the OpenSCAP module.
 
 .. thumbnail:: ../../../../images/wodles-oscap/pci-dashboard.png
     :title: OpenSCAP module
-    :alt: OpenSCAP module
+    :alt: OpenSCAP module 
     :align: center
     :width: 100%
 
@@ -207,11 +207,13 @@ Note that each field is extracted to facilitate searches and analysis.
 
 .. thumbnail:: ../../../../images/wodles-oscap/oscap-example.png
     :title: OpenSCAP example
+    :alt: OpenSCAP example
     :align: center
     :width: 100%
 
 .. thumbnail:: ../../../../images/wodles-oscap/oscap-overview.png
     :title: OpenSCAP overview
+    :alt: OpenSCAP overview
     :align: center
     :width: 100%
 
@@ -222,6 +224,7 @@ Finally, you can explore all scan results using the OpenSCAP module.
 
 .. thumbnail:: ../../../../images/wodles-oscap/oscap-dashboard.png
     :title: OpenSCAP dashboard
+    :alt: OpenSCAP dashboard    
     :align: center
     :width: 100%
 

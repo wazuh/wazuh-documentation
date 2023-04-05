@@ -445,7 +445,8 @@ As an example, the rules in the following set of custom rules trigger when a por
 The alert for a port opening operation is displayed in the Wazuh dashboard as follows:
 
     .. thumbnail:: /images/manual/internal-capabilities/syscollector-port-inserted-alert.png
-      :title: Information from syscollector for "port" value.
+      :title: Information from syscollector for "port" value
+      :alt: Information from syscollector for "port" value
       :align: center
       :width: 100%
 
@@ -595,6 +596,7 @@ Moreover, the same information can be consulted on the Wazuh dashboard, which in
 
 .. thumbnail:: ../../images/manual/inventory.png
     :title: Inventory tab
+    :alt: Inventory tab
     :align: center
     :width: 100%
 
@@ -602,6 +604,7 @@ The *Dev tools* tab is also available to query the Wazuh API directly from the W
 
 .. thumbnail:: ../../images/manual/devtools-syscollector.png
     :title: Dev tools tab
+    :alt: Dev tools tab
     :align: center
     :width: 100%
 
