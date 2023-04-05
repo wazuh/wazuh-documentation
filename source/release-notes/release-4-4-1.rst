@@ -95,4 +95,4 @@ More details about these changes are provided in the changelog of each component
 - `wazuh/wazuh-kibana-app 7.10.2 <https://github.com/wazuh/wazuh-kibana-app/blob/v4.4.1-7.10.2-rc1/CHANGELOG.md>`_
 - `wazuh/wazuh-kibana-app 7.17.x <https://github.com/wazuh/wazuh-kibana-app/blob/v4.4.1-7.17.9-rc1/CHANGELOG.md>`_
 - `wazuh/wazuh-splunk <https://github.com/wazuh/wazuh-splunk/blob/v4.4.1-8.2-rc1/CHANGELOG.md>`_
-- `wazuh/wazuh-packages <https://github.com/wazuh/wazuh-packages/releases/tag/v4.4.1>`_
+- `wazuh/wazuh-packages <https://github.com/wazuh/wazuh-packages/releases/tag/v4.4.1-rc1>`_
