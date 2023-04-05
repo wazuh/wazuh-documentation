@@ -677,16 +677,17 @@ The current available type is: ``security_lake``.
 | :ref:`subscriber_sqs_name`             | Any valid SQS name                                          | Mandatory for Amazon Security Lake            |
 |                                        |                                                             | Subscription                                  |
 +----------------------------------------+-------------------------------------------------------------+-----------------------------------------------+
-| :ref:`subscriber_aws_profile`          | Valid profile name                                          | Optional                                      |
+| :ref:`subscriber_iam_role_arn`         | Valid role ARN                                              | Mandatory for Amazon Security Lake            |
+|                                        |                                                             | Subscription                                  |
 +----------------------------------------+-------------------------------------------------------------+-----------------------------------------------+
-| :ref:`subscriber_iam_role_arn`         | Valid role ARN                                              | Optional                                      |
+| :ref:`subscriber_aws_profile`          | Valid profile name                                          | Optional                                      |
 +----------------------------------------+-------------------------------------------------------------+-----------------------------------------------+
 | :ref:`subscriber_iam_role_duration`    | Number of seconds between 900 and 3600                      | Optional (if set, it requires an iam_role_arn |
 |                                        |                                                             | to be provided)                               |
 +----------------------------------------+-------------------------------------------------------------+-----------------------------------------------+
 | :ref:`subscriber_sts_endpoint`         | Any valid VPC endpoint URL for STS                          | Optional                                      |
 +----------------------------------------+-------------------------------------------------------------+-----------------------------------------------+
-| :ref:`subscriber_service_endpoint`     | Any valid endpoint URL for the Amazon SQS                   | Optional                                      |
+| :ref:`subscriber_service_endpoint`     | Any valid endpoint URL for S3                               | Optional                                      |
 +----------------------------------------+-------------------------------------------------------------+-----------------------------------------------+
 
 .. _subscriber_sqs_name:
@@ -759,12 +760,12 @@ The AWS Security Token Service VPC endpoint URL to be used when an IAM role is p
 service_endpoint
 ^^^^^^^^^^^^^^^^
 
-The endpoint URL for the required Amazon SQS to be used to download the data from it. Check the :ref:`Considerations for configuration <amazon_considerations>` page to learn more about VPC and FIPS endpoints.
+The AWS S3 endpoint URL to be used to download the data from the bucket. Check the :ref:`Considerations for configuration <amazon_considerations>` page to learn more about VPC and FIPS endpoints.
 
 +--------------------+------------------------------------------------+
 | **Default value**  | N/A                                            |
 +--------------------+------------------------------------------------+
-| **Allowed values** | Any valid endpoint URL for the Amazon SQS      |
+| **Allowed values** | Any valid endpoint URL for S3                  |
 +--------------------+------------------------------------------------+
 
 
