@@ -34,7 +34,8 @@ Other
 Packages
 ^^^^^^^^
 - `#2147 <https://github.com/wazuh/wazuh-packages/pull/2147>`_ Added Debian 11 SCA files to specs.
-
+- `#2150 <https://github.com/wazuh/wazuh-packages/pull/2150>`_ The Wazuh indexer is now based on OpenSearch 2.6.0.
+- `#2150 <https://github.com/wazuh/wazuh-packages/pull/2150>`_ The Wazuh dashboard is now based on OpenSearch dashboards 2.6.0.
 
 Resolved issues
 ---------------
