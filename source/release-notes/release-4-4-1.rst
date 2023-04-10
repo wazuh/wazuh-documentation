@@ -15,7 +15,7 @@ This release includes new features or enhancements as the following:
 
 Wazuh manager
 ^^^^^^^^^^^^^
-- `#15883 <https://github.com/wazuh/wazuh/pull/15883>`_ Improve ``WazuhDB`` performance by avoiding synchronizing existing agent keys and removing deprecated agent databases from ``var/db/agents``.
+- `#15883 <https://github.com/wazuh/wazuh/pull/15883>`_ Improved ``WazuhDB`` performance by avoiding synchronizing existing agent keys and removing deprecated agent databases from ``var/db/agents``.
 
 RESTful API
 ^^^^^^^^^^^
@@ -28,13 +28,8 @@ Ruleset
 
 Other
 ^^^^^
-- `#16472 <https://github.com/wazuh/wazuh/pull/16472>`_ Update embedded Python interpreter to 3.9.16. 
-- `#16492 <https://github.com/wazuh/wazuh/pull/16492>`_ Update ``setuptools`` to 65.5.1.
-
-Wazuh Splunk app
-^^^^^^^^^^^^^^^^
-
-- Added support for Wazuh 4.4.1.
+- `#16472 <https://github.com/wazuh/wazuh/pull/16472>`_ Updated embedded Python interpreter to 3.9.16. 
+- `#16492 <https://github.com/wazuh/wazuh/pull/16492>`_ Updated ``setuptools`` to 65.5.1.
 
 Packages
 ^^^^^^^^
