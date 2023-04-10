@@ -10,7 +10,7 @@ Supported services
 
 All the services except ``Inspector Classic`` and ``CloudWatch Logs`` get their data from log files stored in an ``S3`` bucket. These services store their data into log files which are configured inside ``<bucket type='TYPE'> </bucket>`` tags, while ``Inspector Classic`` and ``CloudWatch Logs`` services are configured inside ``<service type='inspector'> </service>`` and ``<service type='cloudwatchlogs'> </service>`` tags, respectively.
 
-.. versionadded:: 4.5.0
+.. versionadded:: 4.4.2
   
 The ``<subscriber type='TYPE'> </subscriber>`` tags are added in order to obtain logs from ``Amazon Security Lake`` buckets.
 

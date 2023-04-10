@@ -18,7 +18,7 @@ Installing dependencies
 Python
 ------
 
-The AWS module requires Python 3. It is compatible with Python 3.6 to Python 3.9. Future Python releases should maintain compatibility although it cannot be guaranteed.
+The AWS module requires Python 3. It is compatible with Python 3.7+. Future Python releases should maintain compatibility although it cannot be guaranteed.
 
 .. tabs::
 

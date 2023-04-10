@@ -659,7 +659,7 @@ The endpoint URL for the required AWS Service to be used to download the data fr
 
 Subscribers
 ~~~~~~~~~~~
-.. versionadded:: 4.5.0
+.. versionadded:: 4.4.2
 
 It is necessary to specify the type as an attribute of the ``subscriber`` tag to indicate the service configured. More information about the supported services and their associated types on :ref:`AWS supported services <amazon_supported_services>`.
 
