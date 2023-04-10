@@ -6,6 +6,6 @@
 
    .. code-block:: console
    
-     # pkgadd -d wazuh-agent_v4.4.0-sol10-sparc.pkg
+     # pkgadd -d wazuh-agent_v4.4.1-sol10-sparc.pkg
 
 .. End of include file
