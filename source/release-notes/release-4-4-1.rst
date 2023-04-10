@@ -33,9 +33,9 @@ Other
 
 Packages
 ^^^^^^^^
-- `#2147 <https://github.com/wazuh/wazuh-packages/pull/2147>`_ Added Debian 11 SCA files to specs.
-- `#2150 <https://github.com/wazuh/wazuh-packages/pull/2150>`_ The Wazuh indexer is now based on OpenSearch 2.6.0.
 - `#2150 <https://github.com/wazuh/wazuh-packages/pull/2150>`_ The Wazuh dashboard is now based on OpenSearch dashboards 2.6.0.
+- `#2150 <https://github.com/wazuh/wazuh-packages/pull/2150>`_ The Wazuh indexer is now based on OpenSearch 2.6.0.
+- `#2147 <https://github.com/wazuh/wazuh-packages/pull/2147>`_ Added Debian 11 SCA files to specs.
 
 Resolved issues
 ---------------
@@ -58,10 +58,10 @@ Wazuh dashboard
 Reference                                                         Description
 ==============================================================    =============
 `#5196 <https://github.com/wazuh/wazuh-kibana-app/pull/5196>`_    Fixed the search in the agent inventory data tables.
-`#5334 <https://github.com/wazuh/wazuh-kibana-app/pull/5334>`_    Fixed top 5 users table overflow in **FIM::Dashboard**.
+`#5334 <https://github.com/wazuh/wazuh-kibana-app/pull/5334>`_    Fixed the `Top 5 users` table overflow in the FIM dashboard.
 `#5337 <https://github.com/wazuh/wazuh-kibana-app/pull/5337>`_    Fixed a visual error in the **About** section.
 `#5329 <https://github.com/wazuh/wazuh-kibana-app/pull/5329>`_    Fixed the Anomaly and malware detection link.
-`#5341 <https://github.com/wazuh/wazuh-kibana-app/pull/5341>`_    Fixed an issue that did not allow closing the time picker when pressing the button again in **Agents** and **Management/Statistics**.
+`#5341 <https://github.com/wazuh/wazuh-kibana-app/pull/5341>`_    Fixed an issue that did not allow closing the time picker when pressing the button multiple times in **Agents** and **Management/Statistics**.
 ==============================================================    =============
 
 Wazuh Kibana plugin for Kibana 7.10.2
@@ -72,7 +72,7 @@ Reference                                                         Description
 ==============================================================    =============
 `#5196 <https://github.com/wazuh/wazuh-kibana-app/pull/5196>`_    Fixed the search in the agent inventory data tables.
 `#5329 <https://github.com/wazuh/wazuh-kibana-app/pull/5329>`_    Fixed the Anomaly and malware detection link.
-`#5341 <https://github.com/wazuh/wazuh-kibana-app/pull/5341>`_    Fixed an issue that did not allow closing the time picker when pressing the button again in **Agents** and **Management/Statistics**.
+`#5341 <https://github.com/wazuh/wazuh-kibana-app/pull/5341>`_    Fixed an issue that did not allow closing the time picker when pressing the button multiple times in **Agents** and **Management/Statistics**.
 ==============================================================    =============
 
 Wazuh Kibana plugin for Kibana 7.16.x and 7.17.x
@@ -83,7 +83,7 @@ Reference                                                         Description
 ==============================================================    =============
 `#5196 <https://github.com/wazuh/wazuh-kibana-app/pull/5196>`_    Fixed the search in the agent inventory data tables.
 `#5329 <https://github.com/wazuh/wazuh-kibana-app/pull/5329>`_    Fixed the Anomaly and malware detection link.
-`#5341 <https://github.com/wazuh/wazuh-kibana-app/pull/5341>`_    Fixed an issue that did not allow closing the time picker when pressing the button again in **Agents** and **Management/Statistics**.
+`#5341 <https://github.com/wazuh/wazuh-kibana-app/pull/5341>`_    Fixed an issue that did not allow closing the time picker when pressing the button multiple times in **Agents** and **Management/Statistics**.
 ==============================================================    =============
 
 Changelogs
