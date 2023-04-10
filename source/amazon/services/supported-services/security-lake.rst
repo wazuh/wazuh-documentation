@@ -8,7 +8,7 @@
 Amazon Security Lake
 =========================
 
-.. versionadded:: 4.5.0
+.. versionadded:: 4.4.2
 
 
 Amazon Security Lake is a fully-managed security data lake service that consolidates data from multiple AWS and other services optimizing storage costs and performance at scale.
