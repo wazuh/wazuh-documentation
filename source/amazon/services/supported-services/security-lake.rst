@@ -57,13 +57,13 @@ Creating a subscriber
 #. Select S3 as your data access method.
 #. Enter the *AWS account ID* for the account you are currently logged into.
 #. Enter a placeholder value in **External ID**. For example, *placeholder-ta-value*. While Wazuh doesn't need an External ID for Amazon Security Lake, you still have to populate the field when creating a subscriber.
-#. Under **Notification details** select SQS queue.
+#. Under **Notification details** select *SQS queue*.
 #. Click the **Create** button to get to the Subscribers pages.
 
 Reviewing the subscriber
 ~~~~~~~~~~~~~~~~~~~~~~~~
 
-#. Navigate to **My subscribers** section, and click on your newly created subscriber to get to the Subscriber Details page.
+#. Navigate to **My subscribers** section, and click on your newly created subscriber to get to the *Subscriber Details* page.
 #. Check that AWS created the subscriber with the correct parameters.
 #. Save the *SQS queue name*. You need the name of the Subscription endpoint for later on, when verifying the information in the SQS queue.
 
@@ -84,12 +84,15 @@ Follow these steps in your Amazon deployment to verify that parquet events are f
 #. In your AWS console, navigate to the Amazon S3 service.
 #. Navigate to the **Buckets** section, and click on the S3 bucket name that Security Lake created for each applicable region. These bucket names start with the prefix *aws-security-data-lake* .
 #. In each applicable bucket, navigate to the **Objects** tab. Click through the directories to verify that Security Lake has available events flowing into the S3 bucket. Check that new files with the ``.gz.parquet`` extension appear.
-    - If you enabled Security Lake on more than one AWS account, check if you see each applicable account number listed. Check that parquet files exist inside each account.
+    
+    * If you enabled Security Lake on more than one AWS account, check if you see each applicable account number listed. Check that parquet files exist inside each account.
 #. In each applicable S3 bucket, navigate to the **Properties** tab and verify in the **Event notifications** section that the data destination is the Security Lake SQS queue.
 
 
 Wazuh configuration
 -------------------
+
+.. _asl_dependencies:
 
 Dependencies
 ^^^^^^^^^^^^
@@ -115,11 +118,11 @@ Set the configuration inside the section ``<subscriber type="security_lake">``. 
             <run_on_start>yes</run_on_start>
             <subscriber type="security_lake">
                 <sqs_name>sqs-security-lake-main-queue</sqs_name>
-                <iam_role_arn>arn:aws:iam::account-id:role/ASL-Role</iam_role_arn>
+                <iam_role_arn>arn:aws:iam::xxxxxxxxxxx:role/ASL-Role</iam_role_arn>
                 <iam_role_duration>1300</iam_role_duration>
                 <aws_profile>user_profile</aws_profile>
-                <sts_endpoint>sts-endpoint-IAM</sts_endpoint>
-                <service_endpoint>s3-vpc-endpoint</service_endpoint>     
+                <sts_endpoint>xxxxxx.sts.region.vpce.amazonaws.com</sts_endpoint>
+                <service_endpoint>https://bucket.xxxxxx.s3.region.vpce.amazonaws.com</service_endpoint>     
             </subscriber>
         </wodle>
 
@@ -130,7 +133,7 @@ After setting the required parameters, restart Wazuh in order to apply the chang
 
     $ systemctl restart wazuh-manager
 
-Please note that the module's time of execution varies depending on the number of notifications present in the queue.
+Please note that the module's time of execution varies depending on the number of notifications present in the queue. If the ``<interval>`` value is less than the required time of execution, the :ref:`Interval overtaken<interval_overtaken_message>` message will be displayed in the ``ossec.log`` file.
 
 
 Parameters
@@ -153,11 +156,11 @@ Using an IAM role (recommended):
 """"""""""""""""""""""""""""""""
 
 *   ``<iam_role_arn>``: ARN for the corresponding IAM role to assume.
-*   ``<iam_role_duration>`` – Optional: The session duration in seconds.
-*   ``<sts_endpoint>`` – Optional: The URL of the VPC endpoint of the AWS Security Token Service.
+*   ``<iam_role_duration>`` - Optional: The session duration in seconds.
+*   ``<sts_endpoint>`` - Optional: The URL of the VPC endpoint of the AWS Security Token Service.
 
     .. note::
-        Note: This authentication method requires some credentials to be previously added to the configuration using any other authentication method, e.g. using the ``/root/.aws/credentials`` file.
+        This authentication method requires some credentials to be previously added to the configuration using the ``/root/.aws/credentials`` file.
 
 Configuring an IAM role
 """""""""""""""""""""""
@@ -165,15 +168,18 @@ Configuring an IAM role
 If you choose to authenticate using IAM, you must perform the following modifications to the IAM role:
 
 Configuring the role
+````````````````````
 
-#. Follow these steps to modify the Security Lake subscriber role. You have to associate an existing user with the role.
-#. In your AWS console, navigate to the Amazon IAM service.
-#. In your Amazon IAM service, navigate to the Roles page.
+Follow these steps to modify the Security Lake subscriber role. You have to associate an existing user with the role.
+
+#. In your AWS console, navigate to the **Amazon IAM service**.
+#. In your Amazon IAM service, navigate to the **Roles** page.
 #. In the Roles page, select the Role name of the subscription role notification that was created as part of the Security Lake subscriber provisioning process.
-#. In the Summary page, navigate to the Trust relationships tab to modify the Trusted entity policy.
+#. In the **Summary** page, navigate to the **Trust relationships** tab to modify the Trusted entity policy.
 #. Modify the Trusted entity policy with the following updates:
-#. Remove any reference to the External ID that was created during the Security Lake subscriber provisioning process.
-#. In the stanza containing the ARN, attach the username from your target user account to the end of the ARN. This step connects a user to the role. It lets you configure the Security Lake service with the secret access key. See the following example Trust entity:
+
+    #. Remove any reference to the External ID that was created during the Security Lake subscriber provisioning process.
+    #. In the stanza containing the ARN, attach the username from your target user account to the end of the ARN. This step connects a user to the role. It lets you configure the Security Lake service with the secret access key. See the following example Trust entity:
 
     .. code-block:: JSON
 
@@ -197,7 +203,7 @@ Granting a user permissions to switch roles
 
 Follow these steps to configure the user permissions:
 
-#. In your Amazon IAM service, navigate to the Users page.
+#. In your Amazon IAM service, navigate to the **Users** page.
 #. In the Users page, select the Username of the user you have connected to the role.
 #. Add the following permission to switch to the new roles:
 
@@ -210,7 +216,7 @@ Follow these steps to configure the user permissions:
                 "Sid": "VisualEditor1",
                 "Effect": "Allow",
                 "Action": "sts:AssumeRole",
-                "Resource": "arn:aws:iam::<account-id>:role/<resource>"
+                "Resource": "arn:aws:iam::<account-id>:role/<resource-role>"
                 }
             ]
         }
@@ -221,6 +227,3 @@ Using a profile (optional)
 *   ``<aws_profile>``: The name of credential profile to use
 
 More information about the different authentication methods can be found: :ref:`Configuring AWS credentials <amazon_credentials>`.
-
-
-
