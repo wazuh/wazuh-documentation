@@ -8,7 +8,7 @@
 Upgrading the Wazuh agent
 =========================
 
-This section guides through the process of upgrading the Wazuh agent installations from versions prior to 3.0.
+This section guides you through the process of upgrading the Wazuh agent installations from versions prior to 3.0.
 
 .. topic:: Contents
 
