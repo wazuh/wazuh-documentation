@@ -92,19 +92,6 @@ Follow these steps in your Amazon deployment to verify that parquet events are f
 Wazuh configuration
 -------------------
 
-.. _asl_dependencies:
-
-Dependencies
-^^^^^^^^^^^^
-
-PyArrow is a Python package that allows for efficient manipulation of data, particularly Parquet files. Security lake creates Parquet files in the AWS S3 Buckets. PyArrow is useful to read these files containing the events.
-To install the dependency, execute the following command:
-
-.. code-block:: console
-
-  $ <WAZUH_PATH>/framework/python/bin/pip3 install pyarrow==11.0.0
-
-
 Security Lake section in ossec.conf 
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
