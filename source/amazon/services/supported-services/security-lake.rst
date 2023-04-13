@@ -56,7 +56,7 @@ Creating a subscriber
 #. Choose to either collect all log and event sources, or only specific log and event sources.
 #. Select S3 as your data access method.
 #. Enter the *AWS account ID* for the account you are currently logged into.
-#. Enter a placeholder value in **External ID**. For example, *placeholder-ta-value*. While Wazuh doesn't need an External ID for Amazon Security Lake, you still have to populate the field when creating a subscriber.
+#. Enter a unique value in **External ID**. For example, *wazuh-external-id-value*.
 #. Under **Notification details** select *SQS queue*.
 #. Click the **Create** button to get to the Subscribers pages.
 
@@ -89,6 +89,72 @@ Follow these steps in your Amazon deployment to verify that parquet events are f
 #. In each applicable S3 bucket, navigate to the **Properties** tab and verify in the **Event notifications** section that the data destination is the Security Lake SQS queue.
 
 
+Configuring an IAM role
+^^^^^^^^^^^^^^^^^^^^^^^
+
+Configuring the role
+~~~~~~~~~~~~~~~~~~~~
+
+Follow these steps to modify the Security Lake subscriber role. You have to associate an existing user with the role.
+
+#. In your AWS console, navigate to the **Amazon IAM service**.
+#. In your Amazon IAM service, navigate to the **Roles** page.
+#. In the Roles page, select the Role name of the subscription role notification that was created as part of the Security Lake subscriber provisioning process.
+#. In the **Summary** page, navigate to the **Trust relationships** tab to modify the Trusted entity policy.
+#. Modify the Trusted entity policy with the following updates:
+
+    #. In the stanza containing the ARN, attach the username from your target user account to the end of the ARN. This step connects a user to the role. It lets you configure the Security Lake service with the secret access key. See the following example Trust entity:
+
+    .. code-block:: JSON
+
+        {
+            "Version": "2012-10-17",
+            "Statement": [
+                {
+                    "Sid": "1",
+                    "Effect": "Allow",
+                    "Principal": {
+                        "AWS": "arn:aws:iam::<account-id>:user/<user-account>"
+                    },
+                    "Action": "sts:AssumeRole",
+                    "Condition": {
+                            "StringEquals": {
+                                "sts:ExternalId": [
+                                    "wazuh-external-id-value"
+                                ]
+                            }
+                    }
+                }
+            ]
+        }
+
+
+
+Granting a user permissions to switch roles
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+Follow these steps to configure the user permissions:
+
+#. In your Amazon IAM service, navigate to the **Users** page.
+#. In the Users page, select the Username of the user you have connected to the role.
+#. Add the following permission to switch to the new roles:
+
+    .. code-block:: JSON
+
+        {
+            "Version": "2012-10-17",
+            "Statement": [
+                {
+                "Sid": "VisualEditor1",
+                "Effect": "Allow",
+                "Action": "sts:AssumeRole",
+                "Resource": "arn:aws:iam::<account-id>:role/<resource-role>"
+                }
+            ]
+        }
+
+
+
 Wazuh configuration
 -------------------
 
@@ -107,7 +173,7 @@ Set the configuration inside the section ``<subscriber type="security_lake">``. 
                 <sqs_name>sqs-security-lake-main-queue</sqs_name>
                 <iam_role_arn>arn:aws:iam::xxxxxxxxxxx:role/ASL-Role</iam_role_arn>
                 <iam_role_duration>1300</iam_role_duration>
-                <aws_profile>user_profile</aws_profile>
+                <external_id>wazuh-external-id-value</external_id>
                 <sts_endpoint>xxxxxx.sts.region.vpce.amazonaws.com</sts_endpoint>
                 <service_endpoint>https://bucket.xxxxxx.s3.region.vpce.amazonaws.com</service_endpoint>     
             </subscriber>
@@ -137,80 +203,14 @@ Queue configuration
 Authentication
 ~~~~~~~~~~~~~~
 
-There are two ways to set the authentication for the lake:
-
-Using an IAM role (recommended):
-""""""""""""""""""""""""""""""""
-
 *   ``<iam_role_arn>``: ARN for the corresponding IAM role to assume.
+*   ``<external_id>``: External ID to use when assuming the role.
 *   ``<iam_role_duration>`` - Optional: The session duration in seconds.
 *   ``<sts_endpoint>`` - Optional: The URL of the VPC endpoint of the AWS Security Token Service.
 
     .. note::
         This authentication method requires some credentials to be previously added to the configuration using the ``/root/.aws/credentials`` file.
 
-Configuring an IAM role
-"""""""""""""""""""""""
 
-If you choose to authenticate using IAM, you must perform the following modifications to the IAM role:
-
-Configuring the role
-````````````````````
-
-Follow these steps to modify the Security Lake subscriber role. You have to associate an existing user with the role.
-
-#. In your AWS console, navigate to the **Amazon IAM service**.
-#. In your Amazon IAM service, navigate to the **Roles** page.
-#. In the Roles page, select the Role name of the subscription role notification that was created as part of the Security Lake subscriber provisioning process.
-#. In the **Summary** page, navigate to the **Trust relationships** tab to modify the Trusted entity policy.
-#. Modify the Trusted entity policy with the following updates:
-
-    #. Remove any reference to the External ID that was created during the Security Lake subscriber provisioning process.
-    #. In the stanza containing the ARN, attach the username from your target user account to the end of the ARN. This step connects a user to the role. It lets you configure the Security Lake service with the secret access key. See the following example Trust entity:
-
-    .. code-block:: JSON
-
-        {
-            "Version": "2012-10-17",
-            "Statement": [
-                {
-                    "Sid": "1",
-                    "Effect": "Allow",
-                    "Principal": {
-                        "AWS": "arn:aws:iam::<account-id>:user/<user-account>"
-                    },
-                    "Action": "sts:AssumeRole"
-                }
-            ]
-        }
-
-
-Granting a user permissions to switch roles
-"""""""""""""""""""""""""""""""""""""""""""
-
-Follow these steps to configure the user permissions:
-
-#. In your Amazon IAM service, navigate to the **Users** page.
-#. In the Users page, select the Username of the user you have connected to the role.
-#. Add the following permission to switch to the new roles:
-
-    .. code-block:: JSON
-
-        {
-            "Version": "2012-10-17",
-            "Statement": [
-                {
-                "Sid": "VisualEditor1",
-                "Effect": "Allow",
-                "Action": "sts:AssumeRole",
-                "Resource": "arn:aws:iam::<account-id>:role/<resource-role>"
-                }
-            ]
-        }
-
-Using a profile (optional)
-""""""""""""""""""""""""""
-
-*   ``<aws_profile>``: The name of credential profile to use
 
 More information about the different authentication methods can be found: :ref:`Configuring AWS credentials <amazon_credentials>`.
