@@ -35,7 +35,8 @@ This scenario is based on a single node deployment and both the docker-compose.y
 
 #. First of all, we must comment out all the lines of the ``Docker-compose.yml`` file where docker volumes are mounted in the ``wazuh.manger`` and ``wazuh.indexer`` containers:
 
-   .. code-block::
+   .. code-block:: yaml
+      :lineno-start: 25
 
       # - wazuh_api_configuration:/var/ossec/api/configuration
       # - wazuh_etc:/var/ossec/etc
@@ -48,7 +49,10 @@ This scenario is based on a single node deployment and both the docker-compose.y
       # - wazuh_wodles:/var/ossec/wodles
       # - filebeat_etc:/etc/filebeat
       # - filebeat_var:/var/lib/filebeat
-      ...
+
+   .. code-block:: yaml
+      :lineno-start: 57
+
       # - wazuh-indexer-data:/var/lib/wazuh-indexer
 
 #. Start the Wazuh stack with the new version:
@@ -74,9 +78,10 @@ This scenario is based on a single node deployment and both the docker-compose.y
       # docker cp single-node_wazuh.manager_1:/etc/filebeat/. - | sudo tar xf /dev/stdin -C $DOCKER_VOLUME_PATH/single-node_filebeat_etc/_data/
       # docker cp single-node_wazuh.manager_1:/var/lib/filebeat/. - | sudo tar xf /dev/stdin -C $DOCKER_VOLUME_PATH/single-node_filebeat_var/_data/
 
-#. After the file copy, we must uncomment the previously commented lines:
+#. After the file copy, we must uncomment the previously commented lines in ``Docker-compose.yml`` file:
 
-   .. code-block::
+   .. code-block:: yaml
+      :lineno-start: 25
 
       - wazuh_api_configuration:/var/ossec/api/configuration
       - wazuh_etc:/var/ossec/etc
@@ -89,7 +94,10 @@ This scenario is based on a single node deployment and both the docker-compose.y
       - wazuh_wodles:/var/ossec/wodles
       - filebeat_etc:/etc/filebeat
       - filebeat_var:/var/lib/filebeat
-      ...
+
+   .. code-block:: yaml
+      :lineno-start: 57
+
       - wazuh-indexer-data:/var/lib/wazuh-indexer
 
 #. Start the new version of Wazuh using ``docker-compose``:
