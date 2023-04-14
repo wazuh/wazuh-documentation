@@ -17,9 +17,9 @@ Select an option below according to your Wazuh installation and follow the instr
 
 The Wazuh central components section includes instructions to upgrade the Wazuh server, the Wazuh indexer, and the Wazuh dashboard. This is the default Wazuh installation starting with Wazuh v4.3.0. 
 
-The Wazuh and Open Distro for Elasticsearch section describes the upgrade process for the Wazuh manager, Filebeat-OSS, Open Distro for Elasticsearch and Kibana. This was the default Wazuh installation from Wazuh v4.0.0 to 4.2.7. 
+The Wazuh and Open Distro for Elasticsearch section describes the upgrade process for the Wazuh manager, Filebeat-OSS, Open Distro for Elasticsearch, and Kibana. This was the default Wazuh installation from Wazuh v4.0.0 to 4.2.7. 
 
-The Wazuh and Elastic Stack basic license section includes instructions to upgrade the Wazuh manager, Filebeat, Elasticsearch and Kibana. The latest supported Elastic Stack basic license version is |ELASTICSEARCH_ELK_LATEST|. 
+The Wazuh and Elastic Stack basic license section includes instructions to upgrade the Wazuh manager, Filebeat, Elasticsearch, and Kibana. The latest supported Elastic Stack basic license version is |ELASTICSEARCH_ELK_LATEST|. 
 
 .. raw:: html
 

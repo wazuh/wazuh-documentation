@@ -8,7 +8,7 @@
 Upgrading Elastic Stack from 6.8 to 7.x
 =======================================
 
-This section guides through the upgrade process of Elastic Stack components, including Elasticsearch, Filebeat, and Kibana for the Elastic distribution.
+This section guides you through the upgrade process of Elastic Stack components, including Elasticsearch, Filebeat, and Kibana for the Elastic distribution.
 
 Coming new in Elastic 7.x, there is an architecture change introduced in the Wazuh installation. Logstash is no longer required, and Filebeat will send the events directly to Elasticsearch. In addition, Elasticsearch 7.x has Java embedded, so unless the user decides to use Logstash, Java is no longer required.
 
@@ -165,7 +165,7 @@ Field migration: From @timestamp to timestamp
 
 In the previous Elasticsearch versions, the Elastic documents were indexed using the ``@timestamp`` field as the reference field for time-based indices. Starting in Elastic 7.x, this field has become a reserved field and is no longer manipulable. The Wazuh time-based indices use the ``timestamp`` field instead.
 
-Due to this change, the previous alerts will not be visible in the Wazuh indices, and an update must be performed to all previous indices in order to complete the upgrade.
+Due to this change, the previous alerts will not be visible in the Wazuh indices, and an update must be performed on all previous indices in order to complete the upgrade.
 
 Run the request below for each Wazuh index created before the Elastic 7.x upgrade. It will add the ``timestamp`` field for all the index documents.
 
