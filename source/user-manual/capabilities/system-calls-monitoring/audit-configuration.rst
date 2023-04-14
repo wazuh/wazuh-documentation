@@ -530,7 +530,7 @@ A common configuration should include: *login*, *common-session*, *cron* and *ss
     /etc/pam.d/sshd:session    required     pam_loginuid.so
 
 
-After configuring PAM, if we execute the previous command with the user *homer* we will see that the field *auid* is 1004, the id of the user homer.
+After configuring PAM, if we execute the previous command with the user *homer* we will see that the field *auid* is 1000, the id of the user homer.
 
 .. code-block:: console
 
