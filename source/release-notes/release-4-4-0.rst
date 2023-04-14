@@ -34,7 +34,7 @@ Wazuh added support for Azure Integration in Linux agents. Now this integration 
 Finally, it’s essential to remark that we maintain support for all installation alternatives. Indeed we maintain and extend this support by adding more recent versions.
 
 .. Note::
-   Wazuh v4.4 will be the last version with central components support for some operating systems. Starting with Wazuh v4.5.0, central components will only support operating systems officially maintained by their vendors, such as Amazon Linux, RHEL, CentOS, and Ubuntu. Wazuh agents will maintain their current support status.
+   Starting with Wazuh v4.5.0, the central components will only support the Amazon Linux, RHEL, CentOS, and Ubuntu operating systems whose versions are officially supported by their vendors. Wazuh agents will maintain their current support status.
 
 Breaking changes
 ----------------

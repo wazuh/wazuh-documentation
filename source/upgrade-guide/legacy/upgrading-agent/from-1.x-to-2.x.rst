@@ -33,7 +33,7 @@ Follow these steps to update the Wazuh agent 1.x to the Wazuh agent 2.x:
 
   .. group-tab:: Windows
 
-    On Windows systems the Wazuh agent upgrade can be done by deleting the previous version and installing the Wazuh agent 2.x from scratch. As the Wazuh agent's ``ossec.conf`` configuration file will be overwritten, it is recommended to backup the old configuration file and import previous settings where needed.
+    On Windows systems, the Wazuh agent upgrade can be done by deleting the previous version and installing the Wazuh agent 2.x from scratch. As the Wazuh agent's ``ossec.conf`` configuration file will be overwritten, it is recommended to backup the old configuration file and import previous settings where needed.
 
     More information about the process can be found in the :ref:`Wazuh agent installation on Windows <wazuh_agent_package_windows>` section.
 

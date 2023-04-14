@@ -112,6 +112,17 @@ newUrls['4.4'] = [
   '/azure/activity-services/prerequisites/dependencies.html',
   '/user-manual/wazuh-dashboard/custom-branding.html',
   '/release-notes/release-4-4-0.html',
+  '/release-notes/release-4-4-1.html',
+  '/nist/index.html',
+  '/nist/visualization-and-dashboard.html',
+  '/nist/log-data-analysis.html',
+  '/nist/configuration-assessment.html',
+  '/nist/malware-detection.html',
+  '/nist/file-integrity-monitoring.html',
+  '/nist/system-inventory.html',
+  '/nist/vulnerability-detection.html',
+  '/nist/active-response.html',
+  '/nist/threat-intelligence.html',
 ];
 
 /* Pages removed in 4.4 */
