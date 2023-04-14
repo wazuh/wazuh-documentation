@@ -15,22 +15,45 @@ This release includes new features or enhancements as the following:
 
 Wazuh manager
 ^^^^^^^^^^^^^
-- `#15883 <https://github.com/wazuh/wazuh/pull/15883>`_ aaa
+- `#13034 <https://github.com/wazuh/wazuh/pull/13034>`_ Added support for Amazon Linux 2022 in Vulnerability Detector.
+- `#13559 <https://github.com/wazuh/wazuh/pull/13559>`_ wazuh-authd can now generate X509 certificates.
+- `#14659 <https://github.com/wazuh/wazuh/pull/14659>`_ wazuh-remoted now checks the size of the files to avoid malformed merged.mg.
+- `#14024 <https://github.com/wazuh/wazuh/pull/14024>`_ Added a limit option for the Rsync dispatch queue size.
+- `#14026 <https://github.com/wazuh/wazuh/pull/14026>`_ Added a limit option for the Rsync thread pool.
+- `#14549 <https://github.com/wazuh/wazuh/pull/14549>`_ wazuh-authd now shows a warning when deprecated forcing options are present in the configuration.
+- `#14804 <https://github.com/wazuh/wazuh/pull/14804>`_ The agent now notifies the manager when Active Reponse fails to run netsh.
 
-RESTful API
-^^^^^^^^^^^
-- `#16541 <https://github.com/wazuh/wazuh/pull/16541>`_ aaa
+Agent
+^^^^^
+- `#14763 <https://github.com/wazuh/wazuh/pull/14763>`_ Added Audit policy change detection in FIM for Windows.
+- `#13264 <https://github.com/wazuh/wazuh/pull/13264>`_ FIM option fim_check_ignore now applies to files and directories.
+- `#14784 <https://github.com/wazuh/wazuh/pull/14784>`_ Unit tests have been added to the shared JSON handling library.
+- `#14476 <https://github.com/wazuh/wazuh/pull/14476>`_ Unit tests have been added to the shared SQLite handling library.
+- `#13878 <https://github.com/wazuh/wazuh/pull/13878>`_ Unused option local_ip for agent configuration has been deleted.
 
 Ruleset
 ^^^^^^^
-- `#16017 <https://github.com/wazuh/wazuh/pull/16017>`_ aaa
+- `#14138 <https://github.com/wazuh/wazuh/pull/14138>`_ The SSHD decoder has been improved to catch disconnection events. #14138
 
-Other
-^^^^^
-- `#16472 <https://github.com/wazuh/wazuh/pull/16472>`_ aaa
-Packages
-^^^^^^^^
-- `#2150 <https://github.com/wazuh/wazuh-packages/pull/2150>`_ aaa
+Wazuh dashboard
+^^^^^^^^^^^^^^^
+
+- `#5197 <https://github.com/wazuh/wazuh-kibana-app/pull/5197>`_ `#5274 <https://github.com/wazuh/wazuh-kibana-app/pull/5274>`_ `#5298 <https://github.com/wazuh/wazuh-kibana-app/pull/5298>`_ Added rel="noopener noreferrer" in documentation links.
+- `#5203 <https://github.com/wazuh/wazuh-kibana-app/pull/5203>`_ Added ignore and restrict options to Syslog configuration.
+- `#5201 <https://github.com/wazuh/wazuh-kibana-app/pull/5201>`_ Changed of regular expression in RBAC.
+
+Wazuh Kibana plugin for Kibana 7.10.2
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+- `#5197 <https://github.com/wazuh/wazuh-kibana-app/pull/5197>`_ `#5274 <https://github.com/wazuh/wazuh-kibana-app/pull/5274>`_ `#5298 <https://github.com/wazuh/wazuh-kibana-app/pull/5298>`_ Added rel="noopener noreferrer" in documentation links.
+- `#5203 <https://github.com/wazuh/wazuh-kibana-app/pull/5203>`_ Added ignore and restrict options to Syslog configuration.
+- `#5201 <https://github.com/wazuh/wazuh-kibana-app/pull/5201>`_ Changed of regular expression in RBAC.
+
+Wazuh Kibana plugin for Kibana 7.16.x and 7.17.x
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+- `#5197 <https://github.com/wazuh/wazuh-kibana-app/pull/5197>`_ `#5274 <https://github.com/wazuh/wazuh-kibana-app/pull/5274>`_ `#5298 <https://github.com/wazuh/wazuh-kibana-app/pull/5298>`_ Added rel="noopener noreferrer" in documentation links.
+- `#5203 <https://github.com/wazuh/wazuh-kibana-app/pull/5203>`_ Added ignore and restrict options to Syslog configuration.
+- `#5201 <https://github.com/wazuh/wazuh-kibana-app/pull/5201>`_ Changed of regular expression in RBAC.
 
 Resolved issues
 ---------------
@@ -43,7 +66,21 @@ Wazuh manager
 ==============================================================    =============
 Reference                                                         Description
 ==============================================================    =============
-`#16546 <https://github.com/wazuh/wazuh/pull/16546>`_             aaa
+`#13979 <https://github.com/wazuh/wazuh/pull/13979>`_             Fixed wazuh-remoted not updating total bytes sent in UDP.
+`#14356 <https://github.com/wazuh/wazuh/pull/14356>`_             Fixed translation of packages with a missing version in CPE Helper for Vulnerability Detector.
+`#14174 <https://github.com/wazuh/wazuh/pull/14174>`_             Fixed undefined behavior issues in Vulnerability Detector unit tests.
+`#14019 <https://github.com/wazuh/wazuh/pull/14019>`_             Fixed permission error when producing FIM alerts.
+`#15164 <https://github.com/wazuh/wazuh/pull/15164>`_             Fixed memory leaks wazuh-authd.
+==============================================================    =============
+
+Agent
+^^^^^
+
+==============================================================    =============
+Reference                                                         Description
+==============================================================    =============
+`#13534 <https://github.com/wazuh/wazuh/pull/13534>`_             Fixed the architecture of the dependency URL for macOS.
+`#13588 <https://github.com/wazuh/wazuh/pull/13588>`_             Fixed a path length limitation that prevented FIM from reporting changes on Windows.
 ==============================================================    =============
 
 Wazuh dashboard
@@ -52,7 +89,13 @@ Wazuh dashboard
 ==============================================================    =============
 Reference                                                         Description
 ==============================================================    =============
-`#5196 <https://github.com/wazuh/wazuh-kibana-app/pull/5196>`_    aaa
+`#4828 <https://github.com/wazuh/wazuh-kibana-app/pull/4828>`_    Fixed trailing hyphen character for OS value in the list of agents.
+`#4909 <https://github.com/wazuh/wazuh-kibana-app/pull/4909>`_    Fixed an issue that caused incorrect visualization of IPv6 addresses.
+`#4911 <https://github.com/wazuh/wazuh-kibana-app/pull/4911>`_    Fixed several typos in the code, by @jctello.
+`#4917 <https://github.com/wazuh/wazuh-kibana-app/pull/4917>`_    Fixed the display of more than one protocol in the Global configuration section.
+`#4918 <https://github.com/wazuh/wazuh-kibana-app/pull/4918>`_    Handling endpoint response was done when there is no data to show.
+`#4894 <https://github.com/wazuh/wazuh-kibana-app/pull/4894>`_    Fixed references to Elasticsearch in Wazuh-stack plugin.
+`#5135 <https://github.com/wazuh/wazuh-kibana-app/pull/5135>`_    Fixed the 2 errors that appeared in console in Settings>Configuration section.
 ==============================================================    =============
 
 Wazuh Kibana plugin for Kibana 7.10.2
@@ -61,7 +104,12 @@ Wazuh Kibana plugin for Kibana 7.10.2
 ==============================================================    =============
 Reference                                                         Description
 ==============================================================    =============
-`#5196 <https://github.com/wazuh/wazuh-kibana-app/pull/5196>`_    aaa
+`#4828 <https://github.com/wazuh/wazuh-kibana-app/pull/4828>`_    Fixed trailing hyphen character for OS value in the list of agents.
+`#4909 <https://github.com/wazuh/wazuh-kibana-app/pull/4909>`_    Fixed an issue that caused incorrect visualization of IPv6 addresses.
+`#4911 <https://github.com/wazuh/wazuh-kibana-app/pull/4911>`_    Fixed several typos in the code, by @jctello.
+`#4917 <https://github.com/wazuh/wazuh-kibana-app/pull/4917>`_    Fixed the display of more than one protocol in the Global configuration section.
+`#4918 <https://github.com/wazuh/wazuh-kibana-app/pull/4918>`_    Handling endpoint response was done when there is no data to show.
+`#5135 <https://github.com/wazuh/wazuh-kibana-app/pull/5135>`_    Fixed the 2 errors that appeared in console in Settings>Configuration section.
 ==============================================================    =============
 
 Wazuh Kibana plugin for Kibana 7.16.x and 7.17.x
@@ -70,7 +118,12 @@ Wazuh Kibana plugin for Kibana 7.16.x and 7.17.x
 ==============================================================    =============
 Reference                                                         Description
 ==============================================================    =============
-`#5196 <https://github.com/wazuh/wazuh-kibana-app/pull/5196>`_    aaa
+`#4828 <https://github.com/wazuh/wazuh-kibana-app/pull/4828>`_    Fixed trailing hyphen character for OS value in the list of agents.
+`#4909 <https://github.com/wazuh/wazuh-kibana-app/pull/4909>`_    Fixed an issue that caused incorrect visualization of IPv6 addresses.
+`#4911 <https://github.com/wazuh/wazuh-kibana-app/pull/4911>`_    Fixed several typos in the code, by @jctello.
+`#4917 <https://github.com/wazuh/wazuh-kibana-app/pull/4917>`_    Fixed the display of more than one protocol in the Global configuration section.
+`#4918 <https://github.com/wazuh/wazuh-kibana-app/pull/4918>`_    Handling endpoint response was done when there is no data to show.
+`#5135 <https://github.com/wazuh/wazuh-kibana-app/pull/5135>`_    Fixed the 2 errors that appeared in console in Settings>Configuration section.
 ==============================================================    =============
 
 Changelogs
