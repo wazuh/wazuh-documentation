@@ -113,6 +113,7 @@ newUrls['4.4'] = [
   '/user-manual/wazuh-dashboard/custom-branding.html',
   '/release-notes/release-4-4-0.html',
   '/release-notes/release-4-4-1.html',
+  '/release-notes/release-4-5-0.html',
   '/nist/index.html',
   '/nist/visualization-and-dashboard.html',
   '/nist/log-data-analysis.html',
