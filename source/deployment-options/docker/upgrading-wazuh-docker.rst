@@ -61,7 +61,7 @@ This scenario is based on a single node deployment and both the docker-compose.y
 
       # docker-compose up -d
 
-#. We copy all the necessary files from the wazuh.manager container to the corresponding docker volumes. The docker volume directory path is the default, if you use a different path, you must modify the value of the ``DOCKER_VOLUME_PATH`` variable:
+#. Copy all the necessary files from the wazuh.manager container to the corresponding docker volumes. The docker volume directory path is the default, if you use a different path, you must modify the value of the ``DOCKER_VOLUME_PATH`` variable:
 
    .. code-block::
 
@@ -77,6 +77,16 @@ This scenario is based on a single node deployment and both the docker-compose.y
       # docker cp single-node_wazuh.manager_1:/var/ossec/wodles/. - | sudo tar xf /dev/stdin -C $DOCKER_VOLUME_PATH/single-node_wazuh_wodles/_data/
       # docker cp single-node_wazuh.manager_1:/etc/filebeat/. - | sudo tar xf /dev/stdin -C $DOCKER_VOLUME_PATH/single-node_filebeat_etc/_data/
       # docker cp single-node_wazuh.manager_1:/var/lib/filebeat/. - | sudo tar xf /dev/stdin -C $DOCKER_VOLUME_PATH/single-node_filebeat_var/_data/
+
+#. If the directory inside the container has no files generates an error, dismiss it:
+
+   .. code-block:: bash
+
+      # sudo docker cp single-node_wazuh.manager_1:/var/ossec/var/multigroups/. - | sudo tar xf /dev/stdin -C /var/lib/docker/volumes/single-node_wazuh_var_multigroups/_data/
+      Error: No such container:path: single-node_wazuh.manager_1:/var/ossec/var/multigroups/.
+      tar: This does not look like a tar archive
+      tar: Exiting with failure status due to previous errors
+
 
 #. After the file copy, we must uncomment the previously commented lines in ``Docker-compose.yml`` file:
 
