@@ -6,19 +6,19 @@
 Upgrading Wazuh Docker
 ======================
 
-This section describes how to upgrade Wazuh Docker deployments starting from version 4.3. To upgrade Wazuh deployments below version 4.3 (production deployment), refer to the :doc:`/deployment-options/docker/data-migration` documentation.
+This section describes how to upgrade Wazuh Docker deployments starting from version 4.3. To upgrade Wazuh deployments with versions below 4.3 (production deployment), refer to the :doc:`/deployment-options/docker/data-migration` documentation.
 
-This scenario is based on a single node deployment and both the docker-compose.yml and the mounted volumes have the default names and configuration.
+This scenario is based on a single node deployment, and both the docker-compose.yml and the mounted volumes have default names and configurations.
 
 #. From the root directory of the repository ``wazuh-docker``, go to the single node deployment folder:
 
-   .. code-block::
+   .. code-block:: console
 
       # cd single-node
 
 #. Run the following command to stop the current v4.3.x environment:
 
-   .. code-block::
+   .. code-block:: console
 
       # docker-compose down
 
@@ -31,7 +31,7 @@ This scenario is based on a single node deployment and both the docker-compose.y
 
          # git checkout v|WAZUH_CURRENT_DOCKER|
 
-#. Before starting the new version, we must copy all the files that have been persisted in the docker volumes and belong to the Wazuh manager installation. This process will overwrite the files belonging to the Wazuh manager installation, but it will not delete your own customization files.
+#. Before starting the new version, we must copy all the files that have persisted in the docker volumes and belong to the Wazuh manager installation. This process will overwrite the files belonging to the Wazuh manager installation, but it will not delete your own customization files.
 
 #. First of all, we must comment out all the lines of the ``Docker-compose.yml`` file where docker volumes are mounted in the ``wazuh.manger`` and ``wazuh.indexer`` containers:
 
