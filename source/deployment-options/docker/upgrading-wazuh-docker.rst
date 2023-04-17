@@ -33,7 +33,7 @@ This scenario is based on a single node deployment, and both the docker-compose.
 
 #. Before starting the new version, we must copy all the files that have persisted in the docker volumes and belong to the Wazuh manager installation. This process will overwrite the files belonging to the Wazuh manager installation, but it will not delete your own customization files.
 
-#. First of all, we must comment out all the lines of the ``Docker-compose.yml`` file where docker volumes are mounted in the ``wazuh.manger`` and ``wazuh.indexer`` containers:
+#. First, you must comment out all the lines of the ``Docker-compose.yml`` file where docker volumes are mounted in the ``wazuh.manger`` and ``wazuh.indexer`` containers:
 
    .. code-block:: yaml
       :lineno-start: 25
@@ -78,7 +78,7 @@ This scenario is based on a single node deployment, and both the docker-compose.
       # docker cp single-node_wazuh.manager_1:/etc/filebeat/. - | sudo tar xf /dev/stdin -C $DOCKER_VOLUME_PATH/single-node_filebeat_etc/_data/
       # docker cp single-node_wazuh.manager_1:/var/lib/filebeat/. - | sudo tar xf /dev/stdin -C $DOCKER_VOLUME_PATH/single-node_filebeat_var/_data/
 
-#. If the directory inside the container has no files generates an error, dismiss it:
+#. Note that if the directory inside the container has no files, it will generate an error, and you must dismiss it:
 
    .. code-block:: bash
 
@@ -88,7 +88,7 @@ This scenario is based on a single node deployment, and both the docker-compose.
       tar: Exiting with failure status due to previous errors
 
 
-#. After the file copy, we must uncomment the previously commented lines in ``Docker-compose.yml`` file:
+#. After copying the file, we must uncomment the previously commented lines in the ``Docker-compose.yml`` file:
 
    .. code-block:: yaml
       :lineno-start: 25
@@ -112,6 +112,6 @@ This scenario is based on a single node deployment, and both the docker-compose.
 
 #. Start the new version of Wazuh using ``docker-compose``:
 
-   .. code-block::
+   .. code-block:: console
 
       # docker-compose up -d
