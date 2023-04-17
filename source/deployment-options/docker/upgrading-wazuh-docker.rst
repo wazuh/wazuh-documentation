@@ -6,34 +6,32 @@
 Upgrading Wazuh Docker
 ======================
 
-This section describes how to upgrade Wazuh Docker deployments starting from version 4.3. To upgrade Wazuh deployments with versions below 4.3 (production deployment), refer to the :doc:`/deployment-options/docker/data-migration` documentation.
+This section describes how to upgrade a Wazuh Docker deployment starting from version 4.3. To upgrade Wazuh deployments with versions older than 4.3, refer to the :doc:`/deployment-options/docker/data-migration` documentation.
 
-This scenario is based on a single node deployment, and both the docker-compose.yml and the mounted volumes have default names and configurations.
+Below, you can see the steps for upgrading to version |WAZUH_CURRENT_MINOR|. These steps consider a scenario of a single node deployment. It considers that both, the ``docker-compose.yml`` and the mounted volumes, use their default names and configurations.
 
-#. From the root directory of the repository ``wazuh-docker``, go to the single node deployment folder:
+#. Change to the ``wazuh-docker/single-node/`` directory in the repository:
 
    .. code-block:: console
 
-      # cd single-node
+      # cd wazuh-docker/single-node
 
-#. Run the following command to stop the current v4.3.x environment:
+#. Run the following command to stop the outdated environment:
 
    .. code-block:: console
 
       # docker-compose down
 
-#. Set the new version of Wazuh:
+#. Set the latest version of Wazuh in one of two ways.
 
-   -  If you have a customized ``docker-compose.yml`` file and want to preserve it. Edit it and change the version of the images to the new version.
-   -  If you want to use the default ``docker-compose.yml`` file of the new version. Navigate to the Git branch of the latest version:
+   -  If you have a customized ``docker-compose.yml`` file and want to preserve it: Edit it and change the version of the images to the latest version.
+   -  If you want to use the default ``docker-compose.yml`` file of the latest version: Checkout the Git branch for this version.
 
-      .. code-block::
+      .. code-block:: console
 
          # git checkout v|WAZUH_CURRENT_DOCKER|
 
-#. Before starting the new version, we must copy all the files that have persisted in the docker volumes and belong to the Wazuh manager installation. This process will overwrite the files belonging to the Wazuh manager installation, but it will not delete your own customization files.
-
-#. First, you must comment out all the lines of the ``Docker-compose.yml`` file where docker volumes are mounted in the ``wazuh.manger`` and ``wazuh.indexer`` containers:
+#. Edit ``docker-compose.yml`` and comment out the following lines. This preserves the Wazuh installation files in the Docker volumes for the ``wazuh.manager`` and ``wazuh.indexer`` containers.
 
    .. code-block:: yaml
       :lineno-start: 25
@@ -55,15 +53,15 @@ This scenario is based on a single node deployment, and both the docker-compose.
 
       # - wazuh-indexer-data:/var/lib/wazuh-indexer
 
-#. Start the Wazuh stack with the new version:
+#. Start the Wazuh stack. This uses the latest version set in the previous steps.
 
-   .. code-block::
+   .. code-block:: console
 
       # docker-compose up -d
 
-#. Copy all the necessary files from the wazuh.manager container to the corresponding docker volumes. The docker volume directory path is the default, if you use a different path, you must modify the value of the ``DOCKER_VOLUME_PATH`` variable:
+#. Run the following commands to copy the necessary files from the ``wazuh.manager`` container to the corresponding docker volumes. If you don't use the default path, you must modify the value of the ``DOCKER_VOLUME_PATH`` variable below.
 
-   .. code-block::
+   .. code-block:: console
 
       # export DOCKER_VOLUME_PATH=/var/lib/docker/volumes
       # docker cp single-node_wazuh.manager_1:/var/ossec/api/configuration/. - | sudo tar xf /dev/stdin -C $DOCKER_VOLUME_PATH/single-node_wazuh_api_configuration/_data/
@@ -78,17 +76,19 @@ This scenario is based on a single node deployment, and both the docker-compose.
       # docker cp single-node_wazuh.manager_1:/etc/filebeat/. - | sudo tar xf /dev/stdin -C $DOCKER_VOLUME_PATH/single-node_filebeat_etc/_data/
       # docker cp single-node_wazuh.manager_1:/var/lib/filebeat/. - | sudo tar xf /dev/stdin -C $DOCKER_VOLUME_PATH/single-node_filebeat_var/_data/
 
-#. Note that if the directory inside the container has no files, it will generate an error, and you must dismiss it:
+   .. note::
 
-   .. code-block:: bash
+      Dismiss any failed copy command errors about missing files in the directory inside the container. For example:
 
-      # sudo docker cp single-node_wazuh.manager_1:/var/ossec/var/multigroups/. - | sudo tar xf /dev/stdin -C /var/lib/docker/volumes/single-node_wazuh_var_multigroups/_data/
-      Error: No such container:path: single-node_wazuh.manager_1:/var/ossec/var/multigroups/.
-      tar: This does not look like a tar archive
-      tar: Exiting with failure status due to previous errors
+      .. code-block:: console
+
+         # sudo docker cp single-node_wazuh.manager_1:/var/ossec/var/multigroups/. - | sudo tar xf /dev/stdin -C /var/lib/docker/volumes/single-node_wazuh_var_multigroups/_data/
+         Error: No such container:path: single-node_wazuh.manager_1:/var/ossec/var/multigroups/.
+         tar: This does not look like a tar archive
+         tar: Exiting with failure status due to previous errors
 
 
-#. After copying the file, we must uncomment the previously commented lines in the ``Docker-compose.yml`` file:
+#. Edit the ``docker-compose.yml`` file and uncomment the previously commented lines.
 
    .. code-block:: yaml
       :lineno-start: 25
@@ -110,7 +110,7 @@ This scenario is based on a single node deployment, and both the docker-compose.
 
       - wazuh-indexer-data:/var/lib/wazuh-indexer
 
-#. Start the new version of Wazuh using ``docker-compose``:
+#. Start the updated version of Wazuh using ``docker-compose``:
 
    .. code-block:: console
 
