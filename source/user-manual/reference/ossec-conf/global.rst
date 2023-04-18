@@ -90,7 +90,7 @@ This specifies the email recipient for alerts.
 | **Allowed values** | Any valid email address |
 +--------------------+-------------------------+
 
-This section will only allow for one email address, but the section can be repeated for each email address you would wish include.
+This section will only allow for one email address, but the section can be repeated for each email address you would wish to include.
 
 email_from
 ^^^^^^^^^^
@@ -131,7 +131,7 @@ This option defines what SMTP server to use to deliver alerts.
 helo_server
 ^^^^^^^^^^^
 
-This option defines how the ossec server will identify itself when sending mail.
+This option defines how the Wazuh server will identify itself when sending mail.
 
 +--------------------+-----------------------------------------------+
 | **Default value**  | notify.ossec.net                              |
