@@ -15,9 +15,9 @@ Amazon Security Lake is a fully-managed security data lake service that consolid
 
 All logs in Amazon Security Lake use the Open Cybersecurity Schema Framework (OCSF) standard for formatting. You can use the Wazuh integration for Amazon Security Lake to ingest security events from AWS services.
 
-These events are available as multi-event Apache Parquet objects in an S3 bucket. Each object has a corresponding SQS notification, once it's ready for download.
+These events are available as multi-event Apache Parquet objects in an S3 bucket. Each object has a corresponding SQS message, once it's ready for download.
 
-Wazuh periodically checks for new SQS notifications, downloads new objects, converts the files from Parquet to JSON and indexes each event into the Wazuh indexer.
+Wazuh periodically checks for new SQS messages, downloads new objects, converts the files from Parquet to JSON, and indexes each event into the Wazuh indexer.
 To set up the Wazuh integration for Amazon Security Lake as a subscriber, you need to do the following:
 
     #. Create a subscriber in Amazon Security Lake.
