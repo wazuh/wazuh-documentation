@@ -110,7 +110,7 @@ Below, you can see the steps for upgrading to version |WAZUH_CURRENT_MINOR|. The
 
       - wazuh-indexer-data:/var/lib/wazuh-indexer
 
-#. atop and delete the stack and start it again with the updated version of Wazuh using ``docker-compose``:
+#. Stop and delete the stack and start it again with the updated version of Wazuh using ``docker-compose``:
 
    .. code-block:: console
 
