@@ -79,7 +79,7 @@ Follow these steps in your Amazon deployment to verify the information for the S
 Verifying events are flowing into S3 bucket
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-Follow these steps in your Amazon deployment to verify that parquet events are flowing into your configured S3 buckets.
+Follow these steps in your Amazon deployment to verify that parquet files are flowing into your configured S3 buckets.
 
 #. In your AWS console, navigate to the Amazon S3 service.
 #. Navigate to the **Buckets** section, and click on the S3 bucket name that Security Lake created for each applicable region. These bucket names start with the prefix *aws-security-data-lake* .
