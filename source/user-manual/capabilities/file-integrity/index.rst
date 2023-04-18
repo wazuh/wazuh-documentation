@@ -16,5 +16,6 @@ Wazuh File integrity monitoring (FIM) system watches selected files and triggers
         :maxdepth: 2
 
         how-it-works
+        compatibility-matrix
         fim-fields-rule-mapping
         fim-configuration
