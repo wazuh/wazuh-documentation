@@ -25,7 +25,7 @@ Below, you can see the steps for upgrading to version |WAZUH_CURRENT_MINOR|. The
 #. Set the latest version of Wazuh in one of two ways.
 
    -  If you have a customized ``docker-compose.yml`` file and want to preserve it: Edit it and change the version of the images to the latest version.
-   -  If you want to use the default ``docker-compose.yml`` file of the latest version: Checkout the Git branch for this version.
+   -  If you want to use the default ``docker-compose.yml`` file of the latest version: Check out the Git branch for this version.
 
       .. code-block:: console
 
