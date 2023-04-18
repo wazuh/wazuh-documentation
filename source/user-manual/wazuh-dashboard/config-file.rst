@@ -767,8 +767,8 @@ This is an example of the wazuh.yml configuration:
 
     extensions.audit     : true
     extensions.aws       : false
-    extensions.docker    : false
     extensions.ciscat    : false
+    extensions.docker    : false
     extensions.gcp       : false
     extensions.gdpr      : true
     extensions.github    : false
