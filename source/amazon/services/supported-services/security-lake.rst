@@ -46,7 +46,7 @@ Logging in and navigating
 ~~~~~~~~~~~~~~~~~~~~~~~~~
 
 #. Log into your AWS console and navigate to **Security Lake**.
-#. Navigate to Subscribers, and click **Create subscriber** to get to the Create subscriber page.
+#. Navigate to Subscribers, and click **Create subscriber**.
 
 
 Creating a subscriber
