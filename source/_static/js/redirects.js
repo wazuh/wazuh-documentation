@@ -121,6 +121,7 @@ newUrls['4.4'] = [
   '/nist/vulnerability-detection.html',
   '/nist/active-response.html',
   '/nist/threat-intelligence.html',
+  '/release-notes/release-4-3-11.html',
 ];
 
 /* Pages removed in 4.4 */
