@@ -205,7 +205,7 @@ In this example, we have an environment with five agents. Agents ``001``, ``002`
 Adding an agents group label
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-To prepare the environment, add a label in the ``Team_A`` centralized configuration ``agent.conf``. To learn more, see :doc:`Agent labels </user-manual/capabilities/labels>`.
+To prepare the environment, add a label in the ``Team_A`` centralized configuration ``agent.conf``. To learn more, see :doc:`Agent labels </user-manual/agents/labels>`.
 
 #. Log into the Wazuh dashboard as administrator.
 
