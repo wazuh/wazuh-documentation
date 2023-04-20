@@ -77,6 +77,11 @@ removedUrls['x.y'] = [
 redirections.push(
     {
       'target': ['4.3=>4.4', '4.4=>4.3'],
+      '4.3': '/user-manual/capabilities/fluent-forwarder.html',
+      '4.4': '/user-manual/manager/fluent-forwarder.html',
+    },
+    {
+      'target': ['4.3=>4.4', '4.4=>4.3'],
       '4.3': '/amazon/services/supported-services/alb.html',
       '4.4': '/amazon/services/supported-services/elastic-load-balancing/alb.html',
     },
