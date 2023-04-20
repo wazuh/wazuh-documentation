@@ -31,9 +31,7 @@ In this section you will find:
     system-calls-monitoring/index
     command-monitoring/index
     active-response/index
-    agentless-monitoring/index
-    antiflooding
-    labels
+    agentless-monitoring/index        
     syscollector
     vulnerability-detection/index
     osquery

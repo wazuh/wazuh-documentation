@@ -77,6 +77,16 @@ removedUrls['x.y'] = [
 redirections.push(
     {
       'target': ['4.3=>4.4', '4.4=>4.3'],
+      '4.3': '/user-manual/capabilities/antiflooding.html',
+      '4.4': '/user-manual/agents/antiflooding.html',
+    },
+    {
+      'target': ['4.3=>4.4', '4.4=>4.3'],
+      '4.3': '/user-manual/capabilities/labels.html',
+      '4.4': '/user-manual/agents/labels.html',
+    },  
+    {
+      'target': ['4.3=>4.4', '4.4=>4.3'],
       '4.3': '/user-manual/capabilities/fluent-forwarder.html',
       '4.4': '/user-manual/manager/fluent-forwarder.html',
     },
