@@ -296,7 +296,7 @@ Then the request is send to logtest
 As in :ref:`wazuh-logtest tool <wazuh-logtest>` this indicates that rule 5710 level 5 matches and an alert is generated.
 The messages field gives information that a session was initialized with the ``95375d4c`` token.
 This token should be added to the next requests to keep the session, including its event history, rules and
-docoders loaded. If the token field is not added to the next request, a new session will be initialized, 
+decoders loaded. If the token field is not added to the next request, a new session will be initialized, 
 reloading the rules and decoders.
 
 
