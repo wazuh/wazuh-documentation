@@ -162,7 +162,7 @@ removedUrls['4.4'] = [
   '/user-manual/wazuh-dashboard/rbac.html',
   '/learning-wazuh/build-lab/install-wazuh-central-components.html',
   '/user-manual/capabilities/antiflooding.html',
-  '/user-manual/capabilities/labels.html'
+  '/user-manual/capabilities/labels.html',
   '/user-manual/capabilities/fluent-forwarder.html',
 ];
 
