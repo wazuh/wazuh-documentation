@@ -77,6 +77,21 @@ removedUrls['x.y'] = [
 redirections.push(
     {
       'target': ['4.3=>4.4', '4.4=>4.3'],
+      '4.3': '/user-manual/capabilities/antiflooding.html',
+      '4.4': '/user-manual/agents/antiflooding.html',
+    },
+    {
+      'target': ['4.3=>4.4', '4.4=>4.3'],
+      '4.3': '/user-manual/capabilities/labels.html',
+      '4.4': '/user-manual/agents/labels.html',
+    },  
+    {
+      'target': ['4.3=>4.4', '4.4=>4.3'],
+      '4.3': '/user-manual/capabilities/fluent-forwarder.html',
+      '4.4': '/user-manual/manager/fluent-forwarder.html',
+    },
+    {
+      'target': ['4.3=>4.4', '4.4=>4.3'],
       '4.3': '/amazon/services/supported-services/alb.html',
       '4.4': '/amazon/services/supported-services/elastic-load-balancing/alb.html',
     },
@@ -121,6 +136,9 @@ newUrls['4.4'] = [
   '/nist/vulnerability-detection.html',
   '/nist/active-response.html',
   '/nist/threat-intelligence.html',
+  '/user-manual/agents/antiflooding.html',
+  '/user-manual/agents/labels.html',
+  '/user-manual/manager/fluent-forwarder.html',
 ];
 
 /* Pages removed in 4.4 */
@@ -143,6 +161,9 @@ removedUrls['4.4'] = [
   '/user-manual/securing-wazuh/elastic-stack.html',
   '/user-manual/wazuh-dashboard/rbac.html',
   '/learning-wazuh/build-lab/install-wazuh-central-components.html',
+  '/user-manual/capabilities/antiflooding.html',
+  '/user-manual/capabilities/labels.html'
+  '/user-manual/capabilities/fluent-forwarder.html',
 ];
 
   /* *** RELEASE 4.3 ****/
