@@ -136,6 +136,9 @@ newUrls['4.4'] = [
   '/nist/vulnerability-detection.html',
   '/nist/active-response.html',
   '/nist/threat-intelligence.html',
+  '/user-manual/agents/antiflooding.html',
+  '/user-manual/agents/labels.html',
+  '/user-manual/manager/fluent-forwarder.html',
 ];
 
 /* Pages removed in 4.4 */
@@ -158,6 +161,9 @@ removedUrls['4.4'] = [
   '/user-manual/securing-wazuh/elastic-stack.html',
   '/user-manual/wazuh-dashboard/rbac.html',
   '/learning-wazuh/build-lab/install-wazuh-central-components.html',
+  '/user-manual/capabilities/antiflooding.html',
+  '/user-manual/capabilities/labels.html'
+  '/user-manual/capabilities/fluent-forwarder.html',
 ];
 
   /* *** RELEASE 4.3 ****/
