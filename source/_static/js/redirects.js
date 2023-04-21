@@ -139,6 +139,9 @@ newUrls['4.4'] = [
   '/user-manual/agents/antiflooding.html',
   '/user-manual/agents/labels.html',
   '/user-manual/manager/fluent-forwarder.html',
+  '/user-manual/capabilities/file-integrity/basic-settings.html',
+  '/user-manual/capabilities/file-integrity/how-to-configure-fim.html',
+  '/user-manual/capabilities/file-integrity/interpreting-fim-module-analysis.html',
 ];
 
 /* Pages removed in 4.4 */

@@ -35,5 +35,8 @@ The FIM capability helps organizations meet regulatory requirements for data sec
         :maxdepth: 2
 
         how-it-works
+        how-to-configure-fim
+        interpreting-fim-module-analysis
+        basic-settings
         fim-fields-rule-mapping
         fim-configuration
