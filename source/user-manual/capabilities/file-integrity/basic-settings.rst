@@ -261,12 +261,12 @@ Linux endpoint
 
    .. code-block:: console
 
-      systemctl restart wazuh-agent
+      # systemctl restart wazuh-agent
 
 Wazuh server
 ~~~~~~~~~~~~
 
-#. Create the fim_ignore.xml file in the /var/ossec/etc/rules/ directory on the Wazuh server:
+#. Create the ``fim_ignore.xml`` file in the ``/var/ossec/etc/rules/`` directory on the Wazuh server:
 
    .. code-block:: console
 
@@ -275,6 +275,7 @@ Wazuh server
 #. Add the following rules to the ``fim_ignore.xml`` file:
 
    .. code-block:: xml
+      :emphasize-lines: 2
 
       <group name="syscheck">
         <rule id="100345" level="0">
@@ -290,6 +291,6 @@ Wazuh server
 
    .. code-block:: console
 
-      systemctl restart wazuh-manager
+      # systemctl restart wazuh-manager
 
 

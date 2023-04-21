@@ -18,26 +18,26 @@ Following, you can see how to configure the FIM module to monitor a file and dir
 
 #. Add the following settings to the Wazuh agent configuration file, replacing the directories values with your own filepaths:
    
-- Linux: ``/var/ossec/etc/ossec.conf``
-- Windows: ``C:\Program Files (x86)\ossec-agent\ossec.conf``
-- macOS: ``/Library/Ossec/etc/ossec.conf``
+   - Linux: ``/var/ossec/etc/ossec.conf``
+   - Windows: ``C:\Program Files (x86)\ossec-agent\ossec.conf``
+   - macOS: ``/Library/Ossec/etc/ossec.conf``
 
-.. code-block:: xml
+   .. code-block:: xml
 
-   <syscheck>
-      <directories>FILEPATH/OF/MONITORED/FILE</directories>
-      <directories>FILEPATH/OF/MONITORED/DIRECTORY</directories>
-   </syscheck>
+      <syscheck>
+         <directories>FILEPATH/OF/MONITORED/FILE</directories>
+         <directories>FILEPATH/OF/MONITORED/DIRECTORY</directories>
+      </syscheck>
 
 #. Restart the Wazuh agent with administrator privilege to apply any configuration change:
 
-- Linux: ``systemctl restart wazuh-agent``
-- Windows: ``Restart-Service -Name wazuh``
-- macOS: ``/Library/Ossec/bin/wazuh-control restart``
+   - Linux: ``systemctl restart wazuh-agent``
+   - Windows: ``Restart-Service -Name wazuh``
+   - macOS: ``/Library/Ossec/bin/wazuh-control restart``
 
-.. note::
+   .. note::
 
-   If you specify a directory both in a :doc:`centralized configuration </user-manual/reference/centralized-configuration>` and on the :doc:`configuration </user-manual/reference/ossec-conf/index>` file of the Wazuh agent, the centralized configuration takes precedence and overrides the local configuration.
+      If you specify a directory both in a :doc:`centralized configuration </user-manual/reference/centralized-configuration>` and on the :doc:`configuration </user-manual/reference/ossec-conf/index>` file of the Wazuh agent, the centralized configuration takes precedence and overrides the local configuration.
 
 
 

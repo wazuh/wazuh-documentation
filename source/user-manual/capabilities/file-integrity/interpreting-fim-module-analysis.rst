@@ -6,7 +6,7 @@
 Interpreting the FIM module analysis
 ====================================
 
-FIM analysis results appear on the Wazuh dashboard whenever there’s an addition, modification, or deletion of monitored files. You can view the FIM results in three different sections of the dashboard. To view results from the FIM module, navigate to Modules > Integrity monitoring on the Wazuh dashboard. The results are in the following sections:
+FIM analysis results appear on the Wazuh dashboard whenever there’s an addition, modification, or deletion of monitored files. You can view the FIM results in three different sections of the dashboard. To view results from the FIM module, navigate to **Modules > Integrity monitoring** on the Wazuh dashboard. The results are in the following sections:
 
 - :ref:`Inventory <inventory>` 
 - :ref:`Dashboard <dashboard>`
@@ -25,7 +25,7 @@ This section displays an inventory of all files that the FIM module has indexed.
   :align: center
   :width: 100%
 
-You can click a file entry to view the entry details such as the last time the FIM module analyzed the file and the file attributes. You can also view FIM alerts related to the file. The image below shows this information for the /etc/ld.so.preload file.
+You can click a file entry to view the entry details such as the last time the FIM module analyzed the file and the file attributes. You can also view FIM alerts related to the file. The image below shows this information for the ``/etc/ld.so.preload`` file.
 
 .. thumbnail:: /images/manual/fim/entry-details.png
   :title: Entry details
