@@ -20,6 +20,7 @@ The other is an agent database on the Wazuh server. The :doc:`wazuh-db </user-ma
 
 .. thumbnail:: ../../../images/manual/fim/fim-flow.png
   :title: File integrity monitoring
+  :alt: File integrity monitoring
   :align: center
   :width: 100%
 
