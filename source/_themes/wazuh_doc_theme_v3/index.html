@@ -55,7 +55,7 @@
     <title>Wazuh documentation</title>
     <link rel="canonical" href="https://documentation.wazuh.com/current/index.html">
   </head>
-  <body>
+  <body data-release="{{ version }}">
     {% set index_redirect_js = get_js_by_page(pagename+'-redirect')[0] %}
     <script src="{{ pathto( index_redirect_js, 1) }}"></script>
   </body>
