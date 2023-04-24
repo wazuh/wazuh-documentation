@@ -56,6 +56,12 @@ In the case Wazuh is installed in a multi-node cluster configuration, repeat the
 Upgrading the Wazuh indexer
 ---------------------------
 
+.. note:: 
+
+   Note that this upgrade process doesn't update plugins installed manually. This might cause the upgrade to fail.
+
+   To ensure compatibility with the latest Wazuh indexer and Wazuh dashboard, please update manually installed plugins accordingly. For additional information, check the `distribution matrix <https://github.com/wazuh/wazuh-packages/tree/|WAZUH_CURRENT_MINOR|#distribution-version-matrix>`_.
+
 In the case of having a Wazuh indexer cluster with multiple nodes, the cluster will remain available throughout the upgrading process. This rolling upgrade allows shutting down one Wazuh indexer node at a time for minimal disruption of service. Repeat these steps for every Wazuh indexer node.
 
 .. note::
@@ -196,6 +202,12 @@ When upgrading a multi-node Wazuh manager cluster, run the upgrade in every node
       
 Upgrading the Wazuh dashboard
 -----------------------------
+
+.. note:: 
+
+   Note that this upgrade process doesn't update plugins installed manually. This might cause the upgrade to fail.
+
+   To ensure compatibility with the latest Wazuh indexer and Wazuh dashboard, please update manually installed plugins accordingly. For additional information, check the `distribution matrix <https://github.com/wazuh/wazuh-packages/tree/|WAZUH_CURRENT_MINOR|#distribution-version-matrix>`_.
 
 #. Upgrade the Wazuh dashboard.
 
