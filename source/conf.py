@@ -42,8 +42,8 @@ is_latest_release = False
 
 # The full version, including alpha/beta/rc tags
 # Important: use a valid branch (4.0) or, preferably, tag name (v4.0.0)
-release = '4.3.10'
-api_tag = 'v4.3.10'
+release = '4.3.11'
+api_tag = 'v4.3.11'
 apiURL = 'https://raw.githubusercontent.com/wazuh/wazuh/'+api_tag+'/api/api/spec/spec.yaml'
 
 # -- General configuration ------------------------------------------------
@@ -528,7 +528,7 @@ custom_replacements = {
     # === Versions and revisions for other Wazuh deployments
     #"|WAZUH_CURRENT_MAJOR_AMI|" :
     #"|WAZUH_CURRENT_MINOR_AMI|" :
-    "|WAZUH_CURRENT_AMI|" : release,
+    "|WAZUH_CURRENT_AMI|" : "4.3.10",
     "|WAZUH_CURRENT_MAJOR_OVA|" : "4.x",
     #"|WAZUH_CURRENT_MINOR_OVA|" :
     "|WAZUH_CURRENT_OVA|" : release,
