@@ -528,7 +528,7 @@ custom_replacements = {
     # === Versions and revisions for other Wazuh deployments
     #"|WAZUH_CURRENT_MAJOR_AMI|" :
     #"|WAZUH_CURRENT_MINOR_AMI|" :
-    "|WAZUH_CURRENT_AMI|" : release,
+    "|WAZUH_CURRENT_AMI|" : "4.3.10",
     "|WAZUH_CURRENT_MAJOR_OVA|" : "4.x",
     #"|WAZUH_CURRENT_MINOR_OVA|" :
     "|WAZUH_CURRENT_OVA|" : release,
