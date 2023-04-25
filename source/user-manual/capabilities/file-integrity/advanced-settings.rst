@@ -63,6 +63,7 @@ Perform the following steps to enable who-data monitoring. In this example, you 
    From the output, you can see the rule was added:
 
    .. code-block:: console
+      :class: output
 
       auditctl -w /etc -p wa -k wazuh_fim
 
@@ -277,7 +278,6 @@ Configuration
 
 To enable the who-data feature, you must declare the tag ``whodata="yes"`` within the directories block in the ``C:\Program Files (x86)\ossec-agent\ossec.conf`` configuration file. Wazuh automatically configures the System Access Control List (SACL) for the directory to monitor.
 
-
    .. code-block:: xml
 
       ...
@@ -288,8 +288,8 @@ To enable the who-data feature, you must declare the tag ``whodata="yes"`` withi
       </syscheck>
       ...
 
-Also, you need to properly configure System audit policies. Luckily, most supported Windows systems do this part automatically by default. However, if your Windows OS version is newer than Windows Vista but the system didn’t automatically configured the audit policies, see the :ref:`Manual configuration of the Local Audit Policies in Windows <manual_configuration_of_the_local_audit_policies_in_windows>`
- guide.
+
+Also, you need to properly configure System audit policies. Luckily, most supported Windows systems do this part automatically by default. However, if your Windows OS version is newer than Windows Vista but the system didn’t automatically configured the audit policies, see the :ref:`Manual configuration of the Local Audit Policies in Windows <manual_configuration_of_the_local_audit_policies_in_windows>` guide.
 
 Alert fields
 ~~~~~~~~~~~~
@@ -353,7 +353,7 @@ Expand the alert with ``rule.id:550`` to view all the information. In the alert 
 Alert in JSON:
 
    .. code-block:: json
-      :emphasize-lines: 13,73,83,84,85,88,89        
+      :emphasize-lines: 13,73,83,84,87,88        
 
       {
         "_index": "wazuh-alerts-4.x-2023.04.18",
@@ -581,9 +581,9 @@ We only recommended this option if your host is Windows Vista or Windows Server 
 
 **Computer Configuration > Windows Settings > Security Settings > Local Policies > Audit Policy > Audit object access**
 
-.. thumbnail:: ../../../images/manual/fim/advanced-audit-policy-configuration-section.png
-   :title: Advanced Audit Policy Configuration section
-   :alt: Advanced Audit Policy Configuration section
+.. thumbnail:: ../../../images/manual/fim/audit-policy-section.png
+   :title: Audit Policy section
+   :alt: Audit Policy section
    :align: center
    :width: 100%
 
@@ -618,9 +618,9 @@ In the configuration example below, you can see how to set the ``recursion_level
 
 #. Add the following settings to the Wazuh agent configuration file:
 
-  - Linux: ``/var/ossec/etc/ossec.conf``
-  - Windows: ``C:\Program Files (x86)\ossec-agent\ossec.conf``
-  - macOS: ``/Library/Ossec/etc/ossec.conf``
+   - Linux: ``/var/ossec/etc/ossec.conf``
+   - Windows: ``C:\Program Files (x86)\ossec-agent\ossec.conf``
+   - macOS: ``/Library/Ossec/etc/ossec.conf``
 
    .. code-block:: xml
 
@@ -630,9 +630,9 @@ In the configuration example below, you can see how to set the ``recursion_level
 
 #. Restart the Wazuh agent with administrator privilege to apply any configuration change:
  
-  - Linux: ``systemctl restart wazuh-agent``
-  - Windows: ``Restart-Service -Name wazuh``
-  - macOS: ``/Library/Ossec/bin/wazuh-control restart``
+   - Linux: ``systemctl restart wazuh-agent``
+   - Windows: ``Restart-Service -Name wazuh``
+   - macOS: ``/Library/Ossec/bin/wazuh-control restart``
 
 If you have the following directory structure and the above setting with ``recursion_level="3"``, FIM then generates alerts for file_3.txt and all files up to ``FILEPATH/OF/MONITORED/DIRECTORY/level_1/level_2/level_3/`` but not for any files in the directory deeper than ``level_3``.
 
@@ -685,7 +685,7 @@ In the configuration example below the FIM module of the agent gets the minimum 
    - Windows: ``Restart-Service -Name wazuh``
    - macOS: ``/Library/Ossec/bin/wazuh-control restart``
 
-Setting the process_priority value lower than the default gives the FIM module higher priority, more CPU resources, and makes it run faster. In the configuration example below the  FIM module has the maximum process priority.
+Setting the ``process_priority`` value lower than the default gives the FIM module higher priority, more CPU resources, and makes it run faster. In the configuration example below the  FIM module has the maximum process priority.
 
 #. Add the following settings to the Wazuh agent configuration file:
 
@@ -701,9 +701,9 @@ Setting the process_priority value lower than the default gives the FIM module h
 
 #. Restart the Wazuh agent with administrator privilege to apply any configuration change:
  
-   - Linux: systemctl restart wazuh-agent
-   - Windows: Restart-Service -Name wazuh
-   - macOS: /Library/Ossec/bin/wazuh-control restart
+   - Linux: ``systemctl restart wazuh-agent``
+   - Windows: ``Restart-Service -Name wazuh``
+   - macOS: ``/Library/Ossec/bin/wazuh-control restart``
 
 Database storage
 ----------------
