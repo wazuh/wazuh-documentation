@@ -58,7 +58,7 @@ Upgrading the Wazuh indexer
 
 .. note:: 
 
-   Note that this upgrade process doesn't update plugins installed manually. This might cause the upgrade to fail.
+   Note that this upgrade process doesn't update plugins installed manually. Outdated plugins might cause the upgrade to fail.
 
    To ensure compatibility with the latest Wazuh indexer and Wazuh dashboard, please update manually installed plugins accordingly. For additional information, check the `distribution matrix <https://github.com/wazuh/wazuh-packages/tree/|WAZUH_CURRENT_MINOR|#distribution-version-matrix>`_.
 
@@ -205,7 +205,7 @@ Upgrading the Wazuh dashboard
 
 .. note:: 
 
-   Note that this upgrade process doesn't update plugins installed manually. This might cause the upgrade to fail.
+   Note that this upgrade process doesn't update plugins installed manually. Outdated plugins might cause the upgrade to fail.
 
    To ensure compatibility with the latest Wazuh indexer and Wazuh dashboard, please update manually installed plugins accordingly. For additional information, check the `distribution matrix <https://github.com/wazuh/wazuh-packages/tree/|WAZUH_CURRENT_MINOR|#distribution-version-matrix>`_.
 
