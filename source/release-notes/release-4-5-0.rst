@@ -16,12 +16,12 @@ This release includes new features or enhancements as the following:
 Wazuh manager
 ^^^^^^^^^^^^^
 - `#13034 <https://github.com/wazuh/wazuh/pull/13034>`_ Added support for Amazon Linux 2022 in Vulnerability Detector.
-- `#13559 <https://github.com/wazuh/wazuh/pull/13559>`_ wazuh-authd can now generate X509 certificates.
-- `#14659 <https://github.com/wazuh/wazuh/pull/14659>`_ wazuh-remoted now checks the size of the files to avoid malformed merged.mg.
+- `#13559 <https://github.com/wazuh/wazuh/pull/13559>`_ ``wazuh-authd`` can now generate X509 certificates.
+- `#14659 <https://github.com/wazuh/wazuh/pull/14659>`_ ``wazuh-remoted`` now checks the size of the files to avoid malformed merged.mg.
 - `#14024 <https://github.com/wazuh/wazuh/pull/14024>`_ Added a limit option for the Rsync dispatch queue size.
 - `#14026 <https://github.com/wazuh/wazuh/pull/14026>`_ Added a limit option for the Rsync thread pool.
-- `#14549 <https://github.com/wazuh/wazuh/pull/14549>`_ wazuh-authd now shows a warning when deprecated forcing options are present in the configuration.
-- `#14804 <https://github.com/wazuh/wazuh/pull/14804>`_ The agent now notifies the manager when Active Reponse fails to run ``netsh``.
+- `#14549 <https://github.com/wazuh/wazuh/pull/14549>`_ ``wazuh-authd`` now shows a warning when deprecated forcing options are present in the configuration.
+- `#14804 <https://github.com/wazuh/wazuh/pull/14804>`_ The agent now notifies the manager when Active Response fails to run ``netsh``.
 
 Agent
 ^^^^^
@@ -38,8 +38,8 @@ Ruleset
 Wazuh dashboard
 ^^^^^^^^^^^^^^^
 
-- `#5197 <https://github.com/wazuh/wazuh-kibana-app/pull/5197>`_ `#5274 <https://github.com/wazuh/wazuh-kibana-app/pull/5274>`_ `#5298 <https://github.com/wazuh/wazuh-kibana-app/pull/5298>`_ Added rel="noopener noreferrer" in documentation links.
-- `#5203 <https://github.com/wazuh/wazuh-kibana-app/pull/5203>`_ Added ignore and restrict options to Syslog configuration.
+- `#5197 <https://github.com/wazuh/wazuh-kibana-app/pull/5197>`_ `#5274 <https://github.com/wazuh/wazuh-kibana-app/pull/5274>`_ `#5298 <https://github.com/wazuh/wazuh-kibana-app/pull/5298>`_ Added ``rel="noopener noreferrer"`` in documentation links.
+- `#5203 <https://github.com/wazuh/wazuh-kibana-app/pull/5203>`_ Added ``ignore`` and ``restrict`` options to Syslog configuration.
 - `#5376 <https://github.com/wazuh/wazuh-kibana-app/pull/5376>`_ Added the ``extensions.github`` and ``extensions.office`` settings to the default configuration file.
 - `#4163 <https://github.com/wazuh/wazuh-kibana-app/pull/4163>`_ Added new global error treatment (client-side).
 - `#5201 <https://github.com/wazuh/wazuh-kibana-app/pull/5201>`_ Changed of regular expression in RBAC.
@@ -48,8 +48,8 @@ Wazuh dashboard
 Wazuh Kibana plugin for Kibana 7.10.2
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-- `#5197 <https://github.com/wazuh/wazuh-kibana-app/pull/5197>`_ `#5274 <https://github.com/wazuh/wazuh-kibana-app/pull/5274>`_ `#5298 <https://github.com/wazuh/wazuh-kibana-app/pull/5298>`_ Added rel="noopener noreferrer" in documentation links.
-- `#5203 <https://github.com/wazuh/wazuh-kibana-app/pull/5203>`_ Added ignore and restrict options to Syslog configuration.
+- `#5197 <https://github.com/wazuh/wazuh-kibana-app/pull/5197>`_ `#5274 <https://github.com/wazuh/wazuh-kibana-app/pull/5274>`_ `#5298 <https://github.com/wazuh/wazuh-kibana-app/pull/5298>`_ Added ``rel="noopener noreferrer"`` in documentation links.
+- `#5203 <https://github.com/wazuh/wazuh-kibana-app/pull/5203>`_ Added ``ignore`` and ``restrict`` options to Syslog configuration.
 - `#5376 <https://github.com/wazuh/wazuh-kibana-app/pull/5376>`_ Added the ``extensions.github`` and ``extensions.office`` settings to the default configuration file.
 - `#4163 <https://github.com/wazuh/wazuh-kibana-app/pull/4163>`_ Added new global error treatment (client-side).
 - `#5201 <https://github.com/wazuh/wazuh-kibana-app/pull/5201>`_ Changed of regular expression in RBAC.
@@ -57,8 +57,8 @@ Wazuh Kibana plugin for Kibana 7.10.2
 
 Wazuh Kibana plugin for Kibana 7.16.x and 7.17.x
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-- `#5197 <https://github.com/wazuh/wazuh-kibana-app/pull/5197>`_ `#5274 <https://github.com/wazuh/wazuh-kibana-app/pull/5274>`_ `#5298 <https://github.com/wazuh/wazuh-kibana-app/pull/5298>`_ Added rel="noopener noreferrer" in documentation links.
-- `#5203 <https://github.com/wazuh/wazuh-kibana-app/pull/5203>`_ Added ignore and restrict options to Syslog configuration.
+- `#5197 <https://github.com/wazuh/wazuh-kibana-app/pull/5197>`_ `#5274 <https://github.com/wazuh/wazuh-kibana-app/pull/5274>`_ `#5298 <https://github.com/wazuh/wazuh-kibana-app/pull/5298>`_ Added ``rel="noopener noreferrer"`` in documentation links.
+- `#5203 <https://github.com/wazuh/wazuh-kibana-app/pull/5203>`_ Added ``ignore`` and ``restrict`` options to Syslog configuration.
 - `#5376 <https://github.com/wazuh/wazuh-kibana-app/pull/5376>`_ Added the ``extensions.github`` and ``extensions.office`` settings to the default configuration file.
 - `#4163 <https://github.com/wazuh/wazuh-kibana-app/pull/4163>`_ Added new global error treatment (client-side).
 - `#5201 <https://github.com/wazuh/wazuh-kibana-app/pull/5201>`_ Changed of regular expression in RBAC.
@@ -75,11 +75,11 @@ Wazuh manager
 ==============================================================    =============
 Reference                                                         Description
 ==============================================================    =============
-`#13979 <https://github.com/wazuh/wazuh/pull/13979>`_             Fixed wazuh-remoted not updating total bytes sent in UDP.
+`#13979 <https://github.com/wazuh/wazuh/pull/13979>`_             Fixed ``wazuh-remoted`` not updating total bytes sent in UDP.
 `#14356 <https://github.com/wazuh/wazuh/pull/14356>`_             Fixed translation of packages with a missing version in CPE Helper for Vulnerability Detector.
 `#14174 <https://github.com/wazuh/wazuh/pull/14174>`_             Fixed undefined behavior issues in Vulnerability Detector unit tests.
 `#14019 <https://github.com/wazuh/wazuh/pull/14019>`_             Fixed permission error when producing FIM alerts.
-`#15164 <https://github.com/wazuh/wazuh/pull/15164>`_             Fixed memory leaks wazuh-authd.
+`#15164 <https://github.com/wazuh/wazuh/pull/15164>`_             Fixed memory leaks ``wazuh-authd``.
 ==============================================================    =============
 
 Agent
@@ -102,12 +102,12 @@ Reference                                                         Description
 `#4909 <https://github.com/wazuh/wazuh-kibana-app/pull/4909>`_    Fixed an issue that caused incorrect visualization of IPv6 addresses.
 `#4911 <https://github.com/wazuh/wazuh-kibana-app/pull/4911>`_    Fixed several typos in the code, by @jctello.
 `#4917 <https://github.com/wazuh/wazuh-kibana-app/pull/4917>`_    Fixed the display of more than one protocol in the Global configuration section.
-`#4918 <https://github.com/wazuh/wazuh-kibana-app/pull/4918>`_    Handling endpoint response was done when there is no data to show.
+`#4918 <https://github.com/wazuh/wazuh-kibana-app/pull/4918>`_    Handling endpoint response is done when there is no data to show.
 `#4894 <https://github.com/wazuh/wazuh-kibana-app/pull/4894>`_    Fixed references to Elasticsearch in Wazuh-stack plugin.
-`#5135 <https://github.com/wazuh/wazuh-kibana-app/pull/5135>`_    Fixed the 2 errors that appeared in console in Settings>Configuration section.
+`#5135 <https://github.com/wazuh/wazuh-kibana-app/pull/5135>`_    Fixed two errors that appeared in the console in **Settings > Configuration** section.
 `#5376 <https://github.com/wazuh/wazuh-kibana-app/pull/5376>`_    Fixed the GitHub and Office 365 module visibility configuration for each API host was not kept when changing/upgrading the plugin.
-`#5376 <https://github.com/wazuh/wazuh-kibana-app/pull/5376>`_    Fixed the GitHub and Office 365 modules appear in the main menu when they were not configured.
-`#5364 <https://github.com/wazuh/wazuh-kibana-app/pull/5364>`_    Fixed TypeError in FIM Inventory using new error handler.
+`#5376 <https://github.com/wazuh/wazuh-kibana-app/pull/5376>`_    Fixed the GitHub and Office 365 modules that appeared in the main menu when they were not configured.
+`#5364 <https://github.com/wazuh/wazuh-kibana-app/pull/5364>`_    Fixed TypeError in FIM Inventory using a new error handler.
 ==============================================================    =============
 
 Wazuh Kibana plugin for Kibana 7.10.2
@@ -120,11 +120,11 @@ Reference                                                         Description
 `#4909 <https://github.com/wazuh/wazuh-kibana-app/pull/4909>`_    Fixed an issue that caused incorrect visualization of IPv6 addresses.
 `#4911 <https://github.com/wazuh/wazuh-kibana-app/pull/4911>`_    Fixed several typos in the code, by @jctello.
 `#4917 <https://github.com/wazuh/wazuh-kibana-app/pull/4917>`_    Fixed the display of more than one protocol in the Global configuration section.
-`#4918 <https://github.com/wazuh/wazuh-kibana-app/pull/4918>`_    Handling endpoint response was done when there is no data to show.
-`#5135 <https://github.com/wazuh/wazuh-kibana-app/pull/5135>`_    Fixed the 2 errors that appeared in console in Settings>Configuration section.
+`#4918 <https://github.com/wazuh/wazuh-kibana-app/pull/4918>`_    Handling endpoint response is done when there is no data to show.
+`#5135 <https://github.com/wazuh/wazuh-kibana-app/pull/5135>`_    Fixed two errors that appeared in the console in **Settings > Configuration** section.
 `#5376 <https://github.com/wazuh/wazuh-kibana-app/pull/5376>`_    Fixed the GitHub and Office 365 module visibility configuration for each API host was not kept when changing/upgrading the plugin.
-`#5376 <https://github.com/wazuh/wazuh-kibana-app/pull/5376>`_    Fixed the GitHub and Office 365 modules appear in the main menu when they were not configured.
-`#5364 <https://github.com/wazuh/wazuh-kibana-app/pull/5364>`_    Fixed TypeError in FIM Inventory using new error handler.
+`#5376 <https://github.com/wazuh/wazuh-kibana-app/pull/5376>`_    Fixed the GitHub and Office 365 modules that appeared in the main menu when they were not configured.
+`#5364 <https://github.com/wazuh/wazuh-kibana-app/pull/5364>`_    Fixed TypeError in FIM Inventory using a new error handler.
 ==============================================================    =============
 
 Wazuh Kibana plugin for Kibana 7.16.x and 7.17.x
@@ -137,11 +137,11 @@ Reference                                                         Description
 `#4909 <https://github.com/wazuh/wazuh-kibana-app/pull/4909>`_    Fixed an issue that caused incorrect visualization of IPv6 addresses.
 `#4911 <https://github.com/wazuh/wazuh-kibana-app/pull/4911>`_    Fixed several typos in the code, by @jctello.
 `#4917 <https://github.com/wazuh/wazuh-kibana-app/pull/4917>`_    Fixed the display of more than one protocol in the Global configuration section.
-`#4918 <https://github.com/wazuh/wazuh-kibana-app/pull/4918>`_    Handling endpoint response was done when there is no data to show.
-`#5135 <https://github.com/wazuh/wazuh-kibana-app/pull/5135>`_    Fixed the 2 errors that appeared in console in Settings>Configuration section.
+`#4918 <https://github.com/wazuh/wazuh-kibana-app/pull/4918>`_    Handling endpoint response is done when there is no data to show.
+`#5135 <https://github.com/wazuh/wazuh-kibana-app/pull/5135>`_    Fixed two errors that appeared in the console in **Settings > Configuration** section.
 `#5376 <https://github.com/wazuh/wazuh-kibana-app/pull/5376>`_    Fixed the GitHub and Office 365 module visibility configuration for each API host was not kept when changing/upgrading the plugin.
-`#5376 <https://github.com/wazuh/wazuh-kibana-app/pull/5376>`_    Fixed the GitHub and Office 365 modules appear in the main menu when they were not configured.
-`#5364 <https://github.com/wazuh/wazuh-kibana-app/pull/5364>`_    Fixed TypeError in FIM Inventory using new error handler.
+`#5376 <https://github.com/wazuh/wazuh-kibana-app/pull/5376>`_    Fixed the GitHub and Office 365 modules that appeared in the main menu when they were not configured.
+`#5364 <https://github.com/wazuh/wazuh-kibana-app/pull/5364>`_    Fixed TypeError in FIM Inventory using a new error handler.
 ==============================================================    =============
 
 Changelogs
