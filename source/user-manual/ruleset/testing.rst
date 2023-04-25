@@ -18,14 +18,16 @@ With Wazuh logtest, you do the following.
 #. Check what decoders match them and check what fields these decoders identify.
 #. Check what alerts match the event logs.
 
-Wazuh logtest shares the same rules engine with the Wazuh analysis module. It's based on unique sessions. Each session loads its own set of rules and decoders.
+Wazuh logtest shares the same rules engine with the Wazuh analysis module. It's based on unique sessions. Each session loads its own set of rules and decoders. 
+
+The ``firedtimes`` counters keep track of all the matching occurrences of the rules. Wazuh logtest keeps these counters throughout the duration of the session. 
 
 Configuration
 -------------
 
-Wazuh logtest is a functionality the Wazuh manager provides. In a Wazuh cluster, the master node processes the event logs. You can change the configuration parameters in the :doc:`ossec.conf </user-manual/reference/ossec-conf/index>` file in the :doc:`\<rule_test\> </user-manual/reference/ossec-conf/rule-test>` section.
+Wazuh logtest is a functionality the Wazuh manager provides. In a Wazuh cluster, the master node processes the event logs. You can change the configuration parameters in the :doc:`\<rule_test\> </user-manual/reference/ossec-conf/rule-test>` section of the :doc:`ossec.conf </user-manual/reference/ossec-conf/index>` file.
 
-By default, the configuration is set as follows.
+By default, the logtest configuration is set as follows.
 
 .. code-block:: xml
 
@@ -41,18 +43,21 @@ By default, the configuration is set as follows.
 +=================+==============================================+================+====================================+
 | enabled         | Enables and disables logtest                 |      ``yes``   | ``yes``, ``no``                    |
 +-----------------+----------------------------------------------+----------------+------------------------------------+
-| threads         | Number of Wazuh-Logtest threads              |                | ``1``–``128``, ``auto``            |
-|                 |                                              |       ``1``    | | auto creates one thread per CPU  |
+| threads         | Number of logtest threads                    |                | ``1``–``128``, ``auto``.           |
+|                 |                                              |       ``1``    | *auto* creates one thread per CPU  |
 +-----------------+----------------------------------------------+----------------+------------------------------------+
-| max_sessions    | Number of users connected simultaneously     |      ``64``    | ``1``–``500``                      |
+| max_sessions    | Number of open sessions allowed              |      ``64``    | ``1``–``500``                      |
 +-----------------+----------------------------------------------+----------------+------------------------------------+
-| session_timeout | Time interval in which a client must remain  |                | A positive number that should      |
-|                 | offline to remove the resources associated   |      ``15m``   | contain a suffix character         |
-|                 | with their session                           |                | indicating a time unit, such as,   |
-|                 |                                              |                | ``s`` (seconds), ``m`` (minutes),  |
-|                 |                                              |                | ``h`` (hours).                     |
-|                 |                                              |                | The max value is ``365`` days      |
+| session_timeout | Minimum time inactive to close a session     |                | Positive number and a suffix       |
+|                 |                                              |      ``15m``   | character indicating a time unit.  |
+|                 |                                              |                | ``s`` for seconds, ``m`` for       |
+|                 |                                              |                | minutes, ``h`` for hours.          |
+|                 |                                              |                | The max value allowed is ``365d``  |
 +-----------------+----------------------------------------------+----------------+------------------------------------+
+
+If a session is idle longer than the ``session_timeout``, it gets closed.
+
+If the number of open sessions reaches ``max_sessions``, opening a new session closes the session that has been inactive for the longest time.
 
 Using the Wazuh dashboard and the command line tool
 ---------------------------------------------------
@@ -107,7 +112,7 @@ To try Wazuh logtest using the Wazuh dashboard or the command line tool, follow 
 
 The above result shows that rule id ``5710`` matches the event log.
 
-If you paste the log seven more times within two minutes, you can see that rule id ``5710`` matches multiple times. In *Phase 3, filtering (rules)*, the ``firedtimes`` counter increases with each repetition. But for the last log line, rule id ``5712`` makes the match. This rule captures the eighth event that was matching rule id ``5710`` previously for the same IP address.
+If you paste the log seven more times within two minutes, you can see that rule id ``5710`` matches multiple times. You can see that in *Phase 3, filtering (rules)*, the ``firedtimes`` counter increases with each repetition. But for the last log line, rule id ``5712`` makes the match. This rule captures the eighth event that was matching rule id ``5710`` previously for the same IP address.
 
 .. code-block:: none
    :class: output
@@ -152,9 +157,9 @@ To use Wazuh logtest with the Wazuh API, you need the two endpoints detailed bel
 +-------------------------------+-----------------+-----------------------------------------------------------------------+
 | Endpoint                      | Method          | Description                                                           |
 +===============================+=================+=======================================================================+
-| ``/logtest``                  | PUT             | Check if a log matches an alert and query the related information.    |
+| ``/logtest``                  | PUT             | Check if an alert matches a log and query the related information.    |
 +-------------------------------+-----------------+-----------------------------------------------------------------------+
-| ``/logtest/sessions/{token}`` | DELETE          | Delete the saved session corresponding to ``{token}``                 |
+| ``/logtest/sessions/{token}`` | DELETE          | Delete the session corresponding to ``{token}``                       |
 +-------------------------------+-----------------+-----------------------------------------------------------------------+
 
 ``PUT /logtest`` accepts the following list of parameters as a *RequestBody*:
@@ -167,33 +172,32 @@ To use Wazuh logtest with the Wazuh API, you need the two endpoints detailed bel
 Logging into the Wazuh API
 ^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-Wazuh API endpoints require authentication. All calls must include a JSON Web Token.
-Use the cURL command to log in. The Wazuh API provides a JWT token upon success.
+Wazuh API endpoints require authentication. All calls must include a JSON Web Token. You can use the cURL command to log in. The Wazuh API provides a JWT token upon success.
 
-#. Run the following command replacing ``<user>`` and ``<password>`` with your own values. By default, the user is `wazuh`, and the password is `wazuh`.
-
-   .. code-block:: bash
-
-      TOKEN=$(curl -u <user>:<password> -k -X POST "https://localhost:55000/security/user/authenticate?raw=true")
-
-#. Check that everything works correctly
+#. Run the following command replacing ``<WAZUH_API_USER>`` and ``<PASSWORD>`` with your own values.
 
    .. code-block:: bash
 
-      curl -k -X GET "https://localhost:55000/" -H "Authorization: Bearer $TOKEN"
+      TOKEN=$(curl -u <WAZUH_API_USER>:<PASSWORD> -k -X POST "https://localhost:55000/security/user/authenticate?raw=true")
+
+#. Check that everything works correctly.
+
+   .. code-block:: bash
+
+      curl -k -X GET "https://localhost:55000/?pretty=true" -H "Authorization: Bearer $TOKEN"
 
    .. code-block:: JSON
       :class: output
 
       {
          "data": {
-               "title": "Wazuh API REST",
-               "api_version": "4.2.0",
-               "revision": 40100,
-               "license_name": "GPL 2.0",
-               "license_url": "https://github.com/wazuh/wazuh/blob/4.2/LICENSE",
-               "hostname": "wazuh-manager",
-               "timestamp": "2020-11-10T15:15:31+0000"
+            "title": "Wazuh API REST",
+            "api_version": "4.4.1",
+            "revision": 40406,
+            "license_name": "GPL 2.0",
+            "license_url": "https://github.com/wazuh/wazuh/blob/v4.4.1/LICENSE",
+            "hostname": "centos7",
+            "timestamp": "2023-04-25T13:39:23Z"
          },
          "error": 0
       }
@@ -232,102 +236,110 @@ Then, send the request to logtest.
 
    .. code-block:: bash
 
-      curl -k -X PUT "https://localhost:55000/logtest" \
+      curl -k -X PUT "https://localhost:55000/logtest?pretty=true" \
       -H "Authorization: Bearer $TOKEN" \
       -H  "Content-Type: application/json" \
       -d "$LOGTEST_REQ"
 
-
    .. code-block:: JSON
       :class: output
-      :emphasize-lines: 6, 13, 25
+      :emphasize-lines: 5, 7, 13, 34
 
       {
          "error": 0,
          "data": {
-               "token": "95375d4c",
-               "messages": [
-                  "INFO: (7202): Session initialized with token '95375d4c'"
-               ],
-               "output": {
-                  "timestamp": "2020-11-10T17:46:23.289+0000",
-                  "rule": {
-                     "level": 5,
-                     "description": "sshd: Attempt to login using a non-existent user",
-                     "id": "5710",
-                     "mitre": {
-                           "id": [
-                              "T1110"
-                           ],
-                           "tactic": [
-                              "Credential Access"
-                           ],
-                           "technique": [
-                              "Brute Force"
-                           ]
-                     },
-                     "firedtimes": 1,
-                     "mail": false,
-                     "groups": [
-                           "syslog",
-                           "sshd",
-                           "invalid_login",
-                           "authentication_failed"
+            "messages": [
+               "INFO: (7202): Session initialized with token '35604a22'"
+            ],
+            "token": "35604a22",
+            "output": {
+               "timestamp": "2023-04-25T13:50:43.764000Z",
+               "rule": {
+                  "level": 5,
+                  "description": "sshd: Attempt to login using a non-existent user",
+                  "id": "5710",
+                  "mitre": {
+                     "id": [
+                        "T1110.001",
+                        "T1021.004",
+                        "T1078"
                      ],
-                     "pci_dss": [
-                           "10.2.4",
-                           "10.2.5",
-                           "10.6.1"
+                     "tactic": [
+                        "Credential Access",
+                        "Lateral Movement",
+                        "Defense Evasion",
+                        "Persistence",
+                        "Privilege Escalation",
+                        "Initial Access"
                      ],
-                     "gpg13": [
-                           "7.1"
-                     ],
-                     "gdpr": [
-                           "IV_35.7.d",
-                           "IV_32.2"
-                     ],
-                     "hipaa": [
-                           "164.312.b"
-                     ],
-                     "nist_800_53": [
-                           "AU.14",
-                           "AC.7",
-                           "AU.6"
-                     ],
-                     "tsc": [
-                           "CC6.1",
-                           "CC6.8",
-                           "CC7.2",
-                           "CC7.3"
+                     "technique": [
+                        "Password Guessing",
+                        "SSH",
+                        "Valid Accounts"
                      ]
                   },
-                  "agent": {
-                     "id": "000",
-                     "name": "wazuh-master"
-                  },
-                  "manager": {
-                     "name": "wazuh-master"
-                  },
-                  "id": "1605030383.185271",
-                  "full_log": "Oct 15 21:07:00 linux-agent sshd[29205]: Invalid user blimey from 18.18.18.18 port 48928",
-                  "predecoder": {
-                     "program_name": "sshd",
-                     "timestamp": "Oct 15 21:07:00",
-                     "hostname": "linux-agent"
-                  },
-                  "decoder": {
-                     "parent": "sshd",
-                     "name": "sshd"
-                  },
-                  "data": {
-                     "srcip": "18.18.18.18",
-                     "srcport": "48928",
-                     "srcuser": "blimey"
-                  },
-                  "location": "master->/var/log/syslog"
+                  "firedtimes": 1,
+                  "mail": false,
+                  "groups": [
+                     "syslog",
+                     "sshd",
+                     "authentication_failed",
+                     "invalid_login"
+                  ],
+                  "gdpr": [
+                     "IV_35.7.d",
+                     "IV_32.2"
+                  ],
+                  "gpg13": [
+                     "7.1"
+                  ],
+                  "hipaa": [
+                     "164.312.b"
+                  ],
+                  "nist_800_53": [
+                     "AU.14",
+                     "AC.7",
+                     "AU.6"
+                  ],
+                  "pci_dss": [
+                     "10.2.4",
+                     "10.2.5",
+                     "10.6.1"
+                  ],
+                  "tsc": [
+                     "CC6.1",
+                     "CC6.8",
+                     "CC7.2",
+                     "CC7.3"
+                  ]
                },
-               "alert": true,
-               "codemsg": 1
+               "agent": {
+                  "id": "000",
+                  "name": "centos7"
+               },
+               "manager": {
+                  "name": "centos7"
+               },
+               "id": "1682430643.3725",
+               "full_log": "Oct 15 21:07:00 linux-agent sshd[29205]: Invalid user blimey from 18.18.18.18 port 48928",
+               "predecoder": {
+                  "program_name": "sshd",
+                  "timestamp": "Oct 15 21:07:00",
+                  "hostname": "linux-agent"
+               },
+               "decoder": {
+                  "parent": "sshd",
+                  "name": "sshd"
+               },
+               "data": {
+                  "srcip": "18.18.18.18",
+                  "srcport": "48928",
+                  "srcuser": "blimey"
+               },
+               "location": "master->/var/log/syslog"
+            },
+            "alert": true,
+            "codemsg": 0
          }
       }
 
@@ -338,121 +350,125 @@ The ``messages`` field shows the session token ``95375d4c``. You must add this t
 Repeating the request with the same session
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-Add the session token to the request and send it seven more times within two minutes. In the ``rule`` object of the response, inside the ``output`` field, you can see the ``firedtimes`` counter increases for each repetition. Finally, rule ``5712`` is the one that makes the match. This rule captures the eighth event that matched rule id ``5710`` previously for the same IP address.
+Add the session token to the request and send it seven more times within two minutes. You can see that rule id ``5710`` matches multiple times. In the ``rule`` object of the response, inside the ``output`` field, you can see the ``firedtimes`` counter increases with each repetition. But for the last request, rule id ``5712`` makes the match. This rule captures the eighth event that was matching rule id ``5710`` previously for the same IP address.
 
-   .. code-block:: bash
+.. code-block:: bash
+   :emphasize-lines: 2
 
-      LOGTEST_REQ=$(echo '{'\
-          '"token": "95375d4c",'\
-          '"event": "Oct 15 21:07:00 linux-agent sshd[29205]: Invalid user blimey from 18.18.18.18 port 48928",'\
-          '"log_format": "syslog",'\
-          '"location": "master->/var/log/syslog"'\
-          '}')
+   LOGTEST_REQ=$(echo '{'\
+       '"token": "35604a22",'\
+       '"event": "Oct 15 21:07:00 linux-agent sshd[29205]: Invalid user blimey from 18.18.18.18 port 48928",'\
+       '"log_format": "syslog",'\
+       '"location": "master->/var/log/syslog"'\
+       '}')
 
-   .. code-block:: bash
+.. note::
 
-      curl -k -X PUT "https://localhost:55000/logtest" \
-      -H "Authorization: Bearer $TOKEN" \
-      -H  "Content-Type: application/json" \
-      -d "$LOGTEST_REQ"
+   Providing an invalid logtest session token results in a new session.
 
+.. code-block:: bash
 
-   .. code-block:: JSON
-      :class: output
-      :emphasize-lines: 10
+   curl -k -X PUT "https://localhost:55000/logtest?pretty=true" \
+   -H "Authorization: Bearer $TOKEN" \
+   -H  "Content-Type: application/json" \
+   -d "$LOGTEST_REQ"
 
-      {
-         "error": 0,
-         "data": {
-               "token": "95375d4c",
-               "output": {
-                  "timestamp": "2020-11-10T18:04:42.440+0000",
-                  "rule": {
-                     "level": 10,
-                     "description": "sshd: brute force trying to get access to the system.",
-                     "id": "5712",
-                     "mitre": {
-                           "id": [
-                              "T1110"
-                           ],
-                           "tactic": [
-                              "Credential Access"
-                           ],
-                           "technique": [
-                              "Brute Force"
-                           ]
-                     },
-                     "frequency": 8,
-                     "firedtimes": 1,
-                     "mail": false,
-                     "groups": [
-                           "syslog",
-                           "sshd",
-                           "authentication_failures"
-                     ],
-                     "pci_dss": [
-                           "11.4",
-                           "10.2.4",
-                           "10.2.5"
-                     ],
-                     "gdpr": [
-                           "IV_35.7.d",
-                           "IV_32.2"
-                     ],
-                     "hipaa": [
-                           "164.312.b"
-                     ],
-                     "nist_800_53": [
-                           "SI.4",
-                           "AU.14",
-                           "AC.7"
-                     ],
-                     "tsc": [
-                           "CC6.1",
-                           "CC6.8",
-                           "CC7.2",
-                           "CC7.3"
-                     ]
-                  },
-                  "agent": {
-                     "id": "000",
-                     "name": "wazuh-master"
-                  },
-                  "manager": {
-                     "name": "wazuh-master"
-                  },
-                  "id": "1605031482.185271",
-                  "previous_output": "Oct 15 21:07:00 linux-agent sshd[29205]: Invalid user blimey from 18.18.18.18 port 48928\nOct 15 21:07:00 linux-agent sshd[29205]: Invalid user blimey from 18.18.18.18 port 48928\nOct 15 21:07:00 linux-agent sshd[29205]: Invalid user blimey from 18.18.18.18 port 48928\nOct 15 21:07:00 linux-agent sshd[29205]: Invalid user blimey from 18.18.18.18 port 48928\nOct 15 21:07:00 linux-agent sshd[29205]: Invalid user blimey from 18.18.18.18 port 48928\nOct 15 21:07:00 linux-agent sshd[29205]: Invalid user blimey from 18.18.18.18 port 48928\nOct 15 21:07:00 linux-agent sshd[29205]: Invalid user blimey from 18.18.18.18 port 48928",
-                  "full_log": "Oct 15 21:07:00 linux-agent sshd[29205]: Invalid user blimey from 18.18.18.18 port 48928",
-                  "predecoder": {
-                     "program_name": "sshd",
-                     "timestamp": "Oct 15 21:07:00",
-                     "hostname": "linux-agent"
-                  },
-                  "decoder": {
-                     "parent": "sshd",
-                     "name": "sshd"
-                  },
-                  "data": {
-                     "srcip": "18.18.18.18",
-                     "srcport": "48928",
-                     "srcuser": "blimey"
-                  },
-                  "location": "master->/var/log/syslog"
+.. code-block:: JSON
+   :class: output
+   :emphasize-lines: 10
+
+   {
+      "error": 0,
+      "data": {
+         "token": "35604a22",
+         "output": {
+            "timestamp": "2023-04-25T13:51:36.409000Z",
+            "rule": {
+               "level": 10,
+               "description": "sshd: brute force trying to get access to the system. Non existent user.",
+               "id": "5712",
+               "mitre": {
+                  "id": [
+                     "T1110"
+                  ],
+                  "tactic": [
+                     "Credential Access"
+                  ],
+                  "technique": [
+                     "Brute Force"
+                  ]
                },
-               "alert": true,
-               "codemsg": 0
-         }
+               "frequency": 8,
+               "firedtimes": 1,
+               "mail": false,
+               "groups": [
+                  "syslog",
+                  "sshd",
+                  "authentication_failures"
+               ],
+               "gdpr": [
+                  "IV_35.7.d",
+                  "IV_32.2"
+               ],
+               "hipaa": [
+                  "164.312.b"
+               ],
+               "nist_800_53": [
+                  "SI.4",
+                  "AU.14",
+                  "AC.7"
+               ],
+               "pci_dss": [
+                  "11.4",
+                  "10.2.4",
+                  "10.2.5"
+               ],
+               "tsc": [
+                  "CC6.1",
+                  "CC6.8",
+                  "CC7.2",
+                  "CC7.3"
+               ]
+            },
+            "agent": {
+               "id": "000",
+               "name": "centos7"
+            },
+            "manager": {
+               "name": "centos7"
+            },
+            "id": "1682430696.3725",
+            "previous_output": "Oct 15 21:07:00 linux-agent sshd[29205]: Invalid user blimey from 18.18.18.18 port 48928\nOct 15 21:07:00 linux-agent sshd[29205]: Invalid user blimey from 18.18.18.18 port 48928\nOct 15 21:07:00 linux-agent sshd[29205]: Invalid user blimey from 18.18.18.18 port 48928\nOct 15 21:07:00 linux-agent sshd[29205]: Invalid user blimey from 18.18.18.18 port 48928\nOct 15 21:07:00 linux-agent sshd[29205]: Invalid user blimey from 18.18.18.18 port 48928\nOct 15 21:07:00 linux-agent sshd[29205]: Invalid user blimey from 18.18.18.18 port 48928\nOct 15 21:07:00 linux-agent sshd[29205]: Invalid user blimey from 18.18.18.18 port 48928",
+            "full_log": "Oct 15 21:07:00 linux-agent sshd[29205]: Invalid user blimey from 18.18.18.18 port 48928",
+            "predecoder": {
+               "program_name": "sshd",
+               "timestamp": "Oct 15 21:07:00",
+               "hostname": "linux-agent"
+            },
+            "decoder": {
+               "parent": "sshd",
+               "name": "sshd"
+            },
+            "data": {
+               "srcip": "18.18.18.18",
+               "srcport": "48928",
+               "srcuser": "blimey"
+            },
+            "location": "master->/var/log/syslog"
+         },
+         "alert": true,
+         "codemsg": 0
       }
+   }
 
 Closing the session
 ^^^^^^^^^^^^^^^^^^^
 
-If you don't require the session any longer, you can close it to release the history of events, rules and decoders loaded.
+If you don't require the session any longer, you can close it to release the history of events, and rules and decoders loaded.
 
-   .. code-block:: none
+   .. code-block:: bash
 
-      curl -k -X DELETE "https://localhost:55000/logtest/sessions/95375d4c" -H "Authorization: Bearer $TOKEN"
+      curl -k -X DELETE "https://localhost:55000/logtest/sessions/35604a22?pretty=true" -H "Authorization: Bearer $TOKEN"
 
    .. code-block:: JSON
       :class: output
@@ -461,7 +477,7 @@ If you don't require the session any longer, you can close it to release the his
          "error": 0,
          "data": {
                "messages": [
-                  "INFO: (7206): The session '95375d4c' was closed successfully"
+                  "INFO: (7206): The session '35604a22' was closed successfully"
                ],
                "codemsg": 0
          }

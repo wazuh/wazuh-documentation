@@ -35,4 +35,3 @@ In this section you will find:
     syscollector
     vulnerability-detection/index
     osquery
-    wazuh-logtest/index

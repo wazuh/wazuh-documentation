@@ -109,7 +109,27 @@ redirections.push(
       'target': ['4.3=>4.4', '4.4=>4.3'],
       '4.3': '/user-manual/capabilities/agent-key-polling.html',
       '4.4': '/user-manual/agents/key-request.html',
-    }
+    },
+    {
+      'target': ['4.3=>4.4'],
+      '4.3': '/user-manual/capabilities/wazuh-logtest/index.html',
+      '4.4': '/user-manual/ruleset/testing.html',
+    },
+    {
+      'target': ['4.3=>4.4'],
+      '4.3': '/user-manual/capabilities/wazuh-logtest/how-it-works.html',
+      '4.4': '/user-manual/ruleset/testing.html',
+    },
+    {
+      'target': ['4.3=>4.4'],
+      '4.3': '/user-manual/capabilities/wazuh-logtest/logtest-configuration.html',
+      '4.4': '/user-manual/ruleset/testing.html#configuration',
+    },
+    {
+      'target': ['4.3=>4.4'],
+      '4.3': '/user-manual/capabilities/wazuh-logtest/logtest-faq.html',
+      '4.4': '/user-manual/ruleset/testing.html',
+    },
 );
 
 /* Pages added in 4.4 */
@@ -164,6 +184,10 @@ removedUrls['4.4'] = [
   '/user-manual/capabilities/antiflooding.html',
   '/user-manual/capabilities/labels.html',
   '/user-manual/capabilities/fluent-forwarder.html',
+  '/user-manual/capabilities/wazuh-logtest/index.html',
+  '/user-manual/capabilities/wazuh-logtest/how-it-works.html',
+  '/user-manual/capabilities/wazuh-logtest/logtest-configuration.html',
+  '/user-manual/capabilities/wazuh-logtest/logtest-faq.html',
 ];
 
   /* *** RELEASE 4.3 ****/
