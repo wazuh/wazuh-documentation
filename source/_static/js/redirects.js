@@ -144,6 +144,12 @@ newUrls['4.4'] = [
   '/user-manual/capabilities/file-integrity/interpreting-fim-module-analysis.html',
   '/user-manual/capabilities/file-integrity/creating-custom-fim-rules.html',   
   '/user-manual/capabilities/file-integrity/advanced-settings.html',
+  '/user-manual/capabilities/file-integrity/use-cases/index.html',
+  '/user-manual/capabilities/file-integrity/use-cases/detecting-malware-persistence-technique.html',
+  '/user-manual/capabilities/file-integrity/use-cases/detecting-account-manipulation.html',
+  '/user-manual/capabilities/file-integrity/use-cases/monitoring-files-at-specific-intervals.html',
+  '/user-manual/capabilities/file-integrity/use-cases/reporting-file-changes.html',
+  '/user-manual/capabilities/file-integrity/use-cases/monitoring-configuration-changes.html',
 ];
 
 /* Pages removed in 4.4 */
