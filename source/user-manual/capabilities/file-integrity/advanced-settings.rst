@@ -8,6 +8,8 @@ Advanced settings
 
 In this section, we describe different advanced settings that can provide greater control and flexibility over how the FIM module works.
 
+.. _who-data-monitoring:
+
 Who-data monitoring
 -------------------
 
