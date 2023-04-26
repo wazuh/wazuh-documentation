@@ -6,13 +6,13 @@
 Testing decoders and rules
 ==========================
 
-Wazuh logtest is a tool to test new rules and decoders and verify the current ones. You can use it with any of the following alternatives.
+Wazuh logtest is a tool to test new rules and decoders and verify the current ones. You can use it with any of the following alternatives:
 
 -  Wazuh dashboard
 -  Command line tool
 -  Wazuh API
 
-With Wazuh logtest, you do the following.
+With Wazuh logtest, you do the following:
 
 #. Input event logs in syslog and JSON formats.
 #. Check what decoders match them and check what fields these decoders identify.
@@ -27,7 +27,7 @@ Configuration
 
 Wazuh logtest is a functionality the Wazuh manager provides. In a Wazuh cluster, the master node processes the event logs. You can change the configuration parameters in the :doc:`\<rule_test\> </user-manual/reference/ossec-conf/rule-test>` section of the :doc:`ossec.conf </user-manual/reference/ossec-conf/index>` file.
 
-By default, the logtest configuration is set as follows.
+By default, the logtest configuration is set as follows:
 
 .. code-block:: xml
 
@@ -62,7 +62,7 @@ If the number of open sessions reaches ``max_sessions``, opening a new session c
 Using the Wazuh dashboard and the command line tool
 ---------------------------------------------------
 
-To try Wazuh logtest using the Wazuh dashboard or the command line tool, follow these steps.
+To try Wazuh logtest using the Wazuh dashboard or the command line tool, follow these steps:
 
 #. Run the tool.
 
@@ -112,7 +112,7 @@ To try Wazuh logtest using the Wazuh dashboard or the command line tool, follow 
 
 The above result shows that rule id ``5710`` matches the event log.
 
-If you paste the log seven more times within two minutes, you can see that rule id ``5710`` matches multiple times. You can see that in *Phase 3, filtering (rules)*, the ``firedtimes`` counter increases with each repetition. But for the last log line, rule id ``5712`` makes the match. This rule captures the eighth event that was matching rule id ``5710`` previously for the same IP address.
+If you paste the log seven more times within two minutes, you can see that rule id ``5710`` matches multiple times. You can see that in *Phase 3, filtering (rules)*, the ``firedtimes`` counter increases with each repetition. But for the last log line, rule id ``5712`` makes the match. This rule captures the eighth event that rule id ``5710`` matched previously for the same IP address.
 
 .. code-block:: none
    :class: output
@@ -174,7 +174,7 @@ Logging into the Wazuh API
 
 Wazuh API endpoints require authentication. All calls must include a JSON Web Token. You can use the cURL command to log in. The Wazuh API provides a JWT token upon success.
 
-#. Run the following command replacing ``<WAZUH_API_USER>`` and ``<PASSWORD>`` with your own values.
+#. Run the following command replacing ``<WAZUH_API_USER>`` and ``<PASSWORD>`` with your own values:
 
    .. code-block:: bash
 
@@ -205,10 +205,10 @@ Wazuh API endpoints require authentication. All calls must include a JSON Web To
 First request
 ^^^^^^^^^^^^^
 
-The first time you send a processing request it has no logtest session token. Since there is no active session, a processing
+The first time you send a processing request, it has no logtest session token. Since there is no active session, a processing
 log request is sent to logtest in Analysisd.
 
-Use the following sample data for request.
+Use the following sample data for request:
 
 +------------------+--------------------------------------+----------------------------------------------------------------------------------------------+
 | Field            | Description                          | Example                                                                                      |
@@ -222,7 +222,7 @@ Use the following sample data for request.
 | token (optional) | logtest session id                   |                                                                                              |
 +------------------+--------------------------------------+----------------------------------------------------------------------------------------------+
 
-You must send the data to the logtest endpoint in JSON format. You can first store the request in a variable as follows.
+You must send the data to the logtest endpoint in JSON format. You can first store the request in a variable as follows:
 
    .. code-block:: bash
 
@@ -350,7 +350,7 @@ The ``messages`` field shows the session token ``95375d4c``. You must add this t
 Repeating the request with the same session
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-Add the session token to the request and send it seven more times within two minutes. You can see that rule id ``5710`` matches multiple times. In the ``rule`` object of the response, inside the ``output`` field, you can see the ``firedtimes`` counter increases with each repetition. But for the last request, rule id ``5712`` makes the match. This rule captures the eighth event that was matching rule id ``5710`` previously for the same IP address.
+Add the session token to the request and send it seven more times within two minutes. You can see that rule id ``5710`` matches multiple times. In the ``rule`` object of the response, inside the ``output`` field, you can see the ``firedtimes`` counter increases with each repetition. But for the last request, rule id ``5712`` makes the match. This rule captures the eighth event that rule id ``5710`` matched previously for the same IP address.
 
 .. code-block:: bash
    :emphasize-lines: 2
