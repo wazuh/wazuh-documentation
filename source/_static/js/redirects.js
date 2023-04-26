@@ -143,6 +143,7 @@ newUrls['4.4'] = [
   '/user-manual/capabilities/file-integrity/how-to-configure-fim.html',
   '/user-manual/capabilities/file-integrity/interpreting-fim-module-analysis.html',
   '/user-manual/capabilities/file-integrity/creating-custom-fim-rules.html',   
+  '/user-manual/capabilities/file-integrity/advanced-settings.html',
 ];
 
 /* Pages removed in 4.4 */

@@ -23,6 +23,7 @@ Following, you can see how to configure the FIM module to monitor a file and dir
    - macOS: ``/Library/Ossec/etc/ossec.conf``
 
    .. code-block:: xml
+      :emphasize-lines: 2,3
 
       <syscheck>
          <directories>FILEPATH/OF/MONITORED/FILE</directories>

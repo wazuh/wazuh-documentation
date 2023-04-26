@@ -6,7 +6,7 @@
 Basic settings
 ==============
 
-A :ref:`default FIM configuration <reference_ossec_syscheck_default_configuration>` exists on both the Wazuh server and the Wazuh agent. You can modify these settings depending on your needs.
+You can configure the FIM capability on the Wazuh server and the Wazuh agent. A :ref:`default FIM configuration <reference_ossec_syscheck_default_configuration>` exists on both the Wazuh server and the Wazuh agent. You can modify these settings depending on your needs. 
 
 You can configure the FIM module on the Wazuh server and the Wazuh agent :doc:`configuration </user-manual/reference/ossec-conf/index>`  file. You can also configure this capability remotely using the :doc:`centralized configuration </user-manual/reference/centralized-configuration>` file. The list of all FIM configuration options is available in the syscheck section.
 
@@ -77,6 +77,21 @@ The table below describes the supported attributes the FIM module records.
   +---------------------+---------------+----------------+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
   | ``check_inode``     | yes           | yes, no        | Records the file inode. On Windows, ``inode`` is always 0.                                                                                                                                    |
   +---------------------+---------------+----------------+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+
+When there is a conflict between options that modify the same attribute, the last one configured takes precedence. For instance:
+
+.. code-block:: xml
+
+   <directories check_all="no" check_mtime="yes">/etc</directories>
+
+The configuration above, set the option check_mtime to YES.
+
+.. code-block:: xml
+   
+   <directories check_mtime="yes" check_all="no">/etc</directories>
+
+Nevertheless, the second one disables recording of all attributes including the modification time check.
+
 
 You can see below an example configuration of how to disable the recording of SHA-1 hash of a monitored file. Replace ``FILEPATH/OF/MONITORED/FILE`` with your own filepath.
 

@@ -48,7 +48,7 @@ Perform the following steps to enable who-data monitoring. In this example, you 
          <directories check_all="yes" whodata="yes">/etc</directories>
       </syscheck>
 
-#. Once you add this configuration, restart the Wazuh agent to apply the changes:
+#. Once you add this configuration, restart the Wazuh agent to apply the changes. This will add an audit rule for the monitored directory:
 
    .. code-block:: console
 
@@ -74,18 +74,18 @@ Perform the following steps to enable who-data monitoring. In this example, you 
 Alert fields
 ~~~~~~~~~~~~
 
-You can see the following fields in FIM alerts when who-data is enabled.
+The following table establishes a correspondence between audit fields and their equivalent fields in an alert when who-data is enabled.
 
   +---------------------+----------------------------------------+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
   | Audit field         | FIM fields                             | Fields description                                                                                                                                                                                                                                          |                                                                                                                                                                         
   +=====================+========================================+=============================================================================================================================================================================================================================================================+
-  | User                | audit.user.id                          | Contain the ID and name of the user who started the process that modified the monitored file.                                                                                                                                                               |                                                                                                                                      
+  | User                | audit.user.id                          | Contain information about who started the process that modified the monitored file.                                                                                                                                                                         |                                                                                                                                      
   |                     | audit.user.name                        |                                                                                                                                                                                                                                                             |                                                                                                                                      
   +---------------------+----------------------------------------+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-  | Login user          | audit.login_user.id                    | Contain the audit user ID and name of the user who started the session. They correspond respectively to the login UID and login name. Upon login, this ID is assigned to a user and is inherited by every process, even when the user's identity changes.   |                                                                                                                                      
+  | Login user          | audit.login_user.id                    | Contain information about the user who started the session. They correspond respectively to the login UID and login name. Upon login, this ID is assigned to a user and is inherited by every process, even when the user's identity changes.               |                                                                                                                                      
   |                     | audit.login_user.name                  |                                                                                                                                                                                                                                                             |                                                                                                                                      
   +---------------------+----------------------------------------+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-  | Effective user      | audit.effective_user.id                | Contain the effective ID and name of the user who started the process that modified the monitored file.                                                                                                                                                     |                                                                                                                                      
+  | Effective user      | audit.effective_user.id                | Contain the effective ID and name of the user who started the process that modified the monitored file. When a user executes a command using sudo, the effective user ID changes to 0 and the effective user name becomes root.                             |                                                                                                                                      
   |                     | audit.effective_user.name              |                                                                                                                                                                                                                                                             |                                                                                                                                      
   +---------------------+----------------------------------------+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
   | Group               | audit.group.id                         | Contain the group ID and group name of the user who started the process that modified the monitored file.                                                                                                                                                   |                                                                                                                                      
@@ -132,7 +132,7 @@ Test the configuration
 
 #. Log out of the Linux endpoint and log in as ``smith``.
 
-#. Add a new IP address, such as ``192.168.32.5`` in ``/etc/hosts.allow`` on the Linux endpoint.
+#. Add a new IP address, such as ``192.168.32.5`` in ``/etc/hosts.allow`` file on the Linux endpoint.
 
    .. code-block:: console
 
@@ -276,7 +276,7 @@ The who-data monitoring functionality uses the Microsoft Windows auditing subsys
 Configuration
 ~~~~~~~~~~~~~
 
-To enable the who-data feature, you must declare the tag ``whodata="yes"`` within the directories block in the ``C:\Program Files (x86)\ossec-agent\ossec.conf`` configuration file. Wazuh automatically configures the System Access Control List (SACL) for the directory to monitor.
+To enable the who-data feature, you must declare the tag ``whodata="yes"`` within the directories block in the ``C:\Program Files (x86)\ossec-agent\ossec.conf`` configuration file. Wazuh automatically configures the System Access Control List (SACL) for the directory to monitor:
 
    .. code-block:: xml
 
@@ -291,8 +291,7 @@ To enable the who-data feature, you must declare the tag ``whodata="yes"`` withi
 
 Also, you need to properly configure System audit policies. Luckily, most supported Windows systems do this part automatically by default. However, if your Windows OS version is newer than Windows Vista but the system didn’t automatically configured the audit policies, see the :ref:`Manual configuration of the Local Audit Policies in Windows <manual_configuration_of_the_local_audit_policies_in_windows>` guide.
 
-Alert fields
-~~~~~~~~~~~~
+The following table establishes a correspondence between audit fields and their equivalent fields in an alert when who-data is enabled:
 
   +---------------------+------------------------+--------------------------------------------------------------------------------------------------+
   | Audit field         | FIM fields             | Fields description                                                                               |                                                                                                                                                                                                                                                                                                                                     
@@ -590,24 +589,7 @@ We only recommended this option if your host is Windows Vista or Windows Server 
 Tuning audit to deal with a flood of who-data events
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-It’s possible to lose who-data events when a flood of events appears. On Linux endpoints, the following options help the audit socket and dispatcher to deal with big amounts of events and minimize ``who-data`` events loss:
-
-   .. code-block:: console
-
-      /etc/audit/auditd.conf  -> disp_qos = ["lossy", "lossless"]
-      /etc/audisp/audispd.conf -> q_dephs  = [<Numerical value>]
-
-The ``disp_qos`` sets blocking/lossless or non-blocking/lossy communication between the audit daemon and the dispatcher. There is a 128k buffer between the audit daemon and dispatcher. This is sufficient for most uses. If lossy is chosen, incoming events going to the dispatcher are discarded when the queue is full. In this case, events are still written to disk if the ``log_format`` is not set as ``nolog``. Otherwise, if lossless is chosen, the auditd daemon will wait for the queue to have an empty spot before logging to disk. The risk is that while the daemon is waiting for network IO, an event is not being recorded to disk. The recommended value is lossless.
-
-The ``q_dephs`` is a numeric value, by default set to ``80``, that tells how big the internal queue of the audit event dispatcher is. A bigger queue handles event floods better but can hold events that are not processed when the daemon is terminated. This value has to be increased if there are messages in the Syslog indicating that the events are being dropped.
-
-On the Wazuh side, the ``rt_delay`` variable in the :ref:`internal FIM configuration <ossec_internal_syscheck>` helps to prevent the loss of events setting a delay between alerts:
-
-   .. code-block:: console
-
-      /var/ossec/etc/internal_options.conf -> syscheck.rt_delay = [Numerical value]
-
-You must set the delay in milliseconds. To process who-data events faster, decrease this numerical value.
+On the Wazuh side, the ``syscheck.rt_delay`` variable in the :ref:`internal FIM configuration <ossec_internal_syscheck>` helps to prevent the loss of events by setting a delay between alerts. You can configure this variable in the ``/var/ossec/etc/internal_options.conf`` file on the Wazuh server. The allowed values for this variable is a numerical value. You must set the delay in milliseconds. To process who-data events faster, decrease this numerical value.
 
 Recursion level
 ---------------
@@ -623,6 +605,7 @@ In the configuration example below, you can see how to set the ``recursion_level
    - macOS: ``/Library/Ossec/etc/ossec.conf``
 
    .. code-block:: xml
+      :emphasize-lines: 2
 
       <syscheck>
          <directories check_all="yes" recursion_level="3">FILEPATH/OF/MONITORED/DIRECTORY</directories>
@@ -757,11 +740,11 @@ The main advantage of using an in-memory database is the performance, as reading
 Synchronization
 ---------------
 
-The FIM module keeps the Wazuh agent and the Wazuh server databases synchronized with each other. It always updates the file inventory in the Wazuh server with the data available to the Wazuh agent.
+The FIM module keeps the Wazuh agent and the Wazuh server databases synchronized with each other through synchronization messages. It always updates the file inventory in the Wazuh server with the data available to  the Wazuh agent.
 
-Whenever the Wazuh agent service restarts, the module clears the FIM database of the agent. To avoid false positives, the module doesn’t report changes in the monitored files performed while the service is not running on the Wazuh server. The same happens to the changes that occur after the last scan and before the restart. The synchronization only takes place on files and directories monitored with the ``realtime`` and ``whodata`` options.
+Whenever the Wazuh agent service restarts, the module rebuilds the FIM database of the agent and synchronizes it with the Wazuh server. The module doesn’t report changes in the monitored files performed while the service is not running to the Wazuh server. The same happens to the changes that occur after the last scan and before the restart. The synchronization only takes place on files and directories monitored with the ``realtime`` and ``whodata`` options.
 
-Examine the default :ref:`synchronization <reference_ossec_syscheck_synchronization>` setting on the ``/var/ossec/etc/ossec.conf`` configuration file:
+You can see below the default :ref:`synchronization <reference_ossec_syscheck_synchronization>` setting on the ``/var/ossec/etc/ossec.conf`` configuration file:
 
    .. code-block:: xml
 
