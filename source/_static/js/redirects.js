@@ -150,6 +150,7 @@ newUrls['4.4'] = [
   '/user-manual/capabilities/file-integrity/use-cases/monitoring-files-at-specific-intervals.html',
   '/user-manual/capabilities/file-integrity/use-cases/reporting-file-changes.html',
   '/user-manual/capabilities/file-integrity/use-cases/monitoring-configuration-changes.html',
+  '/user-manual/capabilities/file-integrity/windows-registry-monitoring.html',
 ];
 
 /* Pages removed in 4.4 */
@@ -175,6 +176,8 @@ removedUrls['4.4'] = [
   '/user-manual/capabilities/antiflooding.html',
   '/user-manual/capabilities/labels.html',
   '/user-manual/capabilities/fluent-forwarder.html',
+  '/user-manual/capabilities/file-integrity/fim-configuration.html',
+  '/user-manual/capabilities/file-integrity/fim-fields-rule-mapping.html',
 ];
 
   /* *** RELEASE 4.3 ****/

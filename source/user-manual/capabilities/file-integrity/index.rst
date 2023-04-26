@@ -42,5 +42,4 @@ The FIM capability helps organizations meet regulatory requirements for data sec
         advanced-settings
         use-cases/index
         windows-registry-monitoring
-        fim-fields-rule-mapping
-        fim-configuration
+        
