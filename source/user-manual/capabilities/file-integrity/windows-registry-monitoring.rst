@@ -121,3 +121,126 @@ If you don’t specify a value for ``recursion_level``, it’s set to the defaul
 
 Reporting changes in registry values
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+To report the exact content changed in a Windows Registry value, you can configure the FIM module with the ``report_changes`` attribute of the :ref:`windows_registry <reference_ossec_syscheck_windows_registry>` option. The allowed values are ``yes`` and ``no`` and the supported registry value types are:
+
+- ``REG_SZ``
+- ``REG_MULTI_SZ``
+- ``REG_DWORD``
+- ``REG_DWORD_BIG_ENDIAN``
+
+You must use the ``report_changes`` attribute with caution. Wazuh copies every single monitored file to a ``C:\Program Files (x86)\ossec-agent\queue\diff\registry`` and this increases storage usage.
+
+Follow these steps to configure the FIM module to report changes made to ``HKEY_LOCAL_MACHINE\SYSTEM\Setup`` key.
+
+#. Create a subkey ``Custom Key`` under the ``HKEY_LOCAL_MACHINE\SYSTEM\Setup`` registry key.
+  
+#. Edit the ``C:\Program Files (x86)\ossec-agent\ossec.conf`` configuration file and add the configuration below:
+
+   .. code-block:: xml
+
+      <syscheck>
+        <frequency>300</frequency>
+        <windows_registry  report_changes="yes">HKEY_LOCAL_MACHINE\SYSTEM\Setup</windows_registry>
+      </syscheck>
+
+#. Restart the Wazuh agent to apply the configuration:
+
+   .. code-block:: console
+
+      Restart-Service -Name wazuh
+
+#. Modify the ``Custom Key`` subkey and add a new string value ``FIM`` and data ``cmd``.
+
+#. Wait for 5 minutes which is the time configured for the FIM scan.
+
+Navigate to **Modules > Integrity monitoring** on the Wazuh dashboard to view the alert generated when the FIM module detects a modification of the monitored registry value.
+
+.. thumbnail:: /images/manual/fim/modification-of-the-monitored-registry-value.png
+  :title: Modification of the monitored registry value
+  :alt: Modification of the monitored registry value
+  :align: center
+  :width: 100%
+
+Expand the alert to see the changed fields.
+
+.. thumbnail:: /images/manual/fim/changed-fields-expanded-alert.png
+  :title: Changed fields expanded alert
+  :alt: Changed fields expanded alert
+  :align: center
+  :width: 100%
+
+Adding exclusions
+^^^^^^^^^^^^^^^^^
+
+You can configure the FIM module to ignore certain Windows Registry keys with the :ref:`registry_ignore <reference_ossec_syscheck_registry_ignore>` option. It allows declaring only a single Windows Registry entry. However, you can specify multiple lines to declare multiple registry entries.
+
+Follow these steps to configure the FIM module to ignore the ``HKEY_LOCAL_MACHINE\Security\Policy`` and any Windows Registry entry that matches the simple regex pattern ``\Enum$`` from FIM results. 
+
+#. Add this configuration to the ``C:\Program Files (x86)\ossec-agent\ossec.conf`` configuration file of the Wazuh agent:
+
+   .. code-block:: xml
+
+      <syscheck>
+        <registry_ignore>HKEY_LOCAL_MACHINE\Security\Policy\Secrets</registry_ignore>
+        <registry_ignore type="sregex">\Enum$</registry_ignore>
+      </syscheck>
+
+#. Restart the Wazuh agent to apply the configuration:
+
+   .. code-block:: console
+
+      Restart-Service -Name wazuh
+
+Use case: Detect malware persistence in Windows Registry
+--------------------------------------------------------
+
+Malware persistence in the Windows Registry is a technique attackers use to ensure that their malicious program runs every time the system starts or restarts. The malicious program is commonly added to the "Run" and "RunOnce" keys in the Registry.
+
+With the Wazuh FIM module, you can detect any suspicious or unknown programs added to the startup registry keys. This allows you to take appropriate action to remove them before they cause harm to your system. 
+
+Infrastructure
+^^^^^^^^^^^^^^
+
+  +---------------------+-----------------------------------------------------------------------------------------------+
+  | Endpoint            | Description                                                                                   |
+  +=====================+===============================================================================================+
+  | Windows 10          | The FIM module monitors startup registry keys on this endpoint.                               |                                                                                                                               
+  +---------------------+-----------------------------------------------------------------------------------------------+
+
+Configuration
+^^^^^^^^^^^^^
+
+Wazuh monitors the startup registry keys automatically, out-of-the-box, without requiring any user special action or configuration. By default, the Wazuh agent configuration file at ``C:\Program Files (x86)\ossec-agent\ossec.conf`` uses the following setting to monitor the startup registry keys:
+
+   .. code-block:: xml
+
+      <syscheck>
+        <frequency>300</frequency>
+        <windows_registry arch="both">HKEY_LOCAL_MACHINE\Software\Microsoft\Windows\CurrentVersion\Run</windows_registry>
+        <windows_registry arch="both">HKEY_LOCAL_MACHINE\Software\Microsoft\Windows\CurrentVersion\RunOnce</windows_registry>
+      </syscheck>
+
+Test the configuration
+^^^^^^^^^^^^^^^^^^^^^^
+
+.. warning::
+
+   You must carry this out in a sandbox environment. Delete the added registry keys after running the test.
+
+#. Add the registry value name ``DemoValue`` and registry value data ``cmd`` to the ``HKEY_LOCAL_MACHINE\Software\Microsoft\Windows\CurrentVersion\Run`` key. 
+
+#. Add the registry value name ``DemoValue`` and registry value data ``cmd`` to the ``HKEY_LOCAL_MACHINE\Software\Microsoft\Windows\CurrentVersion\RunOne`` registry keys.
+
+#. Wait for 5 minutes which is the time configured for the FIM scan.
+
+Visualize the alert
+^^^^^^^^^^^^^^^^^^^
+
+Navigate to **Modules > Integrity monitoring** on the Wazuh dashboard to view the alert generated when the FIM module detects changes in the Windows startup registries.
+
+.. thumbnail:: /images/manual/fim/changed-windows-startup-registries.png
+  :title: Changes in the Windows startup registries
+  :alt: Changes in the Windows startup registries
+  :align: center
+  :width: 100%

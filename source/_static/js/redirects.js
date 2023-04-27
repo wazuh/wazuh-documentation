@@ -77,6 +77,16 @@ removedUrls['x.y'] = [
 redirections.push(
     {
       'target': ['4.3=>4.4', '4.4=>4.3'],
+      '4.3': '/user-manual/capabilities/file-integrity/fim-configuration.html',
+      '4.4': '/user-manual/capabilities/file-integrity/index.html',
+    },  
+    {
+      'target': ['4.3=>4.4', '4.4=>4.3'],
+      '4.3': '/user-manual/capabilities/file-integrity/fim-fields-rule-mapping.html',
+      '4.4': '/user-manual/capabilities/file-integrity/index.html',
+    }, 
+    {
+      'target': ['4.3=>4.4', '4.4=>4.3'],
       '4.3': '/user-manual/capabilities/antiflooding.html',
       '4.4': '/user-manual/agents/antiflooding.html',
     },
