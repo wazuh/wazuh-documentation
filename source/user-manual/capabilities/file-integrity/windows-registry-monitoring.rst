@@ -115,6 +115,7 @@ When using the following registry structure and ``recursion_level="3"``, FIM gen
                           └── Subkey_5
 
 To disable the recursion and generate alerts only for the registry values in the monitored registry, you need to set the ``recursion_level`` value to 0.
+
 If you don’t specify a value for ``recursion_level``, it’s set to the default value defined by ``syscheck.default_max_depth`` in the :ref:`internal options <reference_internal_options>` configuration file.
 
 .. _reporting-changes-in-registry-values:

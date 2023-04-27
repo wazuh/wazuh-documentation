@@ -23,7 +23,7 @@ Below, you can see how to configure the FIM module to monitor a directory in rea
 
 .. note::
 
-   When specifying a directory for real time monitoring, it must exist before restarting the Wazuh agent. If not, the module ignores the directory until it finds iton a subsequent restart of the Wazuh agent.
+   When specifying a directory for real time monitoring, it must exist before restarting the Wazuh agent. If not, the module ignores the directory until it finds it on a subsequent restart of the Wazuh agent.
 
 #. Add the following settings to the Wazuh agent configuration file:
 
@@ -46,37 +46,37 @@ Below, you can see how to configure the FIM module to monitor a directory in rea
 Record file attributes
 ----------------------
 
-When you configure the FIM module to monitor specific files and directories, it records the metadata of the files and monitors them. You can use the directories option to set the specific file metadata that the FIM module must collect and ignore. The directories option supports several attributes. 
+When you configure the FIM module to monitor specific files and directories, it records the metadata of the files and monitors them. You can use the :ref:`directories <reference_ossec_syscheck_directories>` option to set the specific file metadata that the FIM module must collect and ignore. The directories option supports several attributes. 
 
 The table below describes the supported attributes the FIM module records.
 
-  +---------------------+---------------+----------------+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-  | Attribute           | Default value | Allowed values | Description                                                                                                                                                                                   |
-  +=====================+===============+================+===============================================================================================================================================================================================+
-  | ``check_all``       | yes           | yes, no        | Records the values of all attributes below.                                                                                                                                                   |
-  +---------------------+---------------+----------------+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-  | ``check_sum``       | yes           | yes, no        | Records the MD5, SHA-1 and SHA-256 hashes of the files. Same as using ``check_md5sum="yes"``, ``check_sha1sum="yes"``, and ``check_sha256sum="yes"`` at the same time.                        |
-  +---------------------+---------------+----------------+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-  | ``check_sha1sum``   | yes           | yes, no        | Records the SHA-1 hash of the files.                                                                                                                                                          |
-  +---------------------+---------------+----------------+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-  | ``check_md5sum``    | yes           | yes, no        | Records the MD5 hash of the files.                                                                                                                                                            |
-  +---------------------+---------------+----------------+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-  | ``check_sha256sum`` | yes           | yes, no        | Records the SHA-256 hash of the files.                                                                                                                                                        |  
-  +---------------------+---------------+----------------+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-  | ``check_size``      | yes           | yes, no        | Records the size of the files.                                                                                                                                                                |
-  +---------------------+---------------+----------------+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-  | ``check_owner``     | yes           | yes, no        | Records the owner of the files. On Windows, the ``uid`` is always 0                                                                                                                           |
-  +---------------------+---------------+----------------+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-  | ``check_group``     | yes           | yes, no        | Records the group owner of the files/directories. On Windows, ``gid`` is always 0 and the group name is blank.                                                                                |
-  +---------------------+---------------+----------------+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-  | ``check_perm``      | yes           | yes, no        | Records the permission of the files/directories. On Windows, a list of denied and allowed permissions will be given for each user or group. Only works on NTFS partitions on Windows systems. |
-  +---------------------+---------------+----------------+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-  | ``check_attrs``     | yes           | yes, no        | Records the attributes of files in Windows.                                                                                                                                                   |
-  +---------------------+---------------+----------------+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-  | ``check_mtime``     | yes           | yes, no        | Records the modification time of a file.                                                                                                                                                      |
-  +---------------------+---------------+----------------+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-  | ``check_inode``     | yes           | yes, no        | Records the file inode. On Windows, ``inode`` is always 0.                                                                                                                                    |
-  +---------------------+---------------+----------------+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+  +---------------------+---------------+----------------+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+  | Attribute           | Default value | Allowed values | Description                                                                                                                                                                                        |
+  +=====================+===============+================+====================================================================================================================================================================================================+
+  | ``check_all``       | yes           | yes, no        | Records the values of all attributes below.                                                                                                                                                        |
+  +---------------------+---------------+----------------+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+  | ``check_sum``       | yes           | yes, no        | Records the MD5, SHA-1 and SHA-256 hashes of the files. Same as using ``check_md5sum="yes"``, ``check_sha1sum="yes"``, and ``check_sha256sum="yes"`` at the same time.                             |
+  +---------------------+---------------+----------------+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+  | ``check_sha1sum``   | yes           | yes, no        | Records the SHA-1 hash of the files.                                                                                                                                                               |
+  +---------------------+---------------+----------------+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+  | ``check_md5sum``    | yes           | yes, no        | Records the MD5 hash of the files.                                                                                                                                                                 |
+  +---------------------+---------------+----------------+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+  | ``check_sha256sum`` | yes           | yes, no        | Records the SHA-256 hash of the files.                                                                                                                                                             |  
+  +---------------------+---------------+----------------+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+  | ``check_size``      | yes           | yes, no        | Records the size of the files.                                                                                                                                                                     |
+  +---------------------+---------------+----------------+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+  | ``check_owner``     | yes           | yes, no        | Records the owner of the files in Linux.                                                                                                                                                           |
+  +---------------------+---------------+----------------+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+  | ``check_group``     | yes           | yes, no        | Records the group owner of the files/directories. On Windows, ``gid`` is always 0 and the group name is blank.                                                                                     |
+  +---------------------+---------------+----------------+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+  | ``check_perm``      | yes           | yes, no        | Records the permission of the files/directories. On Windows, a list of denied and allowed permissions will be recorded for each user or group. It works on Linux and Windows with NTFS partitions. |
+  +---------------------+---------------+----------------+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+  | ``check_attrs``     | yes           | yes, no        | Records the attributes of files in Windows.                                                                                                                                                        |
+  +---------------------+---------------+----------------+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+  | ``check_mtime``     | yes           | yes, no        | Records the modification time of a file.                                                                                                                                                           |
+  +---------------------+---------------+----------------+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+  | ``check_inode``     | yes           | yes, no        | Records the file inode on Linux.                                                                                                                                                                   |
+  +---------------------+---------------+----------------+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
 
 When there is a conflict between options that modify the same attribute, the last one configured takes precedence. For instance:
 
@@ -116,7 +116,7 @@ You can see below an example configuration of how to disable the recording of SH
 
 .. note::
 
-   Specified files or directories created after the initial FIM scan will be added for monitoring  during the next scheduled scan.
+   Specified files or directories created after the initial FIM scan will be added for monitoring during the next scheduled scan.
 
 Scheduled scans
 ---------------
@@ -198,7 +198,7 @@ Below, you can see how to configure the FIM module to report file changes. Repla
    - Windows: ``Restart-Service -Name wazuh``
    - macOS: ``/Library/Ossec/bin/wazuh-control restart``
 
-   In the configuration example below, you can see how to use the report_changes attribute for all files in the ``FILEPATH/OF/MONITORED/DIRECTORY`` directory. You can see how to prevent the FIM module from reporting the exact content changes to the ``FILEPATH/OF/MONITORED/DIRECTORY/private.txt`` file. Replace FILEPATH/OF/MONITORED/DIRECTORY with your own filepath.
+   In the configuration example below, you can see how to use the ``report_changes`` attribute for all files in the ``FILEPATH/OF/MONITORED/DIRECTORY`` directory. You can see how to prevent the FIM module from reporting the exact content changes to the ``FILEPATH/OF/MONITORED/DIRECTORY/private.txt`` file. Replace ``FILEPATH/OF/MONITORED/DIRECTORY`` with your own filepath.
 
    When using the ``report_changes`` option, you can use the :ref:`nodiff <reference_ossec_syscheck_nodiff>` option to create an exception. This option alerts modifications of the file  but it prevents the Wazuh FIM module from reporting the exact content changed in a text file. Using the nodiff option avoids data leakage that might occur by sending the file content changes through alerts.
 

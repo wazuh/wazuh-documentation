@@ -17,7 +17,7 @@ Some benefits of the Wazuh FIM capability include change management, threat dete
 Change management
 -----------------
 
-The Wazuh FIM capability is an essential tool for verifying that the change management processes are working correctly. This Wazuh capability allows you to examine files to see if they change, how and when they change, and who or what changes them. The Wazuh FIM module compares the baseline information against the information of latest version of the file. This comparison provides visibility into alterations and updates of critical files. For example, you can use this to detect incorrect updates to applications or unauthorized changes made to configuration files.
+The Wazuh FIM capability is an essential tool for verifying that the change management processes are working correctly. This Wazuh capability allows you to examine files to see if they change, how and when they change, and who or what changes them. The Wazuh FIM module compares the baseline information against the information of the latest version of the file. This comparison provides visibility into alterations and updates of critical files. For example, you can use this to detect incorrect updates to applications or unauthorized changes made to configuration files.
 
 Threat detection and response
 -----------------------------
