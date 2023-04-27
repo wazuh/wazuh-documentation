@@ -1,7 +1,7 @@
 .. Copyright (C) 2015, Wazuh, Inc.
 
 .. meta::
-  :description: Learn more about File Integrity Monitoring, a key capability of Wazuh. Check out how it works and some practical use cases. 
+  :description: Wazuh includes out-of-the-box rules that trigger alerts on the creation, modification, or deletion of monitored files. Learn more about it in this section. 
   
 Creating custom FIM rules
 =========================

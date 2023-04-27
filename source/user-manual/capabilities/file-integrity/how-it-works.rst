@@ -1,7 +1,7 @@
 .. Copyright (C) 2015, Wazuh, Inc.
 
 .. meta::
-  :description: Learn more about File Integrity Monitoring, a key capability of Wazuh. Check out how it works and some practical use cases. 
+  :description: The FIM module runs periodic scans on specific paths and monitors specific directories for changes in real time. Learn more about how FIM works in this section. 
   
 How it works
 ============

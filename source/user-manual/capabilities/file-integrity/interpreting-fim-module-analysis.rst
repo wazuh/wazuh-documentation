@@ -1,7 +1,7 @@
 .. Copyright (C) 2015, Wazuh, Inc.
 
 .. meta::
-  :description: Learn more about File Integrity Monitoring, a key capability of Wazuh. Check out how it works and some practical use cases. 
+  :description: FIM analysis results appear on the Wazuh dashboard whenever there’s an addition, modification, or deletion of monitored files. Learn more about it in this section. 
   
 Interpreting the FIM module analysis
 ====================================
