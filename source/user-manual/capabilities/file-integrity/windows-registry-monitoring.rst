@@ -25,7 +25,7 @@ The Wazuh FIM module uses two databases to collect FIM event data, such as regis
   :title: Synchronization diagram
   :alt: Synchronization diagram
   :align: center
-  :width: 100%
+  :width: 80%
 
 The FIM module synchronization mechanism ensures synchronization between the Wazuh agent and the Wazuh server databases. It always updates the file inventory in the Wazuh server with the data available to  the Wazuh agent. This allows for servicing FIM-related API queries regarding the Wazuh agents.
 
@@ -161,7 +161,7 @@ Navigate to **Modules > Integrity monitoring** on the Wazuh dashboard to view th
   :title: Modification of the monitored registry value
   :alt: Modification of the monitored registry value
   :align: center
-  :width: 100%
+  :width: 80%
 
 Expand the alert to see the changed fields.
 
@@ -169,7 +169,7 @@ Expand the alert to see the changed fields.
   :title: Changed fields expanded alert
   :alt: Changed fields expanded alert
   :align: center
-  :width: 100%
+  :width: 80%
 
 Adding exclusions
 ^^^^^^^^^^^^^^^^^
@@ -244,4 +244,4 @@ Navigate to **Modules > Integrity monitoring** on the Wazuh dashboard to view th
   :title: Changes in the Windows startup registries
   :alt: Changes in the Windows startup registries
   :align: center
-  :width: 100%
+  :width: 80%

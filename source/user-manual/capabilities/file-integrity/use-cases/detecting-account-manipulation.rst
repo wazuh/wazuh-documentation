@@ -66,5 +66,5 @@ Navigate to **Modules > Integrity monitoring** on the Wazuh dashboard to view th
   :title: Changes to the authorized_keys file
   :alt: Changes to the authorized_keys file
   :align: center
-  :width: 100%
+  :width: 80%
 

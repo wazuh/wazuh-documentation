@@ -69,7 +69,7 @@ Navigate to **Modules > Integrity monitoring** on the Wazuh dashboard to view th
   :title: Modification of the configuration file
   :alt: Modification of the configuration file
   :align: center
-  :width: 100%
+  :width: 80%
 
 Expand the alert to get more information about the event. In this example, the ``nano`` text editor modified the configuration file. The logged-in user on the endpoint was ``ubuntu``. The user modified the file using root privilege. The content added to the file is ``updated image to V2``.
 
@@ -77,5 +77,5 @@ Expand the alert to get more information about the event. In this example, the `
   :title: Get more information about the event
   :alt: Get more information about the event
   :align: center
-  :width: 100%
+  :width: 80%
 

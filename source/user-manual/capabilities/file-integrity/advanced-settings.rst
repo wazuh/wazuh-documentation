@@ -153,7 +153,7 @@ Navigate to **Modules > Integrity monitoring** on the Wazuh dashboard to view th
   :title: FIM detects changes
   :alt: FIM detects changes
   :align: center
-  :width: 100%
+  :width: 80%
 
 Expand the alert to view more information. In the alert fields below, you can see the user ``smith`` added a new IP address to the ``/etc/hosts.allow`` file using the ``nano`` text editor with root privileges.
 
@@ -161,7 +161,7 @@ Expand the alert to view more information. In the alert fields below, you can se
   :title: Expand the alert
   :alt: Expand the alert
   :align: center
-  :width: 100%
+  :width: 80%
 
 Alert in JSON:
 
@@ -345,7 +345,7 @@ Navigate to **Modules > Integrity monitoring** on the Wazuh dashboard and find t
    :title: Test the configuration
    :alt: Test the configuration
    :align: center
-   :width: 100%
+   :width: 80%
 
 Expand the alert with ``rule.id:550`` to view all the information. In the alert fields below, you can see the user ``“wazuh”`` added the word *“Hello”* to the ``audit_docu.txt`` file using the ``Notepad`` text editor.
 
@@ -353,7 +353,7 @@ Expand the alert with ``rule.id:550`` to view all the information. In the alert 
    :title: Expand the alert with rule.id:550
    :alt: Expand the alert with rule.id:550
    :align: center
-   :width: 100%
+   :width: 80%
 
 Alert in JSON:
 
@@ -575,7 +575,7 @@ This is the recommended option to configure policies and it’s available on Win
    :title: Advanced Audit Policy Configuration section
    :alt: Advanced Audit Policy Configuration section
    :align: center
-   :width: 100%
+   :width: 80%
 
 .. _audit_policy_section:
 
@@ -590,7 +590,7 @@ We only recommended this option if your host is Windows Vista or Windows Server 
    :title: Audit Policy section
    :alt: Audit Policy section
    :align: center
-   :width: 100%
+   :width: 80%
 
 Tuning audit to deal with a flood of who-data events
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^

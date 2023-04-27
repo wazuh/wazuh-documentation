@@ -22,7 +22,7 @@ The other is an agent database on the Wazuh server. The :doc:`wazuh-db </user-ma
   :title: File integrity monitoring
   :alt: File integrity monitoring
   :align: center
-  :width: 100%
+  :width: 80%
 
 The FIM module keeps the Wazuh agent and the Wazuh server databases synchronized with each other. It always updates the file inventory in the Wazuh server with the data available to  the Wazuh agent. An up-to-date Wazuh server database allows for servicing FIM-related API queries. The synchronization mechanism only updates the Wazuh server with information from the Wazuh agents such as checksums and file attributes that have changed. 
 

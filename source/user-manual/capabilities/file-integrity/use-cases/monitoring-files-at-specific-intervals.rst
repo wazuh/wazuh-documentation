@@ -62,4 +62,4 @@ Navigate to **Modules > Integrity monitoring** on the Wazuh dashboard to view th
   :title: Changes to the user_details.txt file
   :alt: Changes to the user_details.txt file
   :align: center
-  :width: 100%
+  :width: 80%

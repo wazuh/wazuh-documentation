@@ -23,7 +23,7 @@ This section displays an inventory of all files that the FIM module has indexed.
   :title: Inventory
   :alt: Inventory
   :align: center
-  :width: 100%
+  :width: 80%
 
 You can click a file entry to view the entry details such as the last time the FIM module analyzed the file and the file attributes. You can also view FIM alerts related to the file. The image below shows this information for the ``/etc/ld.so.preload`` file.
 
@@ -31,7 +31,7 @@ You can click a file entry to view the entry details such as the last time the F
   :title: Entry details
   :alt: Entry details
   :align: center
-  :width: 100%
+  :width: 80%
 
 .. _dashboard:
 
@@ -49,7 +49,7 @@ You can view an example of the overview of FIM scan results for all monitored en
   :title: Dashboard
   :alt: Dashboard
   :align: center
-  :width: 100%
+  :width: 80%
 
 You can view an example of the overview of FIM scan results for an Ubuntu endpoint in the image below. 
 
@@ -57,7 +57,7 @@ You can view an example of the overview of FIM scan results for an Ubuntu endpoi
   :title: Overview of FIM scan results
   :alt: Overview of FIM scan results
   :align: center
-  :width: 100%
+  :width: 80%
 
 .. _events:
 
@@ -70,7 +70,7 @@ This section shows the alerts the Wazuh FIM module triggered. Here you can see d
   :title: Events
   :alt: Events
   :align: center
-  :width: 100%
+  :width: 80%
 
 In addition, you can expand each alert entry to display additional information about the event that triggered the alert.
 
@@ -78,4 +78,4 @@ In addition, you can expand each alert entry to display additional information a
   :title: Expanded alert entry
   :alt: Expanded alert entry
   :align: center
-  :width: 100%
+  :width: 80%

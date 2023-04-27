@@ -12,7 +12,7 @@ Wazuh includes out-of-the-box rules that trigger alerts on the creation, modific
   :title: FIM alerts
   :alt: FIM alerts
   :align: center
-  :width: 100%
+  :width: 80%
 
 You can use custom Wazuh FIM rules to monitor changes to files and directories based on specific criteria such as filename, permissions, and content. For example, you can create a custom rule to detect changes to a critical system file or configuration file. Whenever a user or process modifies the file, Wazuh triggers a specific alert indicating the change and the details of the modification.
 
@@ -211,7 +211,7 @@ Navigate to **Modules > Integrity monitoring** on the Wazuh dashboard to view th
   :title: Visualize the alert
   :alt: Visualize the alert
   :align: center
-  :width: 100%
+  :width: 80%
 
 You can see the alert fields that correspond to the decoded FIM fields in the alert data below:
 
@@ -393,7 +393,7 @@ Navigate to **Modules > Integrity monitoring** on the Wazuh dashboard to view th
   :title: Deleted file alert
   :alt: Deleted file alert
   :align: center
-  :width: 100%
+  :width: 80%
 
 You can see the alert fields that correspond to the decoded FIM fields in the alert data below:
 
@@ -629,4 +629,4 @@ Navigate to **Modules > Integrity monitoring** on the Wazuh dashboard to view th
   :title: Severity of 12 alert
   :alt: Severity of 12 alert
   :align: center
-  :width: 100%
+  :width: 80%
