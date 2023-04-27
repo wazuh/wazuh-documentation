@@ -52,7 +52,7 @@ Logging in and navigating
 Creating a subscriber
 ~~~~~~~~~~~~~~~~~~~~~
 
-#. Create a descriptive name for your subscriber. For example, Wazuh.
+#. Enter a descriptive name for your subscriber. For example, Wazuh.
 #. Choose to either collect all log and event sources, or only specific log and event sources.
 #. Select S3 as your data access method.
 #. Enter the *AWS account ID* for the account you are currently logged into.
@@ -161,7 +161,7 @@ Wazuh configuration
 Security Lake section in ossec.conf 
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-Set the configuration inside the section ``<subscriber type="security_lake">``. You can find this tag inside the ``<wodle name="aws-s3">`` section of the ``ossec.conf`` file.
+Set the configuration inside the section ``<subscriber type="security_lake">``. You can find this tag inside the ``<wodle name="aws-s3">`` section of the ``/var/ossec/etc/ossec.conf`` file.
 
 .. code-block:: xml
 
@@ -180,12 +180,9 @@ Set the configuration inside the section ``<subscriber type="security_lake">``. 
         </wodle>
 
 
-After setting the required parameters, restart Wazuh in order to apply the changes with the following command:
+After setting the required parameters, restart the Wazuh manager to apply the changes:
 
-.. code-block:: console
-
-    $ systemctl restart wazuh-manager
-
+.. include:: /_templates/common/restart_manager.rst
 Please note that the module's time of execution varies depending on the number of notifications present in the queue. If the ``<interval>`` value is less than the required time of execution, the :ref:`Interval overtaken<interval_overtaken_message>` message will be displayed in the ``ossec.log`` file.
 
 
@@ -197,7 +194,7 @@ The following fields inside the section allow you to configure the queue and aut
 Queue configuration
 ~~~~~~~~~~~~~~~~~~~
 
-*   ``<sqs_name>`` : The name of the queue
+*   ``<sqs_name>`` : The name of the queue.
 *   ``<service_endpoint>``- Optional: The AWS S3 endpoint URL to be used to download the data from the bucket. Check :ref:`Considerations for configuration <amazon_considerations>` for more information about VPC and FIPS endpoints.
 
 Authentication
@@ -209,8 +206,8 @@ Authentication
 *   ``<sts_endpoint>`` - Optional: The URL of the VPC endpoint of the AWS Security Token Service.
 
     .. note::
-        This authentication method requires some credentials to be previously added to the configuration using the ``/root/.aws/credentials`` file.
+        This authentication method requires adding credentials to the configuration using the ``/root/.aws/credentials`` file.
 
 
 
-More information about the different authentication methods can be found: :ref:`Configuring AWS credentials <amazon_credentials>`.
+More information about the different authentication methods can be found in the :ref:`Configuring AWS credentials <amazon_credentials>` documentation.

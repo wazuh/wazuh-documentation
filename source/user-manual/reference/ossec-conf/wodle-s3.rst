@@ -669,7 +669,7 @@ It is necessary to specify the type as an attribute of the ``subscriber`` tag to
 
 		</subscriber>
 
-The current available type is: ``security_lake``.
+The currently available type is: ``security_lake``.
 
 +----------------------------------------+-------------------------------------------------------------+-----------------------------------------------+
 | Options                                | Allowed values                                              | Mandatory/Optional                            |
@@ -708,7 +708,7 @@ Name of the SQS from where notifications are pulled.
 aws_profile
 ^^^^^^^^^^^
 
-A valid profile name from a Shared Credential File or AWS Config File with the permission to access the service.
+A valid profile name from a Shared Credential File or AWS Config File with permission to access the service.
 
 +--------------------+--------------------+
 | **Default value**  | N/A                |
