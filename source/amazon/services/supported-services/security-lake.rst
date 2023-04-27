@@ -29,7 +29,7 @@ AWS configuration
 Enabling Amazon Security Lake
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-If you haven't already, ensure that you have enabled Amazon Security Lake by following the instructions at `Getting started - Amazon Security Lake <https://docs.aws.amazon.com/security-lake/latest/userguide/getting-started.html#enable-service>`_ .
+If you haven't already, ensure that you have enabled Amazon Security Lake by following the instructions at `Getting started - Amazon Security Lake <https://docs.aws.amazon.com/security-lake/latest/userguide/getting-started.html#enable-service>`_.
 
 For multiple AWS accounts, we strongly encourage you to use AWS Organizations and to set up Amazon Security Lake at the Organization level.
 
