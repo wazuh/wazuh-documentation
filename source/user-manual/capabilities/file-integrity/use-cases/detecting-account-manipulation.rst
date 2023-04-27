@@ -43,7 +43,7 @@ Perform the following steps to configure the FIM module to monitor SSH key modif
 Test the configuration
 ----------------------
 
-#. Generate a SSH key-pair for user authentication and save it as ``.ssh/test_key`` using the following command:
+#. Generate an SSH key-pair for user authentication and save it as ``.ssh/test_key`` using the following command:
 
    .. code-block:: console
 

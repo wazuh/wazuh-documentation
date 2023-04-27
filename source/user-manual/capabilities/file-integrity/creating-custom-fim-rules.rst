@@ -6,7 +6,7 @@
 Creating custom FIM rules
 =========================
 
-Wazuh includes out-of-the-box rules that trigger alerts on creation, modification, or deletion of monitored files. The image below shows alerts for file addition, modification, and deletion.
+Wazuh includes out-of-the-box rules that trigger alerts on the creation, modification, or deletion of monitored files. The image below shows alerts for file addition, modification, and deletion.
 
 .. thumbnail:: ../../../images/manual/fim/fim-alerts.png
   :title: FIM alerts
@@ -167,7 +167,7 @@ Ubuntu endpoint
 
 Perform the following steps to configure the Wazuh FIM module to monitor the ``/specialdir3`` directory.
 
-#. Create the /specialdir3  directory:
+#. Create the ``/specialdir3`` directory:
 
    .. code-block:: console
 
