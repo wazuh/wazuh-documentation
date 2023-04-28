@@ -78,20 +78,16 @@ The table below describes the supported attributes the FIM module records.
   | ``check_inode``     | yes           | yes, no        | Records the file inode on Linux.                                                                                                                                                                   |
   +---------------------+---------------+----------------+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
 
-When there is a conflict between options that modify the same attribute, the last one configured takes precedence. For instance:
-
+When there is a conflict between options that modify the same attribute, the last one configured takes precedence. For instance, the following configuration sets the option ``check_mtime`` to ``yes``:
 .. code-block:: xml
 
    <directories check_all="no" check_mtime="yes">/etc</directories>
 
-The configuration above, set the option check_mtime to YES.
+While the following configuration disables recording of all attributes including the modification time check.
 
 .. code-block:: xml
    
    <directories check_mtime="yes" check_all="no">/etc</directories>
-
-Nevertheless, the second one disables recording of all attributes including the modification time check.
-
 
 You can see below an example configuration of how to disable the recording of SHA-1 hash of a monitored file. Replace ``FILEPATH/OF/MONITORED/FILE`` with your own filepath.
 
