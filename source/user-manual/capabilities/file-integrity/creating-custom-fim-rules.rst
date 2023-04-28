@@ -553,7 +553,7 @@ You can see the alert fields that correspond to the decoded FIM fields in the al
 Change alert severity for sensitive files
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-With a custom rule, you can alter the level of a FIM alert when detecting changes to a specific file or file pattern. In the following example, the custom rule raises the FIM alert level to **12** when a user or process modifies a critical file. 
+With a custom rule, you can alter the level of an FIM alert when detecting changes to a specific file or file pattern. In the following example, the custom rule raises the FIM alert level to **12** when a user or process modifies a critical file. 
 
 Infrastructure
 ~~~~~~~~~~~~~~
