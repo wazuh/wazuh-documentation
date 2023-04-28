@@ -66,10 +66,10 @@
     "postcss": "^8.4.16",
     "postcss-cli": "^10.0.0",
     "sass": "^1.54.9",
-    "stylelint": "^14.11.0",
-    "stylelint-config-recommended-scss": "^7.0.0",
-    "stylelint-config-standard-scss": "^5.0.0",
-    "stylelint-order": "^5.0.0",
+    "stylelint": "^15.6.0",
+    "stylelint-config-recommended-scss": "^11.0.0",
+    "stylelint-config-standard-scss": "^9.0.0",
+    "stylelint-order": "^6.0.3",
     "uglify-js": "^3.17.0"
   }
 }
