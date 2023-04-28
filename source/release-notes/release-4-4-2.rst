@@ -17,7 +17,7 @@ Agent
 ^^^^^
 - `#16515 <https://github.com/wazuh/wazuh/pull/16515>`_ Added a new module to integrate with Amazon Security Lake as a subscriber.
 - `#16847 <https://github.com/wazuh/wazuh/pull/16847>`_ Added support for localfile blocks deployment.
-- `#16743 <https://github.com/wazuh/wazuh/pull/16743>`_ Changed netstat command on macOS agents.
+- `#16743 <https://github.com/wazuh/wazuh/pull/16743>`_ Changed ``netstat`` command on macOS agents.
 
 Ruleset
 ^^^^^^^
@@ -27,7 +27,7 @@ Ruleset
 
 Other
 ^^^^^
-- `#16692 <https://github.com/wazuh/wazuh/pull/16692>`_ Added pyarrow and numpy Python dependencies.
+- `#16692 <https://github.com/wazuh/wazuh/pull/16692>`_ Added ``pyarrow`` and ``numpy`` Python dependencies.
 
 Resolved issues
 ---------------
@@ -42,7 +42,7 @@ Reference                                                         Description
 ==============================================================    =============
 `#16394 <https://github.com/wazuh/wazuh/pull/16394>`_             Fixed a bug causing agent groups tasks status in the cluster not to be stored. 
 `#16478 <https://github.com/wazuh/wazuh/pull/16478>`_             Fixed memory leaks in Vulnerability Detector after disk failures. 
-`#15957 <https://github.com/wazuh/wazuh/pull/15957>`_             Remove unused variable in wazuh-authd to fix a String not null terminated coverity finding.
+`#15957 <https://github.com/wazuh/wazuh/pull/15957>`_             Remove unused variable in ``wazuh-authd`` to fix a ``String not null terminated`` coverity finding.
 `#16530 <https://github.com/wazuh/wazuh/pull/16530>`_             Fixed a pre-decoder problem with the + symbol in the macOS ULS timestamp.
 ==============================================================    =============
 
