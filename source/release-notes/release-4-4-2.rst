@@ -24,6 +24,7 @@ RESTful API
 Ruleset
 ^^^^^^^
 - `#16017 <https://github.com/wazuh/wazuh/pull/16017>`_ aaa
+
 Other
 ^^^^^
 - `#16472 <https://github.com/wazuh/wazuh/pull/16472>`_ aaa
