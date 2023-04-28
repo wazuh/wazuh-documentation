@@ -17,18 +17,6 @@ Wazuh manager
 ^^^^^^^^^^^^^
 - `#15883 <https://github.com/wazuh/wazuh/pull/15883>`_ aaa
 
-RESTful API
-^^^^^^^^^^^
-- `#16541 <https://github.com/wazuh/wazuh/pull/16541>`_ aaa
-
-Ruleset
-^^^^^^^
-- `#16017 <https://github.com/wazuh/wazuh/pull/16017>`_ aaa
-
-Other
-^^^^^
-- `#16472 <https://github.com/wazuh/wazuh/pull/16472>`_ aaa
-
 Packages
 ^^^^^^^^
 - `#2150 <https://github.com/wazuh/wazuh-packages/pull/2150>`_ aaa
