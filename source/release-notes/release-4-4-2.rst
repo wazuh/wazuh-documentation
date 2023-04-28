@@ -3,7 +3,7 @@
 .. meta::
   :description: Wazuh 4.4.2 has been released. Check out our release notes to discover the changes and additions of this release.
 
-4.4.2 Release notes - 25 April 2023
+4.4.2 Release notes - 28 April 2023
 ===================================
 
 This section lists the changes in version 4.4.2. Every update of the Wazuh solution is cumulative and includes all enhancements and fixes from previous releases.
@@ -13,25 +13,21 @@ What's new
 
 This release includes new features or enhancements as the following:
 
-Wazuh manager
-^^^^^^^^^^^^^
-- `#15883 <https://github.com/wazuh/wazuh/pull/15883>`_ aaa
-
-RESTful API
-^^^^^^^^^^^
-- `#16541 <https://github.com/wazuh/wazuh/pull/16541>`_ aaa
+Agent
+^^^^^
+- `#16515 <https://github.com/wazuh/wazuh/pull/16515>`_ Added a new module to integrate with Amazon Security Lake as a subscriber.
+- `#16847 <https://github.com/wazuh/wazuh/pull/16847>`_ Added support for localfile blocks deployment.
+- `#16743 <https://github.com/wazuh/wazuh/pull/16743>`_ Changed netstat command on macOS agents.
 
 Ruleset
 ^^^^^^^
-- `#16017 <https://github.com/wazuh/wazuh/pull/16017>`_ aaa
+- `#15566 <https://github.com/wazuh/wazuh/pull/15566>`_ Added macOS 13.0 Ventura SCA policy. 
+- `#15567 <https://github.com/wazuh/wazuh/pull/15567>`_ Added new ruleset for macOS 13 Ventura and older versions.
+- `#16549 <https://github.com/wazuh/wazuh/pull/16549>`_ Added new base ruleset for log sources collected from Amazon Security Lake.
 
 Other
 ^^^^^
-- `#16472 <https://github.com/wazuh/wazuh/pull/16472>`_ aaa
-
-Packages
-^^^^^^^^
-- `#2150 <https://github.com/wazuh/wazuh-packages/pull/2150>`_ aaa
+- `#16692 <https://github.com/wazuh/wazuh/pull/16692>`_ Added pyarrow and numpy Python dependencies.
 
 Resolved issues
 ---------------
@@ -44,34 +40,29 @@ Wazuh manager
 ==============================================================    =============
 Reference                                                         Description
 ==============================================================    =============
-`#16546 <https://github.com/wazuh/wazuh/pull/16546>`_             aaa
+`#16394 <https://github.com/wazuh/wazuh/pull/16394>`_             Fixed a bug causing agent groups tasks status in the cluster not to be stored. 
+`#16478 <https://github.com/wazuh/wazuh/pull/16478>`_             Fixed memory leaks in Vulnerability Detector after disk failures. 
+`#15957 <https://github.com/wazuh/wazuh/pull/15957>`_             Remove unused variable in wazuh-authd to fix a String not null terminated coverity finding.
+`#16530 <https://github.com/wazuh/wazuh/pull/16530>`_             Fixed a pre-decoder problem with the + symbol in the macOS ULS timestamp.
 ==============================================================    =============
 
-Wazuh dashboard
-^^^^^^^^^^^^^^^
-
-==============================================================    =============
-Reference                                                         Description
-==============================================================    =============
-`#5196 <https://github.com/wazuh/wazuh-kibana-app/pull/5196>`_    aaa
-==============================================================    =============
-
-Wazuh Kibana plugin for Kibana 7.10.2
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+Agent
+^^^^^
 
 ==============================================================    =============
 Reference                                                         Description
 ==============================================================    =============
-`#5196 <https://github.com/wazuh/wazuh-kibana-app/pull/5196>`_    aaa
+`#16517 <https://github.com/wazuh/wazuh/pull/16517>`_             Fixed an issue with MAC address reporting on Windows systems.
+`#16857 <https://github.com/wazuh/wazuh/pull/16857>`_             Fixed Windows unit tests hanging during execution.
 ==============================================================    =============
 
-Wazuh Kibana plugin for Kibana 7.16.x and 7.17.x
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+RESTful API
+^^^^^^^^^^^
 
 ==============================================================    =============
 Reference                                                         Description
 ==============================================================    =============
-`#5196 <https://github.com/wazuh/wazuh-kibana-app/pull/5196>`_    aaa
+`#16381 <https://github.com/wazuh/wazuh/pull/16381>`_             Fixed agent insertion when no key is specified using POST /agents/insert endpoint.
 ==============================================================    =============
 
 Changelogs
