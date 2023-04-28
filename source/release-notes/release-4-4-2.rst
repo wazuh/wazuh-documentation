@@ -62,7 +62,7 @@ RESTful API
 ==============================================================    =============
 Reference                                                         Description
 ==============================================================    =============
-`#16381 <https://github.com/wazuh/wazuh/pull/16381>`_             Fixed agent insertion when no key is specified using POST /agents/insert endpoint.
+`#16381 <https://github.com/wazuh/wazuh/pull/16381>`_             Fixed agent insertion when no key is specified using ``POST /agents/insert`` endpoint.
 ==============================================================    =============
 
 Changelogs
