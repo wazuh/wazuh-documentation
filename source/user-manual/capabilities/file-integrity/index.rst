@@ -14,18 +14,21 @@ Wazuh has a built-in capability for file integrity monitoring. The Wazuh FIM mod
 
 Some benefits of the Wazuh FIM capability include change management, threat detection and response, and regulatory compliance as follows.  
 
-Change management
------------------
+.. raw:: html
+
+  <h2>Change management</h2>
 
 The Wazuh FIM capability is an essential tool for verifying that the change management processes are working correctly. This Wazuh capability allows you to examine files to see if they change, how and when they change, and who or what changes them. The Wazuh FIM module compares the baseline information against the information of the latest version of the file. This comparison provides visibility into alterations and updates of critical files. For example, you can use this to detect incorrect updates to applications or unauthorized changes made to configuration files.
 
-Threat detection and response
------------------------------
+.. raw:: html
+
+  <h2>Threat detection and response</h2>
 
 You can combine FIM with other Wazuh capabilities for threat detection and response. The FIM capability monitors file integrity, detects permission changes, and monitors user and file activities. It provides detailed alerts for quick responses to detected threats.
 
-Regulatory compliance
----------------------
+.. raw:: html
+
+  <h2>Regulatory compliance</h2>
 
 The FIM capability helps organizations meet regulatory requirements for data security, privacy, and data retention. Monitoring critical files for changes is an important requirement for regulations such as PCI DSS, HIPAA, and GDPR. 
 
