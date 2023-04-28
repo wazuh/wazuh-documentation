@@ -303,9 +303,7 @@ Trigger file deletion alerts
 Deleting a file can result in loss of important data or system files when done accidentally or without authorization. If an attacker gains access to a system and deletes 
 critical files, it can render the system unusable, causing data loss or downtime for the organization.
 
-Wazuh has an out-of-the-box rule that generates an alert when a monitored file is deleted or when a file in a monitored directory is deleted. In this example, we create a 
-
-custom FIM rule that triggers an alert indicating the user and the application that deleted the file.
+Wazuh has an out-of-the-box rule that generates an alert when a monitored file is deleted or when a file in a monitored directory is deleted. In this example, we create a custom FIM rule that triggers an alert indicating the user and the application that deleted the file.
 
 Infrastructure
 ~~~~~~~~~~~~~~
