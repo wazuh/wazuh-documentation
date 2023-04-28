@@ -79,6 +79,7 @@ The table below describes the supported attributes the FIM module records.
   +---------------------+---------------+----------------+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
 
 When there is a conflict between options that modify the same attribute, the last one configured takes precedence. For instance, the following configuration sets the option ``check_mtime`` to ``yes``:
+
 .. code-block:: xml
 
    <directories check_all="no" check_mtime="yes">/etc</directories>
