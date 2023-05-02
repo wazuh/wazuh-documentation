@@ -77,6 +77,16 @@ removedUrls['x.y'] = [
 redirections.push(
     {
       'target': ['4.3=>4.4', '4.4=>4.3'],
+      '4.3': '/user-manual/capabilities/file-integrity/fim-configuration.html',
+      '4.4': '/user-manual/capabilities/file-integrity/index.html',
+    },  
+    {
+      'target': ['4.3=>4.4', '4.4=>4.3'],
+      '4.3': '/user-manual/capabilities/file-integrity/fim-fields-rule-mapping.html',
+      '4.4': '/user-manual/capabilities/file-integrity/index.html',
+    }, 
+    {
+      'target': ['4.3=>4.4', '4.4=>4.3'],
       '4.3': '/user-manual/capabilities/antiflooding.html',
       '4.4': '/user-manual/agents/antiflooding.html',
     },
@@ -139,6 +149,18 @@ newUrls['4.4'] = [
   '/user-manual/agents/antiflooding.html',
   '/user-manual/agents/labels.html',
   '/user-manual/manager/fluent-forwarder.html',
+  '/user-manual/capabilities/file-integrity/basic-settings.html',
+  '/user-manual/capabilities/file-integrity/how-to-configure-fim.html',
+  '/user-manual/capabilities/file-integrity/interpreting-fim-module-analysis.html',
+  '/user-manual/capabilities/file-integrity/creating-custom-fim-rules.html',   
+  '/user-manual/capabilities/file-integrity/advanced-settings.html',
+  '/user-manual/capabilities/file-integrity/use-cases/index.html',
+  '/user-manual/capabilities/file-integrity/use-cases/detecting-malware-persistence-technique.html',
+  '/user-manual/capabilities/file-integrity/use-cases/detecting-account-manipulation.html',
+  '/user-manual/capabilities/file-integrity/use-cases/monitoring-files-at-specific-intervals.html',
+  '/user-manual/capabilities/file-integrity/use-cases/reporting-file-changes.html',
+  '/user-manual/capabilities/file-integrity/use-cases/monitoring-configuration-changes.html',
+  '/user-manual/capabilities/file-integrity/windows-registry-monitoring.html',
 ];
 
 /* Pages removed in 4.4 */
@@ -164,6 +186,8 @@ removedUrls['4.4'] = [
   '/user-manual/capabilities/antiflooding.html',
   '/user-manual/capabilities/labels.html',
   '/user-manual/capabilities/fluent-forwarder.html',
+  '/user-manual/capabilities/file-integrity/fim-configuration.html',
+  '/user-manual/capabilities/file-integrity/fim-fields-rule-mapping.html',
 ];
 
   /* *** RELEASE 4.3 ****/
