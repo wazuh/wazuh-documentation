@@ -7,8 +7,8 @@ FROM python:3.7-alpine
 
 COPY --chown=1000:1000 requirements.txt ./
 
-RUN python -m pip install --requirement requirements.txt && python -m pip install sphinx-autobuild==0.7.1
+RUN python -m pip install --requirement requirements.txt && python -m pip install sphinx-autobuild==2021.3.14
 
 EXPOSE 8000
 
-CMD ["sphinx-autobuild", "--host", "0.0.0.0", "--ignore","*.tmp","--port", "8000", "/home/python/docs", "/home/python/build/html"]
+CMD ["sphinx-autobuild", "--host", "0.0.0.0", "--ignore","*.tmp", "--ignore","**/*.min.*","--port", "8000", "/home/python/docs", "/home/python/build/html"]
