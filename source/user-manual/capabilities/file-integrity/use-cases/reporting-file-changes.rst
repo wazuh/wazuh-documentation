@@ -74,3 +74,9 @@ Expand the alert for the ``appreport.conf`` file with ``rule.id:550`` to find in
   :width: 80%
 
 Expand the alert for the ``private-file.conf`` file with ``rule.id:550`` to search for information about the changes made to the file. In the image below, under the **syscheck.diff** field, you see that FIM doesn’t report the content added to the file. 
+
+.. thumbnail:: /images/manual/fim/alert-for-the-private-file-conf.png
+  :title: Alert for the private-file.conf file
+  :alt: Alert for the private-file.conf file
+  :align: center
+  :width: 80%

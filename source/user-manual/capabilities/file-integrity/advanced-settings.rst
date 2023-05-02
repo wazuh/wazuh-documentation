@@ -748,7 +748,7 @@ Synchronization
 
 The FIM module keeps the Wazuh agent and the Wazuh server databases synchronized with each other through synchronization messages. It always updates the file inventory in the Wazuh server with the data available to  the Wazuh agent.
 
-Whenever the Wazuh agent service restarts, the module rebuilds the FIM database of the agent and synchronizes it with the Wazuh server. The module doesn’t report changes in the monitored files performed while the service is not running to the Wazuh server. The same happens to the changes that occur after the last scan and before the restart. The synchronization only takes place on files and directories monitored with the ``realtime`` and ``whodata`` options.
+Whenever the Wazuh agent service restarts, the module rebuilds the FIM database of the agent, run a full scan and synchronizes the result with the Wazuh server. The module doesn’t report changes in the monitored files performed while the service is not running to the Wazuh server. If the agent is restarted after the last scheduled scan, any event before the restart will be also discarded. Directories monitored with the ``realtime`` or ``whodata`` options are synchronized immediately, while others require a full scan before synchronization can take place.
 
 You can see below the default :ref:`synchronization <reference_ossec_syscheck_synchronization>` setting on the ``/var/ossec/etc/ossec.conf`` configuration file:
 
