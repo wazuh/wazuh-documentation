@@ -26,14 +26,14 @@ Wazuh manager
 Agent
 ^^^^^
 - `#14763 <https://github.com/wazuh/wazuh/pull/14763>`_ Added Audit policy change detection in FIM for Windows.
-- `#13264 <https://github.com/wazuh/wazuh/pull/13264>`_ FIM option fim_check_ignore now applies to files and directories.
+- `#13264 <https://github.com/wazuh/wazuh/pull/13264>`_ FIM option ``fim_check_ignore`` now applies to files and directories.
 - `#14784 <https://github.com/wazuh/wazuh/pull/14784>`_ Unit tests have been added to the shared JSON handling library.
 - `#14476 <https://github.com/wazuh/wazuh/pull/14476>`_ Unit tests have been added to the shared SQLite handling library.
-- `#13878 <https://github.com/wazuh/wazuh/pull/13878>`_ Unused option local_ip for agent configuration has been deleted.
+- `#13878 <https://github.com/wazuh/wazuh/pull/13878>`_ Unused option ``local_ip`` for agent configuration has been deleted.
 
 Ruleset
 ^^^^^^^
-- `#14138 <https://github.com/wazuh/wazuh/pull/14138>`_ The SSHD decoder has been improved to catch disconnection events. #14138
+- `#14138 <https://github.com/wazuh/wazuh/pull/14138>`_ The SSHD decoder has been improved to catch disconnection events.
 
 Wazuh dashboard
 ^^^^^^^^^^^^^^^
