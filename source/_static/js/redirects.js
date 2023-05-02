@@ -181,10 +181,6 @@ newUrls['4.4'] = [
   '/user-manual/capabilities/file-integrity/use-cases/reporting-file-changes.html',
   '/user-manual/capabilities/file-integrity/use-cases/monitoring-configuration-changes.html',
   '/user-manual/capabilities/file-integrity/windows-registry-monitoring.html',
-  '/user-manual/capabilities/auditing-whodata/index.html',
-  '/user-manual/capabilities/auditing-whodata/who-linux.html',
-  '/user-manual/capabilities/auditing-whodata/who-windows.html',
-  '/user-manual/capabilities/auditing-whodata/who-windows-policies.html',  
 ];
 
 /* Pages removed in 4.4 */
@@ -212,6 +208,10 @@ removedUrls['4.4'] = [
   '/user-manual/capabilities/fluent-forwarder.html',
   '/user-manual/capabilities/file-integrity/fim-configuration.html',
   '/user-manual/capabilities/file-integrity/fim-fields-rule-mapping.html',
+  '/user-manual/capabilities/auditing-whodata/index.html',
+  '/user-manual/capabilities/auditing-whodata/who-linux.html',
+  '/user-manual/capabilities/auditing-whodata/who-windows.html',
+  '/user-manual/capabilities/auditing-whodata/who-windows-policies.html',    
 ];
 
   /* *** RELEASE 4.3 ****/
