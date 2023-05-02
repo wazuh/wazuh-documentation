@@ -77,6 +77,26 @@ removedUrls['x.y'] = [
 redirections.push(
     {
       'target': ['4.3=>4.4', '4.4=>4.3'],
+      '4.3': '/user-manual/capabilities/auditing-whodata/index.html',
+      '4.4': '/user-manual/capabilities/file-integrity/advanced-settings.html#who-data-monitoring',
+    },
+    {
+      'target': ['4.3=>4.4', '4.4=>4.3'],
+      '4.3': '/user-manual/capabilities/auditing-whodata/who-linux.html',
+      '4.4': '/user-manual/capabilities/file-integrity/advanced-settings.html#who-data-monitoring',
+    },
+    {
+      'target': ['4.3=>4.4', '4.4=>4.3'],
+      '4.3': '/user-manual/capabilities/auditing-whodata/who-windows.html',
+      '4.4': '/user-manual/capabilities/file-integrity/advanced-settings.html#who-data-monitoring',
+    },
+    {
+      'target': ['4.3=>4.4', '4.4=>4.3'],
+      '4.3': '/user-manual/capabilities/auditing-whodata/who-windows-policies.html',
+      '4.4': '/user-manual/capabilities/file-integrity/advanced-settings.html#who-data-monitoring',
+    },
+    {
+      'target': ['4.3=>4.4', '4.4=>4.3'],
       '4.3': '/user-manual/capabilities/file-integrity/fim-configuration.html',
       '4.4': '/user-manual/capabilities/file-integrity/index.html',
     },  
@@ -161,6 +181,10 @@ newUrls['4.4'] = [
   '/user-manual/capabilities/file-integrity/use-cases/reporting-file-changes.html',
   '/user-manual/capabilities/file-integrity/use-cases/monitoring-configuration-changes.html',
   '/user-manual/capabilities/file-integrity/windows-registry-monitoring.html',
+  '/user-manual/capabilities/auditing-whodata/index.html',
+  '/user-manual/capabilities/auditing-whodata/who-linux.html',
+  '/user-manual/capabilities/auditing-whodata/who-windows.html',
+  '/user-manual/capabilities/auditing-whodata/who-windows-policies.html',  
 ];
 
 /* Pages removed in 4.4 */
