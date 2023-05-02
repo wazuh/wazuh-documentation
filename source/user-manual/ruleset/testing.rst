@@ -1,7 +1,7 @@
 .. Copyright (C) 2015, Wazuh, Inc.
 
 .. meta::
-    :description: Learn how to test Wazuh decoders and rules with Wazuh. The Wazuh logtest tool allows you to test how an event is decoded and if a rule matches the event.
+    :description: Learn how to test Wazuh decoders and rules. The Wazuh logtest tool allows you to test how an event is decoded and if a rule matches the event.
     
 Testing decoders and rules
 ==========================
@@ -77,7 +77,7 @@ To try Wazuh logtest using the Wazuh dashboard or the command line tool, follow 
 
    .. code-block:: none
       :class: output
-      :emphasize-lines: 15,19
+      :emphasize-lines: 15,17,19
 
       **Phase 1: Completed pre-decoding.
          full event: 'Oct 15 21:07:00 linux-agent sshd[29205]: Invalid user blimey from 18.18.18.18 port 48928'
@@ -112,11 +112,12 @@ To try Wazuh logtest using the Wazuh dashboard or the command line tool, follow 
 
 The above result shows that rule id ``5710`` matches the event log.
 
-If you paste the log seven more times within two minutes, you can see that rule id ``5710`` matches multiple times. You can see that in *Phase 3, filtering (rules)*, the ``firedtimes`` counter increases with each repetition. But for the last log line, rule id ``5712`` makes the match. This rule captures the eighth event that rule id ``5710`` matched previously for the same IP address.
+If you paste the log six more times, you can see that rule id ``5710`` "sshd: Attempt to login using a non-existent user" matches each time. Note that in *Phase 3, filtering (rules)*, the ``firedtimes`` counter increases with each repetition. 
+If you paste the log one more time, rule ID 5712 matches instead, indicating an attempted SSH brute force attack on the system. This rule triggers when there have been eight failed attempts to log in to SSH with a non-existing user, all from the same IP address, and within a two-minute timeframe
 
 .. code-block:: none
    :class: output
-   :emphasize-lines: 15
+   :emphasize-lines: 15, 17
 
    **Phase 1: Completed pre-decoding.
    	full event: 'Oct 15 21:07:00 linux-agent sshd[29205]: Invalid user blimey from 18.18.18.18 port 48928'
