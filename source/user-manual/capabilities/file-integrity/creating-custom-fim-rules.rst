@@ -109,14 +109,14 @@ The following table establishes a correspondence between the decoded FIM fields 
 Custom FIM rules examples
 -------------------------
 
-In the following examples, we demonstrate how you can customize the default FIM rules of Wazuh. You can see how to create custom rules with the decoded FIM fields and what are their equivalent Wazuh alert fields.
+In the following examples, we demonstrate how you can customize the default FIM rules of Wazuh. You can see how to create custom rules with the decoded FIM fields and what their equivalent Wazuh alert fields are.
 
 Trigger alerts when execute permission is added to a script
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 If a script contains malicious code, such as commands to delete or modify important files or data, then the execution of that code might result in serious damage or data loss. Therefore, you have to be careful when granting execute permission to shell scripts, and only do so for scripts that are trusted and thoroughly reviewed.
 
-Wazuh has already an out-of-the-box rule that generates an alert when a file permission is modified. However, in this example, you can see how to create a custom FIM rule to further customize this alert.  
+Wazuh already has an out-of-the-box rule that generates an alert when a file permission is modified. However, in this example, you can see how to create a custom FIM rule to further customize this alert.  
 
 Infrastructure
 ~~~~~~~~~~~~~~
@@ -550,7 +550,7 @@ You can see the alert fields that correspond to the decoded FIM fields in the al
 Change alert severity for sensitive files
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-With a custom rule, you can alter the level of an FIM alert when detecting changes to a specific file or file pattern. In the following example, the custom rule raises the FIM alert level to **12** when a user or process modifies a critical file. 
+With a custom rule, you can alter the level of an FIM alert when detecting changes to a specific file or file pattern. In the following example, the custom rule raises the FIM alert level to *12* when a user or process modifies a critical file. 
 
 Infrastructure
 ~~~~~~~~~~~~~~
@@ -595,7 +595,7 @@ Perform the following steps on the Wazuh server.
 macOS endpoint
 ~~~~~~~~~~~~~~
 
-#. Use TextEdit to create a file ``customer_details.rtf``. Then, save it in the Documents directory.
+#. Use TextEdit to create a file ``customer_details.rtf``. Then, save it in the ``Documents`` directory.
    
 #. Edit the Wazuh agent ``/Library/Ossec/etc/ossec.conf`` configuration file and add the ``customer_details.rtf`` file for monitoring: 
 

@@ -26,7 +26,7 @@ Configuration
 
 Perform the following steps to configure the FIM module to monitor SSH key modification.
 
-#. Edit the ``/var/ossec/etc/ossec.conf`` configuration file and add authorized_keys for monitoring:
+#. Edit the ``/var/ossec/etc/ossec.conf`` configuration file and add ``authorized_keys`` for monitoring:
 
    .. code-block:: xml
 

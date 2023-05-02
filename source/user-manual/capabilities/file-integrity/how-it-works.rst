@@ -26,5 +26,5 @@ The other is an agent database on the Wazuh server. The :doc:`wazuh-db </user-ma
 
 The FIM module keeps the Wazuh agent and the Wazuh server databases synchronized with each other. It always updates the file inventory in the Wazuh server with the data available to  the Wazuh agent. An up-to-date Wazuh server database allows for servicing FIM-related API queries. The synchronization mechanism only updates the Wazuh server with information from the Wazuh agents such as checksums and file attributes that have changed. 
 
-The Wazuh agent and manager have the FIM module enabled and :ref:`pre configured <reference_ossec_syscheck_default_configuration>` by default. However, we recommend that you review the configuration of your endpoints to ensure that you tailor the FIM settings, such as monitored paths, to your environment.
+The Wazuh agent and manager have the FIM module enabled and :ref:`pre-configured <reference_ossec_syscheck_default_configuration>` by default. However, we recommend that you review the configuration of your endpoints to ensure that you tailor the FIM settings, such as monitored paths, to your environment.
 

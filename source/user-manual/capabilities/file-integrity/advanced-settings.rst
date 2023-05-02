@@ -347,7 +347,7 @@ Navigate to **Modules > Integrity monitoring** on the Wazuh dashboard and find t
    :align: center
    :width: 80%
 
-Expand the alert with ``rule.id:550`` to view all the information. In the alert fields below, you can see the user ``“wazuh”`` added the word *“Hello”* to the ``audit_docu.txt`` file using the ``Notepad`` text editor.
+Expand the alert with ``rule.id:550`` to view all the information. In the alert fields below, you can see the user ``wazuh`` added the word *“Hello”* to the ``audit_docu.txt`` file using the ``Notepad`` text editor.
 
 .. thumbnail:: ../../../images/manual/fim/expand-the-alert-with-rule.id:550.png
    :title: Expand the alert with rule.id:550
@@ -623,7 +623,7 @@ In the configuration example below, you can see how to set the ``recursion_level
    - Windows: ``Restart-Service -Name wazuh``
    - macOS: ``/Library/Ossec/bin/wazuh-control restart``
 
-If you have the following directory structure and the above setting with ``recursion_level="3"``, FIM then generates alerts for file_3.txt and all files up to ``FILEPATH/OF/MONITORED/DIRECTORY/level_1/level_2/level_3/`` but not for any files in the directory deeper than ``level_3``.
+If you have the following directory structure and the above setting with ``recursion_level="3"``, FIM then generates alerts for ``file_3.txt`` and all files up to ``FILEPATH/OF/MONITORED/DIRECTORY/level_1/level_2/level_3/`` but not for any files in the directory deeper than ``level_3``.
 
    .. code-block:: console
   
