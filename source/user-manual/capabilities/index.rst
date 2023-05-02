@@ -24,7 +24,6 @@ In this section you will find:
 
     log-data-collection/index
     file-integrity/index
-    auditing-whodata/index
     malware-detection/index
     sec-config-assessment/index
     policy-monitoring/index
