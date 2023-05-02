@@ -38,7 +38,7 @@ Ruleset
 Wazuh dashboard
 ^^^^^^^^^^^^^^^
 
-- `#5197 <https://github.com/wazuh/wazuh-kibana-app/pull/5197>`_ `#5274 <https://github.com/wazuh/wazuh-kibana-app/pull/5274>`_ `#5298 <https://github.com/wazuh/wazuh-kibana-app/pull/5298>`_ Added ``rel="noopener noreferrer"`` in documentation links.
+- `#5197 <https://github.com/wazuh/wazuh-kibana-app/pull/5197>`_ `#5274 <https://github.com/wazuh/wazuh-kibana-app/pull/5274>`_ `#5298 <https://github.com/wazuh/wazuh-kibana-app/pull/5298>`_ `#5409 <https://github.com/wazuh/wazuh-kibana-app/pull/5409>`_ Added ``rel="noopener noreferrer"`` in documentation links.
 - `#5203 <https://github.com/wazuh/wazuh-kibana-app/pull/5203>`_ Added ``ignore`` and ``restrict`` options to Syslog configuration.
 - `#5376 <https://github.com/wazuh/wazuh-kibana-app/pull/5376>`_ Added the ``extensions.github`` and ``extensions.office`` settings to the default configuration file.
 - `#4163 <https://github.com/wazuh/wazuh-kibana-app/pull/4163>`_ Added new global error treatment (client-side).
@@ -48,7 +48,7 @@ Wazuh dashboard
 Wazuh Kibana plugin for Kibana 7.10.2
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-- `#5197 <https://github.com/wazuh/wazuh-kibana-app/pull/5197>`_ `#5274 <https://github.com/wazuh/wazuh-kibana-app/pull/5274>`_ `#5298 <https://github.com/wazuh/wazuh-kibana-app/pull/5298>`_ Added ``rel="noopener noreferrer"`` in documentation links.
+- `#5197 <https://github.com/wazuh/wazuh-kibana-app/pull/5197>`_ `#5274 <https://github.com/wazuh/wazuh-kibana-app/pull/5274>`_ `#5298 <https://github.com/wazuh/wazuh-kibana-app/pull/5298>`_ `#5409 <https://github.com/wazuh/wazuh-kibana-app/pull/5409>`_ Added ``rel="noopener noreferrer"`` in documentation links.
 - `#5203 <https://github.com/wazuh/wazuh-kibana-app/pull/5203>`_ Added ``ignore`` and ``restrict`` options to Syslog configuration.
 - `#5376 <https://github.com/wazuh/wazuh-kibana-app/pull/5376>`_ Added the ``extensions.github`` and ``extensions.office`` settings to the default configuration file.
 - `#4163 <https://github.com/wazuh/wazuh-kibana-app/pull/4163>`_ Added new global error treatment (client-side).
@@ -57,12 +57,17 @@ Wazuh Kibana plugin for Kibana 7.10.2
 
 Wazuh Kibana plugin for Kibana 7.16.x and 7.17.x
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-- `#5197 <https://github.com/wazuh/wazuh-kibana-app/pull/5197>`_ `#5274 <https://github.com/wazuh/wazuh-kibana-app/pull/5274>`_ `#5298 <https://github.com/wazuh/wazuh-kibana-app/pull/5298>`_ Added ``rel="noopener noreferrer"`` in documentation links.
+- `#5197 <https://github.com/wazuh/wazuh-kibana-app/pull/5197>`_ `#5274 <https://github.com/wazuh/wazuh-kibana-app/pull/5274>`_ `#5298 <https://github.com/wazuh/wazuh-kibana-app/pull/5298>`_ `#5409 <https://github.com/wazuh/wazuh-kibana-app/pull/5409>`_ Added ``rel="noopener noreferrer"`` in documentation links.
 - `#5203 <https://github.com/wazuh/wazuh-kibana-app/pull/5203>`_ Added ``ignore`` and ``restrict`` options to Syslog configuration.
 - `#5376 <https://github.com/wazuh/wazuh-kibana-app/pull/5376>`_ Added the ``extensions.github`` and ``extensions.office`` settings to the default configuration file.
 - `#4163 <https://github.com/wazuh/wazuh-kibana-app/pull/4163>`_ Added new global error treatment (client-side).
 - `#5201 <https://github.com/wazuh/wazuh-kibana-app/pull/5201>`_ Changed of regular expression in RBAC.
 - `#5384 <https://github.com/wazuh/wazuh-kibana-app/pull/5384>`_ Migrate the timeFilter, metaFields, maxBuckets health checks inside the pattern check.
+
+Wazuh Splunk app
+^^^^^^^^^^^^^^^^
+
+- `#1395 <https://github.com/wazuh/wazuh-splunk/pull/1395>`_ Added Files and Registries limits sections in configurations.
 
 Resolved issues
 ---------------
