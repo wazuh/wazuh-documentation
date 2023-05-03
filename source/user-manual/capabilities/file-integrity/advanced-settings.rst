@@ -15,6 +15,8 @@ Who-data monitoring
 
 The who-data functionality allows the FIM module to obtain information about who made modifications to a monitored file. This information contains the user who made the changes to the monitored files and the program name or process used.
 
+.. _who-data-monitoring-linux:
+
 Who-data monitoring on Linux
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
@@ -270,6 +272,8 @@ Alert in JSON:
         },
         "full_log": "File '/etc/hosts.allow' modified\nMode: whodata\nChanged attributes: size,mtime,md5,sha1,sha256\nSize changed from '411' to '423'\nOld modification time was: '1675696893', now it is '1675696910'\nOld md5sum was: 'd0cfb796d371b0182cd39d589b1c1ce3'\nNew md5sum is : '56bf94e8c0b0ff9c5efb258d85d68bba'\nOld sha1sum was: '2964c8d9f69c7261de20877392bc7393d471f4ed'\nNew sha1sum is : 'a488ebb6fb615aa58c3cbf2363fd50e6f12b1990'\nOld sha256sum was: '9eadbcd7ec16f4e5961ad2035c0228de7c22b2ba0f6761df63b1b3d9bad9d0a7'\nNew sha256sum is : 'be0f64dc44ddc87f6ba4922e124078071cd65d27d9e25f988d5c9b4c8fa60ca0'\n",
       }
+
+.. _who-data-monitoring-windows:
 
 Who-data monitoring in Windows
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^

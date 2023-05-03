@@ -77,6 +77,26 @@ removedUrls['x.y'] = [
 redirections.push(
     {
       'target': ['4.3=>4.4', '4.4=>4.3'],
+      '4.3': '/user-manual/capabilities/auditing-whodata/index.html',
+      '4.4': '/user-manual/capabilities/file-integrity/advanced-settings.html#who-data-monitoring',
+    },
+    {
+      'target': ['4.3=>4.4', '4.4=>4.3'],
+      '4.3': '/user-manual/capabilities/auditing-whodata/who-linux.html',
+      '4.4': '/user-manual/capabilities/file-integrity/advanced-settings.html#who-data-monitoring-on-linux',
+    },
+    {
+      'target': ['4.3=>4.4', '4.4=>4.3'],
+      '4.3': '/user-manual/capabilities/auditing-whodata/who-windows.html',
+      '4.4': '/user-manual/capabilities/file-integrity/advanced-settings.html#who-data-monitoring-in-windows',
+    },
+    {
+      'target': ['4.3=>4.4', '4.4=>4.3'],
+      '4.3': '/user-manual/capabilities/auditing-whodata/who-windows-policies.html',
+      '4.4': '/user-manual/capabilities/file-integrity/advanced-settings.html#manual-configuration-of-the-local-audit-policies-in-windows',
+    },
+    {
+      'target': ['4.3=>4.4', '4.4=>4.3'],
       '4.3': '/user-manual/capabilities/file-integrity/fim-configuration.html',
       '4.4': '/user-manual/capabilities/file-integrity/index.html',
     },  
@@ -188,6 +208,10 @@ removedUrls['4.4'] = [
   '/user-manual/capabilities/fluent-forwarder.html',
   '/user-manual/capabilities/file-integrity/fim-configuration.html',
   '/user-manual/capabilities/file-integrity/fim-fields-rule-mapping.html',
+  '/user-manual/capabilities/auditing-whodata/index.html',
+  '/user-manual/capabilities/auditing-whodata/who-linux.html',
+  '/user-manual/capabilities/auditing-whodata/who-windows.html',
+  '/user-manual/capabilities/auditing-whodata/who-windows-policies.html',    
 ];
 
   /* *** RELEASE 4.3 ****/
