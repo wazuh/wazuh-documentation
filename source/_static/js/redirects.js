@@ -83,17 +83,17 @@ redirections.push(
     {
       'target': ['4.3=>4.4', '4.4=>4.3'],
       '4.3': '/user-manual/capabilities/auditing-whodata/who-linux.html',
-      '4.4': '/user-manual/capabilities/file-integrity/advanced-settings.html#who-data-monitoring',
+      '4.4': '/user-manual/capabilities/file-integrity/advanced-settings.html#who-data-monitoring-on-linux',
     },
     {
       'target': ['4.3=>4.4', '4.4=>4.3'],
       '4.3': '/user-manual/capabilities/auditing-whodata/who-windows.html',
-      '4.4': '/user-manual/capabilities/file-integrity/advanced-settings.html#who-data-monitoring',
+      '4.4': '/user-manual/capabilities/file-integrity/advanced-settings.html#who-data-monitoring-in-windows',
     },
     {
       'target': ['4.3=>4.4', '4.4=>4.3'],
       '4.3': '/user-manual/capabilities/auditing-whodata/who-windows-policies.html',
-      '4.4': '/user-manual/capabilities/file-integrity/advanced-settings.html#who-data-monitoring',
+      '4.4': '/user-manual/capabilities/file-integrity/advanced-settings.html#manual-configuration-of-the-local-audit-policies-in-windows',
     },
     {
       'target': ['4.3=>4.4', '4.4=>4.3'],
