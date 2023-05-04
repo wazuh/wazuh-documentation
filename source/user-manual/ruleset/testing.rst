@@ -14,7 +14,7 @@ Wazuh logtest is a tool to test new rules and decoders and verify the current on
 
 With Wazuh logtest, you do the following:
 
-#. Input event logs in syslog and JSON formats.
+#. Input event logs. 
 #. Check what decoders match them and check what fields these decoders identify.
 #. Check what alerts match the event logs.
 
@@ -113,7 +113,7 @@ To try Wazuh logtest using the Wazuh dashboard or the command line tool, follow 
 The above result shows that rule id ``5710`` matches the event log.
 
 If you paste the log six more times, you can see that rule id ``5710`` "sshd: Attempt to login using a non-existent user" matches each time. Note that in *Phase 3, filtering (rules)*, the ``firedtimes`` counter increases with each repetition. 
-If you paste the log one more time, rule ID 5712 matches instead, indicating an attempted SSH brute force attack on the system. This rule triggers when there have been eight failed attempts to log in to SSH with a non-existing user, all from the same IP address, and within a two-minute timeframe
+If you paste the log one more time, rule ID 5712 matches instead, indicating an attempted SSH brute force attack on the system. This rule triggers when there have been eight failed attempts to log in to SSH with a non-existing user, all from the same IP address, and within a two-minute timeframe. 
 
 .. code-block:: none
    :class: output
@@ -155,20 +155,19 @@ Using the Wazuh API
 
 To use Wazuh logtest with the Wazuh API, you need the two endpoints detailed below.
 
+
+.. |logtest| replace:: `/logtest <https://documentation.wazuh.com/|WAZUH_CURRENT_MINOR|/user-manual/api/reference.html#operation/api.controllers.logtest_controller.run_logtest_tool>`__
+
+.. |logtest_sessions| replace:: `/logtest/sessions/{token} <https://documentation.wazuh.com/|WAZUH_CURRENT_MINOR|/user-manual/api/reference.html#operation/api.controllers.logtest_controller.end_logtest_session>`__
+
 +-------------------------------+-----------------+-----------------------------------------------------------------------+
 | Endpoint                      | Method          | Description                                                           |
 +===============================+=================+=======================================================================+
-| ``/logtest``                  | PUT             | Check if an alert matches a log and query the related information.    |
+| |logtest|                     | PUT             | Check if an alert matches a log and query the related information.    |
 +-------------------------------+-----------------+-----------------------------------------------------------------------+
-| ``/logtest/sessions/{token}`` | DELETE          | Delete the session corresponding to ``{token}``                       |
+| |logtest_sessions|            | DELETE          | Delete the session corresponding to ``{token}``                       |
 +-------------------------------+-----------------+-----------------------------------------------------------------------+
 
-``PUT /logtest`` accepts the following list of parameters as a *RequestBody*:
-
--  **token**: alphanumeric string
--  **log_format**: ``syslog`` or ``json``
--  **location**: path string
--  **event**: string
 
 Logging into the Wazuh API
 ^^^^^^^^^^^^^^^^^^^^^^^^^^
@@ -214,7 +213,7 @@ Use the following sample data for request:
 +------------------+--------------------------------------+----------------------------------------------------------------------------------------------+
 | Field            | Description                          | Example                                                                                      |
 +==================+======================================+==============================================================================================+
-| log_format       | Type of log, ``syslog`` or ``json``  | ``syslog``                                                                                   |
+| log_format       | Type of log                          | ``syslog``                                                                                   |
 +------------------+--------------------------------------+----------------------------------------------------------------------------------------------+
 | event            | Log to process                       | ``Oct 15 21:07:00 linux-agent sshd[29205]: Invalid user blimey from 18.18.18.18 port 48928`` |
 +------------------+--------------------------------------+----------------------------------------------------------------------------------------------+
