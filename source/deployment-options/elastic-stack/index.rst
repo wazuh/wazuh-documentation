@@ -26,7 +26,7 @@ Wazuh server and Elastic Stack are installed on the same host. This type of depl
 
       .. thumbnail:: ../../images/installation/all-in-one-deployment.png
         :title: All-in-one deployment
-        :alt: 
+        :alt: All-in-one deployment
         :align: center
         :width: 80%
         
