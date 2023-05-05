@@ -10,9 +10,7 @@ ms-graph
 
 .. versionadded:: 4.6.0
 
-.. note::
-
-    This module only works on Windows, Linux, and macOS. It is recommended to have it enabled on a single manager/agent to avoid log duplication.
+.. note:: This module only works on Windows, Linux, and macOS. It is recommended to have it enabled on a single manager/agent to avoid log duplication.
 
 .. topic:: XML section name
 
@@ -102,7 +100,7 @@ The length of time the module will wait before searching for logs.
 
 .. note::
 
-    When Wazuh starts, the module will wait for the duration of the configured time interval before running the first scan unless **run_on_start** is enabled.
+    When Wazuh starts, the module will wait for the duration of the configured time interval before running the first scan unless ``run_on_start`` is set to **yes**.
 
 +--------------------+------------------------------------------------------------------------------------------------------------------------------------------+
 | **Default value**  | 1d                                                                                                                                       |
@@ -152,9 +150,7 @@ This block configures the credentials used for authenticating with the Microsoft
 - `api_auth\\client_id`_
 - `api_auth\\secret_value`_
 
-.. warning::
-
-    In case of invalid configuration, a warning message is generated in the log file.
+.. warning:: In the case of an invalid configuration, a warning message will be generated in the log file.
 
 +----------------------------------------+----------------------------------------------+
 | Options                                | Allowed values                               |
@@ -202,7 +198,7 @@ Secret associated with the application registered in Azure.
 resource
 --------
 
-This block configures the internal options in the Microsoft Graph REST API.
+This block configures which logging sources to pull from the Microsoft Graph REST API.
 
 - `resource\\name`_
 - `resource\\relationship`_
@@ -229,7 +225,7 @@ The name of the resource (i.e., specific API endpoint) to query for logs. Additi
 resource\\relationship
 ^^^^^^^^^^^^^^^^^^^^^^
 
-This section configures the types of content (`relationships`) to query for logs. For the security resource, this includes the following relationships:
+This section configures the types of content (`relationships`) to obtain logs of. For the security resource, this includes the following relationships:
 
 - alerts: Legacy alert from supported Azure and Microsoft 365 Defender security providers.
 - alerts_v2: An enrichened version of alerts that contains additional information on suspicious activies and related collections of alerts.
@@ -243,9 +239,7 @@ This section configures the types of content (`relationships`) to query for logs
 | **Allowed values** | Any string   |
 +--------------------+--------------+
 
-.. note::
-
-    Resource blocks can be repeated to give the possibility to connect with more than one API within a tenant.
+.. note:: Resource blocks can be repeated to give the possibility to connect with more than one API within a tenant.
 
 Example of configuration
 ------------------------
