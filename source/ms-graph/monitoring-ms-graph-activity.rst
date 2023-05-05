@@ -139,43 +139,43 @@ Imagine that we have set up the Microsoft Graph module to monitor the `security`
     :class: output
 
     {
-      "id":"xxxx-xxxx-xxxx-xxxx-xxxx",
-      "providerAlertId":"xxxx-xxxx-xxxx-xxxx-xxxx",
-      "incidentId":"xx",
-      "status":"resolved",
-      "severity":"informational",
-      "classification":"truePositive",
-      "determination":null,
-      "serviceSource":"microsoftDefenderForOffice365",
-      "detectionSource":"microsoftDefenderForOffice365",
-      "detectorId":"xxxx-xxxx-xxxx-xxxx-xxxx",
-      "tenantId":"xxxx-xxxx-xxxx-xxxx-xxxx",
-      "title":"Email messages containing malicious file removed after delivery.",
-      "description":"Emails with malicious file that were delivered and later removed -V1.0.0.3",
-      "recommendedActions":"",
-      "category":"InitialAccess",
-      "assignedTo":"Automation",
-      "alertWebUrl":"https://security.microsoft.com/alerts/xxxx-xxxx-xxxx-xxxx-xxxx?tid=xxxx-xxxx-xxxx-xxxx-xxxx",
-      "incidentWebUrl":"https://security.microsoft.com/incidents/xx?tid=xxxx-xxxx-xxxx-xxxx-xxxx",
-      "actorDisplayName":null,
-      "threatDisplayName":null,
-      "threatFamilyName":null,
-      "mitreTechniques":[
-        "T1566.001"
-      ],
-      "createdDateTime":"2022-11-13T23:48:21.9847068Z",
-      "lastUpdateDateTime":"2022-11-14T00:08:37.5366667Z",
-      "resolvedDateTime":"2022-11-14T00:07:25.7033333Z",
-      "firstActivityDateTime":"2022-11-13T23:45:41.0593397Z",
-      "lastActivityDateTime":"2022-11-13T23:47:41.0593397Z",
-      "comments":[
+        "id":"xxxx-xxxx-xxxx-xxxx-xxxx",
+        "providerAlertId":"xxxx-xxxx-xxxx-xxxx-xxxx",
+        "incidentId":"xx",
+        "status":"resolved",
+        "severity":"informational",
+        "classification":"truePositive",
+        "determination":null,
+        "serviceSource":"microsoftDefenderForOffice365",
+        "detectionSource":"microsoftDefenderForOffice365",
+        "detectorId":"xxxx-xxxx-xxxx-xxxx-xxxx",
+        "tenantId":"xxxx-xxxx-xxxx-xxxx-xxxx",
+        "title":"Email messages containing malicious file removed after delivery.",
+        "description":"Emails with malicious file that were delivered and later removed -V1.0.0.3",
+        "recommendedActions":"",
+        "category":"InitialAccess",
+        "assignedTo":"Automation",
+        "alertWebUrl":"https://security.microsoft.com/alerts/xxxx-xxxx-xxxx-xxxx-xxxx?tid=xxxx-xxxx-xxxx-xxxx-xxxx",
+        "incidentWebUrl":"https://security.microsoft.com/incidents/xx?tid=xxxx-xxxx-xxxx-xxxx-xxxx",
+        "actorDisplayName":null,
+        "threatDisplayName":null,
+        "threatFamilyName":null,
+        "mitreTechniques":[
+            "T1566.001"
+        ],
+        "createdDateTime":"2022-11-13T23:48:21.9847068Z",
+        "lastUpdateDateTime":"2022-11-14T00:08:37.5366667Z",
+        "resolvedDateTime":"2022-11-14T00:07:25.7033333Z",
+        "firstActivityDateTime":"2022-11-13T23:45:41.0593397Z",
+        "lastActivityDateTime":"2022-11-13T23:47:41.0593397Z",
+        "comments":[
 
-      ],
-      "evidence":[
-        {
-          "_comment":"Snipped"
-        }
-      ]
+        ],
+        "evidence":[
+            {
+                "_comment":"Snipped"
+            }
+        ]
     }
 
 Wazuh Rules
@@ -204,10 +204,10 @@ Once Wazuh connects with the **Microsoft Graph API**, the log from above with tr
         "rule":{
             "id":"99006",
 	        "level":6,
-	        "description:"MS Graph message: The alert is true positive and detected malicious activity.",
-	        "groups": ["ms-graph"],
+	        "description":"MS Graph message: The alert is true positive and detected malicious activity.",
+	        "groups":["ms-graph"],
 	        "firedtimes":1,
-	        "mail": "false"
+	        "mail":"false"
         },
         "agent":{
             "id":"001",
@@ -222,46 +222,46 @@ Once Wazuh connects with the **Microsoft Graph API**, the log from above with tr
         },
         "data":{
             "integration":"ms-graph",
-            "resource":"security",
-            "relationship":"alerts_v2",
             "ms-graph":{
-              "id":"xxxx-xxxx-xxxx-xxxx-xxxx",
-              "providerAlertId":"xxxx-xxxx-xxxx-xxxx-xxxx",
-              "incidentId":"91",
-              "status":"resolved",
-              "severity":"informational",
-              "classification":"truePositive",
-              "determination":null,
-              "serviceSource":"microsoftDefenderForOffice365",
-              "detectionSource":"microsoftDefenderForOffice365",
-              "detectorId":"xxxx-xxxx-xxxx-xxxx-xxxx",
-              "tenantId":"xxxx-xxxx-xxxx-xxxx-xxxx",
-              "title":"Email messages containing malicious file removed after delivery.",
-              "description":"Emails with malicious file that were delivered and later removed -V1.0.0.3",
-              "recommendedActions":"",
-              "category":"InitialAccess",
-              "assignedTo":"Automation",
-              "alertWebUrl":"https://security.microsoft.com/alerts/xxxx-xxxx-xxxx-xxxx-xxxx?tid=xxxx-xxxx-xxxx-xxxx-xxxx",
-              "incidentWebUrl":"https://security.microsoft.com/incidents/91?tid=xxxx-xxxx-xxxx-xxxx-xxxx",
-              "actorDisplayName":null,
-              "threatDisplayName":null,
-              "threatFamilyName":null,
-              "mitreTechniques":[
-                "T1566.001"
-              ],
-              "createdDateTime":"2022-11-13T23:48:21.9847068Z",
-              "lastUpdateDateTime":"2022-11-14T00:08:37.5366667Z",
-              "resolvedDateTime":"2022-11-14T00:07:25.7033333Z",
-              "firstActivityDateTime":"2022-11-13T23:45:41.0593397Z",
-              "lastActivityDateTime":"2022-11-13T23:47:41.0593397Z",
-              "comments":[
+                "id":"xxxx-xxxx-xxxx-xxxx-xxxx",
+                "providerAlertId":"xxxx-xxxx-xxxx-xxxx-xxxx",
+                "incidentId":"91",
+                "status":"resolved",
+                "severity":"informational",
+                "classification":"truePositive",
+                "determination":null,
+                "serviceSource":"microsoftDefenderForOffice365",
+                "detectionSource":"microsoftDefenderForOffice365",
+                "detectorId":"xxxx-xxxx-xxxx-xxxx-xxxx",
+                "tenantId":"xxxx-xxxx-xxxx-xxxx-xxxx",
+                "title":"Email messages containing malicious file removed after delivery.",
+                "description":"Emails with malicious file that were delivered and later removed -V1.0.0.3",
+                "recommendedActions":"",
+                "category":"InitialAccess",
+                "assignedTo":"Automation",
+                "alertWebUrl":"https://security.microsoft.com/alerts/xxxx-xxxx-xxxx-xxxx-xxxx?tid=xxxx-xxxx-xxxx-xxxx-xxxx",
+                "incidentWebUrl":"https://security.microsoft.com/incidents/91?tid=xxxx-xxxx-xxxx-xxxx-xxxx",
+                "actorDisplayName":null,
+                "threatDisplayName":null,
+                "threatFamilyName":null,
+                "resource":"security",
+                "relationship":"alerts_v2",
+                "mitreTechniques":[
+                    "T1566.001"
+                ],
+                "createdDateTime":"2022-11-13T23:48:21.9847068Z",
+                "lastUpdateDateTime":"2022-11-14T00:08:37.5366667Z",
+                "resolvedDateTime":"2022-11-14T00:07:25.7033333Z",
+                "firstActivityDateTime":"2022-11-13T23:45:41.0593397Z",
+                "lastActivityDateTime":"2022-11-13T23:47:41.0593397Z",
+                "comments":[
 
-              ],
-              "evidence":[
-              {
-                "_comment":"Snipped"
-              }
-              ]
+                ],
+                "evidence":[
+                    {
+                        "_comment":"Snipped"
+                    }
+                ]
             }
         }
     }
