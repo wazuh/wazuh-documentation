@@ -6,20 +6,20 @@
 .. _ms-graph-module:
 
 ms-graph
-=========
+========
 
 .. versionadded:: 4.6.0
 
 .. note::
 
-    This module only works on Windows, Linux, and macOS. It is recommended to have it enabled on a single manager to avoid log duplication.
+    This module only works on Windows, Linux, and macOS. It is recommended to have it enabled on a single manager/agent to avoid log duplication.
 
 .. topic:: XML section name
 
-	.. code-block:: xml
+    .. code-block:: xml
 
-		<ms-graph>
-		</ms-graph>
+		    <ms-graph>
+		    </ms-graph>
 
 Configuration options of the Microsoft Graph module.
 
@@ -210,7 +210,9 @@ This block configures the internal options in the Microsoft Graph REST API.
 +----------------------------------+----------------------------------------------+
 | Options                          | Allowed values                               |
 +==================================+==============================================+
-| `subscriptions\\subscription`_   | Any string                                   |
+| `resource\\name`_                | Any string                                   |
++----------------------------------+----------------------------------------------+
+| `resource\\relationship`_        | Any string                                   |
 +----------------------------------+----------------------------------------------+
 
 resource\\name
@@ -268,7 +270,7 @@ Example of configuration
           <relationship>incidents</relationship>
         </resource>
         <resource>
-          <name>identityProtection</name>
-          <relationship>riskyUsers</relationship>
+          <name>auditLogs</name>
+          <relationship>signIns</relationship>
         </resource>
     </ms-graph>
