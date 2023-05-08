@@ -11,7 +11,7 @@ Amazon Security Lake
 .. versionadded:: 4.4.2
 
 
-Amazon Security Lake is a fully-managed security data lake service that consolidates data from multiple AWS and other services optimizing storage costs and performance at scale.
+Amazon Security Lake is a fully-managed security data lake service that consolidates data from multiple AWS and other services, optimizing storage costs and performance at scale.
 
 All logs in Amazon Security Lake use the Open Cybersecurity Schema Framework (OCSF) standard for formatting. You can use the Wazuh integration for Amazon Security Lake to ingest security events from AWS services.
 
@@ -31,13 +31,13 @@ Enabling Amazon Security Lake
 
 If you haven't already, ensure that you have enabled Amazon Security Lake by following the instructions at `Getting started - Amazon Security Lake <https://docs.aws.amazon.com/security-lake/latest/userguide/getting-started.html#enable-service>`_.
 
-For multiple AWS accounts, we strongly encourage you to use AWS Organizations and to set up Amazon Security Lake at the Organization level.
+For multiple AWS accounts, we strongly encourage you to use AWS Organizations and set up Amazon Security Lake at the Organization level.
 
 
 Creating a Subscriber in Amazon Security Lake
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-After completing all required AWS prerequisites, configure a subscriber for Amazon Security Lake via the AWS console. This creates the resources you need to make the Amazon Security Lake events available for consumption into your Wazuh platform deployment.
+After completing all required AWS prerequisites, configure a subscriber for Amazon Security Lake via the AWS console. This creates the resources you need to make the Amazon Security Lake events available for consumption in your Wazuh platform deployment.
 
 Setting up a subscriber in the AWS Console
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
@@ -65,7 +65,7 @@ Reviewing the subscriber
 
 #. Navigate to **My subscribers** section, and click on your newly created subscriber to get to the *Subscriber Details* page.
 #. Check that AWS created the subscriber with the correct parameters.
-#. Save the *SQS queue name*. You need the name of the Subscription endpoint for later on, when verifying the information in the SQS queue.
+#. Save the *SQS queue name*. You need the name of the Subscription endpoint for later on when verifying the information in the SQS queue.
 
 Verifying information in SQS Queue
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
