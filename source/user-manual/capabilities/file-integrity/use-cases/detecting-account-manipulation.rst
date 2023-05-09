@@ -12,8 +12,8 @@ To maintain persistence on a victim endpoint, adversaries can alter the SSH ``au
 
 You can configure the Wazuh FIM module to monitor the ``authorized_keys`` file. This triggers an alert whenever a user or process modifies the public keys in the file. Detecting the modification of the SSH keys allows you to take action before a system compromise occurs.
 
-Infrastructure
---------------
+Use case description
+--------------------
 
   +---------------------+-----------------------------------------------------------------------------------------------+
   | Endpoint            | Description                                                                                   |

@@ -275,13 +275,13 @@ Alert in JSON:
 
 .. _who-data-monitoring-windows:
 
-Who-data monitoring in Windows
+Who-data monitoring on Windows
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 How it works
 ~~~~~~~~~~~~
 
-The who-data monitoring functionality uses the Microsoft Windows auditing subsystem. It gets the related information about who makes modifications in a monitored directory. These changes produce audit events. The FIM module processes these events and reports them to the Wazuh server. This feature is only compatible with Windows operating systems newer than Windows Vista.
+The who-data monitoring functionality uses the Microsoft Windows auditing subsystem. It gets the related information about who makes modifications in a monitored directory. These changes produce audit events. The FIM module processes these events and reports them to the Wazuh server. This feature is only compatible with Windows operating systems later than Windows Vista.
 
 Configuration
 ~~~~~~~~~~~~~
@@ -299,7 +299,7 @@ To enable the who-data feature, you must declare the tag ``whodata="yes"`` withi
       ...
 
 
-Also, you need to properly configure System audit policies. Luckily, most supported Windows systems do this part automatically by default. However, if your Windows OS version is newer than Windows Vista but the system didn’t automatically configured the audit policies, see the :ref:`Manual configuration of the Local Audit Policies in Windows <manual_configuration_of_the_local_audit_policies_in_windows>` guide.
+Also, you need to properly configure System audit policies. Luckily, most supported Windows systems do this part automatically by default. However, if your Windows OS version is later than Windows Vista but the system didn’t automatically configured the audit policies, see the :ref:`Manual configuration of the Local Audit Policies in Windows <manual_configuration_of_the_local_audit_policies_in_windows>` guide.
 
 The following table establishes a correspondence between audit fields and their equivalent fields in an alert when who-data is enabled:
 
@@ -550,6 +550,8 @@ Alert in JSON:
 Manual configuration of the Local Audit Policies in Windows
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
+For Windows versions later than Windows Vista or Windows Server 2008, when you monitor a file or directory with the ``whodata`` option, Wazuh automatically configures the System Access Control List (SACL) for the file or directory. If this is not done automatically or you have a older version of Windows such as Windows Vista or Windows Server 2008, you have to manually configure the audit policies.
+
 To manually configure the audit policies needed to run FIM in who-data mode, you need to activate the logging of successful events. 
 
 On the Run dialog box (**win** + **R**), open the *Local Group Policy Editor* using the following command:
@@ -560,7 +562,7 @@ On the Run dialog box (**win** + **R**), open the *Local Group Policy Editor* us
 
 Use one of the following methods depending on your operating system version.
 
-- For Windows versions newer than Windows Vista or Windows Server 2008: :ref:`Advanced Audit Policy Configuration section <advanced_audit_policy_configuration_section>`
+- For Windows versions later than Windows Vista or Windows Server 2008: :ref:`Advanced Audit Policy Configuration section <advanced_audit_policy_configuration_section>`
 
 - For Windows Vista or Windows Server 2008: :ref:`Audit Policy section <audit_policy_section>`
 
@@ -569,7 +571,7 @@ Use one of the following methods depending on your operating system version.
 Advanced Audit Policy Configuration section
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-This is the recommended option to configure policies and it’s available on Windows OS versions newer than Windows Vista or Windows Server 2008. Configure the **Audit events** field with the value **Success** for the following options:
+This is the recommended option to configure policies and it’s available on Windows OS versions later than Windows Vista or Windows Server 2008. Configure the **Audit events** field with the value **Success** for the following options:
 
 **Computer Configuration > Windows Settings > Security Settings > Advanced Audit Policy Configuration > Object Access > Audit File System**
 

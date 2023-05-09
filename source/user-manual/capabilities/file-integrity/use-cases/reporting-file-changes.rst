@@ -10,8 +10,8 @@ The functionality to report changes made to a file allows you to confirm the imp
 
 Having a record of file changes might be useful for troubleshooting issues or for auditing purposes. By providing visibility into file changes, the FIM capability plays a crucial role in effective change management.
 
-Infrastructure
---------------
+Use case description
+--------------------
 
   +---------------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
   | Endpoint            | Description                                                                                                                                                                    |
@@ -19,8 +19,8 @@ Infrastructure
   | Ubuntu 20.04        | The FIM module monitors a directory on this endpoint for file changes. It reports the exact changes made to a specified file and hides the changes made to an excluded file.   |                                                                                                                               
   +---------------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
 
-Configuration
--------------
+Use case description
+--------------------
 
 Perform the following steps to configure the FIM module to report changes made to a file. The configuration reports changes made to files in ``/appfolder`` except for the ``private-file.conf`` file. 
 
