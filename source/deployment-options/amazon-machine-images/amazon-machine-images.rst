@@ -142,4 +142,4 @@ Upgrading the Wazuh server
 
 The Wazuh server in the instance can be upgraded as a traditional installation.
 
-  - :ref:`Upgrading the Wazuh manager <upgrading_wazuh_server>`
+  - :doc:`Upgrading the Wazuh central components </upgrade-guide/upgrading-central-components>`
