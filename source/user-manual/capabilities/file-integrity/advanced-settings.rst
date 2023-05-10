@@ -550,7 +550,7 @@ Alert in JSON:
 Manual configuration of the Local Audit Policies in Windows
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-For Windows versions later than Windows Vista or Windows Server 2008, when you monitor a file or directory with the ``whodata`` option, Wazuh automatically configures the System Access Control List (SACL) for the file or directory. If this is not done automatically or you have an older version of Windows, such as Windows Vista or Windows Server 2008, you have to configure the audit policies manually.
+For Windows versions later than Windows Vista and Windows Server 2008, when you monitor a file or directory with the ``whodata`` option, Wazuh automatically configures the System Access Control List (SACL) for the file or directory. If this is not done automatically or you have an earlier version of Windows, such as Windows Vista and Windows Server 2008, you have to configure the audit policies manually.
 
 To manually configure the audit policies needed to run FIM in who-data mode, you need to activate the logging of successful events. 
 
