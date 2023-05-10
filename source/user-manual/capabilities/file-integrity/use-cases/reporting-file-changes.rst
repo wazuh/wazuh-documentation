@@ -19,8 +19,8 @@ Use case description
   | Ubuntu 20.04        | The FIM module monitors a directory on this endpoint for file changes. It reports the exact changes made to a specified file and hides the changes made to an excluded file.   |                                                                                                                               
   +---------------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
 
-Use case description
---------------------
+Configuration
+-------------
 
 Perform the following steps to configure the FIM module to report changes made to a file. The configuration reports changes made to files in ``/appfolder`` except for the ``private-file.conf`` file. 
 
