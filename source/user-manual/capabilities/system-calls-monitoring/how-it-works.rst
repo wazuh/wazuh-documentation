@@ -41,23 +41,23 @@ To define a file system rule, use the following syntax:
 
 Where:
 
-+----------------------+-------------------------------------------------------------------------------------------------------------------------------------------------------------+
-| **-w <path>**        | Specify what file or directory to audit with <path>                                                                                                         |
-+----------------------+-------------------------------------------------------------------------------------------------------------------------------------------------------------+
-| **-p <permissions>** | <permissions> are the permissions that are for auditing, including the following:                                                                           |
-+                      +---------------------------------------------------+-----------+---------------------------------------------------------------------------------------------+
-|                      | Values                                            | r         | read access to a file or a directory.                                                       |
-+                      +                                                   +-----------+---------------------------------------------------------------------------------------------+
-|                      |                                                   | w         | write access to a file or a directory.                                                      |
-+                      +                                                   +-----------+---------------------------------------------------------------------------------------------+
-|                      |                                                   | x         | execute access to a file or a directory.                                                    |
-+                      +                                                   +-----------+---------------------------------------------------------------------------------------------+
-|                      |                                                   | a         | change in the file's or directory's attribute.                                              |
-+----------------------+---------------------------------------------------+-----------+---------------------------------------------------------------------------------------------+
-| **-k <key_name>**    | <key_name> assigns a unique identifier to the rule. It tags the audit events that match the rule to make searching for and analyzing related events easier. |
-|                      |                                                                                                                                                             |
-|                      | Wazuh requires this argument to analyze the logs more accurately.                                                                                           |
-+----------------------+-------------------------------------------------------------------------------------------------------------------------------------------------------------+
++----------------------+-----------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| ``-w <PATH>``        | ``<PATH>``: specifies what file or directory to audit.                                                                                                          |
++----------------------+-----------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| ``-p <PERMISSIONS>`` | ``<PERMISSIONS>`` are the permissions that are for auditing, including the following:                                                                           |
++                      +---------------------------------------------------+-----------+-------------------------------------------------------------------------------------------------+
+|                      | Values                                            | r         | read access to a file or a directory.                                                           |
++                      +                                                   +-----------+-------------------------------------------------------------------------------------------------+
+|                      |                                                   | w         | write access to a file or a directory.                                                          |
++                      +                                                   +-----------+-------------------------------------------------------------------------------------------------+
+|                      |                                                   | x         | execute access to a file or a directory.                                                        |
++                      +                                                   +-----------+-------------------------------------------------------------------------------------------------+
+|                      |                                                   | a         | change in the file's or directory's attribute.                                                  |
++----------------------+---------------------------------------------------+-----------+-------------------------------------------------------------------------------------------------+
+| ``-k <KEY_NAME>``    | ``<KEY_NAME>`` assigns a unique identifier to the rule. It tags the audit events that match the rule to make searching for and analyzing related events easier. |
+|                      |                                                                                                                                                                 |
+|                      | Wazuh requires this argument to analyze the logs more accurately.                                                                                               |
++----------------------+-----------------------------------------------------------------------------------------------------------------------------------------------------------------+
 
 For example, the following command defines a rule that logs all write access and every attribute change of the ``/etc/passwd`` file:
 
@@ -146,7 +146,7 @@ For example, the following configuration defines a rule that creates a log entry
 
    # auditctl -a always,exit -S unlink -S unlinkat -S rename -S renameat -F auid>=500 -F auid!=4294967295 -k delete
 
-It is also possible to define a file system rule using the system call rule syntax. The following command creates a rule for system calls that is similar to the **-w /etc/shadow -p wa** file system rule:
+It is also possible to define a file system rule using the system call rule syntax. The following command creates a rule for system calls that is similar to the ``-w /etc/shadow -p wa`` file system rule:
 
 .. code-block:: console
 
