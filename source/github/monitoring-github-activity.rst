@@ -143,5 +143,11 @@ If Wazuh successfully connects to GitHub, the events raised above will trigger t
 Enabling dashboard visualization  
 --------------------------------
 
-   Once the configuration is complete, you can enable the `Security Information` visualization feature in the **Wazuh Dashboard**. You can read more about it `here <https://documentation.wazuh.com/current/user-manual/wazuh-dashboard/settings.html#modules>`_.
+Once the configuration is complete, you can enable the corresponding Security Information Management module on the Wazuh
+Dashboard. This will provide you with additional details and insights of events, as illustrated in the screenshot below.
 
+    .. thumbnail:: ../images/github/github-dashboard-event.png
+      :align: center
+      :width: 70%
+
+To learn more, see the `modules <https://documentation.wazuh.com/current/user-manual/wazuh-dashboard/settings.html#modules>`_ section.
