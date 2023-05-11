@@ -23,3 +23,4 @@ By providing a centralized view of audit events, Wazuh simplifies the task of mo
 
        how-it-works
        audit-configuration
+       use-cases/index
