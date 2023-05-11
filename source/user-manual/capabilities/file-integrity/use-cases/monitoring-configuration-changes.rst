@@ -15,8 +15,8 @@ You can configure the FIM module to monitor configuration files and report any c
 - The process that the user executed.
 - The changes made to the file.
 
-Infrastructure
---------------
+Use case description
+--------------------
 
   +---------------------+-----------------------------------------------------------------------------------------------+
   | Endpoint            | Description                                                                                   |
