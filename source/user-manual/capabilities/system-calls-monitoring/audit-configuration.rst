@@ -18,6 +18,7 @@ where:
 
 - ``<KEY_NAME>`` is the string you used in the argument *-k* of a file system or system call rule.
 - ``<VALUE>`` is one of the following values:
+
    - write: File system rules with ``-p w``.
    - read: File system rules with ``-p r``.
    - execute: File system rules with ``-p x``.
