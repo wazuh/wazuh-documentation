@@ -146,6 +146,10 @@ For example, the following configuration defines a rule that creates a log entry
 
    # auditctl -a always,exit -S unlink -S unlinkat -S rename -S renameat -F auid>=500 -F auid!=4294967295 -k delete
 
+
+.. Note::
+   ``-F auid!=4294967295`` option is used to exclude users whose login UID is not set.
+
 It is also possible to define a file system rule using the system call rule syntax. The following command creates a rule for system calls that is similar to the ``-w /etc/shadow -p wa`` file system rule:
 
 .. code-block:: console
