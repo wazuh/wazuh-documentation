@@ -68,8 +68,8 @@ You can visualize the alerts for ``rule.id:80792`` in the Wazuh dashboard.
   :width: 80%
 
 .. thumbnail:: /images/manual/system-calls-monitoring/root-commands-alerts.png
-  :title: Root commands alerts
-  :alt: Root commands alerts
+  :title: root commands alerts
+  :alt: root commands alerts
   :align: center
   :width: 80%
 
