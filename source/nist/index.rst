@@ -16,7 +16,7 @@ Wazuh has various capabilities and modules, such as log data analysis, file inte
 
 Wazuh includes default rules and decoders for detecting security incidents, system errors, security misconfigurations, and policy violations. These rules are mapped to the NIST 800-53 controls by default. In addition to the default rule mapping provided by Wazuh, it’s possible to map your custom rules to one or more NIST 800-53 controls. For this, you need to add their compliance identifier in the ``<group>`` tag of the rule. The syntax used to map a rule to a NIST 800-53 control is ``nist_800_53_`` followed by the acronym of the control and the specific control number. For example, the syntax ``nist_800_53_AU.12`` maps a rule to the AU-12 Audit Record Generation control. Refer to the :doc:`Rules syntax section </user-manual/ruleset/ruleset-xml-syntax/rules>` for more information. 
 
-In the `Wazuh for NIST 800-53 revision 5 guide (PDF) <https://wazuh.com/resources/Wazuh-NIST-800-53-guide.pdf>`_ , we explain how the various Wazuh modules assist in meeting and implementing NIST 800-53 controls.
+In the `Wazuh for NIST 800-53 revision 5 guide (PDF) <https://wazuh.com/resources/Wazuh-NIST-800-53-guide.pdf>`_, we explain how the various Wazuh modules assist in meeting and implementing NIST 800-53 controls.
 
 We have some use cases in the following sections that show how to use Wazuh capabilities and modules to comply with NIST 800-53 controls:
 
