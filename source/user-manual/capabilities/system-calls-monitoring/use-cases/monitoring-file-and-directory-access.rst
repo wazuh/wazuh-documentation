@@ -77,7 +77,7 @@ Run the command below to read the new file:
       
       $ nano /home/malware.py
 
-You can visualize the alert data in the Wazuh dashboard. To do this, go to the Security events module and apply the rule.id:80784 filter to query the alert.
+You can visualize the alert data in the Wazuh dashboard. To do this, go to the **Security events** module and apply the ``rule.id:80784`` filter to query the alert.
 
 .. thumbnail:: /images/manual/system-calls-monitoring/write-access-alert.png
   :title: Write access alert
@@ -88,13 +88,13 @@ You can visualize the alert data in the Wazuh dashboard. To do this, go to the S
 Change permissions
 ^^^^^^^^^^^^^^^^^^
 
-Run the command below to change the permission of the /home/malware.py file:
+Run the command below to change the permission of the ``/home/malware.py`` file:
 
    .. code-block:: console
       
       $ chmod u+x /home/malware.py
 
-You can visualize the alert data in the Wazuh dashboard. To do this, go to the Security events module and apply the rule.id:80787 filter to query the alert.
+You can visualize the alert data in the Wazuh dashboard. To do this, go to the **Security events** module and apply the ``rule.id:80787`` filter to query the alert.
 
 .. thumbnail:: /images/manual/system-calls-monitoring/change-permissions-alert.png
   :title: Change permissions alert
@@ -105,13 +105,13 @@ You can visualize the alert data in the Wazuh dashboard. To do this, go to the S
 Read and execute access
 ^^^^^^^^^^^^^^^^^^^^^^^
 
-Run the command below to execute the /home/malware.py file:
+Run the command below to execute the ``/home/malware.py`` file:
 
    .. code-block:: console
       
       $ /home/malware.py
 
-You can visualize the alert data in the Wazuh dashboard. To do this, go to the Security events module and apply the rule.id: (80784 or 80789) filters to query the alerts.
+You can visualize the alert data in the Wazuh dashboard. To do this, go to the **Security events** module and apply the ``rule.id: (80784 or 80789)`` filters to query the alerts.
 
 .. thumbnail:: /images/manual/system-calls-monitoring/execute-access-alert.png
   :title: Read and execute access alert
@@ -122,13 +122,13 @@ You can visualize the alert data in the Wazuh dashboard. To do this, go to the S
 Delete file
 ^^^^^^^^^^^
 
-Run the command below to delete the /home/malware.py file:
+Run the command below to delete the ``/home/malware.py`` file:
 
    .. code-block:: console
       
       $ rm /home/malware.py
 
-You can visualize the alert data in the Wazuh dashboard. To do this, go to the Security events module and apply the rule.id:80791 filter to query the alert.
+You can visualize the alert data in the Wazuh dashboard. To do this, go to the **Security events** module and apply the ``rule.id:80791`` filter to query the alert.
 
 .. thumbnail:: /images/manual/system-calls-monitoring/delete-file-alert.png
   :title: Delete file alert
