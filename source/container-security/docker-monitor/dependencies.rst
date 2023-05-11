@@ -19,7 +19,7 @@ Installing dependencies
 Python
 ------
 
-The Docker listener module requires Python 3. It is compatible with Python 3.6 to Python 3.9. Future Python releases should maintain compatibility although it cannot be guaranteed.
+The Docker listener module requires Python 3. It is compatible with Python 3.7 and above.
 
 .. tabs::
 
