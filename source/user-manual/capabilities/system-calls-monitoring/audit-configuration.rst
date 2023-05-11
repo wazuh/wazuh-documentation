@@ -44,3 +44,60 @@ Run the command below to view the content of the CDB list:
       audit-wazuh-x:execute
       audit-wazuh-c:command
 
+You can add your custom key with its value to the list like this:
+
+   .. code-block:: console
+
+      # echo "<YOUR_KEY>:<VALUE>" >> /var/ossec/etc/lists/audit-keys
+
+Where ``<YOUR_KEY>`` is the key set in the audit rule and ``<VALUE>`` is used by Wazuh to process the event.
+
+Restart the Wazuh manager any time you modify the CDB list:
+
+   .. code-block:: console
+
+      # systemctl restart wazuh-manager
+
+Out-of-the-box rules for Audit events are located in the ``/var/ossec/ruleset/rules/0365-auditd_rules.xml`` file on the Wazuh server.
+
+Monitored endpoint
+------------------
+
+#. To use the Linux Audit system, you must install the audit package on your endpoint. If you do not have this package installed, execute the following command as the root user to install it:
+
+   .. tabs::
+   
+      .. group-tab:: Yum
+                   
+         .. code-block:: console
+         
+            # yum install -y auditd
+   
+      .. group-tab:: APT
+      
+         .. code-block:: console
+         
+            # apt install -y auditd
+   
+
+   .. Note::
+      If the audit package is already present on the endpoint before installing the Wazuh agent, the actions below should not be performed. This configuration will be added by default.
+
+#. Add the configuration below to the Wazuh agent configuration ``/var/ossec/etc/ossec.conf`` file. This configures Wazuh to read the audit file log to process events the Linux Audit system detects:
+
+   .. code-block:: xml  
+
+      <localfile>
+        <log_format>audit</log_format>
+        <location>/var/log/audit/audit.log</location>
+      </localfile>
+
+#. Restart the Wazuh agent to apply the changes:
+
+   .. code-block:: console
+
+      # systemctl restart wazuh-agent
+
+#. Create proper audit rules using the ``auditctl`` command or the audit rules file. 
+
+Linux audit alerts are displayed in the **Security Events** and **System Auditing** tab of the Wazuh dashboard.
