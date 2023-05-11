@@ -13,7 +13,7 @@ Ubuntu endpoint
 
 In this use case, we have two users, John and Jane. We monitor Jane’s home directory and track if any other user that is not Jane or root tries to access this directory.
 
-#.  Create the two users, Jane and John, on your endpoint:
+#. Create the two users, Jane and John, on your endpoint:
 
    .. code-block:: console
 
