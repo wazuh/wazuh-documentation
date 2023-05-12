@@ -16,7 +16,7 @@ This release includes new features or enhancements as the following:
 
 Wazuh manager
 ^^^^^^^^^^^^^
-`#15957 <https://github.com/wazuh/wazuh/pull/15957>`_ Remove an unused variable in ``wazuh-authd`` to fix a ``_String not null terminated_`` Coverity finding.
+- `#15957 <https://github.com/wazuh/wazuh/pull/15957>`_ Remove an unused variable in ``wazuh-authd`` to fix a ``_String not null terminated_`` Coverity finding.
 
 
 Agent
