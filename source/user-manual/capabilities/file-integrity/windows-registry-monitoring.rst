@@ -200,8 +200,8 @@ Malware persistence in the Windows Registry is a technique attackers use to ensu
 
 With the Wazuh FIM module, you can detect any suspicious or unknown programs added to the startup registry keys. This allows you to take appropriate action to remove them before they cause harm to your system. 
 
-Infrastructure
-^^^^^^^^^^^^^^
+Use case description
+^^^^^^^^^^^^^^^^^^^^
 
   +---------------------+-----------------------------------------------------------------------------------------------+
   | Endpoint            | Description                                                                                   |
