@@ -604,6 +604,33 @@ We only recommended this option if your host is Windows Vista or Windows Server 
    :align: center
    :width: 80%
 
+System Access Control List (SACL) in Windows
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+A system access control list (SACL) enables administrators to log attempts to access a secured object. You can check and modify SACLs of each monitored directory through **Properties**, selecting the **Security** tab, and clicking on **Advanced**:
+
+.. thumbnail:: /images/manual/fim/click-on-advanced.png
+   :title: click on Advanced
+   :alt: click on Advanced
+   :align: center
+   :width: 100%
+
+It is  necessary to have a *Success* entry in the Auditing tab :
+
+.. thumbnail:: /images/manual/fim/success-entry-in-the-auditing-tab.png
+   :title: Success entry in the Auditing tab
+   :alt: Success entry in the Auditing tab
+   :align: center
+   :width: 80%
+
+If there is no success entry, click on **Add**, to create it with these **advanced permissions**:
+
+.. thumbnail:: /images/manual/fim/click-on-add.png
+   :title: Click on Add
+   :alt: Click on Add
+   :align: center
+   :width: 80%
+
 Tuning audit to deal with a flood of who-data events
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
