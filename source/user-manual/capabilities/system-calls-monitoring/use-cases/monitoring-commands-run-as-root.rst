@@ -19,11 +19,11 @@ Ubuntu endpoint
       # echo "-a exit,always -F euid=0 -F arch=b32 -S execve -k audit-wazuh-c" >> /etc/audit/audit.rules
 
    - ``-a always,exit``: Specifies that the audit event should always be generated, regardless of whether the system call was successful or not.
-   - ``-S execve``: Specifies that the rule should match events that involve the "execve" system call.
+   - ``-S execve``: Specifies that the rule should match events that involve the ``execve`` system call.
    - ``-F euid=0``: Specifies that the rule should only match events where the effective user ID (euid) is equal to 0, which is the root user.
    - ``-k audit-wazuh-c``: Specifies a key value that will be used to tag the generated audit events.
    
-   Overall, this rule generates audit events for every execution of the ``"execve"`` system call by the root user (euid=0) and tags those events with the key ``"audit-wazuh-c"``.
+   Overall, this rule generates audit events for every execution of the ``execve`` system call by the root user (euid=0) and tags those events with the key ``"audit-wazuh-c"``.
 
 #. Reload the audit rules to apply the changes:
 

@@ -140,7 +140,7 @@ Where:
 |                           | Wazuh requires this argument to analyze the logs more accurately.                                                                                               |
 +---------------------------+-----------------------------------------------------------------------------------------------------------------------------------------------------------------+
 
-For example, the following configuration defines a rule that creates a log entry every time a file is deleted or renamed by a system user whose ID is 500 or larger.
+For example, the following configuration defines a rule that creates a log entry every time a file is deleted or renamed by a system user whose ID is 500 or larger:
 
 .. code-block:: console
 

@@ -29,11 +29,11 @@ In this use case, we have two users, John and Jane. We monitor Jane’s home dir
    Here is a breakdown of the rule:
 
    - ``-a always,exit`` specifies that the rule should always trigger on a process exit.
-   - ``-F dir=/home/jane/`` specifies that the rule should only apply to files and directories inside the /home/jane directory.
+   - ``-F dir=/home/jane/`` specifies that the rule should only apply to files and directories inside the ``/home/jane`` directory.
    - ``-F perm=rwa`` specifies the permissions being monitored for the system call to occur, in this case, read, write, and append permissions.
    - ``-F auid>=1000`` this specifies the audit UID (``auid``), which is the user ID associated with the process that triggered the event, should be more than or equal to 1000.
-   - ``-F auid!=-1`` specifies the auid should not be equal to -1, which is used when a process is launched without a user ID.
-   - ``-F euid!=<EUID_OF_JANE>`` specifies that the audit rule should not apply to Jane herself. ``<EUID_OF_JANE>`` represents Jane’s euid. You can obtain a user ``euid`` using the following command: ``id -u <USERNAME>``.
+   - ``-F auid!=-1`` specifies the ``auid`` should not be equal to -1, which is used when a process is launched without a user ID.
+   - ``-F euid!=<EUID_OF_JANE>`` specifies that the audit rule should not apply to Jane herself. ``<EUID_OF_JANE>`` represents Jane’s ``euid``. You can obtain a user ``euid`` using the following command: ``id -u <USERNAME>``.
    - ``-F uid!=0`` specifies that the audit rule doesn’t apply to the root user.
    - ``-C auid!=obj_uid`` specifies that the ``auid`` should not be equal to the object UID (``obj_uid``), which is the UID associated with the accessed file or directory.
    - ``-k power_abuse`` provides a unique ID that Wazuh uses to analyze the audit logs.

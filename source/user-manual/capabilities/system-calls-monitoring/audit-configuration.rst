@@ -8,7 +8,7 @@
 Configuration
 =============
 
-The Linux Audit system generates numerous events for write access, read access, execute access, attribute change, or system call rule. Wazuh uses the key argument in audit rules because it is difficult to distinguish audit events using rules and decoders alone. As previously explained, each audit rule can add a descriptive key value to identify what rule generated a particular audit log entry. We use a :doc:`CDB list </user-manual/ruleset/cdb-list>` to determine the types of audit rules fired. This list will have the following syntax:
+The Linux Audit system generates numerous events for write access, read access, execute access, attribute change, or system call rule. Wazuh uses the *key* argument in audit rules because it is difficult to distinguish audit events using rules and decoders alone. As previously explained, each audit rule can add a descriptive key value to identify what rule generated a particular audit log entry. We use a :doc:`CDB list </user-manual/ruleset/cdb-list>` to determine the types of audit rules fired. This list will have the following syntax:
 
    .. code-block:: console
 
