@@ -16,14 +16,14 @@ This release includes new features or enhancements as the following:
 
 Wazuh manager
 ^^^^^^^^^^^^^
-- `#15957 <https://github.com/wazuh/wazuh/pull/15957>`_ Remove an unused variable in ``wazuh-authd`` to fix a ``_String not null terminated_`` Coverity finding.
+- `#15957 <https://github.com/wazuh/wazuh/pull/15957>`_ Remove an unused variable in ``wazuh-authd`` to fix a *String not null terminated* Coverity finding.
 
 
 Agent
 ^^^^^
 - `#16515 <https://github.com/wazuh/wazuh/pull/16515>`_ Added a new module to integrate with Amazon Security Lake as a subscriber.
 - `#16847 <https://github.com/wazuh/wazuh/pull/16847>`_ Added support for ``localfile`` blocks deployment.
-- `#16743 <https://github.com/wazuh/wazuh/pull/16743>`_ Changed ``_netstat_`` command on macOS agents.
+- `#16743 <https://github.com/wazuh/wazuh/pull/16743>`_ Changed ``netstat`` command on macOS agents.
 
 Ruleset
 ^^^^^^^
