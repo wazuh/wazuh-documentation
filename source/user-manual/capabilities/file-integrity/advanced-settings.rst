@@ -286,20 +286,26 @@ The who-data monitoring functionality uses the Microsoft Windows auditing subsys
 Configuration
 ~~~~~~~~~~~~~
 
-To enable the who-data feature, you must declare the tag ``whodata="yes"`` within the directories block in the ``C:\Program Files (x86)\ossec-agent\ossec.conf`` configuration file. Wazuh automatically configures the System Access Control List (SACL) for the directory to monitor:
+To enable the who-data feature, you must declare the tag ``whodata="yes"`` within the directories block in the ``C:\Program Files (x86)\ossec-agent\ossec.conf`` configuration file. You need to properly configure the Local Audit Policies and the System Access Control List (SACLs) of each monitored directory. Wazuh automatically performs these configuration for the directory to monitor:
 
    .. code-block:: xml
 
       ...
       <syscheck>
         ...
-        <directories check_all="yes" whodata="yes">%WINDIR%\System32\drivers\etc</directories>
+        <directories check_all="yes" whodata="yes">C:\test</directories>
         ...
       </syscheck>
       ...
 
 
-Also, you need to properly configure System audit policies. Luckily, most supported Windows systems do this part automatically by default. However, if your Windows OS version is later than Windows Vista but the system didn’t automatically configured the audit policies, see the :ref:`Manual configuration of the Local Audit Policies in Windows <manual_configuration_of_the_local_audit_policies_in_windows>` guide.
+The FIM module configures the required Local Audit Policies and SACLs when launched. However, other services might change this configuration which would prevent who-data from receiving the monitored events. To overcome this, FIM detects this configuration change and switches all the directories monitoring with who-data to real-time mode. The two available mechanisms to detect these configuration changes are:
+
+#. Wazuh monitors specific events (ID 4719) that Windows generates when one of the Audit Policies is modified (Success removed).
+
+#. Periodically, Wazuh checks that the Audit Policies and the SACLs are configured as expected. You can modify the frequency of this verification with :ref:`windows_audit_interval <reference_ossec_syscheck_windows_audit_interval>`.
+
+If your Windows OS version is later than Windows Vista but the system didn’t automatically configure the audit policies, see the :ref:`Manual configuration of the Local Audit Policies in Windows <manual_configuration_of_the_local_audit_policies_in_windows>` guide. 
 
 The following table establishes a correspondence between audit fields and their equivalent fields in an alert when who-data is enabled:
 
