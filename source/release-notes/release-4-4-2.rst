@@ -65,6 +65,35 @@ Reference                                                         Description
 `#16381 <https://github.com/wazuh/wazuh/pull/16381>`_             Fixed agent insertion when no key is specified using ``POST /agents/insert`` endpoint.
 ==============================================================    =============
 
+Wazuh dashboard
+^^^^^^^^^^^^^^^
+
+==============================================================================================================================     =============
+Reference                                                                                                                          Description
+==============================================================================================================================     =============
+`#5428 <https://github.com/wazuh/wazuh-kibana-app/pull/5428>`_ `#5432 <https://github.com/wazuh/wazuh-kibana-app/pull/5432>`_      Fixed a problem in the backend service to get the plugin configuration.
+==============================================================================================================================     =============
+
+Wazuh Kibana plugin for Kibana 7.10.2
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+==============================================================    =============
+Reference                                                         Description
+==============================================================    =============
+`#5428 <https://github.com/wazuh/wazuh-kibana-app/pull/5428>`_    Fixed a problem in the backend service to get the plugin configuration.
+==============================================================    =============
+
+Wazuh Kibana plugin for Kibana 7.16.x and 7.17.x
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+==============================================================    =============
+Reference                                                         Description
+==============================================================    =============
+`#5428 <https://github.com/wazuh/wazuh-kibana-app/pull/5428>`_    Fixed a problem in the backend service to get the plugin configuration.
+==============================================================    =============
+
+
+
 Changelogs
 ----------
 
