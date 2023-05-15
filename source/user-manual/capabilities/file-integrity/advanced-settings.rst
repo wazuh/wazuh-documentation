@@ -286,7 +286,7 @@ The who-data monitoring functionality uses the Microsoft Windows auditing subsys
 Configuration
 ~~~~~~~~~~~~~
 
-To enable the who-data feature, you must declare the tag ``whodata="yes"`` within the directories block in the ``C:\Program Files (x86)\ossec-agent\ossec.conf`` configuration file. You need to properly configure the Local Audit Policies and the System Access Control List (SACLs) of each monitored directory. Wazuh automatically performs these configuration for the directory to monitor:
+To enable the who-data feature, you must declare the tag ``whodata="yes"`` within the directories block in the ``C:\Program Files (x86)\ossec-agent\ossec.conf`` configuration file. You need to properly configure the Local Audit Policies and the System Access Control List (SACLs) of each monitored directory. Wazuh automatically performs this configuration for the directory to monitor:
 
    .. code-block:: xml
 
@@ -617,13 +617,13 @@ A system access control list (SACL) enables administrators to log attempts to ac
 
 It is  necessary to have a *Success* entry in the Auditing tab :
 
-.. thumbnail:: /images/manual/fim/success-entry-in-the-auditing-tab.png
-   :title: Success entry in the Auditing tab
-   :alt: Success entry in the Auditing tab
+.. thumbnail:: /images/manual/fim/successful-entry-in-the-auditing-tab.png
+   :title: Successful entry in the Auditing tab
+   :alt: Successful entry in the Auditing tab
    :align: center
-   :width: 80%
+   :width: 100%
 
-If there is no success entry, click on **Add**, to create it with these **advanced permissions**:
+If there is no successful entry, click on **Add**, to create it with these **advanced permissions**:
 
 .. thumbnail:: /images/manual/fim/click-on-add.png
    :title: Click on Add
