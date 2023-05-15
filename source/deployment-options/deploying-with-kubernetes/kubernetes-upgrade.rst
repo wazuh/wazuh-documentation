@@ -26,27 +26,96 @@ Our Kubernetes deployment uses our Wazuh images from Docker. If we look at the f
     /var/ossec/wodles
     /etc/filebeat
     /var/lib/filebeat
+    /usr/share/wazuh-dashboard/config/
+    /usr/share/wazuh-dashboard/certs/
+    /var/lib/wazuh-indexer
+    /usr/share/wazuh-indexer/certs/
+    /usr/share/wazuh-indexer/opensearch.yml
+    /usr/share/wazuh-indexer/opensearch-security/internal_users.yml
 
 
 Any modification related to these files will also be made in the associated volume. When the replica pod is created, it will get those files from the volume, keeping the previous changes.
 
-Change the image of the container
+Upgrade strategies
 ---------------------------------
 
-The only step to updating Wazuh is to change the image of the pod in each file that deploys each node of the Wazuh cluster.
+- `Default manifests`_
 
-These files are the *StatefulSet* files:
+- `Custom manifests`_
 
-    - wazuh-master-sts.yaml
-    - wazuh-worker-sts.yaml
+Default manifests
+^^^^^^^^^^^^^^^^^
 
-For example:
+Use this strategy if you have not edited any of the manifests that come by default in the wazuh-kubernetes repository.
 
-.. code-block:: yaml
+Navigate to the Git branch of the latest version:
 
-    containers:
-    - name: wazuh-manager
-      image: 'wazuh/wazuh:|WAZUH_CURRENT_KUBERNETES|'
+.. code-block::
+
+    # git checkout v|WAZUH_CURRENT_DOCKER|
+
+Then you must `Apply the new configuration`_
+
+
+Custom manifests
+^^^^^^^^^^^^^^^^
+
+If you made any changes in the manifests and want to keep this configuration, you have to edit the following files, find these lines and update them with the new path:
+
+    - wazuh/indexer_stack/wazuh-dashboard/dashboard-deploy.yaml
+
+    .. code-block:: yaml
+
+        image: 'wazuh/wazuh-dashboard:|WAZUH_CURRENT_KUBERNETES|'
+        mountPath: /usr/share/wazuh-dashboard/certs/cert.pem
+        mountPath: /usr/share/wazuh-dashboard/certs/key.pem
+        mountPath: /usr/share/wazuh-dashboard/certs/root-ca.pem
+        value: /usr/share/wazuh-dashboard/certs/cert.pem
+        value: /usr/share/wazuh-dashboard/certs/key.pem
+
+    - wazuh/indexer_stack/wazuh-dashboard/dashboard_conf/opensearch_dashboards.yml
+
+    .. code-block:: yaml
+
+        server.ssl.key: "/usr/share/wazuh-dashboard/certs/key.pem"'
+        server.ssl.certificate: "/usr/share/wazuh-dashboard/certs/cert.pem"
+        opensearch.ssl.certificateAuthorities: ["/usr/share/wazuh-dashboard/certs/root-ca.pem"]
+
+    - wazuh/indexer_stack/wazuh-indexer/cluster/indexer-sts.yaml
+
+    .. code-block:: yaml
+
+        image: 'wazuh/wazuh-indexer:|WAZUH_CURRENT_KUBERNETES|'
+        mountPath: /usr/share/wazuh-indexer/certs/node-key.pem
+        mountPath: /usr/share/wazuh-indexer/certs/node.pem
+        mountPath: /usr/share/wazuh-indexer/certs/root-ca.pem
+        mountPath: /usr/share/wazuh-indexer/certs/admin.pem
+        mountPath: /usr/share/wazuh-indexer/certs/admin-key.pem
+        mountPath: /usr/share/wazuh-indexer/opensearch.yml
+        mountPath: /usr/share/wazuh-indexer/opensearch-security/internal_users.yml
+
+    - wazuh/indexer_stack/wazuh-indexer/indexer_conf/opensearch.yml
+
+    .. code-block:: yaml
+
+        plugins.security.ssl.http.pemcert_filepath: /usr/share/wazuh-indexer/certs/node.pem
+        plugins.security.ssl.http.pemkey_filepath: /usr/share/wazuh-indexer/certs/node-key.pem
+        plugins.security.ssl.http.pemtrustedcas_filepath: /usr/share/wazuh-indexer/certs/root-ca.pem
+        plugins.security.ssl.transport.pemcert_filepath: /usr/share/wazuh-indexer/certs/node.pem
+        plugins.security.ssl.transport.pemkey_filepath: /usr/share/wazuh-indexer/certs/node-key.pem
+        plugins.security.ssl.transport.pemtrustedcas_filepath: /usr/share/wazuh-indexer/certs/root-ca.pem
+
+    - wazuh/wazuh_managers/wazuh-master-sts.yaml
+
+    .. code-block:: yaml
+
+        image: 'wazuh/wazuh-manager:|WAZUH_CURRENT_KUBERNETES|'
+
+    - wazuh/wazuh_managers/wazuh-worker-sts.yaml
+
+    .. code-block:: yaml
+
+        image: 'wazuh/wazuh-manager:|WAZUH_CURRENT_KUBERNETES|'
 
 
 Apply the new configuration
