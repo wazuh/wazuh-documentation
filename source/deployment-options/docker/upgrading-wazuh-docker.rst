@@ -78,7 +78,7 @@ Custom docker-compose files
             - ./config/wazuh_dashboard/opensearch_dashboards.yml:/usr/share/wazuh-dashboard/config/opensearch_dashboards.yml
             - ./config/wazuh_dashboard/wazuh.yml:/usr/share/wazuh-dashboard/data/wazuh/config/wazuh.yml
 
-.. note:: The lines mentioned above are based on the docker-compose.yml for single-node, similar changes should be made to the docker-compose.yml for multi-node. Only the lines that need to be updated are mentioned and not the entire docker-compose file
+   .. note:: The lines mentioned above are based on the docker-compose.yml for single-node, similar changes should be made to the docker-compose.yml for multi-node. Only the lines that need to be updated are mentioned and not the entire docker-compose file
 
 #. Start the new version of Wazuh using ``docker-compose``:
 
