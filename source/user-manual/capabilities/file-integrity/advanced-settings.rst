@@ -623,7 +623,7 @@ It is  necessary to have a *Success* entry in the Auditing tab :
    :align: center
    :width: 100%
 
-If there is no successful entry, click on **Add**, to create it with these **advanced permissions**:
+If there is no *Success* entry, click on **Add**, to create it with these **advanced permissions**:
 
 .. thumbnail:: /images/manual/fim/click-on-add.png
    :title: Click on Add
