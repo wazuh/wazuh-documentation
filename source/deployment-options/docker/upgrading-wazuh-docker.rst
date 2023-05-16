@@ -2,7 +2,7 @@
 
 .. meta::
    :description: Learn more about upgrading the Wazuh deployment on Docker in this section of our documentation. 
-  
+
 Upgrading Wazuh Docker
 ======================
 
@@ -24,7 +24,7 @@ Default docker-compose files
 
       # docker-compose down
 
-#. Set the new version of Wazuh:
+#. Checkout to the wazuh-docker current tag:
 
       .. code-block::
 
@@ -47,12 +47,25 @@ Custom docker-compose files
       # docker-compose down
 
 
-#. If you made any changes in the docker-compose file and want to keep this configuration, you have to find these lines and update them with the new path:
+#. This guide is so you can perform the update if you have custom docker-compose files, some paths have been modified.
 
-    - single-node/docker-compose.yml
-    - multi-node/docker-compose.yml
+   .. code-block::
 
-    .. code-block:: yaml
+      old-path -> new-path
+
+   .. code-block::
+
+      /usr/share/wazuh-dashboard/config/certs/ -> /usr/share/wazuh-dashboard/certs/
+      /usr/share/wazuh-indexer/config/certs/ -> /usr/share/wazuh-indexer/certs/
+      /usr/share/wazuh-indexer/plugins/opensearch-security/securityconfig/ -> /usr/share/wazuh-indexer/opensearch-security/
+
+
+   You have to edit the following files, find these lines and update them with the new path:
+
+   - single-node/docker-compose.yml
+   - multi-node/docker-compose.yml
+
+   .. code-block:: yaml
 
       wazuh.manager:
          image: wazuh/wazuh-manager:|WAZUH_CURRENT_KUBERNETES|
@@ -70,7 +83,7 @@ Custom docker-compose files
             - ./config/wazuh_indexer/internal_users.yml:/usr/share/wazuh-indexer/opensearch-security/internal_users.yml
       ---
       wazuh.dashboard:
-         image: wazuh/wazuh-dashboard:4.4.1
+         image: wazuh/wazuh-dashboard:|WAZUH_CURRENT_KUBERNETES|
          volumes:
             - ./config/wazuh_indexer_ssl_certs/wazuh.dashboard.pem:/usr/share/wazuh-dashboard/certs/wazuh-dashboard.pem
             - ./config/wazuh_indexer_ssl_certs/wazuh.dashboard-key.pem:/usr/share/wazuh-dashboard/certs/wazuh-dashboard-key.pem

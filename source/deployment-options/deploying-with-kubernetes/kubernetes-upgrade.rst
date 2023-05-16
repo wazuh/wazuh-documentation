@@ -48,7 +48,7 @@ Default manifests
 
 Use this strategy if you have not edited any of the manifests that come by default in the wazuh-kubernetes repository.
 
-Navigate to the Git branch of the latest version:
+Checkout to the wazuh-kubernetes current tag:
 
 .. code-block::
 
@@ -60,7 +60,20 @@ Then you must `Apply the new configuration`_
 Custom manifests
 ^^^^^^^^^^^^^^^^
 
-If you made any changes in the manifests and want to keep this configuration, you have to edit the following files, find these lines and update them with the new path:
+This guide is so you can perform the update if you have custom manifests, some paths have been modified.
+
+    .. code-block::
+
+        old-path -> new-path
+
+    .. code-block::
+
+        /usr/share/wazuh-dashboard/config/certs/ -> /usr/share/wazuh-dashboard/certs/
+        /usr/share/wazuh-indexer/config/certs/ -> /usr/share/wazuh-indexer/certs/
+        /usr/share/wazuh-indexer/plugins/opensearch-security/securityconfig/ -> /usr/share/wazuh-indexer/opensearch-security/
+        
+        
+    You have to edit the following files, find these lines and update them with the new path:
 
     - wazuh/indexer_stack/wazuh-dashboard/dashboard-deploy.yaml
 
