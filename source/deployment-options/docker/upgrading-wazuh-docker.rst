@@ -6,25 +6,23 @@
 Upgrading Wazuh Docker
 ======================
 
-This section describes how to upgrade Wazuh Docker deployments starting from version 4.3. To upgrade Wazuh deployments below version 4.3 (production deployment), refer to the :doc:`/deployment-options/docker/data-migration` documentation.
+This section describes how to upgrade your Wazuh Docker deployment, starting from version 4.3. To upgrade Wazuh deployments of versions earlier than 4.3, refer to the :doc:`/deployment-options/docker/data-migration` documentation.
 
-Upgrade strategies
-------------------
+To upgrade to version |WAZUH_CURRENT_MINOR|, you can follow one of two strategies.
 
-- `Default docker-compose files`_
+- `Using default docker-compose files`_ : This strategy uses the default docker-compose files for Wazuh |WAZUH_CURRENT_MINOR|. It replaces the docker-compose files of your outdated Wazuh version. 
+- `Keeping custom docker-compose files`_ : This strategy preserves the docker-compose files of your outdated Wazuh deployment. It ignores the docker-compose files of the latest Wazuh version. 
 
-- `Custom docker-compose files`_
+Using default docker-compose files
+----------------------------------
 
-Default docker-compose files
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-
-#. Run the following command from the ``wazuh-docker`` directory to stop the current v4.3.x environment:
+#. Run the following command from your wazuh-docker directory, such as ``wazuh-docker/single-node/`` or ``wazuh-docker/multi-node/``, to stop the outdated environment:
 
    .. code-block::
 
       # docker-compose down
 
-#. Checkout to the wazuh-docker current tag:
+#. Checkout the tag for the current version of wazuh-docker:
 
       .. code-block::
 
@@ -36,40 +34,29 @@ Default docker-compose files
 
       # docker-compose up -d
 
+Keeping custom docker-compose files
+-----------------------------------
 
-Custom docker-compose files
-^^^^^^^^^^^^^^^^^^^^^^^^^^^
-
-#. Run the following command from the ``wazuh-docker`` directory to stop the current v4.3.x environment:
+#. Run the following command from your wazuh-docker directory, such as ``wazuh-docker/single-node/`` or ``wazuh-docker/multi-node/``, to stop the outdated environment:
 
    .. code-block::
 
       # docker-compose down
 
+#. If you are updating from 4.3, edit ``docker-compose.yml`` and update it with the new paths in 4.4. In Wazuh 4.4, some paths are different to those in earlier versions. You have to update the old paths with the new ones. You can see the new paths for single node docker compose files, such as  ``single-node/docker-compose.yml`` below. For multi node docker compose files, such as  ``multi-node/docker-compose.yml``, you need to do similar changes in the corresponding files.
 
-#. This guide is so you can perform the update if you have custom docker-compose files, some paths have been modified.
+   |  ``old-path`` -> ``new-path``
 
-   .. code-block::
-
-      old-path -> new-path
-
-   .. code-block::
-
-      /usr/share/wazuh-dashboard/config/certs/ -> /usr/share/wazuh-dashboard/certs/
-      /usr/share/wazuh-indexer/config/certs/ -> /usr/share/wazuh-indexer/certs/
-      /usr/share/wazuh-indexer/plugins/opensearch-security/securityconfig/ -> /usr/share/wazuh-indexer/opensearch-security/
-
-
-   You have to edit the following files, find these lines and update them with the new path:
-
-   - single-node/docker-compose.yml
-   - multi-node/docker-compose.yml
+   -  ``/usr/share/wazuh-dashboard/config/certs/`` -> ``/usr/share/wazuh-dashboard/certs/``
+   -  ``/usr/share/wazuh-indexer/config/certs/`` -> ``/usr/share/wazuh-indexer/certs/``
+   -  ``/usr/share/wazuh-indexer/plugins/opensearch-security/securityconfig/`` -> ``/usr/share/wazuh-indexer/opensearch-security/``
 
    .. code-block:: yaml
+      :emphasize-lines: 8-12, 14, 19-21
 
       wazuh.manager:
          image: wazuh/wazuh-manager:|WAZUH_CURRENT_KUBERNETES|
-      ---
+      ...
       wazuh.indexer:
          image: wazuh/wazuh-indexer:|WAZUH_CURRENT_KUBERNETES|
          volumes:
@@ -81,7 +68,7 @@ Custom docker-compose files
             - ./config/wazuh_indexer_ssl_certs/admin-key.pem:/usr/share/wazuh-indexer/certs/admin-key.pem
             - ./config/wazuh_indexer/wazuh.indexer.yml:/usr/share/wazuh-indexer/opensearch.yml
             - ./config/wazuh_indexer/internal_users.yml:/usr/share/wazuh-indexer/opensearch-security/internal_users.yml
-      ---
+      ...
       wazuh.dashboard:
          image: wazuh/wazuh-dashboard:|WAZUH_CURRENT_KUBERNETES|
          volumes:
@@ -90,8 +77,6 @@ Custom docker-compose files
             - ./config/wazuh_indexer_ssl_certs/root-ca.pem:/usr/share/wazuh-dashboard/certs/root-ca.pem
             - ./config/wazuh_dashboard/opensearch_dashboards.yml:/usr/share/wazuh-dashboard/config/opensearch_dashboards.yml
             - ./config/wazuh_dashboard/wazuh.yml:/usr/share/wazuh-dashboard/data/wazuh/config/wazuh.yml
-
-   .. note:: The lines mentioned above are based on the docker-compose.yml for single-node, similar changes should be made to the docker-compose.yml for multi-node. Only the lines that need to be updated are mentioned and not the entire docker-compose file
 
 #. Start the new version of Wazuh using ``docker-compose``:
 
