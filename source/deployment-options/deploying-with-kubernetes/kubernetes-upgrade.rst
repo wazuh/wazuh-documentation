@@ -37,7 +37,7 @@ Our Kubernetes deployment uses our Wazuh images from Docker. If we look at the f
 Any modification related to these files will also be made in the associated volume. When the replica pod is created, it will get those files from the volume, keeping the previous changes.
 
 Upgrade strategies
----------------------------------
+------------------
 
 - `Default manifests`_
 
@@ -77,7 +77,7 @@ If you made any changes in the manifests and want to keep this configuration, yo
 
     .. code-block:: yaml
 
-        server.ssl.key: "/usr/share/wazuh-dashboard/certs/key.pem"'
+        server.ssl.key: "/usr/share/wazuh-dashboard/certs/key.pem"
         server.ssl.certificate: "/usr/share/wazuh-dashboard/certs/cert.pem"
         opensearch.ssl.certificateAuthorities: ["/usr/share/wazuh-dashboard/certs/root-ca.pem"]
 

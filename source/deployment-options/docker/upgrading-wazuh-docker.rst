@@ -9,7 +9,7 @@ Upgrading Wazuh Docker
 This section describes how to upgrade Wazuh Docker deployments starting from version 4.3. To upgrade Wazuh deployments below version 4.3 (production deployment), refer to the :doc:`/deployment-options/docker/data-migration` documentation.
 
 Upgrade strategies
----------------------------------
+------------------
 
 - `Default docker-compose files`_
 
