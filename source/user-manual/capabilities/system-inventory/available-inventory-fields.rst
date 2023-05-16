@@ -5,3 +5,17 @@
 
 Available inventory fields
 ==========================
+
+
+.. _packages:
+
+Packages
+--------
+
+
+
+
+.. _windows-updates:
+
+Windows updates
+---------------
