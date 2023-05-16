@@ -21,6 +21,7 @@ Users can generate system inventory reports from the Wazuh dashboard, which can 
         :maxdepth: 2
 
         how-it-works
+        configuration
         viewing-system-inventory-data
         generating-system-inventory-reports
         available-inventory-fields

@@ -6,10 +6,22 @@
 Viewing system inventory data
 =============================
 
+
+
+
+
+
+
+
+
+
 .. _packages:
 
 Packages
 --------
+
+
+
 
 .. _windows-updates:
 
