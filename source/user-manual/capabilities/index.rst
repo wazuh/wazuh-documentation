@@ -32,5 +32,6 @@ In this section you will find:
     active-response/index
     agentless-monitoring/index        
     syscollector
+    system-inventory/index
     vulnerability-detection/index
     osquery
