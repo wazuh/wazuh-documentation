@@ -553,10 +553,13 @@ Alert in JSON:
 
 .. _manual_configuration_of_the_local_audit_policies_in_windows:
 
-Manual configuration of the Local Audit Policies in Windows
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+Manual configuration of the Windows Audit Policies
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-For Windows versions later than Windows Vista and Windows Server 2008, when you monitor a file or directory with the ``whodata`` option, Wazuh automatically configures the System Access Control List (SACL) for the file or directory. If this is not done automatically or you have an earlier version of Windows, such as Windows Vista and Windows Server 2008, you have to configure the audit policies manually.
+For Windows versions later than Windows Vista and Windows Server 2008, when you monitor a file or directory with the ``whodata`` option, Wazuh automatically configures the Local Audit Policies and the System Access Control List (SACL) for the file or directory. If this is not done automatically or you have an earlier version of Windows such as Windows Vista and Windows Server 2008, you have to manually configure the audit policies  and  the SACL.
+
+Local Audit Policies in Windows
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 To manually configure the audit policies needed to run FIM in who-data mode, you need to activate the logging of successful events. 
 
@@ -566,18 +569,7 @@ On the Run dialog box (**win** + **R**), open the *Local Group Policy Editor* us
 
       gpedit.msc
 
-Use one of the following methods depending on your operating system version.
-
-- For Windows versions later than Windows Vista or Windows Server 2008: :ref:`Advanced Audit Policy Configuration section <advanced_audit_policy_configuration_section>`
-
-- For Windows Vista or Windows Server 2008: :ref:`Audit Policy section <audit_policy_section>`
-
-.. _advanced_audit_policy_configuration_section:
-
-Advanced Audit Policy Configuration section
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-
-This is the recommended option to configure policies and it’s available on Windows OS versions later than Windows Vista or Windows Server 2008. Configure the **Audit events** field with the value **Success** for the following options:
+Configure the **Audit Events** field to **Success** for the following policies:
 
 **Computer Configuration > Windows Settings > Security Settings > Advanced Audit Policy Configuration > Object Access > Audit File System**
 
@@ -589,12 +581,7 @@ This is the recommended option to configure policies and it’s available on Win
    :align: center
    :width: 80%
 
-.. _audit_policy_section:
-
-Audit Policy section
-~~~~~~~~~~~~~~~~~~~~
-
-We only recommended this option if your host is Windows Vista or Windows Server 2008. Configure the **Security Setting** field with the value **Success** for the following options:
+If your system doesn't allow configuring subcategories through Advanced Audit Policy Configuration, configure the **Security Setting** field to **Success** for the following policy:
 
 **Computer Configuration > Windows Settings > Security Settings > Local Policies > Audit Policy > Audit object access**
 
