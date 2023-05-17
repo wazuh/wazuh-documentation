@@ -581,7 +581,6 @@ Configure the **Audit Events** field to **Success** for the following policies:
    :align: center
    :width: 80%
 
-
 If your system doesn't allow configuring subcategories through Advanced Audit Policy Configuration, configure the **Security Setting** field to **Success** for the following policy:
 
 **Computer Configuration > Windows Settings > Security Settings > Local Policies > Audit Policy > Audit object access**
