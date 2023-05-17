@@ -29,8 +29,8 @@ This feature allows you to export a full report of all endpoint properties colle
 - Click on **Generate Report** on the **Inventory data** page of the Wazuh agent.
 
 .. thumbnail:: /images/manual/system-inventory/generate-report.png
-  :title: Generate Report
-  :alt: Generate Report
+  :title: Generate report
+  :alt: Generate report
   :align: center
   :width: 80%
 
