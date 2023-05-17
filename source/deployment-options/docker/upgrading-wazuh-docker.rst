@@ -37,19 +37,23 @@ Using default docker-compose files
 Keeping custom docker-compose files
 -----------------------------------
 
+In Wazuh 4.4, some paths are different to those in earlier versions. You have to update the old paths with the new ones.
+
+``old-path`` -> ``new-path``
+
+-  ``/usr/share/wazuh-dashboard/config/certs/`` -> ``/usr/share/wazuh-dashboard/certs/``
+-  ``/usr/share/wazuh-indexer/config/certs/`` -> ``/usr/share/wazuh-indexer/certs/``
+-  ``/usr/share/wazuh-indexer/plugins/opensearch-security/securityconfig/`` -> ``/usr/share/wazuh-indexer/opensearch-security/``
+
+To upgrade your deployment keeping your custom docker-compose files, do the following.
+
 #. Run the following command from your wazuh-docker directory, such as ``wazuh-docker/single-node/`` or ``wazuh-docker/multi-node/``, to stop the outdated environment:
 
    .. code-block::
 
       # docker-compose down
 
-#. If you are updating from 4.3, edit ``docker-compose.yml`` and update it with the new paths in 4.4. In Wazuh 4.4, some paths are different to those in earlier versions. You have to update the old paths with the new ones. You can see the new paths for single node docker compose files, such as  ``single-node/docker-compose.yml`` below. For multi node docker compose files, such as  ``multi-node/docker-compose.yml``, you need to do similar changes in the corresponding files.
-
-   |  ``old-path`` -> ``new-path``
-
-   -  ``/usr/share/wazuh-dashboard/config/certs/`` -> ``/usr/share/wazuh-dashboard/certs/``
-   -  ``/usr/share/wazuh-indexer/config/certs/`` -> ``/usr/share/wazuh-indexer/certs/``
-   -  ``/usr/share/wazuh-indexer/plugins/opensearch-security/securityconfig/`` -> ``/usr/share/wazuh-indexer/opensearch-security/``
+#. If you are updating from 4.3, edit ``docker-compose.yml`` and update it with the new paths in 4.4. You can see the new paths for single node docker compose files, such as  ``single-node/docker-compose.yml`` below. For multi node docker compose files, such as  ``multi-node/docker-compose.yml``, you need to do similar changes in the corresponding files.
 
    .. code-block:: yaml
       :emphasize-lines: 8-12, 14, 19-21
