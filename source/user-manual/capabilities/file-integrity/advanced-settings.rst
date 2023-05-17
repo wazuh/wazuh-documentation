@@ -556,7 +556,7 @@ Alert in JSON:
 Manual configuration of the Windows Audit Policies
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-For Windows versions later than Windows Vista and Windows Server 2008, when you monitor a file or directory with the ``whodata`` option, Wazuh automatically configures the Local Audit Policies and the System Access Control List (SACL) for the file or directory. If this is not done automatically or you have an earlier version of Windows such as Windows Vista and Windows Server 2008, you have to manually configure the audit policies  and  the SACL.
+For Windows versions later than Windows Vista and Windows Server 2008, when you monitor a file or directory with the ``whodata`` option, Wazuh automatically configures the Local Audit Policies and the System Access Control List (SACL) for the file or directory. If this is not done automatically or you have an earlier version of Windows such as Windows Vista and Windows Server 2008, you have to manually configure the audit policies and the SACL.
 
 Local Audit Policies in Windows
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
