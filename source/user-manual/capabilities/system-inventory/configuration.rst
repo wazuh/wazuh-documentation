@@ -42,7 +42,7 @@ Where:
 - ``<disabled>`` specifies whether the Syscollector module is enabled or not. The default value is ``no``. The allowed values are ``yes`` and ``no``.
 - ``<interval>`` specifies the time between system scans. The default value is 1 hour. The allowed value is a positive number that should contain a suffix character indicating a time unit, such as ``s`` (seconds), ``m`` (minutes), ``h`` (hours), and ``d`` (days).
 - ``<scan_on_start>`` initiates a system scan immediately after you restart the Wazuh service on the endpoint. The default value is ``yes``. The allowed values are ``yes`` and ``no``.
-- ``<hardware>`` option enables or disables the hardware information collection by Syscollector. The default value is yes. The allowed values are yes and no.
+- ``<hardware>`` option enables or disables the hardware information collection by Syscollector. The default value is ``yes``. The allowed values are ``yes`` and ``no``.
 - ``<os>`` option enables or disables the operating system scan. The default value is ``yes``. The allowed values are ``yes`` and ``no``.
 - ``<network>`` enables or disables the network scan. The default value is ``yes``. The allowed values are ``yes`` and ``no``.
 - ``<packages>`` enables or disables the scanning of packages with a default value of ``yes``. The allowed values are ``yes`` and ``no``.
