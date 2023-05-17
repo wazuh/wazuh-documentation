@@ -305,7 +305,7 @@ The FIM module configures the required Local Audit Policies and SACLs when launc
 
 #. Periodically, Wazuh checks that the Audit Policies and the SACLs are configured as expected. You can modify the frequency of this verification with :ref:`windows_audit_interval <reference_ossec_syscheck_windows_audit_interval>`.
 
-If your Windows OS version is later than Windows Vista but the system didn’t automatically configure the audit policies, see the :ref:`Manual configuration of the Local Audit Policies in Windows <manual_configuration_of_the_local_audit_policies_in_windows>` guide. 
+If your Windows OS version is later than Windows Vista but the system didn’t automatically configure the audit policies, see the :ref:`manual_configuration_of_the_local_audit_policies_in_windows` guide. 
 
 The following table establishes a correspondence between audit fields and their equivalent fields in an alert when who-data is enabled:
 
@@ -571,9 +571,9 @@ On the Run dialog box (**win** + **R**), open the *Local Group Policy Editor* us
 
 Configure the **Audit Events** field to **Success** for the following policies:
 
-**Computer Configuration > Windows Settings > Security Settings > Advanced Audit Policy Configuration > Object Access > Audit File System**
+-  **Computer Configuration > Windows Settings > Security Settings > Advanced Audit Policy Configuration > Object Access > Audit File System**
 
-**Computer Configuration > Windows Settings > Security Settings > Advanced Audit Policy Configuration > Object Access > Audit Handle Manipulation**
+-  **Computer Configuration > Windows Settings > Security Settings > Advanced Audit Policy Configuration > Object Access > Audit Handle Manipulation**
 
 .. thumbnail:: ../../../images/manual/fim/advanced-audit-policy-configuration-section.png
    :title: Advanced Audit Policy Configuration section
@@ -583,7 +583,7 @@ Configure the **Audit Events** field to **Success** for the following policies:
 
 If your system doesn't allow configuring subcategories through Advanced Audit Policy Configuration, configure the **Security Setting** field to **Success** for the following policy:
 
-**Computer Configuration > Windows Settings > Security Settings > Local Policies > Audit Policy > Audit object access**
+-  **Computer Configuration > Windows Settings > Security Settings > Local Policies > Audit Policy > Audit object access**
 
 .. thumbnail:: ../../../images/manual/fim/audit-policy-section.png
    :title: Audit Policy section
