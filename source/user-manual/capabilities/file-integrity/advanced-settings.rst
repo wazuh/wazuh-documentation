@@ -286,20 +286,26 @@ The who-data monitoring functionality uses the Microsoft Windows auditing subsys
 Configuration
 ~~~~~~~~~~~~~
 
-To enable the who-data feature, you must declare the tag ``whodata="yes"`` within the directories block in the ``C:\Program Files (x86)\ossec-agent\ossec.conf`` configuration file. Wazuh automatically configures the System Access Control List (SACL) for the directory to monitor:
+To enable the who-data feature, you must declare the tag ``whodata="yes"`` within the directories block in the ``C:\Program Files (x86)\ossec-agent\ossec.conf`` configuration file. You need to properly configure the Local Audit Policies and the System Access Control List (SACLs) of each monitored directory. Wazuh automatically performs these configurations for the directory to monitor.
 
    .. code-block:: xml
 
       ...
       <syscheck>
         ...
-        <directories check_all="yes" whodata="yes">%WINDIR%\System32\drivers\etc</directories>
+        <directories check_all="yes" whodata="yes">C:\test</directories>
         ...
       </syscheck>
       ...
 
 
-Also, you need to properly configure System audit policies. Luckily, most supported Windows systems do this part automatically by default. However, if your Windows OS version is later than Windows Vista but the system didn’t automatically configured the audit policies, see the :ref:`Manual configuration of the Local Audit Policies in Windows <manual_configuration_of_the_local_audit_policies_in_windows>` guide.
+The FIM module configures the required Local Audit Policies and SACLs when launched. However, other services might change this configuration which would prevent who-data from receiving the monitored events. To overcome this, FIM detects this configuration change and switches all the directories monitoring with who-data to real-time mode. The two available mechanisms to detect these configuration changes are:
+
+#. Wazuh monitors specific events (ID 4719) that Windows generates when one of the Audit Policies is modified (Success removed).
+
+#. Periodically, Wazuh checks that the Audit Policies and the SACLs are configured as expected. You can modify the frequency of this verification with :ref:`windows_audit_interval <reference_ossec_syscheck_windows_audit_interval>`.
+
+If your Windows OS version is later than Windows Vista but the system didn’t automatically configure the audit policies, see the :ref:`manual_configuration_of_the_local_audit_policies_in_windows` guide. 
 
 The following table establishes a correspondence between audit fields and their equivalent fields in an alert when who-data is enabled:
 
@@ -547,10 +553,13 @@ Alert in JSON:
 
 .. _manual_configuration_of_the_local_audit_policies_in_windows:
 
-Manual configuration of the Local Audit Policies in Windows
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+Manual configuration of the Windows Audit Policies
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-For Windows versions later than Windows Vista and Windows Server 2008, when you monitor a file or directory with the ``whodata`` option, Wazuh automatically configures the System Access Control List (SACL) for the file or directory. If this is not done automatically or you have an earlier version of Windows, such as Windows Vista and Windows Server 2008, you have to configure the audit policies manually.
+For Windows versions later than Windows Vista and Windows Server 2008, when you monitor a file or directory with the ``whodata`` option, Wazuh automatically configures the Local Audit Policies and the System Access Control List (SACL) for the file or directory. If this is not done automatically or you have an earlier version of Windows such as Windows Vista and Windows Server 2008, you have to manually configure the audit policies and the SACL.
+
+Local Audit Policies in Windows
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 To manually configure the audit policies needed to run FIM in who-data mode, you need to activate the logging of successful events. 
 
@@ -560,22 +569,11 @@ On the Run dialog box (**win** + **R**), open the *Local Group Policy Editor* us
 
       gpedit.msc
 
-Use one of the following methods depending on your operating system version.
+Configure the **Audit Events** field to **Success** for the following policies:
 
-- For Windows versions later than Windows Vista or Windows Server 2008: :ref:`Advanced Audit Policy Configuration section <advanced_audit_policy_configuration_section>`
+-  **Computer Configuration > Windows Settings > Security Settings > Advanced Audit Policy Configuration > Object Access > Audit File System**
 
-- For Windows Vista or Windows Server 2008: :ref:`Audit Policy section <audit_policy_section>`
-
-.. _advanced_audit_policy_configuration_section:
-
-Advanced Audit Policy Configuration section
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-
-This is the recommended option to configure policies and it’s available on Windows OS versions later than Windows Vista or Windows Server 2008. Configure the **Audit events** field with the value **Success** for the following options:
-
-**Computer Configuration > Windows Settings > Security Settings > Advanced Audit Policy Configuration > Object Access > Audit File System**
-
-**Computer Configuration > Windows Settings > Security Settings > Advanced Audit Policy Configuration > Object Access > Audit Handle Manipulation**
+-  **Computer Configuration > Windows Settings > Security Settings > Advanced Audit Policy Configuration > Object Access > Audit Handle Manipulation**
 
 .. thumbnail:: ../../../images/manual/fim/advanced-audit-policy-configuration-section.png
    :title: Advanced Audit Policy Configuration section
@@ -583,18 +581,40 @@ This is the recommended option to configure policies and it’s available on Win
    :align: center
    :width: 80%
 
-.. _audit_policy_section:
+If your system doesn't allow configuring subcategories through Advanced Audit Policy Configuration, configure the **Security Setting** field to **Success** for the following policy:
 
-Audit Policy section
-~~~~~~~~~~~~~~~~~~~~
-
-We only recommended this option if your host is Windows Vista or Windows Server 2008. Configure the **Security Setting** field with the value **Success** for the following options:
-
-**Computer Configuration > Windows Settings > Security Settings > Local Policies > Audit Policy > Audit object access**
+-  **Computer Configuration > Windows Settings > Security Settings > Local Policies > Audit Policy > Audit object access**
 
 .. thumbnail:: ../../../images/manual/fim/audit-policy-section.png
    :title: Audit Policy section
    :alt: Audit Policy section
+   :align: center
+   :width: 80%
+
+System Access Control List (SACL) in Windows
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+A system access control list (SACL) enables administrators to log attempts to access a secured object. You can check and modify SACLs of each monitored directory through **Properties**, selecting the **Security** tab, and clicking on **Advanced**:
+
+.. thumbnail:: /images/manual/fim/click-on-advanced.png
+   :title: click on Advanced
+   :alt: click on Advanced
+   :align: center
+   :width: 100%
+
+It is  necessary to have a *Success* entry in the Auditing tab :
+
+.. thumbnail:: /images/manual/fim/successful-entry-in-the-auditing-tab.png
+   :title: Successful entry in the Auditing tab
+   :alt: Successful entry in the Auditing tab
+   :align: center
+   :width: 100%
+
+If there is no *Success* entry, click on **Add**, to create it with these **advanced permissions**:
+
+.. thumbnail:: /images/manual/fim/click-on-add.png
+   :title: Click on Add
+   :alt: Click on Add
    :align: center
    :width: 80%
 
