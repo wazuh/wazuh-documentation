@@ -136,10 +136,10 @@ Granting a user permissions to switch roles
 Follow these steps to configure the user permissions:
 
 #. In your Amazon IAM service, navigate to the **Users** page.
-#. In the Users page, select the Username of the user you have connected to the role (*<account-id>*)
-#. As mentioned in the **Configuring the role** section, the *<resource-role>* is the name of \
-   the subscription role that was created as part of the Security Lake subscriber provisioning process.
-#. Add the following permission to switch to the new role:
+#. In the **Users**  page, select the Username of the user you have connected to the role (``<account-id>``). 
+#. Replace ``<account-id>`` and ``<resource-role>``, and add the following permission to switch to the new role:
+
+    Note that ``<resource-role>`` is the name of the subscription role that was created as part of the Security Lake subscriber provisioning process.
 
     .. code-block:: JSON
 
