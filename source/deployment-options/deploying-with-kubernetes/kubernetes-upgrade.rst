@@ -36,8 +36,8 @@ Our Kubernetes deployment uses our Wazuh images from Docker. If we look at the f
 
 Any modification related to these files will also be made in the associated volume. When the replica pod is created, it will get those files from the volume, keeping the previous changes.
 
-Upgrading your deployment
--------------------------
+Configuring the upgrade
+-----------------------
 
 To upgrade to version |WAZUH_CURRENT_MINOR|, you can follow one of two strategies.
 
