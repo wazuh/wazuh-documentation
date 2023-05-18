@@ -15,6 +15,7 @@ with great plugins to build your own logging layer. Check it out at https://www.
 - `Input`_
 - `Output`_
 - `Example using logcollector`_
+- `Example using analysisd`_
 
 How it works
 ------------
@@ -113,5 +114,64 @@ You should see the message on the Fluentd server:
     :class: output
 
     2019-03-28 14:47:40.000000000 +0200 debug.test: "message"
+
+
+Example using analysisd
+-----------------------
+
+This example is for testing purposes on a AIX machine, with the Wazuh manager installed.
+
+Given the following configuration:
+
+.. code-block:: xml
+
+    <fluent-forward>
+      <enabled>yes</enabled>
+      <tag>debug.test</tag>
+      <socket_path>/var/ossec/var/run/fluent.sock</socket_path> <!-- The socket must be under /var/ossec directory>
+      <address>localhost</address>
+      <port>24224</port>
+    </fluent-forward>
+
+Set up the ``socket`` for analysisd:
+
+.. code-block:: xml
+
+    <socket>
+      <name>fluent_socket</name>
+      <location>var/run/fluent.sock</location> <!-- This path is relative to /var/ossec directory >
+      <mode>udp</mode>
+    </socket>
+
+Set up a ``target`` to read from:
+
+.. code-block:: xml
+
+    <global>
+      <forward_to>fluent_socket</forward_to>
+    </global>
+
+On a terminal, run the following commands as root to start a Fluentd server:
+
+.. code-block:: console
+
+    apt-get install -y ruby ruby-dev
+    gem install fluentd
+    fluentd -s conf
+    fluentd -c conf/fluent.conf
+
+Restart the Wazuh manager:
+
+.. code-block:: console
+
+    systemctl restart wazuh-manager
+
+
+When a new event is trigger to analysisd, the event is sent to fluentd is JSON format. You should see the message on the Fluentd server:
+
+.. code-block:: none
+    :class: output
+
+    2023-04-25 11:34:32.000000000 +0000 debug.test: {"message":"{\"timestamp\":\"2023-04-25T11:34:32.802+0000\",\"rule\":{\"level\":5,\"description\":\"File added to the system.\",\"id\":\"554\",\"firedtimes\":2,\"mail\":false,\"groups\":[\"ossec\",\"syscheck\",\"syscheck_entry_added\",\"syscheck_file\"],\"pci_dss\":[\"11.5\"],\"gpg13\":[\"4.11\"],\"gdpr\":[\"II_5.1.f\"],\"hipaa\":[\"164.312.c.1\",\"164.312.c.2\"],\"nist_800_53\":[\"SI.7\"],\"tsc\":[\"PI1.4\",\"PI1.5\",\"CC6.1\",\"CC6.8\",\"CC7.2\",\"CC7.3\"]},\"agent\":{\"id\":\"000\",\"name\":\"Manager AIX\"},\"manager\":{\"name\":\"Manager AIX\"},\"id\":\"1682422472.585306\",\"full_log\":\"File '/home/test/newFile.txt' added\\nMode: scheduled\\n\",\"syscheck\":{\"path\":\"/home/test/newFile.txt\",\"mode\":\"scheduled\",\"size_after\":\"0\",\"perm_after\":\"rw-r--r--\",\"uid_after\":\"0\",\"gid_after\":\"0\",\"md5_after\":\"d41d8cd98f00b204e9800998ecf8427e\",\"sha1_after\":\"da39a3ee5e6b4b0d3255bfef95601890afd80709\",\"sha256_after\":\"e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855\",\"uname_after\":\"root\",\"gname_after\":\"root\",\"mtime_after\":\"2023-04-25T11:34:32\",\"inode_after\":524395,\"event\":\"added\"},\"decoder\":{\"name\":\"syscheck_new_entry\"},\"location\":\"syscheck\"}"}
 
 For more information about Fluentd configuration options, check the documentation at https://docs.fluentd.org/v1.0/articles/quickstart
