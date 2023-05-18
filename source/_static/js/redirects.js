@@ -242,7 +242,8 @@ removedUrls['4.4'] = [
   '/user-manual/capabilities/auditing-whodata/index.html',
   '/user-manual/capabilities/auditing-whodata/who-linux.html',
   '/user-manual/capabilities/auditing-whodata/who-windows.html',
-  '/user-manual/capabilities/auditing-whodata/who-windows-policies.html',    
+  '/user-manual/capabilities/auditing-whodata/who-windows-policies.html',  
+  '/user-manual/capabilities/syscollector.html',  
 ];
 
   /* *** RELEASE 4.3 ****/
