@@ -77,129 +77,130 @@ cURL
 
 Follow the steps below to query the endpoint database from the command line using ``cURL``:
 
-Generate a JSON Web Token (JWT) for authenticating to the Wazuh server by running the following command. The default API credentials are ``wazuh:wazuh``. Replace ``<WAZUH_SERVER_IP>`` with your Wazuh server IP address.
+- Generate a JSON Web Token (JWT) for authenticating to the Wazuh server by running the following command. The default API credentials are ``wazuh:wazuh``. Replace ``<WAZUH_SERVER_IP>`` with your Wazuh server IP address.
 
-.. code-block:: console
+   .. code-block:: console
 
-   TOKEN=$(curl -u <USER>:<PASSWORD> -k -X GET "https://<WAZUH_SERVER_IP>:55000/security/user/authenticate?raw=true")
+      TOKEN=$(curl -u <USER>:<PASSWORD> -k -X GET "https://<WAZUH_SERVER_IP>:55000/security/user/authenticate?raw=true")
 
-Run the command ``echo $TOKEN`` to confirm that you successfully generated the token. The output should be like this:
- 
-.. code-block:: console
-   :class: output
+   Run the command ``echo $TOKEN`` to confirm that you successfully generated the token. The output should be like this:
+   
+   .. code-block:: console
+      :class: output
 
-   eyJhbGciOiJFUzUxMiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJ3YXp1aCIsImF1ZCI6IldhenVoIEFQSSBSRVNUIiwibmJmIjoxNjQzMDExMjQ0LCJleHAiOjE2NDMwMTIxNDQsInN1YiI6IndhenVoIiwicnVuX2FzIjpmYWxzZSwicmJhY19yb2xlcyI6WzFdLCJyYmFjX21vZGUiOiJ3aGl0ZSJ9.Ad6zOZvx0BEV7K0J6s3pIXAXTWB-zdVfxaX2fotLfZMQkiYPMkwDaQHUFiOInsWJ_7KZV3y2BbhEs9-kBqlJAMvMAD0NDBPhEQ2qBd_iutZ7QWZECd6eYfIP83xGqH9iqS7uMI6fXOKr3w4aFV13Q6qsHSUQ1A-1LgDnnDGGaqF5ITYo
+      eyJhbGciOiJFUzUxMiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJ3YXp1aCIsImF1ZCI6IldhenVoIEFQSSBSRVNUIiwibmJmIjoxNjQzMDExMjQ0LCJleHAiOjE2NDMwMTIxNDQsInN1YiI6IndhenVoIiwicnVuX2FzIjpmYWxzZSwicmJhY19yb2xlcyI6WzFdLCJyYmFjX21vZGUiOiJ3aGl0ZSJ9.Ad6zOZvx0BEV7K0J6s3pIXAXTWB-zdVfxaX2fotLfZMQkiYPMkwDaQHUFiOInsWJ_7KZV3y2BbhEs9-kBqlJAMvMAD0NDBPhEQ2qBd_iutZ7QWZECd6eYfIP83xGqH9iqS7uMI6fXOKr3w4aFV13Q6qsHSUQ1A-1LgDnnDGGaqF5ITYo
 
 - Query the endpoint information of interest using a command which takes the following format:
 
-.. code-block:: console
+   .. code-block:: console
 
-   curl -k -X GET "https://<WAZUH_SERVER_IP>:55000/syscollector/<AGENT_ID>/<SYSCOLLECTOR_PROPERTY>?pretty=true" -H "Authorization: Bearer $TOKEN"
+      curl -k -X GET "https://<WAZUH_SERVER_IP>:55000/syscollector/<AGENT_ID>/<SYSCOLLECTOR_PROPERTY>?pretty=true" -H "Authorization: Bearer $TOKEN"
 
-For example, to retrieve information about the applications installed on an endpoint with agent ID of ``010``, the command will be:
+   For example, to retrieve information about the applications installed on an endpoint with agent ID of ``010``, the command will be:
 
-.. code-block:: console
+   .. code-block:: console
 
-   curl -k -X GET "https://<WAZUH_SERVER_IP>:55000/syscollector/010/packages?pretty=true" -H  "Authorization: Bearer $TOKEN"
+      curl -k -X GET "https://<WAZUH_SERVER_IP>:55000/syscollector/010/packages?pretty=true" -H  "Authorization: Bearer $TOKEN"
 
-The other inventory properties are ``hardware``, ``hotfixes``, ``netaddr``, ``netiface``, ``netproto``, ``os``, ``ports``, and ``processes``. These all correspond to the tables in the :doc:`inventory database </user-manual/capabilities/system-inventory/available-inventory-fields>`. You can learn more about these options in our `API documentation <https://documentation.wazuh.com/current/user-manual/api/reference.html#tag/Syscollector>`_.
+   The other inventory properties are ``hardware``, ``hotfixes``, ``netaddr``, ``netiface``, ``netproto``, ``os``, ``ports``, and ``processes``. These all correspond to the tables in the :doc:`inventory database </user-manual/capabilities/system-inventory/available-inventory-fields>`. You can learn more about these options in our `API documentation <https://documentation.wazuh.com/current/user-manual/api/reference.html#tag/Syscollector>`_.
 
-.. code-block:: console
-   :class: output
+   .. code-block:: console
+      :class: output
 
-   {
-      "data": {
-         "affected_items": [
-            {
-               "scan": {
-                  "id": 0,
-                  "time": "2022-09-27T09:16:45+00:00"
+      {
+         "data": {
+            "affected_items": [
+               {
+                  "scan": {
+                     "id": 0,
+                     "time": "2022-09-27T09:16:45+00:00"
+                  },
+                  "priority": "optional",
+                  "multiarch": "foreign",
+                  "format": "deb",
+                  "vendor": "Ubuntu Developers <ubuntu-devel-discuss@lists.ubuntu.com>",
+                  "size": 12219,
+                  "version": "0.4.9-2",
+                  "description": "encoding data for the poppler PDF rendering library",
+                  "section": "misc",
+                  "name": "poppler-data",
+                  "architecture": "all",
+                  "agent_id": "010"
                },
-               "priority": "optional",
-               "multiarch": "foreign",
-               "format": "deb",
-               "vendor": "Ubuntu Developers <ubuntu-devel-discuss@lists.ubuntu.com>",
-               "size": 12219,
-               "version": "0.4.9-2",
-               "description": "encoding data for the poppler PDF rendering library",
-               "section": "misc",
-               "name": "poppler-data",
-               "architecture": "all",
-               "agent_id": "010"
-            },
-            {
-               "scan": {
-                  "id": 0,
-                  "time": "2022-09-27T09:16:45+00:00"
+               {
+                  "scan": {
+                     "id": 0,
+                     "time": "2022-09-27T09:16:45+00:00"
+                  },
+                  "priority": "optional",
+                  "multiarch": "foreign",
+                  "format": "deb",
+                  "vendor": "Ubuntu Developers <ubuntu-devel-discuss@lists.ubuntu.com>",
+                  "size": 31,
+                  "version": "3.20-4",
+                  "description": "data tables pertaining to HTML",
+                  "section": "perl",
+                  "name": "libhtml-tagset-perl",
+                  "architecture": "all",
+                  "agent_id": "010"
                },
-               "priority": "optional",
-               "multiarch": "foreign",
-               "format": "deb",
-               "vendor": "Ubuntu Developers <ubuntu-devel-discuss@lists.ubuntu.com>",
-               "size": 31,
-               "version": "3.20-4",
-               "description": "data tables pertaining to HTML",
-               "section": "perl",
-               "name": "libhtml-tagset-perl",
-               "architecture": "all",
-               "agent_id": "010"
-            },
-            {
-               "scan": {
-                  "id": 0,
-                  "time": "2022-09-27T09:16:45+00:00"
+               {
+                  "scan": {
+                     "id": 0,
+                     "time": "2022-09-27T09:16:45+00:00"
+                  },
+                  "priority": "optional",
+                  "multiarch": "same",
+                  "format": "deb",
+                  "vendor": "Ubuntu Developers <ubuntu-devel-discuss@lists.ubuntu.com>",
+                  "size": 426,
+                  "version": "1.17-6ubuntu4.1",
+                  "description": "MIT Kerberos runtime libraries - krb5 GSS-API Mechanism",
+                  "section": "libs",
+                  "source": "krb5",
+                  "name": "libgssapi-krb5-2",
+                  "architecture": "amd64",
+                  "agent_id": "010"
                },
-               "priority": "optional",
-               "multiarch": "same",
-               "format": "deb",
-               "vendor": "Ubuntu Developers <ubuntu-devel-discuss@lists.ubuntu.com>",
-               "size": 426,
-               "version": "1.17-6ubuntu4.1",
-               "description": "MIT Kerberos runtime libraries - krb5 GSS-API Mechanism",
-               "section": "libs",
-               "source": "krb5",
-               "name": "libgssapi-krb5-2",
-               "architecture": "amd64",
-               "agent_id": "010"
-            },
-   …            
+      …            
 
-Furthermore, you can query the inventory data to find specific information about any property. For example, the command below queries the package inventory to check if the ``wazuh-agent`` package is present.
+   Furthermore, you can query the inventory data to find specific information about any property. For example, the command below queries the package inventory to check if the ``wazuh-agent`` package is present.
 
-.. code-block:: console
+   .. code-block:: console
 
-   curl -k -X GET "https://<WAZUH_SERVER_IP>:55000/syscollector/010/packages?pretty=true&name=wazuh-agent" -H  "Authorization: Bearer $TOKEN"
+      curl -k -X GET "https://<WAZUH_SERVER_IP>:55000/syscollector/010/packages?pretty=true&name=wazuh-agent" -H  "Authorization: Bearer $TOKEN"
 
 
-.. code-block:: console
-   :class: output
+   .. code-block:: console
+      :class: output
 
-   {
-      "data": {
-         "affected_items": [
-            {
-               "scan": {
-                  "id": 0,
-                  "time": "2023-03-29T10:54:07+00:00"
-               },
-               "priority": "extra",
-               "format": "deb",
-               "vendor": "Wazuh, Inc <info@wazuh.com>",
-               "size": 28894,
-               "version": "4.4.0-1",
-               "description": "Wazuh helps you to gain security visibility into your infrastructure by monitoring hosts at an operating system and application level. It provides the following capabilities: log analysis, file integrity monitoring, intrusions detection and policy and compliance monitoring",
-               "section": "admin",
-               "name": "wazuh-agent",
-               "architecture": "amd64",
-               "agent_id": "010"
-            }
-         ],
-         "total_affected_items": 1,
-         "total_failed_items": 0,
-         "failed_items": []
-      },
-      "message": "All specified syscollector information was returned",
-      "error": 0
+      {
+         "data": {
+            "affected_items": [
+               {
+                  "scan": {
+                     "id": 0,
+                     "time": "2023-03-29T10:54:07+00:00"
+                  },
+                  "priority": "extra",
+                  "format": "deb",
+                  "vendor": "Wazuh, Inc <info@wazuh.com>",
+                  "size": 28894,
+                  "version": "4.4.0-1",
+                  "description": "Wazuh helps you to gain security visibility into your infrastructure by monitoring hosts at an operating system and application level. It provides the following capabilities: log analysis, file integrity monitoring, intrusions detection and policy and compliance monitoring",
+                  "section": "admin",
+                  "name": "wazuh-agent",
+                  "architecture": "amd64",
+                  "agent_id": "010"
+               }
+            ],
+            "total_affected_items": 1,
+            "total_failed_items": 0,
+            "failed_items": []
+         },
+         "message": "All specified syscollector information was returned",
+         "error": 0
+
 
 Using SQLite
 ^^^^^^^^^^^^
@@ -210,7 +211,7 @@ The location of the database for each monitored endpoint is on the Wazuh server 
 
    $ sqlite3 /var/ossec/queue/db/<AGENT_ID>.db
 
-Where <AGENT_ID> corresponds to the agent ID of the monitored endpoint.
+Where ``<AGENT_ID>`` corresponds to the agent ID of the monitored endpoint.
 
 .. code-block:: console
    :class: output
@@ -238,7 +239,7 @@ After connecting to the database, you can query the list of tables in it using t
    sca_check_rules       sys_netiface        
    sca_policy            sys_netproto 
 
-You can further query the tables for any information you are interested in. For example, if you want to know if a particular software is present on an endpoint, you can query the sys_programs table using  sqlite>select * from sys_programs where name="<SOFTWARE_NAME>";. The command below checks whether the wazuh-agent program is present on a monitored Linux endpoint and shows the captured details:
+You can further query the tables for any information you are interested in. For example, if you want to know if a particular software is present on an endpoint, you can query the ``sys_programs`` table using  ``sqlite>select * from sys_programs where name="<SOFTWARE_NAME>";``. The command below checks whether the ``wazuh-agent`` program is present on a monitored Linux endpoint and shows the captured details:
 
 .. code-block:: console
 

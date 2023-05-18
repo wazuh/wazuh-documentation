@@ -93,7 +93,7 @@ The ``sys_osinfo`` system table in the inventory database stores information abo
 Packages
 --------
 
-The ``sys_programs`` table in the inventory database stores information about the currently installed software on an endpoint. The Vulnerability Detector module uses information from this table to scan and detect vulnerable software. On Linux systems, retrieved packages can be deb, pacman, or rpm. The table below describes the fields in the database.
+The ``sys_programs`` table in the inventory database stores information about the currently installed software on an endpoint. The Vulnerability Detector module uses information from this table to scan and detect vulnerable software. On Linux systems, retrieved packages can be *deb, pacman, or rpm*. The table below describes the fields in the database.
 
 +------------------+-------------------------------------------+-------------------------------------------+-----------------------------------------+
 | Field            | Description                               | Example                                   | Available                               |
@@ -126,7 +126,7 @@ The ``sys_programs`` table in the inventory database stores information about th
 +------------------+-------------------------------------------+-------------------------------------------+-----------------------------------------+
 | ``description``  | Description of the package                | Generic Linux kernel headers              | Linux (deb/rpm/pacman) and macOS (pkg)  |
 +------------------+-------------------------------------------+-------------------------------------------+-----------------------------------------+
-| ``location``     | Location of the package                   | C:\Program Files\VMware\VMware Tools\     | Windows and  macOS (pkg)                |
+| ``location``     | Location of the package                   | C:\\Program Files\\VMware\\VMware Tools\\ | Windows and  macOS (pkg)                |
 +------------------+-------------------------------------------+-------------------------------------------+-----------------------------------------+
 | ``checksum``     | Integrity synchronization value           | 78503709147600c8e0023cf2b9995772280eee30  | All                                     |
 +------------------+-------------------------------------------+-------------------------------------------+-----------------------------------------+
@@ -210,7 +210,7 @@ The network interfaces scan retrieves information about the existing network int
 
 .. _syscollector_netproto:
 
-- ``sys_netproto``: The entries in this table reference the interfaces in the sys_netiface table. The sys_netproto table shows the routing configuration associated with those interfaces.
+- ``sys_netproto``: The entries in this table reference the interfaces in the ``sys_netiface`` table. The ``sys_netproto`` table shows the routing configuration associated with those interfaces.
 
 +------------------+-------------------------------------------+-------------------------------------------+---------------------+
 | Field            | Description                               | Example                                   | Available           |
