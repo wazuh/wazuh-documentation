@@ -25,3 +25,4 @@ This section describes how to manage the agents using the command line (CLI), th
         key-request
         labels
         antiflooding
+        cloud-and-container-monitoring
