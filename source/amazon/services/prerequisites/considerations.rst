@@ -231,13 +231,13 @@ After finishing the configuration, you can activate the Security Information Man
 
     .. thumbnail:: /images/aws/aws-dashboard.png
        :title: Amazon AWS dashboard
-       :alt: AWS dashboard
+       :alt: Amazon AWS dashboard
        :align: center
        :width: 80%
 
     .. thumbnail:: /images/aws/aws-events.png
        :title: Amazon AWS events
-       :alt: AWS events
+       :alt: Amazon AWS events
        :align: center
        :width: 80%
 

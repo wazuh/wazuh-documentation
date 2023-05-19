@@ -88,11 +88,18 @@ Below there is an example of a configuration that uses more than one bucket:
 Enabling dashboard visualization  
 --------------------------------
   
-Once the configuration is complete, you can enable the corresponding Security Information Management module on the Wazuh
-Dashboard. This will provide you with additional details and insights of events, as illustrated in the screenshot below.
+After finishing the configuration, you can activate the Security Information Management module on the Wazuh Dashboard. This will offer you more information and insights about events, as shown in the screenshot below.
 
-    .. thumbnail:: ../../images/gcp/gcp-dashboard-event.png
-      :align: center
-      :width: 70%
+    .. thumbnail:: ../../images/gcp/gcp-dashboard.png
+       :title: Google Cloud Platform dashboard
+       :alt: Google Cloud Platform dashboard
+       :align: center
+       :width: 80%
 
-To learn more, see the `modules <https://documentation.wazuh.com/current/user-manual/wazuh-dashboard/settings.html#modules>`_ section.
+    .. thumbnail:: ../../images/gcp/gcp-events.png
+       :title: Google Cloud Platform events
+       :alt: Google Cloud Platform events
+       :align: center
+       :width: 80%
+
+For further information, please refer to the `modules <https://documentation.wazuh.com/current/user-manual/wazuh-dashboard/settings.html#modules>`_ section.
