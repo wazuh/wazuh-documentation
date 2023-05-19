@@ -38,7 +38,7 @@ In this use case, we have two users, John and Jane. We monitor Jane’s home dir
    - ``-C auid!=obj_uid`` specifies that the ``auid`` should not be equal to the object UID (``obj_uid``), which is the UID associated with the accessed file or directory.
    - ``-k power_abuse`` provides a unique ID that Wazuh uses to analyze the audit logs.
    
-   This audit rule will log all attempts by another user to open files or directories inside Jane’s home directory.
+   This audit rule logs all attempts by another user to open files or directories inside Jane’s home directory.
 
 #. Reload the rules and confirm they are in place:
 
@@ -82,7 +82,7 @@ Wazuh server
 Test the configuration
 ----------------------
 
-Perform the following on the monitored endpoint to test the configuration.
+Perform the following actions on the monitored endpoint to test the configuration.
 
 #. Switch to the user John:
 

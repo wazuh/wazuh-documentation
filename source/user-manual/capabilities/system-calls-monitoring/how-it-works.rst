@@ -46,13 +46,13 @@ Where:
 +----------------------+-----------------------------------------------------------------------------------------------------------------------------------------------------------------+
 | ``-p <PERMISSIONS>`` | ``<PERMISSIONS>`` are the permissions that are for auditing, including the following:                                                                           |
 +                      +---------------------------------------------------+-----------+-------------------------------------------------------------------------------------------------+
-|                      | Values                                            | r         | read access to a file or a directory.                                                           |
+|                      | Values                                            | r         | read access to a file or a directory                                                            |
 +                      +                                                   +-----------+-------------------------------------------------------------------------------------------------+
-|                      |                                                   | w         | write access to a file or a directory.                                                          |
+|                      |                                                   | w         | write access to a file or a directory                                                           |
 +                      +                                                   +-----------+-------------------------------------------------------------------------------------------------+
-|                      |                                                   | x         | execute access to a file or a directory.                                                        |
+|                      |                                                   | x         | execute access to a file or a directory                                                         |
 +                      +                                                   +-----------+-------------------------------------------------------------------------------------------------+
-|                      |                                                   | a         | change in the file's or directory's attribute.                                                  |
+|                      |                                                   | a         | change in the file's or directory's attribute                                                   |
 +----------------------+---------------------------------------------------+-----------+-------------------------------------------------------------------------------------------------+
 | ``-k <KEY_NAME>``    | ``<KEY_NAME>`` assigns a unique identifier to the rule. It tags the audit events that match the rule to make searching for and analyzing related events easier. |
 |                      |                                                                                                                                                                 |
@@ -127,7 +127,7 @@ Where:
 |                           |              |         | For more granular control over which events to audit, use the user and exit filters instead.                                           |
 |                           |              |         |                                                                                                                                        |
 +---------------------------+--------------+---------+----------------------------------------------------------------------------------------------------------------------------------------+
-| ``-S <SYSTEM_CALL>``      | This specifies which system_call to audit. Multiple system calls can be specified in a single rule.                                                             |
+| ``-S <SYSTEM_CALL>``      | This specifies which *system_call* to audit. Multiple system calls can be specified in a single rule.                                                           |
 |                           |                                                                                                                                                                 |
 |                           | A list of all system calls can be found with the command ``ausyscall --dump``.                                                                                  |
 +---------------------------+-----------------------------------------------------------------------------------------------------------------------------------------------------------------+

@@ -51,7 +51,7 @@ Perform the following actions below.
 
    .. code-block:: console
       
-      $ sudo touch newfile1.txt
+      $ sudo touch newfile.txt
 
 #. Run the command below as the root user:
 

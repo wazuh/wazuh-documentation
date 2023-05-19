@@ -49,7 +49,7 @@ Audit configuration alerts are displayed in the **Security Events** and **System
 Test the configuration
 ----------------------
 
-Perform the following actions below on the monitored endpoint.
+Perform the following actions on the monitored endpoint.
 
 Create a new file
 ^^^^^^^^^^^^^^^^^
