@@ -17,7 +17,7 @@ Installing dependencies
 Python
 ------
 
-The GCP module requires Python 3. It is compatible with Python 3.6 to Python 3.9. Future Python releases should maintain compatibility although it cannot be guaranteed.
+The GCP module requires Python 3. It is compatible with Python 3.7 and above.
 
 .. tabs::
 
@@ -60,7 +60,7 @@ It is recommended to use a pip version greater than or equal to 19.3 to ease the
 Google Cloud pip dependencies
 -----------------------------
 
-`google-cloud-pubsub <https://pypi.org/project/google-cloud-pubsub/>`_ is the official python library supported by Google to manage Google Cloud Pub/Sub resources. It is used to pull the log messages from the Pub/Sub queue. 
+`google-cloud-pubsub <https://pypi.org/project/google-cloud-pubsub/>`_ is the official python library supported by Google to manage Google Cloud Pub/Sub resources. It is used to pull the log messages from the Pub/Sub queue.
 
 To install the dependencies, execute the following command:
 

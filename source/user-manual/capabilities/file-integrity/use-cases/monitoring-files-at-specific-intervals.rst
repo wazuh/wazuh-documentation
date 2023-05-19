@@ -17,8 +17,8 @@ This is important for protecting an organization's critical assets and data and 
 You can run scheduled scans with the FIM module to detect file modifications. In this example, the file is ``user_details.txt``,  and 
 you schedule FIM to scan the file every 5 minutes.
 
-Infrastructure
---------------
+Use case description
+--------------------
 
   +---------------------+-----------------------------------------------------------------------------------------------+
   | Endpoint            | Description                                                                                   |
