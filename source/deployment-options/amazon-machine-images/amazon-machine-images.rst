@@ -137,9 +137,9 @@ Next steps
 
 The Wazuh AMI is now ready and you can proceed with :doc:`deploying the Wazuh agents </installation-guide/wazuh-agent/index>` on the systems to be monitored.
 
-Upgrading the Wazuh server
---------------------------
+Upgrading the AMI
+-----------------
 
-The Wazuh server in the instance can be upgraded as a traditional installation.
+Follow the instructions on how to upgrade the Wazuh central components. 
 
-  - :ref:`Upgrading the Wazuh manager <upgrading_wazuh_server>`
+  - :doc:`Upgrading the Wazuh central components </upgrade-guide/upgrading-central-components>`

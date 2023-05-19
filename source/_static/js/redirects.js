@@ -138,6 +138,36 @@ redirections.push(
 redirections.push(
     {
       'target': ['4.3=>4.4', '4.4=>4.3'],
+      '4.3': '/user-manual/capabilities/auditing-whodata/index.html',
+      '4.4': '/user-manual/capabilities/file-integrity/advanced-settings.html#who-data-monitoring',
+    },
+    {
+      'target': ['4.3=>4.4', '4.4=>4.3'],
+      '4.3': '/user-manual/capabilities/auditing-whodata/who-linux.html',
+      '4.4': '/user-manual/capabilities/file-integrity/advanced-settings.html#who-data-monitoring-on-linux',
+    },
+    {
+      'target': ['4.3=>4.4', '4.4=>4.3'],
+      '4.3': '/user-manual/capabilities/auditing-whodata/who-windows.html',
+      '4.4': '/user-manual/capabilities/file-integrity/advanced-settings.html#who-data-monitoring-in-windows',
+    },
+    {
+      'target': ['4.3=>4.4', '4.4=>4.3'],
+      '4.3': '/user-manual/capabilities/auditing-whodata/who-windows-policies.html',
+      '4.4': '/user-manual/capabilities/file-integrity/advanced-settings.html#manual-configuration-of-the-local-audit-policies-in-windows',
+    },
+    {
+      'target': ['4.3=>4.4', '4.4=>4.3'],
+      '4.3': '/user-manual/capabilities/file-integrity/fim-configuration.html',
+      '4.4': '/user-manual/capabilities/file-integrity/index.html',
+    },  
+    {
+      'target': ['4.3=>4.4', '4.4=>4.3'],
+      '4.3': '/user-manual/capabilities/file-integrity/fim-fields-rule-mapping.html',
+      '4.4': '/user-manual/capabilities/file-integrity/index.html',
+    }, 
+    {
+      'target': ['4.3=>4.4', '4.4=>4.3'],
       '4.3': '/user-manual/capabilities/antiflooding.html',
       '4.4': '/user-manual/agents/antiflooding.html',
     },
@@ -170,7 +200,27 @@ redirections.push(
       'target': ['4.3=>4.4', '4.4=>4.3'],
       '4.3': '/user-manual/capabilities/agent-key-polling.html',
       '4.4': '/user-manual/agents/key-request.html',
-    }
+    },
+    {
+      'target': ['4.3=>4.4'],
+      '4.3': '/user-manual/capabilities/wazuh-logtest/index.html',
+      '4.4': '/user-manual/ruleset/testing.html',
+    },
+    {
+      'target': ['4.3=>4.4'],
+      '4.3': '/user-manual/capabilities/wazuh-logtest/how-it-works.html',
+      '4.4': '/user-manual/ruleset/testing.html',
+    },
+    {
+      'target': ['4.3=>4.4'],
+      '4.3': '/user-manual/capabilities/wazuh-logtest/logtest-configuration.html',
+      '4.4': '/user-manual/ruleset/testing.html#configuration',
+    },
+    {
+      'target': ['4.3=>4.4'],
+      '4.3': '/user-manual/capabilities/wazuh-logtest/logtest-faq.html',
+      '4.4': '/user-manual/ruleset/testing.html',
+    },
 );
 
 /* Pages added in 4.4 */
@@ -189,6 +239,7 @@ newUrls['4.4'] = [
   '/user-manual/wazuh-dashboard/custom-branding.html',
   '/release-notes/release-4-4-0.html',
   '/release-notes/release-4-4-1.html',
+  '/release-notes/release-4-4-2.html',
   '/nist/index.html',
   '/nist/visualization-and-dashboard.html',
   '/nist/log-data-analysis.html',
@@ -202,6 +253,18 @@ newUrls['4.4'] = [
   '/user-manual/agents/antiflooding.html',
   '/user-manual/agents/labels.html',
   '/user-manual/manager/fluent-forwarder.html',
+  '/user-manual/capabilities/file-integrity/basic-settings.html',
+  '/user-manual/capabilities/file-integrity/how-to-configure-fim.html',
+  '/user-manual/capabilities/file-integrity/interpreting-fim-module-analysis.html',
+  '/user-manual/capabilities/file-integrity/creating-custom-fim-rules.html',   
+  '/user-manual/capabilities/file-integrity/advanced-settings.html',
+  '/user-manual/capabilities/file-integrity/use-cases/index.html',
+  '/user-manual/capabilities/file-integrity/use-cases/detecting-malware-persistence-technique.html',
+  '/user-manual/capabilities/file-integrity/use-cases/detecting-account-manipulation.html',
+  '/user-manual/capabilities/file-integrity/use-cases/monitoring-files-at-specific-intervals.html',
+  '/user-manual/capabilities/file-integrity/use-cases/reporting-file-changes.html',
+  '/user-manual/capabilities/file-integrity/use-cases/monitoring-configuration-changes.html',
+  '/user-manual/capabilities/file-integrity/windows-registry-monitoring.html',
 ];
 
 /* Pages removed in 4.4 */
@@ -227,6 +290,16 @@ removedUrls['4.4'] = [
   '/user-manual/capabilities/antiflooding.html',
   '/user-manual/capabilities/labels.html',
   '/user-manual/capabilities/fluent-forwarder.html',
+  '/user-manual/capabilities/wazuh-logtest/index.html',
+  '/user-manual/capabilities/wazuh-logtest/how-it-works.html',
+  '/user-manual/capabilities/wazuh-logtest/logtest-configuration.html',
+  '/user-manual/capabilities/wazuh-logtest/logtest-faq.html',
+  '/user-manual/capabilities/file-integrity/fim-configuration.html',
+  '/user-manual/capabilities/file-integrity/fim-fields-rule-mapping.html',
+  '/user-manual/capabilities/auditing-whodata/index.html',
+  '/user-manual/capabilities/auditing-whodata/who-linux.html',
+  '/user-manual/capabilities/auditing-whodata/who-windows.html',
+  '/user-manual/capabilities/auditing-whodata/who-windows-policies.html',    
 ];
 
   /* *** RELEASE 4.3 ****/

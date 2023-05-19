@@ -49,8 +49,8 @@ Get cluster's healthcheck
         Cluster name: wazuh
 
         Last completed synchronization for connected nodes (3):
-        node02 (192.168.56.103): Integrity: 2018-05-15 17:25:12.64 | Agents-info: 2018-05-15 17:25:14.74 | Agent-groups: n/a.
-        node03 (192.168.56.105): Integrity: 2018-05-15 17:25:15.35 | Agents-info: n/a | Agent-groups: n/a.
+        node02 (192.168.56.103): Integrity check: 2023-03-28T15:34:38.801440Z | Integrity sync: 2023-03-28T15:33:53.499310Z | Agents-info: 2023-03-28T15:34:16.094609Z | Last keep alive: 2023-03-28T15:33:53.379383Z | Agent-groups: 2023-03-28T15:34:33.444899Z | Agent-groups full: n/a.
+        node03 (192.168.56.105): Integrity check: 2023-03-28T15:34:31.521853Z | Integrity sync: 2023-03-28T15:33:48.943411Z | Agents-info: 2023-03-28T15:34:27.082314Z | Last keep alive: 2023-03-28T15:33:54.379334Z | Agent-groups: 2023-03-28T15:34:32.321787Z | Agent-groups full: n/a.
 
 * Extended version
     .. code-block:: console
@@ -82,10 +82,12 @@ Get cluster's healthcheck
                     Last synchronization: 2018-05-15 17:28:33.35 - 2018-05-15 17:28:33.35.
                     Synchronized files: 1.
                     Permission to synchronize: True.
-                Agents-group
-                    Last synchronization: n/a - n/a.
-                    Synchronized files: 0.
-                    Permission to synchronize: True.
+                Agents-groups:
+                        Last synchronization: 0.001s (2018-05-15 17:28:33.35 - 2018-05-15 17:28:33.35).
+                        Number of synchronized chunks: 1.
+                Agents-groups full:
+                        Last synchronization: n/a (n/a - n/a).
+                        Number of synchronized chunks: 0.
 
         node03 (192.168.56.105)
             Version: |WAZUH_CURRENT|
@@ -100,10 +102,12 @@ Get cluster's healthcheck
                     Last synchronization: n/a - n/a.
                     Synchronized files: 0.
                     Permission to synchronize: True.
-                Agents-group
-                    Last synchronization: n/a - n/a.
-                    Synchronized files: 0.
-                    Permission to synchronize: True.
+                Agents-groups:
+                        Last synchronization: 0.001s (2018-05-15 17:28:33.35 - 2018-05-15 17:28:33.35).
+                        Number of synchronized chunks: 1.
+                Agents-groups full:
+                        Last synchronization: n/a (n/a - n/a).
+                        Number of synchronized chunks: 0.
 
 * Getting healthcheck of multiple nodes
     .. code-block:: console
@@ -135,10 +139,12 @@ Get cluster's healthcheck
                     Last synchronization: 2018-05-15 17:30:45.74 - 2018-05-15 17:30:45.75.
                     Synchronized files: 1.
                     Permission to synchronize: True.
-                Agents-group
-                    Last synchronization: n/a - n/a.
-                    Synchronized files: 0.
-                    Permission to synchronize: True.
+                Agents-groups:
+                        Last synchronization: 0.001s (2018-05-15 17:28:33.35 - 2018-05-15 17:28:33.35).
+                        Number of synchronized chunks: 1.
+                Agents-groups full:
+                        Last synchronization: n/a (n/a - n/a).
+                        Number of synchronized chunks: 0.
 
 
 Get connected nodes
