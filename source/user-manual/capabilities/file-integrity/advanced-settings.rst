@@ -602,7 +602,7 @@ A system access control list (SACL) enables administrators to log attempts to ac
    :align: center
    :width: 100%
 
-It is  necessary to have a *Success* entry in the Auditing tab :
+It's necessary to have a *Success* entry in the Auditing tab:
 
 .. thumbnail:: /images/manual/fim/successful-entry-in-the-auditing-tab.png
    :title: Successful entry in the Auditing tab
