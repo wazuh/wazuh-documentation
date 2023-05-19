@@ -19,4 +19,5 @@ To install the necessary dependencies, execute the following command:
 
 .. code-block:: console
 
-  # pip3 install google-cloud-core==1.7.1 google-cloud-pubsub==2.7.1 google-cloud-storage==1.39.0 cffi==1.14.4 chardet==3.0.4  pyparsing==2.4.7 pytz==2020.1
+  # pip3 install google-cloud-core==1.7.1 google-cloud-pubsub==2.7.1 google-cloud-storage==1.39.0 pytz==2020.1
+
