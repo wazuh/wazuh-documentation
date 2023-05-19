@@ -10,6 +10,10 @@ Supported services
 
 All the services except ``Inspector Classic`` and ``CloudWatch Logs`` get their data from log files stored in an ``S3`` bucket. These services store their data into log files which are configured inside ``<bucket type='TYPE'> </bucket>`` tags, while ``Inspector Classic`` and ``CloudWatch Logs`` services are configured inside ``<service type='inspector'> </service>`` and ``<service type='cloudwatchlogs'> </service>`` tags, respectively.
 
+.. versionadded:: 4.4.2
+  
+The ``<subscriber type='TYPE'> </subscriber>`` tags are added in order to obtain logs from ``Amazon Security Lake`` buckets.
+
 The next table contains the most relevant information about configuring each service in the ``ossec.conf`` file, as well as the path where the logs will be stored in the bucket if the corresponding service uses them as its storage medium:
 
 +--------------+----------------------------------------------------------+-----------------------+----------------+------------------------------------------------------------------------------------------------------------------+
@@ -47,6 +51,8 @@ The next table contains the most relevant information about configuring each ser
 +--------------+----------------------------------------------------------+-----------------------+----------------+------------------------------------------------------------------------------------------------------------------+
 | Amazon       | :ref:`Amazon ECR Image scanning <amazon_image_scanning>` | service               | cloudwatchlogs |                                                                                                                  |
 +--------------+----------------------------------------------------------+-----------------------+----------------+------------------------------------------------------------------------------------------------------------------+
+| Amazon       | :ref:`Amazon Security Lake <amazon_security_lake>`       | subscriber            | security_lake  |                                                                                                                  |
++--------------+----------------------------------------------------------+-----------------------+----------------+------------------------------------------------------------------------------------------------------------------+
 | Cisco        | :ref:`Umbrella <cisco_umbrella>`                         | bucket                | cisco_umbrella | <bucket_name>/<prefix>/<year>-<month>-<day>                                                                      |
 +--------------+----------------------------------------------------------+-----------------------+----------------+------------------------------------------------------------------------------------------------------------------+
 
@@ -68,3 +74,4 @@ The next table contains the most relevant information about configuring each ser
     ecr-image-scanning
     cisco-umbrella
     elastic-load-balancing/index
+    security-lake

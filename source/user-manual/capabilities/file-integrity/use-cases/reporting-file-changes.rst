@@ -10,8 +10,8 @@ The functionality to report changes made to a file allows you to confirm the imp
 
 Having a record of file changes might be useful for troubleshooting issues or for auditing purposes. By providing visibility into file changes, the FIM capability plays a crucial role in effective change management.
 
-Infrastructure
---------------
+Use case description
+--------------------
 
   +---------------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
   | Endpoint            | Description                                                                                                                                                                    |

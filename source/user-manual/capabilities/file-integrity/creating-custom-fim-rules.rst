@@ -118,8 +118,8 @@ If a script contains malicious code, such as commands to delete or modify import
 
 Wazuh already has an out-of-the-box rule that generates an alert when a file permission is modified. However, in this example, you can see how to create a custom FIM rule to further customize this alert.  
 
-Infrastructure
-~~~~~~~~~~~~~~
+Use case description
+~~~~~~~~~~~~~~~~~~~~
 
   +---------------------+-----------------------------------------------------------------------------------------------+
   | Endpoint            | Description                                                                                   |
@@ -304,8 +304,8 @@ Deleting a file can result in loss of important data or system files when done a
 
 Wazuh has an out-of-the-box rule that generates an alert when a monitored file is deleted or when a file in a monitored directory is deleted. In this example, we create a custom FIM rule that triggers an alert indicating the user and the application that deleted the file.
 
-Infrastructure
-~~~~~~~~~~~~~~
+Use case description
+~~~~~~~~~~~~~~~~~~~~
 
   +---------------------+-----------------------------------------------------------------------------------------------+
   | Endpoint            | Description                                                                                   |
@@ -552,8 +552,8 @@ Change alert severity for sensitive files
 
 With a custom rule, you can alter the level of an FIM alert when detecting changes to a specific file or file pattern. In the following example, the custom rule raises the FIM alert level to *12* when a user or process modifies a critical file. 
 
-Infrastructure
-~~~~~~~~~~~~~~
+Use case description
+~~~~~~~~~~~~~~~~~~~~
 
   +---------------------+---------------------------------------------------------------------------------------------------+
   | Endpoint            | Description                                                                                       |

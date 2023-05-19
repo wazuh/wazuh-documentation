@@ -1,7 +1,9 @@
 .. Copyright (C) 2015, Wazuh, Inc.
 
-.. _azure_monitoring_dependencies:
+.. meta::
+  :description: Learn about the required dependencies for using the AZURE integration in a Wazuh agent.
 
+.. _azure_monitoring_dependencies:
 
 Installing dependencies
 =======================
@@ -13,7 +15,7 @@ To learn more about agent cloud monitoring, check out :doc:`this section </user-
 
 `Azure Storage Blobs client library <https://pypi.org/project/azure-storage-blob/>`_ is the official Python library for Microsoft's Azure Blob storage.
 
-To install the Azure Storage Blobs client library for Python, execute the following command:
+To install the Azure Storage Blobs client library for Python and the required dependencies, execute the following command:
 
 .. code-block:: console
 

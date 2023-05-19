@@ -12,9 +12,9 @@ An example output of the command looks as follows:
     :class: output
     
       NAME         TYPE    VERSION  ADDRESS
-      master-node  master  4.4.1   10.0.0.3
-      worker-node1 worker  4.4.1   10.0.0.4
-      worker-node2 worker  4.4.1   10.0.0.5
+      master-node  master  4.4.2   10.0.0.3
+      worker-node1 worker  4.4.2   10.0.0.4
+      worker-node2 worker  4.4.2   10.0.0.5
 
 Note that ``10.0.0.3``, ``10.0.0.4``, ``10.0.0.5`` are example IPs.
 
