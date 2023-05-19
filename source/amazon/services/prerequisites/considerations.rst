@@ -227,11 +227,19 @@ The following is an example of a valid configuration.
 Enabling dashboard visualization  
 --------------------------------
   
-Once the configuration is complete, you can enable the corresponding Security Information Management module on the Wazuh
-Dashboard. This will provide you with additional details and insights of events, as illustrated in the screenshot below.
+After finishing the configuration, you can activate the Security Information Management module on the Wazuh Dashboard. This will offer you more information and insights about events, as shown in the screenshot below.
 
-    .. thumbnail:: ../../../images/aws/aws-dashboard-event.png
-      :align: center
-      :width: 70%
+    .. thumbnail:: /images/aws/aws-dashboard.png
+       :title: Amazon AWS dashboard
+       :alt: AWS dashboard
+       :align: center
+       :width: 80%
 
-To learn more, see the `modules <https://documentation.wazuh.com/current/user-manual/wazuh-dashboard/settings.html#modules>`_ section.
+    .. thumbnail:: /images/aws/aws-events.png
+       :title: Amazon AWS events
+       :alt: AWS events
+       :align: center
+       :width: 80%
+
+For further information, please refer to the `modules <https://documentation.wazuh.com/current/user-manual/wazuh-dashboard/settings.html#modules>`_ section.
+
