@@ -157,7 +157,7 @@ After finishing the configuration, you can activate the  corresponding Security 
        :align: center
        :width: 80%
 
-To activate the GitHub module, navigate to your Wazuh Dashboard and click on **Wazuh > Settings > Modules**. One on the Security Information Management, you can activate the **GitHub** module, as seen in the image below.
+To activate the **GitHub** module, navigate to your Wazuh Dashboard and click on **Wazuh > Settings > Modules**. One on the Security Information Management, you can start the **GitHub** module, as seen in the image below.
 
     .. thumbnail:: /images/github/github-module.png
        :title: GitHub module

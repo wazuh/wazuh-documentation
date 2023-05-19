@@ -241,7 +241,7 @@ After finishing the configuration, you can activate the corresponding Security I
        :align: center
        :width: 80%
 
-To activate the Amazon AWS module, navigate to your Wazuh Dashboard and click on **Wazuh > Settings > Modules**. One on the Security Information Management, you can activate the **Amazon AWS** module, as seen in the image below.
+To activate the **Amazon AWS** module, navigate to your Wazuh Dashboard and click on **Wazuh > Settings > Modules**. One on the Security Information Management, you can start the **Amazon AWS** module, as seen in the image below.
 
     .. thumbnail:: /images/aws/aws-module.png
        :title: Amazon AWS module

@@ -102,7 +102,7 @@ After finishing the configuration, you can activate the corresponding Security I
        :align: center
        :width: 80%
 
-To activate the GCP module, navigate to your Wazuh Dashboard and click on **Wazuh > Settings > Modules**. One on the Security Information Management, you can activate the **GCP** module, as seen in the image below.
+To activate the **GCP** module, navigate to your Wazuh Dashboard and click on **Wazuh > Settings > Modules**. One on the Security Information Management, you can start the **GCP** module, as seen in the image below.
 
     .. thumbnail:: ../../images/gcp/gcp-module.png
        :title: GCP module

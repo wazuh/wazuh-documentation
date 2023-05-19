@@ -259,7 +259,7 @@ After finishing the configuration, you can activate the corresponding Security I
        :align: center
        :width: 80%
 
-To activate the Office 365 module, navigate to your Wazuh Dashboard and click on **Wazuh > Settings > Modules**. One on the Security Information Management, you can activate the **Office 365** module, as seen in the image below.
+To activate the **Office 365** module, navigate to your Wazuh Dashboard and click on **Wazuh > Settings > Modules**. One on the Security Information Management, you can start the **Office 365** module, as seen in the image below.
 
     .. thumbnail:: /images/office365/office365-module.png
        :title: Office 365 module
