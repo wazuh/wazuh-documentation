@@ -202,6 +202,10 @@ newUrls['4.4'] = [
   '/user-manual/capabilities/file-integrity/use-cases/reporting-file-changes.html',
   '/user-manual/capabilities/file-integrity/use-cases/monitoring-configuration-changes.html',
   '/user-manual/capabilities/file-integrity/windows-registry-monitoring.html',
+  '/user-manual/capabilities/system-calls-monitoring/use-cases/index.html',
+  '/user-manual/capabilities/system-calls-monitoring/use-cases/monitoring-file-and-directory-access.html',
+  '/user-manual/capabilities/system-calls-monitoring/use-cases/monitoring-commands-run-as-root.html',
+  '/user-manual/capabilities/system-calls-monitoring/use-cases/privilege-abuse.html',
 ];
 
 /* Pages removed in 4.4 */
