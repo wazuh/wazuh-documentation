@@ -1,8 +1,8 @@
 .. Copyright (C) 2015, Wazuh, Inc.
 
 .. meta::
-  :description: The Wazuh Syscollector module is in charge of collecting system information and storing it into an SQLite database for each agent on the manager side.
-
+  :description: The Compatibility matrix shows the scans that are compatible with various operating systems. Learn more about it in this section of the Wazuh documentation.
+ 
 Compatibility matrix
 ====================
 

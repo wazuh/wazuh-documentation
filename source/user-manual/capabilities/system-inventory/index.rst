@@ -1,7 +1,7 @@
 .. Copyright (C) 2015, Wazuh, Inc.
 
 .. meta::
-  :description: The Wazuh Syscollector module is in charge of collecting system information and storing it into an SQLite database for each agent on the manager side.
+  :description: A system inventory is a resource that contains information about the hardware and software assets within an IT infrastructure. Learn more about it here.
 
 .. _system_inventory:
 

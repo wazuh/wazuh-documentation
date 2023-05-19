@@ -1,7 +1,7 @@
 .. Copyright (C) 2015, Wazuh, Inc.
 
 .. meta::
-  :description: The Wazuh Syscollector module is in charge of collecting system information and storing it into an SQLite database for each agent on the manager side.
+  :description: You can generate two types of reports from the Wazuh dashboard. Learn more about it in this section of the Wazuh documentation. 
 
 Generating system inventory reports
 ===================================
