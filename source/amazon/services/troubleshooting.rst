@@ -187,6 +187,8 @@ A common scenario is that no alerts are being generated because the events are n
 Take into account that Wazuh does not provide default rules for the different logs that can be found in CloudWatch Logs, since they can have any type of format and come from any source. Because of this, if a user wants to make use of this integration to process any custom log they will most likely have to configure their own rules for them. Take a look at the :ref:`ruleset_custom` section to learn more about this topic.
 
 
+.. _interval_overtaken_message:
+
 Interval overtaken message is present in the ossec.log
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
@@ -226,6 +228,8 @@ Error codes reference
     +-----------+-------------------------------------------------------------------+------------------------------------------------------------------------------------------------------------------------------------------------------+
     | 9         | Failed to parse file                                              | Check the type of the bucket.                                                                                                                        |
     +-----------+-------------------------------------------------------------------+------------------------------------------------------------------------------------------------------------------------------------------------------+
+    | 10        | pyarrow module missing                                            | Install ``pyarrow`` library. For more information, see the :ref:`Installing dependencies <amazon_dependencies>` section.                             |
+    +-----------+-------------------------------------------------------------------+------------------------------------------------------------------------------------------------------------------------------------------------------+
     | 11        | Unable to connect to Wazuh                                        | Ensure that Wazuh is running.                                                                                                                        |
     +-----------+-------------------------------------------------------------------+------------------------------------------------------------------------------------------------------------------------------------------------------+
     | 12        | SIGINT                                                            | The module stopped due to an interrupt signal.                                                                                                       |
@@ -240,4 +244,8 @@ Error codes reference
     +-----------+-------------------------------------------------------------------+------------------------------------------------------------------------------------------------------------------------------------------------------+
     | 17        | Invalid file key format                                           | Ensure that the file path follows the format specified in the                                                                                        |
     |           |                                                                   | `Wazuh documentation <https://documentation.wazuh.com/current/amazon/services/supported-services/index.html>`_.                                      |
+    +-----------+-------------------------------------------------------------------+------------------------------------------------------------------------------------------------------------------------------------------------------+
+    | 20        | Unable to find SQS                                                | Make sure that the ``sqs_name`` value in the wodle configuration in the ``ossec.conf`` file is correct.                                              |
+    +-----------+-------------------------------------------------------------------+------------------------------------------------------------------------------------------------------------------------------------------------------+
+    | 21        | Failed fetch/delete from SQS                                      | Check that no more instances of the wodle are running at the same time.                                                                              |
     +-----------+-------------------------------------------------------------------+------------------------------------------------------------------------------------------------------------------------------------------------------+

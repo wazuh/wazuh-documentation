@@ -8,7 +8,7 @@
 
       .. code-block:: console
 
-        # sudo -u kibana /usr/share/kibana/bin/kibana-plugin install https://packages.wazuh.com/4.x/ui/kibana/wazuh_kibana-4.4.1_7.17.9-1.zip
+        # sudo -u kibana /usr/share/kibana/bin/kibana-plugin install https://packages.wazuh.com/4.x/ui/kibana/wazuh_kibana-4.4.2_7.17.9-1.zip
 
 
 
@@ -17,7 +17,7 @@
 
       .. code-block:: console
 
-        # sudo -u kibana /usr/share/kibana/bin/kibana-plugin install file:///path/wazuh_kibana-4.4.1_7.17.9-1.zip
+        # sudo -u kibana /usr/share/kibana/bin/kibana-plugin install file:///path/wazuh_kibana-4.4.2_7.17.9-1.zip
 
 
 
