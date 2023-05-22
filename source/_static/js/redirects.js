@@ -210,6 +210,10 @@ newUrls['4.4'] = [
   '/user-manual/capabilities/system-inventory/compatibility-matrix.html',
   '/user-manual/capabilities/system-inventory/using-syscollector-information-to-trigger-alerts.html',
   '/user-manual/capabilities/system-inventory/configuration.html',
+  '/user-manual/capabilities/system-calls-monitoring/use-cases/index.html',
+  '/user-manual/capabilities/system-calls-monitoring/use-cases/monitoring-file-and-directory-access.html',
+  '/user-manual/capabilities/system-calls-monitoring/use-cases/monitoring-commands-run-as-root.html',
+  '/user-manual/capabilities/system-calls-monitoring/use-cases/privilege-abuse.html',
 ];
 
 /* Pages removed in 4.4 */
