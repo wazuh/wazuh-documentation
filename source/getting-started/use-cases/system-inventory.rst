@@ -30,4 +30,4 @@ Example of running processes:
     :align: center
     :wrap_image: No
 
-You can find more information about the Wazuh system inventory module in the :doc:`user manual </user-manual/capabilities/syscollector>`.
+You can find more information about the Wazuh system inventory module in the :doc:`user manual </user-manual/capabilities/system-inventory/index>`.

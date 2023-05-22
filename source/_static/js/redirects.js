@@ -202,6 +202,14 @@ newUrls['4.4'] = [
   '/user-manual/capabilities/file-integrity/use-cases/reporting-file-changes.html',
   '/user-manual/capabilities/file-integrity/use-cases/monitoring-configuration-changes.html',
   '/user-manual/capabilities/file-integrity/windows-registry-monitoring.html',
+  '/user-manual/capabilities/system-inventory/index.html',
+  '/user-manual/capabilities/system-inventory/how-it-works.html',
+  '/user-manual/capabilities/system-inventory/viewing-system-inventory-data.html',
+  '/user-manual/capabilities/system-inventory/generating-system-inventory-reports.html',
+  '/user-manual/capabilities/system-inventory/available-inventory-fields.html',
+  '/user-manual/capabilities/system-inventory/compatibility-matrix.html',
+  '/user-manual/capabilities/system-inventory/using-syscollector-information-to-trigger-alerts.html',
+  '/user-manual/capabilities/system-inventory/configuration.html',
   '/user-manual/capabilities/system-calls-monitoring/use-cases/index.html',
   '/user-manual/capabilities/system-calls-monitoring/use-cases/monitoring-file-and-directory-access.html',
   '/user-manual/capabilities/system-calls-monitoring/use-cases/monitoring-commands-run-as-root.html',
@@ -240,7 +248,8 @@ removedUrls['4.4'] = [
   '/user-manual/capabilities/auditing-whodata/index.html',
   '/user-manual/capabilities/auditing-whodata/who-linux.html',
   '/user-manual/capabilities/auditing-whodata/who-windows.html',
-  '/user-manual/capabilities/auditing-whodata/who-windows-policies.html',    
+  '/user-manual/capabilities/auditing-whodata/who-windows-policies.html',  
+  '/user-manual/capabilities/syscollector.html',  
 ];
 
   /* *** RELEASE 4.3 ****/

@@ -18,7 +18,7 @@ Thanks to the Wazuh agent, there are some capabilities available to monitor the 
 - :doc:`File integrity monitoring </user-manual/capabilities/file-integrity/index>`
 - :doc:`/user-manual/capabilities/malware-detection/index`
 - :doc:`Security policy monitoring </user-manual/capabilities/policy-monitoring/index>`
-- :doc:`System inventory </user-manual/capabilities/syscollector>`
+- :doc:`System inventory </user-manual/capabilities/system-inventory/index>`
 - :doc:`Vulnerability detection </user-manual/capabilities/vulnerability-detection/index>`
 
 To learn more about the different Wazuh capabilities, check out :doc:`this section </user-manual/index>`.
