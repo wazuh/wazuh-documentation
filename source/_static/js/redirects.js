@@ -208,6 +208,7 @@ newUrls['4.4'] = [
   '/user-manual/capabilities/system-inventory/available-inventory-fields.html',
   '/user-manual/capabilities/system-inventory/compatibility-matrix.html',
   '/user-manual/capabilities/system-inventory/using-syscollector-information-to-trigger-alerts.html',
+  '/user-manual/capabilities/system-inventory/configuration.html',
 ];
 
 /* Pages removed in 4.4 */

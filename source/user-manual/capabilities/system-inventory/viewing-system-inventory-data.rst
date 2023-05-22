@@ -38,7 +38,7 @@ Wazuh API GUI
 
 On the Wazuh dashboard, navigate to **Wazuh > Tools > API Console**. On the **Console**, type the following:
 
-.. code-block:: console
+.. code-block:: none
 
    GET /syscollector/<AGENT_ID>/
 
@@ -56,7 +56,7 @@ For example, you can use the command ``GET /syscollector/<AGENT_ID>/packages`` t
 
 Furthermore, you can query the inventory data for specific information about any property. For example, the command below queries the package inventory to check for the ``wazuh-agent`` package: 
 
-.. code-block:: console
+.. code-block:: none
 
    GET /syscollector/<AGENT_ID>/packages?pretty=true&name=wazuh-agent 
 
@@ -173,7 +173,8 @@ Follow the steps below to query the endpoint database from the command line usin
 
    .. code-block:: console
       :class: output
-
+      :emphasize-lines: 16
+      
       {
          "data": {
             "affected_items": [
