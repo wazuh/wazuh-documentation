@@ -32,19 +32,17 @@ Follow these steps to quickly set up and run your environment:
 
    #. Give your environment a name.
 
-   #. Choose a :ref:`tier <cloud_glossary_tier>` to define the size in bytes of the indexed events. You can use this `estimation tool <https://wazuh.com/cloud/#pricing>`_ to calculate the Wazuh Cloud data tier.
-   
-      .. note:: During the 14-day trial period, the tier limit is 100GB. Then, after your first payment, the full tier becomes unlocked. For testing purposes, 100 GB is more than enough to get an insight into Wazuh Cloud.
-
    #. Select the :ref:`region <cloud_glossary_region>` where your environment gets hosted. If you are not sure what to pick, select one that is the closest to your location since this typically reduces latency for indexing and search requests.
 
-   #. Choose the support plan that best suits your needs. 
+   #. Fill in the use case. This information helps us understand why our users are utilizing our service, allowing us to improve it accordingly.
 
-   #. Complete your user profile. This step is only shown when there is missing information on your profile. 
+   #. Select the desired settings. To simplify the process, we have prepared three predefined sets of settings called "profiles": *Small*, *Medium*, and *Large*. If none of these profiles meet your requirements, you can always click on *Custom* and configure your settings individually. To learn more about the settings and their functionality, visit this section (**link1 ToDo**).
    
-      To edit your user profile information, see the :ref:`Edit user settings <cloud_user_settings>` section.
+      .. note:: During the 14-day trial period, certain settings are limited. Then, after the first payment, all restrictions are unlocked. These limitations are more than enough to get an insight into Wazuh Cloud.
 
-#. Click **View the summary** and then **Create** to build your environment. This process might take a moment.
+   #. Choose between monthly or annual payments. If you select the monthly option, you will be billed on a monthly basis, whereas the annual option entails a single payment per year.
+
+#. Click on **Start your free trial** to build your environment. This process might take a moment.
 
 Once the environment is ready, you can :ref:`access the Wazuh WUI <cloud_wui_access>`  and register the agents. 
 

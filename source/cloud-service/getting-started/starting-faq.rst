@@ -21,13 +21,19 @@ Cloud service FAQ
   
 - `Is it PCI DDS compliant?`_
 
+- `Is it SOC 2 compliant?`_
+
 - `How can I get support?`_
 
 - `Where is Wazuh Cloud hosted?`_
 
+- `What is a profile?`_
+
+- `What is a setting?`_
+
 - `What is a tier?`_
 
-- `What happens if the tier limit is reached?`_
+- `What happens if the tier limit or indexed data size setting is reached?`_
 
 - `Can I cancel at any time?`_  
 
@@ -54,6 +60,11 @@ Is it PCI DDS compliant?
 
 Yes, the Wazuh Cloud platform is validated as PCI DSS Level 1 Service Provider compliant.
 
+Is it SOC 2 compliant?
+----------------------
+
+Yes, the Wazuh Cloud platform is compliant with SOC 2 standards.
+
 .. _cloud_getting-started_support:
 
 How can I get support?
@@ -66,15 +77,25 @@ Where is Wazuh Cloud hosted?
 
 Wazuh Cloud is hosted on Amazon Web Services (AWS).
 
+What is a profile?
+------------------
+
+A profile refers to a predefined set of settings that you can choose from when configuring your Wazuh Cloud environment. We have three profiles available: Small, Medium, and Large. These profiles are designed to simplify the process by providing preconfigured settings that cater to different needs and requirements. If none of the predefined profiles meet your specific requirements, you can configure your settings individually.
+
+What is a setting?
+------------------
+
+A setting in the context of Wazuh Cloud refers to each of the configuration options available for a cloud environment. These settings determine the limitations and capabilities of an environment. For example, the "Active Agents" setting specifies the maximum number of active agents allowed in your environment. It's important to note that the settings chosen for an environment directly impact its pricing, as they affect the resources allocated and functionalities available.
+
 What is a tier?
 ---------------
 
-The tier is the size limitation, in bytes, of the hot storage.
+The concept of a tier, which represents the size limitation, in bytes, of the hot storage, is no longer used. It has been replaced by the *indexed data size* setting.
 
-What happens if the tier limit is reached?
-------------------------------------------
+What happens if the tier limit or indexed data size setting is reached?
+-----------------------------------------------------------------------
 
-The oldest events are removed from your index when the tier limit is reached. This data is available in cold storage for you to access. See the :ref:`Cold storage <cloud_your_environment_accessing_cold_storage>` section to learn more about data logging and storage.
+When the tier limit or indexed data size setting is reached, the oldest events will be automatically removed from your index. This data is available in cold storage for you to access. See the :ref:`Cold storage <cloud_your_environment_accessing_cold_storage>` section to learn more about data logging and storage.
 
 Can I cancel at any time?
 -------------------------
