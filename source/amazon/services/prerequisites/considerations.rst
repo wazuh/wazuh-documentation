@@ -227,7 +227,7 @@ The following is an example of a valid configuration.
 Enabling dashboard visualization  
 --------------------------------
   
-After finishing the configuration, you can activate the corresponding Security Information Management module on the Wazuh Dashboard. This will offer you more information and insights about events, as shown in the screenshot below.
+You can activate the corresponding Security Information Management module on the Wazuh Dashboard. This module provides additional details and insights about events, as shown in the screenshots below.
 
     .. thumbnail:: /images/aws/aws-dashboard.png
        :title: Amazon AWS dashboard
@@ -241,7 +241,7 @@ After finishing the configuration, you can activate the corresponding Security I
        :align: center
        :width: 80%
 
-To activate the **Amazon AWS** module, navigate to your Wazuh Dashboard and click on **Wazuh > Settings > Modules**. One on the Security Information Management, you can start the **Amazon AWS** module, as seen in the image below.
+To activate the **Amazon AWS** module, navigate to your Wazuh Dashboard and click on **Wazuh > Settings > Modules**. In the **Security Information Management** section, enable the **Amazon AWS** module as shown in the image below.
 
     .. thumbnail:: /images/aws/aws-module.png
        :title: Amazon AWS module

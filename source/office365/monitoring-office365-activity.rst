@@ -243,9 +243,9 @@ If Wazuh successfully connects to Office 365 API, the events raised above will t
  
 
 Enabling dashboard visualization  
---------------------------------
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-After finishing the configuration, you can activate the corresponding Security Information Management module on the Wazuh Dashboard. This will offer you more information and insights about events, as shown in the screenshot below.
+Once the configuration is complete, you can activate the corresponding Security Information Management module on the Wazuh Dashboard. This module provides additional details and insights about events, as shown in the screenshots below.
 
     .. thumbnail:: /images/office365/office365-dashboard.png
        :title: Office 365 dashboard
@@ -259,7 +259,7 @@ After finishing the configuration, you can activate the corresponding Security I
        :align: center
        :width: 80%
 
-To activate the **Office 365** module, navigate to your Wazuh Dashboard and click on **Wazuh > Settings > Modules**. One on the Security Information Management, you can start the **Office 365** module, as seen in the image below.
+To activate the **Office 365** module, navigate to your Wazuh Dashboard and click on **Wazuh > Settings > Modules**. In the **Security Information Management** section, enable the **Office 365** module as shown in the image below.
 
     .. thumbnail:: /images/office365/office365-module.png
        :title: Office 365 module

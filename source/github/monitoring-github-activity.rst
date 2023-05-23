@@ -141,9 +141,9 @@ If Wazuh successfully connects to GitHub, the events raised above will trigger t
     
 
 Enabling dashboard visualization  
---------------------------------
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-After finishing the configuration, you can activate the  corresponding Security Information Management module on the Wazuh Dashboard. This will offer you more information and insights about events, as shown in the screenshot below.
+You can activate the corresponding Security Information Management module on the Wazuh Dashboard. This module provides additional details and insights about events, as shown in the screenshots below.
 
     .. thumbnail:: /images/github/github-dashboard.png
        :title: GitHub dashboard
@@ -157,7 +157,7 @@ After finishing the configuration, you can activate the  corresponding Security 
        :align: center
        :width: 80%
 
-To activate the **GitHub** module, navigate to your Wazuh Dashboard and click on **Wazuh > Settings > Modules**. One on the Security Information Management, you can start the **GitHub** module, as seen in the image below.
+To activate the **GitHub** module, navigate to your Wazuh Dashboard and click on **Wazuh > Settings > Modules**. In the **Security Information Management** section, enable the **GitHub** module as shown in the image below.
 
     .. thumbnail:: /images/github/github-module.png
        :title: GitHub module
