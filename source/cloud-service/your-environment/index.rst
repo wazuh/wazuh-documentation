@@ -16,6 +16,7 @@ Learn more about your environment in the below sections.
       :maxdepth: 1
 	      
       manage-auth
+      settings
       cancel-environment
       monitor-environment-usage
       send-syslog-data
