@@ -160,7 +160,42 @@ redirections.push(
       '4.3': '/user-manual/capabilities/wazuh-logtest/logtest-faq.html',
       '4.4': '/user-manual/ruleset/testing.html',
     },
-);
+    {
+      'target': ['4.3=>4.4', '4.4=>4.3'],
+      '4.3': '/user-manual/capabilities/syscollector.html',
+      '4.4': '/user-manual/capabilities/system-inventory/index.html',
+    },
+    {
+      'target': ['4.3=>4.4', '4.4=>4.3'],
+      '4.3': '/user-manual/capabilities/syscollector.html#how-it-works',
+      '4.4': '/user-manual/capabilities/system-inventory/how-it-works.html',
+    },
+    {
+      'target': ['4.3=>4.4', '4.4=>4.3'],
+      '4.3': '/user-manual/capabilities/syscollector.html#available-scans',
+      '4.4': '/user-manual/capabilities/system-inventory/available-inventory-fields.html',
+    },
+    {
+      'target': ['4.3=>4.4', '4.4=>4.3'],
+      '4.3': '/user-manual/capabilities/syscollector.html#compatibility-matrix',
+      '4.4': '/user-manual/capabilities/system-inventory/compatibility-matrix.html',
+    },
+    {
+      'target': ['4.3=>4.4', '4.4=>4.3'],
+      '4.3': '/user-manual/capabilities/syscollector.html#using-syscollector-information-to-trigger-alerts',
+      '4.4': '/user-manual/capabilities/system-inventory/using-syscollector-information-to-trigger-alerts.html',
+    },
+    {
+      'target': ['4.3=>4.4', '4.4=>4.3'],
+      '4.3': '/user-manual/capabilities/syscollector.html#use-case-visualize-system-inventory-in-the-wazuh-app',
+      '4.4': '/user-manual/capabilities/system-inventory/viewing-system-inventory-data.html',
+    },
+    {
+      'target': ['4.4=>4.3'],
+      '4.3': '/user-manual/capabilities/syscollector.html#use-case-visualize-system-inventory-in-the-wazuh-app',
+      '4.4': '/user-manual/capabilities/system-inventory/configuration.html',
+    },
+  );
 
 /* Pages added in 4.4 */
 
