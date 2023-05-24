@@ -123,6 +123,9 @@ This reference also contains a set of default roles and policies that can be imm
     - `Vulnerability`_
         - `vulnerability:read`_
 
+    - `Webhook`_
+        - `event:ingest`_
+
 `Default policies`_
     - `agents_all`_
     - `agents_commands`_
@@ -148,6 +151,7 @@ This reference also contains a set of default roles and policies that can be imm
     - `task_status`_
     - `users_all`_
     - `vulnerability_read`_
+    - `events_ingest`_
 
 `Default roles`_
     - `administrator`_
@@ -673,6 +677,13 @@ vulnerability:run
 
 .. _api_rbac_reference_default_policies:
 
+Webhook
+^^^^^^^
+event:ingest
+~~~~~~~~~~~~
+- :api-ref:`POST /events <operation/api.controllers.event_controller.forward_event>` (`*:*`_)
+
+
 Default policies
 ----------------
 agents_all
@@ -1116,6 +1127,18 @@ Allow running a vulnerability detector scan.
         - '*:*:*'
       effect: allow
 
+events_ingest
+^^^^^^^^^^^^^
+Allow sending events to analysisd.
+
+.. code-block:: yaml
+
+    resourceless:
+      actions:
+        - event:ingest
+      resources:
+        - '*:*:*'
+      effect: allow
 
 .. _api_rbac_reference_default_roles:
 
