@@ -14,9 +14,17 @@ Technical FAQ
 
 - `What happens if the tier limit is reached?`_
 
-- `Can I move data from cold to hot storage?`_
+- `What happens if indexed data size setting is reached?`_
+
+- `Can I index the archived data again?`_
 
 - `What if I need to change the size of my tier?`_
+
+- `What if I need to upgrade or downgrade a setting?`_
+
+- `What happens if active agents setting is reached?`_
+
+- `What happens if data ingestion rate setting is reached?`_
 
 - `How do I get SSH access to my environment?`_
 
@@ -51,17 +59,38 @@ It is possible to get a new URL by opening a support ticket through the **Help**
 What happens if the tier limit is reached?
 ------------------------------------------
 
-When the tier limit is reached, the oldest events are removed from your index. This data is available in cold storage for you to access. To learn more about data logging and storage, see the :ref:`Cold storage <cloud_your_environment_accessing_cold_storage>` section.
+See What happens if indexed data size setting is reached?.
 
-Can I move data from cold to hot storage?
------------------------------------------
+What happens if indexed data size setting is reached?
+-----------------------------------------------------
 
-It is possible to download the data from the cold storage and reindex it into your local environments, but at this moment it is not possible to reindex it in your cloud environment.
+When indexed data size setting is reached, the oldest events will be automatically removed from your index. This data is available in cold storage for you to access. See the :ref:`Cold storage <cloud_your_environment_accessing_cold_storage>` section to learn more about data logging and storage.
+
+Can I index the archived data again?
+------------------------------------
+
+It is possible to download the data from the archived data and reindex it into your local environments, but at this moment it is not possible to reindex it in your cloud environment.
 
 What if I need to change the size of my tier?
 ---------------------------------------------
 
-You can upgrade or downgrade the tier by contacting the Wazuh team through the **Help** section of your Wazuh Cloud Console.
+See What if I need to upgrade or downgrade a setting?.
+
+What if I need to upgrade or downgrade a setting?
+-------------------------------------------------
+
+You can upgrade or downgrade a setting by contacting the Wazuh team through the **Help** section of your Wazuh Cloud Console. See also "Adjusting environment settings".
+
+What happens if active agents setting is reached?
+-------------------------------------------------
+
+If the maximum number of active agents is reached, the environment may start to malfunction, causing instability with agent connections. While the system can tolerate temporarily exceeding the limit of active agents, appropriate measures will be taken if the situation persists.
+
+What happens if data ingestion rate setting is reached?
+-------------------------------------------------------
+
+If the EPS limit is exceeded, events will start to be queued. However, if the queue becomes full, the incoming events will be discarded, which may lead to potential event loss. The queuing mechanism is automatically managed by the cloud service, ensuring optimal resource utilization.
+
 
 How do I get SSH access to my environment?
 ------------------------------------------

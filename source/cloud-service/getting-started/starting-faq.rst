@@ -33,7 +33,9 @@ Cloud service FAQ
 
 - `What is a tier?`_
 
-- `What happens if the tier limit or indexed data size setting is reached?`_
+- `What happens if the tier limit is reached?`_
+
+- `What happens if indexed data size setting is reached?`_
 
 - `Can I cancel at any time?`_  
 
@@ -92,10 +94,15 @@ What is a tier?
 
 The concept of a tier, which represents the size limitation, in bytes, of the hot storage, is no longer used. It has been replaced by the *indexed data size* setting.
 
-What happens if the tier limit or indexed data size setting is reached?
------------------------------------------------------------------------
+What happens if the tier limit is reached?
+------------------------------------------
 
-When the tier limit or indexed data size setting is reached, the oldest events will be automatically removed from your index. This data is available in cold storage for you to access. See the :ref:`Cold storage <cloud_your_environment_accessing_cold_storage>` section to learn more about data logging and storage.
+See What happens if indexed data size setting is reached?.
+
+What happens if indexed data size setting is reached?
+-----------------------------------------------------
+
+When indexed data size setting is reached, the oldest events will be automatically removed from your index. This data is available in cold storage for you to access. See the :ref:`Cold storage <cloud_your_environment_accessing_cold_storage>` section to learn more about data logging and storage.
 
 Can I cancel at any time?
 -------------------------
