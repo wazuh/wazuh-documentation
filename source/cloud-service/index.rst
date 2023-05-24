@@ -22,7 +22,7 @@ Learn more about Wazuh Cloud in the below sections.
    getting-started/index
    your-environment/index
    account-billing/index
-   cold-storage/index
+   archived-data/index
    apis/index
    cli/index
    glossary
