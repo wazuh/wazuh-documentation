@@ -93,3 +93,332 @@ Wazuh dashboard
       :alt: See the events on Discovery
       :align: center
       :width: 80%
+
+Use case: Detecting signed binary proxy execution
+-------------------------------------------------
+
+Signed binary proxy execution is a technique threat actors use to bypass application whitelisting by using trusted binaries to run malicious code. This technique is identified as ``T1218.010`` based on the MITRE ATT&CK framework. In this use case, we abuse the Windows utility, ``regsvr32.exe`` to bypass application controls. We then analyze events in the Wazuh archives to detect suspicious activity related to this technique.
+
+Configuration
+^^^^^^^^^^^^^
+
+Perform the steps below to install Sysmon and Atomic Red Team (ART) on a Windows 11 endpoint and emulate the signed binary proxy execution technique. 
+
+Windows 11
+~~~~~~~~~~
+
+Sysmon integration
+""""""""""""""""""
+
+Perform the steps below to install and configure Sysmon on the Windows 11 endpoint.
+
+#. Download Sysmon from the `Microsoft Sysinternals page <https://docs.microsoft.com/en-us/sysinternals/downloads/sysmon>`_.
+
+#. Download the Sysmon configuration file: `sysmonconfig.xml <https://wazuh.com/resources/blog/detecting-process-injection-with-wazuh/sysmonconfig.xml>`_.
+
+#. Install Sysmon with the downloaded configuration file using PowerShell as administrator:
+
+   .. code-block:: powershell
+
+      > .\sysmon64.exe -accepteula -i .\sysmonconfig.xml 
+
+#. Add the following configuration within the ``<ossec_config>`` block to the Wazuh agent ``C:\Program Files (x86)\ossec-agent\ossec.conf`` file to specify the location to collect Sysmon logs:
+
+   .. code-block:: html
+
+      <localfile>
+        <location>Microsoft-Windows-Sysmon/Operational</location>
+        <log_format>eventchannel</log_format>
+      </localfile>
+
+#. Restart the Wazuh agent to apply the changes by running the following PowerShell command as an administrator:
+
+   .. code-block:: powershell
+
+      > Restart-Service -Name Wazuh
+
+Atomic Red Team installation
+""""""""""""""""""""""""""""
+
+Perform the following steps to install the Atomic Red Team PowerShell module on a Windows 11 endpoint using PowerShell as an administrator.
+
+#. By default, PowerShell restricts the execution of running scripts. Run the command below to change the default execution policy to ``RemoteSigned``:
+
+   .. code-block:: powershell
+
+      > Set-ExecutionPolicy RemoteSigned
+
+#. Install the ART execution framework:
+
+   .. code-block:: powershell
+
+      > IEX (IWR 'https://raw.githubusercontent.com/redcanaryco/invoke-atomicredteam/master/install-atomicredteam.ps1' -UseBasicParsing);
+      > Install-AtomicRedTeam -getAtomics
+
+#. Import the ART module to use ``Invoke-AtomicTest`` function:
+
+   .. code-block:: powershell
+
+      > Import-Module "C:\AtomicRedTeam\invoke-atomicredteam\Invoke-AtomicRedTeam.psd1" -Force
+
+#. Use ``Invoke-AtomicTest`` function to show details of the technique ``T1218.010``:
+
+   .. code-block:: powershell
+
+      > Invoke-AtomicTest T1218.010 -ShowDetailsBrief
+
+   .. code-block:: console
+      :class: output
+
+      PathToAtomicsFolder = C:\AtomicRedTeam\atomics
+      
+      T1218.010-1 Regsvr32 local COM scriptlet execution
+      T1218.010-2 Regsvr32 remote COM scriptlet execution
+      T1218.010-3 Regsvr32 local DLL execution
+      T1218.010-4 Regsvr32 Registering Non DLL
+      T1218.010-5 Regsvr32 Silent DLL Install Call DllRegisterServer
+
+Attack emulation
+^^^^^^^^^^^^^^^^
+
+We emulate the signed binary proxy execution technique on the Windows 11 endpoint.
+
+Run the command below with Powershell as an administrator to perform the T1218.010 test:
+
+   .. code-block:: powershell
+
+      > Invoke-AtomicTest T1218.010
+
+   .. code-block:: console
+      :class: output
+
+      PathToAtomicsFolder = C:\AtomicRedTeam\atomics
+      
+      Executing test: T1218.010-1 Regsvr32 local COM scriptlet execution
+      Done executing test: T1218.010-1 Regsvr32 local COM scriptlet execution
+      Executing test: T1218.010-2 Regsvr32 remote COM scriptlet execution
+      Done executing test: T1218.010-2 Regsvr32 remote COM scriptlet execution
+      Executing test: T1218.010-3 Regsvr32 local DLL execution
+      Done executing test: T1218.010-3 Regsvr32 local DLL execution
+      Executing test: T1218.010-4 Regsvr32 Registering Non DLL
+      Done executing test: T1218.010-4 Regsvr32 Registering Non DLL
+      Executing test: T1218.010-5 Regsvr32 Silent DLL Install Call DllRegisterServer
+      Done executing test: T1218.010-5 Regsvr32 Silent DLL Install Call DllRegisterServer
+
+Several calculator instances will pop-up after a successful execution of the exploit.
+
+
+Wazuh dashboard
+^^^^^^^^^^^^^^^^
+
+We use the Wazuh archives to query and display events related to the technique being hunted. It is important to note that while consulting the archives, some events might already be captured as alerts on the Wazuh dashboard. You can utilize information from the Wazuh archives, including alerts and events that have no detection to create customized rulesets based on your specific requirements.
+
+#. Apply a time range filter to view events that occurred within the last five minutes of when the test was performed. Filter to view logs from the specific Windows endpoint using ``agent.id``, ``agent.ip`` or ``agent.name``. 
+
+   .. thumbnail:: /images/manual/wazuh-archives/detecting-signed-binary-proxy-execution-1.png
+      :title: Review recent events. Filter information using agent name, ID or IP address. 
+      :alt: Review recent events. Filter information using agent name, ID or IP address.
+      :align: center
+      :width: 80%
+
+   We can see a number of hits that can be investigated to determine a correlation with the attack emulation carried out earlier. For example, we can see a calculator spawning event like the one observed on the Windows endpoint when carrying out the test.
+
+   .. thumbnail:: /images/manual/wazuh-archives/detecting-signed-binary-proxy-execution-2.png
+      :title: See a calculator spawning event
+      :alt: See a calculator spawning event
+      :align: center
+      :width: 80%
+
+#. Type regsvr32 in the search bar to streamline and investigate events related to the ``regsvr32`` utility. 
+
+   .. thumbnail:: /images/manual/wazuh-archives/detecting-signed-binary-proxy-execution-3.png
+      :title: Search for regsvr32
+      :alt: Search for regsvr32
+      :align: center
+      :width: 80%
+
+#. Expand any of the events to view their associated fields.
+
+   .. thumbnail:: /images/manual/wazuh-archives/detecting-signed-binary-proxy-execution-4.png
+      :title: Expand any of the events to view their associated fields
+      :alt: Expand any of the events to view their associated fields
+      :align: center
+      :width: 80%
+
+#. Click on the **JSON** tab to view the JSON format of the archived logs.
+
+   .. thumbnail:: /images/manual/wazuh-archives/detecting-signed-binary-proxy-execution-5.png
+      :title: JSON format of the archived logs
+      :alt: JSON format of the archived logs
+      :align: center
+      :width: 80%
+
+   We can extract and confirm specific details on the activities like commands, services, paths, and more from the JSON log.
+   Below we have identified the initial process creation and the attributes to the command executed:
+
+   .. code-block:: console
+      :emphasize-lines: 10, 35
+
+      "data": {
+            "win": {
+              "eventdata": {
+                "originalFileName": "REGSVR32.EXE",
+                "image": "C:\\\\Windows\\\\SysWOW64\\\\regsvr32.exe",
+                "product": "Microsoft® Windows® Operating System",
+                "parentProcessGuid": "{45cd4aff-35fc-6463-6903-000000001300}",
+                "description": "Microsoft(C) Register Server",
+                "logonGuid": "{45cd4aff-2ce5-6463-2543-290000000000}",
+                "parentCommandLine": "C:\\\\Windows\\\\system32\\\\regsvr32.exe  /s /i C:\\\\AtomicRedTeam\\\\atomics\\\\T1218.010\\\\bin\\\\AllTheThingsx86.dll",
+                "processGuid": "{45cd4aff-35fc-6463-6a03-000000001300}",
+                "logonId": "0x294325",
+                "parentProcessId": "7652",
+                "processId": "4064",
+                "currentDirectory": "C:\\\\Users\\\\THECOT~1\\\\AppData\\\\Local\\\\Temp\\\\",
+                "utcTime": "2023-05-16 07:51:24.512",
+                "hashes": "SHA1=8E2C6B7F92A560E0E856F8533D62A1B10797828F,MD5=5F7264BD237FAEA46FB240785B78AFAC,SHA256=D9BE711BE2BF88096BB91C25DF775D90B964264AB25EC49CF04711D8C1F089F6,IMPHASH=73F03653209E82368127EB826216A6AD",
+                "parentImage": "C:\\\\Windows\\\\System32\\\\regsvr32.exe",
+                "ruleName": "technique_id=T1117,technique_name=Regsvr32",
+                "company": "Microsoft Corporation",
+                "commandLine": "  /s /i C:\\\\AtomicRedTeam\\\\atomics\\\\T1218.010\\\\bin\\\\AllTheThingsx86.dll",
+                "integrityLevel": "High",
+                "fileVersion": "10.0.22621.1 (WinBuild.160101.0800)",
+                "user": "Windows11\\\\Testuser",
+                "terminalSessionId": "2",
+                "parentUser": "Windows11\\\\Testuser"
+              },
+              "system": {
+                "eventID": "1",
+                "keywords": "0x8000000000000000",
+                "providerGuid": "{5770385f-c22a-43e0-bf4c-06f5698ffbd9}",
+                "level": "4",
+                "channel": "Microsoft-Windows-Sysmon/Operational",
+                "opcode": "0",
+                "message": "\"Process Create:\r\nRuleName: technique_id=T1117,technique_name=Regsvr32\r\nUtcTime: 2023-05-16 07:51:24.512\r\nProcessGuid: {45cd4aff-35fc-6463-6a03-000000001300}\r\nProcessId: 4064\r\nImage: C:\\Windows\\SysWOW64\\regsvr32.exe\r\nFileVersion: 10.0.22621.1 (WinBuild.160101.0800)\r\nDescription: Microsoft(C) Register Server\r\nProduct: Microsoft® Windows® Operating System\r\nCompany: Microsoft Corporation\r\nOriginalFileName: REGSVR32.EXE\r\nCommandLine:   /s /i C:\\AtomicRedTeam\\atomics\\T1218.010\\bin\\AllTheThingsx86.dll\r\nCurrentDirectory: C:\\Users\\THECOT~1\\AppData\\Local\\Temp\\\r\nUser: Windows11\\Testuser\r\nLogonGuid: {45cd4aff-2ce5-6463-2543-290000000000}\r\nLogonId: 0x294325\r\nTerminalSessionId: 2\r\nIntegrityLevel: High\r\nHashes: SHA1=8E2C6B7F92A560E0E856F8533D62A1B10797828F,MD5=5F7264BD237FAEA46FB240785B78AFAC,SHA256=D9BE711BE2BF88096BB91C25DF775D90B964264AB25EC49CF04711D8C1F089F6,IMPHASH=73F03653209E82368127EB826216A6AD\r\nParentProcessGuid: {45cd4aff-35fc-6463-6903-000000001300}\r\nParentProcessId: 7652\r\nParentImage: C:\\Windows\\System32\\regsvr32.exe\r\nParentCommandLine: C:\\Windows\\system32\\regsvr32.exe  /s /i C:\\AtomicRedTeam\\atomics\\T1218.010\\bin\\AllTheThingsx86.dll\r\nParentUser: Windows11\\Testuser\"",
+                "version": "5",
+                "systemTime": "2023-05-16T07:51:24.5131006Z",
+                "eventRecordID": "88509",
+                "threadID": "3960",
+                "computer": "Windows11",
+                "task": "1",
+                "processID": "3156",
+                "severityValue": "INFORMATION",
+                "providerName": "Microsoft-Windows-Sysmon"
+              }
+            }
+          },
+      
+   Carrying out further investigations on other related events, we can see a process injection event created by ``regsvr32`` utility and the image loaded:
+
+   .. code-block:: console
+      :emphasize-lines: 8, 28
+
+      "data": {
+            "win": {
+              "eventdata": {
+                "originalFileName": "mscoree.dll",
+                "image": "C:\\\\Windows\\\\SysWOW64\\\\regsvr32.exe",
+                "product": "Microsoft® Windows® Operating System",
+                "signature": "Microsoft Windows",
+                "imageLoaded": "C:\\\\Windows\\\\SysWOW64\\\\mscoree.dll",
+                "description": "Microsoft .NET Runtime Execution Engine",
+                "signed": "true",
+                "signatureStatus": "Valid",
+                "processGuid": "{45cd4aff-35fc-6463-6a03-000000001300}",
+                "processId": "4064",
+                "utcTime": "2023-05-16 07:51:24.774",
+                "hashes": "SHA1=52A6AB3E468C4956C00707DF80C7609EEE74D9AD,MD5=BEE4D173DA78E4D3AC9B54A95C6A464A,SHA256=36B0BA10BBB6575CA4A4CBDE585F6E19B86B3A80014B3C3D8335F861D8AEBFAB,IMPHASH=47F306C12509ADBBC266F7DA43529A4D",
+                "ruleName": "technique_id=T1055,technique_name=Process Injection",
+                "company": "Microsoft Corporation",
+                "fileVersion": "10.0.22621.1 (WinBuild.160101.0800)",
+                "user": "Windows11\\\\Testuser"
+              },
+              "system": {
+                "eventID": "7",
+                "keywords": "0x8000000000000000",
+                "providerGuid": "{5770385f-c22a-43e0-bf4c-06f5698ffbd9}",
+                "level": "4",
+                "channel": "Microsoft-Windows-Sysmon/Operational",
+                "opcode": "0",
+                "message": "\"Image loaded:\r\nRuleName: technique_id=T1055,technique_name=Process Injection\r\nUtcTime: 2023-05-16 07:51:24.774\r\nProcessGuid: {45cd4aff-35fc-6463-6a03-000000001300}\r\nProcessId: 4064\r\nImage: C:\\Windows\\SysWOW64\\regsvr32.exe\r\nImageLoaded: C:\\Windows\\SysWOW64\\mscoree.dll\r\nFileVersion: 10.0.22621.1 (WinBuild.160101.0800)\r\nDescription: Microsoft .NET Runtime Execution Engine\r\nProduct: Microsoft® Windows® Operating System\r\nCompany: Microsoft Corporation\r\nOriginalFileName: mscoree.dll\r\nHashes: SHA1=52A6AB3E468C4956C00707DF80C7609EEE74D9AD,MD5=BEE4D173DA78E4D3AC9B54A95C6A464A,SHA256=36B0BA10BBB6575CA4A4CBDE585F6E19B86B3A80014B3C3D8335F861D8AEBFAB,IMPHASH=47F306C12509ADBBC266F7DA43529A4D\r\nSigned: true\r\nSignature: Microsoft Windows\r\nSignatureStatus: Valid\r\nUser: Windows11\\Testuser\"",
+                "version": "3",
+                "systemTime": "2023-05-16T07:51:24.7768916Z",
+                "eventRecordID": "88510",
+                "threadID": "3960",
+                "computer": "Windows11",
+                "task": "7",
+                "processID": "3156",
+                "severityValue": "INFORMATION",
+                "providerName": "Microsoft-Windows-Sysmon"
+              }
+            }
+          },
+
+#. Since we know the specific technique we are hunting, apply the ``data.win.eventdata.ruleName:technique_id=T1218.010,technique_name=Regsvr32`` filter to see the technique ID as shown below.  
+
+   .. thumbnail:: /images/manual/wazuh-archives/detecting-signed-binary-proxy-execution-6.png
+      :title: Search for the T1218.010 technique 
+      :alt: Search for the T1218.010 technique
+      :align: center
+      :width: 80%
+
+#. Expand the event to view its associated fields. 
+
+   .. thumbnail:: /images/manual/wazuh-archives/detecting-signed-binary-proxy-execution-7.png
+      :title: Expand the event to view its associated fields
+      :alt: Expand the event to view its associated fields
+      :align: center
+      :width: 80%
+
+#. Click on the **JSON** tab to view the JSON format of the archived logs.
+
+   .. thumbnail:: /images/manual/wazuh-archives/detecting-signed-binary-proxy-execution-8.png
+      :title: JSON format of the archived logs
+      :alt: JSON format of the archived logs
+      :align: center
+      :width: 80%
+
+   From the below log, you can extract more structured details which makes it easier to analyze the event:
+   
+   .. code-block:: console
+      :emphasize-lines: 14, 26
+
+      "data": {
+            "win": {
+              "eventdata": {
+                "destinationPort": "443",
+                "image": "C:\\\\Windows\\\\System32\\\\regsvr32.exe",
+                "sourcePort": "63754",
+                "initiated": "true",
+                "destinationIp": "1.1.123.23",
+                "protocol": "tcp",
+                "processGuid": "{45cd4aff-36b5-645a-9e07-000000000e00}",
+                "sourceIp": "192.168.43.16",
+                "processId": "4704",
+                "utcTime": "2023-05-09 21:19:25.361",
+                "ruleName": "technique_id=T1218.010,technique_name=Regsvr32",
+                "destinationIsIpv6": "false",
+                "user": "Windows11\\\\Testuser",
+                "sourceIsIpv6": "false"
+              },
+              "system": {
+                "eventID": "3",
+                "keywords": "0x8000000000000000",
+                "providerGuid": "{5770385f-c22a-43e0-bf4c-06f5698ffbd9}",
+                "level": "4",
+                "channel": "Microsoft-Windows-Sysmon/Operational",
+                "opcode": "0",
+                "message": "\"Network connection detected:\r\nRuleName: technique_id=T1218.010,technique_name=Regsvr32\r\nUtcTime: 2023-05-09 21:19:25.361\r\nProcessGuid: {45cd4aff-36b5-645a-9e07-000000000e00}\r\nProcessId: 4704\r\nImage: C:\\Windows\\System32\\regsvr32.exe\r\nUser: Windows11\\Testuser\r\nProtocol: tcp\r\nInitiated: true\r\nSourceIsIpv6: false\r\nSourceIp: 192.168.43.16\r\nSourceHostname: -\r\nSourcePort: 63754\r\nSourcePortName: -\r\nDestinationIsIpv6: false\r\nDestinationIp: 185.199.108.133\r\nDestinationHostname: -\r\nDestinationPort: 443\r\nDestinationPortName: -\"",
+                "version": "5",
+                "systemTime": "2023-05-09T12:04:07.0231156Z",
+                "eventRecordID": "63350",
+                "threadID": "3096",
+                "computer": "Windows11",
+                "task": "3",
+                "processID": "3156",
+                "severityValue": "INFORMATION",
+                "providerName": "Microsoft-Windows-Sysmon"
+              }
+            }
+          },
+
+You can use events from the Wazuh archives to develop detection logic and write custom rules. Users can utilize the out-of-the-box ``wazuh-logtest`` tool to test and verify rules against provided logs. For more information, see the :doc:`wazuh-logtest </user-manual/reference/tools/wazuh-logtest>` documentation.
