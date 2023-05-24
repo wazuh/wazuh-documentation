@@ -92,7 +92,7 @@ A setting in the context of Wazuh Cloud refers to each of the configuration opti
 What is a tier?
 ---------------
 
-The concept of a tier, which represents the size limitation, in bytes, of the hot storage, is no longer used. It has been replaced by the *indexed data size* setting.
+The concept of a tier, which represents the size limitation, in bytes, of the indexed data (formerly known as hot storage), is no longer used. It has been replaced by the *indexed data size* setting.
 
 What happens if the tier limit is reached?
 ------------------------------------------
