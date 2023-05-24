@@ -24,7 +24,7 @@ The agent runs on the endpoint you want to monitor and communicates with the Waz
 
                 .. code-block:: console
     
-                  # echo "WAZUH_MANAGER='10.0.0.2'" > /tmp/wazuh_vars && installer -pkg wazuh-agent-|WAZUH_CURRENT_OSX|-|WAZUH_REVISION_OSX|.pkg -target /
+                  # echo "WAZUH_MANAGER='10.0.0.2'" > /tmp/wazuh_envs && installer -pkg wazuh-agent-|WAZUH_CURRENT_OSX|-|WAZUH_REVISION_OSX|.pkg -target /
     
                 .. note:: For version 4.4.2 and earlier, run the following command instead. Replace ``<WAZUH.VERSION-REV>`` with your package version, such as ``4.4.2-1``.
                    :class: not-long
