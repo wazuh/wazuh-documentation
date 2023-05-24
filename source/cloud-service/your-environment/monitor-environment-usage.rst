@@ -23,29 +23,29 @@ To see metrics of your Wazuh Cloud environment, follow these steps:
 Agents metric
 -------------
 
-The agents metric provides information about the number of agents in different states, including active, disconnected, never connected, and pending. It also displays the limit of active agents, which can be configured through the "active agents" setting.
+The agents metric provides information about the number of agents in different states, including active, disconnected, never connected, and pending. It also displays the limit of active agents, which can be configured through the :ref:`active agents <cloud_settings_active_agents>` setting.
 
-If the number of active agents exceeds the limit, it is highly recommended to upgrade the "active agents" setting to a value that can accommodate your active agents. This ensures smooth operation and stability of your environment.
+If the number of active agents exceeds the limit, it is highly recommended to upgrade the :ref:`active agents <cloud_settings_active_agents>` setting to a value that can accommodate your active agents. This ensures smooth operation and stability of your environment.
 
 Indexed data metric
 -------------------
 
 The indexed data metric presents a histogram that visualizes the usage of indexed data over time. The x-axis represents time, while the y-axis indicates the amount of data in bytes used by your indexed data. Additionally, the metric displays the date of the oldest indexed alert.
 
-This metric allows you to monitor and evaluate if the contracted indexed data size and indexed data time are sufficient for your needs. The environment automatically rotates data when the used bytes exceed the indexed data size or when the date of the alerts surpasses the indexed data time.
+This metric allows you to monitor and evaluate if the contracted :ref:`indexed data size and indexed data time <cloud_settings_indexed_data>` are sufficient for your needs. The environment automatically rotates data when the used bytes exceed the indexed data size or when the date of the alerts surpasses the indexed data time.
 
-For example, if you have contracted 1 year of indexed data time and a year has passed, but the oldest alert metric shows a date that is less than a year ago, it indicates that the environment has rotated data due to exceeding the indexed data size. In this case, we recommend upgrading the setting accordingly.
+For example, if you have contracted 1 year of *indexed data time* and a year has passed, but the oldest alert metric shows a date that is less than a year ago, it indicates that the environment has rotated data due to exceeding the *indexed data size*. In this case, we recommend upgrading the setting accordingly.
 
-Similarly, if the date of the oldest indexed alert is below the indexed data time, and the used bytes are equal to the indexed data size, it signifies that the environment is rotating data.
+Similarly, if the date of the oldest indexed alert is below the *indexed data time*, and the used bytes are equal to the *indexed data size*, it signifies that the environment is rotating data.
 
-By monitoring the indexed data metric, you can ensure that your indexed data storage meets your requirements and take necessary actions, such as upgrading or downgrading the settings, to maintain optimal storage and retention of data.
+By monitoring this metric, you can ensure that your indexed data storage meets your requirements and take necessary actions, such as upgrading or downgrading the settings, to maintain optimal storage and retention of data.
 
 EPS credits metric
 ------------------
 
 The EPS credits metric provides information about the number of credits available for event processing within a specific timeframe. The metric displays the time on the x-axis and the number of EPS credits on the y-axis. These credits are derived from the statistics returned by the Wazuh API's get_daemon_stats endpoint, specifically the WazuhAnalysisdStatsItem.eps.available_credits field.
 
-The number of EPS credits depends on the "data ingestion rate" setting. For example, assuming the setting is configured for 900 EPS, each manager node would have the EPS limit configured as follows:
+The number of EPS credits depends on the :ref:`data ingestion rate <cloud_settings_data_ingestion_rate>` setting. For example, assuming the setting is configured for 900 EPS, each manager node would have the EPS limit configured as follows:
 
 - Timeframe: 10 seconds
 

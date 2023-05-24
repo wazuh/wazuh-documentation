@@ -82,7 +82,7 @@ Wazuh Cloud is hosted on Amazon Web Services (AWS).
 What is a profile?
 ------------------
 
-A profile refers to a predefined set of settings that you can choose from when configuring your Wazuh Cloud environment. We have three profiles available: Small, Medium, and Large. These profiles are designed to simplify the process by providing preconfigured settings that cater to different needs and requirements. If none of the predefined profiles meet your specific requirements, you can configure your settings individually.
+A profile refers to a predefined set of settings that you can choose from when configuring your Wazuh Cloud environment. We have three profiles available: *Small*, *Medium*, and *Large*. These profiles are designed to simplify the process by providing preconfigured settings that cater to different needs and requirements. If none of the predefined profiles meet your specific requirements, you can configure your settings individually.
 
 What is a setting?
 ------------------
@@ -97,12 +97,14 @@ The concept of a tier, which represents the size limitation, in bytes, of the in
 What happens if the tier limit is reached?
 ------------------------------------------
 
-See What happens if indexed data size setting is reached?.
+See :ref:`What happens if indexed data size setting is reached? <cloud_starting_faq_data_reached>`.
+
+.. _cloud_starting_faq_data_reached:
 
 What happens if indexed data size setting is reached?
 -----------------------------------------------------
 
-When indexed data size setting is reached, the oldest events will be automatically removed from your index. This data is available in cold storage for you to access. See the :ref:`Cold storage <cloud_your_environment_accessing_cold_storage>` section to learn more about data logging and storage.
+When *indexed data size* setting is reached, the oldest events will be automatically removed from your index. This data is available in archived data for you to access. See the :ref:`Archived data <cloud_your_environment_accessing_archived_data>` section to learn more about data logging and storage.
 
 Can I cancel at any time?
 -------------------------

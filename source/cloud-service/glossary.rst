@@ -53,7 +53,7 @@ Environment
 
 An environment is a deployment that contains all the Wazuh components ready to use and running on Wazuh Cloud.
 
-.. _cloud_glossary_cold_storage:
+.. _cloud_glossary_archived_data:
 
 Archived data (formerly known as cold storage)
 ----------------------------------------------
@@ -117,7 +117,7 @@ Available regions:
 Wazuh Cloud API
 ---------------
 
-The Wazuh Cloud API is an application programming interface used to interact with Wazuh Cloud. The Wazuh Cloud API is used, for example, to provide access to an environment's cold storage.
+The Wazuh Cloud API is an application programming interface used to interact with Wazuh Cloud. The Wazuh Cloud API is used, for example, to provide access to an environment's archived data.
 
 .. _cloud_glossary_wazuh_cloud_cli:
 

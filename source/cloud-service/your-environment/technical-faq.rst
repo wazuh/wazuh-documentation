@@ -59,12 +59,12 @@ It is possible to get a new URL by opening a support ticket through the **Help**
 What happens if the tier limit is reached?
 ------------------------------------------
 
-See What happens if indexed data size setting is reached?.
+See What happens if *indexed data size* setting is reached?.
 
 What happens if indexed data size setting is reached?
 -----------------------------------------------------
 
-When indexed data size setting is reached, the oldest events will be automatically removed from your index. This data is available in cold storage for you to access. See the :ref:`Cold storage <cloud_your_environment_accessing_cold_storage>` section to learn more about data logging and storage.
+When *indexed data size* setting is reached, the oldest events will be automatically removed from your index. This data is available in archived data for you to access. See the :ref:`Archived data <cloud_your_environment_accessing_archived_data>` section to learn more about data logging and storage.
 
 Can I index the archived data again?
 ------------------------------------
@@ -79,7 +79,7 @@ See What if I need to upgrade or downgrade a setting?.
 What if I need to upgrade or downgrade a setting?
 -------------------------------------------------
 
-You can upgrade or downgrade a setting by contacting the Wazuh team through the **Help** section of your Wazuh Cloud Console. See also "Adjusting environment settings".
+You can upgrade or downgrade a setting by contacting the Wazuh team through the **Help** section of your Wazuh Cloud Console. See also :ref:`Adjusting environment settings <cloud_settings_adjust>`.
 
 What happens if active agents setting is reached?
 -------------------------------------------------
@@ -133,7 +133,7 @@ Elasticsearch API is not accessible by default. If you want to access it, contac
 How can I forward my logs to another solution or SOC?
 -----------------------------------------------------
 
-You can download your data from cold storage. Then, you can push it to other solutions or Security Operations Center (SOC).
+You can download your data from archived data. Then, you can push it to other solutions or Security Operations Center (SOC).
 
 Is my environment shared with other customers?
 ----------------------------------------------

@@ -36,7 +36,7 @@ Follow these steps to quickly set up and run your environment:
 
    #. Fill in the use case. This information helps us understand why our users are utilizing our service, allowing us to improve it accordingly.
 
-   #. Select the desired settings. To simplify the process, we have prepared three predefined sets of settings called "profiles": *Small*, *Medium*, and *Large*. If none of these profiles meet your requirements, you can always click on *Custom* and configure your settings individually. To learn more about the settings and their functionality, see the :doc:`Settings </cloud-service/your-environment/settings>` section.
+   #. Select the desired :ref:`settings <cloud_your_environment_settings>`. To simplify the process, we have prepared three predefined sets of settings called *profiles*: *Small*, *Medium*, and *Large*. If none of these profiles meet your requirements, you can always click on *Custom* and configure your settings individually. To learn more about the settings and their functionality, see the :doc:`Settings </cloud-service/your-environment/settings>` section.
    
       .. note:: During the 14-day trial period, certain settings are limited. Then, after the first payment, all restrictions are unlocked. These limitations are more than enough to get an insight into Wazuh Cloud.
 

@@ -3,7 +3,7 @@
 .. meta::
   :description: Wazuh provides two types of storage for your data: indexed and archived. Learn more about the archived data in this section. 
 
-.. _cloud_cold_storage_format:
+.. _cloud_archived_data_format:
   
 Filename format
 ===============

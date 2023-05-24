@@ -12,7 +12,7 @@ Every cloud environment is configured based on specific settings. These settings
 
 We offer six available settings, including four basic settings and two advanced settings. The advanced settings are automatically calculated based on the basic settings but can be modified if desired.
 
-To monitor the behavior of your environment and check if the configured values of the settings are being reached, see the :doc:`Monitor usage section </cloud-service/your-environment/monitor-environment-usage>`. This section allows you to assess the performance and utilization of your environment, providing valuable insights into its current state.
+To monitor the behavior of your environment and check if the configured values of the settings are being reached, see the :doc:`Monitor usage section </cloud-service/your-environment/monitor-environment-usage>`.
 
 
 Understanding environment settings
@@ -20,12 +20,16 @@ Understanding environment settings
 
 Below, we provide a detailed explanation of each setting.
 
+.. _cloud_settings_active_agents:
+
 Active agents
 ^^^^^^^^^^^^^
 
 This setting defines the maximum number of active agents that the environment can support. Please note that while it is possible to register an unlimited number of agents, the number of active agents is limited by this setting.
 
 If the maximum number of active agents is reached, the environment may start to malfunction, causing instability with agent connections. While the system can tolerate temporarily exceeding the limit of active agents, appropriate measures will be taken if the situation persists.
+
+.. _cloud_settings_indexed_data:
 
 Indexed data
 ^^^^^^^^^^^^
@@ -40,6 +44,9 @@ There are two settings that define the behavior of the indexed data:
 
 Data remains indexed until either the indexed data time or the indexed data size is reached. In other words, once either of the settings' values is reached, data rotation will occur (removing the oldest data) until the settings' conditions are met.
 
+
+.. _cloud_settings_archived_data:
+
 Archived data
 ^^^^^^^^^^^^^
 
@@ -47,10 +54,15 @@ This setting, previously known as cold storage, determines the duration for whic
 
 When the specified time is reached, data outside that time range will be deleted.
 
+
+.. _cloud_support_type:
+
 Support type
 ^^^^^^^^^^^^
 
 This setting indicates whether the support level is premium or standard.
+
+.. _cloud_settings_data_ingestion_rate:
 
 Data ingestion rate
 ^^^^^^^^^^^^^^^^^^^
@@ -65,6 +77,8 @@ The environment will be configured with the `limits eps option <https://document
 - maximum = EPS setting / number of manager nodes
 
 The number of manager nodes is automatically determined by the cloud service based on the workload, with a minimum of two nodes. For instance, if the EPS setting is 900 EPS, and there is a cluster of 2 nodes at the current time, each node will be able to process up to 450 events every 10 seconds.
+
+.. _cloud_settings_adjust:
 
 Adjusting environment settings
 ------------------------------
