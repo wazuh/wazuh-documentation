@@ -55,4 +55,4 @@ Where:
 
 .. note::
 
-   Restart the agent when you make any changes to the configuration file. This will ensure that the changes take effect.
+   Restart the agent when you make any changes to the configuration file. This ensures that the changes take effect.
