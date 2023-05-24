@@ -14,6 +14,8 @@ Billing FAQ
 
 - `Where can I see the next payment for an environment?`_
 
+- `What happens to my payments if I want to upgrade or downgrade a setting?`_
+
 - `How do I view previous receipts and billing history?`_
 
 - `How can I configure who receives receipts and billing notifications?`_
@@ -40,6 +42,11 @@ Where can I see the next payment for an environment?
 ----------------------------------------------------
 
 Go to :doc:`See your billing cycle and history </cloud-service/account-billing/billing-history>` section to learn how to view the billing details of your environments.
+
+What happens to my payments if I want to upgrade or downgrade a setting?
+------------------------------------------------------------------------
+
+If you choose to upgrade a setting, you will need to make an immediate prorated payment. The upgrade will take effect right away, but please note that it results in a higher price for your environment. On the other hand, if you decide to downgrade a setting, the change will be applied in the next billing cycle, and your price will be adjusted accordingly. See Adjusting environment settings.
 
 How do I view previous receipts and billing history?
 ----------------------------------------------------

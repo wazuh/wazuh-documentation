@@ -55,13 +55,13 @@ This setting indicates whether the support level is premium or standard.
 Data ingestion rate
 ^^^^^^^^^^^^^^^^^^^
 
-It represents the maximum number of events per second (EPS) that the environment can accept. This is an advanced setting, and the interface provides a suggestion when selecting the Active agents setting.
+It represents the maximum number of events per second (EPS) that the environment can analyze. This is an advanced setting, and the interface provides a suggestion when selecting the Active agents setting.
 
 If the EPS limit is exceeded, events will start to be queued. However, if the queue becomes full, the incoming events will be discarded, which may lead to potential event loss. The queuing mechanism is automatically managed by the cloud service, ensuring optimal resource utilization.
 
 The environment will be configured with the `limits eps option <https://documentation.wazuh.com/current/user-manual/reference/ossec-conf/global.html#limits>`_  using the following parameters:
 
-- timeframe = 10
+- timeframe = 10 seconds
 - maximum = EPS setting / number of manager nodes
 
 The number of manager nodes is automatically determined by the cloud service based on the workload, with a minimum of two nodes. For instance, if the EPS setting is 900 EPS, and there is a cluster of 2 nodes at the current time, each node will be able to process up to 450 events every 10 seconds.
