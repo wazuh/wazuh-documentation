@@ -212,6 +212,7 @@ newUrls['4.4'] = [
   '/release-notes/release-4-4-0.html',
   '/release-notes/release-4-4-1.html',
   '/release-notes/release-4-4-2.html',
+  '/release-notes/release-4-4-3.html',
   '/nist/index.html',
   '/nist/visualization-and-dashboard.html',
   '/nist/log-data-analysis.html',
