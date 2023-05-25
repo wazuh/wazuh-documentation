@@ -39,10 +39,55 @@ Reference                                                         Description
 `#2218 <https://github.com/wazuh/wazuh-packages/pull/2218>`_      Fixed the installation on macOS by removing calls to launchctl.
 ==============================================================    =============
 
+Wazuh dashboard
+^^^^^^^^^^^^^^^
+
+==============================================================================================================================     =============
+Reference                                                                                                                          Description
+==============================================================================================================================     =============
+`#5481 <https://github.com/wazuh/wazuh-kibana-app/pull/5481>`_ `#5484 <https://github.com/wazuh/wazuh-kibana-app/pull/5484>`_      Fixed command to install the macOS agent on the agent wizard. 
+`#5470 <https://github.com/wazuh/wazuh-kibana-app/pull/5470>`_                                                                     Fixed command to start the macOS agent on the agent wizard.  
+==============================================================================================================================     =============
+
+Wazuh Kibana plugin for Kibana 7.10.2
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+==============================================================================================================================     =============
+Reference                                                                                                                          Description
+==============================================================================================================================     =============
+`#5481 <https://github.com/wazuh/wazuh-kibana-app/pull/5481>`_ `#5484 <https://github.com/wazuh/wazuh-kibana-app/pull/5484>`_      Fixed command to install the macOS agent on the agent wizard. 
+`#5470 <https://github.com/wazuh/wazuh-kibana-app/pull/5470>`_                                                                     Fixed command to start the macOS agent on the agent wizard.  
+==============================================================================================================================     =============
+
+
+Wazuh Kibana plugin for Kibana 7.16.x and 7.17.x
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+==============================================================================================================================     =============
+Reference                                                                                                                          Description
+==============================================================================================================================     =============
+`#5481 <https://github.com/wazuh/wazuh-kibana-app/pull/5481>`_ `#5484 <https://github.com/wazuh/wazuh-kibana-app/pull/5484>`_      Fixed command to install the macOS agent on the agent wizard. 
+`#5470 <https://github.com/wazuh/wazuh-kibana-app/pull/5470>`_                                                                     Fixed command to start the macOS agent on the agent wizard.  
+==============================================================================================================================     =============
+
+Wazuh Splunk app
+^^^^^^^^^^^^^^^^
+
+==============================================================    =============
+Reference                                                         Description
+==============================================================    =============
+`#1407 <https://github.com/wazuh/wazuh-splunk/pull/1407>`_        Fixed macOS agent install and restart command.  
+==============================================================    =============
+
+
 Changelogs
 ----------
 
 More details about these changes are provided in the changelog of each component:
 
 - `wazuh/wazuh <https://github.com/wazuh/wazuh/blob/v4.4.3/CHANGELOG.md>`_
+- `wazuh/wazuh-dashboard <https://github.com/wazuh/wazuh-kibana-app/blob/v4.4.3-2.6.0/CHANGELOG.md>`_
+- `wazuh/wazuh-kibana-app 7.10.2 <https://github.com/wazuh/wazuh-kibana-app/blob/v4.4.3-7.10.2/CHANGELOG.md>`_
+- `wazuh/wazuh-kibana-app 7.17.x <https://github.com/wazuh/wazuh-kibana-app/blob/v4.4.3-7.17.9/CHANGELOG.md>`_
+- `wazuh/wazuh-splunk <https://github.com/wazuh/wazuh-splunk/blob/v4.4.3-8.2/CHANGELOG.md>`_
 - `wazuh/wazuh-packages <https://github.com/wazuh/wazuh-packages/releases/tag/v4.4.3>`_
