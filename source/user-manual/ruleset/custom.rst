@@ -89,7 +89,7 @@ Check out this example on how to create new decoders and rules. The following lo
       .. include:: /_templates/installations/manager/restart_wazuh_manager.rst
 
 Changing an existing rule
----------------------------
+-------------------------
 
 .. warning::
     Changes to any rule file inside the ``/var/ossec/ruleset/rules`` folder are lost in the update process. Use the following procedure to preserve your changes.
