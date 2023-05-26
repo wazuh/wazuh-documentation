@@ -160,7 +160,42 @@ redirections.push(
       '4.3': '/user-manual/capabilities/wazuh-logtest/logtest-faq.html',
       '4.4': '/user-manual/ruleset/testing.html',
     },
-);
+    {
+      'target': ['4.3=>4.4', '4.4=>4.3'],
+      '4.3': '/user-manual/capabilities/syscollector.html',
+      '4.4': '/user-manual/capabilities/system-inventory/index.html',
+    },
+    {
+      'target': ['4.3=>4.4', '4.4=>4.3'],
+      '4.3': '/user-manual/capabilities/syscollector.html#how-it-works',
+      '4.4': '/user-manual/capabilities/system-inventory/how-it-works.html',
+    },
+    {
+      'target': ['4.3=>4.4', '4.4=>4.3'],
+      '4.3': '/user-manual/capabilities/syscollector.html#available-scans',
+      '4.4': '/user-manual/capabilities/system-inventory/available-inventory-fields.html',
+    },
+    {
+      'target': ['4.3=>4.4', '4.4=>4.3'],
+      '4.3': '/user-manual/capabilities/syscollector.html#compatibility-matrix',
+      '4.4': '/user-manual/capabilities/system-inventory/compatibility-matrix.html',
+    },
+    {
+      'target': ['4.3=>4.4', '4.4=>4.3'],
+      '4.3': '/user-manual/capabilities/syscollector.html#using-syscollector-information-to-trigger-alerts',
+      '4.4': '/user-manual/capabilities/system-inventory/using-syscollector-information-to-trigger-alerts.html',
+    },
+    {
+      'target': ['4.3=>4.4', '4.4=>4.3'],
+      '4.3': '/user-manual/capabilities/syscollector.html#use-case-visualize-system-inventory-in-the-wazuh-app',
+      '4.4': '/user-manual/capabilities/system-inventory/viewing-system-inventory-data.html',
+    },
+    {
+      'target': ['4.4=>4.3'],
+      '4.3': '/user-manual/capabilities/syscollector.html#use-case-visualize-system-inventory-in-the-wazuh-app',
+      '4.4': '/user-manual/capabilities/system-inventory/configuration.html',
+    },
+  );
 
 /* Pages added in 4.4 */
 
@@ -179,6 +214,7 @@ newUrls['4.4'] = [
   '/release-notes/release-4-4-0.html',
   '/release-notes/release-4-4-1.html',
   '/release-notes/release-4-4-2.html',
+  '/release-notes/release-4-4-3.html',
   '/nist/index.html',
   '/nist/visualization-and-dashboard.html',
   '/nist/log-data-analysis.html',
@@ -204,6 +240,14 @@ newUrls['4.4'] = [
   '/user-manual/capabilities/file-integrity/use-cases/reporting-file-changes.html',
   '/user-manual/capabilities/file-integrity/use-cases/monitoring-configuration-changes.html',
   '/user-manual/capabilities/file-integrity/windows-registry-monitoring.html',
+  '/user-manual/capabilities/system-inventory/index.html',
+  '/user-manual/capabilities/system-inventory/how-it-works.html',
+  '/user-manual/capabilities/system-inventory/viewing-system-inventory-data.html',
+  '/user-manual/capabilities/system-inventory/generating-system-inventory-reports.html',
+  '/user-manual/capabilities/system-inventory/available-inventory-fields.html',
+  '/user-manual/capabilities/system-inventory/compatibility-matrix.html',
+  '/user-manual/capabilities/system-inventory/using-syscollector-information-to-trigger-alerts.html',
+  '/user-manual/capabilities/system-inventory/configuration.html',
   '/user-manual/capabilities/system-calls-monitoring/use-cases/index.html',
   '/user-manual/capabilities/system-calls-monitoring/use-cases/monitoring-file-and-directory-access.html',
   '/user-manual/capabilities/system-calls-monitoring/use-cases/monitoring-commands-run-as-root.html',
@@ -242,7 +286,8 @@ removedUrls['4.4'] = [
   '/user-manual/capabilities/auditing-whodata/index.html',
   '/user-manual/capabilities/auditing-whodata/who-linux.html',
   '/user-manual/capabilities/auditing-whodata/who-windows.html',
-  '/user-manual/capabilities/auditing-whodata/who-windows-policies.html',    
+  '/user-manual/capabilities/auditing-whodata/who-windows-policies.html',  
+  '/user-manual/capabilities/syscollector.html',  
 ];
 
   /* *** RELEASE 4.3 ****/
