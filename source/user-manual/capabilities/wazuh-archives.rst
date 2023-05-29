@@ -6,7 +6,7 @@
 Wazuh archives
 ==============
 
-The Wazuh archives refer to the storage files created by the Wazuh server that contain logs, alerts, and other security-related data collected from monitored endpoints. Wazuh archives are useful for threat hunting, as security teams use archived logs to review historical data of security incidents, analyze trends, and generate reports.
+The Wazuh archives refer to the storage files created by the Wazuh server that contain logs, alerts, and other security-related data collected from monitored endpoints. Wazuh archives store all events received by the Wazuh server, whether or not they trip a rule. Wazuh archives are useful for threat hunting, as security teams use archived logs to review historical data of security incidents, analyze trends, and generate reports.
 
 By default, Wazuh archives are disabled because they store a large number of logs on the Wazuh server. When enabled, Wazuh archives allow organizations to store and retain security data for compliance and forensic purposes. 
 
@@ -37,7 +37,7 @@ Perform the steps below to enable the Wazuh archives on your Wazuh server.
    
    - ``<logall_json>`` option enables or disables logging of events. When enabled, the Wazuh server stores the events in a JSON format. The allowed values are yes and no.    
 
-   Depending on the format you desire, you can set one or both values of the highlighted fields to yes. However, only the ``<logall_json>yes</logall_json>`` creates an index that can be used to visualize the events on the Wazuh dashboard.
+   Depending on the format you desire, you can set one or both values of the highlighted fields to yes. However, only the ``<logall_json>yes</logall_json>`` option allows you to create an index that can be used to visualize the events on the Wazuh dashboard.
 
 #. Restart the Wazuh manager to apply the configuration changes: 
 
@@ -52,9 +52,7 @@ Perform the steps below to enable the Wazuh archives on your Wazuh server.
 Visualizing the events on the dashboard
 ---------------------------------------
 
-You can use the **Discover** dashboard to view and query events stored in the Wazuh archives.
-
-Perform the following steps to view Wazuh archived events on the **Discover** dashboard.
+You can use the **Discover** dashboard to view and query events stored in the Wazuh archives. To create the indices and view them in the Wazuh dashboard, follow the steps below.  
 
 Wazuh server
 ^^^^^^^^^^^^
@@ -97,18 +95,15 @@ Wazuh dashboard
 Use case: Detecting signed binary proxy execution
 -------------------------------------------------
 
-Signed binary proxy execution is a technique threat actors use to bypass application whitelisting by using trusted binaries to run malicious code. This technique is identified as ``T1218.010`` based on the MITRE ATT&CK framework. In this use case, we abuse the Windows utility, ``regsvr32.exe`` to bypass application controls. We then analyze events in the Wazuh archives to detect suspicious activity related to this technique.
+Signed binary proxy execution is a technique threat actors use to bypass application whitelisting by using trusted binaries to run malicious code. This technique is identified as ``T1218.010`` based on the MITRE ATT&CK framework. In this use case, we show how to abuse the Windows utility, ``regsvr32.exe`` to bypass application controls. We then analyze events in the Wazuh archives to detect suspicious activity related to this technique.
 
-Configuration
-^^^^^^^^^^^^^
+Windows 11 configuration
+^^^^^^^^^^^^^^^^^^^^^^^^
 
 Perform the steps below to install Sysmon and Atomic Red Team (ART) on a Windows 11 endpoint and emulate the signed binary proxy execution technique. 
 
-Windows 11
-~~~~~~~~~~
-
 Sysmon integration
-""""""""""""""""""
+~~~~~~~~~~~~~~~~~~
 
 Perform the steps below to install and configure Sysmon on the Windows 11 endpoint.
 
@@ -116,13 +111,13 @@ Perform the steps below to install and configure Sysmon on the Windows 11 endpoi
 
 #. Download the Sysmon configuration file: `sysmonconfig.xml <https://wazuh.com/resources/blog/detecting-process-injection-with-wazuh/sysmonconfig.xml>`_.
 
-#. Install Sysmon with the downloaded configuration file using PowerShell as administrator:
+#. Install Sysmon with the downloaded configuration file using PowerShell as an administrator:
 
    .. code-block:: powershell
 
       > .\sysmon64.exe -accepteula -i .\sysmonconfig.xml 
 
-#. Add the following configuration within the ``<ossec_config>`` block to the Wazuh agent ``C:\Program Files (x86)\ossec-agent\ossec.conf`` file to specify the location to collect Sysmon logs:
+#. Add the following configuration within the ``<ossec_config>`` block to the Wazuh agent configuration file ``C:\Program Files (x86)\ossec-agent\ossec.conf`` to specify the location for collecting Sysmon logs:
 
    .. code-block:: html
 
@@ -138,11 +133,11 @@ Perform the steps below to install and configure Sysmon on the Windows 11 endpoi
       > Restart-Service -Name Wazuh
 
 Atomic Red Team installation
-""""""""""""""""""""""""""""
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 Perform the following steps to install the Atomic Red Team PowerShell module on a Windows 11 endpoint using PowerShell as an administrator.
 
-#. By default, PowerShell restricts the execution of running scripts. Run the command below to change the default execution policy to ``RemoteSigned``:
+#. Run the command below to modify PowerShell default execution policy to ``RemoteSigned``: 
 
    .. code-block:: powershell
 
@@ -155,13 +150,13 @@ Perform the following steps to install the Atomic Red Team PowerShell module on 
       > IEX (IWR 'https://raw.githubusercontent.com/redcanaryco/invoke-atomicredteam/master/install-atomicredteam.ps1' -UseBasicParsing);
       > Install-AtomicRedTeam -getAtomics
 
-#. Import the ART module to use ``Invoke-AtomicTest`` function:
+#. Import the ART module to use the ``Invoke-AtomicTest`` function:
 
    .. code-block:: powershell
 
       > Import-Module "C:\AtomicRedTeam\invoke-atomicredteam\Invoke-AtomicRedTeam.psd1" -Force
 
-#. Use ``Invoke-AtomicTest`` function to show details of the technique ``T1218.010``:
+#. Use the ``Invoke-AtomicTest`` function to show details of the ``T1218.010`` technique:
 
    .. code-block:: powershell
 
@@ -181,9 +176,9 @@ Perform the following steps to install the Atomic Red Team PowerShell module on 
 Attack emulation
 ^^^^^^^^^^^^^^^^
 
-We emulate the signed binary proxy execution technique on the Windows 11 endpoint.
+Emulate the signed binary proxy execution technique on the Windows 11 endpoint.
 
-Run the command below with Powershell as an administrator to perform the T1218.010 test:
+#. Run the command below with Powershell as an administrator to perform the T1218.010 test:
 
    .. code-block:: powershell
 
@@ -211,7 +206,7 @@ Several calculator instances will pop-up after a successful execution of the exp
 Wazuh dashboard
 ^^^^^^^^^^^^^^^^
 
-We use the Wazuh archives to query and display events related to the technique being hunted. It is important to note that while consulting the archives, some events might already be captured as alerts on the Wazuh dashboard. You can utilize information from the Wazuh archives, including alerts and events that have no detection to create customized rulesets based on your specific requirements.
+Use the Wazuh archives to query and display events related to the technique being hunted. It's important to note that while consulting the archives, some events might already be captured as alerts on the Wazuh dashboard. You can use information from the Wazuh archives, including alerts and events that have no detection to create custom rules based on your specific requirements.
 
 #. Apply a time range filter to view events that occurred within the last five minutes of when the test was performed. Filter to view logs from the specific Windows endpoint using ``agent.id``, ``agent.ip`` or ``agent.name``. 
 
@@ -221,7 +216,7 @@ We use the Wazuh archives to query and display events related to the technique b
       :align: center
       :width: 80%
 
-   We can see a number of hits that can be investigated to determine a correlation with the attack emulation carried out earlier. For example, we can see a calculator spawning event like the one observed on the Windows endpoint when carrying out the test.
+   You can see a several hits that you can investigate to determine a correlation with the earlier attack emulation. For instance, you may notice a calculator spawning event similar to the one observed on the Windows endpoint during the test.
 
    .. thumbnail:: /images/manual/wazuh-archives/detecting-signed-binary-proxy-execution-2.png
       :title: See a calculator spawning event
@@ -229,7 +224,7 @@ We use the Wazuh archives to query and display events related to the technique b
       :align: center
       :width: 80%
 
-#. Type regsvr32 in the search bar to streamline and investigate events related to the ``regsvr32`` utility. 
+#. Type ``regsvr32`` in the search bar to streamline and investigate events related to the ``regsvr32`` utility. 
 
    .. thumbnail:: /images/manual/wazuh-archives/detecting-signed-binary-proxy-execution-3.png
       :title: Search for regsvr32
@@ -253,8 +248,8 @@ We use the Wazuh archives to query and display events related to the technique b
       :align: center
       :width: 80%
 
-   We can extract and confirm specific details on the activities like commands, services, paths, and more from the JSON log.
-   Below we have identified the initial process creation and the attributes to the command executed:
+   You can extract and verify specific details on the activities such as commands, services, paths, and more from the JSON log.
+   Below, you can identify the initial process creation and the attributes related to the executed command:
 
    .. code-block:: console
       :emphasize-lines: 10, 35
@@ -307,7 +302,7 @@ We use the Wazuh archives to query and display events related to the technique b
             }
           },
       
-   Carrying out further investigations on other related events, we can see a process injection event created by ``regsvr32`` utility and the image loaded:
+   Carrying out further investigations on other related events, you can see a process injection event created by the ``regsvr32`` utility and the image loaded:
 
    .. code-block:: console
       :emphasize-lines: 8, 28
@@ -353,7 +348,7 @@ We use the Wazuh archives to query and display events related to the technique b
             }
           },
 
-#. Since we know the specific technique we are hunting, apply the ``data.win.eventdata.ruleName:technique_id=T1218.010,technique_name=Regsvr32`` filter to see the technique ID as shown below.  
+#. Apply the ``data.win.eventdata.ruleName:technique_id=T1218.010,technique_name=Regsvr32`` filter to see the technique ID as shown below.  
 
    .. thumbnail:: /images/manual/wazuh-archives/detecting-signed-binary-proxy-execution-6.png
       :title: Search for the T1218.010 technique 
@@ -421,4 +416,4 @@ We use the Wazuh archives to query and display events related to the technique b
             }
           },
 
-You can use events from the Wazuh archives to develop detection logic and write custom rules. Users can utilize the out-of-the-box ``wazuh-logtest`` tool to test and verify rules against provided logs. For more information, see the :doc:`wazuh-logtest </user-manual/reference/tools/wazuh-logtest>` documentation.
+You can use events from the Wazuh archives to develop detection logic and write custom decoders and rules. You can use the out-of-the-box ``wazuh-logtest`` tool to test and verify rules against provided logs. For more information, see the :doc:`Custom rules and decoders </user-manual/ruleset/custom>` and the :doc:`wazuh-logtest </user-manual/reference/tools/wazuh-logtest>` documentation.
