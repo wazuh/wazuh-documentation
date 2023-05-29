@@ -79,3 +79,174 @@ Example customization
 Wazuh has out-of-the-box detection rules that are mapped against relevant MITRE IDs. However, to use Wazuh with MITRE ATT&CK for threat hunting, you can configure custom rules and assign corresponding MITRE ATT&CK IDs according to the number of techniques involved in the attack.
 
 For this example, we require the following infrastructure:
+
++--------------+----------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| Endpoint     | Description                                                                                                                                                          |
++==============+======================================================================================================================================================================+
+| Wazuh server | You can download the `Wazuh OVA <https://packages.wazuh.com/4.x/vm/wazuh-4.4.2.ova>`_ or install it using the :doc:`installation guide </installation-guide/index>`. |
++--------------+----------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| Kali Linux   | This is the attacker endpoint. We use it to perform brute-force attacks against the monitored Ubuntu endpoint.                                                       |
++--------------+----------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| Ubuntu 22.04 || We perform SSH brute-force attacks against this victim endpoint.                                                                                                    |
+|              || It is required to have an SSH server installed and enabled on this endpoint.                                                                                        |
++--------------+----------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+
+Wazuh server
+~~~~~~~~~~~~
+#. Append the following rules to the ``/var/ossec/etc/rules/local_rules.xml`` file:
+
+   .. code-block:: xml
+      :emphasize-lines: 9,14
+
+      <group name="local,syslog,sshd,">
+
+        <rule id="100002" level="5">
+          <if_sid>5710</if_sid>
+          <description>sshd: authentication failed from $(srcip).</description>
+          <group>authentication_failed,pci_dss_10.2.4,pci_dss_10.2.5,</group>
+        </rule>
+
+        <rule id="100003" level="10" frequency="8" timeframe="120" ignore="60">
+          <if_matched_sid>100002</if_matched_sid>
+          <description>sshd: brute force trying to get access to the system.</description>
+          <same_srcip />
+          <mitre>
+            <id>T1110</id>
+          </mitre>
+        </rule>
+
+      </group>
+
+   The rule ``100003`` above creates an alert when eight (8) failed ssh bruteforce events occur on a monitored endpoint from the same IP address. It is mapped to the MITRE ATT&CK ID ``T1110`` which indicates the brute force attack technique.
+
+   When the rule triggers, the alert contains information about the MITRE ATT&CK ID ``T1110``. 
+
+#. Restart the Wazuh manager service to apply the changes:
+
+   .. code-block:: console
+
+      $ sudo systemctl restart wazuh-manager.service 
+
+Kali endpoint
+~~~~~~~~~~~~~
+
+Perform the following steps on the Kali Linux endpoint to launch the brute-force attack.
+
+#. Create a text file, ``pass_list.txt``, with six (6) random passwords in the ``/tmp/`` directory using the following command:
+
+   .. code-block:: console
+
+      $ cat > /tmp/pass_list.txt << EOF
+      X9#fGvK5mZ
+      tR3@LdN6xY
+      sP7#hJ8kQz
+      cF2!nB6jWx
+      dH5#tK9lMq
+      zT6$fR9pXs
+      bG8!mY7wQz
+      nE4&tU2cPq
+      gA1%pD3iSx
+      vW2!rC5oLm
+      EOF
+
+#. Launch the brute-force attack against the Ubuntu endpoint’s SSH service using the following command while replacing ``<UBUNTU_IP>`` with the IP address of the Ubuntu endpoint:
+
+   .. code-block:: console
+
+      $ sudo hydra -l attacker -P /tmp/pass_list.txt <UBUNTU_IP> ssh
+
+Visualize the alerts
+^^^^^^^^^^^^^^^^^^^^
+
+We use filters on the **Security Module > MITRE ATT&CK> Events** tab of the Wazuh dashboard to query for specific MITRE IDs, tactics, or techniques as shown in the figure below.
+
+.. thumbnail:: /images/manual/mitre/visualize-the-alerts.png
+  :title: Visualize the alerts
+  :alt: Visualize the alerts
+  :align: center
+  :width: 80%
+
+.. thumbnail:: /images/manual/mitre/events-filters.png
+  :title: Events filters
+  :alt: Events filters
+  :align: center
+  :width: 80%
+
+Expand the rule ID ``100003`` alert to view the MITRE ID ``T1110`` information.
+
+.. thumbnail:: /images/manual/mitre/mitre-id-t1110-information.png
+  :title: MITRE ID T1110 information
+  :alt: MITRE ID T1110 information
+  :align: center
+  :width: 80%
+
+Click on the **JSON** tab to view the details of the alert in JSON format:
+
+.. code-block:: json
+   :emphasize-lines: 22-32
+
+   {
+     "agent": {
+       "ip": "192.168.121.78",
+       "name": "Ubuntu-22",
+       "id": "003"
+     },
+     "data": {
+       "srcuser": "attacker",
+       "srcip": "192.168.121.127",
+       "srcport": "34890"
+     },
+     "rule": {
+       "firedtimes": 1,
+       "mail": false,
+       "level": 10,
+       "description": "sshd: brute force trying to get access to the system.",
+       "groups": [
+         "local",
+         "syslog",
+         "sshd"
+       ],
+       "mitre": {
+         "technique": [
+           "Brute Force"
+         ],
+         "id": [
+           "T1110"
+         ],
+         "tactic": [
+           "Credential Access"
+         ]
+       },
+       "id": "100003",
+       "frequency": 8
+     },
+     "full_log": "May 22 10:40:41 ubuntu2204 sshd[2908]: Invalid user attacker from 192.168.121.127 port 34890",
+     "id": "1684752043.76892",
+     "timestamp": "2023-05-22T10:40:43.395+0000",
+     "predecoder": {
+       "hostname": "ubuntu2204",
+       "program_name": "sshd",
+       "timestamp": "May 22 10:40:41"
+     },
+     "previous_output": "May 22 10:40:41 ubuntu2204 sshd[2909]: Invalid user attacker from 192.168.121.127 port 34892\nMay 22 10:40:41 ubuntu2204 sshd[2905]: Invalid user attacker from 192.168.121.127 port 34884\nMay 22 10:40:41 ubuntu2204 sshd[2904]: Invalid user attacker from 192.168.121.127 port 34880\nMay 22 10:40:41 ubuntu2204 sshd[2912]: Invalid user attacker from 192.168.121.127 port 34898\nMay 22 10:40:41 ubuntu2204 sshd[2906]: Invalid user attacker from 192.168.121.127 port 34886\nMay 22 10:40:41 ubuntu2204 sshd[2903]: Invalid user attacker from 192.168.121.127 port 34881\nMay 22 10:40:41 ubuntu2204 sshd[2907]: Invalid user attacker from 192.168.121.127 port 34888",
+     "manager": {
+       "name": "centos7"
+     },
+     "decoder": {
+       "parent": "sshd",
+       "name": "sshd"
+     },
+     "input": {
+       "type": "log"
+     },
+     "@timestamp": "2023-05-22T10:40:43.395Z",
+     "location": "/var/log/auth.log",
+     "_id": "_H4MQ4gBagiVP1CbE_oe"
+   }
+
+The alerts display the MITRE ATT&CK ID and its associated tactics and techniques. This helps users quickly understand the nature of the attack and take appropriate actions.
+
+
+
+
+
