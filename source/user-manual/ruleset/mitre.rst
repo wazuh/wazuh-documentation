@@ -47,7 +47,7 @@ The **Framework** tab of the Wazuh MITRE ATT&CK module provides a high-level ove
 Dashboard
 ---------
 
-This tab provides an overview of the current state of your infrastructure, with respect to known adversarial Tactics, Techniques, and Procedures (TTPs) in the MITRE ATT&CK framework. The dashboard displays key indicators such as the total number of events, alerts, and a summary of the top 10 TTPs detected within your environment. These indicators can be used to assess the effectiveness of existing security controls and identify areas that may require further attention. Additionally, you can customize the dashboard to display specific metrics that are most relevant to your organization's security posture.
+This tab provides an overview of the current state of your infrastructure with respect to known adversarial Tactics, Techniques, and Procedures (TTPs) in the MITRE ATT&CK framework. The dashboard displays key indicators such as the total number of events, alerts, and a summary of the top 10 TTPs detected within your environment. These indicators can be used to assess the effectiveness of existing security controls and identify areas that may require further attention. Additionally, you can customize the dashboard to display specific metrics that are most relevant to your organization's security posture.
 
 .. thumbnail:: /images/manual/mitre/dashboard-tab.png
   :title: Dashboard tab
@@ -60,7 +60,7 @@ Events
 
 This tab provides detailed information about each event that has been detected within your environment. It includes their correlation to specific TTPs as defined by the MITRE ATT&CK framework. The information shown in this tab is particularly useful for security teams who need to investigate suspicious activity. It allows them to drill down into the details of individual events and assess their potential impact on an environment. 
 
-You can filter the events based on various criteria such as severity, event type, and detection method, and also sort them by different fields to quickly locate relevant information. Additionally, the tab provides access to additional details such as the full event log message and any related alerts that may have been generated in response to the event.
+You can filter the events based on various criteria such as severity, event type, detection method, and also sort them by different fields to  locate relevant information quickly. Additionally, the tab provides access to additional details, such as the full event log message and any related alerts that may have been generated in response to the event.
 
 .. thumbnail:: /images/manual/mitre/events-tab.png
   :title: Events tab
@@ -117,7 +117,7 @@ Wazuh server
 
       </group>
 
-   The rule ``100003`` above creates an alert when eight (8) failed ssh bruteforce events occur on a monitored endpoint from the same IP address. It is mapped to the MITRE ATT&CK ID ``T1110`` which indicates the brute force attack technique.
+   The rule ``100003`` above creates an alert when eight (8) failed ssh bruteforce events occur on a monitored endpoint from the same IP address. It is mapped to the MITRE ATT&CK ID ``T1110`` indicating the brute force attack technique.
 
    When the rule triggers, the alert contains information about the MITRE ATT&CK ID ``T1110``. 
 
@@ -158,7 +158,7 @@ Perform the following steps on the Kali Linux endpoint to launch the brute-force
 Visualize the alerts
 ^^^^^^^^^^^^^^^^^^^^
 
-We use filters on the **Security Module > MITRE ATT&CK> Events** tab of the Wazuh dashboard to query for specific MITRE IDs, tactics, or techniques as shown in the figure below.
+We use filters on the **Security Module > MITRE ATT&CK> Events** tab of the Wazuh dashboard to query for specific MITRE IDs, tactics, or techniques, as shown in the figure below.
 
 .. thumbnail:: /images/manual/mitre/visualize-the-alerts.png
   :title: Visualize the alerts
