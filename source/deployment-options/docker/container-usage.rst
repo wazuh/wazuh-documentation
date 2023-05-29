@@ -43,7 +43,7 @@ Access to services and containers
 
    .. code-block:: console
 
-      # docker exec -it <container name> bash
+      # docker-compose exec <SERVICE> bash
 
 Wazuh service data volumes
 --------------------------
