@@ -17,7 +17,7 @@ Enabling the Wazuh archives
 
 Perform the steps below to enable the Wazuh archives on your Wazuh server.
 
-#. Edit the Wazuh manager configuration file ``/var/ossec/etc/ossec.conf`` and set the value of the highlighted fields below to yes:
+#. Edit the Wazuh manager configuration file ``/var/ossec/etc/ossec.conf`` and set the value of the highlighted fields below to ``yes``:
 
    .. code-block:: html
       :emphasize-lines: 5,6
@@ -33,11 +33,11 @@ Perform the steps below to enable the Wazuh archives on your Wazuh server.
 
    Where:
 
-   - ``<logall>`` option enables or disables archiving of all log messages. When enabled, the Wazuh server stores the logs in a syslog format. The allowed values are yes and no.
+   - ``<logall>`` option enables or disables archiving of all log messages. When enabled, the Wazuh server stores the logs in a syslog format. The allowed values are ``yes`` and ``no``.
    
-   - ``<logall_json>`` option enables or disables logging of events. When enabled, the Wazuh server stores the events in a JSON format. The allowed values are yes and no.    
+   - ``<logall_json>`` option enables or disables logging of events. When enabled, the Wazuh server stores the events in a JSON format. The allowed values are ``yes`` and ``no``.    
 
-   Depending on the format you desire, you can set one or both values of the highlighted fields to yes. However, only the ``<logall_json>yes</logall_json>`` option allows you to create an index that can be used to visualize the events on the Wazuh dashboard.
+   Depending on the format you desire, you can set one or both values of the highlighted fields to ``yes``. However, only the ``<logall_json>yes</logall_json>`` option allows you to create an index that can be used to visualize the events on the Wazuh dashboard.
 
 #. Restart the Wazuh manager to apply the configuration changes: 
 
@@ -137,7 +137,7 @@ Atomic Red Team installation
 
 Perform the following steps to install the Atomic Red Team PowerShell module on a Windows 11 endpoint using PowerShell as an administrator.
 
-#. Run the command below to modify PowerShell default execution policy to ``RemoteSigned``: 
+#. Run the command below to modify the PowerShell default execution policy to ``RemoteSigned``: 
 
    .. code-block:: powershell
 
@@ -178,7 +178,7 @@ Attack emulation
 
 Emulate the signed binary proxy execution technique on the Windows 11 endpoint.
 
-#. Run the command below with Powershell as an administrator to perform the T1218.010 test:
+#. Run the command below with Powershell as an administrator to perform the ``T1218.010`` test:
 
    .. code-block:: powershell
 
@@ -200,7 +200,7 @@ Emulate the signed binary proxy execution technique on the Windows 11 endpoint.
       Executing test: T1218.010-5 Regsvr32 Silent DLL Install Call DllRegisterServer
       Done executing test: T1218.010-5 Regsvr32 Silent DLL Install Call DllRegisterServer
 
-Several calculator instances will pop-up after a successful execution of the exploit.
+Several calculator instances will pop up after a successful execution of the exploit.
 
 
 Wazuh dashboard
@@ -216,7 +216,7 @@ Use the Wazuh archives to query and display events related to the technique bein
       :align: center
       :width: 80%
 
-   You can see a several hits that you can investigate to determine a correlation with the earlier attack emulation. For instance, you may notice a calculator spawning event similar to the one observed on the Windows endpoint during the test.
+   There are multiple hits that you can investigate to determine a correlation with the earlier attack emulation. For instance, you may notice a calculator spawning event similar to the one observed on the Windows endpoint during the test.
 
    .. thumbnail:: /images/manual/wazuh-archives/detecting-signed-binary-proxy-execution-2.png
       :title: See a calculator spawning event
