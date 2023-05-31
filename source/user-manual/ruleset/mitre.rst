@@ -60,7 +60,7 @@ Events
 
 This tab provides detailed information about each event that has been detected within your environment. It includes their correlation to specific TTPs as defined by the MITRE ATT&CK framework. The information shown in this tab is particularly useful for security teams who need to investigate suspicious activity. It allows them to drill down into the details of individual events and assess their potential impact on an environment. 
 
-You can filter the events based on various criteria such as severity, event type, detection method, and also sort them by different fields to  locate relevant information quickly. Additionally, the tab provides access to additional details, such as the full event log message and any related alerts that may have been generated in response to the event.
+You can filter the events based on various criteria such as severity, event type, and detection method, and also sort them by different fields to  locate relevant information quickly. Additionally, the tab provides access to additional details, such as the full event log message and any related alerts that may have been generated in response to the event.
 
 .. thumbnail:: /images/manual/mitre/events-tab.png
   :title: Events tab
