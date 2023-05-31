@@ -73,8 +73,8 @@ Customization
 
 The Wazuh MITRE ATT&CK module also supports a range of customization options. For example, users can define custom mappings between Wazuh alerts and specific tactics and techniques, allowing them to tailor the module to their unique needs and requirements.
 
-Customization example
-^^^^^^^^^^^^^^^^^^^^^
+Example description
+^^^^^^^^^^^^^^^^^^^
 
 Wazuh has out-of-the-box detection rules that are mapped against relevant MITRE IDs. However, to use Wazuh with MITRE ATT&CK for threat hunting, you can configure custom rules and assign corresponding MITRE ATT&CK IDs according to the number of techniques involved in the attack.
 
