@@ -8,7 +8,7 @@
 Upgrading the Wazuh server
 ==========================
 
-This section guides through the process of upgrading the Wazuh server installations from versions prior to 3.0.
+This section guides you through the process of upgrading the Wazuh server installations from versions prior to 3.0.
 
 .. topic:: Contents
 

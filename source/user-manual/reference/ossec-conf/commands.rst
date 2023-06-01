@@ -44,7 +44,7 @@ executable
 
 Names an executable file to run. It is not necessary to provide the path.
 
-These files are located in ``/var/ossec/active-response/bin`` directory in Linux based systems, or in ``C:\Program Files\ossec-agent\active-response\bin`` directory in Windows systems.
+These files are located in ``/var/ossec/active-response/bin`` directory in Linux based systems, or in ``C:\Program Files (x86)\ossec-agent\active-response\bin`` directory in Windows systems.
 
 +--------------------+---------------+
 | **Default value**  | n/a           |

@@ -119,4 +119,4 @@ Upgrading the VM
 
 The virtual machine can be upgraded as a traditional installation:
 
-  - :ref:`Upgrading the Wazuh manager <upgrading_wazuh_server>`
+  - :doc:`Upgrading the Wazuh central components </upgrade-guide/upgrading-central-components>`

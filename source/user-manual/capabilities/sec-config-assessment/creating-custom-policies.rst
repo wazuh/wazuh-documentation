@@ -4,11 +4,31 @@
   :description: Learn more about how to create custom Security Configuration Assessment (SCA) policies in Wazuh and discover some examples. 
 
 Creating custom SCA policies
-----------------------------
+============================
+
+You need to consider the following four sections when creating custom policy files, although not all of them are required.
+
+.. _sca_policy_file_sections:
+
+.. table:: Policy file sections
+    :widths: auto
+
+    +--------------------+----------------+
+    | Section            | Required       |
+    +====================+================+
+    | policy             | Yes            |
+    +--------------------+----------------+
+    | requirements       | No             |
+    +--------------------+----------------+
+    | variables          | No             |
+    +--------------------+----------------+
+    | checks             | Yes            |
+    +--------------------+----------------+
 
 An SCA policy looks like the following:
 
 .. code-block:: YAML
+   :emphasize-lines: 10,18,27,31
 
    # Security Configuration Assessment
    # Audit for UNIX systems
@@ -55,37 +75,12 @@ An SCA policy looks like the following:
 
      - id: 3001
        title: "SSH Hardening: Protocol should be set to 2"
-       ...
+       
+.. note:: 
+   If the ``requirements`` aren't satisfied for a specific policy file, the scan for that file won't start.
 
-As shown in this example, policy files are comprised of four sections, although not all of them are required, as
-detailed in the :ref:`sca_policy_file_sections` table.
+Each section has its fields as described in the tables :ref:`Policy section<sca_policy_file_policy_section>`, :ref:`Requirements section<sca_policy_file_requirements_section>`, :ref:`Variables section<sca_policy_file_variables_section>`, and :ref:`Checks section<sca_policy_file_checks_section>`.
 
-.. _sca_policy_file_sections:
-.. table:: Policy file Sections
-    :widths: auto
-
-    +--------------------+----------------+
-    | Section            | Required       |
-    +====================+================+
-    | policy             | Yes            |
-    +--------------------+----------------+
-    | requirements       | No             |
-    +--------------------+----------------+
-    | variables          | No             |
-    +--------------------+----------------+
-    | checks             | Yes            |
-    +--------------------+----------------+
-
-
-.. note::
-  If the **requirements** aren't satisfied for a specific policy file, the scan for that file won't start.
-
-
-Each section has its fields as described in the tables
-:ref:`sca_policy_file_policy_section`,
-:ref:`sca_policy_file_requirements_section`,
-:ref:`sca_policy_file_variables_section`,
-:ref:`sca_policy_file_checks_section`.
 
 .. _sca_policy_file_policy_section:
 .. table:: Policy section
@@ -129,18 +124,16 @@ Each section has its fields as described in the tables
     +--------------------+----------------+-------------------+------------------------+
 
 .. note::
-  Fields id from **policy** and **checks** must be unique across policy files.
+  The ``id`` field under ``policy`` and ``checks`` must be unique across policy files.
 
 Variables
-^^^^^^^^^
+---------
 
-Variables are set in the **variables** section. Their names are preceded by ``$``. For instance,
+Variables are set in the variables section. Their names are preceded by ``$``. For instance:
 
-.. code-block:: yaml
-
-    $list_of_files: /etc/ssh/sshd_config,/etc/sysctl.conf,/var/log/dmesg
-    $list_of_folders: /etc,/var,/tmp
-    $program_name: apache2
+- ``$list_of_files``: ``/etc/ssh/sshd_config``, ``/etc/sysctl.conf``, ``/var/log/dmesg``
+- ``$list_of_folders``: ``/etc``, ``/var``, ``/tmp``
+- ``$program_name``: ``apache2``
 
 Variables can be placed anywhere in the left part of the rule. Therefore, regarding the variables above, the following rules could be built:
 
@@ -152,9 +145,9 @@ Variables can be placed anywhere in the left part of the rule. Therefore, regard
 There is no limit on the number of variables to add within a rule.
 
 Checks
-^^^^^^^^^
-Checks are the core of an SCA policy, as they describe the checks to be performed in the system.
-Each check is comprised by several fields as described in the table :ref:`sca_policy_file_checks_section`.
+------
+
+Checks are the core of an SCA policy, as they describe the scan to be performed in the endpoint. The checks contain fields that define what actions the agent should take to scan the endpoint, and how to evaluate the scan results. Each check is composed of several fields as described in the table below:
 
 
 .. _sca_policy_file_checks_section:
@@ -182,29 +175,23 @@ Each check is comprised by several fields as described in the table :ref:`sca_po
     |    rules    |    Yes    |      Array of strings      |     Any string     |
     +-------------+-----------+----------------------------+--------------------+
 
-Check evaluation is governed by its `rule result aggregation strategy`, as set in its ``condition`` field, and the results of
-the evaluation of its rules.
-
 Condition
-~~~~~~~~~~~~~~~~~~~
+^^^^^^^^^
 
-The condition field specifies how rule results are aggregated in order to calculate the final value of a check. There are three options:
+The result of each SCA check is governed by the conditions set in the ``condition`` field, and the results of the evaluation of its rules. The condition field specifies how rule results are aggregated in order to calculate the final value of a check. There are three options:
 
-- ``all``: the check will be evaluated as `Passed` if `all` of its rules are satisfied and as `Failed` as soon as one rule is not satisfied,
+- ``all``: The check is evaluated as **Passed** if all of its rules are satisfied and as **Failed** as soon as one rule is not satisfied.
+- ``any``: The check is evaluated as **Passed** as soon as any of its rules are satisfied.
+- ``none``: The check is evaluated as **Passed** if none of its rules are satisfied and as **Failed** as soon as one rule is satisfied.
 
-- ``any``: the check will be evaluated as `Passed` as soon as `any` of its rules is satisfied,
+There are certain situations in which the aforementioned aggregators are evaluated as **Not applicable**.
 
-- ``none``: the check will be evaluated as `Passed` if `none` of its rules are satisfied and as `Failed` as soon as one rule is satisfied.
+- ``all``: If any rule returns **Not applicable**, and no rule returns **Failed**, the result is **Not applicable**.
+- ``any``: The check is evaluated as **Not applicable** if no rule is evaluated as **Passed** and any rule returns **Not applicable**.
+- ``none``: The check is evaluated as **Not applicable** if no rule is evaluated as **Passed** and any rule returns **Not applicable**.
 
-Special mention deserves how rules evaluated as `Not applicable` are treated by the aforementioned aggregators.
 
-- ``all``: If any rule returns `Not applicable`, and no rule returns `Failed`, the result will be `Not applicable`.
-
-- ``any``: The check will be evaluated as `Not applicable` if no rule is evaluated as `Passed` and any returns `Not applicable`.
-
-- ``none``: The check will be evaluated as `Not applicable` if no rule is evaluated as `Passed` and any returns `Not applicable`.
-
-.. table:: 
+.. table:: Condition / rule evaluation
     :widths: auto
 
     +------------------------------+-------------+-------------+-------------------+--------------------+
@@ -229,22 +216,19 @@ Special mention deserves how rules evaluated as `Not applicable` are treated by 
     |           ``none``           |      no     |     yes     |         no        |     Passed         |
     +------------------------------+-------------+-------------+-------------------+--------------------+
 
-\* This result does not affect the final result. 
+\* This result does not affect the final result.
 
 Rules
-~~~~~
+^^^^^
 
-Rules can check for the existence of files, directories, registry keys and values, running processes, and recursively
-test for the existence of files inside directories. When it comes to content checking, they are able to check for file
-contents, recursively check for the contents of files inside directories, command output and registry value data.
+Rules can check for the existence of files, directories, registry keys and values, running processes, and recursively test for the existence of files inside directories. When it comes to content checking, they are able to check for file contents, recursively check for the contents of files inside directories, command output, and registry value data.
 
-Abstractly, rules start with a location (and a `type` of location), that will be the target of the test,
-followed by the actual test specification. Such tests fall into two categories: existence and content checks.
+Abstractly, rules start with a location and a type of location that is the target of the test, followed by the actual test specification. Such tests fall into two categories: existence and content checks. The type of location is listed in the :ref:`Rule types<rule_types>` table below, and the location could be a file name, directory, process name, command, or a registry key.
 
-.. General rule syntax
-   ###################
+.. _rule_types:
 
-There are five main types of rules as described below:
+
+There are five main types of rules as described below.
 
 .. table:: Rule types
     :widths: auto
@@ -263,27 +247,31 @@ There are five main types of rules as described below:
     | Registry (Windows Only)      | ``r``            |
     +------------------------------+------------------+
 
-The operators for content checking are:
+
+The operators for content checking are shown in the content comparison operators table below.
 
 .. table:: Content comparison operators
     :widths: auto
 
-    +--------------------------------------------------------------------------------------+-----------------+------------------------------------------------------------+
-    | Operation                                                                            | Operator        | Example                                                    |
-    +======================================================================================+=================+============================================================+
-    | Literal comparison, exact match                                                      | *by omission*   | ``f:/file -> CONTENT``                                     |
-    +--------------------------------------------------------------------------------------+-----------------+------------------------------------------------------------+
-    | :doc:`Lightweight Regular expression <../../ruleset/ruleset-xml-syntax/regex>` match | ``r:``          | ``f:/file -> r:REGEX``                                     |
-    +--------------------------------------------------------------------------------------+-----------------+------------------------------------------------------------+
-    | Numeric comparison (integers)                                                        | ``n:``          | ``f:/file -> n:REGEX_WITH_CAPTURE_GROUP compare <= VALUE`` |
-    +--------------------------------------------------------------------------------------+-----------------+------------------------------------------------------------+
+    +--------------------------------------------------------------------------------------+-------------------------------------------------------------------------------------------+------------------------------------------------------------+
+    | Operation                                                                            | Operator                                                                                  | Example                                                    |
+    +======================================================================================+===========================================================================================+============================================================+
+    | Literal comparison, exact match                                                      | *by omission (the absence of an operator signifies a literal comparison or exact match)*  | ``f:/file -> CONTENT``                                     |
+    +--------------------------------------------------------------------------------------+-------------------------------------------------------------------------------------------+------------------------------------------------------------+
+    | :doc:`Lightweight Regular expression <../../ruleset/ruleset-xml-syntax/regex>` match | ``r:``                                                                                    | ``f:/file -> r:REGEX``                                     |
+    +--------------------------------------------------------------------------------------+-------------------------------------------------------------------------------------------+------------------------------------------------------------+
+    | Numeric comparison (integers)                                                        | ``n:``                                                                                    | ``f:/file -> n:REGEX_WITH_CAPTURE_GROUP compare <= VALUE`` |
+    +--------------------------------------------------------------------------------------+-------------------------------------------------------------------------------------------+------------------------------------------------------------+
+
+
+The operators for numeric comparison are shown in the table below.
 
 .. table:: Numeric comparison operators
     :widths: auto
 
     +--------------------------------+----------+---------------------------------------+
     | Arithmetic relational operator | Operator | Example                               |
-    +--------------------------------+----------+---------------------------------------+
+    +================================+==========+=======================================+
     | less than                      | ``<``    | ``n:SomeProperty (\d) compare < 42``  |
     +--------------------------------+----------+---------------------------------------+
     | less than or equal to          | ``<=``   | ``n:SomeProperty (\d) compare <= 42`` |
@@ -297,13 +285,13 @@ The operators for content checking are:
     | greater than                   | ``>``    | ``n:SomeProperty (\d) compare > 42``  |
     +--------------------------------+----------+---------------------------------------+
 
-A whole rule can be negated using the operator ``not``, which is placed at the beginning of the rule.
+You can place ``not`` at the beginning of a rule to negate it. For example:
 
 .. code-block:: yaml
 
-    not RULE
+    not f:/some_file -> some_text
 
-Example: ``not f:/some_file -> some_text`` will **fail** if `some_text` is found within the contents of `some_file`.
+The SCA rule above fails if ``some_text`` is found within the contents of ``some_file``.
 
 By combining the aforementioned rule types and operators, both existence and content checking can be performed.
 
@@ -313,9 +301,9 @@ By combining the aforementioned rule types and operators, both existence and con
 
 
 Existence checking rules
-######################################
+~~~~~~~~~~~~~~~~~~~~~~~~
 
-Existence checks are created by setting rules without a content operator, the general form is as follows:
+Existence checks are created by setting rules without a content operator.The general form is as follows:
 
 .. code-block:: yaml
 
@@ -323,14 +311,14 @@ Existence checks are created by setting rules without a content operator, the ge
 
 Examples of existence checks:
 
-- ``f:/etc/sshd_config`` checks the existence of file */etc/sshd_config*
-- ``d:/etc`` checks the existence of directory */etc*
-- ``not p:sshd`` will test the presence of processes called *sshd* and fail if one is found.
-- ``r:HKEY_LOCAL_MACHINE\System\CurrentControlSet\Control\Lsa`` checks for the existence of that key.
-- ``r:HKEY_LOCAL_MACHINE\System\CurrentControlSet\Control\Lsa -> LimitBlankPasswordUse`` checks for the existence of value *LimitBlankPasswordUse* in the key.
+- ``f:/etc/sshd_config`` checks the existence of ``/etc/sshd_config`` file.
+- ``d:/etc`` checks the existence of the ``/etc`` directory.
+- ``not p:sshd`` tests the presence of processes called ``sshd`` and fails if one is found.
+- ``r:HKEY_LOCAL_MACHINE\System\CurrentControlSet\Control\Lsa`` checks for the existence of the ``HKEY_LOCAL_MACHINE\System\CurrentControlSet\Control\Lsa`` key.
+- ``r:HKEY_LOCAL_MACHINE\System\CurrentControlSet\Control\Lsa -> LimitBlankPasswordUse`` checks for the existence of *LimitBlankPasswordUse* value in the key.
 
 Content checking rules
-######################################
+~~~~~~~~~~~~~~~~~~~~~~
 
 The general form of a rule testing for contents is as follows:
 
@@ -340,7 +328,6 @@ The general form of a rule testing for contents is as follows:
 
 .. warning::
     - The context of a content check is limited to a **line**.
-    - Content checks are case-sensitive.
     - It is **mandatory** to respect the spaces around the ``->`` and ``compare`` separators.
     - If the **target** of a rule that checks for contents does not exist, the result will be ``Not applicable`` as it could not be checked.
 
@@ -351,8 +338,8 @@ Content check operator results can be negated by adding a ``!`` before then, for
     f:/etc/ssh_config -> !r:PermitRootLogin
 
 .. warning::
-    Be careful when negating content operators as that will make them evaluate as `Passed` for **anything** that does not match with the check specified.
-    For example rule ```f:/etc/ssh_config -> !r:PermitRootLogin``` will be evaluated as `Passed` if it finds **any line** that does not contain ``PermitRootLogin``.
+
+    Be careful when negating content operators as that makes them evaluate as **Passed** for anything that does not match with the check specified. For example, rule ``f:/etc/ssh_config -> !r:PermitRootLogin`` is evaluated as Passed if it finds any line that does not contain ``PermitRootLogin``.
 
 Content check operators can be chained using the operator ``&&`` (AND) as follows:
 
@@ -360,27 +347,26 @@ Content check operators can be chained using the operator ``&&`` (AND) as follow
 
     f:/etc/ssh_config -> !r:^# && r:Protocol && r:2
 
-This rule reads as `Pass if there's a line whose first character is not "#" and contains "Protocol" and "2"`.
+This rule reads as **Pass** if there's a line whose first character is not ``#`` and contains ``Protocol`` and ``2``.
 
 .. warning::
-    - It is **mandatory** to respect the spaces around the ``&&`` operator.
+    - It is mandatory to respect the spaces around the ``&&`` operator.
     - There's no particular order of evaluation between tests chained using the ``&&`` operator.
 
 Examples of content checks:
 
-    - ``systemctl is-enabled cups -> r:^enabled`` checks that the output of the command contains a line starting by `enabled`.
-    - ``f:$sshd_file -> n:^\s*MaxAuthTries\s*\t*(\d+) compare <= 4`` checks that `MaxAuthTries` is less or equal to 4.
-    - ``r:HKEY_LOCAL_MACHINE\System\CurrentControlSet\Control\Lsa -> LimitBlankPasswordUse -> 1`` checks that value of `LimitBlankPasswordUse` is 1.
+- ``c:systemctl is-enabled cups -> r:^enabled`` checks that the output of the command contains a line starting with enabled.
+- ``f:$sshd_file -> n:^\s*MaxAuthTries\s*\t*(\d+) compare <= 4`` checks that MaxAuthTries is less or equal to 4.
+- ``r:HKEY_LOCAL_MACHINE\System\CurrentControlSet\Control\Lsa -> LimitBlankPasswordUse -> 1`` checks that the value of *LimitBlankPasswordUse* is 1.
 
 Examples
-###################
+~~~~~~~~
 
-The following sections cover each rule type, illustrating them with several examples. It is also recommended to check
-the actual policies and, for minimalistic although complete examples, the `SCA test suite policies
+The following sections cover each rule type, illustrating them with several examples. It is also recommended to check the actual policies and, for minimalistic although complete examples, the `SCA test suite policies
 <https://github.com/wazuh/wazuh-qa/tree/master/tests/legacy/test_sca/test_basic_usage/data>`_.
 
 Rule syntax for files
-:::::::::::::::::::::::::::::::::::
+"""""""""""""""""""""
 
 - Check that a file exists: ``f:/path/to/file``
 - Check that a file does not exist: ``not f:/path/to/file``
@@ -389,7 +375,7 @@ Rule syntax for files
 - Check a numeric value: ``f:/path/to/file -> n:REGEX(\d+) compare <= Number``
 
 Rule syntax for directories
-:::::::::::::::::::::::::::::::::::
+"""""""""""""""""""""""""""
 
 - Check if a directory exists: ``d:/path/to/directory``
 - Check if a directory contains a file: ``d:/path/to/directory -> file``
@@ -397,34 +383,33 @@ Rule syntax for directories
 - Check files matching ``file_name`` for content: ``d:/path/to/directory -> file_name -> content``
 
 Rule syntax for processes
-:::::::::::::::::::::::::::::::::::
+"""""""""""""""""""""""""
 
 - Check if a process is running ``p:process_name``
 - Check if a process is **not** running ``not p:process_name``
 
 Rule syntax for commands
-:::::::::::::::::::::::::::::::::::
+""""""""""""""""""""""""
 
 - Check the output of a command ``c:command -> output``
 - Check the output of a command using regex ``c:command -> r:REGEX``
 - Check a numeric value ``c:command -> n:REGEX_WITH_A_CAPTURE_GROUP compare >= number``
 
 Rule syntax for Windows Registry
-:::::::::::::::::::::::::::::::::::
+""""""""""""""""""""""""""""""""
 
 - Check if a registry exists ``r:path/to/registry``
 - Check if a registry key exists ``r:path/to/registry -> key``
 - Check registry key contents ``r:path/to/registry -> key -> content``
 
 Composite rules
-:::::::::::::::::::::::::::::::::::
+"""""""""""""""
 
 - Check if there is a line that does not begin with ``#`` and contains ``Port 22`` ``f:/etc/ssh/sshd_config -> !r:^# && r:Port\.+22``
-
-- Check if there is **no** line that does not begin with ``#`` and contains ``Port 22`` ``not f:/etc/ssh/sshd_config -> !r:^# && r:Port\.+22``
+- Check if there is no line that does not begin with ``#`` and contains ``Port 22`` ``not f:/etc/ssh/sshd_config -> !r:^# && r:Port\.+22``
 
 Other examples
-:::::::::::::::::::::::::::::::::::
+""""""""""""""
 
 - Check for file contents, whole line match: ``f:/proc/sys/net/ipv4/ip_forward -> 1``
 - Check if a file exists: ``f:/proc/sys/net/ipv4/ip_forward``

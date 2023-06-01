@@ -8,7 +8,7 @@ Detecting a brute-force attack
 
 Brute-forcing is a common attack vector that threat actors use to gain unauthorized access to endpoints and services. Services like SSH on Linux endpoints and RDP on Windows endpoints are usually prone to brute-force attacks. Wazuh identifies brute-force attacks by correlating multiple authentication failure events. 
 
-The section on :doc:`Blocking attacks with Active Response </user-manual/capabilities/active-response/ar-use-cases/blocking-attacks>` describes how to configure an active response to block the IP address of an attacker. In this use case, we show how Wazuh detects brute-force attacks on RHEL and Windows endpoints.
+The section on :doc:`Blocking attacks with Active Response </user-manual/capabilities/active-response/ar-use-cases/blocking-ssh-brute-force>` describes how to configure an active response to block the IP address of an attacker. In this use case, we show how Wazuh detects brute-force attacks on RHEL and Windows endpoints.
 
 Infrastructure
 --------------

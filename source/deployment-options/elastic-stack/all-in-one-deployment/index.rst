@@ -57,14 +57,14 @@ Elasticsearch installation and configuration
 
          .. code-block:: console
 
-           # yum install elasticsearch-7.17.8
+           # yum install elasticsearch-7.17.9
 
 
       .. group-tab:: APT
 
          .. code-block:: console
 
-           # apt-get install elasticsearch=7.17.8
+           # apt-get install elasticsearch=7.17.9
 
 
 #. Download the configuration file ``/etc/elasticsearch/elasticsearch.yml`` as follows:
@@ -128,24 +128,24 @@ This command should have an output like this:
 
 .. code-block:: console
    :class: output
-
+   
    {
      "name" : "elasticsearch",
      "cluster_name" : "elasticsearch",
-     "cluster_uuid" : "9hNRUiNbSwy0p0KAhsswdA",
+     "cluster_uuid" : "CFw_rkxnR7avI7pBv9MvtQ",
      "version" : {
-       "number" : "7.17.8",
+       "number" : "7.17.9",
        "build_flavor" : "default",
        "build_type" : "rpm",
-       "build_hash" : "120eabe1c8a0cb2ae87cffc109a5b65d213e9df1",
-       "build_date" : "2022-12-02T17:33:09.727072865Z",
+       "build_hash" : "ef48222227ee6b9e70e502f0f0daa52435ee634d",
+       "build_date" : "2023-01-31T05:34:43.305517834Z",
        "build_snapshot" : false,
        "lucene_version" : "8.11.1",
        "minimum_wire_compatibility_version" : "6.8.0",
        "minimum_index_compatibility_version" : "6.0.0-beta1"
      },
      "tagline" : "You Know, for Search"
-   }   
+   }  
 
 .. _basic_all_in_one_wazuh:
 
@@ -283,7 +283,7 @@ To ensure that Filebeat has been successfully installed, run the following comma
 This command should have an output like this:
 
 .. code-block:: console
-  :class: output
+   :class: output
 
    elasticsearch: https://127.0.0.1:9200...
      parse url... OK
@@ -298,8 +298,7 @@ This command should have an output like this:
        TLS version: TLSv1.3
        dial up... OK
      talk to server... OK
-     version: 7.17.8     
-
+     version: 7.17.9
 
 Kibana installation and configuration
 -------------------------------------

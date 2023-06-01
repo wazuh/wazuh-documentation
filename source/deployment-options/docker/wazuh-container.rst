@@ -291,17 +291,16 @@ Perform the following steps from your ``single-node`` directory. If you have a m
    .. code-block:: console
   
       export INSTALLATION_DIR=/usr/share/wazuh-indexer
-      export OPENSEARCH_PATH_CONF=${INSTALLATION_DIR}/config
-      CACERT=$OPENSEARCH_PATH_CONF/certs/root-ca.pem
-      KEY=$OPENSEARCH_PATH_CONF/certs/admin-key.pem
-      CERT=$OPENSEARCH_PATH_CONF/certs/admin.pem
+      CACERT=$INSTALLATION_DIR/certs/root-ca.pem
+      KEY=$INSTALLATION_DIR/certs/admin-key.pem
+      CERT=$INSTALLATION_DIR/certs/admin.pem
       export JAVA_HOME=/usr/share/wazuh-indexer/jdk
 
 #. Run the ``securityadmin.sh`` script to apply all changes:
 
    .. code-block:: console
 
-      # bash /usr/share/wazuh-indexer/plugins/opensearch-security/tools/securityadmin.sh -cd /usr/share/wazuh-indexer/plugins/opensearch-security/securityconfig/ -nhnv -cacert  $CACERT -cert $CERT -key $KEY -p 9300 -icl
+      # bash /usr/share/wazuh-indexer/plugins/opensearch-security/tools/securityadmin.sh -cd /usr/share/wazuh-indexer/opensearch-security/ -nhnv -cacert  $CACERT -cert $CERT -key $KEY -p 9200 -icl
 
 #. Exit the Wazuh indexer container and login with the new credentials on the Wazuh dashboard.
 

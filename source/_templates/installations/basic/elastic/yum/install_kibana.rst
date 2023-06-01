@@ -2,6 +2,6 @@
 
 .. code-block:: console
 
-  # yum install kibana-7.17.8
+  # yum install kibana-7.17.9
 
 .. End of include file

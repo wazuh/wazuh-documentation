@@ -18,7 +18,7 @@ Installing dependencies
 Python
 ------
 
-The AWS module requires Python 3. It is compatible with Python 3.6 to Python 3.9. Future Python releases should maintain compatibility although it cannot be guaranteed.
+The AWS module requires Python 3. It is compatible with Python 3.7 and above.
 
 .. tabs::
 
@@ -68,4 +68,4 @@ To install the dependencies, execute the following command:
 
 .. code-block:: console
 
-  # pip3 install boto3==1.17.85 botocore==1.20.85 jmespath==0.9.5 python-dateutil==2.8.1 six==1.14.0 urllib3==1.26.5 s3transfer==0.4.2
+  # pip3 install boto3==1.17.85 botocore==1.20.85 jmespath==0.9.5 python-dateutil==2.8.1 six==1.14.0 urllib3==1.26.5 s3transfer==0.4.2 pyarrow==8.0.0 numpy==1.21.6

@@ -102,8 +102,23 @@ Wazuh server worker nodes
 
     .. include:: /_templates/installations/wazuh/common/check_wazuh_manager.rst
 
-#. .. include:: /_templates/installations/basic/wazuh/common/check_wazuh_cluster.rst
+#. To verify that the Wazuh cluster is enabled and all the nodes are connected, execute the following command:
 
+   .. code-block:: console
+
+      # /var/ossec/bin/cluster_control -l
+
+   An example output of the command looks as follows:
+
+   .. code-block:: none
+      :class: output
+    
+      NAME         TYPE    VERSION  ADDRESS
+      master-node  master  |WAZUH_CURRENT|   10.0.0.3
+      worker-node1 worker  |WAZUH_CURRENT|   10.0.0.4
+      worker-node2 worker  |WAZUH_CURRENT|   10.0.0.5
+
+   Note that ``10.0.0.3``, ``10.0.0.4``, ``10.0.0.5`` are example IPs.
 
 .. _basic_wazuh_server_multi_node_filebeat:
 

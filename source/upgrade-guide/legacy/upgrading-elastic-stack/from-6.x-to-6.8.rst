@@ -8,7 +8,7 @@
 Upgrading Elastic Stack from 6.x to 6.8
 =======================================
 
-This section guides through the upgrade process of the Elastic Stack components, including Elasticsearch, Logstash, Filebeat, and Kibana for the Elastic distribution.
+This section guides you through the upgrade process of the Elastic Stack components, including Elasticsearch, Logstash, Filebeat, and Kibana for the Elastic distribution.
 
 Preparing the Elastic Stack
 ---------------------------

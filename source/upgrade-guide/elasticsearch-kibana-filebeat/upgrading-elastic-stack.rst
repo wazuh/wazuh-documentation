@@ -8,7 +8,7 @@
 Wazuh and Elastic Stack basic license
 =====================================
 
-This section guides through the upgrade process of the Wazuh server, Elasticsearch, and Kibana for the *Elastic Stack basic license* distribution. 
+This section guides you through the upgrade process of the Wazuh server, Elasticsearch, and Kibana for the *Elastic Stack basic license* distribution. 
 
 .. note::
    

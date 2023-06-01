@@ -8,8 +8,8 @@
 Upgrade Wazuh installed in Kubernetes
 =====================================
 
-Check which files are exported to the volume
---------------------------------------------
+Checking which files are exported to the volume
+-----------------------------------------------
 
 Our Kubernetes deployment uses our Wazuh images from Docker. If we look at the following code extracted from the Wazuh configuration using Docker, we can see which directories and files are used in the upgrade.
 
@@ -26,28 +26,106 @@ Our Kubernetes deployment uses our Wazuh images from Docker. If we look at the f
     /var/ossec/wodles
     /etc/filebeat
     /var/lib/filebeat
+    /usr/share/wazuh-dashboard/config/
+    /usr/share/wazuh-dashboard/certs/
+    /var/lib/wazuh-indexer
+    /usr/share/wazuh-indexer/certs/
+    /usr/share/wazuh-indexer/opensearch.yml
+    /usr/share/wazuh-indexer/opensearch-security/internal_users.yml
 
 
 Any modification related to these files will also be made in the associated volume. When the replica pod is created, it will get those files from the volume, keeping the previous changes.
 
-Change the image of the container
----------------------------------
+Configuring the upgrade
+-----------------------
 
-The only step to updating Wazuh is to change the image of the pod in each file that deploys each node of the Wazuh cluster.
+To upgrade to version |WAZUH_CURRENT_MINOR|, you can follow one of two strategies.
 
-These files are the *StatefulSet* files:
+-  `Using default manifests`_ : This strategy uses the default manifests for Wazuh |WAZUH_CURRENT_MINOR|. It replaces the wazuh-kubernetes manifests of your outdated Wazuh version.
+-  `Keeping custom manifests`_ : This strategy preserves the wazuh-kubernetes manifests of your outdated Wazuh deployment. It ignores the manifests of the latest Wazuh version.
 
-    - wazuh-master-sts.yaml
-    - wazuh-worker-sts.yaml
+Using default manifests
+^^^^^^^^^^^^^^^^^^^^^^^
 
-For example:
+#. Checkout the tag for the current version of wazuh-kubernetes:
 
-.. code-block:: yaml
+   .. code-block::
 
-    containers:
-    - name: wazuh-manager
-      image: 'wazuh/wazuh:|WAZUH_CURRENT_KUBERNETES|'
+      # git checkout v|WAZUH_CURRENT_DOCKER|
 
+#. `Apply the new configuration`_
+
+Keeping custom manifests
+^^^^^^^^^^^^^^^^^^^^^^^^
+
+In Wazuh 4.4, some paths are different to those in earlier versions. You have to update the old paths with the new ones if you are keeping your custom manifests.
+
+``old-path`` -> ``new-path``
+
+-  ``/usr/share/wazuh-dashboard/config/certs/`` -> ``/usr/share/wazuh-dashboard/certs/``
+-  ``/usr/share/wazuh-indexer/config/certs/`` -> ``/usr/share/wazuh-indexer/certs/``
+-  ``/usr/share/wazuh-indexer/plugins/opensearch-security/securityconfig/`` -> ``/usr/share/wazuh-indexer/opensearch-security/``
+
+To upgrade your deployment keeping your custom manifests, do the following.
+
+#. If you are updating from 4.3, edit the following files and update them with the new paths in 4.4. You can see the new paths next to each file in the samples below.
+
+   -  ``wazuh/indexer_stack/wazuh-dashboard/dashboard-deploy.yaml``
+
+      .. code-block:: yaml
+
+         image: 'wazuh/wazuh-dashboard:|WAZUH_CURRENT_KUBERNETES|'
+         mountPath: /usr/share/wazuh-dashboard/certs/cert.pem
+         mountPath: /usr/share/wazuh-dashboard/certs/key.pem
+         mountPath: /usr/share/wazuh-dashboard/certs/root-ca.pem
+         value: /usr/share/wazuh-dashboard/certs/cert.pem
+         value: /usr/share/wazuh-dashboard/certs/key.pem
+
+   -  ``wazuh/indexer_stack/wazuh-dashboard/dashboard_conf/opensearch_dashboards.yml``
+
+      .. code-block:: yaml
+
+         server.ssl.key: "/usr/share/wazuh-dashboard/certs/key.pem"
+         server.ssl.certificate: "/usr/share/wazuh-dashboard/certs/cert.pem"
+         opensearch.ssl.certificateAuthorities: ["/usr/share/wazuh-dashboard/certs/root-ca.pem"]
+
+   -  ``wazuh/indexer_stack/wazuh-indexer/cluster/indexer-sts.yaml``
+
+      .. code-block:: yaml
+
+         image: 'wazuh/wazuh-indexer:|WAZUH_CURRENT_KUBERNETES|'
+         mountPath: /usr/share/wazuh-indexer/certs/node-key.pem
+         mountPath: /usr/share/wazuh-indexer/certs/node.pem
+         mountPath: /usr/share/wazuh-indexer/certs/root-ca.pem
+         mountPath: /usr/share/wazuh-indexer/certs/admin.pem
+         mountPath: /usr/share/wazuh-indexer/certs/admin-key.pem
+         mountPath: /usr/share/wazuh-indexer/opensearch.yml
+         mountPath: /usr/share/wazuh-indexer/opensearch-security/internal_users.yml
+
+   -  ``wazuh/indexer_stack/wazuh-indexer/indexer_conf/opensearch.yml``
+
+      .. code-block:: yaml
+
+         plugins.security.ssl.http.pemcert_filepath: /usr/share/wazuh-indexer/certs/node.pem
+         plugins.security.ssl.http.pemkey_filepath: /usr/share/wazuh-indexer/certs/node-key.pem
+         plugins.security.ssl.http.pemtrustedcas_filepath: /usr/share/wazuh-indexer/certs/root-ca.pem
+         plugins.security.ssl.transport.pemcert_filepath: /usr/share/wazuh-indexer/certs/node.pem
+         plugins.security.ssl.transport.pemkey_filepath: /usr/share/wazuh-indexer/certs/node-key.pem
+         plugins.security.ssl.transport.pemtrustedcas_filepath: /usr/share/wazuh-indexer/certs/root-ca.pem
+
+   -  ``wazuh/wazuh_managers/wazuh-master-sts.yaml``
+
+      .. code-block:: yaml
+
+         image: 'wazuh/wazuh-manager:|WAZUH_CURRENT_KUBERNETES|'
+
+   -  ``wazuh/wazuh_managers/wazuh-worker-sts.yaml``
+
+      .. code-block:: yaml
+
+         image: 'wazuh/wazuh-manager:|WAZUH_CURRENT_KUBERNETES|'
+
+#. `Apply the new configuration`_
 
 Apply the new configuration
 ---------------------------

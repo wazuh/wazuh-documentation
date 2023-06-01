@@ -8,10 +8,10 @@
 Use cases
 =========
 
-    .. toctree::
-        :maxdepth: 1
+   .. toctree::
+      :maxdepth: 1
 
-        blocking-attacks
-        wazuh-with-yara
-        Detecting and removing malware <removing-malware>
+      blocking-ssh-brute-force
+      restarting-wazuh-agent
+      disabling-user-account
 

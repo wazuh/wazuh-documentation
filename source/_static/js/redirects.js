@@ -77,6 +77,51 @@ removedUrls['x.y'] = [
 redirections.push(
     {
       'target': ['4.3=>4.4', '4.4=>4.3'],
+      '4.3': '/user-manual/capabilities/auditing-whodata/index.html',
+      '4.4': '/user-manual/capabilities/file-integrity/advanced-settings.html#who-data-monitoring',
+    },
+    {
+      'target': ['4.3=>4.4', '4.4=>4.3'],
+      '4.3': '/user-manual/capabilities/auditing-whodata/who-linux.html',
+      '4.4': '/user-manual/capabilities/file-integrity/advanced-settings.html#who-data-monitoring-on-linux',
+    },
+    {
+      'target': ['4.3=>4.4', '4.4=>4.3'],
+      '4.3': '/user-manual/capabilities/auditing-whodata/who-windows.html',
+      '4.4': '/user-manual/capabilities/file-integrity/advanced-settings.html#who-data-monitoring-in-windows',
+    },
+    {
+      'target': ['4.3=>4.4', '4.4=>4.3'],
+      '4.3': '/user-manual/capabilities/auditing-whodata/who-windows-policies.html',
+      '4.4': '/user-manual/capabilities/file-integrity/advanced-settings.html#manual-configuration-of-the-local-audit-policies-in-windows',
+    },
+    {
+      'target': ['4.3=>4.4', '4.4=>4.3'],
+      '4.3': '/user-manual/capabilities/file-integrity/fim-configuration.html',
+      '4.4': '/user-manual/capabilities/file-integrity/index.html',
+    },  
+    {
+      'target': ['4.3=>4.4', '4.4=>4.3'],
+      '4.3': '/user-manual/capabilities/file-integrity/fim-fields-rule-mapping.html',
+      '4.4': '/user-manual/capabilities/file-integrity/index.html',
+    }, 
+    {
+      'target': ['4.3=>4.4', '4.4=>4.3'],
+      '4.3': '/user-manual/capabilities/antiflooding.html',
+      '4.4': '/user-manual/agents/antiflooding.html',
+    },
+    {
+      'target': ['4.3=>4.4', '4.4=>4.3'],
+      '4.3': '/user-manual/capabilities/labels.html',
+      '4.4': '/user-manual/agents/labels.html',
+    },  
+    {
+      'target': ['4.3=>4.4', '4.4=>4.3'],
+      '4.3': '/user-manual/capabilities/fluent-forwarder.html',
+      '4.4': '/user-manual/manager/fluent-forwarder.html',
+    },
+    {
+      'target': ['4.3=>4.4', '4.4=>4.3'],
       '4.3': '/amazon/services/supported-services/alb.html',
       '4.4': '/amazon/services/supported-services/elastic-load-balancing/alb.html',
     },
@@ -94,8 +139,63 @@ redirections.push(
       'target': ['4.3=>4.4', '4.4=>4.3'],
       '4.3': '/user-manual/capabilities/agent-key-polling.html',
       '4.4': '/user-manual/agents/key-request.html',
-    }
-);
+    },
+    {
+      'target': ['4.3=>4.4'],
+      '4.3': '/user-manual/capabilities/wazuh-logtest/index.html',
+      '4.4': '/user-manual/ruleset/testing.html',
+    },
+    {
+      'target': ['4.3=>4.4'],
+      '4.3': '/user-manual/capabilities/wazuh-logtest/how-it-works.html',
+      '4.4': '/user-manual/ruleset/testing.html',
+    },
+    {
+      'target': ['4.3=>4.4'],
+      '4.3': '/user-manual/capabilities/wazuh-logtest/logtest-configuration.html',
+      '4.4': '/user-manual/ruleset/testing.html#configuration',
+    },
+    {
+      'target': ['4.3=>4.4'],
+      '4.3': '/user-manual/capabilities/wazuh-logtest/logtest-faq.html',
+      '4.4': '/user-manual/ruleset/testing.html',
+    },
+    {
+      'target': ['4.3=>4.4', '4.4=>4.3'],
+      '4.3': '/user-manual/capabilities/syscollector.html',
+      '4.4': '/user-manual/capabilities/system-inventory/index.html',
+    },
+    {
+      'target': ['4.3=>4.4', '4.4=>4.3'],
+      '4.3': '/user-manual/capabilities/syscollector.html#how-it-works',
+      '4.4': '/user-manual/capabilities/system-inventory/how-it-works.html',
+    },
+    {
+      'target': ['4.3=>4.4', '4.4=>4.3'],
+      '4.3': '/user-manual/capabilities/syscollector.html#available-scans',
+      '4.4': '/user-manual/capabilities/system-inventory/available-inventory-fields.html',
+    },
+    {
+      'target': ['4.3=>4.4', '4.4=>4.3'],
+      '4.3': '/user-manual/capabilities/syscollector.html#compatibility-matrix',
+      '4.4': '/user-manual/capabilities/system-inventory/compatibility-matrix.html',
+    },
+    {
+      'target': ['4.3=>4.4', '4.4=>4.3'],
+      '4.3': '/user-manual/capabilities/syscollector.html#using-syscollector-information-to-trigger-alerts',
+      '4.4': '/user-manual/capabilities/system-inventory/using-syscollector-information-to-trigger-alerts.html',
+    },
+    {
+      'target': ['4.3=>4.4', '4.4=>4.3'],
+      '4.3': '/user-manual/capabilities/syscollector.html#use-case-visualize-system-inventory-in-the-wazuh-app',
+      '4.4': '/user-manual/capabilities/system-inventory/viewing-system-inventory-data.html',
+    },
+    {
+      'target': ['4.4=>4.3'],
+      '4.3': '/user-manual/capabilities/syscollector.html#use-case-visualize-system-inventory-in-the-wazuh-app',
+      '4.4': '/user-manual/capabilities/system-inventory/configuration.html',
+    },
+  );
 
 /* Pages added in 4.4 */
 
@@ -110,6 +210,47 @@ newUrls['4.4'] = [
   '/azure/activity-services/prerequisites/dependencies.html',
   '/user-manual/wazuh-dashboard/custom-branding.html',
   '/release-notes/release-4-4-0.html',
+  '/release-notes/release-4-4-1.html',
+  '/release-notes/release-4-4-2.html',
+  '/release-notes/release-4-4-3.html',
+  '/nist/index.html',
+  '/nist/visualization-and-dashboard.html',
+  '/nist/log-data-analysis.html',
+  '/nist/configuration-assessment.html',
+  '/nist/malware-detection.html',
+  '/nist/file-integrity-monitoring.html',
+  '/nist/system-inventory.html',
+  '/nist/vulnerability-detection.html',
+  '/nist/active-response.html',
+  '/nist/threat-intelligence.html',
+  '/user-manual/agents/antiflooding.html',
+  '/user-manual/agents/labels.html',
+  '/user-manual/manager/fluent-forwarder.html',
+  '/user-manual/capabilities/file-integrity/basic-settings.html',
+  '/user-manual/capabilities/file-integrity/how-to-configure-fim.html',
+  '/user-manual/capabilities/file-integrity/interpreting-fim-module-analysis.html',
+  '/user-manual/capabilities/file-integrity/creating-custom-fim-rules.html',   
+  '/user-manual/capabilities/file-integrity/advanced-settings.html',
+  '/user-manual/capabilities/file-integrity/use-cases/index.html',
+  '/user-manual/capabilities/file-integrity/use-cases/detecting-malware-persistence-technique.html',
+  '/user-manual/capabilities/file-integrity/use-cases/detecting-account-manipulation.html',
+  '/user-manual/capabilities/file-integrity/use-cases/monitoring-files-at-specific-intervals.html',
+  '/user-manual/capabilities/file-integrity/use-cases/reporting-file-changes.html',
+  '/user-manual/capabilities/file-integrity/use-cases/monitoring-configuration-changes.html',
+  '/user-manual/capabilities/file-integrity/windows-registry-monitoring.html',
+  '/user-manual/capabilities/system-inventory/index.html',
+  '/user-manual/capabilities/system-inventory/how-it-works.html',
+  '/user-manual/capabilities/system-inventory/viewing-system-inventory-data.html',
+  '/user-manual/capabilities/system-inventory/generating-system-inventory-reports.html',
+  '/user-manual/capabilities/system-inventory/available-inventory-fields.html',
+  '/user-manual/capabilities/system-inventory/compatibility-matrix.html',
+  '/user-manual/capabilities/system-inventory/using-syscollector-information-to-trigger-alerts.html',
+  '/user-manual/capabilities/system-inventory/configuration.html',
+  '/user-manual/capabilities/system-calls-monitoring/use-cases/index.html',
+  '/user-manual/capabilities/system-calls-monitoring/use-cases/monitoring-file-and-directory-access.html',
+  '/user-manual/capabilities/system-calls-monitoring/use-cases/monitoring-commands-run-as-root.html',
+  '/user-manual/capabilities/system-calls-monitoring/use-cases/privilege-abuse.html',
+  '/user-manual/capabilities/wazuh-archives.html',
 ];
 
 /* Pages removed in 4.4 */
@@ -132,6 +273,20 @@ removedUrls['4.4'] = [
   '/user-manual/securing-wazuh/elastic-stack.html',
   '/user-manual/wazuh-dashboard/rbac.html',
   '/learning-wazuh/build-lab/install-wazuh-central-components.html',
+  '/user-manual/capabilities/antiflooding.html',
+  '/user-manual/capabilities/labels.html',
+  '/user-manual/capabilities/fluent-forwarder.html',
+  '/user-manual/capabilities/wazuh-logtest/index.html',
+  '/user-manual/capabilities/wazuh-logtest/how-it-works.html',
+  '/user-manual/capabilities/wazuh-logtest/logtest-configuration.html',
+  '/user-manual/capabilities/wazuh-logtest/logtest-faq.html',
+  '/user-manual/capabilities/file-integrity/fim-configuration.html',
+  '/user-manual/capabilities/file-integrity/fim-fields-rule-mapping.html',
+  '/user-manual/capabilities/auditing-whodata/index.html',
+  '/user-manual/capabilities/auditing-whodata/who-linux.html',
+  '/user-manual/capabilities/auditing-whodata/who-windows.html',
+  '/user-manual/capabilities/auditing-whodata/who-windows-policies.html',  
+  '/user-manual/capabilities/syscollector.html',  
 ];
 
   /* *** RELEASE 4.3 ****/
@@ -184,6 +339,7 @@ newUrls['4.3'] = [
   '/release-notes/release-4-3-8.html',
   '/release-notes/release-4-3-9.html',
   '/release-notes/release-4-3-10.html',
+  '/release-notes/release-4-3-11.html',
   '/getting-started/use-cases/container-security.html',
   '/user-manual/agents/query-configuration.html',
   '/user-manual/agents/listing/wazuh-dashboard.html',
@@ -367,6 +523,14 @@ newUrls['4.3'] = [
   '/user-manual/capabilities/malware-detection/clam-av-logs-collection.html',
   '/user-manual/capabilities/malware-detection/win-defender-logs-collection.html',
   '/user-manual/capabilities/malware-detection/custom-rules-malware-ioc.html',
+  '/user-manual/capabilities/active-response/ar-use-cases/blocking-ssh-brute-force.html',
+  '/user-manual/capabilities/active-response/ar-use-cases/disabling-user-account.html',
+  '/user-manual/capabilities/active-response/ar-use-cases/restarting-wazuh-agent.html',
+  '/user-manual/capabilities/active-response/additional-information.html',
+  '/user-manual/capabilities/active-response/custom-active-response-scripts.html',
+  '/user-manual/capabilities/active-response/default-active-response-scripts.html',
+  '/user-manual/capabilities/active-response/how-to-configure.html',
+  '/user-manual/capabilities/sec-config-assessment/use-cases.html',
 ];
 
 removedUrls['4.3'] = [
@@ -520,16 +684,29 @@ removedUrls['4.3'] = [
   '/user-manual/capabilities/virustotal-scan/about.html',
   '/user-manual/capabilities/virustotal-scan/index.html',
   '/user-manual/capabilities/virustotal-scan/integration.html',
+  '/user-manual/capabilities/active-response/ar-use-cases/blocking-attacks.html',
+  '/user-manual/capabilities/active-response/ar-use-cases/removing-malware.html',
+  '/user-manual/capabilities/active-response/ar-use-cases/wazuh-with-yara.html',
+  '/user-manual/capabilities/active-response/custom-active-response.html',
+  '/user-manual/capabilities/active-response/how-it-works.html',
+  '/user-manual/capabilities/active-response/remediation-configuration.html',
+  '/user-manual/capabilities/active-response/remediation-faq.html',
+  '/user-manual/capabilities/sec-config-assessment/what-is-it.html',
+  '/user-manual/capabilities/sec-config-assessment/use-case.html',
 ];
 
 
 redirections.push(
   {
     'target': ['4.2=>4.3', '4.3=>4.2'],
+    '4.2': '/user-manual/capabilities/sec-config-assessment/use-case.html',
+    '4.3': '/user-manual/capabilities/sec-config-assessment/use-cases.html',
+  },
+  {
+    'target': ['4.2=>4.3', '4.3=>4.2'],
     '4.2': '/pci-dss/elastic.html',
     '4.3': '/pci-dss/dashboard.html',
   },
-
   {
     'target': ['4.2=>4.3', '4.3=>4.2'],
     '4.2': '/upgrade-guide/upgrading-agent.html',
@@ -1220,7 +1397,47 @@ redirections.push(
     '4.2': '/user-manual/capabilities/virustotal-scan/integration.html',
     '4.3': '/user-manual/capabilities/malware-detection/virus-total-integration.html#how-it-works',
   },
-);
+  {
+    'target': ['4.2=>4.3','4.3=>4.2'],
+    '4.2': '/user-manual/capabilities/active-response/ar-use-cases/blocking-attacks.html',
+    '4.3': '/user-manual/capabilities/active-response/ar-use-cases/blocking-ssh-brute-force.html',
+  },
+  {
+    'target': ['4.2=>4.3'],
+    '4.2': '/user-manual/capabilities/active-response/ar-use-cases/removing-malware.html',
+    '4.3': '/proof-of-concept-guide/detect-remove-malware-virustotal.html',
+  },
+  {
+    'target': ['4.2=>4.3'],
+    '4.2': '/user-manual/capabilities/active-response/ar-use-cases/wazuh-with-yara.html',
+    '4.3': '/user-manual/capabilities/malware-detection/fim-yara.html',
+  },
+  {
+    'target': ['4.2=>4.3','4.3=>4.2'],
+    '4.2': '/user-manual/capabilities/active-response/custom-active-response.html',
+    '4.3': '/user-manual/capabilities/active-response/custom-active-response-scripts.html',
+  },
+  {
+    'target': ['4.2=>4.3'],
+    '4.2': '/user-manual/capabilities/active-response/how-it-works.html',
+    '4.3': '/user-manual/capabilities/active-response/index.html',
+  },
+  {
+    'target': ['4.2=>4.3'],
+    '4.2': '/user-manual/capabilities/active-response/remediation-configuration.html',
+    '4.3': '/user-manual/capabilities/active-response/how-to-configure.html',
+  },
+  {
+    'target': ['4.2=>4.3'],
+    '4.2': '/user-manual/capabilities/active-response/remediation-faq.html',
+    '4.3': '/user-manual/capabilities/active-response/index.html',
+  },
+  {
+    'target': ['4.2=>4.3', '4.3=>4.2'],
+    '4.2': '/user-manual/capabilities/sec-config-assessment/what-is-it.html',
+    '4.3': '/user-manual/capabilities/sec-config-assessment/how-it-works.html',
+  },
+  );
 
 /* *** RELEASE 4.2 ****/
 

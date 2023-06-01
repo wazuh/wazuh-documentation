@@ -6,7 +6,7 @@
 System inventory
 ================
 
-Wazuh  uses the system inventory module to gather information about a monitored endpoint. This information includes hardware details, OS information, network details, and running processes. The agent runs periodic scans on the endpoint and sends the information to the manager. The manager then updates the appropriate system information. See the :doc:`System inventory section </user-manual/capabilities/syscollector>` for more information about the system inventory module.
+Wazuh  uses the system inventory module to gather information about a monitored endpoint. This information includes hardware details, OS information, network details, and running processes. The agent runs periodic scans on the endpoint and sends the information to the manager. The manager then updates the appropriate system information. See the :doc:`System inventory section </user-manual/capabilities/system-inventory/index>` for more information about the system inventory module.
 
 The system inventory module helps to meet the following PCI DSS requirement:
 

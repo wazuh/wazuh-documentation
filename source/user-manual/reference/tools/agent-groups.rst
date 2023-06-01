@@ -148,8 +148,7 @@ Examples
     :class: output
 
     Do you want to remove the 'debian' group? [y/N]: y
-    All selected groups were removed
-    Affected agents: 007, 013
+    Group debian removed.
 
 * Add an agent to more than one group:
 

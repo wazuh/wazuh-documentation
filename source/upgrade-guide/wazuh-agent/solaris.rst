@@ -4,8 +4,8 @@
   :description: Check out how to upgrade the Wazuh agent to the latest available version remotely, using the agent_upgrade tool or the Wazuh API, or locally.
 
 
-Ugrading Wazuh agents on Solaris systems
-========================================
+Upgrading Wazuh agents on Solaris systems
+=========================================
 
 Select your Solaris version and follow the steps to upgrade the Wazuh agent. 
 

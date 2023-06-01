@@ -90,7 +90,7 @@ This specifies the email recipient for alerts.
 | **Allowed values** | Any valid email address |
 +--------------------+-------------------------+
 
-This section will only allow for one email address, but the section can be repeated for each email address you would wish include.
+Note that this section only allows for one email address. In case you want to add more than one, repeat the section as many times as required.
 
 email_from
 ^^^^^^^^^^
@@ -131,7 +131,7 @@ This option defines what SMTP server to use to deliver alerts.
 helo_server
 ^^^^^^^^^^^
 
-This option defines how the ossec server will identify itself when sending mail.
+This option defines how the Wazuh server identifies itself when sending mail.
 
 +--------------------+-----------------------------------------------+
 | **Default value**  | notify.ossec.net                              |
@@ -258,6 +258,8 @@ This sets the memory size for the event correlation engine.
 | **Allowed values** | Any integer, but values less than |
 |                    | 2048 will be replaced by 2048.    |
 +--------------------+-----------------------------------+
+
+.. _white_list: 
 
 white_list
 ^^^^^^^^^^
