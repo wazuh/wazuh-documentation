@@ -20,8 +20,8 @@ The following sections show how to install it, update it, and troubleshoot event
 .. thumbnail:: /images/splunk-app/wazuh-app-for-splunk.png
    :align: center
    :width: 80%
-   :title: Install the Wazuh app for Splunk
-   :alt: Install the Wazuh app for Splunk
+   :title: Wazuh app for Splunk
+   :alt: Wazuh app for Splunk
 
 .. note::      
 
