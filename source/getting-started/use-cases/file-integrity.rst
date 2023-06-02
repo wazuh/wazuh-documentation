@@ -99,13 +99,15 @@ In the Integrity Monitoring section of the Wazuh dashboard, users can see all of
    :align: center
    :width: 80% 
 
-.. thumbnail:: /images/getting-started/use-cases/wazuh-use-cases-fim2.png
-   :title: Integrity monitoring
+.. thumbnail:: /images/getting-started/use-cases/integrity-monitoring-events.png
+   :title: Integrity monitoring events
+   :alt: Integrity monitoring events
    :align: center
    :width: 80% 
 
-.. thumbnail:: /images/getting-started/use-cases/wazuh-use-cases-fim3.png
+.. thumbnail:: /images/getting-started/use-cases/integrity-monitoring-inventory.png
    :title: Integrity monitoring inventory
+   :Alt: Integrity monitoring inventory
    :align: center
    :width: 80%
 
