@@ -17,9 +17,11 @@ The following sections show how to install it, update it, and troubleshoot event
    :depth: 1
    :backlinks: none
 
-.. thumbnail:: /images/splunk-app/12.png
+.. thumbnail:: /images/splunk-app/wazuh-app-for-splunk.png
    :align: center
    :width: 80%
+   :title: Wazuh app for Splunk
+   :alt: Wazuh app for Splunk
 
 .. note::      
 
@@ -84,9 +86,11 @@ Install the Wazuh app for Splunk in an all-in-one architecture
     
       You can get more information about how to set up the credentials at :doc:`Securing the Wazuh API </user-manual/api/securing-api>` section.
 
-   .. thumbnail:: /images/splunk-app/13.png
+   .. thumbnail:: /images/splunk-app/wazuh-api-configuration.png
       :align: left
       :width: 100%
+      :title: Wazuh API configuration
+      :alt: Wazuh API configuration
 
    When the Wazuh app for Splunk is installed, the next step is installing and configuring the :ref:`Splunk forwarder <splunk_forwarder>`.
 
@@ -98,17 +102,21 @@ Install the Wazuh app for Splunk in an all-in-one architecture
       
       The Wazuh app considers as a valid index all indices that contain the word ``wazuh`` in the source type. The default value from the installation guide for source type is ``wazuh``.
 
-   .. thumbnail:: /images/splunk-app/14.png
+   .. thumbnail:: /images/splunk-app/configure-index-and-source-type.png
       :align: left
       :width: 100%
+      :title: Configure the index and source type
+      :alt: Configure the index and source type
 
    You can also select the API, Index, and Source Type using the `Quick settings menu`.
 
 #. Open the “Overview” tab, and you should start seeing alerts and events.
 
-   .. thumbnail:: /images/splunk-app/15.png
+   .. thumbnail:: /images/splunk-app/alerts-dashboard.png
       :align: left
       :width: 100%
+      :title: Alerts dashboard
+      :alt: Alerts dashboard
 
 Install the Wazuh app for Splunk in a minimal distributed architecture
 ----------------------------------------------------------------------
@@ -139,9 +147,11 @@ Install the Wazuh app for Splunk in a minimal distributed architecture
 
 #. The app will redirect you to the Settings tab. If you are not redirected to the Settings tab, select the settings icon, this will take you to the “Settings” page.
 
-   .. thumbnail:: /images/splunk-app/16.png
+   .. thumbnail:: /images/splunk-app/settings-icon.png
       :align: left
       :width: 100%
+      :title: Settings icon
+      :alt: Settings icon
 
    Fill out the form with your Wazuh API credentials. Use the URL and port from your Wazuh API server.
         
@@ -151,9 +161,11 @@ Install the Wazuh app for Splunk in a minimal distributed architecture
     
       You can get more information about how to set up the credentials at :doc:`Securing the Wazuh API </user-manual/api/securing-api>` section.
 
-   .. thumbnail:: /images/splunk-app/17.png
+   .. thumbnail:: /images/splunk-app/wazuh-api-credentials.png
       :align: left
       :width: 100%
+      :title: Wazuh API credentials
+      :alt: Wazuh API credentials
 
 #. In order to configure the index and source type of the app, go to Settings/Index (view image).
 
@@ -163,17 +175,21 @@ Install the Wazuh app for Splunk in a minimal distributed architecture
 
       The Wazuh app considers as a valid index all indices that contain the word ``wazuh`` in the source type. The default value from the installation guide for source type is ``wazuh``.
 
-   .. thumbnail:: /images/splunk-app/18.png
+   .. thumbnail:: /images/splunk-app/settings-index.png
       :align: left
       :width: 100%
+      :title: Settings/Index
+      :alt: Settings/Index
         
-   You can also select the API, Index, and Source Type using the Quick settings menu.
+   You can also select the API, Index, and Source Type using the `Quick settings menu`.
     
 #. Open the “Overview” tab, and you should start seeing alerts and events.
 
-   .. thumbnail:: /images/splunk-app/19.png
+   .. thumbnail:: /images/splunk-app/alerts-and-events.png
       :align: left
       :width: 100%
+      :title: Alerts dashboard
+      :alt: Alerts dashboard
 
 Install the Wazuh app for Splunk in a multi-instance cluster
 ------------------------------------------------------------
@@ -252,9 +268,11 @@ Install the Wazuh app for Splunk on the ``deployer`` machine and follow the step
 
 #. The app will redirect you to the Settings tab. If you are not redirected to the Settings tab, select the settings icon, this will take you to the “Settings” page.
 
-   .. thumbnail:: /images/splunk-app/20.png
+   .. thumbnail:: /images/splunk-app/settings-page.png
       :align: left
       :width: 100%
+      :title: Settings page
+      :alt: Settings page
 
    Fill out the form with your Wazuh API credentials. Use the URL and port from your Wazuh master node.
     
@@ -264,9 +282,11 @@ Install the Wazuh app for Splunk on the ``deployer`` machine and follow the step
     
       You can get more information about how to set up the credentials at :doc:`Securing the Wazuh API </user-manual/api/securing-api>` section.
 
-   .. thumbnail:: /images/splunk-app/21.png
+   .. thumbnail:: /images/splunk-app/wazuh-api-setting.png
       :align: left
       :width: 100%
+      :title: Wazuh API setting
+      :alt: Wazuh API setting
         
 #. In order to configure the index and source type of the app, go to Settings/Index (view image).
 
@@ -276,17 +296,21 @@ Install the Wazuh app for Splunk on the ``deployer`` machine and follow the step
     
       The Wazuh app considers as a valid index all indices that contain the word ``wazuh`` in the source type. The default value from the installation guide for source type is ``wazuh``.
 
-   .. thumbnail:: /images/splunk-app/22.png
+   .. thumbnail:: /images/splunk-app/index-tab.png
       :align: left
       :width: 100%
+      :title: Index tab
+      :alt: Index tab
     
-   You can also select the API, Index, and Source Type using the Quick settings menu.
+   You can also select the API, Index, and Source Type using the `Quick settings menu`.
 
 #. Open the “Overview” tab, and you should start seeing alerts and events.
 
-   .. thumbnail:: /images/splunk-app/23.png
+   .. thumbnail:: /images/splunk-app/alerts-and-events-tab.png
       :align: left
-      :width: 100%    
+      :width: 100%   
+      :title: Alerts dashboard
+      :alt: Alerts dashboard
         
 Update the Wazuh app for Splunk
 -------------------------------

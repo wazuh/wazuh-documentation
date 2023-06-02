@@ -34,3 +34,4 @@ In this section you will find:
     system-inventory/index
     vulnerability-detection/index
     osquery
+    wazuh-archives
