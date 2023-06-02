@@ -258,7 +258,7 @@ The Wazuh agent is a single and lightweight monitoring software. It is a multi-p
 
             .. code-block:: doscon
 
-                :: signtool sign /a /tr http://rfc3161timestamp.globalsign.com/advanced /d "%MSI_NAME%" /td SHA256 "%MSI_NAME%"
+                :: signtool sign /a /tr http://timestamp.digicert.com /d "%MSI_NAME%" /fd SHA256 /td SHA256 "%MSI_NAME%"
                 
         #.  Specify the version and the revision number when prompted. This will also generate the Windows installer file. In the following output, the version is set as |WAZUH_CURRENT_WIN_FROM_SOURCES| and the revision is set as |WAZUH_CURRENT_WIN_FROM_SOURCES_REV|. This generates the Windows installer ``wazuh-agent-|WAZUH_CURRENT_WIN_FROM_SOURCES|-|WAZUH_CURRENT_WIN_FROM_SOURCES_REV|.msi``
         
