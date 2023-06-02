@@ -6,162 +6,134 @@
 How it works
 ============
 
+To monitor endpoints without an agent, Wazuh requires an SSH connection between the Wazuh server and the endpoint to be monitored. The Wazuh agentless monitoring module can perform the following actions:
+
+- :ref:`Monitor files, directories, or configuration of an endpoint <monitor-files-directories-configuration-endpoint>`
+- :ref:`Run commands on an endpoint <run-commands-endpoint>`
+
+.. _monitor-files-directories-configuration-endpoint:
+
+Monitor files, directories, or configuration of an endpoint 
+-----------------------------------------------------------
+
+You can configure the Wazuh agentless monitoring module to monitor files, directories, and Cisco PIX firewall and router configurations. If there is a change to the monitored files and directories or the configuration of the firewall or router, this triggers an alert.
+
+.. _run-commands-endpoint:
+
+Run commands on an endpoint
+---------------------------
+
+You can specify commands to be run on the monitored endpoint, and the agentless monitoring module detects the output of these commands. When the output of executed commands changes, it detects them and triggers an alert.
+
 Connection
 ----------
 
-In order to connect the manager to the device using SSH authentication, the following ``register_host.sh`` script should be used. This script is located in the ``/var/ossec/agentless/`` directory and has two options: ``list``  and ``add``.
+Wazuh provides a ``register_host.sh`` script to connect the agentless endpoint to the Wazuh server using SSH authentication. This script is located in the ``/var/ossec/agentless/`` directory of the Wazuh server. You can add an endpoint and list connected endpoints with the ``add`` and ``list`` options.
 
-Using the ``list`` option will list all hosts already included.
+Add an endpoint
+^^^^^^^^^^^^^^^
 
-.. code-block:: console
+The ``add`` option of the ``register_host.sh`` script adds an agentless endpoint to the Wazuh server. Specify the ``NOPASS`` option to use public key authentication rather than using a password. 
 
-  # /var/ossec/agentless/register_host.sh list
+Endpoints with public key authentication
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-Using the ``add`` option will specify a new device to be added to the manager. ``NOPASS`` may be entered as the password to use public key authentication rather than using a password.  For Cisco devices, such as routers or firewalls, ``enablepass`` should be used to specify the enable password.
+To add agentless endpoints that use public key authentication, perform the following steps on the Wazuh server.
 
-.. code-block:: console
+#. Generate a public key with the following command:
 
-  # /var/ossec/agentless/register_host.sh add root@example_address.com example_password [enablepass]
+   .. code-block:: console
 
-Public key authentication can be used with the following command:
+      sudo -u wazuh ssh-keygen
 
-.. code-block:: console
+#. Run the following command to copy the public key to the monitored endpoint:
 
-  # sudo -u wazuh ssh-keygen
+   .. code-block:: console
 
-Once created, the public key must be copied into the remote device.
+      ssh-copy-id -i ~/.ssh/id_rsa.pub user@test.com
 
-Monitoring
-----------
+   Replace ``user@test.com`` with the username and the hostname or IP address of the agentless endpoint.
 
-After devices have been added to the list, the manager must be configured to monitor them. To view additional configuration options for the ``ossec.conf`` file, please refer to :ref:`agentless <reference_ossec_agentless>`.
+#. Add the endpoint by running the following command on the Wazuh server:
 
-BSD Integrity Check
-^^^^^^^^^^^^^^^^^^^
-For BSD systems, set the ``type`` as ``ssh_integrity_check_bsd`` as referenced below.  A space-separated list of directories may be referenced in the configuration section using the ``<arguments>`` tag.  Using this configuration, Wazuh will do an integrity check on the remote box.
+   .. code-block:: console
 
-.. code-block:: xml
+      # /var/ossec/agentless/register_host.sh add user@test.com NOPASS
 
-  <agentless>
-    <type>ssh_integrity_check_bsd</type>
-    <frequency>20000</frequency>
-    <host>root@test.com</host>
-    <state>periodic</state>
-    <arguments>/bin /var/</arguments>
-  </agentless>
+   The command output must be similar to the following:
 
-Linux Integrity Check
-^^^^^^^^^^^^^^^^^^^^^
-For Linux systems, set the ``type`` as ``ssh_integrity_check_linux`` as referenced below.  A space-separated list of directories may be referenced in the configuration section using the ``<arguments>`` tag.  Using this configuration, Wazuh will do an integrity check on the remote box.
+   .. code-block:: console
 
-.. code-block:: xml
+      *Host user@test.com added.
 
-  <agentless>
-    <type>ssh_integrity_check_linux</type>
-    <frequency>36000</frequency>
-    <host>root@test.com</host>
-    <state>periodic</state>
-    <arguments>/bin /etc/ /sbin</arguments>
-  </agentless>
+Endpoints with password authentication
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-Generic Diff
-^^^^^^^^^^^^
-A set of commands can also be configured to run on a remote device. Wazuh will alert you if the output of those commands changes. In order to use this option, set the ``type`` as ``ssh_generic_diff``, as shown below.
+Run the following command to add agentless endpoints to the Wazuh server using the password authentication method:
 
-.. code-block:: xml
+   .. code-block:: console
 
-  <agentless>
-    <type>ssh_generic_diff</type>
-    <frequency>20000</frequency>
-    <host>root@test.com</host>
-    <state>periodic_diff</state>
-    <arguments>ls -la /etc; cat /etc/passwd</arguments>
-  </agentless>
+      # /var/ossec/agentless/register_host.sh add user@test.com test_password
 
-.. note::
+Replace ``user@test.com`` with the username and the hostname or IP address of the agentless host and ``test_password`` with the password of the agentless host.
 
-  To use ``su`` in a command as an argument, ``use_su`` must be set before the hostname. In the previous example, this would appear as: ``<host>use_su root@example_address.com</host>``
+The command output must be similar to the following:
 
+   .. code-block:: console
 
-Pix config
-^^^^^^^^^^
-This option will alert if a Cisco PIX/router configuration changes. Set the ``type`` to ``ssh_pixconfig_diff``, as shown below.
+      *Host user@test.com added.
 
-.. code-block:: xml
+Cisco PIX
+~~~~~~~~~
 
-  <agentless>
-    <type>ssh_pixconfig_diff</type>
-    <frequency>36000</frequency>
-    <host>pix@pix.fw.local</host>
-    <state>periodic_diff</state>
-  </agentless>
+For Cisco devices, such as routers or firewalls, use ``enablepass`` to specify the enable password. 
 
-Checking the setup
-------------------
+Add a Cisco device using the configuration command example below:
 
-Finally, the ``expect`` package must be present on the manager for this feature to work.
+   .. code-block:: console
 
-When the ``expect`` package is present and Wazuh is restarted, the following is shown in the ``/var/ossec/logs/ossec.log`` file:
+      # /var/ossec/agentless/register_host.sh add pix@example_address.com example_password enablepass
 
-.. code-block:: none
-  :class: output
+The command output must be similar to the following:
 
-  wazuh-agentlessd: INFO: Test passed for 'ssh_integrity_check_linux'.
+   .. code-block:: console
 
-When Wazuh has connected to the remote device, the following will be shown in the same log file:
+      *Host pix@example_address.com added.
 
-.. code-block:: none
-  :class: output
+List connected endpoints
+^^^^^^^^^^^^^^^^^^^^^^^^
 
-  wazuh-agentlessd: INFO: ssh_integrity_check_linux: root@example_adress.com: Starting.
-  wazuh-agentlessd: INFO: ssh_integrity_check_linux: root@example_adress.com: Finished.
+The ``list`` option of the ``register_host.sh`` script displays all agentless endpoints connected to the Wazuh server. 
 
-Alert
------
-Once configured as above, Wazuh alerts will be triggered when changes occur within the directories:
+Use the following command to display the connected endpoints:
 
-Sample alerts are as follows:
+   .. code-block:: console
 
-Integrity check BSD/Linux sample alert:
+      /var/ossec/agentless/register_host.sh list
 
-.. code-block:: none
-	:class: output
+The command output must be similar to the following:
 
-	** Alert 1486811998.93230: - ossec,syscheck,pci_dss_11.5,
-	2017 Feb 11 03:19:58 ubuntu->(ssh_integrity_check_linux) root@192.168.1.3->syscheck
-	Rule: 550 (level 7) -> 'Integrity checksum changed.'
-	Integrity checksum changed for: '/etc/.hidden'
-	Size changed from '0' to '10'
-	Old md5sum was: 'd41d8cd98f00b204e9800998ecf8427e'
-	New md5sum is : 'cc7bd56aba1122d0d5f9c7ef7f96de23'
-	Old sha1sum was: 'da39a3ee5e6b4b0d3255bfef95601890afd80709'
-	New sha1sum is : 'b570fbdf7d6ad1d1e95ef57b74877926e2cdf196'
+   .. code-block:: console
 
-	File: /etc/.hidden
-	Old size: 0
-	New size: 10
-	New permissions:   1204
-	New user: 0
-	New group: 0
-	Old MD5: d41d8cd98f00b204e9800998ecf8427e
-	New MD5: cc7bd56aba1122d0d5f9c7ef7f96de23
-	Old SHA1: da39a3ee5e6b4b0d3255bfef95601890afd80709
-	New SHA1: b570fbdf7d6ad1d1e95ef57b74877926e2cdf196
+      *Available hosts: 
+      user@example_address.com
+      pix@example_address.com 
+
+Remove agentless configuration
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Agentless endpoint credentials are stored in the ``/var/ossec/agentless/.passlist`` file on the Wazuh server. This file must be deleted to remove all agentless configurations, as it is currently not possible to remove the configuration of only one endpoint. 
+
+Perform the following steps on the Wazuh server to remove your agentless configuration and passwords.
+
+#. Remove the agentless monitoring setting from the ``/var/ossec/etc/ossec.conf`` file.
+
+#. Delete the ``/var/ossec/agentless/.passlist`` file.
+
+#. Restart the Wazuh manager to apply the changes: 
+
+   .. code-block:: console
+
+      systemctl restart wazuh-manager
 
 
-
-Generic Diff sample alert:
-
-.. code-block:: none
-	:class: output
-
-	** Alert 1486811190.88243: - ossec,syscheck,agentless,pci_dss_11.5,pci_dss_10.6.1,
-	2017 Feb 11 03:06:30 ubuntu->(ssh_generic_diff) root@192.168.1.3->agentless
-	Rule: 555 (level 7) -> 'Integrity checksum for agentless device changed.'
-	ossec: agentless: Change detected:
-	3c3
-	< drwxr-xr-x. 77 root root    8192 Feb 27 10:44 .
-	---
-	> drwxr-xr-x. 77 root root    8192 Feb 27 10:47 .
-	176a177
-	> -rw-r--r--.  1 root root       0 Feb 27 10:47 test
