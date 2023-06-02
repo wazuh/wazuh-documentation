@@ -8,8 +8,8 @@ How it works
 
 To monitor endpoints without an agent, Wazuh requires an SSH connection between the Wazuh server and the endpoint to be monitored. The Wazuh agentless monitoring module can perform the following actions:
 
-- :ref:`Monitor files, directories, or configuration of an endpoint <monitor-files-directories-configuration-endpoint>`
-- :ref:`Run commands on an endpoint <run-commands-endpoint>`
+- `Monitor files, directories, or configuration of an endpoint`_
+- `Run commands on an endpoint`_
 
 .. _monitor-files-directories-configuration-endpoint:
 
