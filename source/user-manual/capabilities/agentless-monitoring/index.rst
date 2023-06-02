@@ -8,9 +8,11 @@
 Agentless monitoring
 ====================
 
-Agentless monitoring allows you to monitor devices or systems with no agent via SSH, such as routers, firewalls, switches, and Linux/BSD systems. This allows users with software installation restrictions to meet security and compliance requirements.
+The Wazuh server analyzes the data it receives from the Wazuh agents to monitor, detect, and trigger alerts for security events and incidents on endpoints. However, some endpoints may have limitations that prevent the installation of the Wazuh agent. Wazuh solves this problem by using the agentless monitoring capability.
 
-Alerts will be triggered when the checksum on the output changes and will show either the checksum or the exact diff output of the change.
+Agentless monitoring refers to a type of endpoint monitoring that does not require the installation of an agent or software. This approach uses existing protocols to access and gather information from the monitored endpoint. 
+
+The Wazuh agentless monitoring capability uses the SSH (Secure Shell) protocol to collect and transfer events from endpoints to the Wazuh server. The supported platforms include routers, firewalls, switches, and Linux/BSD systems. It allows endpoints with software installation restrictions to meet security and compliance requirements.
 
 .. topic:: Contents
 
