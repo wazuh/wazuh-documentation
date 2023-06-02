@@ -313,6 +313,7 @@ newUrls['4.4'] = [
   '/user-manual/capabilities/system-calls-monitoring/use-cases/monitoring-file-and-directory-access.html',
   '/user-manual/capabilities/system-calls-monitoring/use-cases/monitoring-commands-run-as-root.html',
   '/user-manual/capabilities/system-calls-monitoring/use-cases/privilege-abuse.html',
+  '/user-manual/capabilities/wazuh-archives.html',
 ];
 
 /* Pages removed in 4.4 */
