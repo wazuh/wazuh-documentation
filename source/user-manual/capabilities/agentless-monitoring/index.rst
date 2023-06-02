@@ -21,4 +21,5 @@ The Wazuh agentless monitoring capability uses the SSH (Secure Shell) protocol t
 
         how-it-works
         agentless-configuration
+        visualization
         agentless-faq
