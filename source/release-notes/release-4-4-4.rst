@@ -13,7 +13,32 @@ What's new
 
 This release includes new features or enhancements as the following:
 
+Wazuh dashboard
+^^^^^^^^^^^^^^^
 
+- `#5416 <https://github.com/wazuh/wazuh-kibana-app/pull/5416>`_ Added a title to the agent name input of the deploy a new agent section.
+- `#5416 <https://github.com/wazuh/wazuh-kibana-app/pull/5416>`_ Added callout below the agent name entry of the deploy a new agent section.
+- `#5416 <https://github.com/wazuh/wazuh-kibana-app/pull/5416>`_ Changed the title of step 3 of the deploy a new agent section.
+- `#5416 <https://github.com/wazuh/wazuh-kibana-app/pull/5416>`_ Changed the description of step 3 of the deploy a new agent section.
+- `#5416 <https://github.com/wazuh/wazuh-kibana-app/pull/5416>`_ Changed the placeholder of the agent name input of the deploy a new agent section.
+
+Wazuh Kibana plugin for Kibana 7.10.2
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+- `#5416 <https://github.com/wazuh/wazuh-kibana-app/pull/5416>`_ Added a title to the agent name input of the deploy a new agent section.
+- `#5416 <https://github.com/wazuh/wazuh-kibana-app/pull/5416>`_ Added callout below the agent name entry of the deploy a new agent section.
+- `#5416 <https://github.com/wazuh/wazuh-kibana-app/pull/5416>`_ Changed the title of step 3 of the deploy a new agent section.
+- `#5416 <https://github.com/wazuh/wazuh-kibana-app/pull/5416>`_ Changed the description of step 3 of the deploy a new agent section.
+- `#5416 <https://github.com/wazuh/wazuh-kibana-app/pull/5416>`_ Changed the placeholder of the agent name input of the deploy a new agent section.
+
+Wazuh Kibana plugin for Kibana 7.16.x and 7.17.x
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+- `#5416 <https://github.com/wazuh/wazuh-kibana-app/pull/5416>`_ Added a title to the agent name input of the deploy a new agent section.
+- `#5416 <https://github.com/wazuh/wazuh-kibana-app/pull/5416>`_ Added callout below the agent name entry of the deploy a new agent section.
+- `#5416 <https://github.com/wazuh/wazuh-kibana-app/pull/5416>`_ Changed the title of step 3 of the deploy a new agent section.
+- `#5416 <https://github.com/wazuh/wazuh-kibana-app/pull/5416>`_ Changed the description of step 3 of the deploy a new agent section.
+- `#5416 <https://github.com/wazuh/wazuh-kibana-app/pull/5416>`_ Changed the placeholder of the agent name input of the deploy a new agent section.
 
 Resolved issues
 ---------------
