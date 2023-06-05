@@ -19,7 +19,7 @@ Wazuh server
 
 Perform the following steps on the Wazuh server.
 
-#. Add the following block to the ``/var/ossec/etc/ossec.conf`` configuration file. This configuration runs a command to print the content of the ``/tmp/newfile.txt`` file every 2 minutes. It also detects the difference between the outputs each time the command is run. 
+#. Add the following block to the ``/var/ossec/etc/ossec.conf`` configuration file. This configuration runs a command to print the content of the ``/tmp/newfile.txt`` file every *2 minutes*. It also detects the difference between the outputs each time the command is run. 
 
    .. code-block:: xml
       :emphasize-lines: 6        
