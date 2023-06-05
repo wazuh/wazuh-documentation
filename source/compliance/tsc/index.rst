@@ -38,7 +38,7 @@ The Trust Services Criteria (TSC) created by the Assurance Services Executive Co
 
    Wazuh assists with these criteria by performing log collection, file integrity monitoring, configuration assessment, threat detection, vulnerability assessment, and automated threat response.
 
-This document outlines use cases that show how Wazuh helps users comply with the TSC common criteria, and the additional criteria for availability, confidentiality, and processing integrity. We have also created the `Using Wazuh for TSC 2017 requirements guide <>`__, which complements this document. Please refer to the guide for more details on how Wazuh helps meet TSC requirements.
+This document outlines use cases that show how Wazuh helps users comply with the TSC common criteria, and the additional criteria for availability, confidentiality, and processing integrity. We have also created the `Using Wazuh for TSC 2017 requirements guide <https://wazuh.com/docs/using-wazuh-for-TSC-2017-requirements-guide.pdf>`__, which complements this document. Please refer to the guide for more details on how Wazuh helps meet TSC requirements.
 
 The following sections outline some of the technical requirements that Wazuh supports:
 
