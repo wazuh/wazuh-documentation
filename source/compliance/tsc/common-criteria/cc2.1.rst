@@ -33,15 +33,10 @@ The use case below shows how log data analysis can be used to detect specific ev
    :align: center
    :width: 80%
 
-The images below show the Wazuh Security events dashboard.
+The image below shows the Wazuh Security events dashboard.
 
-.. thumbnail:: /images/compliance/tsc/common-criteria/security-events-dashboard1.png
+.. thumbnail:: /images/compliance/tsc/common-criteria/security-events-dashboard.png
    :title: Security events dashboard top
-   :align: center
-   :width: 80%
-
-.. thumbnail:: /images/compliance/tsc/common-criteria/security-events-dashboard2.png
-   :title: Security events dashboard bottom
    :align: center
    :width: 80%
 

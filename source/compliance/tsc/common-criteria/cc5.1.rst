@@ -39,7 +39,7 @@ In this case, we use the FIM module to track changes to the ``/etc/passwd`` file
 
       # useradd randomuser
 
-You can see an alert generated to show that the file /etc/passwd file has been modified.
+You can see an alert generated to show that the file ``/etc/passwd`` file has been modified.
 
 .. thumbnail:: /images/compliance/tsc/common-criteria/etc-passwd-file-modified-alert.png
    :title: /etc/passwd file modified alert
