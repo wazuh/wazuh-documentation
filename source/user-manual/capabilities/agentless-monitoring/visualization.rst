@@ -28,10 +28,10 @@ Perform the following steps to create a visualization for the alerts from agentl
 
 #. Add the following fields from the **Available fields** section:
 
-- **rule.description**
-- **rule.level**
-- **rule.id**
-- **agentless.host**
+   - **rule.description**
+   - **rule.level**
+   - **rule.id**
+   - **agentless.host**
 
    You can see in the image below how you can add the rule.description field. Follow the same step for the remaining fields.   
 
