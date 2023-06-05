@@ -192,12 +192,12 @@ Wazuh API endpoints require authentication. All calls must include a JSON Web To
       {
          "data": {
             "title": "Wazuh API REST",
-            "api_version": "4.4.3",
-            "revision": 40409,
+            "api_version": "<CURRENT_API_VERSION>",
+            "revision": <CURRENT_REVISION>,
             "license_name": "GPL 2.0",
-            "license_url": "https://github.com/wazuh/wazuh/blob/v4.4.3/LICENSE",
+            "license_url": "https://github.com/wazuh/wazuh/blob/v<CURRENT_API_VERSION>/LICENSE",
             "hostname": "Wazuh",
-            "timestamp": "2023-05-25T17:44:38Z"
+            "timestamp": "<CURRENT_DATE>"
          },
          "error": 0
       }
