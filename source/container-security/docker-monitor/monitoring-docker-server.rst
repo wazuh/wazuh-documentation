@@ -13,7 +13,6 @@ All the features available in an agent can be useful to monitor Docker servers (
     -   :doc:`/user-manual/capabilities/active-response/index`
     -   :ref:`manual_agentless`
     -   :ref:`manual_anomaly_detection`
-    -   :ref:`auditing-whodata`
     -   :ref:`manual_command_monitoring`
     -   :ref:`manual_file_integrity`
     -   :ref:`manual_log_analysis`

@@ -24,18 +24,14 @@ In this section you will find:
 
     log-data-collection/index
     file-integrity/index
-    auditing-whodata/index
     malware-detection/index
     sec-config-assessment/index
     policy-monitoring/index
     system-calls-monitoring/index
     command-monitoring/index
     active-response/index
-    agentless-monitoring/index
-    antiflooding
-    labels
-    syscollector
+    agentless-monitoring/index        
+    system-inventory/index
     vulnerability-detection/index
     osquery
-    fluent-forwarder
-    wazuh-logtest/index
+    wazuh-archives

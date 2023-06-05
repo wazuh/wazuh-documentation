@@ -26,8 +26,10 @@ Wazuh server and Elastic Stack are installed on the same host. This type of depl
 
       .. thumbnail:: ../../images/installation/all-in-one-deployment.png
         :title: All-in-one deployment
+        :alt: All-in-one deployment
         :align: center
         :width: 80%
+        
 
     The following components will be installed:
 
@@ -46,8 +48,9 @@ Each component is installed in a separate host as a single-node or multi-node cl
 
 Kibana can be installed on the same server as the Elasticsearch node, or on a separate one. This type of deployment is appropriate for production environments as it provides high availability and scalability of the services.
 
-      .. thumbnail:: ../../images/installation/distributed-no-title.png
+      .. thumbnail:: ../../images/installation/distributed-deployment.png
         :title: Distributed deployment
+        :alt: Distributed deployment
         :align: center
         :width: 80%
 

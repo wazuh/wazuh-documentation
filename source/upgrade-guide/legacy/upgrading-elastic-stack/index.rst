@@ -8,7 +8,7 @@
 Upgrading Elastic Stack
 =======================
 
-This section guides through the process of upgrading the Elastic Stack components from versions prior to 7.0.
+This section guides you through the process of upgrading the Elastic Stack components from versions prior to 7.0.
 
 .. note::
 

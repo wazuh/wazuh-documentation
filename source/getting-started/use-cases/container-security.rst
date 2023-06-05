@@ -117,8 +117,9 @@ Example of an alert generated when a command is executed inside a container:
 
 Example of Docker alerts in the web user interface:
 
-.. thumbnail:: /images/getting-started/use-cases/wazuh-use-cases-docker.png
-   :title: Docker events
+.. thumbnail:: /images/getting-started/use-cases/docker-alerts.png
+   :title: Docker alerts
+   :alt: Docker alerts
    :align: center
    :width: 80%
    :wrap_image: No

@@ -97,8 +97,9 @@ See below an example of an alert generated when an AWS security group is deleted
 
 Example of AWS dashboard:
 
-.. thumbnail:: /images/getting-started/use-cases/wazuh-use-cases-cloud-geo.png
-   :title: AWS dashboard
+.. thumbnail:: /images/getting-started/use-cases/aws-security-dashboard.png
+   :title: AWS security dashboard
+   :alt: AWS security dashboard
    :align: center
    :width: 80%
    :wrap_image: No

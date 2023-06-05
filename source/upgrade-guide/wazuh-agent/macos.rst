@@ -4,8 +4,8 @@
   :description: Check out how to upgrade the Wazuh agent to the latest available version remotely, using the agent_upgrade tool or the Wazuh API, or locally.
 
 
-Ugrading Wazuh agents on macOS systems
-======================================
+Upgrading Wazuh agents on macOS systems
+=======================================
 
 Follow these steps to upgrade Wazuh agents locally on macOS systems. If you want to perform a remote upgrade, check the :doc:`Remote agent upgrade </user-manual/agents/remote-upgrading/upgrading-agent>` section to learn more. 
 
@@ -30,9 +30,10 @@ Follow these steps to upgrade Wazuh agents locally on macOS systems. If you want
 
          Using the GUI will perform a simple upgrade. Double click on the downloaded file and follow the wizard. If you are not sure how to answer some of the prompts, simply use the default answers.
 
-         .. image:: /images/installation/macos.png
+         .. thumbnail:: ../../images/installation/macos-agent.png
             :align: center
-            :scale: 50 %
+            :title: macOS agent installer
+            :alt: macOS agent installer            
 
 
 .. note::
