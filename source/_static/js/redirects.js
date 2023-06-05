@@ -251,6 +251,7 @@ newUrls['4.4'] = [
   '/user-manual/capabilities/system-calls-monitoring/use-cases/monitoring-commands-run-as-root.html',
   '/user-manual/capabilities/system-calls-monitoring/use-cases/privilege-abuse.html',
   '/user-manual/capabilities/wazuh-archives.html',
+  '/user-manual/capabilities/agentless-monitoring/connection.html',
   '/user-manual/capabilities/agentless-monitoring/visualization.html',
 ];
 

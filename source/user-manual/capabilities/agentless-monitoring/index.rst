@@ -20,6 +20,7 @@ The Wazuh agentless monitoring capability uses the SSH (Secure Shell) protocol t
         :maxdepth: 2
 
         how-it-works
+        connection
         agentless-configuration
         visualization
         use-cases
