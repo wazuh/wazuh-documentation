@@ -186,7 +186,7 @@ Wazuh API endpoints require authentication. All calls must include a JSON Web To
 
       curl -k -X GET "https://localhost:55000/?pretty=true" -H "Authorization: Bearer $TOKEN"
 
-   .. code-block:: JSON
+   .. code-block:: none
       :class: output
 
       {
@@ -197,7 +197,7 @@ Wazuh API endpoints require authentication. All calls must include a JSON Web To
             "license_name": "GPL 2.0",
             "license_url": "https://github.com/wazuh/wazuh/blob/v<CURRENT_API_VERSION>/LICENSE",
             "hostname": "Wazuh",
-            "timestamp": "<CURRENT_DATE>"
+            "timestamp": "<CURRENT_TIME>"
          },
          "error": 0
       }
