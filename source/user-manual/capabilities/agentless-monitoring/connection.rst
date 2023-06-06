@@ -1,7 +1,7 @@
 .. Copyright (C) 2015, Wazuh, Inc.
 
 .. meta::
-  :description: Learn more about how the agentless monitoring of Wazuh works: connection, monitoring, checking the setup, and alert. 
+  :description: Wazuh provides a script to connect the agentless endpoint to the Wazuh server using SSH authentication. Learn more about it in this section. 
   
 Connection
 ==========

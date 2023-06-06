@@ -1,7 +1,7 @@
 .. Copyright (C) 2015, Wazuh, Inc.
 
 .. meta::
-  :description: Agentless monitoring allows you to monitor devices or systems with no agent via SSH. Learn how it works and its configuration in this section.
+  :description: The Wazuh agentless monitoring capability uses the SSH protocol to collect and transfer events to the Wazuh server. Learn more about it in this section.
 
 .. _manual_agentless:
 

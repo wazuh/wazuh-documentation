@@ -1,7 +1,7 @@
 .. Copyright (C) 2015, Wazuh, Inc.
 
 .. meta::
-  :description: Get answers to the most frequently asked questions about Wazuh Agentless monitoring in this FAQ section of the Wazuh documentation.
+  :description: Learn more about Wazuh Agentless monitoring with use cases in this section of the Wazuh documentation.
 
 Use cases
 =========
