@@ -41,7 +41,8 @@ To add agentless endpoints that use public key authentication, perform the follo
    The command output must be similar to the following:
 
    .. code-block:: console
-
+      :class: output
+      
       *Host user@test.com added.
 
 Endpoints with password authentication
@@ -58,6 +59,7 @@ Replace ``user@test.com`` with the username and the hostname or IP address of th
 The command output must be similar to the following:
 
    .. code-block:: console
+      :class: output
 
       *Host user@test.com added.
 
@@ -75,6 +77,7 @@ Add a Cisco device using the configuration command example below:
 The command output must be similar to the following:
 
    .. code-block:: console
+      :class: output
 
       *Host pix@example_address.com added.
 
@@ -92,7 +95,8 @@ Use the following command to display the connected endpoints:
 The command output must be similar to the following:
 
    .. code-block:: console
-
+      :class: output
+      
       *Available hosts: 
       user@example_address.com
       pix@example_address.com 

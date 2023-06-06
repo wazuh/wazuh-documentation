@@ -155,7 +155,7 @@ Visualize the alert
 
 You can visualize the alert with any of these options:
 
-- Navigate to the **Discover** section and open the visualization created in the :doc:`Monitoring </user-manual/capabilities/agentless-monitoring/visualization>` section. 
+- Navigate to the **Discover** section and open the visualization created in the :doc:`Visualization </user-manual/capabilities/agentless-monitoring/visualization>` section. 
 
 - Navigate to **Modules > Security events** on the Wazuh dashboard. Search for ``agentless.host:*`` to view the alert generated. 
 
