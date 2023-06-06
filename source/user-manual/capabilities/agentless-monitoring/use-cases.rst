@@ -66,19 +66,19 @@ You can visualize the alert with any of these options
 
 - Navigate to **Modules > Security events** on the Wazuh dashboard. Search for ``agentless.host:*`` to view the alert generated. 
 
-   .. thumbnail:: /images/manual/agentless-monitoring/navigate-to-modules-security-events.png
-      :title: Navigate to Modules > Security events
-      :alt: Navigate to Modules > Security events
-      :align: center
-      :width: 80%
+.. thumbnail:: /images/manual/agentless-monitoring/navigate-to-modules-security-events.png
+   :title: Navigate to Modules > Security events
+   :alt: Navigate to Modules > Security events
+   :align: center
+   :width: 80%
 
 Expand the alert with ``rule.id:555`` to view more information about the event. In the image below, under the full log, you can see the output of the command and the difference between the commands when the file was modified.
 
-   .. thumbnail:: /images/manual/agentless-monitoring/expand-the-alert-with-rule-id-555.png
-      :title: Expand the alert with rule.id:555
-      :alt: Expand the alert with rule.id:555
-      :align: center
-      :width: 80%
+.. thumbnail:: /images/manual/agentless-monitoring/expand-the-alert-with-rule-id-555.png
+   :title: Expand the alert with rule.id:555
+   :alt: Expand the alert with rule.id:555
+   :align: center
+   :width: 80%
 
 Monitor files and directories on an endpoint
 --------------------------------------------
@@ -159,24 +159,24 @@ You can visualize the alert with any of these options:
 
 - Navigate to **Modules > Security events** on the Wazuh dashboard. Search for ``agentless.host:*`` to view the alert generated. 
 
-   .. thumbnail:: /images/manual/agentless-monitoring/search-for-agentless-host.png
-      :title: Search for agentless.host:*
-      :alt: Search for agentless.host:*
-      :align: center
-      :width: 80%
+.. thumbnail:: /images/manual/agentless-monitoring/search-for-agentless-host.png
+   :title: Search for agentless.host:*
+   :alt: Search for agentless.host:*
+   :align: center
+   :width: 80%
 
 Select the ``syscheck.path`` field to add a column that shows all the monitored files.
 
-   .. thumbnail:: /images/manual/agentless-monitoring/select-the-syscheck-path.png
-      :title: Select the syscheck.path
-      :alt: Select the syscheck.path
-      :align: center
-      :width: 80%
+.. thumbnail:: /images/manual/agentless-monitoring/select-the-syscheck-path.png
+   :title: Select the syscheck.path
+   :alt: Select the syscheck.path
+   :align: center
+   :width: 80%
 
 Expand one of the alerts with ``rule.id:550`` to find information about the changes made to the file. You can see the file size and checksum have changed in the image below.  
 
-   .. thumbnail:: /images/manual/agentless-monitoring/expand-one-of-the-alerts-with-rule-id-550.png
-      :title: Expand one of the alerts with rule.id:550
-      :alt: Expand one of the alerts with rule.id:550
-      :align: center
-      :width: 80%
+.. thumbnail:: /images/manual/agentless-monitoring/expand-one-of-the-alerts-with-rule-id-550.png
+   :title: Expand one of the alerts with rule.id:550
+   :alt: Expand one of the alerts with rule.id:550
+   :align: center
+   :width: 80%
