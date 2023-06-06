@@ -20,7 +20,7 @@ Dependencies
 ------------
 
 All cloud and container providers require specific dependencies. Check each section to learn more.
-We use `Pip <https://pypi.org/project/pip/>`_ , the package installer for Python, to install the required dependencies.
+We use `Pip <https://pypi.org/project/pip/>`_, the package installer for Python, to install the required dependencies.
 
 - :doc:`AWS dependencies </amazon/services/prerequisites/dependencies>`
 - :doc:`AZURE dependencies </azure/activity-services/prerequisites/dependencies>`

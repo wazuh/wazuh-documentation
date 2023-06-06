@@ -9,10 +9,10 @@ Python
 ------
 
 GCP module require `Python 3 <https://www.python.org/>`_. It is compatible with
-`Python |PYTHON_CLOUD_CONTAINERS| - 3.10 <https://www.python.org/downloads/>`_.
+`Python |PYTHON_CLOUD_CONTAINERS_MIN| - |PYTHON_CLOUD_CONTAINERS_MAX| <https://www.python.org/downloads/>`_.
 
 .. note::
-   Python versions 3.11+ should work although it is not guaranteed.
+   Newer Python versions should work although it is not guaranteed.
 
 Installing dependencies
 =======================

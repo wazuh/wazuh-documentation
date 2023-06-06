@@ -9,19 +9,16 @@ Python
 ------
 
 AWS module require `Python 3 <https://www.python.org/>`_. It is compatible with
-`Python |PYTHON_CLOUD_CONTAINERS| - 3.10 <https://www.python.org/downloads/>`_.
+`Python |PYTHON_CLOUD_CONTAINERS_MIN| - |PYTHON_CLOUD_CONTAINERS_MAX| <https://www.python.org/downloads/>`_.
 
 .. note::
-   Python versions 3.11+ should work although it is not guaranteed.
+   Newer Python versions should work although it is not guaranteed.
 
 Installing dependencies
 =======================
 
-
 .. warning::
   The Wazuh manager includes all dependencies installed, these steps are only necessary when configuring the integration in a Wazuh agent.
-
-To learn more, see the :doc:`Cloud and container monitoring </user-manual/agents/cloud-and-container-monitoring>` section under the Agent management.
 
 `Boto3 <https://boto3.readthedocs.io/>`__ is the official package supported by Amazon to manage AWS resources. It is used to download the log messages from the different AWS services supported by Wazuh. The module is compatible with boto3 from ``1.13.1`` to ``1.17.85``. Future boto3 releases should maintain compatibility although it cannot be guaranteed.
 
@@ -30,3 +27,5 @@ To install the dependencies, execute the following command:
 .. code-block:: console
 
   # pip3 install boto3==1.17.85
+
+To learn more, see the :doc:`Cloud and container monitoring </user-manual/agents/cloud-and-container-monitoring>` section under the Agent management.
