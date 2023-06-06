@@ -13,6 +13,11 @@ What's new
 
 This release includes new features or enhancements as the following:
 
+Ruleset
+^^^^^^^
+
+- `#17211 <https://github.com/wazuh/wazuh/pull/17211>`_ Updated all current rule descriptions from "Ossec" to "Wazuh".
+
 Wazuh dashboard
 ^^^^^^^^^^^^^^^
 
@@ -45,6 +50,15 @@ Resolved issues
 
 This release resolves known issues as the following: 
 
+Wazuh manager
+^^^^^^^^^^^^^
+
+==============================================================    =============
+Reference                                                         Description
+==============================================================    =============
+`#17178 <https://github.com/wazuh/wazuh/pull/17178>`_             The vulnerability scanner stops producing false positives for some Windows 11 vulnerabilities due to a change in the feed's CPE.
+`#16908 <https://github.com/wazuh/wazuh/pull/16908>`_             Prevented the VirusTotal integration from querying the API when the source alert misses the MD5.
+==============================================================    =============
 
 Changelogs
 ----------
