@@ -5,13 +5,20 @@
 
 .. _gcp_dependencies:
 
+Python
+------
+
+GCP module require `Python 3 <https://www.python.org/>`_. It is compatible with
+`Python |PYTHON_CLOUD_CONTAINERS| - 3.10 <https://www.python.org/downloads/>`_.
+
+.. note::
+   Python versions 3.11+ should work although it is not guaranteed.
+
 Installing dependencies
 =======================
 
 .. warning::
   The Wazuh manager includes all dependencies installed, the following steps are only necessary when configuring the integration in a Wazuh agent.
-
-To learn more about agent cloud monitoring, check out :doc:`this section </user-manual/agents/cloud-and-container-monitoring>`.
 
 `Google-cloud-pubsub <https://pypi.org/project/google-cloud-pubsub/>`_ is the official python library supported by Google to manage Google Cloud Pub/Sub resources. It is used to pull the log messages from the Pub/Sub queue.
 
@@ -21,3 +28,4 @@ To install the necessary dependencies, execute the following command:
 
   # pip3 install google-cloud-core==1.7.1 google-cloud-pubsub==2.7.1 google-cloud-storage==1.39.0 pytz==2020.1
 
+To learn more, see the :doc:`Cloud and container monitoring </user-manual/agents/cloud-and-container-monitoring>` section under the Agent management.

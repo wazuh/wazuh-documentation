@@ -495,6 +495,7 @@ custom_replacements = {
     "|WAZUH_CURRENT_MAJOR|" : "4.x",
     "|WAZUH_CURRENT_MINOR|" : version,
     "|WAZUH_CURRENT|" : release,
+    "|PYTHON_CLOUD_CONTAINERS|" : "3.7",
     # --- Revision numbers for Wazuh agent and manager packages versions
     # Alpine APK packages revisions
     "|WAZUH_REVISION_APK_AGENT_I386|" : "r1",

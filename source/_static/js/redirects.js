@@ -162,6 +162,12 @@ redirections.push(
     },
 );
 
+/* Pages added in 4.6 */
+
+newUrls['4.6'] = [
+  '/user-manual/agents/cloud-and-container-monitoring.html',
+];
+
 /* Pages added in 4.4 */
 
 newUrls['4.4'] = [
