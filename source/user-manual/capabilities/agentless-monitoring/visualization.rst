@@ -33,7 +33,7 @@ Perform the following steps to create a visualization for the alerts from agentl
    - **rule.id**
    - **agentless.host**
 
-   You can see in the image below how you can add the rule.description field. Follow the same step for the remaining fields.   
+   You can see in the image below how you can add the **rule.description** field. Follow the same step for the remaining fields.   
 
    .. thumbnail:: /images/manual/agentless-monitoring/add-the-rule-description-field.png
       :title: Add the rule.description field

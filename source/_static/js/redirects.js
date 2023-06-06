@@ -253,6 +253,7 @@ newUrls['4.4'] = [
   '/user-manual/capabilities/wazuh-archives.html',
   '/user-manual/capabilities/agentless-monitoring/connection.html',
   '/user-manual/capabilities/agentless-monitoring/visualization.html',
+  '/user-manual/capabilities/agentless-monitoring/use-cases.html',  
 ];
 
 /* Pages removed in 4.4 */

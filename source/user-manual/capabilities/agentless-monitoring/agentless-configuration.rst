@@ -76,6 +76,7 @@ You need to set the ``type`` as ``ssh_integrity_check_bsd`` for BSD endpoints, a
 Add the setting below to the ``/var/ossec/etc/ossec.conf`` configuration file of the Wazuh server to monitor the file integrity of  ``/bin`` and ``/var`` directories:
 
    .. code-block:: xml
+      :emphasize-lines: 6        
 
       <agentless>
         <type>ssh_integrity_check_bsd</type>
@@ -95,6 +96,7 @@ You need to set the ``type`` as ``ssh_integrity_check_linux`` for Linux endpoint
 Add the setting below to the ``/var/ossec/etc/ossec.conf`` configuration file of the Wazuh server to monitor the ``/bin``, ``/etc``, and ``/sbin`` directories:
 
    .. code-block:: xml
+      :emphasize-lines: 6        
 
       <agentless>
         <type>ssh_integrity_check_linux</type>
@@ -149,7 +151,7 @@ In the configuration below, the ``ls -la /etc`` command will execute every ``200
       </agentless>
 
 .. Note::   
-   To use ``su`` in a command, ``use_su`` must be set before the hostname. In the previous example, this would appear as: ``<host>use_su user@test.com</host>``
+   To use ``su`` in a command, ``use_su`` must be set before the hostname. In the previous example, this would appear as ``<host>use_su user@test.com</host>``
 
 Checking the agentless monitoring setup
 ---------------------------------------
