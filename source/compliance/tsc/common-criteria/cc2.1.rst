@@ -30,6 +30,7 @@ The use case below shows how log data analysis can be used to detect specific ev
 
 .. thumbnail:: /images/compliance/tsc/common-criteria/wazuh-dashboard.png
    :title: Wazuh dashboard
+   :alt: Wazuh dashboard
    :align: center
    :width: 80%
 
@@ -37,6 +38,7 @@ The image below shows the Wazuh Security events dashboard.
 
 .. thumbnail:: /images/compliance/tsc/common-criteria/security-events-dashboard.png
    :title: Security events dashboard
+   :alt: Security events dashboard
    :align: center
    :width: 80%
 
@@ -44,5 +46,6 @@ The Wazuh ruleset also gives proper labeling to these triggered events. An examp
 
 .. thumbnail:: /images/compliance/tsc/common-criteria/attached-usb-storage-alerts-details.png
    :title: Attached USB storage alert details
+   :alt: Attached USB storage alert details
    :align: center
    :width: 80%

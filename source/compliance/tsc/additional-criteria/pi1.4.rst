@@ -73,6 +73,7 @@ Ubuntu endpoint
 
    .. thumbnail:: /images/compliance/tsc/additional-criteria/rule-id-550-alert.png
       :title: Rule id 550 alert
+      :alt: Rule id 550 alert
       :align: center
       :width: 80%
    
@@ -80,5 +81,6 @@ Ubuntu endpoint
 
    .. thumbnail:: /images/compliance/tsc/additional-criteria/alert-tagged-pi1.4.png
       :title: Alert tagged PI1.4
+      :alt: Alert tagged PI1.4
       :align: center
       :width: 80%

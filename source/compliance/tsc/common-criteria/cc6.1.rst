@@ -43,5 +43,6 @@ Wazuh meets the architecture, infrastructure, and security software aspects of t
 
    .. thumbnail:: /images/compliance/tsc/common-criteria/agent-inventory-data.png
       :title: Agent inventory data
+      :alt: Agent inventory data
       :align: center
       :width: 80%

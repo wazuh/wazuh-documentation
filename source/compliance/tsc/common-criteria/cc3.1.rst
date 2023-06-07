@@ -21,5 +21,6 @@ Using the Wazuh dashboard, you can review events and alerts generated across you
 
 .. thumbnail:: /images/compliance/tsc/common-criteria/events-alerts-review.gif
    :title: Events and alerts review
+   :alt: Events and alerts review
    :align: center
    :width: 80%

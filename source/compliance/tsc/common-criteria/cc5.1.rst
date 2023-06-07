@@ -43,6 +43,7 @@ You can see an alert generated to show that the file ``/etc/passwd`` file has be
 
 .. thumbnail:: /images/compliance/tsc/common-criteria/etc-passwd-file-modified-alert.png
    :title: /etc/passwd file modified alert
+   :alt: /etc/passwd file modified alert
    :align: center
    :width: 80%
 

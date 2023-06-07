@@ -36,25 +36,25 @@ The Trust Services Criteria (TSC) created by the Assurance Services Executive Co
 
    The TSC additional criteria are an extension of the common criteria. Organizations can use these additional criteria to address precise security requirements not defined by the conventional TSC common criteria.
 
-   Wazuh assists with these criteria by performing log collection, file integrity monitoring, configuration assessment, threat detection, vulnerability assessment, and automated threat response.
+Wazuh assists with these criteria by performing log collection, file integrity monitoring, configuration assessment, threat detection, vulnerability assessment, and automated threat response.
 
 This document outlines use cases that show how Wazuh helps users comply with the TSC common criteria, and the additional criteria for availability, confidentiality, and processing integrity. We have also created the `Using Wazuh for TSC 2017 requirements guide <https://documentation.wazuh.com/resources/using-wazuh-for-TSC-2017-requirements-guide.pdf>`__, which complements this document. Please refer to the guide for more details on how Wazuh helps meet TSC requirements.
 
 The following sections outline some of the technical requirements that Wazuh supports:
 
-.. toctree::
-   :caption: The COSO Principle and Common Criteria
-   :maxdepth: 1
+-  The COSO Principle and Common Criteria
 
-   common-criteria/cc2.1
-   common-criteria/cc3.1
-   common-criteria/cc5.1
-   common-criteria/cc6.1
-   common-criteria/cc7.1
-   common-criteria/cc8.1
+   .. toctree::
+      :maxdepth: 1
+
+      Common criteria 2.1 <common-criteria/cc2.1>
+      Common criteria 3.1 <common-criteria/cc3.1>
+      Common criteria 5.1 <common-criteria/cc5.1>
+      Common criteria 6.1 <common-criteria/cc6.1>
+      Common criteria 7.1 <common-criteria/cc7.1>
+      Common criteria 8.1 <common-criteria/cc8.1>
 
 .. toctree::
-   :caption: The additional criteria
    :maxdepth: 2
 
    additional-criteria/additional-criteria

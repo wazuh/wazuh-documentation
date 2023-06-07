@@ -29,6 +29,7 @@ To carry out this use case, set up a Wazuh server and an Ubuntu 22.04 endpoint w
 
    .. thumbnail:: /images/compliance/tsc/common-criteria/ruleid-2902-filtering.gif
       :title: Rule ID 2902 filtering
+      :alt: Rule ID 2902 filtering
       :align: center
       :width: 80%
 

@@ -62,5 +62,6 @@ In this use case, we show how the Wazuh Vulnerability Detector module detects vu
 
    .. thumbnail:: /images/compliance/tsc/common-criteria/agent-vulnerabilities.png
       :title: Agent vulnerabilities
+      :alt: Agent vulnerabilities
       :align: center
       :width: 80%

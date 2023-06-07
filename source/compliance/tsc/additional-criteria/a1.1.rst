@@ -125,5 +125,6 @@ Using the Wazuh command monitoring module, we configure the Wazuh agent to run c
 
    .. thumbnail:: /images/compliance/tsc/additional-criteria/tsc-a1.1-alerts.png
       :title: TSC A1.1 alerts
+      :alt: TSC A1.1 alerts
       :align: center
       :width: 80%
