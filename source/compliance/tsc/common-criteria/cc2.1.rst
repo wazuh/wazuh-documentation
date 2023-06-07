@@ -36,13 +36,13 @@ The use case below shows how log data analysis can be used to detect specific ev
 The image below shows the Wazuh Security events dashboard.
 
 .. thumbnail:: /images/compliance/tsc/common-criteria/security-events-dashboard.png
-   :title: Security events dashboard top
+   :title: Security events dashboard
    :align: center
    :width: 80%
 
 The Wazuh ruleset also gives proper labeling to these triggered events. An example is the image below that shows the details for the triggered alert ``Attached USB Storage`` with rule ID ``81101``
 
 .. thumbnail:: /images/compliance/tsc/common-criteria/attached-usb-storage-alerts-details.png
-   :title: Attached USB storage laert details
+   :title: Attached USB storage alert details
    :align: center
    :width: 80%
