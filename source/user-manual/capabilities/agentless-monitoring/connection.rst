@@ -24,13 +24,11 @@ To add agentless endpoints that use public key authentication, perform the follo
 
       sudo -u wazuh ssh-keygen
 
-#. Run the following command to copy the public key to the monitored endpoint:
+#. Run the following command to copy the public key to the monitored endpoint. Replace ``user@test.com`` with the username and the hostname or IP address of the agentless endpoint.
 
    .. code-block:: console
 
       ssh-copy-id -i ~/.ssh/id_rsa.pub user@test.com
-
-   Replace ``user@test.com`` with the username and the hostname or IP address of the agentless endpoint.
 
 #. Add the endpoint by running the following command on the Wazuh server:
 
@@ -48,13 +46,11 @@ To add agentless endpoints that use public key authentication, perform the follo
 Endpoints with password authentication
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-Run the following command to add agentless endpoints to the Wazuh server using the password authentication method:
+Run the following command to add agentless endpoints to the Wazuh server using the password authentication method. Replace ``user@test.com`` with the username and the hostname or IP address of the agentless host. Replace ``test_password`` with the password of the agentless host.
 
    .. code-block:: console
 
       # /var/ossec/agentless/register_host.sh add user@test.com test_password
-
-Replace ``user@test.com`` with the username and the hostname or IP address of the agentless host and ``test_password`` with the password of the agentless host.
 
 The command output must be similar to the following:
 

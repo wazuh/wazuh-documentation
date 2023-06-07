@@ -19,7 +19,7 @@ Wazuh server
 
 Perform the following steps on the Wazuh server.
 
-#. Add the following block to the ``/var/ossec/etc/ossec.conf`` configuration file. This configuration runs a command to print the content of the ``/tmp/newfile.txt`` file every *2 minutes*. It also detects the difference between the outputs each time the command is run. 
+#. Add the following block to the ``/var/ossec/etc/ossec.conf`` configuration file. This configuration runs a command to print the content of the ``/tmp/newfile.txt`` file every *2 minutes*. It also detects the difference between the outputs each time the command is run. Replace ``user@example.net`` with the username and the hostname or IP address of your  VMware ESXI endpoint.
 
    .. code-block:: xml
       :emphasize-lines: 6        
@@ -31,8 +31,6 @@ Perform the following steps on the Wazuh server.
         <state>periodic_diff</state>
         <arguments>cat /tmp/newfile.txt</arguments>
       </agentless>
-
-   Replace ``user@example.net`` with the username and the hostname or IP address of your  VMware ESXI endpoint. 
 
 #. Restart the Wazuh manager with the following command to apply the changes: 
 
@@ -64,7 +62,7 @@ You can visualize the alert with any of these options
 
 - Navigate to the **Discover** section and open the visualization created in the :doc:`Visualization </user-manual/capabilities/agentless-monitoring/visualization>` section.
 
-- Navigate to **Modules > Security events** on the Wazuh dashboard. Search for ``agentless.host:*`` to view the alert generated. 
+- Navigate to **Modules** > **Security events** on the Wazuh dashboard. Search for ``agentless.host:*`` to view the alert generated. 
 
 .. thumbnail:: /images/manual/agentless-monitoring/navigate-to-modules-security-events.png
    :title: Navigate to Modules > Security events
@@ -93,7 +91,7 @@ Wazuh server
 
 Perform the following steps on the Wazuh server.
 
-#. Add the block below to the ``/var/ossec/etc/ossec.conf`` configuration file. This configuration monitors the ``/tmp/file.conf`` file for modification every 2 minutes: 
+#. Add the block below to the ``/var/ossec/etc/ossec.conf`` configuration file. This configuration monitors the ``/tmp/file.conf`` file for modification every 2 minutes. Replace ``user@example.net`` with the username and the hostname or IP address of your  Linux endpoint.
 
    .. code-block:: xml
       :emphasize-lines: 6        
@@ -105,8 +103,6 @@ Perform the following steps on the Wazuh server.
         <state>periodic</state>
         <arguments>/tmp/file.conf /special_dir</arguments>
       </agentless>
-
-   Replace ``user@example.net`` with the username and the hostname or IP address of your  Linux endpoint. 
 
 #. Restart the Wazuh manager with the following command to apply the changes: 
 
@@ -157,7 +153,7 @@ You can visualize the alert with any of these options:
 
 - Navigate to the **Discover** section and open the visualization created in the :doc:`Visualization </user-manual/capabilities/agentless-monitoring/visualization>` section. 
 
-- Navigate to **Modules > Security events** on the Wazuh dashboard. Search for ``agentless.host:*`` to view the alert generated. 
+- Navigate to **Modules** > **Security events** on the Wazuh dashboard. Search for ``agentless.host:*`` to view the alert generated. 
 
 .. thumbnail:: /images/manual/agentless-monitoring/search-for-agentless-host.png
    :title: Search for agentless.host:*

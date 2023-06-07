@@ -26,7 +26,7 @@ Execute the following command as the root user to install the ``expect`` package
 
          # apt install -y expect
 
-To view configuration options for agentless monitoring, refer to the `supported attributes`_ section. 
+To view configuration options for agentless monitoring, refer to the `supported attributes`_ section below. 
 
 Supported attributes
 --------------------
@@ -54,7 +54,7 @@ The following table explains the different attributes the agentless monitoring m
 +           +                                                                                                                                          +                                                                                         +
 |           |                                                                                                                                          | Changes are alerted on, similar to file integrity monitoring.                           |
 +-----------+------------------------------------------------------------------------------------------------------------------------------------------+-----------------------------------------------------------------------------------------+
-| arguments | For *BSD integrity check* and *Linux integrity check* settings, this is a space-delimited list of files or directories to be monitored.  | Defines the username and the hostname or IP address of the agentless endpoint.          |
+| arguments | For *BSD integrity check* and *Linux integrity check* settings, this is a space-delimited list of files or directories to be monitored.  | Defines the arguments passed to the agentless check.                                    |
 |           |                                                                                                                                          |                                                                                         |
 |           | For *generic diff* settings, this is a command to be run on the endpoint.                                                                |                                                                                         |
 +-----------+------------------------------------------------------------------------------------------------------------------------------------------+-----------------------------------------------------------------------------------------+
