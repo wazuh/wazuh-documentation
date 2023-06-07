@@ -3,8 +3,6 @@
 .. meta::
   :description: Learn how to use the Wazuh passwords tool to manage your passwords and secure your Wazuh installation. 
 
-.. _user_manual_secure_wazuh_indexer:
-
 Password management
 ===================
 
@@ -21,6 +19,10 @@ On the other hand, the Wazuh manager API has two default users:
 - *wazuh*: is the default Wazuh manager API administrator user. 
 
 - *wazuh-wui*: is an admin user used for communications between Wazuh dashboard and the Wazuh manager API. If you change the *wazuh-wui* password, you must update it in the Wazuh dashboard. 
+
+.. note::
+
+   For Wazuh Docker deployments you need to use the ``securityadmin.sh`` tool. Read :ref:`change-pwd-existing-usr` in the Deployment on Docker section to learn more.
 
 If you use the tool in an all-in-one deployment, it automatically updates the passwords where necessary.  If you use it in a distributed environment, depending on the user whose password you change, you may have to update the password on other components. See  :ref:`Changing the passwords in a distributed environment <passwords_distributed>` for more details. 
 
