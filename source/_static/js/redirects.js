@@ -77,6 +77,11 @@ removedUrls['x.y'] = [
 redirections.push(
     {
       'target': ['4.3=>4.4', '4.4=>4.3'],
+      '4.3': '/user-manual/capabilities/agentless-monitoring/agentless-faq.html',
+      '4.4': '/user-manual/capabilities/agentless-monitoring/index.html',
+    },
+    {
+      'target': ['4.3=>4.4', '4.4=>4.3'],
       '4.3': '/user-manual/capabilities/auditing-whodata/index.html',
       '4.4': '/user-manual/capabilities/file-integrity/advanced-settings.html#who-data-monitoring',
     },
