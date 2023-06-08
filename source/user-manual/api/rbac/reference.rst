@@ -123,7 +123,7 @@ This reference also contains a set of default roles and policies that can be imm
     - `Vulnerability`_
         - `vulnerability:read`_
 
-    - `Webhook`_
+    - `Events`_
         - `event:ingest`_
 
 `Default policies`_
@@ -677,7 +677,7 @@ vulnerability:run
 
 .. _api_rbac_reference_default_policies:
 
-Webhook
+Events
 ^^^^^^^
 event:ingest
 ~~~~~~~~~~~~
