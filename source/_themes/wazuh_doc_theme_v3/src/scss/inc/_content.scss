@@ -172,6 +172,12 @@
         line-height: 32px;
       }
     }
+    .caption {
+      .caption-text {
+        font-weight: 500;
+        font-size: 20px;
+      }
+    }
   }
 
   .align-cells-top {
@@ -488,6 +494,11 @@
     .footnote.brackets {
       border-color: rgba(0, 0, 0, 10%);/* stylelint-disable-line color-function-notation */
     }
+    .toctree-wrapper {
+      .caption-text {
+        color: $light-color-main-text;
+      }
+    }
   }
 }
 
@@ -569,6 +580,11 @@
     }
     .footnote.brackets {
       border-color: rgba(255, 255, 255, 10%);/* stylelint-disable-line color-function-notation */
+    }
+    .toctree-wrapper {
+      .caption-text {
+        color: $dark-color-main-text;
+      }
     }
   }
 }
