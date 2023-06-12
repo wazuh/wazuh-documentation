@@ -13,6 +13,10 @@ What's new
 
 This release includes new features or enhancements as the following:
 
+Agent
+^^^^^
+- `#17506 <https://github.com/wazuh/wazuh/pull/17506>`_ The Windows agent package signing certificate has been updated.
+
 Ruleset
 ^^^^^^^
 
