@@ -140,11 +140,11 @@ Perform the following steps on the monitored endpoint.
       $ cd /special_dir 
       $ touch file1 file2
 
-#. Modify the files by adding the word “demo” and wait for 2 minutes:
+#. Modify the files by adding the string ``demo`` and wait for 2 minutes:
 
    .. code-block:: console
       
-      echo “demo” | tee /special_dir/file1 /special_dir/file2
+      echo demo | tee /special_dir/file1 /special_dir/file2
 
 Visualize the alert
 ^^^^^^^^^^^^^^^^^^^
