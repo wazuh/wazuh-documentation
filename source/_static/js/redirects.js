@@ -259,6 +259,7 @@ newUrls['4.4'] = [
   '/user-manual/capabilities/agentless-monitoring/connection.html',
   '/user-manual/capabilities/agentless-monitoring/visualization.html',
   '/user-manual/capabilities/agentless-monitoring/use-cases.html',  
+  '/user-manual/capabilities/vulnerability-detection/querying-the-vulnerability-database.html',
 ];
 
 /* Pages removed in 4.4 */
