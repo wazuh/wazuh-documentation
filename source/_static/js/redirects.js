@@ -76,7 +76,7 @@ removedUrls['x.y'] = [
 
 redirections.push(
     {
-      'target': ['4.3=>4.4', '4.4=>4.3'],
+      'target': ['4.3=>4.4'],
       '4.3': '/user-manual/capabilities/agentless-monitoring/agentless-faq.html',
       '4.4': '/user-manual/capabilities/agentless-monitoring/index.html',
     },
