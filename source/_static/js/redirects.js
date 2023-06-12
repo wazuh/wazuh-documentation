@@ -76,6 +76,11 @@ removedUrls['x.y'] = [
 
 redirections.push(
     {
+      'target': ['4.3=>4.4'],
+      '4.3': '/user-manual/capabilities/agentless-monitoring/agentless-faq.html',
+      '4.4': '/user-manual/capabilities/agentless-monitoring/index.html',
+    },
+    {
       'target': ['4.3=>4.4', '4.4=>4.3'],
       '4.3': '/user-manual/capabilities/auditing-whodata/index.html',
       '4.4': '/user-manual/capabilities/file-integrity/advanced-settings.html#who-data-monitoring',
@@ -251,6 +256,9 @@ newUrls['4.4'] = [
   '/user-manual/capabilities/system-calls-monitoring/use-cases/monitoring-commands-run-as-root.html',
   '/user-manual/capabilities/system-calls-monitoring/use-cases/privilege-abuse.html',
   '/user-manual/capabilities/wazuh-archives.html',
+  '/user-manual/capabilities/agentless-monitoring/connection.html',
+  '/user-manual/capabilities/agentless-monitoring/visualization.html',
+  '/user-manual/capabilities/agentless-monitoring/use-cases.html',  
   '/user-manual/capabilities/vulnerability-detection/querying-the-vulnerability-database.html',
 ];
 
@@ -288,6 +296,7 @@ removedUrls['4.4'] = [
   '/user-manual/capabilities/auditing-whodata/who-windows.html',
   '/user-manual/capabilities/auditing-whodata/who-windows-policies.html',  
   '/user-manual/capabilities/syscollector.html',  
+  '/user-manual/capabilities/agentless-monitoring/agentless-faq.html',
 ];
 
   /* *** RELEASE 4.3 ****/
