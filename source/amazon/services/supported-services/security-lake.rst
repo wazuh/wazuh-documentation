@@ -103,7 +103,7 @@ Follow these steps to modify the Security Lake subscriber role. You have to asso
 #. In the **Summary** page, navigate to the **Trust relationships** tab to modify the Trusted entity policy.
 #. Modify the Trusted entity policy with the following updates:
 
-    #. In the stanza containing the ARN, attach the username from your target user account to the end of the ARN. This step connects a user to the role. It lets you configure the Security Lake service with the secret access key. See the following example Trust entity:
+    #. In the stanza containing the ARN, attach the username from your target user account to the end of the ARN. This step connects a user to the role. It lets you configure the Security Lake service with the secret access key. See the following example Trusted entity:
 
     .. code-block:: JSON
 
