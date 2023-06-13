@@ -41,7 +41,7 @@ The agent runs on the endpoint you want to monitor and communicates with the Waz
 
               .. code-block:: none
 
-                NET START WazuhSvc
+                NET START Wazuh
 
              Once started, the Wazuh agent will start the enrollment process and register with the manager.
 
