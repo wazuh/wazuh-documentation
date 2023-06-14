@@ -8,7 +8,7 @@ Common criteria 7.1
 
 The TSC *common criteria CC7.1* states that: *“To meet its objectives, the entity uses detection and monitoring procedures to identify (1) changes to configurations that result in the introduction of new vulnerabilities, and (2) susceptibilities to newly discovered vulnerabilities”*. This control indicates the depth and rigor of the evaluation required to be performed on an information asset to monitor changes to the configuration. It ensures that changes do not introduce new vulnerabilities to the system or make it prone to new vulnerabilities.
 
-Evaluation and compliance of an information asset to CC7.1 ensure that the asset is strengthened to a high level of security assurance. CC7.1 facilitates the prevention of misconfiguration flaws and ensures continuous monitoring to quickly identify vulnerabilities.
+Evaluation and compliance of an information asset to *CC7.1* ensure that the asset is strengthened to a high level of security assurance. *CC7.1* facilitates the prevention of misconfiguration flaws and ensures continuous monitoring to quickly identify vulnerabilities.
 
 The use case below shows how Wazuh assists in meeting this requirement.
 

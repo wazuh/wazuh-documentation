@@ -15,7 +15,7 @@ The use case below shows how Wazuh assists in meeting this requirement.
 Use case: Maintaining asset inventory on a Windows endpoint
 -----------------------------------------------------------
 
-Wazuh meets the architecture, infrastructure, and security software aspects of the *common criteria CC6.1* by providing several modules. One of these is the Syscollector module. In this use case, we show how to use the Wazuh Syscollector module to collect system information on a Windows 10 endpoint. This module collects information about applications, services, ports, and protocols running on an endpoint. It can be used to monitor specific components, protocols, services, or applications running on an endpoint.
+Wazuh meets the architecture, infrastructure, and security software aspects of the *common criteria CC6.1* by providing several modules. One of these is the Syscollector module. In this use case, we show how to use the Wazuh Syscollector module to collect system information on a Windows 10 endpoint. You can use this module to monitor specific components, protocols, services, or applications running on an endpoint.
 
 #. Open the Wazuh agent configuration file ``C:\Program Files (x86)\ossec-agent\ossec.conf`` and scroll to the ``syscollector`` block to verify that you have the same configuration below:
 
@@ -39,7 +39,7 @@ Wazuh meets the architecture, infrastructure, and security software aspects of t
          </synchronization>
        </wodle>
 
-#. Navigate to **Agents** > **AGENT_NAME** > **Inventory data** on the Wazuh dashboard. Where **AGENT_NAME** is the monitored agent. You can see details about installed applications, network services, and used ports on the monitored endpoint.
+#. Navigate to **Agents** > **AGENT_NAME** > **Inventory data** on the Wazuh dashboard. Where **AGENT_NAME** is the monitored endpoint. You can see details about installed applications, network services, and used ports on the monitored endpoint.
 
    .. thumbnail:: /images/compliance/tsc/common-criteria/agent-inventory-data.png
       :title: Agent inventory data
