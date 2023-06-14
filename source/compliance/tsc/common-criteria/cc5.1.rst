@@ -6,7 +6,7 @@
 Common criteria 5.1 (COSO Principle 10)
 =======================================
 
-The TSC *common criteria CC5.1*: The principle states, *“The entity selects and develops control activities that contribute to the mitigation of risks to the achievement of objectives to acceptable levels.”*. This means that the organization should design and implement controls appropriate for its specific business environment aligned with its overall goals and objectives. Examples of control activities include policies, authorizations and approvals processes, information management, and physical controls.
+The TSC *common criteria CC5.1*: The principle states, *“The entity selects and develops control activities that contribute to the mitigation of risks to the achievement of objectives to acceptable levels.”* This means that the organization should design and implement controls appropriate for its specific business environment aligned with its overall goals and objectives. Examples of control activities include policies, authorizations and approvals processes, information management, and physical controls.
 
 One of the points of focus for this criteria is that an effective control framework should include a diverse mix of control activities, considering different approaches to address risks and incorporating a combination of manual and automated, preventive and detective controls.
 

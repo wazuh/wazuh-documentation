@@ -67,7 +67,6 @@ Using the Wazuh command monitoring module, we configure the Wazuh agent to run c
             <group>MEMUsage,tsc_A1.1,</group>
           </rule>
 
-
           <rule id="302001" level="5">
             <if_sid>302000</if_sid>
             <field name="winCounter.CookedValue" type="pcre2">^[5-9]\d{2}$</field>
@@ -88,7 +87,6 @@ Using the Wazuh command monitoring module, we configure the Wazuh agent to run c
             <description>Windows Counter: CPU Usage.</description>
             <group>CPUUsage,tsc_A1.1,</group>
           </rule>
-
 
           <rule id="303001" level="5">
             <if_sid>303000</if_sid>

@@ -8,10 +8,10 @@ Processing integrity - PI1.4
 
 The trust service criteria for *additional criteria* for processing integrity *PI1.4* is a set of guidelines that outline the requirements for ensuring the completeness and integrity of the processed data of an entity. It states: *"The entity implements policies and procedures to make available or deliver output completely, accurately, and timely in accordance with specifications to meet the entity’s objectives."*. The following actions are performed to achieve this:
 
--  **Protects output**: Output is protected when stored or delivered, or both, to prevent theft, destruction, corruption, or deterioration that would prevent output from meeting specifications.
--  **Distributes output only to intended parties**: Output is distributed or made available only to intended parties.
--  **Distributes output completely and accurately**: Procedures are in place to provide for the completeness, accuracy, and timeliness of distributed output.
--  **Creates and maintains records of system output activities**: Records of system output activities are created and maintained completely and accurately in a timely manner.
+-  **Protect output**: Output is protected when stored or delivered, or both, to prevent theft, destruction, corruption, or deterioration that would prevent output from meeting specifications.
+-  **Distribute output only to intended parties**: Output is distributed or made available only to intended parties.
+-  **Distribute output completely and accurately**: Procedures are in place to provide for the completeness, accuracy, and timeliness of distributed output.
+-  **Create and maintain records of system output activities**: Records of system output activities are created and maintained completely and accurately in a timely manner.
 
 The use case below demonstrates how Wazuh assists in meeting this requirement.
 
@@ -42,7 +42,7 @@ Ubuntu endpoint
       # touch /root/critical_folder/special_data.txt
       # echo "The content in this file must maintain integrity" >> /root/critical_folder/special_data.txt
 
-#. Add the configuration highlighted to the ``<syscheck>`` block of the Wazuh agent configuration file ``/var/ossec/etc/ossec.conf``:
+#. Add the highlighted configuration to the ``<syscheck>`` block of the Wazuh agent configuration file ``/var/ossec/etc/ossec.conf``:
 
    .. code-block:: XML
       :emphasize-lines: 2
