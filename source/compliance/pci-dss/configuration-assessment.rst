@@ -29,7 +29,7 @@ Below are some PCI DSS requirement use cases that can be met with the SCA module
 
    In order to perform checks for this specific use case, the SCA module has check 18081 **Ensure IP forwarding is disabled** for Ubuntu 14.04 endpoints. When an SCA scan runs, you can detect if this use case is satisfied.
 
-   .. thumbnail:: ../images/pci/ensure-ip-forwarding-is-disabled.png
+   .. thumbnail:: /images/compliance/pci/ensure-ip-forwarding-is-disabled.png
       :title: Ensure IP forwarding is disabled
       :align: center
       :width: 80%
@@ -40,7 +40,7 @@ Below are some PCI DSS requirement use cases that can be met with the SCA module
   
    We have the SCA check 18157 **Ensure password reuse is limited** for Ubuntu 14.04 endpoints. It checks the password reuse policy and helps meet requirement 8.3.7. So, when an SCA scan runs, you can detect if the password history policy meets the requirement.
    
-   .. thumbnail:: ../images/pci/ensure-password-reuse-is-limited.png
+   .. thumbnail:: /images/compliance/pci/ensure-password-reuse-is-limited.png
       :title: Ensure password reuse is limited
       :align: center
       :width: 80%

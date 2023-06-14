@@ -19,4 +19,4 @@ Learn more about achieving compliance with Wazuh in the sections below:
    gdpr/index
    hipaa/index
    nist/index
-   compliance/tsc/index
+   tsc/index

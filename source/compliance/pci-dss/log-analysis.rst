@@ -36,7 +36,7 @@ Use cases
 
    -  **Rule 5710 - sshd: attempt to login using a non-existent user**: This rule generates an alert when a non-existent user tries to log in to a system via SSH. The generated alert contains the information required by requirement 10.2.2 (user identification, type of event, date and time, success and failure indication, origination of event, and identity or name of affected data, system component, resource, or service). The screenshot below shows the alert generated on the dashboard:
 
-  	.. thumbnail:: ../images/pci/attempt-to-login-using-non-existent-user.png
+  	.. thumbnail:: /images/compliance/pci/attempt-to-login-using-non-existent-user.png
   		:title: Attempt to login using a non-existent user
   		:align: center
   		:width: 80%
@@ -44,7 +44,7 @@ Use cases
    
    -  **Rule 5715 - sshd: authentication success**: This rule generates an alert when a user successfully logs into a system via SSH. The generated alert contains the information required by requirement 10.2.2 (user identification, type of event, date and time, success and failure indication, origination of event, and identity or name of affected data, system component, resource, or service). The screenshot below shows the alert generated on the dashboard:
 
-  	.. thumbnail:: ../images/pci/user-successfully-logs-into-a-system-via-SSH.png
+  	.. thumbnail:: /images/compliance/pci/user-successfully-logs-into-a-system-via-SSH.png
   		:title: User successfully logs into a system via SSH
   		:align: center
   		:width: 80%
@@ -73,38 +73,38 @@ Use cases
 
 	#. Select **☰** > **Management** > **Stack Management** in the Wazuh dashboard.
 
-		.. thumbnail:: ../images/pci/select-stack-management.png
+		.. thumbnail:: /images/compliance/pci/select-stack-management.png
 			:title: Select Stack Management
 			:align: center
 			:width: 80%
 		
 	#. Choose **Index Patterns** and select **Create index pattern**. Use ``wazuh-archives-*`` as the index pattern name.
 
-		.. thumbnail:: ../images/pci/select-create-index-pattern.png
+		.. thumbnail:: /images/compliance/pci/select-create-index-pattern.png
 			:title: Select Create index pattern
 			:align: center
 			:width: 80%
 
-		.. thumbnail:: ../images/pci/define-an-index-pattern.png
+		.. thumbnail:: /images/compliance/pci/define-an-index-pattern.png
 			:title: Select Create index pattern
 			:align: center
 			:width: 80%
 			
 	#. Select **timestamp** as the primary time field for use with the global time filter, then proceed to create the index pattern.
 
-		.. thumbnail:: ../images/pci/configure-settings.png
+		.. thumbnail:: /images/compliance/pci/configure-settings.png
 			:title: Select Create index pattern
 			:align: center
 			:width: 80%
 
 	#. Open the menu and select **Discover** under **OpenSearch Dashboards**. Events should be getting reported there.
 
-		.. thumbnail:: ../images/pci/select-discover-1.png
+		.. thumbnail:: /images/compliance/pci/select-discover-1.png
 			:title: Select Discover
 			:align: center
 			:width: 80%
 			
-		.. thumbnail:: ../images/pci/select-discover-2.png
+		.. thumbnail:: /images/compliance/pci/select-discover-2.png
 			:title: Select Discover
 			:align: center
 			:width: 80%
@@ -120,14 +120,14 @@ Use cases
 
    -  **Rule 61138**: New Windows Service Created. The analysis engine analyzes the Windows system logs to find out if a new service was created generating an alert from this rule.
 
-    	.. thumbnail:: /images/pci/pci-dss-requirement-10.4.1-1.png
+    	.. thumbnail:: /images/compliance/pci/pci-dss-requirement-10.4.1-1.png
     		:title: PCI DSS requirement 10.4.1
     		:align: center
     		:width: 80%
 
    -  **Rule 31168**: Shellshock attack detected. The analysis engine analyzes logs to find out about shellshock attacks from a WAF or web application generating an alert.
       
-    	.. thumbnail:: /images/pci/pci-dss-requirement-10.4.1-2.png
+    	.. thumbnail:: /images/compliance/pci/pci-dss-requirement-10.4.1-2.png
     		:title: PCI DSS requirement 10.4.1
     		:align: center
     		:width: 80%
