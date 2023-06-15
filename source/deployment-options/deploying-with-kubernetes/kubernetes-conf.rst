@@ -12,6 +12,8 @@ Pre-requisites
 --------------
 
     - Kubernetes cluster already deployed.
+    - For Kubernetes version 1.23 or higher in Amazon EKS, the assignment of an IAM Role is necessary for the CSI driver to function correctly. Within the AWS documentation you can find the instructions for the assignment: https://docs.aws.amazon.com/eks/latest/userguide/ebs-csi.html
+      The installation of the CSI driver is necessary for new and old deployments, since it is a Kubernetes feature.
 
    
 Resource Requirement
