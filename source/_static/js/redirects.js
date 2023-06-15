@@ -72,6 +72,31 @@ removedUrls['x.y'] = [
 
 /* *** RELEASE 4.4 ****/
 
+/* Pages changed within the same release */
+
+redirectSameRelease['4.4'] = {
+  '/nist/index.html':
+    '/compliance/nist/index.html',
+  '/nist/visualization-and-dashboard.html':
+    '/compliance/nist/visualization-and-dashboard.html',
+  '/nist/log-data-analysis.html':
+    '/compliance/nist/log-data-analysis.html',
+  '/nist/configuration-assessment.html':
+    '/compliance/nist/configuration-assessment.html',
+  '/nist/malware-detection.html':
+    '/compliance/nist/malware-detection.html',
+  '/nist/file-integrity-monitoring.html':
+    '/compliance/nist/file-integrity-monitoring.html',
+  '/nist/system-inventory.html':
+    '/compliance/nist/system-inventory.html',
+  '/nist/vulnerability-detection.html':
+    '/compliance/nist/vulnerability-detection.html',
+  '/nist/active-response.html':
+    '/compliance/nist/active-response.html',
+  '/nist/threat-intelligence.html':
+    '/compliance/nist/threat-intelligence.html',
+};
+
 /* Redirections from 4.3 to 4.4  */
 
 redirections.push(
@@ -199,6 +224,116 @@ redirections.push(
       'target': ['4.4=>4.3'],
       '4.3': '/user-manual/capabilities/syscollector.html#use-case-visualize-system-inventory-in-the-wazuh-app',
       '4.4': '/user-manual/capabilities/system-inventory/configuration.html',
+    },
+    {
+      'target': ['4.3=>4.4', '4.4=>4.3'],
+      '4.3': '/compliance.html',
+      '4.4': '/compliance/index.html',
+    },
+    {
+      'target': ['4.3=>4.4', '4.4=>4.3'],
+      '4.3': '/gdpr/index.html',
+      '4.4': '/compliance/gdpr/index.html',
+    },
+    {
+      'target': ['4.3=>4.4', '4.4=>4.3'],
+      '4.3': '/gdpr/gdpr-II.html',
+      '4.4': '/compliance/gdpr/gdpr-II.html',
+    },
+    {
+      'target': ['4.3=>4.4', '4.4=>4.3'],
+      '4.3': '/gdpr/gdpr-III.html',
+      '4.4': '/compliance/gdpr/gdpr-III.html',
+    },
+    {
+      'target': ['4.3=>4.4', '4.4=>4.3'],
+      '4.3': '/gdpr/gdpr-IV.html',
+      '4.4': '/compliance/gdpr/gdpr-IV.html',
+    },
+    {
+      'target': ['4.3=>4.4', '4.4=>4.3'],
+      '4.3': '/hipaa/index.html',
+      '4.4': '/compliance/hipaa/index.html',
+    },
+    {
+      'target': ['4.3=>4.4', '4.4=>4.3'],
+      '4.3': '/hipaa/visualization-and-dashboard.html',
+      '4.4': '/compliance/hipaa/visualization-and-dashboard.html',
+    },
+    {
+      'target': ['4.3=>4.4', '4.4=>4.3'],
+      '4.3': '/hipaa/log-data-analysis.html',
+      '4.4': '/compliance/hipaa/log-data-analysis.html',
+    },
+    {
+      'target': ['4.3=>4.4', '4.4=>4.3'],
+      '4.3': '/hipaa/configuration-assessment.html',
+      '4.4': '/compliance/hipaa/configuration-assessment.html',
+    },
+    {
+      'target': ['4.3=>4.4', '4.4=>4.3'],
+      '4.3': '/hipaa/malware-detection.html',
+      '4.4': '/compliance/hipaa/malware-detection.html',
+    },
+    {
+      'target': ['4.3=>4.4', '4.4=>4.3'],
+      '4.3': '/hipaa/file-integrity-monitoring.html',
+      '4.4': '/compliance/hipaa/file-integrity-monitoring.html',
+    },
+    {
+      'target': ['4.3=>4.4', '4.4=>4.3'],
+      '4.3': '/hipaa/vulnerability-detection.html',
+      '4.4': '/compliance/hipaa/vulnerability-detection.html',
+    },
+    {
+      'target': ['4.3=>4.4', '4.4=>4.3'],
+      '4.3': '/hipaa/active-response.html',
+      '4.4': '/compliance/hipaa/active-response.html',
+    },
+    {
+      'target': ['4.3=>4.4', '4.4=>4.3'],
+      '4.3': '/pci-dss/index.html',
+      '4.4': '/compliance/pci-dss/index.html',
+    },
+    {
+      'target': ['4.3=>4.4', '4.4=>4.3'],
+      '4.3': '/pci-dss/configuration-assessment.html',
+      '4.4': '/compliance/pci-dss/configuration-assessment.html',
+    },
+    {
+      'target': ['4.3=>4.4', '4.4=>4.3'],
+      '4.3': '/pci-dss/malware-detection.html',
+      '4.4': '/compliance/pci-dss/malware-detection.html',
+    },
+    {
+      'target': ['4.3=>4.4', '4.4=>4.3'],
+      '4.3': '/pci-dss/vulnerability-detection.html',
+      '4.4': '/compliance/pci-dss/vulnerability-detection.html',
+    },
+    {
+      'target': ['4.3=>4.4', '4.4=>4.3'],
+      '4.3': '/pci-dss/system-inventory.html',
+      '4.4': '/compliance/pci-dss/system-inventory.html',
+    },
+    {
+      'target': ['4.3=>4.4', '4.4=>4.3'],
+      '4.3': '/pci-dss/dashboard.html',
+      '4.4': '/compliance/pci-dss/dashboard.html',
+    },
+    {
+      'target': ['4.3=>4.4', '4.4=>4.3'],
+      '4.3': '/pci-dss/active-response.html',
+      '4.4': '/compliance/pci-dss/active-response.html',
+    },
+    {
+      'target': ['4.3=>4.4', '4.4=>4.3'],
+      '4.3': '/pci-dss/file-integrity-monitoring.html',
+      '4.4': '/compliance/pci-dss/file-integrity-monitoring.html',
+    },
+    {
+      'target': ['4.3=>4.4', '4.4=>4.3'],
+      '4.3': '/pci-dss/log-analysis.html',
+      '4.4': '/compliance/pci-dss/log-analysis.html',
     },
   );
 
