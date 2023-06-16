@@ -3,8 +3,6 @@
 .. meta::
   :description: Wazuh helps provide regulatory compliance support. Learn more about compliance with Wazuh in this section.
 
-.. _compliance:
-
 Regulatory compliance
 =====================
 
@@ -15,10 +13,10 @@ The default Wazuh ruleset provides support for PCI DSS, HIPAA, NIST 800-53, TSC,
 Learn more about achieving compliance with Wazuh in the sections below:
 
 .. toctree::
-    :maxdepth: 1
+   :maxdepth: 1
 
-    pci-dss/index
-    gdpr/index
-    hipaa/index
-    nist/index
-
+   pci-dss/index
+   gdpr/index
+   hipaa/index
+   nist/index
+   compliance/tsc/index
