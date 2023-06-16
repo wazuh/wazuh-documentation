@@ -479,8 +479,8 @@ System administrators use PowerShell to configure systems. Standard users utiliz
 
    .. code-block:: console
    
-      > NET STOP WazuhSvc
-      > NET START WazuhSvc
+      > NET STOP Wazuh
+      > NET START Wazuh
 
 #. On your Wazuh dashboard, navigate to the SCA tab and select the Windows endpoint to view the results of the custom SCA check you have created.
 

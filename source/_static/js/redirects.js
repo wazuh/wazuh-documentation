@@ -137,6 +137,11 @@ redirections.push(
 
 redirections.push(
     {
+      'target': ['4.3=>4.4'],
+      '4.3': '/user-manual/capabilities/agentless-monitoring/agentless-faq.html',
+      '4.4': '/user-manual/capabilities/agentless-monitoring/index.html',
+    },
+    {
       'target': ['4.3=>4.4', '4.4=>4.3'],
       '4.3': '/user-manual/capabilities/auditing-whodata/index.html',
       '4.4': '/user-manual/capabilities/file-integrity/advanced-settings.html#who-data-monitoring',
@@ -276,6 +281,7 @@ newUrls['4.4'] = [
   '/release-notes/release-4-4-1.html',
   '/release-notes/release-4-4-2.html',
   '/release-notes/release-4-4-3.html',
+  '/release-notes/release-4-4-4.html',
   '/nist/index.html',
   '/nist/visualization-and-dashboard.html',
   '/nist/log-data-analysis.html',
@@ -286,6 +292,16 @@ newUrls['4.4'] = [
   '/nist/vulnerability-detection.html',
   '/nist/active-response.html',
   '/nist/threat-intelligence.html',
+  '/compliance/tsc/index.html',
+  '/compliance/tsc/common-criteria/cc2.1.html',
+  '/compliance/tsc/common-criteria/cc3.1.html',
+  '/compliance/tsc/common-criteria/cc5.1.html',
+  '/compliance/tsc/common-criteria/cc6.1.html',
+  '/compliance/tsc/common-criteria/cc7.1.html',
+  '/compliance/tsc/common-criteria/cc8.1.html',
+  '/compliance/tsc/additional-criteria/additional-criteria.html',
+  '/compliance/tsc/additional-criteria/a1.1.html',
+  '/compliance/tsc/additional-criteria/pi1.4.html',
   '/user-manual/agents/antiflooding.html',
   '/user-manual/agents/labels.html',
   '/user-manual/manager/fluent-forwarder.html',
@@ -314,6 +330,10 @@ newUrls['4.4'] = [
   '/user-manual/capabilities/system-calls-monitoring/use-cases/monitoring-commands-run-as-root.html',
   '/user-manual/capabilities/system-calls-monitoring/use-cases/privilege-abuse.html',
   '/user-manual/capabilities/wazuh-archives.html',
+  '/user-manual/capabilities/agentless-monitoring/connection.html',
+  '/user-manual/capabilities/agentless-monitoring/visualization.html',
+  '/user-manual/capabilities/agentless-monitoring/use-cases.html',  
+  '/user-manual/capabilities/vulnerability-detection/querying-the-vulnerability-database.html',
 ];
 
 /* Pages removed in 4.4 */
@@ -350,6 +370,7 @@ removedUrls['4.4'] = [
   '/user-manual/capabilities/auditing-whodata/who-windows.html',
   '/user-manual/capabilities/auditing-whodata/who-windows-policies.html',  
   '/user-manual/capabilities/syscollector.html',  
+  '/user-manual/capabilities/agentless-monitoring/agentless-faq.html',
 ];
 
   /* *** RELEASE 4.3 ****/

@@ -128,4 +128,4 @@ Use Logstash on a Windows host with a Wazuh agent to receive syslog, log to a fi
 
    .. code-block:: console
       
-      Restart-Service WazuhSvc
+      Restart-Service Wazuh

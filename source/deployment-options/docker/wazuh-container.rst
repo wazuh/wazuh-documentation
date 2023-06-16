@@ -264,7 +264,7 @@ Perform the following steps from your ``single-node`` directory. If you have a m
 
    .. code-block:: console
   
-      # docker-compose stop
+      # docker-compose down
 
 #. Run this command to generate a hash of your new password. Once the container launches, input the new password and press **enter**:
 
@@ -280,7 +280,7 @@ Perform the following steps from your ``single-node`` directory. If you have a m
 
    .. code-block:: console
   
-      # docker-compose start
+      # docker-compose up -d
 
 #. Run ``docker ps`` and note the name of the Wazuh indexer container.
 
