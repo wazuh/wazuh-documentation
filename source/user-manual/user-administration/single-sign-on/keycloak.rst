@@ -359,19 +359,18 @@ Wazuh dashboard configuration
       opensearch_security.auth.type: "saml"
       server.xsrf.allowlist: ["/_opendistro/_security/saml/acs", "/_opendistro/_security/saml/logout", "/_opendistro/_security/saml/acs/idpinitiated"]
 
-   .. note::
-      :class: not-long
+#. Ensure that ``run_as`` is set to false in the ``/usr/share/wazuh-dashboard/data/wazuh/config/wazuh.yml`` configuration file.
 
-      *For versions 4.3.9 and earlier*, also replace ``path: `/auth/logout``` with ``path: `/logout``` in ``/usr/share/wazuh-dashboard/plugins/securityDashboards/server/auth/types/saml/routes.js``. We recommend that you back up these files before you carry out the configuration.
+   .. code-block:: yaml
+      :emphasize-lines: 7
 
-      .. code-block:: console
-         :emphasize-lines: 3
-
-         ...
-            this.router.get({
-               path: `/logout`,
-               validate: false
-         ...
+      hosts:
+        - default:
+            url: https://localhost
+            port: 55000
+            username: wazuh-wui
+            password: "<wazuh-wui-password>"
+            run_as: false
 
 #. Restart the Wazuh dashboard service using this command:
 
