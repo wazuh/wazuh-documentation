@@ -44,17 +44,31 @@ The following sections outline some of the technical requirements that Wazuh sup
 
 -  The COSO Principle and Common Criteria
 
-   .. toctree::
-      :maxdepth: 1
+   -  :doc:`Common criteria 2.1 <common-criteria/cc2.1>`
+   -  :doc:`Common criteria 3.1 <common-criteria/cc3.1>`
+   -  :doc:`Common criteria 5.1 <common-criteria/cc5.1>`
+   -  :doc:`Common criteria 6.1 <common-criteria/cc6.1>`
+   -  :doc:`Common criteria 7.1 <common-criteria/cc7.1>`
+   -  :doc:`Common criteria 8.1 <common-criteria/cc8.1>`
 
-      Common criteria 2.1 <common-criteria/cc2.1>
-      Common criteria 3.1 <common-criteria/cc3.1>
-      Common criteria 5.1 <common-criteria/cc5.1>
-      Common criteria 6.1 <common-criteria/cc6.1>
-      Common criteria 7.1 <common-criteria/cc7.1>
-      Common criteria 8.1 <common-criteria/cc8.1>
+-  :doc:`Additional criteria <additional-criteria/additional-criteria>`
+
+   -  :doc:`Availability - A1.1 <additional-criteria/a1.1>`
+   -  :doc:`Processing integrity - PI1.4 <additional-criteria/pi1.4>`
+
+.. toctree::
+   :maxdepth: 1
+   :hidden:
+
+   Common criteria 2.1 <common-criteria/cc2.1>
+   Common criteria 3.1 <common-criteria/cc3.1>
+   Common criteria 5.1 <common-criteria/cc5.1>
+   Common criteria 6.1 <common-criteria/cc6.1>
+   Common criteria 7.1 <common-criteria/cc7.1>
+   Common criteria 8.1 <common-criteria/cc8.1>
 
 .. toctree::
    :maxdepth: 2
+   :hidden:
 
    additional-criteria/additional-criteria
