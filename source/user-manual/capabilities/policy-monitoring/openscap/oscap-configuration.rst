@@ -112,8 +112,8 @@ When the evaluation is complete, you will see the results as OSSEC alerts:
 Note that each field is extracted to facilitate searches and analysis.
 
 .. thumbnail:: ../../../../images/wodles-oscap/pci-oscap.png
-    :title: PCI OpenSCAP
-    :alt: PCI OpenSCAP
+    :title: PCI OpenSCAP alert
+    :alt: PCI OpenSCAP alert
     :align: center
     :width: 100%
 
@@ -122,8 +122,8 @@ Note that each field is extracted to facilitate searches and analysis.
 Finally, you can explore all results using the OpenSCAP module.
 
 .. thumbnail:: ../../../../images/wodles-oscap/pci-dashboard.png
-    :title: OpenSCAP module
-    :alt: OpenSCAP module 
+    :title: OpenSCAP module dashboard
+    :alt: OpenSCAP module dashboard
     :align: center
     :width: 100%
 
@@ -206,14 +206,14 @@ When the evaluation is completed, you will see the results as OSSEC alerts:
 Note that each field is extracted to facilitate searches and analysis.
 
 .. thumbnail:: ../../../../images/wodles-oscap/oscap-example.png
-    :title: OpenSCAP example
-    :alt: OpenSCAP example
+    :title: OpenSCAP alert example
+    :alt: OpenSCAP alert example
     :align: center
     :width: 100%
 
 .. thumbnail:: ../../../../images/wodles-oscap/oscap-overview.png
-    :title: OpenSCAP overview
-    :alt: OpenSCAP overview
+    :title: OpenSCAP alert overview
+    :alt: OpenSCAP alert overview
     :align: center
     :width: 100%
 
@@ -223,8 +223,8 @@ Note that each field is extracted to facilitate searches and analysis.
 Finally, you can explore all scan results using the OpenSCAP module.
 
 .. thumbnail:: ../../../../images/wodles-oscap/oscap-dashboard.png
-    :title: OpenSCAP dashboard
-    :alt: OpenSCAP dashboard    
+    :title: OpenSCAP module dashboard
+    :alt: OpenSCAP module dashboard    
     :align: center
     :width: 100%
 

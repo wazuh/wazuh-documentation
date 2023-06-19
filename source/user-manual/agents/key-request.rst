@@ -31,8 +31,8 @@ To do this, it is necessary to create a binary or script in any language that ca
 Below you can see the flow diagram:
 
 .. thumbnail:: ../../images/manual/key-request/key-request-flow.png
-  :title: Agent key request module flow diagram
-  :alt: Agent key request module flow diagram
+  :title: Agent key request flow diagram
+  :alt: Agent key request flow diagram
   :align: center
   :width: 100%
 

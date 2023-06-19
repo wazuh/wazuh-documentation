@@ -220,16 +220,16 @@ The next images show a simple event collection with the eventchannel log format.
 The first one represents the number of events of each channel, filtered by provider name along the time.
 
 .. thumbnail:: ../../../images/manual/log-analysis/number-of-events.png
-    :title: Number of events
-    :alt: Number of events
+    :title: Event count graph
+    :alt: Event count graph
     :align: center
     :width: 100%
 
 Some events from different channels are shown below with the associated provider name and severity value:
 
 .. thumbnail:: ../../../images/manual/log-analysis/windows-events.png
-    :title: Windows events
-    :alt: Windows events
+    :title: Windows events table
+    :alt: Windows events table
     :align: center
     :width: 100%
 

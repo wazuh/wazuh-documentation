@@ -110,8 +110,8 @@ To set up this integration, do the following.
 Once the configuration is complete, alerts start showing on the Pagerduty dashboard.
 
 .. thumbnail:: /images/manual/integration/pagerduty.png
-   :title: PagerDuty Incidents Dashboard
-   :alt: PagerDuty Incidents Dashboard
+   :title: Wazuh alert in the PagerDuty Incidents dashboard
+   :alt: Wazuh alert in the PagerDuty Incidents dashboard
    :align: center
    :width: 80%
 
