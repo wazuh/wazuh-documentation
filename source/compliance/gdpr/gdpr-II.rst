@@ -90,12 +90,12 @@ Ubuntu endpoint
 
 On the Wazuh dashboard, an alert detects the modification of the ``subject_data.txt`` file. The alert is also tagged with ``gdpr_II_5.1.f``.
 
-.. thumbnail:: /images/gdpr/fim-file-mod.png
+.. thumbnail:: /images/compliance/gdpr/fim-file-mod.png
     :title: File modification alert visualization
     :align: center
     :width: 80%
 
-.. thumbnail:: /images/gdpr/gdprii-tag.png
+.. thumbnail:: /images/compliance/gdpr/gdprii-tag.png
     :title: GDPRII tag in file modification alert
     :align: center
     :width: 80%

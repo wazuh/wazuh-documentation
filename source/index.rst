@@ -25,6 +25,6 @@ Index
    monitoring
    container-security/index
    development/index
-   compliance
+   compliance/index
    proof-of-concept-guide/index
    release-notes/index

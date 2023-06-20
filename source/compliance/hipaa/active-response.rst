@@ -42,12 +42,12 @@ In this use case, you configure the active response module to block an IP addres
 
    When you attempt to SSH with a non-existent user, rule ``5710`` generates an alert followed by an active response event.
 
-   .. thumbnail:: /images/hipaa/08-active-response.png    
+   .. thumbnail:: /images/compliance/hipaa/08-active-response.png    
       :title: Rule 5710 generates an alert followed by an active response event 
       :align: center
       :width: 80%
 
-   .. thumbnail:: /images/hipaa/09-active-response.png    
+   .. thumbnail:: /images/compliance/hipaa/09-active-response.png    
       :title: Rule 5710 generates an alert followed by an active response event 
       :align: center
       :width: 80%      

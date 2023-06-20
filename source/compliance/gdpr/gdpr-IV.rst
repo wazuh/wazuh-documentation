@@ -24,7 +24,7 @@ In this use case, Wazuh runs SCA checks to find out if the ``shadow`` user group
 
 The image below shows the result of the SCA check on the Wazuh dashboard.
 
-.. thumbnail:: /images/gdpr/SCA-28690-no-alerts.png
+.. thumbnail:: /images/compliance/gdpr/SCA-28690-no-alerts.png
     :title: Filtering SCA 28690 check alerts
     :align: center
     :width: 80%
@@ -94,12 +94,12 @@ Ubuntu endpoint
 
 The FIM module generates the alert below showing the changed attributes.
 
-.. thumbnail:: /images/gdpr/fim-file-mod-who1.png
+.. thumbnail:: /images/compliance/gdpr/fim-file-mod-who1.png
    :title: Changed attributes full alert visualization
    :align: center
    :width: 80%
 
-.. thumbnail:: ../images/gdpr/fim-file-mod-who2.png
+.. thumbnail:: /images/compliance/gdpr/fim-file-mod-who2.png
    :title: Changed attributes alert visualization
    :align: center
    :width: 80%
@@ -193,12 +193,12 @@ In this use case, there is an example of a Wazuh rule to detect SSH authenticati
 
 When an invalid login attempt triggers rule 5710, you can see the alert below on the Wazuh dashboard.
 
-.. thumbnail:: /images/gdpr/invalid-ssh-login-attempt1.png
+.. thumbnail:: /images/compliance/gdpr/invalid-ssh-login-attempt1.png
    :title: Invalid SSH login attempt alert visualization
    :align: center
    :width: 80%
 
-.. thumbnail:: /images/gdpr/invalid-ssh-login-attempt2.png
+.. thumbnail:: /images/compliance/gdpr/invalid-ssh-login-attempt2.png
    :title: Invalid SSH login attempt alert details
    :align: center
    :width: 80%
@@ -332,7 +332,7 @@ Ubuntu endpoint
 
 	You can see a level 7 alert generated in the **Integrity monitoring** section of the Wazuh dashboard to show that a file in the monitored directory was modified.
 
-	.. thumbnail:: /images/gdpr/integrity-monitoring-level-7.png
+	.. thumbnail:: /images/compliance/gdpr/integrity-monitoring-level-7.png
 	   :title: Integrity monitoring level 7 alert visualization
 	   :align: center
 	   :width: 80%
@@ -346,7 +346,7 @@ Ubuntu endpoint
 
 	You can see a level 15 alert generated to show that a sensitive file in the monitored directory was modified.
 
-	.. thumbnail:: /images/gdpr/integrity-monitoring-level-15.png
+	.. thumbnail:: /images/compliance/gdpr/integrity-monitoring-level-15.png
 	   :title: Integrity monitoring level 15 alert visualization
 	   :align: center
 	   :width: 80%

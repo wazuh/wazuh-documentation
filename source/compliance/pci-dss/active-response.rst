@@ -45,22 +45,22 @@ Use cases
 
       When we attempt to SSH with a non-existent user, rule 5710 generates an alert followed by the active response getting triggered.
 
-   .. thumbnail:: ../images/pci/rule-5710-generates-an-alert-01.png
+   .. thumbnail:: /images/compliance/pci/rule-5710-generates-an-alert-01.png
    	:title: Attempt to login using a non-existent user and Host blocked by firewall-drop alerts
    	:align: center
    	:width: 80%
 
-   .. thumbnail:: ../images/pci/rule-5710-generates-an-alert-02.png
+   .. thumbnail:: /images/compliance/pci/rule-5710-generates-an-alert-02.png
    	:title: Rule 651 Host Blocked by firewall-drop Active Response
    	:align: center
    	:width: 80%
 
-   .. thumbnail:: ../images/pci/rule-5710-generates-an-alert-03.png
+   .. thumbnail:: /images/compliance/pci/rule-5710-generates-an-alert-03.png
    	:title: Rule 651 Host Blocked by firewall-drop Active Response
    	:align: center
    	:width: 80%
 
-   .. thumbnail:: ../images/pci/rule-5710-generates-an-alert-04.png
+   .. thumbnail:: /images/compliance/pci/rule-5710-generates-an-alert-04.png
    	:title: Rule 651 Host Blocked by firewall-drop Active Response
    	:align: center
    	:width: 80%

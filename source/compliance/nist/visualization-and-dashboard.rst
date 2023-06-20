@@ -26,7 +26,7 @@ This use case shows how Wazuh helps meet the **CA-7 Continuous monitoring** NIST
 
 #. Go to the Wazuh dashboard menu and select **Discover** under **OpenSearch Dashboards**.
 
-   .. thumbnail:: /images/nist/select-discover.png    
+   .. thumbnail:: /images/compliance/nist/select-discover.png    
       :title: Select Discover
       :alt: Select Discover
       :align: center
@@ -35,7 +35,7 @@ This use case shows how Wazuh helps meet the **CA-7 Continuous monitoring** NIST
 
 #. Add a filter for the ``authentication_success`` rule group and click **Save**.
 
-   .. thumbnail:: /images/nist/add-a-filter.png    
+   .. thumbnail:: /images/compliance/nist/add-a-filter.png    
       :title: Add a filter
       :alt: Add a filter
       :align: center
@@ -44,13 +44,13 @@ This use case shows how Wazuh helps meet the **CA-7 Continuous monitoring** NIST
 
 #. Save the results of the search using any name of your choice.
 
-   .. thumbnail:: /images/nist/save-the-results.png    
+   .. thumbnail:: /images/compliance/nist/save-the-results.png    
       :title: Save the results
       :alt: Save the results
       :align: center
       :width: 80%
 
-   .. thumbnail:: /images/nist/save-search.png    
+   .. thumbnail:: /images/compliance/nist/save-search.png    
       :title: Save search
       :alt: Save search
       :align: center
@@ -59,7 +59,7 @@ This use case shows how Wazuh helps meet the **CA-7 Continuous monitoring** NIST
 
 #. Select **Reporting**, then choose **Generate CSV**. This downloads a report of all successful authentication events as a CSV file for your review.
 
-   .. thumbnail:: /images/nist/select-reporting.png    
+   .. thumbnail:: /images/compliance/nist/select-reporting.png    
       :title: Select Reporting
       :alt: Select Reporting
       :align: center
@@ -73,7 +73,7 @@ In this use case, Wazuh assists security administrators in meeting the **AU-6 Au
 
 #. Select the **NIST 800-53** module from your Wazuh dashboard.
 
-   .. thumbnail:: /images/nist/select-nist-800-53-moduleg.png    
+   .. thumbnail:: /images/compliance/nist/select-nist-800-53-moduleg.png    
       :title: Select the NIST 800-53 module
       :alt: Select the NIST 800-53 module
       :align: center
@@ -82,7 +82,7 @@ In this use case, Wazuh assists security administrators in meeting the **AU-6 Au
 
 #. Select the **Events** tab to see all alerts related to NIST 800-53 controls.
 
-   .. thumbnail:: /images/nist/select-the-events-tab.png    
+   .. thumbnail:: /images/compliance/nist/select-the-events-tab.png    
       :title: Select the Events tab
       :alt: Select the Events tab
       :align: center
@@ -93,13 +93,13 @@ In this use case, Wazuh assists security administrators in meeting the **AU-6 Au
 
    The **Controls** section of the NIST 800-53 compliance dashboard shows the various NIST 800-53 controls and the related events. For ease of navigation, the Wazuh dashboard groups events according to the NIST 800-53 control they meet or violate.
 
-   .. thumbnail:: /images/nist/select-the-controls-tab.png    
+   .. thumbnail:: /images/compliance/nist/select-the-controls-tab.png    
       :title: Select the Controls tab
       :alt: Select the Controls tab
       :align: center
       :width: 80%
 
-   .. thumbnail:: /images/nist/recent-events.png    
+   .. thumbnail:: /images/compliance/nist/recent-events.png    
       :title: Recent events
       :alt: Recent events
       :align: center

@@ -64,7 +64,7 @@ On the Ubuntu endpoint
 
    You can see an alert generated to show that a file in the monitored directory was modified.
 
-      .. thumbnail:: /images/hipaa/04-file-integrity-monitoring.png    
+      .. thumbnail:: /images/compliance/hipaa/04-file-integrity-monitoring.png    
          :title: Alert generated to show that a file in the monitored directory was modified 
          :align: center
          :width: 80%
@@ -105,7 +105,7 @@ On the Ubuntu endpoint
 
 #. Delete a file from the monitored directory. In this case, delete ``patient_data.txt``. You can see an alert generated for the file deleted.
 
-   .. thumbnail:: /images/hipaa/05-file-integrity-monitoring.png    
+   .. thumbnail:: /images/compliance/hipaa/05-file-integrity-monitoring.png    
       :title: You can see an alert generated for the file deleted 
       :align: center
       :width: 80%

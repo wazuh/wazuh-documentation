@@ -100,12 +100,12 @@ For this use case, we configure Wazuh to detect when changes are made to a file 
 
    You can see an alert generated to show that a file in the monitored directory was modified.
 
-      .. thumbnail:: ../images/pci/file-modified-in-the-monitored-directory.png
+      .. thumbnail:: /images/compliance/pci/file-modified-in-the-monitored-directory.png
          :title: File modified in the monitored directory
          :align: center
          :width: 80%
 
-      .. thumbnail:: ../images/pci/file-modified-in-the-monitored-directory-2.png
+      .. thumbnail:: /images/compliance/pci/file-modified-in-the-monitored-directory-2.png
          :title: File modified in the monitored directory
          :align: center
          :width: 80%     
@@ -164,12 +164,12 @@ In this use case, we configure Syscheck to detect when changes have been made to
 
 #. Proceed to modify the file. In this case, we removed some content. An alert is generated on the next Syscheck scan about the modified file.
 
-	.. thumbnail:: ../images/pci/alert-generated-on-the-next-syscheck-scan-01.png
+	.. thumbnail:: /images/compliance/pci/alert-generated-on-the-next-syscheck-scan-01.png
 		:title: Alert generated on the next Syscheck scan
 		:align: center
 		:width: 80%
 
-	.. thumbnail:: ../images/pci/alert-generated-on-the-next-syscheck-scan-02.png
+	.. thumbnail:: /images/compliance/pci/alert-generated-on-the-next-syscheck-scan-02.png
 		:title: Alert generated on the next Syscheck scan
 		:align: center
 		:width: 80%
@@ -198,7 +198,7 @@ In this scenario, Syscheck detects when a file in a monitored directory is delet
 
 #. Delete a file from the directory. For example, ``cardholder_data.txt``. You can see an alert generated for the file deleted.
 
-	.. thumbnail:: ../images/pci/alert-generated-for-the-file-deleted.png
+	.. thumbnail:: /images/compliance/pci/alert-generated-for-the-file-deleted.png
 		:title: Alert generated for the file deleted
 		:align: center
 		:width: 80%

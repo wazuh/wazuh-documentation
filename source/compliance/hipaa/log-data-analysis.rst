@@ -31,7 +31,7 @@ Below is a rule to detect and alert on a successful SSH authentication:
 
 - **Rule 5715 - sshd: authentication success**: When a user successfully logs into an endpoint via SSH, this rule generates an alert. The alert includes the username, timestamp, and authentication status (success, or failure). The image below shows the alerts generated on the Wazuh dashboard for successful SSH authentications:
 
-.. thumbnail:: /images/hipaa/01-log-data-analysis.png    
+.. thumbnail:: /images/compliance/hipaa/01-log-data-analysis.png    
    :title: Rule 5715 - sshd: authentication success
    :align: center
    :width: 80%
