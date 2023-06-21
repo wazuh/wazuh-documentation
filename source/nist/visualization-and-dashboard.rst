@@ -3,6 +3,8 @@
 .. meta::
   :description: Wazuh offers a web dashboard for continuous data visualization and analysis. Learn more about it in this section of the documentation.
 
+:orphan:
+
 Visualization and dashboard
 ===========================
 
