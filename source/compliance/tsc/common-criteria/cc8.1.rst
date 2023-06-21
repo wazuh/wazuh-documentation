@@ -25,6 +25,8 @@ To carry out this use case, set up a Wazuh server and an Ubuntu 22.04 endpoint w
 
 #. Select **Security events** from your Wazuh dashboard.
 
+#. Ensure the Ubuntu endpoint is selected. 
+
 #. Filter for rule ID ``2902``.
 
    .. thumbnail:: /images/compliance/tsc/common-criteria/ruleid-2902-filtering.gif
