@@ -29,10 +29,10 @@ To carry out this use case, set up a Wazuh server and an Ubuntu 22.04 endpoint w
 
 #. Filter for rule ID ``2902``.
 
-   .. thumbnail:: /images/compliance/tsc/common-criteria/ruleid-2902-filtering.gif
-      :title: Rule ID 2902 filtering
-      :alt: Rule ID 2902 filtering
-      :align: center
-      :width: 80%
+.. thumbnail:: /images/compliance/tsc/common-criteria/ruleid-2902-filtering.gif
+   :title: Rule ID 2902 filtering
+   :alt: Rule ID 2902 filtering
+   :align: center
+   :width: 80%
 
 Wazuh contributes to the CC8.1 requirement by maintaining an accurate and up-to-date record of the software installed on each monitored agent. This information is vital for understanding the overall system configuration, tracking licenses, and ensuring compliance. Wazuh also integrates with vulnerability assessment tools and databases to identify known vulnerabilities associated with specific software packages. By cross-referencing the package inventory with vulnerability information, Wazuh highlights potential security weaknesses. This information allows organizations to prioritize patching or mitigating vulnerable packages, reducing the risk of exploitation.
