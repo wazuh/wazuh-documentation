@@ -352,14 +352,7 @@ The command output must be similar to the following:
 Wazuh dashboard configuration
 -----------------------------
 
-#. Edit the Wazuh dashboard configuration file. Add these configurations to ``/etc/wazuh-dashboard/opensearch_dashboards.yml``. We recommend that you back up these files before you carry out the configuration.
-
-   .. code-block:: console  
-
-      opensearch_security.auth.type: "saml"
-      server.xsrf.allowlist: ["/_opendistro/_security/saml/acs", "/_opendistro/_security/saml/logout", "/_opendistro/_security/saml/acs/idpinitiated"]
-
-#. Ensure that ``run_as`` is set to false in the ``/usr/share/wazuh-dashboard/data/wazuh/config/wazuh.yml`` configuration file.
+#. Check the value of ``run_as`` in the ``/usr/share/wazuh-dashboard/data/wazuh/config/wazuh.yml`` configuration file. If ``run_as`` is set to false, proceed to the next step.
 
    .. code-block:: yaml
       :emphasize-lines: 7
@@ -371,6 +364,39 @@ Wazuh dashboard configuration
             username: wazuh-wui
             password: "<wazuh-wui-password>"
             run_as: false
+
+   If ``run_as`` is set to ``true``, you need to add a role mapping on the Wazuh dashboard. To map the backend role to Wazuh, follow these steps:
+
+   #. Click **Wazuh** to open the Wazuh dashboard menu, select **Security**, and then **Roles mapping** to open the page.
+
+      .. thumbnail:: /images/single-sign-on/Wazuh-role-mapping.gif
+         :title: Wazuh role mapping
+         :alt: Wazuh role mapping 
+         :align: center
+         :width: 80%
+
+   #. Click **Create Role mapping** and complete the empty fields with the following parameters:
+
+      - **Role mapping name**: Assign a name to the role mapping.
+      - **Roles**: Select ``administrator``.
+      - **Custom rules**: Click **Add new rule** to expand this field.
+      - **User field**: ``backend_roles``
+      - **Search operation**: ``FIND``
+      - **Value**: Assign the value of the realm role in Keycloak configuration. In our case, this is ``admin``.  
+
+      .. thumbnail:: /images/single-sign-on/keycloak/Wazuh-role-mapping.png
+         :title: Wazuh role mapping
+         :alt: Wazuh role mapping 
+         :align: center
+         :width: 80%      
+
+
+#. Edit the Wazuh dashboard configuration file. Add these configurations to ``/etc/wazuh-dashboard/opensearch_dashboards.yml``. We recommend that you back up these files before you carry out the configuration.
+
+   .. code-block:: console  
+
+      opensearch_security.auth.type: "saml"
+      server.xsrf.allowlist: ["/_opendistro/_security/saml/acs", "/_opendistro/_security/saml/logout", "/_opendistro/_security/saml/acs/idpinitiated"]
 
 #. Restart the Wazuh dashboard service using this command:
 
