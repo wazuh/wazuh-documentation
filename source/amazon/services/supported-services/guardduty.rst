@@ -49,7 +49,7 @@ Amazon configuration native integration
 Amazon configuration with Kinesis, Firehose, CloudWatch integration
 -------------------------------------------------------------------
 
-.. deprecated:: 4.5
+.. deprecated:: 4.6
 
 #. :doc:`Create a new S3 bucket </amazon/services/prerequisites/S3-bucket>`. If you want to use an existing bucket, skip this step.
 
