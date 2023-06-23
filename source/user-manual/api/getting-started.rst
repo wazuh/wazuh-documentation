@@ -907,7 +907,7 @@ It is possible to send security events to analyze using the Wazuh API directly.
 
 .. code-block:: console
 
-    # curl -k -X GET 'https://localhost:55000/events' -H  'Authorization: Bearer $TOKEN' -H  'Content-Type: application/json' -d '{"events": ["Event value 1", "{\"someKey\": \"Event value 2\"}"]}'
+    # curl -k -X POST "https://localhost:55000/events" -H  "Authorization: Bearer $TOKEN" -H  "Content-Type: application/json" -d '{"events": ["Event value 1", "{\"someKey\": \"Event value 2\"}"]}'
 
 .. code-block:: json
     :class: output
