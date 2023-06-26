@@ -1327,7 +1327,7 @@ Misc Variables
 $server_package_version
   Modified client.pp and server.pp to accept package versions as a parameter.
 
-  `Default 4.4.4-1`
+  `Default |WAZUH_CURRENT_PUPPET|-1`
 
   `Type String`
 
