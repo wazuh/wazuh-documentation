@@ -278,7 +278,7 @@ Edit the Wazuh indexer security configuration files. We recommend that you back 
 Wazuh dashboard configuration
 -----------------------------
 
-#. Check the value of ``run_as`` in the ``/usr/share/wazuh-dashboard/data/wazuh/config/wazuh.yml`` configuration file. If ``run_as`` is set to false, proceed to the next step.
+#. Check the value of ``run_as`` in the ``/usr/share/wazuh-dashboard/data/wazuh/config/wazuh.yml`` configuration file. If ``run_as`` is set to ``false``, proceed to the next step.
 
    .. code-block:: yaml
       :emphasize-lines: 7
@@ -311,8 +311,8 @@ Wazuh dashboard configuration
       - **Value**: Assign the value of the Department field in OneLogin configuration. In our case, this is ``wazuh-admin``.
 
       .. thumbnail:: /images/single-sign-on/onelogin/Wazuh-role-mapping.png
-         :title: Wazuh role mapping
-         :alt: Wazuh role mapping 
+         :title: Create Wazuh role mapping
+         :alt: Create Wazuh role mapping 
          :align: center
          :width: 80%      
 

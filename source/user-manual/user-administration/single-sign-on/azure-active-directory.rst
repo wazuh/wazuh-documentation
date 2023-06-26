@@ -277,7 +277,7 @@ Edit the Wazuh indexer security configuration files. We recommend that you back 
 Wazuh dashboard configuration
 -----------------------------
 
-#. Check the value of ``run_as`` in the ``/usr/share/wazuh-dashboard/data/wazuh/config/wazuh.yml`` configuration file. If ``run_as`` is set to false, proceed to the next step.
+#. Check the value of ``run_as`` in the ``/usr/share/wazuh-dashboard/data/wazuh/config/wazuh.yml`` configuration file. If ``run_as`` is set to ``false``, proceed to the next step.
 
    .. code-block:: yaml
       :emphasize-lines: 7
@@ -310,8 +310,8 @@ Wazuh dashboard configuration
       - **Value**: Assign the backend role from the Azure AD configuration, in our case, this is ``Wazuh_role``. 
 
       .. thumbnail:: /images/single-sign-on/azure-active-directory/Wazuh-role-mapping.png
-         :title: Wazuh role mapping
-         :alt: Wazuh role mapping 
+         :title: Create Wazuh role mapping
+         :alt: Create Wazuh role mapping 
          :align: center
          :width: 80%      
 
