@@ -277,6 +277,46 @@ Edit the Wazuh indexer security configuration files. We recommend that you back 
 Wazuh dashboard configuration
 -----------------------------
 
+#. Check the value of ``run_as`` in the ``/usr/share/wazuh-dashboard/data/wazuh/config/wazuh.yml`` configuration file. If ``run_as`` is set to ``false``, proceed to the next step.
+
+   .. code-block:: yaml
+      :emphasize-lines: 7
+
+      hosts:
+        - default:
+            url: https://localhost
+            port: 55000
+            username: wazuh-wui
+            password: "<wazuh-wui-password>"
+            run_as: false
+
+   If ``run_as`` is set to ``true``, you need to add a role mapping on the Wazuh dashboard. To map the backend role to Wazuh, follow these steps:
+
+   #. Click **Wazuh** to open the Wazuh dashboard menu, select **Security**, and then **Roles mapping** to open the page.
+
+      .. thumbnail:: /images/single-sign-on/Wazuh-role-mapping.gif
+         :title: Wazuh role mapping
+         :alt: Wazuh role mapping 
+         :align: center
+         :width: 80%
+
+   #. Click **Create Role mapping** and complete the empty fields with the following parameters:
+
+      -  **Role mapping name**: Assign a name to the role mapping.
+      -  **Roles**: Select ``administrator``.
+      -  **Custom rules**: Click **Add new rule** to expand this field.
+      -  **User field**: ``backend_roles``
+      -  **Search operation**: ``FIND``
+      -  **Value**: Assign the value of the Department field in OneLogin configuration. In our case, this is ``wazuh-admin``.
+
+      .. thumbnail:: /images/single-sign-on/onelogin/Wazuh-role-mapping.png
+         :title: Create Wazuh role mapping
+         :alt: Create Wazuh role mapping 
+         :align: center
+         :width: 80%      
+
+   #. Click **Save role mapping** to save and map the backend role with Wazuh as administrator.
+
 #. Edit the Wazuh dashboard configuration file. Add these configurations to ``/etc/wazuh-dashboard/opensearch_dashboards.yml``. We recommend that you back up these files before you carry out the configuration.
 
    .. code-block:: console  
@@ -297,19 +337,6 @@ Wazuh dashboard configuration
                path: `/logout`,
                validate: false
          ...
-
-#. Ensure that ``run_as`` is set to false in the ``/usr/share/wazuh-dashboard/data/wazuh/config/wazuh.yml`` configuration file.
-
-   .. code-block:: yaml
-      :emphasize-lines: 7
-
-      hosts:
-        - default:
-            url: https://localhost
-            port: 55000
-            username: wazuh-wui
-            password: "<wazuh-wui-password>"
-            run_as: false
 
 #. Restart the Wazuh dashboard service.
 
