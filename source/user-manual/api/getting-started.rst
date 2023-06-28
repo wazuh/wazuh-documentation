@@ -901,7 +901,7 @@ Adding an agent is now easier than ever. Simply send a request with the agent na
 Ingest security events
 ^^^^^^^^^^^^^^^^^^^^^^
 
-.. versionadded:: 4.5.0
+.. versionadded:: 4.6.0
 
 You can send security events for analysis using the Wazuh API.
 
