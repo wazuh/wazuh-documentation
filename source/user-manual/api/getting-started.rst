@@ -903,7 +903,7 @@ Ingest security events
 
 .. versionadded:: 4.5.0
 
-It is possible to send security events to analyze using the Wazuh API directly.
+You can send security events for analysis using the Wazuh API.
 
 .. code-block:: console
 
@@ -926,7 +926,8 @@ It is possible to send security events to analyze using the Wazuh API directly.
     }
 
 .. note::
-    A maximum of 100 events can be sent per request.
+
+   You can send a maximum of 100 events per request.
 
 Conclusion
 ^^^^^^^^^^
