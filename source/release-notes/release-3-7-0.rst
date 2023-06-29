@@ -110,7 +110,7 @@ In this example, the Docker command ``docker pause apache`` will stop the contai
     :align: center
     :width: 100%
 
-To learn more about this new module and how to configure it, check out the section :ref:`docker-monitor-index`.
+To learn more about this new module and how to configure it, check out the section :doc:`/user-manual/capabilities/container-security/monitoring-docker`.
 
 Query remote configuration
 --------------------------
