@@ -40,7 +40,7 @@ The FIM module supports several configuration options for monitoring Windows Reg
 
 In this guide, you can see different configuration options that you can apply to monitor the Windows Registry.
 
-.. versionadded:: 4.5.0
+.. versionadded:: 4.6.0
 
 Windows registries directories can be configured using ``*`` and ``?`` wildcards in the same way you would use them in a shell or cmd terminal for listing files.
 

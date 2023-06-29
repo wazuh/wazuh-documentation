@@ -1040,7 +1040,7 @@ windows_registry
 
 List of registry entries to be monitored. One entry per line. Multiple lines may be entered to include multiple registry entries.
 
-.. versionadded:: 4.5.0
+.. versionadded:: 4.6.0
 
 Wildcard characters (``?`` and ``*``) can be used to monitor paths that fulfill the given pattern.
 These wildcards will be reloaded every time a scheduled scan is run.
@@ -1222,7 +1222,7 @@ Example:
  <windows_registry arch="64bit" recursion_level="3">HKEY_LOCAL_MACHINE\SYSTEM\Setup</windows_registry>
 
 
-.. versionadded:: 4.5.0
+.. versionadded:: 4.6.0
 
 If there is a conflict between a block with wildcards and another without them, the block without wildcards will be used for the specific case. As an example:
 
