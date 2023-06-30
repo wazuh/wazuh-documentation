@@ -305,6 +305,14 @@ Perform the following steps from your ``single-node`` directory. If you have a m
 
 #. Exit the Wazuh indexer container and login with the new credentials on the Wazuh dashboard.
 
+If you decide to update **kibanaserver**'s password, do not forget to set the ``DASHBOARD_PASSWORD`` environment variable for the dashboard container.
+
+.. code-block:: yaml
+
+ environment:
+   - DASHBOARD_PASSWORD=your_new_password
+
+
 Exposed ports
 -------------
 

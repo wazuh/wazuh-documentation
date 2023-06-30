@@ -134,3 +134,4 @@ The options ``-au`` and ``-ap`` are necessary to change the passwords for the AP
 
 In distributed deployments you will need to change the passwords in the nodes running the Wazuh dashboard and Filebeat, you can use ``wazuh-passwords-tool.sh`` to do this.
 
+.. note:: If you're using Docker, read the :doc:`Wazuh Docker deployment page <../../deployment-options/docker/wazuh-container>` for more information.
