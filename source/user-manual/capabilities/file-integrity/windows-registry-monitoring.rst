@@ -50,7 +50,7 @@ You can use ``*`` and ``?`` wildcards when configuring Windows registry keys. Us
 
 .. note::
 
-   Registry keys matching your configuration might be created after the initial FIM scan. Wazuh scans these new keys only in the next scheduled FIM scan.
+   Registry keys matching your configuration might be created after the initial FIM scan. Wazuh scans these new keys only from the next scheduled FIM scan.
 
 The FIM module supports several configuration options for monitoring Windows Registry entries. For example, you can enable all the basic checks with the ``check_all`` attribute, or find the information about the specific change made to a registry entry with the ``report_changes`` attribute. You can find a list of all the supported attributes and options in the :ref:`windows_registry <reference_ossec_syscheck_windows_registry>` section of the documentation.
 
