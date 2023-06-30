@@ -36,23 +36,25 @@ To configure the FIM module, it’s necessary to specify the registry keys that 
 
 You can modify the :ref:`default FIM configuration <reference_ossec_syscheck_default_configuration>` on the ``C:\Program Files (x86)\ossec-agent\ossec.conf`` configuration file of the  Wazuh agent to specify the Windows Registry keys to monitor. You can also configure this capability remotely by using :ref:`centralized configuration <reference_agent_conf>`.
 
+.. versionadded:: 4.6.0
+
+You can use ``*`` and ``?`` wildcards when configuring Windows registry keys. Use them in the same way you would in a shell or Windows command prompt (cmd) terminal for listing files. For example:
+
+.. code-block:: xml
+
+   <syscheck>
+     <windows_registry arch="both">HKEY_LOCAL_MACHINE\SOFTWARE\*</windows_registry>
+     <windows_registry arch="both">HKEY_CURRENT_CONFIG\S?????</windows_registry>
+     <windows_registry arch="both">HKEY_USERS\S-?-?-??\*</windows_registry>
+   </syscheck>
+
+.. note::
+
+   Registry keys matching your configuration might be created after the initial FIM scan. Wazuh scans these new keys only in the next scheduled FIM scan.
+
 The FIM module supports several configuration options for monitoring Windows Registry entries. For example, you can enable all the basic checks with the ``check_all`` attribute, or find the information about the specific change made to a registry entry with the ``report_changes`` attribute. You can find a list of all the supported attributes and options in the :ref:`windows_registry <reference_ossec_syscheck_windows_registry>` section of the documentation.
 
 In this guide, you can see different configuration options that you can apply to monitor the Windows Registry.
-
-.. versionadded:: 4.6.0
-
-Windows registries directories can be configured using ``*`` and ``?`` wildcards in the same way you would use them in a shell or cmd terminal for listing files.
-
-.. code-block:: xml
-  <syscheck>
-    <windows_registry arch="both">HKEY_LOCAL_MACHINE\SOFTWARE\*</windows_registry>
-    <windows_registry arch="both">HKEY_CURRENT_CONFIG\S?????</windows_registry>
-    <windows_registry arch="both">HKEY_USERS\S-?-?-??\*</windows_registry>
-  </syscheck>
-.. note::
-
-  Registers that match the configured pattern and are created after the initial FIM scan will be added for monitoring after the next scheduled scan is run.
 
 Record Windows Registry attributes
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
