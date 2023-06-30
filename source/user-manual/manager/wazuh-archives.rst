@@ -3,8 +3,6 @@
 .. meta::
   :description: Wazuh archives store all events received by the Wazuh server, whether or not they trip a rule.  Learn how to enable them, how to visualize them in the dashboard, and explore a use case in this section of the documentation.
 
-:orphan:
-
 Wazuh archives
 ==============
 

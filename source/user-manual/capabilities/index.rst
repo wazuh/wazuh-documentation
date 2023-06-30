@@ -35,4 +35,3 @@ In this section you will find:
    agentless-monitoring/index        
    osquery
    policy-monitoring/index
-   wazuh-archives
