@@ -269,7 +269,7 @@ Setting a new hash
 
 .. note::
 
-   You don't need to provide a hash if you're changing the ``wazuh-wui`` user password only. Jump to :ref:`wazuh-docker-password-setting` below in this case, after stopping your deployment stack.
+   You don't need to provide a hash if you're only changing the password of the ``wazuh-wui`` user. Jump to :ref:`wazuh-docker-password-setting` below in this case, after stopping your deployment stack.
 
 #. Stop the deployment stack if it’s running:
 
