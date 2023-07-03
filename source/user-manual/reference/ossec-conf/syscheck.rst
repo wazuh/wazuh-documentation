@@ -1042,8 +1042,7 @@ List of registry entries to be monitored. One entry per line. Multiple lines may
 
 .. versionadded:: 4.6.0
 
-Wildcard characters (``?`` and ``*``) can be used to monitor paths that fulfill the given pattern.
-These wildcards will be reloaded every time a scheduled scan is run.
+   To scan paths matching a pattern, you can use the wildcard characters ``?`` and ``*``. For example ``HKEY_LOCAL_MACHINE\SOFTWARE\*``. FIM uses these wildcards during scheduled scan.
 
 +--------------------+----------------------------------------------------------------------+
 | **Default value**  | The default configuration may vary depending on the operating system.|
