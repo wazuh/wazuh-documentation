@@ -269,13 +269,13 @@ Setting a new hash
 
 .. note::
 
-   You don't need to provide a hash if you're changing the ``wazuh-wui`` user password. Jump to :ref:`wazuh-docker-password-setting` below in this case, after stopping your deployment stack.
+   You don't need to provide a hash if you're changing the ``wazuh-wui`` user password only. Jump to :ref:`wazuh-docker-password-setting` below in this case, after stopping your deployment stack.
 
 #. Stop the deployment stack if it’s running:
 
    .. code-block:: console
   
-      # docker-compose stop
+      # docker-compose down
 
 #. Run this command to generate the hash of your new password. Once the container launches, input the new password and press **Enter**.
 
@@ -345,7 +345,7 @@ Setting the new password
             - API_PASSWORD=MyS3cr37P450r.*-
         ...
 
-#. If you're changing the ``wazuh-wui`` user password, also change the password in ``config/wazuh_dashboard/wazuh.yml``.
+#. If you're changing the ``wazuh-wui`` user password, change the password in ``config/wazuh_dashboard/wazuh.yml`` as well.
 
    .. code-block:: YAML
       :emphasize-lines: 6
@@ -365,7 +365,7 @@ Applying the changes
 
    .. code-block:: console
   
-      # docker-compose start
+      # docker-compose up -d
 
 #. Run ``docker ps`` and note the name of the Wazuh indexer container. For example, ``single-node-wazuh.indexer-1``.
 
