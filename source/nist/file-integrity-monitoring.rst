@@ -3,6 +3,8 @@
 .. meta::
   :description: The FIM module monitors an endpoint filesystem to detect file changes in specified files and directories. Learn more about it in this section.
 
+:orphan:
+
 File integrity monitoring
 =========================
 
@@ -46,13 +48,13 @@ In this scenario, the Wazuh FIM monitors the SSH configuration file ``/etc/ssh/s
 
 #. Select the **Integrity monitoring** tab from the Wazuh dashboard. Find the alert triggered by rule ID ``550``. The alert details show that the content of ``/etc/ssh/sshd_config`` has changed. They include the differences in the file checksum, the modification made, the modification time, and other information.
 
-   .. thumbnail:: /images/nist/integrity-monitoring-tab.png    
+   .. thumbnail:: /images/compliance/nist/integrity-monitoring-tab.png    
       :title: Integrity monitoring tab
       :alt: Integrity monitoring tab
       :align: center
       :width: 80%
 
-   .. thumbnail:: /images/nist/alert-triggered-by-rule-id-550.png    
+   .. thumbnail:: /images/compliance/nist/alert-triggered-by-rule-id-550.png    
       :title: Alert triggered by rule ID 550
       :alt: Alert triggered by rule ID 550
       :align: center
@@ -88,7 +90,7 @@ In this scenario, the Wazuh FIM monitors the Uncomplicated Firewall (UFW) rule f
 
 #. Check the alert of rule ID ``550`` on the Wazuh dashboard. This alert shows permissions for the  ``/etc/ufw/user.rules`` file have changed.
 
-   .. thumbnail:: /images/nist/alert-of-rule-id-550.png    
+   .. thumbnail:: /images/compliance/nist/alert-of-rule-id-550.png    
       :title: Alert of rule ID 550
       :alt: Alert of rule ID 550
       :align: center
@@ -97,7 +99,7 @@ In this scenario, the Wazuh FIM monitors the Uncomplicated Firewall (UFW) rule f
 
 #. Expand the alert to view the ``full_log`` field. This field shows an overview of the event.
 
-   .. thumbnail:: /images/nist/the-full-log-field.png    
+   .. thumbnail:: /images/compliance/nist/the-full-log-field.png    
       :title: The full_log field
       :alt: The full_log field
       :align: center
@@ -106,7 +108,7 @@ In this scenario, the Wazuh FIM monitors the Uncomplicated Firewall (UFW) rule f
 
 #. Check the ``syscheck.audit.login_user.name`` and ``syscheck.audit.process.name`` fields to see the user and process that initiated the change.
  
-   .. thumbnail:: /images/nist/check-syscheck-fieldsd.png    
+   .. thumbnail:: /images/compliance/nist/check-syscheck-fieldsd.png    
       :title: Check syscheck fields
       :alt: Check syscheck fields
       :align: center

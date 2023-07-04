@@ -84,9 +84,9 @@ Okta Configuration
      
    #. In the **Configure SAML** menu, you’ll find the **SAML Settings** section, modify the following parameters:
    
-      - **Single sign on URL**: input ``https://<WAZUH_DASHBOARD_URL>/_opendistro/_security/saml/acs/idpinitiated`` and replace the ``<WAZUH_DASHBOARD_URL>`` field with the corresponding URL.
+      - **Single sign on URL**: input ``https://<WAZUH_DASHBOARD_URL>/_opendistro/_security/saml/acs`` and replace the ``<WAZUH_DASHBOARD_URL>`` field with the corresponding URL.
       - **Audience URI (SP Entity ID)**: input ``wazuh-saml``. This is the ``SP Entity ID`` value which will be used later in the ``config.yml`` on the Wazuh indexer instance.
-      - **Other Requestable SSO URLs**: click on **Show Advanced Settings** to access this option. Input ``https://<WAZUH_DASHBOARD_URL>/_opendistro/_security/saml/acs/`` and replace the ``<WAZUH_DASHBOARD_URL>`` field with the corresponding URL.
+      - **Other Requestable SSO URLs**: click on **Show Advanced Settings** to access this option. Input ``https://<WAZUH_DASHBOARD_URL>/_opendistro/_security/saml/acs/idpinitiated`` and replace the ``<WAZUH_DASHBOARD_URL>`` field with the corresponding URL.
 
       You can leave the rest of the values as default.
 
@@ -278,26 +278,52 @@ Edit the Wazuh indexer security configuration files. We recommend that you back 
 Wazuh dashboard configuration
 -----------------------------
 
+#. Check the value of ``run_as`` in the ``/usr/share/wazuh-dashboard/data/wazuh/config/wazuh.yml`` configuration file. If ``run_as`` is set to ``false``, proceed to the next step.
+
+   .. code-block:: yaml
+      :emphasize-lines: 7
+
+      hosts:
+        - default:
+            url: https://localhost
+            port: 55000
+            username: wazuh-wui
+            password: "<wazuh-wui-password>"
+            run_as: false
+
+   If ``run_as`` is set to ``true``, you need to add a role mapping on the Wazuh dashboard. To map the backend role to Wazuh, follow these steps:
+
+   #. Click **Wazuh** to open the Wazuh dashboard menu, select **Security**, and then **Roles mapping** to open the page.
+
+      .. thumbnail:: /images/single-sign-on/Wazuh-role-mapping.gif
+         :title: Wazuh role mapping
+         :alt: Wazuh role mapping 
+         :align: center
+         :width: 80%
+
+   #. Click **Create Role mapping** and complete the empty fields with the following parameters:
+
+      - **Role mapping name**: Assign a name to the role mapping.
+      - **Roles**: Select ``administrator``.
+      - **Custom rules**: Click **Add new rule** to expand this field.
+      - **User field**: ``backend_roles``
+      - **Search operation**: ``FIND``
+      - **Value**: Assign the name you gave to your group in Step 3 of Okta configuration, in our case, this is ``wazuh-admins``. 
+
+      .. thumbnail:: /images/single-sign-on/okta/Wazuh-role-mapping.png
+         :title: Create Wazuh role mapping
+         :alt: Create Wazuh role mapping 
+         :align: center
+         :width: 80%      
+
+   #. Click **Save role mapping** to save and map the backend role with Wazuh as administrator.
+
 #. Edit the Wazuh dashboard configuration file. Add these configurations to ``/etc/wazuh-dashboard/opensearch_dashboards.yml``. We recommend that you back up these files before you carry out the configuration.
 
    .. code-block:: console  
 
       opensearch_security.auth.type: "saml"
       server.xsrf.allowlist: ["/_opendistro/_security/saml/acs", "/_opendistro/_security/saml/logout", "/_opendistro/_security/saml/acs/idpinitiated"]
-
-   .. note::
-      :class: not-long
-
-      *For versions 4.3.9 and earlier*, also replace ``path: `/auth/logout``` with ``path: `/logout``` in ``/usr/share/wazuh-dashboard/plugins/securityDashboards/server/auth/types/saml/routes.js``. We recommend that you back up these files before you carry out the configuration.
-
-      .. code-block:: console
-         :emphasize-lines: 3
-
-         ...
-            this.router.get({
-               path: `/logout`,
-               validate: false
-         ...
 
 #. Restart the Wazuh dashboard service.
 
