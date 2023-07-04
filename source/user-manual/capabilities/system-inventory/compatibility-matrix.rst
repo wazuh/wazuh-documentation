@@ -2,24 +2,26 @@
 
 .. meta::
   :description: The Compatibility matrix shows the scans that are compatible with various operating systems. Learn more about it in this section of the Wazuh documentation.
- 
+
 Compatibility matrix
 ====================
 
-The Syscollector module supports different options across various operating systems that the Wazuh agent can be installed on. The following table shows the scans that are compatible with various operating systems.
+The Syscollector module supports different options across various operating systems that the Wazuh agent can be installed on. The following table shows the scans that are compatible with various operating systems, where '*√*' means compatible scan, '*✗*' not supported scan, and '*–*' not applicable.
 
 +------------------------+----------------------------------------------------------------------------------+
 |                        |                      **Syscollector scan**                                       |
 +  **Operating System**  +-----------+-----------+-----------+----------+-----------+-----------+-----------+
 |                        |  Hardware |    OS     |  Packages |  Network |   Ports   | Processes |  Hotfixes |
 +------------------------+-----------+-----------+-----------+----------+-----------+-----------+-----------+
-|    Windows             |     ✓     |     ✓     |     ✓     |     ✓    |     ✓     |     ✓     |     ✓     |
+|    Windows             |     √     |     √     |     √     |     √    |     √     |     √     |     √     |
 +------------------------+-----------+-----------+-----------+----------+-----------+-----------+-----------+
-|    Linux               |     ✓     |     ✓     |     ✓     |     ✓    |     ✓     |     ✓     |     ✗     |
+|    Linux               |     √     |     √     |     √     |     √    |     √     |     √     |     –     |
 +------------------------+-----------+-----------+-----------+----------+-----------+-----------+-----------+
-|    macOS               |     ✓     |     ✓     |     ✓     |     ✓    |     ✓     |     ✓     |     ✗     |
+|    macOS               |     √     |     √     |     √     |     √    |     √     |     √     |     –     |
 +------------------------+-----------+-----------+-----------+----------+-----------+-----------+-----------+
-|    FreeBSD             |     ✓     |     ✓     |     ✓     |     ✓    |     ✗     |     ✗     |     ✗     |
+|    FreeBSD             |     √     |     √     |     √     |     √    |     ✗     |     ✗     |     –     |
 +------------------------+-----------+-----------+-----------+----------+-----------+-----------+-----------+
-|    OpenBSD             |     ✓     |     ✓     |     ✗     |     ✓    |     ✗     |     ✗     |     ✗     |
+|    OpenBSD             |     √     |     √     |     ✗     |     √    |     ✗     |     ✗     |     –     |
++------------------------+-----------+-----------+-----------+----------+-----------+-----------+-----------+
+|    Solaris             |     ✗     |     √     |     √     |     √    |     ✗     |     ✗     |     –     |
 +------------------------+-----------+-----------+-----------+----------+-----------+-----------+-----------+

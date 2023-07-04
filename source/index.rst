@@ -23,7 +23,6 @@ Index
    Wazuh Cloud service <cloud-service/index>
    user-manual/index
    monitoring
-   container-security/index
    development/index
    compliance/index
    proof-of-concept-guide/index

@@ -95,6 +95,8 @@ redirectSameRelease['4.4'] = {
     '/compliance/nist/active-response.html',
   '/nist/threat-intelligence.html':
     '/compliance/nist/threat-intelligence.html',
+  '/user-manual/capabilities/wazuh-archives.html':
+    '/user-manual/manager/wazuh-archives.html',
 };
 
 /* Redirections from 4.3 to 4.4  */
@@ -335,6 +337,31 @@ redirections.push(
       '4.3': '/pci-dss/log-analysis.html',
       '4.4': '/compliance/pci-dss/log-analysis.html',
     },
+    {
+      'target': ['4.3=>4.4', '4.4=>4.3'],
+      '4.3': '/container-security/index.html',
+      '4.4': '/user-manual/capabilities/container-security/index.html',
+    },
+    {
+      'target': ['4.3=>4.4', '4.4=>4.3'],
+      '4.3': '/container-security/docker-monitor/index.html',
+      '4.4': '/user-manual/capabilities/container-security/monitoring-docker.html',
+    },
+    {
+      'target': ['4.3=>4.4'],
+      '4.3': '/container-security/docker-monitor/dependencies.html',
+      '4.4': '/user-manual/capabilities/container-security/monitoring-docker.html#enable-the-wazuh-docker-listener',
+    },
+    {
+      'target': ['4.3=>4.4'],
+      '4.3': '/container-security/docker-monitor/monitoring-docker-server.html',
+      '4.4': '/user-manual/capabilities/container-security/use-cases.html',
+    },
+    {
+      'target': ['4.3=>4.4'],
+      '4.3': '/container-security/docker-monitor/monitoring-containers-activity.html',
+      '4.4': '/user-manual/capabilities/container-security/use-cases.html',
+    },
   );
 
 /* Pages added in 4.4 */
@@ -387,6 +414,10 @@ newUrls['4.4'] = [
   '/user-manual/agents/antiflooding.html',
   '/user-manual/agents/labels.html',
   '/user-manual/manager/fluent-forwarder.html',
+  '/user-manual/manager/wazuh-archives.html',
+  '/user-manual/capabilities/container-security/index.html',
+  '/user-manual/capabilities/container-security/monitoring-docker.html',
+  '/user-manual/capabilities/container-security/use-cases.html',
   '/user-manual/capabilities/file-integrity/basic-settings.html',
   '/user-manual/capabilities/file-integrity/how-to-configure-fim.html',
   '/user-manual/capabilities/file-integrity/interpreting-fim-module-analysis.html',
@@ -411,7 +442,6 @@ newUrls['4.4'] = [
   '/user-manual/capabilities/system-calls-monitoring/use-cases/monitoring-file-and-directory-access.html',
   '/user-manual/capabilities/system-calls-monitoring/use-cases/monitoring-commands-run-as-root.html',
   '/user-manual/capabilities/system-calls-monitoring/use-cases/privilege-abuse.html',
-  '/user-manual/capabilities/wazuh-archives.html',
   '/user-manual/capabilities/agentless-monitoring/connection.html',
   '/user-manual/capabilities/agentless-monitoring/visualization.html',
   '/user-manual/capabilities/agentless-monitoring/use-cases.html',  
@@ -453,6 +483,12 @@ removedUrls['4.4'] = [
   '/user-manual/capabilities/auditing-whodata/who-windows-policies.html',  
   '/user-manual/capabilities/syscollector.html',  
   '/user-manual/capabilities/agentless-monitoring/agentless-faq.html',
+  '/user-manual/capabilities/wazuh-archives.html',
+  '/container-security/index.html',
+  '/container-security/docker-monitor/index.html',
+  '/container-security/docker-monitor/dependencies.html',
+  '/container-security/docker-monitor/monitoring-containers-activity.html',
+  '/container-security/docker-monitor/monitoring-docker-server.html',
 ];
 
   /* *** RELEASE 4.3 ****/
