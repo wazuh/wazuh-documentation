@@ -72,6 +72,33 @@ removedUrls['x.y'] = [
 
 /* *** RELEASE 4.4 ****/
 
+/* Pages changed within the same release */
+
+redirectSameRelease['4.4'] = {
+  '/nist/index.html':
+    '/compliance/nist/index.html',
+  '/nist/visualization-and-dashboard.html':
+    '/compliance/nist/visualization-and-dashboard.html',
+  '/nist/log-data-analysis.html':
+    '/compliance/nist/log-data-analysis.html',
+  '/nist/configuration-assessment.html':
+    '/compliance/nist/configuration-assessment.html',
+  '/nist/malware-detection.html':
+    '/compliance/nist/malware-detection.html',
+  '/nist/file-integrity-monitoring.html':
+    '/compliance/nist/file-integrity-monitoring.html',
+  '/nist/system-inventory.html':
+    '/compliance/nist/system-inventory.html',
+  '/nist/vulnerability-detection.html':
+    '/compliance/nist/vulnerability-detection.html',
+  '/nist/active-response.html':
+    '/compliance/nist/active-response.html',
+  '/nist/threat-intelligence.html':
+    '/compliance/nist/threat-intelligence.html',
+  '/user-manual/capabilities/wazuh-archives.html':
+    '/user-manual/manager/wazuh-archives.html',
+};
+
 /* Redirections from 4.3 to 4.4  */
 
 redirections.push(
@@ -200,6 +227,141 @@ redirections.push(
       '4.3': '/user-manual/capabilities/syscollector.html#use-case-visualize-system-inventory-in-the-wazuh-app',
       '4.4': '/user-manual/capabilities/system-inventory/configuration.html',
     },
+    {
+      'target': ['4.3=>4.4', '4.4=>4.3'],
+      '4.3': '/compliance.html',
+      '4.4': '/compliance/index.html',
+    },
+    {
+      'target': ['4.3=>4.4', '4.4=>4.3'],
+      '4.3': '/gdpr/index.html',
+      '4.4': '/compliance/gdpr/index.html',
+    },
+    {
+      'target': ['4.3=>4.4', '4.4=>4.3'],
+      '4.3': '/gdpr/gdpr-II.html',
+      '4.4': '/compliance/gdpr/gdpr-II.html',
+    },
+    {
+      'target': ['4.3=>4.4', '4.4=>4.3'],
+      '4.3': '/gdpr/gdpr-III.html',
+      '4.4': '/compliance/gdpr/gdpr-III.html',
+    },
+    {
+      'target': ['4.3=>4.4', '4.4=>4.3'],
+      '4.3': '/gdpr/gdpr-IV.html',
+      '4.4': '/compliance/gdpr/gdpr-IV.html',
+    },
+    {
+      'target': ['4.3=>4.4', '4.4=>4.3'],
+      '4.3': '/hipaa/index.html',
+      '4.4': '/compliance/hipaa/index.html',
+    },
+    {
+      'target': ['4.3=>4.4', '4.4=>4.3'],
+      '4.3': '/hipaa/visualization-and-dashboard.html',
+      '4.4': '/compliance/hipaa/visualization-and-dashboard.html',
+    },
+    {
+      'target': ['4.3=>4.4', '4.4=>4.3'],
+      '4.3': '/hipaa/log-data-analysis.html',
+      '4.4': '/compliance/hipaa/log-data-analysis.html',
+    },
+    {
+      'target': ['4.3=>4.4', '4.4=>4.3'],
+      '4.3': '/hipaa/configuration-assessment.html',
+      '4.4': '/compliance/hipaa/configuration-assessment.html',
+    },
+    {
+      'target': ['4.3=>4.4', '4.4=>4.3'],
+      '4.3': '/hipaa/malware-detection.html',
+      '4.4': '/compliance/hipaa/malware-detection.html',
+    },
+    {
+      'target': ['4.3=>4.4', '4.4=>4.3'],
+      '4.3': '/hipaa/file-integrity-monitoring.html',
+      '4.4': '/compliance/hipaa/file-integrity-monitoring.html',
+    },
+    {
+      'target': ['4.3=>4.4', '4.4=>4.3'],
+      '4.3': '/hipaa/vulnerability-detection.html',
+      '4.4': '/compliance/hipaa/vulnerability-detection.html',
+    },
+    {
+      'target': ['4.3=>4.4', '4.4=>4.3'],
+      '4.3': '/hipaa/active-response.html',
+      '4.4': '/compliance/hipaa/active-response.html',
+    },
+    {
+      'target': ['4.3=>4.4', '4.4=>4.3'],
+      '4.3': '/pci-dss/index.html',
+      '4.4': '/compliance/pci-dss/index.html',
+    },
+    {
+      'target': ['4.3=>4.4', '4.4=>4.3'],
+      '4.3': '/pci-dss/configuration-assessment.html',
+      '4.4': '/compliance/pci-dss/configuration-assessment.html',
+    },
+    {
+      'target': ['4.3=>4.4', '4.4=>4.3'],
+      '4.3': '/pci-dss/malware-detection.html',
+      '4.4': '/compliance/pci-dss/malware-detection.html',
+    },
+    {
+      'target': ['4.3=>4.4', '4.4=>4.3'],
+      '4.3': '/pci-dss/vulnerability-detection.html',
+      '4.4': '/compliance/pci-dss/vulnerability-detection.html',
+    },
+    {
+      'target': ['4.3=>4.4', '4.4=>4.3'],
+      '4.3': '/pci-dss/system-inventory.html',
+      '4.4': '/compliance/pci-dss/system-inventory.html',
+    },
+    {
+      'target': ['4.3=>4.4', '4.4=>4.3'],
+      '4.3': '/pci-dss/dashboard.html',
+      '4.4': '/compliance/pci-dss/dashboard.html',
+    },
+    {
+      'target': ['4.3=>4.4', '4.4=>4.3'],
+      '4.3': '/pci-dss/active-response.html',
+      '4.4': '/compliance/pci-dss/active-response.html',
+    },
+    {
+      'target': ['4.3=>4.4', '4.4=>4.3'],
+      '4.3': '/pci-dss/file-integrity-monitoring.html',
+      '4.4': '/compliance/pci-dss/file-integrity-monitoring.html',
+    },
+    {
+      'target': ['4.3=>4.4', '4.4=>4.3'],
+      '4.3': '/pci-dss/log-analysis.html',
+      '4.4': '/compliance/pci-dss/log-analysis.html',
+    },
+    {
+      'target': ['4.3=>4.4', '4.4=>4.3'],
+      '4.3': '/container-security/index.html',
+      '4.4': '/user-manual/capabilities/container-security/index.html',
+    },
+    {
+      'target': ['4.3=>4.4', '4.4=>4.3'],
+      '4.3': '/container-security/docker-monitor/index.html',
+      '4.4': '/user-manual/capabilities/container-security/monitoring-docker.html',
+    },
+    {
+      'target': ['4.3=>4.4'],
+      '4.3': '/container-security/docker-monitor/dependencies.html',
+      '4.4': '/user-manual/capabilities/container-security/monitoring-docker.html#enable-the-wazuh-docker-listener',
+    },
+    {
+      'target': ['4.3=>4.4'],
+      '4.3': '/container-security/docker-monitor/monitoring-docker-server.html',
+      '4.4': '/user-manual/capabilities/container-security/use-cases.html',
+    },
+    {
+      'target': ['4.3=>4.4'],
+      '4.3': '/container-security/docker-monitor/monitoring-containers-activity.html',
+      '4.4': '/user-manual/capabilities/container-security/use-cases.html',
+    },
   );
 
 /* Pages added in 4.4 */
@@ -229,6 +391,16 @@ newUrls['4.4'] = [
   '/nist/vulnerability-detection.html',
   '/nist/active-response.html',
   '/nist/threat-intelligence.html',
+  '/compliance/nist/index.html',
+  '/compliance/nist/visualization-and-dashboard.html',
+  '/compliance/nist/log-data-analysis.html',
+  '/compliance/nist/configuration-assessment.html',
+  '/compliance/nist/malware-detection.html',
+  '/compliance/nist/file-integrity-monitoring.html',
+  '/compliance/nist/system-inventory.html',
+  '/compliance/nist/vulnerability-detection.html',
+  '/compliance/nist/active-response.html',
+  '/compliance/nist/threat-intelligence.html',  
   '/compliance/tsc/index.html',
   '/compliance/tsc/common-criteria/cc2.1.html',
   '/compliance/tsc/common-criteria/cc3.1.html',
@@ -242,6 +414,10 @@ newUrls['4.4'] = [
   '/user-manual/agents/antiflooding.html',
   '/user-manual/agents/labels.html',
   '/user-manual/manager/fluent-forwarder.html',
+  '/user-manual/manager/wazuh-archives.html',
+  '/user-manual/capabilities/container-security/index.html',
+  '/user-manual/capabilities/container-security/monitoring-docker.html',
+  '/user-manual/capabilities/container-security/use-cases.html',
   '/user-manual/capabilities/file-integrity/basic-settings.html',
   '/user-manual/capabilities/file-integrity/how-to-configure-fim.html',
   '/user-manual/capabilities/file-integrity/interpreting-fim-module-analysis.html',
@@ -266,7 +442,6 @@ newUrls['4.4'] = [
   '/user-manual/capabilities/system-calls-monitoring/use-cases/monitoring-file-and-directory-access.html',
   '/user-manual/capabilities/system-calls-monitoring/use-cases/monitoring-commands-run-as-root.html',
   '/user-manual/capabilities/system-calls-monitoring/use-cases/privilege-abuse.html',
-  '/user-manual/capabilities/wazuh-archives.html',
   '/user-manual/capabilities/agentless-monitoring/connection.html',
   '/user-manual/capabilities/agentless-monitoring/visualization.html',
   '/user-manual/capabilities/agentless-monitoring/use-cases.html',  
@@ -308,6 +483,12 @@ removedUrls['4.4'] = [
   '/user-manual/capabilities/auditing-whodata/who-windows-policies.html',  
   '/user-manual/capabilities/syscollector.html',  
   '/user-manual/capabilities/agentless-monitoring/agentless-faq.html',
+  '/user-manual/capabilities/wazuh-archives.html',
+  '/container-security/index.html',
+  '/container-security/docker-monitor/index.html',
+  '/container-security/docker-monitor/dependencies.html',
+  '/container-security/docker-monitor/monitoring-containers-activity.html',
+  '/container-security/docker-monitor/monitoring-docker-server.html',
 ];
 
   /* *** RELEASE 4.3 ****/

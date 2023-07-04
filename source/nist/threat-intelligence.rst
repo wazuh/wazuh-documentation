@@ -3,6 +3,8 @@
 .. meta::
   :description: The Wazuh MITRE ATT&CK module provides you with threat intelligence capability. Learn more about it in this section of the documentation.
 
+:orphan:
+
 Threat intelligence
 ===================
 
@@ -26,7 +28,7 @@ In this use case, Wazuh helps meet the **PM-16 Threat awareness program** requir
 
 #. Select the **MITRE ATT&CK** module on the Wazuh dashboard.
 
-   .. thumbnail:: /images/nist/mitre-attack-module.png    
+   .. thumbnail:: /images/compliance/nist/mitre-attack-module.png    
       :title: MITRE ATT&CK module
       :alt: MITRE ATT&CK module
       :align: center
@@ -36,13 +38,13 @@ In this use case, Wazuh helps meet the **PM-16 Threat awareness program** requir
 
 #. Select any technique to display its details as well as the events in your environment associated with that technique. In this example, we choose **T1112 Modify Registry**.
 
-   .. thumbnail:: /images/nist/select-framework.png    
+   .. thumbnail:: /images/compliance/nist/select-framework.png    
       :title: Select Framework
       :alt: Select Framework
       :align: center
       :width: 80%
 
-   .. thumbnail:: /images/nist/t1112-modify-registry.png    
+   .. thumbnail:: /images/compliance/nist/t1112-modify-registry.png    
       :title: T1112 Modify Registry
       :alt: T1112 Modify Registry
       :align: center
@@ -59,7 +61,7 @@ In this scenario, you review intelligence from MITRE about various threat actors
 
 #. Select the **MITRE ATT&CK** module from the Wazuh dashboard.
 
-   .. thumbnail:: /images/nist/mitre-attack-module.png    
+   .. thumbnail:: /images/compliance/nist/mitre-attack-module.png    
       :title: MITRE ATT&CK module
       :alt: MITRE ATT&CK module
       :align: center
@@ -69,7 +71,7 @@ In this scenario, you review intelligence from MITRE about various threat actors
 
 #. Select **Groups**. Here, you can see the different threat groups identified by MITRE. In this use case, choose **G0018**.
 
-   .. thumbnail:: /images/nist/select-groups.png    
+   .. thumbnail:: /images/compliance/nist/select-groups.png    
       :title: Select Groups
       :alt: Select Groups
       :align: center
@@ -77,13 +79,13 @@ In this scenario, you review intelligence from MITRE about various threat actors
 
    You can see the group description, the software they use, and their associated techniques.
 
-   .. thumbnail:: /images/nist/group-description.png    
+   .. thumbnail:: /images/compliance/nist/group-description.png    
       :title: Group description
       :alt: Group description
       :align: center
       :width: 80%
 
-   .. thumbnail:: /images/nist/associated-techniques.png    
+   .. thumbnail:: /images/compliance/nist/associated-techniques.png    
       :title: Associated techniques
       :alt: Associated techniques
       :align: center

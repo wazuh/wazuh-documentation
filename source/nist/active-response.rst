@@ -3,6 +3,8 @@
 .. meta::
   :description: The active response module performs autonomous actions on endpoints to mitigate security threats. Learn more about it in this section of the documentation.
 
+:orphan:
+
 Active response
 ===============
 
@@ -66,13 +68,13 @@ Ubuntu endpoint
 
    The image below shows the related alerts on the Wazuh dashboard:  
 
-      .. thumbnail:: /images/nist/alerts-on-the-wazuh-dashboard.png    
+      .. thumbnail:: /images/compliance/nist/alerts-on-the-wazuh-dashboard.png    
          :title: Alerts on the Wazuh dashboard
          :alt: Alerts on the Wazuh dashboard
          :align: center
          :width: 80%
 
-      .. thumbnail:: /images/nist/users-alerts.png    
+      .. thumbnail:: /images/compliance/nist/users-alerts.png    
          :title: Users 1 and 2 alerts
          :alt: Users 1 and 2 alerts
          :align: center
