@@ -3,6 +3,8 @@
 .. meta::
   :description: The log data analysis module collects and analyzes logs from applications, systems, network devices, and cloud workloads. Learn more about it in this section.
 
+:orphan:
+
 Log data analysis
 =================
 
@@ -25,7 +27,7 @@ This use case shows how Wazuh helps meet the **IA-4 Identifier management** requ
 
 #. Open the Remote Desktop Connection application from another Windows endpoint on the same network. Perform five failed login attempts against the monitored Windows endpoint. .
 
-   .. thumbnail:: /images/nist/open-remote-desktop.png    
+   .. thumbnail:: /images/compliance/nist/open-remote-desktop.png    
       :title: Open the Remote Desktop
       :alt: Open the Remote Desktop
       :align: center
@@ -34,7 +36,7 @@ This use case shows how Wazuh helps meet the **IA-4 Identifier management** requ
 
 #. Expand one of the rule ID ``60204`` alerts on the Wazuh dashboard. This allows finding more information about the multiple logon failure event. For example, target username, device identifiers such as source IP address, and the NIST 800-53 control the event is related to. 
  
-   .. thumbnail:: /images/nist/expand-alert.png    
+   .. thumbnail:: /images/compliance/nist/expand-alert.png    
       :title: Expand an alert on the Wazuh dashboard
       :alt: Expand an alert on the Wazuh dashboard
       :align: center

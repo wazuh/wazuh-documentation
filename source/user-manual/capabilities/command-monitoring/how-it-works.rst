@@ -7,7 +7,8 @@ How it works
 ============
 
 .. thumbnail:: ../../../images/manual/command-monitoring/command-monitoring.png
-  :title: Command monitoring
+  :title: Command monitoring workflow
+  :alt: Command monitoring workflow
   :align: center
   :width: 100%
 

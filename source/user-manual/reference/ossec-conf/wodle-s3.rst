@@ -680,7 +680,8 @@ The currently available type is: ``security_lake``.
 | :ref:`subscriber_iam_role_arn`         | Valid role ARN                                              | Mandatory for Amazon Security Lake            |
 |                                        |                                                             | Subscription                                  |
 +----------------------------------------+-------------------------------------------------------------+-----------------------------------------------+
-| :ref:`subscriber_aws_profile`          | Valid profile name                                          | Optional                                      |
+| :ref:`subscriber_external_id`          | Valid external ID                                           | Mandatory for Amazon Security Lake            |
+|                                        |                                                             | Subscription                                  |
 +----------------------------------------+-------------------------------------------------------------+-----------------------------------------------+
 | :ref:`subscriber_iam_role_duration`    | Number of seconds between 900 and 3600                      | Optional (if set, it requires an iam_role_arn |
 |                                        |                                                             | to be provided)                               |
@@ -703,17 +704,17 @@ Name of the SQS from where notifications are pulled.
 | **Allowed values** | Any valid SQS name          |
 +--------------------+-----------------------------+
 
-.. _subscriber_aws_profile:
+.. _subscriber_external_id:
 
-aws_profile
+external_id
 ^^^^^^^^^^^
 
-A valid profile name from a Shared Credential File or AWS Config File with permission to access the service.
+External ID to use when assuming the role.
 
 +--------------------+--------------------+
 | **Default value**  | N/A                |
 +--------------------+--------------------+
-| **Allowed values** | Valid profile name |
+| **Allowed values** | Valid external ID  |
 +--------------------+--------------------+
 
 .. _subscriber_iam_role_arn:
@@ -829,6 +830,8 @@ Example of configuration
       </service>
       <subscriber type="security_lake">
         <sqs_name>sqs-security-lake-main-queue</sqs_name>
-        <aws_profile>user_profile</aws_profile>
-    </subscriber>
+        <external_id>wazuh-external-id-value</external_id>
+        <iam_role_arn>arn:aws:iam::010203040506:role/ASL-Role</iam_role_arn>
+      </subscriber>
   </wodle>
+  

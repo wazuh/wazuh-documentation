@@ -3,7 +3,7 @@
 .. meta::
   :description: Check out this section to learn more about how to use Wazuh for NIST 800-53 compliance.
 
-.. _nist:
+:orphan:
 
 Using Wazuh for NIST 800-53 compliance
 ======================================

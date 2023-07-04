@@ -3,6 +3,8 @@
 .. meta::
   :description: The Wazuh System inventory module gathers system resource information from each monitored endpoint. Learn more about it in this section of the documentation.
 
+:orphan:
+
 System inventory
 ================
 
@@ -40,7 +42,7 @@ Using the Wazuh system inventory module for this use case, you can see all packa
 
 #. Select your agent in the Wazuh dashboard and click **Inventory data**.
 
-   .. thumbnail:: /images/nist/inventory-data.png    
+   .. thumbnail:: /images/compliance/nist/inventory-data.png    
       :title: Inventory data
       :alt: Inventory data
       :align: center
