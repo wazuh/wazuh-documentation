@@ -67,7 +67,7 @@ Follow these steps to enable debug mode:
 
 #. Restart the Wazuh service. 
 
-.. include:: ../../_templates/common/restart_manager_or_agent.rst
+.. include:: /_templates/common/restart_manager_or_agent.rst
 
 .. Note::
         Don't forget to disable debug mode once the troubleshooting has finished. Leaving debug mode enabled could result in the addition of large amounts of logs in the ``ossec.log`` file.
