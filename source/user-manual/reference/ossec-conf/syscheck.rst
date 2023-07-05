@@ -1232,10 +1232,10 @@ If there is a conflict between a block with wildcards and another without them, 
 The above block will set the ``SOFTWARE`` key of all users to be monitored in scheduled mode.
 
 .. code-block:: xml
-  
-  <windows_registry arch="both" check_sum="no">HKEY_LOCAL_MACHINE\SOFTWARE\TEST_KEY</windows_registry>
 
-Even though the above block is included in the previous one, ``HKEY_LOCAL_MACHINE\SOFTWARE\TEST_KEY`` will be monitored in realtime because it has no wildcards.
+  <windows_registry arch="both" check_sum="yes">HKEY_LOCAL_MACHINE\SOFTWARE\TEST_KEY</windows_registry>
+
+Even though the above block is included in the previous one, ``HKEY_LOCAL_MACHINE\SOFTWARE\TEST_KEY`` will be monitored because it has no wildcards.
 
 .. _reference_ossec_syscheck_default_configuration:
 
