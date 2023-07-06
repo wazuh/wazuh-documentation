@@ -76,9 +76,9 @@ This option sets specific rule groups that alerts must belong to for email notif
 
 .. note::
 
-	To avoid partial matches, add a comma at the end of the group string. For example, ``<rules_group>group_a,|group_b,|group_c,</rules_group>``. Not ending the group string with a comma implies that it's a substring open for partial matches.  For example, the group string ``authentication`` matches rule groups ``authentication``, ``authentication_success``, and ``authentication_failure`` while the group string ``authentication,`` matches only rule group ``authentication``.
+   To avoid partial matches, add a comma at the end of the group string. For example, ``<rules_group>group_a,|group_b,|group_c,</rules_group>``. Not ending the group string with a comma implies that it's a substring open for partial matches.  For example, the group string ``authentication`` matches rule groups ``authentication``, ``authentication_success``, and ``authentication_failure`` while the group string ``authentication,`` matches only rule group ``authentication``.
 
-	Also, check that the rule group in your rule definitions ends with a comma as well. For example, ``<group>group_b,</group>``. This is usually the case in the Wazuh default ruleset.
+   Also, check that the rule group in your rule definitions ends with a comma as well. For example, ``<group>group_b,</group>``. This is usually the case in the Wazuh default ruleset.
 
 
 event_location
