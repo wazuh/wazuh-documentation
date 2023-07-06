@@ -1223,19 +1223,21 @@ Example:
 
 .. versionadded:: 4.6.0
 
-If there is a conflict between a block with wildcards and another without them, the block without wildcards will be used for the specific case. As an example:
+Configurations with specific registry keys take precedence over those that use wildcards. The following configuration block provides an example. The first settings line enables scanning the ``SOFTWARE`` keys of all users without checking any hashes.
 
 .. code-block:: xml
+   :emphasize-lines: 1
 
-  <windows_registry arch="both" check_sum="no">HKEY_LOCAL_MACHINE\SOFTWARE\*</windows_registry>
+   <windows_registry arch="both" check_sum="no">HKEY_LOCAL_MACHINE\SOFTWARE\*</windows_registry>
+   <windows_registry arch="both" check_sum="yes">HKEY_LOCAL_MACHINE\SOFTWARE\TEST_KEY</windows_registry>
 
-The above block will set the ``SOFTWARE`` key of all users to be monitored in scheduled mode.
+However, the second line does enable hash checking for ``TEST_KEY``. This is a specific key and this setting takes precedence here.
 
 .. code-block:: xml
+   :emphasize-lines: 2
 
-  <windows_registry arch="both" check_sum="yes">HKEY_LOCAL_MACHINE\SOFTWARE\TEST_KEY</windows_registry>
-
-Even though the above block is included in the previous one, ``HKEY_LOCAL_MACHINE\SOFTWARE\TEST_KEY`` will be monitored because it has no wildcards.
+   <windows_registry arch="both" check_sum="no">HKEY_LOCAL_MACHINE\SOFTWARE\*</windows_registry>
+   <windows_registry arch="both" check_sum="yes">HKEY_LOCAL_MACHINE\SOFTWARE\TEST_KEY</windows_registry>
 
 .. _reference_ossec_syscheck_default_configuration:
 
