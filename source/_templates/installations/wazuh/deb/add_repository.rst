@@ -25,7 +25,7 @@
    .. code-block:: console
 
       # apt-get install gnupg apt-transport-https
-      # curl -s https://packages.wazuh.com/key/GPG-KEY-WAZUH | apt-key add -
-      # echo "deb https://packages.wazuh.com/4.x/apt/ stable main" | tee -a /etc/apt/sources.list.d/wazuh.list
+      # curl -s https://packages.wazuh.com/key/GPG-KEY-WAZUH | gpg --dearmor -o /etc/apt/keyrings/wazuh.gpg 
+      # echo "deb [signed-by=/etc/apt/keyrings/wazuh.gpg] https://packages.wazuh.com/4.x/apt/ stable main" | tee -a /etc/apt/sources.list.d/wazuh.list
 
 .. End of include file
