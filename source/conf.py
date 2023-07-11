@@ -34,7 +34,7 @@ sys.path.append(os.path.abspath("_exts"))
 
 project = u'Wazuh'
 author = u'Wazuh, Inc.'
-copyright = u'&copy; ' + str(datetime.datetime.now().year) + u' &middot; Wazuh Inc.'
+copyright = u'&copy; ' + str(datetime.datetime.now().year) + u' Wazuh Inc.'
 
 # The short X.Y version
 version = '4.6'
