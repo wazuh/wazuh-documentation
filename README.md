@@ -11,7 +11,7 @@ The online documentation for this project is available in this repository. Membe
 
 ## Online documentation
 
-- [Current version (|WAZUH_CURRENT_MAJOR|)](https://documentation.wazuh.com/current/)
+- [Current version (4.x)](https://documentation.wazuh.com/current/)
 - [Legacy version (2.1)](https://documentation.wazuh.com/2.1/)
 
 ## Contribute to this project
