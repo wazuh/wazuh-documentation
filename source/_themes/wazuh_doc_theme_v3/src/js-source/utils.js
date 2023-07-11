@@ -38,8 +38,11 @@ const newTabNodes = [
 
 /* Open external links in a new tab ========================================= */
 
+let oursHost = ['documentation.wazuh.com'];
+
 $('a.reference.external').each(function() {
-  if ( $(this).attr('href').indexOf('documentation.wazuh.com') == -1 ) {
+  let link = new URL($(this).attr('href'));
+  if ( !oursHost.includes(link.host) ) {
     $(this).attr('target', '_blank').attr('rel', 'noreferrer noopener');
   }
 });
