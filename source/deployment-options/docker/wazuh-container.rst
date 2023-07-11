@@ -256,20 +256,15 @@ Change the password of an existing user
 
    You must add all users created on the Wazuh dashboard to the ``internal_users.yml`` file. If you don't, executing this procedure deletes them.
 
-To improve security, you can change the password of a user. For example, you can change the default password of the following users, among others.
+To improve security, you can change the password of a user. For example, you can change the default password of the following Wazuh indexer users.
 
 -  Wazuh indexer ``admin`` user.
 -  Wazuh dashboard ``kibanaserver`` user.
--  Wazuh API ``wazuh-wui`` user.
 
 Perform the following steps from your ``single-node/`` directory. If you have a multi-node deployment, you must adapt and perform them from your ``multi-node/`` directory.
 
 Setting a new hash
 ~~~~~~~~~~~~~~~~~~
-
-.. note::
-
-   You don't need to provide a hash if you're only changing the password of the ``wazuh-wui`` user. Jump to :ref:`wazuh-docker-password-setting` below in this case, after stopping your deployment stack.
 
 #. Stop the deployment stack if it’s running:
 
@@ -344,19 +339,6 @@ Setting the new password
             - API_USERNAME=wazuh-wui
             - API_PASSWORD=MyS3cr37P450r.*-
         ...
-
-#. If you're changing the ``wazuh-wui`` user password, change the password in ``config/wazuh_dashboard/wazuh.yml`` as well.
-
-   .. code-block:: YAML
-      :emphasize-lines: 6
-
-      hosts:
-        - 1513629884013:
-            url: "https://wazuh.manager"
-            port: 55000
-            username: wazuh-wui
-            password: "MyS3cr37P450r.*-"
-            run_as: false
 
 Applying the changes
 ~~~~~~~~~~~~~~~~~~~~
