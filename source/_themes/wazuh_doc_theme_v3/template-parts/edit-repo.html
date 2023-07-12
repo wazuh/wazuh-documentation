@@ -53,7 +53,7 @@
     {% elif show_source and source_url_prefix %}
     <a target="_blank" rel="noopener" href="{{ source_url_prefix }}{{ pagename }}{{ suffix }}">{{ _('View page source') }}</a>
     {% elif show_source and has_source and sourcename %}
-    <a target="_blank" href="{{ pathto('_sources/' + sourcename, true)|e }}" rel="noopener,nofollow"> {{ _('View page source') }}</a>
+    <a target="_blank" href="{{ pathto('_sources/' + sourcename, true)|e }}" rel="noopener nofollow"> {{ _('View page source') }}</a>
     {% endif %}
     {% endif %}
   </span>
