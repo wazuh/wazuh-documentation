@@ -254,12 +254,12 @@ Change the password of an existing user
 
 .. warning::
 
-   You must add all users created on the Wazuh dashboard to the ``internal_users.yml`` file. If you don't, executing this procedure deletes them.
+   If you have custom Wazuh indexer users, add them to the ``internal_users.yml`` file. Otherwise, executing this procedure deletes them.
 
 To improve security, you can change the password of a user. For example, you can change the default password of the following Wazuh indexer users.
 
--  Wazuh indexer ``admin`` user.
--  Wazuh dashboard ``kibanaserver`` user.
+-  ``admin``
+- ``kibanaserver``
 
 Perform the following steps from your ``single-node/`` directory. If you have a multi-node deployment, you must adapt and perform them from your ``multi-node/`` directory.
 
