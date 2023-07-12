@@ -27,6 +27,37 @@ if ( typeof(versions) === 'undefined' ) {
   const versions = [];
 }
 
+/* Menu dropdown hover =========================================================== */
+(function($) {
+  if(window.matchMedia("(hover: hover)").matches) {
+    $('.navbar-nav .dropdown-toggle').on('mouseenter', function(e) {
+      if (!$(this).closest('.dropdown').hasClass('show')) {
+        e.stopPropagation();
+        $(this).trigger('click');
+      }
+    });
+    $('.navbar-nav .dropdown-toggle').on('mouseleave', function(e) {
+      let toElement = e.toElement || e.relatedTarget;
+      console.log(toElement);
+      if ($(this).closest('.dropdown').hasClass('show')
+        && toElement !== $(this).siblings()[0]) {
+        e.stopPropagation();
+        $(this).trigger('click');
+      }
+    });
+    $('.navbar-nav .dropdown-menu').on('mouseleave', function(e) {
+      let toElement = e.toElement || e.relatedTarget;
+      
+      console.log("submenu",toElement);
+      if ($(this).closest('.dropdown').hasClass('show')
+        && toElement !== $(this).siblings()[0]) {
+        $(this).siblings().trigger('click');
+      }
+    });
+  }
+})(jQuery);
+
+
 /* Using ReDoc ============================================================== */
 const minVersionRedoc = '4.0';
 const useApiRedoc = (compareVersion(DOCUMENTATION_OPTIONS.VERSION, minVersionRedoc) >= 0);
