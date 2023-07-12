@@ -6,7 +6,7 @@
 Log data analysis
 =================
 
-The Wazuh log data analysis module collects and analyzes logs from various sources, such as applications, systems, network devices, and cloud workloads. This data helps in resource monitoring, threat detection, and automated response. 
+The Wazuh log data analysis module collects and analyzes logs from various sources, such as applications, systems, network devices, and cloud workloads. This data helps in resource monitoring, threat detection, and incident response. 
 
 The Wazuh :doc:`Log data analysis </user-manual/capabilities/log-data-collection/index>` module helps comply with the following NIST 800-53 controls:
 

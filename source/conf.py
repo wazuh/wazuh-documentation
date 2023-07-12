@@ -664,7 +664,7 @@ emptyTocNodes = json.dumps([
 
 # -- Setup -------------------------------------------------------------------
 
-compilation_time = str(time.time())
+compilation_time = 0 
 
 def setup(app):
 
@@ -932,6 +932,7 @@ def creating_file_list(app, exception):
 
 if (tags.has("production")):
     production = True
+    compilation_time = str(time.time())
 else:
     production = False
 
