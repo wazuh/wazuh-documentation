@@ -368,7 +368,7 @@ Name of AWS organization. Only works with CloudTrail buckets.
 discard_regex
 ^^^^^^^^^^^^^
 
-A regex value to determine if an event should be discarded. It requires a `field` attribute used to specify the field of the event where the regex should be applied.
+A regex value to determine if an event should be discarded. It requires a mandatory `field` attribute used to specify the field of the event where the regex should be applied.
 
 +--------------------+----------------------------------------+
 | **Default value**  | N/A                                    |
@@ -461,6 +461,8 @@ The available types are: ``cloudwatchlogs``, and ``inspector``.
 | :ref:`service_secret_key`              | Any alphanumerical key                                      | Optional                                      |
 +----------------------------------------+-------------------------------------------------------------+-----------------------------------------------+
 | :ref:`service_aws_profile`             | Valid profile name                                          | Optional                                      |
++----------------------------------------+-------------------------------------------------------------+-----------------------------------------------+
+| :ref:`service_discard_regex`           | A regex value to determine if an event should be discarded  | Optional                                      |
 +----------------------------------------+-------------------------------------------------------------+-----------------------------------------------+
 | :ref:`service_iam_role_arn`            | Valid role ARN                                              | Optional                                      |
 +----------------------------------------+-------------------------------------------------------------+-----------------------------------------------+
@@ -557,6 +559,43 @@ A valid profile name from a Shared Credential File or AWS Config File with the p
 +--------------------+--------------------+
 | **Allowed values** | Valid profile name |
 +--------------------+--------------------+
+
+.. _service_discard_regex:
+
+discard_regex
+^^^^^^^^^^^^^
+
+A regex value to determine if an event should be discarded. 
+For ``inspector``, requires a mandatory `field` attribute used to specify the field of the event where the regex should be applied.
+In the case of ``cloudwatchlogs``, the `field` attribute can be ommited since the logs can be plain text or JSON format.
+
++--------------------+----------------------------------------+
+| **Default value**  | N/A                                    |
++--------------------+----------------------------------------+
+| **Allowed values** | Any regex or sregex expression         |
++--------------------+----------------------------------------+
+
+Attributes:
+
++-----------+------------------------------------------------------------------------------------------------------+
+| **field** | The event's field on which the regex should be applied to determine if the event should be skipped   |
+|           +------------------+-----------------------------------------------------------------------------------+
+|           | Default value    | N/A                                                                               |
+|           +------------------+-----------------------------------------------------------------------------------+
+|           | Allowed values   | A str containing the full field name path                                         |
++-----------+------------------+-----------------------------------------------------------------------------------+
+
+Usage examples:
+
+.. code-block:: console
+
+    <discard_regex field="data.configurationItemStatus">REJECT</discard_regex>
+    
+- Only available for ``cloudwatchlogs``:
+
+.. code-block:: console
+
+    <discard_regex>.*Log:.*</discard_regex>
 
 .. _service_iam_role_arn:
 
