@@ -249,17 +249,14 @@ You can modify and build the Wazuh manager, indexer, and dashboard images locall
 
 .. _change-pwd-existing-usr:
 
-Change the password of an existing user
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+Change the password of an indexer user
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 .. warning::
 
    If you have custom Wazuh indexer users, add them to the ``internal_users.yml`` file. Otherwise, executing this procedure deletes them.
 
-To improve security, you can change the password of a user. For example, you can change the default password of the following Wazuh indexer users.
-
--  ``admin``
-- ``kibanaserver``
+To improve security, you can change the default password of Wazuh indexer users. For example, ``admin`` and ``kibanaserver`` users.
 
 Perform the following steps from your ``single-node/`` directory. If you have a multi-node deployment, you must adapt and perform them from your ``multi-node/`` directory.
 
