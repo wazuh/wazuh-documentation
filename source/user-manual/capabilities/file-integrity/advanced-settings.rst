@@ -359,7 +359,7 @@ Navigate to **Modules > Integrity monitoring** on the Wazuh dashboard and find t
 
 Expand the alert with ``rule.id:550`` to view all the information. In the alert fields below, you can see the user ``wazuh`` added the word *“Hello”* to the ``audit_docu.txt`` file using the ``Notepad`` text editor.
 
-.. thumbnail:: ../../../images/manual/fim/expand-the-alert-with-rule.id:550.png
+.. thumbnail:: ../../../images/manual/fim/expand-the-alert-with-rule.id-550.png
    :title: Expand the alert with rule.id:550
    :alt: Expand the alert with rule.id:550
    :align: center
