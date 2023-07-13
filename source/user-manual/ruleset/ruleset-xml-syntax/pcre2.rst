@@ -45,7 +45,7 @@ Example: ``(\d{1,3}\.?){4}`` it is shorter and equivalent to ``\d{1,3}\.?\d{1,3}
 Case sensitivity
 ----------------
 
-Compared to `OSRegex <regex.html#regex-os-regex-syntax>`_ and `OSMatch <regex.html#regex-os-regex-syntax>`_, which are case insensitive, PCRE regex are case sensitive by default. This can be changed by using ``(?i)``.
+Compared to `OSRegex <:ref:`regex <os_regex_syntax>` and `OSMatch <:ref:`regex <sregex_os_match_syntax>`, which are case insensitive, PCRE regex are case sensitive by default. This can be changed by using ``(?i)``.
 Example: `post` will match ``(?i)POST|GET|PUT`` regex but not ``POST|GET|PUT``.
 
 Groups within groups
@@ -88,7 +88,7 @@ Configuring PCRE
 
 PCRE can be enabled in rules and decodes using the ``type="pcre2"`` attribute,
 which also will allow to set other regex like ``type="osregex"`` and ``type="osmatch"`` for
-`OSRegex <regex.html#regex-os-regex-syntax>`_ and `OSMatch <regex.html#regex-os-regex-syntax>`_, respectively, depending on the case.
+`OSRegex <:ref:`regex <os_regex_syntax>` and `OSMatch <:ref:`regex <sregex_os_match_syntax>`, respectively, depending on the case.
 
 Decoders
 --------
@@ -121,7 +121,7 @@ Using PCRE in a decoder it is possible to extract the user, email and email doma
 Rules
 -----
 
-- **Options**: `OSRegex <regex.html#regex-os-regex-syntax>`_, `OSMatch <regex.html#regex-os-regex-syntax>`_
+- **Options**: `OSRegex <:ref:`regex <os_regex_syntax>`, `OSMatch <:ref:`regex <sregex_os_match_syntax>`
 - **Static fields**:
   `action <rules.html#action>`_,
   `extra_data <rules.html#extra-data>`_, `hostname <rules.html#hostname>`_, `id <rules.html#id>`_,
