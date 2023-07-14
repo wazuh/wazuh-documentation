@@ -107,7 +107,7 @@ Backing up the Wazuh indexer and dashboard
       /etc/wazuh-indexer/opensearch.keystore \
       /etc/wazuh-indexer/opensearch-observability/ \
       /etc/wazuh-indexer/opensearch-reports-scheduler/ \
-      /usr/share/wazuh-indexer/plugins/opensearch-security/securityconfig \
+      /etc/wazuh-indexer/opensearch-security/ \
       /usr/lib/sysctl.d/wazuh-indexer.conf $bkp_folder
 
 #. Back up the Wazuh dashboard certificates and configuration files.
