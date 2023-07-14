@@ -1,14 +1,14 @@
 .. Copyright (C) 2015, Wazuh, Inc.
 
 .. meta::
-  :description: AWS Application Load Balancer is a service that distributes incoming application traffic across multiple targets. Learn how to configure and monitor it with Wazuh.
+  :description: AWS Classic Load Balancer is a service that distributes incoming application traffic across multiple targets. Learn how to configure and monitor it with Wazuh.
 
-:orphan:
+.. _amazon_clb:
 
-Amazon ALB
+Amazon CLB
 ==========
 
-`Application Load Balancers <https://docs.aws.amazon.com/elasticloadbalancing/latest/application/introduction.html>`_ (Amazon ALB) Elastic Load Balancing automatically distributes the incoming traffic across multiple targets, such as EC2 instances, containers, and IP addresses, in one or more Availability Zones. It monitors the health of its registered targets and routes traffic only to the healthy targets. Users can select the type of load balancer that best suits their needs. An Application Load Balancer functions at the application layer, the seventh layer of the Open Systems Interconnection (OSI) model. After the load balancer receives a request, it evaluates the listener rules in priority order to determine which rule to apply and then selects a target from the target group for the rule action.
+`Classic Load Balancers <https://docs.aws.amazon.com/elasticloadbalancing/latest/classic/introduction.html>`_ (Amazon CLB) Elastic Load Balancing automatically distributes the incoming traffic across multiple targets, such as EC2 instances, containers, and IP addresses, in one or more Availability Zones. It monitors the health of its registered targets and routes traffic only to the healthy targets. Users can select the type of load balancer that best suits their needs. A Classic Load Balancer makes routing decisions at either the transport layer (TCP/SSL) or the application layer (HTTP/HTTPS). Classic Load Balancers currently require a fixed relationship between the load balancer port and the container instance port.
 
 Amazon configuration
 --------------------
@@ -34,9 +34,9 @@ Amazon configuration
       :width: 70%
 
     .. note::
-      To enable access logs for ALB (Application Load Balancers), check the following link:
+      To enable access logs for CLB (Classic Load Balancers), check the following link:
 
-        * `Application Load Balancer. <https://docs.aws.amazon.com/elasticloadbalancing/latest/application/load-balancer-access-logs.html>`_
+        * `Classic Load Balancer. <https://docs.aws.amazon.com/elasticloadbalancing/latest/classic/enable-access-logs.html>`_
 
 Policy configuration
 ++++++++++++++++++++
@@ -48,7 +48,7 @@ Policy configuration
 Wazuh configuration
 -------------------
 
-#. Open the Wazuh configuration file (``/var/ossec/etc/ossec.conf``) and add the following block for ALB:
+#. Open the Wazuh configuration file (``/var/ossec/etc/ossec.conf``) and add the following block for CLB:
 
     .. code-block:: xml
 
@@ -57,9 +57,9 @@ Wazuh configuration
         <interval>10m</interval>
         <run_on_start>yes</run_on_start>
         <skip_on_error>yes</skip_on_error>
-        <bucket type="alb">
+        <bucket type="clb">
           <name>wazuh-aws-wodle</name>
-          <path>ALB</path>
+          <path>CLB</path>
           <aws_profile>default</aws_profile>
         </bucket>
       </wodle>

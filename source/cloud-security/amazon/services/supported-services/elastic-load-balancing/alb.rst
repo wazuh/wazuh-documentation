@@ -3,7 +3,7 @@
 .. meta::
   :description: AWS Application Load Balancer is a service that distributes incoming application traffic across multiple targets. Learn how to configure and monitor it with Wazuh.
 
-:orphan:
+.. _amazon_alb:
 
 Amazon ALB
 ==========
@@ -77,3 +77,4 @@ Wazuh configuration
 
       .. include:: /_templates/common/restart_agent.rst
 
+   

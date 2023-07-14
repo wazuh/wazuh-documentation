@@ -1,14 +1,14 @@
 .. Copyright (C) 2015, Wazuh, Inc.
 
 .. meta::
-  :description: AWS Application Load Balancer is a service that distributes incoming application traffic across multiple targets. Learn how to configure and monitor it with Wazuh.
+  :description: Amazon NLB automatically distributes the incoming traffic across multiple targets. Learn how to use Amazon NLB with Wazuh in this section.
 
-:orphan:
+.. _amazon_nlb:
 
-Amazon ALB
+Amazon NLB
 ==========
 
-`Application Load Balancers <https://docs.aws.amazon.com/elasticloadbalancing/latest/application/introduction.html>`_ (Amazon ALB) Elastic Load Balancing automatically distributes the incoming traffic across multiple targets, such as EC2 instances, containers, and IP addresses, in one or more Availability Zones. It monitors the health of its registered targets and routes traffic only to the healthy targets. Users can select the type of load balancer that best suits their needs. An Application Load Balancer functions at the application layer, the seventh layer of the Open Systems Interconnection (OSI) model. After the load balancer receives a request, it evaluates the listener rules in priority order to determine which rule to apply and then selects a target from the target group for the rule action.
+`Network Load Balancers <https://docs.aws.amazon.com/elasticloadbalancing/latest/network/introduction.html>`_ (Amazon NLB) Elastic Load Balancing automatically distributes the incoming traffic across multiple targets, such as EC2 instances, containers, and IP addresses, in one or more Availability Zones. It monitors the health of its registered targets and routes traffic only to the healthy targets. Users can select the type of load balancer that best suits their needs. A Network Load Balancer functions at the fourth layer of the Open Systems Interconnection (OSI) model. It can handle millions of requests per second. After the load balancer receives a connection request, it selects a target from the target group for the default rule. It attempts to open a TCP connection to the selected target on the port specified in the listener configuration.
 
 Amazon configuration
 --------------------
@@ -34,9 +34,9 @@ Amazon configuration
       :width: 70%
 
     .. note::
-      To enable access logs for ALB (Application Load Balancers), check the following link:
+      To enable access logs for NLB (Network Load Balancers), check the following link:
 
-        * `Application Load Balancer. <https://docs.aws.amazon.com/elasticloadbalancing/latest/application/load-balancer-access-logs.html>`_
+        * `Network Load Balancer. <https://docs.aws.amazon.com/elasticloadbalancing/latest/network/load-balancer-access-logs.html>`_
 
 Policy configuration
 ++++++++++++++++++++
@@ -48,7 +48,7 @@ Policy configuration
 Wazuh configuration
 -------------------
 
-#. Open the Wazuh configuration file (``/var/ossec/etc/ossec.conf``) and add the following block for ALB:
+#. Open the Wazuh configuration file (``/var/ossec/etc/ossec.conf``) and add the following block for NLB:
 
     .. code-block:: xml
 
@@ -57,9 +57,9 @@ Wazuh configuration
         <interval>10m</interval>
         <run_on_start>yes</run_on_start>
         <skip_on_error>yes</skip_on_error>
-        <bucket type="alb">
+        <bucket type="nlb">
           <name>wazuh-aws-wodle</name>
-          <path>ALB</path>
+          <path>NLB</path>
           <aws_profile>default</aws_profile>
         </bucket>
       </wodle>

@@ -1,6 +1,7 @@
 .. Copyright (C) 2015, Wazuh, Inc.
 
-:orphan:
+.. _azure_monitoring_dependencies:
+
 
 Installing dependencies
 =======================
