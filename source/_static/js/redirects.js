@@ -709,7 +709,7 @@ newUrls['4.4'] = [
   '/cloud-security/github/monitoring-github-activity.html',
   '/cloud-security/office365/index.html',
   '/cloud-security/office365/monitoring-office365-activity.html',
-  '/cloud-security/monitoring.rshtml',
+  '/cloud-security/monitoring.html',
   '/user-manual/agents/key-request.html',
   '/user-manual/manager/manual-backup-restore.html',
   '/user-manual/reference/ossec-conf/wazuh-db-config.html',
