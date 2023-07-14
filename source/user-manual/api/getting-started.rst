@@ -927,7 +927,7 @@ You can send security events for analysis using the Wazuh API.
 
 .. note::
 
-   You can send a maximum of 100 events per request.
+   The endpoint is not meant to ingest large amounts of logs and is therefore limited to 30 requests per minute and 100 events per request.
 
 Conclusion
 ^^^^^^^^^^
