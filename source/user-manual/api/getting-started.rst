@@ -905,6 +905,8 @@ Ingest security events
 
 You can send security events for analysis using the Wazuh API.
 
+There's a limit of ``30`` requests per minute and 100 events per request. This limit prevents endpoints to ingest large amounts of data too fast. Check :ref:`max_request_per_minute <api_configuration_access>` to lower this limit even further or disable the feature.
+
 .. code-block:: console
 
     # curl -k -X POST "https://localhost:55000/events" -H  "Authorization: Bearer $TOKEN" -H  "Content-Type: application/json" -d '{"events": ["Event value 1", "{\"someKey\": \"Event value 2\"}"]}'
@@ -924,10 +926,6 @@ You can send security events for analysis using the Wazuh API.
       "message": "All events were forwarded to analisysd",
       "error": 0
     }
-
-.. note::
-
-   The endpoint is not meant to ingest large amounts of logs and is therefore limited to 30 requests per minute and 100 events per request.
 
 Conclusion
 ^^^^^^^^^^
