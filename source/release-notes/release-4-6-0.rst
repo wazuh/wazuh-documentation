@@ -1,12 +1,12 @@
 .. Copyright (C) 2015, Wazuh, Inc.
 
 .. meta::
-  :description: Wazuh 4.5.0 has been released. Check out our release notes to discover the changes and additions of this release.
+  :description: Wazuh 4.6.0 has been released. Check out our release notes to discover the changes and additions of this release.
 
-4.5.0 Release notes - 30 June 2023
-==================================
+4.6.0 Release notes - TBD
+=========================
 
-This section lists the changes in version 4.5.0. Every update of the Wazuh solution is cumulative and includes all enhancements and fixes from previous releases.
+This section lists the changes in version 4.6.0. Every update of the Wazuh solution is cumulative and includes all enhancements and fixes from previous releases.
 
 What's new
 ----------
@@ -154,9 +154,9 @@ Changelogs
 
 More details about these changes are provided in the changelog of each component:
 
-- `wazuh/wazuh <https://github.com/wazuh/wazuh/blob/v4.5.0/CHANGELOG.md>`_
-- `wazuh/wazuh-dashboard <https://github.com/wazuh/wazuh-kibana-app/blob/v4.5.0-2.6.0/CHANGELOG.md>`_
-- `wazuh/wazuh-kibana-app 7.10.2 <https://github.com/wazuh/wazuh-kibana-app/blob/v4.5.0-7.10.2/CHANGELOG.md>`_
-- `wazuh/wazuh-kibana-app 7.17.x <https://github.com/wazuh/wazuh-kibana-app/blob/v4.5.0-7.17.9/CHANGELOG.md>`_
-- `wazuh/wazuh-splunk <https://github.com/wazuh/wazuh-splunk/blob/v4.5.0-8.2/CHANGELOG.md>`_
-- `wazuh/wazuh-packages <https://github.com/wazuh/wazuh-packages/releases/tag/v4.5.0>`_
+- `wazuh/wazuh <https://github.com/wazuh/wazuh/blob/v4.6.0/CHANGELOG.md>`_
+- `wazuh/wazuh-dashboard <https://github.com/wazuh/wazuh-kibana-app/blob/v4.6.0-2.6.0/CHANGELOG.md>`_
+- `wazuh/wazuh-kibana-app 7.10.2 <https://github.com/wazuh/wazuh-kibana-app/blob/v4.6.0-7.10.2/CHANGELOG.md>`_
+- `wazuh/wazuh-kibana-app 7.17.x <https://github.com/wazuh/wazuh-kibana-app/blob/v4.6.0-7.17.9/CHANGELOG.md>`_
+- `wazuh/wazuh-splunk <https://github.com/wazuh/wazuh-splunk/blob/v4.6.0-8.2/CHANGELOG.md>`_
+- `wazuh/wazuh-packages <https://github.com/wazuh/wazuh-packages/releases/tag/v4.6.0>`_
