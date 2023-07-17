@@ -537,7 +537,7 @@ This specifies a regular expression, match criteria and replace option for logs 
 +--------------------+--------------------------------------------------------------------------------------------+
 | **Default value**  | n/a                                                                                        |
 +--------------------+--------------------------------------------------------------------------------------------+
-| **Allowed values** | Any `PCRE2 regular expression :ref:<pcre2_syntax>`                                         |
+| **Allowed values** | Any :ref:`PCRE2 regular expression <pcre2_syntax>`                                         |
 +--------------------+--------------------------------------------------------------------------------------------+
 
 The attributes below are optional.

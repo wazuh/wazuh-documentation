@@ -33,7 +33,7 @@ Remember that unlike rules, decoders cannot have "grandchildren". A child decode
 Dealing with dynamically structured logs
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-The process of matching at decoder level uses `regular expressions <:ref:`regex <os_regex_syntax>`, which require the matching string to have a specific structure. However, this can be a nuisance when logs do not follow a specific structure. They will often provide information omitting parts of the log or changing the order, which would make it impractical if not impossible to create all the necessary decoders to match each one of the possible combinations in which security-relevant data may be received.
+The process of matching at decoder level uses :ref:`regular expressions <os_regex_syntax>`, which require the matching string to have a specific structure. However, this can be a nuisance when logs do not follow a specific structure. They will often provide information omitting parts of the log or changing the order, which would make it impractical if not impossible to create all the necessary decoders to match each one of the possible combinations in which security-relevant data may be received.
 
 This is where sibling decoders come in. Taking advantage of the simple parent-children matching logic, one can create a set of decoders that are together "parent" of themselves. As a result, when one of these decoders is matched it will also check the "sibling" decoders whilst extracting one piece of information at a time.
 

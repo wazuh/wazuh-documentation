@@ -21,12 +21,12 @@ The **xml labels** used to configure ``rules`` are listed here.
 +-------------------------+---------------------------------------------------------------+------------------------------------------------------------------------------------------------------+
 | Option                  | Values                                                        | Description                                                                                          |
 +=========================+===============================================================+======================================================================================================+
-| :ref:`rules_rule`       | See `table <rules_rule>` below.                               | Its starts a new rule and its defining options.                                                      |
+| :ref:`rules_rule`       | See :ref:`table <rules_rule>` below.                          | Its starts a new rule and its defining options.                                                      |
 +-------------------------+---------------------------------------------------------------+------------------------------------------------------------------------------------------------------+
 | :ref:`rules_match`      | Any :doc:`regular expression <regex>`.                        | It will attempt to find a match in the log using :ref:`sregex <sregex_os_match_syntax>`  by          |
 |                         |                                                               | default, deciding if the rule should be triggered.                                                   |
 +-------------------------+---------------------------------------------------------------+------------------------------------------------------------------------------------------------------+
-| :ref:`regex_rules`      | Any :doc:`regular expression <regex>`.                        | It does the same as ``match``, but with `regex <:ref:`regex <os_regex_syntax>` as default.           |
+| :ref:`regex_rules`      | Any :doc:`regular expression <regex>`.                        | It does the same as ``match``, but with :ref:`regex <os_regex_syntax>` as default.                   |
 +-------------------------+---------------------------------------------------------------+------------------------------------------------------------------------------------------------------+
 | `decoded_as`_           | Any decoder's name.                                           | It will match with logs that have been decoded by a specific decoder.                                |
 +-------------------------+---------------------------------------------------------------+------------------------------------------------------------------------------------------------------+
@@ -39,48 +39,48 @@ The **xml labels** used to configure ``rules`` are listed here.
 +-------------------------+---------------------------------------------------------------+------------------------------------------------------------------------------------------------------+
 | `dstip`_                | Any IP address.                                               | It will compare the IP address with the IP decoded as ``dstip``. Use "!" to negate it.               |
 +-------------------------+---------------------------------------------------------------+------------------------------------------------------------------------------------------------------+
-| `srcport`_              | Any :doc:`regular expression <regex>`.                        | It will compare a regular expression representing a port with a value decoded as ``srcport``.        |
+| :ref:`rules_srcport`    | Any :doc:`regular expression <regex>`.                        | It will compare a regular expression representing a port with a value decoded as ``srcport``.        |
 +-------------------------+---------------------------------------------------------------+------------------------------------------------------------------------------------------------------+
-| `dstport`_              | Any :doc:`regular expression <regex>`.                        | It will compare a regular expression representing a port with a value decoded as ``dstport``.        |
+| :ref:`rules_dstport`    | Any :doc:`regular expression <regex>`.                        | It will compare a regular expression representing a port with a value decoded as ``dstport``.        |
 +-------------------------+---------------------------------------------------------------+------------------------------------------------------------------------------------------------------+
 | `data`_                 | Any :doc:`regular expression <regex>`.                        | It will compare a regular expression representing a data with a value decoded as  ``data``.          |
 +-------------------------+---------------------------------------------------------------+------------------------------------------------------------------------------------------------------+
-| `extra_data`_           | Any :doc:`regular expression <regex>`.                        | It will compare a regular expression representing an extra data with a value decoded                 |
+| :ref:`rules_extra_data` | Any :doc:`regular expression <regex>`.                        | It will compare a regular expression representing an extra data with a value decoded                 |
 |                         |                                                               | as ``extra_data``.                                                                                   |
 +-------------------------+---------------------------------------------------------------+------------------------------------------------------------------------------------------------------+
-| `user`_                 | Any :doc:`regular expression <regex>`.                        | It will compare a regular expression representing a user with a value decoded as ``user``.           |
+| :ref:`rules_user`       | Any :doc:`regular expression <regex>`.                        | It will compare a regular expression representing a user with a value decoded as ``user``.           |
 +-------------------------+---------------------------------------------------------------+------------------------------------------------------------------------------------------------------+
-| `system_name`_          | Any :doc:`regular expression <regex>`.                        | It will compare a regular expression representing a system name with a value decoded                 |
+| :ref:`rules_sys_name`   | Any :doc:`regular expression <regex>`.                        | It will compare a regular expression representing a system name with a value decoded                 |
 |                         |                                                               | as ``system_name``.                                                                                  |
 +-------------------------+---------------------------------------------------------------+------------------------------------------------------------------------------------------------------+
-| `program_name`_         | Any :doc:`regular expression <regex>`.                        | It will compare a regular expression representing a program name with a value pre-decoded            |
+| :ref:`rules_prog_name`  | Any :doc:`regular expression <regex>`.                        | It will compare a regular expression representing a program name with a value pre-decoded            |
 |                         |                                                               | as ``program_name``.                                                                                 |
 +-------------------------+---------------------------------------------------------------+------------------------------------------------------------------------------------------------------+
-| `protocol`_             | Any :doc:`regular expression <regex>`.                        | It will compare a regular expression representing a protocol with a value decoded as ``protocol``.   |
+| :ref:`rules_protocol`   | Any :doc:`regular expression <regex>`.                        | It will compare a regular expression representing a protocol with a value decoded as ``protocol``.   |
 +-------------------------+---------------------------------------------------------------+------------------------------------------------------------------------------------------------------+
-| `hostname`_             | Any :doc:`regular expression <regex>`.                        | It will compare a regular expression representing a hostname with a value pre-decoded                |
+| :ref:`rules_hostname`   | Any :doc:`regular expression <regex>`.                        | It will compare a regular expression representing a hostname with a value pre-decoded                |
 |                         |                                                               | as ``hostname``.                                                                                     |
 +-------------------------+---------------------------------------------------------------+------------------------------------------------------------------------------------------------------+
 | `time`_                 | Any time range. e.g. (hh:mm-hh:mm)                            | It checks if the event was generated during that time range.                                         |
 +-------------------------+---------------------------------------------------------------+------------------------------------------------------------------------------------------------------+
 | `weekday`_              | monday - sunday, weekdays, weekends                           | It checks whether the event was generated during certain weekdays.                                   |
 +-------------------------+---------------------------------------------------------------+------------------------------------------------------------------------------------------------------+
-| `id`_                   | Any :doc:`regular expression <regex>`.                        | It will compare a regular expression representing an ID with a value decoded as ``id``               |
+| :ref:`rules_id`         | Any :doc:`regular expression <regex>`.                        | It will compare a regular expression representing an ID with a value decoded as ``id``               |
 +-------------------------+---------------------------------------------------------------+------------------------------------------------------------------------------------------------------+
-| `url`_                  | Any :doc:`regular expression <regex>`.                        | It will compare a regular expression representing a URL with a value decoded as ``url``              |
+| :ref:`rules_url`        | Any :doc:`regular expression <regex>`.                        | It will compare a regular expression representing a URL with a value decoded as ``url``              |
 +-------------------------+---------------------------------------------------------------+------------------------------------------------------------------------------------------------------+
-| `location`_             | Any :doc:`regular expression <regex>`.                        | It will compare a regular expression representing a location with a value pre-decoded                |
+| :ref:`rules_location`   | Any :doc:`regular expression <regex>`.                        | It will compare a regular expression representing a location with a value pre-decoded                |
 |                         |                                                               | as ``location``.                                                                                     |
 +-------------------------+---------------------------------------------------------------+------------------------------------------------------------------------------------------------------+
-| `action`_               | Any String or :doc:`regular expression <regex>`.              | It will compare a string or regular expression representing an action with a value decoded           |
+| :ref:`rules_action`     | Any String or :doc:`regular expression <regex>`.              | It will compare a string or regular expression representing an action with a value decoded           |
 |                         |                                                               | as ``action``.                                                                                       |
 +-------------------------+---------------------------------------------------------------+------------------------------------------------------------------------------------------------------+
-| `status`_               | Any :doc:`regular expression <regex>`.                        | It will compare a regular expression representing a status with a value decoded as ``status``.       |
+| :ref:`rules_status`     | Any :doc:`regular expression <regex>`.                        | It will compare a regular expression representing a status with a value decoded as ``status``.       |
 +-------------------------+---------------------------------------------------------------+------------------------------------------------------------------------------------------------------+
-| `srcgeoip`_             | Any :doc:`regular expression <regex>`.                        | It will compare a regular expression representing a GeoIP source with a value decoded                |
+| :ref:`rules_srcgeoip`   | Any :doc:`regular expression <regex>`.                        | It will compare a regular expression representing a GeoIP source with a value decoded                |
 |                         |                                                               | as ``srcgeoip``.                                                                                     |
 +-------------------------+---------------------------------------------------------------+------------------------------------------------------------------------------------------------------+
-| `dstgeoip`_             | Any :doc:`regular expression <regex>`.                        | It will compare a regular expression representing a GeoIP destination with a value decoded           |
+| :ref:`rules_dstgeoip`   | Any :doc:`regular expression <regex>`.                        | It will compare a regular expression representing a GeoIP destination with a value decoded           |
 |                         |                                                               | as ``dstgeoip``.                                                                                     |
 +-------------------------+---------------------------------------------------------------+------------------------------------------------------------------------------------------------------+
 | `if_sid`_               | A list of rule IDs separated by commas or spaces.             | It works similar to parent decoder. It will match when a rule ID on the list has previously matched. |
@@ -172,7 +172,7 @@ The **xml labels** used to configure ``rules`` are listed here.
 +-------------------------+---------------------------------------------------------------+------------------------------------------------------------------------------------------------------+
 | `info`_                 | Any String.                                                   | Extra information using certain attributes.                                                          |
 +-------------------------+---------------------------------------------------------------+------------------------------------------------------------------------------------------------------+
-| :ref:`rules_options`     | See the table :ref:`below. <rules_options>`                  | Additional rule options that can be used.                                                            |
+| :ref:`rules_options`    | See the table :ref:`below. <rules_options>`                   | Additional rule options that can be used.                                                            |
 +-------------------------+---------------------------------------------------------------+------------------------------------------------------------------------------------------------------+
 | `check_diff`_           | None.                                                         | Determines when the output of a command changes.                                                     |
 +-------------------------+---------------------------------------------------------------+------------------------------------------------------------------------------------------------------+
@@ -251,7 +251,7 @@ Used as a requisite to trigger the rule. It will search for a match in the log e
 +--------------------+---------------------------------------------------------------+
 | **Default Value**  | n/a                                                           |
 +--------------------+---------------------------------------------------------------+
-| **Allowed values** | Any `regex <:ref:`regex <os_regex_syntax>`,                   |
+| **Allowed values** | Any :ref:`regex <os_regex_syntax>`,                           |
 |                    | :ref:`sregex <sregex_os_match_syntax>` or                     |
 |                    | :ref:`pcre2 <pcre2_syntax>` expression.                       |
 +--------------------+---------------------------------------------------------------+
@@ -299,7 +299,7 @@ Used as a requisite to trigger the rule. It will search for a match in the log e
 +--------------------+---------------------------------------------------------------+
 | **Default Value**  | n/a                                                           |
 +--------------------+---------------------------------------------------------------+
-| **Allowed values** | Any `regex <:ref:`regex <os_regex_syntax>`,                   |
+| **Allowed values** | Any :ref:`regex <os_regex_syntax>`,                           |
 |                    | :ref:`sregex <sregex_os_match_syntax>`  or                    |
 |                    | :ref:`pcre2 <pcre2_syntax>` expression.                       |
 +--------------------+---------------------------------------------------------------+
@@ -398,7 +398,7 @@ Used as a requisite to trigger the rule. It will check for a match in the conten
 +--------------------+---------------------------------------------------------------+
 | **Default Value**  | n/a                                                           |
 +--------------------+---------------------------------------------------------------+
-| **Allowed values** | Any `regex <:ref:`regex <os_regex_syntax>`,                   |
+| **Allowed values** | Any :ref:`regex <os_regex_syntax>`,                           |
 |                    | :ref:`sregex <sregex_os_match_syntax>` or                     |
 |                    | :ref:`pcre2 <pcre2_syntax>` expression.                       |
 +--------------------+---------------------------------------------------------------+
@@ -511,6 +511,8 @@ If ``dstip`` label is declared multiple times within the rule, the following rul
 - The resulting value is their concatenation.
 - The resulting value of an attribute corresponds to the one specified in the last label. If it is not specified, the default value will be used.
 
+.. _rules_srcport:
+
 srcport
 ^^^^^^^
 
@@ -519,7 +521,7 @@ Used as a requisite to trigger the rule. It will check the source port (decoded 
 +--------------------+---------------------------------------------------------------+
 | **Default Value**  | n/a                                                           |
 +--------------------+---------------------------------------------------------------+
-| **Allowed values** | Any `regex <:ref:`regex <os_regex_syntax>`,                   |
+| **Allowed values** | Any :ref:`regex <os_regex_syntax>`,                           |
 |                    | :ref:`sregex <sregex_os_match_syntax>` or                     |
 |                    | :ref:`pcre2 <pcre2_syntax>` expression.                       |
 +--------------------+---------------------------------------------------------------+
@@ -557,6 +559,8 @@ If ``srcport`` label is declared multiple times within the rule, the following r
 - The resulting value is their concatenation.
 - The resulting value of an attribute corresponds to the one specified in the last label. If it is not specified, the default value will be used.
 
+.. _rules_dstport:
+
 dstport
 ^^^^^^^
 
@@ -565,7 +569,7 @@ Used as a requisite to trigger the rule. It will check the destination port (dec
 +--------------------+---------------------------------------------------------------+
 | **Default Value**  | n/a                                                           |
 +--------------------+---------------------------------------------------------------+
-| **Allowed values** | Any `regex <:ref:`regex <os_regex_syntax>`,                   |
+| **Allowed values** | Any :ref:`regex <os_regex_syntax>`,                           |
 |                    | :ref:`sregex <sregex_os_match_syntax>` or                     |
 |                    | :ref:`pcre2 <pcre2_syntax>` expression.                       |
 +--------------------+---------------------------------------------------------------+
@@ -599,7 +603,7 @@ Used as a requisite to trigger the rule. It will check the data (decoded as ``da
 +--------------------+---------------------------------------------------------------+
 | **Default Value**  | n/a                                                           |
 +--------------------+---------------------------------------------------------------+
-| **Allowed values** | Any `regex <:ref:`regex <os_regex_syntax>`,                   |
+| **Allowed values** | Any :ref:`regex <os_regex_syntax>`,                           |
 |                    | :ref:`sregex <sregex_os_match_syntax>` or                     |
 |                    | :ref:`pcre2 <pcre2_syntax>` expression.                       |
 +--------------------+---------------------------------------------------------------+
@@ -625,6 +629,8 @@ If ``data`` label is declared multiple times within the rule, the following rule
 - The resulting value is their concatenation.
 - The resulting value of an attribute corresponds to the one specified in the last label. If it is not specified, the default value will be used.
 
+.. _rules_extra_data:
+
 extra_data
 ^^^^^^^^^^
 
@@ -633,7 +639,7 @@ Used as a requisite to trigger the rule. It will compare any string with the one
 +--------------------+---------------------------------------------------------------+
 | **Default Value**  | n/a                                                           |
 +--------------------+---------------------------------------------------------------+
-| **Allowed values** | Any `regex <:ref:`regex <os_regex_syntax>`,                   |
+| **Allowed values** | Any :ref:`regex <os_regex_syntax>`,                           |
 |                    | :ref:`sregex <sregex_os_match_syntax>` or                     |
 |                    | :ref:`pcre2 <pcre2_syntax>` expression.                       |
 +--------------------+---------------------------------------------------------------+
@@ -671,6 +677,8 @@ If ``extra_data`` label is declared multiple times within the rule, the followin
 - The resulting value is their concatenation.
 - The resulting value of an attribute corresponds to the one specified in the last label. If it is not specified, the default value will be used.
 
+.. _rules_user:
+
 user
 ^^^^
 
@@ -679,7 +687,7 @@ Used as a requisite to trigger the rule. It will check the username (decoded as 
 +--------------------+---------------------------------------------------------------+
 | **Default Value**  | n/a                                                           |
 +--------------------+---------------------------------------------------------------+
-| **Allowed values** | Any `regex <:ref:`regex <os_regex_syntax>`,                   |
+| **Allowed values** | Any :ref:`regex <os_regex_syntax>`,                           |
 |                    | :ref:`sregex <sregex_os_match_syntax>` or                     |
 |                    | :ref:`pcre2 <pcre2_syntax>` expression.                       |
 +--------------------+---------------------------------------------------------------+
@@ -717,6 +725,8 @@ If ``user`` label is declared multiple times within the rule, the following rule
 - The resulting value is their concatenation.
 - The resulting value of an attribute corresponds to the one specified in the last label. If it is not specified, the default value will be used.
 
+.. _rules_sys_name:
+
 system_name
 ^^^^^^^^^^^^
 
@@ -725,7 +735,7 @@ Used as a requisite to trigger the rule. It will check the system name (decoded 
 +--------------------+---------------------------------------------------------------+
 | **Default Value**  | n/a                                                           |
 +--------------------+---------------------------------------------------------------+
-| **Allowed values** | Any `regex <:ref:`regex <os_regex_syntax>`,                   |
+| **Allowed values** | Any :ref:`regex <os_regex_syntax>`,                           |
 |                    | :ref:`sregex <sregex_os_match_syntax>` or                     |
 |                    | :ref:`pcre2 <pcre2_syntax>` expression.                       |
 +--------------------+---------------------------------------------------------------+
@@ -751,6 +761,8 @@ If ``system_name`` label is declared multiple times within the rule, the followi
 - The resulting value is their concatenation.
 - The resulting value of an attribute corresponds to the one specified in the last label. If it is not specified, the default value will be used.
 
+.. _rules_prog_name:
+
 program_name
 ^^^^^^^^^^^^
 
@@ -759,7 +771,7 @@ Used as a requisite to trigger the rule. The program's name is decoded from sysl
 +--------------------+---------------------------------------------------------------+
 | **Default Value**  | n/a                                                           |
 +--------------------+---------------------------------------------------------------+
-| **Allowed values** | Any `regex <:ref:`regex <os_regex_syntax>`,                   |
+| **Allowed values** | Any :ref:`regex <os_regex_syntax>`,                           |
 |                    | :ref:`sregex <sregex_os_match_syntax>` or                     |
 |                    | :ref:`pcre2 <pcre2_syntax>` expression.                       |
 +--------------------+---------------------------------------------------------------+
@@ -798,6 +810,8 @@ If ``program_name`` label is declared multiple times within the rule, the follow
 - The resulting value is their concatenation.
 - The resulting value of an attribute corresponds to the one specified in the last label. If it is not specified, the default value will be used.
 
+.. _rules_protocol:
+
 protocol
 ^^^^^^^^
 
@@ -806,7 +820,7 @@ Used as a requisite to trigger the rule. It will check the protocol (decoded as 
 +--------------------+---------------------------------------------------------------+
 | **Default Value**  | n/a                                                           |
 +--------------------+---------------------------------------------------------------+
-| **Allowed values** | Any `regex <:ref:`regex <os_regex_syntax>`,                   |
+| **Allowed values** | Any :ref:`regex <os_regex_syntax>`,                           |
 |                    | :ref:`sregex <sregex_os_match_syntax>` or                     |
 |                    | :ref:`pcre2 <pcre2_syntax>` expression.                       |
 +--------------------+---------------------------------------------------------------+
@@ -832,6 +846,8 @@ If ``protocol`` label is declared multiple times within the rule, the following 
 - The resulting value is their concatenation.
 - The resulting value of an attribute corresponds to the one specified in the last label. If it is not specified, the default value will be used.
 
+.. _rules_hostname:
+
 hostname
 ^^^^^^^^
 
@@ -840,7 +856,7 @@ Used as a requisite to trigger the rule. Any hostname (decoded as the syslog hos
 +--------------------+---------------------------------------------------------------+
 | **Default Value**  | n/a                                                           |
 +--------------------+---------------------------------------------------------------+
-| **Allowed values** | Any `regex <:ref:`regex <os_regex_syntax>`,                   |
+| **Allowed values** | Any :ref:`regex <os_regex_syntax>`,                           |
 |                    | :ref:`sregex <sregex_os_match_syntax>` or                     |
 |                    | :ref:`pcre2 <pcre2_syntax>` expression.                       |
 +--------------------+---------------------------------------------------------------+
@@ -926,6 +942,8 @@ Example:
 
 This rule will trigger when there is a successful login during the weekend.
 
+.. _rules_id:
+
 id
 ^^
 
@@ -934,7 +952,7 @@ Used as a requisite to trigger the rule. It will check any ID (decoded as the ID
 +--------------------+---------------------------------------------------------------+
 | **Default Value**  | n/a                                                           |
 +--------------------+---------------------------------------------------------------+
-| **Allowed values** | Any `regex <:ref:`regex <os_regex_syntax>`,                   |
+| **Allowed values** | Any :ref:`regex <os_regex_syntax>`,                           |
 |                    | :ref:`sregex <sregex_os_match_syntax>` or                     |
 |                    | :ref:`pcre2 <pcre2_syntax>` expression.                       |
 +--------------------+---------------------------------------------------------------+
@@ -972,6 +990,8 @@ If ``id`` label is declared multiple times within the rule, the following rules 
 - The resulting value is their concatenation.
 - The resulting value of an attribute corresponds to the one specified in the last label. If it is not specified, the default value will be used.
 
+.. _rules_url:
+
 url
 ^^^
 
@@ -980,7 +1000,7 @@ Used as a requisite to trigger the rule. It will check any URL (decoded as the U
 +--------------------+---------------------------------------------------------------+
 | **Default Value**  | n/a                                                           |
 +--------------------+---------------------------------------------------------------+
-| **Allowed values** | Any `regex <:ref:`regex <os_regex_syntax>`,                   |
+| **Allowed values** | Any :ref:`regex <os_regex_syntax>`,                           |
 |                    | :ref:`sregex <sregex_os_match_syntax>` or                     |
 |                    | :ref:`pcre2 <pcre2_syntax>` expression.                       |
 +--------------------+---------------------------------------------------------------+
@@ -1019,6 +1039,8 @@ If ``url`` label is declared multiple times within the rule, the following rules
 - The resulting value is their concatenation.
 - The resulting value of an attribute corresponds to the one specified in the last label. If it is not specified, the default value will be used.
 
+.. _rules_location:
+
 location
 ^^^^^^^^
 
@@ -1027,7 +1049,7 @@ Used as a requisite to trigger the rule. It will check the content of the field 
 +--------------------+---------------------------------------------------------------+
 | **Default Value**  | n/a                                                           |
 +--------------------+---------------------------------------------------------------+
-| **Allowed values** | Any `regex <:ref:`regex <os_regex_syntax>`,                   |
+| **Allowed values** | Any :ref:`regex <os_regex_syntax>`,                           |
 |                    | :ref:`sregex <sregex_os_match_syntax>` or                     |
 |                    | :ref:`pcre2 <pcre2_syntax>` expression.                       |
 +--------------------+---------------------------------------------------------------+
@@ -1105,6 +1127,8 @@ If ``location`` label is declared multiple times within the rule, the following 
 - The resulting value is their concatenation.
 - The resulting value of an attribute corresponds to the one specified in the last label. If it is not specified, the default value will be used.
 
+.. _rules_action:
+
 action
 ^^^^^^
 
@@ -1113,7 +1137,7 @@ Used as a requisite to trigger the rule. It will check any action (decoded as th
 +--------------------+---------------------------------------------------------------+
 | **Default Value**  | n/a                                                           |
 +--------------------+---------------------------------------------------------------+
-| **Allowed values** | Any `regex <:ref:`regex <os_regex_syntax>`,                   |
+| **Allowed values** | Any :ref:`regex <os_regex_syntax>`,                           |
 |                    | :ref:`sregex <sregex_os_match_syntax>` or                     |
 |                    | :ref:`pcre2 <pcre2_syntax>` expression.                       |
 +--------------------+---------------------------------------------------------------+
@@ -1155,6 +1179,8 @@ If ``action`` label is declared multiple times within the rule, the following ru
 - The resulting value is their concatenation.
 - The resulting value of an attribute corresponds to the one specified in the last label. If it is not specified, the default value will be used.
 
+.. _rules_status:
+
 status
 ^^^^^^
 
@@ -1163,7 +1189,7 @@ Checks the actual status of an event.
 +--------------------+---------------------------------------------------------------+
 | **Default Value**  | n/a                                                           |
 +--------------------+---------------------------------------------------------------+
-| **Allowed values** | Any `regex <:ref:`regex <os_regex_syntax>`,                   |
+| **Allowed values** | Any :ref:`regex <os_regex_syntax>`,                           |
 |                    | :ref:`sregex <sregex_os_match_syntax>` or                     |
 |                    | :ref:`pcre2 <pcre2_syntax>` expression.                       |
 +--------------------+---------------------------------------------------------------+
@@ -1200,6 +1226,8 @@ If ``status`` label is declared multiple times within the rule, the following ru
 - The resulting value is their concatenation.
 - The resulting value of an attribute corresponds to the one specified in the last label. If it is not specified, the default value will be used.
 
+.. _rules_srcgeoip:
+
 srcgeoip
 ^^^^^^^^
 
@@ -1208,7 +1236,7 @@ Used as a requisite to trigger the rule. It will check the GeoIP source (decoded
 +--------------------+---------------------------------------------------------------+
 | **Default Value**  | n/a                                                           |
 +--------------------+---------------------------------------------------------------+
-| **Allowed values** | Any `regex <:ref:`regex <os_regex_syntax>`,                   |
+| **Allowed values** | Any :ref:`regex <os_regex_syntax>`,                           |
 |                    | :ref:`sregex <sregex_os_match_syntax>` or                     |
 |                    | :ref:`pcre2 <pcre2_syntax>` expression.                       |
 +--------------------+---------------------------------------------------------------+
@@ -1234,6 +1262,8 @@ If ``srcgeoip`` label is declared multiple times within the rule, the following 
 - The resulting value is their concatenation.
 - The resulting value of an attribute corresponds to the one specified in the last label. If it is not specified, the default value will be used.
 
+.. _rules_dstgeoip:
+
 dstgeoip
 ^^^^^^^^
 
@@ -1242,7 +1272,7 @@ Used as a requisite to trigger the rule. It will check the GeoIP destination (de
 +--------------------+---------------------------------------------------------------+
 | **Default Value**  | n/a                                                           |
 +--------------------+---------------------------------------------------------------+
-| **Allowed values** | Any `regex <:ref:`regex <os_regex_syntax>`,                   |
+| **Allowed values** | Any :ref:`regex <os_regex_syntax>`,                           |
 |                    | :ref:`sregex <sregex_os_match_syntax>` or                     |
 |                    | :ref:`pcre2 <pcre2_syntax>` expression.                       |
 +--------------------+---------------------------------------------------------------+
