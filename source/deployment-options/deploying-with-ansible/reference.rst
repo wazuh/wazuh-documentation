@@ -347,6 +347,12 @@ Wazuh Manager
             - 'buster'
           update_interval: '1h'
           name: '"debian"'
+        - enabled: 'no'
+          update_interval: '1h'
+          name: '"redhat"'
+        - enabled: 'no'
+          update_interval: '1h'
+          name: '"nvd"'
 
 |
 | **Variable**: ``wazuh_manager_syscheck``
