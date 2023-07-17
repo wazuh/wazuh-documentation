@@ -1010,7 +1010,7 @@ Allows disabling the Audit health check during the Whodata engine starting. This
 
 .. warning:: The health check ensures that the rules required by Whodata can be set in Audit correctly and also that the generated events can be obtained. Disabling the health check may cause functioning problems in Whodata and loss of FIM events.
 
-For more information, please read :ref:`auditing who-data <auditing-whodata>`
+For more information, please read :ref:`auditing who-data <who-data-monitoring>`
 
 
 .. _reference_ossec_syscheck_windows_audit_interval:

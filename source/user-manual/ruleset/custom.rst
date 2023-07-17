@@ -44,15 +44,16 @@ Check out this example on how to create new decoders and rules. The following lo
       </decoder>
 
 
-#. Add the following rule to ``/var/ossec/etc/rules/local_rules.xml``:
+#. Add the following rule to ``/var/ossec/etc/rules/local_rules.xml``.
 
    .. code-block:: xml
 
-      <rule id="100010" level="0">
-        <program_name>example</program_name>
-        <description>User logged</description>
-      </rule>
-
+      <group name="custom_rules_example,">
+        <rule id="100010" level="0">
+          <program_name>example</program_name>
+          <description>User logged</description>
+        </rule>
+      </group>
 
 #. Run ``/var/ossec/bin/wazuh-logtest``. Input the example log above to test the decoder and rule:
 
@@ -77,10 +78,9 @@ Check out this example on how to create new decoders and rules. The following lo
               id: '100010'
               level: '0'
               description: 'User logged'
-              groups: '['local', 'syslog', 'sshd']'
+              groups: '['custom_rules_example']'
               firedtimes: '1'
               mail: 'False'
-
 
    To test your rules and decoders using ``wazuh-logtest``, it's enough to save the changes made to the decoder and rule files. However, you need to restart the Wazuh manager to generate alerts based on these changes.  
 
@@ -89,7 +89,7 @@ Check out this example on how to create new decoders and rules. The following lo
       .. include:: /_templates/installations/manager/restart_wazuh_manager.rst
 
 Changing an existing rule
----------------------------
+-------------------------
 
 .. warning::
     Changes to any rule file inside the ``/var/ossec/ruleset/rules`` folder are lost in the update process. Use the following procedure to preserve your changes.
@@ -104,30 +104,36 @@ Here's an example on how to change the level value of the SSH rule ``5710`` from
 
    .. code-block:: xml
 
-      <rule id="5710" level="5">
-        <if_sid>5700</if_sid>
-        <match>illegal user|invalid user</match>
-        <description>sshd: Attempt to login using a non-existent user</description>
-        <mitre>
-          <id>T1110</id>
-        </mitre>
-        <group>invalid_login,authentication_failed,pci_dss_10.2.4,pci_dss_10.2.5,pci_dss_10.6.1,gpg13_7.1,gdpr_IV_35.7.d,gdpr_IV_32.2,hipaa_164.312.b,nist_800_53_AU.14,nist_800_53_AC.7,nist_800_53_AU.6,tsc_CC6.1,tsc_CC6.8,tsc_CC7.2,tsc_CC7.3,</group>
-      </rule>
+      <group name="syslog,sshd,">
+        ...
+        <rule id="5710" level="5">
+          <if_sid>5700</if_sid>
+          <match>illegal user|invalid user</match>
+          <description>sshd: Attempt to login using a non-existent user</description>
+          <mitre>
+            <id>T1110</id>
+          </mitre>
+          <group>invalid_login,authentication_failed,pci_dss_10.2.4,pci_dss_10.2.5,pci_dss_10.6.1,gpg13_7.1,gdpr_IV_35.7.d,gdpr_IV_32.2,hipaa_164.312.b,nist_800_53_AU.14,nist_800_53_AC.7,nist_800_53_AU.6,tsc_CC6.1,tsc_CC6.8,tsc_CC7.2,tsc_CC7.3,</group>
+        </rule>
+        ...
+      </group>
 
-#. Paste the copied rule definition into ``/var/ossec/etc/rules/local_rules.xml``. Modify the level value, and add ``overwrite="yes"`` to indicate that this rule is overwriting an already defined rule:
+#. Paste the copied rule definition into ``/var/ossec/etc/rules/local_rules.xml``. Modify the level value, and add ``overwrite="yes"`` to indicate that this rule overwrites an already defined rule.
 
    .. code-block:: xml
-      :emphasize-lines: 1
+      :emphasize-lines: 2
 
-      <rule id="5710" level="10" overwrite="yes">
-        <if_sid>5700</if_sid>
-        <match>illegal user|invalid user</match>
-        <description>sshd: Attempt to login using a non-existent user</description>
-        <mitre>
-          <id>T1110</id>
-        </mitre>
-        <group>invalid_login,authentication_failed,pci_dss_10.2.4,pci_dss_10.2.5,pci_dss_10.6.1,gpg13_7.1,gdpr_IV_35.7.d,gdpr_IV_32.2,hipaa_164.312.b,nist_800_53_AU.14,nist_800_53_AC.7,nist_800_53_AU.6,tsc_CC6.1,tsc_CC6.8,tsc_CC7.2,tsc_CC7.3,</group>
-      </rule>
+      <group name="syslog,sshd,">
+        <rule id="5710" level="10" overwrite="yes">
+          <if_sid>5700</if_sid>
+          <match>illegal user|invalid user</match>
+          <description>sshd: Attempt to login using a non-existent user</description>
+          <mitre>
+            <id>T1110</id>
+          </mitre>
+          <group>invalid_login,authentication_failed,pci_dss_10.2.4,pci_dss_10.2.5,pci_dss_10.6.1,gpg13_7.1,gdpr_IV_35.7.d,gdpr_IV_32.2,hipaa_164.312.b,nist_800_53_AU.14,nist_800_53_AC.7,nist_800_53_AU.6,tsc_CC6.1,tsc_CC6.8,tsc_CC7.2,tsc_CC7.3,</group>
+        </rule>
+      </group>
 
    .. warning::
       To maintain consistency between loaded rules, currently it's not possible to overwrite the ``if_sid``, ``if_group``, ``if_level``, ``if_matched_sid``, and ``if_matched_group`` labels. These tags are ignored when they are in an overwrite rule, keeping the original values.

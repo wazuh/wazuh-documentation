@@ -15,7 +15,7 @@ wodle name="aws-s3"
 		<wodle name="aws-s3">
 		</wodle>
 
-After adding an ``aws-s3`` section, it is mandatory to define at least one :ref:`bucket<buckets>` or :ref:`service <services>`. It is possible to configure multiple buckets and services inside the same ``aws-s3`` section.
+After adding an ``aws-s3`` section, it is mandatory to define at least one :ref:`bucket<buckets>`, :ref:`service <services>` or :ref:`subscriber<subscribers>`. It is possible to configure multiple buckets, services and subscribers inside the same ``aws-s3`` section.
 
 The options available to use inside the ``aws-s3`` section are the following:
 
@@ -655,6 +655,121 @@ The endpoint URL for the required AWS Service to be used to download the data fr
 | **Allowed values** | Any valid endpoint URL for the AWS Service     |
 +--------------------+------------------------------------------------+
 
+.. _subscribers:
+
+Subscribers
+~~~~~~~~~~~
+.. versionadded:: 4.4.2
+
+It is necessary to specify the type as an attribute of the ``subscriber`` tag to indicate the service configured. More information about the supported services and their associated types on :ref:`AWS supported services <amazon_supported_services>`.
+
+	.. code-block:: xml
+
+		<subscriber type="security_lake">
+
+		</subscriber>
+
+The currently available type is: ``security_lake``.
+
++----------------------------------------+-------------------------------------------------------------+-----------------------------------------------+
+| Options                                | Allowed values                                              | Mandatory/Optional                            |
++========================================+=============================================================+===============================================+
+| :ref:`subscriber_sqs_name`             | Any valid SQS name                                          | Mandatory for Amazon Security Lake            |
+|                                        |                                                             | Subscription                                  |
++----------------------------------------+-------------------------------------------------------------+-----------------------------------------------+
+| :ref:`subscriber_iam_role_arn`         | Valid role ARN                                              | Mandatory for Amazon Security Lake            |
+|                                        |                                                             | Subscription                                  |
++----------------------------------------+-------------------------------------------------------------+-----------------------------------------------+
+| :ref:`subscriber_external_id`          | Valid external ID                                           | Mandatory for Amazon Security Lake            |
+|                                        |                                                             | Subscription                                  |
++----------------------------------------+-------------------------------------------------------------+-----------------------------------------------+
+| :ref:`subscriber_iam_role_duration`    | Number of seconds between 900 and 3600                      | Optional (if set, it requires an iam_role_arn |
+|                                        |                                                             | to be provided)                               |
++----------------------------------------+-------------------------------------------------------------+-----------------------------------------------+
+| :ref:`subscriber_sts_endpoint`         | Any valid VPC endpoint URL for STS                          | Optional                                      |
++----------------------------------------+-------------------------------------------------------------+-----------------------------------------------+
+| :ref:`subscriber_service_endpoint`     | Any valid endpoint URL for S3                               | Optional                                      |
++----------------------------------------+-------------------------------------------------------------+-----------------------------------------------+
+
+.. _subscriber_sqs_name:
+
+sqs_name
+^^^^^^^^
+
+Name of the SQS from where notifications are pulled.
+
++--------------------+-----------------------------+
+| **Default value**  | N/A                         |
++--------------------+-----------------------------+
+| **Allowed values** | Any valid SQS name          |
++--------------------+-----------------------------+
+
+.. _subscriber_external_id:
+
+external_id
+^^^^^^^^^^^
+
+External ID to use when assuming the role.
+
++--------------------+--------------------+
+| **Default value**  | N/A                |
++--------------------+--------------------+
+| **Allowed values** | Valid external ID  |
++--------------------+--------------------+
+
+.. _subscriber_iam_role_arn:
+
+iam_role_arn
+^^^^^^^^^^^^
+
+A valid role ARN with permission to access the service.
+
++--------------------+----------------+
+| **Default value**  | N/A            |
++--------------------+----------------+
+| **Allowed values** | Valid role ARN |
++--------------------+----------------+
+
+.. _subscriber_iam_role_duration:
+
+iam_role_duration
+^^^^^^^^^^^^^^^^^
+
+A valid number of seconds that defines the duration of the session assumed when using the provided :ref:`iam_role_arn<subscriber_iam_role_arn>`.
+
++--------------------+------------------------------------------+
+| **Default value**  | N/A                                      |
++--------------------+------------------------------------------+
+| **Allowed values** | Number of seconds between 900 and 3600   |
++--------------------+------------------------------------------+
+
+.. _subscriber_sts_endpoint:
+
+sts_endpoint
+^^^^^^^^^^^^
+
+The AWS Security Token Service VPC endpoint URL to be used when an IAM role is provided as the authentication method. Check the :ref:`Considerations for configuration <amazon_considerations>` page to learn more about VPC endpoints.
+
++--------------------+----------------------------------------+
+| **Default value**  | N/A                                    |
++--------------------+----------------------------------------+
+| **Allowed values** | Any valid VPC endpoint URL for STS     |
++--------------------+----------------------------------------+
+
+.. _subscriber_service_endpoint:
+
+service_endpoint
+^^^^^^^^^^^^^^^^
+
+The AWS S3 endpoint URL to be used to download the data from the bucket. Check the :ref:`Considerations for configuration <amazon_considerations>` page to learn more about VPC and FIPS endpoints.
+
++--------------------+------------------------------------------------+
+| **Default value**  | N/A                                            |
++--------------------+------------------------------------------------+
+| **Allowed values** | Any valid endpoint URL for S3                  |
++--------------------+------------------------------------------------+
+
+
 Example of configuration
 ~~~~~~~~~~~~~~~~~~~~~~~~
 
@@ -713,4 +828,10 @@ Example of configuration
           <regions>us-east-1,us-west-1,eu-central-1</regions>
           <discard_regex field="data.configurationItemStatus">REJECT</discard_regex>
       </service>
+      <subscriber type="security_lake">
+        <sqs_name>sqs-security-lake-main-queue</sqs_name>
+        <external_id>wazuh-external-id-value</external_id>
+        <iam_role_arn>arn:aws:iam::010203040506:role/ASL-Role</iam_role_arn>
+      </subscriber>
   </wodle>
+  

@@ -27,6 +27,37 @@ if ( typeof(versions) === 'undefined' ) {
   const versions = [];
 }
 
+/* Menu dropdown hover =========================================================== */
+(function($) {
+  if(window.matchMedia("(hover: hover)").matches) {
+    $('.navbar-nav .dropdown-toggle').on('mouseenter', function(e) {
+      if (!$(this).closest('.dropdown').hasClass('show')) {
+        e.stopPropagation();
+        $(this).trigger('click');
+      }
+    });
+    $('.navbar-nav .dropdown-toggle').on('mouseleave', function(e) {
+      let toElement = e.toElement || e.relatedTarget;
+      console.log(toElement);
+      if ($(this).closest('.dropdown').hasClass('show')
+        && toElement !== $(this).siblings()[0]) {
+        e.stopPropagation();
+        $(this).trigger('click');
+      }
+    });
+    $('.navbar-nav .dropdown-menu').on('mouseleave', function(e) {
+      let toElement = e.toElement || e.relatedTarget;
+      
+      console.log("submenu",toElement);
+      if ($(this).closest('.dropdown').hasClass('show')
+        && toElement !== $(this).siblings()[0]) {
+        $(this).siblings().trigger('click');
+      }
+    });
+  }
+})(jQuery);
+
+
 /* Using ReDoc ============================================================== */
 const minVersionRedoc = '4.0';
 const useApiRedoc = (compareVersion(DOCUMENTATION_OPTIONS.VERSION, minVersionRedoc) >= 0);
@@ -38,8 +69,11 @@ const newTabNodes = [
 
 /* Open external links in a new tab ========================================= */
 
+let oursHost = ['documentation.wazuh.com'];
+
 $('a.reference.external').each(function() {
-  if ( $(this).attr('href').indexOf('documentation.wazuh.com') == -1 ) {
+  let link = new URL($(this).attr('href'));
+  if ( !oursHost.includes(link.host) ) {
     $(this).attr('target', '_blank').attr('rel', 'noreferrer noopener');
   }
 });

@@ -389,9 +389,23 @@ Configuring the Wazuh server worker nodes
 Testing Wazuh server cluster
 """"""""""""""""""""""""""""
 
-  .. include:: /_templates/installations/manager/check_wazuh_cluster.rst
+To verify that the Wazuh cluster is enabled and all the nodes are connected, execute the following command:
 
+  .. code-block:: console
 
+    # /var/ossec/bin/cluster_control -l
+
+An example output of the command looks as follows:
+
+  .. code-block:: none
+    :class: output
+    
+      NAME         TYPE    VERSION  ADDRESS
+      master-node  master  |WAZUH_CURRENT|   10.0.0.3
+      worker-node1 worker  |WAZUH_CURRENT|   10.0.0.4
+      worker-node2 worker  |WAZUH_CURRENT|   10.0.0.5
+
+Note that ``10.0.0.3``, ``10.0.0.4``, ``10.0.0.5`` are example IPs.
 
 Installing the Wazuh dashboard
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
@@ -598,7 +612,7 @@ Select your deployment type and follow the instructions to change the default pa
                   url: https://localhost
                   port: 55000
                   username: wazuh-wui
-                  password: <wazuh-wui-password>
+                  password: "<wazuh-wui-password>"
                   run_as: false
 
       #. Restart the Wazuh dashboard to apply the changes.

@@ -3,6 +3,8 @@
 .. meta::
   :description: The SCA module performs scans to determine if monitored endpoints meet secure configuration and hardening policies. Learn more about it in this section.
 
+:orphan:
+
 Security configuration assessment
 =================================
 
@@ -31,7 +33,7 @@ This use case shows how Wazuh helps meet the **CM-6 Configuration settings** req
 
 #. Select the **Security configuration assessment** module on your Wazuh dashboard. SCA scans are enabled by default so you don’t require further configuration actions.
 
-   .. thumbnail:: /images/nist/select-sca-module.png    
+   .. thumbnail:: /images/compliance/nist/select-sca-module.png    
       :title: Select the SCA module
       :alt: Select the SCA module
       :align: center
@@ -40,7 +42,7 @@ This use case shows how Wazuh helps meet the **CM-6 Configuration settings** req
 
 #. Select the endpoint running the Wazuh agent.
 
-   .. thumbnail:: /images/nist/select-the-endpoint.png    
+   .. thumbnail:: /images/compliance/nist/select-the-endpoint.png    
       :title: Select the endpoint
       :alt: Select the endpoint
       :align: center
@@ -49,7 +51,7 @@ This use case shows how Wazuh helps meet the **CM-6 Configuration settings** req
 
 #. Select **CIS benchmark for Ubuntu Linux 22.04**.
 
-   .. thumbnail:: /images/nist/select-cis-benchmark.png    
+   .. thumbnail:: /images/compliance/nist/select-cis-benchmark.png    
       :title: Select CIS benchmark
       :alt: Select CIS benchmark
       :align: center
@@ -59,7 +61,7 @@ This use case shows how Wazuh helps meet the **CM-6 Configuration settings** req
 
 #. Navigate to ID ``28593``.
 
-   .. thumbnail:: /images/nist/navigate-to-id-28593.png    
+   .. thumbnail:: /images/compliance/nist/navigate-to-id-28593.png    
       :title: Navigate to ID 28593
       :alt: Navigate to ID 28593
       :align: center

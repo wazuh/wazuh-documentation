@@ -246,26 +246,53 @@ Edit the Wazuh indexer security configuration files. We recommend that you back 
 Wazuh dashboard configuration
 -----------------------------
 
+#. Check the value of ``run_as`` in the ``/usr/share/wazuh-dashboard/data/wazuh/config/wazuh.yml`` configuration file. If ``run_as`` is set to ``false``, proceed to the next step.
+
+   .. code-block:: yaml
+      :emphasize-lines: 7
+
+      hosts:
+        - default:
+            url: https://localhost
+            port: 55000
+            username: wazuh-wui
+            password: "<wazuh-wui-password>"
+            run_as: false
+
+   If ``run_as`` is set to ``true``, you need to add a role mapping on the Wazuh dashboard. To map the backend role to Wazuh, follow these steps:
+
+   #. Click **Wazuh** to open the Wazuh dashboard menu, select **Security**, and then **Roles mapping** to open the page.
+
+      .. thumbnail:: /images/single-sign-on/Wazuh-role-mapping.gif
+         :title: Wazuh role mapping
+         :alt: Wazuh role mapping 
+         :align: center
+         :width: 80%
+
+   #. Click **Create Role mapping** and complete the empty fields with the following parameters:
+
+      - **Role mapping name**: Assign a name to the role mapping.
+      - **Roles**: Select ``administrator``.
+      - **Custom rules**: Click **Add new rule** to expand this field.
+      - **User field**: ``backend_roles``
+      - **Search operation**: ``FIND``
+      - **Value**: Assign the name you gave to your group in PingOne configuration, in our case, this is ``Role``.  
+
+      .. thumbnail:: /images/single-sign-on/pingone/Wazuh-role-mapping.png
+         :title: Create Wazuh role mapping
+         :alt: Create Wazuh role mapping 
+         :align: center
+         :width: 80%      
+
+   #. Click **Save role mapping** to save and map the backend role with Wazuh as administrator.
+
+
 #. Edit the Wazuh dashboard configuration file. Add these configurations to ``/etc/wazuh-dashboard/opensearch_dashboards.yml``. We recommend that you back up these files before you carry out the configuration.
 
    .. code-block:: console  
 
       opensearch_security.auth.type: "saml"
-      server.xsrf.allowlist: ["/_plugins/_security/saml/acs", "/_plugins/_security/saml/logout", "/_opendistro/_security/saml/acs", "/_opendistro/_security/saml/logout", "/_opendistro/_security/saml/acs/idpinitiated"]
-
-   .. note::
-      :class: not-long
-
-      *For versions 4.3.9 and earlier*, also replace ``path: `/auth/logout``` with ``path: `/logout``` in ``/usr/share/wazuh-dashboard/plugins/securityDashboards/server/auth/types/saml/routes.js``. We recommend that you back up these files before you carry out the configuration.
-
-      .. code-block:: console
-         :emphasize-lines: 3
-
-         ...
-            this.router.get({
-               path: `/logout`,
-               validate: false
-         ...
+      server.xsrf.allowlist: ["/_opendistro/_security/saml/acs", "/_opendistro/_security/saml/logout", "/_opendistro/_security/saml/acs/idpinitiated"]
 
 #. Restart the Wazuh dashboard service.
 
