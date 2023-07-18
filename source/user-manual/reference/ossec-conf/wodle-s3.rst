@@ -568,7 +568,7 @@ discard_regex
 A regular expression to determine if an event must be discarded.
 
 -  For ``inspector``, it requires a mandatory ``field`` attribute. The regex is applied to the event field specified with this attribute.
--  For ``cloudwatchlogs``, the ``field`` attribute is optional. You can ommit it, for example, when monitoring Cloudwatch logs in JSON format and plain text.
+-  For ``cloudwatchlogs``, the ``field`` attribute is optional. You can omit it, for example, when monitoring Cloudwatch logs in JSON format and plain text.
 
 +--------------------+----------------------------------------+
 | **Default value**  | N/A                                    |
