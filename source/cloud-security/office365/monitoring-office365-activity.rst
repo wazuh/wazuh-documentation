@@ -106,7 +106,7 @@ Wazuh configuration
 
 Next, we will see the options we have to configure for the Wazuh integration.
 
-Proceed to configure the ``office365`` module in the Wazuh manager or in the Wazuh agent. Through the following configuration, Wazuh is ready to search for logs created by Office 365 audit-log. In this case, we will only search for the ``Audit.SharePoint`` type events within an interval of ``1m``. Those logs will be only those that were created after the module was started:
+Proceed to configure the ``office365`` module in the Wazuh manager or in the Wazuh agent. To configure manager and agent, check the :doc:`/user-manual/reference/ossec-conf/index` documentation. Through the following configuration, Wazuh is ready to search for logs created by Office 365 audit-log. In this case, we will only search for the ``Audit.SharePoint`` type events within an interval of ``1m``. Those logs will be only those that were created after the module was started:
 
 .. code-block:: xml
 
@@ -125,7 +125,7 @@ Proceed to configure the ``office365`` module in the Wazuh manager or in the Waz
         </subscriptions>
     </office365>
 
-Module reference can be found :ref:`here <office365-module>`.
+Check :ref:`office365-module` reference documentation for the module references.
 
 Using the configuration mentioned above, we will see an example of monitoring Office 365 activity.
 
