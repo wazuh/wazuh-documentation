@@ -33,7 +33,7 @@ To achieve this configuration, follow these steps:
 
 3. Configure NGINX.
 
-   #. Add the following lines to the HTTP section in your NGINX configuration, located in ``/etc/nginx/nginx.conf``.
+   #. Add the following lines to the HTTP section in your NGINX configuration, located in the ``/etc/nginx/nginx.conf`` file. This configuration enables Nginx to extract and use the real client IP address from the X-Forwarded-For header and sets restrictions on which real IP addresses are accepted as valid.
 
 
       .. code-block::
@@ -44,16 +44,16 @@ To achieve this configuration, follow these steps:
          set_real_ip_from nginx_ip;
             }
 
-   #. Add the following block to the end of the NGINX configuration.
+   #. Add the following block to the end of the NGINX configuration file ``/etc/nginx/nginx.conf`` and replace ``<CLOUD_ID>`` with the Cloud ID of your environment. This configuration enables stream proxying, where incoming traffic on specific ports is forwarded to the corresponding upstream servers (master or mycluster). This is based on the port numbers, 1515 and 1514 specified in the listen directive.
 
       .. code-block::
 
 	 stream {
 	   upstream master {
-	     server <cloud_id>.cloud.wazuh.com:1515;
+	     server <CLOUD_ID>.cloud.wazuh.com:1515;
 	   }
 	   upstream mycluster {
-	     server <cloud_id>.cloud.wazuh.com:1514;
+	     server <CLOUD_ID>.cloud.wazuh.com:1514;
 	     }
 	   server {
 	     listen nginx_ip:1515;
@@ -64,22 +64,20 @@ To achieve this configuration, follow these steps:
 	     proxy_pass mycluster;
 	   }
 	 }
-
-      Make sure to replace ``<cloud_id>`` with the Cloud ID of your environment.
 	
-   #. Restart NGINX with ``systemctl restart nginx``.
+   #. Run the command to restart NGINX: ``systemctl restart nginx``.
 
-   #. Register your agent but replace the *WAZUH_MANAGER_IP* value (``nginx_ip``) with the NGINX instance IP address. To learn more on how to register agents, see the :ref:`Register agents <cloud_register_agents>` section.
+   #. Enroll your agent with the IP address of the NGINX instance. To learn more about registering agents, see the :ref:`Enroll agents <cloud_register_agents>` section.
 
       Example:
 
       .. code-block::
 
-         WAZUH_MANAGER_IP=nginx_ip WAZUH_PROTOCOL="tcp" \
-         WAZUH_PASSWORD="xxxx" \
+         WAZUH_MANAGER_IP=<NGINX_IP> WAZUH_PROTOCOL="tcp" \
+         WAZUH_PASSWORD="<PASSWORD>" \
          yum install wazuh-agent
          
-      In this example, make sure to replace ``<xxxx>`` with your actual password.
+      Replace <PASSWORD> with your Wazuh server enrollment password.
 
 Using AWS Private Link
 ----------------------
@@ -104,7 +102,7 @@ In case your agents are located in AWS, you can access our Wazuh Cloud service s
 
 5. After the endpoint is created, Wazuh approves the connection and sends a notification when it is ready to use.
 
-6. You can now register your agent but replace the *WAZUH_MANAGER_IP* value (``vpce-<aws-endpoint-id>.vpce-svc-<aws-service-id>.<region>.vpce.amazonaws.com``) with the endpoint's DNS.
+6. You can now enroll your Wazuh agent but replace the *WAZUH_MANAGER_IP* value with the endpoint's DNS (``vpce-<aws-endpoint-id>.vpce-svc-<aws-service-id>.<region>.vpce.amazonaws.com``).
 
    If the agents are located in a different region than your endpoint, use VPC Peerings to connect them to the endpoint service.
 
@@ -113,7 +111,7 @@ In case your agents are located in AWS, you can access our Wazuh Cloud service s
    .. code-block::
 
       WAZUH_MANAGER_IP=vpce-<aws-endpoint-id>.vpce-svc-<aws-service-id>.<region>.vpce.amazonaws.com WAZUH_PROTOCOL="tcp" \
-      WAZUH_PASSWORD="xxxx" \
+      WAZUH_PASSWORD="<PASSWORD>>" \
       yum install wazuh-agent
 
-   In this example, make sure to replace ``<xxxx>`` with your actual password.
+   In this example, make sure to replace ``<PASSWORD>`` with your actual password.

@@ -24,12 +24,14 @@ This limit governs the number of dashboards, visualizations, and queries that ca
 API rate limits
 ^^^^^^^^^^^^^^^
 
-All our APIs have a rate limit in place to prevent abuse and ensure optimal performance and stability. These rate limits define the maximum number of requests that can be made per second to specific APIs. While it is extremely rare to reach these limits, they are in place to protect the system and maintain a smooth experience for all users. The following APIs have rate limits:
+All our APIs have a rate limit in place to prevent abuse and ensure optimal performance and stability. These rate limits define the maximum number of requests that can be made per second to specific APIs. While it is extremely rare to reach these limits, they are in place to protect the system and maintain a smooth experience for all users.
+
+The following APIs have rate limits:
 
 - Agent registration: This limit controls the maximum number of registration requests that can be processed per second, ensuring a seamless onboarding experience for agents connecting to the Wazuh Cloud environment.
 
 - Wazuh API: This limit specifies the maximum number of requests that can be made per second to the Wazuh API, ensuring the stability and availability of the API.
 
-- Indexer API: This limit defines the maximum number of requests that can be made per second to the Indexer API, enabling efficient retrieval and manipulation of indexed data.
+- Indexer API: This limit defines the maximum number of requests that can be made per second to the Wazuh Indexer API, enabling efficient retrieval and manipulation of indexed data.
 
 - Access to the Archived data: This limit determines the maximum number of requests that can be processed per second for accessing archived data, ensuring efficient retrieval of archived data when needed.

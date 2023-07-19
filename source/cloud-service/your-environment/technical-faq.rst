@@ -32,13 +32,13 @@ Technical FAQ
 
 - `Can I send syslog data directly to the environment?`_
 
-- `Can I send data directly to the Elasticsearch of my environment?`_
+- `Can I send data directly to the Wazuh indexer of my environment?`_
 
 - `Can I integrate with my Single Sign-On (SSO) method (LDAP, Okta, Active Directories)?`_
 
 - `Do I have access to Wazuh API?`_
 
-- `Do I have access to Elasticsearch API?`_
+- `Do I have access to Wazuh indexer API?`_
 
 - `How can I forward my logs to another solution or SOC?`_
 
@@ -49,7 +49,7 @@ Technical FAQ
 How can I send data to my environment?
 --------------------------------------
 
-All the communications are performed through Wazuh agents once they are registered into the environment.
+All the communications are performed through Wazuh agents once they are registered to the environment.
   
 Is it possible to change the URL to access the environment?
 -----------------------------------------------------------
@@ -59,22 +59,27 @@ It is possible to get a new URL by opening a support ticket through the **Help**
 What happens if the tier limit is reached?
 ------------------------------------------
 
-See What happens if *indexed data size* setting is reached?.
+See :ref:`See What happens if *indexed data size* setting is reached? <cloud_technical_faq_change_setting>`
+
+
+.. _cloud_technical_faq_size_reached:
 
 What happens if indexed data size setting is reached?
 -----------------------------------------------------
 
-When *indexed data size* setting is reached, the oldest events will be automatically removed from your index. This data is available in archived data for you to access. See the :ref:`Archived data <cloud_your_environment_accessing_archived_data>` section to learn more about data logging and storage.
+When the selected indexed data size is reached, the oldest events will be automatically removed from your index regardless of the index data time. This data is available in archived data for you to access. See the :ref:`Archived data <cloud_your_environment_accessing_archived_data>` section to learn more about data logging and storage.
 
 Can I index the archived data again?
 ------------------------------------
 
-It is possible to download the data from the archived data and reindex it into your local environments, but at this moment it is not possible to reindex it in your cloud environment.
+It is possible to download the data from the archived data and reindex it into your local environments, but at this moment, it is not possible to reindex it in your cloud environment.
 
 What if I need to change the size of my tier?
 ---------------------------------------------
 
-See What if I need to upgrade or downgrade a setting?.
+See :ref:`What if I need to upgrade or downgrade a setting? <cloud_technical_faq_change_setting>`
+
+.. _cloud_technical_faq_change_setting:
 
 What if I need to upgrade or downgrade a setting?
 -------------------------------------------------
@@ -89,7 +94,7 @@ If the maximum number of active agents is reached, the environment may start to 
 What happens if data ingestion rate setting is reached?
 -------------------------------------------------------
 
-If the EPS limit is exceeded, events will start to be queued. However, if the queue becomes full, the incoming events will be discarded, which may lead to potential event loss. The queuing mechanism is automatically managed by the cloud service, ensuring optimal resource utilization.
+If the EPS limit is exceeded, events will start to queue. However, if the queue becomes full, the incoming events will be discarded, which may lead to potential event loss. The queuing mechanism is automatically managed by the cloud service, ensuring optimal resource utilization.
 
 
 How do I get SSH access to my environment?
@@ -100,35 +105,34 @@ SSH access is not allowed for security reasons. Environments are managed from th
 How can I update my environment?
 --------------------------------
 
-Wazuh takes care of the updates so your environment gets the latest version of Wazuh with no downtime.
+Wazuh takes care of the updates, so your environment gets the latest version of Wazuh with no downtime.
  
 Can I send syslog data directly to the environment?
 ---------------------------------------------------
 
 No, all the communications are performed through Wazuh agents once they are registered into the environment. However, you have alternative options. For more information on how to forward syslog events to your environment, see the :ref:`Forward syslog events <cloud_your_environment_send_syslog>` section.
 
-Can I send data directly to the Elasticsearch of my environment?
-----------------------------------------------------------------------
+Can I send data directly to the Wazuh indexer of my environment?
+----------------------------------------------------------------
 
 No, all the communications are performed through Wazuh agents.
 
 Can I integrate with my Single Sign-On (SSO) method (LDAP, Okta, Active Directories)?
 ----------------------------------------------------------------------------------------
 
-Yes, you can access the Wazuh WUI of your environment through your SSO tool. To perform this action, you need to contact the Wazuh team through the **Help** section of your Wazuh Cloud Console.
+Yes, you can access the Wazuh WUI of your environment through your SSO tool. To perform this action, you need to contact the Wazuh Support team through the **Help** section of your Wazuh Cloud Console.
 
 
 Do I have access to Wazuh API?
 ------------------------------
 
-You have access to the **Dev tools** through your Wazuh WUI where you can use the API. Wazuh API is not exposed, but you can contact the Wazuh team through the **Help** section of your Wazuh Cloud Console to allow Wazuh API access from a specific IP address.
+You have access to the **Dev tools** through your Wazuh WUI, where you can use the API. The Wazuh API is not exposed, but you can contact the Wazuh team through the **Help** section of your Wazuh Cloud Console to allow Wazuh API access from a specific IP address.
 
 
-Do I have access to Elasticsearch API?
+Do I have access to Wazuh indexer API?
 --------------------------------------
 
-Elasticsearch API is not accessible by default. If you want to access it, contact the Wazuh team through the **Help** section of your Wazuh Cloud Console to authorize the connection from a specific IP address. After authorization is granted, you have access to ``GET`` methods of the Elasticsearch API.
-
+The Wazuh indexer API is not accessible by default. If you want to access it, contact the Wazuh team through the **Help** section of your Wazuh Cloud Console to authorize the connection from a specific IP address. After authorization is granted, you have access to the ``GET`` methods of the Wazuh indexer API.
 
 How can I forward my logs to another solution or SOC?
 -----------------------------------------------------
@@ -138,7 +142,7 @@ You can download your data from archived data. Then, you can push it to other so
 Is my environment shared with other customers?
 ----------------------------------------------
 
-No, your environment is isolated from other customers. That means that your account is the only one with access to your environment.
+No, your environment is isolated from other customers. That means your account is the only one with access to your environment.
 
 What are the available regions?
 -------------------------------
