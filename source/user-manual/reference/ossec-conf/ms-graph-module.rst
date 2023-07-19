@@ -273,6 +273,7 @@ Example of configuration
           <client_id>your_client_id</client_id>
           <tenant_id>your_tenant_id</tenant_id>
           <secret_value>your_secret_value</secret_value>
+          <api_auth>global</api_auth>
         </api_auth>
         <resource>
           <name>security</name>
