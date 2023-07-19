@@ -29,7 +29,7 @@ AWS configuration
 Amazon Simple Queue Service
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-Set up a Standard type SQS Queue with the default configurations and apply the following Access Policy:
+Set up a **Standard** type SQS Queue with the default configurations and apply the following **Access Policy**:
 
 .. code-block:: json
 
@@ -66,15 +66,14 @@ Amazon S3 and Event Notifications
 
 The steps to have an S3 bucket reporting creation events are:
 
-- Configure an S3 bucket as defined in the :ref:`Configuring an S3 Bucket <s3_bucket>` section with the name provided in the previous section.
-- Once created, go to **Event notifications** and select **Create event notification**. 
-- In **Event Types**, select **All object create events**. This will generate notifications for any type of event that results in the creation of an object in the bucket.
-- In the **Destination** section, select **SQS queue** and **Choose from your SQS queues**, choosing the created queue in the previous step.
+#. Configure an S3 bucket as defined in the :ref:`Configuring an S3 Bucket <s3_bucket>` section with the name provided in the previous section.
+#. Once created, go to **Event notifications** and select **Create event notification**. 
+#. In **Event Types**, select **All object create events**. This will generate notifications for any type of event that results in the creation of an object in the bucket.
+#. In the **Destination** section, select **SQS queue** and **Choose from your SQS queues**, choosing the created queue in the previous step.
 
 
 Wazuh Configuration
 -------------------
-
 
 Buckets Subscriber section in ossec.conf 
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
