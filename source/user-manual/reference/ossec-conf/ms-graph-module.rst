@@ -35,6 +35,7 @@ Options
 - `api_auth\\tenant_id`_
 - `api_auth\\client_id`_
 - `api_auth\\secret_value`_
+- `api_auth\\api_type`_
 - `resource`_
 - `resource\\name`_
 - `resource\\relationship`_
@@ -61,6 +62,8 @@ Options
 | `api_auth\\client_id`_                 | Any string                      |
 +----------------------------------------+---------------------------------+
 | `api_auth\\secret_value`_              | Any string                      |
++----------------------------------------+---------------------------------+
+| `api_auth\\api_type`_                  | global, gcc-high, dod           |
 +----------------------------------------+---------------------------------+
 | `resource`_                            | N/A                             |
 +----------------------------------------+---------------------------------+
@@ -161,6 +164,8 @@ This block configures the credentials used for authenticating with the Microsoft
 +----------------------------------------+----------------------------------------------+
 | `api_auth\\secret_value`_              | Any string                                   |
 +----------------------------------------+----------------------------------------------+
+| `api_auth\\api_type`_                  | global, gcc-high, dod                        |
++----------------------------------------+----------------------------------------------+
 
 api_auth\\tenant_id
 ^^^^^^^^^^^^^^^^^^^
@@ -194,6 +199,17 @@ Secret associated with the application registered in Azure.
 +--------------------+--------------------+
 | **Allowed values** | Any string         |
 +--------------------+--------------------+
+
+api_auth\\api_type
+^^^^^^^^^^^^^^^^^^
+
+Type of Microsoft 365 subscription plan used by the tenant. `global` refers to either a commerical or GCC tenant.
+
++--------------------+------------------------+
+| **Default value**  | N/A                    |
++--------------------+------------------------+
+| **Allowed values** | global, gcc-high, dod  |
++--------------------+------------------------+
 
 resource
 --------

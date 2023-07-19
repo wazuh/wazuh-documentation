@@ -119,6 +119,7 @@ In this case, we will search for `alerts_v2` and `incidents` type events within 
           <client_id>your_client_id</client_id>
           <tenant_id>your_tenant_id</tenant_id>
           <secret_value>your_secret_value</secret_value>
+          <api_type>global<api_type>
         </api_auth>
         <resource>
           <name>security</name>
