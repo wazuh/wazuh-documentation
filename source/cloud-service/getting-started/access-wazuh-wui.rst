@@ -7,22 +7,22 @@
 Access Wazuh WUI
 ================
 
-The Wazuh WUI is a flexible and intuitive web interface. Through this WUI, you have access to the tools for mining and visualizing events, giving you a comprehensive insight into your monitored systems.
+The Wazuh WUI is a flexible and intuitive web interface. Through this WUI, you have access to visualized tools that gives you a comprehensive insight into your monitored endpoints.
 
 Follow these steps to access Wazuh WUI:
 
 #. Log in to the `Wazuh Cloud Console <https://console.cloud.wazuh.com/>`_.
-#. On the **Environments** page, select the environment you want to access.
+#. Select the environment you want to access from the **Environments** page.
 #. Click **Open Wazuh** to open Wazuh WUI.
 #. Choose from one of these methods to log in:
   
-  - Log in with the default credentials. You can download them by clicking **Default credentials** on the Environments page. Then, use the `Wazuh WUI - Username` and `Wazuh WUI - Password` to log in.
+  - Log in with the default credentials. You can view them by clicking the **Manage** button and selecting **Default credentials** on the environments page. These credentials will grant you access to the Wazuh WUI. 
   - If Single sign-on (SSO) is enabled, use your own account.
-  - You can also log in with any user you already created in Wazuh WUI.
+  - You can also log in with any user you created in Wazuh WUI.
 
 It is highly recommended for security reasons to change the default password and create your own users. 
 
-.. note:: You can access the Wazuh WUI directly using the URL *https://<cloud_id>.cloud.wazuh.com*, where ``<cloud_id>`` is the Cloud ID of your environment.
+.. note:: You can access the Wazuh WUI directly using the URL *https://<CLOUD_ID>.cloud.wazuh.com*, where ``<CLOUD_ID>`` is the Cloud ID of your environment.
 
 
 If you have any questions about the Wazuh Cloud, see the :doc:`Cloud service FAQ </cloud-service/getting-started/starting-faq>`.
@@ -30,4 +30,4 @@ If you have any questions about the Wazuh Cloud, see the :doc:`Cloud service FAQ
 Next steps
 ----------
 
-Your Wazuh Cloud environment is ready, and you can install a Wazuh agent on every endpoint to be monitored. To learn how to install agents, check the :ref:`Register agents <cloud_register_agents>` section.
+Your Wazuh Cloud environment is ready, and you can install the Wazuh agent on the endpoint you want to monitor. Check out the :ref:`Enroll agents <cloud_register_agents>` section to learn how to install agents.

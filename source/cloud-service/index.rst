@@ -5,14 +5,16 @@
 
 .. _cloud_service:
 
-Cloud service
-=============
+Wazuh Cloud service
+===================
   
-Wazuh protects your enterprise with Security Information and Event Management (SIEM) and Endpoint Detection and Response (EDR). Wazuh Cloud hosts and manages all the Wazuh components in one integrated platform. You can create and tailor your cloud environment to meet specific needs and upgrade it to the most appropriate setting. The setting up of a Wazuh Cloud environment is streamlined: installing and updating the Wazuh components and defining scalability are all handled by Wazuh Cloud.
+Wazuh is a free and open source platform that offers unified Security Information and Event Management (SIEM) and Extended Detection and Response (XDR) capabilities. It protects workloads across on-premises, virtualized, cloud, and containerized environments.  The Wazuh platform can be deployed in your on-premises and cloud environment or by using our Wazuh Cloud service. 
 
-We provide a free trial for you to create a cloud environment and explore the Wazuh Cloud service. 
+The Wazuh Cloud service hosts and manages all the Wazuh components in one integrated platform. You can create and tailor your cloud environment to meet your specific needs. The Wazuh Cloud service is streamlined for quick and easy deployment of Wazuh. It handles installation, scaling, and updates of the Wazuh components.
 
-Learn more about Wazuh Cloud in the below sections.
+We provide a free trial to create your cloud environment and explore the Wazuh Cloud service.
+Learn more about Wazuh Cloud in the sections below.
+
 
 .. toctree::
    :titlesonly:
