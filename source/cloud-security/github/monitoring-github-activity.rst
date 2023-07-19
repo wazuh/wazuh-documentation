@@ -38,7 +38,7 @@ Wazuh configuration
 
 Next, we will see the options we have to configure for the Wazuh integration.
 
-Proceed to configure the ``github`` module in the Wazuh manager or in the Wazuh agent. We will use the data that we took previously as the **organization name** and the **PATs**. Through the following configuration, Wazuh is ready to search for logs created by GitHub audit-log. In this case, we will search only the type of ``git`` events within an interval of ``1m``. Those logs will be only those that were created after the module was started:
+Configure the ``github`` module either in the Wazuh manager or the Wazuh agent. To do so, modify the :doc:`ossec.conf </user-manual/reference/ossec-conf/index>` configuration file. We will use the data that we took previously as the **organization name** and the **PATs**. Through the following configuration, Wazuh is ready to search for logs created by GitHub audit-log. In this case, we will search only the type of ``git`` events within an interval of ``1m``. Those logs will be only those that were created after the module was started:
 
 .. code-block:: xml
 
@@ -57,7 +57,7 @@ Proceed to configure the ``github`` module in the Wazuh manager or in the Wazuh 
         </api_parameters>
     </github>
 
-The module references can be found :ref:`here <github-module>`.
+To learn more, check the :ref:`github-module` module reference.
 
 Using the configuration mentioned above, we will see an example of monitoring GitHub activity.
 
