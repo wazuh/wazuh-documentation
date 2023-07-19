@@ -1,122 +1,119 @@
 .. Copyright (C) 2015, Wazuh, Inc.
 
 .. meta::
-   :description: PingOne is a platform that enables enterprises to give their users federated access to applications. Learn more about it in this section of our documentation.
+   :description: Jumpcloud is a Unified Device and Identity Access Management platform. Learn more about it and the administrator role in this section of the Wazuh documentation.
 
-PingOne
-=======
+Jumpcloud
+=========
 
-`PingOne for Enterprise <https://www.pingidentity.com/>`_ is an identity-as-a-service (IDaaS) and single sign-on (SSO) platform. It allows enterprises to give their users federated access to applications. In this guide, we integrate the PingOne IdP to authenticate users into the Wazuh platform.
+`Jumpcloud <https://jumpcloud.com/>`__, is a Unified Device and Identity Access Management platform that provides services such as Multi-Factor Authentication (MFA), Single Sign-On, password management, and cloud directory. In this guide, we integrate the Jumpcloud SSO to authenticate users into the Wazuh platform.
 
 There are three stages in the single sign-on integration.
 
-#. PingOne Configuration
+#. Jumpcloud Configuration
 #. Wazuh indexer configuration
 #. Wazuh dashboard configuration
 
-PingOne Configuration
----------------------
+Jumpcloud Configuration
+-----------------------
 
-#. Create an account in Ping Identity. Request a free trial if you don't have a paid license.
-#. Go to `PingOne <https://admin.pingone.com/>`_ and sign in with your Ping Identity account.
-#. Create an application in **Connections**.
+#. Create an account in Jumpcloud. Request a free trial if you don't have a paid license.
+#. Create a new user. This step can be skipped if you are just testing, you can use your Jumpcloud ``admin`` user for example.
 
-   #. Navigate to **Connections** > **Applications** > **Add Application** and give it a name. In our case, the name is ``wazuh-sso``.
+   #. Go to **User Management**, click on **Users** > **(+)** >  **Manual user entry**. Fill in the user information, activate the user and click on **save user**. 
 
-   #. Proceed to the **Choose Application Type** section, and select  **SAML Application** > **Configure**.
-
-      .. thumbnail:: /images/single-sign-on/pingone/01-proceed-to-the-choose-application-type-section.png
-          :title: Proceed to the Choose Application Type section
+      .. thumbnail:: /images/single-sign-on/jumpcloud/01-go-to-user-management-and-click-on-users.png
+          :title: Go to User Management and click on Users
           :align: center
           :width: 80%
 
-   #. Select **Manually Enter** on the **Provide App Metadata** page and add the following configuration, replacing ``<WAZUH_DASHBOARD_URL>`` with the corresponding value:
+#. Create a new group and assign the user.
 
-      - ACS URLs: ``https://<WAZUH_DASHBOARD_URL>/_opendistro/_security/saml/acs``
-      - ENTITY ID: ``wazuh-saml``
+   #. Go to **User Management** > **User Groups** > **(+)** and give a name to the group. In our case, this is ``Wazuh admins``.
 
-      .. thumbnail:: /images/single-sign-on/pingone/02-select-manually-enter-on-the-provide-app-metadata.png
-          :title: Select Manually Enter on the Provide App Metadata
+      .. thumbnail:: /images/single-sign-on/jumpcloud/02-go-to-user-management-user-groups.png
+          :title: Go to User Management - User Groups
           :align: center
           :width: 80%
 
-   #. On the **Configuration** tab, click on the edit icon and add the following information:
+      The name you give to your group will be used in the configuration. It will be our ``backend_roles`` in ``roles_mapping.yml``.
 
-      - SLO ENDPOINT: ``https://<WAZUH_DASHBOARD_URL>/``
-      - SLO BINDING: ``HTTP Redirect``
-      - ASSERTION VALIDITY DURATION: ``3600`` (for one hour token validity)
-      - VERIFICATION CERTIFICATE (OPTIONAL): Load a PUBLIC CERTIFICATE that corresponds to the PRIVATE KEY that is going to be used on the ``sp.signature_private_key_filepath`` of the ``config.yml`` configuration file on the Wazuh indexer instance. This is necessary as all the logout requests must be signed.
+   #. In the selected **User Groups**,  go to the **Users** tab, select the newly created user and Save the changes.
 
-      .. thumbnail:: /images/single-sign-on/pingone/03-on-the-configuration-tab.png
-          :title: On the Configuration tab
+      .. thumbnail:: /images/single-sign-on/jumpcloud/03-go-to-users-tab.png
+          :title: Go to the Users tab and select the newly created user 
           :align: center
           :width: 80%
 
-   #. Click on the **Attribute Mappings** tab,  select the edit icon, click on **Add** and insert the following configuration:
+#. Create a new app. Configure the SAML settings while you create the app.
 
-      ``Roles`` = ``Group Names`` 
+   #. Under the User Authentication section, go to **SSO**, select **(+)**, click on **Custom SAML App** and add a **Display Label**.
 
-      .. thumbnail:: /images/single-sign-on/pingone/04-click-on-the-attribute-mappings-tab.png
-          :title: Click on the Attribute Mappings tab
+      .. thumbnail:: /images/single-sign-on/jumpcloud/05-click-on-custom-saml.png
+          :title: Click on Custom SAML App and add a Display Label
           :align: center
-          :width: 80%
+          :width: 80%    
 
-      The ``Roles`` attribute will be used later as the ``sp.entity_id`` in the Wazuh indexer configuration file.
-
-   #. Click on the **Required** checkbox, and click on **Save**.
-
-#. Create a group and assign users.
- 
-   #. Navigate to **Identities** > **Groups**, and click on the **+** sign. Select the name of the **Group**, in this case, ``Role``.
-
-      .. thumbnail:: /images/single-sign-on/pingone/05-navigate-to-identities-groups.png
-          :title: Navigate to Identities > Groups
+      .. thumbnail:: /images/single-sign-on/jumpcloud/04-go-to-SSO.png
+          :title: Under the User Authentication section, go to SSO 
           :align: center
-          :width: 80%
+          :width: 80%    
 
-   #. To assign users, open the created **Group**, go to the **Users** tab and select **Add Users Individually**. Add all the members that must log in to the Wazuh dashboard, and click on **Save** when done.
+   #. Complete the SSO tab with the appropriate information.
 
-      .. thumbnail:: /images/single-sign-on/pingone/06-assign-users.png
-          :title: Assign users
+      - **IdP Entity ID**: ``wazuh`` (this will be the ``idp.entity_id`` in our Wazuh indexer configuration).
+      - **SP Entity ID**: ``wazuh-saml`` (this will be the ``sp.entity_id`` in our Wazuh indexer configuration).
+      - **ACS URL**: ``https://<WAZUH_DASHBOARD_URL>/_opendistro/_security/saml/acs``
+      - Check **Sign Assertion**.
+      - Check **Declare Redirect Endpoint**.
+      - Check **include group attribute** and add **Roles** as the attribute. This will be used later in the ``config.yml`` configuration file.
+
+      The rest of the options can be left as their default values.
+
+      .. thumbnail:: /images/single-sign-on/jumpcloud/06-complete-the-sso-tab.png
+          :title: Complete the SSO tab
           :align: center
-          :width: 80%
+          :width: 80%   
 
-      .. thumbnail:: /images/single-sign-on/pingone/07-assign-users.png
-          :title: Assign users
+      .. thumbnail:: /images/single-sign-on/jumpcloud/07-complete-the-sso-tab.png      
+          :title: Complete the SSO tab
           :align: center
-          :width: 80%
+          :width: 80%    
 
-#. Activate the application and note the necessary parameters.
-
-   #. Navigate to **Connections**, select **Applications**, and enable the application.
-
-      .. thumbnail:: /images/single-sign-on/pingone/08-navigate-to-connections.png
-          :title: Navigate to Connections
+      .. thumbnail:: /images/single-sign-on/jumpcloud/08-complete-the-sso-tab.png
+          :title: Complete the SSO tab
           :align: center
-          :width: 80%
-    
-   #. Take note of the following parameters from the configuration page of the application. This information will be used in the next step. 
+          :width: 80%    
 
-      - **ISSUER ID**: It'll be in the form \https://auth.pingone.com/...
-      - **IDP METADATA URL**: It’ll be in the form \https://auth.pingone.com/...
-      - ``exchange_key``: If you open IDP **IDP METADATA URL** you'll find the X509 Certificate  section, this will be used as the ``exchange_key``.
+   #. On the **User Groups** tab, select the **Group** created previously and click **save**.
 
-      .. thumbnail:: /images/single-sign-on/pingone/09-take-note-of-parameters.png
-          :title: Take note of parameters from the configuration page
+      .. thumbnail:: /images/single-sign-on/jumpcloud/09-on-the-user-groups-tab.png
+          :title: On the User Groups tab, select the Group created previously
           :align: center
-          :width: 80%
+          :width: 80% 
+
+#. Note the necessary parameters from the SAML settings of the new app.
+
+   #. Open the recently created application, go to the **SSO** tab and select **Export Metadata**. This will be our ``metadata_file``. Place the metadata file in the configuration directory of the Wazuh indexer. The path to the directory is ``/etc/wazuh-indexer/opensearch-security/``.
+
+   #. Extract the ``exchange_key`` from the ``metadata_file`` under the ``ds:X509Certificate`` tag.
+
+      .. thumbnail:: /images/single-sign-on/jumpcloud/10-go-to-the-sso-tab.png
+          :title: Go to the SSO tab and select Export Metadata
+          :align: center
+          :width: 80% 
 
 
 Wazuh indexer configuration
 ---------------------------
 
-Edit the Wazuh indexer security configuration files. We recommend that you back up these files before you carry out the configuration.
+Edit the Wazuh indexer security configuration files. We recommend that you back up these files before you carry out the configuration. 
 
-#. Place the private key file within the ``/etc/wazuh-indexer/opensearch-security/`` directory. Set the file ownership to ``wazuh-indexer`` using the following command:
+#. Place the ``metadata_jumpcloud.xml`` file within the ``/etc/wazuh-indexer/opensearch-security/`` directory. Set the file ownership to ``wazuh-indexer`` using the following command:
 
    .. code-block:: console
 
-      # chown wazuh-indexer:wazuh-indexer /etc/wazuh-indexer/opensearch-security/securityconfig/PRIVATE_KEY
+      # chown wazuh-indexer:wazuh-indexer /etc/wazuh-indexer/opensearch-security/metadata_jumpcloud.xml
 
 #. Edit the ``/etc/wazuh-indexer/opensearch-security/config.yml`` file and change the following values:
 
@@ -125,7 +122,7 @@ Edit the Wazuh indexer security configuration files. We recommend that you back 
    - Include a ``saml_auth_domain`` configuration under the ``authc`` section similar to the following:
 
    .. code-block:: yaml
-      :emphasize-lines: 7,10,22,23,25,26,27,28,29,30
+      :emphasize-lines: 7,10,22,23,25,26,27,28,29
 
           authc:
       ...
@@ -141,41 +138,41 @@ Edit the Wazuh indexer security configuration files. We recommend that you back 
                 type: "intern"
             saml_auth_domain:
               http_enabled: true
-              transport_enabled: false
+              transport_enabled: true
               order: 1
               http_authenticator:
                 type: saml
                 challenge: true
                 config:
                   idp:
-                    metadata_url: IDP METADATA URL
-                    entity_id: ISSUER ID
+                    metadata_file: “/etc/wazuh-indexer/opensearch-security/metadata_jumpcloud.xml”
+                    entity_id: wazuh
                   sp:
                     entity_id: wazuh-saml
-                    signature_private_key_filepath: /etc/wazuh-indexer/opensearch-security/PRIVATE_KEY
                     forceAuthn: true
                   kibana_url: https://<WAZUH_DASHBOARD_URL>
                   roles_key: Roles
-                  exchange_key: 'MIIJ6DLSAAbAmAJHSgIWYia.........'
+                  exchange_key: 'MIIBkTCB+wIBADBSMQs......'
               authentication_backend:
                 type: noop
 
+
+
    Ensure to change the following parameters to their corresponding value:
 
-   - ``idp.metadata_file``
-   - ``idp.entity_id``
-   - ``sp.entity_id``
-   - ``sp.signature_private_key_filepath``
-   - ``kibana_url``
-   - ``roles_key``
-   - ``exchange_key``
+      - ``idp.metadata_file``
+      - ``idp.entity_id``
+      - ``sp.entity_id``
+      - ``kibana_url``
+      - ``roles_key``
+      - ``exchange_key``
 
 #. Run the ``securityadmin`` script to load the configuration changes made in the ``config.yml`` file. 
 
    .. code-block:: console
 
       # export JAVA_HOME=/usr/share/wazuh-indexer/jdk/ && bash /usr/share/wazuh-indexer/plugins/opensearch-security/tools/securityadmin.sh -f /etc/wazuh-indexer/opensearch-security/config.yml -icl -key /etc/wazuh-indexer/certs/admin-key.pem -cert /etc/wazuh-indexer/certs/admin.pem -cacert /etc/wazuh-indexer/certs/root-ca.pem -h localhost -nhnv
-
+      
    The ``-h`` flag specifies the hostname or the IP address of the Wazuh indexer node. Note that this command uses localhost, set your Wazuh indexer address if necessary.
 
    The command output must be similar to the following:
@@ -198,9 +195,10 @@ Edit the Wazuh indexer security configuration files. We recommend that you back 
          SUCC: Configuration for 'config' created or updated
       Done with success
 
-#. Edit the ``/etc/wazuh-indexer/opensearch-security/roles_mapping.yml`` file and change the following values:
    
-   Map the Group (Role) that is in PingOne to the ``all_access`` role in Wazuh indexer:
+#. Edit the ``/etc/wazuh-indexer/opensearch-security/roles_mapping.yml`` file and change the following values:
+
+   Configure the ``roles_mapping.yml`` file to map the Jumpcloud user group to the appropriate Wazuh indexer role. In our case, we map the ``Wazuh admins`` group to the ``all_access`` role:
 
    .. code-block:: console
       :emphasize-lines: 6
@@ -210,23 +208,22 @@ Edit the Wazuh indexer security configuration files. We recommend that you back 
         hidden: false
         backend_roles:
         - "admin"
-        - "Role"
+        - "Wazuh admins"
         description: "Maps admin to all_access"
-
 
 #. Run the ``securityadmin`` script to load the configuration changes made in the ``roles_mapping.yml`` file. 
 
    .. code-block:: console
 
-      # export JAVA_HOME=/usr/share/wazuh-indexer/jdk/ && bash /usr/share/wazuh-indexer/plugins/opensearch-security/tools/securityadmin.sh -f /etc/wazuh-indexer/opensearch-security/roles_mapping.yml -icl -key /etc/wazuh-indexer/certs/admin-key.pem -cert /etc/wazuh-indexer/certs/admin.pem -cacert /etc/wazuh-indexer/certs/root-ca.pem -h localhost -nhnv
+      # export JAVA_HOME=/usr/share/wazuh-indexer/jdk/ && bash /usr/share/wazuh-indexer/plugins/opensearch-security/tools/securityadmin.sh -f /etc/wazuh-indexer/opensearch-security/roles_mapping.yml -icl -key /etc/wazuh-indexer/certs/admin-key.pem -cert /etc/wazuh-indexer/certs/admin.pem -cacert /etc/wazuh-indexer/certs/root-ca.pem -h localhost -nhnv      
 
    The ``-h`` flag specifies the hostname or the IP address of the Wazuh indexer node. Note that this command uses localhost, set your Wazuh indexer address if necessary.
-
+      
    The command output must be similar to the following:
-
+       
    .. code-block:: console
       :class: output
-            
+
       Security Admin v7
       Will connect to localhost:9200 ... done
       Connected as "CN=admin,OU=Wazuh,O=Wazuh,L=California,C=US"
@@ -276,16 +273,15 @@ Wazuh dashboard configuration
       - **Custom rules**: Click **Add new rule** to expand this field.
       - **User field**: ``backend_roles``
       - **Search operation**: ``FIND``
-      - **Value**: Assign the name you gave to your group in PingOne configuration, in our case, this is ``Role``.  
+      - **Value**: Assign the value of the Department field in OneLogin configuration. In our case, this is ``Wazuh admins``.  
 
-      .. thumbnail:: /images/single-sign-on/pingone/Wazuh-role-mapping.png
+      .. thumbnail:: /images/single-sign-on/jumpcloud/Wazuh-role-mapping.png
          :title: Create Wazuh role mapping
          :alt: Create Wazuh role mapping 
          :align: center
          :width: 80%      
 
    #. Click **Save role mapping** to save and map the backend role with Wazuh as administrator.
-
 
 #. Edit the Wazuh dashboard configuration file. Add these configurations to ``/etc/wazuh-dashboard/opensearch_dashboards.yml``. We recommend that you back up these files before you carry out the configuration.
 
@@ -294,8 +290,12 @@ Wazuh dashboard configuration
       opensearch_security.auth.type: "saml"
       server.xsrf.allowlist: ["/_opendistro/_security/saml/acs", "/_opendistro/_security/saml/logout", "/_opendistro/_security/saml/acs/idpinitiated"]
 
+
 #. Restart the Wazuh dashboard service.
 
    .. include:: /_templates/common/restart_dashboard.rst
 
-#. Test the configuration. Go to your Wazuh dashboard URL and log in with your Ping One account. 
+#. Test the configuration. Go to your Wazuh dashboard URL and log in with your Jumpcloud account. 
+
+
+

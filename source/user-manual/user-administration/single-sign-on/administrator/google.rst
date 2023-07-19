@@ -1,9 +1,7 @@
 .. Copyright (C) 2015, Wazuh, Inc.
 
 .. meta::
-   :description: Google Workspace is a collection of cloud computing, productivity and collaboration tools. Learn more about it in this section of the Wazuh documentation.
-
-.. _google:
+   :description: Google Workspace is a collection of cloud computing, productivity and collaboration tools. Learn more about it and the administrator role in this section of the Wazuh documentation.
 
 Google
 ======

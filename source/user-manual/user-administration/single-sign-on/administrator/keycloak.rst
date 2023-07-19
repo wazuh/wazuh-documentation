@@ -1,7 +1,7 @@
 .. Copyright (C) 2015, Wazuh, Inc.
 
 .. meta::
-   :description: Keycloak is an open source identity and access management tool. Learn more about it in this section of the Wazuh documentation.
+   :description: Keycloak is an open source identity and access management tool. Learn more about it and the administrator role in this section of the Wazuh documentation.
 
 Keycloak
 ========
