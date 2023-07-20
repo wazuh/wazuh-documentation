@@ -36,12 +36,12 @@ Each environment is charged monthly, according to the environment's beginning da
 Is my credit card information safe?
 -----------------------------------
 
-Your credit card information is sent securely to our billing provider, `Stripe <https://stripe.com>`_, and stored with them.
+Your credit card information is sent securely to our billing provider, `Stripe <https://stripe.com>`_, and stored there.
 
 Where can I see the next payment for an environment?
 ----------------------------------------------------
 
-Go to :doc:`See your billing cycle and history </cloud-service/account-billing/billing-history>` section to learn how to view the billing details of your environments.
+Go to the :doc:`See your billing cycle and history </cloud-service/account-billing/billing-history>` section to learn how to view the billing details of your environments.
 
 What happens to my payments if I want to upgrade or downgrade a setting?
 ------------------------------------------------------------------------
@@ -51,7 +51,7 @@ If you choose to upgrade a setting, you will need to make an immediate prorated 
 How do I view previous receipts and billing history?
 ----------------------------------------------------
 
-Go to :doc:`See your billing cycle and history </cloud-service/account-billing/billing-history>` section to learn how to download the overview of all invoices issued for your account.
+Go to the :doc:`See your billing cycle and history </cloud-service/account-billing/billing-history>` section to learn how to download an overview of all invoices issued for your account.
 
 How can I configure who receives receipts and billing notifications?
 --------------------------------------------------------------------
@@ -62,7 +62,7 @@ Go to :doc:`Update billing and operational contacts </cloud-service/account-bill
 What are the available payment methods on Wazuh Cloud?
 --------------------------------------------------------------
 
-Credit or debit card payment is supported. To learn more about Wazuh supported cards, see the certified payment processor list of card brands in the `Stripe documentation <https://stripe.com/docs/payments/cards/supported-card-brands>`_.
+Credit or debit card payments are supported. To learn more about Wazuh supported cards, see the certified payment processor list of card brands in the `Stripe documentation <https://stripe.com/docs/payments/cards/supported-card-brands>`_.
 
 
 Can I get a refund?
@@ -73,7 +73,7 @@ Charges are nonrefundable, but if you want to cease using an environment, you ca
 What is included in my Wazuh Cloud environment?
 -----------------------------------------------
 
-A full set-up of Wazuh, according to your tier, and a standard or premium support service.
+A full set-up of Wazuh, according to your setting, and a standard or premium support service.
 
 How can I request more information?
 -----------------------------------

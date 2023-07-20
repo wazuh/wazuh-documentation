@@ -23,13 +23,17 @@ To add the billing details:
 
 2. Go to the **Account** section and select **Billing**.
 
-3. In Payment method, select **Add billing information**.
+3. In Payment method section, select **Add billing information**.
 
 4. Fill in the form with your billing details.
 
 5. Click **Save** to confirm the payment method.
 
-You can stop upcoming charges by :ref:`canceling your environments <cloud_stop_charges>`. Please take into account that the cancellation cannot be undone once you do it and that all your data will be completely deleted.
+You can stop upcoming charges by :ref:`canceling your environments <cloud_stop_charges>`. 
+
+.. note::
+  
+  Please take into account that the cancellation cannot be undone once you do it and that all your data will be completely deleted.
 
 Remove your billing details
 ---------------------------

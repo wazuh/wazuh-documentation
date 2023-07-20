@@ -12,7 +12,7 @@ You can specify billing and operational contacts in addition to the primary emai
 
 .. note::
   
-  Billing and operational contacts are only for notification purposes, they cannot be used to log in to Wazuh Cloud Console. To access the Wazuh Cloud Console, you must use the primary email address for your account.
+  Billing and operational contacts are only for notification purposes, they cannot be used to log in to the Wazuh Cloud Console. To access the Wazuh Cloud Console, you must use the primary email address for your account.
 
 To update billing and operational contacts:
 
