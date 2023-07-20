@@ -27,7 +27,7 @@ To obtain an API key:
 
 .. note::
 
-  The API key has no expiration date, so it can be used indefinitely. You might also have multiple API keys for different purposes and you can revoke them when you no longer need them.
+  The API key has no expiration date, so it can be used indefinitely. You might also have multiple API keys for different purposes, and you can revoke them when you no longer need them.
 
 To revoke an API key:
 

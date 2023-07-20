@@ -68,7 +68,7 @@ Indexed data (formerly known as hot storage)
 
 It is the data available on the Wazuh WUI corresponding to the information indexed by Wazuh. This information is available as soon as Wazuh ingests and indexes the events sent by the agents, making the data searchable and analyzable.
 
-Hot storage use is calculated using the primary shards of ``wazuh-*`` indices.
+It is calculated using the primary shards of ``wazuh-*`` indices.
 
 .. _cloud_glossary_tier:
 
@@ -89,7 +89,7 @@ A setting in the context of Wazuh Cloud refers to each of the configuration opti
 Profile
 -------
 
-A profile refers to a predefined set of settings that you can choose from when configuring your Wazuh Cloud environment. We have three profiles available: Small, Medium, and Large. These profiles are designed to simplify the process by providing preconfigured settings that cater to different needs and requirements. If none of the predefined profiles meet your specific requirements, you can configure your settings individually.
+A profile refers to predefined settings that you can choose from when configuring your Wazuh Cloud environment. We have three profiles available: Small, Medium, and Large. These profiles are designed to simplify the process by providing preconfigured settings that cater to different needs and requirements. If none of the predefined profiles meet your specific requirements, you can configure your settings individually.
 
 .. _cloud_glossary_region:
 
@@ -123,4 +123,5 @@ The Wazuh Cloud API is an application programming interface used to interact wit
 
 Wazuh Cloud CLI
 ---------------
-The Wazuh Cloud Command Line Interface is a tool that enables you to interact with Wazuh Cloud using commands in your command-line shell. 
+
+The Wazuh Cloud Command Line Interface is a tool that enables you to interact with Wazuh Cloud using commands in your command-line shell.
