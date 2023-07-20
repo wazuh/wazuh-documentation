@@ -8,15 +8,15 @@
 Filename format
 ===============
 
-The files are stored in a directory structure that indicates the date and time the file was delivered to the archived data. 
+The files are stored in a directory structure that indicates the date and time the file was delivered to the archived data.
 
 The main path follows this format:
 
-``wazuh-cloud-cold-<region>/<cloud_id>/<category>[/<subcategory>]/<year>/<month>/<day>``
+``wazuh-cloud-cold-<region>/<CLOUD_ID>/<category>[/<subcategory>]/<year>/<month>/<day>``
 
 Each file has the following name:
 
-``<cloud_id>_<category>[_<subcategory>]_<YYYYMMDDTHHmm>_<UniqueString>.<format>``
+``<CLOUD_ID>_<category>[_<subcategory>]_<YYYYMMDDTHHmm>_<UniqueString>.<format>``
 
 The files include the following fields:
 

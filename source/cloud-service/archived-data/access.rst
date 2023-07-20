@@ -23,7 +23,7 @@ The following example describes the steps to follow to list the files of your ar
 
    .. code-block::
 
-      curl -XPOST https://api.cloud.wazuh.com/v2/storage/token -H "x-api-key: <your_api_key>" -H "Content-Type: application/json" --data '
+      curl -XPOST https://api.cloud.wazuh.com/v2/storage/token -H "x-api-key: <YOUR_API_KEY>" -H "Content-Type: application/json" --data '
       {
          "environment_cloud_id": "0123456789ab",
          "token_expiration": "3600"

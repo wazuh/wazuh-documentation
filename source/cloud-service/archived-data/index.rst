@@ -20,11 +20,11 @@ Your environment is configured with the following settings:
 - Indexed data size (formerly known as tier): 100 GB
 - Archived data: 1 year
 
-Assuming that Wazuh ingests 5GB of data daily, with 20% of events generating alerts, it indexes 1GB per day. In this scenario, the indexed data can retain alerts for up to 100 days (1GB per day - 100GB), but it will be rotated to maintain only 3 months of data as specified in the *indexed data time* setting. However, all information from the past year is still accessible in the archived data according to the *archived data* setting.
+Assuming that Wazuh ingests 5GB of data daily, with 20% of events generating alerts, it indexes 1GB per day. In this scenario, the indexed data can retain alerts for up to 100 days (1GB per day - 100GB), but it will be rotated to maintain only 3 months of data as specified in the indexed data time setting. However, all information from the past year is still accessible in the archived data according to the archived data setting.
 
 This configuration ensures that recent alerts are readily available in the indexed data, while older data is securely stored in the archived data for compliance and historical purposes.
 
-For more information about the archived data feature in Wazuh Cloud service, please refer to the following sections:
+For more information about the archived data feature in the Wazuh Cloud service, please refer to the following sections:
 
 .. toctree::
   :maxdepth: 1
