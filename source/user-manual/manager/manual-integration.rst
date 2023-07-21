@@ -184,7 +184,7 @@ Maltiverse
 
 `Maltiverse <https://whatis.maltiverse.com/>`__ is an open and collaborative platform for indexing and searching Indicators of Compromise (IoCs). It works as a broker for Threat intelligence sources. Maltiverse aggregates information from more than a hundred different public, private and community sources.
 
-This integration identifies IoCs in Wazuh alerts via the Maltiverse API and generates new enriched ones inserting new fields, following the threat taxonomy of the ECS standard (Elastic Common Schema).
+This integration identifies IoCs in Wazuh alerts via the Maltiverse API. It generates new alerts enriched with Maltiverse data. The Maltiverse data fields are based on the threat taxonomy of the ECS standard (Elastic Common Schema).
 
 To set up this integration, do the following.
 
