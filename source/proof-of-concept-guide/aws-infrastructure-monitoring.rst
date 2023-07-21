@@ -8,7 +8,7 @@ Monitoring AWS infrastructure
 
 This use case shows how the Wazuh module for AWS (aws-s3) enables the log data collection from different AWS sources.
 
-To learn more about monitoring AWS resources, see the :doc:`Using Wazuh to monitor AWS </amazon/index>` section of the documentation.
+To learn more about monitoring AWS resources, see the :doc:`Using Wazuh to monitor AWS </cloud-security/amazon/index>` section of the documentation.
 
 Infrastructure
 --------------
@@ -45,7 +45,7 @@ Wazuh server
 
 #. From the Wazuh dashboard, navigate through **Settings > Modules** and enable the Amazon AWS module dashboard which is disabled by default.
 
-#. Enable the Wazuh AWS module in the ``/var/ossec/etc/ossec.conf`` configuration file on the Wazuh server. Add only the AWS buckets of interest. Read our guide on how to :doc:`Configure AWS credentials </amazon/services/prerequisites/credentials>`:
+#. Enable the Wazuh AWS module in the ``/var/ossec/etc/ossec.conf`` configuration file on the Wazuh server. Add only the AWS buckets of interest. Read our guide on how to :doc:`Configure AWS credentials </cloud-security/amazon/services/prerequisites/credentials>`:
 
    .. code-block:: xml
       :emphasize-lines: 8, 9
