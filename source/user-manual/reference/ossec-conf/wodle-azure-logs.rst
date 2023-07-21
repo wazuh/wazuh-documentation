@@ -484,7 +484,7 @@ Key to the application we will use for authentication and to be able to use the 
 graph\\auth_path
 ^^^^^^^^^^^^^^^^
 
-Path of the file that contains the application identifier and the application key for authentication in order to use the AAD Graph API. Incompatible with the ``application_id`` and ``application_key`` options. Check the :doc:`credentials </azure/activity-services/prerequisites/credentials>` reference for more information about this topic.
+Path of the file that contains the application identifier and the application key for authentication in order to use the AAD Graph API. Incompatible with the ``application_id`` and ``application_key`` options. Check the :doc:`credentials </cloud-security/azure/activity-services/prerequisites/credentials>` reference for more information about this topic.
 
 +--------------------+--------------------+
 | **Default value**  | N/A                |

@@ -38,7 +38,6 @@ if ( typeof(versions) === 'undefined' ) {
     });
     $('.navbar-nav .dropdown-toggle').on('mouseleave', function(e) {
       let toElement = e.toElement || e.relatedTarget;
-      console.log(toElement);
       if ($(this).closest('.dropdown').hasClass('show')
         && toElement !== $(this).siblings()[0]) {
         e.stopPropagation();
@@ -47,8 +46,6 @@ if ( typeof(versions) === 'undefined' ) {
     });
     $('.navbar-nav .dropdown-menu').on('mouseleave', function(e) {
       let toElement = e.toElement || e.relatedTarget;
-      
-      console.log("submenu",toElement);
       if ($(this).closest('.dropdown').hasClass('show')
         && toElement !== $(this).siblings()[0]) {
         $(this).siblings().trigger('click');
@@ -72,7 +69,7 @@ const newTabNodes = [
 let oursHost = ['documentation.wazuh.com'];
 
 $('a.reference.external').each(function() {
-  let link = new URL($(this).attr('href'));
+  let link = new URL(this.href);
   if ( !oursHost.includes(link.host) ) {
     $(this).attr('target', '_blank').attr('rel', 'noreferrer noopener');
   }
