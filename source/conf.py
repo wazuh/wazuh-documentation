@@ -37,13 +37,13 @@ author = u'Wazuh, Inc.'
 copyright = u'&copy; ' + str(datetime.datetime.now().year) + u' Wazuh Inc.'
 
 # The short X.Y version
-version = '4.5'
+version = '4.6'
 is_latest_release = True
 
 # The full version, including alpha/beta/rc tags
 # Important: use a valid branch (4.0) or, preferably, tag name (v4.0.0)
-release = '4.5.2'
-api_tag = '4.5.2'
+release = '4.6.0'
+api_tag = '4.6.0'
 apiURL = 'https://raw.githubusercontent.com/wazuh/wazuh/'+api_tag+'/api/api/spec/spec.yaml'
 
 # -- General configuration ------------------------------------------------

@@ -202,7 +202,7 @@ $ossec_smtp_server
   SMTP mail server.
 
   `Default smtp.example.wazuh.com`
-  
+
   `Type String`
 
    Depends on **ossec_emailnotification**
@@ -211,7 +211,7 @@ $ossec_emailfrom
   Email from address.
 
   `Default ossecm@example.wazuh.com`
-  
+
   `Type String`
 
    Depends on **ossec_emailnotification**
@@ -231,7 +231,7 @@ $ossec_email_log_source
   `Default 'alerts.log'`
 
   `Type String`
-  
+
    Depends on **ossec_emailnotification**
 
 $ossec_email_idsname
@@ -444,7 +444,7 @@ $ossec_syscheck_scan_on_start
   Specifies if syscheck scans immediately when started.
 
   `Default yes`
-  
+
   `Type String`
 
 $ossec_syscheck_auto_ignore
@@ -524,9 +524,9 @@ $ossec_syscheck_ignore_type_2
 
 $ossec_syscheck_max_eps
   Sets the maximum event reporting throughput. Events are messages that will produce an alert.
-  
+
   `Default 100`
-  
+
   `Type String`
 
 $ossec_syscheck_process_priority
@@ -588,38 +588,38 @@ $syslog_output_level
   The minimum level of the alerts to be forwarded.
 
   `Default 2`
-  
+
   `Type Integer`
-  
+
    Depends on **syslog_output**
 
 $syslog_output_port
   The port to forward alerts to.
 
   `Default 514`
-  
+
   `Type Integer`
-  
+
    Depends on **syslog_output**
 
 $syslog_output_server
   The IP address of the syslog server.
 
   `Default undef`
-  
+
   `Type String`
-  
+
    Depends on **syslog_output**
-  
+
    Required if **syslog_output** is set to true
 
 $syslog_output_format
   Format of alert output.
 
   `Default undef`
-  
+
   `Type String`
-  
+
    Depends on **syslog_output**
 
 
@@ -883,7 +883,7 @@ $vulnerability_detector_provider_alas_enabled
 $vulnerability_detector_provider_alas_os
   Feed to update.
 
-  `Default ['amazon-linux','amazon-linux-2']`
+  `Default ['amazon-linux','amazon-linux-2','amazon-linux-2022']`
 
   `Type List`
 
@@ -942,7 +942,7 @@ $wazuh_api_port
   Port where the Wazuh API will listen.
 
   `Default 55000`
-  
+
   `Type String`
 
 
@@ -950,42 +950,42 @@ $wazuh_api_https_enabled
   Enable or disable SSL (https) in the Wazuh API.
 
   `Default true`
-  
+
   `Type String`
 
 $wazuh_api_https_key
   File with the private key.
 
   `Default server.key (in api/configuration/ssl)`
-  
+
   `Type String`
 
 $wazuh_api_https_cert
   File with the certificate.
 
   `Default server.crt (in api/configuration/ssl)`
-  
+
   `Type String`
 
 $wazuh_api_https_use_ca
   Whether to use a certificate from a Certificate Authority.
 
   `Default false`
-  
+
   `Type String`
 
 $wazuh_api_https_ca
   Certificate of the Certificate Authority (CA).
 
   `Default ca.crt (in api/configuration/ssl)`
-  
+
   `Type String`
 
 $wazuh_api_logs_level
   Sets the verbosity level of the Wazuh API logs.
 
   `Default info`
-  
+
   `Type String`
 
 $wazuh_api_logs_format
@@ -997,84 +997,84 @@ $wazuh_api_cors_enabled
   Enable or disable the use of CORS in the Wazuh API.
 
   `Default false`
-  
+
   `Type String`
 
 $wazuh_api_cors_source_route
   Sources for which the resources will be available. For example `http://client.example.org.`
 
   `Default "*"`
-  
+
   `Type String`
 
 $wazuh_api_cors_expose_headers
   Specifies which headers can be exposed as part of the response.
 
   `Default "*"`
-  
+
   `Type String`
 
 $wazuh_api_cors_allow_headers
   Specifies which HTTP headers can be used during the actual request.
 
   `Default "*"`
-  
+
   `Type String`
 
 $wazuh_api_cors_allow_credentials
   Tells browsers whether to expose the response to frontend JavaScript.
 
   `Default false`
-  
+
   `Type String`
 
 $wazuh_api_cache_enabled
   Enables or disables caching for certain API responses (currently, all `/rules` endpoints)
 
   `Default true`
-  
+
   `Type String`
 
 $wazuh_api_cache_time
   Time in seconds that the cache lasts before expiring.
 
   `Default 0.75`
-  
+
   `Type String`
 
 $wazuh_api_access_max_login_attempts
   Set a maximum number of login attempts during a specified block_time number of seconds.
 
   `Default 5`
-  
+
   `Type Integer`
 
 $wazuh_api_access_block_time
   Established period of time (in seconds) to attempt login requests. If the established number of requests (`max_login_attempts`) is exceeded within this time limit, the IP address is blocked until the end of the block time period.
 
   `Default 300`
-  
+
   `Type Integer`
 
 $wazuh_api_access_max_request_per_minute
   Establish a maximum number of requests the Wazuh API can handle per minute (does not include authentication requests). If the number of requests for a given minute is exceeded, all incoming requests (from any user) will be blocked. This feature can be disabled by setting its value to 0.
 
   `Default 300`
-  
+
   `Type Integer`
 
 $wazuh_api_drop_privileges
   Run wazuh-api process as wazuh user
 
   `Default true`
-  
+
   `Type String`
 
 $wazuh_api_experimental_features
   Enable features under development
 
   `Default false`
-  
+
   `Type String`
 
 
@@ -1087,14 +1087,14 @@ $configure_wodle_openscap
   Enables the Wodle OpenSCAP section rendering on this host. If this variable is not set to *true* the complete open-scap wodle tag will not be added to *ossec.conf*.
 
   `Default true`
-  
+
   `Type boolean`
 
 $wodle_openscap_disabled
   Disables the OpenSCAP wodle.
 
   `Default yes`
-  
+
   `Type String`
 
    Depends on **wodle_openscap_disabled**
@@ -1103,7 +1103,7 @@ $wodle_openscap_timeout
   Timeout for each evaluation.
 
   `Default 1800`
-  
+
   `Type String`
 
    Depends on **wodle_openscap_disabled**
@@ -1112,7 +1112,7 @@ $wodle_openscap_interval
   The interval between OpenSCAP executions.
 
   `Default 1d`
-  
+
   `Type String`
 
    Depends on **wodle_openscap_disabled**
@@ -1121,11 +1121,11 @@ $wodle_openscap_scan_on_start
   Run evaluation immediately when service is started.
 
   `Default yes`
-  
+
   `Type String`
 
    Depends on **wodle_openscap_disabled**
-   
+
 
 .. _ref_server_vars_ciscat:
 
@@ -1143,7 +1143,7 @@ $wodle_ciscat_disabled
   Disables the CIS-CAT wodle.
 
   `Default yes`
-  
+
   `Type String`
 
    Depends on **configure_wodle_cis_cat**
@@ -1152,7 +1152,7 @@ $wodle_ciscat_timeout
   Timeout for each evaluation. In case the execution takes longer than the specified timeout, it stops.
 
   `Default 1800`
-  
+
   `Type String`
 
    Depends on **configure_wodle_cis_cat**
@@ -1161,7 +1161,7 @@ $wodle_ciscat_interval
   The interval between CIS-CAT executions.
 
   `Default 1d`
-  
+
   `Type String`
 
    Depends on **configure_wodle_cis_cat**
@@ -1170,7 +1170,7 @@ $wodle_ciscat_scan_on_start
   Run evaluation immediately when service is started.
 
   `Default yes`
-  
+
   `Type String`
 
    Depends on **configure_wodle_cis_cat**
@@ -1179,7 +1179,7 @@ $wodle_ciscat_java_path
   Define where Java is located. If this parameter is not set, the wodle will search for the Java location in the default environment variable `$PATH`.
 
   `Default 'wodles/java'`
-  
+
   `Type String`
 
    Depends on **configure_wodle_cis_cat**
@@ -1188,7 +1188,7 @@ $wodle_ciscat_ciscat_path
   Define where CIS-CAT is located.
 
   `Default 'wodles/ciscat'`
-  
+
   `Type String`
 
    Depends on **configure_wodle_cis_cat**
@@ -1202,14 +1202,14 @@ $configure_wodle_osquery
   Enables the Wodle osquery section rendering on this host. If this variable is not set to *true*, the complete osquery wodle tag will not be added to *ossec.conf*.
 
   `Default true`
-  
+
   `Type Boolean`
 
 $wodle_osquery_disabled
   Disable the osquery wodle.
 
   `Default yes`
-  
+
   `Type String`
 
    Depends on **configure_wodle_osquery**
@@ -1218,7 +1218,7 @@ $wodle_osquery_run_daemon
   Makes the module run osqueryd as a subprocess or lets the module monitor the results log without running Osquery.
 
   `Default yes`
-  
+
   `Type String`
 
    Depends on **configure_wodle_osquery**
@@ -1227,7 +1227,7 @@ $wodle_osquery_log_path
   Full path to the results log written by Osquery.
 
   `Default '/var/log/osquery/osqueryd.results.log'`
-  
+
   `Type String`
 
    Depends on **configure_wodle_osquery**
@@ -1236,7 +1236,7 @@ $wodle_osquery_config_path
   Path to the Osquery configuration file. This path can be relative to the folder where the Wazuh agent is running.
 
   `Default '/etc/osquery/osquery.conf'`
-  
+
   `Type String`
 
    Depends on **configure_wodle_osquery**
@@ -1245,12 +1245,12 @@ $wodle_osquery_add_labels
   Add the agent labels defined as decorators.
 
   `Default yes`
-  
+
   `Type String`
 
    Depends on **configure_wodle_osquery**
 
-   
+
 
 .. _ref_server_vars_wodle_syscollector:
 
@@ -1266,56 +1266,56 @@ $wodle_syscollector_interval
   Time between system scans.
 
   `Default 1h`
-  
+
   `Type String`
 
 $wodle_syscollector_scan_on_start
   Run a system scan immediately when service is started.
 
   `Default yes`
-  
+
   `Type String`
 
 $wodle_syscollector_hardware
   Enables the hardware scan.
 
   `Default yes`
-  
+
   `Type String`
 
 $wodle_syscollector_os
   Enables the OS scan.
 
   `Default yes`
-  
+
   `Type String`
 
 $wodle_syscollector_network
   Enables the network scan.
 
   `Default yes`
-  
+
   `Type String`
 
 $wodle_syscollector_packages
   Enables the scan of the packages.
 
   `Default yes`
-  
+
   `Type String`
 
 $wodle_syscollector_ports
   Enables the ports scan.
 
   `Default yes`
-  
+
   `Type String`
 
 $wodle_syscollector_processes
   Enables the scan of the processes.
 
   `Default yes`
-  
+
   `Type String`
 
 
@@ -1442,5 +1442,3 @@ $active_response_repeated_offenders
   `Default empty`
 
 .. _ref_server_addlog:
-
-

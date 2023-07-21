@@ -1,22 +1,22 @@
 .. Copyright (C) 2015, Wazuh, Inc.
 
 .. meta::
-    :description: The operation of RBAC is based on the relationship between three components: users, roles, and policies or permissions. Learn more here. 
+    :description: The operation of RBAC is based on the relationship between four components: users, roles, rules, and policies. Learn more here.
 
 .. _api_rbac_how_it_works:
 
 How it works
 ============
 
-The operation of RBAC is based on the relationship between three components: **users**, **roles**, and **policies** or permissions. Policies are associated with roles, and each user can belong to one or more roles.
+The operation of RBAC is based on the relationship between four components: **users**, **roles**, **rules**, and **policies**. Policies and rules are associated with roles, and each user can belong to one or more roles.
 
 Since the policies are not directly related to users, it is not necessary to assign them to each user. Simply assign the user to the appropriate role. The process of updating the permissions of an entire group of users is also made easier thanks to this structure.
 
 After configuring RBAC, there will be users that can only see and do certain actions on specified resources that have previously been established. For example, it can be ensured that members of a Security-team have 'read' access to all agents, while the Sales-team has 'read' and 'modify' permissions only to agents in their department (but not delete permissions).
 
 
-Actions, resources, and effect
-------------------------------
+RBAC Policies
+-------------
 
 Policies control the Wazuh API permissions using three elements: actions, resources, and effect.
 

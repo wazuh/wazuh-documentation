@@ -772,9 +772,15 @@ Remoted
 +-----------------------------------+---------------+--------------------------------------------------------------+
 |  **remoted.merge_shared**         | Description   | Merge shared configuration to be broadcast to agents.        |
 +                                   +---------------+--------------------------------------------------------------+
-|                                   | Default Value | 1 ( Enabled )                                                |
+|                                   | Default Value | 1 (Enabled)                                                  |
 +                                   +---------------+--------------------------------------------------------------+
-|                                   | Allowed Value | 1 ( Enabled ) or 0 (Disabled)                                |
+|                                   | Allowed Value | 1 (Enabled), 0 (Disabled)                                    |
++-----------------------------------+---------------+--------------------------------------------------------------+
+|  **remoted.disk_storage**         | Description   | Store the temporary shared configuration file on disk.       |
++                                   +---------------+--------------------------------------------------------------+
+|                                   | Default Value | 0 (No, store in memory)                                      |
++                                   +---------------+--------------------------------------------------------------+
+|                                   | Allowed Value | 1 (Yes, store on disk), 0 (No, store in memory)              |
 +-----------------------------------+---------------+--------------------------------------------------------------+
 |   **remoted.shared_reload**       | Description   | Number of seconds between reloading of shared files.         |
 +                                   +---------------+--------------------------------------------------------------+

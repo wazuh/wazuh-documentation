@@ -33,6 +33,6 @@ You can also join our [users mailing list](https://groups.google.com/d/forum/waz
 
 ## Copyright & License
 
-Copyright © 2022 Wazuh, Inc.
+Copyright © 2023 Wazuh, Inc.
 
 Wazuh is free software; you can redistribute it and/or modify it under the terms of the GNU General Public License as published by the Free Software Foundation; either version 2 of the License, or (at your option) any later version.

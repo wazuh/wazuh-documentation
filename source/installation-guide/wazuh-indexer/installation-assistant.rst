@@ -42,30 +42,30 @@ Indicate your deployment configuration, create the SSL certificates to encrypt c
           # Wazuh indexer nodes
           indexer:
             - name: node-1
-              ip: <indexer-node-ip>
+              ip: "<indexer-node-ip>"
             #- name: node-2
-            #  ip: <indexer-node-ip>
+            #  ip: "<indexer-node-ip>"
             #- name: node-3
-            #  ip: <indexer-node-ip>
+            #  ip: "<indexer-node-ip>"
 
           # Wazuh server nodes
           # If there is more than one Wazuh server
           # node, each one must have a node_type
           server:
             - name: wazuh-1
-              ip: <wazuh-manager-ip>
+              ip: "<wazuh-manager-ip>"
             #  node_type: master
             #- name: wazuh-2
-            #  ip: <wazuh-manager-ip>
+            #  ip: "<wazuh-manager-ip>"
             #  node_type: worker
             #- name: wazuh-3
-            #  ip: <wazuh-manager-ip>
+            #  ip: "<wazuh-manager-ip>"
             #  node_type: worker
 
           # Wazuh dashboard nodes
           dashboard:
             - name: dashboard
-              ip: <dashboard-node-ip>
+              ip: "<dashboard-node-ip>"
 
 
 #. Run the assistant with the option ``--generate-config-files`` to generate the  Wazuh cluster key, certificates, and passwords necessary for installation. You can find these files in ``./wazuh-install-files.tar``.

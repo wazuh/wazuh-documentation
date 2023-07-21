@@ -33,24 +33,23 @@ On the other hand, the ``CloudWatch Logs`` module can process logs older than th
 
 
 Reparse
-~~~~~~~
-
-.. note::
-  Option not available for CloudWatch Logs.
+-------
 
 .. warning::
-  Using the ``reparse`` option will fetch and process every log from the starting date until the present. This process may generate duplicate alerts.
+  
+   Using the ``reparse`` option will fetch and process all the logs from the starting date until the present. This process may generate duplicate alerts.
 
-To process older logs, it's necessary to manually execute the module using the ``--reparse`` or ``-o`` option. Executing the module with this option will use the ``only_logs_after`` value provided to fetch and process every log from that date until the present. If no ``only_logs_after`` value was provided, it will use the date of the first file processed.
+To fetch and process older logs, you need to manually run the module using the ``--reparse`` option.
 
-Below there is an example of a manual execution of the module using the ``--reparse`` option on a manager, being ``/var/ossec`` the Wazuh installation path:
+The ``only_logs_after`` value sets the time for the starting point. If you don't provide an ``only_logs_after`` value, the module uses the date of the first file processed.
+
+Find an example of running the module on a manager using the ``--reparse`` option. ``/var/ossec`` is the Wazuh installation path.
 
 .. code-block:: console
 
-  # cd /var/ossec/wodles/aws
-  # ./aws-s3 -b 'wazuh-example-bucket' --reparse --only_logs_after '2021-Jun-10' --debug 2
+  # /var/ossec/wodles/aws/aws-s3 -b 'wazuh-example-bucket' --reparse --only_logs_after '2021-Jun-10' --debug 2
 
-The ``--debug 2`` parameter was used to get a verbose output since by default the script won't print anything on the terminal, and it could seem like it's not working when it could be handling a great amount of data instead.
+The ``--debug 2`` parameter gets a verbose output. This is useful to show the script is working, specially when handling a large amount of data.
 
 
 Connection configuration for retries
