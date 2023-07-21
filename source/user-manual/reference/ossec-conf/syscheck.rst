@@ -1040,6 +1040,10 @@ windows_registry
 
 List of registry entries to be monitored. One entry per line. Multiple lines may be entered to include multiple registry entries.
 
+.. versionadded:: 4.6.0
+
+   To scan paths matching a pattern, you can use the wildcard characters ``?`` and ``*``. For example ``HKEY_LOCAL_MACHINE\SOFTWARE\*``. FIM uses these wildcards during scheduled scan.
+
 +--------------------+----------------------------------------------------------------------+
 | **Default value**  | The default configuration may vary depending on the operating system.|
 +--------------------+----------------------------------------------------------------------+
@@ -1216,6 +1220,24 @@ Example:
  <windows_registry arch="both" check_sum="no">HKEY_LOCAL_MACHINE\SOFTWARE\test_key</windows_registry>
  <windows_registry arch="64bit" recursion_level="3">HKEY_LOCAL_MACHINE\SYSTEM\Setup</windows_registry>
 
+
+.. versionadded:: 4.6.0
+
+Configurations with specific registry keys take precedence over those that use wildcards. The following configuration block provides an example. The first settings line enables scanning the ``SOFTWARE`` keys of all users without checking any hashes.
+
+.. code-block:: xml
+   :emphasize-lines: 1
+
+   <windows_registry arch="both" check_sum="no">HKEY_LOCAL_MACHINE\SOFTWARE\*</windows_registry>
+   <windows_registry arch="both" check_sum="yes">HKEY_LOCAL_MACHINE\SOFTWARE\TEST_KEY</windows_registry>
+
+However, the second line does enable hash checking for ``TEST_KEY``. This is a specific key and this setting takes precedence here.
+
+.. code-block:: xml
+   :emphasize-lines: 2
+
+   <windows_registry arch="both" check_sum="no">HKEY_LOCAL_MACHINE\SOFTWARE\*</windows_registry>
+   <windows_registry arch="both" check_sum="yes">HKEY_LOCAL_MACHINE\SOFTWARE\TEST_KEY</windows_registry>
 
 .. _reference_ossec_syscheck_default_configuration:
 
