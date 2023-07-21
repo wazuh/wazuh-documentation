@@ -90,13 +90,13 @@ Enabling dashboard visualization
   
 You can activate the corresponding Security Information Management module on the Wazuh Dashboard. This module provides additional details and insights about events, as shown in the screenshots below.
 
-    .. thumbnail:: ../../images/gcp/gcp-dashboard.png
+    .. thumbnail:: /images/gcp/gcp-dashboard.png
        :title: GCP dashboard
        :alt: GCP dashboard
        :align: center
        :width: 80%
 
-    .. thumbnail:: ../../images/gcp/gcp-events.png
+    .. thumbnail:: /images/gcp/gcp-events.png
        :title: GCP events
        :alt: GCP events
        :align: center
@@ -104,7 +104,7 @@ You can activate the corresponding Security Information Management module on the
 
 To activate the **GCP** module, navigate to your Wazuh Dashboard and click on **Wazuh > Settings > Modules**. In the **Security Information Management** section, enable the **GCP** module as shown in the image below.
 
-    .. thumbnail:: ../../images/gcp/gcp-module.png
+    .. thumbnail:: /images/gcp/gcp-module.png
        :title: GCP module
        :alt: GCP module
        :align: center
