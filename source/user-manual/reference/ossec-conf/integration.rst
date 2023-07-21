@@ -15,7 +15,7 @@ integration
     <integration>
     </integration>
 
-This configures the manager to :ref:`connect Wazuh to external APIs <manual_integration>` and alerting tools such as Slack, PagerDuty, VirusTotal, Shuffle and Maltiverse.
+This configures the manager to :ref:`connect Wazuh to external APIs <manual_integration>` and alerting tools such as Slack, PagerDuty, VirusTotal, Shuffle, and Maltiverse.
 
 Options
 -------
@@ -47,7 +47,7 @@ This indicates the service to integrate with.
 hook_url
 ^^^^^^^^
 
-This is the URL that is used for communication with the software being integrated. It's mandatory for the `Slack`, `Shuffle`  and `Maltiverse` integrations.
+This is the URL that is used for communication with the software being integrated. It's mandatory for the `Slack`, `Shuffle`,  and `Maltiverse` integrations.
 
 +--------------------+----------------------------------------+
 | **Default value**  | n/a                                    |
@@ -58,7 +58,7 @@ This is the URL that is used for communication with the software being integrate
 api_key
 ^^^^^^^
 
-This is the key that you would have retrieved from the PagerDuty, VirusTotal or Maltiverse API. This is **mandatory for PagerDuty, VirusTotal and Maltiverse.**
+This is the key that you would have retrieved from the PagerDuty, VirusTotal, or Maltiverse API. This is **mandatory for PagerDuty, VirusTotal, and Maltiverse.**
 
 +--------------------+-----------------------------------------+
 | **Default value**  | n/a                                     |
@@ -124,7 +124,7 @@ This writes the alert file in the JSON format. The Integrator makes use of this 
 | **Allowed values** | json                                                      |
 +--------------------+-----------------------------------------------------------+
 
-.. note:: This option must be set to ``json`` for Slack, VirusTotal, Shuffle and Maltiverse integrations.
+.. note:: This option must be set to ``json`` for Slack, VirusTotal, Shuffle, and Maltiverse integrations.
 
 max_log
 ^^^^^^^
