@@ -23,7 +23,7 @@ redirectSameRelease = {
    '/user-manual/wazuh-dashboard/single-sign-on/onelogin.html':
      '/user-manual/user-administration/single-sign-on/onelogin.html',     
    '/user-manual/securing-wazuh/index.html':
-     '/user-manual/user-administration/password-management/index.html',
+     '/user-manual/user-administration/password-management.html',
    '/user-manual/securing-wazuh/wazuh-indexer.html':
      '/user-manual/user-administration/password-management.html',
    '/user-manual/securing-wazuh/opendistro.html':
