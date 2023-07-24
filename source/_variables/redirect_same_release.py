@@ -34,6 +34,8 @@ redirectSameRelease = {
         '/cloud-security/amazon/services/supported-services/elastic-load-balancing/nlb.html',
       '/amazon/services/supported-services/elastic-load-balancing/clb.html':
         '/cloud-security/amazon/services/supported-services/elastic-load-balancing/clb.html',
+      '/azure/activity-services/prerequisites/dependencies.html':
+        '/cloud-security/azure/activity-services/prerequisites/dependencies.html',
     },
   '4.3': {
    '/user-manual/wazuh-dashboard/single-sign-on/index.html':
@@ -51,7 +53,7 @@ redirectSameRelease = {
    '/user-manual/wazuh-dashboard/single-sign-on/onelogin.html':
      '/user-manual/user-administration/single-sign-on/onelogin.html',     
    '/user-manual/securing-wazuh/index.html':
-     '/user-manual/user-administration/password-management/index.html',
+     '/user-manual/user-administration/password-management.html',
    '/user-manual/securing-wazuh/wazuh-indexer.html':
      '/user-manual/user-administration/password-management.html',
    '/user-manual/securing-wazuh/opendistro.html':
