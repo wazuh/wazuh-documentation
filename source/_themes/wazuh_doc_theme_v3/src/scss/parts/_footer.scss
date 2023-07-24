@@ -22,9 +22,27 @@ footer {
     left: $left-sidebar-width;
   }
 
+  .nav-item svg {
+    height: 15px;
+    width: 17px;
+  }
+
   & > .container {
     @include media-max(xl) {
       flex-direction: column;
+    }
+  }
+
+  .logo-link {
+    svg {
+      display: inline-block;
+      width: 28px;
+      height: 16px;
+      @include media-max(sm) {
+        width: 46px;
+        height: 24px;
+        margin-bottom: 10px;
+      }
     }
   }
 
@@ -32,11 +50,21 @@ footer {
     @include media-min(xl){
       width: 100%;
     }
+    @include media-only(md,xl) {
+      padding-top: 15px;
+      padding-bottom: 15px;
+    }
     .social-links {
       display: flex;
-      padding: 15px 0;
-      @include media-min(sm){
+      padding: 3px 0;
+      font-size: 14px;
+      @include media-min(md){
         justify-content: flex-end;
+      }
+      @include media-max (md) {
+        justify-content: center;
+        align-items: center;
+        padding: 40px 0;
       }
       i {
         font-size: 23px;
@@ -44,14 +72,69 @@ footer {
           font-size: 1rem;
         }
       }
+      svg {
+        height: 21px;
+        width: 20px;
+        @include media-min(xl){
+          height: 21px;
+          width: 15px;
+        }
+      }
     }
-    .copyright {
-      padding: 15px;
+  }
+
+  .subfooter {
+    font-size: 14px;
+    display: flex;
+    flex-direction: row;
+    position: relative;
+    @include media-max(sm) {
+      flex-direction: column;
+      align-items: center;
+    }
+    @include media-max (md) {
+      padding-top: 40px;
+      justify-content: center; 
+      align-items: center;
+    }
+    &>div {
+      padding: 5px 15px;
+      line-height: 30px;
+      @include media-min(sm) {
+        border-left: 1px solid $color-subfooter-separator;
+        padding: 0 15px;
+      }
+      a {
+        text-decoration: none;
+      }
+      &:first-of-type,
+      &:nth-of-type(2) {
+        @include media-min(sm) {
+          border: 0;
+          padding-left: 0;
+        }
+      }
+      &:last-of-type {
+        @include media-min(sm) {
+          padding-right: 0;
+        }
+      }
     }
   }
 
   .website-links {
-    margin-bottom: 3rem;
+    margin-bottom: .5rem;
+    position: relative;
+    &::after{
+      content: "";
+      height: 0;
+      width: calc(100% - 30px);
+      position: absolute;
+      bottom: 0;
+      left: 15px;
+      right: 15px;
+      border-bottom: 1px solid $color-subfooter-separator;
+    }
     ul {
       padding-left: 0;
       margin-bottom: 0;
@@ -66,11 +149,11 @@ footer {
   }
   .footer-section {
     line-height: 32px;
+      padding-bottom: 40px;
     .footer-title {
       font-size: 17px;
       text-transform: uppercase;
-      margin-top: 28px;
-      margin-bottom: 5px;
+      margin-bottom: 0.4rem;
       font-weight: 600;
     }
   }
@@ -88,21 +171,16 @@ footer {
 .index footer {
   & > div {
     @include media-max(sm){
-      width: calc(100% - 50px);
       margin-right: auto;
       margin-left: 0;
     }
   }
   .desktop-footer.row {
-    @include media-max(xl) {
+    @include media-max(md) {
       flex-direction: column;
     }
   }
   .social-links {
-    @include media-max(xl) {
-      justify-content: flex-start;
-      order: 0;
-    }
     .nav-link {
       @include media-max(sm) {
         padding: 0 11px;
@@ -119,9 +197,15 @@ footer {
 
     .nav-link {
       color: $light-color-main-text;
+      svg {
+        fill: $light-color-main-text;
+      }
 
       &:hover {
         color: $light-color-primary-lighter;
+        svg {
+          fill: $light-color-primary-lighter;
+        }
       }
     }
     .website-links {
@@ -138,6 +222,16 @@ footer {
         fill: $light-color-main-text-extra;
       }
     }
+    .subfooter {
+      &>div {
+        a {
+            color: $light-color-main-text;
+            &:hover, &:active {
+              color: $light-color-primary;
+            }
+        }
+      }
+    }
   }
 }
 
@@ -149,9 +243,14 @@ footer {
 
     .nav-link {
       color: $dark-color-main-text;
-
+      svg {
+        fill: $dark-color-main-text;
+      }
       &:hover {
         color: $dark-color-primary-lighter;
+        svg {
+          fill: $dark-color-primary-lighter;
+        }
       }
     }
     .website-links {
@@ -166,6 +265,16 @@ footer {
     .logo-link {
       svg {
         fill: $dark-color-main-text;
+      }
+    }
+    .subfooter {
+      &>div {
+        a {
+            color: $dark-color-main-text;
+            &:hover, &:active {
+              color: $dark-color-primary;
+            }
+        }
       }
     }
   }
