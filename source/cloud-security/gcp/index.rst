@@ -28,12 +28,12 @@ Google Cloud Storage
 --------------------
 .. versionadded:: 4.3.0
 
-Wazuh can process logs stored in a Google Cloud Storage bucket using the ``gcp-buckets`` module, a highly configurable module that collects any log stored in the bucket and processes the events using the defined `threat detection rules and decoders <../user-manual/ruleset/index.html>`__.
+Wazuh can process logs stored in a Google Cloud Storage bucket using the ``gcp-buckets`` module, a highly configurable module that collects any log stored in the bucket and processes the events using the defined :doc:`threat detection rules and decoders </user-manual/ruleset/index>`.
 
 Google Pub/Sub
 --------------
 
-Wazuh can use the Google Cloud Pub/Sub messaging and ingestion service. It is widely used for event-driven systems and streaming analytics. It allows sending and receiving messages between applications. The Wazuh module uses it to fetch different kinds of events (Data access, Admin activity, System events, DNS queries, etc.) from the Google Cloud infrastructure. Once events are collected, Wazuh processes them using its `threat detection rules <../user-manual/ruleset/index.html>`__.
+Wazuh can use the Google Cloud Pub/Sub messaging and ingestion service. It is widely used for event-driven systems and streaming analytics. It allows sending and receiving messages between applications. The Wazuh module uses it to fetch different kinds of events (Data access, Admin activity, System events, DNS queries, etc.) from the Google Cloud infrastructure. Once events are collected, Wazuh processes them using its :doc:`threat detection rules </user-manual/ruleset/index>`.
 
 The Wazuh module for GCP ``gcp-pubsub`` provides the capability to monitor GCP-based services.
 
