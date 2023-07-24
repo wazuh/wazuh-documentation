@@ -348,11 +348,9 @@ Wazuh Manager
           update_interval: '1h'
           name: '"debian"'
         - enabled: 'no'
-          update_from_year: '2010'
           update_interval: '1h'
           name: '"redhat"'
         - enabled: 'no'
-          update_from_year: '2010'
           update_interval: '1h'
           name: '"nvd"'
 
