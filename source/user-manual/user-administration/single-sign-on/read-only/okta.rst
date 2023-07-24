@@ -138,7 +138,7 @@ Okta Configuration
 
    Copy the blob of the **X.509 Certificate** excluding the ``-----BEGIN CERTIFICATE-----`` and ``-----END CERTIFICATE-----`` lines. This will be used as the ``exchange_key``:
 
-     .. thumbnail:: /images/single-sign-on/okta/14-navigate-to-applications.png
+     .. thumbnail:: /images/single-sign-on/okta/read-only/14-navigate-to-applications-RO.png
         :title: Navigate to Applications - Applications - <YOUR_APP> - Sign On
         :align: center
         :width: 80%
@@ -284,7 +284,7 @@ Wazuh dashboard configuration
          :align: center
          :width: 80%      
 
-   #. Click **Save role mapping** to save and map the backend role with Wazuh as administrator.
+   #. Click **Save role mapping** to save and map the backend role with Wazuh as *read-only*.
 
 #. Edit the Wazuh dashboard configuration file. Add these configurations to ``/etc/wazuh-dashboard/opensearch_dashboards.yml``. We recommend that you back up these files before you carry out the configuration.
 

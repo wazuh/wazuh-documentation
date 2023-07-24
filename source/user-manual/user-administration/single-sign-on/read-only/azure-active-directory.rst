@@ -73,7 +73,7 @@ Azure Active Directory Configuration
 
    #. Click on **Add user/group**, assign a **user** and select the role we created in **App roles**. Click on **Assign** to save the configuration.
 
-      .. thumbnail:: /images/single-sign-on/azure-active-directory/06-click-on-add-user-group.png
+      .. thumbnail:: /images/single-sign-on/azure-active-directory/read-only/06-click-on-add-user-group-RO.png
          :title: Click on Add user/group
          :align: center
          :width: 80%
@@ -263,7 +263,7 @@ Wazuh dashboard configuration
       - **Search operation**: ``FIND``
       - **Value**: Assign the value attribute of the app role you created  in Azure Active Directory portal, in our case, this is ``wazuh-readonly``.
 
-      .. thumbnail:: /images/single-sign-on/azure-active-directory/Wazuh-role-mapping.png
+      .. thumbnail:: /images/single-sign-on/azure-active-directory/read-only/Wazuh-role-mapping-RO.png
          :title: Create Wazuh role mapping
          :alt: Create Wazuh role mapping 
          :align: center
