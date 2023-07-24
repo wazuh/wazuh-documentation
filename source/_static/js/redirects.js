@@ -70,6 +70,14 @@ removedUrls['x.y'] = [
 ];
 */
 
+/* *** RELEASE 4.5 ****/
+
+/* Pages added in x.y */
+
+newUrls['4.5'] = [
+  '/release-notes/release-4-5-0.html',
+];
+
 /* *** RELEASE 4.4 ****/
 
 /* Pages changed within the same release */
