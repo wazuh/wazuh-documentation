@@ -34,14 +34,8 @@ redirectSameRelease = {
         '/cloud-security/amazon/services/supported-services/elastic-load-balancing/nlb.html',
       '/amazon/services/supported-services/elastic-load-balancing/clb.html':
         '/cloud-security/amazon/services/supported-services/elastic-load-balancing/clb.html',
-      '/azure/activity-services/prerequisites/dependencies.html':
-        '/cloud-security/azure/activity-services/prerequisites/dependencies.html',
     },
   '4.3': {
-   '/user-manual/capabilities/vulnerability-detection/compatibility-matrix.html':
-     '/user-manual/capabilities/vulnerability-detection/how-it-works.html#compatibility-matrix',
-   '/user-manual/capabilities/vulnerability-detection/running-vu-scan.html':
-     '/user-manual/capabilities/vulnerability-detection/configuring-scans.html',
    '/user-manual/wazuh-dashboard/single-sign-on/index.html':
      '/user-manual/user-administration/single-sign-on/index.html', 
    '/user-manual/wazuh-dashboard/single-sign-on/okta.html':
