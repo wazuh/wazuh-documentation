@@ -13,10 +13,17 @@ What's new
 
 This version includes new features or improvements, such as the following:
 
+Manager
+^^^^^^^
+
+- `#17954 <https://github.com/wazuh/wazuh/pull/17954>`_ Vulnerability Detector now fetches the NVD feed from `<https://feed.wazuh.com>`_, based on the NVD API 2.0.
+
+   - The ``<update_from_year>`` option has been deprecated.
+
 RESTful API
 ^^^^^^^^^^^
 
-- `#17703 <https://github.com/wazuh/wazuh/pull/17703>`_ Changed the API integration tests to include Nginx LB logs when tests failed. 
+- `#17703 <https://github.com/wazuh/wazuh/pull/17703>`_ Modified the API integration tests to include Nginx LB logs in case of test failures.
 
 Resolved issues
 ---------------
@@ -29,7 +36,7 @@ Manager
 ==============================================================    =============
 Reference                                                         Description
 ==============================================================    =============
-`#17656 <https://github.com/wazuh/wazuh/pull/17656>`_             Fixed an error in the installation commands of the API and Framework modules when performing upgrades from sources. 
+`#17656 <https://github.com/wazuh/wazuh/pull/17656>`_             Fixed an error in the installation commands of the API and Framework modules when upgrading from sources.
 ==============================================================    =============
 
 RESTful API
@@ -38,7 +45,7 @@ RESTful API
 ==============================================================    =============
 Reference                                                         Description
 ==============================================================    =============
-`#17703 <https://github.com/wazuh/wazuh/pull/17703>`_             Fixed error in the Nginx LB entrypoint of the API integration tests. 
+`#17703 <https://github.com/wazuh/wazuh/pull/17703>`_             Fixed an error in the Nginx LB entrypoint of the API integration tests.
 ==============================================================    =============
 
 Changelogs
