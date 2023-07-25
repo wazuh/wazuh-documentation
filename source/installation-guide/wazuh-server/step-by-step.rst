@@ -54,19 +54,19 @@ Installing the Wazuh manager
 
   #. Install the Wazuh manager package. 
 
-   .. tabs::
+     .. tabs::
 
-      .. group-tab:: Yum
+        .. group-tab:: Yum
 
-         .. code-block:: console
+           .. code-block:: console
 
-            # yum -y install wazuh-manager|WAZUH_MANAGER_RPM_PKG_INSTALL|
+              # yum -y install wazuh-manager|WAZUH_MANAGER_RPM_PKG_INSTALL|
 
-      .. group-tab:: APT
+        .. group-tab:: APT
 
-			.. code-block:: console
+           .. code-block:: console
 
-  				# apt-get -y install wazuh-manager|WAZUH_MANAGER_DEB_PKG_INSTALL|
+              # apt-get -y install wazuh-manager|WAZUH_MANAGER_DEB_PKG_INSTALL|
      
   #. Enable and start the Wazuh manager service.
 
