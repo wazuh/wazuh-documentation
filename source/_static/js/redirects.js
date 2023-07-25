@@ -269,7 +269,6 @@ newUrls['4.3'] = [
 
 removedUrls['4.3'] = [
   '/amazon-machine-images/amazon-machine-images.html',
-  '/azure/dependencies.html',
   '/azure/monitoring-activity.html',
   '/azure/monitoring-services.html',
   '/deploying-with-ansible/guide/install-ansible.html',
@@ -1178,7 +1177,6 @@ redirections.push(
 /* Pages added in 4.2 */
 
 newUrls['4.2'] = [
-  '/azure/dependencies.html',
   '/proof-of-concept-guide/detect-malware-yara-integration.html',
   '/proof-of-concept-guide/poc-vulnerability-detection.html',
   '/proof-of-concept-guide/detect-remove-malware-virustotal.html',
