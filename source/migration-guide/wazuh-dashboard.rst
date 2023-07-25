@@ -51,20 +51,19 @@ To guarantee a correct operation of Wazuh, make sure to also migrate from Open D
 
 #. Install the Wazuh dashboard package.
 
-      .. tabs::
+   .. tabs::
 
-          .. group-tab:: Yum
+      .. group-tab:: Yum
 
+         .. code-block:: console
 
-              .. include:: /_templates/installations/dashboard/yum/install_dashboard.rst
+            # yum -y install wazuh-dashboard|WAZUH_DASHBOARD_RPM_PKG_INSTALL|
 
+      .. group-tab:: APT
 
-
-          .. group-tab:: APT
-
-
-              .. include:: /_templates/installations/dashboard/apt/install_dashboard.rst
-
+         .. code-block:: console
+              
+            # apt-get -y install wazuh-dashboard|WAZUH_DASHBOARD_DEB_PKG_INSTALL|
 
    .. note::
 
