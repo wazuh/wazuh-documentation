@@ -14,10 +14,13 @@ Add a clear description of how the problem has been solved.
 If your PR closes an issue, please use the "closes" keyword indicating the issue.
 -->
 ## Checks
+### Docs building
 - [ ] Compiles without warnings.
-- [ ] Uses present tense, active voice, and semi-formal registry.
-- [ ] Uses short, simple sentences.
-- [ ] Uses **bold** for user interface elements, _italics_ for key terms or emphasis, and `code` font for Bash commands, file names, REST paths, and code.
+### Code formatting and web optimization
 - [ ] Uses three spaces indentation.
 - [ ] Adds or updates meta descriptions accordingly.
 - [ ] Updates the `redirects.js` script if necessary (check [this guide](https://github.com/wazuh/wazuh-documentation/blob/master/NEW_RELEASE.md)).
+### Writing style
+- [ ] Uses present tense, active voice, and semi-formal registry.
+- [ ] Uses short, simple sentences.
+- [ ] Uses **bold** for user interface elements, _italics_ for key terms or emphasis, and `code` font for Bash commands, file names, REST paths, and code.
