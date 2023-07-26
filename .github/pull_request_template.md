@@ -16,7 +16,7 @@ If your PR closes an issue, please use the "closes" keyword indicating the issue
 ## Checks
 ### Docs building
 - [ ] Compiles without warnings.
-### Cleanup and optimization
+### Code formatting and web optimization
 - [ ] Uses three spaces indentation.
 - [ ] Adds or updates meta descriptions accordingly.
 - [ ] Updates the `redirects.js` script if necessary (check [this guide](https://github.com/wazuh/wazuh-documentation/blob/master/NEW_RELEASE.md)).
