@@ -31,7 +31,7 @@ Google Configuration
 
    #. Take note of the following parameters, as they will be used during the Wazuh indexer configuration:
 
-      - **Entity ID**: This will be used later as the ``idp.entity_id``
+      - **Entity ID**: This will be used later as the ``idp.entity_id``.
       - Select **DOWNLOAD METADATA** and place the metadata file in the ``configuration`` directory of the Wazuh indexer. The path to the directory is ``/etc/wazuh-indexer/opensearch-security/``.
 
       .. thumbnail:: /images/single-sign-on/google/02-take-note-of-the-parameters.png
@@ -52,7 +52,7 @@ Google Configuration
 
    #. Leave the remaining parameters with their default values, then select **CONTINUE**.
 
-   #. Click on **ADD MAPPING**, under Employee details, choose **Department**, under App attributes, type **Roles**, and select **FINISH**. 
+   #. Click on **ADD MAPPING**. Under Employee details, choose **Department** and under App attributes, type **Roles**. Click **FINISH**. 
 
       Google doesn't support sending the Group membership attribute as part of the SAML Assertion (as the other Identity Providers do). So in this example, we are going to use **Department** as the attribute whose value will be used as our ``roles_key`` in the Wazuh indexer configuration. In this case, the value for the **Department** attribute will be stored as ``Roles``.
 
@@ -205,10 +205,10 @@ Wazuh dashboard configuration
    #. Click **Create role**, complete the empty fields with the following parameters, and then click **Create** to complete the task.
 
       -  **Name**: Assign a name to the role.
-      -  **Cluster permissions**: **cluster_composite_ops_ro**
-      -  **Index**: *****
-      -  **Index permissions**: **read**
-      -  **Tenant permissions**: **global_tenant** and select the **Read only** option.
+      -  **Cluster permissions**: ``cluster_composite_ops_ro``
+      -  **Index**: ``*``
+      -  **Index permissions**: ``read``
+      -  **Tenant permissions**: Select ``global_tenant`` and the ``Read only`` option.
    #. Select the newly created role.
    #. Select the **Mapped users** tab and click **Manage mapping**.
    #. Under **Backend roles**, add the value of the **Department** field you created in Google Workspace and click **Map** to confirm the action. In our case, the backend role is ``wazuh-readonly``.

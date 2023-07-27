@@ -84,7 +84,7 @@ OneLogin Configuration
          :align: center
          :width: 80%   
 
-   #. Edit the parameter details. In our own case, we named the new parameter as **Roles**, then we selected the value **Department** and marked the  **Include in SAML assertion** checkbox. The rest of the app configuration is left as default. 
+   #. Edit the parameter details. In our case, we named the new parameter as **Roles**, then we selected the value **Department** and marked the  **Include in SAML assertion** checkbox. The rest of the app configuration is left as default.
 
       .. thumbnail:: /images/single-sign-on/onelogin/08-we-named-the-new-parameter-as-roles.png
          :title: We named the new parameter as Roles
@@ -236,11 +236,11 @@ Wazuh dashboard configuration
    #. Click the upper-left menu icon **☰** to open the options, select **Security**, and then **Roles** to open the roles page.
    #. Click **Create role**, complete the empty fields with the following parameters, and then click **Create** to complete the task.
 
-      -  **Name**: Assign a name to the role.
-      -  **Cluster permissions**: **cluster_composite_ops_ro**
-      -  **Index**: *****
-      - **Index permissions**: **read**
-      - **Tenant permissions**: **global_tenant** and select the **Read only** option.
+      - **Name**: Assign a name to the role.
+      - **Cluster permissions**: ``cluster_composite_ops_ro``
+      - **Index**: ``*``
+      - **Index permissions**: ``read``
+      - **Tenant permissions**: Select ``global_tenant`` and the ``Read only`` option.
    #. Select the newly created role.
    #. Select the **Mapped users** tab and click **Manage mapping**.
    #. Under **Backend roles**, add the value of the **Department** field in OneLogin configuration and click **Map** to confirm the action. In our case, the backend role is ``wazuh-readonly``.

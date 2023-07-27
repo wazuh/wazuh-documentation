@@ -52,10 +52,10 @@ Azure Active Directory Configuration
 
    #. Add the following details to your app role:
 
-      -  **Display name**: This can be any value that you want. In our case this is ``Wazuh Read Only Role``.
+      -  **Display name**: This can be any value that you want. In our case, this is ``Wazuh Read Only Role``.
       -  **Allowed member types**: Select ``Users/Groups``.
       -  **Value**: defines the name of the role. In this case ``wazuh-readonly``, which will be the backend role value to be mapped on the Wazuh dashboard.
-      -  **Description**: This can be any value that you want. In our case this is ``Wazuh Read Only Role``.
+      -  **Description**: This can be any value that you want. In our case, this is ``Wazuh Read Only Role``.
       -  **Do you want to enable this app role**: Click on the checkmark to enable the role.
 
       .. thumbnail:: /images/single-sign-on/azure-active-directory/read-only/04-create-app-roles-RO.png
@@ -222,10 +222,10 @@ Wazuh dashboard configuration
    #. Click **Create role**, complete the empty fields with the following parameters, and then click **Create** to complete the task.
 
       -  **Name**: Assign a name to the role.
-      -  **Cluster permissions**: **cluster_composite_ops_ro**
-      -  **Index**: *****
-      -  **Index permissions**: **read**
-      -  **Tenant permissions**: **global_tenant** and select the **Read only** option.
+      -  **Cluster permissions**: ``cluster_composite_ops_ro``
+      -  **Index**: ``*``
+      -  **Index permissions**: ``read``
+      -  **Tenant permissions**: Select ``global_tenant`` and the ``Read only`` option.
    #. Select the newly created role.
    #. Select the **Mapped users** tab and click **Manage mapping**.
    #. Under **Backend roles**, add the value attribute of the app role you created  in Azure Active Directory portal and click **Map** to confirm the action. In our case, the backend role is ``wazuh-readonly``.
