@@ -26,7 +26,7 @@ From Linux/Unix and macOS
 
    .. code-block:: console
 
-     # TOKEN=$(curl -u <user>:<password> -k -X POST "https://<MANAGER_IP>:55000/security/user/authenticate?raw=true")
+     # TOKEN=$(curl -u <user>:<password> -k "https://<MANAGER_IP>:55000/security/user/authenticate?raw=true")
 
    Run the command ``echo $TOKEN`` to confirm that the token was successfully generated. You should get an output like this:
 
