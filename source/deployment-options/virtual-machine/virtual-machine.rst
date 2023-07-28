@@ -25,9 +25,9 @@ Packages list
 .. |VM_AL2_64_OVA| replace:: `wazuh-|WAZUH_CURRENT_OVA|.ova <https://packages.wazuh.com/|WAZUH_CURRENT_MAJOR_OVA|/vm/wazuh-|WAZUH_CURRENT_OVA|.ova>`__ (`sha512 <https://packages.wazuh.com/|WAZUH_CURRENT_MAJOR_OVA|/checksums/wazuh/|WAZUH_CURRENT_OVA|/wazuh-|WAZUH_CURRENT_OVA|.ova.sha512>`__)
 
 +----------------+--------------+--------------+---------+--------------------------------------+
-| Distribution   | Architecture | VM Format    | Version | Package                              |
-+==============+==============+==============+=========+======================================+
-| Amazon Linux 2 |    64bits    |      OVA     |  |WAZUH_CURRENT_OVA|  | |VM_AL2_64_OVA|                  |
+|  Distribution  | Architecture | VM Format    | Version | Package                              |
++================+==============+==============+=========+======================================+
+| Amazon Linux 2 |    64bits    |      OVA     |  |WAZUH_CURRENT_OVA|  | |VM_AL2_64_OVA|                      |
 +----------------+--------------+--------------+---------+--------------------------------------+
 
 Hardware requirements
