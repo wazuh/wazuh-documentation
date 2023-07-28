@@ -48,7 +48,7 @@ function getRedirectionUrl(domain, path, anchor, versions) {
 		}
 		let SameInRelease = redirectSameRelease[release];
 		if (SameInRelease.hasOwnProperty(path)) {
-      releaseFolder = release;
+			releaseFolder = release;
 			minRelease = release;
 			[path, anchor] = SameInRelease[path].split('#');
 			changedSameRelease = true;
