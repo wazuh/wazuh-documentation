@@ -647,7 +647,22 @@ redirections.push(
       '4.3': '/container-security/docker-monitor/monitoring-containers-activity.html',
       '4.4': '/user-manual/capabilities/container-security/use-cases.html',
     },
-  );
+    {
+      'target': ['4.4=>4.3'],
+      '4.3': '/user-manual/files-backup/index.html',
+      '4.4': '/user-manual/files-backup/creating/index.html',
+    },
+    {
+      'target': ['4.3=>4.4', '4.4=>4.3'],
+      '4.3': '/user-manual/files-backup/wazuh-central-components.html',
+      '4.4': '/user-manual/files-backup/creating/wazuh-central-components.html',
+    },
+    {
+      'target': ['4.3=>4.4', '4.4=>4.3'],
+      '4.3': '/user-manual/files-backup/wazuh-agent.html',
+      '4.4': '/user-manual/files-backup/creating/wazuh-agent.html',
+    },
+);
 
 /* Pages added in 4.4 */
 
@@ -785,6 +800,12 @@ newUrls['4.4'] = [
   '/user-manual/capabilities/agentless-monitoring/visualization.html',
   '/user-manual/capabilities/agentless-monitoring/use-cases.html',  
   '/user-manual/capabilities/vulnerability-detection/querying-the-vulnerability-database.html',
+  '/user-manual/files-backup/creating/index.html',
+  '/user-manual/files-backup/creating/wazuh-central-components.html',
+  '/user-manual/files-backup/creating/wazuh-agent.html',
+  '/user-manual/files-backup/restoring/index.html',
+  '/user-manual/files-backup/restoring/wazuh-central-components.html',
+  '/user-manual/files-backup/restoring/wazuh-agent.html',
 ];
 
 /* Pages removed in 4.4 */
@@ -886,6 +907,8 @@ removedUrls['4.4'] = [
   '/container-security/docker-monitor/dependencies.html',
   '/container-security/docker-monitor/monitoring-containers-activity.html',
   '/container-security/docker-monitor/monitoring-docker-server.html',
+  '/user-manual/files-backup/wazuh-central-components.html',
+  '/user-manual/files-backup/wazuh-agent.html',
 ];
 
   /* *** RELEASE 4.3 ****/
@@ -1130,6 +1153,9 @@ newUrls['4.3'] = [
   '/user-manual/capabilities/active-response/default-active-response-scripts.html',
   '/user-manual/capabilities/active-response/how-to-configure.html',
   '/user-manual/capabilities/sec-config-assessment/use-cases.html',
+  '/user-manual/files-backup/index.html',
+  '/user-manual/files-backup/wazuh-central-components.html',
+  '/user-manual/files-backup/wazuh-agent.html',
 ];
 
 removedUrls['4.3'] = [
