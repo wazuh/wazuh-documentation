@@ -70,7 +70,16 @@ Perform the steps below to restore Wazuh agent files on a Linux endpoint.
       # sudo cp -r var/ossec/queue/rids/* /var/ossec/queue/rids/
       # chown -R wazuh:wazuh /var/ossec/queue/rids/
 
-#. Restore your custom files such as local SCA policies, active response scripts, and wodle commands if there are any and change the file permissions
+#. Restore your custom files such as local SCA policies, active response scripts, and wodle commands if there are any and change the file permissions:
+
+   .. code-block:: console
+
+      # sudo cp var/ossec/etc/<SCA_DIRECTORY>/<CUSTOM_SCA_FILE> /var/ossec/etc/<SCA_DIRECTORY>/
+      # chown wazuh:wazuh /var/ossec/etc/custom-sca-files/<CUSTOM_SCA_FILE>
+      # sudo cp var/ossec/active-response/bin/<CUSTOM_ACTIVE_RESPONSE_SCRIPT> /var/ossec/active-response/bin/
+      # chown root:wazuh /var/ossec/active-response/bin/<CUSTOM_ACTIVE_RESPONSE_SCRIPT> 
+      # sudo cp var/ossec/wodles/<CUSTOM_WODLE_SCRIPT> /var/ossec/wodles/
+      # chown root:wazuh /var/ossec/wodles/<CUSTOM_WODLE_SCRIPT>
 
 #. Start the Wazuh agent service: 
 
@@ -119,6 +128,12 @@ Perform the steps below to restore Wazuh agent files on a Windows endpoint.
    You can also copy these files using the *drag and drop* method.
 
 #. You should also restore your custom files, such as local SCA policies, active response scripts, and wodle commands, if there are any.
+
+   .. code-block:: doscon
+
+      > xcopy <SCA_DIRECTORY>/<CUSTOM_SCA_FILE> “C:\Program Files (x86)\ossec-agent\<SCA_DIRECTORY>” /H /I /K /S /X /Y
+      > xcopy active-response\bin\<CUSTOM_ACTIVE_RESPONSE_SCRIPT> "C:\Program Files (x86)\ossec-agent\active-response\bin\" /H /I /K /S /X /Y
+      > xcopy wodles\<CUSTOM_WODLE_SCRIPT> "C:\Program Files (x86)\ossec-agent\wodles\" /H /I /K /S /X /Y
 
 #. Start the Wazuh agent service by running the following command on the Command Prompt as an administrator:
 
