@@ -13,7 +13,7 @@ Wazuh provides a pre-built virtual machine image in Open Virtual Appliance (OVA)
 
 Download the `virtual appliance (OVA) <https://packages.wazuh.com/|WAZUH_CURRENT_MAJOR_OVA|/vm/wazuh-|WAZUH_CURRENT_OVA|.ova>`_, which contains the following components:
 
-    - CentOS 7
+    - Amazon Linux 2
     - Wazuh manager |WAZUH_CURRENT_OVA|
     - Wazuh indexer |WAZUH_CURRENT_OVA|
     - Filebeat-OSS |FILEBEAT_LATEST_OVA|
@@ -22,13 +22,13 @@ Download the `virtual appliance (OVA) <https://packages.wazuh.com/|WAZUH_CURRENT
 Packages list
 -------------
 
-.. |VM_CentOS7_64_OVA| replace:: `wazuh-|WAZUH_CURRENT_OVA|.ova <https://packages.wazuh.com/|WAZUH_CURRENT_MAJOR_OVA|/vm/wazuh-|WAZUH_CURRENT_OVA|.ova>`__ (`sha512 <https://packages.wazuh.com/|WAZUH_CURRENT_MAJOR_OVA|/checksums/wazuh/|WAZUH_CURRENT_OVA|/wazuh-|WAZUH_CURRENT_OVA|.ova.sha512>`__)
+.. |VM_AL2_64_OVA| replace:: `wazuh-|WAZUH_CURRENT_OVA|.ova <https://packages.wazuh.com/|WAZUH_CURRENT_MAJOR_OVA|/vm/wazuh-|WAZUH_CURRENT_OVA|.ova>`__ (`sha512 <https://packages.wazuh.com/|WAZUH_CURRENT_MAJOR_OVA|/checksums/wazuh/|WAZUH_CURRENT_OVA|/wazuh-|WAZUH_CURRENT_OVA|.ova.sha512>`__)
 
-+--------------+--------------+--------------+---------+--------------------------------------+
-| Distribution | Architecture | VM Format    | Version | Package                              |
++----------------+--------------+--------------+---------+--------------------------------------+
+| Distribution   | Architecture | VM Format    | Version | Package                              |
 +==============+==============+==============+=========+======================================+
-|   CentOS 7   |    64bits    |      OVA     |  |WAZUH_CURRENT_OVA|  | |VM_CentOS7_64_OVA|                  |
-+--------------+--------------+--------------+---------+--------------------------------------+
+| Amazon Linux 2 |    64bits    |      OVA     |  |WAZUH_CURRENT_OVA|  | |VM_AL2_64_OVA|                  |
++----------------+--------------+--------------+---------+--------------------------------------+
 
 Hardware requirements
 ---------------------
@@ -50,6 +50,14 @@ Out of the box, the Wazuh VM is configured with the following specifications:
 +------------------+----------------+--------------+--------------+
 
 However, this hardware configuration can be modified depending on the number of protected endpoints and indexed alert data. More information about requirements can be found :doc:`here </quickstart>`. 
+
+VirtualBox graphic card configuration
+-------------------------------------
+
+In case of deploying Wazuh through OVA with VirtualBox it is necessary to modify the graphic controller of the VM.
+After importing the OVA file you must select the imported VM, go to ``options`` - -> ``display`` --> ``graphic controller`` and change the ``XBoxVGA`` option to ``VMSVGA``.
+
+If you do not make this change, you will notice that the VM window will freeze, but the VM will continue to function normally.
 
 
 Import and access the virtual machine
@@ -108,7 +116,7 @@ VirtualBox time configuration
 In case of using VirtualBox, once the virtual machine is imported it may run into issues caused by time skew when VirtualBox synchronizes the time of the guest machine. To avoid this situation, enable the ``Hardware Clock in UTC Time`` option in the ``System`` tab of the virtual machine configuration.
 
 .. note::
-  By default, the network interface type is set to Bridged Adapter. The VM will attempt to obtain an IP address from the network DHCP server. Alternatively, a static IP address can be set by configuring the appropriate network files in the CentOS operating system on which the VM is based.
+  By default, the network interface type is set to Bridged Adapter. The VM will attempt to obtain an IP address from the network DHCP server. Alternatively, a static IP address can be set by configuring the appropriate network files in the Amazon Linux operating system on which the VM is based.
 
 
 Once the virtual machine is imported and running, the next step is to :doc:`deploy the Wazuh agents </installation-guide/wazuh-agent/index>` on the systems to be monitored.
