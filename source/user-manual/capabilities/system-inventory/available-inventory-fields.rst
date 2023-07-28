@@ -126,7 +126,7 @@ The ``sys_programs`` table in the inventory database stores information about th
 +------------------+-------------------------------------------+-------------------------------------------+----------------------------------------------+
 | ``description``  | Description of the package                | Generic Linux kernel headers              | Linux (deb/rpm/pacman/snap) and macOS (pkg)  |
 +------------------+-------------------------------------------+-------------------------------------------+----------------------------------------------+
-| ``location``     | Location of the package                   | C:\\Program Files\\VMware\\VMware Tools\\ | Linux (snap), Windows and  macOS (pkg)       |
+| ``location``     | Location of the package                   | C:\\Program Files\\VMware\\VMware Tools\\ | Linux (snap), Windows, and  macOS (pkg)      |
 +------------------+-------------------------------------------+-------------------------------------------+----------------------------------------------+
 | ``checksum``     | Integrity synchronization value           | 78503709147600c8e0023cf2b9995772280eee30  | All                                          |
 +------------------+-------------------------------------------+-------------------------------------------+----------------------------------------------+
