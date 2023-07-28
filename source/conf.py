@@ -639,6 +639,29 @@ custom_replacements = {
     "|WAZUH_SPLUNK_REV_CURRENT_8.1|" : "1",
 }
 
+if is_latest_release:
+    custom_replacements["|WAZUH_INDEXER_RPM_PKG_INSTALL|"] = ''
+    custom_replacements["|WAZUH_MANAGER_RPM_PKG_INSTALL|"] = ''
+    custom_replacements["|WAZUH_DASHBOARD_RPM_PKG_INSTALL|"] = ''
+    custom_replacements["|WAZUH_INDEXER_DEB_PKG_INSTALL|"] = ''
+    custom_replacements["|WAZUH_MANAGER_DEB_PKG_INSTALL|"] = ''
+    custom_replacements["|WAZUH_DASHBOARD_DEB_PKG_INSTALL|"] = ''
+    custom_replacements["|WAZUH_AGENT_RPM_PKG_INSTALL|"] = ''
+    custom_replacements["|WAZUH_AGENT_DEB_PKG_INSTALL|"] = ''
+    custom_replacements["|WAZUH_AGENT_ZYPP_PKG_INSTALL|"] = ''
+    custom_replacements["|WAZUH_AGENT_APK_PKG_INSTALL|"] = ''
+else:
+    custom_replacements["|WAZUH_INDEXER_RPM_PKG_INSTALL|"] = '-' + custom_replacements["|WAZUH_CURRENT|"] + '-' + custom_replacements["|WAZUH_INDEXER_CURRENT_REV|"]
+    custom_replacements["|WAZUH_MANAGER_RPM_PKG_INSTALL|"] = '-' + custom_replacements["|WAZUH_CURRENT|"] + '-' + custom_replacements["|WAZUH_REVISION_YUM_MANAGER_X86|"]
+    custom_replacements["|WAZUH_DASHBOARD_RPM_PKG_INSTALL|"] = '-' + custom_replacements["|WAZUH_CURRENT|"] + '-' + custom_replacements["|WAZUH_DASHBOARD_CURRENT_REV_RPM|"]
+    custom_replacements["|WAZUH_INDEXER_DEB_PKG_INSTALL|"] = '=' + custom_replacements["|WAZUH_CURRENT|"] + '-' + custom_replacements["|WAZUH_INDEXER_CURRENT_REV|"]
+    custom_replacements["|WAZUH_MANAGER_DEB_PKG_INSTALL|"] = '=' + custom_replacements["|WAZUH_CURRENT|"] + '-' + custom_replacements["|WAZUH_REVISION_DEB_MANAGER_X86|"]
+    custom_replacements["|WAZUH_DASHBOARD_DEB_PKG_INSTALL|"] = '=' + custom_replacements["|WAZUH_CURRENT|"] + '-' + custom_replacements["|WAZUH_DASHBOARD_CURRENT_REV_DEB|"]
+    custom_replacements["|WAZUH_AGENT_RPM_PKG_INSTALL|"] = '-' + custom_replacements["|WAZUH_CURRENT|"] + '-' + custom_replacements["|WAZUH_REVISION_YUM_AGENT_X86|"]
+    custom_replacements["|WAZUH_AGENT_DEB_PKG_INSTALL|"] = '=' + custom_replacements["|WAZUH_CURRENT|"] + '-' + custom_replacements["|WAZUH_REVISION_DEB_AGENT_X86|"]
+    custom_replacements["|WAZUH_AGENT_ZYPP_PKG_INSTALL|"] = '-' + custom_replacements["|WAZUH_CURRENT|"] + '-' + '1'
+    custom_replacements["|WAZUH_AGENT_APK_PKG_INSTALL|"] = '=' + custom_replacements["|WAZUH_CURRENT|"] + '-' + custom_replacements["|WAZUH_REVISION_APK_AGENT_X86_64|"]
+
 # -- Customizations ---------------------------------------------------------
 
 ## emptyTocNodes ##
