@@ -1,9 +1,7 @@
 .. Copyright (C) 2015, Wazuh, Inc.
 
 .. meta::
-   :description: OneLogin is a cloud-based identity and access management provider. Learn more about it in this section of the Wazuh documentation.
-
-.. _onelogin:
+   :description: OneLogin is a cloud-based identity and access management provider. Learn more about it and the administrator role in this section of the Wazuh documentation.
 
 OneLogin
 ========
@@ -12,9 +10,9 @@ OneLogin
 
 There are three stages in the single sign-on integration.
 
-#. OneLogin Configuration
-#. Wazuh indexer configuration
-#. Wazuh dashboard configuration
+#. `OneLogin Configuration`_
+#. `Wazuh indexer configuration_`
+#. `Wazuh dashboard configuration`_
    
 OneLogin Configuration
 ----------------------
@@ -217,7 +215,7 @@ Edit the Wazuh indexer security configuration files. We recommend that you back 
       Security Admin v7
       Will connect to localhost:9200 ... done
       Connected as "CN=admin,OU=Wazuh,O=Wazuh,L=California,C=US"
-      OpenSearch Version: 2.4.1
+      OpenSearch Version: 2.6.0
       Contacting opensearch cluster 'opensearch' and wait for YELLOW clusterstate ...
       Clustername: wazuh-cluster
       Clusterstate: GREEN
@@ -262,7 +260,7 @@ Edit the Wazuh indexer security configuration files. We recommend that you back 
       Security Admin v7
       Will connect to localhost:9200 ... done
       Connected as "CN=admin,OU=Wazuh,O=Wazuh,L=California,C=US"
-      OpenSearch Version: 2.4.1
+      OpenSearch Version: 2.6.0
       Contacting opensearch cluster 'opensearch' and wait for YELLOW clusterstate ...
       Clustername: wazuh-cluster
       Clusterstate: GREEN

@@ -1,7 +1,7 @@
 .. Copyright (C) 2015, Wazuh, Inc.
 
 .. meta::
-   :description: PingOne is a platform that enables enterprises to give their users federated access to applications. Learn more about it in this section of our documentation.
+   :description: PingOne is a platform that enables enterprises to give their users federated access to applications. Learn more about it and the administrator role in this section of our documentation.
 
 PingOne
 =======
@@ -10,9 +10,9 @@ PingOne
 
 There are three stages in the single sign-on integration.
 
-#. PingOne Configuration
-#. Wazuh indexer configuration
-#. Wazuh dashboard configuration
+#. `PingOne Configuration`_
+#. `Wazuh indexer configuration`_
+#. `Wazuh dashboard configuration`_
 
 PingOne Configuration
 ---------------------
@@ -186,7 +186,7 @@ Edit the Wazuh indexer security configuration files. We recommend that you back 
       Security Admin v7
       Will connect to localhost:9200 ... done
       Connected as "CN=admin,OU=Wazuh,O=Wazuh,L=California,C=US"
-      OpenSearch Version: 2.4.1
+      OpenSearch Version: 2.6.0
       Contacting opensearch cluster 'opensearch' and wait for YELLOW clusterstate ...
       Clustername: wazuh-cluster
       Clusterstate: GREEN
@@ -230,7 +230,7 @@ Edit the Wazuh indexer security configuration files. We recommend that you back 
       Security Admin v7
       Will connect to localhost:9200 ... done
       Connected as "CN=admin,OU=Wazuh,O=Wazuh,L=California,C=US"
-      OpenSearch Version: 2.4.1
+      OpenSearch Version: 2.6.0
       Contacting opensearch cluster 'opensearch' and wait for YELLOW clusterstate ...
       Clustername: wazuh-cluster
       Clusterstate: GREEN

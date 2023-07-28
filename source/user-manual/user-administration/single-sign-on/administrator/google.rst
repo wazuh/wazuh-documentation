@@ -1,9 +1,7 @@
 .. Copyright (C) 2015, Wazuh, Inc.
 
 .. meta::
-   :description: Google Workspace is a collection of cloud computing, productivity and collaboration tools. Learn more about it in this section of the Wazuh documentation.
-
-.. _google:
+   :description: Google Workspace is a collection of cloud computing, productivity and collaboration tools. Learn more about it and the administrator role in this section of the Wazuh documentation.
 
 Google
 ======
@@ -12,9 +10,9 @@ Google
 
 There are three stages in the single sign-on integration.
 
-#. Google Configuration
-#. Wazuh indexer configuration
-#. Wazuh dashboard configuration
+#. `Google Configuration`_
+#. `Wazuh indexer configuration`_
+#. `Wazuh dashboard configuration`_
 
 Google Configuration
 --------------------
@@ -54,7 +52,7 @@ Google Configuration
 
    #. Leave the remaining parameters with their default values, then select **CONTINUE**.
 
-   #. Click on **ADD MAPPING**, under Employee details, choose **Department**, under App attributes, type **Roles**, and select **FINISH**. 
+   #. Click on **ADD MAPPING**. Under Employee details, choose **Department** and under App attributes, type **Roles**. Click **FINISH**. 
 
       Google doesn't support sending the Group membership attribute as part of the SAML Assertion (as the other Identity Providers do). So in this example, we are going to use **Department** as the attribute whose value will be used as our ``roles_key`` in the Wazuh indexer configuration. In this case, the value for the **Department** attribute will be stored as ``Roles``.
 
@@ -185,7 +183,7 @@ Edit the Wazuh indexer security configuration files. We recommend that you back 
       Security Admin v7
       Will connect to localhost:9200 ... done
       Connected as "CN=admin,OU=Wazuh,O=Wazuh,L=California,C=US"
-      OpenSearch Version: 2.4.1
+      OpenSearch Version: 2.6.0
       Contacting opensearch cluster 'opensearch' and wait for YELLOW clusterstate ...
       Clustername: wazuh-cluster
       Clusterstate: GREEN
@@ -228,7 +226,7 @@ Edit the Wazuh indexer security configuration files. We recommend that you back 
       Security Admin v7
       Will connect to localhost:9200 ... done
       Connected as "CN=admin,OU=Wazuh,O=Wazuh,L=California,C=US"
-      OpenSearch Version: 2.4.1
+      OpenSearch Version: 2.6.0
       Contacting opensearch cluster 'opensearch' and wait for YELLOW clusterstate ...
       Clustername: wazuh-cluster
       Clusterstate: GREEN
