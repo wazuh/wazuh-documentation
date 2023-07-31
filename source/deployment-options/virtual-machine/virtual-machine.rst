@@ -23,12 +23,13 @@ Packages list
 -------------
 
 .. |VM_AL2_64_OVA| replace:: `wazuh-|WAZUH_CURRENT_OVA|.ova <https://packages.wazuh.com/|WAZUH_CURRENT_MAJOR_OVA|/vm/wazuh-|WAZUH_CURRENT_OVA|.ova>`__ (`sha512 <https://packages.wazuh.com/|WAZUH_CURRENT_MAJOR_OVA|/checksums/wazuh/|WAZUH_CURRENT_OVA|/wazuh-|WAZUH_CURRENT_OVA|.ova.sha512>`__)
+.. |WAZUH_OVA_VERSION| replace:: |WAZUH_CURRENT_OVA|
 
-+----------------+--------------+--------------+---------+--------------------------------------+
-|  Distribution  | Architecture | VM Format    | Version | Package                              |
-+================+==============+==============+=========+======================================+
-| Amazon Linux 2 |    64bits    |      OVA     |  |WAZUH_CURRENT_OVA|  | |VM_AL2_64_OVA|                      |
-+----------------+--------------+--------------+---------+--------------------------------------+
++----------------+--------------+--------------+----------------------+------------------+
+|  Distribution  | Architecture | VM Format    | Version              | Package          |
++================+==============+==============+======================+==================+
+| Amazon Linux 2 |    64-bit    |      OVA     | |WAZUH_OVA_VERSION|  | |VM_AL2_64_OVA|  |
++----------------+--------------+--------------+----------------------+------------------+
 
 Hardware requirements
 ---------------------
@@ -51,28 +52,26 @@ Out of the box, the Wazuh VM is configured with the following specifications:
 
 However, this hardware configuration can be modified depending on the number of protected endpoints and indexed alert data. More information about requirements can be found :doc:`here </quickstart>`. 
 
-VirtualBox graphic card configuration
--------------------------------------
-
-In case of deploying Wazuh through OVA with VirtualBox it is necessary to modify the graphic controller of the VM.
-After importing the OVA file you must select the imported VM, go to ``options`` - -> ``display`` --> ``graphic controller`` and change the ``XBoxVGA`` option to ``VMSVGA``.
-
-If you do not make this change, you will notice that the VM window will freeze, but the VM will continue to function normally.
-
-
 Import and access the virtual machine
 -------------------------------------
 
-First, import the OVA to the virtualization platform and start the machine.
+#. Import the OVA to the virtualization platform.
 
-Use the following user and password to access the virtual machine. You can use the virtualization platform or access it via SSH.
+#. If you're using VirtualBox, set the ``VMSVGA`` graphic controller. Setting another graphic controller freezes the VM window.
+
+   #. Select the imported VM.
+   #. Click **Settings** > **Display**
+   #. In **Graphic controller**, select the ``VMSVGA`` option.
+
+#. Start the machine.
+#. Access the virtual machine using the following user and password. You can use the virtualization platform or access it via SSH.
  
-  .. code-block:: none
+   .. code-block:: none
 
       user: wazuh-user
       password: wazuh
 
-The password for ``root`` user is ``wazuh``. However, accessing the virtual machine via SSH is only possible using the system user. SSH login with the root user is disabled.
+   The password for ``root`` user is ``wazuh``. However, accessing the virtual machine via SSH is only possible using the system user. SSH login with the root user is disabled.
 
 Access the Wazuh dashboard
 --------------------------
