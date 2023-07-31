@@ -10,9 +10,9 @@ Keycloak
 
 There are three stages in the single sign-on integration:
 
-#. KeyCloak configuration
-#. Wazuh indexer configuration
-#. Wazuh dashboard configuration
+#. `KeyCloak configuration`_
+#. `Wazuh indexer configuration`_
+#. `Wazuh dashboard configuration`_
 
 KeyCloak configuration
 ----------------------
@@ -394,6 +394,7 @@ Wazuh dashboard configuration
          :align: center
          :width: 80%      
 
+   #. Click **Save role mapping** to save and map the backend role with Wazuh as administrator.
 
 #. Edit the Wazuh dashboard configuration file. Add these configurations to ``/etc/wazuh-dashboard/opensearch_dashboards.yml``. We recommend that you back up these files before you carry out the configuration.
 

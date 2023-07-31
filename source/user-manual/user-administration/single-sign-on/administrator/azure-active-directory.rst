@@ -3,8 +3,6 @@
 .. meta::
    :description: Azure Active Directory is a cloud-based identity and access management service by Microsoft. Learn more about it in this section of the Wazuh documentation.
 
-.. _azure-active-directory:
-
 Azure Active Directory
 ======================
 
@@ -12,12 +10,13 @@ Azure Active Directory
 
 There are three stages in the single sign-on integration.
 
-#. Azure Active Directory Configuration
-#. Wazuh indexer configuration
-#. Wazuh dashboard configuration
+#. `Azure Active Directory Configuration`_
+#. `Wazuh indexer configuration`_
+#. `Wazuh dashboard configuration`_
    
- .. note::
-    You may have to request a free trial at least to complete the configuration. 
+.. note::
+
+   You may have to request a free trial at least to complete the configuration. 
 
 Azure Active Directory Configuration
 ------------------------------------

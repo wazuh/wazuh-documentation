@@ -3,8 +3,6 @@
 .. meta::
    :description: OneLogin is a cloud-based identity and access management provider. Learn more about it in this section of the Wazuh documentation.
 
-.. _onelogin:
-
 OneLogin
 ========
 
@@ -12,9 +10,9 @@ OneLogin
 
 There are three stages in the single sign-on integration.
 
-#. OneLogin Configuration
-#. Wazuh indexer configuration
-#. Wazuh dashboard configuration
+#. `OneLogin Configuration`_
+#. `Wazuh indexer configuration`_
+#. `Wazuh dashboard configuration`_
    
 OneLogin Configuration
 ----------------------
@@ -337,6 +335,18 @@ Wazuh dashboard configuration
                path: `/logout`,
                validate: false
          ...
+
+#. Ensure that ``run_as`` is set to false in the ``/usr/share/wazuh-dashboard/data/wazuh/config/wazuh.yml`` configuration file.
+
+   .. code-block:: yaml
+
+      hosts:
+        - default:
+            url: https://localhost
+            port: 55000
+            username: wazuh-wui
+            password: "6TMbkZhBR......"
+            run_as: false           
 
 #. Restart the Wazuh dashboard service.
 

@@ -3,8 +3,6 @@
 .. meta::
    :description: Okta Inc. provides technologies that enable secure user authentication into applications. Learn more about it in this section of the Wazuh documentation.
 
-.. _okta:
-
 Okta
 ====
 
@@ -12,9 +10,9 @@ Okta
 
 There are three stages in the single sign-on integration.
 
-#. Okta Configuration
-#. Wazuh indexer configuration
-#. Wazuh dashboard configuration
+#. `Okta Configuration`_
+#. `Wazuh indexer configuration`_
+#. `Wazuh dashboard configuration`_
 
 Okta Configuration
 ------------------

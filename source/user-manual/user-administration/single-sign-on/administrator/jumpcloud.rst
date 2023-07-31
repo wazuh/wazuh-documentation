@@ -3,8 +3,6 @@
 .. meta::
    :description: Jumpcloud is a Unified Device and Identity Access Management platform. Learn more about it in this section of the Wazuh documentation.
 
-.. _jumpcloud:
-
 Jumpcloud
 =========
 
@@ -12,9 +10,9 @@ Jumpcloud
 
 There are three stages in the single sign-on integration.
 
-#. Jumpcloud Configuration
-#. Wazuh indexer configuration
-#. Wazuh dashboard configuration
+#. `Jumpcloud Configuration`_
+#. `Wazuh indexer configuration`_
+#. `Wazuh dashboard configuration`_
 
 Jumpcloud Configuration
 -----------------------
