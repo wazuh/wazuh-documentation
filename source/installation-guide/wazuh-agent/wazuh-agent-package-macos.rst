@@ -26,13 +26,6 @@ The agent runs on the endpoint you want to monitor and communicates with the Waz
     
                   # echo "WAZUH_MANAGER='10.0.0.2'" > /tmp/wazuh_envs && installer -pkg wazuh-agent-|WAZUH_CURRENT_OSX|-|WAZUH_REVISION_OSX|.pkg -target /
     
-                .. note:: For version 4.4.2 and earlier, run the following command instead. Replace ``<WAZUH.VERSION-REV>`` with your package version, such as ``4.4.2-1``.
-                   :class: not-long
-
-                   .. code-block:: console
-    
-                      # launchctl setenv WAZUH_MANAGER "10.0.0.2" && installer -pkg wazuh-agent-<WAZUH.VERSION-REV>.pkg -target /
-
                 For additional deployment options such as agent name, agent group, and registration password, see the :doc:`Deployment variables for macOS </user-manual/deployment-variables/deployment-variables-macos>` section.
                 
                 .. note:: Alternatively, if you want to install an agent without registering it, omit the deployment variables. To learn more about the different registration methods, see the :doc:`Wazuh agent enrollment </user-manual/agent-enrollment/index>` section.
