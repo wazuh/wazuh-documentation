@@ -15,7 +15,7 @@ Restore your Wazuh agent installation by following these steps.
 Linux
 -----
 
-You need to have a new installation of the Wazuh agent on a Linux endpoint. Follow :doc:`/installation-guide/wazuh-agent/wazuh-agent-package-linux` guide to perform a fresh Wazuh agent installation.
+You need to have a new installation of the Wazuh agent on a Linux endpoint. Follow the :doc:`/installation-guide/wazuh-agent/wazuh-agent-package-linux` guide to perform a fresh Wazuh agent installation.
 
 Preparing the data restoration
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
@@ -40,10 +40,10 @@ Preparing the data restoration
       # tar -xzvf wazuh_agent.tar.gz
       # cd ~/wazuh_files_backup/<DATE_TIME>
 
-Restoring Wazuh agent files on Linux endpoints
+Restoring Wazuh agent files
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-Perform the steps below to restore Wazuh agent files on a Linux endpoint.
+Perform the steps below to restore the Wazuh agent files on a Linux endpoint.
 
 #. Stop the Wazuh agent to prevent any modification to the Wazuh agent files during the restore process:
 
@@ -70,7 +70,7 @@ Perform the steps below to restore Wazuh agent files on a Linux endpoint.
       # sudo cp -r var/ossec/queue/rids/* /var/ossec/queue/rids/
       # chown -R wazuh:wazuh /var/ossec/queue/rids/
 
-#. Restore your custom files such as local SCA policies, active response scripts, and wodle commands if there are any and change the file permissions:
+#. Restore your custom files such as local SCA policies, active response scripts, and wodle commands if there are any and change the file permissions. Adapt the following command accordingly. 
 
    .. code-block:: console
 
@@ -90,7 +90,7 @@ Perform the steps below to restore Wazuh agent files on a Linux endpoint.
 Windows
 -------
 
-You need to have a new installation of the Wazuh agent on a Windows endpoint. Follow :doc:`/installation-guide/wazuh-agent/wazuh-agent-package-windows` guide to perform a fresh Wazuh agent installation.
+You need to have a new installation of the Wazuh agent on a Windows endpoint. Follow the :doc:`/installation-guide/wazuh-agent/wazuh-agent-package-windows` guide to perform a fresh Wazuh agent installation.
 
 Preparing the data restoration
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
@@ -99,10 +99,10 @@ Preparing the data restoration
 
 #. Decompress the file using `7-Zip <https://www.7-zip.org/>`__ or any of your preferred tools.
 
-Restoring Wazuh agent files on Windows endpoints
+Restoring Wazuh agent files
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-Perform the steps below to restore Wazuh agent files on a Windows endpoint.
+Perform the steps below to restore the Wazuh agent files on a Windows endpoint.
 
 #. Stop the Wazuh agent to prevent any modification to the Wazuh agent files during the restore process by running the following command on the Command Prompt as an administrator:
 
@@ -127,7 +127,7 @@ Perform the steps below to restore Wazuh agent files on a Windows endpoint.
 
    You can also copy these files using the *drag and drop* method.
 
-#. You should also restore your custom files, such as local SCA policies, active response scripts, and wodle commands, if there are any.
+#. Restore your custom files, such as local SCA policies, active response scripts, and wodle commands, if there are any. Adapt the following command accordingly.
 
    .. code-block:: doscon
 
@@ -144,7 +144,7 @@ Perform the steps below to restore Wazuh agent files on a Windows endpoint.
 macOS
 -----
 
-You need to have a new installation of the Wazuh agent on a macOS endpoint. Follow :doc:`/installation-guide/wazuh-agent/wazuh-agent-package-macos` guide to perform a fresh Wazuh agent installation.
+You need to have a new installation of the Wazuh agent on a macOS endpoint. Follow the :doc:`/installation-guide/wazuh-agent/wazuh-agent-package-macos` guide to perform a fresh Wazuh agent installation.
 
 Preparing the data restoration
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
@@ -169,7 +169,7 @@ Preparing the data restoration
       # tar -xzvf wazuh_agent.tar.gz
       # cd wazuh_files_backup/<DATE_TIME>
 
-Restoring Wazuh agent files on macOS endpoints
+Restoring Wazuh agent files
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 Perform the steps below to restore Wazuh agent files on a macOS endpoint.

@@ -6,18 +6,18 @@
 Wazuh central components
 ========================
 
-Perform the following actions to restore Wazuh central component data, depending on your deployment type.
+Perform the following actions to restore the Wazuh central components data, depending on your deployment type.
 
 .. note::
    
-   For a multi node setup, there should be a backup file for each node within the cluster. You need root user privileges to execute the commands below.
+   For a multi-node setup, there should be a backup file for each node within the cluster. You need root user privileges to execute the commands below.
 
-Single node data restoration
+Single-node data restoration
 ----------------------------
 
 You need to have a new installation of Wazuh. Follow the :doc:`/quickstart` guide to perform a fresh installation of the Wazuh central components on a new server.
 
-The actions below will guide you through the data restoration process for a single node deployment.
+The actions below will guide you through the data restoration process for a single-node deployment.
 
 Preparing the data restoration
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
@@ -28,7 +28,7 @@ Preparing the data restoration
 
       # tar -cvzf wazuh_central_components.tar.gz ~/wazuh_files_backup/
 
-#. Move the compressed file to the root / directory of your node:
+#. Move the compressed file to the root ``/`` directory of your node:
 
    .. code-block:: console
 
@@ -45,7 +45,7 @@ Preparing the data restoration
 Restoring Wazuh indexer files
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-Perform the following steps to restore Wazuh indexer files on the new server.
+Perform the following steps to restore the Wazuh indexer files on the new server.
 
 #. Stop the Wazuh indexer to prevent any modifications to the Wazuh indexer files during the restoration process:
 
@@ -82,7 +82,7 @@ Perform the following steps to restore Wazuh indexer files on the new server.
 Restoring Wazuh server files
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-Perform the following steps to restore Wazuh server files on the new server.
+Perform the following steps to restore the Wazuh server files on the new server.
 
 #. Stop the Wazuh server to prevent any modification to the Wazuh server files during the restoration process:
 
@@ -418,7 +418,7 @@ Verifying data restoration
 
 Using the Wazuh dashboard, navigate to the **Security events**, **Integrity monitoring**, **Vulnerabilities**, and any other modules to see if the data is restored successfully.
 
-Multi node data restoration
+Multi-node data restoration
 ---------------------------
 
 Perform the actions below to restore the Wazuh central components on their respective Wazuh nodes.
@@ -496,7 +496,7 @@ Perform the following steps on each Wazuh indexer node.
 Restoring Wazuh server files
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-You need to have a new installation of a Wazuh server. Follow the :doc:`Wazuh server - Installation guide </installation-guide/wazuh-server/index>` to perform a multi node Wazuh server installation. There will be at least one master node and one worker node as node types. Perform the steps below, considering your node type.
+You need to have a new installation of a Wazuh server. Follow the :doc:`Wazuh server - Installation guide </installation-guide/wazuh-server/index>` to perform a multi-node Wazuh server installation. There will be at least one master node and one worker node as node types. Perform the steps below, considering your node type.
 
 #. Stop the Wazuh manager and Filebeat to prevent any modification to the Wazuh server files during the restore process:
 
