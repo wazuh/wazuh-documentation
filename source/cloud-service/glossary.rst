@@ -68,7 +68,7 @@ Indexed data (formerly known as hot storage)
 
 It is the data available on the Wazuh WUI corresponding to the information indexed by Wazuh. This information is available as soon as Wazuh ingests and indexes the events sent by the agents, making the data searchable and analyzable.
 
-It is calculated using the primary shards of ``wazuh-*`` indices.
+Indexed data is calculated using the primary shards of ``wazuh-*`` indices.
 
 .. _cloud_glossary_tier:
 

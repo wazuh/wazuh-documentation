@@ -8,9 +8,9 @@
 Forward syslog events
 =====================
 
-Wazuh agents can run on a wide range of operating systems, but when it is not possible due to software incompatibilities or business restrictions, you can forward Syslog events to your environment. This is a common use case for network devices such as routers or firewalls.
+Wazuh agents can run on a wide range of operating systems, but when it is not possible due to software incompatibilities or business restrictions, you can forward syslog events to your environment. This is a common use case for network devices such as routers or firewalls.
 
-Since every communication with your environment is performed through the Wazuh agent, you must configure the agent to forward the Syslog events. To do so, you have these options:
+Since every communication with your environment is performed through the Wazuh agent, you must configure the agent to forward the syslog events. To do so, you have these options:
 
 - `Rsyslog on Linux`_
 
@@ -49,7 +49,7 @@ Use rsyslog on a Linux endpoint with a Wazuh agent to log to a file and send tho
 
    To perform the following steps, make sure to replace <FILE_NAME.log> with the name chosen for this log.
 
-#. Deploy a Wazuh agent on the same endpoint with Rsyslog installed.
+#. Deploy a Wazuh agent on the same endpoint with rsyslog installed.
 
 #. Configure the agent to read the syslog output file by editing the ``/var/ossec/etc/ossec.conf`` file.
 
