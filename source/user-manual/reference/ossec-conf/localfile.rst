@@ -299,6 +299,8 @@ Target specifies the name of the socket where the output will be redirected. The
 | **Allowed values** | any defined socket             |
 +--------------------+--------------------------------+
 
+.. _log_format:
+
 log_format
 ^^^^^^^^^^
 
