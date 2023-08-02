@@ -8,7 +8,7 @@
 Integration with external APIs
 ==============================
 
-The *Integrator* daemon allows Wazuh to connect to external APIs and alerting tools such as Slack, PagerDuty, VirusTotal, and Shuffle.
+The *Integrator* daemon allows Wazuh to connect to external APIs and alerting tools such as Slack, PagerDuty, VirusTotal, Shuffle, and Maltiverse.
 
 Configuration
 -------------
@@ -19,9 +19,9 @@ The integrations are configured on the Wazuh manager ``ossec.conf`` file. You ca
 
   <integration>
     <name> </name>
-    <hook_url> </hook_url> <!-- Required for Slack and Shuffle -->
-    <api_key> </api_key> <!-- Required for PagerDuty and VirusTotal -->
-    <alert_format>json</alert_format> <!-- Required for Slack, VirusTotal and Shuffle -->
+    <hook_url> </hook_url> <!-- Required for Slack, Shuffle, and Maltiverse -->
+    <api_key> </api_key> <!-- Required for PagerDuty, VirusTotal, and Maltiverse -->
+    <alert_format>json</alert_format> <!-- Required for Slack, VirusTotal, Shuffle, and Maltiverse -->
 
     <!-- Optional filters -->
     <rule_id> </rule_id>
@@ -178,6 +178,43 @@ Once the configuration is complete, alerts start showing in the email inbox.
    :alt: Shuffle email alert
    :align: center
    :width: 80%
+
+Maltiverse
+----------
+
+`Maltiverse <https://whatis.maltiverse.com/>`__ is an open and collaborative platform for indexing and searching Indicators of Compromise (IoCs). It works as a broker for Threat intelligence sources. Maltiverse aggregates information from more than a hundred different public, private and community sources.
+
+This integration identifies IoCs in Wazuh alerts via the Maltiverse API. It generates new alerts enriched with Maltiverse data. The Maltiverse data fields are based on the threat taxonomy of the ECS standard (Elastic Common Schema).
+
+To set up this integration, do the following.
+
+#. Get your API key from the `Maltiverse <https://www.maltiverse.com>`__ page.
+
+#. Edit ``/var/ossec/etc/ossec.conf`` in the Wazuh server and include a configuration block such as the following. Replace ``API_KEY`` with your Maltiverse API key. The rule level filter is optional. You can remove it or set another level value for the integration.
+
+   .. code-block:: xml
+      :emphasize-lines: 5
+
+      <integration>
+         <name>custom-maltiverse</name>
+         <hook_url>https://api.maltiverse.com</hook_url>
+         <level>3</level>
+         <api_key>API_KEY</api_key> <!-- Replace with your Maltiverse API key --> 
+         <alert_format>json</alert_format>
+      </integration>
+
+#. Restart the Wazuh manager to apply the changes.
+
+   .. include:: /_templates/common/restart_manager.rst
+
+Once the configuration is complete, enriched alerts start showing in the Wazuh Dashboard if applicable.
+
+.. thumbnail:: /images/manual/integration/maltiverse.png
+   :title: Maltiverse alert
+   :alt: Maltiverse alert
+   :align: center
+   :width: 80%
+
 
 Custom integration
 ------------------
