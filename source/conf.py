@@ -23,6 +23,8 @@ except ImportError:
     atexit.register(print,"\nThe module jsmin is not available. Please, make sure you install all the required modules listed in requirements.txt.")
     sys.exit()
 from requests.utils import requote_uri
+sys.path.append(os.path.abspath("_variables"))
+from redirect_same_release import redirectSameRelease
 
 # If extensions (or modules to document with autodoc) are in another directory,
 # add these directories to sys.path here. If the directory is relative to the
@@ -59,6 +61,7 @@ extensions = [
     'sphinx.ext.extlinks', # Sphinx built-in extension
     'sphinx_tabs.tabs',
     'wazuh-doc-images', # Custom extension
+    'sphinx_reredirects'
 ]
 
 # Add any paths that contain templates here, relative to this directory.
@@ -664,6 +667,22 @@ else:
 
 # -- Customizations ---------------------------------------------------------
 
+## Redirects within the same release ##
+
+def transformReredirect (absolutePaths):
+    formattedList = {}
+    for source in absolutePaths:
+        # Format source
+        formattedSource = source[1:].split('.html')[0]
+        # Format path
+        formattedPath = os.path.relpath(absolutePaths[source], source).replace('\\', '/').replace('../', '', 1)
+        formattedList[formattedSource] = formattedPath
+    return formattedList
+
+redirects = transformReredirect(redirectSameRelease[version])
+
+redirectSameRelease = json.dumps(redirectSameRelease)
+
 ## emptyTocNodes ##
 emptyTocNodes = json.dumps([
     'amazon/configuration/index',
@@ -969,6 +988,7 @@ html_context = {
     "apiURL": apiURL,
     "compilation_ts": compilation_time,
     "empty_toc_nodes": emptyTocNodes,
+    "redirectSameRelease": redirectSameRelease,
     "is_latest_release": is_latest_release
 }
 sphinx_tabs_nowarn = True
