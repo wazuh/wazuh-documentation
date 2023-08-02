@@ -180,6 +180,7 @@ The attributes below are optional.
 .. note::
   If the log rotates while ``wazuh-logcollector`` is stopped and ``only-future-events`` is set to ``no``, it will start reading from the beginning of the log. 
 
+.. _query:
 
 query
 ^^^^^
