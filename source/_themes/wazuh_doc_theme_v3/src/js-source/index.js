@@ -40,8 +40,11 @@ if ( $('.index') ) {
         const linkText = foundNodes.text();
         const parent = foundNodes.parent();
         if ( parent.hasClass('toctree-l1') ) {
+          let spanTitle = document.createElement('span');
+          spanTitle.className = 'section-title';
+          $(spanTitle).text(linkText).attr('data-href', emptyTocNodes[i] + '.html');
           foundNodes.remove();
-          parent.prepend('<span class="section-title" data-href="' + emptyTocNodes[i] + '.html">' + linkText + '</span>');
+          parent.prepend(spanTitle);
         }
       }
     }

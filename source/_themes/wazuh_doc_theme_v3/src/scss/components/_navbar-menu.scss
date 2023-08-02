@@ -5,7 +5,36 @@
   menu in the top bar).
 ----------------------------------------------------------------------------- */
 
+
+header {
+
+  .navbar-nav .nav-item {
+    .nav-link {
+      padding: 24px 10px;
+      font-weight: 500;
+    }
+  }
+}
+
 .navbar-nav {
+  .nav-item {
+    &.show {
+      svg {
+        transform: rotate(180deg);
+      }
+    }
+    svg {
+      width: 12px;
+      height: 12px;
+      transform: rotate(0);
+      position: relative;
+      @include media-max(lg) {
+        left: 8px;
+        bottom: -1px;
+      }
+    }
+  }
+
   .nav-link {
     padding: 0 10px;
     font-size: 17px;
@@ -24,24 +53,9 @@
       padding-right: 27px;
       &[aria-expanded="true"] {
         text-decoration: none;
-
-        &::after {
-          transition: transform ease-in .1s;
-          transform: rotateX(180deg);
-        }
       }
       &::after {
-        position: absolute;
-        right: 8px;
-        bottom: .5rem;
-        display: inline-block;
-        width: 13px;
-        height: 8px;
-        content: "";
-        background-position: center;
-        background-size: contain;
-        border: none;
-        transition: transform ease-in .1s;
+        content: none;
       }
     }
   }
@@ -51,6 +65,8 @@
     margin-top: 20px;
     border: 1px solid;
     border-radius: 10px;
+    position: absolute;
+    top: -24px!important;
     &::before {
       position: absolute;
       top: -9px;
@@ -65,6 +81,7 @@
     .dropdown-item {
       padding: .9rem .75rem;
       font-size: 17px;
+      font-weight: 500;
     }
   }
 }
@@ -83,12 +100,12 @@
       &.dropdown-toggle {
         &[aria-expanded="true"],
         &:hover {
-          &::after {
-            background: url("#{$ico-path}svg-icons.svg#menu-chevron-blue-lt");
+          svg {
+            fill: $light-color-primary;
           }
         }
-        &::after {
-          background: url("#{$ico-path}svg-icons.svg#menu-chevron-default-lt");
+        svg {
+          fill: $light-color-main-text;
         }
       }
     }
@@ -124,12 +141,12 @@
       &.dropdown-toggle {
         &[aria-expanded="true"],
         &:hover {
-          &::after {
-            background: url("#{$ico-path}svg-icons.svg#menu-chevron-blue-dt");
+          svg {
+            fill: $dark-color-primary;
           }
         }
-        &::after {
-          background: url("#{$ico-path}svg-icons.svg#menu-chevron-default-dt");
+        svg {
+          fill: $dark-color-main-text;
         }
       }
     }
