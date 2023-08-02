@@ -75,6 +75,9 @@ if ( $('.search') ) {
                   if ( DOCUMENTATION_OPTIONS.URL_ROOT !== "./" ) {
                     linkUrl = DOCUMENTATION_OPTIONS.URL_ROOT + path;
                   }
+                  if ( linkUrl[linkUrl.length-1] == '/') {
+                    linkUrl = linkUrl+'index.html';
+                  }
                   
                   // Title
                   titleLink = $('<a/>').attr('href', linkUrl + highlightstring)
@@ -224,7 +227,10 @@ function createResultBreadcrumb(resultLinkNode) {
   
   const a = $(document.createElement('a'));
   const homeIcon = $('#home-icon svg');
-  a.attr('href', DOCUMENTATION_OPTIONS.URL_ROOT).append(homeIcon.clone(true)).addClass('breadcrumb-link');
+  let homeHerf = DOCUMENTATION_OPTIONS.URL_ROOT;
+  homeHerf = ( homeHerf[homeHerf.length-1] === '/') ? homeHerf + 'index.html' : homeHerf + '/index.html';
+
+  a.attr('href', homeHerf).append(homeIcon.clone(true)).addClass('breadcrumb-link');
   breadcrumb.prepend(a);
   return breadcrumb;
 }

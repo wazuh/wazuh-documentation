@@ -217,8 +217,6 @@
       {{- inline_js() }}
     {%- endif %}
     {{- fonts() }}
-    <link rel="preload" href="{{ url_root }}_static/fonts/fa-solid-900.woff2" as="font" type="font/woff2" crossorigin>
-    <link rel="preload" href="{{ url_root }}_static/fonts/fa-brands-400.woff2" as="font" type="font/woff2" crossorigin>
     {% endblock preload -%}
     
     {%- block linktags %}
@@ -242,11 +240,11 @@
     {% endblock css %}
     
     {#- FAVICON -#}
-    <link rel="mask-icon" href="{{ pathto('_static/images/favicon.svg', 1) }}" color="#000000">
-    <link rel="icon" href="{{ pathto('_static/images/favicon.png', 1) }}" media="(prefers-color-scheme:no-preference)" sizes="any" type="image/png"/>
-    <link rel="icon" href="{{ pathto('_static/images/dark-favicon.png', 1) }}" media="(prefers-color-scheme:dark)" sizes="any" type="image/png"/>
-    <link rel="icon" href="{{ pathto('_static/images/favicon.png', 1) }}" media="(prefers-color-scheme:light)" sizes="any" type="image/png"/>
-    <link rel="apple-touch-icon" href="{{ pathto('_static/images/favicon.svg', 1) }}">
+    <link rel="mask-icon" href="{{ pathto('_static/images/favicon.svg', 1) }}?v={{ compilation_ts }}" color="#000000">
+    <link rel="icon" href="{{ pathto('_static/images/favicon.png', 1) }}?v={{ compilation_ts }}" media="(prefers-color-scheme:no-preference)" sizes="any" type="image/png"/>
+    <link rel="icon" href="{{ pathto('_static/images/dark-favicon.png', 1) }}?v={{ compilation_ts }}" media="(prefers-color-scheme:dark)" sizes="any" type="image/png"/>
+    <link rel="icon" href="{{ pathto('_static/images/favicon.png', 1) }}?v={{ compilation_ts }}" media="(prefers-color-scheme:light)" sizes="any" type="image/png"/>
+    <link rel="apple-touch-icon" href="{{ pathto('_static/images/favicon.svg', 1) }}?v={{ compilation_ts }}">
     
     {%- if production and theme_breadcrumb_root_title == 'Documentation' -%}
     {#- Google Tag Manager - Head -#}
@@ -297,6 +295,13 @@
     {%- endblock gtm_body %}
   {%- endif -%}
   {% block body %} {% endblock %}
+  <div class="icon-assets">
+    {%- block icons %} 
+      {% include "template-parts/icons/social-icons.svg" %}
+      {% include "template-parts/icons/copy.svg" %}
+      {% include "template-parts/icons/theme-common-icons.svg" %}
+    {% endblock icons -%}
+  </div>
   {%- block after_footer %}
     <script id="documentation_options" data-url_root="{{ pathto('', 1) }}" src="{{ pathto('_static/js/documentation_options.js', 1) }}"></script>
     <script>
