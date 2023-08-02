@@ -39,7 +39,7 @@ redirectSameRelease = {
     },
   '4.3': {
    '/user-manual/wazuh-dashboard/single-sign-on/index.html':
-     '/user-manual/user-administration/single-sign-on/administrator/index.html',
+     '/user-manual/user-administration/single-sign-on/index.html',
    '/user-manual/wazuh-dashboard/single-sign-on/okta.html':
      '/user-manual/user-administration/single-sign-on/administrator/okta.html',
    '/user-manual/wazuh-dashboard/single-sign-on/azure-active-directory.html':
@@ -52,8 +52,6 @@ redirectSameRelease = {
      '/user-manual/user-administration/single-sign-on/administrator/jumpcloud.html',
    '/user-manual/wazuh-dashboard/single-sign-on/onelogin.html':
      '/user-manual/user-administration/single-sign-on/administrator/onelogin.html',
-   '/user-manual/user-administration/single-sign-on/index.html':
-     '/user-manual/user-administration/single-sign-on/administrator/index.html',
    '/user-manual/user-administration/single-sign-on/okta.html':
      '/user-manual/user-administration/single-sign-on/administrator/okta.html',
    '/user-manual/user-administration/single-sign-on/azure-active-directory.html':
