@@ -91,6 +91,7 @@ newUrls['4.3'] = [
   '/user-manual/user-administration/index.html',
   '/user-manual/user-administration/password-management.html',
   '/user-manual/user-administration/rbac.html',
+  '/user-manual/user-administration/single-sign-on/index.html',
   '/user-manual/user-administration/single-sign-on/administrator/index.html',
   '/user-manual/user-administration/single-sign-on/administrator/okta.html',
   '/user-manual/user-administration/single-sign-on/administrator/azure-active-directory.html',
