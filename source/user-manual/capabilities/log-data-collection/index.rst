@@ -22,3 +22,6 @@ Wazuh collects, analyzes, and stores logs from endpoints, network devices, and a
         monitoring-log-files
         syslog
         multiple-socket-outputs
+        configuration
+        log-data-analysis
+        use-cases
