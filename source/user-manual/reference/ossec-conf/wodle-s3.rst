@@ -806,7 +806,7 @@ A valid profile name from a Shared Credential File or AWS Config File with the p
 discard_regex
 ^^^^^^^^^^^^^
 
-A regex value to determine if an event should be discarded. It requires a `field` attribute used to specify the field of the event where the regex should be applied.
+A regex value to determine if an event should be discarded. JSON and CSV logs require a `field` attribute used to specify the field of the event where the regex should be applied.
 
 +--------------------+----------------------------------------+
 | **Default value**  | N/A                                    |
@@ -824,11 +824,17 @@ Attributes:
 |           | Allowed values   | A str containing the full field name path                                         |
 +-----------+------------------+-----------------------------------------------------------------------------------+
 
-Usage example:
+Usage examples:
 
 .. code-block:: console
 
     <discard_regex field="data.configurationItemStatus">REJECT</discard_regex>
+
+Usage example only for plain text logs:
+
+.. code-block:: console
+
+    <discard_regex>.*Log:.*</discard_regex>
 
 .. _subscriber_sts_endpoint:
 

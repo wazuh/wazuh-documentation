@@ -13,7 +13,7 @@ Custom Logs Buckets
 `Amazon Simple Queue Service (Amazon SQS)  <https://aws.amazon.com/sqs/>`_ is a fully managed message queuing service that offers secure, durable, and available hosted queues to decouple and scale software systems and components.
 It allows sending, storing, and receiving messages between software components at any volume, without losing messages or requiring other services to be available. These features make it an optimal component to associate with Amazon S3 Buckets to consume any type of log.
 
-Combining Amazon SQS with Amazon S3 buckets, allows Wazuh to fetch any JSON or CSV logs, originated in AWS or not, and process the events inside of them.
+Combining Amazon SQS with Amazon S3 buckets, allows Wazuh to fetch any JSON, CSV or plain text logs, originated in AWS or not, and process the events inside them.
 
 .. note::
   It is a precondition of the module for the CSV logs to have the corresponding column headers to be properly processed.
