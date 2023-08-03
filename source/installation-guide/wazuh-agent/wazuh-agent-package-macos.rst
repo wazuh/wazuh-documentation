@@ -3,8 +3,6 @@
 .. meta::
   :description: Learn more about how to successfully install the Wazuh agent on macOS systems in this section of our Installation Guide.
 
-.. _wazuh_agent_package_macos:
-
 Installing Wazuh agents on macOS endpoints
 ==========================================
 
@@ -12,79 +10,78 @@ The agent runs on the endpoint you want to monitor and communicates with the Waz
 
 .. note:: You need root user privileges to run all the commands described below.
 
-#. To start the installation process, download the :ref:`Wazuh agent for macOS <packages_list_agent_macos>`. The intel64 package is suitable for macOS Sierra or later and arm64 package for Big Sur or later. 
+#. To start the installation process, download the :ref:`Wazuh agent for macOS <packages_list_agent_macos>` considering the following.
 
-#. Select the installation method you want to follow: command line interface (CLI) or graphical user interface (GUI).
+   -  The Intel64 package is suitable for macOS Sierra and later
+   -  The ARM64 package is suitable for macOS Big Sur and later. 
 
-        .. tabs::
-    
-          .. group-tab:: CLI
-            
+#. Select the installation method you want to follow: Command line interface (CLI) or graphical user interface (GUI).
+
+   .. tabs::
+
+      .. group-tab:: CLI
+      
+         #. To deploy the Wazuh agent on your endpoint, edit the ``WAZUH_MANAGER`` variable to contain your Wazuh manager IP address or hostname and run the following command. 
+
             .. tabs::
-
-              .. group-tab:: intel64
-
-                To deploy the Wazuh agent on your endpoint, edit the ``WAZUH_MANAGER`` variable to contain your Wazuh manager IP address or hostname and run the following command. 
-
-                    .. code-block:: console
-        
-                      # echo "WAZUH_MANAGER='10.0.0.2'" > /tmp/wazuh_envs && installer -pkg wazuh-agent-|WAZUH_CURRENT_OSX|-|WAZUH_REVISION_OSX|.intel64.pkg -target /
-        
-                    .. note:: The implementation of the different package architectures has been introduced in version 4.5.1, therefore previous versions always use intel64 architecture.
-                      :class: not-long
-
-                      .. code-block:: console
-        
-                          # launchctl setenv WAZUH_MANAGER "10.0.0.2" && installer -pkg wazuh-agent-4.5.0-1.pkg -target /
-
-                    For additional deployment options such as agent name, agent group, and registration password, see the :doc:`Deployment variables for macOS </user-manual/deployment-variables/deployment-variables-macos>` section.
-                    
-                    .. note:: Alternatively, if you want to install an agent without registering it, omit the deployment variables. To learn more about the different registration methods, see the :doc:`Wazuh agent enrollment </user-manual/agent-enrollment/index>` section.
-
-              .. group-tab:: arm64
-
-                To deploy the Wazuh agent on your endpoint, edit the ``WAZUH_MANAGER`` variable to contain your Wazuh manager IP address or hostname and run the following command. 
-
-                    .. code-block:: console
-        
-                      # echo "WAZUH_MANAGER='10.0.0.2'" > /tmp/wazuh_envs && installer -pkg wazuh-agent-|WAZUH_CURRENT_OSX|-|WAZUH_REVISION_OSX|.arm64.pkg -target /
-
-                    .. note:: The implementation of the different package architectures has been introduced in version 4.5.1, therefore in previous versions arm64 architecture is not available.
-
-                    For additional deployment options such as agent name, agent group, and registration password, see the :doc:`Deployment variables for macOS </user-manual/deployment-variables/deployment-variables-macos>` section.
-                    
-                    .. note:: Alternatively, if you want to install an agent without registering it, omit the deployment variables. To learn more about the different registration methods, see the :doc:`Wazuh agent enrollment </user-manual/agent-enrollment/index>` section.
-
-
-              To complete the installation process, start the Wazuh agent.
-      
-                  .. code-block:: console
-      
-                    # /Library/Ossec/bin/wazuh-control start
-
-
-              The installation process is now complete, and the Wazuh agent is successfully deployed and running on your macOS endpoint.
-
             
-          .. group-tab:: GUI
+               .. group-tab:: Intel64
 
-             #. To install the Wazuh agent on your system, run the downloaded file and follow the steps in the installation wizard. If you are not sure how to answer some of the prompts, use the default answers.
+                  .. code-block:: console
+                  
+                     # echo "WAZUH_MANAGER='10.0.0.2'" > /tmp/wazuh_envs && installer -pkg wazuh-agent-|WAZUH_CURRENT_OSX|-|WAZUH_REVISION_OSX|.intel64.pkg -target /
+   
+                  .. note::
+                     :class: not-long
+                     
+                     The package version 4.5.0 is available for Intel64 architectures. To upgrade to 4.5.0 run the following command instead.
+                     
+                     .. code-block:: console
+        
+                        # echo "WAZUH_MANAGER='10.0.0.2'" > /tmp/wazuh_envs && installer -pkg wazuh-agent-4.5.0-1.pkg -target /
 
-                .. thumbnail:: ../../images/installation/macos-agent.png
-                   :align: center
-                   :title: macOS agent installer
-                   :alt: macOS agent installer
-                   
-             #. To complete the installation process, start the Wazuh agent.
-    
-                .. code-block:: console
-    
-                  # sudo /Library/Ossec/bin/wazuh-control start
- 
-            The installation process is now complete, and the Wazuh agent is successfully installed on your macOS endpoint. The next step is to register and configure the agent to communicate with the Wazuh server. To perform this action, see the :doc:`Wazuh agent enrollment </user-manual/agent-enrollment/index>` section.  
+               .. group-tab:: ARM64
+
+                  .. code-block:: console
+                  
+                     # echo "WAZUH_MANAGER='10.0.0.2'" > /tmp/wazuh_envs && installer -pkg wazuh-agent-|WAZUH_CURRENT_OSX|-|WAZUH_REVISION_OSX|.arm64.pkg -target /
+
+                  .. note::
+                     
+                     The ARM64 architecture is not available in packages earlier than 4.5.1.
+
+               For additional deployment options such as agent name, agent group, and registration password, see the :doc:`Deployment variables for macOS </user-manual/deployment-variables/deployment-variables-macos>` section.
+               
+               .. note:: Alternatively, if you want to install an agent without registering it, omit the deployment variables. To learn more about the different registration methods, see the :doc:`Wazuh agent enrollment </user-manual/agent-enrollment/index>` section.
+
+         #. To complete the installation process, start the Wazuh agent.
+
+            .. code-block:: console
+
+               # /Library/Ossec/bin/wazuh-control start
+
+
+         The installation process is now complete, and the Wazuh agent is successfully deployed and running on your macOS endpoint.
+
+      
+      .. group-tab:: GUI
+
+         #. To install the Wazuh agent on your system, run the downloaded file and follow the steps in the installation wizard. If you are not sure how to answer some of the prompts, use the default answers.
+
+            .. thumbnail:: ../../images/installation/macos-agent.png
+               :align: center
+               :title: macOS agent installer
+               :alt: macOS agent installer
+               
+         #. To complete the installation process, start the Wazuh agent.
+
+            .. code-block:: console
+
+               # sudo /Library/Ossec/bin/wazuh-control start
+
+         The installation process is now complete, and the Wazuh agent is successfully installed on your macOS endpoint. The next step is to register and configure the agent to communicate with the Wazuh server. To perform this action, see the :doc:`Wazuh agent enrollment </user-manual/agent-enrollment/index>` section.  
 
 By default, all agent files are stored in ``/Library/Ossec/`` after the installation.
-    
 
 Uninstall a Wazuh agent
 -----------------------

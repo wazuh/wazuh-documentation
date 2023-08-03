@@ -47,7 +47,7 @@ Below you can find a table describing the variables used by Wazuh installers, an
 
 .. tabs::
 
-   .. group-tab:: Examples (intel64)
+   .. group-tab:: Intel64 examples
     
       -  Registration with password:
 
@@ -91,7 +91,7 @@ Below you can find a table describing the variables used by Wazuh installers, an
             # echo "WAZUH_MANAGER='10.0.0.2' && WAZUH_REGISTRATION_SERVER='10.0.0.2' && WAZUH_REGISTRATION_KEY='/var/ossec/etc/sslagent.key' && \
             WAZUH_REGISTRATION_CERTIFICATE='/var/ossec/etc/sslagent.cert'" > /tmp/wazuh_envs && installer -pkg wazuh-agent-|WAZUH_CURRENT_OSX|-|WAZUH_REVISION_OSX|.intel64.pkg -target /
 
-   .. group-tab:: Examples (arm64)
+   .. group-tab:: ARM64 examples
     
       -  Registration with password:
 
