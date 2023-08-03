@@ -29,12 +29,20 @@ Follow these steps to upgrade Wazuh agents locally on macOS systems. If you want
 
                   # installer -pkg wazuh-agent-|WAZUH_CURRENT_OSX|-|WAZUH_REVISION_OSX|.intel64.pkg -target /
 
+               .. note:: The implementation of the different package architectures has been introduced in version 4.5.1, therefore previous versions always use intel64 architecture.
+                  :class: not-long
+
+                  .. code-block:: console
+   
+                     # installer -pkg wazuh-agent-4.5.0-1.pkg -target /
+
             .. group-tab:: arm64
          
                .. code-block:: console
 
                   # installer -pkg wazuh-agent-|WAZUH_CURRENT_OSX|-|WAZUH_REVISION_OSX|.arm64.pkg -target /
 
+               .. note:: The implementation of the different package architectures has been introduced in version 4.5.1, therefore in previous versions arm64 architecture is not available.
 
       .. group-tab:: GUI
 
