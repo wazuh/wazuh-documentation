@@ -1179,7 +1179,17 @@ redirections.push(
     '4.2': '/user-manual/capabilities/sec-config-assessment/what-is-it.html',
     '4.3': '/user-manual/capabilities/sec-config-assessment/how-it-works.html',
   },
-  );
+  {
+    'target': ['4.2=>4.3', '4.3=>4.2'],
+    '4.2': '/user-manual/capabilities/vulnerability-detection/compatibility-matrix.html',
+    '4.3': '/user-manual/capabilities/vulnerability-detection/how-it-works.html#compatibility-matrix',
+  },
+  {
+    'target': ['4.2=>4.3', '4.3=>4.2'],
+    '4.2': '/user-manual/capabilities/vulnerability-detection/running-vu-scan.html',
+    '4.3': '/user-manual/capabilities/vulnerability-detection/configuring-scans.html',
+  },
+);
 
 /* *** RELEASE 4.2 ****/
 
