@@ -31,14 +31,11 @@ The agent runs on the endpoint you want to monitor and communicates with the Waz
                   
                      # echo "WAZUH_MANAGER='10.0.0.2'" > /tmp/wazuh_envs && installer -pkg wazuh-agent-|WAZUH_CURRENT_OSX|-|WAZUH_REVISION_OSX|.intel64.pkg -target /
    
-                  .. note::
-                     :class: not-long
-                     
-                     The package version 4.5.0 is available for Intel64 architectures. To upgrade to 4.5.0 run the following command instead.
-                     
-                     .. code-block:: console
-        
-                        # echo "WAZUH_MANAGER='10.0.0.2'" > /tmp/wazuh_envs && installer -pkg wazuh-agent-4.5.0-1.pkg -target /
+                  If you want to upgrade to 4.5.0, run the following command instead.
+
+                  .. code-block:: console
+      
+                     # echo "WAZUH_MANAGER='10.0.0.2'" > /tmp/wazuh_envs && installer -pkg wazuh-agent-4.5.0-1.pkg -target /
 
                .. group-tab:: ARM64
 
