@@ -11,7 +11,7 @@ Follow these steps to upgrade Wazuh agents locally on macOS systems. If you want
 
 .. note:: To perform the agent upgrade, administrator privileges are required.
 
-#. Download the latest `macOS installer <https://packages.wazuh.com/|WAZUH_CURRENT_MAJOR_OSX|/macos/wazuh-agent-|WAZUH_CURRENT_OSX|-|WAZUH_REVISION_OSX|.pkg>`_. 
+#. Download the latest :ref:`macOS installer <packages_list_agent_macos>`. 
 
 #. Run the macOS installer by using the command line interface (CLI) or the graphical user interface (GUI).
 
@@ -20,10 +20,20 @@ Follow these steps to upgrade Wazuh agents locally on macOS systems. If you want
       .. group-tab:: CLI
 
          To upgrade the Wazuh agent by using the command line, run the installer:
+         
+         .. tabs::
 
-         .. code-block:: console
+            .. group-tab:: intel64
+         
+               .. code-block:: console
 
-            # installer -pkg wazuh-agent-|WAZUH_CURRENT_OSX|-|WAZUH_REVISION_OSX|.pkg -target /
+                  # installer -pkg wazuh-agent-|WAZUH_CURRENT_OSX|-|WAZUH_REVISION_OSX|.intel64.pkg -target /
+
+            .. group-tab:: arm64
+         
+               .. code-block:: console
+
+                  # installer -pkg wazuh-agent-|WAZUH_CURRENT_OSX|-|WAZUH_REVISION_OSX|.arm64.pkg -target /
 
 
       .. group-tab:: GUI
