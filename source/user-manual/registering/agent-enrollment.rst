@@ -97,7 +97,7 @@ In the following example, we show how an Ubuntu Wazuh agent can be installed, co
 
     .. code-block:: console  
 
-          # apt-get install wazuh-agent
+          # apt-get install wazuh-agent|WAZUH_AGENT_DEB_PKG_INSTALL|
 
 
 #. Edit ``/var/ossec/etc/ossec.conf`` to include the manager IP address and, optional, any desired enrollment configuration:

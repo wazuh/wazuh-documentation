@@ -56,13 +56,13 @@ When upgrading a multi-node Wazuh manager cluster, run the upgrade in every node
 
          .. code-block:: console
 
-            # yum upgrade wazuh-manager
+            # yum upgrade wazuh-manager|WAZUH_MANAGER_RPM_PKG_INSTALL|
 
       .. group-tab:: APT
 
          .. code-block:: console
 
-            # apt-get install wazuh-manager
+            # apt-get install wazuh-manager|WAZUH_MANAGER_DEB_PKG_INSTALL|
 
    .. note::
 
