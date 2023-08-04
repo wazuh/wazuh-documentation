@@ -66,16 +66,19 @@ This is the minimum alert severity level for which emails will be sent.
 group
 ^^^^^^^^
 
-This limits the sending of emails to only when rules are tripped that belongs to one of the listed groups.
+This option sets specific rule groups that alerts must belong to for email notification.
 
 +--------------------+---------------------------------------------------------------------------------------------+
 | **Default value**  | n/a                                                                                         |
 +--------------------+---------------------------------------------------------------------------------------------+
-| **Allowed values** | Any rule group is allowed. Multiple groups should be separated with a pipe character (“|”). |
+| **Allowed values** | Any group string. For multiple groups, separate the strings with a pipe character ``|``.    |
 +--------------------+---------------------------------------------------------------------------------------------+
 
 .. note::
-	Observe that all groups must be finished with a comma.
+
+   To avoid partial matches, add a comma at the end of the group string. For example, ``<rules_group>group_a,|group_b,|group_c,</rules_group>``. Not ending the group string with a comma implies that it's a substring open for partial matches.  For example, the group string ``authentication`` matches rule groups ``authentication``, ``authentication_success``, and ``authentication_failure`` while the group string ``authentication,`` matches only rule group ``authentication``.
+
+   Also, check that the rule group in your rule definitions ends with a comma as well. For example, ``<group>group_b,</group>``. This is usually the case in the Wazuh default ruleset.
 
 
 event_location

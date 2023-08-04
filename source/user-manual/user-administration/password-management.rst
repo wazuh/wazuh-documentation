@@ -3,10 +3,12 @@
 .. meta::
   :description: Learn how to use the Wazuh passwords tool to manage your passwords and secure your Wazuh installation. 
 
-.. _user_manual_secure_wazuh_indexer:
-
 Password management
 ===================
+
+.. note::
+
+   If you deployed Wazuh on Docker, read :ref:`change-pwd-existing-usr` for specific instructions.
 
 Learn how to use the Wazuh passwords tool to manage your passwords. This tool allows you to change the passwords of both the :doc:`Wazuh indexer </getting-started/components/wazuh-indexer>` users, also known as internal users, and the :doc:`Wazuh manager API </user-manual/api/index>`  users.
 
