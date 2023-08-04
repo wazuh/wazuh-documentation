@@ -45,9 +45,11 @@ Below you can find a table describing the variables used by Wazuh installers, an
 |   ENROLLMENT_DELAY               |  Assigns the time that agentd should wait after a successful registration. See :ref:`delay_after_enrollment <enrollment_delay_after_enrollment>`.                                                    |
 +----------------------------------+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
 
+Examples:
+
 .. tabs::
 
-   .. group-tab:: Intel64 examples
+   .. group-tab:: Intel
     
       -  Registration with password:
 
@@ -91,7 +93,7 @@ Below you can find a table describing the variables used by Wazuh installers, an
             # echo "WAZUH_MANAGER='10.0.0.2' && WAZUH_REGISTRATION_SERVER='10.0.0.2' && WAZUH_REGISTRATION_KEY='/var/ossec/etc/sslagent.key' && \
             WAZUH_REGISTRATION_CERTIFICATE='/var/ossec/etc/sslagent.cert'" > /tmp/wazuh_envs && installer -pkg wazuh-agent-|WAZUH_CURRENT_OSX|-|WAZUH_REVISION_OSX|.intel64.pkg -target /
 
-   .. group-tab:: ARM64 examples
+   .. group-tab:: Apple silicon
     
       -  Registration with password:
 

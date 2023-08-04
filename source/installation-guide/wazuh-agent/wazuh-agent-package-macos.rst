@@ -10,10 +10,15 @@ The agent runs on the endpoint you want to monitor and communicates with the Waz
 
 .. note:: You need root user privileges to run all the commands described below.
 
-#. To start the installation process, download the :ref:`Wazuh agent for macOS <packages_list_agent_macos>` considering the following.
+.. |macOS_intel_64| replace:: `wazuh-agent-|WAZUH_CURRENT_OSX|-|WAZUH_REVISION_OSX|.intel64.pkg <https://packages.wazuh.com/|WAZUH_CURRENT_MAJOR_OSX|/macos/wazuh-agent-|WAZUH_CURRENT_OSX|-|WAZUH_REVISION_OSX|.intel64.pkg>`__
+.. |macOS_arm64| replace:: `wazuh-agent-|WAZUH_CURRENT_OSX|-|WAZUH_REVISION_OSX|.arm64.pkg <https://packages.wazuh.com/|WAZUH_CURRENT_MAJOR_OSX|/macos/wazuh-agent-|WAZUH_CURRENT_OSX|-|WAZUH_REVISION_OSX|.arm64.pkg>`__
 
-   -  The Intel64 package is suitable for macOS Sierra and later
-   -  The ARM64 package is suitable for macOS Big Sur and later. 
+
+#. To start the installation process, download the Wazuh agent according to your architecture:
+
+   - **Intel**: |macOS_intel_64|. Suitable for macOS Sierra and later.
+
+   - **Apple silicon**: |macOS_arm64|. Suitable for macOS Big Sur and later.
 
 #. Select the installation method you want to follow: Command line interface (CLI) or graphical user interface (GUI).
 
@@ -21,31 +26,25 @@ The agent runs on the endpoint you want to monitor and communicates with the Waz
 
       .. group-tab:: CLI
       
-         #. To deploy the Wazuh agent on your endpoint, edit the ``WAZUH_MANAGER`` variable to contain your Wazuh manager IP address or hostname and run the following command. 
+         #. To deploy the Wazuh agent on your endpoint, choose your architecture, edit the ``WAZUH_MANAGER`` variable to contain your Wazuh manager IP address or hostname, and run the following command. 
 
             .. tabs::
             
-               .. group-tab:: Intel64
+               .. group-tab:: Intel
 
                   .. code-block:: console
                   
                      # echo "WAZUH_MANAGER='10.0.0.2'" > /tmp/wazuh_envs && installer -pkg wazuh-agent-|WAZUH_CURRENT_OSX|-|WAZUH_REVISION_OSX|.intel64.pkg -target /
    
-                  If you want to upgrade to 4.5.0, run the following command instead.
 
-                  .. code-block:: console
-      
-                     # echo "WAZUH_MANAGER='10.0.0.2'" > /tmp/wazuh_envs && installer -pkg wazuh-agent-4.5.0-1.pkg -target /
+               .. group-tab:: Apple silicon
 
-               .. group-tab:: ARM64
+                  .. versionadded:: 4.5.1
 
                   .. code-block:: console
                   
                      # echo "WAZUH_MANAGER='10.0.0.2'" > /tmp/wazuh_envs && installer -pkg wazuh-agent-|WAZUH_CURRENT_OSX|-|WAZUH_REVISION_OSX|.arm64.pkg -target /
 
-                  .. note::
-                     
-                     The ARM64 architecture is not available in packages earlier than 4.5.1.
 
                For additional deployment options such as agent name, agent group, and registration password, see the :doc:`Deployment variables for macOS </user-manual/deployment-variables/deployment-variables-macos>` section.
                
