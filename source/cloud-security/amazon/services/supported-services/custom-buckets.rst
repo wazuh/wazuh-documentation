@@ -8,7 +8,7 @@
 Custom Logs Buckets
 ===================
 
-.. versionadded:: 4.6.0
+.. versionadded:: 4.7.0
 
 `Amazon Simple Queue Service (Amazon SQS)  <https://aws.amazon.com/sqs/>`_ is a fully managed message queuing service that offers secure, durable, and available hosted queues to decouple and scale software systems and components.
 It allows sending, storing, and receiving messages between software components at any volume, without losing messages or requiring other services to be available. These features make it an optimal component to associate with Amazon S3 Buckets to consume any type of log.
@@ -67,7 +67,7 @@ Amazon S3 and Event Notifications
 The steps to have an S3 bucket reporting creation events are:
 
 #. Configure an S3 bucket as defined in the :ref:`Configuring an S3 Bucket <s3_bucket>` section with the name provided in the previous section.
-#. Once created, go to **Event notifications** and select **Create event notification**. 
+#. Once created, go to **Event notifications** inside the **Properties** tab and select **Create event notification**. 
 #. In **Event Types**, select **All object create events**. This will generate notifications for any type of event that results in the creation of an object in the bucket.
 #. In the **Destination** section, select **SQS queue** and **Choose from your SQS queues**, choosing the created queue in the previous step.
 
@@ -80,22 +80,20 @@ Buckets Subscriber section in ossec.conf
 
 Set the configuration inside the section ``<subscriber type="buckets">``. You can find this tag inside the ``<wodle name="aws-s3">`` section of the ``/var/ossec/etc/ossec.conf`` file.
 
-.. code-block:: xml
+    .. code-block:: xml
 
-        <wodle name="aws-s3">
-            <disabled>no</disabled>
-            <interval>1h</interval>
-            <run_on_start>yes</run_on_start>
-            <subscriber type="buckets">
-                <sqs_name>sqs-queue</sqs_name>
-                <aws_profile>profile</aws_profile>
-                <iam_role_arn>arn:aws:iam::example</iam_role_arn>
-                <iam_role_duration>1300</iam_role_duration> 
-                <discard_regex field="field">REGEX</discard_regex>
-                <sts_endpoint>sts-endpoint-IAM</sts_endpoint>
-                <service_endpoint>s3.region.amazonaws.com</service_endpoint>
-            </subscriber>
-        </wodle>
+      <wodle name="aws-s3">
+          <disabled>no</disabled>
+          <interval>1h</interval>
+          <run_on_start>yes</run_on_start>
+          <subscriber type="buckets">
+              <sqs_name>sqs-queue</sqs_name>
+              <aws_profile>default</aws_profile>
+          </subscriber>
+      </wodle>
+
+    .. note::
+      Check the :doc:`AWS S3 module </user-manual/reference/ossec-conf/wodle-s3>` reference manual to learn more about the available settings.
 
 After setting the required parameters, restart the Wazuh manager to apply the changes:
 
