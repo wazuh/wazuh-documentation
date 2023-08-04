@@ -46,7 +46,6 @@ In this use case, we show how the Wazuh Vulnerability Detector module detects vu
           <!-- Aggregate vulnerabilities -->
           <provider name="nvd">
           <enabled>yes</enabled>
-          <update_from_year>2019</update_from_year>
           <update_interval>1h</update_interval>
           </provider>
         </vulnerability-detector>

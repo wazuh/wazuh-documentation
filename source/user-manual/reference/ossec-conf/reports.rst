@@ -87,7 +87,7 @@ Filter by the log location or agent name.
 +--------------------+-----------------------------------------------------------------------------------------------------------------------------------------------------------+
 | **Default value**  | n/a                                                                                                                                                       |
 +--------------------+-----------------------------------------------------------------------------------------------------------------------------------------------------------+
-| **Allowed values** | Any file path, hostname or network is allowed. Any `sregex expression <../../ruleset/ruleset-xml-syntax/regex.html#sregex-os-match-syntax>`_              |
+| **Allowed values** | Any file path, hostname or network is allowed. Any :ref:`sregex expression <sregex_os_match_syntax>`                                                      |
 +--------------------+-----------------------------------------------------------------------------------------------------------------------------------------------------------+
 
 srcip
