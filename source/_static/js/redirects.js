@@ -1,7 +1,6 @@
 const removedUrls = [];
 const newUrls = [];
 const redirections = [];
-const redirectSameRelease = [];
 
 /* Note: new release versions must always be inserted in the first position of the array "versions" */
 const versions = [
@@ -28,17 +27,6 @@ const versions = [
 ];
 
 /* Data structure for every release
-
-/* Pages changed within the same release */
-
-/*
-redirectSameRelease['x.y'] = {
-  '/old/path/that/was/removed.html':
-    '/new/path/replacing/the/old/one.html',
-  '/another-old/path/that/was/removed.html':
-    '/another-new/path/replacing/the/old/one.html',
-};
-*/
 
 /* *** RELEASE X.Y ****/
 
@@ -79,43 +67,6 @@ newUrls['4.5'] = [
 ];
 
 /* *** RELEASE 4.4 ****/
-
-/* Pages changed within the same release */
-
-redirectSameRelease['4.4'] = {
-  '/nist/index.html':
-    '/compliance/nist/index.html',
-  '/nist/visualization-and-dashboard.html':
-    '/compliance/nist/visualization-and-dashboard.html',
-  '/nist/log-data-analysis.html':
-    '/compliance/nist/log-data-analysis.html',
-  '/nist/configuration-assessment.html':
-    '/compliance/nist/configuration-assessment.html',
-  '/nist/malware-detection.html':
-    '/compliance/nist/malware-detection.html',
-  '/nist/file-integrity-monitoring.html':
-    '/compliance/nist/file-integrity-monitoring.html',
-  '/nist/system-inventory.html':
-    '/compliance/nist/system-inventory.html',
-  '/nist/vulnerability-detection.html':
-    '/compliance/nist/vulnerability-detection.html',
-  '/nist/active-response.html':
-    '/compliance/nist/active-response.html',
-  '/nist/threat-intelligence.html':
-    '/compliance/nist/threat-intelligence.html',
-  '/user-manual/capabilities/wazuh-archives.html':
-    '/user-manual/manager/wazuh-archives.html',
-  '/amazon/services/supported-services/elastic-load-balancing/index.html':
-    '/cloud-security/amazon/services/supported-services/elastic-load-balancing/index.html',
-  '/amazon/services/supported-services/elastic-load-balancing/alb.html':
-    '/cloud-security/amazon/services/supported-services/elastic-load-balancing/alb.html',
-  '/amazon/services/supported-services/elastic-load-balancing/nlb.html':
-    '/cloud-security/amazon/services/supported-services/elastic-load-balancing/nlb.html',
-  '/amazon/services/supported-services/elastic-load-balancing/clb.html':
-    '/cloud-security/amazon/services/supported-services/elastic-load-balancing/clb.html',
-  '/azure/activity-services/prerequisites/dependencies.html':
-    '/cloud-security/azure/activity-services/prerequisites/dependencies.html',
-};
 
 /* Redirections from 4.3 to 4.4  */
 
@@ -783,16 +734,6 @@ newUrls['4.4'] = [
   '/release-notes/release-4-4-3.html',
   '/release-notes/release-4-4-4.html',
   '/release-notes/release-4-4-5.html',
-  '/nist/index.html',
-  '/nist/visualization-and-dashboard.html',
-  '/nist/log-data-analysis.html',
-  '/nist/configuration-assessment.html',
-  '/nist/malware-detection.html',
-  '/nist/file-integrity-monitoring.html',
-  '/nist/system-inventory.html',
-  '/nist/vulnerability-detection.html',
-  '/nist/active-response.html',
-  '/nist/threat-intelligence.html',
   '/compliance/nist/index.html',
   '/compliance/nist/visualization-and-dashboard.html',
   '/compliance/nist/log-data-analysis.html',
@@ -900,10 +841,6 @@ removedUrls['4.4'] = [
   '/amazon/services/supported-services/alb.html',
   '/amazon/services/supported-services/nlb.html',
   '/amazon/services/supported-services/clb.html',
-  '/amazon/services/supported-services/elastic-load-balancing/index.html',
-  '/amazon/services/supported-services/elastic-load-balancing/alb.html',
-  '/amazon/services/supported-services/elastic-load-balancing/nlb.html',
-  '/amazon/services/supported-services/elastic-load-balancing/clb.html',
   '/amazon/services/supported-services/ecr-image-scanning.html',
   '/amazon/services/supported-services/server-access.html',
   '/azure/monitoring-instances.html',
@@ -937,19 +874,6 @@ removedUrls['4.4'] = [
   '/office365/monitoring-office365-activity.html',
   '/monitoring.html',
   '/user-manual/capabilities/agent-key-polling.html',
-  '/user-manual/wazuh-dashboard/single-sign-on/index.html',
-  '/user-manual/wazuh-dashboard/single-sign-on/okta.html',
-  '/user-manual/wazuh-dashboard/single-sign-on/azure-active-directory.html',
-  '/user-manual/wazuh-dashboard/single-sign-on/pingone.html',
-  '/user-manual/wazuh-dashboard/single-sign-on/google.html',
-  '/user-manual/wazuh-dashboard/single-sign-on/jumpcloud.html',
-  '/user-manual/wazuh-dashboard/single-sign-on/onelogin.html',
-  '/user-manual/securing-wazuh/index.html',
-  '/user-manual/securing-wazuh/wazuh-indexer.html',
-  '/user-manual/securing-wazuh/opendistro.html',
-  '/user-manual/securing-wazuh/elastic-stack.html',
-  '/user-manual/wazuh-dashboard/rbac.html',
-  '/learning-wazuh/build-lab/install-wazuh-central-components.html',
   '/user-manual/capabilities/antiflooding.html',
   '/user-manual/capabilities/labels.html',
   '/user-manual/capabilities/fluent-forwarder.html',
@@ -965,7 +889,6 @@ removedUrls['4.4'] = [
   '/user-manual/capabilities/auditing-whodata/who-windows-policies.html',  
   '/user-manual/capabilities/syscollector.html',  
   '/user-manual/capabilities/agentless-monitoring/agentless-faq.html',
-  '/user-manual/capabilities/wazuh-archives.html',
   '/container-security/index.html',
   '/container-security/docker-monitor/index.html',
   '/container-security/docker-monitor/dependencies.html',
@@ -976,41 +899,6 @@ removedUrls['4.4'] = [
 ];
 
   /* *** RELEASE 4.3 ****/
-
-/* Pages changed within the same release */
-
-redirectSameRelease['4.3'] = {
-   '/user-manual/capabilities/vulnerability-detection/compatibility-matrix.html':
-     '/user-manual/capabilities/vulnerability-detection/how-it-works.html#compatibility-matrix',
-   '/user-manual/capabilities/vulnerability-detection/running-vu-scan.html':
-     '/user-manual/capabilities/vulnerability-detection/configuring-scans.html',
-   '/user-manual/wazuh-dashboard/single-sign-on/index.html':
-     '/user-manual/user-administration/single-sign-on/index.html', 
-   '/user-manual/wazuh-dashboard/single-sign-on/okta.html':
-     '/user-manual/user-administration/single-sign-on/okta.html',
-   '/user-manual/wazuh-dashboard/single-sign-on/azure-active-directory.html':
-     '/user-manual/user-administration/single-sign-on/azure-active-directory.html',
-   '/user-manual/wazuh-dashboard/single-sign-on/pingone.html':
-     '/user-manual/user-administration/single-sign-on/pingone.html', 
-   '/user-manual/wazuh-dashboard/single-sign-on/google.html':
-     '/user-manual/user-administration/single-sign-on/google.html',
-   '/user-manual/wazuh-dashboard/single-sign-on/jumpcloud.html':
-     '/user-manual/user-administration/single-sign-on/jumpcloud.html',
-   '/user-manual/wazuh-dashboard/single-sign-on/onelogin.html':
-     '/user-manual/user-administration/single-sign-on/onelogin.html',     
-   '/user-manual/securing-wazuh/index.html':
-     '/user-manual/user-administration/password-management/index.html',
-   '/user-manual/securing-wazuh/wazuh-indexer.html':
-     '/user-manual/user-administration/password-management.html',
-   '/user-manual/securing-wazuh/opendistro.html':
-     '/user-manual/user-administration/password-management.html',
-   '/user-manual/securing-wazuh/elastic-stack.html':  
-     '/user-manual/user-administration/password-management.html',
-   '/user-manual/wazuh-dashboard/rbac.html':
-     '/user-manual/user-administration/rbac.html', 
-   '/learning-wazuh/build-lab/install-wazuh-central-components.html':
-     '/proof-of-concept-guide/index.html',
- };
  
  /* Pages added in 4.3 */
 
@@ -1178,7 +1066,6 @@ newUrls['4.3'] = [
   '/deployment-options/deploying-with-puppet/wazuh-puppet-module/reference-wazuh-puppet/wazuh-manager-class.html',
   '/deployment-options/amazon-machine-images/amazon-machine-images.html',
   '/release-notes/release-4-3-0.html',
-  '/learning-wazuh/build-lab/install-wazuh-central-components.html', 
   '/pci-dss/configuration-assessment.html', 
   '/pci-dss/malware-detection.html',
   '/pci-dss/vulnerability-detection.html',
@@ -1224,7 +1111,6 @@ newUrls['4.3'] = [
 
 removedUrls['4.3'] = [
   '/amazon-machine-images/amazon-machine-images.html',
-  '/azure/dependencies.html',
   '/azure/monitoring-activity.html',
   '/azure/monitoring-services.html',
   '/deploying-with-ansible/guide/install-ansible.html',
@@ -1390,6 +1276,16 @@ redirections.push(
     'target': ['4.2=>4.3', '4.3=>4.2'],
     '4.2': '/user-manual/capabilities/sec-config-assessment/use-case.html',
     '4.3': '/user-manual/capabilities/sec-config-assessment/use-cases.html',
+  },
+  {
+    'target': ['4.2=>4.3', '4.3=>4.2'],
+    '4.2': '/user-manual/capabilities/vulnerability-detection/compatibility-matrix.html',
+    '4.3': '/user-manual/capabilities/vulnerability-detection/how-it-works.html#compatibility-matrix',
+  },
+  {
+    'target': ['4.2=>4.3', '4.3=>4.2'],
+    '4.2': '/user-manual/capabilities/vulnerability-detection/running-vu-scan.html',
+    '4.3': '/user-manual/capabilities/vulnerability-detection/configuring-scans.html',
   },
   {
     'target': ['4.2=>4.3', '4.3=>4.2'],
@@ -2130,21 +2026,9 @@ redirections.push(
 
 /* *** RELEASE 4.2 ****/
 
-/* Pages changed within the same release */
-
-redirectSameRelease['4.2'] = {
-  '/release-notes/release_4_2_0.html':
-    '/release-notes/release-4-2-0.html',
-  '/user-manual/registering/agent-enrollment.html':  
-    '/user-manual/agent-enrollment/via-agent-configuration/index.html',
-  '/azure/dependencies.html':  
-    '/azure/index.html',
-};
-
 /* Pages added in 4.2 */
 
 newUrls['4.2'] = [
-  '/azure/dependencies.html',
   '/proof-of-concept-guide/detect-malware-yara-integration.html',
   '/proof-of-concept-guide/poc-vulnerability-detection.html',
   '/proof-of-concept-guide/detect-remove-malware-virustotal.html',
@@ -2308,7 +2192,6 @@ newUrls['4.2'] = [
   '/release-notes/release-4-1-3.html',
   '/release-notes/release-4-1-4.html',
   '/release-notes/release-4-1-5.html',
-  '/release-notes/release_4_2_0.html',
   '/release-notes/release-4-2-0.html',
   '/release-notes/release-4-2-1.html',
   '/release-notes/release-4-2-2.html',
@@ -2351,7 +2234,6 @@ newUrls['4.2'] = [
   '/docker-monitor/monitoring-docker-server.html',
   '/upgrade-guide/compatibility-matrix/index.html',
   '/upgrade-guide/legacy/upgrading-wazuh-server/restore-alerts-from-2.x-to-3.x.html',
-  '/user-manual/registering/agent-enrollment.html',
   '/user-manual/agent-enrollment/index.html',
   '/user-manual/agent-enrollment/via-agent-configuration/index.html',
   '/user-manual/agent-enrollment/via-agent-configuration/linux-endpoint.html', 
