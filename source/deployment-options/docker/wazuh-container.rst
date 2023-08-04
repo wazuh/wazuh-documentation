@@ -321,7 +321,7 @@ Setting a new hash
 Setting the new password
 ~~~~~~~~~~~~~~~~~~~~~~~~
 
-#. Open  the ``docker-compose.yml`` file. Change all occurrences of the old password with the new one. For example, change the ``INDEXER_PASSWORD`` ocurrences to set the new ``admin`` user password.
+#. Open  the ``docker-compose.yml`` file. Change all occurrences of the old password with the new one.
 
    admin user:
 
@@ -415,6 +415,10 @@ Wazuh API user
 
 The steps are performed with the single user used for connect with Wazuh API: ``wazuh-wui`` user.
 
+.. note::
+      The password for users must be between 8 and 64 characters long. It should contain at least one uppercase and one lowercase letter, a number, and a symbol.
+
+
 #. Open the file ``single-node/config/wazuh_dashboard/wazuh.yml`` and modify the value of ``password`` parameter.
 
    .. code-block:: YAML
@@ -429,6 +433,46 @@ The steps are performed with the single user used for connect with Wazuh API: ``
             password: "MyS3cr37P450r.*-"
             run_as: false
       ...
+
+#. Open  the ``docker-compose.yml`` file. Change all occurrences of the old password with the new one.
+
+   .. code-block:: YAML
+      :emphasize-lines: 14,25
+
+      ...
+      services:
+        wazuh.manager:
+          ...
+          environment:
+            - INDEXER_URL=https://wazuh.indexer:9200
+            - INDEXER_USERNAME=admin
+            - INDEXER_PASSWORD=SecretPassword
+            - FILEBEAT_SSL_VERIFICATION_MODE=full
+            - SSL_CERTIFICATE_AUTHORITIES=/etc/ssl/root-ca.pem
+            - SSL_CERTIFICATE=/etc/ssl/filebeat.pem
+            - SSL_KEY=/etc/ssl/filebeat.key
+            - API_USERNAME=wazuh-wui
+            - API_PASSWORD=MyS3cr37P450r.*-
+      ...
+      wazuh.dashboard:
+          ...
+          environment:
+            - INDEXER_USERNAME=admin
+            - INDEXER_PASSWORD=SecretPassword
+            - WAZUH_API_URL=https://wazuh.manager
+            - DASHBOARD_USERNAME=kibanaserver
+            - DASHBOARD_PASSWORD=kibanaserver
+            - API_USERNAME=wazuh-wui
+            - API_PASSWORD=MyS3cr37P450r.*-
+        ...
+
+#. Recreate the Wazuh containers:
+
+   .. code-block:: console
+
+      # docker-compose down
+      # docker-compose up -d
+
 
 Exposed ports
 -------------
