@@ -11,7 +11,15 @@ Follow these steps to upgrade Wazuh agents locally on macOS systems. If you want
 
 .. note:: To perform the agent upgrade, administrator privileges are required.
 
-#. Download the latest `macOS installer <https://packages.wazuh.com/|WAZUH_CURRENT_MAJOR_OSX|/macos/wazuh-agent-|WAZUH_CURRENT_OSX|-|WAZUH_REVISION_OSX|.pkg>`_. 
+.. |macOS_intel_64| replace:: `wazuh-agent-|WAZUH_CURRENT_OSX|-|WAZUH_REVISION_OSX|.intel64.pkg <https://packages.wazuh.com/|WAZUH_CURRENT_MAJOR_OSX|/macos/wazuh-agent-|WAZUH_CURRENT_OSX|-|WAZUH_REVISION_OSX|.intel64.pkg>`__
+.. |macOS_arm64| replace:: `wazuh-agent-|WAZUH_CURRENT_OSX|-|WAZUH_REVISION_OSX|.arm64.pkg <https://packages.wazuh.com/|WAZUH_CURRENT_MAJOR_OSX|/macos/wazuh-agent-|WAZUH_CURRENT_OSX|-|WAZUH_REVISION_OSX|.arm64.pkg>`__
+
+
+#. Download the latest macOS installer:
+
+   - **Intel**: |macOS_intel_64|.
+
+   - **Apple silicon**: |macOS_arm64|.
 
 #. Run the macOS installer by using the command line interface (CLI) or the graphical user interface (GUI).
 
@@ -19,12 +27,26 @@ Follow these steps to upgrade Wazuh agents locally on macOS systems. If you want
     
       .. group-tab:: CLI
 
-         To upgrade the Wazuh agent by using the command line, run the installer:
+         To upgrade the Wazuh agent by using the command line, select your architecture, and run the installer:
+         
+         .. tabs::
 
-         .. code-block:: console
+            .. group-tab:: Intel
+         
+               .. code-block:: console
 
-            # installer -pkg wazuh-agent-|WAZUH_CURRENT_OSX|-|WAZUH_REVISION_OSX|.pkg -target /
+                  # installer -pkg wazuh-agent-|WAZUH_CURRENT_OSX|-|WAZUH_REVISION_OSX|.intel64.pkg -target /
 
+
+            .. group-tab:: Apple silicon
+         
+               .. code-block:: console
+
+                  # installer -pkg wazuh-agent-|WAZUH_CURRENT_OSX|-|WAZUH_REVISION_OSX|.arm64.pkg -target /
+
+               .. note::
+                  
+                  Packages earlier than 4.5.1 are not available for ARM64 architectures.
 
       .. group-tab:: GUI
 
