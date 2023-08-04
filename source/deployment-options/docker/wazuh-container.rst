@@ -249,10 +249,17 @@ You can modify and build the Wazuh manager, indexer, and dashboard images locall
 
 .. _change-pwd-existing-usr:
 
-Change the password of a Wazuh indexer user
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+Change the password of a Wazuh users
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-To improve security, you can change the default password of Wazuh indexer users. For example, ``admin`` and ``kibanaserver`` users.
+To improve security, you can change the default password of Wazuh users. You have 2 types of users: Indexer users and API user.
+
+
+Wazuh indexer users
+^^^^^^^^^^^^^^^^^^^
+
+The steps performed are based on the two users that Wazuh uses by default: ``admin`` and ``kibanaserver`` users.
+
 
 Perform the following steps from your ``single-node/`` directory. If you have a multi-node deployment, you must adapt and perform them from your ``multi-node/`` directory.
 
@@ -277,9 +284,11 @@ Setting a new hash
 
 #. Copy the generated hash.
 
-#. Open the ``config/wazuh_indexer/internal_users.yml`` file. Locate the block for the user you are changing password for. For example, ``admin``.
+#. Open the ``config/wazuh_indexer/internal_users.yml`` file. Locate the block for the user you are changing password for.
 
 #. Replace the hash.
+
+   admin user:
 
    .. code-block:: YAML
       :emphasize-lines: 3
@@ -292,12 +301,19 @@ Setting a new hash
         - "admin"
         description: "Demo admin user"
 
+      ...
+
+   kibanaserver user:
+
+   .. code-block:: YAML
+      :emphasize-lines: 3
+
+      ...
       kibanaserver:
         hash: "$2a$12$4AcgAt3xwOWadA5s5blL6ev39OXDNhmOesEoo33eZtrq2N0YrU3H."
         reserved: true
         description: "Demo kibanaserver user"
 
-      kibanaro:
       ...
 
 .. _wazuh-docker-password-setting:
@@ -306,6 +322,8 @@ Setting the new password
 ~~~~~~~~~~~~~~~~~~~~~~~~
 
 #. Open  the ``docker-compose.yml`` file. Change all occurrences of the old password with the new one. For example, change the ``INDEXER_PASSWORD`` ocurrences to set the new ``admin`` user password.
+
+   admin user:
 
    .. code-block:: YAML
       :emphasize-lines: 8, 20
@@ -325,6 +343,25 @@ Setting the new password
             - API_USERNAME=wazuh-wui
             - API_PASSWORD=MyS3cr37P450r.*-
         ...
+        wazuh.dashboard:
+          ...
+          environment:
+            - INDEXER_USERNAME=admin
+            - INDEXER_PASSWORD=SecretPassword
+            - WAZUH_API_URL=https://wazuh.manager
+            - DASHBOARD_USERNAME=kibanaserver
+            - DASHBOARD_PASSWORD=kibanaserver
+            - API_USERNAME=wazuh-wui
+            - API_PASSWORD=MyS3cr37P450r.*-
+        ...
+
+   kibanaserver user:
+
+   .. code-block:: YAML
+      :emphasize-lines: 10
+
+      ...
+      services:
         wazuh.dashboard:
           ...
           environment:
@@ -371,6 +408,27 @@ Applying the changes
       $ bash /usr/share/wazuh-indexer/plugins/opensearch-security/tools/securityadmin.sh -cd /usr/share/wazuh-indexer/opensearch-security/ -nhnv -cacert  $CACERT -cert $CERT -key $KEY -p 9200 -icl
 
 #. Exit the Wazuh indexer container and login with the new credentials on the Wazuh dashboard.
+
+
+Wazuh API user
+^^^^^^^^^^^^^^
+
+The steps are performed with the single user used for connect with Wazuh API: ``wazuh-wui`` user.
+
+#. Open the file ``single-node/config/wazuh_dashboard/wazuh.yml`` and modify the value of ``password`` parameter.
+
+   .. code-block:: YAML
+      :emphasize-lines: 7
+
+      ...
+      hosts:
+        - 1513629884013:
+            url: "https://wazuh.manager"
+            port: 55000
+            username: wazuh-wui
+            password: "MyS3cr37P450r.*-"
+            run_as: false
+      ...
 
 Exposed ports
 -------------
