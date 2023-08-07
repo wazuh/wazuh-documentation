@@ -3,8 +3,6 @@
 .. meta::
   :description: In this section of our documentation, you will find more information about Wazuh Docker deployment: its requirements, usage, and exposed ports.
   
-.. _wazuh-container:
-
 Wazuh Docker deployment
 =======================
 
@@ -249,26 +247,27 @@ You can modify and build the Wazuh manager, indexer, and dashboard images locall
 
 .. _change-pwd-existing-usr:
 
-Change the password of a Wazuh users
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+Change the password of Wazuh users
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-To improve security, you can change the default password of Wazuh users. You have 2 types of users: Indexer users and API user.
+To improve security, you can change the default password of the Wazuh users. There are two types of Wazuh users:
 
+-  Wazuh indexer users
+-  Wazuh API users
+
+ To change the passwords of Wazuh users, perform the following steps. Run the commands from your ``single-node/`` or ``multi-node/`` directory, depending on your Wazuh on Docker deployment.
 
 Wazuh indexer users
-^^^^^^^^^^^^^^^^^^^
+~~~~~~~~~~~~~~~~~~~
 
-The steps performed are based on the two users that Wazuh uses by default: ``admin`` and ``kibanaserver`` users.
-
-
-Perform the following steps from your ``single-node/`` directory. If you have a multi-node deployment, you must adapt and perform them from your ``multi-node/`` directory.
+ Follow these steps to change the password of the default ``admin`` and ``kibanaserver`` users.
 
 .. warning::
 
    If you have custom users, add them to the ``internal_users.yml`` file. Otherwise, executing this procedure deletes them.
 
 Setting a new hash
-~~~~~~~~~~~~~~~~~~
+..................
 
 #. Stop the deployment stack if it’s running:
 
@@ -288,94 +287,94 @@ Setting a new hash
 
 #. Replace the hash.
 
-   admin user:
+   -  ``admin`` user
 
-   .. code-block:: YAML
-      :emphasize-lines: 3
+      .. code-block:: YAML
+         :emphasize-lines: 3
 
-      ...
-      admin:
-        hash: "$2y$12$K/SpwjtB.wOHJ/Nc6GVRDuc1h0rM1DfvziFRNPtk27P.c4yDr9njO"
-        reserved: true
-        backend_roles:
-        - "admin"
-        description: "Demo admin user"
+         ...
+         admin:
+           hash: "$2y$12$K/SpwjtB.wOHJ/Nc6GVRDuc1h0rM1DfvziFRNPtk27P.c4yDr9njO"
+           reserved: true
+           backend_roles:
+           - "admin"
+           description: "Demo admin user"
 
-      ...
+         ...
 
-   kibanaserver user:
+   -  ``kibanaserver`` user
 
-   .. code-block:: YAML
-      :emphasize-lines: 3
+      .. code-block:: YAML
+         :emphasize-lines: 3
 
-      ...
-      kibanaserver:
-        hash: "$2a$12$4AcgAt3xwOWadA5s5blL6ev39OXDNhmOesEoo33eZtrq2N0YrU3H."
-        reserved: true
-        description: "Demo kibanaserver user"
+         ...
+         kibanaserver:
+           hash: "$2a$12$4AcgAt3xwOWadA5s5blL6ev39OXDNhmOesEoo33eZtrq2N0YrU3H."
+           reserved: true
+           description: "Demo kibanaserver user"
 
-      ...
+         ...
 
 .. _wazuh-docker-password-setting:
 
 Setting the new password
-~~~~~~~~~~~~~~~~~~~~~~~~
+........................
 
 #. Open  the ``docker-compose.yml`` file. Change all occurrences of the old password with the new one.
 
-   admin user:
+   -  ``admin`` user
 
-   .. code-block:: YAML
-      :emphasize-lines: 8, 20
+      .. code-block:: YAML
+         :emphasize-lines: 8, 20
 
-      ...
-      services:
-        wazuh.manager:
-          ...
-          environment:
-            - INDEXER_URL=https://wazuh.indexer:9200
-            - INDEXER_USERNAME=admin
-            - INDEXER_PASSWORD=SecretPassword
-            - FILEBEAT_SSL_VERIFICATION_MODE=full
-            - SSL_CERTIFICATE_AUTHORITIES=/etc/ssl/root-ca.pem
-            - SSL_CERTIFICATE=/etc/ssl/filebeat.pem
-            - SSL_KEY=/etc/ssl/filebeat.key
-            - API_USERNAME=wazuh-wui
-            - API_PASSWORD=MyS3cr37P450r.*-
-        ...
-        wazuh.dashboard:
-          ...
-          environment:
-            - INDEXER_USERNAME=admin
-            - INDEXER_PASSWORD=SecretPassword
-            - WAZUH_API_URL=https://wazuh.manager
-            - DASHBOARD_USERNAME=kibanaserver
-            - DASHBOARD_PASSWORD=kibanaserver
-            - API_USERNAME=wazuh-wui
-            - API_PASSWORD=MyS3cr37P450r.*-
-        ...
+         ...
+         services:
+           wazuh.manager:
+             ...
+             environment:
+               - INDEXER_URL=https://wazuh.indexer:9200
+               - INDEXER_USERNAME=admin
+               - INDEXER_PASSWORD=SecretPassword
+               - FILEBEAT_SSL_VERIFICATION_MODE=full
+               - SSL_CERTIFICATE_AUTHORITIES=/etc/ssl/root-ca.pem
+               - SSL_CERTIFICATE=/etc/ssl/filebeat.pem
+               - SSL_KEY=/etc/ssl/filebeat.key
+               - API_USERNAME=wazuh-wui
+               - API_PASSWORD=MyS3cr37P450r.*-
+           ...
+           wazuh.dashboard:
+             ...
+             environment:
+               - INDEXER_USERNAME=admin
+               - INDEXER_PASSWORD=SecretPassword
+               - WAZUH_API_URL=https://wazuh.manager
+               - DASHBOARD_USERNAME=kibanaserver
+               - DASHBOARD_PASSWORD=kibanaserver
+               - API_USERNAME=wazuh-wui
+               - API_PASSWORD=MyS3cr37P450r.*-
+           ...
 
-   kibanaserver user:
+   -  ``kibanaserver`` user
 
-   .. code-block:: YAML
-      :emphasize-lines: 10
+      .. code-block:: YAML
+         :emphasize-lines: 10
 
-      ...
-      services:
-        wazuh.dashboard:
-          ...
-          environment:
-            - INDEXER_USERNAME=admin
-            - INDEXER_PASSWORD=SecretPassword
-            - WAZUH_API_URL=https://wazuh.manager
-            - DASHBOARD_USERNAME=kibanaserver
-            - DASHBOARD_PASSWORD=kibanaserver
-            - API_USERNAME=wazuh-wui
-            - API_PASSWORD=MyS3cr37P450r.*-
-        ...
+         ...
+         services:
+           wazuh.dashboard:
+             ...
+             environment:
+               - INDEXER_USERNAME=admin
+               - INDEXER_PASSWORD=SecretPassword
+               - WAZUH_API_URL=https://wazuh.manager
+               - DASHBOARD_USERNAME=kibanaserver
+               - DASHBOARD_PASSWORD=kibanaserver
+               - API_USERNAME=wazuh-wui
+               - API_PASSWORD=MyS3cr37P450r.*-
+           ...
 
 Applying the changes
-~~~~~~~~~~~~~~~~~~~~
+....................
 
 #. Start the deployment stack.
 
@@ -409,17 +408,16 @@ Applying the changes
 
 #. Exit the Wazuh indexer container and login with the new credentials on the Wazuh dashboard.
 
+Wazuh API users
+~~~~~~~~~~~~~~~
 
-Wazuh API user
-^^^^^^^^^^^^^^
-
-The steps are performed with the single user used for connect with Wazuh API: ``wazuh-wui`` user.
+The ``wazuh-wui`` user is the user to connect with the Wazuh API by default. Follow these steps to change the password.
 
 .. note::
-      The password for users must be between 8 and 64 characters long. It should contain at least one uppercase and one lowercase letter, a number, and a symbol.
+   
+   The password for Wazuh API users must be between 8 and 64 characters long. It must contain at least one uppercase and one lowercase letter, a number, and a symbol.
 
-
-#. Open the file ``single-node/config/wazuh_dashboard/wazuh.yml`` and modify the value of ``password`` parameter.
+#. Open the file ``config/wazuh_dashboard/wazuh.yml`` and modify the value of ``password`` parameter.
 
    .. code-block:: YAML
       :emphasize-lines: 7
@@ -453,8 +451,8 @@ The steps are performed with the single user used for connect with Wazuh API: ``
             - SSL_KEY=/etc/ssl/filebeat.key
             - API_USERNAME=wazuh-wui
             - API_PASSWORD=MyS3cr37P450r.*-
-      ...
-      wazuh.dashboard:
+        ...
+        wazuh.dashboard:
           ...
           environment:
             - INDEXER_USERNAME=admin
@@ -472,7 +470,6 @@ The steps are performed with the single user used for connect with Wazuh API: ``
 
       # docker-compose down
       # docker-compose up -d
-
 
 Exposed ports
 -------------
