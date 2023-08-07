@@ -74,8 +74,9 @@ Here are all the available settings for the ``api.yaml`` configuration file. For
         limits:
            eps:
               allow: yes
-         allow_higher_versions:
-            allow: yes
+         agents:
+            allow_higher_versions:
+               allow: yes
 
 .. warning::
 
