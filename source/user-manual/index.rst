@@ -30,4 +30,5 @@ Welcome to the Wazuh user manual. Use it as your reference library once your bas
         wazuh-dashboard/index
         uninstall/index
         files-backup/index
+        Integrations guide <integrations/index>
         
