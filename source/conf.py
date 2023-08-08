@@ -628,7 +628,7 @@ custom_replacements = {
     # --- Open Distro for Elasticsearch
     "|OPEN_DISTRO_LATEST|" : "1.13.2",
     # --- Elasticsearch
-    "|ELASTICSEARCH_ELK_LATEST|" : "7.17.9", # Basic license
+    "|ELASTICSEARCH_ELK_LATEST|" : "7.17.11", # Basic license
     "|ELASTICSEARCH_LATEST|" : "7.10.2",
     # --- Other Elastic
     "|ELASTIC_6_LATEST|" : "6.8.8",
