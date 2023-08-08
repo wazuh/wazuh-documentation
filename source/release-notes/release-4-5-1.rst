@@ -60,8 +60,8 @@ Wazuh dashboard
 -  `#5478 <https://github.com/wazuh/wazuh-kibana-app/pull/5478>`_ Added Apple Silicon architecture button to the register Agent wizard.
 -  `#5497 <https://github.com/wazuh/wazuh-kibana-app/pull/5497>`_ Removed the agent name in the agent info ribbon.
 -  `#5539 <https://github.com/wazuh/wazuh-kibana-app/pull/5539>`_ Changed method to perform redirection on agent table buttons.
--  `#5538 <https://github.com/wazuh/wazuh-kibana-app/pull/5538>`_ Changed windows agent service name in the deploy agent wizard.
--  `#5687 <https://github.com/wazuh/wazuh-kibana-app/pull/5687>`_ Changed the requests to get the agent labels for the managers.
+-  `#5538 <https://github.com/wazuh/wazuh-kibana-app/pull/5538>`_ Changed Windows agent service name in the deploy agent wizard.
+-  `#5687 <https://github.com/wazuh/wazuh-kibana-app/pull/5687>`_ Changed the requests to get the agent labels from the managers.
 
 Wazuh Kibana plugin for Kibana 7.10.2, 7.16.x, and 7.17.x
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
@@ -69,8 +69,8 @@ Wazuh Kibana plugin for Kibana 7.10.2, 7.16.x, and 7.17.x
 -  `#5478 <https://github.com/wazuh/wazuh-kibana-app/pull/5478>`_ Added Apple Silicon architecture button to the register Agent wizard.
 -  `#5497 <https://github.com/wazuh/wazuh-kibana-app/pull/5497>`_ Removed the agent name in the agent info ribbon.
 -  `#5539 <https://github.com/wazuh/wazuh-kibana-app/pull/5539>`_ Changed method to perform redirection on agent table buttons.
--  `#5538 <https://github.com/wazuh/wazuh-kibana-app/pull/5538>`_ Changed windows agent service name in the deploy agent wizard.
--  `#5687 <https://github.com/wazuh/wazuh-kibana-app/pull/5687>`_ Changed the requests to get the agent labels for the managers.
+-  `#5538 <https://github.com/wazuh/wazuh-kibana-app/pull/5538>`_ Changed Windows agent service name in the deploy agent wizard.
+-  `#5687 <https://github.com/wazuh/wazuh-kibana-app/pull/5687>`_ Changed the requests to get the agent labels from the managers.
 
 Packages
 ^^^^^^^^
