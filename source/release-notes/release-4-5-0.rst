@@ -16,7 +16,7 @@ This version includes new features or improvements, such as the following:
 Manager
 ^^^^^^^
 
-- `#17954 <https://github.com/wazuh/wazuh/pull/17954>`_ Vulnerability Detector now fetches the NVD feed from `<https://feed.wazuh.com>`_, based on the NVD API 2.0.
+- `#17954 <https://github.com/wazuh/wazuh/pull/17954>`_ Vulnerability Detector now fetches the NVD feed from `https://feed.wazuh.com`, based on the NVD API 2.0.
 
    - The ``<update_from_year>`` option has been deprecated.
 
@@ -37,6 +37,7 @@ Manager
 Reference                                                         Description
 ==============================================================    =============
 `#17656 <https://github.com/wazuh/wazuh/pull/17656>`_             Fixed an error in the installation commands of the API and Framework modules when upgrading from sources.
+`#18123 <https://github.com/wazuh/wazuh/issues/18123>`_           Fixed embedded Python interpreter to remove old Wazuh packages from it.
 ==============================================================    =============
 
 RESTful API
