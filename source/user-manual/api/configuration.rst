@@ -75,8 +75,8 @@ Here are all the available settings for the ``api.yaml`` configuration file. For
            eps:
               allow: yes
          agents:
-            allow_higher_versions:
-               allow: yes
+           allow_higher_versions:
+              allow: yes
 
 .. warning::
 
@@ -338,7 +338,7 @@ agents
 +------------+----------------------+---------------+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
 | Sub-fields | Allowed values       | Default value | Description                                                                                                                                                                                                                                                                                                                                 |
 +============+======================+===============+=============================================================================================================================================================================================================================================================================================================================================+
-| allow      | yes, no              | yes          | Allow uploading configurations accepting higher agent versions through the Wazuh API. Setting this option to ``false`` prevents uploading ``ossec.conf`` files that contain the ``<agents><allow_higher_versions>`` section inside the :ref:`global tag <reference_ossec_global>`.                                                                                 |
+| allow      | yes, true, no, false | true          | Allow uploading configurations accepting higher agent versions through the Wazuh API. Setting this option to ``false`` prevents uploading ``ossec.conf`` files that contain the ``<agents><allow_higher_versions>`` section with the ``yes`` value inside the :ref:`global tag <reference_ossec_global>`.                                   |
 +------------+----------------------+---------------+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
 
 .. _api_security_configuration_options:
