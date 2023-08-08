@@ -187,7 +187,7 @@ Follow the steps below to query the endpoint database from the command line usin
                   "format": "deb",
                   "vendor": "Wazuh, Inc <info@wazuh.com>",
                   "size": 28894,
-                  "version": "4.4.0-1",
+                  "version": "|WAZUH_CURRENT|-1",
                   "description": "Wazuh helps you to gain security visibility into your infrastructure by monitoring hosts at an operating system and application level. It provides the following capabilities: log analysis, file integrity monitoring, intrusions detection and policy and compliance monitoring",
                   "section": "admin",
                   "name": "wazuh-agent",
