@@ -39,8 +39,8 @@ Manager
 Agent
 ^^^^^
 
--  `#17673 <https://github.com/wazuh/wazuh/pull/17673>`_ Added new validations for the AWS integration arguments.
 -  `#2224 <https://github.com/wazuh/wazuh-packages/pull/2224>`_ Added native agent support for Apple silicon.
+-  `#17673 <https://github.com/wazuh/wazuh/pull/17673>`_ Added new validations for the AWS integration arguments.
 -  `#16607 <https://github.com/wazuh/wazuh/pull/16607>`_ The agent for Windows now loads its shared libraries after running the verification.
 
 Ruleset
@@ -71,11 +71,6 @@ Wazuh Kibana plugin for Kibana 7.10.2, 7.16.x, and 7.17.x
 -  `#5539 <https://github.com/wazuh/wazuh-kibana-app/pull/5539>`_ Changed method to perform redirection on agent table buttons.
 -  `#5538 <https://github.com/wazuh/wazuh-kibana-app/pull/5538>`_ Changed Windows agent service name in the deploy agent wizard.
 -  `#5687 <https://github.com/wazuh/wazuh-kibana-app/pull/5687>`_ Changed the requests to get the agent labels from the managers.
-
-Packages
-^^^^^^^^
-
--  `#2224 <https://github.com/wazuh/wazuh-packages/pull/2224>`_ Added native agent support for Apple silicon.
 
 Resolved issues
 ---------------
@@ -166,4 +161,5 @@ More details about these changes are provided in the changelog of each component
 -  `wazuh/wazuh-kibana-app 7.10.2 <https://github.com/wazuh/wazuh-kibana-app/blob/v4.5.1-7.10.2/CHANGELOG.md>`_
 -  `wazuh/wazuh-kibana-app 7.16.x <https://github.com/wazuh/wazuh-kibana-app/blob/v4.5.1-7.16.3/CHANGELOG.md>`_
 -  `wazuh/wazuh-kibana-app 7.17.x <https://github.com/wazuh/wazuh-kibana-app/blob/v4.5.1-7.17.11/CHANGELOG.md>`_
+-  `wazuh/wazuh-splunk <https://github.com/wazuh/wazuh-splunk/blob/v4.5.1-8.2/CHANGELOG.md>`_
 -  `wazuh/wazuh-packages <https://github.com/wazuh/wazuh-packages/releases/tag/v4.5.1>`_
