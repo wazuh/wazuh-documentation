@@ -8,8 +8,8 @@
 Monitoring Microsoft Graph Activity
 ===================================
 
-The **Microsoft Graph API** is a powerful interface that allows an organzation's admins to review a wide variety of information concerning a Microsoft 365 tenant and its associated users and endpoints.
-This inculdes details such as security scores and detected incidents to information like avaliable OneDrive resources and login audit logs.
+The **Microsoft Graph API** is a powerful interface that allows an organization's admins to review a wide variety of information concerning a Microsoft 365 tenant and its associated users and endpoints.
+This includes details such as security scores and detected incidents as well as information like available OneDrive resources and login audit logs.
 
 In turn, this module integrates with Microsoft Graph to bring this content-rich source of information into Wazuh. This is done through a series of `resources` and `relationships`, which describe the function, type, and content of various logs available within Microsoft Graph.
 
@@ -21,65 +21,70 @@ To retrieve a set of logs from Microsoft Graph, make a GET request against the U
 
     GET https://graph.microsoft.com/{version}/{resource}/{relationship}?{query-parameters}
 
-A description of the current production version of the Microsoft Graph API can be found at this `link <https://learn.microsoft.com/en-us/graph/overview?view=graph-rest-1.0>`_.
+A description of the current production version of the Microsoft Graph API can be found at the `Overview of Microsoft Graph <https://learn.microsoft.com/en-us/graph/overview?view=graph-rest-1.0>`_.
 
 Alternatively, the API can be directly experimented with through the `Microsoft Graph Explorer <https://developer.microsoft.com/graph/graph-explorer>`_.
 
 Microsoft Graph API Setup
-^^^^^^^^^^^^^^^^^^^^^^^^^
+-------------------------
 
 Before **Wazuh** can begin pulling logs and other content from the Microsoft Graph API, it must be authorized and pass through an authentication process. To authenticate, Wazuh must provide the ``tenant_id``, ``client_id``, and ``secret_value`` of an authorized application, which we will register through Azure.
 
-#. Register your app
+Registering your app
+^^^^^^^^^^^^^^^^^^^^
 
-   To authenticate with the Microsoft identity platform endpoint, you need to register an app in your `Microsoft Azure portal application registration <https://portal.azure.com/#blade/Microsoft_AAD_RegisteredApps/ApplicationsListBlade>`_ section.
-   Once there, click on **New registration**:
+#. To authenticate with the Microsoft identity platform endpoint, you need to register an app in your `Microsoft Azure portal application registration <https://portal.azure.com/#blade/Microsoft_AAD_RegisteredApps/ApplicationsListBlade>`_ section. Once there, click on **New registration**:
 
    .. thumbnail:: /images/cloud-security/ms-graph/0-azure-app-new-registration.png
        :title: Register your app
+       :alt: Register your app
        :align: center
        :width: 100%
 
-   Fill in the name of your app, choose the desired account type, and click on the **Register** button:
+#. Fill in the name of your app, choose the desired account type, and click on the **Register** button:
 
    .. thumbnail:: /images/cloud-security/ms-graph/1-azure-wazuh-app-register-application.png
        :title: Register your app
+       :alt: Register your app
        :align: center
        :width: 100%
 
-   The app is now registered, and you can see information about it in its **Overview** section. Make sure to note down the ``client_id`` and ``tenant_id`` information:
+#. The app is now registered, and you can see information about it in its **Overview** section. Make sure to note down the ``client_id`` and ``tenant_id`` information:
 
    .. thumbnail:: /images/cloud-security/ms-graph/2-azure-wazuh-app-overview.png
        :title: Register your app
+       :alt: Register your app
        :align: center
        :width: 100%
 
-#. Certificates & secrets
-
-   Now you need to generate a secret to be used during the authentication process. Go to **Certificates & secrets** and click on **New client secret**,
-   which will then generate the secret and its ID:
+Certificates & secrets
+^^^^^^^^^^^^^^^^^^^^^^
+#. Generate a secret to be used during the authentication process. Go to **Certificates & secrets** and click on **New client secret**, which will then generate the secret and its ID:
    
    .. thumbnail:: /images/cloud-security/ms-graph/3-azure-wazuh-app-create-secret.png
        :title: Certificates & secrets
+       :alt: Certificates & secrets
        :align: center
        :width: 100%
    
-   Ensure that the ``secret_value`` information is copied down and saved:
+#. Ensure that the ``secret_value`` information is copied down and saved:
    
-   .. thumbnail:: /images/cloud-security/ms-graph/3-azure-wazuh-app-create-secret-copy-value.png
-       :title: Copy secrets value
-       :align: center
-       :width: 100%
+    .. thumbnail:: /images/cloud-security/ms-graph/3-azure-wazuh-app-create-secret-copy-value.png
+        :title: Copy secrets value
+        :alt: Copy secrets value
+        :align: center
+        :width: 100%
    
-   .. note:: Make sure you write down the secret's value section, because the UI won't let you copy it afterward.
+    .. note:: Make sure you write down the secret's value section, because the UI won't let you copy it afterward.
 
-#. API permissions
+API permissions
+^^^^^^^^^^^^^^^
 
-   The application needs specific API permissions to be able to retrieve logs and events from the Microsoft Graph API. In this case, you are looking for permissions related to the `security` resource.
+The application needs specific API permissions to be able to retrieve logs and events from the Microsoft Graph API. In this case, you are looking for permissions related to the `security` resource.
    
-   To configure the application permissions, go to the **API permissions** page and choose **Add a permission**. Select **Microsoft Graph API** and click on **Application permissions**.
+#. To configure the application permissions, go to the **API permissions** page and choose **Add a permission**. Select **Microsoft Graph API** and click on **Application permissions**.
    
-   You need to add the following relationships' permissions under the **SecurityAlert** and **SecurityIncident** sections:
+#. Add the following relationships' permissions under the **SecurityAlert** and **SecurityIncident** sections:
    
    - ``SecurityAlert.Read.All``. Read `alerts` & `alerts_v2` relationship data from your tenant.
 
@@ -87,23 +92,26 @@ Before **Wazuh** can begin pulling logs and other content from the Microsoft Gra
    
    .. thumbnail:: /images/cloud-security/ms-graph/4-azure-wazuh-app-configure-permissions.png
        :title: API permissions
+       :alt: API permissions
        :align: center
        :width: 100%
+      
+.. note:: Admin consent is required for API permission changes.
    
-   .. note:: Admin consent is required for API permission changes.
-   
-   .. thumbnail:: /images/cloud-security/ms-graph/4-azure-wazuh-app-configure-permissions-admin-consent.png
-       :title: API permissions admin consent
-       :align: center
-       :width: 100%
+.. thumbnail:: /images/cloud-security/ms-graph/4-azure-wazuh-app-configure-permissions-admin-consent.png
+    :title: API permissions admin consent
+    :alt: API permissions admin consent
+    :align: center
+    :width: 100%
 
 
 Wazuh configuration
-^^^^^^^^^^^^^^^^^^^
+-------------------
 
 Next, we will see the options we have to configure to allow the integration to successfully pull logs from the Microsoft Graph API.
 
-Proceed to configure the ``ms-graph`` module in the Wazuh manager or in the Wazuh agent. Through the following configuration, Wazuh is ready to search for logs created by Microsoft Graph resources and relationships.
+Configure the ``ms-graph`` module in the Wazuh manager or in the Wazuh agent :doc:`configuration file </user-manual/reference/ossec-conf/index>`. Through the following configuration, Wazuh is ready to search for logs created by Microsoft Graph resources and relationships.
+
 In this case, we will search for `alerts_v2` and `incidents` type events within the `security` resource at an interval of ``5m``. The logs will only be those that were created after the module was started:
 
 .. code-block:: xml
@@ -128,16 +136,16 @@ In this case, we will search for `alerts_v2` and `incidents` type events within 
         </resource>
     </ms-graph>
 
-.. note:: A reference for the module's options can be found :ref:`here <ms-graph-module>`.
+.. note:: To learn more about the module options, see the :doc:`ms-graph </user-manual/reference/ossec-conf/ms-graph-module>` reference.
 
 Using the configuration mentioned above, we can examine a classic example of a security event: malicious spam emails.
 
 Examining Microsoft Graph logs
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+------------------------------
 
-One of the more ubiquitous alerts that an organization of any size will recieve is spam emails. In this case, we can specifically look at an example where the spam email contains malicious content, and examine how Microsoft Graph & Wazuh report on this information.
+One of the more ubiquitous alerts that an organization of any size receive is spam emails. In this case, we can specifically look at an example where the spam email contains malicious content, and examine how Microsoft Graph & Wazuh report on this information.
 
-Imagine that we have set up the Microsoft Graph module to monitor the `security` resource, and the `alerts_v2` relationship within that. Presuming that **Microsoft Defender** is enabled within our **Microsoft 365 tenant**, we would expect JSON similiar to the following to be generated:
+Imagine that we have set up the Microsoft Graph module to monitor the `security` resource, and the `alerts_v2` relationship within that. Presuming that **Microsoft Defender** is enabled within our **Microsoft 365 tenant**, we would expect JSON similar to the following to be generated:
 
 .. code-block:: json
     :class: output
@@ -183,10 +191,11 @@ Imagine that we have set up the Microsoft Graph module to monitor the `security`
     }
 
 Wazuh Rules
-^^^^^^^^^^^
+-----------
 
-The Wazuh manager contains a set of premade rules for helping to catagorize the importance and meaning of various events:
-in this example, we can take a look at the rule id ``99006``, which corresponds to ``MS Graph message: The alert is true positive and detected malicious activity.``, per the `Microsoft Graph documentation <https://learn.microsoft.com/en-us/graph/api/resources/security-alert?view=graph-rest-1.0#alertclassification-values>`_.
+The Wazuh manager includes a set of pre-made rules that aid in classifying the importance and context of different events. 
+
+In this example, we can take a look at the rule id ``99006``, which corresponds to ``MS Graph message: The alert is true positive and detected malicious activity.``, per the `Microsoft Graph documentation <https://learn.microsoft.com/en-us/graph/api/resources/security-alert?view=graph-rest-1.0#alertclassification-values>`_.
 
 .. code-block:: xml
 
@@ -197,7 +206,7 @@ in this example, we can take a look at the rule id ``99006``, which corresponds 
         <description>MS Graph message: The alert is true positive and detected malicious activity.</description>
     </rule>
 
-Once Wazuh connects with the Microsoft Graph API, the log from above with trigger the rule and raise the following alert:
+Once Wazuh connects with the Microsoft Graph API, the previous log triggers the rule and raises the following alert:
 
 .. code-block:: json
     :emphasize-lines: 5

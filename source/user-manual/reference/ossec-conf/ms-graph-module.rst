@@ -88,7 +88,7 @@ only_future_events
 
 Set it to **yes** to collect events generated since the Wazuh manager was started.
 
-By default, the Microsoft Graph module will only read logs from when the module was started onwards.
+By default, the Microsoft Graph module will only read logs from when the module was started onward.
 
 +--------------------+-----------------------------+
 | **Default value**  | yes                         |
@@ -105,11 +105,11 @@ The length of time the module will wait before searching for logs.
 
     When Wazuh starts, the module will wait for the duration of the configured time interval before running the first scan unless ``run_on_start`` is set to **yes**.
 
-+--------------------+------------------------------------------------------------------------------------------------------------------------------------------+
-| **Default value**  | 1d                                                                                                                                       |
-+--------------------+------------------------------------------------------------------------------------------------------------------------------------------+
-| **Allowed values** | A positive number that should contain a suffix character indicating a time unit, such as, s (seconds), m (minutes), h (hours), d (days). |
-+--------------------+------------------------------------------------------------------------------------------------------------------------------------------+
++--------------------+---------------------------------------------------------------------------------------------------------------------------------------------+
+| **Default value**  | 1d                                                                                                                                          |
++--------------------+---------------------------------------------------------------------------------------------------------------------------------------------+
+| **Allowed values** | A positive number that should contain a suffix character indicating a time unit, such as s (seconds), m (minutes), h (hours), and d (days). |
++--------------------+---------------------------------------------------------------------------------------------------------------------------------------------+
 
 curl_max_size
 ^^^^^^^^^^^^^
@@ -204,7 +204,7 @@ Secret associated with the application registered in Azure.
 api_auth\\api_type
 ^^^^^^^^^^^^^^^^^^
 
-Type of Microsoft 365 subscription plan used by the tenant. `global` refers to either a commerical or GCC tenant.
+Type of Microsoft 365 subscription plan used by the tenant. `global` refers to either a commercial or GCC tenant.
 
 +--------------------+------------------------+
 | **Default value**  | N/A                    |
@@ -231,7 +231,7 @@ This block configures which logging sources to pull from the Microsoft Graph RES
 resource\\name
 ^^^^^^^^^^^^^^
 
-The name of the resource (i.e., specific API endpoint) to query for logs. Additional information on the Microsoft Graph REST API endpoints can be found at this `link <https://learn.microsoft.com/en-us/graph/api/overview?view=graph-rest-1.0>`_.
+The name of the resource (i.e., specific API endpoint) to query for logs. Additional information on the Microsoft Graph REST API endpoints can be found at the `Microsoft Graph REST API v1.0 endpoint reference <https://learn.microsoft.com/en-us/graph/api/overview?view=graph-rest-1.0>`_.
 
 +--------------------+--------------+
 | **Default value**  | N/A          |
@@ -245,7 +245,7 @@ resource\\relationship
 This section configures the types of content (`relationships`) to obtain logs of. For the security resource, this includes the following relationships:
 
 - alerts: Legacy alert from supported Azure and Microsoft 365 Defender security providers.
-- alerts_v2: An enrichened version of alerts that contains additional information on suspicious activies and related collections of alerts.
+- alerts_v2: An enriched version of alerts that contains additional information on suspicious activities and related collections of alerts.
 - incidents: Correlated alerts and associated data that make up the story of an attack (part of Microsoft 365 Defender).
 - secureScores: The tenant's security score per day, at the tenant and control level.
 - cases/eDiscoveryCases: Contains custodians, searches, and review sets from Microsoft Purview eDiscovery Premium.
