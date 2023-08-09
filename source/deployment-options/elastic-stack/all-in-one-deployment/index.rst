@@ -71,7 +71,7 @@ Elasticsearch installation and configuration
 
    .. code-block:: console
 
-     # curl -so /etc/elasticsearch/elasticsearch.yml https://packages.wazuh.com/4.4/tpl/elastic-basic/elasticsearch_all_in_one.yml
+     # curl -so /etc/elasticsearch/elasticsearch.yml https://packages.wazuh.com/|WAZUH_CURRENT_MINOR|/tpl/elastic-basic/elasticsearch_all_in_one.yml
 
 
 Certificates creation and deployment
