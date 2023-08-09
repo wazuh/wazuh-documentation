@@ -168,12 +168,12 @@ Follow the steps below to query the endpoint database from the command line usin
 
    .. code-block:: console
 
-      curl -k -X GET "https://<WAZUH_SERVER_IP>:55000/syscollector/010/packages?pretty=true&name=wazuh-agent" -H  "Authorization: Bearer $TOKEN"
+      curl -k -X GET "https://<WAZUH_SERVER_IP>:55000/syscollector/001/packages?pretty=true&name=wazuh-agent" -H  "Authorization: Bearer $TOKEN"
 
 
    .. code-block:: console
       :class: output
-      :emphasize-lines: 16
+      :emphasize-lines: 14
       
       {
          "data": {
@@ -181,18 +181,18 @@ Follow the steps below to query the endpoint database from the command line usin
                {
                   "scan": {
                      "id": 0,
-                     "time": "2023-03-29T10:54:07+00:00"
+                     "time": "2023-08-09T06:49:25+00:00"
                   },
-                  "priority": "extra",
-                  "format": "deb",
-                  "vendor": "Wazuh, Inc <info@wazuh.com>",
-                  "size": 28894,
-                  "version": "|WAZUH_CURRENT|-1",
+                  "architecture": "x86_64",
                   "description": "Wazuh helps you to gain security visibility into your infrastructure by monitoring hosts at an operating system and application level. It provides the following capabilities: log analysis, file integrity monitoring, intrusions detection and policy and compliance monitoring",
-                  "section": "admin",
+                  "format": "rpm",
+                  "size": 25951010,
+                  "install_time": "1691563709",
                   "name": "wazuh-agent",
-                  "architecture": "amd64",
-                  "agent_id": "010"
+                  "section": "System Environment/Daemons",
+                  "vendor": "Wazuh, Inc <info@wazuh.com>",
+                  "version": "4.5.0-1",
+                  "agent_id": "001"
                }
             ],
             "total_affected_items": 1,
@@ -201,7 +201,7 @@ Follow the steps below to query the endpoint database from the command line usin
          },
          "message": "All specified syscollector information was returned",
          "error": 0
-
+      }
 
 Using SQLite
 ^^^^^^^^^^^^
