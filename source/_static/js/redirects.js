@@ -5,6 +5,7 @@ const redirectSameRelease = [];
 
 /* Note: new release versions must always be inserted in the first position of the array "versions" */
 const versions = [
+  '4.6',
   '4.4',
   '4.3',
   '4.2',
@@ -69,6 +70,14 @@ removedUrls['x.y'] = [
   '/old-url',
 ];
 */
+
+/* *** RELEASE 4.6 ****/
+
+newUrls['4.6'] = [
+  '/cloud-security/ms-graph/index.html',
+  '/cloud-security/ms-graph/monitoring-ms-graph-activity.html',
+  '/user-manual/reference/ossec-conf/ms-graph-module.html',
+];
 
 /* *** RELEASE 4.4 ****/
 
