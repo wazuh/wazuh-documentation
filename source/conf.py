@@ -679,7 +679,8 @@ def transformReredirect (absolutePaths):
         formattedList[formattedSource] = formattedPath
     return formattedList
 
-redirects = transformReredirect(redirectSameRelease[version])
+if version in redirectSameRelease.keys():
+    redirects = transformReredirect(redirectSameRelease[version])
 
 redirectSameRelease = json.dumps(redirectSameRelease)
 
