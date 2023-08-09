@@ -406,6 +406,10 @@ Applying the changes
 
       $ bash /usr/share/wazuh-indexer/plugins/opensearch-security/tools/securityadmin.sh -cd /usr/share/wazuh-indexer/opensearch-security/ -nhnv -cacert  $CACERT -cert $CERT -key $KEY -p 9200 -icl
 
+.. note::
+
+   Wazuh indexer takes ``2`` to ``5`` minutes to start correctly, depending on the size of the nodes, assigned hardware and the speed of the network. It is recommended that you wait this time before running ``securityadmin.sh`` so that it does not return an error message..
+
 #. Exit the Wazuh indexer container and login with the new credentials on the Wazuh dashboard.
 
 Wazuh API users
