@@ -86,9 +86,9 @@ Enables the Microsoft Graph module.
 only_future_events
 ^^^^^^^^^^^^^^^^^^
 
-By default, the Microsoft Graph module will only read logs from when the module was started onwards.
+Set it to **yes** to collect events generated since the Wazuh manager was started.
 
-To always read all log content that exists on the tenant, set this to **no**.
+By default, the Microsoft Graph module will only read logs from when the module was started onwards.
 
 +--------------------+-----------------------------+
 | **Default value**  | yes                         |
@@ -152,6 +152,7 @@ This block configures the credentials used for authenticating with the Microsoft
 - `api_auth\\tenant_id`_
 - `api_auth\\client_id`_
 - `api_auth\\secret_value`_
+- `api_auth\\api_type`_
 
 .. warning:: In the case of an invalid configuration, a warning message will be generated in the log file.
 

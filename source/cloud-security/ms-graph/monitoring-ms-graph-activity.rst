@@ -9,7 +9,7 @@ Monitoring Microsoft Graph Activity
 ===================================
 
 The **Microsoft Graph API** is a powerful interface that allows an organzation's admins to review a wide variety of information concerning a Microsoft 365 tenant and its associated users and endpoints.
-This inculdes details such as security scores and detected incidents to information like  avaliable OneDrive resources and login audit logs.
+This inculdes details such as security scores and detected incidents to information like avaliable OneDrive resources and login audit logs.
 
 In turn, this module integrates with Microsoft Graph to bring this content-rich source of information into Wazuh. This is done through a series of `resources` and `relationships`, which describe the function, type, and content of various logs available within Microsoft Graph.
 
@@ -35,21 +35,21 @@ Before **Wazuh** can begin pulling logs and other content from the Microsoft Gra
    To authenticate with the Microsoft identity platform endpoint, you need to register an app in your `Microsoft Azure portal application registration <https://portal.azure.com/#blade/Microsoft_AAD_RegisteredApps/ApplicationsListBlade>`_ section.
    Once there, click on **New registration**:
 
-   .. thumbnail:: ../images/ms-graph/0-azure-app-new-registration.png
+   .. thumbnail:: /images/cloud-security/ms-graph/0-azure-app-new-registration.png
        :title: Register your app
        :align: center
        :width: 100%
 
    Fill in the name of your app, choose the desired account type, and click on the **Register** button:
 
-   .. thumbnail:: ../images/ms-graph/1-azure-wazuh-app-register-application.png
+   .. thumbnail:: /images/cloud-security/ms-graph/1-azure-wazuh-app-register-application.png
        :title: Register your app
        :align: center
        :width: 100%
 
    The app is now registered, and you can see information about it in its **Overview** section. Make sure to note down the ``client_id`` and ``tenant_id`` information:
 
-   .. thumbnail:: ../images/ms-graph/2-azure-wazuh-app-overview.png
+   .. thumbnail:: /images/cloud-security/ms-graph/2-azure-wazuh-app-overview.png
        :title: Register your app
        :align: center
        :width: 100%
@@ -59,14 +59,14 @@ Before **Wazuh** can begin pulling logs and other content from the Microsoft Gra
    Now you need to generate a secret to be used during the authentication process. Go to **Certificates & secrets** and click on **New client secret**,
    which will then generate the secret and its ID:
    
-   .. thumbnail:: ../images/ms-graph/3-azure-wazuh-app-create-secret.png
+   .. thumbnail:: /images/cloud-security/ms-graph/3-azure-wazuh-app-create-secret.png
        :title: Certificates & secrets
        :align: center
        :width: 100%
    
    Ensure that the ``secret_value`` information is copied down and saved:
    
-   .. thumbnail:: ../images/ms-graph/3-azure-wazuh-app-create-secret-copy-value.png
+   .. thumbnail:: /images/cloud-security/ms-graph/3-azure-wazuh-app-create-secret-copy-value.png
        :title: Copy secrets value
        :align: center
        :width: 100%
@@ -85,14 +85,14 @@ Before **Wazuh** can begin pulling logs and other content from the Microsoft Gra
 
    - ``SecurityIncident.Read.All``. Read `incident` relationship data, including associated events/alerts, from your tenant.
    
-   .. thumbnail:: ../images/ms-graph/4-azure-wazuh-app-configure-permissions.png
+   .. thumbnail:: /images/cloud-security/ms-graph/4-azure-wazuh-app-configure-permissions.png
        :title: API permissions
        :align: center
        :width: 100%
    
    .. note:: Admin consent is required for API permission changes.
    
-   .. thumbnail:: ../images/ms-graph/4-azure-wazuh-app-configure-permissions-admin-consent.png
+   .. thumbnail:: /images/cloud-security/ms-graph/4-azure-wazuh-app-configure-permissions-admin-consent.png
        :title: API permissions admin consent
        :align: center
        :width: 100%
