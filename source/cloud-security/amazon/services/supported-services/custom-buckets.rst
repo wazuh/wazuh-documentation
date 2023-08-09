@@ -10,18 +10,18 @@ Custom Logs Buckets
 
 .. versionadded:: 4.7.0
 
-`Amazon Simple Queue Service (Amazon SQS)  <https://aws.amazon.com/sqs/>`_ is a fully managed message queuing service that offers secure, durable, and available hosted queues to decouple and scale software systems and components.
-It allows sending, storing, and receiving messages between software components at any volume, without losing messages or requiring other services to be available. These features make it an optimal component to associate with Amazon S3 Buckets to consume any type of log.
+`Amazon Simple Queue Service (Amazon SQS)  <https://aws.amazon.com/sqs/>`_ is a fully managed message queuing service. It offers secure, durable, and available hosted queues to decouple and scale software systems and components. It allows sending, storing, and receiving messages between software components at any volume, without losing messages or requiring other services to be available. These features make it an optimal component to associate with Amazon S3 buckets to consume any type of log.
 
-Combining Amazon SQS with Amazon S3 buckets, allows Wazuh to fetch any JSON, CSV or plain text logs, originated in AWS or not, and process the events inside them.
+Combining Amazon SQS with Amazon S3 buckets allows Wazuh to fetch JSON, CSV, and plain text logs from any custom path. The origin of these logs don't even need to be AWS.
 
 .. note::
-  It is a precondition of the module for the CSV logs to have the corresponding column headers to be properly processed.
+
+   To properly process CSV logs, they must include column headers.
 
 To set up the Wazuh integration for Custom Logs Buckets, you need to do the following:
 
-    #. Create an AWS SQS Queue.
-    #. Configure an S3 bucket to send notifications to the queue for every object creation event.
+   #. Create an AWS SQS Queue.
+   #. Configure an S3 bucket. For every object creation event, the bucket sends notifications to the queue.
 
 AWS configuration
 -----------------
@@ -29,58 +29,61 @@ AWS configuration
 Amazon Simple Queue Service
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-Set up a **Standard** type SQS Queue with the default configurations and apply the following **Access Policy**:
+#. Set up a *Standard* type SQS Queue with the default configurations.  You can apply an Access Policy similar to the following example, where ``<region>``, ``<account-id>``, and ``<s3-bucket>`` are the region, account ID, and the name you are going to provide to the S3 bucket.
 
-.. code-block:: json
+   .. code-block:: json
 
-  {
-  "Version": "2012-10-17",
-  "Id": "example-ID",
-  "Statement": [
-    {
-      "Sid": "example-access-policy",
-      "Effect": "Allow",
-      "Principal": {
-        "Service": "s3.amazonaws.com"
-      },
-      "Action": "SQS:SendMessage",
-      "Resource": "arn:aws:sqs:<region>:<account-id>:<s3-bucket>",
-      "Condition": {
-        "StringEquals": {
-          "aws:SourceAccount": "<account-id>"
-        },
-        "ArnLike": {
-          "aws:SourceArn": "arn:aws:s3:*:*:<s3-bucket>"
-        }
-      }
-    }
-  ]
-  }
-
+     {
+     "Version": "2012-10-17",
+     "Id": "example-ID",
+     "Statement": [
+       {
+         "Sid": "example-access-policy",
+         "Effect": "Allow",
+         "Principal": {
+           "Service": "s3.amazonaws.com"
+         },
+         "Action": "SQS:SendMessage",
+         "Resource": "arn:aws:sqs:<region>:<account-id>:<s3-bucket>",
+         "Condition": {
+           "StringEquals": {
+             "aws:SourceAccount": "<account-id>"
+           },
+           "ArnLike": {
+             "aws:SourceArn": "arn:aws:s3:*:*:<s3-bucket>"
+           }
+         }
+       }
+     ]
+     }
   
-.. note::
-     This is an example Access Policy. It can be modified to accept S3 notifications from different ``<account-id>`` values or to apply different conditions. More information `here <https://docs.aws.amazon.com/AWSSimpleQueueService/latest/SQSDeveloperGuide/sqs-overview-of-managing-access.html>`_. 
+   You can make your access policy to accept S3 notifications from different account IDs and to apply different conditions. More information in `Managing access in Amazon SQS <https://docs.aws.amazon.com/AWSSimpleQueueService/latest/SQSDeveloperGuide/sqs-overview-of-managing-access.html>`_. 
 
 Amazon S3 and Event Notifications
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-The steps to have an S3 bucket reporting creation events are:
+To configure an S3 bucket that reports creation events, do the following.
 
-#. Configure an S3 bucket as defined in the :ref:`Configuring an S3 Bucket <s3_bucket>` section with the name provided in the previous section.
-#. Once created, go to **Event notifications** inside the **Properties** tab and select **Create event notification**. 
-#. In **Event Types**, select **All object create events**. This will generate notifications for any type of event that results in the creation of an object in the bucket.
-#. In the **Destination** section, select **SQS queue** and **Choose from your SQS queues**, choosing the created queue in the previous step.
+#. Configure an S3 bucket as defined in the :doc:`Configuring an S3 Bucket <../prerequisites/S3-bucket>` section. Provide the name you decided in the previous section.
+#. Once created, go to **Event notifications** inside the **Properties** tab. Select **Create event notification**. 
+#. In **Event Types**, select **All object create events**. This generates notifications for any type of event that results in the creation of an object in the bucket.
+#. In the **Destination** section, select the following options:
 
+   -  **SQS queue**
+   -  **Choose from your SQS queues**
+#. Choose the queue you created previously.
 
 Wazuh Configuration
 -------------------
 
-Buckets Subscriber section in ossec.conf 
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+.. warning::
+      
+   Every message sent to the queue is read and deleted. Make sure you only use the queue for bucket notifications.
 
-Set the configuration inside the section ``<subscriber type="buckets">``. You can find this tag inside the ``<wodle name="aws-s3">`` section of the ``/var/ossec/etc/ossec.conf`` file.
+#. Edit the ``/var/ossec/etc/ossec.conf`` file. Add the SQS name and your `Configuration parameters`_ for the buckets service. Set this inside ``<subscriber type="buckets">``. For example:
 
-    .. code-block:: xml
+   .. code-block:: xml
+      :emphasize-lines: 6,7
 
       <wodle name="aws-s3">
           <disabled>no</disabled>
@@ -92,42 +95,41 @@ Set the configuration inside the section ``<subscriber type="buckets">``. You ca
           </subscriber>
       </wodle>
 
-    .. note::
-      Check the :doc:`AWS S3 module </user-manual/reference/ossec-conf/wodle-s3>` reference manual to learn more about the available settings.
+   Check the :doc:`AWS S3 module </user-manual/reference/ossec-conf/wodle-s3>` reference manual to learn more about the available settings.
 
-After setting the required parameters, restart the Wazuh manager to apply the changes:
-
-.. include:: /_templates/common/restart_manager.rst
-Please note that the module's time of execution varies depending on the number of notifications present in the queue. If the ``<interval>`` value is less than the required time of execution, the :ref:`Interval overtaken<interval_overtaken_message>` message will be displayed in the ``ossec.log`` file.
-
-   .. warning::
+   .. note::
       
-      Every message sent to the queue will be read and deleted, make sure that the queue is only used for bucket notifications.
+      The amount of notifications present in the queue affects the execution time of the AWS S3 module. If the ``<interval>`` value for the waiting time between executions is too short, the :ref:`Interval overtaken <interval_overtaken_message>` warning is logged into the ``ossec.log`` file.
 
-Parameters
-^^^^^^^^^^
+#. Restart the Wazuh manager to apply the changes.
 
-The following fields inside the section allow you to configure the queue and authenticate:
+   .. include:: /_templates/common/restart_manager.rst
 
-Queue configuration
-~~~~~~~~~~~~~~~~~~~
+Configuration parameters
+^^^^^^^^^^^^^^^^^^^^^^^^
 
-*   ``<sqs_name>`` : The name of the queue.
-*   ``<service_endpoint>``- Optional: The AWS S3 endpoint URL to be used to download the data from the bucket. Check :ref:`Considerations for configuration <amazon_considerations>` for more information about VPC and FIPS endpoints.
+Configure the following fields to set the queue and authentication configuration. For more information, check the :ref:`subscribers` reference.
+
+Queue
+~~~~~
+
+-  ``<sqs_name>``: The name of the queue.
+-  Optional – ``<service_endpoint>``: The AWS S3 endpoint URL for data downloading from the bucket. Check :ref:`using_non-default_aws_endpoints` for more information about VPC and FIPS endpoints.
 
 Authentication
 ~~~~~~~~~~~~~~
 
-The available authentication methods are :ref:`IAM Roles <iam_roles>` or  :ref:`Profiles <aws_profile>`.
+The available authentication methods are the following:
 
-*   ``<profile>``: A valid profile name from a Shared Credential File or AWS Config File with the permission to read logs from the bucket.
-*   ``<iam_role_arn>``: ARN for the corresponding IAM role to assume.
-*   ``<iam_role_duration>`` - Optional: The session duration in seconds.
-*   ``<sts_endpoint>`` - Optional: The URL of the VPC endpoint of the AWS Security Token Service.
+-  :ref:`IAM Roles <iam_roles>`
+-  :ref:`Profiles <aws_profile>`
 
-    .. note::
-        This authentication method requires adding credentials to the configuration using the ``/root/.aws/credentials`` file.
+These authentication methods require using the ``/root/.aws/credentials`` file to provide credentials. You can find more information in :ref:`Configuring AWS credentials <amazon_credentials>`.
 
+The available authentication configuration parameters are the following:
 
+-  ``<aws_profile>``: A valid profile name from a Shared Credential File or AWS Config File with the permission to read logs from the bucket.
+-  ``<iam_role_arn>``: ARN for the corresponding IAM role to assume.
+-  Optional – ``<iam_role_duration>``: The session duration in seconds.
+-  Optional – ``<sts_endpoint>``: The URL of the VPC endpoint of the AWS Security Token Service.
 
-More information about the different authentication methods can be found in the :ref:`Configuring AWS credentials <amazon_credentials>` documentation.

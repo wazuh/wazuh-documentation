@@ -728,7 +728,7 @@ The currently available types are: ``security_lake`` and ``buckets``.
 | :ref:`subscriber_iam_role_duration`    | Number of seconds between 900 and 3600                      | Optional (if set, it requires an iam_role_arn |
 |                                        |                                                             | to be provided)                               |
 +----------------------------------------+-------------------------------------------------------------+-----------------------------------------------+
-| :ref:`subscriber_discard_regex`        | A regex value to determine if an event should be discarded  | Optional                                      |
+| :ref:`subscriber_discard_regex`        | A regex value to determine if an event must be discarded    | Optional                                      |
 |                                        |                                                             | (only available for Custom Logs Buckets)      |
 +----------------------------------------+-------------------------------------------------------------+-----------------------------------------------+
 | :ref:`subscriber_sts_endpoint`         | Any valid VPC endpoint URL for STS                          | Optional                                      |
@@ -806,7 +806,7 @@ A valid profile name from a Shared Credential File or AWS Config File with the p
 discard_regex
 ^^^^^^^^^^^^^
 
-A regex value to determine if an event should be discarded. JSON and CSV logs require a `field` attribute used to specify the field of the event where the regex should be applied.
+A regular expression to determine if an event must be discarded. JSON and CSV logs require a mandatory ``field`` attribute. The regex is applied to the event field specified with this attribute.
 
 +--------------------+----------------------------------------+
 | **Default value**  | N/A                                    |
@@ -816,13 +816,13 @@ A regex value to determine if an event should be discarded. JSON and CSV logs re
 
 Attributes:
 
-+-----------+------------------------------------------------------------------------------------------------------+
-| **field** | The event's field on which the regex should be applied to determine if the event should be skipped   |
-|           +------------------+-----------------------------------------------------------------------------------+
-|           | Default value    | N/A                                                                               |
-|           +------------------+-----------------------------------------------------------------------------------+
-|           | Allowed values   | A str containing the full field name path                                         |
-+-----------+------------------+-----------------------------------------------------------------------------------+
++-----------+-----------------------------------------------------------------+
+| **field** | The event field where to apply the regex                        |
+|           +------------------+----------------------------------------------+
+|           | Default value    | N/A                                          |
+|           +------------------+----------------------------------------------+
+|           | Allowed values   | A str containing the full field name path    |
++-----------+------------------+----------------------------------------------+
 
 Usage examples:
 
