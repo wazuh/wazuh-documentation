@@ -41,7 +41,7 @@ Preparing the data restoration
       # cd ~/wazuh_files_backup/<DATE_TIME>
 
 Restoring Wazuh agent files
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 Perform the steps below to restore the Wazuh agent files on a Linux endpoint.
 
@@ -100,7 +100,7 @@ Preparing the data restoration
 #. Decompress the file using `7-Zip <https://www.7-zip.org/>`__ or any of your preferred tools.
 
 Restoring Wazuh agent files
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 Perform the steps below to restore the Wazuh agent files on a Windows endpoint.
 
@@ -131,7 +131,7 @@ Perform the steps below to restore the Wazuh agent files on a Windows endpoint.
 
    .. code-block:: doscon
 
-      > xcopy <SCA_DIRECTORY>/<CUSTOM_SCA_FILE> “C:\Program Files (x86)\ossec-agent\<SCA_DIRECTORY>” /H /I /K /S /X /Y
+      > xcopy <SCA_DIRECTORY>\<CUSTOM_SCA_FILE> “C:\Program Files (x86)\ossec-agent\<SCA_DIRECTORY>” /H /I /K /S /X /Y
       > xcopy active-response\bin\<CUSTOM_ACTIVE_RESPONSE_SCRIPT> "C:\Program Files (x86)\ossec-agent\active-response\bin\" /H /I /K /S /X /Y
       > xcopy wodles\<CUSTOM_WODLE_SCRIPT> "C:\Program Files (x86)\ossec-agent\wodles\" /H /I /K /S /X /Y
 
@@ -170,7 +170,7 @@ Preparing the data restoration
       # cd wazuh_files_backup/<DATE_TIME>
 
 Restoring Wazuh agent files
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 Perform the steps below to restore Wazuh agent files on a macOS endpoint.
 
@@ -193,6 +193,12 @@ Perform the steps below to restore Wazuh agent files on a macOS endpoint.
       # cp -R Library/Ossec/queue/rids/* /Library/Ossec/queue/rids/ 
 
 #. Restore custom files, such as local SCA policies, active response, and wodle scripts, if there are any.
+
+   .. code-block:: console
+
+      # sudo cp Library/Ossec/<SCA_DIRECTORY>/<CUSTOM_SCA_FILE> /Library/Ossec/<SCA_DIRECTORY>/
+      # sudo cp Library/Ossec/active-response/bin/<CUSTOM_ACTIVE_RESPONSE_SCRIPT> /Library/Ossec/active-response/bin/
+      # sudo cp Library/Ossec/wodles/<CUSTOM_WODLE_SCRIPT> /Library/Ossec/wodles/
 
 #. Start the Wazuh agent service:
 
