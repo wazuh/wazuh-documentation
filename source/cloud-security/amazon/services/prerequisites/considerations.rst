@@ -157,6 +157,8 @@ Below there is an example of different services configuration:
   </wodle>
 
 
+.. _using_non-default_aws_endpoints:
+
 Using non-default AWS endpoints
 -------------------------------
 
