@@ -305,7 +305,7 @@ Setting a new hash
 Setting the new password
 ~~~~~~~~~~~~~~~~~~~~~~~~
 
-#. Open  the ``docker-compose.yml`` file. Change all occurrences of the old password with the new one. For example, change the ``INDEXER_PASSWORD`` ocurrences to set the new ``admin`` user password.
+#. Open  the ``docker-compose.yml`` file. Change all occurrences of the old password with the new one. For example, change the ``INDEXER_PASSWORD`` occurrences to set the new ``admin`` user password.
 
    .. code-block:: YAML
       :emphasize-lines: 8, 20

@@ -55,37 +55,53 @@ Deploy a Wazuh agent
 
 #. To deploy the Wazuh agent on your endpoint, select your package manager and edit the ``WAZUH_MANAGER`` variable to contain your Wazuh manager IP address or hostname.   
 
+   .. tabs::
+   
+      .. group-tab:: Yum
+   
+         .. code-block:: console
           
-      .. tabs::
-    
-   
-        .. group-tab:: Yum
-      
-   
-          .. include:: ../../_templates/installations/wazuh/yum/deploy_wazuh_agent.rst
-      
-   
-   
-        .. group-tab:: APT
-      
-   
-          .. include:: ../../_templates/installations/wazuh/deb/deploy_wazuh_agent.rst
-      
-   
-   
-        .. group-tab:: ZYpp
-      
-   
-          .. include:: ../../_templates/installations/wazuh/zypp/deploy_wazuh_agent.rst
+            # WAZUH_MANAGER="10.0.0.2" yum install wazuh-agent|WAZUH_AGENT_RPM_PKG_INSTALL|
 
+         For additional deployment options such as agent name, agent group, and registration password, see the :doc:`Deployment variables for Linux </user-manual/deployment-variables/deployment-variables-linux>` section.
 
-
-        .. group-tab:: APK
-      
+          .. note:: Alternatively, if you want to install an agent without registering it, omit the deployment variables. To learn more about the different registration methods, see the :doc:`Wazuh agent enrollment </user-manual/agent-enrollment/index>` section. 
    
-          .. include:: ../../_templates/installations/wazuh/apk/deploy_wazuh_agent.rst
+      .. group-tab:: APT
+   
+         .. code-block:: console
+          
+            # WAZUH_MANAGER="10.0.0.2" apt-get install wazuh-agent|WAZUH_AGENT_DEB_PKG_INSTALL|
+
+         For additional deployment options such as agent name, agent group, and registration password, see the :doc:`Deployment variables for Linux </user-manual/deployment-variables/deployment-variables-linux>` section.
+
+         .. note:: Alternatively, if you want to install an agent without registering it, omit the deployment variables. To learn more about the different registration methods, see the :doc:`Wazuh agent enrollment </user-manual/agent-enrollment/index>` section. 
+   
+      .. group-tab:: ZYpp
+   
+         .. code-block:: console
+          
+            # WAZUH_MANAGER="10.0.0.2" zypper install wazuh-agent|WAZUH_AGENT_ZYPP_PKG_INSTALL|
+
+         For additional deployment options such as agent name, agent group, and registration password, see the :doc:`Deployment variables for Linux </user-manual/deployment-variables/deployment-variables-linux>` section.
+
+         .. note:: Alternatively, if you want to install an agent without registering it, omit the deployment variables. To learn more about the different registration methods, see the :doc:`Wazuh agent enrollment </user-manual/agent-enrollment/index>` section. 
+
+      .. group-tab:: APK
+   
+         #. Install the Wazuh agent:
+
+            .. code-block:: console
             
-         
+               # apk add wazuh-agent|WAZUH_AGENT_APK_PKG_INSTALL|
+
+         #. Edit the agent configuration to add the address of your Wazuh manager:
+
+            .. code-block:: console
+            
+               # export WAZUH_MANAGER="10.0.0.2" && sed -i "s|MANAGER_IP|$WAZUH_MANAGER|g" /var/ossec/etc/ossec.conf
+
+            For more customization options, like agent name or group, see the :doc:`Linux/Unix endpoint configuration </user-manual/agent-enrollment/via-agent-configuration/linux-endpoint>` page. For more security options, check the :doc:`Additional security options </user-manual/agent-enrollment/security-options/index>` section. 
 
 #. Enable and start the Wazuh agent service.
 
