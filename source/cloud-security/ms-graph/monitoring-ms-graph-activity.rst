@@ -195,12 +195,12 @@ Wazuh Rules
 
 The Wazuh manager includes a set of pre-made rules that aid in classifying the importance and context of different events. 
 
-In this example, we can take a look at the rule id ``99006``, which corresponds to ``MS Graph message: The alert is true positive and detected malicious activity.``, per the `Microsoft Graph documentation <https://learn.microsoft.com/en-us/graph/api/resources/security-alert?view=graph-rest-1.0#alertclassification-values>`_.
+In this example, we can take a look at the rule id ``99506``, which corresponds to ``MS Graph message: The alert is true positive and detected malicious activity.``, per the `Microsoft Graph documentation <https://learn.microsoft.com/en-us/graph/api/resources/security-alert?view=graph-rest-1.0#alertclassification-values>`_.
 
 .. code-block:: xml
 
-    <rule id="99006" level="6">
-        <if_sid>99001</if_sid>
+    <rule id="99506" level="6">
+        <if_sid>99501</if_sid>
         <options>no_full_log</options>
         <field name="ms-graph.classification">truePositive</field>
         <description>MS Graph message: The alert is true positive and detected malicious activity.</description>
@@ -215,7 +215,7 @@ Once Wazuh connects with the Microsoft Graph API, the previous log triggers the 
     {
         "timestamp":"2023-04-23T14:53:15.301+0000",
         "rule":{
-            "id":"99006",
+            "id":"99506",
 	        "level":6,
 	        "description":"MS Graph message: The alert is true positive and detected malicious activity.",
 	        "groups":["ms-graph"],
