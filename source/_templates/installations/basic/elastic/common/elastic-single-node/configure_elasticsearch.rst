@@ -4,6 +4,6 @@ Once Elasticsearch is installed, it can be configured by downloading the file ``
 
 .. code-block:: console
 
-  # curl -so /etc/elasticsearch/elasticsearch.yml https://packages.wazuh.com/4.4/tpl/elastic-basic/elasticsearch.yml
+  # curl -so /etc/elasticsearch/elasticsearch.yml https://packages.wazuh.com/4.5/tpl/elastic-basic/elasticsearch.yml
 
 .. End of include file

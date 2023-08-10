@@ -50,7 +50,7 @@ function getRedirectionUrl(domain, path, anchor, versions) {
 		if (SameInRelease.hasOwnProperty(path)) {
 			releaseFolder = release;
 			minRelease = release;
-			path = SameInRelease[path];
+			[path, anchor] = SameInRelease[path].split('#');
 			changedSameRelease = true;
 		}
 	});

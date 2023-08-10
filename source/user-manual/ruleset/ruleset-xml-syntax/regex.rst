@@ -89,10 +89,10 @@ This library is designed to be simple while still supporting the most common reg
   - ``\s`` matches only an ASCII space (32), not other whitespace like tab
   - there is no syntax to match a literal caret, asterisk or plus (although ``\p`` will match asterisk or plus, along with some other characters)
 
-.. _os_sregex_syntax:
+.. _sregex_os_match_syntax:
 
 Sregex (OS_Match) syntax
------------------------------
+------------------------
 
 This is faster than OS_Regex, but only supports simple string matching and the
 following special characters.
@@ -111,8 +111,10 @@ following special characters.
   | !           | To negate the expression                         |
   +-------------+--------------------------------------------------+
 
+.. _pcre2_syntax:
+
 PCRE2 syntax
------------------------------
+------------
 
 **Perl Compatible Regular Expressions (PCRE)** tries to match Perl syntax and semantics as closely as it can.
 

@@ -66,7 +66,21 @@ Adding the Wazuh repository
 Installing the Wazuh indexer
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-  .. include:: /_templates/installations/indexer/common/install-indexer.rst
+#. Install the Wazuh indexer package.
+
+   .. tabs::
+
+      .. group-tab:: Yum
+
+         .. code-block:: console
+
+            # yum -y install wazuh-indexer|WAZUH_INDEXER_RPM_PKG_INSTALL|
+
+      .. group-tab:: APT
+
+         .. code-block:: console
+
+            # apt-get -y install wazuh-indexer|WAZUH_INDEXER_DEB_PKG_INSTALL|
 
 Configuring the Wazuh indexer
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
