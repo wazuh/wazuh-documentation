@@ -110,7 +110,7 @@ This filters alerts by where the event originated.
 +--------------------+--------------------------------------------------------------+
 | **Default value**  | n/a                                                          |
 +--------------------+--------------------------------------------------------------+
-| **Allowed values** | Any :ref:`sregex<os_sregex_syntax>` expression.              |
+| **Allowed values** | Any :ref:`sregex<sregex_os_match_syntax>` expression.        |
 +--------------------+--------------------------------------------------------------+
 
 alert_format
