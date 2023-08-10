@@ -29,6 +29,7 @@ Options
 - `ipv6`_
 - `queue_size`_
 - `rids_closing_time`_
+- `agents`_
 
 connection
 ^^^^^^^^^^^
@@ -143,6 +144,25 @@ Sets the time to close the RIDS files for agents that don't report new events in
 | **Allowed values** | A positive number that should contain a suffix character indicating a time unit, such as, s (seconds), m (minutes), h (hours), d (days). |
 +--------------------+------------------------------------------------------------------------------------------------------------------------------------------+
 
+agents
+^^^^^^
+
+**allow_higher_versions**
+
+.. versionadded:: 4.6.0
+  
+Accept agents with a later version than the current manager.
+
++--------------------+------------------+
+| **Default value**  | yes              |
++--------------------+------------------+
+| **Allowed values** | yes, no          |
++--------------------+------------------+
+
+.. note::
+
+   This option only works when **connection** is set to ``secure``.
+
 
 Example of configuration
 ------------------------
@@ -163,4 +183,7 @@ Example of configuration
       <protocol>tcp,udp</protocol>
       <queue_size>16384</queue_size>
       <rids_closing_time>5m</rids_closing_time>
+      <agents>
+        <allow_higher_versions>yes</allow_higher_versions>
+      </agents>  
     </remote>
