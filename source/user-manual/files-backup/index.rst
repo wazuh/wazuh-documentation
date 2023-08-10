@@ -6,10 +6,13 @@
 Wazuh files backup
 ==================
 
-In this section you can find instructions on how to create a backup of your Wazuh installation. To do this backup, you copy key files to a folder. Later, you can move this folder contents back to the corresponding location to restore your Wazuh data, certificates, and configurations. Backing up Wazuh files is useful in cases such as moving your Wazuh installation to another system.
+In this section you can find instructions on how to create and restore a backup of your Wazuh installation.
+
+To do this backup, you copy key files to a folder preserving file permissions, ownership, and path. Later, you can move this folder contents back to the corresponding location to restore your Wazuh data, certificates, and configurations. Backing up Wazuh files is useful in cases such as moving your Wazuh installation to another system.
 
 .. toctree::
-   :maxdepth: 1
+   :maxdepth: 2
 
-   wazuh-central-components
-   wazuh-agent
+   creating/index
+   restoring/index
+

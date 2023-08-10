@@ -97,9 +97,9 @@ h1 {
 @media (prefers-color-scheme: dark) {
   body {
     color: $dark-color-main-text;
-  }
-  h1 {
-    color: $dark-color-main-text;
+    h1 {
+      color: $dark-color-main-text;
+    }
   }
   #spinner {
     border-top: 4px solid $dark-color-primary;

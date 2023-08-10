@@ -45,94 +45,96 @@ Below you can find a table describing the variables used by Wazuh installers, an
 |   ENROLLMENT_DELAY               |  Assigns the time that agentd should wait after a successful registration. See :ref:`delay_after_enrollment <enrollment_delay_after_enrollment>`.                                                    |
 +----------------------------------+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
 
+Examples:
+
 .. tabs::
 
-   .. group-tab:: Examples
+   .. group-tab:: Intel
     
       -  Registration with password:
 
          .. code-block:: console
          
             # echo "WAZUH_MANAGER='10.0.0.2' && WAZUH_REGISTRATION_PASSWORD='TopSecret' && \
-            WAZUH_AGENT_NAME='macos-agent'" > /tmp/wazuh_envs && installer -pkg wazuh-agent-|WAZUH_CURRENT_OSX|-|WAZUH_REVISION_OSX|.pkg -target /
+            WAZUH_AGENT_NAME='macos-agent'" > /tmp/wazuh_envs && installer -pkg wazuh-agent-|WAZUH_CURRENT_OSX|-|WAZUH_REVISION_OSX|.intel64.pkg -target /
 
       -  Registration with password and assigning a group:
 
          .. code-block:: console
          
             # echo "WAZUH_MANAGER='10.0.0.2' && WAZUH_REGISTRATION_SERVER='10.0.0.2' && WAZUH_REGISTRATION_PASSWORD='TopSecret' && \
-            WAZUH_AGENT_GROUP='my-group'" > /tmp/wazuh_envs && installer -pkg wazuh-agent-|WAZUH_CURRENT_OSX|-|WAZUH_REVISION_OSX|.pkg -target /            
+            WAZUH_AGENT_GROUP='my-group'" > /tmp/wazuh_envs && installer -pkg wazuh-agent-|WAZUH_CURRENT_OSX|-|WAZUH_REVISION_OSX|.intel64.pkg -target /            
 
       -  Registration with relative path to CA. It will be searched at your Wazuh installation folder:
 
          .. code-block:: console
          
             # echo "WAZUH_MANAGER='10.0.0.2' && WAZUH_REGISTRATION_SERVER='10.0.0.2' && WAZUH_AGENT_NAME='macos-agent' && \
-            WAZUH_REGISTRATION_CA='rootCA.pem'" > /tmp/wazuh_envs && installer -pkg wazuh-agent-|WAZUH_CURRENT_OSX|-|WAZUH_REVISION_OSX|.pkg -target /
+            WAZUH_REGISTRATION_CA='rootCA.pem'" > /tmp/wazuh_envs && installer -pkg wazuh-agent-|WAZUH_CURRENT_OSX|-|WAZUH_REVISION_OSX|.intel64.pkg -target /
 
       -  Registration with protocol:
 
          .. code-block:: console
       
             # echo "WAZUH_MANAGER='10.0.0.2' && WAZUH_REGISTRATION_SERVER='10.0.0.2' && WAZUH_AGENT_NAME='macos-agent' && \
-            WAZUH_PROTOCOL='udp'" > /tmp/wazuh_envs && installer -pkg wazuh-agent-|WAZUH_CURRENT_OSX|-|WAZUH_REVISION_OSX|.pkg -target /
+            WAZUH_PROTOCOL='udp'" > /tmp/wazuh_envs && installer -pkg wazuh-agent-|WAZUH_CURRENT_OSX|-|WAZUH_REVISION_OSX|.intel64.pkg -target /
 
       -  Registration and adding multiple address:
 
          .. code-block:: console
       
             # echo "WAZUH_MANAGER='10.0.0.2,10.0.0.3' && WAZUH_REGISTRATION_SERVER='10.0.0.2' && \
-            WAZUH_AGENT_NAME='macos-agent'" > /tmp/wazuh_envs && installer -pkg wazuh-agent-|WAZUH_CURRENT_OSX|-|WAZUH_REVISION_OSX|.pkg -target /
+            WAZUH_AGENT_NAME='macos-agent'" > /tmp/wazuh_envs && installer -pkg wazuh-agent-|WAZUH_CURRENT_OSX|-|WAZUH_REVISION_OSX|.intel64.pkg -target /
 
       -  Absolute paths to CA, certificate or key that contain spaces can be written as shown below:
 
          .. code-block:: console
       
             # echo "WAZUH_MANAGER='10.0.0.2' && WAZUH_REGISTRATION_SERVER='10.0.0.2' && WAZUH_REGISTRATION_KEY='/var/ossec/etc/sslagent.key' && \
-            WAZUH_REGISTRATION_CERTIFICATE='/var/ossec/etc/sslagent.cert'" > /tmp/wazuh_envs && installer -pkg wazuh-agent-|WAZUH_CURRENT_OSX|-|WAZUH_REVISION_OSX|.pkg -target /
+            WAZUH_REGISTRATION_CERTIFICATE='/var/ossec/etc/sslagent.cert'" > /tmp/wazuh_envs && installer -pkg wazuh-agent-|WAZUH_CURRENT_OSX|-|WAZUH_REVISION_OSX|.intel64.pkg -target /
 
-   .. group-tab:: Examples (for 4.4.2 and earlier)
-
+   .. group-tab:: Apple silicon
+    
       -  Registration with password:
 
          .. code-block:: console
          
-            # launchctl setenv WAZUH_MANAGER "10.0.0.2" WAZUH_REGISTRATION_PASSWORD "TopSecret" \
-            WAZUH_AGENT_NAME "macos-agent" && installer -pkg wazuh-agent-4.4.2-1.pkg -target /
+            # echo "WAZUH_MANAGER='10.0.0.2' && WAZUH_REGISTRATION_PASSWORD='TopSecret' && \
+            WAZUH_AGENT_NAME='macos-agent'" > /tmp/wazuh_envs && installer -pkg wazuh-agent-|WAZUH_CURRENT_OSX|-|WAZUH_REVISION_OSX|.arm64.pkg -target /
 
       -  Registration with password and assigning a group:
 
          .. code-block:: console
          
-            # launchctl setenv WAZUH_MANAGER "10.0.0.2" WAZUH_REGISTRATION_SERVER "10.0.0.2" WAZUH_REGISTRATION_PASSWORD "TopSecret" \
-            WAZUH_AGENT_GROUP "my-group" && installer -pkg wazuh-agent-4.4.2-1.pkg -target /
+            # echo "WAZUH_MANAGER='10.0.0.2' && WAZUH_REGISTRATION_SERVER='10.0.0.2' && WAZUH_REGISTRATION_PASSWORD='TopSecret' && \
+            WAZUH_AGENT_GROUP='my-group'" > /tmp/wazuh_envs && installer -pkg wazuh-agent-|WAZUH_CURRENT_OSX|-|WAZUH_REVISION_OSX|.arm64.pkg -target /            
 
       -  Registration with relative path to CA. It will be searched at your Wazuh installation folder:
 
          .. code-block:: console
          
-            # launchctl setenv WAZUH_MANAGER "10.0.0.2" WAZUH_REGISTRATION_SERVER "10.0.0.2" WAZUH_AGENT_NAME "macos-agent" \
-            WAZUH_REGISTRATION_CA "rootCA.pem" && installer -pkg wazuh-agent-4.4.2-1.pkg -target /
+            # echo "WAZUH_MANAGER='10.0.0.2' && WAZUH_REGISTRATION_SERVER='10.0.0.2' && WAZUH_AGENT_NAME='macos-agent' && \
+            WAZUH_REGISTRATION_CA='rootCA.pem'" > /tmp/wazuh_envs && installer -pkg wazuh-agent-|WAZUH_CURRENT_OSX|-|WAZUH_REVISION_OSX|.arm64.pkg -target /
 
       -  Registration with protocol:
 
          .. code-block:: console
       
-            # launchctl setenv WAZUH_MANAGER "10.0.0.2" WAZUH_REGISTRATION_SERVER "10.0.0.2" WAZUH_AGENT_NAME "macos-agent" \
-            WAZUH_PROTOCOL "udp" && installer -pkg wazuh-agent-4.4.2-1.pkg -target /
+            # echo "WAZUH_MANAGER='10.0.0.2' && WAZUH_REGISTRATION_SERVER='10.0.0.2' && WAZUH_AGENT_NAME='macos-agent' && \
+            WAZUH_PROTOCOL='udp'" > /tmp/wazuh_envs && installer -pkg wazuh-agent-|WAZUH_CURRENT_OSX|-|WAZUH_REVISION_OSX|.arm64.pkg -target /
 
       -  Registration and adding multiple address:
 
          .. code-block:: console
       
-            # launchctl setenv WAZUH_MANAGER "10.0.0.2,10.0.0.3" WAZUH_REGISTRATION_SERVER "10.0.0.2" \
-            WAZUH_AGENT_NAME "macos-agent" && installer -pkg wazuh-agent-4.4.2-1.pkg -target /
+            # echo "WAZUH_MANAGER='10.0.0.2,10.0.0.3' && WAZUH_REGISTRATION_SERVER='10.0.0.2' && \
+            WAZUH_AGENT_NAME='macos-agent'" > /tmp/wazuh_envs && installer -pkg wazuh-agent-|WAZUH_CURRENT_OSX|-|WAZUH_REVISION_OSX|.arm64.pkg -target /
 
       -  Absolute paths to CA, certificate or key that contain spaces can be written as shown below:
 
          .. code-block:: console
       
-            # launchctl setenv WAZUH_MANAGER "10.0.0.2" WAZUH_REGISTRATION_SERVER "10.0.0.2" WAZUH_REGISTRATION_KEY "/var/ossec/etc/sslagent.key" \
-            WAZUH_REGISTRATION_CERTIFICATE "/var/ossec/etc/sslagent.cert" && installer -pkg wazuh-agent-4.4.2-1.pkg -target /
+            # echo "WAZUH_MANAGER='10.0.0.2' && WAZUH_REGISTRATION_SERVER='10.0.0.2' && WAZUH_REGISTRATION_KEY='/var/ossec/etc/sslagent.key' && \
+            WAZUH_REGISTRATION_CERTIFICATE='/var/ossec/etc/sslagent.cert'" > /tmp/wazuh_envs && installer -pkg wazuh-agent-|WAZUH_CURRENT_OSX|-|WAZUH_REVISION_OSX|.arm64.pkg -target /
 
 .. note:: It’s necessary to use both KEY and PEM options to verify agents' identities with the registration server. See the :ref:`Registration Service with host verification - Agent verification with host validation <enrollment_additional_security>` section.
