@@ -4,6 +4,7 @@ const redirections = [];
 
 /* Note: new release versions must always be inserted in the first position of the array "versions" */
 const versions = [
+  '4.7',
   '4.6',
   '4.5',
   '4.4',
