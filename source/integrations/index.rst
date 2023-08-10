@@ -34,7 +34,7 @@ Additionally, we demonstrate how to import the provided dashboards for these pla
 Wazuh indexer integration
 ^^^^^^^^^^^^^^^^^^^^^^^^^
 
-.. thumbnail:: /images/manual/integrations/image15.png
+.. thumbnail:: /images/integrations/image15.png
    :title: Wazuh indexer integration diagram
    :align: center
    :width: 80%
@@ -48,7 +48,7 @@ We recommend the Wazuh indexer integration if you want to continue analyzing sec
 Wazuh server integration
 ^^^^^^^^^^^^^^^^^^^^^^^^
 
-.. thumbnail:: /images/manual/integrations/image7.png
+.. thumbnail:: /images/integrations/image7.png
    :title: Wazuh server integration diagram
    :align: center
    :width: 80%
@@ -75,7 +75,7 @@ Third-party security platforms typically have a dedicated data collector or data
 
 In the Wazuh indexer integration alternative, the forwarder executes periodic queries to the Wazuh indexer. These queries are performed in blocks, with the time range of each query matching the specified query period. Consequently, there may be a delay in the arrival of alerts at the destination, depending on the frequency set for querying new alerts.
 
-.. thumbnail:: /images/manual/integrations/image20.png
+.. thumbnail:: /images/integrations/image20.png
    :title: Wazuh indexer queries diagram
    :align: center
    :width: 80%
@@ -84,7 +84,7 @@ In the Wazuh server integration, the forwarder periodically checks the Wazuh ale
 
 Similarly, checking for new alerts periodically means that the alerts reach the destination with a delay. This delay depends on the frequency established to check for new alerts.
 
-.. thumbnail:: /images/manual/integrations/image21.png
+.. thumbnail:: /images/integrations/image21.png
    :title: Alerts file checking diagram
    :align: center
    :width: 80%

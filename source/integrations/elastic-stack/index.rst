@@ -13,7 +13,7 @@ In this guide, you can find how to integrate Wazuh with Elastic in the following
 -  `Wazuh indexer integration using Logstash`_
 -  `Wazuh server integration using Logstash`_
 
-.. thumbnail:: /images/manual/integrations/image2.png
+.. thumbnail:: /images/integrations/image2.png
    :title: ELK integration diagram
    :align: center
    :width: 80%
