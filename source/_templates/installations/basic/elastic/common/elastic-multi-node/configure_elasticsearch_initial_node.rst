@@ -2,7 +2,7 @@
 
 .. code-block:: console
 
-  # curl -so /etc/elasticsearch/elasticsearch.yml https://packages.wazuh.com/4.4/tpl/elastic-basic/elasticsearch_cluster_initial_node.yml
+  # curl -so /etc/elasticsearch/elasticsearch.yml https://packages.wazuh.com/4.5/tpl/elastic-basic/elasticsearch_cluster_initial_node.yml
 
 The file ``/etc/elasticsearch/elasticsearch.yml`` has to be edited:
 
