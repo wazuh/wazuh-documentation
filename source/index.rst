@@ -19,11 +19,11 @@ Index
    installation-guide/index
    deployment-options/index
    upgrade-guide/index
-   migration-guide/index
-   Wazuh Cloud service <cloud-service/index>
    user-manual/index
+   Wazuh Cloud service <cloud-service/index>
    cloud-security/monitoring
    development/index
    compliance/index
    proof-of-concept-guide/index
+   migration-guide/index
    release-notes/index
