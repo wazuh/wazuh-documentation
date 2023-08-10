@@ -23,6 +23,10 @@ Wazuh dashboard installation
       
       Make sure that a copy of the ``wazuh-install-files.tar`` file, created during the initial configuration step, is placed in your working directory.
 
+   .. note::
+      
+      You can specify the Wazuh web interface port by using the optional parameter ``-p|--port <port_number>``.
+      
    .. code-block:: console
 
       # bash wazuh-install.sh --wazuh-dashboard dashboard
