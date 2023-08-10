@@ -84,7 +84,7 @@ Restoring Wazuh server files
 
 Perform the following steps to restore the Wazuh server files on the new server.
 
-#. Stop the Wazuh server to prevent any modification to the Wazuh server files during the restoration process:
+#. Stop the Wazuh manager and Filebeat to prevent any modification to the Wazuh server files during the restore process:
 
    .. code-block:: console
 
@@ -392,6 +392,7 @@ Perform the following actions on your Wazuh server to decompress these logs and 
 
 
    .. code-block:: yaml
+      :emphasize-lines: 7
 
       module_version: 0.1
 
@@ -806,6 +807,7 @@ Perform the following actions on both master and worker nodes of your Wazuh serv
 #. Add the ``/tmp/recovery.json`` path to the Wazuh Filebeat module ``/usr/share/filebeat/module/wazuh/alerts/manifest.yml`` so that Filebeat sends the old alerts to the Wazuh indexer for indexing:
 
    .. code-block:: yaml
+      :emphasize-lines: 7
 
       module_version: 0.1
 
