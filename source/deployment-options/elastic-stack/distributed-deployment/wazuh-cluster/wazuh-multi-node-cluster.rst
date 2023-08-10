@@ -50,22 +50,19 @@ Installing the Wazuh manager
 
 #. Install the Wazuh manager package. This step must be applied in all servers that will act as Wazuh cluster nodes:
 
-.. tabs::
+   .. tabs::
 
+      .. group-tab:: Yum
 
-  .. group-tab:: Yum
+         .. code-block:: console
 
+            # yum install wazuh-manager|WAZUH_MANAGER_RPM_PKG_INSTALL|
 
-    .. include:: /_templates/installations/basic/wazuh/yum/install_wazuh_manager.rst
+      .. group-tab:: APT
 
+         .. code-block:: console
 
-
-  .. group-tab:: APT
-
-
-    .. include:: /_templates/installations/basic/wazuh/deb/install_wazuh_manager.rst
-
-
+            # apt-get install wazuh-manager|WAZUH_MANAGER_DEB_PKG_INSTALL|
 
 Now, the Wazuh manager has been installed in all the Wazuh cluster nodes. The Wazuh manager is installed and configured in a single-node cluster by default. The following sections will describe how to configure the Wazuh manager as a Wazuh master node or Wazuh worker node.
 

@@ -772,15 +772,6 @@ $vulnerability_detector_provider_redhat_os
 
    Depends on **configure_vulnerability_detector**
 
-$vulnerability_detector_provider_redhat_update_from_year
-  Year from which the provider will be updated.
-
-  `Default 2010`
-
-  `Type String`
-
-   Depends on **configure_vulnerability_detector**
-
 $vulnerability_detector_provider_redhat_update_interval
   How often the vulnerability database is updated. It has priority over the `update_interval` option of the provider block.
 
@@ -812,15 +803,6 @@ $vulnerability_detector_provider_nvd_os
   Feed to update.
 
   `Default []`
-
-  `Type String`
-
-   Depends on **configure_vulnerability_detector**
-
-$vulnerability_detector_provider_nvd_update_from_year
-  Year from which the provider will be updated.
-
-  `Default 2010`
 
   `Type String`
 

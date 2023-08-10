@@ -38,7 +38,7 @@ The following Elastic Stack and Open Distro for Elasticsearch versions are compa
 +--------------------------+---------------------------+
 | 7.16.0–7.16.3            |                           |
 +--------------------------+---------------------------+
-| 7.17.0–7.17.9            |                           |
+| 7.17.0–7.17.11           |                           |
 +--------------------------+---------------------------+
 
 You can find more information on the `Wazuh Kibana plugin repository <https://github.com/wazuh/wazuh-kibana-app/wiki/Compatibility>`_.
