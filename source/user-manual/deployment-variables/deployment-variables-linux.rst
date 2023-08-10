@@ -58,42 +58,42 @@ Examples:
         .. code-block:: console
         
              # WAZUH_MANAGER="10.0.0.2" WAZUH_REGISTRATION_PASSWORD="TopSecret" \
-                  WAZUH_AGENT_NAME="yum-agent" yum install wazuh-agent
+                  WAZUH_AGENT_NAME="yum-agent" yum install wazuh-agent|WAZUH_AGENT_RPM_PKG_INSTALL|
         
         * Registration with password and assigning a group:
         
         .. code-block:: console
         
              # WAZUH_MANAGER="10.0.0.2" WAZUH_REGISTRATION_SERVER="10.0.0.2" WAZUH_REGISTRATION_PASSWORD="TopSecret" \
-                  WAZUH_AGENT_GROUP="my-group" yum install wazuh-agent
+                  WAZUH_AGENT_GROUP="my-group" yum install wazuh-agent|WAZUH_AGENT_RPM_PKG_INSTALL|
         
         * Registration with relative path to CA. It will be searched at your Wazuh installation folder:
         
         .. code-block:: console
         
              # WAZUH_MANAGER="10.0.0.2" WAZUH_REGISTRATION_SERVER="10.0.0.2" WAZUH_AGENT_NAME="yum-agent" \
-                  WAZUH_REGISTRATION_CA="rootCA.pem" yum install wazuh-agent
+                  WAZUH_REGISTRATION_CA="rootCA.pem" yum install wazuh-agent|WAZUH_AGENT_RPM_PKG_INSTALL|
         
         * Registration with protocol:
         
         .. code-block:: console
         
              # WAZUH_MANAGER="10.0.0.2" WAZUH_REGISTRATION_SERVER="10.0.0.2" WAZUH_AGENT_NAME="yum-agent" \
-                  WAZUH_PROTOCOL="udp" yum install wazuh-agent
+                  WAZUH_PROTOCOL="udp" yum install wazuh-agent|WAZUH_AGENT_RPM_PKG_INSTALL|
         
         * Registration and adding multiple address:
         
         .. code-block:: console
         
              # WAZUH_MANAGER="10.0.0.2,10.0.0.3" WAZUH_REGISTRATION_SERVER="10.0.0.2" \
-                  WAZUH_AGENT_NAME="yum-agent" yum install wazuh-agent
+                  WAZUH_AGENT_NAME="yum-agent" yum install wazuh-agent|WAZUH_AGENT_RPM_PKG_INSTALL|
         
         * Absolute paths to CA, certificate or key that contain spaces can be written as shown below:
         
         .. code-block:: console
         
              # WAZUH_MANAGER="10.0.0.2" WAZUH_REGISTRATION_SERVER="10.0.0.2" WAZUH_REGISTRATION_KEY="/var/ossec/etc/sslagent.key" \
-                  WAZUH_REGISTRATION_CERTIFICATE="/var/ossec/etc/sslagent.cert" yum install wazuh-agent
+                  WAZUH_REGISTRATION_CERTIFICATE="/var/ossec/etc/sslagent.cert" yum install wazuh-agent|WAZUH_AGENT_RPM_PKG_INSTALL|
         
         .. note:: It’s necessary to use both KEY and PEM options to verify agents' identities with the registration server. See the :ref:`Registration Service with host verification - Agent verification with host validation <enrollment_additional_security>` section.
      
@@ -106,42 +106,42 @@ Examples:
         .. code-block:: console
         
              # WAZUH_MANAGER="10.0.0.2" WAZUH_REGISTRATION_PASSWORD="TopSecret" \
-                  WAZUH_AGENT_NAME="apt-agent" apt-get install wazuh-agent
+                  WAZUH_AGENT_NAME="apt-agent" apt-get install wazuh-agent|WAZUH_AGENT_DEB_PKG_INSTALL|
         
         * Registration with password and assigning a group:
         
         .. code-block:: console
         
              # WAZUH_MANAGER="10.0.0.2" WAZUH_REGISTRATION_SERVER="10.0.0.2" WAZUH_REGISTRATION_PASSWORD="TopSecret" \
-                  WAZUH_AGENT_GROUP="my-group" apt-get install wazuh-agent
+                  WAZUH_AGENT_GROUP="my-group" apt-get install wazuh-agent|WAZUH_AGENT_DEB_PKG_INSTALL|
         
         * Registration with relative path to CA. It will be searched at your Wazuh installation folder:
         
         .. code-block:: console
         
              # WAZUH_MANAGER="10.0.0.2" WAZUH_REGISTRATION_SERVER="10.0.0.2" WAZUH_AGENT_NAME="apt-agent" \
-                  WAZUH_REGISTRATION_CA="rootCA.pem" apt-get install wazuh-agent
+                  WAZUH_REGISTRATION_CA="rootCA.pem" apt-get install wazuh-agent|WAZUH_AGENT_DEB_PKG_INSTALL|
         
         * Registration with protocol:
         
         .. code-block:: console
         
              # WAZUH_MANAGER="10.0.0.2" WAZUH_REGISTRATION_SERVER="10.0.0.2" WAZUH_AGENT_NAME="apt-agent" \
-                  WAZUH_PROTOCOL="udp" apt-get install wazuh-agent
+                  WAZUH_PROTOCOL="udp" apt-get install wazuh-agent|WAZUH_AGENT_DEB_PKG_INSTALL|
         
         * Registration and adding multiple addresses:
         
         .. code-block:: console
         
              # WAZUH_MANAGER="10.0.0.2,10.0.0.3" WAZUH_REGISTRATION_SERVER="10.0.0.2" \
-                  WAZUH_AGENT_NAME="apt-agent" apt-get install wazuh-agent
+                  WAZUH_AGENT_NAME="apt-agent" apt-get install wazuh-agent|WAZUH_AGENT_DEB_PKG_INSTALL|
         
         * Absolute paths to CA, certificate or key that contain spaces can be written as shown below:
         
         .. code-block:: console
         
              # WAZUH_MANAGER="10.0.0.2" WAZUH_REGISTRATION_SERVER="10.0.0.2" WAZUH_REGISTRATION_KEY="/var/ossec/etc/sslagent.key" \
-                  WAZUH_REGISTRATION_CERTIFICATE="/var/ossec/etc/sslagent.cert" apt-get install wazuh-agent
+                  WAZUH_REGISTRATION_CERTIFICATE="/var/ossec/etc/sslagent.cert" apt-get install wazuh-agent|WAZUH_AGENT_DEB_PKG_INSTALL|
         
         .. note:: To verify agents identity with the registration server, it's necessary to use both KEY and PEM options. See the    :ref:`Registration Service with host verification - Agent verification with host validation <enrollment_additional_security>` section.
      
@@ -157,42 +157,42 @@ Examples:
         .. code-block:: console
         
              # WAZUH_MANAGER="10.0.0.2" WAZUH_REGISTRATION_PASSWORD="TopSecret" \
-                  WAZUH_AGENT_NAME="zypper-agent" zypper install wazuh-agent
+                  WAZUH_AGENT_NAME="zypper-agent" zypper install wazuh-agent|WAZUH_AGENT_ZYPP_PKG_INSTALL|
         
         * Registration with password and assigning a group:
         
         .. code-block:: console
         
              # WAZUH_MANAGER="10.0.0.2" WAZUH_REGISTRATION_SERVER="10.0.0.2" WAZUH_REGISTRATION_PASSWORD="TopSecret" \
-                  WAZUH_AGENT_GROUP="my-group" zypper install wazuh-agent
+                  WAZUH_AGENT_GROUP="my-group" zypper install wazuh-agent|WAZUH_AGENT_ZYPP_PKG_INSTALL|
         
         * Registration with relative path to CA. It will be searched at your Wazuh installation folder:
         
         .. code-block:: console
         
              # WAZUH_MANAGER="10.0.0.2" WAZUH_REGISTRATION_SERVER="10.0.0.2" WAZUH_AGENT_NAME="zypper-agent" \
-                  WAZUH_REGISTRATION_CA="rootCA.pem" zypper install wazuh-agent
+                  WAZUH_REGISTRATION_CA="rootCA.pem" zypper install wazuh-agent|WAZUH_AGENT_ZYPP_PKG_INSTALL|
         
         * Registration with protocol:
         
         .. code-block:: console
         
              # WAZUH_MANAGER="10.0.0.2" WAZUH_REGISTRATION_SERVER="10.0.0.2" WAZUH_AGENT_NAME="zypper-agent" \
-                  WAZUH_PROTOCOL="udp" zypper install wazuh-agent
+                  WAZUH_PROTOCOL="udp" zypper install wazuh-agent|WAZUH_AGENT_ZYPP_PKG_INSTALL|
         
         * Registration and adding multiple address:
         
         .. code-block:: console
         
              # WAZUH_MANAGER="10.0.0.2,10.0.0.3" WAZUH_REGISTRATION_SERVER="10.0.0.2" \
-                  WAZUH_AGENT_NAME="zypper-agent" zypper install wazuh-agent
+                  WAZUH_AGENT_NAME="zypper-agent" zypper install wazuh-agent|WAZUH_AGENT_ZYPP_PKG_INSTALL|
         
         * Absolute paths to CA, certificate or key that contain spaces can be written as shown below:
         
         .. code-block:: console
         
              # WAZUH_MANAGER="10.0.0.2" WAZUH_REGISTRATION_SERVER="10.0.0.2" WAZUH_REGISTRATION_KEY="/var/ossec/etc/sslagent.key" \
-                  WAZUH_REGISTRATION_CERTIFICATE="/var/ossec/etc/sslagent.cert" zypper install wazuh-agent
+                  WAZUH_REGISTRATION_CERTIFICATE="/var/ossec/etc/sslagent.cert" zypper install wazuh-agent|WAZUH_AGENT_ZYPP_PKG_INSTALL|
         
         .. note:: To verify agents identity with the registration server, it's necessary to use both KEY and PEM options. See the    :ref:`Registration Service with host verification - Agent verification with host validation <enrollment_additional_security>` section.
 

@@ -43,6 +43,7 @@ Maximum time that the task information will remain stored in the task database.
 | **Required**       | no                                                                                                                                 |
 +--------------------+------------------------------------------------------------------------------------------------------------------------------------+
 
+.. note:: The ``cleanup_time`` must be greater than or equal to the ``task_timeout`` parameter.
 
 task_timeout
 ^^^^^^^^^^^^
