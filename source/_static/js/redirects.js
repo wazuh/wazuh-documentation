@@ -60,6 +60,14 @@ removedUrls['x.y'] = [
 ];
 */
 
+/* *** RELEASE 4.6 ****/
+
+newUrls['4.6'] = [
+  '/cloud-security/ms-graph/index.html',
+  '/cloud-security/ms-graph/monitoring-ms-graph-activity.html',
+  '/user-manual/reference/ossec-conf/ms-graph-module.html',
+];
+
 /* *** RELEASE 4.5 ****/
 
 /* Pages added in x.y */
