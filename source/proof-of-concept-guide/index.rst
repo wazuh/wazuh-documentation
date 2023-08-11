@@ -71,7 +71,3 @@ Use cases
    audit-commands-run-by-user
    detect-web-attack-shellshock
 
-..
-   integrate-osquery
-   poc-integrate-slack
-

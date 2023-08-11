@@ -2,7 +2,7 @@
 
 .. code-block:: console
   
-  # curl -so /etc/filebeat/wazuh-template.json https://raw.githubusercontent.com/wazuh/wazuh/4.4/extensions/elasticsearch/7.x/wazuh-template.json
+  # curl -so /etc/filebeat/wazuh-template.json https://raw.githubusercontent.com/wazuh/wazuh/4.5/extensions/elasticsearch/7.x/wazuh-template.json
   # chmod go+r /etc/filebeat/wazuh-template.json
 
 .. End of include file

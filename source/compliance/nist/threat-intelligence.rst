@@ -6,7 +6,7 @@
 Threat intelligence
 ===================
 
-The Wazuh MITRE ATT&CK module provides you with threat intelligence capability. You can use it to gain further context on alerts in your environment. `MITRE ATT&CK <https://attack.mitre.org/>`_ is a repository for information about attack tactics and techniques, and what to do to detect and mitigate them. The Wazuh MITRE ATT&CK module shows alerts that detail the threat actors, attack tactics,  and techniques used in a security event. This module is helpful when an attack generates alerts and a user wants to know more about it. Refer to the `Enhancing with MITRE documentation <https://documentation.wazuh.com/current/user-manual/ruleset/mitre.html>`_ for more details about MITRE mapping to rules.
+The Wazuh MITRE ATT&CK module provides you with threat intelligence capability. You can use it to gain further context on alerts in your environment. `MITRE ATT&CK <https://attack.mitre.org/>`_ is a repository for information about attack tactics and techniques, and what to do to detect and mitigate them. The Wazuh MITRE ATT&CK module shows alerts that detail the threat actors, attack tactics,  and techniques used in a security event. This module is helpful when an attack generates alerts and a user wants to know more about it. Refer to the :doc:`/user-manual/ruleset/mitre` for more details about MITRE mapping to rules.
 
 The Wazuh threat intelligence capability helps to meet the following NIST 800-53 controls:
 

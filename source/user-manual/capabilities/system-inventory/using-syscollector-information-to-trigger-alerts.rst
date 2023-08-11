@@ -80,7 +80,7 @@ You can search for any Syscollector field on the Wazuh dashboard. The Wazuh inde
 To see Syscollector searchable fields on the Wazuh dashboard, you must either:
 
 - Create a custom rule that uses the built-in Syscollector rule ``221``. This is the recommended option.
-- `Modify the rule level <https://documentation.wazuh.com/current/user-manual/ruleset/custom.html#changing-an-existing-rule>`_ of the Syscollector rule ``221`` by overwriting it with a new rule in your ``/var/ossec/etc/rules/local_rules.xml`` file or in any custom rules file you have:
+- :ref:`Modify the rule level <changing_existing_rule>` of the Syscollector rule ``221`` by overwriting it with a new rule in your ``/var/ossec/etc/rules/local_rules.xml`` file or in any custom rules file you have:
 
 .. code-block:: xml
    :emphasize-lines: 2
