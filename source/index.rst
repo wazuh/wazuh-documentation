@@ -19,7 +19,7 @@ Index
    installation-guide/index
    deployment-options/index
    upgrade-guide/index
-   Integrations guide <integrations/index>
+   Integrations guide <integrations-guide/index>
    migration-guide/index
    Wazuh Cloud service <cloud-service/index>
    user-manual/index
