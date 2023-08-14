@@ -59,8 +59,8 @@ Installation is done using yum from `EPEL <http://fedoraproject.org/wiki/EPEL>`_
 
          .. code-block:: console
          
-            $ pip3 install --upgrade --ignore-installed pip setuptools --user
-            $ python3 -m pip install --user ansible
+            # pip3 install --upgrade --ignore-installed pip setuptools --user
+            # python3 -m pip install --user ansible
 
 Installation on Debian/Ubuntu
 -----------------------------
