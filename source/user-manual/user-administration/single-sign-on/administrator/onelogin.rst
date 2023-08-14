@@ -336,18 +336,6 @@ Wazuh dashboard configuration
                validate: false
          ...
 
-#. Ensure that ``run_as`` is set to false in the ``/usr/share/wazuh-dashboard/data/wazuh/config/wazuh.yml`` configuration file.
-
-   .. code-block:: yaml
-
-      hosts:
-        - default:
-            url: https://localhost
-            port: 55000
-            username: wazuh-wui
-            password: "6TMbkZhBR......"
-            run_as: false           
-
 #. Restart the Wazuh dashboard service.
 
    .. include:: /_templates/common/restart_dashboard.rst
