@@ -18,7 +18,7 @@ Wazuh integrates with Splunk in these ways:
    -  :ref:`Using Logstash <server_integration_using_Logstash>`
    -  :ref:`Using the Splunk forwarder <server_integration_using_SplunkForwarder>`
 
-.. thumbnail:: /images/integrations/image11.png
+.. thumbnail:: /images/integrations/integration-diagram-splunk.png
    :title: Splunk integration diagram
    :align: center
    :width: 80%
@@ -39,7 +39,7 @@ To complete the integration from the Wazuh indexer to Splunk, you must first con
 
 Check the Splunk `set up and use HTTP Event Collector <https://docs.splunk.com/Documentation/Splunk/latest/Data/UsetheHTTPEventCollector>`__ documentation to set up the configuration, as seen below.
 
-.. thumbnail:: /images/integrations/image4.gif
+.. thumbnail:: /images/integrations/enable-http-event-collector.gif
    :title: Enable the HTTP Event Collector
    :align: center
    :width: 80%
@@ -216,7 +216,7 @@ First, set up Splunk as follows:
 
 Check the Splunk `set up and use HTTP Event Collector <https://docs.splunk.com/Documentation/Splunk/latest/Data/UsetheHTTPEventCollector>`_ documentation to achieve this.￼
 
-.. thumbnail:: /images/integrations/image4.gif
+.. thumbnail:: /images/integrations/enable-http-event-collector.gif
    :title: Enable the HTTP Event Collector
    :align: center
    :width: 80%
@@ -374,8 +374,8 @@ Perform the following actions in Splunk Web:
 #. Under **Receive data**, click **Add new**.
 #. Enter ``9997`` in the **Listen on this port** input box and click **Save**.
 
-.. thumbnail:: /images/integrations/image13.gif
-   :title: Configure the receiving port
+.. thumbnail:: /images/integrations/configuring-the-receiving-port.gif
+   :title: Configuring the receiving port
    :align: center
    :width: 80%
 
@@ -398,7 +398,7 @@ Perform the following actions to configure the ``wazuh-alerts`` indexes in Splun
 #. Go to **Settings** > **Indexes** > **New Index**.
 #. Enter ``wazuh-alerts`` in **Index name** and click **Save**.
 
-.. thumbnail:: /images/integrations/image19.gif
+.. thumbnail:: /images/integrations/configuring-index-pattern-in-splunk.gif
    :title: Configuring the wazuh-alerts indexes in Splunk Web
    :align: center
    :width: 80%
@@ -502,7 +502,7 @@ Splunk dashboards
 
 Wazuh provides several `dashboards <https://github.com/wazuh/wazuh-kibana-app/tree/4.6.0/docker/integrations/extra/dashboards/Splunk>`__  for Splunk. After you complete the Splunk integration, you can use these dashboards to display your Wazuh alerts in Splunk.
 
-.. thumbnail:: /images/integrations/image6.png
+.. thumbnail:: /images/integrations/security-events-dashboard-for-splunk.png
    :title: Wazuh security events on Splunk dashboard
    :align: center
    :width: 80%
@@ -518,7 +518,7 @@ To import the Wazuh dashboards for Splunk, repeat the following steps for each d
 #. Paste your dashboard file content, replacing everything in the source.
 #. Click **Back** and click **Save**.
 
-.. thumbnail:: /images/integrations/image5.gif
+.. thumbnail:: /images/integrations/import-dashboard-in-splunk.gif
    :title: Importing Wazuh dashboards for Splunk
    :align: center
    :width: 80%

@@ -13,7 +13,7 @@ In this guide, you can find how to integrate Wazuh with Elastic in the following
 -  `Wazuh indexer integration using Logstash`_
 -  `Wazuh server integration using Logstash`_
 
-.. thumbnail:: /images/integrations/image2.png
+.. thumbnail:: /images/integrations/integration-diagram-ELK.png
    :title: ELK integration diagram
    :align: center
    :width: 80%
@@ -46,6 +46,15 @@ Perform the following steps to install Logstash and the required plugin.
 
       You can add the certificates to any directory of your choice. For example, we added them in ``/etc/logstash/wazuh-indexer-certs`` and ``/etc/logstash/elasticsearch-certs`` respectively.
 
+#. Give the ``logstash`` user the necessary permissions to read the copied certificates:
+
+   .. code-block:: console
+
+      $ sudo chmod -R 755 </PATH/TO/LOCAL/WAZUH-INDEXER/CERTIFICATE>/root-ca.pem
+      $ sudo chmod -R 755 </PATH/TO/LOCAL/ELASTICSEARCH/CERTIFICATE>/root-ca.pem
+
+   Replace ``</PATH/TO/LOCAL/WAZUH-INDEXER/CERTIFICATE>/root-ca.pem`` and ``</PATH/TO/LOCAL/ELASTICSEARCH/CERTIFICATE>/root-ca.pem`` with your Wazuh indexer and Elasticsearch certificate local paths on the Logstash endpoint respectively.
+
 Configuring new indexes
 ^^^^^^^^^^^^^^^^^^^^^^^
 
@@ -53,7 +62,7 @@ You must define the mappings between the data and the index types to ensure Elas
 
 You need to use the `logstash/es_template.json <https://raw.githubusercontent.com/wazuh/wazuh-kibana-app/4.6/docker/integrations/config/logstash/es_template.json>`__ template to configure this index initialization for your Elasticsearch platform. The ``refresh_interval`` is set to ``5s`` in the template we provide.
 
-Create a ``/etc/logstash/templates/`` directory and download the template as wazuh.json using the following commands:
+Create a ``/etc/logstash/templates/`` directory and download the template as ``wazuh.json`` using the following commands:
 
 .. code-block:: console
 
@@ -232,7 +241,7 @@ Running Logstash
 
    The ``/var/log/logstash/logstash-plain.log`` file in the Logstash instance stores events generated when Logstash runs. View this file in case you need to troubleshoot.
 
-Check Elastic documentation for more details on setting up and running Logstash .
+Check Elastic documentation for more details on `setting up and running Logstash <https://www.elastic.co/guide/en/logstash/current/setup-logstash.html>`__.
 
 Wazuh server integration using Logstash
 ---------------------------------------
@@ -260,12 +269,20 @@ Perform the following steps to install Logstash and the required plugin.
 
 #. Copy the Elasticsearch root certificate to the Wazuh server. You can add the certificate to any directory of your choice. In our case, we add it in ``/etc/logstash/elasticsearch-certs`` directory.
 
+#. Give the ``logstash`` user the necessary permissions to read the copied certificates:
+
+   .. code-block:: console
+
+      $ sudo chmod -R 755 </PATH/TO/LOCAL/ELASTICSEARCH/CERTIFICATE>/root-ca.pem
+
+   Replace ``</PATH/TO/LOCAL/ELASTICSEARCH/CERTIFICATE>/root-ca.pem`` with your Elasticsearch certificate local path on the Wazuh server.
+
 Configuring new indexes
 ^^^^^^^^^^^^^^^^^^^^^^^
 
 You must define the mappings between the data and the index types to ensure Elasticsearch indexes your data correctly. Elasticsearch can infer these mappings, but we recommend that you explicitly configure them. Wazuh provides a set of mappings to ensure Elasticsearch indexes the data correctly.
 
-You need to use the `logstash/es_template.json <https://raw.githubusercontent.com/wazuh/wazuh-kibana-app/4.6/docker/integrations/config/logstash/es_template.json>`__ template to configure this index initialization for your Elasticsearch platform. The refresh_interval is set to 5s in the template we provide.
+You need to use the `logstash/es_template.json <https://raw.githubusercontent.com/wazuh/wazuh-kibana-app/4.6/docker/integrations/config/logstash/es_template.json>`__ template to configure this index initialization for your Elasticsearch platform. The ``refresh_interval`` is set to ``5s`` in the template we provide.
 
 Create a ``/etc/logstash/templates/`` directory and download the template as ``wazuh.json`` using the following commands:
 
@@ -282,12 +299,12 @@ In Elasticsearch, the indexes support up to ``1000`` fields by default. However,
    "template": {
      ...
      "settings": {
-   	 ...
+       ...
            "mapping": {
-      	 	"total_fields": {
-    		   	"limit": 10000
-      	   	}
-         	  }
+            "total_fields": {
+      	      "limit": 10000
+            }
+           }
            ...
      }
      ...
@@ -439,7 +456,7 @@ In Kibana, do the following to create the index pattern name for the Wazuh alert
 #. Open the menu and select **Discover** under **Analytics**.
 #. Select **☰** > **Analytics** > **Discover**.
 
-.. thumbnail:: /images/integrations/image16.gif
+.. thumbnail:: /images/integrations/configuring-index-pattern-in-elastic.gif
    :title: Configuring the Wazuh alerts index pattern in Elastic
    :align: center
    :width: 80%
@@ -447,9 +464,9 @@ In Kibana, do the following to create the index pattern name for the Wazuh alert
 Verifying the integration
 -------------------------
 
-To check the integration with Elasticsearch, you can navigate to Discover in Kibana and verify that you can find  the Wazuh security data with the data view name you entered.
+To check the integration with Elasticsearch, you can navigate to **Discover** in Kibana and verify that you can find  the Wazuh security data with the data view name you entered.
 
-.. thumbnail:: /images/integrations/image12.png
+.. thumbnail:: /images/integrations/finding-security-data-in-elastic.png
    :title: Verify finding security data
    :align: center
    :width: 80%
@@ -461,7 +478,7 @@ Elastic dashboards
 
 Wazuh provides several `dashboards for Elastic Stack <https://github.com/wazuh/wazuh-kibana-app/tree/4.6.0/docker/integrations/extra/dashboards/elastic/elastic%20v8.6.0%20v8.6.1%20v8.6.2%20v8.7.0>`__. After finishing with the Elasticsearch integration setup, these dashboards display your Wazuh alerts in Elastic.
 
-.. thumbnail:: /images/integrations/image1.png
+.. thumbnail:: /images/integrations/security-events-dashboard-for-elastic.png
    :title: Security events dashboard for Elastic
    :align: center
    :width: 80%
@@ -489,14 +506,14 @@ Follow the next steps to import the Wazuh dashboards for Elastic.
 #. Click on the **Import** icon, browse your files, and select the dashboard file.
 #. Click the **Import** button to start importing.
 
-   .. thumbnail:: /images/integrations/image3.gif
+   .. thumbnail:: /images/integrations/import-dashboard-in-elastic.gif
       :title: Import dashboard file in Elastic
       :align: center
       :width: 80%
 
 #. To find the imported dashboards,  select **Analytics** > **Dashboard**.
 
-   .. thumbnail:: /images/integrations/image9.png
+   .. thumbnail:: /images/integrations/finding-imported-dashboard-in-elastic.png
       :title: Find the imported dashboard
       :align: center
       :width: 80%

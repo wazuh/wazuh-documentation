@@ -64,6 +64,10 @@ removedUrls['x.y'] = [
 /* Pages added in x.y */
 
 newUrls['4.5'] = [
+  '/integrations-guide/index.html',
+  '/integrations-guide/elastic-stack/index.html',
+  '/integrations-guide/opensearch/index.html',
+  '/integrations-guide/splunk/index.html',
   '/release-notes/release-4-5-0.html',
 ];
 

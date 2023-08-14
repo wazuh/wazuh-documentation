@@ -13,7 +13,7 @@ In this guide, you can find how to integrate Wazuh with OpenSearch in the follow
 -  `Wazuh indexer integration using Logstash`_
 -  `Wazuh server integration using Logstash`_
 
-.. thumbnail:: /images/integrations/image18.png
+.. thumbnail:: /images/integrations/integration-diagram-opensearch.png
    :title: OpenSearch integration diagram
    :align: center
    :width: 80%
@@ -41,6 +41,15 @@ Perform the following steps to install Logstash and the required plugins. Ensure
       
       You can add the certificates to any directory of your choice. For example, we added them in ``/etc/logstash/wazuh-indexer-certs`` and ``/etc/logstash/opensearch-certs`` respectively.
 
+#. Give the ``logstash`` user the necessary permissions to read the copied certificates:
+
+   .. code-block:: console
+
+      $ sudo chmod -R 755 </PATH/TO/LOCAL/WAZUH-INDEXER/CERTIFICATE>/root-ca.pem
+      $ sudo chmod -R 755 </PATH/TO/LOCAL/OPENSEARCH/CERTIFICATE>/root-ca.pem
+
+   Replace ``</PATH/TO/LOCAL/WAZUH-INDEXER/CERTIFICATE>/root-ca.pem`` and ``</PATH/TO/LOCAL/OPENSEARCH/CERTIFICATE>/root-ca.pem`` with your Wazuh indexer and Opensearch certificate local path on the Logstash endpoint respectively.
+
 Configuring new indexes
 ^^^^^^^^^^^^^^^^^^^^^^^
 
@@ -64,12 +73,12 @@ In OpenSearch, the indexes support up to ``1000`` fields by default. However, Wa
    "template": {
      ...
      "settings": {
-   	 ...
+       ...
            "mapping": {
-      	 	"total_fields": {
-    		   	"limit": 10000
-      	   	}
-         	  }
+            "total_fields": {
+               "limit": 10000
+            }
+           }
            ...
      }
      ...
@@ -253,12 +262,20 @@ Perform the following steps to install Logstash and the required plugin.
 
 #. Copy the OpenSearch root certificate to the Wazuh server. You can add the certificate to any directory of your choice. In our case, we add it in the ``/etc/logstash/opensearch-certs`` directory.
 
+#. Give the ``logstash`` user the necessary permissions to read the copied certificates:
+
+   .. code-block:: console
+
+      $ sudo chmod -R 755 </PATH/TO/LOCAL/OPENSEARCH/CERTIFICATE>/root-ca.pem
+
+   Replace ``</PATH/TO/LOCAL/OPENSEARCH/CERTIFICATE>/root-ca.pem`` with your OpenSearch certificate local path on the Wazuh server.
+
 Configuring new indexes
 ^^^^^^^^^^^^^^^^^^^^^^^
 
 You must define the mappings between the data and the index types to ensure Opensearch indexes your data correctly. Opensearch can infer these mappings, but we recommend that you explicitly configure them. Wazuh provides a set of mappings to ensure Opensearch indexes the data correctly.
 
-You need to use the `logstash/os_template.json <https://raw.githubusercontent.com/wazuh/wazuh-kibana-app/4.6/docker/integrations/config/logstash/os_template.json>`__ template to configure this index initialization for your Opensearch platform. The ``refresh_interval`` is set to 5s in the template we provide.
+You need to use the `logstash/os_template.json <https://raw.githubusercontent.com/wazuh/wazuh-kibana-app/4.6/docker/integrations/config/logstash/os_template.json>`__ template to configure this index initialization for your Opensearch platform. The ``refresh_interval`` is set to ``5s`` in the template we provide.
 
 Create a ``/etc/logstash/templates/`` directory and download the template as ``wazuh.json`` using the following commands:
 
@@ -391,7 +408,7 @@ We use the `Logstash keystore <https://www.elastic.co/guide/en/logstash/current/
          
          For testing purposes, you can avoid SSL verification by replacing ``cacert => "/PATH/TO/LOCAL/OPENSEARCH/root-ca.pem"`` with ``ssl_certificate_verification => false``.
 
-         If you are using composable index templates and the _index_template API, set the optional parameter ``legacy_template => false``.
+         If you are using composable index templates and the _index_template API, set the optional parameter `legacy_template => false <https://opensearch.org/docs/latest/tools/logstash/ship-to-opensearch/#optional-parameters>`__.
 
 #. By default the ``/var/ossec/logs/alerts/alerts.json`` file is owned by the ``wazuh`` user with restrictive permissions. You must add the ``logstash`` user to the ``wazuh`` group so it can read the file when running Logstash as a service:
 
@@ -437,7 +454,7 @@ In Opensearch Dashboards, do the following to create the index pattern name for 
 #. Select **timestamp** as the primary time field for use with the global time filter. Then **Create the index pattern**.
 #. Open the menu and select **Discover** under **OpenSearch Dashboards**.
 
-.. thumbnail:: /images/integrations/image17.gif
+.. thumbnail:: /images/integrations/configuring-index-pattern-in-opensearch.gif
    :title: Configuring the Wazuh alerts index pattern in OpenSearch
    :align: center
    :width: 80%
@@ -447,7 +464,7 @@ Verifying the integration
 
 To check the integration with OpenSearch, navigate to **Discover** in OpenSearch Dashboards and verify that you can find  the Wazuh security data within the index pattern ``wazuh-alerts-4.x*``.
 
-.. thumbnail:: /images/integrations/image10.png
+.. thumbnail:: /images/integrations/finding-security-data-in-opensearch.png
    :title: Verify finding security data
    :align: center
    :width: 80%
@@ -459,7 +476,7 @@ OpenSearch dashboards
 
 Wazuh provides several `dashboards for OpenSearch <https://github.com/wazuh/wazuh-kibana-app/tree/4.6.0/docker/integrations/extra/dashboards/opensearch/opensearch%20v2.6.0>`__. After finishing with the OpenSearch integration setup, these dashboards display your Wazuh alerts in OpenSearch.
 
-.. thumbnail:: /images/integrations/image14.png
+.. thumbnail:: /images/integrations/security-events-dashboard-for-opensearch.png
    :title: Security events dashboard for Opensearch
    :align: center
    :width: 80%
@@ -488,7 +505,7 @@ Follow the next steps to import the Wazuh dashboards for OpenSearch.
 #. Click the **Import** button to start importing then click **Done**.
 #. To find the imported dashboards, navigate to **Dashboard** under **OpenSearch Dashboards**.
 
-.. thumbnail:: /images/integrations/image8.gif
+.. thumbnail:: /images/integrations/import-dashboard-in-opensearch.gif
    :title: Import dashboard file in Opensearch
    :align: center
    :width: 80%
