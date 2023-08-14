@@ -93,6 +93,32 @@ Backing up a Wazuh agent
 
 #. Back up your custom files such as local SCA policies, active response scripts, and wodles.
 
+   .. tabs::
+
+      .. group-tab:: Linux
+
+         .. code-block:: console
+
+            # rsync -aREz /var/ossec/etc/<SCA_DIRECTORY>/<CUSTOM_SCA_FILE> $bkp_folder
+            # rsync -aREz /var/ossec/active-response/bin/<CUSTOM_ACTIVE_RESPONSE_SCRIPT> $bkp_folder
+            # rsync -aREz /var/ossec/wodles/<CUSTOM_WODLE_SCRIPT> $bkp_folder
+
+      .. group-tab:: Windows
+
+         .. code-block:: doscon
+
+            > xcopy "C:\Program Files (x86)\ossec-agent\<SCA_DIRECTORY>\<CUSTOM_SCA_FILE>" %bkp_folder% /H /I /K /S /X
+            > xcopy "C:\Program Files (x86)\ossec-agent\active-response\bin\<CUSTOM_ACTIVE_RESPONSE_SCRIPT>" %bkp_folder%\active-response\bin\ /H /I /K /S /X
+            > xcopy "C:\Program Files (x86)\ossec-agent\wodles\<CUSTOM_WODLE_SCRIPT>" %bkp_folder%\wodles\ /H /I /K /S /X
+
+      .. group-tab:: macOS
+
+         .. code-block:: console
+
+            # rsync -aREz /Library/Ossec/etc/<SCA_DIRECTORY>/<CUSTOM_SCA_FILE> $bkp_folder 
+            # rsync -aREz /Library/Ossec/active-response/bin/<CUSTOM_ACTIVE_RESPONSE_SCRIPT> $bkp_folder
+            # rsync -aREz /Library/Ossec/wodles/<CUSTOM_WODLE_SCRIPT> $bkp_folder
+
 Checking the backup
 -------------------
 
