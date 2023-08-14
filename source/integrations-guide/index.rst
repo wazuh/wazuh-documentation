@@ -114,7 +114,7 @@ In this guide you can find configuration steps to set your integration and use t
 
 -  :ref:`elastic_dashboards`
 -  :ref:`openSearch_dashboards`
--  :doc:`Splunk dashboards <>`
+-  :ref:`splunk_dashboards`
 
 Capacity planning
 ^^^^^^^^^^^^^^^^^
