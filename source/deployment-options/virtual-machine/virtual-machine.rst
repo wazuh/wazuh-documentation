@@ -71,14 +71,11 @@ Import and access the virtual machine
       user: wazuh-user
       password: wazuh
 
-   The password for ``root`` user is ``wazuh``. However, accessing the virtual machine via SSH is only possible using the system user. SSH login with the root user is disabled.
    SSH ``root`` user login has been deactivated; nevertheless, the ``wazuh-user`` retains sudo privileges. Access escalation can be achieved by executing the following command:
 
    .. code-block:: console
 
       sudo -i
-
-
 
 Access the Wazuh dashboard
 --------------------------
