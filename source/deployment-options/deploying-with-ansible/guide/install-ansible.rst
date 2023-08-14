@@ -38,7 +38,7 @@ The following minimum requirements should be met to use Ansible on Windows endpo
 Installation on CentOS/RHEL/Fedora
 ----------------------------------
 
-Installation is done using yum from `EPEL <http://fedoraproject.org/wiki/EPEL>`_. Only CentOS/RedHat version 6 or 7, and Fedora distributions, are currently supported. The steps are as follows:
+Installation is done using yum from `EPEL <http://fedoraproject.org/wiki/EPEL>`_. Only CentOS/RedHat version 6, 7 o 8, and Fedora distributions, are currently supported. The steps are as follows:
 
 #. Install the EPEL repository:
 
@@ -51,6 +51,16 @@ Installation is done using yum from `EPEL <http://fedoraproject.org/wiki/EPEL>`_
    .. code-block:: console
 
       # yum install ansible
+   
+   .. note::
+      :class: not-long
+   
+      If the system is CentOS 8, run the following commands:
+
+         .. code-block:: console
+         
+            $ pip3 install --upgrade --ignore-installed pip setuptools --user
+            $ python3 -m pip install --user ansible
 
 Installation on Debian/Ubuntu
 -----------------------------
