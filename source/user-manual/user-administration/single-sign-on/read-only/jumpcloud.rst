@@ -1,9 +1,7 @@
 .. Copyright (C) 2015, Wazuh, Inc.
 
 .. meta::
-   :description: Jumpcloud is a Unified Device and Identity Access Management platform. Learn more about it in this section of the Wazuh documentation.
-
-.. _jumpcloud:
+   :description: Jumpcloud is a Unified Device and Identity Access Management platform. Learn more about it and the read-only role in this section of the Wazuh documentation.
 
 Jumpcloud
 =========
@@ -12,9 +10,9 @@ Jumpcloud
 
 There are three stages in the single sign-on integration.
 
-#. Jumpcloud Configuration
-#. Wazuh indexer configuration
-#. Wazuh dashboard configuration
+#. `Jumpcloud Configuration`_
+#. `Wazuh indexer configuration`_
+#. `Wazuh dashboard configuration`_
 
 Jumpcloud Configuration
 -----------------------
@@ -31,9 +29,9 @@ Jumpcloud Configuration
 
 #. Create a new group and assign the user.
 
-   #. Go to **User Management** > **User Groups** > **(+)** and give a name to the group. In our case, this is ``Wazuh admins``.
+   #. Go to **User Management** > **User Groups** > **(+)** and give a name to the group. In our case, this is ``wazuh-readonly``.
 
-      .. thumbnail:: /images/single-sign-on/jumpcloud/02-go-to-user-management-user-groups.png
+      .. thumbnail:: /images/single-sign-on/jumpcloud/read-only/02-go-to-user-management-user-groups-RO.png
           :title: Go to User Management - User Groups
           :align: center
           :width: 80%
@@ -57,7 +55,7 @@ Jumpcloud Configuration
           :width: 80%    
 
       .. thumbnail:: /images/single-sign-on/jumpcloud/04-go-to-SSO.png
-          :title: Under the User Authentication section, go to SSO 
+          :title: Add a Display label
           :align: center
           :width: 80%    
 
@@ -89,7 +87,7 @@ Jumpcloud Configuration
 
    #. On the **User Groups** tab, select the **Group** created previously and click **save**.
 
-      .. thumbnail:: /images/single-sign-on/jumpcloud/09-on-the-user-groups-tab.png
+      .. thumbnail:: /images/single-sign-on/jumpcloud/read-only/09-on-the-user-groups-tab-RO.png
           :title: On the User Groups tab, select the Group created previously
           :align: center
           :width: 80% 
@@ -109,7 +107,7 @@ Jumpcloud Configuration
 Wazuh indexer configuration
 ---------------------------
 
-Edit the Wazuh indexer security configuration files. We recommend that you back up these files before you carry out the configuration.
+Edit the Wazuh indexer security configuration files. We recommend that you back up these files before you carry out the configuration. 
 
 #. Place the ``metadata_jumpcloud.xml`` file within the ``/usr/share/wazuh-indexer/plugins/opensearch-security/securityconfig/`` directory. Set the file ownership to ``wazuh-indexer`` using the following command:
 
@@ -194,53 +192,24 @@ Edit the Wazuh indexer security configuration files. We recommend that you back 
       Will update '_doc/config' with /usr/share/wazuh-indexer/plugins/opensearch-security/securityconfig/config.yml 
          SUCC: Configuration for 'config' created or updated
       Done with success
-   
-#. Edit the ``/usr/share/wazuh-indexer/plugins/opensearch-security/securityconfig/roles_mapping.yml`` file and change the following values:
-
-   Configure the ``roles_mapping.yml`` file to map the Jumpcloud user group to the appropriate Wazuh indexer role. In our case, we map the ``Wazuh admins`` group to the ``all_access`` role:
-
-   .. code-block:: console
-      :emphasize-lines: 6
-
-      all_access:
-        reserved: false
-        hidden: false
-        backend_roles:
-        - "admin"
-        - "Wazuh admins"
-        description: "Maps admin to all_access"
-
-#. Run the ``securityadmin`` script to load the configuration changes made in the ``roles_mapping.yml`` file. 
-
-   .. code-block:: console
-
-      # export JAVA_HOME=/usr/share/wazuh-indexer/jdk/ && bash /usr/share/wazuh-indexer/plugins/opensearch-security/tools/securityadmin.sh -f /usr/share/wazuh-indexer/plugins/opensearch-security/securityconfig/roles_mapping.yml -icl -key /etc/wazuh-indexer/certs/admin-key.pem -cert /etc/wazuh-indexer/certs/admin.pem -cacert /etc/wazuh-indexer/certs/root-ca.pem -h localhost -nhnv      
-
-   The ``-h`` flag specifies the hostname or the IP address of the Wazuh indexer node. Note that this command uses localhost, set your Wazuh indexer address if necessary.
-      
-   The command output must be similar to the following:
-       
-   .. code-block:: console
-      :class: output
-
-      Security Admin v7
-      Will connect to localhost:9300 ... done
-      Connected as CN=admin,OU=Wazuh,O=Wazuh,L=California,C=US
-      OpenSearch Version: 1.2.4
-      OpenSearch Security Version: 1.2.4.0
-      Contacting opensearch cluster 'opensearch' and wait for YELLOW clusterstate ...
-      Clustername: wazuh-cluster
-      Clusterstate: GREEN
-      Number of nodes: 1
-      Number of data nodes: 1
-      .opendistro_security index already exists, so we do not need to create one.
-      Populate config from /home/wazuh
-      Will update '_doc/rolesmapping' with /usr/share/wazuh-indexer/plugins/opensearch-security/securityconfig/roles_mapping.yml 
-         SUCC: Configuration for 'rolesmapping' created or updated
-      Done with success
 
 Wazuh dashboard configuration
 -----------------------------
+
+#. Create a new role mapping for the backend role. Follow these steps to create a new role mapping, and grant read-only permissions to the backend role.
+
+   #. Log into the Wazuh dashboard as administrator.
+   #. Click the upper-left menu icon **☰** to open the options, select **Security**, and then **Roles** to open the roles page.
+   #. Click **Create role**, complete the empty fields with the following parameters, and then click **Create** to complete the task.
+
+      -  **Name**: Assign a name to the role.
+      -  **Cluster permissions**: ``cluster_composite_ops_ro``
+      -  **Index**: ``*``
+      -  **Index permissions**: ``read``
+      -  **Tenant permissions**: Select ``global_tenant`` and the ``Read only`` option.
+   #. Select the newly created role.
+   #. Select the **Mapped users** tab and click **Manage mapping**.
+   #. Under **Backend roles**, add the name of the group you created in JumpCloud  and click **Map** to confirm the action. In our case, the backend role is ``wazuh-readonly``.
 
 #. Check the value of ``run_as`` in the ``/usr/share/wazuh-dashboard/data/wazuh/config/wazuh.yml`` configuration file. If ``run_as`` is set to ``false``, proceed to the next step.
 
@@ -257,6 +226,7 @@ Wazuh dashboard configuration
 
    If ``run_as`` is set to ``true``, you need to add a role mapping on the Wazuh dashboard. To map the backend role to Wazuh, follow these steps:
 
+   #. Click the upper-left menu icon **☰** to open the available options.
    #. Click **Wazuh** to open the Wazuh dashboard menu, select **Security**, and then **Roles mapping** to open the page.
 
       .. thumbnail:: /images/single-sign-on/Wazuh-role-mapping.gif
@@ -267,20 +237,33 @@ Wazuh dashboard configuration
 
    #. Click **Create Role mapping** and complete the empty fields with the following parameters:
 
-      -  **Role mapping name**: Assign a name to the role mapping.
-      -  **Roles**: Select ``administrator``.
-      -  **Custom rules**: Click **Add new rule** to expand this field.
-      -  **User field**: ``backend_roles``
-      -  **Search operation**: ``FIND``
-      -  **Value**: Assign the value of the Department field in OneLogin configuration. In our case, this is ``Wazuh admins``.  
+      - **Role mapping name**: Assign a name to the role mapping.
+      - **Roles**: Select ``readonly``.
+      - **Custom rules**: Click **Add new rule** to expand this field.
+      - **User field**: ``backend_roles``
+      - **Search operation**: ``FIND``
+      - **Value**: Assign the name of the group you created in JumpCloud. In our case, the backend role is ``wazuh-readonly``.
 
-      .. thumbnail:: /images/single-sign-on/jumpcloud/Wazuh-role-mapping.png
+      .. thumbnail:: /images/single-sign-on/jumpcloud/read-only/Wazuh-role-mapping-RO.png
          :title: Create Wazuh role mapping
          :alt: Create Wazuh role mapping 
          :align: center
          :width: 80%      
 
-   #. Click **Save role mapping** to save and map the backend role with Wazuh as administrator.
+   #. Click **Save role mapping** to save and map the backend role with Wazuh as *read-only*.
+
+   .. note::
+
+      For versions 4.3.9 and earlier, also replace ``path: `/auth/logout``` with ``path: `/logout``` in ``/usr/share/wazuh-dashboard/plugins/securityDashboards/server/auth/types/saml/routes.js``. We recommend that you back up these files before you carry out the configuration.
+
+      .. code-block:: javascript
+         :emphasize-lines: 3
+
+         ...
+         this.router.get({
+               path: `/logout`,
+               validate: false
+         ...
 
 #. Edit the Wazuh dashboard configuration file. Add these configurations to ``/etc/wazuh-dashboard/opensearch_dashboards.yml``. We recommend that you back up these files before you carry out the configuration.
 
@@ -289,19 +272,6 @@ Wazuh dashboard configuration
       opensearch_security.auth.type: "saml"
       server.xsrf.whitelist: ["/_opendistro/_security/saml/acs", "/_opendistro/_security/saml/logout", "/_opendistro/_security/saml/acs/idpinitiated"]
 
-   .. note::
-      :class: not-long
-
-      *For versions 4.3.9 and earlier*, also replace ``path: `/auth/logout``` with ``path: `/logout``` in ``/usr/share/wazuh-dashboard/plugins/securityDashboards/server/auth/types/saml/routes.js``. We recommend that you back up these files before you carry out the configuration.
-
-      .. code-block:: console
-         :emphasize-lines: 3
-
-         ...
-            this.router.get({
-               path: `/logout`,
-               validate: false
-         ...
 
 #. Restart the Wazuh dashboard service.
 

@@ -92,13 +92,22 @@ newUrls['4.3'] = [
   '/user-manual/user-administration/password-management.html',
   '/user-manual/user-administration/rbac.html',
   '/user-manual/user-administration/single-sign-on/index.html',
-  '/user-manual/user-administration/single-sign-on/okta.html',
-  '/user-manual/user-administration/single-sign-on/azure-active-directory.html',
-  '/user-manual/user-administration/single-sign-on/pingone.html',
-  '/user-manual/user-administration/single-sign-on/google.html',
-  '/user-manual/user-administration/single-sign-on/jumpcloud.html',
-  '/user-manual/user-administration/single-sign-on/onelogin.html',
-  '/user-manual/user-administration/single-sign-on/keycloak.html',
+  '/user-manual/user-administration/single-sign-on/administrator/index.html',
+  '/user-manual/user-administration/single-sign-on/administrator/okta.html',
+  '/user-manual/user-administration/single-sign-on/administrator/azure-active-directory.html',
+  '/user-manual/user-administration/single-sign-on/administrator/pingone.html',
+  '/user-manual/user-administration/single-sign-on/administrator/google.html',
+  '/user-manual/user-administration/single-sign-on/administrator/jumpcloud.html',
+  '/user-manual/user-administration/single-sign-on/administrator/onelogin.html',
+  '/user-manual/user-administration/single-sign-on/administrator/keycloak.html',
+  '/user-manual/user-administration/single-sign-on/read-only/index.html',
+  '/user-manual/user-administration/single-sign-on/read-only/okta.html',
+  '/user-manual/user-administration/single-sign-on/read-only/azure-active-directory.html',
+  '/user-manual/user-administration/single-sign-on/read-only/pingone.html',
+  '/user-manual/user-administration/single-sign-on/read-only/google.html',
+  '/user-manual/user-administration/single-sign-on/read-only/jumpcloud.html',
+  '/user-manual/user-administration/single-sign-on/read-only/onelogin.html',
+  '/user-manual/user-administration/single-sign-on/read-only/keycloak.html',
   '/upgrade-guide/upgrading-central-components.html',
   '/migration-guide/index.html',
   '/migration-guide/wazuh-indexer.html',
@@ -1170,7 +1179,17 @@ redirections.push(
     '4.2': '/user-manual/capabilities/sec-config-assessment/what-is-it.html',
     '4.3': '/user-manual/capabilities/sec-config-assessment/how-it-works.html',
   },
-  );
+  {
+    'target': ['4.2=>4.3', '4.3=>4.2'],
+    '4.2': '/user-manual/capabilities/vulnerability-detection/compatibility-matrix.html',
+    '4.3': '/user-manual/capabilities/vulnerability-detection/how-it-works.html#compatibility-matrix',
+  },
+  {
+    'target': ['4.2=>4.3', '4.3=>4.2'],
+    '4.2': '/user-manual/capabilities/vulnerability-detection/running-vu-scan.html',
+    '4.3': '/user-manual/capabilities/vulnerability-detection/configuring-scans.html',
+  },
+);
 
 /* *** RELEASE 4.2 ****/
 
