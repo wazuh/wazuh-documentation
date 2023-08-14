@@ -54,7 +54,7 @@ Azure Active Directory Configuration
 
       -  **Display name**: This can be any value that you want. In our case, this is ``Wazuh Read Only Role``.
       -  **Allowed member types**: Select ``Users/Groups``.
-      -  **Value**: defines the name of the role. In this case ``wazuh-readonly``, which will be the backend role value to be mapped on the Wazuh dashboard.
+      -  **Value**: Defines the name of the role. In this case ``wazuh-readonly``, which will be the backend role value to be mapped on the Wazuh dashboard.
       -  **Description**: This can be any value that you want. In our case, this is ``Wazuh Read Only Role``.
       -  **Do you want to enable this app role**: Click on the checkmark to enable the role.
 

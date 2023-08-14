@@ -16,7 +16,7 @@ Required parameters
 The following parameters are required to make the configurations on the Wazuh dashboard instance:
 
 -  ``idp.metadata_url``: URL to an XML file that contains metadata information about the application configured on the IdP side. It can be used instead of ``idp.metadata_file``.
--  ``idp.metadata_file``: XML File that contains the metadata information about the application configured on the IdP side. It can be used instead of ``idp.metadata_url``.
+-  ``idp.metadata_file``: XML file that contains the metadata information about the application configured on the IdP side. It can be used instead of ``idp.metadata_url``.
 -  ``idp.entity_id``: Entity ID of the Identity Provider. This is a unique value assigned to an Identity Provider.
 -  ``sp.entity_id``: Entity ID of the Service Provider. This is a unique value assigned to a Service Provider.
 -  ``kibana_url``: URL to access the Wazuh dashboard.
@@ -28,7 +28,7 @@ The following parameters are required to make the configurations on the Wazuh da
    -  The group and role names used in this guide can be changed. They do not necessarily have to be the ones we used.
    -  OpenSearch and the SAML assertion are case sensitive. Therefore the values on the IDP and in the SAML configuration of the Wazuh indexer have to be exactly the same.
    -  It is recommended to clear the browser cache and cookies before the integration is carried out.
-   -  The ``securityadmin`` script has to be executed with root user privileges
+   -  The ``securityadmin`` script has to be executed with root user privileges.
    -  Read-only permissions are being assigned in this integration. The :doc:`../administrator/index` guide can be used to configure an administrator role based on the user requirements.
    -  Each group that is generated in the IDPs can only be used as one  ``backend_role``. In a case where other roles such as ``administrator`` are needed, a new group will have to be created for this purpose.
    -  You need an account with administrator privileges on the Wazuh dashboard.
