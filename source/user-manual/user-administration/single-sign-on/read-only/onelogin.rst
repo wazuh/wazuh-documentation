@@ -38,7 +38,7 @@ OneLogin Configuration
    #. Select the user, navigate to **More Actions** and click on **Change Password** to assign a password to the user.
 
       .. thumbnail:: /images/single-sign-on/onelogin/03-click-on-save-user.png
-         :title: Click on Save User
+         :title: Change the password
          :align: center
          :width: 80%
 

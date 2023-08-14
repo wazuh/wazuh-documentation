@@ -55,7 +55,7 @@ Jumpcloud Configuration
           :width: 80%    
 
       .. thumbnail:: /images/single-sign-on/jumpcloud/04-go-to-SSO.png
-          :title: Under the User Authentication section, go to SSO 
+          :title: Add a Display label
           :align: center
           :width: 80%    
 

@@ -59,6 +59,9 @@ Azure Active Directory Configuration
       -  **Do you want to enable this app role**: Click on the checkmark to enable the role.
 
       .. thumbnail:: /images/single-sign-on/azure-active-directory/read-only/04-create-app-roles-RO.png
+         :title: Create app role
+         :align: center
+         :width: 80%
 
    #. Click **Apply** to save the changes and proceed to the next step.
 

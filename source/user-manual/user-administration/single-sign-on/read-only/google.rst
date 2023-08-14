@@ -101,7 +101,7 @@ Google Configuration
    #. Add a value to the **Department** field, in this example, we add ``wazuh-readonly``, click on **SAVE**. This value will be used as the backend role in the Wazuh dashboard configuration.
 
       .. thumbnail:: /images/single-sign-on/google/read-only/10-add-a-value-to-the-department-field-RO.png
-        :title:  Add a value to the Department field
+        :title: Add a value to the Department field
         :align: center
         :width: 80%
 

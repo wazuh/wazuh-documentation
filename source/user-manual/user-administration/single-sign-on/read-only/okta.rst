@@ -43,7 +43,7 @@ Okta Configuration
 #. Create a new group. Navigate to **Directory** > **Groups** and add a group.
    
      .. thumbnail:: /images/single-sign-on/okta/04-navigate-to-directory-groups.png
-        :title: Navigate to directory groups
+        :title: Navigate to Directory > Groups and add a group
         :align: center
         :width: 80%    
  
@@ -52,7 +52,7 @@ Okta Configuration
 #. Add the new user to the new group. Navigate to **Directory** > **Groups**  and select your group. Click on **Assign People** and add the user to the group created.
 
      .. thumbnail:: /images/single-sign-on/okta/read-only/05-navigate-to-directory-groups-RO.png
-        :title: Navigate to Directory - Groups - <YOUR_GROUP>
+        :title: Navigate to Directory > Groups and select your group
         :align: center
         :width: 80%   
 
@@ -114,7 +114,7 @@ Okta Configuration
 #. Add the new app to the new group. Navigate to **Directory** > **Groups**  and select your group. Click on **Applications** and select **Assign Applications**. From here, assign the app created in step 5 and click on **Done** to save the changes.
    
    .. thumbnail:: /images/single-sign-on/okta/read-only/12-navigate-to-applications-RO.png
-      :title: Navigate to Directory - Groups - <YOUR_GROUP>
+      :title: Navigate to Directory > Groups and select your group
       :align: center
       :width: 80%   
 

@@ -48,7 +48,7 @@ PingOne Configuration
       - VERIFICATION CERTIFICATE (OPTIONAL): Load a PUBLIC CERTIFICATE that corresponds to the PRIVATE KEY that is going to be used on the ``sp.signature_private_key_filepath`` of the ``config.yml`` configuration file on the Wazuh indexer instance. This is necessary as all the logout requests must be signed.
 
       .. thumbnail:: /images/single-sign-on/pingone/read-only/03-on-the-configuration-tab-RO.png
-          :title: On the Configuration tab
+          :title: Configuration tab
           :align: center
           :width: 80%
 
