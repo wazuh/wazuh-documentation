@@ -413,7 +413,7 @@ Applying the changes
 
    .. code-block:: console
 
-      HOST==$(grep node.name opensearch.yml | awk '{printf $2}')
+      HOST=$(grep node.name $INSTALLATION_DIR/opensearch.yml | awk '{printf $2}')
       $ bash /usr/share/wazuh-indexer/plugins/opensearch-security/tools/securityadmin.sh -cd /usr/share/wazuh-indexer/opensearch-security/ -nhnv -cacert  $CACERT -cert $CERT -key $KEY -p 9200 -icl -h $HOST
 
 #. Exit the Wazuh indexer container and login with the new credentials on the Wazuh dashboard.
