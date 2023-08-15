@@ -186,8 +186,6 @@ For example, a ``notify_time`` setting of 60 combined with a time-reconnect of 3
 force_reconnect_interval
 ^^^^^^^^^^^^^^^^^^^^^^^^
 
-.. versionadded:: 4.3.0
-
 Specifies the time after which the agent is forced to be reconnected to the manager. The reconnection is forced to be done even if the agent is having a successful two-way communication with the manager.
 
 +--------------------+--------------------------------------------------------------------------------------------------------------------------------------------------+
@@ -200,8 +198,6 @@ Specifies the time after which the agent is forced to be reconnected to the mana
 
 ip_update_interval
 ^^^^^^^^^^^^^^^^^^
-
-.. versionadded:: 4.2.0
 
 Specifies how often an agent will query the control module for its main IP address.
 
@@ -295,7 +291,6 @@ Sample link-local IPv6 configuration
 
 enrollment
 ^^^^^^^^^^
-.. versionadded:: 4.0
 
 Configures the connection parameters for the agent enrollment.
 

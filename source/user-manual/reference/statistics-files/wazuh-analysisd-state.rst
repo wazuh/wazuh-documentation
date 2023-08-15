@@ -8,8 +8,6 @@
 wazuh-analysisd.state
 =====================
 
-.. versionadded:: 4.2
-
 The statistical file for **wazuh-analysisd** is located at ``/var/ossec/var/run/wazuh-analysisd.state``.
 
 It can be useful when benchmarking our Wazuh manager analysis engine in highly loaded environments.

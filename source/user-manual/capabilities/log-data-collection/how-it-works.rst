@@ -68,8 +68,6 @@ Wazuh can monitor classic Windows event logs, as well as the newer Windows event
 macOS ULS logs
 ^^^^^^^^^^^^^^
 
-.. versionadded:: 4.3.0
-
 Wazuh can monitor logs from the macOS Unified Logging System.
 
   .. code-block:: xml

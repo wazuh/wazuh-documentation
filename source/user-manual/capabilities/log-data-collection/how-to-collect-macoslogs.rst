@@ -8,8 +8,6 @@
 How to collect macOS ULS logs
 =============================
 
-.. versionadded:: 4.3.0
-
 macOS unified logging system (ULS) events can be gathered and forwarded to the manager.
 
 The ULS centralizes the management and storage of the logs across all the system levels, from Apps to the Kernel itself, rather than writing the data to text-based log files. Because of this, it is necessary to use specific methods to retrieve logs from this particular system.

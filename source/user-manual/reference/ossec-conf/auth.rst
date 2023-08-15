@@ -51,8 +51,6 @@ Toggles the execution of the Auth daemon on or off.
 remote_enrollment
 ^^^^^^^^^^^^^^^^^
 
-.. versionadded:: 4.2.0
-
 Allow listening for new agents on TLS port (1515 by default).
 
 +--------------------+---------------------+
@@ -77,8 +75,6 @@ Defines the TCP port number for listening to connections.
 ipv6
 ^^^^^^^^^^^
 
-.. versionadded:: 4.4.0
-
 Enables IPv6 support.
 
 +--------------------+------------------+
@@ -100,8 +96,6 @@ Toggles the use of the client's source IP address or the use of "any" to add an 
 
 force
 ^^^^^
-
-.. versionadded:: 4.3.0
 
 The agent replacement options are configured inside this tag. All conditions must be satisfied to perform the replacement.
 
@@ -266,8 +260,6 @@ The format of this parameter is described in `SSL ciphers <https://www.openssl.o
 
 key_request
 ^^^^^^^^^^^
-
-.. versionadded:: 4.4.0
 
 The key request settings are configured inside this tag. Read more about this feature at :doc:`agent key request <../../agents/key-request>`.
 
