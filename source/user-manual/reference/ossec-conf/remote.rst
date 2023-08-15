@@ -65,7 +65,6 @@ Specifies the protocol to use. It is available for secure connections and syslog
 | **Allowed values** | udp, tcp |
 +--------------------+----------+
 
-.. versionadded:: 4.2.0
   It is now possible to configure both UDP and TCP protocols to work simultaneously in the secure connections, this can be achieved by writing in the same configuration block the accepted protocols separated with a comma. For syslog connections, multiple protocols support require multiple configuration blocks since only one protocol per block is allowed.
 
 allowed-ips

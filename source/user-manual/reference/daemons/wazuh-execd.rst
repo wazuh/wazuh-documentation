@@ -8,8 +8,6 @@
 wazuh-execd
 ===========
 
-.. versionadded:: 4.2
-
 The wazuh-execd program runs active responses by initiating the configured scripts. It also handles the socket needed to perform remote upgrades in the agents.
 
 +-----------------+-------------------------------------------------------------------------------------------------+
