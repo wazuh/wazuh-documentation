@@ -255,12 +255,12 @@ To improve security, you can change the default password of the Wazuh users. The
 -  Wazuh indexer users
 -  Wazuh API users
 
- To change the passwords of Wazuh users, perform the following steps. Run the commands from your ``single-node/`` or ``multi-node/`` directory, depending on your Wazuh on Docker deployment.
+ To change the password of these Wazuh users, perform the following steps. You must run the commands from your ``single-node/`` or ``multi-node/`` directory, depending on your Wazuh on Docker deployment.
 
 Wazuh indexer users
 ~~~~~~~~~~~~~~~~~~~
 
- Follow these steps to change the password of the default ``admin`` and ``kibanaserver`` users.
+ To change the password of the default ``admin`` and ``kibanaserver`` users, do the following.
 
 .. warning::
 
@@ -400,15 +400,11 @@ Applying the changes
       CERT=$INSTALLATION_DIR/certs/admin.pem
       export JAVA_HOME=/usr/share/wazuh-indexer/jdk
 
-#. Run the ``securityadmin.sh`` script to apply all changes:
+#. Wait for the Wazuh indexer to initialize properly. The waiting time can vary from two to five minutes. It depends on the size of the cluster, the assigned resources, and the speed of the network. Then, run the ``securityadmin.sh`` script to apply all changes.
 
    .. code-block:: console
 
       $ bash /usr/share/wazuh-indexer/plugins/opensearch-security/tools/securityadmin.sh -cd /usr/share/wazuh-indexer/opensearch-security/ -nhnv -cacert  $CACERT -cert $CERT -key $KEY -p 9200 -icl
-
-.. note::
-
-   Wazuh indexer takes ``2`` to ``5`` minutes to start correctly, depending on the size of the nodes, assigned hardware and the speed of the network. It is recommended that you wait this time before running ``securityadmin.sh`` so that it does not return an error message..
 
 #. Exit the Wazuh indexer container and login with the new credentials on the Wazuh dashboard.
 
