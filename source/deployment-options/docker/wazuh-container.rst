@@ -402,9 +402,19 @@ Applying the changes
 
 #. Wait for the Wazuh indexer to initialize properly. The waiting time can vary from two to five minutes. It depends on the size of the cluster, the assigned resources, and the speed of the network. Then, run the ``securityadmin.sh`` script to apply all changes.
 
+.. tabs::
+   .. tab:: Single Node
+
    .. code-block:: console
 
       $ bash /usr/share/wazuh-indexer/plugins/opensearch-security/tools/securityadmin.sh -cd /usr/share/wazuh-indexer/opensearch-security/ -nhnv -cacert  $CACERT -cert $CERT -key $KEY -p 9200 -icl
+
+   .. tab:: Multi Node
+
+   .. code-block:: console
+
+      HOST==$(grep node.name opensearch.yml | awk '{printf $2}')
+      $ bash /usr/share/wazuh-indexer/plugins/opensearch-security/tools/securityadmin.sh -cd /usr/share/wazuh-indexer/opensearch-security/ -nhnv -cacert  $CACERT -cert $CERT -key $KEY -p 9200 -icl -h $HOST
 
 #. Exit the Wazuh indexer container and login with the new credentials on the Wazuh dashboard.
 
