@@ -30,7 +30,7 @@ The Syscollector module supports different options across various operating syst
 
 The Syscollector module now supports scan packages from `NPM (Node Package Manager)  <https://www.npmjs.com/>`_ and `PyPI (Python Package Index)  <https://www.npmjs.com/>`_, **the support is only for the default paths of those packages' installation**.
 
-The following table shows the new feature that are compatible with various operating systems, where '*√*' means compatible enhancement, '*✗*' not supported enhancement, and '*–*' not applicable.
+The following table shows the new feature that are compatible with various operating systems.
 
 +------------------------+----------------------------------------+
 |                        |  **Syscollector package enhancement**  |
