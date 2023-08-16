@@ -27,8 +27,8 @@ Wazuh dashboard installation
 
       # bash wazuh-install.sh --wazuh-dashboard dashboard
 
-   The default Wazuh web user interface port is 443, used by the Wazuh dashboard. You can specify this port by using the optional parameter ``-p|--port <port_number>``. Some recommended ports are 8443, 8444, 8080, 8888, and 9000.
-   
+   The default Wazuh web user interface port is 443, used by the Wazuh dashboard. You can change this port using the optional parameter ``-p|--port <port_number>``. Some recommended ports are 8443, 8444, 8080, 8888, and 9000.
+
    Once the assistant finishes the installation, the output shows the access credentials and a message that confirms that the installation was successful.
 
    .. code-block:: none
