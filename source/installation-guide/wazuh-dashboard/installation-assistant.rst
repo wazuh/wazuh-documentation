@@ -22,7 +22,7 @@ Wazuh dashboard installation
    .. note::
       
       Make sure that a copy of the ``wazuh-install-files.tar`` file, created during the initial configuration step, is placed in your working directory.
-      
+
    .. code-block:: console
 
       # bash wazuh-install.sh --wazuh-dashboard dashboard
