@@ -71,7 +71,7 @@ Import and access the virtual machine
       user: wazuh-user
       password: wazuh
 
-   SSH ``root`` user login has been deactivated; nevertheless, the ``wazuh-user`` retains sudo privileges. Access escalation can be achieved by executing the following command:
+   SSH ``root`` user login has been deactivated; nevertheless, the ``wazuh-user`` retains sudo privileges. Root privilege escalation can be achieved by executing the following command:
 
    .. code-block:: console
 
