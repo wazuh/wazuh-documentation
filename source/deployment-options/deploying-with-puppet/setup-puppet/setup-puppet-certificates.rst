@@ -14,13 +14,13 @@ To generate and sign a certificate, follow the next steps:
 
     .. code-block:: console
 
-       # puppet agent -t
+        # puppet agent -t
 
 2. On the Puppet server side, list the current certificates that need approval:
 
     .. code-block:: console
 
-       # puppetserver ca list
+        # puppetserver ca list
 
     It should output a list with your node hostname.
 
@@ -30,13 +30,11 @@ To generate and sign a certificate, follow the next steps:
 
         # puppetserver ca sign --certname pending-agent-node
 
-
-All certificates can be approved with this:
+    All certificates can be approved with this:
 
     .. code-block:: console
 
-         # puppetserver ca sign --all
-
+        # puppetserver ca sign --all
 
 4. Back on the Puppet agent node, run in the puppet agent again:
 
