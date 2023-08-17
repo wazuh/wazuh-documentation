@@ -10,12 +10,12 @@ Wazuh offers extensive compatibility and robust integration features that allow 
 
 Elastic, OpenSearch, and Splunk are software platforms designed for search, analytics, and data management. They are used to collect, index, search, and analyze large volumes of data in real-time and historical contexts.
 
-Up to Wazuh v4.4, the following integrated applications allowed users to manage Wazuh and its security data using third-party platforms:
+Up to Wazuh v4.5, the following integrated applications allows users to manage Wazuh and its security data using third-party platforms:
 
--  `Wazuh for Splunk <https://documentation.wazuh.com/4.4/deployment-options/splunk/splunk-app.html>`__
--  `Wazuh for Elastic <https://documentation.wazuh.com/4.4/deployment-options/elastic-stack/index.html>`__
+-  `Wazuh for Splunk <https://documentation.wazuh.com/4.5/deployment-options/splunk/splunk-app.html>`__
+-  `Wazuh for Elastic <https://documentation.wazuh.com/4.5/deployment-options/elastic-stack/index.html>`__
 
-However, since version 4.5, we don’t develop these integrated applications any longer. We only support them with critical security updates. In this document, we describe how to integrate your Wazuh deployment with the following third-party security platforms:
+However, from version 4.6, we will not develop these integrated applications any longer. We will only support them with critical security updates. In this document, we describe new methods of integrating your Wazuh deployment with the following third-party security platforms:
 
 -  :doc:`Elastic Stack <elastic-stack/index>`
 -  :doc:`OpenSearch <opensearch/index>`
@@ -31,6 +31,8 @@ We describe how to configure the following integration alternatives for each of 
 
 Additionally, we demonstrate how to import the provided dashboards for these platforms.
 
+.. _wazuh_indexer_integration:
+
 Wazuh indexer integration
 ^^^^^^^^^^^^^^^^^^^^^^^^^
 
@@ -45,6 +47,8 @@ Wazuh indexer integration requires a running Wazuh indexer and uses `Logstash <h
 
 We recommend the Wazuh indexer integration if you want to continue analyzing security data in Wazuh and archive it in a data lake for storage or out-of-band analysis. The Wazuh indexer and third-party platform indexer both create indexes for the same alerts. This integration results in the redundancy of indexes which can lead to high resource costs.
 
+.. _wazuh_server_integration:
+
 Wazuh server integration
 ^^^^^^^^^^^^^^^^^^^^^^^^
 
@@ -53,7 +57,7 @@ Wazuh server integration
    :align: center
    :width: 80%
 
-The Wazuh agent collects security data from monitored endpoints. The Wazuh server analyzes the data and generates alerts on the Wazuh dashboard. Wazuh stores security alerts locally in the ``/var/ossec/logs/alerts/alerts.log`` and ``/var/ossec/logs/alerts/alerts.json`` alerts files. The Wazuh server integration operates by reading the ``/var/ossec/logs/alerts/alerts.json`` file and forwarding the alerts to the third-party platform using a :ref:`data forwarder <data_forwarders>`
+The Wazuh agent collects security data from monitored endpoints. The Wazuh server analyzes the data and generates alerts on the Wazuh dashboard. Wazuh stores security alerts locally in the ``/var/ossec/logs/alerts/alerts.log`` and ``/var/ossec/logs/alerts/alerts.json`` alerts files. The Wazuh server integration operates by reading the ``/var/ossec/logs/alerts/alerts.json`` file and forwarding the alerts to the third-party platform using a :ref:`data forwarder <data_forwarders>`.
 
 We recommend Wazuh server integration over indexer integration if you don’t have enough resources for hosting both the third-party security platform indexer and the Wazuh indexer. This is particularly relevant for users operating Wazuh at a large scale, generating numerous alerts.
 
@@ -115,6 +119,8 @@ In this guide you can find configuration steps to set your integration and use t
 -  :ref:`elastic_dashboards`
 -  :ref:`openSearch_dashboards`
 -  :ref:`splunk_dashboards`
+
+.. _capacity_planning:
 
 Capacity planning
 ^^^^^^^^^^^^^^^^^

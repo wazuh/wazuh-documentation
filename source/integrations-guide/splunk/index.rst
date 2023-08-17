@@ -26,7 +26,7 @@ Wazuh integrates with Splunk in these ways:
 Wazuh indexer integration using Logstash
 ----------------------------------------
 
-Before configuring Logstash, you need to set up the Splunk indexer to receive the forwarded events.
+Before configuring Logstash, you need to set up the Splunk indexer to receive the forwarded events. Learn more about the :ref:`Wazuh indexer integration <wazuh_indexer_integration>` and its necessary :ref:`considerations <capacity_planning>`.
 
 Configuring the Splunk indexer
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
@@ -190,20 +190,22 @@ Running Logstash
       $ sudo systemctl enable logstash
       $ sudo systemctl start logstash
 
+Check Elastic documentation for more details on `setting up and running Logstash <https://www.elastic.co/guide/en/logstash/current/setup-logstash.html>`__.
+
 .. note::
    
    Any data indexed before the configuration is complete would not be forwarded to the Splunk indexes.
 
    The ``/var/log/logstash/logstash-plain.log`` file in the Logstash instance has logs that you can check in case something fails.
 
-Check Elastic documentation for more details on `setting up and running Logstash <https://www.elastic.co/guide/en/logstash/current/setup-logstash.html>`__.
+After Logstash is successfully running, check how to :ref:`verify the integration <verifying_splunk_integration>`.
 
 .. _server_integration_using_Logstash:
 
 Wazuh server integration using Logstash
 ---------------------------------------
 
-Before configuring Logstash, you need to set up the Splunk indexer to receive the forwarded events.
+Before configuring Logstash, you need to set up the Splunk indexer to receive the forwarded events. Learn more about the :ref:`Wazuh server integration <wazuh_server_integration>` and its necessary :ref:`considerations <capacity_planning>`.
 
 Configuring Splunk indexer
 ^^^^^^^^^^^^^^^^^^^^^^^^^^
@@ -344,13 +346,15 @@ Running Logstash
       $ sudo systemctl enable logstash
       $ sudo systemctl start logstash
 
+Check Elastic documentation for more details on `setting up and running Logstash <https://www.elastic.co/guide/en/logstash/current/setup-logstash.html>`__.
+
 .. note::
    
    Any data indexed before the configuration is complete would not be forwarded to the Splunk indexes.
 
    The ``/var/log/logstash/logstash-plain.log`` file in the Logstash instance has logs that you can check in case something fails.
 
-Check Elastic documentation for more details on `setting up and running Logstash <https://www.elastic.co/guide/en/logstash/current/setup-logstash.html>`__.
+After Logstash is successfully running, check how to :ref:`verify the integration <verifying_splunk_integration>`.
 
 .. _server_integration_using_SplunkForwarder:
 
@@ -487,10 +491,12 @@ Running the forwarder
    
    The ``/opt/splunkforwarder/var/log/splunk/splunkd.log`` file in the forwarder instance has logs that you can check in case something fails.
 
+.. _verifying_splunk_integration:
+
 Verifying the integration
 -------------------------
 
-To check the integration with Splunk, you can `access Splunk Web <https://docs.splunk.com/Documentation/Splunk/latest/SearchTutorial/StartSplunk#Login_to_Splunk_Web>`__ and search for the ``wazuh-alerts`` Splunk index as follows.
+To check the integration with Splunk, access `Splunk Web <https://docs.splunk.com/Documentation/Splunk/latest/SearchTutorial/StartSplunk#Login_to_Splunk_Web>`__ and search for the ``wazuh-alerts`` Splunk index as follows.
 
 #. Go to **Search & Reporting**.
 #. Enter ``index="wazuh-alerts"`` and run the search.
@@ -500,7 +506,19 @@ To check the integration with Splunk, you can `access Splunk Web <https://docs.s
 Splunk dashboards
 -----------------
 
-Wazuh provides several `dashboards <https://github.com/wazuh/wazuh-kibana-app/tree/4.6.0/docker/integrations/extra/dashboards/Splunk>`__  for Splunk. After you complete the Splunk integration, you can use these dashboards to display your Wazuh alerts in Splunk.
+Wazuh provides several dashboards for Splunk.
+
+-  `Wz-sp-4.x-9.x-search-bar-in-progress <https://packages.wazuh.com/integrations/splunk/4.x-9.x/dashboards/wz-sp-4.x-9.x-search-bar-in-progress>`__
+-  `Wz-sp-4.x-9.x-wazuh-amazon-aws <https://packages.wazuh.com/integrations/splunk/4.x-9.x/dashboards/wz-sp-4.x-9.x-wazuh-amazon-aws>`__
+-  `Wz-sp-4.x-9.x-wazuh-docker-listener <https://packages.wazuh.com/integrations/splunk/4.x-9.x/dashboards/wz-sp-4.x-9.x-wazuh-docker-listener>`__
+-  `Wz-sp-4.x-9.x-wazuh-incident-response <https://packages.wazuh.com/integrations/splunk/4.x-9.x/dashboards/wz-sp-4.x-9.x-wazuh-incident-response>`__
+-  `wz-sp-4.x-9.x-wazuh-malware-detection <https://packages.wazuh.com/integrations/splunk/4.x-9.x/dashboards/wz-sp-4.x-9.x-wazuh-malware-detection>`__
+-  `Wz-sp-4.x-9.x-wazuh-pci-dss <https://packages.wazuh.com/integrations/splunk/4.x-9.x/dashboards/wz-sp-4.x-9.x-wazuh-pci-dss>`__
+-  `wz-sp-4.x-9.x-wazuh-security-events <https://packages.wazuh.com/integrations/splunk/4.x-9.x/dashboards/wz-sp-4.x-9.x-wazuh-security-events>`__
+-  `wz-sp-4.x-9.x-wazuh-vulnerabilities <https://packages.wazuh.com/integrations/splunk/4.x-9.x/dashboards/wz-sp-4.x-9.x-wazuh-vulnerabilities>`__
+
+
+After you complete the Splunk integration, you can use these dashboards to display your Wazuh alerts in Splunk.
 
 .. thumbnail:: /images/integrations/security-events-dashboard-for-splunk.png
    :title: Wazuh security events on Splunk dashboard
@@ -509,7 +527,7 @@ Wazuh provides several `dashboards <https://github.com/wazuh/wazuh-kibana-app/tr
 
 To import the Wazuh dashboards for Splunk, repeat the following steps for each dashboard file you want to use.
 
-#. Open the dashboard file from `Wazuh dashboards for Splunk <https://github.com/wazuh/wazuh-kibana-app/tree/4.6.0/docker/integrations/extra/dashboards/Splunk>`__ and copy all its content.
+#. Download the dashboard file that you need from the list of :ref:`Splunk dashboards <splunk_dashboards>` provided above.
 #. Navigate to **Search & Reporting** in Splunk Web.
 #. Click **Dashboards** and click **Create New Dashboard**.
 #. Enter a dashboard title and select **Dashboard Studio**.

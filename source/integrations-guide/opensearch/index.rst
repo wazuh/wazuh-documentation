@@ -23,6 +23,8 @@ Wazuh indexer integration using Logstash
 
 Perform the steps below on your Logstash server. You must install Logstash on a dedicated server or on the server hosting the third-party indexer. We performed these steps on a Linux operating system. Logstash forwards the data from the Wazuh indexer to OpenSearch in the form of indexes.
 
+Learn more about the :ref:`Wazuh indexer integration <wazuh_indexer_integration>` and its necessary :ref:`considerations <capacity_planning>`.
+
 Installing Logstash
 ^^^^^^^^^^^^^^^^^^^
 
@@ -55,14 +57,14 @@ Configuring new indexes
 
 You must define the mappings between the data and the index types to ensure OpenSearch indexes your data correctly. OpenSearch can infer these mappings, but we recommend that you explicitly configure them. Wazuh provides a set of mappings to ensure OpenSearch indexes the data correctly.
 
-You need to use the `logstash/os_template.json <https://raw.githubusercontent.com/wazuh/wazuh-kibana-app/4.6/docker/integrations/config/logstash/os_template.json>`__ template to configure this index initialization for your OpenSearch platform.
+You need to use the `logstash/os_template.json <https://packages.wazuh.com/integrations/opensearch/4.x-2.x/dashboards/wz-os-4.x-2.x-template.json>`__ template to configure this index initialization for your OpenSearch platform.
 
 Create a ``/etc/logstash/templates/`` directory and download the template as ``wazuh.json`` using the following commands:
 
 .. code-block:: console
 
    # mkdir /etc/logstash/templates
-   # curl -o /etc/logstash/templates/wazuh.json https://raw.githubusercontent.com/wazuh/wazuh-kibana-app/4.6/docker/integrations/config/logstash/os_template.json
+   # curl -o /etc/logstash/templates/wazuh.json https://packages.wazuh.com/integrations/opensearch/4.x-2.x/dashboards/wz-os-4.x-2.x-template.json
 
 In OpenSearch, the indexes support up to ``1000`` fields by default. However, Wazuh logs might contain even more than this number of fields. To solve this issue, the provided ``wazuh.json`` template has the fields set to ``10000`` by default as shown below:
 
@@ -233,18 +235,20 @@ Running Logstash
       $ sudo systemctl enable logstash
       $ sudo systemctl start logstash
 
+Check Elastic documentation for more details on `setting up and running Logstash <https://www.elastic.co/guide/en/logstash/current/setup-logstash.html>`__.
+
 .. note::
    
    Any data indexed before the configuration is complete would not be forwarded to the OpenSearch indexes.
 
    The ``/var/log/logstash/logstash-plain.log`` file in the Logstash instance stores events produced when Logstash runs. View this file in case you need to troubleshoot.
 
-Check Elastic documentation for more details on `setting up and running Logstash <https://www.elastic.co/guide/en/logstash/current/setup-logstash.html>`__.
+After Logstash is successfully running, check how to :ref:`configure the Wazuh alert index pattern <configuring_wazuh_alerts_index_pattern_in_opensearch>` and :ref:`verify the integration <verifying_opensearch_integration>`.
 
 Wazuh server integration using Logstash
 ---------------------------------------
 
-Perform all the steps below on your Wazuh server.
+Perform all the steps below on your Wazuh server. Learn more about the :ref:`Wazuh server integration <wazuh_server_integration>` and its necessary :ref:`considerations <capacity_planning>`.
 
 Installing Logstash
 ^^^^^^^^^^^^^^^^^^^
@@ -275,14 +279,14 @@ Configuring new indexes
 
 You must define the mappings between the data and the index types to ensure Opensearch indexes your data correctly. Opensearch can infer these mappings, but we recommend that you explicitly configure them. Wazuh provides a set of mappings to ensure Opensearch indexes the data correctly.
 
-You need to use the `logstash/os_template.json <https://raw.githubusercontent.com/wazuh/wazuh-kibana-app/4.6/docker/integrations/config/logstash/os_template.json>`__ template to configure this index initialization for your Opensearch platform. The ``refresh_interval`` is set to ``5s`` in the template we provide.
+You need to use the `logstash/os_template.json <https://packages.wazuh.com/integrations/opensearch/4.x-2.x/dashboards/wz-os-4.x-2.x-template.json>`__ template to configure this index initialization for your Opensearch platform. The ``refresh_interval`` is set to ``5s`` in the template we provide.
 
 Create a ``/etc/logstash/templates/`` directory and download the template as ``wazuh.json`` using the following commands:
 
 .. code-block:: console
 
    # mkdir /etc/logstash/templates
-   # curl -o /etc/logstash/templates/wazuh.json https://raw.githubusercontent.com/wazuh/wazuh-kibana-app/4.6/docker/integrations/config/logstash/os_template.json
+   # curl -o /etc/logstash/templates/wazuh.json https://packages.wazuh.com/integrations/opensearch/4.x-2.x/dashboards/wz-os-4.x-2.x-template.json
 
 In OpenSearch, the indexes support up to ``1000`` fields by default. However, Wazuh logs might contain even more than this number of fields. To solve this issue, the provided ``wazuh.json`` template has the fields set to ``10000`` by default as shown below:
 
@@ -443,6 +447,8 @@ Running Logstash
 
 Check Elastic documentation for more details on `setting up and running Logstash <https://www.elastic.co/guide/en/logstash/current/setup-logstash.html>`__.
 
+.. _configuring_wazuh_alerts_index_pattern_in_opensearch:
+
 Configuring the Wazuh alerts index pattern in OpenSearch
 --------------------------------------------------------
 
@@ -459,6 +465,8 @@ In Opensearch Dashboards, do the following to create the index pattern name for 
    :align: center
    :width: 80%
 
+.. _verifying_opensearch_integration:
+
 Verifying the integration
 -------------------------
 
@@ -474,7 +482,7 @@ To check the integration with OpenSearch, navigate to **Discover** in OpenSearch
 OpenSearch dashboards
 ---------------------
 
-Wazuh provides several `dashboards for OpenSearch <https://github.com/wazuh/wazuh-kibana-app/tree/4.6.0/docker/integrations/extra/dashboards/opensearch/opensearch%20v2.6.0>`__. After finishing with the OpenSearch integration setup, these dashboards display your Wazuh alerts in OpenSearch.
+Wazuh provides several `dashboards for OpenSearch <https://packages.wazuh.com/integrations/opensearch/4.x-2.x/dashboards/wz-os-4.x-2.x-dashboards.ndjson>`__. After finishing with the OpenSearch integration setup, these dashboards display your Wazuh alerts in OpenSearch.
 
 .. thumbnail:: /images/integrations/security-events-dashboard-for-opensearch.png
    :title: Security events dashboard for Opensearch
@@ -491,13 +499,13 @@ Follow the next steps to import the Wazuh dashboards for OpenSearch.
 
       .. code-block:: console
 
-         # wget https://raw.githubusercontent.com/wazuh/wazuh-kibana-app/4.6/docker/integrations/extra/dashboards/opensearch/opensearch%20v2.6.0/allDashboards.ndjson
+         # wget https://packages.wazuh.com/integrations/opensearch/4.x-2.x/dashboards/wz-os-4.x-2.x-dashboards.ndjson
 
    #. If you are accessing the Opensearch dashboard from a Windows system (run the command using Powershell):
 
       .. code-block:: powershell
 
-         # Invoke-WebRequest -Uri "https://raw.githubusercontent.com/wazuh/wazuh-kibana-app/4.6/docker/integrations/extra/dashboards/opensearch/opensearch%20v2.6.0/allDashboards.ndjson" -OutFile "allDashboards.ndjson"
+         # Invoke-WebRequest -Uri "https://packages.wazuh.com/integrations/opensearch/4.x-2.x/dashboards/wz-os-4.x-2.x-dashboards.ndjson" -OutFile "allDashboards.ndjson"
 
 #. In OpenSearch Dashboards, navigate to **Management** > **Dashboards management**.
 #. Click on **Saved Objects** and click **Import**.
