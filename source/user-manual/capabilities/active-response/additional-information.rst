@@ -21,7 +21,7 @@ To configure a white list for the endpoint(s), add the related IP address, netbl
        <jsonout_output>yes</jsonout_output>
        <email_notification>no</email_notification>
        <logall>yes</logall>
-       <white_list><WHITE_LISTED_IP><white_list>
+       <white_list><WHITE_LISTED_IP></white_list>
      </global>
    </ossec_config>
 
