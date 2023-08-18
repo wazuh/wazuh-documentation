@@ -147,7 +147,7 @@ Sets the time to close the RIDS files for agents that don't report new events in
 connection_overtake_time
 ^^^^^^^^^^^^^^^^^^^^^^^^^
 
-Sets the time to consider a connection down with a TCP client when a collision happens.
+Sets the time to consider a connection down with a TCP client when a client key collision happens.
 
 +--------------------+------------------------------------------------------------------------------------------------------------------------------------------+
 | **Default value**  | 60                                                                                                                                       |
@@ -159,7 +159,7 @@ Sets the time to consider a connection down with a TCP client when a collision h
   The ``connection_overtake_time`` must be higher than ``notify_time`` from ``<client>`` configuration block. The value 0 disable this setting, so never a connection with a TCP client is considered down.
 
 .. note::
-  The ``connection_overtake_time`` do not apply to connections from UPD clients.
+  The ``connection_overtake_time`` do not apply to connections from UDP clients.
 
 Example of configuration
 ------------------------
