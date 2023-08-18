@@ -172,7 +172,7 @@ We use the  `Logstash keystore <https://www.elastic.co/guide/en/logstash/current
          	password  =>  "${WAZUH_INDEXER_PASSWORD}"
          	index =>  "wazuh-alerts-4.x-*"
          	ssl => true
-         	ca_file => "</PATH/TO/LOCAL/WAZUH-INDEXER>/root-ca.pem"
+         	ca_file => "</PATH/TO/LOCAL/WAZUH-INDEXER/CERTIFICATE>/root-ca.pem"
          	query =>  '{
             	 "query": {
             		 "range": {
@@ -185,7 +185,7 @@ We use the  `Logstash keystore <https://www.elastic.co/guide/en/logstash/current
          	schedule => "* * * * *"
            }
          }
-
+         
          output {
              opensearch {
              	hosts => ["<OPENSEARCH_ADDRESS>"]
@@ -195,7 +195,7 @@ We use the  `Logstash keystore <https://www.elastic.co/guide/en/logstash/current
                  	password => '${OPENSEARCH_PASSWORD}'
                	}
              	index  => "wazuh-alerts-4.x-%{+YYYY.MM.dd}"
-               cacert => "</PATH/TO/LOCAL/OPENSEARCH/CERTIFICATE>/root-ca.pem"
+             	cacert => "</PATH/TO/LOCAL/OPENSEARCH/CERTIFICATE>/root-ca.pem"
              	ssl => true
                 template => "/etc/logstash/templates/wazuh.json"
              	template_name => "wazuh"
@@ -207,12 +207,12 @@ We use the  `Logstash keystore <https://www.elastic.co/guide/en/logstash/current
 
       -  ``<WAZUH_INDEXER_ADDRESS>`` is your Wazuh indexer address or addresses in case of cluster deployment.
       -  ``<OPENSEARCH_ADDRESS>`` is your OpenSearch address.
-      -  ``</PATH/TO/LOCAL/WAZUH-INDEXER>/root-ca.pem`` is your Wazuh indexer certificate local path on the Wazuh server. For example,  you can use ``/etc/logstash/wazuh-indexer-certs/root-ca.pem`` which is the Wazuh indexer root certificate that was copied earlier.
+      -  ``</PATH/TO/LOCAL/WAZUH-INDEXER/CERTIFICATE>/root-ca.pem`` is your Wazuh indexer certificate local path on the Wazuh server. For example,  you can use ``/etc/logstash/wazuh-indexer-certs/root-ca.pem`` which is the Wazuh indexer root certificate that was copied earlier.
       -  ``</PATH/TO/LOCAL/OPENSEARCH/CERTIFICATE>/root-ca.pem`` is your OpenSearch certificate local path on the Wazuh server. For example, you can use ``/etc/logstash/opensearch-certs/root-ca.pem`` which is the OpenSearch certificate that was copied earlier.
 
       .. note::
          
-         For testing purposes, you can avoid SSL verification by replacing ``cacert => "</PATH/TO/LOCAL/OPENSEARCH/CERTIFICATE>>/root-ca.pem"`` with ``ssl_certificate_verification => false``.
+         For testing purposes, you can avoid SSL verification by replacing ``cacert => "</PATH/TO/LOCAL/OPENSEARCH/CERTIFICATE>/root-ca.pem"`` with ``ssl_certificate_verification => false``.
 
          If you are using composable index templates and the _index_template API, set the optional parameter `legacy_template => false <https://opensearch.org/docs/latest/tools/logstash/ship-to-opensearch/#optional-parameters>`__.
 
@@ -387,7 +387,7 @@ We use the `Logstash keystore <https://www.elastic.co/guide/en/logstash/current/
              ecs_compatibility => "disabled"
            }
          }
-
+         
          output {
              opensearch {
              	hosts => ["<OPENSEARCH_ADDRESS>"]
@@ -397,7 +397,7 @@ We use the `Logstash keystore <https://www.elastic.co/guide/en/logstash/current/
                  	 password => '${OPENSEARCH_PASSWORD}'
                	}
              	index  => "wazuh-alerts-4.x-%{+YYYY.MM.dd}"
-               cacert => "</PATH/TO/LOCAL/OPENSEARCH/CERTIFICATE>/root-ca.pem"
+             	cacert => "</PATH/TO/LOCAL/OPENSEARCH/CERTIFICATE>/root-ca.pem"
              	ssl => true
                 template => "/etc/logstash/templates/wazuh.json"
                 template_name => "wazuh"
