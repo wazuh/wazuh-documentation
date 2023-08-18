@@ -149,19 +149,21 @@ connection_overtake_time
 
 .. versionadded:: 4.5.2
 
-Sets the time to consider a connection down with a TCP client when a client key collision happens. The value 0 disable this setting, so never a connection with a TCP client is considered down in this situation.
-
-+--------------------+------------------------------------------------------------------------------------------------------------------------------------------+
-| **Default value**  | 60                                                                                                                                       |
-+--------------------+------------------------------------------------------------------------------------------------------------------------------------------+
-| **Allowed values** | A number between 0 and 3600 (seconds).                                                                                                   |
-+--------------------+------------------------------------------------------------------------------------------------------------------------------------------+
-
-.. note::
-  The ``connection_overtake_time`` do not apply to connections from UDP clients.
+Sets the time to wait before considering a TCP connection down. A value of 0 disables this assessment of connection activity.
 
 .. warning::
-  The ``connection_overtake_time`` should be higher than :ref:`notify-time <notify_time>` configured in the agents.
+
+   The ``connection_overtake_time`` must be higher than the agent :ref:`notify-time <notify_time>`.
+
++--------------------+-----------------------------------------------+
+| **Default value**  | 60                                            |
++--------------------+-----------------------------------------------+
+| **Allowed values** | A number between 0 and 3600 (seconds).        |
++--------------------+-----------------------------------------------+
+
+.. note::
+
+   ``connection_overtake_time`` doesn't apply to UDP connections.
 
 Example of configuration
 ------------------------
