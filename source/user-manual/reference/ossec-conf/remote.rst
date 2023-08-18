@@ -149,7 +149,7 @@ connection_overtake_time
 
 .. versionadded:: 4.5.2
 
-Sets the time to wait before considering a TCP connection down. A value of 0 disables this assessment of connection activity.
+Sets the time to wait before considering a connection with a TCP client down when a new connection with the same key arrives. A value of 0 disables this assessment of connection activity.
 
 .. warning::
 
@@ -163,7 +163,7 @@ Sets the time to wait before considering a TCP connection down. A value of 0 dis
 
 .. note::
 
-   ``connection_overtake_time`` doesn't apply to UDP connections.
+   ``connection_overtake_time`` doesn't apply to connections with UDP clients.
 
 Example of configuration
 ------------------------
