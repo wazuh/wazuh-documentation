@@ -104,6 +104,7 @@ We use the  `Logstash keystore <https://www.elastic.co/guide/en/logstash/current
 #. Run the following commands on your Logstash server to set a keystore password:
 
    .. code-block:: console
+      :emphasize-lines: 3,4
 
       # touch /etc/sysconfig/logstash
       # set +o history
@@ -164,6 +165,7 @@ We use the  `Logstash keystore <https://www.elastic.co/guide/en/logstash/current
    #. Add the following configuration to the ``wazuh-opensearch.conf`` file.  This sets the parameters required to run Logstash.
 
       .. code-block:: none
+         :emphasize-lines: 3,8,24,31
 
          input {
            opensearch {
@@ -325,6 +327,7 @@ We use the `Logstash keystore <https://www.elastic.co/guide/en/logstash/current/
 #. Run the following commands on your Logstash server to set a keystore password:
 
    .. code-block:: console
+      :emphasize-lines: 3,4
 
       # touch /etc/sysconfig/logstash
       # set +o history
@@ -375,6 +378,7 @@ We use the `Logstash keystore <https://www.elastic.co/guide/en/logstash/current/
    #. Add the following configuration to the ``wazuh-opensearch.conf`` file. This sets the parameters required to run Logstash.
 
       .. code-block:: console
+         :emphasize-lines: 15,22
 
          input {
            file {

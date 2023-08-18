@@ -88,6 +88,7 @@ To securely store these values, you can use the `Logstash keystore <https://www.
 #. Run the following commands on your Logstash server to set a keystore password:
 
    .. code-block:: console
+      :emphasize-lines: 3,4
 
       # touch /etc/sysconfig/logstash
       # set +o history
@@ -129,6 +130,7 @@ Perform the following steps to configure the Logstash pipeline.
 #. Edit the file and add the following configuration. This sets the parameters required to run Logstash.
 
    .. code-block:: none
+      :emphasize-lines: 3,8,25,27
 
       input {
         opensearch {
@@ -257,6 +259,7 @@ To securely store these values, you can use the `Logstash keystore <https://www.
 #. Run the following commands on your Logstash server to set a keystore password:
 
    .. code-block:: console
+      :emphasize-lines: 3,4
 
       # touch /etc/sysconfig/logstash
       # set +o history
@@ -292,6 +295,7 @@ To configure the Logstash pipeline do the following.
 #. Edit the ``wazuh-splunk.conf`` file and add the following configuration. This sets the parameters required to run logstash.
 
    .. code-block:: none
+      :emphasize-lines: 16,18
 
       input {
         file {
@@ -442,6 +446,7 @@ Configuring the Splunk forwarder
 #. Set the following configuration in ``/opt/splunkforwarder/etc/system/local/inputs.conf`` file. This configures the Splunk forwarder to monitor the Wazuh ``/var/ossec/logs/alerts/alerts.json`` alerts file. Where ``<WAZUH_SERVER_HOST>`` is a name of your choice.
 
    .. code-block:: none
+      :emphasize-lines: 3
 
       [monitor:///var/ossec/logs/alerts/alerts.json]
       disabled = 0
@@ -465,6 +470,7 @@ Configuring the Splunk forwarder
 #. Set the following configuration in the ``/opt/splunkforwarder/etc/system/local/outputs.conf`` file to define how the alerts are forwarded to Splunk. Where ``<SPLUNK_INDEXER_ADDRESS>`` is your Splunk server IP address. For Cloud instances, the Splunk indexer address is the cloud instance address.
 
    .. code-block:: none
+      :emphasize-lines: 4,6
 
       defaultGroup = default-autolb-group
 

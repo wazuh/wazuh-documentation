@@ -109,6 +109,7 @@ We use the `Logstash keystore <https://www.elastic.co/guide/en/logstash/current/
 #. Run the following commands on your Logstash server to set a keystore password:
 
    .. code-block:: console
+      :emphasize-lines: 3,4
 
       # touch /etc/sysconfig/logstash
       # set +o history
@@ -169,6 +170,7 @@ We use the `Logstash keystore <https://www.elastic.co/guide/en/logstash/current/
    #. Add the following configuration to the ``wazuh-elasticsearch.conf`` file. This sets the parameters required to run Logstash.
 
       .. code-block:: none
+         :emphasize-lines: 3,8,24,29
 
          input {
            opensearch {
@@ -300,6 +302,7 @@ Create a ``/etc/logstash/templates/`` directory and download the template as ``w
 In Elasticsearch, the indexes support up to ``1000`` fields by default. However, Wazuh logs might contain even more than this number of fields. To solve this issue, the provided ``wazuh.json`` template has the fields set to ``10000`` by default as shown below:
 
 .. code-block:: none
+   :emphasize-lines: 8
 
    ...
    "template": {
@@ -331,6 +334,7 @@ We use the `Logstash keystore <https://www.elastic.co/guide/en/logstash/current/
 #. Run the following commands on your Logstash server to set a keystore password:
 
    .. code-block:: console
+      :emphasize-lines: 3,4
 
       # touch /etc/sysconfig/logstash
       # set +o history
@@ -381,6 +385,7 @@ We use the `Logstash keystore <https://www.elastic.co/guide/en/logstash/current/
    #. Add the following configuration to the ``wazuh-elasticsearch.conf`` file. This sets the parameters required to run Logstash.
 
       .. code-block:: none
+         :emphasize-lines: 15,20
 
          input {
            file {
