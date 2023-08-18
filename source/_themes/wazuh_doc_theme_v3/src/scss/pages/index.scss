@@ -479,8 +479,8 @@ main {
   }
 
   /* Compliance */
-  [href$="compliance.html"]::before,
-  [data-href$="compliance.html"]::before {
+  [href$="compliance/index.html"]::before,
+  [data-href$="compliance/index.html"]::before {
     background-image: url("#{$ico-path}index-icons.svg#compliance-lt");
   }
 
@@ -512,6 +512,12 @@ main {
   [href$="migration-guide/index.html"]::before,
   [data-href$="migration-guide/index.html"]::before {
     background-image: url("#{$ico-path}index-icons.svg#migration-guide-lt");
+  }
+  
+  /* Integrations guide */
+  [href$="integrations-guide/index.html"]::before,
+  [data-href$="integrations-guide/index.html"]::before {
+    background-image: url("#{$ico-path}index-icons.svg#integrations-guide-lt");
   }
 }
 .light-theme {
@@ -654,8 +660,8 @@ main {
   }
 
   /* Compliance */
-  [href$="compliance.html"]::before,
-  [data-href$="compliance.html"]::before {
+  [href$="compliance/index.html"]::before,
+  [data-href$="compliance/index.html"]::before {
     background-image: url("#{$ico-path}index-icons.svg#compliance-dt");
   }
 
@@ -689,6 +695,12 @@ main {
     background-image: url("#{$ico-path}index-icons.svg#migration-guide-dt");
   }
 
+  /* Integrations guide */
+  [href$="integrations-guide/index.html"]::before,
+  [data-href$="integrations-guide/index.html"]::before {
+    background-image: url("#{$ico-path}index-icons.svg#integrations-guide-dt");
+  }
+  
   &.index #quickstart {
     border-color: $dark-color-primary;
     background-color: $dark-color-sidebar-space;
