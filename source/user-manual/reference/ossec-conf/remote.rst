@@ -29,6 +29,7 @@ Options
 - `ipv6`_
 - `queue_size`_
 - `rids_closing_time`_
+- `connection_overtake_time`_
 
 connection
 ^^^^^^^^^^^
@@ -143,6 +144,22 @@ Sets the time to close the RIDS files for agents that don't report new events in
 | **Allowed values** | A positive number that should contain a suffix character indicating a time unit, such as, s (seconds), m (minutes), h (hours), d (days). |
 +--------------------+------------------------------------------------------------------------------------------------------------------------------------------+
 
+connection_overtake_time
+^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Sets the time to consider a connection down with a TCP client when a collision happens.
+
++--------------------+------------------------------------------------------------------------------------------------------------------------------------------+
+| **Default value**  | 60                                                                                                                                       |
++--------------------+------------------------------------------------------------------------------------------------------------------------------------------+
+| **Allowed values** | A number between 0 and 3600 (seconds).                                                                                                   |
++--------------------+------------------------------------------------------------------------------------------------------------------------------------------+
+
+.. note::
+  The ``connection_overtake_time`` must be higher than ``notify_time`` from ``<client>`` configuration block. The value 0 disable this setting, so never a connection with a TCP client is considered down.
+
+.. note::
+  The ``connection_overtake_time`` do not apply to connections from UPD clients.
 
 Example of configuration
 ------------------------
