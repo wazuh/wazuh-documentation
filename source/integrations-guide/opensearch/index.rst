@@ -8,7 +8,7 @@ OpenSearch integration
 
 `OpenSearch <https://opensearch.org/>`__ is a distributed, community-driven, Apache 2.0-licensed, 100% open source search and analytics suite used for a broad set of use cases like real-time application monitoring, log analytics, and website search. OpenSearch is a fork from Elasticsearch. They have many similarities in configuration and integration steps.
 
-In this guide, you can find how to integrate Wazuh with OpenSearch in the following ways:
+In this guide, you can find out how to integrate Wazuh with OpenSearch in the following ways:
 
 -  `Wazuh indexer integration using Logstash`_
 -  `Wazuh server integration using Logstash`_
@@ -195,7 +195,7 @@ We use the  `Logstash keystore <https://www.elastic.co/guide/en/logstash/current
                  	password => '${OPENSEARCH_PASSWORD}'
                	}
              	index  => "wazuh-alerts-4.x-%{+YYYY.MM.dd}"
-             	cacert => "</PATH/TO/LOCAL/OPENSEARCH>/root-ca.pem"
+               cacert => "</PATH/TO/LOCAL/OPENSEARCH/CERTIFICATE>/root-ca.pem"
              	ssl => true
                 template => "/etc/logstash/templates/wazuh.json"
              	template_name => "wazuh"
@@ -208,11 +208,11 @@ We use the  `Logstash keystore <https://www.elastic.co/guide/en/logstash/current
       -  ``<WAZUH_INDEXER_ADDRESS>`` is your Wazuh indexer address or addresses in case of cluster deployment.
       -  ``<OPENSEARCH_ADDRESS>`` is your OpenSearch address.
       -  ``</PATH/TO/LOCAL/WAZUH-INDEXER>/root-ca.pem`` is your Wazuh indexer certificate local path on the Wazuh server. For example,  you can use ``/etc/logstash/wazuh-indexer-certs/root-ca.pem`` which is the Wazuh indexer root certificate that was copied earlier.
-      -  ``</PATH/TO/LOCAL/OPENSEARCH>/root-ca.pem`` is your OpenSearch certificate local path on the Wazuh server. For example, you can use ``/etc/logstash/opensearch-certs/root-ca.pem`` which is the Elasticsearch certificate that was copied earlier.
+      -  ``</PATH/TO/LOCAL/OPENSEARCH/CERTIFICATE>/root-ca.pem`` is your OpenSearch certificate local path on the Wazuh server. For example, you can use ``/etc/logstash/opensearch-certs/root-ca.pem`` which is the OpenSearch certificate that was copied earlier.
 
       .. note::
          
-         For testing purposes, you can avoid SSL verification by replacing ``cacert => "</PATH/TO/LOCAL/OPENSEARCH>/root-ca.pem"`` with ``ssl_certificate_verification => false``.
+         For testing purposes, you can avoid SSL verification by replacing ``cacert => "</PATH/TO/LOCAL/OPENSEARCH/CERTIFICATE>>/root-ca.pem"`` with ``ssl_certificate_verification => false``.
 
          If you are using composable index templates and the _index_template API, set the optional parameter `legacy_template => false <https://opensearch.org/docs/latest/tools/logstash/ship-to-opensearch/#optional-parameters>`__.
 
@@ -227,6 +227,8 @@ Running Logstash
       $ sudo -E /usr/share/logstash/bin/logstash -f /etc/logstash/conf.d/wazuh-opensearch.conf --path.settings /etc/logstash/
 
    Make sure to use your own paths for the Logstash executable, the pipeline, and the configuration files.
+
+   Ensure that Wazuh indexer RESTful API port (9200) is open on your Wazuh indexer. To verify that the necessary ports for Wazuh component communication are open, refer to the list of :ref:`required ports <default_ports>`.
 
 #. After confirming that the configuration loads correctly without errors, cancel the command and run Logstash as a service. This way Logstash is not dependent on the lifecycle of the terminal it's running on. You can now enable and run Logstash as service:
 
@@ -395,7 +397,7 @@ We use the `Logstash keystore <https://www.elastic.co/guide/en/logstash/current/
                  	 password => '${OPENSEARCH_PASSWORD}'
                	}
              	index  => "wazuh-alerts-4.x-%{+YYYY.MM.dd}"
-             	cacert => "</PATH/TO/LOCAL/OPENSEARCH>/root-ca.pem"
+               cacert => "</PATH/TO/LOCAL/OPENSEARCH/CERTIFICATE>/root-ca.pem"
              	ssl => true
                 template => "/etc/logstash/templates/wazuh.json"
                 template_name => "wazuh"
@@ -406,11 +408,11 @@ We use the `Logstash keystore <https://www.elastic.co/guide/en/logstash/current/
       Where:
 
       -  ``<OPENSEARCH_ADDRESS>`` is your OpenSearch IP address.
-      -  ``</PATH/TO/LOCAL/OPENSEARCH>/root-ca.pem`` is your OpenSearch certificate local path on the Wazuh server. In our case, we used ``/etc/logstash/opensearch-certs/root-ca.pem``.
+      -  ``</PATH/TO/LOCAL/OPENSEARCH/CERTIFICATE>/root-ca.pem`` is your OpenSearch certificate local path on the Wazuh server. In our case, we used ``/etc/logstash/opensearch-certs/root-ca.pem``.
 
       .. note::
          
-         For testing purposes, you can avoid SSL verification by replacing ``cacert => "/PATH/TO/LOCAL/OPENSEARCH/root-ca.pem"`` with ``ssl_certificate_verification => false``.
+         For testing purposes, you can avoid SSL verification by replacing ``cacert => "</PATH/TO/LOCAL/OPENSEARCH/CERTIFICATE>/root-ca.pem"`` with ``ssl_certificate_verification => false``.
 
          If you are using composable index templates and the _index_template API, set the optional parameter `legacy_template => false <https://opensearch.org/docs/latest/tools/logstash/ship-to-opensearch/#optional-parameters>`__.
 
@@ -431,6 +433,8 @@ Running Logstash
       $ sudo -E /usr/share/logstash/bin/logstash -f /etc/logstash/conf.d/wazuh-opensearch.conf --path.settings /etc/logstash/
 
    Make sure to use your own paths for the executable, the pipeline, and the configuration files.
+
+   Ensure that Wazuh server RESTful API port (55000) is open on your Wazuh server. To verify that the necessary ports for Wazuh component communication are open, refer to the list of :ref:`required ports <default_ports>`.
 
 #. After confirming that the configuration loads correctly without errors, cancel the command and run Logstash as a service. This way Logstash is not dependent on the lifecycle of the terminal it's running on. You can now enable and run Logstash as a service:
 

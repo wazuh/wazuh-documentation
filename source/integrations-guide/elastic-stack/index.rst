@@ -8,7 +8,7 @@ Elastic Stack integration
 
 `Elasticsearch <https://www.elastic.co/what-is/elasticsearch>`__ is the central component of the Elastic Stack, (commonly referred to as the `ELK Stack <https://www.elastic.co/elastic-stack/>`__ - Elasticsearch, Logstash, and Kibana), which is a set of free and open tools for data ingestion, enrichment, storage, analysis, and visualization.
 
-In this guide, you can find how to integrate Wazuh with Elastic in the following ways:
+In this guide, you can find out how to integrate Wazuh with Elastic in the following ways:
 
 -  `Wazuh indexer integration using Logstash`_
 -  `Wazuh server integration using Logstash`_
@@ -228,7 +228,9 @@ Running Logstash
       $ sudo systemctl stop logstash
       $ sudo -E /usr/share/logstash/bin/logstash -f /etc/logstash/conf.d/wazuh-elasticsearch.conf --path.settings /etc/logstash/
    
-   Make sure to use your own paths for the executable, the pipeline, and the configuration files. 
+   Make sure to use your own paths for the executable, the pipeline, and the configuration files.
+
+   Ensure that Wazuh indexer RESTful API port (9200) is open on your Wazuh indexer. To verify that the necessary ports for Wazuh component communication are open, refer to the list of :ref:`required ports <default_ports>`.
 
 #. After confirming that the configuration loads correctly without errors, cancel the command and run Logstash as a service. This way Logstash is not dependent on the lifecycle of the terminal it's running on. You can now enable and run Logstash as a service:
 
@@ -413,7 +415,7 @@ We use the `Logstash keystore <https://www.elastic.co/guide/en/logstash/current/
 
       .. note::
          
-         For testing purposes you can avoid SSL verification by replacing ``cacert => "/PATH/TO/LOCAL/ELASTICSEARCH/root-ca.pem"`` with ``ssl_certificate_verification => false``.
+         For testing purposes, you can avoid SSL verification by replacing ``cacert => "/PATH/TO/LOCAL/ELASTICSEARCH/root-ca.pem"`` with ``ssl_certificate_verification => false``.
 
 #. By default the ``/var/ossec/logs/alerts/alerts.json`` file is owned by the ``wazuh`` user with restrictive permissions. You must add the ``logstash`` user to the ``wazuh`` group so it can read the file when running Logstash as a service:
 
@@ -433,7 +435,9 @@ Running Logstash
 
    Make sure to use your own paths for the executable, the pipeline, and the configuration files.
 
-#. After confirming that the configuration loads correctly without errors, cancel the command and run Logstash as a service. This way Logstash is not dependent on the lifecycle of the terminal it's running on. You can now enable and run Logstash as service:
+   Ensure that Wazuh server RESTful API port (55000) is open on your Wazuh server. To verify that the necessary ports for Wazuh component communication are open, refer to the list of :ref:`required ports <default_ports>`.
+
+#. After confirming that the configuration loads correctly without errors, cancel the command and run Logstash as a service. This way Logstash is not dependent on the lifecycle of the terminal it's running on. You can now enable and run Logstash as a service:
 
    .. code-block:: console
 

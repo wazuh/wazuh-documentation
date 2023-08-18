@@ -10,7 +10,7 @@ Wazuh offers extensive compatibility and robust integration features that allow 
 
 Elastic, OpenSearch, and Splunk are software platforms designed for search, analytics, and data management. They are used to collect, index, search, and analyze large volumes of data in real-time and historical contexts.
 
-Up to Wazuh v4.5, the following integrated applications allows users to manage Wazuh and its security data using third-party platforms:
+Up to Wazuh v4.5, the following integrated applications allow users to manage Wazuh and its security data using third-party platforms:
 
 -  `Wazuh for Splunk <https://documentation.wazuh.com/4.5/deployment-options/splunk/splunk-app.html>`__
 -  `Wazuh for Elastic <https://documentation.wazuh.com/4.5/deployment-options/elastic-stack/index.html>`__

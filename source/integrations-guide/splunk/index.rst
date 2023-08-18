@@ -169,7 +169,7 @@ Perform the following steps to configure the Logstash pipeline.
 
    .. note::
       
-      For testing purposes you can avoid SSL verification by removing the line ``cacert => "/PATH/TO/LOCAL/SPLUNK/ca.pem"``.
+      For testing purposes, you can avoid SSL verification by removing the line ``cacert => "/PATH/TO/LOCAL/SPLUNK/ca.pem"``.
 
 Running Logstash
 ^^^^^^^^^^^^^^^^
@@ -182,6 +182,8 @@ Running Logstash
       $ sudo -E /usr/share/logstash/bin/logstash -f /etc/logstash/conf.d/wazuh-splunk.conf --path.settings /etc/logstash/
 
    Make sure to use your own paths for the executable, the pipeline, and the settings files.
+
+   Ensure that Wazuh indexer RESTful API port (9200) is open on your Wazuh indexer. To verify that the necessary ports for Wazuh component communication are open, refer to the list of :ref:`required ports <default_ports>`.
 
 #. After confirming that the configuration loads correctly without errors, cancel the command and run Logstash as a service. This way Logstash is not dependent on the lifecycle of the terminal it's running on. You can now enable and run Logstash as a service:
 
@@ -339,7 +341,9 @@ Running Logstash
 
    Make sure to use your own paths for the executable, the pipeline, and the settings files.
 
-#. After confirming that the configuration loads correctly without errors, cancel the command and run Logstash as a service. This way Logstash is not dependent on the lifecycle of the terminal it's running on. You can now enable and run Logstash as service:
+   Ensure that Wazuh server RESTful API port (55000) is open on your Wazuh server. To verify that the necessary ports for Wazuh component communication are open, refer to the list of :ref:`required ports <default_ports>`.
+
+#. After confirming that the configuration loads correctly without errors, cancel the command and run Logstash as a service. This way Logstash is not dependent on the lifecycle of the terminal it's running on. You can now enable and run Logstash as a service:
 
    .. code-block:: console
 
@@ -361,7 +365,7 @@ After Logstash is successfully running, check how to :ref:`verify the integratio
 Wazuh server integration using the Splunk forwarder
 ---------------------------------------------------
 
-Before configuring the Splunk forwarder, you need to configure the Splunk indexer to receive the forwarded events. For this you need to perform the following tasks on your Splunk server instance:
+Before configuring the Splunk forwarder, you need to configure the Splunk indexer to receive the forwarded events. For this, you need to perform the following tasks on your Splunk server instance:
 
 -  Set a receiving port.
 -  Create the ``wazuh-alerts`` Splunk indexes.
@@ -392,7 +396,7 @@ Edit ``/opt/splunk/etc/system/local/inputs.conf`` on the Splunk server to add th
    [splunktcp://9997]
    connection_host = none
 
-For more details visit `enable a receiver <https://docs.splunk.com/Documentation/Splunk/latest/Forwarding/Enableareceiver>`__ section in the Splunk documentation.
+For more details, visit `enable a receiver <https://docs.splunk.com/Documentation/Splunk/latest/Forwarding/Enableareceiver>`__ section in the Splunk documentation.
 
 Configuring indexes
 ~~~~~~~~~~~~~~~~~~~
