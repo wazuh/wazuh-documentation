@@ -75,7 +75,7 @@ In OpenSearch, the indexes support up to ``1000`` fields by default. However, Wa
    "template": {
      ...
      "settings": {
-       ...
+           ...
            "mapping": {
             "total_fields": {
                "limit": 10000
@@ -169,40 +169,40 @@ We use the  `Logstash keystore <https://www.elastic.co/guide/en/logstash/current
 
          input {
            opensearch {
-         	hosts =>  ["<WAZUH_INDEXER_ADDRESS>:9200"]
-         	user  =>  "${WAZUH_INDEXER_USERNAME}"
-         	password  =>  "${WAZUH_INDEXER_PASSWORD}"
-         	index =>  "wazuh-alerts-4.x-*"
-         	ssl => true
-         	ca_file => "</PATH/TO/LOCAL/WAZUH-INDEXER/CERTIFICATE>/root-ca.pem"
-         	query =>  '{
-            	 "query": {
-            		 "range": {
-            			 "@timestamp": {
-            				 "gt": "now-1m"
-            			 }
-            		 }
-            	 }
-         	}'
-         	schedule => "* * * * *"
+            hosts =>  ["<WAZUH_INDEXER_ADDRESS>:9200"]
+            user  =>  "${WAZUH_INDEXER_USERNAME}"
+            password  =>  "${WAZUH_INDEXER_PASSWORD}"
+            index =>  "wazuh-alerts-4.x-*"
+            ssl => true
+            ca_file => "</PATH/TO/LOCAL/WAZUH-INDEXER/CERTIFICATE>/root-ca.pem"
+            query =>  '{
+                "query": {
+                   "range": {
+                      "@timestamp": {
+                         "gt": "now-1m"
+                      }
+                   }
+                }
+            }'
+            schedule => "* * * * *"
            }
          }
          
          output {
              opensearch {
-             	hosts => ["<OPENSEARCH_ADDRESS>"]
-             	auth_type => {
-                 	type => 'basic'
-                 	user => '${OPENSEARCH_USERNAME}'
-                 	password => '${OPENSEARCH_PASSWORD}'
-               	}
-             	index  => "wazuh-alerts-4.x-%{+YYYY.MM.dd}"
-             	cacert => "</PATH/TO/LOCAL/OPENSEARCH/CERTIFICATE>/root-ca.pem"
-             	ssl => true
-                template => "/etc/logstash/templates/wazuh.json"
-             	template_name => "wazuh"
-             	template_overwrite => true
-         	}
+               hosts => ["<OPENSEARCH_ADDRESS>"]
+               auth_type => {
+                  type => 'basic'
+                  user => '${OPENSEARCH_USERNAME}'
+                  password => '${OPENSEARCH_PASSWORD}'
+               }
+               index  => "wazuh-alerts-4.x-%{+YYYY.MM.dd}"
+               cacert => "</PATH/TO/LOCAL/OPENSEARCH/CERTIFICATE>/root-ca.pem"
+               ssl => true
+               template => "/etc/logstash/templates/wazuh.json"
+               template_name => "wazuh"
+               template_overwrite => true
+             }
          }
 
       Where:
@@ -301,7 +301,7 @@ In OpenSearch, the indexes support up to ``1000`` fields by default. However, Wa
    "template": {
      ...
      "settings": {
-       ...
+           ...
            "mapping": {
             "total_fields": {
                "limit": 10000
@@ -394,19 +394,19 @@ We use the `Logstash keystore <https://www.elastic.co/guide/en/logstash/current/
          
          output {
              opensearch {
-             	hosts => ["<OPENSEARCH_ADDRESS>"]
-             	auth_type => {
-               	type => 'basic'
-               	user => '${OPENSEARCH_USERNAME}'
-                 	 password => '${OPENSEARCH_PASSWORD}'
-               	}
-             	index  => "wazuh-alerts-4.x-%{+YYYY.MM.dd}"
-             	cacert => "</PATH/TO/LOCAL/OPENSEARCH/CERTIFICATE>/root-ca.pem"
-             	ssl => true
-                template => "/etc/logstash/templates/wazuh.json"
-                template_name => "wazuh"
-                template_overwrite => true
-              }
+               hosts => ["<OPENSEARCH_ADDRESS>"]
+               auth_type => {
+                  type => 'basic'
+                  user => '${OPENSEARCH_USERNAME}'
+                  password => '${OPENSEARCH_PASSWORD}'
+               }
+               index  => "wazuh-alerts-4.x-%{+YYYY.MM.dd}"
+               cacert => "</PATH/TO/LOCAL/OPENSEARCH/CERTIFICATE>/root-ca.pem"
+               ssl => true
+               template => "/etc/logstash/templates/wazuh.json"
+               template_name => "wazuh"
+               template_overwrite => true
+             }
          }
 
       Where:

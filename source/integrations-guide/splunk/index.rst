@@ -134,32 +134,32 @@ Perform the following steps to configure the Logstash pipeline.
 
       input {
         opensearch {
-      	hosts =>  ["<WAZUH_INDEXER_ADDRESS>:9200"]
-      	user  =>  "${WAZUH_INDEXER_USERNAME}"
-      	password  =>  "${WAZUH_INDEXER_PASSWORD}"
-      	index =>  "wazuh-alerts-4.x-*"
-      	ssl => true
-      	ca_file => "</PATH/TO/LOCAL/WAZUH-INDEXER/CERTIFICATE>/root-ca.pem"
-      	query =>  '{
-         	 "query": {
-         		 "range": {
-         			 "@timestamp": {
-         				 "gt": "now-1m"
-         			 }
-         		 }
-         	 }
-      	}'
-      	schedule => "* * * * *"
+         hosts =>  ["<WAZUH_INDEXER_ADDRESS>:9200"]
+         user  =>  "${WAZUH_INDEXER_USERNAME}"
+         password  =>  "${WAZUH_INDEXER_PASSWORD}"
+         index =>  "wazuh-alerts-4.x-*"
+         ssl => true
+         ca_file => "</PATH/TO/LOCAL/WAZUH-INDEXER/CERTIFICATE>/root-ca.pem"
+         query =>  '{
+             "query": {
+                "range": {
+                   "@timestamp": {
+                      "gt": "now-1m"
+                   }
+                }
+             }
+         }'
+         schedule => "* * * * *"
         }
       }
       output {
-          http {
-          	format => "json" # format of forwarded logs
-          	http_method => "post" # HTTP method used to forward logs
-          	url => "<SPLUNK_URL>:8088/services/collector/raw" # endpoint to forward logs to
-          	headers => ["Authorization", "Splunk ${SPLUNK_AUTH}"]
-             cacert => </PATH/TO/LOCAL/SPLUNK/CERTIFICATE>/ca.pem
-      	}
+         http {
+            format => "json" # format of forwarded logs
+            http_method => "post" # HTTP method used to forward logs
+            url => "<SPLUNK_URL>:8088/services/collector/raw" # endpoint to forward logs to
+            headers => ["Authorization", "Splunk ${SPLUNK_AUTH}"]
+            cacert => </PATH/TO/LOCAL/SPLUNK/CERTIFICATE>/ca.pem
+         }
       }
 
    Where:
@@ -309,13 +309,13 @@ To configure the Logstash pipeline do the following.
         }
       }
       output {
-          http {
+         http {
             format => "json" # format of forwarded logs
             http_method => "post" # HTTP method used to <SPLUNK_URL>forward logs
             url => "<SPLUNK_URL>:8088/services/collector/raw" # endpoint to forward logs to
             headers => ["Authorization", "Splunk ${SPLUNK_AUTH}"]
             cacert => </PATH/TO/LOCAL/SPLUNK/CERTIFICATE>/ca.pem
-      	}
+         }
       }
 
    Where:

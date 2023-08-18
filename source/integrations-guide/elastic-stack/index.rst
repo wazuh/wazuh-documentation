@@ -80,12 +80,12 @@ In Elasticsearch, the indexes support up to ``1000`` fields by default. However,
    "template": {
      ...
      "settings": {
-   	 ...
+           ...
            "mapping": {
-      	 	"total_fields": {
-    		   	"limit": 10000
-      	   	}
-         	  }
+            "total_fields": {
+               "limit": 10000
+            }
+           }
            ...
      }
      ...
@@ -174,22 +174,22 @@ We use the `Logstash keystore <https://www.elastic.co/guide/en/logstash/current/
 
          input {
            opensearch {
-         	hosts =>  ["<WAZUH_INDEXER_ADDRESS>:9200"]
-         	user  =>  "${WAZUH_INDEXER_USERNAME}"
-         	password  =>  "${WAZUH_INDEXER_PASSWORD}"
-         	index =>  "wazuh-alerts-4.x-*"
-         	ssl => true
-         	ca_file => "</PATH/TO/LOCAL/WAZUH_INDEXER>/root-ca.pem"
-         	query =>  '{
-            	 "query": {
-            		 "range": {
-            			 "@timestamp": {
-            				 "gt": "now-1m"
-            			 }
-            		 }
-            	 }
-         	}'
-         	schedule => "* * * * *"
+            hosts =>  ["<WAZUH_INDEXER_ADDRESS>:9200"]
+            user  =>  "${WAZUH_INDEXER_USERNAME}"
+            password  =>  "${WAZUH_INDEXER_PASSWORD}"
+            index =>  "wazuh-alerts-4.x-*"
+            ssl => true
+            ca_file => "</PATH/TO/LOCAL/WAZUH_INDEXER>/root-ca.pem"
+            query =>  '{
+                "query": {
+                   "range": {
+                      "@timestamp": {
+                         "gt": "now-1m"
+                      }
+                   }
+                }
+            }'
+            schedule => "* * * * *"
            }
          }
 
@@ -204,7 +204,7 @@ We use the `Logstash keystore <https://www.elastic.co/guide/en/logstash/current/
                   template => "/etc/logstash/templates/wazuh.json"
                   template_name => "wazuh"
                   template_overwrite => true
-         	}
+             }
          }
 
       Where:
@@ -308,10 +308,10 @@ In Elasticsearch, the indexes support up to ``1000`` fields by default. However,
    "template": {
      ...
      "settings": {
-       ...
+           ...
            "mapping": {
             "total_fields": {
-      	      "limit": 10000
+               "limit": 10000
             }
            }
            ...
@@ -410,7 +410,7 @@ We use the `Logstash keystore <https://www.elastic.co/guide/en/logstash/current/
                   template => "/etc/logstash/templates/wazuh.json"
                   template_name => "wazuh"
                   template_overwrite => true
-         	}
+             }
          }
 
       Where:
