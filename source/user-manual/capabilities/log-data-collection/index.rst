@@ -1,7 +1,7 @@
 .. Copyright (C) 2015, Wazuh, Inc.
 
 .. meta::
-  :description: Know more about the Wazuh Log Data Collection capability in this section of our documentation: how it works, how to configure it, FAQs, and more. 
+  :description: Dive into the Wazuh Log data collection capability: how it works, how to configure it, use cases, and more in this documentation section.
   
 .. _manual_log_analysis:
 

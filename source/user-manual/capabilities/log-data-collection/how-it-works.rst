@@ -1,7 +1,7 @@
 .. Copyright (C) 2015, Wazuh, Inc.
 
 .. meta::
-  :description: Here you can see how the Log Data Collection capability of Wazuh works and learn how to collect log files and Windows event logs.
+  :description: Learn more about the log data collection and analysis flow in this section of the documentation.
 
 How it works
 ============
@@ -17,7 +17,7 @@ By default, the Wazuh server retains logs and does not delete them automatically
 The image below illustrates the flow of log data collection and analysis in Wazuh.
 
 .. thumbnail:: /images/manual/log-data-collection/log-data-collection.png
-    :title: Log analysis flow
-    :alt: Log analysis flow
+    :title: Log data collection and analysis in Wazuh
+    :alt:  Log data collection and analysis in Wazuh
     :align: center
     :width: 100%

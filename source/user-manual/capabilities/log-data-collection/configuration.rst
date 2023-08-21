@@ -238,6 +238,8 @@ Perform the following steps to configure a Linux endpoint to forward events usin
 
       # systemctl restart wazuh-manager
 
+.. _how-to-collect-macoslogs:
+
 macOS
 ------
 
