@@ -49,13 +49,11 @@ Backing up the Wazuh server
       /var/ossec/etc/decoders/local_decoder.xml \
       /var/ossec/etc/shared/ \
       /var/ossec/logs/ \
-      /var/ossec/queue/agent-groups/ \
       /var/ossec/queue/agentless/ \
       /var/ossec/queue/agents-timestamp \
       /var/ossec/queue/fts/ \
       /var/ossec/queue/rids/ \
       /var/ossec/stats/ \
-      /var/ossec/var/db/agents/ \
       /var/ossec/var/multigroups/ $bkp_folder
 
 #. If present, back up certificates and additional configuration files.
