@@ -8,6 +8,8 @@
 Agent key request
 =================
 
+.. versionadded:: 4.4.0
+
 .. note:: The key request feature replaces the old :doc:`agent-key-polling <../reference/ossec-conf/wodle-agent-key-polling>` wodle.
 
 The key request feature allows fetching the agent keys stored on an external database.

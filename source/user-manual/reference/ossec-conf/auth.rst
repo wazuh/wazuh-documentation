@@ -75,6 +75,8 @@ Defines the TCP port number for listening to connections.
 ipv6
 ^^^^^^^^^^^
 
+.. versionadded:: 4.4.0
+
 Enables IPv6 support.
 
 +--------------------+------------------+
@@ -260,6 +262,8 @@ The format of this parameter is described in `SSL ciphers <https://www.openssl.o
 
 key_request
 ^^^^^^^^^^^
+
+.. versionadded:: 4.4.0
 
 The key request settings are configured inside this tag. Read more about this feature at :doc:`agent key request <../../agents/key-request>`.
 
