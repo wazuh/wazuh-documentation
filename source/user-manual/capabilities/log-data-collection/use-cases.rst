@@ -9,7 +9,7 @@ Use cases
 Forwarding Linux logs using rsyslog
 -----------------------------------
 
-In this use case, we configure a CentOS 7 endpoint to forward logs using rsyslog to the Wazuh server for analysis. On the CentOS 7 endpoint, we create and delete the user account Stephen. Wazuh has default rules that generate alerts for the creation and deletion of user accounts.
+In this use case, we configure a CentOS 7 endpoint to forward logs using rsyslog to the Wazuh server for analysis. On the CentOS 7 endpoint, we create and delete the user account ``Stephen``. Wazuh has default rules that generate alerts for the creation and deletion of user accounts.
 
 CentOS endpoint
 ^^^^^^^^^^^^^^^

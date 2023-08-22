@@ -37,5 +37,6 @@ The Wazuh server can collect logs via syslog from endpoints such as firewalls, s
       # systemctl restart wazuh-manager
 
 .. note:: The ``allowed-ips`` label is mandatory. The configuration will not take effect without it.
+
    If you have a central logging server like Syslog or Logstash in place, you can install the Wazuh agent on that server to streamline log collection. This setup enables seamless forwarding of logs from multiple sources to the Wazuh server, facilitating comprehensive analysis.
 
