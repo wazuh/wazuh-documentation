@@ -1,7 +1,7 @@
 .. Copyright (C) 2015, Wazuh, Inc.
 
 .. meta::
-  :description: 
+  :description: Log data collection helps security teams to meet regulatory compliance, detect and remediate threats. Learn how to configure log collection on Windows, Linux, and macOS endpoints.
 
 Configuring log collection for different operating systems
 ==========================================================
@@ -47,7 +47,7 @@ The table below shows the channels and providers that the Wazuh agent supports.
 Monitoring the Windows event channel with Wazuh
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-To monitor specific Windows event channels using the Wazuh agent, simply include the channel name in the ``location`` field and set the log format as ``eventchannel`` within the ``localfile`` block in the ``C:\Program Files (x86)\ossec-agent\ossec.conf`` file. For example, perform the following steps to monitor the Microsoft-Windows-PrintService/Operational channel:
+To monitor specific Windows event channels using the Wazuh agent, simply include the channel name in the ``location`` field and set the log format as ``eventchannel`` within the ``localfile`` block in the ``C:\Program Files (x86)\ossec-agent\ossec.conf`` file. For example, perform the following steps to monitor the ``Microsoft-Windows-PrintService/Operational`` channel:
 
 #. Add the following configuration in between the ``<ossec_config>`` tags of the Wazuh agent ``C:\Program Files (x86)\ossec-agent\ossec.conf`` file:
 
@@ -184,7 +184,7 @@ Perform the following steps to configure a Linux endpoint to forward events usin
 
       *.info@@<WAZUH_SERVER_IP_ADDRESS>:514
 
-   .. note:: ``@@`` indicates a TCP connection, while ``@`` indicates a UDP connection
+   .. note:: ``@@`` indicates a TCP connection, while ``@`` indicates a UDP connection.
 
    Where:
 
@@ -268,7 +268,7 @@ Wazuh interfaces with the CLI log tool using the ``–style syslog`` format to c
 
 .. warning:: You can only have one configuration block with ``log_format`` set as ``macos``. If you add more blocks, only the last one will be used.
 
-To filter the system logs, it is necessary, but not mandatory, to use the ``<query>`` label. This label allows setting different filtering options such as:
+To filter the system logs, it's necessary, but not mandatory, to use the ``<query>`` label. This label allows setting different filtering options such as:
 
 - ``type``: Specifies the type of logs collected. The values of ``types`` are ``activity``, ``log``, and ``trace``. You can combine multiple values.
 

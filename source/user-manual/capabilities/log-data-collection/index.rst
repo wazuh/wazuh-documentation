@@ -1,7 +1,7 @@
 .. Copyright (C) 2015, Wazuh, Inc.
 
 .. meta::
-  :description: Dive into the Wazuh Log data collection capability: how it works, how to configure it, use cases, and more in this documentation section.
+  :description: Wazuh collects logs from monitored endpoints, applications, and network devices. Dive into the Log data collection capability: how it works, how to configure it, use cases, and more in this documentation section.
   
 .. _manual_log_analysis:
 

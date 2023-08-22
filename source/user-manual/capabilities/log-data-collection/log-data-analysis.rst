@@ -1,7 +1,7 @@
 .. Copyright (C) 2015, Wazuh, Inc.
 
 .. meta::
-  :description: 
+  :description: Log data analysis in Wazuh involves three stages: pre-decoding, decoding, and rule matching. Learn more about this process in this documentation section.
 
 Log data analysis
 =================

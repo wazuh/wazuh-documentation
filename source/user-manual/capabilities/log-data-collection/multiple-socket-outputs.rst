@@ -1,14 +1,14 @@
 .. Copyright (C) 2015, Wazuh, Inc.
 
 .. meta::
-  :description: 
+  :description: Log data is sent to the Wazuh agent socket by default, but it's also possible to specify other sockets. Learn how to configure multiple sockets in this section of the documentation.
 
 Using multiple socket outputs
 =============================
 
 .. note:: You can use sockets only on Linux/Unix and macOS endpoints.
 
-Log data is sent to the Wazuh agent socket by default, but it is also possible to specify other sockets as output. The logcollector module uses UNIX-type sockets to communicate, thereby allowing TCP or UDP protocols. One scenario where this may be useful is inter-process communication where you may need to redirect the logs to a different socket for another process to read.
+Log data is sent to the Wazuh agent socket by default, but it's also possible to specify other sockets as output. The logcollector module uses UNIX-type sockets to communicate, thereby allowing TCP or UDP protocols. One scenario where this may be useful is inter-process communication where you may need to redirect the logs to a different socket for another process to read.
 
 You can use the ``<socket>`` tag to add new output sockets and then configure the Wazuh agent to output logs to that socket. Perform the following steps on the monitored endpoint to create a new output socket and forward logs from ``file.log`` to it:
 
@@ -32,7 +32,7 @@ You can use the ``<socket>`` tag to add new output sockets and then configure th
 
    - ``<name>`` is the name of the socket. This is a required field.
    - ``<location>`` is the path of the socket. This is a required field.
-   - ``<mode>`` is the socket communication protocol set to UDP by default. The allowed values are either tcp or udp. This field is not mandatory.
+   - ``<mode>`` is the socket communication protocol set to UDP by default. The allowed values are either ``tcp`` or ``udp``. This field is not mandatory.
    - ``<prefix>`` is a string placed before the message. This field is not mandatory.
    
    Refer to the :doc:`socket documentation </user-manual/reference/ossec-conf/socket>` for more information about defining a socket.

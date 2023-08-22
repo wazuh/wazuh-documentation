@@ -1,7 +1,7 @@
 .. Copyright (C) 2015, Wazuh, Inc.
 
 .. meta::
-  :description: 
+  :description: The Wazuh server can collect logs via syslog from endpoints such as firewalls, switches and routers. Check out this section of the documentation to learn more.
 
 Configuring syslog on the Wazuh server
 ======================================
@@ -24,7 +24,7 @@ The Wazuh server can collect logs via syslog from endpoints such as firewalls, s
 
    - ``<connection>`` specifies the type of connection to accept. This value can either be secure or syslog.  
    - ``<port>`` is the port used to listen for incoming syslog messages from endpoints. We use port 514 in the example above.
-   - ``<protocol>`` is the protocol used to listen for incoming syslog messages from endpoints. The allowed values are either tcp or udp.  
+   - ``<protocol>`` is the protocol used to listen for incoming syslog messages from endpoints. The allowed values are either ``tcp`` or ``udp``.
    - ``<allowed-ips>`` is the IP address or network range of the endpoints forwarding events to the Wazuh server. In the example above, we use 192.168.2.15/24.
    - ``<local_ip>`` is the IP address of the Wazuh server listening for incoming log messages. In the example above, we use 192.168.2.10.
    

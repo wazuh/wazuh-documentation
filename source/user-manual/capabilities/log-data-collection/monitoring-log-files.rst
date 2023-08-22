@@ -1,14 +1,14 @@
 .. Copyright (C) 2015, Wazuh, Inc.
 
 .. meta::
-  :description: 
+  :description: Learn to set up log file monitoring. This section explores various configuration possibilities, such as tracking date-based logs files, employing wildcard patterns, and using environment variables.
 
 Configuration for monitoring log files
 ======================================
 
 You can use a local configuration file on the Wazuh agent or Wazuh server to monitor log files. There is also a centralized configuration file on the Wazuh server to monitor log files across multiple endpoints. These two configuration options for monitoring log files are explained below.
 
-- Local configuration: The :doc:`ossec.conf </user-manual/reference/ossec-conf/index>` file is the main configuration file on the Wazuh server and the Wazuh agent. The Wazuh agent collects logs from monitored endpoints and forwards these logs to the Wazuh server for analysis. You can configure the Wazuh agent ossec.conf file to collect logs from specific log files on a monitored endpoint. The table below shows the location of the ossec.conf file on different operating systems.
+- Local configuration: The :doc:`ossec.conf </user-manual/reference/ossec-conf/index>` file is the main configuration file on the Wazuh server and the Wazuh agent. The Wazuh agent collects logs from monitored endpoints and forwards these logs to the Wazuh server for analysis. You can configure the Wazuh agent ``ossec.conf`` file to collect logs from specific log files on a monitored endpoint. The table below shows the location of the ``ossec.conf`` file on different operating systems.
 
 
 =================  ==================================================

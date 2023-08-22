@@ -1,7 +1,7 @@
 .. Copyright (C) 2015, Wazuh, Inc.
 
 .. meta::
-  :description: 
+  :description: Explore Log data collection use cases: Learn to forward Linux logs using rsyslog, detect Windows applications installation, and monitor PowerShell activity.
 
 Use cases
 =========
@@ -9,7 +9,7 @@ Use cases
 Forwarding Linux logs using rsyslog
 -----------------------------------
 
-In this use case, we configure a CentOS 7 endpoint to forward logs using rsyslog to the Wazuh server for analysis. On the CentOS 7 endpoint, we create and delete the user account Stephen. Wazuh has default rules that will generate alerts for the creation and deletion of user accounts.
+In this use case, we configure a CentOS 7 endpoint to forward logs using rsyslog to the Wazuh server for analysis. On the CentOS 7 endpoint, we create and delete the user account Stephen. Wazuh has default rules that generate alerts for the creation and deletion of user accounts.
 
 CentOS endpoint
 ^^^^^^^^^^^^^^^
@@ -105,7 +105,9 @@ The image below shows an alert for user deletion.
 Detecting the installation of applications on Windows
 -----------------------------------------------------
 
-In this use case, we detect when an application is installed on a Windows endpoint. We test this use case by installing an application called Dr. Memory. Dr. Memory is an open source memory monitoring tool capable of detecting invalid memory accesses, memory leaks, handle leaks, accesses to freed memory, and other memory-related issues.
+In this use case, we detect when an application is installed on a Windows endpoint. We test this use case by installing an application called Dr. Memory.
+
+Dr. Memory is an open source memory monitoring tool capable of detecting invalid memory accesses, memory leaks, handle leaks, accesses to freed memory, and other memory-related issues.
 
 Windows endpoint
 ^^^^^^^^^^^^^^^^
