@@ -26,11 +26,15 @@ The Syscollector module supports different options across various operating syst
 |    Solaris             |     ✗     |     √     |     √     |     √    |     ✗     |     ✗     |     –     |
 +------------------------+-----------+-----------+-----------+----------+-----------+-----------+-----------+
 
+The module detects various package formats depending on the operating system. This is shown in the table below.
+
 .. versionadded:: 4.7.0
 
-The Syscollector module now supports scan packages from `NPM (Node Package Manager)  <https://www.npmjs.com/>`_ and `PyPI (Python Package Index)  <https://pypi.org/>`_, **the support is only for the default paths of those packages' installation**. This enhancement requires a C++ compiler that supports the `17 standard <https://en.cppreference.com/w/cpp/compiler_support/17>`_ (GCC>=7), and it's for this reason that some Operating Systems are not supported.
+The packages scan supports detection of `NPM (Node Package Manager)  <https://www.npmjs.com/>`__ and `PyPI (Python Package Index)  <https://pypi.org/>`__ packages in some of operating systems. The NPM and PyPI scan isn't available in all operating systems. The scan requires a C++ compiler supporting the `17 standard <https://en.cppreference.com/w/cpp/compiler_support/17>`__ (GCC>=7).
 
-The following table shows the packages that syscollector is able to detect, depending on the operating system where it is installed.
+.. note::
+
+   Support for scanning NPM and PyPI packages is limited to the default installation paths.
 
 +------------------------+------------------------------------------------------------------------------------------------------------------+
 |                        |                                        **Syscollector package scan support**                                     |
