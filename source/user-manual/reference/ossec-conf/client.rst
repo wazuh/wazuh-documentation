@@ -201,8 +201,6 @@ Specifies the time after which the agent is forced to be reconnected to the mana
 ip_update_interval
 ^^^^^^^^^^^^^^^^^^
 
-.. versionadded:: 4.2.0
-
 Specifies how often an agent will query the control module for its main IP address.
 
 
@@ -295,7 +293,6 @@ Sample link-local IPv6 configuration
 
 enrollment
 ^^^^^^^^^^
-.. versionadded:: 4.0
 
 Configures the connection parameters for the agent enrollment.
 

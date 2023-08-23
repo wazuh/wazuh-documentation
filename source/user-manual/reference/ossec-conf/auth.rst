@@ -51,8 +51,6 @@ Toggles the execution of the Auth daemon on or off.
 remote_enrollment
 ^^^^^^^^^^^^^^^^^
 
-.. versionadded:: 4.2.0
-
 Allow listening for new agents on TLS port (1515 by default).
 
 +--------------------+---------------------+

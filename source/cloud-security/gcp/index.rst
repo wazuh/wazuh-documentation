@@ -26,6 +26,7 @@ The :doc:`/cloud-security/gcp/supported-services/index` section contains detaile
 
 Google Cloud Storage
 --------------------
+
 .. versionadded:: 4.3.0
 
 Wazuh can process logs stored in a Google Cloud Storage bucket using the ``gcp-buckets`` module, a highly configurable module that collects any log stored in the bucket and processes the events using the defined :doc:`threat detection rules and decoders </user-manual/ruleset/index>`.

@@ -8,8 +8,6 @@
 wazuh-agentd
 ============
 
-.. versionadded:: 4.2
-
 The wazuh-agentd program is the client-side daemon that communicates with the server. It runs as user ``wazuh``.
 
 +-----------------+-------------------------------------------------------------------------------------------------+
