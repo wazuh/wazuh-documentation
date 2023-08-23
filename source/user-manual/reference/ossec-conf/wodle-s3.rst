@@ -522,8 +522,6 @@ The access key ID for the IAM user with the permission to access the service.
 aws_log_groups
 ^^^^^^^^^^^^^^
 
-.. versionadded:: 4.0.0
-
 A comma-separated list of log group names from where the logs should be extracted. This option is mandatory for CloudWatch Logs, and only works with that service.
 
 +--------------------+------------------------------------------------+
@@ -589,8 +587,6 @@ A valid number of seconds that defines the duration of the session assumed when 
 only_logs_after
 ^^^^^^^^^^^^^^^
 
-.. versionadded:: 4.0.0
-
 A valid date, in YYYY-MMM-DD format. Only logs from that date onwards will be parsed. This option is only available for the CloudWatch Logs service.
 
 +--------------------+-----------------------------------+
@@ -604,8 +600,6 @@ A valid date, in YYYY-MMM-DD format. Only logs from that date onwards will be pa
 regions
 ^^^^^^^
 
-.. versionadded:: 4.0.0
-
 A comma-separated list of regions to limit parsing of logs.
 
 +--------------------+----------------------------------------+
@@ -618,8 +612,6 @@ A comma-separated list of regions to limit parsing of logs.
 
 remove_log_streams
 ^^^^^^^^^^^^^^^^^^
-
-.. versionadded:: 4.0.0
 
 Define whether or not to remove the log streams from the log groups after they are read by the module. Only works for CloudWatch Logs service.
 
@@ -659,6 +651,7 @@ The endpoint URL for the required AWS Service to be used to download the data fr
 
 Subscribers
 ~~~~~~~~~~~
+
 .. versionadded:: 4.4.2
 
 It is necessary to specify the type as an attribute of the ``subscriber`` tag to indicate the service configured. More information about the supported services and their associated types on :ref:`AWS supported services <amazon_supported_services>`.

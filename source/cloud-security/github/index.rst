@@ -8,8 +8,6 @@
 Using Wazuh to monitor GitHub
 =============================
 
-.. versionadded:: 4.3.0
-
 This section provides instructions for monitoring the GitHub `audit log` for your organization.
 
 The `audit log` allows Wazuh to monitor:

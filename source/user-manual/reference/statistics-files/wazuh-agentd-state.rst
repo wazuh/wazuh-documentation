@@ -8,8 +8,6 @@
 wazuh-agentd.state
 ==================
 
-.. versionadded:: 4.2
-
 The statistical file for **wazuh-agentd** is located at ``/var/ossec/var/run/wazuh-agentd.state``.
 
 This file provides information about the agent as the number of generated events, last connection, agent status, and some other useful information.
