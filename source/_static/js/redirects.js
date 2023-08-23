@@ -61,10 +61,54 @@ removedUrls['x.y'] = [
 
 /* *** RELEASE 4.5 ****/
 
-/* Pages added in x.y */
+/* Redirections from 4.4 to 4.5  */
+
+redirections.push(
+  {
+    'target': ['4.4=>4.5'],
+    '4.4': '/user-manual/capabilities/log-data-collection/how-to-collect-macoslogs.html',
+    '4.5': '/user-manual/capabilities/log-data-collection/configuration.html#macos',
+  },
+  {
+    'target': ['4.4=>4.5'],
+    '4.4': '/user-manual/capabilities/log-data-collection/how-to-collect-wlogs.html',
+    '4.5': '/user-manual/capabilities/log-data-collection/configuration.html#windows',
+  },
+  {
+    'target': ['4.4=>4.5'],
+    '4.4': '/user-manual/capabilities/log-data-collection/log-data-faq.html',
+    '4.5': '/user-manual/capabilities/log-data-collection/index.html',
+  },
+  {
+    'target': ['4.4=>4.5'],
+    '4.4': '/user-manual/capabilities/log-data-collection/log-data-configuration.html',
+    '4.5': '/user-manual/capabilities/log-data-collection/monitoring-log-files.html',
+  },
+);
+
+/* Pages added in 4.5 */
 
 newUrls['4.5'] = [
+  '/integrations-guide/index.html',
+  '/integrations-guide/elastic-stack/index.html',
+  '/integrations-guide/opensearch/index.html',
+  '/integrations-guide/splunk/index.html',
   '/release-notes/release-4-5-0.html',
+  '/user-manual/capabilities/log-data-collection/configuration.html', 
+  '/user-manual/capabilities/log-data-collection/log-data-analysis.html',
+  '/user-manual/capabilities/log-data-collection/monitoring-log-files.html',
+  '/user-manual/capabilities/log-data-collection/multiple-socket-outputs.html',
+  '/user-manual/capabilities/log-data-collection/syslog.html',
+  '/user-manual/capabilities/log-data-collection/use-cases.html',
+];
+
+/* Pages no longer available in 4.5 */
+
+removedUrls['4.5'] = [
+  '/user-manual/capabilities/log-data-collection/how-to-collect-macoslogs.html',
+  '/user-manual/capabilities/log-data-collection/how-to-collect-wlogs.html',
+  '/user-manual/capabilities/log-data-collection/log-data-faq.html',
+  '/user-manual/capabilities/log-data-collection/log-data-configuration.html',
 ];
 
 /* *** RELEASE 4.4 ****/
@@ -609,46 +653,6 @@ redirections.push(
     },
     {
       'target': ['4.4=>4.3'],
-      '4.3': '/user-manual/user-administration/single-sign-on/index.html',
-      '4.4': '/user-manual/user-administration/single-sign-on/administrator/index.html',
-    },
-    {
-      'target': ['4.3=>4.4', '4.4=>4.3'],
-      '4.3': '/user-manual/user-administration/single-sign-on/okta.html',
-      '4.4': '/user-manual/user-administration/single-sign-on/administrator/okta.html',
-    },
-    {
-      'target': ['4.3=>4.4', '4.4=>4.3'],
-      '4.3': '/user-manual/user-administration/single-sign-on/azure-active-directory.html',
-      '4.4': '/user-manual/user-administration/single-sign-on/administrator/azure-active-directory.html',
-    },
-    {
-      'target': ['4.3=>4.4', '4.4=>4.3'],
-      '4.3': '/user-manual/user-administration/single-sign-on/pingone.html',
-      '4.4': '/user-manual/user-administration/single-sign-on/administrator/pingone.html',
-    },
-    {
-      'target': ['4.3=>4.4', '4.4=>4.3'],
-      '4.3': '/user-manual/user-administration/single-sign-on/google.html',
-      '4.4': '/user-manual/user-administration/single-sign-on/administrator/google.html',
-    },
-    {
-      'target': ['4.3=>4.4', '4.4=>4.3'],
-      '4.3': '/user-manual/user-administration/single-sign-on/jumpcloud.html',
-      '4.4': '/user-manual/user-administration/single-sign-on/administrator/jumpcloud.html',
-    },
-    {
-      'target': ['4.3=>4.4', '4.4=>4.3'],
-      '4.3': '/user-manual/user-administration/single-sign-on/onelogin.html',
-      '4.4': '/user-manual/user-administration/single-sign-on/administrator/onelogin.html',
-    },
-    {
-      'target': ['4.3=>4.4', '4.4=>4.3'],
-      '4.3': '/user-manual/user-administration/single-sign-on/keycloak.html',
-      '4.4': '/user-manual/user-administration/single-sign-on/administrator/keycloak.html',
-    },
-    {
-      'target': ['4.4=>4.3'],
       '4.3': '/user-manual/files-backup/index.html',
       '4.4': '/user-manual/files-backup/creating/index.html',
     },
@@ -790,22 +794,6 @@ newUrls['4.4'] = [
   '/user-manual/capabilities/agentless-monitoring/visualization.html',
   '/user-manual/capabilities/agentless-monitoring/use-cases.html',  
   '/user-manual/capabilities/vulnerability-detection/querying-the-vulnerability-database.html',
-  '/user-manual/user-administration/single-sign-on/administrator/index.html',
-  '/user-manual/user-administration/single-sign-on/administrator/okta.html',
-  '/user-manual/user-administration/single-sign-on/administrator/azure-active-directory.html',
-  '/user-manual/user-administration/single-sign-on/administrator/pingone.html',
-  '/user-manual/user-administration/single-sign-on/administrator/google.html',
-  '/user-manual/user-administration/single-sign-on/administrator/jumpcloud.html',
-  '/user-manual/user-administration/single-sign-on/administrator/onelogin.html',
-  '/user-manual/user-administration/single-sign-on/administrator/keycloak.html',
-  '/user-manual/user-administration/single-sign-on/read-only/index.html',
-  '/user-manual/user-administration/single-sign-on/read-only/okta.html',
-  '/user-manual/user-administration/single-sign-on/read-only/azure-active-directory.html',
-  '/user-manual/user-administration/single-sign-on/read-only/pingone.html',
-  '/user-manual/user-administration/single-sign-on/read-only/google.html',
-  '/user-manual/user-administration/single-sign-on/read-only/jumpcloud.html',
-  '/user-manual/user-administration/single-sign-on/read-only/onelogin.html',
-  '/user-manual/user-administration/single-sign-on/read-only/keycloak.html',
   '/user-manual/files-backup/creating/index.html',
   '/user-manual/files-backup/creating/wazuh-central-components.html',
   '/user-manual/files-backup/creating/wazuh-agent.html',
@@ -934,13 +922,22 @@ newUrls['4.3'] = [
   '/user-manual/user-administration/password-management.html',
   '/user-manual/user-administration/rbac.html',
   '/user-manual/user-administration/single-sign-on/index.html',
-  '/user-manual/user-administration/single-sign-on/okta.html',
-  '/user-manual/user-administration/single-sign-on/azure-active-directory.html',
-  '/user-manual/user-administration/single-sign-on/pingone.html',
-  '/user-manual/user-administration/single-sign-on/google.html',
-  '/user-manual/user-administration/single-sign-on/jumpcloud.html',
-  '/user-manual/user-administration/single-sign-on/onelogin.html',
-  '/user-manual/user-administration/single-sign-on/keycloak.html',
+  '/user-manual/user-administration/single-sign-on/administrator/index.html',
+  '/user-manual/user-administration/single-sign-on/administrator/okta.html',
+  '/user-manual/user-administration/single-sign-on/administrator/azure-active-directory.html',
+  '/user-manual/user-administration/single-sign-on/administrator/pingone.html',
+  '/user-manual/user-administration/single-sign-on/administrator/google.html',
+  '/user-manual/user-administration/single-sign-on/administrator/jumpcloud.html',
+  '/user-manual/user-administration/single-sign-on/administrator/onelogin.html',
+  '/user-manual/user-administration/single-sign-on/administrator/keycloak.html',
+  '/user-manual/user-administration/single-sign-on/read-only/index.html',
+  '/user-manual/user-administration/single-sign-on/read-only/okta.html',
+  '/user-manual/user-administration/single-sign-on/read-only/azure-active-directory.html',
+  '/user-manual/user-administration/single-sign-on/read-only/pingone.html',
+  '/user-manual/user-administration/single-sign-on/read-only/google.html',
+  '/user-manual/user-administration/single-sign-on/read-only/jumpcloud.html',
+  '/user-manual/user-administration/single-sign-on/read-only/onelogin.html',
+  '/user-manual/user-administration/single-sign-on/read-only/keycloak.html',
   '/upgrade-guide/upgrading-central-components.html',
   '/migration-guide/index.html',
   '/migration-guide/wazuh-indexer.html',
