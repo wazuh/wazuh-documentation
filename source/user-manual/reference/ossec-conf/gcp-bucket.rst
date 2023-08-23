@@ -8,6 +8,8 @@
 gcp-bucket
 ==========
 
+.. versionadded:: 4.3.0
+
 .. topic:: XML section name
 
 	.. code-block:: xml

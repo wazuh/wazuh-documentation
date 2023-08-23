@@ -107,6 +107,8 @@ Using the RESTful API
 
 2. Upgrade the agents with ID 002 and 003 using endpoint :api-ref:`PUT /agents/upgrade <operation/api.controllers.agent_controller.put_upgrade_agents>`:
 
+    .. versionadded:: 4.3.0
+
         The parameter `agents_list` of endpoints :api-ref:`PUT /agents/upgrade <operation/api.controllers.agent_controller.put_upgrade_agents>` and :api-ref:`PUT /agents/upgrade_custom <operation/api.controllers.agent_controller.put_upgrade_custom_agents>` allows the value `all`. When setting this value, an upgrade request will be sent to all agents.
 
     When upgrading more than 3000 agents at the same time, it's highly recommended to use the parameter `wait_for_complete` set to `true` to avoid a possible API timeout.

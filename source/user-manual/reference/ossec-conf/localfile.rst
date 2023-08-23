@@ -329,6 +329,8 @@ Set the format of the log to be read. **field is required**
 |                    |                    |                                                                                                  |
 |                    |                    | Monitors all the logs that match the query filter.                                               |
 |                    |                    | See :ref:`How to collect macOS ULS logs <how-to-collect-macoslogs>`.                             |
+|                    |                    |                                                                                                  |
+|                    |                    | .. versionadded:: 4.3.0                                                                          |
 +                    +--------------------+--------------------------------------------------------------------------------------------------+
 |                    | audit              | Used for events from Auditd.                                                                     |
 |                    |                    |                                                                                                  |

@@ -99,6 +99,8 @@ Toggles the use of the client's source IP address or the use of "any" to add an 
 force
 ^^^^^
 
+.. versionadded:: 4.3.0
+
 The agent replacement options are configured inside this tag. All conditions must be satisfied to perform the replacement.
 
 .. code-block:: xml

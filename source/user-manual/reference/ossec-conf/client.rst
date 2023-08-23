@@ -186,6 +186,8 @@ For example, a ``notify_time`` setting of 60 combined with a time-reconnect of 3
 force_reconnect_interval
 ^^^^^^^^^^^^^^^^^^^^^^^^
 
+.. versionadded:: 4.3.0
+
 Specifies the time after which the agent is forced to be reconnected to the manager. The reconnection is forced to be done even if the agent is having a successful two-way communication with the manager.
 
 +--------------------+--------------------------------------------------------------------------------------------------------------------------------------------------+

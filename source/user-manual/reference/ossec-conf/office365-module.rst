@@ -8,6 +8,8 @@
 office365
 =========
 
+.. versionadded:: 4.3.0
+
 .. note::
 
     This module only works on Windows, Linux, and macOS. It is recommended to have it enabled only in one agent to avoid repeated logs.

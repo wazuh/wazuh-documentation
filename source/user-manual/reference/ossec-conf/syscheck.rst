@@ -119,6 +119,8 @@ This is to be set on the system to be monitored (or in the ``agent.conf``, if ap
 
 There is a limit of 64 directories, comma-separated, that can be written in one line .
 
+.. versionadded:: 4.3.0
+
 Wildcard characters (``?`` and ``*``) can be used to monitor paths that fulfill the given pattern.
 These wildcards will be reloaded every time a scheduled scan is run.
 
@@ -287,6 +289,8 @@ The configuration above, set the option ``check_sha256`` to ``YES``.
   <directories check_sha256="yes" check_all="no">/etc</directories>
 
 Nevertheless, the second one disables the SHA-256 hash check.
+
+.. versionadded:: 4.3.0
 
 If there is a conflict between a block with wildcards and another without them, the block without wildcards will be used for the specific case. As an example:
 
