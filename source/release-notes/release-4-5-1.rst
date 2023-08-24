@@ -111,7 +111,7 @@ RESTful API
 Reference                                                         Description
 ==============================================================    =============
 `#17632 <https://github.com/wazuh/wazuh/pull/17632>`_             Fixed ``PUT /agents/upgrade_custom`` endpoint to validate that the file extension is ``.wpk``.
-`#17660 <https://github.com/wazuh/wazuh/pull/17660>`_             Fixed errors in API endpoints to get labels and reports active configuration from managers.
+`#17660 <https://github.com/wazuh/wazuh/pull/17660>`_             Fixed errors in API endpoints to get ``labels`` and ``reports`` active configuration from managers.
 ==============================================================    =============
 
 Ruleset
@@ -137,6 +137,7 @@ Reference                                                         Description
 `#5490 <https://github.com/wazuh/wazuh-kibana-app/pull/5490>`_    Fixed the agents active coverage stat as ``NaN`` in **Details** panel of **Agents** section.
 `#5687 <https://github.com/wazuh/wazuh-kibana-app/pull/5687>`_    Fixed a broken documentation link to agent labels.
 `#5714 <https://github.com/wazuh/wazuh-kibana-app/pull/5714>`_    Fixed the PDF report filters applied to tables.
+`#5766 <https://github.com/wazuh/wazuh-kibana-app/pull/5766>`_    Fixed outdated year in the PDF report footer.
 ==============================================================    =============
 
 Wazuh Kibana plugin for Kibana 7.10.2, 7.16.x, and 7.17.x
@@ -149,6 +150,7 @@ Reference                                                         Description
 `#5490 <https://github.com/wazuh/wazuh-kibana-app/pull/5490>`_    Fixed the agents active coverage stat as ``NaN`` in **Details** panel of **Agents** section.
 `#5687 <https://github.com/wazuh/wazuh-kibana-app/pull/5687>`_    Fixed a broken documentation link to agent labels.
 `#5714 <https://github.com/wazuh/wazuh-kibana-app/pull/5714>`_    Fixed the PDF report filters applied to tables.
+`#5766 <https://github.com/wazuh/wazuh-kibana-app/pull/5766>`_    Fixed outdated year in the PDF report footer.
 ==============================================================    =============
 
 Changelogs
