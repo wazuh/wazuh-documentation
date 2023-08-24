@@ -129,7 +129,7 @@ The following example of a ``~/.aws/config`` file sets the supported configurati
    retry_mode = standard
 
 .. note::
-   To configure multiple profile for the integration, declare each profile in the ``~/.aws/config`` file using the same pattern as before.
+   To configure multiple profiles for the integration, declare each profile in the ``~/.aws/config`` file using the same pattern as before.
    If no profile is declared in the module configuration, the *default* profile is used.
 
 Configuring multiple services
