@@ -586,7 +586,7 @@ Logcollector
 +                                          +---------------+----------------------------------------------------------------------------+
 |                                          | Default value | 60                                                                         |
 +                                          +---------------+----------------------------------------------------------------------------+
-|                                          | Allowed values| 0: Obtain the IP on demand.                                                |
+|                                          | Allowed values| 0: The agent will never try to collect the host's IP (disable feature).    |
 |                                          |               |                                                                            |
 |                                          |               | **Warning:** Systems with extensive routing tables                         |
 |                                          |               | can suffer from high CPU usage.                                            |
