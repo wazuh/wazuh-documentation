@@ -1,7 +1,13 @@
-<svg id="wazuh-icons-sprite" width="" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" xml:space="preserve">
+<svg id="wazuh-icons-sprite" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.or256BD1g/1999/xlink" xml:space="preserve">
   <style type="text/css">
+    .st0-lt{stroke-width:.7;fill:none;stroke:#000000;stroke-miterlimit:10;}
+    .st0-dt{stroke-width:.7;fill:none;stroke:#ffffff;stroke-miterlimit:10;}
+    .st1-lt{stroke-width:.2;fill:#256BD1;stroke:#256BD1;stroke-miterlimit:10;}
+    .st1-dt{stroke-width:.2;fill:#499CFE;stroke:#499CFE;stroke-miterlimit:10;}
     .st3-lt{stroke-width:2;fill-rule:evenodd;clip-rule:evenodd;fill:none;stroke:#256BD1;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:10;}
     .st3-dt{stroke-width:2;fill-rule:evenodd;clip-rule:evenodd;fill:none;stroke:#499CFE;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:10;}
+    .st4-lt{stroke-width:.7;fill:none;stroke:#256BD1;stroke-miterlimit:10;}
+    .st4-dt{stroke-width:.7;fill:none;stroke:#499CFE;stroke-miterlimit:10;}
     .st6-lt{stroke-width:2;fill:none;stroke:#256BD1;stroke-miterlimit:10;}
     .st6-dt{stroke-width:2;fill:none;stroke:#499CFE;stroke-miterlimit:10;}
     .st7-lt{stroke-width:1;fill:#050505;stroke:#050505}
@@ -69,6 +75,9 @@
   <view id="development-dt" viewBox="3090 255 200 200"/>
   <view id="learning-lt" viewBox="3280 25 200 200"/>
   <view id="learning-dt" viewBox="3280 245 200 200"/>
+  <view id="integrations-guide-lt" viewBox="3470 0 70 70"/>
+  <view id="integrations-guide-dt" viewBox="3470 220 70 70"/>
+
   <g>
     <path class="st18-lt" d="M35.908,77.821c0,0.03,0.002,0.059,0.002,0.088h-0.002v108.796l64.679-27.351l63.545,27.351V77.909h-0.002
       c0-0.03,0.002-0.059,0.002-0.088"/>
@@ -777,5 +786,25 @@
       c-0.116,0.335-0.254,0.664-0.394,0.993c-0.081,0.19-0.161,0.38-0.236,0.572c-0.157,0.401-0.167,0.645-0.125,0.738
       c0.018,0.04,0.142,0.253,0.816,0.501l0.63,0.229c1.539,0.559,3.131,1.137,4.532,2.088c3.719,2.526,5.781,6.89,5.518,11.671
       c-0.265,4.814-2.812,8.953-6.813,11.07c-0.834,0.441-0.839,0.646-0.844,0.843C149.974,107.54,149.969,107.737,150.765,108.166z"/>
+  </g>
+  <g transform="translate(3485, 5)">
+	  <path class="st0-lt" d="M1.28,47.47v5.97c0,4.28,3.38,7.75,7.55,7.75H44.2v-9.81v-3.9V11.89l-4.94-9.67"/>
+		<path class="st1-lt" d="M37.62,1.24c0.78,0,1.41,0.63,1.41,1.41v44.83H1.48V7.51c0-3.46,2.81-6.27,6.27-6.27H37.62 M37.62,0.74H7.75
+			c-3.74,0-6.77,3.03-6.77,6.77v40.48h38.56V2.65C39.53,1.6,38.68,0.74,37.62,0.74L37.62,0.74z"/>
+	  <line class="st0-lt" x1="8.68" y1="52.67" x2="38.61" y2="52.67"/>
+		<line class="st4-lt" x1="26.89" y1="18.92" x2="13.62" y2="18.92"/>
+		<polyline class="st4-lt" points="23.05,15.84 26.89,18.92 23.1,21.8"/>
+		<line class="st0-lt" x1="13.62" y1="28.08" x2="26.89" y2="28.08"/>
+		<polyline class="st0-lt" points="17.46,31.16 13.62,28.08 17.41,25.2"/>
+  </g>
+  <g transform="translate(3485, 225)">
+  <path class="st0-dt" d="M1.28,47.47v5.97c0,4.28,3.38,7.75,7.55,7.75H44.2v-9.81v-3.9V11.89l-4.94-9.67"/>
+		<path class="st1-dt" d="M37.62,1.24c0.78,0,1.41,0.63,1.41,1.41v44.83H1.48V7.51c0-3.46,2.81-6.27,6.27-6.27H37.62 M37.62,0.74H7.75
+			c-3.74,0-6.77,3.03-6.77,6.77v40.48h38.56V2.65C39.53,1.6,38.68,0.74,37.62,0.74L37.62,0.74z"/>
+	  <line class="st0-dt" x1="8.68" y1="52.67" x2="38.61" y2="52.67"/>
+		<line class="st4-dt" x1="26.89" y1="18.92" x2="13.62" y2="18.92"/>
+		<polyline class="st4-dt" points="23.05,15.84 26.89,18.92 23.1,21.8"/>
+		<line class="st0-dt" x1="13.62" y1="28.08" x2="26.89" y2="28.08"/>
+		<polyline class="st0-dt" points="17.46,31.16 13.62,28.08 17.41,25.2"/>
   </g>
 </svg>
