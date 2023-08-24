@@ -172,8 +172,6 @@ The attributes below are optional.
 |             |                                       |              |               |
 |             | Positive number followed by B, KB, MB |              |               |
 |             | and GB units are supported            |              |               |
-|             |                                       |              |               |
-|             | .. versionadded:: 4.2.0               |              |               |
 +-------------+---------------------------------------+--------------+---------------+
 
 .. warning::
@@ -182,6 +180,7 @@ The attributes below are optional.
 .. note::
   If the log rotates while ``wazuh-logcollector`` is stopped and ``only-future-events`` is set to ``no``, it will start reading from the beginning of the log.
 
+.. _query:
 
 query
 ^^^^^
@@ -301,6 +300,8 @@ Target specifies the name of the socket where the output will be redirected. The
 | **Allowed values** | any defined socket             |
 +--------------------+--------------------------------+
 
+.. _log_format:
+
 log_format
 ^^^^^^^^^^
 
@@ -333,8 +334,6 @@ Set the format of the log to be read. **field is required**
 |                    |                    |                                                                                                  |
 |                    |                    | Monitors all the logs that match the query filter.                                               |
 |                    |                    | See :ref:`How to collect macOS ULS logs <how-to-collect-macoslogs>`.                             |
-|                    |                    |                                                                                                  |
-|                    |                    | .. versionadded:: 4.3.0                                                                          |
 +                    +--------------------+--------------------------------------------------------------------------------------------------+
 |                    | audit              | Used for events from Auditd.                                                                     |
 |                    |                    |                                                                                                  |
@@ -373,8 +372,6 @@ Set the format of the log to be read. **field is required**
 |                    | multi-line-regex   | Used to monitor applications that log variable amount lines with variable length per event.      |
 |                    |                    |                                                                                                  |
 |                    |                    | The behavior depends on `multiline_regex`_ option.                                               |
-|                    |                    |                                                                                                  |
-|                    |                    | .. versionadded:: 4.2.0                                                                          |
 +--------------------+--------------------+--------------------------------------------------------------------------------------------------+
 
 .. warning::
@@ -532,7 +529,6 @@ Defines the interval of reconnection attempts when the Windows Event Channel ser
 
 multiline_regex
 ^^^^^^^^^^^^^^^
-.. versionadded:: 4.2.0
 
 This specifies a regular expression, match criteria and replace option for logs with a variable amount of lines.
 
