@@ -8,8 +8,6 @@
 wazuh-analysisd
 ===============
 
-.. versionadded:: 4.2
-
 The ``wazuh-analysisd`` program receives the log messages and compares them to the rules. It then creates an alert when a log message matches an applicable rule.
 
 +-----------------+-------------------------------------------------------------------------------------------------+
