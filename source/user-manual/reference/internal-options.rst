@@ -586,12 +586,13 @@ Logcollector
 +                                          +---------------+----------------------------------------------------------------------------+
 |                                          | Default value | 60                                                                         |
 +                                          +---------------+----------------------------------------------------------------------------+
-|                                          | Allowed values| 0: The agent will never try to collect the host's IP (disable feature).    |
+|                                          | Allowed values| 0: Disable. Host IP address collection is disabled. The agent doesn't      |
+|                                          |               | periodically obtain the  system IP address.                                |
++                                          +               +----------------------------------------------------------------------------+
+|                                          |               | Any other integer between 1 and 3600.                                      |
 |                                          |               |                                                                            |
 |                                          |               | **Warning:** Systems with extensive routing tables                         |
 |                                          |               | can suffer from high CPU usage.                                            |
-+                                          +               +----------------------------------------------------------------------------+
-|                                          |               | Any other integer between 1 and 3600.                                      |
 +------------------------------------------+---------------+----------------------------------------------------------------------------+
 
 Maild
