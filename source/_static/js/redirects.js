@@ -89,11 +89,12 @@ redirections.push(
 /* Pages added in 4.5 */
 
 newUrls['4.5'] = [
+  '/release-notes/release-4-5-0.html',
+  '/release-notes/release-4-5-1.html',
   '/integrations-guide/index.html',
   '/integrations-guide/elastic-stack/index.html',
   '/integrations-guide/opensearch/index.html',
   '/integrations-guide/splunk/index.html',
-  '/release-notes/release-4-5-0.html',
   '/user-manual/capabilities/log-data-collection/configuration.html', 
   '/user-manual/capabilities/log-data-collection/log-data-analysis.html',
   '/user-manual/capabilities/log-data-collection/monitoring-log-files.html',
