@@ -8,8 +8,6 @@
 wazuh-logtest
 =============
 
-.. versionadded:: 4.1.0
-
 `wazuh-logtest` tool allows the testing and verification of rules against provided log examples inside a sandbox in `wazuh-analysisd`. Helpful when writing and debugging custom rules and decoders, troubleshooting false positives and negatives.
 
 +-------------------------------------------+--------------------------------------------------------------------------------+

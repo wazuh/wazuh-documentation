@@ -93,7 +93,7 @@ The ``sys_osinfo`` system table in the inventory database stores information abo
 Packages
 --------
 
-The ``sys_programs`` table in the inventory database stores information about the currently installed software on an endpoint. The Vulnerability Detector module uses information from this table to scan and detect vulnerable software. On Linux systems, retrieved packages are *deb, pacman, rpm, and snap*. The table below describes the fields in the database.
+The ``sys_programs`` table in the inventory database stores information about the currently installed software on an endpoint. The Vulnerability Detector module uses information from this table to scan and detect vulnerable software. On Linux systems, the Syscollector module retrieves *deb, rpm, pacman, npm, and pypi* packages. The table below describes the fields in the database.
 
 +------------------+-------------------------------------------+-------------------------------------------+----------------------------------------------+
 | Field            | Description                               | Example                                   | Available                                    |

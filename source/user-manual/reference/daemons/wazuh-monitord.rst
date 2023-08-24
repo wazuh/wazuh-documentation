@@ -8,8 +8,6 @@
 wazuh-monitord
 ==============
 
-.. versionadded:: 4.2
-
 The wazuh-monitord program monitors agent connectivity. In addition, it rotates and compresses internal logs daily or when they reach a certain configurable size.
 
 +-----------------+-------------------------------------------------------------------------------------------------+

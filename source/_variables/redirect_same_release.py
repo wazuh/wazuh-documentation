@@ -43,19 +43,33 @@ redirectSameRelease = {
     },
   '4.3': {
    '/user-manual/wazuh-dashboard/single-sign-on/index.html':
-     '/user-manual/user-administration/single-sign-on/index.html', 
+     '/user-manual/user-administration/single-sign-on/index.html',
    '/user-manual/wazuh-dashboard/single-sign-on/okta.html':
-     '/user-manual/user-administration/single-sign-on/okta.html',
+     '/user-manual/user-administration/single-sign-on/administrator/okta.html',
    '/user-manual/wazuh-dashboard/single-sign-on/azure-active-directory.html':
-     '/user-manual/user-administration/single-sign-on/azure-active-directory.html',
+     '/user-manual/user-administration/single-sign-on/administrator/azure-active-directory.html',
    '/user-manual/wazuh-dashboard/single-sign-on/pingone.html':
-     '/user-manual/user-administration/single-sign-on/pingone.html', 
+     '/user-manual/user-administration/single-sign-on/administrator/pingone.html',
    '/user-manual/wazuh-dashboard/single-sign-on/google.html':
-     '/user-manual/user-administration/single-sign-on/google.html',
+     '/user-manual/user-administration/single-sign-on/administrator/google.html',
    '/user-manual/wazuh-dashboard/single-sign-on/jumpcloud.html':
-     '/user-manual/user-administration/single-sign-on/jumpcloud.html',
+     '/user-manual/user-administration/single-sign-on/administrator/jumpcloud.html',
    '/user-manual/wazuh-dashboard/single-sign-on/onelogin.html':
-     '/user-manual/user-administration/single-sign-on/onelogin.html',     
+     '/user-manual/user-administration/single-sign-on/administrator/onelogin.html',
+   '/user-manual/user-administration/single-sign-on/okta.html':
+     '/user-manual/user-administration/single-sign-on/administrator/okta.html',
+   '/user-manual/user-administration/single-sign-on/azure-active-directory.html':
+     '/user-manual/user-administration/single-sign-on/administrator/azure-active-directory.html',
+   '/user-manual/user-administration/single-sign-on/pingone.html':
+     '/user-manual/user-administration/single-sign-on/administrator/pingone.html',
+   '/user-manual/user-administration/single-sign-on/google.html':
+     '/user-manual/user-administration/single-sign-on/administrator/google.html',
+   '/user-manual/user-administration/single-sign-on/jumpcloud.html':
+     '/user-manual/user-administration/single-sign-on/administrator/jumpcloud.html',
+   '/user-manual/user-administration/single-sign-on/onelogin.html':
+     '/user-manual/user-administration/single-sign-on/administrator/onelogin.html',
+   '/user-manual/user-administration/single-sign-on/keycloak.html':
+     '/user-manual/user-administration/single-sign-on/administrator/keycloak.html',
    '/user-manual/securing-wazuh/index.html':
      '/user-manual/user-administration/password-management.html',
    '/user-manual/securing-wazuh/wazuh-indexer.html':

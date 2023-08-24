@@ -8,8 +8,6 @@
 wazuh-dbd
 =============
 
-.. versionadded:: 4.2
-
 The ``wazuh-dbd`` program inserts the alert logs into a database.  These alerts can be inserted into either postgresql or mysql.
 
 +-----------------+-------------------------------------------------------------------------------------------------+

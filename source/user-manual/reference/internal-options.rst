@@ -568,8 +568,6 @@ Logcollector
 |                                          | Allowed value | Any integer between 1 and 172800                                           |
 +------------------------------------------+---------------+----------------------------------------------------------------------------+
 | **logcollector.state_interval**          | Description   | Statistics generation interval, in seconds                                 |
-|                                          |               |                                                                            |
-|                                          |               | .. versionadded:: 4.2                                                      |
 +                                          +---------------+----------------------------------------------------------------------------+
 |                                          | Default value | 60                                                                         |
 +                                          +---------------+----------------------------------------------------------------------------+
@@ -581,8 +579,6 @@ Logcollector
 | **logcollector.ip_update_interval**      | Description   | IP update interval, in seconds. This specifies how often the system        |
 |                                          |               | IP is obtained when the                                                    |
 |                                          |               | :ref:`out_format<ossec_localfile_out_format>` option is used.              |
-|                                          |               |                                                                            |
-|                                          |               | .. versionadded:: 4.3                                                      |
 +                                          +---------------+----------------------------------------------------------------------------+
 |                                          | Default value | 60                                                                         |
 +                                          +---------------+----------------------------------------------------------------------------+
@@ -850,8 +846,6 @@ Remoted
 +-----------------------------------+---------------+--------------------------------------------------------------+
 | **remoted.send_chunk**            | Description   | | Send buffer size for TCP (bytes).                          |
 |                                   |               | | Amount of data that Remoted can send per operation.        |
-|                                   |               |                                                              |
-|                                   |               | .. versionadded:: 4.3.0                                      |
 +                                   +---------------+--------------------------------------------------------------+
 |                                   | Default value | 4096                                                         |
 +                                   +---------------+--------------------------------------------------------------+
@@ -861,8 +855,6 @@ Remoted
 | **remoted.send_buffer_size**      | Description   | | Send queue size for TCP (bytes).                           |
 |                                   |               | | Amount of data that Remoted can queue to send              |
 |                                   |               | | (one queue per agent).                                     |
-|                                   |               |                                                              |
-|                                   |               | .. versionadded:: 4.3.0                                      |
 +                                   +---------------+--------------------------------------------------------------+
 |                                   | Default value | 131072                                                       |
 +                                   +---------------+--------------------------------------------------------------+
@@ -871,8 +863,6 @@ Remoted
 +-----------------------------------+---------------+--------------------------------------------------------------+
 | **remoted.send_timeout_to_retry** | Description   | | Maximum number of seconds to wait before retrying to       |
 |                                   |               | | queue a packet to send in TCP.                             |
-|                                   |               |                                                              |
-|                                   |               | .. versionadded:: 4.3.0                                      |
 +                                   +---------------+--------------------------------------------------------------+
 |                                   | Default value | 1                                                            |
 +                                   +---------------+--------------------------------------------------------------+
