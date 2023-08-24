@@ -61,11 +61,55 @@ removedUrls['x.y'] = [
 
 /* *** RELEASE 4.5 ****/
 
-/* Pages added in x.y */
+/* Redirections from 4.4 to 4.5  */
+
+redirections.push(
+  {
+    'target': ['4.4=>4.5'],
+    '4.4': '/user-manual/capabilities/log-data-collection/how-to-collect-macoslogs.html',
+    '4.5': '/user-manual/capabilities/log-data-collection/configuration.html#macos',
+  },
+  {
+    'target': ['4.4=>4.5'],
+    '4.4': '/user-manual/capabilities/log-data-collection/how-to-collect-wlogs.html',
+    '4.5': '/user-manual/capabilities/log-data-collection/configuration.html#windows',
+  },
+  {
+    'target': ['4.4=>4.5'],
+    '4.4': '/user-manual/capabilities/log-data-collection/log-data-faq.html',
+    '4.5': '/user-manual/capabilities/log-data-collection/index.html',
+  },
+  {
+    'target': ['4.4=>4.5'],
+    '4.4': '/user-manual/capabilities/log-data-collection/log-data-configuration.html',
+    '4.5': '/user-manual/capabilities/log-data-collection/monitoring-log-files.html',
+  },
+);
+
+/* Pages added in 4.5 */
 
 newUrls['4.5'] = [
-  '/release-notes/release-4-5-1.html',
   '/release-notes/release-4-5-0.html',
+  '/release-notes/release-4-5-1.html',
+  '/integrations-guide/index.html',
+  '/integrations-guide/elastic-stack/index.html',
+  '/integrations-guide/opensearch/index.html',
+  '/integrations-guide/splunk/index.html',
+  '/user-manual/capabilities/log-data-collection/configuration.html', 
+  '/user-manual/capabilities/log-data-collection/log-data-analysis.html',
+  '/user-manual/capabilities/log-data-collection/monitoring-log-files.html',
+  '/user-manual/capabilities/log-data-collection/multiple-socket-outputs.html',
+  '/user-manual/capabilities/log-data-collection/syslog.html',
+  '/user-manual/capabilities/log-data-collection/use-cases.html',
+];
+
+/* Pages no longer available in 4.5 */
+
+removedUrls['4.5'] = [
+  '/user-manual/capabilities/log-data-collection/how-to-collect-macoslogs.html',
+  '/user-manual/capabilities/log-data-collection/how-to-collect-wlogs.html',
+  '/user-manual/capabilities/log-data-collection/log-data-faq.html',
+  '/user-manual/capabilities/log-data-collection/log-data-configuration.html',
 ];
 
 /* *** RELEASE 4.4 ****/

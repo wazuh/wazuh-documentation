@@ -51,8 +51,6 @@ Toggles the execution of the Auth daemon on or off.
 remote_enrollment
 ^^^^^^^^^^^^^^^^^
 
-.. versionadded:: 4.2.0
-
 Allow listening for new agents on TLS port (1515 by default).
 
 +--------------------+---------------------+
@@ -100,8 +98,6 @@ Toggles the use of the client's source IP address or the use of "any" to add an 
 
 force
 ^^^^^
-
-.. versionadded:: 4.3.0
 
 The agent replacement options are configured inside this tag. All conditions must be satisfied to perform the replacement.
 

@@ -119,8 +119,6 @@ This is to be set on the system to be monitored (or in the ``agent.conf``, if ap
 
 There is a limit of 64 directories, comma-separated, that can be written in one line .
 
-.. versionadded:: 4.3.0
-
 Wildcard characters (``?`` and ``*``) can be used to monitor paths that fulfill the given pattern.
 These wildcards will be reloaded every time a scheduled scan is run.
 
@@ -128,8 +126,6 @@ These wildcards will be reloaded every time a scheduled scan is run.
 | **Default value**  | /etc,/usr/bin,/usr/sbin,/bin,/sbin |
 +--------------------+------------------------------------+
 | **Allowed values** | Any directory                      |
-+                    +                                    +
-|                    | .. versionadded:: 4.0              |
 +                    +                                    +
 |                    | Any environment variable           |
 +--------------------+------------------------------------+
@@ -160,8 +156,6 @@ Attributes:
 | **diff_size_limit**      | Limit the maximum size of the file which will report diff information with ``report_changes`` enabled.                |
 +                          +                                                                                                                       +
 |                          | Files bigger than this value will not report diff information.                                                        |
-+                          +                                                                                                                       +
-|                          | .. versionadded:: 4.0.0                                                                                               |
 +                          +------------------------------------------------------------+----------------------------------------------------------+
 |                          | Default value                                              | 50MB                                                     |
 +                          +------------------------------------------------------------+----------------------------------------------------------+
@@ -294,8 +288,6 @@ The configuration above, set the option ``check_sha256`` to ``YES``.
 
 Nevertheless, the second one disables the SHA-256 hash check.
 
-.. versionadded:: 4.3.0
-
 If there is a conflict between a block with wildcards and another without them, the block without wildcards will be used for the specific case. As an example:
 
 .. code-block:: xml
@@ -403,8 +395,6 @@ Example:
 
 max_files_per_second
 --------------------
-
-.. versionadded:: 4.2.0
 
 Sets the maximum number of files scanned per second. If this option is set to 0, there will be no limit on the number of files scanned per second.
 
@@ -716,8 +706,6 @@ Specifies whether there will be periodic inventory synchronizations or not.
 
 **registry_enabled**
 
-.. versionadded:: 4.1.0
-
 On Windows agents, enables inventory synchronizations for registry entries. If ``enabled`` is set to no,
 this parameter is ignored.
 
@@ -785,8 +773,6 @@ Sets the maximum synchronization message throughput.
 diff
 ----
 
-.. versionadded:: 4.0
-
 The diff settings will be configured inside this tag.
 
 .. code-block:: xml
@@ -807,13 +793,9 @@ The diff settings will be configured inside this tag.
 disk_quota
 """"""""""
 
-.. versionadded:: 4.0
-
 This option can be used to limit the size of the ``queue/diff/local`` folder where Wazuh stores the compressed files used to perform the diff operation when ``report_changes`` is enabled. After reaching this size, alerts will not show the diff information until the size is smaller than the configured limit.
 
 **enabled**
-
-.. versionadded:: 4.0
 
 Set the disk quota limit option to enabled or disabled.
 
@@ -824,8 +806,6 @@ Set the disk quota limit option to enabled or disabled.
 +--------------------+---------------------------------------+
 
 **limit**
-
-.. versionadded:: 4.0
 
 Specifies the limit for the size of the ``queue/diff/local`` folder.
 
@@ -838,13 +818,9 @@ Specifies the limit for the size of the ``queue/diff/local`` folder.
 file_size
 """""""""
 
-.. versionadded:: 4.0
-
 This option can be used to limit the size of the file which will report diff information with ``report_changes`` enabled. Files bigger than this limit will not report diff information until the size is smaller than the configured limit again.
 
 **enabled**
-
-.. versionadded:: 4.0
 
 Set the size limit of a file to enabled or disabled.
 
@@ -855,8 +831,6 @@ Set the size limit of a file to enabled or disabled.
 +--------------------+---------------------------------------+
 
 **limit**
-
-.. versionadded:: 4.0
 
 Specifies the limit for the size of files monitored with ``report_changes``.
 
@@ -1015,8 +989,6 @@ Attributes:
 | **report_changes**       | Report registry value changes. This is limited to REG_SZ, REG_MULTI_SZ, REG_DWORD, REG_DWORD_BIG_ENDIAN,              |
 +                          +                                                                                                                       +
 |                          | REG_QWORD value.                                                                                                      |
-+                          +                                                                                                                       +
-|                          | .. versionadded:: 4.1.0                                                                                               |
 +                          +------------------------------------------------------------+----------------------------------------------------------+
 |                          | Default value                                              | no                                                       |
 +                          +------------------------------------------------------------+----------------------------------------------------------+
@@ -1025,16 +997,12 @@ Attributes:
 | **diff_size_limit**      | Limit the maximum size of the value which will report diff information with ``report_changes`` enabled.               |
 +                          +                                                                                                                       +
 |                          | Values bigger than this size will not report diff information.                                                        |
-+                          +                                                                                                                       +
-|                          | .. versionadded:: 4.1.0                                                                                               |
 +                          +------------------------------------------------------------+----------------------------------------------------------+
 |                          | Default value                                              | 50MB                                                     |
 +                          +------------------------------------------------------------+----------------------------------------------------------+
 |                          | Allowed values                                             | Any positive number followed by KB/MB/GB                 |
 +--------------------------+------------------------------------------------------------+----------------------------------------------------------+
 | **check_all**            | It modifies the value of all attributes with the prefix ``check_``.                                                   |
-+                          +                                                                                                                       +
-|                          | .. versionadded:: 4.1.0                                                                                               |
 +                          +------------------------------------------------------------+----------------------------------------------------------+
 |                          | Default value                                              | yes                                                      |
 +                          +------------------------------------------------------------+----------------------------------------------------------+
@@ -1043,48 +1011,36 @@ Attributes:
 | **check_sum**            | Check the MD5, SHA-1 and SHA-256 hashes of the registry.                                                              |
 +                          +                                                                                                                       +
 |                          | Same as using ``check_md5sum="yes"``, ``check_sha1sum="yes"`` and ``check_sha256sum="yes"`` at the same time.         |
-+                          +                                                                                                                       +
-|                          | .. versionadded:: 4.1.0                                                                                               |
 +                          +------------------------------------------------------------+----------------------------------------------------------+
 |                          | Default value                                              | yes                                                      |
 +                          +------------------------------------------------------------+----------------------------------------------------------+
 |                          | Allowed values                                             | yes, no                                                  |
 +--------------------------+------------------------------------------------------------+----------------------------------------------------------+
 | **check_sha1sum**        | Check only the SHA-1 hash of the registries.                                                                          |
-+                          +                                                                                                                       +
-|                          | .. versionadded:: 4.1.0                                                                                               |
 +                          +------------------------------------------------------------+----------------------------------------------------------+
 |                          | Default value                                              | yes                                                      |
 +                          +------------------------------------------------------------+----------------------------------------------------------+
 |                          | Allowed values                                             | yes, no                                                  |
 +--------------------------+------------------------------------------------------------+----------------------------------------------------------+
 | **check_md5sum**         | Check only the MD5 hash of the registries.                                                                            |
-+                          +                                                                                                                       +
-|                          | .. versionadded:: 4.1.0                                                                                               |
 +                          +------------------------------------------------------------+----------------------------------------------------------+
 |                          | Default value                                              | yes                                                      |
 +                          +------------------------------------------------------------+----------------------------------------------------------+
 |                          | Allowed values                                             | yes, no                                                  |
 +--------------------------+------------------------------------------------------------+----------------------------------------------------------+
 | **check_sha256sum**      | Check only the SHA-256 hash of the registries.                                                                        |
-+                          +                                                                                                                       +
-|                          | .. versionadded:: 4.1.0                                                                                               |
 +                          +------------------------------------------------------------+----------------------------------------------------------+
 |                          | Default value                                              | yes                                                      |
 +                          +------------------------------------------------------------+----------------------------------------------------------+
 |                          | Allowed values                                             | yes, no                                                  |
 +--------------------------+------------------------------------------------------------+----------------------------------------------------------+
 | **check_size**           | Check the size of the registries.                                                                                     |
-+                          +                                                                                                                       +
-|                          | .. versionadded:: 4.1.0                                                                                               |
 +                          +------------------------------------------------------------+----------------------------------------------------------+
 |                          | Default value                                              | yes                                                      |
 +                          +------------------------------------------------------------+----------------------------------------------------------+
 |                          | Allowed values                                             | yes, no                                                  |
 +--------------------------+------------------------------------------------------------+----------------------------------------------------------+
 | **check_owner**          | Check the owner of the registries.                                                                                    |
-+                          +                                                                                                                       +
-|                          | .. versionadded:: 4.1.0                                                                                               |
 +                          +------------------------------------------------------------+----------------------------------------------------------+
 |                          | Default value                                              | yes                                                      |
 +                          +------------------------------------------------------------+----------------------------------------------------------+
@@ -1093,8 +1049,6 @@ Attributes:
 | **check_group**          | Check the group owner of the registries.                                                                              |
 +                          +                                                                                                                       +
 |                          | Just gid will be checked, group name will be blank.                                                                   |
-+                          +                                                                                                                       +
-|                          | .. versionadded:: 4.1.0                                                                                               |
 +                          +------------------------------------------------------------+----------------------------------------------------------+
 |                          | Default value                                              | yes                                                      |
 +                          +------------------------------------------------------------+----------------------------------------------------------+
@@ -1103,16 +1057,12 @@ Attributes:
 | **check_perm**           | Check the permission of the registries.                                                                               |
 +                          +                                                                                                                       +
 |                          | A list of denied and allowed permissions will be given for each user or group.                                        |
-+                          +                                                                                                                       +
-|                          | .. versionadded:: 4.1.0                                                                                               |
 +                          +------------------------------------------------------------+----------------------------------------------------------+
 |                          | Default value                                              | yes                                                      |
 +                          +------------------------------------------------------------+----------------------------------------------------------+
 |                          | Allowed values                                             | yes, no                                                  |
 +--------------------------+------------------------------------------------------------+----------------------------------------------------------+
 | **check_mtime**          | Check the modification time of a registry.                                                                            |
-+                          +                                                                                                                       +
-|                          | .. versionadded:: 4.1.0                                                                                               |
 +                          +------------------------------------------------------------+----------------------------------------------------------+
 |                          | Default value                                              | yes                                                      |
 +                          +------------------------------------------------------------+----------------------------------------------------------+
@@ -1123,8 +1073,6 @@ Attributes:
 |                          | This is limited to REG_NONE, REG_SZ, REG_EXPAND_SZ, REG_BINARY, REG_DWORD, REG_DWORD_BIG_ENDIAN, REG_LINK,            |
 +                          +                                                                                                                       +
 |                          | REG_MULTI_SZ, REG_RESOURCE_LIST, REG_FULL_RESOURCE_DESCRIPTOR, REG_RESOURCE_REQUIREMENTS_LIST, REG_QWORD.             |
-+                          +                                                                                                                       +
-|                          | .. versionadded:: 4.1.0                                                                                               |
 +                          +------------------------------------------------------------+----------------------------------------------------------+
 |                          | Default value                                              | yes                                                      |
 +                          +------------------------------------------------------------+----------------------------------------------------------+
@@ -1133,8 +1081,6 @@ Attributes:
 | **restrict_key**         | Limit checks to registries containing the entered sregex in the registry name.                                        |
 +                          +                                                                                                                       +
 |                          | Any registry is allowed.                                                                                              |
-+                          +                                                                                                                       +
-|                          | .. versionadded:: 4.1.0                                                                                               |
 +                          +------------------------------------------------------------+----------------------------------------------------------+
 |                          | Default value                                              | N/A                                                      |
 +                          +------------------------------------------------------------+----------------------------------------------------------+
@@ -1143,16 +1089,12 @@ Attributes:
 | **restrict_value**       | Limit checks to registry values containing the entered sregex in the value name.                                      |
 +                          +                                                                                                                       +
 |                          | Any registry value is allowed.                                                                                        |
-+                          +                                                                                                                       +
-|                          | .. versionadded:: 4.1.0                                                                                               |
 +                          +------------------------------------------------------------+----------------------------------------------------------+
 |                          | Default value                                              | N/A                                                      |
 +                          +------------------------------------------------------------+----------------------------------------------------------+
 |                          | Allowed value                                              | sregex                                                   |
 +--------------------------+------------------------------------------------------------+----------------------------------------------------------+
 | **recursion_level**      | Limits the maximum level of recursion allowed.                                                                        |
-+                          +                                                                                                                       +
-|                          | .. versionadded:: 4.1.0                                                                                               |
 +                          +------------------------------------------------------------+----------------------------------------------------------+
 |                          | Default value                                              | 512                                                      |
 +                          +------------------------------------------------------------+----------------------------------------------------------+

@@ -8,8 +8,6 @@
 wazuh-reportd
 ==============
 
-.. versionadded:: 4.2
-
 The wazuh-reportd program creates reports from Wazuh alerts. It accepts alerts on ``stdin`` and outputs a report on ``stderr``.
 
 .. note::
