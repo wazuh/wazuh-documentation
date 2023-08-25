@@ -294,6 +294,10 @@ jsonout_output
 
 This toggles the writing of JSON-formatted alerts to ``/var/ossec/logs/alerts/alerts.json`` which would include the same events that would be sent to alerts.log, only in JSON format.
 
+.. warning::
+
+   Disabling ``jsonout_output`` disrupts indexing of alerts. The Wazuh indexer relies on reading the alerts from the ``alerts.json`` file.
+
 +--------------------+---------+
 | **Default value**  | yes     |
 +--------------------+---------+
