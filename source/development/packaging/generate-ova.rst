@@ -16,7 +16,7 @@ Requirements
 -  `Git <https://git-scm.com/book/en/v2/Getting-Started-Installing-Git>`__
 -  `Python <https://www.python.org/download/releases/2.7/>`__
 
-We recommend using a system with at least the following specifications.
+We recommend using a system with at least the following hardware specifications:
 
 -  8 GB RAM
 -  4 cores CPU
