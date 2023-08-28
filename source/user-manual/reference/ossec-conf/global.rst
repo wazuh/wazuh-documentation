@@ -294,6 +294,10 @@ jsonout_output
 
 This toggles the writing of JSON-formatted alerts to ``/var/ossec/logs/alerts/alerts.json`` which would include the same events that would be sent to alerts.log, only in JSON format.
 
+.. warning::
+
+   Disabling ``jsonout_output`` disrupts the alerts indexing process. In a default installation, Filebeat reads the ``alerts.json`` file and sends this information to the Wazuh indexer. If the writing to this file stops, alerts are no longer indexed.
+
 +--------------------+---------+
 | **Default value**  | yes     |
 +--------------------+---------+
