@@ -6,7 +6,7 @@
 Virtual machine
 ===============
 
-We provide an automated way of generating a virtual machine (VM). The ``generate_ova.sh`` script creates a VM in OVA format. The generated VM is ready to run the Wazuh central components.
+We provide an automated way of generating a virtual machine (VM). The ``generate_ova.sh`` script orchestrates the creation of a VM in OVA format. The generated VM is ready to run the Wazuh central components.
 
 Requirements
 ------------
@@ -18,8 +18,11 @@ Requirements
 
 We recommend using a system with at least the following hardware specifications:
 
--  8 GB RAM
--  4 cores CPU
++----------------+--------------+
+|   CPU (cores)  |   RAM (GB)   |
++================+==============+
+|       4        |      8       |
++----------------+--------------+
 
 Creating the Wazuh VM
 ---------------------
@@ -34,35 +37,23 @@ To create the virtual machine follow these steps:
 
 #. Execute the ``generate_ova.sh`` script.
 
-   -  Using production packages.
+   .. code-block:: console
 
-      .. code-block:: console
+      $ ./generate_ova.sh
 
-         $ ./generate_ova.sh
-
-   -  Using development packages.
-
-      .. code-block:: console
-
-         $ ./generate_ova.sh -r dev
-
-   These alternative commands above build a Wazuh VM with Wazuh central components. Check all available options by running the following command.
+The last command above builds a VM with Wazuh central components. It uses production packages by default. If you're building a pre-release version, you must select the development packages instead.
 
    .. code-block:: console
 
-      $ ./generate_ova.sh -h
+      $ ./generate_ova.sh -r dev
 
-   .. code-block:: none
-      :class: output
+The ``-r`` or ``--repository`` option selects the stage to use for the packages. For example:
 
-      General usage: generate_ova.sh [OPTIONS]
-        -r,    --repository       [Optional] Select the software repository [prod/dev]. By default: prod
-        -s,    --store <path>     [Optional] Set the destination absolute path where the OVA file will be stored.
-        -c,    --checksum         [Optional] Generate checksum [yes/no]. By default: no
-        -g,    --debug            [Optional] Set debug mode on [yes/no]. By default: no
-        -h,    --help             [  Util  ] Show this help.
-    
-   The ``-r`` or ``--repository`` option selects the stage to use for the packages. Depending on this parameter, the script generates the OVA file using Wazuh packages in this way:
+-  ``prod``: Packages released for production environments.
+-  ``dev``: Pre-release packages for testing and development purposes.
 
-   -  ``prod``: Packages released for production environments.
-   -  ``dev``: Pre-release packages for testing and development purposes.
+Check all available options by running the following command.
+
+.. code-block:: console
+
+   $ ./generate_ova.sh -h
