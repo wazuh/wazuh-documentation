@@ -625,4 +625,4 @@ Next steps
 
 Once the Wazuh environment is ready, Wazuh agents can be installed on every endpoint to be monitored. To install the Wazuh agents and start monitoring the endpoints, see the :doc:`Wazuh agent </installation-guide/wazuh-agent/index>` installation section. If you need to install them offline, you can check the appropriate agent package to download for your monitored system in the :ref:`Wazuh agent packages list <Wazuh_manager_agent_packages_list>` section.
 
-To uninstall all the Wazuh central components, see the :doc:`/user-manual/uninstall/central-components` section.
+To uninstall all the Wazuh central components, see the :doc:`/user-manual/uninstall/index` section.
