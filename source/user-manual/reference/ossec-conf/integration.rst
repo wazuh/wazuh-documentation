@@ -199,5 +199,5 @@ Configuration example
     <group>multiple_drops,authentication_failures</group>
     <api_key>APIKEY</api_key> <!-- Replace with your external service API key -->
     <alert_format>json</alert_format>
-    <options>JSON</options> <!-- Replace with your custom JSON object -->
+    <options>{"data": "Custom data"}</options> <!-- Replace with your custom JSON object -->
   </integration>
