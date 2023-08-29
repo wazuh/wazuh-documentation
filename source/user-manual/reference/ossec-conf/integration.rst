@@ -163,14 +163,14 @@ Configuration example
     <level>10</level>
     <group>multiple_drops,authentication_failures</group>
     <alert_format>json</alert_format>
-    <options>JSON</options> <!-- Replace with your custom JSON object -->
+    <options>{"pretext": "Custom Title"}</options> <!-- Replace with your custom JSON object -->
   </integration>
 
   <!-- Integration with PagerDuty -->
   <integration>
     <name>pagerduty</name>
     <api_key>API_KEY</api_key> <!-- Replace with your PagerDuty API key -->
-    <options>JSON</options> <!-- Replace with your custom JSON object -->
+    <options>{"pretext": "Custom title"}</options> <!-- Replace with your custom JSON object -->
     <alert_format>json</alert_format> <!-- With the new script this is mandatory -->
   </integration>
 
@@ -180,7 +180,6 @@ Configuration example
     <api_key>API_KEY</api_key> <!-- Replace with your VirusTotal API key -->
     <group>syscheck</group>
     <alert_format>json</alert_format>
-    <options>JSON</options> <!-- Replace with your custom JSON object -->
   </integration>
 
   <!-- Integration with Shuffle -->
@@ -189,7 +188,7 @@ Configuration example
     <hook_url>http://IP:3001/api/v1/hooks/HOOK_ID</hook_url> <!-- Replace with your Shuffle hook URL -->
     <level>3</level>
     <alert_format>json</alert_format>
-    <options>JSON</options> <!-- Replace with your custom JSON object -->
+    <options>{"data": {"title": "Custom title"}}</options> <!-- Replace with your custom JSON object -->
   </integration>
 
   <!--Custom external Integration -->
