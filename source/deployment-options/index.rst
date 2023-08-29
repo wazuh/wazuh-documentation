@@ -10,6 +10,9 @@ Installation alternatives
 
 You can install Wazuh using other deployment options. These are complementary to the installation methods you can find in the  :doc:`/installation-guide/index` and the :doc:`/quickstart`. 
 
+.. note::
+  Elastic Stack, Open Distro for Elasticsearch and Splunk installations are no longer compatible with the Wazuh manager since v4.6.0. However you can still integrate Wazuh with those providers. You can see more information in :doc:`/integrations-guide/index`.
+
 Installing the Wazuh central components
 ---------------------------------------
 
@@ -47,15 +50,6 @@ All the alternatives include instructions on how to install the :doc:`Wazuh cent
 
 - :doc:`Installing the Wazuh server from sources <wazuh-from-sources/index>`: Installing Wazuh from sources means installing the Wazuh manager without using a package manager. You compile the source code and copy the binaries to your computer instead.
 
-
-
-.. raw:: html
-
-    <h3>Commercial options</h3>
-
-- :doc:`Installation with Elastic Stack basic license <elastic-stack/index>`: As an alternative to the Wazuh indexer, you can install Wazuh using the Elastic Stack basic license option. It contains everything included in the open source version under the `Apache License, Version 2.0 <https://www.apache.org/licenses/LICENSE-2.0>`_, plus additional capabilities such as Elastic Stack Security features, Kibana alerting, and others. According to your chosen configuration, Wazuh and Elastic Stack are installed on the same host, as an all-in-one deployment, on a separate host as a single-node or multi-node cluster.
-
-- :doc:`Installation with Splunk <splunk/index>`: You install Wazuh along with Splunk Enterprise, including the Splunk forwarder and the Wazuh Splunk app. This can be done as a single instance or as a multi-instance cluster.
 
 
 Installing the Wazuh agent
@@ -167,7 +161,5 @@ These alternatives guide you to install the Wazuh central components along with 
     deploying-with-kubernetes/index
     offline-installation
     wazuh-from-sources/index
-    elastic-stack/index
-    splunk/index
     deploying-with-ansible/index
     deploying-with-puppet/index

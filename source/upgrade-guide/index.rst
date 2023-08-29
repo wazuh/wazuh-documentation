@@ -13,13 +13,11 @@ Check the :doc:`compatibility-matrix/index` section to learn about the compatibi
 Upgrade the Wazuh central components
 ------------------------------------
 
-Select an option below according to your Wazuh installation and follow the instructions. 
-
 The Wazuh central components section includes instructions to upgrade the Wazuh server, the Wazuh indexer, and the Wazuh dashboard. This is the default Wazuh installation starting with Wazuh v4.3.0. 
 
-The Wazuh and Open Distro for Elasticsearch section describes the upgrade process for the Wazuh manager, Filebeat-OSS, Open Distro for Elasticsearch, and Kibana. This was the default Wazuh installation from Wazuh v4.0.0 to 4.2.7. 
-
-The Wazuh and Elastic Stack basic license section includes instructions to upgrade the Wazuh manager, Filebeat, Elasticsearch, and Kibana. The latest supported Elastic Stack basic license version is |ELASTICSEARCH_ELK_LATEST|. 
+Elastic Stack and Open Distro for Elasticsearch are no longer compatible with the Wazuh manager since v4.6.0.
+ 
+ 
 
 .. raw:: html
 
@@ -47,52 +45,6 @@ Wazuh central components
       </div>
     </div>
     
-    <div class="link-boxes-item">
-    <div>
-    
-.. image:: /images/upgrade-guide/computer-open-distro.png
-
-.. raw:: html
-
-      <a class="link-boxes-link horizontal-content" href="elasticsearch-kibana-filebeat/upgrading-open-distro.html">
-
-        <p class="link-boxes-label">Upgrade Open Distro for Elasticsearch</p>
-
-
-.. image:: /images/upgrade-guide/opendistro.svg
-   :width: 30px
-     
-Open Distro for Elasticsearch
-
-.. raw:: html
-
-      </a>
-      </div>
-    </div>
-    
-    <div class="link-boxes-item">
-    <div>
-    
-.. image:: /images/upgrade-guide/computer-elastic-stack.png
-
-.. raw:: html
-
-      <a class="link-boxes-link horizontal-content" href="elasticsearch-kibana-filebeat/upgrading-elastic-stack.html">
-
-        <p class="link-boxes-label">Upgrade Elastic stack basic license</p>
-
-
-.. image:: /images/upgrade-guide/elasticsearch.svg
-   :width: 30px
-     
-Elastic stack basic license
-
-.. raw:: html
-
-      </a>
-      </div>
-    </div>
-    
   </div>
   
 
@@ -100,7 +52,7 @@ If you are unsure of what is your Wazuh installation, on the web user interface 
 
 - If you see the "Welcome to the Wazuh dashboard" message, you have the default Wazuh installation. Select the **Wazuh central components** option above and follow the instructions to upgrade your environment.    
 
-- If you see the "Welcome to the Wazuh app for Kibana" message, go to the top left menu  **☰** > **Dev tools**. Use ``GET /`` to get your Elasticsearch version, and look for the ``build_flavor``. If the build flavor is ``OSS`` you have Open Distro for Elasticsearch, but if the build flavor is ``default`` then you have Elastic Stack basic license.  
+- If you see the "Welcome to the Wazuh app for Kibana" message, go to the top left menu  **☰** > **Dev tools**. Use ``GET /`` to get your Elasticsearch version, and look for the ``build_flavor``. If the build flavor is ``OSS`` you have Open Distro for Elasticsearch, but if the build flavor is ``default`` then you have Elastic Stack basic license.  These installations are no longer supported since 4.6.0, but Wazuh can be integrated with those providers. Verify :doc:`/integrations-guide/index` for more information.
 
 Upgrade the Wazuh agents
 ------------------------
