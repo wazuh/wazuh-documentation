@@ -29,10 +29,10 @@ The Wazuh manager is also compatible with OSSEC agents but not all capabilities 
 Elastic and the Wazuh Kibana plugin
 -----------------------------------
 
-Elastic Stack and Open Distro for Elasticsearch are no longer compatible with the Wazuh manager since v4.6.0.
+Since v4.6.0, we no longer support Elastic Stack nor Open Distro for Elasticsearch. Check :doc:`/integrations-guide/index` for information on how to integrate Wazuh with them.
 
 
 Splunk and the Wazuh Splunk app
 -------------------------------
 
-Splunk is no longer compatible with the Wazuh manager since v4.6.0.
+Since v4.6.0, we no longer support Splunk. Check :doc:`/integrations-guide/index` for information on how to integrate Wazuh with it.

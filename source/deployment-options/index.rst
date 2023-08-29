@@ -11,7 +11,8 @@ Installation alternatives
 You can install Wazuh using other deployment options. These are complementary to the installation methods you can find in the  :doc:`/installation-guide/index` and the :doc:`/quickstart`. 
 
 .. note::
-  Elastic Stack, Open Distro for Elasticsearch and Splunk installations are no longer compatible with the Wazuh manager since v4.6.0. However you can still integrate Wazuh with those providers. You can see more information in :doc:`/integrations-guide/index`.
+
+   Since v4.6.0, we no longer support deployments with Elastic Stack, Open Distro for Elasticsearch, nor Splunk. However, you can still integrate Wazuh with any of these platforms. Find more information in :doc:`/integrations-guide/index`.
 
 Installing the Wazuh central components
 ---------------------------------------
