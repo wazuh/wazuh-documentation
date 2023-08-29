@@ -6,7 +6,7 @@
 Virtual machine
 ===============
 
-We provide an automated way of generating a virtual machine (VM). The ``generate_ova.sh`` script orchestrates the creation of a VM in OVA format. The generated VM is ready to run the Wazuh central components.
+We provide an automated way of generating a virtual machine (VM). The ``generate_ova.sh`` script orchestrates the creation of an OVA-formatted VM, ready to run the Wazuh central components.
 
 Requirements
 ------------
