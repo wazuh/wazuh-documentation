@@ -418,7 +418,6 @@ One of those tasks, which is defined as a class, is the task created to receive 
 
 Multiprocessing
 ~~~~~~~~~~~~~~~
-.. versionadded:: 4.3.0
 
 While the use of asynchronous tasks is a good solution to optimize work and avoid waiting times for I/O, it is not a good solution to execute multiple tasks that require intensive use of CPU. The reason is the way in which Python works. Python allows a single thread to take control over the Python interpreter through the Global Interpreter Lock (GIL). Therefore, asynchronous tasks run concurrently and not in parallel. Following the analogy of the previous section, it is as if there is effectively only one chef who has to do all the tasks. The chef can only do one at a time so if one task requires all his/her attention, the other ones are delayed.
 

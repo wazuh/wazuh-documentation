@@ -1,10 +1,11 @@
 const removedUrls = [];
 const newUrls = [];
 const redirections = [];
-const redirectSameRelease = [];
 
 /* Note: new release versions must always be inserted in the first position of the array "versions" */
 const versions = [
+  '4.6',
+  '4.5',
   '4.4',
   '4.3',
   '4.2',
@@ -28,17 +29,6 @@ const versions = [
 ];
 
 /* Data structure for every release
-
-/* Pages changed within the same release */
-
-/*
-redirectSameRelease['x.y'] = {
-  '/old/path/that/was/removed.html':
-    '/new/path/replacing/the/old/one.html',
-  '/another-old/path/that/was/removed.html':
-    '/another-new/path/replacing/the/old/one.html',
-};
-*/
 
 /* *** RELEASE X.Y ****/
 
@@ -70,34 +60,69 @@ removedUrls['x.y'] = [
 ];
 */
 
+/* *** RELEASE 4.6 ****/
+
+newUrls['4.6'] = [
+  '/release-notes/release-4-6-0.html',
+  '/cloud-security/ms-graph/index.html',
+  '/cloud-security/ms-graph/monitoring-ms-graph-activity.html',
+  '/user-manual/reference/ossec-conf/ms-graph-module.html',
+];
+
+/* *** RELEASE 4.5 ****/
+
+/* Redirections from 4.4 to 4.5  */
+
+redirections.push(
+  {
+    'target': ['4.4=>4.5'],
+    '4.4': '/user-manual/capabilities/log-data-collection/how-to-collect-macoslogs.html',
+    '4.5': '/user-manual/capabilities/log-data-collection/configuration.html#macos',
+  },
+  {
+    'target': ['4.4=>4.5'],
+    '4.4': '/user-manual/capabilities/log-data-collection/how-to-collect-wlogs.html',
+    '4.5': '/user-manual/capabilities/log-data-collection/configuration.html#windows',
+  },
+  {
+    'target': ['4.4=>4.5'],
+    '4.4': '/user-manual/capabilities/log-data-collection/log-data-faq.html',
+    '4.5': '/user-manual/capabilities/log-data-collection/index.html',
+  },
+  {
+    'target': ['4.4=>4.5'],
+    '4.4': '/user-manual/capabilities/log-data-collection/log-data-configuration.html',
+    '4.5': '/user-manual/capabilities/log-data-collection/monitoring-log-files.html',
+  },
+);
+
+/* Pages added in 4.5 */
+
+newUrls['4.5'] = [
+  '/release-notes/release-4-5-0.html',
+  '/release-notes/release-4-5-1.html',
+  '/integrations-guide/index.html',
+  '/integrations-guide/elastic-stack/index.html',
+  '/integrations-guide/opensearch/index.html',
+  '/integrations-guide/splunk/index.html',
+  '/user-manual/capabilities/log-data-collection/configuration.html', 
+  '/user-manual/capabilities/log-data-collection/log-data-analysis.html',
+  '/user-manual/capabilities/log-data-collection/monitoring-log-files.html',
+  '/user-manual/capabilities/log-data-collection/multiple-socket-outputs.html',
+  '/user-manual/capabilities/log-data-collection/syslog.html',
+  '/user-manual/capabilities/log-data-collection/use-cases.html',
+];
+
+/* Pages no longer available in 4.5 */
+
+removedUrls['4.5'] = [
+  '/user-manual/capabilities/log-data-collection/how-to-collect-macoslogs.html',
+  '/user-manual/capabilities/log-data-collection/how-to-collect-wlogs.html',
+  '/user-manual/capabilities/log-data-collection/log-data-faq.html',
+  '/user-manual/capabilities/log-data-collection/log-data-configuration.html',
+];
+
 /* *** RELEASE 4.4 ****/
-
-/* Pages changed within the same release */
-
-redirectSameRelease['4.4'] = {
-  '/nist/index.html':
-    '/compliance/nist/index.html',
-  '/nist/visualization-and-dashboard.html':
-    '/compliance/nist/visualization-and-dashboard.html',
-  '/nist/log-data-analysis.html':
-    '/compliance/nist/log-data-analysis.html',
-  '/nist/configuration-assessment.html':
-    '/compliance/nist/configuration-assessment.html',
-  '/nist/malware-detection.html':
-    '/compliance/nist/malware-detection.html',
-  '/nist/file-integrity-monitoring.html':
-    '/compliance/nist/file-integrity-monitoring.html',
-  '/nist/system-inventory.html':
-    '/compliance/nist/system-inventory.html',
-  '/nist/vulnerability-detection.html':
-    '/compliance/nist/vulnerability-detection.html',
-  '/nist/active-response.html':
-    '/compliance/nist/active-response.html',
-  '/nist/threat-intelligence.html':
-    '/compliance/nist/threat-intelligence.html',
-  '/user-manual/capabilities/wazuh-archives.html':
-    '/user-manual/manager/wazuh-archives.html',
-};
 
 /* Redirections from 4.3 to 4.4  */
 
@@ -155,17 +180,292 @@ redirections.push(
     {
       'target': ['4.3=>4.4', '4.4=>4.3'],
       '4.3': '/amazon/services/supported-services/alb.html',
-      '4.4': '/amazon/services/supported-services/elastic-load-balancing/alb.html',
+      '4.4': '/cloud-security/amazon/services/supported-services/elastic-load-balancing/alb.html',
     },
     {
       'target': ['4.3=>4.4', '4.4=>4.3'],
       '4.3': '/amazon/services/supported-services/nlb.html',
-      '4.4': '/amazon/services/supported-services/elastic-load-balancing/nlb.html',
+      '4.4': '/cloud-security/amazon/services/supported-services/elastic-load-balancing/nlb.html',
     },
     {
       'target': ['4.3=>4.4', '4.4=>4.3'],
       '4.3': '/amazon/services/supported-services/clb.html',
-      '4.4': '/amazon/services/supported-services/elastic-load-balancing/clb.html',
+      '4.4': '/cloud-security/amazon/services/supported-services/elastic-load-balancing/clb.html',
+    },
+    {
+      'target': ['4.3=>4.4', '4.4=>4.3'],
+      '4.3': '/amazon/services/supported-services/ecr-image-scanning.html',
+      '4.4': '/cloud-security/amazon/services/supported-services/ecr-image-scanning.html',
+    },
+    {
+      'target': ['4.3=>4.4', '4.4=>4.3'],
+      '4.3': '/amazon/services/supported-services/server-access.html',
+      '4.4': '/cloud-security/amazon/services/supported-services/server-access.html',
+    },
+    {
+      'target': ['4.3=>4.4', '4.4=>4.3'],
+      '4.3': '/azure/activity-services/index.html',
+      '4.4': '/cloud-security/azure/activity-services/index.html',
+    },
+    {
+      'target': ['4.3=>4.4', '4.4=>4.3'],
+      '4.3': '/azure/activity-services/active-directory/index.html',
+      '4.4': '/cloud-security/azure/activity-services/active-directory/index.html',
+    },
+    {
+      'target': ['4.3=>4.4', '4.4=>4.3'],
+      '4.3': '/azure/activity-services/active-directory/graph.html',
+      '4.4': '/cloud-security/azure/activity-services/active-directory/graph.html',
+    },
+    {
+      'target': ['4.3=>4.4', '4.4=>4.3'],
+      '4.3': '/azure/activity-services/prerequisites/considerations.html',
+      '4.4': '/cloud-security/azure/activity-services/prerequisites/considerations.html',
+    },
+    {
+      'target': ['4.3=>4.4', '4.4=>4.3'],
+      '4.3': '/azure/activity-services/prerequisites/credentials.html',
+      '4.4': '/cloud-security/azure/activity-services/prerequisites/credentials.html',
+    },
+    {
+      'target': ['4.3=>4.4', '4.4=>4.3'],
+      '4.3': '/azure/activity-services/prerequisites/index.html',
+      '4.4': '/cloud-security/azure/activity-services/prerequisites/index.html',
+    },
+    {
+      'target': ['4.3=>4.4', '4.4=>4.3'],
+      '4.3': '/azure/activity-services/services/index.html',
+      '4.4': '/cloud-security/azure/activity-services/services/index.html',
+    },
+    {
+      'target': ['4.3=>4.4', '4.4=>4.3'],
+      '4.3': '/azure/activity-services/services/log-analytics.html',
+      '4.4': '/cloud-security/azure/activity-services/services/log-analytics.html',
+    },
+    {
+      'target': ['4.3=>4.4', '4.4=>4.3'],
+      '4.3': '/azure/activity-services/services/storage.html',
+      '4.4': '/cloud-security/azure/activity-services/services/storage.html',
+    },
+    {
+      'target': ['4.3=>4.4', '4.4=>4.3'],
+      '4.3': '/gcp/supported-services/access_logs.html',
+      '4.4': '/cloud-security/gcp/supported-services/access_logs.html',
+    },
+    {
+      'target': ['4.3=>4.4', '4.4=>4.3'],
+      '4.3': '/gcp/supported-services/cloud_audit_logs.html',
+      '4.4': '/cloud-security/gcp/supported-services/cloud_audit_logs.html',
+    },
+    {
+      'target': ['4.3=>4.4', '4.4=>4.3'],
+      '4.3': '/gcp/supported-services/dns_queries.html',
+      '4.4': '/cloud-security/gcp/supported-services/dns_queries.html',
+    },
+    {
+      'target': ['4.3=>4.4', '4.4=>4.3'],
+      '4.3': '/gcp/supported-services/load_balancing.html',
+      '4.4': '/cloud-security/gcp/supported-services/load_balancing.html',
+    },
+    {
+      'target': ['4.3=>4.4', '4.4=>4.3'],
+      '4.3': '/gcp/supported-services/vpc_flow.html',
+      '4.4': '/cloud-security/gcp/supported-services/vpc_flow.html',
+    },
+    {
+      'target': ['4.3=>4.4', '4.4=>4.3'],
+      '4.3': '/gcp/supported-services/firewall.html',
+      '4.4': '/cloud-security/gcp/supported-services/firewall.html',
+    },
+    {
+      'target': ['4.3=>4.4', '4.4=>4.3'],
+      '4.3': '/github/index.html',
+      '4.4': '/cloud-security/github/index.html',
+    },
+    {
+      'target': ['4.3=>4.4', '4.4=>4.3'],
+      '4.3': '/github/monitoring-github-activity.html',
+      '4.4': '/cloud-security/github/monitoring-github-activity.html',
+    },
+    {
+      'target': ['4.3=>4.4', '4.4=>4.3'],
+      '4.3': '/office365/index.html',
+      '4.4': '/cloud-security/office365/index.html',
+    },
+    {
+      'target': ['4.3=>4.4', '4.4=>4.3'],
+      '4.3': '/office365/monitoring-office365-activity.html',
+      '4.4': '/cloud-security/office365/monitoring-office365-activity.html',
+    },
+    {
+      'target': ['4.3=>4.4', '4.4=>4.3'],
+      '4.3': '/amazon/instances.html',
+      '4.4': '/cloud-security/amazon/instances.html',
+    },
+    {
+      'target': ['4.3=>4.4', '4.4=>4.3'],
+      '4.3': '/amazon/index.html',
+      '4.4': '/cloud-security/amazon/index.html',
+    },
+    {
+      'target': ['4.3=>4.4', '4.4=>4.3'],
+      '4.3': '/amazon/services/troubleshooting.html',
+      '4.4': '/cloud-security/amazon/services/troubleshooting.html',
+    },
+    {
+      'target': ['4.3=>4.4', '4.4=>4.3'],
+      '4.3': '/amazon/services/prerequisites/dependencies.html',
+      '4.4': '/cloud-security/amazon/services/prerequisites/dependencies.html',
+    },
+    {
+      'target': ['4.3=>4.4', '4.4=>4.3'],
+      '4.3': '/amazon/services/prerequisites/considerations.html',
+      '4.4': '/cloud-security/amazon/services/prerequisites/considerations.html',
+    },
+    {
+      'target': ['4.3=>4.4', '4.4=>4.3'],
+      '4.3': '/amazon/services/prerequisites/credentials.html',
+      '4.4': '/cloud-security/amazon/services/prerequisites/credentials.html',
+    },
+    {
+      'target': ['4.3=>4.4', '4.4=>4.3'],
+      '4.3': '/amazon/services/prerequisites/index.html',
+      '4.4': '/cloud-security/amazon/services/prerequisites/index.html',
+    },
+    {
+      'target': ['4.3=>4.4', '4.4=>4.3'],
+      '4.3': '/amazon/services/prerequisites/S3-bucket.html',
+      '4.4': '/cloud-security/amazon/services/prerequisites/S3-bucket.html',
+    },
+    {
+      'target': ['4.3=>4.4', '4.4=>4.3'],
+      '4.3': '/amazon/services/index.html',
+      '4.4': '/cloud-security/amazon/services/index.html',
+    },
+    {
+      'target': ['4.3=>4.4', '4.4=>4.3'],
+      '4.3': '/amazon/services/supported-services/elastic-load-balancing/index.html',
+      '4.4': '/cloud-security/amazon/services/supported-services/elastic-load-balancing/index.html',
+    },
+    {
+      'target': ['4.3=>4.4', '4.4=>4.3'],
+      '4.3': '/amazon/services/supported-services/vpc.html',
+      '4.4': '/cloud-security/amazon/services/supported-services/vpc.html',
+    },
+    {
+      'target': ['4.3=>4.4', '4.4=>4.3'],
+      '4.3': '/amazon/services/supported-services/security-lake.html',
+      '4.4': '/cloud-security/amazon/services/supported-services/security-lake.html',
+    },
+    {
+      'target': ['4.3=>4.4', '4.4=>4.3'],
+      '4.3': '/amazon/services/supported-services/waf.html',
+      '4.4': '/cloud-security/amazon/services/supported-services/waf.html',
+    },
+    {
+      'target': ['4.3=>4.4', '4.4=>4.3'],
+      '4.3': '/amazon/services/supported-services/guardduty.html',
+      '4.4': '/cloud-security/amazon/services/supported-services/guardduty.html',
+    },
+    {
+      'target': ['4.3=>4.4', '4.4=>4.3'],
+      '4.3': '/amazon/services/supported-services/cisco-umbrella.html',
+      '4.4': '/cloud-security/amazon/services/supported-services/cisco-umbrella.html',
+    },
+    {
+      'target': ['4.3=>4.4', '4.4=>4.3'],
+      '4.3': '/amazon/services/supported-services/cloudtrail.html',
+      '4.4': '/cloud-security/amazon/services/supported-services/cloudtrail.html',
+    },
+    {
+      'target': ['4.3=>4.4', '4.4=>4.3'],
+      '4.3': '/amazon/services/supported-services/kms.html',
+      '4.4': '/cloud-security/amazon/services/supported-services/kms.html',
+    },
+    {
+      'target': ['4.3=>4.4', '4.4=>4.3'],
+      '4.3': '/amazon/services/supported-services/index.html',
+      '4.4': '/cloud-security/amazon/services/supported-services/index.html',
+    },
+    {
+      'target': ['4.3=>4.4', '4.4=>4.3'],
+      '4.3': '/amazon/services/supported-services/config.html',
+      '4.4': '/cloud-security/amazon/services/supported-services/config.html',
+    },
+    {
+      'target': ['4.3=>4.4', '4.4=>4.3'],
+      '4.3': '/amazon/services/supported-services/trusted-advisor.html',
+      '4.4': '/cloud-security/amazon/services/supported-services/trusted-advisor.html',
+    },
+    {
+      'target': ['4.3=>4.4', '4.4=>4.3'],
+      '4.3': '/amazon/services/supported-services/inspector.html',
+      '4.4': '/cloud-security/amazon/services/supported-services/inspector.html',
+    },
+    {
+      'target': ['4.3=>4.4', '4.4=>4.3'],
+      '4.3': '/amazon/services/supported-services/macie.html',
+      '4.4': '/cloud-security/amazon/services/supported-services/macie.html',
+    },
+    {
+      'target': ['4.3=>4.4', '4.4=>4.3'],
+      '4.3': '/amazon/services/supported-services/cloudwatchlogs.html',
+      '4.4': '/cloud-security/amazon/services/supported-services/cloudwatchlogs.html',
+    },
+    {
+      'target': ['4.3=>4.4', '4.4=>4.3'],
+      '4.3': '/monitoring.html',
+      '4.4': '/cloud-security/monitoring.html',
+    },
+    {
+      'target': ['4.3=>4.4', '4.4=>4.3'],
+      '4.3': '/azure/monitoring-instances.html',
+      '4.4': '/cloud-security/azure/monitoring-instances.html',
+    },
+    {
+      'target': ['4.3=>4.4', '4.4=>4.3'],
+      '4.3': '/azure/index.html',
+      '4.4': '/cloud-security/azure/index.html',
+    },
+    {
+      'target': ['4.3=>4.4', '4.4=>4.3'],
+      '4.3': '/azure/activity-services/prerequisites/dependencies.html',
+      '4.4': '/cloud-security/azure/activity-services/prerequisites/dependencies.html',
+    },
+    {
+      'target': ['4.3=>4.4', '4.4=>4.3'],
+      '4.3': '/gcp/prerequisites/pubsub.html',
+      '4.4': '/cloud-security/gcp/prerequisites/pubsub.html',
+    },
+    {
+      'target': ['4.3=>4.4', '4.4=>4.3'],
+      '4.3': '/gcp/prerequisites/dependencies.html',
+      '4.4': '/cloud-security/gcp/prerequisites/dependencies.html',
+    },
+    {
+      'target': ['4.3=>4.4', '4.4=>4.3'],
+      '4.3': '/gcp/prerequisites/considerations.html',
+      '4.4': '/cloud-security/gcp/prerequisites/considerations.html',
+    },
+    {
+      'target': ['4.3=>4.4', '4.4=>4.3'],
+      '4.3': '/gcp/prerequisites/credentials.html',
+      '4.4': '/cloud-security/gcp/prerequisites/credentials.html',
+    },
+    {
+      'target': ['4.3=>4.4', '4.4=>4.3'],
+      '4.3': '/gcp/prerequisites/index.html',
+      '4.4': '/cloud-security/gcp/prerequisites/index.html',
+    },
+    {
+      'target': ['4.3=>4.4', '4.4=>4.3'],
+      '4.3': '/gcp/index.html',
+      '4.4': '/cloud-security/gcp/index.html',
+    },
+    {
+      'target': ['4.3=>4.4', '4.4=>4.3'],
+      '4.3': '/gcp/supported-services/index.html',
+      '4.4': '/cloud-security/gcp/supported-services/index.html',
     },
     {
       'target': ['4.3=>4.4', '4.4=>4.3'],
@@ -362,21 +662,87 @@ redirections.push(
       '4.3': '/container-security/docker-monitor/monitoring-containers-activity.html',
       '4.4': '/user-manual/capabilities/container-security/use-cases.html',
     },
-  );
+    {
+      'target': ['4.4=>4.3'],
+      '4.3': '/user-manual/files-backup/index.html',
+      '4.4': '/user-manual/files-backup/creating/index.html',
+    },
+    {
+      'target': ['4.3=>4.4', '4.4=>4.3'],
+      '4.3': '/user-manual/files-backup/wazuh-central-components.html',
+      '4.4': '/user-manual/files-backup/creating/wazuh-central-components.html',
+    },
+    {
+      'target': ['4.3=>4.4', '4.4=>4.3'],
+      '4.3': '/user-manual/files-backup/wazuh-agent.html',
+      '4.4': '/user-manual/files-backup/creating/wazuh-agent.html',
+    },
+);
 
 /* Pages added in 4.4 */
 
 newUrls['4.4'] = [
-  '/amazon/services/supported-services/elastic-load-balancing/index.html',
-  '/amazon/services/supported-services/elastic-load-balancing/alb.html',
-  '/amazon/services/supported-services/elastic-load-balancing/nlb.html',
-  '/amazon/services/supported-services/elastic-load-balancing/clb.html',
-  '/development/rbac-database-integrity.html',
-  '/user-manual/reference/tools/rbac-control.html',
+  '/cloud-security/amazon/instances.html',
+  '/cloud-security/amazon/index.html',
+  '/cloud-security/amazon/services/troubleshooting.html',
+  '/cloud-security/amazon/services/prerequisites/dependencies.html',
+  '/cloud-security/amazon/services/prerequisites/considerations.html',
+  '/cloud-security/amazon/services/prerequisites/credentials.html',
+  '/cloud-security/amazon/services/prerequisites/index.html',
+  '/cloud-security/amazon/services/prerequisites/S3-bucket.html',
+  '/cloud-security/amazon/services/index.html',
+  '/cloud-security/amazon/services/supported-services/vpc.html',
+  '/cloud-security/amazon/services/supported-services/security-lake.html',
+  '/cloud-security/amazon/services/supported-services/waf.html',
+  '/cloud-security/amazon/services/supported-services/guardduty.html',
+  '/cloud-security/amazon/services/supported-services/cisco-umbrella.html',
+  '/cloud-security/amazon/services/supported-services/cloudtrail.html',
+  '/cloud-security/amazon/services/supported-services/kms.html',
+  '/cloud-security/amazon/services/supported-services/index.html',
+  '/cloud-security/amazon/services/supported-services/config.html',
+  '/cloud-security/amazon/services/supported-services/trusted-advisor.html',
+  '/cloud-security/amazon/services/supported-services/inspector.html',
+  '/cloud-security/amazon/services/supported-services/macie.html',
+  '/cloud-security/amazon/services/supported-services/cloudwatchlogs.html',
+  '/cloud-security/amazon/services/supported-services/elastic-load-balancing/index.html',
+  '/cloud-security/amazon/services/supported-services/elastic-load-balancing/alb.html',
+  '/cloud-security/amazon/services/supported-services/elastic-load-balancing/nlb.html',
+  '/cloud-security/amazon/services/supported-services/elastic-load-balancing/clb.html',
+  '/cloud-security/amazon/services/supported-services/ecr-image-scanning.html',
+  '/cloud-security/amazon/services/supported-services/server-access.html',
+  '/cloud-security/azure/monitoring-instances.html',
+  '/cloud-security/azure/index.html',
+  '/cloud-security/azure/activity-services/index.html',
+  '/cloud-security/azure/activity-services/active-directory/index.html',
+  '/cloud-security/azure/activity-services/active-directory/graph.html',
+  '/cloud-security/azure/activity-services/prerequisites/considerations.html',
+  '/cloud-security/azure/activity-services/prerequisites/credentials.html',
+  '/cloud-security/azure/activity-services/prerequisites/dependencies.html',
+  '/cloud-security/azure/activity-services/prerequisites/index.html',
+  '/cloud-security/azure/activity-services/services/index.html',
+  '/cloud-security/azure/activity-services/services/log-analytics.html',
+  '/cloud-security/azure/activity-services/services/storage.html',
+  '/cloud-security/gcp/prerequisites/pubsub.html',
+  '/cloud-security/gcp/prerequisites/dependencies.html',
+  '/cloud-security/gcp/prerequisites/considerations.html',
+  '/cloud-security/gcp/prerequisites/credentials.html',
+  '/cloud-security/gcp/prerequisites/index.html',
+  '/cloud-security/gcp/index.html',
+  '/cloud-security/gcp/supported-services/index.html',
+  '/cloud-security/gcp/supported-services/access_logs.html',
+  '/cloud-security/gcp/supported-services/cloud_audit_logs.html',
+  '/cloud-security/gcp/supported-services/dns_queries.html',
+  '/cloud-security/gcp/supported-services/load_balancing.html',
+  '/cloud-security/gcp/supported-services/vpc_flow.html',
+  '/cloud-security/gcp/supported-services/firewall.html',
+  '/cloud-security/github/index.html',
+  '/cloud-security/github/monitoring-github-activity.html',
+  '/cloud-security/office365/index.html',
+  '/cloud-security/office365/monitoring-office365-activity.html',
+  '/cloud-security/monitoring.html',
   '/user-manual/agents/key-request.html',
   '/user-manual/manager/manual-backup-restore.html',
   '/user-manual/reference/ossec-conf/wazuh-db-config.html',
-  '/azure/activity-services/prerequisites/dependencies.html',
   '/user-manual/wazuh-dashboard/custom-branding.html',
   '/release-notes/release-4-4-0.html',
   '/release-notes/release-4-4-1.html',
@@ -384,17 +750,6 @@ newUrls['4.4'] = [
   '/release-notes/release-4-4-3.html',
   '/release-notes/release-4-4-4.html',
   '/release-notes/release-4-4-5.html',
-  '/release-notes/release-4-6-0.html',
-  '/nist/index.html',
-  '/nist/visualization-and-dashboard.html',
-  '/nist/log-data-analysis.html',
-  '/nist/configuration-assessment.html',
-  '/nist/malware-detection.html',
-  '/nist/file-integrity-monitoring.html',
-  '/nist/system-inventory.html',
-  '/nist/vulnerability-detection.html',
-  '/nist/active-response.html',
-  '/nist/threat-intelligence.html',
   '/compliance/nist/index.html',
   '/compliance/nist/visualization-and-dashboard.html',
   '/compliance/nist/log-data-analysis.html',
@@ -450,28 +805,75 @@ newUrls['4.4'] = [
   '/user-manual/capabilities/agentless-monitoring/visualization.html',
   '/user-manual/capabilities/agentless-monitoring/use-cases.html',  
   '/user-manual/capabilities/vulnerability-detection/querying-the-vulnerability-database.html',
+  '/user-manual/files-backup/creating/index.html',
+  '/user-manual/files-backup/creating/wazuh-central-components.html',
+  '/user-manual/files-backup/creating/wazuh-agent.html',
+  '/user-manual/files-backup/restoring/index.html',
+  '/user-manual/files-backup/restoring/wazuh-central-components.html',
+  '/user-manual/files-backup/restoring/wazuh-agent.html',
 ];
 
 /* Pages removed in 4.4 */
 
 removedUrls['4.4'] = [
+  '/amazon/instances.html',
+  '/amazon/index.html',
+  '/amazon/services/troubleshooting.html',
+  '/amazon/services/prerequisites/dependencies.html',
+  '/amazon/services/prerequisites/considerations.html',
+  '/amazon/services/prerequisites/credentials.html',
+  '/amazon/services/prerequisites/index.html',
+  '/amazon/services/prerequisites/S3-bucket.html',
+  '/amazon/services/index.html',
+  '/amazon/services/supported-services/vpc.html',
+  '/amazon/services/supported-services/security-lake.html',
+  '/amazon/services/supported-services/waf.html',
+  '/amazon/services/supported-services/guardduty.html',
+  '/amazon/services/supported-services/cisco-umbrella.html',
+  '/amazon/services/supported-services/cloudtrail.html',
+  '/amazon/services/supported-services/kms.html',
+  '/amazon/services/supported-services/index.html',
+  '/amazon/services/supported-services/config.html',
+  '/amazon/services/supported-services/trusted-advisor.html',
+  '/amazon/services/supported-services/inspector.html',
+  '/amazon/services/supported-services/macie.html',
+  '/amazon/services/supported-services/cloudwatchlogs.html',
   '/amazon/services/supported-services/alb.html',
   '/amazon/services/supported-services/nlb.html',
   '/amazon/services/supported-services/clb.html',
+  '/amazon/services/supported-services/ecr-image-scanning.html',
+  '/amazon/services/supported-services/server-access.html',
+  '/azure/monitoring-instances.html',
+  '/azure/index.html',
+  '/azure/activity-services/index.html',
+  '/azure/activity-services/active-directory/index.html',
+  '/azure/activity-services/active-directory/graph.html',
+  '/azure/activity-services/prerequisites/considerations.html',
+  '/azure/activity-services/prerequisites/credentials.html',
+  '/azure/activity-services/prerequisites/dependencies.html',
+  '/azure/activity-services/prerequisites/index.html',
+  '/azure/activity-services/services/index.html',
+  '/azure/activity-services/services/log-analytics.html',
+  '/azure/activity-services/services/storage.html',
+  '/gcp/prerequisites/pubsub.html',
+  '/gcp/prerequisites/dependencies.html',
+  '/gcp/prerequisites/considerations.html',
+  '/gcp/prerequisites/credentials.html',
+  '/gcp/prerequisites/index.html',
+  '/gcp/index.html',
+  '/gcp/supported-services/index.html',
+  '/gcp/supported-services/access_logs.html',
+  '/gcp/supported-services/cloud_audit_logs.html',
+  '/gcp/supported-services/dns_queries.html',
+  '/gcp/supported-services/load_balancing.html',
+  '/gcp/supported-services/vpc_flow.html',
+  '/gcp/supported-services/firewall.html',
+  '/github/index.html',
+  '/github/monitoring-github-activity.html',
+  '/office365/index.html',
+  '/office365/monitoring-office365-activity.html',
+  '/monitoring.html',
   '/user-manual/capabilities/agent-key-polling.html',
-  '/user-manual/wazuh-dashboard/single-sign-on/index.html',
-  '/user-manual/wazuh-dashboard/single-sign-on/okta.html',
-  '/user-manual/wazuh-dashboard/single-sign-on/azure-active-directory.html',
-  '/user-manual/wazuh-dashboard/single-sign-on/pingone.html',
-  '/user-manual/wazuh-dashboard/single-sign-on/google.html',
-  '/user-manual/wazuh-dashboard/single-sign-on/jumpcloud.html',
-  '/user-manual/wazuh-dashboard/single-sign-on/onelogin.html',
-  '/user-manual/securing-wazuh/index.html',
-  '/user-manual/securing-wazuh/wazuh-indexer.html',
-  '/user-manual/securing-wazuh/opendistro.html',
-  '/user-manual/securing-wazuh/elastic-stack.html',
-  '/user-manual/wazuh-dashboard/rbac.html',
-  '/learning-wazuh/build-lab/install-wazuh-central-components.html',
   '/user-manual/capabilities/antiflooding.html',
   '/user-manual/capabilities/labels.html',
   '/user-manual/capabilities/fluent-forwarder.html',
@@ -487,50 +889,16 @@ removedUrls['4.4'] = [
   '/user-manual/capabilities/auditing-whodata/who-windows-policies.html',  
   '/user-manual/capabilities/syscollector.html',  
   '/user-manual/capabilities/agentless-monitoring/agentless-faq.html',
-  '/user-manual/capabilities/wazuh-archives.html',
   '/container-security/index.html',
   '/container-security/docker-monitor/index.html',
   '/container-security/docker-monitor/dependencies.html',
   '/container-security/docker-monitor/monitoring-containers-activity.html',
   '/container-security/docker-monitor/monitoring-docker-server.html',
+  '/user-manual/files-backup/wazuh-central-components.html',
+  '/user-manual/files-backup/wazuh-agent.html',
 ];
 
   /* *** RELEASE 4.3 ****/
-
-/* Pages changed within the same release */
-
-redirectSameRelease['4.3'] = {
-   '/user-manual/capabilities/vulnerability-detection/compatibility-matrix.html':
-     '/user-manual/capabilities/vulnerability-detection/how-it-works.html#compatibility-matrix',
-   '/user-manual/capabilities/vulnerability-detection/running-vu-scan.html':
-     '/user-manual/capabilities/vulnerability-detection/configuring-scans.html',
-   '/user-manual/wazuh-dashboard/single-sign-on/index.html':
-     '/user-manual/user-administration/single-sign-on/index.html', 
-   '/user-manual/wazuh-dashboard/single-sign-on/okta.html':
-     '/user-manual/user-administration/single-sign-on/okta.html',
-   '/user-manual/wazuh-dashboard/single-sign-on/azure-active-directory.html':
-     '/user-manual/user-administration/single-sign-on/azure-active-directory.html',
-   '/user-manual/wazuh-dashboard/single-sign-on/pingone.html':
-     '/user-manual/user-administration/single-sign-on/pingone.html', 
-   '/user-manual/wazuh-dashboard/single-sign-on/google.html':
-     '/user-manual/user-administration/single-sign-on/google.html',
-   '/user-manual/wazuh-dashboard/single-sign-on/jumpcloud.html':
-     '/user-manual/user-administration/single-sign-on/jumpcloud.html',
-   '/user-manual/wazuh-dashboard/single-sign-on/onelogin.html':
-     '/user-manual/user-administration/single-sign-on/onelogin.html',     
-   '/user-manual/securing-wazuh/index.html':
-     '/user-manual/user-administration/password-management/index.html',
-   '/user-manual/securing-wazuh/wazuh-indexer.html':
-     '/user-manual/user-administration/password-management.html',
-   '/user-manual/securing-wazuh/opendistro.html':
-     '/user-manual/user-administration/password-management.html',
-   '/user-manual/securing-wazuh/elastic-stack.html':  
-     '/user-manual/user-administration/password-management.html',
-   '/user-manual/wazuh-dashboard/rbac.html':
-     '/user-manual/user-administration/rbac.html', 
-   '/learning-wazuh/build-lab/install-wazuh-central-components.html':
-     '/proof-of-concept-guide/index.html',
- };
  
  /* Pages added in 4.3 */
 
@@ -565,13 +933,22 @@ newUrls['4.3'] = [
   '/user-manual/user-administration/password-management.html',
   '/user-manual/user-administration/rbac.html',
   '/user-manual/user-administration/single-sign-on/index.html',
-  '/user-manual/user-administration/single-sign-on/okta.html',
-  '/user-manual/user-administration/single-sign-on/azure-active-directory.html',
-  '/user-manual/user-administration/single-sign-on/pingone.html',
-  '/user-manual/user-administration/single-sign-on/google.html',
-  '/user-manual/user-administration/single-sign-on/jumpcloud.html',
-  '/user-manual/user-administration/single-sign-on/onelogin.html',
-  '/user-manual/user-administration/single-sign-on/keycloak.html',
+  '/user-manual/user-administration/single-sign-on/administrator/index.html',
+  '/user-manual/user-administration/single-sign-on/administrator/okta.html',
+  '/user-manual/user-administration/single-sign-on/administrator/azure-active-directory.html',
+  '/user-manual/user-administration/single-sign-on/administrator/pingone.html',
+  '/user-manual/user-administration/single-sign-on/administrator/google.html',
+  '/user-manual/user-administration/single-sign-on/administrator/jumpcloud.html',
+  '/user-manual/user-administration/single-sign-on/administrator/onelogin.html',
+  '/user-manual/user-administration/single-sign-on/administrator/keycloak.html',
+  '/user-manual/user-administration/single-sign-on/read-only/index.html',
+  '/user-manual/user-administration/single-sign-on/read-only/okta.html',
+  '/user-manual/user-administration/single-sign-on/read-only/azure-active-directory.html',
+  '/user-manual/user-administration/single-sign-on/read-only/pingone.html',
+  '/user-manual/user-administration/single-sign-on/read-only/google.html',
+  '/user-manual/user-administration/single-sign-on/read-only/jumpcloud.html',
+  '/user-manual/user-administration/single-sign-on/read-only/onelogin.html',
+  '/user-manual/user-administration/single-sign-on/read-only/keycloak.html',
   '/upgrade-guide/upgrading-central-components.html',
   '/migration-guide/index.html',
   '/migration-guide/wazuh-indexer.html',
@@ -698,7 +1075,6 @@ newUrls['4.3'] = [
   '/deployment-options/deploying-with-puppet/wazuh-puppet-module/reference-wazuh-puppet/wazuh-manager-class.html',
   '/deployment-options/amazon-machine-images/amazon-machine-images.html',
   '/release-notes/release-4-3-0.html',
-  '/learning-wazuh/build-lab/install-wazuh-central-components.html', 
   '/pci-dss/configuration-assessment.html', 
   '/pci-dss/malware-detection.html',
   '/pci-dss/vulnerability-detection.html',
@@ -737,11 +1113,13 @@ newUrls['4.3'] = [
   '/user-manual/capabilities/active-response/default-active-response-scripts.html',
   '/user-manual/capabilities/active-response/how-to-configure.html',
   '/user-manual/capabilities/sec-config-assessment/use-cases.html',
+  '/user-manual/files-backup/index.html',
+  '/user-manual/files-backup/wazuh-central-components.html',
+  '/user-manual/files-backup/wazuh-agent.html',
 ];
 
 removedUrls['4.3'] = [
   '/amazon-machine-images/amazon-machine-images.html',
-  '/azure/dependencies.html',
   '/azure/monitoring-activity.html',
   '/azure/monitoring-services.html',
   '/deploying-with-ansible/guide/install-ansible.html',
@@ -907,6 +1285,16 @@ redirections.push(
     'target': ['4.2=>4.3', '4.3=>4.2'],
     '4.2': '/user-manual/capabilities/sec-config-assessment/use-case.html',
     '4.3': '/user-manual/capabilities/sec-config-assessment/use-cases.html',
+  },
+  {
+    'target': ['4.2=>4.3', '4.3=>4.2'],
+    '4.2': '/user-manual/capabilities/vulnerability-detection/compatibility-matrix.html',
+    '4.3': '/user-manual/capabilities/vulnerability-detection/how-it-works.html#compatibility-matrix',
+  },
+  {
+    'target': ['4.2=>4.3', '4.3=>4.2'],
+    '4.2': '/user-manual/capabilities/vulnerability-detection/running-vu-scan.html',
+    '4.3': '/user-manual/capabilities/vulnerability-detection/configuring-scans.html',
   },
   {
     'target': ['4.2=>4.3', '4.3=>4.2'],
@@ -1647,21 +2035,9 @@ redirections.push(
 
 /* *** RELEASE 4.2 ****/
 
-/* Pages changed within the same release */
-
-redirectSameRelease['4.2'] = {
-  '/release-notes/release_4_2_0.html':
-    '/release-notes/release-4-2-0.html',
-  '/user-manual/registering/agent-enrollment.html':  
-    '/user-manual/agent-enrollment/via-agent-configuration/index.html',
-  '/azure/dependencies.html':  
-    '/azure/index.html',
-};
-
 /* Pages added in 4.2 */
 
 newUrls['4.2'] = [
-  '/azure/dependencies.html',
   '/proof-of-concept-guide/detect-malware-yara-integration.html',
   '/proof-of-concept-guide/poc-vulnerability-detection.html',
   '/proof-of-concept-guide/detect-remove-malware-virustotal.html',
@@ -1825,7 +2201,6 @@ newUrls['4.2'] = [
   '/release-notes/release-4-1-3.html',
   '/release-notes/release-4-1-4.html',
   '/release-notes/release-4-1-5.html',
-  '/release-notes/release_4_2_0.html',
   '/release-notes/release-4-2-0.html',
   '/release-notes/release-4-2-1.html',
   '/release-notes/release-4-2-2.html',
@@ -1868,7 +2243,6 @@ newUrls['4.2'] = [
   '/docker-monitor/monitoring-docker-server.html',
   '/upgrade-guide/compatibility-matrix/index.html',
   '/upgrade-guide/legacy/upgrading-wazuh-server/restore-alerts-from-2.x-to-3.x.html',
-  '/user-manual/registering/agent-enrollment.html',
   '/user-manual/agent-enrollment/index.html',
   '/user-manual/agent-enrollment/via-agent-configuration/index.html',
   '/user-manual/agent-enrollment/via-agent-configuration/linux-endpoint.html', 

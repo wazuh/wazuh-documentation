@@ -80,10 +80,12 @@ Wazuh has out-of-the-box detection rules that are mapped against relevant MITRE 
 
 For this example, we require the following infrastructure:
 
+.. |WAZUH_OVA| replace:: `Wazuh OVA <https://packages.wazuh.com/4.x/vm/wazuh-|WAZUH_CURRENT|.ova>`__
+
 +------------------+----------------------------------------------------------------------------------------------------------------------------------------------------------------------+
 | Endpoint         | Example description                                                                                                                                                  |
 +==================+======================================================================================================================================================================+
-| **Wazuh server** | You can download the `Wazuh OVA <https://packages.wazuh.com/4.x/vm/wazuh-4.4.2.ova>`_ or install it using the :doc:`installation guide </installation-guide/index>`. |
+| **Wazuh server** | You can download the |WAZUH_OVA| or install it using the :doc:`installation guide </installation-guide/index>`.                                                      |
 +------------------+----------------------------------------------------------------------------------------------------------------------------------------------------------------------+
 | **Kali Linux**   | This is the attacker endpoint. We use it to perform brute-force attacks against the monitored Ubuntu endpoint.                                                       |
 +------------------+----------------------------------------------------------------------------------------------------------------------------------------------------------------------+

@@ -8,8 +8,6 @@
 wazuh-control
 =============
 
-.. versionadded:: 4.2
-
 The wazuh-control script is used to start, stop, configure, check on the status of Wazuh processes and enable the debug mode.
 
 .. note::
