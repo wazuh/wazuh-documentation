@@ -10,10 +10,6 @@ Installation alternatives
 
 You can install Wazuh using other deployment options. These are complementary to the installation methods you can find in the  :doc:`/installation-guide/index` and the :doc:`/quickstart`. 
 
-.. note::
-
-   Since v4.6.0, we no longer support deployments with Elastic Stack, Open Distro for Elasticsearch, nor Splunk. However, you can still integrate Wazuh with any of these platforms. Find more information in :doc:`/integrations-guide/index`.
-
 Installing the Wazuh central components
 ---------------------------------------
 
@@ -51,7 +47,9 @@ All the alternatives include instructions on how to install the :doc:`Wazuh cent
 
 - :doc:`Installing the Wazuh server from sources <wazuh-from-sources/index>`: Installing Wazuh from sources means installing the Wazuh manager without using a package manager. You compile the source code and copy the binaries to your computer instead.
 
+.. note::
 
+   Since Wazuh v4.6, we don't provide the Kibana plugin and Splunk app anymore. However, if you want to integrate Wazuh with the Elastic or Splunk platforms, you can follow the :doc:`/integrations-guide/index`.
 
 Installing the Wazuh agent
 --------------------------

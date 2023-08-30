@@ -15,7 +15,9 @@ Upgrade the Wazuh central components
 
 The :doc:`upgrading-central-components` section includes instructions to upgrade the Wazuh server, the Wazuh indexer, and the Wazuh dashboard.
 
-Since v4.6.0, we don't support Elastic, Open Distro for Elasticsearch, nor Splunk. Check :doc:`/integrations-guide/index` for information on how to integrate Wazuh with these platforms. 
+.. note::
+  
+   Since Wauh v4.6, we don't provide the Kibana plugin and Splunk app anymore. However, if you want to integrate Wazuh with the Elastic or Splunk platforms, you can follow the :doc:`/integrations-guide/index`.
 
 Upgrade the Wazuh agents
 ------------------------
