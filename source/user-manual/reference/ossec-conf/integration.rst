@@ -17,19 +17,8 @@ integration
 
 This configures the manager to :ref:`connect Wazuh to external APIs <manual_integration>` and alerting tools such as Slack, PagerDuty, VirusTotal and Shuffle.
 
-Customizable options
---------------------
-
-- `name`_
-- `hook_url`_
-- `api_key`_
-- `level`_
-- `rule_id`_
-- `group`_
-- `event_location`_
-- `alert_format`_
-- `max_log`_
-- `options`_
+Integration options
+-------------------
 
 name
 ^^^^
@@ -140,10 +129,12 @@ The maximum length of an alert snippet that will be sent to the Integrator.  Lon
 
 .. note:: This option only applies if ``alert_format`` is not set to ``json``.
 
+.. _integration_options_tag:
+
 options
 ^^^^^^^
 
-This overwrites the previous fields or adds customizable fields according to the information provided in the JSON object.
+This overwrites the previous fields or adds customization fields according to the information provided in the JSON object.
 
 +--------------------+-----------------------------------------------------------+
 | **Default value**  | n/a                                                       |

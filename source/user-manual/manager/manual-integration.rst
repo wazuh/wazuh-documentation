@@ -60,9 +60,6 @@ This integration uses Slack Incoming Webhooks and allows posting Wazuh alerts in
 
 To set up this integration, follow these steps.
 
-.. note::
-  For a list of all possibles customizable fields of the `options` tag, you can visit the API reference `Slack API reference <https://api.slack.com/reference/messaging/attachments#legacy_fields>`_
-
 #. Enable Incoming Webhooks and create one for your Slack channel. Follow the Slack guide on `Incoming Webhooks <https://api.slack.com/messaging/webhooks>`__ for this.
 
 #. Edit ``/var/ossec/etc/ossec.conf`` in the Wazuh server and include a configuration block such as the following. Replace ``WEBHOOK_URL`` with your Incoming Webhook URL.
@@ -74,6 +71,10 @@ To set up this integration, follow these steps.
        <hook_url>WEBHOOK_URL</hook_url> <!-- Replace with your Slack hook URL -->
        <alert_format>json</alert_format>
      </integration>
+
+   .. note::
+
+      You can set a JSON object with customization fields using the :ref:`options <integration_options_tag>` tag. Visit the `Slack API reference <https://api.slack.com/reference/messaging/attachments#legacy_fields>`__ for information about available customization fields.
 
 #. Restart the Wazuh manager to apply the changes.
 
@@ -95,9 +96,6 @@ To set up this integration, do the following.
 
 #. Get your own *Events API v2* integration key by creating a `Pagerduty new service <https://support.pagerduty.com/docs/services-and-integrations#create-a-service>`__.
 
-.. note::
-  For a list of all possibles customizable fields of the `options` tag, you can visit the API reference `PagerDuty API reference <https://developer.pagerduty.com/docs/ZG9jOjExMDI5NTgx-send-an-alert-event>`_
-
 #. Edit ``/var/ossec/etc/ossec.conf`` in the Wazuh server and include a configuration block such as the following. Replace ``API_KEY`` with your Pagerduty integration key. The rule level filter is optional and you can remove it or set another level value for the integration.
 
    .. code-block:: xml
@@ -109,6 +107,10 @@ To set up this integration, do the following.
         <level>10</level>
         <alert_format>json</alert_format> <!-- With the new script this is mandatory -->
       </integration>
+
+   .. note::
+
+      You can set a JSON object with customization fields using the :ref:`options <integration_options_tag>` tag. Visit the `PagerDuty API reference <https://developer.pagerduty.com/docs/ZG9jOjExMDI5NTgx-send-an-alert-event>`__ for information about available customization fields.
 
 #. Restart the Wazuh manager to apply the changes.
 
@@ -151,9 +153,6 @@ Shuffle
 
 `Shuffle <https://shuffler.io/>`__ is an Open Source interpretation of SOAR. It transfers data throughout the enterprise with plug-and-play Apps. The Shuffle integration allows forwarding Wazuh alerts into a Shuffle Workflow using a `webhook <https://shuffler.io/docs/triggers#webhook>`__.
 
-.. note::
-  For a list of all possibles customizable fields of the `options` tag, you can visit the API reference `Shuffle API reference <https://shuffler.io/docs/API>`_
-
 To set up this integration, do the following.
 
 #. Go to Shuffle and make a Workflow.
@@ -175,6 +174,10 @@ To set up this integration, do the following.
          <level>3</level>
          <alert_format>json</alert_format>
       </integration>
+
+   .. note::
+
+      You can set a JSON object with customization fields using the :ref:`options <integration_options_tag>` tag. Visit the `Shuffle API reference <https://shuffler.io/docs/API>`__ for information about available customization fields.
 
 #. Restart the Wazuh manager to apply the changes.
 
@@ -204,4 +207,5 @@ Below, you can find an example of a configuration block in the ``ossec.conf`` fi
     <group>multiple_drops,authentication_failures</group>
     <api_key>APIKEY</api_key> <!-- Replace with your external service API key -->
     <alert_format>json</alert_format>
+    <options>{"data": "Custom data"}</options> <!-- Replace with your custom JSON object -->
   </integration>
