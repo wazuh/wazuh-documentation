@@ -36,7 +36,7 @@ Reparse
 -------
 
 .. warning::
-  
+
    Using the ``reparse`` option will fetch and process all the logs from the starting date until the present. This process may generate duplicate alerts.
 
 To fetch and process older logs, you need to manually run the module using the ``--reparse`` option.
@@ -231,6 +231,7 @@ The `service_endpoint` and `sts_endpoint` tags can be used to specify the VPC en
     </bucket>
 
     <bucket type="cloudtrail">
+      <aws_profile>default</aws_profile>
       <name>wazuh-cloudtrail-2</name>
       <aws_profile>default</aws_profile>
       <iam_role_arn>arn:aws:iam::xxxxxxxxxxx:role/wazuh-role</iam_role_arn>
