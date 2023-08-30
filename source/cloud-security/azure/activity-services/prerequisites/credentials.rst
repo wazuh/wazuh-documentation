@@ -35,14 +35,8 @@ Getting access credentials for Storage
     :align: center
     :width: 100%
 
-
-Authentication options
-----------------------
-
-There are two different ways to set up the Azure authentication:
-
 Using an authentication file
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+----------------------------
 
 It is possible to store the credentials in a file for authentication as long as the file content follows the `field = value` format explained below.
 
@@ -112,71 +106,5 @@ Regardless of the service or activity to be monitored, the authentication file i
 
 
 Check the :doc:`azure-logs wodle </user-manual/reference/ossec-conf/wodle-azure-logs>` section from the ossec.conf reference page for more information about the ``<auth_path>`` and other available parameters.
-
-
-Inserting the credentials into the configuration
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-
-.. deprecated:: 4.4.0
-
-Another authentication option is to set up credentials by storing them directly into the Wazuh configuration file ``/var/ossec/etc/ossec.conf``, inside of the ``<graph>``, ``<log_analytics>`` and ``<storage>`` blocks on the module configuration.
-
-The tags to use are different depending on the type of service or activity to be monitored:
-
-.. rubric:: Microsoft Graph and Log Analytics
-   :class: h5
-
-.. code-block:: none
-   :emphasize-lines: 6, 7, 18, 19
-
-   <wodle name="azure-logs">
-     <disabled>no</disabled>
-     <run_on_start>yes</run_on_start>
-
-     <log_analytics>
-         <application_id>8b7...c14</application_id>
-         <application_key>w22...91x</application_key>
-
-         <tenantdomain>wazuh.onmicrosoft.com</tenantdomain>
-         <request>
-             <query>AzureActivity</query>
-             <workspace>d6b...efa</workspace>
-             <time_offset>1d</time_offset>
-         </request>
-     </log_analytics>
-
-     <graph>
-         <application_id>8b7...c14</application_id>
-         <application_key>w22...91x</application_key>
-
-         <tenantdomain>wazuh.onmicrosoft.com</tenantdomain>
-         <request>
-             <query>auditLogs/directoryAudits</query>
-             <time_offset>1d</time_offset>
-         </request>
-     </graph>
-   </wodle>
-
-.. rubric:: Storage
-   :class: h5
-
-.. code-block:: none
-   :emphasize-lines: 6, 7
-
-   <wodle name="azure-logs">
-     <disabled>no</disabled>
-     <run_on_start>yes</run_on_start>
-
-     <storage>
-         <account_name>exampleaccountname</account_name>
-         <account_key>w22...91x</account_key>
-
-         <container name="insights-operational-logs">
-             <blobs>.json</blobs>
-             <content_type>json_inline</content_type>
-             <time_offset>24h</time_offset>
-         </container>
-     </storage>
-   </wodle>
 
 Take a look at the :doc:`azure-logs wodle </user-manual/reference/ossec-conf/wodle-azure-logs>` entry from the ``ossec.conf`` reference page for more information about the parameters.
