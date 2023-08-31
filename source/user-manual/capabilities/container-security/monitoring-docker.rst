@@ -211,5 +211,3 @@ The example configuration below shows an enabled Docker listener. The listener a
      <run_on_start>no</run_on_start>
      <disabled>no</disabled>
    </wodle>
-
-
