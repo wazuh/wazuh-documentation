@@ -24,36 +24,25 @@ Enable the Wazuh Docker listener
 
 The Docker listener allows the Wazuh agent to capture Docker events and forward them to the Wazuh server. The following sections describe how to install the Python Docker module and enable the Wazuh Docker listener.
 
-Install dependencies on the Docker server
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+Python
+------
 
-#. Install Python3:
+Docker container module require `Python 3 <https://www.python.org/>`_. It is compatible with
+`Python |PYTHON_CLOUD_CONTAINERS_MIN| - |PYTHON_CLOUD_CONTAINERS_MAX| <https://www.python.org/downloads/>`_.
 
-   .. tabs::
+.. note::
+   Newer Python versions should work although it is not guaranteed.
 
-      .. group-tab:: Yum
+Docker library for Python
+-------------------------
 
-         .. code-block:: console
+.. warning::
+  The Wazuh manager includes all dependencies installed, these steps are only necessary when configuring the integration in a Wazuh agent.
 
-            # yum update && yum install python3
+`Python Docker library <https://pypi.org/project/docker/>`_ is the official Python library for the Docker Engine API. The Wazuh docker integration requires ``docker 4.2.0``.
 
-      .. group-tab:: APT
-
-         .. code-block:: console
-
-            # apt-get update && apt-get install python3
-
-#. Install Pip on Debian-based endpoints:
-
-   .. code-block:: console
-
-      # apt-get install python3-pip
-
-#. Install the Python ``docker`` module. The Wazuh Docker listener requires ``docker 4.2.0``.
-
-   .. code-block:: console
-
-      # pip3 install docker==4.2.0
+.. code-block:: console
+  # pip3 install docker==4.2.0
 
 Configure the Wazuh agent
 ^^^^^^^^^^^^^^^^^^^^^^^^^

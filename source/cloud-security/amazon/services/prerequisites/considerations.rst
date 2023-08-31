@@ -54,7 +54,9 @@ The ``--debug 2`` parameter gets a verbose output. This is useful to show the sc
 Connection configuration for retries
 ------------------------------------
 
-Some calls to AWS services may fail when made in highly congested environments. The :ref:`boto-3` client raises `ClientError` exceptions describing the errors. This kind of exception often needs repeating the call, without further handling. To help retry these calls, Boto3 provides `Retries <https://boto3.amazonaws.com/v1/documentation/api/latest/guide/retries.html>`__. This feature allows retrying client calls to AWS services when errors like ``ThrottlingException`` are experienced.
+Some calls to AWS services may fail when made in highly congested environments.
+The `boto-3 <https://boto3.amazonaws.com/v1/documentation/api/latest/index.html`_ client raises `ClientError`
+exceptions describing the errors. This kind of exception often needs repeating the call, without further handling. To help retry these calls, Boto3 provides `Retries <https://boto3.amazonaws.com/v1/documentation/api/latest/guide/retries.html>`__. This feature allows retrying client calls to AWS services when errors like ``ThrottlingException`` are experienced.
 
 Users can customize two retry configurations.
 
