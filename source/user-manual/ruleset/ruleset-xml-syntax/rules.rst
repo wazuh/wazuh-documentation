@@ -183,6 +183,52 @@ The **xml labels** used to configure ``rules`` are listed here.
 | `var`_                  | Name for the variable. Most used: `BAD_WORDS`_                | Defines a variable that can be used anywhere inside the same file.                                   |
 +-------------------------+---------------------------------------------------------------+------------------------------------------------------------------------------------------------------+
 
+.. _rules_group:
+
+group
+^^^^^
+
+Groups are tags to categorize alerts. Groups provide the following benefits.
+
+-  A search criteria to filter related alerts.
+-  A matching condition for rules that use `if_group`_ and `if_matched_group`_.
+
+The ``<group>`` element is a root element in the rule file. All rules must have at least one group and must be enclosed by this element as shown in the following example.
+
+  .. code-block:: xml
+
+     <group name="wazuh_api,">
+ 
+       <rule id="401" level="3">
+         <if_sid>400</if_sid>
+         <field name="type">INFO</field>
+         <description>Wazuh API: Informative event.</description>
+       </rule>
+ 
+     </group>
+
+There's an additional ``<group>`` element to set groups within a rule definition as follows.
+
+.. code-block:: xml
+
+   <rule id="402" level="5">
+     <if_sid>400</if_sid>
+     <field name="type">WARNING</field>
+     <description>Wazuh API: Warning event.</description>
+     <group>gpg13_4.12</group>
+   </rule>
+
+These two ``<group>`` elements provide the following benefits:
+
+-  Allow assigning one or more groups to the alerts.
+-  Keep the rules definitions organized.
+
++--------------------+------------+
+| **Default Value**  | n/a        |
++--------------------+------------+
+| **Allowed values** | Any String |
++--------------------+------------+
+
 .. _rules_rule:
 
 rule
@@ -2070,36 +2116,6 @@ Example:
         <description>List of logged in users. It will not be alerted by default.</description>
       </rule>
 
-.. _rules_group:
-
-group
-^^^^^
-
-Add additional groups to the alert. Groups are optional tags added to alerts.
-
-They can be used by other rules by using if_group or if_matched_group, or by alert parsing tools to categorize alerts.
-
-Groups are variables that define behavior. When an alert includes that group label, this behavior will occur.
-
-Example:
-
-  .. code-block:: xml
-
-    <rule id="3801" level="4">
-      <description>Group for rules related with spam.</description>
-      <group>spam,</group>
-    </rule>
-
-Now, every rule with the line ``<group>spam,</group>`` will be included in that group.
-
-It's a very useful label to keep the rules ordered.
-
-+--------------------+------------+
-| **Default Value**  | n/a        |
-+--------------------+------------+
-| **Allowed values** | Any String |
-+--------------------+------------+
-
 .. _rules_mitre:
 
 mitre
@@ -2154,7 +2170,7 @@ Example:
     </group>
 
 BAD_WORDS
-^^^^^^^^^
+~~~~~~~~~
 
 <var name="BAD_WORDS">error|warning|failure</var>
 
