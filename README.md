@@ -22,9 +22,9 @@ You can also join our [users mailing list](https://groups.google.com/d/forum/waz
 
 ## Software and libraries used
 
-- [Python](https://www.python.org/) 3.6+
-- [Sphinx](http://www.sphinx-doc.org/) 3.4.3
-- [sphinx-tabs](https://github.com/djungelorm/sphinx-tabs) 1.3.0
+- [Python](https://www.python.org/) 3.8+
+- [Sphinx](http://www.sphinx-doc.org/) 7.0.1
+- [sphinx-tabs](https://github.com/djungelorm/sphinx-tabs) 3.4.1
 - [jsmin](https://github.com/tikitu/jsmin) 3.0.1
 - [sphinx-reredirects](https://gitlab.com/documatt/sphinx-reredirects) 0.1.2
 
