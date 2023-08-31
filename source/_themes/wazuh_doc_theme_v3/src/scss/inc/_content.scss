@@ -11,7 +11,7 @@
 @import "../components/step-cards";
 @import "../components/breadcrumbs";
 @import "../components/code-blocks";
-@import "../components/customized-tabs";
+@import "../components/tabs";
 @import "../components/lightbox";
 @import "../components/link-boxes";
 @import "../components/previous-next";
@@ -386,12 +386,6 @@
     font-size: .7em;
     text-decoration: underline;
     vertical-align: super;
-    &::before {
-      content: "[";
-    }
-    &.footnote-reference::after {
-      content: "]";
-    }
   }
   .footnote.brackets {
     position: relative;
@@ -407,10 +401,11 @@
       font-weight: 600;
       content: "Footnotes";
     }
-    .label .brackets {
+    .label {
       display: inline-block;
       margin-top: .5rem;
       margin-bottom: .5rem;
+      margin-right: 10px;
     }
     p {
       margin-top: .5rem;
