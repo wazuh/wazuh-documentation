@@ -17,7 +17,7 @@ Installing dependencies
 Python
 ------
 
-The Azure module requires Python 3. It is compatible with Python 3.8 and above.
+The Azure module requires Python 3. It is compatible with Python 3.7 and above.
 
 .. tabs::
 
