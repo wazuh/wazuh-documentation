@@ -21,7 +21,7 @@ The integrations are configured on the Wazuh manager ``ossec.conf`` file. You ca
     <name> </name>
     <hook_url> </hook_url> <!-- Required for Slack and Shuffle -->
     <api_key> </api_key> <!-- Required for PagerDuty and VirusTotal -->
-    <alert_format>json</alert_format> <!-- Required for Slack, VirusTotal and Shuffle -->
+    <alert_format>json</alert_format> <!-- Required for Slack, PagerDuty, VirusTotal and Shuffle -->
 
     <!-- Optional filters -->
     <rule_id> </rule_id>
@@ -105,7 +105,7 @@ To set up this integration, do the following.
         <name>pagerduty</name>
         <api_key>API_KEY</api_key> <!-- Replace with your PagerDuty API key -->
         <level>10</level>
-        <alert_format>json</alert_format> <!-- With the new script this is mandatory -->
+        <alert_format>json</alert_format> <!-- New mandatory parameter since v4.7.0 -->
       </integration>
 
    .. note::
