@@ -6,10 +6,6 @@
 Installing dependencies
 =======================
 
-.. note::
-
-  The Azure monitoring module can be configured in the Wazuh manager (which also behaves as an agent) or directly in a Wazuh agent.
-
 Python
 ------
 

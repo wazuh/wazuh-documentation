@@ -6,9 +6,6 @@
 Installing dependencies
 =======================
 
-.. note::
-  The GCP module can be configured in both the Wazuh manager and the agent. The choice merely depends on where you want to reach the GCP services from.
-
 Python
 ------
 
