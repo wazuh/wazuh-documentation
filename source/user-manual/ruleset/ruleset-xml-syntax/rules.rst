@@ -193,41 +193,47 @@ Groups are tags to categorize alerts. Groups provide the following benefits.
 -  A search criteria to filter related alerts.
 -  A matching condition for rules that use `if_group`_ and `if_matched_group`_.
 
-The ``<group>`` element is a root element in the rule file. All rules must have at least one group and must be enclosed by this element as shown in the following example.
+All rules must have at least one group.
 
-  .. code-block:: xml
-
-     <group name="wazuh_api,">
- 
-       <rule id="401" level="3">
-         <if_sid>400</if_sid>
-         <field name="type">INFO</field>
-         <description>Wazuh API: Informative event.</description>
-       </rule>
- 
-     </group>
-
-There's an additional ``<group>`` element to set groups within a rule definition as follows.
+The ``<group>`` element is a root element in the rule file. All rule definitions must be enclosed by the ``<group>`` ``</group>`` pair as shown in the following example.
 
 .. code-block:: xml
+   :emphasize-lines: 1,7
 
-   <rule id="402" level="5">
-     <if_sid>400</if_sid>
-     <field name="type">WARNING</field>
-     <description>Wazuh API: Warning event.</description>
-     <group>gpg13_4.12</group>
-   </rule>
+   <group name="wazuh,">
+     <rule id="221" level="0">
+       <category>ossec</category>
+       <decoded_as>syscollector</decoded_as>
+       <description>Syscollector event.</description>
+     </rule>
+   </group>
+
+There's an additional ``<group>`` element within a rule definition to set groups as follows.
+
+.. code-block:: xml
+   :emphasize-lines: 6
+
+   <group name="wazuh,">
+     <rule id="234" level="3">
+       <if_sid>230</if_sid>
+       <field name="alert_type">normal</field>
+       <description>The file limit set for this agent is $(file_limit). Now, $(file_count) files are being monitored.</description>
+       <group>syscheck,fim_db_state,</group>
+     </rule>
+   </group>
 
 These two ``<group>`` elements provide the following benefits:
 
--  Allow assigning one or more groups to the alerts.
--  Keep the rules definitions organized.
+-  Enable the assignment of one or more groups to the alerts.
+-  Keep the rule definitions organized.
 
 +--------------------+------------+
 | **Default Value**  | n/a        |
 +--------------------+------------+
 | **Allowed values** | Any String |
 +--------------------+------------+
+
+To set more than one group within a ``<group>`` element, you need to use the separator character ``,``.
 
 .. _rules_rule:
 
