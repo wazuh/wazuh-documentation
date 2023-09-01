@@ -17,7 +17,7 @@ The :doc:`upgrading-central-components` section includes instructions to upgrade
 
 .. note::
   
-   Since Wauh v4.6, we don't provide the Kibana plugin and Splunk app anymore. However, if you want to integrate Wazuh with the Elastic or Splunk platforms, you can follow the :doc:`/integrations-guide/index`.
+   Since Wazuh v4.6.0, we don't provide the Kibana plugin and Splunk app anymore. To integrate Wazuh with Elastic or Splunk, refer to our :doc:`/integrations-guide/index`.
 
 Upgrade the Wazuh agents
 ------------------------
