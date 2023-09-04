@@ -93,18 +93,21 @@ Below is an example of an alert generated when a monitored file is changed. Meta
 
 In the Integrity Monitoring section of the Wazuh dashboard, users can see all of the details of the alerts triggered and find a comprehensive summary of detected changes.
     
-.. thumbnail:: /images/getting-started/use-cases/wazuh-use-cases-fim1.png
-   :title: Integrity monitoring dashboard
-   :align: center
-   :width: 80% 
-
-.. thumbnail:: /images/getting-started/use-cases/wazuh-use-cases-fim2.png
+.. thumbnail:: /images/getting-started/use-cases/integrity-monitoring.png
    :title: Integrity monitoring
+   :alt: Integrity monitoring
    :align: center
    :width: 80% 
 
-.. thumbnail:: /images/getting-started/use-cases/wazuh-use-cases-fim3.png
+.. thumbnail:: /images/getting-started/use-cases/integrity-monitoring-events.png
+   :title: Integrity monitoring events
+   :alt: Integrity monitoring events
+   :align: center
+   :width: 80% 
+
+.. thumbnail:: /images/getting-started/use-cases/integrity-monitoring-inventory.png
    :title: Integrity monitoring inventory
+   :Alt: Integrity monitoring inventory
    :align: center
    :width: 80%
 

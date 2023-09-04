@@ -84,7 +84,7 @@ if ( $('.document').length > 0 ) {
     });
 
     const data = blockCode.html();
-    const codeType = getCodeBlockType(blockCode.parent());
+    const codeType = getCodeBlockType(blockCode.parent()).toLowerCase();
     if ( jQuery.inArray(codeType, ['none', 'bash']) === -1 ) {
       const heredocs = findHeredocs(data);
       const find = data.match(/(?:\$\s|\#)/g);
@@ -147,7 +147,7 @@ if ( $('.document').length > 0 ) {
     codeClone.find('.gp').empty();
     let data = codeClone.text();
     const heredocs = findHeredocs(code);
-    const codeType = getCodeBlockType(parent);
+    const codeType = getCodeBlockType(parent).toLowerCase();
 
     data = String(data);
     if ( jQuery.inArray(codeType, ['none', 'bash']) === -1 ) {

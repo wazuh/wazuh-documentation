@@ -57,21 +57,21 @@ Elasticsearch installation and configuration
 
          .. code-block:: console
 
-           # yum install elasticsearch-7.17.8
+           # yum install elasticsearch-|ELASTICSEARCH_ELK_LATEST|
 
 
       .. group-tab:: APT
 
          .. code-block:: console
 
-           # apt-get install elasticsearch=7.17.8
+           # apt-get install elasticsearch=|ELASTICSEARCH_ELK_LATEST|
 
 
 #. Download the configuration file ``/etc/elasticsearch/elasticsearch.yml`` as follows:
 
    .. code-block:: console
 
-     # curl -so /etc/elasticsearch/elasticsearch.yml https://packages.wazuh.com/4.4/tpl/elastic-basic/elasticsearch_all_in_one.yml
+     # curl -so /etc/elasticsearch/elasticsearch.yml https://packages.wazuh.com/|WAZUH_CURRENT_MINOR|/tpl/elastic-basic/elasticsearch_all_in_one.yml
 
 
 Certificates creation and deployment
@@ -128,24 +128,25 @@ This command should have an output like this:
 
 .. code-block:: console
    :class: output
-
+   
    {
      "name" : "elasticsearch",
      "cluster_name" : "elasticsearch",
-     "cluster_uuid" : "9hNRUiNbSwy0p0KAhsswdA",
+     "cluster_uuid" : "VohZYVe1RKaT-lx7Lf6Jeg",
      "version" : {
-       "number" : "7.17.8",
+       "number" : "7.17.11",
        "build_flavor" : "default",
        "build_type" : "rpm",
-       "build_hash" : "120eabe1c8a0cb2ae87cffc109a5b65d213e9df1",
-       "build_date" : "2022-12-02T17:33:09.727072865Z",
+       "build_hash" : "eeedb98c60326ea3d46caef960fb4c77958fb885",
+       "build_date" : "2023-06-23T05:33:12.261262042Z",
        "build_snapshot" : false,
        "lucene_version" : "8.11.1",
        "minimum_wire_compatibility_version" : "6.8.0",
        "minimum_index_compatibility_version" : "6.0.0-beta1"
      },
      "tagline" : "You Know, for Search"
-   }   
+   }
+
 
 .. _basic_all_in_one_wazuh:
 
@@ -180,21 +181,19 @@ Installing the Wazuh manager
 
 #. Install the Wazuh manager package:
 
-    .. tabs::
+   .. tabs::
 
       .. group-tab:: Yum
 
+         .. code-block:: console
 
-        .. include:: ../../../_templates/installations/basic/wazuh/yum/install_wazuh_manager.rst
-
-
+            # yum install wazuh-manager|WAZUH_MANAGER_RPM_PKG_INSTALL|
 
       .. group-tab:: APT
 
+         .. code-block:: console
 
-        .. include:: ../../../_templates/installations/basic/wazuh/deb/install_wazuh_manager.rst
-
-
+            # apt-get install wazuh-manager|WAZUH_MANAGER_DEB_PKG_INSTALL|
 
 #. Enable and start the Wazuh manager service:
 
@@ -283,7 +282,7 @@ To ensure that Filebeat has been successfully installed, run the following comma
 This command should have an output like this:
 
 .. code-block:: console
-  :class: output
+   :class: output
 
    elasticsearch: https://127.0.0.1:9200...
      parse url... OK
@@ -298,8 +297,7 @@ This command should have an output like this:
        TLS version: TLSv1.3
        dial up... OK
      talk to server... OK
-     version: 7.17.8     
-
+     version: 7.17.11
 
 Kibana installation and configuration
 -------------------------------------

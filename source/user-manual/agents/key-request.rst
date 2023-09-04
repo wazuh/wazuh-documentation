@@ -31,7 +31,8 @@ To do this, it is necessary to create a binary or script in any language that ca
 Below you can see the flow diagram:
 
 .. thumbnail:: ../../images/manual/key-request/key-request-flow.png
-  :title: Agent key request module flow diagram
+  :title: Agent key request flow diagram
+  :alt: Agent key request flow diagram
   :align: center
   :width: 100%
 
@@ -55,8 +56,9 @@ When fetching by IP address, the manager retrieves the agent key by querying his
 
   ./agent_key_request.py ip 192.168.1.100
 
-.. thumbnail:: ../../images/manual/key-request/key-request-1.png
-  :title: Executable method: one program call per request.
+.. thumbnail:: ../../images/manual/key-request/executable-method.png
+  :title: Executable method: one program call per request
+  :alt: Executable method: one program call per request
   :align: center
   :width: 100%
 
@@ -67,8 +69,9 @@ When the ``socket`` tag is specified the module will send the parameters through
 
 The format in which the program receives the data is ``option:value``, where option can be ``id`` or ``ip`` depending on the fetching type.
 
-.. thumbnail:: ../../images/manual/key-request/key-request-0.png
-  :title: Method with socket: requests directly to the socket.
+.. thumbnail:: ../../images/manual/key-request/method-with-socket.png
+  :title: Method with socket: requests directly to the socket
+  :alt: Method with socket: requests directly to the socket
   :align: center
   :width: 100%
 

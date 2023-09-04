@@ -3,37 +3,26 @@
 .. meta::
   :description: Find out more about the Wazuh Security Configuration Assessment capability. What is SCA, how it works and how to configure it, a use case and more.
 
-.. Section marks used on this document:
-.. h0 ======================================
-.. h1 --------------------------------------
-.. h2 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-.. h3 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-.. h4 ######################################
-.. h5 ::::::::::::::::::::::::::::::::::::::
-
 .. _manual_sec_config_assessment:
 
 Security Configuration Assessment
 =================================
 
-There are multiple Wazuh integrations that perform configuration assessment scans (see :ref:`Policy monitoring section <manual_policy_monitoring>`), including CIS-CAT, and more recently the Security Configuration Assessment (SCA). The SCA was created by the Wazuh development team to overcome limitations that were inherent to the other integrations, to name a few:
+Security Configuration Assessment (SCA) is the process of verifying that all systems conform to a set of predefined rules regarding configuration settings and approved application usage. One of the most certain ways to secure endpoints is by reducing their vulnerability surface. This process is commonly known as hardening. Configuration assessment is an effective way to identify weaknesses in your endpoints and patch them to reduce your attack surface.
 
-- The CIS-CAT tool is proprietary software that requires an external license for its use.
-- The *Rootcheck* module depends on the *Syscheck* daemon, and its policies feeds are often outdated.
+The Wazuh SCA module performs scans to detect misconfigurations and exposures on monitored endpoints and recommend remediation actions. Those scans assess the configuration of the endpoints using policy files that contain rules to be tested against the actual configuration of the endpoint. SCA policies can check for the existence of files, directories, registry keys and values, running processes, and recursively test for the existence of files inside directories.
 
-The Security Configuration Assessment (SCA) module aims to provide the user with the best possible experience when performing scans about hardening and configuration policies. Some of its key features include:
+For example, the SCA module could assess whether it is necessary to change password-related configuration, remove unnecessary software, disable unnecessary services, or audit the TCP/IP stack configuration.
 
--  State of the last SCA scan. The results of the checks for every enabled policy are stored in the Wazuh manager. They can be consulted at the SCA tab in the Wazuh dashboard.
--  Alerts on SCA state changes. Only state changes and new checks are alerted to avoid alert flooding and repeated alerts with every new scan. State changes are updated in the Wazuh manager database.
--  YAML format for policy files. CIS policies are based on CIS benchmarks.
+Policies for the SCA module are written in YAML. This format was chosen because it is human-readable and easy to understand. You can easily write your own SCA policies or extend existing ones to fit your needs. Furthermore, Wazuh is distributed with a set of out-of-the-box policies mostly based on the CIS benchmarks, a well-established standard for endpoint hardening.
 
 Further information is available in the following sections:
 
 .. toctree::
    :maxdepth: 2
 
-   what-is-it
    how-it-works
    how-to-configure
+   available-sca-policies
    creating-custom-policies
-   use-case
+   use-cases

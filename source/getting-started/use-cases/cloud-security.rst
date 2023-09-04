@@ -19,23 +19,23 @@ The :doc:`Wazuh agent <../components/wazuh-agent>` also provides a module to mon
 
 The following list describes some of the AWS services that Wazuh can monitor:
 
-- :doc:`Amazon Guardduty </amazon/services/supported-services/guardduty>`: threat detection service that continuously monitors for malicious activity and unauthorized behavior to protect your AWS accounts, workloads, and data stored in Amazon S3.
+- :doc:`Amazon Guardduty </cloud-security/amazon/services/supported-services/guardduty>`: threat detection service that continuously monitors for malicious activity and unauthorized behavior to protect your AWS accounts, workloads, and data stored in Amazon S3.
 
-- :doc:`Amazon Inspector </amazon/services/supported-services/inspector>`: automated security assessment service that helps improve the security and compliance of applications deployed on AWS.
+- :doc:`Amazon Inspector </cloud-security/amazon/services/supported-services/inspector>`: automated security assessment service that helps improve the security and compliance of applications deployed on AWS.
 
-- :doc:`Amazon Key Management Service (KMS) </amazon/services/supported-services/kms>`: used to create and manage cryptographic keys and control their use across a wide range of AWS services.
+- :doc:`Amazon Key Management Service (KMS) </cloud-security/amazon/services/supported-services/kms>`: used to create and manage cryptographic keys and control their use across a wide range of AWS services.
 
-- :doc:`Amazon Macie </amazon/services/supported-services/macie>`: fully managed data security and data privacy service. It automatically detects unencrypted S3 buckets, publicly accessible buckets, and buckets shared with external AWS accounts.
+- :doc:`Amazon Macie </cloud-security/amazon/services/supported-services/macie>`: fully managed data security and data privacy service. It automatically detects unencrypted S3 buckets, publicly accessible buckets, and buckets shared with external AWS accounts.
 
-- :doc:`Amazon Virtual Private Cloud (VPC) </amazon/services/supported-services/vpc>`: provisions a logically isolated section of the AWS Cloud where AWS resources can be launched on a virtual network defined by the user.
+- :doc:`Amazon Virtual Private Cloud (VPC) </cloud-security/amazon/services/supported-services/vpc>`: provisions a logically isolated section of the AWS Cloud where AWS resources can be launched on a virtual network defined by the user.
 
-- :doc:`AWS Config </amazon/services/supported-services/config>`: assess, audit, and evaluate the configurations of your AWS resources. It assists the users review changes in configurations and relationships between AWS resources.
+- :doc:`AWS Config </cloud-security/amazon/services/supported-services/config>`: assess, audit, and evaluate the configurations of your AWS resources. It assists the users review changes in configurations and relationships between AWS resources.
 
-- :doc:`AWS Cloudtrail </amazon/services/supported-services/cloudtrail>`: enables governance, compliance, operational auditing, and risk auditing of your AWS account. With CloudTrail, you can log, continuously monitor, and retain account activity related to actions across your AWS infrastructure.
+- :doc:`AWS Cloudtrail </cloud-security/amazon/services/supported-services/cloudtrail>`: enables governance, compliance, operational auditing, and risk auditing of your AWS account. With CloudTrail, you can log, continuously monitor, and retain account activity related to actions across your AWS infrastructure.
 
-- :doc:`AWS Trusted Advisor </amazon/services/supported-services/trusted-advisor>`: helps users reduce cost, increase performance, and improve security by optimizing their AWS environment. It provides real-time guidance to help users provision their resources following AWS best practices.
+- :doc:`AWS Trusted Advisor </cloud-security/amazon/services/supported-services/trusted-advisor>`: helps users reduce cost, increase performance, and improve security by optimizing their AWS environment. It provides real-time guidance to help users provision their resources following AWS best practices.
 
-- :doc:`AWS Web Application Firewall (WAF) </amazon/services/supported-services/waf>`: helps protect your web applications or APIs against common web exploits that may affect availability, compromise security, or consume excessive resources.
+- :doc:`AWS Web Application Firewall (WAF) </cloud-security/amazon/services/supported-services/waf>`: helps protect your web applications or APIs against common web exploits that may affect availability, compromise security, or consume excessive resources.
 
 See below an example of an alert generated when an AWS security group is deleted:
 
@@ -97,24 +97,25 @@ See below an example of an alert generated when an AWS security group is deleted
 
 Example of AWS dashboard:
 
-.. thumbnail:: /images/getting-started/use-cases/wazuh-use-cases-cloud-geo.png
-   :title: AWS dashboard
+.. thumbnail:: /images/getting-started/use-cases/aws-security-dashboard.png
+   :title: AWS security dashboard
+   :alt: AWS security dashboard
    :align: center
    :width: 80%
    :wrap_image: No
 
-You can find more information on how to use Wazuh to monitor AWS in our :doc:`documentation </amazon/index>`.
+You can find more information on how to use Wazuh to monitor AWS in our :doc:`documentation </cloud-security/amazon/index>`.
 
 Microsoft Azure
 ---------------
 
 The :doc:`Wazuh agent <../components/wazuh-agent>` module for Microsoft Azure makes it easy to pull Azure platform logs. In particular, it is designed to obtain data from the following services:
 
-- :doc:`Log Analytics API </azure/activity-services/services/log-analytics>`: The Log Analytics API is a core component of the Azure Monitor service, which is used to aggregate and analyze log data. The sources of such data are cloud applications, operating systems, and Azure resources. The Wazuh module for Azure is capable of querying the Log Analytics API, pulling the logs collected by the Azure monitor service.
+- :doc:`Log Analytics API </cloud-security/azure/activity-services/services/log-analytics>`: The Log Analytics API is a core component of the Azure Monitor service, which is used to aggregate and analyze log data. The sources of such data are cloud applications, operating systems, and Azure resources. The Wazuh module for Azure is capable of querying the Log Analytics API, pulling the logs collected by the Azure monitor service.
 
-- :doc:`Blob Storage API </azure/activity-services/services/storage>`: Logs from Azure services are optionally pushed to Azure Blob Storage. Specifically, it is possible to configure an Azure service to export logs to a container in a storage account created for that purpose. Afterward, the Wazuh agent will download those logs via its integration with the Blob Storage API.
+- :doc:`Blob Storage API </cloud-security/azure/activity-services/services/storage>`: Logs from Azure services are optionally pushed to Azure Blob Storage. Specifically, it is possible to configure an Azure service to export logs to a container in a storage account created for that purpose. Afterward, the Wazuh agent will download those logs via its integration with the Blob Storage API.
 
-- :doc:`Active Directory Graph API </azure/activity-services/active-directory/graph>`: The Azure Active Directory Graph API provides access to AZURE AD through REST API endpoints. It is used by Wazuh to monitor Active Directory events (e.g., creation of a new user, update of user properties, disable of user accounts, etc.).
+- :doc:`Active Directory Graph API </cloud-security/azure/activity-services/active-directory/graph>`: The Azure Active Directory Graph API provides access to AZURE AD through REST API endpoints. It is used by Wazuh to monitor Active Directory events (e.g., creation of a new user, update of user properties, disable of user accounts, etc.).
 
 See below an example of an Azure alert:
 
@@ -156,7 +157,7 @@ See below an example of an Azure alert:
      "timestamp": "2020-05-25T15:45:51.432+0000"
    }
 
-You can find more information on how to use Wazuh to monitor Microsoft Azure in our :doc:`documentation </azure/index>`.
+You can find more information on how to use Wazuh to monitor Microsoft Azure in our :doc:`documentation </cloud-security/azure/index>`.
 
 Google Cloud Platform
 ---------------------
@@ -227,4 +228,4 @@ See below an example of an alert generated when a known bad actor (a source IP a
      "timestamp": "2020-08-17T17:09:25.832+0000"
    }
 
-You can find more information on how to use Wazuh to monitor the Google cloud platform in :doc:`/gcp/index`.
+You can find more information on how to use Wazuh to monitor the Google cloud platform in :doc:`/cloud-security/gcp/index`.

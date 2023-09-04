@@ -25,6 +25,7 @@ High availability
 
 .. thumbnail:: ../../images/manual/cluster/cluster-infrastructure.png
     :title: Wazuh cluster infrastructure
+    :alt: Wazuh cluster infrastructure
     :align: center
     :width: 80%
 
@@ -72,7 +73,6 @@ How the cluster works
 
         - **Keep alive thread**: Responsible of sending a keep alive to the master every so often.
         - **Agent info thread**: Responsible of sending the statuses of the agents that are reporting to that node.
-        - **Agent groups sync thread**: Responsible of sending information of agent groups assignment to master.
         - **Agent groups send thread**: Responsible of sending information of agent groups assignment to workers.
         - **Local agent-groups thread**: Responsible of reading all new agent groups information in the master.
         - **Integrity thread**: Responsible of synchronizing files in the cluster.
@@ -81,7 +81,9 @@ How the cluster works
     All cluster logs are written in the file ``logs/cluster.log``.
 
     .. thumbnail:: ../../images/manual/cluster/cluster-flow.png
-      :align: center
+       :title: Wazuh cluster workflow
+       :alt: Wazuh cluster workflow
+       :align: center
 
 Keep alive thread
 ~~~~~~~~~~~~~~~~~
@@ -97,16 +99,10 @@ Agent info thread
 
     The master also checks whether the agent exists or not before saving its status update. This is done to prevent the master from storing unnecessary information. For example, this situation is very common when an agent is removed but the master hasn't notified worker nodes yet.
 
-Agent groups sync thread
-~~~~~~~~~~~~~~~~~~~~~~~~
-
-    The *agent groups sync thread* sends information to the master about the groups to which each agent belongs. This happens when a new agent connects for the first time to a worker and is repeated until the master sends back said information.
-
-
 Agent groups send thread
 ~~~~~~~~~~~~~~~~~~~~~~~~
 
-    The *agent groups send thread* sends information from the master to all the workers about the groups to which each agent belongs. This happens when the master receives agent-groups information from any worker, forwarding it to the same worker and to all the others.
+    The *agent groups send thread* sends information from the master to all the workers about the groups to which each agent belongs. The information is calculated in the master when an agent connects for the first time.
 
 Local agent-groups thread
 ~~~~~~~~~~~~~~~~~~~~~~~~~

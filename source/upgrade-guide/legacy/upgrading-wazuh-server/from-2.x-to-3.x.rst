@@ -79,7 +79,7 @@ To upgrade the Wazuh server, choose the appropriate tab for the desired package 
 
   The installation of the updated packages will automatically ``restart the services`` for the Wazuh manager and the Wazuh API. The Wazuh manager configuration file will be ``unmodified``, so the user will need to manually add the settings for the new capabilities. More information can be found in the :doc:`User manual </user-manual/index>`.
 
-  After the upgrade, the old alerts will not be visualized in Kibana due to a change in the Wazuh alerts’ template. In order to access the old alerts and visualize them along with the new ones, the indices need to be reindexed to apply the new mapping. The process is described in the :ref:`Restore the Wazuh alerts from Wazuh 2.x <restore_alerts_2.x_3.x>` section.
+  After the upgrade, the old alerts will not be visualized in Kibana due to a change in the Wazuh alerts template. In order to access the old alerts and visualize them along with the new ones, the indices need to be reindexed to apply the new mapping. The process is described in the :ref:`Restore the Wazuh alerts from Wazuh 2.x <restore_alerts_2.x_3.x>` section.
 
 Disable the Wazuh repository
 ----------------------------

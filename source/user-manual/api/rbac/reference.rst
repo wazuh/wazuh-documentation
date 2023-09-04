@@ -61,6 +61,9 @@ This reference also contains a set of default roles and policies that can be imm
         - `decoders:update`_
         - `decoders:delete`_
 
+    - `Events`_
+        - `event:ingest`_
+
     - `Group`_
         - `group:create`_
         - `group:delete`_
@@ -132,6 +135,7 @@ This reference also contains a set of default roles and policies that can be imm
     - `cluster_read`_
     - `decoders_all`_
     - `decoders_read`_
+    - `events_ingest`_
     - `lists_all`_
     - `lists_read`_
     - `logtest_all`_
@@ -300,7 +304,6 @@ agent:modify_group
 - :api-ref:`DELETE /agents/group <operation/api.controllers.agent_controller.delete_multiple_agent_single_group>` (`agent:id`_, `agent:group`_)
 - :api-ref:`DELETE /agents/{agent_id}/group <operation/api.controllers.agent_controller.delete_single_agent_multiple_groups>` (`agent:id`_, `agent:group`_)
 - :api-ref:`DELETE /agents/{agent_id}/group/{group_id} <operation/api.controllers.agent_controller.delete_single_agent_single_group>` (`agent:id`_, `agent:group`_)
-- :api-ref:`DELETE /groups <operation/api.controllers.agent_controller.delete_groups>` (`agent:id`_, `agent:group`_)
 - :api-ref:`PUT /agents/group <operation/api.controllers.agent_controller.put_multiple_agent_single_group>` (`agent:id`_, `agent:group`_)
 - :api-ref:`PUT /agents/{agent_id}/group/{group_id} <operation/api.controllers.agent_controller.put_agent_single_group>` (`agent:id`_, `agent:group`_)
 
@@ -408,6 +411,12 @@ decoders:delete
 ~~~~~~~~~~~~~~~~~~~~~~~~~~
 - :api-ref:`DELETE /decoders/files/{filename} <operation/api.controllers.decoder_controller.delete_file>` (`decoder:file`_)
 
+Events
+^^^^^^^
+event:ingest
+~~~~~~~~~~~~
+- :api-ref:`POST /events <operation/api.controllers.event_controller.forward_event>` (`*:*`_)
+
 Group
 ^^^^^^^^^^^^^^^
 group:create
@@ -423,7 +432,6 @@ group:modify_assignments
 - :api-ref:`DELETE /agents/group <operation/api.controllers.agent_controller.delete_multiple_agent_single_group>` (`group:id`_)
 - :api-ref:`DELETE /agents/{agent_id}/group <operation/api.controllers.agent_controller.delete_single_agent_multiple_groups>` (`group:id`_)
 - :api-ref:`DELETE /agents/{agent_id}/group/{group_id} <operation/api.controllers.agent_controller.delete_single_agent_single_group>` (`group:id`_)
-- :api-ref:`DELETE /groups <operation/api.controllers.agent_controller.delete_groups>` (`group:id`_)
 - :api-ref:`PUT /agents/group <operation/api.controllers.agent_controller.put_multiple_agent_single_group>` (`group:id`_)
 - :api-ref:`PUT /agents/{agent_id}/group/{group_id} <operation/api.controllers.agent_controller.put_agent_single_group>` (`group:id`_)
 
@@ -440,7 +448,6 @@ group:read
 group:update_config
 ~~~~~~~~~~~~~~~~~~~~~~~~~~
 - :api-ref:`PUT /groups/{group_id}/configuration <operation/api.controllers.agent_controller.put_group_config>` (`group:id`_)
-
 
 Lists
 ^^^^^^^^^^^^^^^
@@ -838,6 +845,19 @@ Allow reading all decoder files in the system.
         - decoders:read
       resources:
         - decoder:file:*
+      effect: allow
+
+events_ingest
+^^^^^^^^^^^^^
+Allow sending events to analysisd.
+
+.. code-block:: yaml
+
+    resourceless:
+      actions:
+        - event:ingest
+      resources:
+        - '*:*:*'
       effect: allow
 
 lists_all

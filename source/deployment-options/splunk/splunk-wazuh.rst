@@ -28,7 +28,19 @@ The Wazuh server collects and analyzes data from deployed Wazuh agents. It runs 
 
 #. Install the Wazuh manager package:
 
-   .. include:: /_templates/installations/wazuh/common/install_wazuh_manager.rst
+   .. tabs::
+
+      .. group-tab:: Yum
+
+         .. code-block:: console
+
+            # yum -y install wazuh-manager|WAZUH_MANAGER_RPM_PKG_INSTALL|
+
+      .. group-tab:: APT
+
+         .. code-block:: console
+
+            # apt-get -y install wazuh-manager|WAZUH_MANAGER_DEB_PKG_INSTALL|
 
 Choose the corresponding tab to configure the installation as a single-node or multi-node cluster: 
 

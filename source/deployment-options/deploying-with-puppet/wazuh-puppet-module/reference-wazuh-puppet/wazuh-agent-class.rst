@@ -907,7 +907,7 @@ $agent_package_name
 $agent_package_version
   Define package version
 
-  `Default 4.4.0-1`
+  `Default |WAZUH_CURRENT_PUPPET|-1`
 
   `Type String`
 

@@ -55,21 +55,18 @@ Installing the Wazuh manager
   #. Install the Wazuh manager package. 
 
      .. tabs::
-     
-     
-       .. group-tab:: Yum
-     
-     
-         .. include:: /_templates/installations/wazuh/yum/install_wazuh_manager.rst
-     
-     
-     
-       .. group-tab:: APT
-     
-     
-         .. include:: /_templates/installations/wazuh/deb/install_wazuh_manager.rst
-     
-     
+
+        .. group-tab:: Yum
+
+           .. code-block:: console
+
+              # yum -y install wazuh-manager|WAZUH_MANAGER_RPM_PKG_INSTALL|
+
+        .. group-tab:: APT
+
+           .. code-block:: console
+
+              # apt-get -y install wazuh-manager|WAZUH_MANAGER_DEB_PKG_INSTALL|
      
   #. Enable and start the Wazuh manager service.
 
@@ -228,7 +225,23 @@ Configuring the Wazuh server worker nodes
 Testing Wazuh server cluster
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-  .. include:: /_templates/installations/manager/check_wazuh_cluster.rst
+To verify that the Wazuh cluster is enabled and all the nodes are connected, execute the following command:
+
+  .. code-block:: console
+
+    # /var/ossec/bin/cluster_control -l
+
+An example output of the command looks as follows:
+
+  .. code-block:: none
+    :class: output
+    
+      NAME         TYPE    VERSION  ADDRESS
+      master-node  master  |WAZUH_CURRENT|   10.0.0.3
+      worker-node1 worker  |WAZUH_CURRENT|   10.0.0.4
+      worker-node2 worker  |WAZUH_CURRENT|   10.0.0.5
+
+Note that ``10.0.0.3``, ``10.0.0.4``, ``10.0.0.5`` are example IPs.
 
 Next steps
 ----------

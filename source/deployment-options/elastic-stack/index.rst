@@ -26,8 +26,10 @@ Wazuh server and Elastic Stack are installed on the same host. This type of depl
 
       .. thumbnail:: ../../images/installation/all-in-one-deployment.png
         :title: All-in-one deployment
+        :alt: All-in-one deployment
         :align: center
         :width: 80%
+        
 
     The following components will be installed:
 
@@ -46,8 +48,9 @@ Each component is installed in a separate host as a single-node or multi-node cl
 
 Kibana can be installed on the same server as the Elasticsearch node, or on a separate one. This type of deployment is appropriate for production environments as it provides high availability and scalability of the services.
 
-      .. thumbnail:: ../../images/installation/distributed-no-title.png
+      .. thumbnail:: ../../images/installation/distributed-deployment.png
         :title: Distributed deployment
+        :alt: Distributed deployment
         :align: center
         :width: 80%
 
@@ -74,7 +77,7 @@ The following Elastic Stack versions are compatible with the Wazuh manager |WAZU
 +-------------------------+
 | 7.16.0–7.16.3           |
 +-------------------------+
-| 7.17.0–7.17.8           | 
+| 7.17.0–7.17.11          |
 +-------------------------+
 
 .. _packages_list_elk:
@@ -113,6 +116,12 @@ The following table contains the Wazuh Kibana plugin files for each version of E
 
 .. |WAZUH_KIBANA_7.17.8| replace:: `wazuh_kibana-|WAZUH_CURRENT|_7.17.8.zip <https://packages.wazuh.com/|WAZUH_CURRENT_MAJOR|/ui/kibana/wazuh_kibana-|WAZUH_CURRENT|_7.17.8-1.zip>`__ (`sha512 <https://packages.wazuh.com/|WAZUH_CURRENT_MAJOR|/checksums/wazuh/|WAZUH_CURRENT|/wazuh_kibana-|WAZUH_CURRENT|_7.17.8-1.zip.sha512>`__)
 
+.. |WAZUH_KIBANA_7.17.9| replace:: `wazuh_kibana-|WAZUH_CURRENT|_7.17.9.zip <https://packages.wazuh.com/|WAZUH_CURRENT_MAJOR|/ui/kibana/wazuh_kibana-|WAZUH_CURRENT|_7.17.9-1.zip>`__ (`sha512 <https://packages.wazuh.com/|WAZUH_CURRENT_MAJOR|/checksums/wazuh/|WAZUH_CURRENT|/wazuh_kibana-|WAZUH_CURRENT|_7.17.9-1.zip.sha512>`__)
+
+.. |WAZUH_KIBANA_7.17.10| replace:: `wazuh_kibana-|WAZUH_CURRENT|_7.17.10.zip <https://packages.wazuh.com/|WAZUH_CURRENT_MAJOR|/ui/kibana/wazuh_kibana-|WAZUH_CURRENT|_7.17.10-1.zip>`__ (`sha512 <https://packages.wazuh.com/|WAZUH_CURRENT_MAJOR|/checksums/wazuh/|WAZUH_CURRENT|/wazuh_kibana-|WAZUH_CURRENT|_7.17.10-1.zip.sha512>`__)
+
+.. |WAZUH_KIBANA_7.17.11| replace:: `wazuh_kibana-|WAZUH_CURRENT|_7.17.11.zip <https://packages.wazuh.com/|WAZUH_CURRENT_MAJOR|/ui/kibana/wazuh_kibana-|WAZUH_CURRENT|_7.17.11-1.zip>`__ (`sha512 <https://packages.wazuh.com/|WAZUH_CURRENT_MAJOR|/checksums/wazuh/|WAZUH_CURRENT|/wazuh_kibana-|WAZUH_CURRENT|_7.17.11-1.zip.sha512>`__)
+
 +------------------+--------------------------+
 | Kibana Version   | Package                  |
 +==================+==========================+
@@ -144,7 +153,12 @@ The following table contains the Wazuh Kibana plugin files for each version of E
 +------------------+--------------------------+
 | 7.17.8           | |WAZUH_KIBANA_7.17.8|    |
 +------------------+--------------------------+
-
+| 7.17.9           | |WAZUH_KIBANA_7.17.9|    |
++------------------+--------------------------+
+| 7.17.10          | |WAZUH_KIBANA_7.17.10|   |
++------------------+--------------------------+
+| 7.17.11          | |WAZUH_KIBANA_7.17.11|   |
++------------------+--------------------------+
 
 For a full list of the available Wazuh Kibana plugin packages, check the `Wazuh Kibana plugin compatibility matrix <https://github.com/wazuh/wazuh-kibana-app/wiki/Compatibility>`__.  
 

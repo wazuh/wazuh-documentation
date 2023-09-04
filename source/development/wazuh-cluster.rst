@@ -36,7 +36,8 @@ Architecture overview
 The following diagram shows a typical Wazuh cluster architecture:
 
 .. thumbnail:: ../images/manual/cluster/cluster-infrastructure.png
-    :title: Wazuh cluster infrastructure
+    :title: Wazuh cluster architecture
+    :alt: Wazuh cluster architecture
     :align: center
     :width: 80%
 
@@ -83,6 +84,7 @@ The image below shows a schema of how a master node and a worker node interact w
 
 .. thumbnail:: ../images/manual/cluster/cluster-flow.png
     :title: Wazuh cluster workflow
+    :alt: Wazuh cluster workflow
     :align: center
     :width: 80%
 
@@ -99,8 +101,6 @@ The following tasks can be found in the cluster, depending on the type of node t
 | Integrity sync                 |        |
 +--------------------------------+        |
 | Agent info sync                |        |
-+--------------------------------+        |
-| Agent groups sync              |        |
 +--------------------------------+--------+
 | Keep alive - Check workers     | Master |
 +--------------------------------+        |
@@ -120,7 +120,7 @@ Keep alive thread
 
 The worker nodes send a keep-alive message to the master every so often. The master keeps the date of the last received keep alive and knows the interval the worker is using to send its keepalives. If the last keep alive received by a worker is older than a determined amount of time, the master considers the worker is disconnected and immediately closes the connection. When a worker realizes the connection has been closed, it automatically tries to reconnect again.
 
-This feature is very useful to drop nodes that are facing a network issue or aren't available at the moment.  It was implemented  `here <https://github.com/wazuh/wazuh/issues/1355>`_.
+This feature is very useful to drop nodes that are facing a network issue or aren't available at the moment.
 
 
 Integrity thread
@@ -167,13 +167,6 @@ If there is an error during the update process of one of the chunks in the maste
 
 .. _agent-groups-sync:
 
-Agent groups sync thread
-~~~~~~~~~~~~~~~~~~~~~~~~
-
-This thread is in charge of sending information about agents' groups assignment (abbr. agent-groups) from each worker to the master. The communication is started by the worker and it follows the exact same stages as :ref:`agent-info <agent-info>`.
-
-However, unlike in :ref:`agent-info <agent-info>`, the same information is sent over and over again to the master. This happens until the master node stores it in its database and sends it back to all workers (including the worker it came from). This prevents losing any agent-group if an unsuccessful communication occurs. Once the worker receives the agent-groups information from the master, it will never send it to the master again.
-
 Agent groups send thread
 ~~~~~~~~~~~~~~~~~~~~~~~~
 
@@ -181,11 +174,10 @@ This thread is in charge of synchronizing information of agents' groups assignme
 
 1. When there is new agent-groups information, the master sends a JSON string with it to each worker. This is done only once per node.
 2. The workers send the received information to their local :ref:`wazuh-db <wazuh-db>` service, where it is updated.
-3. Workers stop sending information to the master (:ref:`Agent groups sync <agent-groups-sync>`) about any agent-group they have received in this task.
-4. The worker compares the checksum of its database with the checksum of the master's.
-5. If the checksum has been different for 10 consecutive times, the worker notifies the master.
-6. When notified, the master sends to the worker all the agent-groups information.
-7. The worker overwrites its database with the agent-groups information it has received from the master.
+3. The worker compares the checksum of its database with the checksum of the master.
+4. If the checksum has been different for 10 consecutive times, the worker notifies the master.
+5. When notified, the master sends to the worker all the agent-groups information.
+6. The worker overwrites its database with the agent-groups information it has received from the master.
 
 Local agent-groups thread
 ~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -258,7 +250,7 @@ The protocol message has two parts: a header and a payload. The payload will be 
 
 The header has four subparts:
 
-* **Counter**: It specifies the message ID. It's randomly initialized and then increased with every new sent request. It's very useful when receiving a response, so it indicates which sent request it is replying to.
+* **Counter**: It specifies the message ID. It's randomly generated for every new sent request. It's very useful when receiving a response, so it indicates which sent request it is replying to.
 * **Payload length**: Specifies the amount of data contained in the message payload. Used to know how much data to expect to receive.
 * **Command**: Specifies protocol message. This string will always be 11 characters long. If the command is not 11 characters long, a padding of ``-`` is added until the string reaches the expected length. All available commands in the protocol are shown below.
 * **Flag message divided**: Specifies whether the message has been divided because its initial payload length was more than 5242880 bytes or not. The flag value can be ``d`` if the message is a divided one, or nothing (it will be ``-`` due to the padding mentioned above) if the message is the end of a divided message or a single message.
@@ -278,13 +270,13 @@ This communication protocol is used by all cluster nodes to synchronize the nece
 |                   |             | - Wazuh version<str>  |                                                                                                 |
 +-------------------+-------------+-----------------------+-------------------------------------------------------------------------------------------------+
 | ``syn_i_w_m_p``   | Master      | None                  | Ask permission to start synchronization protocol. Message characters define the action to do:   |
-| ``syn_g_w_m_p``   |             |                       |                                                                                                 |
-| ``syn_a_w_m_p``   |             |                       | - I (integrity), G (agent-groups sync), A (agent-info).                                         |
+| ``syn_a_w_m_p``   |             |                       |                                                                                                 |
+|                   |             |                       | - I (integrity), A (agent-info).                                                                |
 |                   |             |                       | - W (worker), M (master), P (permission).                                                       |
 +-------------------+-------------+-----------------------+-------------------------------------------------------------------------------------------------+
 | ``syn_i_w_m``     | Master      | None or String ID<str>| Start synchronization protocol. Message characters define the action to do:                     |
-| ``syn_g_w_m``     |             |                       |                                                                                                 |
-| ``syn_a_w_m``     |             |                       | - I (integrity), G (agent-groups sync), A (agent-info).                                         |
+| ``syn_a_w_m``     |             |                       |                                                                                                 |
+|                   |             |                       | - I (integrity), A (agent-info).                                                                |
 |                   |             |                       | - W (worker), M (master).                                                                       |
 +-------------------+-------------+-----------------------+-------------------------------------------------------------------------------------------------+
 | ``syn_i_w_m_e``   | Master      | None or String ID<str>| End synchronization protocol. Message characters define the action to do:                       |
@@ -301,8 +293,6 @@ This communication protocol is used by all cluster nodes to synchronize the nece
 | ``syn_w_g_err``   |             |                       |                                                                                                 |
 | ``syn_wgc_err``   |             |                       | - I (integrity), G (agent-groups send), C (agent-groups send full).                             |
 |                   |             |                       | - W (worker), M (master), R/ERR (error).                                                        |
-+-------------------+-------------+-----------------------+-------------------------------------------------------------------------------------------------+
-| ``syn_m_g_err``   | Worker      | Error msg<str>        | Notify an error during agent-groups recv synchronization.                                       |
 +-------------------+-------------+-----------------------+-------------------------------------------------------------------------------------------------+
 | ``sendsync``      | Master      | Arguments<Dict>       | Receive a message from a worker node destined for the specified daemon of the master node.      |
 |                   |             |                       |                                                                                                 |
@@ -428,7 +418,6 @@ One of those tasks, which is defined as a class, is the task created to receive 
 
 Multiprocessing
 ~~~~~~~~~~~~~~~
-.. versionadded:: 4.3.0
 
 While the use of asynchronous tasks is a good solution to optimize work and avoid waiting times for I/O, it is not a good solution to execute multiple tasks that require intensive use of CPU. The reason is the way in which Python works. Python allows a single thread to take control over the Python interpreter through the Global Interpreter Lock (GIL). Therefore, asynchronous tasks run concurrently and not in parallel. Following the analogy of the previous section, it is as if there is effectively only one chef who has to do all the tasks. The chef can only do one at a time so if one task requires all his/her attention, the other ones are delayed.
 

@@ -8,8 +8,6 @@
 wazuh-agentlessd
 ================
 
-.. versionadded:: 4.2
-
 The wazuh-agentlessd program allows integrity checks to be run on systems without an agent installed.
 
 +-----------------+-------------------------------------------------------------------------------------------------+

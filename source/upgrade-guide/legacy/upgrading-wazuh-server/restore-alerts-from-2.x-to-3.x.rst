@@ -8,7 +8,7 @@
 Restore the Wazuh alerts from Wazuh 2.x
 =======================================
 
-After upgrading Wazuh from 2.x to 3.x, the old alerts will not be lost. However, they cannot be visualized in Kibana due to a change in the Wazuh alerts' template. In order to access the old alerts and visualize them along with the new ones, the indices need to be reindexed to apply the new mapping.
+After upgrading Wazuh from 2.x to 3.x, the old alerts will not be lost. However, they cannot be visualized in Kibana due to a change in the Wazuh alerts template. In order to access the old alerts and visualize them along with the new ones, the indices need to be reindexed to apply the new mapping.
 
 To do so, download the `restore_alerts.sh <https://github.com/wazuh/wazuh/blob/3.13/extensions/elasticsearch/restore_alerts/restore_alerts.sh>`_ script and the Logstash configuration file called `restore_alerts.conf <https://github.com/wazuh/wazuh/blob/3.13/extensions/elasticsearch/restore_alerts/restore_alerts.conf>`_:
 

@@ -8,7 +8,7 @@
 Wazuh and Open Distro for Elasticsearch
 =======================================
 
-This section guides through the upgrade process of the Wazuh server, Elasticsearch, and Kibana for the *Open Distro for Elasticsearch* distribution. 
+This section guides you through the upgrade process of the Wazuh server, Elasticsearch, and Kibana for the *Open Distro for Elasticsearch* distribution. 
 
 .. note:: You need root user privileges to run all the commands described below.
 
@@ -52,13 +52,13 @@ When upgrading a multi-node Wazuh manager cluster, run the upgrade in every node
 
          .. code-block:: console
 
-            # yum upgrade wazuh-manager
+            # yum upgrade wazuh-manager|WAZUH_MANAGER_RPM_PKG_INSTALL|
 
       .. group-tab:: APT
 
          .. code-block:: console
 
-            # apt-get install wazuh-manager
+            # apt-get install wazuh-manager|WAZUH_MANAGER_DEB_PKG_INSTALL|
 
    .. note::
 
@@ -165,7 +165,7 @@ Preparations
 Upgrade
 ^^^^^^^
 
-This guide explains how to perform a rolling upgrade, which allows you to shut down one node at a time for minimal disruption of service.The cluster remains available throughout the process.
+This guide explains how to perform a rolling upgrade, which allows you to shut down one node at a time for minimal disruption of service. The cluster remains available throughout the process.
 
 The IP address ``127.0.0.1`` is used in the commands below. If Elasticsearch is bound to a specific IP address, replace ``127.0.0.1`` with your Elasticsearch IP address. If using ``http``, the option ``-k`` must be omitted, and if not using user/password authentication, ``-u`` must be omitted.
 

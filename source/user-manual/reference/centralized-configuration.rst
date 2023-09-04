@@ -14,13 +14,13 @@ Introduction
 Agents can be configured remotely by using the ``agent.conf`` file. The following capabilities can be configured remotely:
 
 - :doc:`File Integrity monitoring <../capabilities/file-integrity/index>` (**syscheck**)
-- :doc:`Rootkit detection <../capabilities/anomalies-detection/index>` (**rootcheck**)
+- :doc:`Rootkit detection <../capabilities/malware-detection/index>` (**rootcheck**)
 - :doc:`Log data collection <../capabilities/log-data-collection/index>` (**localfile**)
 - :doc:`Security policy monitoring <../capabilities/policy-monitoring/index>` (**wodle name="open-scap"**, **wodle name="cis-cat"**)
 - :doc:`Remote commands <ossec-conf/wodle-command>` (**wodle name="command"**)
-- :doc:`Labels for agent alerts <../capabilities/labels>` (**labels**)
+- :doc:`Labels for agent alerts <../agents/labels>` (**labels**)
 - :doc:`Security Configuration Assessment <../capabilities/sec-config-assessment/index>` (**sca**)
-- :doc:`System inventory <../capabilities/syscollector>` (**syscollector**)
+- :doc:`System inventory <../capabilities/system-inventory/index>` (**syscollector**)
 - :doc:`Avoid events flooding <ossec-conf/client-buffer>` (**client_buffer**)
 - :doc:`Configure osquery wodle <ossec-conf/wodle-osquery>` (**wodle name="osquery"**)
 - :doc:`force_reconnect_interval setting <ossec-conf/client>` (**client**)

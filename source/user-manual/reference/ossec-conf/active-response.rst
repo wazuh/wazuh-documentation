@@ -118,16 +118,19 @@ Defines a minimum severity level required for the command to be executed.
 rules_group
 ^^^^^^^^^^^
 
-Defines the rule group that a rule must belong to one for the command to be executed.
+Defines the rule group that a rule must belong to for the execution of the command.
 
-+--------------------+---------------------------------------------------------------------------------------------+
-| **Default value**  | n/a                                                                                         |
-+--------------------+---------------------------------------------------------------------------------------------+
-| **Allowed values** | Any rule group is allowed. Multiple groups should be separated with a pipe character (“|”). |
-+--------------------+---------------------------------------------------------------------------------------------+
++--------------------+------------------------------------------------------------------------------------------+
+| **Default value**  | n/a                                                                                      |
++--------------------+------------------------------------------------------------------------------------------+
+| **Allowed values** | Any group string. For multiple groups, separate the strings with a pipe character ``|``. |
++--------------------+------------------------------------------------------------------------------------------+
 
 .. note::
-	All groups must end with a comma.
+	
+   To avoid partial matches, add a comma at the end of the group string. For example, ``<rules_group>group_a,|group_b,|group_c,</rules_group>`` Also, check that the rule group in your rule definitions ends with a comma as well. This is usually the case in the Wazuh default ruleset. For example, ``<group>group_b,</group>``.
+   
+   Not ending the group string with a comma implies that the group string is a substring open for partial matches.  For example, the group string ``authentication`` matches rule groups ``authentication``, ``authentication_success``, and ``authentication_failure`` while the group string ``authentication,`` matches only rule group ``authentication``.
 
 rules_id
 ^^^^^^^^
@@ -156,6 +159,7 @@ Specifies how long in seconds before the reverse command is executed.  When ``re
 | **Allowed values** | A positive number (seconds) |
 +--------------------+-----------------------------+
 
+.. _repeated_offenders:
 
 repeated_offenders
 ^^^^^^^^^^^^^^^^^^

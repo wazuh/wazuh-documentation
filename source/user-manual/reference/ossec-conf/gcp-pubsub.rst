@@ -102,7 +102,6 @@ Number of maximum messages pulled in each iteration. This value does not depend 
 
 num_threads
 ^^^^^^^^^^^^
-.. versionadded:: 4.2.2
 
 Number of threads used to pull in each iteration. The number of maximum messages will be divided between all the configured threads.
 

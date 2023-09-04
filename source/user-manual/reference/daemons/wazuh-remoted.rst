@@ -8,8 +8,6 @@
 wazuh-remoted
 =============
 
-.. versionadded:: 4.2
-
 The wazuh-remoted program is the server side daemon that communicates with the agents.  It runs as ``wazuh`` and is chrooted to ``/var/ossec`` by default.
 
 +-----------------+-------------------------------------------------------------------------------------------------+

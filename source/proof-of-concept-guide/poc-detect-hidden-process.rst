@@ -10,7 +10,7 @@ In this use case, we show how Wazuh detects hidden processes created by a rootki
 
 This rootkit hides from the kernel module list. It also hides selected processes from the ``ps`` utility. However, Wazuh detects it using ``setsid()``, ``getpid()``, and ``kill()`` system calls.
 
-The :doc:`Anomaly and Malware detection </user-manual/capabilities/anomalies-detection/index>` section of our documentation contains more details about how the Wazuh detects malware and the rootcheck module.
+The :doc:`/user-manual/capabilities/malware-detection/index` section of our documentation contains more details about how the Wazuh detects malware and the rootcheck module.
 
 
 Infrastructure

@@ -10,5 +10,6 @@ You can list and see basic information about all registered agents by going to t
 
 .. thumbnail:: /images/kibana-app/agent-management/agents-preview.png
     :title: Listing agents from the Wazuh dashboard
+    :alt: Listing agents from the Wazuh dashboard
     :align: center
     :width: 100%

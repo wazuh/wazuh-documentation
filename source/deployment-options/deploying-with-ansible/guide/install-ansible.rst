@@ -1,8 +1,8 @@
 .. Copyright (C) 2015, Wazuh, Inc.
 
 .. meta::
-   :description: Learn how to install the Ansible server in this section of the Wazuh documentation. Check out this step-by-step guide. 
-   
+   :description: Learn how to install the Ansible server in this section of the Wazuh documentation. Check out this step-by-step guide.
+
 Install Ansible
 ===============
 
@@ -15,7 +15,7 @@ In the example we will follow in this guide, we have the following infrastructur
 -  Wazuh agent
 
 .. note::
-  
+
    OpenSSH Compatibility: Ansible version 1.3 and later uses native OpenSSH for remote communication.
 
 .. contents::
@@ -38,19 +38,31 @@ The following minimum requirements should be met to use Ansible on Windows endpo
 Installation on CentOS/RHEL/Fedora
 ----------------------------------
 
-Installation is done using yum from `EPEL <http://fedoraproject.org/wiki/EPEL>`_. Only CentOS/RedHat version 6 or 7, and Fedora distributions, are currently supported. The steps are as follows:
+.. tabs::
 
-#. Install the EPEL repository:
+   .. tab:: CentOS/RHEL 6, 7, and Fedora
 
-   .. code-block:: console
+      #. Install the `EPEL <http://fedoraproject.org/wiki/EPEL>`__ repository:
 
-      # yum -y install epel-release
+         .. code-block:: console
+         
+            # yum -y install epel-release
 
-#. Install ansible:
+      #. Install Ansible:
 
-   .. code-block:: console
+         .. code-block:: console
+         
+            # yum install ansible
 
-      # yum install ansible
+
+   .. tab:: CentOS/RHEL 8
+
+      #. Install Ansible using pip.
+
+         .. code-block:: console
+         
+            # pip3 install --upgrade --ignore-installed pip setuptools --user
+            # python3 -m pip install --user ansible
 
 Installation on Debian/Ubuntu
 -----------------------------
@@ -115,11 +127,11 @@ Our Ansible server will need to connect to the other endpoints. Let’s see how 
          # ssh-keygen
 
    #. Check the permissions of the generated keys.
-    
+
       .. code-block:: console
 
          # ls -la ~/.ssh
-            
+
       ``id_rsa`` must have restrictive permissions (600 or “- r w - - - - - - -“).
 
       .. code-block:: none
@@ -132,17 +144,17 @@ Our Ansible server will need to connect to the other endpoints. Let’s see how 
          -rw-r--r--. 1 root root  175 Mar 18 10:14 known_hosts
 
       In addition, the ``/root/.ssh/`` directory must have its permissions set to ``700 (d r w x - - - - - -)``. The permissions can be set using the command below:
-        
+
       .. code-block:: console
 
          # chmod 700 ~/.ssh/
-                
+
 #. Now, proceed to copy the public key of the Ansible server to the  ~/.ssh/authorized_keys file in the $HOME directory of the remote system (the Wazuh server in this example).
 
    #. On the remote system, install openssh-server if it is not installed.
 
       .. tabs::
-          
+
          .. group-tab:: CentOS/RHEL/Fedora
 
             .. code-block:: console
@@ -247,7 +259,7 @@ Testing the Ansible connection to remote endpoints
 #. Add endpoints for management by Ansible.
 
    This is done by including the hostname or IP Address in ``/etc/ansible/hosts`` on our Ansible server. In this case, we intend to use the Ansible playbooks to deploy the Wazuh indexer, dashboard, and manager on one server (all-in-one deployment). The IP address of the server is ``192.168.33.31`` and the user is ``centos``.
-   
+
    We proceed to add the following entry to the ``/etc/ansible/hosts`` file:
 
    .. code-block:: none
@@ -292,7 +304,7 @@ On the Ansible server, the following commands are run:
 .. code-block:: console
 
    # cd /etc/ansible/roles/
-   # sudo git clone --branch |WAZUH_CURRENT_MINOR_ANSIBLE| https://github.com/wazuh/wazuh-ansible.git
+   # sudo git clone --branch v|WAZUH_CURRENT_ANSIBLE| https://github.com/wazuh/wazuh-ansible.git
    # ls
 
 .. code-block:: none

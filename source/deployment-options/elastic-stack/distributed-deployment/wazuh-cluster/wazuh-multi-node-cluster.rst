@@ -50,22 +50,19 @@ Installing the Wazuh manager
 
 #. Install the Wazuh manager package. This step must be applied in all servers that will act as Wazuh cluster nodes:
 
-.. tabs::
+   .. tabs::
 
+      .. group-tab:: Yum
 
-  .. group-tab:: Yum
+         .. code-block:: console
 
+            # yum install wazuh-manager|WAZUH_MANAGER_RPM_PKG_INSTALL|
 
-    .. include:: /_templates/installations/basic/wazuh/yum/install_wazuh_manager.rst
+      .. group-tab:: APT
 
+         .. code-block:: console
 
-
-  .. group-tab:: APT
-
-
-    .. include:: /_templates/installations/basic/wazuh/deb/install_wazuh_manager.rst
-
-
+            # apt-get install wazuh-manager|WAZUH_MANAGER_DEB_PKG_INSTALL|
 
 Now, the Wazuh manager has been installed in all the Wazuh cluster nodes. The Wazuh manager is installed and configured in a single-node cluster by default. The following sections will describe how to configure the Wazuh manager as a Wazuh master node or Wazuh worker node.
 
@@ -102,8 +99,23 @@ Wazuh server worker nodes
 
     .. include:: /_templates/installations/wazuh/common/check_wazuh_manager.rst
 
-#. .. include:: /_templates/installations/basic/wazuh/common/check_wazuh_cluster.rst
+#. To verify that the Wazuh cluster is enabled and all the nodes are connected, execute the following command:
 
+   .. code-block:: console
+
+      # /var/ossec/bin/cluster_control -l
+
+   An example output of the command looks as follows:
+
+   .. code-block:: none
+      :class: output
+    
+      NAME         TYPE    VERSION  ADDRESS
+      master-node  master  |WAZUH_CURRENT|   10.0.0.3
+      worker-node1 worker  |WAZUH_CURRENT|   10.0.0.4
+      worker-node2 worker  |WAZUH_CURRENT|   10.0.0.5
+
+   Note that ``10.0.0.3``, ``10.0.0.4``, ``10.0.0.5`` are example IPs.
 
 .. _basic_wazuh_server_multi_node_filebeat:
 
