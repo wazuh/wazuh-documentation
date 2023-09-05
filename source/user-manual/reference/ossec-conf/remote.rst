@@ -29,6 +29,7 @@ Options
 - `ipv6`_
 - `queue_size`_
 - `rids_closing_time`_
+- `connection_overtake_time`_
 
 connection
 ^^^^^^^^^^^
@@ -142,6 +143,26 @@ Sets the time to close the RIDS files for agents that don't report new events in
 | **Allowed values** | A positive number that should contain a suffix character indicating a time unit, such as, s (seconds), m (minutes), h (hours), d (days). |
 +--------------------+------------------------------------------------------------------------------------------------------------------------------------------+
 
+connection_overtake_time
+^^^^^^^^^^^^^^^^^^^^^^^^^
+
+.. versionadded:: 4.5.2
+
+Sets the time to wait before considering a connection with a TCP client down when a new connection with the same key arrives. A value of 0 disables this assessment of connection activity.
+
+.. warning::
+
+   The ``connection_overtake_time`` must be higher than the agent :ref:`notify-time <notify_time>`.
+
++--------------------+-----------------------------------------------+
+| **Default value**  | 60                                            |
++--------------------+-----------------------------------------------+
+| **Allowed values** | A number between 0 and 3600 (seconds).        |
++--------------------+-----------------------------------------------+
+
+.. note::
+
+   ``connection_overtake_time`` doesn't apply to connections with UDP clients.
 
 Example of configuration
 ------------------------
@@ -162,4 +183,5 @@ Example of configuration
       <protocol>tcp,udp</protocol>
       <queue_size>16384</queue_size>
       <rids_closing_time>5m</rids_closing_time>
+      <connection_overtake_time>600</connection_overtake_time>
     </remote>
