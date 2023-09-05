@@ -217,7 +217,7 @@ Edit the Wazuh indexer security configuration files. We recommend that you back 
       Security Admin v7
       Will connect to localhost:9200 ... done
       Connected as "CN=admin,OU=Wazuh,O=Wazuh,L=California,C=US"
-      OpenSearch Version: 2.4.1
+      OpenSearch Version: 2.8.0
       Contacting opensearch cluster 'opensearch' and wait for YELLOW clusterstate ...
       Clustername: wazuh-cluster
       Clusterstate: GREEN
@@ -227,6 +227,7 @@ Edit the Wazuh indexer security configuration files. We recommend that you back 
       Populate config from /etc/wazuh-indexer/opensearch-security
       Will update '/config' with /etc/wazuh-indexer/opensearch-security/config.yml 
          SUCC: Configuration for 'config' created or updated
+      SUCC: Expected 1 config types for node {"updated_config_types":["config"],"updated_config_size":1,"message":null} is 1 (["config"]) due to: null
       Done with success
 
 #. Edit the ``/etc/wazuh-indexer/opensearch-security/roles_mapping.yml`` file and change the following values:
@@ -261,7 +262,7 @@ Edit the Wazuh indexer security configuration files. We recommend that you back 
       Security Admin v7
       Will connect to localhost:9200 ... done
       Connected as "CN=admin,OU=Wazuh,O=Wazuh,L=California,C=US"
-      OpenSearch Version: 2.4.1
+      OpenSearch Version: 2.8.0
       Contacting opensearch cluster 'opensearch' and wait for YELLOW clusterstate ...
       Clustername: wazuh-cluster
       Clusterstate: GREEN
@@ -271,9 +272,8 @@ Edit the Wazuh indexer security configuration files. We recommend that you back 
       Populate config from /etc/wazuh-indexer/opensearch-security
       Will update '/rolesmapping' with /etc/wazuh-indexer/opensearch-security/roles_mapping.yml 
          SUCC: Configuration for 'rolesmapping' created or updated
+      SUCC: Expected 1 config types for node {"updated_config_types":["rolesmapping"],"updated_config_size":1,"message":null} is 1 (["rolesmapping"]) due to: null
       Done with success
-
-
 
 Wazuh dashboard configuration
 -----------------------------
