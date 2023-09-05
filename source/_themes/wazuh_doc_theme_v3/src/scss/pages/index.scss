@@ -28,22 +28,20 @@ body {
 }
 
 header .navbar-nav .dropdown-menu {
-  position: absolute;
-  left: -30px;
+  top: 50px!important;
+  left: -35px;
   &:before {
-    left: 40px;
+    left: 49px;
   }
 }
 
 #large-search-box {
 
-  // top: $header-height-xs;
   display: flex;
   flex-direction: column;
   justify-content: center;
   height: $index-header-height-xs;
   @include media-min(xl){
-    // top: $header-height-xl;
     height: $index-header-height-xl;
   }
   @include media-max(lg){
@@ -409,9 +407,6 @@ main {
     .form-control {
       background: $light-color-index-header-background;
     }
-    svg {
-      fill: $light-color-main-text-extra;
-    }
   }
   #large-search-box {
     background: $light-color-index-header-background;
@@ -484,8 +479,8 @@ main {
   }
 
   /* Compliance */
-  [href$="compliance.html"]::before,
-  [data-href$="compliance.html"]::before {
+  [href$="compliance/index.html"]::before,
+  [data-href$="compliance/index.html"]::before {
     background-image: url("#{$ico-path}index-icons.svg#compliance-lt");
   }
 
@@ -517,6 +512,12 @@ main {
   [href$="migration-guide/index.html"]::before,
   [data-href$="migration-guide/index.html"]::before {
     background-image: url("#{$ico-path}index-icons.svg#migration-guide-lt");
+  }
+  
+  /* Integrations guide */
+  [href$="integrations-guide/index.html"]::before,
+  [data-href$="integrations-guide/index.html"]::before {
+    background-image: url("#{$ico-path}index-icons.svg#integrations-guide-lt");
   }
 }
 .light-theme {
@@ -659,8 +660,8 @@ main {
   }
 
   /* Compliance */
-  [href$="compliance.html"]::before,
-  [data-href$="compliance.html"]::before {
+  [href$="compliance/index.html"]::before,
+  [data-href$="compliance/index.html"]::before {
     background-image: url("#{$ico-path}index-icons.svg#compliance-dt");
   }
 
@@ -694,6 +695,12 @@ main {
     background-image: url("#{$ico-path}index-icons.svg#migration-guide-dt");
   }
 
+  /* Integrations guide */
+  [href$="integrations-guide/index.html"]::before,
+  [data-href$="integrations-guide/index.html"]::before {
+    background-image: url("#{$ico-path}index-icons.svg#integrations-guide-dt");
+  }
+  
   &.index #quickstart {
     border-color: $dark-color-primary;
     background-color: $dark-color-sidebar-space;

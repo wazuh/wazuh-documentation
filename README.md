@@ -23,9 +23,10 @@ You can also join our [users mailing list](https://groups.google.com/d/forum/waz
 ## Software and libraries used
 
 - [Python](https://www.python.org/) 3.6+
-- [Sphinx](http://www.sphinx-doc.org/) 3.2.0
-- [sphinx-tabs](https://github.com/djungelorm/sphinx-tabs) 1.2.1
+- [Sphinx](http://www.sphinx-doc.org/) 3.4.3
+- [sphinx-tabs](https://github.com/djungelorm/sphinx-tabs) 1.3.0
 - [jsmin](https://github.com/tikitu/jsmin) 3.0.1
+- [sphinx-reredirects](https://gitlab.com/documatt/sphinx-reredirects) 0.1.2
 
 ### Optional software to run the alternative Pagefind search engine
 

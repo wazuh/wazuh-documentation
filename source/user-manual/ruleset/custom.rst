@@ -88,6 +88,8 @@ Check out this example on how to create new decoders and rules. The following lo
 
       .. include:: /_templates/installations/manager/restart_wazuh_manager.rst
 
+.. _changing_existing_rule:
+
 Changing an existing rule
 -------------------------
 

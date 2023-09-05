@@ -79,6 +79,7 @@ Once the configuration is complete, alerts start showing in the selected channel
 
 .. thumbnail:: /images/manual/integration/slack.png
   :title: Alerts in Slack channel
+  :alt: Alerts in Slack channel
   :align: center
   :width: 50%
 
@@ -109,7 +110,8 @@ To set up this integration, do the following.
 Once the configuration is complete, alerts start showing on the Pagerduty dashboard.
 
 .. thumbnail:: /images/manual/integration/pagerduty.png
-   :title: PagerDuty Incidents Dashboard
+   :title: Wazuh alert in the PagerDuty Incidents dashboard
+   :alt: Wazuh alert in the PagerDuty Incidents dashboard
    :align: center
    :width: 80%
 
@@ -173,6 +175,7 @@ Once the configuration is complete, alerts start showing in the email inbox.
 
 .. thumbnail:: /images/manual/integration/shuffle.png
    :title: Shuffle email alert
+   :alt: Shuffle email alert
    :align: center
    :width: 80%
 

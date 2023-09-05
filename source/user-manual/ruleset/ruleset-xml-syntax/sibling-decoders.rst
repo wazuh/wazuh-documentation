@@ -8,7 +8,7 @@
 Sibling Decoders
 ================
 
-Our development team and the Wazuh community at large are constantly `contributing to the ruleset <../contribute.html>`_ but at the same time, new security-relevant devices and software programs are being created constantly all around the globe.
+Our development team and the Wazuh community at large are constantly :doc:`contributing to the ruleset <../contribute>` but at the same time, new security-relevant devices and software programs are being created constantly all around the globe.
 Even more, depending on each environment, users will have different needs and preferences. For these reasons and more it is key that the security software you use is as flexible and easy to configure as possible.
 
 Sibling Decoders can be considered a decoder building strategy that can be of great help for those looking into building their own custom decoders. As different logs come with different needs and sometimes extracting all the information can be challenging, especially when dealing with dynamically structured logs.
@@ -33,7 +33,7 @@ Remember that unlike rules, decoders cannot have "grandchildren". A child decode
 Dealing with dynamically structured logs
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-The process of matching at decoder level uses `regular expressions <regex.html#regex-os-regex-syntax>`_, which require the matching string to have a specific structure. However, this can be a nuisance when logs do not follow a specific structure. They will often provide information omitting parts of the log or changing the order, which would make it impractical if not impossible to create all the necessary decoders to match each one of the possible combinations in which security-relevant data may be received.
+The process of matching at decoder level uses :ref:`regular expressions <os_regex_syntax>`, which require the matching string to have a specific structure. However, this can be a nuisance when logs do not follow a specific structure. They will often provide information omitting parts of the log or changing the order, which would make it impractical if not impossible to create all the necessary decoders to match each one of the possible combinations in which security-relevant data may be received.
 
 This is where sibling decoders come in. Taking advantage of the simple parent-children matching logic, one can create a set of decoders that are together "parent" of themselves. As a result, when one of these decoders is matched it will also check the "sibling" decoders whilst extracting one piece of information at a time.
 

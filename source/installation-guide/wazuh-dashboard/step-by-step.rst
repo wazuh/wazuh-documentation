@@ -46,23 +46,21 @@ Adding the Wazuh repository
 Installing the Wazuh dashboard
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-  #. Install the Wazuh dashboard package.
+#. Install the Wazuh dashboard package.
 
-      .. tabs::
+   .. tabs::
 
-          .. group-tab:: Yum
+      .. group-tab:: Yum
 
+         .. code-block:: console
 
-              .. include:: /_templates/installations/dashboard/yum/install_dashboard.rst
+            # yum -y install wazuh-dashboard|WAZUH_DASHBOARD_RPM_PKG_INSTALL|
 
+      .. group-tab:: APT
 
-
-          .. group-tab:: APT
-
-
-              .. include:: /_templates/installations/dashboard/apt/install_dashboard.rst
-
-
+         .. code-block:: console
+              
+            # apt-get -y install wazuh-dashboard|WAZUH_DASHBOARD_DEB_PKG_INSTALL|
 
 Configuring the Wazuh dashboard
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
@@ -221,7 +219,7 @@ Select your deployment type and follow the instructions to change the default pa
                   url: https://localhost
                   port: 55000
                   username: wazuh-wui
-                  password: <wazuh-wui-password>
+                  password: "<wazuh-wui-password>"
                   run_as: false
 
       #. Restart the Wazuh dashboard to apply the changes.

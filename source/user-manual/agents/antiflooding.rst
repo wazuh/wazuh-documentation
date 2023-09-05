@@ -55,6 +55,7 @@ As mentioned above, the leaky bucket is a congestion control located in agents a
 
 .. thumbnail:: /images/manual/internal-capabilities/bucket.png
     :title: Anti-flooding bucket
+    :alt: Anti-flooding bucket
     :align: center
     :width: 70%
 
@@ -96,7 +97,8 @@ Use case: Leaky bucket
 In this section, it will be shown how the leaky bucket acts when faced with an extreme situation. For this purpose, the following graphic shows different phases of the buffer's usage when it is receiving more events than expected, and how it acts step by step to manage the situation.
 
 .. thumbnail:: /images/manual/internal-capabilities/graphic-with-flood.png
-    :title: buffer usage with flooding
+    :title: Buffer usage with flooding
+    :alt: Buffer usage with flooding
     :align: center
     :width: 80%
 
@@ -146,7 +148,8 @@ At this point, two possible things could happen:
     This graphic illustrates this situation.
 
     .. thumbnail:: /images/manual/internal-capabilities/graphic-without-flooding.png
-        :title: buffer usage without flooding
+        :title: Buffer usage without flooding
+        :alt: Buffer usage without flooding
         :align: center
         :width: 70%
 
