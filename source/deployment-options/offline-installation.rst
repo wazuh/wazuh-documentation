@@ -154,34 +154,33 @@ Installing the Wazuh indexer
 
         # /usr/share/wazuh-indexer/bin/indexer-security-init.sh
   
-#.  Run the following command to check that the installation is successful. Note that this command uses localhost, set your Wazuh indexer address if necessary. 
+#. Run the following command to check that the installation is successful. Note that this command uses localhost, set your Wazuh indexer address if necessary. 
 
-    .. code-block:: console
+   .. code-block:: console
 
-        # curl -XGET https://localhost:9200 -u admin:admin -k
+      # curl -XGET https://localhost:9200 -u admin:admin -k
 
-    Expand the output to see an example response.
+   Expand the output to see an example response.
 
-    .. code-block:: none
-        :class: output collapsed
+   .. code-block:: none
+      :class: output collapsed
 
-        {
-          "name" : "node-1",
-          "cluster_name" : "wazuh-cluster",
-          "cluster_uuid" : "bMz0BKdlRVui5jF-mlt6yg",
-          "version" : {
-            "number" : "7.10.2",
-            "build_type" : "rpm",
-            "build_hash" : "f2f809ea280ffba217451da894a5899f1cec02ab",
-            "build_date" : "2022-12-12T22:17:42.341124910Z",
-            "build_snapshot" : false,
-            "lucene_version" : "9.4.2",
-            "minimum_wire_compatibility_version" : "7.10.0",
-            "minimum_index_compatibility_version" : "7.0.0"
-          },
-          "tagline" : "The OpenSearch Project: https://opensearch.org/"
-        }
-
+      {
+        "name" : "node-1",
+        "cluster_name" : "wazuh-cluster",
+        "cluster_uuid" : "095jEW-oRJSFKLz5wmo5PA",
+        "version" : {
+          "number" : "7.10.2",
+          "build_type" : "rpm",
+          "build_hash" : "db90a415ff2fd428b4f7b3f800a51dc229287cb4",
+          "build_date" : "2023-06-03T06:24:25.112415503Z",
+          "build_snapshot" : false,
+          "lucene_version" : "9.6.0",
+          "minimum_wire_compatibility_version" : "7.10.0",
+          "minimum_index_compatibility_version" : "7.0.0"
+        },
+        "tagline" : "The OpenSearch Project: https://opensearch.org/"
+      }
 
 Installing the Wazuh server
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^

@@ -110,40 +110,37 @@ Repeat this stage of the installation process for every Wazuh indexer node in yo
 Testing the cluster installation
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-  #. Replace ``<WAZUH_INDEXER_IP>`` and run the following commands to confirm that the installation is successful.
+#. Replace ``<WAZUH_INDEXER_IP>`` and run the following commands to confirm that the installation is successful.
 
-      .. code-block:: console
+   .. code-block:: console
 
-        # curl -k -u admin:admin https://<WAZUH_INDEXER_IP>:9200
+      # curl -k -u admin:admin https://<WAZUH_INDEXER_IP>:9200
 
-      .. code-block:: none
-          :class: output accordion-output
+   .. code-block:: none
+      :class: output accordion-output
 
-          {
-            "name" : "node-1",
-            "cluster_name" : "wazuh-cluster",
-            "cluster_uuid" : "bMz0BKdlRVui5jF-mlt6yg",
-            "version" : {
-              "number" : "7.10.2",
-              "build_type" : "rpm",
-              "build_hash" : "f2f809ea280ffba217451da894a5899f1cec02ab",
-              "build_date" : "2022-12-12T22:17:42.341124910Z",
-              "build_snapshot" : false,
-              "lucene_version" : "9.4.2",
-              "minimum_wire_compatibility_version" : "7.10.0",
-              "minimum_index_compatibility_version" : "7.0.0"
-            },
-            "tagline" : "The OpenSearch Project: https://opensearch.org/"
-          }
-          
+      {
+        "name" : "node-1",
+        "cluster_name" : "wazuh-cluster",
+        "cluster_uuid" : "095jEW-oRJSFKLz5wmo5PA",
+        "version" : {
+          "number" : "7.10.2",
+          "build_type" : "rpm",
+          "build_hash" : "db90a415ff2fd428b4f7b3f800a51dc229287cb4",
+          "build_date" : "2023-06-03T06:24:25.112415503Z",
+          "build_snapshot" : false,
+          "lucene_version" : "9.6.0",
+          "minimum_wire_compatibility_version" : "7.10.0",
+          "minimum_index_compatibility_version" : "7.0.0"
+        },
+        "tagline" : "The OpenSearch Project: https://opensearch.org/"
+      }
 
-
-  #. Replace ``<WAZUH_INDEXER_IP>`` and run the following command to check if the single-node or multi-node cluster is working correctly. 
+#. Replace ``<WAZUH_INDEXER_IP>`` and run the following command to check if the single-node or multi-node cluster is working correctly. 
   
-      .. code-block:: console
+   .. code-block:: console
 
-        # curl -k -u admin:admin https://<WAZUH_INDEXER_IP>:9200/_cat/nodes?v
-
+      # curl -k -u admin:admin https://<WAZUH_INDEXER_IP>:9200/_cat/nodes?v
 
 Next steps
 ----------
