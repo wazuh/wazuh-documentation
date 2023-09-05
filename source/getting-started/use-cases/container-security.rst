@@ -15,7 +15,7 @@ Wazuh for container security
 
 Wazuh integrates with container platforms like Docker and Kubernetes and actively monitors container runtime events, application logs, and overall container health. Wazuh identifies anomalies by evaluating container logs against predefined rules. Additionally, it maintains a record of container engine actions to detect unauthorized activities in a containerized environment. It also monitors health metrics to prevent performance bottlenecks in an organization.
 
-Wazuh's container security features comprise monitoring container runtimes, tracking containerized application logs, monitoring container resource utilization, centralized logging, and container alert notifications. This comprehensive set of capabilities enhances security and streamlines incident response.
+Wazuh container security features comprise monitoring container runtimes, tracking containerized application logs, monitoring container resource utilization, centralized logging, and container alert notifications. This comprehensive set of capabilities enhances security and streamlines incident response.
 
 Container runtime monitoring
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
