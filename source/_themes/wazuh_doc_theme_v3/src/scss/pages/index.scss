@@ -478,11 +478,18 @@ main {
     background-image: url("#{$ico-path}index-icons.svg#deployment-lt");
   }
 
+  /* Integrations guide */
+  [href$="integrations-guide/index.html"]::before,
+  [data-href$="integrations-guide/index.html"]::before {
+    background-image: url("#{$ico-path}index-icons.svg#integrations-guide-lt");
+  }
+
   /* Compliance */
   [href$="compliance.html"]::before,
   [data-href$="compliance.html"]::before {
     background-image: url("#{$ico-path}index-icons.svg#compliance-lt");
   }
+
 
   /* Learning Wazuh */
   [href$="learning-wazuh/index.html"]::before,
@@ -652,6 +659,12 @@ main {
   [data-href$="deployment.html"]::before {
     background-image: url("#{$ico-path}index-icons.svg#deployment-dt");
   }
+
+    /* Integrations guide */
+    [href$="integrations-guide/index.html"]::before,
+    [data-href$="integrations-guide/index.html"]::before {
+      background-image: url("#{$ico-path}index-icons.svg#integrations-guide-dt");
+    }
 
   /* Compliance */
   [href$="compliance.html"]::before,
