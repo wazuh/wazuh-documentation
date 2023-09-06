@@ -1,8 +1,8 @@
 .. Copyright (C) 2015, Wazuh, Inc.
 
 .. meta::
-  :description: Learn how to configure the manager to connect Wazuh to external APIs. Check out the options, optional filters, and configuration examples. 
-  
+  :description: Learn how to configure the manager to connect Wazuh to external APIs. Check out the options, optional filters, and configuration examples.
+
 .. _reference_ossec_integration:
 
 integration
@@ -29,6 +29,8 @@ Options
 - `event_location`_
 - `alert_format`_
 - `max_log`_
+- `timeout`_
+- `retries`_
 
 name
 ^^^^
@@ -139,6 +141,28 @@ The maximum length of an alert snippet that will be sent to the Integrator.  Lon
 
 .. note:: This option only applies if ``alert_format`` is not set to ``json``.
 
+timeout
+^^^^^^^
+
+The timeout (in seconds) to wait for a valid response from the external integration server.
+
++--------------------+-----------------------------------------------------------+
+| **Default value**  | 10                                                        |
++--------------------+-----------------------------------------------------------+
+| **Allowed values** | Any positive integer.                                     |
++--------------------+-----------------------------------------------------------+
+
+retries
+^^^^^^^
+
+The number of attempts to retry a request to the external integration server in case it times out.
+
++--------------------+-----------------------------------------------------------+
+| **Default value**  | 3                                                         |
++--------------------+-----------------------------------------------------------+
+| **Allowed values** | Any positive integer.                                     |
++--------------------+-----------------------------------------------------------+
+
 Configuration example
 ---------------------
 
@@ -165,6 +189,8 @@ Configuration example
     <api_key>API_KEY</api_key> <!-- Replace with your VirusTotal API key -->
     <group>syscheck</group>
     <alert_format>json</alert_format>
+    <timeout>30</timeout>
+    <retries>5</retries>
   </integration>
 
   <!-- Integration with Shuffle -->
