@@ -485,8 +485,8 @@ main {
   }
 
   /* Compliance */
-  [href$="compliance.html"]::before,
-  [data-href$="compliance.html"]::before {
+  [href$="compliance/index.html"]::before,
+  [data-href$="compliance/index.html"]::before {
     background-image: url("#{$ico-path}index-icons.svg#compliance-lt");
   }
 
@@ -667,8 +667,8 @@ main {
     }
 
   /* Compliance */
-  [href$="compliance.html"]::before,
-  [data-href$="compliance.html"]::before {
+  [href$="compliance/index.html"]::before,
+  [data-href$="compliance/index.html"]::before {
     background-image: url("#{$ico-path}index-icons.svg#compliance-dt");
   }
 
