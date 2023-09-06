@@ -2,7 +2,7 @@
 
 .. meta::
   :description: Wazuh provides an automated way of building Wazuh Dashboard packages. Learn how to build your own Wazuh Dashboard packages in this section of our documentation.
-  
+
 .. _create-dashboard:
 
 Wazuh Dashboard
