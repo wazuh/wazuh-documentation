@@ -14,6 +14,9 @@ All notable changes to this project will be documented in this file.
 - Added the FIM wildcard Windows registers documentation. ([#5932](https://github.com/wazuh/wazuh-documentation/pull/5932)) 
 - Support AlmaLinux in Vulnerability Detector. ([#5904](https://github.com/wazuh/wazuh-documentation/pull/5904))
 - wazuh-authd can now generate X509 certificates. ([#5461](https://github.com/wazuh/wazuh-documentation/pull/5461))
+- Removed Kibana and Splunk from documentation ([#6401](https://github.com/wazuh/wazuh-documentation/pull/6401))
+- Updated Securityadmin script output examples in SSO docs ([#6436](https://github.com/wazuh/wazuh-documentation/pull/6436))
+- Updated output examples for indexer 4.6.0 ([#6437](https://github.com/wazuh/wazuh-documentation/pull/6437))
 
 ## [v4.5.2]
 
