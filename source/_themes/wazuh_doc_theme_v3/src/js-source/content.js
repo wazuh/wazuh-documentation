@@ -25,6 +25,7 @@ if ( $('.document') ) {
 
   /* Headerlink text -------------------------------------------------------- */
   $('.headerlink').text('Permalink to this headline');
+  $('.headerlink').attr('title', 'Permalink to this headline');
 
   /* Table adjustments ------------------------------------------------------ */
   /* Turn tables into responsive table */
