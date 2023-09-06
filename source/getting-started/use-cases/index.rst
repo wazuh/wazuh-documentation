@@ -28,6 +28,8 @@ Below you can find examples of some of the most common use cases of the Wazuh pl
      - :doc:`cloud-security`
    * - :doc:`container-security`
      - :doc:`regulatory-compliance`
+   * - :doc:`threat-hunting`
+     -
 
 .. toctree::
    :hidden:
@@ -42,3 +44,4 @@ Below you can find examples of some of the most common use cases of the Wazuh pl
    cloud-security
    container-security
    regulatory-compliance
+   threat-hunting

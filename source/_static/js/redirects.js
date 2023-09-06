@@ -101,6 +101,7 @@ newUrls['4.5'] = [
   '/user-manual/capabilities/log-data-collection/multiple-socket-outputs.html',
   '/user-manual/capabilities/log-data-collection/syslog.html',
   '/user-manual/capabilities/log-data-collection/use-cases.html',
+  '/getting-started/use-cases/threat-hunting.html',
 ];
 
 /* Pages no longer available in 4.5 */
