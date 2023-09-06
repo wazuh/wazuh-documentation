@@ -26,4 +26,5 @@ This section will show you how to generate your own Wazuh packages for different
         generate-ova
         generate-windows-package
         generate-wpk-package
+        generate-indexer-package
         generate-dashboard-package
