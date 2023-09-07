@@ -26,7 +26,6 @@ Welcome to the Wazuh user manual. Use it as your reference library once your bas
         api/index
         user-administration/index
         reference/index
-        elasticsearch/index
         wazuh-dashboard/index
         uninstall/index
         files-backup/index

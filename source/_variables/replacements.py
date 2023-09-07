@@ -39,6 +39,7 @@ custom_replacements = {
     "|WAZUH_CURRENT|" : release,
     "|PYTHON_CLOUD_CONTAINERS_MIN|": "3.7",
     "|PYTHON_CLOUD_CONTAINERS_MAX|": "3.10",
+
     # --- Revision numbers for Wazuh agent and manager packages versions
     # Alpine APK packages revisions
     "|WAZUH_REVISION_APK_AGENT_I386|" : "r1",
@@ -169,7 +170,7 @@ custom_replacements = {
     # --- Open Distro for Elasticsearch
     "|OPEN_DISTRO_LATEST|" : "1.13.2",
     # --- Elasticsearch
-    "|ELASTICSEARCH_ELK_LATEST|" : "7.17.11", # Basic license
+    "|ELASTICSEARCH_ELK_LATEST|" : "7.17.12", # Basic license
     "|ELASTICSEARCH_LATEST|" : "7.10.2",
     # --- Other Elastic
     "|ELASTIC_6_LATEST|" : "6.8.8",
