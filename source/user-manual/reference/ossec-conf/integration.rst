@@ -1,7 +1,7 @@
 .. Copyright (C) 2015, Wazuh, Inc.
 
 .. meta::
-  :description: Learn how to configure the manager to connect Wazuh to external APIs. Check out the options, optional filters, and configuration examples.
+  :description: Learn how to configure the manager to connect Wazuh to external APIs. Check out the options, optional filters, optional settings, and configuration examples.
 
 .. _reference_ossec_integration:
 
@@ -23,11 +23,11 @@ Options
 - `name`_
 - `hook_url`_
 - `api_key`_
+- `alert_format`_
 - `level`_
 - `rule_id`_
 - `group`_
 - `event_location`_
-- `alert_format`_
 - `max_log`_
 - `timeout`_
 - `retries`_
@@ -67,6 +67,19 @@ This is the key that you would have retrieved from the PagerDuty, VirusTotal, or
 +--------------------+-----------------------------------------+
 | **Allowed values** | PagerDuty/VirusTotal/Maltiverse Api key |
 +--------------------+-----------------------------------------+
+
+alert_format
+^^^^^^^^^^^^
+
+This writes the alert file in the JSON format. The Integrator makes use of this file to fetch fields values.
+
++--------------------+-----------------------------------------------------------+
+| **Default value**  | n/a                                                       |
++--------------------+-----------------------------------------------------------+
+| **Allowed values** | json                                                      |
++--------------------+-----------------------------------------------------------+
+
+.. note:: This option must be set to ``json`` for Slack, VirusTotal, Shuffle, and Maltiverse integrations.
 
 Optional filters
 ----------------
@@ -115,18 +128,8 @@ This filters alerts by where the event originated.
 | **Allowed values** | Any :ref:`sregex<sregex_os_match_syntax>` expression.        |
 +--------------------+--------------------------------------------------------------+
 
-alert_format
-^^^^^^^^^^^^
-
-This writes the alert file in the JSON format. The Integrator makes use of this file to fetch fields values.
-
-+--------------------+-----------------------------------------------------------+
-| **Default value**  | n/a                                                       |
-+--------------------+-----------------------------------------------------------+
-| **Allowed values** | json                                                      |
-+--------------------+-----------------------------------------------------------+
-
-.. note:: This option must be set to ``json`` for Slack, VirusTotal, Shuffle, and Maltiverse integrations.
+Optional settings
+-----------------
 
 max_log
 ^^^^^^^

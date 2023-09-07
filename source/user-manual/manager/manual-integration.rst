@@ -30,6 +30,7 @@ The integrations are configured on the Wazuh manager ``ossec.conf`` file. You ca
     <event_location> </event_location>
 
     <!-- Optional settings -->
+    <max_log> </max_log>
     <timeout> </timeout>
     <retries> </retries>
   </integration>
@@ -145,8 +146,6 @@ To set up this integration, follow these steps.
         <api_key>API_KEY</api_key> <!-- Replace with your VirusTotal API key -->
         <group>syscheck</group>
         <alert_format>json</alert_format>
-        <timeout>30</timeout>
-        <retries>5</retries>
       </integration>
 
 #. Restart the Wazuh manager to apply the changes.
