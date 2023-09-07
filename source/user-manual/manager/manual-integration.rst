@@ -2,13 +2,13 @@
 
 .. meta::
   :description: Learn more about the Integrator daemon, which allows Wazuh to connect to external APIs, as well as alerting tools such as Slack, PagerDuty, VirusTotal, and Shuffle.
-  
+
 .. _manual_integration:
 
 Integration with external APIs
 ==============================
 
-The *Integrator* daemon allows Wazuh to connect to external APIs and alerting tools such as Slack, PagerDuty, VirusTotal, and Shuffle.
+The *Integrator* daemon allows Wazuh to connect to external APIs and alerting tools such as Slack, PagerDuty, VirusTotal, Shuffle, and Maltiverse.
 
 Configuration
 -------------
@@ -19,15 +19,16 @@ The integrations are configured on the Wazuh manager ``ossec.conf`` file. You ca
 
   <integration>
     <name> </name>
-    <hook_url> </hook_url> <!-- Required for Slack and Shuffle -->
-    <api_key> </api_key> <!-- Required for PagerDuty and VirusTotal -->
-    <alert_format>json</alert_format> <!-- Required for Slack, VirusTotal and Shuffle -->
+    <hook_url> </hook_url> <!-- Required for Slack, Shuffle, and Maltiverse -->
+    <api_key> </api_key> <!-- Required for PagerDuty, VirusTotal, and Maltiverse -->
+    <alert_format>json</alert_format> <!-- Required for Slack, PagerDuty, VirusTotal, Shuffle, and Maltiverse -->
 
     <!-- Optional filters -->
     <rule_id> </rule_id>
     <level> </level>
     <group> </group>
     <event_location> </event_location>
+    <options> </options>
   </integration>
 
 
@@ -42,7 +43,7 @@ Optional filters
 The `Integrator` daemon uses the `optional filters` fields to determine which alerts should be sent to the external platforms. Only the alerts that meet the filter conditions are sent. If no filters are specified, all alerts are sent.
 
 The following considerations must be taken into account when the filters are set:
-   
+
    - It is possible to specify multiple group names using the ``<group>`` field with a comma-separated list. If the alert's group matches any of the groups in the list, the alert is sent. Otherwise, it is ignored.
    - It is possible to specify multiple rule IDs using the ``<rule_id>`` field with a comma-separated list. If the alert's rule ID matches any of the IDs in the list, the alert is sent. Otherwise, it is ignored.
    - It is possible to specify the previously described fields together. If both the alert's rule ID and group match any of the IDs and groups in the lists, the alert is sent. Otherwise, it is ignored.
@@ -70,6 +71,10 @@ To set up this integration, follow these steps.
        <hook_url>WEBHOOK_URL</hook_url> <!-- Replace with your Slack hook URL -->
        <alert_format>json</alert_format>
      </integration>
+
+   .. note::
+
+      You can set a JSON object with customization fields using the :ref:`options <integration_options_tag>` tag. Visit the `Slack API reference <https://api.slack.com/reference/messaging/attachments#legacy_fields>`__ for information about available customization fields.
 
 #. Restart the Wazuh manager to apply the changes.
 
@@ -101,7 +106,12 @@ To set up this integration, do the following.
         <name>pagerduty</name>
         <api_key>API_KEY</api_key> <!-- Replace with your PagerDuty API key -->
         <level>10</level>
+        <alert_format>json</alert_format> <!-- New mandatory parameter since v4.7.0 -->
       </integration>
+
+   .. note::
+
+      You can set a JSON object with customization fields using the :ref:`options <integration_options_tag>` tag. Visit the `PagerDuty API reference <https://developer.pagerduty.com/docs/ZG9jOjExMDI5NTgx-send-an-alert-event>`__ for information about available customization fields.
 
 #. Restart the Wazuh manager to apply the changes.
 
@@ -128,7 +138,7 @@ To set up this integration, follow these steps.
 
    .. code-block:: xml
       :emphasize-lines: 3
-  
+
       <integration>
         <name>virustotal</name>
         <api_key>API_KEY</api_key> <!-- Replace with your VirusTotal API key -->
@@ -167,6 +177,10 @@ To set up this integration, do the following.
          <alert_format>json</alert_format>
       </integration>
 
+   .. note::
+
+      You can set a JSON object with customization fields using the :ref:`options <integration_options_tag>` tag. Visit the `Shuffle API reference <https://shuffler.io/docs/API>`__ for information about available customization fields.
+
 #. Restart the Wazuh manager to apply the changes.
 
    .. include:: /_templates/common/restart_manager.rst
@@ -178,6 +192,43 @@ Once the configuration is complete, alerts start showing in the email inbox.
    :alt: Shuffle email alert
    :align: center
    :width: 80%
+
+Maltiverse
+----------
+
+`Maltiverse <https://whatis.maltiverse.com/>`__ is an open and collaborative platform for indexing and searching Indicators of Compromise (IoCs). It works as a broker for Threat intelligence sources. Maltiverse aggregates information from more than a hundred different public, private and community sources.
+
+This integration identifies IoCs in Wazuh alerts via the Maltiverse API. It generates new alerts enriched with Maltiverse data. The Maltiverse data fields are based on the threat taxonomy of the ECS standard (Elastic Common Schema).
+
+To set up this integration, do the following.
+
+#. Get your API key from the `Maltiverse <https://www.maltiverse.com>`__ page.
+
+#. Edit ``/var/ossec/etc/ossec.conf`` in the Wazuh server and include a configuration block such as the following. Replace ``API_KEY`` with your Maltiverse API key. The rule level filter is optional. You can remove it or set another level value for the integration.
+
+   .. code-block:: xml
+      :emphasize-lines: 5
+
+      <integration>
+         <name>maltiverse</name>
+         <hook_url>https://api.maltiverse.com</hook_url>
+         <level>3</level>
+         <api_key>API_KEY</api_key> <!-- Replace with your Maltiverse API key -->
+         <alert_format>json</alert_format>
+      </integration>
+
+#. Restart the Wazuh manager to apply the changes.
+
+   .. include:: /_templates/common/restart_manager.rst
+
+Once the configuration is complete, enriched alerts start showing in the Wazuh Dashboard if applicable.
+
+.. thumbnail:: /images/manual/integration/maltiverse.png
+   :title: Maltiverse alert
+   :alt: Maltiverse alert
+   :align: center
+   :width: 80%
+
 
 Custom integration
 ------------------
@@ -196,4 +247,5 @@ Below, you can find an example of a configuration block in the ``ossec.conf`` fi
     <group>multiple_drops,authentication_failures</group>
     <api_key>APIKEY</api_key> <!-- Replace with your external service API key -->
     <alert_format>json</alert_format>
+    <options>{"data": "Custom data"}</options> <!-- Replace with your custom JSON object -->
   </integration>
