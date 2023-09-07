@@ -1,7 +1,7 @@
 .. Copyright (C) 2015, Wazuh, Inc.
 
 .. meta::
-  :description: Learn more about how to configure the collection of log data from files, Windows events, and from the output of commands with Wazuh. 
+  :description: Learn more about how to configure the collection of log data from files, Windows events, and from the output of commands with Wazuh.
 
 .. _reference_ossec_localfile:
 
@@ -35,6 +35,8 @@ Options
 - `exclude`_
 - `reconnect_time`_
 - `multiline_regex`_
+- `ignore`_
+- `restrict`_
 
 
 location
@@ -176,14 +178,14 @@ The attributes below are optional.
   If collecting logs with ``<log_format>`` set as ``macos``, then ``max-size`` is ignored.
 
 .. note::
-  If the log rotates while ``wazuh-logcollector`` is stopped and ``only-future-events`` is set to ``no``, it will start reading from the beginning of the log. 
+  If the log rotates while ``wazuh-logcollector`` is stopped and ``only-future-events`` is set to ``no``, it will start reading from the beginning of the log.
 
 .. _query:
 
 query
 ^^^^^
 
-This label can be used to filter *Windows* ``eventchannel`` events or *macOS* ULS logs (``macos``) that Wazuh will process. 
+This label can be used to filter *Windows* ``eventchannel`` events or *macOS* ULS logs (``macos``) that Wazuh will process.
 
 To filter *Windows* ``eventchannel`` events, *XPATH* format is used to make the queries following the event schema.
 
@@ -591,6 +593,83 @@ For example, we may want to read a Python Traceback output as one single log, re
       <location>/var/logs/my_python_app.log</location>
       <multiline_regex replace="wspace">^Traceback</multiline_regex>
    </localfile>
+
+ignore
+^^^^^^^^^^^^^^^
+
+Specify a regular expression to ignore log lines or command outputs when matching. Whether several `ignore` labels are defined, entries are ignored when matching any of the specified ones.
+
++--------------------+---------------------------------------------------------------+
+| **Default Value**  | n/a                                                           |
++--------------------+---------------------------------------------------------------+
+| **Allowed values** | Any `regex <regex.html#regex-os-regex-syntax>`_,              |
+|                    | `sregex <regex.html#sregex-os-match-syntax>`_ or              |
+|                    | `PCRE2 <regex.html#pcre2-syntax>`_ expression.                |
++--------------------+---------------------------------------------------------------+
+
+Use the `type` attribute to define the regular expression type. By default, PCRE2 is applied.
+
++----------+--------------------------------------------------------------------------------+
+| **type** | Allows to set regular expression type                                          |
++          +------------------+-------------------------------------------------------------+
+|          | Default value    | PCRE2                                                       |
+|          +------------------+-------------------------------------------------------------+
+|          | Allowed values   | osregex, osmatch, PCRE2                                     |
++----------+------------------+-------------------------------------------------------------+
+
+For example, to ignore events related to configuration changes in the audit log:
+
+.. code-block:: xml
+
+  <localfile>
+      <log_format>audit</log_format>
+      <location>/var/log/audit/audit.log</location>
+      <ignore type="PCRE2">type=.+_CHANGE</ignore>
+      <ignore type="osregex">type=CONFIG_\.+</ignore>
+  </localfile>
+
+restrict
+^^^^^^^^^^^^^^^
+
+Specify a regular expression to restrict processed log lines or command outputs. Whether several `restrict` labels are defined, entries are processed when matching all of them.
+
++--------------------+---------------------------------------------------------------+
+| **Default Value**  | n/a                                                           |
++--------------------+---------------------------------------------------------------+
+| **Allowed values** | Any `regex <regex.html#regex-os-regex-syntax>`_,              |
+|                    | `sregex <regex.html#sregex-os-match-syntax>`_ or              |
+|                    | `PCRE2 <regex.html#pcre2-syntax>`_ expression.                |
++--------------------+---------------------------------------------------------------+
+
+Use the `type` attribute to define the regular expression type. By default, PCRE2 is applied.
+
++----------+--------------------------------------------------------------------------------+
+| **type** | Allows to set regular expression type                                          |
++          +------------------+-------------------------------------------------------------+
+|          | Default value    | PCRE2                                                       |
+|          +------------------+-------------------------------------------------------------+
+|          | Allowed values   | osregex, osmatch, PCRE2                                     |
++----------+------------------+-------------------------------------------------------------+
+
+For example, to restrict syslog events related to a particular user name:
+
+.. code-block:: xml
+
+  <localfile>
+      <log_format>syslog</log_format>
+      <location>/custom/file/path</location>
+      <restrict type="PCRE2">username_\d?</restrict>
+      <restrict type="osregex">Jun\.+</restrict>
+  </localfile>
+
+.. note::
+  For formats that group multiple lines, the entire group is treated as a single log when evaluating the regex.
+
+.. note::
+  Whether the same log entry matches an ignore and also a restrict configured for the same `localfile`, the entry is discarded. In other words, the `ignore` has precedence over `restrict`. Said that, if the same expression is defined in both `ignore` and `restrict`, no log will be processed for that `localfile`.
+
+.. note::
+  The `eventchannel` format already provides a way to filter logs through queries. Therefore, `ignore` and `restrict` settings don't apply to this format.
 
 
 Configuration examples

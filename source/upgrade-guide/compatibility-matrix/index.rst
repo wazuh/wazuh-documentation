@@ -24,38 +24,6 @@ The Wazuh manager version must always be **newer than or equal to**  the Wazuh a
 
 The Wazuh manager is also compatible with OSSEC agents but not all capabilities are available with them. 
 
-.. _wazuh_kibana_compatibility_matrix:    
+.. note::
 
-Elastic and the Wazuh Kibana plugin
------------------------------------
-
-The following Elastic Stack and Open Distro for Elasticsearch versions are compatible with the Wazuh manager |WAZUH_CURRENT| using the Wazuh Kibana plugin:
-
-+--------------------------+---------------------------+
-| Elastic Stack version    |   Open Distro version     |
-+==========================+===========================+
-| 7.10.2                   | 1.13.2                    |
-+--------------------------+---------------------------+
-| 7.16.0–7.16.3            |                           |
-+--------------------------+---------------------------+
-| 7.17.0–7.17.12           |                           |
-+--------------------------+---------------------------+
-
-You can find more information on the `Wazuh Kibana plugin repository <https://github.com/wazuh/wazuh-kibana-app/wiki/Compatibility>`_.
-
-.. _wazuh_and_splunk_app:
-
-Splunk and the Wazuh Splunk app
--------------------------------
-
-The following Splunk versions are compatible with the Wazuh manager |WAZUH_CURRENT| using the Wazuh Splunk app |WAZUH_SPLUNK_CURRENT|:
-
-+------------------+
-| Splunk version   |
-+==================+
-| 8.1.1–8.1.10     |
-+------------------+
-| 8.2.0–8.2.8      |
-+------------------+
-
-You can find more information on the `Wazuh Splunk app repository <https://github.com/wazuh/wazuh-splunk#installation>`__.
+   Since Wazuh v4.6.0, we don't provide the Kibana plugin and Splunk app anymore. To integrate Wazuh with Elastic or Splunk, refer to our :doc:`/integrations-guide/index`.

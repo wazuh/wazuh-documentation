@@ -4,6 +4,7 @@ const redirections = [];
 
 /* Note: new release versions must always be inserted in the first position of the array "versions" */
 const versions = [
+  '4.6',
   '4.5',
   '4.4',
   '4.3',
@@ -58,6 +59,74 @@ removedUrls['x.y'] = [
   '/old-url',
 ];
 */
+
+/* *** RELEASE 4.6 ****/
+
+/* Redirections from 4.5 to 4.6  */
+
+redirections.push(
+  {
+    'target': ['4.5=>4.6'],
+    '4.5': '/user-manual/uninstall/central-components.html',
+    '4.6': '/user-manual/uninstall/index.html',
+  },
+);
+
+/* Pages added in 4.6 */
+
+newUrls['4.6'] = [
+  '/cloud-security/ms-graph/index.html',
+  '/cloud-security/ms-graph/monitoring-ms-graph-activity.html',
+  '/user-manual/reference/ossec-conf/ms-graph-module.html',
+];
+
+/* Pages no longer available in 4.6 */
+
+removedUrls['4.6'] = [
+  '/deployment-options/elastic-stack/index.html',
+  '/deployment-options/elastic-stack/distributed-deployment/index.html',
+  '/deployment-options/elastic-stack/distributed-deployment/elasticsearch-cluster/index.html',
+  '/deployment-options/elastic-stack/distributed-deployment/elasticsearch-cluster/elasticsearch-single-node-cluster.html',
+  '/deployment-options/elastic-stack/distributed-deployment/elasticsearch-cluster/elasticsearch-multi-node-cluster.html',
+  '/deployment-options/elastic-stack/distributed-deployment/wazuh-cluster/index.html',
+  '/deployment-options/elastic-stack/distributed-deployment/wazuh-cluster/wazuh-single-node-cluster.html',
+  '/deployment-options/elastic-stack/distributed-deployment/wazuh-cluster/wazuh-multi-node-cluster.html',
+  '/deployment-options/elastic-stack/distributed-deployment/kibana/index.html',
+  '/deployment-options/elastic-stack/all-in-one-deployment/index.html',
+  '/deployment-options/splunk/index.html',
+  '/deployment-options/splunk/splunk-install.html',
+  '/deployment-options/splunk/splunk-wazuh.html',
+  '/deployment-options/splunk/splunk-minimal-distributed.html',
+  '/deployment-options/splunk/splunk-distributed.html',
+  '/deployment-options/splunk/splunk-app.html',
+  '/deployment-options/splunk/splunk-basic.html',
+  '/deployment-options/splunk/splunk-reverse-proxy.html',
+  '/deployment-options/splunk/splunk-polling.html',
+  '/deployment-options/splunk/splunk-rbac.html',
+  '/upgrade-guide/elasticsearch-kibana-filebeat/upgrading-elastic-stack.html',
+  '/upgrade-guide/elasticsearch-kibana-filebeat/upgrading-open-distro.html',
+  '/upgrade-guide/legacy/upgrading-elastic-stack/from-2.x-to-5.x.html',
+  '/upgrade-guide/legacy/upgrading-elastic-stack/from-6.8-to-7.x.html',
+  '/upgrade-guide/legacy/upgrading-elastic-stack/from-6.x-to-6.8.html',
+  '/upgrade-guide/legacy/upgrading-elastic-stack/index.html',
+  '/upgrade-guide/legacy/upgrading-agent/from-1.x-to-2.x.html',
+  '/upgrade-guide/legacy/upgrading-agent/from-2.x-to-3.x.html',
+  '/upgrade-guide/legacy/upgrading-agent/index.html',
+  '/upgrade-guide/legacy/upgrading-wazuh-server/from-1.x-to-2.x.html',
+  '/upgrade-guide/legacy/upgrading-wazuh-server/from-2.x-to-3.x.html',
+  '/upgrade-guide/legacy/upgrading-wazuh-server/index.html',
+  '/upgrade-guide/legacy/upgrading-wazuh-server/restore-alerts-from-2.x-to-3.x.html',
+  '/user-manual/elasticsearch/configure-indices.html',
+  '/user-manual/elasticsearch/elasticsearch.html',
+  '/user-manual/elasticsearch/index.html',
+  '/user-manual/elasticsearch/troubleshooting.html',  
+  '/user-manual/elasticsearch/elastic-tuning.html',
+  '/user-manual/uninstall/central-components.html',
+  '/user-manual/uninstall/elastic-stack.html',
+  '/user-manual/uninstall/open-distro.html',
+  '/development/packaging/generate-wazuh-kibana-app.html',
+  '/development/packaging/generate-wazuh-splunk-app.html',
+];
 
 /* *** RELEASE 4.5 ****/
 

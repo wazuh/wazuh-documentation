@@ -1,8 +1,8 @@
 .. Copyright (C) 2015, Wazuh, Inc.
 
 .. meta::
-  :description: The Wazuh FIM module scans the Windows Registry periodically and triggers an alert when it detects changes in the entries. Learn more about it in this section. 
-  
+  :description: The Wazuh FIM module scans the Windows Registry periodically and triggers an alert when it detects changes in the entries. Learn more about it in this section.
+
 Windows Registry monitoring
 ===========================
 
@@ -10,7 +10,7 @@ The Windows Registry is a vital part of the Windows operating system. It’s a d
 
 An unauthorized or unexpected change to the registry might result in system instability, application failures, and security breaches. Attackers might modify registry keys to execute malicious code or to maintain persistence on the system. In addition, legitimate software and system updates might also modify the registry. It's essential to track these changes to ensure system stability and security.
 
-The Wazuh FIM module scans the Windows Registry periodically and triggers an alert when it detects changes in the entries.  
+The Wazuh FIM module scans the Windows Registry periodically and triggers an alert when it detects changes in the entries.
 
 How it works
 ------------
@@ -19,7 +19,7 @@ The FIM module runs periodic scans of monitored Windows Registry entries and sto
 
 Upon a scan, the Wazuh agent reports any changes the FIM module finds in the monitored registry entries to the Wazuh server. The FIM module looks for file modifications by comparing the checksums of a registry entry to its stored checksums and attribute values. It generates an alert if it finds discrepancies.
 
-The Wazuh FIM module uses two databases to collect FIM event data, such as registry entry creation, modification, and deletion data. One is a local SQLite-based database on the monitored endpoint that stores the data in  ``C:\Program Files (x86)\ossec-agent\queue\fim\db``. The other is an agent database on the Wazuh server stored at ``/var/ossec/queue/db``. 
+The Wazuh FIM module uses two databases to collect FIM event data, such as registry entry creation, modification, and deletion data. One is a local SQLite-based database on the monitored endpoint that stores the data in  ``C:\Program Files (x86)\ossec-agent\queue\fim\db``. The other is an agent database on the Wazuh server stored at ``/var/ossec/queue/db``.
 
 .. thumbnail:: /images/manual/fim/synchronization-diagram.png
   :title: Synchronization diagram
@@ -34,7 +34,23 @@ Configuration
 
 To configure the FIM module, it’s necessary to specify the registry keys that FIM must monitor for creation, modification, and deletion. You can do  this similarly to how you list directories and files, but using the label ``<windows_registry>`` instead.
 
-You can modify the :ref:`default FIM configuration <reference_ossec_syscheck_default_configuration>` on the ``C:\Program Files (x86)\ossec-agent\ossec.conf`` configuration file of the  Wazuh agent to specify the Windows Registry keys to monitor. You can also configure this capability remotely by using :ref:`centralized configuration <reference_agent_conf>`. 
+You can modify the :ref:`default FIM configuration <reference_ossec_syscheck_default_configuration>` on the ``C:\Program Files (x86)\ossec-agent\ossec.conf`` configuration file of the  Wazuh agent to specify the Windows Registry keys to monitor. You can also configure this capability remotely by using :ref:`centralized configuration <reference_agent_conf>`.
+
+.. versionadded:: 4.6.0
+
+You can use ``*`` and ``?`` wildcards when configuring Windows registry keys. Use them in the same way you would in a shell or Windows command prompt (cmd) terminal for listing files. For example:
+
+.. code-block:: xml
+
+   <syscheck>
+     <windows_registry arch="both">HKEY_LOCAL_MACHINE\SOFTWARE\*</windows_registry>
+     <windows_registry arch="both">HKEY_CURRENT_CONFIG\S?????</windows_registry>
+     <windows_registry arch="both">HKEY_USERS\S-?-?-??\*</windows_registry>
+   </syscheck>
+
+.. note::
+
+   Registry keys matching your configuration might be created after the initial FIM scan. Wazuh scans these new keys only from the next scheduled FIM scan.
 
 The FIM module supports several configuration options for monitoring Windows Registry entries. For example, you can enable all the basic checks with the ``check_all`` attribute, or find the information about the specific change made to a registry entry with the ``report_changes`` attribute. You can find a list of all the supported attributes and options in the :ref:`windows_registry <reference_ossec_syscheck_windows_registry>` section of the documentation.
 
@@ -51,7 +67,7 @@ You can specify the Windows Registry keys to monitor using the :ref:`windows_reg
    - Last modification date
    - MD5, SHA1, and SHA256 hash sums
 
-- ``check_sum``:  Records the MD5, SHA1, and SHA256 hashes of the Windows Registry values. The allowed values for the ``check_sum`` attribute are ``yes`` and ``no``.  
+- ``check_sum``:  Records the MD5, SHA1, and SHA256 hashes of the Windows Registry values. The allowed values for the ``check_sum`` attribute are ``yes`` and ``no``.
 - ``check_mtime``: The ``check_mtime`` attribute allows the FIM module to record the modification time of the Windows Registry keys and values. The allowed values for the ``check_mtime`` attribute are ``yes`` and ``no``.
 
 Follow these steps to configure the FIM module with the following settings:
@@ -79,7 +95,7 @@ Follow these steps to configure the FIM module with the following settings:
 Recursion level
 ^^^^^^^^^^^^^^^
 
-You can configure the maximum recursion level allowed for a Windows Registry entity  with the ``recursion_level`` attribute of the :ref:`windows_registry <reference_ossec_syscheck_windows_registry>` option. The allowed values for this attribute are any integer between 0 and 512. 
+You can configure the maximum recursion level allowed for a Windows Registry entity  with the ``recursion_level`` attribute of the :ref:`windows_registry <reference_ossec_syscheck_windows_registry>` option. The allowed values for this attribute are any integer between 0 and 512.
 
 Follow these steps to set the ``recursion_level`` of ``HKEY_LOCAL_MACHINE\SYSTEM\Setup`` to 3.
 
@@ -135,7 +151,7 @@ You must use the ``report_changes`` attribute with caution. Wazuh copies every s
 Follow these steps to configure the FIM module to report changes made to ``HKEY_LOCAL_MACHINE\SYSTEM\Setup`` key.
 
 #. Create a subkey ``Custom Key`` under the ``HKEY_LOCAL_MACHINE\SYSTEM\Setup`` registry key.
-  
+
 #. Edit the ``C:\Program Files (x86)\ossec-agent\ossec.conf`` configuration file and add the configuration below:
 
    .. code-block:: xml
@@ -176,7 +192,7 @@ Adding exclusions
 
 You can configure the FIM module to ignore certain Windows Registry keys with the :ref:`registry_ignore <reference_ossec_syscheck_registry_ignore>` option. It allows declaring only a single Windows Registry entry. However, you can specify multiple lines to declare multiple registry entries.
 
-Follow these steps to configure the FIM module to ignore the ``HKEY_LOCAL_MACHINE\Security\Policy`` and any Windows Registry entry that matches the simple regex pattern ``\Enum$`` from FIM results. 
+Follow these steps to configure the FIM module to ignore the ``HKEY_LOCAL_MACHINE\Security\Policy`` and any Windows Registry entry that matches the simple regex pattern ``\Enum$`` from FIM results.
 
 #. Add this configuration to the ``C:\Program Files (x86)\ossec-agent\ossec.conf`` configuration file of the Wazuh agent:
 
@@ -198,7 +214,7 @@ Use case: Detect malware persistence in Windows Registry
 
 Malware persistence in the Windows Registry is a technique attackers use to ensure that their malicious program runs every time the system starts or restarts. The malicious program is commonly added to the "Run" and "RunOnce" keys in the Registry.
 
-With the Wazuh FIM module, you can detect any suspicious or unknown programs added to the startup registry keys. This allows you to take appropriate action to remove them before they cause harm to your system. 
+With the Wazuh FIM module, you can detect any suspicious or unknown programs added to the startup registry keys. This allows you to take appropriate action to remove them before they cause harm to your system.
 
 Use case description
 ^^^^^^^^^^^^^^^^^^^^
@@ -206,7 +222,7 @@ Use case description
   +---------------------+-----------------------------------------------------------------------------------------------+
   | Endpoint            | Description                                                                                   |
   +=====================+===============================================================================================+
-  | Windows 10          | The FIM module monitors startup registry keys on this endpoint.                               |                                                                                                                               
+  | Windows 10          | The FIM module monitors startup registry keys on this endpoint.                               |
   +---------------------+-----------------------------------------------------------------------------------------------+
 
 Configuration
@@ -229,7 +245,7 @@ Test the configuration
 
    You must carry this out in a sandbox environment. Delete the added registry keys after running the test.
 
-#. Add the registry value name ``DemoValue`` and registry value data ``cmd`` to the ``HKEY_LOCAL_MACHINE\Software\Microsoft\Windows\CurrentVersion\Run`` key. 
+#. Add the registry value name ``DemoValue`` and registry value data ``cmd`` to the ``HKEY_LOCAL_MACHINE\Software\Microsoft\Windows\CurrentVersion\Run`` key.
 
 #. Add the registry value name ``DemoValue`` and registry value data ``cmd`` to the ``HKEY_LOCAL_MACHINE\Software\Microsoft\Windows\CurrentVersion\RunOne`` registry keys.
 

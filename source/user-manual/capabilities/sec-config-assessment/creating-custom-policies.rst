@@ -85,19 +85,21 @@ Each section has its fields as described in the tables :ref:`Policy section<sca_
 .. _sca_policy_file_policy_section:
 .. table:: Policy section
 
-    +--------------------+----------------+-------------------+------------------------+------------------------+
-    | Field              | Mandatory      | Type              | Allowed values         | Allowed values         |
-    +====================+================+===================+========================+========================+
-    | id                 | Yes            | String            | Any string             | Policy ID              |
-    +--------------------+----------------+-------------------+------------------------+------------------------+
-    | file               | Yes            | String            | Any string             | Policy filename        |
-    +--------------------+----------------+-------------------+------------------------+------------------------+
-    | name               | Yes            | String            | Any string             | Policy title           |
-    +--------------------+----------------+-------------------+------------------------+------------------------+
-    | description        | Yes            | String            | Any string             | Brief description      |
-    +--------------------+----------------+-------------------+------------------------+------------------------+
-    | references         | No             | Array of strings  | Any string             | Any string             |
-    +--------------------+----------------+-------------------+------------------------+------------------------+
+    +--------------------+----------------+-------------------+-------------------------------+------------------------+
+    | Field              | Mandatory      | Type              | Allowed values                | Description            |
+    +====================+================+===================+===============================+========================+
+    | id                 | Yes            | String            | Any string                    | Policy ID              |
+    +--------------------+----------------+-------------------+-------------------------------+------------------------+
+    | file               | Yes            | String            | Any string                    | Policy filename        |
+    +--------------------+----------------+-------------------+-------------------------------+------------------------+
+    | name               | Yes            | String            | Any string                    | Policy title           |
+    +--------------------+----------------+-------------------+-------------------------------+------------------------+
+    | description        | Yes            | String            | Any string                    | Brief description      |
+    +--------------------+----------------+-------------------+-------------------------------+------------------------+
+    | references         | No             | Array of strings  | Any string (empty by default) | Links to references    |
+    +--------------------+----------------+-------------------+-------------------------------+------------------------+
+    | regex_type         | No             | String            | "osregex" (default), "pcre2"  | Policy regex engine    |
+    +--------------------+----------------+-------------------+-------------------------------+------------------------+
 
 .. _sca_policy_file_requirements_section:
 .. table:: Requirements section
@@ -174,6 +176,15 @@ Checks are the core of an SCA policy, as they describe the scan to be performed 
     +-------------+-----------+----------------------------+--------------------+
     |    rules    |    Yes    |      Array of strings      |     Any string     |
     +-------------+-----------+----------------------------+--------------------+
+    | regex_type  |    No     |           String           |"pcre2" or "osregex"|
+    +-------------+-----------+----------------------------+--------------------+
+
+Check evaluation is governed by its `rule result aggregation strategy`, as set in its ``condition`` field, and the results of
+the evaluation of its rules.
+
+.. note::
+
+    If you set a ``regex_type``, it overrides the regex engine type defined in the policy.
 
 Condition
 ^^^^^^^^^

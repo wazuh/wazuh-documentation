@@ -25,7 +25,148 @@ The following sections cover how to configure AWS to store the scan findings in 
 AWS configuration
 -----------------
 
-AWS provides a `template <https://github.com/aws-samples/ecr-image-scan-findings-logger/blob/main/Template-ECR-SFL.yml>`_ for creating a stack in CloudFormation that loads the image scan findings from Amazon ECR in CloudWatch using an AWS Lambda function.
+AWS provides a `template <https://github.com/aws-samples/ecr-image-scan-findings-logger/blob/main/Template-ECR-SFL.yml>`__ that logs to CloudWatch the findings of Amazon ECR scans of images. The template uses an AWS Lambda function to accomplish this.
+
+Uploading the template and creating a stack, uploading the images to Amazon ECR, scanning the images, and using the logger all require specific permissions. Because of this, you need to create a custom policy granting these permissions.
+
+.. include:: /_templates/cloud/amazon/create_policy.rst
+
+IAM permissions
+^^^^^^^^^^^^^^^
+
+You need the permissions listed below inside the sections for  ``RoleCreator`` and ``PassRole`` to create and delete the stack based on the template.
+
+.. warning::
+
+   These permissions must be bound to the specific resources due to overly permissive actions.
+
+.. code-block:: json
+  
+   {
+      "Sid": "RoleCreator",
+      "Effect": "Allow",
+      "Action": [
+         "iam:CreateRole",
+         "iam:PutRolePolicy",
+         "iam:AttachRolePolicy",
+         "iam:DeleteRolePolicy",
+         "iam:DeleteRole",
+         "iam:GetRole",
+         "iam:GetRolePolicy",
+         "iam:PassRole"
+      ],
+      "Resource": "arn:aws:iam::<account-ID>:role/*"
+   },
+   {
+      "Sid": "PassRole",
+      "Effect": "Allow",
+      "Action": "iam:PassRole",
+      "Resource": "arn:aws:iam::<account-ID>:role/*-LambdaExecutionRole*"
+   }
+
+CloudFormation stack permissions
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+You need the following permissions to create and delete any template-based CloudFormation stack.
+
+.. code-block:: json
+
+   {
+      "Sid": "CloudFormationStackCreation",
+      "Effect": "Allow",
+      "Action": [
+         "cloudformation:CreateStack",
+         "cloudformation:ValidateTemplate",
+         "cloudformation:CreateUploadBucket",
+         "cloudformation:GetTemplateSummary",
+         "cloudformation:DescribeStackEvents",
+         "cloudformation:DescribeStackResources",
+         "cloudformation:ListStacks",
+         "cloudformation:DeleteStack",
+         "s3:PutObject",
+         "s3:ListBucket",
+         "s3:GetObject",
+         "s3:CreateBucket"
+      ],
+      "Resource": "*"   
+   }
+
+ECR registry and repository permissions
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+This `Amazon ECR <https://docs.aws.amazon.com/AmazonECR/latest/userguide/set-repository-policy.html>`__ permission allows calls to the API through an IAM policy.
+
+.. note::
+
+   Before authenticating to a registry and pushing or pulling any images from any Amazon ECR repository, you need  ``ecr:GetAuthorizationToken``. 
+
+.. code-block:: json
+
+   { 
+      "Sid": "ECRUtilities",
+      "Effect": "Allow",
+      "Action": [
+         "ecr:GetAuthorizationToken",  
+         "ecr:DescribeRepositories"    
+      ],
+      "Resource": "*"
+   }
+
+Image pushing and scanning permissions
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+You need the following Amazon ECR permissions to `push images <https://docs.aws.amazon.com/AmazonECR/latest/userguide/image-push.html#image-push-iam>`__. They are scoped down to a specific repository. The steps to push Docker images are described in the `Amazon ECR - Pushing a Docker image <https://docs.aws.amazon.com/AmazonECR/latest/userguide/docker-push-ecr-image.html>`_ documentation.
+
+.. code-block:: json
+
+   {
+      "Sid": "ScanPushImage",
+      "Effect": "Allow",
+      "Action": [
+         "ecr:CompleteLayerUpload",
+         "ecr:UploadLayerPart",
+         "ecr:InitiateLayerUpload",
+         "ecr:BatchCheckLayerAvailability",
+         "ecr:PutImage",
+         "ecr:ListImages",
+         "ecr:DescribeImages",
+         "ecr:DescribeImageScanFindings",
+         "ecr:StartImageScan"
+      ],
+      "Resource": "arn:aws:ecr:<region>:<account-ID>:repository/<repository-name>"
+   }
+
+Amazon Lambda and Amazon EventBridge permissions
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+You need the following permissions to create and delete the resources handled by the Scan Findings Logger template.
+  
+.. code-block:: json
+
+   {
+      "Sid": "TemplateRequired0",
+      "Effect": "Allow",
+      "Action": [
+         "lambda:RemovePermission",
+         "lambda:DeleteFunction",
+         "lambda:GetFunction",
+         "lambda:CreateFunction",
+         "lambda:AddPermission"
+      ],
+      "Resource": "arn:aws:lambda:<region>:<account-ID>:*"
+   },
+   {
+      "Sid": "TemplateRequired1",
+      "Effect": "Allow",
+      "Action": [
+         "events:RemoveTargets",
+         "events:DeleteRule",
+         "events:PutRule",
+         "events:DescribeRule",
+         "events:PutTargets"
+      ],
+      "Resource": "arn:aws:events:<region>:<account-ID>:*"
+    }
 
 How to create the CloudFormation Stack
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^

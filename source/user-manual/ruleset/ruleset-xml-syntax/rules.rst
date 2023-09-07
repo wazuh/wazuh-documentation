@@ -2128,7 +2128,7 @@ Example:
 var
 ^^^
 
-Defines a variable that may be used in any place of the same file.
+Defines a variable that can be used in any place within the same file. It must be defined at the base level of the ruleset, not inside a tagged section.
 
 +----------------+------------------------+
 | Attribute      | Value                  |
@@ -2140,16 +2140,16 @@ Example:
 
   .. code-block:: xml
 
-     <var name="joe_folder">/home/joe/</var>
+    <var name="joe_folder">/home/joe/</var>
 
-      <group name="local,">
+    <group name="local,">
 
-        <rule id="100001" level="5">
-          <if_sid>550</if_sid>
-          <field name="file">^$joe_folder</field>
-          <description>A Joe's file was modified.</description>
-          <group>ossec,pci_dss_10.6.1,gpg13_10.1,gdpr_IV_35.7.d,</group>
-        </rule>
+      <rule id="100001" level="5">
+        <if_sid>550</if_sid>
+        <field name="file">^$joe_folder</field>
+        <description>A Joe's file was modified.</description>
+        <group>ossec,pci_dss_10.6.1,gpg13_10.1,gdpr_IV_35.7.d,</group>
+      </rule>
 
     </group>
 
