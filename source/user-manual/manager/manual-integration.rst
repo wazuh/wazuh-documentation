@@ -86,7 +86,7 @@ To set up this integration, follow these steps.
 
    .. note::
 
-      You can set a JSON object with customization fields using the :ref:`options <integration_options_tag>` tag. Visit the `Slack API reference <https://api.slack.com/reference/messaging/attachments#legacy_fields>`__ for information about available customization fields.
+      You can set a JSON object with customization fields using the options tag. Visit the `Slack API reference <https://api.slack.com/reference/messaging/attachments#legacy_fields>`__ for information about available customization fields.
 
 #. Restart the Wazuh manager to apply the changes.
 
@@ -123,7 +123,7 @@ To set up this integration, do the following.
 
    .. note::
 
-      You can set a JSON object with customization fields using the :ref:`options <integration_options_tag>` tag. Visit the `PagerDuty API reference <https://developer.pagerduty.com/docs/ZG9jOjExMDI5NTgx-send-an-alert-event>`__ for information about available customization fields.
+      You can set a JSON object with customization fields using the options tag. Visit the `PagerDuty API reference <https://developer.pagerduty.com/docs/ZG9jOjExMDI5NTgx-send-an-alert-event>`__ for information about available customization fields.
 
 #. Restart the Wazuh manager to apply the changes.
 
@@ -191,7 +191,7 @@ To set up this integration, do the following.
 
    .. note::
 
-      You can set a JSON object with customization fields using the :ref:`options <integration_options_tag>` tag. Visit the `Shuffle API reference <https://shuffler.io/docs/API>`__ for information about available customization fields.
+      You can set a JSON object with customization fields using the options tag. Visit the `Shuffle API reference <https://shuffler.io/docs/API>`__ for information about available customization fields.
 
 #. Restart the Wazuh manager to apply the changes.
 
