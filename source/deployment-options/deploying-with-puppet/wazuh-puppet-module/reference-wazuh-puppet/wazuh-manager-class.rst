@@ -729,7 +729,7 @@ $vulnerability_detector_provider_debian_enabled
 $vulnerability_detector_provider_debian_os
   Feed to update.
 
-  `Default ['wheezy', 'stretch', 'jessie', 'buster']`
+  `Default ['buster', 'bullseye', 'bookworm']`
 
   `Type String`
 

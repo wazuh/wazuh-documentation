@@ -456,9 +456,6 @@ Advanced index options
 
     These options are only valid if they're modified before starting the Wazuh dashboard for the very first time.
 
-    You can read more about configuring the shards and replicas in :ref:`elastic_tuning`.
-
-
 wazuh.monitoring.shards
 ^^^^^^^^^^^^^^^^^^^^^^^
 
