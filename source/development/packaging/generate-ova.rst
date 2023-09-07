@@ -3,60 +3,57 @@
 .. meta::
   :description: Wazuh provides an automated way of generating a Virtual machine in OVA format. Learn how to build a Virtual machine with Wazuh central components installed in this section.  
 
-.. _create-ova:
-
 Virtual machine
 ===============
 
-Wazuh provides an automated way of generating a Virtual machine in OVA format that is ready to run a Wazuh manager and ELK.
+We provide an automated way of generating a virtual machine (VM). The ``generate_ova.sh`` script orchestrates the creation of an OVA-formatted VM, ready to run the Wazuh central components.
+
+Requirements
+------------
+
+-  `Virtual Box <https://www.virtualbox.org/manual/UserManual.html#installation>`__
+-  `Vagrant <https://www.vagrantup.com/docs/installation/>`__
+-  `Git <https://git-scm.com/book/en/v2/Getting-Started-Installing-Git>`__
+-  `Python <https://www.python.org/download/releases/2.7/>`__
+
+We recommend using a system with at least the following hardware specifications:
+
++----------------+--------------+
+|   CPU (cores)  |   RAM (GB)   |
++================+==============+
+|       4        |      8       |
++----------------+--------------+
+
+Creating the Wazuh VM
+---------------------
 
 To create the virtual machine follow these steps:
 
-Requirements
-^^^^^^^^^^^^
+#. Download our *wazuh-packages* repository from GitHub and navigate to the ``ova/`` directory. Select the version, for example, ``v|WAZUH_CURRENT_OVA|``.
 
- * `Virtual Box <https://www.virtualbox.org/manual/UserManual.html#installation>`_
- * `Vagrant <https://www.vagrantup.com/docs/installation/>`_
- * `Git <https://git-scm.com/book/en/v2/Getting-Started-Installing-Git>`_
- * `Python <https://www.python.org/download/releases/2.7/>`_
+   .. code-block:: console
 
-Download our wazuh-packages repository from GitHub and go to the ova directory.
+      $ git clone https://github.com/wazuh/wazuh-packages && cd wazuh-packages/ova && git checkout v|WAZUH_CURRENT_OVA|
 
-.. code-block:: console
+#. Execute the ``generate_ova.sh`` script.
 
- $ git clone https://github.com/wazuh/wazuh-packages && cd wazuh-packages/ova && git checkout v|WAZUH_CURRENT_OVA|
+   .. code-block:: console
 
-Execute the ``generate_ova.sh`` script, with the different options you desire.
+      $ ./generate_ova.sh
 
-.. code-block:: console
+The last command above builds a VM with Wazuh central components. It uses production packages by default. If you're building a pre-release version, you must select the development packages instead.
 
-  $ ./generate_ova.sh -h
+   .. code-block:: console
 
-.. code-block:: none
-  :class: output
+      $ ./generate_ova.sh -r dev
 
-  General usage: generate_ova.sh [OPTIONS]
-    -r,    --repository       [Optional] Select the software repository [prod/dev]. By default: prod
-    -s,    --store <path>     [Optional] Set the destination absolute path where the OVA file will be stored.
-    -c,    --checksum         [Optional] Generate checksum [yes/no]. By default: no
-    -g,    --debug            [Optional] Set debug mode on [yes/no]. By default: no
-    -h,    --help             [  Util  ] Show this help.
+The ``-r`` or ``--repository`` option selects the stage to use for the packages. For example:
 
-The options for the repository indicates whether the packages used to install Wazuh are the production ones or not.
+-  ``prod``: Packages released for production environments.
+-  ``dev``: Pre-release packages for testing and development purposes.
 
- * prod: The OVA uses released packages.
- * dev: The OVA uses pre-release packages.
-
-Below, you will find some examples of how to build a Wazuh virtual machine.
+Check all available options by running the following command.
 
 .. code-block:: console
 
-  # ./generate_ova.sh
-
-This will generate a Virtual machine with the Wazuh manager |WAZUH_CURRENT_OVA| and ELK |ELASTICSEARCH_LATEST| installed using production packages.
-
-.. code-block:: console
-
-  # ./generate_ova.sh -r dev
-
-This will generate a Virtual machine with the Wazuh manager |WAZUH_CURRENT_OVA| and ELK |ELASTICSEARCH_LATEST| installed using development packages.
+   $ ./generate_ova.sh -h

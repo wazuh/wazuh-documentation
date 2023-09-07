@@ -17,20 +17,8 @@ integration
 
 This configures the manager to :ref:`connect Wazuh to external APIs <manual_integration>` and alerting tools such as Slack, PagerDuty, VirusTotal, Shuffle, and Maltiverse.
 
-Options
--------
-
-- `name`_
-- `hook_url`_
-- `api_key`_
-- `alert_format`_
-- `level`_
-- `rule_id`_
-- `group`_
-- `event_location`_
-- `max_log`_
-- `timeout`_
-- `retries`_
+Integration options
+-------------------
 
 name
 ^^^^
@@ -144,6 +132,17 @@ The maximum length of an alert snippet that will be sent to the Integrator.  Lon
 
 .. note:: This option only applies if ``alert_format`` is not set to ``json``.
 
+options
+^^^^^^^
+
+This overwrites the previous fields or adds customization fields according to the information provided in the JSON object.
+
++--------------------+-----------------------------------------------------------+
+| **Default value**  | n/a                                                       |
++--------------------+-----------------------------------------------------------+
+| **Allowed values** | json                                                      |
++--------------------+-----------------------------------------------------------+
+
 timeout
 ^^^^^^^
 
@@ -178,12 +177,15 @@ Configuration example
     <level>10</level>
     <group>multiple_drops,authentication_failures</group>
     <alert_format>json</alert_format>
+    <options>{"pretext": "Custom Title"}</options> <!-- Replace with your custom JSON object -->
   </integration>
 
   <!-- Integration with PagerDuty -->
   <integration>
     <name>pagerduty</name>
     <api_key>API_KEY</api_key> <!-- Replace with your PagerDuty API key -->
+    <options>{"pretext": "Custom title"}</options> <!-- Replace with your custom JSON object -->
+    <alert_format>json</alert_format> <!-- With the new script this is mandatory -->
   </integration>
 
   <!-- Integration with VirusTotal -->
@@ -202,6 +204,7 @@ Configuration example
     <hook_url>http://IP:3001/api/v1/hooks/HOOK_ID</hook_url> <!-- Replace with your Shuffle hook URL -->
     <level>3</level>
     <alert_format>json</alert_format>
+    <options>{"data": {"title": "Custom title"}}</options> <!-- Replace with your custom JSON object -->
   </integration>
 
   <!-- Integration with Maltiverse -->
@@ -220,4 +223,5 @@ Configuration example
     <group>multiple_drops,authentication_failures</group>
     <api_key>APIKEY</api_key> <!-- Replace with your external service API key -->
     <alert_format>json</alert_format>
+    <options>{"data": "Custom data"}</options> <!-- Replace with your custom JSON object -->
   </integration>

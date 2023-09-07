@@ -215,7 +215,7 @@ Edit the Wazuh indexer security configuration files. We recommend that you back 
       Security Admin v7
       Will connect to localhost:9200 ... done
       Connected as "CN=admin,OU=Wazuh,O=Wazuh,L=California,C=US"
-      OpenSearch Version: 2.6.0
+      OpenSearch Version: 2.8.0
       Contacting opensearch cluster 'opensearch' and wait for YELLOW clusterstate ...
       Clustername: wazuh-cluster
       Clusterstate: GREEN
@@ -225,6 +225,7 @@ Edit the Wazuh indexer security configuration files. We recommend that you back 
       Populate config from /etc/wazuh-indexer/opensearch-security
       Will update '/config' with /etc/wazuh-indexer/opensearch-security/config.yml 
          SUCC: Configuration for 'config' created or updated
+      SUCC: Expected 1 config types for node {"updated_config_types":["config"],"updated_config_size":1,"message":null} is 1 (["config"]) due to: null
       Done with success
    
 Wazuh dashboard configuration

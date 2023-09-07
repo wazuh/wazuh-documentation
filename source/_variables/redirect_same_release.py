@@ -3,10 +3,6 @@
 # Important: the redirect is relative to the old path
 
 redirectSameRelease = {
-    '4.8':{},
-    '4.7':{},
-    '4.6':{},
-    '4.5':{},
     '4.4': {
       '/nist/index.html':
         '/compliance/nist/index.html',

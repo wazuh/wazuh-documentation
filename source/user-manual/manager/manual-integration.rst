@@ -21,7 +21,7 @@ The integrations are configured on the Wazuh manager ``ossec.conf`` file. You ca
     <name> </name>
     <hook_url> </hook_url> <!-- Required for Slack, Shuffle, and Maltiverse -->
     <api_key> </api_key> <!-- Required for PagerDuty, VirusTotal, and Maltiverse -->
-    <alert_format>json</alert_format> <!-- Required for Slack, VirusTotal, Shuffle, and Maltiverse -->
+    <alert_format>json</alert_format> <!-- Required for Slack, PagerDuty, VirusTotal, Shuffle, and Maltiverse -->
 
     <!-- Optional filters -->
     <rule_id> </rule_id>
@@ -31,6 +31,7 @@ The integrations are configured on the Wazuh manager ``ossec.conf`` file. You ca
 
     <!-- Optional settings -->
     <max_log> </max_log>
+    <options> </options>
     <timeout> </timeout>
     <retries> </retries>
   </integration>
@@ -83,6 +84,10 @@ To set up this integration, follow these steps.
        <alert_format>json</alert_format>
      </integration>
 
+   .. note::
+
+      You can set a JSON object with customization fields using the :ref:`options <integration_options_tag>` tag. Visit the `Slack API reference <https://api.slack.com/reference/messaging/attachments#legacy_fields>`__ for information about available customization fields.
+
 #. Restart the Wazuh manager to apply the changes.
 
    .. include:: /_templates/common/restart_manager.rst
@@ -113,7 +118,12 @@ To set up this integration, do the following.
         <name>pagerduty</name>
         <api_key>API_KEY</api_key> <!-- Replace with your PagerDuty API key -->
         <level>10</level>
+        <alert_format>json</alert_format> <!-- New mandatory parameter since v4.7.0 -->
       </integration>
+
+   .. note::
+
+      You can set a JSON object with customization fields using the :ref:`options <integration_options_tag>` tag. Visit the `PagerDuty API reference <https://developer.pagerduty.com/docs/ZG9jOjExMDI5NTgx-send-an-alert-event>`__ for information about available customization fields.
 
 #. Restart the Wazuh manager to apply the changes.
 
@@ -179,6 +189,10 @@ To set up this integration, do the following.
          <alert_format>json</alert_format>
       </integration>
 
+   .. note::
+
+      You can set a JSON object with customization fields using the :ref:`options <integration_options_tag>` tag. Visit the `Shuffle API reference <https://shuffler.io/docs/API>`__ for information about available customization fields.
+
 #. Restart the Wazuh manager to apply the changes.
 
    .. include:: /_templates/common/restart_manager.rst
@@ -208,7 +222,7 @@ To set up this integration, do the following.
       :emphasize-lines: 5
 
       <integration>
-         <name>custom-maltiverse</name>
+         <name>maltiverse</name>
          <hook_url>https://api.maltiverse.com</hook_url>
          <level>3</level>
          <api_key>API_KEY</api_key> <!-- Replace with your Maltiverse API key -->
@@ -245,4 +259,5 @@ Below, you can find an example of a configuration block in the ``ossec.conf`` fi
     <group>multiple_drops,authentication_failures</group>
     <api_key>APIKEY</api_key> <!-- Replace with your external service API key -->
     <alert_format>json</alert_format>
+    <options>{"data": "Custom data"}</options> <!-- Replace with your custom JSON object -->
   </integration>
