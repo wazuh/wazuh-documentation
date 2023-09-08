@@ -59,7 +59,7 @@ This is the key that you would have retrieved from the PagerDuty, VirusTotal, or
 alert_format
 ^^^^^^^^^^^^
 
-This writes the alert file in the JSON format. The Integrator makes use of this file to fetch fields values.
+This writes the alert file in the JSON format, which the Integrator uses to fetch fields values.
 
 +--------------------+-----------------------------------------------------------+
 | **Default value**  | n/a                                                       |
@@ -67,7 +67,7 @@ This writes the alert file in the JSON format. The Integrator makes use of this 
 | **Allowed values** | json                                                      |
 +--------------------+-----------------------------------------------------------+
 
-.. note:: This option must be set to ``json`` for Slack, VirusTotal, Shuffle, and Maltiverse integrations.
+.. note:: Set this option as ``json`` for Slack, VirusTotal, Shuffle, and Maltiverse integrations.
 
 Optional filters
 ----------------
@@ -157,7 +157,7 @@ The timeout (in seconds) to wait for a valid response from the external integrat
 retries
 ^^^^^^^
 
-The number of attempts to retry a request to the external integration server in case it times out.
+On timeout, the maximum number of retry attempts for a request to the external integration server.
 
 +--------------------+-----------------------------------------------------------+
 | **Default value**  | 3                                                         |

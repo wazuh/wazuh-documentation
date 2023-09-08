@@ -56,14 +56,14 @@ The following considerations must be taken into account when the filters are set
 .. note::
   It is recommended to carefully check the groups and rule identifiers mentioned above, as defining them incorrectly will result in expected alerts not being sent to the integration.
 
-The full configuration reference for the Integrator daemon can be found :ref:`here <reference_ossec_integration>`.
+You can find the full configuration reference for the Integrator daemon in the :ref:`Integration <reference_ossec_integration>` section of our Reference guide.
 
 Optional settings
 ^^^^^^^^^^^^^^^^^
 
-The `Integrator` daemon uses the `optional settings` fields to configure the internal behavior of the integrations.
+The `Integrator` daemon uses the `optional settings` fields to tailor the integration behavior.
 
-The full configuration reference for the Integrator daemon can be found :ref:`here <reference_ossec_integration>`.
+You can find the full configuration reference for the Integrator daemon in the :ref:`Integration <reference_ossec_integration>` section of our Reference guide.
 
 Slack
 -----
@@ -86,7 +86,7 @@ To set up this integration, follow these steps.
 
    .. note::
 
-      You can set a JSON object with customization fields using the options tag. Visit the `Slack API reference <https://api.slack.com/reference/messaging/attachments#legacy_fields>`__ for information about available customization fields.
+      You can set a JSON object with customization fields using the ``options`` tag. Visit the `Slack API reference <https://api.slack.com/reference/messaging/attachments#legacy_fields>`__ for information about available customization fields.
 
 #. Restart the Wazuh manager to apply the changes.
 
@@ -123,7 +123,7 @@ To set up this integration, do the following.
 
    .. note::
 
-      You can set a JSON object with customization fields using the options tag. Visit the `PagerDuty API reference <https://developer.pagerduty.com/docs/ZG9jOjExMDI5NTgx-send-an-alert-event>`__ for information about available customization fields.
+      You can set a JSON object with customization fields using the ``options`` tag. Visit the `PagerDuty API reference <https://developer.pagerduty.com/docs/ZG9jOjExMDI5NTgx-send-an-alert-event>`__ for information about available customization fields.
 
 #. Restart the Wazuh manager to apply the changes.
 
@@ -191,7 +191,7 @@ To set up this integration, do the following.
 
    .. note::
 
-      You can set a JSON object with customization fields using the options tag. Visit the `Shuffle API reference <https://shuffler.io/docs/API>`__ for information about available customization fields.
+      You can set a JSON object with customization fields using the ``options`` tag. Visit the `Shuffle API reference <https://shuffler.io/docs/API>`__ for information about available customization fields.
 
 #. Restart the Wazuh manager to apply the changes.
 
