@@ -62,6 +62,13 @@ removedUrls['x.y'] = [
 ];
 */
 
+/* *** RELEASE 4.8 ****/
+
+newUrls['4.8'] = [
+  '/development/packaging/generate-indexer-package.html',
+  '/development/packaging/generate-dashboard-package.html',
+];
+
 /* *** RELEASE 4.6 ****/
 
 /* Redirections from 4.5 to 4.6  */
