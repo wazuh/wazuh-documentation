@@ -32,9 +32,9 @@
     {% if display_github %}
     {% if check_meta and 'github_url' in meta %}
     {# User defined GitHub URL #}
-    <a target="_blank" rel="noopener" href="{{ meta['github_url'] }}">{{ _('Edit on GitHub') }} <i class="icon fas fa-pencil-alt" aria-hidden="true"></i></a>
+    <a target="_blank" rel="noopener" href="{{ meta['github_url'] }}">{{ _('Edit on GitHub') }} <svg class="icon"><use xlink:href="#edit-icon"></use></svg></a>
     {% else %}
-    <a target="_blank" rel="noopener" href="https://{{ github_host|default("github.com") }}/{{ github_user }}/{{ github_repo }}/{{ theme_vcs_pageview_mode|default("blob") }}/{{ github_version }}{{ conf_py_path }}{{ pagename }}{{ suffix }}">{{ _('Edit on GitHub') }} <i class="icon fas fa-pencil-alt" aria-hidden="true"></i></a>
+    <a target="_blank" rel="noopener" href="https://{{ github_host|default("github.com") }}/{{ github_user }}/{{ github_repo }}/{{ theme_vcs_pageview_mode|default("blob") }}/{{ github_version }}{{ conf_py_path }}{{ pagename }}{{ suffix }}">{{ _('Edit on GitHub') }} <svg class="icon"><use xlink:href="#edit-icon"></use></svg></a>
     {% endif %}
     {% elif display_bitbucket %}
     {% if check_meta and 'bitbucket_url' in meta %}
@@ -53,7 +53,7 @@
     {% elif show_source and source_url_prefix %}
     <a target="_blank" rel="noopener" href="{{ source_url_prefix }}{{ pagename }}{{ suffix }}">{{ _('View page source') }}</a>
     {% elif show_source and has_source and sourcename %}
-    <a target="_blank" href="{{ pathto('_sources/' + sourcename, true)|e }}" rel="noopener,nofollow"> {{ _('View page source') }}</a>
+    <a target="_blank" href="{{ pathto('_sources/' + sourcename, true)|e }}" rel="noopener nofollow"> {{ _('View page source') }}</a>
     {% endif %}
     {% endif %}
   </span>
