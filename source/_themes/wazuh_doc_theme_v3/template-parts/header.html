@@ -24,23 +24,53 @@
     <div class="mobile-secondary-header version-zone">
     {% if theme_breadcrumb_root_title == 'Documentation' %}
       <ul class="navbar-nav ml-auto d-none d-xl-flex flex-row">
-        <li class="nav-item">
-          <a class="nav-link" href="{{ theme_wazuh_web_url + '/platform/' }}" target="_blank" rel="noreferrer noopener">Platform</a>
+        <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle" href="#" id="dropdown-platform" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Platform<b class="caret d-inline d-sm-none"></b><svg class="d-none d-sm-inline"><use xlink:href="#menu-chevron" /></svg></a>
+          <ul class="dropdown-menu" aria-labelledby="dropdown-platform">
+            <li class="nav-item">
+              <a class="dropdown-item" href="{{ theme_wazuh_web_url + '/platform/overview/' }}" target="_blank" rel="noreferrer noopener">Overview</a>
+            </li>
+            <li class="nav-item">
+              <a class="dropdown-item" href="{{ theme_wazuh_web_url + '/platform/xdr/' }}" target="_blank" rel="noreferrer noopener">XDR</a>
+            </li>
+            <li class="nav-item">
+              <a class="dropdown-item" href="{{ theme_wazuh_web_url + '/platform/siem/' }}" target="_blank" rel="noreferrer noopener">SIEM</a>
+            </li>
+          </ul>
         </li>
         <li class="nav-item">
           <a class="nav-link" href="{{ theme_wazuh_web_url + '/cloud/' }}" target="_blank" rel="noreferrer noopener">Cloud</a>
         </li>
-        <li class="nav-item">
-          <a class="nav-link" href="{{ theme_wazuh_web_url + '/professional-services/' }}" target="_blank" rel="noreferrer noopener">Services</a>
+        <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle" href="#" id="dropdown-services" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Services<b class="caret d-inline d-sm-none"></b><svg class="d-none d-sm-inline"><use xlink:href="#menu-chevron" /></svg></a>
+          <ul class="dropdown-menu" aria-labelledby="dropdown-services">
+            <li class="nav-item">
+              <a class="dropdown-item" href="{{ theme_wazuh_web_url + '/services/professional-support/' }}" target="_blank" rel="noreferrer noopener">Professional support</a>
+            </li>
+            <li class="nav-item">
+              <a class="dropdown-item" href="{{ theme_wazuh_web_url + '/services/consulting-services/' }}" target="_blank" rel="noreferrer noopener">Consulting services</a>
+            </li>
+            <li class="nav-item">
+              <a class="dropdown-item" href="{{ theme_wazuh_web_url + '/services/training-courses/' }}" target="_blank" rel="noreferrer noopener">Training courses</a>
+            </li>
+          </ul>
         </li>
-        <li class="nav-item">
-          <a class="nav-link" href="{{ theme_wazuh_web_url + '/partners/' }}" target="_blank" rel="noreferrer noopener">Partners</a>
+        <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle" href="#" id="dropdown-partners" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Partners<b class="caret d-inline d-sm-none"></b><svg class="d-none d-sm-inline"><use xlink:href="#menu-chevron" /></svg></a>
+          <ul class="dropdown-menu" aria-labelledby="dropdown-partners">
+            <li class="nav-item">
+              <a class="dropdown-item" href="{{ theme_wazuh_web_url + '/partners/' }}" target="_blank" rel="noreferrer noopener">Become a partner</a>
+            </li>
+            <li class="nav-item">
+              <a class="dropdown-item" href="{{ theme_wazuh_web_url + '/partners/find-a-partner/' }}" target="_blank" rel="noreferrer noopener">Find a partner</a>
+            </li>
+          </ul>
         </li>
         <li class="nav-item">
           <a class="nav-link" href="{{ theme_wazuh_web_url + '/blog/' }}" target="_blank" rel="noreferrer noopener">Blog</a>
         </li>
         <li class="nav-item dropdown">
-          <a class="nav-link dropdown-toggle" href="#" id="dropdown-company" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Company</a>
+          <a class="nav-link dropdown-toggle" href="#" id="dropdown-company" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Company<b class="caret d-inline d-sm-none"></b><svg class="d-none d-sm-inline"><use xlink:href="#menu-chevron" /></svg></a>
           <ul class="dropdown-menu" aria-labelledby="dropdown-company">
             <li class="nav-item">
               <a class="dropdown-item" href="{{ theme_wazuh_web_url + '/our-customers/' }}" target="_blank" rel="noreferrer noopener">Customers</a>
