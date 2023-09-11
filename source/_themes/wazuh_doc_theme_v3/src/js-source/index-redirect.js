@@ -8,4 +8,4 @@ switch (document.location.protocol) {
     url = 'https://documentation.wazuh.com';
 }
 
-document.location = url + '/' + document.querySelector('body').getAttribute('data-release') + '/getting-started/index.html';
+document.location = url + '/' + DOCUMENTATION_OPTIONS.VERSION + '/getting-started/index.html';
