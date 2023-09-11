@@ -9,7 +9,12 @@ $(document).ready(function() {
   if ($('#local-toc').length > 0) {
      /* Fix the href of the first item */
     const firstLocalTocItem = $('#local-toc > .navbar-nav > .nav-item:first-of-type > .nav-link');
-    const firstSection = $('main:first-of-type > .section:first-of-type');
+    let firstSection = $('main:first-of-type > .section:first-of-type');
+
+    /* Fix for docutils>=0.17 */ 
+    if (firstSection.length === 0) {
+      firstSection = $('main:first-of-type > section:first-of-type');
+    }
 
     // Check if the firstSection has a valid id before updating the href
     const firstSectionId = firstSection.attr('id');
