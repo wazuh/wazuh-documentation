@@ -11,7 +11,8 @@ if ( $('.search') ) {
   const urlParams = new URLSearchParams(window.location.search);
   const resultsContainer = "#search-results";
 
-  if ( pagefindUrl.length ) {    
+  /* If searh option A, PageFind, is available */
+  if ( pagefindUrl.length ) {
     fetch(pagefindUrl, {
       method: 'HEAD'
     })
@@ -31,7 +32,7 @@ if ( $('.search') ) {
             if ( typeof(queryTerm) !== 'string' ) {
               return;
             } 
-            let highlightstring = '?highlight=' + queryTerm;
+            let highlighedWordstSet = new Set();
             pagefindSearch(queryTerm);
             
             function pagefindSearch(query) {
@@ -53,7 +54,7 @@ if ( $('.search') ) {
               $('<span class="query-term"></span>').appendTo(pageTitle).text(queryTerm);
               elementObj.append(pageTitle);
               const status = $('<p class="search-summary" style="display: none;">&nbsp;</p>').appendTo(elementObj);
-              const resultList = $('<ul class="search"/>').appendTo(elementObj);
+              const resultList = $('<ul class="search-ul"/>').appendTo(elementObj);
               
               status.fadeIn(500);
               let dataPromises = [];
@@ -63,11 +64,9 @@ if ( $('.search') ) {
               for ( let i = 0; i < resultsFound; i++ ) {
                 dataPromises.push(results[i].data()
                 .then((singleResult) => {
-                  
                   let listItem = $('<li style="display:none"></li>');
-                  let requestUrl = "";
                   let linkUrl = "";
-                  let titleLink, breadcrumb, context;
+                  let titleText, titleLink, breadcrumb, context;
                   
                   /* Display result [i] */
                   path = (folder == "" || folder == "/") ? singleResult.url.substring(1) : singleResult.url.split(folder)[1];
@@ -75,33 +74,38 @@ if ( $('.search') ) {
                   if ( DOCUMENTATION_OPTIONS.URL_ROOT !== "./" ) {
                     linkUrl = DOCUMENTATION_OPTIONS.URL_ROOT + path;
                   }
+                  if ( linkUrl[linkUrl.length-1] == '/') {
+                    linkUrl = linkUrl+'index.html';
+                  }
                   
                   // Title
-                  titleLink = $('<a/>').attr('href', linkUrl + highlightstring)
+                  titleLink = $('<a/>').attr('href', linkUrl)
                   .text(singleResult.meta.title).addClass('result-link');
+                  listItem.append(titleLink);
                   
                   // Breadcrumb
                   breadcrumb = createResultBreadcrumb(titleLink);
+                  listItem.append(breadcrumb);
                   
                   // Context
                   let excerptRange = results[i].excerpt_range;
                   let higlightedWords = results[i].words;
-                  let escapedContent = _.escape(singleResult.content).split(" ");
-
+                  let escapedContent = singleResult.content.split(" ");
+                  
                   for (var wordIndex = 0; wordIndex < higlightedWords.length; wordIndex++) {
+                    /* Extract found terms */
+                    highlighedWordstSet.add(escapedContent[higlightedWords[wordIndex]]);
+                    /* Wrap the terms in marks */
                     escapedContent[higlightedWords[wordIndex]] = "<mark>" + escapedContent[higlightedWords[wordIndex]] + "</mark>";
                   }
-
+                  
                   let excerpt = (excerptRange[0] > 0) ? "..." : "";
                   excerpt = excerpt + escapedContent.slice(results[i].excerpt_range[0], results[i].excerpt_range[0]+results[i].excerpt_range[1]).join(" ");
                   excerpt = excerpt + ((excerptRange[0]+excerptRange[1]-1 < escapedContent.length) ? "..." : "");
                   
-                  context = $('<div/>').addClass('context').html(excerpt);
+                  context = $('<div/>').addClass('context').html(excerpt.replace('¶', ''));
                   
-                  listItem.append(titleLink);
-                  listItem.append(breadcrumb);
                   listItem.append(context);
-                  
                   
                   $.each(excludedSearchFolders, function(index, value) {
                     if ( path.includes(value+"/") ) {
@@ -119,9 +123,13 @@ if ( $('.search') ) {
                   
                 }));
               }
-              
+
               Promise.allSettled(dataPromises).then(([result]) => {
                 updateSearchStatus(status, resultsFound, excludedResultsCount)
+                if (SPHINX_HIGHLIGHT_ENABLED) {  // set in sphinx_highlight.js
+                  highlighedWordstSet = Array.from(highlighedWordstSet);
+                  localStorage.setItem("sphinx_highlight_terms", [...highlighedWordstSet].join(" "))
+                }
               });
             }
           }
@@ -130,6 +138,7 @@ if ( $('.search') ) {
       }
     });
   } else {
+    /* Otherwise, load search option B, Sphinx search */
     loadSphinxSearch();
   }
 
@@ -152,17 +161,14 @@ if ( $('.search') ) {
 /* Shows excluded results */
 $(document).delegate('#search-results #toggle-results.include', 'click', function() {
   const toggleButton = $(this);
-  const excludedResults = $('ul.search li.excluded-search-result');
+  const excludedResults = $('ul.search-ul li.excluded-search-result');
   
   toggleButton.text(toggleButton.text().replace('Include', 'Exclude'));
   toggleButton.removeClass('include').addClass('exclude');
-  $('#search-results #n-results').text($('ul.search li').length);
+  $('#search-results #n-results').text($('ul.search-ul li').length);
   
   excludedResults.each(function(e) {
     currentResult = $(this);
-    currentResult.hide(0, function() {
-      $(this).removeClass('hidden-result');
-    });
     currentResult.show('fast');
   });
 });
@@ -170,11 +176,11 @@ $(document).delegate('#search-results #toggle-results.include', 'click', functio
 /* Hides excluded results */
 $(document).delegate('#search-results #toggle-results.exclude', 'click', function() {
   const toggleButton = $(this);
-  const excludedResults = $('ul.search li.excluded-search-result');
+  const excludedResults = $('ul.search-ul li.excluded-search-result');
   
   toggleButton.text(toggleButton.text().replace('Exclude', 'Include'));
   toggleButton.removeClass('exclude').addClass('include');
-  $('#search-results #n-results').text($('ul.search li').length - excludedResults.length);
+  $('#search-results #n-results').text($('ul.search-ul li').length - excludedResults.length);
   
   excludedResults.each(function(e) {
     currentResult = $(this);
@@ -193,7 +199,6 @@ $(document).delegate('#search-results #toggle-results.exclude', 'click', functio
 function createResultBreadcrumb(resultLinkNode) {
   /* Collect the information */
   const breadcrumbList = [];
-  
   let resultLinkURL = resultLinkNode.attr('href').split('?')[0];
   
   let currentTocNode = $('#global-toc').find('[href="' + resultLinkURL + '"]');
@@ -224,11 +229,22 @@ function createResultBreadcrumb(resultLinkNode) {
   
   const a = $(document.createElement('a'));
   const homeIcon = $('#home-icon svg');
-  a.attr('href', DOCUMENTATION_OPTIONS.URL_ROOT).append(homeIcon.clone(true)).addClass('breadcrumb-link');
+  let homeHerf = DOCUMENTATION_OPTIONS.URL_ROOT;
+  homeHerf = ( homeHerf[homeHerf.length-1] === '/') ? homeHerf + 'index.html' : homeHerf + '/index.html';
+
+  a.attr('href', homeHerf).append(homeIcon.clone(true)).addClass('breadcrumb-link');
   breadcrumb.prepend(a);
   return breadcrumb;
 }
 
+/**
+ * Updates the information at the begining of the page when the search with PageFinds ends.
+ *
+ * @param {string} statusElement Contains the element with the text to show as summary of the search results.
+ * @param {int} totalResults Total number of results found.
+ * @param {int} excludedResults Number of results that can be hidden (from release notes)
+ * @returns none
+ */
 function updateSearchStatus(statusElement, totalResults, excludedResults) {
   if ( totalResults == 0 ){
     statusElement.text('No results.');
