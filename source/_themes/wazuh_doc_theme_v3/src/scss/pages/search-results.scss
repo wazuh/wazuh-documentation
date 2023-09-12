@@ -29,7 +29,7 @@ h1 {
     font-weight: 500;
   }
 
-  .search {
+  .search-ul {
     padding-left: 0;
     list-style: none;
 
@@ -58,10 +58,6 @@ h1 {
       margin: 1rem 0;
       overflow-wrap: break-word;
     }
-
-    .hidden-result {
-      display: none;
-    }
   }
 }
 
@@ -82,7 +78,7 @@ h1 {
     .search-summary {
       color: $light-color-shaded-text;
     }
-    .search {
+    .search-ul {
       .breadcrumb-separator,
       .breadcrumb-link {
         color: $light-color-shaded-text;
@@ -119,7 +115,7 @@ h1 {
     .search-summary {
       color: $dark-color-shaded-text;
     }
-    .search {
+    .search-ul {
       .breadcrumb-separator,
       .breadcrumb-link {
         color: $dark-color-shaded-text;
