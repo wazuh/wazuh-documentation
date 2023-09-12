@@ -574,6 +574,9 @@ def manage_assets(app, pagename, templatename, context, doctree):
             # lightbox (extension)
         ]
 
+        if version < '4.0':
+            js_map['user-manual/api/reference'] = default
+
         if html_theme_options['breadcrumb_root_title'] == 'Training':
             js_map['index'] = default
 
