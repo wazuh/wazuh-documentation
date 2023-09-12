@@ -11,7 +11,7 @@
 @import "../components/step-cards";
 @import "../components/breadcrumbs";
 @import "../components/code-blocks";
-@import "../components/customized-tabs";
+@import "../components/tabs";
 @import "../components/lightbox";
 @import "../components/link-boxes";
 @import "../components/previous-next";
@@ -103,30 +103,41 @@
     min-height: calc(100vh - #{$header-height-xl} - #{$breadcrumbs-height-xl} - #{$footer-height});
   }
 
+  .headerlink {
+    display: inline-flex;
+    line-height: 1;
+    text-decoration: none;
+    word-break: keep-all;
+    white-space: nowrap;
+    width: 24px;
+    overflow: hidden;
+    align-items: center;
+    justify-content: flex-end;
+    user-select: none;
+    
+    &::after {
+      display: inline-block;
+      width: 15px;
+      height: 15px;
+      min-width: 15px;
+      min-height: 15px;
+      background-size: 15px 15px;
+      text-align: right;
+      vertical-align: middle;
+      content: '';
+      opacity: 0;
+      transition: opacity ease-in .1s;
+      margin-left: 20px;
+    }
+  }
+  
   h1,
   h2,
   h3,
   h4,
   h5,
-  h6 {
-    .headerlink {
-      display: inline-block;
-      line-height: 1;
-      text-decoration: none;
-
-      &::after {
-        display: inline-block;
-        width: 1rem;
-        height: 1rem;
-        padding-left: 10px;
-        font: normal 700 normal .95rem/1 FontAwesome, sans-serif;
-        text-align: right;
-        vertical-align: middle;
-        content: "\f0c1";
-        opacity: 0;
-        transition: opacity ease-in .1s;
-      }
-    }
+  h6,
+  caption {
 
     &:hover {
       .headerlink::after {
@@ -159,6 +170,12 @@
         padding-top: .2rem;
         padding-bottom: .6rem;
         line-height: 32px;
+      }
+    }
+    .caption {
+      .caption-text {
+        font-weight: 500;
+        font-size: 20px;
       }
     }
   }
@@ -369,12 +386,6 @@
     font-size: .7em;
     text-decoration: underline;
     vertical-align: super;
-    &::before {
-      content: "[";
-    }
-    &.footnote-reference::after {
-      content: "]";
-    }
   }
   .footnote.brackets {
     position: relative;
@@ -390,10 +401,11 @@
       font-weight: 600;
       content: "Footnotes";
     }
-    .label .brackets {
+    .label {
       display: inline-block;
       margin-top: .5rem;
       margin-bottom: .5rem;
+      margin-right: 10px;
     }
     p {
       margin-top: .5rem;
@@ -409,6 +421,7 @@
     .headerlink {
       &::after {
         color: $light-color-shaded-text;
+        background-image: url("#{$ico-path}link.svg#link-lt");
       }
     }
     code {
@@ -476,6 +489,11 @@
     .footnote.brackets {
       border-color: rgba(0, 0, 0, 10%);/* stylelint-disable-line color-function-notation */
     }
+    .toctree-wrapper {
+      .caption-text {
+        color: $light-color-main-text;
+      }
+    }
   }
 }
 
@@ -486,6 +504,7 @@
     .headerlink {
       &::after {
         color: $dark-color-shaded-text;
+        background-image: url("#{$ico-path}link.svg#link-dt");
       }
     }
     code {
@@ -556,6 +575,11 @@
     }
     .footnote.brackets {
       border-color: rgba(255, 255, 255, 10%);/* stylelint-disable-line color-function-notation */
+    }
+    .toctree-wrapper {
+      .caption-text {
+        color: $dark-color-main-text;
+      }
     }
   }
 }

@@ -53,51 +53,50 @@
   {%- set titlesuffix = '' -%}
 {%- endif -%}
 
-{#- Remove sphinx_tabs assets from templates where they are not used -#}
-{%- if pagename in special_pages %}
-  
-  {%- set temp_css_files = []  -%}
-  {%- for cssfile in css_files -%}
-    {%- if 'sphinx_tabs' not in cssfile -%}
-     {{- temp_css_files.append(cssfile)|default("", True) -}}
-    {%- endif -%}
-  {%- endfor -%}
-  {%- set css_files = temp_css_files -%}
-  
-  {%- set temp_script_files = []  -%}
-  {%- for scriptfile in script_files -%}
-    {%- if 'sphinx_tabs' not in scriptfile -%}
-      {{- temp_script_files.append(scriptfile)|default("", True) -}}
-    {%- endif -%}
-  {% endfor -%}
-  {%- set script_files = temp_script_files -%}
-{%- endif -%}
+{#- Remove unwanted assets -#}
+{%- set unwanted_css = ['_static/pygments.css', '_static/', '_static/tabs.css']  -%}
+{%- set unwanted_js = ['_static/documentation_options.js', '_static/doctools.js','_static/sphinx_highlight.js', '_static/tabs.js']  -%}
+
+{%- set temp_css_files = []  -%}
+{%- for cssfile in css_files -%}
+  {%- if cssfile not in unwanted_css -%}
+    {{- temp_css_files.append(cssfile)|default("", True) -}}
+  {%- endif -%}
+{%- endfor -%}
+{%- set css_files = temp_css_files -%}
+
+{%- set temp_script_files = []  -%}
+{%- for scriptfile in script_files -%}
+  {%- if scriptfile not in unwanted_js -%}
+    {{- temp_script_files.append(scriptfile)|default("", True) -}}
+  {%- endif -%}
+{% endfor -%}
+{%- set script_files = temp_script_files -%}
 
 {#- TEMPLATE MACROS -#}
 
 {%- macro css() -%}
 {#- Remove unwanted CSS files -#}
 {%- set temp_css_files = []  -%}
-{%- set unwanted_css = ['tabs.css']  -%}
+
 {%- for cssfile in css_files -%}
   {%- if cssfile != '' %}
-  {%- if pagename in special_pages %}
-    {#- Remove extension files for this template -#}
-    {%- if 'sphinx_tabs' not in cssfile and 'wazuh-doc-images' not in cssfile -%}
-      {{- temp_css_files.append(cssfile)|default("", True) -}}
-    {%- endif -%}
-  {% else -%}
-    {%- for unwanted in unwanted_css -%}
-      {%- if unwanted not in cssfile -%}
+    {%- if pagename in special_pages %}
+      {#- Remove extension files for this template -#}
+      {%- if 'wazuh-doc-images' not in cssfile -%}
         {{- temp_css_files.append(cssfile)|default("", True) -}}
       {%- endif -%}
-    {%- endfor -%}
-  {% endif -%}
+    {% else -%}
+      {%- if cssfile not in unwanted_js -%}
+        {{- temp_css_files.append(cssfile)|default("", True) -}}
+      {%- endif -%}
+    {% endif -%}
   {% endif -%}
 {%- endfor -%}
+
 {%- set css_files = temp_css_files -%}
 {%- if pagename != 'moved-content' %}
-  {%- for cssfile in css_files -%}
+  {%- for cssfile in temp_css_files -%}
     <link rel="stylesheet" href="{{ pathto(cssfile, 1) }}" type="text/css">
   {%- endfor -%}
 {% endif -%}
@@ -109,18 +108,12 @@
 {%- set theme_script_files = []  -%}
 {%- set extensions_script_files = []  -%}
 {%- for scriptfile in script_files -%}
-  {%- if scriptfile not in ["_static/jquery.js", "_static/underscore.js", "_static/doctools.js", "_static/language_data.js"] %}
-    {%- if "_static/js/" in scriptfile %}
-      {{- theme_script_files.append(scriptfile)|default("", True) -}}
-    {%- else -%}
-      {%- if pagename not in special_pages %}
-        {# Extension files disabled from special pages #}
-        {%- if "tabs.js" in scriptfile %}
-          {{- extensions_script_files.append("_static/js/min/sphinx-tabs.min.js")|default("", True) -}}
-        {%- else -%}
-          {{- extensions_script_files.append(scriptfile)|default("", True) -}}
-        {%- endif -%}
-      {%- endif -%}
+  {%- if "_static/js/" in scriptfile %}
+    {{- theme_script_files.append(scriptfile)|default("", True) -}}
+  {%- else -%}
+    {%- if pagename not in special_pages %}
+      {# Extension files disabled from special pages #}
+      {{- extensions_script_files.append(scriptfile)|default("", True) -}}
     {%- endif -%}
   {%- endif -%}
 {% endfor -%}
@@ -217,8 +210,6 @@
       {{- inline_js() }}
     {%- endif %}
     {{- fonts() }}
-    <link rel="preload" href="{{ url_root }}_static/fonts/fa-solid-900.woff2" as="font" type="font/woff2" crossorigin>
-    <link rel="preload" href="{{ url_root }}_static/fonts/fa-brands-400.woff2" as="font" type="font/woff2" crossorigin>
     {% endblock preload -%}
     
     {%- block linktags %}
@@ -242,11 +233,11 @@
     {% endblock css %}
     
     {#- FAVICON -#}
-    <link rel="mask-icon" href="{{ pathto('_static/images/favicon.svg', 1) }}" color="#000000">
-    <link rel="icon" href="{{ pathto('_static/images/favicon.png', 1) }}" media="(prefers-color-scheme:no-preference)" sizes="any" type="image/png"/>
-    <link rel="icon" href="{{ pathto('_static/images/dark-favicon.png', 1) }}" media="(prefers-color-scheme:dark)" sizes="any" type="image/png"/>
-    <link rel="icon" href="{{ pathto('_static/images/favicon.png', 1) }}" media="(prefers-color-scheme:light)" sizes="any" type="image/png"/>
-    <link rel="apple-touch-icon" href="{{ pathto('_static/images/favicon.svg', 1) }}">
+    <link rel="mask-icon" href="{{ pathto('_static/images/favicon.svg', 1) }}?v={{ compilation_ts }}" color="#000000">
+    <link rel="icon" href="{{ pathto('_static/images/favicon.png', 1) }}?v={{ compilation_ts }}" media="(prefers-color-scheme:no-preference)" sizes="any" type="image/png"/>
+    <link rel="icon" href="{{ pathto('_static/images/dark-favicon.png', 1) }}?v={{ compilation_ts }}" media="(prefers-color-scheme:dark)" sizes="any" type="image/png"/>
+    <link rel="icon" href="{{ pathto('_static/images/favicon.png', 1) }}?v={{ compilation_ts }}" media="(prefers-color-scheme:light)" sizes="any" type="image/png"/>
+    <link rel="apple-touch-icon" href="{{ pathto('_static/images/favicon.svg', 1) }}?v={{ compilation_ts }}">
     
     {%- if production and theme_breadcrumb_root_title == 'Documentation' -%}
     {#- Google Tag Manager - Head -#}
@@ -297,6 +288,13 @@
     {%- endblock gtm_body %}
   {%- endif -%}
   {% block body %} {% endblock %}
+  <div class="icon-assets">
+    {%- block icons %} 
+      {% include "template-parts/icons/social-icons.svg" %}
+      {% include "template-parts/icons/copy.svg" %}
+      {% include "template-parts/icons/theme-common-icons.svg" %}
+    {% endblock icons -%}
+  </div>
   {%- block after_footer %}
     <script id="documentation_options" data-url_root="{{ pathto('', 1) }}" src="{{ pathto('_static/js/documentation_options.js', 1) }}"></script>
     <script>
