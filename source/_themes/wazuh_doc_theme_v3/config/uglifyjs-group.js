@@ -20,10 +20,11 @@ const commonJS = [
 // List of javascript files per page
 const pageSpecificJS = {
   "wazuh-documentation": [
-    SRC_PATH + "components/in-release-redirections.js",
+    SRC_PATH + "components/sphinx-tabs/tabs.js",
     SRC_PATH + "components/admonitions.js",
     SRC_PATH + "components/accordions.js",
     SRC_PATH + "components/doctools.js",
+    SRC_PATH + "components/sphinx-search/sphinx_highlight.js",
     SRC_PATH + "components/version-selector.js",
     SRC_PATH + "components/global-toc.js",
     SRC_PATH + "components/local-toc.js",
@@ -35,31 +36,30 @@ const pageSpecificJS = {
     SRC_PATH + "index.js" //JS code only for page "Index" if necessary.
   ],
   "sphinx-search-ui": [
-    SRC_PATH + "components/doctools.js",
     SRC_PATH + "components/sphinx-search/language_data.js",
-    SRC_PATH + "components/sphinx-search/searchtools.js",
-    SRC_PATH + "components/sphinx-search/sphinx-search-ui.js"
+    SRC_PATH + "components/sphinx-search/sphinx-search-ui.js",
+    SRC_PATH + "components/sphinx-search/searchtools.js"
     // + JS files only for the sphinx_search
   ],
   "search-results": [
     SRC_PATH + "components/version-selector.js",
     SRC_PATH + "components/global-toc.js",
+    SRC_PATH + "components/doctools.js",
+    SRC_PATH + "components/sphinx-search/sphinx_highlight.js",
     SRC_PATH + "search-results.js"
     // + JS files only for search page
   ],
   "not-found": [
-    SRC_PATH + "components/doctools.js",
     SRC_PATH + "components/version-selector.js",
     SRC_PATH + "components/global-toc.js"
     // + JS files only for page "Not found"
   ],
   "api-reference": [
     SRC_PATH + "components/version-selector.js",
+    SRC_PATH + "components/doctools.js",
+    SRC_PATH + "components/sphinx-search/sphinx_highlight.js",
     SRC_PATH + "custom-redoc.js"
   ],
-  "sphinx-tabs": [
-    SRC_PATH + "components/sphinx-tabs/tabs.js"
-  ]
 };
 
 if (pageSpecificJS.hasOwnProperty(FILE)) {
@@ -78,7 +78,7 @@ if (pageSpecificJS.hasOwnProperty(FILE)) {
   
   let scriptFiles;
   
-  if (FILE !== "sphinx-search-ui" && FILE !== "sphinx-tabs" ) {
+  if (FILE !== "sphinx-search-ui") {
     scriptFiles = commonJS.concat(pageSpecificJS[FILE]);
   } else {
     scriptFiles = pageSpecificJS[FILE];
