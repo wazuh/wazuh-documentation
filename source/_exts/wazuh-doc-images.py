@@ -11,7 +11,7 @@ from sphinx.util.osutil import copyfile
 from sphinx.util.docutils import SphinxDirective
 
 try:
-    from sphinx.util import status_iterator
+    from sphinx.util.display import status_iterator
 except ImportError:
     pass
 
