@@ -1,94 +1,145 @@
-if (!String.prototype.startsWith) {
-  Object.defineProperty(String.prototype, 'startsWith', {
-    value: function(search, pos) {
-      pos = !pos || pos < 0 ? 0 : +pos;
-      return this.substring(pos, pos + search.length) === search;
-    }
-  });
+try {
+  var session = window.sessionStorage || {};
+} catch (e) {
+  var session = {};
 }
 
-// From http://stackoverflow.com/questions/123999/how-to-tell-if-a-dom-element-is-visible-in-the-current-viewport
-function elementIsInView (el) {
-  if (typeof jQuery === "function" && el instanceof jQuery) {
-    el = el[0];
+window.addEventListener("DOMContentLoaded", () => {
+  const allTabs = document.querySelectorAll('.sphinx-tabs-tab');
+  const tabLists = document.querySelectorAll('[role="tablist"]');
+
+  allTabs.forEach(tab => {
+    tab.addEventListener("click", changeTabs);
+  });
+
+  tabLists.forEach(tabList => {
+    tabList.addEventListener("keydown", keyTabs);
+  });
+
+  // Restore group tab selection from session
+  const lastSelected = session.getItem('sphinx-tabs-last-selected');
+  if (lastSelected != null) selectNamedTabs(lastSelected);
+});
+
+/**
+ * Key focus left and right between sibling elements using arrows
+ * @param  {Node} e the element in focus when key was pressed
+ */
+function keyTabs(e) {
+    const tab = e.target;
+    let nextTab = null;
+    if (e.keyCode === 39 || e.keyCode === 37) {
+      tab.setAttribute("tabindex", -1);
+      // Move right
+      if (e.keyCode === 39) {
+        nextTab = tab.nextElementSibling;
+        if (nextTab === null) {
+          nextTab = tab.parentNode.firstElementChild;
+        }
+      // Move left
+      } else if (e.keyCode === 37) {
+        nextTab = tab.previousElementSibling;
+        if (nextTab === null) {
+          nextTab = tab.parentNode.lastElementChild;
+        }
+      }
+    }
+
+    if (nextTab !== null) {
+      nextTab.setAttribute("tabindex", 0);
+      nextTab.focus();
+    }
+}
+
+/**
+ * Select or deselect clicked tab. If a group tab
+ * is selected, also select tab in other tabLists.
+ * @param  {Node} e the element that was clicked
+ */
+function changeTabs(e) {
+  // Use this instead of the element that was clicked, in case it's a child
+  const notSelected = this.getAttribute("aria-selected") === "false";
+  const positionBefore = this.parentNode.getBoundingClientRect().top;
+  const notClosable = !this.parentNode.classList.contains("closeable");
+
+  deselectTabList(this);
+
+  if (notSelected || notClosable) {
+    selectTab(this);
+    const name = this.getAttribute("name");
+    selectNamedTabs(name, this.id);
+
+    if (this.classList.contains("group-tab")) {
+      // Persist during session
+      session.setItem('sphinx-tabs-last-selected', name);
+    }
   }
 
-  const  rect = el.getBoundingClientRect();
-
-  return (
-    rect.top >= 0 &&
-    rect.left >= 0 &&
-    rect.bottom <= (window.innerHeight || document.documentElement.clientHeight) &&
-    rect.right <= (window.innerWidth || document.documentElement.clientWidth)
-  );
+  const positionAfter = this.parentNode.getBoundingClientRect().top;
+  const positionDelta = positionAfter - positionBefore;
+  // Scroll to offset content resizing
+  window.scrollTo(0, window.scrollY + positionDelta);
 }
 
-$(function() {
-  // Change container tags <div> -> <a>
-  $('.sphinx-menu.menu .item').each(function() {
-    var this_ = $(this);
-    var a_this = $('<a>');
+/**
+ * Select tab and show associated panel.
+ * @param  {Node} tab tab to select
+ */
+function selectTab(tab) {
+  tab.setAttribute("aria-selected", true);
 
-    a_this.html(this_.html());
-    $.each(this_.prop('attributes'), function() {
-      a_this.attr(this.name, this.value);
-    });
+  // Show the associated panel
+  document
+    .getElementById(tab.getAttribute("aria-controls"))
+    .removeAttribute("hidden");
+}
 
-    this_.replaceWith(a_this);
-  });
+/**
+ * Hide the panels associated with all tabs within the
+ * tablist containing this tab.
+ * @param  {Node} tab a tab within the tablist to deselect
+ */
+function deselectTabList(tab) {
+  const parent = tab.parentNode;
+  const grandparent = parent.parentNode;
 
-  // We store the data-tab values as sphinx-data-<data-tab value>
-  // Add data-tab attribute with the extracted value
-  $('.sphinx-menu.menu .item, .sphinx-tab.tab').each(function() {
-    var this_ = $(this);
-    const prefix = 'sphinx-data-';
-    const classes = this_.attr('class').split(/\s+/);
-    $.each(classes, function(idx, clazz) {
-      if (clazz.startsWith(prefix)) {
-        this_.attr('data-tab',
-                   clazz.substring(prefix.length));
+  Array.from(parent.children)
+  .forEach(t => t.setAttribute("aria-selected", false));
+
+  Array.from(grandparent.children)
+    .slice(1)  // Skip tablist
+    .forEach(panel => panel.setAttribute("hidden", true));
+}
+
+/**
+ * Select grouped tabs with the same name, but no the tab
+ * with the given id.
+ * @param  {Node} name name of grouped tab to be selected
+ * @param  {Node} clickedId id of clicked tab
+ */
+function selectNamedTabs(name, clickedId=null) {
+  const groupedTabs = document.querySelectorAll(`.sphinx-tabs-tab[name="${name}"]`);
+  const tabLists = Array.from(groupedTabs).map(tab => tab.parentNode);
+
+  tabLists
+    .forEach(tabList => {
+      // Don't want to change the tabList containing the clicked tab
+      const clickedTab = tabList.querySelector(`[id="${clickedId}"]`);
+      if (clickedTab === null ) {
+        // Select first tab with matching name
+        const tab = tabList.querySelector(`.sphinx-tabs-tab[name="${name}"]`);
+        deselectTabList(tab);
+        selectTab(tab);
       }
-    });
-  });
+    })
+}
 
-  // Mimic the Semantic UI behaviour
-  $('.sphinx-menu.menu .item').each(function() {
-    var this1 = $(this);
-    var data_tab = this1.attr('data-tab');
+if (typeof exports === 'undefined') {
+  exports = {};
+}
 
-    this1.on('click', function() {
-      // Find offset in view
-      const offset = (this1.offset().top - $(window).scrollTop());
-
-      // Enable all tabs with this id
-
-      // For each tab group
-      $('.sphinx-tabs').each(function() {
-        var this2 = $(this);
-
-        // Check if tab group has a tab matching the clicked tab
-        var has_tab = false;
-        this2.children().eq(0).children().each(function() {
-          has_tab |= $(this).attr('data-tab') === data_tab;
-        });
-
-        if (has_tab) {
-          // Enable just the matching tab
-          var toggle = function() {
-            var this3 = $(this);
-            if (this3.attr('data-tab') === data_tab) {
-              this3.addClass('active');
-            } else {
-              this3.removeClass('active');
-            }
-          };
-          this2.children().eq(0).children('[data-tab]').each(toggle);
-          this2.children('[data-tab]').each(toggle);
-        }
-      });
-
-      // Keep tab with the original view offset
-      $(window).scrollTop(this1.offset().top - offset);
-    });
-  });
-});
+exports.keyTabs = keyTabs;
+exports.changeTabs = changeTabs;
+exports.selectTab = selectTab;
+exports.deselectTabList = deselectTabList;
+exports.selectNamedTabs = selectNamedTabs;
