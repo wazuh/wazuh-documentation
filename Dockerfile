@@ -3,7 +3,7 @@
 # docker build -t sphinx-autobuild .
 # docker run -it -p 8000:8000 --rm -v "$(pwd)/source":/home/python/docs sphinx-autobuild
 
-FROM python:3.7-alpine
+FROM python:3.8-alpine
 
 COPY --chown=1000:1000 requirements.txt ./
 
