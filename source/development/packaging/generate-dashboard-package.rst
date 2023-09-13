@@ -26,8 +26,8 @@ Go into the folder for the type of package to build
 
 .. code-block:: console
 
-	$ cd rpm # For RPM
-	$ cd db # For DEB
+   $ cd rpm # For RPM
+   $ cd db # For DEB
 
 Execute the ``build_package.sh`` script, with the different options you desire.
 
@@ -76,6 +76,6 @@ This will generate an Dashboard package in a given path instead of the default o
 
 .. code-block:: console
 
-	# ./build_package.sh -b no –dont-build-docker –app-url <APP-URL> 
+   # ./build_package.sh -b no –dont-build-docker –app-url <APP-URL> 
 
 This will generate a Dashboard package using an existing base and containers that are already present in the host with a custom wazuh plugin located in the given ``--app-url``
