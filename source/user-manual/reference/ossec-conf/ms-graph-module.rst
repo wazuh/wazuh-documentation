@@ -156,6 +156,11 @@ This block configures the credentials used for authenticating with the Microsoft
 
 .. warning:: In the case of an invalid configuration, a warning message will be generated in the log file.
 
+.. note::
+  
+   Multi-tenant is not supported. You can only configure one block of ``api_auth``.
+
+
 +----------------------------------------+----------------------------------------------+
 | Options                                | Allowed values                               |
 +========================================+==============================================+
@@ -211,8 +216,6 @@ Type of Microsoft 365 subscription plan used by the tenant. `global` refers to e
 +--------------------+------------------------+
 | **Allowed values** | global, gcc-high, dod  |
 +--------------------+------------------------+
-
-.. note:: Multi-tenant is not supported. You can only configure one block of ``api_auth``.
 
 resource
 --------
