@@ -212,7 +212,7 @@ Type of Microsoft 365 subscription plan used by the tenant. `global` refers to e
 | **Allowed values** | global, gcc-high, dod  |
 +--------------------+------------------------+
 
-.. note:: At the moment, multi-tenant is not supported, so only one block of ``api_auth`` can be used in the entire configuration.
+.. note:: Multi-tenant is not supported. You can only configure one block of ``api_auth``.
 
 resource
 --------
