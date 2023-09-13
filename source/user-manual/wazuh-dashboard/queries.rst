@@ -88,11 +88,11 @@ To filter by an agent that is active and the OS platform contains linux:
 
         status=active and os.platform~linux
 
-To filter by an agent that was never connected, its IP contains 240 and the OS platform contains linux:
+To filter by an agent that was never connected, its IP contains 240 or the OS platform contains linux:
 
     .. code-block:: none
 
-        status!=never_connected and ip~240 or os.platform~linux
+        status!=never_connected and ip~240 and os.platform~linux
 
 To filter by an agent that was never connected and its IP contains 240, or its ID is equal to 001:
 
