@@ -8,103 +8,131 @@
 Filtering data using queries
 ============================
 
-The query language to use depends on where the data is comming from:
+The query language to use depends on where the data is coming from:
 
 - Wazuh API
 - Wazuh indexer
 
-Wazuh API
----------
+Wazuh API queries
+-----------------
 
-To filter this data, the most of related search bars use WQL (Wazuh Query Language), that is a query language based in the :ref:`Wazuh API query language <queries>`.
+The WQL search bars found in various sections of the Wazuh dashboard, use the Wazuh Query Language to query the API. This language is based on the :ref:`Wazuh API query language <queries>`.
 
 .. thumbnail:: ../../images/wazuh-dashboard/queries/search-bar-wql.png
     :title: Search bar using WQL with implicit filter
+    :alt: Search bar using WQL with implicit filter
     :align: left
     :width: 100%
 
-It supports 2 modes:
 
-* **explicit**: Define the field, operator and value. This mode is enabled when it finds a field and operator tokens.
-    * **Field name**: Field name to filter by. If an incorrect field name is used, an validation error will be displayed.
-    * **Operator**: Operator to filter by:
-        * ``=``: equality.
-        * ``!=``: not equality.
-        * ``<``: smaller.
-        * ``>``: bigger.
-        * ``~``: like as.
-        * ``()``: grouping operators. Group queries.
-    * **Value**: Value to filter by.
+There are two query modes:
 
-    .. note::
-        * Value without spaces can be literal.
-        * Value with spaces or containing the double quote character (**"**) must be wrapped by a pair of double quotes (**""**). The double quote (**"**) can be escaped using **\\"**.
+- :ref:`explicit <explicit_queries>`: The search includes a field, operator and value.
 
-    * **Separator**: Operator to join multiple "queries":
-        * ``or``: represents an ``OR``.
-        * ``and``: represents an ``AND``.
+- :ref:`search term <search_term_queries>`: Uses a term to search in the available fields.
+
+.. _explicit_queries:
+
+Explicit queries
+^^^^^^^^^^^^^^^^
+
+These queries include a field, operator and value. This mode is enabled when it finds a field and operator tokens.
+
+   - **Field name**: Field name to filter by. If an incorrect field name is used, a validation error is displayed.
+
+   - **Operator**: Operator to filter by. The available operators are:
+
+      - ``=``: equality.
+      - ``!=``: not equality.
+      - ``<``: smaller.
+      - ``>``: bigger.
+      - ``~``: like as.
+      - ``()``: grouping operators. Group queries.
+
+   - **Value**: Value to filter by.
+
+      - Note that values without spaces can be literal.
+      - Values with spaces or containing the double quote character (**"**) must be wrapped by a pair of double quotes (**""**). The double quote (**"**) can be escaped using **\\"**.
+
+   - **Separator**: Operator to join multiple "queries".
+
+      - ``or``: represents an ``OR``.
+      - ``and``: represents an ``AND``.
     
     .. note::
 
         The tokens can be separated by whitespaces.
-        
-* **search term**: use a term to search in the available fields. Under the hood, this search is translated to query in each field supported by the explicit mode using the like as operator (~).
 
-.. warning::
-
-    Theses modes can not be combined.
-
-Some search bars can include an implicit filter, that is added to the user query, as for example in the Agents section.
+Note that some search bars include an implicit filter, that is added to the user query. For example, the search bar in the **Agents** section includes the ``id!=000`` filter.
 
 .. thumbnail:: ../../images/wazuh-dashboard/queries/search-bar-wql-with-implicit-filter.png
     :title: Search bar using WQL with implicit filter
     :align: left
     :width: 100%
 
-Examples
-^^^^^^^^
+.. _search_term_queries:
 
-* Explicit mode
+Search term queries
+^^^^^^^^^^^^^^^^^^^
 
-For example, to filter by entities whose **id** is equal to a specific value:
+Use a term to search in the available fields. Under the hood, this search is translated to query in each field supported by the explicit mode using the like as operator ``~``.
 
-    .. code-block:: none
+.. warning::
 
-        id=001
+    The explicit and search term modes can't be combined.
 
-    .. note::
 
-        It is possible to use whitespace between the tokens.
+Query examples
+^^^^^^^^^^^^^^
 
-    .. code-block:: none
+Explicit mode
+~~~~~~~~~~~~~
 
-        id = 001
+- Filter by entities whose **id** is equal to a specific value:
+
+   .. code-block:: none
+
+      id=001
+
+   .. note::
+      :class: not-long
+
+      It is possible to use whitespace between the tokens.
+
+      .. code-block:: none
+
+         id = 001
 
 To get more precise results, use a query with multiple statements using the logical operators (**and** or **or**) and/or grouping operators (**()**).
 
-To filter by an agent that is active and the OS platform contains linux:
+- Filter by an agent that is active and the OS platform contains linux:
 
-    .. code-block:: none
+   .. code-block:: none
 
-        status=active and os.platform~linux
+      status=active and os.platform~linux
 
-To filter by an agent that was never connected, its IP contains 240 or the OS platform contains linux:
+- Filter by an agent that was never connected, its IP contains 240 or the OS platform contains linux:
 
-    .. code-block:: none
+   .. code-block:: none
 
-        status!=never_connected and ip~240 and os.platform~linux
+      status!=never_connected and ip~240 and os.platform~linux
 
-To filter by an agent that was never connected and its IP contains 240, or its ID is equal to 001:
+- Filter by an agent that was never connected and its IP contains 240, or its ID is equal to 001:
 
-    .. code-block:: none
+   .. code-block:: none
 
-        ( status!=never_connected and ip~240 ) or id=001
+      ( status!=never_connected and ip~240 ) or id=001
 
-* Search term mode
+
+Search term mode
+~~~~~~~~~~~~~~~~
+
+- Search the term ``linux`` in the available fields:
 
 .. code-block:: none
 
     linux
+
 
 Wazuh Indexer
 -------------
