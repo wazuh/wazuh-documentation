@@ -149,7 +149,7 @@ To set up this integration, do the following.
 
 #. Go to Shuffle and make a Workflow.
 
-#. Set **Recipients** and **Subject** in the email configuration. Put ``$exec`` in the **Body** to include the alert information. Change the version of the Email App to `1.0.1`.
+#. Set **Recipients** and **Subject** in the email configuration. Put ``$exec`` in the **Body** to include the alert information. Change the version of the Email App to ``1.0.1``.
 
 #. Add a webhook to the Workflow.
 
