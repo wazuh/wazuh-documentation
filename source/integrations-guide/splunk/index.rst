@@ -171,7 +171,7 @@ Perform the following steps to configure the Logstash pipeline.
 
    .. note::
       
-      For testing purposes, you can avoid SSL verification by removing the line ``cacert => "/PATH/TO/LOCAL/SPLUNK/ca.pem"``.
+      For testing purposes, you can avoid SSL verification by removing the line ``cacert => "/PATH/TO/LOCAL/SPLUNK/ca.pem"`` and adding ``ssl_verification_mode => "none"``.
 
 Running Logstash
 ^^^^^^^^^^^^^^^^
@@ -325,7 +325,7 @@ To configure the Logstash pipeline do the following.
 
    .. note::
       
-      For testing purposes, you can avoid SSL verification by removing the ``cacert => "</PATH/TO/LOCAL/SPLUNK/CERTIFICATE>/ca.pem"`` line.
+      For testing purposes, you can avoid SSL verification by removing the line ``cacert => "</PATH/TO/LOCAL/SPLUNK/CERTIFICATE>/ca.pem"`` and adding ``ssl_verification_mode => "none"``.
 
 #. By default, the ``/var/ossec/logs/alerts/alerts.json`` file is owned by the ``wazuh`` user with restrictive permissions. You must add the ``logstash`` user to the ``wazuh`` group so it can read the file when running Logstash as a service:
 
