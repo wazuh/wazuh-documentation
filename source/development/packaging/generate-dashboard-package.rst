@@ -3,10 +3,8 @@
 .. meta::
   :description: Wazuh provides an automated way of building Wazuh Dashboard packages. Learn how to build your own Wazuh Dashboard packages in this section of our documentation.
 
-.. _create-dashboard:
-
 Wazuh Dashboard
-===
+===============
 
 Wazuh provides an automated way of building RPM and DEB Wazuh Dashboard packages. keep in mind that to build a package you must run this tool in a system of the wanted package type.
 
@@ -25,10 +23,11 @@ Download our wazuh-packages repository from GitHub and go to the dashboard direc
  $ cd wazuh-packages/stack/dashboard
 
 Go into the folder for the type of package to build
-.. code-block:: console
- $ cd rpm # For RPM
- $ cd db # For DEB
 
+.. code-block:: console
+
+   $ cd rpm # For RPM
+   $ cd db # For DEB
 
 Execute the ``build_package.sh`` script, with the different options you desire.
 
@@ -76,6 +75,7 @@ This will generate an Dashboard package using an existing base with revision ``t
 This will generate an Dashboard package in a given path instead of the default output path.
 
 .. code-block:: console
-  # ./build_package.sh -b no –dont-build-docker –app-url <APP-URL> 
+
+   # ./build_package.sh -b no –dont-build-docker –app-url <APP-URL> 
 
 This will generate a Dashboard package using an existing base and containers that are already present in the host with a custom wazuh plugin located in the given ``--app-url``
