@@ -63,7 +63,7 @@ As explained before, the GCP integration requires a credentials file in JSON for
 Regardless of the service, the authentication file is always specified in the ``ossec.conf`` configuration file using the ``<credentials_file>`` tag. Take a look at the following example:
 
 .. code-block:: xml
-   :emphasize-lines: 7, 16
+   :emphasize-lines: 6, 14
 
     <gcp-pubsub>
         <pull_on_start>yes</pull_on_start>
@@ -84,6 +84,6 @@ Regardless of the service, the authentication file is always specified in the ``
             <remove_from_bucket>no</remove_from_bucket>
         </bucket>
     </gcp-bucket>
-    
+
 
 Check the :doc:`gcp-pubsub </user-manual/reference/ossec-conf/gcp-pubsub>` and :doc:`gcp-bucket </user-manual/reference/ossec-conf/gcp-bucket>` sections from the ossec.conf reference page for more information about the ``<credentials_file>`` and other available parameters.
