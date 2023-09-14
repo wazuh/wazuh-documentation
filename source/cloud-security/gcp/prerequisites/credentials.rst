@@ -84,9 +84,6 @@ Regardless of the service, the authentication file is always specified in the ``
             <remove_from_bucket>no</remove_from_bucket>
         </bucket>
     </gcp-bucket>
-        
-    </gcp-bucket>
-
-
+    
 
 Check the :doc:`gcp-pubsub </user-manual/reference/ossec-conf/gcp-pubsub>` and :doc:`gcp-bucket </user-manual/reference/ossec-conf/gcp-bucket>` sections from the ossec.conf reference page for more information about the ``<credentials_file>`` and other available parameters.
