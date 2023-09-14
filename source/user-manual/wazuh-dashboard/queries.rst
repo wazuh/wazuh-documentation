@@ -27,7 +27,7 @@ The WQL search bars found in various sections of the Wazuh dashboard, use the Wa
 
 There are two query modes:
 
-- :ref:`explicit <explicit_queries>`: The search includes a field, operator and value.
+- :ref:`explicit <explicit_queries>`: The search contains a field, an operator, and a value.
 
 - :ref:`search term <search_term_queries>`: Uses a term to search in the available fields.
 
@@ -36,7 +36,7 @@ There are two query modes:
 Explicit queries
 ^^^^^^^^^^^^^^^^
 
-These queries include a field, operator and value. This mode is enabled when it finds a field and operator tokens.
+These queries include a field, an operator and a value. This mode is activated when both a field value and an operator are present.
 
    - **Field name**: Field name to filter by. If an incorrect field name is used, a validation error is displayed.
 
@@ -51,8 +51,8 @@ These queries include a field, operator and value. This mode is enabled when it 
 
    - **Value**: Value to filter by.
 
-      - Note that values without spaces can be literal.
-      - Values with spaces or containing the double quote character (**"**) must be wrapped by a pair of double quotes (**""**). The double quote (**"**) can be escaped using **\\"**.
+      - For values without spaces, no additional formatting is necessary.
+      - Values with spaces or containing the double quote character ``"`` must be wrapped by a pair of double quotes ``""``. The double quote ``"`` can be escaped using ``\"``. For example, ``"value with whitespaces and escaped \"quotes\""``.
 
    - **Separator**: Operator to join multiple "queries".
 
@@ -88,7 +88,7 @@ Query examples
 Explicit mode
 ~~~~~~~~~~~~~
 
-- Filter by entities whose **id** is equal to a specific value:
+- Filter by entities whose ``id`` is equal to a specific value:
 
    .. code-block:: none
 
@@ -97,27 +97,29 @@ Explicit mode
    .. note::
       :class: not-long
 
-      It is possible to use whitespace between the tokens.
+      It is possible to use whitespaces between the tokens.
 
       .. code-block:: none
 
          id = 001
 
-To get more precise results, use a query with multiple statements using the logical operators (**and** or **or**) and/or grouping operators (**()**).
+To get more precise results, use a query with multiple statements using the logical operators ``and`` or ``or`` and grouping operators ``()``.
 
-- Filter by an agent that is active and the OS platform contains linux:
+
+- Filter active agents whose ``os.platform`` contains Linux:
 
    .. code-block:: none
 
       status=active and os.platform~linux
 
-- Filter by an agent that was never connected, its IP contains 240 or the OS platform contains linux:
+
+- Filter agents whose status is not ``Never connected``, whose IP address contains ``240``, and whose operating system is Linux:
 
    .. code-block:: none
 
       status!=never_connected and ip~240 and os.platform~linux
 
-- Filter by an agent that was never connected and its IP contains 240, or its ID is equal to 001:
+- Filter agents whose status is not ``Never connected`` and whose IP address contains ``240``, or agents whose ``id`` is equal to ``001``:
 
    .. code-block:: none
 
@@ -137,4 +139,4 @@ Search term mode
 Wazuh Indexer
 -------------
 
-See https://opensearch.org/docs/2.8/dashboards/discover/dql/.
+In the Wazuh dashboard, there are specialized search bars for querying Wazuh indexer data. These use the same syntax as OpenSearch. To learn more, refer to `Using Dashboards Query Language <https://opensearch.org/docs/2.8/dashboards/discover/dql/>`__.
