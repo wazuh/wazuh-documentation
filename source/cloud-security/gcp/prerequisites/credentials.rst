@@ -76,7 +76,15 @@ Regardless of the service, the authentication file is always specified in the ``
     <gcp-bucket>
         <run_on_start>yes</run_on_start>
         <interval>1m</interval>
-        <credentials_file>/var/ossec/wodles/gcloud/credentials.json</credentials_file>
+        <bucket type="access_logs">
+            <name>wazuh-test-bucket</name>
+            <credentials_file>/var/ossec/wodles/gcloud/credentials.json</credentials_file>
+            <only_logs_after>2021-JUN-01</only_logs_after>
+            <path>access_logs/</path>
+            <remove_from_bucket>no</remove_from_bucket>
+        </bucket>
+    </gcp-bucket>
+        
     </gcp-bucket>
 
 
