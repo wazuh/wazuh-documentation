@@ -70,16 +70,12 @@ Regardless of the service, the authentication file is always specified in the ``
         <interval>1m</interval>
         <project_id>wazuh-dev-123456</project_id>
         <subscription_name>wazuh-subscription</subscription_name>
-
         <credentials_file>/var/ossec/wodles/gcloud/credentials.json</credentials_file>
     </gcp-pubsub>
 
     <gcp-bucket>
         <run_on_start>yes</run_on_start>
         <interval>1m</interval>
-        <project_id>wazuh-dev-123456</project_id>
-        <subscription_name>wazuh-subscription</subscription_name>
-
         <credentials_file>/var/ossec/wodles/gcloud/credentials.json</credentials_file>
     </gcp-bucket>
 
