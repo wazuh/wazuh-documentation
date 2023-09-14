@@ -171,7 +171,7 @@ Perform the following steps to configure the Logstash pipeline.
 
    .. note::
       
-      For testing purposes, you can avoid SSL verification by removing the line ``cacert => "/PATH/TO/LOCAL/SPLUNK/ca.pem"`` and adding ``ssl_verification_mode => "none"``.
+      For testing purposes, you can avoid SSL verification by replacing the line ``cacert => "/PATH/TO/LOCAL/SPLUNK/ca.pem"`` with ``ssl_verification_mode => "none"``.
 
 Running Logstash
 ^^^^^^^^^^^^^^^^
