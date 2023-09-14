@@ -78,6 +78,7 @@ newUrls['4.6'] = [
   '/cloud-security/ms-graph/index.html',
   '/cloud-security/ms-graph/monitoring-ms-graph-activity.html',
   '/user-manual/reference/ossec-conf/ms-graph-module.html',
+  '/user-manual/wazuh-dashboard/queries.html'
 ];
 
 /* Pages no longer available in 4.6 */
