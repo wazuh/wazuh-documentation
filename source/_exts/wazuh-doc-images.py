@@ -160,6 +160,7 @@ class WazuhLightBox(nodes.General, nodes.Element):
         'min/wazuh-light-box.min.css',
         'min/wazuh-light-box.min.js',
         'img/close.png',
+        'img/zoom-out.png',
         'img/next.png',
         'img/prev.png',
         'img/loading.gif',
@@ -216,16 +217,6 @@ def setup_add_wazuh_light_box(app, pagename, templatename, context, doctree):
             light_box_str += '<div class="%s-slide" data-image-id="%s">' % (class_prefix, target_id) 
             light_box_str += '<div class="%s-image-wrapper">' % (class_short_prefix) 
             light_box_str += image.asdom()
-            # Buttons: prev button
-            if gallery_index != 0:
-                light_box_str += '<div tabindex="0" class="%s-prev-button">' % class_short_prefix
-                light_box_str += '<span class="%s-prev-button-content read-only">Previous image</span>' % class_short_prefix
-                light_box_str += '</div>'
-            # Buttons: next button
-            if gallery_index != len(wazuh_images_doc_images)-1:
-                light_box_str += '<div tabindex="0" class="%s-next-button">' % class_short_prefix
-                light_box_str += '<span class="%s-next-button-content read-only">Next image</span>' % class_short_prefix
-                light_box_str += '</div>'
             
             light_box_str += '</div>' # Closes the image wrapper
             light_box_str += '<div class="%s-data-container">' % class_short_prefix
@@ -239,7 +230,19 @@ def setup_add_wazuh_light_box(app, pagename, templatename, context, doctree):
             light_box_str += '<div class="%s-number-container">Image %d of %d</div>' % (class_short_prefix, gallery_index + 1, len(wazuh_images_doc_images))
             light_box_str += '</div>' # Closes the data-container
             light_box_str += '</div>' # Closes the slide wrapper
+        # Buttons: prev button
+        light_box_str += '<div tabindex="0" class="%s-prev-button">' % class_short_prefix
+        light_box_str += '<span class="%s-prev-button-content read-only">Previous image</span>' % class_short_prefix
+        light_box_str += '</div>'
+        # Buttons: next button
+        light_box_str += '<div tabindex="0" class="%s-next-button">' % class_short_prefix
+        light_box_str += '<span class="%s-next-button-content read-only">Next image</span>' % class_short_prefix
+        light_box_str += '</div>'
         light_box_str += '</div>' # Closes the slides container
+        # Buttons: zoom out button
+        light_box_str += '<div tabindex="0" class="%s-zoom-out-button">' % class_short_prefix
+        light_box_str += '<span class="%s-zoom-out-button-content read-only">Zoom out</span>' % class_short_prefix
+        light_box_str += '</div>'
         # Buttons: close button
         light_box_str += '<button tabindex="0" class="%s-close-button">' % class_short_prefix
         light_box_str += '<span class="%s-close-button-content read-only">Close</span>' % class_short_prefix
@@ -272,7 +275,7 @@ def setup(app):
     app.connect('env-updated', manage_static_files)
 
     return {
-        'version': '0.3',
+        'version': '0.4',
         'parallel_read_safe': True,
         'parallel_write_safe': True,
     }
