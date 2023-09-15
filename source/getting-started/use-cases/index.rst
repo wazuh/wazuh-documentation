@@ -20,7 +20,7 @@ Below you can find examples of some of the most common use cases of the Wazuh pl
 
    * - :doc:`log-analysis` 
      - :doc:`file-integrity`
-   * - :doc:`rootkits-detection`
+   * - :doc:`malware-detection`
      - :doc:`incident-response`
    * - :doc:`configuration-assessment`
      - :doc:`system-inventory`
@@ -36,7 +36,7 @@ Below you can find examples of some of the most common use cases of the Wazuh pl
 
    log-analysis
    file-integrity
-   rootkits-detection
+   malware-detection
    incident-response
    configuration-assessment
    system-inventory
