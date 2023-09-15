@@ -1,7 +1,7 @@
 .. Copyright (C) 2015, Wazuh, Inc.
 
 .. meta::
-    :description: The Wazuh platform is often used to meet the technical aspects of regulatory compliance standards. Learn more about this Wazuh capability here. 
+    :description: Wazuh helps organizations meet PCI DSS, GDPR, HIPAA, NIST 800-53, and TSC standards. Learn more about regulatory compliance in this use case.
     
 Regulatory compliance
 =====================
