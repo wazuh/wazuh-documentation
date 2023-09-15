@@ -53,9 +53,24 @@ The required modules can be installed with Pip, the Python package manager. Most
 
 It is recommended to use a pip version greater than or equal to 19.3 to ease the installation of the required dependencies.
 
-.. code-block:: console
+.. tabs::
 
-  # pip3 install --upgrade pip
+   .. group-tab:: Python 3.7 - 3.10
+
+      .. code-block:: console
+
+         # pip3 install --upgrade pip
+
+   .. group-tab:: Python 3.11
+
+      .. code-block:: console
+
+         # pip3 install --upgrade pip --break-system-packages
+   
+      .. note::
+         
+         The ``--break-system-packages`` parameter is required to make the install on the default externally managed environment (more information on the `PEP 668 description <https://peps.python.org/pep-0668/>`_). To avoid it, the command can be executed inside a virtual environment but this would require a modification on the ``aws-s3`` script shebang to use the environment's interpreter. 
+
 
 .. _boto-3:
 
@@ -66,6 +81,20 @@ AWS pip dependencies
 
 To install the dependencies, execute the following command:
 
-.. code-block:: console
+.. tabs::
 
-  # pip3 install boto3==1.17.85 botocore==1.20.85 jmespath==0.9.5 python-dateutil==2.8.1 six==1.14.0 urllib3==1.26.5 s3transfer==0.4.2 pyarrow==8.0.0 numpy==1.21.6
+   .. group-tab:: Python 3.7 - 3.10
+
+      .. code-block:: console
+
+         # pip3 install boto3==1.17.85 botocore==1.20.85 jmespath==0.9.5 python-dateutil==2.8.1 six==1.14.0 urllib3==1.26.5 s3transfer==0.4.2 pyarrow==8.0.0 numpy==1.21.6
+   
+   .. group-tab:: Python 3.11
+
+      .. code-block:: console
+
+         # pip3 install --break-system-packages boto3==1.17.85 botocore==1.20.85 jmespath==0.9.5 python-dateutil==2.8.1 six==1.14.0 urllib3==1.26.5 s3transfer==0.4.2 pyarrow==8.0.0 numpy==1.21.6
+
+      .. note::
+         
+         In the case of using a virtual environment, the ``--break-system-packages`` parameter should be removed from the command.
