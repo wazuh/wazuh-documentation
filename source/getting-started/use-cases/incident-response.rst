@@ -22,7 +22,7 @@ You can also configure the actions to be either stateless or stateful. Stateless
 Default active response actions
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-Out-of-the-box scripts are available on every operating system that runs the Wazuh agents. Some of the :doc:`default active response </user-manual/capabilities/active-response/default-active-response-scripts>` scripts include.
+Out-of-the-box scripts are available on every operating system that runs the Wazuh agents. Some of the :doc:`default active response </user-manual/capabilities/active-response/default-active-response-scripts>` scripts include:
 
 =============== ===========
 Name of script  Description
