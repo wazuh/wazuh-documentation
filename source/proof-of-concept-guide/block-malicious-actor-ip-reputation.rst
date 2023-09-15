@@ -10,7 +10,7 @@ In this use case, we demonstrate how to block malicious IP addresses from access
 
 This case uses a public IP reputation database that contains the IP addresses of some malicious actors. An IP reputation database is a collection of IP addresses that have been flagged as malicious. The RHEL endpoint plays the role of the malicious actor here, therefore you add its IP address to the reputation database. Then, configure Wazuh to block the RHEL endpoint from accessing web resources on the Apache web servers for 60 seconds. It’s a way of discouraging attackers from continuing to carry out their malicious activities.
 
-In this use case, you use the Wazuh :doc:`CDB list </user-manual/ruleset/cdb-list>` and :doc:`active response </getting-started/use-cases/active-response>` capabilities.
+In this use case, you use the Wazuh :doc:`CDB list </user-manual/ruleset/cdb-list>` and :doc:`active response </getting-started/use-cases/incident-response>` capabilities.
 
 Infrastructure
 --------------

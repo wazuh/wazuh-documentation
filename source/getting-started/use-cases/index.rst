@@ -21,13 +21,15 @@ Below you can find examples of some of the most common use cases of the Wazuh pl
    * - :doc:`log-analysis` 
      - :doc:`file-integrity`
    * - :doc:`malware-detection`
-     - :doc:`active-response`
+     - :doc:`incident-response`
    * - :doc:`configuration-assessment`
      - :doc:`system-inventory`
    * - :doc:`vulnerability-detection`
      - :doc:`cloud-security`
    * - :doc:`container-security`
      - :doc:`regulatory-compliance`
+   * - :doc:`threat-hunting`
+     -
 
 .. toctree::
    :hidden:
@@ -35,10 +37,11 @@ Below you can find examples of some of the most common use cases of the Wazuh pl
    log-analysis
    file-integrity
    malware-detection
-   active-response
+   incident-response
    configuration-assessment
    system-inventory
    vulnerability-detection
    cloud-security
    container-security
    regulatory-compliance
+   threat-hunting
