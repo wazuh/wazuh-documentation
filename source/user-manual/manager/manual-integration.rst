@@ -147,9 +147,9 @@ Shuffle
 
 To set up this integration, do the following.
 
-#. Go to Shuffle and make a Workflow.
+#. Go to Shuffle and make a Workflow using the Email app. Select version ``1.0.1`` for it.
 
-#. Set **Recipients** and **Subject** in the email configuration. Put ``$exec`` in the **Body** to include the alert information. Change the version of the Email App to ``1.0.1``.
+#. Set **Recipients** and **Subject** in the email configuration. Put ``$exec`` in the **Body** to include the alert information.
 
 #. Add a webhook to the Workflow.
 
