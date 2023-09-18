@@ -15,7 +15,7 @@ Wazuh SCA module
 
 Wazuh offers a :doc:`Security Configuration Assessment (SCA) </user-manual/capabilities/sec-config-assessment/index>` module that assists security teams to scan and detect misconfigurations within their environment. The Wazuh agent uses policy files to scan endpoints that it monitors. These files contain predefined checks to be carried out on each monitored endpoint. 
 
-Wazuh includes :doc:`SCA policies </user-manual/capabilities/sec-config-assessment/available-sca-policies>` out-of-the-box based on the Center for Internet Security (CIS) security benchmarks. These benchmarks serve as essential guidelines on best practices for protecting IT systems and data from cyberattacks. It provides clear instructions for establishing a secure baseline configuration and offers guidance to ensure that users implement effective measures to safeguard their critical assets and mitigate potential vulnerabilities. By adhering to these standards, you can enhance your overall security posture and mitigate the risk of cyber threats against your business. 
+Wazuh includes :doc:`SCA policies </user-manual/capabilities/sec-config-assessment/available-sca-policies>` out-of-the-box based on the Center for Internet Security (CIS) security benchmarks. These benchmarks serve as essential guidelines on best practices for protecting IT systems and data from cyberattacks. They provide clear instructions for establishing a secure baseline configuration and offer guidance to ensure that users implement effective measures to safeguard their critical assets and mitigate potential vulnerabilities. By adhering to these standards, you can enhance your overall security posture and mitigate the risk of cyber threats against your business. 
 
 Some other benefits of the Wazuh Security Configuration Assessment (SCA) module include:
 
@@ -92,7 +92,7 @@ In the image below, you see the policy based on the CIS benchmark for Ubuntu Lin
 Interpreting SCA results
 ------------------------
 
-On the Wazuh dashboard, we select a policy to see the checks that we run on the endpoint. In the image below, you can see 182 checks were run against the Ubuntu 22.04 endpoint. Out of these, 63 passed and 98 failed, and 21 are not applicable to the endpoint. It also shows a score of 39% which is calculated based on the number of tests passed.  
+On the Wazuh dashboard, we select a policy to see the checks that we run on the endpoint. In the image below, you can see 182 checks were run against the Ubuntu 22.04 endpoint. Out of these, 63 passed, 98 failed, and 21 are not applicable to the endpoint. It also shows a score of 39% which is calculated based on the number of tests passed.  
 
 .. thumbnail:: /images/getting-started/use-cases/sca/cis-benchmark-ubuntu22-results.png
    :title: Results for CIS benchmark for Ubuntu 22.04 checks
