@@ -88,16 +88,15 @@ To securely store these values, you can use the `Logstash keystore <https://www.
 #. Run the following commands on your Logstash server to set a keystore password:
 
    .. code-block:: console
-      :emphasize-lines: 3,4
+      :emphasize-lines: 2,3
 
-      # touch /etc/sysconfig/logstash
-      # set +o history
-      # echo 'LOGSTASH_KEYSTORE_PASS="<MY_KEYSTORE_PASSWORD>"' > /etc/sysconfig/logstash
-      # export LOGSTASH_KEYSTORE_PASS=<MY_KEYSTORE_PASSWORD>
-      # set -o history
-      # chown root /etc/sysconfig/logstash
-      # chmod 600 /etc/sysconfig/logstash
-      # systemctl start logstash
+      $ set +o history
+      $ echo 'LOGSTASH_KEYSTORE_PASS="<MY_KEYSTORE_PASSWORD>"' | sudo tee /etc/sysconfig/logstash LOGSTASH_KEYSTORE_PASS="<MY_KEYSTORE_PASSWORD>"
+      $ export LOGSTASH_KEYSTORE_PASS=<MY_KEYSTORE_PASSWORD>
+      $ set -o history
+      $ sudo chown root /etc/sysconfig/logstash
+      $ sudo chmod 600 /etc/sysconfig/logstash
+      $ sudo systemctl start logstash
 
    Where ``<MY_KEYSTORE_PASSWORD>`` is your keystore password.
 
@@ -109,10 +108,10 @@ To securely store these values, you can use the `Logstash keystore <https://www.
 
    .. code-block:: console
 
-      # sudo -E /usr/share/logstash/bin/logstash-keystore --path.settings /etc/logstash create
-      # sudo -E /usr/share/logstash/bin/logstash-keystore --path.settings /etc/logstash add WAZUH_INDEXER_USERNAME
-      # sudo -E /usr/share/logstash/bin/logstash-keystore --path.settings /etc/logstash add WAZUH_INDEXER_PASSWORD
-      # sudo -E /usr/share/logstash/bin/logstash-keystore --path.settings /etc/logstash add SPLUNK_AUTH
+      $ sudo -E /usr/share/logstash/bin/logstash-keystore --path.settings /etc/logstash create
+      $ sudo -E /usr/share/logstash/bin/logstash-keystore --path.settings /etc/logstash add WAZUH_INDEXER_USERNAME
+      $ sudo -E /usr/share/logstash/bin/logstash-keystore --path.settings /etc/logstash add WAZUH_INDEXER_PASSWORD
+      $ sudo -E /usr/share/logstash/bin/logstash-keystore --path.settings /etc/logstash add SPLUNK_AUTH
 
    Where:
 
@@ -125,7 +124,7 @@ Perform the following steps to configure the Logstash pipeline.
 
    .. code-block:: console
 
-      # touch /etc/logstash/conf.d/wazuh-splunk.conf
+      $ sudo touch /etc/logstash/conf.d/wazuh-splunk.conf
 
 #. Edit the file and add the following configuration. This sets the parameters required to run Logstash.
 
@@ -259,16 +258,15 @@ To securely store these values, you can use the `Logstash keystore <https://www.
 #. Run the following commands on your Logstash server to set a keystore password:
 
    .. code-block:: console
-      :emphasize-lines: 3,4
+      :emphasize-lines: 2,3
 
-      # touch /etc/sysconfig/logstash
-      # set +o history
-      # echo 'LOGSTASH_KEYSTORE_PASS="<MY_KEYSTORE_PASSWORD>"' > /etc/sysconfig/logstash
-      # export LOGSTASH_KEYSTORE_PASS=<MY_KEYSTORE_PASSWORD>
-      # set -o history
-      # chown root /etc/sysconfig/logstash
-      # chmod 600 /etc/sysconfig/logstash
-      # systemctl start logstash
+      $ set +o history
+      $ echo 'LOGSTASH_KEYSTORE_PASS="<MY_KEYSTORE_PASSWORD>"'| sudo tee /etc/sysconfig/logstash LOGSTASH_KEYSTORE_PASS="<MY_KEYSTORE_PASSWORD>"
+      $ export LOGSTASH_KEYSTORE_PASS=<MY_KEYSTORE_PASSWORD>
+      $ set -o history
+      $ sudo chown root /etc/sysconfig/logstash
+      $ sudo chmod 600 /etc/sysconfig/logstash
+      $ sudo systemctl start logstash
 
    Where ``<MY_KEYSTORE_PASSWORD>`` is your keystore password.
 
@@ -278,8 +276,8 @@ To securely store these values, you can use the `Logstash keystore <https://www.
 
    .. code-block:: console
 
-      # sudo -E /usr/share/logstash/bin/logstash-keystore --path.settings /etc/logstash create
-      # sudo -E /usr/share/logstash/bin/logstash-keystore --path.settings /etc/logstash add SPLUNK_AUTH
+      $ sudo -E /usr/share/logstash/bin/logstash-keystore --path.settings /etc/logstash create
+      $ sudo -E /usr/share/logstash/bin/logstash-keystore --path.settings /etc/logstash add SPLUNK_AUTH
 
 Configuring the pipeline with the Tail mode and the JSON codec for the `file input plugin <https://www.elastic.co/guide/en/logstash/current/plugins-inputs-file.html>`__ allows Logstash to read the Wazuh alerts file.
 
@@ -290,7 +288,7 @@ To configure the Logstash pipeline do the following.
 
    .. code-block:: console
 
-      # touch /etc/logstash/conf.d/wazuh-splunk.conf
+      $ sudo touch /etc/logstash/conf.d/wazuh-splunk.conf
 
 #. Edit the ``wazuh-splunk.conf`` file and add the following configuration. This sets the parameters required to run logstash.
 
