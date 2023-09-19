@@ -89,13 +89,13 @@ To install the dependencies, execute the following command:
 
       .. code-block:: console
 
-         # pip3 install boto3==1.17.85 botocore==1.20.85 jmespath==0.9.5 python-dateutil==2.8.1 six==1.14.0 urllib3==1.26.5 s3transfer==0.4.2 pyarrow==8.0.0 numpy==1.21.6
+         # pip3 install boto3==1.17.85 botocore==1.20.85 jmespath==0.9.5 python-dateutil==2.8.1 six==1.14.0 urllib3==1.26.5 s3transfer==0.4.2 pyarrow==8.0.0
    
    .. group-tab:: Python 3.11
 
       .. code-block:: console
 
-         # pip3 install --break-system-packages boto3==1.17.85 botocore==1.20.85 jmespath==0.9.5 python-dateutil==2.8.1 six==1.14.0 urllib3==1.26.5 s3transfer==0.4.2 pyarrow==8.0.0 numpy==1.21.6
+         # pip3 install --break-system-packages boto3==1.17.85 botocore==1.20.85 jmespath==0.9.5 python-dateutil==2.8.1 six==1.14.0 urllib3==1.26.5 s3transfer==0.4.2 pyarrow==13.0.0
 
       .. note::
          
