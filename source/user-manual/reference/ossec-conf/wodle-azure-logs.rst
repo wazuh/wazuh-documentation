@@ -761,7 +761,7 @@ This option sets the time delay in which we will perform the query. For example,
 storage\\container\\path
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-Defines, for the container, a path to search into. If it isn't present, the module retrieves all the blobs at the root level.
+Defines, for the container, a path to search for logs. If it isn't present, the module retrieves all the blobs starting from the root level.
 
 +--------------------+----------------------------------------------------------------------------------------------------------------------------+
 | **Default value**  | N/A                                                                                                                        |
@@ -789,6 +789,7 @@ Example of storage configuration
                 <blobs>.json</blobs>
                 <content_type>json_inline</content_type>
                 <time_offset>24h</time_offset>
+                <path>info-logs</path>
             </container>
 
 	    <container name="audit-logs"/>
@@ -848,6 +849,7 @@ Example of all integration
                 <blobs>.json</blobs>
                 <content_type>json_inline</content_type>
                 <time_offset>24h</time_offset>
+                <path>info-logs</path>
             </container>
 
 	    <container name="audit-logs"/>
