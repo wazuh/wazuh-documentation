@@ -98,21 +98,21 @@ Wazuh dashboard
 - `#4163 <https://github.com/wazuh/wazuh-kibana-app/pull/4163>`_ Added new global error treatment (client-side).
 - `#5519 <https://github.com/wazuh/wazuh-kibana-app/pull/5519>`_ Added new CLI to generate API data from specification file.
 - `#5551 <https://github.com/wazuh/wazuh-kibana-app/pull/5551>`_ Added specific RBAC permissions to Security section.
-- `#5443 <https://github.com/wazuh/wazuh-kibana-app/pull/5443>`_ Added Refresh and Export formatted button to panels in **Agents > Inventory data**.
-- `#5491 <https://github.com/wazuh/wazuh-kibana-app/pull/5491>`_ Added Refresh and Export formatted buttons to **Management > Cluster > Nodes**.
+- `#5443 <https://github.com/wazuh/wazuh-kibana-app/pull/5443>`_ Added **Refresh** and **Export formatted** button to panels in **Agents > Inventory data**.
+- `#5491 <https://github.com/wazuh/wazuh-kibana-app/pull/5491>`_ Added **Refresh** and **Export formatted** buttons to **Management > Cluster > Nodes**.
 - `#5201 <https://github.com/wazuh/wazuh-kibana-app/pull/5201>`_ Changed of regular expression in RBAC.
-- `#5384 <https://github.com/wazuh/wazuh-kibana-app/pull/5384>`_ Migrate the timeFilter, metaFields, and maxBuckets health checks inside the pattern check.
-- `#5485 <https://github.com/wazuh/wazuh-kibana-app/pull/5485>`_ Changed the query to search for an agent in ``management/configuration``.
+- `#5384 <https://github.com/wazuh/wazuh-kibana-app/pull/5384>`_ Migrated the ``timeFilter``, ``metaFields``, and ``maxBuckets`` health checks inside the ``pattern`` check.
+- `#5485 <https://github.com/wazuh/wazuh-kibana-app/pull/5485>`_ Changed the query to search for an agent in **Management > Configuration**.
 - `#5476 <https://github.com/wazuh/wazuh-kibana-app/pull/5476>`_ Changed the search bar in ``management/log`` to the one used in the rest of the app.
 - `#5457 <https://github.com/wazuh/wazuh-kibana-app/pull/5457>`_ Changed the design of the wizard to add agents.
-- `#5363 <https://github.com/wazuh/wazuh-kibana-app/pull/5363>`_ `#5442 <https://github.com/wazuh/wazuh-kibana-app/pull/5442>`_ `#5443 <https://github.com/wazuh/wazuh-kibana-app/pull/5443>`_ `#5444 <https://github.com/wazuh/wazuh-kibana-app/pull/5444>`_ `#5445 <https://github.com/wazuh/wazuh-kibana-app/pull/5445>`_ `#5447 <https://github.com/wazuh/wazuh-kibana-app/pull/5447>`_ `#5452 <https://github.com/wazuh/wazuh-kibana-app/pull/5452>`_ `#5491 <https://github.com/wazuh/wazuh-kibana-app/pull/5491>`_ `#5785 <https://github.com/wazuh/wazuh-kibana-app/pull/5785>`_ Changed the search bar in Management (Rules, Decoders, CDB List, Groups, Cluster > Nodes), Modules (Vulnerabilities > Inventory, Security Configuration Assessment > Inventory > {Policy ID} > Checks, MITRE ATT&CK > Intelligence > {Resource}, Integrity monitoring > Inventory > Files, Integrity monitoring > Inventory > Registry), Agent Inventory data, Explore agent modal, and Agents.
+- `#5363 <https://github.com/wazuh/wazuh-kibana-app/pull/5363>`_ `#5442 <https://github.com/wazuh/wazuh-kibana-app/pull/5442>`_ `#5443 <https://github.com/wazuh/wazuh-kibana-app/pull/5443>`_ `#5444 <https://github.com/wazuh/wazuh-kibana-app/pull/5444>`_ `#5445 <https://github.com/wazuh/wazuh-kibana-app/pull/5445>`_ `#5447 <https://github.com/wazuh/wazuh-kibana-app/pull/5447>`_ `#5452 <https://github.com/wazuh/wazuh-kibana-app/pull/5452>`_ `#5491 <https://github.com/wazuh/wazuh-kibana-app/pull/5491>`_ `#5785 <https://github.com/wazuh/wazuh-kibana-app/pull/5785>`_  Introduced a new, enhanced search bar. This bar addresses some of the issues found in the previous version and adds new features to all the searchable tables in Wazuh which leverages the Wazuh API.
 - `#5451 <https://github.com/wazuh/wazuh-kibana-app/pull/5451>`_ Removed deprecated request and code in agent's view.
 - `#5453 <https://github.com/wazuh/wazuh-kibana-app/pull/5453>`_ Removed unnecessary dashboard queries caused by the deploy agent view.
 - `#5500 <https://github.com/wazuh/wazuh-kibana-app/pull/5500>`_ Removed repeated and unnecessary requests in the Security section.
 - `#5519 <https://github.com/wazuh/wazuh-kibana-app/pull/5519>`_ Removed scripts to generate API data from live Wazuh manager.
 - `#5532 <https://github.com/wazuh/wazuh-kibana-app/pull/5532>`_ Removed the ``pretty`` parameter from cron job requests.
-- `#5528 <https://github.com/wazuh/wazuh-kibana-app/pull/5528>`_ Removed unnecessary requests in ``Management/Status`` section.
-- `#5485 <https://github.com/wazuh/wazuh-kibana-app/pull/5485>`_ Removed obsolete code that caused duplicate requests to the API in ``Management``.
+- `#5528 <https://github.com/wazuh/wazuh-kibana-app/pull/5528>`_ Removed unnecessary requests in the **Management > Status** section.
+- `#5485 <https://github.com/wazuh/wazuh-kibana-app/pull/5485>`_ Removed obsolete code that caused duplicate requests to the API in **Management**.
 - `#5592 <https://github.com/wazuh/wazuh-kibana-app/pull/5592>`_ Removed unused embedded ``jquery-ui``.
 
 Resolved issues
@@ -205,7 +205,7 @@ Reference                                                         Description
 `#4918 <https://github.com/wazuh/wazuh-kibana-app/pull/4918>`_    Handling endpoint response was done when there is no data to show.
 `#4894 <https://github.com/wazuh/wazuh-kibana-app/pull/4894>`_    Fixed references to Elasticsearch in Wazuh-stack plugin.
 `#5135 <https://github.com/wazuh/wazuh-kibana-app/pull/5135>`_    Fixed the 2 errors that appeared in console in **Settings > Configuration** section.
-`#5376 <https://github.com/wazuh/wazuh-kibana-app/pull/5376>`_    Fixed the GitHub and Office 365 module visibility configuration for each API host was not kept when changing/upgrading the plugin.
+`#5376 <https://github.com/wazuh/wazuh-kibana-app/pull/5376>`_    Fixed the GitHub and Office 365 module visibility configuration for each API host that was not kept when changing/upgrading the plugin.
 `#5376 <https://github.com/wazuh/wazuh-kibana-app/pull/5376>`_    Fixed the GitHub and Office 365 modules appear in the main menu when they were not configured.
 `#5364 <https://github.com/wazuh/wazuh-kibana-app/pull/5364>`_    Fixed TypeError in FIM Inventory using new error handler.
 `#5423 <https://github.com/wazuh/wazuh-kibana-app/pull/5423>`_    Fixed error when using invalid group configuration.
@@ -213,6 +213,8 @@ Reference                                                         Description
 `#5465 <https://github.com/wazuh/wazuh-kibana-app/pull/5465>`_    Fixed repeated requests in the group table when adding a group or refreshing the table.
 `#5521 <https://github.com/wazuh/wazuh-kibana-app/pull/5521>`_    Fixed an error in the request body suggestions of API Console.
 `#5734 <https://github.com/wazuh/wazuh-kibana-app/pull/5734>`_    Fixed some errors related to relative dirname of rule and decoder files.
+`#5879 <https://github.com/wazuh/wazuh-kibana-app/pull/5879>`_    Fixed package URLs in the ``aarch64`` commands.
+`#5888 <https://github.com/wazuh/wazuh-kibana-app/pull/5888>`_    Fixed the install macOS agent commands.
 ==============================================================    =============
 
 
