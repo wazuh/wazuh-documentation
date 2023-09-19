@@ -115,6 +115,7 @@ newUrls['4.5'] = [
   '/getting-started/use-cases/incident-response.html',
   '/getting-started/use-cases/threat-hunting.html',
   '/getting-started/use-cases/malware-detection.html',
+  '/getting-started/use-cases/it-hygiene.html',
 ];
 
 /* Pages no longer available in 4.5 */

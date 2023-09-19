@@ -72,6 +72,8 @@ Where:
   :align: center
   :width: 80%
 
+.. _inventory_wazuh_api_curl:
+
 cURL
 ~~~~
 
