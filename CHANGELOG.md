@@ -14,6 +14,13 @@ All notable changes to this project will be documented in this file.
 - Added the FIM wildcard Windows registers documentation. ([#5932](https://github.com/wazuh/wazuh-documentation/pull/5932)) 
 - Support AlmaLinux in Vulnerability Detector. ([#5904](https://github.com/wazuh/wazuh-documentation/pull/5904))
 - wazuh-authd can now generate X509 certificates. ([#5461](https://github.com/wazuh/wazuh-documentation/pull/5461))
+- Removed Kibana and Splunk from documentation ([#6401](https://github.com/wazuh/wazuh-documentation/pull/6401))
+- Updated Securityadmin script output examples in SSO docs ([#6436](https://github.com/wazuh/wazuh-documentation/pull/6436))
+- Updated output examples for indexer 4.6.0 ([#6437](https://github.com/wazuh/wazuh-documentation/pull/6437))
+
+## [v4.5.3]
+
+- Support for Wazuh 4.5.3.
 
 ## [v4.5.2]
 
@@ -23,6 +30,10 @@ All notable changes to this project will be documented in this file.
 - Explained how to use the Wazuh installation assistant `-p|--port` option in the Wazuh dashboard installation guide. ([#6322](https://github.com/wazuh/wazuh-documentation/pull/6322))
 - Added instructions on how to install Ansible on CentOS/RHEL 8. ([#6341](https://github.com/wazuh/wazuh-documentation/pull/6341))
 - Added steps for updating Wazuh API user passwords and enhanced instructions for changing passwords of Wazuh indexer users in Docker deployments. ([#6306](https://github.com/wazuh/wazuh-documentation/pull/6306))
+- Added support for Kibana 7.17.12. ([#6400](https://github.com/wazuh/wazuh-documentation/pull/6400))
+- Updated the Debian OVAL URL for offline update. ([#6430](https://github.com/wazuh/wazuh-documentation/pull/6430))
+- Added the Wazuh v4.5.2 release notes. ([#6389](https://github.com/wazuh/wazuh-documentation/pull/6389))
+
 ## [v4.5.1]
 
 ### Added
