@@ -8,6 +8,8 @@ IT hygiene
 
 IT hygiene refers to the measures that organizations and individuals undertake to maintain the health and security of their IT assets. IT hygiene requires continuous adaptation of practices and processes to counter emerging cybersecurity threats and challenges, fostering a secure and resilient IT environment. Organizations implement robust IT hygiene practices to prevent cyberattacks, data breaches, and other security concerns that may result in data loss, service disruption, reputational harm, or financial instability.
 
+.. _system_inventory_gs_use_case:
+
 System inventory
 ----------------
 

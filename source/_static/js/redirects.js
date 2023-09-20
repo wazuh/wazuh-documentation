@@ -94,6 +94,11 @@ redirections.push(
     '4.4': '/getting-started/use-cases/rootkits-detection.html',
     '4.5': '/getting-started/use-cases/malware-detection.html',
   },
+  {
+    'target': ['4.4=>4.5', '4.5=>4.4'],
+    '4.4': '/getting-started/use-cases/system-inventory.html',
+    '4.5': '/getting-started/use-cases/it-hygiene#system-inventory.html',
+  },
 );
 
 /* Pages added in 4.5 */
@@ -127,6 +132,7 @@ removedUrls['4.5'] = [
   '/user-manual/capabilities/log-data-collection/log-data-configuration.html',
   '/getting-started/use-cases/active-response.html',
   '/getting-started/use-cases/rootkits-detection.html',
+  '/getting-started/use-cases/system-inventory.html',
 ];
 
 /* *** RELEASE 4.4 ****/
