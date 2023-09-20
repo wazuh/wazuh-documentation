@@ -252,7 +252,8 @@ Getting the ubuntu agents with id other than 0 and lower than 4, whose name cont
        "error": 0
     }
 
-Getting agents with an id higher than ``007`` that run on *Windows* or whose operating system major version is either 14 or 18:
+Getting agents with an ID higher than ``007`` that run on *Windows* or whose operating system major version is either 14 or 18:
+
 
 .. code-block:: console
 
