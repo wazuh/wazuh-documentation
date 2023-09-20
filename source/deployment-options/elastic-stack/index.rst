@@ -77,7 +77,7 @@ The following Elastic Stack versions are compatible with the Wazuh manager |WAZU
 +-------------------------+
 | 7.16.0–7.16.3           |
 +-------------------------+
-| 7.17.0–7.17.12          |
+| 7.17.0–7.17.13          |
 +-------------------------+
 
 .. _packages_list_elk:
@@ -124,6 +124,8 @@ The following table contains the Wazuh Kibana plugin files for each version of E
 
 .. |WAZUH_KIBANA_7.17.12| replace:: `wazuh_kibana-|WAZUH_CURRENT|_7.17.12.zip <https://packages.wazuh.com/|WAZUH_CURRENT_MAJOR|/ui/kibana/wazuh_kibana-|WAZUH_CURRENT|_7.17.12-1.zip>`__ (`sha512 <https://packages.wazuh.com/|WAZUH_CURRENT_MAJOR|/checksums/wazuh/|WAZUH_CURRENT|/wazuh_kibana-|WAZUH_CURRENT|_7.17.12-1.zip.sha512>`__)
 
+.. |WAZUH_KIBANA_7.17.13| replace:: `wazuh_kibana-|WAZUH_CURRENT|_7.17.13.zip <https://packages.wazuh.com/|WAZUH_CURRENT_MAJOR|/ui/kibana/wazuh_kibana-|WAZUH_CURRENT|_7.17.13-1.zip>`__ (`sha512 <https://packages.wazuh.com/|WAZUH_CURRENT_MAJOR|/checksums/wazuh/|WAZUH_CURRENT|/wazuh_kibana-|WAZUH_CURRENT|_7.17.13-1.zip.sha512>`__)
+
 +------------------+--------------------------+
 | Kibana Version   | Package                  |
 +==================+==========================+
@@ -162,6 +164,8 @@ The following table contains the Wazuh Kibana plugin files for each version of E
 | 7.17.11          | |WAZUH_KIBANA_7.17.11|   |
 +------------------+--------------------------+
 | 7.17.12          | |WAZUH_KIBANA_7.17.12|   |
++------------------+--------------------------+
+| 7.17.13          | |WAZUH_KIBANA_7.17.13|   |
 +------------------+--------------------------+
 
 For a full list of the available Wazuh Kibana plugin packages, check the `Wazuh Kibana plugin compatibility matrix <https://github.com/wazuh/wazuh-kibana-app/wiki/Compatibility>`__.  
