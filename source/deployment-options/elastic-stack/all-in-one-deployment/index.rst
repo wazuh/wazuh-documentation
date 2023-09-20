@@ -132,13 +132,13 @@ This command should have an output like this:
    {
      "name" : "elasticsearch",
      "cluster_name" : "elasticsearch",
-     "cluster_uuid" : "Usvij2iGRMOqVtk9YdFfvA",
+     "cluster_uuid" : "EFEejKSIT7SMp6-f5fDI3A",
      "version" : {
-       "number" : "7.17.12",
+       "number" : "7.17.13",
        "build_flavor" : "default",
        "build_type" : "rpm",
-       "build_hash" : "e3b0c3d3c5c130e1dc6d567d6baef1c73eeb2059",
-       "build_date" : "2023-07-20T05:33:33.690180787Z",
+       "build_hash" : "2b211dbb8bfdecaf7f5b44d356bdfe54b1050c13",
+       "build_date" : "2023-08-31T17:33:19.958690787Z",
        "build_snapshot" : false,
        "lucene_version" : "8.11.1",
        "minimum_wire_compatibility_version" : "6.8.0",
@@ -297,7 +297,7 @@ This command should have an output like this:
        TLS version: TLSv1.3
        dial up... OK
      talk to server... OK
-     version: 7.17.12
+     version: 7.17.13
 
 Kibana installation and configuration
 -------------------------------------
