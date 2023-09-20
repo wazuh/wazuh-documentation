@@ -3,10 +3,8 @@
 .. meta::
   :description: Wazuh provides an automated way of building Wazuh Indexer packages. Learn how to build your own Wazuh Indexer packages in this section of our documentation.
   
-.. _create-indexer:
-
 Wazuh Indexer
-===
+=============
 
 Wazuh provides an automated way of building RPM and DEB Wazuh Indexer packages. keep in mind that to build a package you must run this tool in a system of the wanted package type.
 
@@ -25,10 +23,11 @@ Download our wazuh-packages repository from GitHub and go to the indexer directo
  $ cd wazuh-packages/stack/indexer
 
 Go into the folder for the type of package to build
-.. code-block:: console
- $ cd rpm # For RPM
- $ cd db # For DEB
 
+.. code-block:: console
+
+   $ cd rpm # For RPM
+   $ cd db # For DEB
 
 Execute the ``build_package.sh`` script, with the different options you desire.
 
