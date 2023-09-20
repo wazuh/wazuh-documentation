@@ -76,3 +76,135 @@ Vulnerability management aims to identify and remediate vulnerabilities to preve
 The Wazuh :doc:`Vulnerability Detector </user-manual/capabilities/vulnerability-detection/index>` module identifies vulnerable applications by using the information collected from operating system vendors and :doc:`vulnerability databases </user-manual/capabilities/vulnerability-detection/how-it-works>`. The Vulnerability Detector module scans and generates alerts for vulnerabilities discovered on monitored endpoints. This provides a comprehensive view of vulnerabilities identified across all monitored endpoints, allowing you to view, analyze, fix, and track the remediation of vulnerabilities.
 
 The vulnerabilities discovered are grouped into severity levels, and a summary is provided based on the application name, CVE, and CVSS3 score on the Wazuh dashboard.
+
+.. thumbnail:: /images/getting-started/use-cases/it-hygiene/vulnerabilities-inventory-dashboard.png
+   :title: Vulnerabilities inventory dashboard
+   :alt: Vulnerabilities inventory dashboard
+   :align: center
+   :width: 80%
+
+You can download a report that contains security events related to discovered and resolved vulnerabilities on a monitored endpoint from the Wazuh dashboard. This feature allows you to identify endpoints with unresolved vulnerabilities and keep track of remediation activities.
+
+.. thumbnail:: /images/getting-started/use-cases/it-hygiene/vulnerabilities-data-download.png
+   :title: Vulnerabilities data download
+   :alt: Vulnerabilities data download
+   :align: center
+   :width: 80%
+
+The Wazuh Vulnerability Detector module also enables you to track remediation activities, which could serve as a progress report on improving or maintaining IT hygiene. For example, when a vulnerability is remediated, an alert is generated on the Wazuh dashboard. This feature detects when a patch or software upgrade resolves a previously detected vulnerability.
+
+.. thumbnail:: /images/getting-started/use-cases/it-hygiene/remediation-alerts.png
+   :title: Remediation alerts
+   :alt: Remediation alerts
+   :align: center
+   :width: 80%
+
+Malware detection
+-----------------
+
+Malware detection is essential for safeguarding computer systems and networks from cyber threats. Organizations can improve their IT hygiene by identifying and mitigating malicious software that can cause data breaches, system compromises, and financial losses.
+
+Wazuh offers an out-of-the-box ruleset designed to recognize malware patterns and trigger alerts for quick response. Wazuh also allows security analysts to create :doc:`custom rules </user-manual/ruleset/custom>` tailored to their environment, thereby optimizing their malware detection efforts. For example, we created custom rules to detect `Vidar infostealer malware using Wazuh <https://wazuh.com/blog/detecting-vidar-infostealer-with-wazuh/>`__.
+
+.. code-block:: xml
+
+   <group name="windows,sysmon,vidar_detection_rule,">
+   <!-- Vidar downloads malicious DLL files on victim endpoint -->
+     <rule id="100084" level="10">
+       <if_sid>61613</if_sid>
+       <field name="win.eventdata.image" type="pcre2">(?i)\\\\.+(exe|dll|bat|msi)</field>
+       <field name="win.eventdata.targetFilename" type="pcre2">(?i)\\\\ProgramData\\\\(freebl3|mozglue|msvcp140|nss3|softokn3|vcruntime140)\.dll</field>
+       <description>Possible Vidar malware detected. $(win.eventdata.targetFilename) was downloaded on $(win.system.computer)</description>
+       <mitre>
+         <id>T1056.001</id>
+       </mitre>
+     </rule>
+   <!-- Vidar loads malicious DLL files -->
+     <rule id="100085" level="12">
+       <if_sid>61609</if_sid>
+       <field name="win.eventdata.image" type="pcre2">(?i)\\\\.+(exe|dll|bat|msi)</field>
+       <field name="win.eventdata.imageLoaded" type="pcre2">(?i)\\\\programdata\\\\(freebl3|mozglue|msvcp140|nss3|softokn3|vcruntime140)\.dll</field>
+       <description>Possible Vidar malware detected. Malicious $(win.eventdata.imageLoaded) file loaded by $(win.eventdata.image)</description>
+       <mitre>
+         <id>T1574.002</id>
+       </mitre>
+     </rule>
+   <!-- Vidar deletes itself or a malicious process it creates -->
+     <rule id="100086" level="7" frequency="5" timeframe="360">
+       <if_sid>61603</if_sid>
+       <if_matched_sid>100085</if_matched_sid>
+       <field name="win.eventdata.image" type="pcre2">(?i)\\\\cmd.exe</field>
+       <match type="pcre2">cmd.exe\\" /c timeout /t \d{1,}.+del /f /q \\".+(exe|dll|bat|msi)</match>
+       <description>Possible Vidar malware detected. Malware deletes $(win.eventdata.parentCommandLine)</description>
+       <mitre>
+         <id>T1070.004</id>
+       </mitre>
+     </rule>
+   </group>
+
+The rules above detect specific behaviors of the Vidar infostealer malware and trigger alerts on the dashboard.
+
+.. thumbnail:: /images/getting-started/use-cases/it-hygiene/vidar-malware-alerts.png
+   :title: Vidar malware alerts
+   :alt: Vidar malware alerts
+   :align: center
+   :width: 80%
+
+Wazuh boosts its malware detection capabilities by :doc:`integrating with threat intelligence </user-manual/capabilities/malware-detection/virus-total-integration>` sources such as VirusTotal, MISP, and more. Wazuh also offers support for integrating third-party malware detection tools such as :doc:`ClamAV </user-manual/capabilities/malware-detection/clam-av-logs-collection>` and :doc:`Windows Defender </user-manual/capabilities/malware-detection/win-defender-logs-collection>`. By collecting and analyzing logs from third-party malware detection tools, Wazuh provides security analysts with a centralized monitoring platform. Wazuh increases the efficiency in detecting malware by combining diverse threat intelligence from third-party tools, thereby improving the organization's IT hygiene.
+
+The image below shows an alert of an event from VirusTotal processed by the Wazuh server.
+
+.. thumbnail:: /images/getting-started/use-cases/it-hygiene/virustotal-finding-alert.png
+   :title: VirusTotal finding alert
+   :alt: VirusTotal finding alert
+   :align: center
+   :width: 80%
+
+Wazuh uses :doc:`CDB lists </user-manual/ruleset/cdb-list>` (constant databases) containing indicators of compromise (IOCs) to detect malware. These lists contain known malware IOCs such as file hashes, IP addresses, and domain names. Wazuh proactively identifies malicious files by comparing the identified IOCs with the information stored in the CDB lists.
+
+.. thumbnail:: /images/getting-started/use-cases/it-hygiene/malware-detected-alert.png
+   :title: Malware detected alert
+   :alt: Malware detected alert
+   :align: center
+   :width: 80%
+
+Regulatory compliance
+---------------------
+
+Regulatory standards provide a global benchmark for best business practices to help improve customer trust and business reputation. Compliance with regulatory standards also helps organizations to enhance their IT hygiene.
+
+Wazuh streamlines the process of meeting :doc:`regulatory compliance </compliance/index>` obligations by offering a robust solution that addresses requirements of industry standards such as PCI DSS, HIPAA, GDPR, and others.
+
+.. thumbnail:: /images/getting-started/use-cases/it-hygiene/regulatory-compliance-module.png
+   :title: Regulatory compliance module
+   :alt: Regulatory compliance module
+   :align: center
+   :width: 80%
+
+Wazuh uses its capabilities such as the :doc:`SCA </user-manual/capabilities/sec-config-assessment/index>`, :doc:`Vulnerability Detector </user-manual/capabilities/vulnerability-detection/index>`, :doc:`FIM </user-manual/capabilities/file-integrity/index>`, and more to identify and report compliance violations. It also provides dedicated compliance dashboards to help monitor compliance status, identify improvement areas, and take appropriate remediation actions.
+
+For example, you can get a general overview of the PCI DSS requirement of a monitored endpoint on the Wazuh dashboard.
+
+.. thumbnail:: /images/getting-started/use-cases/it-hygiene/pci-dss-dashboard.png
+   :title: PCI DSS dashboard
+   :alt: PCI DSS dashboard
+   :align: center
+   :width: 80%
+
+You can drill down to the individual PCI DSS requirement from the **Controls** tab to discover where the policy violations occurred.
+
+.. thumbnail:: /images/getting-started/use-cases/it-hygiene/pci-dss-requirement-violations.png
+   :title: PCI DSS requirement violations
+   :alt: PCI DSS requirement violations
+   :align: center
+   :width: 80%
+
+The image below shows alerts generated for vulnerabilities that violate the *PCI DSS Requirement 11.2.1*.
+
+.. thumbnail:: /images/getting-started/use-cases/it-hygiene/pci-dss-requirement-violation-details.png
+   :title: PCI DSS requirement violation details
+   :alt: PCI DSS requirement violation details
+   :align: center
+   :width: 80%
+
+This feature is also available for other compliance standards such as GDPR, TSC, HIPAA, and  NIST-800-53.
