@@ -349,6 +349,13 @@ Wazuh Manager
           update_interval: '1h'
           name: '"debian"'
         - enabled: 'no'
+          os:
+            - 'amazon-linux'
+            - 'amazon-linux-2'
+            - 'amazon-linux-2023'
+          update_interval: '1h'
+          name: '"alas"'  
+        - enabled: 'no'
           update_interval: '1h'
           name: '"redhat"'
         - enabled: 'no'
