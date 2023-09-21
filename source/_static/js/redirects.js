@@ -75,6 +75,7 @@ redirections.push(
 /* Pages added in 4.6 */
 
 newUrls['4.6'] = [
+  '/release-notes/release-4-6-0.html',
   '/cloud-security/ms-graph/index.html',
   '/cloud-security/ms-graph/monitoring-ms-graph-activity.html',
   '/user-manual/reference/ossec-conf/ms-graph-module.html',
