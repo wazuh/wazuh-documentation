@@ -11,15 +11,15 @@ This section lists the changes in version 4.6.0. Every update of the Wazuh solut
 Highlights
 ----------
 
-- Included support for the Microsoft Graph Security API, enabling users to integrate and fetch security alerts from multiple Microsoft products, providing a cohesive security perspective.
+- Included support for the Microsoft Graph Security API. This addition enables users to integrate and fetch security alerts from multiple Microsoft products. It provides a cohesive security perspective.
 
-- Added the Webhook input API endpoint, paving the way to dynamic integrations and real-time responses, enhancing automation capabilities and responsiveness.
+- Added the Webhook input API endpoint. It paves the way to dynamic integrations and real-time responses. It enhances automation capabilities and responsiveness.
 
-- Introduced Office 365 Support for GCC/GCCH, extending monitoring coverage for organizations with a strong reliance on Office 365, particularly in GCC/GCCH environments, to ensure comprehensive compliance and security.
+- Incorporated Office 365 support for GCC/GCCH. This addition extends monitoring coverage for organizations with a strong reliance on Office 365, particularly in GCC/GCCH environments. It ensures comprehensive compliance and security.
 
-- Support for AlmaLinux OS, Debian 12 and Amazon Linux 2022 is now included in Vulnerability Detector. Expanding support to newer OS versions, especially popular ones, highlights the platform's adaptability to the evolving Linux ecosystem and commitment to ensuring user safety across diverse environments.
+- Support for AlmaLinux OS, Debian 12, and Amazon Linux 2022 is now included in Vulnerability Detector. Expanding support to newer OS versions demonstrates the platform adaptability to the evolving Linux ecosystem. It also highlights our commitment to user safety across diverse environments.
 
-- Included PCRE2 Support in Security Configuration Assessment (SCA). This addition of PCRE2 support provides users with a more powerful pattern-matching tool, thereby enhancing the software auditing and compliance capabilities
+- Included PCRE2 support in Security Configuration Assessment (SCA). This addition provides users with a more powerful pattern-matching tool. It enhances the software auditing and compliance capabilities
 
 
 What's new
@@ -196,9 +196,9 @@ RESTful API
 ==============================================================    =============
 Reference                                                         Description
 ==============================================================    =============
-`13421 <https://github.com/wazuh/wazuh/pull/13421>`_              Fixed an unexpected behavior when using the ``q`` and ``select`` parameters in some endpoints.
+`#13421 <https://github.com/wazuh/wazuh/pull/13421>`_              Fixed an unexpected behavior when using the ``q`` and ``select`` parameters in some endpoints.
 `#15203 <https://github.com/wazuh/wazuh/pull/15203>`_             Resolved an issue in the ``GET /manager/configuration`` API endpoint when retrieving the vulnerability detector configuration section.
-`#15152 <https://github.com/wazuh/wazuh/pull/15152>`_             Fixed ``GET /agents/upgrade_result`` endpoint internal error with code 1814 in large environments.
+`#15152 <https://github.com/wazuh/wazuh/pull/15152>`_             Fixed ``GET /agents/upgrade_result`` endpoint internal error with code ``1814`` in large environments.
 `#16756 <https://github.com/wazuh/wazuh/pull/16756>`_             Enhanced the ``alphanumeric_symbols`` regex to better accommodate specific SCA remediation fields.
 `#15967 <https://github.com/wazuh/wazuh/pull/15967>`_             Fixed bug that would not allow retrieving the Wazuh logs if only the JSON format was configured.
 `#16310 <https://github.com/wazuh/wazuh/pull/16310>`_             Fixed error in ``GET /rules`` when variables are used inside ``id`` or ``level`` ruleset fields.
