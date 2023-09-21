@@ -1,93 +1,36 @@
 .. Copyright (C) 2015, Wazuh, Inc.
 
 .. meta::
-  :description: Check out these use cases of Log Data Analysis, a Wazuh capability that allows you to review, interpret and understand logs.
+   :description: 
   
 Log data analysis
 =================
 
-In many cases, evidence of an attack can be found in the log messages of devices, systems, and applications. Wazuh assists users by automating log management and analysis to accelerate threat detection.
+Log data analysis is a crucial process that involves examining and extracting valuable insights from log files created by different systems, applications, or devices. These logs contain records of events that provide useful information for troubleshooting, security analysis and monitoring,  and optimizing performance. Log data analysis is an essential practice that contributes to a secure, efficient, and reliable IT ecosystem.
 
-The :doc:`Wazuh agent <../components/wazuh-agent>`, running on the monitored endpoint, is in charge of reading operating system and application log messages, forwarding those to the :doc:`Wazuh server <../components/wazuh-server>`, where the analysis takes place. The server can also receive data via Syslog from network devices or applications when no agent is deployed.
+Wazuh collects, analyzes, and stores logs from endpoints, network devices, and applications. The Wazuh agent, running on a monitored endpoint collects and forwards system and application logs to the Wazuh server for analysis. Additionally, you can send log messages to the Wazuh server via syslog or third-party API integrations.
 
-Wazuh uses decoders to identify the source application of the log message. Then, it analyzes the data using application-specific rules. This is an example of a rule used to detect SSH authentication failure events:
+Log data collection
+-------------------
 
-.. code-block:: xml
-   :emphasize-lines: 3
+Wazuh collects logs from a wide range of sources, enabling comprehensive monitoring of various aspects of your IT environment. You can check our documentation on :doc:`Log data collection </user-manual/capabilities/log-data-collection/index>` to understand better how Wazuh collects and analyzes logs from monitored endpoints. Some of the common log sources supported by Wazuh include:
 
-   <rule id="5716" level="5">
-     <if_sid>5700</if_sid>
-     <match>^Failed|^error: PAM: Authentication</match>                            
-     <description>SSHD authentication failed.</description>
-     <mitre>
-       <id>T1110</id>
-     </mitre>
-     <group>pci_dss_10.2.4,pci_dss_10.2.5,</group>
-   </rule>
+-  **Operating system logs**: Wazuh collects logs from several operating systems, including :ref:`Linux <how-to-collect-linuxlogs>`, :ref:`Windows <how-to-collect-windowslogs>`, and :ref:`macOS <how-to-collect-macoslogs>`. Wazuh can collect syslog, auditd, application logs, and others from Linux endpoints. Wazuh collects logs on Windows endpoints using the Windows event channel and Windows event log format. By default, the Wazuh agent monitors the System, Application, and Security Windows event channels on Windows endpoints. The Wazuh agent offers the flexibility to configure and monitor other :ref:`Windows event channels <windows_event_channel_log_collection>`. Wazuh utilizes the unified logging system (ULS) to collect logs on macOS endpoints. The macOS ULS centralizes the management and storage of logs across all the system levels.
 
-Rules include a ``match`` field used to define the pattern that the rule looks for. They also have a ``level`` field that specifies the priority of the resulting alerts. Besides, rules enrich events with technique identifiers from the MITRE ATT&CK framework and mappings to regulatory compliance controls.
+   The image below shows an event collected from the ``Microsoft-Windows-Sysmon/Operational`` event channel on a Windows endpoint.
 
-The manager generates an alert every time an event, collected by one of the agents or received via Syslog, matches a rule with a priority level higher than a predefined threshold (``3`` by default).
+   .. thumbnail:: /images/getting-started/use-cases/log-data-analysis/sysmon-operational-event-channel-alert.png
+      :title: Sysmon operational Event channel alert
+      :alt: Sysmon operational Event channel alert
+      :align: center
+      :width: 80%
 
-See below an example alert found in ``/var/ossec/logs/alerts/alerts.json``. Some fields have been removed for reasons of brevity:
+-  **Syslog events**: Wazuh gathers logs from :doc:`syslog-enabled </user-manual/capabilities/log-data-collection/how-it-works>` devices, encompassing a wide array of sources including Linux/Unix systems and network devices that do not support agent installation. The image below shows an alert triggered when a new user is created on the Linux endpoint and the log is forwarded to the Wazuh server via rsyslog.
 
-.. code-block:: json
-   :emphasize-lines: 16,24
-   :class: output
+   .. thumbnail:: /images/getting-started/use-cases/log-data-analysis/new-user-added-alert.png
+      :title: New user added to the system alert
+      :alt: New user added to the system alert
+      :align: center
+      :width: 80%
 
-   {
-     "agent": {
-         "id": "005",
-         "ip": "10.0.1.175",
-         "name": "Centos"
-     },
-     "predecoder": {
-         "hostname": "ip-10-0-1-175",
-         "program_name": "sshd",
-         "timestamp": "Jul 12 15:32:41"
-     },
-     "decoder": {
-         "name": "sshd",
-         "parent": "sshd"
-     },
-     "full_log": "Jul 12 15:32:41 ip-10-0-1-175 sshd[21746]: Failed password for root from 61.177.172.13 port 61658 ssh2",
-     "location": "/var/log/secure",
-     "data": {
-         "dstuser": "root",
-         "srcip": "61.177.172.13",
-         "srcport": "61658"
-     },
-     "rule": {
-         "description": "sshd: authentication failed.",
-         "id": "5716",
-         "level": 5,
-         "mitre": {
-             "id": [
-                 "T1110"
-             ],
-             "tactic": [
-                 "Credential Access"
-             ],
-             "technique": [
-                 "Brute Force"
-             ]
-         },
-     },
-     "timestamp": "2020-07-12T15:32:41.756+0000"
-   }
-
-Once generated by the :doc:`Wazuh server <../components/wazuh-server>`, the alerts are sent to the :doc:`Wazuh indexer <../components/wazuh-indexer>` component where they are enriched with geolocation information, stored and indexed. The Wazuh dashboard can then be used to search, analyze, and visualize the data. Below is an example screenshot of the interface:
-
-.. thumbnail:: /images/getting-started/use-cases/log-data-analysis.png
-   :title: Log data analysis
-   :alt: Log data analysis
-   :align: center
-   :width: 80%
-
-.. thumbnail:: /images/getting-started/use-cases/security-events.png
-   :title: Security events
-   :alt: Security events
-   :align: center
-   :width: 80%
-
-Wazuh provides a default ruleset, updated periodically, with over 3,000 rules for different systems and applications. In addition, Wazuh allows the creation of custom rules. Find more information in the :doc:`user manual </user-manual/capabilities/log-data-collection/index>`.
+-  
