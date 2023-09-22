@@ -3,8 +3,6 @@
 .. meta::
   :description: Learn how to configure an Amazon S3 bucket, an object storage service that delivers scalability, data availability, security, and performance.
   
-.. _s3_bucket:
-
 Configuring an S3 Bucket
 ========================
 
