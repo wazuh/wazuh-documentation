@@ -11,6 +11,7 @@ All notable changes to this project will be documented in this file.
 - Added the New Custom Logs Buckets documentation. ([#6254](https://github.com/wazuh/wazuh-documentation/pull/6254))
 - Added new setting to client buffer: `eps_timeframe`. ([#5975](https://github.com/wazuh/wazuh-documentation/pull/5975))
 - Added the `options` section for integrations. ([#5962](https://github.com/wazuh/wazuh-documentation/pull/5962))
+
 ### Changed
 
 - Updated the Maltiverse rule id. ([#6420](https://github.com/wazuh/wazuh-documentation/pull/6420))
