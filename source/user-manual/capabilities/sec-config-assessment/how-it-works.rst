@@ -16,6 +16,8 @@ Integrity and alerting flow are depicted in the sequence diagram below.
      :align: center
      :width: 80%
 
+.. _sca_check_overview:
+
 Overview of an SCA check
 ------------------------
 
