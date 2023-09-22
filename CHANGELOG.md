@@ -18,7 +18,7 @@ All notable changes to this project will be documented in this file.
 - Added the Email app version for the Shuffle integration. ([#6502](https://github.com/wazuh/wazuh-documentation/pull/6502))
 - Added differentiation between commands from different Python versions. ([#6514](https://github.com/wazuh/wazuh-documentation/pull/6514))
 - Added `path` parameter usage example to Azure Storage documentation. ([#6524](https://github.com/wazuh/wazuh-documentation/pull/6524))
-- Added the Wazuh v4.6.0 release notes ([#6034](https://github.com/wazuh/wazuh-documentation/pull/6034))
+- Added the Wazuh v4.6.0 release notes. ([#6034](https://github.com/wazuh/wazuh-documentation/pull/6034))
 
 ### Changed
 
