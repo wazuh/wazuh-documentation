@@ -1,6 +1,17 @@
 # Change Log
 All notable changes to this project will be documented in this file.
 
+## [v4.8.0]
+
+### Added
+
+- Added instructions to build the Wazuh indexer and Wazuh dashboard packages. ([#6444](https://github.com/wazuh/wazuh-documentation/pull/6444))
+- Added the `timeout` and `retries` settings to the `integratord` configuration. ([#6442](https://github.com/wazuh/wazuh-documentation/pull/6442))
+
+### Changed
+
+- Updated the `logcollector.ip_update_interval` setting in the Internal options documentation. ([#6373](https://github.com/wazuh/wazuh-documentation/pull/6373))
+
 ## [v4.7.1]
 
 ### Added
