@@ -129,6 +129,7 @@ The maximum length of an alert snippet that will be sent to the Integrator.  Lon
 
 .. note:: This option only applies if ``alert_format`` is not set to ``json``.
 
+
 .. _integration_options_tag:
 
 options
@@ -141,6 +142,8 @@ This overwrites the previous fields or adds customization fields according to th
 +--------------------+-----------------------------------------------------------+
 | **Allowed values** | json                                                      |
 +--------------------+-----------------------------------------------------------+
+
+.. _integration_configuration_example:
 
 Configuration example
 ---------------------
