@@ -1,7 +1,7 @@
 .. Copyright (C) 2015, Wazuh, Inc.
 
-.. _azure_monitoring_dependencies:
-
+.. meta::
+   :description: Learn about the required dependencies for using the AZURE integration in a Wazuh agent.
 
 Installing dependencies
 =======================
