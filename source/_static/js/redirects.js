@@ -4,6 +4,7 @@ const redirections = [];
 
 /* Note: new release versions must always be inserted in the first position of the array "versions" */
 const versions = [
+  '4.8',
   '4.7',
   '4.6',
   '4.5',
@@ -60,6 +61,13 @@ removedUrls['x.y'] = [
   '/old-url',
 ];
 */
+
+/* *** RELEASE 4.8 ****/
+
+newUrls['4.8'] = [
+  '/development/packaging/generate-indexer-package.html',
+  '/development/packaging/generate-dashboard-package.html',
+];
 
 /* *** RELEASE 4.6 ****/
 

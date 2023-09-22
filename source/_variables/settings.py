@@ -15,7 +15,7 @@
 #
 
 # The short X.Y version
-version = '4.7'
+version = '4.8'
 is_latest_release = True
 
 # The full version, including alpha/beta/rc tags
