@@ -30,6 +30,7 @@ Options
 - `queue_size`_
 - `rids_closing_time`_
 - `connection_overtake_time`_
+- `agents`_
 
 connection
 ^^^^^^^^^^^
@@ -164,6 +165,25 @@ Sets the time to wait before considering a connection with a TCP client down whe
 
    ``connection_overtake_time`` doesn't apply to connections with UDP clients.
 
+agents
+^^^^^^
+
+**allow_higher_versions**
+
+.. versionadded:: 4.6.0
+  
+Accept agents with a later version than the current manager.
+
++--------------------+------------------+
+| **Default value**  | yes              |
++--------------------+------------------+
+| **Allowed values** | yes, no          |
++--------------------+------------------+
+
+.. note::
+
+   This option only works when **connection** is set to ``secure``.
+
 Example of configuration
 ------------------------
 
@@ -184,4 +204,7 @@ Example of configuration
       <queue_size>16384</queue_size>
       <rids_closing_time>5m</rids_closing_time>
       <connection_overtake_time>600</connection_overtake_time>
+      <agents>
+        <allow_higher_versions>yes</allow_higher_versions>
+      </agents>  
     </remote>

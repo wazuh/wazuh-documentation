@@ -29,6 +29,8 @@ Tools
 +---------------------------------------------------+----------------------------------------------------------------------------+-----------------------------+
 | :doc:`wazuh-regex <wazuh-regex>`                  | Validates a regex expression                                               | manager                     |
 +---------------------------------------------------+----------------------------------------------------------------------------+-----------------------------+
+| :doc:`rbac_control <rbac-control>`                | Manage API RBAC resources and reset RBAC DB                                | manager                     |
++---------------------------------------------------+----------------------------------------------------------------------------+-----------------------------+
 | :doc:`update_ruleset <update-ruleset>`            | Update Decoders, Rules and Rootchecks                                      | manager                     |
 |                                                   |                                                                            |                             |
 |                                                   | .. deprecated:: 4.2                                                        |                             |
@@ -57,6 +59,7 @@ Tools
     wazuh-logtest
     clear-stats
     wazuh-regex
+    rbac-control
     update-ruleset
     verify-agent-conf
     agent-groups

@@ -42,7 +42,7 @@ Optional filters
 The `Integrator` daemon uses the `optional filters` fields to determine which alerts should be sent to the external platforms. Only the alerts that meet the filter conditions are sent. If no filters are specified, all alerts are sent.
 
 The following considerations must be taken into account when the filters are set:
-   
+
    - It is possible to specify multiple group names using the ``<group>`` field with a comma-separated list. If the alert's group matches any of the groups in the list, the alert is sent. Otherwise, it is ignored.
    - It is possible to specify multiple rule IDs using the ``<rule_id>`` field with a comma-separated list. If the alert's rule ID matches any of the IDs in the list, the alert is sent. Otherwise, it is ignored.
    - It is possible to specify the previously described fields together. If both the alert's rule ID and group match any of the IDs and groups in the lists, the alert is sent. Otherwise, it is ignored.
@@ -147,7 +147,7 @@ Shuffle
 
 To set up this integration, do the following.
 
-#. Go to Shuffle and make a Workflow.
+#. Go to Shuffle and make a Workflow using the Email app. Select version ``1.0.1`` for it.
 
 #. Set **Recipients** and **Subject** in the email configuration. Put ``$exec`` in the **Body** to include the alert information.
 

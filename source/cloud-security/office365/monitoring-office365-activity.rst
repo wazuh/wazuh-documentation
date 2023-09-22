@@ -119,6 +119,7 @@ Configure the ``office365`` module either in the Wazuh manager or the Wazuh agen
             <tenant_id>your_tenant_id</tenant_id>
             <client_id>your_client_id</client_id>
             <client_secret>your_client_secret</client_secret>
+            <api_type>commercial</api_type>
         </api_auth>
         <subscriptions>
             <subscription>Audit.SharePoint</subscription>

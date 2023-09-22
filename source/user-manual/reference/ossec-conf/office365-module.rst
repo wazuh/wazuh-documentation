@@ -34,6 +34,7 @@ Options
 - `api_auth\\client_id`_
 - `api_auth\\client_secret_path`_
 - `api_auth\\client_secret`_
+- `api_auth\\api_type`_
 - `subscriptions`_
 - `subscriptions\\subscription`_
 
@@ -57,6 +58,8 @@ Options
 | `api_auth\\client_secret_path`_        | Any string                      |
 +----------------------------------------+---------------------------------+
 | `api_auth\\client_secret`_             | Any string                      |
++----------------------------------------+---------------------------------+
+| `api_auth\\api_type`_                  | commercial, gcc, gcc-high       |
 +----------------------------------------+---------------------------------+
 | `subscriptions`_                       | N/A                             |
 +----------------------------------------+---------------------------------+
@@ -122,6 +125,7 @@ This block configures the credential for the **authentication** with the Office3
 - `api_auth\\client_id`_
 - `api_auth\\client_secret_path`_
 - `api_auth\\client_secret`_
+- `api_auth\\api_type`_
 
 .. warning::
 
@@ -137,6 +141,8 @@ This block configures the credential for the **authentication** with the Office3
 | `api_auth\\client_secret_path`_        | Any string                                   |
 +----------------------------------------+----------------------------------------------+
 | `api_auth\\client_secret`_             | Any string                                   |
++----------------------------------------+----------------------------------------------+
+| `api_auth\\api_type`_                  | commercial, gcc, gcc-high                    |
 +----------------------------------------+----------------------------------------------+
 
 api_auth\\tenant_id
@@ -182,6 +188,17 @@ Client secret value of your application registered in Azure.
 +--------------------+--------------------+
 | **Allowed values** | Any string         |
 +--------------------+--------------------+
+
+api_auth\\api_type
+^^^^^^^^^^^^^^^^^^^^^^^
+
+Type of Microsoft 365 subscription plan used by the tenant.
+
++--------------------+---------------------------+
+| **Default value**  | commercial                |
++--------------------+---------------------------+
+| **Allowed values** | commercial, gcc, gcc-high |
++--------------------+---------------------------+
 
 .. note::
 
@@ -231,6 +248,7 @@ Example of configuration
             <tenant_id>your_tenant_id</tenant_id>
             <client_id>your_client_id</client_id>
             <client_secret>your_client_secret</client_secret>
+            <api_type>commercial</api_type>
         </api_auth>
         <subscriptions>
             <subscription>Audit.AzureActiveDirectory</subscription>
@@ -252,11 +270,13 @@ Example of multiple tenants
             <tenant_id>your_tenant_id</tenant_id>
             <client_id>your_client_id</client_id>
             <client_secret>your_client_secret</client_secret>
+            <api_type>commercial</api_type>
         </api_auth>
         <api_auth>
             <tenant_id>your_tenant_id_2</tenant_id>
             <client_id>your_client_id_2</client_id>
             <client_secret>your_client_secret_2</client_secret>
+            <api_type>commercial</api_type>
         </api_auth>
         <subscriptions>
             <subscription>Audit.AzureActiveDirectory</subscription>

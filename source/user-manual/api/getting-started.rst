@@ -1,8 +1,8 @@
 .. Copyright (C) 2015, Wazuh, Inc.
 
 .. meta::
-  :description: This guide provides the basic information needed to get started with the Wazuh API, including some practical use cases. 
-  
+  :description: This guide provides the basic information needed to get started with the Wazuh API, including some practical use cases.
+
 .. _api_getting-started:
 
 Getting started
@@ -342,10 +342,10 @@ Here are some of the basic concepts related to making API requests and understan
                 "error": {
                   "code": 1707,
                   "message": "Cannot send request, agent is not active",
-                  "remediation": "Please, check non-active agents connection and try again. Visit 
-                  https://documentation.wazuh.com/current/user-manual/registering/index.html and 
-                  https://documentation.wazuh.com/current/user-manual/agents/agent-connection.html 
-                  to obtain more information on registering and connecting agents" 
+                  "remediation": "Please, check non-active agents connection and try again. Visit
+                  https://documentation.wazuh.com/current/user-manual/registering/index.html and
+                  https://documentation.wazuh.com/current/user-manual/agents/agent-connection.html
+                  to obtain more information on registering and connecting agents"
                 },
                 "id": [
                   "001",
@@ -898,6 +898,34 @@ Adding an agent is now easier than ever. Simply send a request with the agent na
       "error": 0
     }
 
+Ingest security events
+^^^^^^^^^^^^^^^^^^^^^^
+
+.. versionadded:: 4.6.0
+
+You can send security events for analysis using the Wazuh API.
+
+There's a limit of ``30`` requests per minute and 100 events per request. This limit prevents endpoints to ingest large amounts of data too fast. Check :ref:`max_request_per_minute <api_configuration_access>` to lower this limit even further or disable the feature.
+
+.. code-block:: console
+
+    # curl -k -X POST "https://localhost:55000/events" -H  "Authorization: Bearer $TOKEN" -H  "Content-Type: application/json" -d '{"events": ["Event value 1", "{\"someKey\": \"Event value 2\"}"]}'
+
+.. code-block:: json
+    :class: output
+
+    {
+      "data": {
+        "affected_items": [
+
+        ],
+        "total_affected_items": 2,
+        "total_failed_items": 0,
+        "failed_items": []
+      },
+      "message": "All events were forwarded to analisysd",
+      "error": 0
+    }
 
 Conclusion
 ^^^^^^^^^^
