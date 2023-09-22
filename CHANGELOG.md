@@ -1,6 +1,28 @@
 # Change Log
 All notable changes to this project will be documented in this file.
 
+## [v4.7.1]
+
+### Added
+
+- Support for Wazuh 4.7.1.
+
+## [v4.7.0]
+
+### Added
+
+- Added support for Amazon Linux 2023 in Vulnerability Detector. ([#6446](https://github.com/wazuh/wazuh-documentation/pull/6446))
+- Clarified that Syscollector is now capable of fetching the PYPI and node packages. [#3464](https://github.com/wazuh/wazuh-documentation/pull/6346)
+- Added the Maltiverse integration section. ([#6257](https://github.com/wazuh/wazuh-documentation/pull/6257))
+- Added the New Custom Logs Buckets documentation. ([#6254](https://github.com/wazuh/wazuh-documentation/pull/6254))
+- Added new setting to client buffer: `eps_timeframe`. ([#5975](https://github.com/wazuh/wazuh-documentation/pull/5975))
+- Added the `options` section for integrations. ([#5962](https://github.com/wazuh/wazuh-documentation/pull/5962))
+
+### Changed
+
+- Updated the Maltiverse rule id. ([#6420](https://github.com/wazuh/wazuh-documentation/pull/6420))
+- Updated `PIP` and `process`` information in ports inventory. ([#6308](https://github.com/wazuh/wazuh-documentation/pull/6308))
+
 ## [v4.6.0]
 
 ### Added
@@ -14,13 +36,43 @@ All notable changes to this project will be documented in this file.
 - Added the FIM wildcard Windows registers documentation. ([#5932](https://github.com/wazuh/wazuh-documentation/pull/5932)) 
 - Support AlmaLinux in Vulnerability Detector. ([#5904](https://github.com/wazuh/wazuh-documentation/pull/5904))
 - wazuh-authd can now generate X509 certificates. ([#5461](https://github.com/wazuh/wazuh-documentation/pull/5461))
-- Removed Kibana and Splunk from documentation ([#6401](https://github.com/wazuh/wazuh-documentation/pull/6401))
-- Updated Securityadmin script output examples in SSO docs ([#6436](https://github.com/wazuh/wazuh-documentation/pull/6436))
-- Updated output examples for indexer 4.6.0 ([#6437](https://github.com/wazuh/wazuh-documentation/pull/6437))
+- Added a note in the Microsoft Graph documentation stating that multi-tenant is not supported. ([#6505](https://github.com/wazuh/wazuh-documentation/pull/6505))
+- Added the Email app version for the Shuffle integration. ([#6502](https://github.com/wazuh/wazuh-documentation/pull/6502))
+- Added differentiation between commands from different Python versions. ([#6514](https://github.com/wazuh/wazuh-documentation/pull/6514))
+- Added `path` parameter usage example to Azure Storage documentation. ([#6524](https://github.com/wazuh/wazuh-documentation/pull/6524))
+- Added the Wazuh v4.6.0 release notes. ([#6034](https://github.com/wazuh/wazuh-documentation/pull/6034))
+
+### Changed
+
+- Updated `securityadmin.sh` script output examples in SSO docs. ([#6436](https://github.com/wazuh/wazuh-documentation/pull/6436))
+- Updated output examples for indexer 4.6.0. ([#6437](https://github.com/wazuh/wazuh-documentation/pull/6437))
+- Updated the **Deploy new agent** section from UI screenshots. ([#6841](https://github.com/wazuh/wazuh-documentation/pull/6481))
+- Changed the Python 3.11 `pyarrow` dependency version. ([#6513](https://github.com/wazuh/wazuh-documentation/pull/6513))
+
+### Fixed
+
+- Fixed the GCP configuration examples. ([#6509](https://github.com/wazuh/wazuh-documentation/pull/6509))
+- Added several fixes to the Integration guide. ([#6526](https://github.com/wazuh/wazuh-documentation/pull/6526))
+
+### Removed
+
+- Removed references to the Wazuh Kibana plugin and the Wazuh Splunk app. ([#6401](https://github.com/wazuh/wazuh-documentation/pull/6401))
 
 ## [v4.5.3]
+### Added
 
-- Support for Wazuh 4.5.3.
+- Added support for Kibana 7.17.13. ([#6531](https://github.com/wazuh/wazuh-documentation/pull/6531))
+- Add a nested query example for the filtering data using queries API page. ([6362](https://github.com/wazuh/wazuh-documentation/pull/6362))
+
+### Changed
+
+- Updated the SUSE OVAL URL for offline update. ([6435](https://github.com/wazuh/wazuh-documentation/pull/6435))
+- Update ``agent_upgrade`` command force flag message in the agent upgrade module documentation. ([6345](https://github.com/wazuh/wazuh-documentation/pull/6345))
+### Fixed
+
+- Fixed configuration inconsistency in Wazuh Puppet agent installation ([6506](https://github.com/wazuh/wazuh-documentation/pull/6506))
+- Fixed an error on the API reference pages that was preventing the page from loading the header and the version selector. ([6496](https://github.com/wazuh/wazuh-documentation/pull/6496))
+- Fixed an error in the first link in the "On this page" lateral menu. ([6464](https://github.com/wazuh/wazuh-documentation/pull/6464))
 
 ## [v4.5.2]
 

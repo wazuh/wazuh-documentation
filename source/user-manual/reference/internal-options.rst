@@ -729,11 +729,11 @@ Remoted
 +                                   +---------------+--------------------------------------------------------------+
 |                                   | Allowed Value | Any integer between 1 and 64.                                |
 +-----------------------------------+---------------+--------------------------------------------------------------+
-|   **remoted.request_pool**        | Description   | Number of parallel threads to dispatch requests.             |
+|   **remoted.request_pool**        | Description   | Limit of parallel threads to dispatch requests.              |
 +                                   +---------------+--------------------------------------------------------------+
-|                                   | Default Value | 8                                                            |
+|                                   | Default Value | 1024                                                         |
 +                                   +---------------+--------------------------------------------------------------+
-|                                   | Allowed Value | Any integer between 1 and 64.                                |
+|                                   | Allowed Value | Any integer between 1 and 4096.                              |
 +-----------------------------------+---------------+--------------------------------------------------------------+
 |   **remoted.request_timeout**     | Description   | Time (in seconds) the remote request listener rejects a      |
 |                                   |               | new request.                                                 |

@@ -86,12 +86,14 @@ It is possible to add more than one ``request`` block at the same time in the sa
                 <blobs>.json</blobs>
                 <content_type>json_inline</content_type>
                 <time_offset>24h</time_offset>
+                <path>info-logs</path>
             </container>
 
             <container name="insights-operational-logs">
                 <blobs>.txt</blobs>
                 <content_type>json_inline</content_type>
                 <time_offset>24h</time_offset>
+                <path>info-logs</path>
             </container>
 
         </storage>

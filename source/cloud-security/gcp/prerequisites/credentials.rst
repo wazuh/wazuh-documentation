@@ -63,26 +63,27 @@ As explained before, the GCP integration requires a credentials file in JSON for
 Regardless of the service, the authentication file is always specified in the ``ossec.conf`` configuration file using the ``<credentials_file>`` tag. Take a look at the following example:
 
 .. code-block:: xml
-   :emphasize-lines: 7, 16
+   :emphasize-lines: 6, 14
 
     <gcp-pubsub>
         <pull_on_start>yes</pull_on_start>
         <interval>1m</interval>
         <project_id>wazuh-dev-123456</project_id>
         <subscription_name>wazuh-subscription</subscription_name>
-
         <credentials_file>/var/ossec/wodles/gcloud/credentials.json</credentials_file>
     </gcp-pubsub>
 
     <gcp-bucket>
         <run_on_start>yes</run_on_start>
         <interval>1m</interval>
-        <project_id>wazuh-dev-123456</project_id>
-        <subscription_name>wazuh-subscription</subscription_name>
-
-        <credentials_file>/var/ossec/wodles/gcloud/credentials.json</credentials_file>
+        <bucket type="access_logs">
+            <name>wazuh-test-bucket</name>
+            <credentials_file>/var/ossec/wodles/gcloud/credentials.json</credentials_file>
+            <only_logs_after>2021-JUN-01</only_logs_after>
+            <path>access_logs/</path>
+            <remove_from_bucket>no</remove_from_bucket>
+        </bucket>
     </gcp-bucket>
-
 
 
 Check the :doc:`gcp-pubsub </user-manual/reference/ossec-conf/gcp-pubsub>` and :doc:`gcp-bucket </user-manual/reference/ossec-conf/gcp-bucket>` sections from the ossec.conf reference page for more information about the ``<credentials_file>`` and other available parameters.
