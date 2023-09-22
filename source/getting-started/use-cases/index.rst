@@ -20,25 +20,28 @@ Below you can find examples of some of the most common use cases of the Wazuh pl
 
    * - :doc:`log-analysis` 
      - :doc:`file-integrity`
-   * - :doc:`rootkits-detection`
-     - :doc:`active-response`
+   * - :doc:`malware-detection`
+     - :doc:`incident-response`
    * - :doc:`configuration-assessment`
      - :doc:`system-inventory`
    * - :doc:`vulnerability-detection`
      - :doc:`cloud-security`
    * - :doc:`container-security`
      - :doc:`regulatory-compliance`
+   * - :doc:`threat-hunting`
+     -
 
 .. toctree::
    :hidden:
 
    log-analysis
    file-integrity
-   rootkits-detection
-   active-response
+   malware-detection
+   incident-response
    configuration-assessment
    system-inventory
    vulnerability-detection
    cloud-security
    container-security
    regulatory-compliance
+   threat-hunting

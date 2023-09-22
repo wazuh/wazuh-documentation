@@ -19,8 +19,20 @@ All notable changes to this project will be documented in this file.
 - Updated output examples for indexer 4.6.0 ([#6437](https://github.com/wazuh/wazuh-documentation/pull/6437))
 
 ## [v4.5.3]
+### Added
 
-- Support for Wazuh 4.5.3.
+- Added support for Kibana 7.17.13. ([#6531](https://github.com/wazuh/wazuh-documentation/pull/6531))
+- Add a nested query example for the filtering data using queries API page. ([6362](https://github.com/wazuh/wazuh-documentation/pull/6362))
+
+### Changed
+
+- Updated the SUSE OVAL URL for offline update. ([6435](https://github.com/wazuh/wazuh-documentation/pull/6435))
+- Update ``agent_upgrade`` command force flag message in the agent upgrade module documentation. ([6345](https://github.com/wazuh/wazuh-documentation/pull/6345))
+### Fixed
+
+- Fixed configuration inconsistency in Wazuh Puppet agent installation ([6506](https://github.com/wazuh/wazuh-documentation/pull/6506))
+- Fixed an error on the API reference pages that was preventing the page from loading the header and the version selector. ([6496](https://github.com/wazuh/wazuh-documentation/pull/6496))
+- Fixed an error in the first link in the "On this page" lateral menu. ([6464](https://github.com/wazuh/wazuh-documentation/pull/6464))
 
 ## [v4.5.2]
 

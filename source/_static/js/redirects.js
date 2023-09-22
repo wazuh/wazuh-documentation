@@ -155,6 +155,16 @@ redirections.push(
     '4.4': '/user-manual/capabilities/log-data-collection/log-data-configuration.html',
     '4.5': '/user-manual/capabilities/log-data-collection/monitoring-log-files.html',
   },
+  {
+    'target': ['4.4=>4.5', '4.5=>4.4'],
+    '4.4': '/getting-started/use-cases/active-response.html',
+    '4.5': '/getting-started/use-cases/incident-response.html',
+  },
+  {
+    'target': ['4.4=>4.5', '4.5=>4.4'],
+    '4.4': '/getting-started/use-cases/rootkits-detection.html',
+    '4.5': '/getting-started/use-cases/malware-detection.html',
+  },
 );
 
 /* Pages added in 4.5 */
@@ -163,6 +173,7 @@ newUrls['4.5'] = [
   '/release-notes/release-4-5-0.html',
   '/release-notes/release-4-5-1.html',
   '/release-notes/release-4-5-2.html',
+  '/release-notes/release-4-5-3.html',
   '/integrations-guide/index.html',
   '/integrations-guide/elastic-stack/index.html',
   '/integrations-guide/opensearch/index.html',
@@ -173,6 +184,9 @@ newUrls['4.5'] = [
   '/user-manual/capabilities/log-data-collection/multiple-socket-outputs.html',
   '/user-manual/capabilities/log-data-collection/syslog.html',
   '/user-manual/capabilities/log-data-collection/use-cases.html',
+  '/getting-started/use-cases/incident-response.html',
+  '/getting-started/use-cases/threat-hunting.html',
+  '/getting-started/use-cases/malware-detection.html',
 ];
 
 /* Pages no longer available in 4.5 */
@@ -182,6 +196,8 @@ removedUrls['4.5'] = [
   '/user-manual/capabilities/log-data-collection/how-to-collect-wlogs.html',
   '/user-manual/capabilities/log-data-collection/log-data-faq.html',
   '/user-manual/capabilities/log-data-collection/log-data-configuration.html',
+  '/getting-started/use-cases/active-response.html',
+  '/getting-started/use-cases/rootkits-detection.html',
 ];
 
 /* *** RELEASE 4.4 ****/
