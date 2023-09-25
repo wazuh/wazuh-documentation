@@ -48,7 +48,7 @@ The blog post on `Auditing Kubernetes with Wazuh <https://wazuh.com/blog/auditin
 Monitoring containerized application logs
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-Wazuh allows organizations to monitor containerized applications. It provides visibility into the applications that are resident in the container. When the application events are forwarded to the Wazuh manager, Security engineers can create `custom rules <https://wazuh.com/blog/creating-decoders-and-rules-from-scratch/>`__ that align with the unique requirements of their organization. This facilitates a highly personalized approach that improves overall visibility into the containers and the applications they host.
+Wazuh allows organizations to monitor containerized applications. It provides visibility into the applications that are resident in the container. When the application events are forwarded to the Wazuh manager, Security engineers can create :doc:`custom rules </user-manual/ruleset/custom>` that align with the unique requirements of their organization. This facilitates a highly personalized approach that improves overall visibility into the containers and the applications they host.
 
 The :ref:`Monitoring container runtime <monitoring_container_runtime>` documentation has more information about monitoring containerized application logs.
 
@@ -91,7 +91,7 @@ The image below displays the customized container dashboard of Wazuh, where even
 Container alert notification with Wazuh
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-Wazuh integrates with messaging platforms like :doc:`email </user-manual/manager/manual-email-report/index>` and :ref:`Slack <slack_manual_integration>`. It also integrates with case management solutions `Jira <https://wazuh.com/blog/how-to-integrate-external-software-using-integrator/>`__ for incident response and real-time alerting. This ensures that security teams are promptly notified whenever potential threats or unauthorized actions occur in containerized environments.
+Wazuh integrates with messaging platforms like :doc:`email </user-manual/manager/manual-email-report/index>` and :ref:`Slack <slack_manual_integration>`. It also integrates with case management solutions, like `Jira <https://wazuh.com/blog/how-to-integrate-external-software-using-integrator/>`__ , for incident response and real-time alerting. This ensures that security teams are promptly notified whenever potential threats or unauthorized actions occur in containerized environments.
 
 The documentation on :doc:`/user-manual/manager/manual-integration` explains how the Integrator daemon allows Wazuh to connect to external APIs and case management systems tools like :ref:`PagerDuty <pagerduty_manual_integration>`.
 
