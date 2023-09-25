@@ -95,14 +95,14 @@ Edit the ``/etc/puppetlabs/puppet/puppet.conf`` file, adding this line to the ``
 
   ::
 
-    dns_alt_names = puppet,puppet-master
+    dns_alt_names = puppet,puppet-master.com
 
 Also add the [server] section with the following content in the ``/etc/puppetlabs/puppet/puppet.conf`` file replacing ``puppet-master`` with your own FQDN:
 
   ::
 
     [main]
-    server = puppet-master
+    server = puppet-master.com
 
 
 .. note:: If you find ``templatedir=$confdir/templates`` in the config file, delete that line.  It has been deprecated.
