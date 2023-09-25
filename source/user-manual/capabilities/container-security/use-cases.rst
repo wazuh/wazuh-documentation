@@ -15,6 +15,8 @@ Requirements
 -  :doc:`Install Wazuh agent </installation-guide/wazuh-agent/index>` on the Docker server, and enroll it to a Wazuh server.
 -  :ref:`Enable the Wazuh Docker listener <enable-wazuh-docker-listener>` on the Docker server.
 
+.. _monitoring_user_interaction_with_docker_resources:
+
 Monitoring user interaction with Docker resources
 -------------------------------------------------
 
@@ -123,6 +125,8 @@ Below, we show the full data of an alert triggered when a Docker container is st
      "timestamp": "2023-05-09T14:41:31.033+0300",
      "_id": "ApVRAIgBKQU4L4_oLMjj"
    }
+
+.. _monitoring_container_runtime:
 
 Monitoring container runtime
 ----------------------------
