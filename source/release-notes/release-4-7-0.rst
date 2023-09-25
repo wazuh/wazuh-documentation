@@ -15,7 +15,7 @@ This version includes new features or improvements, such as the following:
 
 Manager
 ^^^^^^^
-- `#18026 <https://github.com/wazuh/wazuh/pull/18026>`__ Introduced native Maltiverse integration.
+- `#18026 <https://github.com/wazuh/wazuh/pull/18026>`__ Introduced a native Maltiverse integration.
 - `#16513 <https://github.com/wazuh/wazuh/pull/16513>`__ Added a file detailing the dependencies for the Wazuh RESTful API and wodles tests.
 - `#15985 <https://github.com/wazuh/wazuh/pull/15985>`__ Added unit tests for the Syscollector legacy decoder.
 - `#15999 <https://github.com/wazuh/wazuh/pull/15999>`__ Added unit tests for the ``manage_agents`` tool.
@@ -37,7 +37,15 @@ Agent
 - `#18006 <https://github.com/wazuh/wazuh/pull/18006>`__ The package inventory internal messages have been modified to honor the schema compliance.
 - `#16346 <https://github.com/wazuh/wazuh/pull/16346>`__ The agent's leaky bucket throughput limit has been extended to 100.000 EPS.
 
+Wazuh dashboard
+^^^^^^^^^^^^^^^
 
+- `#5680 <https://github.com/wazuh/wazuh-kibana-app/pull/5680>`_ Added the **Status detail** column in the **Agents** table.
+- `#5738 <https://github.com/wazuh/wazuh-kibana-app/pull/5738>`_ The agent registration wizard now effectively manages special characters in passwords.
+- `#5636 <https://github.com/wazuh/wazuh-kibana-app/pull/5636>`_ Changed the **Network ports** table columns for Linux agents.
+- `#5748 <https://github.com/wazuh/wazuh-kibana-app/pull/5748>`_ Updated development dependencies: ``@typescript-eslint/eslint-plugin, @typescript-eslint/parser, eslint, swagger-client``.
+- `#5707 <https://github.com/wazuh/wazuh-kibana-app/pull/5707>`_ Changed Timelion-type displays in the **Management > Statistics** section to line-type displays.
+- `#5747 <https://github.com/wazuh/wazuh-kibana-app/pull/5747>`_ Removed views in JSON and XML formats from the **Management** settings.
 
 Resolved issues
 ---------------
@@ -85,12 +93,23 @@ Reference                                                         Description
 `#17040 <https://github.com/wazuh/wazuh/pull/17040>`__            Fixed the signature of the internal function ``OSHash_GetIndex()``.
 ==============================================================    =============
 
+Wazuh dashboard
+^^^^^^^^^^^^^^^
+==============================================================    =============
+Reference                                                         Description
+==============================================================    =============
+`#5591 <https://github.com/wazuh/wazuh-kibana-app/pull/5591>`_    Fixed problem with new or missing columns in the **Agents** table.
+`#5676 <https://github.com/wazuh/wazuh-kibana-app/pull/5676>`_    Fixed the color of the agent name in the groups section in dark mode.
+`#5597 <https://github.com/wazuh/wazuh-kibana-app/pull/5597>`_    Fixed the propagation event so that the flyout data, in the decoders, does not change when the button is pressed.
+`#5631 <https://github.com/wazuh/wazuh-kibana-app/pull/5631>`_    Fixed the tooltips of the tables in the **Security** section, and removed unnecessary requests.
+==============================================================    =============
+
 
 Changelogs
 ----------
 
 More details about these changes are provided in the changelog of each component:
 
--  `wazuh/wazuh <https://github.com/wazuh/wazuh/blob/v4.7.0-2.9.0/CHANGELOG.md>`_
--  `wazuh/wazuh-dashboard <https://github.com/wazuh/wazuh-kibana-app/blob/v4.7.0/CHANGELOG.md>`_
+-  `wazuh/wazuh <https://github.com/wazuh/wazuh/blob/v4.7.0/CHANGELOG.md>`_
+-  `wazuh/wazuh-dashboard <https://github.com/wazuh/wazuh-kibana-app/blob/v4.7.0-2.9.0/CHANGELOG.md>`_
 -  `wazuh/wazuh-packages <https://github.com/wazuh/wazuh-packages/releases/tag/v4.7.0>`_
