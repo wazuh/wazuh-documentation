@@ -71,7 +71,6 @@ Reference                                                         Description
 `#17006 <https://github.com/wazuh/wazuh/pull/17006>`__            Fixed detection of ``osquery 5.4.0+`` running outside the integration.
 ==============================================================    =============
 
-
 RESTful API
 ^^^^^^^^^^^
 
@@ -82,7 +81,6 @@ Reference                                                         Description
 `#16914 <https://github.com/wazuh/wazuh/pull/16914>`__            Resolved an issue in the ``WazuhException`` class that disrupted the API executor subprocess.
 `#16918 <https://github.com/wazuh/wazuh/issues/16918>`__          Corrected an empty value problem in the API specification key.
 ==============================================================    =============
-
 
 Other
 ^^^^^
@@ -95,6 +93,7 @@ Reference                                                         Description
 
 Wazuh dashboard
 ^^^^^^^^^^^^^^^
+
 ==============================================================    =============
 Reference                                                         Description
 ==============================================================    =============
@@ -103,7 +102,6 @@ Reference                                                         Description
 `#5597 <https://github.com/wazuh/wazuh-kibana-app/pull/5597>`_    Fixed the propagation event so that the flyout data, in the decoders, does not change when the button is pressed.
 `#5631 <https://github.com/wazuh/wazuh-kibana-app/pull/5631>`_    Fixed the tooltips of the tables in the **Security** section, and removed unnecessary requests.
 ==============================================================    =============
-
 
 Changelogs
 ----------
