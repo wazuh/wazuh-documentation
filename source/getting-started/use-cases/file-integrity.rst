@@ -33,7 +33,7 @@ You can find a dedicated **Integrity monitoring** module in the Wazuh dashboard 
       :align: center
       :width: 80%
 
-#. The **Event** section shows the alerts triggered by the FIM module. It displays details such as the agent name, the file path of the monitored file, the type of FIM event, a description of the alert, and the rule level of each alert.
+#. The **Events** section shows the alerts triggered by the FIM module. It displays details such as the agent name, the file path of the monitored file, the type of FIM event, a description of the alert, and the rule level of each alert.
 
    .. thumbnail:: /images/getting-started/use-cases/fim/fim-alerts.png
       :title: File integrity monitoring module alerts
@@ -50,7 +50,7 @@ Modifications to configuration files and file attributes are frequent occurrence
 
 The Wazuh FIM module supports various configuration options that enable effective monitoring of assets:
 
--  :ref:`Real-time monitoring <real_time_monitoring>`: The FIM module provides a ``realtime`` attribute that enables continuous monitoring of specified directories. This feature is particularly useful for monitoring critical directories and tracking changes immediately they occur. Wazuh allows you to specify the directories or files in the monitored endpoints that would be reported in real-time if file changes occur. 
+-  :ref:`Real-time monitoring <real_time_monitoring>`: The FIM module provides a ``realtime`` attribute that enables continuous monitoring of specified directories. This feature is particularly useful for monitoring critical directories and tracking changes immediately after they occur. Wazuh allows you to specify the directories or files in the monitored endpoints that would be reported in real-time if file changes occur.
 -  :ref:`Scheduled monitoring <scheduled_scans>`: The ``frequency`` option in the Wazuh FIM module allows users to customize the scheduling of each FIM scan performed in your monitored endpoints. The default scan interval for the FIM module is 12 hours (43200 seconds) and can be customized on each endpoint. Alternatively, scans can be scheduled using the :ref:`scan_time <reference_ossec_syscheck_scan_time>` and the :ref:`scan_day <reference_ossec_syscheck_scan_day>` options. These options help users to set up FIM scans outside business hours or during holidays. 
 -  :ref:`Who-data monitoring <who-data-monitoring>`: Wazuh captures advanced insights into file changes using the who-data functionality. This functionality uses audit tools like the Linux Audit subsystem and Microsoft Windows SACL to determine important information about the detected file changes. The who-data monitoring functionality allows the FIM module to obtain information on when the change event occurred, who or what made the change, and what content was changed. This is useful in maintaining accountability and validating if changes made to monitored files or directories were authorized and performed using approved processes.
 
@@ -99,7 +99,7 @@ The Wazuh FIM module supports various integrations, including but not limited to
       :align: center
       :width: 80%
 
--  **File integrity monitoring and CDB list**: Wazuh FIM module also detects malicious files by checking the presence of known malware signatures when combined with :doc:`CDB lists (constant database) </user-manual/capabilities/malware-detection/cdb-lists-threat-intelligence>`. CDB lists are used to store known malware indicators of Compromise (IOCs) such as file hashes, IP addresses, and domain names. When CDB lists are created, Wazuh checks if field values from FIM alerts such as file hash matches the keys stored in the CDB lists. If matched, it generates an alert and respond based on how you configure your custom rule.
+-  **File integrity monitoring and CDB list**: Wazuh FIM module also detects malicious files by checking the presence of known malware signatures when combined with :doc:`CDB lists (constant database) </user-manual/capabilities/malware-detection/cdb-lists-threat-intelligence>`. CDB lists are used to store known malware indicators of Compromise (IOCs) such as file hashes, IP addresses, and domain names. When CDB lists are created, Wazuh checks if field values from FIM alerts such as file hash match the keys stored in the CDB lists. If matched, it generates an alert and response based on how you configure your custom rule.
 
    .. thumbnail:: /images/getting-started/use-cases/fim/malware-hash-file-alerts.png
       :title: File with known malware hash detected and removed alerts
@@ -141,7 +141,7 @@ Threat actors maintain persistence by commonly adding programs for their malicio
 Meeting regulatory compliance
 -----------------------------
 
-Meeting regulatory compliance requirements is an important consideration for organizations in various industries. File integrity monitoring is a requirement for achieving compliance with regulations such as PCI DSS, SOX, HIPAA, NIST SP 800-53, etc.
+Meeting regulatory compliance requirements is an important consideration for organizations in various industries. File integrity monitoring is a requirement for achieving compliance with regulations such as PCI DSS, SOX, HIPAA, NIST SP 800-53, among others.
 
 You can customize the Wazuh FIM module to monitor specific files and directories where your organization’s sensitive and confidential data are stored. Wazuh provides a comprehensive report that outlines the changes made to the files and directories being monitored. This feature is particularly useful for ensuring compliance with various regulatory standards.
 
