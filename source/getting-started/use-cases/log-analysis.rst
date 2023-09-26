@@ -15,7 +15,13 @@ Log data collection
 
 Wazuh collects logs from a wide range of sources, enabling comprehensive monitoring of various aspects of your IT environment. You can check our documentation on :doc:`Log data collection </user-manual/capabilities/log-data-collection/index>` to understand better how Wazuh collects and analyzes logs from monitored endpoints. Some of the common log sources supported by Wazuh include:
 
--  **Operating system logs**: Wazuh collects logs from several operating systems, including :ref:`Linux <how-to-collect-linuxlogs>`, :ref:`Windows <how-to-collect-windowslogs>`, and :ref:`macOS <how-to-collect-macoslogs>`. Wazuh can collect syslog, auditd, application logs, and others from Linux endpoints. Wazuh collects logs on Windows endpoints using the Windows event channel and Windows event log format. By default, the Wazuh agent monitors the System, Application, and Security Windows event channels on Windows endpoints. The Wazuh agent offers the flexibility to configure and monitor other :ref:`Windows event channels <windows_event_channel_log_collection>`. Wazuh utilizes the unified logging system (ULS) to collect logs on macOS endpoints. The macOS ULS centralizes the management and storage of logs across all the system levels.
+-  **Operating system logs**: Wazuh collects logs from several operating systems, including :ref:`Linux <how-to-collect-linuxlogs>`, :ref:`Windows <how-to-collect-windowslogs>`, and :ref:`macOS <how-to-collect-macoslogs>`.
+
+   Wazuh can collect syslog, auditd, application logs, and others from Linux endpoints.
+
+   Wazuh collects logs on Windows endpoints using the Windows event channel and Windows event log format. By default, the Wazuh agent monitors the System, Application, and Security Windows event channels on Windows endpoints. The Wazuh agent offers the flexibility to configure and monitor other :ref:`Windows event channels <windows_event_channel_log_collection>`. 
+
+   Wazuh utilizes the unified logging system (ULS) to collect logs on macOS endpoints. The macOS ULS centralizes the management and storage of logs across all the system levels.
 
    The image below shows an event collected from the ``Microsoft-Windows-Sysmon/Operational`` event channel on a Windows endpoint.
 
@@ -41,7 +47,7 @@ Wazuh collects logs from a wide range of sources, enabling comprehensive monitor
       :align: center
       :width: 80%
 
--  **Cloud provider logs**: Wazuh integrates with cloud providers like :doc:`AWS </cloud-security/amazon/index>`, :doc:`Azure </cloud-security/azure/index>`, :doc:`Google Cloud </cloud-security/gcp/index>`, and :doc:`Office 365 </cloud-security/gcp/index>` to collect logs from cloud services such as EC2 instances, S3 buckets, Azure VMs, and more. The image below shows the various cloud provider modules on the Wazuh dashboard.
+-  **Cloud provider logs**: Wazuh integrates with cloud providers like :doc:`AWS </cloud-security/amazon/index>`, :doc:`Azure </cloud-security/azure/index>`, :doc:`Google Cloud </cloud-security/gcp/index>`, and :doc:`Office 365 </cloud-security/office365/index>` to collect logs from cloud services such as EC2 instances, S3 buckets, Azure VMs, and more. The image below shows the various cloud provider modules on the Wazuh dashboard.
 
    .. thumbnail:: /images/getting-started/use-cases/log-data-analysis/cloud-provider-modules.png
       :title: Cloud provider modules
@@ -65,8 +71,8 @@ Wazuh :doc:`rules and decoders </user-manual/ruleset/index>` are core components
 Wazuh decoders are responsible for parsing and normalizing log data collected from various sources. Decoders are essential for converting the raw log data in several formats into a unified and structured format that Wazuh can process effectively. Wazuh has pre-built decoders for common log formats such as syslog, Windows event channel, macOS ULS, and more. Additionally, Wazuh allows you to define :doc:`custom decoders </user-manual/ruleset/custom>` for parsing logs from specific applications or devices with unique log formats. By using decoders, Wazuh can efficiently interpret log data and extract relevant information, such as timestamps, log levels, source IP addresses, user names, and more. As shown below, you can view Wazuh out-of-the-box and custom **Decoders** on the **Management** tab of the Wazuh dashboard.
 
 .. thumbnail:: /images/getting-started/use-cases/log-data-analysis/decoders-in-wazuh-dashboard.png
-   :title: Decoders-in Wazuh dashboard
-   :alt: Decoders-in Wazuh dashboard
+   :title: Decoders in Wazuh dashboard
+   :alt: Decoders in Wazuh dashboard
    :align: center
    :width: 80%
 
@@ -90,7 +96,7 @@ For example, the rule below includes a ``match`` field used to define the patter
        <id>T1078</id>
        <id>T1021</id>
      </mitre>
-   <group>authentication_success,gdpr_IV_32.2,gpg13_7.1,gpg13_7.2,hipaa_164.312.b,nist_800_53_AU.14,nist_800_53_AC.7,pci_dss_10.2.5,tsc_CC6.8,tsc_CC7.2,tsc_CC7.3,</group>
+     <group>authentication_success,gdpr_IV_32.2,gpg13_7.1,gpg13_7.2,hipaa_164.312.b,nist_800_53_AU.14,nist_800_53_AC.7,pci_dss_10.2.5,tsc_CC6.8,tsc_CC7.2,tsc_CC7.3,</group>
    </rule>
 
 Log data indexing and storage
@@ -102,7 +108,7 @@ The Wazuh indexer guarantees redundancy by storing the JSON documents across sev
 
 Wazuh uses four indices to store several event types:
 
--  **Wazuh-alerts** stores alerts generated by the Wazuh server when an event triggers a rule with high enough priority. The image below shows alerts in the **Security Event** tab of the Wazuh dashboard. The index pattern is set to ``wazuh-alerts-*`` by default.
+-  **wazuh-alerts** stores alerts generated by the Wazuh server when an event triggers a rule with high enough priority. The image below shows alerts in the **Security Event** tab of the Wazuh dashboard. The index pattern is set to ``wazuh-alerts-*`` by default.
 
    .. thumbnail:: /images/getting-started/use-cases/log-data-analysis/alerts-in-index-pattern.png
       :title: Alerts in the wazuh-alerts-* index pattern
@@ -110,7 +116,7 @@ Wazuh uses four indices to store several event types:
       :align: center
       :width: 80%
 
--  **Wazuh-archives** index stores all events received from the Wazuh server regardless of whether they trigger an alert. The :doc:`Wazuh archives </user-manual/manager/wazuh-archives>` use this index to enable log retention and querying capabilities that offer deeper insight into events happening within monitored endpoints. Wazuh archives are disabled by default because of the huge storage requirements needed to store all the logs. The image below shows archived events in the **Discover** section of Wazuh dashboard with the index pattern set to ``wazuh-archives-*``.
+-  **wazuh-archives** index stores all events received from the Wazuh server regardless of whether they trigger an alert. The :doc:`Wazuh archives </user-manual/manager/wazuh-archives>` use this index to enable log retention and querying capabilities that offer deeper insight into events happening within monitored endpoints. Wazuh archives are disabled by default because of the huge storage requirements needed to store all the logs. The image below shows archived events in the **Discover** section of Wazuh dashboard with the index pattern set to ``wazuh-archives-*``.
 
    .. thumbnail:: /images/getting-started/use-cases/log-data-analysis/events-in-index-pattern.png
       :title: Events in wazuh-archives-* index pattern
@@ -118,7 +124,7 @@ Wazuh uses four indices to store several event types:
       :align: center
       :width: 80%
 
--  **Wazuh-monitoring** index stores data about the state of Wazuh agents over a period of time. The state of the agent could be ``Active``, ``Disconnected``, or ``Never connected``. This information is very useful in tracking Wazuh agents that are not reporting to the dashboard for several reasons that need investigation. The image below shows the connection status of the agents on the Wazuh dashboard. The agent information as shown in the image is collected from the ``wazuh-monitoring`` index.
+-  **wazuh-monitoring** index stores data about the state of Wazuh agents over a period of time. The state of the agent could be ``Active``, ``Disconnected``, or ``Never connected``. This information is very useful in tracking Wazuh agents that are not reporting to the dashboard for several reasons that need investigation. The image below shows the connection status of the agents on the Wazuh dashboard. The agent information as shown in the image is collected from the ``wazuh-monitoring`` index.
 
    .. thumbnail:: /images/getting-started/use-cases/log-data-analysis/agent-monitoring-information.png
       :title: Agent information from wazuh-monitoring index
@@ -126,7 +132,7 @@ Wazuh uses four indices to store several event types:
       :align: center
       :width: 80%
 
--  **Wazuh-statistics** index stores performance data related to the Wazuh server. This information is critical to ensuring the Wazuh server performs optimally with the available compute resources. The image below shows performance-related events on the Wazuh dashboard.
+-  **wazuh-statistics** index stores performance data related to the Wazuh server. This information is critical to ensuring the Wazuh server performs optimally with the available computing resources. The image below shows performance-related events on the Wazuh dashboard.
 
    .. thumbnail:: /images/getting-started/use-cases/log-data-analysis/performance-related-events.png
       :title: Performance-related events
@@ -137,9 +143,9 @@ Wazuh uses four indices to store several event types:
 Log data querying and visualization 
 -----------------------------------
 
-The Wazuh dashboard offers log data querying and visualization capabilities.You can leverage the dashboard’s intuitive interface to conduct complex searches and queries to extract meaningful insights from the log data collected by Wazuh.
+The Wazuh dashboard offers log data querying and visualization capabilities. You can leverage the dashboard’s intuitive interface to conduct complex searches and queries to extract meaningful insights from the log data collected by Wazuh.
 
-Wazuh provides a set of predefined dashboards and visualizations out of the box, specifically tailored to security monitoring and compliance use cases. These dashboards provide insight into common security events such as failed logins, malware detection, and system anomalies. You can further customize these dashboards to suit your specific needs and requirements. Below is a sample image of the **Security event** dashboard showing several interesting information like ``Top 5 PCI DSS Requirements``, ``Top 5 alerts``, and ``Alert groups evolution``.
+Wazuh provides a set of predefined dashboards and visualizations out of the box, specifically tailored to security monitoring and compliance use cases. These dashboards provide insight into common security events such as failed logins, malware detection, and system anomalies. You can further customize these dashboards to suit your specific needs and requirements. Below is a sample image of the **Security event** dashboard showing several interesting information like **Top 5 PCI DSS Requirements**, **Top 5 alerts**, and **Alert groups evolution**.
 
    .. thumbnail:: /images/getting-started/use-cases/log-data-analysis/security-event-dashboard.png
       :title: Security event dashboard
@@ -147,7 +153,7 @@ Wazuh provides a set of predefined dashboards and visualizations out of the box,
       :align: center
       :width: 80%
 
-The Wazuh dashboard enables users to explore log entries in real-time, apply various filters, and drill down into specific events or time ranges. This flexibility allows security analysts to identify trends, anomalies, and potential security incidents within their environment.
+The Wazuh dashboard enables users to explore log entries in real time, apply various filters, and drill down into specific events or time ranges. This flexibility allows security analysts to identify trends, anomalies, and potential security incidents within their environment.
 
 Wazuh allows users to create customized dashboards that display key performance indicators, security metrics, and real-time monitoring of critical systems and applications. Users can assemble multiple visualizations, such as pie charts, line graphs, and heat maps, onto a single dashboard, providing a holistic view of their infrastructure's security posture. The following blog posts detailed how to query and create custom dashboards:
 
