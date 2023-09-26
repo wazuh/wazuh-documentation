@@ -96,6 +96,11 @@ redirections.push(
   },
   {
     'target': ['4.4=>4.5', '4.5=>4.4'],
+    '4.4': '/getting-started/use-cases/cloud-security.html',
+    '4.5': '/getting-started/use-cases/cloud-workload-protection.html',
+  },
+  {
+    'target': ['4.4=>4.5', '4.5=>4.4'],
     '4.4': '/getting-started/use-cases/system-inventory.html',
     '4.5': '/getting-started/use-cases/it-hygiene#system-inventory.html',
   },
@@ -120,6 +125,7 @@ newUrls['4.5'] = [
   '/getting-started/use-cases/incident-response.html',
   '/getting-started/use-cases/threat-hunting.html',
   '/getting-started/use-cases/malware-detection.html',
+  '/getting-started/use-cases/cloud-workload-protection.html',
   '/getting-started/use-cases/it-hygiene.html',
 ];
 
@@ -132,6 +138,7 @@ removedUrls['4.5'] = [
   '/user-manual/capabilities/log-data-collection/log-data-configuration.html',
   '/getting-started/use-cases/active-response.html',
   '/getting-started/use-cases/rootkits-detection.html',
+  '/getting-started/use-cases/cloud-security.html',
   '/getting-started/use-cases/system-inventory.html',
 ];
 
