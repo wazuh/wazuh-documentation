@@ -25,7 +25,7 @@ Below you can find examples of some of the most common use cases of the Wazuh pl
    * - :doc:`configuration-assessment`
      - :doc:`system-inventory`
    * - :doc:`vulnerability-detection`
-     - :doc:`cloud-security`
+     - :doc:`cloud-workload-protection`
    * - :doc:`container-security`
      - :doc:`regulatory-compliance`
    * - :doc:`threat-hunting`
@@ -41,7 +41,7 @@ Below you can find examples of some of the most common use cases of the Wazuh pl
    configuration-assessment
    system-inventory
    vulnerability-detection
-   cloud-security
+   cloud-workload-protection
    container-security
    regulatory-compliance
    threat-hunting
