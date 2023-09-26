@@ -23,13 +23,13 @@ Below you can find examples of some of the most common use cases of the Wazuh pl
    * - :doc:`malware-detection`
      - :doc:`incident-response`
    * - :doc:`configuration-assessment`
-     - :doc:`system-inventory`
+     - :doc:`it-hygiene`
    * - :doc:`vulnerability-detection`
      - :doc:`cloud-workload-protection`
    * - :doc:`container-security`
      - :doc:`regulatory-compliance`
    * - :doc:`threat-hunting`
-     -
+     - 
 
 .. toctree::
    :hidden:
@@ -39,7 +39,7 @@ Below you can find examples of some of the most common use cases of the Wazuh pl
    malware-detection
    incident-response
    configuration-assessment
-   system-inventory
+   it-hygiene
    vulnerability-detection
    cloud-workload-protection
    container-security
