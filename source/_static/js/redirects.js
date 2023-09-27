@@ -61,6 +61,14 @@ removedUrls['x.y'] = [
 ];
 */
 
+/* *** RELEASE 4.7 ****/
+
+/* Pages added in 4.7 */
+
+newUrls['4.7'] = [
+  '/release-notes/release-4-7-0.html',
+];
+
 /* *** RELEASE 4.6 ****/
 
 /* Redirections from 4.5 to 4.6  */
