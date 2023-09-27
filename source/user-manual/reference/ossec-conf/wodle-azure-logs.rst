@@ -2,7 +2,7 @@
 
 .. meta::
   :description: Find out the configuration options of the azure-logs wodle. Learn more about it in this section of the Wazuh documentation.
-  
+
 .. _wodle_azure_logs:
 
 wodle name="azure-logs"
@@ -420,8 +420,7 @@ Example of log_analytics configuration
 
         <log_analytics>
 
-            <application_id>8b7...c14</application_id>
-            <application_key>w22...91x</application_key>
+            <auth_path>/var/ossec/wodles/credentials/log_analytics_credentials</auth_path>
             <tenantdomain>wazuh.onmicrosoft.com</tenantdomain>
 
             <request>
@@ -586,7 +585,7 @@ Example of graph configuration
 
 	    <graph>
 
-	        <auth_path>/Azure/graph_auth.txt</auth_path>
+            <auth_path>/var/ossec/wodles/credentials/graph_credentials</auth_path>
 	        <tenantdomain>wazuh.onmicrosoft.com</tenantdomain>
 
 	        <request>
@@ -782,7 +781,7 @@ Example of storage configuration
 
         <storage>
 
-            <auth_path>/home/manager/Azure/storage_auth.txt</auth_path>
+            <auth_path>/var/ossec/wodles/credentials/storage_credentials</auth_path>
             <tag>azure-activity</tag>
 
             <container name="insights-operational-logs">
