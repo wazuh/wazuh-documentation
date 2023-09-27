@@ -65,6 +65,7 @@ removedUrls['x.y'] = [
 /* *** RELEASE 4.8 ****/
 
 newUrls['4.8'] = [
+  '/release-notes/release-4-8-0.html',
   '/development/packaging/generate-indexer-package.html',
   '/development/packaging/generate-dashboard-package.html',
 ];
