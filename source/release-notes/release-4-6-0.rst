@@ -84,6 +84,7 @@ Agent
 - `#14684 <https://github.com/wazuh/wazuh/pull/14684>`__ Removed unused migration functionality from the AWS integration.
 - `#17655 <https://github.com/wazuh/wazuh/pull/17655>`__ Deleted definitions of repeated classes in the AWS integration.
 - `#15031 <https://github.com/wazuh/wazuh/pull/15031>`__ Removed duplicate methods in ``AWSBucket`` and reuse inherited ones from ``WazuhIntegration``.
+- `#16547 <https://github.com/wazuh/wazuh/pull/16547>`__ Added support for Office365 MS/Azure Government Community Cloud (GCC) and Government Community Cloud High (GCCH) API.
 
 RESTful API
 ^^^^^^^^^^^
