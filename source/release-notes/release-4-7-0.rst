@@ -22,6 +22,7 @@ Manager
 - `#16090 <https://github.com/wazuh/wazuh/pull/16090>`__ Added an option to customize the Slack integration.
 - `#16008 <https://github.com/wazuh/wazuh/pull/16008>`__ An unnecessary sanity check related to Syscollector has been removed from ``wazuh-db``.
 - `#17225 <https://github.com/wazuh/wazuh/pull/17225>`__ Deleted unused framework RBAC migration folder.
+- `#18570 <https://github.com/wazuh/wazuh/pull/18570>`__ Added support for Amazon Linux 2023 in Vulnerability Detector.
 
 Agent
 ^^^^^
