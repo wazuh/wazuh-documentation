@@ -260,7 +260,7 @@ To improve security, you can change the default password of the Wazuh users. The
 Wazuh indexer users
 ~~~~~~~~~~~~~~~~~~~
 
- To change the password of the default ``admin`` and ``kibanaserver`` users, do the following.
+ To change the password of the default ``admin`` and ``kibanaserver`` users, do the following. You can only change one at a time. 
 
 .. warning::
 
