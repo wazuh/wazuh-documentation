@@ -31,7 +31,6 @@ RESTful API
 -  `#18493 <https://github.com/wazuh/wazuh/pull/18493>`__ Added support for nested queries in the ``q`` API parameter.
 -  `#18432 <https://github.com/wazuh/wazuh/pull/18432>`__ Updated ``force`` flag message in the ``agent_upgrade`` CLI.
 
-
 Resolved issues
 ---------------
 
@@ -69,6 +68,32 @@ Reference                                                         Description
 `#18733 <https://github.com/wazuh/wazuh/pull/18733>`__            Fixed an error in the API log mechanism where sometimes the requests would not be printed in the log file.
 ==============================================================    =============
 
+Wazuh dashboard
+^^^^^^^^^^^^^^^
+
+================================================================    =============
+Reference                                                           Description
+================================================================    =============
+`#5925 <https://github.com/wazuh/wazuh-kibana-app/pull/5925>`__     Fixed the command to install the agent on SUSE. Now it uses zypper.
+================================================================    =============
+
+Wazuh Kibana plugin for Kibana 7.10.2
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+================================================================    =============
+Reference                                                           Description
+================================================================    =============
+`#5925 <https://github.com/wazuh/wazuh-kibana-app/pull/5925>`__     Fixed the command to install the agent on SUSE. Now it uses zypper.
+================================================================    =============
+
+Wazuh Kibana plugin for Kibana 7.16.x and 7.17.x
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+================================================================    =============
+Reference                                                           Description
+================================================================    =============
+`#5925 <https://github.com/wazuh/wazuh-kibana-app/pull/5925>`__     Fixed the command to install the agent on SUSE. Now it uses zypper.
+================================================================    =============
 
 Changelogs
 ----------
