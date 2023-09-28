@@ -186,7 +186,7 @@ Edit the Wazuh indexer security configuration files. We recommend that you back 
       Security Admin v7
       Will connect to localhost:9200 ... done
       Connected as "CN=admin,OU=Wazuh,O=Wazuh,L=California,C=US"
-      OpenSearch Version: 2.8.0
+      OpenSearch Version: 2.10.0
       Contacting opensearch cluster 'opensearch' and wait for YELLOW clusterstate ...
       Clustername: wazuh-cluster
       Clusterstate: GREEN
