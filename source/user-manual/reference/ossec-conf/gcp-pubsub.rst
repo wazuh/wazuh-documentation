@@ -41,7 +41,7 @@ Scheduling options
 enabled
 ^^^^^^^
 
-This indicates if the module is enabled or disabled.
+Enables or disables the module.
 
 +--------------------+--------------+
 | **Default value**  | n/a          |
@@ -52,7 +52,7 @@ This indicates if the module is enabled or disabled.
 project_id
 ^^^^^^^^^^^
 
-This tag indicates the Google Cloud project ID.
+Google Cloud project ID.
 
 +--------------------+--------------------------------------------------+
 | **Default value**  | n/a                                              |
@@ -65,7 +65,7 @@ For example ``<project_id>wazuh-dev</project_id>``.
 subscription_name
 ^^^^^^^^^^^^^^^^^
 
-This string specifies the name of the subscription to read from.
+Subscription name to read from.
 
 +--------------------+------------+
 | **Default value**  | n/a        |
@@ -78,7 +78,7 @@ For example ``<subscription_name>wazuh-name</subscription_name>``.
 credentials_file
 ^^^^^^^^^^^^^^^^
 
-This setting specifies the path to the Google Cloud credentials file in JW Tokens. It allows both relative (to $HOME_INSTALLATION) and absolute paths.
+Path to the Google Cloud credentials file. It can be absolute or relative to ``WAZUH_HOME``.
 
 +--------------------+--------------------------------+
 | **Default value**  | n/a                            |
@@ -90,7 +90,8 @@ For example, ``<credentials_file>wodles/gcp-pubsub/credentials.json</credentials
 
 max_messages
 ^^^^^^^^^^^^
-Number of maximum messages pulled in each iteration. This value does not depend on the number of threads used.
+
+Maximum number of messages pulled in each iteration. This value does not depend on the number of threads used.
 
 +--------------------+-------------+
 | **Default value**  | 100         |
@@ -103,7 +104,7 @@ Number of maximum messages pulled in each iteration. This value does not depend 
 num_threads
 ^^^^^^^^^^^^
 
-Number of threads used to pull in each iteration. The number of maximum messages will be divided between all the configured threads.
+Number of threads used to pull in each iteration. The maximum number of messages will be divided between all the configured threads.
 
 +--------------------+-------------+
 | **Default value**  | 1           |
@@ -125,7 +126,7 @@ This option has no effect. The module now uses the :ref:`wazuh_modules.debug <wa
 pull_on_start
 ^^^^^^^^^^^^^
 
-Trigger the pulling in case of an agent start or restart.
+Pull logs on Wazuh agent start or restart.
 
 +--------------------+---------+
 | **Default value**  | yes     |
@@ -136,7 +137,7 @@ Trigger the pulling in case of an agent start or restart.
 interval
 ^^^^^^^^
 
-The interval between module executions.
+Time gap between module executions.
 
 +--------------------+----------------------------------------------------------------------------------------------------------------------------------------------------------------+
 | **Default value**  | 1h                                                                                                                                                             |
@@ -147,7 +148,7 @@ The interval between module executions.
 day
 ^^^
 
-Day of the month to run the script to fetch logs from GCP.
+Day of the month to retrieve logs from GCP.
 
 +--------------------+--------------------------+
 | **Default value**  | n/a                      |
@@ -162,7 +163,7 @@ Day of the month to run the script to fetch logs from GCP.
 wday
 ^^^^
 
-Day of the week to run the script to fetch logs. This option is **not compatible** with the ``day`` option.
+Day of the week to retrieve logs from GCP. This option is **not compatible** with the ``day`` option.
 
 +--------------------+--------------------------+
 | **Default value**  | n/a                      |

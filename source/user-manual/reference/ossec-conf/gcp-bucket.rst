@@ -38,7 +38,7 @@ Scheduling options
 enabled
 ^^^^^^^
 
-This indicates if the module is enabled or disabled.
+Enables or disables the module.
 
 +--------------------+--------------+
 | **Default value**  | n/a          |
@@ -83,7 +83,7 @@ Specifies the type of bucket. It is an attribute of the ``bucket`` tag.
 bucket\\name
 ^^^^^^^^^^^^
 
-Name of the Google Cloud Storage bucket from where logs are read.
+Name of the Google Cloud Storage bucket where logs are read from.
 
 +--------------------+-----------------------------+
 | **Default value**  | N/A                         |
@@ -94,7 +94,7 @@ Name of the Google Cloud Storage bucket from where logs are read.
 bucket\\credentials_file
 ^^^^^^^^^^^^^^^^^^^^^^^^
 
-This setting specifies the path to the Google Cloud credentials file in JW Tokens. It allows both relative (to $HOME_INSTALLATION) and absolute paths.
+Path to the Google Cloud credentials file. It can be absolute or relative to ``WAZUH_HOME``.
 
 +--------------------+--------------------------------+
 | **Default value**  | n/a                            |
@@ -107,7 +107,7 @@ For example ``<credentials_file>wodles/gcp-bucket/credentials.json</credentials_
 bucket\\path
 ^^^^^^^^^^^^
 
-If defined, the path or prefix for the bucket.
+Bucket path or prefix.
 
 +--------------------+---------------+
 | **Default value**  | N/A           |
@@ -118,18 +118,18 @@ If defined, the path or prefix for the bucket.
 bucket\\only_logs_after
 ^^^^^^^^^^^^^^^^^^^^^^^
 
-A valid date, in YYYY-MMM-DD format. Only logs from that date onwards will be parsed.
+Parse logs from a specific date onwards. It must have the YYYY-MM-DD format. 
 
 +--------------------+-----------------------------------+
 | **Default value**  | Date of execution at ``00:00:00`` |
 +--------------------+-----------------------------------+
-| **Allowed values** | Valid date                        |
+| **Allowed values** | Valid date [YYYY-MM-DD]           |
 +--------------------+-----------------------------------+
 
 bucket\\remove_from_bucket
 ^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-Define if logs from the Google Cloud Storage bucket should be removed after they are read by the module.
+Remove the logs from the Google Cloud Storage bucket after they are read by the module.
 
 +--------------------+---------+
 | **Default value**  | no      |
@@ -142,7 +142,7 @@ Define if logs from the Google Cloud Storage bucket should be removed after they
 run_on_start
 ^^^^^^^^^^^^^
 
-Trigger the module in case the Wazuh service starts or restarts.
+Run the module on Wazuh service start or restart.
 
 +--------------------+---------+
 | **Default value**  | yes     |
@@ -153,7 +153,7 @@ Trigger the module in case the Wazuh service starts or restarts.
 interval
 ^^^^^^^^
 
-The interval between module executions.
+Time gap between module executions.
 
 +--------------------+----------------------------------------------------------------------------------------------------------------------------------------------------------------+
 | **Default value**  | 1h                                                                                                                                                             |
@@ -164,7 +164,7 @@ The interval between module executions.
 day
 ^^^
 
-Day of the month to run the script to fetch logs from GCP.
+Day of the month to retrieve logs from GCP.
 
 +--------------------+--------------------------+
 | **Default value**  | n/a                      |
@@ -179,7 +179,7 @@ Day of the month to run the script to fetch logs from GCP.
 wday
 ^^^^
 
-Day of the week to run the script to fetch logs. This option is **not compatible** with the ``day`` option.
+Day of the week to retrieve logs from GCP. This option is **not compatible** with the ``day`` option.
 
 +--------------------+--------------------------+
 | **Default value**  | n/a                      |
