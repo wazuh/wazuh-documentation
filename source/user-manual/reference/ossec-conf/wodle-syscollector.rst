@@ -165,6 +165,8 @@ Enables the scan of the processes.
 | **Allowed values** | yes, no |
 +--------------------+---------+
 
+.. _syscollector_hotfixes:
+
 hotfixes
 ^^^^^^^^
 
