@@ -61,7 +61,7 @@ Single-node Deployment
       
          .. code-block:: console
          
-            # docker-compose -f generate-indexer-certs.yml run --rm generator
+            # docker compose -f generate-indexer-certs.yml run --rm generator
 
       This saves the certificates into the ``config/wazuh_indexer_ssl_certs`` directory.
 
@@ -101,13 +101,13 @@ Single-node Deployment
 
       .. code-block:: console  
 
-         # docker-compose up
+         # docker compose up
 
    -  **Background**:
 
       .. code-block:: console  
 
-         # docker-compose up -d
+         # docker compose up -d
 
    The default username and password for the Wazuh dashboard are ``admin`` and ``SecretPassword``. For :ref:`additional security <change-pwd-existing-usr>`, you can change the default password for the Wazuh indexer *admin* user.
 
@@ -161,7 +161,7 @@ Multi-node deployment
         
       .. code-block:: console
 
-         # docker-compose -f generate-indexer-certs.yml run --rm generator
+         # docker compose -f generate-indexer-certs.yml run --rm generator
 
       This saves the certificates into the ``config/wazuh_indexer_ssl_certs`` directory.
 
@@ -208,13 +208,13 @@ Multi-node deployment
 
       .. code-block:: console
 
-         # docker-compose up
+         # docker compose up
 
    -  **Background**:
 
       .. code-block:: console
 
-         # docker-compose up -d
+         # docker compose up -d
 
    The default username and password for the Wazuh dashboard are ``admin`` and ``SecretPassword``. For :ref:`additional security <change-pwd-existing-usr>`, you can change the default password for the Wazuh indexer *admin* user.
 
@@ -237,7 +237,7 @@ You can modify and build the Wazuh manager, indexer, and dashboard images locall
   
    .. code-block:: console
   
-      # docker-compose build
+      # docker compose build
 
    For version 4.3.5 and above, run the image creation script:
 
@@ -273,7 +273,7 @@ Setting a new hash
 
    .. code-block:: console
   
-      # docker-compose down
+      # docker compose down
 
 #. Run this command to generate the hash of your new password. Once the container launches, input the new password and press **Enter**.
 
@@ -380,7 +380,7 @@ Applying the changes
 
    .. code-block:: console
   
-      # docker-compose up -d
+      # docker compose up -d
 
 #. Run ``docker ps`` and note the name of the Wazuh indexer container. For example, ``single-node-wazuh.indexer-1``.
 
@@ -479,8 +479,8 @@ The ``wazuh-wui`` user is the user to connect with the Wazuh API by default. Fol
 
    .. code-block:: console
 
-      # docker-compose down
-      # docker-compose up -d
+      # docker compose down
+      # docker compose up -d
 
 Exposed ports
 -------------
