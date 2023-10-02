@@ -14,34 +14,25 @@ Additionally, Wazuh is employed to protect containerized environments by providi
 
 Below you can find examples of some of the most common use cases of the Wazuh platform.
 
-.. list-table::
-   :width: 100%
-   :widths: 50 50
-
-   * - :doc:`log-analysis` 
-     - :doc:`file-integrity`
-   * - :doc:`malware-detection`
-     - :doc:`incident-response`
-   * - :doc:`configuration-assessment`
-     - :doc:`system-inventory`
-   * - :doc:`vulnerability-detection`
-     - :doc:`cloud-security`
-   * - :doc:`container-security`
-     - :doc:`regulatory-compliance`
-   * - :doc:`threat-hunting`
-     -
+=================================  ================================  ==============================  ==================================
+Endpoint security                  Threat intelligence               Security operations             Cloud security
+=================================  ================================  ==============================  ==================================
+:doc:`configuration-assessment`    :doc:`threat-hunting`             :doc:`incident-response`        :doc:`container-security`
+:doc:`malware-detection`           :doc:`log-analysis`               :doc:`regulatory-compliance`    Posture management
+:doc:`file-integrity`              :doc:`vulnerability-detection`    :doc:`it-hygiene`               :doc:`cloud-workload-protection`
+=================================  ================================  ==============================  ==================================
 
 .. toctree::
    :hidden:
 
-   log-analysis
-   file-integrity
-   malware-detection
-   incident-response
    configuration-assessment
-   system-inventory
-   vulnerability-detection
-   cloud-security
-   container-security
-   regulatory-compliance
+   malware-detection
+   file-integrity
    threat-hunting
+   log-analysis
+   vulnerability-detection
+   incident-response
+   regulatory-compliance
+   it-hygiene
+   container-security
+   cloud-workload-protection

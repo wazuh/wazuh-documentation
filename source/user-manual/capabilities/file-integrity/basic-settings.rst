@@ -12,6 +12,8 @@ You can configure the FIM module on the Wazuh server and the Wazuh agent :doc:`c
 
 In this guide, we show different configuration options that the Wazuh FIM module supports.
 
+.. _real_time_monitoring:
+ 
 Real-time monitoring
 --------------------
   
@@ -42,6 +44,8 @@ Below, you can see how to configure the FIM module to monitor a directory in rea
 
    - Linux: ``systemctl restart wazuh-agent``
    - Windows: ``Restart-Service -Name wazuh``
+
+.. _record_file_attributes:
 
 Record file attributes
 ----------------------
@@ -115,6 +119,8 @@ You can see below an example configuration of how to disable the recording of SH
 
    Specified files or directories created after the initial FIM scan will be added for monitoring during the next scheduled scan.
 
+.. _scheduled_scans:
+
 Scheduled scans
 ---------------
 
@@ -162,6 +168,8 @@ The FIM module runs scans every 12 hours *(43200 seconds)* by default. In the fo
    - Linux: ``systemctl restart wazuh-agent``
    - Windows: ``Restart-Service -Name wazuh``
    - macOS: ``/Library/Ossec/bin/wazuh-control restart``
+
+.. _report_changes_in_file_values:
 
 Report changes in file values
 -----------------------------
