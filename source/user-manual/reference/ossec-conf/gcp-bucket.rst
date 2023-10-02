@@ -24,7 +24,7 @@ Main options
 ^^^^^^^^^^^^
 
 - `enabled`_
-- `bucket type`_
+- `bucket`_
 
 Scheduling options
 ^^^^^^^^^^^^^^^^^^
@@ -55,30 +55,48 @@ logging
 This option has no effect. The module now uses the :ref:`wazuh_modules.debug <wazuh_modules_options>` level to set its logging level.
 
 
-bucket type
-^^^^^^^^^^^
+bucket
+^^^^^^
 
 Defines a bucket to process. It must have its ``type`` attribute defined. It supports multiple instances of this option.
 
-Bucket options
-~~~~~~~~~~~~~~
+   .. code-block:: xml
 
-- `bucket\\name`_
-- `bucket\\credentials_file`_
-- `bucket\\path`_
-- `bucket\\only_logs_after`_
-- `bucket\\remove_from_bucket`_
+      <bucket type="access_logs">
+
+      </bucket>
 
 type
 ^^^^
 
-Specifies the type of bucket. It is an attribute of the ``bucket`` tag.
+Specifies the type of bucket.
 
 +--------------------+-------------+
 | **Default value**  | N/A         |
 +--------------------+-------------+
 | **Allowed values** | access_logs |
 +--------------------+-------------+
+
+Bucket options
+^^^^^^^^^^^^^^
+
++----------------------------------------+-------------------------------------------------------------+-----------------------------------------------+
+| Options                                | Allowed values                                              | Mandatory/Optional                            |
++========================================+=============================================================+===============================================+
+| :ref:`bucket_name`                     | Any valid bucket name                                       | Mandatory                                     |
++----------------------------------------+-------------------------------------------------------------+-----------------------------------------------+
+| :ref:`bucket_credentials_file`         | Path to a credentials file.                                 | Mandatory                                     |
+|                                        | It can be absolute or relative to ``WAZUH_HOME``            |                                               |
++----------------------------------------+-------------------------------------------------------------+-----------------------------------------------+
+| :ref:`bucket_path`                     | Any valid path                                              | Optional                                      |
++----------------------------------------+-------------------------------------------------------------+-----------------------------------------------+
+| :ref:`bucket_only_logs_after`          | Valid date in YYYY-MM-DD format                             | Optional                                      |
++----------------------------------------+-------------------------------------------------------------+-----------------------------------------------+
+| :ref:`bucket_remove_from_bucket`       | A value to determine if each log file is deleted once it    | Optional                                      |
+|                                        | has been collected by the module                            |                                               |
++----------------------------------------+-------------------------------------------------------------+-----------------------------------------------+
+
+.. _bucket_name:
 
 bucket\\name
 ^^^^^^^^^^^^
@@ -90,6 +108,8 @@ Name of the Google Cloud Storage bucket where logs are read from.
 +--------------------+-----------------------------+
 | **Allowed values** | Any valid bucket name       |
 +--------------------+-----------------------------+
+
+.. _bucket_credentials_file:
 
 bucket\\credentials_file
 ^^^^^^^^^^^^^^^^^^^^^^^^
@@ -104,6 +124,8 @@ Path to the Google Cloud credentials file. It can be absolute or relative to ``W
 
 For example ``<credentials_file>wodles/gcp-bucket/credentials.json</credentials_file>``.
 
+.. _bucket_path:
+
 bucket\\path
 ^^^^^^^^^^^^
 
@@ -115,6 +137,8 @@ Bucket path or prefix.
 | **Allowed values** | Valid path    |
 +--------------------+---------------+
 
+.. _bucket_only_logs_after:
+
 bucket\\only_logs_after
 ^^^^^^^^^^^^^^^^^^^^^^^
 
@@ -125,6 +149,8 @@ Parse logs from a specific date onwards. It must have the YYYY-MM-DD format.
 +--------------------+-----------------------------------+
 | **Allowed values** | Valid date [YYYY-MM-DD]           |
 +--------------------+-----------------------------------+
+
+.. _bucket_remove_from_bucket:
 
 bucket\\remove_from_bucket
 ^^^^^^^^^^^^^^^^^^^^^^^^^^
