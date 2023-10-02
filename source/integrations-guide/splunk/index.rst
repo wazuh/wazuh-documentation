@@ -91,7 +91,7 @@ To securely store these values, you can use the `Logstash keystore <https://www.
       :emphasize-lines: 2,3
 
       $ set +o history
-      $ echo 'LOGSTASH_KEYSTORE_PASS="<MY_KEYSTORE_PASSWORD>"' | sudo tee /etc/sysconfig/logstash LOGSTASH_KEYSTORE_PASS="<MY_KEYSTORE_PASSWORD>"
+      $ echo 'LOGSTASH_KEYSTORE_PASS="<MY_KEYSTORE_PASSWORD>"' | sudo tee /etc/sysconfig/logstash
       $ export LOGSTASH_KEYSTORE_PASS=<MY_KEYSTORE_PASSWORD>
       $ set -o history
       $ sudo chown root /etc/sysconfig/logstash
@@ -157,7 +157,7 @@ Perform the following steps to configure the Logstash pipeline.
             http_method => "post" # HTTP method used to forward logs
             url => "<SPLUNK_URL>:8088/services/collector/raw" # endpoint to forward logs to
             headers => ["Authorization", "Splunk ${SPLUNK_AUTH}"]
-            cacert => </PATH/TO/LOCAL/SPLUNK/CERTIFICATE>/ca.pem
+            cacert => "</PATH/TO/LOCAL/SPLUNK/CERTIFICATE>/ca.pem"
          }
       }
 
@@ -261,7 +261,7 @@ To securely store these values, you can use the `Logstash keystore <https://www.
       :emphasize-lines: 2,3
 
       $ set +o history
-      $ echo 'LOGSTASH_KEYSTORE_PASS="<MY_KEYSTORE_PASSWORD>"'| sudo tee /etc/sysconfig/logstash LOGSTASH_KEYSTORE_PASS="<MY_KEYSTORE_PASSWORD>"
+      $ echo 'LOGSTASH_KEYSTORE_PASS="<MY_KEYSTORE_PASSWORD>"'| sudo tee /etc/sysconfig/logstash
       $ export LOGSTASH_KEYSTORE_PASS=<MY_KEYSTORE_PASSWORD>
       $ set -o history
       $ sudo chown root /etc/sysconfig/logstash
@@ -312,7 +312,7 @@ To configure the Logstash pipeline do the following.
             http_method => "post" # HTTP method used to <SPLUNK_URL>forward logs
             url => "<SPLUNK_URL>:8088/services/collector/raw" # endpoint to forward logs to
             headers => ["Authorization", "Splunk ${SPLUNK_AUTH}"]
-            cacert => </PATH/TO/LOCAL/SPLUNK/CERTIFICATE>/ca.pem
+            cacert => "</PATH/TO/LOCAL/SPLUNK/CERTIFICATE>/ca.pem"
          }
       }
 
@@ -516,7 +516,6 @@ Splunk dashboards
 
 Wazuh provides several dashboards for Splunk.
 
--  `Wz-sp-4.x-9.x-search-bar-in-progress <https://packages.wazuh.com/integrations/splunk/4.x-9.x/dashboards/wz-sp-4.x-9.x-search-bar-in-progress>`__
 -  `Wz-sp-4.x-9.x-wazuh-amazon-aws <https://packages.wazuh.com/integrations/splunk/4.x-9.x/dashboards/wz-sp-4.x-9.x-wazuh-amazon-aws>`__
 -  `Wz-sp-4.x-9.x-wazuh-docker-listener <https://packages.wazuh.com/integrations/splunk/4.x-9.x/dashboards/wz-sp-4.x-9.x-wazuh-docker-listener>`__
 -  `Wz-sp-4.x-9.x-wazuh-incident-response <https://packages.wazuh.com/integrations/splunk/4.x-9.x/dashboards/wz-sp-4.x-9.x-wazuh-incident-response>`__
@@ -524,7 +523,6 @@ Wazuh provides several dashboards for Splunk.
 -  `Wz-sp-4.x-9.x-wazuh-pci-dss <https://packages.wazuh.com/integrations/splunk/4.x-9.x/dashboards/wz-sp-4.x-9.x-wazuh-pci-dss>`__
 -  `wz-sp-4.x-9.x-wazuh-security-events <https://packages.wazuh.com/integrations/splunk/4.x-9.x/dashboards/wz-sp-4.x-9.x-wazuh-security-events>`__
 -  `wz-sp-4.x-9.x-wazuh-vulnerabilities <https://packages.wazuh.com/integrations/splunk/4.x-9.x/dashboards/wz-sp-4.x-9.x-wazuh-vulnerabilities>`__
-
 
 After you complete the Splunk integration, you can use these dashboards to display your Wazuh alerts in Splunk.
 
@@ -539,6 +537,11 @@ To import the Wazuh dashboards for Splunk, repeat the following steps for each d
 #. Navigate to **Search & Reporting** in Splunk Web.
 #. Click **Dashboards** and click **Create New Dashboard**.
 #. Enter a dashboard title and select **Dashboard Studio**.
+
+   .. note::
+
+      The dashboard title you enter here will be overwritten with the original title set in the dashboard template.
+
 #. Select **Grid** and click on **Create**.
 #. Click on the **</> Source** icon.
 #. Paste your dashboard file content, replacing everything in the source.
