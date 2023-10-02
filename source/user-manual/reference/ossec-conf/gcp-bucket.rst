@@ -83,20 +83,20 @@ Bucket options
 +----------------------------------------+-------------------------------------------------------------+-----------------------------------------------+
 | Options                                | Allowed values                                              | Mandatory/Optional                            |
 +========================================+=============================================================+===============================================+
-| :ref:`bucket_name`                     | Any valid bucket name                                       | Mandatory                                     |
+| :ref:`gcp_bucket_name`                 | Any valid bucket name                                       | Mandatory                                     |
 +----------------------------------------+-------------------------------------------------------------+-----------------------------------------------+
-| :ref:`bucket_credentials_file`         | Path to a credentials file.                                 | Mandatory                                     |
+| :ref:`gcp_bucket_credentials_file`     | Path to a credentials file.                                 | Mandatory                                     |
 |                                        | It can be absolute or relative to ``WAZUH_HOME``            |                                               |
 +----------------------------------------+-------------------------------------------------------------+-----------------------------------------------+
-| :ref:`bucket_path`                     | Any valid path                                              | Optional                                      |
+| :ref:`gcp_bucket_path`                 | Any valid path                                              | Optional                                      |
 +----------------------------------------+-------------------------------------------------------------+-----------------------------------------------+
-| :ref:`bucket_only_logs_after`          | Valid date in YYYY-MM-DD format                             | Optional                                      |
+| :ref:`gcp_bucket_only_logs_after`      | Valid date in YYYY-MM-DD format                             | Optional                                      |
 +----------------------------------------+-------------------------------------------------------------+-----------------------------------------------+
-| :ref:`bucket_remove_from_bucket`       | A value to determine if each log file is deleted once it    | Optional                                      |
+| :ref:`gcp_bucket_remove_from_bucket`   | A value to determine if each log file is deleted once it    | Optional                                      |
 |                                        | has been collected by the module                            |                                               |
 +----------------------------------------+-------------------------------------------------------------+-----------------------------------------------+
 
-.. _bucket_name:
+.. _gcp_bucket_name:
 
 bucket\\name
 ^^^^^^^^^^^^
@@ -109,7 +109,7 @@ Name of the Google Cloud Storage bucket where logs are read from.
 | **Allowed values** | Any valid bucket name       |
 +--------------------+-----------------------------+
 
-.. _bucket_credentials_file:
+.. _gcp_bucket_credentials_file:
 
 bucket\\credentials_file
 ^^^^^^^^^^^^^^^^^^^^^^^^
@@ -124,7 +124,7 @@ Path to the Google Cloud credentials file. It can be absolute or relative to ``W
 
 For example ``<credentials_file>wodles/gcp-bucket/credentials.json</credentials_file>``.
 
-.. _bucket_path:
+.. _gcp_bucket_path:
 
 bucket\\path
 ^^^^^^^^^^^^
@@ -137,7 +137,7 @@ Bucket path or prefix.
 | **Allowed values** | Valid path    |
 +--------------------+---------------+
 
-.. _bucket_only_logs_after:
+.. _gcp_bucket_only_logs_after:
 
 bucket\\only_logs_after
 ^^^^^^^^^^^^^^^^^^^^^^^
@@ -150,7 +150,7 @@ Parse logs from a specific date onwards. It must have the YYYY-MM-DD format.
 | **Allowed values** | Valid date [YYYY-MM-DD]           |
 +--------------------+-----------------------------------+
 
-.. _bucket_remove_from_bucket:
+.. _gcp_bucket_remove_from_bucket:
 
 bucket\\remove_from_bucket
 ^^^^^^^^^^^^^^^^^^^^^^^^^^
