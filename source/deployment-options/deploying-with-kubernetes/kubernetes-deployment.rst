@@ -211,123 +211,126 @@ Wazuh indexer users
 Setting a new hash
 ..................
 
-#. Run this command to generate the hash of your new password. Once the container launches, input the new password and press **Enter**.
+#. Start a Bash shell in ``wazuh-indexer-0``.
 
    .. code-block:: console
 
       # kubectl exec -it wazuh-indexer-0 -n wazuh -- /bin/bash
+
+#. Run these commands to generate the hash of your new password. When prompted, input the new password and press **Enter**.
+
+   .. code-block:: console
+
 	  wazuh-indexer@wazuh-indexer-0:~$ export JAVA_HOME=/usr/share/wazuh-indexer/jdk
 	  wazuh-indexer@wazuh-indexer-0:~$ bash /usr/share/wazuh-indexer/plugins/opensearch-security/tools/hash.sh
 
-
-#. Copy the generated hash.
+#. Copy the generated hash and exit the Bash shell.
 
 #. Open the ``wazuh/indexer_stack/wazuh-indexer/indexer_conf/internal_users.yml`` file. Locate the block for the user you are changing password for.
 
 #. Replace the hash.
 
-    -  ``admin`` user
+   -  ``admin`` user
 
-        .. code-block:: YAML
-            :emphasize-lines: 3
+      .. code-block:: YAML
+         :emphasize-lines: 3
 
-        ...
-        admin:
-            hash: "$2y$12$K/SpwjtB.wOHJ/Nc6GVRDuc1h0rM1DfvziFRNPtk27P.c4yDr9njO"
-            reserved: true
-            backend_roles:
-            - "admin"
-            description: "Demo admin user"
+         ...
+         admin:
+             hash: "$2y$12$K/SpwjtB.wOHJ/Nc6GVRDuc1h0rM1DfvziFRNPtk27P.c4yDr9njO"
+             reserved: true
+             backend_roles:
+             - "admin"
+             description: "Demo admin user"
+ 
+         ...
 
-        ...
+   -  ``kibanaserver`` user
 
-    -  ``kibanaserver`` user
+      .. code-block:: YAML
+         :emphasize-lines: 3
 
-        .. code-block:: YAML
-            :emphasize-lines: 3
-
-        ...
-        kibanaserver:
-            hash: "$2a$12$4AcgAt3xwOWadA5s5blL6ev39OXDNhmOesEoo33eZtrq2N0YrU3H."
-            reserved: true
-            description: "Demo kibanaserver user"
-
-        ...
-
+         ...
+         kibanaserver:
+             hash: "$2a$12$4AcgAt3xwOWadA5s5blL6ev39OXDNhmOesEoo33eZtrq2N0YrU3H."
+             reserved: true
+             description: "Demo kibanaserver user"
+ 
+         ...
 
 Setting the new password
 ........................
 
-#. Open  the ``wazuh/secrets/indexer-cred-secret.yaml`` file when you need to change ``admin`` user or ``wazuh/secrets/dashboard-cred-secret.yaml`` file when you need to change ``kibanaserver`` user . Change the value of the secret "password" in the corresponding file, base64 encoding the new password:
+#. Encode your new password in base64 format. Avoid inserting a trailing newline character to maintain the hash value. For example, use the ``-n`` option with the ``echo`` command as follows.
 
-.. note::
+   .. code-block::
+      
+      # echo -n "NewPassword" | base64
 
-    If you use the ``echo`` command to execute the ``base64`` command on Linux, remember to add the -n option so that it does not record a line break at the end and does not modify the password hash
-    ``# echo -n "NewPassword" | base64``
+#. Edit the indexer or dashbboard secrets configuration file as follows. Replace the value of the ``password`` field with your new encoded password.
 
+   -  To change the ``admin`` user password, edit the ``wazuh/secrets/indexer-cred-secret.yaml`` file.
 
-    -  ``admin`` user
+      .. code-block:: YAML
+         :emphasize-lines: 8
 
-        .. code-block:: YAML
-            :emphasize-lines: 8
+         ...
+         apiVersion: v1
+         kind: Secret
+         metadata:
+             name: indexer-cred
+         data:
+             username: YWRtaW4=              # string "admin" base64 encoded
+             password: U2VjcmV0UGFzc3dvcmQ=  # string "SecretPassword" base64 encoded
+         ...
 
-        ...
-        apiVersion: v1
-        kind: Secret
-        metadata:
-            name: indexer-cred
-        data:
-            username: YWRtaW4=              # string "admin" base64 encoded
-            password: U2VjcmV0UGFzc3dvcmQ=  # string "SecretPassword" base64 encoded
-        ...
+   -  To change the ``kibanaserver`` user password, edit the ``wazuh/secrets/dashboard-cred-secret.yaml`` file.
 
-    -  ``kibanaserver`` user
+      .. code-block:: YAML
+         :emphasize-lines: 8
 
-        .. code-block:: YAML
-            emphasize-lines: 8
-
-        ...
-        apiVersion: v1
-        kind: Secret
-        metadata:
-            name: dashboard-cred
-        data:
-            username: a2liYW5hc2VydmVy  # string "kibanaserver" base64 encoded
-            password: a2liYW5hc2VydmVy  # string "kibanaserver" base64 encoded
-        ...
+         ...
+         apiVersion: v1
+         kind: Secret
+         metadata:
+             name: dashboard-cred
+         data:
+             username: a2liYW5hc2VydmVy  # string "kibanaserver" base64 encoded
+             password: a2liYW5hc2VydmVy  # string "kibanaserver" base64 encoded
+         ...
 
 Applying the changes
 ....................
 
 #. Apply the manifest changes
 
-    .. code-block:: console
+   .. code-block:: console
 
-        # kubectl apply -k envs/eks/
+      # kubectl apply -k envs/eks/
 
-#. Run ``kubectl exec -it <POD_NAME> -n wazuh -- /bin/bash`` to enter the container. For example:
+#. Start a bash shell in ``wazuh-indexer-0`` once more.
 
-    .. code-block:: console
+   .. code-block:: console
 
-        # kubectl exec -it wazuh-indexer-0 -n wazuh -- /bin/bash
+      # kubectl exec -it wazuh-indexer-0 -n wazuh -- /bin/bash
 
 #. Set the following variables:
 
-    .. code-block:: console
+   .. code-block:: console
 
-        export INSTALLATION_DIR=/usr/share/wazuh-indexer
-        CACERT=$INSTALLATION_DIR/certs/root-ca.pem
-        KEY=$INSTALLATION_DIR/certs/admin-key.pem
-        CERT=$INSTALLATION_DIR/certs/admin.pem
-        export JAVA_HOME=/usr/share/wazuh-indexer/jdk
+      export INSTALLATION_DIR=/usr/share/wazuh-indexer
+      CACERT=$INSTALLATION_DIR/certs/root-ca.pem
+      KEY=$INSTALLATION_DIR/certs/admin-key.pem
+      CERT=$INSTALLATION_DIR/certs/admin.pem
+      export JAVA_HOME=/usr/share/wazuh-indexer/jdk
 
 #. Wait for the Wazuh indexer to initialize properly. The waiting time can vary from two to five minutes. It depends on the size of the cluster, the assigned resources, and the speed of the network. Then, run the ``securityadmin.sh`` script to apply all changes.
 
-    .. code-block:: console
+   .. code-block:: console
 
-        $ bash /usr/share/wazuh-indexer/plugins/opensearch-security/tools/securityadmin.sh -cd /usr/share/wazuh-indexer/opensearch-security/ -nhnv -cacert  $CACERT -cert $CERT -key $KEY -p 9200 -icl -h $NODE_NAME
+      $ bash /usr/share/wazuh-indexer/plugins/opensearch-security/tools/securityadmin.sh -cd /usr/share/wazuh-indexer/opensearch-security/ -nhnv -cacert  $CACERT -cert $CERT -key $KEY -p 9200 -icl -h $NODE_NAME
 
-#. Exit the Wazuh indexer container and login with the new credentials on the Wazuh dashboard.
+#. Login with the new credentials on the Wazuh dashboard.
 
 Wazuh API users
 ~~~~~~~~~~~~~~~
@@ -338,7 +341,13 @@ The ``wazuh-wui`` user is the user to connect with the Wazuh API by default. Fol
 
    The password for Wazuh API users must be between 8 and 64 characters long. It must contain at least one uppercase and one lowercase letter, a number, and a symbol.
 
-#. Open the file ``wazuh/secrets/wazuh-api-cred-secret.yaml`` and modify the value of ``password`` parameter.
+#. Encode your new password in base64 format. Avoid inserting a trailing newline character to maintain the hash value. For example, use the ``-n`` option with the ``echo`` command as follows.
+
+   .. code-block::
+      
+      # echo -n "NewPassword" | base64
+
+#. Edit the ``wazuh/secrets/wazuh-api-cred-secret.yaml`` file and replace the value of the ``password`` field.
 
     .. code-block:: YAML
         :emphasize-lines: 8
@@ -352,13 +361,13 @@ The ``wazuh-wui`` user is the user to connect with the Wazuh API by default. Fol
 		    username: d2F6dWgtd3Vp          # string "wazuh-wui" base64 encoded
 		    password: UGFzc3dvcmQxMjM0LmE=  # string "MyS3cr37P450r.*-" base64 encoded
 
-#. Apply the manifest changes
+#. Apply the manifest changes.
 
     .. code-block:: console
 
         # kubectl apply -k envs/eks/
 
-#. Restart pods for Wazuh dashboasrd and Wazuh manager master
+#. Restart pods for Wazuh dashboard and Wazuh manager master.
 
 Agents
 ^^^^^^
