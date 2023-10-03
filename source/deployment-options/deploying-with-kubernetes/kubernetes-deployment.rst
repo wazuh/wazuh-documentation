@@ -226,33 +226,33 @@ Setting a new hash
 
 #. Replace the hash.
 
-   -  ``admin`` user
+    -  ``admin`` user
 
-      .. code-block:: YAML
-         :emphasize-lines: 3
+        .. code-block:: YAML
+            :emphasize-lines: 3
 
-         ...
-         admin:
-           hash: "$2y$12$K/SpwjtB.wOHJ/Nc6GVRDuc1h0rM1DfvziFRNPtk27P.c4yDr9njO"
-           reserved: true
-           backend_roles:
-           - "admin"
-           description: "Demo admin user"
+        ...
+        admin:
+            hash: "$2y$12$K/SpwjtB.wOHJ/Nc6GVRDuc1h0rM1DfvziFRNPtk27P.c4yDr9njO"
+            reserved: true
+            backend_roles:
+            - "admin"
+            description: "Demo admin user"
 
-         ...
+        ...
 
-   -  ``kibanaserver`` user
+    -  ``kibanaserver`` user
 
-      .. code-block:: YAML
-         :emphasize-lines: 3
+        .. code-block:: YAML
+            :emphasize-lines: 3
 
-         ...
-         kibanaserver:
-           hash: "$2a$12$4AcgAt3xwOWadA5s5blL6ev39OXDNhmOesEoo33eZtrq2N0YrU3H."
-           reserved: true
-           description: "Demo kibanaserver user"
+        ...
+        kibanaserver:
+            hash: "$2a$12$4AcgAt3xwOWadA5s5blL6ev39OXDNhmOesEoo33eZtrq2N0YrU3H."
+            reserved: true
+            description: "Demo kibanaserver user"
 
-         ...
+        ...
 
 
 Setting the new password
@@ -260,66 +260,70 @@ Setting the new password
 
 #. Open  the ``wazuh/secrets/indexer-cred-secret.yaml`` file when you need to change ``admin`` user or ``wazuh/secrets/dashboard-cred-secret.yaml`` file when you need to change ``kibanaserver`` user . Change the value of the secret "password" in the corresponding file, base64 encoding the new password:
 
+.. note::
+
+    If you use the ``echo`` command to execute the ``base64`` command on Linux, remember to add the -n option so that it does not record a line break at the end and does not modify the password hash
+    ``# echo -n "NewPassword" | base64``
 
 
     -  ``admin`` user
 
         .. code-block:: YAML
-           :emphasize-lines: 8
+            :emphasize-lines: 8
 
-         ...
-         apiVersion: v1
-		 kind: Secret
-		 metadata:
-		   name: indexer-cred
-		 data:
-		   username: YWRtaW4=              # string "admin" base64 encoded
-		   password: U2VjcmV0UGFzc3dvcmQ=  # string "SecretPassword" base64 encoded
-		 ...
+        ...
+        apiVersion: v1
+        kind: Secret
+        metadata:
+            name: indexer-cred
+        data:
+            username: YWRtaW4=              # string "admin" base64 encoded
+            password: U2VjcmV0UGFzc3dvcmQ=  # string "SecretPassword" base64 encoded
+        ...
 
-   -  ``kibanaserver`` user
+    -  ``kibanaserver`` user
 
-      .. code-block:: YAML
-         :emphasize-lines: 8
+        .. code-block:: YAML
+            emphasize-lines: 8
 
-         ...
-		 apiVersion: v1
-		 kind: Secret
-		 metadata:
-		   name: dashboard-cred
-		 data:
-		   username: a2liYW5hc2VydmVy  # string "kibanaserver" base64 encoded
-		   password: a2liYW5hc2VydmVy  # string "kibanaserver" base64 encoded
-         ...
+        ...
+        apiVersion: v1
+        kind: Secret
+        metadata:
+            name: dashboard-cred
+        data:
+            username: a2liYW5hc2VydmVy  # string "kibanaserver" base64 encoded
+            password: a2liYW5hc2VydmVy  # string "kibanaserver" base64 encoded
+        ...
 
 Applying the changes
 ....................
 
 #. Apply the manifest changes
 
-   .. code-block:: console
+    .. code-block:: console
 
-      # kubectl apply -k envs/eks/
+        # kubectl apply -k envs/eks/
 
 #. Run ``kubectl exec -it <POD_NAME> -n wazuh -- /bin/bash`` to enter the container. For example:
 
-   .. code-block:: console
+    .. code-block:: console
 
-      # kubectl exec -it wazuh-indexer-0 -n wazuh -- /bin/bash
+        # kubectl exec -it wazuh-indexer-0 -n wazuh -- /bin/bash
 
 #. Set the following variables:
 
-   .. code-block:: console
+    .. code-block:: console
 
-      export INSTALLATION_DIR=/usr/share/wazuh-indexer
-      CACERT=$INSTALLATION_DIR/certs/root-ca.pem
-      KEY=$INSTALLATION_DIR/certs/admin-key.pem
-      CERT=$INSTALLATION_DIR/certs/admin.pem
-      export JAVA_HOME=/usr/share/wazuh-indexer/jdk
+        export INSTALLATION_DIR=/usr/share/wazuh-indexer
+        CACERT=$INSTALLATION_DIR/certs/root-ca.pem
+        KEY=$INSTALLATION_DIR/certs/admin-key.pem
+        CERT=$INSTALLATION_DIR/certs/admin.pem
+        export JAVA_HOME=/usr/share/wazuh-indexer/jdk
 
 #. Wait for the Wazuh indexer to initialize properly. The waiting time can vary from two to five minutes. It depends on the size of the cluster, the assigned resources, and the speed of the network. Then, run the ``securityadmin.sh`` script to apply all changes.
 
-      .. code-block:: console
+    .. code-block:: console
 
         $ bash /usr/share/wazuh-indexer/plugins/opensearch-security/tools/securityadmin.sh -cd /usr/share/wazuh-indexer/opensearch-security/ -nhnv -cacert  $CACERT -cert $CERT -key $KEY -p 9200 -icl -h $NODE_NAME
 
@@ -336,23 +340,23 @@ The ``wazuh-wui`` user is the user to connect with the Wazuh API by default. Fol
 
 #. Open the file ``wazuh/secrets/wazuh-api-cred-secret.yaml`` and modify the value of ``password`` parameter.
 
-   .. code-block:: YAML
-      :emphasize-lines: 8
+    .. code-block:: YAML
+        :emphasize-lines: 8
 
-      apiVersion: v1
-	  kind: Secret
-	  metadata:
-	    name: wazuh-api-cred
+        apiVersion: v1
+        kind: Secret
+        metadata:
+            name: wazuh-api-cred
 		namespace: wazuh
-	  data:
-		username: d2F6dWgtd3Vp          # string "wazuh-wui" base64 encoded
-		password: UGFzc3dvcmQxMjM0LmE=  # string "MyS3cr37P450r.*-" base64 encoded
+        data:
+		    username: d2F6dWgtd3Vp          # string "wazuh-wui" base64 encoded
+		    password: UGFzc3dvcmQxMjM0LmE=  # string "MyS3cr37P450r.*-" base64 encoded
 
 #. Apply the manifest changes
 
-   .. code-block:: console
+    .. code-block:: console
 
-      # kubectl apply -k envs/eks/
+        # kubectl apply -k envs/eks/
 
 #. Restart pods for Wazuh dashboasrd and Wazuh manager master
 
