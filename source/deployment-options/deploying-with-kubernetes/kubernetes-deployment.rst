@@ -349,17 +349,17 @@ The ``wazuh-wui`` user is the user to connect with the Wazuh API by default. Fol
 
 #. Edit the ``wazuh/secrets/wazuh-api-cred-secret.yaml`` file and replace the value of the ``password`` field.
 
-    .. code-block:: YAML
-        :emphasize-lines: 8
+   .. code-block:: YAML
+      :emphasize-lines: 8
 
-        apiVersion: v1
-        kind: Secret
-        metadata:
-            name: wazuh-api-cred
-		namespace: wazuh
-        data:
-		    username: d2F6dWgtd3Vp          # string "wazuh-wui" base64 encoded
-		    password: UGFzc3dvcmQxMjM0LmE=  # string "MyS3cr37P450r.*-" base64 encoded
+      apiVersion: v1
+      kind: Secret
+      metadata:
+          name: wazuh-api-cred
+          namespace: wazuh
+      data:
+          username: d2F6dWgtd3Vp          # string "wazuh-wui" base64 encoded
+          password: UGFzc3dvcmQxMjM0LmE=  # string "MyS3cr37P450r.*-" base64 encoded
 
 #. Apply the manifest changes.
 
