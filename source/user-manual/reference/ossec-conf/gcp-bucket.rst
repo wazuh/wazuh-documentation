@@ -98,8 +98,8 @@ Bucket options
 
 .. _gcp_bucket_name:
 
-bucket\\name
-^^^^^^^^^^^^
+name
+~~~~
 
 Name of the Google Cloud Storage bucket where logs are read from.
 
@@ -111,8 +111,8 @@ Name of the Google Cloud Storage bucket where logs are read from.
 
 .. _gcp_bucket_credentials_file:
 
-bucket\\credentials_file
-^^^^^^^^^^^^^^^^^^^^^^^^
+credentials_file
+~~~~~~~~~~~~~~~~
 
 Path to the Google Cloud credentials file. It can be absolute or relative to ``WAZUH_HOME``.
 
@@ -126,8 +126,8 @@ For example ``<credentials_file>wodles/gcp-bucket/credentials.json</credentials_
 
 .. _gcp_bucket_path:
 
-bucket\\path
-^^^^^^^^^^^^
+path
+~~~~
 
 Bucket path or prefix.
 
@@ -139,8 +139,8 @@ Bucket path or prefix.
 
 .. _gcp_bucket_only_logs_after:
 
-bucket\\only_logs_after
-^^^^^^^^^^^^^^^^^^^^^^^
+only_logs_after
+~~~~~~~~~~~~~~~
 
 Parse logs from a specific date onwards. It must have the YYYY-MM-DD format. 
 
@@ -152,8 +152,8 @@ Parse logs from a specific date onwards. It must have the YYYY-MM-DD format.
 
 .. _gcp_bucket_remove_from_bucket:
 
-bucket\\remove_from_bucket
-^^^^^^^^^^^^^^^^^^^^^^^^^^
+remove_from_bucket
+~~~~~~~~~~~~~~~~~~
 
 Remove the logs from the Google Cloud Storage bucket after they are read by the module.
 
