@@ -199,8 +199,6 @@ To improve security, you can change the default password of the Wazuh users. The
 -  Wazuh indexer users
 -  Wazuh API users
 
- To change the password of these Wazuh users, perform the following steps. You must run the commands from your ``single-node/`` or ``multi-node/`` directory, depending on your Wazuh on Docker deployment.
-
 Wazuh indexer users
 ~~~~~~~~~~~~~~~~~~~
 
@@ -256,7 +254,6 @@ Setting a new hash
 
          ...
 
-.. _wazuh-docker-password-setting:
 
 Setting the new password
 ........................
@@ -265,10 +262,10 @@ Setting the new password
 
 
 
-   -  ``admin`` user
+    -  ``admin`` user
 
-      .. code-block:: YAML
-         :emphasize-lines: 8
+        .. code-block:: YAML
+           :emphasize-lines: 8
 
          ...
          apiVersion: v1
@@ -278,7 +275,7 @@ Setting the new password
 		 data:
 		   username: YWRtaW4=              # string "admin" base64 encoded
 		   password: U2VjcmV0UGFzc3dvcmQ=  # string "SecretPassword" base64 encoded
-		...
+		 ...
 
    -  ``kibanaserver`` user
 
@@ -293,7 +290,7 @@ Setting the new password
 		 data:
 		   username: a2liYW5hc2VydmVy  # string "kibanaserver" base64 encoded
 		   password: a2liYW5hc2VydmVy  # string "kibanaserver" base64 encoded
-           ...
+         ...
 
 Applying the changes
 ....................
