@@ -191,6 +191,173 @@ The Wazuh dashboard will be accessible on ``https://localhost:8443``.
 
 The default credentials are ``admin:SecretPassword``.
 
+Change the password of Wazuh users
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+To improve security, you can change the default password of the Wazuh users. There are two types of Wazuh users:
+
+-  Wazuh indexer users
+-  Wazuh API users
+
+ To change the password of these Wazuh users, perform the following steps. You must run the commands from your ``single-node/`` or ``multi-node/`` directory, depending on your Wazuh on Docker deployment.
+
+Wazuh indexer users
+~~~~~~~~~~~~~~~~~~~
+
+ To change the password of the default ``admin`` and ``kibanaserver`` users, do the following.
+
+.. warning::
+
+   If you have custom users, add them to the ``internal_users.yml`` file. Otherwise, executing this procedure deletes them.
+
+Setting a new hash
+..................
+
+#. Run this command to generate the hash of your new password. Once the container launches, input the new password and press **Enter**.
+
+   .. code-block:: console
+
+      # kubectl exec -it wazuh-indexer-0 -n wazuh -- /bin/bash
+	  wazuh-indexer@wazuh-indexer-0:~$ export JAVA_HOME=/usr/share/wazuh-indexer/jdk
+	  wazuh-indexer@wazuh-indexer-0:~$ bash /usr/share/wazuh-indexer/plugins/opensearch-security/tools/hash.sh
+
+
+#. Copy the generated hash.
+
+#. Open the ``wazuh/indexer_stack/wazuh-indexer/indexer_conf/internal_users.yml`` file. Locate the block for the user you are changing password for.
+
+#. Replace the hash.
+
+   -  ``admin`` user
+
+      .. code-block:: YAML
+         :emphasize-lines: 3
+
+         ...
+         admin:
+           hash: "$2y$12$K/SpwjtB.wOHJ/Nc6GVRDuc1h0rM1DfvziFRNPtk27P.c4yDr9njO"
+           reserved: true
+           backend_roles:
+           - "admin"
+           description: "Demo admin user"
+
+         ...
+
+   -  ``kibanaserver`` user
+
+      .. code-block:: YAML
+         :emphasize-lines: 3
+
+         ...
+         kibanaserver:
+           hash: "$2a$12$4AcgAt3xwOWadA5s5blL6ev39OXDNhmOesEoo33eZtrq2N0YrU3H."
+           reserved: true
+           description: "Demo kibanaserver user"
+
+         ...
+
+.. _wazuh-docker-password-setting:
+
+Setting the new password
+........................
+
+#. Open  the ``wazuh/secrets/indexer-cred-secret.yaml`` file when you need to change ``admin`` user or ``wazuh/secrets/dashboard-cred-secret.yaml`` file when you need to change ``kibanaserver`` user . Change the value of the secret "password" in the corresponding file, base64 encoding the new password:
+
+
+
+   -  ``admin`` user
+
+      .. code-block:: YAML
+         :emphasize-lines: 8
+
+         ...
+         apiVersion: v1
+		 kind: Secret
+		 metadata:
+		   name: indexer-cred
+		 data:
+		   username: YWRtaW4=              # string "admin" base64 encoded
+		   password: U2VjcmV0UGFzc3dvcmQ=  # string "SecretPassword" base64 encoded
+		...
+
+   -  ``kibanaserver`` user
+
+      .. code-block:: YAML
+         :emphasize-lines: 8
+
+         ...
+		 apiVersion: v1
+		 kind: Secret
+		 metadata:
+		   name: dashboard-cred
+		 data:
+		   username: a2liYW5hc2VydmVy  # string "kibanaserver" base64 encoded
+		   password: a2liYW5hc2VydmVy  # string "kibanaserver" base64 encoded
+           ...
+
+Applying the changes
+....................
+
+#. Apply the manifest changes
+
+   .. code-block:: console
+
+      # kubectl apply -k envs/eks/
+
+#. Run ``kubectl exec -it <POD_NAME> -n wazuh -- /bin/bash`` to enter the container. For example:
+
+   .. code-block:: console
+
+      # kubectl exec -it wazuh-indexer-0 -n wazuh -- /bin/bash
+
+#. Set the following variables:
+
+   .. code-block:: console
+
+      export INSTALLATION_DIR=/usr/share/wazuh-indexer
+      CACERT=$INSTALLATION_DIR/certs/root-ca.pem
+      KEY=$INSTALLATION_DIR/certs/admin-key.pem
+      CERT=$INSTALLATION_DIR/certs/admin.pem
+      export JAVA_HOME=/usr/share/wazuh-indexer/jdk
+
+#. Wait for the Wazuh indexer to initialize properly. The waiting time can vary from two to five minutes. It depends on the size of the cluster, the assigned resources, and the speed of the network. Then, run the ``securityadmin.sh`` script to apply all changes.
+
+      .. code-block:: console
+
+        $ bash /usr/share/wazuh-indexer/plugins/opensearch-security/tools/securityadmin.sh -cd /usr/share/wazuh-indexer/opensearch-security/ -nhnv -cacert  $CACERT -cert $CERT -key $KEY -p 9200 -icl -h $NODE_NAME
+
+#. Exit the Wazuh indexer container and login with the new credentials on the Wazuh dashboard.
+
+Wazuh API users
+~~~~~~~~~~~~~~~
+
+The ``wazuh-wui`` user is the user to connect with the Wazuh API by default. Follow these steps to change the password.
+
+.. note::
+
+   The password for Wazuh API users must be between 8 and 64 characters long. It must contain at least one uppercase and one lowercase letter, a number, and a symbol.
+
+#. Open the file ``wazuh/secrets/wazuh-api-cred-secret.yaml`` and modify the value of ``password`` parameter.
+
+   .. code-block:: YAML
+      :emphasize-lines: 8
+
+      apiVersion: v1
+	  kind: Secret
+	  metadata:
+	    name: wazuh-api-cred
+		namespace: wazuh
+	  data:
+		username: d2F6dWgtd3Vp          # string "wazuh-wui" base64 encoded
+		password: UGFzc3dvcmQxMjM0LmE=  # string "MyS3cr37P450r.*-" base64 encoded
+
+#. Apply the manifest changes
+
+   .. code-block:: console
+
+      # kubectl apply -k envs/eks/
+
+#. Restart pods for Wazuh dashboasrd and Wazuh manager master
 
 Agents
 ^^^^^^
