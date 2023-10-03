@@ -81,7 +81,7 @@ Select your Solaris version and follow the steps to upgrade the Wazuh agent.
 
          .. code-block:: console
 
-            #rm -rf /var/ossec
+            # rm -rf /var/ossec
 
       #. Install the Wazuh agent. Choose one option depending on the host architecture.
 
@@ -107,7 +107,6 @@ Select your Solaris version and follow the steps to upgrade the Wazuh agent.
             # mv ~/client.keys.bk /var/ossec/etc/client.keys
             # chown root:wazuh /var/ossec/etc/client.keys
 
-         There may be incompatible options with 4.3 version, please validate your config files before restoration.
 
       #. Start the Wazuh agent.
 
