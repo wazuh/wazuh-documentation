@@ -3,175 +3,98 @@
 .. meta::
   :description: Learn more about the command monitoring configuration. Check out the basic usage, how to monitor running Windows processes, and more. 
 
-.. _command-examples:
-
 Configuration
 =============
 
-#. `Basic usage`_
-#. `Monitor running Windows processes`_
-#. `Disk space utilization`_
-#. `Check if the output changed`_
-#. `Load average`_
-#. `Detect USB Storage`_
+This section of the documentation shows how to configure the modules responsible for running and monitoring commands, executables, and scripts on endpoints. It also provides the different configuration files available and suitable for different use cases.
 
-Basic usage
------------
+Modules
+-------
 
-Command monitoring is configured in the :ref:`localfile section<reference_ossec_localfile>` of :ref:`ossec.conf <reference_ossec_conf>`. It can also be centrally configured in :ref:`agent.conf<reference_agent_conf>`.
+Wazuh provides two modules for monitoring the output of system commands executed on an endpoint. The Command and the Logcollector modules periodically run and monitor commands or executables on Windows, Linux, and macOS endpoints.
 
-Monitor running Windows processes
----------------------------------
-Let's say you want to monitor running processes and alert if an important process is not running.
+Command module
+^^^^^^^^^^^^^^
 
-Example with notepad.exe as the important process to monitor:
+We recommend using the Command module to run and monitor endpoint commands. It provides the following capabilities:
 
-1. Configure the agent in the agent's **local_internal_options.conf** file to accept remote commands from the manager.
+- **Checksum verification**: It verifies and validates the integrity of every executed system binary or script by comparing predefined MD5, SHA1, and SHA256 hashes. This procedure ensures that the binary has not been altered or replaced.
 
-    .. code-block:: pkgconfig
+- **Encrypted communication**: All messages exchanged between the Wazuh server and agents are encrypted using AES encryption. This implies that every command output from the Wazuh agents is sent securely to the  Wazuh server.
 
-      # Logcollector - Whether or not to accept remote commands from the manager
-      logcollector.remote_commands=1
+- **Scheduling execution**: The Command module is flexible and can be configured to run commands on endpoints as follows:
 
-2. Define the command in the group's **agent.conf** file to list running processes.
+   - Immediately after the Wazuh agent starts.
 
-    .. code-block:: xml
+   - At specific time intervals (:ref:`interval <wodle_command_interval>`).
 
-      <localfile>
-          <log_format>full_command</log_format>
-          <command>tasklist</command>
-          <frequency>120</frequency>
-      </localfile>
+   - On a particular day of the month (:ref:`day <wodle_command_day>`) represented by the day's number.
 
-    The ``<frequency>`` tag defines how often the command will be run in seconds.
+   - On a specific day of the week (:ref:`wday <wodle_command_wday>`) represented by the day’s name.
 
-3. Define the rules.
+   - At a particular time (:ref:`time <wodle_command_time>`) of the day represented in the format hh:mm.
 
-    .. code-block:: xml
-
-      <rule id="100010" level="6">
-        <if_sid>530</if_sid>
-        <match>^ossec: output: 'tasklist'</match>
-        <description>Important process not running.</description>
-        <group>process_monitor,</group>
-      </rule>
-
-      <rule id="100011" level="0">
-        <if_sid>100010</if_sid>
-        <match>notepad.exe</match>
-        <description>Processes running as expected</description>
-        <group>process_monitor,</group>
-      </rule>
-
-    The first rule (100010) will generate an alert ("Important process not running") unless it is overridden by its child rule (100011) that matches `notepad.exe` in the command output.  You may add as many child rules as needed to enumerate all of the important processes you want to monitor.  You can also adapt this example to monitor Linux processes by changing the ``<command>`` from ``tasklist`` to a Linux command that lists processes, like ``ps -auxw``.
-
-Disk space utilization
-----------------------
-
-The ``df`` command helps here to check the available disk space for file systems.
-
-This can be configured in either the ``agent.conf`` file or the ``ossec.conf`` file:
+A standard command configuration block looks like this:
 
 .. code-block:: xml
 
-  <localfile>
-      <log_format>command</log_format>
-      <command>df -P</command>
-  </localfile>
-
-Wazuh already has a rule to monitor this
-
-.. code-block:: xml
-
-  <rule id="531" level="7" ignore="7200">
-    <if_sid>530</if_sid>
-    <match>ossec: output: 'df -P': /dev/</match>
-    <regex>100%</regex>
-    <description>Partition usage reached 100% (disk space monitor).</description>
-    <group>low_diskspace,pci_dss_10.6.1,</group>
-  </rule>
+   <wodle name="command">
+     <disabled>no</disabled>
+     <tag>test</tag>
+     <command>/bin/bash /root/script.sh</command>
+     <interval>1d</interval>
+     <ignore_output>no</ignore_output>
+     <run_on_start>yes</run_on_start>
+     <timeout>0</timeout>
+     <verify_md5>11227b11f565de042c48654a241e9d1c</verify_md5>
+     <verify_sha1>be705c5a89d7bf74185c86c5c3c562608f6e6478</verify_sha1>
+     <verify_sha256>292a188e498caea5c5fbfb0beca413c980e7a5edf40d47cf70e1dbc33e4f395e</verify_sha256>
+   </wodle>
 
 
-The system will alert once the disk space usage on any partition reaches 100%.
-
-Check if the output changed
----------------------------
-
-In this case, the Linux "netstat" command is used along with the :ref:`check_diff option <rules_check_diff>` to monitor for changes in listening tcp sockets.
-
-This can be configured in either the ``agent.conf`` file or the ``ossec.conf`` file:
-
-.. code-block:: xml
-
-  <localfile>
-    <log_format>full_command</log_format>
-    <command>netstat -tulpn | sed 's/\([[:alnum:]]\+\)\ \+[[:digit:]]\+\ \+[[:digit:]]\+\ \+\(.*\):\([[:digit:]]*\)\ \+\([0-9\.\:\*]\+\).\+\ \([[:digit:]]*\/[[:alnum:]\-]*\).*/\1 \2 == \3 == \4 \5/' | sort -k 4 -g | sed 's/ == \(.*\) ==/:\1/' | sed 1,2d</command>
-    <alias>netstat listening ports</alias>
-    <frequency>360</frequency>
-  </localfile>
-
-Wazuh already has a rule to monitor this:
-
-.. code-block:: xml
-
-  <rule id="533" level="7">
-    <if_sid>530</if_sid>
-    <match>ossec: output: 'netstat listening ports</match>
-    <check_diff />
-    <description>Listened ports status (netstat) changed (new port opened or closed).</description>
-    <group>pci_dss_10.2.7,pci_dss_10.6.1,gpg13_10.1,gdpr_IV_35.7.d,</group>
-  </rule>
-
-If the output changes, the system will generate an alert indicating a network listener has disappeared or a new one has appeared. This may indicate something is broken or a network backdoor has been installed.
-
-Load average
-------------
-
-Wazuh can be configured to monitor the Linux ``uptime`` command and alert when it is higher than a given threshold, like two load averages in this example.
-
-This can be configured in ``agent.conf`` or ``ossec.conf``:
-
-.. code-block:: xml
-
-  <localfile>
-      <log_format>command</log_format>
-      <command>uptime</command>
-  </localfile>
-
-And the custom rule to alert when "uptime" is higher than two load averages:
-
-.. code-block:: xml
-
-  <rule id="100101" level="7" ignore="7200">
-    <if_sid>530</if_sid>
-    <match>ossec: output: 'uptime': </match>
-    <regex>load average: 2.</regex>
-    <description>Load average reached 2..</description>
-  </rule>
-
-Detect USB Storage
-------------------
-
-Wazuh can be configured to alert when a USB storage device is connected. This example is for a Windows agent.
-
-Configure your agent to monitor the USBSTOR registry entry by adding the following to the group's ``agent.conf``:
-
-.. code-block:: xml
-
-  <agent_config os="Windows">
-    <localfile>
-        <log_format>full_command</log_format>
-        <command>reg QUERY HKLM\SYSTEM\CurrentControlSet\Enum\USBSTOR</command>
-    </localfile>
-  </agent_config>
-
-Next, create a custom rule:
-
-.. code-block:: xml
-
-  <rule id="140125" level="7">
-      <if_sid>530</if_sid>
-      <match>ossec: output: 'reg QUERY</match>
-      <check_diff />
-      <description>New USB device connected</description>
-  </rule>
++--------------------+---------------+--------------------------------------------------+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+---------------------------------------------------------------------------------------------------------------------------------------+
+| Options            | Default value | Allowed values                                   | Description                                                                                                                                                                                                                                                                                       | Note                                                                                                                                  |
++====================+===============+==================================================+===================================================================================================================================================================================================================================================================================================+=======================================================================================================================================+
+| **Main options**                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                  |
++--------------------+---------------+--------------------------------------------------+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+---------------------------------------------------------------------------------------------------------------------------------------+
+| disabled           | no            | yes, no                                          | Disables the Command module when set to ``yes``.                                                                                                                                                                                                                                                  |                                                                                                                                       |
++--------------------+---------------+--------------------------------------------------+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+---------------------------------------------------------------------------------------------------------------------------------------+
+| tag                | no            | N/A                                              | Tags the command with a descriptive name in the command output. For example, ``test`` in the configuration block above will be present in the command output.                                                                                                                                     |                                                                                                                                       |
++--------------------+---------------+--------------------------------------------------+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+---------------------------------------------------------------------------------------------------------------------------------------+
+|command             |               | - A command                                      | Specifies the path to a command, binary, or script to be executed.                                                                                                                                                                                                                                |                                                                                                                                       |
+|                    |               | - Path to a binary                               |                                                                                                                                                                                                                                                                                                   |                                                                                                                                       |
+|                    |               | - Path to a script                               |                                                                                                                                                                                                                                                                                                   |                                                                                                                                       |
++--------------------+---------------+--------------------------------------------------+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+---------------------------------------------------------------------------------------------------------------------------------------+
+|ignore_output       | no            | yes, no                                          | Specifies whether the output of a command is ignored. When this option is set to ``yes``, the command output is not forwarded to the Wazuh server.                                                                                                                                                |                                                                                                                                       |
++--------------------+---------------+--------------------------------------------------+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+---------------------------------------------------------------------------------------------------------------------------------------+
+|timeout             | N/A           | A positive number                                | Specifies the time (in seconds) for each command to wait for the completion of its execution. When this option is set to ``0``, it will wait indefinitely for the end of the process. If the timeout is any value other than ``0``, then the execution will finish when the set value expires.    |                                                                                                                                       |
++--------------------+---------------+--------------------------------------------------+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+---------------------------------------------------------------------------------------------------------------------------------------+
+|verify_md5          | N/A           | MD5 checksum                                     | Verifies the MD5 sum of the binary or the script to be executed against this value. If the checksum does not match, the command output is ignored.                                                                                                                                                | Verifies only the first argument of the command option if you passed two or more arguments.                                           |
++--------------------+---------------+--------------------------------------------------+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+---------------------------------------------------------------------------------------------------------------------------------------+
+|verify_sha1         | N/A           | SHA1 checksum                                    | Verifies the SHA1 sum of the binary or the script to be executed against this value. If the checksum does not match, the command output is ignored.                                                                                                                                               | Verifies only the first argument of the command option if you passed two or more arguments.                                           |
++--------------------+---------------+--------------------------------------------------+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+---------------------------------------------------------------------------------------------------------------------------------------+
+|verify_sha256       | N/A           | SHA256 checksum                                  | Verifies the SHA256 sum of the binary or the script to be executed against this value. If the checksum does not match, the command output is ignored.                                                                                                                                             | Verifies only the first argument of the command option if you passed two or more arguments.                                           |
++--------------------+---------------+--------------------------------------------------+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+---------------------------------------------------------------------------------------------------------------------------------------+
+|skip_verification   | N/A           | yes, no                                          | Runs the command defined even if the checksum does not match. When set to yes and there is a verification failure, the agent will log that the checksum verification failed but will run the specified command regardless of the failure.                                                         |                                                                                                                                       |
++--------------------+---------------+--------------------------------------------------+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+---------------------------------------------------------------------------------------------------------------------------------------+
+| **Scheduling options**                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            |
++--------------------+---------------+--------------------------------------------------+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+---------------------------------------------------------------------------------------------------------------------------------------+
+| run_on_start       | yes           | yes, no                                          | Runs the configured command immediately when the Wazuh service starts.                                                                                                                                                                                                                            |                                                                                                                                       |
++--------------------+---------------+--------------------------------------------------+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+---------------------------------------------------------------------------------------------------------------------------------------+
+| interval           | 2s            | A positive number that should contain a suffix   | Specifies how often a defined command executes.                                                                                                                                                                                                                                                   |                                                                                                                                       |
+|                    |               | character indicating a time unit, such as,       |                                                                                                                                                                                                                                                                                                   |                                                                                                                                       |
+|                    |               | s (seconds), m (minutes), h (hours), d (days)    |                                                                                                                                                                                                                                                                                                   |                                                                                                                                       |
++--------------------+---------------+--------------------------------------------------+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+---------------------------------------------------------------------------------------------------------------------------------------+
+| day                | N/A           | Day of the month [1..31]                         | Day of the month to run the command configured.                                                                                                                                                                                                                                                   | When the ``day`` option is set, the interval value must be a multiple of months. By default, the interval is set to a month.          |
++--------------------+---------------+--------------------------------------------------+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+---------------------------------------------------------------------------------------------------------------------------------------+
+| wday               | N/A           |                                                  | Day of the week to run the command configured. This option is not compatible with the ``day`` option.                                                                                                                                                                                             | When the ``wday`` option is set, the interval value must be a multiple of weeks. By default, the interval is set to a week.           |
+|                    |               | - sunday/sun                                     |                                                                                                                                                                                                                                                                                                   |                                                                                                                                       |
+|                    |               | - monday/mon                                     |                                                                                                                                                                                                                                                                                                   |                                                                                                                                       |
+|                    |               | - tuesday/tue                                    |                                                                                                                                                                                                                                                                                                   |                                                                                                                                       |
+|                    |               | - wednesday/wed                                  |                                                                                                                                                                                                                                                                                                   |                                                                                                                                       |
+|                    |               | - thursday/thu                                   |                                                                                                                                                                                                                                                                                                   |                                                                                                                                       |
+|                    |               | - friday/fri                                     |                                                                                                                                                                                                                                                                                                   |                                                                                                                                       |
+|                    |               | - saturday/sat                                   |                                                                                                                                                                                                                                                                                                   |                                                                                                                                       |
++--------------------+---------------+--------------------------------------------------+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+---------------------------------------------------------------------------------------------------------------------------------------+
+| time               | N/A           | Time of day [hh:mm]                              | When only the ``time`` option is set, the interval value must be a multiple of days or weeks. By default, the interval is set to a day.                                                                                                                                                           |                                                                                                                                       |
++--------------------+---------------+--------------------------------------------------+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+---------------------------------------------------------------------------------------------------------------------------------------+
