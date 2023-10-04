@@ -144,17 +144,18 @@ Perform the following steps on the Wazuh server.
    .. code-block:: xml
 
       <group name="syscheck">
-        <rule id="180002" level="8">
+        <rule id="100002" level="8">
           <if_sid>550</if_sid>
           <field name="file">.sh$</field>
           <field name="changed_fields">^permission$</field>
-          <field name="perm" type="pcre">\w\wx</field>
+          <field name="perm" type="pcre2">\w\wx</field>
           <description>Execute permission added to shell script.</description>
           <mitre>
             <id>T1222.002</id>
           </mitre>
         </rule>
       </group>
+
 
 #. Restart the Wazuh server to apply the configuration changes:
 
@@ -275,7 +276,7 @@ You can see the alert fields that correspond to the decoded FIM fields in the al
                 "Defense Evasion"
               ]
             },
-            "id": "180002"
+            "id": "100002"
           },
           "location": "syscheck",
           "decoder": {
@@ -296,7 +297,7 @@ You can see the alert fields that correspond to the decoded FIM fields in the al
         "highlight": {
           "agent.id": [
       }
-      
+
 Trigger file deletion alerts
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
@@ -330,7 +331,7 @@ Perform the following steps on the Wazuh server.
       :emphasize-lines: 4,5
 
       <group name="syscheck">
-        <rule id="180003" level="8">
+        <rule id="100003" level="8">
           <if_sid>553</if_sid>
           <field name="process_name">explorer.exe$</field>
           <field name="uname">USER$</field>
@@ -527,7 +528,7 @@ You can see the alert fields that correspond to the decoded FIM fields in the al
                 "Impact"
               ]
             },
-            "id": "180003"
+            "id": "100003"
           },
           "location": "syscheck",
           "decoder": {
@@ -578,7 +579,7 @@ Perform the following steps on the Wazuh server.
       :emphasize-lines: 2
 
       <group name="syscheck">
-      <rule id="180005" level="12">
+      <rule id="100005" level="12">
         <if_sid>550</if_sid>
         <field name="file">customer_details.rtf</field>
         <match>modified</match>
