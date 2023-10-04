@@ -3,8 +3,6 @@
 .. meta::
   :description: Learn more about the enhancement of Wazuh with MITRE, a feature that allows the user to customize the alert information to include specific information related to MITRE ATT&CK techniques.
   
-.. _mitre:
-
 Enhancing detection with MITRE ATT&CK framework
 ===============================================
 
@@ -82,46 +80,40 @@ For this example, we require the following infrastructure:
 
 .. |WAZUH_OVA| replace:: `Wazuh OVA <https://packages.wazuh.com/4.x/vm/wazuh-|WAZUH_CURRENT|.ova>`__
 
-+------------------+----------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-| Endpoint         | Example description                                                                                                                                                  |
-+==================+======================================================================================================================================================================+
-| **Wazuh server** | You can download the |WAZUH_OVA| or install it using the :doc:`installation guide </installation-guide/index>`.                                                      |
-+------------------+----------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-| **Kali Linux**   | This is the attacker endpoint. We use it to perform brute-force attacks against the monitored Ubuntu endpoint.                                                       |
-+------------------+----------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-| **Ubuntu 22.04** || We perform SSH brute-force attacks against this victim endpoint.                                                                                                    |
-|                  || It is required to have an SSH server installed and enabled on this endpoint.                                                                                        |
-+------------------+----------------------------------------------------------------------------------------------------------------------------------------------------------------------+
++------------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| Endpoint         | Example description                                                                                                                                                                                                                  |
++==================+======================================================================================================================================================================================================================================+
+| **Wazuh server** | You can download the |WAZUH_OVA| or install it using the :doc:`installation guide </installation-guide/index>`.                                                                                                                      |
++------------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| **Windows 11**   || We perform privilege escalation emulation attack on this endpoint.                                                                                                                                                                  |
+|                  || It is required to have a Wazuh agent installed and enrolled to the Wazuh server. To install the Wazuh agent, refer to the :doc:`Wazuh Windows installation guide </installation-guide/wazuh-agent/wazuh-agent-package-windows>`.    |
++------------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
 
 Wazuh server
 ~~~~~~~~~~~~
+
 #. Append the following rules to the ``/var/ossec/etc/rules/local_rules.xml`` file:
 
    .. code-block:: xml
-      :emphasize-lines: 9,14
 
-      <group name="local,syslog,sshd,">
+      <group name="windows,sysmon,privilege-escalation">
 
-        <rule id="100002" level="5">
-          <if_sid>5710</if_sid>
-          <description>sshd: authentication failed from $(srcip).</description>
-          <group>authentication_failed,pci_dss_10.2.4,pci_dss_10.2.5,</group>
-        </rule>
-
-        <rule id="100003" level="10" frequency="8" timeframe="120" ignore="60">
-          <if_matched_sid>100002</if_matched_sid>
-          <description>sshd: brute force trying to get access to the system.</description>
-          <same_srcip />
+        <rule id="160011" level="10">
+          <if_sid>61615</if_sid>
+          <field name="win.eventdata.targetObject" type="pcre2">HKLM\\\\System\\\\CurrentControlSet\\\\Services\\\\PSEXESVC</field>
+          <field name="win.eventdata.eventType" type="pcre2">^SetValue$</field>
+          <field name="win.eventdata.user" type="pcre2">NT AUTHORITY\\\\SYSTEM</field>
+          <options>no_full_log</options>
+          <description>PsExec service running as $(win.eventdata.user) has been created on $(win.system.computer)</description>
           <mitre>
-            <id>T1110</id>
+            <id>T1543.003</id>
           </mitre>
         </rule>
-
       </group>
 
-   The rule ``100003`` above creates an alert when eight (8) failed ssh bruteforce events occur on a monitored endpoint from the same IP address. It is mapped to the MITRE ATT&CK ID ``T1110`` indicating the brute force attack technique.
+   The rule ``160011`` creates an alert whenever there is a creation of a service named ``PSEXESVC``, which occurs each time PsExec is executed on the Windows endpoint. It is mapped to the MITRE ATT&CK ID ``T1543.003``, indicating the persistence and privilege escalation tactics.
 
-   When the rule triggers, the alert contains information about the MITRE ATT&CK ID ``T1110``. 
+   When the rule triggers, the alert contains information about the MITRE ATT&CK ID ``T1543.003``.
 
 #. Restart the Wazuh manager service to apply the changes:
 
@@ -129,33 +121,56 @@ Wazuh server
 
       $ sudo systemctl restart wazuh-manager.service 
 
-Kali endpoint
-~~~~~~~~~~~~~
+Windows 11
+~~~~~~~~~~
 
-Perform the following steps on the Kali Linux endpoint to launch the brute-force attack.
+Perform the following steps to configure the Wazuh agent to capture Sysmon logs and send them to the Wazuh server for analysis.
 
-#. Create a text file, ``pass_list.txt``, with six (6) random passwords in the ``/tmp/`` directory using the following command:
+#. Download `Sysmon <https://learn.microsoft.com/en-us/sysinternals/downloads/sysmon>`__ and the configuration file `sysmonconfig.xml <https://wazuh.com/resources/blog/emulation-of-attack-techniques-and-detection-with-wazuh/sysmonconfig.xml>`__.
+#. Launch PowerShell with administrative privilege, and install Sysmon as follows:
 
-   .. code-block:: console
+   .. code-block:: powershell
 
-      $ cat > /tmp/pass_list.txt << EOF
-      X9#fGvK5mZ
-      tR3@LdN6xY
-      sP7#hJ8kQz
-      cF2!nB6jWx
-      dH5#tK9lMq
-      zT6$fR9pXs
-      bG8!mY7wQz
-      nE4&tU2cPq
-      gA1%pD3iSx
-      vW2!rC5oLm
-      EOF
+      > .\Sysmon64.exe -accepteula -i .\sysmonconfig.xml
 
-#. Launch the brute-force attack against the Ubuntu endpoint’s SSH service using the following command while replacing ``<UBUNTU_IP>`` with the IP address of the Ubuntu endpoint:
+#. Edit the Wazuh agent ``C:\Program Files (x86)\ossec-agent\ossec.conf`` file and include the following settings within the ``<ossec_config>`` block:
 
-   .. code-block:: console
+   .. code-block:: xml
 
-      $ sudo hydra -l attacker -P /tmp/pass_list.txt <UBUNTU_IP> ssh
+      <!-- Configure Wazuh agent to receive events from Sysmon -->
+      <localfile>   
+        <location>Microsoft-Windows-Sysmon/Operational</location>
+        <log_format>eventchannel</log_format>
+      </localfile>
+
+#. Restart the Wazuh agent for the changes to take effect:
+
+   .. code-block:: powershell
+
+      > Restart-Service -Name wazuh
+
+PsExec execution
+^^^^^^^^^^^^^^^^
+
+We download the `PsTools archive from the Microsoft Sysinternals <https://docs.microsoft.com/en-us/sysinternals/downloads/psexec>`__ page and extract the PsExec binary from the archive. The following command escalates a Windows PowerShell process from an administrator user to a SYSTEM user:
+
+   .. code-block:: powershell
+
+      >./psexec -i -s powershell /accepteula
+
+Run the command below to confirm that the new instance of PowerShell is running as SYSTEM:
+
+   .. code-block:: powershell
+
+      > whoami
+
+Output is shown below:
+
+   .. code-block:: none
+      :class: output
+
+      PS C:\Windows\system32> whoami
+      nt authority\system
 
 Visualize the alerts
 ^^^^^^^^^^^^^^^^^^^^
@@ -174,9 +189,9 @@ We use filters on the **Security Module > MITRE ATT&CK> Events** tab of the Wazu
   :align: center
   :width: 80%
 
-Expand the rule ID ``100003`` alert to view the MITRE ID ``T1110`` information.
+Expand the rule ID ``160011`` alert to view the MITRE ID ``T1543.003`` information.
 
-.. thumbnail:: /images/manual/mitre/mitre-id-t1110-information.png
+.. thumbnail:: /images/manual/mitre/mitre-id-t1543.003-information.png
   :title: MITRE ID T1110 information
   :alt: MITRE ID T1110 information
   :align: center
