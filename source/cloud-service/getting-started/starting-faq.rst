@@ -39,13 +39,11 @@ Cloud service FAQ
 
 - `What happens if the tier limit is reached?`_
 
-- `What happens if indexed data size setting is reached?`_
+- `What happens if the indexed data size setting is reached?`_
 
 - `How is indexed data rotated?`_
 
-- `What are EPS credits?`_
-
-- `What happens when there are no EPS credits left?`_
+- `What happens if the data ingestion rate is exceeded?`_
 
 - `Can I cancel at any time?`_
   
@@ -116,12 +114,12 @@ The concept of a tier, which represents the size limitation, in bytes, of the in
 What happens if the tier limit is reached?
 ------------------------------------------
 
-See :ref:`What happens if indexed data size setting is reached? <cloud_starting_faq_data_reached>`.
+See :ref:`What happens if the indexed data size setting is reached? <cloud_starting_faq_data_reached>`.
 
 .. _cloud_starting_faq_data_reached:
 
-What happens if indexed data size setting is reached?
------------------------------------------------------
+What happens if the indexed data size setting is reached?
+---------------------------------------------------------
 
 When the selected **indexed data size** is reached, the oldest events will be automatically removed from your index regardless of the **index data time**. This data is available in archived data for you to access. See the :ref:`Archived data <cloud_your_environment_accessing_archived_data>` section to learn more about data logging and storage.
 
@@ -130,15 +128,10 @@ How is indexed data rotated?
 
 Data rotation is determined by two conditions: the indexed data time and the indexed data size. For instance, if you have set a 3-month indexed data time and a 100GB indexed data size, and you consume the entire 100GB within the first month, the data will start rotating. Similarly, even if you have not utilized all 100GB, the data from the first month will be rotated by the fourth month if only 20GB is used.
 
-What are EPS credits?
----------------------
+What happens if the data ingestion rate is exceeded?
+----------------------------------------------------
 
-The EPS credits refer to the number of events your Wazuh server nodes can process within a 10-second timeframe simultaneously. The number of EPS credits depends on the Data ingestion rate.
-
-What happens when there are no EPS credits left?
-------------------------------------------------
-
-Once all credits are exhausted, events start queuing, and if the queue becomes full, the incoming events will be discarded, which may lead to potential event loss.
+If you send more events per second than allowed by the **data ingestion rate** setting, events start queuing, and if the queue becomes full, the incoming events will be discarded, which may lead to potential event loss.
 
 Can I cancel at any time?
 -------------------------

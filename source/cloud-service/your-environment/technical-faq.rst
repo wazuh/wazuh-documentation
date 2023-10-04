@@ -94,7 +94,7 @@ If the maximum number of active agents is reached, the environment may start to 
 What happens if data ingestion rate setting is reached?
 -------------------------------------------------------
 
-If the EPS limit is exceeded, events will start to queue. However, if the queue becomes full, the incoming events will be discarded, which may lead to potential event loss. The queuing mechanism is automatically managed by the cloud service, ensuring optimal resource utilization.
+If the data ingestion is exceeded, events will start to queue. However, if the queue becomes full, the incoming events will be discarded, which may lead to potential event loss. The queuing mechanism is automatically managed by the cloud service, ensuring optimal resource utilization.
 
 
 How do I get SSH access to my environment?
