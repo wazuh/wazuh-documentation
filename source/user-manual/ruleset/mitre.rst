@@ -200,65 +200,78 @@ Expand the rule ID ``160011`` alert to view the MITRE ID ``T1543.003`` informati
 Click on the **JSON** tab to view the details of the alert in JSON format:
 
 .. code-block:: json
-   :emphasize-lines: 22-32
 
    {
      "agent": {
-       "ip": "192.168.121.78",
-       "name": "Ubuntu-22",
-       "id": "003"
+       "ip": "172.20.10.3",
+       "name": "Windows11",
+       "id": "002"
+     },
+     "manager": {
+       "name": "wazuh-server"
      },
      "data": {
-       "srcuser": "attacker",
-       "srcip": "192.168.121.127",
-       "srcport": "34890"
+       "win": {
+         "eventdata": {
+           "image": "C:\\\\Windows\\\\system32\\\\services.exe",
+           "targetObject": "HKLM\\\\System\\\\CurrentControlSet\\\\Services\\\\PSEXESVC\\\\ObjectName",
+           "processGuid": "{45cd4aff-93d1-6501-0b00-000000000b00}",
+           "processId": "720",
+           "utcTime": "2023-09-13 12:12:15.759",
+           "ruleName": "technique_id=T1543,technique_name=Service Creation",
+           "details": "LocalSystem",
+           "eventType": "SetValue",
+           "user": "NT AUTHORITY\\\\SYSTEM"
+         },
+         "system": {
+           "eventID": "13",
+           "keywords": "0x8000000000000000",
+           "providerGuid": "{5770385f-c22a-43e0-bf4c-06f5698ffbd9}",
+           "level": "4",
+           "channel": "Microsoft-Windows-Sysmon/Operational",
+           "opcode": "0",
+           "message": "\"Registry value set:\r\nRuleName: technique_id=T1543,technique_name=Service Creation\r\nEventType: SetValue\r\nUtcTime: 2023-09-13 12:12:15.759\r\nProcessGuid: {45cd4aff-93d1-6501-0b00-000000000b00}\r\nProcessId: 720\r\nImage: C:\\Windows\\system32\\services.exe\r\nTargetObject: HKLM\\System\\CurrentControlSet\\Services\\PSEXESVC\\ObjectName\r\nDetails: LocalSystem\r\nUser: NT AUTHORITY\\SYSTEM\"",
+           "version": "2",
+           "systemTime": "2023-09-13T12:12:15.7636688Z",
+           "eventRecordID": "118081",
+           "threadID": "3588",
+           "computer": "Windows11",
+           "task": "13",
+           "processID": "3140",
+           "severityValue": "INFORMATION",
+           "providerName": "Microsoft-Windows-Sysmon"
+         }
+       }
      },
      "rule": {
-       "firedtimes": 1,
+       "firedtimes": 7,
        "mail": false,
        "level": 10,
-       "description": "sshd: brute force trying to get access to the system.",
+       "description": "PsExec service running as NT AUTHORITY\\\\SYSTEM has been created on Windows11",
        "groups": [
-         "local",
-         "syslog",
-         "sshd"
+         "windows",
+         "sysmon"
        ],
        "mitre": {
          "technique": [
-           "Brute Force"
+           "Windows Service"
          ],
          "id": [
-           "T1110"
+           "T1543.003"
          ],
          "tactic": [
-           "Credential Access"
+           "Persistence",
+           "Privilege Escalation"
          ]
        },
-       "id": "100003",
-       "frequency": 8
+       "id": "160011"
      },
-     "full_log": "May 22 10:40:41 ubuntu2204 sshd[2908]: Invalid user attacker from 192.168.121.127 port 34890",
-     "id": "1684752043.76892",
-     "timestamp": "2023-05-22T10:40:43.395+0000",
-     "predecoder": {
-       "hostname": "ubuntu2204",
-       "program_name": "sshd",
-       "timestamp": "May 22 10:40:41"
-     },
-     "previous_output": "May 22 10:40:41 ubuntu2204 sshd[2909]: Invalid user attacker from 192.168.121.127 port 34892\nMay 22 10:40:41 ubuntu2204 sshd[2905]: Invalid user attacker from 192.168.121.127 port 34884\nMay 22 10:40:41 ubuntu2204 sshd[2904]: Invalid user attacker from 192.168.121.127 port 34880\nMay 22 10:40:41 ubuntu2204 sshd[2912]: Invalid user attacker from 192.168.121.127 port 34898\nMay 22 10:40:41 ubuntu2204 sshd[2906]: Invalid user attacker from 192.168.121.127 port 34886\nMay 22 10:40:41 ubuntu2204 sshd[2903]: Invalid user attacker from 192.168.121.127 port 34881\nMay 22 10:40:41 ubuntu2204 sshd[2907]: Invalid user attacker from 192.168.121.127 port 34888",
-     "manager": {
-       "name": "centos7"
-     },
+     "location": "EventChannel",
      "decoder": {
-       "parent": "sshd",
-       "name": "sshd"
+       "name": "windows_eventchannel"
      },
-     "input": {
-       "type": "log"
-     },
-     "@timestamp": "2023-05-22T10:40:43.395Z",
-     "location": "/var/log/auth.log",
-     "_id": "_H4MQ4gBagiVP1CbE_oe"
+     "id": "1694607138.3688437",
+     "timestamp": "2023-09-13T12:12:18.684+0000"
    }
 
 The alerts display the MITRE ATT&CK ID and its associated tactics and techniques. This helps users quickly understand the nature of the attack and take appropriate actions.
