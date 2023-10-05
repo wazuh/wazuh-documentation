@@ -7,7 +7,7 @@ All notable changes to this project will be documented in this file.
 - Added support for Kibana 7.17.13. ([#6531](https://github.com/wazuh/wazuh-documentation/pull/6531))
 - Add a nested query example for the filtering data using queries API page. ([#6362](https://github.com/wazuh/wazuh-documentation/pull/6362))
 - Added clarification to change one user password at a time on Docker. ([#6554](https://github.com/wazuh/wazuh-documentation/pull/6554))
-- Added clarifications for multi-node deployment steps on Docker. ([#6555](https://github.com/wazuh/wazuh-documentation/pull/6555)) ([6578](https://github.com/wazuh/wazuh-documentation/pull/6578))
+- Added clarifications for multi-node deployment steps on Docker. ([#6555](https://github.com/wazuh/wazuh-documentation/pull/6555)) ([#6578](https://github.com/wazuh/wazuh-documentation/pull/6578))
 
 ### Changed
 
