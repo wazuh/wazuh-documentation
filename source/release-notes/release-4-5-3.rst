@@ -107,6 +107,7 @@ Reference                                                          Description
 `#2397 <https://github.com/wazuh/wazuh-packages/pull/2397>`__      Changed GRUB options in build OVA process.
 `#2453 <https://github.com/wazuh/wazuh-packages/pull/2453>`__      Fixed  an issue with the Wazuh dashboard port check despite the ``-p|--port`` installation assistant option being specified.
 `#2461 <https://github.com/wazuh/wazuh-packages/pull/2461>`__      Fixed an issue when passwords changed. Now the ``internal_users.yml`` file gets updated.
+`#2492 <https://github.com/wazuh/wazuh-packages/pull/2492>`__      Fixed missing removal of Wazuh indexer remaining files upon rollback.
 ===============================================================    =============
 
 Changelogs
