@@ -18,5 +18,6 @@ Command monitoring can be used to detect a variety of anomalies and threats. For
         :maxdepth: 2
 
         how-it-works
-        command-configuration
-        command-faq
+        configuration
+        command-output-analysis
+        use-cases/index   
