@@ -2,7 +2,7 @@
 
 .. meta::
   :description: Find out the configuration options of the azure-logs wodle. Learn more about it in this section of the Wazuh documentation.
-  
+
 .. _wodle_azure_logs:
 
 wodle name="azure-logs"
@@ -418,8 +418,7 @@ Example of log_analytics configuration
 
         <log_analytics>
 
-            <application_id>8b7...c14</application_id>
-            <application_key>w22...91x</application_key>
+            <auth_path>/var/ossec/wodles/credentials/log_analytics_credentials</auth_path>
             <tenantdomain>wazuh.onmicrosoft.com</tenantdomain>
 
             <request>
@@ -584,7 +583,7 @@ Example of graph configuration
 
 	    <graph>
 
-	        <auth_path>/Azure/graph_auth.txt</auth_path>
+                <auth_path>/var/ossec/wodles/credentials/graph_credentials</auth_path>
 	        <tenantdomain>wazuh.onmicrosoft.com</tenantdomain>
 
 	        <request>
@@ -697,7 +696,7 @@ Specifies the name of the container. Enter ``*`` to access all account container
 storage\\container\\blobs
 ^^^^^^^^^^^^^^^^^^^^^^^^^
 
-Specifies the extension of the blobs like ``.json``. Enter "*" to access all the containers' blobs. 
+Specifies the extension of the blobs like ``.json``. Enter ``*`` to access all the containers blobs.
 
 .. note::
 
@@ -719,7 +718,7 @@ This parameter indicates the format of the blobs' content. The available values 
 - **json_inline**. Each line is a log in json format.
 
 The format of logs stored in Azure accounts is **inline JSON**.
-	
+
 .. note::
 
 	When the ``day`` option is set, the interval value must be a multiple of months. By default, the interval is set to a month.
@@ -766,7 +765,7 @@ Example of storage configuration
 
         <storage>
 
-            <auth_path>/home/manager/Azure/storage_auth.txt</auth_path>
+            <auth_path>/var/ossec/wodles/credentials/storage_credentials</auth_path>
             <tag>azure-activity</tag>
 
             <container name="insights-operational-logs">
@@ -796,8 +795,7 @@ Example of all integration
 
         <log_analytics>
 
-            <application_id>8b7...c14</application_id>
-            <application_key>w22...91x</application_key>
+            <auth_path>/var/ossec/wodles/credentials/log_analytics_credentials</auth_path>
             <tenantdomain>wazuh.onmicrosoft.com</tenantdomain>
 
             <request>
@@ -811,7 +809,7 @@ Example of all integration
 
         <graph>
 
-            <auth_path>/Azure/graph_auth.txt</auth_path>
+            <auth_path>/var/ossec/wodles/credentials/graph_credentials</auth_path>
             <tenantdomain>wazuh.onmicrosoft.com</tenantdomain>
 
             <request>
@@ -825,7 +823,7 @@ Example of all integration
 
         <storage>
 
-            <auth_path>/home/manager/Azure/storage_auth.txt</auth_path>
+            <auth_path>/var/ossec/wodles/credentials/storage_credentials</auth_path>
             <tag>azure-activity</tag>
 
             <container name="insights-operational-logs">

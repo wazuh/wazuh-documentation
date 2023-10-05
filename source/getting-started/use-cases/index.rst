@@ -18,8 +18,8 @@ Below you can find examples of some of the most common use cases of the Wazuh pl
 Endpoint security                  Threat intelligence               Security operations             Cloud security
 =================================  ================================  ==============================  ==================================
 :doc:`configuration-assessment`    :doc:`threat-hunting`             :doc:`incident-response`        :doc:`container-security`
-:doc:`malware-detection`           :doc:`log-analysis`               :doc:`regulatory-compliance`    Posture management
-:doc:`file-integrity`              :doc:`vulnerability-detection`    :doc:`it-hygiene`               :doc:`cloud-workload-protection`
+:doc:`malware-detection`           :doc:`log-analysis`               :doc:`regulatory-compliance`    :doc:`Workload protection <cloud-workload-protection>`
+:doc:`file-integrity`              :doc:`vulnerability-detection`    :doc:`it-hygiene`
 =================================  ================================  ==============================  ==================================
 
 .. toctree::
