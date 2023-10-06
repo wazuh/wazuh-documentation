@@ -58,6 +58,7 @@ In this scenario, the Wazuh FIM monitors the SSH configuration file ``/etc/ssh/s
       :align: center
       :width: 80%
 
+.. _detecting_change-actors_to_ufw_firewall_rules_using_who-data:
 
 Detecting change actors to UFW firewall rules using who-data 
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
