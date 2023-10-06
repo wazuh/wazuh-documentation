@@ -5,7 +5,7 @@ All notable changes to this project will be documented in this file.
 
 ### Added
 
-- Support for Wazuh 4.7.1.
+- Added the Wazuh v4.7.1 release notes. ([6549](https://github.com/wazuh/wazuh-documentation/pull/6549))
 
 ## [v4.7.0]
 
