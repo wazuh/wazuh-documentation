@@ -53,6 +53,8 @@ The following considerations must be taken into account when the filters are set
 
 The full configuration reference for the Integrator daemon can be found :ref:`here <reference_ossec_integration>`.
 
+.. _slack_manual_integration:
+
 Slack
 -----
 
@@ -87,6 +89,8 @@ Once the configuration is complete, alerts start showing in the selected channel
   :alt: Alerts in Slack channel
   :align: center
   :width: 50%
+
+.. _pagerduty_manual_integration:
 
 PagerDuty
 ---------

@@ -6,10 +6,14 @@
 Configuring log collection for different operating systems
 ==========================================================
 
+.. _how-to-collect-windowslogs:
+
 Windows
 -------
 
 Windows logs are descriptive messages that provide information about events that occur in Windows systems. The Windows Event Viewer shows events, as well as the software, applications, or components that generate them. The Wazuh agent captures  essential information from events, such as their descriptions, standard ``system`` fields, and ``eventdata`` specifics. The Wazuh server analyzes and translates the collected events to JSON format. This format makes it easier for users to query and filter the various event fields.
+
+.. _windows_event_channel_log_collection:
 
 Windows event channel
 ^^^^^^^^^^^^^^^^^^^^^
@@ -167,6 +171,8 @@ For example, perform the following steps to monitor Application logs from Window
    .. code-block:: Powershell
 
       > Restart-Service -Name wazuh
+
+.. _how-to-collect-linuxlogs:
 
 Linux
 -----

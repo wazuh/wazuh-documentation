@@ -68,8 +68,8 @@ Create a ``/etc/logstash/templates/`` directory and download the template as ``w
 
 .. code-block:: console
 
-   # mkdir /etc/logstash/templates
-   # curl -o /etc/logstash/templates/wazuh.json https://packages.wazuh.com/integrations/elastic/4.x-8.x/dashboards/wz-es-4.x-8.x-template.json
+   $ sudo mkdir /etc/logstash/templates
+   $ sudo curl -o /etc/logstash/templates/wazuh.json https://packages.wazuh.com/integrations/elastic/4.x-8.x/dashboards/wz-es-4.x-8.x-template.json
 
 In Elasticsearch, the indexes support up to ``1000`` fields by default. However, Wazuh logs might contain even more than this number of fields. To solve this issue, the provided ``wazuh.json`` template has the fields set to ``10000`` by default as shown below:
 
@@ -112,7 +112,7 @@ We use the `Logstash keystore <https://www.elastic.co/guide/en/logstash/current/
       :emphasize-lines: 2,3
 
       $ set +o history
-      $ echo 'LOGSTASH_KEYSTORE_PASS="<MY_KEYSTORE_PASSWORD>"'| sudo tee /etc/sysconfig/logstash LOGSTASH_KEYSTORE_PASS="<MY_KEYSTORE_PASSWORD>"
+      $ echo 'LOGSTASH_KEYSTORE_PASS="<MY_KEYSTORE_PASSWORD>"'| sudo tee /etc/sysconfig/logstash
       $ export LOGSTASH_KEYSTORE_PASS=<MY_KEYSTORE_PASSWORD>
       $ set -o history
       $ sudo chown root /etc/sysconfig/logstash
@@ -295,8 +295,8 @@ Create a ``/etc/logstash/templates/`` directory and download the template as ``w
 
 .. code-block:: console
 
-   # mkdir /etc/logstash/templates
-   # curl -o /etc/logstash/templates/wazuh.json https://packages.wazuh.com/integrations/elastic/4.x-8.x/dashboards/wz-es-4.x-8.x-template.json
+   $ sudo mkdir /etc/logstash/templates
+   $ sudo curl -o /etc/logstash/templates/wazuh.json https://packages.wazuh.com/integrations/elastic/4.x-8.x/dashboards/wz-es-4.x-8.x-template.json
 
 In Elasticsearch, the indexes support up to ``1000`` fields by default. However, Wazuh logs might contain even more than this number of fields. To solve this issue, the provided ``wazuh.json`` template has the fields set to ``10000`` by default as shown below:
 
@@ -336,7 +336,7 @@ We use the `Logstash keystore <https://www.elastic.co/guide/en/logstash/current/
       :emphasize-lines: 2,3
 
       $ set +o history
-      $ echo 'LOGSTASH_KEYSTORE_PASS="<MY_KEYSTORE_PASSWORD>"'| sudo tee /etc/sysconfig/logstash LOGSTASH_KEYSTORE_PASS="<MY_KEYSTORE_PASSWORD>"
+      $ echo 'LOGSTASH_KEYSTORE_PASS="<MY_KEYSTORE_PASSWORD>"'| sudo tee /etc/sysconfig/logstash
       $ export LOGSTASH_KEYSTORE_PASS=<MY_KEYSTORE_PASSWORD>
       $ set -o history
       $ sudo chown root /etc/sysconfig/logstash
