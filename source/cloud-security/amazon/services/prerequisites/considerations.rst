@@ -2,7 +2,7 @@
 
 .. meta::
   :description: Learn about some considerations that must be taken into account when configuring the Wazuh module for AWS.
-  
+
 .. _amazon_considerations:
 
 Considerations for configuration
@@ -61,7 +61,7 @@ Users can customize two retry configurations.
 -  ``retry_mode``: legacy, standard, and adaptive.
 
    -  **Legacy** mode is the default retry mode. It sets the older version 1 for the retry handler. This includes:
-      
+
       -  Retry attempts for a limited number of errors/exceptions.
       -  A default value of 5 for maximum call attempts.
 
@@ -173,11 +173,10 @@ Below there is an example of different services configuration:
       <aws_profile>dev</aws_profile>
     </bucket>
 
-    <!-- CloudTrail, authentication with hardcoded keys (not recommended), without 'path' tag -->
+    <!-- CloudTrail, 'default' profile, without 'path' tag -->
     <bucket type="cloudtrail">
       <name>wazuh-cloudtrail</name>
-      <access_key>XXXXXXXXXX</access_key>
-      <secret_key>XXXXXXXXXX</secret_key>
+      <aws_profile>default</aws_profile>
     </bucket>
 
     <!-- CloudTrail, 'gov1' profile, and 'us-gov-east-1' GovCloud region -->
@@ -224,8 +223,7 @@ The `service_endpoint` and `sts_endpoint` tags can be used to specify the VPC en
 
     <bucket type="cloudtrail">
       <name>wazuh-cloudtrail-2</name>
-      <access_key>xxxxxx</access_key>
-      <secret_key>xxxxxx</secret_key>
+      <aws_profile>default</aws_profile>
       <iam_role_arn>arn:aws:iam::xxxxxxxxxxx:role/wazuh-role</iam_role_arn>
       <sts_endpoint>xxxxxx.sts.us-east-2.vpce.amazonaws.com</sts_endpoint>
       <service_endpoint>https://bucket.xxxxxx.s3.us-east-2.vpce.amazonaws.com</service_endpoint>
