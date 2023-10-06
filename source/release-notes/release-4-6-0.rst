@@ -98,6 +98,7 @@ RESTful API
 - `#13615 <https://github.com/wazuh/wazuh/pull/13615>`__ Added API integration tests documentation.
 - `#13646 <https://github.com/wazuh/wazuh/pull/13646>`__ Changed the API's response status code for Wazuh cluster errors from 400 to 500.
 - `#15934 <https://github.com/wazuh/wazuh/pull/15934>`__ Removed legacy code related to agent databases in ``/var/agents/db``.
+- `#19001 <https://github.com/wazuh/wazuh/pull/19001>`__ Changed Operational API error messages to include additional information.
 
 Ruleset
 ^^^^^^^
@@ -189,6 +190,7 @@ Reference                                                          Description
 `#16268 <https://github.com/wazuh/wazuh/pull/16268>`__             Fixed agent starts with an invalid FIM configuration.
 `#15719 <https://github.com/wazuh/wazuh/pull/15719>`__             Fixed rootcheck scan trying to read deleted files.
 `#15739 <https://github.com/wazuh/wazuh/pull/15739>`__             Fixed compilation and build in Gentoo.
+`#19375 <https://github.com/wazuh/wazuh/pull/19375>`__             Fixed a crash when FIM scanned long Windows paths.
 ==============================================================     =============
 
 RESTful API
@@ -233,6 +235,17 @@ Reference                                                          Description
 ===============================================================    =============
 
 
+Packages
+^^^^^^^^
+
+==============================================================     =============
+Reference                                                          Description
+==============================================================     =============
+`#2495 <https://github.com/wazuh/wazuh-packages/pull/2495>`__      Fixed debug redirection in packages installation in the Wazuh installation assistant.
+`#2490 <https://github.com/wazuh/wazuh-packages/pull/2490>`__      Fixed dashboard dependencies in RHEL systems.
+`#2498 <https://github.com/wazuh/wazuh-packages/pull/2498>`__      Replaced ``requestHeadersWhitelist`` with ``requestHeadersAllowlist``.
+`#2486 <https://github.com/wazuh/wazuh-packages/pull/2486>`__      Fixed common WPK container.
+==============================================================     =============
 
 Changelogs
 ----------
