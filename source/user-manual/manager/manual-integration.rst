@@ -65,6 +65,8 @@ The `Integrator` daemon uses the `optional settings` fields to tailor the integr
 
 You can find the full configuration reference for the Integrator daemon in the :ref:`Integration <reference_ossec_integration>` section of our Reference guide.
 
+.. _slack_manual_integration:
+
 Slack
 -----
 
@@ -99,6 +101,8 @@ Once the configuration is complete, alerts start showing in the selected channel
   :alt: Alerts in Slack channel
   :align: center
   :width: 50%
+
+.. _pagerduty_manual_integration:
 
 PagerDuty
 ---------

@@ -70,6 +70,15 @@ newUrls['4.8'] = [
   '/development/packaging/generate-dashboard-package.html',
 ];
 
+/* *** RELEASE 4.7 ****/
+
+/* Pages added in 4.7 */
+
+newUrls['4.7'] = [
+  '/release-notes/release-4-7-0.html',
+  '/release-notes/release-4-7-1.html',
+];
+
 /* *** RELEASE 4.6 ****/
 
 /* Redirections from 4.5 to 4.6  */
@@ -175,6 +184,16 @@ redirections.push(
     '4.4': '/getting-started/use-cases/rootkits-detection.html',
     '4.5': '/getting-started/use-cases/malware-detection.html',
   },
+  {
+    'target': ['4.4=>4.5', '4.5=>4.4'],
+    '4.4': '/getting-started/use-cases/cloud-security.html',
+    '4.5': '/getting-started/use-cases/cloud-workload-protection.html',
+  },
+  {
+    'target': ['4.4=>4.5', '4.5=>4.4'],
+    '4.4': '/getting-started/use-cases/system-inventory.html',
+    '4.5': '/getting-started/use-cases/it-hygiene#system-inventory.html',
+  },
 );
 
 /* Pages added in 4.5 */
@@ -197,6 +216,8 @@ newUrls['4.5'] = [
   '/getting-started/use-cases/incident-response.html',
   '/getting-started/use-cases/threat-hunting.html',
   '/getting-started/use-cases/malware-detection.html',
+  '/getting-started/use-cases/cloud-workload-protection.html',
+  '/getting-started/use-cases/it-hygiene.html',
 ];
 
 /* Pages no longer available in 4.5 */
@@ -208,6 +229,8 @@ removedUrls['4.5'] = [
   '/user-manual/capabilities/log-data-collection/log-data-configuration.html',
   '/getting-started/use-cases/active-response.html',
   '/getting-started/use-cases/rootkits-detection.html',
+  '/getting-started/use-cases/cloud-security.html',
+  '/getting-started/use-cases/system-inventory.html',
 ];
 
 /* *** RELEASE 4.4 ****/
