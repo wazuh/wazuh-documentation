@@ -138,6 +138,8 @@ Options
 +----------------------------------------+----------------------------------------------+
 | `storage\\container\\time_offset`_     | A positive number + suffix                   |
 +----------------------------------------+----------------------------------------------+
+| `storage\\container\\path`_            | Any string                                   |
++----------------------------------------+----------------------------------------------+
 
 
 disabled
@@ -681,6 +683,8 @@ storage\\container
 +-----------------------------------------+----------------------------------------------+
 | `storage\\container\\time_offset`_      | A positive number + suffix                   |
 +-----------------------------------------+----------------------------------------------+
+| `storage\\container\\path`_             | Any string                                   |
++-----------------------------------------+----------------------------------------------+
 
 storage\\container name
 ^^^^^^^^^^^^^^^^^^^^^^^
@@ -752,6 +756,18 @@ This option sets the time delay in which we will perform the query. For example,
 | **Allowed values** | A positive number that should contain a suffix character indicating a time unit, such as, m (minutes), h (hours), d (days) |
 +--------------------+----------------------------------------------------------------------------------------------------------------------------+
 
+
+storage\\container\\path
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Defines, for the container, a path to search for logs. If it isn't present, the module retrieves all the blobs starting from the root level.
+
++--------------------+----------------------------------------------------------------------------------------------------------------------------+
+| **Default value**  | N/A                                                                                                                        |
++--------------------+----------------------------------------------------------------------------------------------------------------------------+
+| **Allowed values** | Valid path                                                                                                                 |
++--------------------+----------------------------------------------------------------------------------------------------------------------------+
+
 Example of storage configuration
 --------------------------------
 
@@ -772,6 +788,7 @@ Example of storage configuration
                 <blobs>.json</blobs>
                 <content_type>json_inline</content_type>
                 <time_offset>24h</time_offset>
+                <path>info-logs</path>
             </container>
 
 	    <container name="audit-logs"/>
@@ -830,6 +847,7 @@ Example of all integration
                 <blobs>.json</blobs>
                 <content_type>json_inline</content_type>
                 <time_offset>24h</time_offset>
+                <path>info-logs</path>
             </container>
 
 	    <container name="audit-logs"/>

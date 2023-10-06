@@ -284,13 +284,57 @@ Extensions
 
     These options are only applied for newly inserted APIs on the *Settings* tab, not for the existing ones.
 
-extensions.pci
-^^^^^^^^^^^^^^
+extensions.audit
+^^^^^^^^^^^^^^^^
 
-Enable or disable the PCI DSS tab on *Overview* and *Agents*.
+Enable or disable the Audit tab on *Overview* and *Agents*.
 
 +--------------------+------------+
 | **Default value**  | true       |
++--------------------+------------+
+| **Allowed values** | true,false |
++--------------------+------------+
+
+extensions.aws
+^^^^^^^^^^^^^^
+
+Enable or disable the Amazon (AWS) tab on *Overview* and *Agents*.
+
++--------------------+------------+
+| **Default value**  | false      |
++--------------------+------------+
+| **Allowed values** | true,false |
++--------------------+------------+
+
+extensions.ciscat
+^^^^^^^^^^^^^^^^^
+
+Enable or disable the CIS-CAT tab on *Overview* and *Agents*.
+
++--------------------+------------+
+| **Default value**  | false      |
++--------------------+------------+
+| **Allowed values** | true,false |
++--------------------+------------+
+
+extensions.docker
+^^^^^^^^^^^^^^^^^
+
+Enable or disable the Docker listener tab on *Overview* and *Agents*.
+
++--------------------+------------+
+| **Default value**  | false      |
++--------------------+------------+
+| **Allowed values** | true,false |
++--------------------+------------+
+
+extensions.gcp
+^^^^^^^^^^^^^^
+
+Enable or disable the GCP tab on *Overview* and *Agents*.
+
++--------------------+------------+
+| **Default value**  | false      |
 +--------------------+------------+
 | **Allowed values** | true,false |
 +--------------------+------------+
@@ -302,6 +346,17 @@ Enable or disable the GDPR tab on *Overview* and *Agents*.
 
 +--------------------+------------+
 | **Default value**  | true       |
++--------------------+------------+
+| **Allowed values** | true,false |
++--------------------+------------+
+
+extensions.github
+^^^^^^^^^^^^^^^^^
+
+Enable or disable the GitHub tab on *Overview* and *Agents*.
+
++--------------------+------------+
+| **Default value**  | false      |
 +--------------------+------------+
 | **Allowed values** | true,false |
 +--------------------+------------+
@@ -328,24 +383,13 @@ Enable or disable the NIST tab on *Overview* and *Agents*.
 | **Allowed values** | true,false |
 +--------------------+------------+
 
-extensions.tsc
-^^^^^^^^^^^^^^
+extensions.office
+^^^^^^^^^^^^^^^^^
 
-Enable or disable the TSC tab on *Overview* and *Agents*.
-
-+--------------------+------------+
-| **Default value**  | true       |
-+--------------------+------------+
-| **Allowed values** | true,false |
-+--------------------+------------+
-
-extensions.audit
-^^^^^^^^^^^^^^^^
-
-Enable or disable the Audit tab on *Overview* and *Agents*.
+Enable or disable the Office 365 tab on *Overview* and *Agents*.
 
 +--------------------+------------+
-| **Default value**  | true       |
+| **Default value**  | false      |
 +--------------------+------------+
 | **Allowed values** | true,false |
 +--------------------+------------+
@@ -354,50 +398,6 @@ extensions.oscap
 ^^^^^^^^^^^^^^^^
 
 Enable or disable the OSCAP tab on *Overview* and *Agents*.
-
-+--------------------+------------+
-| **Default value**  | false      |
-+--------------------+------------+
-| **Allowed values** | true,false |
-+--------------------+------------+
-
-extensions.ciscat
-^^^^^^^^^^^^^^^^^
-
-Enable or disable the CIS-CAT tab on *Overview* and *Agents*.
-
-+--------------------+------------+
-| **Default value**  | false      |
-+--------------------+------------+
-| **Allowed values** | true,false |
-+--------------------+------------+
-
-extensions.aws
-^^^^^^^^^^^^^^
-
-Enable or disable the Amazon (AWS) tab on *Overview* and *Agents*.
-
-+--------------------+------------+
-| **Default value**  | false      |
-+--------------------+------------+
-| **Allowed values** | true,false |
-+--------------------+------------+
-
-extensions.gcp
-^^^^^^^^^^^^^^
-
-Enable or disable the GCP tab on *Overview* and *Agents*.
-
-+--------------------+------------+
-| **Default value**  | false      |
-+--------------------+------------+
-| **Allowed values** | true,false |
-+--------------------+------------+
-
-extensions.virustotal
-^^^^^^^^^^^^^^^^^^^^^
-
-Enable or disable the VirusTotal tab on *Overview* and *Agents*.
 
 +--------------------+------------+
 | **Default value**  | false      |
@@ -416,10 +416,32 @@ Enable or disable the Osquery tab on *Overview* and *Agents*.
 | **Allowed values** | true,false |
 +--------------------+------------+
 
-extensions.docker
-^^^^^^^^^^^^^^^^^
+extensions.pci
+^^^^^^^^^^^^^^
 
-Enable or disable the Docker listener tab on *Overview* and *Agents*.
+Enable or disable the PCI DSS tab on *Overview* and *Agents*.
+
++--------------------+------------+
+| **Default value**  | true       |
++--------------------+------------+
+| **Allowed values** | true,false |
++--------------------+------------+
+
+extensions.tsc
+^^^^^^^^^^^^^^
+
+Enable or disable the TSC tab on *Overview* and *Agents*.
+
++--------------------+------------+
+| **Default value**  | true       |
++--------------------+------------+
+| **Allowed values** | true,false |
++--------------------+------------+
+
+extensions.virustotal
+^^^^^^^^^^^^^^^^^^^^^
+
+Enable or disable the VirusTotal tab on *Overview* and *Agents*.
 
 +--------------------+------------+
 | **Default value**  | false      |
@@ -433,9 +455,6 @@ Advanced index options
 .. warning::
 
     These options are only valid if they're modified before starting the Wazuh dashboard for the very first time.
-
-    You can read more about configuring the shards and replicas in :ref:`elastic_tuning`.
-
 
 wazuh.monitoring.shards
 ^^^^^^^^^^^^^^^^^^^^^^^
@@ -743,19 +762,21 @@ This is an example of the wazuh.yml configuration:
 
     #Extensions
 
-    extensions.pci       : true
+    extensions.audit     : true
+    extensions.aws       : false
+    extensions.ciscat    : false
+    extensions.docker    : false
+    extensions.gcp       : false
     extensions.gdpr      : true
+    extensions.github    : false
     extensions.hipaa     : true
     extensions.nist      : true
-    extensions.tsc       : true
-    extensions.audit     : true
+    extensions.office    : false
     extensions.oscap     : false
-    extensions.ciscat    : false
-    extensions.aws       : false
-    extensions.gcp       : false
-    extensions.virustotal: false
     extensions.osquery   : false
-    extensions.docker    : false
+    extensions.pci       : true
+    extensions.tsc       : true
+    extensions.virustotal: false
 
     #Advanced index options
 
