@@ -235,6 +235,17 @@ Reference                                                          Description
 ===============================================================    =============
 
 
+Packages
+^^^^^^^^
+
+==============================================================     =============
+Reference                                                          Description
+==============================================================     =============
+`#2495 <https://github.com/wazuh/wazuh-packages/pull/2495>`__      Fixed debug redirection in packages installation in the Assistant.
+`#2490 <https://github.com/wazuh/wazuh-packages/pull/2490>`__      Fixed dashboard dependencies in RHEL systems.
+`#2498 <https://github.com/wazuh/wazuh-packages/pull/2498>`__      Replaced requestHeadersWhitelist with requestHeadersAllowlist.
+`#2486 <https://github.com/wazuh/wazuh-packages/pull/2486>`__      Fix common WPK container.
+==============================================================     =============
 
 Changelogs
 ----------
