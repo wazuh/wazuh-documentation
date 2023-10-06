@@ -107,7 +107,7 @@ We use the  `Logstash keystore <https://www.elastic.co/guide/en/logstash/current
       :emphasize-lines: 2,3
 
       $ set +o history
-      $ echo 'LOGSTASH_KEYSTORE_PASS="<MY_KEYSTORE_PASSWORD>"'| sudo tee /etc/sysconfig/logstash LOGSTASH_KEYSTORE_PASS="<MY_KEYSTORE_PASSWORD>"
+      $ echo 'LOGSTASH_KEYSTORE_PASS="<MY_KEYSTORE_PASSWORD>"'| sudo tee /etc/sysconfig/logstash
       $ export LOGSTASH_KEYSTORE_PASS=<MY_KEYSTORE_PASSWORD>
       $ set -o history
       $ sudo chown root /etc/sysconfig/logstash
@@ -329,7 +329,7 @@ We use the `Logstash keystore <https://www.elastic.co/guide/en/logstash/current/
       :emphasize-lines: 2,3
 
       $ set +o history
-      $ echo 'LOGSTASH_KEYSTORE_PASS="<MY_KEYSTORE_PASSWORD>"'| sudo tee /etc/sysconfig/logstash LOGSTASH_KEYSTORE_PASS="<MY_KEYSTORE_PASSWORD>"
+      $ echo 'LOGSTASH_KEYSTORE_PASS="<MY_KEYSTORE_PASSWORD>"'| sudo tee /etc/sysconfig/logstash
       $ export LOGSTASH_KEYSTORE_PASS=<MY_KEYSTORE_PASSWORD>
       $ set -o history
       $ sudo chown root /etc/sysconfig/logstash
