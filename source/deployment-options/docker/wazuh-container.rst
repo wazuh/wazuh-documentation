@@ -260,7 +260,7 @@ To improve security, you can change the default password of the Wazuh users. The
 Wazuh indexer users
 ~~~~~~~~~~~~~~~~~~~
 
- To change the password of the default ``admin`` and ``kibanaserver`` users, do the following.
+ To change the password of the default ``admin`` and ``kibanaserver`` users, do the following. You can only change one at a time. 
 
 .. warning::
 
@@ -320,7 +320,7 @@ Setting a new hash
 Setting the new password
 ........................
 
-#. Open  the ``docker-compose.yml`` file. Change all occurrences of the old password with the new one.
+#. Open  the ``docker-compose.yml`` file. Change all occurrences of the old password with the new one. For example, for a single-node deployment:
 
    -  ``admin`` user
 
@@ -382,7 +382,7 @@ Applying the changes
   
       # docker-compose up -d
 
-#. Run ``docker ps`` and note the name of the Wazuh indexer container. For example, ``single-node-wazuh.indexer-1``.
+#. Run ``docker ps`` and note the name of the first Wazuh indexer container. For example, ``single-node-wazuh.indexer-1``, or ``multi-node-wazuh1.indexer-1``.
 
 #. Run ``docker exec -it <WAZUH_INDEXER_CONTAINER_NAME> bash`` to enter the container. For example:
 

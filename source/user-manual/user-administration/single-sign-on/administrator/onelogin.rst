@@ -11,7 +11,7 @@ OneLogin
 There are three stages in the single sign-on integration.
 
 #. `OneLogin Configuration`_
-#. `Wazuh indexer configuration_`
+#. `Wazuh indexer configuration`_
 #. `Wazuh dashboard configuration`_
    
 OneLogin Configuration
