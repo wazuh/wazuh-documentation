@@ -104,6 +104,16 @@ redirections.push(
     '4.4': '/getting-started/use-cases/system-inventory.html',
     '4.5': '/getting-started/use-cases/it-hygiene#system-inventory.html',
   },
+  {
+    'target': ['4.4=>4.5', '4.5=>4.4'],
+    '4.4': '/user-manual/elasticsearch/index.html',
+    '4.5': '/user-manual/wazuh-indexer/index.html',
+  },
+  {
+    'target': ['4.4=>4.5', '4.5=>4.4'],
+    '4.4': '/user-manual/elasticsearch/elasticsearch.html',
+    '4.5': '/user-manual/wazuh-indexer/wazuh-indexer-indices.html',
+  },
 );
 
 /* Pages added in 4.5 */
@@ -129,6 +139,8 @@ newUrls['4.5'] = [
   '/getting-started/use-cases/it-hygiene.html',
   '/user-manual/wazuh-indexer/index.html',
   '/user-manual/wazuh-indexer/wazuh-indexer-indices.html',
+  '/user-manual/wazuh-indexer/re-indexing.html',
+  '/user-manual/wazuh-indexer/index-life-management.html',
 ];
 
 /* Pages no longer available in 4.5 */

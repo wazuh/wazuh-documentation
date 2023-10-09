@@ -18,3 +18,5 @@ The Wazuh indexer can be configured as a single-node or multi-node cluster, prov
       :maxdepth: 1
       
       wazuh-indexer-indices
+      re-indexing
+      index-life-management

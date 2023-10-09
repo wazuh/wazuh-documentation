@@ -130,6 +130,8 @@ Hide the manager alerts in the dashboard visualizations.
 Monitoring
 ----------
 
+.. _wazuh_monitoring_enabled:
+
 wazuh.monitoring.enabled
 ^^^^^^^^^^^^^^^^^^^^^^^^
 
@@ -148,6 +150,8 @@ Enable or disable the ``wazuh-monitoring`` index creation and/or visualization:
 .. warning::
 
     The Wazuh dashboard user interface allows selecting ``true`` and ``false`` only. To set the ``worker`` value, you must edit the configuration file instead.
+
+.. _wazuh_monitoring_frequency:
 
 wazuh.monitoring.frequency
 ^^^^^^^^^^^^^^^^^^^^^^^^^^
@@ -174,6 +178,8 @@ Default Wazuh monitoring index pattern to use for the app. This setting does not
 +--------------------+-------------------------+
 | **Allowed values** | Any valid index pattern |
 +--------------------+-------------------------+
+
+.. _wazuh_monitoring_creation:
 
 wazuh.monitoring.creation
 ^^^^^^^^^^^^^^^^^^^^^^^^^
@@ -547,6 +553,8 @@ Enter the ID of the hosts you want to save data from, and leave this empty to ru
 | **Allowed values** | Array of APIs              |
 +--------------------+----------------------------+
 
+.. _cron_statistics_interval:
+
 cron.statistics.interval
 ^^^^^^^^^^^^^^^^^^^^^^^^
 
@@ -568,6 +576,8 @@ Define the name of the index in which the documents will be saved.
 +--------------------+----------------------------+
 | **Allowed values** | Any valid index pattern    |
 +--------------------+----------------------------+
+
+.. _cron_statistics_index_creation:
 
 cron.statistics.index.creation
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
