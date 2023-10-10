@@ -21,7 +21,7 @@ Manager
 Agent
 ^^^^^
 
--  `#19041 <https://github.com/wazuh/wazuh/pull/19041>`__ Updated the agent to report the name of macOS 14 (Sonoma).
+-  `#19205 <https://github.com/wazuh/wazuh/issues/19205>`__ Support for macOS 14 (Sonoma).
 
 RESTful API
 ^^^^^^^^^^^
