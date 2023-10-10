@@ -112,6 +112,7 @@ newUrls['4.5'] = [
   '/release-notes/release-4-5-0.html',
   '/release-notes/release-4-5-1.html',
   '/release-notes/release-4-5-2.html',
+  '/release-notes/release-4-5-3.html',
   '/integrations-guide/index.html',
   '/integrations-guide/elastic-stack/index.html',
   '/integrations-guide/opensearch/index.html',
