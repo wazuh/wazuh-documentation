@@ -120,26 +120,52 @@ Options
 +-------------+-------------------------------------------------------------------------------------------------------------------------------------------------------------------+
 | **name**    | Allows assignment of the block to one particular agent.                                                                                                           |
 +             +-------------------------------------------------------+-----------------------------------------------------------------------------------------------------------+
-|             | Allowed values                                        | Any agent name                                                                                            |
+|             | Allowed values                                        | Any regular expression that matches the agent name .                                                      |
 +-------------+-------------------------------------------------------+-----------------------------------------------------------------------------------------------------------+
 | **os**      | Allows assignment of the block to an operating system.                                                                                                            |
 +             +-------------------------------------------------------+-----------------------------------------------------------------------------------------------------------+
-|             | Allowed values                                        | Any OS family                                                                                             |
+|             | Allowed values                                        | Any regular expression that matches the agent OS information.                                             |
 +-------------+-------------------------------------------------------+-----------------------------------------------------------------------------------------------------------+
 | **profile** | Allows assignment of a profile name to a block. Any agent configured to use the defined :ref:`profile <reference_ossec_client_config_profile>` may use the block. |
 +             +-------------------------------------------------------+-----------------------------------------------------------------------------------------------------------+
-|             | Allowed values                                        | Any defined profile                                                                                       |
+|             | Allowed values                                        | Any regular expression that matches the defined profile.                                                  |
 +-------------+-------------------------------------------------------+-----------------------------------------------------------------------------------------------------------+
 
-Examples
+.. topic:: Example
 
 	.. code-block:: xml
 
-		<agent_config name=”agent01”>
+		<agent_config name=”^agent01”>
 		...
-		<agent_config os="Linux">
+		<agent_config os="^Linux">
 		...
-		<agent_config profile="UnixHost">
+		<agent_config profile="^UnixHost">
+
+Get the agent name and operating system.
+
+    .. code-block:: console
+
+        agent_control -i <AGENT_ID>
+
+    Where ``<AGENT_ID>`` corresponds to the agent ID of the endpoint.
+
+    .. code-block:: none
+        :class: output
+
+        Wazuh agent_control. Agent information:
+        Agent ID:   001
+        Agent Name: agent01
+        IP address: any
+        Status:     Active
+
+        Operating system:    Linux |centos9 |5.14.0-366.el9.x86_64 |#1 SMP PREEMPT_DYNAMIC Thu Sep 14 23:37:14 UTC 2023 |x86_64
+        Client version:      Wazuh v4.5.2
+        Configuration hash:  ab73af41699f13fdd81903b5f23d8d00
+        Shared file hash:    4a8724b20dee0124ff9656783c490c4e
+        Last keep alive:     1696963366
+
+        Syscheck last started at:  Tue Oct 10 12:37:43 2023
+        Syscheck last ended at:    Tue Oct 10 12:37:46 2023
 
 Centralized configuration process
 ---------------------------------
