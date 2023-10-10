@@ -70,7 +70,7 @@ This section describes creating a custom index pattern, ``my-custom-alerts-*``, 
 
       # tar -axf wazuh-install-files.tar wazuh-install-files/wazuh-passwords.txt -O | grep -P "\'admin\'" -A 1
 
-   .. code-block:: none
+   .. code-block:: output
       :class: output
 
       {"acknowledged":true}
@@ -200,7 +200,7 @@ Command line interface
 
       # curl -k -u <INDEXER_USERNAME>:<INDEXER_PASSWORD> https://<INDEXER_IP_ADDRESS>:9200/_cat/indices/wazuh-*?v
 
-   .. code-block:: none
+   .. code-block:: output
       :class: output
 
       health status index                       uuid                   pri rep docs.count docs.deleted store.size pri.store.size
@@ -380,7 +380,7 @@ Enabling Wazuh archives
 
       # filebeat test output
     
-   .. code-block:: none
+   .. code-block:: output
       :class: output
 
       elasticsearch: https://127.0.0.1:9200...

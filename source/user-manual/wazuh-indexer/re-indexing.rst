@@ -42,7 +42,7 @@ Wazuh dashboard
          }
       }
 
-   .. code-block:: none
+   .. code-block:: output
       :class: output
 
       {
@@ -97,7 +97,7 @@ For example:
       }
    }'
 
-.. code-block:: none
+.. code-block:: output
    :class: output
 
    {"took":18025,"timed_out":false,"total":26854,"updated":26854,"created":0,"deleted":0,"batches":27,"version_conflicts":0,"noops":0,"retries":{"bulk":0,"search":0},"throttled_millis":0,"requests_per_second":-1.0,"throttled_until_millis":0,"failures":[]}

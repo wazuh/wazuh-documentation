@@ -114,6 +114,11 @@ redirections.push(
     '4.4': '/user-manual/elasticsearch/elasticsearch.html',
     '4.5': '/user-manual/wazuh-indexer/wazuh-indexer-indices.html',
   },
+  {
+    'target': ['4.4=>4.5', '4.5=>4.4'],
+    '4.4': '/user-manual/elasticsearch/elastic-tuning.html',
+    '4.5': '/user-manual/wazuh-indexer/wazuh-indexer-tuning.html',
+  },
 );
 
 /* Pages added in 4.5 */
@@ -141,6 +146,8 @@ newUrls['4.5'] = [
   '/user-manual/wazuh-indexer/wazuh-indexer-indices.html',
   '/user-manual/wazuh-indexer/re-indexing.html',
   '/user-manual/wazuh-indexer/index-life-management.html',
+  '/user-manual/wazuh-indexer/wazuh-indexer-tuning.html',
+  '/user-manual/wazuh-indexer/migrating-wazuh-indices.html',
 ];
 
 /* Pages no longer available in 4.5 */
