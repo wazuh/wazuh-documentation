@@ -14,7 +14,7 @@ Hardware
 --------
 
 The ``sys_hwinfo`` table in the inventory database stores basic information about the hardware components of an endpoint. The table below describes the fields in the database.
- 
+
 +------------------+-------------------------------------------+-------------------------------------------+------------+
 | Field            | Description                               | Example                                   | Available  |
 +==================+===========================================+===========================================+============+
@@ -36,7 +36,7 @@ The ``sys_hwinfo`` table in the inventory database stores basic information abou
 +------------------+-------------------------------------------+-------------------------------------------+------------+
 | ``ram_usage``    | Percentage of RAM in use                  | 87                                        | All        |
 +------------------+-------------------------------------------+-------------------------------------------+------------+
-| ``checksum``     | Integrity synchronization value           | 503709147600c8e0023cf2b9995772280eee30    | All        |                                                                                                                                                                                                                                                                                                                                          
+| ``checksum``     | Integrity synchronization value           | 503709147600c8e0023cf2b9995772280eee30    | All        |
 +------------------+-------------------------------------------+-------------------------------------------+------------+
 
 .. _syscollector_system:
@@ -83,11 +83,11 @@ The ``sys_osinfo`` system table in the inventory database stores information abo
 +------------------------+-------------------------------------------+-----------------------------------------------------+-------------------+
 | ``version``            | Release version                           | #31~16.04.1-Ubuntu SMP Wed Jul 18 08:54:04 UTC 2018 | All               |
 +------------------------+-------------------------------------------+-----------------------------------------------------+-------------------+
-| ``checksum``           | Integrity synchronization value           | 503709147600c8e0023cf2b9995772280eee30              | All               |                                                                                                                                                                                                                                                                                                                                             
+| ``checksum``           | Integrity synchronization value           | 503709147600c8e0023cf2b9995772280eee30              | All               |
 +------------------------+-------------------------------------------+-----------------------------------------------------+-------------------+
-| ``reference``          | Unified primary key                       | 94b6f7b3c1d905aae22a652448df6372da98e5b8            | All               |                                                                                                                                                                                                                                                                                                                                             
+| ``reference``          | Unified primary key                       | 94b6f7b3c1d905aae22a652448df6372da98e5b8            | All               |
 +------------------------+-------------------------------------------+-----------------------------------------------------+-------------------+
- 
+
 .. _syscollector_packages:
 
 Packages
@@ -122,7 +122,7 @@ The ``sys_programs`` table in the inventory database stores information about th
 +------------------+-------------------------------------------+-------------------------------------------+-----------------------------------------+
 | ``multiarch``    | Multiarchitecture support                 | same                                      | Linux (deb)                             |
 +------------------+-------------------------------------------+-------------------------------------------+-----------------------------------------+
-| ``source``       | Source of the package                     | linux-meta                                | Linux (deb/rpm) and  macOS (pkg)        |
+| ``source``       | Source of the package                     | linux-meta                                | Linux (deb) and  macOS (pkg)            |
 +------------------+-------------------------------------------+-------------------------------------------+-----------------------------------------+
 | ``description``  | Description of the package                | Generic Linux kernel headers              | Linux (deb/rpm/pacman) and macOS (pkg)  |
 +------------------+-------------------------------------------+-------------------------------------------+-----------------------------------------+
