@@ -94,6 +94,7 @@ Applying the following configuration, the integration will be executed every day
                     <blobs>.json</blobs>
                     <content_type>json_inline</content_type>
                     <time_offset>24h</time_offset>
+                    <path>info-logs</path>
                 </container>
 
         </storage>

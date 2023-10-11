@@ -8,6 +8,26 @@
 Considerations for configuration
 ================================
 
+Reparse
+-------
+
+.. warning::
+
+   Using the ``reparse`` option will fetch and process all the logs from the starting date until the present. This process may generate duplicate alerts.
+
+To fetch and process older logs, you need to manually run the module using the ``--reparse`` option.
+
+The ``la_time_offset`` value sets the time as an offset for the starting point. If you don't provide an ``la_time_offset`` value, the module goes back to the date of the first file processed.
+
+Find an example of running the module on a manager using the ``--reparse`` option. ``/var/ossec`` is the Wazuh installation path.
+
+.. code-block:: console
+
+  # /var/ossec/wodles/azure/azure-logs --log_analytics --la_auth_path credentials_example --la_tenant_domain 'wazuh.example.domain' --la_tag azure-activity --la_query "AzureActivity" --workspace example-workspace --la_time_offset 50d --debug 2 --reparse
+
+The ``--debug 2`` parameter gets a verbose output. This is useful to show the script is working, specially when handling a large amount of data.
+
+
 Configuring multiple services
 -----------------------------
 
@@ -65,12 +85,14 @@ It is possible to add more than one ``request`` block at the same time in the sa
                 <blobs>.json</blobs>
                 <content_type>json_inline</content_type>
                 <time_offset>24h</time_offset>
+                <path>info-logs</path>
             </container>
 
             <container name="insights-operational-logs">
                 <blobs>.txt</blobs>
                 <content_type>json_inline</content_type>
                 <time_offset>24h</time_offset>
+                <path>info-logs</path>
             </container>
 
         </storage>

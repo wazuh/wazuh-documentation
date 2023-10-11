@@ -129,7 +129,6 @@ Options
 - `time-reconnect`_
 - `force_reconnect_interval`_
 - `ip_update_interval`_
-- `local_ip`_
 - `auto_restart`_
 - `crypto_method`_
 
@@ -211,17 +210,6 @@ Any value equal to or lower than the configured ``notify_time`` will cause the I
 +--------------------+-----------------------------+
 
  .. note:: Most systems won't need to modify this value, but on systems with large routing tables this configuration can help lower CPU usage from wazuh-modulesd.
-
-local_ip
-^^^^^^^^
-
-Specifies which IP address will be used to communicate with the manager when the agent has multiple network interfaces.
-
-+--------------------+----------------------------------+
-| **Default value**  | n/a                              |
-+--------------------+----------------------------------+
-| **Allowed values** | Any valid IP address is allowed. |
-+--------------------+----------------------------------+
 
 auto_restart
 ^^^^^^^^^^^^

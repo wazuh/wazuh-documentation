@@ -13,6 +13,17 @@ The ``wazuh-authd`` program can automatically add a Wazuh agent to a Wazuh manag
 .. warning::
   By default, there is no authentication or authorization involved in this transaction, so it is recommended that this daemon only be run when a new agent is being added.
 
+
+``wazuh-authd`` is able to generate X.509 certificates used for manager verification. `OpenSSL` is not required.   
+
+The certificate parameters are specified in the CLI:
+
+   .. code-block:: console
+
+     # wazuh-authd -C 265 -B 2048 -K /var/ossec/etc/sslmanager.key -X /var/ossec/etc/sslmanager.cert -S "/C=US/ST=California/CN=wazuh/"
+
+If any of the parameters related to the certificate generation is missing, an error is triggered and the certificates are not generated.
+
 +------------------+-------------------------------------------------------------------------------------------------------+
 | **-V**           | Version and license message.                                                                          |
 +------------------+-------------------------------------------------------------------------------------------------------+
@@ -59,6 +70,16 @@ The ``wazuh-authd`` program can automatically add a Wazuh agent to a Wazuh manag
 |                  | **Default** | TLS v1.2 only (if supported by the server).                                             |
 +------------------+-------------+-----------------------------------------------------------------------------------------+
 | **-L**           | Force insertion even though agent limit has been reached.                                             |
++------------------+-------------------------------------------------------------------------------------------------------+
+| **-C**           | Specify the number of days the certificate is valid for.                                              |
++------------------+-------------------------------------------------------------------------------------------------------+
+| **-B**           | Set the X.509 certificate key size in bits.                                                           |
++------------------+-------------------------------------------------------------------------------------------------------+
+| **-K**           | Path to store the X.509 certificate key.                                                              |
++------------------+-------------------------------------------------------------------------------------------------------+
+| **-X**           | Path to store the X.509 certificate.                                                                  |
++------------------+-------------------------------------------------------------------------------------------------------+
+| **-S**           | Subject of the X.509 certificate. The arg must be formatted as /type0=value0/type1=value1/type2=..    |
 +------------------+-------------------------------------------------------------------------------------------------------+
 
 .. note::
