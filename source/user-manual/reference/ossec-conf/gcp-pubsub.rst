@@ -13,24 +13,24 @@ gcp-pubsub
 		<gcp-pubsub>
 		</gcp-pubsub>
 
-This configuration section is used to configure the Google Cloud Pub/Sub module.
+   This configuration section is used to configure the Google Cloud Pub/Sub module.
 
-**Main options**
+.. topic:: Main options:
 
-- `enabled`_
-- `project_id`_
-- `subscription_name`_
-- `credentials_file`_
-- `max_messages`_
-- `num_threads`_
+   - `enabled`_
+   - `project_id`_
+   - `subscription_name`_
+   - `credentials_file`_
+   - `max_messages`_
+   - `num_threads`_
 
-**Scheduling options**
+.. topic:: Scheduling options:
 
-- `pull_on_start`_
-- `interval`_
-- `day`_
-- `wday`_
-- `time`_
+   - `pull_on_start`_
+   - `interval`_
+   - `day`_
+   - `wday`_
+   - `time`_
 
 Main options
 ------------
