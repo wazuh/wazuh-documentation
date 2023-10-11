@@ -865,7 +865,7 @@ $vulnerability_detector_provider_alas_enabled
 $vulnerability_detector_provider_alas_os
   Feed to update.
 
-  `Default ['amazon-linux','amazon-linux-2','amazon-linux-2022']`
+  `Default ['amazon-linux','amazon-linux-2','amazon-linux-2022','amazon-linux-2023']`
 
   `Type List`
 

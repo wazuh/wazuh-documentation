@@ -139,4 +139,4 @@ Search term mode
 Wazuh Indexer
 -------------
 
-In the Wazuh dashboard, there are specialized search bars for querying Wazuh indexer data. These use the same syntax as OpenSearch. To learn more, refer to `Using Dashboards Query Language <https://opensearch.org/docs/2.8/dashboards/discover/dql/>`__.
+In the Wazuh dashboard, there are specialized search bars for querying Wazuh indexer data. These use the same syntax as OpenSearch. To learn more, refer to `Using Dashboards Query Language <https://opensearch.org/docs/2.9/dashboards/discover/dql/>`__.

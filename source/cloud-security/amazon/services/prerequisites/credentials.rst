@@ -88,6 +88,8 @@ To use the *prod* profile in the AWS integration you would use the following buc
     <aws_profile>prod</aws_profile>
   </bucket>
 
+.. _iam_roles:
+
 IAM Roles
 ^^^^^^^^^
 
