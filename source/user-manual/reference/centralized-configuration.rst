@@ -118,30 +118,30 @@ Options
 -------
 
 +-------------+-------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-| **name**    | Allows assignment of the block to one particular agent.                                                                                                           |
+| **name**    | Assigns the block to agents with specific names.                                                                                                                  |
 +             +-------------------------------------------------------+-----------------------------------------------------------------------------------------------------------+
-|             | Allowed values                                        | Any regular expression that matches the agent name .                                                      |
+|             | Allowed values                                        | Any regular expression that matches the agent name.                                                       |
 +-------------+-------------------------------------------------------+-----------------------------------------------------------------------------------------------------------+
-| **os**      | Allows assignment of the block to an operating system.                                                                                                            |
+| **os**      | Assigns the block to agents on specific operating systems.                                                                                                        |
 +             +-------------------------------------------------------+-----------------------------------------------------------------------------------------------------------+
 |             | Allowed values                                        | Any regular expression that matches the agent OS information.                                             |
 +-------------+-------------------------------------------------------+-----------------------------------------------------------------------------------------------------------+
-| **profile** | Allows assignment of a profile name to a block. Any agent configured to use the defined :ref:`profile <reference_ossec_client_config_profile>` may use the block. |
+| **profile** | Assigns the block to agents with specific profiles as defined in :ref:`client configuration <reference_ossec_client_config_profile>`.                             |
 +             +-------------------------------------------------------+-----------------------------------------------------------------------------------------------------------+
-|             | Allowed values                                        | Any regular expression that matches the defined profile.                                                  |
+|             | Allowed values                                        | Any regular expression that matches the agent profile.                                                    |
 +-------------+-------------------------------------------------------+-----------------------------------------------------------------------------------------------------------+
 
 .. topic:: Example
 
 	.. code-block:: xml
 
-		<agent_config name=”^agent01”>
+		<agent_config name=”^agent01|^agent02”>
 		...
 		<agent_config os="^Linux">
 		...
 		<agent_config profile="^UnixHost">
 
-Get the agent name and operating system.
+   To get the agent name and operating system information, you can run the ``agent_control`` utility.
 
     .. code-block:: console
 
