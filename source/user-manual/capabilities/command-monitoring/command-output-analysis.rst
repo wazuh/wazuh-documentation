@@ -1,7 +1,7 @@
 .. Copyright (C) 2015, Wazuh, Inc.
 
 .. meta::
-  :description:  
+  :description: Explore command output analysis: decoding, rule matching, raw log viewing, and crafting custom rules and decoders.
 
 Command output analysis
 =======================

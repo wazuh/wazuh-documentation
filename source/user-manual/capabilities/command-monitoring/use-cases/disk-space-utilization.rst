@@ -1,7 +1,7 @@
 .. Copyright (C) 2015, Wazuh, Inc.
 
 .. meta::
-    :description: 
+    :description: Optimize disk space on Windows, Linux, and macOS. Learn how to monitor partitions to maintain defined free space limits in this use case.
 
 Disk space utilization
 ======================

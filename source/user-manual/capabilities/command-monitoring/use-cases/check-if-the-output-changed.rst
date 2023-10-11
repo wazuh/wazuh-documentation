@@ -1,7 +1,7 @@
 .. Copyright (C) 2015, Wazuh, Inc.
 
 .. meta::
-    :description: 
+    :description: Learn to monitor network changes with the Linux netstat command and generate alerts when TCP socket changes occur.
 
 Check if the output changed
 ===========================

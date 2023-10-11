@@ -1,7 +1,7 @@
 .. Copyright (C) 2015, Wazuh, Inc.
 
 .. meta::
-  :description: Learn more about the command monitoring configuration. Check out the basic usage, how to monitor running Windows processes, and more. 
+  :description: Discover how to configure the modules responsible for running and monitoring commands, executables, and scripts on endpoints.
 
 Configuration
 =============

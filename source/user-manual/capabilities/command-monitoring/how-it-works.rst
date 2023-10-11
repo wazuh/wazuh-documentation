@@ -1,7 +1,7 @@
 .. Copyright (C) 2015, Wazuh, Inc.
 
 .. meta::
-  :description: Learn more about how the command monitoring configuration works and its configuration in this section of our documentation. 
+  :description: Wazuh uses Command and Logcollector modules to execute commands and send output for analysis. Learn how the command monitoring works in this documentation section.
   
 How it works
 ============

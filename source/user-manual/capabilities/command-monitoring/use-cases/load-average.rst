@@ -1,7 +1,7 @@
 .. Copyright (C) 2015, Wazuh, Inc.
 
 .. meta::
-    :description: 
+    :description: Learn how to configure a Wazuh agent to monitor Linux uptime command output, tracking system load average for resource management.
 
 Load average
 ============

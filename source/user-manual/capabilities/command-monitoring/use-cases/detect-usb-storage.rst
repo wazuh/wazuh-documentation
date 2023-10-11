@@ -1,7 +1,7 @@
 .. Copyright (C) 2015, Wazuh, Inc.
 
 .. meta::
-    :description: 
+    :description: Discover how to use Wazuh command monitoring capability to detect USB storage device connections on Windows endpoints.
 
 Detect USB Storage
 ==================

@@ -1,7 +1,7 @@
 .. Copyright (C) 2015, Wazuh, Inc.
 
 .. meta::
-    :description: 
+    :description: Configure Wazuh agents to monitor processes on Windows, Linux, and macOS. Create custom rules for alerting if a given process is running or not.
 
 Monitoring running processes
 =============================
