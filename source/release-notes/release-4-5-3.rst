@@ -3,8 +3,8 @@
 .. meta::
   :description: Wazuh 4.5.3 has been released. Check out our release notes to discover the changes and additions of this release.
 
-4.5.3 Release notes - TBD
-=========================
+4.5.3 Release notes - 10 October 2023
+=====================================
 
 This section lists the changes in version 4.5.3. Every update of the Wazuh solution is cumulative and includes all enhancements and fixes from previous releases.
 
@@ -21,7 +21,7 @@ Manager
 Agent
 ^^^^^
 
--  `#19041 <https://github.com/wazuh/wazuh/pull/19041>`__ Updated the agent to report the name of macOS 14 (Sonoma).
+-  `#19205 <https://github.com/wazuh/wazuh/issues/19205>`__ Support for macOS 14 (Sonoma).
 
 RESTful API
 ^^^^^^^^^^^
