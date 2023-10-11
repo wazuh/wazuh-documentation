@@ -3,8 +3,6 @@
 .. meta::
   :description: The Wazuh GCP Storage module allows you to process logs stored in Google Cloud Storage buckets. Learn more about how to configure the module in this section.
 
-.. _gcp-bucket:
-
 gcp-bucket
 ==========
 
@@ -17,23 +15,21 @@ gcp-bucket
 
 This configuration section is used to configure the Google Cloud Storage bucket module.
 
-Options
--------
-
-Main options
-^^^^^^^^^^^^
+**Main options**:
 
 - `enabled`_
 - `bucket`_
 
-Scheduling options
-^^^^^^^^^^^^^^^^^^
+**Scheduling options**:
 
 - `run_on_start`_
 - `interval`_
 - `day`_
 - `wday`_
 - `time`_
+
+Main options
+------------
 
 enabled
 ^^^^^^^
@@ -66,19 +62,15 @@ Defines a bucket to process. It must have its ``type`` attribute defined. It sup
 
       </bucket>
 
-type
-^^^^
+**Bucket attributes**
 
-Specifies the type of bucket.
++----------------------------------------+-------------------------------------------------------------+-----------------------------------------------+
+| Attributes                             | Allowed values                                              | Mandatory/Optional                            |
++========================================+=============================================================+===============================================+
+| :ref:`type_attribute`                  | ``access_logs``                                             | Mandatory                                     |
++----------------------------------------+-------------------------------------------------------------+-----------------------------------------------+
 
-+--------------------+-------------+
-| **Default value**  | N/A         |
-+--------------------+-------------+
-| **Allowed values** | access_logs |
-+--------------------+-------------+
-
-Bucket options
-^^^^^^^^^^^^^^
+**Bucket options**
 
 +----------------------------------------+-------------------------------------------------------------+-----------------------------------------------+
 | Options                                | Allowed values                                              | Mandatory/Optional                            |
@@ -96,12 +88,25 @@ Bucket options
 |                                        | has been collected by the module                            |                                               |
 +----------------------------------------+-------------------------------------------------------------+-----------------------------------------------+
 
+.. _type_attribute:
+
+type (attribute)
+~~~~~~~~~~~~~~~~
+
+Specifies the type of bucket.
+
++--------------------+-------------+
+| **Default value**  | N/A         |
++--------------------+-------------+
+| **Allowed values** | access_logs |
++--------------------+-------------+
+
 .. _gcp_bucket_name:
 
 name
 ~~~~
 
-Name of the Google Cloud Storage bucket where logs are read from.
+Name of the Google Cloud Storage bucket from which logs are read.
 
 +--------------------+-----------------------------+
 | **Default value**  | N/A                         |
@@ -114,7 +119,7 @@ Name of the Google Cloud Storage bucket where logs are read from.
 credentials_file
 ~~~~~~~~~~~~~~~~
 
-Path to the Google Cloud credentials file. It can be absolute or relative to ``WAZUH_HOME``.
+Path to the Google Cloud credentials file. It can be an absolute path or relative to ``WAZUH_HOME``.
 
 +--------------------+--------------------------------+
 | **Default value**  | n/a                            |
@@ -142,7 +147,7 @@ Bucket path or prefix.
 only_logs_after
 ~~~~~~~~~~~~~~~
 
-Parse logs from a specific date onwards. It must have the YYYY-MM-DD format. 
+Parse logs from a specific date onwards. It must follow the YYYY-MM-DD format. 
 
 +--------------------+-----------------------------------+
 | **Default value**  | Date of execution at ``00:00:00`` |
@@ -155,7 +160,7 @@ Parse logs from a specific date onwards. It must have the YYYY-MM-DD format.
 remove_from_bucket
 ~~~~~~~~~~~~~~~~~~
 
-Remove the logs from the Google Cloud Storage bucket after they are read by the module.
+Remove the logs from the Google Cloud Storage bucket once the module reads them.
 
 +--------------------+---------+
 | **Default value**  | no      |
@@ -163,7 +168,8 @@ Remove the logs from the Google Cloud Storage bucket after they are read by the 
 | **Allowed values** | yes, no |
 +--------------------+---------+
 
-
+Scheduling options
+------------------
 
 run_on_start
 ^^^^^^^^^^^^^
@@ -179,7 +185,7 @@ Run the module on Wazuh service start or restart.
 interval
 ^^^^^^^^
 
-Time gap between module executions.
+Time interval between module executions.
 
 +--------------------+----------------------------------------------------------------------------------------------------------------------------------------------------------------+
 | **Default value**  | 1h                                                                                                                                                             |

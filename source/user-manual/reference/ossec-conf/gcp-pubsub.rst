@@ -3,8 +3,6 @@
 .. meta::
   :description: The Wazuh GCP Pub/Sub module allows you to pull log data from Google Pub/Sub. Learn more about how to configure the module in this section.
 
-.. _gcp-pubsub:
-
 gcp-pubsub
 ==========
 
@@ -17,11 +15,7 @@ gcp-pubsub
 
 This configuration section is used to configure the Google Cloud Pub/Sub module.
 
-Options
--------
-
-Main options
-^^^^^^^^^^^^
+**Main options**
 
 - `enabled`_
 - `project_id`_
@@ -30,13 +24,16 @@ Main options
 - `max_messages`_
 - `num_threads`_
 
-Scheduling options
-^^^^^^^^^^^^^^^^^^
+**Scheduling options**
+
 - `pull_on_start`_
 - `interval`_
 - `day`_
 - `wday`_
 - `time`_
+
+Main options
+------------
 
 enabled
 ^^^^^^^
@@ -65,7 +62,7 @@ For example ``<project_id>wazuh-dev</project_id>``.
 subscription_name
 ^^^^^^^^^^^^^^^^^
 
-Subscription name to read from.
+Name of the subscription to read from.
 
 +--------------------+------------+
 | **Default value**  | n/a        |
@@ -78,7 +75,7 @@ For example ``<subscription_name>wazuh-name</subscription_name>``.
 credentials_file
 ^^^^^^^^^^^^^^^^
 
-Path to the Google Cloud credentials file. It can be absolute or relative to ``WAZUH_HOME``.
+Path to the Google Cloud credentials file. It can be absolute path or relative to ``WAZUH_HOME``.
 
 +--------------------+--------------------------------+
 | **Default value**  | n/a                            |
@@ -104,7 +101,7 @@ Maximum number of messages pulled in each iteration. This value does not depend 
 num_threads
 ^^^^^^^^^^^^
 
-Number of threads used to pull in each iteration. The maximum number of messages will be divided between all the configured threads.
+Number of threads used to pull in each iteration. The maximum number of messages is divided between all the configured threads.
 
 +--------------------+-------------+
 | **Default value**  | 1           |
@@ -123,6 +120,9 @@ logging
 
 This option has no effect. The module now uses the :ref:`wazuh_modules.debug <wazuh_modules_options>` level to set its logging level.
 
+Scheduling options
+------------------
+
 pull_on_start
 ^^^^^^^^^^^^^
 
@@ -137,7 +137,7 @@ Pull logs on Wazuh agent start or restart.
 interval
 ^^^^^^^^
 
-Time gap between module executions.
+Time interval between module executions.
 
 +--------------------+----------------------------------------------------------------------------------------------------------------------------------------------------------------+
 | **Default value**  | 1h                                                                                                                                                             |
