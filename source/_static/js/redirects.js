@@ -107,7 +107,7 @@ redirections.push(
   {
     'target': ['4.4=>4.5', '4.5=>4.4'],
     '4.4': '/user-manual/capabilities/command-monitoring/command-configuration.html',
-    '4.5': '/user-manual/capabilities/command-monitoring/configuration.html',
+    '4.5': '/user-manual/capabilities/command-monitoring/use-cases/index.html',
   },
   {
     'target': ['4.4=>4.5'],
