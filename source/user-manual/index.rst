@@ -16,6 +16,8 @@ Welcome to the Wazuh user manual. Use it as your reference library once your bas
         :maxdepth: 2
 
         manager/index
+        wazuh-indexer/index
+        wazuh-dashboard/index
         certificates
         deployment-variables/deployment-variables
         agent-enrollment/index
@@ -23,11 +25,9 @@ Welcome to the Wazuh user manual. Use it as your reference library once your bas
         configuring-cluster/index
         capabilities/index
         ruleset/index
-        api/index
         user-administration/index
-        reference/index
-        elasticsearch/index
-        wazuh-dashboard/index
-        uninstall/index
+        api/index
         files-backup/index
+        uninstall/index
+        reference/index
         

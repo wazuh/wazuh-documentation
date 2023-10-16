@@ -815,8 +815,7 @@ Example of configuration
       <skip_on_error>no</skip_on_error>
       <bucket type="cloudtrail">
           <name>s3-dev-bucket</name>
-          <access_key>insert_access_key</access_key>
-          <secret_key>insert_secret_key</secret_key>
+          <aws_profile>default</aws_profile>
           <only_logs_after>2018-JUN-01</only_logs_after>
           <regions>us-east-1,us-west-1,eu-central-1</regions>
           <path>/dev1/</path>
@@ -827,8 +826,7 @@ Example of configuration
       </bucket>
       <bucket type="cloudtrail">
           <name>s3-dev-bucket</name>
-          <access_key>insert_access_key</access_key>
-          <secret_key>insert_secret_key</secret_key>
+          <aws_profile>default</aws_profile>
           <only_logs_after>2018-JUN-01</only_logs_after>
           <regions>us-east-1,us-west-1,eu-central-1</regions>
           <path>/dev2/</path>
@@ -854,8 +852,7 @@ Example of configuration
           <remove_from_bucket>yes<remove_from_bucket>
       </bucket>
       <service type="cloudwatchlogs">
-          <access_key>insert_access_key</access_key>
-          <secret_key>insert_secret_key</secret_key>
+          <aws_profile>default</aws_profile>
           <aws_log_groups>log_group1,log_group2</aws_log_groups>
           <only_logs_after>2018-JUN-01</only_logs_after>
           <regions>us-east-1,us-west-1,eu-central-1</regions>
@@ -867,4 +864,3 @@ Example of configuration
         <iam_role_arn>arn:aws:iam::010203040506:role/ASL-Role</iam_role_arn>
       </subscriber>
   </wodle>
-  

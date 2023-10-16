@@ -114,6 +114,21 @@ redirections.push(
     '4.4': '/user-manual/capabilities/command-monitoring/command-faq.html',
     '4.5': '/user-manual/capabilities/command-monitoring/index.html',
   },
+  {
+    'target': ['4.4=>4.5'],
+    '4.4': '/user-manual/elasticsearch/index.html',
+    '4.5': '/user-manual/wazuh-indexer/index.html',
+  },
+  {
+    'target': ['4.4=>4.5', '4.5=>4.4'],
+    '4.4': '/user-manual/elasticsearch/elasticsearch.html',
+    '4.5': '/user-manual/wazuh-indexer/wazuh-indexer-indices.html',
+  },
+  {
+    'target': ['4.4=>4.5', '4.5=>4.4'],
+    '4.4': '/user-manual/elasticsearch/elastic-tuning.html',
+    '4.5': '/user-manual/wazuh-indexer/wazuh-indexer-tuning.html',
+  },
 );
 
 /* Pages added in 4.5 */
@@ -122,6 +137,7 @@ newUrls['4.5'] = [
   '/release-notes/release-4-5-0.html',
   '/release-notes/release-4-5-1.html',
   '/release-notes/release-4-5-2.html',
+  '/release-notes/release-4-5-3.html',
   '/integrations-guide/index.html',
   '/integrations-guide/elastic-stack/index.html',
   '/integrations-guide/opensearch/index.html',
@@ -145,6 +161,12 @@ newUrls['4.5'] = [
   '/getting-started/use-cases/malware-detection.html',
   '/getting-started/use-cases/cloud-workload-protection.html',
   '/getting-started/use-cases/it-hygiene.html',
+  '/user-manual/wazuh-indexer/index.html',
+  '/user-manual/wazuh-indexer/wazuh-indexer-indices.html',
+  '/user-manual/wazuh-indexer/re-indexing.html',
+  '/user-manual/wazuh-indexer/index-life-management.html',
+  '/user-manual/wazuh-indexer/wazuh-indexer-tuning.html',
+  '/user-manual/wazuh-indexer/migrating-wazuh-indices.html',
 ];
 
 /* Pages no longer available in 4.5 */
@@ -160,6 +182,11 @@ removedUrls['4.5'] = [
   '/getting-started/use-cases/system-inventory.html',
   '/user-manual/capabilities/command-monitoring/command-configuration.html',
   '/user-manual/capabilities/command-monitoring/command-faq.html',
+  '/user-manual/elasticsearch/configure-indices.html',
+  '/user-manual/elasticsearch/elastic-tuning.html',
+  '/user-manual/elasticsearch/elasticsearch.html',
+  '/user-manual/elasticsearch/index.html',
+  '/user-manual/elasticsearch/troubleshooting.html',  
 ];
 
 /* *** RELEASE 4.4 ****/
