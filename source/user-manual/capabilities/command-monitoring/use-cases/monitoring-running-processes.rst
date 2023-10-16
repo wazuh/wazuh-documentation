@@ -154,7 +154,7 @@ Wazuh server
 
 Configure the Wazuh server with custom rules to analyze the events received from the Linux endpoint using the steps below.
 
-#. Add the rules below to the The first rule with ID 100012 generates an alert ("Cron process not running.") unless it is overridden by its child rule with ID 100013 that matches /usr/sbin/cron in the command output. You can add as many child rules as needed to enumerate all of the important processes you want to monitor./var/ossec/etc/rules/local_rules.xml`` file. The rules generate an alert when the ``/usr/sbin/cron`` process is not running as expected:
+#. Add the rules below to the ``/var/ossec/etc/rules/local_rules.xml`` file. The rules generate an alert when the ``/usr/sbin/cron process`` is not running as expected:
 
    .. code-block:: xml
 
