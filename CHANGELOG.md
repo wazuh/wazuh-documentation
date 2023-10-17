@@ -1,6 +1,12 @@
 # Change Log
 All notable changes to this project will be documented in this file.
 
+## [v4.5.4]
+
+### Added
+
+- Support for Wazuh 4.5.4.
+
 ## [v4.5.3]
 ### Added
 
