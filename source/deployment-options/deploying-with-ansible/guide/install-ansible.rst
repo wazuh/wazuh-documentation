@@ -34,6 +34,7 @@ The following minimum requirements should be met to use Ansible on Windows endpo
 -  PowerShell 3.0 or newer.
 -  At least .NET version 4.0 should be installed on the Windows endpoint.
 -  A WinRM listener should be created and activated.
+-  The port 5986 specified in the `ansible_ssh_port` variable in the hosts file. 
 
 Installation on CentOS/RHEL/Fedora
 ----------------------------------
