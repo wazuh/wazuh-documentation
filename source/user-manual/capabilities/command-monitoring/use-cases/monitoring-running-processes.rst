@@ -154,7 +154,7 @@ Wazuh server
 
 Configure the Wazuh server with custom rules to analyze the events received from the Linux endpoint using the steps below.
 
-#. Add the rules below to the ``/var/ossec/etc/rules/local_rules.xml`` file. The rules generate an alert when the ``/usr/sbin/cron process`` is not running as expected:
+#. Add the rules below to the ``/var/ossec/etc/rules/local_rules.xml`` file. The rules generate an alert when the ``/usr/sbin/cron`` process is not running as expected:
 
    .. code-block:: xml
 
