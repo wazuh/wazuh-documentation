@@ -98,7 +98,7 @@ Wazuh server
 
       <group name="windows,sysmon,privilege-escalation">
 
-        <rule id="160011" level="10">
+        <rule id="110011" level="10">
           <if_sid>61615</if_sid>
           <field name="win.eventdata.targetObject" type="pcre2">HKLM\\\\System\\\\CurrentControlSet\\\\Services\\\\PSEXESVC</field>
           <field name="win.eventdata.eventType" type="pcre2">^SetValue$</field>
@@ -111,7 +111,7 @@ Wazuh server
         </rule>
       </group>
 
-   The rule ``160011`` creates an alert whenever there is a creation of a service named ``PSEXESVC``, which occurs each time PsExec is executed on the Windows endpoint. It is mapped to the MITRE ATT&CK ID ``T1543.003``, indicating the persistence and privilege escalation tactics.
+   The rule ``110011`` creates an alert whenever there is a creation of a service named ``PSEXESVC``, which occurs each time PsExec is executed on the Windows endpoint. It is mapped to the MITRE ATT&CK ID ``T1543.003``, indicating the persistence and privilege escalation tactics.
 
    When the rule triggers, the alert contains information about the MITRE ATT&CK ID ``T1543.003``.
 
@@ -189,7 +189,7 @@ We use filters on the **Security Module > MITRE ATT&CK> Events** tab of the Wazu
   :align: center
   :width: 80%
 
-Expand the rule ID ``160011`` alert to view the MITRE ID ``T1543.003`` information.
+Expand the rule ID ``110011`` alert to view the MITRE ID ``T1543.003`` information.
 
 .. thumbnail:: /images/manual/mitre/mitre-id-t1543.003-information.png
   :title: MITRE ID T1110 information
@@ -217,7 +217,7 @@ Click on the **JSON** tab to view the details of the alert in JSON format:
            "targetObject": "HKLM\\\\System\\\\CurrentControlSet\\\\Services\\\\PSEXESVC\\\\ObjectName",
            "processGuid": "{45cd4aff-93d1-6501-0b00-000000000b00}",
            "processId": "720",
-           "utcTime": "2023-09-13 12:12:15.759",
+           "utcTime": "2023-10-16 12:12:15.759",
            "ruleName": "technique_id=T1543,technique_name=Service Creation",
            "details": "LocalSystem",
            "eventType": "SetValue",
@@ -230,11 +230,11 @@ Click on the **JSON** tab to view the details of the alert in JSON format:
            "level": "4",
            "channel": "Microsoft-Windows-Sysmon/Operational",
            "opcode": "0",
-           "message": "\"Registry value set:\r\nRuleName: technique_id=T1543,technique_name=Service Creation\r\nEventType: SetValue\r\nUtcTime: 2023-09-13 12:12:15.759\r\nProcessGuid: {45cd4aff-93d1-6501-0b00-000000000b00}\r\nProcessId: 720\r\nImage: C:\\Windows\\system32\\services.exe\r\nTargetObject: HKLM\\System\\CurrentControlSet\\Services\\PSEXESVC\\ObjectName\r\nDetails: LocalSystem\r\nUser: NT AUTHORITY\\SYSTEM\"",
+           "message": "\"Registry value set:\r\nRuleName: technique_id=T1543,technique_name=Service Creation\r\nEventType: SetValue\r\nUtcTime: 2023-10-16 12:12:15.759\r\nProcessGuid: {45cd4aff-93d1-6501-0b00-000000000b00}\r\nProcessId: 720\r\nImage: C:\\Windows\\system32\\services.exe\r\nTargetObject: HKLM\\System\\CurrentControlSet\\Services\\PSEXESVC\\ObjectName\r\nDetails: LocalSystem\r\nUser: NT AUTHORITY\\SYSTEM\"",
            "version": "2",
-           "systemTime": "2023-09-13T12:12:15.7636688Z",
+           "systemTime": "2023-10-16T12:12:15.7636688Z",
            "eventRecordID": "118081",
-           "threadID": "3588",
+           "threadID": "3644",
            "computer": "Windows11",
            "task": "13",
            "processID": "3140",
@@ -244,7 +244,7 @@ Click on the **JSON** tab to view the details of the alert in JSON format:
        }
      },
      "rule": {
-       "firedtimes": 7,
+       "firedtimes": 4,
        "mail": false,
        "level": 10,
        "description": "PsExec service running as NT AUTHORITY\\\\SYSTEM has been created on Windows11",
@@ -264,14 +264,14 @@ Click on the **JSON** tab to view the details of the alert in JSON format:
            "Privilege Escalation"
          ]
        },
-       "id": "160011"
+       "id": "110011"
      },
      "location": "EventChannel",
      "decoder": {
        "name": "windows_eventchannel"
      },
      "id": "1694607138.3688437",
-     "timestamp": "2023-09-13T12:12:18.684+0000"
+     "timestamp": "2023-10-16T12:12:18.684+0000"
    }
 
 The alerts display the MITRE ATT&CK ID and its associated tactics and techniques. This helps users quickly understand the nature of the attack and take appropriate actions.
