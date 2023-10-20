@@ -398,7 +398,7 @@ Wazuh Manager
       skip_proc: 'yes'
       skip_sys: 'yes'
       process_priority: 10
-      max_eps: 100
+      max_eps: 50
       sync_enabled: 'yes'
       sync_interval: '5m'
       sync_max_interval: '1h'
@@ -1134,7 +1134,7 @@ Wazuh Agent
       skip_proc: 'yes'
       skip_sys: 'yes'
       process_priority: 10
-      max_eps: 100
+      max_eps: 50
       sync_enabled: 'yes'
       sync_interval: '5m'
       sync_max_interval: '1h'

@@ -380,7 +380,7 @@ max_eps
 Sets the maximum event reporting throughput. Events are messages that will produce an alert.
 
 +--------------------+---------------------------------------------------------+
-| **Default value**  | 100                                                     |
+| **Default value**  | 50                                                     |
 +--------------------+---------------------------------------------------------+
 | **Allowed values** | Integer number between 0 and 1000000. 0 means disabled. |
 +--------------------+---------------------------------------------------------+
@@ -389,7 +389,7 @@ Example:
 
 .. code-block:: xml
 
- <max_eps>100</max_eps>
+ <max_eps>50</max_eps>
 
 
 .. _reference_ossec_syscheck_max_files_per_second:
@@ -1231,7 +1231,7 @@ Default syscheck configuration:
     <!-- Nice value for Syscheck process -->
     <process_priority>10</process_priority>
     <!-- Maximum output throughput -->
-    <max_eps>100</max_eps>
+    <max_eps>50</max_eps>
     <!-- Database synchronization settings -->
     <synchronization>
       <enabled>yes</enabled>
@@ -1277,7 +1277,7 @@ Default syscheck configuration:
     <!-- Nice value for Syscheck process -->
     <process_priority>10</process_priority>
     <!-- Maximum output throughput -->
-    <max_eps>100</max_eps>
+    <max_eps>50</max_eps>
     <!-- Database synchronization settings -->
     <synchronization>
       <enabled>yes</enabled>
@@ -1354,7 +1354,7 @@ Default syscheck configuration:
     <!-- Nice value for Syscheck module -->
     <process_priority>10</process_priority>
     <!-- Maximum output throughput -->
-    <max_eps>100</max_eps>
+    <max_eps>50</max_eps>
     <!-- Database synchronization settings -->
     <synchronization>
       <enabled>yes</enabled>
@@ -1402,7 +1402,7 @@ Default syscheck configuration:
     <!-- Nice value for Syscheck process -->
     <process_priority>10</process_priority>
     <!-- Maximum output throughput -->
-    <max_eps>100</max_eps>
+    <max_eps>50</max_eps>
     <!-- Database synchronization settings -->
     <synchronization>
       <enabled>yes</enabled>
