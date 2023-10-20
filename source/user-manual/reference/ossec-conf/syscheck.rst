@@ -380,7 +380,7 @@ max_eps
 Sets the maximum event reporting throughput. Events are messages that will produce an alert.
 
 +--------------------+---------------------------------------------------------+
-| **Default value**  | 50                                                     |
+| **Default value**  | 50                                                      |
 +--------------------+---------------------------------------------------------+
 | **Allowed values** | Integer number between 0 and 1000000. 0 means disabled. |
 +--------------------+---------------------------------------------------------+
