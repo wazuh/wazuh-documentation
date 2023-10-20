@@ -250,7 +250,7 @@ Let’s see below, the content of the YAML file ``/etc/ansible/roles/wazuh-ansib
                  - "{{ hostvars.wi2.private_ip }}"
                  - "{{ hostvars.wi3.private_ip }}"
 
-   # Indexer + dashboard node
+   # Wazuh dashboard node
      - hosts: dashboard
        roles:
          - role: "../roles/wazuh/wazuh-indexer"
@@ -320,7 +320,7 @@ More details on  default configuration variables can be found in the :doc:`varia
 2 - Preparing to run the playbook
 ---------------------------------
 
-The YAML file wazuh-production-ready.yml will provision a production-ready distributed Wazuh environment. We will add the public and private IP addresses of the endpoints where the various components of the cluster will be installed to the Ansible hosts file. For this guide, the architecture includes 2 Wazuh nodes, 3 Wazuh indexer nodes, and a mixed Wazuh dashboard node.
+The YAML file wazuh-production-ready.yml will provision a production-ready distributed Wazuh environment. We will add the public and private IP addresses of the endpoints where the various components of the cluster will be installed to the Ansible hosts file. For this guide, the architecture includes 2 Wazuh nodes, 3 Wazuh indexer nodes, and a Wazuh dashboard node.
 
 The contents of the host file is:
 
