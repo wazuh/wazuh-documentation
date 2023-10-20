@@ -28,7 +28,7 @@ The following GCP services are supported by the Wazuh GCP module by pulling the 
    firewall
    load_balancing
 
-To check the ``gcp-pubsub`` configuration used to pull data from Google Cloud Pub/Sub, see the :ref:`gcp-pubsub <gcp-pubsub>` section.
+To check the ``gcp-pubsub`` configuration used to pull data from Google Cloud Pub/Sub, see the :doc:`gcp-pubsub </user-manual/reference/ossec-conf/gcp-pubsub>` section.
 
 Supported services using Google Cloud Storage buckets
 -----------------------------------------------------
@@ -40,5 +40,5 @@ The following GCP services are supported by the Wazuh GCP module by pulling the 
 
    access_logs
 
-To check the `gcp-bucket` configuration used to pull data from Google Cloud Storage buckets, see the :ref:`gcp-bucket <gcp-bucket>` section.
+To check the `gcp-bucket` configuration used to pull data from Google Cloud Storage buckets, see the :doc:`gcp-bucket </user-manual/reference/ossec-conf/gcp-bucket>` section.
 
