@@ -133,7 +133,7 @@ Filebeat installation and configuration
 
     .. code-block:: console
 
-      # curl -so /etc/filebeat/wazuh-template.json https://raw.githubusercontent.com/wazuh/wazuh/|WAZUH_CURRENT_MINOR|/extensions/elasticsearch/7.x/wazuh-template.json
+      # curl -so /etc/filebeat/wazuh-template.json https://raw.githubusercontent.com/wazuh/wazuh/v|WAZUH_CURRENT|/extensions/elasticsearch/7.x/wazuh-template.json
       # chmod go+r /etc/filebeat/wazuh-template.json
 
 #. Download the Wazuh module for Filebeat:
