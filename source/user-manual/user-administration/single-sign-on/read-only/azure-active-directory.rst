@@ -109,7 +109,7 @@ Azure Active Directory Configuration
          :align: center
          :width: 80%
 
-   #. In option 2 under **User Attributes & Claims**, click **edit** and select **Add new claim**. Select **Roles** as the name and **user.assignedroles** as **Source attribute**. This claim will be mapped with ``roles_key`` on the Wazuh indexer configuration.
+   #. In option 2 under **Attributes & Claims**, click **edit** and select **Add new claim**. Select **Roles** as the name and **user.assignedroles** as **Source attribute**. This claim will be mapped with ``roles_key`` on the Wazuh indexer configuration.
 
       .. thumbnail:: /images/single-sign-on/azure-active-directory/12-click-edit-and-select-add-new-claim.png
          :title: Click edit and select Add new claim
@@ -277,6 +277,7 @@ Wazuh dashboard configuration
 
       opensearch_security.auth.type: "saml"
       server.xsrf.allowlist: ["/_opendistro/_security/saml/acs", "/_opendistro/_security/saml/logout", "/_opendistro/_security/saml/acs/idpinitiated"]
+      opensearch_security.session.keepalive: false
 
 #. Restart the Wazuh dashboard service.
 
