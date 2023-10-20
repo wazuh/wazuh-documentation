@@ -7,6 +7,7 @@ All notable changes to this project will be documented in this file.
 
 - Added instructions to build the Wazuh indexer and Wazuh dashboard packages. ([#6444](https://github.com/wazuh/wazuh-documentation/pull/6444)) ([#6508](https://github.com/wazuh/wazuh-documentation/pull/6508))
 - Added the `timeout` and `retries` settings to the `integratord` configuration. ([#6442](https://github.com/wazuh/wazuh-documentation/pull/6442))
+- Added support for deploying with Ansible on Windows ([#6640](https://github.com/wazuh/wazuh-documentation/pull/6640))
 - Added Wazuh v4.8.0 release notes. ([#6550](https://github.com/wazuh/wazuh-documentation/pull/6550))
 
 ### Changed
