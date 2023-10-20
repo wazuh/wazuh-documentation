@@ -14,6 +14,7 @@ Wazuh version                                  Release date
 :doc:`4.7.1 </release-notes/release-4-7-1>`    TBD
 :doc:`4.7.0 </release-notes/release-4-7-0>`    TBD
 :doc:`4.6.0 </release-notes/release-4-6-0>`    TBD
+:doc:`4.5.4 </release-notes/release-4-5-4>`    TBD
 :doc:`4.5.3 </release-notes/release-4-5-3>`    10 October 2023
 :doc:`4.5.2 </release-notes/release-4-5-2>`    6 September 2023
 :doc:`4.5.1 </release-notes/release-4-5-1>`    24 August 2023
@@ -64,6 +65,7 @@ Wazuh version                                  Release date
       4.7.1 Release notes <release-4-7-1>
       4.7.0 Release notes <release-4-7-0>
       4.6.0 Release notes <release-4-6-0>
+      4.5.4 Release notes <release-4-5-4>
       4.5.3 Release notes <release-4-5-3>
       4.5.2 Release notes <release-4-5-2>
       4.5.1 Release notes <release-4-5-1>

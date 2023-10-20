@@ -122,7 +122,7 @@ The ``sys_programs`` table in the inventory database stores information about th
 +------------------+-------------------------------------------+-------------------------------------------+-----------------------------------------+
 | ``multiarch``    | Multiarchitecture support                 | same                                      | Linux (deb)                             |
 +------------------+-------------------------------------------+-------------------------------------------+-----------------------------------------+
-| ``source``       | Source of the package                     | linux-meta                                | Linux (deb/rpm) and  macOS (pkg)        |
+| ``source``       | Source of the package                     | linux-meta                                | Linux (deb) and  macOS (pkg)            |
 +------------------+-------------------------------------------+-------------------------------------------+-----------------------------------------+
 | ``description``  | Description of the package                | Generic Linux kernel headers              | Linux (deb/rpm/pacman) and macOS (pkg)  |
 +------------------+-------------------------------------------+-------------------------------------------+-----------------------------------------+
