@@ -525,7 +525,7 @@ $ossec_syscheck_ignore_type_2
 $ossec_syscheck_max_eps
   Sets the maximum event reporting throughput. Events are messages that will produce an alert.
 
-  `Default 100`
+  `Default 50`
 
   `Type String`
 
