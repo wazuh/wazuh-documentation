@@ -41,12 +41,12 @@ Agent
 Wazuh dashboard
 ^^^^^^^^^^^^^^^
 
-- `#5680 <https://github.com/wazuh/wazuh-kibana-app/pull/5680>`_ Added the **Status detail** column in the **Agents** table.
-- `#5738 <https://github.com/wazuh/wazuh-kibana-app/pull/5738>`_ The agent registration wizard now effectively manages special characters in passwords.
-- `#5636 <https://github.com/wazuh/wazuh-kibana-app/pull/5636>`_ Changed the **Network ports** table columns for Linux agents.
-- `#5748 <https://github.com/wazuh/wazuh-kibana-app/pull/5748>`_ Updated development dependencies: ``@typescript-eslint/eslint-plugin, @typescript-eslint/parser, eslint, swagger-client``.
-- `#5707 <https://github.com/wazuh/wazuh-kibana-app/pull/5707>`_ Changed Timelion-type displays in the **Management > Statistics** section to line-type displays.
-- `#5747 <https://github.com/wazuh/wazuh-kibana-app/pull/5747>`_ Removed views in JSON and XML formats from the **Management** settings.
+- `#5680 <https://github.com/wazuh/wazuh-dashboard-plugins/pull/5680>`__ Added the **Status detail** column in the **Agents** table.
+- `#5738 <https://github.com/wazuh/wazuh-dashboard-plugins/pull/5738>`__ The agent registration wizard now effectively manages special characters in passwords.
+- `#5636 <https://github.com/wazuh/wazuh-dashboard-plugins/pull/5636>`__ Changed the **Network ports** table columns for Linux agents.
+- `#5748 <https://github.com/wazuh/wazuh-dashboard-plugins/pull/5748>`__ Updated development dependencies: ``@typescript-eslint/eslint-plugin, @typescript-eslint/parser, eslint, swagger-client``.
+- `#5707 <https://github.com/wazuh/wazuh-dashboard-plugins/pull/5707>`__ Changed Timelion-type displays in the **Management > Statistics** section to line-type displays.
+- `#5747 <https://github.com/wazuh/wazuh-dashboard-plugins/pull/5747>`__ Removed views in JSON and XML formats from the **Management** settings.
 
 Resolved issues
 ---------------
@@ -95,20 +95,20 @@ Reference                                                         Description
 Wazuh dashboard
 ^^^^^^^^^^^^^^^
 
-==============================================================    =============
-Reference                                                         Description
-==============================================================    =============
-`#5591 <https://github.com/wazuh/wazuh-kibana-app/pull/5591>`_    Fixed problem with new or missing columns in the **Agents** table.
-`#5676 <https://github.com/wazuh/wazuh-kibana-app/pull/5676>`_    Fixed the color of the agent name in the groups section in dark mode.
-`#5597 <https://github.com/wazuh/wazuh-kibana-app/pull/5597>`_    Fixed the propagation event so that the flyout data, in the decoders, does not change when the button is pressed.
-`#5631 <https://github.com/wazuh/wazuh-kibana-app/pull/5631>`_    Fixed the tooltips of the tables in the **Security** section, and removed unnecessary requests.
-==============================================================    =============
+=======================================================================    =============
+Reference                                                                  Description
+=======================================================================    =============
+`#5591 <https://github.com/wazuh/wazuh-dashboard-plugins/pull/5591>`__     Fixed problem with new or missing columns in the **Agents** table.
+`#5676 <https://github.com/wazuh/wazuh-dashboard-plugins/pull/5676>`__     Fixed the color of the agent name in the groups section in dark mode.
+`#5597 <https://github.com/wazuh/wazuh-dashboard-plugins/pull/5597>`__     Fixed the propagation event so that the flyout data, in the decoders, does not change when the button is pressed.
+`#5631 <https://github.com/wazuh/wazuh-dashboard-plugins/pull/5631>`__     Fixed the tooltips of the tables in the **Security** section, and removed unnecessary requests.
+=======================================================================    =============
 
 Changelogs
 ----------
 
 More details about these changes are provided in the changelog of each component:
 
--  `wazuh/wazuh <https://github.com/wazuh/wazuh/blob/v4.7.0/CHANGELOG.md>`_
--  `wazuh/wazuh-dashboard <https://github.com/wazuh/wazuh-kibana-app/blob/v4.7.0-2.9.0/CHANGELOG.md>`_
--  `wazuh/wazuh-packages <https://github.com/wazuh/wazuh-packages/releases/tag/v4.7.0>`_
+-  `wazuh/wazuh <https://github.com/wazuh/wazuh/blob/v4.7.0/CHANGELOG.md>`__
+-  `wazuh/wazuh-dashboard <https://github.com/wazuh/wazuh-dashboard-plugins/blob/v4.7.0-2.9.0/CHANGELOG.md>`__
+-  `wazuh/wazuh-packages <https://github.com/wazuh/wazuh-packages/releases/tag/v4.7.0>`__
