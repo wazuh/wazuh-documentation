@@ -397,11 +397,10 @@ Wazuh dashboard configuration
 
       opensearch_security.auth.type: "saml"
       server.xsrf.allowlist: ["/_opendistro/_security/saml/acs", "/_opendistro/_security/saml/logout", "/_opendistro/_security/saml/acs/idpinitiated"]
+      opensearch_security.session.keepalive: false
 
 #. Restart the Wazuh dashboard service using this command:
 
    .. include:: /_templates/common/restart_dashboard.rst
 
 #. Test the configuration. Go to your Wazuh dashboard URL and log in with your Keycloak account. 
-
-
