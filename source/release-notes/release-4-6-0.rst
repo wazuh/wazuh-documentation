@@ -48,6 +48,7 @@ Wazuh manager
 - `#13065 <https://github.com/wazuh/wazuh/pull/13065>`__ Refactored methods responsible for file synchronization within the cluster.
 - `#16065 <https://github.com/wazuh/wazuh/pull/16065>`__ Changed schema constraints for ``sys_hwinfo`` table.
 - `#15709 <https://github.com/wazuh/wazuh/pull/15709>`__ The Auth process does not start when the registration password is empty.
+- `#19400 <https://github.com/wazuh/wazuh/pull/19400>`__ Changed the message type for ``GetSecurityInfo`` from error to debug.
 
 Agent
 ^^^^^
@@ -85,6 +86,7 @@ Agent
 - `#17655 <https://github.com/wazuh/wazuh/pull/17655>`__ Deleted definitions of repeated classes in the AWS integration.
 - `#15031 <https://github.com/wazuh/wazuh/pull/15031>`__ Removed duplicate methods in ``AWSBucket`` and reuse inherited ones from ``WazuhIntegration``.
 - `#16547 <https://github.com/wazuh/wazuh/pull/16547>`__ Added support for Office365 MS/Azure Government Community Cloud (GCC) and Government Community Cloud High (GCCH) API.
+- `#19758 <https://github.com/wazuh/wazuh/pull/19758>`__ Reduced the default FIM event throughput to ``50`` EPS.
 
 RESTful API
 ^^^^^^^^^^^
@@ -191,6 +193,7 @@ Reference                                                          Description
 `#15719 <https://github.com/wazuh/wazuh/pull/15719>`__             Fixed rootcheck scan trying to read deleted files.
 `#15739 <https://github.com/wazuh/wazuh/pull/15739>`__             Fixed compilation and build in Gentoo.
 `#19375 <https://github.com/wazuh/wazuh/pull/19375>`__             Fixed a crash when FIM scanned long Windows paths.
+`#19378 <https://github.com/wazuh/wazuh/pull/19378>`__             Fixed FIM who-data support for AArch64 platforms.
 ==============================================================     =============
 
 RESTful API
