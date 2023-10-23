@@ -30,7 +30,7 @@ Agent
 Wazuh dashboard
 ^^^^^^^^^^^^^^^
 
-- `#5791 <https://github.com/wazuh/wazuh-kibana-app/pull/5791>`__ Added remember server address check.
+- `#5791 <https://github.com/wazuh/wazuh-dashboard-plugins/pull/5791>`__ Added remember server address check.
 
 Resolved issues
 ---------------
@@ -54,5 +54,5 @@ Changelogs
 More details about these changes are provided in the changelog of each component:
 
 - `wazuh/wazuh <https://github.com/wazuh/wazuh/blob/v4.8.0/CHANGELOG.md>`__
-- `wazuh/wazuh-dashboard <https://github.com/wazuh/wazuh-kibana-app/blob/v4.8.0-2.9.0/CHANGELOG.md>`__
+- `wazuh/wazuh-dashboard <https://github.com/wazuh/wazuh-dashboard-plugins/blob/v4.8.0-2.9.0/CHANGELOG.md>`__
 - `wazuh/wazuh-packages <https://github.com/wazuh/wazuh-packages/releases/tag/v4.8.0>`__
