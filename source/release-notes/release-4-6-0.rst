@@ -108,28 +108,28 @@ Ruleset
 Wazuh dashboard
 ^^^^^^^^^^^^^^^
 
-- `#5197 <https://github.com/wazuh/wazuh-kibana-app/pull/5197>`__ `#5274 <https://github.com/wazuh/wazuh-kibana-app/pull/5274>`__ `#5298 <https://github.com/wazuh/wazuh-kibana-app/pull/5298>`__ `#5409 <https://github.com/wazuh/wazuh-kibana-app/pull/5409>`__ Added ``rel="noopener noreferrer"`` in documentation links.
-- `#5203 <https://github.com/wazuh/wazuh-kibana-app/pull/5203>`__ Added ``ignore`` and ``restrict`` options to Syslog configuration.
-- `#5376 <https://github.com/wazuh/wazuh-kibana-app/pull/5376>`__ Added the ``extensions.github`` and ``extensions.office`` settings to the default configuration file.
-- `#4163 <https://github.com/wazuh/wazuh-kibana-app/pull/4163>`__ Added new global error treatment (client-side).
-- `#5519 <https://github.com/wazuh/wazuh-kibana-app/pull/5519>`__ Added new CLI to generate API data from specification file.
-- `#5551 <https://github.com/wazuh/wazuh-kibana-app/pull/5551>`__ Added specific RBAC permissions to the Security section.
-- `#5443 <https://github.com/wazuh/wazuh-kibana-app/pull/5443>`__ Added **Refresh** and **Export formatted** button to panels in **Agents > Inventory data**.
-- `#5491 <https://github.com/wazuh/wazuh-kibana-app/pull/5491>`__ Added **Refresh** and **Export formatted** buttons to **Management > Cluster > Nodes**.
-- `#5201 <https://github.com/wazuh/wazuh-kibana-app/pull/5201>`__ Changed of regular expression in RBAC.
-- `#5384 <https://github.com/wazuh/wazuh-kibana-app/pull/5384>`__ Migrated the ``timeFilter``, ``metaFields``, and ``maxBuckets`` health checks inside the ``pattern`` check.
-- `#5485 <https://github.com/wazuh/wazuh-kibana-app/pull/5485>`__ Changed the query to search for an agent in **Management > Configuration**.
-- `#5476 <https://github.com/wazuh/wazuh-kibana-app/pull/5476>`__ Changed the search bar in ``management/log`` to the one used in the rest of the app.
-- `#5457 <https://github.com/wazuh/wazuh-kibana-app/pull/5457>`__ Changed the design of the wizard to add agents.
-- `#5363 <https://github.com/wazuh/wazuh-kibana-app/pull/5363>`__ `#5442 <https://github.com/wazuh/wazuh-kibana-app/pull/5442>`__ `#5443 <https://github.com/wazuh/wazuh-kibana-app/pull/5443>`__ `#5444 <https://github.com/wazuh/wazuh-kibana-app/pull/5444>`__ `#5445 <https://github.com/wazuh/wazuh-kibana-app/pull/5445>`__ `#5447 <https://github.com/wazuh/wazuh-kibana-app/pull/5447>`__ `#5452 <https://github.com/wazuh/wazuh-kibana-app/pull/5452>`__ `#5491 <https://github.com/wazuh/wazuh-kibana-app/pull/5491>`__ `#5785 <https://github.com/wazuh/wazuh-kibana-app/pull/5785>`__  Introduced a new, enhanced search bar. It adds new features to all the searchable tables which leverages the Wazuh API. It also addresses some of the issues found in the previous version.
-- `#5451 <https://github.com/wazuh/wazuh-kibana-app/pull/5451>`__ Removed deprecated request and code in agent's view.
-- `#5453 <https://github.com/wazuh/wazuh-kibana-app/pull/5453>`__ Removed unnecessary dashboard queries caused by the deploy agent view.
-- `#5500 <https://github.com/wazuh/wazuh-kibana-app/pull/5500>`__ Removed repeated and unnecessary requests in the Security section.
-- `#5519 <https://github.com/wazuh/wazuh-kibana-app/pull/5519>`__ Removed scripts to generate API data from live Wazuh manager.
-- `#5532 <https://github.com/wazuh/wazuh-kibana-app/pull/5532>`__ Removed the ``pretty`` parameter from cron job requests.
-- `#5528 <https://github.com/wazuh/wazuh-kibana-app/pull/5528>`__ Removed unnecessary requests in the **Management > Status** section.
-- `#5485 <https://github.com/wazuh/wazuh-kibana-app/pull/5485>`__ Removed obsolete code that caused duplicate requests to the API in **Management**.
-- `#5592 <https://github.com/wazuh/wazuh-kibana-app/pull/5592>`__ Removed unused embedded ``jquery-ui``.
+- `#5197 <https://github.com/wazuh/wazuh-dashboard-plugins/pull/5197>`__ `#5274 <https://github.com/wazuh/wazuh-dashboard-plugins/pull/5274>`__ `#5298 <https://github.com/wazuh/wazuh-dashboard-plugins/pull/5298>`__ `#5409 <https://github.com/wazuh/wazuh-dashboard-plugins/pull/5409>`__ Added ``rel="noopener noreferrer"`` in documentation links.
+- `#5203 <https://github.com/wazuh/wazuh-dashboard-plugins/pull/5203>`__ Added ``ignore`` and ``restrict`` options to Syslog configuration.
+- `#5376 <https://github.com/wazuh/wazuh-dashboard-plugins/pull/5376>`__ Added the ``extensions.github`` and ``extensions.office`` settings to the default configuration file.
+- `#4163 <https://github.com/wazuh/wazuh-dashboard-plugins/pull/4163>`__ Added new global error treatment (client-side).
+- `#5519 <https://github.com/wazuh/wazuh-dashboard-plugins/pull/5519>`__ Added new CLI to generate API data from specification file.
+- `#5551 <https://github.com/wazuh/wazuh-dashboard-plugins/pull/5551>`__ Added specific RBAC permissions to the Security section.
+- `#5443 <https://github.com/wazuh/wazuh-dashboard-plugins/pull/5443>`__ Added **Refresh** and **Export formatted** button to panels in **Agents > Inventory data**.
+- `#5491 <https://github.com/wazuh/wazuh-dashboard-plugins/pull/5491>`__ Added **Refresh** and **Export formatted** buttons to **Management > Cluster > Nodes**.
+- `#5201 <https://github.com/wazuh/wazuh-dashboard-plugins/pull/5201>`__ Changed of regular expression in RBAC.
+- `#5384 <https://github.com/wazuh/wazuh-dashboard-plugins/pull/5384>`__ Migrated the ``timeFilter``, ``metaFields``, and ``maxBuckets`` health checks inside the ``pattern`` check.
+- `#5485 <https://github.com/wazuh/wazuh-dashboard-plugins/pull/5485>`__ Changed the query to search for an agent in **Management > Configuration**.
+- `#5476 <https://github.com/wazuh/wazuh-dashboard-plugins/pull/5476>`__ Changed the search bar in ``management/log`` to the one used in the rest of the app.
+- `#5457 <https://github.com/wazuh/wazuh-dashboard-plugins/pull/5457>`__ Changed the design of the wizard to add agents.
+- `#5363 <https://github.com/wazuh/wazuh-dashboard-plugins/pull/5363>`__ `#5442 <https://github.com/wazuh/wazuh-dashboard-plugins/pull/5442>`__ `#5443 <https://github.com/wazuh/wazuh-dashboard-plugins/pull/5443>`__ `#5444 <https://github.com/wazuh/wazuh-dashboard-plugins/pull/5444>`__ `#5445 <https://github.com/wazuh/wazuh-dashboard-plugins/pull/5445>`__ `#5447 <https://github.com/wazuh/wazuh-dashboard-plugins/pull/5447>`__ `#5452 <https://github.com/wazuh/wazuh-dashboard-plugins/pull/5452>`__ `#5491 <https://github.com/wazuh/wazuh-dashboard-plugins/pull/5491>`__ `#5785 <https://github.com/wazuh/wazuh-dashboard-plugins/pull/5785>`__  Introduced a new, enhanced search bar. It adds new features to all the searchable tables which leverages the Wazuh API. It also addresses some of the issues found in the previous version.
+- `#5451 <https://github.com/wazuh/wazuh-dashboard-plugins/pull/5451>`__ Removed deprecated request and code in agent's view.
+- `#5453 <https://github.com/wazuh/wazuh-dashboard-plugins/pull/5453>`__ Removed unnecessary dashboard queries caused by the deploy agent view.
+- `#5500 <https://github.com/wazuh/wazuh-dashboard-plugins/pull/5500>`__ Removed repeated and unnecessary requests in the Security section.
+- `#5519 <https://github.com/wazuh/wazuh-dashboard-plugins/pull/5519>`__ Removed scripts to generate API data from live Wazuh manager.
+- `#5532 <https://github.com/wazuh/wazuh-dashboard-plugins/pull/5532>`__ Removed the ``pretty`` parameter from cron job requests.
+- `#5528 <https://github.com/wazuh/wazuh-dashboard-plugins/pull/5528>`__ Removed unnecessary requests in the **Management > Status** section.
+- `#5485 <https://github.com/wazuh/wazuh-dashboard-plugins/pull/5485>`__ Removed obsolete code that caused duplicate requests to the API in **Management**.
+- `#5592 <https://github.com/wazuh/wazuh-dashboard-plugins/pull/5592>`__ Removed unused embedded ``jquery-ui``.
 
 Resolved issues
 ---------------
@@ -213,26 +213,26 @@ Reference                                                          Description
 Wazuh dashboard
 ^^^^^^^^^^^^^^^
 
-===============================================================    =============
-Reference                                                          Description
-===============================================================    =============
-`#4828 <https://github.com/wazuh/wazuh-kibana-app/pull/4828>`__    Fixed trailing hyphen character for OS value in the list of agents.
-`#4911 <https://github.com/wazuh/wazuh-kibana-app/pull/4911>`__    Fixed several typos in the code.
-`#4917 <https://github.com/wazuh/wazuh-kibana-app/pull/4917>`__    Fixed the display of more than one protocol in the Global configuration section.
-`#4918 <https://github.com/wazuh/wazuh-kibana-app/pull/4918>`__    Fixed uncaught error and wrong error message in the PCI DSS Control tab.
-`#4894 <https://github.com/wazuh/wazuh-kibana-app/pull/4894>`__    Fixed references to Elasticsearch in Wazuh-stack plugin.
-`#5135 <https://github.com/wazuh/wazuh-kibana-app/pull/5135>`__    Fixed the 2 errors that appeared in console in **Settings > Configuration** section.
-`#5376 <https://github.com/wazuh/wazuh-kibana-app/pull/5376>`__    Fixed the GitHub and Office 365 module visibility configuration for each API host that was not kept when changing/upgrading the plugin.
-`#5376 <https://github.com/wazuh/wazuh-kibana-app/pull/5376>`__    Fixed the GitHub and Office 365 modules appearing in the main menu when they were not configured.
-`#5364 <https://github.com/wazuh/wazuh-kibana-app/pull/5364>`__    Fixed TypeError in FIM Inventory using a new error handler.
-`#5423 <https://github.com/wazuh/wazuh-kibana-app/pull/5423>`__    Fixed error when using invalid group configuration.
-`#5460 <https://github.com/wazuh/wazuh-kibana-app/pull/5460>`__    Fixed repeated requests in inventory data and configurations of an agent.
-`#5465 <https://github.com/wazuh/wazuh-kibana-app/pull/5465>`__    Fixed repeated requests in the group table when adding a group or refreshing the table.
-`#5521 <https://github.com/wazuh/wazuh-kibana-app/pull/5521>`__    Fixed an error in the request body suggestions of API Console.
-`#5734 <https://github.com/wazuh/wazuh-kibana-app/pull/5734>`__    Fixed some errors related to relative dirname of rule and decoder files.
-`#5879 <https://github.com/wazuh/wazuh-kibana-app/pull/5879>`__    Fixed package URLs in the ``aarch64`` commands.
-`#5888 <https://github.com/wazuh/wazuh-kibana-app/pull/5888>`__    Fixed the install macOS agent commands.
-===============================================================    =============
+=========================================================================    =============
+Reference                                                                    Description
+=========================================================================    =============
+`#4828 <https://github.com/wazuh/wazuh-dashboard-plugins/pull/4828>`__       Fixed trailing hyphen character for OS value in the list of agents.
+`#4911 <https://github.com/wazuh/wazuh-dashboard-plugins/pull/4911>`__       Fixed several typos in the code.
+`#4917 <https://github.com/wazuh/wazuh-dashboard-plugins/pull/4917>`__       Fixed the display of more than one protocol in the Global configuration section.
+`#4918 <https://github.com/wazuh/wazuh-dashboard-plugins/pull/4918>`__       Fixed uncaught error and wrong error message in the PCI DSS Control tab.
+`#4894 <https://github.com/wazuh/wazuh-dashboard-plugins/pull/4894>`__       Fixed references to Elasticsearch in Wazuh-stack plugin.
+`#5135 <https://github.com/wazuh/wazuh-dashboard-plugins/pull/5135>`__       Fixed the 2 errors that appeared in console in **Settings > Configuration** section.
+`#5376 <https://github.com/wazuh/wazuh-dashboard-plugins/pull/5376>`__       Fixed the GitHub and Office 365 module visibility configuration for each API host that was not kept when changing/upgrading the plugin.
+`#5376 <https://github.com/wazuh/wazuh-dashboard-plugins/pull/5376>`__       Fixed the GitHub and Office 365 modules appearing in the main menu when they were not configured.
+`#5364 <https://github.com/wazuh/wazuh-dashboard-plugins/pull/5364>`__       Fixed TypeError in FIM Inventory using a new error handler.
+`#5423 <https://github.com/wazuh/wazuh-dashboard-plugins/pull/5423>`__       Fixed error when using invalid group configuration.
+`#5460 <https://github.com/wazuh/wazuh-dashboard-plugins/pull/5460>`__       Fixed repeated requests in inventory data and configurations of an agent.
+`#5465 <https://github.com/wazuh/wazuh-dashboard-plugins/pull/5465>`__       Fixed repeated requests in the group table when adding a group or refreshing the table.
+`#5521 <https://github.com/wazuh/wazuh-dashboard-plugins/pull/5521>`__       Fixed an error in the request body suggestions of API Console.
+`#5734 <https://github.com/wazuh/wazuh-dashboard-plugins/pull/5734>`__       Fixed some errors related to relative dirname of rule and decoder files.
+`#5879 <https://github.com/wazuh/wazuh-dashboard-plugins/pull/5879>`__       Fixed package URLs in the ``aarch64`` commands.
+`#5888 <https://github.com/wazuh/wazuh-dashboard-plugins/pull/5888>`__       Fixed the install macOS agent commands.
+=========================================================================    =============
 
 
 Packages
@@ -253,5 +253,5 @@ Changelogs
 More details about these changes are provided in the changelog of each component:
 
 - `wazuh/wazuh <https://github.com/wazuh/wazuh/blob/v4.6.0/CHANGELOG.md>`__
-- `wazuh/wazuh-dashboard <https://github.com/wazuh/wazuh-kibana-app/blob/v4.6.0-2.8.0/CHANGELOG.md>`__
+- `wazuh/wazuh-dashboard <https://github.com/wazuh/wazuh-dashboard-plugins/blob/v4.6.0-2.8.0/CHANGELOG.md>`__
 - `wazuh/wazuh-packages <https://github.com/wazuh/wazuh-packages/releases/tag/v4.6.0>`__
