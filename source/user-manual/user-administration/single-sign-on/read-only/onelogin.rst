@@ -37,7 +37,7 @@ OneLogin Configuration
 
    #. Select the user, navigate to **More Actions** and click on **Change Password** to assign a password to the user.
 
-      .. thumbnail:: /images/single-sign-on/onelogin/03-click-on-save-user.png
+      .. thumbnail:: /images/single-sign-on/onelogin/read-only/03-click-on-save-user-RO.png
          :title: Click on Save User
          :align: center
          :width: 80%
@@ -291,6 +291,7 @@ Wazuh dashboard configuration
 
       opensearch_security.auth.type: "saml"
       server.xsrf.allowlist: ["/_opendistro/_security/saml/acs", "/_opendistro/_security/saml/logout", "/_opendistro/_security/saml/acs/idpinitiated"]
+      opensearch_security.session.keepalive: false
 
 #. Restart the Wazuh dashboard service.
 
