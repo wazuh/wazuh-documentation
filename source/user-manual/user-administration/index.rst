@@ -21,4 +21,5 @@ In the single sign-on section, you can find instructions on how to integrate Waz
         password-management
         rbac
         single-sign-on/index
+        ldap
 
