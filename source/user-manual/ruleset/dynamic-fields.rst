@@ -106,4 +106,4 @@ JSON Output:
 
 
 .. note::
-    By default, the number of fields that can be extracted simultaneously from an ``<order>`` tag is **64**. This value can be modified by changing the variable ``analysisd.decoder_order_size`` seen in ``/var/ossec/etc/internal_options.conf``.  If you need to change this value, copy the ``analysisd.decoder_order_size`` section from ``/var/ossec/etc/internal_options.conf`` to ``/var/ossec/etc/local_internal_options.conf`` and change it there, since Wazuh software updates can replace ``/var/ossec/etc/internal_options.conf``
+    By default, the number of fields that can be extracted simultaneously from an ``<order>`` tag is **256**. This value can be modified by changing the variable ``analysisd.decoder_order_size`` seen in ``/var/ossec/etc/internal_options.conf``.  If you need to change this value, copy the ``analysisd.decoder_order_size`` section from ``/var/ossec/etc/internal_options.conf`` to ``/var/ossec/etc/local_internal_options.conf`` and change it there, since Wazuh software updates can replace ``/var/ossec/etc/internal_options.conf``
