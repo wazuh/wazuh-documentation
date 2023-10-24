@@ -63,6 +63,12 @@ removedUrls['x.y'] = [
 ];
 */
 
+/* *** RELEASE 4.9 ****/
+
+newUrls['4.9'] = [
+  '/release-notes/release-4-9-0.html',
+];
+
 /* *** RELEASE 4.8 ****/
 
 newUrls['4.8'] = [
