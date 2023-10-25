@@ -284,3 +284,68 @@ Follow these steps to create a new role mapping and grant administrator permissi
 
 Setup read-only role
 ^^^^^^^^^^^^^^^^^^^^
+
+#. Follow these steps to create a new role mapping and grant read-only permissions to the backend role.
+
+   #. Log into the Wazuh dashboard as administrator.
+   #. Click the upper-left menu icon **☰** to open the options, select **Security**, and then **Roles** to open the roles page.
+   #. Click **Create role**, complete the empty fields with the following parameters, and then click **Create** to complete the task.
+
+      -  **Name**: Assign a name to the role.
+      -  **Cluster permissions**: **cluster_composite_ops_ro**
+      -  **Index**: **\***
+      -  **Index permissions**: **read**
+      -  **Tenant permissions**: **global_tenant** and select the **Read only** option.
+   #. Select the newly created role.
+   #. Select the **Mapped users** tab and click **Manage mapping**.
+   #. Under **Backend roles**, assign the name of the read-only role you have in your LDAP server and click on  **Map** to confirm the action. In our case, the backend role (CN) is ``readonly``.
+
+#. Check the value of ``run_as`` in the ``/usr/share/wazuh-dashboard/data/wazuh/config/wazuh.yml`` configuration file. If ``run_as`` is set to ``false``, proceed to the next step.
+
+   .. code-block:: yaml
+      :emphasize-lines: 7
+
+      hosts:
+        - default:
+            url: https://localhost
+            port: 55000
+            username: wazuh-wui
+            password: "<wazuh-wui-password>"
+            run_as: false
+
+   If ``run_as`` is set to ``true``, you need to add a role mapping on the Wazuh dashboard. To map the backend role to Wazuh, follow these steps:
+
+   #. Click the upper-left menu icon **☰** to open the available options, and click **Wazuh**.
+   #. Click **Wazuh** to open the Wazuh dashboard menu, select **Security**, and then **Roles mapping** to open the page.
+
+      .. thumbnail:: /images/manual/user-administration/ldap/select-roles-mapping.gif
+         :title: Roles mapping selection
+         :alt: Roles mapping selection
+         :align: center
+         :width: 80%
+
+   #. Click **Create Role mapping** and complete the empty fields with the following parameters:
+
+      -  **Role mapping name**: Assign a name to the role mapping.
+      -  **Roles**: Select ``readonly``.
+      -  **Custom rules**: Click **Add new rule** to expand this field.
+      -  **User field**: ``backend_roles``.
+      -  **Search operation**: ``FIND``.
+      -  **Value**: Assign the name of your backend role in your LDAP server. In our case, this is a group named ``readonly`` which contains users with read only roles.
+
+
+      .. thumbnail:: /images/manual/user-administration/ldap/create-readonly-new-role-mapping.png
+         :title: Create readonly new role mapping
+         :alt: Create readonly new role mapping
+         :align: center
+         :width: 80%
+   
+   #. Click **Save role mapping** to save and map the backend role with Wazuh as *read-only*.
+
+#. Restart the Wazuh dashboard service using this command:
+
+   .. code-block:: console
+
+      # systemctl restart wazuh-dashboard
+
+#. Test the configuration. To test the configuration, go to your Wazuh dashboard URL and log in with your LDAP details.
