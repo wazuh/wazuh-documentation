@@ -102,7 +102,7 @@ OneLogin Configuration
          :align: center
          :width: 80%    
 
-#. Get the ``metada_onelogin.xml`` file and ``X.509 certificate`` from the application.
+#. Get the ``metadata_onelogin.xml`` file and ``X.509 certificate`` from the application.
 
    #. Go to **Applications** >  **Applications** then select the **Wazuh** app. Click on **More Actions** and then select **SAML Metadata**.
 

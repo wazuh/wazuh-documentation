@@ -99,7 +99,7 @@ PingOne Configuration
 
       - **ISSUER ID**: It'll be in the form \https://auth.pingone.com/...
       - **IDP METADATA URL**: It’ll be in the form \https://auth.pingone.com/...
-      - ``exchange_key``: If you open IDP **IDP METADATA URL** you'll find the X509 Certificate  section, this will be used as the ``exchange_key``.
+      - ``exchange_key``: If you open the **IDP METADATA URL** you'll find the X509 Certificate  section, this will be used as the ``exchange_key``.
 
       .. thumbnail:: /images/single-sign-on/pingone/read-only/09-take-note-of-parameters-RO.png
           :title: Take note of parameters from the configuration page
