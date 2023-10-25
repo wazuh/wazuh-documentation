@@ -1,14 +1,14 @@
 .. Copyright (C) 2015, Wazuh, Inc.
 
 .. meta::
-  :description: The Wazuh dashboard includes a configuration file where you can define custom values for several options. Learn more about it in this section.
+  :description: The Wazuh dashboard plugin includes a configuration file where you can define custom values for several options. Learn more about it in this section.
 
 .. _wazuh_dashboard_config_file:
 
 Configuration file
 ==================
 
-The Wazuh dashboard includes a configuration file located at ``/usr/share/wazuh-dashboard/data/wazuh/config/wazuh.yml`` where you can define custom values for several options. This section describes all the settings available in this file.
+The Wazuh dashboard plugin includes a configuration file located at ``/usr/share/wazuh-dashboard/data/wazuh/config/wazuh.yml`` where you can define custom values for several options. This section describes all the settings available in this file.
 
 If you are using the Wazuh Kibana plugin, you can find this configuration file at ``/usr/share/kibana/data/wazuh/config/wazuh.yml``. 
 
@@ -724,6 +724,116 @@ Set the footer of the PDF reports. To use an empty footer, type a space " " in t
 | **Allowed values** | Any string                 |
 +--------------------+----------------------------+
 
+ISM rollover policy
+-------------------
+
+.. warning::
+
+    These options are only valid if they're modified before starting the Wazuh dashboard for the very first time.
+
+    You can read more about customizating the rollover policy in :doc:`/user-manual/wazuh-indexer/index-life-management`.
+
+ism.rollover.enabled
+^^^^^^^^^^^^^^^^^^^^
+
+Toggles the verification of the rollover policy. If set to ``true``, the rollover policy will be applied to the indices that match the index patterns defined in ``ism.rollover.ism_template.index_patterns``, only if there isn't any other policy managing these indices.
+
+This options does not enable or disable the policy itself. 
+
++--------------------+----------------------------+
+| **Default value**  | true                       |
++--------------------+----------------------------+
+| **Allowed values** | true,false                 |
++--------------------+----------------------------+
+
+ism.rollover.ism_template.index_patterns
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+The policy will be applied to the indices that match the patterns defined here. The index format must match the pattern: ``^.*-\d+$``. The managed indices must use an alias. Set ``index.plugins.index_state_management.rollover_alias`` as the alias to rollover.
+
+The ``wazuh-alerts-4.x-*`` and ``wazuh-archives-4.x-*`` indices  are configured to use the ``wazuh-alerts`` and ``wazuh-archives`` aliases respectively. The rollover policy is specially designed to manage these indices, so it is not recommended to change this setting as it may cause the policy to be applied to indices that do not use an alias.
+
+Changing the index pattern **will not**:
+ - change or set the alias of the indices.
+ - affect the indices that are already managed by the rollover policy.
+ - change the calculation of the ``min_doc_count`` condition, as it is based on the number of primary shards of the wazuh-alerts and wazuh-archives indices.
+
++--------------------+---------------------------------------------------------------------+
+| **Default value**  | ["wazuh-alerts\*", "wazuh-archives\*", "-wazuh-alerts-4.x-sample*"] |
++--------------------+---------------------------------------------------------------------+
+| **Allowed values** | Array of strings. Eg: ["wazuh-archives-\*"]                         |
++--------------------+---------------------------------------------------------------------+
+
+ism.rollover.ism_template.priority
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+The priority of the policy. The higher the value, the higher the priority. If there are multiple policies that match the index, the one with the highest priority will be applied.
+There cannot be two policies with the same priority.
+
++--------------------+-----------------------------------+
+| **Default value**  | 50                                |
++--------------------+-----------------------------------+
+| **Allowed values** | Any integer number greater than 0 |
++--------------------+-----------------------------------+
+
+ism.rollover.min_index_age
+^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+The minimum age required to roll over the index. Index age is the time between its creation and the present. Supported units are d (days), h (hours), m (minutes), s (seconds), ms (milliseconds), and micros (microseconds).
+
+Rolling over an index too often might cause performance issues. The minimum recommended value is 7 days.
+
++--------------------+---------+
+| **Default value**  | 7d      |
++--------------------+---------+
+| **Allowed values** | String  |
++--------------------+---------+
+
+ism.rollover.min_primary_shard_size
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+The minimum storage size in GiB of a single primary shard required to roll over the index. For example, if you set ``min_primary_shard_size`` to 30 GiB and one of the primary shards in the index has a size greater than the condition, the rollover occurs.
+
+The recommended shard sizes are 10-30 GiB for search-heavy workloads and 30-50 GiB for write-heavy workloads. The shard size must never exceed the 50 GiB. In Wazuh, we use 25 GiB, in order to achieve a good balance between both workloads.
+
++--------------------+-----------------------------------+
+| **Default value**  | 25                                |
++--------------------+-----------------------------------+
+| **Allowed values** | Any positive number               |
++--------------------+-----------------------------------+
+
+ism.rollover.docs_per_shard
+^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+The minimum number of documents per shard (approximately) required to roll over the index.
+
+This value is used to set the ``min_doc_count`` condition in the rollover policy, which is computed as follows:
+
+.. code-block:: text
+
+    min_doc_count = docs_per_shard * number_of_primary_shards
+
+The number of primary shards is obtained from the index settings. The ``wazuh-alerts`` and ``wazuh-archives`` indices use 3 primary shards by default, so the default value for ``min_doc_count`` is 6,300,000.
+
+A shard can contain 2^31 documents at most, so it's not recommened to set a higher value.
+
++--------------------+-----------------------------------+
+| **Default value**  | 2100000                           |
++--------------------+-----------------------------------+
+| **Allowed values** | Any positive number               |
++--------------------+-----------------------------------+
+
+ism.rollover.overwrite
+^^^^^^^^^^^^^^^^^^^^^^
+
+If set to ``true``, the ``wazuh_rollover_policy`` will be updated with the values from the previous settings. Restarting Wazuh dashboard is required to apply the changes.
+
++--------------------+----------------------------+
+| **Default value**  | false                      |
++--------------------+----------------------------+
+| **Allowed values** | true,false                 |
++--------------------+----------------------------+
+
 
 Example
 -------
@@ -732,8 +842,7 @@ This is an example of the wazuh.yml configuration:
 
 .. code-block:: yaml
     
-    #General options
-
+    # General options
     hosts:
         - env-1:
             url: https://env-1.example
@@ -747,7 +856,6 @@ This is an example of the wazuh.yml configuration:
             username: wazuh-wui
             password: wazuh-wui
             run_as: true
-
     pattern: 'wazuh-alerts-*'
     timeout: 20000
     ip.selector: true
@@ -755,15 +863,13 @@ This is an example of the wazuh.yml configuration:
     logs.level: info
     hideManagerAlerts: true
 
-    #Monitoring
-
+    # Monitoring
     wazuh.monitoring.enabled: true
     wazuh.monitoring.frequency: 900
     wazuh.monitoring.pattern: wazuh-monitoring-*
     wazuh.monitoring.creation: w
 
-    #Health checks
-
+    # Health checks
     checks.pattern : true
     checks.template: true
     checks.fields  : true
@@ -773,8 +879,7 @@ This is an example of the wazuh.yml configuration:
     checks.timeFilter: true
     checks.maxBuckets: true
 
-    #Extensions
-
+    # Extensions
     extensions.audit     : true
     extensions.aws       : false
     extensions.ciscat    : false
@@ -791,13 +896,11 @@ This is an example of the wazuh.yml configuration:
     extensions.tsc       : true
     extensions.virustotal: false
 
-    #Advanced index options
-
+    # Advanced index options
     wazuh.monitoring.shards: 1
     wazuh.monitoring.replicas: 0    
 
-    #Custom branding
-
+    # Custom branding
     customization.enabled: true
     customization.logo.app: 'custom/images/customization.logo.app.jpg'
     customization.logo.sidebar: 'custom/images/customization.logo.sidebar.png'
@@ -806,17 +909,14 @@ This is an example of the wazuh.yml configuration:
     customization.reports.footer: '123 Custom footer Ave.\nSan Jose, CA 95148'
     customization.reports.header: 'Custom Company\ninfo@custom.com\n@social_reference'
 
-    #Unauthorized roles
-
+    # Unauthorized roles
     disabled_roles: 
         - wazuh_disabled
 
-    #Sample alerts
-
+    # Sample alerts
     alerts.sample.prefix: wazuh-alerts-4.x-
 
-    #Cron
-
+    # Cron
     cron.prefix: wazuh
     cron.statistics.status: true
     cron.statistics.apis: []
@@ -826,7 +926,15 @@ This is an example of the wazuh.yml configuration:
     cron.statistics.shards: 1
     cron.statistics.replicas: 0
 
-    #Enrollment DNS
-
+    # Enrollment DNS
     enrollment.dns: ''
     enrollment.password: ''
+
+    # ISM rollover policy
+    ism.rollover.enabled: true
+    ism.rollover.ism_template.index_patterns: ["wazuh-alerts*", "wazuh-archives*", "-wazuh-alerts-4.x-sample*"]
+    ism.rollover.ism_template.priority: 50
+    ism.rollover.min_index_age: 7d
+    ism.rollover.min_primary_shard_size: 25gb
+    ism.rollover.docs_per_shard: 2100000
+    ism.rollover.overwrite: false
