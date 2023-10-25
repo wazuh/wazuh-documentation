@@ -133,19 +133,19 @@ The ``auhtc`` section of the Wazuh indexer security configuration file handles a
                    - admin
                    - kibanaserver
 
-      Change the following parameters to their corresponding value:
+   Change the following parameters to their corresponding value:
 
-      -  ``pemtrustedcas_filepath``
-      -  ``hosts``
-      -  ``bind_dn``
-      -  ``password``
-      -  ``userbase``
-      -  ``usersearch``
-      -  ``username_attribute``
-      -  ``rolebase``
-      -  ``rolesearch``
-      -  ``userrolename``
-      -  ``rolename``
+   -  ``pemtrustedcas_filepath``
+   -  ``hosts``
+   -  ``bind_dn``
+   -  ``password``
+   -  ``userbase``
+   -  ``usersearch``
+   -  ``username_attribute``
+   -  ``rolebase``
+   -  ``rolesearch``
+   -  ``userrolename``
+   -  ``rolename``
 
 #. Run the ``securityadmin`` script to load the configuration changes made in the ``config.yml`` file.
 
