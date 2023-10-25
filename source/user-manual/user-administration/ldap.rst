@@ -1,7 +1,7 @@
 .. Copyright (C) 2015, Wazuh, Inc.
 
 .. meta::
-  :description: 
+   :description: LDAP can handle both authentication and authorization of users accessing the Wazuh dashboard. Find out how to integrate LDAP with the Wazuh platform in this section of the documentation.
   
 LDAP integration
 ================
@@ -15,7 +15,7 @@ In this section, we outline the required configuration to integrate LDAP with th
 .. topic:: Required parameters
 
    The following parameters are required to make the configurations on the Wazuh indexer instance:
-   
+
    -  ``hosts``: This is your LDAP server and its port (by default it is 389 for LDAP and 636 for LDAP over SSL).
    -  ``bind_dn``: The credential to authenticate to your LDAP server.
    -  ``password``: The password to authenticate to your LDAP server.
@@ -29,9 +29,9 @@ In this section, we outline the required configuration to integrate LDAP with th
    -  ``userrolename``: If the roles/groups of a user are not stored in the groups subtree, but as an attribute of the user’s directory entry, define this attribute name here.
    - ``rolename``: The attribute of the role entry that should be used as the role name.
    -  ``skip_users``: Array of users that should be skipped when retrieving roles. Wildcards and regular expressions are supported.
-   
+
    .. note::
-   
+
       -  The LDAP attribute types such as Common Name (CN), Organizational Unit (OU), Distinguished Name (DN), and Domain Component (DC) used in this integration are from a test LDAP server. Replace them with the corresponding values from your LDAP server.
       -  It is recommended to clear the browser cache and cookies before the integration is carried out.
       -  The ``securityadmin`` script has to be executed with root user privileges.
