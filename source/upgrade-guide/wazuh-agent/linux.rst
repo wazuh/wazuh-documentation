@@ -139,6 +139,38 @@ Select your package manager and follow the instructions to upgrade the Wazuh age
 
           # sed -i "s/^enabled=1/enabled=0/" /etc/zypp/repos.d/wazuh.repo
 
+
+  .. group-tab:: APK
+
+    #. Install the GPG key.
+
+       .. code-block:: console
+
+         # wget -O /etc/apk/keys/alpine-devel@wazuh.com-633d7457.rsa.pub https://packages.wazuh.com/key/alpine-devel//%40wazuh.com-633d7457.rsa.pub
+
+    #. Add the Wazuh repository.
+
+       .. code-block:: console
+
+         # echo "https://packages.wazuh.com/4.x/alpine/v3.12/main" >> /etc/apk/repositories
+
+
+    #. Upgrade the Wazuh agent to the latest version.
+        
+		Replace "4.5.3-r1" with the latest version (can be found at https://documentation.wazuh.com/current/installation-guide/packages-list.html)
+
+       .. code-block:: console
+
+          # apk update
+          # apk add wazuh-agent=4.5.3-r1
+
+
+    #. It is recommended to disable the Wazuh repository in order to avoid undesired upgrades and compatibility issues as the Wazuh agent should always be in the same or an older version than the Wazuh manager. Skip this step if the package is set to a ``hold`` state.
+
+        .. code-block:: console
+
+        # sed -i "s|^https://packages.wazuh.com|#https://packages.wazuh.com|g" /etc/apk/repositories   
+
 .. note::
    :class: not-long
 
