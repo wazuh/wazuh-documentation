@@ -12,31 +12,30 @@ Authentication is the process of verifying the identity of users or systems to e
 
 In this section, we outline the required configuration to integrate LDAP with the Wazuh platform. The guide assumes you already have an LDAP server or Microsoft Active Directory. 
 
-Required parameters
--------------------
+.. topic:: Required parameters
 
-The following parameters are required to make the configurations on the Wazuh indexer instance:
-
--  ``hosts``: This is your LDAP server and its port (by default it is 389 for LDAP and 636 for LDAP over SSL).
--  ``bind_dn``: The credential to authenticate to your LDAP server.
--  ``password``: The password to authenticate to your LDAP server.
--  ``enable_ssl``: Specifies whether to use LDAP over SSL (LDAPS). This can be set to true or false. 
--  ``pemtrustedcas_filepath``: The absolute path to the Privacy Enhanced Mail (PEM) file containing the root Certificate Authority (CA) of your Active Directory/LDAP server. This is required when ``enable_ssl`` is set to true.
-- ``userbase``: Specifies the subtree in the directory where user information is stored.
--  ``usersearch``: The actual LDAP query that the Security plugin executes when trying to authenticate a user. 
--  ``username_attribute``: The Security plugin uses this attribute of the directory entry to look for the user name. If set to null, the Distinguished Name (DN) is used (default).
--  ``rolebase``: Specifies the subtree in the directory where role/group information is stored.
--  ``rolesearch``: The actual LDAP query that the Security plugin executes when trying to determine the roles of a user.
--  ``userrolename``: If the roles/groups of a user are not stored in the groups subtree, but as an attribute of the user’s directory entry, define this attribute name here.
-- ``rolename``: The attribute of the role entry that should be used as the role name.
--  ``skip_users``: Array of users that should be skipped when retrieving roles. Wildcards and regular expressions are supported.
-
-.. note::
-
-   -  The LDAP attribute types such as Common Name (CN), Organizational Unit (OU), Distinguished Name (DN), and Domain Component (DC) used in this integration are from a test LDAP server. Replace them with the corresponding values from your LDAP server.
-   -  It is recommended to clear the browser cache and cookies before the integration is carried out.
-   -  The ``securityadmin`` script has to be executed with root user privileges.
-   -  You need an account with administrator privileges on the Wazuh dashboard.
+   The following parameters are required to make the configurations on the Wazuh indexer instance:
+   
+   -  ``hosts``: This is your LDAP server and its port (by default it is 389 for LDAP and 636 for LDAP over SSL).
+   -  ``bind_dn``: The credential to authenticate to your LDAP server.
+   -  ``password``: The password to authenticate to your LDAP server.
+   -  ``enable_ssl``: Specifies whether to use LDAP over SSL (LDAPS). This can be set to true or false. 
+   -  ``pemtrustedcas_filepath``: The absolute path to the Privacy Enhanced Mail (PEM) file containing the root Certificate Authority (CA) of your Active Directory/LDAP server. This is required when ``enable_ssl`` is set to true.
+   - ``userbase``: Specifies the subtree in the directory where user information is stored.
+   -  ``usersearch``: The actual LDAP query that the Security plugin executes when trying to authenticate a user. 
+   -  ``username_attribute``: The Security plugin uses this attribute of the directory entry to look for the user name. If set to null, the Distinguished Name (DN) is used (default).
+   -  ``rolebase``: Specifies the subtree in the directory where role/group information is stored.
+   -  ``rolesearch``: The actual LDAP query that the Security plugin executes when trying to determine the roles of a user.
+   -  ``userrolename``: If the roles/groups of a user are not stored in the groups subtree, but as an attribute of the user’s directory entry, define this attribute name here.
+   - ``rolename``: The attribute of the role entry that should be used as the role name.
+   -  ``skip_users``: Array of users that should be skipped when retrieving roles. Wildcards and regular expressions are supported.
+   
+   .. note::
+   
+      -  The LDAP attribute types such as Common Name (CN), Organizational Unit (OU), Distinguished Name (DN), and Domain Component (DC) used in this integration are from a test LDAP server. Replace them with the corresponding values from your LDAP server.
+      -  It is recommended to clear the browser cache and cookies before the integration is carried out.
+      -  The ``securityadmin`` script has to be executed with root user privileges.
+      -  You need an account with administrator privileges on the Wazuh dashboard.
 
 LDAP server configuration
 -------------------------
