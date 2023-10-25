@@ -59,7 +59,7 @@ Agent
 - `#13573 <https://github.com/wazuh/wazuh/pull/13573>`__ Added new unit tests for GCloud integration and increased coverage to 99%.
 - `#14104 <https://github.com/wazuh/wazuh/pull/14104>`__ Added new unit tests for Azure Storage integration and increased coverage to 99%.
 - `#14177 <https://github.com/wazuh/wazuh/pull/14177>`__ Added new unit tests for Docker Listener integration.
-- `#18116 <https://github.com/wazuh/wazuh/pull/18116>`__ Added support for Microsoft Graph security API.
+- `#18116 <https://github.com/wazuh/wazuh/pull/18116>`__ Added support for Microsoft Graph security API. Thanks to Bryce Shurts (`@S-Bryce <https://github.com/S-Bryce>`__).
 - `#15852 <https://github.com/wazuh/wazuh/pull/15852>`__ Added wildcard support in FIM Windows registers.
 - `#15973 <https://github.com/wazuh/wazuh/pull/15973>`__ Added wildcards support for folders in the localfile configuration on Windows.
 - `#14782 <https://github.com/wazuh/wazuh/pull/14782>`__ Added new settings ``ignore`` and ``restrict`` to logcollector.
@@ -85,7 +85,7 @@ Agent
 - `#14684 <https://github.com/wazuh/wazuh/pull/14684>`__ Removed unused migration functionality from the AWS integration.
 - `#17655 <https://github.com/wazuh/wazuh/pull/17655>`__ Deleted definitions of repeated classes in the AWS integration.
 - `#15031 <https://github.com/wazuh/wazuh/pull/15031>`__ Removed duplicate methods in ``AWSBucket`` and reuse inherited ones from ``WazuhIntegration``.
-- `#16547 <https://github.com/wazuh/wazuh/pull/16547>`__ Added support for Office365 MS/Azure Government Community Cloud (GCC) and Government Community Cloud High (GCCH) API.
+- `#16547 <https://github.com/wazuh/wazuh/pull/16547>`__ Added support for Office365 MS/Azure Government Community Cloud (GCC) and Government Community Cloud High (GCCH) API. Thanks to Bryce Shurts (`@S-Bryce <https://github.com/S-Bryce>`__).
 - `#19758 <https://github.com/wazuh/wazuh/pull/19758>`__ Reduced the default FIM event throughput to ``50`` EPS.
 
 RESTful API
