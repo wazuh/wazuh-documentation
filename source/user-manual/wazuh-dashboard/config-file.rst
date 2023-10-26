@@ -729,9 +729,7 @@ ISM rollover policy
 
 .. warning::
 
-    These options are only valid if they're modified before starting the Wazuh dashboard for the very first time.
-
-    You can read more about how to customize the rollover policy in :doc:`/user-manual/wazuh-indexer/index-life-management`.
+   Modifying these options has no effect if you do it once the Wazuh dashboard started for the first time. Read about different methods to customize the rollover policy in :doc:`/user-manual/wazuh-indexer/index-life-management`.
 
 ism.rollover.enabled
 ^^^^^^^^^^^^^^^^^^^^
@@ -767,8 +765,7 @@ Changing the index pattern **will not**:
 ism.rollover.priority
 ^^^^^^^^^^^^^^^^^^^^^
 
-The priority of the policy. The higher the value, the higher the priority. If there are multiple policies that match the index, the one with the highest priority will be applied.
-There cannot be two policies with the same priority.
+The priority value for the policy. The higher the value, the higher the priority. If there are multiple policies to manage an index, Wazuh applies the one with the highest priority value. There cannot be two policies with the same priority value to manage the same index.
 
 +--------------------+-----------------------------------+
 | **Default value**  | 50                                |
@@ -779,7 +776,7 @@ There cannot be two policies with the same priority.
 ism.rollover.min_index_age
 ^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-The minimum age required to roll over the index. Index age is the time between its creation and the present. Supported units are d (days), h (hours), m (minutes), s (seconds), ms (milliseconds), and micros (microseconds).
+The minimum age required to roll over the index. Index age is the time elapsed since its creation. Supported units are ``d`` (days), ``h`` (hours), ``m`` (minutes), ``s`` (seconds), ``ms`` (milliseconds), and ``micros`` (microseconds).
 
 Rolling over an index too often might cause performance issues. The minimum recommended value is 7 days.
 
