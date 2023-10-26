@@ -19,7 +19,7 @@ Extracted from `OpenSearch's documentation
 Index rollover
 ---------------
 
-Since 4.8.0, Wazuh uses a ISM policy to automatically rollover indices based on the number of documents, index size, or index age.
+Since 4.8.0, Wazuh uses an ISM policy to automatically rollover indices based on the number of documents, index size, or index age.
 
     .. code-block:: json
         :emphasize-lines: 11,12,13
@@ -62,14 +62,14 @@ This policy will rotate the ``wazuh-alerts`` and ``wazuh-archives`` indices when
       
       Each shard can contain up to just over two billion documents (2^31). Shards between 10 GB and 50 GB usually work well for many use cases, as long as the documents-per-shard is kept below 200 million.
 
-The policy will be automatically added to the environment when Wazuh dashboard starts, only if there is not any other rollover policy already managing the indices. If you want to use a different rollover policy, you can disable the default one by setting the ``ism.rollover.enabled`` variable to ``false`` in the ``/usr/share/wazuh/config/wazuh.yml`` file before the very first start of Wazuh dashboard. If the policy has been already uploaded an applied to the indices, you can remove it using the Index State Management plugin.
+The policy will be automatically added to the environment when Wazuh dashboard starts, only if there is not any other rollover policy already managing the indices. If you want to use a different rollover policy, you can disable the default one by setting the ``ism.rollover.enabled`` variable to ``false`` in the ``/usr/share/wazuh-dashboard/data/wazuh/config/wazuh.yml`` file before the very first start of Wazuh dashboard. If the policy has been already uploaded and applied to the indices, you can remove it using the Index State Management plugin.
 
 .. _Customizing the rollover policy:
 
 Customizing the rollover policy
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-You can customize the rollover policy to fit your needs. For example, you can change the number of documents per shard, the index size, or the index age. To customize the initialization values of the policy, you can edit the ``/usr/share/wazuh/config/wazuh.yml`` file **before starting Wazuh dashboard**.
+You can customize the rollover policy to fit your needs. For example, you can change the number of documents per shard, the index size, or the index age. To customize the initialization values of the policy, you can edit the ``/usr/share/wazuh-dashboard/data/wazuh/config/wazuh.yml`` file **before starting Wazuh dashboard**.
 
     .. code-block:: yaml
 
@@ -87,19 +87,45 @@ Do not worry, you can still customize the policy after starting Wazuh dashboard 
     * Using the Index State Management plugin (**recommended**).
     * Using the Index State Management API.
     * Using the Wazuh plugin.
-    * Using the ``/usr/share/wazuh/config/wazuh.yml`` file.
+    * Using the ``wazuh.yml`` file.
 
-ADD STEPS FOR EACH METHOD
+By default, only the ``admin`` and ``kibanaserver`` users have permissions to manage the policies. For convenience, a new permission group and role (**manage_ism**) has been created to grant permissions to the `ISM API <https://opensearch.org/docs/latest/security/access-control/permissions/#index-state-management-permissions>`__.
 
 Whatever the method you choose to customize the policy, make sure to have the following considerations in mind:
 
     * The policy's name is ``wazuh-rollover-policy``.
     * The ``min_doc_count`` value should be lower than the maximum number of documents per shard (2^31). A value over 200 million is not recommended. 
     * The ``priority`` value should be unique among other policies managing the same indices.
-    * The ``min_primary_shard_size`` value should be between 10 GiB and 50 GiB for best performance.
-    * It's not adviced to change the ``index_patterns`` value.
+    * The ``min_primary_shard_size`` value should be between 10 GB and 50 GB for best performance.
+    * It's not advised to change the ``index_patterns`` value.
 
-For extended information about ISM policies, check the `OpenSearch's documentation <https://opensearch.org/docs/latest/im-plugin/ism/index>`_.
+Using the Index State Management plugin (**recommended**)
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+#. Click on the upper left menu **☰**, go to **Management**, and select **Index Management**. Choose **State management policies** and click on **wazuh_rollover_policy**. Select the preferred method and edit as desired.
+
+Using the Index State Management API
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+You can use the `ISM API <https://opensearch.org/docs/latest/im-plugin/ism/api/>`__ directly from the **Dev Tools** section on the UI. You can also use external tools like `Postman <https://www.postman.com/>`_, `cURL <https://curl.se/>`_, or any other tool or library capable of performing HTTP requests.
+
+Using the Wazuh plugin
+~~~~~~~~~~~~~~~~~~~~~~
+
+#. Click on the upper left menu **☰**, go to **Wazuh**, ...
+
+Using the ``wazuh.yml`` file
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+#. In the Wazuh dashboard node, edit the ``/usr/share/wazuh-dashboard/data/wazuh/config/wazuh.yml`` file and change the desired values.
+
+#. Set ``ism.rollover.enabled`` to ``true`` to enable the policy verification during the Wazuh dashboard startup.
+
+#. Set ``ism.rollover.overwrite`` to ``true`` to update the policy with the new values.
+
+#. Restart Wazuh dashboard
+
+Check the available options in the :doc:`Wazuh dashboard configuration file </user-manual/wazuh-dashboard/config-file>`.
 
 Index retention
 ---------------

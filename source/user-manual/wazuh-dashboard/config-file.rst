@@ -731,19 +731,19 @@ ISM rollover policy
 
     These options are only valid if they're modified before starting the Wazuh dashboard for the very first time.
 
-    You can read more about customizating the rollover policy in :doc:`/user-manual/wazuh-indexer/index-life-management`.
+    You can read more about how to customize the rollover policy in :doc:`/user-manual/wazuh-indexer/index-life-management`.
 
 ism.rollover.enabled
 ^^^^^^^^^^^^^^^^^^^^
 
 Toggles the verification of the rollover policy. If set to ``true``, the rollover policy will be applied to the indices that match the index patterns defined in ``ism.rollover.index_patterns``, only if there isn't any other policy managing these indices.
 
-This options does not enable or disable the policy itself. 
+This option does not enable or disable the policy itself. 
 
 +--------------------+----------------------------+
 | **Default value**  | true                       |
 +--------------------+----------------------------+
-| **Allowed values** | true,false                 |
+| **Allowed values** | true, false                |
 +--------------------+----------------------------+
 
 ism.rollover.index_patterns
@@ -751,7 +751,7 @@ ism.rollover.index_patterns
 
 The policy will be applied to the indices that match the patterns defined here. The index format must match the pattern: ``^.*-\d+$``. The managed indices must use an alias. Set ``index.plugins.index_state_management.rollover_alias`` as the alias to rollover.
 
-The ``wazuh-alerts-4.x-*`` and ``wazuh-archives-4.x-*`` indices  are configured to use the ``wazuh-alerts`` and ``wazuh-archives`` aliases respectively. The rollover policy is specially designed to manage these indices, so it is not recommended to change this setting as it may cause the policy to be applied to indices that do not use an alias.
+The ``wazuh-alerts-4.x-*`` and ``wazuh-archives-4.x-*`` indices are configured to use the ``wazuh-alerts`` and ``wazuh-archives`` aliases respectively. The rollover policy is specially designed to manage these indices, so it is not recommended to change this setting as it may cause the policy to be applied to indices that do not use an alias.
 
 Changing the index pattern **will not**:
     * change or set the alias of the indices.
@@ -823,7 +823,7 @@ If set to ``true``, the ``wazuh_rollover_policy`` will be updated with the value
 +--------------------+----------------------------+
 | **Default value**  | false                      |
 +--------------------+----------------------------+
-| **Allowed values** | true,false                 |
+| **Allowed values** | true, false                |
 +--------------------+----------------------------+
 
 
