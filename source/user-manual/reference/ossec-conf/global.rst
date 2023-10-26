@@ -546,7 +546,7 @@ A positive number expressed in seconds that indicates the time period where the 
 update_check
 ^^^^^^^^^^^^
 
-This toggles whether to query an external service to retrieve any available update from the dashboard.
+This toggles whether to query the external Wazuh CTI service to retrieve the available Wazuh updates.
 
 +--------------------+---------+
 | **Default value**  | yes     |
