@@ -22,7 +22,7 @@ Index rollover
 Since 4.8.0, Wazuh uses a ISM policy to automatically rollover indices based on the number of documents, index size, or index age.
 
     .. code-block:: json
-        :emphasize-lines: 12,13,14
+        :emphasize-lines: 11,12,13
 
         {
             "policy": {
@@ -36,7 +36,7 @@ Since 4.8.0, Wazuh uses a ISM policy to automatically rollover indices based on 
                         "rollover": {
                             "min_primary_shard_size": "25gb",
                             "min_index_age": "7d",
-                            "min_doc_count": "${rollover_min_docs}"
+                            "min_doc_count": "200000000"
                         }
                     }
                     ]
@@ -54,16 +54,15 @@ This policy will rotate the ``wazuh-alerts`` and ``wazuh-archives`` indices when
 
     * The index is older than 7 days.
     * An index's primary shard is larger than 25 GB.
-    * The index has more than 2,100,000 documents per shard.
+    * The index has more than 200,000,000 documents.
 
    .. note::
       
-      The ``rollover_min_docs`` variable is computed based on the number of shards and replicas of the index. There is a limit of 2^31 documents per shard, so the default value is 2,100,000 documents per shard, a bit below the maximum.
+      There is a limit of 2^31 documents per shard. 
+      
+      Each shard can contain up to just over two billion documents (2^31). Shards between 10 GB and 50 GB usually work well for many use cases, as long as the documents-per-shard is kept below 200 million.
 
-      By default, ``wazuh-alerts`` and ``wazuh-archives`` indices use 3 primary shards and 0 replicas, so this value would be 6,300,000 documents per index. If you change the number of primary shards, you should also change the ``rollover_min_docs`` variable accordingly.  Check :ref:`Customizing the rollover policy` for more information.
-
-
-The policy will be automatically added to the environment when Wazuh dashboard starts, only if there is not any other rollover policy already managing the indices. If you want to use a different rollover policy, you can disable the default one by setting the ``ism.rollover.enabled`` variable to ``false`` in the ``/usr/share/wazuh/config/wazuh.yml`` file.
+The policy will be automatically added to the environment when Wazuh dashboard starts, only if there is not any other rollover policy already managing the indices. If you want to use a different rollover policy, you can disable the default one by setting the ``ism.rollover.enabled`` variable to ``false`` in the ``/usr/share/wazuh/config/wazuh.yml`` file before the very first start of Wazuh dashboard. If the policy has been already uploaded an applied to the indices, you can remove it using the Index State Management plugin.
 
 .. _Customizing the rollover policy:
 
@@ -76,11 +75,11 @@ You can customize the rollover policy to fit your needs. For example, you can ch
 
         # ISM rollover policy configuration (default values)
         ism.rollover.enabled: true
-        ism.rollover.ism_template.index_patterns: ["wazuh-alerts*","wazuh-archives*","-wazuh-alerts-4.x-sample*"]
-        ism.rollover.ism_template.priority: 50
+        ism.rollover.index_patterns: ["wazuh-alerts*","wazuh-archives*","-wazuh-alerts-4.x-sample*"]
+        ism.rollover.priority: 50
         ism.rollover.min_index_age: 7d
         ism.rollover.min_primary_shard_size: 25gb
-        ism.rollover.docs_per_shard: 2100000
+        ism.rollover.min_doc_count: 200000000
         ism.rollover.overwrite: false
 
 Do not worry, you can still customize the policy after starting Wazuh dashboard following one of these methods:
@@ -95,7 +94,7 @@ ADD STEPS FOR EACH METHOD
 Whatever the method you choose to customize the policy, make sure to have the following considerations in mind:
 
     * The policy's name is ``wazuh-rollover-policy``.
-    * The ``docs_per_shard`` value should be lower than the maximum number of documents per shard (2^31). This value is used to set the ``rollover_min_docs`` variable as follows: ``rollover_min_docs = docs_per_shard * number_of_shards``. 
+    * The ``min_doc_count`` value should be lower than the maximum number of documents per shard (2^31). A value over 200 million is not recommended. 
     * The ``priority`` value should be unique among other policies managing the same indices.
     * The ``min_primary_shard_size`` value should be between 10 GiB and 50 GiB for best performance.
     * It's not adviced to change the ``index_patterns`` value.

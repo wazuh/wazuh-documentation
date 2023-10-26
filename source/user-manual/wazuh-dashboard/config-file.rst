@@ -736,7 +736,7 @@ ISM rollover policy
 ism.rollover.enabled
 ^^^^^^^^^^^^^^^^^^^^
 
-Toggles the verification of the rollover policy. If set to ``true``, the rollover policy will be applied to the indices that match the index patterns defined in ``ism.rollover.ism_template.index_patterns``, only if there isn't any other policy managing these indices.
+Toggles the verification of the rollover policy. If set to ``true``, the rollover policy will be applied to the indices that match the index patterns defined in ``ism.rollover.index_patterns``, only if there isn't any other policy managing these indices.
 
 This options does not enable or disable the policy itself. 
 
@@ -746,17 +746,17 @@ This options does not enable or disable the policy itself.
 | **Allowed values** | true,false                 |
 +--------------------+----------------------------+
 
-ism.rollover.ism_template.index_patterns
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+ism.rollover.index_patterns
+^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 The policy will be applied to the indices that match the patterns defined here. The index format must match the pattern: ``^.*-\d+$``. The managed indices must use an alias. Set ``index.plugins.index_state_management.rollover_alias`` as the alias to rollover.
 
 The ``wazuh-alerts-4.x-*`` and ``wazuh-archives-4.x-*`` indices  are configured to use the ``wazuh-alerts`` and ``wazuh-archives`` aliases respectively. The rollover policy is specially designed to manage these indices, so it is not recommended to change this setting as it may cause the policy to be applied to indices that do not use an alias.
 
 Changing the index pattern **will not**:
- - change or set the alias of the indices.
- - affect the indices that are already managed by the rollover policy.
- - change the calculation of the ``min_doc_count`` condition, as it is based on the number of primary shards of the wazuh-alerts and wazuh-archives indices.
+    * change or set the alias of the indices.
+    * affect the indices that are already managed by the rollover policy.
+    * change the calculation of the ``min_doc_count`` condition, as it is based on the number of primary shards of the wazuh-alerts and wazuh-archives indices.
 
 +--------------------+---------------------------------------------------------------------+
 | **Default value**  | ["wazuh-alerts\*", "wazuh-archives\*", "-wazuh-alerts-4.x-sample*"] |
@@ -764,8 +764,8 @@ Changing the index pattern **will not**:
 | **Allowed values** | Array of strings. Eg: ["wazuh-archives-\*"]                         |
 +--------------------+---------------------------------------------------------------------+
 
-ism.rollover.ism_template.priority
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+ism.rollover.priority
+^^^^^^^^^^^^^^^^^^^^^
 
 The priority of the policy. The higher the value, the higher the priority. If there are multiple policies that match the index, the one with the highest priority will be applied.
 There cannot be two policies with the same priority.
@@ -792,9 +792,9 @@ Rolling over an index too often might cause performance issues. The minimum reco
 ism.rollover.min_primary_shard_size
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-The minimum storage size in GiB of a single primary shard required to roll over the index. For example, if you set ``min_primary_shard_size`` to 30 GiB and one of the primary shards in the index has a size greater than the condition, the rollover occurs.
+The minimum storage size in GB of a single primary shard required to roll over the index. For example, if you set ``min_primary_shard_size`` to 30 GB and one of the primary shards in the index has a size greater than the condition, the rollover occurs.
 
-The recommended shard sizes are 10-30 GiB for search-heavy workloads and 30-50 GiB for write-heavy workloads. The shard size must never exceed the 50 GiB. In Wazuh, we use 25 GiB, in order to achieve a good balance between both workloads.
+The recommended shard sizes are 10-30 GB for search-heavy workloads and 30-50 GB for write-heavy workloads. The shard size must never exceed the 50 GB. In Wazuh, we use 25 GB, in order to achieve a good balance between both workloads.
 
 +--------------------+-----------------------------------+
 | **Default value**  | 25                                |
@@ -802,23 +802,15 @@ The recommended shard sizes are 10-30 GiB for search-heavy workloads and 30-50 G
 | **Allowed values** | Any positive number               |
 +--------------------+-----------------------------------+
 
-ism.rollover.docs_per_shard
+ism.rollover.min_doc_count
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-The minimum number of documents per shard (approximately) required to roll over the index.
+The minimum number of documents required to roll over the index.
 
-This value is used to set the ``min_doc_count`` condition in the rollover policy, which is computed as follows:
-
-.. code-block:: text
-
-    min_doc_count = docs_per_shard * number_of_primary_shards
-
-The number of primary shards is obtained from the index settings. The ``wazuh-alerts`` and ``wazuh-archives`` indices use 3 primary shards by default, so the default value for ``min_doc_count`` is 6,300,000.
-
-A shard can contain 2^31 documents at most, so it's not recommened to set a higher value.
+The documents are distributed across the shards of the index. Although a shard can contain up to 2^31 documents, it's recommended to keep the documents-per-shard below 200 million.
 
 +--------------------+-----------------------------------+
-| **Default value**  | 2100000                           |
+| **Default value**  | 200000000                         |
 +--------------------+-----------------------------------+
 | **Allowed values** | Any positive number               |
 +--------------------+-----------------------------------+
@@ -932,9 +924,9 @@ This is an example of the wazuh.yml configuration:
 
     # ISM rollover policy
     ism.rollover.enabled: true
-    ism.rollover.ism_template.index_patterns: ["wazuh-alerts*", "wazuh-archives*", "-wazuh-alerts-4.x-sample*"]
-    ism.rollover.ism_template.priority: 50
+    ism.rollover.index_patterns: ["wazuh-alerts*", "wazuh-archives*", "-wazuh-alerts-4.x-sample*"]
+    ism.rollover.priority: 50
     ism.rollover.min_index_age: 7d
     ism.rollover.min_primary_shard_size: 25gb
-    ism.rollover.docs_per_shard: 2100000
+    ism.rollover.min_doc_count: 200000000
     ism.rollover.overwrite: false
