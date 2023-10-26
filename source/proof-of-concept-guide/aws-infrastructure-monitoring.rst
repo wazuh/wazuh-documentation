@@ -43,8 +43,6 @@ The image below shows how to create a new CloudTrail service and attach a new S3
 Wazuh server
 ^^^^^^^^^^^^
 
-#. From the Wazuh dashboard, navigate through **Settings > Modules** and enable the Amazon AWS module dashboard which is disabled by default.
-
 #. Enable the Wazuh AWS module in the ``/var/ossec/etc/ossec.conf`` configuration file on the Wazuh server. Add only the AWS buckets of interest. Read our guide on how to :doc:`Configure AWS credentials </cloud-security/amazon/services/prerequisites/credentials>`:
 
    .. code-block:: xml
@@ -80,7 +78,7 @@ You can also find additional :ref:`CloudTrail use cases <cloudtrail-use-cases>` 
 Visualize the alerts
 --------------------
 
-You can visualize the alert data in the Wazuh dashboard. To do this, navigate through **Modules** > **Amazon AWS** module.
+You can visualize the alert data in the Wazuh dashboard. To do this, navigate through **AWS** module.
 
 .. thumbnail:: /images/poc/AWS-alerts.png
    :title: Visualize Amazon AWS alerts 

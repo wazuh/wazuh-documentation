@@ -61,27 +61,7 @@ Perform the following steps on the Docker server to configure the Wazuh agent to
    .. code-block:: console
 
       # systemctl restart wazuh-agent
-
-Wazuh Docker listener dashboard
--------------------------------
-
-The Wazuh Docker listener dashboard offers a centralized and user-friendly interface that allows you to monitor the security of your Dockerized infrastructure. With real-time insights and actionable information, the Wazuh Docker listener dashboard empowers system administrators and security teams to detect and respond to potential threats, ensuring the integrity and reliability of containerized applications. From monitoring container events to analyzing logs and implementing custom rules, this dashboard streamlines the security management process, enhancing the overall protection of your Docker environment.
-
-Take the following steps to enable the Wazuh Docker listener dashboard:
-
-#. Click on the **Wazuh** menu icon, and select **Settings** > **Modules**.
-
-#. Scroll down to the **Threat Detection and Response** section and enable **Docker listener**.
-
-#. Click on the **Wazuh** menu icon, and select **Modules** > **Docker listener** to view the Docker listener dashboard.
-
-The animation below is a graphical representation of the steps you need to take to enable the Wazuh Docker listener dashboard.
-
-.. thumbnail:: /images/manual/container-security/enable-wazuh-docker-listener-dashboard.gif
-   :title: Steps to enable the Wazuh Docker listener dashboard
-   :alt: Steps to enable the Wazuh Docker listener dashboard
-   :align: center
-   :width: 80% 
+      
 
 Wazuh Docker listener configuration options
 -------------------------------------------

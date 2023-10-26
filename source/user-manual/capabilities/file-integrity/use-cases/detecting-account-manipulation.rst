@@ -60,7 +60,7 @@ Replace ``<UBUNTU_USER>`` and ``<UBUNTU_IP>`` with the user and IP address for y
 Visualize the alert
 -------------------
 
-Navigate to **Modules > Integrity monitoring** on the Wazuh dashboard to view the alert generated when the FIM module detects changes to the ``authorized_keys`` file.
+Navigate to **File integrity monitoring** on the Wazuh dashboard to view the alert generated when the FIM module detects changes to the ``authorized_keys`` file.
 
 .. thumbnail:: /images/manual/fim/changes-windows-authorized-keys-file.png
   :title: Changes to the authorized_keys file

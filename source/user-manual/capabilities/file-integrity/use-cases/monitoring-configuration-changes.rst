@@ -63,7 +63,7 @@ Test the configuration
 Visualize the alert
 -------------------
 
-Navigate to **Modules > Integrity monitoring** on the Wazuh dashboard to view the alert generated when the FIM module detects modification of the configuration file.
+Navigate to **File integrity monitoring** on the Wazuh dashboard to view the alert generated when the FIM module detects modification of the configuration file.
 
 .. thumbnail:: /images/manual/fim/modification-of-the-configuration-file.png
   :title: Modification of the configuration file

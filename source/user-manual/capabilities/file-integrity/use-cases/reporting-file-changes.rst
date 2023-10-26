@@ -57,7 +57,7 @@ Test the configuration
 Visualize the alert
 -------------------
 
-Navigate to **Modules > Integrity monitoring** on the Wazuh dashboard to view the alert. You can find four alerts related to the monitored directory.
+Navigate to **File integrity monitoring** on the Wazuh dashboard to view the alert. You can find four alerts related to the monitored directory.
 
 .. thumbnail:: /images/manual/fim/alerts-related-monitored-directory.png
   :title: Alerts related to the monitored directory

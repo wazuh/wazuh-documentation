@@ -95,7 +95,7 @@ We trigger a port change in the Linux endpoint by changing the default ``ssh`` p
 Visualize the alerts
 --------------------
 
-Go to **Modules > Security events** tab on the Wazuh dashboard to visualize the alert showing the changes in the network.
+Go to **Threat hunting** tab on the Wazuh dashboard to visualize the alert showing the changes in the network.
 
 .. thumbnail:: /images/manual/command-monitoring/ports-status-changed-alert.png
   :title: Listened ports status (netcat) changed alert

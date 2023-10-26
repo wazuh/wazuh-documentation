@@ -99,7 +99,7 @@ Follow the steps below to trigger a load average alert on the Linux endpoint.
 Visualize the alerts
 --------------------
 
-Go to **Modules > Security events** tab on the Wazuh dashboard to visualize the generated alert.
+Go to **Threat hunting** tab on the Wazuh dashboard to visualize the generated alert.
 
 .. thumbnail:: /images/manual/command-monitoring/load-average-alert.png
   :title: Load average alert

@@ -57,7 +57,7 @@ OneLogin Configuration
       - **Recipient**: ``https://<WAZUH_DASHBOARD_URL>/_opendistro/_security/saml/acs``
       - **ACS (Consumer) URL Validator**: ``https://<WAZUH_DASHBOARD_URL>/_opendistro/_security/saml/acs``
       - **ACS (Consumer) URL**: ``https://<WAZUH_DASHBOARD_URL>/_opendistro/_security/saml/acs``
-      - **Login URL**: ``https://<WAZUH_DASHBOARD_URL>/app/wazuh``
+      - **Login URL**: ``https://<WAZUH_DASHBOARD_URL>/app/wz-home``
       - **SAML initiator**: ``Service Provider``
       - **SAML nameID format**: ``Unspecified``
       - **SAML issuer type**: ``Specific``

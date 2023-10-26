@@ -8,7 +8,7 @@
 Configuring AWS credentials
 ===========================
 
-In order to make the Wazuh AWS module pull log data from the different services, it's necessary to provide access credentials to connect to them. The ``.aws/credentials`` file must be placed at the correct location. You need to create the credentials file using ``root``. The root user is the one that runs *wazuh-modulesd*. Thus, the correct location is ``/root/.aws/credentials``, the home directory of the root user.
+In order to make the Wazuh AWS module pull log data from the different services, it's necessary to provide access credentials to connect to them. The ``.aws/credentials`` file must be placed at the correct location. You need to create the credentials file using ``root``. Thus, the correct location is ``/root/.aws/credentials``, the home directory of the root user.
 
 There are multiple ways to configure the AWS credentials:
 
