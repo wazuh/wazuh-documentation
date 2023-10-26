@@ -22,24 +22,25 @@ Prerequisites
 Download the packages and configuration files
 ---------------------------------------------
 
-#. Run the following commands with your choice and execute them from a Linux system with Internet connection. This action executes a script that downloads all required files for the offline installation on x86_64 architectures.
-
-   .. code-block:: console
-
-      # curl -sO https://packages.wazuh.com/|WAZUH_CURRENT_MINOR|/wazuh-install.sh
-      # chmod 744 wazuh-install.sh
+#. Run the following commands with your choice from a Linux system with Internet connection. This action executes a script that downloads all required files for the offline installation on x86_64 architectures.
     
-   If your system is RPM-based, run the following command:
+   .. tabs::
 
-    .. code-block:: console
+        .. group-tab:: RPM
 
-      # ./wazuh-install.sh -dw rpm
-    
-   If your system is Debian-based, run the following command:
+            .. code-block:: console
+        
+               # curl -sO https://packages.wazuh.com/|WAZUH_CURRENT_MINOR|/wazuh-install.sh
+               # chmod 744 wazuh-install.sh
+               # ./wazuh-install.sh -dw rpm
 
-    .. code-block:: console
-      
-      # ./wazuh-install.sh -dw deb
+        .. group-tab:: DEB
+
+            .. code-block:: console
+        
+               # curl -sO https://packages.wazuh.com/|WAZUH_CURRENT_MINOR|/wazuh-install.sh
+               # chmod 744 wazuh-install.sh
+               # ./wazuh-install.sh -dw deb
           
 #. Download the certificates configuration file.
 
