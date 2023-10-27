@@ -22,7 +22,7 @@ Prerequisites
 Download the packages and configuration files
 ---------------------------------------------
 
-#. Run the following commands with your choice from a Linux system with Internet connection. This action executes a script that downloads all required files for the offline installation on x86_64 architectures.
+#. Run the following commands from any Linux system with Internet connection. This action executes a script that downloads all required files for the offline installation on x86_64 architectures. Select the package format to download.
     
    .. tabs::
 
