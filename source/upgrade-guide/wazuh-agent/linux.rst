@@ -146,7 +146,7 @@ Select your package manager and follow the instructions to upgrade the Wazuh age
 
        .. code-block:: console
 
-         # wget -O /etc/apk/keys/alpine-devel@wazuh.com-633d7457.rsa.pub https://packages.wazuh.com/key/alpine-devel//%40wazuh.com-633d7457.rsa.pub
+         # wget -O /etc/apk/keys/alpine-devel@wazuh.com-633d7457.rsa.pub https://packages.wazuh.com/key/alpine-devel%40wazuh.com-633d7457.rsa.pub
 
     #. Add the Wazuh repository.
 
