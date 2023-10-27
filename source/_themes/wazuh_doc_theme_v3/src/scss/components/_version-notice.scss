@@ -83,9 +83,18 @@
   &.search {
     .no-latest-notice-wrapper {
       top: calc(#{$header-height-xl});
+      @include media-max(sm){
+        top: calc(#{$header-height-xs} + #{$secondary-mobile-bar});
+      }
+      @include media-only(sm, xl){
+        top: calc(#{$header-height-xs} + #{$secondary-mobile-bar});
+      }
     }
     #central-column {
       padding-top: $no-latest-notice-height-xl;
+      @include media-max(sm){
+        padding-top: calc(#{$no-latest-notice-height-xl} + 40px);
+      }
     }
   }
 }
