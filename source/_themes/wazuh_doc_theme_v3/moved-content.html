@@ -17,6 +17,10 @@
     <a class="home-btn" href="{{ pathto(master_doc) }}">Return home</a>
 {% endblock -%}
 {%- block after_footer -%}
+  <script>
+    let redirectSameRelease = '{{ redirectSameRelease }}';
+    redirectSameRelease = JSON.parse(redirectSameRelease);
+  </script>
   {%- set specific_js_files = get_js_by_page(pagename) -%}
   {%- for js_file in specific_js_files %}
     <script src="{{ pathto( js_file, 1) }}"></script>
