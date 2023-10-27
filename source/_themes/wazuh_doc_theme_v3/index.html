@@ -51,13 +51,16 @@
     {{ super () }}
     
   {%- else -%}
+<html>
   <head>
     <title>Wazuh documentation</title>
     <link rel="canonical" href="https://documentation.wazuh.com/current/index.html">
   </head>
   <body data-release="{{ version }}">
     {% set index_redirect_js = get_js_by_page(pagename+'-redirect')[0] %}
+    <script id="documentation_options" data-url_root="{{ pathto('', 1) }}" src="{{ pathto('_static/js/documentation_options.js', 1) }}"></script>
     <script src="{{ pathto( index_redirect_js, 1) }}"></script>
   </body>
+</html>
   {%- endif %}
 {%- endif %}
