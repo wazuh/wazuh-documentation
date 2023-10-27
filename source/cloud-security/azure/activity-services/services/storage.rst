@@ -23,7 +23,7 @@ This section explains how to use the Azure portal to archive the Azure activity 
 Configuring the Activity log export
 -----------------------------------
 
-1. To export the logs, search for the **Activity log** service. It can be found by typing "Activity" in the search engine. From there, access the **Audit Logs** section and click on **Export Data Settings**.
+1. To export the logs, search for the **Activity log** service. It can be found in **Azure Active Directory**. From there, access the **Audit Logs** section and click on **Export Data Settings**.
 
 .. thumbnail:: /images/cloud-security/azure/storage-activity-1.png
     :title: Storage
