@@ -119,7 +119,7 @@ You should see the message on the Fluentd server:
 Example using analysisd
 -----------------------
 
-This example is for testing purposes on a AIX machine, with the Wazuh manager installed.
+This example is for testing purposes on a Debian machine, with the Wazuh manager installed.
 
 Given the following configuration:
 
@@ -128,10 +128,13 @@ Given the following configuration:
     <fluent-forward>
       <enabled>yes</enabled>
       <tag>debug.test</tag>
-      <socket_path>/var/ossec/var/run/fluent.sock</socket_path> <!-- The socket must be under /var/ossec directory>
+      <socket_path>/var/ossec/var/run/fluent.sock</socket_path>
       <address>localhost</address>
       <port>24224</port>
     </fluent-forward>
+
+.. note::
+    The ``socket_path`` must be relative or under the ``/var/ossec`` directory.
 
 Set up the ``socket`` for analysisd:
 
@@ -139,9 +142,12 @@ Set up the ``socket`` for analysisd:
 
     <socket>
       <name>fluent_socket</name>
-      <location>var/run/fluent.sock</location> <!-- This path is relative to /var/ossec directory >
+      <location>/var/ossec/var/run/fluent.sock</location>
       <mode>udp</mode>
     </socket>
+
+.. note::
+    The ``location`` must have the same value as the ``socket_path`` set before.
 
 Set up a ``target`` to read from:
 
@@ -150,6 +156,9 @@ Set up a ``target`` to read from:
     <global>
       <forward_to>fluent_socket</forward_to>
     </global>
+
+.. note::
+    In ``forward_to`` specify the ``name`` of the generated socket.
 
 On a terminal, run the following commands as root to start a Fluentd server:
 
