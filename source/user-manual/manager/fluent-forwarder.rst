@@ -134,7 +134,7 @@ Given the following configuration:
     </fluent-forward>
 
 .. note::
-    The ``socket_path`` must be relative or under the ``/var/ossec`` directory.
+   The ``socket_path`` must be located within the ``/var/ossec/`` directory. You can use an absolute or a relative path. For example ``var/run/fluent.sock``.
 
 Set up the ``socket`` for analysisd:
 
@@ -147,9 +147,9 @@ Set up the ``socket`` for analysisd:
     </socket>
 
 .. note::
-    The ``location`` must have the same value as the ``socket_path`` set before.
+   The value of ``location`` must match the value of ``socket_path`` above.
 
-Set up a ``target`` to read from:
+Set up a target to read from:
 
 .. code-block:: xml
 
@@ -158,7 +158,7 @@ Set up a ``target`` to read from:
     </global>
 
 .. note::
-    In ``forward_to`` specify the ``name`` of the generated socket.
+   In ``forward_to`` you must specify the value of ``name`` defined in ``<socket>`` above.
 
 On a terminal, run the following commands as root to start a Fluentd server:
 
@@ -176,7 +176,7 @@ Restart the Wazuh manager:
     systemctl restart wazuh-manager
 
 
-When a new event is trigger to analysisd, the event is sent to fluentd is JSON format. You should see the message on the Fluentd server:
+When an event triggers an alert, it's sent to fluentd in JSON format. On the Fluentd server, you can see a message similar to this:
 
 .. code-block:: none
     :class: output
