@@ -8,7 +8,7 @@
 Configuration file
 ==================
 
-The Wazuh dashboard plugin includes a configuration file located at ``/usr/share/wazuh-dashboard/data/wazuh/config/wazuh.yml`` where you can define custom values for several options. This section describes all the settings available in this file.
+The Wazuh dashboard includes a configuration file located at ``/usr/share/wazuh-dashboard/data/wazuh/config/wazuh.yml`` where you can define custom values for several options. This section describes all the settings available in this file.
 
 If you are using the Wazuh Kibana plugin, you can find this configuration file at ``/usr/share/kibana/data/wazuh/config/wazuh.yml``. 
 
