@@ -634,6 +634,76 @@ Define the number of replicas to use for the statistics indices.
 | **Allowed values** | Any number starting from 0 |
 +--------------------+----------------------------+
 
+Roll over ISM policy task
+-------------------------
+
+ism.rollover.enabled
+^^^^^^^^^^^^^^^^^^^^
+
+Enable or disable the task to adding a roll over ISM policy, alias templates and create the rollover indices.
+
++--------------------+----------------------------+
+| **Default value**  | true                       |
++--------------------+----------------------------+
+| **Allowed values** | true,false                 |
++--------------------+----------------------------+
+
+
+ism.rollover.index_patterns
+^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Index patterns to apply the roll over ISM policy.
+
++--------------------+---------------------------------------------------------------------+
+| **Default value**  | ["wazuh-alerts-*", "wazuh-archives-*", "-wazuh-alerts-4.x-sample*"] |
++--------------------+---------------------------------------------------------------------+
+| **Allowed values** | Array of index patterns                                             |
++--------------------+---------------------------------------------------------------------+
+
+ism.rollover.min_doc_count
+^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Define the minimum documents count required to roll over the index. This value is the results of docs_by_shard * number_of_shards.
+
++--------------------+------------------------------------+
+| **Default value**  | 200000000                          |
++--------------------+------------------------------------+
+| **Allowed values** | Any number starting from 1 to 2e31 |
++--------------------+------------------------------------+
+
+ism.rollover.min_index_age
+^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Define the minimum age required to roll over the index.
+
++--------------------+---------------------------------------------------------------------+
+| **Default value**  | 7d                                                                  |
++--------------------+---------------------------------------------------------------------+
+| **Allowed values** | number and unit time: d (days), h (hours), m (minutes), s (seconds) |
++--------------------+---------------------------------------------------------------------+
+
+ism.rollover.priority
+^^^^^^^^^^^^^^^^^^^^^
+
+Define the priority of the ISM policy template.
+
++--------------------+----------------------------+
+| **Default value**  | 50                         |
++--------------------+----------------------------+
+| **Allowed values** | Any number starting from 0 |
++--------------------+----------------------------+
+
+ism.rollover.overwrite
+^^^^^^^^^^^^^^^^^^^^^^
+
+Overwrite the ISM policy with the current configuration. This requires restarting.
+
++--------------------+----------------------------+
+| **Default value**  | false                      |
++--------------------+----------------------------+
+| **Allowed values** | true,false                 |
++--------------------+----------------------------+
+
 Custom branding
 ---------------
 
