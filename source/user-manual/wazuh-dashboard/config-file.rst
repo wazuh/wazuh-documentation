@@ -1,7 +1,7 @@
 .. Copyright (C) 2015, Wazuh, Inc.
 
 .. meta::
-  :description: The Wazuh dashboard plugin includes a configuration file where you can define custom values for several options. Learn more about it in this section.
+  :description: The Wazuh dashboard includes a configuration file where you can define custom values for several options. Learn more about it in this section.
 
 .. _wazuh_dashboard_config_file:
 
@@ -724,108 +724,6 @@ Set the footer of the PDF reports. To use an empty footer, type a space " " in t
 | **Allowed values** | Any string                 |
 +--------------------+----------------------------+
 
-ISM rollover policy
--------------------
-
-.. warning::
-
-    These options are only valid if they're modified before starting the Wazuh dashboard for the very first time.
-
-    You can read more about how to customize the rollover policy in :doc:`/user-manual/wazuh-indexer/index-life-management`.
-
-ism.rollover.enabled
-^^^^^^^^^^^^^^^^^^^^
-
-Toggles the verification of the rollover policy. If set to ``true``, the rollover policy will be applied to the indices that match the index patterns defined in ``ism.rollover.index_patterns``, only if there isn't any other policy managing these indices.
-
-This option does not enable or disable the policy itself. 
-
-+--------------------+----------------------------+
-| **Default value**  | true                       |
-+--------------------+----------------------------+
-| **Allowed values** | true, false                |
-+--------------------+----------------------------+
-
-ism.rollover.index_patterns
-^^^^^^^^^^^^^^^^^^^^^^^^^^^
-
-The policy will be applied to the indices that match the patterns defined here. The index format must match the pattern: ``^.*-\d+$``. The managed indices must use an alias. Set ``index.plugins.index_state_management.rollover_alias`` as the alias to rollover.
-
-The ``wazuh-alerts-4.x-*`` and ``wazuh-archives-4.x-*`` indices are configured to use the ``wazuh-alerts`` and ``wazuh-archives`` aliases respectively. The rollover policy is specially designed to manage these indices, so it is not recommended to change this setting as it may cause the policy to be applied to indices that do not use an alias.
-
-Changing the index pattern **will not**:
-    * change or set the alias of the indices.
-    * affect the indices that are already managed by the rollover policy.
-    * change the calculation of the ``min_doc_count`` condition, as it is based on the number of primary shards of the wazuh-alerts and wazuh-archives indices.
-
-+--------------------+---------------------------------------------------------------------+
-| **Default value**  | ["wazuh-alerts\*", "wazuh-archives\*", "-wazuh-alerts-4.x-sample*"] |
-+--------------------+---------------------------------------------------------------------+
-| **Allowed values** | Array of strings. Eg: ["wazuh-archives-\*"]                         |
-+--------------------+---------------------------------------------------------------------+
-
-ism.rollover.priority
-^^^^^^^^^^^^^^^^^^^^^
-
-The priority of the policy. The higher the value, the higher the priority. If there are multiple policies that match the index, the one with the highest priority will be applied.
-There cannot be two policies with the same priority.
-
-+--------------------+-----------------------------------+
-| **Default value**  | 50                                |
-+--------------------+-----------------------------------+
-| **Allowed values** | Any integer number greater than 0 |
-+--------------------+-----------------------------------+
-
-ism.rollover.min_index_age
-^^^^^^^^^^^^^^^^^^^^^^^^^^
-
-The minimum age required to roll over the index. Index age is the time between its creation and the present. Supported units are d (days), h (hours), m (minutes), s (seconds), ms (milliseconds), and micros (microseconds).
-
-Rolling over an index too often might cause performance issues. The minimum recommended value is 7 days.
-
-+--------------------+---------+
-| **Default value**  | 7d      |
-+--------------------+---------+
-| **Allowed values** | String  |
-+--------------------+---------+
-
-ism.rollover.min_primary_shard_size
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-
-The minimum storage size in GB of a single primary shard required to roll over the index. For example, if you set ``min_primary_shard_size`` to 30 GB and one of the primary shards in the index has a size greater than the condition, the rollover occurs.
-
-The recommended shard sizes are 10-30 GB for search-heavy workloads and 30-50 GB for write-heavy workloads. The shard size must never exceed the 50 GB. In Wazuh, we use 25 GB, in order to achieve a good balance between both workloads.
-
-+--------------------+-----------------------------------+
-| **Default value**  | 25                                |
-+--------------------+-----------------------------------+
-| **Allowed values** | Any positive number               |
-+--------------------+-----------------------------------+
-
-ism.rollover.min_doc_count
-^^^^^^^^^^^^^^^^^^^^^^^^^^^
-
-The minimum number of documents required to roll over the index.
-
-The documents are distributed across the shards of the index. Although a shard can contain up to 2^31 documents, it's recommended to keep the documents-per-shard below 200 million.
-
-+--------------------+-----------------------------------+
-| **Default value**  | 200000000                         |
-+--------------------+-----------------------------------+
-| **Allowed values** | Any positive number               |
-+--------------------+-----------------------------------+
-
-ism.rollover.overwrite
-^^^^^^^^^^^^^^^^^^^^^^
-
-If set to ``true``, the ``wazuh_rollover_policy`` will be updated with the values from the previous settings. Restarting Wazuh dashboard is required to apply the changes.
-
-+--------------------+----------------------------+
-| **Default value**  | false                      |
-+--------------------+----------------------------+
-| **Allowed values** | true, false                |
-+--------------------+----------------------------+
-
 
 Example
 -------
@@ -921,12 +819,3 @@ This is an example of the wazuh.yml configuration:
     # Enrollment DNS
     enrollment.dns: ''
     enrollment.password: ''
-
-    # ISM rollover policy
-    ism.rollover.enabled: true
-    ism.rollover.index_patterns: ["wazuh-alerts*", "wazuh-archives*", "-wazuh-alerts-4.x-sample*"]
-    ism.rollover.priority: 50
-    ism.rollover.min_index_age: 7d
-    ism.rollover.min_primary_shard_size: 25gb
-    ism.rollover.min_doc_count: 200000000
-    ism.rollover.overwrite: false
