@@ -896,6 +896,14 @@ This is an example of the wazuh.yml configuration:
     cron.statistics.shards: 1
     cron.statistics.replicas: 0
 
+    # Roll over ISM policy
+    ism.rollover.enabled: true
+    ism.rollover.index_patterns: ["wazuh-alerts-*", "wazuh-archives-*", "-wazuh-alerts-4.x-sample*"]
+    ism.rollover.min_doc_count: 200000000
+    ism.rollover.min_index_age: 7d
+    ism.rollover.priority: 50
+    ism.rollover.overwrite: false
+
     #Enrollment DNS
 
     enrollment.dns: ''
