@@ -143,7 +143,7 @@ KeyCloak configuration
 
    #. Click on the newly created group, navigate to **Members > Add member** and select the user created in the previous step. Click on **Add** to add it to the group.
    
-      .. thumbnail:: /images/single-sign-on/keycloak/13-add-member.png
+      .. thumbnail:: /images/single-sign-on/keycloak/read-only/13-add-member-RO.png
          :title: Add member
          :align: center
          :width: 80% 
@@ -373,11 +373,10 @@ Wazuh dashboard configuration
 
       opensearch_security.auth.type: "saml"
       server.xsrf.allowlist: ["/_opendistro/_security/saml/acs", "/_opendistro/_security/saml/logout", "/_opendistro/_security/saml/acs/idpinitiated"]
+      opensearch_security.session.keepalive: false
 
 #. Restart the Wazuh dashboard service using this command:
 
    .. include:: /_templates/common/restart_dashboard.rst
 
 #. Test the configuration. Go to your Wazuh dashboard URL and log in with your Keycloak account. 
-
-
