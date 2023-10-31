@@ -30,10 +30,10 @@ PingOne Configuration
           :align: center
           :width: 80%
 
-   #. Select **Manually Enter** on the **Provide App Metadata** page and add the following configuration, replacing ``<WAZUH_DASHBOARD_URL>`` with the corresponding value:
+   #. Select **Manually Enter** on the **Provide App Metadata** section and add the following configuration, replacing ``<WAZUH_DASHBOARD_URL>`` with the corresponding value:
 
       - ACS URLs: ``https://<WAZUH_DASHBOARD_URL>/_opendistro/_security/saml/acs``
-      - ENTITY ID: ``wazuh-saml``
+      - Entity ID: ``wazuh-saml``
 
       .. thumbnail:: /images/single-sign-on/pingone/02-select-manually-enter-on-the-provide-app-metadata.png
           :title: Select Manually Enter on the Provide App Metadata
@@ -74,7 +74,7 @@ PingOne Configuration
           :align: center
           :width: 80%
 
-   #. To assign users, open the created **Group**, go to the **Users** tab and select **Add Users Individually**. Add all the members that must log in to the Wazuh dashboard, and click on **Save** when done.
+   #. To assign users, open the created **Group**, go to the **Users** tab and select **Add Individually**. Add all the members that must log in to the Wazuh dashboard, and click on **Save** when done.
 
       .. thumbnail:: /images/single-sign-on/pingone/06-assign-users.png
           :title: Assign users
@@ -99,7 +99,7 @@ PingOne Configuration
 
       - **ISSUER ID**: It'll be in the form \https://auth.pingone.com/...
       - **IDP METADATA URL**: It’ll be in the form \https://auth.pingone.com/...
-      - ``exchange_key``: If you open IDP **IDP METADATA URL** you'll find the X509 Certificate  section, this will be used as the ``exchange_key``.
+      - ``exchange_key``: If you open the **IDP METADATA URL** you'll find the X509 Certificate  section, this will be used as the ``exchange_key``.
 
       .. thumbnail:: /images/single-sign-on/pingone/09-take-note-of-parameters.png
           :title: Take note of parameters from the configuration page
@@ -294,6 +294,7 @@ Wazuh dashboard configuration
 
       opensearch_security.auth.type: "saml"
       server.xsrf.allowlist: ["/_opendistro/_security/saml/acs", "/_opendistro/_security/saml/logout", "/_opendistro/_security/saml/acs/idpinitiated"]
+      opensearch_security.session.keepalive: false
 
 #. Restart the Wazuh dashboard service.
 
