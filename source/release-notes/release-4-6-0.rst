@@ -24,7 +24,7 @@ Highlights
 Breaking changes
 ----------------
 
--  The integration methods for Splunk, OpenSearch, and Elastic Stack have been changed. Please refer to the :doc:`Integrations guide </integrations-guide/index>` to learn more:
+-  The integration methods for Splunk, OpenSearch, and Elastic Stack have been changed. Please refer to the :doc:`Integrations guide </integrations-guide/index>` to learn more.
 
 What's new
 ----------
