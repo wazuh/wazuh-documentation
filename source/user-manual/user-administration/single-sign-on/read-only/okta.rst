@@ -42,7 +42,7 @@ Okta Configuration
          
 #. Create a new group. Navigate to **Directory** > **Groups** and add a group.
    
-     .. thumbnail:: /images/single-sign-on/okta/04-navigate-to-directory-groups.png
+     .. thumbnail:: /images/single-sign-on/okta/read-only/04-navigate-to-directory-groups-RO.png
         :title: Navigate to directory groups
         :align: center
         :width: 80%    
@@ -73,7 +73,7 @@ Okta Configuration
          :align: center
          :width: 80%   
 
-   #. Assign a name to the application. In our case, we assign the name ``wazuh-sso-app``.
+   #. Assign a name to the application and click on **Next**. In our case, we assign the name ``wazuh-sso-app``.
 
       .. thumbnail:: /images/single-sign-on/okta/08-assign-name.png
          :title: Assign a name to the application
@@ -114,7 +114,7 @@ Okta Configuration
 
 #. Add the new app to the new group. Navigate to **Directory** > **Groups**  and select your group. Click on **Applications** and select **Assign Applications**. From here, assign the app created in step 5 and click on **Done** to save the changes.
    
-   .. thumbnail:: /images/single-sign-on/okta/12-navigate-to-directory-groups.png
+   .. thumbnail:: /images/single-sign-on/okta/read-only/12-navigate-to-directory-groups-RO.png
       :title: Navigate to Directory - Groups - <YOUR_GROUP>
       :align: center
       :width: 80%   
@@ -293,6 +293,7 @@ Wazuh dashboard configuration
 
       opensearch_security.auth.type: "saml"
       server.xsrf.allowlist: ["/_opendistro/_security/saml/acs", "/_opendistro/_security/saml/logout", "/_opendistro/_security/saml/acs/idpinitiated"]
+      opensearch_security.session.keepalive: false
 
 #. Restart the Wazuh dashboard service.
 

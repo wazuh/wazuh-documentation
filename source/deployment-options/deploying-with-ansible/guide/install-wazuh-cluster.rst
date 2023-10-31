@@ -250,27 +250,14 @@ Let’s see below, the content of the YAML file ``/etc/ansible/roles/wazuh-ansib
                  - "{{ hostvars.wi2.private_ip }}"
                  - "{{ hostvars.wi3.private_ip }}"
 
-   # Indexer + dashboard node
+   # Wazuh dashboard node
      - hosts: dashboard
        roles:
-         - role: "../roles/wazuh/wazuh-indexer"
          - role: "../roles/wazuh/wazuh-dashboard"
        become: yes
        become_user: root
        vars:
-         indexer_network_host: "{{ hostvars.dashboard.private_ip }}"
-         indexer_node_name: node-6
-         indexer_node_master: false
-         indexer_node_ingest: false
-         indexer_node_data: false
-         indexer_cluster_nodes:
-             - "{{ hostvars.wi1.private_ip }}"
-             - "{{ hostvars.wi2.private_ip }}"
-             - "{{ hostvars.wi3.private_ip }}"
-         indexer_discovery_nodes:
-             - "{{ hostvars.wi1.private_ip }}"
-             - "{{ hostvars.wi2.private_ip }}"
-             - "{{ hostvars.wi3.private_ip }}"
+         indexer_network_host: "{{ hostvars.wi1.private_ip }}"
          dashboard_node_name: node-6
          wazuh_api_credentials:
            - id: default
@@ -278,33 +265,6 @@ Let’s see below, the content of the YAML file ``/etc/ansible/roles/wazuh-ansib
              port: 55000
              username: custom-user
              password: SecretPassword1!
-         instances:
-           node1:
-             name: node-1
-             ip: "{{ hostvars.wi1.private_ip }}"   # When unzipping, the node will search for its node name folder to get the cert.
-             role: indexer
-           node2:
-             name: node-2
-             ip: "{{ hostvars.wi2.private_ip }}"
-             role: indexer
-           node3:
-             name: node-3
-             ip: "{{ hostvars.wi3.private_ip }}"
-             role: indexer
-           node4:
-             name: node-4
-             ip: "{{ hostvars.manager.private_ip }}"
-             role: wazuh
-             node_type: master
-           node5:
-             name: node-5
-             ip: "{{ hostvars.worker.private_ip }}"
-             role: wazuh
-             node_type: worker
-           node6:
-             name: node-6
-             ip: "{{ hostvars.dashboard.private_ip }}"
-             role: dashboard
          ansible_shell_allow_world_readable_temp: true
 
 Let’s take a closer look at the content.
@@ -320,7 +280,7 @@ More details on  default configuration variables can be found in the :doc:`varia
 2 - Preparing to run the playbook
 ---------------------------------
 
-The YAML file wazuh-production-ready.yml will provision a production-ready distributed Wazuh environment. We will add the public and private IP addresses of the endpoints where the various components of the cluster will be installed to the Ansible hosts file. For this guide, the architecture includes 2 Wazuh nodes, 3 Wazuh indexer nodes, and a mixed Wazuh dashboard node.
+The YAML file wazuh-production-ready.yml will provision a production-ready distributed Wazuh environment. We will add the public and private IP addresses of the endpoints where the various components of the cluster will be installed to the Ansible hosts file. For this guide, the architecture includes 2 Wazuh nodes, 3 Wazuh indexer nodes, and a Wazuh dashboard node.
 
 The contents of the host file is:
 
