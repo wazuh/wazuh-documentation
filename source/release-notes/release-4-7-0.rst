@@ -15,7 +15,7 @@ This version includes new features or improvements, such as the following:
 
 Manager
 ^^^^^^^
-- `#18026 <https://github.com/wazuh/wazuh/pull/18026>`__ Introduced a native Maltiverse integration.
+- `#18026 <https://github.com/wazuh/wazuh/pull/18026>`__ Introduced a native Maltiverse integration. Thanks to David Gil (`@dgilm <https://github.com/dgilm>`__).
 - `#16513 <https://github.com/wazuh/wazuh/pull/16513>`__ Added a file detailing the dependencies for the Wazuh RESTful API and wodles tests.
 - `#15985 <https://github.com/wazuh/wazuh/pull/15985>`__ Added unit tests for the Syscollector legacy decoder.
 - `#15999 <https://github.com/wazuh/wazuh/pull/15999>`__ Added unit tests for the ``manage_agents`` tool.
@@ -47,6 +47,11 @@ Wazuh dashboard
 - `#5748 <https://github.com/wazuh/wazuh-dashboard-plugins/pull/5748>`__ Updated development dependencies: ``@typescript-eslint/eslint-plugin, @typescript-eslint/parser, eslint, swagger-client``.
 - `#5707 <https://github.com/wazuh/wazuh-dashboard-plugins/pull/5707>`__ Changed Timelion-type displays in the **Management > Statistics** section to line-type displays.
 - `#5747 <https://github.com/wazuh/wazuh-dashboard-plugins/pull/5747>`__ Removed views in JSON and XML formats from the **Management** settings.
+
+RESTful API
+^^^^^^^^^^^
+
+- `#19726 <https://github.com/wazuh/wazuh/pull/19726>`__ Added new ``status_code`` field to ``GET /agents`` response.
 
 Resolved issues
 ---------------
