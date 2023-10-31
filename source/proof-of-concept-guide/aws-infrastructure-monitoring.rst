@@ -78,7 +78,7 @@ You can also find additional :ref:`CloudTrail use cases <cloudtrail-use-cases>` 
 Visualize the alerts
 --------------------
 
-You can visualize the alert data in the Wazuh dashboard. To do this, navigate through **AWS** module.
+You can visualize the alert data in the Wazuh dashboard. To do this, navigate through **AWS** application.
 
 .. thumbnail:: /images/poc/AWS-alerts.png
    :title: Visualize Amazon AWS alerts 

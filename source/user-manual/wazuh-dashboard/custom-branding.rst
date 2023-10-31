@@ -20,8 +20,6 @@ To use your own logos in the Wazuh dashboard, click on the `App main logo` and g
 
 -  ``customization.logo.healthcheck``. This property sets the `Health check logo` image. It has a size limit of 1 MB. It replaces the logo on top of the check list displayed during the health check routine. Recommended size: 300 pixels width, 70 pixels height. See #2 in the image below.
 
--  ``customization.logo.sidebar``. This property sets the `Navigation drawer logo` image. It has a size limit of 1 MB. It replaces the left navigation menu logo image. Recommended size: 80 pixels width, 80 pixels height. See #3 in the image below.
-
 .. thumbnail:: /images/kibana-app/features/white-labeling/custom-branding-settings.jpg
    :align: center
    :width: 80%
@@ -76,19 +74,6 @@ The following settings correspond to the custom branding feature. Edit them usin
 
     This is the image to be used as the health check logo.
     It is saved as ``/usr/share/wazuh-dashboard/plugins/wazuh/public/assets/custom/images/customization.logo.healthcheck.<format>``.
-
-    +--------------------+----------------------------+
-    | Allowed format     | jpeg, jpg, png, svg        |
-    +--------------------+----------------------------+
-    | Default value      | ''                         |
-    +--------------------+----------------------------+
-    | Maximum file size  | 1 MB                       |
-    +--------------------+----------------------------+
-
-**customization.logo.sidebar**
-
-    This is the image to be used as the sidebar logo.
-    It is saved as ``/usr/share/wazuh-dashboard/plugins/wazuh/public/assets/custom/images/customization.logo.sidebar.<format>``.
 
     +--------------------+----------------------------+
     | Allowed format     | jpeg, jpg, png, svg        |
