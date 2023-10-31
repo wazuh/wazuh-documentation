@@ -315,19 +315,6 @@ Define the number of replicas to use for the ``wazuh-monitoring-*`` indices.
 | **Allowed values** | Any number starting from 0 |
 +--------------------+----------------------------+
 
-Unauthorized roles
-------------------
-
-disabled_roles
-^^^^^^^^^^^^^^
-
-Disable Wazuh for the Elasticsearch / OpenSearch roles defined here.
-
-.. code-block:: yaml
-
-    disabled_roles: 
-        - wazuh_disabled
-
 Sample alerts
 -------------
 
@@ -603,11 +590,6 @@ This is an example of the wazuh.yml configuration:
     customization.logo.reports: 'custom/images/customization.logo.reports.jpg'
     customization.reports.footer: '123 Custom footer Ave.\nSan Jose, CA 95148'
     customization.reports.header: 'Custom Company\ninfo@custom.com\n@social_reference'
-
-    #Unauthorized roles
-
-    disabled_roles: 
-        - wazuh_disabled
 
     #Sample alerts
 
