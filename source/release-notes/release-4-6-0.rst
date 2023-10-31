@@ -36,6 +36,7 @@ Wazuh manager
 - `#16343 <https://github.com/wazuh/wazuh/pull/16343>`__ Added support for Alma Linux in Vulnerability Detector.
 - `#18542 <https://github.com/wazuh/wazuh/pull/18542>`__ Added support for Debian 12 in Vulnerability Detector.
 - `#14953 <https://github.com/wazuh/wazuh/pull/14953>`__ Added mechanism in ``wazuh-db`` to identify fragmentation and perform vacuum.
+- `#19956 <https://github.com/wazuh/wazuh/pull/19956>`__ Adjusted the default settings for ``wazuh-db`` to perform database auto-vacuum more often.
 - `#18333 <https://github.com/wazuh/wazuh/pull/18333>`__ Added an option to set whether the manager should ban newer agents.
 - `#15661 <https://github.com/wazuh/wazuh/pull/15661>`__ Added mechanism to prevent Wazuh agents connections to lower manager versions.
 - `#14659 <https://github.com/wazuh/wazuh/pull/14659>`__ ``wazuh-remoted`` now checks the size of the files to avoid malformed ``merged.mg``.
