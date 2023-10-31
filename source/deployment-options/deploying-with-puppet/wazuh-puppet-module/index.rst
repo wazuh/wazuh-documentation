@@ -154,10 +154,6 @@ In case it is necessary to add any ``Wazuh manager worker`` server, it is necess
       class { 'wazuh::repo':
       stage => repo,
       }
-      class { "wazuh::agent":
-          wazuh_register_endpoint => "$masterhost",
-          wazuh_reporting_endpoint => "$masterhost"
-      }
       }
       node "puppet-wazuh-indexer-node1" {
       class { 'wazuh::repo':
@@ -175,10 +171,6 @@ In case it is necessary to add any ``Wazuh manager worker`` server, it is necess
       class { 'wazuh::securityadmin':
       stage => securityadmin,
       }
-      class { "wazuh::agent":
-          wazuh_register_endpoint => "$masterhost",
-          wazuh_reporting_endpoint => "$masterhost"
-      }
       }
       node "puppet-wazuh-indexer-node2" {
       class { 'wazuh::repo':
@@ -193,10 +185,6 @@ In case it is necessary to add any ``Wazuh manager worker`` server, it is necess
         indexer_cluster_CN => $indexer_cluster_CN,
         stage => indexerdeploy,
       }
-      class { "wazuh::agent":
-          wazuh_register_endpoint => "$masterhost",
-          wazuh_reporting_endpoint => "$masterhost"
-      }
       }
       node "puppet-wazuh-indexer-node3" {
       class { 'wazuh::repo':
@@ -210,10 +198,6 @@ In case it is necessary to add any ``Wazuh manager worker`` server, it is necess
         indexer_cluster_initial_master_nodes => $indexer_cluster_initial_master_nodes,
         indexer_cluster_CN => $indexer_cluster_CN,
         stage => indexerdeploy,
-      }
-      class { "wazuh::agent":
-          wazuh_register_endpoint => "$masterhost",
-          wazuh_reporting_endpoint => "$masterhost"
       }
       }
       node "puppet-wazuh-manager-master" {
@@ -258,10 +242,6 @@ In case it is necessary to add any ``Wazuh manager worker`` server, it is necess
         indexer_server_ip  => "$node1host",
         manager_api_host   => "$masterhost",
         stage => dashboard,
-      }
-      class { "wazuh::agent":
-          wazuh_register_endpoint => "$masterhost",
-          wazuh_reporting_endpoint => "$masterhost"
       }
       }
 Place the file at ``/etc/puppetlabs/code/environments/production/manifests/`` in your Puppet master and it will be executed in the specified node after the ``runinterval`` time set in ``puppet.conf``. However, if you want to run the manifest immediately on a specific node, run the following command on the node:
