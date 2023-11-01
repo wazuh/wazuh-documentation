@@ -49,6 +49,7 @@ Options
 - `agents_disconnection_time`_
 - `agents_disconnection_alert_time`_
 - `limits`_
+- `update_check`_
 
 alerts_log
 ^^^^^^^^^^
@@ -259,7 +260,7 @@ This sets the memory size for the event correlation engine.
 |                    | 2048 will be replaced by 2048.    |
 +--------------------+-----------------------------------+
 
-.. _white_list: 
+.. _white_list:
 
 white_list
 ^^^^^^^^^^
@@ -540,6 +541,20 @@ A positive number expressed in seconds that indicates the time period where the 
 | **Allowed values** | A positive number between 1 and 3600|
 +--------------------+-------------------------------------+
 
+.. _reference_update_check:
+
+update_check
+^^^^^^^^^^^^
+
+This setting toggles whether to query the external Wazuh Cyber Threat Intelligence (CTI) service for any available Wazuh updates.
+
++--------------------+---------+
+| **Default value**  | yes     |
++--------------------+---------+
+| **Allowed values** | yes, no |
++--------------------+---------+
+
+
 Configuration example
 ---------------------
 
@@ -558,4 +573,5 @@ Configuration example
      <email_log_source>alerts.log</email_log_source>
      <agents_disconnection_time>10m</agents_disconnection_time>
      <agents_disconnection_alert_time>0</agents_disconnection_alert_time>
+     <update_check>yes</update_check>
    </global>

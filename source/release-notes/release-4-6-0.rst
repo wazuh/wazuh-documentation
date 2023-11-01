@@ -3,8 +3,8 @@
 .. meta::
   :description: Wazuh 4.6.0 has been released. Check out our release notes to discover the changes and additions of this release.
 
-4.6.0 Release notes - TBD
-=========================
+4.6.0 Release notes - 31 October 2023
+=====================================
 
 This section lists the changes in version 4.6.0. Every update of the Wazuh solution is cumulative and includes all enhancements and fixes from previous releases.
 
@@ -36,6 +36,7 @@ Wazuh manager
 - `#16343 <https://github.com/wazuh/wazuh/pull/16343>`__ Added support for Alma Linux in Vulnerability Detector.
 - `#18542 <https://github.com/wazuh/wazuh/pull/18542>`__ Added support for Debian 12 in Vulnerability Detector.
 - `#14953 <https://github.com/wazuh/wazuh/pull/14953>`__ Added mechanism in ``wazuh-db`` to identify fragmentation and perform vacuum.
+- `#19956 <https://github.com/wazuh/wazuh/pull/19956>`__ Adjusted the default settings for ``wazuh-db`` to perform database auto-vacuum more often.
 - `#18333 <https://github.com/wazuh/wazuh/pull/18333>`__ Added an option to set whether the manager should ban newer agents.
 - `#15661 <https://github.com/wazuh/wazuh/pull/15661>`__ Added mechanism to prevent Wazuh agents connections to lower manager versions.
 - `#14659 <https://github.com/wazuh/wazuh/pull/14659>`__ ``wazuh-remoted`` now checks the size of the files to avoid malformed ``merged.mg``.
@@ -48,6 +49,7 @@ Wazuh manager
 - `#13065 <https://github.com/wazuh/wazuh/pull/13065>`__ Refactored methods responsible for file synchronization within the cluster.
 - `#16065 <https://github.com/wazuh/wazuh/pull/16065>`__ Changed schema constraints for ``sys_hwinfo`` table.
 - `#15709 <https://github.com/wazuh/wazuh/pull/15709>`__ The Auth process does not start when the registration password is empty.
+- `#19400 <https://github.com/wazuh/wazuh/pull/19400>`__ Changed the message type for ``GetSecurityInfo`` from error to debug.
 
 Agent
 ^^^^^
@@ -58,7 +60,7 @@ Agent
 - `#13573 <https://github.com/wazuh/wazuh/pull/13573>`__ Added new unit tests for GCloud integration and increased coverage to 99%.
 - `#14104 <https://github.com/wazuh/wazuh/pull/14104>`__ Added new unit tests for Azure Storage integration and increased coverage to 99%.
 - `#14177 <https://github.com/wazuh/wazuh/pull/14177>`__ Added new unit tests for Docker Listener integration.
-- `#18116 <https://github.com/wazuh/wazuh/pull/18116>`__ Added support for Microsoft Graph security API.
+- `#18116 <https://github.com/wazuh/wazuh/pull/18116>`__ Added support for Microsoft Graph security API. Thanks to Bryce Shurts (`@S-Bryce <https://github.com/S-Bryce>`__).
 - `#15852 <https://github.com/wazuh/wazuh/pull/15852>`__ Added wildcard support in FIM Windows registers.
 - `#15973 <https://github.com/wazuh/wazuh/pull/15973>`__ Added wildcards support for folders in the localfile configuration on Windows.
 - `#14782 <https://github.com/wazuh/wazuh/pull/14782>`__ Added new settings ``ignore`` and ``restrict`` to logcollector.
@@ -84,7 +86,8 @@ Agent
 - `#14684 <https://github.com/wazuh/wazuh/pull/14684>`__ Removed unused migration functionality from the AWS integration.
 - `#17655 <https://github.com/wazuh/wazuh/pull/17655>`__ Deleted definitions of repeated classes in the AWS integration.
 - `#15031 <https://github.com/wazuh/wazuh/pull/15031>`__ Removed duplicate methods in ``AWSBucket`` and reuse inherited ones from ``WazuhIntegration``.
-- `#16547 <https://github.com/wazuh/wazuh/pull/16547>`__ Added support for Office365 MS/Azure Government Community Cloud (GCC) and Government Community Cloud High (GCCH) API.
+- `#16547 <https://github.com/wazuh/wazuh/pull/16547>`__ Added support for Office365 MS/Azure Government Community Cloud (GCC) and Government Community Cloud High (GCCH) API. Thanks to Bryce Shurts (`@S-Bryce <https://github.com/S-Bryce>`__).
+- `#19758 <https://github.com/wazuh/wazuh/pull/19758>`__ Reduced the default FIM event throughput to ``50`` EPS.
 
 RESTful API
 ^^^^^^^^^^^
@@ -191,6 +194,7 @@ Reference                                                          Description
 `#15719 <https://github.com/wazuh/wazuh/pull/15719>`__             Fixed rootcheck scan trying to read deleted files.
 `#15739 <https://github.com/wazuh/wazuh/pull/15739>`__             Fixed compilation and build in Gentoo.
 `#19375 <https://github.com/wazuh/wazuh/pull/19375>`__             Fixed a crash when FIM scanned long Windows paths.
+`#19378 <https://github.com/wazuh/wazuh/pull/19378>`__             Fixed FIM who-data support for AArch64 platforms.
 ==============================================================     =============
 
 RESTful API
