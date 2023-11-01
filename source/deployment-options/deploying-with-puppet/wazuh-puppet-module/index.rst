@@ -65,7 +65,7 @@ Create a stack.pp file at ``/etc/puppetlabs/code/environments/production/manifes
       Exec {
       timeout => 0,
       }
-      node "puppet-master-node" {
+      node "puppet-server" {
       class { 'wazuh::certificates':
         indexer_certs => [['node-1','127.0.0.1']],
         manager_certs => [['master','127.0.0.1']],
@@ -73,7 +73,7 @@ Create a stack.pp file at ``/etc/puppetlabs/code/environments/production/manifes
         stage => certificates,
       }
       }
-      node "puppet-agent-node" {
+      node "puppet-aio-node" {
       class { 'wazuh::repo':
       stage => repo,
       }
@@ -138,8 +138,7 @@ In case it is necessary to add any ``Wazuh manager worker`` server, it is necess
       stage { 'securityadmin': }
       stage { 'dashboard': }
       stage { 'manager': }
-      stage { 'agent': }
-      Stage[certificates] -> Stage[repo] -> Stage[indexerdeploy] -> Stage[securityadmin] -> Stage[manager] -> Stage[dashboard] -> Stage[agent]
+      Stage[certificates] -> Stage[repo] -> Stage[indexerdeploy] -> Stage[securityadmin] -> Stage[manager] -> Stage[dashboard]
       Exec {
       timeout => 0,
       }
@@ -149,15 +148,15 @@ In case it is necessary to add any ``Wazuh manager worker`` server, it is necess
         manager_master_certs => [['master',"$masterhost"]],
         manager_worker_certs => [['worker',"$workerhost"]],
         dashboard_certs => ["$dashboardhost"],
-        stage => certificates,
+        stage => certificates
       }
       class { 'wazuh::repo':
-      stage => repo,
+      stage => repo
       }
       }
       node "puppet-wazuh-indexer-node1" {
       class { 'wazuh::repo':
-      stage => repo,
+      stage => repo
       }
       class { 'wazuh::indexer':
         indexer_node_name => "$indexer_node1_name",
@@ -166,15 +165,15 @@ In case it is necessary to add any ``Wazuh manager worker`` server, it is necess
         indexer_discovery_hosts => $indexer_discovery_hosts,
         indexer_cluster_initial_master_nodes => $indexer_cluster_initial_master_nodes,
         indexer_cluster_CN => $indexer_cluster_CN,
-        stage => indexerdeploy,
+        stage => indexerdeploy
       }
       class { 'wazuh::securityadmin':
-      stage => securityadmin,
+      stage => securityadmin
       }
       }
       node "puppet-wazuh-indexer-node2" {
       class { 'wazuh::repo':
-      stage => repo,
+      stage => repo
       }
       class { 'wazuh::indexer':
         indexer_node_name => "$indexer_node2_name",
@@ -183,12 +182,12 @@ In case it is necessary to add any ``Wazuh manager worker`` server, it is necess
         indexer_discovery_hosts => $indexer_discovery_hosts,
         indexer_cluster_initial_master_nodes => $indexer_cluster_initial_master_nodes,
         indexer_cluster_CN => $indexer_cluster_CN,
-        stage => indexerdeploy,
+        stage => indexerdeploy
       }
       }
       node "puppet-wazuh-indexer-node3" {
       class { 'wazuh::repo':
-      stage => repo,
+      stage => repo
       }
       class { 'wazuh::indexer':
         indexer_node_name => "$indexer_node3_name",
@@ -197,12 +196,12 @@ In case it is necessary to add any ``Wazuh manager worker`` server, it is necess
         indexer_discovery_hosts => $indexer_discovery_hosts,
         indexer_cluster_initial_master_nodes => $indexer_cluster_initial_master_nodes,
         indexer_cluster_CN => $indexer_cluster_CN,
-        stage => indexerdeploy,
+        stage => indexerdeploy
       }
       }
       node "puppet-wazuh-manager-master" {
       class { 'wazuh::repo':
-      stage => repo,
+      stage => repo
       }
       class { 'wazuh::manager':
         ossec_cluster_name => 'wazuh-cluster',
@@ -212,16 +211,16 @@ In case it is necessary to add any ``Wazuh manager worker`` server, it is necess
         ossec_cluster_bind_addr => "$masterhost",
         ossec_cluster_nodes => ["$masterhost"],
         ossec_cluster_disabled => 'no',
-        stage => manager,
+        stage => manager
       }
       class { 'wazuh::filebeat_oss':
         filebeat_oss_indexer_ip => "$node1host",
-        stage => manager,
+        stage => manager
       }
       }
       node "puppet-wazuh-manager-worker" {
       class { 'wazuh::repo':
-      stage => repo,
+      stage => repo
       }
       class { 'wazuh::manager':
         ossec_cluster_name => 'wazuh-cluster',
@@ -231,7 +230,7 @@ In case it is necessary to add any ``Wazuh manager worker`` server, it is necess
         ossec_cluster_bind_addr => "$masterhost",
         ossec_cluster_nodes => ["$masterhost"],
         ossec_cluster_disabled => 'no',
-        stage => manager,
+        stage => manager
       }
       }
       node "puppet-wazuh-dashboard" {
@@ -241,7 +240,7 @@ In case it is necessary to add any ``Wazuh manager worker`` server, it is necess
       class { 'wazuh::dashboard':
         indexer_server_ip  => "$node1host",
         manager_api_host   => "$masterhost",
-        stage => dashboard,
+        stage => dashboard
       }
       }
 Place the file at ``/etc/puppetlabs/code/environments/production/manifests/`` in your Puppet master and it will be executed in the specified node after the ``runinterval`` time set in ``puppet.conf``. However, if you want to run the manifest immediately on a specific node, run the following command on the node:
