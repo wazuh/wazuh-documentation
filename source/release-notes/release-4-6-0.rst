@@ -21,6 +21,10 @@ Highlights
 
 - Included PCRE2 support in Security Configuration Assessment (SCA). This addition provides users with a more powerful pattern-matching tool. It enhances the software auditing and compliance capabilities
 
+Breaking changes
+----------------
+
+-  The integration methods for Splunk, OpenSearch, and Elastic Stack have been changed. Please refer to the :doc:`Integrations guide </integrations-guide/index>` to learn more.
 
 What's new
 ----------
