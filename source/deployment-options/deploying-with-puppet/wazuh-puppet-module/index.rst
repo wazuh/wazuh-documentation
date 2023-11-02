@@ -61,7 +61,7 @@ Create a stack.pp file at ``/etc/puppetlabs/code/environments/production/manifes
       stage { 'securityadmin': }
       stage { 'dashboard': }
       stage { 'manager': }
-      Stage[certificates] -> Stage[repo] -> Stage[indexerdeploy] -> Stage[securityadmin] -> Stage[manager] -> Stage[dashboard]
+      Stage[certificates] -> Stage[repo] -> Stage[indexerdeploy] -> Stage[securityadmin] -> Stage{rollover} -> Stage[manager] -> Stage[dashboard]
       Exec {
       timeout => 0,
       }
@@ -79,6 +79,12 @@ Create a stack.pp file at ``/etc/puppetlabs/code/environments/production/manifes
       }
       class { 'wazuh::indexer':
         stage => indexerdeploy,
+      }
+      class { 'wazuh::securityadmin':
+      stage => securityadmin
+      }
+      class { 'wazuh::ism_rollover':
+      stage => rollover
       }
       class { 'wazuh::manager':
         stage => manager,
@@ -138,7 +144,7 @@ In case it is necessary to add any ``Wazuh manager worker`` server, it is necess
       stage { 'securityadmin': }
       stage { 'dashboard': }
       stage { 'manager': }
-      Stage[certificates] -> Stage[repo] -> Stage[indexerdeploy] -> Stage[securityadmin] -> Stage[manager] -> Stage[dashboard]
+      Stage[certificates] -> Stage[repo] -> Stage[indexerdeploy] -> Stage[securityadmin] -> Stage{rollover} -> Stage[manager] -> Stage[dashboard]
       Exec {
       timeout => 0,
       }
@@ -169,6 +175,9 @@ In case it is necessary to add any ``Wazuh manager worker`` server, it is necess
       }
       class { 'wazuh::securityadmin':
       stage => securityadmin
+      }
+      class { 'wazuh::ism_rollover':
+      stage => rollover
       }
       }
       node "puppet-wazuh-indexer-node2" {
