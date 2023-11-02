@@ -169,6 +169,11 @@ Repeat this stage of the installation process for every Wazuh indexer node in yo
 
     <div class="accordion-section open">
 
+#. Run the Wazuh indexer ``indexer-rollover-init.sh`` script on `any` Wazuh indexer node to load the rollover ISM policy. 
+    
+   .. code-block:: console
+
+      # /usr/share/wazuh-indexer/bin/indexer-rollover-init.sh
 
 #. Run the Wazuh indexer ``indexer-security-init.sh`` script on `any` Wazuh indexer node to load the new certificates information and start the single-node or multi-node cluster. 
     

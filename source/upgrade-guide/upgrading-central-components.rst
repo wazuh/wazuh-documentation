@@ -146,6 +146,18 @@ In the case of having a Wazuh indexer cluster with multiple nodes, the cluster w
 
       # curl -k -u <username>:<password> https://<WAZUH_INDEXER_IP>:9200/_cat/nodes?v
 
+
+Loading the rollover policy
+^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+.. note:: This step is only required for Wazuh indexer installations upgraded to 4.8.0. More information can be found in :doc:`/user-manual/wazuh-indexer/index-life-management`.
+
+#. Run the Wazuh indexer ``indexer-rollover-init.sh`` script on `any` Wazuh indexer node to load the rollover ISM policy. 
+    
+   .. code-block:: console
+
+      # /usr/share/wazuh-indexer/bin/indexer-rollover-init.sh
+
 .. _upgrading_wazuh_server:
 
 Upgrading the Wazuh server
