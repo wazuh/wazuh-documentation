@@ -66,6 +66,8 @@ Reference                                                         Description
 ==============================================================    =============
 `#16683 <https://github.com/wazuh/wazuh/pull/16683>`__            Fixed an unexpected cluster error when a worker gets restarted.
 `#16681 <https://github.com/wazuh/wazuh/pull/16681>`__            Fixed an issue that let the manager validate wrong XML configurations.
+`#19869 <https://github.com/wazuh/wazuh/pull/19869>`__            Fixed default value for multiarch field in syscollector packages.
+`#19811 <https://github.com/wazuh/wazuh/pull/19811>`__            Improved reliability of the signature verification mechanism.
 ==============================================================    =============
 
 Agent
