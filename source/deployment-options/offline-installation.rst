@@ -148,17 +148,11 @@ Installing the Wazuh indexer
 
 #. For multi-node clusters, repeat the previous steps on every Wazuh indexer node. 
 
-#. When all Wazuh indexer nodes are running, run the Wazuh indexer ``indexer-rollover-init.sh`` script on `any Wazuh indexer node` to load the rollover ISM policy. 
+#. When all Wazuh indexer nodes are running, run the Wazuh indexer ``indexer-init.sh`` script on `any Wazuh indexer node` to initialize the cluster. 
 
     .. code-block:: console
 
-        # /usr/share/wazuh-indexer/bin/indexer-rollover-init.sh
-
-#. When all Wazuh indexer nodes are running, run the Wazuh indexer ``indexer-security-init.sh`` script on `any Wazuh indexer node` to load the new certificates information and start the cluster. 
-
-    .. code-block:: console
-
-        # /usr/share/wazuh-indexer/bin/indexer-security-init.sh
+        # /usr/share/wazuh-indexer/bin/indexer-init.sh
   
 #. Run the following command to check that the installation is successful. Note that this command uses localhost, set your Wazuh indexer address if necessary. 
 
