@@ -35,9 +35,11 @@ The **xml labels** used to configure ``rules`` are listed here.
 | :ref:`rules_field`      | Name and any :doc:`regular expression <regex>`.               | It will compare a field extracted by the decoder in :ref:`order <decoders_order>` with a             |
 |                         |                                                               | regular expression.                                                                                  |
 +-------------------------+---------------------------------------------------------------+------------------------------------------------------------------------------------------------------+
-| `srcip`_                | Any IP address.                                               | It will compare the IP address with the IP decoded as ``srcip``. Use "!" to negate it.               |
+| `srcip`_                | Any IP address.                                               | It will compare the IP address with the IP decoded as ``srcip``. Use option negate="yes" to negate   |
+|                         |                                                               | it.                                                                                                  |
 +-------------------------+---------------------------------------------------------------+------------------------------------------------------------------------------------------------------+
-| `dstip`_                | Any IP address.                                               | It will compare the IP address with the IP decoded as ``dstip``. Use "!" to negate it.               |
+| `dstip`_                | Any IP address.                                               | It will compare the IP address with the IP decoded as ``dstip``. Use option negate="yes" to negate   |
+|                         |                                                               | it.                                                                                                  |
 +-------------------------+---------------------------------------------------------------+------------------------------------------------------------------------------------------------------+
 | :ref:`rules_srcport`    | Any :doc:`regular expression <regex>`.                        | It will compare a regular expression representing a port with a value decoded as ``srcport``.        |
 +-------------------------+---------------------------------------------------------------+------------------------------------------------------------------------------------------------------+
@@ -490,7 +492,7 @@ Example:
 
       <rule id="100110" level="5">
           <if_sid>100100</if_sid>
-          <dstip>!198.168.41.30</dstip>
+          <dstip negate="yes">198.168.41.30</dstip>
           <description>A different dstip has been detected.</description>
       </rule>
 
