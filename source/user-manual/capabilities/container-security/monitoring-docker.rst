@@ -61,7 +61,7 @@ Perform the following steps on the Docker server to configure the Wazuh agent to
    .. code-block:: console
 
       # systemctl restart wazuh-agent
-   
+
 Wazuh Docker listener dashboard
 -------------------------------
 
