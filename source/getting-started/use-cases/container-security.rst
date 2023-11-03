@@ -25,7 +25,7 @@ Organizations can enhance the security of their containerized applications by mo
 Monitoring the container engine 
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-Wazuh captures real-time events performed by the Docker engine via its :doc:`Docker listener </user-manual/capabilities/container-security/monitoring-docker>` module. This ensures that no crucial Docker event or operation goes undetected.
+Wazuh captures real-time events performed by the Docker engine via its :doc:`Docker </user-manual/capabilities/container-security/monitoring-docker>` module. This ensures that no crucial Docker event or operation goes undetected.
 
 :ref:`monitoring_user_interaction_with_docker_resources` demonstrates how Wazuh enhances visibility into the interactions of the container engine with the containers and the images.
 
