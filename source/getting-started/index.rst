@@ -53,8 +53,8 @@ Screenshots
           :title: Vulnerability detection  
           :alt: Vulnerability detection  
      - .. thumbnail:: ../images/getting-started/security-configuration-assessment.png
-          :title: Security configuration assessment   
-          :alt: Security configuration assessment   
+          :title: Configuration assessment   
+          :alt: Configuration assessment   
    * - .. thumbnail:: ../images/getting-started/incident-response.png
           :title: Incident response 
           :alt: Incident response 

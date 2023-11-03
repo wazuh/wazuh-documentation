@@ -1,11 +1,11 @@
 .. Copyright (C) 2015, Wazuh, Inc.
 
 .. meta::
-  :description: Learn more about the configuration of the Security Configuration Assessment module. Check out the options and a sample configuration in this section.
+  :description: Learn more about the configuration of the Configuration Assessment application. Check out the options and a sample configuration in this section.
   
 .. _reference_sec_config_assessment:
 
-sca
+Configuration assessment 
 ===
 
 This section covers the configuration for the :ref:`manual_sec_config_assessment` module.
@@ -17,7 +17,7 @@ This section covers the configuration for the :ref:`manual_sec_config_assessment
 		<sca>
 		</sca>
 
-Settings to run Security Configuration Assessment scans.
+Settings to run Configuration Assessment scans.
 
 Options
 -------

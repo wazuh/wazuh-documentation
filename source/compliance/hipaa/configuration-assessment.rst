@@ -6,7 +6,7 @@
 Configuration assessment
 ========================
 
-The Security Configuration Assessment (SCA) module performs scans to determine if monitored endpoints meet secure configuration and hardening policies. These scans assess the configuration of the endpoint using policy files that contain rules to be tested against the actual configuration of the endpoint.
+The Configuration Assessment application performs scans to determine if monitored endpoints meet secure configuration and hardening policies. These scans assess the configuration of the endpoint using policy files that contain rules to be tested against the actual configuration of the endpoint.
 
 The SCA module can help to implement the following HIPAA sections:
 

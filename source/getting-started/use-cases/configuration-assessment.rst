@@ -1,7 +1,7 @@
 .. Copyright (C) 2015, Wazuh, Inc.
 
 .. meta::
-   :description: Wazuh offers a Security Configuration Assessment module that assists security teams to scan and detect misconfigurations within their environment.
+   :description: Wazuh offers a Configuration Assessment application that assists security teams to scan and detect misconfigurations within their environment.
 
 Configuration assessment
 ========================
@@ -13,11 +13,11 @@ Regular configuration assessments are essential in maintaining a secure and comp
 Wazuh SCA module
 ----------------
 
-Wazuh offers a :doc:`Security Configuration Assessment (SCA) </user-manual/capabilities/sec-config-assessment/index>` module that assists security teams to scan and detect misconfigurations within their environment. The Wazuh agent uses policy files to scan endpoints that it monitors. These files contain predefined checks to be carried out on each monitored endpoint. 
+Wazuh offers a :doc:`Configuration Assessment </user-manual/capabilities/sec-config-assessment/index>` application that assists security teams to scan and detect misconfigurations within their environment. The Wazuh agent uses policy files to scan endpoints that it monitors. These files contain predefined checks to be carried out on each monitored endpoint. 
 
 Wazuh includes :doc:`SCA policies </user-manual/capabilities/sec-config-assessment/available-sca-policies>` out-of-the-box based on the Center for Internet Security (CIS) security benchmarks. These benchmarks serve as essential guidelines on best practices for protecting IT systems and data from cyberattacks. They provide clear instructions for establishing a secure baseline configuration and offer guidance to ensure that users implement effective measures to safeguard their critical assets and mitigate potential vulnerabilities. By adhering to these standards, you can enhance your overall security posture and mitigate the risk of cyber threats against your business. 
 
-Some other benefits of the Wazuh Security Configuration Assessment (SCA) module include:
+Some other benefits of the Wazuh Configuration Assessment application include:
 
 -  **Security posture management**: Wazuh SCA helps organizations ensure that their endpoints are configured securely. This minimizes vulnerabilities resulting from misconfigurations and reduces the risk of security breaches.
 -  **Compliance monitoring**: It allows organizations to assess and implement compliance with regulatory standards, best practices, and internal security policies.
@@ -73,11 +73,11 @@ The ``/tmp`` directory is used to store data that is needed for a short time by 
 Viewing SCA results
 -------------------
 
-The Wazuh dashboard has a **Security configuration assessment** module that allows you to view SCA scan results for each agent.
+The Wazuh dashboard has a **Configuration assessment** application that allows you to view SCA scan results for each agent.
 
 .. thumbnail:: /images/getting-started/use-cases/sca/sca-module.png
-   :title: SCA module
-   :alt: SCA module
+   :title: Configuration assessment application
+   :alt: Configuration assessment application
    :align: center
    :width: 80%
     

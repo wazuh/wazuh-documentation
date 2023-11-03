@@ -27,7 +27,7 @@ Generally, this file is reserved for debugging issues and for troubleshooting. *
 - `Remoted`_
 - `Syscheck`_
 - `Rootcheck`_
-- `Security Configuration Assessment`_
+- `Configuration Assessment`_
 - `Wazuh`_
 - `Wazuh Clusterd`_
 - `Wazuh Database`_
@@ -968,7 +968,7 @@ Rootcheck
 |                          | Allowed values | Any integer between 0 and 1000.                                               |
 +--------------------------+----------------+-------------------------------------------------------------------------------+
 
-Security Configuration Assessment
+Configuration Assessment
 ---------------------------------
 
 +-----------------------------------+----------------+------------------------------------------------------------------------------------------------------------------+

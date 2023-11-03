@@ -13,7 +13,7 @@ Adhering to regulatory requirements constitutes a crucial component within an or
 Wazuh provides several :doc:`capabilities </user-manual/capabilities/index>` for implementing  compliance, including:
 
 -  File Integrity Monitoring (FIM).
--  Security Configuration Assessment (SCA).
+-  Configuration Assessment.
 -  Vulnerability detection.
 -  Malware detection.
 -  Incidence response.

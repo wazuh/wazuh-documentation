@@ -14,14 +14,14 @@ This principle is a crucial part of the overall control metrics of an organizati
 
 The use case below shows how Wazuh assists in meeting this requirement.
 
-Use case: Security Configuration Assessment of a monitored endpoint
+Use case: Configuration Assessment of a monitored endpoint
 -------------------------------------------------------------------
 
-Wazuh helps meet this aspect of the *COSO Principle 10 CC5.1 control activities* requirement by providing several modules. One of these modules is the Security Configuration Assessment (SCA) module. This module allows a user to scan system components and configurations to detect misconfigurations that could lead to security issues. The Wazuh SCA module is an example of a detective control for proactively identifying misconfiguration issues for timely remediation.
+Wazuh helps meet this aspect of the *COSO Principle 10 CC5.1 control activities* requirement by providing several modules. One of these applications is the Configuration Assessment application. This application allows a user to scan system components and configurations to detect misconfigurations that could lead to security issues. The Wazuh Configuration assessment application is an example of a detective control for proactively identifying misconfiguration issues for timely remediation.
 
 In this case, we use the SCA module to evaluate a monitored Windows 10 endpoint against the CIS Benchmark for Windows 10. By monitoring and detecting security configuration issues, you can quickly identify and remediate potential security risks, ensuring the security and compliance of your systems. You can track these events and actions on the Wazuh dashboard:
 
-#. Navigate to the **Security Configuration Assessment** module from the Wazuh dashboard. Select the monitored Windows 10 endpoint.
+#. Navigate to the **Configuration Assessment** application from the Wazuh dashboard. Select the monitored Windows 10 endpoint.
 
 You can see the result of the assessment of the monitored endpoint.
 

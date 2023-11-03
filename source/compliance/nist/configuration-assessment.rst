@@ -3,10 +3,10 @@
 .. meta::
   :description: The SCA module performs scans to determine if monitored endpoints meet secure configuration and hardening policies. Learn more about it in this section.
 
-Security configuration assessment
+Configuration assessment
 =================================
 
-The Wazuh Security Configuration Assessment (SCA) module performs scans to determine if monitored endpoints meet secure configuration and hardening policies. These scans assess the endpoint configuration using policy files. These policy files contain rules that serve as a benchmark for the configurations that exist on the monitored endpoint.
+The Wazuh Configuration Assessment application performs scans to determine if monitored endpoints meet secure configuration and hardening policies. These scans assess the endpoint configuration using policy files. These policy files contain rules that serve as a benchmark for the configurations that exist on the monitored endpoint.
 
 The Wazuh :doc:`SCA </user-manual/capabilities/sec-config-assessment/how-it-works>` helps to comply with the following NIST 800-53 controls:
 
@@ -29,7 +29,7 @@ This use case shows how Wazuh helps meet the **CM-6 Configuration settings** req
 
       # systemctl restart wazuh-agent
 
-#. Select the **Security configuration assessment** module on your Wazuh dashboard. SCA scans are enabled by default so you don’t require further configuration actions.
+#. Select the **Configuration assessment** module on your Wazuh dashboard. SCA scans are enabled by default so you don’t require further configuration actions.
 
    .. thumbnail:: /images/compliance/nist/select-sca-module.png    
       :title: Select the SCA module

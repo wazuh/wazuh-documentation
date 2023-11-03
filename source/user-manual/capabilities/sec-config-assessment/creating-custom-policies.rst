@@ -1,9 +1,9 @@
 .. Copyright (C) 2015, Wazuh, Inc.
 
 .. meta::
-  :description: Learn more about how to create custom Security Configuration Assessment (SCA) policies in Wazuh and discover some examples. 
+  :description: Learn more about how to create custom Configuration Assessment policies in Wazuh and discover some examples. 
 
-Creating custom SCA policies
+Creating custom Configuration Assessment policies
 ============================
 
 You need to consider the following four sections when creating custom policy files, although not all of them are required.
@@ -30,7 +30,7 @@ An SCA policy looks like the following:
 .. code-block:: YAML
    :emphasize-lines: 10,18,27,31
 
-   # Security Configuration Assessment
+   # Configuration Assessment
    # Audit for UNIX systems
    # Copyright (C) 2015, Wazuh Inc.
    #
