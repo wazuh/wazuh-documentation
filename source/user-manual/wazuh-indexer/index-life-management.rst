@@ -49,17 +49,12 @@ By default, Wazuh uses an ISM policy to rotate the ``wazuh-alerts-*`` and ``wazu
 
 Customizing the rollover policy
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-.. NEEDS UPDATE TO INCLUDE NEW DESIGN: the indexer will configure the policy
+
+.. note::
+   
+   The rollover policy is added to the Wazuh indexer during its initialization. The installation assistant initializes the cluster automatically using the default values. In this case, you will need to customize the policy using one of the methods below. However, in a step-by-step installation, you can use the ``indexer-ism-init.sh`` script to customize the policy since the very beginning.
 
 You can customize the rollover policy to fit your needs. For example, you can change the minimum index size, age, and documents count values that trigger a rollover.
-
-When the Wazuh dashboard starts for the first time, it adds the default rollover policy to the environment. However, you can disable the addition of this default policy if you plan to use a different one.
-
-To disable the addition of the default rollover policy do the following.
-
-...
-
-Fortunately, if it's the case that the Wazuh dashboard has already started and applied the default policy to the indices, you can still remove it using the ISM user interface.
 
 To customize your policy, you can follow one of these methods:
 
@@ -70,7 +65,7 @@ By default, only the ``admin`` and ``kibanaserver`` users have permissions to ma
 
 Whatever the method you choose to customize the policy, make sure to keep the following considerations in mind:
 
--  The policy name must be ``rollover-policy``.
+-  The policy name must be ``rollover-policy``. This ensures that your policy won't be overwritten by the default policy on the upgrades.
 -  The ``min_doc_count`` value must be lower than 2^31. Furthermore, we recommend a value not higher than 200 million.
 -  The ``priority`` value must be unique among all policies managing the same indices.
 -  For best performance, we recommend a value between 10 GB and 50 GB for ``min_primary_shard_size``.
