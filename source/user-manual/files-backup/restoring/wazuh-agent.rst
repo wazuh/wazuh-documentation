@@ -215,4 +215,4 @@ Verifying data restoration
 
       # /var/ossec/bin/agent_control -l
 
-2. Using the Wazuh dashboard, navigate to **Active agents**. Select your Wazuh agent to see the data from the backup, such as **Security events**, **Vulnerabilities**, **Configuration assessment**, and others.
+2. Using the Wazuh dashboard, navigate to **Active agents**. Select your Wazuh agent to see the data from the backup, such as **Threat hunting**, **Vulnerabilities**, **Configuration assessment**, and others.

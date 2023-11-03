@@ -35,7 +35,7 @@ Ubuntu endpoint
       -w /home -p r -k audit-wazuh-r
       -w /home -p x -k audit-wazuh-x
 
-Audit configuration alerts are displayed in the **Security Events** tab of the Wazuh dashboard. 
+Audit configuration alerts are displayed in the **Threat hunting** tab of the Wazuh dashboard. 
 
 .. thumbnail:: /images/manual/system-calls-monitoring/audit-configuration-alerts.png
   :title: Audit configuration alerts

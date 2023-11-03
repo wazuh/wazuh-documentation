@@ -61,7 +61,7 @@ In this use case, we demonstrate how Wazuh monitors Docker events and triggers a
 View the alerts on the Wazuh dashboard
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-Navigate to the **Security events** tab or the dedicated **Docker listener dashboard** on the Wazuh dashboard to view the alerts. The following alerts are generated when we perform all the actions above. We have highlighted the alerts and labeled them according to the action that triggered each of them for ease of understanding.
+Navigate to the **Threat hunting** tab or the dedicated **Docker listener dashboard** on the Wazuh dashboard to view the alerts. The following alerts are generated when we perform all the actions above. We have highlighted the alerts and labeled them according to the action that triggered each of them for ease of understanding.
 
 .. thumbnail:: /images/manual/container-security/docker-listener-alerts.png
    :title: Docker listener alerts
@@ -203,7 +203,7 @@ Run the Docker container and simulate the attack
 View the alerts on the Wazuh dashboard
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-Navigate to the **Security events** tab on the Wazuh dashboard to view the alert. The following alert is generated when we simulate the SQLi attack.
+Navigate to the **Threat hunting** tab on the Wazuh dashboard to view the alert. The following alert is generated when we simulate the SQLi attack.
 
 .. thumbnail:: /images/manual/container-security/SQL-injection-attempt-alert.png
    :title: SQL injection attempt alert
