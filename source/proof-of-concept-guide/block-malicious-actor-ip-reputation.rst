@@ -264,7 +264,7 @@ The attacker endpoint connects to the victim's web servers the first time. After
 Visualize the alerts
 --------------------
 
-You can visualize the alert data in the Wazuh dashboard. To do this, go to the **Security events** module and add the filters in the search bar to query the alerts.
+You can visualize the alert data in the Wazuh dashboard. To do this, go to the **Threat hunting** module and add the filters in the search bar to query the alerts.
 
 -  Ubuntu - ``rule.id:(651 OR 100100)``
 

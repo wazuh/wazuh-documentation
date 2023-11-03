@@ -38,8 +38,8 @@ Screenshots
    :widths: 50 50
 
    * - .. thumbnail:: ../images/getting-started/security-events.png
-          :title: Security events 
-          :alt: Security events 
+          :title: Threat hunting 
+          :alt: Threat hunting 
      - .. thumbnail:: ../images/getting-started/malware-detection.png
           :title: Malware detection
           :alt: Malware detection 

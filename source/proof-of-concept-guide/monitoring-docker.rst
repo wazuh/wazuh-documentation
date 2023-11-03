@@ -87,7 +87,7 @@ Perform several Docker activities like pulling a Docker image, starting an insta
 Visualize the alerts
 --------------------
 
-You can visualize the alert data in the Wazuh dashboard. To do this, go to the **Security events** module and add the filters in the search bar to query the alerts.
+You can visualize the alert data in the Wazuh dashboard. To do this, go to the **Threat hunting** module and add the filters in the search bar to query the alerts.
 
 -  ``rule.groups: "docker"``
 

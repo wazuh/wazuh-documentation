@@ -6,7 +6,7 @@
 Visualization and dashboard
 ===========================
 
-Wazuh offers a web dashboard for continuous data visualization and analysis. The Wazuh dashboard comes with out-of-the-box modules for: security events, regulatory compliance, detected vulnerable applications, file integrity monitoring, configuration assessment results, and cloud infrastructure monitoring. It helps perform forensic and historical alert analyses.
+Wazuh offers a web dashboard for continuous data visualization and analysis. The Wazuh dashboard comes with out-of-the-box modules for: threat hunting, regulatory compliance, detected vulnerable applications, file integrity monitoring, configuration assessment results, and cloud infrastructure monitoring. It helps perform forensic and historical alert analyses.
 
 The :doc:`Wazuh dashboard </getting-started/components/wazuh-dashboard>` assists in meeting the following NIST 800-53 controls:
 
