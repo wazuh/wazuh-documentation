@@ -417,7 +417,7 @@ Perform the following actions on your Wazuh server to decompress these logs and 
 Verifying data restoration
 ^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-Using the Wazuh dashboard, navigate to the **Threat hunting**, **Integrity monitoring**, **Vulnerabilities**, and any other modules to see if the data is restored successfully.
+Using the Wazuh dashboard, navigate to the **Threat hunting**, **Integrity monitoring**, **Vulnerability detection**, and any other modules to see if the data is restored successfully.
 
 Multi-node data restoration
 ---------------------------
@@ -832,4 +832,4 @@ Perform the following actions on both master and worker nodes of your Wazuh serv
 Verifying data restoration
 ^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-Using the Wazuh dashboard, navigate to the **Threat hunting**, **Integrity monitoring**, **Vulnerabilities**, and any other modules to see if the data is restored successfully.
+Using the Wazuh dashboard, navigate to the **Threat hunting**, **Integrity monitoring**, **Vulnerability detection**, and any other modules to see if the data is restored successfully.
