@@ -101,4 +101,4 @@ Monitored endpoint
 
 #. Create proper audit rules using the ``auditctl`` command or the audit rules file. 
 
-Linux audit alerts are displayed in the **Security Events** and **System Auditing** tab of the Wazuh dashboard.
+Linux audit alerts are displayed in the **Security Events** tab of the Wazuh dashboard.
