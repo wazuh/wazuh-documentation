@@ -23,7 +23,7 @@ To carry out this use case, set up a Wazuh server and an Ubuntu 22.04 endpoint w
 
       $ sudo apt upgrade
 
-#. Select **Threat hunting** from your Wazuh dashboard.
+#. Select **Threat Hunting** from your Wazuh dashboard.
 
 #. Ensure the Ubuntu endpoint is selected. 
 

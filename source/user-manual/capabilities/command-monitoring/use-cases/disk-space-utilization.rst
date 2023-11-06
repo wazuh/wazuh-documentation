@@ -84,7 +84,7 @@ Perform the following steps on the Wazuh server.
 Visualize the alerts
 ^^^^^^^^^^^^^^^^^^^^
 
-Go to **Threat hunting** tab on the Wazuh dashboard to visualize the generated alert when the free disk space is less than 20%.
+Go to **Threat Hunting** tab on the Wazuh dashboard to visualize the generated alert when the free disk space is less than 20%.
 
 .. thumbnail:: /images/manual/command-monitoring/windows-low-free-space-alert.png
   :title: Drive free space less than 20% alert
@@ -192,7 +192,7 @@ Knowing the Command module does have a default decoder for its log format, we ne
 Visualize the alerts
 ^^^^^^^^^^^^^^^^^^^^
 
-Go to **Threat hunting** tab on the Wazuh dashboard to visualize the generated alerts when the disk usage of the ``/dev`` partition exceeds ``80%``.
+Go to **Threat Hunting** tab on the Wazuh dashboard to visualize the generated alerts when the disk usage of the ``/dev`` partition exceeds ``80%``.
 
 .. thumbnail:: /images/manual/command-monitoring/partition-exceeded-80-alert.png
   :title: Partition exceeds 80% usage alert
@@ -282,7 +282,7 @@ Run the following command on the macOS endpoint to fill the disk space with rand
 Visualize the alerts
 ^^^^^^^^^^^^^^^^^^^^
 
-Go to **Threat hunting** tab on the Wazuh dashboard to visualize the generated alert when the disk usage of the ``/dev`` partition is ``100%``.
+Go to **Threat Hunting** tab on the Wazuh dashboard to visualize the generated alert when the disk usage of the ``/dev`` partition is ``100%``.
 
 .. thumbnail:: /images/manual/command-monitoring/macos-partition-usage-reached-100.png
   :title: Partition exceeds 80% usage alert

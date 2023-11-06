@@ -55,7 +55,7 @@ Attack emulation
 Visualize the alerts
 --------------------
 
-You can visualize the alert data in the Wazuh dashboard. To do this, go to the **Threat hunting** module and add the filters in the search bar to query the alerts.
+You can visualize the alert data in the Wazuh dashboard. To do this, go to the **Threat Hunting** module and add the filters in the search bar to query the alerts.
 
 -  Linux - ``rule.id:(5551 OR 5712)``. Other related rules are ``5710``, ``5711``, ``5716``, ``5720``, ``5503``, ``5504``.
 

@@ -80,8 +80,8 @@ The Wazuh :doc:`Vulnerability Detector </user-manual/capabilities/vulnerability-
 The vulnerabilities discovered are grouped into severity levels, and a summary is provided based on the application name, CVE, and CVSS3 score on the Wazuh dashboard.
 
 .. thumbnail:: /images/getting-started/use-cases/it-hygiene/vulnerabilities-inventory-dashboard.png
-   :title: Vulnerabilities inventory dashboard
-   :alt: Vulnerabilities inventory dashboard
+   :title: Vulnerability detection inventory dashboard
+   :alt: Vulnerability detection inventory dashboard
    :align: center
    :width: 80%
 

@@ -81,7 +81,7 @@ Test the configuration
 Visualize the alerts
 --------------------
 
-You can visualize the alert data in the Wazuh dashboard. To do this, go to the **Threat hunting** module and add the filters in the search bar to query the alerts:
+You can visualize the alert data in the Wazuh dashboard. To do this, go to the **Threat Hunting** module and add the filters in the search bar to query the alerts:
 
 -  Ubuntu - ``rule.id: is one of 550,553,554``
 

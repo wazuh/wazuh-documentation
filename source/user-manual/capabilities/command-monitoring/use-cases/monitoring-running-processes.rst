@@ -100,7 +100,7 @@ Trigger the alert by launching the Notepad application on the Windows endpoint.
 Visualize the alerts
 ^^^^^^^^^^^^^^^^^^^^
 
-Go to **Threat hunting** tab on the Wazuh dashboard to visualize the generated alerts when the monitored command runs.      
+Go to **Threat Hunting** tab on the Wazuh dashboard to visualize the generated alerts when the monitored command runs.      
 
 .. thumbnail:: /images/manual/command-monitoring/notepad-is-running-alert.png
   :title: Notepad is running alert
@@ -192,7 +192,7 @@ Trigger the alert by stopping the Cron process on the Linux endpoint with the co
 Visualize the alerts
 ^^^^^^^^^^^^^^^^^^^^
 
-Go to **Threat hunting** tab on the Wazuh dashboard to visualize the generated alert when the Cron process is not running.
+Go to **Threat Hunting** tab on the Wazuh dashboard to visualize the generated alert when the Cron process is not running.
 
 .. thumbnail:: /images/manual/command-monitoring/cron-process-not-running-alert.png
   :title: Cron process is not running alert
@@ -273,7 +273,7 @@ Trigger the alert by launching the Calendar application on the macOS endpoint.
 Visualize the alerts
 ^^^^^^^^^^^^^^^^^^^^
 
-Go to **Threat hunting** tab on the Wazuh dashboard to visualize the generated alert.
+Go to **Threat Hunting** tab on the Wazuh dashboard to visualize the generated alert.
 
 .. thumbnail:: /images/manual/command-monitoring/calendar-is-running-alert.png
   :title: Calendar is running alert

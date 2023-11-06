@@ -75,7 +75,7 @@ Perform the following on the CentOS 7 endpoint to test the configuration.
 
       # userdel Stephen
 
-Navigate to **Threat hunting** tab on the Wazuh dashboard to view the alerts.   
+Navigate to **Threat Hunting** tab on the Wazuh dashboard to view the alerts.   
 
 .. note:: 
    :class: not-long
@@ -140,7 +140,7 @@ Wazuh has a built-in rule ``60612`` to detect when an application is installed o
 Test the configuration
 ^^^^^^^^^^^^^^^^^^^^^^
 
-After installing Dr. Memory, navigate to **Threat hunting** on the Wazuh dashboard and apply the filter ``rule.id:60612`` to view the alert.
+After installing Dr. Memory, navigate to **Threat Hunting** on the Wazuh dashboard and apply the filter ``rule.id:60612`` to view the alert.
 
 .. thumbnail:: /images/manual/log-data-collection/application-installed.png
     :title: Application installed
@@ -213,7 +213,7 @@ Perform the following steps to test the configuration:
 
    .. note:: We recommend running the above command in a sandbox environment, and not in a production environment.
 
-#. Navigate to **Threat hunting** on the Wazuh dashboard and apply the ``rule.id:91843`` filter to view the alert.
+#. Navigate to **Threat Hunting** on the Wazuh dashboard and apply the ``rule.id:91843`` filter to view the alert.
 
 .. thumbnail:: /images/manual/log-data-collection/monitoring-Powershell.png
     :title: Monitoring PowerShell activity
