@@ -2,9 +2,9 @@
 .. Copyright (C) 2015, Wazuh, Inc.
 
 .. meta::
-  :description: Check out this section of our documentation to learn more about how to configure Configuration Assessment in Wazuh.
+  :description: Check out this section of our documentation to learn more about how to configure Security Configuration Assessment in Wazuh.
 
-How to configure Configuration assessment
+How to configure SCA
 ====================
 
 Wazuh agents include the appropriate policies for their particular operating system during installation. For the full list of officially supported policy files, see the table :ref:`available_sca_policies`. These policies are included with the Wazuh server installation so that they can be easily enabled.

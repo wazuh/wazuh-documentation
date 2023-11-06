@@ -1,9 +1,9 @@
 .. Copyright (C) 2015, Wazuh, Inc.
 
 .. meta::
-  :description: Learn more about how the Configuration Assessment capability of Wazuh works in this section of the documentation. 
+  :description: Learn more about how the Security Configuration Assessment capability of Wazuh works in this section of the documentation. 
   
-How Configuration Assessment works
+How SCA works
 =============
 
 Each Wazuh agent has its own local database where it stores the current state of each SCA check. The Wazuh server maintains an SCA database for all agents that are enrolled to it. Wazuh agents only send the differences detected between scans to the Wazuh server. If there has been no change, only a summary of the SCA scan is sent, thus avoiding unnecessary network traffic while keeping the SCA database on the Wazuh server up to date. The Wazuh server then uses those updates to issue alerts that are shown in the Wazuh dashboard.
@@ -110,7 +110,7 @@ After evaluating the aforementioned check, the following event is generated:
      }
    },
 
-You can view the scan summaries on the **Configuration assessment** module on the Wazuh dashboard.
+You can view the scan summaries on the **Configuration Assessment** module on the Wazuh dashboard.
 
   .. thumbnail:: /images/sca/dashboard-sca-tab.png
      :title: Dashboard Configuration assessment module

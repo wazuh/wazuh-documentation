@@ -19,7 +19,7 @@ Agents can be configured remotely by using the ``agent.conf`` file. The followin
 - :doc:`Security policy monitoring <../capabilities/policy-monitoring/index>` (**wodle name="open-scap"**, **wodle name="cis-cat"**)
 - :doc:`Remote commands <ossec-conf/wodle-command>` (**wodle name="command"**)
 - :doc:`Labels for agent alerts <../agents/labels>` (**labels**)
-- :doc:`Configuration Assessment <../capabilities/sec-config-assessment/index>` (**sca**)
+- :doc:`Security Configuration Assessment <../capabilities/sec-config-assessment/index>` (**sca**)
 - :doc:`System inventory <../capabilities/system-inventory/index>` (**syscollector**)
 - :doc:`Avoid events flooding <ossec-conf/client-buffer>` (**client_buffer**)
 - :doc:`Configure osquery wodle <ossec-conf/wodle-osquery>` (**wodle name="osquery"**)
@@ -307,7 +307,7 @@ and this configuration in the ``agent.conf`` file.
     </policies>
   </sca>
 
-The final configuration will enable the Configuration Assessment applicabtion. In addition, it will add the `cis_debian_linux_rcl.yml` to the list of scanned policies.
+The final configuration will enable the Security Configuration Assessment module. In addition, it will add the `cis_debian_linux_rcl.yml` to the list of scanned policies.
 In other words, the configuration located at ``agent.conf`` will overwrite the one of the ``ossec.conf``.
 
 How to ignore shared configuration

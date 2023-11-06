@@ -39,12 +39,12 @@ The inventory data collected can be queried using the `Wazuh API <https://docume
    :align: center
    :width: 80%
 
-Configuration Assessment
+Security Configuration Assessment
 ---------------------------------
 
 One of the objectives of implementing good IT hygiene is to reduce the attack surface of your organization. The :doc:`Wazuh SCA </user-manual/capabilities/sec-config-assessment/index>` module periodically scans monitored endpoints against policies based on the Center for Internet Security (CIS) benchmarks to identify security misconfigurations and flaws. The CIS benchmarks are essential guidelines for establishing a secure baseline configuration for critical assets. This minimizes vulnerabilities resulting from misconfigurations and reduces the risk of security breaches.
 
-The **Configuration assessment** application on the Wazuh dashboard provides each agent's SCA scan result. The results show the number of checks performed on the endpoint, how many failed, and the number of checks that passed. It also shows a score calculated based on the number of tests passed, giving you an overview of the level of compliance.
+The **Configuration Assessment** module on the Wazuh dashboard provides each agent's SCA scan result. The results show the number of checks performed on the endpoint, how many failed, and the number of checks that passed. It also shows a score calculated based on the number of tests passed, giving you an overview of the level of compliance.
 
 .. thumbnail:: /images/getting-started/use-cases/it-hygiene/sca-results.png
    :title: Configuration assessment results

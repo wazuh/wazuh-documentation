@@ -1,14 +1,14 @@
 .. Copyright (C) 2015, Wazuh, Inc.
 
 .. meta::
-  :description: You can use the Configuration assessment application to create configuration policies on agents. Learn more about it in this section.
+  :description: You can use the Security configuration assessment module to create configuration policies on agents. Learn more about it in this section.
   
 .. _configuration_assessment:
 
 Configuration assessment
 ========================
 
-The Configuration assessment application determines the state of hardening and configuration policies on agents. SCA performs scans to discover exposures or misconfigurations in monitored endpoints. Those scans assess the configuration of the hosts using policy files that contain rules to be tested against the actual configuration of the host.
+The Security configuration assessment module determines the state of hardening and configuration policies on agents. SCA performs scans to discover exposures or misconfigurations in monitored endpoints. Those scans assess the configuration of the hosts using policy files that contain rules to be tested against the actual configuration of the host.
 
 The SCA module helps to meet the following PCI DSS requirements:
 
