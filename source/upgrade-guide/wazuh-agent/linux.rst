@@ -13,162 +13,151 @@ Select your package manager and follow the instructions to upgrade the Wazuh age
 
 .. tabs::
 
-  .. group-tab:: Yum
+   .. group-tab:: Yum
 
-    #. Import the GPG key.
+      #. Import the GPG key.
 
-       .. code-block:: console
+         .. code-block:: console
 
-        # rpm --import https://packages.wazuh.com/key/GPG-KEY-WAZUH
+            # rpm --import https://packages.wazuh.com/key/GPG-KEY-WAZUH
 
-    #. Add the Wazuh repository. 
+      #. Add the Wazuh repository. 
 
-       .. code-block:: console
+         .. code-block:: console
 
-         # cat > /etc/yum.repos.d/wazuh.repo << EOF
-         [wazuh]
-         gpgcheck=1
-         gpgkey=https://packages.wazuh.com/key/GPG-KEY-WAZUH
-         enabled=1
-         name=EL-\$releasever - Wazuh
-         baseurl=https://packages.wazuh.com/4.x/yum/
-         protect=1
-         EOF
+            # cat > /etc/yum.repos.d/wazuh.repo << EOF
+            [wazuh]
+            gpgcheck=1
+            gpgkey=https://packages.wazuh.com/key/GPG-KEY-WAZUH
+            enabled=1
+            name=EL-\$releasever - Wazuh
+            baseurl=https://packages.wazuh.com/4.x/yum/
+            protect=1
+            EOF
 
-    #. Clean the YUM cache.
+      #. Clean the YUM cache.
 
-       .. code-block:: console
+         .. code-block:: console
 
-         # yum clean all
+            # yum clean all
 
+      #. Upgrade the Wazuh agent to the latest version.
 
-    #. Upgrade the Wazuh agent to the latest version.
+         .. code-block:: console
 
-       .. code-block:: console
+            # yum upgrade wazuh-agent|WAZUH_AGENT_RPM_PKG_INSTALL|
 
-          # yum upgrade wazuh-agent|WAZUH_AGENT_RPM_PKG_INSTALL|
+      #. It is recommended to disable the Wazuh repository in order to avoid undesired upgrades and compatibility issues as the Wazuh agent should always be in the same or an older version than the Wazuh manager.
 
+         .. code-block:: console
 
-    #. It is recommended to disable the Wazuh repository in order to avoid undesired upgrades and compatibility issues as the Wazuh agent should always be in the same or an older version than the Wazuh manager.
+            # sed -i "s/^enabled=1/enabled=0/" /etc/yum.repos.d/wazuh.repo
 
-        .. code-block:: console
+   .. group-tab:: APT
 
-          # sed -i "s/^enabled=1/enabled=0/" /etc/yum.repos.d/wazuh.repo
+      #. Install the GPG key.
 
+         .. code-block:: console
 
-  .. group-tab:: APT
+            # curl -s https://packages.wazuh.com/key/GPG-KEY-WAZUH | gpg --no-default-keyring --keyring gnupg-ring:/usr/share/keyrings/wazuh.gpg --import && chmod 644 /usr/share/keyrings/wazuh.gpg
 
-    #. Install the GPG key.
+      #. Add the Wazuh repository.
 
-       .. code-block:: console
+         .. code-block:: console
 
-         # curl -s https://packages.wazuh.com/key/GPG-KEY-WAZUH | gpg --no-default-keyring --keyring gnupg-ring:/usr/share/keyrings/wazuh.gpg --import && chmod 644 /usr/share/keyrings/wazuh.gpg
+            # echo "deb [signed-by=/usr/share/keyrings/wazuh.gpg] https://packages.wazuh.com/4.x/apt/ stable main" | tee -a /etc/apt/sources.list.d/wazuh.list
 
-    #. Add the Wazuh repository.
+      #. Upgrade the Wazuh agent to the latest version.
 
-       .. code-block:: console
+         .. code-block:: console
 
-         # echo "deb [signed-by=/usr/share/keyrings/wazuh.gpg] https://packages.wazuh.com/4.x/apt/ stable main" | tee -a /etc/apt/sources.list.d/wazuh.list
+            # apt-get update
+            # apt-get install wazuh-agent|WAZUH_AGENT_DEB_PKG_INSTALL|
 
 
-    #. Upgrade the Wazuh agent to the latest version.
+      #. It is recommended to disable the Wazuh repository in order to avoid undesired upgrades and compatibility issues as the Wazuh agent should always be in the same or an older version than the Wazuh manager. Skip this step if the package is set to a ``hold`` state.
 
-       .. code-block:: console
+         .. code-block:: console
 
-          # apt-get update
-          # apt-get install wazuh-agent|WAZUH_AGENT_DEB_PKG_INSTALL|
+            # sed -i "s/^deb/#deb/" /etc/apt/sources.list.d/wazuh.list
+            # apt-get update
 
+      .. note::
 
-    #. It is recommended to disable the Wazuh repository in order to avoid undesired upgrades and compatibility issues as the Wazuh agent should always be in the same or an older version than the Wazuh manager. Skip this step if the package is set to a ``hold`` state.
+         For Debian 7, 8, and Ubuntu 14 systems import the GCP key and add the Wazuh repository (steps 1 and 2) using the following commands.
 
-        .. code-block:: console
+         .. code-block:: console
 
-          # sed -i "s/^deb/#deb/" /etc/apt/sources.list.d/wazuh.list
-          # apt-get update
+            # apt-get install gnupg apt-transport-https
+            # curl -s https://packages.wazuh.com/key/GPG-KEY-WAZUH | apt-key add -
+            # echo "deb https://packages.wazuh.com/4.x/apt/ stable main" | tee -a /etc/apt/sources.list.d/wazuh.list
 
-    .. note::
+   .. group-tab:: ZYpp
 
-       For Debian 7, 8, and Ubuntu 14 systems import the GCP key and add the Wazuh repository (steps 1 and 2) using the following commands.
+      #. Import the GPG key.
 
-       .. code-block:: console
+         .. code-block:: console
 
-          # apt-get install gnupg apt-transport-https
-          # curl -s https://packages.wazuh.com/key/GPG-KEY-WAZUH | apt-key add -
-          # echo "deb https://packages.wazuh.com/4.x/apt/ stable main" | tee -a /etc/apt/sources.list.d/wazuh.list
+            # rpm --import https://packages.wazuh.com/key/GPG-KEY-WAZUH
 
+      #. Add the Wazuh repository. 
 
-  .. group-tab:: ZYpp
+         .. code-block:: console
 
-    #. Import the GPG key.
+            # cat > /etc/zypp/repos.d/wazuh.repo <<\EOF
+            [wazuh]
+            gpgcheck=1
+            gpgkey=https://packages.wazuh.com/key/GPG-KEY-WAZUH
+            enabled=1
+            name=EL-$releasever - Wazuh
+            baseurl=https://packages.wazuh.com/4.x/yum/
+            protect=1
+            EOF
 
-       .. code-block:: console
+      #. Refresh the repository. 
 
-         # rpm --import https://packages.wazuh.com/key/GPG-KEY-WAZUH
+         .. code-block:: console
 
-    #. Add the Wazuh repository. 
+            # zypper refresh
 
-       .. code-block:: console
+      #. Upgrade the Wazuh agent to the latest version.
 
-         # cat > /etc/zypp/repos.d/wazuh.repo <<\EOF
-         [wazuh]
-         gpgcheck=1
-         gpgkey=https://packages.wazuh.com/key/GPG-KEY-WAZUH
-         enabled=1
-         name=EL-$releasever - Wazuh
-         baseurl=https://packages.wazuh.com/4.x/yum/
-         protect=1
-         EOF
+         .. code-block:: console
 
-    #. Refresh the repository. 
+            # zypper update wazuh-agent|WAZUH_AGENT_ZYPP_PKG_INSTALL|
 
-       .. code-block:: console
+      #. It is recommended to disable the Wazuh repository in order to avoid undesired upgrades and compatibility issues as the Wazuh agent should always be in the same or an older version than the Wazuh manager. 
 
-         # zypper refresh
+         .. code-block:: console
 
+            # sed -i "s/^enabled=1/enabled=0/" /etc/zypp/repos.d/wazuh.repo
 
-    #. Upgrade the Wazuh agent to the latest version.
+   .. group-tab:: APK
 
-       .. code-block:: console
+      #. Install the GPG key.
 
-          # zypper update wazuh-agent|WAZUH_AGENT_ZYPP_PKG_INSTALL|
+         .. code-block:: console
 
+            # wget -O /etc/apk/keys/alpine-devel@wazuh.com-633d7457.rsa.pub https://packages.wazuh.com/key/alpine-devel%40wazuh.com-633d7457.rsa.pub
 
-    #. It is recommended to disable the Wazuh repository in order to avoid undesired upgrades and compatibility issues as the Wazuh agent should always be in the same or an older version than the Wazuh manager. 
+      #. Add the Wazuh repository.
 
-        .. code-block:: console
+         .. code-block:: console
 
-          # sed -i "s/^enabled=1/enabled=0/" /etc/zypp/repos.d/wazuh.repo
+            # echo "https://packages.wazuh.com/4.x/alpine/v3.12/main" >> /etc/apk/repositories
 
-
-  .. group-tab:: APK
-
-    #. Install the GPG key.
-
-       .. code-block:: console
-
-         # wget -O /etc/apk/keys/alpine-devel@wazuh.com-633d7457.rsa.pub https://packages.wazuh.com/key/alpine-devel%40wazuh.com-633d7457.rsa.pub
-
-    #. Add the Wazuh repository.
-
-       .. code-block:: console
-
-         # echo "https://packages.wazuh.com/4.x/alpine/v3.12/main" >> /etc/apk/repositories
-
-
-    #. Upgrade the Wazuh agent to the latest version.
+      #. Upgrade the Wazuh agent to the latest version.
         
-       .. code-block:: console
+         .. code-block:: console
 
-          # apk update
-          # apk add wazuh-agent|WAZUH_AGENT_APK_PKG_INSTALL|
+            # apk update
+            # apk add wazuh-agent|WAZUH_AGENT_APK_PKG_INSTALL|
 
+      #. It is recommended to disable the Wazuh repository to avoid undesired upgrades and compatibility issues as the Wazuh agent should always be in the same or an older version than the Wazuh manager.
 
-    #. It is recommended to disable the Wazuh repository to avoid undesired upgrades and compatibility issues as the Wazuh agent should always be in the same or an older version than the Wazuh manager.
+         .. code-block:: console
 
-       .. code-block:: console
-
-          # sed -i "s|^https://packages.wazuh.com|#https://packages.wazuh.com|g" /etc/apk/repositories   
-
+            # sed -i "s|^https://packages.wazuh.com|#https://packages.wazuh.com|g" /etc/apk/repositories   
 
 .. note::
    :class: not-long
