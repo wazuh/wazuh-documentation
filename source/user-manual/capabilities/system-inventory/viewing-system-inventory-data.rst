@@ -9,7 +9,7 @@ Viewing system inventory data
 Wazuh dashboard
 ---------------
 
-You can view the system inventory of each monitored endpoint from the Wazuh dashboard. To do this, select an agent from your Wazuh dashboard and navigate to the **Inventory data** tab as displayed below. The inventory data page for each monitored endpoint shows its operating system, hardware, processes, network interface, and packages.
+You can view the system inventory of each monitored endpoint from the Wazuh dashboard. To do this, select an agent from your Wazuh dashboard and navigate to the **Inventory data** module as displayed below. The inventory data page for each monitored endpoint shows its operating system, hardware, processes, network interface, and packages.
 
 .. thumbnail:: /images/manual/system-inventory/inventory-data.png
   :title: Inventory data

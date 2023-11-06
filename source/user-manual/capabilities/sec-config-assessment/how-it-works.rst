@@ -110,11 +110,11 @@ After evaluating the aforementioned check, the following event is generated:
      }
    },
 
-You can view the scan summaries on the **Configuration assessment** tab on the Wazuh dashboard.
+You can view the scan summaries on the **Configuration assessment** module on the Wazuh dashboard.
 
   .. thumbnail:: /images/sca/dashboard-sca-tab.png
-     :title: Dashboard Configuration assessment tab
-     :alt: Dashboard Configuration assessment tab
+     :title: Dashboard Configuration assessment module
+     :alt: Dashboard Configuration assessment module
      :align: center
      :width: 80%
 

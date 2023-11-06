@@ -182,7 +182,7 @@ Configure the Wazuh server with a custom decoder and rule to analyze the events 
 
       $ sudo systemctl restart wazuh-manager    
 
-Visit the Wazuh dashboard and navigate to the **Threat Hunting** tab to visualize the generated alert as shown below.
+Visit the Wazuh dashboard and navigate to the **Threat Hunting** module to visualize the generated alert as shown below.
 
 .. thumbnail:: /images/manual/command-monitoring/notepad-execution-alert.png
   :title: Notepad execution alert
@@ -287,7 +287,7 @@ Perform the following steps on the Wazuh server to generate alerts when Wazuh an
 
 After you perform the steps above, the Wazuh server can now analyze the output of the command, ``free -m | awk 'NR==2{printf "%.2f\t\t\n", $3*100/$2``, and trigger security alerts every ``120`` seconds.
 
-Visit the Wazuh dashboard and navigate to the **Threat Hunting** tab to visualize the generated alert as shown below.
+Visit the Wazuh dashboard and navigate to the **Threat Hunting** module to visualize the generated alert as shown below.
 
 .. thumbnail:: /images/manual/command-monitoring/memory-utilization-alert.png
   :title: Memory utilization alert

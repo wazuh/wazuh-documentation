@@ -75,7 +75,7 @@ Perform the following on the CentOS 7 endpoint to test the configuration.
 
       # userdel Stephen
 
-Navigate to **Threat Hunting** tab on the Wazuh dashboard to view the alerts.   
+Navigate to **Threat Hunting** module on the Wazuh dashboard to view the alerts.   
 
 .. note:: 
    :class: not-long

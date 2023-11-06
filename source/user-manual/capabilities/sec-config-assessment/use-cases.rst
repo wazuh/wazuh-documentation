@@ -119,7 +119,7 @@ Take the following steps on your Ubuntu endpoint to create the file ``/usr/share
    
       # systemctl restart wazuh-agent
 
-#. On your Wazuh dashboard, navigate to the **SCA** tab and select the Ubuntu endpoint to view the results of the custom SCA check you have created.
+#. On your Wazuh dashboard, navigate to the **SCA** module and select the Ubuntu endpoint to view the results of the custom SCA check you have created.
 
   .. thumbnail:: /images/sca/ubuntu-sca-check-results.png
      :title: Ubuntu results of the custom SCA check
@@ -208,7 +208,7 @@ Take the following steps on your Ubuntu endpoint to create the file ``C:\Program
    
       # Restart-Service -Name wazuh
 
-#. On your Wazuh dashboard, navigate to the **SCA** tab and select the Windows endpoint to view the results of the custom SCA check you have created.
+#. On your Wazuh dashboard, navigate to the **SCA** module and select the Windows endpoint to view the results of the custom SCA check you have created.
 
   .. thumbnail:: /images/sca/windows-sca-check-results.png
      :title: Windows results of the custom SCA check
@@ -299,7 +299,7 @@ Take the following steps on your macOS endpoint to create the file ``/usr/local/
    
       # /Library/Ossec/bin/wazuh-control restart
 
-#. On your Wazuh dashboard, navigate to the SCA tab and select the macOS endpoint to view the results of the custom SCA check you have created.
+#. On your Wazuh dashboard, navigate to the SCA module and select the macOS endpoint to view the results of the custom SCA check you have created.
 
   .. thumbnail:: /images/sca/macos-sca-check-results.png
      :title: macOS results of the custom SCA check
@@ -400,7 +400,7 @@ Netcat is a utility that uses TCP and UDP to read and write data on an IP networ
    
       # systemctl restart wazuh-agent
 
-#. On your Wazuh dashboard, navigate to the **SCA** tab and select the Ubuntu endpoint to view the results of the custom SCA check you have created.
+#. On your Wazuh dashboard, navigate to the **SCA** module and select the Ubuntu endpoint to view the results of the custom SCA check you have created.
 
   .. thumbnail:: /images/sca/ubuntu-sca-use-case.png
      :title: Ubuntu SCA use case to detect running processes
@@ -482,7 +482,7 @@ System administrators use PowerShell to configure systems. Standard users utiliz
       > NET STOP Wazuh
       > NET START Wazuh
 
-#. On your Wazuh dashboard, navigate to the SCA tab and select the Windows endpoint to view the results of the custom SCA check you have created.
+#. On your Wazuh dashboard, navigate to the SCA module and select the Windows endpoint to view the results of the custom SCA check you have created.
 
   .. thumbnail:: /images/sca/windows-sca-use-case.png
      :title: Windows SCA use case to detect running processes
@@ -558,7 +558,7 @@ Netcat is a utility that uses TCP and UDP to read and write data on an IP networ
    
       # /Library/Ossec/bin/wazuh-control restart
 
-#. On your Wazuh dashboard, navigate to the SCA tab and select the macOS endpoint to view the results of the custom SCA check you have created.
+#. On your Wazuh dashboard, navigate to the SCA module and select the macOS endpoint to view the results of the custom SCA check you have created.
 
   .. thumbnail:: /images/sca/macos-sca-use-case.png
      :title: macOS SCA use case to detect running processes

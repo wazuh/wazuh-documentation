@@ -15,7 +15,7 @@ System inventory
 
 An up-to-date :doc:`system inventory </user-manual/capabilities/system-inventory/index>` helps organizations optimize asset visibility in their environment, and is essential for maintaining good IT hygiene. Wazuh collects system inventory data that includes hardware and operating system information, installed software, network interfaces, ports, and running processes. Wazuh agents use the :doc:`Syscollector </user-manual/capabilities/system-inventory/configuration>` module to collect inventory data from monitored endpoints and send them to the Wazuh server.
 
-You can generate system inventory reports from the **Inventory data** tab on the Wazuh dashboard. The information contained in the report helps identify unwanted applications, processes, services, and malicious artifacts.
+You can generate system inventory reports from the **Inventory data** module on the Wazuh dashboard. The information contained in the report helps identify unwanted applications, processes, services, and malicious artifacts.
 
 .. thumbnail:: /images/getting-started/use-cases/it-hygiene/inventory-data-dashboard.png
    :title: Inventory data on the Wazuh dashboard

@@ -79,4 +79,4 @@ The Wazuh agent installation directory depends on the architecture of the host:
              # net start wazuh
 
 
-#. Select the “agents” tab to check for the newly enrolled agent and its connection status in the Wazuh dashboard to confirm that enrollment was successful.
+#. Select the “agents” module to check for the newly enrolled agent and its connection status in the Wazuh dashboard to confirm that enrollment was successful.
