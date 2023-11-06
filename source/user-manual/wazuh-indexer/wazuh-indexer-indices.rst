@@ -443,7 +443,7 @@ At any moment, the connection status of an enrolled Wazuh agent is one of the fo
 
 Wazuh stores a history of the connection status of all its agents. By default, it indexes the agent connection status using the ``wazuh‑monitoring-*`` indices. The Wazuh indexer creates one of these indices per week by default. Check the documentation on :ref:`custom creation intervals <wazuh_monitoring_creation>`. These indices store the connection status of all the agents every 15 minutes by default. Check the documentation on the :ref:`frequency of API requests <wazuh_monitoring_frequency>`.
 
-The Wazuh dashboard requires these indices to display information about agent status. For example, by clicking **Agents**, you can see information such as the Wazuh agent's connection status and historical evolution within set timeframes.
+The Wazuh dashboard requires these indices to display information about agent status. For example, by clicking **Endpoints Summary**, you can see information such as the Wazuh agent's connection status and historical evolution within set timeframes.
 
 .. thumbnail:: /images/manual/wazuh-indexer/status-evolution-agents-dashboard.png
    :title: Status and evolution in Agents dashboard
