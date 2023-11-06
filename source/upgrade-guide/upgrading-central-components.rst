@@ -146,13 +146,7 @@ In the case of having a Wazuh indexer cluster with multiple nodes, the cluster w
 
       # curl -k -u <username>:<password> https://<WAZUH_INDEXER_IP>:9200/_cat/nodes?v
 
-
-Loading the ISM policies
-^^^^^^^^^^^^^^^^^^^^^^^^
-
-.. note:: This step is only required for Wazuh indexer installations upgraded to 4.8.0. More information can be found in :doc:`/user-manual/wazuh-indexer/index-life-management`.
-
-#. Run the Wazuh indexer ``indexer-ism-init.sh`` script on `any` Wazuh indexer node to load the ISM policies. 
+#. If you're upgrading from a version earlier than 4.8.0, run the Wazuh indexer ``indexer-ism-init.sh`` script on `any` Wazuh indexer node to load the ISM policies. Find more information in :doc:`/user-manual/wazuh-indexer/index-life-management`.
     
    .. code-block:: console
 

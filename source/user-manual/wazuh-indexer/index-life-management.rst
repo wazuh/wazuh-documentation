@@ -6,14 +6,16 @@
 Index life management
 =====================
 
-To optimize your cluster performance, you can perform periodic operations, such as index rollovers and deletions. Index State Management (ISM) lets you automate these operational tasks.
+To optimize your cluster performance, you can perform periodic operations, such as index rollovers and deletions.
 
-You can implement lifecycle policies, such as retention policies, for your data using ISM. ISM triggers index operations automatically based on your policies and the changes detected in index age, size, and documents count.
+Index State Management (ISM) lets you automate these operational tasks. You can implement lifecycle policies, such as retention policies, for your data using ISM. ISM triggers index operations automatically based on your policies and the changes detected in index age, size, and documents count.
 
 Index rollover
 ---------------
 
-By default, Wazuh uses an ISM policy to rotate the ``wazuh-alerts-*`` and ``wazuh-archives-*`` indices automatically. It sets the following conditions for a rollover.
+Wazuh uses an ISM policy to rotate the ``wazuh-alerts-*`` and ``wazuh-archives-*`` indices automatically.
+
+If a rollover policy is missing, it sets a default one during the Wazuh indexer initialization. This default policy establishes the following conditions for the rollover.
 
 -  A single primary shard of an index is larger than 25 GB.
 -  The index is older than 7 days.
@@ -50,44 +52,38 @@ By default, Wazuh uses an ISM policy to rotate the ``wazuh-alerts-*`` and ``wazu
 Customizing the rollover policy
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-.. note::
-   
-   The rollover policy is added to the Wazuh indexer during its initialization. The installation assistant initializes the cluster automatically using the default values. In this case, you will need to customize the policy using one of the methods below. However, in a step-by-step installation, you can use the ``indexer-ism-init.sh`` script to customize the policy since the very beginning.
-
 You can customize the rollover policy to fit your needs. For example, you can change the minimum index size, age, and documents count values that trigger a rollover.
 
 To customize your policy, you can follow one of these methods:
 
--  **Recommended** – Using the ISM user interface.
--  Using the ISM API.
+-  Recommended – `Using the ISM user interface`_.
+-  `Using the ISM API`_.
+-  If you are deploying Wazuh step-by-step, running ``indexer-ism-init.sh``. For example, ``bash indexer-ism-init.sh -a 30d``. Use ``--help`` for a list of options.
 
-By default, only the ``admin`` and ``kibanaserver`` users have permissions to manage the policies. However, the ``manage_ism`` permission group and role grants permissions to the `ISM API <https://opensearch.org/docs/latest/security/access-control/permissions/#index-state-management-permissions>`__.
+Whatever the method you choose, make sure to keep the following considerations in mind:
 
-Whatever the method you choose to customize the policy, make sure to keep the following considerations in mind:
-
--  The policy name must be ``rollover-policy``. This ensures that your policy won't be overwritten by the default policy on the upgrades.
+-  Keep ``rollover_policy`` for the policy name. Wazuh preserves this policy unaffected between upgrades and initialization if present.
 -  The ``min_doc_count`` value must be lower than 2^31. Furthermore, we recommend a value not higher than 200 million.
 -  The ``priority`` value must be unique among all policies managing the same indices.
 -  For best performance, we recommend a value between 10 GB and 50 GB for ``min_primary_shard_size``.
 
-.. note::
-   
-   We recommend keeping your documents count from exceeding 200 million while allocating between 10 GB and 50 GB per shard. This configuration typically works well for most use cases. In addition, we don't recommend changing the ``index_patterns`` value.
+We recommend keeping your documents count from exceeding 200 million while allocating between 10 GB and 50 GB per shard. This configuration typically works well for most use cases. In addition, we don't recommend changing the ``index_patterns`` value.
 
 Using the ISM user interface
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 This is the recommended method.
 
-#. Click on the upper left menu **☰** and select **Index Management** under **Management**.
-#. Choose **State management policies** and click **wazuh_rollover_policy**. 
+#. Click on the upper left menu **☰** and select **Index Management** under **OpenSearch Plugins**.
+#. Choose **State management policies** and click **rollover_policy**. 
 #. Select your preferred edition method and make changes as desired.
 
 Using the ISM API
 ~~~~~~~~~~~~~~~~~
 
-You can use the `ISM API <https://opensearch.org/docs/latest/im-plugin/ism/api/>`__ directly from the **Dev Tools** section on the UI. You can also use external tools like `Postman <https://www.postman.com/>`_, `cURL <https://curl.se/>`_, or any other tool or library capable of performing HTTP requests.
+You can use the `ISM API <https://opensearch.org/docs/latest/im-plugin/ism/api/>`__ directly from **Dev Tools** under **Management** section on the UI. You can also use external tools like `Postman <https://www.postman.com/>`_, `cURL <https://curl.se/>`_, or any other tool or library capable of performing HTTP requests.
 
+By default, only the ``admin`` and ``kibanaserver`` users have permissions to manage the policies. However, the ``manage_ism`` permission group and role grants permissions to the `ISM API <https://opensearch.org/docs/latest/security/access-control/permissions/#index-state-management-permissions>`__.
 
 Index retention
 ---------------
