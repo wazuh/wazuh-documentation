@@ -58,7 +58,7 @@ To customize your policy, you can follow one of these methods:
 
 -  Recommended – `Using the ISM user interface`_.
 -  `Using the ISM API`_.
--  If you are deploying Wazuh step-by-step, running ``indexer-ism-init.sh``. For example, ``bash indexer-ism-init.sh -a 30d``. Use ``--help`` for a list of options.
+-  `Using the initialization script`_.
 
 Whatever the method you choose, make sure to keep the following considerations in mind:
 
@@ -84,6 +84,28 @@ Using the ISM API
 You can use the `ISM API <https://opensearch.org/docs/latest/im-plugin/ism/api/>`__ directly from **Dev Tools** under **Management** section on the UI. You can also use external tools like `Postman <https://www.postman.com/>`_, `cURL <https://curl.se/>`_, or any other tool or library capable of performing HTTP requests.
 
 By default, only the ``admin`` and ``kibanaserver`` users have permissions to manage the policies. However, the ``manage_ism`` permission group and role grants permissions to the `ISM API <https://opensearch.org/docs/latest/security/access-control/permissions/#index-state-management-permissions>`__.
+
+Using the initialization script
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+If you are deploying Wazuh step-by-step, you can customize the rollover policy by using the ``indexer-ism-init.sh`` script. In this case, the initialization of the cluster splits in two steps, instead of running the ``indexer-init.sh`` script:
+
+#. Initialize the security options by running the ``indexer-security-init.sh`` script.
+
+    .. code-block:: console
+    
+        # /usr/share/wazuh-indexer/bin/indexer-security-init.sh
+
+
+#. Then, initialize the rollover policy running the ``indexer-ism-init.sh`` script.
+
+    .. code-block:: console
+    
+        # /usr/share/wazuh-indexer/bin/indexer-ism-init.sh -a 30d
+
+    Use ``--help`` for a list of options.
+
+    The script uses the default password of the admin user. If you changed the password, you can use the ``-p`` option to specify the new password.
 
 Index retention
 ---------------
