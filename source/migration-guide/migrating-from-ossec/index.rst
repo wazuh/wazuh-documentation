@@ -84,7 +84,7 @@ Incident response
 * Implementation of new output options for log collector component.
 * Module for integration with `Virustotal <https://www.virustotal.com/>`_, used to detect the presence of malicious files.
 
-Vulnerability Detection and configuration assessment
+Vulnerability detection and configuration assessment
 ++++++++++++++++++++++++++++++++++++++++++++++++++++
 
 * Dynamic creation of CVE vulnerability databases, gathering data from OVAL repositories.
