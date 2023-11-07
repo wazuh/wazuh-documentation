@@ -50,8 +50,8 @@ Screenshots
           :title: File integrity monitoring
           :alt: File integrity monitoring 
    * - .. thumbnail:: ../images/getting-started/vulnerability-detection.png
-          :title: Vulnerability detection  
-          :alt: Vulnerability detection  
+          :title: Vulnerability Detection  
+          :alt: Vulnerability Detection  
      - .. thumbnail:: ../images/getting-started/security-configuration-assessment.png
           :title: Security configuration assessment   
           :alt: Security configuration assessment   
