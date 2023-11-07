@@ -47,8 +47,8 @@ One of the objectives of implementing good IT hygiene is to reduce the attack su
 The **Configuration Assessment** module on the Wazuh dashboard provides each agent's SCA scan result. The results show the number of checks performed on the endpoint, how many failed, and the number of checks that passed. It also shows a score calculated based on the number of tests passed, giving you an overview of the level of compliance.
 
 .. thumbnail:: /images/getting-started/use-cases/it-hygiene/sca-results.png
-   :title: Configuration assessment results
-   :alt: Configuration assessment results
+   :title: Configuration Assessment results
+   :alt: Configuration Assessment results
    :align: center
    :width: 80%
 
@@ -80,8 +80,8 @@ The Wazuh :doc:`Vulnerability Detector </user-manual/capabilities/vulnerability-
 The vulnerabilities discovered are grouped into severity levels, and a summary is provided based on the application name, CVE, and CVSS3 score on the Wazuh dashboard.
 
 .. thumbnail:: /images/getting-started/use-cases/it-hygiene/vulnerabilities-inventory-dashboard.png
-   :title: Vulnerability detection inventory dashboard
-   :alt: Vulnerability detection inventory dashboard
+   :title: Vulnerability Detection inventory dashboard
+   :alt: Vulnerability Detection inventory dashboard
    :align: center
    :width: 80%
 

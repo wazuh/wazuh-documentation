@@ -9,7 +9,7 @@ How it works
 .. note::
    This guide is based on the official `Audit guide <https://access.redhat.com/documentation/en-US/Red_Hat_Enterprise_Linux/6/html/Security_Guide/sec-Defining_Audit_Rules_and_Controls.html>`_.
 
-The Linux Audit system is a feature of the Linux kernel that provides a framework for monitoring. It is usually installed by default on RedHat and CentOS operating systems but can be manually installed on other Linux distributions. It captures and records various events, including system calls, file system activity, and network activity, among others.
+The Linux Audit system is a feature of the Linux kernel that provides a framework for system auditing and monitoring. It is usually installed by default on RedHat and CentOS operating systems but can be manually installed on other Linux distributions. It captures and records various events, including system calls, file system activity, and network activity, among others.
 
 When an event occurs on an endpoint, the Linux kernel generates an audit record that contains information about the event, such as the date and time, the user who initiated the event, the type of event, and any relevant parameters. The audit daemon collects and stores these audit records in a secure audit log file.
 

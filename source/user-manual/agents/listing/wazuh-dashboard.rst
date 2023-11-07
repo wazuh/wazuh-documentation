@@ -1,7 +1,7 @@
 .. Copyright (C) 2015, Wazuh, Inc.
 
 .. meta::
-  :description: You can list and see basic information about registered agents in the Agent module. Learn more about it in this section of the documentation. 
+  :description: You can list and see basic information about registered agents in the Endpoints Summary module. Learn more about it in this section of the documentation. 
 
 Listing agents using the Wazuh dashboard
 ----------------------------------------
