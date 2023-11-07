@@ -20,7 +20,7 @@ The Wazuh agent provides :ref:`key features <agents_modules>` to enhance your sy
 
    * - Log collector
      - Command execution
-   * - File Integrity Monitoring (FIM) 
+   * - File integrity monitoring (FIM) 
      - Security configuration assessment (SCA)
    * - System inventory 
      - Malware detection
