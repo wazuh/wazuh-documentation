@@ -31,11 +31,11 @@ You can also generate property-specific reports for a monitored endpoint. For ex
    :align: center
    :width: 80%
 
-The inventory data collected can be queried using the `Wazuh API <https://documentation.wazuh.com/|WAZUH_CURRENT_MINOR|/user-manual/api/reference.html#tag/Syscollector>`__, which retrieves nested data in JSON format. For example, you can query the package inventory to check for the ``wazuh-agent`` package on a monitored endpoint using the **API Console** on the Wazuh dashboard. Command line tools like :ref:`cURL <inventory_wazuh_api_curl>` can also be used to query the inventory database.
+The inventory data collected can be queried using the `Wazuh API <https://documentation.wazuh.com/|WAZUH_CURRENT_MINOR|/user-manual/api/reference.html#tag/Syscollector>`__, which retrieves nested data in JSON format. For example, you can query the package inventory to check for the ``wazuh-agent`` package on a monitored endpoint using the **Server management** > **Dev Tools** module on the Wazuh dashboard. Command line tools like :ref:`cURL <inventory_wazuh_api_curl>` can also be used to query the inventory database.
 
 .. thumbnail:: /images/getting-started/use-cases/it-hygiene/inventory-querying-api.png
-   :title: Querying the package inventory using the API console
-   :alt: Querying the package inventory using the API console
+   :title: Querying the package inventory using the Dev Tools
+   :alt: Querying the package inventory using the Dev Tools
    :align: center
    :width: 80%
 

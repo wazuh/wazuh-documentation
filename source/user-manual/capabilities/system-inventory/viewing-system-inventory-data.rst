@@ -36,7 +36,7 @@ You can query the Wazuh inventory data using the `Wazuh API <https://documentati
 Wazuh API GUI
 ~~~~~~~~~~~~~
 
-On the Wazuh dashboard, navigate to **Wazuh > Tools > API Console**. On the **Console**, type the following:
+On the Wazuh dashboard, navigate to **Server management** > **Dev Tools**. On the **Console**, type the following:
 
 .. code-block:: none
 
@@ -47,8 +47,8 @@ Where ``<AGENT_ID>`` corresponds to the agent ID of the endpoint.
 The Wazuh dashboard will suggest a list of available tables that you can query via the API.
 
 .. thumbnail:: /images/manual/system-inventory/api-console.png
-  :title: API Console
-  :alt: API Console
+  :title: Server management > Dev Tools
+  :alt: Server management > Dev Tools
   :align: center
   :width: 80%
 
