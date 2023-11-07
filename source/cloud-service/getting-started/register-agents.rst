@@ -13,7 +13,7 @@ Follow these steps to register an agent:
 
 #. Log into the Wazuh WUI.
 
-#. Click **Wazuh** and then **Endpoints Summary**.
+#. Click **Endpoints Summary**.
 
 #. Click **Deploy a new agent**.
 

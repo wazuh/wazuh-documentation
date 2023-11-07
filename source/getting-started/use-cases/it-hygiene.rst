@@ -31,11 +31,11 @@ You can also generate property-specific reports for a monitored endpoint. For ex
    :align: center
    :width: 80%
 
-The inventory data collected can be queried using the `Wazuh API <https://documentation.wazuh.com/|WAZUH_CURRENT_MINOR|/user-manual/api/reference.html#tag/Syscollector>`__, which retrieves nested data in JSON format. For example, you can query the package inventory to check for the ``wazuh-agent`` package on a monitored endpoint using the **API Console** on the Wazuh dashboard. Command line tools like :ref:`cURL <inventory_wazuh_api_curl>` can also be used to query the inventory database.
+The inventory data collected can be queried using the `Wazuh API <https://documentation.wazuh.com/|WAZUH_CURRENT_MINOR|/user-manual/api/reference.html#tag/Syscollector>`__, which retrieves nested data in JSON format. For example, you can query the package inventory to check for the ``wazuh-agent`` package on a monitored endpoint using the **Server management** > **Dev Tools** module on the Wazuh dashboard. Command line tools like :ref:`cURL <inventory_wazuh_api_curl>` can also be used to query the inventory database.
 
 .. thumbnail:: /images/getting-started/use-cases/it-hygiene/inventory-querying-api.png
-   :title: Querying the package inventory using the API console
-   :alt: Querying the package inventory using the API console
+   :title: Querying the package inventory using the Dev Tools
+   :alt: Querying the package inventory using the Dev Tools
    :align: center
    :width: 80%
 
@@ -47,8 +47,8 @@ One of the objectives of implementing good IT hygiene is to reduce the attack su
 The **Configuration Assessment** module on the Wazuh dashboard provides each agent's SCA scan result. The results show the number of checks performed on the endpoint, how many failed, and the number of checks that passed. It also shows a score calculated based on the number of tests passed, giving you an overview of the level of compliance.
 
 .. thumbnail:: /images/getting-started/use-cases/it-hygiene/sca-results.png
-   :title: Configuration assessment results
-   :alt: Configuration assessment results
+   :title: Configuration Assessment results
+   :alt: Configuration Assessment results
    :align: center
    :width: 80%
 

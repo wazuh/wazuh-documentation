@@ -113,8 +113,8 @@ After evaluating the aforementioned check, the following event is generated:
 You can view the scan summaries on the **Configuration Assessment** module on the Wazuh dashboard.
 
   .. thumbnail:: /images/sca/dashboard-sca-tab.png
-     :title: Dashboard Configuration assessment module
-     :alt: Dashboard Configuration assessment module
+     :title: Dashboard Configuration Assessment module
+     :alt: Dashboard Configuration Assessment module
      :align: center
      :width: 80%
 

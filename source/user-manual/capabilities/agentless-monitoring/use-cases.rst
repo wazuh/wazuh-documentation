@@ -65,8 +65,8 @@ You can visualize the alert with any of these options
 - Navigate to **Threat Hunting** on the Wazuh dashboard. Search for ``agentless.host:*`` to view the alert generated. 
 
 .. thumbnail:: /images/manual/agentless-monitoring/navigate-to-modules-security-events.png
-   :title: Navigate to Modules > Threat Hunting
-   :alt: Navigate to Modules > Threat Hunting
+   :title: Navigate to Threat Hunting
+   :alt: Navigate to Threat Hunting
    :align: center
    :width: 80%
 

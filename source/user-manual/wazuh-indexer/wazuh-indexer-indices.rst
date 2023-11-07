@@ -402,7 +402,7 @@ Enabling Wazuh archives
 Defining the index pattern
 ^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-#. Go to **dev-tools-indices-list** > **Dashboard Management** and click **Index Patterns** from the Wazuh dashboard upper left menu **☰**.
+#. Go to **Indexer/dashboard management** > **Dashboard Management** and click **Index Patterns** from the Wazuh dashboard upper left menu **☰**.
 
 #. Click on **Create index pattern**.
 

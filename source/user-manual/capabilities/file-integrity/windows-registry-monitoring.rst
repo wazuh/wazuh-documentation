@@ -258,6 +258,6 @@ Navigate to **File Integrity Monitoring** on the Wazuh dashboard to view the ale
 
 .. thumbnail:: /images/manual/fim/changed-windows-startup-registries.png
   :title: Changes in the Windows startup registries
-  :alt: Changes in the Windows startup registries  
+  :alt: Changes in the Windows startup registries
   :align: center
   :width: 80%
