@@ -72,11 +72,11 @@ We recommend keeping your documents count from exceeding 200 million while alloc
 Using the ISM user interface
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-This is the recommended method.
+This is the recommended method. Perform the following steps using the Wazuh dashboard user interface.
 
 #. Click on the upper left menu **☰** and select **Index Management** under **OpenSearch Plugins**.
 #. Choose **State management policies** and click **rollover_policy**. 
-#. Select your preferred edition method and make changes as desired.
+#. Select your preferred edition method and update with your custom values.
 
 Using the ISM API
 ~~~~~~~~~~~~~~~~~
@@ -88,24 +88,21 @@ By default, only the ``admin`` and ``kibanaserver`` users have permissions to ma
 Using the initialization script
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-If you are deploying Wazuh step-by-step, you can customize the rollover policy by using the ``indexer-ism-init.sh`` script. In this case, the initialization of the cluster splits in two steps, instead of running the ``indexer-init.sh`` script:
+When deploying Wazuh step by step, you have the option to customize the rollover policy using the ``indexer-ism-init.sh`` script. In this scenario, the cluster initialization process involves two distinct steps instead of using the ``indexer-init.sh`` script:
 
-#. Initialize the security options by running the ``indexer-security-init.sh`` script.
+#. To set up the security options, execute the ``indexer-security-init.sh`` script.
 
-    .. code-block:: console
+   .. code-block:: console
     
-        # /usr/share/wazuh-indexer/bin/indexer-security-init.sh
+      # /usr/share/wazuh-indexer/bin/indexer-security-init.sh
 
+#. Next, configure the rollover policy by running the ``indexer-ism-init.sh`` script. For example, you can specify a 30 days rollover interval with the ``-a`` option as shown below. For a complete list of available options, use ``--help``.
 
-#. Then, initialize the rollover policy running the ``indexer-ism-init.sh`` script.
-
-    .. code-block:: console
+   .. code-block:: console
     
-        # /usr/share/wazuh-indexer/bin/indexer-ism-init.sh -a 30d
+      # /usr/share/wazuh-indexer/bin/indexer-ism-init.sh -a 30d
 
-    Use ``--help`` for a list of options.
-
-    The script uses the default password of the admin user. If you changed the password, you can use the ``-p`` option to specify the new password.
+   Please note that this script uses the default password for the ``admin`` user. If you have changed the password, use the ``-p`` option to specify the new password.
 
 Index retention
 ---------------
