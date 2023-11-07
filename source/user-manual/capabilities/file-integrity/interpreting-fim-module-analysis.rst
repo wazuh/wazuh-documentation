@@ -6,7 +6,7 @@
 Interpreting the FIM module analysis
 ====================================
 
-FIM analysis results appear on the Wazuh dashboard whenever there’s an addition, modification, or deletion of monitored files. You can view the FIM results in three different sections of the dashboard. To view results from the FIM module, navigate to **File integrity monitoring** on the Wazuh dashboard. The results are in the following sections:
+FIM analysis results appear on the Wazuh dashboard whenever there’s an addition, modification, or deletion of monitored files. You can view the FIM results in three different sections of the dashboard. To view results from the FIM module, navigate to **File Integrity Monitoring** on the Wazuh dashboard. The results are in the following sections:
 
 - :ref:`Inventory <inventory>` 
 - :ref:`Dashboard <dashboard>`

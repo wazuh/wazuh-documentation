@@ -3,7 +3,7 @@
 .. meta::
    :description: The Wazuh FIM module tracks the activities performed within monitored directories or files to gain extensive information on file creation, modification, and deletion. Learn more in this use case.
     
-File integrity monitoring
+File Integrity Monitoring
 =========================
 
 **File Integrity Monitoring** (FIM) involves monitoring the integrity of files and directories to detect and alert when there are file addition, modification, or deletion events. FIM provides an important layer of protection for sensitive files and data by routinely scanning and verifying the integrity of those assets. It identifies file changes that could be indicative of a cyberattack and generates alerts for further investigation and remediation if necessary.
@@ -15,29 +15,29 @@ The open source FIM module performs real-time monitoring and scheduled scans dep
 Viewing File Integrity Monitoring scan results
 ----------------------------------------------
 
-You can find a dedicated **Integrity monitoring** module in the Wazuh dashboard where all file integrity events triggered from monitored endpoints are reported. This increases visibility as it provides valuable information on the status of monitored directories and their potential impact on the security posture. The :doc:`Wazuh FIM dashboard </user-manual/capabilities/file-integrity/interpreting-fim-module-analysis>` has three different sections to view FIM analysis results; **Inventory, Dashboard, and Events**.
+You can find a dedicated **File Integrity monitoring** module in the Wazuh dashboard where all file integrity events triggered from monitored endpoints are reported. This increases visibility as it provides valuable information on the status of monitored directories and their potential impact on the security posture. The :doc:`Wazuh FIM dashboard </user-manual/capabilities/file-integrity/interpreting-fim-module-analysis>` has three different sections to view FIM analysis results; **Inventory, Dashboard, and Events**.
 
 #. The **Inventory** section displays a list of all files that the FIM module has indexed. Each file has entry information including the filename, last modification date, user, user ID, group, and file size.
 
    .. thumbnail:: /images/getting-started/use-cases/fim/fim-module-inventory.png
-      :title: File integrity monitoring module inventory
-      :alt: File integrity monitoring module inventory
+      :title: File Integrity Monitoring module inventory
+      :alt: File Integrity Monitoring module inventory
       :align: center
       :width: 80%
 
 #. The **Dashboard** section shows an overview of the events triggered by the FIM module for all monitored endpoints. You can also streamline it to show the events for a selected monitored endpoint.
 
    .. thumbnail:: /images/getting-started/use-cases/fim/fim-dashboard.png
-      :title: File integrity monitoring dashboard
-      :alt: File integrity monitoring dashboard
+      :title: File Integrity Monitoring dashboard
+      :alt: File Integrity Monitoring dashboard
       :align: center
       :width: 80%
 
 #. The **Events** section shows the alerts triggered by the FIM module. It displays details such as the agent name, the file path of the monitored file, the type of FIM event, a description of the alert, and the rule level of each alert.
 
    .. thumbnail:: /images/getting-started/use-cases/fim/fim-alerts.png
-      :title: File integrity monitoring module alerts
-      :alt: File integrity monitoring module alerts
+      :title: File Integrity Monitoring module alerts
+      :alt: File Integrity Monitoring module alerts
       :align: center
       :width: 80%
 
@@ -57,8 +57,8 @@ The Wazuh FIM module supports various configuration options that enable effectiv
    Below is an example of an alert generated when a monitored file is changed on a Windows endpoint.
 
    .. thumbnail:: /images/getting-started/use-cases/fim/fim-modified-file-alert.png
-      :title: File integrity monitoring modified file alert
-      :alt: File integrity monitoring modified file alert
+      :title: File Integrity Monitoring modified file alert
+      :alt: File Integrity Monitoring modified file alert
       :align: center
       :width: 80%
 
@@ -87,9 +87,9 @@ The Wazuh FIM module integrates with other Wazuh capabilities and third-party th
 
 The Wazuh FIM module supports various integrations, including but not limited to:
 
--  **File integrity monitoring and YARA**: By combining the Wazuh FIM module and the YARA tool, it is possible to detect malware when suspicious file additions or modifications are identified. The YARA rule files contain samples of malware indicators that are downloaded to the monitored endpoints. When the FIM module detects a change in the monitored file or directory, it executes a YARA scan using a script to determine if it is malware. If the YARA rule finds a match with a file, it will send the scan results to the Wazuh server for decoding and alerting. This would be reported according to the custom rule and decoder configurations configured on the Wazuh server. Check this documentation for more information on :doc:`how to integrate the Wazuh FIM module with YARA </user-manual/capabilities/malware-detection/fim-yara>`.
--  **File integrity monitoring and VirusTotal**: The Wazuh :doc:`Integrator module </user-manual/reference/ossec-conf/integration>` connects to external APIs and alerting tools such as VirusTotal. The :doc:`VirusTotal integration </user-manual/capabilities/malware-detection/virus-total-integration>` uses the VirusTotal API to detect malicious file hashes within the files and directories monitored by the FIM module. Once enabled, when FIM generates alerts, Wazuh initiates the VirusTotal integration to extract the hash value associated with the flagged file from the alert. The VirusTotal API is then used to compare these hashes against its scanning engines for potentially malicious content.
--  **File integrity monitoring and active response**: The :doc:`Wazuh active response </user-manual/capabilities/active-response/index>` module automatically responds to threats identified in a timely manner. This combination enables the FIM module to not only detect but also respond to malicious activities. You can configure active response scripts to execute when the FIM module detects file changes in your monitored environment.  Additionally, it also generates alerts for the response performed. This reduces the Mean Time To Respond (MTTR) as malicious changes detected are remediated in a timely manner.
+-  **File Integrity Monitoring and YARA**: By combining the Wazuh FIM module and the YARA tool, it is possible to detect malware when suspicious file additions or modifications are identified. The YARA rule files contain samples of malware indicators that are downloaded to the monitored endpoints. When the FIM module detects a change in the monitored file or directory, it executes a YARA scan using a script to determine if it is malware. If the YARA rule finds a match with a file, it will send the scan results to the Wazuh server for decoding and alerting. This would be reported according to the custom rule and decoder configurations configured on the Wazuh server. Check this documentation for more information on :doc:`how to integrate the Wazuh FIM module with YARA </user-manual/capabilities/malware-detection/fim-yara>`.
+-  **File Integrity Monitoring and VirusTotal**: The Wazuh :doc:`Integrator module </user-manual/reference/ossec-conf/integration>` connects to external APIs and alerting tools such as VirusTotal. The :doc:`VirusTotal integration </user-manual/capabilities/malware-detection/virus-total-integration>` uses the VirusTotal API to detect malicious file hashes within the files and directories monitored by the FIM module. Once enabled, when FIM generates alerts, Wazuh initiates the VirusTotal integration to extract the hash value associated with the flagged file from the alert. The VirusTotal API is then used to compare these hashes against its scanning engines for potentially malicious content.
+-  **File Integrity Monitoring and active response**: The :doc:`Wazuh active response </user-manual/capabilities/active-response/index>` module automatically responds to threats identified in a timely manner. This combination enables the FIM module to not only detect but also respond to malicious activities. You can configure active response scripts to execute when the FIM module detects file changes in your monitored environment.  Additionally, it also generates alerts for the response performed. This reduces the Mean Time To Respond (MTTR) as malicious changes detected are remediated in a timely manner.
 
    In the image below Wazuh triggers when a file is added to the monitored endpoint. The VirusTotal API scans the file and identifies it as malicious content on 55 engines. Then the Wazuh active response module acts immediately to remove the threat from the monitored endpoint.
 
@@ -99,7 +99,7 @@ The Wazuh FIM module supports various integrations, including but not limited to
       :align: center
       :width: 80%
 
--  **File integrity monitoring and CDB list**: Wazuh FIM module also detects malicious files by checking the presence of known malware signatures when combined with :doc:`CDB lists (constant database) </user-manual/capabilities/malware-detection/cdb-lists-threat-intelligence>`. CDB lists are used to store known malware indicators of Compromise (IOCs) such as file hashes, IP addresses, and domain names. When CDB lists are created, Wazuh checks if field values from FIM alerts such as file hash match the keys stored in the CDB lists. If matched, it generates an alert and response based on how you configure your custom rule.
+-  **File Integrity Monitoring and CDB list**: Wazuh FIM module also detects malicious files by checking the presence of known malware signatures when combined with :doc:`CDB lists (constant database) </user-manual/capabilities/malware-detection/cdb-lists-threat-intelligence>`. CDB lists are used to store known malware indicators of Compromise (IOCs) such as file hashes, IP addresses, and domain names. When CDB lists are created, Wazuh checks if field values from FIM alerts such as file hash match the keys stored in the CDB lists. If matched, it generates an alert and response based on how you configure your custom rule.
 
    .. thumbnail:: /images/getting-started/use-cases/fim/malware-hash-file-alerts.png
       :title: File with known malware hash detected and removed alerts
@@ -141,7 +141,7 @@ Threat actors maintain persistence by commonly adding programs for their malicio
 Meeting regulatory compliance
 -----------------------------
 
-Meeting regulatory compliance requirements is an important consideration for organizations in various industries. File integrity monitoring is a requirement for achieving compliance with regulations such as PCI DSS, SOX, HIPAA, NIST SP 800-53, among others.
+Meeting regulatory compliance requirements is an important consideration for organizations in various industries. File Integrity Monitoring is a requirement for achieving compliance with regulations such as PCI DSS, SOX, HIPAA, NIST SP 800-53, among others.
 
 You can customize the Wazuh FIM module to monitor specific files and directories where your organization’s sensitive and confidential data are stored. Wazuh provides a comprehensive report that outlines the changes made to the files and directories being monitored. This feature is particularly useful for ensuring compliance with various regulatory standards.
 

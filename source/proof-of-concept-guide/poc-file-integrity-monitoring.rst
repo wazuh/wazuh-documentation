@@ -3,7 +3,7 @@
 .. meta::
    :description: The Wazuh File Integrity Monitoring system watches for modification of files in selected directories and triggers alerts when these files are modified. Learn more about it in this PoC.
 
-File integrity monitoring
+File Integrity Monitoring
 =========================
 
 File Integrity Monitoring (FIM) helps in auditing sensitive files and meeting regulatory compliance requirements. Wazuh has an inbuilt :doc:`FIM </user-manual/capabilities/file-integrity/index>` module that monitors file system changes to detect the creation, modification, and deletion of files.
