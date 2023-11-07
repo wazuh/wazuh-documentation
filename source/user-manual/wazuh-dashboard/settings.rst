@@ -8,7 +8,7 @@
 Settings
 ========
 
-The *Settings* page allows you to configure and customize your Wazuh dashboard experience.
+The Dashboard *Settings* allows you to configure and customize your Wazuh dashboard experience.
 
 API
 ---
