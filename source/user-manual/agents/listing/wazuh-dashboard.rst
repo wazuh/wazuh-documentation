@@ -6,7 +6,7 @@
 Listing agents using the Wazuh dashboard
 ----------------------------------------
 
-You can list and see basic information about all registered agents by going to the **Agents** module in the Wazuh dashboard:
+You can list and see basic information about all registered agents by going to the **Endpoints Summary** module in the Wazuh dashboard:
 
 .. thumbnail:: /images/kibana-app/agent-management/agents-preview.png
     :title: Listing agents from the Wazuh dashboard
