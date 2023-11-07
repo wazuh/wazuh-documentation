@@ -143,19 +143,19 @@ You can check for information about Wazuh indices in two ways.
 Using the web user interface
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-#. In the Wazuh dashboard upper left menu **☰**, go to **OpenSearch Plugins** > **Index Management**.
+#. In the Wazuh dashboard upper left menu **☰**, go to **Indexer/dashboard management** > **Index Management**.
 
    .. thumbnail:: /images/manual/wazuh-indexer/opensearch-plugins-index-management-option.png
-      :title: Opensearch plugins Index management menu option
-      :alt: Opensearch plugins Index management menu option
+      :title: Indexer/dashboard management Index management menu option
+      :alt: Indexer/dashboard management Index management menu option
       :align: center
       :width: 80%
 
 #. Click on **Indices**.
 
    .. thumbnail:: /images/manual/wazuh-indexer/opensearch-plugins-index-management-indices.png
-      :title: OpenSearch plugins Index-management indices option
-      :alt: OpenSearch plugins Index-management indices option
+      :title: Indexer/dashboard management Index-management indices option
+      :alt: Indexer/dashboard management Index-management indices option
       :align: center
       :width: 80%
 
@@ -169,7 +169,7 @@ You can query the indices information using the Wazuh indexer API from the Wazuh
 Wazuh dashboard
 ~~~~~~~~~~~~~~~
 
-#. Navigate to **☰** > **Management** > **Dev Tools**:
+#. Navigate to **☰** > **Indexer/dashboard management** > **Dev Tools**:
 
    .. code-block:: none
 
@@ -402,7 +402,7 @@ Enabling Wazuh archives
 Defining the index pattern
 ^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-#. Go to **Management** > **Stack Management** and click **Index Patterns** from the Wazuh dashboard upper left menu **☰**.
+#. Go to **dev-tools-indices-list** > **Dashboard Management** and click **Index Patterns** from the Wazuh dashboard upper left menu **☰**.
 
 #. Click on **Create index pattern**.
 
@@ -466,7 +466,7 @@ The Wazuh dashboard uses the ``wazuh‑statistics-*`` indices to display statist
 
 The Wazuh dashboard runs requests to the Wazuh manager API to query usage-related information. It inserts data into the ``wazuh‑statistics-*`` indices from the information collected. The Wazuh indexer creates a ``wazuh‑statistics-*`` index per week by default. Check the documentation on the :ref:`Statistics creation interval <cron_statistics_index_creation>`. These indices store Wazuh server statistics every 5 minutes by default. Check the documentation on the :ref:`Frequency of task execution <cron_statistics_interval>`.
 
-To visualize this information in the Wazuh dashboard, go to **Management** > **Statistics**.
+To visualize this information in the Wazuh dashboard, go to **Server management** > **Statistics**.
 
 .. thumbnail:: /images/manual/wazuh-indexer/statistics-analysis-engine-dashboard.png
    :title: Statistics analysis engine dashboard

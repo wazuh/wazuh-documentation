@@ -83,7 +83,7 @@ The following steps serve as a guide on how to import the key to a Linux/Unix ag
          # /var/ossec/bin/wazuh-control restart
 
 
-#. Select the “agents” module to check for the newly enrolled agent and its connection status in the Wazuh dashboard to confirm that enrollment was successful.
+#. Select the “Endpoints Summary” module to check for the newly enrolled agent and its connection status in the Wazuh dashboard to confirm that enrollment was successful.
 
 
 .. _this-windows-endpoint:
@@ -150,7 +150,7 @@ The Wazuh agent installation directory depends on the architecture of the host:
 
 
 
-#. Select the “agents” module to check for the newly enrolled agent and its connection status in the Wazuh dashboard to confirm that enrollment was successfully.
+#. Select the “Endpoints Summary” module to check for the newly enrolled agent and its connection status in the Wazuh dashboard to confirm that enrollment was successfully.
 
 
 .. _this-macos-endpoint:
@@ -201,4 +201,4 @@ The following steps serve as a guide on how to import the key to a macOS agent:
     # /Library/Ossec/bin/wazuh-control restart
 
 
-#. Select the “agents” module to check for the newly enrolled agent and its connection status in the Wazuh dashboard to confirm that enrollment was successful.
+#. Select the “Endpoints Summary” module to check for the newly enrolled agent and its connection status in the Wazuh dashboard to confirm that enrollment was successful.
