@@ -229,7 +229,7 @@ Upgrading the Wazuh dashboard
 
     .. include:: /_templates/installations/dashboard/enable_dashboard.rst
 
-#. Clear browsers caches and cookies.
+
 
 Next steps
 ----------
