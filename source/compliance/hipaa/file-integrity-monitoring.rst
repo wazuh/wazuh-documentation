@@ -3,7 +3,7 @@
 .. meta::
   :description: The File Integrity Monitoring module assists you in meeting HIPAA compliance. Learn more about it in this section of the Wazuh documentation.
 
-File integrity monitoring
+File Integrity Monitoring
 =========================
 
 The Wazuh File Integrity Monitoring (FIM) module monitors an endpoint filesystem to detect changes in specified files and directories. It triggers alerts on file creation, modification, or deletion from the monitored paths. The FIM module stores the cryptographic checksum and other attributes of the monitored file, folder, or Windows registry key, and alerts when there is a change.

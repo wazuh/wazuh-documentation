@@ -14,7 +14,7 @@ Wazuh provides several :doc:`capabilities </user-manual/capabilities/index>` for
 
 -  File Integrity Monitoring (FIM).
 -  Security Configuration Assessment (SCA).
--  Vulnerability detection.
+-  Vulnerability Detection.
 -  Malware detection.
 -  Incidence response.
 

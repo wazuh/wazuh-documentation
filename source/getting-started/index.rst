@@ -47,11 +47,11 @@ Screenshots
           :title: Log data analysis
           :alt: Log data analysis
      - .. thumbnail:: ../images/getting-started/file-integrity-monitoring.png
-          :title: File integrity monitoring
-          :alt: File integrity monitoring 
+          :title: File Integrity Monitoring
+          :alt: File Integrity Monitoring 
    * - .. thumbnail:: ../images/getting-started/vulnerability-detection.png
-          :title: Vulnerability detection  
-          :alt: Vulnerability detection  
+          :title: Vulnerability Detection  
+          :alt: Vulnerability Detection  
      - .. thumbnail:: ../images/getting-started/security-configuration-assessment.png
           :title: Security configuration assessment   
           :alt: Security configuration assessment   

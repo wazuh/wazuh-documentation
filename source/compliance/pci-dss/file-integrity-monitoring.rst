@@ -5,10 +5,10 @@
   
 .. _pci_dss_file_integrity_monitoring:
 
-File integrity monitoring
+File Integrity Monitoring
 =========================
 
-File integrity monitoring compares the cryptographic checksum and other attributes of a known file against the checksum and attributes of that file after it has been modified.
+File Integrity Monitoring compares the cryptographic checksum and other attributes of a known file against the checksum and attributes of that file after it has been modified.
 
 First, the Wazuh agent scans the system periodically at a specified interval, then it sends the checksums of the monitored files and registry keys (for Windows systems) to the Wazuh server. The server stores the checksums and looks for modifications by comparing the newly received checksums against the historical checksum values for those files and/or registry keys. An alert is generated if the checksum (or another file attribute) changes. Wazuh also supports near real-time file integrity monitoring.
 

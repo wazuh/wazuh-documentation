@@ -1,7 +1,7 @@
 {
   "name": "wazuh-documentation",
   "version": "3.0.0",
-  "description": "Wazuh is a free, open source and enterprise-ready security monitoring solution for threat detection, integrity monitoring, incident response and compliance.",
+  "description": "Wazuh is a free, open source and enterprise-ready security monitoring solution for threat detection, file integrity monitoring, incident response and compliance.",
   "main": "index.html",
   "watch": {
     "build": {
