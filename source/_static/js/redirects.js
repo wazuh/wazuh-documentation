@@ -66,8 +66,6 @@ removedUrls['x.y'] = [
 
 newUrls['4.8'] = [
   '/release-notes/release-4-8-0.html',
-  '/development/packaging/generate-indexer-package.html',
-  '/development/packaging/generate-dashboard-package.html',
 ];
 
 /* *** RELEASE 4.7 ****/
@@ -258,6 +256,7 @@ newUrls['4.5'] = [
   '/user-manual/wazuh-indexer/index-life-management.html',
   '/user-manual/wazuh-indexer/wazuh-indexer-tuning.html',
   '/user-manual/wazuh-indexer/migrating-wazuh-indices.html',
+  '/user-manual/user-administration/ldap.html',
 ];
 
 /* Pages no longer available in 4.5 */

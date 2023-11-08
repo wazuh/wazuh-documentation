@@ -102,7 +102,7 @@ OneLogin Configuration
          :align: center
          :width: 80%    
 
-#. Get the ``metada_onelogin.xml`` file and ``X.509 certificate`` from the application.
+#. Get the ``metadata_onelogin.xml`` file and ``X.509 certificate`` from the application.
 
    #. Go to **Applications** >  **Applications** then select the **Wazuh** app. Click on **More Actions** and then select **SAML Metadata**.
 
@@ -323,6 +323,7 @@ Wazuh dashboard configuration
 
       opensearch_security.auth.type: "saml"
       server.xsrf.allowlist: ["/_opendistro/_security/saml/acs", "/_opendistro/_security/saml/logout", "/_opendistro/_security/saml/acs/idpinitiated"]
+      opensearch_security.session.keepalive: false
 
 #. Restart the Wazuh dashboard service.
 
