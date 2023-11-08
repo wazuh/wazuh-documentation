@@ -13,7 +13,7 @@ It is necessary to provide access credentials to the Wazuh Azure module so it ca
 
 Getting access credentials for Microsoft Graph and Log Analytics
 ----------------------------------------------------------------
-For :doc:`Microsoft Graph </cloud-security/azure/activity-services/active-directory/graph>` and :doc:`Log Analytics </cloud-security/azure/activity-services/services/log-analytics>` valid ``application_id`` and ``application_key`` values are required. The necessary ``application_key`` value for a given **App Registration** in **Microsoft Entra ID** can be obtained from the **Certificates & secrets** section while the ``application_id`` can be obtained from the **Overview** section:
+For :doc:`Microsoft Graph </cloud-security/azure/activity-services/entra/graph>` and :doc:`Log Analytics </cloud-security/azure/activity-services/services/log-analytics>` valid ``application_id`` and ``application_key`` values are required. The necessary ``application_key`` value for a given **App Registration** in **Microsoft Entra ID** can be obtained from the **Certificates & secrets** section while the ``application_id`` can be obtained from the **Overview** section:
 
 .. thumbnail:: /images/cloud-security/azure/log-analytics-create-key.png
     :title: Log Analytics App
