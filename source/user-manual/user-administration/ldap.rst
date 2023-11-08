@@ -10,7 +10,7 @@ Lightweight Directory Access Protocol (LDAP) is often used for centralizing user
 
 Authentication is the process of verifying the identity of users or systems to ensure that they provide valid credentials, such as username and password. Authorization, on the other hand, is granting access to a user or system based on their identity. It retrieves the backend roles for the user and determines what actions they are allowed to perform on the Wazuh dashboard. 
 
-In this section, we outline the required configuration to integrate LDAP with the Wazuh platform. The guide assumes you already have an LDAP server or Microsoft Active Directory. 
+In this section, we outline the required configuration to integrate LDAP with the Wazuh platform. The guide assumes you already have an LDAP server or Microsoft Entra ID. 
 
 .. topic:: Required parameters
 
@@ -20,7 +20,7 @@ In this section, we outline the required configuration to integrate LDAP with th
    -  ``bind_dn``: The credential to authenticate to your LDAP server.
    -  ``password``: The password to authenticate to your LDAP server.
    -  ``enable_ssl``: Specifies whether to use LDAP over SSL (LDAPS). This can be set to true or false. 
-   -  ``pemtrustedcas_filepath``: The absolute path to the Privacy Enhanced Mail (PEM) file containing the root Certificate Authority (CA) of your Active Directory/LDAP server. This is required when ``enable_ssl`` is set to true.
+   -  ``pemtrustedcas_filepath``: The absolute path to the Privacy Enhanced Mail (PEM) file containing the root Certificate Authority (CA) of your Microsoft Entra ID/LDAP server. This is required when ``enable_ssl`` is set to true.
    - ``userbase``: Specifies the subtree in the directory where user information is stored.
    -  ``usersearch``: The actual LDAP query that the Security plugin executes when trying to authenticate a user. 
    -  ``username_attribute``: The Security plugin uses this attribute of the directory entry to look for the user name. If set to null, the Distinguished Name (DN) is used (default).
@@ -77,7 +77,7 @@ The ``auhtc`` section of the Wazuh indexer security configuration file handles a
 
          authc:
            ldap:
-             description: "Authenticate via LDAP or Active Directory"
+             description: "Authenticate via LDAP or Microsoft Entra ID"
              http_enabled: true
              transport_enabled: false
              order: 5
@@ -107,7 +107,7 @@ The ``auhtc`` section of the Wazuh indexer security configuration file handles a
 
          authz:
            roles_from_myldap:
-             description: "Authorize via LDAP or Active Directory"
+             description: "Authorize via LDAP or Microsoft Entra ID"
              http_enabled: true
              transport_enabled: true
              authorization_backend:
