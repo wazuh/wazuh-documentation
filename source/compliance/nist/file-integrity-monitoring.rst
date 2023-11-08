@@ -3,7 +3,7 @@
 .. meta::
   :description: The FIM module monitors an endpoint filesystem to detect file changes in specified files and directories. Learn more about it in this section.
 
-File Integrity Monitoring
+File integrity monitoring
 =========================
 
 The Wazuh File Integrity Monitoring (FIM) module monitors an endpoint filesystem to detect file changes in specified files and directories. It triggers alerts on file creation, modification, or deletion from the monitored paths. The FIM module compares the cryptographic checksum and other attributes of the monitored files and folders when a change occurs. 
@@ -44,11 +44,11 @@ In this scenario, the Wazuh FIM monitors the SSH configuration file ``/etc/ssh/s
         
         # sed -re 's/^(PasswordAuthentication)([[:space:]]+)no/\1\2yes/' -i.`date -I` /etc/ssh/sshd_config
 
-#. Select the **File Integrity monitoring** module from the Wazuh dashboard. Find the alert triggered by rule ID ``550``. The alert details show that the content of ``/etc/ssh/sshd_config`` has changed. They include the differences in the file checksum, the modification made, the modification time, and other information.
+#. Select the **File Integrity Monitoring** module from the Wazuh dashboard. Find the alert triggered by rule ID ``550``. The alert details show that the content of ``/etc/ssh/sshd_config`` has changed. They include the differences in the file checksum, the modification made, the modification time, and other information.
 
    .. thumbnail:: /images/compliance/nist/integrity-monitoring-tab.png    
-      :title: File Integrity monitoring module
-      :alt: File Integrity monitoring module
+      :title: File Integrity Monitoring module
+      :alt: File Integrity Monitoring module
       :align: center
       :width: 80%
 
