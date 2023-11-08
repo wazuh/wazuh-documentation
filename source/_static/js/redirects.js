@@ -82,8 +82,8 @@ newUrls['4.6'] = [
   '/user-manual/wazuh-dashboard/queries.html',
   '/cloud-security/azure/activity-services/entra/index.html',
   '/cloud-security/azure/activity-services/entra/graph.html',
-  '/user-manual/user-administration/single-sign-on/administrator/microsoft-entra-id.rst',
-  '/user-manual/user-administration/single-sign-on/read-only/microsoft-entra-id.rst',
+  '/user-manual/user-administration/single-sign-on/administrator/microsoft-entra-id.html',
+  '/user-manual/user-administration/single-sign-on/read-only/microsoft-entra-id.html',
 ];
 
 /* Pages no longer available in 4.6 */
@@ -134,8 +134,8 @@ removedUrls['4.6'] = [
   '/development/packaging/generate-wazuh-splunk-app.html',
   '/cloud-security/azure/activity-services/active-directory/index.html',
   '/cloud-security/azure/activity-services/active-directory/graph.html',
-  '/user-manual/user-administration/single-sign-on/administrator/azure-active-directory.rst',
-  '/user-manual/user-administration/single-sign-on/read-only/azure-active-directory.rst'
+  '/user-manual/user-administration/single-sign-on/administrator/azure-active-directory.html',
+  '/user-manual/user-administration/single-sign-on/read-only/azure-active-directory.html'
 ];
 
 /* *** RELEASE 4.5 ****/

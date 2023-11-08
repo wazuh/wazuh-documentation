@@ -19,9 +19,9 @@ From a wider perspective, the Microsoft Azure infrastructure resources can be di
 
 .. topic:: Contents
 
-    .. toctree::
-       :maxdepth: 2
+   .. toctree::
+      :maxdepth: 2
 
-       prerequisites/index
-       services/index
-       active-directory/index
+      prerequisites/index
+      services/index
+      entra/index
