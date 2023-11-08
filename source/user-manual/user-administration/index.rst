@@ -14,7 +14,7 @@ The RBAC section contains directions on how to create Wazuh indexer users, also 
 
 In the single sign-on section, you can find instructions on how to integrate Wazuh with different Identity Providers to implement Single Sign-On. Find instructions for Okta, Microsoft Entra ID, PingOne, Google, Jumpcloud and OneLogin. 
 
-In the LDAP integration section, you can find instructions on how to integrate Wazuh with LDAP/Microsoft Entra ID to authenticate and authorize users.
+In the LDAP integration section, you can find instructions on how to integrate Wazuh with LDAP/Active Directory to authenticate and authorize users.
 
     .. toctree::
         :maxdepth: 2

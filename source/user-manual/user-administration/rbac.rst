@@ -10,7 +10,7 @@ Wazuh RBAC - How to create and map internal users
 
 Wazuh RBAC allows access to Wazuh resources based on the roles and policies assigned to the users. It is an easy-to-use administration system that enables to manage users' or entities' permissions to the system resources. To learn more, see the :doc:`Role-Based Access Control </user-manual/api/rbac/index>` section. 
 
-The Wazuh platform includes an internal user database that can be used for authentication. It can also be used in addition to an external authentication system such as LDAP or Microsoft Entra ID.  Learn how to create users and map them with Wazuh in the below sections.
+The Wazuh platform includes an internal user database that can be used for authentication. It can also be used in addition to an external authentication system such as LDAP or Active Directory.  Learn how to create users and map them with Wazuh in the below sections.
 
 - `Creating and setting a Wazuh admin user`_
 - `Creating and setting a Wazuh read-only user`_ 
