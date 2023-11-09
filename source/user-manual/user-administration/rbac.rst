@@ -25,7 +25,7 @@ Follow these steps to create an internal user, create a new role mapping, and gi
 
 #. Log into the Wazuh dashboard as administrator.
 
-#. Click the upper-left menu icon **☰** to open the options, select **Security**, and then **Internal users** to open the internal users' page.
+#. Click the upper-left menu icon **☰** to open the options, go to **Indexer/dashboard management** > **Security**, and then **Internal users** to open the internal users' page.
 
    .. thumbnail:: /images/manual/user-administration/rbac/internal-user.gif
       :title: Internal users page 
@@ -37,7 +37,7 @@ Follow these steps to create an internal user, create a new role mapping, and gi
 
 #. To map the user to the admin role, follow these steps:
 
-   #. Click the upper-left menu icon **☰** to open the options, select **Security**, and then **Roles** to open the roles page.
+   #. Click the upper-left menu icon **☰** to open the options, go to **Indexer/dashboard management** > **Security**, and then **Roles** to open the roles page.
 
    #. Search for the **all_access** role in the roles list and select it to open the details window.
 
@@ -52,9 +52,8 @@ Follow these steps to create an internal user, create a new role mapping, and gi
    .. note:: Reserved roles are restricted for any permission customizations. You can create a custom role with the same permissions or duplicate a reserved role for further customization.
 
 #. To map the user with Wazuh, follow these steps:
-
-   #. Click the upper-left menu icon **☰** to open the available options, and click **Wazuh**.   
-   #. Click **Wazuh** to open the Wazuh dashboard menu, select **Security**, and then **Roles mapping** to open the page.
+ 
+   #. Click the upper-left menu icon **☰** to open the menu on the Wazuh dashboard, go to **Server management** > **Security**, and then **Roles mapping** to open the page.
 
       .. thumbnail:: /images/manual/user-administration/rbac/role-mapping.gif
          :title: Wazuh role mapping
@@ -79,7 +78,7 @@ Follow these steps to create an internal user, create a new role mapping, and gi
 
 #. Log into the Wazuh dashboard as administrator.
 
-#. Click the upper-left menu icon **☰** to open the options, select **Security**, and then **Internal users** to open the internal users' page.
+#. Click the upper-left menu icon **☰** to open the options, go to **Indexer/dashboard management** > **Security**, and then **Internal users** to open the internal users' page.
 
    .. thumbnail:: /images/manual/user-administration/rbac/internal-user.gif
       :title: Internal users page 
@@ -91,7 +90,7 @@ Follow these steps to create an internal user, create a new role mapping, and gi
 
 #. To map the user to the appropriate role, follow these steps:
 
-   #. Click the upper-left menu icon **☰** to open the options, select **Security**, and then **Roles** to open the roles page.
+   #. Click the upper-left menu icon **☰** to open the options, go to **Indexer/dashboard management** > **Security**, and then **Roles** to open the roles page.
 
    #. Click **Create role**, complete the empty fields with the following parameters, and then click **Create** to complete the task. 
      
@@ -111,9 +110,7 @@ Follow these steps to create an internal user, create a new role mapping, and gi
 
 #. To map the user with Wazuh, follow these steps:
 
-   #. Click the upper-left menu icon **☰** to open the available options and click **Wazuh**.  
-
-   #. Click **Wazuh** to open the menu, select **Security**, and then **Roles mapping** to open the page.
+   #. Click **☰** to open the menu on the Wazuh dashboard, go to **Server management** > **Security**, and then **Roles mapping** to open the page.
 
       .. thumbnail:: /images/manual/user-administration/rbac/role-mapping.gif
          :title: Wazuh role mapping
@@ -139,7 +136,7 @@ Follow these steps to create an internal user and map it to a role of your choic
 
 #. Log into the Wazuh dashboard as administrator.
 
-#. Click the upper-left menu icon **☰** to open the options, select **Security**, and then **Internal users** to open the internal users' page.
+#. Click the upper-left menu icon **☰** to open the options, got to **Server management** > **Security**, and then **Internal users** to open the internal users' page.
 
    .. thumbnail:: /images/manual/user-administration/rbac/internal-user.gif
       :title: Internal users page 
@@ -156,9 +153,8 @@ Follow these steps to create an internal user and map it to a role of your choic
    #. Add the user you created in the previous steps and click **Map** to confirm the action.
 
 #. To map the user with Wazuh, follow these steps:
-
-   #. Click the upper-left menu icon **☰** to open the available options and click **Wazuh**.   
-   #. Click **Wazuh** to open the Wazuh dashboard menu, select **Security**, and then **Roles mapping** to open the page.
+  
+   #. Click **☰** to open the menu on the Wazuh dashboard, go to **Server management** > **Security**, and then **Roles mapping** to open the page.
 
       .. thumbnail:: /images/manual/user-administration/rbac/role-mapping.gif
          :title: Wazuh role mapping
@@ -234,7 +230,7 @@ Creating and mapping an internal user
 
 Follow these steps to create an internal user, create a custom role and map it to the new user.  
 
-#. Click the upper-left menu icon **☰** to open the available options, select **Security**, and then **Internal users** to open the internal users' page.
+#. Click the upper-left menu icon **☰** to open the available options, go to **Indexer/dashboard management** > **Security**, and then **Internal users** to open the internal users' page.
 
 #. Click **Create internal user**, provide a username and password, and click **Create** to complete the action.
 
@@ -306,8 +302,7 @@ Mapping with Wazuh
 
 To map the user with Wazuh, follow these steps:
 
-#. Click the upper-left menu icon **☰** to open the available options and click **Wazuh**.
-#. Click **Wazuh** to open the Wazuh dashboard menu, select **Security**, and then **Policies** to open the policies page.
+#. Click **☰** to open the menu on the Wazuh dashboard, go to **Server management** > **Security**, and then **Policies** to open the policies page.
 #. Click **Create policy** and complete the empty fields with the requested information.
    
       - **Policy name**: Assign a name to the new policy. 
