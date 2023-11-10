@@ -24,7 +24,7 @@ Generate a report of successful authentications
 
 This use case shows how Wazuh helps meet the **CA-7 Continuous monitoring** NIST requirement by providing security reporting to administrators. Use the Wazuh dashboard to generate a report of all successful authentications in the last 24 hours:
 
-#. Go to the Wazuh dashboard menu and select **Discover** under **OpenSearch Dashboards**.
+#. Go to the Wazuh dashboard menu and select **Discover** under **Explore**.
 
    .. thumbnail:: /images/compliance/nist/select-discover.png    
       :title: Select Discover

@@ -34,7 +34,7 @@ This feature allows you to export a full report of all endpoint properties colle
   :align: center
   :width: 80%
 
-- When the report is ready, navigate to **Server management** > **Reporting** and download the report.
+- When the report is ready, navigate to **Indexer/dashboard management** > **Reporting** and download the report.
 
 .. Note::
    Both report types cover the inventory for only the monitored endpoint of interest.

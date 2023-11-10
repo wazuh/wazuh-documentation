@@ -97,7 +97,7 @@ Use cases
 			:align: center
 			:width: 80%
 
-	#. Open the menu and select **Discover** under **OpenSearch Dashboards**. Events should be getting reported there.
+	#. Open the menu and select **Discover** under **Explore**. Events should be getting reported there.
 
 		.. thumbnail:: /images/compliance/pci/select-discover-1.png
 			:title: Select Discover
