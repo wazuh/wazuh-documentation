@@ -150,7 +150,7 @@ In the case of having a Wazuh indexer cluster with multiple nodes, the cluster w
     
    .. code-block:: console
 
-      # /usr/share/wazuh-indexer/bin/indexer-init.sh
+      # bash /usr/share/wazuh-indexer/bin/indexer-init.sh -i <WAZUH_INDEXER_IP> -p <password>
 
 .. _upgrading_wazuh_server:
 
