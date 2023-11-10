@@ -30,10 +30,26 @@ Windows endpoints are supported by Ansible from version 1.7 via the remote execu
 
 The following minimum requirements should be met to use Ansible on Windows endpoints:
 
--  Windows versions under current and extended support from Microsoft. Ansible can manage desktop OSs including Windows 7, 8.1, and 10, and server OSs including Windows Server 2008, 2008 R2, 2012, 2012 R2, 2016, and 2019.
+-  Windows ve<rsions under current and extended support from Microsoft. Ansible can manage desktop OSs including Windows 7, 8.1, and 10, and server OSs including Windows Server 2008, 2008 R2, 2012, 2012 R2, 2016, and 2019.
 -  PowerShell 3.0 or newer.
 -  At least .NET version 4.0 should be installed on the Windows endpoint.
 -  A WinRM listener should be created and activated.
+
+Before deploying on your Windows endpoints, you must set Ansible to use port ``5986`` . Edit the ``/etc/ansible/hosts`` file and add a configuration block for the Windows agents. For example:
+
+.. code-block:: ini
+   [windows_agents]
+   agent1 ansible_host=192.168.1.101 ansible_port=5986
+   agent2 ansible_host=192.168.1.102 ansible_port=5986
+   agent3 ansible_host=192.168.1.103 ansible_port=5986
+
+Where:
+
+-  ``windows_agents`` is a host group name for the Windows agents.
+-  ``agent1``, ``agent2``, and ``agent3`` are names for each host.
+-  ``192.168.1.101``–``103`` are the respective Windows host IP addresses.
+
+Make sure to replace these values with your Windows agents actual data. Add and remove lines accordingly.
 
 Installation on CentOS/RHEL/Fedora
 ----------------------------------
