@@ -18,29 +18,29 @@ As an example, Wazuh provides out-of-the-box dashboards for regulatory complianc
 .. hlist::
    :columns: 2
 
-   -  .. thumbnail::  /images/getting-started/security-information-management.png 
+   -  .. thumbnail::  /images/getting-started/endpoint-security.png 
          :align: center
          :width: 100% 
-         :title: Security information management
-         :alt: Security information management
+         :title: Endpoint security
+         :alt: Endpoint security
 
-   -  .. thumbnail::  /images/getting-started/policy-monitoring.png 
+   -  .. thumbnail::  /images/getting-started/security-operations.png 
          :align: center
          :width: 100% 
-         :title: Auditing and policy monitoring
-         :alt: Auditing and policy monitoring
+         :title: Security operations
+         :alt: Security operations
 
-   -  .. thumbnail::  /images/getting-started/threat-detection-and-response.png 
+   -  .. thumbnail::  /images/getting-started/threat-intelligence.png 
          :align: center
          :width: 100% 
-         :title: Threat detection and response
-         :alt: Threat detection and response
+         :title: Threat intelligence
+         :alt: Threat intelligence
 
-   -  .. thumbnail::  /images/getting-started/dashboard-regulatory-compliance.png 
+   -  .. thumbnail::  /images/getting-started/cloud-security.png 
          :align: center
          :width: 100% 
-         :title: Regulatory compliance
-         :alt: Regulatory compliance
+         :title: Cloud security
+         :alt: Cloud security
 
 Agents monitoring and configuration
 -----------------------------------
@@ -58,20 +58,11 @@ Platform management
 
 The Wazuh dashboard provides a user interface dedicated to manage your Wazuh deployment. This includes monitoring the status, logs, and statistics of the different Wazuh components. It also includes configuring the Wazuh server, and creating custom rules and decoders for log analysis and threat detection.
 
-.. hlist::
-   :columns: 2
-
-   -  .. thumbnail::  /images/getting-started/platform-management.png 
-         :align: center
-         :width: 100% 
-         :title: Platform management
-         :alt: Platform management
-
-   -  .. thumbnail::  /images/getting-started/status-and-reports.png 
-         :align: center
-         :width: 100% 
-         :title: Status and reports
-         :alt: Status and reports
+.. thumbnail::  /images/getting-started/platform-management.png 
+   :align: center
+   :width: 100% 
+   :title: Platform management
+   :alt: Platform management
 
 Developer tools
 ---------------

@@ -112,7 +112,7 @@ After evaluating the aforementioned check, the following event is generated:
 
 You can view the scan summaries on the **Configuration Assessment** module on the Wazuh dashboard.
 
-  .. thumbnail:: /images/sca/dashboard-sca-tab.png
+  .. thumbnail:: /images/sca/configuration-assessment-dashboard.png
      :title: Dashboard Configuration Assessment module
      :alt: Dashboard Configuration Assessment module
      :align: center
@@ -120,7 +120,7 @@ You can view the scan summaries on the **Configuration Assessment** module on th
 
 In addition, you can expand each result to display additional information.
 
-  .. thumbnail:: /images/sca/sca-additional-information.png
+  .. thumbnail:: /images/sca/configuration-assessment-additional-information.png
      :title: SCA additional information
      :alt: SCA additional information
      :align: center
@@ -151,7 +151,7 @@ The above SCA scan result is **Failed** because the rule did not find ``Chain IN
 
 The scan result for check ``2603`` changes to **Passed** as shown in the image below:
 
-  .. thumbnail:: /images/sca/sca-scan-result.png
+  .. thumbnail:: /images/sca/configuration-assessment-scan-result.png
      :title: SCA scan result
      :alt: SCA scan result
      :align: center
