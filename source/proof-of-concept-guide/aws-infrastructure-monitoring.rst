@@ -81,6 +81,6 @@ Visualize the alerts
 You can visualize the alert data in the Wazuh dashboard. To do this, navigate through **Amazon Web Services** module.
 
 .. thumbnail:: /images/poc/AWS-alerts.png
-   :title: Visualize Amazon AWS alerts 
+   :title: Visualize Amazon Web Services alerts 
    :align: center
    :width: 80%
