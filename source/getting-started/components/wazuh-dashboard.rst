@@ -18,25 +18,25 @@ As an example, Wazuh provides out-of-the-box dashboards for regulatory complianc
 .. hlist::
    :columns: 2
 
-   -  .. thumbnail::  /images/getting-started/endpoint-security.png 
+   -  .. thumbnail::  /images/getting-started/endpoint-security-modules.png 
          :align: center
          :width: 100% 
          :title: Endpoint security
          :alt: Endpoint security
 
-   -  .. thumbnail::  /images/getting-started/security-operations.png 
+   -  .. thumbnail::  /images/getting-started/security-operations-modules.png 
          :align: center
          :width: 100% 
          :title: Security operations
          :alt: Security operations
 
-   -  .. thumbnail::  /images/getting-started/threat-intelligence.png 
+   -  .. thumbnail::  /images/getting-started/threat-intelligence-modules.png 
          :align: center
          :width: 100% 
          :title: Threat intelligence
          :alt: Threat intelligence
 
-   -  .. thumbnail::  /images/getting-started/cloud-security.png 
+   -  .. thumbnail::  /images/getting-started/cloud-security-modules.png 
          :align: center
          :width: 100% 
          :title: Cloud security
