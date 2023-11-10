@@ -12,7 +12,7 @@ The Wazuh dashboard includes a configuration file located at ``/usr/share/wazuh-
 
 If you are using the Wazuh Kibana plugin, you can find this configuration file at ``/usr/share/kibana/data/wazuh/config/wazuh.yml``. 
 
-The configuration file shows the default values for all of the possible options. You can edit the file, uncomment any of them and apply the desired values. You can also edit these settings from the Wazuh dashboard in *App Settings*.
+The configuration file shows the default values for all of the possible options. You can edit the file, uncomment any of them and apply the desired values. You can also edit these settings from the Wazuh dashboard in **App Settings**.
 
 The configuration file reference is organized by sections:
 

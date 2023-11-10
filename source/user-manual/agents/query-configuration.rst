@@ -39,7 +39,7 @@ It also has the capability to show the configuration in JSON or XML formats for 
   :align: center
   :width: 100%
 
-Now for example, if you want to know the current cluster configuration from one of your *Wazuh managers*, click on the *Settings* module, select the desired node and then click on the *Cluster* section:
+Now for example, if you want to know the current cluster configuration from one of your *Wazuh managers*, click on the **Settings** module, select the desired node and then click on the **Cluster** section:
 
 .. thumbnail:: ../../images/kibana-app/features/query-configuration/cluster.png
   :title: Cluster node configuration
