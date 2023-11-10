@@ -37,8 +37,8 @@ This use case shows how log data analysis can be used to detect specific events 
 Check the security events on the dashboard and click on any alert to view more details. 
 
 .. thumbnail:: /images/compliance/tsc/common-criteria/security-events-dashboard.png
-   :title: Security events dashboard
-   :alt: Security events dashboard
+   :title: Threat hunting dashboard
+   :alt: Threat hunting dashboard
    :align: center
    :width: 80%
 

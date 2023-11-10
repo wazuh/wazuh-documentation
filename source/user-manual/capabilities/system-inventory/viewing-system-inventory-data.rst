@@ -18,8 +18,8 @@ You can view the system inventory of each monitored endpoint from the Wazuh dash
   :width: 80%
 
 .. thumbnail:: /images/manual/system-inventory/inventory-data-tab.png
-  :title: Inventory data tab
-  :alt: Inventory data tab
+  :title: Inventory data module
+  :alt: Inventory data module
   :align: center
   :width: 80%
 
