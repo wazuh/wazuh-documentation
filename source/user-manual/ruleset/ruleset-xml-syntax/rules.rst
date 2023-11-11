@@ -188,27 +188,13 @@ The **xml labels** used to configure ``rules`` are listed here.
 group
 ^^^^^
 
-Groups are tags to categorize alerts. Groups provide the following benefits.
+Groups are used to categorize alerts in the Dashboard in the first place.
+It is mandatory for a rule to belong to one group at least.
+This way we can have sets of related rules in the same group, for example 'syscheck', 'attack', or 'syslog'.
 
--  A search criteria to filter related alerts.
--  A matching condition for rules that use `if_group`_ and `if_matched_group`_.
+We can specify the group of a rule using the <group name="..."> element, enclosing the whole rule's definition.
 
-All rules must have at least one group.
-
-The ``<group>`` element is a root element in the rule file. All rule definitions must be enclosed by the ``<group>`` ``</group>`` pair as shown in the following example.
-
-.. code-block:: xml
-   :emphasize-lines: 1,7
-
-   <group name="wazuh,">
-     <rule id="221" level="0">
-       <category>ossec</category>
-       <decoded_as>syscollector</decoded_as>
-       <description>Syscollector event.</description>
-     </rule>
-   </group>
-
-There's an additional ``<group>`` element within a rule definition to set groups as follows.
+Example:
 
 .. code-block:: xml
    :emphasize-lines: 6
@@ -218,24 +204,42 @@ There's an additional ``<group>`` element within a rule definition to set groups
        <if_sid>230</if_sid>
        <field name="alert_type">normal</field>
        <description>The file limit set for this agent is $(file_limit). Now, $(file_count) files are being monitored.</description>
-       <group>syscheck,fim_db_state,</group>
      </rule>
    </group>
 
-These two ``<group>`` elements provide the following benefits:
 
--  Enable the assignment of one or more groups to the alerts.
--  Keep the rule definitions organized.
+In this example, the rule "234" belongs to the group "wazuh". Whenever we filter rules in the dashboard with group:wazuh, this rule will be in the results.
 
-+--------------------+------------+
-| **Default Value**  | n/a        |
-+--------------------+------------+
-| **Allowed values** | Any String |
-+--------------------+------------+
 
-To set more than one group within a ``<group>`` element, you need to use the separator character ``,``.
+On the other hand, the <group> element can be used inside the rule's definition instead of enclosing it..
 
-.. _rules_rule:
+Example:
+
+.. code-block:: xml
+   :emphasize-lines: 6
+
+   <group name="wazuh,">
+     <rule id="234" level="3">
+       <if_sid>230</if_sid>
+       <field name="alert_type">normal</field>
+       <description>The file limit set for this agent is $(file_limit). Now, $(file_count) files are being monitored.</description>
+       <group>group_example,</group>
+     </rule>
+   </group>
+
+Using <group> inside the rule's definition have effects only during the Matching Algorithm.
+We can define another rule to match if the indicated group has matched before using <if_group>_ and <if_matched_group>_.
+
+.. code-block:: xml
+   :emphasize-lines: 6
+
+   <group name="wazuh,">
+     <rule id="235" level="3">
+       <if_group>group_example,</group>
+     </rule>
+   </group>
+
+We can think of <group> as a way to categorize rules to be matched from other rules instead of using ids, adding a semantic meaning to our rules.
 
 rule
 ^^^^
@@ -780,7 +784,7 @@ If ``user`` label is declared multiple times within the rule, the following rule
 .. _rules_sys_name:
 
 system_name
-^^^^^^^^^^^^
+^^^^^^^^^^^
 
 Used as a requisite to trigger the rule. It will check the system name (decoded as ``system_name``).
 
