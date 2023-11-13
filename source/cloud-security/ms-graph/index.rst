@@ -14,7 +14,7 @@ This section provides instructions for monitoring **Microsoft Graph API** `resou
 
 Currently, the module allows you to monitor the following with Wazuh:
 
-- Azure Active Directory Identity Protection
+- Microsoft Entra ID Protection
 - Microsoft 365 Defender
 - Microsoft Defender for Cloud Apps
 - Microsoft Defender for Endpoint
