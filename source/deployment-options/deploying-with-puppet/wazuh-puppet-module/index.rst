@@ -171,6 +171,7 @@ In case it is necessary to add any ``Wazuh manager worker`` server, it is necess
         stage => indexerdeploy
       }
       class { 'wazuh::securityadmin':
+      indexer_network_host => "$node1host",
       stage => securityadmin
       }
       }
