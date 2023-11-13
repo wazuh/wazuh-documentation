@@ -53,6 +53,12 @@ RESTful API
 
 - `#19726 <https://github.com/wazuh/wazuh/pull/19726>`__ Added new ``status_code`` field to ``GET /agents`` response.
 
+Packages
+^^^^^^^^
+
+- `#2568 <https://github.com/wazuh/wazuh-packages/pull/2568>`__ Updated links to ``wazuh-dashboard-plugins`` repository.
+- `#2555 <https://github.com/wazuh/wazuh-packages/pull/2555>`__ Added firewall validation to the installation assistant.
+
 Resolved issues
 ---------------
 
@@ -110,6 +116,15 @@ Reference                                                                  Descr
 `#5597 <https://github.com/wazuh/wazuh-dashboard-plugins/pull/5597>`__     Fixed the propagation event so that the flyout data, in the decoders, does not change when the button is pressed.
 `#5631 <https://github.com/wazuh/wazuh-dashboard-plugins/pull/5631>`__     Fixed the tooltips of the tables in the **Security** section, and removed unnecessary requests.
 =======================================================================    =============
+
+Packages
+^^^^^^^^
+
+==============================================================     =============
+Reference                                                          Description
+==============================================================     =============
+`#2523 <https://github.com/wazuh/wazuh-packages/pull/2523>`__      Fixed wrong condition when generating the RPM Wazuh indexer package with an existent base file.
+==============================================================     =============
 
 Changelogs
 ----------
