@@ -19,7 +19,7 @@ If a rollover policy is missing, it sets a default one during the Wazuh indexer 
 
 -  A single primary shard of an index is larger than 25 GB.
 -  The index is older than 7 days.
--  The index has more than 200,000,000 documents.
+-  The index has more than 600,000,000 documents.
 
 .. code-block:: json
    :emphasize-lines: 11,12,13
@@ -36,7 +36,7 @@ If a rollover policy is missing, it sets a default one during the Wazuh indexer 
                   "rollover": {
                         "min_primary_shard_size": "25gb",
                         "min_index_age": "7d",
-                        "min_doc_count": "200000000"
+                        "min_doc_count": "600000000"
                   }
                }
                ]
