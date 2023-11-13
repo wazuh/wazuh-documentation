@@ -147,7 +147,11 @@ In the case of having a Wazuh indexer cluster with multiple nodes, the cluster w
       # curl -k -u <username>:<password> https://<WAZUH_INDEXER_IP>:9200/_cat/nodes?v
 
 #. If you're upgrading from a version earlier than 4.8.0, run the Wazuh indexer ``indexer-init.sh`` script on `any` Wazuh indexer node to re-initialize the cluster. Find more information in :doc:`/user-manual/wazuh-indexer/index-life-management`.
-    
+
+   .. note::
+
+      If you have a rollover policy in use, execute the ``indexer-init.sh`` script with the ``-P`` flag to assign the policy a custom priority. The policy with the highest priority value takes precedence.
+      
    .. code-block:: console
 
       # bash /usr/share/wazuh-indexer/bin/indexer-init.sh -i <WAZUH_INDEXER_IP> -p <password>
