@@ -1,7 +1,7 @@
 .. Copyright (C) 2015, Wazuh, Inc.
 
 .. meta::
-   :description: Learn about Wazuh Puppet module in this section of the Wazuh documentation. 
+   :description: Learn about Wazuh Puppet module in this section of the Wazuh documentation.
 
 .. _wazuh_puppet_module:
 
@@ -79,6 +79,9 @@ Create a stack.pp file at ``/etc/puppetlabs/code/environments/production/manifes
       }
       class { 'wazuh::indexer':
         stage => indexerdeploy,
+      }
+      class { 'wazuh::securityadmin':
+      stage => securityadmin
       }
       class { 'wazuh::manager':
         stage => manager,
@@ -342,4 +345,4 @@ Reference Wazuh puppet
 
     reference-wazuh-puppet/wazuh-manager-class
     reference-wazuh-puppet/wazuh-agent-class
-    
+
