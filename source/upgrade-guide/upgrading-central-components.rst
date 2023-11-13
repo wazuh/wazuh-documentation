@@ -60,7 +60,7 @@ Upgrading the Wazuh indexer
 
    Note that this upgrade process doesn't update plugins installed manually. Outdated plugins might cause the upgrade to fail.
 
-   To ensure compatibility with the latest Wazuh indexer and Wazuh dashboard, please update manually installed plugins accordingly. For additional information, check the `distribution matrix <https://github.com/wazuh/wazuh-packages/tree/|WAZUH_CURRENT_MINOR|#distribution-version-matrix>`_.
+   To ensure compatibility with the latest Wazuh indexer and Wazuh dashboard, please update manually installed plugins accordingly. For additional information, check the `distribution matrix <https://github.com/wazuh/wazuh-packages/tree/v|WAZUH_CURRENT|#distribution-version-matrix>`__.
 
 In the case of having a Wazuh indexer cluster with multiple nodes, the cluster will remain available throughout the upgrading process. This rolling upgrade allows shutting down one Wazuh indexer node at a time for minimal disruption of service. Repeat these steps for every Wazuh indexer node.
 
@@ -207,7 +207,7 @@ Upgrading the Wazuh dashboard
 
    Note that this upgrade process doesn't update plugins installed manually. Outdated plugins might cause the upgrade to fail.
 
-   To ensure compatibility with the latest Wazuh indexer and Wazuh dashboard, please update manually installed plugins accordingly. For additional information, check the `distribution matrix <https://github.com/wazuh/wazuh-packages/tree/|WAZUH_CURRENT_MINOR|#distribution-version-matrix>`_.
+   To ensure compatibility with the latest Wazuh indexer and Wazuh dashboard, please update manually installed plugins accordingly. For additional information, check the `distribution matrix <https://github.com/wazuh/wazuh-packages/tree/v|WAZUH_CURRENT|#distribution-version-matrix>`__.
 
 #. Upgrade the Wazuh dashboard.
 
@@ -229,7 +229,7 @@ Upgrading the Wazuh dashboard
 
     .. include:: /_templates/installations/dashboard/enable_dashboard.rst
 
-#. Clear browsers caches and cookies.
+
 
 Next steps
 ----------

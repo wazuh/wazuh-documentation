@@ -257,8 +257,8 @@ Edit the Wazuh indexer security configuration files. We recommend that you back 
                 challenge: true
                 config:
                   idp:
-                    metadata_file: “/etc/wazuh-indexer/opensearch-security/idp.metadata.xml”
-                    entity_id: “http://192.168.XX.XX:8080/realms/Wazuh”
+                    metadata_file: '/etc/wazuh-indexer/opensearch-security/idp.metadata.xml'
+                    entity_id: 'http://192.168.XX.XX:8080/realms/Wazuh'
                   sp:
                     entity_id: wazuh-saml
                     metadata_file: /etc/wazuh-indexer/opensearch-security/sp.metadata.xml
