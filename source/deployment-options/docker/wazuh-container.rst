@@ -325,7 +325,7 @@ Setting the new password
    -  ``admin`` user
 
       .. code-block:: YAML
-         :emphasize-lines: 8, 20
+         :emphasize-lines: 8, 20, 26
 
          ...
          services:
@@ -341,6 +341,12 @@ Setting the new password
                - SSL_KEY=/etc/ssl/filebeat.key
                - API_USERNAME=wazuh-wui
                - API_PASSWORD=MyS3cr37P450r.*-
+           ...
+           wazuh.indexer:
+             ...
+             environment:
+               - "OPENSEARCH_JAVA_OPTS=-Xms1024m -Xmx1024m"
+               - 'INDEXER_PASSWORD=SecretPassword'
            ...
            wazuh.dashboard:
              ...
