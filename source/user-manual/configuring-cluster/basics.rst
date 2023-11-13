@@ -25,6 +25,7 @@ High availability
 
 .. thumbnail:: ../../images/manual/cluster/cluster-infrastructure.png
     :title: Wazuh cluster infrastructure
+    :alt: Wazuh cluster infrastructure
     :align: center
     :width: 80%
 
@@ -80,7 +81,9 @@ How the cluster works
     All cluster logs are written in the file ``logs/cluster.log``.
 
     .. thumbnail:: ../../images/manual/cluster/cluster-flow.png
-      :align: center
+       :title: Wazuh cluster workflow
+       :alt: Wazuh cluster workflow
+       :align: center
 
 Keep alive thread
 ~~~~~~~~~~~~~~~~~

@@ -337,22 +337,28 @@ Wazuh Manager
             - 'trusty'
             - 'xenial'
             - 'bionic'
+            - 'focal'
+            - 'jammy'
           update_interval: '1h'
           name: '"canonical"'
         - enabled: 'no'
           os:
-            - 'wheezy'
-            - 'stretch'
-            - 'jessie'
             - 'buster'
+            - 'bullseye'
+            - 'bookworm'
           update_interval: '1h'
           name: '"debian"'
         - enabled: 'no'
-          update_from_year: '2010'
+          os:
+            - 'amazon-linux'
+            - 'amazon-linux-2'
+            - 'amazon-linux-2023'
+          update_interval: '1h'
+          name: '"alas"'  
+        - enabled: 'no'
           update_interval: '1h'
           name: '"redhat"'
         - enabled: 'no'
-          update_from_year: '2010'
           update_interval: '1h'
           name: '"nvd"'
 
@@ -399,7 +405,7 @@ Wazuh Manager
       skip_proc: 'yes'
       skip_sys: 'yes'
       process_priority: 10
-      max_eps: 100
+      max_eps: 50
       sync_enabled: 'yes'
       sync_interval: '5m'
       sync_max_interval: '1h'
@@ -1135,7 +1141,7 @@ Wazuh Agent
       skip_proc: 'yes'
       skip_sys: 'yes'
       process_priority: 10
-      max_eps: 100
+      max_eps: 50
       sync_enabled: 'yes'
       sync_interval: '5m'
       sync_max_interval: '1h'

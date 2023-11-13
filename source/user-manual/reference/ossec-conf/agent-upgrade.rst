@@ -147,8 +147,6 @@ Maximum time allowed between successive notifications. Can use second, minute an
 ca_verification
 ^^^^^^^^^^^^^^^
 
-.. versionadded:: 4.1.0
-
 Configuration block to specify CA certificates to validate WPK files.
 
 +---------------------------+--------------------+-----------------------------------------------------------------------------------------------------------------------------------------------------------------+

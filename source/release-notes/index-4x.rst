@@ -11,7 +11,17 @@ This section summarizes the most important features of each Wazuh 4.x release.
 =============================================  ====================
 Wazuh version                                  Release date
 =============================================  ====================
-:doc:`4.4.4 </release-notes/release-4-4-4>`    13 Jun 2023
+:doc:`4.8.0 </release-notes/release-4-8-0>`    TBD
+:doc:`4.7.1 </release-notes/release-4-7-1>`    TBD
+:doc:`4.7.0 </release-notes/release-4-7-0>`    TBD
+:doc:`4.6.0 </release-notes/release-4-6-0>`    31 October 2023
+:doc:`4.5.4 </release-notes/release-4-5-4>`    23 October 2023
+:doc:`4.5.3 </release-notes/release-4-5-3>`    10 October 2023
+:doc:`4.5.2 </release-notes/release-4-5-2>`    6 September 2023
+:doc:`4.5.1 </release-notes/release-4-5-1>`    24 August 2023
+:doc:`4.5.0 </release-notes/release-4-5-0>`    10 August 2023
+:doc:`4.4.5 </release-notes/release-4-4-5>`    10 July 2023
+:doc:`4.4.4 </release-notes/release-4-4-4>`    13 June 2023
 :doc:`4.4.3 </release-notes/release-4-4-3>`    25 May 2023
 :doc:`4.4.2 </release-notes/release-4-4-2>`    18 May 2023
 :doc:`4.4.1 </release-notes/release-4-4-1>`    12 April 2023
@@ -53,39 +63,49 @@ Wazuh version                                  Release date
 
    .. toctree::
 
-       4.4.4 Release notes <release-4-4-4>
-       4.4.3 Release notes <release-4-4-3>
-       4.4.2 Release notes <release-4-4-2>
-       4.4.1 Release notes <release-4-4-1>
-       4.4.0 Release notes <release-4-4-0>
-       4.3.11 Release notes <release-4-3-11>
-       4.3.10 Release notes <release-4-3-10>
-       4.3.9 Release notes <release-4-3-9>
-       4.3.8 Release notes <release-4-3-8>
-       4.3.7 Release notes <release-4-3-7>
-       4.3.6 Release notes <release-4-3-6>
-       4.3.5 Release notes <release-4-3-5>
-       4.3.4 Release notes <release-4-3-4>
-       4.3.3 Release notes <release-4-3-3>
-       4.3.2 Release notes <release-4-3-2>        
-       4.3.1 Release notes <release-4-3-1>
-       4.3.0 Release notes <release-4-3-0>
-       4.2.7 Release notes <release-4-2-7>        
-       4.2.6 Release notes <release-4-2-6>
-       4.2.5 Release notes <release-4-2-5>
-       4.2.4 Release notes <release-4-2-4>
-       4.2.3 Release notes <release-4-2-3>
-       4.2.2 Release notes <release-4-2-2>
-       4.2.1 Release notes <release-4-2-1>
-       4.2.0 Release notes <release-4-2-0>
-       4.1.5 Release notes <release-4-1-5>
-       4.1.4 Release notes <release-4-1-4>
-       4.1.3 Release notes <release-4-1-3>
-       4.1.2 Release notes <release-4-1-2>
-       4.1.1 Release notes <release-4-1-1>
-       4.1.0 Release notes <release-4-1-0>
-       4.0.4 Release notes <release-4-0-4>
-       4.0.3 Release notes <release-4-0-3>
-       4.0.2 Release notes <release-4-0-2>
-       4.0.1 Release notes <release-4-0-1>
-       4.0.0 Release notes <release-4-0-0>
+      4.8.0 Release notes <release-4-8-0>
+      4.7.1 Release notes <release-4-7-1>
+      4.7.0 Release notes <release-4-7-0>
+      4.6.0 Release notes <release-4-6-0>
+      4.5.4 Release notes <release-4-5-4>
+      4.5.3 Release notes <release-4-5-3>
+      4.5.2 Release notes <release-4-5-2>
+      4.5.1 Release notes <release-4-5-1>
+      4.5.0 Release notes <release-4-5-0>
+      4.4.5 Release notes <release-4-4-5>
+      4.4.4 Release notes <release-4-4-4>
+      4.4.3 Release notes <release-4-4-3>
+      4.4.2 Release notes <release-4-4-2>
+      4.4.1 Release notes <release-4-4-1>
+      4.4.0 Release notes <release-4-4-0>
+      4.3.11 Release notes <release-4-3-11>
+      4.3.10 Release notes <release-4-3-10>
+      4.3.9 Release notes <release-4-3-9>
+      4.3.8 Release notes <release-4-3-8>
+      4.3.7 Release notes <release-4-3-7>
+      4.3.6 Release notes <release-4-3-6>
+      4.3.5 Release notes <release-4-3-5>
+      4.3.4 Release notes <release-4-3-4>
+      4.3.3 Release notes <release-4-3-3>
+      4.3.2 Release notes <release-4-3-2>        
+      4.3.1 Release notes <release-4-3-1>
+      4.3.0 Release notes <release-4-3-0>
+      4.2.7 Release notes <release-4-2-7>        
+      4.2.6 Release notes <release-4-2-6>
+      4.2.5 Release notes <release-4-2-5>
+      4.2.4 Release notes <release-4-2-4>
+      4.2.3 Release notes <release-4-2-3>
+      4.2.2 Release notes <release-4-2-2>
+      4.2.1 Release notes <release-4-2-1>
+      4.2.0 Release notes <release-4-2-0>
+      4.1.5 Release notes <release-4-1-5>
+      4.1.4 Release notes <release-4-1-4>
+      4.1.3 Release notes <release-4-1-3>
+      4.1.2 Release notes <release-4-1-2>
+      4.1.1 Release notes <release-4-1-1>
+      4.1.0 Release notes <release-4-1-0>
+      4.0.4 Release notes <release-4-0-4>
+      4.0.3 Release notes <release-4-0-3>
+      4.0.2 Release notes <release-4-0-2>
+      4.0.1 Release notes <release-4-0-1>
+      4.0.0 Release notes <release-4-0-0>

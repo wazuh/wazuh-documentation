@@ -22,13 +22,25 @@ Prerequisites
 Download the packages and configuration files
 ---------------------------------------------
 
-#. Replace ``<deb|rpm>`` in the following command with your choice of package format and run it from a Linux system with Internet connection. This action executes a script that downloads all required files for the offline installation on x86_64 architectures.
+#. Run the following commands from any Linux system with Internet connection. This action executes a script that downloads all required files for the offline installation on x86_64 architectures. Select the package format to download.
+    
+   .. tabs::
 
-   .. code-block:: console
+        .. group-tab:: RPM
 
-      # curl -sO https://packages.wazuh.com/|WAZUH_CURRENT_MINOR|/wazuh-install.sh
-      # chmod 744 wazuh-install.sh
-      # ./wazuh-install.sh -dw <deb|rpm>
+            .. code-block:: console
+        
+               # curl -sO https://packages.wazuh.com/|WAZUH_CURRENT_MINOR|/wazuh-install.sh
+               # chmod 744 wazuh-install.sh
+               # ./wazuh-install.sh -dw rpm
+
+        .. group-tab:: DEB
+
+            .. code-block:: console
+        
+               # curl -sO https://packages.wazuh.com/|WAZUH_CURRENT_MINOR|/wazuh-install.sh
+               # chmod 744 wazuh-install.sh
+               # ./wazuh-install.sh -dw deb
           
 #. Download the certificates configuration file.
 
@@ -38,7 +50,7 @@ Download the packages and configuration files
 
 #. Edit ``config.yml`` to prepare the certificates creation.
 
-   -  If you are performing an all-in-one deployment, replace ``<indexer-node-ip>``, ``<wazuh-manager-ip>``, and ``<dashboard-node-ip>`` with ``127.0.0.1``.
+   -  If you are performing an all-in-one deployment, replace ``"<indexer-node-ip>"``, ``"<wazuh-manager-ip>"``, and ``"<dashboard-node-ip>"`` with ``127.0.0.1``.
         
    -  If you are performing a distributed deployment, replace the node names and IP values with the corresponding names and IP addresses. You need to do this for all the Wazuh server, the Wazuh indexer, and the Wazuh dashboard nodes. Add as many node fields as needed.
 
@@ -154,34 +166,33 @@ Installing the Wazuh indexer
 
         # /usr/share/wazuh-indexer/bin/indexer-security-init.sh
   
-#.  Run the following command to check that the installation is successful. Note that this command uses localhost, set your Wazuh indexer address if necessary. 
+#. Run the following command to check that the installation is successful. Note that this command uses localhost, set your Wazuh indexer address if necessary. 
 
-    .. code-block:: console
+   .. code-block:: console
 
-        # curl -XGET https://localhost:9200 -u admin:admin -k
+      # curl -XGET https://localhost:9200 -u admin:admin -k
 
-    Expand the output to see an example response.
+   Expand the output to see an example response.
 
-    .. code-block:: none
-        :class: output collapsed
+   .. code-block:: none
+      :class: output collapsed
 
-        {
-          "name" : "node-1",
-          "cluster_name" : "wazuh-cluster",
-          "cluster_uuid" : "bMz0BKdlRVui5jF-mlt6yg",
-          "version" : {
-            "number" : "7.10.2",
-            "build_type" : "rpm",
-            "build_hash" : "f2f809ea280ffba217451da894a5899f1cec02ab",
-            "build_date" : "2022-12-12T22:17:42.341124910Z",
-            "build_snapshot" : false,
-            "lucene_version" : "9.4.2",
-            "minimum_wire_compatibility_version" : "7.10.0",
-            "minimum_index_compatibility_version" : "7.0.0"
-          },
-          "tagline" : "The OpenSearch Project: https://opensearch.org/"
-        }
-
+      {
+        "name" : "node-1",
+        "cluster_name" : "wazuh-cluster",
+        "cluster_uuid" : "095jEW-oRJSFKLz5wmo5PA",
+        "version" : {
+          "number" : "7.10.2",
+          "build_type" : "rpm",
+          "build_hash" : "db90a415ff2fd428b4f7b3f800a51dc229287cb4",
+          "build_date" : "2023-06-03T06:24:25.112415503Z",
+          "build_snapshot" : false,
+          "lucene_version" : "9.6.0",
+          "minimum_wire_compatibility_version" : "7.10.0",
+          "minimum_index_compatibility_version" : "7.0.0"
+        },
+        "tagline" : "The OpenSearch Project: https://opensearch.org/"
+      }
 
 Installing the Wazuh server
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
@@ -612,7 +623,7 @@ Select your deployment type and follow the instructions to change the default pa
                   url: https://localhost
                   port: 55000
                   username: wazuh-wui
-                  password: <wazuh-wui-password>
+                  password: "<wazuh-wui-password>"
                   run_as: false
 
       #. Restart the Wazuh dashboard to apply the changes.
@@ -625,4 +636,4 @@ Next steps
 
 Once the Wazuh environment is ready, Wazuh agents can be installed on every endpoint to be monitored. To install the Wazuh agents and start monitoring the endpoints, see the :doc:`Wazuh agent </installation-guide/wazuh-agent/index>` installation section. If you need to install them offline, you can check the appropriate agent package to download for your monitored system in the :ref:`Wazuh agent packages list <Wazuh_manager_agent_packages_list>` section.
 
-To uninstall all the Wazuh central components, see the :doc:`/user-manual/uninstall/central-components` section.
+To uninstall all the Wazuh central components, see the :doc:`/user-manual/uninstall/index` section.

@@ -8,8 +8,6 @@
 wazuh-logcollector
 ==================
 
-.. versionadded:: 4.2
-
 The wazuh-logcollector program monitors configured files and commands for new log messages.
 
 ``wazuh-logcollector`` is now multi-threaded, achieving an improvement in overall performance. Each of the threads will read the first log that is not already handled by other threads

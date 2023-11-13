@@ -3,8 +3,6 @@
 .. meta::
   :description: In this section of our documentation, you will find more information about Wazuh Docker deployment: its requirements, usage, and exposed ports.
   
-.. _wazuh-container:
-
 Wazuh Docker deployment
 =======================
 
@@ -249,16 +247,27 @@ You can modify and build the Wazuh manager, indexer, and dashboard images locall
 
 .. _change-pwd-existing-usr:
 
-Change the password of an existing user
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+Change the password of Wazuh users
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+To improve security, you can change the default password of the Wazuh users. There are two types of Wazuh users:
+
+-  Wazuh indexer users
+-  Wazuh API users
+
+ To change the password of these Wazuh users, perform the following steps. You must run the commands from your ``single-node/`` or ``multi-node/`` directory, depending on your Wazuh on Docker deployment.
+
+Wazuh indexer users
+~~~~~~~~~~~~~~~~~~~
+
+ To change the password of the default ``admin`` and ``kibanaserver`` users, do the following. You can only change one at a time. 
 
 .. warning::
 
-   You must add all users created on the Wazuh dashboard to the ``internal_users.yml`` file. If not, executing this procedure deletes them.
+   If you have custom users, add them to the ``internal_users.yml`` file. Otherwise, executing this procedure deletes them.
 
-You can change the default password of an existing user to improve security. For example, you can change the default password of the Wazuh indexer *admin* user.
-
-Perform the following steps from your ``single-node`` directory. If you have a multi-node deployment, you must adapt them and perform them from your ``multi-node`` directory.
+Setting a new hash
+..................
 
 #. Stop the deployment stack if it’s running:
 
@@ -266,25 +275,120 @@ Perform the following steps from your ``single-node`` directory. If you have a m
   
       # docker-compose down
 
-#. Run this command to generate a hash of your new password. Once the container launches, input the new password and press **enter**:
+#. Run this command to generate the hash of your new password. Once the container launches, input the new password and press **Enter**.
 
    .. code-block:: console
   
       # docker run --rm -ti wazuh/wazuh-indexer:|WAZUH_CURRENT_DOCKER| bash /usr/share/wazuh-indexer/plugins/opensearch-security/tools/hash.sh
 
-#. Copy the generated hash. Replace the current ``admin`` user hash in the ``/single-node/config/wazuh_indexer/internal_users.yml`` file.
+#. Copy the generated hash.
 
-#. Change all occurrences of the default ``INDEXER_PASSWORD`` in the ``docker-compose.yml`` file to the new password.
+#. Open the ``config/wazuh_indexer/internal_users.yml`` file. Locate the block for the user you are changing password for.
 
-#. Start the deployment stack:
+#. Replace the hash.
+
+   -  ``admin`` user
+
+      .. code-block:: YAML
+         :emphasize-lines: 3
+
+         ...
+         admin:
+           hash: "$2y$12$K/SpwjtB.wOHJ/Nc6GVRDuc1h0rM1DfvziFRNPtk27P.c4yDr9njO"
+           reserved: true
+           backend_roles:
+           - "admin"
+           description: "Demo admin user"
+
+         ...
+
+   -  ``kibanaserver`` user
+
+      .. code-block:: YAML
+         :emphasize-lines: 3
+
+         ...
+         kibanaserver:
+           hash: "$2a$12$4AcgAt3xwOWadA5s5blL6ev39OXDNhmOesEoo33eZtrq2N0YrU3H."
+           reserved: true
+           description: "Demo kibanaserver user"
+
+         ...
+
+.. _wazuh-docker-password-setting:
+
+Setting the new password
+........................
+
+#. Open  the ``docker-compose.yml`` file. Change all occurrences of the old password with the new one. For example, for a single-node deployment:
+
+   -  ``admin`` user
+
+      .. code-block:: YAML
+         :emphasize-lines: 8, 20
+
+         ...
+         services:
+           wazuh.manager:
+             ...
+             environment:
+               - INDEXER_URL=https://wazuh.indexer:9200
+               - INDEXER_USERNAME=admin
+               - INDEXER_PASSWORD=SecretPassword
+               - FILEBEAT_SSL_VERIFICATION_MODE=full
+               - SSL_CERTIFICATE_AUTHORITIES=/etc/ssl/root-ca.pem
+               - SSL_CERTIFICATE=/etc/ssl/filebeat.pem
+               - SSL_KEY=/etc/ssl/filebeat.key
+               - API_USERNAME=wazuh-wui
+               - API_PASSWORD=MyS3cr37P450r.*-
+           ...
+           wazuh.dashboard:
+             ...
+             environment:
+               - INDEXER_USERNAME=admin
+               - INDEXER_PASSWORD=SecretPassword
+               - WAZUH_API_URL=https://wazuh.manager
+               - DASHBOARD_USERNAME=kibanaserver
+               - DASHBOARD_PASSWORD=kibanaserver
+               - API_USERNAME=wazuh-wui
+               - API_PASSWORD=MyS3cr37P450r.*-
+           ...
+
+   -  ``kibanaserver`` user
+
+      .. code-block:: YAML
+         :emphasize-lines: 10
+
+         ...
+         services:
+           wazuh.dashboard:
+             ...
+             environment:
+               - INDEXER_USERNAME=admin
+               - INDEXER_PASSWORD=SecretPassword
+               - WAZUH_API_URL=https://wazuh.manager
+               - DASHBOARD_USERNAME=kibanaserver
+               - DASHBOARD_PASSWORD=kibanaserver
+               - API_USERNAME=wazuh-wui
+               - API_PASSWORD=MyS3cr37P450r.*-
+           ...
+
+Applying the changes
+....................
+
+#. Start the deployment stack.
 
    .. code-block:: console
   
       # docker-compose up -d
 
-#. Run ``docker ps`` and note the name of the Wazuh indexer container.
+#. Run ``docker ps`` and note the name of the first Wazuh indexer container. For example, ``single-node-wazuh.indexer-1``, or ``multi-node-wazuh1.indexer-1``.
 
-#. Run ``docker exec -it single-node-wazuh.indexer-1 bash`` to enter the container. ``single-node-wazuh.indexer-1`` is the container name obtained in the previous step.
+#. Run ``docker exec -it <WAZUH_INDEXER_CONTAINER_NAME> bash`` to enter the container. For example:
+
+   .. code-block:: console
+
+      # docker exec -it single-node-wazuh.indexer-1 bash
 
 #. Set the following variables:
 
@@ -296,13 +400,87 @@ Perform the following steps from your ``single-node`` directory. If you have a m
       CERT=$INSTALLATION_DIR/certs/admin.pem
       export JAVA_HOME=/usr/share/wazuh-indexer/jdk
 
-#. Run the ``securityadmin.sh`` script to apply all changes:
+#. Wait for the Wazuh indexer to initialize properly. The waiting time can vary from two to five minutes. It depends on the size of the cluster, the assigned resources, and the speed of the network. Then, run the ``securityadmin.sh`` script to apply all changes.
+
+   .. tabs::
+
+      .. tab:: Single-node cluster
+
+         .. code-block:: console
+
+            $ bash /usr/share/wazuh-indexer/plugins/opensearch-security/tools/securityadmin.sh -cd /usr/share/wazuh-indexer/opensearch-security/ -nhnv -cacert  $CACERT -cert $CERT -key $KEY -p 9200 -icl
+
+      .. tab:: Multi-node cluster
+
+         .. code-block:: console
+
+            $ HOST=$(grep node.name $INSTALLATION_DIR/opensearch.yml | awk '{printf $2}')
+            $ bash /usr/share/wazuh-indexer/plugins/opensearch-security/tools/securityadmin.sh -cd /usr/share/wazuh-indexer/opensearch-security/ -nhnv -cacert  $CACERT -cert $CERT -key $KEY -p 9200 -icl -h $HOST
+
+#. Exit the Wazuh indexer container and login with the new credentials on the Wazuh dashboard.
+
+Wazuh API users
+~~~~~~~~~~~~~~~
+
+The ``wazuh-wui`` user is the user to connect with the Wazuh API by default. Follow these steps to change the password.
+
+.. note::
+   
+   The password for Wazuh API users must be between 8 and 64 characters long. It must contain at least one uppercase and one lowercase letter, a number, and a symbol.
+
+#. Open the file ``config/wazuh_dashboard/wazuh.yml`` and modify the value of ``password`` parameter.
+
+   .. code-block:: YAML
+      :emphasize-lines: 7
+
+      ...
+      hosts:
+        - 1513629884013:
+            url: "https://wazuh.manager"
+            port: 55000
+            username: wazuh-wui
+            password: "MyS3cr37P450r.*-"
+            run_as: false
+      ...
+
+#. Open  the ``docker-compose.yml`` file. Change all occurrences of the old password with the new one.
+
+   .. code-block:: YAML
+      :emphasize-lines: 14,25
+
+      ...
+      services:
+        wazuh.manager:
+          ...
+          environment:
+            - INDEXER_URL=https://wazuh.indexer:9200
+            - INDEXER_USERNAME=admin
+            - INDEXER_PASSWORD=SecretPassword
+            - FILEBEAT_SSL_VERIFICATION_MODE=full
+            - SSL_CERTIFICATE_AUTHORITIES=/etc/ssl/root-ca.pem
+            - SSL_CERTIFICATE=/etc/ssl/filebeat.pem
+            - SSL_KEY=/etc/ssl/filebeat.key
+            - API_USERNAME=wazuh-wui
+            - API_PASSWORD=MyS3cr37P450r.*-
+        ...
+        wazuh.dashboard:
+          ...
+          environment:
+            - INDEXER_USERNAME=admin
+            - INDEXER_PASSWORD=SecretPassword
+            - WAZUH_API_URL=https://wazuh.manager
+            - DASHBOARD_USERNAME=kibanaserver
+            - DASHBOARD_PASSWORD=kibanaserver
+            - API_USERNAME=wazuh-wui
+            - API_PASSWORD=MyS3cr37P450r.*-
+        ...
+
+#. Recreate the Wazuh containers:
 
    .. code-block:: console
 
-      # bash /usr/share/wazuh-indexer/plugins/opensearch-security/tools/securityadmin.sh -cd /usr/share/wazuh-indexer/opensearch-security/ -nhnv -cacert  $CACERT -cert $CERT -key $KEY -p 9200 -icl
-
-#. Exit the Wazuh indexer container and login with the new credentials on the Wazuh dashboard.
+      # docker-compose down
+      # docker-compose up -d
 
 Exposed ports
 -------------

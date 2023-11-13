@@ -18,13 +18,13 @@ Index
    quickstart
    installation-guide/index
    deployment-options/index
+   user-manual/index
+   cloud-security/monitoring
+   compliance/index
+   proof-of-concept-guide/index
    upgrade-guide/index
+   Integrations guide <integrations-guide/index>
    migration-guide/index
    Wazuh Cloud service <cloud-service/index>
-   user-manual/index
-   monitoring
-   container-security/index
    development/index
-   compliance
-   proof-of-concept-guide/index
    release-notes/index

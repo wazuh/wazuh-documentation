@@ -110,13 +110,13 @@ In the case of having a Wazuh indexer cluster with multiple nodes, the cluster w
 
          .. code-block:: console
 
-            # yum upgrade wazuh-indexer
+            # yum upgrade wazuh-indexer|WAZUH_INDEXER_RPM_PKG_INSTALL|
 
       .. group-tab:: APT
 
          .. code-block:: console
 
-            # apt-get install wazuh-indexer
+            # apt-get install wazuh-indexer|WAZUH_INDEXER_DEB_PKG_INSTALL|
 
 #. Restart the service.
 
@@ -163,13 +163,13 @@ When upgrading a multi-node Wazuh manager cluster, run the upgrade in every node
 
          .. code-block:: console
 
-            # yum upgrade wazuh-manager
+            # yum upgrade wazuh-manager|WAZUH_MANAGER_RPM_PKG_INSTALL|
 
       .. group-tab:: APT
 
          .. code-block:: console
 
-            # apt-get install wazuh-manager
+            # apt-get install wazuh-manager|WAZUH_MANAGER_DEB_PKG_INSTALL|
 
    .. note::
 
@@ -217,13 +217,13 @@ Upgrading the Wazuh dashboard
 
          .. code-block:: console
 
-            # yum upgrade wazuh-dashboard
+            # yum upgrade wazuh-dashboard|WAZUH_DASHBOARD_RPM_PKG_INSTALL|
 
       .. group-tab:: APT
 
          .. code-block:: console
 
-            # apt-get install wazuh-dashboard
+            # apt-get install wazuh-dashboard|WAZUH_DASHBOARD_DEB_PKG_INSTALL|
 
 #. Restart the Wazuh dashboard:
 
