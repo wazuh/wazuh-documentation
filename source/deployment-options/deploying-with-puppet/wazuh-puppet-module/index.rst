@@ -104,7 +104,7 @@ With the multi-node manifest below, you can deploy a distributed stack with the 
 -  Manager worker node
 -  Dashboard node
 
-It is required to add within the manifest the IPs of the servers where each of the applications will be installed.
+Within the manifest, include the IP addresses of the servers where you are installing each application.
 
 This is the correspondence of the IPs with the puppet nodes described in the manifest:
 
