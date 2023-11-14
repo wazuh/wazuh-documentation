@@ -19,6 +19,17 @@ Resolved issues
 
 This release resolves known issues as the following: 
 
+Wazuh dashboard
+^^^^^^^^^^^^^^^
+
+=========================================================================    =============
+Reference                                                                    Description
+=========================================================================    =============
+`#6076 <https://github.com/wazuh/wazuh-dashboard-plugins/pull/6076>`__       Fixed problem when using non latin characters in the username.
+`#6104 <https://github.com/wazuh/wazuh-dashboard-plugins/pull/6104>`__       Fixed UI crash on retrieving log collection configuration for macos agent.
+`#6105 <https://github.com/wazuh/wazuh-dashboard-plugins/pull/6105>`__       Fixed incorrect validation of the agent name on the Deploy new agent window.
+=========================================================================    =============
+
 Changelogs
 ----------
 

@@ -18,7 +18,8 @@ All notable changes to this project will be documented in this file.
 
 ### Added
 
-- Added the Wazuh v4.7.1 release notes. ([6549](https://github.com/wazuh/wazuh-documentation/pull/6549))
+- Added deb/rpm selection tabs in offline installation download step. ([#6686](https://github.com/wazuh/wazuh-documentation/pull/6686))
+- Added missing RBAC policies for ``PUT /decoders/files/{filename}`` and ``PUT /rules/files/{filename}`` API endpoints. ([#6693](https://github.com/wazuh/wazuh-documentation/pull/6693))
 
 ## [v4.7.0]
 
@@ -28,7 +29,6 @@ All notable changes to this project will be documented in this file.
 - Clarified that Syscollector is now capable of fetching the PYPI and node packages. [#3464](https://github.com/wazuh/wazuh-documentation/pull/6346)
 - Added the Maltiverse integration section. ([#6257](https://github.com/wazuh/wazuh-documentation/pull/6257))
 - Added the New Custom Logs Buckets documentation. ([#6254](https://github.com/wazuh/wazuh-documentation/pull/6254))
-- Added new setting to client buffer: `eps_timeframe`. ([#5975](https://github.com/wazuh/wazuh-documentation/pull/5975))
 - Added the `options` section for integrations. ([#5962](https://github.com/wazuh/wazuh-documentation/pull/5962))
 
 ### Changed
@@ -36,6 +36,14 @@ All notable changes to this project will be documented in this file.
 - Updated the Maltiverse rule id. ([#6420](https://github.com/wazuh/wazuh-documentation/pull/6420))
 - Updated `PIP` and `process`` information in ports inventory. ([#6308](https://github.com/wazuh/wazuh-documentation/pull/6308))
 - Updated the link to "Using Dashboards Query Language". ([#6588](https://github.com/wazuh/wazuh-documentation/pull/6588))
+
+### Fixed
+
+- Fixed paths to log files in VirusTotal integration section. ([#6651](https://github.com/wazuh/wazuh-documentation/pull/6651))
+
+### Removed
+
+- Removed reference for Wazuh indexer and dashboard mixed node from Deploying with Ansible guide. ([#6653](https://github.com/wazuh/wazuh-documentation/pull/6653))
 
 ## [v4.6.0]
 

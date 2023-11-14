@@ -23,7 +23,6 @@ Options
 - `disabled`_
 - `queue_size`_
 - `events_per_second`_
-- `eps_timeframe`_
 
 disabled
 ^^^^^^^^
@@ -58,21 +57,7 @@ Specifies the number of events that can be sent to the manager per second.
 +--------------------+----------------------------------+
 | **Default value**  | 500                              |
 +--------------------+----------------------------------+
-| **Allowed values** | Any number between 0 and 100000. |
-+--------------------+----------------------------------+
-
-.. note::
-	Setting this option to 0 removes the limit of events per second, allowing the maximum event sending rate.
-
-eps_timeframe
-^^^^^^^^^^^^^
-
-Defines the time interval in seconds used to restore the number of events available for sending. This setting does not change the events per second on average. Every ``eps_timeframe`` seconds, a total of ``eps_timeframe`` x ``events_per_seconds`` events are sent before waiting for the new interval.
-
-+--------------------+----------------------------------+
-| **Default value**  | 1                                |
-+--------------------+----------------------------------+
-| **Allowed values** | Any number between 1 and 3600.   |
+| **Allowed values** | Any number between 1 and 1000.   |
 +--------------------+----------------------------------+
 
 Default configuration
