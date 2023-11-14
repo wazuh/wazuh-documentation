@@ -128,7 +128,7 @@ If you need more ``Wazuh Indexer`` nodes, add new variables, for example ``index
 
 In addition, you need to add a new node instance similar to ``puppet-wazuh-indexer-node2`` or ``puppet-wazuh-indexer-node3``. These instances don't run ``securityadmin``.
 
-In case it is necessary to add any ``Wazuh manager worker`` server, it is necessary to add a new ``worker2host`` variable for example, add this variable to the ``manager_worker_certs`` array as ``['worker',"$worker2host"]`` and then replicate the node instance ``puppet-wazuh-manager-worker`` with the new server.
+In case you need to add a ``Wazuh manager worker`` server, add a new variable such as ``worker2host``. Add this variable to the ``manager_worker_certs`` array as ``['worker',"$worker2host"]`` and then replicate the node instance ``puppet-wazuh-manager-worker`` with the new server.
 
 
 .. code-block:: console
