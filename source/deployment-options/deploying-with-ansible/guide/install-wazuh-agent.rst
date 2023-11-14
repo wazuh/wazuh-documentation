@@ -106,8 +106,8 @@ For the agent deployment, we are going to use the role of wazuh-agent, which con
 	        port: 1514
 	        protocol: tcp
 	        api_port: 55000
-	        api_proto: 'http'
-	        api_user: ansible
+	        api_proto: 'https'
+	        api_user: wazuh
 	        max_retries: 5
 	        retry_interval: 5
 
@@ -131,22 +131,22 @@ We can create a similar YAML file or modify the one we already have to adapt it 
 
 .. tabs::
    
-	.. group-tab:: Generic
+   .. group-tab:: Generic
 
-		.. code-block:: yaml
+      .. code-block:: yaml
 
-			[wazuh-agents]
-			agent_1 ansible_host=192.168.33.31 ansible_ssh_user=<username>
+	     [wazuh-agents]
+		    agent_1 ansible_host=192.168.33.31 ansible_ssh_user=<username>
 
-	.. group-tab:: Windows
+   .. group-tab:: Windows
 
-		.. code-block:: yaml
+	  .. code-block:: yaml
 
-			[wazuh-agents]
-			agent_1 ansible_host=192.168.33.31
+	     [wazuh-agents]
+	        agent_1 ansible_host=192.168.33.31
 
-			[wazuh-agents:vars]
-			ansible_user=<username>
+		 [wazuh-agents:vars]
+		    ansible_user=<username>
 			ansible_password=<password>
 			ansible_connection=winrm
 			ansible_winrm_server_cert_validation=ignore
@@ -170,8 +170,8 @@ Our resulting file is:
 	        port: 1514
 	        protocol: tcp
 	        api_port: 55000
-	        api_proto: 'http'
-	        api_user: ansible
+	        api_proto: 'https'
+	        api_user: wazuh
 	        max_retries: 5
 	        retry_interval: 5
 

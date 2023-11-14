@@ -30,7 +30,7 @@ Windows endpoints are supported by Ansible from version 1.7 via the remote execu
 
 The following minimum requirements should be met to use Ansible on Windows endpoints:
 
--  Windows ve<rsions under current and extended support from Microsoft. Ansible can manage desktop OSs including Windows 7, 8.1, and 10, and server OSs including Windows Server 2008, 2008 R2, 2012, 2012 R2, 2016, and 2019.
+-  Windows versions under current and extended support from Microsoft. Ansible can manage desktop OSs including Windows 7, 8.1, and 10, and server OSs including Windows Server 2008, 2008 R2, 2012, 2012 R2, 2016, and 2019.
 -  PowerShell 3.0 or newer.
 -  At least .NET version 4.0 should be installed on the Windows endpoint.
 -  A WinRM listener should be created and activated.
