@@ -46,7 +46,7 @@ Install a stack via Puppet
 --------------------------
 
 Single Node:
-------------
+^^^^^^^^^^^
 
 You can use  the followingmanifest to deploy a single node stack of Wazuh manager, Wazuh dashboard, Wazuh indexer, and Filebeat. To configure the manager before deployment, check the configuration variables in the Wazuh manager section.
 
