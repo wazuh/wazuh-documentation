@@ -48,7 +48,7 @@ Install a stack via Puppet
 Single Node:
 ^^^^^^^^^^^
 
-You can use  the followingmanifest to deploy a single node stack of Wazuh manager, Wazuh dashboard, Wazuh indexer, and Filebeat. To configure the manager before deployment, check the configuration variables in the Wazuh manager section.
+A single node stack of Wazuh manager, Wazuh dashboard, Wazuh indexer and Filebeat can be deployed using this manifest. See the :ref:`Wazuh manager section <ref_wazuh_puppet>` for variables that can be used to configure the manager before deployment.
 
 Create a stack.pp file at ``/etc/puppetlabs/code/environments/production/manifests/`` and put the contents below. ``puppet-agent-node`` refers to the hostname or IP of the puppet agent:
 
@@ -108,7 +108,7 @@ Within the manifest, include the IP addresses of the servers where you are insta
 
 This is the correspondence of the IPs with the puppet nodes described in the manifest:
 
-.. code-block:: console
+.. code-block:: none
 
     puppet-wazuh-indexer-node1 = node1host (Wazuh indexer node1)
     puppet-wazuh-indexer-node2 = node2host (Wazuh indexer node2)
@@ -131,7 +131,7 @@ In addition, you need to add a new node instance similar to ``puppet-wazuh-index
 In case you need to add a ``Wazuh manager worker`` server, add a new variable such as ``worker2host``. Add this variable to the ``manager_worker_certs`` array as ``['worker',"$worker2host"]`` and then replicate the node instance ``puppet-wazuh-manager-worker`` with the new server.
 
 
-.. code-block:: console
+.. code-block:: puppet
 
       $node1host   = 'x.x.x.x'
       $node2host   = 'x.x.x.x'
@@ -288,6 +288,8 @@ Place the file at ``/etc/puppetlabs/code/environments/production/manifests/`` in
   .. code-block:: console
 
     # puppet agent -t
+
+.. _ref_wazuh_puppet:
 
 Reference Wazuh puppet
 ----------------------
