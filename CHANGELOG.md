@@ -5,7 +5,8 @@ All notable changes to this project will be documented in this file.
 
 ### Added
 
-- Added the Wazuh v4.7.1 release notes. ([6549](https://github.com/wazuh/wazuh-documentation/pull/6549))
+- Added deb/rpm selection tabs in offline installation download step. ([#6686](https://github.com/wazuh/wazuh-documentation/pull/6686))
+- Added missing RBAC policies for ``PUT /decoders/files/{filename}`` and ``PUT /rules/files/{filename}`` API endpoints. ([#6693](https://github.com/wazuh/wazuh-documentation/pull/6693))
 
 ## [v4.7.0]
 
