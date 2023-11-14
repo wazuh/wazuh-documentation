@@ -52,7 +52,7 @@ You can use  the followingmanifest to deploy a single node stack of Wazuh manage
 
 Create a stack.pp file at ``/etc/puppetlabs/code/environments/production/manifests/`` and put the contents below. ``puppet-agent-node`` refers to the hostname or IP of the puppet agent:
 
-.. code-block:: console
+.. code-block:: puppet
 
       $discovery_type = 'single-node'
       stage { 'certificates': }
