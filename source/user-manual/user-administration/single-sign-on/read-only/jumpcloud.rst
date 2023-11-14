@@ -181,7 +181,7 @@ Edit the Wazuh indexer security configuration files. We recommend that you back 
                 challenge: true
                 config:
                   idp:
-                    metadata_file: “/etc/wazuh-indexer/opensearch-security/metadata_jumpcloud.xml”
+                    metadata_file: '/etc/wazuh-indexer/opensearch-security/metadata_jumpcloud.xml'
                     entity_id: wazuh
                   sp:
                     entity_id: wazuh-saml
