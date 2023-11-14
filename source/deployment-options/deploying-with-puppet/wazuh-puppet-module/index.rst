@@ -97,7 +97,12 @@ Create a stack.pp file at ``/etc/puppetlabs/code/environments/production/manifes
 Multi Node:
 ^^^^^^^^^^^
 
-You can deploy a distributed stack with 1 ``Wazuh dashboard``, 1 ``Wazuh manager master``, 1 ``Wazuh manager worker`` and 3 ``Wazuh indexer`` nodes between 3 diferentes servers or VMs with this manifest.
+With the multi-node manifest below, you can deploy a distributed stack with the following nodes between three different servers or Virtual Machines (VM).
+
+-  3 indexer nodes
+-  Manager master node
+-  Manager worker node
+-  Dashboard node
 
 It is required to add within the manifest the IPs of the servers where each of the applications will be installed.
 
