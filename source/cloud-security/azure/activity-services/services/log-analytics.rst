@@ -17,7 +17,7 @@ The Log Analytics solution helps you to analyze and search the Azure activity lo
     :align: center
     :width: 60%
 
-The data collected by Log Analytics can be consulted through the **Azure Log Analytics REST API**. The Azure Log Analytics API uses the Azure Active Directory authentication scheme.
+The data collected by Log Analytics can be consulted through the **Azure Log Analytics REST API**. The Azure Log Analytics API uses the Microsoft Entra ID authentication scheme.
 
 A qualified application or client is required to use the Azure Log Analytics REST API. This must be configured manually on the Microsoft Azure portal.
 
@@ -32,7 +32,7 @@ The process explained below details the creation of an application that will use
 Creating the application
 ^^^^^^^^^^^^^^^^^^^^^^^^
 
-In the **Azure Active Directory** panel, select the option **App registrations**. Then, select **New registration**.
+In the **Microsoft Entra ID** panel, select the option **App registrations**. Then, select **New registration**.
 
 .. thumbnail:: /images/cloud-security/azure/log-analytics-app-1.png
     :title: Log Analytics App
@@ -123,7 +123,7 @@ Sending logs to the Workspace
 
 To collect logs and send them to the Log Analytics Workspace created in the previous steps, you need to create a **diagnostic setting**.
 
-#. Go back to **Azure Active Directory**, scroll down on the left menu bar, and select the **Diagnostic settings** section. Click on **Add diagnostic setting**.
+#. Go back to **Microsoft Entra ID**, scroll down on the left menu bar, and select the **Diagnostic settings** section. Click on **Add diagnostic setting**.
 
    .. thumbnail:: /images/cloud-security/azure/log-analytics-diagnostic-1.png
       :title: Log Analytics App
@@ -155,7 +155,7 @@ Here is an example of monitoring the activity of the infrastructure using the pr
 Creating a user
 ^^^^^^^^^^^^^^^
 
-An easy way to test this is to create a new user in Azure Active Directory. A few minutes after the creation of the user, a new log will be available for Log Analytics reflecting this change. The log can be checked using the ``AuditLogs`` query, by accessing **Log Analytics** and running the ``AuditLogs`` query.
+An easy way to test this is to create a new user in Microsoft Entra ID. A few minutes after the creation of the user, a new log will be available for Log Analytics reflecting this change. The log can be checked using the ``AuditLogs`` query, by accessing **Log Analytics** and running the ``AuditLogs`` query.
 
 .. thumbnail:: /images/cloud-security/azure/log-analytics-new-user.png
     :title: Log Analytics App
@@ -191,7 +191,7 @@ Through the following configuration, Wazuh is ready to search for any query acce
 
 Check the reference for more information about the :doc:`Azure module </user-manual/reference/ossec-conf/wodle-azure-logs>`.
 
-.. warning:: The field ``tenantdomain`` is mandatory. It can be obtained from the **Overview** section in the Azure Active Directory.
+.. warning:: The field ``tenantdomain`` is mandatory. It can be obtained from the **Overview** section in Microsoft Entra ID.
 
 Wazuh Rules
 ^^^^^^^^^^^

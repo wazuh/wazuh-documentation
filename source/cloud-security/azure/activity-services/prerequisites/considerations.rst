@@ -64,13 +64,13 @@ It is possible to add more than one ``request`` block at the same time in the sa
             <tenantdomain>wazuh.onmicrosoft.com</tenantdomain>
 
             <request>
-                <tag>azure-active_directory-1</tag>
+                <tag>microsoft-entra_id-1</tag>
                 <query>auditLogs/directoryAudits</query>
                 <time_offset>1d</time_offset>
             </request>
 
             <request>
-                <tag>azure-active_directory-2</tag>
+                <tag>microsoft-entra_id-2</tag>
                 <query>auditLogs/directoryAudits</query>
                 <time_offset>1d</time_offset>
             </request>

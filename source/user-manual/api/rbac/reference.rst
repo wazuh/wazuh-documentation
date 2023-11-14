@@ -409,6 +409,7 @@ decoders:update
 
 decoders:delete
 ~~~~~~~~~~~~~~~~~~~~~~~~~~
+- :api-ref:`PUT /decoders/files/{filename} <operation/api.controllers.decoder_controller.put_file>` (`*:*`_)
 - :api-ref:`DELETE /decoders/files/{filename} <operation/api.controllers.decoder_controller.delete_file>` (`decoder:file`_)
 
 Events
@@ -554,6 +555,7 @@ rules:update
 
 rules:delete
 ~~~~~~~~~~~~~~~~~~~~~~~~~~
+- :api-ref:`PUT /rules/files/{filename} <operation/api.controllers.rule_controller.put_file>` (`*:*`_)
 - :api-ref:`DELETE /rules/files/{filename} <operation/api.controllers.rule_controller.delete_file>` (`rule:file`_)
 
 
@@ -672,13 +674,11 @@ Vulnerability
 ^^^^^^^^^^^^^^^
 vulnerability:read
 ~~~~~~~~~~~~~~~~~~
-- :api-ref:`GET /vulnerability/{agent_id} <operation/api.controllers.vulnerability_controller.get_vulnerability_agent>` (`agent:id`_, `agent:group`_)
-- :api-ref:`GET /vulnerability/{agent_id}/last_scan <operation/api.controllers.vulnerability_controller.get_last_scan_agent>` (`agent:id`_, `agent:group`_)
-- :api-ref:`GET /vulnerability/{agent_id}/summary/{field} <operation/api.controllers.vulnerability_controller.get_vulnerabilities_field_summary>` (`agent:id`_, `agent:group`_)
+.. deprecated:: 4.8.0
 
 vulnerability:run
 ~~~~~~~~~~~~~~~~~~
-- :api-ref:`PUT /vulnerability <operation/api.controllers.vulnerability_controller.run_vulnerability_scan>` (`*:*`_)
+.. deprecated:: 4.8.0
 
 .. _api_rbac_reference_default_policies:
 

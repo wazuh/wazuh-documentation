@@ -73,8 +73,6 @@ newUrls['4.9'] = [
 
 newUrls['4.8'] = [
   '/release-notes/release-4-8-0.html',
-  '/development/packaging/generate-indexer-package.html',
-  '/development/packaging/generate-dashboard-package.html',
 ];
 
 /* *** RELEASE 4.7 ****/
@@ -105,7 +103,11 @@ newUrls['4.6'] = [
   '/cloud-security/ms-graph/index.html',
   '/cloud-security/ms-graph/monitoring-ms-graph-activity.html',
   '/user-manual/reference/ossec-conf/ms-graph-module.html',
-  '/user-manual/wazuh-dashboard/queries.html'
+  '/user-manual/wazuh-dashboard/queries.html',
+  '/cloud-security/azure/activity-services/entra/index.html',
+  '/cloud-security/azure/activity-services/entra/graph.html',
+  '/user-manual/user-administration/single-sign-on/administrator/microsoft-entra-id.html',
+  '/user-manual/user-administration/single-sign-on/read-only/microsoft-entra-id.html',
 ];
 
 /* Pages no longer available in 4.6 */
@@ -154,6 +156,10 @@ removedUrls['4.6'] = [
   '/user-manual/uninstall/open-distro.html',
   '/development/packaging/generate-wazuh-kibana-app.html',
   '/development/packaging/generate-wazuh-splunk-app.html',
+  '/cloud-security/azure/activity-services/active-directory/index.html',
+  '/cloud-security/azure/activity-services/active-directory/graph.html',
+  '/user-manual/user-administration/single-sign-on/administrator/azure-active-directory.html',
+  '/user-manual/user-administration/single-sign-on/read-only/azure-active-directory.html'
 ];
 
 /* *** RELEASE 4.5 ****/
