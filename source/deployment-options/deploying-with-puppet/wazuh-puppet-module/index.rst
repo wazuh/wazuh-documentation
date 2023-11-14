@@ -48,7 +48,7 @@ Install a stack via Puppet
 Single Node:
 ------------
 
-A single node stack of Wazuh manager, Wazuh dashboard, Wazuh indexer and Filebeat can be deployed using this manifest. See the Wazuh manager section for variables that can be used to configure the manager before deployment.
+You can use  the followingmanifest to deploy a single node stack of Wazuh manager, Wazuh dashboard, Wazuh indexer, and Filebeat. To configure the manager before deployment, check the configuration variables in the Wazuh manager section.
 
 Create a stack.pp file at ``/etc/puppetlabs/code/environments/production/manifests/`` and put the contents below. ``puppet-agent-node`` refers to the hostname or IP of the puppet agent:
 
