@@ -19,9 +19,11 @@ In this installation guide, you will learn how to install Wazuh in your infrastr
 Installing the Wazuh central components
 ---------------------------------------
 
-You can choose between two installation methods for each Wazuh central component. Both options provide instructions to install the central components on a single host or on separate hosts. You can also check our :doc:`Quickstart </quickstart>` documentation to get started with Wazuh in just a few minutes.
+The Wazuh indexer and Wazuh server can be installed on a single host or be distributed in cluster configurations. You can choose between two installation methods for each Wazuh central component. Both options provide instructions to install the central components on a single host or on separate hosts.
 
-The Wazuh indexer and Wazuh server can be installed on a single host or be distributed in cluster configurations. To check the requirements and start installing the first of the Wazuh central components, go to the :doc:`Wazuh indexer <wazuh-indexer/index>` section.
+You can check our :doc:`Quickstart </quickstart>` documentation to perform an all-in-one installation. This is the fastest way to get the Wazuh central components up and running.
+
+For more deployment flexibility and customization, install the Wazuh central components by starting with the :doc:`Wazuh indexer <wazuh-indexer/index>` deployment. This deployment method allows the all-in-one installation, and the installation of the components on separate servers.
 
 This is the installation workflow you will follow:
 

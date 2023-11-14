@@ -147,8 +147,8 @@ Edit the Wazuh indexer security configuration files. We recommend that you back 
                 challenge: true
                 config:
                   idp:
-                    metadata_file: “/etc/wazuh-indexer/opensearch-security/Google_Metadata.xml”
-                    entity_id: “https://accounts.google.com/o/saml2?idpid=C02…”
+                    metadata_file: '/etc/wazuh-indexer/opensearch-security/Google_Metadata.xml'
+                    entity_id: 'https://accounts.google.com/o/saml2?idpid=C02…'
                   sp:
                     entity_id: wazuh-saml
                   kibana_url: https://<WAZUH_DASHBOARD_URL>

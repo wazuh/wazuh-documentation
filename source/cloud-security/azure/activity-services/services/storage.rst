@@ -53,7 +53,7 @@ This is a basic example of how to monitor the activity of the infrastructure. A 
 Creating a user
 ^^^^^^^^^^^^^^^
 
-An easy way to test this configuration is to create a new user in Azure Active Directory. A few minutes after the creation of the user, a new log will be available in a container named **insights-logs-auditlogs** inside the Storage account specified when configuring the Activity log export.
+An easy way to test this configuration is to create a new user in Microsoft Entra ID. A few minutes after the creation of the user, a new log will be available in a container named **insights-logs-auditlogs** inside the Storage account specified when configuring the Activity log export.
 
 .. thumbnail:: /images/cloud-security/azure/storage-new-user-1.png
     :title: Storage
