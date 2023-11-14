@@ -15,7 +15,7 @@ The `audit log` allows Wazuh to monitor:
 - User activity in SharePoint Online and OneDrive for Business.
 - User activity in Exchange Online (Exchange mailbox audit logging).
 - Admin activity in SharePoint Online.
-- Admin activity in Azure Active Directory (the directory service for Microsoft 365).
+- Admin activity in Microsoft Entra ID (the directory service for Microsoft 365).
 - Admin activity in Exchange Online (Exchange admin audit logging).
 - eDiscovery activities in the security and compliance center.
 - User and admin activity in Power BI.

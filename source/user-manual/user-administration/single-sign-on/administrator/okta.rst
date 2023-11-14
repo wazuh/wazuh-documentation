@@ -180,8 +180,8 @@ Edit the Wazuh indexer security configuration files. We recommend that you back 
                 challenge: true
                 config:
                   idp:
-                    metadata_url: "https://....okta.com/app/..../sso/saml/metadata"
-                    entity_id: "http://www.okta.com/...."
+                    metadata_url: 'https://....okta.com/app/..../sso/saml/metadata'
+                    entity_id: 'http://www.okta.com/....'
                   sp:
                     entity_id: wazuh-saml
                   kibana_url: https://<WAZUH_DASHBOARD_URL>

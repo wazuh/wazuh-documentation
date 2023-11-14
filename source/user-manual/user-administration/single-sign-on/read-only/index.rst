@@ -40,7 +40,7 @@ Identity providers
    :maxdepth: 1
 
    okta
-   azure-active-directory
+   microsoft-entra-id
    pingone
    google
    jumpcloud
