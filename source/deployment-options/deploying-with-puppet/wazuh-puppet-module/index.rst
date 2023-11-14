@@ -117,7 +117,7 @@ This is the correspondence of the IPs with the puppet nodes described in the man
     puppet-wazuh-manager-worker = workerhost (Wazuh manager worker)
     puppet-wazuh-dashboard = dashboardhost (Wazuh dashboard node)
 
-The wazuh::certificates class must be executed inside the puppet server where the Wazuh module is installed (``puppet-server``) because we use the archives module to pass files to all the servers where we deploy the Wazuh stack.
+The ``wazuh::certificates`` class must be executed inside the puppet server where the Wazuh module is installed (``puppet-server``) because we use the archives module to pass files to all the servers where we deploy the Wazuh stack.
 
 If you need to add more ``Wazuh Indexer`` nodes, you need to add new variables (``indexer_node4_name`` and ``node4host`` for example) and add them to the ``indexer_discovery_hosts``, ``indexer_cluster_initial_master_nodes``, ``indexer_cluster_CN`` and ``indexer_certs`` arrays. In addition, it is necessary to add a new node instance equal to ``puppet-wazuh-indexer-node2`` or ``puppet-wazuh-indexer-node3``, so that they do not run ``securityadmin``.
 
