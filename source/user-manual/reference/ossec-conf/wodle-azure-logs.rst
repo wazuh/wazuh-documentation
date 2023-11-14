@@ -311,7 +311,7 @@ File example:
 log_analytics\\tenantdomain
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-A tenant is simply a dedicated instance of Azure Active Directory (Azure AD). The Azure Log Analytics API uses the Azure Active Directory authentication scheme.
+A tenant is simply a dedicated instance of Microsoft Entra ID (ME-ID). The Azure Log Analytics API uses the Microsoft Entra ID authentication scheme.
 
 +--------------------+--------------------+
 | **Default value**  | N/A                |
@@ -463,7 +463,7 @@ This block configures the integration with Azure Active Directory Graph REST API
 graph\\application_id
 ^^^^^^^^^^^^^^^^^^^^^
 
-Identifier of the application that we will use for the authentication and to be able to use the AAD Graph API. It must be used next to the ``application_key`` option obligatorily. Incompatible with ``auth_path`` option.
+Identifier of the application that we will use for the authentication and to be able to use the Azure Active Directory Graph API. It must be used next to the ``application_key`` option obligatorily. Incompatible with ``auth_path`` option.
 
 +--------------------+--------------------+
 | **Default value**  | N/A                |
@@ -474,7 +474,7 @@ Identifier of the application that we will use for the authentication and to be 
 graph\\application_key
 ^^^^^^^^^^^^^^^^^^^^^^
 
-Key to the application we will use for authentication and to be able to use the AAD Graph API. It must be used next to the ``application_id`` option obligatorily. Incompatible with ``auth_path`` option.
+Key to the application we will use for authentication and to be able to use the Azure Active Directory Graph API. It must be used next to the ``application_id`` option obligatorily. Incompatible with ``auth_path`` option.
 
 +--------------------+--------------------+
 | **Default value**  | N/A                |
@@ -485,7 +485,7 @@ Key to the application we will use for authentication and to be able to use the 
 graph\\auth_path
 ^^^^^^^^^^^^^^^^
 
-Path of the file that contains the application identifier and the application key for authentication in order to use the AAD Graph API. Incompatible with the ``application_id`` and ``application_key`` options. Check the :doc:`credentials </cloud-security/azure/activity-services/prerequisites/credentials>` reference for more information about this topic.
+Path of the file that contains the application identifier and the application key for authentication in order to use the Azure Active Directory Graph API. Incompatible with the ``application_id`` and ``application_key`` options. Check the :doc:`credentials </cloud-security/azure/activity-services/prerequisites/credentials>` reference for more information about this topic.
 
 +--------------------+--------------------+
 | **Default value**  | N/A                |
@@ -497,7 +497,7 @@ Path of the file that contains the application identifier and the application ke
 graph\\tenantdomain
 ^^^^^^^^^^^^^^^^^^^
 
-A tenant is simply a dedicated instance of Azure Active Directory (Azure AD) because it uses the Azure Active Directory authentication scheme.
+A tenant is simply a dedicated instance of Microsoft Entra ID (ME-ID) because it uses the Microsoft Entra ID authentication scheme.
 
 +--------------------+--------------------+
 | **Default value**  | N/A                |
@@ -589,7 +589,7 @@ Example of graph configuration
 	        <tenantdomain>wazuh.onmicrosoft.com</tenantdomain>
 
 	        <request>
-	            <tag>azure-active_directory</tag>
+	            <tag>microsoft-entra_id</tag>
 	            <query>activities/audit?api-version=beta</query>
 	            <time_offset>1d</time_offset>
 	        </request>
@@ -830,7 +830,7 @@ Example of all integration
             <tenantdomain>wazuh.onmicrosoft.com</tenantdomain>
 
             <request>
-                <tag>azure-active_directory</tag>
+                <tag>microsoft-entra_id</tag>
                 <query>activities/audit?api-version=beta</query>
                 <timeout>7200</timeout>
                 <time_offset>1d</time_offset>
