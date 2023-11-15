@@ -38,7 +38,7 @@ Follow these steps to create an internal user and map it to its appropriate role
 
 #. To map the user to the appropriate role, follow these steps:
    
-   #. Go to **Security**, select **Roles** to open the page, and click the name of the role selected to open the window.
+   #. Click the upper-left menu icon **☰** to open the options, go to **Indexer/dashboard management** > **Security**, select **Roles** to open the page, and click the name of the role selected to open the window.
    #. Select the **Mapped users** tab and click **Manage mapping**.
    #. Add the user you created in the previous steps and click **Map** to confirm the action.
 
@@ -101,7 +101,7 @@ Follow these steps to create an internal user, create a new role mapping, and gi
 
 #. :ref:`Log into your WUI <cloud_wui_access>` as administrator.
 
-#. Click the upper-left menu icon **☰** to open the options, select **Security**, and then **Internal users** to open the internal users' page.
+#. Click the upper-left menu icon **☰** to open the options, go to **Indexer/dashboard management** > **Security**, and then **Internal users** to open the internal users' page.
 
 #. Click **Create internal user**, complete the empty fields with the requested information, and click **Create** to complete the action.
 

@@ -75,7 +75,7 @@ The Wazuh dashboard includes a Ruleset Test tool that can process log messages t
    :title: Ruleset test
    :alt: Ruleset test
 
-The Wazuh dashboard also includes a Dev Tools for users to interact with the Wazuh API. This can be used to manage the Wazuh deployment (e.g., managing server or agent configurations, monitor status and log messages, adding or removing agents, etc.).
+The Wazuh dashboard also includes an API console for users to interact with the Wazuh API. This can be used to manage the Wazuh deployment (e.g., managing server or agent configurations, monitor status and log messages, adding or removing agents, etc.).
 
 .. hlist::
     :columns: 2

@@ -136,7 +136,7 @@ Follow these steps to create an internal user and map it to a role of your choic
 
 #. Log into the Wazuh dashboard as administrator.
 
-#. Click the upper-left menu icon **☰** to open the options, got to **Server management** > **Security**, and then **Internal users** to open the internal users' page.
+#. Click the upper-left menu icon **☰** to open the options, go to **Indexer/dashboard management** > **Security**, and then **Internal users** to open the internal users' page.
 
    .. thumbnail:: /images/manual/user-administration/rbac/internal-user.gif
       :title: Internal users page 
