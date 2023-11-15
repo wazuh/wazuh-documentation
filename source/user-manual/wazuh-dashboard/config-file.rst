@@ -732,8 +732,7 @@ This is an example of the wazuh.yml configuration:
 
 .. code-block:: yaml
     
-    #General options
-
+    # General options
     hosts:
         - env-1:
             url: https://env-1.example
@@ -747,7 +746,6 @@ This is an example of the wazuh.yml configuration:
             username: wazuh-wui
             password: wazuh-wui
             run_as: true
-
     pattern: 'wazuh-alerts-*'
     timeout: 20000
     ip.selector: true
@@ -755,15 +753,13 @@ This is an example of the wazuh.yml configuration:
     logs.level: info
     hideManagerAlerts: true
 
-    #Monitoring
-
+    # Monitoring
     wazuh.monitoring.enabled: true
     wazuh.monitoring.frequency: 900
     wazuh.monitoring.pattern: wazuh-monitoring-*
     wazuh.monitoring.creation: w
 
-    #Health checks
-
+    # Health checks
     checks.pattern : true
     checks.template: true
     checks.fields  : true
@@ -773,8 +769,7 @@ This is an example of the wazuh.yml configuration:
     checks.timeFilter: true
     checks.maxBuckets: true
 
-    #Extensions
-
+    # Extensions
     extensions.audit     : true
     extensions.aws       : false
     extensions.ciscat    : false
@@ -791,13 +786,11 @@ This is an example of the wazuh.yml configuration:
     extensions.tsc       : true
     extensions.virustotal: false
 
-    #Advanced index options
-
+    # Advanced index options
     wazuh.monitoring.shards: 1
     wazuh.monitoring.replicas: 0    
 
-    #Custom branding
-
+    # Custom branding
     customization.enabled: true
     customization.logo.app: 'custom/images/customization.logo.app.jpg'
     customization.logo.sidebar: 'custom/images/customization.logo.sidebar.png'
@@ -806,17 +799,14 @@ This is an example of the wazuh.yml configuration:
     customization.reports.footer: '123 Custom footer Ave.\nSan Jose, CA 95148'
     customization.reports.header: 'Custom Company\ninfo@custom.com\n@social_reference'
 
-    #Unauthorized roles
-
+    # Unauthorized roles
     disabled_roles: 
         - wazuh_disabled
 
-    #Sample alerts
-
+    # Sample alerts
     alerts.sample.prefix: wazuh-alerts-4.x-
 
-    #Cron
-
+    # Cron
     cron.prefix: wazuh
     cron.statistics.status: true
     cron.statistics.apis: []
@@ -826,7 +816,6 @@ This is an example of the wazuh.yml configuration:
     cron.statistics.shards: 1
     cron.statistics.replicas: 0
 
-    #Enrollment DNS
-
+    # Enrollment DNS
     enrollment.dns: ''
     enrollment.password: ''
