@@ -76,7 +76,7 @@ Wazuh decoders are responsible for parsing and normalizing log data collected fr
    :align: center
    :width: 80%
 
-Wazuh ruleset detects security events and anomalies in log data. These rules are written in a specific format and they trigger alerts when certain conditions are met. The rules are defined based on certain criteria like log fields, values, or patterns to match specific log entries that may indicate security threats. Wazuh provides a wide range of pre-built rules covering common security use cases. Additionally, administrators can create :doc:`custom rules </user-manual/ruleset/custom>` tailored to their specific environment and security requirements. The **Rules** module of the Wazuh dashboard lets you view the default and custom **Rules**.
+Wazuh ruleset detects security events and anomalies in log data. These rules are written in a specific format and they trigger alerts when certain conditions are met. The rules are defined based on certain criteria like log fields, values, or patterns to match specific log entries that may indicate security threats. Wazuh provides a wide range of pre-built rules covering common security use cases. Additionally, administrators can create :doc:`custom rules </user-manual/ruleset/custom>` tailored to their specific environment and security requirements. The **Rules** module of the Wazuh dashboard lets you view the default and custom rules.
 
 .. thumbnail:: /images/getting-started/use-cases/log-data-analysis/rules-in-wazuh-dashboard.png
    :title: Rules in Wazuh dashboard
