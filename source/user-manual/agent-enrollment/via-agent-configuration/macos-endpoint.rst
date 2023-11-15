@@ -59,4 +59,4 @@ The following steps serve as a guide on how to configure a macOS endpoint agent 
      # /Library/Ossec/bin/wazuh-control restart
 
 
-#. Select the “Endpoints Summary” module to check for the newly enrolled agent and its connection status in the Wazuh dashboard to confirm that enrollment was successful.
+#. Select the **Server management** > **Endpoints Summary** module to check for the newly enrolled agent and its connection status in the Wazuh dashboard to confirm that enrollment was successful.
