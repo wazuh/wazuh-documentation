@@ -148,13 +148,15 @@ In the case of having a Wazuh indexer cluster with multiple nodes, the cluster w
 
 #. If you're upgrading from a version earlier than 4.8.0, run the Wazuh indexer ``indexer-init.sh`` script on `any` Wazuh indexer node to re-initialize the cluster. Find more information in :doc:`/user-manual/wazuh-indexer/index-life-management`.
 
-   .. note::
-
-      If you have a rollover policy in use, execute the ``indexer-init.sh`` script with the ``-P`` flag to assign the policy a custom priority. The policy with the highest priority value takes precedence and will be applied to new indices, but not to existing ones. Use the ``POST <alias>/_rollover`` endpoint to rotate the current write index managed by the previous policy. For example: ``wazuh-alerts/_rollover``
+   -  If there is a rollover policy in use, your new policy needs a higher priority value to take precedence over it. Add ``-P <CUSTOM_PRIORITY_VALUE>`` into the command below to set a custom priority value.
       
    .. code-block:: console
 
-      # bash /usr/share/wazuh-indexer/bin/indexer-init.sh -i <WAZUH_INDEXER_IP> -p <password>
+      # bash /usr/share/wazuh-indexer/bin/indexer-init.sh -i <WAZUH_INDEXER_IP_ADDRESS> -p <password>
+
+   .. note::
+
+      Wazuh applies policies only to new indices and not to existing ones. To rotate the current write index managed by the previous policy and start applying the new one, use the ``POST <alias>/_rollover`` endpoint. For example: ``POST wazuh-alerts/_rollover``
 
 .. _upgrading_wazuh_server:
 

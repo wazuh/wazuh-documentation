@@ -175,7 +175,7 @@ Cluster initialization involves configuring a default ISM policy, loading new ce
     
    .. code-block:: console
 
-      # bash /usr/share/wazuh-indexer/bin/indexer-init.sh -i <WAZUH_INDEXER_IP>
+      # bash /usr/share/wazuh-indexer/bin/indexer-init.sh -i <WAZUH_INDEXER_IP_ADDRESS>
 
    .. note::
       

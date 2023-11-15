@@ -63,7 +63,7 @@ To customize your policy, you can follow one of these methods:
 Whatever the method you choose, make sure to keep the following considerations in mind:
 
 -  Keep ``rollover_policy`` for the policy name. Wazuh preserves this policy unaffected between upgrades and initialization if present.
--  The ``min_doc_count`` value must be lower than 2^31. Furthermore, we recommend a value not higher than 200 million.
+-  The ``min_doc_count`` value must be lower than *2^31*. Furthermore, we recommend a value not higher than 200 million.
 -  The ``priority`` value must be unique among all policies managing the same indices.
 -  For best performance, we recommend a value between 10 GB and 50 GB for ``min_primary_shard_size``.
 
