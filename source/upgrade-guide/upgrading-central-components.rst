@@ -66,13 +66,13 @@ In the case of having a Wazuh indexer cluster with multiple nodes, the cluster w
 
 .. note::
 
-   -  Replace ``<WAZUH_INDEXER_IP>``, ``<username>``, and ``<password>`` before running the commands below.
+   -  Replace ``<WAZUH_INDEXER_IP_ADDRESS>``, ``<username>``, and ``<password>`` before running the commands below.
 
 #. Disable shard allocation.
 
    .. code-block:: bash
    
-      curl -X PUT "https://<WAZUH_INDEXER_IP>:9200/_cluster/settings"  -u <username>:<password> -k -H 'Content-Type: application/json' -d'
+      curl -X PUT "https://<WAZUH_INDEXER_IP_ADDRESS>:9200/_cluster/settings"  -u <username>:<password> -k -H 'Content-Type: application/json' -d'
       {
         "persistent": {
           "cluster.routing.allocation.enable": "primaries"
@@ -84,7 +84,7 @@ In the case of having a Wazuh indexer cluster with multiple nodes, the cluster w
 
    .. code-block:: console
 
-      # curl -X POST "https://<WAZUH_INDEXER_IP>:9200/_flush/synced" -u <username>:<password> -k
+      # curl -X POST "https://<WAZUH_INDEXER_IP_ADDRESS>:9200/_flush/synced" -u <username>:<password> -k
 
 #. Shut down the Wazuh indexer in the node.
 
@@ -126,13 +126,13 @@ In the case of having a Wazuh indexer cluster with multiple nodes, the cluster w
 
    .. code-block:: console
 
-      # curl -k -u <username>:<password> https://<WAZUH_INDEXER_IP>:9200/_cat/nodes?v
+      # curl -k -u <username>:<password> https://<WAZUH_INDEXER_IP_ADDRESS>:9200/_cat/nodes?v
 
 #. Re-enable shard allocation.
 
    .. code-block:: bash
 
-      curl -X PUT "https://<WAZUH_INDEXER_IP>:9200/_cluster/settings" -u <username>:<password> -k -H 'Content-Type: application/json' -d'
+      curl -X PUT "https://<WAZUH_INDEXER_IP_ADDRESS>:9200/_cluster/settings" -u <username>:<password> -k -H 'Content-Type: application/json' -d'
       {
         "persistent": {
           "cluster.routing.allocation.enable": "all"
@@ -144,7 +144,7 @@ In the case of having a Wazuh indexer cluster with multiple nodes, the cluster w
 
    .. code-block:: console
 
-      # curl -k -u <username>:<password> https://<WAZUH_INDEXER_IP>:9200/_cat/nodes?v
+      # curl -k -u <username>:<password> https://<WAZUH_INDEXER_IP_ADDRESS>:9200/_cat/nodes?v
 
 #. If you're upgrading from a version earlier than 4.8.0, run the Wazuh indexer ``indexer-init.sh`` script on `any` Wazuh indexer node to re-initialize the cluster. Find more information in :doc:`/user-manual/wazuh-indexer/index-life-management`.
 
@@ -156,7 +156,7 @@ In the case of having a Wazuh indexer cluster with multiple nodes, the cluster w
 
    .. note::
 
-      Wazuh applies policies only to new indices and not to existing ones. To rotate the current write index managed by the previous policy and start applying the new one, use the ``POST <alias>/_rollover`` endpoint. For example: ``POST wazuh-alerts/_rollover``
+      The policy will be applied only to new indices and not to existing ones. To rotate the current write index managed by the previous policy and start applying the new one, use the ``POST <alias>/_rollover`` endpoint. For example: ``POST wazuh-alerts/_rollover``
 
 .. _upgrading_wazuh_server:
 
