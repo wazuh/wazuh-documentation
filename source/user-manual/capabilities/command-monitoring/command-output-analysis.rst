@@ -210,7 +210,7 @@ Wazuh server
 Wazuh dashboard
 ^^^^^^^^^^^^^^^
 
-Click on the **Agents** menu and select the monitored Linux endpoint. Then, navigate to the **Threat Hunting** module to view the alerts generated when the Command module runs the ``grep MemFree /proc/meminfo`` command.
+Click the upper-left menu icon **☰** to open the options, go to **Server management** > **Endpoints summary** and select the monitored Linux endpoint. Then, navigate to the **Threat Hunting** module to view the alerts generated when the Command module runs the ``grep MemFree /proc/meminfo`` command.
 
 .. thumbnail:: /images/manual/command-monitoring/free-memory-alert.png
   :title: System's free memory alert
