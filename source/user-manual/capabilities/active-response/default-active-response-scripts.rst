@@ -23,18 +23,18 @@ The table below lists out-of-the-box active response scripts for:
 
 Click on the name of each active response to open its source code. 
 
-.. |disable-account| replace:: `disable-account <https://github.com/wazuh/wazuh/blob/|WAZUH_CURRENT_MINOR|/src/active-response/disable-account.c>`__
-.. |firewall-drop| replace:: `firewall-drop <https://github.com/wazuh/wazuh/blob/|WAZUH_CURRENT_MINOR|/src/active-response/firewalls/default-firewall-drop.c>`__
-.. |firewalld-drop| replace:: `firewalld-drop <https://github.com/wazuh/wazuh/blob/|WAZUH_CURRENT_MINOR|/src/active-response/firewalld-drop.c>`__
-.. |host-deny| replace:: `host-deny <https://github.com/wazuh/wazuh/blob/|WAZUH_CURRENT_MINOR|/src/active-response/host-deny.c>`__
-.. |ip-customblock| replace:: `ip-customblock <https://github.com/wazuh/wazuh/blob/|WAZUH_CURRENT_MINOR|/src/active-response/ip-customblock.c>`__
-.. |ipfw| replace:: `ipfw <https://github.com/wazuh/wazuh/blob/|WAZUH_CURRENT_MINOR|/src/active-response/firewalls/ipfw.c>`__
-.. |npf| replace:: `npf <https://github.com/wazuh/wazuh/blob/|WAZUH_CURRENT_MINOR|/src/active-response/firewalls/npf.c>`__
-.. |wazuh-slack| replace:: `wazuh-slack <https://github.com/wazuh/wazuh/blob/|WAZUH_CURRENT_MINOR|/src/active-response/wazuh-slack.c>`__
-.. |pf| replace:: `pf <https://github.com/wazuh/wazuh/blob/|WAZUH_CURRENT_MINOR|/src/active-response/firewalls/pf.c>`__
+.. |disable-account| replace:: `disable-account <https://github.com/wazuh/wazuh/blob/v|WAZUH_CURRENT|/src/active-response/disable-account.c>`__
+.. |firewall-drop| replace:: `firewall-drop <https://github.com/wazuh/wazuh/blob/v|WAZUH_CURRENT|/src/active-response/firewalls/default-firewall-drop.c>`__
+.. |firewalld-drop| replace:: `firewalld-drop <https://github.com/wazuh/wazuh/blob/v|WAZUH_CURRENT|/src/active-response/firewalld-drop.c>`__
+.. |host-deny| replace:: `host-deny <https://github.com/wazuh/wazuh/blob/v|WAZUH_CURRENT|/src/active-response/host-deny.c>`__
+.. |ip-customblock| replace:: `ip-customblock <https://github.com/wazuh/wazuh/blob/v|WAZUH_CURRENT|/src/active-response/ip-customblock.c>`__
+.. |ipfw| replace:: `ipfw <https://github.com/wazuh/wazuh/blob/v|WAZUH_CURRENT|/src/active-response/firewalls/ipfw.c>`__
+.. |npf| replace:: `npf <https://github.com/wazuh/wazuh/blob/v|WAZUH_CURRENT|/src/active-response/firewalls/npf.c>`__
+.. |wazuh-slack| replace:: `wazuh-slack <https://github.com/wazuh/wazuh/blob/v|WAZUH_CURRENT|/src/active-response/wazuh-slack.c>`__
+.. |pf| replace:: `pf <https://github.com/wazuh/wazuh/blob/v|WAZUH_CURRENT|/src/active-response/firewalls/pf.c>`__
 .. |restart.sh| replace:: `restart.sh <https://github.com/wazuh/wazuh/blob/master/src/active-response/restart.sh>`__
-.. |restart-wazuh| replace:: `restart-wazuh <https://github.com/wazuh/wazuh/blob/|WAZUH_CURRENT_MINOR|/src/active-response/restart-wazuh.c>`__
-.. |route-null| replace:: `route-null <https://github.com/wazuh/wazuh/blob/|WAZUH_CURRENT_MINOR|/src/active-response/route-null.c>`__
+.. |restart-wazuh| replace:: `restart-wazuh <https://github.com/wazuh/wazuh/blob/v|WAZUH_CURRENT|/src/active-response/restart-wazuh.c>`__
+.. |route-null| replace:: `route-null <https://github.com/wazuh/wazuh/blob/v|WAZUH_CURRENT|/src/active-response/route-null.c>`__
 .. |kaspersky| replace:: `kaspersky <https://github.com/wazuh/wazuh/blob/master/src/active-response/kaspersky.c>`__
 
 +---------------------------+-------------------------------------------------------------------------------------------------------------+
@@ -73,9 +73,9 @@ Windows endpoints
 
 The table below lists out-of-the-box scripts for Windows endpoints, located in the Wazuh agent ``C:\Program Files (x86)\ossec-agent\active-response\bin`` directory. Click on the name of each script to see its source code.
 
-.. |netsh.exe| replace:: `netsh.exe <https://github.com/wazuh/wazuh/blob/|WAZUH_CURRENT_MINOR|/src/active-response/netsh.c>`__
-.. |restart-wazuh.exe| replace:: `restart-wazuh.exe <https://github.com/wazuh/wazuh/blob/|WAZUH_CURRENT_MINOR|/src/active-response/restart-wazuh.c>`__
-.. |route-null.exe| replace:: `route-null.exe <https://github.com/wazuh/wazuh/blob/|WAZUH_CURRENT_MINOR|/src/active-response/route-null.c>`__
+.. |netsh.exe| replace:: `netsh.exe <https://github.com/wazuh/wazuh/blob/v|WAZUH_CURRENT|/src/active-response/netsh.c>`__
+.. |restart-wazuh.exe| replace:: `restart-wazuh.exe <https://github.com/wazuh/wazuh/blob/v|WAZUH_CURRENT|/src/active-response/restart-wazuh.c>`__
+.. |route-null.exe| replace:: `route-null.exe <https://github.com/wazuh/wazuh/blob/v|WAZUH_CURRENT|/src/active-response/route-null.c>`__
 
 +-------------------------+---------------------------------------------------------------+
 | Name of script          |                          Description                          |

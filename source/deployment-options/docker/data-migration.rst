@@ -44,7 +44,7 @@ This guide shows how to migrate data from Opendistro to Wazuh Indexer in Docker 
 
       # git clone https://github.com/wazuh/wazuh-docker.git -b v|WAZUH_CURRENT_DOCKER|
 
-#. Navigate to the ``multi-node`` directory and run the ``volume-migrator`` script. This script creates new volumes for |WAZUH_CURRENT_MINOR_DOCKER| and copies data from old volumes to the newly created volumes. Use the Docker-compose version and project name as the arguments. You can see an example below. You can also do this step manually, see steps 5 and 6 in Wazuh Docker `Github <https://github.com/wazuh/wazuh-docker/blob/|WAZUH_CURRENT_MINOR_DOCKER|/multi-node/Migration-to-Wazuh-|WAZUH_CURRENT_MINOR_DOCKER|.md>`__:
+#. Navigate to the ``multi-node`` directory and run the ``volume-migrator`` script. This script creates new volumes for |WAZUH_CURRENT_MINOR_DOCKER| and copies data from old volumes to the newly created volumes. Use the Docker-compose version and project name as the arguments. You can see an example below. You can also do this step manually, see steps 5 and 6 in Wazuh Docker `Github <https://github.com/wazuh/wazuh-docker/blob/v|WAZUH_CURRENT_DOCKER|/multi-node/Migration-to-Wazuh-4.4.md>`__:
 
    .. code-block:: console
 

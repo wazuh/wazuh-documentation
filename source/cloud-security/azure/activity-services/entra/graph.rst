@@ -14,7 +14,7 @@ Learn how to configure an application from the Microsoft Azure portal to be able
 - `Wazuh configuration`_
 - `Microsoft Graph use case`_
 
-In order to know how the Wazuh Azure module works in conjunction with the `Microsoft Graph REST API`, it is important to understand first what are the Azure AD activity reports and what kind of information they provide. Wazuh can process the logs from the following Azure AD activity reports, each one of them requiring a different query to be executed:
+In order to know how the Wazuh Azure module works in conjunction with the `Microsoft Graph REST API`, it is important to understand first what are the Microsoft Entra ID activity reports and what kind of information they provide. Wazuh can process the logs from the following Microsoft Entra ID activity reports, each one of them requiring a different query to be executed:
 
 +---------------------------------------------------------------------------------------------------------------------------+-------------------------------+
 | **Report type**                                                                                                           | **Query**                     |
@@ -35,7 +35,7 @@ Creating the application
 
 This section explains the creation of an application that will use the Azure Log Analytics REST API. It is also possible to configure an existing application. If this is the case, skip this step.
 
-In the **Azure Active Directory** panel, select the option **App registrations**. Then, select **New registration**.
+In the **Microsoft Entra ID** panel, select the option **App registrations**. Then, select **New registration**.
 
 .. thumbnail:: /images/cloud-security/azure/graph-1.png
     :title: Log Analytics App
@@ -109,7 +109,7 @@ azure-logs module configuration
 
 Proceed with configuring the ``azure-logs`` module in the local configuration (``ossec.conf``). The `key and ID of the application` saved during the previous steps will be used here. In this case, both fields were saved in a `file` for authentication.
 
-Here is an example of how to get the audit log of the Azure Active Directory using Microsoft Graph. This example configuration includes a representative ``tag`` and is scheduled for every Monday at 02:00, using an offset of one day, which means only the log data from the last day is parsed:
+Here is an example of how to get the audit log of the Microsoft Entra ID using Microsoft Graph. This example configuration includes a representative ``tag`` and is scheduled for every Monday at 02:00, using an offset of one day, which means only the log data from the last day is parsed:
 
 .. code-block:: xml
 
@@ -126,7 +126,7 @@ Here is an example of how to get the audit log of the Azure Active Directory usi
             <tenantdomain>wazuh.onmicrosoft.com</tenantdomain>
 
             <request>
-                <tag>azure-active_directory</tag>
+                <tag>microsoft-entra_id</tag>
                 <query>auditLogs/directoryAudits</query>
                 <time_offset>1d</time_offset>
             </request>
@@ -144,12 +144,12 @@ Check the :doc:`azure-logs </user-manual/reference/ossec-conf/wodle-azure-logs>`
     application_id = 317...764
     application_key = wUj...9cj
 
-.. warning:: The field ``tenantdomain`` is mandatory. It can be obtain from the **Overview** section in the Azure Active Directory.
+.. warning:: The field ``tenantdomain`` is mandatory. It can be obtained from the **Overview** section in Microsoft Entra ID.
 
 Microsoft Graph use case
 ------------------------
 
-Here is an example of monitoring the Azure AD activity using the configuration described above.
+Here is an example of monitoring Microsoft Entra ID activity using the configuration described above.
 
 Wazuh Rules
 ^^^^^^^^^^^
@@ -177,7 +177,7 @@ Create a new user in Azure. If the creation is successful, a log will be written
 Azure portal visualization
 ^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-The resulting log from the user creation can be checked in the **Audit logs** section of Azure Active Directory.
+The resulting log from the user creation can be checked in the **Audit logs** section of Microsoft Entra ID.
 
 .. thumbnail:: /images/cloud-security/azure/portal-services.png
     :title: AAD

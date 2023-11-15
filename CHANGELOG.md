@@ -6,19 +6,26 @@ All notable changes to this project will be documented in this file.
 ### Added
 
 - Added the `timeout` and `retries` settings to the `integratord` configuration. ([#6442](https://github.com/wazuh/wazuh-documentation/pull/6442))
-- Added support for deploying with Ansible on Windows ([#6640](https://github.com/wazuh/wazuh-documentation/pull/6640))
+- Added support for deploying with Ansible on Windows. ([#6640](https://github.com/wazuh/wazuh-documentation/pull/6640))
 - Added Wazuh v4.8.0 release notes. ([#6550](https://github.com/wazuh/wazuh-documentation/pull/6550))
+- Added the ``update_check`` configuration option. ([#6673](https://github.com/wazuh/wazuh-documentation/pull/6673))
 
 ### Changed
 
 - Updated the `logcollector.ip_update_interval` setting in the Internal options documentation. ([#6373](https://github.com/wazuh/wazuh-documentation/pull/6373))
 - Updated OSD version to 2.10.0. ([#6568](https://github.com/wazuh/wazuh-documentation/pull/6568))
+- Updated dashboard settings screenshots. ([#6711](https://github.com/wazuh/wazuh-documentation/pull/6711))
+
+### Removed
+
+- Deprecated ``/vulnerability`` API endpoints. ([#6738](https://github.com/wazuh/wazuh-documentation/pull/6738))
 
 ## [v4.7.1]
 
 ### Added
 
-- Added the Wazuh v4.7.1 release notes. ([6549](https://github.com/wazuh/wazuh-documentation/pull/6549))
+- Added deb/rpm selection tabs in offline installation download step. ([#6686](https://github.com/wazuh/wazuh-documentation/pull/6686))
+- Added missing RBAC policies for ``PUT /decoders/files/{filename}`` and ``PUT /rules/files/{filename}`` API endpoints. ([#6693](https://github.com/wazuh/wazuh-documentation/pull/6693))
 
 ## [v4.7.0]
 
@@ -28,7 +35,6 @@ All notable changes to this project will be documented in this file.
 - Clarified that Syscollector is now capable of fetching the PYPI and node packages. [#3464](https://github.com/wazuh/wazuh-documentation/pull/6346)
 - Added the Maltiverse integration section. ([#6257](https://github.com/wazuh/wazuh-documentation/pull/6257))
 - Added the New Custom Logs Buckets documentation. ([#6254](https://github.com/wazuh/wazuh-documentation/pull/6254))
-- Added new setting to client buffer: `eps_timeframe`. ([#5975](https://github.com/wazuh/wazuh-documentation/pull/5975))
 - Added the `options` section for integrations. ([#5962](https://github.com/wazuh/wazuh-documentation/pull/5962))
 
 ### Changed
@@ -36,6 +42,14 @@ All notable changes to this project will be documented in this file.
 - Updated the Maltiverse rule id. ([#6420](https://github.com/wazuh/wazuh-documentation/pull/6420))
 - Updated `PIP` and `process`` information in ports inventory. ([#6308](https://github.com/wazuh/wazuh-documentation/pull/6308))
 - Updated the link to "Using Dashboards Query Language". ([#6588](https://github.com/wazuh/wazuh-documentation/pull/6588))
+
+### Fixed
+
+- Fixed paths to log files in VirusTotal integration section. ([#6651](https://github.com/wazuh/wazuh-documentation/pull/6651))
+
+### Removed
+
+- Removed reference for Wazuh indexer and dashboard mixed node from Deploying with Ansible guide. ([#6653](https://github.com/wazuh/wazuh-documentation/pull/6653))
 
 ## [v4.6.0]
 

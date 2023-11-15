@@ -33,10 +33,8 @@ Agent
 - `#15877 <https://github.com/wazuh/wazuh/pull/15877>`__ Added package inventory support for MacPorts in Syscollector.
 - `#17982 <https://github.com/wazuh/wazuh/pull/17982>`__ Added package inventory support for PYPI and node in Syscollector.
 - `#15000 <https://github.com/wazuh/wazuh/pull/15000>`__ Added related process information to the open ports inventory in Syscollector.
-- `#16089 <https://github.com/wazuh/wazuh/pull/16089>`__ Fixed vendor data in package inventory for Brew packages on macOS.
 - `#17966 <https://github.com/wazuh/wazuh/pull/17966>`__ The shared modules code has been sanitized according to the convention.
 - `#18006 <https://github.com/wazuh/wazuh/pull/18006>`__ The package inventory internal messages have been modified to honor the schema compliance.
-- `#16346 <https://github.com/wazuh/wazuh/pull/16346>`__ The agent's leaky bucket throughput limit has been extended to 100.000 EPS.
 
 Wazuh dashboard
 ^^^^^^^^^^^^^^^
@@ -52,6 +50,18 @@ RESTful API
 ^^^^^^^^^^^
 
 - `#19726 <https://github.com/wazuh/wazuh/pull/19726>`__ Added new ``status_code`` field to ``GET /agents`` response.
+- `#20126 <https://github.com/wazuh/wazuh/pull/20126>`__ Deprecated the following API endpoints.
+
+  -  ``PUT /vulnerability``
+  -  ``GET /vulnerability/{agent_id}``
+  -  ``GET /vulnerability/{agent_id}/last_scan``
+  -  ``GET /vulnerability/{agent_id}/summary/{field}``
+
+Packages
+^^^^^^^^
+
+- `#2568 <https://github.com/wazuh/wazuh-packages/pull/2568>`__ Updated links to ``wazuh-dashboard-plugins`` repository.
+- `#2555 <https://github.com/wazuh/wazuh-packages/pull/2555>`__ Added firewall validation to the installation assistant.
 
 Resolved issues
 ---------------
@@ -66,6 +76,9 @@ Reference                                                         Description
 ==============================================================    =============
 `#16683 <https://github.com/wazuh/wazuh/pull/16683>`__            Fixed an unexpected cluster error when a worker gets restarted.
 `#16681 <https://github.com/wazuh/wazuh/pull/16681>`__            Fixed an issue that let the manager validate wrong XML configurations.
+`#19869 <https://github.com/wazuh/wazuh/pull/19869>`__            Fixed default value for ``multiarch`` field in syscollector packages.
+`#19811 <https://github.com/wazuh/wazuh/pull/19811>`__            Improved reliability of the signature verification mechanism.
+`#20081 <https://github.com/wazuh/wazuh/pull/20081>`__            Fixed WPK rollback rebooting the host in Windows agent.
 ==============================================================    =============
 
 Agent
@@ -75,6 +88,7 @@ Agent
 Reference                                                         Description
 ==============================================================    =============
 `#17006 <https://github.com/wazuh/wazuh/pull/17006>`__            Fixed detection of ``osquery 5.4.0+`` running outside the integration.
+`#16089 <https://github.com/wazuh/wazuh/pull/16089>`__            Fixed vendor data in package inventory for Brew packages on macOS.
 ==============================================================    =============
 
 RESTful API
@@ -108,6 +122,15 @@ Reference                                                                  Descr
 `#5597 <https://github.com/wazuh/wazuh-dashboard-plugins/pull/5597>`__     Fixed the propagation event so that the flyout data, in the decoders, does not change when the button is pressed.
 `#5631 <https://github.com/wazuh/wazuh-dashboard-plugins/pull/5631>`__     Fixed the tooltips of the tables in the **Security** section, and removed unnecessary requests.
 =======================================================================    =============
+
+Packages
+^^^^^^^^
+
+==============================================================     =============
+Reference                                                          Description
+==============================================================     =============
+`#2523 <https://github.com/wazuh/wazuh-packages/pull/2523>`__      Fixed wrong condition when generating the RPM Wazuh indexer package with an existent base file.
+==============================================================     =============
 
 Changelogs
 ----------
