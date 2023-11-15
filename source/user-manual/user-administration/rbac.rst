@@ -205,7 +205,7 @@ To prepare the environment, add a label in the ``Team_A`` centralized configurat
 
 #. Log into the Wazuh dashboard as administrator.
 
-#. Select **Endpoint Groups** to open the page.
+#. Select **Server management** > **Endpoint Groups** to open the page.
 
 #. Select your group, for example, ``Team_A``.
 

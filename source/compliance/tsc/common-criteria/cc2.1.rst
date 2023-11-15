@@ -26,7 +26,7 @@ Wazuh helps meet the COSO Principle 13 (CC2.1) requirement by providing capabili
 
 This use case shows how log data analysis can be used to detect specific events across multiple endpoints. The process below shows how Wazuh groups *Threat Hunting* for an Ubuntu 22.04 agent.
 
-#. Click on **Threat Hunting** from the Wazuh dashboard:
+#. Click on **Threat Hunting** in the Wazuh dashboard:
 
 .. thumbnail:: /images/compliance/tsc/common-criteria/wazuh-dashboard.png
    :title: Wazuh dashboard

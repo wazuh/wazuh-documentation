@@ -14,7 +14,7 @@ The Wazuh dashboard white-labeling feature allows you to replace the following e
 Custom logos in the Wazuh dashboard 
 -----------------------------------
 
-To use your own logos in the Wazuh dashboard, click on the `App main logo` and go to **App Settings**. Under the **Custom branding** section, set up the following properties:
+To use your own logos in the Wazuh dashboard, click on **Indexer/dashboard management** > **App Settings**. Under the **Custom branding** section, set up the following properties:
 
 -  ``customization.logo.app``. This property sets the `App main logo` image. It has a size limit of 1 MB. It replaces the logo image in the Wazuh main menu located top left. Recommended size: 300 pixels width, 70 pixels height. See #1 in the image below.
 
@@ -29,7 +29,7 @@ Once you are done setting your custom logo images, you can find them saved in ``
 Custom branding of the PDF reports
 ----------------------------------
 
-To customize the PDF reports, click on the `App main logo` and go to **App Settings**. Under the **Custom branding** section, set up the following properties:
+To customize the PDF reports, click **Indexer/dashboard management** > **App Settings**. Under the **Custom branding** section, set up the following properties:
 
 -  ``customization.reports.logo``. This property sets the `PDF reports logo` image. It has a size limit of 1 MB. It's printed in the top left corner of the PDF reports. Recommended size: 190 pixels width, 40 pixels height. See #1 in the image below.
 
