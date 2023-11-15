@@ -150,7 +150,7 @@ In the case of having a Wazuh indexer cluster with multiple nodes, the cluster w
 
    .. note::
 
-      If you have a rollover policy in use, execute the ``indexer-init.sh`` script with the ``-P`` flag to assign the policy a custom priority. The policy with the highest priority value takes precedence.
+      If you have a rollover policy in use, execute the ``indexer-init.sh`` script with the ``-P`` flag to assign the policy a custom priority. The policy with the highest priority value takes precedence and will be applied to new indices, but not to existing ones. Use the ``POST <alias>/_rollover`` endpoint to rotate the current write index managed by the previous policy. For example: ``wazuh-alerts/_rollover``
       
    .. code-block:: console
 
