@@ -104,33 +104,6 @@ With the multi-node manifest below, you can deploy a distributed stack with the 
 -  Manager worker node
 -  Dashboard node
 
-Within the manifest, include the IP addresses of the servers where you are installing each application.
-
-This is the correspondence of the IPs with the puppet nodes described in the manifest:
-
-.. code-block:: none
-
-    puppet-wazuh-indexer-node1 = node1host (Wazuh indexer node1)
-    puppet-wazuh-indexer-node2 = node2host (Wazuh indexer node2)
-    puppet-wazuh-indexer-node3 = node3host (Wazuh indexer node3)
-    puppet-wazuh-manager-master = masterhost (Wazuh manager master)
-    puppet-wazuh-manager-worker = workerhost (Wazuh manager worker)
-    puppet-wazuh-dashboard = dashboardhost (Wazuh dashboard node)
-
-The ``wazuh::certificates`` class must be executed inside the puppet server where the Wazuh module is installed (``puppet-server``) because we use the archives module to pass files to all the servers where we deploy the Wazuh stack.
-
-If you need more ``Wazuh Indexer`` nodes, add new variables, for example ``indexer_node4_name`` and ``node4host``. Add them to the following arrays:
-
--  ``indexer_discovery_hosts``
--  ``indexer_cluster_initial_master_nodes``
--  ``indexer_cluster_CN``
--  ``indexer_certs``
-
-In addition, you need to add a new node instance similar to ``puppet-wazuh-indexer-node2`` or ``puppet-wazuh-indexer-node3``. These instances don't run ``securityadmin``.
-
-In case you need to add a ``Wazuh manager worker`` server, add a new variable such as ``worker2host``. Add this variable to the ``manager_worker_certs`` array as ``['worker',"$worker2host"]`` and then replicate the node instance ``puppet-wazuh-manager-worker`` with the new server.
-
-
 .. code-block:: puppet
 
       $node1host   = 'x.x.x.x'
@@ -259,6 +232,33 @@ In case you need to add a ``Wazuh manager worker`` server, add a new variable su
         stage => dashboard
       }
       }
+
+Within the manifest, include the IP addresses of the servers where you are installing each application.
+
+This is the correspondence of the IPs with the puppet nodes described in the manifest:
+
+.. code-block:: none
+
+    puppet-wazuh-indexer-node1 = node1host (Wazuh indexer node1)
+    puppet-wazuh-indexer-node2 = node2host (Wazuh indexer node2)
+    puppet-wazuh-indexer-node3 = node3host (Wazuh indexer node3)
+    puppet-wazuh-manager-master = masterhost (Wazuh manager master)
+    puppet-wazuh-manager-worker = workerhost (Wazuh manager worker)
+    puppet-wazuh-dashboard = dashboardhost (Wazuh dashboard node)
+
+The ``wazuh::certificates`` class must be executed inside the puppet server where the Wazuh module is installed (``puppet-server``) because we use the archives module to pass files to all the servers where we deploy the Wazuh stack.
+
+If you need more ``Wazuh Indexer`` nodes, add new variables, for example ``indexer_node4_name`` and ``node4host``. Add them to the following arrays:
+
+-  ``indexer_discovery_hosts``
+-  ``indexer_cluster_initial_master_nodes``
+-  ``indexer_cluster_CN``
+-  ``indexer_certs``
+
+In addition, you need to add a new node instance similar to ``puppet-wazuh-indexer-node2`` or ``puppet-wazuh-indexer-node3``. These instances don't run ``securityadmin``.
+
+In case you need to add a ``Wazuh manager worker`` server, add a new variable such as ``worker2host``. Add this variable to the ``manager_worker_certs`` array as ``['worker',"$worker2host"]`` and then replicate the node instance ``puppet-wazuh-manager-worker`` with the new server.
+
 Place the file at ``/etc/puppetlabs/code/environments/production/manifests/`` in your Puppet master and it will be executed in the specified node after the ``runinterval`` time set in ``puppet.conf``. However, if you want to run the manifest immediately on a specific node, run the following command on the node:
 
   .. code-block:: console
