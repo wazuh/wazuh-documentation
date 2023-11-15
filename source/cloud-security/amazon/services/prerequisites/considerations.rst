@@ -263,20 +263,3 @@ The following is an example of a valid configuration.
     </service>
 
   </wodle>
-
-Enabling dashboard visualization  
---------------------------------
-  
-You can activate the corresponding Security Information Management module on the Wazuh Dashboard. This module provides additional details and insights about events, as shown in the screenshots below.
-
-    .. thumbnail:: /images/aws/aws-dashboard.png
-       :title: Amazon Web Services dashboard
-       :alt: Amazon Web Services dashboard
-       :align: center
-       :width: 80%
-
-    .. thumbnail:: /images/aws/aws-events.png
-       :title: Amazon Web Services events
-       :alt: Amazon Web Services events
-       :align: center
-       :width: 80%
