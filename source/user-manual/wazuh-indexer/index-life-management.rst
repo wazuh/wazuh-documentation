@@ -117,7 +117,7 @@ Creating a retention policy
 Using the Visual editor
 ~~~~~~~~~~~~~~~~~~~~~~~
 
-#. Click on the upper left menu **☰**, go to **OpenSearch Plugins**, and select **Index Management**. Choose **State management policies** and click **Create policy**. Select **Visual editor** and click **Continue**.
+#. Click on the upper left menu **☰**, go to **Indexer/dashboard management**, and select **Index Management**. Choose **State management policies** and click **Create policy**. Select **Visual editor** and click **Continue**.
 
    .. thumbnail:: /images/manual/wazuh-indexer/state-management-policies.png
       :title: State management policies
@@ -151,7 +151,7 @@ Using the Visual editor
 Using the JSON editor
 ~~~~~~~~~~~~~~~~~~~~~
 
-#. Click on the upper left menu **☰**, go to **OpenSearch Plugins**, and choose **Index Management**. Choose **State management policies** and click **Create policy**. Select **JSON editor** and click **Continue**.
+#. Click on the upper left menu **☰**, go to **Indexer/dashboard management**, and choose **Index Management**. Choose **State management policies** and click **Create policy**. Select **JSON editor** and click **Continue**.
 
    .. thumbnail:: /images/manual/wazuh-indexer/configuration-method-json.png
       :title: JSON editor configuration method

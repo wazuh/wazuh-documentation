@@ -56,7 +56,7 @@ Test the configuration
 Visualize the alert
 -------------------
 
-Navigate to **Modules > Integrity monitoring** on the Wazuh dashboard to view the alert generated when the FIM module detects changes to the ``user_details.txt`` file.
+Navigate to **File Integrity Monitoring** on the Wazuh dashboard to view the alert generated when the FIM module detects changes to the ``user_details.txt`` file.
 
 .. thumbnail:: /images/manual/fim/changes-user-details-file.png
   :title: Changes to the user_details.txt file

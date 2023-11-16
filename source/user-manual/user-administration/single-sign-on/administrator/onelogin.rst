@@ -57,7 +57,7 @@ OneLogin Configuration
       - **Recipient**: ``https://<WAZUH_DASHBOARD_URL>/_opendistro/_security/saml/acs``
       - **ACS (Consumer) URL Validator**: ``https://<WAZUH_DASHBOARD_URL>/_opendistro/_security/saml/acs``
       - **ACS (Consumer) URL**: ``https://<WAZUH_DASHBOARD_URL>/_opendistro/_security/saml/acs``
-      - **Login URL**: ``https://<WAZUH_DASHBOARD_URL>/app/wazuh``
+      - **Login URL**: ``https://<WAZUH_DASHBOARD_URL>/app/wz-home``
       - **SAML initiator**: ``Service Provider``
       - **SAML nameID format**: ``Unspecified``
       - **SAML issuer type**: ``Specific``
@@ -292,7 +292,7 @@ Wazuh dashboard configuration
 
    If ``run_as`` is set to ``true``, you need to add a role mapping on the Wazuh dashboard. To map the backend role to Wazuh, follow these steps:
 
-   #. Click **Wazuh** to open the Wazuh dashboard menu, select **Security**, and then **Roles mapping** to open the page.
+   #. Click **☰** to open the menu on the Wazuh dashboard, go to **Server management** > **Security**, and then **Roles mapping** to open the page.
 
       .. thumbnail:: /images/single-sign-on/Wazuh-role-mapping.gif
          :title: Wazuh role mapping

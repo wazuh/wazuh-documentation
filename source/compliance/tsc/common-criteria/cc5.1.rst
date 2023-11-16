@@ -21,7 +21,7 @@ Wazuh helps meet this aspect of the *COSO Principle 10 CC5.1 control activities*
 
 In this case, we use the SCA module to evaluate a monitored Windows 10 endpoint against the CIS Benchmark for Windows 10. By monitoring and detecting security configuration issues, you can quickly identify and remediate potential security risks, ensuring the security and compliance of your systems. You can track these events and actions on the Wazuh dashboard:
 
-#. Navigate to the **Security Configuration Assessment** module from the Wazuh dashboard. Select the monitored Windows 10 endpoint.
+#. Navigate to the **Configuration Assessment** module from the Wazuh dashboard. Select the monitored Windows 10 endpoint.
 
 You can see the result of the assessment of the monitored endpoint.
 

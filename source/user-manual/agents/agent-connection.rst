@@ -14,19 +14,19 @@ To learn more about installing and enrolling the Wazuh agent, see the :doc:`Wazu
 Using the Wazuh dashboard
 -------------------------
 
-You can check the connection status of any agent by selecting the **Agents** menu option of the Wazuh dashboard.
+You can check the connection status of any agent by selecting the **Endpoints Summary** menu option of the Wazuh dashboard.
 
-.. thumbnail:: /images/manual/managing-agents/agents-menu.png
-   :title: Wazuh dashboard Agents menu option
-   :alt: Wazuh dashboard Agents menu option
+.. thumbnail:: /images/manual/managing-agents/endpoints-summary-menu.png
+   :title: Wazuh dashboard Endpoints Summary menu option
+   :alt: Wazuh dashboard Endpoints Summary menu option
    :align: center
    :width: 80%
 
-This option shows the **Agents** dashboard with a list of all registered agents. The list includes the connection status of each agent. The dashboard also shows a summary with the number of agents found for each possible connection :ref:`status <agent-status-cycle>`: `Active`, `Disconnected`, `Pending`, `Never connected`.
+This option shows the **Endpoints Summary** dashboard with a list of all registered agents. The list includes the connection status of each agent. The dashboard also shows a summary with the number of agents found for each possible connection :ref:`status <agent-status-cycle>`: `Active`, `Disconnected`, `Pending`, `Never connected`.
 
-.. thumbnail:: /images/manual/managing-agents/agents-dashboard.png
-   :title: Wazuh Agents dashboard
-   :alt: Wazuh Agents dashboard
+.. thumbnail:: /images/manual/managing-agents/endpoints-summary-dashboard.png
+   :title: Wazuh Endpoints Summary dashboard
+   :alt: Wazuh Endpoints Summary dashboard
    :align: center
    :width: 80%
 

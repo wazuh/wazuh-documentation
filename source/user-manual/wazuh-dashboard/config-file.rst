@@ -12,7 +12,7 @@ The Wazuh dashboard includes a configuration file located at ``/usr/share/wazuh-
 
 If you are using the Wazuh Kibana plugin, you can find this configuration file at ``/usr/share/kibana/data/wazuh/config/wazuh.yml``. 
 
-The configuration file shows the default values for all of the possible options. You can edit the file, uncomment any of them and apply the desired values. You can also edit these settings from the Wazuh dashboard in *Settings > Configuration*.
+The configuration file shows the default values for all of the possible options. You can edit the file, uncomment any of them and apply the desired values. You can also edit these settings from the Wazuh dashboard in **Indexer/dashboard management** > **App Settings**.
 
 The configuration file reference is organized by sections:
 
@@ -283,178 +283,6 @@ Enable or disable the maxBuckets health check when opening the app.
 | **Allowed values** | true,false |
 +--------------------+------------+
 
-Extensions
-----------
-
-.. note::
-
-    These options are only applied for newly inserted APIs on the *Settings* tab, not for the existing ones.
-
-extensions.audit
-^^^^^^^^^^^^^^^^
-
-Enable or disable the Audit tab on *Overview* and *Agents*.
-
-+--------------------+------------+
-| **Default value**  | true       |
-+--------------------+------------+
-| **Allowed values** | true,false |
-+--------------------+------------+
-
-extensions.aws
-^^^^^^^^^^^^^^
-
-Enable or disable the Amazon (AWS) tab on *Overview* and *Agents*.
-
-+--------------------+------------+
-| **Default value**  | false      |
-+--------------------+------------+
-| **Allowed values** | true,false |
-+--------------------+------------+
-
-extensions.ciscat
-^^^^^^^^^^^^^^^^^
-
-Enable or disable the CIS-CAT tab on *Overview* and *Agents*.
-
-+--------------------+------------+
-| **Default value**  | false      |
-+--------------------+------------+
-| **Allowed values** | true,false |
-+--------------------+------------+
-
-extensions.docker
-^^^^^^^^^^^^^^^^^
-
-Enable or disable the Docker listener tab on *Overview* and *Agents*.
-
-+--------------------+------------+
-| **Default value**  | false      |
-+--------------------+------------+
-| **Allowed values** | true,false |
-+--------------------+------------+
-
-extensions.gcp
-^^^^^^^^^^^^^^
-
-Enable or disable the GCP tab on *Overview* and *Agents*.
-
-+--------------------+------------+
-| **Default value**  | false      |
-+--------------------+------------+
-| **Allowed values** | true,false |
-+--------------------+------------+
-
-extensions.gdpr
-^^^^^^^^^^^^^^^
-
-Enable or disable the GDPR tab on *Overview* and *Agents*.
-
-+--------------------+------------+
-| **Default value**  | true       |
-+--------------------+------------+
-| **Allowed values** | true,false |
-+--------------------+------------+
-
-extensions.github
-^^^^^^^^^^^^^^^^^
-
-Enable or disable the GitHub tab on *Overview* and *Agents*.
-
-+--------------------+------------+
-| **Default value**  | false      |
-+--------------------+------------+
-| **Allowed values** | true,false |
-+--------------------+------------+
-
-extensions.hipaa
-^^^^^^^^^^^^^^^^
-
-Enable or disable the HIPAA tab on *Overview* and *Agents*.
-
-+--------------------+------------+
-| **Default value**  | true       |
-+--------------------+------------+
-| **Allowed values** | true,false |
-+--------------------+------------+
-
-extensions.nist
-^^^^^^^^^^^^^^^
-
-Enable or disable the NIST tab on *Overview* and *Agents*.
-
-+--------------------+------------+
-| **Default value**  | true       |
-+--------------------+------------+
-| **Allowed values** | true,false |
-+--------------------+------------+
-
-extensions.office
-^^^^^^^^^^^^^^^^^
-
-Enable or disable the Office 365 tab on *Overview* and *Agents*.
-
-+--------------------+------------+
-| **Default value**  | false      |
-+--------------------+------------+
-| **Allowed values** | true,false |
-+--------------------+------------+
-
-extensions.oscap
-^^^^^^^^^^^^^^^^
-
-Enable or disable the OSCAP tab on *Overview* and *Agents*.
-
-+--------------------+------------+
-| **Default value**  | false      |
-+--------------------+------------+
-| **Allowed values** | true,false |
-+--------------------+------------+
-
-extensions.osquery
-^^^^^^^^^^^^^^^^^^
-
-Enable or disable the Osquery tab on *Overview* and *Agents*.
-
-+--------------------+------------+
-| **Default value**  | false      |
-+--------------------+------------+
-| **Allowed values** | true,false |
-+--------------------+------------+
-
-extensions.pci
-^^^^^^^^^^^^^^
-
-Enable or disable the PCI DSS tab on *Overview* and *Agents*.
-
-+--------------------+------------+
-| **Default value**  | true       |
-+--------------------+------------+
-| **Allowed values** | true,false |
-+--------------------+------------+
-
-extensions.tsc
-^^^^^^^^^^^^^^
-
-Enable or disable the TSC tab on *Overview* and *Agents*.
-
-+--------------------+------------+
-| **Default value**  | true       |
-+--------------------+------------+
-| **Allowed values** | true,false |
-+--------------------+------------+
-
-extensions.virustotal
-^^^^^^^^^^^^^^^^^^^^^
-
-Enable or disable the VirusTotal tab on *Overview* and *Agents*.
-
-+--------------------+------------+
-| **Default value**  | false      |
-+--------------------+------------+
-| **Allowed values** | true,false |
-+--------------------+------------+
-
 Advanced index options
 ----------------------
 
@@ -486,19 +314,6 @@ Define the number of replicas to use for the ``wazuh-monitoring-*`` indices.
 +--------------------+----------------------------+
 | **Allowed values** | Any number starting from 0 |
 +--------------------+----------------------------+
-
-Unauthorized roles
-------------------
-
-disabled_roles
-^^^^^^^^^^^^^^
-
-Disable Wazuh for the Elasticsearch / OpenSearch roles defined here.
-
-.. code-block:: yaml
-
-    disabled_roles: 
-        - wazuh_disabled
 
 Sample alerts
 -------------
@@ -669,17 +484,6 @@ Define the image's path, name and extension for the main menu logo.
 | **Allowed values** | Any string                 |
 +--------------------+----------------------------+
 
-customization.logo.sidebar
-^^^^^^^^^^^^^^^^^^^^^^^^^^
-
-Define the image's path, name and extension for the logo to display in the platform's navigation drawer, this is, the main sidebar collapsible menu.
-
-+--------------------+----------------------------+
-| **Default value**  | ''                         |
-+--------------------+----------------------------+
-| **Allowed values** | Any string                 |
-+--------------------+----------------------------+
-
 customization.logo.healthcheck
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
@@ -769,41 +573,19 @@ This is an example of the wazuh.yml configuration:
     checks.timeFilter: true
     checks.maxBuckets: true
 
-    # Extensions
-    extensions.audit     : true
-    extensions.aws       : false
-    extensions.ciscat    : false
-    extensions.docker    : false
-    extensions.gcp       : false
-    extensions.gdpr      : true
-    extensions.github    : false
-    extensions.hipaa     : true
-    extensions.nist      : true
-    extensions.office    : false
-    extensions.oscap     : false
-    extensions.osquery   : false
-    extensions.pci       : true
-    extensions.tsc       : true
-    extensions.virustotal: false
-
-    # Advanced index options
+    #Advanced index options
     wazuh.monitoring.shards: 1
     wazuh.monitoring.replicas: 0    
 
     # Custom branding
     customization.enabled: true
     customization.logo.app: 'custom/images/customization.logo.app.jpg'
-    customization.logo.sidebar: 'custom/images/customization.logo.sidebar.png'
     customization.logo.healthcheck: 'custom/images/customization.logo.healthcheck.svg'
     customization.logo.reports: 'custom/images/customization.logo.reports.jpg'
     customization.reports.footer: '123 Custom footer Ave.\nSan Jose, CA 95148'
     customization.reports.header: 'Custom Company\ninfo@custom.com\n@social_reference'
 
-    # Unauthorized roles
-    disabled_roles: 
-        - wazuh_disabled
-
-    # Sample alerts
+    #Sample alerts
     alerts.sample.prefix: wazuh-alerts-4.x-
 
     # Cron

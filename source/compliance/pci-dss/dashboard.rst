@@ -8,7 +8,7 @@
 Visualization and dashboard
 ===========================
 
-Wazuh provides a web dashboard for data visualization and analysis. The dashboard comes with out-of-the-box modules for security events, PCI DSS compliance, detected vulnerable applications, file integrity monitoring data, configuration assessment results, cloud infrastructure monitoring events, and others. You can perform forensic and historical analysis of your alerts with the Wazuh dashboard.
+Wazuh provides a web dashboard for data visualization and analysis. The dashboard comes with out-of-the-box modules for threat hunting, PCI DSS compliance, detected vulnerable applications, file integrity monitoring data, configuration assessment results, cloud infrastructure monitoring events, and others. You can perform forensic and historical analysis of your alerts with the Wazuh dashboard.
 
 Wazuh also provides a PCI DSS compliance dashboard under the regulatory compliance module.
 

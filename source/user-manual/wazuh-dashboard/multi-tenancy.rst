@@ -41,7 +41,7 @@ To enable multi-tenancy, follow the instructions below.
     .. code-block:: yaml
       :emphasize-lines: 1
 
-        uiSettings.overrides.defaultRoute: /app/wazuh?security_tenant=global
+        uiSettings.overrides.defaultRoute: /app/wz-home?security_tenant=global
 
 #. Restart the Wazuh dashboard so changes can take effect. 
 

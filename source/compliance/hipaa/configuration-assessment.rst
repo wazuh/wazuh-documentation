@@ -23,10 +23,10 @@ The SCA module can help to implement the following HIPAA sections:
 Use cases: SCA scan and SSH session timeout
 -------------------------------------------
 
-- In this use case, the SCA module performs periodic scans on an Ubuntu 22.04 endpoint to ensure that it complies with security policies and hardening configurations. Additionally, the SCA module on the Wazuh dashboard displays the status of the SCA checks (passed, failed, or not applicable) and the time of the last scan for a specific endpoint, as shown below:
+- In this use case, the SCA module performs periodic scans on an Ubuntu 22.04 endpoint to ensure that it complies with security policies and hardening configurations. Additionally, the **Configuration Assessment** module on the Wazuh dashboard displays the status of the SCA checks (passed, failed, or not applicable) and the time of the last scan for a specific endpoint, as shown below:
 
   .. thumbnail:: /images/compliance/hipaa/02-configuration-assessment.png    
-    :title: The SCA module on the Wazuh dashboard displays the status of the SCA checks 
+    :title: The Configuration Assessment module on the Wazuh dashboard displays the status of the SCA checks 
     :align: center
     :width: 80%
 
