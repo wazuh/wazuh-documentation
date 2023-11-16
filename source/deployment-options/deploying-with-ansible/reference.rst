@@ -980,6 +980,7 @@ Wazuh Agent
         user_agent_server_name: null
         user_agent_config_profile: null
         user_ca_store: /var/ossec/wpk_root.pem"
+
 |
 | **Variable**: ``wazuh_agent_nolog_sensible``:
 | **Description**: This variable indicates if the `nolog option <https://docs.ansible.com/ansible/latest/reference_appendices/logging.html>`_ should be added to tasks which output sensitive information (like tokens).
@@ -1005,6 +1006,7 @@ Wazuh Agent
 .. code-block:: yaml
 
     wazuh_profile: "centos7, centos7"
+
 |
 | **Variable**: ``wazuh_profile_ubuntu``
 | **Description**: Configure what profiles this agent will have in case of Ubuntu systems.
@@ -1032,6 +1034,7 @@ Wazuh Agent
       ssl_agent_cert: null
       ssl_agent_key: null
       ssl_auto_negotiate: 'no'
+
 |
 | **Variable**: ``wazuh_auto_restart``
 | **Description**: Set the ``<auto_restart>`` option in the agent.

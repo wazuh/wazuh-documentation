@@ -38,6 +38,7 @@ The following minimum requirements should be met to use Ansible on Windows endpo
 Before deploying on your Windows endpoints, you must set Ansible to use port ``5986`` . Edit the ``/etc/ansible/hosts`` file and add a configuration block for the Windows agents. For example:
 
 .. code-block:: ini
+
    [windows_agents]
    agent1 ansible_host=192.168.1.101 ansible_port=5986
    agent2 ansible_host=192.168.1.102 ansible_port=5986

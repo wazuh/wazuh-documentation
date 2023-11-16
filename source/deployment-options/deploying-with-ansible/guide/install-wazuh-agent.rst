@@ -135,22 +135,22 @@ We can create a similar YAML file or modify the one we already have to adapt it 
 
       .. code-block:: yaml
 
-	    [wazuh-agents]
-			agent_1 ansible_host=192.168.33.31 ansible_ssh_user=<username>
+         [wazuh-agents]
+         agent_1 ansible_host=192.168.33.31 ansible_ssh_user=<username>
 
    .. group-tab:: Windows
 
-	  .. code-block:: yaml
+      .. code-block:: yaml
 
-		[wazuh-agents]
-		 	agent_1 ansible_host=192.168.33.31
+         [wazuh-agents]
+         agent_1 ansible_host=192.168.33.31
 
-		[wazuh-agents:vars]
-			ansible_user=<username>
-			ansible_password=<password>
-			ansible_connection=winrm
-			ansible_winrm_server_cert_validation=ignore
-			ansible_ssh_port=5986
+         [wazuh-agents:vars]
+         ansible_user=<username>
+         ansible_password=<password>
+         ansible_connection=winrm
+         ansible_winrm_server_cert_validation=ignore
+         ansible_ssh_port=5986
 
 We will also add the IP address of the Wazuh server to the ``wazuh_managers:`` section.
 
