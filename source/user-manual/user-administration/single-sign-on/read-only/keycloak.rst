@@ -92,7 +92,7 @@ KeyCloak configuration
    #. Navigate to **Clients > Advanced > Fine Grain SAML Endpoint Configuration** and complete the section with these parameters:
 
       - **Assertion Consumer Service POST Binding URL**: ``https://<WAZUH_DASHBOARD_URL>/_opendistro/_security/saml/acs/idpinitiated``
-      - **Logout Service Redirect Binding URL**: ``https://<WAZUH_DASHBOARD_URL>/app/wz-home``
+      - **Logout Service Redirect Binding URL**: ``https://<WAZUH_DASHBOARD_URL>``
 
       .. thumbnail:: /images/single-sign-on/keycloak/08-fine-grain-saml-endpoint-configuration.png
          :title: Fine Grain SAML Endpoint Configuration
