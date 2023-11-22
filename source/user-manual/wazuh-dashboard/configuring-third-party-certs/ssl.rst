@@ -42,7 +42,7 @@ Install certbot
          .. code-block:: console
 
             # apt-get update
-            # apt-get install snap
+            # apt-get install snapd
 
 #. Confirm installed snap is the latest:
 
