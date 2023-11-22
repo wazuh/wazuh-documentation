@@ -16,13 +16,33 @@ Custom logos in the Wazuh dashboard
 
 To use your own logos in the Wazuh dashboard, click on **Indexer/dashboard management** > **App Settings**. Under the **Custom branding** section, set up the following properties:
 
--  ``customization.logo.app``. This property sets the `App main logo` image. It has a size limit of 1 MB. It replaces the logo image in the Wazuh main menu located top left. Recommended size: 300 pixels width, 70 pixels height. See #1 in the image below.
+-  ``customization.logo.app``. This property sets the `App loading logo` image. It has a size limit of 1 MB. It replaces the logo image in the Wazuh loading animation when a new section initializes. Recommended size: 300 pixels width, 70 pixels height.
 
--  ``customization.logo.healthcheck``. This property sets the `Health check logo` image. It has a size limit of 1 MB. It replaces the logo on top of the check list displayed during the health check routine. Recommended size: 300 pixels width, 70 pixels height. See #2 in the image below.
-
-.. thumbnail:: /images/kibana-app/features/white-labeling/custom-branding-settings.jpg
+.. thumbnail:: /images/kibana-app/features/white-labeling/custom-branding-settings-loading.png
    :align: center
-   :width: 80%
+   :width: 100%
+
+-  ``customization.logo.healthcheck``. This property sets the `Health check logo` image. It has a size limit of 1 MB. It replaces the logo on top of the check list displayed during the health check routine. Recommended size: 300 pixels width, 70 pixels height.
+
+.. thumbnail:: /images/kibana-app/features/white-labeling/custom-branding-settings-health-check.png
+   :align: center
+   :width: 100%
+
+
+To customize the `Wazuh dashboard home logo` in the top header, you have to edit the file ``/usr/share/wazuh-dashboard/config/opensearch_dashboards.yml`` and add the URL of the default and dark theme logos.
+
+
+.. code-block:: yaml
+   
+   opensearchDashboards.branding:
+      mark:
+         defaultUrl: "https://domain.org/default-logo.png"
+         darkModeUrl: "https://domain.org/dark-mode-logo.png"
+         
+
+.. thumbnail:: /images/kibana-app/features/white-labeling/custom-branding-settings-header.png
+   :align: center
+   :width: 100%
 
 Once you are done setting your custom logo images, you can find them saved in ``/usr/share/wazuh-dashboard/plugins/wazuh/public/assets/custom/images/``.
 
@@ -59,7 +79,7 @@ The following settings correspond to the custom branding feature. Edit them usin
 
 **customization.logo.app**
 
-    This is the image to be used as the logo in the main menu of the app.
+    This logo is used as loading indicator while the user is logging into Wazuh API.
     It is saved as ``/usr/share/wazuh-dashboard/plugins/wazuh/public/assets/custom/images/customization.logo.app.<format>``.
 
     +--------------------+----------------------------+
