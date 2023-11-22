@@ -3,7 +3,8 @@
 .. include:: /_templates/cloud/amazon/read_only_policy_description.rst
 
 .. code-block:: json
-
+   :emphasize-lines: 12,13
+   
     {
 	"Version": "2012-10-17",
 	"Statement": [
@@ -25,6 +26,7 @@
 .. include:: /_templates/cloud/amazon/delete_policy_description.rst
 
 .. code-block:: json
+   :emphasize-lines: 13,14
 
    {
 	"Version": "2012-10-17",
@@ -45,6 +47,6 @@
 	]
     }
 
-.. note:: ``<bucket-name>`` is a placeholder, replace it with the name of the bucket where you want to fetch the logs from.
+.. note:: ``<bucket-name>`` is a placeholder. Replace it with the actual name of the bucket from which you want to retrieve logs.
 
 .. End of include file
