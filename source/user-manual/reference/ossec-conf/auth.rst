@@ -269,7 +269,7 @@ key_request
 The key request settings are configured inside this tag. Read more about this feature at :doc:`agent key request <../../agents/key-request>`.
 
 .. code-block:: xml
-    
+
     <key_request>
       <enabled>yes</enabled>
       <exec_path>/usr/bin/python /home/script.py</exec_path>
@@ -349,11 +349,11 @@ agents
 **allow_higher_versions**
 
 .. versionadded:: 4.6.0
-  
+
 Accept agents with a later version than the current manager.
 
 +--------------------+------------------+
-| **Default value**  | yes              |
+| **Default value**  | no               |
 +--------------------+------------------+
 | **Allowed values** | yes, no          |
 +--------------------+------------------+
