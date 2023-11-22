@@ -565,7 +565,6 @@ Creating a Heat Map
 
 #. Click the **Update** button.
 
-
    .. thumbnail:: /images/wazuh-dashboard/custom-dashboards/create-heat-map-visualization-update-button.png
       :align: center
       :width: 80%
@@ -574,3 +573,295 @@ Creating a Heat Map
 
 Data
 ^^^^
+
+Data metric visualization is a single number that displays any count or calculation.
+
+The following is a list of data visualizations:
+
+-  **Data table**: This is where the data is shown in tabular form.
+-  **Metric**: This is where a single number is displayed, which we can use to show any important metric data.
+-  **Goal and gauge**: This is used when we want to display any progress.
+
+Data table
+~~~~~~~~~~
+
+This is a tabular representation of data that is organized into rows and columns. It provides a structured format to display and analyze data. Each row represents a specific entry, and each column represents a different variable. Data tables are widely used for data analysis, reporting, and providing a clear overview of multiple variables.
+
+Creating a Data table
+'''''''''''''''''''''
+
+#. From the **Visualize** tab, click **Create Visualization**, select the ``Data Table`` visualization format and use ``wazuh-alerts-*`` as the index pattern name. 
+#. On the **Metric** in **Metrics** data, set the following values:
+
+   -  ``Aggregation`` = ``Max``
+   -  ``Field`` = ``data.disk_used_bytes``
+
+#. Add an additional metric
+
+   -  ``Aggregation`` = ``Max``
+   -  ``Field`` = ``data.disk_free_bytes``
+
+#. Click the **Update** button.
+
+   .. thumbnail:: /images/wazuh-dashboard/custom-dashboards/create-data-table-visualization-update-button.png
+      :align: center
+      :width: 80%
+      :title: Create data table visualization – Update button
+      :alt: Create data table visualization – Update button
+
+#. Click the upper-right **Save** button and assign a title to save the visualization.
+
+Metric
+~~~~~~
+
+This is a quantifiable measurement that is used to evaluate performance, progress, or specific characteristics. Metric represents a calculation as a single numerical value. They are applicable in various domains, including business analytics, key performance indicators (KPIs), and performance monitoring.
+
+Creating a Metric
+'''''''''''''''''
+
+#. From the **Visualize** tab, click **Create Visualization**, select the ``Metric`` visualization format and use ``wazuh-alerts-*`` as the index pattern name.
+#. On the **Metric** in **Metrics** data, set the following values:
+
+   -  ``Aggregation`` = ``Max``
+   -  ``Field`` = ``data.memory_usage_%``
+
+#. Click the **Update** button.
+
+   .. thumbnail:: /images/wazuh-dashboard/custom-dashboards/create-metric-visualization-update-button.png
+      :align: center
+      :width: 80%
+      :title: Create metric visualization – Update button
+      :alt: Create metric visualization – Update button
+
+#. Click the upper-right **Save** button and assign a title to save the visualization.
+
+Goal
+~~~~
+
+This refers to the desired target that an individual or organization aims to achieve. It represents a specific purpose and serves as a benchmark for measuring progress and achieving a final goal.
+
+Creating a Goal
+'''''''''''''''
+
+#. From the **Visualize** tab, click **Create Visualization**, select the ``Goal`` visualization format and use ``wazuh-alerts-*`` as the index pattern name.
+#. On the **Metric** in **Data**, set the following values:
+
+   -  ``Aggregation`` = ``Max``
+   -  ``Field`` = ``data.sca.passed``
+
+#. Add a ``Split group`` in **Buckets** and set the following values:
+
+   -  ``Aggregation`` = ``Terms``
+   -  ``Field`` = ``data.sca.total_checks``
+
+#. In the ``Options`` section, customize the ``Ranges`` to match the range of existing sca rules.
+
+   .. thumbnail:: /images/wazuh-dashboard/custom-dashboards/create-goal-visualization.png
+      :align: center
+      :width: 80%
+      :title: Create goal visualization
+      :alt: Create goal visualization
+
+#. Click the **Update** button.
+
+   .. thumbnail:: /images/wazuh-dashboard/custom-dashboards/create-goal-visualization-update-button.png
+      :align: center
+      :width: 80%
+      :title: Create goal visualization – Update button
+      :alt: Create goal visualization – Update button
+
+#. Click the upper-right **Save** button and assign a title to save the visualization.
+
+Gauge
+~~~~~
+
+This is a visualization that is represented as a meter. It is commonly used to display a single value within a specific range. The gauge consists of a pointer that shows the current value. This is displayed as a position along a circular or linear scale.
+
+Gauges are used to indicate progress, performance metrics, or levels of achievement. It shows how a metric’s value relates to reference threshold values.
+
+Creating a Gauge
+''''''''''''''''
+
+#. From the **Visualize** tab, click **Create Visualization**, select the ``Gauge`` visualization format and use ``wazuh-alerts-*`` as the index pattern name.
+#. On the **Metric** in **Metrics** data, set the following values:
+
+   -  ``Aggregation`` = ``Max``
+   -  ``Field`` = ``data.disk_usage_%``
+
+#. Click the Update button.
+
+   .. thumbnail:: /images/wazuh-dashboard/custom-dashboards/create-gauge-visualization-update-button.png
+      :align: center
+      :width: 80%
+      :title: Create gauge visualization – Update button
+      :alt: Create gauge visualization – Update button
+
+#. Click the upper-right **Save** button and assign a title to save the visualization.
+
+Maps
+^^^^
+
+**Maps**: These are visual representations of geographical regions. Maps display spatial data, such as locations, boundaries, or distributions, on a graphical interface. They provide a means to explore and analyze geographic information, making them valuable for various applications, including navigation, data visualization, and spatial analysis.
+
+Creating a map
+~~~~~~~~~~~~~~
+
+#. From the **Visualize** tab, click **Create Visualization**, select the ``Maps`` visualization format and use ``wazuh-alerts-*`` as the index pattern name.
+
+   .. thumbnail:: /images/wazuh-dashboard/custom-dashboards/create-map-visualization.png
+      :align: center
+      :width: 80%
+      :title: Create map visualization
+      :alt: Create map visualization
+
+#. Click on **Add layer**.
+
+   .. thumbnail:: /images/wazuh-dashboard/custom-dashboards/create-map-visualization-add-layer.png
+      :align: center
+      :width: 80%
+      :title: Create map visualization – Add layer
+      :alt: Create map visualization – Add layer
+
+#. Select ``Documents`` as the **Data** layer.
+#. Set the following values in the New layer:
+
+   -  ``Data source`` = ``wazuh-alerts-*``
+   -  ``Geospatial field`` = ``geo.coordinates``
+   -  ``Number of documents`` = ``1000``
+
+   .. thumbnail:: /images/wazuh-dashboard/custom-dashboards/create-map-visualization-new-layer.png
+      :align: center
+      :width: 80%
+      :title: Create map visualization – New layer
+      :alt: Create map visualization – New layer
+
+#. Click the **Update** button.
+
+   .. thumbnail:: /images/wazuh-dashboard/custom-dashboards/create-map-visualization-update-button.png
+      :align: center
+      :width: 80%
+      :title: Create map visualization – Update button
+      :alt: Create map visualization – Update button
+
+#. Click the upper-right **Save** button and assign a title to save the visualization.
+
+The following is a list of maps used in visualization:
+
+-  **Coordinate map**: This can be used for linking the aggregation of data fields with geographic locations.
+-  **Region map**: This is a kind of thematic map where we use color intensity to show a metric's value with locations.
+
+Coordinate Map
+~~~~~~~~~~~~~~
+
+This uses geographic coordinates to display data points or regions on a map. Coordinate maps allow you to plot and visualize information in relation to specific locations or geographical areas. By using latitude and longitude coordinates, you can represent data in a spatial context.
+
+Coordinate maps are ideal for plotting latitude and longitude coordinates. This allows the visualization of spatial data, such as locations, regions, or density. They are commonly used in geographical analysis, tracking data by location, or displaying demographic information.
+
+Creating a Coordinate map
+'''''''''''''''''''''''''
+
+#. From the **Visualize** tab, click **Create Visualization**, select the ``Coordinate Map`` visualization format and use ``wazuh-alerts-*`` as the index pattern name.
+
+   .. thumbnail:: /images/wazuh-dashboard/custom-dashboards/create-coordinate-map-visualization.png
+      :align: center
+      :width: 80%
+      :title: Create coordinate map visualization
+      :alt: Create coordinate map visualization
+
+#. On the **Metric** in **Data**, set the following values:
+
+   -  ``Aggregation`` = ``Count``
+
+#. Add a ``Geo coordinate`` in **Buckets** and set the following values:
+
+   -  ``Aggregation`` = ``Geohash``
+   -  ``Field`` = ``OriginLocation``
+
+#. Click the **Update** button.
+
+   .. thumbnail:: /images/wazuh-dashboard/custom-dashboards/create-coordinate-map-visualization-update-button.png
+      :align: center
+      :width: 80%
+      :title: Create coordinate map visualization – Update button
+      :alt: Create coordinate map visualization – Update button
+
+#. Click the upper-right **Save** button and assign a title to save the visualization.
+
+Region Map
+~~~~~~~~~~
+
+This is a map-based visualization that displays data by dividing regions into distinct boundaries. Region maps are suitable for displaying data at a territorial level. They are often used in geopolitical analysis, demographic comparisons, or election results.
+
+Create region map
+'''''''''''''''''
+
+#. From the **Visualize** tab, click **Create Visualization**, select the ``Region Map`` visualization format and use ``wazuh-alerts-*`` as the index pattern name.
+
+   .. thumbnail:: /images/wazuh-dashboard/custom-dashboards/create-region-map-visualization.png
+      :align: center
+      :width: 80%
+      :title: Create region map visualization
+      :alt: Create region map visualization
+
+#. On the **Metric** in **Data**, set the following values:
+
+   -  ``Aggregation`` = ``Count``
+
+#. Add a ``Shape field`` in **Buckets** and set the following values:
+
+   -  ``Aggregation`` = ``Terms``
+   -  ``Field`` = ``DestCountry``
+   -  ``Order by`` = ``Metric: Count``
+   -  ``Order`` = ``Descending``
+
+#. Click the **Update** button.
+
+   .. thumbnail:: /images/wazuh-dashboard/custom-dashboards/create-region-map-visualization-update-button.png
+      :align: center
+      :width: 80%
+      :title: Create region map visualization – Update button
+      :alt: Create region map visualization – Update button
+
+#. Click the upper-right **Save** button and assign a title to save the visualization.
+
+Time series
+^^^^^^^^^^^
+
+The following is a list of time series used in visualization:
+
+-  **VisBuilder**: This is used to display the results from single or multiple indices by combining data from multiple time series datasets.
+-  **Time series visual builder**: This is used to visualize time series data using data aggregations.
+
+VisBuilder
+~~~~~~~~~~
+
+Visualization Builder is an intuitive tool that allows users to create customized visualizations without programming knowledge. It is beneficial for users who want to quickly generate visual representations of their data without extensive technical knowledge.
+
+As at the time of writing this document, this visualization is experimental. The design and implementation are less mature than stable visualizations and might be subject to change.
+
+Creating a Visualization Builder
+''''''''''''''''''''''''''''''''
+
+#. From the **Visualize** tab, click **Create Visualization**, select the ``VisBuilder`` visualization format and use ``wazuh-alerts-*`` as the index pattern name.
+
+   .. thumbnail:: /images/wazuh-dashboard/custom-dashboards/create-visbuilder-visualization.png
+      :align: center
+      :width: 80%
+      :title: Create VisBuilder visualization
+      :alt: Create VisBuilder visualization
+
+   Drag a field to the configuration panel to generate a visualization.
+
+#. On the ``Y-axis`` set aggregation to count.
+#. On an ``X-axis`` ``place rule.mitre.technique``.
+#. On the split series place ``rule.mitre.tactics``.
+
+   .. thumbnail:: /images/wazuh-dashboard/custom-dashboards/create-visbuilder-visualization-data.png
+      :align: center
+      :width: 80%
+      :title: Create VisBuilder visualization – Data
+      :alt: Create VisBuilder visualization – Data
+
+TSVB
+~~~~
+
