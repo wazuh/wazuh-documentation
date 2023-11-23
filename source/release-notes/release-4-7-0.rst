@@ -23,6 +23,7 @@ Manager
 - `#16008 <https://github.com/wazuh/wazuh/pull/16008>`__ An unnecessary sanity check related to Syscollector has been removed from ``wazuh-db``.
 - `#17225 <https://github.com/wazuh/wazuh/pull/17225>`__ Deleted unused framework RBAC migration folder.
 - `#18570 <https://github.com/wazuh/wazuh/pull/18570>`__ Added support for Amazon Linux 2023 in Vulnerability Detector.
+- `#20367 <https://github.com/wazuh/wazuh/pull/20367>`__ The manager now rejects agents with a higher version by default.
 
 Agent
 ^^^^^
@@ -35,6 +36,7 @@ Agent
 - `#15000 <https://github.com/wazuh/wazuh/pull/15000>`__ Added related process information to the open ports inventory in Syscollector.
 - `#17966 <https://github.com/wazuh/wazuh/pull/17966>`__ The shared modules code has been sanitized according to the convention.
 - `#18006 <https://github.com/wazuh/wazuh/pull/18006>`__ The package inventory internal messages have been modified to honor the schema compliance.
+- `#20360 <https://github.com/wazuh/wazuh/pull/20360>`__ Added clarification to the agent connection log. The agent must connect to a manager of the same or higher version.
 
 Wazuh dashboard
 ^^^^^^^^^^^^^^^
