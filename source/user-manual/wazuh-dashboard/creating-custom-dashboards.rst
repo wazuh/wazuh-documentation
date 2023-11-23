@@ -865,3 +865,248 @@ Creating a Visualization Builder
 TSVB
 ~~~~
 
+Time Series Visual Builder (TSVB) is a component of the Wazuh dashboard that allows users to create visualizations and analyze time series data using a visual pipeline interface. It provides features such as aggregations, filters, and metrics specifically tailored for time-based analysis.
+
+Creating a TSVB
+'''''''''''''''
+
+#. From the **Visualize** tab, select the ``TSVB`` visualization format.
+
+   .. thumbnail:: /images/wazuh-dashboard/custom-dashboards/create-tsvb-visualization.png
+      :align: center
+      :width: 80%
+      :title: Create TSVB visualization
+      :alt: Create TSVB visualization
+
+#. On the **Metric** in **Data**, set the following values:
+
+   -  ``Aggregation`` = ``Count``
+   -  ``Group by`` = ``Terms``
+   -  ``By`` = ``rule.mitre.tactic``
+
+   .. thumbnail:: /images/wazuh-dashboard/custom-dashboards/create-tsvb-visualization-data.png
+      :align: center
+      :width: 80%
+      :title: Create TSVB visualization – Data
+      :alt: Create TSVB visualization – Data
+
+Others
+^^^^^^
+
+Here are some other items that are used in visualization:
+
+-  **Tag cloud**: This is where selected field values are picked for creating a cloud of words.
+-  **Markdown**: This will display a form for showing information or instructions.
+
+Tag Cloud
+~~~~~~~~~
+
+This is a visual representation of text data where words are displayed in varying sizes based on their importance. Tag clouds are often used in data visualization, text analysis, or content analysis.
+
+Creating a tag cloud
+''''''''''''''''''''
+
+#. From the **Visualize** tab, click **Create Visualization**, select the ``Tag cloud`` visualization format and use ``wazuh-alerts-*`` as the index pattern name.
+
+   .. thumbnail:: /images/wazuh-dashboard/custom-dashboards/create-tag-cloud-visualization.png
+      :align: center
+      :width: 80%
+      :title: Create tag cloud visualization
+      :alt: Create tag cloud visualization
+
+#. On the **Metric** in **Metrics** data, set the following value:
+
+   -  ``Tag size`` = ``Count``
+
+#. Add a new **Tag** in **Bucket** data and set the following values:
+
+   -  ``Aggregation`` = ``Terms``
+   -  ``Field`` = ``rule.mitre.tactic`` 
+   -  ``Order by`` = ``Metric: Count``
+
+#. Click the **Update** button.
+
+   .. thumbnail:: /images/wazuh-dashboard/custom-dashboards/create-tag-cloud-visualization-update-button.png
+      :align: center
+      :width: 80%
+      :title: Create tag cloud visualization – Update button
+      :alt: Create tag cloud visualization – Update button
+
+#. Click the upper-right **Save** button and assign a title to save the visualization.
+
+Markdown
+~~~~~~~~
+
+Markdown is a lightweight markup language that is used for formatting text. It allows users to add structure, emphasis, and styling to plain text documents, without the need for complex coding. Markdown is often utilized in documentation, websites, and note-taking applications to create easily readable and formatted content.
+
+Creating a markdown
+'''''''''''''''''''
+
+From the **Visualize** tab, click **Create Visualization**, select the ``Markdown`` visualization format and use ``wazuh-alerts-*`` as the index pattern name.
+
+.. thumbnail:: /images/wazuh-dashboard/custom-dashboards/create-markdown-visualization.png
+   :align: center
+   :width: 80%
+   :title: Create markdown visualization
+   :alt: Create markdown visualization
+
+After that, we need to do the following:
+
+#. On the **Data** tab, add the text content in the given text-area.
+#. On the **Options** tab, Increase or decrease the font using the controller.
+#. Click on the **Update** button to show the markdown:
+
+
+   .. thumbnail:: /images/wazuh-dashboard/custom-dashboards/create-markdown-visualization-update-button.png
+      :align: center
+      :width: 80%
+      :title: Create markdown visualization – Update button
+      :alt: Create markdown visualization – Update button
+
+#. Click the upper-right **Save** button and assign a title to save the visualization.
+
+Controls
+~~~~~~~~
+
+These are interactive tools that provide users with the ability to manipulate or adjust parameters or settings within a software application or user interface. These controls enable users to customize their experience or modify certain aspects of the system according to their preferences. Controls are typically used in interactive applications or interfaces where users need to adjust settings, parameters, or filters to customize their experience or analyze specific aspects of the data.
+
+As at the time of writing this document, this visualization is experimental. The design and implementation are less mature than stable visualizations and might be subject to change.
+
+Creating controls
+'''''''''''''''''
+
+#. From the **Visualize** tab, click **Create Visualization**, select the ``Controls`` visualization format.
+
+   .. thumbnail:: /images/wazuh-dashboard/custom-dashboards/create-controls-visualization.png
+      :align: center
+      :width: 80%
+      :title: Create controls visualization
+      :alt: Create controls visualization
+
+#. Add a new ``Options list`` and set the control Label as Mitre tactic.
+#. Choose a source for the chart. Here we selected ``wazuh-alerts-*`` as the index to use.
+#. Select the field ``rule.mitre.tactic``.
+#. Add a new ``Range slider`` and set the control Label as Quantity.
+#. Select ``wazuh-alerts-*`` as the index to use.
+#. Select the field ``rule.level``.
+#. Click the **Update** button.
+
+   .. thumbnail:: /images/wazuh-dashboard/custom-dashboards/create-controls-visualization-update-button.png
+      :align: center
+      :width: 80%
+      :title: Create controls visualization – Update button
+      :alt: Create controls visualization – Update button
+
+#. Click the upper-right **Save** button and assign a title to save the visualization.
+
+Gantt Chart
+~~~~~~~~~~~
+
+This is a visualization that is used to illustrate project schedules or timelines. It displays a horizontal bar for each task or activity, representing its start and end dates. The length of the bars indicates the duration of each task, and they are arranged along a timeline to demonstrate the order and duration of various project activities.
+
+Gantt charts are valuable for project management or scheduling tasks over time. They help in visualizing project timelines, dependencies, and resource allocation.
+
+Creating a Gantt chart
+''''''''''''''''''''''
+
+#. From the **Visualize** tab, click **Create Visualization**, select the ``Gantt Chart`` visualization format and use ``wazuh-alerts-*`` as the index pattern name.
+
+   .. thumbnail:: /images/wazuh-dashboard/custom-dashboards/create-gantt-chart-visualization.png
+      :align: center
+      :width: 80%
+      :title: Create Gantt chart visualization
+      :alt: Create Gantt chart visualization
+
+#. Choose a source for the chart. Here we selected ``wazuh-alerts-*`` as the index to use.
+#. On the **Metric** in **Metrics** data, under **Event**, select a log data.
+#. On the **Start time** field for the Event, select a ``timestamp`` field for the start of a schedule. This is the timestamp used for the beginning of the selected Event.
+#. On the **Duration** field for the Event, select a time interval field for the Event duration. This is the amount of time that is added to the start time.
+#. On the **Results** field, select the number of events that will be shown on the chart. The events will be sequenced based on the **Start time**, from the earliest to the latest.
+#. To adjust the colors, axis labels and time format, navigate to the Panel settings.
+#. Click the **Update** button. 
+#. Click the upper-right **Save** button and assign a title to save the visualization.
+
+Hover over a bar to see the duration of that event.
+
+Timeline
+~~~~~~~~
+
+This is a chronological display of events or activities, often depicted as a horizontal line with dates or time periods marked along it. Timeline builds time-series using functional expressions.
+
+They are commonly used in historical analysis, project planning, or storytelling.
+
+Creating Timeline
+'''''''''''''''''
+
+#. From the **Visualize** tab, click **Create Visualization**, select the ``Timeline`` visualization format.
+
+   .. thumbnail:: /images/wazuh-dashboard/custom-dashboards/create-timeline-visualization.png
+      :align: center
+      :width: 80%
+      :title: Create timeline visualization
+      :alt: Create timeline visualization
+
+#. Choose a source for the chart. In the Timeline expression windows, within ``.es(*)``. The expression ``.es(*)`` is a wildcard value that represents all the indexes currently within the Wazuh indexer, combined together. Here we selected ``wazuh-alerts-*`` as the index to use.
+
+   .. code-block:: none
+
+      .es(index=wazuh-alerts-*)
+
+   .. thumbnail:: /images/wazuh-dashboard/custom-dashboards/create-timeline-visualization-source.png
+      :align: center
+      :width: 80%
+      :title: Create timeline visualization – Source
+      :alt: Create timeline visualization – Source
+
+   Where:
+
+   -  **Index** represents the data storage unit containing the data to be used for visualization.
+   -  **Interval** represents the time duration between data points or events.
+   -  **Timefield** represents a specific field in a dataset that holds timestamp or time information for each data point.
+   -  **Metric** represents the quantitative measure to be used from the data.
+   -  **Offset** is used to adjust the time displayed on the timeline for aligning with specific events.
+   -  **opensearchDashboards** represents a platform that provides a web-based interface for visualizing and exploring real-time data.
+   -  **Q** represents a query or set of queries used to filter and retrieve specific data for display.
+   -  **Split** represents the function that divides or groups data into segments based on a specified parameter for visualization and analysis.
+
+   A sample query:
+
+      .. code-block:: none
+
+         .es(index=wazuh-alerts-*, timefield=@timestamp, metric=count:request).aggregate(function=avg)
+
+Vega
+~~~~
+
+This is a versatile declarative language for creating interactive visualizations. It allows users to define visualizations using JSON syntax. It allows users to define complex visualizations using JSON syntax and is suitable for advanced data visualization needs.
+
+Creating dashboards
+-------------------
+
+Dashboards transform your data from one or more single visualization perspectives into a group of visualizations that provide a clear representation of your data. This allows you to concentrate solely on the data that matters to you by presenting a dynamic representation for your data.
+
+To create a custom dashboard, do the following:
+
+#. Click on the upper-left menu icon and navigate to **OpenSearch Dashboards** > **Dashboard** > **Create new dashboard**.
+
+   .. thumbnail:: /images/wazuh-dashboard/custom-dashboards/create-new-dashboard.png
+      :align: center
+      :width: 80%
+      :title: Create new dashboard
+      :alt: Create new dashboard
+
+#. Click **Add an existing** and select the newly created visualizations to populate the dashboard.
+
+   .. thumbnail:: /images/wazuh-dashboard/custom-dashboards/create-new-dashboard-add-visualizations.png
+      :align: center
+      :width: 80%
+      :title: Create new dashboard – Add visualizations
+      :alt: Create new dashboard – Add visualizations
+
+#. Save the dashboard by selecting the **Save** option on the top-right navigation bar.
+
+   .. thumbnail:: /images/wazuh-dashboard/custom-dashboards/create-new-dashboard-save.png
+      :align: center
+      :width: 80%
+      :title: Create new dashboard – Save
+      :alt: Create new dashboard – Save
