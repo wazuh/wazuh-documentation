@@ -29,7 +29,7 @@ To use your own logos in the Wazuh dashboard, click on **Indexer/dashboard manag
    :width: 100%
 
 
-To customize the `Wazuh dashboard home logo` in the top header, you have to edit the file ``/usr/share/wazuh-dashboard/config/opensearch_dashboards.yml`` and add the URL of the default and dark theme logos.
+To customize the `Wazuh dashboard home logo` in the top header, you have to edit the file ``opensearch_dashboards.yml`` which is located in ``/usr/share/wazuh-dashboard/config/`` in the docker installations or it's located in  ``/etc/wazuh-dashboard/`` in the .rpm and .deb packages, add the URL of the default and dark theme logos.
 
 
 .. code-block:: yaml
