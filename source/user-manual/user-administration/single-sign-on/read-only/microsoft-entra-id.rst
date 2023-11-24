@@ -22,7 +22,7 @@ Microsoft Entra ID Configuration
 --------------------------------
 
 #. Create a Microsoft account or use your own if you already have one.
-#. Go to `Microsoft Entra ID <https://portal.azure.com/>`_ and sign in with your Microsoft account.
+#. Go to `Microsoft Azure Portal <https://portal.azure.com/>`_ and sign in with your Microsoft account.
 #. Create an app in **Microsoft Entra ID**.
 
    #. Go to **Microsoft Entra ID** > **Enterprise applications** > **New application** and **Create your own application**. 
@@ -127,7 +127,7 @@ Microsoft Entra ID Configuration
       :align: center
       :width: 80%
 
-   - In option 4 **Set up <YOUR APPLICATION>**, the **Microsoft Entra ID** will be our ``idp.entity_id``.
+   - In option 4 **Set up <YOUR APPLICATION>**, the **Microsoft Entra ID Identifier** will be our ``idp.entity_id``.
 
 Wazuh indexer configuration
 ---------------------------
@@ -229,7 +229,7 @@ Wazuh dashboard configuration
       -  **Tenant permissions**: Select ``global_tenant`` and the ``Read only`` option.
    #. Select the newly created role.
    #. Select the **Mapped users** tab and click **Manage mapping**.
-   #. Under **Backend roles**, add the value attribute of the app role you created  in Microsoft Entra ID portal and click **Map** to confirm the action. In our case, the backend role is ``wazuh-readonly``.
+   #. Under **Backend roles**, add the value attribute of the app role you created in Microsoft Entra ID and click **Map** to confirm the action. In our case, the backend role is ``wazuh-readonly``.
 
 #. Check the value of ``run_as`` in the ``/usr/share/wazuh-dashboard/data/wazuh/config/wazuh.yml`` configuration file. If ``run_as`` is set to ``false``, proceed to the next step.
 
@@ -262,7 +262,7 @@ Wazuh dashboard configuration
       - **Custom rules**: Click **Add new rule** to expand this field.
       - **User field**: ``backend_roles``
       - **Search operation**: ``FIND``
-      - **Value**: Assign the value attribute of the app role you created  in Microsoft Entra ID portal, in our case, this is ``wazuh-readonly``.
+      - **Value**: Assign the value attribute of the app role you created  in Microsoft Entra ID, in our case, this is ``wazuh-readonly``.
 
       .. thumbnail:: /images/single-sign-on/azure-active-directory/read-only/Wazuh-role-mapping-RO.png
          :title: Create Wazuh role mapping
