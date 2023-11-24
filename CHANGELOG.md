@@ -15,7 +15,7 @@ All notable changes to this project will be documented in this file.
 - Updated the `logcollector.ip_update_interval` setting in the Internal options documentation. ([#6373](https://github.com/wazuh/wazuh-documentation/pull/6373))
 - Updated OSD version to 2.10.0. ([#6568](https://github.com/wazuh/wazuh-documentation/pull/6568))
 - Updated dashboard settings screenshots. ([#6711](https://github.com/wazuh/wazuh-documentation/pull/6711))
-- Updated the home URL of single sign on configuration. ([#6775](https://github.com/wazuh/wazuh-documentation/pull/6775))
+- Updated the Wazuh dashboard home URL in single sign on configuration. ([#6775](https://github.com/wazuh/wazuh-documentation/pull/6775))
 
 ### Removed
 
