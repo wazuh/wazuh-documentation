@@ -9,42 +9,63 @@ How to set up custom branding
 The Wazuh dashboard white-labeling feature allows you to replace the following elements with custom ones.
 
 -  Logos in the Wazuh dashboard.
+
+   -  App loading logo
+   -  Health check logo
+   -  Wazuh dashboard home logo
+
 -  Logo, header, and footer in PDF reports.
 
-Custom logos in the Wazuh dashboard 
+Custom logos in the Wazuh dashboard
 -----------------------------------
 
-To use your own logos in the Wazuh dashboard, click on **Indexer/dashboard management** > **App Settings**. Under the **Custom branding** section, set up the following properties:
+App loading and Health check logos
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
--  ``customization.logo.app``. This property sets the `App loading logo` image. It has a size limit of 1 MB. It replaces the logo image in the Wazuh loading animation when a new section initializes. Recommended size: 300 pixels width, 70 pixels height.
+To use your own App loading and Health check logos in the Wazuh dashboard, do the following.
 
-.. thumbnail:: /images/kibana-app/features/white-labeling/custom-branding-settings-loading.png
-   :align: center
-   :width: 100%
+#. Click on **Indexer/dashboard management** > **App Settings**.
+#. Under the **Custom branding** section, set up the following properties:
 
--  ``customization.logo.healthcheck``. This property sets the `Health check logo` image. It has a size limit of 1 MB. It replaces the logo on top of the check list displayed during the health check routine. Recommended size: 300 pixels width, 70 pixels height.
-
-.. thumbnail:: /images/kibana-app/features/white-labeling/custom-branding-settings-health-check.png
-   :align: center
-   :width: 100%
-
-
-To customize the `Wazuh dashboard home logo` in the top header, you have to edit the file ``opensearch_dashboards.yml`` which is located in ``/usr/share/wazuh-dashboard/config/`` in the docker installations or it's located in  ``/etc/wazuh-dashboard/`` in the .rpm and .deb packages, add the URL of the default and dark theme logos.
-
-
-.. code-block:: yaml
+   -  ``customization.logo.app``. This property sets the `App loading logo` image. It has a size limit of 1 MB. It replaces the logo image in the Wazuh loading animation when a new section initializes. Recommended size: 300 pixels width, 70 pixels height.
    
-   opensearchDashboards.branding:
-      mark:
-         defaultUrl: "https://domain.org/default-logo.png"
-         darkModeUrl: "https://domain.org/dark-mode-logo.png"
-         
+      .. thumbnail:: /images/kibana-app/features/white-labeling/custom-branding-settings-loading.png
+         :align: center
+         :width: 80%
+   
+   -  ``customization.logo.healthcheck``. This property sets the `Health check logo` image. It has a size limit of 1 MB. It replaces the logo on top of the check list displayed during the health check routine. Recommended size: 300 pixels width, 70 pixels height.
+   
+      .. thumbnail:: /images/kibana-app/features/white-labeling/custom-branding-settings-health-check.png
+         :align: center
+         :width: 80%
+
+Once you are done setting your custom logo images, you can find them saved in ``/usr/share/wazuh-dashboard/plugins/wazuh/public/assets/custom/images/``.
+
+Wazuh dashboard home logo
+^^^^^^^^^^^^^^^^^^^^^^^^^
+
+To customize the `Wazuh dashboard home logo` in the top header, do the following.
+
+#. Edit ``opensearch_dashboards.yml``. You can find this file in the following locations:
+
+   -  ``/etc/wazuh-dashboard/``
+   -  ``/usr/share/wazuh-dashboard/config/`` for Docker installations.
+ 
+#. Add the URL of your default and dark theme logos.
+
+   .. code-block:: yaml
+      :emphasize-lines: 3,4
+   
+      opensearchDashboards.branding:
+         mark:
+            defaultUrl: "https://domain.org/default-logo.png"
+            darkModeUrl: "https://domain.org/dark-mode-logo.png"
 
 .. thumbnail:: /images/kibana-app/features/white-labeling/custom-branding-settings-header.png
    :align: center
    :width: 100%
 
-Once you are done setting your custom logo images, you can find them saved in ``/usr/share/wazuh-dashboard/plugins/wazuh/public/assets/custom/images/``.
+Once you are done setting your custom logo image, you can find it saved in ``/usr/share/wazuh-dashboard/plugins/wazuh/public/assets/custom/images/``.
 
 Custom branding of the PDF reports
 ----------------------------------
