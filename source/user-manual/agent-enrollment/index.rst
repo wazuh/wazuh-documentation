@@ -44,7 +44,7 @@ The following has to be in place to ensure the Wazuh agent enrollment is done:
    - 55000/TCP for enrollment via manager API.
 
 
-.. note:: You can find instructions to install and enroll agents in the Wazuh dashboard making use of the deployment variables. Go to **Wazuh** > **Agents**, and click on **Deploy new agent**.
+.. note:: You can find instructions to install and enroll agents in the Wazuh dashboard making use of the deployment variables. Go to **Endpoints Summary**, and click on **Deploy new agent**.
 
 
 Troubleshooting

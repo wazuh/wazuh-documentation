@@ -62,11 +62,11 @@ You can visualize the alert with any of these options
 
 - Navigate to the **Discover** section and open the visualization created in the :doc:`Visualization </user-manual/capabilities/agentless-monitoring/visualization>` section.
 
-- Navigate to **Modules** > **Security events** on the Wazuh dashboard. Search for ``agentless.host:*`` to view the alert generated. 
+- Navigate to **Threat Hunting** on the Wazuh dashboard. Search for ``agentless.host:*`` to view the alert generated. 
 
 .. thumbnail:: /images/manual/agentless-monitoring/navigate-to-modules-security-events.png
-   :title: Navigate to Modules > Security events
-   :alt: Navigate to Modules > Security events
+   :title: Navigate to Threat Hunting
+   :alt: Navigate to Threat Hunting
    :align: center
    :width: 80%
 
@@ -153,7 +153,7 @@ You can visualize the alert with any of these options:
 
 - Navigate to the **Discover** section and open the visualization created in the :doc:`Visualization </user-manual/capabilities/agentless-monitoring/visualization>` section. 
 
-- Navigate to **Modules** > **Security events** on the Wazuh dashboard. Search for ``agentless.host:*`` to view the alert generated. 
+- Navigate to **Threat Hunting** on the Wazuh dashboard. Search for ``agentless.host:*`` to view the alert generated. 
 
 .. thumbnail:: /images/manual/agentless-monitoring/search-for-agentless-host.png
    :title: Search for agentless.host:*

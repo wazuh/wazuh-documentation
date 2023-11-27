@@ -24,9 +24,9 @@ Use case: Collecting and analyzing logs across multiple endpoints
 
 Wazuh helps meet the COSO Principle 13 (CC2.1) requirement by providing capabilities that generate quality information for the proper functioning of internal control measures. An example is log data analysis. The Wazuh logcollector module retrieves and centralizes log data from different sources, such as operating systems, applications, network devices, and security appliances. Once the log data is collected, Wazuh applies various analysis techniques to extract valuable insights and detect potential security issues. This is done by matching the received data with the Wazuh out of the box decoders and rules.
 
-This use case shows how log data analysis can be used to detect specific events across multiple endpoints. The process below shows how Wazuh groups *Security events* for an Ubuntu 22.04 agent.
+This use case shows how log data analysis can be used to detect specific events across multiple endpoints. The process below shows how Wazuh groups *Threat Hunting* for an Ubuntu 22.04 agent.
 
-#. Click on **Security events** from the Wazuh dashboard:
+#. Click on **Threat Hunting** in the Wazuh dashboard:
 
 .. thumbnail:: /images/compliance/tsc/common-criteria/wazuh-dashboard.png
    :title: Wazuh dashboard
@@ -37,8 +37,8 @@ This use case shows how log data analysis can be used to detect specific events 
 Check the security events on the dashboard and click on any alert to view more details. 
 
 .. thumbnail:: /images/compliance/tsc/common-criteria/security-events-dashboard.png
-   :title: Security events dashboard
-   :alt: Security events dashboard
+   :title: Threat hunting dashboard
+   :alt: Threat hunting dashboard
    :align: center
    :width: 80%
 

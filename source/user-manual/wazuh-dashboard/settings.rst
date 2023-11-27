@@ -8,7 +8,7 @@
 Settings
 ========
 
-The *Settings* page allows you to configure and customize your Wazuh dashboard experience.
+The **Settings** module allows you to configure and customize your Wazuh dashboard experience.
 
 API
 ---
@@ -16,15 +16,6 @@ API
 In this section, you can list all your inserted API credentials. The star icon indicates the currently used API to show information on the app. Each entry has multiple available actions to manage it. Keep in mind that a working API is needed to add or edit an entry. Check your API connection status before adding them to the app.
 
 .. thumbnail:: ../../images/kibana-app/features/settings/api.png
-  :align: center
-  :width: 100%
-
-Modules
--------
-
-Wazuh dashboard provides multiple integrations and capabilities to monitor and analyze your hosts. You can enable multiple modules to visualize tailored dashboards, which provide rich and useful information. Some of these extensions are disabled by default because you have to previously enable them on your manager configuration in order to generate alerts.
-
-.. thumbnail:: ../../images/kibana-app/features/settings/extensions.png
   :align: center
   :width: 100%
 

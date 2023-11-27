@@ -104,6 +104,7 @@ newUrls['4.6'] = [
   '/cloud-security/ms-graph/monitoring-ms-graph-activity.html',
   '/user-manual/reference/ossec-conf/ms-graph-module.html',
   '/user-manual/wazuh-dashboard/queries.html',
+  '/user-manual/wazuh-dashboard/creating-custom-dashboards.html',
   '/cloud-security/azure/activity-services/entra/index.html',
   '/cloud-security/azure/activity-services/entra/graph.html',
   '/user-manual/user-administration/single-sign-on/administrator/microsoft-entra-id.html',

@@ -15,7 +15,7 @@ System inventory
 
 An up-to-date :doc:`system inventory </user-manual/capabilities/system-inventory/index>` helps organizations optimize asset visibility in their environment, and is essential for maintaining good IT hygiene. Wazuh collects system inventory data that includes hardware and operating system information, installed software, network interfaces, ports, and running processes. Wazuh agents use the :doc:`Syscollector </user-manual/capabilities/system-inventory/configuration>` module to collect inventory data from monitored endpoints and send them to the Wazuh server.
 
-You can generate system inventory reports from the **Inventory data** tab on the Wazuh dashboard. The information contained in the report helps identify unwanted applications, processes, services, and malicious artifacts.
+You can generate system inventory reports from the **Inventory data** module on the Wazuh dashboard. The information contained in the report helps identify unwanted applications, processes, services, and malicious artifacts.
 
 .. thumbnail:: /images/getting-started/use-cases/it-hygiene/inventory-data-dashboard.png
    :title: Inventory data on the Wazuh dashboard
@@ -31,11 +31,11 @@ You can also generate property-specific reports for a monitored endpoint. For ex
    :align: center
    :width: 80%
 
-The inventory data collected can be queried using the `Wazuh API <https://documentation.wazuh.com/|WAZUH_CURRENT_MINOR|/user-manual/api/reference.html#tag/Syscollector>`__, which retrieves nested data in JSON format. For example, you can query the package inventory to check for the ``wazuh-agent`` package on a monitored endpoint using the **API Console** on the Wazuh dashboard. Command line tools like :ref:`cURL <inventory_wazuh_api_curl>` can also be used to query the inventory database.
+The inventory data collected can be queried using the `Wazuh API <https://documentation.wazuh.com/|WAZUH_CURRENT_MINOR|/user-manual/api/reference.html#tag/Syscollector>`__, which retrieves nested data in JSON format. For example, you can query the package inventory to check for the ``wazuh-agent`` package on a monitored endpoint using the **Server management** > **Dev Tools** module on the Wazuh dashboard. Command line tools like :ref:`cURL <inventory_wazuh_api_curl>` can also be used to query the inventory database.
 
 .. thumbnail:: /images/getting-started/use-cases/it-hygiene/inventory-querying-api.png
-   :title: Querying the package inventory using the API console
-   :alt: Querying the package inventory using the API console
+   :title: Querying the package inventory using the Dev Tools
+   :alt: Querying the package inventory using the Dev Tools
    :align: center
    :width: 80%
 
@@ -44,11 +44,11 @@ Security Configuration Assessment
 
 One of the objectives of implementing good IT hygiene is to reduce the attack surface of your organization. The :doc:`Wazuh SCA </user-manual/capabilities/sec-config-assessment/index>` module periodically scans monitored endpoints against policies based on the Center for Internet Security (CIS) benchmarks to identify security misconfigurations and flaws. The CIS benchmarks are essential guidelines for establishing a secure baseline configuration for critical assets. This minimizes vulnerabilities resulting from misconfigurations and reduces the risk of security breaches.
 
-The **Security configuration assessment** module on the Wazuh dashboard provides each agent's SCA scan result. The results show the number of checks performed on the endpoint, how many failed, and the number of checks that passed. It also shows a score calculated based on the number of tests passed, giving you an overview of the level of compliance.
+The **Configuration Assessment** module on the Wazuh dashboard provides each agent's SCA scan result. The results show the number of checks performed on the endpoint, how many failed, and the number of checks that passed. It also shows a score calculated based on the number of tests passed, giving you an overview of the level of compliance.
 
 .. thumbnail:: /images/getting-started/use-cases/it-hygiene/sca-results.png
-   :title: Security configuration assessment results
-   :alt: Security configuration assessment results
+   :title: Configuration Assessment results
+   :alt: Configuration Assessment results
    :align: center
    :width: 80%
 
@@ -80,8 +80,8 @@ The Wazuh :doc:`Vulnerability Detector </user-manual/capabilities/vulnerability-
 The vulnerabilities discovered are grouped into severity levels, and a summary is provided based on the application name, CVE, and CVSS3 score on the Wazuh dashboard.
 
 .. thumbnail:: /images/getting-started/use-cases/it-hygiene/vulnerabilities-inventory-dashboard.png
-   :title: Vulnerabilities inventory dashboard
-   :alt: Vulnerabilities inventory dashboard
+   :title: Vulnerability Detection inventory dashboard
+   :alt: Vulnerability Detection inventory dashboard
    :align: center
    :width: 80%
 

@@ -73,11 +73,11 @@ The ``/tmp`` directory is used to store data that is needed for a short time by 
 Viewing SCA results
 -------------------
 
-The Wazuh dashboard has a **Security configuration assessment** module that allows you to view SCA scan results for each agent.
+The Wazuh dashboard has a **Configuration Assessment** module that allows you to view SCA scan results for each agent.
 
 .. thumbnail:: /images/getting-started/use-cases/sca/sca-module.png
-   :title: SCA module
-   :alt: SCA module
+   :title: Configuration Assessment module
+   :alt: Configuration Assessment module
    :align: center
    :width: 80%
     
