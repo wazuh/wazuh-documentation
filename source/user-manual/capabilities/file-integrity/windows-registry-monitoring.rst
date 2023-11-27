@@ -171,7 +171,7 @@ Follow these steps to configure the FIM module to report changes made to ``HKEY_
 
 #. Wait for 5 minutes which is the time configured for the FIM scan.
 
-Navigate to **Modules > Integrity monitoring** on the Wazuh dashboard to view the alert generated when the FIM module detects a modification of the monitored registry value.
+Navigate to **File Integrity Monitoring** on the Wazuh dashboard to view the alert generated when the FIM module detects a modification of the monitored registry value.
 
 .. thumbnail:: /images/manual/fim/modification-of-the-monitored-registry-value.png
   :title: Modification of the monitored registry value
@@ -254,7 +254,7 @@ Test the configuration
 Visualize the alert
 ^^^^^^^^^^^^^^^^^^^
 
-Navigate to **Modules > Integrity monitoring** on the Wazuh dashboard to view the alert generated when the FIM module detects changes in the Windows startup registries.
+Navigate to **File Integrity Monitoring** on the Wazuh dashboard to view the alert generated when the FIM module detects changes in the Windows startup registries.
 
 .. thumbnail:: /images/manual/fim/changed-windows-startup-registries.png
   :title: Changes in the Windows startup registries

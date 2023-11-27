@@ -21,7 +21,7 @@ The Wazuh agent provides :ref:`key features <agents_modules>` to enhance your sy
    * - Log collector
      - Command execution
    * - File integrity monitoring (FIM) 
-     - Security configuration assessment (SCA) 
+     - Security configuration assessment (SCA)
    * - System inventory 
      - Malware detection
    * - Active response
@@ -108,7 +108,7 @@ If you are deploying Wazuh in a large environment, with a high number of servers
 
 .. note:: Compatibility between the Wazuh agent and the Wazuh manager is guaranteed when the Wazuh manager version is later than or equal to that of the Wazuh agent.
 
-You can also deploy a new agent following the instructions in the Wazuh dashboard. Go to **Wazuh** > **Agents**, and click on **Deploy new agent**.
+You can also deploy a new agent following the instructions in the Wazuh dashboard. Go to **Endpoints Summary**, and click on **Deploy new agent**.
  
   .. thumbnail::  /images/installation/deploy-new-agent-from-ui.png
     :align: center

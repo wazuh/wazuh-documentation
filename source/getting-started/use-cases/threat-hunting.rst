@@ -101,7 +101,7 @@ Rules and decoders
 
 Wazuh enhances threat hunting with robust rules, decoders, and pre-configured rules for diverse attack vectors and cyber activities.
 
-The **Management** tab on the Wazuh dashboard presents both default and custom rules, covering a broad array of security events, including system anomalies, malware detection, authentication failures, and other potential threats as seen below.
+The **Rules** module on the Wazuh dashboard presents both default and custom rules, covering a broad array of security events, including system anomalies, malware detection, authentication failures, and other potential threats as seen below.
 
 .. thumbnail:: /images/getting-started/use-cases/threat-hunting/rules.png
    :title: Wazuh dashboard rules view
@@ -113,7 +113,7 @@ Wazuh allows you to customize and :doc:`create your own rules and decoders </use
 
 Wazuh decoders play a vital role in normalizing and parsing diverse log formats and data sources. They ensure that collected information is presented in a standardized manner, facilitating effective analysis and correlation of data from various sources.
 
-The **Management** tab on the Wazuh dashboard allows you to view default and custom **Decoders**. The image below shows details of the default decoder ``agent-upgrade``.
+The **Decoders** module on the Wazuh dashboard allows you to view default and custom decoders. The image below shows details of the default decoder ``agent-upgrade``.
 
 .. thumbnail:: /images/getting-started/use-cases/threat-hunting/decoders.png
    :title: Details of the default agent-upgrade decoder

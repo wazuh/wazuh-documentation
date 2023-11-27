@@ -18,29 +18,29 @@ As an example, Wazuh provides out-of-the-box dashboards for regulatory complianc
 .. hlist::
    :columns: 2
 
-   -  .. thumbnail::  /images/getting-started/security-information-management.png 
+   -  .. thumbnail::  /images/getting-started/endpoint-security-modules.png 
          :align: center
          :width: 100% 
-         :title: Security information management
-         :alt: Security information management
+         :title: Endpoint security
+         :alt: Endpoint security
 
-   -  .. thumbnail::  /images/getting-started/policy-monitoring.png 
+   -  .. thumbnail::  /images/getting-started/security-operations-modules.png 
          :align: center
          :width: 100% 
-         :title: Auditing and policy monitoring
-         :alt: Auditing and policy monitoring
+         :title: Security operations
+         :alt: Security operations
 
-   -  .. thumbnail::  /images/getting-started/threat-detection-and-response.png 
+   -  .. thumbnail::  /images/getting-started/threat-intelligence-modules.png 
          :align: center
          :width: 100% 
-         :title: Threat detection and response
-         :alt: Threat detection and response
+         :title: Threat intelligence
+         :alt: Threat intelligence
 
-   -  .. thumbnail::  /images/getting-started/dashboard-regulatory-compliance.png 
+   -  .. thumbnail::  /images/getting-started/cloud-security-modules.png 
          :align: center
          :width: 100% 
-         :title: Regulatory compliance
-         :alt: Regulatory compliance
+         :title: Cloud security
+         :alt: Cloud security
 
 Agents monitoring and configuration
 -----------------------------------
@@ -58,20 +58,11 @@ Platform management
 
 The Wazuh dashboard provides a user interface dedicated to manage your Wazuh deployment. This includes monitoring the status, logs, and statistics of the different Wazuh components. It also includes configuring the Wazuh server, and creating custom rules and decoders for log analysis and threat detection.
 
-.. hlist::
-   :columns: 2
-
-   -  .. thumbnail::  /images/getting-started/platform-management.png 
-         :align: center
-         :width: 100% 
-         :title: Platform management
-         :alt: Platform management
-
-   -  .. thumbnail::  /images/getting-started/status-and-reports.png 
-         :align: center
-         :width: 100% 
-         :title: Status and reports
-         :alt: Status and reports
+.. thumbnail::  /images/getting-started/platform-management.png 
+   :align: center
+   :width: 100% 
+   :title: Platform management
+   :alt: Platform management
 
 Developer tools
 ---------------
@@ -84,7 +75,7 @@ The Wazuh dashboard includes a Ruleset Test tool that can process log messages t
    :title: Ruleset test
    :alt: Ruleset test
 
-The Wazuh dashboard also includes an API Console for users to interact with the Wazuh API. This can be used to manage the Wazuh deployment (e.g., managing server or agent configurations, monitor status and log messages, adding or removing agents, etc.).
+The Wazuh dashboard also includes an API console for users to interact with the Wazuh API. This can be used to manage the Wazuh deployment (e.g., managing server or agent configurations, monitor status and log messages, adding or removing agents, etc.).
 
 .. hlist::
     :columns: 2
@@ -92,8 +83,8 @@ The Wazuh dashboard also includes an API Console for users to interact with the 
     -  .. thumbnail::  /images/getting-started/api-console.png 
           :align: center
           :width: 100% 
-          :title: API console
-          :alt: API console
+          :title: Server management > Dev Tools
+          :alt: Server management > Dev Tools
 
     -  .. thumbnail::  /images/getting-started/creating-security-rules.png  
           :align: center

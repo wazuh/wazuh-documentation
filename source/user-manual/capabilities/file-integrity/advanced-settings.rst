@@ -149,7 +149,7 @@ Test the configuration
 Visualize the alert
 ~~~~~~~~~~~~~~~~~~~
 
-Navigate to **Modules > Integrity monitoring** on the Wazuh dashboard to view the alert generated when the FIM module detects changes in the monitored file.
+Navigate to **File Integrity Monitoring** on the Wazuh dashboard to view the alert generated when the FIM module detects changes in the monitored file.
 
 .. thumbnail:: ../../../images/manual/fim/fim-detects-changes.png
   :title: FIM detects changes
@@ -349,7 +349,7 @@ Test the configuration
 Visualize the alert
 ~~~~~~~~~~~~~~~~~~~
 
-Navigate to **Modules > Integrity monitoring** on the Wazuh dashboard and find the alert generated when the FIM module detects changes in the monitored directory.
+Navigate to **File Integrity Monitoring** on the Wazuh dashboard and find the alert generated when the FIM module detects changes in the monitored directory.
 
 .. thumbnail:: ../../../images/manual/fim/test-the-configuration.png
    :title: Test the configuration

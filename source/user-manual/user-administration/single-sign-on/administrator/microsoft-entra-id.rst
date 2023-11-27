@@ -21,7 +21,7 @@ Microsoft Entra ID Configuration
 --------------------------------
 
 #. Create a Microsoft account or use your own if you already have one.
-#. Go to `Microsoft Entra ID <https://portal.azure.com/>`_ and sign in with your Microsoft account.
+#. Go to `Microsoft Azure Portal <https://portal.azure.com/>`_ and sign in with your Microsoft account.
 #. Create an app in **Microsoft Entra ID**.
 
    #. Go to **Microsoft Entra ID** > **Enterprise applications** > **New application** and **Create your own application**. 
@@ -143,7 +143,7 @@ Microsoft Entra ID Configuration
       :align: center
       :width: 80%
 
-   - In option 4 **Set up <YOUR APPLICATION>**, the **Microsoft Entra ID** will be our ``idp.entity_id``.
+   - In option 4 **Set up <YOUR APPLICATION>**, the **Microsoft Entra ID Identifier** will be our ``idp.entity_id``.
 
 Wazuh indexer configuration
 ---------------------------
@@ -291,7 +291,7 @@ Wazuh dashboard configuration
 
    If ``run_as`` is set to ``true``, you need to add a role mapping on the Wazuh dashboard. To map the backend role to Wazuh, follow these steps:
 
-   #. Click **Wazuh** to open the Wazuh dashboard menu, select **Security**, and then **Roles mapping** to open the page.
+   #. Click **☰** to open the menu on the Wazuh dashboard, go to **Server management** > **Security**, and then **Roles mapping** to open the page.
 
       .. thumbnail:: /images/single-sign-on/Wazuh-role-mapping.gif
          :title: Wazuh role mapping

@@ -2,7 +2,7 @@
 
 .. meta::
    :description: Learn how to upgrade the Wazuh indexer, server, and dashboard to the latest version available.
-  
+
 Wazuh central components
 ========================
 
@@ -15,7 +15,7 @@ Preparing the upgrade
 
 In the case Wazuh is installed in a multi-node cluster configuration, repeat the following steps for every node.
 
-#. Add the Wazuh repository. You can skip this step if the repository is already present and enabled on the node. 
+#. Add the Wazuh repository. You can skip this step if the repository is already present and enabled on the node.
 
    .. tabs::
 
@@ -56,7 +56,7 @@ In the case Wazuh is installed in a multi-node cluster configuration, repeat the
 Upgrading the Wazuh indexer
 ---------------------------
 
-.. note:: 
+.. note::
 
    Note that this upgrade process doesn't update plugins installed manually. Outdated plugins might cause the upgrade to fail.
 
@@ -66,13 +66,13 @@ In the case of having a Wazuh indexer cluster with multiple nodes, the cluster w
 
 .. note::
 
-   -  Replace ``<WAZUH_INDEXER_IP>``, ``<username>``, and ``<password>`` before running the commands below.
+   -  Replace ``<WAZUH_INDEXER_IP_ADDRESS>``, ``<username>``, and ``<password>`` before running the commands below.
 
 #. Disable shard allocation.
 
    .. code-block:: bash
    
-      curl -X PUT "https://<WAZUH_INDEXER_IP>:9200/_cluster/settings"  -u <username>:<password> -k -H 'Content-Type: application/json' -d'
+      curl -X PUT "https://<WAZUH_INDEXER_IP_ADDRESS>:9200/_cluster/settings"  -u <username>:<password> -k -H 'Content-Type: application/json' -d'
       {
         "persistent": {
           "cluster.routing.allocation.enable": "primaries"
@@ -84,7 +84,7 @@ In the case of having a Wazuh indexer cluster with multiple nodes, the cluster w
 
    .. code-block:: console
 
-      # curl -X POST "https://<WAZUH_INDEXER_IP>:9200/_flush/synced" -u <username>:<password> -k
+      # curl -X POST "https://<WAZUH_INDEXER_IP_ADDRESS>:9200/_flush/synced" -u <username>:<password> -k
 
 #. Shut down the Wazuh indexer in the node.
 
@@ -126,13 +126,13 @@ In the case of having a Wazuh indexer cluster with multiple nodes, the cluster w
 
    .. code-block:: console
 
-      # curl -k -u <username>:<password> https://<WAZUH_INDEXER_IP>:9200/_cat/nodes?v
+      # curl -k -u <username>:<password> https://<WAZUH_INDEXER_IP_ADDRESS>:9200/_cat/nodes?v
 
 #. Re-enable shard allocation.
 
    .. code-block:: bash
 
-      curl -X PUT "https://<WAZUH_INDEXER_IP>:9200/_cluster/settings" -u <username>:<password> -k -H 'Content-Type: application/json' -d'
+      curl -X PUT "https://<WAZUH_INDEXER_IP_ADDRESS>:9200/_cluster/settings" -u <username>:<password> -k -H 'Content-Type: application/json' -d'
       {
         "persistent": {
           "cluster.routing.allocation.enable": "all"
@@ -144,7 +144,19 @@ In the case of having a Wazuh indexer cluster with multiple nodes, the cluster w
 
    .. code-block:: console
 
-      # curl -k -u <username>:<password> https://<WAZUH_INDEXER_IP>:9200/_cat/nodes?v
+      # curl -k -u <username>:<password> https://<WAZUH_INDEXER_IP_ADDRESS>:9200/_cat/nodes?v
+
+#. If you're upgrading from a version earlier than 4.8.0, run the Wazuh indexer ``indexer-init.sh`` script on `any` Wazuh indexer node to re-initialize the cluster. Find more information in :doc:`/user-manual/wazuh-indexer/index-life-management`.
+
+   -  If there is a rollover policy in use, your new policy needs a higher priority value to take precedence over it. Add ``-P <CUSTOM_PRIORITY_VALUE>`` into the command below to set a custom priority value.
+      
+   .. code-block:: console
+
+      # bash /usr/share/wazuh-indexer/bin/indexer-init.sh -i <WAZUH_INDEXER_IP_ADDRESS> -p <password>
+
+   .. note::
+
+      The policy will be applied only to new indices and not to existing ones. To rotate the current write index managed by the previous policy and start applying the new one, use the ``POST <alias>/_rollover`` endpoint. For example: ``POST wazuh-alerts/_rollover``
 
 .. _upgrading_wazuh_server:
 
@@ -153,7 +165,7 @@ Upgrading the Wazuh server
 
 When upgrading a multi-node Wazuh manager cluster, run the upgrade in every node to make all the Wazuh manager nodes join the cluster. Start with the master node to reduce server downtime.
 
-   .. note:: Upgrading from Wazuh 4.2.x or lower creates the ``wazuh`` operating system user and group to replace ``ossec``. To avoid upgrade conflicts, make sure that the ``wazuh`` user and group are not present in your operating system.  
+   .. note:: Upgrading from Wazuh 4.2.x or lower creates the ``wazuh`` operating system user and group to replace ``ossec``. To avoid upgrade conflicts, make sure that the ``wazuh`` user and group are not present in your operating system.
 
 #. Upgrade the Wazuh manager to the latest version.
 
@@ -180,8 +192,8 @@ When upgrading a multi-node Wazuh manager cluster, run the upgrade in every node
 
     .. code-block:: console
 
-      # curl -s https://packages.wazuh.com/4.x/filebeat/wazuh-filebeat-0.2.tar.gz | sudo tar -xvz -C /usr/share/filebeat/module   
-               
+      # curl -s https://packages.wazuh.com/4.x/filebeat/wazuh-filebeat-0.3.tar.gz | sudo tar -xvz -C /usr/share/filebeat/module
+
 
 #. Download the alerts template:
 
@@ -189,7 +201,7 @@ When upgrading a multi-node Wazuh manager cluster, run the upgrade in every node
 
       # curl -so /etc/filebeat/wazuh-template.json https://raw.githubusercontent.com/wazuh/wazuh/v|WAZUH_CURRENT|/extensions/elasticsearch/7.x/wazuh-template.json
       # chmod go+r /etc/filebeat/wazuh-template.json
-      
+
 #. Restart Filebeat:
 
     .. include:: /_templates/installations/basic/elastic/common/enable_filebeat.rst
@@ -199,11 +211,11 @@ When upgrading a multi-node Wazuh manager cluster, run the upgrade in every node
    .. code-block:: console
 
       # filebeat setup --index-management -E output.logstash.enabled=false
-      
+
 Upgrading the Wazuh dashboard
 -----------------------------
 
-.. note:: 
+.. note::
 
    Note that this upgrade process doesn't update plugins installed manually. Outdated plugins might cause the upgrade to fail.
 
