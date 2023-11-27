@@ -15,25 +15,21 @@ This version includes new features or improvements, such as the following:
 
 Manager
 ^^^^^^^
-- `#18026 <https://github.com/wazuh/wazuh/pull/18026>`__ Introduced a native Maltiverse integration. Thanks to David Gil (`@dgilm <https://github.com/dgilm>`__).
-- `#16513 <https://github.com/wazuh/wazuh/pull/16513>`__ Added a file detailing the dependencies for the Wazuh RESTful API and wodles tests.
-- `#15985 <https://github.com/wazuh/wazuh/pull/15985>`__ Added unit tests for the Syscollector legacy decoder.
-- `#15999 <https://github.com/wazuh/wazuh/pull/15999>`__ Added unit tests for the ``manage_agents`` tool.
+- `#18026 <https://github.com/wazuh/wazuh/pull/18026>`__ Added native Maltiverse integration. Wazuh now leverages the Maltiverse API to enrich alerts. This enhancement supplements alert details with threat intelligence data following the Elastic Common Schema (ECS) standard. Acknowledgments to David Gil (`@dgilm <https://github.com/dgilm>`__).
 - `#16090 <https://github.com/wazuh/wazuh/pull/16090>`__ Added an option to customize the Slack integration.
 - `#16008 <https://github.com/wazuh/wazuh/pull/16008>`__ An unnecessary sanity check related to Syscollector has been removed from ``wazuh-db``.
-- `#17225 <https://github.com/wazuh/wazuh/pull/17225>`__ Deleted unused framework RBAC migration folder.
 - `#18570 <https://github.com/wazuh/wazuh/pull/18570>`__ Added support for Amazon Linux 2023 in Vulnerability Detector.
 - `#20367 <https://github.com/wazuh/wazuh/pull/20367>`__ The manager now rejects agents with a higher version by default.
 
 Agent
 ^^^^^
 
-- `#17951 <https://github.com/wazuh/wazuh/pull/17951>`__ Added support for Custom Logs in Buckets via AWS SQS.
-- `#16198 <https://github.com/wazuh/wazuh/pull/16198>`__ Added geolocation for ``aws.data.client_ip`` field. Thanks to `@rh0dy <https://github.com/rh0dy>`__.
+- `#17951 <https://github.com/wazuh/wazuh/pull/17951>`__ Added support for Custom AWS Logs in Buckets via AWS SQS. This enhancement improves visibility and troubleshooting in AWS environments.
+- `#15582 <https://github.com/wazuh/wazuh/pull/15582>`__ Added geolocation for ``aws.data.client_ip`` field. The new GeoIP feature enables tracking of geographical locations of AWS ALB client IP addresses. This addition enhances visibility into network traffic and security monitoring. Acknowledgements to Arran Rhodes `@rh0dy <https://github.com/rh0dy>`__.
 - `#15699 <https://github.com/wazuh/wazuh/pull/15699>`__ Added package inventory support for Alpine Linux in Syscollector.
-- `#15877 <https://github.com/wazuh/wazuh/pull/15877>`__ Added package inventory support for MacPorts in Syscollector.
-- `#17982 <https://github.com/wazuh/wazuh/pull/17982>`__ Added package inventory support for PYPI and node in Syscollector.
-- `#15000 <https://github.com/wazuh/wazuh/pull/15000>`__ Added related process information to the open ports inventory in Syscollector.
+- `#16117 <https://github.com/wazuh/wazuh/pull/16117>`__ Added package inventory support for MacPorts package manager in Syscollector. This enhancement improves compatibility with macOS.
+- `#17982 <https://github.com/wazuh/wazuh/pull/17982>`__ Added package inventory support for Python PYPI and Node.js in Syscollector.
+- `#15000 <https://github.com/wazuh/wazuh/pull/15000>`__ Added process information to the open ports inventory in Syscollector. This addition enhances ports inventory capabilities for better management and tracking on Linux systems.
 - `#17966 <https://github.com/wazuh/wazuh/pull/17966>`__ The shared modules code has been sanitized according to the convention.
 - `#18006 <https://github.com/wazuh/wazuh/pull/18006>`__ The package inventory internal messages have been modified to honor the schema compliance.
 - `#20360 <https://github.com/wazuh/wazuh/pull/20360>`__ Added clarification to the agent connection log. The agent must connect to a manager of the same or higher version.
@@ -44,7 +40,6 @@ Wazuh dashboard
 - `#5680 <https://github.com/wazuh/wazuh-dashboard-plugins/pull/5680>`__ Added the **Status detail** column in the **Agents** table.
 - `#5738 <https://github.com/wazuh/wazuh-dashboard-plugins/pull/5738>`__ The agent registration wizard now effectively manages special characters in passwords.
 - `#5636 <https://github.com/wazuh/wazuh-dashboard-plugins/pull/5636>`__ Changed the **Network ports** table columns for Linux agents.
-- `#5748 <https://github.com/wazuh/wazuh-dashboard-plugins/pull/5748>`__ Updated development dependencies: ``@typescript-eslint/eslint-plugin, @typescript-eslint/parser, eslint, swagger-client``.
 - `#5707 <https://github.com/wazuh/wazuh-dashboard-plugins/pull/5707>`__ Changed Timelion-type displays in the **Management > Statistics** section to line-type displays.
 - `#5747 <https://github.com/wazuh/wazuh-dashboard-plugins/pull/5747>`__ Removed views in JSON and XML formats from the **Management** settings.
 
