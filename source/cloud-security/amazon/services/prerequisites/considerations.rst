@@ -74,12 +74,14 @@ Users can customize two retry configurations.
 
 -  ``max_attempts``: The maximum number of attempts including the initial call. This configuration can override the default value set by the retry mode.
 
-You can specify the retry configuration in the ``~/.aws/config`` `configuration file <https://boto3.amazonaws.com/v1/documentation/api/latest/guide/configuration.html#using-a-configuration-file>`__. The profile section must include the ``max_attempts``, ``retry_mode``, and ``region`` settings. It is important to use the same profile as the one you chose as your :ref:`authentication method <authentication_method>`. If the authentication method doesn't have a profile, then the ``[Default]`` profile must include the configurations. In case the system doesn't have this file, the `aws-s3` Wazuh module defines the following values by default:
+You can specify the retry configuration in the ``~/.aws/config`` `configuration file <https://boto3.amazonaws.com/v1/documentation/api/latest/guide/configuration.html#using-a-configuration-file>`__. The profile section must include the ``max_attempts``, ``retry_mode``, and ``region`` settings.
+
+It is important to use the same profile as the one you chose as your :ref:`authentication method <authentication_method>`. If the authentication method doesn't have a profile, then the ``[default]`` profile must include the configurations. In case the system doesn't have this file, the `aws-s3` Wazuh module defines the following values by default:
 
 -  ``retry_mode=standard``
--  ``max_attempts=10``.
+-  ``max_attempts=10``
 
-The following example of a ``~/.aws/config`` file sets retry parameters for the *dev* profile:
+The following example of a ``~/.aws/config`` file sets the retry parameters for the *dev* profile:
 
 .. code-block:: ini
 
@@ -88,13 +90,16 @@ The following example of a ``~/.aws/config`` file sets retry parameters for the 
    max_attempts=5
    retry_mode=standard
 
+.. note::
+   When using a profile that is not ``[default]`` in a configuration file, the name must include the prefix word *"profile"*.
+
 Additional configuration
 ~~~~~~~~~~~~~~~~~~~~~~~~
 
 Wazuh supports additional configuration options found in the ``.aws/config file``. The supported keys are the primary keys stated in the `boto3 configuration <https://boto3.amazonaws.com/v1/documentation/api/latest/guide/configuration.html>`_. Supported keys are:
 
-- region_name.
-- signature_version.
+- region_name
+- signature_version
 - s3
 - proxies
 - proxies_config
@@ -104,9 +109,12 @@ The following example of a ``~/.aws/config`` file sets the supported configurati
 
 .. code-block:: ini
 
-   [dev]
+   [profile dev]
    region = us-east-1
    output = json
+   max_attempts = 5
+   retry_mode = standard
+
    dev.s3.max_concurrent_requests = 10
    dev.s3.max_queue_size = 1000
    dev.s3.multipart_threshold = 64MB
@@ -124,13 +132,12 @@ The following example of a ``~/.aws/config`` file sets the supported configurati
    dev.proxy.client_cert = /path/to/client_cert.pem
    dev.proxy.use_forwarding_for_https = true
 
-   dev.signature_version = s3v4
-   max_attempts = 5
-   retry_mode = standard
+   signature_version = s3v4
 
 .. note::
-   To configure multiple profiles for the integration, declare each profile in the ``~/.aws/config`` file using the same pattern as before.
-   If no profile is declared in the module configuration, the *default* profile is used.
+   All configurations for ``s3`` and ``proxy`` must start with the profile name.
+
+To configure multiple profiles for the integration, declare each profile in the ``~/.aws/config`` file using the same pattern as before. If no profile is declared in the module configuration, the *default* profile will be used.
 
 Configuring multiple services
 -----------------------------
