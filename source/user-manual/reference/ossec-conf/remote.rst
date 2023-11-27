@@ -1,8 +1,8 @@
 .. Copyright (C) 2015, Wazuh, Inc.
 
 .. meta::
-  :description: Check out how to configure the manager to listen for events from the agents and an example of configuration in this section of the Wazuh documentation. 
-  
+  :description: Check out how to configure the manager to listen for events from the agents and an example of configuration in this section of the Wazuh documentation.
+
 .. _reference_ossec_remote:
 
 remote
@@ -171,11 +171,11 @@ agents
 **allow_higher_versions**
 
 .. versionadded:: 4.6.0
-  
+
 Accept agents with a later version than the current manager.
 
 +--------------------+------------------+
-| **Default value**  | yes              |
+| **Default value**  | no               |
 +--------------------+------------------+
 | **Allowed values** | yes, no          |
 +--------------------+------------------+
@@ -205,6 +205,6 @@ Example of configuration
       <rids_closing_time>5m</rids_closing_time>
       <connection_overtake_time>600</connection_overtake_time>
       <agents>
-        <allow_higher_versions>yes</allow_higher_versions>
-      </agents>  
+        <allow_higher_versions>no</allow_higher_versions>
+      </agents>
     </remote>
