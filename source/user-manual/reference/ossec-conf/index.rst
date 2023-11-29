@@ -91,7 +91,9 @@ Wazuh can be installed in two ways: as a manager by using the "server/manager" i
 +---------------------------------------------------------------------+------------------------+
 | :doc:`task-manager <task-manager>`                                  | manager                |
 +---------------------------------------------------------------------+------------------------+
-| :doc:`vulnerability-detector <vuln-detector>`                       | manager                |
+| :doc:`vulnerability-detection <vuln-detector>`                      | manager                |
++---------------------------------------------------------------------+------------------------+
+| :doc:`indexer <indexer>`                                            | manager                |
 +---------------------------------------------------------------------+------------------------+
 | :doc:`wazuh_db <wazuh-db-config>`                                   | manager                |
 +---------------------------------------------------------------------+------------------------+
@@ -139,6 +141,7 @@ All of the above sections must be located within the top-level ``<ossec_config>`
    email-alerts
    global
    github-module
+   indexer
    integration
    labels
    localfile
