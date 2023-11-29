@@ -23,7 +23,6 @@ Options
 - `enabled`_
 - `interval`_
 - `run_on_start`_
-- `min_full_scan_interval`_
 - `retry_interval`_
 - `provider`_
 
@@ -35,8 +34,6 @@ Options
 | `interval`_               | A positive number (seconds) |
 +---------------------------+-----------------------------+
 | `run_on_start`_           | yes, no                     |
-+---------------------------+-----------------------------+
-| `min_full_scan_interval`_ | A positive number (seconds) |
 +---------------------------+-----------------------------+
 | `retry_interval`_         | A positive number (seconds) |
 +---------------------------+-----------------------------+
@@ -80,19 +77,6 @@ Runs updates and vulnerabilities scans immediately when the service is started.
 +----------------------+-----------+
 | **Allowed values**   | yes, no   |
 +----------------------+-----------+
-
-.. _vuln_det_min_full_scan_interval:
-
-min_full_scan_interval
-^^^^^^^^^^^^^^^^^^^^^^^
-
-The time during which a full scan will not be performed even if the database of vulnerabilities is updated. When this time expires, a :doc:`full scan </user-manual/capabilities/vulnerability-detection/scan-types>` will be performed only if the CVEs database has changed.
-
-+----------------------+------------------------------------------------------------------------------------------------------------------------------------+
-| **Default value**    | 6 hours                                                                                                                            |
-+----------------------+------------------------------------------------------------------------------------------------------------------------------------+
-| **Allowed values**   | A positive number that should contain a suffix character indicating a time unit: s (seconds), m (minutes), h (hours) or d (days).  |
-+----------------------+------------------------------------------------------------------------------------------------------------------------------------+
 
 .. _retry_interval:
 
