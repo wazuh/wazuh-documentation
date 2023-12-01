@@ -40,6 +40,8 @@ Amazon configuration
 
       The structure may change depending on the different configurations of the services, and the user may only change the **bucket_name** & **prefix** values.
 
+.. _policy_cloudtrail:
+
 Policy configuration
 ^^^^^^^^^^^^^^^^^^^^
 
