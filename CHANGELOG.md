@@ -21,6 +21,12 @@ All notable changes to this project will be documented in this file.
 
 - Deprecated ``/vulnerability`` API endpoints. ([#6738](https://github.com/wazuh/wazuh-documentation/pull/6738))
 
+## [v4.7.2]
+
+### Added
+
+- Support for Wazuh 4.7.2.
+
 ## [v4.7.1]
 
 ### Added
