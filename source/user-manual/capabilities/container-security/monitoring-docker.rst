@@ -53,7 +53,7 @@ Install dependencies on the Docker server
 
    .. code-block:: console
 
-      # pip3 install docker==4.2.0
+      # pip3 install docker==4.2.0 urllib3==1.26.18
 
 Configure the Wazuh agent
 ^^^^^^^^^^^^^^^^^^^^^^^^^
