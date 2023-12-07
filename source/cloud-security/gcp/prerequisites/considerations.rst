@@ -47,9 +47,9 @@ Find an example of running the module on a manager using the ``--reparse`` optio
 
 .. code-block:: console
 
-  # /var/ossec/wodles/gcloud/gcloud --integration_type access_logs -b 'wazuh-example-bucket' -c credentials.json --reparse --only_logs_after '2021-Jun-10' --debug 2
+  # /var/ossec/wodles/gcloud/gcloud --integration_type access_logs -b 'wazuh-example-bucket' -c credentials.json --reparse --only_logs_after '2021-Jun-10' -l 2
 
-The ``--debug 2`` parameter gets a verbose output. This is useful to show the script is working, specially when handling a large amount of data.
+The ``-l 2`` parameter gets a verbose output. This is useful to show the script is working, specially when handling a large amount of data.
 
 
 Configuring multiple Google Cloud Storage bucket

@@ -13,14 +13,39 @@ In order to make the Wazuh GCP module pull log data from Google Pub/Sub or Googl
 
 To do this, it is recommended to create a service account with the Pub/Sub or Storage permissions and then create a key. It is important to save this key as a JSON file as it will be used as the authentication method for the GCP module.
 
+Creating a custom role
+----------------------
+
+The ``gcp-bucket`` module requires permissions to access storage buckets and objects. These permissions were originally assigned using the **Storage Legacy Bucket Writer** role, but it is no longer available for selection, so it will be necessary to create a new one.
+
+To create the new role, follow these steps:
+
+#. Go to the **Roles** section and click on **Create Role**.
+#. Establish a **Title** and click on **Add Permissions**.
+#. On the search bar, filter available permissions by typing **Storage Legacy Bucket Writer**. Select the following ones:
+
+   - ``storage.bucket.get``
+   - ``storage.objects.create``
+   - ``storage.objects.delete``
+   - ``storage.objects.list``
+
+#. Click on **Create**.
+
+.. thumbnail:: /images/cloud-security/gcp/gcp-bucket-role.png
+    :align: center
+    :width: 100%
+
 Creating a service account
 --------------------------
 
 Within the **Service Accounts** section, create a new service account and add the following roles depending on which module to use: ``gcp-pubsub``, ``gcp-bucket``, or both.
 
 - For ``gcp-pubsub``, add two roles with *Pub/Sub* permissions: **Pub/Sub Publisher** and **Pub/Sub Subscriber**.
-- For ``gcp-bucket``, add the following role with *Google Cloud Storage bucket* permissions: **Storage Legacy Bucket Writer**.
+- For ``gcp-bucket``, add the following role with *Google Cloud Storage bucket* permissions: **Storage Bucket Writer**.
 
+.. thumbnail:: /images/cloud-security/gcp/gcp-service-account.png
+    :align: center
+    :width: 100%
 
 Creating a private key
 ----------------------
