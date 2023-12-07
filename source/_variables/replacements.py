@@ -33,6 +33,8 @@ custom_replacements = {
     "|DEB_AGENT_URL|" : "https://packages.wazuh.com/4.x/apt/pool/main/w/wazuh-agent/wazuh-agent",
     "|DEB_MANAGER_URL|" : "https://packages.wazuh.com/4.x/apt/pool/main/w/wazuh-manager/wazuh-manager",
     #
+    "|CTI_URL|" : "https://cti.wazuh.com/api/v1/catalog/contexts/vd_1.0.0/consumers/vd_4.8.0",
+    #
     # === Global and Wazuh version (wazuh agent, manager, indexer, and dashboard)
     "|WAZUH_CURRENT_MAJOR|" : "4.x",
     "|WAZUH_CURRENT_MINOR|" : version,
