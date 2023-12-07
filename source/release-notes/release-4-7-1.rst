@@ -13,6 +13,11 @@ What's new
 
 This release includes new features or enhancements as the following:
 
+Manager
+^^^^^^^
+
+- `#20616 <https://github.com/wazuh/wazuh/pull/20616>`__ Improved WPK upgrade scripts to ensure safe execution and backup generation.
+
 Other
 ^^^^^
 
@@ -42,6 +47,8 @@ Reference                                                         Description
 `#5941 <https://github.com/wazuh/wazuh/pull/5941>`__              The installer now updates the ``merged.mg`` file permissions on upgrade.
 `#19993 <https://github.com/wazuh/wazuh/pull/19993>`__            Fixed an insecure request warning in the Shuffle integration.
 `#19888 <https://github.com/wazuh/wazuh/pull/19888>`__            Fixed a bug that corrupted cluster logs when rotated.
+`#20580 <https://github.com/wazuh/wazuh/pull/20580>`__            Fixed a bug causing the Canonical feed parser to fail in Vulnerability Detector.
+`#20545 <https://github.com/wazuh/wazuh/pull/20545>`__            Fixed a bug that allowed two simultaneous updates to occur through WPK.
 ==============================================================    =============
 
 Agent
@@ -97,5 +104,5 @@ Changelogs
 More details about these changes are provided in the changelog of each component:
 
 - `wazuh/wazuh <https://github.com/wazuh/wazuh/blob/v4.7.1/CHANGELOG.md>`__
-- `wazuh/wazuh-dashboard <https://github.com/wazuh/wazuh-kibana-app/blob/v4.7.1-2.9.0/CHANGELOG.md>`__
+- `wazuh/wazuh-dashboard <https://github.com/wazuh/wazuh-kibana-app/blob/v4.7.1-2.8.0/CHANGELOG.md>`__
 - `wazuh/wazuh-packages <https://github.com/wazuh/wazuh-packages/releases/tag/v4.7.1>`__
