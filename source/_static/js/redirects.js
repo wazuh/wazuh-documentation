@@ -66,6 +66,7 @@ removedUrls['x.y'] = [
 /* Pages added in 4.7 */
 
 newUrls['4.7'] = [
+  '/getting-started/use-cases/posture-management.html',
   '/release-notes/release-4-7-0.html',
 ];
 
