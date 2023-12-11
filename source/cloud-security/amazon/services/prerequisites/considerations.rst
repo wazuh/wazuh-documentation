@@ -76,7 +76,7 @@ Users can customize two retry configurations.
 
 You can specify the retry configuration in the ``~/.aws/config`` `configuration file <https://boto3.amazonaws.com/v1/documentation/api/latest/guide/configuration.html#using-a-configuration-file>`__. The profile section must include the ``max_attempts``, ``retry_mode``, and ``region`` settings.
 
-It is important to use the same profile as the one you chose as your :ref:`authentication method <authentication_method>`. If the authentication method doesn't have a profile, then the ``[default]`` profile must include the configurations. In case the system doesn't have this file, the `aws-s3` Wazuh module defines the following values by default:
+It's important to match this profile section with the :ref:`authentication method profile <aws_profile>`. If the authentication method lacks a profile, then the ``[default]`` profile section must include the configurations. If the configuration file is missing, the `aws-s3` Wazuh module defines the following values by default:
 
 -  ``retry_mode=standard``
 -  ``max_attempts=10``
@@ -91,7 +91,7 @@ The following example of a ``~/.aws/config`` file sets the retry parameters for 
    retry_mode=standard
 
 .. note::
-   When using a profile that is not ``[default]`` in a configuration file, the name must include the prefix word *"profile"*.
+   When using a profile different to ``default``, ensure the profile name includes the prefix word ``profile``.
 
 Additional configuration
 ~~~~~~~~~~~~~~~~~~~~~~~~
@@ -135,9 +135,9 @@ The following example of a ``~/.aws/config`` file sets the supported configurati
    signature_version = s3v4
 
 .. note::
-   All configurations for ``s3`` and ``proxy`` must start with the profile name.
+   All ``s3`` and ``proxy`` configuration sections must start with ``[profile <PROFILE-NAME>]``.
 
-To configure multiple profiles for the integration, declare each profile in the ``~/.aws/config`` file using the same pattern as before. If no profile is declared in the module configuration, the *default* profile will be used.
+To configure multiple profiles for the integration, declare each profile section in ``~/.aws/config`` with ``[profile <PROFILE-NAME>]``. If you don't declare a profile section in this configuration file, Wazuh uses the ``default`` profile.
 
 Configuring multiple services
 -----------------------------
