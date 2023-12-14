@@ -87,13 +87,13 @@ To install the dependencies, execute the following command:
 
       .. code-block:: console
 
-         # pip3 install azure-storage-blob==2.1.0 SQLAlchemy==1.3.11 pytz==2020.1
+         # pip3 install azure-storage-blob==2.1.0 SQLAlchemy==2.0.23 pytz==2020.1
 
    .. group-tab:: Python 3.11
 
       .. code-block:: console
 
-         # pip3 install --break-system-packages azure-storage-blob==2.1.0 SQLAlchemy==1.3.11 pytz==2020.1
+         # pip3 install --break-system-packages azure-storage-blob==2.1.0 SQLAlchemy==2.0.23 pytz==2020.1
 
       .. note::
          
