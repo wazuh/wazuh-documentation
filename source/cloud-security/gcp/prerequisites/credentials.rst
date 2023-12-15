@@ -16,9 +16,7 @@ To do this, it is recommended to create a service account with the Pub/Sub or St
 Creating a custom role
 ----------------------
 
-The ``gcp-bucket`` module requires permissions to access storage buckets and objects. These permissions were originally assigned using the **Storage Legacy Bucket Writer** role, but it is no longer available for selection, so it will be necessary to create a new one.
-
-To create the new role, follow these steps:
+The ``gcp-bucket`` module requires permissions to access storage buckets and objects. To create a role with the required permissions, follow these steps:
 
 #. Go to the **Roles** section and click on **Create Role**.
 #. Establish a **Title** and click on **Add Permissions**.
