@@ -339,7 +339,7 @@ To map the user with Wazuh, follow these steps:
 #. Click **Create Role mapping** and complete the empty fields with the requested information.
    
       - **Role mapping name**: Assign a name to the role mapping.
-      - **Roles**: Select the role created previously. 
+      - **Roles**: Select the role created previously and  the ``cluster_readonly`` role. This role assigns the user basic configuration reading permissions.
       - **Internal users**: Select the internal user created previously.
 
        .. thumbnail:: /images/manual/user-administration/rbac/create-new-role-mapping.png
