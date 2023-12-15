@@ -30,6 +30,7 @@ Packages
 
 - `#2559 <https://github.com/wazuh/wazuh-packages/pull/2559>`__ Updated Wazuh assistant help text for offline download option.
 - `#2627 <https://github.com/wazuh/wazuh-packages/pull/2627>`__ Updated error message for CentOS GPG key import failure.
+- `#2624 <https://github.com/wazuh/wazuh-packages/pull/2624>`__ Added macOS 14 Sonoma SCA files.
 
 Resolved issues
 ---------------
