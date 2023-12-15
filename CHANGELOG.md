@@ -9,7 +9,7 @@ All notable changes to this project will be documented in this file.
 
 ### Changed
 
-- Updated the use case: Give a user permissions to read and manage a group of agents with minimum configuration reading permissions. ([#6761](https://github.com/wazuh/wazuh-documentation/pull/6761))
+- Updated the use case: Give a user permissions to read and manage a group of agents with minimum configuration reading permissions. ([#6850](https://github.com/wazuh/wazuh-documentation/pull/6850))
 
 ## [v4.7.1]
 
