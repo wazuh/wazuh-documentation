@@ -14,14 +14,6 @@ Wazuh is a free, open source, enterprise-grade security monitoring platform that
 
 This section demonstrates how to use Wazuh to monitor Microsoft Azure security posture.
 
-Infrastructure
---------------
-
-The following components are the requirements for this demonstration.
-
--  A pre-built, ready-to-use Wazuh OVA 4.5.3. Follow the :doc:`Virtual Machine (OVA) </deployment-options/virtual-machine/virtual-machine>` installation guide to download the virtual machine (VM). This VM hosts the Wazuh central components (Wazuh server, Wazuh indexer, and Wazuh dashboard).
--  A Microsoft Azure account with an active subscription and global administrative privileges.
-
 Integrating Wazuh with Microsoft Azure
 --------------------------------------
 
@@ -31,7 +23,7 @@ Below is a summary of the actions performed on Azure to integrate with Wazuh.
 
 -  **Creating a service principal application**: This involves registering an application with a Microsoft Entra ID, which automatically creates a service principal for the application registration. The service principal is the application’s identity in the Microsoft Entra tenant and its access to resources is restricted by the roles assigned to it.
 -  **Creating a Log Analytics workspace**: The workspace is where logs and data are stored, and it has a unique workspace ID and resource ID. The Wazuh :doc:`Azure module </user-manual/reference/ossec-conf/wodle-azure-logs>` is then configured to query the workspace for new data. 
--  **Enabling Microsoft Defender for Cloud**: We configure the Microsoft Defender for Cloud to scan all resources inside an Azure Subscription. Microsoft Defender for Cloud is configured to send security log data and recommendations to the created Log Analytics workspace.
+-  **Enabling Microsoft Defender for Cloud**: Configure the Microsoft Defender for Cloud to scan all resources inside an Azure Subscription. Microsoft Defender for Cloud is configured to send security log data and recommendations to the created Log Analytics workspace.
 
 Microsoft Azure
 ---------------
@@ -39,7 +31,7 @@ Microsoft Azure
 Creating a service principal application
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-We create a Microsoft Entra ID application that Wazuh uses to authenticate to the Log Analytics Workspace. Microsoft Entra ID is the identity directory service from Microsoft.
+Create a Microsoft Entra ID application for Wazuh authentication to the Log Analytics Workspace. Microsoft Entra ID is the identity directory service from Microsoft.
 
 #. In the Search bar of the Azure portal, type ``Microsoft Entra ID``, then select the same service name. Select **App registrations** from the Default Directory on the sidebar menu.
 #. Select **+ New registration** from the command bar to create a new service principal application.
@@ -91,7 +83,7 @@ We create a Microsoft Entra ID application that Wazuh uses to authenticate to th
 Create a Log Analytics workspace
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-We create a Log Analytics Workspace that enables Wazuh to retrieve log data from Azure. 
+Create a Log Analytics Workspace that enables Wazuh to retrieve log data from Azure. 
 
 #. In the search bar of the Azure portal, type ``Log Analytics workspaces``, then select the same service name. Select **+ Create** from the command bar to create a new workspace.
 #. On the opened dialog box, select **Create new** to create a _`resource group` for the Log Analytics. Enter a unique name for the **Resource group** and click **OK**.
@@ -138,7 +130,7 @@ We create a Log Analytics Workspace that enables Wazuh to retrieve log data from
 Enable Microsoft Defender for Cloud
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-We enable and configure Microsoft Defender for Cloud to report all security misconfigurations using its CSPM module.
+Enable and configure Microsoft Defender for Cloud to report all security misconfigurations using its CSPM module.
 
 #. In the search bar of the Azure portal, type ``Microsoft Defender``, then select **Microsoft Defender for Cloud**.
 #. Select **Getting started** on the sidebar menu. On the **Getting started** page, under the **Upgrade** tab, select your subscription, and then click the **Upgrade** button at the bottom of the page.
@@ -348,7 +340,7 @@ Configure the Wazuh server to receive logs from Microsoft Azure by performing th
 Cloud Security Posture Management simulation
 --------------------------------------------
 
-We simulate sample security alerts in Microsoft Defender for Cloud. These alerts mimic real life attacks in a cloud environment.
+Simulate sample security alerts in Microsoft Defender for Cloud. These alerts mimic real life attacks in a cloud environment.
 
 To create sample alerts, follow the steps below:
 
@@ -377,16 +369,3 @@ Visualize the results by navigating to the **Modules** > **Security events** tab
    :alt: Azure security alerts on the Wazuh dashboard
    :align: center
    :width: 80%
-
-Conclusion
-----------
-
-The integration of Wazuh with Microsoft Azure offers a centralized solution for managing cloud security posture. In this blog post, we show how to integrate Azure with Wazuh using the out of the box Wazuh Azure module. The integration helps organizations with the tools and insights needed to protect their assets, comply with regulations, and maintain a strong security posture in a dynamic cloud landscape.
-
-`Wazuh <https://wazuh.com/>`_ is an open source security platform for threat detection, compliance, and incident handling. You can integrate Wazuh with third-party solutions and technologies. Wazuh also has an ever-growing `community <https://wazuh.com/community/>`__ where users are supported. To learn more about Wazuh, please check out our :doc:`documentation </index>` and `blog <https://wazuh.com/blog/>`_ posts.
-
-References
-----------
-
--  :doc:`Using Wazuh to monitor Microsoft Azure </cloud-security/azure/index>`
--  `Continuously export Microsoft Defender for Cloud data <https://learn.microsoft.com/en-us/azure/defender-for-cloud/continuous-export?tabs=azure-portal>`__

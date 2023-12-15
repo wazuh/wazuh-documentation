@@ -68,7 +68,7 @@ removedUrls['x.y'] = [
 newUrls['4.7'] = [
   '/getting-started/use-cases/posture-management.html',
   '/release-notes/release-4-7-0.html',
-  '/cloud-security/azure/posture-management.rst',
+  '/cloud-security/azure/posture-management.html',
 ];
 
 /* *** RELEASE 4.6 ****/
