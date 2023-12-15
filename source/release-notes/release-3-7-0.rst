@@ -94,7 +94,7 @@ There are several ways to monitor the Azure instances:
   :align: center
   :width: 80%
 
-To learn more about this new module and how to configure it, check out the section :ref:`azure`.
+To learn more about this new module and how to configure it, check out the section :doc:`/cloud-security/azure/index`.
 
 New module to monitor Docker
 ----------------------------
