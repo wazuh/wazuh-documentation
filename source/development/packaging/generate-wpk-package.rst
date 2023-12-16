@@ -54,6 +54,9 @@ Execute the ``generate_wpk_package.sh`` script, with the different options you d
 
 To use this tool, the previously required :ref:`certificate <create-wpk-key>` and the key must be in the same directory.
 
+Alpine Linux WPK
+^^^^^^^^^^^^^^^^
+
 Linux WPK
 ^^^^^^^^^
 
