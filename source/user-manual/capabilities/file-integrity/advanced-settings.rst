@@ -15,6 +15,25 @@ Who-data monitoring
 
 The who-data functionality allows the FIM module to obtain information about who made modifications to a monitored file. This information contains the user who made the changes to the monitored files and the program name or process used.
 
+.. _who-data-monitoring-alpine-linux:
+
+Who-data monitoring on Alpine Linux
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Before using
+~~~~~~~~~~~~
+
+Due to an incorrect installation of the Audit tool Who-data feature in Alpine Linux may not work properly. We have had this type of issue from version v3.1.1-r0 of Audit. To enable the use of Who-data until Audit makes the necessary adjustments, follow these steps.
+
+  .. code-block:: console
+
+    # cp /usr/sbin/audisp-af_unix  /sbin/audisp-af_unix
+
+    # rc-service auditd restart
+
+    # /var/ossec/bin/wazuh-control restart
+
+
 .. _who-data-monitoring-linux:
 
 Who-data monitoring on Linux
