@@ -54,17 +54,6 @@ Execute the ``generate_wpk_package.sh`` script, with the different options you d
 
 To use this tool, the previously required :ref:`certificate <create-wpk-key>` and the key must be in the same directory.
 
-Alpine Linux WPK
-^^^^^^^^^^^^^^^^
-
-Example of Alpine Linux WPK package building.
-
-.. code-block:: console
-
-  # ./generate_alpine_linux_package_wpk.sh -b v|WAZUH_CURRENT| -a x86_64 -j 6 -d /tmp/wpk -k /tmp/keys 
-
-This script builds a Wazuh |WAZUH_CURRENT| Alpine Linux WPK package (name is derived from the source package) for x86_64 architecture and stores it in ``/var/local/wazuh/*.wpk``. This action is done using the previously generated keys that are saved in ``/tmp/keys``.
-
 Linux WPK
 ^^^^^^^^^
 
