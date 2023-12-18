@@ -75,7 +75,7 @@ Proceed to configure the ``azure-logs`` module in the local configuration (``oss
     :align: center
     :width: 80%
 
-Applying the following configuration, the integration will be executed every day using a credentials file for authentication. The contents of the ``insights-operational-logs`` will be processed, downloading every blob available with ``.json`` extension from the last ``24 hours``. The content for these blobs is expected to be in ``json_inline`` format.
+Applying the following configuration, the integration will be executed every day using a credentials file for authentication. The ``insights-logs-auditlogs`` container content will be processed, downloading every blob available with the ``.json`` extension from the last ``24 hours``. The content for these blobs is expected to be in ``json_inline`` format.
 
 .. code-block:: xml
 
@@ -90,11 +90,10 @@ Applying the following configuration, the integration will be executed every day
                 <auth_path>/home/manager/Azure/storage_auth.txt</auth_path>
                 <tag>azure-activity</tag>
 
-                <container name="insights-operational-logs">
+                <container name="insights-logs-auditlogs">
                     <blobs>.json</blobs>
                     <content_type>json_inline</content_type>
                     <time_offset>24h</time_offset>
-                    <path>info-logs</path>
                 </container>
 
         </storage>
@@ -105,7 +104,7 @@ Check the :doc:`Azure module </user-manual/reference/ossec-conf/wodle-azure-logs
 Wazuh rules
 ^^^^^^^^^^^
 
-Thanks to the following rules, already included in Wazuh ruleset by default, it it possible to monitor the infrastructure activity and get the related alerts:
+Thanks to the following rules, already included in the default Wazuh ruleset, it is possible to monitor the infrastructure activity and obtain related alerts:
 
 .. code-block:: xml
 
