@@ -59,7 +59,7 @@ Wazuh dashboard
 - `#5896 <https://github.com/wazuh/wazuh-dashboard-plugins/pull/5896>`__ Added global vulnerability dashboards.
 - `#6179 <https://github.com/wazuh/wazuh-dashboard-plugins/pull/6179>`__ Added global vulnerability dashboards. `#6173 <https://github.com/wazuh/wazuh-dashboard-plugins/pull/6173>`__ `#6147 <https://github.com/wazuh/wazuh-dashboard-plugins/pull/6147>`__
 - `#5840 <https://github.com/wazuh/wazuh-dashboard-plugins/pull/5840>`__ Added an agent selector to the IT Hygiene module.
-- `#5840 <https://github.com/wazuh/wazuh-dashboard-plugins/pull/5840>`__ Moved the Wazuh menu into the side menu.
+- `#5840 <https://github.com/wazuh/wazuh-dashboard-plugins/pull/5840>`__ Moved the Wazuh menu into the side menu. `#6226 <https://github.com/wazuh/wazuh-dashboard-plugins/pull/6226>`__
 - `#5840 <https://github.com/wazuh/wazuh-dashboard-plugins/pull/5840>`__ Removed the ``disabled_roles`` and ``customization.logo.sidebar`` settings.
 - `#5840 <https://github.com/wazuh/wazuh-dashboard-plugins/pull/5840>`__ Removed module visibility configuration and removed the ``extensions.*`` settings.
 - `#6106 <https://github.com/wazuh/wazuh-dashboard-plugins/pull/6106>`__ Added query results limit of 10000 hits.
@@ -126,6 +126,7 @@ Reference                                                                    Des
 `#6177 <https://github.com/wazuh/wazuh-dashboard-plugins/pull/6177>`__       Fixed exception in **IT-Hygiene** when an agent doesn't have policies.
 `#6177 <https://github.com/wazuh/wazuh-dashboard-plugins/pull/6177>`__       Fixed exception in **Inventory** when agents don't have operating system information.
 `#6177 <https://github.com/wazuh/wazuh-dashboard-plugins/pull/6177>`__       Fixed pinned agent state in URL.
+`#6234 <https://github.com/wazuh/wazuh-dashboard-plugins/pull/6234>`__       Fixed invalid date format in **About** and **Agents** views.
 =========================================================================    =============
 
 Packages
