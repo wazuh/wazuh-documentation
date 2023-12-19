@@ -32,6 +32,7 @@ Wazuh dashboard
 ^^^^^^^^^^^^^^^
 
 - `#6145 <https://github.com/wazuh/wazuh-dashboard-plugins/pull/6145>`__ Added AngularJS dependencies.
+- `#6120 <https://github.com/wazuh/wazuh-dashboard-plugins/pull/6120>`__ Removed embedded discover component.
 
 Resolved issues
 ---------------
