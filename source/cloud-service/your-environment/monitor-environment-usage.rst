@@ -34,22 +34,22 @@ Data indexed metric
 
 The data indexed metric presents a histogram that visualizes the usage of indexed data over time. The x-axis represents time, while the y-axis indicates the amount of data in gigabyte used by your indexed data. Additionally, the metric displays the date of the oldest indexed alert.
 
-This metric allows you to monitor and evaluate if the :ref:`indexed data size and indexed data time <cloud_settings_indexed_data>` settings are sufficient for your needs. The environment automatically rotates data when the used bytes exceed the indexed data size or when the date of the alerts surpasses the indexed data time.
+This metric allows you to monitor and evaluate if the :ref:`indexed data capacity and indexed data retention <cloud_settings_indexed_data>` settings are sufficient for your needs. The environment automatically rotates data when the used bytes exceed the indexed data capacity or when the date of the alerts surpasses the indexed data retention.
 
-When the environment age is less than the indexed data time setting, your oldest indexed alert should match the environment age. Otherwise, it should match the indexed data time. In both cases, your configuration is correct, and no action is needed. If not, it indicates premature data rotation. In this case, we recommend increasing the :ref:`indexed data size <cloud_settings_indexed_data>` setting or refining your rule configurations to filter out less critical events, reducing the indexed data.
+When the environment age is less than the indexed data retention setting, your oldest indexed alert should match the environment age. Otherwise, it should match the indexed data retention. In both cases, your configuration is correct, and no action is needed. If not, it indicates premature data rotation. In this case, we recommend increasing the :ref:`indexed data capacity <cloud_settings_indexed_data>` setting or refining your rule configurations to filter out less critical events, reducing the indexed data.
 
-Your oldest indexed alert will never be dated beyond the indexed data time setting because alerts are rotated in such cases.
+Your oldest indexed alert will never be dated beyond the indexed data retention setting because alerts are rotated in such cases.
 
 By monitoring this metric, you can ensure that your indexed data storage meets your requirements and take necessary actions, such as upgrading or downgrading the settings, to maintain optimal storage and retention of data.
 
 Events dropped over time and Events processed vs dropped metrics
 ----------------------------------------------------------------
 
-The "Events Dropped Over Time" metric displays a histogram of events that have been lost or dropped over a specific period. These events are dropped because the rate of incoming events exceeds the limit set by the data ingestion rate setting, causing the event queues to become full and resulting in event loss.
+The "Events Dropped Over Time" metric displays a histogram of events that have been lost or dropped over a specific period. These events are dropped because the rate of incoming events exceeds the limit set by the average/Peak EPS setting, causing the event queues to become full and resulting in event loss.
 
-The "Events Processed vs. Dropped" pie chart provides a visual comparison between the number of events that were successfully processed and those that were dropped due to exceeding the data ingestion rate setting.
+The "Events Processed vs. Dropped" pie chart provides a visual comparison between the number of events that were successfully processed and those that were dropped due to exceeding the average/Peak EPS setting.
 
-If you observe a consistent pattern of event drops over time, it's an indication that your environment may need an adjustment to accommodate the higher event rate. Consider increasing the :ref:`data ingestion rate <cloud_settings_data_ingestion_rate>` setting to avoid ongoing event drops.
+If you observe a consistent pattern of event drops over time, it's an indication that your environment may need an adjustment to accommodate the higher event rate. Consider increasing the :ref:`average/Peak EPS <cloud_settings_data_ingestion_rate>` setting to avoid ongoing event drops.
 
 Also, as an alternative, you can adjust your agent configuration:
 

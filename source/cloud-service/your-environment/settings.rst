@@ -36,11 +36,11 @@ The indexed data, previously known as hot storage, includes the data available o
 
 Two settings define the behavior of the indexed data:
 
-- Indexed data time: It determines the maximum duration for which data remains indexed. This is a basic setting.
+- Indexed data retention: It determines the maximum duration for which data remains indexed. This is a basic setting.
 
-- Indexed data size: It defines the maximum size, in bytes, of the indexed data. This setting is equivalent to what was previously called a "tier." This is an advanced setting, and the interface provides a suggestion when selecting the Indexed data time.
+- Indexed data capacity: It defines the maximum size, in bytes, of the indexed data. This setting is equivalent to what was previously called a "tier." This is an advanced setting, and the interface provides a suggestion when selecting the Indexed data retention.
 
-Data remains indexed until either the indexed data time or the indexed data size is reached. In other words, once either of the settings' values is reached, data rotation will occur (removing the oldest data) until the settings' conditions are met.
+Data remains indexed until either the indexed data retention or the indexed data capacity is reached. In other words, once either of the settings' values is reached, data rotation will occur (removing the oldest data) until the settings' conditions are met.
 
 
 .. _cloud_settings_archived_data:
@@ -54,14 +54,14 @@ When the specified time is reached, data outside that time range will be deleted
 
 .. _cloud_support_type:
 
-Support type
+Support plan
 ^^^^^^^^^^^^
 
 This setting indicates whether the support level is premium or standard.
 
 .. _cloud_settings_data_ingestion_rate:
 
-Data ingestion rate
+Average/Peak EPS
 ^^^^^^^^^^^^^^^^^^^
 
 It represents the maximum number of events per second (EPS) that the environment can analyze. This is an advanced setting, and the interface provides a suggestion when selecting the Active agents setting.
@@ -71,16 +71,16 @@ If the ingestion rate is exceeded, events will start to queue. However, if the q
 The environment will be configured with the `limits eps option <https://documentation.wazuh.com/current/user-manual/reference/ossec-conf/global.html#limits>`_ using the following parameters:
 
 - timeframe = 1 seconds
-- maximum = Data ingestion rate setting / number of server nodes
+- maximum = Average/Peak EPS setting / number of server nodes
 
-The number of server nodes is automatically determined by the cloud service based on the workload. For instance, if the Data ingestion rate setting is 900 EPS and there is a cluster of 2 nodes at the current time, each node can process up to 450 events per second.
+The number of server nodes is automatically determined by the cloud service based on the workload. For instance, if the Average/Peak EPS setting is 900 EPS and there is a cluster of 2 nodes at the current time, each node can process up to 450 events per second.
 
 .. _cloud_settings_adjust:
 
 Adjusting environment settings
 ------------------------------
 
-Managing your environment settings is crucial to meeting your evolving needs and optimizing the performance of your cloud environment. While some settings can be determined upfront, such as the number of active agents, indexed data time, archived data, and support type, it's important to note that these requirements may change over time.
+Managing your environment settings is crucial to meeting your evolving needs and optimizing the performance of your cloud environment. While some settings can be determined upfront, such as the number of active agents, indexed data retention, archived data, and support plan, it's important to note that these requirements may change over time.
 
 Additionally, advanced settings may be more challenging to determine in advance. While the interface provides recommendations based on our experience, your specific workload may differ. That's why we highly recommend deploying, monitoring, and adjusting the settings as needed to align with your evolving requirements.
 
