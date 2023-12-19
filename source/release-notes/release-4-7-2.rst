@@ -17,7 +17,7 @@ Wazuh dashboard
 ^^^^^^^^^^^^^^^
 
 - `#6191 <https://github.com/wazuh/wazuh-dashboard-plugins/pull/6191>`__ Added **Hostname** and **Board Serial** information to **Agents** > **Inventory data**.
-
+- `#6208 <https://github.com/wazuh/wazuh-dashboard-plugins/pull/6208>`__ Added contextual information to the deploy agent steps.
 
 Resolved issues
 ---------------
@@ -27,12 +27,13 @@ This release resolves known issues as the following:
 Wazuh dashboard
 ^^^^^^^^^^^^^^^
 
-==============================================================================    =============
- Reference                                                                         Description
-==============================================================================    =============
-`#6185 <https://github.com/wazuh/wazuh-dashboard-plugins/pull/6185>`__            Fixed Agents preview page load when there are no registered agents.
-==============================================================================    =============
-
+=================================================================================================================================================    =============
+ Reference                                                                                                                                           Description
+=================================================================================================================================================    =============
+`#6185 <https://github.com/wazuh/wazuh-dashboard-plugins/pull/6185>`__                                                                               Fixed Agents preview page load when there are no registered agents.
+`#6206 <https://github.com/wazuh/wazuh-dashboard-plugins/pull/6206>`__, `#6213 <https://github.com/wazuh/wazuh-dashboard-plugins/pull/6213>`__       Changed the endpoint to get Wazuh server auth configuration to ``manager/configuration/auth/auth``.
+`#6224 <https://github.com/wazuh/wazuh-dashboard-plugins/pull/6224>`__                                                                               Fixed error navigating back to agent in some scenarios.
+=================================================================================================================================================    =============
 
 Changelogs
 ----------
