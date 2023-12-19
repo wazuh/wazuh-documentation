@@ -42,6 +42,37 @@ For Debian based systems, use the following command:
 
       # apt-get install auditd
 
+For Alpine Linux systems:
+
+   .. code-block:: console
+
+      # apk add audit=3.1.1-r0
+      # rc-update add auditd default
+      # cp /usr/sbin/audisp-af_unix /sbin/audisp-af_unix
+
+
+.. note::
+
+      `Audit 3.1.1 changelog <https://people.redhat.com/sgrubb/audit/ChangeLog>`_. indicates that the audispd af_unix plugin was moved to a standalone program. For whodata to successfully connect to the Audit daemon, it is necessary to install this plugin.
+
+      In Red Hat based systems, use the following command to install the audspd af_unix plugin:
+
+         .. code-block:: console
+
+            # yum install audispd-plugins
+
+      For Debian based systems, use the following command to install the audspd af_unix plugin:
+
+         .. code-block:: console
+
+            # apt-get install audispd-plugins
+
+      In any case, you should restart the Auditd daemon.
+
+         .. code-block:: console
+
+            # service auditd restart
+
 Perform the following steps to enable who-data monitoring. In this example, you configure who-data monitoring for ``/etc`` directory.
 
 #. Edit the Wazuh agent ``/var/ossec/etc/ossec.conf`` configuration file and add the configuration below:
