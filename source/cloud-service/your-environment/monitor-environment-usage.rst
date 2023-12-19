@@ -45,11 +45,11 @@ By monitoring this metric, you can ensure that your indexed data storage meets y
 Events dropped over time and Events processed vs dropped metrics
 ----------------------------------------------------------------
 
-The "Events Dropped Over Time" metric displays a histogram of events that have been lost or dropped over a specific period. These events are dropped because the rate of incoming events exceeds the limit set by the average/Peak EPS setting, causing the event queues to become full and resulting in event loss.
+The "Events Dropped Over Time" metric displays a histogram of events that have been lost or dropped over a specific period. These events are dropped because the rate of incoming events exceeds the limit set by the average/peak EPS setting, causing the event queues to become full and resulting in event loss.
 
-The "Events Processed vs. Dropped" pie chart provides a visual comparison between the number of events that were successfully processed and those that were dropped due to exceeding the average/Peak EPS setting.
+The "Events Processed vs. Dropped" pie chart provides a visual comparison between the number of events that were successfully processed and those that were dropped due to exceeding the average/peak EPS setting.
 
-If you observe a consistent pattern of event drops over time, it's an indication that your environment may need an adjustment to accommodate the higher event rate. Consider increasing the :ref:`average/Peak EPS <cloud_settings_data_ingestion_rate>` setting to avoid ongoing event drops.
+If you observe a consistent pattern of event drops over time, it's an indication that your environment may need an adjustment to accommodate the higher event rate. Consider increasing the :ref:`average/peak EPS <cloud_settings_data_ingestion_rate>` setting to avoid ongoing event drops.
 
 Also, as an alternative, you can adjust your agent configuration:
 

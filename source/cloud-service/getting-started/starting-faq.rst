@@ -43,7 +43,7 @@ Cloud service FAQ
 
 - `How is indexed data rotated?`_
 
-- `What happens if the average/Peak EPS is exceeded?`_
+- `What happens if the average/peak EPS is exceeded?`_
 
 - `Can I cancel at any time?`_
   
@@ -128,10 +128,10 @@ How is indexed data rotated?
 
 Data rotation is determined by two conditions: the indexed data retention and the indexed data capacity. For instance, if you have set a 3-month indexed data retention and a 100GB indexed data capacity, and you consume the entire 100GB within the first month, the data will start rotating. Similarly, even if you have not utilized all 100GB, the data from the first month will be rotated by the fourth month if only 20GB is used.
 
-What happens if the average/Peak EPS is exceeded?
+What happens if the average/peak EPS is exceeded?
 ----------------------------------------------------
 
-If you send more events per second than allowed by the **average/Peak EPS** setting, events start queuing, and if the queue becomes full, the incoming events will be discarded, which may lead to potential event loss.
+If you send more events per second than allowed by the **average/peak EPS** setting, events start queuing, and if the queue becomes full, the incoming events will be discarded, which may lead to potential event loss.
 
 Can I cancel at any time?
 -------------------------
