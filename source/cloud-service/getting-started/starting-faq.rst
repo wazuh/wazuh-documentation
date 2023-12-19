@@ -79,7 +79,7 @@ Yes, the Wazuh Cloud platform is compliant with SOC 2 standards.
 How can I get support?
 ----------------------
 
-Every environment includes support after the first payment. You can contact the Wazuh team anytime through the Help section on your Wazuh Cloud Console. You can also fill out `this form <https://wazuh.com/cloud/#subscription>`_ to get help from the Wazuh team.
+Every environment includes support after the first payment. You can contact the Wazuh team anytime through the Help section on your Wazuh Cloud Console. You can also fill out `this form <https://wazuh.com/wazuh-cloud-info/>`_ to get help from the Wazuh team.
 
 Where is Wazuh Cloud hosted?
 ----------------------------
