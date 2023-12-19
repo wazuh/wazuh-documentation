@@ -214,6 +214,7 @@ You must include the IP addresses of the servers where you are installing each a
    }
    class { 'wazuh::filebeat_oss':
      filebeat_oss_indexer_ip => "$node1host",
+     wazuh_node_name = 'master',
      stage => manager
    }
    }
@@ -229,6 +230,11 @@ You must include the IP addresses of the servers where you are installing each a
      ossec_cluster_bind_addr => "$masterhost",
      ossec_cluster_nodes => ["$masterhost"],
      ossec_cluster_disabled => 'no',
+     stage => manager
+   }
+   class { 'wazuh::filebeat_oss':
+     filebeat_oss_indexer_ip => "$node1host",
+     wazuh_node_name = 'worker',
      stage => manager
    }
    }
