@@ -155,7 +155,7 @@ Wazuh provides a set of predefined dashboards and visualizations out of the box,
 
 The Wazuh dashboard enables users to explore log entries in real time, apply various filters, and drill down into specific events or time ranges. This flexibility allows security analysts to identify trends, anomalies, and potential security incidents within their environment.
 
-Wazuh allows users to create customized dashboards that display key performance indicators, security metrics, and real-time monitoring of critical systems and applications. Users can assemble multiple visualizations, such as pie charts, line graphs, and heat maps, onto a single dashboard, providing a holistic view of their infrastructure's security posture. The following blog posts detailed how to query and create custom dashboards:
+Wazuh allows users to :doc:`create customized dashboards </user-manual/wazuh-dashboard/creating-custom-dashboards>` that display key performance indicators, security metrics, and real-time monitoring of critical systems and applications. Users can assemble multiple visualizations, such as pie charts, line graphs, and heat maps, onto a single dashboard, providing a holistic view of their infrastructure's security posture. The following blog posts detailed how to query and create custom dashboards:
 
 -  `Monitoring macOS resources with Wazuh <https://wazuh.com/blog/monitoring-macos-resources/>`__
 -  `Monitoring Linux resources with Wazuh <https://wazuh.com/blog/monitoring-linux-resource-usage-with-wazuh/>`__

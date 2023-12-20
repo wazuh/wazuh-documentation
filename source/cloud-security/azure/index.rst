@@ -3,8 +3,6 @@
 .. meta::
   :description: Learn more about how to use Wazuh to monitor Microsoft Azure infrastructures in this section of the Wazuh documentation. 
 
-.. _azure:
-
 Using Wazuh to monitor Microsoft Azure
 ======================================
 
@@ -16,8 +14,9 @@ This section provides instructions for monitoring `Microsoft Azure` infrastructu
 
 .. topic:: Contents
 
-    .. toctree::
-       :maxdepth: 2
+   .. toctree::
+      :maxdepth: 2
 
-       monitoring-instances
-       activity-services/index
+      monitoring-instances
+      activity-services/index
+      posture-management
