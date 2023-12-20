@@ -17,7 +17,8 @@ Installing dependencies
 Python
 ------
 
-The Azure module requires Python 3. It is compatible with Python 3.7 and above.
+The Azure module requires `Python 3 <https://www.python.org/>`__. Specifically, it's compatible with
+`Python |PYTHON_CLOUD_CONTAINERS_MIN|–|PYTHON_CLOUD_CONTAINERS_MAX| <https://www.python.org/downloads/>`_. While later Python versions should work as well, we can't assure they are compatible.
 
 .. tabs::
 
@@ -73,12 +74,12 @@ It is recommended to use a pip version greater than or equal to 19.3 to ease the
          
          To prevent the modification, you can run ``pip3 install --upgrade pip`` within a virtual environment. You must update the ``azure-logs`` script shebang with your virtual environment interpreter, for example, ``#!/path/to/your/virtual/environment/bin/python3``. 
 
-Azure Storage Blobs client library for Python
----------------------------------------------
+Azure Storage client library for Python
+---------------------------------------
 
 `Azure Storage Blobs client library <https://pypi.org/project/azure-storage-blob/>`_ is the official Python library for Microsoft's Azure Blob storage.
 
-To install the Azure Storage Blobs client library for Python, execute the following command:
+To install the dependencies, execute the following command:
 
 .. tabs::
 
