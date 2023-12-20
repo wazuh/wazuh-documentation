@@ -19,7 +19,7 @@ Endpoint security                  Threat intelligence               Security op
 =================================  ================================  ==============================  ==================================
 :doc:`configuration-assessment`    :doc:`threat-hunting`             :doc:`incident-response`        :doc:`container-security`
 :doc:`malware-detection`           :doc:`log-analysis`               :doc:`regulatory-compliance`    :doc:`Workload protection <cloud-workload-protection>`
-:doc:`file-integrity`              :doc:`vulnerability-detection`    :doc:`it-hygiene`
+:doc:`file-integrity`              :doc:`vulnerability-detection`    :doc:`it-hygiene`               :doc:`posture-management`
 =================================  ================================  ==============================  ==================================
 
 .. toctree::
@@ -36,3 +36,4 @@ Endpoint security                  Threat intelligence               Security op
    it-hygiene
    container-security
    cloud-workload-protection
+   posture-management
