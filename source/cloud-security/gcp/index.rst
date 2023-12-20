@@ -70,3 +70,4 @@ In addition, it is possible to use multiple threads to pull a larger number of m
 
       prerequisites/index
       supported-services/index
+      posture-management

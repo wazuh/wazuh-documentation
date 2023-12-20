@@ -3,8 +3,8 @@
 .. meta::
   :description: Wazuh 4.7.1 has been released. Check out our release notes to discover the changes and additions of this release.
 
-4.7.1 Release notes - TBD
-=========================
+4.7.1 Release notes - 20 December 2023
+======================================
 
 This section lists the changes in version 4.7.1. Every update of the Wazuh solution is cumulative and includes all enhancements and fixes from previous releases.
 
@@ -12,6 +12,11 @@ What's new
 ----------
 
 This release includes new features or enhancements as the following:
+
+Agent
+^^^^^
+
+- `#20616 <https://github.com/wazuh/wazuh/pull/20616>`__ Improved WPK upgrade scripts to ensure safe execution and backup generation.
 
 Other
 ^^^^^
@@ -25,6 +30,7 @@ Packages
 
 - `#2559 <https://github.com/wazuh/wazuh-packages/pull/2559>`__ Updated Wazuh assistant help text for offline download option.
 - `#2627 <https://github.com/wazuh/wazuh-packages/pull/2627>`__ Updated error message for CentOS GPG key import failure.
+- `#2624 <https://github.com/wazuh/wazuh-packages/pull/2624>`__ Added macOS 14 Sonoma SCA files.
 
 Resolved issues
 ---------------
@@ -42,6 +48,7 @@ Reference                                                         Description
 `#5941 <https://github.com/wazuh/wazuh/pull/5941>`__              The installer now updates the ``merged.mg`` file permissions on upgrade.
 `#19993 <https://github.com/wazuh/wazuh/pull/19993>`__            Fixed an insecure request warning in the Shuffle integration.
 `#19888 <https://github.com/wazuh/wazuh/pull/19888>`__            Fixed a bug that corrupted cluster logs when rotated.
+`#20580 <https://github.com/wazuh/wazuh/pull/20580>`__            Fixed a bug causing the Canonical feed parser to fail in Vulnerability Detector.
 ==============================================================    =============
 
 Agent
@@ -55,6 +62,7 @@ Reference                                                         Description
 `#20169 <https://github.com/wazuh/wazuh/pull/20169>`__            Fixed a bug in the FIM decoder at ``wazuh-analysisd`` that ignored Windows Registry events from agents earlier than 4.6.0.
 `#20250 <https://github.com/wazuh/wazuh/pull/20250>`__            Fixed multiple bugs in the Syscollector decoder at ``wazuh-analysisd`` that did not sanitize the input data properly.
 `#20284 <https://github.com/wazuh/wazuh/pull/20284>`__            Added the ``pyarrow_hotfix`` dependency to fix the pyarrow ``CVE-2023-47248`` vulnerability in the AWS integration.
+`#20598 <https://github.com/wazuh/wazuh/pull/20598>`__            Fixed a bug that allowed two simultaneous updates to occur through WPK.
 ==============================================================    =============
 
 RESTful API
@@ -97,5 +105,5 @@ Changelogs
 More details about these changes are provided in the changelog of each component:
 
 - `wazuh/wazuh <https://github.com/wazuh/wazuh/blob/v4.7.1/CHANGELOG.md>`__
-- `wazuh/wazuh-dashboard <https://github.com/wazuh/wazuh-kibana-app/blob/v4.7.1-2.9.0/CHANGELOG.md>`__
+- `wazuh/wazuh-dashboard <https://github.com/wazuh/wazuh-kibana-app/blob/v4.7.1-2.8.0/CHANGELOG.md>`__
 - `wazuh/wazuh-packages <https://github.com/wazuh/wazuh-packages/releases/tag/v4.7.1>`__

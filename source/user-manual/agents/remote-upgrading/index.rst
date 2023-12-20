@@ -8,6 +8,10 @@
 Remote upgrading
 ==================
 
+.. warning::
+   
+   Remote upgrade is temporarily unavailable in |WAZUH_CURRENT_MINOR|.
+
 .. topic:: Contents
 
     .. toctree::
