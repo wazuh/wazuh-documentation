@@ -55,7 +55,7 @@ For Alpine Linux systems:
 
       `Audit 3.1.1 changelog <https://people.redhat.com/sgrubb/audit/ChangeLog>`_. indicates that the audispd af_unix plugin was moved to a standalone program. For whodata to successfully connect to the Audit daemon, it is necessary to install this plugin.
 
-      In Red Hat based systems, use the following command to install the audspd af_unix plugin:
+      In Red Hat based systems, use the following command to install the audispd af_unix plugin:
 
          .. code-block:: console
 
