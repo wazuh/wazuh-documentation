@@ -409,6 +409,7 @@ decoders:update
 
 decoders:delete
 ~~~~~~~~~~~~~~~~~~~~~~~~~~
+- :api-ref:`PUT /decoders/files/{filename} <operation/api.controllers.decoder_controller.put_file>` (`*:*`_)
 - :api-ref:`DELETE /decoders/files/{filename} <operation/api.controllers.decoder_controller.delete_file>` (`decoder:file`_)
 
 Events
@@ -554,6 +555,7 @@ rules:update
 
 rules:delete
 ~~~~~~~~~~~~~~~~~~~~~~~~~~
+- :api-ref:`PUT /rules/files/{filename} <operation/api.controllers.rule_controller.put_file>` (`*:*`_)
 - :api-ref:`DELETE /rules/files/{filename} <operation/api.controllers.rule_controller.delete_file>` (`rule:file`_)
 
 
