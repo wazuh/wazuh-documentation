@@ -49,6 +49,7 @@ For Alpine Linux systems:
       # apk add audit=3.1.1-r0
       # rc-update add auditd default
       # cp /usr/sbin/audisp-af_unix /sbin/audisp-af_unix
+      # rc-service auditd restart
 
 
 .. note::
