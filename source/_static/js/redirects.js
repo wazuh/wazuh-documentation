@@ -68,6 +68,7 @@ removedUrls['x.y'] = [
 newUrls['4.7'] = [
   '/getting-started/use-cases/posture-management.html',
   '/release-notes/release-4-7-0.html',
+  '/release-notes/release-4-7-1.html',
   '/cloud-security/azure/posture-management.html',
   '/cloud-security/gcp/posture-management.html',
 ];
