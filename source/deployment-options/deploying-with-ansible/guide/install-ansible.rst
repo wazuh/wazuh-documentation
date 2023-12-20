@@ -57,7 +57,7 @@ Installation on CentOS/RHEL/Fedora
 
 .. tabs::
 
-   .. tab:: CentOS/RHEL 6, 7, and Fedora
+   .. tab:: CentOS/RHEL 7 and Fedora
 
       #. Install the `EPEL <http://fedoraproject.org/wiki/EPEL>`__ repository:
 

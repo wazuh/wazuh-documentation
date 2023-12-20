@@ -19,7 +19,7 @@ Installing dependencies
     
         .. tabs::
           
-            .. tab:: CentOS 6/7
+            .. tab:: CentOS 7
             
                 .. code-block:: console
                 
