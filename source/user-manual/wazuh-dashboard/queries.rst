@@ -63,13 +63,6 @@ These queries include a field, an operator and a value. This mode is activated w
 
         The tokens can be separated by whitespaces.
 
-Note that some search bars include an implicit filter, that is added to the user query. For example, the search bar in the **Endpoints Summary** section includes the ``id!=000`` filter.
-
-.. thumbnail:: ../../images/wazuh-dashboard/queries/search-bar-wql-with-implicit-filter.png
-    :title: Search bar using WQL with implicit filter
-    :align: left
-    :width: 100%
-
 .. _search_term_queries:
 
 Search term queries
