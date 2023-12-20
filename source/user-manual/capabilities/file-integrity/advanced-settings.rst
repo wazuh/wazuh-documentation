@@ -61,7 +61,7 @@ For Alpine Linux systems:
 
             # yum install audispd-plugins
 
-      For Debian based systems, use the following command to install the audspd af_unix plugin:
+      For Debian based systems, use the following command to install the audispd af_unix plugin:
 
          .. code-block:: console
 
