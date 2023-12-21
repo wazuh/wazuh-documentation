@@ -2,7 +2,7 @@
 
 .. meta::
    :description: Learn how to upgrade the Wazuh indexer, server, and dashboard to the latest version available.
-  
+
 Wazuh central components
 ========================
 
@@ -15,7 +15,7 @@ Preparing the upgrade
 
 In the case Wazuh is installed in a multi-node cluster configuration, repeat the following steps for every node.
 
-#. Add the Wazuh repository. You can skip this step if the repository is already present and enabled on the node. 
+#. Add the Wazuh repository. You can skip this step if the repository is already present and enabled on the node.
 
    .. tabs::
 
@@ -56,7 +56,7 @@ In the case Wazuh is installed in a multi-node cluster configuration, repeat the
 Upgrading the Wazuh indexer
 ---------------------------
 
-.. note:: 
+.. note::
 
    Note that this upgrade process doesn't update plugins installed manually. Outdated plugins might cause the upgrade to fail.
 
@@ -165,7 +165,7 @@ Upgrading the Wazuh server
 
 When upgrading a multi-node Wazuh manager cluster, run the upgrade in every node to make all the Wazuh manager nodes join the cluster. Start with the master node to reduce server downtime.
 
-   .. note:: Upgrading from Wazuh 4.2.x or lower creates the ``wazuh`` operating system user and group to replace ``ossec``. To avoid upgrade conflicts, make sure that the ``wazuh`` user and group are not present in your operating system.  
+   .. note:: Upgrading from Wazuh 4.2.x or lower creates the ``wazuh`` operating system user and group to replace ``ossec``. To avoid upgrade conflicts, make sure that the ``wazuh`` user and group are not present in your operating system.
 
 #. Upgrade the Wazuh manager to the latest version.
 
@@ -192,8 +192,8 @@ When upgrading a multi-node Wazuh manager cluster, run the upgrade in every node
 
     .. code-block:: console
 
-      # curl -s https://packages.wazuh.com/4.x/filebeat/wazuh-filebeat-0.2.tar.gz | sudo tar -xvz -C /usr/share/filebeat/module   
-               
+      # curl -s https://packages.wazuh.com/4.x/filebeat/wazuh-filebeat-0.4.tar.gz | sudo tar -xvz -C /usr/share/filebeat/module
+
 
 #. Download the alerts template:
 
@@ -201,21 +201,22 @@ When upgrading a multi-node Wazuh manager cluster, run the upgrade in every node
 
       # curl -so /etc/filebeat/wazuh-template.json https://raw.githubusercontent.com/wazuh/wazuh/v|WAZUH_CURRENT|/extensions/elasticsearch/7.x/wazuh-template.json
       # chmod go+r /etc/filebeat/wazuh-template.json
-      
+
 #. Restart Filebeat:
 
     .. include:: /_templates/installations/basic/elastic/common/enable_filebeat.rst
 
-#. Upload the new Wazuh template. This step can be omitted for Wazuh indexer single-node installations.
+#. Upload the new Wazuh template and pipelines for Filebeat.
 
    .. code-block:: console
 
+      # filebeat setup --pipelines
       # filebeat setup --index-management -E output.logstash.enabled=false
-      
+
 Upgrading the Wazuh dashboard
 -----------------------------
 
-.. note:: 
+.. note::
 
    Note that this upgrade process doesn't update plugins installed manually. Outdated plugins might cause the upgrade to fail.
 

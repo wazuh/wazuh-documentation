@@ -73,8 +73,12 @@ newUrls['4.8'] = [
 /* Pages added in 4.7 */
 
 newUrls['4.7'] = [
+  '/getting-started/use-cases/posture-management.html',
   '/release-notes/release-4-7-0.html',
   '/release-notes/release-4-7-1.html',
+  '/release-notes/release-4-7-2.html',
+  '/cloud-security/azure/posture-management.html',
+  '/cloud-security/gcp/posture-management.html',
 ];
 
 /* *** RELEASE 4.6 ****/
@@ -97,6 +101,7 @@ newUrls['4.6'] = [
   '/cloud-security/ms-graph/monitoring-ms-graph-activity.html',
   '/user-manual/reference/ossec-conf/ms-graph-module.html',
   '/user-manual/wazuh-dashboard/queries.html',
+  '/user-manual/wazuh-dashboard/creating-custom-dashboards.html',
   '/cloud-security/azure/activity-services/entra/index.html',
   '/cloud-security/azure/activity-services/entra/graph.html',
   '/user-manual/user-administration/single-sign-on/administrator/microsoft-entra-id.html',

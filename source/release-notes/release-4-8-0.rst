@@ -56,14 +56,39 @@ Wazuh dashboard
 - `#5791 <https://github.com/wazuh/wazuh-dashboard-plugins/pull/5791>`__ Added remember server address check.
 - `#6093 <https://github.com/wazuh/wazuh-dashboard-plugins/pull/6093>`__ Added a notification about new Wazuh updates and a button to check their availability.
 - `#6083 <https://github.com/wazuh/wazuh-dashboard-plugins/pull/6083>`__ Added the ``ssl_agent_ca`` configuration to the **SSL Settings** form.
-- `#5896 <https://github.com/wazuh/wazuh-dashboard-plugins/pull/5896>`__ Added global vulnerabilities dashboards.
+- `#5896 <https://github.com/wazuh/wazuh-dashboard-plugins/pull/5896>`__ Added global vulnerability dashboards.
+- `#6179 <https://github.com/wazuh/wazuh-dashboard-plugins/pull/6179>`__ Added global vulnerability dashboards. `#6173 <https://github.com/wazuh/wazuh-dashboard-plugins/pull/6173>`__ `#6147 <https://github.com/wazuh/wazuh-dashboard-plugins/pull/6147>`__
 - `#5840 <https://github.com/wazuh/wazuh-dashboard-plugins/pull/5840>`__ Added an agent selector to the IT Hygiene module.
-- `#5840 <https://github.com/wazuh/wazuh-dashboard-plugins/pull/5840>`__ Moved the Wazuh menu into the side menu.
+- `#5840 <https://github.com/wazuh/wazuh-dashboard-plugins/pull/5840>`__ Moved the Wazuh menu into the side menu. `#6226 <https://github.com/wazuh/wazuh-dashboard-plugins/pull/6226>`__
 - `#5840 <https://github.com/wazuh/wazuh-dashboard-plugins/pull/5840>`__ Removed the ``disabled_roles`` and ``customization.logo.sidebar`` settings.
 - `#5840 <https://github.com/wazuh/wazuh-dashboard-plugins/pull/5840>`__ Removed module visibility configuration and removed the ``extensions.*`` settings.
 - `#6106 <https://github.com/wazuh/wazuh-dashboard-plugins/pull/6106>`__ Added query results limit of 10000 hits.
 - `#6035 <https://github.com/wazuh/wazuh-dashboard-plugins/pull/6035>`__ Improved the implementation of module dashboards.
 - `#6067 <https://github.com/wazuh/wazuh-dashboard-plugins/pull/6067>`__ Reorganized tabs order in all modules.
+- `#6174 <https://github.com/wazuh/wazuh-dashboard-plugins/pull/6174>`__ Removed the implicit filter of WQL language of the search bar UI.
+- `#6176 <https://github.com/wazuh/wazuh-dashboard-plugins/pull/6176>`__ Added a redirection button to Endpoint Summary from IT Hygiene application.
+- `#6176 <https://github.com/wazuh/wazuh-dashboard-plugins/pull/6176>`__ Removed the application menu in the IT Hygiene application.
+
+Packages 
+^^^^^^^^
+
+- `#2332 <https://github.com/wazuh/wazuh-packages/pull/2332>`_ Added check into the installation assistant to prevent the use of public IP addresses.
+- `#2582 <https://github.com/wazuh/wazuh-packages/pull/2582>`_ Added the ISM init script to the Wazuh indexer package to handle the creation of ISM policies.
+- `#2584 <https://github.com/wazuh/wazuh-packages/pull/2584>`_ Added ISM init script to the installation assistant.
+- `#2365 <https://github.com/wazuh/wazuh-packages/pull/2365>`_ Removed the ``postProvision.sh`` script. It's no longer used in OVA generation.
+- `#2364 <https://github.com/wazuh/wazuh-packages/pull/2364>`_ Added ``curl`` error messages in downloads.
+- `#2469 <https://github.com/wazuh/wazuh-packages/pull/2469>`_ Improved debug output in the installation assistant.
+- `#2422 <https://github.com/wazuh/wazuh-packages/pull/2422>`_ Enabled ``localhost`` domain registration in the installation assistant and ``cert-tool``.
+- `#2300 <https://github.com/wazuh/wazuh-packages/pull/2300>`_ Added SCA policy for Rocky Linux 8 in SPECS.
+- `#2557 <https://github.com/wazuh/wazuh-packages/pull/2557>`_ Added SCA policy for Amazon Linux 2023 in SPECS.
+- `#2558 <https://github.com/wazuh/wazuh-packages/pull/2558>`_ Wazuh password tool now recognizes UI created users.
+- `#2562 <https://github.com/wazuh/wazuh-packages/pull/2562>`_ Bumped Wazuh indexer to OpenSearch 2.10.0.
+- `#2563 <https://github.com/wazuh/wazuh-packages/pull/2563>`_ Bumped Wazuh dashboard to OpenSearch Dashboards 2.10.0.
+- `#2577 <https://github.com/wazuh/wazuh-packages/pull/2577>`_ Addedd APT and YUM lock logic to the Wazuh instalaltion assistant.
+- `#2553 <https://github.com/wazuh/wazuh-packages/pull/2553>`_ Added new role to grant ISM API permissions.
+- `#2164 <https://github.com/wazuh/wazuh-packages/pull/2164>`_ Deprecated CentOS 6 and Debian 7 for the Wazuh manager compilation, while still supporting them in the Wazuh agent compilation.
+- `#2588 <https://github.com/wazuh/wazuh-packages/pull/2588>`_ Added logic to the installation assistant to check for clean Wazuh central components removal.
+- `#2615 <https://github.com/wazuh/wazuh-packages/pull/2615>`_ Added branding images to the header of Wazuh dashboard.
 
 Resolved issues
 ---------------
@@ -98,7 +123,21 @@ Reference                                                                    Des
 =========================================================================    =============
 `#5840 <https://github.com/wazuh/wazuh-dashboard-plugins/pull/5840>`__       Fixed a problem with the agent menu header when the side menu is docked.
 `#6102 <https://github.com/wazuh/wazuh-dashboard-plugins/pull/6102>`__       Fixed how the query filters apply on the Security Alerts table.
+`#6177 <https://github.com/wazuh/wazuh-dashboard-plugins/pull/6177>`__       Fixed exception in **IT-Hygiene** when an agent doesn't have policies.
+`#6177 <https://github.com/wazuh/wazuh-dashboard-plugins/pull/6177>`__       Fixed exception in **Inventory** when agents don't have operating system information.
+`#6177 <https://github.com/wazuh/wazuh-dashboard-plugins/pull/6177>`__       Fixed pinned agent state in URL.
+`#6234 <https://github.com/wazuh/wazuh-dashboard-plugins/pull/6234>`__       Fixed invalid date format in **About** and **Agents** views.
 =========================================================================    =============
+
+Packages
+^^^^^^^^
+
+=====================================================================     =============
+Reference                                                                 Description
+=====================================================================     =============
+`#2381 <https://github.com/wazuh/wazuh-packages/pull/2381>`_              Fixed DNS validation in the Installation Assistant.
+`#2401 <https://github.com/wazuh/wazuh-packages/pull/2401>`_              Fixed debug redirection in Installation Assistant.
+=====================================================================     =============
 
 Changelogs
 ----------

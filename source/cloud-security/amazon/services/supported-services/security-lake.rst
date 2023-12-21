@@ -185,8 +185,10 @@ Set the configuration inside the section ``<subscriber type="security_lake">``. 
 After setting the required parameters, restart the Wazuh manager to apply the changes:
 
 .. include:: /_templates/common/restart_manager.rst
-Please note that the module's time of execution varies depending on the number of notifications present in the queue. If the ``<interval>`` value is less than the required time of execution, the :ref:`Interval overtaken<interval_overtaken_message>` message will be displayed in the ``ossec.log`` file.
 
+.. note::
+    
+    The module execution time varies depending on the number of notifications in the queue. This affects the time to display alerts on the Wazuh dashboard. If the ``<interval>`` value is less than the execution time, the :ref:`Interval overtaken <interval_overtaken_message>` message appears in the ``ossec.log`` file.
 
 Parameters
 ^^^^^^^^^^
@@ -213,3 +215,12 @@ Authentication
 
 
 More information about the different authentication methods can be found in the :ref:`Configuring AWS credentials <amazon_credentials>` documentation.
+
+Visualizing alerts in Wazuh dashboard 
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Once you set the configuration and restart the manager, you can visualize the Amazon Security Lake alerts in the Wazuh dashboard. To do this, go to the **Security events** module. Apply the filter ``rule.groups: amazon_security_lake`` for an easier visualization.
+
+    .. thumbnail:: /images/aws/security-lake-1.png
+      :align: center
+      :width: 80%

@@ -21,7 +21,7 @@ Microsoft Entra ID Configuration
 --------------------------------
 
 #. Create a Microsoft account or use your own if you already have one.
-#. Go to `Microsoft Entra ID <https://portal.azure.com/>`_ and sign in with your Microsoft account.
+#. Go to `Microsoft Azure Portal <https://portal.azure.com/>`_ and sign in with your Microsoft account.
 #. Create an app in **Microsoft Entra ID**.
 
    #. Go to **Microsoft Entra ID** > **Enterprise applications** > **New application** and **Create your own application**. 
@@ -118,7 +118,7 @@ Microsoft Entra ID Configuration
          :align: center
          :width: 80%
 
-   #. In option 1, under  **Basic SAML Configuration**, click **edit** and set ``wazuh-saml`` as **Identifier (Entity ID)** and ``https://<WAZUH_DASHBOARD_URL>/_opendistro/_security/saml/acs`` as **Reply URL (Assertion Consumer Service URL)**. Replace ``<WAZUH_DASHBOARD_URL>`` with the corresponding value. Save and proceed to the next step.
+   #. In option 1, under  **Basic SAML Configuration**, click **edit** and set ``wazuh-saml`` as **Identifier (Entity ID)** and ``https://<WAZUH_DASHBOARD_URL>/_opendistro/_security/saml/acs`` as **Reply URL (Assertion Consumer Service URL)**, and ``https://<WAZUH_DASHBOARD_URL>/app/wazuh`` as **Sign on URL (Optional)**. Replace ``<WAZUH_DASHBOARD_URL>`` with the corresponding value. Save and proceed to the next step.
 
       .. thumbnail:: /images/single-sign-on/azure-active-directory/11-click-edit-and-set-wazuh-saml.png
          :title: Click edit and set wazuh-saml
@@ -143,7 +143,7 @@ Microsoft Entra ID Configuration
       :align: center
       :width: 80%
 
-   - In option 4 **Set up <YOUR APPLICATION>**, the **Microsoft Entra ID** will be our ``idp.entity_id``.
+   - In option 4 **Set up <YOUR APPLICATION>**, the **Microsoft Entra ID Identifier** will be our ``idp.entity_id``.
 
 Wazuh indexer configuration
 ---------------------------
