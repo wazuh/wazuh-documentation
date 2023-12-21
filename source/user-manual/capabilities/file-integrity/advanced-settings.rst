@@ -30,49 +30,42 @@ Configuration
 
 You need to install the audit daemon if you don’t have it already installed on your endpoint.
 
-In Red Hat based systems, auditd is usually installed by default. If not, install it using the following command:
+.. tabs::
 
-   .. code-block:: console
+   .. group-tab:: Red Hat-based
 
-      # yum install audit
+      .. code-block:: console
 
-For Debian based systems, use the following command:
+         # yum install audit
+      
+      For Audit 3.1.1 and later, install the audispd af_unix plugin and restart the Audit service.
 
-   .. code-block:: console
+      .. code-block:: console
 
-      # apt-get install auditd
+         # yum install audispd-plugins
+         # systemctl restart auditd
 
-For Alpine Linux systems:
+   .. group-tab:: Debian-based
 
-   .. code-block:: console
+      .. code-block:: console
 
-      # apk add audit=3.1.1-r0
-      # rc-update add auditd default
-      # cp /usr/sbin/audisp-af_unix /sbin/audisp-af_unix
-      # rc-service auditd restart
+         # apt-get install auditd
 
+      For Audit 3.1.1 and later, install the audispd af_unix plugin and restart the Audit service.
 
-.. note::
+      .. code-block:: console
 
-      `Audit 3.1.1 changelog <https://people.redhat.com/sgrubb/audit/ChangeLog>`_. indicates that the audispd af_unix plugin was moved to a standalone program. For whodata to successfully connect to the Audit daemon, it is necessary to install this plugin.
+         # apt-get install audispd-plugins
+         # systemctl restart auditd
 
-      In Red Hat based systems, use the following command to install the audispd af_unix plugin:
+   .. group-tab:: Alpine Linux
 
-         .. code-block:: console
+      .. code-block:: console
 
-            # yum install audispd-plugins
-
-      For Debian based systems, use the following command to install the audispd af_unix plugin:
-
-         .. code-block:: console
-
-            # apt-get install audispd-plugins
-
-      In any case, you should restart the Auditd daemon.
-
-         .. code-block:: console
-
-            # service auditd restart
+         # apk add audit=3.1.1-r0
+         # rc-update add auditd default
+         # cp /usr/sbin/audisp-af_unix /sbin/audisp-af_unix
+         # rc-service auditd restart
 
 Perform the following steps to enable who-data monitoring. In this example, you configure who-data monitoring for ``/etc`` directory.
 
