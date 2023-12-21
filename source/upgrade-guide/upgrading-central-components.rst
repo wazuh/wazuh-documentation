@@ -206,10 +206,11 @@ When upgrading a multi-node Wazuh manager cluster, run the upgrade in every node
 
     .. include:: /_templates/installations/basic/elastic/common/enable_filebeat.rst
 
-#. Upload the new Wazuh template. This step can be omitted for Wazuh indexer single-node installations.
+#. Upload the new Wazuh template and pipelines for Filebeat.
 
    .. code-block:: console
 
+      # filebeat setup pipelines
       # filebeat setup --index-management -E output.logstash.enabled=false
 
 Upgrading the Wazuh dashboard
