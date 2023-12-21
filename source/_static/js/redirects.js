@@ -64,9 +64,39 @@ removedUrls['x.y'] = [
 
 /* *** RELEASE 4.8 ****/
 
+/* Pages added in 4.8 */
+
 newUrls['4.8'] = [
   '/release-notes/release-4-8-0.html',
 ];
+
+/* Pages no longer available in 4.8 */
+
+removedUrls['4.8'] = [
+  '/user-manual/capabilities/vulnerability-detection/cpe-helper.html',
+  '/user-manual/capabilities/vulnerability-detection/querying-the-vulnerability-database.html',
+  '/user-manual/capabilities/vulnerability-detection/scan-types.html',
+];
+
+/* Redirections from 4.7 to 4.8  */
+
+redirections.push(
+  {
+    'target': ['4.7=>4.8'],
+    '4.7': '/user-manual/capabilities/vulnerability-detection/cpe-helper.html',
+    '4.8': '/user-manual/capabilities/vulnerability-detection/index.html',
+  },
+  {
+    'target': ['4.7=>4.8'],
+    '4.7': '/user-manual/capabilities/vulnerability-detection/querying-the-vulnerability-database.html',
+    '4.8': '/user-manual/capabilities/vulnerability-detection/index.html',
+  },
+  {
+    'target': ['4.7=>4.8'],
+    '4.7': '/user-manual/capabilities/vulnerability-detection/scan-types.html',
+    '4.8': '/user-manual/capabilities/vulnerability-detection/index.html',
+  },
+);
 
 /* *** RELEASE 4.7 ****/
 
