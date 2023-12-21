@@ -125,7 +125,7 @@ You must include the IP addresses of the servers where you are installing each a
    $indexer_node1_name = 'node1'
    $indexer_node2_name = 'node2'
    $indexer_node3_name = 'node3'
-=>   $master_name = 'master'
+   $master_name = 'master'
    $worker_name = 'worker'
    $cluster_size = '3'
    $indexer_discovery_hosts = [$node1host, $node2host, $node3host]
