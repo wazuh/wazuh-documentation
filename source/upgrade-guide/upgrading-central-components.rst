@@ -210,7 +210,7 @@ When upgrading a multi-node Wazuh manager cluster, run the upgrade in every node
 
    .. code-block:: console
 
-      # filebeat setup pipelines
+      # filebeat setup --pipelines
       # filebeat setup --index-management -E output.logstash.enabled=false
 
 Upgrading the Wazuh dashboard
