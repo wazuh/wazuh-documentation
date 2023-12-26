@@ -22,36 +22,39 @@ This section explains how to use the Azure portal to archive the Azure activity 
 
 Configuring the Activity log export
 -----------------------------------
-1. Find the activity logs to export in one of these two ways:
-   -  Click **Activity log** in the **Monitor** service menu.
-   -  Type ``activity`` in the search bar.
 
-   From there, click **Export Activity logs**.
+#. Click **Activity log** in the **Monitor** service menu. You can type ``activity`` in the search bar to find the option.
 
-.. thumbnail:: /images/cloud-security/azure/storage-activity-4.png
-    :title: Storage
-    :align: center
-    :width: 80%
+   .. thumbnail:: /images/cloud-security/azure/storage-activity-4.png
+       :title: Storage
+       :align: center
+       :width: 80%
 
-.. thumbnail:: /images/cloud-security/azure/storage-activity-1.png
-    :title: Storage
-    :align: center
-    :width: 80%
+#. Click **Export Activity logs**.
 
-2. Click on **Add diagnostic setting**.
+   .. thumbnail:: /images/cloud-security/azure/storage-activity-1.png
+       :title: Storage
+       :align: center
+       :width: 80%
 
-.. thumbnail:: /images/cloud-security/azure/storage-activity-2.png
-    :title: Storage
-    :align: center
-    :width: 80%
+#. Click **Add diagnostic setting**.
 
-3. Check the **AuditLogs** box and the **Archive to storage account**, selecting the name of the subscription and the Storage account to export the logs.
+   .. thumbnail:: /images/cloud-security/azure/storage-activity-2.png
+       :title: Storage
+       :align: center
+       :width: 80%
 
-.. thumbnail:: /images/cloud-security/azure/storage-activity-3.png
-    :title: Storage
-    :align: center
-    :width: 80%
+#. Configure the following settings and click **Save**.
 
+   -  Tick **AuditLogs** checkbox.
+   -  Tick the **Archive to storage account** checkbox.
+   -  Select your **Subscription**.
+   -  Select your **Storage account**.
+
+   .. thumbnail:: /images/cloud-security/azure/storage-activity-3.png
+       :title: Storage
+       :align: center
+       :width: 80%
 
 Azure Storage use case
 ----------------------
