@@ -3,8 +3,6 @@
 .. meta::
   :description: The Wazuh Ruleset is used to analyze incoming events and generate alerts when appropriate. Learn more about Rules syntax in this section.
 
-.. _rules_syntax:
-
 Rules Syntax
 ============
 
@@ -188,58 +186,40 @@ The **xml labels** used to configure ``rules`` are listed here.
 group
 ^^^^^
 
-Groups are used to categorize alerts in the Dashboard in the first place.
-It is mandatory for a rule to belong to one group at least.
-This way we can have sets of related rules in the same group, for example 'syscheck', 'attack', or 'syslog'.
+Groups categorize alerts. They allow filtering related alerts in the Wazuh dashboard.
 
-We can specify the group of a rule using the <group name="..."> element, enclosing the whole rule's definition.
+The default Wazuh ruleset already includes rules that use groups like ``syscheck,``, ``attack,``, and ``syslog,``. As an example, you can filter alerts for these categories by querying ``rule.groups: attack`` or ``rule.groups: (syscheck OR syslog)`` in the Wazuh dashboard.
 
-Example:
+Every rule must belong to at least one group. To specify one or more groups for a rule, enclose the rule definition with the ``<group name="GROUP1_NAME,GROUP2_NAME,">`` element. For example:
 
 .. code-block:: xml
-   :emphasize-lines: 6
+   :emphasize-lines: 1,7
 
    <group name="wazuh,">
-     <rule id="234" level="3">
+     <rule id="100234" level="3">
        <if_sid>230</if_sid>
        <field name="alert_type">normal</field>
        <description>The file limit set for this agent is $(file_limit). Now, $(file_count) files are being monitored.</description>
      </rule>
    </group>
 
-
-In this example, the rule "234" belongs to the group "wazuh". Whenever we filter rules in the dashboard with group:wazuh, this rule will be in the results.
-
-
-On the other hand, the <group> element can be used inside the rule's definition instead of enclosing it..
-
-Example:
+You can also specify additional groups by including the ``<group>`` element within the rule definition. For example:
 
 .. code-block:: xml
    :emphasize-lines: 6
 
    <group name="wazuh,">
-     <rule id="234" level="3">
+     <rule id="100234" level="3">
        <if_sid>230</if_sid>
        <field name="alert_type">normal</field>
        <description>The file limit set for this agent is $(file_limit). Now, $(file_count) files are being monitored.</description>
-       <group>group_example,</group>
+       <group>syscheck,fim_db_state,</group>
      </rule>
    </group>
 
-Using <group> inside the rule's definition have effects only during the Matching Algorithm.
-We can define another rule to match if the indicated group has matched before using <if_group>_ and <if_matched_group>_.
+To define rules that trigger only if another rule in a specific group has triggered, check the `if_group`_ and `if_matched_group`_ options. These options use the groups defined in the ``<group>`` element inside the rule definition.
 
-.. code-block:: xml
-   :emphasize-lines: 6
-
-   <group name="wazuh,">
-     <rule id="235" level="3">
-       <if_group>group_example,</group>
-     </rule>
-   </group>
-
-We can think of <group> as a way to categorize rules to be matched from other rules instead of using ids, adding a semantic meaning to our rules.
+.. _rules_rule:
 
 rule
 ^^^^
@@ -2164,25 +2144,28 @@ Defines a variable that may be used in any place of the same file.
 
 Example:
 
-  .. code-block:: xml
+.. code-block:: xml
+   :emphasize-lines: 1,7
 
-     <var name="joe_folder">/home/joe/</var>
+   <var name="joe_folder">/home/joe/</var>
 
-      <group name="local,">
+   <group name="local,">
 
-        <rule id="100001" level="5">
-          <if_sid>550</if_sid>
-          <field name="file">^$joe_folder</field>
-          <description>A Joe's file was modified.</description>
-          <group>ossec,pci_dss_10.6.1,gpg13_10.1,gdpr_IV_35.7.d,</group>
-        </rule>
+      <rule id="100001" level="5">
+        <if_sid>550</if_sid>
+        <field name="file">^$joe_folder</field>
+        <description>A Joe's file was modified.</description>
+        <group>ossec,pci_dss_10.6.1,gpg13_10.1,gdpr_IV_35.7.d,</group>
+      </rule>
 
-    </group>
+   </group>
 
 BAD_WORDS
 ~~~~~~~~~
 
-<var name="BAD_WORDS">error|warning|failure</var>
+.. code-block:: xml
+
+   <var name="BAD_WORDS">error|warning|failure</var>
 
 ``BAD_WORDS`` is a very used use case of the ``<var>`` option.
 
@@ -2190,13 +2173,14 @@ It is used to include many words in the same variable. Later, this variable can 
 
 Example:
 
-  .. code-block:: xml
+.. code-block:: xml
+   :emphasize-lines: 1,5
 
-    <var name="BAD_WORDS">error|warning|failure</var>
+   <var name="BAD_WORDS">error|warning|failure</var>
 
-    <group name="syslog,errors,">
-      <rule id="XXXX" level="2">
-        <match>$BAD_WORDS</match>
-        <description>Error found.</description>
-      </rule>
-    </group>
+   <group name="syslog,errors,">
+     <rule id="XXXX" level="2">
+       <match>$BAD_WORDS</match>
+       <description>Error found.</description>
+     </rule>
+   </group>
