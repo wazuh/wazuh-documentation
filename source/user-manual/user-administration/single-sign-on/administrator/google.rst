@@ -22,7 +22,7 @@ Google Configuration
 #. Go to https://admin.google.com/ac/apps/unified and sign in with your Google Admin account.
 #. Create an app with **Add custom SAML app**.
 
-   #. Go to **Apps** > **Website and mobile apps** > **Add App**, then **Add custom SAML app**. Enter an **App name** and click **CONTINUE**.
+   #. Go to **Apps** > **Web and mobile apps** > **Add App**, then **Add custom SAML app**. Enter an **App name** and click **CONTINUE**.
 
       .. thumbnail:: /images/single-sign-on/google/01-go-to-apps.png
          :title: Go to Apps > Website and mobile apps
@@ -31,8 +31,9 @@ Google Configuration
 
    #. Take note of the following parameters, as they will be used during the Wazuh indexer configuration:
 
-      - **Entity ID**: This will be used later as the ``idp.entity_id``
-      - Select **DOWNLOAD METADATA** and place the metadata file in the ``configuration`` directory of the Wazuh indexer. The path to the directory is ``/etc/wazuh-indexer/opensearch-security/``.
+      -  **Entity ID**: This will be used later as the ``idp.entity_id``
+      -  Select **DOWNLOAD METADATA** and place the metadata file in the ``configuration`` directory of the Wazuh indexer. The path to the directory is ``/etc/wazuh-indexer/opensearch-security/``.
+      -  **Certificate**: Copy the blob of the certificate excluding the ``-----BEGIN CERTIFICATE-----`` and ``-----END CERTIFICATE-----`` lines. This will be our ``exchange_key`` in the Wazuh indexer configuration file.
 
       .. thumbnail:: /images/single-sign-on/google/02-take-note-of-the-parameters.png
          :title: Take note of the parameters
@@ -41,9 +42,8 @@ Google Configuration
    
    #. Select **CONTINUE** and configure the following:
 
-      - **ACS URL**: ``https://<WAZUH_DASHBOARD_URL>/_opendistro/_security/saml/acs``. Replace the Wazuh dashboard URL field with the appropriate URL or IP address.
-      - **Entity ID**: Use any name here. This will be the ``sp.entity_id`` in the Wazuh indexer configuration file. In our case, the value is ``wazuh-saml``.
-      - **Certificate**: Copy the blob of the certificate excluding the ``-----BEGIN CERTIFICATE-----`` and ``-----END CERTIFICATE-----`` lines. This will be our ``exchange_key`` in the Wazuh indexer configuration file.
+      -  **ACS URL**: ``https://<WAZUH_DASHBOARD_URL>/_opendistro/_security/saml/acs``. Replace the Wazuh dashboard URL field with the appropriate URL or IP address.
+      -  **Entity ID**: Use any name here. This will be the ``sp.entity_id`` in the Wazuh indexer configuration file. In our case, the value is ``wazuh-saml``.
 
       .. thumbnail:: /images/single-sign-on/google/03-select-continue-and-configure.png
          :title: Select CONTINUE and configure
@@ -147,8 +147,8 @@ Edit the Wazuh indexer security configuration files. We recommend that you back 
                 challenge: true
                 config:
                   idp:
-                    metadata_file: “/etc/wazuh-indexer/opensearch-security/Google_Metadata.xml”
-                    entity_id: “https://accounts.google.com/o/saml2?idpid=C02…”
+                    metadata_file: '/etc/wazuh-indexer/opensearch-security/Google_Metadata.xml'
+                    entity_id: 'https://accounts.google.com/o/saml2?idpid=C02…'
                   sp:
                     entity_id: wazuh-saml
                   kibana_url: https://<WAZUH_DASHBOARD_URL>
@@ -183,7 +183,7 @@ Edit the Wazuh indexer security configuration files. We recommend that you back 
       Security Admin v7
       Will connect to localhost:9200 ... done
       Connected as "CN=admin,OU=Wazuh,O=Wazuh,L=California,C=US"
-      OpenSearch Version: 2.6.0
+      OpenSearch Version: 2.8.0
       Contacting opensearch cluster 'opensearch' and wait for YELLOW clusterstate ...
       Clustername: wazuh-cluster
       Clusterstate: GREEN
@@ -193,6 +193,7 @@ Edit the Wazuh indexer security configuration files. We recommend that you back 
       Populate config from /etc/wazuh-indexer/opensearch-security
       Will update '/config' with /etc/wazuh-indexer/opensearch-security/config.yml 
          SUCC: Configuration for 'config' created or updated
+      SUCC: Expected 1 config types for node {"updated_config_types":["config"],"updated_config_size":1,"message":null} is 1 (["config"]) due to: null
       Done with success
 
 #. Edit the ``/etc/wazuh-indexer/opensearch-security/roles_mapping.yml`` file and change the following values:
@@ -226,7 +227,7 @@ Edit the Wazuh indexer security configuration files. We recommend that you back 
       Security Admin v7
       Will connect to localhost:9200 ... done
       Connected as "CN=admin,OU=Wazuh,O=Wazuh,L=California,C=US"
-      OpenSearch Version: 2.6.0
+      OpenSearch Version: 2.8.0
       Contacting opensearch cluster 'opensearch' and wait for YELLOW clusterstate ...
       Clustername: wazuh-cluster
       Clusterstate: GREEN
@@ -236,8 +237,8 @@ Edit the Wazuh indexer security configuration files. We recommend that you back 
       Populate config from /etc/wazuh-indexer/opensearch-security
       Will update '/rolesmapping' with /etc/wazuh-indexer/opensearch-security/roles_mapping.yml 
          SUCC: Configuration for 'rolesmapping' created or updated
+      SUCC: Expected 1 config types for node {"updated_config_types":["rolesmapping"],"updated_config_size":1,"message":null} is 1 (["rolesmapping"]) due to: null
       Done with success
-
 
 Wazuh dashboard configuration
 -----------------------------
@@ -288,6 +289,7 @@ Wazuh dashboard configuration
 
       opensearch_security.auth.type: "saml"
       server.xsrf.allowlist: ["/_opendistro/_security/saml/acs", "/_opendistro/_security/saml/logout", "/_opendistro/_security/saml/acs/idpinitiated"]
+      opensearch_security.session.keepalive: false
 
 #. Restart the Wazuh dashboard service using this command:
 

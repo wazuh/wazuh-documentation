@@ -143,7 +143,7 @@ KeyCloak configuration
 
    #. Click on the newly created group, navigate to **Members > Add member** and select the user created in the previous step. Click on **Add** to add it to the group.
    
-      .. thumbnail:: /images/single-sign-on/keycloak/13-add-member.png
+      .. thumbnail:: /images/single-sign-on/keycloak/read-only/13-add-member-RO.png
          :title: Add member
          :align: center
          :width: 80% 
@@ -257,11 +257,11 @@ Edit the Wazuh indexer security configuration files. We recommend that you back 
                 challenge: true
                 config:
                   idp:
-                    metadata_file: “/etc/wazuh-indexer/opensearch-security/idp.metadata.xml”
-                    entity_id: “http://192.168.XX.XX:8080/realms/Wazuh”
+                    metadata_file: '/etc/wazuh-indexer/opensearch-security/idp.metadata.xml'
+                    entity_id: 'http://192.168.XX.XX:8080/realms/Wazuh'
                   sp:
                     entity_id: wazuh-saml
-                    metadata_file: /etc/wazuh-indexer/opensearch-security/sp.metadata.xml
+                    metadata_file: '/etc/wazuh-indexer/opensearch-security/sp.metadata.xml'
                   kibana_url: https://<WAZUH_DASHBOARD_ADDRESS>
                   roles_key: Roles
                   exchange_key: 'MIICajCCAdOgAwIBAgIBAD.........'
@@ -295,7 +295,7 @@ Edit the Wazuh indexer security configuration files. We recommend that you back 
       Security Admin v7
       Will connect to localhost:9200 ... done
       Connected as "CN=admin,OU=Wazuh,O=Wazuh,L=California,C=US"
-      OpenSearch Version: 2.6.0
+      OpenSearch Version: 2.8.0
       Contacting opensearch cluster 'opensearch' and wait for YELLOW clusterstate ...
       Clustername: wazuh-cluster
       Clusterstate: GREEN
@@ -305,6 +305,7 @@ Edit the Wazuh indexer security configuration files. We recommend that you back 
       Populate config from /etc/wazuh-indexer/opensearch-security
       Will update '/config' with /etc/wazuh-indexer/opensearch-security/config.yml 
          SUCC: Configuration for 'config' created or updated
+      SUCC: Expected 1 config types for node {"updated_config_types":["config"],"updated_config_size":1,"message":null} is 1 (["config"]) due to: null
       Done with success
 
 Wazuh dashboard configuration
@@ -372,11 +373,10 @@ Wazuh dashboard configuration
 
       opensearch_security.auth.type: "saml"
       server.xsrf.allowlist: ["/_opendistro/_security/saml/acs", "/_opendistro/_security/saml/logout", "/_opendistro/_security/saml/acs/idpinitiated"]
+      opensearch_security.session.keepalive: false
 
 #. Restart the Wazuh dashboard service using this command:
 
    .. include:: /_templates/common/restart_dashboard.rst
 
 #. Test the configuration. Go to your Wazuh dashboard URL and log in with your Keycloak account. 
-
-

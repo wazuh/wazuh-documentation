@@ -2,7 +2,7 @@
 
 .. meta::
   :description: Learn about some considerations that must be taken into account when configuring the Wazuh module for AWS.
-  
+
 .. _amazon_considerations:
 
 Considerations for configuration
@@ -33,25 +33,23 @@ On the other hand, the ``CloudWatch Logs`` module can process logs older than th
 
 
 Reparse
-~~~~~~~
-
-.. note::
-  Option not available for CloudWatch Logs.
+-------
 
 .. warning::
-  Using the ``reparse`` option will fetch and process every log from the starting date until the present. This process may generate duplicate alerts.
+  
+   Using the ``reparse`` option will fetch and process all the logs from the starting date until the present. This process may generate duplicate alerts.
 
-To process older logs, it's necessary to manually execute the module using the ``--reparse`` or ``-o`` option. Executing the module with this option will use the ``only_logs_after`` value provided to fetch and process every log from that date until the present. If no ``only_logs_after`` value was provided, it will use the date of the first file processed.
+To fetch and process older logs, you need to manually run the module using the ``--reparse`` option.
 
-Below there is an example of a manual execution of the module using the ``--reparse`` option on a manager, being ``/var/ossec`` the Wazuh installation path:
+The ``only_logs_after`` value sets the time for the starting point. If you don't provide an ``only_logs_after`` value, the module uses the date of the first file processed.
+
+Find an example of running the module on a manager using the ``--reparse`` option. ``/var/ossec`` is the Wazuh installation path.
 
 .. code-block:: console
 
-  # cd /var/ossec/wodles/aws
-  # ./aws-s3 -b 'wazuh-example-bucket' --reparse --only_logs_after '2021-Jun-10' --debug 2
+  # /var/ossec/wodles/aws/aws-s3 -b 'wazuh-example-bucket' --reparse --only_logs_after '2021-Jun-10' --debug 2
 
-The ``--debug 2`` parameter was used to get a verbose output since by default the script won't print anything on the terminal, and it could seem like it's not working when it could be handling a great amount of data instead.
-
+The ``--debug 2`` parameter gets a verbose output. This is useful to show the script is working, specially when handling a large amount of data.
 
 Connection configuration for retries
 ------------------------------------
@@ -63,7 +61,7 @@ Users can customize two retry configurations.
 -  ``retry_mode``: legacy, standard, and adaptive.
 
    -  **Legacy** mode is the default retry mode. It sets the older version 1 for the retry handler. This includes:
-      
+
       -  Retry attempts for a limited number of errors/exceptions.
       -  A default value of 5 for maximum call attempts.
 
@@ -90,6 +88,49 @@ The following example of a ``~/.aws/config`` file sets retry parameters for the 
    max_attempts=5
    retry_mode=standard
 
+Additional configuration
+~~~~~~~~~~~~~~~~~~~~~~~~
+
+Wazuh supports additional configuration options found in the ``.aws/config file``. The supported keys are the primary keys stated in the `boto3 configuration <https://boto3.amazonaws.com/v1/documentation/api/latest/guide/configuration.html>`_. Supported keys are:
+
+- region_name.
+- signature_version.
+- s3
+- proxies
+- proxies_config
+- retries
+
+The following example of a ``~/.aws/config`` file sets the supported configuration for the *dev* profile:
+
+.. code-block:: ini
+
+   [dev]
+   region = us-east-1
+   output = json
+   dev.s3.max_concurrent_requests = 10
+   dev.s3.max_queue_size = 1000
+   dev.s3.multipart_threshold = 64MB
+   dev.s3.multipart_chunksize = 16MB
+   dev.s3.max_bandwidth = 50MB/s
+   dev.s3.use_accelerate_endpoint = true
+   dev.s3.addressing_style = virtual
+
+   dev.proxy.host = proxy.example.com
+   dev.proxy.port = 8080
+   dev.proxy.username = your-proxy-username
+   dev.proxy.password = your-proxy-password
+
+   dev.proxy.ca_bundle = /path/to/ca_bundle.pem
+   dev.proxy.client_cert = /path/to/client_cert.pem
+   dev.proxy.use_forwarding_for_https = true
+
+   dev.signature_version = s3v4
+   max_attempts = 5
+   retry_mode = standard
+
+.. note::
+   To configure multiple profiles for the integration, declare each profile in the ``~/.aws/config`` file using the same pattern as before.
+   If no profile is declared in the module configuration, the *default* profile is used.
 
 Configuring multiple services
 -----------------------------
@@ -132,11 +173,10 @@ Below there is an example of different services configuration:
       <aws_profile>dev</aws_profile>
     </bucket>
 
-    <!-- CloudTrail, authentication with hardcoded keys (not recommended), without 'path' tag -->
+    <!-- CloudTrail, 'default' profile, without 'path' tag -->
     <bucket type="cloudtrail">
       <name>wazuh-cloudtrail</name>
-      <access_key>XXXXXXXXXX</access_key>
-      <secret_key>XXXXXXXXXX</secret_key>
+      <aws_profile>default</aws_profile>
     </bucket>
 
     <!-- CloudTrail, 'gov1' profile, and 'us-gov-east-1' GovCloud region -->
@@ -157,6 +197,7 @@ Below there is an example of different services configuration:
 
   </wodle>
 
+.. _using_non-default_aws_endpoints:
 
 Using non-default AWS endpoints
 -------------------------------
@@ -184,8 +225,7 @@ The `service_endpoint` and `sts_endpoint` tags can be used to specify the VPC en
 
     <bucket type="cloudtrail">
       <name>wazuh-cloudtrail-2</name>
-      <access_key>xxxxxx</access_key>
-      <secret_key>xxxxxx</secret_key>
+      <aws_profile>default</aws_profile>
       <iam_role_arn>arn:aws:iam::xxxxxxxxxxx:role/wazuh-role</iam_role_arn>
       <sts_endpoint>xxxxxx.sts.us-east-2.vpce.amazonaws.com</sts_endpoint>
       <service_endpoint>https://bucket.xxxxxx.s3.us-east-2.vpce.amazonaws.com</service_endpoint>
@@ -223,3 +263,30 @@ The following is an example of a valid configuration.
     </service>
 
   </wodle>
+
+Enabling dashboard visualization  
+--------------------------------
+  
+You can activate the corresponding Security Information Management module on the Wazuh Dashboard. This module provides additional details and insights about events, as shown in the screenshots below.
+
+    .. thumbnail:: /images/aws/aws-dashboard.png
+       :title: Amazon AWS dashboard
+       :alt: Amazon AWS dashboard
+       :align: center
+       :width: 80%
+
+    .. thumbnail:: /images/aws/aws-events.png
+       :title: Amazon AWS events
+       :alt: Amazon AWS events
+       :align: center
+       :width: 80%
+
+To activate the **Amazon AWS** module, navigate to your Wazuh Dashboard and click on **Wazuh > Settings > Modules**. In the **Security Information Management** section, enable the **Amazon AWS** module as shown in the image below.
+
+    .. thumbnail:: /images/aws/aws-module.png
+       :title: Amazon AWS module
+       :alt: Amazon AWS module
+       :align: center
+       :width: 80%
+
+For further information, please refer to the `modules <https://documentation.wazuh.com/current/user-manual/wazuh-dashboard/settings.html#modules>`_ section.

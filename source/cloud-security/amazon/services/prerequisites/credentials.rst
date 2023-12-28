@@ -2,7 +2,7 @@
 
 .. meta::
   :description: Learn about the different ways to configure your AWS credentials when monitoring AWS services with Wazuh.
-  
+
 .. _amazon_credentials:
 
 Configuring AWS credentials
@@ -88,6 +88,8 @@ To use the *prod* profile in the AWS integration you would use the following buc
     <aws_profile>prod</aws_profile>
   </bucket>
 
+.. _iam_roles:
+
 IAM Roles
 ^^^^^^^^^
 
@@ -156,8 +158,7 @@ Once your role is created, just paste it on the bucket configuration:
 
   <bucket type="cloudtrail">
     <name>my-bucket</name>
-    <access_key>xxxxxx</access_key>
-    <secret_key>xxxxxx</secret_key>
+    <aws_profile>default</aws_profile>
     <iam_role_arn>arn:aws:iam::xxxxxxxxxxx:role/wazuh-role</iam_role_arn>
  </bucket>
 

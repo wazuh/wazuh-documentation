@@ -47,15 +47,46 @@ Jumpcloud Configuration
 
 #. Create a new app. Configure the SAML settings while you create the app.
 
-   #. Under the User Authentication section, go to **SSO**, select **(+)**, click on **Custom SAML App** and add a **Display Label**.
+   #. Under the User Authentication section, go to **SSO Applications**, select **+ Add New Application**, and select **Custom Application**.
 
-      .. thumbnail:: /images/single-sign-on/jumpcloud/05-click-on-custom-saml.png
-          :title: Click on Custom SAML App and add a Display Label
+      .. thumbnail:: /images/single-sign-on/jumpcloud/04-go-to-SSO.png
+          :title: Add new SSO application
           :align: center
           :width: 80%    
 
-      .. thumbnail:: /images/single-sign-on/jumpcloud/04-go-to-SSO.png
-          :title: Under the User Authentication section, go to SSO 
+      .. thumbnail:: /images/single-sign-on/jumpcloud/05-select-custom-app.png
+          :title: Select custom application
+          :align: center
+          :width: 80%    
+
+   #. Complete the **Create New Application Integration** page with the appropriate information.
+
+      -  Click **Next** on the **Select Application** page.
+      -  Check the **Manage Single Sign-On (SSO)** and **Configure SSO with SAML** options on the **Select Options** page. Click **Next** to proceed to the next step.
+      -  Assign a **Display Label** to the application, and click the **Show this application in User Portal** checkbox on the **Enter General Info** page. Click **Save Application** to apply the settings. 
+      -  Click **Configure Application** on the Review page.
+
+      .. thumbnail:: /images/single-sign-on/jumpcloud/06-select-application.png
+          :title: Custom application selected
+          :alt: Custom application selected
+          :align: center
+          :width: 80%    
+
+      .. thumbnail:: /images/single-sign-on/jumpcloud/07-select-manage-sso.png
+          :title: Configure SSO options
+          :alt: Configure SSO options
+          :align: center
+          :width: 80%    
+
+      .. thumbnail:: /images/single-sign-on/jumpcloud/08-enter-general-info.png
+          :title: Enter general info
+          :alt: Enter general info
+          :align: center
+          :width: 80%    
+
+      .. thumbnail:: /images/single-sign-on/jumpcloud/09-go-to-review.png
+          :title: Confirm new application integration
+          :alt: Confirm new application integration
           :align: center
           :width: 80%    
 
@@ -70,24 +101,29 @@ Jumpcloud Configuration
 
       The rest of the options can be left as their default values.
 
-      .. thumbnail:: /images/single-sign-on/jumpcloud/06-complete-the-sso-tab.png
+      .. thumbnail:: /images/single-sign-on/jumpcloud/10-complete-the-sso-tab.png
           :title: Complete the SSO tab
           :align: center
           :width: 80%   
 
-      .. thumbnail:: /images/single-sign-on/jumpcloud/07-complete-the-sso-tab.png      
+      .. thumbnail:: /images/single-sign-on/jumpcloud/11-complete-the-sso-tab.png      
           :title: Complete the SSO tab
           :align: center
           :width: 80%    
 
-      .. thumbnail:: /images/single-sign-on/jumpcloud/08-complete-the-sso-tab.png
+      .. thumbnail:: /images/single-sign-on/jumpcloud/12-complete-the-sso-tab.png
+          :title: Complete the SSO tab
+          :align: center
+          :width: 80%    
+
+      .. thumbnail:: /images/single-sign-on/jumpcloud/13-complete-the-sso-tab.png
           :title: Complete the SSO tab
           :align: center
           :width: 80%    
 
    #. On the **User Groups** tab, select the **Group** created previously and click **save**.
 
-      .. thumbnail:: /images/single-sign-on/jumpcloud/09-on-the-user-groups-tab.png
+      .. thumbnail:: /images/single-sign-on/jumpcloud/14-on-the-user-groups-tab.png
           :title: On the User Groups tab, select the Group created previously
           :align: center
           :width: 80% 
@@ -98,7 +134,7 @@ Jumpcloud Configuration
 
    #. Extract the ``exchange_key`` from the ``metadata_file`` under the ``ds:X509Certificate`` tag.
 
-      .. thumbnail:: /images/single-sign-on/jumpcloud/10-go-to-the-sso-tab.png
+      .. thumbnail:: /images/single-sign-on/jumpcloud/15-go-to-the-sso-tab.png
           :title: Go to the SSO tab and select Export Metadata
           :align: center
           :width: 80% 
@@ -145,7 +181,7 @@ Edit the Wazuh indexer security configuration files. We recommend that you back 
                 challenge: true
                 config:
                   idp:
-                    metadata_file: “/etc/wazuh-indexer/opensearch-security/metadata_jumpcloud.xml”
+                    metadata_file: '/etc/wazuh-indexer/opensearch-security/metadata_jumpcloud.xml'
                     entity_id: wazuh
                   sp:
                     entity_id: wazuh-saml
@@ -183,7 +219,7 @@ Edit the Wazuh indexer security configuration files. We recommend that you back 
       Security Admin v7
       Will connect to localhost:9200 ... done
       Connected as "CN=admin,OU=Wazuh,O=Wazuh,L=California,C=US"
-      OpenSearch Version: 2.6.0
+      OpenSearch Version: 2.8.0
       Contacting opensearch cluster 'opensearch' and wait for YELLOW clusterstate ...
       Clustername: wazuh-cluster
       Clusterstate: GREEN
@@ -193,8 +229,8 @@ Edit the Wazuh indexer security configuration files. We recommend that you back 
       Populate config from /etc/wazuh-indexer/opensearch-security
       Will update '/config' with /etc/wazuh-indexer/opensearch-security/config.yml 
          SUCC: Configuration for 'config' created or updated
+      SUCC: Expected 1 config types for node {"updated_config_types":["config"],"updated_config_size":1,"message":null} is 1 (["config"]) due to: null
       Done with success
-
    
 #. Edit the ``/etc/wazuh-indexer/opensearch-security/roles_mapping.yml`` file and change the following values:
 
@@ -227,7 +263,7 @@ Edit the Wazuh indexer security configuration files. We recommend that you back 
       Security Admin v7
       Will connect to localhost:9200 ... done
       Connected as "CN=admin,OU=Wazuh,O=Wazuh,L=California,C=US"
-      OpenSearch Version: 2.6.0
+      OpenSearch Version: 2.8.0
       Contacting opensearch cluster 'opensearch' and wait for YELLOW clusterstate ...
       Clustername: wazuh-cluster
       Clusterstate: GREEN
@@ -237,8 +273,8 @@ Edit the Wazuh indexer security configuration files. We recommend that you back 
       Populate config from /etc/wazuh-indexer/opensearch-security
       Will update '/rolesmapping' with /etc/wazuh-indexer/opensearch-security/roles_mapping.yml 
          SUCC: Configuration for 'rolesmapping' created or updated
+      SUCC: Expected 1 config types for node {"updated_config_types":["rolesmapping"],"updated_config_size":1,"message":null} is 1 (["rolesmapping"]) due to: null
       Done with success
-
 
 Wazuh dashboard configuration
 -----------------------------
@@ -289,7 +325,7 @@ Wazuh dashboard configuration
 
       opensearch_security.auth.type: "saml"
       server.xsrf.allowlist: ["/_opendistro/_security/saml/acs", "/_opendistro/_security/saml/logout", "/_opendistro/_security/saml/acs/idpinitiated"]
-
+      opensearch_security.session.keepalive: false
 
 #. Restart the Wazuh dashboard service.
 

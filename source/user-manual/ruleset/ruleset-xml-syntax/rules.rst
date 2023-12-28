@@ -2134,7 +2134,7 @@ Example:
 var
 ^^^
 
-Defines a variable that may be used in any place of the same file.
+Defines a variable that can be used in any place within the same file. It must be defined at the base level of the ruleset, not inside a tagged section.
 
 +----------------+------------------------+
 | Attribute      | Value                  |

@@ -88,16 +88,15 @@ To securely store these values, you can use the `Logstash keystore <https://www.
 #. Run the following commands on your Logstash server to set a keystore password:
 
    .. code-block:: console
-      :emphasize-lines: 3,4
+      :emphasize-lines: 2,3
 
-      # touch /etc/sysconfig/logstash
-      # set +o history
-      # echo 'LOGSTASH_KEYSTORE_PASS="<MY_KEYSTORE_PASSWORD>"' > /etc/sysconfig/logstash
-      # export LOGSTASH_KEYSTORE_PASS=<MY_KEYSTORE_PASSWORD>
-      # set -o history
-      # chown root /etc/sysconfig/logstash
-      # chmod 600 /etc/sysconfig/logstash
-      # systemctl start logstash
+      $ set +o history
+      $ echo 'LOGSTASH_KEYSTORE_PASS="<MY_KEYSTORE_PASSWORD>"' | sudo tee /etc/sysconfig/logstash
+      $ export LOGSTASH_KEYSTORE_PASS=<MY_KEYSTORE_PASSWORD>
+      $ set -o history
+      $ sudo chown root /etc/sysconfig/logstash
+      $ sudo chmod 600 /etc/sysconfig/logstash
+      $ sudo systemctl start logstash
 
    Where ``<MY_KEYSTORE_PASSWORD>`` is your keystore password.
 
@@ -109,10 +108,10 @@ To securely store these values, you can use the `Logstash keystore <https://www.
 
    .. code-block:: console
 
-      # sudo -E /usr/share/logstash/bin/logstash-keystore --path.settings /etc/logstash create
-      # sudo -E /usr/share/logstash/bin/logstash-keystore --path.settings /etc/logstash add WAZUH_INDEXER_USERNAME
-      # sudo -E /usr/share/logstash/bin/logstash-keystore --path.settings /etc/logstash add WAZUH_INDEXER_PASSWORD
-      # sudo -E /usr/share/logstash/bin/logstash-keystore --path.settings /etc/logstash add SPLUNK_AUTH
+      $ sudo -E /usr/share/logstash/bin/logstash-keystore --path.settings /etc/logstash create
+      $ sudo -E /usr/share/logstash/bin/logstash-keystore --path.settings /etc/logstash add WAZUH_INDEXER_USERNAME
+      $ sudo -E /usr/share/logstash/bin/logstash-keystore --path.settings /etc/logstash add WAZUH_INDEXER_PASSWORD
+      $ sudo -E /usr/share/logstash/bin/logstash-keystore --path.settings /etc/logstash add SPLUNK_AUTH
 
    Where:
 
@@ -125,7 +124,7 @@ Perform the following steps to configure the Logstash pipeline.
 
    .. code-block:: console
 
-      # touch /etc/logstash/conf.d/wazuh-splunk.conf
+      $ sudo touch /etc/logstash/conf.d/wazuh-splunk.conf
 
 #. Edit the file and add the following configuration. This sets the parameters required to run Logstash.
 
@@ -158,7 +157,7 @@ Perform the following steps to configure the Logstash pipeline.
             http_method => "post" # HTTP method used to forward logs
             url => "<SPLUNK_URL>:8088/services/collector/raw" # endpoint to forward logs to
             headers => ["Authorization", "Splunk ${SPLUNK_AUTH}"]
-            cacert => </PATH/TO/LOCAL/SPLUNK/CERTIFICATE>/ca.pem
+            cacert => "</PATH/TO/LOCAL/SPLUNK/CERTIFICATE>/ca.pem"
          }
       }
 
@@ -171,7 +170,7 @@ Perform the following steps to configure the Logstash pipeline.
 
    .. note::
       
-      For testing purposes, you can avoid SSL verification by removing the line ``cacert => "/PATH/TO/LOCAL/SPLUNK/ca.pem"``.
+      For testing purposes, you can avoid SSL verification by replacing the line ``cacert => "/PATH/TO/LOCAL/SPLUNK/ca.pem"`` with ``ssl_verification_mode => "none"``.
 
 Running Logstash
 ^^^^^^^^^^^^^^^^
@@ -259,16 +258,15 @@ To securely store these values, you can use the `Logstash keystore <https://www.
 #. Run the following commands on your Logstash server to set a keystore password:
 
    .. code-block:: console
-      :emphasize-lines: 3,4
+      :emphasize-lines: 2,3
 
-      # touch /etc/sysconfig/logstash
-      # set +o history
-      # echo 'LOGSTASH_KEYSTORE_PASS="<MY_KEYSTORE_PASSWORD>"' > /etc/sysconfig/logstash
-      # export LOGSTASH_KEYSTORE_PASS=<MY_KEYSTORE_PASSWORD>
-      # set -o history
-      # chown root /etc/sysconfig/logstash
-      # chmod 600 /etc/sysconfig/logstash
-      # systemctl start logstash
+      $ set +o history
+      $ echo 'LOGSTASH_KEYSTORE_PASS="<MY_KEYSTORE_PASSWORD>"'| sudo tee /etc/sysconfig/logstash
+      $ export LOGSTASH_KEYSTORE_PASS=<MY_KEYSTORE_PASSWORD>
+      $ set -o history
+      $ sudo chown root /etc/sysconfig/logstash
+      $ sudo chmod 600 /etc/sysconfig/logstash
+      $ sudo systemctl start logstash
 
    Where ``<MY_KEYSTORE_PASSWORD>`` is your keystore password.
 
@@ -278,8 +276,8 @@ To securely store these values, you can use the `Logstash keystore <https://www.
 
    .. code-block:: console
 
-      # sudo -E /usr/share/logstash/bin/logstash-keystore --path.settings /etc/logstash create
-      # sudo -E /usr/share/logstash/bin/logstash-keystore --path.settings /etc/logstash add SPLUNK_AUTH
+      $ sudo -E /usr/share/logstash/bin/logstash-keystore --path.settings /etc/logstash create
+      $ sudo -E /usr/share/logstash/bin/logstash-keystore --path.settings /etc/logstash add SPLUNK_AUTH
 
 Configuring the pipeline with the Tail mode and the JSON codec for the `file input plugin <https://www.elastic.co/guide/en/logstash/current/plugins-inputs-file.html>`__ allows Logstash to read the Wazuh alerts file.
 
@@ -290,7 +288,7 @@ To configure the Logstash pipeline do the following.
 
    .. code-block:: console
 
-      # touch /etc/logstash/conf.d/wazuh-splunk.conf
+      $ sudo touch /etc/logstash/conf.d/wazuh-splunk.conf
 
 #. Edit the ``wazuh-splunk.conf`` file and add the following configuration. This sets the parameters required to run logstash.
 
@@ -314,7 +312,7 @@ To configure the Logstash pipeline do the following.
             http_method => "post" # HTTP method used to <SPLUNK_URL>forward logs
             url => "<SPLUNK_URL>:8088/services/collector/raw" # endpoint to forward logs to
             headers => ["Authorization", "Splunk ${SPLUNK_AUTH}"]
-            cacert => </PATH/TO/LOCAL/SPLUNK/CERTIFICATE>/ca.pem
+            cacert => "</PATH/TO/LOCAL/SPLUNK/CERTIFICATE>/ca.pem"
          }
       }
 
@@ -325,7 +323,7 @@ To configure the Logstash pipeline do the following.
 
    .. note::
       
-      For testing purposes, you can avoid SSL verification by removing the ``cacert => "</PATH/TO/LOCAL/SPLUNK/CERTIFICATE>/ca.pem"`` line.
+      For testing purposes, you can avoid SSL verification by replacing the line ``cacert => "</PATH/TO/LOCAL/SPLUNK/CERTIFICATE>/ca.pem"`` with ``ssl_verification_mode => "none"``.
 
 #. By default, the ``/var/ossec/logs/alerts/alerts.json`` file is owned by the ``wazuh`` user with restrictive permissions. You must add the ``logstash`` user to the ``wazuh`` group so it can read the file when running Logstash as a service:
 
@@ -518,7 +516,6 @@ Splunk dashboards
 
 Wazuh provides several dashboards for Splunk.
 
--  `Wz-sp-4.x-9.x-search-bar-in-progress <https://packages.wazuh.com/integrations/splunk/4.x-9.x/dashboards/wz-sp-4.x-9.x-search-bar-in-progress>`__
 -  `Wz-sp-4.x-9.x-wazuh-amazon-aws <https://packages.wazuh.com/integrations/splunk/4.x-9.x/dashboards/wz-sp-4.x-9.x-wazuh-amazon-aws>`__
 -  `Wz-sp-4.x-9.x-wazuh-docker-listener <https://packages.wazuh.com/integrations/splunk/4.x-9.x/dashboards/wz-sp-4.x-9.x-wazuh-docker-listener>`__
 -  `Wz-sp-4.x-9.x-wazuh-incident-response <https://packages.wazuh.com/integrations/splunk/4.x-9.x/dashboards/wz-sp-4.x-9.x-wazuh-incident-response>`__
@@ -526,7 +523,6 @@ Wazuh provides several dashboards for Splunk.
 -  `Wz-sp-4.x-9.x-wazuh-pci-dss <https://packages.wazuh.com/integrations/splunk/4.x-9.x/dashboards/wz-sp-4.x-9.x-wazuh-pci-dss>`__
 -  `wz-sp-4.x-9.x-wazuh-security-events <https://packages.wazuh.com/integrations/splunk/4.x-9.x/dashboards/wz-sp-4.x-9.x-wazuh-security-events>`__
 -  `wz-sp-4.x-9.x-wazuh-vulnerabilities <https://packages.wazuh.com/integrations/splunk/4.x-9.x/dashboards/wz-sp-4.x-9.x-wazuh-vulnerabilities>`__
-
 
 After you complete the Splunk integration, you can use these dashboards to display your Wazuh alerts in Splunk.
 
@@ -541,6 +537,11 @@ To import the Wazuh dashboards for Splunk, repeat the following steps for each d
 #. Navigate to **Search & Reporting** in Splunk Web.
 #. Click **Dashboards** and click **Create New Dashboard**.
 #. Enter a dashboard title and select **Dashboard Studio**.
+
+   .. note::
+
+      The dashboard title you enter here will be overwritten with the original title set in the dashboard template.
+
 #. Select **Grid** and click on **Create**.
 #. Click on the **</> Source** icon.
 #. Paste your dashboard file content, replacing everything in the source.

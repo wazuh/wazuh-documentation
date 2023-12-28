@@ -91,7 +91,7 @@
     "js:build:moved-content": "npm run js:minify:moved-content",
     "js:minify:index-redirect": "uglifyjs --compress typeofs=false --mangle --comments \"/^!/\" --source-map \"filename=static/js/index-redirect.min.js.map,includeSources,url=index-redirect.min.js.map\" --output static/js/min/index-redirect.min.js src/js-source/index-redirect.js",
     "js:build:index-redirect": "npm run js:minify:index-redirect",
-    "js:build:page:default": "node config/uglifyjs-group.js FILE=wazuh-documentation && node config/uglifyjs-group.js FILE=sphinx-tabs",
+    "js:build:page:default": "node config/uglifyjs-group.js FILE=wazuh-documentation",
     "js:build:page:index": "node config/uglifyjs-group.js FILE=index",
     "js:build:page:api-reference": "node config/uglifyjs-group.js FILE=api-reference",
     "js:build:page:search": "node config/uglifyjs-group.js FILE=search-results && node config/uglifyjs-group.js FILE=sphinx-search-ui",
@@ -135,7 +135,7 @@
     "npm-run-all": "^4.1.5",
     "npm-watch": "^0.11.0",
     "popper.js": "^1.16.1",
-    "postcss": "^8.3.8",
+    "postcss": "^8.4.31",
     "postcss-cli": "^9.0.1",
     "rollup": "^2.58.0",
     "sass": "1.32.13",
@@ -147,6 +147,6 @@
     "uglify-js": "^3.17.0"
   },
   "resolutions": {
-    "semver": "7.5.2"
+    "semver": "^7.5.2"
   }
 }

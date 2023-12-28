@@ -42,7 +42,7 @@ Okta Configuration
          
 #. Create a new group. Navigate to **Directory** > **Groups** and add a group.
    
-     .. thumbnail:: /images/single-sign-on/okta/04-navigate-to-directory-groups.png
+     .. thumbnail:: /images/single-sign-on/okta/read-only/04-navigate-to-directory-groups-RO.png
         :title: Navigate to directory groups
         :align: center
         :width: 80%    
@@ -73,7 +73,7 @@ Okta Configuration
          :align: center
          :width: 80%   
 
-   #. Assign a name to the application. In our case, we assign the name ``wazuh-sso-app``.
+   #. Assign a name to the application and click on **Next**. In our case, we assign the name ``wazuh-sso-app``.
 
       .. thumbnail:: /images/single-sign-on/okta/08-assign-name.png
          :title: Assign a name to the application
@@ -114,7 +114,7 @@ Okta Configuration
 
 #. Add the new app to the new group. Navigate to **Directory** > **Groups**  and select your group. Click on **Applications** and select **Assign Applications**. From here, assign the app created in step 5 and click on **Done** to save the changes.
    
-   .. thumbnail:: /images/single-sign-on/okta/12-navigate-to-directory-groups.png
+   .. thumbnail:: /images/single-sign-on/okta/read-only/12-navigate-to-directory-groups-RO.png
       :title: Navigate to Directory - Groups - <YOUR_GROUP>
       :align: center
       :width: 80%   
@@ -180,7 +180,7 @@ Edit the Wazuh indexer security configuration files. We recommend that you back 
                 challenge: true
                 config:
                   idp:
-                    metadata_url: "https://....okta.com/app/..../sso/saml/metadata"
+                    metadata_url: 'https://....okta.com/app/..../sso/saml/metadata'
                     entity_id: "http://www.okta.com/...."
                   sp:
                     entity_id: wazuh-saml
@@ -215,7 +215,7 @@ Edit the Wazuh indexer security configuration files. We recommend that you back 
       Security Admin v7
       Will connect to localhost:9200 ... done
       Connected as "CN=admin,OU=Wazuh,O=Wazuh,L=California,C=US"
-      OpenSearch Version: 2.6.0
+      OpenSearch Version: 2.8.0
       Contacting opensearch cluster 'opensearch' and wait for YELLOW clusterstate ...
       Clustername: wazuh-cluster
       Clusterstate: GREEN
@@ -225,6 +225,7 @@ Edit the Wazuh indexer security configuration files. We recommend that you back 
       Populate config from /etc/wazuh-indexer/opensearch-security
       Will update '/config' with /etc/wazuh-indexer/opensearch-security/config.yml 
          SUCC: Configuration for 'config' created or updated
+      SUCC: Expected 1 config types for node {"updated_config_types":["config"],"updated_config_size":1,"message":null} is 1 (["config"]) due to: null
       Done with success
 
 Wazuh dashboard configuration
@@ -292,6 +293,7 @@ Wazuh dashboard configuration
 
       opensearch_security.auth.type: "saml"
       server.xsrf.allowlist: ["/_opendistro/_security/saml/acs", "/_opendistro/_security/saml/logout", "/_opendistro/_security/saml/acs/idpinitiated"]
+      opensearch_security.session.keepalive: false
 
 #. Restart the Wazuh dashboard service.
 

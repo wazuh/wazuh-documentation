@@ -4,6 +4,8 @@ const redirections = [];
 
 /* Note: new release versions must always be inserted in the first position of the array "versions" */
 const versions = [
+  '4.7',
+  '4.6',
   '4.5',
   '4.4',
   '4.3',
@@ -59,6 +61,97 @@ removedUrls['x.y'] = [
 ];
 */
 
+/* *** RELEASE 4.7 ****/
+
+/* Pages added in 4.7 */
+
+newUrls['4.7'] = [
+  '/getting-started/use-cases/posture-management.html',
+  '/release-notes/release-4-7-0.html',
+  '/release-notes/release-4-7-1.html',
+  '/cloud-security/azure/posture-management.html',
+  '/cloud-security/gcp/posture-management.html',
+];
+
+/* *** RELEASE 4.6 ****/
+
+/* Redirections from 4.5 to 4.6  */
+
+redirections.push(
+  {
+    'target': ['4.5=>4.6'],
+    '4.5': '/user-manual/uninstall/central-components.html',
+    '4.6': '/user-manual/uninstall/index.html',
+  },
+);
+
+/* Pages added in 4.6 */
+
+newUrls['4.6'] = [
+  '/release-notes/release-4-6-0.html',
+  '/cloud-security/ms-graph/index.html',
+  '/cloud-security/ms-graph/monitoring-ms-graph-activity.html',
+  '/user-manual/reference/ossec-conf/ms-graph-module.html',
+  '/user-manual/wazuh-dashboard/queries.html',
+  '/user-manual/wazuh-dashboard/creating-custom-dashboards.html',
+  '/cloud-security/azure/activity-services/entra/index.html',
+  '/cloud-security/azure/activity-services/entra/graph.html',
+  '/user-manual/user-administration/single-sign-on/administrator/microsoft-entra-id.html',
+  '/user-manual/user-administration/single-sign-on/read-only/microsoft-entra-id.html',
+];
+
+/* Pages no longer available in 4.6 */
+
+removedUrls['4.6'] = [
+  '/deployment-options/elastic-stack/index.html',
+  '/deployment-options/elastic-stack/distributed-deployment/index.html',
+  '/deployment-options/elastic-stack/distributed-deployment/elasticsearch-cluster/index.html',
+  '/deployment-options/elastic-stack/distributed-deployment/elasticsearch-cluster/elasticsearch-single-node-cluster.html',
+  '/deployment-options/elastic-stack/distributed-deployment/elasticsearch-cluster/elasticsearch-multi-node-cluster.html',
+  '/deployment-options/elastic-stack/distributed-deployment/wazuh-cluster/index.html',
+  '/deployment-options/elastic-stack/distributed-deployment/wazuh-cluster/wazuh-single-node-cluster.html',
+  '/deployment-options/elastic-stack/distributed-deployment/wazuh-cluster/wazuh-multi-node-cluster.html',
+  '/deployment-options/elastic-stack/distributed-deployment/kibana/index.html',
+  '/deployment-options/elastic-stack/all-in-one-deployment/index.html',
+  '/deployment-options/splunk/index.html',
+  '/deployment-options/splunk/splunk-install.html',
+  '/deployment-options/splunk/splunk-wazuh.html',
+  '/deployment-options/splunk/splunk-minimal-distributed.html',
+  '/deployment-options/splunk/splunk-distributed.html',
+  '/deployment-options/splunk/splunk-app.html',
+  '/deployment-options/splunk/splunk-basic.html',
+  '/deployment-options/splunk/splunk-reverse-proxy.html',
+  '/deployment-options/splunk/splunk-polling.html',
+  '/deployment-options/splunk/splunk-rbac.html',
+  '/upgrade-guide/elasticsearch-kibana-filebeat/upgrading-elastic-stack.html',
+  '/upgrade-guide/elasticsearch-kibana-filebeat/upgrading-open-distro.html',
+  '/upgrade-guide/legacy/upgrading-elastic-stack/from-2.x-to-5.x.html',
+  '/upgrade-guide/legacy/upgrading-elastic-stack/from-6.8-to-7.x.html',
+  '/upgrade-guide/legacy/upgrading-elastic-stack/from-6.x-to-6.8.html',
+  '/upgrade-guide/legacy/upgrading-elastic-stack/index.html',
+  '/upgrade-guide/legacy/upgrading-agent/from-1.x-to-2.x.html',
+  '/upgrade-guide/legacy/upgrading-agent/from-2.x-to-3.x.html',
+  '/upgrade-guide/legacy/upgrading-agent/index.html',
+  '/upgrade-guide/legacy/upgrading-wazuh-server/from-1.x-to-2.x.html',
+  '/upgrade-guide/legacy/upgrading-wazuh-server/from-2.x-to-3.x.html',
+  '/upgrade-guide/legacy/upgrading-wazuh-server/index.html',
+  '/upgrade-guide/legacy/upgrading-wazuh-server/restore-alerts-from-2.x-to-3.x.html',
+  '/user-manual/elasticsearch/configure-indices.html',
+  '/user-manual/elasticsearch/elasticsearch.html',
+  '/user-manual/elasticsearch/index.html',
+  '/user-manual/elasticsearch/troubleshooting.html',  
+  '/user-manual/elasticsearch/elastic-tuning.html',
+  '/user-manual/uninstall/central-components.html',
+  '/user-manual/uninstall/elastic-stack.html',
+  '/user-manual/uninstall/open-distro.html',
+  '/development/packaging/generate-wazuh-kibana-app.html',
+  '/development/packaging/generate-wazuh-splunk-app.html',
+  '/cloud-security/azure/activity-services/active-directory/index.html',
+  '/cloud-security/azure/activity-services/active-directory/graph.html',
+  '/user-manual/user-administration/single-sign-on/administrator/azure-active-directory.html',
+  '/user-manual/user-administration/single-sign-on/read-only/azure-active-directory.html'
+];
+
 /* *** RELEASE 4.5 ****/
 
 /* Redirections from 4.4 to 4.5  */
@@ -84,6 +177,51 @@ redirections.push(
     '4.4': '/user-manual/capabilities/log-data-collection/log-data-configuration.html',
     '4.5': '/user-manual/capabilities/log-data-collection/monitoring-log-files.html',
   },
+  {
+    'target': ['4.4=>4.5', '4.5=>4.4'],
+    '4.4': '/getting-started/use-cases/active-response.html',
+    '4.5': '/getting-started/use-cases/incident-response.html',
+  },
+  {
+    'target': ['4.4=>4.5', '4.5=>4.4'],
+    '4.4': '/getting-started/use-cases/rootkits-detection.html',
+    '4.5': '/getting-started/use-cases/malware-detection.html',
+  },
+  {
+    'target': ['4.4=>4.5', '4.5=>4.4'],
+    '4.4': '/getting-started/use-cases/cloud-security.html',
+    '4.5': '/getting-started/use-cases/cloud-workload-protection.html',
+  },
+  {
+    'target': ['4.4=>4.5', '4.5=>4.4'],
+    '4.4': '/getting-started/use-cases/system-inventory.html',
+    '4.5': '/getting-started/use-cases/it-hygiene#system-inventory.html',
+  },
+  {
+    'target': ['4.4=>4.5', '4.5=>4.4'],
+    '4.4': '/user-manual/capabilities/command-monitoring/command-configuration.html',
+    '4.5': '/user-manual/capabilities/command-monitoring/use-cases/index.html',
+  },
+  {
+    'target': ['4.4=>4.5'],
+    '4.4': '/user-manual/capabilities/command-monitoring/command-faq.html',
+    '4.5': '/user-manual/capabilities/command-monitoring/index.html',
+  },
+  {
+    'target': ['4.4=>4.5'],
+    '4.4': '/user-manual/elasticsearch/index.html',
+    '4.5': '/user-manual/wazuh-indexer/index.html',
+  },
+  {
+    'target': ['4.4=>4.5', '4.5=>4.4'],
+    '4.4': '/user-manual/elasticsearch/elasticsearch.html',
+    '4.5': '/user-manual/wazuh-indexer/wazuh-indexer-indices.html',
+  },
+  {
+    'target': ['4.4=>4.5', '4.5=>4.4'],
+    '4.4': '/user-manual/elasticsearch/elastic-tuning.html',
+    '4.5': '/user-manual/wazuh-indexer/wazuh-indexer-tuning.html',
+  },
 );
 
 /* Pages added in 4.5 */
@@ -91,6 +229,9 @@ redirections.push(
 newUrls['4.5'] = [
   '/release-notes/release-4-5-0.html',
   '/release-notes/release-4-5-1.html',
+  '/release-notes/release-4-5-2.html',
+  '/release-notes/release-4-5-3.html',
+  '/release-notes/release-4-5-4.html',
   '/integrations-guide/index.html',
   '/integrations-guide/elastic-stack/index.html',
   '/integrations-guide/opensearch/index.html',
@@ -101,6 +242,26 @@ newUrls['4.5'] = [
   '/user-manual/capabilities/log-data-collection/multiple-socket-outputs.html',
   '/user-manual/capabilities/log-data-collection/syslog.html',
   '/user-manual/capabilities/log-data-collection/use-cases.html',
+  '/user-manual/capabilities/command-monitoring/configuration.html',
+  '/user-manual/capabilities/command-monitoring/command-output-analysis.html',
+  '/user-manual/capabilities/command-monitoring/use-cases/check-if-the-output-changed.html',
+  '/user-manual/capabilities/command-monitoring/use-cases/detect-usb-storage.html',
+  '/user-manual/capabilities/command-monitoring/use-cases/disk-space-utilization.html',
+  '/user-manual/capabilities/command-monitoring/use-cases/index.html',
+  '/user-manual/capabilities/command-monitoring/use-cases/load-average.html',
+  '/user-manual/capabilities/command-monitoring/use-cases/monitoring-running-processes.html',
+  '/getting-started/use-cases/incident-response.html',
+  '/getting-started/use-cases/threat-hunting.html',
+  '/getting-started/use-cases/malware-detection.html',
+  '/getting-started/use-cases/cloud-workload-protection.html',
+  '/getting-started/use-cases/it-hygiene.html',
+  '/user-manual/wazuh-indexer/index.html',
+  '/user-manual/wazuh-indexer/wazuh-indexer-indices.html',
+  '/user-manual/wazuh-indexer/re-indexing.html',
+  '/user-manual/wazuh-indexer/index-life-management.html',
+  '/user-manual/wazuh-indexer/wazuh-indexer-tuning.html',
+  '/user-manual/wazuh-indexer/migrating-wazuh-indices.html',
+  '/user-manual/user-administration/ldap.html',
 ];
 
 /* Pages no longer available in 4.5 */
@@ -110,6 +271,17 @@ removedUrls['4.5'] = [
   '/user-manual/capabilities/log-data-collection/how-to-collect-wlogs.html',
   '/user-manual/capabilities/log-data-collection/log-data-faq.html',
   '/user-manual/capabilities/log-data-collection/log-data-configuration.html',
+  '/getting-started/use-cases/active-response.html',
+  '/getting-started/use-cases/rootkits-detection.html',
+  '/getting-started/use-cases/cloud-security.html',
+  '/getting-started/use-cases/system-inventory.html',
+  '/user-manual/capabilities/command-monitoring/command-configuration.html',
+  '/user-manual/capabilities/command-monitoring/command-faq.html',
+  '/user-manual/elasticsearch/configure-indices.html',
+  '/user-manual/elasticsearch/elastic-tuning.html',
+  '/user-manual/elasticsearch/elasticsearch.html',
+  '/user-manual/elasticsearch/index.html',
+  '/user-manual/elasticsearch/troubleshooting.html',  
 ];
 
 /* *** RELEASE 4.4 ****/

@@ -42,30 +42,30 @@ Indicate your deployment configuration, create the SSL certificates to encrypt c
           # Wazuh indexer nodes
           indexer:
             - name: node-1
-              ip: <indexer-node-ip>
+              ip: "<indexer-node-ip>"
             #- name: node-2
-            #  ip: <indexer-node-ip>
+            #  ip: "<indexer-node-ip>"
             #- name: node-3
-            #  ip: <indexer-node-ip>
+            #  ip: "<indexer-node-ip>"
 
           # Wazuh server nodes
           # If there is more than one Wazuh server
           # node, each one must have a node_type
           server:
             - name: wazuh-1
-              ip: <wazuh-manager-ip>
+              ip: "<wazuh-manager-ip>"
             #  node_type: master
             #- name: wazuh-2
-            #  ip: <wazuh-manager-ip>
+            #  ip: "<wazuh-manager-ip>"
             #  node_type: worker
             #- name: wazuh-3
-            #  ip: <wazuh-manager-ip>
+            #  ip: "<wazuh-manager-ip>"
             #  node_type: worker
 
           # Wazuh dashboard nodes
           dashboard:
             - name: dashboard
-              ip: <dashboard-node-ip>
+              ip: "<dashboard-node-ip>"
 
 
 #. Run the assistant with the option ``--generate-config-files`` to generate the  Wazuh cluster key, certificates, and passwords necessary for installation. You can find these files in ``./wazuh-install-files.tar``.
@@ -137,20 +137,19 @@ Testing the cluster installation
       {
         "name" : "node-1",
         "cluster_name" : "wazuh-cluster",
-        "cluster_uuid" : "bMz0BKdlRVui5jF-mlt6yg",
+        "cluster_uuid" : "095jEW-oRJSFKLz5wmo5PA",
         "version" : {
           "number" : "7.10.2",
           "build_type" : "rpm",
-          "build_hash" : "f2f809ea280ffba217451da894a5899f1cec02ab",
-          "build_date" : "2022-12-12T22:17:42.341124910Z",
+          "build_hash" : "db90a415ff2fd428b4f7b3f800a51dc229287cb4",
+          "build_date" : "2023-06-03T06:24:25.112415503Z",
           "build_snapshot" : false,
-          "lucene_version" : "9.4.2",
+          "lucene_version" : "9.6.0",
           "minimum_wire_compatibility_version" : "7.10.0",
           "minimum_index_compatibility_version" : "7.0.0"
         },
         "tagline" : "The OpenSearch Project: https://opensearch.org/"
       }
-
 
 #. Replace ``<WAZUH_INDEXER_IP>`` and ``<ADMIN_PASSWORD>``, and run the following command to check if the cluster is working correctly:
 

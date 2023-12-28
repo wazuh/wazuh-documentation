@@ -3,8 +3,6 @@
 .. meta::
   :description: The Wazuh GCP Storage module allows you to process logs stored in Google Cloud Storage buckets. Learn more about how to configure the module in this section.
 
-.. _gcp-bucket:
-
 gcp-bucket
 ==========
 
@@ -15,30 +13,28 @@ gcp-bucket
 		<gcp-bucket>
 		</gcp-bucket>
 
-This configuration section is used to configure the Google Cloud Storage bucket module.
+   This configuration section is used to configure the Google Cloud Storage bucket module.
 
-Options
--------
+.. topic:: Main options:
+
+   - `enabled`_
+   - `bucket`_
+
+.. topic:: Scheduling options:
+
+   - `run_on_start`_
+   - `interval`_
+   - `day`_
+   - `wday`_
+   - `time`_
 
 Main options
-^^^^^^^^^^^^
-
-- `enabled`_
-- `bucket type`_
-
-Scheduling options
-^^^^^^^^^^^^^^^^^^
-
-- `run_on_start`_
-- `interval`_
-- `day`_
-- `wday`_
-- `time`_
+------------
 
 enabled
 ^^^^^^^
 
-This indicates if the module is enabled or disabled.
+Enables or disables the module.
 
 +--------------------+--------------+
 | **Default value**  | n/a          |
@@ -55,24 +51,49 @@ logging
 This option has no effect. The module now uses the :ref:`wazuh_modules.debug <wazuh_modules_options>` level to set its logging level.
 
 
-bucket type
-^^^^^^^^^^^
+bucket
+^^^^^^
 
 Defines a bucket to process. It must have its ``type`` attribute defined. It supports multiple instances of this option.
 
-Bucket options
-~~~~~~~~~~~~~~
+   .. code-block:: xml
 
-- `bucket\\name`_
-- `bucket\\credentials_file`_
-- `bucket\\path`_
-- `bucket\\only_logs_after`_
-- `bucket\\remove_from_bucket`_
+      <bucket type="access_logs">
 
-type
-^^^^
+      </bucket>
 
-Specifies the type of bucket. It is an attribute of the ``bucket`` tag.
+.. topic:: Bucket attributes
+
+   +----------------------------------------+-------------------------------------------------------------+-----------------------------------------------+
+   | Attributes                             | Allowed values                                              | Mandatory/Optional                            |
+   +========================================+=============================================================+===============================================+
+   | :ref:`type_attribute`                  | ``access_logs``                                             | Mandatory                                     |
+   +----------------------------------------+-------------------------------------------------------------+-----------------------------------------------+
+
+.. topic:: Bucket options
+
+   +----------------------------------------+-------------------------------------------------------------+-----------------------------------------------+
+   | Options                                | Allowed values                                              | Mandatory/Optional                            |
+   +========================================+=============================================================+===============================================+
+   | :ref:`gcp_bucket_name`                 | Any valid bucket name                                       | Mandatory                                     |
+   +----------------------------------------+-------------------------------------------------------------+-----------------------------------------------+
+   | :ref:`gcp_bucket_credentials_file`     | Path to a credentials file.                                 | Mandatory                                     |
+   |                                        | It can be absolute or relative to ``WAZUH_HOME``            |                                               |
+   +----------------------------------------+-------------------------------------------------------------+-----------------------------------------------+
+   | :ref:`gcp_bucket_path`                 | Any valid path                                              | Optional                                      |
+   +----------------------------------------+-------------------------------------------------------------+-----------------------------------------------+
+   | :ref:`gcp_bucket_only_logs_after`      | Valid date in YYYY-MM-DD format                             | Optional                                      |
+   +----------------------------------------+-------------------------------------------------------------+-----------------------------------------------+
+   | :ref:`gcp_bucket_remove_from_bucket`   | A value to determine if each log file is deleted once it    | Optional                                      |
+   |                                        | has been collected by the module                            |                                               |
+   +----------------------------------------+-------------------------------------------------------------+-----------------------------------------------+
+
+.. _type_attribute:
+
+type (attribute)
+~~~~~~~~~~~~~~~~
+
+Specifies the type of bucket.
 
 +--------------------+-------------+
 | **Default value**  | N/A         |
@@ -80,10 +101,12 @@ Specifies the type of bucket. It is an attribute of the ``bucket`` tag.
 | **Allowed values** | access_logs |
 +--------------------+-------------+
 
-bucket\\name
-^^^^^^^^^^^^
+.. _gcp_bucket_name:
 
-Name of the Google Cloud Storage bucket from where logs are read.
+name
+~~~~
+
+Name of the Google Cloud Storage bucket from which logs are read.
 
 +--------------------+-----------------------------+
 | **Default value**  | N/A                         |
@@ -91,10 +114,12 @@ Name of the Google Cloud Storage bucket from where logs are read.
 | **Allowed values** | Any valid bucket name       |
 +--------------------+-----------------------------+
 
-bucket\\credentials_file
-^^^^^^^^^^^^^^^^^^^^^^^^
+.. _gcp_bucket_credentials_file:
 
-This setting specifies the path to the Google Cloud credentials file in JW Tokens. It allows both relative (to $HOME_INSTALLATION) and absolute paths.
+credentials_file
+~~~~~~~~~~~~~~~~
+
+Path to the Google Cloud credentials file. It can be an absolute path or relative to ``WAZUH_HOME``.
 
 +--------------------+--------------------------------+
 | **Default value**  | n/a                            |
@@ -104,10 +129,12 @@ This setting specifies the path to the Google Cloud credentials file in JW Token
 
 For example ``<credentials_file>wodles/gcp-bucket/credentials.json</credentials_file>``.
 
-bucket\\path
-^^^^^^^^^^^^
+.. _gcp_bucket_path:
 
-If defined, the path or prefix for the bucket.
+path
+~~~~
+
+Bucket path or prefix.
 
 +--------------------+---------------+
 | **Default value**  | N/A           |
@@ -115,21 +142,25 @@ If defined, the path or prefix for the bucket.
 | **Allowed values** | Valid path    |
 +--------------------+---------------+
 
-bucket\\only_logs_after
-^^^^^^^^^^^^^^^^^^^^^^^
+.. _gcp_bucket_only_logs_after:
 
-A valid date, in YYYY-MMM-DD format. Only logs from that date onwards will be parsed.
+only_logs_after
+~~~~~~~~~~~~~~~
+
+Parse logs from a specific date onwards. It must follow the YYYY-MM-DD format. 
 
 +--------------------+-----------------------------------+
 | **Default value**  | Date of execution at ``00:00:00`` |
 +--------------------+-----------------------------------+
-| **Allowed values** | Valid date                        |
+| **Allowed values** | Valid date [YYYY-MM-DD]           |
 +--------------------+-----------------------------------+
 
-bucket\\remove_from_bucket
-^^^^^^^^^^^^^^^^^^^^^^^^^^
+.. _gcp_bucket_remove_from_bucket:
 
-Define if logs from the Google Cloud Storage bucket should be removed after they are read by the module.
+remove_from_bucket
+~~~~~~~~~~~~~~~~~~
+
+Remove the logs from the Google Cloud Storage bucket once the module reads them.
 
 +--------------------+---------+
 | **Default value**  | no      |
@@ -137,12 +168,13 @@ Define if logs from the Google Cloud Storage bucket should be removed after they
 | **Allowed values** | yes, no |
 +--------------------+---------+
 
-
+Scheduling options
+------------------
 
 run_on_start
 ^^^^^^^^^^^^^
 
-Trigger the module in case the Wazuh service starts or restarts.
+Run the module on Wazuh service start or restart.
 
 +--------------------+---------+
 | **Default value**  | yes     |
@@ -153,7 +185,7 @@ Trigger the module in case the Wazuh service starts or restarts.
 interval
 ^^^^^^^^
 
-The interval between module executions.
+Time interval between module executions.
 
 +--------------------+----------------------------------------------------------------------------------------------------------------------------------------------------------------+
 | **Default value**  | 1h                                                                                                                                                             |
@@ -164,7 +196,7 @@ The interval between module executions.
 day
 ^^^
 
-Day of the month to run the script to fetch logs from GCP.
+Day of the month to retrieve logs from GCP.
 
 +--------------------+--------------------------+
 | **Default value**  | n/a                      |
@@ -179,7 +211,7 @@ Day of the month to run the script to fetch logs from GCP.
 wday
 ^^^^
 
-Day of the week to run the script to fetch logs. This option is **not compatible** with the ``day`` option.
+Day of the week to retrieve logs from GCP. This option is **not compatible** with the ``day`` option.
 
 +--------------------+--------------------------+
 | **Default value**  | n/a                      |
@@ -223,7 +255,11 @@ Linux configuration:
     <gcp-bucket>
         <run_on_start>yes</run_on_start>
         <interval>1m</interval>
-        <project_id>wazuh-dev</project_id>
-        <subscription_name>wazuhdns</subscription_name>
-        <credentials_file>wodles/gcp-bucket/credentials.json</credentials_file>
+        <bucket type="access_logs">
+            <name>wazuh-test-bucket</name>
+            <credentials_file>/var/ossec/wodles/gcloud/credentials.json</credentials_file>
+            <only_logs_after>2021-JUN-01</only_logs_after>
+            <path>access_logs/</path>
+            <remove_from_bucket>no</remove_from_bucket>
+        </bucket>
     </gcp-bucket>

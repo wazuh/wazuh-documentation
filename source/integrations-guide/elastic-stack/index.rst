@@ -68,8 +68,8 @@ Create a ``/etc/logstash/templates/`` directory and download the template as ``w
 
 .. code-block:: console
 
-   # mkdir /etc/logstash/templates
-   # curl -o /etc/logstash/templates/wazuh.json https://packages.wazuh.com/integrations/elastic/4.x-8.x/dashboards/wz-es-4.x-8.x-template.json
+   $ sudo mkdir /etc/logstash/templates
+   $ sudo curl -o /etc/logstash/templates/wazuh.json https://packages.wazuh.com/integrations/elastic/4.x-8.x/dashboards/wz-es-4.x-8.x-template.json
 
 In Elasticsearch, the indexes support up to ``1000`` fields by default. However, Wazuh logs might contain even more than this number of fields. To solve this issue, the provided ``wazuh.json`` template has the fields set to ``10000`` by default as shown below:
 
@@ -109,16 +109,15 @@ We use the `Logstash keystore <https://www.elastic.co/guide/en/logstash/current/
 #. Run the following commands on your Logstash server to set a keystore password:
 
    .. code-block:: console
-      :emphasize-lines: 3,4
+      :emphasize-lines: 2,3
 
-      # touch /etc/sysconfig/logstash
-      # set +o history
-      # echo 'LOGSTASH_KEYSTORE_PASS="<MY_KEYSTORE_PASSWORD>"' > /etc/sysconfig/logstash
-      # export LOGSTASH_KEYSTORE_PASS=<MY_KEYSTORE_PASSWORD>
-      # set -o history
-      # chown root /etc/sysconfig/logstash
-      # chmod 600 /etc/sysconfig/logstash
-      # systemctl start logstash
+      $ set +o history
+      $ echo 'LOGSTASH_KEYSTORE_PASS="<MY_KEYSTORE_PASSWORD>"'| sudo tee /etc/sysconfig/logstash
+      $ export LOGSTASH_KEYSTORE_PASS=<MY_KEYSTORE_PASSWORD>
+      $ set -o history
+      $ sudo chown root /etc/sysconfig/logstash
+      $ sudo chmod 600 /etc/sysconfig/logstash
+      $ sudo systemctl start logstash
 
    Where ``<MY_KEYSTORE_PASSWORD>`` is your keystore password.
 
@@ -165,7 +164,7 @@ We use the `Logstash keystore <https://www.elastic.co/guide/en/logstash/current/
 
       .. code-block:: console
 
-         # touch /etc/logstash/conf.d/wazuh-elasticsearch.conf
+         $ sudo touch /etc/logstash/conf.d/wazuh-elasticsearch.conf
    
    #. Add the following configuration to the ``wazuh-elasticsearch.conf`` file. This sets the parameters required to run Logstash.
 
@@ -296,8 +295,8 @@ Create a ``/etc/logstash/templates/`` directory and download the template as ``w
 
 .. code-block:: console
 
-   # mkdir /etc/logstash/templates
-   # curl -o /etc/logstash/templates/wazuh.json https://packages.wazuh.com/integrations/elastic/4.x-8.x/dashboards/wz-es-4.x-8.x-template.json
+   $ sudo mkdir /etc/logstash/templates
+   $ sudo curl -o /etc/logstash/templates/wazuh.json https://packages.wazuh.com/integrations/elastic/4.x-8.x/dashboards/wz-es-4.x-8.x-template.json
 
 In Elasticsearch, the indexes support up to ``1000`` fields by default. However, Wazuh logs might contain even more than this number of fields. To solve this issue, the provided ``wazuh.json`` template has the fields set to ``10000`` by default as shown below:
 
@@ -334,16 +333,15 @@ We use the `Logstash keystore <https://www.elastic.co/guide/en/logstash/current/
 #. Run the following commands on your Logstash server to set a keystore password:
 
    .. code-block:: console
-      :emphasize-lines: 3,4
+      :emphasize-lines: 2,3
 
-      # touch /etc/sysconfig/logstash
-      # set +o history
-      # echo 'LOGSTASH_KEYSTORE_PASS="<MY_KEYSTORE_PASSWORD>"' > /etc/sysconfig/logstash
-      # export LOGSTASH_KEYSTORE_PASS=<MY_KEYSTORE_PASSWORD>
-      # set -o history
-      # chown root /etc/sysconfig/logstash
-      # chmod 600 /etc/sysconfig/logstash
-      # systemctl start logstash
+      $ set +o history
+      $ echo 'LOGSTASH_KEYSTORE_PASS="<MY_KEYSTORE_PASSWORD>"'| sudo tee /etc/sysconfig/logstash
+      $ export LOGSTASH_KEYSTORE_PASS=<MY_KEYSTORE_PASSWORD>
+      $ set -o history
+      $ sudo chown root /etc/sysconfig/logstash
+      $ sudo chmod 600 /etc/sysconfig/logstash
+      $ sudo systemctl start logstash
 
    Where ``<MY_KEYSTORE_PASSWORD>`` is your keystore password.
 
@@ -363,14 +361,14 @@ We use the `Logstash keystore <https://www.elastic.co/guide/en/logstash/current/
 
       .. code-block:: console
 
-         # sudo -E /usr/share/logstash/bin/logstash-keystore --path.settings /etc/logstash create
+         $ sudo -E /usr/share/logstash/bin/logstash-keystore --path.settings /etc/logstash create
    
    #. Store your Elasticsearch username and password:
 
       .. code-block:: console
 
-         # sudo -E /usr/share/logstash/bin/logstash-keystore --path.settings /etc/logstash add ELASTICSEARCH_USERNAME
-         # sudo -E /usr/share/logstash/bin/logstash-keystore --path.settings /etc/logstash add ELASTICSEARCH_PASSWORD
+         $ sudo -E /usr/share/logstash/bin/logstash-keystore --path.settings /etc/logstash add ELASTICSEARCH_USERNAME
+         $ sudo -E /usr/share/logstash/bin/logstash-keystore --path.settings /etc/logstash add ELASTICSEARCH_PASSWORD
 
       Where ``ELASTICSEARCH_USERNAME`` and ``ELASTICSEARCH_PASSWORD`` are keys representing your Elasticsearch username and password respectively.
 
@@ -380,7 +378,7 @@ We use the `Logstash keystore <https://www.elastic.co/guide/en/logstash/current/
 
       .. code-block:: console
 
-         # touch /etc/logstash/conf.d/wazuh-elasticsearch.conf
+         $ sudo touch /etc/logstash/conf.d/wazuh-elasticsearch.conf
    
    #. Add the following configuration to the ``wazuh-elasticsearch.conf`` file. This sets the parameters required to run Logstash.
 

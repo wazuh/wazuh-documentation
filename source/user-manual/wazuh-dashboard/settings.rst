@@ -49,7 +49,7 @@ The Wazuh dashboard stores log information on the ``/usr/share/wazuh-dashboard/d
 About
 -----
 
-This section provides information about your currently installed Wazuh dashboard package, such as version, revision, and installation date. If you want to discover what's new on each release, you can go to our `Changelog file <https://github.com/wazuh/wazuh-kibana-app/blob/master/CHANGELOG.md>`_ to check it out.
+This section provides information about your currently installed Wazuh dashboard package, such as version, revision, and installation date. If you want to discover what's new on each release, you can go to our `Changelog file <https://github.com/wazuh/wazuh-dashboard-plugins/blob/master/CHANGELOG.md>`_ to check it out.
 
 .. thumbnail:: ../../images/kibana-app/features/settings/about.png
   :align: center

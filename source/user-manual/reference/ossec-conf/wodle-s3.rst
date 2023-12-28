@@ -702,22 +702,27 @@ It is necessary to specify the type as an attribute of the ``subscriber`` tag to
 
 		</subscriber>
 
-The currently available type is: ``security_lake``.
+The currently available types are: ``security_lake`` and ``buckets``.
 
 +----------------------------------------+-------------------------------------------------------------+-----------------------------------------------+
 | Options                                | Allowed values                                              | Mandatory/Optional                            |
 +========================================+=============================================================+===============================================+
-| :ref:`subscriber_sqs_name`             | Any valid SQS name                                          | Mandatory for Amazon Security Lake            |
-|                                        |                                                             | Subscription                                  |
+| :ref:`subscriber_sqs_name`             | Any valid SQS name                                          | Mandatory                                     |
 +----------------------------------------+-------------------------------------------------------------+-----------------------------------------------+
 | :ref:`subscriber_iam_role_arn`         | Valid role ARN                                              | Mandatory for Amazon Security Lake            |
 |                                        |                                                             | Subscription                                  |
 +----------------------------------------+-------------------------------------------------------------+-----------------------------------------------+
 | :ref:`subscriber_external_id`          | Valid external ID                                           | Mandatory for Amazon Security Lake            |
 |                                        |                                                             | Subscription                                  |
+|                                        |                                                             | (not available for Custom Logs Buckets)       |
++----------------------------------------+-------------------------------------------------------------+-----------------------------------------------+
+| :ref:`subscriber_aws_profile`          | Valid profile name                                          | Optional                                      |
 +----------------------------------------+-------------------------------------------------------------+-----------------------------------------------+
 | :ref:`subscriber_iam_role_duration`    | Number of seconds between 900 and 3600                      | Optional (if set, it requires an iam_role_arn |
 |                                        |                                                             | to be provided)                               |
++----------------------------------------+-------------------------------------------------------------+-----------------------------------------------+
+| :ref:`subscriber_discard_regex`        | A regex value to determine if an event must be discarded    | Optional                                      |
+|                                        |                                                             | (only available for Custom Logs Buckets)      |
 +----------------------------------------+-------------------------------------------------------------+-----------------------------------------------+
 | :ref:`subscriber_sts_endpoint`         | Any valid VPC endpoint URL for STS                          | Optional                                      |
 +----------------------------------------+-------------------------------------------------------------+-----------------------------------------------+
@@ -776,6 +781,54 @@ A valid number of seconds that defines the duration of the session assumed when 
 | **Allowed values** | Number of seconds between 900 and 3600   |
 +--------------------+------------------------------------------+
 
+.. _subscriber_aws_profile:
+
+aws_profile
+^^^^^^^^^^^
+
+A valid profile name from a Shared Credential File or AWS Config File with the permission to access the service.
+
++--------------------+--------------------+
+| **Default value**  | N/A                |
++--------------------+--------------------+
+| **Allowed values** | Valid profile name |
++--------------------+--------------------+
+
+.. _subscriber_discard_regex:
+
+discard_regex
+^^^^^^^^^^^^^
+
+A regular expression to determine if an event must be discarded. JSON and CSV logs require a mandatory ``field`` attribute. The regex is applied to the event field specified with this attribute.
+
++--------------------+----------------------------------------+
+| **Default value**  | N/A                                    |
++--------------------+----------------------------------------+
+| **Allowed values** | Any regex or sregex expression         |
++--------------------+----------------------------------------+
+
+Attributes:
+
++-----------+-----------------------------------------------------------------+
+| **field** | The event field where to apply the regex                        |
+|           +------------------+----------------------------------------------+
+|           | Default value    | N/A                                          |
+|           +------------------+----------------------------------------------+
+|           | Allowed values   | A str containing the full field name path    |
++-----------+------------------+----------------------------------------------+
+
+Usage examples:
+
+.. code-block:: console
+
+    <discard_regex field="data.configurationItemStatus">REJECT</discard_regex>
+
+Usage example only for plain text logs:
+
+.. code-block:: console
+
+    <discard_regex>.*Log:.*</discard_regex>
+
 .. _subscriber_sts_endpoint:
 
 sts_endpoint
@@ -815,8 +868,7 @@ Example of configuration
       <skip_on_error>no</skip_on_error>
       <bucket type="cloudtrail">
           <name>s3-dev-bucket</name>
-          <access_key>insert_access_key</access_key>
-          <secret_key>insert_secret_key</secret_key>
+          <aws_profile>default</aws_profile>
           <only_logs_after>2018-JUN-01</only_logs_after>
           <regions>us-east-1,us-west-1,eu-central-1</regions>
           <path>/dev1/</path>
@@ -827,8 +879,7 @@ Example of configuration
       </bucket>
       <bucket type="cloudtrail">
           <name>s3-dev-bucket</name>
-          <access_key>insert_access_key</access_key>
-          <secret_key>insert_secret_key</secret_key>
+          <aws_profile>default</aws_profile>
           <only_logs_after>2018-JUN-01</only_logs_after>
           <regions>us-east-1,us-west-1,eu-central-1</regions>
           <path>/dev2/</path>
@@ -854,8 +905,7 @@ Example of configuration
           <remove_from_bucket>yes<remove_from_bucket>
       </bucket>
       <service type="cloudwatchlogs">
-          <access_key>insert_access_key</access_key>
-          <secret_key>insert_secret_key</secret_key>
+          <aws_profile>default</aws_profile>
           <aws_log_groups>log_group1,log_group2</aws_log_groups>
           <only_logs_after>2018-JUN-01</only_logs_after>
           <regions>us-east-1,us-west-1,eu-central-1</regions>
@@ -866,5 +916,8 @@ Example of configuration
         <external_id>wazuh-external-id-value</external_id>
         <iam_role_arn>arn:aws:iam::010203040506:role/ASL-Role</iam_role_arn>
       </subscriber>
+      <subscriber type="buckets">
+        <sqs_name>sqs-custom-logs-queue</sqs_name>
+        <aws_profile>dev</aws_profile>
+      </subscriber>
   </wodle>
-  

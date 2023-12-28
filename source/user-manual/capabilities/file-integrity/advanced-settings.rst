@@ -30,17 +30,42 @@ Configuration
 
 You need to install the audit daemon if you don’t have it already installed on your endpoint.
 
-In Red Hat based systems, auditd is usually installed by default. If not, install it using the following command:
+.. tabs::
 
-   .. code-block:: console
+   .. group-tab:: Red Hat-based
 
-      # yum install audit
+      .. code-block:: console
 
-For Debian based systems, use the following command:
+         # yum install audit
+      
+      For Audit 3.1.1 and later, install the audispd af_unix plugin and restart the Audit service.
 
-   .. code-block:: console
+      .. code-block:: console
 
-      # apt-get install auditd
+         # yum install audispd-plugins
+         # systemctl restart auditd
+
+   .. group-tab:: Debian-based
+
+      .. code-block:: console
+
+         # apt-get install auditd
+
+      For Audit 3.1.1 and later, install the audispd af_unix plugin and restart the Audit service.
+
+      .. code-block:: console
+
+         # apt-get install audispd-plugins
+         # systemctl restart auditd
+
+   .. group-tab:: Alpine Linux
+
+      .. code-block:: console
+
+         # apk add audit=3.1.1-r0
+         # rc-update add auditd default
+         # cp /usr/sbin/audisp-af_unix /sbin/audisp-af_unix
+         # rc-service auditd restart
 
 Perform the following steps to enable who-data monitoring. In this example, you configure who-data monitoring for ``/etc`` directory.
 
@@ -622,6 +647,47 @@ Tuning audit to deal with a flood of who-data events
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 On the Wazuh side, the ``syscheck.rt_delay`` variable in the :ref:`internal FIM configuration <ossec_internal_syscheck>` helps to prevent the loss of events by setting a delay between alerts. You can configure this variable in the ``/var/ossec/etc/internal_options.conf`` file on the Wazuh server. The allowed value for this variable is a numerical value. You must set the delay in milliseconds. To process who-data events faster, decrease this numerical value.
+
+Windows installation directory monitoring
+-----------------------------------------
+
+In 64-bit architecture systems, you can locate 32-bit and 64-bit DLLs in a special way.
+
+- ``System32`` is reserved for 64-bit DLLs.
+- ``SysWOW64`` is reserved for all 32-bit DLLs.
+
+Furthermore, 32-bit processes running in 64-bit environments access ``System32`` through a virtual folder called ``Sysnative``. 
+
+We disabled this redirection and you can access ``System32`` directly. Monitoring ``%WINDIR%/System32`` and ``%WINDIR%/Sysnative`` directories is equivalent and Wazuh shows the path ``%WINDIR%/System32`` in the alerts. ``SysWOW64`` is a different directory. To monitor ``%WINDIR%/SysWOW64``, you must add it to the ``C:\Program Files (x86)\ossec-agent\ossec.conf`` configuration file.
+
+You can monitor the Windows special directories ``%WINDIR%/System32`` and ``%WINDIR%/SysWOW64`` directories by configuring them with any of the FIM modes. For example:
+
+- **Scheduled scan**
+
+   .. code-block:: xml
+
+      <syscheck>
+        <directories>%WINDIR%/System32</directories>
+        <directories>%WINDIR%/SysWOW64</directories>
+      </syscheck>
+
+- **Real-time**
+
+   .. code-block:: xml
+
+      <syscheck>
+        <directories realtime="yes">%WINDIR%/System32</directories>
+        <directories realtime="yes">%WINDIR%/SysWOW64</directories>
+      </syscheck>
+
+- **Who-data**
+
+   .. code-block:: xml
+
+      <syscheck>
+        <directories whodata="yes">%WINDIR%/System32</directories>
+        <directories whodata="yes">%WINDIR%/SysWOW64</directories>
+      </syscheck>
 
 Recursion level
 ---------------

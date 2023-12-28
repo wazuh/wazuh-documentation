@@ -8,11 +8,11 @@ Installing the Wazuh server step by step
 
 Install and configure the Wazuh server as a single-node or multi-node cluster following step-by-step instructions. The Wazuh server is a central component that includes the Wazuh manager and Filebeat. The Wazuh manager collects and analyzes data from the deployed Wazuh agents. It triggers alerts when threats or anomalies are detected. Filebeat securely forwards alerts and archived events to the Wazuh indexer.
 
-The installation process is divided into two stages.  
+The installation process is divided into two stages.
 
 #. Wazuh server node installation
 
-#. Cluster configuration for multi-node deployment 
+#. Cluster configuration for multi-node deployment
 
 .. note:: You need root user privileges to run all the commands described below.
 
@@ -30,7 +30,7 @@ Adding the Wazuh repository
 
   ..
     Add the Wazuh repository to download the official Wazuh packages. As an alternative, you can download the Wazuh packages directly from :doc:`../packages-list`.
-      
+
   .. tabs::
 
 
@@ -52,7 +52,7 @@ Adding the Wazuh repository
 Installing the Wazuh manager
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-  #. Install the Wazuh manager package. 
+  #. Install the Wazuh manager package.
 
      .. tabs::
 
@@ -67,13 +67,13 @@ Installing the Wazuh manager
            .. code-block:: console
 
               # apt-get -y install wazuh-manager|WAZUH_MANAGER_DEB_PKG_INSTALL|
-     
+
   #. Enable and start the Wazuh manager service.
 
       .. include:: /_templates/installations/wazuh/common/enable_wazuh_manager_service.rst
 
 
-  #. Run the following command to verify the Wazuh manager status. 
+  #. Run the following command to verify the Wazuh manager status.
 
       .. include:: /_templates/installations/wazuh/common/check_wazuh_manager.rst
 
@@ -103,7 +103,7 @@ Installing Filebeat
 
 
 
-Configuring Filebeat 
+Configuring Filebeat
 ^^^^^^^^^^^^^^^^^^^^
 
   #. Download the preconfigured Filebeat configuration file.
@@ -111,8 +111,8 @@ Configuring Filebeat
       .. code-block:: console
 
         # curl -so /etc/filebeat/filebeat.yml https://packages.wazuh.com/|WAZUH_CURRENT_MINOR|/tpl/wazuh/filebeat/filebeat.yml
-        
-        
+
+
   #. Edit the ``/etc/filebeat/filebeat.yml`` configuration file and replace the following value:
 
      .. include:: /_templates/installations/filebeat/opensearch/configure_filebeat.rst
@@ -120,26 +120,28 @@ Configuring Filebeat
   #. Create a Filebeat keystore to securely store authentication credentials.
 
       .. code-block:: console
-     
+
         # filebeat keystore create
 
   #. Add the default username and password ``admin``:``admin`` to the secrets keystore.
-      
+
       .. code-block:: console
 
         # echo admin | filebeat keystore add username --stdin --force
-        # echo admin | filebeat keystore add password --stdin --force    
+        # echo admin | filebeat keystore add password --stdin --force
 
   #. Download the alerts template for the Wazuh indexer.
 
-      .. include:: /_templates/installations/filebeat/opensearch/load_filebeat_template.rst
+     .. code-block:: console
 
+        # curl -so /etc/filebeat/wazuh-template.json https://raw.githubusercontent.com/wazuh/wazuh/v|WAZUH_CURRENT|/extensions/elasticsearch/7.x/wazuh-template.json
+        # chmod go+r /etc/filebeat/wazuh-template.json
 
   #. Install the Wazuh module for Filebeat.
 
       .. code-block:: console
 
-        # curl -s https://packages.wazuh.com/4.x/filebeat/wazuh-filebeat-0.2.tar.gz | tar -xvz -C /usr/share/filebeat/module
+        # curl -s https://packages.wazuh.com/4.x/filebeat/wazuh-filebeat-0.3.tar.gz | tar -xvz -C /usr/share/filebeat/module
 
 Deploying certificates
 ^^^^^^^^^^^^^^^^^^^^^^
@@ -151,7 +153,7 @@ Deploying certificates
 
       .. include:: /_templates/installations/filebeat/opensearch/copy_certificates_filebeat_wazuh_cluster.rst
 
-      
+
 Starting the Filebeat service
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
@@ -166,10 +168,10 @@ Starting the Filebeat service
         # filebeat test output
 
      Expand the output to see an example response.
-     
+
      .. code-block:: none
           :class: output accordion-output
-     
+
           elasticsearch: https://127.0.0.1:9200...
             parse url... OK
             connection...
@@ -187,7 +189,7 @@ Starting the Filebeat service
 
 
 Your Wazuh server node is now successfully installed. Repeat this stage of the installation process for every Wazuh server node in your Wazuh cluster, then proceed with configuring the Wazuh cluster. If you want a Wazuh server single-node cluster, everything is set and you can proceed directly with :doc:`../wazuh-dashboard/step-by-step`.
-  
+
 2. Cluster configuration for multi-node deployment
 --------------------------------------------------
 .. raw:: html
@@ -205,18 +207,18 @@ Configuring the Wazuh server master node
 
       .. include:: /_templates/installations/manager/configure_wazuh_master_node.rst
 
-  #. Restart the Wazuh manager. 
+  #. Restart the Wazuh manager.
 
       .. include:: /_templates/installations/manager/restart_wazuh_manager.rst
 
 .. _wazuh_server_worker_nodes:
-    
+
 Configuring the Wazuh server worker nodes
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
   #. .. include:: /_templates/installations/manager/configure_wazuh_worker_node.rst
 
-  #. Restart the Wazuh manager. 
+  #. Restart the Wazuh manager.
 
       .. include:: /_templates/installations/manager/restart_wazuh_manager.rst
 
@@ -235,7 +237,7 @@ An example output of the command looks as follows:
 
   .. code-block:: none
     :class: output
-    
+
       NAME         TYPE    VERSION  ADDRESS
       master-node  master  |WAZUH_CURRENT|   10.0.0.3
       worker-node1 worker  |WAZUH_CURRENT|   10.0.0.4

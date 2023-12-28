@@ -36,6 +36,7 @@ Options
 - `ssl_auto_negotiate`_
 - `ciphers`_
 - `key_request`_
+- `agents`_
 
 disabled
 ^^^^^^^^
@@ -268,7 +269,7 @@ key_request
 The key request settings are configured inside this tag. Read more about this feature at :doc:`agent key request <../../agents/key-request>`.
 
 .. code-block:: xml
-    
+
     <key_request>
       <enabled>yes</enabled>
       <exec_path>/usr/bin/python /home/script.py</exec_path>
@@ -280,18 +281,8 @@ The key request settings are configured inside this tag. Read more about this fe
 
 Configuration options of the ``key request`` feature.
 
-Options
--------
 
-- `enabled`_
-- `timeout`_
-- `exec_path`_
-- `socket`_
-- `threads`_
-- `queue_size`_
-
-enabled
-^^^^^^^
+**enabled**
 
 Enable the key request.
 
@@ -301,8 +292,7 @@ Enable the key request.
 | **Allowed values** | yes, no                     |
 +--------------------+-----------------------------+
 
-timeout
-^^^^^^^
+**timeout**
 
 Maximum time for waiting a response from the executable.
 
@@ -312,8 +302,7 @@ Maximum time for waiting a response from the executable.
 | **Allowed values** | A positive number in seconds |
 +--------------------+------------------------------+
 
-exec_path
-^^^^^^^^^
+**exec_path**
 
 Full path to the executable.
 
@@ -323,8 +312,7 @@ Full path to the executable.
 | **Allowed values** | A string indicating the full path |
 +--------------------+-----------------------------------+
 
-socket
-^^^^^^
+**socket**
 
 Full path to the Unix domain socket.
 
@@ -334,8 +322,7 @@ Full path to the Unix domain socket.
 | **Allowed values** | A string indicating the full path to a Unix domain socket |
 +--------------------+-----------------------------------------------------------+
 
-threads
-^^^^^^^
+**threads**
 
 Number of threads for dispatching the external keys requests.
 
@@ -345,8 +332,8 @@ Number of threads for dispatching the external keys requests.
 | **Allowed values** | A positive number indicating the number of threads [1..32] |
 +--------------------+------------------------------------------------------------+
 
-queue_size
-^^^^^^^^^^
+**queue_size**
+
 
 Indicates the maximum size of the queue for fetching external keys.
 
@@ -355,6 +342,26 @@ Indicates the maximum size of the queue for fetching external keys.
 +--------------------+------------------------------------------------------------+
 | **Allowed values** | A positive number indicating the queue size [1..220000]    |
 +--------------------+------------------------------------------------------------+
+
+agents
+^^^^^^
+
+**allow_higher_versions**
+
+.. versionadded:: 4.6.0
+
+Accept agents with a later version than the current manager.
+
++--------------------+------------------+
+| **Default value**  | no               |
++--------------------+------------------+
+| **Allowed values** | yes, no          |
++--------------------+------------------+
+
+.. note::
+
+   This option only works when **connection** is set to ``secure``.
+
 
 Default configuration
 ---------------------

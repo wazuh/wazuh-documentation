@@ -11,7 +11,7 @@ OneLogin
 There are three stages in the single sign-on integration.
 
 #. `OneLogin Configuration`_
-#. `Wazuh indexer configuration_`
+#. `Wazuh indexer configuration`_
 #. `Wazuh dashboard configuration`_
    
 OneLogin Configuration
@@ -102,7 +102,7 @@ OneLogin Configuration
          :align: center
          :width: 80%    
 
-#. Get the ``metada_onelogin.xml`` file and ``X.509 certificate`` from the application.
+#. Get the ``metadata_onelogin.xml`` file and ``X.509 certificate`` from the application.
 
    #. Go to **Applications** >  **Applications** then select the **Wazuh** app. Click on **More Actions** and then select **SAML Metadata**.
 
@@ -178,8 +178,8 @@ Edit the Wazuh indexer security configuration files. We recommend that you back 
                 challenge: true
                 config:
                   idp:
-                    metadata_file: "/etc/wazuh-indexer/opensearch-security/metadata_onelogin.xml"
-                    entity_id: "https://app.onelogin.com/saml/metadata/xxxxxxx"
+                    metadata_file: '/etc/wazuh-indexer/opensearch-security/metadata_onelogin.xml'
+                    entity_id: 'https://app.onelogin.com/saml/metadata/xxxxxxx'
                   sp:
                     entity_id: wazuh-saml
                   kibana_url: https://<WAZUH_DASHBOARD_URL>
@@ -215,7 +215,7 @@ Edit the Wazuh indexer security configuration files. We recommend that you back 
       Security Admin v7
       Will connect to localhost:9200 ... done
       Connected as "CN=admin,OU=Wazuh,O=Wazuh,L=California,C=US"
-      OpenSearch Version: 2.6.0
+      OpenSearch Version: 2.8.0
       Contacting opensearch cluster 'opensearch' and wait for YELLOW clusterstate ...
       Clustername: wazuh-cluster
       Clusterstate: GREEN
@@ -225,6 +225,7 @@ Edit the Wazuh indexer security configuration files. We recommend that you back 
       Populate config from /etc/wazuh-indexer/opensearch-security
       Will update '/config' with /etc/wazuh-indexer/opensearch-security/config.yml 
          SUCC: Configuration for 'config' created or updated
+      SUCC: Expected 1 config types for node {"updated_config_types":["config"],"updated_config_size":1,"message":null} is 1 (["config"]) due to: null
       Done with success
    
 #. Edit the ``/etc/wazuh-indexer/opensearch-security/roles_mapping.yml`` file and change the following values:
@@ -260,7 +261,7 @@ Edit the Wazuh indexer security configuration files. We recommend that you back 
       Security Admin v7
       Will connect to localhost:9200 ... done
       Connected as "CN=admin,OU=Wazuh,O=Wazuh,L=California,C=US"
-      OpenSearch Version: 2.6.0
+      OpenSearch Version: 2.8.0
       Contacting opensearch cluster 'opensearch' and wait for YELLOW clusterstate ...
       Clustername: wazuh-cluster
       Clusterstate: GREEN
@@ -270,8 +271,8 @@ Edit the Wazuh indexer security configuration files. We recommend that you back 
       Populate config from /etc/wazuh-indexer/opensearch-security
       Will update '/rolesmapping' with /etc/wazuh-indexer/opensearch-security/roles_mapping.yml 
          SUCC: Configuration for 'rolesmapping' created or updated
+      SUCC: Expected 1 config types for node {"updated_config_types":["rolesmapping"],"updated_config_size":1,"message":null} is 1 (["rolesmapping"]) due to: null
       Done with success
-
 
 Wazuh dashboard configuration
 -----------------------------
@@ -322,6 +323,7 @@ Wazuh dashboard configuration
 
       opensearch_security.auth.type: "saml"
       server.xsrf.allowlist: ["/_opendistro/_security/saml/acs", "/_opendistro/_security/saml/logout", "/_opendistro/_security/saml/acs/idpinitiated"]
+      opensearch_security.session.keepalive: false
 
 #. Restart the Wazuh dashboard service.
 

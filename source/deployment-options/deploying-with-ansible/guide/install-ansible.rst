@@ -35,22 +35,51 @@ The following minimum requirements should be met to use Ansible on Windows endpo
 -  At least .NET version 4.0 should be installed on the Windows endpoint.
 -  A WinRM listener should be created and activated.
 
+Before deploying on your Windows endpoints, you must set Ansible to use port ``5986`` . Edit the ``/etc/ansible/hosts`` file and add a configuration block for the Windows agents. For example:
+
+.. code-block:: ini
+
+   [windows_agents]
+   agent1 ansible_host=192.168.1.101 ansible_port=5986
+   agent2 ansible_host=192.168.1.102 ansible_port=5986
+   agent3 ansible_host=192.168.1.103 ansible_port=5986
+
+Where:
+
+-  ``windows_agents`` is a host group name for the Windows agents.
+-  ``agent1``, ``agent2``, and ``agent3`` are names for each host.
+-  ``192.168.1.101``–``103`` are the respective Windows host IP addresses.
+
+Make sure to replace these values with your Windows agents actual data. Add and remove lines accordingly.
+
 Installation on CentOS/RHEL/Fedora
 ----------------------------------
 
-Installation is done using yum from `EPEL <http://fedoraproject.org/wiki/EPEL>`_. Only CentOS/RedHat version 6 or 7, and Fedora distributions, are currently supported. The steps are as follows:
+.. tabs::
 
-#. Install the EPEL repository:
+   .. tab:: CentOS/RHEL 6, 7, and Fedora
 
-   .. code-block:: console
+      #. Install the `EPEL <http://fedoraproject.org/wiki/EPEL>`__ repository:
 
-      # yum -y install epel-release
+         .. code-block:: console
+         
+            # yum -y install epel-release
 
-#. Install ansible:
+      #. Install Ansible:
 
-   .. code-block:: console
+         .. code-block:: console
+         
+            # yum install ansible
 
-      # yum install ansible
+
+   .. tab:: CentOS/RHEL 8
+
+      #. Install Ansible using pip.
+
+         .. code-block:: console
+         
+            # pip3 install --upgrade --ignore-installed pip setuptools --user
+            # python3 -m pip install --user ansible
 
 Installation on Debian/Ubuntu
 -----------------------------

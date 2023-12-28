@@ -2,7 +2,7 @@
 
 .. meta::
   :description: Frequently asked questions about the Wazuh module for Amazon. Learn more about it in this section of the documentation.
-  
+
 .. _amazon_troubleshooting:
 
 Troubleshooting
@@ -65,7 +65,7 @@ Follow these steps to enable debug mode:
         wazuh_modules.debug=2
 
 
-#. Restart the Wazuh service. 
+#. Restart the Wazuh service.
 
 .. include:: /_templates/common/restart_manager_or_agent.rst
 
@@ -192,7 +192,7 @@ Take into account that Wazuh does not provide default rules for the different lo
 Interval overtaken message is present in the ossec.log
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-The ``Interval overtaken`` message is present in the ``ossec.log`` file. 
+The ``Interval overtaken`` message is present in the ``ossec.log`` file.
 
 **Solution**
 
@@ -212,7 +212,7 @@ Error codes reference
     | 1         | Unknown error                                                     | Programming error. Please, open an issue in the `Wazuh GitHub repository <https://github.com/wazuh/wazuh/issues/new/choose>`_ with the trace of the  |
     |           |                                                                   | error.                                                                                                                                               |
     +-----------+-------------------------------------------------------------------+------------------------------------------------------------------------------------------------------------------------------------------------------+
-    | 2         | Error parsing configuration (bucket name, keys, etc.)             | Check the wodle configuration in ``ossec.conf`` file.                                                                                                |
+    | 2         | SIGINT                                                            | The module stopped due to an interrupt signal.                                                                                                       |
     +-----------+-------------------------------------------------------------------+------------------------------------------------------------------------------------------------------------------------------------------------------+
     | 3         | Invalid credentials to access S3 bucket                           | Make sure that your credentials are OK. For more information, see the :ref:`Configuring AWS credentials <amazon_credentials>` section.               |
     +-----------+-------------------------------------------------------------------+------------------------------------------------------------------------------------------------------------------------------------------------------+
@@ -226,13 +226,13 @@ Error codes reference
     +-----------+-------------------------------------------------------------------+------------------------------------------------------------------------------------------------------------------------------------------------------+
     | 8         | Failed to decompress file                                         | Only ``.gz`` and ``.zip`` compression formats are supported.                                                                                         |
     +-----------+-------------------------------------------------------------------+------------------------------------------------------------------------------------------------------------------------------------------------------+
-    | 9         | Failed to parse file                                              | Check the type of the bucket.                                                                                                                        |
+    | 9         | Failed to parse file                                              | Ensure that the log file contents have the expected structure.                                                                                       |
     +-----------+-------------------------------------------------------------------+------------------------------------------------------------------------------------------------------------------------------------------------------+
     | 10        | pyarrow module missing                                            | Install ``pyarrow`` library. For more information, see the :ref:`Installing dependencies <amazon_dependencies>` section.                             |
     +-----------+-------------------------------------------------------------------+------------------------------------------------------------------------------------------------------------------------------------------------------+
     | 11        | Unable to connect to Wazuh                                        | Ensure that Wazuh is running.                                                                                                                        |
     +-----------+-------------------------------------------------------------------+------------------------------------------------------------------------------------------------------------------------------------------------------+
-    | 12        | SIGINT                                                            | The module stopped due to an interrupt signal.                                                                                                       |
+    | 12        | Invalid type of bucket                                            | Check if the type of bucket is one of the :ref:`supported <amazon_supported_services>`.                                                              |
     +-----------+-------------------------------------------------------------------+------------------------------------------------------------------------------------------------------------------------------------------------------+
     | 13        | Error sending message to Wazuh                                    | Make sure that Wazuh is running.                                                                                                                     |
     +-----------+-------------------------------------------------------------------+------------------------------------------------------------------------------------------------------------------------------------------------------+
@@ -242,10 +242,17 @@ Error codes reference
     +-----------+-------------------------------------------------------------------+------------------------------------------------------------------------------------------------------------------------------------------------------+
     | 16        | Throttling error                                                  | AWS is receiving more than 10 requests per second. Try to run the module again when the number of requests to AWS has decreased.                     |
     +-----------+-------------------------------------------------------------------+------------------------------------------------------------------------------------------------------------------------------------------------------+
-    | 17        | Invalid file key format                                           | Ensure that the file path follows the format specified in the                                                                                        |
-    |           |                                                                   | :doc:`Wazuh documentation </cloud-security/amazon/services/supported-services/index>`.                                                               |
+    | 17        | Invalid file key format                                           | Ensure that the file path follows the format specified in the :doc:`Wazuh documentation </cloud-security/amazon/services/supported-services/index>`  |
+    +-----------+-------------------------------------------------------------------+------------------------------------------------------------------------------------------------------------------------------------------------------+
+    | 18        | Invalid prefix                                                    | Make sure that the indicated path exists in the S3 bucket.                                                                                           |
+    +-----------+-------------------------------------------------------------------+------------------------------------------------------------------------------------------------------------------------------------------------------+
+    | 19        | The server datetime and datetime of the AWS environment differ    | Make sure that the server datetime is correctly set.                                                                                                 |
     +-----------+-------------------------------------------------------------------+------------------------------------------------------------------------------------------------------------------------------------------------------+
     | 20        | Unable to find SQS                                                | Make sure that the ``sqs_name`` value in the wodle configuration in the ``ossec.conf`` file is correct.                                              |
     +-----------+-------------------------------------------------------------------+------------------------------------------------------------------------------------------------------------------------------------------------------+
     | 21        | Failed fetch/delete from SQS                                      | Check that no more instances of the wodle are running at the same time.                                                                              |
+    +-----------+-------------------------------------------------------------------+------------------------------------------------------------------------------------------------------------------------------------------------------+
+    | 22        | Invalid region                                                    | Check the provided ``region`` in the ``ossec.conf`` file.                                                                                            |
+    +-----------+-------------------------------------------------------------------+------------------------------------------------------------------------------------------------------------------------------------------------------+
+    | 23        | Profile not found                                                 | Check the provided ``aws_profile`` in the ``ossec.conf`` file.                                                                                       |
     +-----------+-------------------------------------------------------------------+------------------------------------------------------------------------------------------------------------------------------------------------------+

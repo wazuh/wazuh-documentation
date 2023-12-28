@@ -17,7 +17,7 @@ Advance filtering is possible using the Wazuh API's queries. Queries are specifi
     * ``<``: smaller.
     * ``>``: bigger.
     * ``~``: like as.
-    * ``()``: grouping operators
+    * ``()``: grouping operators.
 * **Value**: Value to filter by.
 * **Separator**: Operator to join multiple "queries":
     * ``,``: represents an ``OR``.
@@ -245,6 +245,67 @@ Getting the ubuntu agents with id other than 0 and lower than 4, whose name cont
              }
           ],
           "total_affected_items": 3,
+          "total_failed_items": 0,
+          "failed_items": []
+       },
+       "message": "All selected agents information was returned",
+       "error": 0
+    }
+
+Getting agents with an ID higher than ``007`` that run on *Windows* or whose operating system major version is either 14 or 18:
+
+
+.. code-block:: console
+
+    # curl -G --data-urlencode "q=id>007;(os.name~windows,(os.major=14,os.major=18))" -k -X GET "https://localhost:55000/agents?limit=500&pretty=true&select=id,name,os.name,os.version,os.codename,os.major" -H  "Authorization: Bearer $TOKEN"
+
+.. code-block:: json
+    :class: output
+
+    {
+       "data": {
+          "affected_items": [
+             {
+                "os": {
+                   "codename": "Bionic Beaver",
+                   "major": "18",
+                   "name": "Ubuntu",
+                   "version": "18.04.4 LTS"
+                },
+                "name": "wazuh-agent8",
+                "id": "008"
+             },
+             {
+                "os": {
+                   "codename": "Bionic Beaver",
+                   "major": "18",
+                   "name": "Ubuntu",
+                   "version": "18.04.2 LTS"
+                },
+                "name": "wazuh-agent9",
+                "id": "009"
+             },
+             {
+                "os": {
+                   "codename": "Bionic Beaver",
+                   "major": "18",
+                   "name": "Ubuntu",
+                   "version": "18.04.2 LTS"
+                },
+                "name": "wazuh-agent10",
+                "id": "010"
+             },
+             {
+                "os": {
+                   "major": "6",
+                   "name": "Microsoft Windows 7 Ultimate Edition Professional Service Pack 1",
+                   "version": "6.1.7601"
+                },
+                "name": "jmv74211-PC",
+                "id": "013"
+             }
+          ],
+          "total_affected_items": 4,
           "total_failed_items": 0,
           "failed_items": []
        },
