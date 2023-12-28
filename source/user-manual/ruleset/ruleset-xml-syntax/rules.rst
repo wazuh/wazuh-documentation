@@ -217,7 +217,7 @@ You can also specify additional groups by including the ``<group>`` element with
      </rule>
    </group>
 
-To define rules that trigger only if another rule in a specific group has triggered, check the `if_group`_ and `if_matched_group`_ options. These options use the groups defined in the ``<group>`` element inside the rule definition.
+To define rules that trigger only if another rule in a specific group has triggered, check the `if_group`_ and `if_matched_group`_ options.
 
 .. _rules_rule:
 
