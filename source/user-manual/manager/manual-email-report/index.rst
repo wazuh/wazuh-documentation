@@ -199,6 +199,27 @@ For example:
 This configuration will send an email every time rule 502 is triggered regardless of what the minimum level is set to.
 
 
+Disable Email alert based on rule id and specific server/agent
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+Assume you have a specific rule triggering notifications (alerts) from a specific server. You only want to disable the alerts for this specific server and not in general for this rule. 
+This is configured as follows:
+
+Edit ``/var/ossec/etc/rules/local_rules.xml``
+
+.. code-block:: xml
+
+ <rule id="100002" level="0">
+     <if_sid>5108</if_sid> <!-- specify here the rule id found in the notification -->
+     <hostname>servername</hostname> <!-- specify your servername / agent producing the notification -->
+     <match>memory</match> <!-- lets catch only if this text appears in the message -->
+     <!-- Other conditions if necessary -->
+     <description>Disable email alert for rule 5108 on servername</description> <!-- give it a nice description -->
+ </rule>
+
+This will ignore alerts from the system with the hostname "servername" from the rule 5108 when the messagetext matches "memory".
+
+
+
 .. toctree::
    :hidden:
    :maxdepth: 1
