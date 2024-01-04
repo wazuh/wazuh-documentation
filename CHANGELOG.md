@@ -3,7 +3,13 @@ All notable changes to this project will be documented in this file.
 
 ## [v4.8.1]
 
-- Support for Wazuh 4.8.1
+### Added
+
+- Added reference to AWS Cloudtrail policies in Monitoring AWS infrastructure PoC guide. ([#6785](https://github.com/wazuh/wazuh-documentation/pull/6785))
+
+### Changed
+
+- Updated ``SQLAlchemy`` and ``urllib3`` in dependencies Azure cloud security section. ([#6842](https://github.com/wazuh/wazuh-documentation/pull/6842))
 
 ## [v4.8.0]
 
