@@ -103,6 +103,8 @@ The table below shows SCA policies pre-installed in Wazuh out-of-the-box. The Wa
     +-----------------------------+------------------------------------------------------------+-------------------------------+
     | cis_apple_macOS_13.x        |  CIS Checks for macOS 13.x                                 | macOS 13.x (Ventura)          |
     +-----------------------------+------------------------------------------------------------+-------------------------------+
+    | cis_apple_macOS_14.0        |  CIS Checks for macOS 14.0                                 | macOS 14.0 (Sonoma)           |
+    +-----------------------------+------------------------------------------------------------+-------------------------------+
     | web_vulnerabilities         |  System audit for web-related vulnerabilities              | N/A                           |
     +-----------------------------+------------------------------------------------------------+-------------------------------+
     | cis_apache_24               |  CIS Apache HTTP Server 2.4 Benchmark                      | Apache configuration files    |

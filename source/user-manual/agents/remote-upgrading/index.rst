@@ -3,14 +3,8 @@
 .. meta::
     :description: From Wazuh 3.0.0 version onwards, agents can be upgraded remotely. Learn more about it in this section of the Wazuh documentation. 
 
-.. _remote-upgrading:
-
 Remote upgrading
 ==================
-
-.. warning::
-   
-   Remote upgrade is temporarily unavailable in |WAZUH_CURRENT_MINOR|.
 
 .. topic:: Contents
 
