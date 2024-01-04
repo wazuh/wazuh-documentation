@@ -34,12 +34,14 @@ Agent
 - `#19064 <https://github.com/wazuh/wazuh/pull/19064>`__ Added multiple tenants support to the MS Graph integration module.
 - `#16200 <https://github.com/wazuh/wazuh/pull/16200>`__ FIM now buffers the Linux audit events for who-data to prevent side effects in other components.
 - `#19720 <https://github.com/wazuh/wazuh/pull/19720>`__ The sub-process execution implementation has been improved.
+- `#20649 <https://github.com/wazuh/wazuh/pull/20649>`__ Added geolocation mapping for the AWS WAF events.
 
 RESTful API
 ^^^^^^^^^^^
 
 - `#19952 <https://github.com/wazuh/wazuh/pull/19952>`__ Added new ``GET /manager/version/check`` API endpoint to obtain information about new releases of Wazuh.
 - `#20119 <https://github.com/wazuh/wazuh/pull/20119>`__ Removed ``PUT /vulnerability``, ``GET /vulnerability/{agent_id}``, ``GET /vulnerability/{agent_id}/last_scan`` and ``GET /vulnerability/{agent_id}/summary/{field}`` API endpoints as they were deprecated in version 4.7.0. Use the Wazuh indexer REST API instead.
+- `#20420 <https://github.com/wazuh/wazuh/pull/20420>`__ Added the ``auto`` option to the ``ssl_protocol`` setting in the API configuration. This option enables automatic negotiation of the TLS certificate.
 
 Other
 ^^^^^
@@ -47,6 +49,7 @@ Other
 - `#20003 <https://github.com/wazuh/wazuh/pull/20003>`__ Upgraded external ``aiohttp`` library dependency version to ``3.8.5``.
 - `#20003 <https://github.com/wazuh/wazuh/pull/20003>`__ Upgraded external ``cryptography`` library dependency version to ``41.0.4``.
 - `#20003 <https://github.com/wazuh/wazuh/pull/20003>`__ Upgraded external ``numpy`` library dependency version to ``1.26.0``.
+- `#20003 <https://github.com/wazuh/wazuh/pull/20003>`__ Upgraded external ``pyarrow`` library dependency version to ``14.0.1``.
 - `#20003 <https://github.com/wazuh/wazuh/pull/20003>`__ Upgraded external ``grpcio`` library dependency version to ``1.58.0``.
 - `#20003 <https://github.com/wazuh/wazuh/pull/20003>`__ Upgraded embedded Python version to ``3.10.13``.
 
@@ -54,7 +57,7 @@ Wazuh dashboard
 ^^^^^^^^^^^^^^^
 
 - `#5791 <https://github.com/wazuh/wazuh-dashboard-plugins/pull/5791>`__ Added remember server address check.
-- `#6093 <https://github.com/wazuh/wazuh-dashboard-plugins/pull/6093>`__ Added a notification about new Wazuh updates and a button to check their availability.
+- `#6093 <https://github.com/wazuh/wazuh-dashboard-plugins/pull/6093>`__ Added a notification about new Wazuh updates and a button to check their availability. `#6256 <https://github.com/wazuh/wazuh-dashboard-plugins/pull/6256>`__
 - `#6083 <https://github.com/wazuh/wazuh-dashboard-plugins/pull/6083>`__ Added the ``ssl_agent_ca`` configuration to the **SSL Settings** form.
 - `#5896 <https://github.com/wazuh/wazuh-dashboard-plugins/pull/5896>`__ Added global vulnerability dashboards.
 - `#6179 <https://github.com/wazuh/wazuh-dashboard-plugins/pull/6179>`__ Added global vulnerability dashboards. `#6173 <https://github.com/wazuh/wazuh-dashboard-plugins/pull/6173>`__ `#6147 <https://github.com/wazuh/wazuh-dashboard-plugins/pull/6147>`__
@@ -113,6 +116,15 @@ Reference                                                          Description
 `#16839 <https://github.com/wazuh/wazuh/pull/16839>`__             Fixed process path retrieval in Syscollector on Windows XP.
 `#16056 <https://github.com/wazuh/wazuh/pull/16056>`__             Fixed the OS version detection on Alpine Linux.
 `#18642 <https://github.com/wazuh/wazuh/pull/18642>`__             Fixed Solaris 10 name not showing in the dashboard.
+==============================================================     =============
+
+RESTful API
+^^^^^^^^^^^
+
+==============================================================     =============
+Reference                                                          Description
+==============================================================     =============
+`#20527 <https://github.com/wazuh/wazuh/pull/20527>`__             Fixed a warning from SQLAlchemy involving detached Roles instances in RBAC.
 ==============================================================     =============
 
 Wazuh dashboard
