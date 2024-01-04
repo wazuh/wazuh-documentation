@@ -125,6 +125,8 @@ You must include the IP addresses of the servers where you are installing each a
    $indexer_node1_name = 'node1'
    $indexer_node2_name = 'node2'
    $indexer_node3_name = 'node3'
+   $master_name = 'master'
+   $worker_name = 'worker'
    $cluster_size = '3'
    $indexer_discovery_hosts = [$node1host, $node2host, $node3host]
    $indexer_cluster_initial_master_nodes = [$node1host, $node2host, $node3host]
@@ -143,8 +145,8 @@ You must include the IP addresses of the servers where you are installing each a
    node "puppet-server" {
    class { 'wazuh::certificates':
      indexer_certs => [["$indexer_node1_name","$node1host" ],["$indexer_node2_name","$node2host" ],["$indexer_node3_name","$node3host" ]],
-     manager_master_certs => [['master',"$masterhost"]],
-     manager_worker_certs => [['worker',"$workerhost"]],
+     manager_master_certs => [["$master_name","$masterhost"]],
+     manager_worker_certs => [["$worker_name","$workerhost"]],
      dashboard_certs => ["$dashboardhost"],
      stage => certificates
    }
@@ -214,6 +216,7 @@ You must include the IP addresses of the servers where you are installing each a
    }
    class { 'wazuh::filebeat_oss':
      filebeat_oss_indexer_ip => "$node1host",
+     wazuh_node_name => "$master_name",
      stage => manager
    }
    }
@@ -229,6 +232,11 @@ You must include the IP addresses of the servers where you are installing each a
      ossec_cluster_bind_addr => "$masterhost",
      ossec_cluster_nodes => ["$masterhost"],
      ossec_cluster_disabled => 'no',
+     stage => manager
+   }
+   class { 'wazuh::filebeat_oss':
+     filebeat_oss_indexer_ip => "$node1host",
+     wazuh_node_name => "$worker_name",
      stage => manager
    }
    }
