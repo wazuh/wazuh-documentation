@@ -7,6 +7,10 @@ All notable changes to this project will be documented in this file.
 
 - Added functionality to forward alerts to Fluentd. ([#6691](https://github.com/wazuh/wazuh-documentation/pull/6691))
 
+### Changed
+
+- Removed the container ``path`` option and changed the container ``name`` in the Azure Storage use case to keep consistency with the values shown in the images. ([#6835](https://github.com/wazuh/wazuh-documentation/pull/6835))
+
 ## [v4.8.2]
 
 - Support for Wazuh 4.8.2
