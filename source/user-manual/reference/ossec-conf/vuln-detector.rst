@@ -1,7 +1,7 @@
 .. Copyright (C) 2015, Wazuh, Inc.
 
 .. meta::
-  :description: Learn more about the available options and how to configure the Vulnerability Detector module of Wazuh in this section of our documentation.
+  :description: Learn more about the available options and how to configure the vulnerability detection module of Wazuh in this section of our documentation.
 
 vulnerability-detection
 =======================
@@ -28,9 +28,9 @@ Options
 +===========================+====================================+
 | `enabled`_                | ``yes``, ``no``                    |
 +---------------------------+------------------------------------+
-| `index-status`_           | ``yes``, ``no``                    |
-+---------------------------+------------------------------------+
 | `feed-update-interval`_   | Positive number + Time unit suffix |
++---------------------------+------------------------------------+
+| `index-status`_           | ``yes``, ``no``                    |
 +---------------------------+------------------------------------+
 
 enabled
@@ -52,7 +52,7 @@ Time interval for periodic feed updates.
 +--------------------+------------------------------------------------------------------------------------------------------+
 | **Default value**  | ``60m``                                                                                              |
 +--------------------+------------------------------------------------------------------------------------------------------+
-| **Allowed values** | A positive number that containing a time unit suffix character. For example ``2h`` for 2 hours       |
+| **Allowed values** | A positive number containing a time unit suffix character. For example ``2h`` for 2 hours            |
 +--------------------+------------------------------------------------------------------------------------------------------+
 
 index-status

@@ -17,7 +17,7 @@ Use case: Monitoring a CentOS endpoint for vulnerabilities
 
 Wazuh helps meet the *common criteria CC7.1* by providing the Vulnerability Detection module. This module can uncover vulnerabilities in operating systems and installed applications. It performs a software audit by querying our Cyber Threat Intelligence (CTI) API for vulnerability content documents. We aggregate vulnerability information into the CTI repository from external vulnerability sources indexed by Canonical, Debian, Red Hat, Arch Linux, Amazon Linux Advisories Security (ALAS), Microsoft, and the National Vulnerability Database (NVD). We also maintain the integrity of our vulnerability data and the vulnerabilities repository updated, ensuring the solution checks for the latest CVEs. The Vulnerability detection module correlates this information with data from the endpoint application inventory.
 
-In this use case, we show how the Wazuh Vulnerability Detection module detects vulnerabilities on a CentOS 8 endpoint.
+In this use case, you can see how the Wazuh Vulnerability Detection module detects vulnerabilities on a CentOS 8 endpoint.
 
 #. Edit the Wazuh server configuration file ``/var/ossec/etc/ossec.conf``. Make sure the module is enabled.
 
@@ -46,11 +46,11 @@ In this use case, we show how the Wazuh Vulnerability Detection module detects v
         </ssl>
       </indexer>
 
-#. Restart the Wazuh manager to apply the changes:
+#. If you made changes, restart the Wazuh manager to apply them:
 
    .. include:: /_templates/common/restart_manager.rst
 
-#. Navigate to the Vulnerability Detection module from the Wazuh dashboard. Select an agent to view its discovered vulnerabilities.
+#. Navigate to the **Vulnerability detection** module from the Wazuh dashboard. Select the agent to view its discovered vulnerabilities.
 
    .. thumbnail:: /images/compliance/tsc/common-criteria/agent-vulnerabilities.png
       :title: Agent vulnerabilities

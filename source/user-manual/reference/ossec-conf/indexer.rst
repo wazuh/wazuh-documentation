@@ -29,7 +29,7 @@ enabled
 Enables forwarding vulnerability detection alerts to the Wazuh indexer.
 
 +--------------------+-----------------------------+
-| **Default value**  | ``yes``                     |
+| **Default**        | ``yes``                     |
 +--------------------+-----------------------------+
 | **Allowed values** | ``yes``, ``no``             |
 +--------------------+-----------------------------+
@@ -45,7 +45,7 @@ host
 Wazuh indexer node URL or IP address to connect to. For example, ``http://172.16.1.11`` or ``192.168.3.2:9230``.
 
 +--------------------+-----------------------------+
-| **Default value**  | ``https://0.0.0.0:9200``    |
+| **Default**        | ``https://0.0.0.0:9200``    |
 +--------------------+-----------------------------+
 | **Allowed values** | Any valid URL or IP address |
 +--------------------+-----------------------------+
@@ -56,7 +56,7 @@ username
 Specify the username to connect to the Wazuh indexer.
 
 +--------------------+-----------------------------+
-| **Default value**  | ``admin``                   |
+| **Default**        | ``admin``                   |
 +--------------------+-----------------------------+
 | **Allowed values** | Any valid username          |
 +--------------------+-----------------------------+
@@ -67,7 +67,7 @@ password
 Specify the password to connect to the Wazuh indexer.
 
 +--------------------+-----------------------------+
-| **Default value**  | ``admin``                   |
+| **Default**        | ``admin``                   |
 +--------------------+-----------------------------+
 | **Allowed values** | Any valid password          |
 +--------------------+-----------------------------+
