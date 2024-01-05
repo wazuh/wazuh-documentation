@@ -71,7 +71,6 @@ Once the Wazuh files are ready and copied to the specified hosts, it is necessar
 
 
 .. toctree::
-  :hidden:
   :maxdepth: 1
 
   installation-assistant

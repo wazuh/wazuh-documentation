@@ -1,9 +1,11 @@
 Install Wazuh components using the assistant
------------------------------------------
+--------------------------------------------
 
 Install and configure the different Wazuh components with the aid of the Wazuh installation assistant. 
 
 .. note:: You need root user privileges to run all the commands described below.
+
+Please, make sure that a copy of the ``wazuh-install-files.tar`` and ``wazuh-offline.tar.gz`` files, created during the initial configuration step, is placed in your working directory.
 
 Installing the Wazuh indexer
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
@@ -13,14 +15,12 @@ Install and configure the Wazuh indexer nodes.
 
 #. Run the assistant with the ``--offline-install`` to perform an offline installation. Also, run the assistant with the option ``--wazuh-indexer`` and the node name to install and configure the Wazuh indexer. The node name must be the same one used in ``config.yml`` for the initial configuration, for example, ``node-1``.
       
-      .. note:: Make sure that a copy of ``wazuh-install-files.tar`` and ``wazuh-offline.tar.gz`` files, created during the initial configuration step, is placed in your working directory.
-
       .. code-block:: console
 
         # bash wazuh-install.sh --offline-install --wazuh-indexer node-1 
 
 
-Repeat this stage of the installation process for every Wazuh indexer node in your cluster. Then proceed with initializing your single-node or multi-node cluster in the next step.
+    Repeat this stage of the installation process for every Wazuh indexer node in your cluster. Then proceed with initializing your single-node or multi-node cluster in the next step.
 
 #. Run the Wazuh installation assistant with option ``--start-cluster`` on any Wazuh indexer node to load the new certificates information and start the cluster. 
 
@@ -35,8 +35,6 @@ Installing the Wazuh manager
 
 #. Run the assistant with the ``--offline-install`` to perform an offline installation. Also, run the assistant with the option ``--wazuh-server`` followed by the node name to install the Wazuh server. The node name must be the same one used in ``config.yml`` for the initial configuration, for example, ``wazuh-1``.
  
-   .. note:: Make sure that a copy of the ``wazuh-install-files.tar`` and ``wazuh-offline.tar.gz`` files, created during the initial configuration step, is placed in your working directory.
-
    .. code-block:: console
   
        # bash wazuh-install.sh --offline-install --wazuh-server wazuh-1
@@ -44,20 +42,16 @@ Installing the Wazuh manager
 
 Your Wazuh server is now successfully installed. 
 
-- If you want a Wazuh server single-node cluster, everything is set and you can proceed directly with :doc:`../wazuh-dashboard/installation-assistant`.
+- If you want a Wazuh server single-node cluster, everything is set and you can proceed directly with the next stage.
       
 - If you want a Wazuh server multi-node cluster, repeat this process on every Wazuh server node.
 
 
 Installing the Wazuh dashboard
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 #. Run the assistant with the ``--offline-install`` to perform an offline installation. Also, run the assistant with the option ``--wazuh-dashboard`` and the node name to install and configure the Wazuh dashboard. The node name must be the same one used in ``config.yml`` for the initial configuration, for example, ``dashboard``.
    
-   .. note::
-      
-      Make sure that a copy of the ``wazuh-install-files.tar`` and ``wazuh-offline.tar.gz`` files, created during the initial configuration step, is placed in your working directory.
-
    .. code-block:: console
 
       # bash wazuh-install.sh --wazuh-dashboard dashboard
