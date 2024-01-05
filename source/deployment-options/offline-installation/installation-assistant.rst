@@ -30,6 +30,47 @@ Install and configure the Wazuh indexer nodes.
  
    .. note:: You only have to initialize the cluster `once`, there is no need to run this command on every node. 
 
+Testing the cluster installation
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+#. Run the following command to get the *admin* password:
+
+   .. code-block:: console
+
+      # tar -axf wazuh-install-files.tar wazuh-install-files/wazuh-passwords.txt -O | grep -P "\'admin\'" -A 1
+
+#. Run the following command to confirm that the installation is successful. Replace ``<ADMIN_PASSWORD>`` with the password gotten from the output of the previous command. Replace ``<WAZUH_INDEXER_IP>`` with the configured Wazuh indexer IP address:
+
+   .. code-block:: console
+
+      # curl -k -u admin:<ADMIN_PASSWORD> https://<WAZUH_INDEXER_IP>:9200
+
+   .. code-block:: none
+      :class: output
+
+      {
+        "name" : "node-1",
+        "cluster_name" : "wazuh-cluster",
+        "cluster_uuid" : "095jEW-oRJSFKLz5wmo5PA",
+        "version" : {
+          "number" : "7.10.2",
+          "build_type" : "rpm",
+          "build_hash" : "db90a415ff2fd428b4f7b3f800a51dc229287cb4",
+          "build_date" : "2023-06-03T06:24:25.112415503Z",
+          "build_snapshot" : false,
+          "lucene_version" : "9.6.0",
+          "minimum_wire_compatibility_version" : "7.10.0",
+          "minimum_index_compatibility_version" : "7.0.0"
+        },
+        "tagline" : "The OpenSearch Project: https://opensearch.org/"
+      }
+
+#. Replace ``<WAZUH_INDEXER_IP>`` and ``<ADMIN_PASSWORD>``, and run the following command to check if the cluster is working correctly:
+
+   .. code-block:: console
+
+      # curl -k -u admin:<ADMIN_PASSWORD> https://<WAZUH_INDEXER_IP>:9200/_cat/nodes?v
+
 Installing the Wazuh manager
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
