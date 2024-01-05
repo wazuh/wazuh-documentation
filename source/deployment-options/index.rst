@@ -38,7 +38,7 @@ All the alternatives include instructions on how to install the :doc:`Wazuh cent
 
     <h3>Offline</h3>
     
-- :doc:`offline-installation`: Installing the solution offline involves downloading the Wazuh components to later install them on a system with no internet connection. 
+- :doc:`offline-installation/index`: Installing the solution offline involves downloading the Wazuh components to later install them on a system with no internet connection. 
 
 
 .. raw:: html
@@ -158,7 +158,7 @@ These alternatives guide you to install the Wazuh central components along with 
     amazon-machine-images/amazon-machine-images
     docker/index 
     deploying-with-kubernetes/index
-    offline-installation
+    offline-installation/index
     wazuh-from-sources/index
     deploying-with-ansible/index
     deploying-with-puppet/index
