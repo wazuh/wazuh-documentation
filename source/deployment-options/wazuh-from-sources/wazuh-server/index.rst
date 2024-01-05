@@ -110,6 +110,17 @@ Installing the Wazuh manager
         # cd wazuh-|WAZUH_CURRENT_FROM_SOURCES|
         # ./install.sh
 
+    In addition to the basic installation, you can set the ``DOWNLOAD_CONTENT_AND_DECOMPRESS=y`` variable during the installation to download vulnerability detection content.
+
+    .. code-block:: console
+
+        # DOWNLOAD_CONTENT_AND_DECOMPRESS=y ./install.sh
+
+    .. note::
+        Wazuh adds vulnerability information to the CTI repository and keeps the vulnerability repository updated. However, for the initial run, the :doc:`vulnerability detection </user-manual/capabilities/vulnerability-detection/index>` content needs to be downloaded and processed, which can be time-consuming.
+
+        Therefore, we offer the option to download a pre-prepared initial database to bypass this data processing step.
+
     If you have previously compiled for another platform, you must clean the build using the Makefile  in ``src``:
 
     .. code-block:: console
