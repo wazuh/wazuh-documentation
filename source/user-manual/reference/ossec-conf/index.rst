@@ -59,6 +59,8 @@ Wazuh can be installed in two ways: as a manager by using the "server/manager" i
 +---------------------------------------------------------------------+------------------------+
 | :doc:`github <github-module>`                                       | manager, agent         |
 +---------------------------------------------------------------------+------------------------+
+| :doc:`indexer <indexer>`                                            | manager                |
++---------------------------------------------------------------------+------------------------+
 | :doc:`integration  <integration>`                                   | manager                |
 +---------------------------------------------------------------------+------------------------+
 | :doc:`labels  <labels>`                                             | manager, agent         |
@@ -92,8 +94,6 @@ Wazuh can be installed in two ways: as a manager by using the "server/manager" i
 | :doc:`task-manager <task-manager>`                                  | manager                |
 +---------------------------------------------------------------------+------------------------+
 | :doc:`vulnerability-detection <vuln-detector>`                      | manager                |
-+---------------------------------------------------------------------+------------------------+
-| :doc:`indexer <indexer>`                                            | manager                |
 +---------------------------------------------------------------------+------------------------+
 | :doc:`wazuh_db <wazuh-db-config>`                                   | manager                |
 +---------------------------------------------------------------------+------------------------+
@@ -161,12 +161,12 @@ All of the above sections must be located within the top-level ``<ossec_config>`
    fluent-forward
    gcp-pubsub
    gcp-bucket
+   vuln-detector
    wodle-openscap
    wodle-command
    wodle-ciscat
    wodle-s3
    wodle-syscollector
-   vuln-detector
    wazuh-db-config
    wodle-osquery
    wodle-docker

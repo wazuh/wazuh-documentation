@@ -13,7 +13,7 @@ indexer
       <indexer>
       </indexer>
 
-Configure these options to forward the vulnerability detection alerts to the Wazuh indexer.
+Configure these options to forward inventory data to the Wazuh indexer.
 
 Options
 -------
@@ -26,7 +26,7 @@ Options
 enabled
 ^^^^^^^
 
-Enables forwarding vulnerability detection alerts to the Wazuh indexer.
+Enables forwarding inventory data to the Wazuh indexer.
 
 +--------------------+-----------------------------+
 | **Default**        | ``yes``                     |
@@ -37,7 +37,7 @@ Enables forwarding vulnerability detection alerts to the Wazuh indexer.
 hosts
 ^^^^^
 
-Wazuh indexer nodes to connect to. Use the ``host`` option for setting up each node to connect to.
+Wazuh indexer nodes to connect to. Use the ``host`` option for setting up each node connection.
 
 host
 ~~~~
@@ -80,12 +80,12 @@ Configuration options for the SSL parameters.
 certificate_authorities
 ~~~~~~~~~~~~~~~~~~~~~~~
 
-List of root certificates for verification. Use the ``ca`` option for setting up each CA cert file path.
+List of root certificate file paths for verification. Use the ``ca`` option for setting up each CA certificate file path.
 
 ca
 ''
 
-CA cert file path.
+CA certificate file path.
 
 +--------------------+--------------------------------------+
 | **Default value**  | ``/etc/filebeat/certs/root-ca.pem``  |

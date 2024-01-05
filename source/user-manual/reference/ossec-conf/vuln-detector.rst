@@ -36,10 +36,10 @@ Options
 enabled
 ^^^^^^^
 
-Enables the module.
+Enables the vulnerability detection module.
 
 +--------------------+-----------------------------+
-| **Default value**  | ``yes``                     |
+| **Default**        | ``yes``                     |
 +--------------------+-----------------------------+
 | **Allowed values** | ``yes``, ``no``             |
 +--------------------+-----------------------------+
@@ -50,7 +50,7 @@ feed-update-interval
 Time interval for periodic feed updates.
 
 +--------------------+------------------------------------------------------------------------------------------------------+
-| **Default value**  | ``60m``                                                                                              |
+| **Default**        | ``60m``                                                                                              |
 +--------------------+------------------------------------------------------------------------------------------------------+
 | **Allowed values** | A positive number containing a time unit suffix character. For example ``2h`` for 2 hours            |
 +--------------------+------------------------------------------------------------------------------------------------------+
@@ -58,8 +58,10 @@ Time interval for periodic feed updates.
 index-status
 ^^^^^^^^^^^^
 
+Enables indexing of vulnerability inventory data.
+
 +--------------------+-----------------------------+
-| **Default value**  | ``no``                      |
+| **Default**        | ``yes``                     |
 +--------------------+-----------------------------+
 | **Allowed values** | ``yes``, ``no``             |
 +--------------------+-----------------------------+
