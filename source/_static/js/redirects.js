@@ -65,8 +65,34 @@ removedUrls['x.y'] = [
 
 /* *** RELEASE 4.9 ****/
 
+/* Redirections from 4.8 to 4.9  */
+
+redirections.push(
+  {
+    'target': ['4.8=>4.9', '4.9=>4.8'],
+    '4.8': '/deployment-options/offline-installation.html',
+    '4.9': '/deployment-options/offline-installation/index.html',
+  },
+  {
+    'target': ['4.9=>4.8'],
+    '4.8': '/deployment-options/offline-installation.html',
+    '4.9': '/deployment-options/offline-installation/step-by-step.html',
+  },
+);
+
+/* Pages added in 4.9 */
+
 newUrls['4.9'] = [
   '/release-notes/release-4-9-0.html',
+  '/deployment-options/offline-installation/index.html',
+  '/deployment-options/offline-installation/step-by-step.html',
+  '/deployment-options/offline-installation/installation-assistant.html',
+];
+
+/* Pages no longer available in 4.9 */
+
+removedUrls['4.9'] = [
+  '/deployment-options/offline-installation.html',
 ];
 
 /* *** RELEASE 4.8 ****/
