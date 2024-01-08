@@ -15,10 +15,9 @@ Install and configure the Wazuh indexer nodes.
 
 #. Run the assistant with the ``--offline-install`` to perform an offline installation. Use the option ``--wazuh-indexer`` and the node name to install and configure the Wazuh indexer. The node name must be the same one used in ``config.yml`` for the initial configuration, for example, ``node-1``.
       
-      .. code-block:: console
+   .. code-block:: console
 
-        # bash wazuh-install.sh --offline-install --wazuh-indexer node-1 
-
+      # bash wazuh-install.sh --offline-install --wazuh-indexer node-1 
 
    Repeat this step for every Wazuh indexer node in your cluster. Then proceed with initializing your single-node or multi-node cluster in the next step.
 
@@ -26,7 +25,7 @@ Install and configure the Wazuh indexer nodes.
 
    .. code-block:: console
  
-     # bash wazuh-install.sh --start-cluster
+      # bash wazuh-install.sh --start-cluster
  
    .. note:: You only have to initialize the cluster `once`, there is no need to run this command on every node. 
 
@@ -78,14 +77,12 @@ Installing the Wazuh server
  
    .. code-block:: console
   
-       # bash wazuh-install.sh --offline-install --wazuh-server wazuh-1
-
+      # bash wazuh-install.sh --offline-install --wazuh-server wazuh-1
 
 Your Wazuh server is now successfully installed. 
 
 -  If you want a Wazuh server multi-node cluster, repeat this step on every Wazuh server node.
 -  If you want a Wazuh server single-node cluster, everything is set and you can proceed directly with the next stage.
-
 
 Installing the Wazuh dashboard
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
