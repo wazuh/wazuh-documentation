@@ -69,9 +69,14 @@ removedUrls['x.y'] = [
 
 redirections.push(
   {
-    'target': ['4.8=>4.9'],
+    'target': ['4.8=>4.9', '4.9=>4.8'],
     '4.8': '/deployment-options/offline-installation.html',
     '4.9': '/deployment-options/offline-installation/index.html',
+  },
+  {
+    'target': ['4.9=>4.8'],
+    '4.8': '/deployment-options/offline-installation.html',
+    '4.9': '/deployment-options/offline-installation/step-by-step.html',
   },
 );
 
