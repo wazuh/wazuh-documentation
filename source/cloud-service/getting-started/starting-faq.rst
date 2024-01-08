@@ -119,7 +119,7 @@ See :ref:`What happens if the indexed data capacity setting is reached? <cloud_s
 .. _cloud_starting_faq_data_reached:
 
 What happens if the indexed data capacity setting is reached?
----------------------------------------------------------
+-------------------------------------------------------------
 
 When the selected **indexed data capacity** is reached, the oldest events will be automatically removed from your index regardless of the **index data time**. This data is available in archived data for you to access. See the :ref:`Archived data <cloud_your_environment_accessing_archived_data>` section to learn more about data logging and storage.
 
