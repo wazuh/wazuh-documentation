@@ -1,12 +1,12 @@
 Install Wazuh components step by step
 -----------------------------------------
 
-#. In the working directory where you placed ``wazuh-offline.tar.gz`` and ``wazuh-install-files.tar.gz``, execute the following command to decompress the installation files:
+#. In the working directory where you placed ``wazuh-offline.tar.gz`` and ``wazuh-install-files.tar``, execute the following command to decompress the installation files:
 
    .. code-block:: console
 
       # tar xf wazuh-offline.tar.gz
-      # tar xf wazuh-install-files.tar.gz
+      # tar xf wazuh-install-files.tar
 
    You can check the SHA512 of the decompressed package files in ``wazuh-offline/wazuh-packages/``. Find the SHA512 checksums in the :doc:`/installation-guide/packages-list`.
 

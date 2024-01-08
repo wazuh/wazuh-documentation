@@ -5,7 +5,7 @@ Install and configure the different Wazuh components with the aid of the Wazuh i
 
 .. note:: You need root user privileges to run all the commands described below.
 
-Please, make sure that a copy of the ``wazuh-install-files.tar.gz`` and ``wazuh-offline.tar.gz`` files, created during the initial configuration step, is placed in your working directory.
+Please, make sure that a copy of the ``wazuh-install-files.tar`` and ``wazuh-offline.tar.gz`` files, created during the initial configuration step, is placed in your working directory.
 
 Installing the Wazuh indexer
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
