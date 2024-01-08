@@ -284,7 +284,7 @@ Change Password for Wazuh users:
 
 The password change of users used by Wazuh must be done following the page of :doc:`Password Management </user-manual/user-administration/password-management>` of Wazuh's documentation
 
-After the password change, these new passwords must be loaded within the classes with which the Wazuh Stack was displayed.
+After the password change, these new passwords must be loaded within the classes with which the Wazuh Stack was deployed.
 
 Indexer users:
 ^^^^^^^^^^^^^^
