@@ -75,7 +75,7 @@ Indexed data is calculated using the primary shards of ``wazuh-*`` indices.
 Tier
 ----
 
-The concept of a tier, which represents the size limitation, in bytes, of the indexed data (formerly known as hot storage), is no longer used. It has been replaced by the *indexed data size* setting.
+The concept of a tier, which represents the size limitation, in bytes, of the indexed data (formerly known as hot storage), is no longer used. It has been replaced by the *indexed data capacity* setting.
 
 .. _cloud_glossary_setting:
 

@@ -14,7 +14,7 @@ Technical FAQ
 
 - `What happens if the tier limit is reached?`_
 
-- `What happens if indexed data size setting is reached?`_
+- `What happens if indexed data capacity setting is reached?`_
 
 - `Can I index the archived data again?`_
 
@@ -24,7 +24,7 @@ Technical FAQ
 
 - `What happens if active agents setting is reached?`_
 
-- `What happens if data ingestion rate setting is reached?`_
+- `What happens if average/peak EPS setting is reached?`_
 
 - `How do I get SSH access to my environment?`_
 
@@ -59,15 +59,15 @@ It is possible to get a new URL by opening a support ticket through the **Help**
 What happens if the tier limit is reached?
 ------------------------------------------
 
-See :ref:`See What happens if *indexed data size* setting is reached? <cloud_technical_faq_change_setting>`
+See :ref:`See What happens if *indexed data capacity* setting is reached? <cloud_technical_faq_change_setting>`
 
 
 .. _cloud_technical_faq_size_reached:
 
-What happens if indexed data size setting is reached?
------------------------------------------------------
+What happens if indexed data capacity setting is reached?
+---------------------------------------------------------
 
-When the selected indexed data size is reached, the oldest events will be automatically removed from your index regardless of the index data time. This data is available in archived data for you to access. See the :ref:`Archived data <cloud_your_environment_accessing_archived_data>` section to learn more about data logging and storage.
+When the selected indexed data capacity is reached, the oldest events will be automatically removed from your index regardless of the index data time. This data is available in archived data for you to access. See the :ref:`Archived data <cloud_your_environment_accessing_archived_data>` section to learn more about data logging and storage.
 
 Can I index the archived data again?
 ------------------------------------
@@ -91,7 +91,7 @@ What happens if active agents setting is reached?
 
 If the maximum number of active agents is reached, the environment may start to malfunction, causing instability with agent connections. While the system can tolerate temporarily exceeding the limit of active agents, appropriate measures will be taken if the situation persists.
 
-What happens if data ingestion rate setting is reached?
+What happens if average/peak EPS setting is reached?
 -------------------------------------------------------
 
 If the data ingestion is exceeded, events will start to queue. However, if the queue becomes full, the incoming events will be discarded, which may lead to potential event loss. The queuing mechanism is automatically managed by the cloud service, ensuring optimal resource utilization.
