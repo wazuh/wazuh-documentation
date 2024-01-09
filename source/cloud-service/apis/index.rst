@@ -10,7 +10,7 @@ Wazuh Cloud API
 
 Wazuh Cloud provides a Wazuh Cloud API that allows you to perform some operations with your cloud environments, such as downloading archived data.
 
-The following section provides information on:
+This section provides information on the following:
 
    .. toctree::
       :maxdepth: 1
