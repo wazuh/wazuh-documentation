@@ -20,22 +20,18 @@ In this section you will find:
 
 
 .. toctree::
-    :maxdepth: 2
+   :maxdepth: 2
 
-    log-data-collection/index
-    file-integrity/index
-    auditing-whodata/index
-    malware-detection/index
-    sec-config-assessment/index
-    policy-monitoring/index
-    system-calls-monitoring/index
-    command-monitoring/index
-    active-response/index
-    agentless-monitoring/index
-    antiflooding
-    labels
-    syscollector
-    vulnerability-detection/index
-    osquery
-    fluent-forwarder
-    wazuh-logtest/index
+   file-integrity/index
+   malware-detection/index
+   sec-config-assessment/index
+   active-response/index
+   log-data-collection/index
+   vulnerability-detection/index
+   command-monitoring/index
+   container-security/index
+   system-inventory/index
+   system-calls-monitoring/index
+   agentless-monitoring/index        
+   osquery
+   policy-monitoring/index

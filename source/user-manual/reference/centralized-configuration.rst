@@ -18,9 +18,9 @@ Agents can be configured remotely by using the ``agent.conf`` file. The followin
 - :doc:`Log data collection <../capabilities/log-data-collection/index>` (**localfile**)
 - :doc:`Security policy monitoring <../capabilities/policy-monitoring/index>` (**wodle name="open-scap"**, **wodle name="cis-cat"**)
 - :doc:`Remote commands <ossec-conf/wodle-command>` (**wodle name="command"**)
-- :doc:`Labels for agent alerts <../capabilities/labels>` (**labels**)
+- :doc:`Labels for agent alerts <../agents/labels>` (**labels**)
 - :doc:`Security Configuration Assessment <../capabilities/sec-config-assessment/index>` (**sca**)
-- :doc:`System inventory <../capabilities/syscollector>` (**syscollector**)
+- :doc:`System inventory <../capabilities/system-inventory/index>` (**syscollector**)
 - :doc:`Avoid events flooding <ossec-conf/client-buffer>` (**client_buffer**)
 - :doc:`Configure osquery wodle <ossec-conf/wodle-osquery>` (**wodle name="osquery"**)
 - :doc:`force_reconnect_interval setting <ossec-conf/client>` (**client**)
@@ -118,28 +118,54 @@ Options
 -------
 
 +-------------+-------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-| **name**    | Allows assignment of the block to one particular agent.                                                                                                           |
+| **name**    | Assigns the block to agents with specific names.                                                                                                                  |
 +             +-------------------------------------------------------+-----------------------------------------------------------------------------------------------------------+
-|             | Allowed values                                        | Any agent name                                                                                            |
+|             | Allowed values                                        | Any regular expression that matches the agent name.                                                       |
 +-------------+-------------------------------------------------------+-----------------------------------------------------------------------------------------------------------+
-| **os**      | Allows assignment of the block to an operating system.                                                                                                            |
+| **os**      | Assigns the block to agents on specific operating systems.                                                                                                        |
 +             +-------------------------------------------------------+-----------------------------------------------------------------------------------------------------------+
-|             | Allowed values                                        | Any OS family                                                                                             |
+|             | Allowed values                                        | Any regular expression that matches the agent OS information.                                             |
 +-------------+-------------------------------------------------------+-----------------------------------------------------------------------------------------------------------+
-| **profile** | Allows assignment of a profile name to a block. Any agent configured to use the defined :ref:`profile <reference_ossec_client_config_profile>` may use the block. |
+| **profile** | Assigns the block to agents with specific profiles as defined in :ref:`client configuration <reference_ossec_client_config_profile>`.                             |
 +             +-------------------------------------------------------+-----------------------------------------------------------------------------------------------------------+
-|             | Allowed values                                        | Any defined profile                                                                                       |
+|             | Allowed values                                        | Any regular expression that matches the agent profile.                                                    |
 +-------------+-------------------------------------------------------+-----------------------------------------------------------------------------------------------------------+
 
-Examples
+.. topic:: Example
 
 	.. code-block:: xml
 
-		<agent_config name=”agent01”>
+		<agent_config name=”^agent01|^agent02”>
 		...
-		<agent_config os="Linux">
+		<agent_config os="^Linux">
 		...
-		<agent_config profile="UnixHost">
+		<agent_config profile="^UnixHost">
+
+   To get the agent name and operating system information, you can run the ``agent_control`` utility.
+
+    .. code-block:: console
+
+        agent_control -i <AGENT_ID>
+
+    Where ``<AGENT_ID>`` corresponds to the agent ID of the endpoint.
+
+    .. code-block:: none
+        :class: output
+
+        Wazuh agent_control. Agent information:
+        Agent ID:   001
+        Agent Name: agent01
+        IP address: any
+        Status:     Active
+
+        Operating system:    Linux |centos9 |5.14.0-366.el9.x86_64 |#1 SMP PREEMPT_DYNAMIC Thu Sep 14 23:37:14 UTC 2023 |x86_64
+        Client version:      Wazuh v4.5.2
+        Configuration hash:  ab73af41699f13fdd81903b5f23d8d00
+        Shared file hash:    4a8724b20dee0124ff9656783c490c4e
+        Last keep alive:     1696963366
+
+        Syscheck last started at:  Tue Oct 10 12:37:43 2023
+        Syscheck last ended at:    Tue Oct 10 12:37:46 2023
 
 Centralized configuration process
 ---------------------------------

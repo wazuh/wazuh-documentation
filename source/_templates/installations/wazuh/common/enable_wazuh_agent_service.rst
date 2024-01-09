@@ -35,7 +35,7 @@
 
   .. group-tab:: No service manager
 
-     On some system, like Alpine Linux, you need to start the agent manually: 
+     On some systems, like Alpine Linux, you need to start the agent manually: 
 
      .. code-block:: console
 

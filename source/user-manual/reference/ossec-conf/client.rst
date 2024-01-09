@@ -129,7 +129,6 @@ Options
 - `time-reconnect`_
 - `force_reconnect_interval`_
 - `ip_update_interval`_
-- `local_ip`_
 - `auto_restart`_
 - `crypto_method`_
 
@@ -186,8 +185,6 @@ For example, a ``notify_time`` setting of 60 combined with a time-reconnect of 3
 force_reconnect_interval
 ^^^^^^^^^^^^^^^^^^^^^^^^
 
-.. versionadded:: 4.3.0
-
 Specifies the time after which the agent is forced to be reconnected to the manager. The reconnection is forced to be done even if the agent is having a successful two-way communication with the manager.
 
 +--------------------+--------------------------------------------------------------------------------------------------------------------------------------------------+
@@ -201,8 +198,6 @@ Specifies the time after which the agent is forced to be reconnected to the mana
 ip_update_interval
 ^^^^^^^^^^^^^^^^^^
 
-.. versionadded:: 4.2.0
-
 Specifies how often an agent will query the control module for its main IP address.
 
 
@@ -215,17 +210,6 @@ Any value equal to or lower than the configured ``notify_time`` will cause the I
 +--------------------+-----------------------------+
 
  .. note:: Most systems won't need to modify this value, but on systems with large routing tables this configuration can help lower CPU usage from wazuh-modulesd.
-
-local_ip
-^^^^^^^^
-
-Specifies which IP address will be used to communicate with the manager when the agent has multiple network interfaces.
-
-+--------------------+----------------------------------+
-| **Default value**  | n/a                              |
-+--------------------+----------------------------------+
-| **Allowed values** | Any valid IP address is allowed. |
-+--------------------+----------------------------------+
 
 auto_restart
 ^^^^^^^^^^^^
@@ -295,7 +279,6 @@ Sample link-local IPv6 configuration
 
 enrollment
 ^^^^^^^^^^
-.. versionadded:: 4.0
 
 Configures the connection parameters for the agent enrollment.
 

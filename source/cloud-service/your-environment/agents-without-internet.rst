@@ -21,6 +21,7 @@ It is possible to access your environment using an NGINX forwarding proxy.
 
 .. thumbnail:: ../../images/cloud-service/nginx-scheme.png
     :title: Using an NGINX forwarding proxy
+    :alt: Using an NGINX forwarding proxy
     :align: center
     :width: 80%
 
@@ -73,9 +74,15 @@ To achieve this configuration, follow these steps:
 
       .. code-block::
 
+<<<<<<< HEAD
          WAZUH_MANAGER_IP=<NGINX_IP> WAZUH_PROTOCOL="tcp" \
          WAZUH_PASSWORD="<PASSWORD>" \
          yum install wazuh-agent
+=======
+         WAZUH_MANAGER_IP=nginx_ip WAZUH_PROTOCOL="tcp" \
+         WAZUH_PASSWORD="xxxx" \
+         yum install wazuh-agent|WAZUH_AGENT_RPM_PKG_INSTALL|
+>>>>>>> 4.7
          
       Replace <PASSWORD> with your Wazuh server enrollment password.
 
@@ -112,6 +119,6 @@ In case your agents are located in AWS, you can access our Wazuh Cloud service s
 
       WAZUH_MANAGER_IP=vpce-<aws-endpoint-id>.vpce-svc-<aws-service-id>.<region>.vpce.amazonaws.com WAZUH_PROTOCOL="tcp" \
       WAZUH_PASSWORD="<PASSWORD>>" \
-      yum install wazuh-agent
+      yum install wazuh-agent|WAZUH_AGENT_RPM_PKG_INSTALL|
 
    In this example, make sure to replace ``<PASSWORD>`` with your actual password.

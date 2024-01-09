@@ -61,6 +61,9 @@ This reference also contains a set of default roles and policies that can be imm
         - `decoders:update`_
         - `decoders:delete`_
 
+    - `Events`_
+        - `event:ingest`_
+
     - `Group`_
         - `group:create`_
         - `group:delete`_
@@ -132,6 +135,7 @@ This reference also contains a set of default roles and policies that can be imm
     - `cluster_read`_
     - `decoders_all`_
     - `decoders_read`_
+    - `events_ingest`_
     - `lists_all`_
     - `lists_read`_
     - `logtest_all`_
@@ -405,7 +409,14 @@ decoders:update
 
 decoders:delete
 ~~~~~~~~~~~~~~~~~~~~~~~~~~
+- :api-ref:`PUT /decoders/files/{filename} <operation/api.controllers.decoder_controller.put_file>` (`*:*`_)
 - :api-ref:`DELETE /decoders/files/{filename} <operation/api.controllers.decoder_controller.delete_file>` (`decoder:file`_)
+
+Events
+^^^^^^^
+event:ingest
+~~~~~~~~~~~~
+- :api-ref:`POST /events <operation/api.controllers.event_controller.forward_event>` (`*:*`_)
 
 Group
 ^^^^^^^^^^^^^^^
@@ -438,7 +449,6 @@ group:read
 group:update_config
 ~~~~~~~~~~~~~~~~~~~~~~~~~~
 - :api-ref:`PUT /groups/{group_id}/configuration <operation/api.controllers.agent_controller.put_group_config>` (`group:id`_)
-
 
 Lists
 ^^^^^^^^^^^^^^^
@@ -545,6 +555,7 @@ rules:update
 
 rules:delete
 ~~~~~~~~~~~~~~~~~~~~~~~~~~
+- :api-ref:`PUT /rules/files/{filename} <operation/api.controllers.rule_controller.put_file>` (`*:*`_)
 - :api-ref:`DELETE /rules/files/{filename} <operation/api.controllers.rule_controller.delete_file>` (`rule:file`_)
 
 
@@ -836,6 +847,19 @@ Allow reading all decoder files in the system.
         - decoders:read
       resources:
         - decoder:file:*
+      effect: allow
+
+events_ingest
+^^^^^^^^^^^^^
+Allow sending events to analysisd.
+
+.. code-block:: yaml
+
+    resourceless:
+      actions:
+        - event:ingest
+      resources:
+        - '*:*:*'
       effect: allow
 
 lists_all

@@ -108,6 +108,8 @@ Available regions:
 
 * Frankfurt: ``eu-central-1``
 
+* Mumbai: ``ap-south-1``
+
 * Singapore: ``ap-southeast-1``
 
 * Sydney: ``ap-southeast-2``

@@ -41,7 +41,7 @@ The agent runs on the endpoint you want to monitor and communicates with the Waz
 
               .. code-block:: none
 
-                NET START WazuhSvc
+                NET START Wazuh
 
              Once started, the Wazuh agent will start the enrollment process and register with the manager.
 
@@ -54,9 +54,11 @@ The agent runs on the endpoint you want to monitor and communicates with the Waz
 
                 To install the Wazuh agent on your system, run the Windows installer and follow the steps in the installation wizard. If you are not sure how to answer some of the prompts, use the default answers. Once installed, the agent uses a GUI for configuration, opening the log file, and starting or stopping the service.
 
-                    .. thumbnail:: ../../images/installation/windows-agent.png
+                    .. thumbnail:: ../../images/installation/windows-agent.png                        
                         :align: center
                         :width: 100%
+                        :title: Windows agent manager
+                        :alt: Windows agent manager
             
               The installation process is now complete, and the Wazuh agent is successfully installed on your Windows endpoint. The next step is to register and configure the agent to communicate with the Wazuh server. To perform this action, see the :doc:`Wazuh agent enrollment </user-manual/agent-enrollment/index>` section.                 
  

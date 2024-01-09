@@ -8,7 +8,7 @@ File integrity monitoring
 
 File Integrity Monitoring (FIM) helps in auditing sensitive files and meeting regulatory compliance requirements. Wazuh has an inbuilt :doc:`FIM </user-manual/capabilities/file-integrity/index>` module that monitors file system changes to detect the creation, modification, and deletion of files.
 
-This use case uses the Wazuh FIM module to detect changes in monitored directories on Ubuntu and Windows endpoints. The Wazuh FIM module enriches alert data by fetching information about the user and process that made the changes using :doc:`who-data audit </user-manual/capabilities/auditing-whodata/index>`.
+This use case uses the Wazuh FIM module to detect changes in monitored directories on Ubuntu and Windows endpoints. The Wazuh FIM module enriches alert data by fetching information about the user and process that made the changes using :ref:`who-data audit <who-data-monitoring>`.
 
 Infrastructure 
 --------------
@@ -29,7 +29,7 @@ Ubuntu endpoint
 
 Perform the following steps to configure the Wazuh agent to monitor filesystem changes in the ``/root`` directory.
 
-#. Edit the Wazuh agent ``/var/ossec/etc/ossec.conf`` configuration file. Add the directories for monitoring within the ``<syscheck>`` block. For this use case, you configure Wazuh to monitor the ``/root`` directory. To get additional information about the user and process that made the changes, enable :doc:`who-data audit </user-manual/capabilities/auditing-whodata/who-linux>`:
+#. Edit the Wazuh agent ``/var/ossec/etc/ossec.conf`` configuration file. Add the directories for monitoring within the ``<syscheck>`` block. For this use case, you configure Wazuh to monitor the ``/root`` directory. To get additional information about the user and process that made the changes, enable :ref:`who-data audit <who-data-monitoring-linux>`:
 
    .. code-block:: xml
 
@@ -51,7 +51,7 @@ Windows endpoint
 
 Take the following steps to configure the Wazuh agent to monitor filesystem changes in the ``C:\Users\Administrator\Desktop`` directory.
 
-#. Edit the ``C:\Program Files (x86)\ossec-agent\ossec.conf`` configuration file on the monitored Windows endpoint. Add the directories for monitoring within the ``<syscheck>`` block. For this use case, you  configure Wazuh to monitor the ``C:\Users\Administrator\Desktop`` directory. To get additional information about the user and process that made the changes, enable :doc:`who-data audit </user-manual/capabilities/auditing-whodata/who-windows>`:
+#. Edit the ``C:\Program Files (x86)\ossec-agent\ossec.conf`` configuration file on the monitored Windows endpoint. Add the directories for monitoring within the ``<syscheck>`` block. For this use case, you  configure Wazuh to monitor the ``C:\Users\Administrator\Desktop`` directory. To get additional information about the user and process that made the changes, enable :ref:`who-data audit <who-data-monitoring-windows>`:
 
    .. code-block:: xml
 

@@ -1,7 +1,7 @@
 .. Copyright (C) 2015, Wazuh, Inc.
 
 .. meta::
-  :description: The ossec.conf file is the main configuration file on the Wazuh manager and it also plays an important role on the agents. Learn more about it here.
+  :description: The ossec.conf file is the main configuration file on the Wazuh manager and also important on the agents. Learn more about FIM settings with configuration examples here.
 
 .. _reference_ossec_syscheck:
 
@@ -21,6 +21,9 @@ Configuration options for file integrity monitoring:
 - `alert_new_files`_
 - `allow_remote_prefilter_cmd`_
 - `database`_
+- `file_limit`_
+- `registry_limit`_
+- `diff`_
 - `directories`_
 - `disabled`_
 - `frequency`_
@@ -36,12 +39,10 @@ Configuration options for file integrity monitoring:
 - `skip_nfs`_
 - `skip_proc`_
 - `skip_sys`_
-- `file_limit`_
 - `synchronization`_
 - `whodata`_
 - `windows_audit_interval`_
 - `windows_registry`_
-- `diff`_
 
 .. _reference_ossec_syscheck_alert_new_files:
 
@@ -119,8 +120,6 @@ This is to be set on the system to be monitored (or in the ``agent.conf``, if ap
 
 There is a limit of 64 directories, comma-separated, that can be written in one line .
 
-.. versionadded:: 4.3.0
-
 Wildcard characters (``?`` and ``*``) can be used to monitor paths that fulfill the given pattern.
 These wildcards will be reloaded every time a scheduled scan is run.
 
@@ -128,8 +127,6 @@ These wildcards will be reloaded every time a scheduled scan is run.
 | **Default value**  | /etc,/usr/bin,/usr/sbin,/bin,/sbin |
 +--------------------+------------------------------------+
 | **Allowed values** | Any directory                      |
-+                    +                                    +
-|                    | .. versionadded:: 4.0              |
 +                    +                                    +
 |                    | Any environment variable           |
 +--------------------+------------------------------------+
@@ -160,8 +157,6 @@ Attributes:
 | **diff_size_limit**      | Limit the maximum size of the file which will report diff information with ``report_changes`` enabled.                |
 +                          +                                                                                                                       +
 |                          | Files bigger than this value will not report diff information.                                                        |
-+                          +                                                                                                                       +
-|                          | .. versionadded:: 4.0.0                                                                                               |
 +                          +------------------------------------------------------------+----------------------------------------------------------+
 |                          | Default value                                              | 50MB                                                     |
 +                          +------------------------------------------------------------+----------------------------------------------------------+
@@ -294,8 +289,6 @@ The configuration above, set the option ``check_sha256`` to ``YES``.
 
 Nevertheless, the second one disables the SHA-256 hash check.
 
-.. versionadded:: 4.3.0
-
 If there is a conflict between a block with wildcards and another without them, the block without wildcards will be used for the specific case. As an example:
 
 .. code-block:: xml
@@ -387,7 +380,7 @@ max_eps
 Sets the maximum event reporting throughput. Events are messages that will produce an alert.
 
 +--------------------+---------------------------------------------------------+
-| **Default value**  | 100                                                     |
+| **Default value**  | 50                                                      |
 +--------------------+---------------------------------------------------------+
 | **Allowed values** | Integer number between 0 and 1000000. 0 means disabled. |
 +--------------------+---------------------------------------------------------+
@@ -396,15 +389,13 @@ Example:
 
 .. code-block:: xml
 
- <max_eps>100</max_eps>
+ <max_eps>50</max_eps>
 
 
 .. _reference_ossec_syscheck_max_files_per_second:
 
 max_files_per_second
 --------------------
-
-.. versionadded:: 4.2.0
 
 Sets the maximum number of files scanned per second. If this option is set to 0, there will be no limit on the number of files scanned per second.
 
@@ -651,7 +642,7 @@ Example:
 file_limit
 ----------
 
-Specifies a limit on the number of files that will be monitored by syscheck. Files created when the database has reached the limit will be ignored.
+Specifies a limit on the number of files that FIM monitors. It ignores files added once the database reached the limit.
 
 .. code-block:: xml
 
@@ -664,7 +655,7 @@ Specifies a limit on the number of files that will be monitored by syscheck. Fil
 
 **enabled**
 
-Specifies whether there will be a limit on the number of monitored files or not.
+Specifies if the number of monitored entries has a limit.
 
 +--------------------+---------------------------------------+
 | **Default value**  | yes                                   |
@@ -675,7 +666,45 @@ Specifies whether there will be a limit on the number of monitored files or not.
 
 **entries**
 
-Specifies the number of files to be monitored.
+Specifies the maximum number of files to monitor.
+
++--------------------+------------------------------------------+
+| **Default value**  | 100000                                   |
++--------------------+------------------------------------------+
+| **Allowed values** | Integer number between 1 and 2147483647. |
++--------------------+------------------------------------------+
+
+
+registry_limit
+--------------
+
+.. note::
+
+   This section only applies to Windows agents.
+
+Specifies a limit on the number of registry entries that FIM monitors. It ignores registry values created once the database reached the limit.
+
+.. code-block:: xml
+
+   <!-- Maximum number of registries to be monitored -->
+   <registry_limit>
+     <enabled>yes</enabled>
+     <entries>100000</entries>
+   </registry_limit>
+
+**enabled**
+
+Specifies if the number of monitored entries has a limit.
+
++--------------------+---------------------------------------+
+| **Default value**  | yes                                   |
++--------------------+---------------------------------------+
+| **Allowed values** | yes/no                                |
++--------------------+---------------------------------------+
+
+**entries**
+
+Specifies the maximum number of registry entries to monitor.
 
 +--------------------+------------------------------------------+
 | **Default value**  | 100000                                   |
@@ -700,13 +729,14 @@ The database synchronization settings are configured inside this tag.
       <max_interval>1h</max_interval>
       <response_timeout>30</response_timeout>
       <queue_size>16384</queue_size>
+      <thread_pool>1</thread_pool>
       <max_eps>10</max_eps>
     </synchronization>
 
 
 **enabled**
 
-Specifies whether there will be periodic inventory synchronizations or not.
+Specifies performing periodic inventory synchronizations.
 
 +--------------------+---------------------------------------+
 | **Default value**  | yes                                   |
@@ -715,8 +745,6 @@ Specifies whether there will be periodic inventory synchronizations or not.
 +--------------------+---------------------------------------+
 
 **registry_enabled**
-
-.. versionadded:: 4.1.0
 
 On Windows agents, enables inventory synchronizations for registry entries. If ``enabled`` is set to no,
 this parameter is ignored.
@@ -729,36 +757,33 @@ this parameter is ignored.
 
 **interval**
 
-Specifies the initial number of seconds between every inventory synchronization. If synchronization fails
-the value will be duplicated until it reaches the value of ``max_interval``.
+Specifies the initial time interval between every inventory synchronization. If the synchronization fails the value is duplicated until it reaches the value of ``max_interval``. If the synchronization succeds the value is restored.
 
 +--------------------+-----------------------------------------------------------------------+
-| **Default value**  | 300 s                                                                 |
+| **Default value**  | 5 m                                                                   |
 +--------------------+-----------------------------------------------------------------------+
 | **Allowed values** | Any number greater than or equal to 0. Allowed suffixes (s, m, h, d). |
 +--------------------+-----------------------------------------------------------------------+
 
 **max_interval**
 
-Specifies the maximum number of seconds between every inventory synchronization.
+Maximum time interval to trigger a synchronization. When a synchronization fails the interval is duplicated up to this maximum value.
 
-+--------------------+------------------------------------------------------------------------------+
-| **Default value**  | 1 h                                                                          |
-+--------------------+------------------------------------------------------------------------------+
-| **Allowed values** | Any number greater than or equal to interval. Allowed suffixes (s, m, h, d). |
-+--------------------+------------------------------------------------------------------------------+
++--------------------+-----------------------------------------------------------------------------------+
+| **Default value**  | 1 h                                                                               |
++--------------------+-----------------------------------------------------------------------------------+
+| **Allowed values** | Any integer greater than or equal to ``interval``. Allowed suffixes (s, m, h, d). |
++--------------------+-----------------------------------------------------------------------------------+
 
 **response_timeout**
 
-Specifies the time elapsed in seconds since the agent sends the message to the manager and receives the response.
-If the response is not received in this interval, the message is marked as unanswered (timed-out) and the agent
-may start a new synchronization session at the defined interval.
+Waiting time in seconds since a sync message is sent or received for the next synchronization activity. If the agent doesn't send or receive a message in this interval the synchronization is marked as successful. If a synchronization is unsuccessful, the synchronization interval is doubled up to the ``max_interval`` value. This mechanism avoids synchronization overlapping.
 
-+--------------------+---------------------------------------+
-| **Default value**  | 30                                    |
-+--------------------+---------------------------------------+
-| **Allowed values** | Any number greater than or equal to 0.|
-+--------------------+---------------------------------------+
++--------------------+----------------------------------------------------------------------+
+| **Default value**  | 30                                                                   |
++--------------------+----------------------------------------------------------------------+
+| **Allowed values** | Any number between 0 and ``interval``.                               |
++--------------------+----------------------------------------------------------------------+
 
 **queue_size**
 
@@ -769,6 +794,16 @@ Specifies the queue size of the manager synchronization responses.
 +--------------------+---------------------------------------+
 | **Allowed values** | Integer number between 2 and 1000000. |
 +--------------------+---------------------------------------+
+
+**thread_pool**
+
+Specifies the number of threads that FIM database synchronization uses. FIM uses the lesser value of the configured value and the number of system CPU cores.
+
++--------------------+-----------------------------------------------------+
+| **Default value**  | 1                                                   |
++--------------------+-----------------------------------------------------+
+| **Allowed values** |  Any integer greater than 0.                        |
++--------------------+-----------------------------------------------------+
 
 **max_eps**
 
@@ -784,8 +819,6 @@ Sets the maximum synchronization message throughput.
 
 diff
 ----
-
-.. versionadded:: 4.0
 
 The diff settings will be configured inside this tag.
 
@@ -807,13 +840,9 @@ The diff settings will be configured inside this tag.
 disk_quota
 """"""""""
 
-.. versionadded:: 4.0
-
 This option can be used to limit the size of the ``queue/diff/local`` folder where Wazuh stores the compressed files used to perform the diff operation when ``report_changes`` is enabled. After reaching this size, alerts will not show the diff information until the size is smaller than the configured limit.
 
 **enabled**
-
-.. versionadded:: 4.0
 
 Set the disk quota limit option to enabled or disabled.
 
@@ -824,8 +853,6 @@ Set the disk quota limit option to enabled or disabled.
 +--------------------+---------------------------------------+
 
 **limit**
-
-.. versionadded:: 4.0
 
 Specifies the limit for the size of the ``queue/diff/local`` folder.
 
@@ -838,13 +865,9 @@ Specifies the limit for the size of the ``queue/diff/local`` folder.
 file_size
 """""""""
 
-.. versionadded:: 4.0
-
 This option can be used to limit the size of the file which will report diff information with ``report_changes`` enabled. Files bigger than this limit will not report diff information until the size is smaller than the configured limit again.
 
 **enabled**
-
-.. versionadded:: 4.0
 
 Set the size limit of a file to enabled or disabled.
 
@@ -855,8 +878,6 @@ Set the size limit of a file to enabled or disabled.
 +--------------------+---------------------------------------+
 
 **limit**
-
-.. versionadded:: 4.0
 
 Specifies the limit for the size of files monitored with ``report_changes``.
 
@@ -963,7 +984,7 @@ Allows disabling the Audit health check during the Whodata engine starting. This
 
 .. warning:: The health check ensures that the rules required by Whodata can be set in Audit correctly and also that the generated events can be obtained. Disabling the health check may cause functioning problems in Whodata and loss of FIM events.
 
-For more information, please read :ref:`auditing who-data <auditing-whodata>`
+For more information, please read :ref:`auditing who-data <who-data-monitoring>`
 
 
 .. _reference_ossec_syscheck_windows_audit_interval:
@@ -971,7 +992,7 @@ For more information, please read :ref:`auditing who-data <auditing-whodata>`
 windows_audit_interval
 ----------------------
 
-Sets the frequency in seconds with which the Windows agent will check that the SACLs of the directories monitored in whodata mode are correct.
+Sets the frequency in seconds with which the Windows agent checks that the Local Audit Policies and the SACLs of the directories monitored in whodata mode are correct.
 
 +--------------------+------------------------------------+
 | **Default value**  | 300 seconds                        |
@@ -992,6 +1013,10 @@ windows_registry
 ----------------
 
 List of registry entries to be monitored. One entry per line. Multiple lines may be entered to include multiple registry entries.
+
+.. versionadded:: 4.6.0
+
+   To scan paths matching a pattern, you can use the wildcard characters ``?`` and ``*``. For example ``HKEY_LOCAL_MACHINE\SOFTWARE\*``. FIM uses these wildcards during scheduled scan.
 
 +--------------------+----------------------------------------------------------------------+
 | **Default value**  | The default configuration may vary depending on the operating system.|
@@ -1015,8 +1040,6 @@ Attributes:
 | **report_changes**       | Report registry value changes. This is limited to REG_SZ, REG_MULTI_SZ, REG_DWORD, REG_DWORD_BIG_ENDIAN,              |
 +                          +                                                                                                                       +
 |                          | REG_QWORD value.                                                                                                      |
-+                          +                                                                                                                       +
-|                          | .. versionadded:: 4.1.0                                                                                               |
 +                          +------------------------------------------------------------+----------------------------------------------------------+
 |                          | Default value                                              | no                                                       |
 +                          +------------------------------------------------------------+----------------------------------------------------------+
@@ -1025,16 +1048,12 @@ Attributes:
 | **diff_size_limit**      | Limit the maximum size of the value which will report diff information with ``report_changes`` enabled.               |
 +                          +                                                                                                                       +
 |                          | Values bigger than this size will not report diff information.                                                        |
-+                          +                                                                                                                       +
-|                          | .. versionadded:: 4.1.0                                                                                               |
 +                          +------------------------------------------------------------+----------------------------------------------------------+
 |                          | Default value                                              | 50MB                                                     |
 +                          +------------------------------------------------------------+----------------------------------------------------------+
 |                          | Allowed values                                             | Any positive number followed by KB/MB/GB                 |
 +--------------------------+------------------------------------------------------------+----------------------------------------------------------+
 | **check_all**            | It modifies the value of all attributes with the prefix ``check_``.                                                   |
-+                          +                                                                                                                       +
-|                          | .. versionadded:: 4.1.0                                                                                               |
 +                          +------------------------------------------------------------+----------------------------------------------------------+
 |                          | Default value                                              | yes                                                      |
 +                          +------------------------------------------------------------+----------------------------------------------------------+
@@ -1043,48 +1062,36 @@ Attributes:
 | **check_sum**            | Check the MD5, SHA-1 and SHA-256 hashes of the registry.                                                              |
 +                          +                                                                                                                       +
 |                          | Same as using ``check_md5sum="yes"``, ``check_sha1sum="yes"`` and ``check_sha256sum="yes"`` at the same time.         |
-+                          +                                                                                                                       +
-|                          | .. versionadded:: 4.1.0                                                                                               |
 +                          +------------------------------------------------------------+----------------------------------------------------------+
 |                          | Default value                                              | yes                                                      |
 +                          +------------------------------------------------------------+----------------------------------------------------------+
 |                          | Allowed values                                             | yes, no                                                  |
 +--------------------------+------------------------------------------------------------+----------------------------------------------------------+
 | **check_sha1sum**        | Check only the SHA-1 hash of the registries.                                                                          |
-+                          +                                                                                                                       +
-|                          | .. versionadded:: 4.1.0                                                                                               |
 +                          +------------------------------------------------------------+----------------------------------------------------------+
 |                          | Default value                                              | yes                                                      |
 +                          +------------------------------------------------------------+----------------------------------------------------------+
 |                          | Allowed values                                             | yes, no                                                  |
 +--------------------------+------------------------------------------------------------+----------------------------------------------------------+
 | **check_md5sum**         | Check only the MD5 hash of the registries.                                                                            |
-+                          +                                                                                                                       +
-|                          | .. versionadded:: 4.1.0                                                                                               |
 +                          +------------------------------------------------------------+----------------------------------------------------------+
 |                          | Default value                                              | yes                                                      |
 +                          +------------------------------------------------------------+----------------------------------------------------------+
 |                          | Allowed values                                             | yes, no                                                  |
 +--------------------------+------------------------------------------------------------+----------------------------------------------------------+
 | **check_sha256sum**      | Check only the SHA-256 hash of the registries.                                                                        |
-+                          +                                                                                                                       +
-|                          | .. versionadded:: 4.1.0                                                                                               |
 +                          +------------------------------------------------------------+----------------------------------------------------------+
 |                          | Default value                                              | yes                                                      |
 +                          +------------------------------------------------------------+----------------------------------------------------------+
 |                          | Allowed values                                             | yes, no                                                  |
 +--------------------------+------------------------------------------------------------+----------------------------------------------------------+
 | **check_size**           | Check the size of the registries.                                                                                     |
-+                          +                                                                                                                       +
-|                          | .. versionadded:: 4.1.0                                                                                               |
 +                          +------------------------------------------------------------+----------------------------------------------------------+
 |                          | Default value                                              | yes                                                      |
 +                          +------------------------------------------------------------+----------------------------------------------------------+
 |                          | Allowed values                                             | yes, no                                                  |
 +--------------------------+------------------------------------------------------------+----------------------------------------------------------+
 | **check_owner**          | Check the owner of the registries.                                                                                    |
-+                          +                                                                                                                       +
-|                          | .. versionadded:: 4.1.0                                                                                               |
 +                          +------------------------------------------------------------+----------------------------------------------------------+
 |                          | Default value                                              | yes                                                      |
 +                          +------------------------------------------------------------+----------------------------------------------------------+
@@ -1093,8 +1100,6 @@ Attributes:
 | **check_group**          | Check the group owner of the registries.                                                                              |
 +                          +                                                                                                                       +
 |                          | Just gid will be checked, group name will be blank.                                                                   |
-+                          +                                                                                                                       +
-|                          | .. versionadded:: 4.1.0                                                                                               |
 +                          +------------------------------------------------------------+----------------------------------------------------------+
 |                          | Default value                                              | yes                                                      |
 +                          +------------------------------------------------------------+----------------------------------------------------------+
@@ -1103,16 +1108,12 @@ Attributes:
 | **check_perm**           | Check the permission of the registries.                                                                               |
 +                          +                                                                                                                       +
 |                          | A list of denied and allowed permissions will be given for each user or group.                                        |
-+                          +                                                                                                                       +
-|                          | .. versionadded:: 4.1.0                                                                                               |
 +                          +------------------------------------------------------------+----------------------------------------------------------+
 |                          | Default value                                              | yes                                                      |
 +                          +------------------------------------------------------------+----------------------------------------------------------+
 |                          | Allowed values                                             | yes, no                                                  |
 +--------------------------+------------------------------------------------------------+----------------------------------------------------------+
 | **check_mtime**          | Check the modification time of a registry.                                                                            |
-+                          +                                                                                                                       +
-|                          | .. versionadded:: 4.1.0                                                                                               |
 +                          +------------------------------------------------------------+----------------------------------------------------------+
 |                          | Default value                                              | yes                                                      |
 +                          +------------------------------------------------------------+----------------------------------------------------------+
@@ -1123,8 +1124,6 @@ Attributes:
 |                          | This is limited to REG_NONE, REG_SZ, REG_EXPAND_SZ, REG_BINARY, REG_DWORD, REG_DWORD_BIG_ENDIAN, REG_LINK,            |
 +                          +                                                                                                                       +
 |                          | REG_MULTI_SZ, REG_RESOURCE_LIST, REG_FULL_RESOURCE_DESCRIPTOR, REG_RESOURCE_REQUIREMENTS_LIST, REG_QWORD.             |
-+                          +                                                                                                                       +
-|                          | .. versionadded:: 4.1.0                                                                                               |
 +                          +------------------------------------------------------------+----------------------------------------------------------+
 |                          | Default value                                              | yes                                                      |
 +                          +------------------------------------------------------------+----------------------------------------------------------+
@@ -1133,8 +1132,6 @@ Attributes:
 | **restrict_key**         | Limit checks to registries containing the entered sregex in the registry name.                                        |
 +                          +                                                                                                                       +
 |                          | Any registry is allowed.                                                                                              |
-+                          +                                                                                                                       +
-|                          | .. versionadded:: 4.1.0                                                                                               |
 +                          +------------------------------------------------------------+----------------------------------------------------------+
 |                          | Default value                                              | N/A                                                      |
 +                          +------------------------------------------------------------+----------------------------------------------------------+
@@ -1143,16 +1140,12 @@ Attributes:
 | **restrict_value**       | Limit checks to registry values containing the entered sregex in the value name.                                      |
 +                          +                                                                                                                       +
 |                          | Any registry value is allowed.                                                                                        |
-+                          +                                                                                                                       +
-|                          | .. versionadded:: 4.1.0                                                                                               |
 +                          +------------------------------------------------------------+----------------------------------------------------------+
 |                          | Default value                                              | N/A                                                      |
 +                          +------------------------------------------------------------+----------------------------------------------------------+
 |                          | Allowed value                                              | sregex                                                   |
 +--------------------------+------------------------------------------------------------+----------------------------------------------------------+
 | **recursion_level**      | Limits the maximum level of recursion allowed.                                                                        |
-+                          +                                                                                                                       +
-|                          | .. versionadded:: 4.1.0                                                                                               |
 +                          +------------------------------------------------------------+----------------------------------------------------------+
 |                          | Default value                                              | 512                                                      |
 +                          +------------------------------------------------------------+----------------------------------------------------------+
@@ -1169,6 +1162,24 @@ Example:
  <windows_registry arch="both" check_sum="no">HKEY_LOCAL_MACHINE\SOFTWARE\test_key</windows_registry>
  <windows_registry arch="64bit" recursion_level="3">HKEY_LOCAL_MACHINE\SYSTEM\Setup</windows_registry>
 
+
+.. versionadded:: 4.6.0
+
+Configurations with specific registry keys take precedence over those that use wildcards. The following configuration block provides an example. The first settings line enables scanning the ``SOFTWARE`` keys of all users without checking any hashes.
+
+.. code-block:: xml
+   :emphasize-lines: 1
+
+   <windows_registry arch="both" check_sum="no">HKEY_LOCAL_MACHINE\SOFTWARE\*</windows_registry>
+   <windows_registry arch="both" check_sum="yes">HKEY_LOCAL_MACHINE\SOFTWARE\TEST_KEY</windows_registry>
+
+However, the second line does enable hash checking for ``TEST_KEY``. This is a specific key and this setting takes precedence here.
+
+.. code-block:: xml
+   :emphasize-lines: 2
+
+   <windows_registry arch="both" check_sum="no">HKEY_LOCAL_MACHINE\SOFTWARE\*</windows_registry>
+   <windows_registry arch="both" check_sum="yes">HKEY_LOCAL_MACHINE\SOFTWARE\TEST_KEY</windows_registry>
 
 .. _reference_ossec_syscheck_default_configuration:
 
@@ -1220,12 +1231,11 @@ Default syscheck configuration:
     <!-- Nice value for Syscheck process -->
     <process_priority>10</process_priority>
     <!-- Maximum output throughput -->
-    <max_eps>100</max_eps>
+    <max_eps>50</max_eps>
     <!-- Database synchronization settings -->
     <synchronization>
       <enabled>yes</enabled>
       <interval>5m</interval>
-      <max_interval>1h</max_interval>
       <max_eps>10</max_eps>
     </synchronization>
    </syscheck>
@@ -1267,12 +1277,11 @@ Default syscheck configuration:
     <!-- Nice value for Syscheck process -->
     <process_priority>10</process_priority>
     <!-- Maximum output throughput -->
-    <max_eps>100</max_eps>
+    <max_eps>50</max_eps>
     <!-- Database synchronization settings -->
     <synchronization>
       <enabled>yes</enabled>
       <interval>5m</interval>
-      <max_interval>1h</max_interval>
       <max_eps>10</max_eps>
     </synchronization>
    </syscheck>
@@ -1345,12 +1354,11 @@ Default syscheck configuration:
     <!-- Nice value for Syscheck module -->
     <process_priority>10</process_priority>
     <!-- Maximum output throughput -->
-    <max_eps>100</max_eps>
+    <max_eps>50</max_eps>
     <!-- Database synchronization settings -->
     <synchronization>
       <enabled>yes</enabled>
       <interval>5m</interval>
-      <max_interval>1h</max_interval>
       <max_eps>10</max_eps>
     </synchronization>
    </syscheck>
@@ -1394,12 +1402,11 @@ Default syscheck configuration:
     <!-- Nice value for Syscheck process -->
     <process_priority>10</process_priority>
     <!-- Maximum output throughput -->
-    <max_eps>100</max_eps>
+    <max_eps>50</max_eps>
     <!-- Database synchronization settings -->
     <synchronization>
       <enabled>yes</enabled>
       <interval>5m</interval>
-      <max_interval>1h</max_interval>
       <max_eps>10</max_eps>
     </synchronization>
    </syscheck>

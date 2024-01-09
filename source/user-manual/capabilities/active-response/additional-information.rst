@@ -21,7 +21,7 @@ To configure a white list for the endpoint(s), add the related IP address, netbl
        <jsonout_output>yes</jsonout_output>
        <email_notification>no</email_notification>
        <logall>yes</logall>
-       <white_list><WHITE_LISTED_IP><white_list>
+       <white_list><WHITE_LISTED_IP></white_list>
      </global>
    </ossec_config>
 
@@ -56,4 +56,4 @@ Restart the Wazuh agent to apply changes:
 
 The first time the active response triggers, it blocks the IP address for the specified period using the ``<timeout>`` configured on the Wazuh server side. Then, the second time for 10 minutes, the third time for 20 minutes, and the fourth time for 30 minutes using the ``<repeated offenders>`` on the agent side.
 
-Using the active response module, you can respond to several scenarios like restricting malicious activities and blocking attacks. Be aware that improperly configured automated responses can make an endpoint vulnerable, so you have to define your active responses carefully.
+Using the active response module, you can respond to several scenarios like restricting malicious activities and blocking attacks. Be aware that improperly configured responses can make an endpoint vulnerable, so you have to define your active responses carefully.

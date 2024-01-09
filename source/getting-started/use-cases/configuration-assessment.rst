@@ -1,86 +1,124 @@
 .. Copyright (C) 2015, Wazuh, Inc.
 
 .. meta::
-  :description: Automated Security Configuration Assessment is an essential capability to improve the enterprise security posture and to reduce its attack surface. 
+   :description: Wazuh offers a Security Configuration Assessment module that assists security teams to scan and detect misconfigurations within their environment.
 
 Configuration assessment
 ========================
 
-Automated Security Configuration Assessment (SCA) is an essential capability to improve the enterprise security posture and reduce its attack surface. The Wazuh SCA module helps maintain a standard configuration through the monitored endpoints. This is done via predefined checks based on the Center of Internet Security (CIS) hardening guides.
+Configuration assessment is a process that verifies whether endpoints adhere to a set of predefined rules regarding configuration settings and approved application usage. It involves comparing the current configuration against established industry standards and organizational policies to identify vulnerabilities and misconfigurations.
 
-When the SCA module is enabled, the :doc:`Wazuh agent <../components/wazuh-agent>` performs scans periodically, reporting misconfigurations in the monitored system. Those scans assess the configuration of the system through policy files containing a set of checks to be run. For example, an SCA check can inspect the filesystem configuration, look for the presence of a software update or security patch, see that the local firewall is enabled, identify unnecessary running services, or verify the users’ password policy.
+Regular configuration assessments are essential in maintaining a secure and compliant environment, as they help organizations proactively identify and patch vulnerabilities. This practice strengthens security controls and minimizes the risk of security incidents.
 
-Policies for the SCA scans are written in YAML format, allowing users to understand them quickly. Using SCA syntax, users can extend the existing policies to fit their needs or write new ones. Each policy contains a set of checks, and each check has one or more rules. For example, a rule can be used to look for the existence of a file, a directory, a Windows registry key, or a running process, among others. It is also possible to execute a command and check its output against a regular expression.
+Wazuh SCA module
+----------------
 
-Linux SCA rule example:
+Wazuh offers a :doc:`Security Configuration Assessment (SCA) </user-manual/capabilities/sec-config-assessment/index>` module that assists security teams to scan and detect misconfigurations within their environment. The Wazuh agent uses policy files to scan endpoints that it monitors. These files contain predefined checks to be carried out on each monitored endpoint. 
+
+Wazuh includes :doc:`SCA policies </user-manual/capabilities/sec-config-assessment/available-sca-policies>` out-of-the-box based on the Center for Internet Security (CIS) security benchmarks. These benchmarks serve as essential guidelines on best practices for protecting IT systems and data from cyberattacks. They provide clear instructions for establishing a secure baseline configuration and offer guidance to ensure that users implement effective measures to safeguard their critical assets and mitigate potential vulnerabilities. By adhering to these standards, you can enhance your overall security posture and mitigate the risk of cyber threats against your business. 
+
+Some other benefits of the Wazuh Security Configuration Assessment (SCA) module include:
+
+-  **Security posture management**: Wazuh SCA helps organizations ensure that their endpoints are configured securely. This minimizes vulnerabilities resulting from misconfigurations and reduces the risk of security breaches.
+-  **Compliance monitoring**: It allows organizations to assess and implement compliance with regulatory standards, best practices, and internal security policies.
+-  **Continuous monitoring**: Wazuh SCA continuously monitors the configuration of the endpoints and alerts when it discovers misconfigurations. 
+
+Overview of Wazuh SCA policies
+------------------------------
+
+The Wazuh SCA module uses policies written in YAML format. Each policy consists of :ref:`checks <sca_check_overview>`, and each check comprises one or more rules. These rules can examine various aspects of an endpoint, such as the presence of files, directories, Windows registry keys, running processes, and more.
+
+By default, the Wazuh agent runs scans for every policy (``.yaml`` or ``.yml`` files) present in the ruleset directory. This directory can be found in the following locations on every operating system that runs the Wazuh agent:
+
+-  Linux and Unix-based agents: ``/var/ossec/ruleset/sca``.
+-  Windows agents: ``C:\Program Files (x86)\ossec-agent\ruleset\sca``.
+-  macOS agents: ``/Library/Ossec/ruleset/sca``.
+
+Wazuh also allows you to :doc:`create custom policies </user-manual/capabilities/sec-config-assessment/creating-custom-policies>` that can be used to scan endpoints and verify if they conform to your organization’s policies.
+
+See a snippet of a CIS policy file ``/var/ossec/ruleset/sca/cis_ubuntu22-04.yml`` which is included out-of-the-box on Ubuntu 22.04 endpoints. The SCA policy which is based on the CIS benchmarks, runs checks on the endpoint to determine if it conforms to the best practices for system hardening. The SCA policy with ID ``28500`` checks if the ``/tmp`` directory is on a separate partition.
 
 .. code-block:: yaml
    :emphasize-lines: 2
 
-   - id: 5546
-     title: "Ensure IP address forwarding is disabled"
-     description: "The net.ipv4.ip_forward flag is used to tell the system whether it can forward packets or not."
-     rationale: "Setting the flag to 0 ensures that a system with multiple interfaces (for example, a hard proxy), will never be able to forward packets, and therefore, never serve as a router."
-     remediation: "Set the following parameter in /etc/sysctl.conf or a /etc/sysctl.d/* file: net.ipv4.ip_forward = 0 and set the active kernel parameters."
+   - id: 28500
+     title: "Ensure /tmp is a separate partition."
+     description: "The /tmp directory is a world-writable directory used for temporary storage by all users and some applications."
+     rationale: "Making /tmp its own file system allows an administrator to set additional mount options such as the noexec option on the mount, making /tmp useless for an attacker to install executable code. It would also prevent an attacker from establishing a hard link to a system setuid program and wait for it to be updated. Once the program was updated, the hard link would be broken and the attacker would have his own copy of the program. If the program happened to have a security vulnerability, the attacker could continue to exploit the known flaw. This can be accomplished by either mounting tmpfs to /tmp, or creating a separate partition for /tmp."
+     impact: "Since the /tmp directory is intended to be world-writable, there is a risk of resource exhaustion if it is not bound to a separate partition. Running out of /tmp space is a problem regardless of what kind of filesystem lies under it, but in a configuration where /tmp is not a separate file system it will essentially have the whole disk available, as the default installation only creates a single / partition. On the other hand, a RAM-based /tmp (as with tmpfs) will almost certainly be much smaller, which can lead to applications filling up the filesystem much more easily. Another alternative is to create a dedicated partition for /tmp from a separate volume or disk. One of the downsides of a disk-based dedicated partition is that it will be slower than tmpfs which is RAM-based. /tmp utilizing tmpfs can be resized using the size={size} parameter in the relevant entry in /etc/fstab."
+     remediation: "First ensure that systemd is correctly configured to ensure that /tmp will be mounted at boot time. # systemctl unmask tmp.mount For specific configuration requirements of the /tmp mount for your environment, modify /etc/fstab or tmp.mount. Example of /etc/fstab configured tmpfs file system with specific mount options: tmpfs 0 /tmp tmpfs defaults,rw,nosuid,nodev,noexec,relatime,size=2G 0 Example of tmp.mount configured tmpfs file system with specific mount options: [Unit] Description=Temporary Directory /tmp ConditionPathIsSymbolicLink=!/tmp DefaultDependencies=no Conflicts=umount.target Before=local-fs.target umount.target After=swap.target [Mount] What=tmpfs Where=/tmp Type=tmpfs."
+     references:
+       - https://www.freedesktop.org/wiki/Software/systemd/APIFileSystems/
+       - https://www.freedesktop.org/software/systemd/man/systemd-fstab-generator.html
      compliance:
-       - cis: ["3.1.1"]
-       - cis_csc: ["3", "11"]
-       - pci_dss: ["2.2.4"]
-       - nist_800_53: ["CM.1"]
+       - cis: ["1.1.2.1"]
+       - cis_csc_v7: ["14.6"]
+       - cis_csc_v8: ["3.3"]
+       - mitre_techniques: ["T1499", "T1499.001"]
+       - mitre_tactics: ["TA0005"]
+       - mitre_mitigations: ["M1022"]
+       - cmmc_v2.0: ["AC.L1-3.1.1", "AC.L1-3.1.2", "AC.L2-3.1.5", "AC.L2-3.1.3", "MP.L2-3.8.2"]
+       - hipaa: ["164.308(a)(3)(i)", "164.308(a)(3)(ii)(A)", "164.312(a)(1)"]
+       - pci_dss_v3.2.1: ["7.1", "7.1.1", "7.1.2", "7.1.3"]
+       - pci_dss_v4.0: ["1.3.1", "7.1"]
+       - nist_sp_800-53: ["AC-5", "AC-6"]
+       - soc_2: ["CC5.2", "CC6.1"]
      condition: all
      rules:
-       - 'c:sysctl net.ipv4.ip_forward -> r:^net.ipv4.ip_forward\s*=\s*0$'
-       - 'c:grep -Rh net\.ipv4\.ip_forward /etc/sysctl.conf /etc/sysctl.d -> r:^net.ipv4.ip_forward\s*=\s*0$'
+       - 'c:findmnt --kernel /tmp -> r:\s*/tmp\s'
+       - "c:systemctl is-enabled tmp.mount -> r:generated|enabled"
 
-Windows SCA rule example:
+The ``/tmp`` directory is used to store data that is needed for a short time by system and user applications. Mounting ``/tmp`` on a separate partition allows an administrator to set additional mount options such as the ``noexec``, ``nodev``, and ``nosuid``. Therefore making the directory useless for an attacker to install executable code. The SCA policy file also gives recommendations on how to remediate this issue.
 
-.. code-block:: yaml
-   :emphasize-lines: 2
+Viewing SCA results
+-------------------
 
-   - id: 14038
-     title: "Ensure Microsoft Firewall is enabled"
-     compliance:
-       - pci_dss: ["10.6.1", "1.4"]
-       - hipaa: ["164.312.b", "164.312.a.1"]
-       - nist_800_53: ["AU.6", "SC.7"]
-       - tsc: ["CC6.1", "CC6.8", "CC7.2", "CC7.3", "CC6.7"]
-     condition: all
-     rules:
-       - 'r:HKEY_LOCAL_MACHINE\software\policies\microsoft\windowsfirewall\domainprofile -> enablefirewall -> 1'
+The Wazuh dashboard has a **Security configuration assessment** module that allows you to view SCA scan results for each agent.
 
-macOS SCA rule example:
+.. thumbnail:: /images/getting-started/use-cases/sca/sca-module.png
+   :title: SCA module
+   :alt: SCA module
+   :align: center
+   :width: 80%
+    
+In the image below, you see the policy based on the CIS benchmark for Ubuntu Linux 22.04.
 
-.. code-block:: yaml
-  :emphasize-lines: 2
-
-  - id: 8522
-    title: "Ensure nfs server is not running"
-    description: "macOS can act as an NFS fileserver. NFS sharing could be enabled to allow someone on another computer to mount shares and gain access to information from the user's computer. File sharing from a user endpoint has long been considered questionable and Apple has removed that capability from the GUI. NFSD is still part of the Operating System and can be easily turned on to export shares and provide remote connectivity to an end user computer."
-    rationale: "File serving should not be done from a user desktop, dedicated servers should be used.  Open ports make it easier to exploit the computer."
-    remediation: "Ensure that the NFS Server is not running and is not set to start at boot Stop the NFS Server: sudo nfsd disable    Remove the exported Directory listing: rm /etc/export"
-    compliance:
-      - cis: ["4.5"]
-    condition: none
-    rules:
-      - 'p:nfsd'
-      - 'p:/sbin/nfsd'
-      - 'f:/etc/exports'
-
-Below is an example of the results of a configuration assessment evaluation. These can be obtained through the web user interface or directly through the Wazuh RESTful API.
-
-.. thumbnail:: /images/getting-started/use-cases/wazuh-use-cases-sca01.png
-   :title: Security configuration assessment inventory dashboard
+.. thumbnail:: /images/getting-started/use-cases/sca/cis-benchmark-ubuntu22-policy.png
+   :title: Policy for CIS benchmark for Ubuntu 22.04
+   :alt: Policy for CIS benchmark for Ubuntu 22.04
    :align: center
    :width: 80%
 
-.. thumbnail:: /images/getting-started/use-cases/wazuh-use-cases-sca2.png
-   :title: Security configuration assessment inventory
+Interpreting SCA results
+------------------------
+
+On the Wazuh dashboard, we select a policy to see the checks that we run on the endpoint. In the image below, you can see 182 checks were run against the Ubuntu 22.04 endpoint. Out of these, 63 passed, 98 failed, and 21 are not applicable to the endpoint. It also shows a score of 39% which is calculated based on the number of tests passed.  
+
+.. thumbnail:: /images/getting-started/use-cases/sca/cis-benchmark-ubuntu22-results.png
+   :title: Results for CIS benchmark for Ubuntu 22.04 checks
+   :alt: Policy for CIS benchmark for Ubuntu 22.04 checks
    :align: center
    :width: 80%
 
-.. thumbnail:: /images/getting-started/use-cases/wazuh-use-cases-sca3.png
-   :title: Security configuration assessment inventory events
+You can click on the checks to get more information. In the image below, you can see information such as rationale, remediation, and a description of the check with ID ``28500``.
+
+.. thumbnail:: /images/getting-started/use-cases/sca/check-28500-results.png
+   :title: Results for CIS benchmark for Ubuntu 22.04 check ID 28500
+   :alt: Results for CIS benchmark for Ubuntu 22.04 check ID 28500
    :align: center
    :width: 80%
-          
-You can find more information about security configuration assessment in the :doc:`user manual </user-manual/capabilities/sec-config-assessment/index>`.
+
+The above SCA scan result shows ``failed`` because the ``/tmp`` directory is not on a separate partition and the directory is not mounted at boot time. If the remediation is implemented, the result will change to ``passed`` thereby improving the security of the endpoint.
+
+Implementing SCA remediation steps
+----------------------------------
+
+In the example in the previous section, implementing the remediation provided by the Wazuh SCA improves the security of the endpoint. This involves mounting the ``/tmp`` directory to a separate partition and adding some options such as ``nodev``, ``noexec``, and ``nosuid`` to the mount point. In the image below, you can see the status of the checks ``28500``–``28503`` have changed to ``passed``.
+
+.. thumbnail:: /images/getting-started/use-cases/sca/sca-checks-status-changed.png
+   :title: Status passed for the checks 28500–28503
+   :alt: Status passed for the checks 28500–28503
+   :align: center
+   :width: 80%
+
+By utilizing the Wazuh SCA module, you can detect misconfigurations, remediate them, and verify that your endpoints adhere to industry best practices. This proactive approach significantly reduces the likelihood of security breaches within your environment.

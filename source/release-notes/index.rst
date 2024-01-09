@@ -3,8 +3,6 @@
 .. meta::
   :description: Check out all the Wazuh release notes. Every update of the solution is cumulative and includes all enhancements and fixes from previous releases.
   
-.. _release_notes:
-
 Release notes
 =============
 
@@ -13,8 +11,21 @@ This section summarizes the most important features of each Wazuh release.
 ==============================================   ====================
 Wazuh version                                    Release date
 ==============================================   ====================
+:doc:`4.7.1 </release-notes/release-4-7-1>`      20 December 2023
+:doc:`4.7.0 </release-notes/release-4-7-0>`      27 November 2023
+:doc:`4.6.0 </release-notes/release-4-6-0>`      31 October 2023
+:doc:`4.5.4 </release-notes/release-4-5-4>`      23 October 2023
+:doc:`4.5.3 </release-notes/release-4-5-3>`      10 October 2023
+:doc:`4.5.2 </release-notes/release-4-5-2>`      6 September 2023
+:doc:`4.5.1 </release-notes/release-4-5-1>`      24 August 2023
+:doc:`4.5.0 </release-notes/release-4-5-0>`      10 August 2023
+:doc:`4.4.5 </release-notes/release-4-4-5>`      10 July 2023
+:doc:`4.4.4 </release-notes/release-4-4-4>`      13 June 2023
+:doc:`4.4.3 </release-notes/release-4-4-3>`      25 May 2023
+:doc:`4.4.2 </release-notes/release-4-4-2>`      18 May 2023
 :doc:`4.4.1 </release-notes/release-4-4-1>`      12 April 2023
 :doc:`4.4.0 </release-notes/release-4-4-0>`      28 March 2023
+:doc:`4.3.11 </release-notes/release-4-3-11>`    24 April 2023
 :doc:`4.3.10 </release-notes/release-4-3-10>`    16 November 2022
 :doc:`4.3.9 </release-notes/release-4-3-9>`      13 October 2022
 :doc:`4.3.8 </release-notes/release-4-3-8>`      19 September 2022

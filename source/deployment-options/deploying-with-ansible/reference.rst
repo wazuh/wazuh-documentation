@@ -337,22 +337,28 @@ Wazuh Manager
             - 'trusty'
             - 'xenial'
             - 'bionic'
+            - 'focal'
+            - 'jammy'
           update_interval: '1h'
           name: '"canonical"'
         - enabled: 'no'
           os:
-            - 'wheezy'
-            - 'stretch'
-            - 'jessie'
             - 'buster'
+            - 'bullseye'
+            - 'bookworm'
           update_interval: '1h'
           name: '"debian"'
         - enabled: 'no'
-          update_from_year: '2010'
+          os:
+            - 'amazon-linux'
+            - 'amazon-linux-2'
+            - 'amazon-linux-2023'
+          update_interval: '1h'
+          name: '"alas"'  
+        - enabled: 'no'
           update_interval: '1h'
           name: '"redhat"'
         - enabled: 'no'
-          update_from_year: '2010'
           update_interval: '1h'
           name: '"nvd"'
 
@@ -399,7 +405,7 @@ Wazuh Manager
       skip_proc: 'yes'
       skip_sys: 'yes'
       process_priority: 10
-      max_eps: 100
+      max_eps: 50
       sync_enabled: 'yes'
       sync_interval: '5m'
       sync_max_interval: '1h'
@@ -927,52 +933,119 @@ Wazuh Agent
     wazuh_managers:
     - address: 172.16.24.56
       protocol: udp
+      api_port: 55000
+      api_proto: https
+      api_user: wazuh
+      max_retries: 5
+      retry_interval: 5
     - address: 192.168.10.15
       port: 1514
       protocol: tcp
+      api_port: 55000
+      api_proto: https
+      api_user: wazuh
+      max_retries: 5
+      retry_interval: 5
       register: yes
+
+|
+| **Variable**: ``wazuh_custom_packages_installation_agent_enabled``:
+| **Description**: Configures the installation from custom packages.
+| **Default value**: ``false``
+|
+| **Variable**: ``wazuh_agent_sources_installation``:
+| **Description**: Configures the installation via sources as an alternative to the installation from packages.
+| **Example**:
+
+.. code-block:: yaml
+
+    wazuh_agent_sources_installation:
+        enabled: false
+        branch: "v4.7.1"
+        user_language: "y"
+        user_no_stop: "y"
+        user_install_type: "agent"
+        user_dir: "/var/ossec"
+        user_delete_dir: "y"
+        user_enable_active_response: "y"
+        user_enable_syscheck: "y"
+        user_enable_rootcheck: "y"
+        user_enable_openscap: "n"
+        user_enable_sca: "y"
+        user_enable_authd: "y"
+        user_generate_authd_cert: "n"
+        user_update: "y"
+        user_binaryinstall: null
+        user_agent_server_ip: 172.16.24.56
+        user_agent_server_name: null
+        user_agent_config_profile: null
+        user_ca_store: /var/ossec/wpk_root.pem"
 
 |
 | **Variable**: ``wazuh_agent_nolog_sensible``:
 | **Description**: This variable indicates if the `nolog option <https://docs.ansible.com/ansible/latest/reference_appendices/logging.html>`_ should be added to tasks which output sensitive information (like tokens).
-| **Default value**: ``true``
+| **Default value**: ``yes``
+|
+| **Variable**: ``wazuh_agent_config_overlay``:
+| **Description**: This variable apply an additional configuration combined with the default configuration.
+| **Default value**: ``yes``
 |
 | **Variable**: ``wazuh_agent_api_validate``
 | **Description**: After registering the agent through the REST API, validate that registration is correct.
-| **Default value**: ``true``
+| **Default value**: ``yes``
 |
 | **Variable**: ``wazuh_agent_address``
 | **Description**: Establish which IP address we want to associate with this agent. It can be an address or “any” This variable will supersede wazuh_agent_nat.
 | **Default value**: ``ansible_default_ipv4.address``
 |
-| **Variable**: ``wazuh_profile``
-| **Description**: Configure what profiles this agent will have.
-| **Default value**: ``null``
+| **Variable**: ``wazuh_profile_centos``
+| **Description**: Configure what profiles this agent will have in case of CentOS systems.
+| **Default value**: ``centos7, centos7, centos7.7``
 | Multiple profiles can be included, separated by a comma and a space, for example:
 
 .. code-block:: yaml
 
-    wazuh_profile: "centos7, centos7-web"
+    wazuh_profile: "centos7, centos7"
 
+|
+| **Variable**: ``wazuh_profile_ubuntu``
+| **Description**: Configure what profiles this agent will have in case of Ubuntu systems.
+| **Default value**: ``ubuntu, ubuntu18, ubuntu18.04``
+| Multiple profiles can be included, separated by a comma and a space, for example:
+
+.. code-block:: yaml
+
+    wazuh_profile: "ubuntu, ubuntu18"
+    
 |
 | **Variable**: ``wazuh_agent_authd``
 | **Description**: Set the agent-authd facility. This will enable or not the automatic agent registration, you could set various options in accordance with the authd service configured in the Wazuh Manager. This Ansible role will use the address defined on ``registration_address`` as the authd registration server.
 | **Example**:
 
-    .. code-block:: yaml
+.. code-block:: yaml
 
-        wazuh_agent_authd:
-          registration_address: 10.1.1.12
-          enable: false
-          port: 1515
-          ssl_agent_ca: null
-          ssl_agent_cert: null
-          ssl_agent_key: null
-          ssl_auto_negotiate: 'no'
+    wazuh_agent_authd:
+      registration_address: 10.1.1.12
+      enable: false
+      port: 1515
+      agent_name: null
+      groups: []
+      ssl_agent_ca: null
+      ssl_agent_cert: null
+      ssl_agent_key: null
+      ssl_auto_negotiate: 'no'
 
+|
+| **Variable**: ``wazuh_auto_restart``
+| **Description**: Set the ``<auto_restart>`` option in the agent.
+| **Default value**: ``null``
 |
 | **Variable**: ``wazuh_notify_time``
 | **Description**: Set the ``<notify_time>`` option in the agent.
+| **Default value**: ``null``
+|
+| **Variable**: ``wazuh_crypto_method``
+| **Description**: Set ``<crypto_method>`` option in the agent.
 | **Default value**: ``null``
 |
 | **Variable**: ``wazuh_time_reconnect``
@@ -985,11 +1058,13 @@ Wazuh Agent
 
 .. code-block:: yaml
 
-    install_dir: 'C:\wazuh-agent\'
-    version: '2.1.1'
-    revision: '2'
-    repo: https://packages.wazuh.com/windows/
-    md5: fd9a3ce30cd6f9f553a1bc71e74a6c9f
+    wazuh_winagent_config:
+      download_dir: C:\
+      install_dir: C:\Program Files\ossec-agent\
+      install_dir_x86: C:\Program Files (x86)\ossec-agent\
+      auth_path: C:\Program Files\ossec-agent\agent-auth.exe
+      auth_path_x86: C:\'Program Files (x86)'\ossec-agent\agent-auth.exe
+      check_sha512: True
 
 |
 | **Variable**: ``wazuh_agent_enrollment``
@@ -1135,7 +1210,7 @@ Wazuh Agent
       skip_proc: 'yes'
       skip_sys: 'yes'
       process_priority: 10
-      max_eps: 100
+      max_eps: 50
       sync_enabled: 'yes'
       sync_interval: '5m'
       sync_max_interval: '1h'
@@ -1159,6 +1234,79 @@ Wazuh Agent
         - '.log$|.htm$|.jpg$|.png$|.chm$|.pnf$|.evtx$'
       no_diff:
         - /etc/ssl/private.key
+      directories:
+        - dirs: /etc,/usr/bin,/usr/sbin
+          checks: ''
+        - dirs: /bin,/sbin,/boot
+          checks: ''
+      win_directories:
+        - dirs: '%WINDIR%'
+          checks: 'recursion_level="0" restrict="regedit.exe$|system.ini$|win.ini$"'
+        - dirs: '%WINDIR%\SysNative'
+          checks: >-
+            recursion_level="0" restrict="at.exe$|attrib.exe$|cacls.exe$|cmd.exe$|eventcreate.exe$|ftp.exe$|lsass.exe$|
+            net.exe$|net1.exe$|netsh.exe$|reg.exe$|regedt32.exe|regsvr32.exe|runas.exe|sc.exe|schtasks.exe|sethc.exe|subst.exe$"
+        - dirs: '%WINDIR%\SysNative\drivers\etc%'
+          checks: 'recursion_level="0"'
+        - dirs: '%WINDIR%\SysNative\wbem'
+          checks: 'recursion_level="0" restrict="WMIC.exe$"'
+        - dirs: '%WINDIR%\SysNative\WindowsPowerShell\v1.0'
+          checks: 'recursion_level="0" restrict="powershell.exe$"'
+        - dirs: '%WINDIR%\SysNative'
+          checks: 'recursion_level="0" restrict="winrm.vbs$"'
+        - dirs: '%WINDIR%\System32'
+          checks: >-
+            recursion_level="0" restrict="at.exe$|attrib.exe$|cacls.exe$|cmd.exe$|eventcreate.exe$|ftp.exe$|lsass.exe$|net.exe$|net1.exe$|
+            netsh.exe$|reg.exe$|regedit.exe$|regedt32.exe$|regsvr32.exe$|runas.exe$|sc.exe$|schtasks.exe$|sethc.exe$|subst.exe$"
+        - dirs: '%WINDIR%\System32\drivers\etc'
+          checks: 'recursion_level="0"'
+        - dirs: '%WINDIR%\System32\wbem'
+          checks: 'recursion_level="0" restrict="WMIC.exe$"'
+        - dirs: '%WINDIR%\System32\WindowsPowerShell\v1.0'
+          checks: 'recursion_level="0" restrict="powershell.exe$"'
+        - dirs: '%WINDIR%\System32'
+          checks: 'recursion_level="0" restrict="winrm.vbs$"'
+        - dirs: '%PROGRAMDATA%\Microsoft\Windows\Start Menu\Programs\Startup'
+          checks: 'realtime="yes"'
+      windows_registry:
+        - key: 'HKEY_LOCAL_MACHINE\Software\Classes\batfile'
+        - key: 'HKEY_LOCAL_MACHINE\Software\Classes\cmdfile'
+        - key: 'HKEY_LOCAL_MACHINE\Software\Classes\comfile'
+        - key: 'HKEY_LOCAL_MACHINE\Software\Classes\exefile'
+        - key: 'HKEY_LOCAL_MACHINE\Software\Classes\piffile'
+        - key: 'HKEY_LOCAL_MACHINE\Software\Classes\AllFilesystemObjects'
+        - key: 'HKEY_LOCAL_MACHINE\Software\Classes\Directory'
+        - key: 'HKEY_LOCAL_MACHINE\Software\Classes\Folder'
+        - key: 'HKEY_LOCAL_MACHINE\Software\Classes\Protocols'
+          arch: "both"
+        - key: 'HKEY_LOCAL_MACHINE\Software\Policies'
+          arch: "both"
+        - key: 'HKEY_LOCAL_MACHINE\Security'
+        - key: 'HKEY_LOCAL_MACHINE\Software\Microsoft\Internet Explorer'
+          arch: "both"
+        - key: 'HKEY_LOCAL_MACHINE\System\CurrentControlSet\Services'
+        - key: 'HKEY_LOCAL_MACHINE\System\CurrentControlSet\Control\Session Manager\KnownDLLs'
+        - key: 'HKEY_LOCAL_MACHINE\System\CurrentControlSet\Control\SecurePipeServers\winreg'
+        - key: 'HKEY_LOCAL_MACHINE\Software\Microsoft\Windows\CurrentVersion\Run'
+          arch: "both"
+        - key: 'HKEY_LOCAL_MACHINE\Software\Microsoft\Windows\CurrentVersion\RunOnce'
+          arch: "both"
+        - key: 'HKEY_LOCAL_MACHINE\Software\Microsoft\Windows\CurrentVersion\RunOnceEx'
+        - key: 'HKEY_LOCAL_MACHINE\Software\Microsoft\Windows\CurrentVersion\URL'
+          arch: "both"
+        - key: 'HKEY_LOCAL_MACHINE\Software\Microsoft\Windows\CurrentVersion\Policies'
+          arch: "both"
+        - key: 'HKEY_LOCAL_MACHINE\Software\Microsoft\Windows NT\CurrentVersion\Windows'
+          arch: "both"
+        - key: 'HKEY_LOCAL_MACHINE\Software\Microsoft\Windows NT\CurrentVersion\Winlogon'
+          arch: "both"
+        - key: 'HKEY_LOCAL_MACHINE\Software\Microsoft\Active Setup\Installed Components'
+          arch: "both"
+      windows_registry_ignore:
+        - key: 'HKEY_LOCAL_MACHINE\Security\Policy\Secrets'
+        - key: 'HKEY_LOCAL_MACHINE\Security\SAM\Domains\Account\Users'
+        - key: '\Enum$'
+          type: "sregex"
 
 |
 | **Variable**: ``wazuh_agent_localfiles``
@@ -1241,46 +1389,30 @@ Wazuh Agent
 | **Description**: Configures the :doc:`log_format </user-manual/reference/ossec-conf/logging>` section from ``ossec.conf``.
 | **Default value**: ``plain``
 |
-| **Variable**: ``wazuh_agent_config``
+| **Variable**: ``wazuh_agent_config_defaults``
 | **Description**: Wazuh Agent related configuration. This variable is provided for backward compatibility. Newer deployments should use the newly introduced variables described above.
 | **Example**:
 
 .. code-block:: yaml
 
-    wazuh_agent_config:
-      log_format: 'plain'
-      syscheck:
-        frequency: 43200
-        scan_on_start: 'yes'
-        auto_ignore: 'no'
-        alert_new_files: 'yes'
-        ignore:
-          - /etc/mtab
-          - /etc/mnttab
-          - /etc/hosts.deny
-          - /etc/mail/statistics
-          - /etc/random-seed
-          - /etc/random.seed
-          - /etc/adjtime
-          - /etc/httpd/logs
-          - /etc/utmpx
-          - /etc/wtmpx
-          - /etc/cups/certs
-          - /etc/dumpdates
-          - /etc/svc/volatile
-        no_diff:
-          - /etc/ssl/private.key
-        directories:
-          - dirs: /etc,/usr/bin,/usr/sbin
-            checks: 'check_all="yes"'
-          - dirs: /bin,/sbin
-            checks: 'check_all="yes"'
-        windows_registry:
-          - key: 'HKEY_LOCAL_MACHINE\Software\Classes\batfile'
-            arch: 'both'
-          - key: 'HKEY_LOCAL_MACHINE\Software\Classes\Folder'
-      rootcheck:
-        frequency: 43200
+    wazuh_agent_config_defaults:
+      repo: '{{ wazuh_repo }}'
+      active_response: '{{ wazuh_agent_active_response }}'
+      log_format: '{{ wazuh_agent_log_format }}'
+      client_buffer: '{{ wazuh_agent_client_buffer }}'
+      syscheck: '{{ wazuh_agent_syscheck }}'
+
+      rootcheck: '{{ wazuh_agent_rootcheck }}'
+      openscap: '{{ wazuh_agent_openscap }}'
+
+      osquery: '{{ wazuh_agent_osquery }}'
+      syscollector: '{{ wazuh_agent_syscollector }}'
+      sca: '{{ wazuh_agent_sca }}'
+      cis_cat: '{{ wazuh_agent_cis_cat }}'
+      localfiles: '{{ wazuh_agent_localfiles }}'
+
+      labels: '{{ wazuh_agent_labels }}'
+      enrollment: '{{ wazuh_agent_enrollment }}'
 
 |
 

@@ -568,8 +568,6 @@ Logcollector
 |                                          | Allowed value | Any integer between 1 and 172800                                           |
 +------------------------------------------+---------------+----------------------------------------------------------------------------+
 | **logcollector.state_interval**          | Description   | Statistics generation interval, in seconds                                 |
-|                                          |               |                                                                            |
-|                                          |               | .. versionadded:: 4.2                                                      |
 +                                          +---------------+----------------------------------------------------------------------------+
 |                                          | Default value | 60                                                                         |
 +                                          +---------------+----------------------------------------------------------------------------+
@@ -581,8 +579,6 @@ Logcollector
 | **logcollector.ip_update_interval**      | Description   | IP update interval, in seconds. This specifies how often the system        |
 |                                          |               | IP is obtained when the                                                    |
 |                                          |               | :ref:`out_format<ossec_localfile_out_format>` option is used.              |
-|                                          |               |                                                                            |
-|                                          |               | .. versionadded:: 4.3                                                      |
 +                                          +---------------+----------------------------------------------------------------------------+
 |                                          | Default value | 60                                                                         |
 +                                          +---------------+----------------------------------------------------------------------------+
@@ -732,11 +728,11 @@ Remoted
 +                                   +---------------+--------------------------------------------------------------+
 |                                   | Allowed Value | Any integer between 1 and 64.                                |
 +-----------------------------------+---------------+--------------------------------------------------------------+
-|   **remoted.request_pool**        | Description   | Number of parallel threads to dispatch requests.             |
+|   **remoted.request_pool**        | Description   | Limit of parallel threads to dispatch requests.              |
 +                                   +---------------+--------------------------------------------------------------+
-|                                   | Default Value | 8                                                            |
+|                                   | Default Value | 1024                                                         |
 +                                   +---------------+--------------------------------------------------------------+
-|                                   | Allowed Value | Any integer between 1 and 64.                                |
+|                                   | Allowed Value | Any integer between 1 and 4096.                              |
 +-----------------------------------+---------------+--------------------------------------------------------------+
 |   **remoted.request_timeout**     | Description   | Time (in seconds) the remote request listener rejects a      |
 |                                   |               | new request.                                                 |
@@ -772,9 +768,15 @@ Remoted
 +-----------------------------------+---------------+--------------------------------------------------------------+
 |  **remoted.merge_shared**         | Description   | Merge shared configuration to be broadcast to agents.        |
 +                                   +---------------+--------------------------------------------------------------+
-|                                   | Default Value | 1 ( Enabled )                                                |
+|                                   | Default Value | 1 (Enabled)                                                  |
 +                                   +---------------+--------------------------------------------------------------+
-|                                   | Allowed Value | 1 ( Enabled ) or 0 (Disabled)                                |
+|                                   | Allowed Value | 1 (Enabled), 0 (Disabled)                                    |
++-----------------------------------+---------------+--------------------------------------------------------------+
+|  **remoted.disk_storage**         | Description   | Store the temporary shared configuration file on disk.       |
++                                   +---------------+--------------------------------------------------------------+
+|                                   | Default Value | 0 (No, store in memory)                                      |
++                                   +---------------+--------------------------------------------------------------+
+|                                   | Allowed Value | 1 (Yes, store on disk), 0 (No, store in memory)              |
 +-----------------------------------+---------------+--------------------------------------------------------------+
 |   **remoted.shared_reload**       | Description   | Number of seconds between reloading of shared files.         |
 +                                   +---------------+--------------------------------------------------------------+
@@ -844,8 +846,6 @@ Remoted
 +-----------------------------------+---------------+--------------------------------------------------------------+
 | **remoted.send_chunk**            | Description   | | Send buffer size for TCP (bytes).                          |
 |                                   |               | | Amount of data that Remoted can send per operation.        |
-|                                   |               |                                                              |
-|                                   |               | .. versionadded:: 4.3.0                                      |
 +                                   +---------------+--------------------------------------------------------------+
 |                                   | Default value | 4096                                                         |
 +                                   +---------------+--------------------------------------------------------------+
@@ -855,8 +855,6 @@ Remoted
 | **remoted.send_buffer_size**      | Description   | | Send queue size for TCP (bytes).                           |
 |                                   |               | | Amount of data that Remoted can queue to send              |
 |                                   |               | | (one queue per agent).                                     |
-|                                   |               |                                                              |
-|                                   |               | .. versionadded:: 4.3.0                                      |
 +                                   +---------------+--------------------------------------------------------------+
 |                                   | Default value | 131072                                                       |
 +                                   +---------------+--------------------------------------------------------------+
@@ -865,8 +863,6 @@ Remoted
 +-----------------------------------+---------------+--------------------------------------------------------------+
 | **remoted.send_timeout_to_retry** | Description   | | Maximum number of seconds to wait before retrying to       |
 |                                   |               | | queue a packet to send in TCP.                             |
-|                                   |               |                                                              |
-|                                   |               | .. versionadded:: 4.3.0                                      |
 +                                   +---------------+--------------------------------------------------------------+
 |                                   | Default value | 1                                                            |
 +                                   +---------------+--------------------------------------------------------------+
@@ -1099,6 +1095,8 @@ Wazuh Modules
 |                                |               | 2: Verbose debug output.                                                            |
 +--------------------------------+---------------+-------------------------------------------------------------------------------------+
 
+.. _wazuh_command_remote_commands:
+
 Wazuh Command
 -------------
 
@@ -1148,13 +1146,13 @@ Wazuh-db
 +-------------------------------------------+---------------+-------------------------------------------------------------------------------------+
 |      **wazuh_db.max_fragmentation**       | Description   | Maximum fragmentation allowed for a database.                                       |
 +                                           +---------------+-------------------------------------------------------------------------------------+
-|                                           | Default value | 95                                                                                  |
+|                                           | Default value | 90                                                                                  |
 +                                           +---------------+-------------------------------------------------------------------------------------+
 |                                           | Allowed value | Any integer between 0 and 100.                                                      |
 +-------------------------------------------+---------------+-------------------------------------------------------------------------------------+
 |    **wazuh_db.fragmentation_threshold**   | Description   | Indicates the allowed fragmentation threshold.                                      |
 +                                           +---------------+-------------------------------------------------------------------------------------+
-|                                           | Default value | 80                                                                                  |
+|                                           | Default value | 75                                                                                  |
 +                                           +---------------+-------------------------------------------------------------------------------------+
 |                                           | Allowed value | Any integer between 0 and 100.                                                      |
 +-------------------------------------------+---------------+-------------------------------------------------------------------------------------+
@@ -1168,13 +1166,13 @@ Wazuh-db
 |      **wazuh_db.free_pages_percentage**   | Description   | | Indicates the minimum percentage of free pages present in a database that         |
 |                                           |               | | can trigger a vacuum.                                                             |
 +                                           +---------------+-------------------------------------------------------------------------------------+
-|                                           | Default value | 5                                                                                   |
+|                                           | Default value | 0                                                                                   |
 +                                           +---------------+-------------------------------------------------------------------------------------+
 |                                           | Allowed value | Any integer between 0 and 99.                                                       |
 +-------------------------------------------+---------------+-------------------------------------------------------------------------------------+
 | **wazuh_db.check_fragmentation_interval** | Description   | Interval for database fragmentation check, in seconds.                              |
 +                                           +---------------+-------------------------------------------------------------------------------------+
-|                                           | Default value | 43200                                                                               |
+|                                           | Default value | 7200                                                                                |
 +                                           +---------------+-------------------------------------------------------------------------------------+
 |                                           | Allowed value | Any integer between 1 and 30758400.                                                 |
 +-------------------------------------------+---------------+-------------------------------------------------------------------------------------+

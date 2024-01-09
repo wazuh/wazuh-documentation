@@ -21,7 +21,7 @@ GDPR Support
 
 The `General Data Protection Regulation <https://www.eugdpr.org/>`_ took effect on 25th May 2018. Wazuh helps with most technical requirements, taking advantage of features such as File Integrity or Policy monitoring. In addition, the entire Ruleset has been mapped following the GDPR regulation, enriching all the alerts related to this purpose.
 
-You can read more information about the GDPR regulation and how Wazuh faces it on the this section: :doc:`/gdpr/index`.
+You can read more information about the GDPR regulation and how Wazuh faces it on the this section: :doc:`/compliance/gdpr/index`.
 
 Wazuh cluster
 -------------

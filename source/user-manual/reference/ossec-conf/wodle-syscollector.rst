@@ -15,7 +15,7 @@ wodle name="syscollector"
 		<wodle name="syscollector">
 		</wodle>
 
-Configuration options of the Syscollector wodle for :ref:`system inventory <syscollector>`.
+Configuration options of the Syscollector wodle for :ref:`system inventory <system_inventory>`.
 
 Options
 -------
@@ -165,6 +165,8 @@ Enables the scan of the processes.
 | **Allowed values** | yes, no |
 +--------------------+---------+
 
+.. _wodle_syscollector_hotfixes:
+
 hotfixes
 ^^^^^^^^
 
@@ -183,8 +185,6 @@ Enables the hotfixes scan. It reports the Windows updates installed.
 synchronization
 ^^^^^^^^^^^^^^^
 
-.. versionadded:: 4.2.0
-
 The database synchronization settings are configured inside this tag.
 
 .. code-block:: xml
@@ -197,8 +197,6 @@ The database synchronization settings are configured inside this tag.
 
 max_eps
 ^^^^^^^
-
-.. versionadded:: 4.2.0
 
 Sets the maximum event reporting throughput.
 
