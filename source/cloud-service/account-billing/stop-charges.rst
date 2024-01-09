@@ -18,4 +18,4 @@ To stop being charged for an environment:
 
 .. warning::
 
-  The cancellation cannot be undone, and all data is completely deleted with this action.
+   Cancellation cannot be undone, and all data is permanently deleted with this action.
