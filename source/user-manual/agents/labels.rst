@@ -31,7 +31,7 @@ Use case
 
 Below is a case where the use of labels could prove helpful.
 
-Let's imagine we have a large environment deployed in Amazon Web Services (AWS) and monitored by Wazuh. In this situation, we want the manager to have the following information about each agent when an alert is triggered:
+In a large environment deployed in Amazon Web Services (AWS), you might want to have the following information about each agent when an alert is triggered:
 
 - AWS instance-id.
 - AWS Security group.
