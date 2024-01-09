@@ -46,7 +46,7 @@ If you know your current password:
 
 If you don’t know your current password:
 
-1. Click on **Forgot my password** on the log in page of the Wazuh Cloud Console.
+1. Click on **Forgot my password** on the login page of the Wazuh Cloud Console.
 2. Enter the primary email address for your account and click **Reset password**.
 
   An email is sent to your address with a link to reset the password.
