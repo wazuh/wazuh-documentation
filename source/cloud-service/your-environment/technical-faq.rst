@@ -96,7 +96,6 @@ What happens if average/peak EPS setting is reached?
 
 If the data ingestion is exceeded, events start to queue. If the queue becomes full, Wazuh discards the incoming events, which might lead to event loss. The cloud service automatically manages the queuing mechanism, ensuring optimal resource usage.
 
-
 How do I get SSH access to my environment?
 ------------------------------------------
 
