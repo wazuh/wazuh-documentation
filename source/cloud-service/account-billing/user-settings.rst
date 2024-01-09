@@ -15,7 +15,7 @@ Configure your user profile
 
 You can configure your name, last name, company name, country, phone number, and website anytime.
 
-1. Log in to the `Wazuh Cloud Console <https://console.cloud.wazuh.com/>`_  and click the upper-right user icon to open the menu.
+1. Log in to the `Wazuh Cloud Console <https://console.cloud.wazuh.com/>`_ and click the upper-right user icon to open the menu.
 2. Go to **User settings**.
 3. Fill in or edit the fields. *Company* and *Country* are required in order to continue.
 4. Click **Save** to complete the action.
