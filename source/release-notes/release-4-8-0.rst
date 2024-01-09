@@ -16,6 +16,7 @@ This release includes new features or enhancements as the following:
 Manager
 ^^^^^^^
 
+- `#21201 <https://github.com/wazuh/wazuh/pull/21201>`__ Refactored vulnerability detection capability.
 - `#16058 <https://github.com/wazuh/wazuh/pull/16058>`__ Added new ``rollback`` query to ``wazuh-db``.
 - `#18476 <https://github.com/wazuh/wazuh/pull/18476>`__ Improved ``wazuh-db`` detection of deleted database files.
 - `#16893 <https://github.com/wazuh/wazuh/pull/16893>`__ Added ``timeout`` and ``retry`` parameters to the VirusTotal integration.
@@ -42,6 +43,28 @@ RESTful API
 - `#19952 <https://github.com/wazuh/wazuh/pull/19952>`__ Added new ``GET /manager/version/check`` API endpoint to obtain information about new releases of Wazuh.
 - `#20119 <https://github.com/wazuh/wazuh/pull/20119>`__ Removed ``PUT /vulnerability``, ``GET /vulnerability/{agent_id}``, ``GET /vulnerability/{agent_id}/last_scan`` and ``GET /vulnerability/{agent_id}/summary/{field}`` API endpoints as they were deprecated in version 4.7.0. Use the Wazuh indexer REST API instead.
 - `#20420 <https://github.com/wazuh/wazuh/pull/20420>`__ Added the ``auto`` option to the ``ssl_protocol`` setting in the API configuration. This option enables automatic negotiation of the TLS certificate.
+
+Ruleset
+^^^^^^^
+
+- `#19528 <https://github.com/wazuh/wazuh/pull/19528>`__ Added rules to detect IcedID attacks.
+- `#17780 <https://github.com/wazuh/wazuh/pull/17780>`__ Added new SCA policy for Amazon Linux 2023.
+- `#17784 <https://github.com/wazuh/wazuh/pull/17784>`__ Added new SCA policy for Rocky Linux 8.
+- `#18721 <https://github.com/wazuh/wazuh/pull/18721>`__ Revised SCA policy for Ubuntu Linux 18.04.
+- `#17515 <https://github.com/wazuh/wazuh/pull/17515>`__ Revised SCA policy for Ubuntu Linux 22.04.
+- `#18440 <https://github.com/wazuh/wazuh/pull/18440>`__ Revised SCA policy for Red Hat Enterprise Linux 7.
+- `#17770 <https://github.com/wazuh/wazuh/pull/17770>`__ Revised SCA policy for Red Hat Enterprise Linux 8.
+- `#17412 <https://github.com/wazuh/wazuh/pull/17412>`__ Revised SCA policy for Red Hat Enterprise Linux 9.
+- `#17624 <https://github.com/wazuh/wazuh/pull/17624>`__ Revised SCA policy for CentOS 7.
+- `#18439 <https://github.com/wazuh/wazuh/pull/18439>`__ Revised SCA policy for CentOS 8.
+- `#18010 <https://github.com/wazuh/wazuh/pull/18010>`__ Revised SCA policy for Debian 8.
+- `#17922 <https://github.com/wazuh/wazuh/pull/17922>`__ Revised SCA policy for Debian 10.
+- `#18695 <https://github.com/wazuh/wazuh/pull/18695>`__ Revised SCA policy for Amazon Linux 2.
+- `#18985 <https://github.com/wazuh/wazuh/pull/18985>`__ Revised SCA policy for SUSE Linux Enterprise 15.
+- `#19037 <https://github.com/wazuh/wazuh/pull/19037>`__ Revised SCA policy for macOS 13.0 Ventura.
+- `#19515 <https://github.com/wazuh/wazuh/pull/19515>`__ Revised SCA policy for Microsoft Windows 10 Enterprise.
+- `#20044 <https://github.com/wazuh/wazuh/pull/20044>`__ Revised SCA policy for Microsoft Windows 11 Enterprise.
+- `#17518 <https://github.com/wazuh/wazuh/pull/17518>`__ Updated MITRE DB to v13.1.
 
 Other
 ^^^^^
