@@ -10,9 +10,9 @@ Authentication and authorization
 
 You can use the native support for managing and authenticating users or integrate with external user management systems.
 
-.. note::
-   
-   You cannot log in to the Wazuh WUI of your environment with your Wazuh Cloud account credentials. To log in to Wazuh WUI, use the default credentials from the Wazuh Cloud Console page or the credentials of any user you already created in Wazuh WUI.
+   .. note::
+      
+      You cannot log in to the Wazuh WUI of your environment with your Wazuh Cloud account credentials. To log in to Wazuh WUI, use the default credentials from the Wazuh Cloud Console page or the credentials of any user you already created in Wazuh WUI.
   
 
 Native support for users and roles

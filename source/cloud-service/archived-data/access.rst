@@ -10,8 +10,8 @@ Access
 
 To access your archived data, you need an AWS token that grants permission on the AWS S3 bucket of your environment. This token can be generated using the Wazuh Cloud API.
 
-.. note::
-   See the :doc:`Wazuh Cloud CLI </cloud-service/cli/index>` section to learn how to list and download your archived data automatically.
+   .. note::
+      See the :doc:`Wazuh Cloud CLI </cloud-service/cli/index>` section to learn how to list and download your archived data automatically.
 
 
 The following example describes the steps to follow to list the files of your archived data:

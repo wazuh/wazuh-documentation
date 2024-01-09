@@ -19,8 +19,8 @@ Follow these steps to enroll an agent:
 
 #. Follow the steps described on the **Deploy a new agent** page.
 
-.. note::
+  .. note::
 
-   Wazuh agents use TCP to communicate with your environment.
+    Wazuh agents use TCP to communicate with your environment.
 
 If you have any questions about the Wazuh Cloud, see the :doc:`Cloud service FAQ </cloud-service/getting-started/starting-faq>`.

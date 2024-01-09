@@ -10,9 +10,9 @@ Manage your billing details
 
 If you want to continue using your environment beyond the trial period, you need to add credit card details to your Wazuh Cloud account. Your credit card information is sent securely to our billing provider and stored with them.
 
-.. note::
+  .. note::
 
-  A trial environment is converted to a paid environment when the trial expires. If you do not add your credit card information before the expiration date, your environment is deleted, and all data is permanently erased. Make sure to add your credit card before the end of the trial period.
+    A trial environment is converted to a paid environment when the trial expires. If you do not add your credit card information before the expiration date, your environment is deleted, and all data is permanently erased. Make sure to add your credit card before the end of the trial period.
 
 Add your billing details
 ------------------------
@@ -31,9 +31,9 @@ To add the billing details:
 
 You can stop upcoming charges by :ref:`canceling your environments <cloud_stop_charges>`. 
 
-.. note::
-  
-  Please take into account that the cancellation cannot be undone once you do it and that all your data will be completely deleted.
+  .. note::
+    
+    Please take into account that the cancellation cannot be undone once you do it and that all your data will be completely deleted.
 
 Remove your billing details
 ---------------------------
