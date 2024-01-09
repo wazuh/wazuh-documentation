@@ -115,6 +115,9 @@ Packages
 - `#2164 <https://github.com/wazuh/wazuh-packages/pull/2164>`_ Deprecated CentOS 6 and Debian 7 for the Wazuh manager compilation, while still supporting them in the Wazuh agent compilation.
 - `#2588 <https://github.com/wazuh/wazuh-packages/pull/2588>`_ Added logic to the installation assistant to check for clean Wazuh central components removal.
 - `#2615 <https://github.com/wazuh/wazuh-packages/pull/2615>`_ Added branding images to the header of Wazuh dashboard.
+- `#2696 <https://github.com/wazuh/wazuh-packages/pull/2696>`_ Updated Filebeat module version to 0.4 in Wazuh installation assistant.
+- `#2695 <https://github.com/wazuh/wazuh-packages/pull/2695>`_ Added content database in RPM and DEB packages.
+- `#2669 <https://github.com/wazuh/wazuh-packages/pull/2669>`_ Upgraded ``botocore`` dependency in WPK package Docker containers.
 
 Resolved issues
 ---------------
