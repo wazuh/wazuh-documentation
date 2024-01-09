@@ -125,7 +125,7 @@ Yes, you can access the Wazuh WUI of your environment through your SSO tool. To 
 Do I have access to Wazuh API?
 ------------------------------
 
-You have access to the **Dev tools** through your Wazuh WUI, where you can use the API. The Wazuh API is not exposed, but you can contact the Wazuh team through the **Help** section of your Wazuh Cloud Console to allow Wazuh API access from a specific IP address.
+You have access to the **Dev tools** through your Wazuh dashboard, where you can use the API. The Wazuh API is not exposed, but you can contact the Wazuh team through the **Help** section of your Wazuh Cloud Console to allow Wazuh API access from a specific IP address.
 
 
 Do I have access to Wazuh indexer API?
