@@ -13,7 +13,7 @@ Follow the next steps to create your trial environment.
 Sign up
 -------
 
-To sign up for a free trial:
+To sign up for a free trial, do the following.
 
 #. Go to our Wazuh Cloud Console `Login <https://console.cloud.wazuh.com/>`_ page.
 
