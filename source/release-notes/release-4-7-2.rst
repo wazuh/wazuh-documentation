@@ -3,8 +3,8 @@
 .. meta::
   :description: Wazuh 4.7.2 has been released. Check out our release notes to discover the changes and additions of this release.
 
-4.7.2 Release notes - TBD
-=========================
+4.7.2 Release notes - 10 January 2024
+=====================================
 
 This section lists the changes in version 4.7.2. Every update of the Wazuh solution is cumulative and includes all enhancements and fixes from previous releases.
 
@@ -12,6 +12,11 @@ What's new
 ----------
 
 This release includes new features or enhancements as the following:
+
+Wazuh manager
+^^^^^^^^^^^^^
+
+- `#21142 <https://github.com/wazuh/wazuh/pull/21142>`__ Added minimum time constraint of 1 hour for downloading the Vulnerability Detector feed.
 
 Wazuh agent
 ^^^^^^^^^^^
@@ -39,6 +44,7 @@ Packages
 
 - `#2670 <https://github.com/wazuh/wazuh-packages/pull/2670>`__ Removed installed dependencies that were part of the Wazuh installation assistant. This ensures a clean post-installation state.
 - `#2677 <https://github.com/wazuh/wazuh-packages/pull/2677>`__ Removed ``gnupg`` package as RPM dependency in the Wazuh installation assistant.
+- `#2693 <https://github.com/wazuh/wazuh-packages/pull/2693>`__ Added Debian12 SCA files.
 
 Resolved issues
 ---------------

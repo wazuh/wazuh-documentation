@@ -93,7 +93,7 @@ The ``sys_osinfo`` system table in the inventory database stores information abo
 Packages
 --------
 
-The ``sys_programs`` table in the inventory database stores information about the currently installed software on an endpoint. The Vulnerability Detector module uses information from this table to scan and detect vulnerable software. On Linux systems, the Syscollector module retrieves *deb, rpm, pacman, npm, and pypi* packages. The table below describes the fields in the database.
+The ``sys_programs`` table in the inventory database stores information about the currently installed software on an endpoint. The vulnerability detection module uses information from this table to detect vulnerable software. On Linux systems, the Syscollector module retrieves *deb, rpm, pacman, npm, and pypi* packages. The table below describes the fields in the database.
 
 +------------------+-------------------------------------------+-------------------------------------------+----------------------------------------------+
 | Field            | Description                               | Example                                   | Available                                    |
@@ -351,7 +351,7 @@ The ``sys_processes`` table in the inventory database stores basic information a
 Windows updates
 ---------------
 
-The ``sys_hotfixes`` table contains information about the updates installed on Windows endpoints. The Vulnerability Detector module uses the hotfix identifier to discover what vulnerabilities exist on Windows endpoints and the patches you have applied. The table below describes the fields in the ``sys_hotfixes`` table.
+The ``sys_hotfixes`` table contains information about the updates installed on Windows endpoints. The vulnerability detection module uses the hotfix identifier to discover what vulnerabilities exist on Windows endpoints and the patches you have applied. The table below describes the fields in the ``sys_hotfixes`` table.
 
 +------------------+-------------------------------------------+------------------------------------------+-------------------+
 | Field            | Description                               | Example                                  | Available         |
