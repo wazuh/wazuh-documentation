@@ -50,7 +50,7 @@ Cloud service FAQ
 What is Wazuh Cloud?
 --------------------
 
-Wazuh Cloud provides a comprehensive solution by hosting and managing all Wazuh components within a single integrated platform. With just a few clicks, you can effortlessly create your environment and enroll Wazuh agents. By leveraging Wazuh, you gain access to powerful security capabilities, including Security Information and Event Management (SIEM) and Extended Detection and Response (XDR).
+Wazuh Cloud provides a comprehensive solution by hosting and managing all Wazuh components within a single integrated platform. Wazuh cloud allows you to create your environment and enroll Wazuh agents. By leveraging Wazuh, you gain access to security capabilities, including Security Information and Event Management (SIEM) and Extended Detection and Response (XDR).
 
 
 Can I try it for free?
