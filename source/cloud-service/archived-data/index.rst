@@ -1,6 +1,5 @@
 .. Copyright (C) 2015, Wazuh, Inc.
 
-.. _cloud_your_environment_accessing_archived_data:
 
 .. meta::
   :description: Wazuh provides two types of storage for your data: indexed and archived. Learn more about the archived data in this section. 
