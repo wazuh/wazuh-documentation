@@ -99,7 +99,7 @@ In the context of Wazuh Cloud, a setting  refers to each configuration option av
 What is the indexed data?
 -------------------------
 
-The indexed data, previously known as hot storage, includes the data available on the Wazuh WUI, which corresponds to the information indexed by Wazuh. This information becomes searchable and analyzable as soon as Wazuh ingests and indexes the events sent by the agents.
+The indexed data, previously known as hot storage, includes the data available on the Wazuh dashboard, which corresponds to the information Wazuh indexed. This information becomes searchable and analyzable as soon as Wazuh ingests and indexes the events sent by the agents.
 
 What is the archived data?
 --------------------------
