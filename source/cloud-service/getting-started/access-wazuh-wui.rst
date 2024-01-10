@@ -7,7 +7,7 @@
 Access Wazuh WUI
 ================
 
-The Wazuh WUI is a flexible and intuitive web interface. Through this WUI, you have access to visualized tools that gives you a comprehensive insight into your monitored endpoints.
+The Wazuh dashboard has a flexible and intuitive web interface. Through this WUI, you have access to visualizations that give you a comprehensive insight into your monitored endpoints.
 
 Follow these steps to access Wazuh WUI:
 
