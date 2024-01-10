@@ -6,7 +6,7 @@
 Limits
 ======
 
-Wazuh Cloud service sets predefined limits for certain key metrics that affect the performance and capacity of your environment. These limits are determined by the service and cannot be directly configured by users. If an environment reaches these limits, there may be restrictions on the normal functioning of the service. If any issues arise related to these limits, the Wazuh support team can provide assistance and guidance for resolution.
+The Wazuh Cloud service sets predefined limits for specific key metrics that affect your environment performance and capacity. These limits cannot be directly configured by users. If an environment reaches these limits, there might be restrictions in normal service functioning. In case of any issues arising from these limitations, contact the Wazuh support team for assistance and guidance for resolution.
 
 
 Limit definitions
