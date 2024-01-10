@@ -3,7 +3,6 @@
 .. meta::
   :description: Learn about Wazuh Cloud limits. 
 
-
 Limits
 ======
 
