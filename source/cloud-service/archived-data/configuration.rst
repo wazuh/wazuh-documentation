@@ -12,7 +12,7 @@ Your environment is configured by default to send Wazuh output files to archived
 
 There are two Wazuh output files in JSON format:
 
-- The file ``/var/ossec/logs/archives/archives.json`` contains all events, whether they triggered a rule or not. This is sent to archived data if the setting ``logall_json`` is set to ``yes``.
+- ``/var/ossec/logs/archives/archives.json``: If  you set ``logall_json`` to ``yes``, Wazuh stores all events in this file and sends it to archived data, regardless of whether they triggered an alert.
 
 - The file ``/var/ossec/logs/alerts/alerts.json`` contains only events that tripped a rule with high enough priority, according to a configurable threshold. This is always sent to archived data.
 
