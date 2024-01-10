@@ -40,7 +40,7 @@ Follow these steps to quickly set up and run your environment:
 
    #. Choose from the available settings by selecting one of three predefined profiles: **Small**, **Medium**, or **Large**. If these presets don't align with your needs, opt for the Custom option to configure settings individually.  For more details about the settings and their functionality, see the :doc:`Settings </cloud-service/your-environment/settings>` section.
    
-      .. note:: During the 14-day trial period, some settings are limited, but they do not prevent you from gaining insight into the Wazuh Cloud platform. All restrictions are removed after you make the first payment.
+      .. note:: Thoughout the 14-day trial period, some settings are limited. However, they do not prevent you from exploring and using the Wazuh Cloud platform. All restrictions are removed after you make the initial payment.
 
    #. Select between monthly or annual payments. If you choose the monthly option, you will be billed on a monthly basis, whereas the annual option entails a single payment per year.
 
