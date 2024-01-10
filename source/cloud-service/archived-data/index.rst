@@ -17,7 +17,7 @@ When Wazuh ingests and indexes events from agents, the data becomes searchable a
 Environment example for data storage
 ------------------------------------
 
-Your environment is configured with the following settings:
+This example environment is configured with the following settings:
 
 - Indexed data retention: 3 months
 - Indexed data capacity (formerly known as tier): 100 GB
