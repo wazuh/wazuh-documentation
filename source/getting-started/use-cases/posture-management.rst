@@ -37,8 +37,9 @@ The image below shows an example log received from a monitored GCP instance on t
    :align: center
    :width: 80%
 
-Amazon Web Service
-------------------
+Amazon Web Services
+-------------------
+
 Wazuh provides CSPM to your AWS workloads by monitoring the AWS services and instances. Monitoring your AWS services includes collecting and analyzing log data about your AWS infrastructure using the :doc:`Wazuh module for AWS </cloud-security/amazon/services/index>`.
 
 You can enable the Amazon AWS module via your Wazuh dashboard to view logs related to AWS services.
