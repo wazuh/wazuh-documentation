@@ -94,7 +94,7 @@ A profile refers to predefined settings available for configuring your Wazuh Clo
 What is a setting?
 ------------------
 
-A setting in the context of Wazuh Cloud refers to each configuration option available for a cloud environment. These settings determine the limitations and capabilities of an environment. For example, the "Active Agents" setting specifies the maximum number of active agents allowed in your environment. It is important to note that the settings chosen for an environment directly impact its pricing, as they affect the resources allocated and functionalities available.
+In the context of Wazuh Cloud, a setting  refers to each configuration option available for a cloud environment. These settings determine the limitations and functionalities of an environment. For example, the "Active Agents" setting specifies the maximum number of active agents allowed in your environment. Note that the settings chosen for an environment directly impact its pricing, as they affect the resources allocated and functionalities available.
 
 What is the indexed data?
 -------------------------
