@@ -7,7 +7,10 @@
 Archived data
 =============
 
-Wazuh provides two types of storage for your data: indexed data (formerly known as hot storage) and archived data (formerly known as cold storage).
+Wazuh provides two types of storage for your data:
+
+-  **Indexed data**, formerly known as hot storage.
+-  **Archived data**, formerly known as cold storage.
 
 When Wazuh ingests and indexes events from agents, the data becomes searchable and analyzable in the Wazuh WUI. This information is stored in indexed data, which is limited by your :ref:`indexed data retention and indexed data capacity <cloud_settings_indexed_data>` (formerly known as tier) settings. Simultaneously, the data is sent to archived data with a maximum delay of 30 minutes after initial processing by Wazuh. Archived data is stored in an AWS S3 bucket, allowing you to store logs for extended periods and meet compliance requirements. Additionally, you can reindex the data to other environments for further investigations.
 
