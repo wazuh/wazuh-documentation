@@ -10,7 +10,6 @@ Wazuh provides a 14-day free trial to create a cloud environment and explore the
 
 Follow the next steps to create your trial environment.
 
-
 Sign up
 -------
 
