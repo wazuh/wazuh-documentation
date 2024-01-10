@@ -16,7 +16,6 @@ We provide a free trial to create your cloud environment and explore the Wazuh C
 
 Learn more about Wazuh Cloud in the sections below.
 
-
 .. toctree::
    :titlesonly:
    :includehidden:
