@@ -46,6 +46,6 @@ Follow these steps to quickly set up and run your environment:
 
 #. Click on **Start your free trial** to build your environment. This process might take a few minutes.
 
-Once the environment is ready, access the :ref:`Wazuh WUI <cloud_wui_access>` and enroll the Wazuh agents.
+Once the environment is ready, access the :ref:`Wazuh dashboard <cloud_wui_access>` and enroll the Wazuh agents.
 
 If you have any questions about the Wazuh Cloud, see the :doc:`Cloud service FAQ </cloud-service/getting-started/starting-faq>`.
