@@ -89,7 +89,7 @@ Wazuh Cloud is hosted on Amazon Web Services (AWS).
 What is a profile?
 ------------------
 
-A profile refers to predefined settings that you can choose from when configuring your Wazuh Cloud environment. We have three profiles available: Small, Medium, and Large. These profiles provide ready-to-use environment templates that cater to different needs and requirements. If none of the predefined profiles meet your specific requirements, you can configure your settings individually.
+A profile refers to predefined settings available for configuring your Wazuh Cloud environment. We offer three profiles: Small, Medium, and Large. They provide ready-to-use environment templates that cater to different needs and requirements. If none of these predefined profiles meet your specific requirements, you can configure your settings individually.
 
 What is a setting?
 ------------------
