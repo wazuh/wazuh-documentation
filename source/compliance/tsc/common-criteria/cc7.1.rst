@@ -1,7 +1,7 @@
 .. Copyright (C) 2015, Wazuh, Inc.
 
 .. meta::
-   :description: Wazuh helps meet the common criteria CC7.1 by providing the Vulnerability Detector module.
+   :description: Wazuh helps meet the common criteria CC7.1 by providing the Vulnerability Detection module.
 
 Common criteria 7.1
 ===================
@@ -15,49 +15,42 @@ The use case below shows how Wazuh assists in meeting this requirement.
 Use case: Monitoring a CentOS endpoint for vulnerabilities
 ----------------------------------------------------------
 
-Wazuh helps meet the *common criteria CC7.1* by providing the Vulnerability Detector module. This module can uncover vulnerabilities in operating systems and installed applications. It builds a database of Common Vulnerabilities and Exposures (CVEs) using data indexed from Canonical, Debian, Red Hat, Arch Linux, Amazon Linux Advisories Security (ALAS), Microsoft, and the National Vulnerability Database (NVD). Wazuh compares the information from these sources with scanned data from the monitored endpoint.
+Wazuh helps meet the *common criteria CC7.1* by providing the Vulnerability Detection module. This module can uncover vulnerabilities in operating systems and installed applications. It performs a software audit by querying our Cyber Threat Intelligence (CTI) API for vulnerability content documents. We aggregate vulnerability information into the CTI repository from external vulnerability sources indexed by Canonical, Debian, Red Hat, Arch Linux, Amazon Linux Advisories Security (ALAS), Microsoft, and the National Vulnerability Database (NVD). We also maintain the integrity of our vulnerability data and the vulnerabilities repository updated, ensuring the solution checks for the latest CVEs. The Vulnerability detection module correlates this information with data from the endpoint application inventory.
 
-In this use case, we show how the Wazuh Vulnerability Detector module detects vulnerabilities on a CentOS 8 endpoint.
+In this use case, you can see how the Wazuh Vulnerability Detection module detects vulnerabilities on a CentOS 8 endpoint.
 
-#. Enable the Vulnerability Detector module. This is found under the ``<vulnerability-detector>`` block of the Wazuh server ``/var/ossec/etc/ossec.conf`` configuration file:
+#. Edit the Wazuh server configuration file ``/var/ossec/etc/ossec.conf``. Make sure the module is enabled.
 
-   .. code-block:: XML
-      :emphasize-lines: 3, 10, 22
+   .. code-block:: xml
+      :emphasize-lines: 2
+   
+      <vulnerability-detection>
+        <enabled>yes</enabled>
+        <index-status>yes</index-status>
+        <feed-update-interval>60m</feed-update-interval>
+      </vulnerability-detection>
+   
+      <indexer>
+        <enabled>yes</enabled>
+        <hosts>
+          <host>https://0.0.0.0:9200</host>
+        </hosts>
+        <username>admin</username>
+        <password>admin</password>
+        <ssl>
+          <certificate_authorities>
+            <ca>/etc/filebeat/certs/root-ca.pem</ca>
+          </certificate_authorities>
+          <certificate>/etc/filebeat/certs/filebeat.pem</certificate>
+          <key>/etc/filebeat/certs/filebeat-key.pem</key>
+        </ssl>
+      </indexer>
 
-      <ossec_config>
-        <vulnerability-detector>
-          <enabled>yes</enabled>
-          <interval>5m</interval>
-          <min_full_scan_interval>6h</min_full_scan_interval>
-          <run_on_start>yes</run_on_start>
+#. If you made changes, restart the Wazuh manager to apply them:
 
-          <!-- RedHat OS vulnerabilities -->
-          <provider name="redhat">
-          <enabled>yes</enabled>
-          <os>5</os>
-          <os>6</os>
-          <os>7</os>
-          <os>8</os>
-          <os allow="CentOS Linux-8">8</os>
-          <os>9</os>
-          <update_interval>1h</update_interval>
-          </provider>
+   .. include:: /_templates/common/restart_manager.rst
 
-          <!-- Aggregate vulnerabilities -->
-          <provider name="nvd">
-          <enabled>yes</enabled>
-          <update_interval>1h</update_interval>
-          </provider>
-        </vulnerability-detector>
-      </ossec_config>
-
-#. Restart the Wazuh manager to apply the changes:
-
-   .. code-block:: console
-
-      # systemctl restart wazuh-manager
-
-#. Navigate to the Vulnerability Detector module from the Wazuh dashboard. Select an agent to view its discovered vulnerabilities.
+#. Navigate to the **Vulnerability detection** module from the Wazuh dashboard. Select the agent to view its discovered vulnerabilities.
 
    .. thumbnail:: /images/compliance/tsc/common-criteria/agent-vulnerabilities.png
       :title: Agent vulnerabilities
