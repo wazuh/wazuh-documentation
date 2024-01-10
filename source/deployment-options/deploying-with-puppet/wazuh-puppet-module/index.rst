@@ -68,6 +68,45 @@ Place the file at ``/etc/puppetlabs/code/environments/production/manifests/`` in
 
     # puppet agent -t
 
+Change Password for Wazuh users
+-------------------------------
+
+Follow the instructions in the :doc:`Password Management </user-manual/user-administration/password-management>` section to change your Wazuh user passwords. Once you change them, set the new passwords within the classes used for deploying the Wazuh Stack.
+
+Indexer users
+^^^^^^^^^^^^^
+
+-  ``admin`` user:
+
+   .. code-block:: puppet
+
+      node "puppet-agent.com" {
+        class { 'wazuh::dashboard':
+          dashboard_password => '<NEW_PASSWORD>'
+        }
+      }
+-  ``kibanaserver`` user:
+
+   .. code-block:: puppet
+
+      node "puppet-agent.com" {
+        class { 'wazuh::filebeat_oss':
+          filebeat_oss_elastic_password  => '<NEW_PASSWORD>'
+        }
+      }
+
+Wazuh API users
+^^^^^^^^^^^^^^^
+
+-  ``wazuh-wui`` user:
+
+   .. code-block:: puppet
+      node "puppet-agent.com" {
+        class { 'wazuh::dashboard':
+          dashboard_wazuh_api_credentials => '<NEW_PASSWORD>'
+        }
+      }
+
 
 Install Wazuh agent via Puppet
 ------------------------------
