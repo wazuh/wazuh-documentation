@@ -81,7 +81,7 @@ The concept of a tier, which represents the size limitation, in bytes, of the in
 Setting
 -------
 
-A setting in the context of Wazuh Cloud refers to each of the configuration options available for a cloud environment. These settings define the limitations, capabilities, and pricing of the environment.
+In the context of Wazuh Cloud, a setting  refers to each configuration option available for a cloud environment. These settings determine the limitations, functionalities, and pricing of an environment.
 
 .. _cloud_glossary_profile:
 
