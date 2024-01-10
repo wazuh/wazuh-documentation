@@ -9,7 +9,7 @@ Access Wazuh WUI
 
 The Wazuh dashboard has a flexible and intuitive web interface. Through this WUI, you have access to visualizations that give you a comprehensive insight into your monitored endpoints.
 
-Follow these steps to access Wazuh WUI:
+Follow these steps to access Wazuh dashboard:
 
 #. Log in to the `Wazuh Cloud Console <https://console.cloud.wazuh.com/>`_.
 #. Select the environment you want to access from the **Environments** page.
