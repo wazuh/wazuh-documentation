@@ -1,7 +1,7 @@
 .. Copyright (C) 2015, Wazuh, Inc.
 
 .. meta::
-   :description: Wazuh helps meet the TSC common criteria CC8.1 requirement by providing several modules such as SCA, Vulnerability Detector, and active response.
+   :description: Wazuh helps meet the TSC common criteria CC8.1 requirement by providing several modules such as SCA, vulnerability detection, and active response.
 
 Common criteria 8.1
 ===================
@@ -13,7 +13,7 @@ The following use case shows how Wazuh can assist in meeting this objective.
 Use case: Monitoring packages installed on an Ubuntu endpoint
 -------------------------------------------------------------
 
-Wazuh helps meet the *TSC common criteria CC8.1* requirement by providing several modules such as SCA, vulnerability detector, and active response. This use case shows how Wazuh can be used to view installed packages on an Ubuntu 22.04 endpoint.
+Wazuh helps meet the *TSC common criteria CC8.1* requirement by providing several modules such as SCA, vulnerability detection, and active response. This use case shows how Wazuh can be used to view installed packages on an Ubuntu 22.04 endpoint.
 
 To carry out this use case, set up a Wazuh server and an Ubuntu 22.04 endpoint with the Wazuh agent installed and connected to the Wazuh server.
 
