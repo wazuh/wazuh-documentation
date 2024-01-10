@@ -14,7 +14,7 @@ There are two Wazuh output files in JSON format:
 
 - ``/var/ossec/logs/archives/archives.json``: If  you set ``logall_json`` to ``yes``, Wazuh stores all events in this file and sends it to archived data, regardless of whether they triggered an alert.
 
-- The file ``/var/ossec/logs/alerts/alerts.json`` contains only events that tripped a rule with high enough priority, according to a configurable threshold. This is always sent to archived data.
+- ``/var/ossec/logs/alerts/alerts.json``: This file contains only events that tripped a rule with high enough priority, according to a configurable threshold. This is always sent to archived data.
 
 Both files are delivered to archived data as soon as they are rotated and compressed. This process usually takes between 10 and 30 minutes from the moment the event is received.
 
