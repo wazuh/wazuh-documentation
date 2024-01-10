@@ -85,6 +85,7 @@ Indexer users
           dashboard_password => '<NEW_PASSWORD>'
         }
       }
+
 -  ``kibanaserver`` user:
 
    .. code-block:: puppet
@@ -101,6 +102,7 @@ Wazuh API users
 -  ``wazuh-wui`` user:
 
    .. code-block:: puppet
+
       node "puppet-agent.com" {
         class { 'wazuh::dashboard':
           dashboard_wazuh_api_credentials => '<NEW_PASSWORD>'
