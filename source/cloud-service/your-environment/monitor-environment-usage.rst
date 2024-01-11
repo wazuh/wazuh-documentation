@@ -8,7 +8,7 @@
 Monitor usage
 =============
 
-This section provides valuable insights into the utilization of your environment, allowing you to make decisions and take necessary actions to optimize its performance.
+This section provides details on using your environment, helping you to optimize its performance.
 
 Viewing environment usage metrics
 ---------------------------------
