@@ -24,7 +24,7 @@ Learn more about Wazuh Cloud in the sections below.
    getting-started/index
    your-environment/index
    account-billing/index
-   archived-data/index
+   archive-data/index
    apis/index
    cli/index
    glossary

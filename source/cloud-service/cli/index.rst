@@ -76,10 +76,10 @@ A non-default location can be specified for the config file by setting the `WAZU
 Examples
 --------
 
-Getting S3 token for archived data
+Getting S3 token for archive data
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-This command generates an AWS token to access the archived data of the environment with Cloud ID `012345678ab`.
+This command generates an AWS token to access the archive data of the environment with Cloud ID `012345678ab`.
 
 .. code-block:: console
 
@@ -94,10 +94,10 @@ This command generates an AWS token to access the archived data of the environme
   aws_secret_access_key = A...E
   aws_session_token = F...Q==
 
-Listing archived data
+Listing archive data
 ^^^^^^^^^^^^^^^^^^^^^
 
-This command lists the archived data files of the environment `012345678ab` between the specified dates.
+This command lists the archive data files of the environment `012345678ab` between the specified dates.
 
 .. code-block:: console
 
@@ -109,10 +109,10 @@ This command lists the archived data files of the environment `012345678ab` betw
   Environment '012345678ab' files from 2021-05-07 to 2021-05-07:
   012345678ab/output/alerts/2021/05/07/012345678ab_output_alerts_20210507T1040_mXSoDTf5Pgyr8b8D.json.gz
 
-Downloading archived data
+Downloading archive data
 ^^^^^^^^^^^^^^^^^^^^^^^^^
 
-This command downloads in the `/home/test` directory the archived data files of the environment `012345678ab` between the specified dates.
+This command downloads in the `/home/test` directory the archive data files of the environment `012345678ab` between the specified dates.
 
 .. code-block:: console
 

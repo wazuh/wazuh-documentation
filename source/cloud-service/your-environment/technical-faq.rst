@@ -16,7 +16,7 @@ Technical FAQ
 
 - `What happens if indexed data capacity setting is reached?`_
 
-- `Can I index the archived data again?`_
+- `Can I index the archive data again?`_
 
 - `What if I need to change the size of my tier?`_
 
@@ -67,12 +67,12 @@ See :ref:`See What happens if *indexed data capacity* setting is reached? <cloud
 What happens if indexed data capacity setting is reached?
 ---------------------------------------------------------
 
-When the selected indexed data capacity is reached, the oldest events will be automatically removed from your index regardless of the index data time. This data is available in archived data for you to access. See the :ref:`Archived data <cloud_your_environment_accessing_archived_data>` section to learn more about data logging and storage.
+When the selected indexed data capacity is reached, the oldest events will be automatically removed from your index regardless of the index data time. This data is available in archive data for you to access. See the :ref:`Archive data <cloud_your_environment_accessing_archive_data>` section to learn more about data logging and storage.
 
-Can I index the archived data again?
+Can I index the archive data again?
 ------------------------------------
 
-It's possible to download the data from the archived data and re-index it into your local environments. However, it isn't possible to re-index it in your cloud environment.
+It's possible to download the data from the archive data and re-index it into your local environments. However, it isn't possible to re-index it in your cloud environment.
 
 What if I need to change the size of my tier?
 ---------------------------------------------
@@ -136,7 +136,7 @@ The Wazuh indexer API is not accessible by default. If you want to access it, co
 How can I forward my logs to another solution or SOC?
 -----------------------------------------------------
 
-You can download your data from archived data. Then, you can push it to other solutions or Security Operations Center (SOC).
+You can download your data from archive data. Then, you can push it to other solutions or Security Operations Center (SOC).
 
 Is my environment shared with other customers?
 ----------------------------------------------

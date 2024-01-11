@@ -1,13 +1,13 @@
 .. Copyright (C) 2015, Wazuh, Inc.
 
 .. meta::
-  :description: Wazuh provides two types of storage for your data: indexed and archived. Learn more about the archived data in this section. 
+  :description: Wazuh provides two types of storage for your data: indexed and archive. Learn more about the archive data in this section. 
 
   
 Filename format
 ===============
 
-The files are stored in a directory structure that indicates the date and time the file was delivered to the archived data.
+The files are stored in a directory structure that indicates the date and time the file was delivered to the archive data.
 
 The main path follows this format:
 

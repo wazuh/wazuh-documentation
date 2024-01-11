@@ -1,25 +1,25 @@
 .. Copyright (C) 2015, Wazuh, Inc.
 
 .. meta::
-  :description: Wazuh provides two types of storage for your data: indexed and archived. Learn more about the archived data in this section. 
+  :description: Wazuh provides two types of storage for your data: indexed and archive. Learn more about the archive data in this section. 
 
-.. _cloud_archived_data_access:
+.. _cloud_archive_data_access:
 
 Access
 ======
 
-To access your archived data, you need an AWS token that grants permission on the AWS S3 bucket of your environment. This token can be generated using the Wazuh Cloud API.
+To access your archive data, you need an AWS token that grants permission on the AWS S3 bucket of your environment. This token can be generated using the Wazuh Cloud API.
 
    .. note::
-      See the :doc:`Wazuh Cloud CLI </cloud-service/cli/index>` section to learn how to list and download your archived data automatically.
+      See the :doc:`Wazuh Cloud CLI </cloud-service/cli/index>` section to learn how to list and download your archive data automatically.
 
 
-The following example describes the steps to follow to list the files of your archived data:
+The following example describes the steps to follow to list the files of your archive data:
 
 
 1. Before your start using the Wazuh Cloud API, you need an API key. To generate your API key, see the :ref:`Authentication <cloud_apis_auth>` section.
 
-2. Use the ``POST /storage/token`` endpoint of the :cloud-api-ref:`Wazuh Cloud API <tag/storage>` to get the AWS token and access the archived data of a specific environment. In this example, we generate an AWS token valid for 3600 seconds for environment `0123456789ab`.
+2. Use the ``POST /storage/token`` endpoint of the :cloud-api-ref:`Wazuh Cloud API <tag/storage>` to get the AWS token and access the archive data of a specific environment. In this example, we generate an AWS token valid for 3600 seconds for environment `0123456789ab`.
 
    .. code-block::
 
@@ -61,4 +61,4 @@ The following example describes the steps to follow to list the files of your ar
       
       $ aws --profile wazuh_cloud_storage --region us-east-1 s3 ls wazuh-cloud-cold-us-east-1/0123456789ab
 
-You now have access to your archived data.
+You now have access to your archive data.
