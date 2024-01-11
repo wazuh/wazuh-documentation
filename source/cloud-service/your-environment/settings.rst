@@ -22,7 +22,6 @@ This basic setting sets the maximum count of active Wazuh agents that the enviro
 
 If the maximum number of active agents is reached, the environment might start to malfunction, causing instability with agent connections. Although the system can temporarily handle exceeding the active agent limit, appropriate measures will be taken if the situation persists.
 
-
 .. _cloud_settings_indexed_data:
 
 Indexed data
