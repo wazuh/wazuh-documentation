@@ -77,7 +77,7 @@ Adjusting environment settings
 
 Managing your environment settings is crucial to meeting your evolving needs and optimizing the performance of your cloud environment. While some settings can be determined upfront, such as the number of active agents, indexed data retention, archived data, and support plan, it's important to note that these requirements may change over time.
 
-Additionally, advanced settings may be more challenging to determine in advance. While the interface provides recommendations based on our experience, your specific workload may differ. That's why we highly recommend deploying, monitoring, and adjusting the settings as needed to align with your evolving requirements.
+Advanced settings might be more challenging to determine in advance. While the interface provides recommendations based on our experience, your specific workload might differ. Hence, we recommend deploying, monitoring, and adjusting the settings as needed to align with your evolving requirements.
 
 To effectively monitor and adapt your environment, you have the option to modify your settings by opening a support ticket. Here's how the process works:
 
