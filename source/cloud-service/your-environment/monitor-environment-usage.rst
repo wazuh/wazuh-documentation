@@ -37,7 +37,7 @@ Exceeding the active agents limit might cause operational issues and decrease sy
 Data indexed metric
 -------------------
 
-The data indexed metric presents a histogram that visualizes the usage of indexed data over time. The x-axis represents time, while the y-axis indicates the amount of data in gigabyte used by your indexed data. Additionally, the metric displays the date of the oldest indexed alert.
+The ``data indexed`` metric presents a histogram showing the usage of indexed data over time. The x-axis represents time, while the y-axis indicates the volume of data in gigabytes consumed by your indexed data. Additionally, this metric displays the date of the oldest indexed alert.
 
 This metric allows you to monitor and evaluate if the :ref:`indexed data capacity and indexed data retention <cloud_settings_indexed_data>` settings are sufficient for your needs. The environment automatically rotates data when the used bytes exceed the indexed data capacity or when the date of the alerts surpasses the indexed data retention.
 
