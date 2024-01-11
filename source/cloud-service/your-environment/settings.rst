@@ -63,7 +63,7 @@ It represents the average and the maximum number of events per second (EPS) that
 
 If the ingestion rate is exceeding the peak EPS, events will start to queue. However, if the queue becomes full, the incoming events will be discarded, which may lead to potential event loss. The queuing mechanism is automatically managed by the cloud service, ensuring optimal resource utilization.
 
-The environment will be configured with the `limits eps option <https://documentation.wazuh.com/current/user-manual/reference/ossec-conf/global.html#limits>`_ using the following parameters:
+The environment is configured with the `limits eps option <https://documentation.wazuh.com/current/user-manual/reference/ossec-conf/global.html#limits>`_ using the following parameters:
 
 - timeframe = 1 seconds
 - maximum = Peak EPS / number of server nodes
