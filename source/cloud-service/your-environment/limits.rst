@@ -22,7 +22,7 @@ This limit governs the concurrent execution of dashboards, visualizations, and q
 API rate limits
 ^^^^^^^^^^^^^^^
 
-All our APIs have a rate limit in place to prevent abuse and ensure optimal performance and stability. These rate limits define the maximum number of requests that can be made per second to specific APIs. While it is extremely rare to reach these limits, they are in place to protect the system and maintain a smooth experience for all users.
+All our APIs incorporate a rate limit to prevent abuse and ensure optimal performance and stability. This limit sets the maximum allowable number of requests per second for specific APIs. Although reaching this limit is extremely rare, they serve as a safeguard to protect the system and maintain a smooth experience for all users.
 
 The following APIs have rate limits:
 
