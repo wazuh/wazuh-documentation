@@ -63,4 +63,3 @@ If you observe a consistent pattern of event drops over time, it's an indication
 Implementing these agent-level adjustments can complement your strategy, ensuring that your environment operates within the defined event processing rate. This helps reducing the risk of event loss while maintaining efficient event processing.
 
 
-
