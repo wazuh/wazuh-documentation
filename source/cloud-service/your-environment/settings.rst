@@ -83,7 +83,7 @@ To effectively monitor and adapt your environment, you have the option to modify
 
 -  **Upgrading a setting**: If you need to raise a setting, you will be charged a prorated amount based on the remaining time in your billing cycle. The change will be implemented immediately after the payment is made. Please note that your next billing cycle will reflect the increased cost of the enhancement.
 
-- Downgrading a setting: If you want to lower a setting, the change will take effect in the next billing cycle, resulting in a reduced cost.
+-  **Downgrading a setting**: If you want to lower a setting, the change will take effect in the next billing cycle, resulting in a reduced cost.
 
 Before any changes or payments are made, we will confirm the adjustments with you to ensure accuracy and alignment with your requirements.
 
