@@ -20,7 +20,7 @@ Active agents
 
 This basic setting sets the maximum count of active Wazuh agents that the environment can support. Please note that while registering an unlimited number of Wazuh agents is possible, the active agent count is limited by this setting.
 
-If the maximum number of active agents is reached, the environment may start to malfunction, causing instability with agent connections. While the system can tolerate temporarily exceeding the limit of active agents, appropriate measures will be taken if the situation persists.
+If the maximum number of active agents is reached, the environment might start to malfunction, causing instability with agent connections. Although the system can temporarily handle exceeding the active agent limit, appropriate measures will be taken if the situation persists.
 
 
 .. _cloud_settings_indexed_data:
