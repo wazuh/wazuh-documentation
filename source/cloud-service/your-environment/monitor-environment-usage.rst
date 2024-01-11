@@ -45,7 +45,7 @@ When the environment age is less than the indexed data retention setting, your o
 
 Your oldest indexed alert will never be dated beyond the indexed data retention setting because alerts are rotated in such cases.
 
-By monitoring this metric, you can ensure that your indexed data storage meets your requirements and take necessary actions, such as upgrading or downgrading the settings, to maintain optimal storage and retention of data.
+Monitoring this metric allows you to ensure that your indexed data storage aligns with your needs. You can take actions, such as upgrading or downgrading the settings, to maintain optimal storage and retention of data.
 
 Events dropped over time and Events processed vs dropped metrics
 ----------------------------------------------------------------
