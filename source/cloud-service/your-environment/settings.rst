@@ -27,7 +27,7 @@ If the maximum number of active agents is reached, the environment might start t
 Indexed data
 ^^^^^^^^^^^^
 
-The indexed data, previously known as hot storage, includes the data available on the Wazuh WUI, which corresponds to the information indexed by Wazuh. This information becomes searchable and analyzable as soon as Wazuh ingests and indexes the events sent by the agents.
+The indexed data was previously known as hot storage. It includes the data available on the Wazuh dashboard, which corresponds to the information indexed by Wazuh. This information becomes searchable and analyzable as soon as Wazuh ingests and indexes the events sent by the agents.
 
 Two settings define the behavior of the indexed data:
 
