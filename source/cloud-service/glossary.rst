@@ -16,9 +16,9 @@ Here is a list of terms related to Wazuh Cloud.
 
 - `Environment`_
 
-- `Archived data (formerly known as cold storage)`_
+- `Archived data`_
   
-- `Indexed data (formerly known as hot storage)`_
+- `Indexed data`_
 
 - `Tier`_
 

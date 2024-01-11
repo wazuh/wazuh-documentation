@@ -74,15 +74,9 @@ To achieve this configuration, follow these steps:
 
       .. code-block::
 
-<<<<<<< HEAD
          WAZUH_MANAGER_IP=<NGINX_IP> WAZUH_PROTOCOL="tcp" \
          WAZUH_PASSWORD="<PASSWORD>" \
-         yum install wazuh-agent
-=======
-         WAZUH_MANAGER_IP=nginx_ip WAZUH_PROTOCOL="tcp" \
-         WAZUH_PASSWORD="xxxx" \
          yum install wazuh-agent|WAZUH_AGENT_RPM_PKG_INSTALL|
->>>>>>> 4.7
          
       Replace <PASSWORD> with your Wazuh server enrollment password.
 
