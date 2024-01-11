@@ -59,7 +59,7 @@ Creating and setting a Wazuh admin user
 
 Follow these steps to create an internal user, create a new role mapping, and give administrator permissions to the user.
 
-#. Log into your :ref:`WUI <cloud_wui_access>` as administrator.
+#. Log into your :ref:`Wazuh dashboard <cloud_wui_access>` as administrator.
 
 #. Click the upper-left menu icon **☰** to open the options, select **Security**, and then **Internal users** to open the internal users' page.
 
