@@ -26,7 +26,7 @@ All our APIs incorporate a rate limit to prevent abuse and ensure optimal perfor
 
 The following APIs have rate limits:
 
-- Agent registration: This limit controls the maximum number of registration requests that can be processed per second, ensuring a seamless onboarding experience for agents connecting to the Wazuh Cloud environment.
+-  **Agent registration**: This limit controls the maximum rate of registration requests processed per second, ensuring a seamless onboarding process for agents connecting to the Wazuh Cloud environment.
 
 - Wazuh API: This limit specifies the maximum number of requests that can be made per second to the Wazuh API, ensuring the stability and availability of the API.
 
