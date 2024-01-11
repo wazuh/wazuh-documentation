@@ -30,7 +30,7 @@ Creating an internal user and mapping it to Wazuh
 
 Follow these steps to create an internal user and map it to its appropriate role.
 
-#. Log into your :ref:`WUI <cloud_wui_access>` as administrator.
+#. Log into your :ref:`Wazuh dashboard <cloud_wui_access>` as administrator.
 
 #. Click the upper-left menu icon **☰** to open the options, select **Security**, and then **Internal users** to open the internal users' page.
 
