@@ -56,7 +56,6 @@ The "Events Processed vs. Dropped" pie chart provides a visual comparison betwee
 
 If you observe a consistent pattern of event drops over time, it's an indication that your environment may need an adjustment to accommodate the higher event rate. Consider increasing the :ref:`average/peak EPS <cloud_settings_data_ingestion_rate>` setting to avoid ongoing event drops.
 
-Also, as an alternative, you can adjust your agent configuration:
 
 - Review agent configuration: Examine the configuration settings of your agents. You may find that some agents are sending an excessive number of events. Adjusting the configurations of these agents to send fewer events or implementing filters to send only critical events can help manage the event rate.
 
