@@ -13,7 +13,6 @@ To monitor the behavior of your environment and check if the configured values o
 Understanding environment settings
 ----------------------------------
 
-Below, we provide a detailed explanation of each setting.
 
 .. _cloud_settings_active_agents:
 
