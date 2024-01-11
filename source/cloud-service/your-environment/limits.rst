@@ -17,7 +17,7 @@ The following are the limits associated with specific functionalities and APIs i
 Dashboards, visualizations, and queries
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-This limit governs the number of dashboards, visualizations, and queries that can be executed concurrently, as well as their efficiency and impact on performance. While Wazuh Cloud ensures optimal performance and responsiveness, it is important to note that the quality and efficiency of queries, visualizations, and dashboards created by users also play a significant role. Users are responsible for creating well-optimized queries and visualizations to maximize the effectiveness and efficiency of their operations within the Wazuh interface.
+This limit governs the concurrent execution of dashboards, visualizations, and queries, affecting their efficiency and performance impact. While Wazuh Cloud ensures optimal performance and responsiveness, it's important to note that the quality and efficiency of user-created queries, visualizations, and dashboards also play a significant role. Users are responsible for creating well-optimized queries and visualizations to maximize the effectiveness and efficiency of their operations within the Wazuh interface.
 
 API rate limits
 ^^^^^^^^^^^^^^^
