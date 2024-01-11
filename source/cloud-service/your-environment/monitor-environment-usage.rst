@@ -23,7 +23,7 @@ To see metrics of your Wazuh Cloud environment, follow these steps:
 Agents metric
 -------------
 
-The agents metric provides information about the number of Wazuh agents in different states, including active, disconnected, never connected, and pending. It also displays the limit of active agents, which can be configured through the :ref:`active agents <cloud_settings_active_agents>` setting.
+The ``agents`` metric shows the number of Wazuh agents in the ``active``, ``disconnected``, ``never connected``, and ``pending`` states. It also displays the limit of active agents, which is configurable through the :ref:`active agents <cloud_settings_active_agents>` setting.
 
 
 It is crucial to note that exceeding the limit of active agents may lead to operational issues and a potential decrease in system stability. While the system can tolerate a temporary increase in active agents beyond the limit, we strongly recommend taking immediate action to either upgrade the :ref:`active agents <cloud_settings_active_agents>` setting to accommodate the actual number of active agents or reduce the number of active agents accordingly. This ensures the continued smooth operation and stability of your environment.
