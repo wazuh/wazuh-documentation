@@ -81,7 +81,7 @@ Advanced settings might be more challenging to determine in advance. While the i
 
 To effectively monitor and adapt your environment, you have the option to modify your settings by opening a support ticket. Here's how the process works:
 
-- Upgrading a setting: If you need to raise a setting, you will be charged a prorated amount based on the remaining time in your billing cycle. The change will be implemented immediately after the payment is made. Please note that your next billing cycle will reflect the increased cost of the enhancement.
+-  **Upgrading a setting**: If you need to raise a setting, you will be charged a prorated amount based on the remaining time in your billing cycle. The change will be implemented immediately after the payment is made. Please note that your next billing cycle will reflect the increased cost of the enhancement.
 
 - Downgrading a setting: If you want to lower a setting, the change will take effect in the next billing cycle, resulting in a reduced cost.
 
