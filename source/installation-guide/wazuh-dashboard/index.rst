@@ -12,7 +12,7 @@ With the Wazuh dashboard, users can visualize security events, detected vulnerab
 
 Check the requirements below and choose an installation method to start installing the Wazuh dashboard.
 
-- :doc:`Wazuh installation assistant <installation-assistant>`: Install this component by running an assistant that automates the installation and configuration process. 
+- :doc:`Assisted installation <installation-assistant>`: Install this component by running a script that automates the installation and configuration process. 
 
 - :doc:`Step-by-step installation <step-by-step>`: Install this component following detailed step-by-step instructions.
 
@@ -115,5 +115,5 @@ Other Chromium-based browsers might also work. Internet Explorer 11 is not suppo
     :hidden:
     :maxdepth: 1
 
-    Wazuh installation assistant <installation-assistant>
+    Assisted installation <installation-assistant>
     Step-by-step installation <step-by-step>

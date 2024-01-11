@@ -13,7 +13,7 @@ You can install the Wazuh indexer on a single host. Alternatively, you can insta
 
 Check the requirements below and choose an installation method to start installing the Wazuh indexer.
 
-- :doc:`Wazuh installation assistant <installation-assistant>`: Install this component by running an assistant that automates the installation and configuration process.
+- :doc:`Assisted installation <installation-assistant>`: Install this component by running a script that automates the installation and configuration process.
 
 - :doc:`Step-by-step installation <step-by-step>`: Install this component following detailed step-by-step instructions.
 
@@ -122,5 +122,5 @@ The Wazuh indexer can be installed as a single-node or as a multi-node cluster.
     :hidden:
     :maxdepth: 1
 
-    Wazuh installation assistant <installation-assistant>
+    Assisted installation <installation-assistant>
     Step-by-step installation <step-by-step>
