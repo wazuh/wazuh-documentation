@@ -72,7 +72,7 @@ When the selected indexed data capacity is reached, the oldest events will be au
 Can I index the archived data again?
 ------------------------------------
 
-It is possible to download the data from the archived data and reindex it into your local environments, but at this moment, it is not possible to reindex it in your cloud environment.
+It's possible to download the data from the archived data and re-index it into your local environments. However, it isn't possible to re-index it in your cloud environment.
 
 What if I need to change the size of my tier?
 ---------------------------------------------
