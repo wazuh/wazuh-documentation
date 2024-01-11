@@ -47,7 +47,7 @@ Your oldest indexed alert will never be dated beyond the indexed data retention 
 
 Monitoring this metric allows you to ensure that your indexed data storage aligns with your needs. You can take actions, such as upgrading or downgrading the settings, to maintain optimal storage and retention of data.
 
-Events dropped over time and Events processed vs dropped metrics
+*Events dropped over time* and *Events processed vs dropped* metrics
 ----------------------------------------------------------------
 
 The "Events Dropped Over Time" metric displays a histogram of events that have been lost or dropped over a specific period. These events are dropped because the rate of incoming events exceeds the limit set by the average/peak EPS setting, causing the event queues to become full and resulting in event loss.
