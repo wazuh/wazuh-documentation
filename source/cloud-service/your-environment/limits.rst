@@ -32,4 +32,4 @@ The following APIs have rate limits:
 
 -  **Indexer API**: This limit sets the maximum requests allowed per second to the Wazuh Indexer API, enabling efficient retrieval and manipulation of indexed data.
 
-- Access to the Archived data: This limit determines the maximum number of requests that can be processed per second for accessing archived data, ensuring efficient retrieval of archived data when needed.
+-  **Access to the Archived data**: This limit sets the maximum requests processed per second for accessing archived data, ensuring efficient retrieval when necessary.
