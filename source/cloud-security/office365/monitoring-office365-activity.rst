@@ -34,6 +34,8 @@ Office 365 API requirements
 
 For **Wazuh** to successfully connect to the **Office365 API**, an authentication process is required. To do this, we must provide the ``tenant_id``, ``client_id``, and ``client_secret`` of the application that we authorize in the organization.
 
+.. note:: For this to work, please make sure you have auditing enabled in your tenant. See `Turn auditing on or off <https://learn.microsoft.com/en-us/purview/audit-log-enable-disable?view=o365-worldwide>`_ for more information.
+
 #. Register your app
 
    To authenticate with the Microsoft identity platform endpoint, you need to register an app in your `Microsoft Azure portal app registrations <https://portal.azure.com/#blade/Microsoft_AAD_RegisteredApps/ApplicationsListBlade>`_  section. Once there click on **New registration**:
