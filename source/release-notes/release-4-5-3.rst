@@ -42,7 +42,7 @@ Agent
 ==============    ========================================================    =============
 CVE               Reference                                                   Description
 ==============    ========================================================    =============
-CVE-2023-42463    `#19069 <https://github.com/wazuh/wazuh/pull/19069>`__      Fixed a stack overflow hazard in ``wazuh-logcollector`` that could allow a local privilege escalation. Found by Keith Yeo.
+CVE-2023-42463    `#19069 <https://github.com/wazuh/wazuh/pull/19069>`__      Fixed a stack overflow hazard in ``wazuh-logcollector`` that could allow a local privilege escalation. Found by Keith Yeo (`@kyeojy <https://twitter.com/kyeojy>`__).
 ==============    ========================================================    =============
 
 Resolved issues
