@@ -6,7 +6,7 @@
 Settings
 ========
 
-Every cloud environment is configured based on specific settings that define its limitations, capabilities, and pricing. We offer six settings, comprising four basic and two advanced settings. The advanced settings are automatically calculated based from the basic settings but can be modified if needed.
+Every cloud environment is configured based on specific settings that define its limitations and pricing. We offer six settings, comprising four basic and two advanced settings. The advanced settings are automatically calculated based on the basic settings but can be modified if needed.
 
 To monitor the behavior of your environment and check if the configured values of the settings are being reached, see the :doc:`Monitor usage section </cloud-service/your-environment/monitor-environment-usage>`. section.
 
