@@ -31,10 +31,24 @@ RESTful API
 -  `#18493 <https://github.com/wazuh/wazuh/pull/18493>`__ Added support for nested queries in the ``q`` API parameter.
 -  `#18432 <https://github.com/wazuh/wazuh/pull/18432>`__ Updated ``force`` flag message in the ``agent_upgrade`` CLI.
 
+Security updates
+----------------
+
+This release fixes the following vulnerabilities:
+
+Agent
+^^^^^
+
+==============    ========================================================    =============
+CVE               Reference                                                   Description
+==============    ========================================================    =============
+CVE-2023-42463    `#19069 <https://github.com/wazuh/wazuh/pull/19069>`__      Fixed a stack overflow hazard in ``wazuh-logcollector`` that could allow a local privilege escalation. Found by Keith Yeo.
+==============    ========================================================    =============
+
 Resolved issues
 ---------------
 
-This release resolves known issues as the following: 
+This release resolves known issues as the following:
 
 Manager
 ^^^^^^^
@@ -55,7 +69,6 @@ Reference                                                   Description
 ========================================================    =============
 `#18773 <https://github.com/wazuh/wazuh/pull/18773>`__      Fixed a bug in the memory handle at the agent's data provider helper.
 `#18903 <https://github.com/wazuh/wazuh/pull/18903>`__      Fixed a data mismatch in the OS name between the global and agents' databases.
-`#19069 <https://github.com/wazuh/wazuh/pull/19069>`__      Fixed an array limit check in ``wazuh-logcollector``.
 `#19286 <https://github.com/wazuh/wazuh/pull/19286>`__      Fixed wrong Windows agent binaries metadata.
 `#19397 <https://github.com/wazuh/wazuh/pull/19397>`__      Fixed error during the Windows agent upgrade.
 ========================================================    =============
