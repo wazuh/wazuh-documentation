@@ -8,17 +8,17 @@
 Authentication and authorization
 ================================
 
-You can use the native support for managing and authenticating users, or integrate with external user management systems.
+You can use the native support for managing and authenticating users or integrate with external user management systems.
 
-.. note::
-   
-   You cannot log in to Wazuh WUI of your environment with your Wazuh Cloud account. To log in to Wazuh WUI, use the default credentials you downloaded from the Wazuh Cloud Console page or the credentials of any user you already created in Wazuh WUI.
+   .. note::
+      
+      You cannot log in to the Wazuh WUI of your environment with your Wazuh Cloud account credentials. To log in to Wazuh WUI, use the default credentials from the Wazuh Cloud Console page or the credentials of any user you already created in Wazuh WUI.
   
 
 Native support for users and roles
 ----------------------------------
 
-The Wazuh WUI allows you to add users, create roles, and map roles to users.
+The Wazuh WUI allows you to add users, create roles, and map roles to users. The following sections highlight more on this.
 
 - `Creating an internal user and mapping it to Wazuh`_
 - `Creating and setting a Wazuh admin user`_
@@ -30,19 +30,19 @@ Creating an internal user and mapping it to Wazuh
 
 Follow these steps to create an internal user and map it to its appropriate role.
 
-#. :ref:`Log into your WUI <cloud_wui_access>` as administrator.
+#. Log into your :ref:`Wazuh dashboard <cloud_wui_access>` as administrator.
 
 #. Click the upper-left menu icon **☰** to open the options, select **Security**, and then **Internal users** to open the internal users' page.
 
 #. Click **Create internal user**, complete the empty fields with the requested information, and click **Create** to complete the action.
 
-#. To map the user to the appropriate role, follow these steps:
+#. Follow these steps to map the user to the appropriate role:
    
-   #. Go to **Security**, select **Roles** to open the page, and click the name of the role selected to open the window.
+   #. Go to **Security**, select **Roles** to open the page, and click the role name selected to open the window.
    #. Select the **Mapped users** tab and click **Manage mapping**.
    #. Add the user you created in the previous steps and click **Map** to confirm the action.
 
-#. To map the user with Wazuh, follow these steps:
+#. Follow these steps to map the user with Wazuh:
    
    #. Go to the Wazuh WUI, click **Wazuh** to open the menu, select **Security**, and then **Roles mapping** to open the page.
    #. Click **Create Role mapping** and complete the empty fields with the following parameters:
@@ -59,13 +59,13 @@ Creating and setting a Wazuh admin user
 
 Follow these steps to create an internal user, create a new role mapping, and give administrator permissions to the user.
 
-#. :ref:`Log into your WUI <cloud_wui_access>` as administrator.
+#. Log into your :ref:`Wazuh dashboard <cloud_wui_access>` as administrator.
 
 #. Click the upper-left menu icon **☰** to open the options, select **Security**, and then **Internal users** to open the internal users' page.
 
 #. Click **Create internal user**, complete the empty fields with the requested information, and click **Create** to complete the action.
 
-#. To map the user to the appropriate role, follow these steps:
+#. Follow these steps to map the user to the appropriate role:
 
    #. Click the upper-left menu icon **☰** to open the options, select **Security**, and then **Roles** to open the roles page.
 
@@ -81,7 +81,7 @@ Follow these steps to create an internal user, create a new role mapping, and gi
 
    .. note:: Reserved roles are restricted for any permission customizations. You can create a custom role with the same permissions or duplicate a reserved role for further customization.   
 
-#. To map the user with Wazuh, follow these steps:
+#. Follow these steps to map the user with Wazuh:
    
    #. Go to the Wazuh WUI, click **Wazuh** to open the menu, select **Security**, and then **Roles mapping** to open the page.
    #. Click **Create Role mapping** and complete the empty fields with the following parameters:
@@ -99,13 +99,13 @@ Creating and setting a Wazuh read-only user
 
 Follow these steps to create an internal user, create a new role mapping, and give read-only permissions to the user.
 
-#. :ref:`Log into your WUI <cloud_wui_access>` as administrator.
+#. Log into your :ref:`WUI <cloud_wui_access>` as administrator.
 
 #. Click the upper-left menu icon **☰** to open the options, select **Security**, and then **Internal users** to open the internal users' page.
 
 #. Click **Create internal user**, complete the empty fields with the requested information, and click **Create** to complete the action.
 
-#. To map the user to the appropriate role, follow these steps:
+#. Follow these steps to map the user to the appropriate role:
 
    #. Click the upper-left menu icon **☰** to open the options, select **Security**, and then **Roles** to open the roles page.
 
@@ -125,7 +125,7 @@ Follow these steps to create an internal user, create a new role mapping, and gi
    
    #. Add the user you created in the previous steps and click **Map** to confirm the action.   
 
-#. To map the user with Wazuh, follow these steps:
+#. Follow these steps to map the user with Wazuh:
 
    #. Go to the Wazuh WUI, click **Wazuh** to open the menu, select **Security**, and then **Roles mapping** to open the page.
 
