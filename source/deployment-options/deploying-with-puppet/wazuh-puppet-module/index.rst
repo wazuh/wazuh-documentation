@@ -331,7 +331,6 @@ Here is an example of a manifest ``wazuh-agent.pp`` (please replace  ``MANAGER_I
 
    node "puppet-agent.com" {
      class { 'wazuh::repo':
-       stage => repo
      }
      class { "wazuh::agent":
        wazuh_register_endpoint => "<MANAGER_IP>",
