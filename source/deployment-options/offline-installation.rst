@@ -164,7 +164,7 @@ Installing the Wazuh indexer
 
     .. code-block:: console
 
-        # /usr/share/wazuh-indexer/bin/indexer-init.sh
+        # bash /usr/share/wazuh-indexer/bin/indexer-init.sh -i <WAZUH_INDEXER_IP_ADDRESS>
   
 #. Run the following command to check that the installation is successful. Note that this command uses localhost, set your Wazuh indexer address if necessary. 
 
