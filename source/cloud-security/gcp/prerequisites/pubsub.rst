@@ -17,11 +17,11 @@ In this section, we see how to create a topic, a subscription, and a sink to ful
 Create a topic
 --------------
 
-Every publishing application sends messages to topics. Wazuh will retrieve the logs from this topic. To create it, follow these steps:
+Every publishing application sends messages to topics. To create a topic, follow these steps. Wazuh will retrieve logs from this topic.
 
 #. Go to the **Pub/Sub** service.
 #. Click on **CREATE TOPIC**.
-#. Establish a **Topic ID** and click on **CREATE**.
+#. Set a **Topic ID** and click **CREATE**.
 
 .. note::
 
@@ -31,8 +31,8 @@ Every publishing application sends messages to topics. Wazuh will retrieve the l
     :align: center
     :width: 100%
 
-Create a subscription
----------------------
+Create a custom subscription
+----------------------------
 
 .. note::
 
