@@ -50,6 +50,7 @@ Options
 - `agents_disconnection_alert_time`_
 - `limits`_
 - `update_check`_
+- `forward_to`_
 
 alerts_log
 ^^^^^^^^^^
@@ -554,6 +555,24 @@ This setting toggles whether to query the external Wazuh Cyber Threat Intelligen
 | **Allowed values** | yes, no |
 +--------------------+---------+
 
+.. _reference_forward_to:
+
+forward_to
+^^^^^^^^^^
+
+Specifies the name of the socket where the output will be redirected. The socket must be defined previously.
+
++-------------------------+------------------------------------------------------------------------------------------------------------------------------------------+
+| **Default value**       | None                                                                                                                                     |
++-------------------------+------------------------------------------------------------------------------------------------------------------------------------------+
+| **Allowed values**      | Any defined socket under /var/ossec                                                                                                      |
++-------------------------+------------------------------------------------------------------------------------------------------------------------------------------+
+
+Example:
+
+.. code-block:: xml
+
+  <forward_to>fluentd</forward_to>
 
 Configuration example
 ---------------------
