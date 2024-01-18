@@ -63,36 +63,6 @@ removedUrls['x.y'] = [
 
 /* *** RELEASE 4.7 ****/
 
-/* Redirections from 4.6 to 4.7  */
-
-redirections.push(
-    {
-      'target': ['4.6=>4.7', '4.7=>4.6'],
-      '4.6': '/cloud-service/cold-storage/index.html',
-      '4.7': '/cloud-service/archive-data/index.html',
-    },
-    {
-      'target': ['4.6=>4.7', '4.7=>4.6'],
-      '4.6': '/cloud-service/cold-storage/access.html',
-      '4.7': '/cloud-service/archive-data/access.html',
-    },
-    {
-      'target': ['4.6=>4.7', '4.7=>4.6'],
-      '4.6': '/cloud-service/cold-storage/configuration.html',
-      '4.7': '/cloud-service/archive-data/configuration.html',
-    },
-    {
-      'target': ['4.6=>4.7', '4.7=>4.6'],
-      '4.6': '/cloud-service/cold-storage/filename-format.html',
-      '4.7': '/cloud-service/archive-data/filename-format.html',
-    },
-    {
-      'target': ['4.6=>4.7', '4.7=>4.6'],
-      '4.6': '/cloud-service/getting-started/register-agents.html',
-      '4.7': '/cloud-service/getting-started/enroll-agents.html',
-    },
-);
-
 /* Pages added in 4.7 */
 
 newUrls['4.7'] = [
