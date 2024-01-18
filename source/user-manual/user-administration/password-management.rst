@@ -14,7 +14,7 @@ Learn how to use the Wazuh passwords tool to manage your passwords. This tool al
 
 Among the Wazuh indexer users, it is worth mentioning the following:
 
-- *admin*: is the default administrator user. It's used to log in to the web interface and for communications between Filebeat and the Wazuh indexer. If you change the *admin* password, you must update it in Filebeat and Wazuh server.
+- *admin*: is the default administrator user. It's used to log in to the web interface and for communications between Filebeat and the Wazuh indexer. If you change the *admin* password, you must update it in Filebeat and the Wazuh server.
 
 - *kibanaserver*: is used for communications between the Wazuh dashboard and the Wazuh indexer. If you change the *kibanaserver* password, you must update it in the Wazuh dashboard.
 
@@ -213,14 +213,14 @@ Follow the instructions below to change the passwords for all the Wazuh indexer 
       INFO: The password for Wazuh API user wazuh is ivLOfmj7.jL6*7Ev?UJoFjrkGy9t6Je.
       INFO: The password for Wazuh API user wazuh-wui is fL+f?sFRPEv5pYRE559rqy9b6G4Z5pVi
 
-#. On `all your Wazuh server nodes`, run the following command to update the `admin` password in the Filebeat keystore and in the ossec.conf file for Wazuh server. Replace ``<admin-password>`` with the random password generated in the first step.
+#. On `all your Wazuh server nodes`, run the following command to update the `admin` password in the Filebeat keystore and in the ``ossec.conf`` file for the Wazuh server. Replace ``<admin-password>`` with the random password generated in the first step.
 
    .. code-block:: console
 
       # echo <admin-password> | filebeat keystore add password --stdin --force
       # sed -i 's/<password>.*<\/password>/<password><admin-password><\/password>/g' /var/ossec/etc/ossec.conf
 
-#. Restart Filebeat and Wazuh server to apply the change.
+#. Restart Filebeat and the Wazuh server to apply the change.
 
    .. include:: /_templates/common/restart_filebeat.rst
    .. include:: /_templates/common/restart_manager.rst
