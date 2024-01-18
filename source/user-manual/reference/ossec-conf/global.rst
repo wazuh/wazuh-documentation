@@ -480,8 +480,10 @@ Example:
 
   <agents_disconnection_alert_time>1h</agents_disconnection_alert_time>
 
+.. _reference_limits:
+
 limits
-------
+^^^^^^
 
 This block configures the limits section.
 
@@ -494,7 +496,7 @@ This block configures the limits section.
 +----------------------------+
 
 limits\\eps
-^^^^^^^^^^^
+"""""""""""
 
 This block configures the events per second limitation functionality.
 
@@ -521,7 +523,7 @@ Events per second limits example block:
     </limits>
 
 limits\\eps\\maximum
-^^^^^^^^^^^^^^^^^^^^
+""""""""""""""""""""
 
 Maximum number of events per second allowed to be processed by decoders.
 
@@ -532,7 +534,7 @@ Maximum number of events per second allowed to be processed by decoders.
 +--------------------+-----------------------------------------------------------------+
 
 limits\\eps\\timeframe
-^^^^^^^^^^^^^^^^^^^^^^
+""""""""""""""""""""""
 
 A positive number expressed in seconds that indicates the time period where the events per second processed are increased and restored.
 
