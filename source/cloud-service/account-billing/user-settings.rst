@@ -8,12 +8,12 @@
 Edit user settings
 ===================
 
-You can edit your account setting preferences such as email address and password from the Wazuh Cloud Console. You can also enable multi-factor authentication to increase security and see login method alternatives.
+You can edit your account preferences, such as email address and password from the Wazuh Cloud Console. You can also enable multi-factor authentication to increase security and see login method alternatives.
 
 Configure your user profile
 ---------------------------
 
-You can configure your name, last name, company name, country, phone number, and website anytime. Make sure to have the fields *Company*, and *Country* filled in as this information is required to create an environment. 
+You can configure your name, last name, company name, country, phone number, and website anytime.
 
 1. Log in to the `Wazuh Cloud Console <https://console.cloud.wazuh.com/>`_ and click the upper-right user icon to open the menu.
 2. Go to **User settings**.
@@ -46,7 +46,7 @@ If you know your current password:
 
 If you don’t know your current password:
 
-1. On the log in page of the Wazuh Cloud Console, click **Forgot my password**.
+1. Click on **Forgot my password** on the login page of the Wazuh Cloud Console.
 2. Enter the primary email address for your account and click **Reset password**.
 
   An email is sent to your address with a link to reset the password.

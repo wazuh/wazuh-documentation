@@ -3,6 +3,18 @@
 # Important: the redirect is relative to the old path
 
 redirectSameRelease = {
+  '4.7': {
+    '/cloud-service/cold-storage/index.html':
+      '/cloud-service/archive-data/index.html',
+    '/cloud-service/cold-storage/access.html':
+      '/cloud-service/archive-data/access.html',
+    '/cloud-service/cold-storage/configuration.html':
+      '/cloud-service/archive-data/configuration.html',
+    '/cloud-service/cold-storage/filename-format.html':
+      '/cloud-service/archive-data/filename-format.html',
+    '/cloud-service/getting-started/register-agents.html':
+      '/cloud-service/getting-started/enroll-agents.html',
+  },
   '4.6': {
     '/cloud-security/azure/activity-services/active-directory/index.html':
       '/cloud-security/azure/activity-services/entra/index.html',
