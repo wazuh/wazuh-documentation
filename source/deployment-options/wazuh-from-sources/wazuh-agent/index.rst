@@ -407,7 +407,7 @@ The Wazuh agent is a single and lightweight monitoring software. It is a multi-p
 
     .. group-tab:: AIX
 
-        AIX 6.1 TL4 or greater is the supported version for the following installation procedure. 
+        AIX 6.1 TL9 or greater is the supported version for the following installation procedure. 
 
         .. note::
 
@@ -468,7 +468,7 @@ The Wazuh agent is a single and lightweight monitoring software. It is a multi-p
                 # cd src
                 # gmake clean-deps
                 # gmake clean
-                # gmake deps TARGET=agent RESOURCES_URL=http://packages.wazuh.com/deps/15
+                # gmake deps TARGET=agent RESOURCES_URL=http://packages.wazuh.com/deps/27
                 # gmake TARGET=agent USE_SELINUX=no PREFIX=/var/ossec
 
         #.  Run the ``install.sh`` script. This will run a wizard that will guide you through the installation process using the Wazuh sources:
@@ -612,7 +612,7 @@ The Wazuh agent is a single and lightweight monitoring software. It is a multi-p
             .. code-block:: console
 
                 # cd wazuh-|WAZUH_CURRENT_FROM_SOURCES|
-                # /usr/local/bin/gmake -C src deps RESOURCES_URL=http://packages.wazuh.com/deps/14 TARGET=agent
+                # /usr/local/bin/gmake -C src deps RESOURCES_URL=http://packages.wazuh.com/deps/27 TARGET=agent
                 # /usr/local/bin/gmake -C src TARGET=agent USE_SELINUX=no
 
         #.  Run the ``install.sh`` script. This will run a wizard that will guide you through the installation process using the Wazuh sources:
@@ -799,7 +799,7 @@ The Wazuh agent is a single and lightweight monitoring software. It is a multi-p
                             # export LD_LIBRARY_PATH=/usr/local/gcc-5.5.0/lib
                             # cd wazuh/src
                             # gmake clean
-                            # gmake deps TARGET=agent RESOURCES_URL=http://packages.wazuh.com/deps/15
+                            # gmake deps TARGET=agent RESOURCES_URL=http://packages.wazuh.com/deps/27
                             # gmake -j 4 TARGET=agent PREFIX=/var/ossec USE_SELINUX=no
                             USE_BIG_ENDIAN=yes
                             # cd ..
