@@ -11,13 +11,13 @@ Install the Wazuh server as a single-node or multi-node cluster using the assist
 Wazuh server cluster installation
 ---------------------------------
 
-#. Download the Wazuh installation script.
+#. Download the Wazuh installation assistant.
 
    .. code-block:: console
    
        # curl -sO https://packages.wazuh.com/|WAZUH_CURRENT_MINOR|/wazuh-install.sh
 
-#. Run the Wazuh installation script with the option ``--wazuh-server`` followed by the node name to install the Wazuh server. The node name must be the same one used in ``config.yml`` for the initial configuration, for example, ``wazuh-1``.
+#. Run the Wazuh installation assistant with the option ``--wazuh-server`` followed by the node name to install the Wazuh server. The node name must be the same one used in ``config.yml`` for the initial configuration, for example, ``wazuh-1``.
  
    .. note:: Make sure that a copy of the ``wazuh-install-files.tar``, created during the initial configuration step, is placed in your working directory.
 

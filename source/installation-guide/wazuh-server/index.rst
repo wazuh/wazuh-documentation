@@ -12,7 +12,7 @@ You can install the Wazuh server on a single host. Alternatively, you can instal
 
 Check the requirements below and choose an installation method to start installing the Wazuh server.
 
-- :doc:`Assisted installation <installation-assistant>`: Install this component by running a script that automates the installation and configuration process.
+- :doc:`Assisted installation <installation-assistant>`: Install this component by running an assistant that automates the installation and configuration process.
  
 - :doc:`Step-by-step installation <step-by-step>`: Install this component following detailed step-by-step instructions.
 

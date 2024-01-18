@@ -26,7 +26,7 @@ The installation process is divided into three stages.
 
 Indicate your deployment configuration, create the SSL certificates to encrypt communications between the Wazuh components, and generate random passwords to secure your installation. 
 
-#. Download the Wazuh installation script and the configuration file. 
+#. Download the Wazuh installation assistant and the configuration file. 
 
       .. code-block:: console
 
@@ -67,7 +67,7 @@ Indicate your deployment configuration, create the SSL certificates to encrypt c
               ip: "<dashboard-node-ip>"
 
 
-#. Run the Wazuh installation script with the option ``--generate-config-files`` to generate the  Wazuh cluster key, certificates, and passwords necessary for installation. You can find these files in ``./wazuh-install-files.tar``.
+#. Run the Wazuh installation assistant with the option ``--generate-config-files`` to generate the  Wazuh cluster key, certificates, and passwords necessary for installation. You can find these files in ``./wazuh-install-files.tar``.
 
       .. code-block:: console
 
@@ -83,14 +83,14 @@ Indicate your deployment configuration, create the SSL certificates to encrypt c
 Install and configure the Wazuh indexer nodes. 
 
 
-#. Download the Wazuh installation script.
+#. Download the Wazuh installation assistant.
 
       .. code-block:: console
 
         # curl -sO https://packages.wazuh.com/|WAZUH_CURRENT_MINOR|/wazuh-install.sh
 
 
-#. Run the Wazuh installation script with the option ``--wazuh-indexer`` and the node name to install and configure the Wazuh indexer. The node name must be the same one used in ``config.yml`` for the initial configuration, for example, ``node-1``.
+#. Run the Wazuh installation assistant with the option ``--wazuh-indexer`` and the node name to install and configure the Wazuh indexer. The node name must be the same one used in ``config.yml`` for the initial configuration, for example, ``node-1``.
       
       .. note:: Make sure that a copy of ``wazuh-install-files.tar``, created during the initial configuration step, is placed in your working directory.
 
@@ -107,7 +107,7 @@ Repeat this stage of the installation process for every Wazuh indexer node in yo
 
 The final stage of installing the Wazuh indexer single-node or multi-node cluster consists of running the security admin script. 
 
-#. Run the Wazuh installation script with option ``--start-cluster`` on any Wazuh indexer node to load the new certificates information and start the cluster. 
+#. Run the Wazuh installation assistant with option ``--start-cluster`` on any Wazuh indexer node to load the new certificates information and start the cluster. 
 
    .. code-block:: console
  

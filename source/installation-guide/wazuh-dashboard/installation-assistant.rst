@@ -11,13 +11,13 @@ Install and configure the Wazuh dashboard using the assisted installation method
 Wazuh dashboard installation
 -----------------------------
 
-#. Download the Wazuh installation script. You can skip this step if you have already installed Wazuh indexer on the same server.
+#. Download the Wazuh installation assistant. You can skip this step if you have already installed Wazuh indexer on the same server.
 
    .. code-block:: console
 
       # curl -sO https://packages.wazuh.com/|WAZUH_CURRENT_MINOR|/wazuh-install.sh
 
-#. Run the Wazuh installation script with the option ``--wazuh-dashboard`` and the node name to install and configure the Wazuh dashboard. The node name must be the same one used in ``config.yml`` for the initial configuration, for example, ``dashboard``.
+#. Run the Wazuh installation assistant with the option ``--wazuh-dashboard`` and the node name to install and configure the Wazuh dashboard. The node name must be the same one used in ``config.yml`` for the initial configuration, for example, ``dashboard``.
    
    .. note::
       
@@ -41,7 +41,7 @@ Wazuh dashboard installation
 
       INFO: Installation finished.
 
-   You now have installed and configured Wazuh. Find all passwords that the Wazuh installation script generated in the ``wazuh-passwords.txt`` file inside the ``wazuh-install-files.tar`` archive. To print them, run the following command:
+   You now have installed and configured Wazuh. Find all passwords that the Wazuh installation assistant generated in the ``wazuh-passwords.txt`` file inside the ``wazuh-install-files.tar`` archive. To print them, run the following command:
    
    .. code-block:: console
    
