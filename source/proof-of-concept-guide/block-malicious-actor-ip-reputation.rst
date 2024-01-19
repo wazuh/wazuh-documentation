@@ -89,11 +89,11 @@ Perform the following steps to install and configure an Apache web server.
 
 #. Unzip the contents of the Apache web server zip file and copy the extracted ``Apache24`` folder to the ``C:`` directory.
 
-#. Navigate to the ``C:\Apache24\bin`` folder and run the following command in a PowerShell terminal with administrator privileges:
+#. Navigate to the ``C:\Apache24\bin\`` folder and run the following command in a PowerShell terminal with administrator privileges:
 
    .. code-block:: powershell
 
-      > C:\Apache24\bin>httpd.exe
+      > .\httpd.exe
 
    The first time you run the Apache binary a Windows Defender Firewall pops up.
 
