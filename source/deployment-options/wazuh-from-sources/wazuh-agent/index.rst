@@ -910,7 +910,7 @@ The Wazuh agent is a single and lightweight monitoring software. It is a multi-p
 
                         .. code-block:: console
 
-                            # pkgutil -y -i git gmake cmake gcc5core gcc5g++
+                            # /opt/csw/bin/pkgutil -y -i git gmake cmake gcc5core gcc5g++
 
                     #.  Install a gcc version to include all files needed in the next step:
 
