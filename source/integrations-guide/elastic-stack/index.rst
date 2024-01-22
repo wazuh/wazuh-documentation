@@ -217,7 +217,7 @@ We use the `Logstash keystore <https://www.elastic.co/guide/en/logstash/current/
          
          For testing purposes, you can avoid SSL verification by replacing ``cacert => "</PATH/TO/LOCAL/ELASTICSEARCH>/root-ca.pem"`` with ``ssl_certificate_verification => false``.
 
-         If you are using composable index templates and the _index_template API, set the optional parameter `legacy_template => false <https://opensearch.org/docs/latest/tools/logstash/ship-to-opensearch/#optional-parameters>`__.
+         If you aren't using composable index templates and the _index_template API, remove the `legacy_template => false <https://opensearch.org/docs/latest/tools/logstash/ship-to-opensearch/#optional-parameters>`__ parameter.
 
 Running Logstash
 ^^^^^^^^^^^^^^^^

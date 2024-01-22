@@ -201,6 +201,7 @@ We use the  `Logstash keystore <https://www.elastic.co/guide/en/logstash/current
                template => "/etc/logstash/templates/wazuh.json"
                template_name => "wazuh"
                template_overwrite => true
+               legacy_template => false
              }
          }
 
@@ -215,7 +216,7 @@ We use the  `Logstash keystore <https://www.elastic.co/guide/en/logstash/current
          
          For testing purposes, you can avoid SSL verification by replacing ``cacert => "</PATH/TO/LOCAL/OPENSEARCH/CERTIFICATE>/root-ca.pem"`` with ``ssl_certificate_verification => false``.
 
-         If you are using composable index templates and the _index_template API, set the optional parameter `legacy_template => false <https://opensearch.org/docs/latest/tools/logstash/ship-to-opensearch/#optional-parameters>`__.
+         If you aren't using composable index templates and the _index_template API, remove the `legacy_template => false <https://opensearch.org/docs/latest/tools/logstash/ship-to-opensearch/#optional-parameters>`__ parameter.
 
 Running Logstash
 ^^^^^^^^^^^^^^^^
@@ -404,6 +405,7 @@ We use the `Logstash keystore <https://www.elastic.co/guide/en/logstash/current/
                template => "/etc/logstash/templates/wazuh.json"
                template_name => "wazuh"
                template_overwrite => true
+               legacy_template => false
              }
          }
 
@@ -416,7 +418,7 @@ We use the `Logstash keystore <https://www.elastic.co/guide/en/logstash/current/
          
          For testing purposes, you can avoid SSL verification by replacing ``cacert => "</PATH/TO/LOCAL/OPENSEARCH/CERTIFICATE>/root-ca.pem"`` with ``ssl_certificate_verification => false``.
 
-         If you are using composable index templates and the _index_template API, set the optional parameter `legacy_template => false <https://opensearch.org/docs/latest/tools/logstash/ship-to-opensearch/#optional-parameters>`__.
+         If you aren't using composable index templates and the _index_template API, remove the `legacy_template => false <https://opensearch.org/docs/latest/tools/logstash/ship-to-opensearch/#optional-parameters>`__ parameter.
 
 #. By default the ``/var/ossec/logs/alerts/alerts.json`` file is owned by the ``wazuh`` user with restrictive permissions. You must add the ``logstash`` user to the ``wazuh`` group so it can read the file when running Logstash as a service:
 
