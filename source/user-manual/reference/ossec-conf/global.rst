@@ -562,19 +562,25 @@ This setting toggles whether to query the external Wazuh Cyber Threat Intelligen
 forward_to
 ^^^^^^^^^^
 
-Specifies the name of the socket where the output will be redirected. The socket must be defined previously.
+Specifies the :ref:`name of the socket <reference_ossec_socket_name>` where the output will be redirected. The socket must be defined previously. 
 
 +-------------------------+------------------------------------------------------------------------------------------------------------------------------------------+
 | **Default value**       | None                                                                                                                                     |
 +-------------------------+------------------------------------------------------------------------------------------------------------------------------------------+
-| **Allowed values**      | Any defined socket under /var/ossec                                                                                                      |
+| **Allowed values**      | Any defined socket under ``/var/ossec``                                                                                                  |
 +-------------------------+------------------------------------------------------------------------------------------------------------------------------------------+
 
 Example:
 
 .. code-block:: xml
 
-  <forward_to>fluentd</forward_to>
+  <socket>  
+    <name>custom_socket</name>  
+    <location>/var/ossec/custom.sock</location>  
+    <mode>tcp</mode>  
+  </socket>  
+
+  <forward_to>custom_socket</forward_to>  
 
 Configuration example
 ---------------------
