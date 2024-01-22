@@ -10,6 +10,7 @@ All notable changes to this project will be documented in this file.
 - Added Wazuh v4.8.0 release notes. ([#6550](https://github.com/wazuh/wazuh-documentation/pull/6550))
 - Added the ``update_check`` configuration option. ([#6673](https://github.com/wazuh/wazuh-documentation/pull/6673))
 - Added the Filebeat deployment into Wazuh manager worker nodes for distributed deployments with Puppet. ([#6872](https://github.com/wazuh/wazuh-documentation/pull/6872))
+- Add configuration to logstash in opensearch integration guide. ([#6981](https://github.com/wazuh/wazuh-documentation/pull/6981))
 
 ### Changed
 
