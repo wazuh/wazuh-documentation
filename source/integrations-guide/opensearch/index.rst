@@ -201,6 +201,7 @@ We use the  `Logstash keystore <https://www.elastic.co/guide/en/logstash/current
                template => "/etc/logstash/templates/wazuh.json"
                template_name => "wazuh"
                template_overwrite => true
+               legacy_template => false
              }
          }
 
@@ -404,6 +405,7 @@ We use the `Logstash keystore <https://www.elastic.co/guide/en/logstash/current/
                template => "/etc/logstash/templates/wazuh.json"
                template_name => "wazuh"
                template_overwrite => true
+               legacy_template => false
              }
          }
 
