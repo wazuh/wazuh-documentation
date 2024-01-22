@@ -79,6 +79,7 @@ newUrls['4.7'] = [
   '/cloud-service/getting-started/enroll-agents.html',
   '/cloud-service/your-environment/limits.html',
   '/cloud-service/your-environment/settings.html',
+  '/user-manual/capabilities/malware-detection/osquery.html',
 ];
 
 /* Pages no longer available in 4.7 */
@@ -90,6 +91,7 @@ removedUrls['4.7'] = [
   '/cloud-service/cold-storage/configuration.html',
   '/cloud-service/cold-storage/filename-format.html',
   '/cloud-service/getting-started/register-agents.html',
+  '/user-manual/capabilities/osquery.html',
 ];
 
 /* *** RELEASE 4.6 ****/
