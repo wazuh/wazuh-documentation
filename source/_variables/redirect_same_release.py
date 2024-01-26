@@ -14,6 +14,8 @@ redirectSameRelease = {
       '/cloud-service/archive-data/filename-format.html',
     '/cloud-service/getting-started/register-agents.html':
       '/cloud-service/getting-started/enroll-agents.html',
+    '/user-manual/capabilities/osquery.html':
+      '/user-manual/capabilities/malware-detection/osquery.html',
   },
   '4.6': {
     '/cloud-security/azure/activity-services/active-directory/index.html':
