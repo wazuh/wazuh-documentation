@@ -219,7 +219,7 @@ More information about the different authentication methods can be found in the 
 Visualizing alerts in Wazuh dashboard 
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-Once you set the configuration and restart the manager, you can visualize the Amazon Security Lake alerts in the Wazuh dashboard. To do this, go to the **Security events** module. Apply the filter ``rule.groups: amazon_security_lake`` for an easier visualization.
+Once you set the configuration and restart the manager, you can visualize the Amazon Security Lake alerts in the Wazuh dashboard. To do this, go to the **Threat Hunting** module. Apply the filter ``rule.groups: amazon_security_lake`` for an easier visualization.
 
     .. thumbnail:: /images/aws/security-lake-1.png
       :align: center
