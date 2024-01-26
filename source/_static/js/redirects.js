@@ -68,6 +68,7 @@ removedUrls['x.y'] = [
 
 newUrls['4.8'] = [
   '/release-notes/release-4-8-0.html',
+  '/release-notes/release-4-8-1.html',
 ];
 
 /* Pages no longer available in 4.8 */
