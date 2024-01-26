@@ -101,6 +101,7 @@ removedUrls['4.9'] = [
 
 newUrls['4.8'] = [
   '/release-notes/release-4-8-0.html',
+  '/release-notes/release-4-8-1.html',
   '/release-notes/release-4-8-2.html',
 ];
 
@@ -143,6 +144,26 @@ newUrls['4.7'] = [
   '/release-notes/release-4-7-2.html',
   '/cloud-security/azure/posture-management.html',
   '/cloud-security/gcp/posture-management.html',
+  '/cloud-service/archive-data/index.html',
+  '/cloud-service/archive-data/access.html',
+  '/cloud-service/archive-data/configuration.html',
+  '/cloud-service/archive-data/filename-format.html',
+  '/cloud-service/getting-started/enroll-agents.html',
+  '/cloud-service/your-environment/limits.html',
+  '/cloud-service/your-environment/settings.html',
+  '/user-manual/capabilities/malware-detection/osquery.html',
+];
+
+/* Pages no longer available in 4.7 */
+
+
+removedUrls['4.7'] = [
+  '/cloud-service/cold-storage/index.html',
+  '/cloud-service/cold-storage/access.html',
+  '/cloud-service/cold-storage/configuration.html',
+  '/cloud-service/cold-storage/filename-format.html',
+  '/cloud-service/getting-started/register-agents.html',
+  '/user-manual/capabilities/osquery.html',
 ];
 
 /* *** RELEASE 4.6 ****/

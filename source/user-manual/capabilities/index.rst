@@ -33,5 +33,4 @@ In this section you will find:
    system-inventory/index
    system-calls-monitoring/index
    agentless-monitoring/index        
-   osquery
    policy-monitoring/index
