@@ -17,14 +17,26 @@ In this section, we see how to create a topic, a subscription, and a sink to ful
 Create a topic
 --------------
 
-Every publishing application sends messages to topics. Wazuh will retrieve the logs from this topic.
+Every publishing application sends messages to topics. To create a topic, follow these steps. Wazuh will retrieve logs from this topic.
+
+#. Go to the **Pub/Sub** service.
+#. Click on **CREATE TOPIC**.
+#. Set a **Topic ID** and click **CREATE**.
+
+.. note::
+
+    Leave the **Add a default subscription** box checked to create a default subscription associated with this topic. To create a customized one, uncheck it and go to the next section.
 
 .. thumbnail:: /images/cloud-security/gcp/gcp-topic.png
     :align: center
     :width: 100%
 
-Create a subscription
----------------------
+Create a custom subscription
+----------------------------
+
+.. note::
+
+    If you selected to create a default subscription in the step above, you can skip this section.
 
 Follow the steps below to fill in the **Create subscription** form:
 

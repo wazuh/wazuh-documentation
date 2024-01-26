@@ -93,11 +93,11 @@ Installing the Wazuh indexer
 
 #. For multi-node clusters, repeat the previous steps on every Wazuh indexer node. 
 
-#. When all Wazuh indexer nodes are running, run the Wazuh indexer ``indexer-security-init.sh`` script on `any Wazuh indexer node` to load the new certificates information and start the cluster. 
+#. When all Wazuh indexer nodes are running, run the Wazuh indexer ``indexer-init.sh`` script on `any Wazuh indexer node` to load the new certificates information and start the cluster. 
 
     .. code-block:: console
 
-        # /usr/share/wazuh-indexer/bin/indexer-security-init.sh
+        # bash /usr/share/wazuh-indexer/bin/indexer-init.sh -i <WAZUH_INDEXER_IP_ADDRESS>
   
 #. Run the following command to check that the installation is successful. Note that this command uses localhost, set your Wazuh indexer address if necessary. 
 
@@ -188,21 +188,6 @@ Filebeat must be installed and configured on the same server as the Wazuh manage
         cp ./wazuh-offline/wazuh-files/wazuh-template.json /etc/filebeat/ &&\
         chmod go+r /etc/filebeat/wazuh-template.json
 
-#.  Edit ``/etc/filebeat/wazuh-template.json`` and change to ``"1"`` the value for ``"index.number_of_shards"`` for  a single-node installation. This value can be changed based on the user requirement when performing a distributed installation.
-
-    .. code-block:: none
-        :emphasize-lines: 5
-
-        {
-          ...
-          "settings": {
-            ...
-            "index.number_of_shards": "1",
-            ...
-          },
-          ...
-        }      
-
 #. Edit the ``/etc/filebeat/filebeat.yml`` configuration file and replace the following value:
 
    .. include:: /_templates/installations/filebeat/opensearch/configure_filebeat.rst
@@ -272,27 +257,6 @@ Filebeat must be installed and configured on the same server as the Wazuh manage
             dial up... OK
           talk to server... OK
           version: 7.10.2
-
-    To check the number of shards that have been configured, you can run the following command. Note that this command uses localhost, set your Wazuh indexer address if necessary. 
-    
-    .. code-block:: console
-
-        # curl -k -u admin:admin "https://localhost:9200/_template/wazuh?pretty&filter_path=wazuh.settings.index.number_of_shards"
-
-    Expand the output to see an example response.
-    
-    .. code-block:: none
-        :class: output collapsed
-
-        {
-          "wazuh" : {
-            "settings" : {
-              "index" : {
-                "number_of_shards" : "1"
-              }
-            }
-          }
-        }
 
 
 Your Wazuh server node is now successfully installed. Repeat the steps of this installation process stage for every Wazuh server node in your cluster, expand the **Wazuh cluster configuration for multi-node deployment** section below, and carry on then with configuring the Wazuh cluster. If you want a Wazuh server single-node cluster, everything is set and you can proceed directly with the Wazuh dashboard installation.
