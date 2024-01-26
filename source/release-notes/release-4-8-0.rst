@@ -80,10 +80,9 @@ Wazuh dashboard
 ^^^^^^^^^^^^^^^
 
 - `#5791 <https://github.com/wazuh/wazuh-dashboard-plugins/pull/5791>`__ Added remember server address check.
-- `#6093 <https://github.com/wazuh/wazuh-dashboard-plugins/pull/6093>`__ Added a notification about new Wazuh updates and a button to check their availability. `#6256 <https://github.com/wazuh/wazuh-dashboard-plugins/pull/6256>`__
+- `#6093 <https://github.com/wazuh/wazuh-dashboard-plugins/pull/6093>`__ Added a notification about new Wazuh updates and a button to check their availability. `#6256 <https://github.com/wazuh/wazuh-dashboard-plugins/pull/6256>`__ `#6328 <https://github.com/wazuh/wazuh-dashboard-plugins/pull/6328>`__
 - `#6083 <https://github.com/wazuh/wazuh-dashboard-plugins/pull/6083>`__ Added the ``ssl_agent_ca`` configuration to the **SSL Settings** form.
-- `#5896 <https://github.com/wazuh/wazuh-dashboard-plugins/pull/5896>`__ Added global vulnerability dashboards.
-- `#6179 <https://github.com/wazuh/wazuh-dashboard-plugins/pull/6179>`__ Added global vulnerability dashboards. `#6173 <https://github.com/wazuh/wazuh-dashboard-plugins/pull/6173>`__ `#6147 <https://github.com/wazuh/wazuh-dashboard-plugins/pull/6147>`__
+- `#5896 <https://github.com/wazuh/wazuh-dashboard-plugins/pull/5896>`__ Added global vulnerability dashboards. `#6179 <https://github.com/wazuh/wazuh-dashboard-plugins/pull/6179>`__ `#6173 <https://github.com/wazuh/wazuh-dashboard-plugins/pull/6173>`__ `#6147 <https://github.com/wazuh/wazuh-dashboard-plugins/pull/6147>`__ `#6231 <https://github.com/wazuh/wazuh-dashboard-plugins/pull/6231>`__ `#6246 <https://github.com/wazuh/wazuh-dashboard-plugins/pull/6246>`__ `#6321 <https://github.com/wazuh/wazuh-dashboard-plugins/pull/6321>`__ `#6338 <https://github.com/wazuh/wazuh-dashboard-plugins/pull/6338>`__ `#6356 <https://github.com/wazuh/wazuh-dashboard-plugins/pull/6356>`__
 - `#5840 <https://github.com/wazuh/wazuh-dashboard-plugins/pull/5840>`__ Added an agent selector to the IT Hygiene module.
 - `#5840 <https://github.com/wazuh/wazuh-dashboard-plugins/pull/5840>`__ Moved the Wazuh menu into the side menu. `#6226 <https://github.com/wazuh/wazuh-dashboard-plugins/pull/6226>`__
 - `#5840 <https://github.com/wazuh/wazuh-dashboard-plugins/pull/5840>`__ Removed the ``disabled_roles`` and ``customization.logo.sidebar`` settings.
@@ -92,8 +91,13 @@ Wazuh dashboard
 - `#6035 <https://github.com/wazuh/wazuh-dashboard-plugins/pull/6035>`__ Improved the implementation of module dashboards.
 - `#6067 <https://github.com/wazuh/wazuh-dashboard-plugins/pull/6067>`__ Reorganized tabs order in all modules.
 - `#6174 <https://github.com/wazuh/wazuh-dashboard-plugins/pull/6174>`__ Removed the implicit filter of WQL language of the search bar UI.
-- `#6176 <https://github.com/wazuh/wazuh-dashboard-plugins/pull/6176>`__ Added a redirection button to Endpoint Summary from IT Hygiene application.
-- `#6176 <https://github.com/wazuh/wazuh-dashboard-plugins/pull/6176>`__ Removed the application menu in the IT Hygiene application.
+- `#6176 <https://github.com/wazuh/wazuh-dashboard-plugins/pull/6176>`__ Added a redirection button to **Endpoint Summary** from **IT Hygiene** application.
+- `#6176 <https://github.com/wazuh/wazuh-dashboard-plugins/pull/6176>`__ Removed the application menu in the **IT Hygiene** application.
+- `#6373 <https://github.com/wazuh/wazuh-dashboard-plugins/pull/6373>`__ Changed the **API configuration** title to **API Connections**.
+- `#6366 <https://github.com/wazuh/wazuh-dashboard-plugins/pull/6366>`__ Removed **Compilation date** field from the **Status** view.
+- `#6361 <https://github.com/wazuh/wazuh-dashboard-plugins/pull/6361>`__ Removed ``WAZUH_REGISTRATION_SERVER`` variable from Windows agent deployment command.
+- `#6354 <https://github.com/wazuh/wazuh-dashboard-plugins/pull/6354>`__ Added a dash character and a tooltip element to **Run as** in the API configuration table to indicate it's been disabled.
+- `#6364 <https://github.com/wazuh/wazuh-dashboard-plugins/pull/6364>`__ Added tooltip element to **Most active agent** in **Details** in the **Endpoint summary** view and renamed a label element.
 
 Packages 
 ^^^^^^^^
@@ -165,6 +169,11 @@ Reference                                                                    Des
 `#6177 <https://github.com/wazuh/wazuh-dashboard-plugins/pull/6177>`__       Fixed exception in **Inventory** when agents don't have operating system information.
 `#6177 <https://github.com/wazuh/wazuh-dashboard-plugins/pull/6177>`__       Fixed pinned agent state in URL.
 `#6234 <https://github.com/wazuh/wazuh-dashboard-plugins/pull/6234>`__       Fixed invalid date format in **About** and **Agents** views.
+`#6305 <https://github.com/wazuh/wazuh-dashboard-plugins/pull/6305>`__       Fixed issue with script to install agents on macOS if using the registration password deployment variable.
+`#6327 <https://github.com/wazuh/wazuh-dashboard-plugins/pull/6327>`__       Fixed an issue preventing the use of a hostname as the **Server address** in **Deploy New Agent**.
+`#6345 <https://github.com/wazuh/wazuh-dashboard-plugins/pull/6345>`__       Fixed unnecessary scrolling in the vulnerability **Inventory** table.
+`#6342 <https://github.com/wazuh/wazuh-dashboard-plugins/pull/6342>`__       Fixed wrong **Queue Usage** values in **Server management** > **Statistics**.
+`#6352 <https://github.com/wazuh/wazuh-dashboard-plugins/pull/6352>`__       Fixed **Statistics** view errors when cluster mode is disabled.
 =========================================================================    =============
 
 Packages
