@@ -119,17 +119,18 @@ The final stage of installing the Wazuh indexer single-node or multi-node cluste
 Testing the cluster installation
 --------------------------------
 
-#. Run the following command to get the *admin* password:
+#. Replace ``<INDEXER_USERNAME>``, ``<INDEXER_PASSWORD>`` and ``<WAZUH_INDEXER_IP_ADDRESS>`` with the Wazuh indexer username and password that you set using the Keystore tool commands:
 
    .. code-block:: console
 
-      # tar -axf wazuh-install-files.tar wazuh-install-files/wazuh-passwords.txt -O | grep -P "\'admin\'" -A 1
-
-#. Run the following command to confirm that the installation is successful. Replace ``<ADMIN_PASSWORD>`` with the password gotten from the output of the previous command. Replace ``<WAZUH_INDEXER_IP>`` with the configured Wazuh indexer IP address:
+         # /var/ossec/bin/wazuh-keystore -f indexer -k username -v <INDEXER_USERNAME>
+         # /var/ossec/bin/wazuh-keystore -f indexer -k password -v <INDEXER_PASSWORD>
+         
+  And run the following commands to confirm that the installation is successful.
 
    .. code-block:: console
 
-      # curl -k -u admin:<ADMIN_PASSWORD> https://<WAZUH_INDEXER_IP>:9200
+      # curl -k -u <INDEXER_USERNAME>:<INDEXER_PASSWORD> https://<WAZUH_INDEXER_IP_ADRESS>:9200
 
    .. code-block:: none
       :class: output

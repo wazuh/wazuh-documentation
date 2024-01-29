@@ -60,16 +60,13 @@ This section describes creating a custom index pattern, ``my-custom-alerts-*``, 
 
       # curl -XPUT -k -u <INDEXER_USERNAME>:<INDEXER_PASSWORD> 'https://<INDEXER_IP_ADDRESS>:9200/_template/wazuh' -H 'Content-Type: application/json' -d @template.json
 
-   Replace ``<INDEXER_USERNAME>`` and ``<INDEXER_PASSWORD>`` with the Wazuh indexer username and password. You can obtain the Wazuh indexer credentials for fresh deployments using the command:
-
-   .. note::
-      
-      If using the Wazuh OVA, use the default credentials ``admin:admin`` or refer to the :doc:`password management </user-manual/user-administration/password-management>` section.
+   Replace ``<INDEXER_USERNAME>`` and ``<INDEXER_PASSWORD>`` with the Wazuh indexer username and password that you set using the Keystore tool commands:
 
    .. code-block:: console
 
-      # tar -axf wazuh-install-files.tar wazuh-install-files/wazuh-passwords.txt -O | grep -P "\'admin\'" -A 1
-
+         # /var/ossec/bin/wazuh-keystore -f indexer -k username -v <INDEXER_USERNAME>
+         # /var/ossec/bin/wazuh-keystore -f indexer -k password -v <INDEXER_PASSWORD>
+   
    .. code-block:: output
       :class: output
 
@@ -184,17 +181,7 @@ Wazuh dashboard
 Command line interface
 ~~~~~~~~~~~~~~~~~~~~~~
 
-#. Obtain the Wazuh indexer username and password for fresh deployments using the below command:
-
-   .. code-block:: console
-
-      # tar -axf wazuh-install-files.tar wazuh-install-files/wazuh-passwords.txt -O | grep -P "\'admin\'" -A 1
-
-   .. note::
-      
-      If using the Wazuh OVA, use the default credentials admin:admin or refer to the :doc:`password management </user-manual/user-administration/password-management>` section.
-
-#. Run the following command to query your index status. Replace ``<INDEXER_USERNAME>`` and ``<INDEXER_PASSWORD>`` with the username and password obtained. Replace ``<INDEXER_IP_ADDRESS>`` with your Wazuh indexer IP address or FQDN. You can replace ``wazuh-*`` with a more specific pattern for your query, such as ``wazuh-alerts-*``.
+#. Run the following command to query your index status. Replace ``<INDEXER_USERNAME>`` and ``<INDEXER_PASSWORD>`` with the Wazuh indexer username and password that you set using the Keystore tool commands. Replace ``<INDEXER_IP_ADDRESS>`` with your Wazuh indexer IP address or FQDN. You can replace ``wazuh-*`` with a more specific pattern for your query, such as ``wazuh-alerts-*``.
 
    .. code-block:: console
 

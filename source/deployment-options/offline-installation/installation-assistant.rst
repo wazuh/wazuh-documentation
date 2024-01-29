@@ -32,17 +32,17 @@ Install and configure the Wazuh indexer nodes.
 Testing the cluster installation
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-#. Run the following command to get the *admin* password:
+#. Create username and password for the indexer
+^^^^^^^^^^^^^^^^^^^^
+  #. Set username and password.
+
+      .. include:: /_templates/installations/indexer/common/create_username_password.rst
+
+#. Run the following command to confirm that the installation is successful. Replace ``<INDEXER_USERNAME>``, ``<INDEXER_PASSWORD>`` and ``<WAZUH_INDEXER_IP_ADDRESS>`` with the Wazuh indexer username and password that you set using the Keystore tool:
 
    .. code-block:: console
 
-      # tar -axf wazuh-install-files.tar wazuh-install-files/wazuh-passwords.txt -O | grep -P "\'admin\'" -A 1
-
-#. Run the following command to confirm that the installation is successful. Replace ``<ADMIN_PASSWORD>`` with the password gotten from the output of the previous command. Replace ``<WAZUH_INDEXER_IP>`` with the configured Wazuh indexer IP address:
-
-   .. code-block:: console
-
-      # curl -k -u admin:<ADMIN_PASSWORD> https://<WAZUH_INDEXER_IP>:9200
+      # curl -k -u <INDEXER_USERNAME>:<ADMIN_PASSWORD> https://<WAZUH_INDEXER_IP>:9200
 
    .. code-block:: none
       :class: output
@@ -64,11 +64,11 @@ Testing the cluster installation
         "tagline" : "The OpenSearch Project: https://opensearch.org/"
       }
 
-#. Replace ``<WAZUH_INDEXER_IP>`` and ``<ADMIN_PASSWORD>``, and run the following command to check if the cluster is working correctly:
+#. Replace ``<WAZUH_INDEXER_IP>`` and ``<INDEXER_PASSWORD>``, and run the following command to check if the cluster is working correctly:
 
    .. code-block:: console
 
-      # curl -k -u admin:<ADMIN_PASSWORD> https://<WAZUH_INDEXER_IP>:9200/_cat/nodes?v
+      # curl -k -u <INDEXER_USERNAME>:<INDEXER_PASSWORD> https://<WAZUH_INDEXER_IP>:9200/_cat/nodes?v
 
 Installing the Wazuh server
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^

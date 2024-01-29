@@ -153,9 +153,14 @@ Deploying certificates
 
   .. include:: /_templates/installations/indexer/common/deploy_certificates.rst
 
+Create username and password for the indexer
+^^^^^^^^^^^^^^^^^^^^
+  #. Set username and password.
+
+      .. include:: /_templates/installations/indexer/common/create_username_password.rst
+
 Starting the service
 ^^^^^^^^^^^^^^^^^^^^
-
   #. Enable and start the Wazuh indexer service.
 
       .. include:: /_templates/installations/indexer/common/enable_indexer.rst
@@ -184,11 +189,18 @@ Cluster initialization involves configuring a default ISM policy, loading new ce
 Testing the cluster installation
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-#. Replace ``<WAZUH_INDEXER_IP_ADDRESS>`` and run the following commands to confirm that the installation is successful.
+#. Replace ``<INDEXER_USERNAME>``, ``<INDEXER_PASSWORD>`` and ``<WAZUH_INDEXER_IP_ADDRESS>`` with the Wazuh indexer username and password that you set using the Keystore tool commands:
 
    .. code-block:: console
 
-      # curl -k -u admin:admin https://<WAZUH_INDEXER_IP_ADRESS>:9200
+         # /var/ossec/bin/wazuh-keystore -f indexer -k username -v <INDEXER_USERNAME>
+         # /var/ossec/bin/wazuh-keystore -f indexer -k password -v <INDEXER_PASSWORD>
+         
+  And run the following commands to confirm that the installation is successful.
+
+   .. code-block:: console
+
+      # curl -k -u <INDEXER_USERNAME>:<INDEXER_PASSWORD> https://<WAZUH_INDEXER_IP_ADRESS>:9200
 
    .. code-block:: none
       :class: output accordion-output
@@ -200,7 +212,7 @@ Testing the cluster installation
         "version" : {
           "number" : "7.10.2",
           "build_type" : "rpm",
-          "build_hash" : "db90a415ff2fd428b4f7b3f800a51dc229287cb4",
+          "build_hash" : "db90a5RT515ff2fd428b4f7b3f800a51dc229287cb4",
           "build_date" : "2023-06-03T06:24:25.112415503Z",
           "build_snapshot" : false,
           "lucene_version" : "9.6.0",
@@ -210,11 +222,11 @@ Testing the cluster installation
         "tagline" : "The OpenSearch Project: https://opensearch.org/"
       }
 
-#. Replace ``<WAZUH_INDEXER_IP_ADDRESS>`` and run the following command to check if the single-node or multi-node cluster is working correctly. 
+#. Replace ``<INDEXER_USERNAME>``, ``<INDEXER_PASSWORD>`` and ``<WAZUH_INDEXER_IP_ADDRESS>`` and run the following command to check if the single-node or multi-node cluster is working correctly. 
   
    .. code-block:: console
 
-      # curl -k -u admin:admin https://<WAZUH_INDEXER_IP_ADDRESS>:9200/_cat/nodes?v
+      # curl -k -u <INDEXER_USERNAME>:<INDEXER_PASSWORD> https://<WAZUH_INDEXER_IP_ADDRESS>:9200/_cat/nodes?v
 
 Next steps
 ----------
