@@ -13,7 +13,11 @@ gcp-pubsub
 		<gcp-pubsub>
 		</gcp-pubsub>
 
-   This configuration section is used to configure the Google Cloud Pub/Sub module.
+This configuration section is used to configure the Google Cloud Pub/Sub module.
+
+.. warning::
+
+   Only one ``gcp-pubsub`` section is supported in the same configuration. To configure more than one service, deploying multiple agents is required.
 
 .. topic:: Main options:
 
