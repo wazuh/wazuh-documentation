@@ -35,8 +35,6 @@ In this use case, you can see how the Wazuh Vulnerability Detection module detec
         <hosts>
           <host>https://0.0.0.0:9200</host>
         </hosts>
-        <username>admin</username>
-        <password>admin</password>
         <ssl>
           <certificate_authorities>
             <ca>/etc/filebeat/certs/root-ca.pem</ca>
