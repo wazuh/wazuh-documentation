@@ -45,7 +45,7 @@ Tools
 +---------------------------------------------------+----------------------------------------------------------------------------+-----------------------------+
 | :doc:`fim_migrate <fim-migrate>`                  | Migrates older FIM databases to Wazuh-DB                                   | manager                     |
 +---------------------------------------------------+----------------------------------------------------------------------------+-----------------------------+
-| :doc:`keystore-tool <keystore-tool>`              | Stores sensitive information for increased security                        | manager                     |
+| :doc:`wazuh-keystore <wazuh-keystore>`            | Stores sensitive information for increased security                        | manager                     |
 +---------------------------------------------------+----------------------------------------------------------------------------+-----------------------------+
 
 
@@ -68,4 +68,4 @@ Tools
     agent-upgrade
     cluster-control
     fim-migrate
-    keystore-tool
+    wazuh-keystore
