@@ -1,14 +1,14 @@
 .. Copyright (C) 2015, Wazuh, Inc.
 
 .. meta::
-  :description: Tool where sensitive configuration data can be securely stored, including any information that the Wazuh server daemons/tools need for their work. 
+  :description: Tool where sensitive configuration data can be securely stored, including any information that the Wazuh manager daemons/tools need for their work. 
 
 .. _keystore-tool:
 
 keystore-tool
 =============
 
-The keystore-tool increases the security of sensitive information, storing in it any information that the Wazuh server requires for its correct operation.
+The keystore-tool increases the security of sensitive information, storing in it any information that the Wazuh manager requires for its correct operation.
 
 keystore-tool options
 ---------------------

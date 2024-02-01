@@ -225,7 +225,7 @@ Installing the Wazuh manager
 
     .. include:: /_templates/installations/wazuh/common/check_wazuh_manager.rst
 
-#. Save the Wazuh indexer username and password into the Wazuh keystore using the wazuh-keystore tool: 
+#. Save the Wazuh indexer username and password into the Wazuh manager keystore using the wazuh-keystore tool: 
 
    .. code-block:: console
 
