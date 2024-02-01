@@ -84,7 +84,7 @@ Installing the Wazuh manager
        # /var/ossec/bin/wazuh-keystore -f indexer -k username -v <INDEXER_USERNAME>
        # /var/ossec/bin/wazuh-keystore -f indexer -k password -v <INDEXER_PASSWORD>   
 
-    .. note:: The default step-by-step installation credentials are admin:admin
+    .. note:: The default step-by-step installation credentials are ``admin``:``admin``
 
 .. _wazuh_server_multi_node_filebeat:
 
