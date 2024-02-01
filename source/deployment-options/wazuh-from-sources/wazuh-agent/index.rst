@@ -65,7 +65,7 @@ The Wazuh agent is a single and lightweight monitoring software. It is a multi-p
 
                     .. code-block:: console
 
-                        # apt-get install python gcc g++ make libc6-dev curl policycoreutils automake autoconf libtool libssl-dev
+                        # apt-get install python gcc g++ make libc6-dev curl policycoreutils automake autoconf libtool libssl-dev procps
 
                     CMake 3.18 installation
 
