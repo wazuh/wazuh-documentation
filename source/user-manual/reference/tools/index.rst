@@ -45,7 +45,7 @@ Tools
 +---------------------------------------------------+----------------------------------------------------------------------------+-----------------------------+
 | :doc:`fim_migrate <fim-migrate>`                  | Migrates older FIM databases to Wazuh-DB                                   | manager                     |
 +---------------------------------------------------+----------------------------------------------------------------------------+-----------------------------+
-| :doc:`keystore-tool <keystore-tool>`              | Sets the username and password that connect Wazuh manager and indexer      | manager                     |
+| :doc:`keystore-tool <keystore-tool>`              | Stores sensitive information for increased security                        | manager                     |
 +---------------------------------------------------+----------------------------------------------------------------------------+-----------------------------+
 
 
