@@ -120,7 +120,7 @@ To generate and change passwords for all the Wazuh indexer users, run the script
     INFO: The password for user logstash is SUbk4KTmLl*geQbUg0c5tyfwahjDMhx5
     INFO: The password for user readall is ?w*Itj1Lgz.5w.C7vOw0Kxi7G94G8bG*
     INFO: The password for user snapshotrestore is Z6UXgM8Sr0bfV.i*6yPPEUY3H6Du2rdz
-    WARNING: Wazuh indexer passwords changed. Remember to update the password in the Wazuh dashboard, Wazuh server, and Filebeat nodes if necessary, and restart the services.
+    WARNING: Wazuh indexer passwords changed. Remember to update the password in the Wazuh dashboard, Wazuh server, keystore tool, and Filebeat nodes if necessary, and restart the services.
 
 If you use the tool in an all-in-one deployment, it automatically updates the passwords where necessary. If you use it in a distributed environment, you have to update the password on other components. See :ref:`Changing the passwords in a distributed environment <passwords_distributed>` for more details.
 
@@ -141,7 +141,7 @@ On an all-in-one deployment, use options ``-a``, ``-au`` and ``-ap`` to also cha
       INFO: The password for user logstash is wuabgegtKsQABems5RNJfV0AOmxT?81T
       INFO: The password for user readall is gKSuQFGG.Sa0L9gzJX5WZHPP3Y4Es+sU
       INFO: The password for user snapshotrestore is UdyI8ToXkgVCNOPfJ*FX*a5vybeB.rUw
-      WARNING: Wazuh indexer passwords changed. Remember to update the password in the Wazuh dashboard, Wazuh server, and Filebeat nodes if necessary, and restart the services.
+      WARNING: Wazuh indexer passwords changed. Remember to update the password in the Wazuh dashboard, Wazuh server, keystore tool, and Filebeat nodes if necessary, and restart the services.
       INFO: The password for Wazuh API user wazuh is zG0yTsAiettOXWEB79Aca1jbQ5.UeW3M
       INFO: The password for Wazuh API user wazuh-wui is JmKiaCBQo?4Ne0yrM4+n7kGdXGfCmVjO
       INFO: Updated wazuh-wui user password in wazuh dashboard. Remember to restart the service.
@@ -198,7 +198,7 @@ Follow the instructions below to change the passwords for all the Wazuh indexer 
       INFO: The password for user logstash is nQg1Qw0nIQFZXUJc8r8+zHVrkelch33h
       INFO: The password for user readall is s0iWAei?RXObSDdibBfzSgXdhZCD9kH4
       INFO: The password for user snapshotrestore is Mb2EHw8SIc1d.oz.nM?dHiPBGk7s?UZB
-      WARNING: Wazuh indexer passwords changed. Remember to update the password in the Wazuh dashboard, Wazuh server, and Filebeat nodes if necessary, and restart the services.
+      WARNING: Wazuh indexer passwords changed. Remember to update the password in the Wazuh dashboard, Wazuh server, keystore tool, and Filebeat nodes if necessary, and restart the services.
 
 #. On your `Wazuh server master node`, download the Wazuh passwords tool and use it to change the passwords of the Wazuh API users. Replace ``<wazuh-password>`` with the *wazuh* user password.
 

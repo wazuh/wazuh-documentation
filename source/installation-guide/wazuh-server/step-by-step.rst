@@ -77,7 +77,18 @@ Installing the Wazuh manager
 
       .. include:: /_templates/installations/wazuh/common/check_wazuh_manager.rst
 
+  #. Add the username and password that the Wazuh manager uses to connect to the indexer, use the keystore tool: 
 
+   .. code-block:: console
+
+       # /var/ossec/bin/wazuh-keystore -f indexer -k username -v <INDEXER_USERNAME>
+       # /var/ossec/bin/wazuh-keystore -f indexer -k password -v <INDEXER_PASSWORD>   
+
+   .. note:: The default <INDEXER_USERNAME> is admin, as the password is randomly generated, run the following command to get <INDEXER_PASSWORD>.
+      
+      .. code-block:: console
+
+          # tar -axf wazuh-install-files.tar wazuh-install-files/wazuh-passwords.txt -O | grep -P "\'admin\'" -A 1
 
 .. _wazuh_server_multi_node_filebeat:
 
