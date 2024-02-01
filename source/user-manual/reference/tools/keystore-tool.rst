@@ -8,13 +8,13 @@
 keystore-tool
 =============
 
-The keystore-tool increases the security of sensitive information, storing in it any information that the Wazuh server requires for its correct operation..
+The keystore-tool increases the security of sensitive information, storing in it any information that the Wazuh server requires for its correct operation.
 
 keystore-tool options
 ---------------------
 
 +------------------------+---------------------------------------------------------+
-| **-h**                 | Display the help message                                |
+| **-h**                 | Display the help message.                               |
 +------------------------+---------------------------------------------------------+
 | **-f <FAMILY>**        | Specifies the target column family for the insertion.   |
 +------------------------+---------------------------------------------------------+

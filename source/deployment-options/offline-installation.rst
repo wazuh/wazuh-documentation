@@ -232,7 +232,7 @@ Installing the Wazuh manager
        # /var/ossec/bin/wazuh-keystore -f indexer -k username -v <INDEXER_USERNAME>
        # /var/ossec/bin/wazuh-keystore -f indexer -k password -v <INDEXER_PASSWORD>   
 
-   .. note:: The default offline-installation credentials are admin:admin.
+   .. note:: The default offline-installation credentials are admin:admin
 
 Installing Filebeat
 ~~~~~~~~~~~~~~~~~~~
