@@ -17,7 +17,7 @@ This configuration section is used to configure the Google Cloud Pub/Sub module.
 
 .. warning::
 
-   Only one ``gcp-pubsub`` section is supported in the same configuration. To configure more than one service, deploying multiple agents is required.
+   Only one ``gcp-pubsub`` section is supported in the same :ref:`Wazuh configuration file<reference_ossec_conf>`. To configure more than one service, deploying multiple agents is required.
 
 .. topic:: Main options:
 
