@@ -102,6 +102,10 @@ Configure the Wazuh server to receive logs from GCP by performing the following 
 
    Run the commands with root permission.
 
+.. warning::
+
+   The Wazuh GCP module does not support multiple Pub/Sub sections in the same :ref:`Wazuh configuration file<reference_ossec_conf>`. To configure more than one service, deploying multiple agents is required.
+
 #. Create a ``credentials.json`` file in the ``/var/ossec/wodles/gcloud/`` directory:
 
    .. code-block:: console

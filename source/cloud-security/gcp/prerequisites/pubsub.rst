@@ -14,10 +14,6 @@ We use it to get security events from the Google Cloud instances without creatin
 
 In this section, we see how to create a topic, a subscription, and a sink to fully configure Google Cloud Pub/Sub to work with Wazuh.
 
-.. warning::
-
-   The Wazuh GCP module does not support multiple Pub/Sub sections in the same configuration. To configure more than one service, deploying multiple agents is required.
-
 Create a topic
 --------------
 
