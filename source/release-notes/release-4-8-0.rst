@@ -99,7 +99,7 @@ Wazuh dashboard
 - `#6354 <https://github.com/wazuh/wazuh-dashboard-plugins/pull/6354>`__ Added a dash character and a tooltip element to **Run as** in the API configuration table to indicate it's been disabled.
 - `#6364 <https://github.com/wazuh/wazuh-dashboard-plugins/pull/6364>`__ Added tooltip element to **Most active agent** in **Details** in the **Endpoint summary** view and renamed a label element.
 
-Packages 
+Packages
 ^^^^^^^^
 
 - `#2332 <https://github.com/wazuh/wazuh-packages/pull/2332>`_ Added check into the installation assistant to prevent the use of public IP addresses.
@@ -108,13 +108,12 @@ Packages
 - `#2365 <https://github.com/wazuh/wazuh-packages/pull/2365>`_ Removed the ``postProvision.sh`` script. It's no longer used in OVA generation.
 - `#2364 <https://github.com/wazuh/wazuh-packages/pull/2364>`_ Added ``curl`` error messages in downloads.
 - `#2469 <https://github.com/wazuh/wazuh-packages/pull/2469>`_ Improved debug output in the installation assistant.
-- `#2422 <https://github.com/wazuh/wazuh-packages/pull/2422>`_ Enabled ``localhost`` domain registration in the installation assistant and ``cert-tool``.
 - `#2300 <https://github.com/wazuh/wazuh-packages/pull/2300>`_ Added SCA policy for Rocky Linux 8 in SPECS.
 - `#2557 <https://github.com/wazuh/wazuh-packages/pull/2557>`_ Added SCA policy for Amazon Linux 2023 in SPECS.
 - `#2558 <https://github.com/wazuh/wazuh-packages/pull/2558>`_ Wazuh password tool now recognizes UI created users.
 - `#2562 <https://github.com/wazuh/wazuh-packages/pull/2562>`_ Bumped Wazuh indexer to OpenSearch 2.10.0.
 - `#2563 <https://github.com/wazuh/wazuh-packages/pull/2563>`_ Bumped Wazuh dashboard to OpenSearch Dashboards 2.10.0.
-- `#2577 <https://github.com/wazuh/wazuh-packages/pull/2577>`_ Addedd APT and YUM lock logic to the Wazuh instalaltion assistant.
+- `#2577 <https://github.com/wazuh/wazuh-packages/pull/2577>`_ Added APT and YUM lock logic to the Wazuh installation assistant.
 - `#2553 <https://github.com/wazuh/wazuh-packages/pull/2553>`_ Added new role to grant ISM API permissions.
 - `#2164 <https://github.com/wazuh/wazuh-packages/pull/2164>`_ Deprecated CentOS 6 and Debian 7 for the Wazuh manager compilation, while still supporting them in the Wazuh agent compilation.
 - `#2588 <https://github.com/wazuh/wazuh-packages/pull/2588>`_ Added logic to the installation assistant to check for clean Wazuh central components removal.
@@ -122,11 +121,20 @@ Packages
 - `#2696 <https://github.com/wazuh/wazuh-packages/pull/2696>`_ Updated Filebeat module version to 0.4 in Wazuh installation assistant.
 - `#2695 <https://github.com/wazuh/wazuh-packages/pull/2695>`_ Added content database in RPM and DEB packages.
 - `#2669 <https://github.com/wazuh/wazuh-packages/pull/2669>`_ Upgraded ``botocore`` dependency in WPK package Docker containers.
+- `#2738 <https://github.com/wazuh/wazuh-packages/pull/2738>`_ Added ``xz utils`` as requirement.
+- `#2777 <https://github.com/wazuh/wazuh-packages/pull/2777>`_ Added support for refactored vulnerability detector in the installation assistant.
+- `#2797 <https://github.com/wazuh/wazuh-packages/pull/2797>`_ The installation assistant now uses ``127.0.0.1`` instead of ``localhost`` in dashboard configuration.
+- `#2801 <https://github.com/wazuh/wazuh-packages/pull/2801>`_ Added check into the installation assistant to ensure ``sudo`` package is installed.
+- `#2792 <https://github.com/wazuh/wazuh-packages/pull/2792>`_ Improved certificates generation tool output.
+- `#2804 <https://github.com/wazuh/wazuh-packages/pull/2804>`_ Added keystore tool creation for manager packages.
+- `#2802 <https://github.com/wazuh/wazuh-packages/pull/2802>`_ Added wazuh-keystore in passwords tool.
+- `#2809 <https://github.com/wazuh/wazuh-packages/pull/2809>`_ Upgrade scripts to support building Wazuh with OpenSSL 3.0.
+
 
 Resolved issues
 ---------------
 
-This release resolves known issues as the following: 
+This release resolves known issues as the following:
 
 Wazuh manager
 ^^^^^^^^^^^^^
