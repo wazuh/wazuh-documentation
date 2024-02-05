@@ -98,6 +98,7 @@ Wazuh dashboard
 - `#6361 <https://github.com/wazuh/wazuh-dashboard-plugins/pull/6361>`__ Removed ``WAZUH_REGISTRATION_SERVER`` variable from Windows agent deployment command.
 - `#6354 <https://github.com/wazuh/wazuh-dashboard-plugins/pull/6354>`__ Added a dash character and a tooltip element to **Run as** in the API configuration table to indicate it's been disabled.
 - `#6364 <https://github.com/wazuh/wazuh-dashboard-plugins/pull/6364>`__ Added tooltip element to **Most active agent** in **Details** in the **Endpoint summary** view and renamed a label element.
+- `#6379 <https://github.com/wazuh/wazuh-dashboard-plugins/pull/6379>`__ Changed overview home top KPIs.
 
 Packages
 ^^^^^^^^
@@ -182,6 +183,8 @@ Reference                                                                    Des
 `#6345 <https://github.com/wazuh/wazuh-dashboard-plugins/pull/6345>`__       Fixed unnecessary scrolling in the vulnerability **Inventory** table.
 `#6342 <https://github.com/wazuh/wazuh-dashboard-plugins/pull/6342>`__       Fixed wrong **Queue Usage** values in **Server management** > **Statistics**.
 `#6352 <https://github.com/wazuh/wazuh-dashboard-plugins/pull/6352>`__       Fixed **Statistics** view errors when cluster mode is disabled.
+`#6374 <https://github.com/wazuh/wazuh-dashboard-plugins/pull/6374>`__       Fixed the help menu, to be consistent and avoid duplication
+`#6378 <https://github.com/wazuh/wazuh-dashboard-plugins/pull/6378>`__       Fixed the axis label visual bug from dashboards
 =========================================================================    =============
 
 Packages
