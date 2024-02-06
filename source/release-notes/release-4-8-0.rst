@@ -24,6 +24,7 @@ Manager
 - `#19819 <https://github.com/wazuh/wazuh/pull/19819>`__ Replaced Filebeat date index name processor to ensure the indices are identifiable by the index alias for auto-rollover.
 - `#18466 <https://github.com/wazuh/wazuh/pull/18466>`__ Updated API and framework packages installation commands to use ``pip`` instead of direct invocation of ``setuptools``.
 - `#17015 <https://github.com/wazuh/wazuh/pull/17015>`__ Refactored how cluster status dates are treated in the cluster.
+- `#21602 <https://github.com/wazuh/wazuh/pull/21602>`__ The log message about file rotation and signature from wazuh-monitord has been updated.
 
 Agent
 ^^^^^
@@ -36,6 +37,8 @@ Agent
 - `#16200 <https://github.com/wazuh/wazuh/pull/16200>`__ FIM now buffers the Linux audit events for who-data to prevent side effects in other components.
 - `#19720 <https://github.com/wazuh/wazuh/pull/19720>`__ The sub-process execution implementation has been improved.
 - `#20649 <https://github.com/wazuh/wazuh/pull/20649>`__ Added geolocation mapping for the AWS WAF events.
+- `#21530 <https://github.com/wazuh/wazuh/pull/21530>`__ Added a validation to reject unsupported regions when using the inspector service.
+- `#21561 <https://github.com/wazuh/wazuh/pull/21561>`__ Added additional information on some AWS integration errors.
 
 RESTful API
 ^^^^^^^^^^^
@@ -43,6 +46,7 @@ RESTful API
 - `#19952 <https://github.com/wazuh/wazuh/pull/19952>`__ Added new ``GET /manager/version/check`` API endpoint to obtain information about new releases of Wazuh.
 - `#20119 <https://github.com/wazuh/wazuh/pull/20119>`__ Removed ``PUT /vulnerability``, ``GET /vulnerability/{agent_id}``, ``GET /vulnerability/{agent_id}/last_scan`` and ``GET /vulnerability/{agent_id}/summary/{field}`` API endpoints as they were deprecated in version 4.7.0. Use the Wazuh indexer REST API instead.
 - `#20420 <https://github.com/wazuh/wazuh/pull/20420>`__ Added the ``auto`` option to the ``ssl_protocol`` setting in the API configuration. This option enables automatic negotiation of the TLS certificate.
+- `#21572 <https://github.com/wazuh/wazuh/pull/21572>`__ Removed the ``compilation_date`` field from ``GET /cluster/{node_id}/info`` and ``GET /manager/info`` endpoints.
 
 Ruleset
 ^^^^^^^
@@ -70,10 +74,13 @@ Other
 ^^^^^
 
 - `#20003 <https://github.com/wazuh/wazuh/pull/20003>`__ Upgraded external ``aiohttp`` library dependency version to ``3.8.5``.
-- `#20003 <https://github.com/wazuh/wazuh/pull/20003>`__ Upgraded external ``cryptography`` library dependency version to ``41.0.4``.
+- `#21055 <https://github.com/wazuh/wazuh/pull/21055>`__ Upgraded external ``cryptography`` library dependency version to ``41.0.7``.
 - `#20003 <https://github.com/wazuh/wazuh/pull/20003>`__ Upgraded external ``numpy`` library dependency version to ``1.26.0``.
 - `#20003 <https://github.com/wazuh/wazuh/pull/20003>`__ Upgraded external ``pyarrow`` library dependency version to ``14.0.1``.
 - `#20003 <https://github.com/wazuh/wazuh/pull/20003>`__ Upgraded external ``grpcio`` library dependency version to ``1.58.0``.
+- `#20630 <https://github.com/wazuh/wazuh/pull/20630>`__ Upgraded external ``urllib3`` library dependency version to ``1.26.18``.
+- `#20741 <https://github.com/wazuh/wazuh/pull/20741>`__ Upgraded external ``SQLAlchemy`` library dependency version to ``2.0.23``.
+- `#21684 <https://github.com/wazuh/wazuh/pull/21684>`__ Upgraded external ``Jinja2`` library dependency version to ``3.1.3``.
 - `#20003 <https://github.com/wazuh/wazuh/pull/20003>`__ Upgraded embedded Python version to ``3.10.13``.
 
 Wazuh dashboard
