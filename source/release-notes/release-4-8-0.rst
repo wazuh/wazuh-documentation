@@ -190,8 +190,8 @@ Reference                                                                    Des
 `#6345 <https://github.com/wazuh/wazuh-dashboard-plugins/pull/6345>`__       Fixed unnecessary scrolling in the vulnerability **Inventory** table.
 `#6342 <https://github.com/wazuh/wazuh-dashboard-plugins/pull/6342>`__       Fixed wrong **Queue Usage** values in **Server management** > **Statistics**.
 `#6352 <https://github.com/wazuh/wazuh-dashboard-plugins/pull/6352>`__       Fixed **Statistics** view errors when cluster mode is disabled.
-`#6374 <https://github.com/wazuh/wazuh-dashboard-plugins/pull/6374>`__       Fixed the help menu, to be consistent and avoid duplication
-`#6378 <https://github.com/wazuh/wazuh-dashboard-plugins/pull/6378>`__       Fixed the axis label visual bug from dashboards
+`#6374 <https://github.com/wazuh/wazuh-dashboard-plugins/pull/6374>`__       Fixed the help menu, to be consistent and avoid duplication.
+`#6378 <https://github.com/wazuh/wazuh-dashboard-plugins/pull/6378>`__       Fixed the axis label visual bug from dashboards.
 =========================================================================    =============
 
 Packages
