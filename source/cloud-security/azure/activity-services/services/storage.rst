@@ -46,8 +46,8 @@ Configuring the Activity log export
 
 #. Configure the following settings and click **Save**.
 
-   -  Tick **AuditLogs** checkbox.
-   -  Tick the **Archive to storage account** checkbox.
+   -  Tick **Administrative** checkbox.
+   -  Tick the **Archive to a storage account** checkbox.
    -  Select your **Subscription**.
    -  Select your **Storage account**.
 

@@ -50,28 +50,6 @@ Wazuh indexer node URL or IP address to connect to. For example, ``http://172.16
 | **Allowed values** | Any valid URL or IP address |
 +--------------------+-----------------------------+
 
-username
-^^^^^^^^
-
-Specify the username to connect to the Wazuh indexer.
-
-+--------------------+-----------------------------+
-| **Default**        | ``admin``                   |
-+--------------------+-----------------------------+
-| **Allowed values** | Any valid username          |
-+--------------------+-----------------------------+
-
-password
-^^^^^^^^
-
-Specify the password to connect to the Wazuh indexer.
-
-+--------------------+-----------------------------+
-| **Default**        | ``admin``                   |
-+--------------------+-----------------------------+
-| **Allowed values** | Any valid password          |
-+--------------------+-----------------------------+
-
 ssl
 ^^^
 
@@ -125,8 +103,6 @@ Configuration example
      <hosts>
        <host>https://0.0.0.0:9200</host>
      </hosts>
-     <username>admin</username>
-     <password>admin</password>
      <ssl>
        <certificate_authorities>
          <ca>/etc/filebeat/certs/root-ca.pem</ca>
