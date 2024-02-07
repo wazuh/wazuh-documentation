@@ -6,6 +6,7 @@ All notable changes to this project will be documented in this file.
 ### Added
 
 - Added reference to AWS Cloudtrail policies in Monitoring AWS infrastructure PoC guide. ([#6785](https://github.com/wazuh/wazuh-documentation/pull/6785))
+- Added ``procps`` as Wazuh manager and Wazuh agent source install dependency ([#7003](https://github.com/wazuh/wazuh-documentation/pull/7003))
 
 ### Changed
 
