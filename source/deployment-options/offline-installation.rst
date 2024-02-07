@@ -225,6 +225,14 @@ Installing the Wazuh manager
 
     .. include:: /_templates/installations/wazuh/common/check_wazuh_manager.rst
 
+#. Save the Wazuh indexer username and password into the Wazuh manager keystore using the wazuh-keystore tool: 
+
+   .. code-block:: console
+
+       # /var/ossec/bin/wazuh-keystore -f indexer -k username -v <INDEXER_USERNAME>
+       # /var/ossec/bin/wazuh-keystore -f indexer -k password -v <INDEXER_PASSWORD>   
+
+   .. note:: The default offline-installation credentials are ``admin``:``admin``
 
 Installing Filebeat
 ~~~~~~~~~~~~~~~~~~~
