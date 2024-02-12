@@ -165,7 +165,7 @@ The available types are:  ``cloudtrail``, ``guardduty``, ``vpcflow``, ``config``
 +----------------------------------------+-------------------------------------------------------------+-----------------------------------------------+
 | :ref:`bucket_iam_role_arn`             | IAM role ARN                                                | Optional                                      |
 +----------------------------------------+-------------------------------------------------------------+-----------------------------------------------+
-| :ref:`bucket_iam_role_duration`        | Number of seconds between 900 and 3600                      | Optional (if set, it requires an iam_role_arn |
+| :ref:`bucket_iam_role_duration`        | Number of seconds between 900 and 43200                     | Optional (if set, it requires an iam_role_arn |
 |                                        |                                                             | to be provided)                               |
 +----------------------------------------+-------------------------------------------------------------+-----------------------------------------------+
 | :ref:`bucket_path`                     | Prefix for S3 bucket key                                    | Optional                                      |
@@ -295,7 +295,7 @@ A valid number of seconds that defines the duration of the session assumed when 
 +--------------------+------------------------------------------+
 | **Default value**  | N/A                                      |
 +--------------------+------------------------------------------+
-| **Allowed values** | Number of seconds between 900 and 3600   |
+| **Allowed values** | Number of seconds between 900 and 43200  |
 +--------------------+------------------------------------------+
 
 .. _bucket_path:
@@ -466,7 +466,7 @@ The available types are: ``cloudwatchlogs``, and ``inspector``.
 +----------------------------------------+-------------------------------------------------------------+-----------------------------------------------+
 | :ref:`service_iam_role_arn`            | Valid role ARN                                              | Optional                                      |
 +----------------------------------------+-------------------------------------------------------------+-----------------------------------------------+
-| :ref:`service_iam_role_duration`       | Number of seconds between 900 and 3600                      | Optional (if set, it requires an iam_role_arn |
+| :ref:`service_iam_role_duration`       | Number of seconds between 900 and 43200                     | Optional (if set, it requires an iam_role_arn |
 |                                        |                                                             | to be provided)                               |
 +----------------------------------------+-------------------------------------------------------------+-----------------------------------------------+
 | :ref:`service_only_logs_after`         | Valid date in YYYY-MMM-DD format                            | Optional                                      |
@@ -619,7 +619,7 @@ A valid number of seconds that defines the duration of the session assumed when 
 +--------------------+------------------------------------------+
 | **Default value**  | N/A                                      |
 +--------------------+------------------------------------------+
-| **Allowed values** | Number of seconds between 900 and 3600   |
+| **Allowed values** | Number of seconds between 900 and 43200  |
 +--------------------+------------------------------------------+
 
 .. _service_only_logs_after:
@@ -718,7 +718,7 @@ The currently available types are: ``security_lake`` and ``buckets``.
 +----------------------------------------+-------------------------------------------------------------+-----------------------------------------------+
 | :ref:`subscriber_aws_profile`          | Valid profile name                                          | Optional                                      |
 +----------------------------------------+-------------------------------------------------------------+-----------------------------------------------+
-| :ref:`subscriber_iam_role_duration`    | Number of seconds between 900 and 3600                      | Optional (if set, it requires an iam_role_arn |
+| :ref:`subscriber_iam_role_duration`    | Number of seconds between 900 and 43200                     | Optional (if set, it requires an iam_role_arn |
 |                                        |                                                             | to be provided)                               |
 +----------------------------------------+-------------------------------------------------------------+-----------------------------------------------+
 | :ref:`subscriber_discard_regex`        | A regex value to determine if an event must be discarded    | Optional                                      |
@@ -778,7 +778,7 @@ A valid number of seconds that defines the duration of the session assumed when 
 +--------------------+------------------------------------------+
 | **Default value**  | N/A                                      |
 +--------------------+------------------------------------------+
-| **Allowed values** | Number of seconds between 900 and 3600   |
+| **Allowed values** | Number of seconds between 900 and 43200  |
 +--------------------+------------------------------------------+
 
 .. _subscriber_aws_profile:
