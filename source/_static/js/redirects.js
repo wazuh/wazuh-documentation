@@ -4,6 +4,7 @@ const redirections = [];
 
 /* Note: new release versions must always be inserted in the first position of the array "versions" */
 const versions = [
+  '5.0',
   '4.9',
   '4.8',
   '4.7',
@@ -62,6 +63,18 @@ removedUrls['x.y'] = [
   '/old-url',
 ];
 */
+
+/* *** RELEASE 5.0 ****/
+
+/* Redirections from 4.9 to 5.0  */
+
+/* Pages added in 5.0 */
+
+newUrls['5.0'] = [
+  '/release-notes/release-5-0-0.html',
+];
+
+/* Pages no longer available in 5.0 */
 
 /* *** RELEASE 4.9 ****/
 
@@ -232,7 +245,7 @@ removedUrls['4.6'] = [
   '/user-manual/elasticsearch/configure-indices.html',
   '/user-manual/elasticsearch/elasticsearch.html',
   '/user-manual/elasticsearch/index.html',
-  '/user-manual/elasticsearch/troubleshooting.html',  
+  '/user-manual/elasticsearch/troubleshooting.html',
   '/user-manual/elasticsearch/elastic-tuning.html',
   '/user-manual/uninstall/central-components.html',
   '/user-manual/uninstall/elastic-stack.html',
@@ -329,7 +342,7 @@ newUrls['4.5'] = [
   '/integrations-guide/elastic-stack/index.html',
   '/integrations-guide/opensearch/index.html',
   '/integrations-guide/splunk/index.html',
-  '/user-manual/capabilities/log-data-collection/configuration.html', 
+  '/user-manual/capabilities/log-data-collection/configuration.html',
   '/user-manual/capabilities/log-data-collection/log-data-analysis.html',
   '/user-manual/capabilities/log-data-collection/monitoring-log-files.html',
   '/user-manual/capabilities/log-data-collection/multiple-socket-outputs.html',
@@ -374,7 +387,7 @@ removedUrls['4.5'] = [
   '/user-manual/elasticsearch/elastic-tuning.html',
   '/user-manual/elasticsearch/elasticsearch.html',
   '/user-manual/elasticsearch/index.html',
-  '/user-manual/elasticsearch/troubleshooting.html',  
+  '/user-manual/elasticsearch/troubleshooting.html',
 ];
 
 /* *** RELEASE 4.4 ****/
@@ -411,12 +424,12 @@ redirections.push(
       'target': ['4.3=>4.4', '4.4=>4.3'],
       '4.3': '/user-manual/capabilities/file-integrity/fim-configuration.html',
       '4.4': '/user-manual/capabilities/file-integrity/index.html',
-    },  
+    },
     {
       'target': ['4.3=>4.4', '4.4=>4.3'],
       '4.3': '/user-manual/capabilities/file-integrity/fim-fields-rule-mapping.html',
       '4.4': '/user-manual/capabilities/file-integrity/index.html',
-    }, 
+    },
     {
       'target': ['4.3=>4.4', '4.4=>4.3'],
       '4.3': '/user-manual/capabilities/antiflooding.html',
@@ -426,7 +439,7 @@ redirections.push(
       'target': ['4.3=>4.4', '4.4=>4.3'],
       '4.3': '/user-manual/capabilities/labels.html',
       '4.4': '/user-manual/agents/labels.html',
-    },  
+    },
     {
       'target': ['4.3=>4.4', '4.4=>4.3'],
       '4.3': '/user-manual/capabilities/fluent-forwarder.html',
@@ -1014,7 +1027,7 @@ newUrls['4.4'] = [
   '/compliance/nist/system-inventory.html',
   '/compliance/nist/vulnerability-detection.html',
   '/compliance/nist/active-response.html',
-  '/compliance/nist/threat-intelligence.html',  
+  '/compliance/nist/threat-intelligence.html',
   '/compliance/tsc/index.html',
   '/compliance/tsc/common-criteria/cc2.1.html',
   '/compliance/tsc/common-criteria/cc3.1.html',
@@ -1035,7 +1048,7 @@ newUrls['4.4'] = [
   '/user-manual/capabilities/file-integrity/basic-settings.html',
   '/user-manual/capabilities/file-integrity/how-to-configure-fim.html',
   '/user-manual/capabilities/file-integrity/interpreting-fim-module-analysis.html',
-  '/user-manual/capabilities/file-integrity/creating-custom-fim-rules.html',   
+  '/user-manual/capabilities/file-integrity/creating-custom-fim-rules.html',
   '/user-manual/capabilities/file-integrity/advanced-settings.html',
   '/user-manual/capabilities/file-integrity/use-cases/index.html',
   '/user-manual/capabilities/file-integrity/use-cases/detecting-malware-persistence-technique.html',
@@ -1058,7 +1071,7 @@ newUrls['4.4'] = [
   '/user-manual/capabilities/system-calls-monitoring/use-cases/privilege-abuse.html',
   '/user-manual/capabilities/agentless-monitoring/connection.html',
   '/user-manual/capabilities/agentless-monitoring/visualization.html',
-  '/user-manual/capabilities/agentless-monitoring/use-cases.html',  
+  '/user-manual/capabilities/agentless-monitoring/use-cases.html',
   '/user-manual/capabilities/vulnerability-detection/querying-the-vulnerability-database.html',
   '/user-manual/files-backup/creating/index.html',
   '/user-manual/files-backup/creating/wazuh-central-components.html',
@@ -1141,8 +1154,8 @@ removedUrls['4.4'] = [
   '/user-manual/capabilities/auditing-whodata/index.html',
   '/user-manual/capabilities/auditing-whodata/who-linux.html',
   '/user-manual/capabilities/auditing-whodata/who-windows.html',
-  '/user-manual/capabilities/auditing-whodata/who-windows-policies.html',  
-  '/user-manual/capabilities/syscollector.html',  
+  '/user-manual/capabilities/auditing-whodata/who-windows-policies.html',
+  '/user-manual/capabilities/syscollector.html',
   '/user-manual/capabilities/agentless-monitoring/agentless-faq.html',
   '/container-security/index.html',
   '/container-security/docker-monitor/index.html',
@@ -1154,7 +1167,7 @@ removedUrls['4.4'] = [
 ];
 
   /* *** RELEASE 4.3 ****/
- 
+
  /* Pages added in 4.3 */
 
 newUrls['4.3'] = [
@@ -1175,7 +1188,7 @@ newUrls['4.3'] = [
   '/user-manual/elasticsearch/configure-indices.html',
   '/user-manual/elasticsearch/elasticsearch.html',
   '/user-manual/elasticsearch/index.html',
-  '/user-manual/elasticsearch/troubleshooting.html',  
+  '/user-manual/elasticsearch/troubleshooting.html',
   '/user-manual/wazuh-dashboard/settings.html',
   '/user-manual/wazuh-dashboard/config-file.html',
   '/user-manual/wazuh-dashboard/index.html',
@@ -1330,7 +1343,7 @@ newUrls['4.3'] = [
   '/deployment-options/deploying-with-puppet/wazuh-puppet-module/reference-wazuh-puppet/wazuh-manager-class.html',
   '/deployment-options/amazon-machine-images/amazon-machine-images.html',
   '/release-notes/release-4-3-0.html',
-  '/pci-dss/configuration-assessment.html', 
+  '/pci-dss/configuration-assessment.html',
   '/pci-dss/malware-detection.html',
   '/pci-dss/vulnerability-detection.html',
   '/pci-dss/system-inventory.html',
@@ -1493,7 +1506,7 @@ removedUrls['4.3'] = [
   '/migrating-from-ossec/ossec-server.html',
   '/migrating-from-ossec/ossec-agent.html',
   '/learning-wazuh/build-lab/access-ec2-instances.html',
-  '/learning-wazuh/build-lab/build-vpc.html', 
+  '/learning-wazuh/build-lab/build-vpc.html',
   '/learning-wazuh/build-lab/launch-ec2-instances.html',
   '/learning-wazuh/build-lab/xpack-security-setup.html',
   '/learning-wazuh/build-lab/install-elastic-stack.html',
@@ -1515,7 +1528,7 @@ removedUrls['4.3'] = [
   '/pci-dss/policy-monitoring.html',
   '/pci-dss/rootkit-detection.html',
   '/pci-dss/elastic.html',
-  '/upgrade-guide/upgrading-agent.html', 
+  '/upgrade-guide/upgrading-agent.html',
   '/user-manual/capabilities/anomalies-detection/anomaly-configuration.html',
   '/user-manual/capabilities/anomalies-detection/anomaly-faq.html',
   '/user-manual/capabilities/anomalies-detection/how-it-works.html',
@@ -2500,7 +2513,7 @@ newUrls['4.2'] = [
   '/upgrade-guide/legacy/upgrading-wazuh-server/restore-alerts-from-2.x-to-3.x.html',
   '/user-manual/agent-enrollment/index.html',
   '/user-manual/agent-enrollment/via-agent-configuration/index.html',
-  '/user-manual/agent-enrollment/via-agent-configuration/linux-endpoint.html', 
+  '/user-manual/agent-enrollment/via-agent-configuration/linux-endpoint.html',
   '/user-manual/agent-enrollment/via-agent-configuration/windows-endpoint.html',
   '/user-manual/agent-enrollment/via-agent-configuration/macos-endpoint.html',
   '/user-manual/agent-enrollment/via-manager-API/index.html',
@@ -2508,9 +2521,9 @@ newUrls['4.2'] = [
   '/user-manual/agent-enrollment/via-manager-API/importing-the-key.html',
   '/user-manual/agent-enrollment/security-options/index.html',
   '/user-manual/agent-enrollment/security-options/using-password-authentication.html',
-  '/user-manual/agent-enrollment/security-options/manager-identity-verification.html', 
-  '/user-manual/agent-enrollment/security-options/agent-identity-verification.html', 
-  '/user-manual/agent-enrollment/troubleshooting.html', 
+  '/user-manual/agent-enrollment/security-options/manager-identity-verification.html',
+  '/user-manual/agent-enrollment/security-options/agent-identity-verification.html',
+  '/user-manual/agent-enrollment/troubleshooting.html',
 ];
 
 removedUrls['4.2'] = [
@@ -2661,7 +2674,7 @@ removedUrls['4.2'] = [
   '/user-manual/registering/index.html',
   '/user-manual/registering/command-line-registration.html',
   '/user-manual/registering/restful-api-registration.html',
-  '/user-manual/registering/password-authorization-registration.html', 
+  '/user-manual/registering/password-authorization-registration.html',
   '/user-manual/registering/host-verification-registration.html',
   '/user-manual/registering/registering-agents-theory.html',
   '/user-manual/registering/registering-agents-troubleshooting.html',
@@ -2681,7 +2694,7 @@ redirections.push(
     {
       'target': ['4.2=>4.1'],
       '4.2': '/getting-started/components/kibana.html',
-      '4.1': '/getting-started/components/elastic-stack.html',      
+      '4.1': '/getting-started/components/elastic-stack.html',
     },
     {
       'target': ['4.1=>4.2', '4.2=>4.1'],
@@ -2717,7 +2730,7 @@ redirections.push(
       'target': ['4.1=>4.2', '4.2=>4.1'],
       '4.1': '/user-manual/registering/registering-agents-troubleshooting.html',
       '4.2': '/user-manual/agent-enrollment/troubleshooting.html',
-    },   
+    },
     {
       'target': ['4.1=>4.2', '4.2=>4.1'],
       '4.1': '/deploying-with-ansible/roles/wazuh-elasticsearch.html',
@@ -4396,9 +4409,9 @@ redirections.push(
 );
 
 newUrls['3.13'] = [
-  '/release-notes/release-3-13-6.html', 
-  '/release-notes/release-3-13-5.html', 
-  '/release-notes/release-3-13-4.html',  
+  '/release-notes/release-3-13-6.html',
+  '/release-notes/release-3-13-5.html',
+  '/release-notes/release-3-13-4.html',
   '/release-notes/release_3_13_3.html',
   '/release-notes/release_3_13_2.html',
   '/getting-started/use_cases/index.html',
