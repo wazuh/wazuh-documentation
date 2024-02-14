@@ -102,10 +102,6 @@ Configure the Wazuh server to receive logs from GCP by performing the following 
 
    Run the commands with root permission.
 
-.. warning::
-
-   The Wazuh GCP module does not support multiple Pub/Sub sections in the same :ref:`Wazuh configuration file<reference_ossec_conf>`. To configure more than one service, deploying multiple agents is required.
-
 #. Create a ``credentials.json`` file in the ``/var/ossec/wodles/gcloud/`` directory:
 
    .. code-block:: console
@@ -134,6 +130,10 @@ Configure the Wazuh server to receive logs from GCP by performing the following 
 
    -  ``<PROJECT_ID>`` is the ID of the `GCP project`_ created above.
    -  ``<SUBSCRIPTION_NAME>`` is the `subscription ID`_ of your GCP Pub/Sub.
+
+   .. note::
+   
+      The Wazuh GCP module supports only one ``gcp-pubsub`` section per :ref:`Wazuh configuration file <reference_ossec_conf>`. To configure more than one service, you need to deploy multiple agents.
 
 #. Create a rule file ``gcp_posture.xml`` in the ``/var/ossec/etc/rules/`` directory and add the following custom rules to detect GCP posture findings:
 
