@@ -18,6 +18,15 @@ Resolved issues
 
 This release resolves known issues as the following: 
 
+Agent
+^^^^^
+
+==============================================================     =============
+Reference                                                          Description
+==============================================================     =============
+`#21455 <https://github.com/wazuh/wazuh/pull/21455>`__             Fixed an error in Windows agents preventing loading whodata policies.
+==============================================================     =============
+
 Changelogs
 ----------
 
