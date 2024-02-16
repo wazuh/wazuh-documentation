@@ -13,7 +13,7 @@ The below information is intended to assist in troubleshooting issues.
 Checking if the module is running
 ---------------------------------
 
-When the module runs it writes its output in the ``ossec.log`` file. This log file can be found in ``WAZUH_PATH/logs/ossec.log`` or under **Logs** if using the Wazuh UI.
+When the module runs it writes its output in the ``ossec.log`` file. This log file can be found in ``WAZUH_PATH/logs/ossec.log`` and under **Server management** > **Logs** if using the Wazuh UI.
 
 It is possible to check if the module is running without issues by looking in the ``ossec.log`` file. These are the messages that are displayed in the ``ossec.log``, depending on how the module has been configured:
 
