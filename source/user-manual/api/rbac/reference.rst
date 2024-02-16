@@ -442,8 +442,7 @@ group:read
 - :api-ref:`GET /groups/{group_id}/agents <operation/api.controllers.agent_controller.get_agents_in_group>` (`group:id`_)
 - :api-ref:`GET /groups/{group_id}/configuration <operation/api.controllers.agent_controller.get_group_config>` (`group:id`_)
 - :api-ref:`GET /groups/{group_id}/files <operation/api.controllers.agent_controller.get_group_files>` (`group:id`_)
-- :api-ref:`GET /groups/{group_id}/files/{file_name}/json <operation/api.controllers.agent_controller.get_group_file_json>` (`group:id`_)
-- :api-ref:`GET /groups/{group_id}/files/{file_name}/xml <operation/api.controllers.agent_controller.get_group_file_xml>` (`group:id`_)
+- :api-ref:`GET /groups/{group_id}/files/{file_name} <operation/api.controllers.agent_controller.get_group_file>` (`group:id`_)
 - :api-ref:`GET /overview/agents <operation/api.controllers.overview_controller.get_overview_agents>` (`group:id`_)
 
 group:update_config
