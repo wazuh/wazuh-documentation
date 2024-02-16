@@ -14,7 +14,7 @@
 {%- if pagename == 'index' and theme_breadcrumb_root_title == 'Documentation' -%}
   {%- include 'index.html' -%}
 {%- else -%}
-  {% if version >= '4.0' and pagename in api_pages %}
+  {% if version >= '4.0' and pagename in api_pages and builder is not 'simplepdf' %}
     {# Redoc template #}
     {% if pagename == 'user-manual/api/reference' %}
       {% include "api-redoc.html" %}

@@ -103,6 +103,11 @@ singlehtml:
 	@echo
 	@echo "Build finished. The HTML page is in $(BUILDDIR)/singlehtml."
 
+simplepdf:
+	$(SPHINXBUILD) -b simplepdf $(ALLSPHINXOPTS) $(BUILDDIR)/simplepdf
+	@echo
+	@echo "Build finished. The PDF file is in $(BUILDDIR)/simplepdf."
+
 pickle:
 	$(SPHINXBUILD) -b pickle $(ALLSPHINXOPTS) $(BUILDDIR)/pickle
 	@echo

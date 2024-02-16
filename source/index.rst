@@ -2,12 +2,15 @@
 
 .. meta::
   :description: Welcome to the Wazuh documentation. Here you can find the installation guide, the user manual, and everything you need to deploy Wazuh.
-  
+
+
 .. _index:
 
-================
-Index
-================
+.. if-builder:: html
+  
+    ================
+    Index
+    ================
 
 .. toctree::
    :titlesonly:

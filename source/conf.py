@@ -39,7 +39,7 @@ sys.path.append(os.path.abspath("_exts"))
 
 project = u'Wazuh'
 author = u'Wazuh, Inc.'
-copyright = u'&copy; ' + str(datetime.datetime.now().year) + u' Wazuh Inc.'
+copyright = u'© ' + str(datetime.datetime.now().year) + u' Wazuh, Inc'
 
 # -- General configuration ------------------------------------------------
 
@@ -54,7 +54,8 @@ extensions = [
     'sphinx.ext.extlinks', # Sphinx built-in extension
     'sphinx_tabs.tabs',
     'wazuh-doc-images', # Custom extension
-    'sphinx_reredirects'
+    'sphinx_reredirects',
+    'sphinx_simplepdf'
 ]
 
 # Add any paths that contain templates here, relative to this directory.
@@ -214,10 +215,34 @@ smartquotes = False
 # template names.
 html_additional_pages = {}
 
-html_additional_pages['not_found'] = 'not-found.html'
+if 'simplepdf' not in sys.argv:
+  html_additional_pages['not_found'] = 'not-found.html'
 
-if is_latest_release == True and html_theme_options['breadcrumb_root_title'] == 'Documentation':
+  if is_latest_release == True and html_theme_options['breadcrumb_root_title'] == 'Documentation':
     html_additional_pages['moved-content'] = 'moved-content.html'
+
+else:
+  extensions.append('sphinxcontrib.redoc')
+  redoc = [
+    {
+        'name': 'Wazuh API REST ('+ release +')',
+        'page': 'user-manual/api/reference',
+        'spec': apiURL,
+        'embed': False,
+    },
+    {
+        'name': 'Wazuh Cloud API',
+        'page': 'cloud-service/apis/reference',
+        'spec': 'https://raw.githubusercontent.com/wazuh/wazuh-documentation/current/resources/cloud/spec.yml',
+        'opts': {
+            'lazy': False,
+            'nowarnings': False,
+            'nohostname': False,
+            'required-props-first': True,
+            'expand-responses': ["200", "201"],
+        }
+    },
+]
 
 # If false, no module index is generated.
 #html_domain_indices = True
@@ -347,6 +372,22 @@ texinfo_documents = [
 
 # If true, do not generate a @detailmenu in the "Top" node's menu.
 #texinfo_no_detailmenu = False
+
+# -- Options for SimplePDF output -------------------------------------------------
+
+simplepdf_vars = {
+    'primary': '#256bd1',
+    'secondary': '#3585f9',
+    'cover': '#256bd1',
+    'white': '#ffffff',
+    'links': '#256bd1',
+    # 'cover-bg': 'url(cover-bg.jpg) no-repeat center',
+    'cover-overlay': 'rgba(53, 133, 249, 0.5)',
+    'top-left-content': 'counter(page)',
+    'bottom-center-content': 'copyright',
+}
+
+simplepdf_file_name = u'wazuh-documentation-'+ version +'.pdf'
 
 
 # -- Options for Epub output -------------------------------------------------

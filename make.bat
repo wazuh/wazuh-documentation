@@ -135,6 +135,14 @@ if "%1" == "singlehtml" (
 	goto end
 )
 
+if "%1" == "simplepdf" (
+	%SPHINXBUILD% -b simplepdf %ALLSPHINXOPTS% %BUILDDIR%/simplepdf
+	if errorlevel 1 exit /b 1
+	echo.
+	echo.Build finished. The PDF file is in %BUILDDIR%/simplepdf.
+	goto end
+)
+
 if "%1" == "pickle" (
 	%SPHINXBUILD% -b pickle %ALLSPHINXOPTS% %BUILDDIR%/pickle
 	if errorlevel 1 exit /b 1
