@@ -447,3 +447,227 @@ Distributed deployment
 
 Wazuh indexer node(s) installation
 ----------------------------------
+
+Once the certificates have been created and copied to the new node(s), you can now proceed with installing the Wazuh indexer node.
+
+#. Install package dependencies.
+
+   .. include:: /_templates/installations/indexer/common/install-dependencies.rst
+
+#. Add the Wazuh repository.
+
+   .. tabs::
+
+      .. group-tab:: Yum
+
+         .. include:: /_templates/installations/common/yum/add-repository.rst
+
+      .. group-tab:: APT
+
+         .. include:: /_templates/installations/common/deb/add-repository.rst
+
+#. Install the Wazuh indexer.
+
+   .. tabs::
+
+      .. group-tab:: Yum
+
+         .. code-block:: console
+
+            # yum -y install wazuh-indexer|WAZUH_INDEXER_RPM_PKG_INSTALL|
+
+      .. group-tab:: APT
+
+         .. code-block:: console
+
+            # apt-get -y install wazuh-indexer|WAZUH_INDEXER_DEB_PKG_INSTALL|
+
+Configuring the Wazuh indexer
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Edit the ``/etc/wazuh-indexer/opensearch.yml`` configuration file and replace the following values:
+
+#. ``network.host``: Sets the address of this node for both HTTP and HTTPS traffic. The node will bind to this address and use it as its publish address. This field accepts an IP address or a hostname.
+
+   Use the same node address set in ``/root/config.yml`` to create the SSL certificates.
+
+#. ``node.name``: Name of the Wazuh indexer node as defined in the ``/root/config.yml`` file. For example, ``node-1``.
+
+#. ``cluster.initial_master_nodes``: List of the names of the master-eligible nodes. These names are defined in the ``/root/config.yml`` file. Uncomment the ``node-2`` line or add more lines, and change the node names according to your ``/root/config.yml`` definitions.
+
+   .. code-block:: yaml
+
+      cluster.initial_master_nodes:
+      - "<EXISTING_WAZUH_INDEXER_NODE_NAME>"
+      - "<NEW_WAZUH_INDEXER_NODE_NAME>"
+
+#. ``discovery.seed_hosts``: List of the addresses of the master-eligible nodes. Each element can be either an IP address or a hostname. Uncomment this setting and set the IP addresses of each master-eligible node:
+
+   .. code-block:: yaml
+
+      discovery.seed_hosts:
+        - "<EXISTING_WAZUH_INDEXER_IP>"
+        - "<NEW_WAZUH_INDEXER_IP>"
+
+#. ``plugins.security.nodes_dn``: List of the Distinguished Names of the certificates of all the Wazuh indexer cluster nodes. Uncomment the line for ``node-2`` and change the common names (CN) and values according to your settings and your ``/root/config.yml`` definitions:
+
+   .. code-block:: yaml
+
+      plugins.security.nodes_dn:
+      - "CN=<EXISTING_WAZUH_INDEXER_NODE_NAME>,OU=Wazuh,O=Wazuh,L=California,C=US"
+      - "CN=<NEW_WAZUH_INDEXER_NODE_NAME>,OU=Wazuh,O=Wazuh,L=California,C=US"
+
+Deploying certificates
+^^^^^^^^^^^^^^^^^^^^^^
+
+#. Run the following commands in the directory where the ``wazuh-certificates.tar`` file was copied to, replacing ``<NEW_WAZUH_INDEXER_NODE_NAME>`` with the name of the Wazuh indexer node you are configuring as defined in ``/root/config.yml``. For example, ``node-1``. This deploys the SSL certificates to encrypt communications between the Wazuh central components:
+
+   .. code-block:: console
+
+      # NODE_NAME=NEW_WAZUH_INDEXER_NODE_NAME
+
+   .. code-block:: console
+
+      # mkdir /etc/wazuh-indexer/certs
+      # tar -xf ./wazuh-certificates.tar -C /etc/wazuh-indexer/certs/ ./$NODE_NAME.pem ./$NODE_NAME-key.pem ./admin.pem ./admin-key.pem ./root-ca.pem
+      # mv -n /etc/wazuh-indexer/certs/$NODE_NAME.pem /etc/wazuh-indexer/certs/indexer.pem
+      # mv -n /etc/wazuh-indexer/certs/$NODE_NAME-key.pem /etc/wazuh-indexer/certs/indexer-key.pem
+      # chmod 500 /etc/wazuh-indexer/certs
+      # chmod 400 /etc/wazuh-indexer/certs/*
+      # chown -R wazuh-indexer:wazuh-indexer /etc/wazuh-indexer/certs
+
+#. **Recommended action**: If no other Wazuh components are going to be installed on this node, remove the ``wazuh-certificates.tar`` file by running the command below to increase security. Alternatively, save a copy offline for potential future use and scalability.
+
+   .. code-block:: console
+
+      # rm -f ./wazuh-certificates.tar
+
+Starting the service
+^^^^^^^^^^^^^^^^^^^^
+
+#. Run the following commands to start the Wazuh indexer service.
+
+   .. include:: /_templates/installations/indexer/common/enable_indexer.rst
+
+Cluster initialization
+----------------------
+
+#. Run the Wazuh indexer ``indexer-security-init.sh`` script on `any` Wazuh indexer node to load the new certificates information and start the single-node or multi-node cluster. 
+    
+   .. code-block:: console
+
+      # /usr/share/wazuh-indexer/bin/indexer-security-init.sh
+
+   .. note::
+      
+      You only have to initialize the cluster `once`, there is no need to run this command on every node.
+
+#. Confirm the configuration works by running the command below on your Wazuh server node.
+
+   .. code-block:: console
+
+      filebeat test output
+
+   An example output is shown below:
+
+   .. code-block:: none
+      :class: output
+      :emphasize-lines: 1, 10, 13, 15, 24, 27
+
+      elasticsearch: https://10.0.0.1:9200...
+        parse url... OK
+        connection...
+          parse host... OK
+          dns lookup... OK
+          addresses: 10.0.0.1
+          dial up... OK
+        TLS...
+          security: server's certificate chain verification is enabled
+          handshake... OK
+          TLS version: TLSv1.3
+          dial up... OK
+        talk to server... OK
+        version: 7.10.2
+      elasticsearch: https://10.0.0.2:9200...
+        parse url... OK
+        connection...
+          parse host... OK
+          dns lookup... OK
+          addresses: 10.0.0.2
+          dial up... OK
+        TLS...
+          security: server's certificate chain verification is enabled
+          handshake... OK
+          TLS version: TLSv1.3
+          dial up... OK
+        talk to server... OK
+        version: 7.10.2
+
+Testing the cluster
+-------------------
+
+After completing the above steps, you can proceed to test your cluster and ensure that the indexer node has been successfully added. There are two possible methods to do this:
+
+.. contents::
+   :local:
+   :depth: 1
+   :backlinks: none
+
+Using the `securityadmin` script
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+The `securityadmin` script helps configure and manage the security settings of OpenSearch. The script lets you load, backup, restore, and migrate the security configuration files to the Wazuh indexer cluster.
+
+Run the  the command below on any of the Wazuh indexer nodes to execute the ``securityadmin`` script and initialize the cluster:
+
+.. code-block:: console
+
+   /usr/share/wazuh-indexer/bin/indexer-security-init.sh
+
+The output should be similar to the one below. It should show the number of Wazuh indexer nodes in the cluster:
+
+.. code-block:: none
+   :class: output
+   :emphasize-lines: 12,13
+
+   **************************************************************************
+   ** This tool will be deprecated in the next major release of OpenSearch **
+   ** https://github.com/opensearch-project/security/issues/1755           **
+   **************************************************************************
+   Security Admin v7
+   Will connect to 192.168.21.152:9200 ... done
+   Connected as "CN=admin,OU=Wazuh,O=Wazuh,L=California,C=US"
+   OpenSearch Version: 2.6.0
+   Contacting opensearch cluster 'opensearch' and wait for YELLOW clusterstate ...
+   Clustername: wazuh-cluster
+   Clusterstate: GREEN
+   Number of nodes: 2
+   Number of data nodes: 2
+   .opendistro_security index already exists, so we do not need to create one.
+   Populate config from /etc/wazuh-indexer/opensearch-security/
+   Will update '/config' with /etc/wazuh-indexer/opensearch-security/config.yml
+      SUCC: Configuration for 'config' created or updated
+   Will update '/roles' with /etc/wazuh-indexer/opensearch-security/roles.yml
+      SUCC: Configuration for 'roles' created or updated
+   Will update '/rolesmapping' with /etc/wazuh-indexer/opensearch-security/roles_mapping.yml
+      SUCC: Configuration for 'rolesmapping' created or updated
+   Will update '/internalusers' with /etc/wazuh-indexer/opensearch-security/internal_users.yml
+      SUCC: Configuration for 'internalusers' created or updated
+   Will update '/actiongroups' with /etc/wazuh-indexer/opensearch-security/action_groups.yml
+      SUCC: Configuration for 'actiongroups' created or updated
+   Will update '/tenants' with /etc/wazuh-indexer/opensearch-security/tenants.yml
+      SUCC: Configuration for 'tenants' created or updated
+   Will update '/nodesdn' with /etc/wazuh-indexer/opensearch-security/nodes_dn.yml
+      SUCC: Configuration for 'nodesdn' created or updated
+   Will update '/whitelist' with /etc/wazuh-indexer/opensearch-security/whitelist.yml
+      SUCC: Configuration for 'whitelist' created or updated
+   Will update '/audit' with /etc/wazuh-indexer/opensearch-security/audit.yml
+      SUCC: Configuration for 'audit' created or updated
+   Will update '/allowlist' with /etc/wazuh-indexer/opensearch-security/allowlist.yml
+      SUCC: Configuration for 'allowlist' created or updated
+   SUCC: Expected 10 config types for node {"updated_config_types":["allowlist","tenants","rolesmapping","nodesdn","audit","roles","whitelist","internalusers","actiongroups","config"],"updated_config_size":10,"message":null} is 10 (["allowlist","tenants","rolesmapping","nodesdn","audit","roles","whitelist","internalusers","actiongroups","config"]) due to: null
+   SUCC: Expected 10 config types for node {"updated_config_types":["allowlist","tenants","rolesmapping","nodesdn","audit","roles","whitelist","internalusers","actiongroups","config"],"updated_config_size":10,"message":null} is 10 (["allowlist","tenants","rolesmapping","nodesdn","audit","roles","whitelist","internalusers","actiongroups","config"]) due to: null
+   Done with success
+
+Using the Wazuh indexer API
+^^^^^^^^^^^^^^^^^^^^^^^^^^^
