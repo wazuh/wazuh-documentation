@@ -1,7 +1,7 @@
 .. Copyright (C) 2015, Wazuh, Inc.
 
 .. meta::
-   :description: Find steps to upscale your Wazuh server cluster in this section of the documentation.
+   :description: Find instructions on how to upscale your Wazuh server cluster in this section of the documentation.
 
 Adding a Wazuh server node
 ==========================

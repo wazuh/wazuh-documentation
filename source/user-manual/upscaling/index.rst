@@ -1,7 +1,7 @@
 .. Copyright (C) 2015, Wazuh, Inc.
 
 .. meta::
-  :description: This documentation provides a guide on upscaling your Wazuh infrastructure to add new Wazuh indexer or Wazuh server nodes.
+  :description: This documentation provides a guide on upscaling your Wazuh infrastructure to add new Wazuh indexer and Wazuh server nodes.
   
 Upscaling a Wazuh deployment
 ============================
