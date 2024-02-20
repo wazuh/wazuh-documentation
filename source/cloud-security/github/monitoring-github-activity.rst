@@ -3,167 +3,194 @@
 .. meta::
   :description: Discover the way that Wazuh provides to monitor your organization's GitHub activity. Check out this section of our documentation to learn more about it.
 
-.. _github_monitoring_activity:
+Monitoring GitHub audit logs
+============================
 
-Monitoring GitHub Activity
-==========================
+Organizational administrators proactively utilize GitHub audit logs to review the actions performed by members within their organization. It includes details such as the user who performs the action, the nature of the action, and the timestamp of its execution. The Wazuh module for GitHub enables the collection of audit logs from GitHub through its API. Wazuh initiates an HTTP GET request to GitHub API endpoint ``/orgs/{org}/audit-log`` to collect the audit logs. For further details, you can refer to the `GitHub REST API <https://docs.github.com/en/rest>`__ documentation.
 
-The `audit log` allows organization admins to quickly review the actions performed by members of your organization. It includes details such as who performed the action, what the action was, and when it was performed.
-This Wazuh module allows you to collect all the logs from GitHub using its API:
+Requirements for monitoring GitHub audit logs
+---------------------------------------------
+
+You need the following requirements on GitHub to access the audit logs with Wazuh.
+
+-  **GitHub organization**: You can only view audit logs for GitHub organizations.
+-  **GitHub Enterprise Cloud subscription**: Only organizations with a GitHub Enterprise Cloud subscription can use the GitHub audit log REST API.
+
+Creating a personal access token on GitHub
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Take the following steps on GitHub to generate the required personal access token:
+
+#. Sign into GitHub with an account that belongs to the organization owner.
+#. Navigate to https://github.com/settings/tokens/new to create a new personal access token.
+#. Include a descriptive note for the personal access token, and select an expiration time.
+
+   .. thumbnail:: /images/cloud-security/github/github-new-personal-access-token.png   
+      :title: GitHub new personal access token
+      :alt: GitHub new personal access token
+      :align: center
+      :width: 80%
+
+#. Scroll down, select **audit_log**, and click **Generate token**.
+
+   .. thumbnail:: /images/cloud-security/github/github-generate-token.png   
+      :title: GitHub generate token
+      :alt: GitHub generate token
+      :align: center
+      :width: 80%
+
+#. Copy the newly generated personal access token.
+
+   .. thumbnail:: /images/cloud-security/github/github-copy-generated-token.png   
+      :title: GitHub copy generated token
+      :alt: GitHub copy generated token
+      :align: center
+      :width: 80%
+
+Configure Wazuh to pull GitHub logs
+-----------------------------------
+
+Perform the following steps to allow Wazuh to monitor, collect, and analyze the GitHub audit logs. You can either configure the Wazuh module for GitHub in the Wazuh server or the Wazuh agent.
+
+#. Append the following configuration to the ``/var/ossec/etc/ossec.conf`` file on the Wazuh server.
+
+   .. code-block:: xml
+
+      <ossec_config>
+        <github>
+          <enabled>yes</enabled>
+          <interval>1m</interval>
+          <time_delay>1m</time_delay>
+          <curl_max_size>1M</curl_max_size>
+          <only_future_events>yes</only_future_events>
+          <api_auth>
+            <org_name>ORG_NAME</org_name>
+            <api_token>API_TOKEN</api_token>
+          </api_auth>
+          <api_parameters>
+            <event_type>all</event_type>
+          </api_parameters>
+        </github>
+      </ossec_config>
+
+   Where:
+
+   -  ``<enabled>``: Enables the Wazuh module for GitHub. The allowed values are ``yes`` and ``no``.
+   -  ``<interval>``: Defines the time interval between each execution of the Wazuh module for GitHub. The default value is ``10m``, and the allowed value is any positive number that contains a suffix character indicating a time unit, such as s (seconds), m (minutes), h (hours), and d (days). 
+   -  ``<time_delay>``: Specifies the delay time of the scan with respect to the current time. The default value is ``30s``, and the allowed value is any positive number that contains a suffix character indicating a time unit, such as s (seconds), m (minutes), h (hours), and d (days).
+   -  ``<curl_max_size>``: Specifies the maximum size allowed for the GitHub API response. The default value is ``1M``, and the allowed value is any positive number that contains a suffix character indicating a size unit, such as b/B (bytes), k/K (kilobytes), m/M (megabytes), and g/G (gigabytes).
+   -  ``<only_future_events>``: When set to yes, the Wazuh module for GitHub collects only events generated after you start the Wazuh manager. when set to ``no``, it collects previous events generated before you start the Wazuh manager. The default value is ``yes``, and the allowed values are ``yes`` and ``no``.
+   -  ``<api_auth>``: This block configures the credential for the authentication with the GitHub REST API. The following tags ``<org_name>`` and ``<api_token>`` are configuration tags within ``<api_auth>``.
+
+      -  ``<org_name>``: Name of your GitHub organization. The allowed value is any string.
+      -  ``<api_token>``: Personal access token to authenticate with the GitHub API. The allowed value is any string.
+   -  ``<api_parameters>``: This block configures the internal options in the GitHub REST API. One sub-configuration block within ``<api_parameters>`` is ``<event_type>``.
+
+      -  ``<event_type>``: Specifies the event types Wazuh should collect. The available event types are web and git events. The default value for this configuration block is ``all``, to collect both web and git events. Allowed values are ``all``, ``web``, and ``git``.
+
+   To learn more about the configuration options, refer to the :doc:`Wazuh module for GitHub </user-manual/reference/ossec-conf/github-module>` reference.
+
+#. Restart the Wazuh manager or agent service to apply the changes:
+
+   -  **Wazuh manager**
+
+      .. code-block:: console
+
+         # systemctl restart wazuh-manager
+
+   -  **Wazuh agent**
+
+      .. code-block:: console
+
+         # systemctl restart wazuh-agent
+
+Monitor multiple GitHub organizations
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+You can monitor multiple GitHub organizations with Wazuh by specifying the organization credentials in individual ``<api_auth>`` sections. For example, the following configuration monitors two organizations named ``organization1`` and ``organization2``.
 
 .. code-block:: xml
+   :emphasize-lines: 8-11, 13-16
 
-    GET /orgs/{org}/audit-log
+   <github>
+     <enabled>yes</enabled>
+     <interval>1m</interval>
+     <time_delay>1m</time_delay>
+     <curl_max_size>1M</curl_max_size>
+     <only_future_events>no</only_future_events>
 
-The GitHub API description can be found in this `link <https://docs.github.com/en/rest>`_.
+     <api_auth>
+       <org_name>organization1</org_name>
+       <api_token>ghp_oiasd6efbvptrfdua8fyepnfdc78ewf324jg</api_token>
+     </api_auth>
 
-.. note::
+     <api_auth>
+       <org_name>organization2</org_name>
+       <api_token>ghp_oiasd6efbvptrfdua8fyepnfdc78ewf324jg</api_token>
+     </api_auth>
 
-    To access Git events in the `audit log`, you must use the `audit log` REST API. The `audit log` REST API is available for users of GitHub Enterprise Cloud only.
+     <api_parameters>
+       <event_type>git</event_type>
+     </api_parameters>
+   </github>
 
-GitHub requirements
-^^^^^^^^^^^^^^^^^^^
+Enabling dashboard visualization
+--------------------------------
 
-For **Wazuh** to successfully connect to the **GitHub API**, an authentication process is required. To do this, we must provide the name of the organization on GitHub and personal access tokens.
-The Personal Access Tokens (PATs) are an alternative to using passwords for authentication on GitHub when using the GitHub API.
+You can activate the GitHub module on the Wazuh dashboard to view details about GitHub events. The GitHub Security Information Management module is optional. You can view GitHub events on the **Security Events** tab of the Wazuh dashboard without following the steps outlined in this section. However, leveraging the dashboard module is beneficial as it allows you to focus only on GitHub events while providing rapid insights through intuitive charts on the dedicated GitHub dashboard.
 
-.. note::
+Take the following steps to activate the GitHub module on the Wazuh dashboard:
 
-    To use this endpoint, you must be an organization owner, and you must use an access token with the ``admin:org`` scope.
+#. Navigate to your Wazuh Dashboard and click on **Wazuh** > **Settings** > **Modules**.
 
-`Click here <https://docs.github.com/en/github/authenticating-to-github/creating-a-personal-access-token#creating-a-token>`_ to learn how to create one.
+   .. thumbnail:: /images/cloud-security/github/github-wazuh-menu-settings-module.png   
+      :title: GitHub Wazuh menu settings module
+      :alt: GitHub Wazuh menu settings module
+      :align: center
+      :width: 80%
 
-Wazuh configuration
-^^^^^^^^^^^^^^^^^^^
+#. Enable the GitHub module in the **Security Information Management** section.
 
-Next, we will see the options we have to configure for the Wazuh integration.
+   .. thumbnail:: /images/cloud-security/github/github-wazuh-security-information-management.png
+      :title: GitHub Wazuh Security information management
+      :alt: GitHub Wazuh Security information management
+      :align: center
+      :width: 80%
 
-Configure the ``github`` module either in the Wazuh manager or the Wazuh agent. To do so, modify the :doc:`ossec.conf </user-manual/reference/ossec-conf/index>` configuration file. We will use the data that we took previously as the **organization name** and the **PATs**. Through the following configuration, Wazuh is ready to search for logs created by GitHub audit-log. In this case, we will search only the type of ``git`` events within an interval of ``1m``. Those logs will be only those that were created after the module was started:
+After enabling the dashboard visualization, navigate to **Modules** > **GitHub** to view the GitHub dashboard.
 
-.. code-block:: xml
+   .. thumbnail:: /images/cloud-security/github/github-module-dashboard1.png
+      :title: GitHub module dashboard
+      :alt: GitHub module dashboard
+      :align: center
+      :width: 80%
 
-    <github>
-        <enabled>yes</enabled>
-        <interval>1m</interval>
-        <time_delay>1m</time_delay>
-        <curl_max_size>1M</curl_max_size>
-        <only_future_events>yes</only_future_events>
-        <api_auth>
-            <org_name>insert_organization_name</org_name>
-            <api_token>insert_personal_access_token</api_token>
-        </api_auth>
-        <api_parameters>
-            <event_type>git</event_type>
-        </api_parameters>
-    </github>
+   .. thumbnail:: /images/cloud-security/github/github-module-dashboard2.png
+      :title: GitHub module dashboard
+      :alt: GitHub module dashboard
+      :align: center
+      :width: 80%
 
-To learn more, check the :ref:`github-module` module reference.
+Use case
+--------
 
-Using the configuration mentioned above, we will see an example of monitoring GitHub activity.
+Requirements
+^^^^^^^^^^^^
 
-Generate activity on GitHub
-^^^^^^^^^^^^^^^^^^^^^^^^^^^
+-  Integrate Wazuh with GitHub according to the :doc:`monitoring GitHub activity </cloud-security/github/monitoring-github-activity>` documentation.
+-  An Ubuntu 23.10 endpoint with curl installed.
 
-For this example, we will start by generating some activity in our GitHub Organization, in this case, let's add a new member to our team. If we do that, we can see that GitHub will generate a new json event, something like this:
+GitHub
+^^^^^^
 
-.. code-block:: json
-    :class: output
+Create a GitHub personal access token within the ``admin:org``, ``repo``, and ``delete_repo`` scopes. We will use this token with the GitHub REST API to test the use cases by performing actions on the organization that trigger alerts on Wazuh. Take the following steps to create the token:
 
-    {
-        "actor": "User",
-        "data": {
-            "team": "org_name/team_name"
-        },
-        "org": "org_name",
-        "created_at": 1619032221869,
-        "action": "team.add_member",
-        "user": "User",
-    }
+#. Navigate to https://github.com/settings/tokens/new, add a note for the token, select your desired expiration time, and then select the ``repo`` and the ``admin:org`` scopes.
 
-Wazuh Rules
-^^^^^^^^^^^
+   .. thumbnail:: /images/cloud-security/github/use-case-github-new-personal-access-token.png
+      :title: GitHub module dashboard
+      :alt: GitHub module dashboard
+      :align: center
+      :width: 80%
 
-Wazuh provides a series of rules to catch different events on GitHub, for this example we will take the rule id ``91393`` which detects a ``GitHub Team add member`` action.
-
-.. code-block:: xml
-
-    <!-- team.add_member -->
-
-    <rule id="91393" level="5">
-        <if_sid>91392</if_sid>
-        <action>team.add_member</action>
-        <description>GitHub Team add member.</description>
-        <options>no_full_log</options>
-        <group>git_team</group>
-    </rule>
-
-If Wazuh successfully connects to GitHub, the events raised above will trigger these rules and cause an alert like this:
-
-.. code-block:: json
-    :emphasize-lines: 5,6,16
-    :class: output
-
-    {
-        "timestamp":"2021-04-29T16:40:33.955+0000",
-        "rule": {
-            "level":5,
-            "description":"GitHub Team add member.",
-            "id":"91393",
-            "firedtimes":8,
-            "mail":false,
-            "groups": ["github","git"]
-        },
-        "agent": {
-            "id":"000",
-            "name":"ubuntu"
-        },
-        "manager": {
-            "name":"ubuntu-bionic"
-        },
-        "id":"1619714433.146108",
-        "decoder": {
-            "name":"json"
-        },
-        "data": {
-            "github": {
-                "action":"team.add_member",
-                "actor":"member_name",
-                "@timestamp":"1619031743300.000000",
-                "org":"org_name",
-                "created_at":"1619031743300.000000",
-                "user":"User",
-                "_document_id":"9Z1pUC7N0GBf4ZzZFQEXpA",
-                "source":"github"
-            }
-        },
-        "location":"github"
-    }
-    
-
-Enabling dashboard visualization  
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-
-You can activate the corresponding Security Information Management module on the Wazuh Dashboard. This module provides additional details and insights about events, as shown in the screenshots below.
-
-    .. thumbnail:: /images/github/github-dashboard.png
-       :title: GitHub dashboard
-       :alt: GitHub dashboard
-       :align: center
-       :width: 80%
-
-    .. thumbnail:: /images/github/github-events.png
-       :title: GitHub events
-       :alt: GitHub events
-       :align: center
-       :width: 80%
-
-To activate the **GitHub** module, navigate to your Wazuh Dashboard and click on **Wazuh > Settings > Modules**. In the **Security Information Management** section, enable the **GitHub** module as shown in the image below.
-
-    .. thumbnail:: /images/github/github-module.png
-       :title: GitHub module
-       :alt: GitHub module
-       :align: center
-       :width: 80%
-
-For further information, please refer to the `modules <https://documentation.wazuh.com/current/user-manual/wazuh-dashboard/settings.html#modules>`_ section.
-
+#. 
