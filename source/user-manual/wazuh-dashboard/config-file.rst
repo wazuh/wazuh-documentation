@@ -24,7 +24,7 @@ You can load a configuration through of:
 On start
 ^^^^^^^^
 
-When Wazuh dashboard starts checks if there are a file located at ``/usr/share/wazuh-dashboard/data/wazuh/config/wazuh.yml``. If this exists and does not a previous configuration stored in the saved object, the configuration defined in the file will be read and stored in the saved object.
+When Wazuh dashboard starts checks if there are a file located at ``/usr/share/wazuh-dashboard/data/wazuh/config/wazuh.yml``. If this exists and there is not a previous configuration stored in the saved object, the configuration defined in the file will be read and stored in the saved object.
 
 Script
 ^^^^^^
