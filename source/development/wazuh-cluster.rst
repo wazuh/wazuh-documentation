@@ -481,7 +481,7 @@ Another example that can show how asynchronous tasks are used is Distributed API
 
 The type association with every endpoint can be found here: `API controllers <https://github.com/wazuh/wazuh/tree/v|WAZUH_CURRENT|/api/api/controllers>`__.
 
-Imagine a cluster with two nodes, where there is an agent reporting to the worker node with id *020*. The following diagram shows the process of requesting ``GET/syscollector/020/os`` API endpoint:
+Imagine a cluster with two nodes, where there is an agent reporting to the worker node with id *020*. The following diagram shows the process of running a distributed API request by requesting the ``GET/sca/020`` API endpoint:
 
 .. thumbnail:: ../images/development/distributed-dapi-worker.png
     :title: Distributed API requests
