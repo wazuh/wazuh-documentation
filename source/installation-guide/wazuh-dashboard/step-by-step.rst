@@ -98,22 +98,6 @@ Starting the Wazuh dashboard service
 
       .. include:: /_templates/installations/dashboard/enable_dashboard.rst
 
-      
-      **Only for distributed deployments**  
-      
-          Edit the ``/usr/share/wazuh-dashboard/data/wazuh/config/wazuh.yml`` file and replace the ``url`` value with the IP address or hostname of the Wazuh server master node.
-          
-            .. code-block:: yaml
-               :emphasize-lines: 3
-            
-               hosts:
-                 - default:
-                     url: https://localhost
-                     port: 55000
-                     username: wazuh-wui
-                     password: wazuh-wui
-                     run_as: false
-
 
   #. Access the Wazuh web interface with your credentials.
 
@@ -122,6 +106,17 @@ Starting the Wazuh dashboard service
       - **Password**: *admin*
 
     When you access the Wazuh dashboard for the first time, the browser shows a warning message stating that the certificate was not issued by a trusted authority. An exception can be added in the advanced options of the web browser. For increased security, the ``root-ca.pem``  file previously generated can be imported to the certificate manager of the browser. Alternatively, a certificate from a trusted authority can be configured. 
+
+  #.  Add a new server API.
+
+      Go to **Dashboard management** > **Server APIs**, click on **Add new API** button and fill the form with:
+
+      - **ID**: default
+      - **URL**: IP address or hostname of the Wazuh server master node
+      - **Port**: 55000
+      - **Username**: wazuh-wui
+      - **Password**: wazuh-wui
+      - **Run as**: false 
 
 
 Securing your Wazuh installation
@@ -209,22 +204,13 @@ Select your deployment type and follow the instructions to change the default pa
 
             # echo <kibanaserver-password> | /usr/share/wazuh-dashboard/bin/opensearch-dashboards-keystore --allow-root add -f --stdin opensearch.password
 
-      #. Update the ``/usr/share/wazuh-dashboard/data/wazuh/config/wazuh.yml`` configuration file with the new `wazuh-wui` password generated in the second step.
-
-         .. code-block:: yaml
-            :emphasize-lines: 6
-           
-            hosts:
-              - default:
-                  url: https://localhost
-                  port: 55000
-                  username: wazuh-wui
-                  password: "<wazuh-wui-password>"
-                  run_as: false
-
       #. Restart the Wazuh dashboard to apply the changes.
 
          .. include:: /_templates/common/restart_dashboard.rst
+
+      #. Update the API host password.
+      
+         On Wazuh dashboard, go to **Dashboard management** > **Server APIs**, click on the edit button of the secured server API entry and replace the **Password** field, then click on the **Apply** button to save.
 
 
 Next steps

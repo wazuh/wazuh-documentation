@@ -279,20 +279,9 @@ Edit the Wazuh indexer security configuration files. We recommend that you back 
 Wazuh dashboard configuration
 -----------------------------
 
-#. Check the value of ``run_as`` in the ``/usr/share/wazuh-dashboard/data/wazuh/config/wazuh.yml`` configuration file. If ``run_as`` is set to ``false``, proceed to the next step.
+#. Check the value of ``Run as`` in the API host entry configuration on **Dashboard management** > **Server APIs**. If ``Run as`` is set to ``false``, proceed to the next step.
 
-   .. code-block:: yaml
-      :emphasize-lines: 7
-
-      hosts:
-        - default:
-            url: https://localhost
-            port: 55000
-            username: wazuh-wui
-            password: "<wazuh-wui-password>"
-            run_as: false
-
-   If ``run_as`` is set to ``true``, you need to add a role mapping on the Wazuh dashboard. To map the backend role to Wazuh, follow these steps:
+   If ``Run as`` is set to ``true``, you need to add a role mapping on the Wazuh dashboard. To map the backend role to Wazuh, follow these steps:
 
    #. Click **☰** to open the menu on the Wazuh dashboard, go to **Server management** > **Security**, and then **Roles mapping** to open the page.
 
