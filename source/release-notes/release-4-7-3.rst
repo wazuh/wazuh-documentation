@@ -18,6 +18,16 @@ Resolved issues
 
 This release resolves known issues as the following: 
 
+Wazuh manager
+^^^^^^^^^^^^^
+
+===========================================================  =============
+ Reference                                                   Description
+===========================================================  =============
+`#21997 <https://github.com/wazuh/wazuh/pull/21997>`__       Resolved a transitive mutex locking issue in wazuh-db that was impacting performance.
+`#21977 <https://github.com/wazuh/wazuh/pull/21977>`__       Wazuh DB internal SQL queries have been optimized by tuning database indexes to improve performance.
+===========================================================  =============
+
 Changelogs
 ----------
 
