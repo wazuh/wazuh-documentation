@@ -9,7 +9,8 @@ Configuration
 =============
 
 The configuration related to Wazuh plugins is defined in:
-- saved object. You can use the **Dashboard management > App Settings** application to define the custom values for several options.
+
+- saved object. Define the custom values for several settings on **Dashboard management** > **App Settings** or the API host entries on **Dashboard management** > **Server APIs**.
 - configuration file of Wazuh dashboard. Located at ``/etc/wazuh-dashboard/opensearch_dashboards.yml`` for package installations or ``/usr/share/wazuh-dashboard/config/opensearch_dashoards.yml`` for Docker installations.
 
 This section describes all the settings available for each location.
@@ -17,19 +18,46 @@ This section describes all the settings available for each location.
 Load a configuration
 --------------------
 
-You can load a configuration through of:
-- on Wazuh dashboard start
-- script
+You can load a configuration using a file through of:
+
+- on start
+- update
 
 On start
 ^^^^^^^^
 
-When Wazuh dashboard starts checks if there are a file located at ``/usr/share/wazuh-dashboard/data/wazuh/config/wazuh.yml``. If this exists and there is not a previous configuration stored in the saved object, the configuration defined in the file will be read and stored in the saved object.
+When Wazuh dashboard starts checks if there are a file located at ``/usr/share/wazuh-dashboard/data/wazuh/config/wazuh.yml``. If this exists and there is not a previous configuration stored in the saved object, the configuration will be updated.
 
-Script
+This process is oriented to migrations from previous versions.
+
+Update
 ^^^^^^
 
-TODO
+This process can update the current configuration using a configuration file based on the format of ``wazuh.yml`.
+
+#. Define a configuration file according to the settings
+
+#. On the Wazuh dashboard host, go to ``/usr/share/wazuh-dashboard/plugins/wazuh_core/scripts`` and run:
+
+    Update the configuration:
+
+.. code-block:: sh
+
+    bash wazuh-dashboard-setup-configuration --config-file <config-file> --host <wazuh-dashboard-url> --user <username> --password <password>
+
+where:
+    - config-file: path to the configuration file
+    - host: URL address of the Wazuh dashboard host
+    - user: username
+    - password: password for the user
+
+.. note::
+
+    The user must be an administrator user that has permissions to update the settings.
+
+.. note::
+
+    If you want to clear the previous configuration, use the ``--clear`` parameter.
 
 Settings
 --------
