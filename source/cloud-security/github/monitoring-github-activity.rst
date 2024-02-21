@@ -166,8 +166,8 @@ After enabling the dashboard visualization, navigate to **Modules** > **GitHub**
       :width: 80%
 
    .. thumbnail:: /images/cloud-security/github/github-module-dashboard2.png
-      :title: GitHub module dashboard
-      :alt: GitHub module dashboard
+      :title: GitHub module events dashboard
+      :alt: GitHub module events dashboard
       :align: center
       :width: 80%
 
@@ -188,9 +188,219 @@ Create a GitHub personal access token within the ``admin:org``, ``repo``, and ``
 #. Navigate to https://github.com/settings/tokens/new, add a note for the token, select your desired expiration time, and then select the ``repo`` and the ``admin:org`` scopes.
 
    .. thumbnail:: /images/cloud-security/github/use-case-github-new-personal-access-token.png
-      :title: GitHub module dashboard
-      :alt: GitHub module dashboard
+      :title: GitHub new personal access token
+      :alt: GitHub new personal access token
       :align: center
       :width: 80%
 
-#. 
+#. Scroll to the bottom of the page, then select the ``delete_repo`` scope and click the **Generate token** button.
+
+   .. thumbnail:: /images/cloud-security/github/use-case-github-generate-token.png
+      :title: GitHub Generate token
+      :alt: GitHub Generate token
+      :align: center
+      :width: 80%
+
+#. Copy the newly generated personal access token.
+
+   .. thumbnail:: /images/cloud-security/github/use-case-github-copy-generated-token.png
+      :title: Copy generated token
+      :alt: Copy generated token
+      :align: center
+      :width: 80%
+
+Ubuntu endpoint
+^^^^^^^^^^^^^^^
+
+Detect organization members’ manipulation
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+Invite a member
+'''''''''''''''
+
+Take the following steps to invite a member to your organization.
+
+#. Run the following command on the Ubuntu endpoint:
+
+   .. code-block:: console
+
+      # curl -L \
+        -X POST \
+        -H "Accept: application/vnd.github+json" \
+        -H "Authorization: Bearer <API_TOKEN>" \
+        -H "X-GitHub-Api-Version: 2022-11-28" \
+        https://api.github.com/orgs/<ORG_NAME>/invitations \
+        -d '{"email":"<USER_EMAIL>","role":"direct_member"'
+
+   Where:
+
+   -  ``<API_TOKEN>`` is the GitHub personal access token created within the ``admin:org`` scope.
+   -  ``<ORG_NAME>`` is your organization name.
+   -  ``<USER_EMAIL>`` is the email address of the user you want to invite.
+
+#. Go to the invited member’s mailbox and accept the invite.
+
+Promote a member to administrator
+'''''''''''''''''''''''''''''''''
+
+Run the following command to promote a member of your organization to the role of an administrator:
+
+.. code-block:: console
+
+   # curl \
+     -u <ADMIN_USERNAME>:<API_TOKEN> \
+     -X PUT \
+     -H "Accept: application/vnd.github.v3+json" https://api.github.com/orgs/<ORG_NAME>/memberships/<MEMBER_USERNAME> \
+      -d '{"role":"admin"}'
+
+Where:
+
+-  ``<ADMIN_USERNAME>`` is the username of a current administrator. For example, the username of the owner of the organization.
+-  ``<API_TOKEN>``  is the GitHub personal access token created within the ``admin:org`` scope.
+-  ``<ORG_NAME>`` is your organization name.
+-  ``<MEMBER_USERNAME>`` is the username of the user you want to promote.
+
+Create a new team
+'''''''''''''''''
+
+Run the following command to create a new team in your organization:
+
+.. code-block:: console
+
+   # curl -X POST \
+        -H "Authorization: Bearer <API_TOKEN>" \
+        -d '{"name": "<NEW_TEAM_NAME>"}' \
+        "https://api.github.com/orgs/<ORG_NAME>/teams"
+
+Where:
+
+-  ``<NEW_TEAM_NAME>`` is the name of the new team.
+-  ``<API_TOKEN>`` is the GitHub personal access token created within the ``admin:org`` scope.
+-  ``<ORG_NAME>`` is your organization name.
+
+The image below shows the alerts generated on the Wazuh dashboard after we performed the above actions on the monitored GitHub organization.
+
+.. thumbnail:: /images/cloud-security/github/use-case-github-members-monitoring-alerts-dashboard.png
+   :title: GitHub members monitoring alerts dashboard
+   :alt: GitHub members monitoring alerts dashboard
+   :align: center
+   :width: 80%
+
+Detect changes to a repository
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+Create a new repository
+'''''''''''''''''''''''
+
+Run the following command to create a new repository:
+
+.. code-block:: console
+
+   # curl -L \
+     -X POST \
+     -H "Accept: application/vnd.github+json" \
+     -H "Authorization: Bearer <API_TOKEN>" \
+     -H "X-GitHub-Api-Version: 2022-11-28" \
+     https://api.github.com/orgs/<ORG_NAME>/repos \
+     -d '{"name":"<NEW_REPO_NAME>"}'
+
+Where:
+
+-  ``<API_TOKEN>`` is the GitHub personal access token created within the ``repo`` scope.
+-  ``<ORG_NAME>`` is your organization name.
+-  ``<NEW_REPO_NAME>`` is the name of the repository you want to create.
+
+Add a team to your repository
+'''''''''''''''''''''''''''''
+
+Run the following commands to list teams and add a team to your repository:
+
+#. List the team IDs in your organization.
+
+   .. code-block:: console
+
+      # curl -H "Authorization: Bearer <API_TOKEN>" "https://api.github.com/orgs/<ORG_NAME>/teams"
+
+#. Input the ID of the team you want to add to your repository.
+
+   .. code-block:: console
+
+      # curl -X PUT \
+           -H "Authorization: Bearer <API_TOKEN>" \
+           -d '{"permission": "push"}' \
+           "https://api.github.com/teams/<TEAM_ID>/repos/<ORG_NAME>/<REPO_NAME>"
+
+   Where:
+
+   -  ``<TEAM_ID>`` is the team ID.
+   -  ``<API_TOKEN>`` is the GitHub personal access token created within the ``admin:org`` scope.
+   -  ``<ORG_NAME>`` is your organization name.
+   -  ``<REPO_NAME>`` is the name of the repository you want to add a team to.
+
+Manage privileges
+'''''''''''''''''
+
+Run the following command to grant members of your team administrator privileges on the repository:
+
+.. code-block:: console
+
+   # curl \
+   -u <ADMIN_USERNAME>:<API_TOKEN> \
+   -X PUT \
+   -H "Accept: application/vnd.github.v3+json" https://api.github.com/orgs/<ORG_NAME>/teams/<TEAM_NAME>/repos/<ORG_NAME>/<REPO_NAME> \
+    -d '{"permission":"admin"}'
+
+Where:
+
+-  ``<ADMIN_USERNAME>`` is the username of the user that has permission to promote a user to admin
+-  ``<API_TOKEN>`` is the GitHub personal access token created within the ``admin:org`` scope.
+-  ``<ORG_NAME>`` is your organization name.
+-  ``<REPO_NAME>`` is the name of the repository you want to manage its team’s access.
+-  ``<TEAM_NAME>`` is the name of the specific team in your repository.
+
+Delete repository
+'''''''''''''''''
+
+Run the following command to delete a repository in your organization:
+
+.. code-block:: console
+
+   # curl -L \
+     -X DELETE \
+     -H "Accept: application/vnd.github+json" \
+     -H "Authorization: Bearer <API_TOKEN>" \
+     -H "X-GitHub-Api-Version: 2022-11-28" \
+     https://api.github.com/repos/<ORG_NAME>/<REPO_NAME>
+
+Where:
+
+-  ``<API_TOKEN>`` is the GitHub personal access token created within the ``delete_repo`` scope.
+-  ``<ORG_NAME>`` is your organization name.
+-  ``<REPO_NAME>`` is the name of the repository you want to delete from your organization.
+
+Delete team
+'''''''''''
+
+Run the following command to delete the team you created:
+
+.. code-block:: console
+
+   # curl -L \
+     -X DELETE \
+     -H "Accept: application/vnd.github+json" \
+     -H "Authorization: Bearer <API_TOKEN>" \
+     https://api.github.com/orgs/<ORG_NAME>/teams/<TEAM_NAME>
+
+Where:
+
+-  ``<API_TOKEN>`` is the GitHub personal access token created within the ``admin:org`` scope.
+-  ``<ORG_NAME>`` is your organization name.
+-  ``<TEAM_NAME>`` is the name of the specific team in your repository.
+
+The image below shows the alerts generated on the Wazuh dashboard after we performed the above actions on the monitored GitHub organization.
+
+.. thumbnail:: /images/cloud-security/github/use-case-github-repository-monitoring-alerts-dashboard.png
+   :title: GitHub repository monitoring alerts dashboard
+   :alt: GitHub repository monitoring alerts dashboard
+   :align: center
+   :width: 80%
