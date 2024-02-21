@@ -35,10 +35,11 @@ Getting access credentials for Storage
     :align: center
     :width: 100%
 
-Using an authentication file
-----------------------------
 
-It is possible to store the credentials in a file for authentication as long as the file content follows the `field = value` format explained below.
+Authentication
+--------------
+
+To authenticate, store the credentials in a file whose content follows the `field = value` format explained below.
 
 The fields expected to be present in the credentials file will change depending on the type of service or activity to be monitored.
 
