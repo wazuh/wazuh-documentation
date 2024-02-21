@@ -1,18 +1,38 @@
 .. Copyright (C) 2015, Wazuh, Inc.
 
 .. meta::
-  :description: The Wazuh dashboard includes a configuration file where you can define custom values for several options. Learn more about it in this section.
+  :description: The Wazuh dashboard includes a configuration where you can define custom values for several options. Learn more about it in this section.
 
 .. _wazuh_dashboard_config_file:
 
-Configuration file
-==================
+Configuration
+=============
 
-The Wazuh dashboard includes a configuration file located at ``/usr/share/wazuh-dashboard/data/wazuh/config/wazuh.yml`` where you can define custom values for several options. This section describes all the settings available in this file.
+The configuration related to Wazuh plugins is defined in:
+- saved object. You can use the **Dashboard management > App Settings** application to define the custom values for several options.
+- configuration file of Wazuh dashboard. Located at ``/etc/wazuh-dashboard/opensearch_dashboards.yml`` for package installations or ``/usr/share/wazuh-dashboard/config/opensearch_dashoards.yml`` for Docker installations.
 
-If you are using the Wazuh Kibana plugin, you can find this configuration file at ``/usr/share/kibana/data/wazuh/config/wazuh.yml``. 
+This section describes all the settings available for each location.
 
-The configuration file shows the default values for all of the possible options. You can edit the file, uncomment any of them and apply the desired values. You can also edit these settings from the Wazuh dashboard in **Indexer/dashboard management** > **App Settings**.
+Load a configuration
+--------------------
+
+You can load a configuration through of:
+- on Wazuh dashboard start
+- script
+
+On start
+^^^^^^^^
+
+When Wazuh dashboard starts checks if there are a file located at ``/usr/share/wazuh-dashboard/data/wazuh/config/wazuh.yml``. If this exists and does not a previous configuration stored in the saved object, the configuration defined in the file will be read and stored in the saved object.
+
+Script
+^^^^^^
+
+TODO
+
+Settings
+--------
 
 The configuration file reference is organized by sections:
 
@@ -521,7 +541,7 @@ Set the footer of the PDF reports. To use an empty footer, type a space " " in t
 Example
 -------
 
-This is an example of the wazuh.yml configuration:
+This is an example of the wazuh.yml configuration that can be used to load a configuration:
 
 .. code-block:: yaml
     
@@ -589,3 +609,39 @@ This is an example of the wazuh.yml configuration:
     # Enrollment DNS
     enrollment.dns: ''
     enrollment.password: ''
+
+
+Configuration of Wazuh dashboard
+--------------------------------
+
+The configuration stored as saved object depends on some settings defined in the configuration file of Wazuh dashboard.
+
+wazuh_core.configuration.encryption_key
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Define a key to encrypt some data values of the configuration saved object.
+
++--------------------+----------------------------+
+| **Default value**  | secretencryptionkey!       |
++--------------------+----------------------------+
+| **Allowed values** | Any string                 |
++--------------------+----------------------------+
+
+.. warning::
+
+    Any change in this value could cause a problem if there was data stored that was encrypted with the previous key.
+
+wazuh_core.instance
+^^^^^^^^^^^^^^^^^^^
+
+Define the Wazuh dashboard instance. This defines an identifier of the saved object configuration to use in the Wazuh dashboard instance. This allows to define independant or shared configuration for different Wazuh dashboard instances that uses the same Wazuh indexer backend.
+
++--------------------+----------------------------+
+| **Default value**  | wazuh-dashboard            |
++--------------------+----------------------------+
+| **Allowed values** | Any string                 |
++--------------------+----------------------------+
+
+.. warning::
+
+    Any change in this value could cause stored configuration previously is lost.
