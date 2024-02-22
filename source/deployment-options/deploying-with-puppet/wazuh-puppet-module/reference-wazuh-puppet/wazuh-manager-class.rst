@@ -624,289 +624,105 @@ $syslog_output_format
 
 
 
-.. _ref_server_vars_vuln_detector:
+.. _ref_server_vars_vuln_detection:
 
-Vulnerability Detector variables
---------------------------------
+Vulnerability Detection variables
+---------------------------------
 
-$configure_vulnerability_detector
-  Enables Vulnerability detector section rendering on this host. If this variable is not set to *true*, the complete vulnerability-detector tag will not be added to *ossec.conf*.
+$configure_vulnerability_detection
+  Enables Vulnerability detection section rendering on this host. If this variable is not set to *true*, the complete vulnerability-detection tag will not be added to *ossec.conf*.
 
   `Default yes`
 
   `Type Boolean`
 
-$vulnerability_detector_enabled
-  Enables the module.
-
-  `Default no`
-
-  `Type String`
-
-   Depends on **configure_vulnerability_detector**
-
-$vulnerability_detector_interval
-  Time between vulnerabilities scans.
-
-  `Default 5m`
-
-  `Type String`
-
-   Depends on **configure_vulnerability_detector**
-
-$vulnerability_detector_min_full_scan_interval
-  Time interval after which a full scan will be triggered if the vulnerabilities database is updated with new CVEs information.
-
-  `Default 6h`
-
-  `Type String`
-
-   Depends on **configure_vulnerability_detector**
-
-$vulnerability_detector_run_on_start
-  Runs updates and vulnerabilities scans immediately when service is started.
+$vulnerability_detection_enabled
+  Enables the vulnerability detection module.
 
   `Default yes`
 
   `Type String`
 
-   Depends on **configure_vulnerability_detector**
+   Depends on **configure_vulnerability_detection**
 
-$vulnerability_detector_provider_canonical
-  Enables canonical as feed to update.
-
-  `Default yes`
-
-  `Type String`
-
-   Depends on **configure_vulnerability_detector**
-
-$vulnerability_detector_provider_canonical_enabled
-  Enables updating from Canonical feed.
-
-  `Default no`
-
-  `Type String`
-
-   Depends on **configure_vulnerability_detector**
-
-$vulnerability_detector_provider_canonical_os
-  Feed to update.
-
-  `Default ['trusty','xenial','bionic']`
-
-  `Type List`
-
-   Depends on **configure_vulnerability_detector**
-
-$vulnerability_detector_provider_canonical_update_interval
-  How often the vulnerability database is updated. It has priority over the `update_interval` option of the provider block.
-
-  `Default 1h`
-
-  `Type String`
-
-   Depends on **configure_vulnerability_detector**
-
-$vulnerability_detector_provider_debian
-  Enables Debian as feed to update.
+$vulnerability_detection_index_status
+  Enables indexing of vulnerability inventory data.
 
   `Default yes`
 
   `Type String`
 
-   Depends on **configure_vulnerability_detector**
+   Depends on **configure_vulnerability_detection**
 
-$vulnerability_detector_provider_debian_enabled
-  Enables updating from Debian feed.
+$vulnerability_detection_feed_update_interval
+  Time interval for periodic feed updates.
 
-  `Default no`
-
-  `Type String`
-
-   Depends on **configure_vulnerability_detector**
-
-$vulnerability_detector_provider_debian_os
-  Feed to update.
-
-  `Default ['buster', 'bullseye', 'bookworm']`
+  `Default 60m`
 
   `Type String`
 
-   Depends on **configure_vulnerability_detector**
+   Depends on **configure_vulnerability_detection**
 
-$vulnerability_detector_provider_debian_update_interval
-  How often the vulnerability database is updated. It has priority over the `update_interval` option of the provider block.
+$configure_vulnerability_indexer
+  Enables Vulnerability detection indexer section rendering on this host. If this variable is not set to *true*, the vulnerability-indexer tag will not be added to *ossec.conf*.
 
-  `Default 1h`
+  `Default yes`
 
-  `Type String`
+  `Type Boolean`
 
-   Depends on **configure_vulnerability_detector**
-
-$vulnerability_detector_provider_redhat
-  Enables Red Hat as feed to update.
+$vulnerability_indexer_enabled
+  Enables the Vulnerability detection indexer module.
 
   `Default yes`
 
   `Type String`
 
-   Depends on **configure_vulnerability_detector**
+   Depends on **configure_vulnerability_indexer**
 
+$vulnerability_indexer_hosts_host
+  host or IP of Wazuh indexer nodes.
 
-$vulnerability_detector_provider_redhat_enabled
-  Enables updating from Red Hat feed.
-
-  `Default no`
-
-  `Type String`
-
-   Depends on **configure_vulnerability_detector**
-
-$vulnerability_detector_provider_redhat_os
-  Feed to update.
-
-  `Default []`
-
-  `Type List`
-
-   Depends on **configure_vulnerability_detector**
-
-$vulnerability_detector_provider_redhat_update_interval
-  How often the vulnerability database is updated. It has priority over the `update_interval` option of the provider block.
-
-  `Default 1h`
+  `Default ['127.0.0.1']`
 
   `Type String`
 
-   Depends on **configure_vulnerability_detector**
+   Depends on **configure_vulnerability_indexer**
 
-$vulnerability_detector_provider_nvd
-  Enables NVD as feed to update.
+$vulnerability_indexer_hosts_port
+  Port of Wazuh indexer.
 
-  `Default yes`
-
-  `Type String`
-
-   Depends on **configure_vulnerability_detector**
-
-$vulnerability_detector_provider_nvd_enabled
-  Enables updating from NVD feed.
-
-  `Default no`
+  `Default 9200`
 
   `Type String`
 
-   Depends on **configure_vulnerability_detector**
+   Depends on **configure_vulnerability_indexer**
 
-$vulnerability_detector_provider_nvd_os
-  Feed to update.
+$vulnerability_indexer_ssl_ca
+  Path of ca certificate.
 
-  `Default []`
-
-  `Type String`
-
-   Depends on **configure_vulnerability_detector**
-
-$vulnerability_detector_provider_nvd_update_interval
-  How often the vulnerability database is updated. It has priority over the `update_interval` option of the provider block.
-
-  `Default 1h`
+  `Default /etc/filebeat/certs/root-ca.pem`
 
   `Type String`
 
-   Depends on **configure_vulnerability_detector**
+   Depends on **configure_vulnerability_indexer**
 
-$vulnerability_detector_provider_arch
-  Enables Arch as a feed to update.
+$vulnerability_indexer_ssl_certificate
+  Path of Filebeat certificate.
 
-  `Default yes`
-
-  `Type String`
-
-   Depends on **configure_vulnerability_detector**
-
-$vulnerability_detector_provider_arch_enabled
-  Enables updating from the Arch feed.
-
-  `Default no`
+  `Default /etc/filebeat/certs/filebeat.pem`
 
   `Type String`
 
-   Depends on **configure_vulnerability_detector**
+   Depends on **configure_vulnerability_indexer**
 
-$vulnerability_detector_provider_arch_update_interval
-  How often the vulnerability database is updated. It has priority over the update_interval option of the provider block.
+$vulnerability_indexer_ssl_key
+  Path of Filebeat key.
 
-  `Default 1h`
-
-  `Type String`
-
-   Depends on **configure_vulnerability_detector**
-
-$vulnerability_detector_provider_alas
-  Enables ALAS as a feed to update.
-
-  `Default yes`
+  `Default /etc/filebeat/certs/filebeat-key.pem`
 
   `Type String`
 
-   Depends on **configure_vulnerability_detector**
-
-$vulnerability_detector_provider_alas_enabled
-  Enables updating from the ALAS feed.
-
-  `Default no`
-
-  `Type String`
-
-   Depends on **configure_vulnerability_detector**
-
-$vulnerability_detector_provider_alas_os
-  Feed to update.
-
-  `Default ['amazon-linux','amazon-linux-2','amazon-linux-2022','amazon-linux-2023']`
-
-  `Type List`
-
-   Depends on **configure_vulnerability_detector**
-
-$vulnerability_detector_provider_alas_update_interval
-  How often the vulnerability database is updated. It has priority over the update_interval option of the provider block.
-
-  `Default 1h`
-
-  `Type String`
-
-   Depends on **configure_vulnerability_detector**
-
-$vulnerability_detector_provider_msu
-  Enables MSU as a feed to update.
-
-  `Default yes`
-
-  `Type String`
-
-   Depends on **configure_vulnerability_detector**
-
-$vulnerability_detector_provider_msu_enabled
-  Enables updating from the MSU feed.
-
-  `Default no`
-
-  `Type String`
-
-   Depends on **configure_vulnerability_detector**
-
-$vulnerability_detector_provider_msu_update_interval
-  How often the vulnerability database is updated. It has priority over the update_interval option of the provider block.
-
-  `Default 1h`
-
-  `Type String`
-
-   Depends on **configure_vulnerability_detector**
-
+   Depends on **configure_vulnerability_indexer**
 
 .. _ref_server_vars_wazuh_api:
 

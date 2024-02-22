@@ -369,7 +369,7 @@ Reference Wazuh puppet
 |                                                                 |                                                                 |                                             |
 |                                                                 | :ref:`Syslog output <ref_server_vars_syslog_output>`            |                                             |
 |                                                                 |                                                                 |                                             |
-|                                                                 | :ref:`Vulnerability Detector <ref_server_vars_vuln_detector>`   |                                             |
+|                                                                 | :ref:`Vulnerability Detection <ref_server_vars_vuln_detection>` |                                             |
 |                                                                 |                                                                 |                                             |
 |                                                                 | :ref:`Wazuh API <ref_server_vars_wazuh_api>`                    |                                             |
 |                                                                 |                                                                 |                                             |
