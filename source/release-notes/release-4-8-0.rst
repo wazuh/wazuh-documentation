@@ -111,8 +111,6 @@ Packages
 ^^^^^^^^
 
 - `#2332 <https://github.com/wazuh/wazuh-packages/pull/2332>`_ Added check into the installation assistant to prevent the use of public IP addresses.
-- `#2582 <https://github.com/wazuh/wazuh-packages/pull/2582>`_ Added the ISM init script to the Wazuh indexer package to handle the creation of ISM policies.
-- `#2584 <https://github.com/wazuh/wazuh-packages/pull/2584>`_ Added ISM init script to the installation assistant.
 - `#2365 <https://github.com/wazuh/wazuh-packages/pull/2365>`_ Removed the ``postProvision.sh`` script. It's no longer used in OVA generation.
 - `#2364 <https://github.com/wazuh/wazuh-packages/pull/2364>`_ Added ``curl`` error messages in downloads.
 - `#2469 <https://github.com/wazuh/wazuh-packages/pull/2469>`_ Improved debug output in the installation assistant.
@@ -122,7 +120,6 @@ Packages
 - `#2562 <https://github.com/wazuh/wazuh-packages/pull/2562>`_ Bumped Wazuh indexer to OpenSearch 2.10.0.
 - `#2563 <https://github.com/wazuh/wazuh-packages/pull/2563>`_ Bumped Wazuh dashboard to OpenSearch Dashboards 2.10.0.
 - `#2577 <https://github.com/wazuh/wazuh-packages/pull/2577>`_ Added APT and YUM lock logic to the Wazuh installation assistant.
-- `#2553 <https://github.com/wazuh/wazuh-packages/pull/2553>`_ Added new role to grant ISM API permissions.
 - `#2164 <https://github.com/wazuh/wazuh-packages/pull/2164>`_ Deprecated CentOS 6 and Debian 7 for the Wazuh manager compilation, while still supporting them in the Wazuh agent compilation.
 - `#2588 <https://github.com/wazuh/wazuh-packages/pull/2588>`_ Added logic to the installation assistant to check for clean Wazuh central components removal.
 - `#2615 <https://github.com/wazuh/wazuh-packages/pull/2615>`_ Added branding images to the header of Wazuh dashboard.
