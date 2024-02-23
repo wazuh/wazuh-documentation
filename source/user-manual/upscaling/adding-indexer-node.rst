@@ -452,7 +452,19 @@ Once the certificates have been created and copied to the new node(s), you can n
 
 #. Install package dependencies.
 
-   .. include:: /_templates/installations/indexer/common/install-dependencies.rst
+   .. tabs::
+
+      .. group-tab:: Yum
+
+         .. code-block:: console
+
+            # yum install coreutils
+
+      .. group-tab:: APT
+
+         .. code-block:: console
+
+            # apt-get install debconf adduser procps
 
 #. Add the Wazuh repository.
 
@@ -552,7 +564,7 @@ Starting the service
 Cluster initialization
 ----------------------
 
-Run the Wazuh indexer ``indexer-security-init.sh`` script on `any` Wazuh indexer node to load the new certificates information and start the single-node or multi-node cluster. 
+Run the Wazuh indexer ``indexer-security-init.sh`` script on `any` Wazuh indexer node to load the new certificates information and start the cluster. 
     
 .. code-block:: console
 

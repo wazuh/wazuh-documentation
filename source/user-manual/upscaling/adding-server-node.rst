@@ -262,7 +262,7 @@ All-in-one deployment
       cluster.initial_master_nodes:
       - "<WAZUH_INDEXER_NODE_NAME>"
 
-#. Edit the filebeat configuration file ``/etc/filebeat/filebeat.yml`` (Located in the Wazuh server node in distributed deployments) to specify the indexer’s IP address:
+#. Edit the filebeat configuration file ``/etc/filebeat/filebeat.yml`` to specify the indexer’s IP address:
 
    .. code-block:: yaml
 
