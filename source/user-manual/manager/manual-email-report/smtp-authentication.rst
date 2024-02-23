@@ -50,6 +50,7 @@ Wazuh email alerts does not support SMTP servers with authentication such as Gma
             smtp_tls_CAfile = /etc/ssl/certs/ca-certificates.crt
             smtp_use_tls = yes
             smtpd_relay_restrictions = permit_mynetworks, permit_sasl_authenticated, defer_unauth_destination
+            inet_interfaces = localhost
 
 #. Set the sender email address and password. Replace *USERNAME* and *PASSWORD* with your own data.
 
