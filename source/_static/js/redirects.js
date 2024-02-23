@@ -107,6 +107,7 @@ newUrls['4.7'] = [
   '/release-notes/release-4-7-0.html',
   '/release-notes/release-4-7-1.html',
   '/release-notes/release-4-7-2.html',
+  '/release-notes/release-4-7-3.html',
   '/cloud-security/azure/posture-management.html',
   '/cloud-security/gcp/posture-management.html',
   '/cloud-service/archive-data/index.html',

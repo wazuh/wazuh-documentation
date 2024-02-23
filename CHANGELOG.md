@@ -45,6 +45,10 @@ All notable changes to this project will be documented in this file.
 - Deprecated ``/vulnerability`` API endpoints. ([#6738](https://github.com/wazuh/wazuh-documentation/pull/6738))
 - Remove implicit ``id!=000`` WQL filter in the search bar. ([#6815](https://github.com/wazuh/wazuh-documentation/pull/6815))
 
+## [v4.7.3]
+
+- Support for Wazuh 4.7.3
+
 ## [v4.7.2]
 
 ### Added
