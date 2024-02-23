@@ -64,8 +64,8 @@ Perform the following steps to allow Wazuh to monitor, collect, and analyze the 
           <curl_max_size>1M</curl_max_size>
           <only_future_events>yes</only_future_events>
           <api_auth>
-            <org_name>ORG_NAME</org_name>
-            <api_token>API_TOKEN</api_token>
+            <org_name><ORG_NAME></org_name>
+            <api_token><API_TOKEN></api_token>
           </api_auth>
           <api_parameters>
             <event_type>all</event_type>
@@ -121,18 +121,22 @@ You can monitor multiple GitHub organizations with Wazuh by specifying the organ
 
      <api_auth>
        <org_name>organization1</org_name>
-       <api_token>ghp_oiasd6efbvptrfdua8fyepnfdc78ewf324jg</api_token>
+       <api_token><API_TOKEN></api_token>
      </api_auth>
 
      <api_auth>
        <org_name>organization2</org_name>
-       <api_token>ghp_oiasd6efbvptrfdua8fyepnfdc78ewf324jg</api_token>
+       <api_token><API_TOKEN></api_token>
      </api_auth>
 
      <api_parameters>
        <event_type>git</event_type>
      </api_parameters>
    </github>
+
+Where:
+
+-  ``<API_TOKEN>`` is the GitHub personal access token created within the ``admin:org`` scope.
 
 Enabling dashboard visualization
 --------------------------------
