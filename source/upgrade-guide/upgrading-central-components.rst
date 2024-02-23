@@ -178,7 +178,6 @@ When upgrading a multi-node Wazuh manager cluster, run the upgrade in every node
 
    .. warning::
       Upgrading from Wazuh 4.7.x or lower with the vulnerability detector enabled requires additional steps, related with the indexer connection. For more information, check the :doc:`/user-manual/reference/ossec-conf/indexer` section.
-      You probably need to set your correct IP address and port of your indexer.
 
 #. Download the Wazuh module for Filebeat:
 
