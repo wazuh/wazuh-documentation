@@ -138,15 +138,15 @@ Packages
 - `#2669 <https://github.com/wazuh/wazuh-packages/pull/2669>`_ Upgraded ``botocore`` dependency in WPK package Docker containers.
 - `#2738 <https://github.com/wazuh/wazuh-packages/pull/2738>`_ Added ``xz utils`` as requirement.
 - `#2777 <https://github.com/wazuh/wazuh-packages/pull/2777>`_ Added support for refactored vulnerability detector in the installation assistant.
-- `#2797 <https://github.com/wazuh/wazuh-packages/pull/2797>`_ The installation assistant now uses ``127.0.0.1`` instead of ``localhost`` in dashboard configuration. `#2808 <https://github.com/wazuh/wazuh-packages/pull/2808>`__
+- `#2797 <https://github.com/wazuh/wazuh-packages/pull/2797>`_ The Wazuh installation assistant now uses ``127.0.0.1`` instead of ``localhost`` in the Wazuh dashboard configuration. `#2808 <https://github.com/wazuh/wazuh-packages/pull/2808>`__
 - `#2801 <https://github.com/wazuh/wazuh-packages/pull/2801>`_ Added check into the installation assistant to ensure ``sudo`` package is installed.
-- `#2802 <https://github.com/wazuh/wazuh-packages/pull/2802>`_ Added wazuh-keystore in passwords tool.
+- `#2802 <https://github.com/wazuh/wazuh-packages/pull/2802>`_ Added the Wazuh keystore functionality to the passwords tool.
 - `#2809 <https://github.com/wazuh/wazuh-packages/pull/2809>`_ Upgrade scripts to support building Wazuh with OpenSSL 3.0.
-- `#2784 <https://github.com/wazuh/wazuh-packages/pull/2784>`_ Addeded roll back and exit in case the Wazuh indexer security admin fails.
+- `#2784 <https://github.com/wazuh/wazuh-packages/pull/2784>`_ Added rollback and exit in case the Wazuh indexer security admin fails.
 - `#2804 <https://github.com/wazuh/wazuh-packages/pull/2804>`_ Added the keystore tool for both RPM and DEB manager packages creation. `#2802 <https://github.com/wazuh/wazuh-packages/pull/2802>`_
-- `#2798 <https://github.com/wazuh/wazuh-packages/pull/2798>`_ Add compression for wazuh-manager due to inclusion of vulnerability detector databases.
-- `#2796 <https://github.com/wazuh/wazuh-packages/pull/2796>`_ Simplified dashboard help menu entries.
-- `#2792 <https://github.com/wazuh/wazuh-packages/pull/2792>`_ Improved certificates generation output when using WIA/WCT.
+- `#2798 <https://github.com/wazuh/wazuh-packages/pull/2798>`_ Add compression for the Wazuh manager due to inclusion of Vulnerability Detection databases.
+- `#2796 <https://github.com/wazuh/wazuh-packages/pull/2796>`_ Simplified the Wazuh dashboard help menu entries.
+- `#2792 <https://github.com/wazuh/wazuh-packages/pull/2792>`_ Improved certificates generation output when using the Wazuh Installation Assistant and the Wazuh Certs Tool.
 
 Resolved issues
 ---------------
@@ -171,7 +171,7 @@ Reference                                                          Description
 `#16839 <https://github.com/wazuh/wazuh/pull/16839>`__             Fixed process path retrieval in Syscollector on Windows XP.
 `#16056 <https://github.com/wazuh/wazuh/pull/16056>`__             Fixed the OS version detection on Alpine Linux.
 `#18642 <https://github.com/wazuh/wazuh/pull/18642>`__             Fixed Solaris 10 name not showing in the dashboard.
-`#21932 <https://github.com/wazuh/wazuh/pull/21932>`__             Fixed and error in macOS Ventura compilation from sources.
+`#21932 <https://github.com/wazuh/wazuh/pull/21932>`__             Fixed an error in macOS Ventura compilation from sources.
 ==============================================================     =============
 
 RESTful API
@@ -204,7 +204,7 @@ Reference                                                                    Des
 `#6374 <https://github.com/wazuh/wazuh-dashboard-plugins/pull/6374>`__       Fixed the help menu, to be consistent and avoid duplication.
 `#6378 <https://github.com/wazuh/wazuh-dashboard-plugins/pull/6378>`__       Fixed the axis label visual bug from dashboards.
 `#6346 <https://github.com/wazuh/wazuh-dashboard-plugins/pull/6346>`__       Fixed bug related to the implicit filter close button in the search bar.
-`#6431 <https://github.com/wazuh/wazuh-dashboard-plugins/pull/6431>`__       Fixed error displaying when clicking **Refresh** in **MITRE ATT&CK** if the the Wazuh indexer service was down.
+`#6431 <https://github.com/wazuh/wazuh-dashboard-plugins/pull/6431>`__       Fixed error displaying when clicking **Refresh** in **MITRE ATT&CK** if the the Wazuh indexer service is down.
 =========================================================================    =============
 
 Packages
