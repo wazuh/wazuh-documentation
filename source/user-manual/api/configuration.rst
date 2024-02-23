@@ -220,8 +220,8 @@ https
 +--------------+------------------------------------+----------------------------------+-------------------------------------------------------------------------------------------------+
 | ca           | Any text string                    | ca.crt                           | Name of the certificate of the Certificate Authority (CA). Stored in ``api/configuration/ssl``. |
 +--------------+------------------------------------+----------------------------------+-------------------------------------------------------------------------------------------------+
-| ssl_protocol | TLS, TLSv1, TLSv1.1, TLSv1.2, auto | .. versionadded:: 4.8.0          |                                                                                                 | 
-|              |                                    |                                  |                                                                                                 |   
+| ssl_protocol | TLS, TLSv1, TLSv1.1, TLSv1.2, auto | .. versionadded:: 4.8.0          |                                                                                                 |
+|              |                                    |                                  |                                                                                                 |
 |              |                                    | auto                             | SSL protocol to allow. Its value is not case sensitive.                                         |
 +--------------+------------------------------------+----------------------------------+-------------------------------------------------------------------------------------------------+
 | ssl_ciphers  | Any text string                    | None                             | SSL ciphers to allow. Its value is not case sensitive.                                          |
@@ -249,14 +249,16 @@ max_size
 
 .. versionadded:: 4.6.0
 
-+------------+-----------------------------------------------+---------------+-------------------------------------------------------------------------------------------------------------------+
-| Sub-fields | Allowed values                                | Default value | Description                                                                                                       |
-+============+===============================================+===============+===================================================================================================================+
-| enabled    | yes, true, no, false                          | false         | Enable or disable log file rotation based on file size. This option will disable log file rotation based on time. |
-+------------+-----------------------------------------------+---------------+-------------------------------------------------------------------------------------------------------------------+
-| size       | Any positive number followed by a valid unit. | 1M            | Set a file size to trigger log rotation.                                                                          |
-|            | K/k for kilobytes, M/m for megabytes.         |               |                                                                                                                   |
-+------------+-----------------------------------------------+---------------+-------------------------------------------------------------------------------------------------------------------+
++------------+-----------------------------------------------+---------------+----------------------------------------------------------------------------------------------------------------------------+
+| Sub-fields | Allowed values                                | Default value | Description                                                                                                                |
++============+===============================================+===============+============================================================================================================================+
+| enabled    | yes, true, no, false                          | false         | Enable or disable log file rotation based on file size. This option will disable log file rotation based on time.          |
+|            |                                               |               | Rotation occurs after adding a new entry to the API log, triggering the selected method.                                   |
+|            |                                               |               | For instance, the time-based rotation will rotate after a new entry is added past midnight. Not at midnight automatically. |
++------------+-----------------------------------------------+---------------+----------------------------------------------------------------------------------------------------------------------------+
+| size       | Any positive number followed by a valid unit. | 1M            | Set a file size to trigger log rotation. This value must be equal or greater than 1M.                                      |
+|            | K/k for kilobytes, M/m for megabytes.         |               |                                                                                                                            |
++------------+-----------------------------------------------+---------------+----------------------------------------------------------------------------------------------------------------------------+
 
 
 cors
