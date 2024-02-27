@@ -221,18 +221,18 @@ Installing the Wazuh manager
 
    .. code-block:: console
 
-       # /var/ossec/bin/wazuh-keystore -f indexer -k username -v <INDEXER_USERNAME>
-       # /var/ossec/bin/wazuh-keystore -f indexer -k password -v <INDEXER_PASSWORD>   
+      # /var/ossec/bin/wazuh-keystore -f indexer -k username -v <INDEXER_USERNAME>
+      # /var/ossec/bin/wazuh-keystore -f indexer -k password -v <INDEXER_PASSWORD>   
 
    .. note:: The default offline-installation credentials are ``admin``:``admin``
 
-#.  Enable and start the Wazuh manager service.
+#. Enable and start the Wazuh manager service.
 
-    .. include:: /_templates/installations/wazuh/common/enable_wazuh_manager_service.rst
+   .. include:: /_templates/installations/wazuh/common/enable_wazuh_manager_service.rst
 
-#.  Run the following command to verify that the Wazuh manager status is active.
+#. Run the following command to verify that the Wazuh manager status is active.
 
-    .. include:: /_templates/installations/wazuh/common/check_wazuh_manager.rst
+   .. include:: /_templates/installations/wazuh/common/check_wazuh_manager.rst
 
 Installing Filebeat
 ~~~~~~~~~~~~~~~~~~~
