@@ -68,6 +68,15 @@ Installing the Wazuh manager
 
               # apt-get -y install wazuh-manager|WAZUH_MANAGER_DEB_PKG_INSTALL|
 
+  #. Save the Wazuh indexer username and password into the Wazuh manager keystore using the wazuh-keystore tool: 
+
+      .. code-block:: console
+
+        # /var/ossec/bin/wazuh-keystore -f indexer -k username -v <INDEXER_USERNAME>
+        # /var/ossec/bin/wazuh-keystore -f indexer -k password -v <INDEXER_PASSWORD>   
+
+      .. note:: The default step-by-step installation credentials are ``admin``:``admin``
+
   #. Enable and start the Wazuh manager service.
 
       .. include:: /_templates/installations/wazuh/common/enable_wazuh_manager_service.rst
@@ -76,15 +85,6 @@ Installing the Wazuh manager
   #. Run the following command to verify the Wazuh manager status.
 
       .. include:: /_templates/installations/wazuh/common/check_wazuh_manager.rst
-
-  #. Save the Wazuh indexer username and password into the Wazuh manager keystore using the wazuh-keystore tool: 
-
-    .. code-block:: console
-
-       # /var/ossec/bin/wazuh-keystore -f indexer -k username -v <INDEXER_USERNAME>
-       # /var/ossec/bin/wazuh-keystore -f indexer -k password -v <INDEXER_PASSWORD>   
-
-    .. note:: The default step-by-step installation credentials are ``admin``:``admin``
 
 .. _wazuh_server_multi_node_filebeat:
 
