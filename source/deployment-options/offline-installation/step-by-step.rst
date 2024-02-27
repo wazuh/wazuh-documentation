@@ -391,7 +391,7 @@ Installing the Wazuh dashboard
 
 #.  Add a new server API.
 
-      Go to **Dashboard management** > **Server APIs**, click on **Add API host** button and fill the form with:
+      Go to **Dashboard management** > **Server APIs**, click on **Add API connection** button and fill the form with:
 
       - **ID**: default
       - **URL**: IP address or hostname of the Wazuh server master node
