@@ -247,7 +247,7 @@ This block configures the integration with Azure Log Analytics REST API.
 log_analytics\\auth_path
 ^^^^^^^^^^^^^^^^^^^^^^^^
 
-Path of the file that contains the application identifier and the application key for authentication in order to use the Azure Log Analytics API.
+File path containing the application identifier and key for authentication. This is necessary to use the Azure Log Analytics API.
 
 +--------------------+--------------------+
 | **Default value**  | N/A                |
@@ -411,7 +411,7 @@ This block configures the integration with Azure Active Directory Graph REST API
 graph\\auth_path
 ^^^^^^^^^^^^^^^^
 
-Path of the file that contains the application identifier and the application key for authentication in order to use the AAD Graph API.
+File path containing the application identifier and key for authentication. This is necessary to use the AAD Graph API.
 
 +--------------------+--------------------+
 | **Default value**  | N/A                |
@@ -546,7 +546,7 @@ This block configures the integration with Azure Storage.
 storage\\auth_path
 ^^^^^^^^^^^^^^^^^^
 
-Path of the file that contains the account name and the account key for authentication.
+File path containing the account name and key for authentication.
 
 +--------------------+--------------------+
 | **Default value**  | N/A                |
