@@ -256,7 +256,7 @@ max_size
 |            |                                               |               | Rotation occurs after adding a new entry to the API log, triggering the selected method.                                   |
 |            |                                               |               | For instance, the time-based rotation will rotate after a new entry is added past midnight. Not at midnight automatically. |
 +------------+-----------------------------------------------+---------------+----------------------------------------------------------------------------------------------------------------------------+
-| size       | Any positive number followed by a valid unit. | 1M            | Set a file size to trigger log rotation. This value must be equal to or greater than 1M.                                      |
+| size       | Any positive number followed by a valid unit. | 1M            | Set a file size to trigger log rotation. This value must be equal to or greater than 1M.                                   |
 |            | K/k for kilobytes, M/m for megabytes.         |               |                                                                                                                            |
 +------------+-----------------------------------------------+---------------+----------------------------------------------------------------------------------------------------------------------------+
 
