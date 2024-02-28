@@ -231,7 +231,6 @@ The `service_endpoint` and `sts_endpoint` tags can be used to specify the VPC en
     </bucket>
 
     <bucket type="cloudtrail">
-      <aws_profile>default</aws_profile>
       <name>wazuh-cloudtrail-2</name>
       <aws_profile>default</aws_profile>
       <iam_role_arn>arn:aws:iam::xxxxxxxxxxx:role/wazuh-role</iam_role_arn>
