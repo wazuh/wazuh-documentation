@@ -3,8 +3,6 @@
 .. meta::
   :description: Learn how to deploy the Wazuh agent on Linux with deployment variables that facilitate the task of installing, registering, and configuring the agent. 
 
-.. _wazuh_agent_package_linux:
-
 Deploying Wazuh agents on Linux endpoints
 =========================================
 
@@ -139,51 +137,3 @@ The deployment process is now complete, and the Wazuh agent is successfully runn
       .. group-tab:: APK
 
         .. include:: ../../_templates/installations/wazuh/apk/disabling_repository.rst
-
-
-Uninstall a Wazuh agent
------------------------
-
-To uninstall the agent, run the following commands:
-
-
-#. Remove the Wazuh agent installation. 
-
-
-   .. tabs::
- 
- 
-     .. group-tab:: Yum
- 
- 
-       .. include:: ../../_templates/installations/wazuh/yum/uninstall_wazuh_agent.rst
- 
- 
- 
-     .. group-tab:: APT
- 
- 
-       .. include:: ../../_templates/installations/wazuh/deb/uninstall_wazuh_agent.rst
- 
- 
- 
-     .. group-tab:: ZYpp
- 
- 
-       .. include:: ../../_templates/installations/wazuh/zypp/uninstall_wazuh_agent.rst
-
-
-
-     .. group-tab:: APK
- 
- 
-       .. include:: ../../_templates/installations/wazuh/apk/uninstall_wazuh_agent.rst
-
-
-
-#. Disable the Wazuh agent service. 
-
-   .. include:: ../../_templates/installations/wazuh/common/disable_wazuh_agent_service.rst
-
-
-The Wazuh agent is now completely removed from your Linux endpoint.

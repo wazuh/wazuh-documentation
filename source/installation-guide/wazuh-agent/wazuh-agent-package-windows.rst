@@ -3,8 +3,6 @@
 .. meta::
   :description: Learn more about how to successfully install the Wazuh agent on Windows systems in this section of our Installation Guide.
 
-.. _wazuh_agent_package_windows:
-
 Installing Wazuh agents on Windows endpoints
 ============================================
 
@@ -64,15 +62,3 @@ The agent runs on the endpoint you want to monitor and communicates with the Waz
  
 
  By default, all agent files are stored in ``C:\Program Files (x86)\ossec-agent`` after the installation.
-
-
-Uninstall a Wazuh agent
------------------------
-
-To uninstall the agent, the original Windows installer file is required to perform the unattended process:
-
-  .. code-block:: none
-  
-      msiexec.exe /x wazuh-agent-|WAZUH_CURRENT_WINDOWS|-|WAZUH_REVISION_WINDOWS|.msi /qn  
-
-The Wazuh agent is now completely removed from your Windows endpoint.
