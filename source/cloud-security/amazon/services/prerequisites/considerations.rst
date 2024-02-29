@@ -36,7 +36,7 @@ Reparse
 -------
 
 .. warning::
-  
+
    Using the ``reparse`` option will fetch and process all the logs from the starting date until the present. This process may generate duplicate alerts.
 
 To fetch and process older logs, you need to manually run the module using the ``--reparse`` option.

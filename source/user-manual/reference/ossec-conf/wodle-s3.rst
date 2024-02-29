@@ -157,10 +157,6 @@ The available types are:  ``cloudtrail``, ``guardduty``, ``vpcflow``, ``config``
 +----------------------------------------+-------------------------------------------------------------+-----------------------------------------------+
 | :ref:`bucket_account_alias`            | Any string                                                  | Optional                                      |
 +----------------------------------------+-------------------------------------------------------------+-----------------------------------------------+
-| :ref:`bucket_access_key`               | Alphanumerical key                                          | Optional                                      |
-+----------------------------------------+-------------------------------------------------------------+-----------------------------------------------+
-| :ref:`bucket_secret_key`               | Alphanumerical key                                          | Optional                                      |
-+----------------------------------------+-------------------------------------------------------------+-----------------------------------------------+
 | :ref:`bucket_aws_profile`              | Any string                                                  | Optional                                      |
 +----------------------------------------+-------------------------------------------------------------+-----------------------------------------------+
 | :ref:`bucket_iam_role_arn`             | IAM role ARN                                                | Optional                                      |
@@ -227,37 +223,6 @@ A user-friendly name for the AWS account.
 +--------------------+-----------------------------+
 | **Allowed values** | Any string                  |
 +--------------------+-----------------------------+
-
-.. _bucket_access_key:
-
-access_key
-^^^^^^^^^^
-
-.. deprecated:: 4.4.0
-
-The access key ID for the IAM user with the permission to read logs from the bucket.
-
-+--------------------+--------------------------+
-| **Default value**  | N/A                      |
-+--------------------+--------------------------+
-| **Allowed values** | Any alphanumerical key   |
-+--------------------+--------------------------+
-
-.. _bucket_secret_key:
-
-
-secret_key
-^^^^^^^^^^
-
-.. deprecated:: 4.4.0
-
-The secret key created for the IAM user with the permission to read logs from the bucket.
-
-+--------------------+--------------------------+
-| **Default value**  | N/A                      |
-+--------------------+--------------------------+
-| **Allowed values** | Any alphanumerical key   |
-+--------------------+--------------------------+
 
 .. _bucket_aws_profile:
 
@@ -505,10 +470,6 @@ The available types are: ``cloudwatchlogs``, and ``inspector``.
 +----------------------------------------+-------------------------------------------------------------+-----------------------------------------------+
 | :ref:`service_aws_log_groups`          | Comma-separated list of valid log group names               | Mandatory for CloudWatch Logs                 |
 +----------------------------------------+-------------------------------------------------------------+-----------------------------------------------+
-| :ref:`service_access_key`              | Any alphanumerical key                                      | Optional                                      |
-+----------------------------------------+-------------------------------------------------------------+-----------------------------------------------+
-| :ref:`service_secret_key`              | Any alphanumerical key                                      | Optional                                      |
-+----------------------------------------+-------------------------------------------------------------+-----------------------------------------------+
 | :ref:`service_aws_profile`             | Valid profile name                                          | Optional                                      |
 +----------------------------------------+-------------------------------------------------------------+-----------------------------------------------+
 | :ref:`service_discard_regex`           | A regex to determine if an event must be discarded          | Optional                                      |
@@ -555,19 +516,6 @@ A user-friendly name for the AWS account.
 | **Allowed values** | Any string                  |
 +--------------------+-----------------------------+
 
-.. _service_access_key:
-
-access_key
-^^^^^^^^^^
-
-The access key ID for the IAM user with the permission to access the service.
-
-+--------------------+--------------------------+
-| **Default value**  | N/A                      |
-+--------------------+--------------------------+
-| **Allowed values** | Any alphanumerical key   |
-+--------------------+--------------------------+
-
 .. _service_aws_log_groups:
 
 aws_log_groups
@@ -580,19 +528,6 @@ A comma-separated list of log group names from where the logs should be extracte
 +--------------------+------------------------------------------------+
 | **Allowed values** | Comma-separated list of valid log group names  |
 +--------------------+------------------------------------------------+
-
-.. _service_secret_key:
-
-secret_key
-^^^^^^^^^^
-
-The secret key created for the IAM user with the permission to access the service.
-
-+--------------------+--------------------------+
-| **Default value**  | N/A                      |
-+--------------------+--------------------------+
-| **Allowed values** | Any alphanumerical key   |
-+--------------------+--------------------------+
 
 .. _service_aws_profile:
 
