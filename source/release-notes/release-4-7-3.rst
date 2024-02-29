@@ -34,7 +34,7 @@ Wazuh dashboard
 =======================================================================    =============
 Reference                                                                  Description
 =======================================================================    =============
-`#6458 <https://github.com/wazuh/wazuh-dashboard-plugins/pull/6458>`__     Resolved issue with CDB list upload.
+`#6458 <https://github.com/wazuh/wazuh-dashboard-plugins/pull/6458>`__     Fixed an error when uploading CDB lists.
 =======================================================================    =============
 
 Changelogs
