@@ -23,10 +23,10 @@ Welcome to the Wazuh user manual. Use it as your reference library once your bas
         agent-enrollment/index
         agents/index
         configuring-cluster/index
+        upscaling/index
         capabilities/index
         ruleset/index
         user-administration/index
         api/index
         files-backup/index
         reference/index
-        
