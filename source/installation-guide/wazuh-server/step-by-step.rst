@@ -77,6 +77,26 @@ Installing the Wazuh manager
 
      .. note:: The default step-by-step installation credentials are ``admin``:``admin``
 
+  #. Configure indexer connection
+
+    Edit ``/var/ossec/etc/ossec.conf`` to configure the indexer connection. Set your host indexer IP address and port. You can skip this step if you are not going to use the vulnerability detection capability. For example:
+
+    .. code-block:: console
+
+      <indexer>
+        <enabled>yes</enabled>
+        <hosts>
+          <host>https://0.0.0.0:9200</host> <!-- Replace with your indexer IP address and PORT -->
+        </hosts>
+        <ssl>
+          <certificate_authorities>
+            <ca>/etc/filebeat/certs/root-ca.pem</ca>
+          </certificate_authorities>
+          <certificate>/etc/filebeat/certs/filebeat.pem</certificate>
+          <key>/etc/filebeat/certs/filebeat-key.pem</key>
+        </ssl>
+      </indexer>
+
   #. Enable and start the Wazuh manager service.
 
      .. include:: /_templates/installations/wazuh/common/enable_wazuh_manager_service.rst
