@@ -85,7 +85,7 @@ Perform the following steps to install and configure an Apache web server.
 
 #. Install the latest `Visual C++ Redistributable package <https://aka.ms/vs/17/release/vc_redist.x64.exe>`__.
 
-#. Download the Apache web server `ZIP installation file <https://www.apachelounge.com/download/VS17/binaries/httpd-2.4.58-win64-VS17.zip>`__. This is an already compiled binary for Windows operating systems.
+#. Download the `Apache web server <https://www.apachelounge.com/download/>`__ Win64 ZIP installation file. This is an already compiled binary for Windows operating systems.
 
 #. Unzip the contents of the Apache web server zip file and copy the extracted ``Apache24`` folder to the ``C:`` directory.
 
