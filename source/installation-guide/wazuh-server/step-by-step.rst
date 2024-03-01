@@ -52,38 +52,44 @@ Adding the Wazuh repository
 Installing the Wazuh manager
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-  #. Install the Wazuh manager package.
+#. Install the Wazuh manager package.
 
-     .. tabs::
+   .. tabs::
 
-        .. group-tab:: Yum
+      .. group-tab:: Yum
 
-           .. code-block:: console
+         .. code-block:: console
 
-              # yum -y install wazuh-manager|WAZUH_MANAGER_RPM_PKG_INSTALL|
+            # yum -y install wazuh-manager|WAZUH_MANAGER_RPM_PKG_INSTALL|
 
-        .. group-tab:: APT
+      .. group-tab:: APT
 
-           .. code-block:: console
+         .. code-block:: console
 
-              # apt-get -y install wazuh-manager|WAZUH_MANAGER_DEB_PKG_INSTALL|
+            # apt-get -y install wazuh-manager|WAZUH_MANAGER_DEB_PKG_INSTALL|
 
-  #. Save the Wazuh indexer username and password into the Wazuh manager keystore using the wazuh-keystore tool: 
+#. Save the Wazuh indexer username and password into the Wazuh manager keystore using the wazuh-keystore tool: 
 
-     .. code-block:: console
+   .. code-block:: console
 
-        # /var/ossec/bin/wazuh-keystore -f indexer -k username -v <INDEXER_USERNAME>
-        # /var/ossec/bin/wazuh-keystore -f indexer -k password -v <INDEXER_PASSWORD>   
+      # /var/ossec/bin/wazuh-keystore -f indexer -k username -v <INDEXER_USERNAME>
+      # /var/ossec/bin/wazuh-keystore -f indexer -k password -v <INDEXER_PASSWORD>   
 
-     .. note:: The default step-by-step installation credentials are ``admin``:``admin``
+   .. note::
+      
+      The default step-by-step installation credentials are ``admin``:``admin``
 
-  #. Enable and start the Wazuh manager service.
+#. Edit ``/var/ossec/etc/ossec.conf`` to configure the indexer connection. Set your host indexer URL. You can skip this step if you are not going to use the vulnerability detection capability.
 
-     .. include:: /_templates/installations/wazuh/common/enable_wazuh_manager_service.rst
+   .. include:: /_templates/installations/manager/configure_indexer_connection.rst
 
-  #. Run the following command to verify the Wazuh manager status.
+#. Enable and start the Wazuh manager service.
 
-     .. include:: /_templates/installations/wazuh/common/check_wazuh_manager.rst
+   .. include:: /_templates/installations/wazuh/common/enable_wazuh_manager_service.rst
+
+#. Run the following command to verify the Wazuh manager status.
+
+   .. include:: /_templates/installations/wazuh/common/check_wazuh_manager.rst
 
 .. _wazuh_server_multi_node_filebeat:
 
