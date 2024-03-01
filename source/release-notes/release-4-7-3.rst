@@ -8,15 +8,10 @@
 
 This section lists the changes in version 4.7.3. Every update of the Wazuh solution is cumulative and includes all enhancements and fixes from previous releases.
 
-What's new
-----------
-
-This release includes new features or enhancements as the following:
-
 Resolved issues
 ---------------
 
-This release resolves known issues as the following: 
+This release resolves known issues as the following:
 
 Wazuh manager
 ^^^^^^^^^^^^^
@@ -27,6 +22,15 @@ Wazuh manager
 `#21997 <https://github.com/wazuh/wazuh/pull/21997>`__       Resolved a transitive mutex locking issue in wazuh-db that was impacting performance.
 `#21977 <https://github.com/wazuh/wazuh/pull/21977>`__       Wazuh DB internal SQL queries have been optimized by tuning database indexes to improve performance.
 ===========================================================  =============
+
+Wazuh dashboard
+^^^^^^^^^^^^^^^
+
+=======================================================================    =============
+Reference                                                                  Description
+=======================================================================    =============
+`#6458 <https://github.com/wazuh/wazuh-dashboard-plugins/pull/6458>`__     Fixed an error when uploading CDB lists.
+=======================================================================    =============
 
 Changelogs
 ----------
