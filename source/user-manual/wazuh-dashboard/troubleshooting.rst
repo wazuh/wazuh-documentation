@@ -250,7 +250,7 @@ Check the following log files:
 
           # journalctl -u wazuh-dashboard
 
-          # cat /usr/share/wazuh-dashboard/data/wazuh/logs/wazuhapp.log | grep -i -E "error|warn"
+          # journalctl -u wazuh-dashboard | grep -i E "error|warn"
 
     .. note::
       The Wazuh indexer uses the ``/var/log`` folder to store logs by default.

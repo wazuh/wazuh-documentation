@@ -156,6 +156,7 @@ newUrls['4.7'] = [
   '/release-notes/release-4-7-0.html',
   '/release-notes/release-4-7-1.html',
   '/release-notes/release-4-7-2.html',
+  '/release-notes/release-4-7-3.html',
   '/cloud-security/azure/posture-management.html',
   '/cloud-security/gcp/posture-management.html',
   '/cloud-service/archive-data/index.html',
@@ -166,6 +167,9 @@ newUrls['4.7'] = [
   '/cloud-service/your-environment/limits.html',
   '/cloud-service/your-environment/settings.html',
   '/user-manual/capabilities/malware-detection/osquery.html',
+  '/user-manual/upscaling/index.html',
+  '/user-manual/upscaling/adding-indexer-node.html',
+  '/user-manual/upscaling/adding-server-node.html',
 ];
 
 /* Pages no longer available in 4.7 */
