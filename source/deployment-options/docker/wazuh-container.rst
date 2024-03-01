@@ -325,7 +325,7 @@ Setting the new password
    -  ``admin`` user
 
       .. code-block:: YAML
-         :emphasize-lines: 8, 20, 26
+         :emphasize-lines: 8, 20
 
          ...
          services:
@@ -346,7 +346,6 @@ Setting the new password
              ...
              environment:
                - "OPENSEARCH_JAVA_OPTS=-Xms1024m -Xmx1024m"
-               - INDEXER_PASSWORD=SecretPassword
            ...
            wazuh.dashboard:
              ...

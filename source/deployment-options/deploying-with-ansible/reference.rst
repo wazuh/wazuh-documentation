@@ -320,47 +320,20 @@ Wazuh Manager
       time: ''
 
 |
-| **Variable**: ``wazuh_manager_vulnerability_detector``
-| **Description**: Configures the :doc:`vulnerability-detector </user-manual/reference/ossec-conf/vuln-detector>` section from ``ossec.conf``.
+| **Variable**: ``wazuh_manager_vulnerability_detection``
+| **Description**: Configures the :doc:`vulnerability-detection </user-manual/reference/ossec-conf/vuln-detector>` section from ``ossec.conf``.
 | **Default values**:
 
 .. code-block:: yaml
 
-    wazuh_manager_vulnerability_detector:
-      enabled: 'no'
-      interval: '5m'
-      min_full_scan_interval: '6h'
-      run_on_start: 'yes'
-      providers:
-        - enabled: 'no'
-          os:
-            - 'trusty'
-            - 'xenial'
-            - 'bionic'
-            - 'focal'
-            - 'jammy'
-          update_interval: '1h'
-          name: '"canonical"'
-        - enabled: 'no'
-          os:
-            - 'buster'
-            - 'bullseye'
-            - 'bookworm'
-          update_interval: '1h'
-          name: '"debian"'
-        - enabled: 'no'
-          os:
-            - 'amazon-linux'
-            - 'amazon-linux-2'
-            - 'amazon-linux-2023'
-          update_interval: '1h'
-          name: '"alas"'  
-        - enabled: 'no'
-          update_interval: '1h'
-          name: '"redhat"'
-        - enabled: 'no'
-          update_interval: '1h'
-          name: '"nvd"'
+    wazuh_manager_vulnerability_detection:
+      enabled: 'yes'
+      indexer_status: 'yes'
+      feed_update_interval: '60m'
+
+    wazuh_manager_indexer:
+      enabled: 'yes'
+      hosts: "{{ filebeat_output_indexer_hosts }}"
 
 |
 | **Variable**: ``wazuh_manager_syscheck``
