@@ -18,6 +18,15 @@ Resolved issues
 
 This release resolves known issues as the following: 
 
+Agent
+^^^^^
+
+==============================================================     =============
+Reference                                                          Description
+==============================================================     =============
+`#21595 <https://github.com/wazuh/wazuh/pull/21595>`__             Fixed an unexpected error where the manager received messages with a reported size not corresponding to the bytes received.
+==============================================================     =============
+
 Changelogs
 ----------
 

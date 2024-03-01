@@ -2,7 +2,7 @@
 #
 # Release settings
 #
-# This file contains the information the release settings that is unique to 
+# This file contains the information the release settings that is unique to
 # this branch:
 #
 # * is_latest_release: this variable must be set to False except for the
