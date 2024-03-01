@@ -3,7 +3,13 @@ All notable changes to this project will be documented in this file.
 
 ## [v5.0.0]
 
-- Support for Wazuh 5.0.0
+### Changed
+
+- Changed from ``3600`` to ``43200`` the maximum value of the ``iam_role_duration`` parameter in the AWS module. ([#7029](https://github.com/wazuh/wazuh-documentation/pull/7029))
+
+### Removed
+
+- Removed the option to store authentication credentials as plain text in ``ossec.conf``. ([#6405](https://github.com/wazuh/wazuh-documentation/pull/6405))
 
 ## [v4.9.0]
 
