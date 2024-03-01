@@ -96,17 +96,3 @@ Example of configuration
       <index-status>yes</index-status>
       <feed-update-interval>60m</feed-update-interval>
    </vulnerability-detection>
-
-   <indexer>
-      <enabled>yes</enabled>
-      <hosts>
-         <host>https://0.0.0.0:9200</host>
-      </hosts>
-      <ssl>
-         <certificate_authorities>
-         <ca>/etc/filebeat/certs/root-ca.pem</ca>
-         </certificate_authorities>
-         <certificate>/etc/filebeat/certs/filebeat.pem</certificate>
-         <key>/etc/filebeat/certs/filebeat-key.pem</key>
-      </ssl>
-   </indexer>
