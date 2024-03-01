@@ -169,13 +169,11 @@ Repeat this stage of the installation process for every Wazuh indexer node in yo
 
     <div class="accordion-section open">
 
-Cluster initialization involves configuring a default ISM policy, loading new certificate information, and starting the single-node or multi-node cluster. 
-
-#. Run the Wazuh indexer ``indexer-init.sh`` script on `any` Wazuh indexer node to initialize the cluster. Check :doc:`/user-manual/wazuh-indexer/index-life-management` for customization options.
+#. Run the Wazuh indexer ``indexer-security-init.sh`` script on `any` Wazuh indexer node to load the new certificates information and start the single-node or multi-node cluster.
     
    .. code-block:: console
 
-      # bash /usr/share/wazuh-indexer/bin/indexer-init.sh -i <WAZUH_INDEXER_IP_ADDRESS>
+      # /usr/share/wazuh-indexer/bin/indexer-security-init.sh
 
    .. note::
       
