@@ -81,6 +81,9 @@ newUrls['4.7'] = [
   '/cloud-service/your-environment/limits.html',
   '/cloud-service/your-environment/settings.html',
   '/user-manual/capabilities/malware-detection/osquery.html',
+  '/user-manual/upscaling/index.html',
+  '/user-manual/upscaling/adding-indexer-node.html',
+  '/user-manual/upscaling/adding-server-node.html',
 ];
 
 /* Pages no longer available in 4.7 */

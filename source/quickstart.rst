@@ -68,6 +68,8 @@ Wazuh dashboard supports the following web browsers:
 
 Other Chromium-based browsers might also work. Internet Explorer 11 is not supported.
 
+.. _quickstart_installing_wazuh:
+
 Installing Wazuh
 ----------------
 

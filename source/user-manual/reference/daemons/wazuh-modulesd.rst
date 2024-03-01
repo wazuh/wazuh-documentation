@@ -39,7 +39,7 @@ The wazuh-modulesd program manages the Wazuh modules described below.
 
 .. topic:: GitHub wodle
 
-  The GitHub wodle allows you to gather audit logs from multiple GitHub organizations. See the :ref:`GitHub <github>` section for more information on this functionality.
+  The GitHub wodle allows you to gather audit logs from multiple GitHub organizations. See the :doc:`GitHub </cloud-security/github/index>` section for more information on this functionality.
 
 .. topic:: Office 365 wodle
 
