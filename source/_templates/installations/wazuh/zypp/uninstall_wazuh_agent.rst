@@ -2,8 +2,8 @@
 
 .. code-block:: console
 
-  # zypper remove wazuh-agent
+   # zypper remove wazuh-agent
 
-Some files are marked as configuration files. Due to this designation, the package manager does not remove these files from the filesystem. If you want to completely remove all files, delete the ``/var/ossec`` folder.
+Some files are marked as configuration files. Due to this designation, the package manager does not remove these files from the filesystem. Delete the ``/var/ossec/`` folder if you want to remove all files completely.
 
 .. End of include file
