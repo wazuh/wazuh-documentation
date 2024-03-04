@@ -29,5 +29,4 @@ Welcome to the Wazuh user manual. Use it as your reference library once your bas
         user-administration/index
         api/index
         files-backup/index
-        uninstall/index
         reference/index

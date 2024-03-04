@@ -1,9 +1,9 @@
 .. Copyright (C) 2015, Wazuh, Inc.
 
-To uninstall the Wazuh agent in Solaris 10, run the following command:
+Run the following command to uninstall the Wazuh agent in Solaris 10.
 
 .. code-block:: console
 
-  # pkgrm wazuh-agent
+   # pkgrm wazuh-agent
 
 .. End of include file
