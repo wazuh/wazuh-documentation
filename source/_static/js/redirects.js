@@ -121,6 +121,9 @@ newUrls['4.7'] = [
   '/user-manual/upscaling/index.html',
   '/user-manual/upscaling/adding-indexer-node.html',
   '/user-manual/upscaling/adding-server-node.html',
+  '/installation-guide/uninstalling-wazuh/index.html',
+  '/installation-guide/uninstalling-wazuh/agent.html',
+  '/installation-guide/uninstalling-wazuh/central-components.html',
 ];
 
 /* Pages no longer available in 4.7 */
@@ -133,7 +136,48 @@ removedUrls['4.7'] = [
   '/cloud-service/cold-storage/filename-format.html',
   '/cloud-service/getting-started/register-agents.html',
   '/user-manual/capabilities/osquery.html',
+  '/user-manual/uninstall/index.html',
 ];
+
+/* Redirections from 4.6 to 4.7  */
+
+redirections.push(
+  {
+    'target': ['4.6=>4.7', '4.7=>4.6'],
+    '4.6': '/user-manual/uninstall/index.html',
+    '4.7': '/installation-guide/uninstalling-wazuh/central-components.html',
+  },
+  {
+    'target': ['4.6=>4.7', '4.7=>4.6'],
+    '4.6': '/installation-guide/wazuh-agent/wazuh-agent-package-linux.html#uninstall-a-wazuh-agent',
+    '4.7': '/installation-guide/uninstalling-wazuh/agent.html#uninstalling-a-linux-wazuh-agent',
+  },
+  {
+    'target': ['4.6=>4.7', '4.7=>4.6'],
+    '4.6': '/installation-guide/wazuh-agent/wazuh-agent-package-windows.html#uninstall-a-wazuh-agent',
+    '4.7': '/installation-guide/uninstalling-wazuh/agent.html#uninstalling-a-windows-wazuh-agent',
+  },
+  {
+    'target': ['4.6=>4.7', '4.7=>4.6'],
+    '4.6': '/installation-guide/wazuh-agent/wazuh-agent-package-macos.html#uninstall-a-wazuh-agent',
+    '4.7': '/installation-guide/uninstalling-wazuh/agent.html#uninstalling-a-macos-wazuh-agent',
+  },
+  {
+    'target': ['4.6=>4.7', '4.7=>4.6'],
+    '4.6': '/installation-guide/wazuh-agent/wazuh-agent-package-solaris.html#uninstall-a-wazuh-agent',
+    '4.7': '/installation-guide/uninstalling-wazuh/agent.html#uninstalling-a-solaris-wazuh-agent',
+  },
+  {
+    'target': ['4.6=>4.7', '4.7=>4.6'],
+    '4.6': '/installation-guide/wazuh-agent/wazuh-agent-package-aix.html#uninstall-a-wazuh-agent',
+    '4.7': '/installation-guide/uninstalling-wazuh/agent.html#uninstalling-an-aix-wazuh-agent',
+  },
+  {
+    'target': ['4.6=>4.7', '4.7=>4.6'],
+    '4.6': '/installation-guide/wazuh-agent/wazuh-agent-package-hpux.html#uninstall-a-wazuh-agent',
+    '4.7': '/installation-guide/uninstalling-wazuh/agent.html#uninstalling-an-hp-ux-wazuh-agent',
+  },
+);
 
 /* *** RELEASE 4.6 ****/
 
