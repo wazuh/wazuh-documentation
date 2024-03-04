@@ -170,11 +170,12 @@ Wazuh provides other :doc:`installation alternatives </deployment-options/index>
 
 
 .. toctree::
-    :hidden:
-    :maxdepth: 1
+   :hidden:
+   :maxdepth: 1
 
-    wazuh-indexer/index
-    wazuh-server/index
-    wazuh-dashboard/index
-    wazuh-agent/index
-    packages-list
+   wazuh-indexer/index
+   wazuh-server/index
+   wazuh-dashboard/index
+   wazuh-agent/index
+   packages-list
+   uninstalling-wazuh/index
