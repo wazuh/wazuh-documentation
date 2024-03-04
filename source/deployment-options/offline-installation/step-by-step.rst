@@ -93,11 +93,11 @@ Installing the Wazuh indexer
 
 #. For multi-node clusters, repeat the previous steps on every Wazuh indexer node. 
 
-#. When all Wazuh indexer nodes are running, run the Wazuh indexer ``indexer-init.sh`` script on `any Wazuh indexer node` to load the new certificates information and start the cluster. 
+#. When all Wazuh indexer nodes are running, run the Wazuh indexer ``indexer-security-init.sh`` script on `any Wazuh indexer node` to load the new certificates information and start the cluster.
 
     .. code-block:: console
 
-        # bash /usr/share/wazuh-indexer/bin/indexer-init.sh -i <WAZUH_INDEXER_IP_ADDRESS>
+        # /usr/share/wazuh-indexer/bin/indexer-security-init.sh
   
 #. Run the following command to check that the installation is successful. Note that this command uses localhost, set your Wazuh indexer address if necessary. 
 
@@ -150,22 +150,22 @@ Installing the Wazuh manager
         
                 # dpkg -i ./wazuh-offline/wazuh-packages/wazuh-manager*.deb
 
-#.  Enable and start the Wazuh manager service.
-
-    .. include:: /_templates/installations/wazuh/common/enable_wazuh_manager_service.rst
-
-#.  Run the following command to verify that the Wazuh manager status is active.
-
-    .. include:: /_templates/installations/wazuh/common/check_wazuh_manager.rst    
-
 #. Save the Wazuh indexer username and password into the Wazuh manager keystore using the wazuh-keystore tool: 
 
    .. code-block:: console
 
-       # /var/ossec/bin/wazuh-keystore -f indexer -k username -v <INDEXER_USERNAME>
-       # /var/ossec/bin/wazuh-keystore -f indexer -k password -v <INDEXER_PASSWORD>   
+      # /var/ossec/bin/wazuh-keystore -f indexer -k username -v <INDEXER_USERNAME>
+      # /var/ossec/bin/wazuh-keystore -f indexer -k password -v <INDEXER_PASSWORD>   
 
    .. note:: The default offline-installation credentials are ``admin``:``admin``
+
+#. Enable and start the Wazuh manager service.
+
+   .. include:: /_templates/installations/wazuh/common/enable_wazuh_manager_service.rst
+
+#. Run the following command to verify that the Wazuh manager status is active.
+
+   .. include:: /_templates/installations/wazuh/common/check_wazuh_manager.rst
 
 Installing Filebeat
 ~~~~~~~~~~~~~~~~~~~
