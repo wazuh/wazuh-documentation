@@ -42,7 +42,9 @@ Wazuh dashboard
 - `#6145 <https://github.com/wazuh/wazuh-dashboard-plugins/pull/6145>`__ Added AngularJS dependencies.
 - `#6120 <https://github.com/wazuh/wazuh-dashboard-plugins/issues/6120>`__ Removed embedded discover component. `#6235 <https://github.com/wazuh/wazuh-dashboard-plugins/pull/6235>`__ `#6254 <https://github.com/wazuh/wazuh-dashboard-plugins/pull/6254>`__ `#6285 <https://github.com/wazuh/wazuh-dashboard-plugins/pull/6285>`__ `#6288 <https://github.com/wazuh/wazuh-dashboard-plugins/pull/6288>`__ `#6286 <https://github.com/wazuh/wazuh-dashboard-plugins/pull/6286>`__
 - `#6227 <https://github.com/wazuh/wazuh-dashboard-plugins/pull/6227>`__ Added support for a new index for the FIM module.
+- `#6268 <https://github.com/wazuh/wazuh-dashboard-plugins/pull/6268>`__ Refactored the **Endpoints Summary** charts.
 - `#6250 <https://github.com/wazuh/wazuh-dashboard-plugins/pull/6250>`__ Added agent groups edition to **Endpoints Summary**.
+- `#6274 <https://github.com/wazuh/wazuh-dashboard-plugins/pull/6274>`__ Added global actions for adding and removing groups on agents to the **Endpoints Summary**.
 
 Resolved issues
 ---------------
