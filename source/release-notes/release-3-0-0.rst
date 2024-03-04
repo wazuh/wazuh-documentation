@@ -155,7 +155,7 @@ A new digitally signed MSI Windows installer has been developed in order to impr
 
 This installer can be launched in unattended mode from the command line and combines the agent installation, configuration, registration and connection into a single step.
 
-The procedure for using the MSI installer can be found at: :ref:`Install Wazuh agent on Windows <wazuh_agent_package_windows>`
+The procedure for using the MSI installer can be found at: :doc:`Install Wazuh agent on Windows </installation-guide/wazuh-agent/wazuh-agent-package-windows>`
 
 
 Wazuh API
