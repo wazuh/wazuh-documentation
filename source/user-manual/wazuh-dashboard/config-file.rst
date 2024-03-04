@@ -682,4 +682,4 @@ This allows to define independant or shared configuration for different Wazuh da
 
 .. warning::
 
-    When sharing the configuration of multiple instances of Wazuh dashboard, some settings could require some actions to take effect.
+    When sharing the configuration of multiple instances of Wazuh dashboard and changing the settings from some instance, the changes could require some actions to take effect that should be applied in each instance that is sharing the configuration.
