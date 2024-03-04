@@ -8,59 +8,65 @@
 Configuration
 =============
 
-The configuration related to Wazuh plugins is defined in:
+The configuration related to Wazuh plugins can be defined in:
 
-- saved object. Define the custom values for several settings on **Dashboard management** > **App Settings** or the API host entries on **Dashboard management** > **Server APIs**.
-- configuration file of Wazuh dashboard. Located at ``/etc/wazuh-dashboard/opensearch_dashboards.yml`` for package installations or ``/usr/share/wazuh-dashboard/config/opensearch_dashoards.yml`` for Docker installations.
+- **Plugins settings**:
+
+  The custom values are stored in a saved object. They can be managed through:
+
+  - **Dashboard management** > **App Settings**: define the custom values for several settings.
+  - **Dashboard management** > **Server APIs**: manage the API hosts entries.
+
+  The users with privilegies to manage the rest API of Wazuh indexer can define the settings or API host entries.
+
+- **Wazuh dashboard settings**:
+  
+  Configuration file of Wazuh dashboard located at ``/etc/wazuh-dashboard/opensearch_dashboards.yml`` for package installations or ``/usr/share/wazuh-dashboard/config/opensearch_dashoards.yml`` for Docker installations.
 
 This section describes all the settings available for each location.
 
-Load a configuration
---------------------
+Setup a configuration
+---------------------
 
-You can load a configuration using a file through of:
+The management of the plugin settings can be done through the UI, but you can setup the current configuration using a configuration file with these methods too:
 
 - on start
-- update
+- API
+
+.. warning::
+
+    Changing some settings through these methods could require some action to take effect.
 
 On start
 ^^^^^^^^
 
-When Wazuh dashboard starts checks if there are a file located at ``/usr/share/wazuh-dashboard/data/wazuh/config/wazuh.yml``. If this exists and there is not a previous configuration stored in the saved object, the configuration will be updated.
+When the Wazuh dashboard starts, checks if there is a file located at ``<WAZUH_DASHBOARD>/data/wazuh/config/wazuh.yml``. If this exists and there is not the configuration saved object, then will setup into it.
 
-This process is oriented to migrations from previous versions.
+API
+^^^
 
-Update
-^^^^^^
+Use the Wazuh dashboard API to setup the configuration:
 
-This process can update the current configuration using a configuration file based on the format of ``wazuh.yml`.
+#. Define a configuration file according to the settings.
 
-#. Define a configuration file according to the settings
-
-#. On the Wazuh dashboard host, go to ``/usr/share/wazuh-dashboard/plugins/wazuh_core/scripts`` and run:
-
-    Update the configuration:
+#. Upload the configuration:
 
 .. code-block:: sh
 
-    bash wazuh-dashboard-setup-configuration --config-file <config-file> --host <wazuh-dashboard-url> --user <username> --password <password>
+    curl -k -u <username>:<password> --form file='@<config_file>' <address>
 
 where:
-    - config-file: path to the configuration file
-    - host: URL address of the Wazuh dashboard host
-    - user: username
-    - password: password for the user
+    - `username`: username
+    - `password`: password for the user
+    - `config_file`: path to the configuration file
+    - `address`: URL address of the Wazuh dashboard host
 
 .. note::
 
-    The user must be an administrator user that has permissions to update the settings.
+    The user must have privilegies to manage the rest API of Wazuh indexer.
 
-.. note::
-
-    If you want to clear the previous configuration, use the ``--clear`` parameter.
-
-Settings
---------
+Configuration file
+------------------
 
 The configuration file reference is organized by sections:
 
@@ -642,12 +648,10 @@ This is an example of the wazuh.yml configuration that can be used to load a con
 Configuration of Wazuh dashboard
 --------------------------------
 
-The configuration stored as saved object depends on some settings defined in the configuration file of Wazuh dashboard.
-
 wazuh_core.configuration.encryption_key
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-Define a key to encrypt some data values of the configuration saved object.
+Define a key to encrypt some sensitive data stored in the configuration saved object.
 
 +--------------------+----------------------------+
 | **Default value**  | secretencryptionkey!       |
@@ -662,7 +666,9 @@ Define a key to encrypt some data values of the configuration saved object.
 wazuh_core.instance
 ^^^^^^^^^^^^^^^^^^^
 
-Define the Wazuh dashboard instance. This defines an identifier of the saved object configuration to use in the Wazuh dashboard instance. This allows to define independant or shared configuration for different Wazuh dashboard instances that uses the same Wazuh indexer backend.
+Define the identifier of the Wazuh dashboard instance.This identifier is used to define the configuration saved object that will use the Wazuh dashboard instance.
+
+This allows to define independant or shared configuration for different Wazuh dashboard instances that uses the same Wazuh indexer backend.
 
 +--------------------+----------------------------+
 | **Default value**  | wazuh-dashboard            |
@@ -673,3 +679,7 @@ Define the Wazuh dashboard instance. This defines an identifier of the saved obj
 .. warning::
 
     Any change in this value could cause stored configuration previously is lost.
+
+.. warning::
+
+    When sharing the configuration of multiple instances of Wazuh dashboard, some settings could require some actions to take effect.
