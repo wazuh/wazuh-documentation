@@ -18,15 +18,13 @@ Welcome to the Wazuh user manual. Use it as your reference library once your bas
         manager/index
         wazuh-indexer/index
         wazuh-dashboard/index
-        certificates
-        deployment-variables/deployment-variables
-        agent-enrollment/index
-        agents/index
-        configuring-cluster/index
-        upscaling/index
-        capabilities/index
+        agent/index
         ruleset/index
         user-administration/index
+        capabilities/index
         api/index
-        files-backup/index
         reference/index
+        certificates
+        configuring-cluster/index
+        upscaling/index
+        files-backup/index

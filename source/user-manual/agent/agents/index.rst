@@ -15,13 +15,14 @@ This section describes how to manage the agents using the command line (CLI), th
     .. toctree::
         :maxdepth: 2
 
-        agent-life-cycle
+        file-locations-and-directories
         listing/index
-        remove-agents/index
-        agent-connection
         grouping-agents
-        remote-upgrading/index
+        remove-agents/index
         query-configuration
+        remote-upgrading/index
         key-request
         labels
         antiflooding
+        agent-life-cycle
+        agent-connection

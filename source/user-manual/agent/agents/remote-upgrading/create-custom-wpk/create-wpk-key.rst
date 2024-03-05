@@ -49,5 +49,5 @@ There are two different ways of creating a WPK, you can do it manually or you ca
     .. toctree::
         :maxdepth: 1
 
-        ../../../../development/packaging/generate-wpk-package
+        /development/packaging/generate-wpk-package
         generate-wpk-package-manually

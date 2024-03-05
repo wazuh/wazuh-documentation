@@ -15,7 +15,7 @@ Once an agent is installed on a machine to be monitored, it must be registered w
 
 A registered agent will remain in the manager until it is removed by the user. There are four different states that an agent may be in at any given time, as shown in the image below:
 
-.. thumbnail:: ../../images/manual/managing-agents/agent-status.png
+.. thumbnail:: /images/manual/managing-agents/agent-status.png
     :title: Agent life cycle
     :alt: Agent life cycle
     :align: center

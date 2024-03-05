@@ -5,8 +5,8 @@
 
 .. _manual_integration:
 
-Integration with external APIs
-==============================
+Integration with third-party APIs
+=================================
 
 The *Integrator* daemon allows Wazuh to connect to external APIs and alerting tools such as Slack, PagerDuty, VirusTotal, Shuffle, and Maltiverse.
 

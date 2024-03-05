@@ -5,8 +5,8 @@
   
 .. _agent_enrollment:
 
-Wazuh agent enrollment
-=======================
+Agent enrollment
+================
 
 Agent enrollment is the process of registering Wazuh agents as authorized members of the Wazuh solution. Agent enrollment allows:
 
@@ -57,6 +57,7 @@ Refer to the :doc:`Troubleshooting <../agent-enrollment/troubleshooting>` sectio
     :hidden:
     :maxdepth: 1
 
+    enrollment-methods/index
     via-agent-configuration/index
     via-manager-API/index
     security-options/index

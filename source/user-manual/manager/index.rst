@@ -5,8 +5,8 @@
 
 .. _user_manual_manager:
 
-Wazuh server administration
-===========================
+Wazuh server
+============
 
 The Wazuh manager is the system that analyzes the data received from all registered agents and triggers alerts when an event coincides with a rule. For example, intrusion detected, file modified, configuration not in accordance with the policy, possible rootkit, among others. The manager also works as an agent on the local machine, which means that it has all the features that an agent has. In addition, the manager can forward the alerts that it triggers through Syslog, emails, or integrated external APIs.
 
@@ -15,13 +15,15 @@ The Wazuh manager is the system that analyzes the data received from all registe
    .. toctree::
       :maxdepth: 2
 
-      remote-service
-      alert-threshold
+      agent-enrollment-service
+      agent-connection-service
+      analysis-engine
+      alert-management/index
+      file-locations-and-directories
       manual-integration
-      manual-syslog-output
-      manual-database-output
+      wazuh-server-cluster
+      filebeat
+      remote-service
       automatic-reports
-      manual-email-report/index
       manual-backup-restore
       fluent-forwarder
-      wazuh-archives
