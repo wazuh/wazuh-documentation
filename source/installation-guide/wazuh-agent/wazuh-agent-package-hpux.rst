@@ -10,19 +10,20 @@ The installed agent runs on the endpoint you want to monitor and communicates wi
 
 .. note:: You need root user privileges to run all the commands described below.
 
-#. To start the installation process, download the `HP-UX installer <https://packages.wazuh.com/|WAZUH_CURRENT_MAJOR_HPUX|/hp-ux/wazuh-agent-|WAZUH_CURRENT_HPUX|-|WAZUH_REVISION_HPUX|-hpux-11v3-ia64.tar>`_. 
+#. To start the installation process, download the `HP-UX installer <https://packages.wazuh.com/|WAZUH_CURRENT_MAJOR_HPUX|/hp-ux/wazuh-agent-|WAZUH_CURRENT_HPUX|-|WAZUH_REVISION_HPUX|-hpux-11v3-ia64.tar>`_.
 
 #. Create the ``wazuh`` user and group.
-   
+
    .. code-block:: console
-   
+
        # groupadd wazuh
        # useradd -G wazuh wazuh
-   
+
 #. Uncompress the package in ``/``.
 
    .. code-block:: console
-   
+
+       # gzip -d wazuh-agent-|WAZUH_CURRENT_HPUX|-|WAZUH_REVISION_HPUX|-hpux-11v3-ia64.tar.gz
        # tar -xvf wazuh-agent-|WAZUH_CURRENT_HPUX|-|WAZUH_REVISION_HPUX|-hpux-11v3-ia64.tar
 
 
