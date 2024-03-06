@@ -285,6 +285,8 @@ cache
 | time       | Any positive integer or real number  | 0.75          | Time in seconds that the cache lasts before expiring.                                                                |
 +------------+--------------------------------------+---------------+----------------------------------------------------------------------------------------------------------------------+
 
+.. deprecated:: 4.8.0
+
 .. _api_configuration_access:
 
 access
