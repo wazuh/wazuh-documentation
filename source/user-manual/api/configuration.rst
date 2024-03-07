@@ -252,11 +252,10 @@ max_size
 +------------+-----------------------------------------------+---------------+----------------------------------------------------------------------------------------------------------------------------+
 | Sub-fields | Allowed values                                | Default value | Description                                                                                                                |
 +============+===============================================+===============+============================================================================================================================+
-| enabled    | yes, true, no, false                          | false         | Enable or disable log file rotation based on file size. This option will disable log file rotation based on time.          |
-|            |                                               |               | Rotation occurs after adding a new entry to the API log, triggering the selected method.                                   |
-|            |                                               |               | For instance, the time-based rotation will rotate after a new entry is added past midnight. Not at midnight automatically. |
+| enabled    | yes, true, no, false                          | false         | Toggle between time-based and size-based Wazuh API log rotation.                                                           |
+|            |                                               |               | Enabling this option disables time-based rotation, enabling rotation based on file size instead.                           |
 +------------+-----------------------------------------------+---------------+----------------------------------------------------------------------------------------------------------------------------+
-| size       | Any positive number followed by a valid unit. | 1M            | Set a file size to trigger log rotation. This value must be equal to or greater than 1M.                                   |
+| size       | Any positive number followed by a valid unit. | 1M            | Set the maximum file size to not trigger size-based log rotation. Lower than 1 M values are considered as 1 M.             |
 |            | K/k for kilobytes, M/m for megabytes.         |               |                                                                                                                            |
 +------------+-----------------------------------------------+---------------+----------------------------------------------------------------------------------------------------------------------------+
 

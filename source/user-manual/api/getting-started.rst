@@ -429,6 +429,8 @@ Here are some of the basic concepts related to making API requests and understan
 - All requests (except ``POST /security/user/authenticate`` and ``POST /security/user/authenticate/run_as``) accept the parameter ``pretty`` to convert the JSON response to a more human-readable format.
 - The Wazuh API log is stored on the manager at ``WAZUH_PATH/logs`` directory as ``api.log`` or ``api.json`` depending on the chosen log format (the verbosity level can be changed in the Wazuh API configuration file). The Wazuh API logs are rotated daily. Rotated logs are stored in ``WAZUH_PATH/logs/api/<year>/<month>`` and compressed using ``gzip``.
 - All Wazuh API requests will be aborted if no response is received after a certain amount of time. The parameter ``wait_for_complete`` can be used to disable this timeout. This is useful for calls that could take more time than expected, such as :api-ref:`PUT /agents/upgrade <operation/api.controllers.agent_controller.put_upgrade_agents>`.
+- The Wazuh API logs are rotated based on time by default. Rotation only occurs after adding a new entry to the log. For instance, time-based rotation triggers when a new entry is added on a different day, not necessarily every midnight.
+
 
 .. note:: The maximum API response time can be modified in the :ref:`API configuration <api_configuration_options>`.
 
