@@ -751,7 +751,7 @@ It is necessary to specify the type as an attribute of the ``subscriber`` tag to
 
 		</subscriber>
 
-The currently available types are: ``security_lake`` and ``buckets``.
+The currently available types are: ``security_lake``, ``buckets`` and ``security_hub``.
 
 +----------------------------------------+-------------------------------------------------------------+-----------------------------------------------+
 | Options                                | Allowed values                                              | Mandatory/Optional                            |
@@ -763,7 +763,8 @@ The currently available types are: ``security_lake`` and ``buckets``.
 +----------------------------------------+-------------------------------------------------------------+-----------------------------------------------+
 | :ref:`subscriber_external_id`          | Valid external ID                                           | Mandatory for Amazon Security Lake            |
 |                                        |                                                             | Subscription                                  |
-|                                        |                                                             | (not available for Custom Logs Buckets)       |
+|                                        |                                                             | (not available for Custom Logs Buckets        |
+|                                        |                                                             | or Amazon Security Hub)                       |
 +----------------------------------------+-------------------------------------------------------------+-----------------------------------------------+
 | :ref:`subscriber_aws_profile`          | Valid profile name                                          | Optional                                      |
 +----------------------------------------+-------------------------------------------------------------+-----------------------------------------------+
@@ -771,7 +772,8 @@ The currently available types are: ``security_lake`` and ``buckets``.
 |                                        |                                                             | to be provided)                               |
 +----------------------------------------+-------------------------------------------------------------+-----------------------------------------------+
 | :ref:`subscriber_discard_regex`        | A regex value to determine if an event must be discarded    | Optional                                      |
-|                                        |                                                             | (only available for Custom Logs Buckets)      |
+|                                        |                                                             | (only available for Custom Logs Buckets       |
+|                                        |                                                             | and Amazon Security Hub)                      |
 +----------------------------------------+-------------------------------------------------------------+-----------------------------------------------+
 | :ref:`subscriber_sts_endpoint`         | Any valid VPC endpoint URL for STS                          | Optional                                      |
 +----------------------------------------+-------------------------------------------------------------+-----------------------------------------------+
@@ -1015,6 +1017,10 @@ Example of configuration
         <iam_role_arn>arn:aws:iam::010203040506:role/ASL-Role</iam_role_arn>
       </subscriber>
       <subscriber type="buckets">
+        <sqs_name>sqs-custom-logs-queue</sqs_name>
+        <aws_profile>dev</aws_profile>
+      </subscriber>
+      <subscriber type="security_hub">
         <sqs_name>sqs-custom-logs-queue</sqs_name>
         <aws_profile>dev</aws_profile>
       </subscriber>
