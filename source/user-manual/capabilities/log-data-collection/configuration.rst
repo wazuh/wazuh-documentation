@@ -73,17 +73,17 @@ Monitoring specific events from Windows event channel
 
 You can configure Wazuh agent to collect specific Windows events from the Windows event channel using queries. For example, the following configuration collects Windows events from the ``System`` channel whose levels are equal to or less than 3 (warning):
 
-   .. code-block:: none
+   .. code-block:: xml
 
       <localfile>
         <location>System</location>
         <log_format>eventchannel</log_format>
          <query>
-           \<QueryList\>
-             \<Query Id="0" Path="System"\>
-               \<Select Path="System"\>*[System[(Level&lt;=3)]]\</Select\>
-                \</Query\>
-              \</QueryList\>
+           \<QueryList>
+             \<Query Id="0" Path="System">
+               \<Select Path="System">*[System[(Level&lt;=3)]]\</Select>
+                \</Query>
+              \</QueryList>
         </query>
       </localfile>
 
