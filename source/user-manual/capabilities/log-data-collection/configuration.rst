@@ -78,12 +78,12 @@ You can configure Wazuh agent to collect specific Windows events from the Window
       <localfile>
         <location>System</location>
         <log_format>eventchannel</log_format>
-         <query>
-           \<QueryList>
-             \<Query Id="0" Path="System">
-               \<Select Path="System">*[System[(Level&lt;=3)]]\</Select>
-                \</Query>
-              \</QueryList>
+        <query>
+          \<QueryList>
+            \<Query Id="0" Path="System">
+              \<Select Path="System">*[System[(Level&lt;=3)]]\</Select>
+            \</Query>
+          \</QueryList>
         </query>
       </localfile>
 
