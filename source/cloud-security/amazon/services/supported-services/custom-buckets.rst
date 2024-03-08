@@ -23,6 +23,8 @@ To set up the Wazuh integration for Custom Logs Buckets, you need to do the foll
    #. Create an AWS SQS Queue.
    #. Configure an S3 bucket. For every object creation event, the bucket sends notifications to the queue.
 
+.. _amazon_custom_logs_configuration:
+
 AWS configuration
 -----------------
 
