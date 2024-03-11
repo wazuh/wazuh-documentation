@@ -35,10 +35,10 @@ Perform the following steps to add a new key to the service account.
 #. Select **JSON**, and click **CREATE** to complete the action.
 
    .. thumbnail:: /images/cloud-security/gcp/create-private-key-json.png
-      :title: New USB device connected alert
-      :alt: New USB device connected alert
+      :title: 
+      :alt: 
       :align: center
-      :width: 100%
+      :width: 80%
 
    The credentials file will be downloaded on the endpoint accessing the Google Cloud console. See an example below of the format of a credentials file:
 

@@ -13,9 +13,8 @@ Wazuh offers security monitoring, incident response, and regulatory compliance c
 .. topic:: Contents
 
    .. toctree::
+      :maxdepth: 2
 
       instances
       services
-      prerequisites/index
-      supported-services/index
       posture-management
