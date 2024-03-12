@@ -50,6 +50,7 @@ RESTful API
 - `#20119 <https://github.com/wazuh/wazuh/pull/20119>`__ Removed ``PUT /vulnerability``, ``GET /vulnerability/{agent_id}``, ``GET /vulnerability/{agent_id}/last_scan`` and ``GET /vulnerability/{agent_id}/summary/{field}`` API endpoints as they were deprecated in version 4.7.0. Use the Wazuh indexer REST API instead.
 - `#20420 <https://github.com/wazuh/wazuh/pull/20420>`__ Added the ``auto`` option to the ``ssl_protocol`` setting in the API configuration. This option enables automatic negotiation of the TLS certificate.
 - `#21572 <https://github.com/wazuh/wazuh/pull/21572>`__ Removed the ``compilation_date`` field from ``GET /cluster/{node_id}/info`` and ``GET /manager/info`` endpoints.
+- `#22387 <https://github.com/wazuh/wazuh/pull/22387>`__ Deprecated the ``cache`` configuration option.
 
 Ruleset
 ^^^^^^^
@@ -77,21 +78,23 @@ Other
 ^^^^^
 
 - `#20003 <https://github.com/wazuh/wazuh/pull/20003>`__ Upgraded embedded Python version to ``3.10.13``.
-- `#20003 <https://github.com/wazuh/wazuh/pull/20003>`__ Upgraded external ``aiohttp`` library dependency version to ``3.8.5``.
-- `#21055 <https://github.com/wazuh/wazuh/pull/21055>`__ Upgraded external ``cryptography`` library dependency version to ``41.0.7``.
-- `#20003 <https://github.com/wazuh/wazuh/pull/20003>`__ Upgraded external ``numpy`` library dependency version to ``1.26.0``.
-- `#20003 <https://github.com/wazuh/wazuh/pull/20003>`__ Upgraded external ``pyarrow`` library dependency version to ``14.0.1``.
-- `#20003 <https://github.com/wazuh/wazuh/pull/20003>`__ Upgraded external ``grpcio`` library dependency version to ``1.58.0``.
-- `#20630 <https://github.com/wazuh/wazuh/pull/20630>`__ Upgraded external ``urllib3`` library dependency version to ``1.26.18``.
-- `#20741 <https://github.com/wazuh/wazuh/pull/20741>`__ Upgraded external ``SQLAlchemy`` library dependency version to ``2.0.23``.
-- `#21684 <https://github.com/wazuh/wazuh/pull/21684>`__ Upgraded external ``Jinja2`` library dependency version to ``3.1.3``.
+- `#21856 <https://github.com/wazuh/wazuh/pull/21856>`__ Upgraded external ``aiohttp`` library dependency version to ``3.9.3``.
+- `#22221 <https://github.com/wazuh/wazuh/pull/22221>`__ Upgraded external ``cryptography`` library dependency version to ``42.0.4``.
 - `#21710 <https://github.com/wazuh/wazuh/pull/21710>`__ Upgraded external ``curl`` library dependency version to ``8.5.0``.
-- `#21710 <https://github.com/wazuh/wazuh/pull/21710>`__ Upgraded external ``pcre2`` library dependency version to ``10.42``.
+- `#20003 <https://github.com/wazuh/wazuh/pull/20003>`__ Upgraded external ``grpcio`` library dependency version to ``1.58.0``.
+- `#21684 <https://github.com/wazuh/wazuh/pull/21684>`__ Upgraded external ``Jinja2`` library dependency version to ``3.1.3``.
 - `#21710 <https://github.com/wazuh/wazuh/pull/21710>`__ Upgraded external ``libarchive`` library dependency version to ``3.7.2``.
+- `#20003 <https://github.com/wazuh/wazuh/pull/20003>`__ Upgraded external ``numpy`` library dependency version to ``1.26.0``.
+- `#21710 <https://github.com/wazuh/wazuh/pull/21710>`__ Upgraded external ``pcre2`` library dependency version to ``10.42``.
+- `#20003 <https://github.com/wazuh/wazuh/pull/20003>`__ Upgraded external ``pyarrow`` library dependency version to ``14.0.1``.
 - `#21710 <https://github.com/wazuh/wazuh/pull/21710>`__ Upgraded external ``rpm`` library dependency version to ``4.18.2``.
+- `#20741 <https://github.com/wazuh/wazuh/pull/20741>`__ Upgraded external ``SQLAlchemy`` library dependency version to ``2.0.23``.
 - `#21710 <https://github.com/wazuh/wazuh/pull/21710>`__ Upgraded external ``sqlite`` library dependency version to ``3.45.0``.
+- `#20630 <https://github.com/wazuh/wazuh/pull/20630>`__ Upgraded external ``urllib3`` library dependency version to ``1.26.18``.
 - `#21710 <https://github.com/wazuh/wazuh/pull/21710>`__ Upgraded external ``zlib`` library dependency version to ``1.3.1``.
 - `#21710 <https://github.com/wazuh/wazuh/pull/21710>`__ Added external ``lua`` library dependency version ``5.3.6``.
+- `#21749 <https://github.com/wazuh/wazuh/pull/21749>`__ Added external ``PyJWT`` library dependency version ``2.8.0``.
+- `#21749 <https://github.com/wazuh/wazuh/pull/21749>`__ Removed external ``python-jose`` and ``ecdsa`` library dependencies.
 
 Wazuh dashboard
 ^^^^^^^^^^^^^^^
@@ -99,7 +102,7 @@ Wazuh dashboard
 - `#5791 <https://github.com/wazuh/wazuh-dashboard-plugins/pull/5791>`__ Added remember server address check.
 - `#6093 <https://github.com/wazuh/wazuh-dashboard-plugins/pull/6093>`__ Added a notification about new Wazuh updates and a button to check their availability. `#6256 <https://github.com/wazuh/wazuh-dashboard-plugins/pull/6256>`__ `#6328 <https://github.com/wazuh/wazuh-dashboard-plugins/pull/6328>`__
 - `#6083 <https://github.com/wazuh/wazuh-dashboard-plugins/pull/6083>`__ Added the ``ssl_agent_ca`` configuration to the **SSL Settings** form.
-- `#5896 <https://github.com/wazuh/wazuh-dashboard-plugins/pull/5896>`__ Added global vulnerability dashboards. `#6179 <https://github.com/wazuh/wazuh-dashboard-plugins/pull/6179>`__ `#6173 <https://github.com/wazuh/wazuh-dashboard-plugins/pull/6173>`__ `#6147 <https://github.com/wazuh/wazuh-dashboard-plugins/pull/6147>`__ `#6231 <https://github.com/wazuh/wazuh-dashboard-plugins/pull/6231>`__ `#6246 <https://github.com/wazuh/wazuh-dashboard-plugins/pull/6246>`__ `#6321 <https://github.com/wazuh/wazuh-dashboard-plugins/pull/6321>`__ `#6338 <https://github.com/wazuh/wazuh-dashboard-plugins/pull/6338>`__ `#6356 <https://github.com/wazuh/wazuh-dashboard-plugins/pull/6356>`__ `#6410 <https://github.com/wazuh/wazuh-dashboard-plugins/pull/6410>`__ `#6429 <https://github.com/wazuh/wazuh-dashboard-plugins/pull/6429>`__ `#6448 <https://github.com/wazuh/wazuh-dashboard-plugins/pull/6448>`__
+- `#5896 <https://github.com/wazuh/wazuh-dashboard-plugins/pull/5896>`__ Added global vulnerability dashboards. `#6179 <https://github.com/wazuh/wazuh-dashboard-plugins/pull/6179>`__ `#6173 <https://github.com/wazuh/wazuh-dashboard-plugins/pull/6173>`__ `#6147 <https://github.com/wazuh/wazuh-dashboard-plugins/pull/6147>`__ `#6231 <https://github.com/wazuh/wazuh-dashboard-plugins/pull/6231>`__ `#6246 <https://github.com/wazuh/wazuh-dashboard-plugins/pull/6246>`__ `#6321 <https://github.com/wazuh/wazuh-dashboard-plugins/pull/6321>`__ `#6338 <https://github.com/wazuh/wazuh-dashboard-plugins/pull/6338>`__ `#6356 <https://github.com/wazuh/wazuh-dashboard-plugins/pull/6356>`__ `#6410 <https://github.com/wazuh/wazuh-dashboard-plugins/pull/6410>`__ `#6429 <https://github.com/wazuh/wazuh-dashboard-plugins/pull/6429>`__ `#6448 <https://github.com/wazuh/wazuh-dashboard-plugins/pull/6448>`__ `#6488 <https://github.com/wazuh/wazuh-dashboard-plugins/pull/6488>`__
 - `#5840 <https://github.com/wazuh/wazuh-dashboard-plugins/pull/5840>`__ Added an agent selector to the IT Hygiene module.
 - `#5840 <https://github.com/wazuh/wazuh-dashboard-plugins/pull/5840>`__ Moved the Wazuh menu into the side menu. `#6226 <https://github.com/wazuh/wazuh-dashboard-plugins/pull/6226>`__ `#6176 <https://github.com/wazuh/wazuh-dashboard-plugins/pull/6176>`__ `#6423 <https://github.com/wazuh/wazuh-dashboard-plugins/pull/6423>`__
 - `#5840 <https://github.com/wazuh/wazuh-dashboard-plugins/pull/5840>`__ Removed the ``disabled_roles`` and ``customization.logo.sidebar`` settings.
@@ -116,6 +119,7 @@ Wazuh dashboard
 - `#6364 <https://github.com/wazuh/wazuh-dashboard-plugins/pull/6364>`__ Added tooltip element to **Most active agent** in **Details** in the **Endpoint summary** view and renamed a label element. `#6421 <https://github.com/wazuh/wazuh-dashboard-plugins/pull/6421>`__
 - `#6379 <https://github.com/wazuh/wazuh-dashboard-plugins/pull/6379>`__ Changed overview home top KPIs. `#6408 <https://github.com/wazuh/wazuh-dashboard-plugins/pull/6408>`__
 - `#6341 <https://github.com/wazuh/wazuh-dashboard-plugins/pull/6341>`__ Removed notice of old **Discover** deprecation.
+- `#6492 <https://github.com/wazuh/wazuh-dashboard-plugins/pull/6492>`__ Updated the PDF report year number to 2024.
 
 Packages
 ^^^^^^^^
@@ -205,6 +209,7 @@ Reference                                                                    Des
 `#6378 <https://github.com/wazuh/wazuh-dashboard-plugins/pull/6378>`__       Fixed the axis label visual bug from dashboards.
 `#6346 <https://github.com/wazuh/wazuh-dashboard-plugins/pull/6346>`__       Fixed bug related to the implicit filter close button in the search bar.
 `#6431 <https://github.com/wazuh/wazuh-dashboard-plugins/pull/6431>`__       Fixed error displaying when clicking **Refresh** in **MITRE ATT&CK** if the the Wazuh indexer service is down.
+`#6484 <https://github.com/wazuh/wazuh-dashboard-plugins/pull/6484>`__       Fixed minor style issues. `#6489 <https://github.com/wazuh/wazuh-dashboard-plugins/pull/6489>`__
 =========================================================================    =============
 
 Packages
