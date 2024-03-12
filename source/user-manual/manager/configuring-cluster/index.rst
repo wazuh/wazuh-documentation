@@ -5,8 +5,8 @@
 
 .. _configuring-cluster:
 
-Deploying a Wazuh cluster
-===========================
+Wazuh server cluster
+====================
 
 .. toctree::
     :maxdepth: 1

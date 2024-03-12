@@ -21,9 +21,6 @@ The Wazuh manager is the system that analyzes the data received from all registe
       alert-management/index
       file-locations-and-directories
       manual-integration
-      wazuh-server-cluster
+      configuring-cluster/index
       filebeat
       remote-service
-      automatic-reports
-      manual-backup-restore
-      fluent-forwarder

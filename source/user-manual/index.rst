@@ -25,6 +25,5 @@ Welcome to the Wazuh user manual. Use it as your reference library once your bas
         api/index
         reference/index
         certificates
-        configuring-cluster/index
         upscaling/index
         files-backup/index

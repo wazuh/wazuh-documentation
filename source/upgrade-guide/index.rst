@@ -105,3 +105,4 @@ To perform the upgrade locally, select your operating system and follow the inst
    upgrading-central-components
    wazuh-agent/index
    compatibility-matrix/index
+   manual-backup-restore
