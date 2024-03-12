@@ -53,7 +53,7 @@ Use the Wazuh dashboard API to setup the configuration:
 
 .. code-block:: sh
 
-    curl -k -u <username>:<password> --form file='@<config_file>' -XPOST <address>/utils/configuration/import
+    curl -k -u <username>:<password> --form file='@<config_file>' -H 'xsrf:kibana' -XPOST <address>/utils/configuration/import
 
 where:
     - `username`: username
