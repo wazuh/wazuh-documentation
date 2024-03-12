@@ -387,18 +387,19 @@ Installing the Wazuh dashboard
     -   **Username**: admin
     -   **Password**: admin
 
-      Upon the first access to the Wazuh dashboard, the browser shows a warning message stating that the certificate was not issued by a trusted authority. An exception can be added in the advanced options of the web browser or, for increased security, the ``root-ca.pem`` file previously generated can be imported to the certificate manager of the browser. Alternatively, a certificate from a trusted authority can be configured.
+    .. note::
+       :class: not-long
 
-#.  Add a new server API.
+       Upon the first access to the Wazuh dashboard, the browser shows a warning message stating that the certificate was not issued by a trusted authority. An exception can be added in the advanced options of the web browser or, for increased security, the ``root-ca.pem`` file previously generated can be imported to the certificate manager of the browser. Alternatively, a certificate from a trusted authority can be configured.
 
-      Go to **Dashboard management** > **Server APIs**, click on **Add API connection** button and fill the form with:
+#.  Go to **Dashboard management** > **Server APIs** to add a new server API connection. Click on **Add API connection** button and fill the form with the following values.
 
-      - **ID**: default
-      - **URL**: IP address or hostname of the Wazuh server master node
-      - **Port**: 55000
-      - **Username**: wazuh-wui
-      - **Password**: wazuh-wui
-      - **Run as**: false 
+    - **ID**: ``default``
+    - **URL**: IP address or hostname of the Wazuh server master node
+    - **Port**: ``55000``
+    - **Username**: ``wazuh-wui``
+    - **Password**: ``wazuh-wui``
+    - **Run as**: ``false``
 
 Securing your Wazuh installation
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
@@ -520,10 +521,7 @@ Select your deployment type and follow the instructions to change the default pa
 
          .. include:: /_templates/common/restart_dashboard.rst
 
-      #. Update the API host password.
-      
-         On Wazuh dashboard, go to **Dashboard management** > **Server APIs**, click on the edit button of the secured server API entry and replace the **Password** field, then click on the **Apply** button to save.
-
+      #. On the Wazuh dashboard, go to **Dashboard management** > **Server APIs** to update the API host password. Click on the edit button of the secured server API entry and replace the **Password** field. Then click on the **Apply** button to save.
 
 Next steps
 ^^^^^^^^^^

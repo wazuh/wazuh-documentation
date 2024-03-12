@@ -246,9 +246,7 @@ Wazuh dashboard configuration
    #. Select the **Mapped users** tab and click **Manage mapping**.
    #. Under **Backend roles**, add the value of the **Department** field in OneLogin configuration and click **Map** to confirm the action. In our case, the backend role is ``wazuh-readonly``.
 
-#. Check the value of ``Run as`` in the API host entry configuration on **Dashboard management** > **Server APIs**. If ``Run as`` is set to ``false``, proceed to the next step.
-
-   If ``Run as`` is set to ``true``, you need to add a role mapping on the Wazuh dashboard. To map the backend role to Wazuh, follow these steps:
+#. Check the value of **Run as** in the API host entry configuration on **Dashboard management** > **Server APIs**. If **Run as** is set to ``false``, proceed to the next step. If **Run as** is set to ``true``, you need to add a role mapping on the Wazuh dashboard. To map the backend role to Wazuh, follow these steps:
 
    #. Click **☰** to open the menu on the Wazuh dashboard, go to **Server management** > **Security**, and then **Roles mapping** to open the page.
 

@@ -115,7 +115,7 @@ Backing up the Wazuh indexer and dashboard
       # rsync -aREz \
       /etc/wazuh-dashboard/certs/ \
       /etc/wazuh-dashboard/opensearch_dashboards.yml \
-      /usr/share/wazuh-dashboard/config/opensearch_dashboards.keystore
+      /usr/share/wazuh-dashboard/config/opensearch_dashboards.keystore $bkp_folder
 
 #. If present, back up your downloads and custom images.
 
