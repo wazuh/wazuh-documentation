@@ -91,7 +91,7 @@ Replace 2g in the ``JAVA_ARGS`` variable with the amount of memory you want to a
 Configuration
 -------------
 
-Edit the ``/etc/puppetlabs/puppet/puppet.conf`` file, adding this line to the ``[main]`` section (create the section if it does not exist), and replacing ``puppet,puppet-master`` with your own FQDN:
+Edit the ``/etc/puppetlabs/puppet/puppet.conf`` file, adding this lines to the ``[main]`` section (create the section if it does not exist), and replacing ``puppet,puppet-master`` with your own FQDN if you have your own DNS configured:
 
   ::
 
