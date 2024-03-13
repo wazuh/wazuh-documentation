@@ -205,3 +205,65 @@ You can confirm that logs are generated in your environment by running the query
 Visualizing the events on the Wazuh dashboard
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
+Once you configure the sink, apply the filter below on the Google Cloud module of the Wazuh dashboard to filter for DNS queries logs.
+
+Set the value of ``data.gcp.logName`` field to ``projects/<YOUR-PROJECT-ID>/logs/compute.googleapis.com%2Fdns_queries``.
+
+Replace ``<YOUR-PROJECT-ID>`` with your project ID on Google Cloud.
+
+.. thumbnail:: /images/cloud-security/gcp/filter-dns-query-logs.png
+   :title: Filter DNS query logs
+   :alt: Filter DNS query logs
+   :align: center
+   :width: 80%
+
+Available logs must appear as shown in the picture below.
+
+.. thumbnail:: /images/cloud-security/gcp/dns-query-available-logs.png
+   :title: Available DNS query logs
+   :alt: Available DNS query logs
+   :align: center
+   :width: 80%
+
+VPC Flow Logs
+-------------
+
+`VPC Flow Logs <https://cloud.google.com/vpc/docs/flow-logs>`__ record a sample of network flows sent from and received by VM instances, including instances used as Google Kubernetes Engine nodes. VPC Flow Logs are aggregated by the connection from Compute Engine VMs and exported in real-time.
+
+.. note::
+   
+   Before you perform the steps below make sure that you have already configured the :doc:`Google Cloud Pub/Sub integration <>` and the :doc:`Wazuh module for Google Cloud Pub/Sub <>`.
+
+Enabling VPC Flow Logs
+^^^^^^^^^^^^^^^^^^^^^^
+
+VPC Flow Logs can be enabled on the VPC networks page in the Google Cloud Console. They can be enabled for both new and existing subnets. Follow the `Google Virtual Private Cloud <https://cloud.google.com/vpc/docs/using-flow-logs#enabling-vpc-flow-logs>`__ documentation for the most up-to-date instructions on how to enable this feature.
+
+Exporting VPC Flow Logs to Pub/Sub
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+The :doc:`Export logs via sink <>` section explains how to create a sink to export logs to a Pub/Sub topic. However, this would export every single log available, not just the VPC Flow Logs. It is possible to configure the sink to export VPC Flow Logs only to a topic, ignoring logs coming from other services by adding a filtering condition to the sink. To do so, follow the same instructions as explained in the :doc:`Export logs via sink <>` section but add the following filter in Step 3 - **Choose logs to include in sink**:
+
+.. code-block:: none
+
+   resource.type="gce_subnetwork"
+   log_name="projects/<YOUR-PROJECT-ID>/logs/compute.googleapis.com%2Fvpc_flows"
+
+Replace ``<YOUR-PROJECT-ID>`` with your project ID on Google Cloud.
+
+.. thumbnail:: /images/cloud-security/gcp/gcp-create-logs-routing-sink-vpc-flow.png
+   :title: Create logs routing sink
+   :alt: Create logs routing sink
+   :align: center
+   :width: 80%
+
+You can confirm that logs are generated in your environment by running the query in the **Logs Explorer**, as shown in the picture below.
+
+.. thumbnail:: /images/cloud-security/gcp/vpc-flow-logs-query.png
+   :title: VPC flow logs query
+   :alt: VPC flow logs query
+   :align: center
+   :width: 80%
+
+Visualizing the events on Wazuh dashboard
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
