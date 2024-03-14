@@ -267,3 +267,85 @@ You can confirm that logs are generated in your environment by running the query
 
 Visualizing the events on Wazuh dashboard
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Once you configure the sink, apply the filter below on the Google Cloud module of the Wazuh dashboard to filter for VPC Flow Logs.
+
+Set the value of ``data.gcp.logName`` field to ``projects/<YOUR-PROJECT-ID>/logs/compute.googleapis.com%2Fvpc_flows``. Replace ``<YOUR-PROJECT-ID>`` with your Google Cloud project ID.
+
+.. thumbnail:: /images/cloud-security/gcp/filter-vpc-flow-logs.png
+   :title: Filter VPC flow logs
+   :alt: Filter VPC flow logs
+   :align: center
+   :width: 80%
+
+Available logs must appear as shown in the picture below.
+
+.. thumbnail:: /images/cloud-security/gcp/vpc-flow-available-logs.png
+   :title: VPC flow available logs
+   :alt: VPC flow available logs
+   :align: center
+   :width: 80%
+
+Firewall Rules Logging
+----------------------
+
+`Firewall Rules Logging <https://cloud.google.com/vpc/docs/firewall-rules-logging>`__ records traffic to and from Compute Engine virtual machine (VM) instances. This includes Google Cloud products built on Compute Engine VMs, such as Google Kubernetes Engine (GKE) clusters and App Engine flexible environment instances. To send Firewall Rules Logging logs to Wazuh, you must first configure **Cloud Logging** to export these logs to Pub/Sub.
+
+.. note::
+   
+   Before you perform the steps below make sure that you have already configured the :doc:`Google Cloud Pub/Sub integration <>` and the :doc:`Wazuh module for Google Cloud Pub/Sub <>`.
+
+Enabling Firewall Rules Logging
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Firewall Rules Logging can be enabled on the Firewall page in the Google Cloud Console. Follow the `Google Virtual Private Cloud <https://cloud.google.com/vpc/docs/using-firewall-rules-logging#enable>`__ documentation for the most up-to-date instructions on how to enable this feature.
+
+Exporting Firewall Rules logs to Pub/Sub
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+The :doc:`Export logs via sink <>` section explains how to create a sink to export logs to a Pub/Sub topic. However, this would export every single log available, not only the Firewall Rules Logging. It is possible to configure the sink to export Firewall Rules Logging logs only to a topic, ignoring logs from other services, by adding a filtering condition to the sink. To do so, follow the instructions as explained in the :doc:`Export logs via sink <>` section but add the following filter in Step 3 - **Choose logs to include in sink**:
+
+.. code-block:: none
+
+   (resource.type="gce_subnetwork"
+   log_name="projects/<YOUR-PROJECT-ID>/logs/compute.googleapis.com%2Ffirewall")
+
+Replace ``<YOUR-PROJECT-ID>`` with your project ID on Google Cloud.
+
+.. thumbnail:: /images/cloud-security/gcp/gpc-export-fw-rules.png
+   :title: Export firewall rules
+   :alt: Export firewall rules
+   :align: center
+   :width: 80%
+
+You can confirm that logs are generated in your environment by running the query in the **Logs Explorer** as shown in the picture below.
+
+.. thumbnail:: /images/cloud-security/gcp/gcp-query-logs-explorer-fw.png
+   :title: Query logs in the Logs explorer
+   :alt: Query logs in the Logs explorer
+   :align: center
+   :width: 80%
+
+Visualizing the events on the Wazuh dashboard
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Once you configure the sink, apply the filter below on the Google Cloud module of the Wazuh dashboard to filter for Firewall Rules logs.
+
+Set the value of ``data.gcp.logName`` field to ``projects/<YOUR-PROJECT-ID>/logs/compute.googleapis.com%2Ffirewall``. Replace ``<YOUR-PROJECT-ID>`` with your own project ID on Google Cloud.
+
+.. thumbnail:: /images/cloud-security/gcp/filter-fw-logs.png
+   :title: Filter firewall logs
+   :alt: Filter firewall logs
+   :align: center
+   :width: 80%
+
+Available logs must appear as shown in the picture below.
+
+.. thumbnail:: /images/cloud-security/gcp/fw-available-logs.png
+   :title: Available firewall logs
+   :alt: Available firewall logs
+   :align: center
+   :width: 80%
+
+HTTP(S) Load Balancing Logging
+------------------------------
