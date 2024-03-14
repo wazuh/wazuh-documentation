@@ -1,14 +1,14 @@
 .. Copyright (C) 2015, Wazuh, Inc.
 
 .. meta::
-  :description: The Wazuh dashboard includes a configuration where you can define custom values for several options. Learn more about it in this section.
+   :description: The Wazuh dashboard includes configuration options to define custom settings. Learn more about it in this section.
 
 .. _wazuh_dashboard_config_file:
 
 Configuration
 =============
 
-The configuration related to Wazuh plugins can be defined in:
+You can configure the Wazuh dashboard and plugins as follows:
 
 - **Plugins settings**:
 
