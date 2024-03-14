@@ -233,7 +233,7 @@ Follow these steps to create a new role mapping and grant administrator permissi
       Done with success
       SUCC: Expected 1 config types for node {"updated_config_types":["rolesmapping"],"updated_config_size":1,"message":null} is 1 (["rolesmapping"]) due to: null
 
-#. Check the value of **Run as** in the API host entry configuration on **Dashboard management** > **Server APIs**. If **Run as** is disabled, proceed to the next step. If **Run as** is enabled, you need to add a role mapping on the Wazuh dashboard. To map the backend role to Wazuh, follow these steps:
+#. Check the value of **Run as** in the API host entry configuration on **Dashboard management** > **Server APIs**. If **Run as** is set to ``false``, proceed to the next step. If **Run as** is set to ``true``, you need to add a role mapping on the Wazuh dashboard. To map the backend role to Wazuh, follow these steps:
 
    .. image:: /images/wazuh-dashboard/api-connections/wazuh-dashboard-check-api-connection-run-as.jpg
       :align: center
