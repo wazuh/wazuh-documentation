@@ -572,7 +572,7 @@ Set the footer of the PDF reports. To use an empty footer, type a space " " in t
 Example
 -------
 
-This is an example of the wazuh.yml configuration that can be used to load a configuration:
+This is an example of the configuration file that can be used to load a configuration:
 
 .. code-block:: yaml
     
