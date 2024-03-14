@@ -233,7 +233,10 @@ Follow these steps to create a new role mapping and grant administrator permissi
       Done with success
       SUCC: Expected 1 config types for node {"updated_config_types":["rolesmapping"],"updated_config_size":1,"message":null} is 1 (["rolesmapping"]) due to: null
 
-#. Check the value of **Run as** in the API host entry configuration on **Dashboard management** > **Server APIs**. If **Run as** is set to ``false``, proceed to the next step. If **Run as** is set to ``true``, you need to add a role mapping on the Wazuh dashboard. To map the backend role to Wazuh, follow these steps:
+#. Check the value of **Run as** in the API host entry configuration on **Dashboard management** > **Server APIs**. If **Run as** is disabled, proceed to the next step. If **Run as** is enabled, you need to add a role mapping on the Wazuh dashboard. To map the backend role to Wazuh, follow these steps:
+
+   .. image:: /images/wazuh-dashboard/api-connections/wazuh-dashboard-check-api-connection-run-as.jpg
+      :align: center
 
    #. Click **☰** to open the menu on the Wazuh dashboard, go to **Server management** > **Security**, and then **Roles mapping** to open the page.
 
@@ -286,8 +289,11 @@ Setup read-only role
    #. Select the **Mapped users** tab and click **Manage mapping**.
    #. Under **Backend roles**, assign the name of the read-only role you have in your LDAP server and click on  **Map** to confirm the action. In our case, the backend role (CN) is ``readonly``.
 
-#. Check the value of **Run as** in the API host entry configuration on **Dashboard management** > **Server APIs**. If **Run as** is set to ``false``, proceed to the next step. If **Run as** is set to ``true``, you need to add a role mapping on the Wazuh dashboard. To map the backend role to Wazuh, follow these steps:
+#. Check the value of **Run as** in the API host entry configuration on **Dashboard management** > **Server APIs**. If **Run as** is disabled, proceed to the next step. If **Run as** is enabled, you need to add a role mapping on the Wazuh dashboard. To map the backend role to Wazuh, follow these steps:
    
+   .. image:: /images/wazuh-dashboard/api-connections/wazuh-dashboard-check-api-connection-run-as.jpg
+      :align: center
+
    #. Click the upper-left menu icon **☰** to open the menu on the Wazuh dashboard, go to **Server management** > **Security**, and then **Roles mapping** to open the page.
 
       .. thumbnail:: /images/manual/user-administration/ldap/select-roles-mapping.gif

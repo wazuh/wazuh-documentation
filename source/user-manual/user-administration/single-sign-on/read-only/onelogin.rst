@@ -248,6 +248,9 @@ Wazuh dashboard configuration
 
 #. Check the value of **Run as** in the API host entry configuration on **Dashboard management** > **Server APIs**. If **Run as** is set to ``false``, proceed to the next step. If **Run as** is set to ``true``, you need to add a role mapping on the Wazuh dashboard. To map the backend role to Wazuh, follow these steps:
 
+   .. image:: /images/wazuh-dashboard/api-connections/wazuh-dashboard-check-api-connection-run-as.jpg
+      :align: center
+
    #. Click **☰** to open the menu on the Wazuh dashboard, go to **Server management** > **Security**, and then **Roles mapping** to open the page.
 
       .. thumbnail:: /images/single-sign-on/Wazuh-role-mapping.gif
