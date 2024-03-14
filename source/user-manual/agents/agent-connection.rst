@@ -109,7 +109,7 @@ To check the current status and verify the connection of the agent with the mana
 
       .. code-block:: Powershell
 
-         > Select-String -Path C:\Program Files (x86)\ossec-agent\wazuh-agent.state -Pattern "^status"
+         > Select-String -Path "C:\Program Files (x86)\ossec-agent\wazuh-agent.state" -Pattern "^status"
 
       .. code-block:: console
          :class: output
