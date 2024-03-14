@@ -10,18 +10,15 @@ Configuration
 
 You can configure the Wazuh dashboard and plugins as follows:
 
-- **Plugins settings**:
+- **Wazuh dashboard settings**: You can edit the Wazuh dashboard configuration file.
 
-  The custom values are stored in a saved object. They can be managed through:
+   -  ``/etc/wazuh-dashboard/opensearch_dashboards.yml`` for installations from packages.
+   -  ``/usr/share/wazuh-dashboard/config/opensearch_dashoards.yml`` for Docker installations.
 
-  - **Dashboard management** > **App Settings**: define the custom values for several settings.
-  - **Dashboard management** > **Server APIs**: manage the API hosts entries.
+- **Plugins settings**: Users with privileges to manage the Wazuh indexer security REST API can manage the plugins settings from the Wazuh dashboard. Wazuh stores the custom values in a saved object.
 
-  The users with privilegies to manage the rest API of Wazuh indexer can define the settings or API host entries.
-
-- **Wazuh dashboard settings**:
-  
-  Configuration file of Wazuh dashboard located at ``/etc/wazuh-dashboard/opensearch_dashboards.yml`` for package installations or ``/usr/share/wazuh-dashboard/config/opensearch_dashoards.yml`` for Docker installations.
+   -  **Dashboard management** > **App Settings**: To customize several settings.
+   -  **Dashboard management** > **Server APIs**: To customize API host entries.
 
 This section describes all the settings available for each location.
 
