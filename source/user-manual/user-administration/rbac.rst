@@ -71,6 +71,9 @@ Follow these steps to create an internal user, create a new role mapping, and gi
 
    For the role mapping to take effect, make sure that **Run as** is set to ``true`` in the API host entry configuration on **Dashboard management** > **Server APIs**. Restart the Wazuh dashboard service and clear your browser cache and cookies.
 
+      .. image:: /images/wazuh-dashboard/api-connections/wazuh-dashboard-check-api-connection-run-as-is-enabled.jpg
+         :align: center
+
 Creating and setting a Wazuh read-only user
 -------------------------------------------
 
@@ -128,6 +131,8 @@ Follow these steps to create an internal user, create a new role mapping, and gi
 
    For the role mapping to take effect, make sure that **Run as** is set to ``true`` in the API host entry configuration on **Dashboard management** > **Server APIs**. Restart the Wazuh dashboard service and clear your browser cache and cookies.
 
+      .. image:: /images/wazuh-dashboard/api-connections/wazuh-dashboard-check-api-connection-run-as-is-enabled.jpg
+         :align: center
 
 Creating an internal user and mapping it to Wazuh
 -------------------------------------------------
@@ -174,6 +179,8 @@ Follow these steps to create an internal user and map it to a role of your choic
 
    For the role mapping to take effect, make sure that **Run as** is set to ``true`` in the API host entry configuration on **Dashboard management** > **Server APIs**. Restart the Wazuh dashboard service and clear your browser cache and cookies.
 
+      .. image:: /images/wazuh-dashboard/api-connections/wazuh-dashboard-check-api-connection-run-as-is-enabled.jpg
+         :align: center
 
 .. _wazuh-rbac-use-case-agents-group:
 
@@ -345,7 +352,10 @@ To map the user with Wazuh, follow these steps:
   
 #. Click **Save role mapping** to finish the action. 
 
-  For the role mapping to take effect, make sure that **Run as** is set to ``true`` in the API host entry configuration on **Dashboard management** > **Server APIs**. Restart the Wazuh dashboard service and clear your browser cache and cookies.
+   For the role mapping to take effect, make sure that **Run as** is set to ``true`` in the API host entry configuration on **Dashboard management** > **Server APIs**. Restart the Wazuh dashboard service and clear your browser cache and cookies.
+
+      .. image:: /images/wazuh-dashboard/api-connections/wazuh-dashboard-check-api-connection-run-as-is-enabled.jpg
+         :align: center
 
 You have now created a new internal user and mapped it to manage a Wazuh agents' group. Authenticate with the new user and open the Wazuh dashboard, see that only ``Team_A`` agents' alerts and information are displayed.  
 

@@ -238,3 +238,6 @@ Follow the instructions below to change the passwords for all the Wazuh indexer 
    .. include:: /_templates/common/restart_dashboard.rst
 
 #. Go to **Dashboard management** > **Server APIs** to update the password of the API host entry with the new `wazuh-wui` password generated in the second step. Click on the edit button of the related API host. Change the **Password** and then click on **Apply** to save the changes.
+
+   .. image:: /images/wazuh-dashboard/api-connections/wazuh-dashboard-edit-api-connection.jpg
+      :align: center

@@ -394,6 +394,9 @@ Installing the Wazuh dashboard
 
 #.  Go to **Dashboard management** > **Server APIs** to add a new server API connection. Click on **Add API connection** button and fill the form with the following values.
 
+   .. image:: /images/wazuh-dashboard/api-connections/wazuh-dashboard-add-api-connection.jpg
+      :align: center
+
     - **ID**: ``default``
     - **URL**: IP address or hostname of the Wazuh server master node
     - **Port**: ``55000``
@@ -522,6 +525,10 @@ Select your deployment type and follow the instructions to change the default pa
          .. include:: /_templates/common/restart_dashboard.rst
 
       #. On the Wazuh dashboard, go to **Dashboard management** > **Server APIs** to update the API host password. Click on the edit button of the secured server API entry and replace the **Password** field. Then click on the **Apply** button to save.
+
+         .. image:: /images/wazuh-dashboard/api-connections/wazuh-dashboard-edit-api-connection.jpg
+            :align: center
+
 
 Next steps
 ^^^^^^^^^^
