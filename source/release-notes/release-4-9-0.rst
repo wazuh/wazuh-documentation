@@ -48,7 +48,7 @@ Wazuh dashboard
 - `#6337 <https://github.com/wazuh/wazuh-dashboard-plugins/pull/6337>`__ Changed the way the configuration is defined and stored.
 - `#6337 <https://github.com/wazuh/wazuh-dashboard-plugins/pull/6337>`__ Added a migration task to setup the configuration using a configuration file.
 - `#6337 <https://github.com/wazuh/wazuh-dashboard-plugins/pull/6337>`__ Added the ability to manage the API hosts from the Server APIs. `#6519 <https://github.com/wazuh/wazuh-dashboard-plugins/pull/6519>`__
-- `#6337 <https://github.com/wazuh/wazuh-dashboard-plugins/pull/6337>`__ Changed the view of API is down and check connection to Server APIs application.
+- `#6337 <https://github.com/wazuh/wazuh-dashboard-plugins/pull/6337>`__ Moved the content of the **API is down** and **Check connection** views to the **Server APIs** view.
 - `#6476 <https://github.com/wazuh/wazuh-dashboard-plugins/pull/6476>`__ Added the **Upgrade** agent action to **Endpoints Summary**.
 
 Resolved issues
