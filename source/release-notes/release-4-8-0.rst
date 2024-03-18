@@ -8,6 +8,16 @@
 
 This section lists the changes in version 4.8.0. Every update of the Wazuh solution is cumulative and includes all enhancements and fixes from previous releases.
 
+Breaking changes
+----------------
+
+This release includes some breaking changes, such as the following:
+
+RESTful API
+^^^^^^^^^^^
+
+- `#17048 <https://github.com/wazuh/wazuh/pull/17048>`__ Removed ``custom`` parameter from ``PUT /active-response`` endpoint.
+
 What's new
 ----------
 
@@ -86,7 +96,7 @@ Other
 - `#21710 <https://github.com/wazuh/wazuh/pull/21710>`__ Upgraded external ``libarchive`` library dependency version to ``3.7.2``.
 - `#20003 <https://github.com/wazuh/wazuh/pull/20003>`__ Upgraded external ``numpy`` library dependency version to ``1.26.0``.
 - `#21710 <https://github.com/wazuh/wazuh/pull/21710>`__ Upgraded external ``pcre2`` library dependency version to ``10.42``.
-- `#20003 <https://github.com/wazuh/wazuh/pull/20003>`__ Upgraded external ``pyarrow`` library dependency version to ``14.0.1``.
+- `#20493 <https://github.com/wazuh/wazuh/pull/20493>`__ Upgraded external ``pyarrow`` library dependency version to ``14.0.1``.
 - `#21710 <https://github.com/wazuh/wazuh/pull/21710>`__ Upgraded external ``rpm`` library dependency version to ``4.18.2``.
 - `#20741 <https://github.com/wazuh/wazuh/pull/20741>`__ Upgraded external ``SQLAlchemy`` library dependency version to ``2.0.23``.
 - `#21710 <https://github.com/wazuh/wazuh/pull/21710>`__ Upgraded external ``sqlite`` library dependency version to ``3.45.0``.
