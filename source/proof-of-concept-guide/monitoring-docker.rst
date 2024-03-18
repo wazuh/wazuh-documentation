@@ -41,7 +41,7 @@ Perform the following steps to install Docker on the Ubuntu endpoint and configu
    .. code-block:: console
 
       $ curl -sSL https://get.docker.com/ | sh
-      $ sudo pip3 install docker==4.2.0 urllib3==1.26.18
+      $ sudo pip3 install docker==6.0.0 urllib3==1.26.18
 
 #. Edit the Wazuh agent configuration file ``/var/ossec/etc/ossec.conf`` and add this block to enable the ``docker-listener`` module:
 
