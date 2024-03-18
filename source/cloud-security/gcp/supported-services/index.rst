@@ -12,3 +12,4 @@ You can use the Wazuh module for Google Cloud Pub/Sub and the Wazuh module for G
 
    pubsub
    use-cases
+   cloud-storage-buckets

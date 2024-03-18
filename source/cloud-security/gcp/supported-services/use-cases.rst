@@ -349,3 +349,58 @@ Available logs must appear as shown in the picture below.
 
 HTTP(S) Load Balancing Logging
 ------------------------------
+
+`HTTP(S) Load Balancing Logging <https://cloud.google.com/load-balancing/docs/https/https-logging-monitoring>`__ allows the user to enable, disable, and view logs for an HTTP(S) Load Balancing backend service. To send HTTP(S) Load Balancing Logging logs to Wazuh, you must first configure Cloud Logging to export these logs to Pub/Sub.
+
+.. note::
+   
+   Before you perform the steps below make sure that you have already configured the :doc:`Google Cloud Pub/Sub integration <>` and the :doc:`Wazuh module for Google Cloud Pub/Sub <>`.
+
+Enabling logging on HTTP(S) Load Balancer
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+HTTP(S) Load Balancer Logging can be enabled on the **Load Balancing** page in the Google Cloud Console. Follow the `Google Cloud Load Balancing <https://cloud.google.com/load-balancing/docs/https/https-logging-monitoring#enabling_logging_on_a_new_backend_service>`__ documentation for the most up-to-date instructions on how to enable this feature.
+
+Exporting HTTP(S) Load Balancer logs to Pub/Sub
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+The :doc:`Export logs via sink <>` section explains how to create a sink to export logs to a Pub/Sub topic. However, this would export every single log available, not just the HTTP(S) Load Balancer logs. It is possible to configure the sink to export HTTP(S) Load Balancer logs only to a topic, ignoring logs from other services, by adding a filtering condition to the sink. To do so, follow the same instructions as explained in the :doc:`Export logs via sink <>` section but add the following filter in Step 3 - **Choose logs to include in sink**:
+
+.. code-block:: none
+
+   resource.type=http_load_balancer
+
+.. thumbnail:: /images/cloud-security/gcp/gcp-create-logs-routing-sink-load-balancer.png
+   :title: Create logs routing sink – HTTP load balancer
+   :alt: Create logs routing sink – HTTP load balancer
+   :align: center
+   :width: 80%
+
+You can confirm that logs are generated in your environment by running the query in the **Logs Explorer**, as shown in the picture below.
+
+.. thumbnail:: /images/cloud-security/gcp/gcp-query-logs-explorer-load-balancer.png
+   :title: Query Logs Explorer – Load balancer
+   :alt: Query Logs Explorer – Load balancer
+   :align: center
+   :width: 80%
+
+Visualizing the events on the Wazuh dashboard
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Once you configure the sink, apply the filter below on the Wazuh dashboard to filter for Load balancer logs.
+
+Set the value of the ``data.gcp.resource.type`` field to ``http_load_balancer``.
+
+.. thumbnail:: /images/cloud-security/gcp/filter-load-balancer-logs.png
+   :title: Query Logs Explorer – Load balancer
+   :alt: Query Logs Explorer – Load balancer
+   :align: center
+   :width: 80%
+
+Available logs must appear as shown in the picture below.
+
+.. thumbnail:: /images/cloud-security/gcp/load-balancer-log.alerts.png
+   :title: Load balancer log alerts in the Wazuh dashboard
+   :alt: Load balancer log alerts in the Wazuh dashboard
+   :align: center
+   :width: 80%
