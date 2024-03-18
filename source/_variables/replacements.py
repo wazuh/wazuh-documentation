@@ -39,7 +39,7 @@ custom_replacements = {
     "|WAZUH_CURRENT_MAJOR|" : "4.x",
     "|WAZUH_CURRENT_MINOR|" : version,
     "|WAZUH_CURRENT|" : release,
-    "|PYTHON_CLOUD_CONTAINERS_MIN|": "3.7",
+    "|PYTHON_CLOUD_CONTAINERS_MIN|": "3.8",
     "|PYTHON_CLOUD_CONTAINERS_MAX|": "3.11",
 
     # --- Revision numbers for Wazuh agent and manager packages versions
