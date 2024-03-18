@@ -45,6 +45,11 @@ Wazuh dashboard
 - `#6268 <https://github.com/wazuh/wazuh-dashboard-plugins/pull/6268>`__ Refactored the **Endpoints Summary** charts.
 - `#6250 <https://github.com/wazuh/wazuh-dashboard-plugins/pull/6250>`__ Added agent groups edition to **Endpoints Summary**.
 - `#6274 <https://github.com/wazuh/wazuh-dashboard-plugins/pull/6274>`__ Added global actions for adding and removing groups on agents to the **Endpoints Summary**.
+- `#6337 <https://github.com/wazuh/wazuh-dashboard-plugins/pull/6337>`__ Changed the way the configuration is defined and stored.
+- `#6337 <https://github.com/wazuh/wazuh-dashboard-plugins/pull/6337>`__ Added a migration task to setup the configuration using a configuration file.
+- `#6337 <https://github.com/wazuh/wazuh-dashboard-plugins/pull/6337>`__ Added the ability to manage the API hosts from the Server APIs. `#6519 <https://github.com/wazuh/wazuh-dashboard-plugins/pull/6519>`__
+- `#6337 <https://github.com/wazuh/wazuh-dashboard-plugins/pull/6337>`__ Moved the content of the **API is down** and **Check connection** views to the **Server APIs** view.
+- `#6476 <https://github.com/wazuh/wazuh-dashboard-plugins/pull/6476>`__ Added the **Upgrade** agent action to **Endpoints Summary**.
 
 Resolved issues
 ---------------
