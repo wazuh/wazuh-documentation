@@ -51,7 +51,7 @@ RESTful API
 - `#20420 <https://github.com/wazuh/wazuh/pull/20420>`__ Added the ``auto`` option to the ``ssl_protocol`` setting in the API configuration. This option enables automatic negotiation of the TLS certificate.
 - `#21572 <https://github.com/wazuh/wazuh/pull/21572>`__ Removed the ``compilation_date`` field from ``GET /cluster/{node_id}/info`` and ``GET /manager/info`` endpoints.
 - `#22387 <https://github.com/wazuh/wazuh/pull/22387>`__ Deprecated the ``cache`` configuration option.
-- `#17048 <https://github.com/wazuh/wazuh/pull/17048>`__ Removed ``custom`` parameter from ``PUT /active-response`` endpoint.
+- `#17048 <https://github.com/wazuh/wazuh/pull/17048>`__ Removed the ``custom`` parameter from the ``PUT /active-response`` endpoint.
 
 Ruleset
 ^^^^^^^
