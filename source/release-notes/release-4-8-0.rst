@@ -8,16 +8,6 @@
 
 This section lists the changes in version 4.8.0. Every update of the Wazuh solution is cumulative and includes all enhancements and fixes from previous releases.
 
-Breaking changes
-----------------
-
-This release includes some breaking changes, such as the following:
-
-RESTful API
-^^^^^^^^^^^
-
-- `#17048 <https://github.com/wazuh/wazuh/pull/17048>`__ Removed ``custom`` parameter from ``PUT /active-response`` endpoint.
-
 What's new
 ----------
 
@@ -61,6 +51,7 @@ RESTful API
 - `#20420 <https://github.com/wazuh/wazuh/pull/20420>`__ Added the ``auto`` option to the ``ssl_protocol`` setting in the API configuration. This option enables automatic negotiation of the TLS certificate.
 - `#21572 <https://github.com/wazuh/wazuh/pull/21572>`__ Removed the ``compilation_date`` field from ``GET /cluster/{node_id}/info`` and ``GET /manager/info`` endpoints.
 - `#22387 <https://github.com/wazuh/wazuh/pull/22387>`__ Deprecated the ``cache`` configuration option.
+- `#17048 <https://github.com/wazuh/wazuh/pull/17048>`__ Removed ``custom`` parameter from ``PUT /active-response`` endpoint.
 
 Ruleset
 ^^^^^^^
