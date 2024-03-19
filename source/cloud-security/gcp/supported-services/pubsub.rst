@@ -8,11 +8,11 @@ Monitoring Google Cloud Pub/Sub
 
 Wazuh integrates with the Google Cloud Pub/Sub messaging and ingestion service using the Wazuh module for Google Cloud Pub/Sub. Google Cloud Pub/Sub is widely used for event-driven systems and streaming analytics. It allows sending and receiving messages between different applications. Integrating with the Pub/Sub service allows the Wazuh module for Google Cloud Pub/Sub to fetch different events like the ones listed below from your Google Cloud environment:
 
--  :doc:`Audited resources <>`
--  :doc:`DNS queries <>`
--  :doc:`VPC Flow Logs <>`
--  :doc:`Firewall Rules Logging <>`
--  :doc:`HTTP(S) Load Balancing Logging <>`
+-  :ref:`Audited resources <cloud_audit_logs>`
+-  :ref:`DNS queries <dns_queries>`
+-  :ref:`VPC Flow Logs <vpc_flow_logs>`
+-  :ref:`Firewall Rules Logging <firewall_rules_logging>`
+-  :ref:`HTTP(S) Load Balancing Logging <http_s_load_balancing_logging>`
 
 Once these events are collected, Wazuh processes them using its :doc:`detection rules </user-manual/ruleset/index>` and displays the appropriate alerts on the Wazuh dashboard.
 
@@ -80,6 +80,8 @@ Setting up Google Cloud credentials for Wazuh
 
 If you do not have credentials yet, follow the steps in the :doc:`credentials </cloud-security/gcp/prerequisites/credentials>` section.
 
+.. _configuring_wazuh_module_pub_sub:
+
 Configuring the Wazuh module for Google Cloud Pub/Sub
 -----------------------------------------------------
 
@@ -124,6 +126,8 @@ Follow the next steps to configure the Wazuh module for Google Cloud Pub/Sub on 
          .. code-block:: console
 
             # systemctl restart wazuh-agent
+
+.. _export_logs_via_sink:
 
 Export logs via sink
 --------------------

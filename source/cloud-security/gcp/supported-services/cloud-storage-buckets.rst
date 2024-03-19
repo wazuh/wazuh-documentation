@@ -6,12 +6,12 @@
 Monitoring Google Cloud Storage buckets
 =======================================
 
-Google Cloud Storage offers `usage logs and storage logs <https://cloud.google.com/storage/docs/access-logs>`__, also known as access logs, in the form of CSV files that can be downloaded. Usage logs provide information for all of the requests made on a specified bucket and are created hourly. Storage logs provide information about the storage consumption of that bucket for the last day and are created daily. Once set up, usage logs and storage logs are automatically created as new objects in the specified bucket. The Wazuh module for Google Cloud Storage buckets collects these logs from the bucket and processes the events using defined :doc:`threat detection rules and decoders <>`.
+Google Cloud Storage offers `usage logs and storage logs <https://cloud.google.com/storage/docs/access-logs>`__, also known as access logs, in the form of CSV files that can be downloaded. Usage logs provide information for all of the requests made on a specified bucket and are created hourly. Storage logs provide information about the storage consumption of that bucket for the last day and are created daily. Once set up, usage logs and storage logs are automatically created as new objects in the specified bucket. The Wazuh module for Google Cloud Storage buckets collects these logs from the bucket and processes the events using defined :doc:`threat detection rules and decoders </user-manual/ruleset/index>`.
 
 Configuring Google Cloud Storage buckets
 ----------------------------------------
 
-This section describes how to create a bucket and enable logging. If you do not have credentials, follow the steps in the :doc:`configuring Google Cloud credentials <>` section.
+This section describes how to create a bucket and enable logging. If you do not have credentials, follow the steps in the :doc:`configuring Google Cloud credentials <../prerequisites/credentials>` section.
 
 Setting up log delivery to a Google Cloud Storage bucket
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
@@ -84,7 +84,7 @@ Perform the following steps to configure the Wazuh module for Google Cloud Stora
          <interval>1m</interval>
          <bucket type="access_logs">
              <name><YOUR_BUCKET_NAME></name>
-      <credentials_file>/var/ossec/wodles/gcloud/<YOUR_AUTHENTICATION_FILE></credentials_file>
+             <credentials_file>/var/ossec/wodles/gcloud/<YOUR_AUTHENTICATION_FILE></credentials_file>
          </bucket>
       </gcp-bucket>
 
@@ -93,7 +93,7 @@ Perform the following steps to configure the Wazuh module for Google Cloud Stora
    -  ``<run_on_start>``: Schedules the module to run on the start or restart of the Wazuh manager or agent service, depending on where the module is configured. 
    -  ``<interval>``: Sets a time interval between module execution.
    -  ``<name>``: Contains the name of the Google Cloud Storage bucket from which logs are read.
-   -  ``<credentials_file>``: Contains the path to the Google Cloud credentials file. If you do not have credentials yet, follow the steps in the :doc:`configuring Google Cloud credentials <>` section.
+   -  ``<credentials_file>``: Contains the path to the Google Cloud credentials file. If you do not have credentials yet, follow the steps in the :doc:`configuring Google Cloud credentials <../prerequisites/credentials>` section.
 
    Replace ``<YOUR_BUCKET_NAME>`` with your bucket name and ``<YOUR_AUTHENTICATION_FILE>`` with the name of your credential file.
 
@@ -101,40 +101,40 @@ Perform the following steps to configure the Wazuh module for Google Cloud Stora
 
 #. Restart the Wazuh manager or agent service to apply the changes:
 
-   -  Wazuh manager
+   .. tabs::
 
-      .. code-block:: console
+      .. group-tab:: Wazuh manager
 
-         # systemctl restart wazuh-manager
+         .. code-block:: console
 
-   -  Wazuh agent
+            # systemctl restart wazuh-manager
 
-      .. code-block:: console
+      .. group-tab:: Wazuh agent
 
-         # systemctl restart wazuh-agent
+         .. code-block:: console
+
+            # systemctl restart wazuh-agent
 
 Visualizing the events on the Wazuh dashboard
 ---------------------------------------------
 
 Apply one of the filters below on the Wazuh dashboard to filter for Google Cloud storage and usage logs.
 
-``data.gcp.resource.type`` ``is`` ``gcs_bucket``.
+-  ``data.gcp.resource.type`` ``is`` ``gcs_bucket``.
 
-.. thumbnail:: /images/cloud-security/gcp/filter-cloud-storage-logs-resource-type.png
-   :title: Filter Google Cloud storage and usage logs – Resource type
-   :alt: Filter Google Cloud storage and usage logs – Resource type
-   :align: center
-   :width: 80%
+   .. thumbnail:: /images/cloud-security/gcp/filter-cloud-storage-logs-resource-type.png
+      :title: Filter Google Cloud storage and usage logs – Resource type
+      :alt: Filter Google Cloud storage and usage logs – Resource type
+      :align: center
+      :width: 80%
 
-Or
+-  ``data.gcp.source`` ``is`` ``gcp_bucket``.
 
-``data.gcp.source`` ``is`` ``gcp_bucket``.
-
-.. thumbnail:: /images/cloud-security/gcp/filter-cloud-storage-logs-source.png
-   :title: Filter Google Cloud storage and usage logs – Source
-   :alt: Filter Google Cloud storage and usage logs – Source
-   :align: center
-   :width: 80%
+   .. thumbnail:: /images/cloud-security/gcp/filter-cloud-storage-logs-source.png
+      :title: Filter Google Cloud storage and usage logs – Source
+      :alt: Filter Google Cloud storage and usage logs – Source
+      :align: center
+      :width: 80%
 
 Available logs must appear as shown in the picture below.
 
@@ -193,17 +193,19 @@ Where:
 
 Restart the Wazuh manager or agent service to apply the changes:
 
--  Wazuh manager
+.. tabs::
 
-   .. code-block:: console
+   .. group-tab:: Wazuh manager
 
-      # systemctl restart wazuh-manager
+      .. code-block:: console
 
--  Wazuh agent
+         # systemctl restart wazuh-manager
 
-   .. code-block:: console
+   .. group-tab:: Wazuh agent
 
-      # systemctl restart wazuh-agent
+      .. code-block:: console
+
+         # systemctl restart wazuh-agent
 
 First execution
 ^^^^^^^^^^^^^^^

@@ -8,6 +8,8 @@ Use cases
 
 In this section, we explore how to use the Wazuh module for Pub/Sub to collect and monitor different types of logs from your Google Cloud environment, such as cloud audit logs, DNS queries, VPC Flow Logs, Firewall Rules Logging, and HTTP(S) load balancing.
 
+.. _cloud_audit_logs:
+
 Cloud audit logs
 ----------------
 
@@ -27,7 +29,7 @@ To collect Google Cloud audit logs, it is necessary to first ingest the audit lo
 
 .. note::
 
-   Before you perform the steps below make sure that you have already configured the :doc:`Google Cloud Pub/Sub integration <>` and the :doc:`Wazuh module for Google Cloud Pub/Sub <>`.
+   Before you perform the steps below make sure that you have already configured the :doc:`Google Cloud Pub/Sub integration <pubsub>` and the :ref:`Wazuh module for Google Cloud Pub/Sub <configuring_wazuh_module_pub_sub>`.
 
 #. Visit the `Google Cloud Logging section <https://console.cloud.google.com/logs/router>`__ and click on **Create sink**.
 
@@ -67,7 +69,7 @@ To collect Google Cloud audit logs, it is necessary to first ingest the audit lo
       :align: center
       :width: 80%
 
-Once this process is finished, you can configure the :doc:`Wazuh module for Google Cloud Pub/Sub <>`  to process the audit logs of the selected resources as usual.
+Once this process is finished, you can configure the :ref:`Wazuh module for Google Cloud Pub/Sub <configuring_wazuh_module_pub_sub>`  to process the audit logs of the selected resources as usual.
 
 Visualizing the events on the Wazuh dashboard
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
@@ -92,6 +94,8 @@ Available logs must appear as shown in the picture below.
 
 Visit the `Google Cloud documentation <https://cloud.google.com/logging/docs/audit/services>`__ to learn more about the different Google services capable of writing audit logs.
 
+.. _dns_queries:
+
 DNS queries
 -----------
 
@@ -99,7 +103,7 @@ Wazuh has default rules for `DNS queries <https://cloud.google.com/monitoring/ap
 
 .. note::
    
-   Before you perform the steps below make sure that you have already configured the :doc:`Google Cloud Pub/Sub integration <>` and the :doc:`Wazuh module for Google Cloud Pub/Sub <>`.
+   Before you perform the steps below make sure that you have already configured the :doc:`Google Cloud Pub/Sub integration <pubsub>` and the :ref:`Wazuh module for Google Cloud Pub/Sub <configuring_wazuh_module_pub_sub>`.
 
 Configuring Google DNS logs collection
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
@@ -154,7 +158,7 @@ To collect the DNS queries made to the Google DNS service, we use DNS policies t
 Exporting DNS queries logs to Pub/Sub
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-Once DNS Cloud logging is configured, the generated logs must be ingested into a Pub/Sub topic so that Wazuh can collect them using the :doc:`Google Pub/Sub integration <>`. To achieve that, it is necessary to define a custom log router.
+Once DNS Cloud logging is configured, the generated logs must be ingested into a Pub/Sub topic so that Wazuh can collect them using the :doc:`Google Pub/Sub integration <pubsub>`. To achieve that, it is necessary to define a custom log router.
 
 #. Visit the `Google Cloud Logging section <https://console.cloud.google.com/logs/router>`__ and click on **CREATE SINK**.
 
@@ -225,6 +229,8 @@ Available logs must appear as shown in the picture below.
    :align: center
    :width: 80%
 
+.. _vpc_flow_logs:
+
 VPC Flow Logs
 -------------
 
@@ -232,7 +238,7 @@ VPC Flow Logs
 
 .. note::
    
-   Before you perform the steps below make sure that you have already configured the :doc:`Google Cloud Pub/Sub integration <>` and the :doc:`Wazuh module for Google Cloud Pub/Sub <>`.
+   Before you perform the steps below make sure that you have already configured the :doc:`Google Cloud Pub/Sub integration <pubsub>` and the :ref:`Wazuh module for Google Cloud Pub/Sub <configuring_wazuh_module_pub_sub>`.
 
 Enabling VPC Flow Logs
 ^^^^^^^^^^^^^^^^^^^^^^
@@ -242,7 +248,7 @@ VPC Flow Logs can be enabled on the VPC networks page in the Google Cloud Consol
 Exporting VPC Flow Logs to Pub/Sub
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-The :doc:`Export logs via sink <>` section explains how to create a sink to export logs to a Pub/Sub topic. However, this would export every single log available, not just the VPC Flow Logs. It is possible to configure the sink to export VPC Flow Logs only to a topic, ignoring logs coming from other services by adding a filtering condition to the sink. To do so, follow the same instructions as explained in the :doc:`Export logs via sink <>` section but add the following filter in Step 3 - **Choose logs to include in sink**:
+The :ref:`Export logs via sink <export_logs_via_sink>` section explains how to create a sink to export logs to a Pub/Sub topic. However, this would export every single log available, not just the VPC Flow Logs. It is possible to configure the sink to export VPC Flow Logs only to a topic, ignoring logs coming from other services by adding a filtering condition to the sink. To do so, follow the same instructions as explained in the :ref:`Export logs via sink <export_logs_via_sink>` section but add the following filter in Step 3 - **Choose logs to include in sink**:
 
 .. code-block:: none
 
@@ -286,6 +292,8 @@ Available logs must appear as shown in the picture below.
    :align: center
    :width: 80%
 
+.. _firewall_rules_logging:
+
 Firewall Rules Logging
 ----------------------
 
@@ -293,7 +301,7 @@ Firewall Rules Logging
 
 .. note::
    
-   Before you perform the steps below make sure that you have already configured the :doc:`Google Cloud Pub/Sub integration <>` and the :doc:`Wazuh module for Google Cloud Pub/Sub <>`.
+   Before you perform the steps below make sure that you have already configured the :doc:`Google Cloud Pub/Sub integration <pubsub>` and the :ref:`Wazuh module for Google Cloud Pub/Sub <configuring_wazuh_module_pub_sub>`.
 
 Enabling Firewall Rules Logging
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
@@ -303,7 +311,7 @@ Firewall Rules Logging can be enabled on the Firewall page in the Google Cloud C
 Exporting Firewall Rules logs to Pub/Sub
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-The :doc:`Export logs via sink <>` section explains how to create a sink to export logs to a Pub/Sub topic. However, this would export every single log available, not only the Firewall Rules Logging. It is possible to configure the sink to export Firewall Rules Logging logs only to a topic, ignoring logs from other services, by adding a filtering condition to the sink. To do so, follow the instructions as explained in the :doc:`Export logs via sink <>` section but add the following filter in Step 3 - **Choose logs to include in sink**:
+The :ref:`Export logs via sink <export_logs_via_sink>` section explains how to create a sink to export logs to a Pub/Sub topic. However, this would export every single log available, not only the Firewall Rules Logging. It is possible to configure the sink to export Firewall Rules Logging logs only to a topic, ignoring logs from other services, by adding a filtering condition to the sink. To do so, follow the instructions as explained in the :ref:`Export logs via sink <export_logs_via_sink>` section but add the following filter in Step 3 - **Choose logs to include in sink**:
 
 .. code-block:: none
 
@@ -347,6 +355,8 @@ Available logs must appear as shown in the picture below.
    :align: center
    :width: 80%
 
+.. _http_s_load_balancing_logging:
+
 HTTP(S) Load Balancing Logging
 ------------------------------
 
@@ -354,7 +364,7 @@ HTTP(S) Load Balancing Logging
 
 .. note::
    
-   Before you perform the steps below make sure that you have already configured the :doc:`Google Cloud Pub/Sub integration <>` and the :doc:`Wazuh module for Google Cloud Pub/Sub <>`.
+   Before you perform the steps below make sure that you have already configured the :doc:`Google Cloud Pub/Sub integration <pubsub>` and the :ref:`Wazuh module for Google Cloud Pub/Sub <configuring_wazuh_module_pub_sub>`.
 
 Enabling logging on HTTP(S) Load Balancer
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
@@ -364,7 +374,7 @@ HTTP(S) Load Balancer Logging can be enabled on the **Load Balancing** page in t
 Exporting HTTP(S) Load Balancer logs to Pub/Sub
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-The :doc:`Export logs via sink <>` section explains how to create a sink to export logs to a Pub/Sub topic. However, this would export every single log available, not just the HTTP(S) Load Balancer logs. It is possible to configure the sink to export HTTP(S) Load Balancer logs only to a topic, ignoring logs from other services, by adding a filtering condition to the sink. To do so, follow the same instructions as explained in the :doc:`Export logs via sink <>` section but add the following filter in Step 3 - **Choose logs to include in sink**:
+The :ref:`Export logs via sink <export_logs_via_sink>` section explains how to create a sink to export logs to a Pub/Sub topic. However, this would export every single log available, not just the HTTP(S) Load Balancer logs. It is possible to configure the sink to export HTTP(S) Load Balancer logs only to a topic, ignoring logs from other services, by adding a filtering condition to the sink. To do so, follow the same instructions as explained in the :ref:`Export logs via sink <export_logs_via_sink>` section but add the following filter in Step 3 - **Choose logs to include in sink**:
 
 .. code-block:: none
 

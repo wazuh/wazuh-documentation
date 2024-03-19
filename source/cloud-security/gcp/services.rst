@@ -10,7 +10,7 @@ Wazuh provides modules that integrate with the Google Cloud Pub/Sub and Google C
 
 These log collection and analysis capabilities allow organizations that rely on Google Cloud Platform for their infrastructure, providing them with the ability to proactively monitor activities and respond effectively to security incidents within their cloud environment.
 
-Further sections highlight the :doc:`prerequisites </cloud-security/gcp/prerequisites/index>` for monitoring :doc:`Google Cloud supported services <>`.
+Further sections highlight the :doc:`prerequisites <prerequisites/index>` for monitoring :doc:`Google Cloud supported services <supported-services/index>`.
 
 .. toctree::
    :maxdepth: 2

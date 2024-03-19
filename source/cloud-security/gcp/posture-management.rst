@@ -33,7 +33,7 @@ Create a new Google Cloud project and a service account that enables the Wazuh G
 
 Follow the steps below to perform the configuration.
 
-#. Create a new Google Cloud project. Take note of the project ID.
+#. Create a new _`Google Cloud project`. Take note of the project ID.
 
    .. thumbnail:: /images/cloud-security/gcp/create-gcp-project.gif
       :title: Create GCP project
@@ -59,7 +59,7 @@ Follow the steps below to perform the configuration.
    -  **Service account name** is the privileged account that Wazuh uses to connect to Google Cloud.
    -  **Roles** are the rights given to the service account.
 
-#. Open the newly created service account and create a private key in JSON format. Your browser automatically downloads the key. Wazuh uses the key to authenticate to your Google Cloud project.
+#. Open the newly created service account and create a _`private key in JSON format`. Your browser automatically downloads the key. Wazuh uses the key to authenticate to your Google Cloud project.
 
    .. thumbnail:: /images/cloud-security/gcp/create-a-private-key-in-json-format.gif
       :title: Create a private key in JSON format
