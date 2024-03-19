@@ -112,10 +112,15 @@ Installation on Windows
 Agent Configuration
 ^^^^^^^^^^^^^^^^^^^
 
-Add the server value to the ``[main]`` section of the node ``/etc/puppetlabs/puppet/puppet.conf`` (Linux) or  ``C:\ProgramData\PuppetLabs\puppet\etc\puppet.conf`` (Windows) file, replacing ``puppet-master`` with your Puppet server FQDN if you have your own DNS configured::
+To configure the Puppet agent, edit the configuration file in the node.
+-  ``/etc/puppetlabs/puppet/puppet.conf`` for Linux systems
+-  ``C:\ProgramData\PuppetLabs\puppet\etc\puppet.conf`` for Windows systems
+Add the ``server`` setting to the ``[main]`` section of the file.  If you have set up your own DNS, replace ``puppet-master`` with the Fully Qualified Domain Name (FQDN) of your Puppet server.
 
-   [main]
-   server = puppet-master
+   .. code-block:: none
+
+      [main]
+      server = puppet-master
    
 
 .. note:: The Puppet server FQDN should be resolved by the Puppet agent host.
