@@ -51,6 +51,7 @@ RESTful API
 - `#20420 <https://github.com/wazuh/wazuh/pull/20420>`__ Added the ``auto`` option to the ``ssl_protocol`` setting in the API configuration. This option enables automatic negotiation of the TLS certificate.
 - `#21572 <https://github.com/wazuh/wazuh/pull/21572>`__ Removed the ``compilation_date`` field from ``GET /cluster/{node_id}/info`` and ``GET /manager/info`` endpoints.
 - `#22387 <https://github.com/wazuh/wazuh/pull/22387>`__ Deprecated the ``cache`` configuration option.
+- `#17048 <https://github.com/wazuh/wazuh/pull/17048>`__ Removed the ``custom`` parameter from the ``PUT /active-response`` endpoint.
 
 Ruleset
 ^^^^^^^
@@ -86,7 +87,7 @@ Other
 - `#21710 <https://github.com/wazuh/wazuh/pull/21710>`__ Upgraded external ``libarchive`` library dependency version to ``3.7.2``.
 - `#20003 <https://github.com/wazuh/wazuh/pull/20003>`__ Upgraded external ``numpy`` library dependency version to ``1.26.0``.
 - `#21710 <https://github.com/wazuh/wazuh/pull/21710>`__ Upgraded external ``pcre2`` library dependency version to ``10.42``.
-- `#20003 <https://github.com/wazuh/wazuh/pull/20003>`__ Upgraded external ``pyarrow`` library dependency version to ``14.0.1``.
+- `#20493 <https://github.com/wazuh/wazuh/pull/20493>`__ Upgraded external ``pyarrow`` library dependency version to ``14.0.1``.
 - `#21710 <https://github.com/wazuh/wazuh/pull/21710>`__ Upgraded external ``rpm`` library dependency version to ``4.18.2``.
 - `#20741 <https://github.com/wazuh/wazuh/pull/20741>`__ Upgraded external ``SQLAlchemy`` library dependency version to ``2.0.23``.
 - `#21710 <https://github.com/wazuh/wazuh/pull/21710>`__ Upgraded external ``sqlite`` library dependency version to ``3.45.0``.
@@ -104,7 +105,7 @@ Wazuh dashboard
 - `#6083 <https://github.com/wazuh/wazuh-dashboard-plugins/pull/6083>`__ Added the ``ssl_agent_ca`` configuration to the **SSL Settings** form.
 - `#5896 <https://github.com/wazuh/wazuh-dashboard-plugins/pull/5896>`__ Added global vulnerability dashboards. `#6179 <https://github.com/wazuh/wazuh-dashboard-plugins/pull/6179>`__ `#6173 <https://github.com/wazuh/wazuh-dashboard-plugins/pull/6173>`__ `#6147 <https://github.com/wazuh/wazuh-dashboard-plugins/pull/6147>`__ `#6231 <https://github.com/wazuh/wazuh-dashboard-plugins/pull/6231>`__ `#6246 <https://github.com/wazuh/wazuh-dashboard-plugins/pull/6246>`__ `#6321 <https://github.com/wazuh/wazuh-dashboard-plugins/pull/6321>`__ `#6338 <https://github.com/wazuh/wazuh-dashboard-plugins/pull/6338>`__ `#6356 <https://github.com/wazuh/wazuh-dashboard-plugins/pull/6356>`__ `#6410 <https://github.com/wazuh/wazuh-dashboard-plugins/pull/6410>`__ `#6429 <https://github.com/wazuh/wazuh-dashboard-plugins/pull/6429>`__ `#6448 <https://github.com/wazuh/wazuh-dashboard-plugins/pull/6448>`__ `#6488 <https://github.com/wazuh/wazuh-dashboard-plugins/pull/6488>`__
 - `#5840 <https://github.com/wazuh/wazuh-dashboard-plugins/pull/5840>`__ Added an agent selector to the IT Hygiene module.
-- `#5840 <https://github.com/wazuh/wazuh-dashboard-plugins/pull/5840>`__ Moved the Wazuh menu into the side menu. `#6226 <https://github.com/wazuh/wazuh-dashboard-plugins/pull/6226>`__ `#6176 <https://github.com/wazuh/wazuh-dashboard-plugins/pull/6176>`__ `#6423 <https://github.com/wazuh/wazuh-dashboard-plugins/pull/6423>`__
+- `#5840 <https://github.com/wazuh/wazuh-dashboard-plugins/pull/5840>`__ Moved the Wazuh menu into the side menu. `#6226 <https://github.com/wazuh/wazuh-dashboard-plugins/pull/6226>`__ `#6176 <https://github.com/wazuh/wazuh-dashboard-plugins/pull/6176>`__ `#6423 <https://github.com/wazuh/wazuh-dashboard-plugins/pull/6423>`__  `#6510 <https://github.com/wazuh/wazuh-dashboard-plugins/pull/6510>`__
 - `#5840 <https://github.com/wazuh/wazuh-dashboard-plugins/pull/5840>`__ Removed the ``disabled_roles`` and ``customization.logo.sidebar`` settings.
 - `#5840 <https://github.com/wazuh/wazuh-dashboard-plugins/pull/5840>`__ Removed module visibility configuration and removed the ``extensions.*`` settings.
 - `#6106 <https://github.com/wazuh/wazuh-dashboard-plugins/pull/6106>`__ Added query results limit of 10000 hits.
