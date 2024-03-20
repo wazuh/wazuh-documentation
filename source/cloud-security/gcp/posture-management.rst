@@ -1,7 +1,7 @@
 .. Copyright (C) 2015, Wazuh, Inc.
 
 .. meta::
-   :description: 
+   :description: Learn how to use Wazuh to review posture security on the Google Cloud in this section of the documentation.
 
 Cloud Security Posture Management
 =================================

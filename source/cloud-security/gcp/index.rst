@@ -1,7 +1,7 @@
 .. Copyright (C) 2015, Wazuh, Inc.
 
 .. meta::
-   :description: 
+   :description: Learn how to integrate Wazuh with supported Google Cloud services in this section of the documentation.
   
 Monitoring Google Cloud
 =======================

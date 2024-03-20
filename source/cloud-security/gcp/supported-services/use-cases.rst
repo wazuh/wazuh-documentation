@@ -1,7 +1,7 @@
 .. Copyright (C) 2015, Wazuh, Inc.
 
 .. meta::
-   :description: 
+   :description: Explore how to use the Wazuh module for Pub/Sub to collect and monitor different types of logs from your Google Cloud environment in this section of the documentation.
   
 Use cases
 =========

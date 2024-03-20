@@ -1,7 +1,7 @@
 .. Copyright (C) 2015, Wazuh, Inc.
 
 .. meta::
-   :description: 
+   :description: Learn about the prerequisites to collect logs from Google Cloud Pub/Sub or storage buckets in this section of the documentation.
 
 Prerequisites
 =============

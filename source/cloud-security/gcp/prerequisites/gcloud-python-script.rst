@@ -1,7 +1,7 @@
 .. Copyright (C) 2015, Wazuh, Inc.
 
 .. meta::
-   :description: 
+   :description: The Wazuh modules for Google Cloud are accessible through a Python script. Learn more in this section of the documentation.
 
 Gcloud Python script
 ====================

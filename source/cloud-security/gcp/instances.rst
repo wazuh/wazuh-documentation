@@ -1,7 +1,7 @@
 .. Copyright (C) 2015, Wazuh, Inc.
 
 .. meta::
-   :description: 
+   :description: Install the Wazuh agent directly on Google Cloud virtual machines or instances to collect security data.
 
 Monitoring Google Cloud instances
 =================================

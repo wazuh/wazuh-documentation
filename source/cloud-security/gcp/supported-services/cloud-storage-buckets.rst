@@ -1,7 +1,7 @@
 .. Copyright (C) 2015, Wazuh, Inc.
 
 .. meta::
-   :description: 
+   :description: Learn how the Wazuh module for Google Cloud Storage buckets collects access logs from the bucket and processes the events in this section of the documentation.
   
 Monitoring Google Cloud Storage buckets
 =======================================

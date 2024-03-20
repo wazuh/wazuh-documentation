@@ -1,7 +1,7 @@
 .. Copyright (C) 2015, Wazuh, Inc.
 
 .. meta::
-   :description: 
+   :description: Learn how to integrate Wazuh with the Google Cloud Pub/Sub messaging and ingestion service using the Wazuh module for Google Cloud Pub/Sub in this section of the documentation.
   
 Monitoring Google Cloud Pub/Sub
 ===============================

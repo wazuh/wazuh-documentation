@@ -1,6 +1,6 @@
 .. Copyright (C) 2015, Wazuh, Inc.
 .. meta::
-  :description: 
+  :description: Install Python and Pip on the endpoint you are performing the integration to monitor Google Cloud.
 
 Installing dependencies
 =======================

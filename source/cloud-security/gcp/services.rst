@@ -1,7 +1,7 @@
 .. Copyright (C) 2015, Wazuh, Inc.
 
 .. meta::
-   :description: 
+   :description: Learn how Wazuh provides modules that integrate with the Google Cloud Pub/Sub and Google Cloud Storage bucket services in this section of the documentation.
 
 Monitoring Google Cloud services
 =================================

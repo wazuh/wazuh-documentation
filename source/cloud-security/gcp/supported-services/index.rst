@@ -1,7 +1,7 @@
 .. Copyright (C) 2015, Wazuh, Inc.
 
 .. meta::
-   :description: 
+   :description: Learn how to use the Wazuh module for Google Cloud to monitor and secure your Google Cloud environment in this section of the documentation.
 
 Configuring the supported services
 ==================================
