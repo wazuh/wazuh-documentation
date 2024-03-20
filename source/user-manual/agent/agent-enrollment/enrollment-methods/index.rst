@@ -1,7 +1,7 @@
 .. Copyright (C) 2015, Wazuh, Inc.
 
 .. meta::
-  :description: 
+  :description: Wazuh agent enrollment methods.
   
 Enrollment methods
 ==================

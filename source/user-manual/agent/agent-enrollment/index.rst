@@ -58,8 +58,6 @@ Refer to the :doc:`Troubleshooting <../agent-enrollment/troubleshooting>` sectio
     :maxdepth: 1
 
     enrollment-methods/index
-    via-agent-configuration/index
-    via-manager-API/index
     security-options/index
     troubleshooting
     

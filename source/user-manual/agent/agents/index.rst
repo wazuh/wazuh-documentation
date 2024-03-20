@@ -15,7 +15,6 @@ This section describes how to manage the agents using the command line (CLI), th
     .. toctree::
         :maxdepth: 2
 
-        file-locations-and-directories
         listing/index
         grouping-agents
         remove-agents/index

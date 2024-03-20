@@ -1,7 +1,7 @@
 .. Copyright (C) 2015, Wazuh, Inc.
 
 .. meta::
-  :description: 
+  :description: Alert management
   
 Alert management
 ================
@@ -11,6 +11,5 @@ Alert management
 
    alert-threshold
    forwarding-alerts/index
-   log-compression-and-rotation
    wazuh-archives
 

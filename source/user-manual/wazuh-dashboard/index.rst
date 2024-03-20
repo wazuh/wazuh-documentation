@@ -15,7 +15,6 @@ The Wazuh dashboard is a powerful web user interface for data visualization and 
     .. toctree::
         :maxdepth: 1
 
-        navigating-the-wazuh-dashboard
         creating-custom-dashboards
         queries
         multi-tenancy

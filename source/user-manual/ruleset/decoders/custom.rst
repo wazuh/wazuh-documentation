@@ -1,18 +1,16 @@
 .. Copyright (C) 2015, Wazuh, Inc.
 
 .. meta::
-  :description: 
+   :description: Customizing decoders
   
 Custom decoders
 ===============
-
-Adding new decoders
--------------------
 
 Changing existing decoders
 --------------------------
 
 .. warning::
+
    Changes in any decoder file in the ``/var/ossec/ruleset/decoders`` folder are lost in the update process. Use the following procedure to preserve your changes.
 
 To change a default decoder, you can rewrite its file in the ``/var/ossec/etc/decoders`` directory, make the changes, and exclude the original decoder file from the loading list. 

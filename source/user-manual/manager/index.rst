@@ -15,12 +15,7 @@ The Wazuh manager is the system that analyzes the data received from all registe
    .. toctree::
       :maxdepth: 2
 
-      agent-enrollment-service
-      agent-connection-service
-      analysis-engine
       alert-management/index
-      file-locations-and-directories
       manual-integration
       configuring-cluster/index
-      filebeat
       remote-service

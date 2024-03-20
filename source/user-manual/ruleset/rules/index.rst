@@ -1,7 +1,7 @@
 .. Copyright (C) 2015, Wazuh, Inc.
 
 .. meta::
-  :description: 
+  :description: Wazuh rules
 
 Rules
 =====
@@ -11,5 +11,4 @@ Rules
    .. toctree::
       :maxdepth: 1
 
-      default-rules
       custom

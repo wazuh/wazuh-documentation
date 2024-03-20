@@ -1,15 +1,12 @@
 .. Copyright (C) 2015, Wazuh, Inc.
 
 .. meta::
-  :description: 
+  :description: Customizing rules
   
 .. _ruleset_custom:
 
 Custom rules
 ============
-
-Adding new rules
-----------------
 
 .. _changing_existing_rule:
 

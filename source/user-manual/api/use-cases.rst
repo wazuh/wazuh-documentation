@@ -1,7 +1,7 @@
 .. Copyright (C) 2015, Wazuh, Inc.
 
 .. meta::
-    :description: 
+   :description: This section presents use cases for the Wazuh API.
     
 .. _wazuh_api_use_cases:
 
