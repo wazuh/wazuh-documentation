@@ -61,7 +61,7 @@ This information can also be obtained using the Wazuh API endpoint :api-ref:`GET
         "error": 0,
     }
 
-If you want to see more examples and check all its options, refer to :doc:`the cluster_control manual <../reference/tools/cluster-control>` or the :api-ref:`cluster endpoints <tag/Cluster>`.
+If you want to see more examples and check all its options, refer to :doc:`the cluster_control manual </user-manual/reference/tools/cluster-control>` or the :api-ref:`cluster endpoints <tag/Cluster>`.
 
 
 Upgrading from older versions

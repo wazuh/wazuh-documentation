@@ -8,7 +8,7 @@
 Enrollment via agent configuration
 ==================================
 
-In this option, the agent is automatically enrolled after the Wazuh manager IP address has been configured. Please note that, when using :doc:`Additional security options<../security-options/index>`, other settings might need to be configured.
+In this option, the agent is automatically enrolled after the Wazuh manager IP address has been configured. Please note that, when using :doc:`Additional security options<../../security-options/index>`, other settings might need to be configured.
 
 The Wazuh manager IP address can be configured in one of two ways on the agent:
 
@@ -16,7 +16,7 @@ The Wazuh manager IP address can be configured in one of two ways on the agent:
 
 #. Manually configuring the Wazuh manager IP address in the agent configuration file.
 
-Enrollment with additional security options involves the use of passwords for enrollment authorization or certificates for identity validation of the agent and manager. See the :doc:`Additional security options<../security-options/index>` section for guidance on enrolling an agent to a manager with additional security options enabled.
+Enrollment with additional security options involves the use of passwords for enrollment authorization or certificates for identity validation of the agent and manager. See the :doc:`Additional security options <../../security-options/index>` section for guidance on enrolling an agent to a manager with additional security options enabled.
 
 Below you can find the steps to configure different endpoint agents:
 

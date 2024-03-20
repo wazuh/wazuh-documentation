@@ -8,7 +8,7 @@ Checking connection with the Wazuh manager
 
 This guide shows different ways to check the connection status between an agent and the Wazuh manager. This includes navigating the Wazuh dashboard, using the agent control utility, querying the Wazuh API, and reading the agent state file. It also contains instructions to verify the network communication between the endpoint and the server.
 
-To learn more about installing and enrolling the Wazuh agent, see the :doc:`Wazuh agent installation guide </installation-guide/wazuh-agent/index>` and the :doc:`Agent enrollment </user-manual/agent-enrollment/index>` section. 
+To learn more about installing and enrolling the Wazuh agent, see the :doc:`Wazuh agent installation guide </installation-guide/wazuh-agent/index>` and the :doc:`Agent enrollment </user-manual/agent/agent-enrollment/index>` section. 
 
 
 Using the Wazuh dashboard
@@ -34,7 +34,7 @@ This option shows the **Agents** dashboard with a list of all registered agents.
 Using the `agent_control` utility from the server
 -------------------------------------------------
 
-You can check the :ref:`status <agent-status-cycle>` of any agent remotely by using the :doc:`agent_control <../reference/tools/agent-control>` utility found with the Wazuh server. To get the status of an agent, run the following command replacing the ``-i`` parameter with your agent ID, for example, `001`. 
+You can check the :ref:`status <agent-status-cycle>` of any agent remotely by using the :doc:`agent_control </user-manual/reference/tools/agent-control>` utility found with the Wazuh server. To get the status of an agent, run the following command replacing the ``-i`` parameter with your agent ID, for example, `001`. 
 
 .. code-block:: console
 
@@ -184,4 +184,4 @@ For troubleshooting purposes, search for error or warnings in the corresponding 
 
 - macOS: ``/Library/Ossec/logs/ossec.log``
 
-To learn more, see the :doc:`Troubleshooting agent enrollment </user-manual/agent-enrollment/troubleshooting>` section. 
+To learn more, see the :doc:`Troubleshooting agent enrollment </user-manual/agent/agent-enrollment/troubleshooting>` section. 

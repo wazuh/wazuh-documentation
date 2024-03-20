@@ -18,13 +18,13 @@ How it works
 
 Configuring labels that will be included in alerts is a straightforward process. It can be done using a simple XML structure that adds information into alerts. Labels can be nested by separating "key" terms by a period for inclusion in JSON formatted alerts.
 
-Information on how to configure labels can be found in the :doc:`Labels section <../reference/ossec-conf/labels>` of ``ossec.conf``.
+Information on how to configure labels can be found in the :doc:`Labels section </user-manual/reference/ossec-conf/labels>` of ``ossec.conf``.
 
 Agent labels can also be centralized using the ``agent.conf`` file, such that labels can be set for specific agents at the manager level. When there is a pre-existing label that is the same as one the user has defined in ``ossec.conf`` or ``agent.conf``, the second one will override the first.
 
-For more information about centralizing agent configuration, see the :doc:`Centralized configuration <../reference/centralized-configuration>` section.
+For more information about centralizing agent configuration, see the :doc:`Centralized configuration </user-manual/reference/centralized-configuration>` section.
 
-Addition configuration information is available in the :doc:`Internal configuration <../reference/internal-options>` section. This includes information on ``analysisd.label_cache_maxage`` and ``analysisd.show_hidden_labels``.
+Addition configuration information is available in the :doc:`Internal configuration </user-manual/reference/internal-options>` section. This includes information on ``analysisd.label_cache_maxage`` and ``analysisd.show_hidden_labels``.
 
 Use case
 --------

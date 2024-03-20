@@ -8,8 +8,8 @@
 Grouping agents
 ===============
 
-There are two methods for configuring registered agents. They can either be configured locally with the :doc:`ossec.conf <../reference/ossec-conf/index>` file or remotely using
-the :doc:`centralized configuration <../reference/centralized-configuration>`. If the centralized configuration is used, agents may be assigned to groups where each group possesses a unique configuration.  This greatly simplifies the overall configuration process.
+There are two methods for configuring registered agents. They can either be configured locally with the :doc:`ossec.conf </user-manual/reference/ossec-conf/index>` file or remotely using
+the :doc:`centralized configuration </user-manual/reference/centralized-configuration>`. If the centralized configuration is used, agents may be assigned to groups where each group possesses a unique configuration.  This greatly simplifies the overall configuration process.
 
 .. note:: Read the `Agent groups and centralized configuration <https://wazuh.com/blog/agent-groups-and-centralized-configuration//>`_ document for more information.
 
@@ -17,7 +17,7 @@ Unless otherwise assigned, all new connected agents automatically belong to the 
 
 Below are the steps to assign agents to a group with a specific configuration:
 
-1. Once an agent has been added and connected to the manager, assign it to a group using the :doc:`agent_groups <../reference/tools/agent-groups>` tool or the
+1. Once an agent has been added and connected to the manager, assign it to a group using the :doc:`agent_groups </user-manual/reference/tools/agent-groups>` tool or the
    Wazuh API. Below are examples of how to assign an agent with ID 002 to the group *'dbms'* using these methods:
 
    Using **agent_groups**:
@@ -101,7 +101,7 @@ Below are the steps to assign agents to a group with a specific configuration:
 
 3. Within 20 minutes of connecting to the manager, each agent assigned to a group will receive the files contained in the *'dbms'* folder from the manager, including the ``agent.conf`` file that was modified in the previous step.  The length of time it takes for the manager to push these files to the agents depends on the size of the files, the number of agents in the group and the connection protocol used. For example, depending on network bandwidth and performance, it may take 8 minutes to receive a 10 MB folder (excluding **merged.mg** file) on 100 agents using UDP. However, if TCP is used, this may move along much faster.
 
-4. Once a specific agent belongs to a group, it will be **automatically reassigned** to this group even if it is registered under another name or ID. This happens because, when the agent is re-registered, the checksum of ``merged.mg`` sent by the agent is compared with that of the other agents registered with the manager. However, this is not the default behavior, and, if needed, it must be explicitly activated by the user in ``local_internal_options.conf`` by adding the option ``remoted.guess_agent_group=1`` (see section ``remoted`` in :doc:`internal options <../reference/internal-options>`).
+4. Once a specific agent belongs to a group, it will be **automatically reassigned** to this group even if it is registered under another name or ID. This happens because, when the agent is re-registered, the checksum of ``merged.mg`` sent by the agent is compared with that of the other agents registered with the manager. However, this is not the default behavior, and, if needed, it must be explicitly activated by the user in ``local_internal_options.conf`` by adding the option ``remoted.guess_agent_group=1`` (see section ``remoted`` in :doc:`internal options </user-manual/reference/internal-options>`).
 
 .. _multigroups:
 
@@ -339,7 +339,7 @@ Finally, to check the synchronization status of the group configuration for agen
            "error": 0
         }
 
-The rest of the capabilities of **agent_groups** can be found at its :doc:`reference section <../reference/tools/agent-groups>`. The same for the :doc:`Wazuh API <../api/reference>`, which offers calls with similar behavior.
+The rest of the capabilities of **agent_groups** can be found at its :doc:`reference section </user-manual/reference/tools/agent-groups>`. The same for the :doc:`Wazuh API </user-manual/api/reference>`, which offers calls with similar behavior.
 
 Shared files behavior
 ^^^^^^^^^^^^^^^^^^^^^
@@ -349,7 +349,7 @@ As was explained above, traditionally, the manager shared configuration files wi
 In the case of belonging to multiple groups, the configuration files of every group are merged into one following the next criteria:
 
 - Shared files such as CIS benchmarks for the rootkit detection are joined in the shared folder. If there were repeated files, the last one added would overwrite the old ones.
-- The new ``agent.conf`` file added is appended to the existing one. When two groups have conflicting configurations, the last group assigned to the agent will be the leading one. Learn more about the configuration precedence in :doc:`Centralized configuration manual <../reference/centralized-configuration>`.
+- The new ``agent.conf`` file added is appended to the existing one. When two groups have conflicting configurations, the last group assigned to the agent will be the leading one. Learn more about the configuration precedence in :doc:`Centralized configuration manual </user-manual/reference/centralized-configuration>`.
 - Custom shared files set from the user to a particular group are also joined to send them to the agents.
 
 

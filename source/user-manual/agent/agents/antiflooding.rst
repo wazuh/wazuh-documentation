@@ -74,7 +74,7 @@ The leaky bucket is totally configurable to adapt to any environment with the us
 Measured configuration
 ^^^^^^^^^^^^^^^^^^^^^^
 
-In the ``<client_buffer>`` section of :doc:`Local configuration <../reference/ossec-conf/index>` it is possible to disable the buffer, configure the size of the buffer (in number of events), and configure its throughput limit measured in EPS, or event-per-second.
+In the ``<client_buffer>`` section of :doc:`Local configuration </user-manual/reference/ossec-conf/index>` it is possible to disable the buffer, configure the size of the buffer (in number of events), and configure its throughput limit measured in EPS, or event-per-second.
 
 - Disable buffer: This parameter disables the use of the leaky bucket, resulting in no restriction on the rate of events transmitted by the agent to the manager.  This is how previous versions of the agent were set up.
 
@@ -82,13 +82,13 @@ In the ``<client_buffer>`` section of :doc:`Local configuration <../reference/os
 
 - Events per second: This is the maximum rate at which events will be pulled from the agent's buffer and transmitted to its manager. The default is a generous 500 EPS, but this should be set with consideration of the capacity of the network and the number of agents a manager is serving.
 
-This configuration is also available in :doc:`Centralized configuration <../reference/centralized-configuration>`, which means it can be set in ``agent.conf`` with the aim of configuring agents' bucket options from the manager side. When an agent is configured by ``agent.conf``, that configuration overrides its own local configuration.
-To allow the agent to have final say about a minimum number of EPS it will be allowed to transmit, regardless of the EPS limit configured at the manager level via agent.conf, another variable called ``agent.min_eps`` can be set in the agent's :doc:`Internal configuration <../reference/internal-options>`.
+This configuration is also available in :doc:`Centralized configuration </user-manual/reference/centralized-configuration>`, which means it can be set in ``agent.conf`` with the aim of configuring agents' bucket options from the manager side. When an agent is configured by ``agent.conf``, that configuration overrides its own local configuration.
+To allow the agent to have final say about a minimum number of EPS it will be allowed to transmit, regardless of the EPS limit configured at the manager level via agent.conf, another variable called ``agent.min_eps`` can be set in the agent's :doc:`Internal configuration </user-manual/reference/internal-options>`.
 
 Threshold configuration
 ^^^^^^^^^^^^^^^^^^^^^^^^
 
-In :doc:`Internal configuration <../reference/internal-options>`, there are more advanced options related to buffer operation. Specifically, the warning and normal level thresholds, plus the tolerance time for triggering a flooding alert can be configured.
+In :doc:`Internal configuration </user-manual/reference/internal-options>`, there are more advanced options related to buffer operation. Specifically, the warning and normal level thresholds, plus the tolerance time for triggering a flooding alert can be configured.
 
 
 Use case: Leaky bucket
@@ -203,4 +203,4 @@ To avoid agent buffer saturation followed by event loss, the event production ra
 
 - CIS-CAT and Syscollector wodles: These modules previously did send the entire set of scan results as soon as a scan would complete. They now send the scan information to the manager at a regulated speed in order to prevent the buffer from being collapsed.
 
-These are advanced configurations located at :doc:`Internal configuration <../reference/internal-options>`. The variables defined for this purpose are called ``logcollector.max_lines``, ``wazuh_modules.max_eps``, and much care should be given when changing these values.
+These are advanced configurations located at :doc:`Internal configuration </user-manual/reference/internal-options>`. The variables defined for this purpose are called ``logcollector.max_lines``, ``wazuh_modules.max_eps``, and much care should be given when changing these values.

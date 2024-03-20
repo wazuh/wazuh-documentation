@@ -22,7 +22,7 @@ The :doc:`upgrading-central-components` section includes instructions to upgrade
 Upgrade the Wazuh agents
 ------------------------
 
-You can upgrade the Wazuh agents either remotely from the Wazuh manager or locally. Upgrading the Wazuh agents remotely is possible by using the ``agent_upgrade`` tool and the Wazuh API. See the :doc:`Remote agent upgrade </user-manual/agents/remote-upgrading/upgrading-agent>` section to learn more.
+You can upgrade the Wazuh agents either remotely from the Wazuh manager or locally. Upgrading the Wazuh agents remotely is possible by using the ``agent_upgrade`` tool and the Wazuh API. See the :doc:`Remote agent upgrade </user-manual/agent/agents/remote-upgrading/upgrading-agent>` section to learn more.
 
 To perform the upgrade locally, select your operating system and follow the instructions. 
 

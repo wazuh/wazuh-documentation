@@ -78,6 +78,6 @@ In this phase, the Wazuh server compares the logs against a ruleset. Rule ``5715
 
 By default, the Wazuh server generates alerts for any rule whose level is above 2. In this scenario, the log triggers an alert because the rule level is 3 and this will be visible on the Wazuh dashboard.
 
-You can create custom decoders and rules to analyze logs that are not supported by default. To learn how to create custom rules and decoders, refer to :doc:`custom rules and decoders </user-manual/ruleset/custom>`.
+You can create custom decoders and rules to analyze logs that are not supported by default. To learn how to create custom rules and decoders, refer to :doc:`custom rules and decoders </user-manual/ruleset/index>`.
 
 

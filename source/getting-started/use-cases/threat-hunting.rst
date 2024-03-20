@@ -33,14 +33,14 @@ Wazuh uses decoders to extract meaningful information from log data obtained fro
    :align: center
    :width: 80%
 
-Wazuh offers :doc:`agentless monitoring </user-manual/capabilities/agentless-monitoring/index>` and :doc:`syslog log collection </user-manual/manager/manual-syslog-output>` for efficient log data handling. It ensures consistency and compatibility across various log formats. Wazuh indexing and querying capabilities facilitate quick search and access to specific log data, streamlining analysis and investigation. Wazuh uses its advanced parsing and real-time analysis to enhance threat hunting by proactively identifying and mitigating risks thereby enhancing security.
+Wazuh offers :doc:`agentless monitoring </user-manual/capabilities/agentless-monitoring/index>` and :doc:`syslog log collection </user-manual/manager/alert-management/forwarding-alerts/manual-syslog-output>` for efficient log data handling. It ensures consistency and compatibility across various log formats. Wazuh indexing and querying capabilities facilitate quick search and access to specific log data, streamlining analysis and investigation. Wazuh uses its advanced parsing and real-time analysis to enhance threat hunting by proactively identifying and mitigating risks thereby enhancing security.
 
 Wazuh archives
 --------------
 
 Wazuh provides a centralized storage location for archiving all collected logs from monitored endpoints. The Wazuh archives logs include those that do not trigger alerts on the Wazuh dashboard. Wazuh archives are disabled by default and can be easily enabled. The availability of detailed logs is crucial for effective threat hunting, providing comprehensive visibility into your environment.
 
-:doc:`Wazuh archives </user-manual/manager/wazuh-archives>` provide log retention, indexing, and querying capabilities that give concrete visibility to analyze events within specific monitored endpoints in your environment. This facilitates uncovering event causes, event locations, event communications, event timestamps, and related parent-child processes. The image below shows the archived logs in the **Discover** section on the Wazuh dashboard.
+:doc:`Wazuh archives </user-manual/manager/alert-management/wazuh-archives>` provide log retention, indexing, and querying capabilities that give concrete visibility to analyze events within specific monitored endpoints in your environment. This facilitates uncovering event causes, event locations, event communications, event timestamps, and related parent-child processes. The image below shows the archived logs in the **Discover** section on the Wazuh dashboard.
 
 .. thumbnail:: /images/getting-started/use-cases/threat-hunting/discover-archives-logs.png
    :title: wazuh-archives logs in the Discover section
@@ -109,7 +109,7 @@ The **Management** tab on the Wazuh dashboard presents both default and custom r
    :align: center
    :width: 80%
 
-Wazuh allows you to customize and :doc:`create your own rules and decoders </user-manual/ruleset/custom>`, tailored to your specific environment and threat landscape. This enables you to fine-tune detection, address unique requirements, and minimize blind spots.
+Wazuh allows you to customize and :doc:`create your own rules and decoders </user-manual/ruleset/index>`, tailored to your specific environment and threat landscape. This enables you to fine-tune detection, address unique requirements, and minimize blind spots.
 
 Wazuh decoders play a vital role in normalizing and parsing diverse log formats and data sources. They ensure that collected information is presented in a standardized manner, facilitating effective analysis and correlation of data from various sources.
 

@@ -18,7 +18,7 @@ Utilize the :doc:`Wazuh-Logtest </user-manual/ruleset/testing>` utility to simul
 Viewing the raw logs
 --------------------
 
-The :doc:`Wazuh archives </user-manual/manager/wazuh-archives>` provide the option to view the raw log format of executed commands that the Wazuh server processes. This feature allows you to gather log information required to develop decoders when no decoders are available to process specific log formats.
+The :doc:`Wazuh archives </user-manual/manager/alert-management/wazuh-archives>` provide the option to view the raw log format of executed commands that the Wazuh server processes. This feature allows you to gather log information required to develop decoders when no decoders are available to process specific log formats.
 
 When you enable the Wazuh archives, all the logs the Wazuh server receives are stored in the ``/var/ossec/logs/archives/archives.log`` and ``/var/ossec/logs/archives/archives.json`` files on the Wazuh server. By default, this feature is disabled on the Wazuh server to prevent the server from storing raw logs and filling the disk storage.
 

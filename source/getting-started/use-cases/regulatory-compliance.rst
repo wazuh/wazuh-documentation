@@ -26,7 +26,7 @@ Wazuh provides out-of-the-box rulesets mapped against compliance tags for PCI DS
    :align: center
    :width: 80%
 
-Wazuh allows you to create :doc:`custom rules </user-manual/ruleset/custom>` and tag them to compliance standards that suit your needs. The following section details use cases for the supported standards.
+Wazuh allows you to create :doc:`custom rules </user-manual/ruleset/rules/custom>` and tag them to compliance standards that suit your needs. The following section details use cases for the supported standards.
 
 PCI DSS
 -------

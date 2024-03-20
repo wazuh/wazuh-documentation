@@ -18,7 +18,7 @@ Upgrading an agent remotely can be performed at the command line and through the
 Using the command line
 ----------------------
 
-To upgrade agents using the command line, use the :doc:`agent_upgrade <../../reference/tools/agent-upgrade>` tool as follows:
+To upgrade agents using the command line, use the :doc:`agent_upgrade </user-manual/reference/tools/agent-upgrade>` tool as follows:
 
 1. List all outdated agents using the *'-l'* parameter:
 

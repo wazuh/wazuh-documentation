@@ -8,7 +8,7 @@
 Additional security options
 ===========================
 
-Additional security measures can be implemented in the enrollment process in order to authenticate  the endpoint to the Wazuh manager and vice versa. These security options are only available when enrolling agents :doc:`via the agent configuration method <../via-agent-configuration/index>`.
+Additional security measures can be implemented in the enrollment process in order to authenticate  the endpoint to the Wazuh manager and vice versa. These security options are only available when enrolling agents :doc:`via the agent configuration method <../enrollment-methods/via-agent-configuration/index>`.
 
 The additional security options include:
 

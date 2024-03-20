@@ -45,7 +45,7 @@ Master
 
     .. warning::
 
-        The master doesn't send its :doc:`local configuration file <../reference/index>` to the workers. If the configuration is changed in the master node, it should be changed manually in the workers. Take care of not overwriting the cluster section in the local configuration of each worker.
+        The master doesn't send its :doc:`local configuration file </user-manual/reference/index>` to the workers. If the configuration is changed in the master node, it should be changed manually in the workers. Take care of not overwriting the cluster section in the local configuration of each worker.
 
     .. warning::
         When rules, decoders, or CDB lists are synchronized, the worker nodes are not restarted. They must be restarted manually in order to apply the received configuration.
@@ -65,7 +65,7 @@ Worker
 How the cluster works
 ^^^^^^^^^^^^^^^^^^^^^
 
-    The cluster is managed by a daemon, called **wazuh-clusterd**, which communicates with all the nodes following a master-worker architecture. Refer to the :doc:`Daemons <../reference/daemons/clusterd>` section for more information about its use.
+    The cluster is managed by a daemon, called **wazuh-clusterd**, which communicates with all the nodes following a master-worker architecture. Refer to the :doc:`Daemons </user-manual/reference/daemons/clusterd>` section for more information about its use.
 
     The image below shows the communications between a worker and a master node. Each worker-master communication is independent of each other since workers are the ones who start the communication with the master.
 
@@ -117,8 +117,8 @@ Integrity thread
     The *integrity thread* is in charge of synchronizing the files sent by the master node to the workers. Those files are:
 
         - The Wazuh agent keys file.
-        - :doc:`User defined rules, decoders <../ruleset/custom>` and :doc:`CDB lists <../ruleset/cdb-list>`.
-        - :doc:`Groups files <../agents/grouping-agents>`.
+        - :doc:`User defined rules, decoders </user-manual/ruleset/index>` and :doc:`CDB lists </user-manual/ruleset/cdb-list>`.
+        - :doc:`Groups files </user-manual/agent/agents/grouping-agents>`.
 
 Local integrity thread
 ~~~~~~~~~~~~~~~~~~~~~~
