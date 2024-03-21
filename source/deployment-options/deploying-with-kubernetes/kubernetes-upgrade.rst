@@ -36,8 +36,12 @@ Our Kubernetes deployment uses our Wazuh images from Docker. If we look at the f
 
 Any modification related to these files will also be made in the associated volume. When the replica pod is created, it will get those files from the volume, keeping the previous changes.
 
-.. warning::
-   Starting with Wazuh v4.8.0 we have made a change to the CN of the certificate used in the Wazuh indexer pods, so it is necessary to :ref:`recreate the certificates. <kubernetes_ssl_certificates>`
+
+Recreate certificates
+---------------------
+
+Due to changes made in version v4.8.0 of Wazuh, it is mandatory to recreate the SSL certificates before applying the changes of the new version, so any update from a version prior to Wazuh v4.8.0 to an equal or later version must :ref:`recreate your certificates. <kubernetes_ssl_certificates>`
+
 
 Configuring the upgrade
 -----------------------
