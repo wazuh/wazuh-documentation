@@ -113,8 +113,10 @@ Agent Configuration
 ^^^^^^^^^^^^^^^^^^^
 
 To configure the Puppet agent, edit the configuration file in the node.
+
 -  ``/etc/puppetlabs/puppet/puppet.conf`` for Linux systems
 -  ``C:\ProgramData\PuppetLabs\puppet\etc\puppet.conf`` for Windows systems
+
 Add the ``server`` setting to the ``[main]`` section of the file.  If you have set up your own DNS, replace ``puppet-master`` with the Fully Qualified Domain Name (FQDN) of your Puppet server.
 
    .. code-block:: none
