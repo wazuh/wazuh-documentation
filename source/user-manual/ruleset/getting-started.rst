@@ -72,7 +72,7 @@ In the Wazuh repository you will find:
 Resources
 ^^^^^^^^^
 
-Visit the `Wazuh GitHub repository <https://github.com/wazuh/wazuh/tree/v|WAZUH_CURRENT|/ruleset>`__ to view the rules in detail.
+Visit the `Wazuh GitHub repository <https://github.com/wazuh/wazuh/tree/v|WAZUH_CURRENT|/ruleset>`__ to view our ruleset in detail.
 
 Rule and Rootcheck example
 ^^^^^^^^^^^^^^^^^^^^^^^^^^
