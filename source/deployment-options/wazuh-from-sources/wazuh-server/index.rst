@@ -103,7 +103,7 @@ Installing the Wazuh manager
 
     .. warning::
       
-        If you want to enable the database output, :doc:`check out </user-manual/manager/alert-management/forwarding-alerts/manual-database-output>` this section before running the installation script.
+        If you want to enable the database output, :doc:`check out </user-manual/manager/manual-database-output>` this section before running the installation script.
 
     .. code-block:: console
 
