@@ -15,6 +15,7 @@ This section describes how to manage the agents using the command line (CLI), th
     .. toctree::
         :maxdepth: 2
 
+        agent-connection
         listing/index
         grouping-agents
         remove-agents/index
@@ -24,4 +25,3 @@ This section describes how to manage the agents using the command line (CLI), th
         labels
         antiflooding
         agent-life-cycle
-        agent-connection

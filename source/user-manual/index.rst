@@ -19,11 +19,9 @@ Welcome to the Wazuh user manual. Use it as your reference library once your bas
         wazuh-indexer/index
         wazuh-dashboard/index
         agent/index
+        upscaling/index
         ruleset/index
         user-administration/index
         capabilities/index
         api/index
         reference/index
-        certificates
-        upscaling/index
-        files-backup/index
