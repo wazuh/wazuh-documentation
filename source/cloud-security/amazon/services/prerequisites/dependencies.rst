@@ -56,12 +56,6 @@ It is recommended to use a pip version greater than or equal to 19.3 to ease the
 
 .. tabs::
 
-   .. group-tab:: Python 3.7
-
-      .. code-block:: console
-
-         # pip3 install --upgrade pip
-
    .. group-tab:: Python 3.8–3.10
 
       .. code-block:: console
@@ -91,12 +85,6 @@ AWS client library for Python
 To install the dependencies, execute the following command:
 
 .. tabs::
-
-   .. group-tab:: Python 3.7
-
-      .. code-block:: console
-
-         # pip3 install boto3==1.17.85 pyarrow==8.0.0 pyarrow_hotfix==0.5
 
    .. group-tab:: Python 3.8–3.10
 

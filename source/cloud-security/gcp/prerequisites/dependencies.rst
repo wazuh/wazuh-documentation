@@ -56,7 +56,7 @@ It is recommended to use a pip version greater than or equal to 19.3 to ease the
 
 .. tabs::
 
-   .. group-tab:: Python 3.7–3.10
+   .. group-tab:: Python 3.8–3.10
 
       .. code-block:: console
 
@@ -83,7 +83,7 @@ To install the dependencies, execute the following command:
 
 .. tabs::
 
-   .. group-tab:: Python 3.7–3.10
+   .. group-tab:: Python 3.8–3.10
 
       .. code-block:: console
 
