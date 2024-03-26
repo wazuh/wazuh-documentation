@@ -5,8 +5,8 @@
   
 .. _wazuh_dashboard_settings:
 
-Settings
-========
+Wazuh dashboard settings
+========================
 
 The *Settings* page allows you to configure and customize your Wazuh dashboard experience.
 

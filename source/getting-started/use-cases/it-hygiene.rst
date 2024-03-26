@@ -106,7 +106,7 @@ Malware detection
 
 Malware detection is essential for safeguarding computer systems and networks from cyber threats. Organizations can improve their IT hygiene by identifying and mitigating malicious software that can cause data breaches, system compromises, and financial losses.
 
-Wazuh offers an out-of-the-box ruleset designed to recognize malware patterns and trigger alerts for quick response. Wazuh also allows security analysts to create :doc:`custom rules </user-manual/ruleset/custom>` tailored to their environment, thereby optimizing their malware detection efforts. For example, we created custom rules to detect `Vidar infostealer malware using Wazuh <https://wazuh.com/blog/detecting-vidar-infostealer-with-wazuh/>`__.
+Wazuh offers an out-of-the-box ruleset designed to recognize malware patterns and trigger alerts for quick response. Wazuh also allows security analysts to create :doc:`custom rules </user-manual/ruleset/rules/custom>` tailored to their environment, thereby optimizing their malware detection efforts. For example, we created custom rules to detect `Vidar infostealer malware using Wazuh <https://wazuh.com/blog/detecting-vidar-infostealer-with-wazuh/>`__.
 
 .. code-block:: xml
 

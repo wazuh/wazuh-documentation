@@ -5,8 +5,8 @@
  
 .. _queries:
 
-Filtering data using queries
-============================
+Filtering data using Wazuh Query Language (WQL)
+===============================================
 
 Advance filtering is possible using the Wazuh API's queries. Queries are specified using the ``q`` parameter. A query has the following structure:
 
