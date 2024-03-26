@@ -1,18 +1,69 @@
 .. Copyright (C) 2015, Wazuh, Inc.
 
 .. meta::
-  :description: The Wazuh dashboard includes a configuration file where you can define custom values for several options. Learn more about it in this section.
+   :description: The Wazuh dashboard includes configuration options to define custom settings. Learn more about it in this section.
 
 .. _wazuh_dashboard_config_file:
 
+Configuration
+=============
+
+You can configure the Wazuh dashboard and plugins as follows:
+
+- **Wazuh dashboard settings**: You can edit the Wazuh dashboard configuration file.
+
+   -  ``/etc/wazuh-dashboard/opensearch_dashboards.yml`` for installations from packages.
+   -  ``/usr/share/wazuh-dashboard/config/opensearch_dashoards.yml`` for Docker installations.
+
+- **Plugins settings**: Users with privileges to manage the Wazuh indexer security REST API can manage the plugins settings from the Wazuh dashboard. Wazuh stores the custom values in a saved object.
+
+   -  **Dashboard management** > **App Settings**: To customize several settings.
+   -  **Dashboard management** > **Server APIs**: To customize API host entries.
+
+This section describes all the settings available for each location.
+
+Setup a configuration
+---------------------
+
+The management of the plugin settings can be done through the UI, but you can setup the current configuration using a configuration file with these methods too:
+
+- on start
+- API
+
+.. warning::
+
+    Changing some settings through these methods could require some action to take effect.
+
+On start
+^^^^^^^^
+
+When the Wazuh dashboard starts, checks if there is a file located at ``<WAZUH_DASHBOARD>/data/wazuh/config/wazuh.yml``. If this exists and there is not the configuration saved object, then will setup into it.
+
+API
+^^^
+
+Use the Wazuh dashboard API to setup the configuration:
+
+#. Define a configuration file according to the settings.
+
+#. Upload the configuration:
+
+.. code-block:: sh
+
+    curl -k -u <username>:<password> --form file='@<config_file>' -H 'xsrf:kibana' -XPOST <address>/utils/configuration/import
+
+where:
+    - `username`: username
+    - `password`: password for the user
+    - `config_file`: path to the configuration file
+    - `address`: URL address of the Wazuh dashboard host
+
+.. note::
+
+    The user must have privilegies to manage the rest API of Wazuh indexer.
+
 Configuration file
-==================
-
-The Wazuh dashboard includes a configuration file located at ``/usr/share/wazuh-dashboard/data/wazuh/config/wazuh.yml`` where you can define custom values for several options. This section describes all the settings available in this file.
-
-If you are using the Wazuh Kibana plugin, you can find this configuration file at ``/usr/share/kibana/data/wazuh/config/wazuh.yml``. 
-
-The configuration file shows the default values for all of the possible options. You can edit the file, uncomment any of them and apply the desired values. You can also edit these settings from the Wazuh dashboard in **Indexer/dashboard management** > **App Settings**.
+------------------
 
 The configuration file reference is organized by sections:
 
@@ -521,7 +572,7 @@ Set the footer of the PDF reports. To use an empty footer, type a space " " in t
 Example
 -------
 
-This is an example of the wazuh.yml configuration:
+This is an example of the configuration file that can be used to load a configuration:
 
 .. code-block:: yaml
     
@@ -589,3 +640,43 @@ This is an example of the wazuh.yml configuration:
     # Enrollment DNS
     enrollment.dns: ''
     enrollment.password: ''
+
+
+Configuration of Wazuh dashboard
+--------------------------------
+
+wazuh_core.configuration.encryption_key
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Define a key to encrypt some sensitive data stored in the configuration saved object.
+
++--------------------+----------------------------+
+| **Default value**  | secretencryptionkey!       |
++--------------------+----------------------------+
+| **Allowed values** | Any string                 |
++--------------------+----------------------------+
+
+.. warning::
+
+    Any change in this value could cause a problem if there was data stored that was encrypted with the previous key.
+
+wazuh_core.instance
+^^^^^^^^^^^^^^^^^^^
+
+Define the identifier of the Wazuh dashboard instance.This identifier is used to define the configuration saved object that will use the Wazuh dashboard instance.
+
+This allows to define independant or shared configuration for different Wazuh dashboard instances that uses the same Wazuh indexer backend.
+
++--------------------+----------------------------+
+| **Default value**  | wazuh-dashboard            |
++--------------------+----------------------------+
+| **Allowed values** | Any string                 |
++--------------------+----------------------------+
+
+.. warning::
+
+    Any change in this value could cause stored configuration previously is lost.
+
+.. warning::
+
+    When sharing the configuration of multiple instances of Wazuh dashboard and changing the settings from some instance, the changes could require some actions to take effect that should be applied in each instance that is sharing the configuration.

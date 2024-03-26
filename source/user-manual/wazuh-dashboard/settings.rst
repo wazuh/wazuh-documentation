@@ -22,7 +22,7 @@ In this section, you can list all your inserted API credentials. The star icon i
 Configuration
 -------------
 
-You can take a quick look at the Wazuh dashboard configuration file here. The documentation for the ``wazuh.yml`` file can be found in the config section.
+You can take a quick look at the Wazuh dashboard configuration here. The documentation for configuration can be found in the config section.
 
 .. thumbnail:: ../../images/kibana-app/features/settings/configuration.png
   :align: center

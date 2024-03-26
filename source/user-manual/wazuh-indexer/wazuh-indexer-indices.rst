@@ -105,11 +105,7 @@ This section describes creating a custom index pattern, ``my-custom-alerts-*``, 
 
       The index name must not contain the characters ``#``, ``\``, ``/``, ``*``, ``?``, ``"``, ``<``, ``>``, ``|``, ``,``, and must not start with ``_``, ``-``, or ``+``. Also, all the letters must be lowercase.
 
-#. (Optional) If you want to use the new index pattern by default, open the ``/usr/share/wazuh-dashboard/data/wazuh/config/wazuh.yml`` file and add the below configuration:
-
-   .. code-block:: yaml
-
-      pattern: my-custom-alerts-*
+#. (Optional) If you want to use the new index pattern by default, on Wazuh dashboard go to **Dashboard management** > **App Settings** and edit the **pattern** setting with the ``my-custom-alerts-*`` and save the changes.
 
    This will make the Wazuh server automatically create and/or select the new index pattern.
 

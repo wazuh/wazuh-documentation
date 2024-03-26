@@ -94,10 +94,7 @@ All components included in this AMI are configured to work out-of-the-box withou
 - Wazuh manager: ``/var/ossec/etc/ossec.conf``
 - Wazuh indexer: ``/etc/wazuh-indexer/opensearch.yml``
 - Filebeat-OSS: ``/etc/filebeat/filebeat.yml``
-- Wazuh dashboard:
-
-    - ``/etc/wazuh-dashboard/opensearch_dashboards.yml``
-    - ``/usr/share/wazuh-dashboard/data/wazuh/config/wazuh.yml``
+- Wazuh dashboard: ``/etc/wazuh-dashboard/opensearch_dashboards.yml``
 
 To learn more about configuring Wazuh, see the :doc:`User manual </user-manual/index>`.
 

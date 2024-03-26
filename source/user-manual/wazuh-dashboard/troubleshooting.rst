@@ -74,23 +74,6 @@ To ensure that Filebeat is correctly configured, run the following command:
             version: 7.10.2
 
 
-
-Could not connect to API with id: default: 3003 - Missing param: API USERNAME
------------------------------------------------------------------------------
-
-Starting Wazuh 4.0 the Wazuh API username variable changed from ``user`` to ``username``. It's necessary to change the credentials (foo:bar are no longer accepted) as well as the name of the variable in the ``/usr/share/wazuh-dashboard/data/wazuh/config/wazuh.yml`` configuration file. For example, the configuration can be: 
-
-.. code-block:: console
-   
-   hosts:
-    - production:
-        url: https://localhost
-        port: 55000
-        username: wazuh-wui
-        password: wazuh-wui
-        run_as: false
-
-
 "Wazuh API and Wazuh dashboard version mismatch" error is displayed
 -------------------------------------------------------------------
 

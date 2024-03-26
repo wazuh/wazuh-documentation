@@ -233,19 +233,11 @@ Follow the instructions below to change the passwords for all the Wazuh indexer 
 
       # echo <kibanaserver-password> | /usr/share/wazuh-dashboard/bin/opensearch-dashboards-keystore --allow-root add -f --stdin opensearch.password
 
-#. Update the ``/usr/share/wazuh-dashboard/data/wazuh/config/wazuh.yml`` configuration file with the new `wazuh-wui` password generated in the second step.
-
-   .. code-block:: yaml
-      :emphasize-lines: 6
-
-      hosts:
-        - default:
-            url: https://localhost
-            port: 55000
-            username: wazuh-wui
-            password: "<wazuh-wui-password>"
-            run_as: false
-
 #. Restart the Wazuh dashboard to apply the changes.
 
    .. include:: /_templates/common/restart_dashboard.rst
+
+#. Go to **Dashboard management** > **Server APIs** to update the password of the API host entry with the new `wazuh-wui` password generated in the second step. Click on the edit button of the related API host. Change the **Password** and then click on **Apply** to save the changes.
+
+   .. image:: /images/wazuh-dashboard/api-connections/wazuh-dashboard-edit-api-connection.jpg
+      :align: center

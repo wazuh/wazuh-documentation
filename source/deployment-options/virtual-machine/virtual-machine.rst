@@ -107,11 +107,7 @@ All components included in this virtual image are configured to work out-of-the-
   
   - Filebeat-OSS: ``/etc/filebeat/filebeat.yml``
   
-  - Wazuh dashboard: 
-
-     - ``/etc/wazuh-dashboard/opensearch_dashboards.yml``
-
-     - ``/usr/share/wazuh-dashboard/data/wazuh/config/wazuh.yml``
+  - Wazuh dashboard: ``/etc/wazuh-dashboard/opensearch_dashboards.yml``
 
 VirtualBox time configuration
 -----------------------------
