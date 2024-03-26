@@ -73,6 +73,13 @@ newUrls['4.7'] = [
   '/release-notes/release-4-7-3.html',
   '/cloud-security/azure/posture-management.html',
   '/cloud-security/gcp/posture-management.html',
+  '/cloud-security/gcp/instances.html',
+  '/cloud-security/gcp/prerequisites/gcloud-python-script.html',
+  '/cloud-security/gcp/prerequisites/visualizing-events.html',
+  '/cloud-security/gcp/prerequisites/services.html',
+  '/cloud-security/gcp/supported-services/cloud-storage-buckets.html',
+  '/cloud-security/gcp/supported-services/pubsub.html',
+  '/cloud-security/gcp/supported-services/use-cases.html',
   '/cloud-service/archive-data/index.html',
   '/cloud-service/archive-data/access.html',
   '/cloud-service/archive-data/configuration.html',
@@ -222,6 +229,14 @@ removedUrls['4.7'] = [
   '/user-manual/ruleset/dynamic-fields.html',
   '/user-manual/ruleset/json-decoder.html',
   '/user-manual/ruleset/ruleset-xml-syntax/sibling-decoders.html',
+  '/cloud-security/gcp/prerequisites/considerations.html',
+  '/cloud-security/gcp/prerequisites/pubsub.html',
+  '/cloud-security/gcp/supported-services/access_logs.html',
+  '/cloud-security/gcp/supported-services/cloud_audit_logs.html',
+  '/cloud-security/gcp/supported-services/dns_queries.html',
+  '/cloud-security/gcp/supported-services/firewall.html',
+  '/cloud-security/gcp/supported-services/load_balancing.html',
+  '/cloud-security/gcp/supported-services/vpc_flow.html',
 ];
 
 /* Redirections from 4.6 to 4.7  */
@@ -546,6 +561,41 @@ redirections.push(
     'target': ['4.6=>4.7', '4.7=>4.6'],
     '4.6': '/user-manual/ruleset/ruleset-xml-syntax/sibling-decoders.html',
     '4.7': '/user-manual/ruleset/decoders/sibling-decoders.html',
+  },
+  {
+    'target': ['4.6=>4.7', '4.7=>4.6'],
+    '4.6': '/cloud-security/gcp/supported-services/cloud_audit_logs.html',
+    '4.7': '/cloud-security/gcp/supported-services/use-cases.html#cloud-audit-logs',
+  },
+  {
+    'target': ['4.6=>4.7', '4.7=>4.6'],
+    '4.6': '/cloud-security/gcp/supported-services/dns_queries.html',
+    '4.7': '/cloud-security/gcp/supported-services/use-cases.html#dns-queries',
+  },
+  {
+    'target': ['4.6=>4.7', '4.7=>4.6'],
+    '4.6': '/cloud-security/gcp/supported-services/firewall.html',
+    '4.7': '/cloud-security/gcp/supported-services/use-cases.html#firewall-rules-logging',
+  },
+  {
+    'target': ['4.6=>4.7', '4.7=>4.6'],
+    '4.6': '/cloud-security/gcp/supported-services/load_balancing.html',
+    '4.7': '/cloud-security/gcp/supported-services/use-cases.html#http-s-load-balancing-logging',
+  },
+  {
+    'target': ['4.6=>4.7', '4.7=>4.6'],
+    '4.6': '/cloud-security/gcp/supported-services/vpc_flow.html',
+    '4.7': '/cloud-security/gcp/supported-services/use-cases.html#vpc-flow-logs',
+  },
+  {
+    'target': ['4.6=>4.7', '4.7=>4.6'],
+    '4.6': '/cloud-security/gcp/prerequisites/considerations.html',
+    '4.7': '/cloud-security/gcp/supported-services/cloud-storage-buckets.html#considerations-for-the-google-cloud-storage-buckets-integration',
+  },
+  {
+    'target': ['4.6=>4.7', '4.7=>4.6'],
+    '4.6': '/cloud-security/gcp/prerequisites/pubsub.html',
+    '4.7': '/cloud-security/gcp/supported-services/pubsub.html#configuring-google-cloud-pub-sub',
   },
 );
 
