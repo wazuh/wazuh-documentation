@@ -266,7 +266,7 @@ key_request
 
 .. versionadded:: 4.4.0
 
-The key request settings are configured inside this tag. Read more about this feature at :doc:`agent key request <../../agent/agents/key-request>`.
+The key request settings are configured inside this tag. Read more about this feature at :doc:`agent key request <../../agent/agent-management/key-request>`.
 
 .. code-block:: xml
 

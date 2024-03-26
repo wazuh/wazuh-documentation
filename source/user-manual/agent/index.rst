@@ -13,5 +13,5 @@ Wazuh agent
       :maxdepth: 1
       
       agent-enrollment/index
-      agents/index
+      agent-management/index
       deployment-variables/deployment-variables

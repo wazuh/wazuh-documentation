@@ -7,7 +7,7 @@
 Upgrading Wazuh agents on macOS systems
 =======================================
 
-Follow these steps to upgrade Wazuh agents locally on macOS systems. If you want to perform a remote upgrade, check the :doc:`Remote agent upgrade </user-manual/agent/agents/remote-upgrading/upgrading-agent>` section to learn more. 
+Follow these steps to upgrade Wazuh agents locally on macOS systems. If you want to perform a remote upgrade, check the :doc:`Remote agent upgrade </user-manual/agent/agent-management/remote-upgrading/upgrading-agent>` section to learn more. 
 
 .. note:: To perform the agent upgrade, administrator privileges are required.
 

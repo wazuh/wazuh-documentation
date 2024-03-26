@@ -118,7 +118,7 @@ Integrity thread
 
         - The Wazuh agent keys file.
         - :doc:`User defined rules, decoders </user-manual/ruleset/index>` and :doc:`CDB lists </user-manual/ruleset/cdb-list>`.
-        - :doc:`Groups files </user-manual/agent/agents/grouping-agents>`.
+        - :doc:`Groups files </user-manual/agent/agent-management/grouping-agents>`.
 
 Local integrity thread
 ~~~~~~~~~~~~~~~~~~~~~~
