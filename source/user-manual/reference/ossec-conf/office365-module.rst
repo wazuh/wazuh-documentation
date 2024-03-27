@@ -3,8 +3,6 @@
 .. meta::
   :description: Find out how to configure the Wazuh Office365 module. Learn more about it in this section of the Wazuh documentation.
   
-.. _office365-module:
-
 office365
 =========
 
@@ -216,6 +214,8 @@ This block configures the internal options in the Office365 REST API.
 +==================================+==============================================+
 | `subscriptions\\subscription`_   | Any string                                   |
 +----------------------------------+----------------------------------------------+
+
+.. _office365_module_subscriptions_subscription:
 
 subscriptions\\subscription
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^

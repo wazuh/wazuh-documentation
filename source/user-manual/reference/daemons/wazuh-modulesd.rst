@@ -43,7 +43,7 @@ The wazuh-modulesd program manages the Wazuh modules described below.
 
 .. topic:: Office 365 wodle
 
-  The Office 365 wodle allows you to gather audit logs from multiple Office 365 organizations. See the :ref:`Office 365 <office365>` section for more information on this functionality.
+  The Office 365 wodle allows you to gather audit logs from multiple Office 365 organizations. See the :doc:`Office 365 </cloud-security/office365/index>` section for more information on this functionality.
 
 .. topic:: Vulnerability detector wodle
 
