@@ -17,5 +17,13 @@
       </ssl>
   </indexer>
 
-.. End of include file
+If you have more than one Wazuh indexer node, add all the required ``<host>`` entries. The vulnerability detector module will report to the first available node found and will switch to the next one in case of error.
 
+.. code-block:: xml
+
+      <hosts>
+        <host>https://10.0.0.1:9200</host>
+        <host>https://10.0.0.2:9200</host>
+      </hosts>
+
+.. End of include file
