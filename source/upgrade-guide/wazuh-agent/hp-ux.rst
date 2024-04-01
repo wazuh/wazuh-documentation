@@ -7,9 +7,9 @@
 Upgrading Wazuh agents on HP-UX systems
 =======================================
 
-Follow the steps to upgrade the Wazuh agent on HP-UX systems.  
+Follow the steps to upgrade the Wazuh agent on HP-UX systems.
 
-#. Download the latest `HP-UX installer <https://packages.wazuh.com/|WAZUH_CURRENT_MAJOR_HPUX|/hp-ux/wazuh-agent-|WAZUH_CURRENT_HPUX|-|WAZUH_REVISION_HPUX|-hpux-11v3-ia64.tar>`_.
+#. Download the latest `HP-UX installer <https://packages.wazuh.com/|WAZUH_CURRENT_MAJOR_HPUX|/hp-ux/wazuh-agent-|WAZUH_CURRENT_HPUX|-|WAZUH_REVISION_HPUX|-hpux-11v3-ia64.tar.gz>`_.
 
 #. Stop the Wazuh agent.
 
@@ -26,8 +26,8 @@ Follow the steps to upgrade the Wazuh agent on HP-UX systems.
       # cp /var/ossec/etc/client.keys ~/client.keys.bk
 
 
-#. **Only for upgrades from version 4.2.7 or lower**:  
-      
+#. **Only for upgrades from version 4.2.7 or lower**:
+
    #. Delete the ossec user and group.
 
       .. code-block:: console
@@ -46,6 +46,7 @@ Follow the steps to upgrade the Wazuh agent on HP-UX systems.
 
    .. code-block:: console
 
+      # gzip -d wazuh-agent-|WAZUH_CURRENT_HPUX|-|WAZUH_REVISION_HPUX|-hpux-11v3-ia64.tar.gz
       # tar -xvf wazuh-agent-|WAZUH_CURRENT_HPUX|-|WAZUH_REVISION_HPUX|-hpux-11v3-ia64.tar
 
 
@@ -68,4 +69,4 @@ Follow the steps to upgrade the Wazuh agent on HP-UX systems.
 .. note::
    :class: not-long
 
-   When upgrading agents from versions earlier than 4.x, make sure that the communication protocol is compatible. Up to that point, UDP was the default protocol and it was switched to TCP for later versions. Edit the agent configuration file ``ossec.conf`` to update the :ref:`protocol <server_protocol>` or make sure that your Wazuh manager accepts :ref:`both protocols<manager_protocol>`.     
+   When upgrading agents from versions earlier than 4.x, make sure that the communication protocol is compatible. Up to that point, UDP was the default protocol and it was switched to TCP for later versions. Edit the agent configuration file ``ossec.conf`` to update the :ref:`protocol <server_protocol>` or make sure that your Wazuh manager accepts :ref:`both protocols<manager_protocol>`.

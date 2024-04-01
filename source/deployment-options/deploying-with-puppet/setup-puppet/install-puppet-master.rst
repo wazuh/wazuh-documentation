@@ -91,19 +91,13 @@ Replace 2g in the ``JAVA_ARGS`` variable with the amount of memory you want to a
 Configuration
 -------------
 
-Edit the ``/etc/puppetlabs/puppet/puppet.conf`` file, adding this line to the ``[main]`` section (create the section if it does not exist), and replacing ``puppet,puppet-master`` with your own FQDN:
+Edit the ``/etc/puppetlabs/puppet/puppet.conf`` file to configure the Puppet server. Add the following settings to the ``[main]`` section. You need to create the section if it doesn't exist. If you have set up your own DNS, replace ``puppet`` and ``puppet-master`` with your Fully Qualified Domain Names (FQDNs).
 
-  ::
+   .. code-block:: none
 
-    dns_alt_names = puppet,puppet-master.com
-
-Also add the [server] section with the following content in the ``/etc/puppetlabs/puppet/puppet.conf`` file replacing ``puppet-master`` with your own FQDN:
-
-  ::
-
-    [main]
-    server = puppet-master.com
-
+      [main]
+      server = puppet-master
+      dns_alt_names = puppet, puppet-master
 
 .. note:: If you find ``templatedir=$confdir/templates`` in the config file, delete that line.  It has been deprecated.
 
