@@ -62,17 +62,21 @@ Upgrading the Wazuh indexer
 
    To ensure compatibility with the latest Wazuh indexer and Wazuh dashboard, please update manually installed plugins accordingly. For additional information, check the `distribution matrix <https://github.com/wazuh/wazuh-packages/tree/v|WAZUH_CURRENT|#distribution-version-matrix>`__.
 
-In the case of having a Wazuh indexer cluster with multiple nodes, the cluster will remain available throughout the upgrading process. This rolling upgrade allows shutting down one Wazuh indexer node at a time for minimal disruption of service. Repeat these steps for every Wazuh indexer node.
+In a Wazuh indexer cluster with multiple nodes, the cluster remains available throughout the upgrading process. This rolling upgrade allows shutting down one Wazuh indexer node at a time for minimal disruption of service.
 
-.. note::
+As a first step, remove the *ss4o* index templates. Replace ``<WAZUH_INDEXER_IP_ADDRESS>``, ``<username>``, and ``<password>`` before running any command below.
 
-   -  Replace ``<WAZUH_INDEXER_IP_ADDRESS>``, ``<username>``, and ``<password>`` before running the commands below.
+.. code-block:: bash
+
+   curl -X DELETE "https://<WAZUH_INDEXER_IP_ADDRESS>:9200/_index_template/ss4o_*_template" -u <username>:<password> -k
+
+Then, repeat the following steps for every Wazuh indexer node.
 
 #. Disable shard allocation.
 
    .. code-block:: bash
    
-      curl -X PUT "https://<WAZUH_INDEXER_IP_ADDRESS>:9200/_cluster/settings"  -u <username>:<password> -k -H 'Content-Type: application/json' -d'
+      curl -X PUT "https://<WAZUH_INDEXER_IP_ADDRESS>:9200/_cluster/settings" -u <username>:<password> -k -H 'Content-Type: application/json' -d'
       {
         "persistent": {
           "cluster.routing.allocation.enable": "primaries"

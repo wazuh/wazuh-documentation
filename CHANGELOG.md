@@ -25,7 +25,13 @@ All notable changes to this project will be documented in this file.
 
 ## [v4.8.2]
 
-- Support for Wazuh 4.8.2
+### Added
+
+- Added considerations for max_size API options. ([#7063](https://github.com/wazuh/wazuh-documentation/pull/7063))
+
+### Fixed
+
+- Fixed Puppet deployment config steps. ([#7120](https://github.com/wazuh/wazuh-documentation/pull/7120))
 
 ## [v4.8.1]
 
@@ -37,6 +43,7 @@ All notable changes to this project will be documented in this file.
 ### Changed
 
 - Updated ``SQLAlchemy`` and ``urllib3`` in dependencies Azure cloud security section. ([#6842](https://github.com/wazuh/wazuh-documentation/pull/6842))
+- Changed all references to HP-UX package to tar.gz. ([#7107](https://github.com/wazuh/wazuh-documentation/pull/7107))
 
 ## [v4.8.0]
 
@@ -50,6 +57,9 @@ All notable changes to this project will be documented in this file.
 - Added keystore management tool section. ([#7000](https://github.com/wazuh/wazuh-documentation/pull/7000)) ([#7072](https://github.com/wazuh/wazuh-documentation/pull/7072))
 - Added available SCA policies in 4.8.0 version. ([#7049](https://github.com/wazuh/wazuh-documentation/pull/7049))
 - Added environment variable for Wazuh indexer in Wazuh on Docker deployment. ([#6750](https://github.com/wazuh/wazuh-documentation/pull/6750)) ([#7057](https://github.com/wazuh/wazuh-documentation/pull/7057))
+- Added step to remove the *ss4o* index templates from the Wazuh indexer upgrade guide. ([#7093](https://github.com/wazuh/wazuh-documentation/pull/7093))
+- Added deprecation notice for the ``cache`` Wazuh API configuration option. ([#7106](https://github.com/wazuh/wazuh-documentation/pull/7106))
+- Added warning about 4.8.0 upgrade. ([#7135](https://github.com/wazuh/wazuh-documentation/pull/7135))
 
 ### Changed
 
@@ -77,11 +87,14 @@ All notable changes to this project will be documented in this file.
 - Removed steps to modify the number of shards from the offline installation guide. ([#6958](https://github.com/wazuh/wazuh-documentation/pull/6958))
 - Fixed password update step for distributed deployments. ([#6967](https://github.com/wazuh/wazuh-documentation/pull/6967))
 - Added fixes and updates to the MITRE ATT&CK framework section. ([#6962](https://github.com/wazuh/wazuh-documentation/pull/6962))
+- Modified master node address name to uppercase. ([#7127](https://github.com/wazuh/wazuh-documentation/pull/7127))
 
 ### Removed
 
 - Deprecated ``/vulnerability`` API endpoints. ([#6738](https://github.com/wazuh/wazuh-documentation/pull/6738))
-- Remove implicit ``id!=000`` WQL filter in the search bar. ([#6815](https://github.com/wazuh/wazuh-documentation/pull/6815))
+- Removed implicit ``id!=000`` WQL filter in the search bar. ([#6815](https://github.com/wazuh/wazuh-documentation/pull/6815))
+- Removed launchctl unload step from macOS uninstalling manual. ([#7123](https://github.com/wazuh/wazuh-documentation/pull/7123))
+- Removed Wazuh_Ruleset.pdf references. ([#7142](https://github.com/wazuh/wazuh-documentation/pull/7142))
 
 ## [v4.7.3]
 
