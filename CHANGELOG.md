@@ -9,7 +9,7 @@ All notable changes to this project will be documented in this file.
 
 ### Fixed
 
-- Fixed puppet config steps. ([#7120](https://github.com/wazuh/wazuh-documentation/pull/7120))
+- Fixed Puppet deployment config steps. ([#7120](https://github.com/wazuh/wazuh-documentation/pull/7120))
 
 ## [v4.8.1]
 
