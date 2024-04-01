@@ -3,7 +3,13 @@ All notable changes to this project will be documented in this file.
 
 ## [v4.8.2]
 
-- Support for Wazuh 4.8.2
+### Added
+
+- Added considerations for max_size API options. ([#7063](https://github.com/wazuh/wazuh-documentation/pull/7063))
+
+### Fixed
+
+- Fixed Puppet deployment config steps. ([#7120](https://github.com/wazuh/wazuh-documentation/pull/7120))
 
 ## [v4.8.1]
 
