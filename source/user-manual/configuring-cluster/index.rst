@@ -51,7 +51,7 @@ Deploying a Wazuh cluster
                 <port>1516</port>
                 <bind_addr>0.0.0.0</bind_addr>
                 <nodes>
-                    <node>master</node>
+                    <node>WAZUH-MASTER-ADDRESS</node>
                 </nodes>
                 <hidden>no</hidden>
                 <disabled>no</disabled>
@@ -75,7 +75,7 @@ Deploying a Wazuh cluster
                 <port>1516</port>
                 <bind_addr>0.0.0.0</bind_addr>
                 <nodes>
-                    <node>master</node>
+                    <node>WAZUH-MASTER-ADDRESS</node>
                 </nodes>
                 <hidden>no</hidden>
                 <disabled>no</disabled>
@@ -119,12 +119,13 @@ Deploying a Wazuh cluster
 
     **Installing Splunk forwarder:**
 
-    +-------------------------------------------------------------------+----------------------------------------------------------------------------------------------------------------------------------------+
-    | Type                                                              | Description                                                                                                                            |
-    +===================================================================+========================================================================================================================================+
-    | `RPM/DEB packages <https://documentation.wazuh.com/3.13/installation-guide/installing-splunk/splunk-forwarder.html>`_                        | Install Splunk forwarder for RPM or DEB based OS.           |
-    +-------------------------------------------------------------------+----------------------------------------------------------------------------------------------------------------------------------------+
+    .. |V4.5_SPLUNK_FWD| replace:: `RPM/DEB packages – Version 4.5 <https://documentation.wazuh.com/4.5/deployment-options/splunk/splunk-install.html>`__
 
+    +--------------------+-------------------------------------------------------------+
+    | Type               | Description                                                 |
+    +====================+=============================================================+
+    | |V4.5_SPLUNK_FWD|  | Install Splunk forwarder for RPM and DEB based OS.          |
+    +--------------------+-------------------------------------------------------------+
 
 .. _deploy_wazuh_agents_cluster:
 
