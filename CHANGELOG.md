@@ -11,6 +11,7 @@ All notable changes to this project will be documented in this file.
 ### Changed
 
 - Updated ``SQLAlchemy`` and ``urllib3`` in dependencies Azure cloud security section. ([#6842](https://github.com/wazuh/wazuh-documentation/pull/6842))
+- Changed all references to HP-UX package to tar.gz. ([#7107]https://github.com/wazuh/wazuh-documentation/pull/7107)
 
 ## [v4.8.0]
 
