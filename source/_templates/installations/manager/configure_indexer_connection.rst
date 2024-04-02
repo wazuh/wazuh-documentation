@@ -1,6 +1,6 @@
 .. Copyright (C) 2015, Wazuh, Inc.
 
-By default, the host is set to localhost: ``<host>https://0.0.0.0:9200/host>``. Replace it with your Wazuh indexer address accordingly. You can use either IP addresses or hostnames.
+By default, the host is set to localhost: ``<host>https://0.0.0.0:9200/</host>``. Replace ``0.0.0.0`` with your Wazuh indexer node IP address or hostname.
 
 .. code-block:: xml
   :emphasize-lines: 4
@@ -8,7 +8,7 @@ By default, the host is set to localhost: ``<host>https://0.0.0.0:9200/host>``. 
   <indexer>
       <enabled>yes</enabled>
       <hosts>
-        <host>https://10.0.0.1:9200</host>
+        <host>https://0.0.0.0:9200</host>
       </hosts>
       <ssl>
         <certificate_authorities>
