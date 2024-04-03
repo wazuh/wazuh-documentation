@@ -70,8 +70,10 @@ Installing the Wazuh manager
 
 Configuring the Wazuh indexer connection
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  .. note::
-    You can skip this step if you are not going to use the vulnerability detection capability.
+
+.. note::
+
+   You can skip this step if you are not going to use the vulnerability detection capability.
 
 #. Save the Wazuh indexer username and password into the Wazuh manager keystore using the wazuh-keystore tool:
 
