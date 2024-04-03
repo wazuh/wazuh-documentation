@@ -150,6 +150,9 @@ newUrls['4.7'] = [
   '/user-manual/manager/configuring-cluster/basics.html',
   '/user-manual/manager/configuring-cluster/cluster-management.html',
   '/user-manual/manager/configuring-cluster/index.html',
+  '/user-manual/manager/certificates.html',
+  '/user-manual/wazuh-indexer/certificates.html',
+  '/user-manual/wazuh-dashboard/certificates.html',
   '/user-manual/ruleset/decoders/dynamic-fields.html',
   '/user-manual/ruleset/decoders/index.html',
   '/user-manual/ruleset/decoders/json-decoder.html',
@@ -229,6 +232,7 @@ removedUrls['4.7'] = [
   '/user-manual/ruleset/dynamic-fields.html',
   '/user-manual/ruleset/json-decoder.html',
   '/user-manual/ruleset/ruleset-xml-syntax/sibling-decoders.html',
+  '/user-manual/certificates.html',
   '/cloud-security/gcp/prerequisites/considerations.html',
   '/cloud-security/gcp/prerequisites/pubsub.html',
   '/cloud-security/gcp/supported-services/access_logs.html',
@@ -311,6 +315,21 @@ redirections.push(
     'target': ['4.6=>4.7', '4.7=>4.6'],
     '4.6': '/cloud-security/gcp/prerequisites/pubsub.html',
     '4.7': '/cloud-security/gcp/supported-services/pubsub.html#configuring-google-cloud-pub-sub',
+  },
+  {
+    'target': ['4.7=>4.6'],
+    '4.6': '/user-manual/certificates.html',
+    '4.7': '/user-manual/manager/certificates.html',
+  },
+  {
+    'target': ['4.7=>4.6'],
+    '4.6': '/user-manual/certificates.html',
+    '4.7': '/user-manual/wazuh-indexer/certificates.html',
+  },
+  {
+    'target': ['4.7=>4.6'],
+    '4.6': '/user-manual/certificates.html',
+    '4.7': '/user-manual/wazuh-dashboard/certificates.html',
   },
 );
 

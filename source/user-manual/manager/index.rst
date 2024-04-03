@@ -23,4 +23,4 @@ The Wazuh manager is the system that analyzes the data received from all registe
       manual-email-report/index
       configuring-cluster/index
       remote-service
-      ../certificates
+      certificates
