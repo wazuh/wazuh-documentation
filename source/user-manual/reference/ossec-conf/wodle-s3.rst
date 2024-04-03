@@ -751,7 +751,10 @@ It is necessary to specify the type as an attribute of the ``subscriber`` tag to
 
 		</subscriber>
 
-The currently available types are: ``security_lake``, ``buckets`` and ``security_hub``.
+The currently available types are:
+-  ``security_lake``
+-  ``buckets``
+-  ``security_hub``
 
 +----------------------------------------+-------------------------------------------------------------+-----------------------------------------------+
 | Options                                | Allowed values                                              | Mandatory/Optional                            |

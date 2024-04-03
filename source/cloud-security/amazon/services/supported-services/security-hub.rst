@@ -1,20 +1,29 @@
 .. Copyright (C) 2015, Wazuh, Inc.
 
 .. meta::
-  :description: Learn how to configure Amazon Security Hub findings and insights fetching.
-
-.. _amazon_security_hub:
+   :description: Learn how to configure Amazon Security Hub findings and insights fetching.
 
 AWS Security Hub
 ================
 
 .. versionadded:: 4.9.0
 
-`AWS Security Hub <https://aws.amazon.com/security-hub/>`_ is a cloud security posture management (CSPM) service that automates security best practice checks, aggregates security alerts into a determined format, and understands the overall security posture across all of the user's AWS accounts.
+`AWS Security Hub <https://aws.amazon.com/security-hub/>`_ is a cloud security posture management (CSPM) service that automates security best practice checks, aggregates security alerts into a determined format, and helps the user understand the overall security posture across all of the AWS accounts.
 
-Security Hub runs checks against security controls and generates control `findings <https://docs.aws.amazon.com/securityhub/latest/userguide/securityhub-findings.html>`_ to help the user assess their compliance against security best practices. Related findings are also grouped in collections called `insights <https://docs.aws.amazon.com/securityhub/latest/userguide/securityhub-insights.html>`_.
+Security Hub helps users assess their compliance against security best practices as follows:
 
-To get the most out of the Security Hub service, Wazuh combines its capabilities with `Amazon SQS <https://aws.amazon.com/sqs>`_ and `EventBridge <https://aws.amazon.com/eventbridge>`_ to process and centralize potential alerts from findings and insights in a single place.
+-  Runs checks against security controls.
+-  Generates control `findings <https://docs.aws.amazon.com/securityhub/latest/userguide/securityhub-findings.html>`__.
+-  Groups related findings into collections called `insights <https://docs.aws.amazon.com/securityhub/latest/userguide/securityhub-insights.html>`__.
+
+Wazuh integrates with `Amazon SQS <https://aws.amazon.com/sqs>`_ and `EventBridge <https://aws.amazon.com/eventbridge>`_ to centralize Security Hub findings and insights in a single place. To set up the integration, you need to:
+
+   #. Configure AWS:
+
+      - Enable Amazon Security Hub.
+      - Enable an Amazon SQS queue
+      - Enable an Amazon S3 bucket with Event notifications since for every Security Hub object creation event, the bucket sends notifications to the queue.
+   #. Set up the Wazuh integration for Amazon Security Hub.
 
 AWS configuration
 -----------------
@@ -22,41 +31,42 @@ AWS configuration
 Enabling Security Hub
 ^^^^^^^^^^^^^^^^^^^^^
 
-   .. note::
-      As a prerequisite, it is advised to `configure AWS Config <https://docs.aws.amazon.com/securityhub/latest/userguide/securityhub-setup-prereqs.html#securityhub-prereq-config>`_ since AWS Security Hub uses service-linked rules from it to perform security checks for most controls.
+AWS Security Hub uses service-linked AWS Config rules to perform security checks for most controls. We advise to `configure AWS Config <https://docs.aws.amazon.com/securityhub/latest/userguide/securityhub-setup-prereqs.html#securityhub-prereq-config>`_ as a prerequisite.
 
-The documentation establishes two ways to enable AWS Security Hub:
-   - `By integrating with AWS Organizations <https://docs.aws.amazon.com/securityhub/latest/userguide/securityhub-settingup.html#securityhub-orgs-setup-overview>`_: strongly recommend for multi-account and multi-region environments.
-   - `Manually <https://docs.aws.amazon.com/securityhub/latest/userguide/securityhub-settingup.html#securityhub-manual-setup-overview>`_: for standalone accounts, or if the integration with AWS Organizations is unnecessary.
+You have two alternative ways to enable AWS Security Hub:
 
-    .. thumbnail:: /images/aws/security-hub-set-up.png
+-  `AWS Organizations integration <https://docs.aws.amazon.com/securityhub/latest/userguide/securityhub-settingup.html#securityhub-orgs-setup-overview>`_: Recommended for multi-account and multi-region environments.
+-  `Manually <https://docs.aws.amazon.com/securityhub/latest/userguide/securityhub-settingup.html#securityhub-manual-setup-overview>`__: Recommended for standalone accounts, or if the integration with AWS Organizations is unnecessary.
+
+   .. thumbnail:: /images/aws/security-hub-set-up.png
       :align: center
       :width: 70%
 
-The AWS managed policy called `AWSSecurityHubFullAccess <https://docs.aws.amazon.com/securityhub/latest/userguide/security-iam-awsmanpol.html#security-iam-awsmanpol-awssecurityhubfullaccess>`_ must be attached to the IAM identity to access the Security Hub console and API operations. The policy called `AWSSecurityHubOrganizationsAccess <https://docs.aws.amazon.com/securityhub/latest/userguide/security-iam-awsmanpol.html#security-iam-awsmanpol-awssecurityhuborganizationsaccess>`_ should also be attached to enable and manage the Security Hub through the Organizations integration.
 
-    .. thumbnail:: /images/aws/security-hub-policies.png
-      :align: center
-      :width: 70%
+You must attach the AWS managed policy called `AWSSecurityHubFullAccess <https://docs.aws.amazon.com/securityhub/latest/userguide/security-iam-awsmanpol.html#security-iam-awsmanpol-awssecurityhubfullaccess>`__ to the IAM identity to access the Security Hub console and API operations. You must also attach the policy called `AWSSecurityHubOrganizationsAccess <https://docs.aws.amazon.com/securityhub/latest/userguide/security-iam-awsmanpol.html#security-iam-awsmanpol-awssecurityhuborganizationsaccess>`__ to enable and manage the Security Hub through the Organizations integration.
 
-When integrating Security Hub and Organizations, there is the option to use a feature called `central configuration <https://docs.aws.amazon.com/securityhub/latest/userguide/central-configuration-intro.html>`_ to set up and manage Security Hub for the organization. It is strongly recommended to use central configuration because it lets the administrator customize security coverage for the organization.
+.. thumbnail:: /images/aws/security-hub-policies.png
+   :align: center
+   :width: 70%
+
+We recommend using `central configuration <https://docs.aws.amazon.com/securityhub/latest/userguide/central-configuration-intro.html>`__ to set up and manage Security Hub for the organization. Central configuration lets the administrator customize security coverage for the organization.
 
 Types of Security Hub integration with EventBridge
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-Security Hub events and insights can be stored in S3 buckets by integrating Security Hub with EventBridge as it is carried out, for example, for the :ref:`Amazon WAF integration <amazon_waf>`. 
+Integrating Security Hub with EventBridge allows storing Security Hub events and insights in S3 buckets. For example, this is the case for the :ref:`Amazon WAF integration <amazon_waf>`.
 The three available types of events are:
 
-- *Security Hub Findings - Imported*: This event type is automatically sent by Security Hub to EventBridge. It includes all new findings and updates to existing findings. Each event contains a single finding.
-- *Security Hub Findings - Custom Action*: This event type is sent by Security Hub to EventBridge when custom actions are triggered. The events are associated with the findings of the custom actions.
-- *Security Hub Insight Results*: This event type is used to process the Security Hub Insights. Custom actions can be used to send sets of insight results to EventBridge. Insight results are the resources that match an insight.
+-  **Security Hub Findings - Imported**: Security Hub automatically sends this type of event to EventBridge. It includes all new findings and updates to existing findings. Each event contains a single finding.
+-  **Security Hub Findings - Custom Action**: Security Hub sends this type of event to EventBridge when custom actions are triggered. The events are associated with the findings of the custom actions.
+-  **Security Hub Insight Results**: This type of event is used to process the Security Hub Insights. You can use custom actions to send sets of insight results to EventBridge. Insight results are the resources that match an insight.
 
-   .. note::
-      To send the last two types of events to EventBridge, you need to create a custom action in Security Hub. Please refer to the Security Hub `documentation <https://docs.aws.amazon.com/securityhub/latest/userguide/securityhub-cwe-custom-actions.html>`_ to achieve this.
+.. note::
+   To send the last two types of events to EventBridge, you need to create a custom action in Security Hub. Please refer to the `Security Hub documentation <https://docs.aws.amazon.com/securityhub/latest/userguide/securityhub-cwe-custom-actions.html>`__ to achieve this.
 
 Each type of event contains a `specific format <https://docs.aws.amazon.com/securityhub/latest/userguide/securityhub-cwe-event-formats.html>`_ from which the Wazuh integration takes every relevant ``detail`` field and value along with the ``detail-type`` value.
 
-More information on how to configure each type in the `AWS Security Hub related section <https://docs.aws.amazon.com/securityhub/latest/userguide/securityhub-cwe-integration-types.html>`_.
+Find more information on how to configure each type in the `AWS Security Hub related section <https://docs.aws.amazon.com/securityhub/latest/userguide/securityhub-cwe-integration-types.html>`_.
 
 Amazon Simple Queue Service
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^
@@ -146,7 +156,7 @@ Queue
 ~~~~~
 
 -  ``<sqs_name>``: The name of the queue.
--  ``<service_endpoint>`` - Optional: The AWS S3 endpoint URL for data downloading from the bucket. Check :ref:`using_non-default_aws_endpoints` for more information about VPC and FIPS endpoints.
+-  ``<service_endpoint>`` – *Optional*: The AWS S3 endpoint URL for data downloading from the bucket. Check :ref:`using_non-default_aws_endpoints` for more information about VPC and FIPS endpoints.
 
 Authentication
 ~~~~~~~~~~~~~~
@@ -160,7 +170,7 @@ These authentication methods require using the ``/root/.aws/credentials`` file t
 
 The available authentication configuration parameters are the following:
 
--  ``<aws_profile>``: A valid profile name from a Shared Credential File or AWS Config File with permission to read logs from the bucket.
+-  ``<aws_profile>``: A valid profile name from a :ref:`Shared Credential File <aws_profile>` or :ref:`AWS Config File <aws_config_file>` with `permission to read logs from the bucket <https://docs.aws.amazon.com/AmazonS3/latest/userguide/using-with-s3-actions.html>`__.
 -  ``<iam_role_arn>``: ARN for the corresponding IAM role to assume.
--  ``<iam_role_duration>`` - Optional: The session duration in seconds.
--  ``<sts_endpoint>`` - Optional: The URL of the VPC endpoint of the AWS Security Token Service.
+-  ``<iam_role_duration>`` – *Optional*: The session duration in seconds.
+-  ``<sts_endpoint>`` – *Optional*: The URL of the VPC endpoint of the AWS Security Token Service.
