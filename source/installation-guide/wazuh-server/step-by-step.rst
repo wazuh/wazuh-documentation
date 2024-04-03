@@ -68,8 +68,10 @@ Installing the Wazuh manager
 
             # apt-get -y install wazuh-manager|WAZUH_MANAGER_DEB_PKG_INSTALL|
 
-Configuring the Wazuh manager
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+Configuring the Wazuh indexer connection
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  .. note::
+    You can skip this step if you are not going to use the vulnerability detection capability.
 
 #. Save the Wazuh indexer username and password into the Wazuh manager keystore using the wazuh-keystore tool:
 
@@ -82,7 +84,7 @@ Configuring the Wazuh manager
 
       The default step-by-step installation credentials are ``admin``:``admin``
 
-#. Edit ``/var/ossec/etc/ossec.conf`` to configure the indexer connection. You can skip this step if you are not going to use the vulnerability detection capability.
+#. Edit ``/var/ossec/etc/ossec.conf`` to configure the indexer connection.
 
    .. include:: /_templates/installations/manager/configure_indexer_connection.rst
 
