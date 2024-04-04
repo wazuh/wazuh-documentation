@@ -130,7 +130,7 @@ These authentication methods require using the ``/root/.aws/credentials`` file t
 
 The available authentication configuration parameters are the following:
 
--  ``<aws_profile>``: A valid profile name from a :ref:`Shared Credential File <aws_profile>` or :ref:`AWS Config File <aws_config_file>` with `permission to read logs from the bucket <https://docs.aws.amazon.com/AmazonS3/latest/userguide/using-with-s3-actions.html>`__.
+-  ``<aws_profile>``: A valid profile name from a :ref:`Shared Credential File <aws_profile>` or `AWS Config File <https://boto3.amazonaws.com/v1/documentation/api/latest/guide/configuration.html#using-a-configuration-file>`__ with `permission to read logs from the bucket <https://docs.aws.amazon.com/AmazonS3/latest/userguide/using-with-s3-actions.html>`__.
 -  ``<iam_role_arn>``: ARN for the corresponding IAM role to assume.
 -  ``<iam_role_duration>`` – *Optional*: The session duration in seconds.
 -  ``<sts_endpoint>`` – *Optional*: The URL of the VPC endpoint of the AWS Security Token Service.

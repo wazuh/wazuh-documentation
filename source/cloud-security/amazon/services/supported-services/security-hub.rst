@@ -18,12 +18,14 @@ Security Hub helps users assess their compliance against security best practices
 
 Wazuh integrates with `Amazon SQS <https://aws.amazon.com/sqs>`_ and `EventBridge <https://aws.amazon.com/eventbridge>`_ to centralize Security Hub findings and insights in a single place. To set up the integration, you need to:
 
-   #. Configure AWS:
+#. Configure AWS:
 
-      - Enable Amazon Security Hub.
-      - Enable an Amazon SQS queue
-      - Enable an Amazon S3 bucket with Event notifications since for every Security Hub object creation event, the bucket sends notifications to the queue.
-   #. Set up the Wazuh integration for Amazon Security Hub.
+   -  Enable Amazon Security Hub.
+   -  Create a Firehose stream in Amazon Data Firehose.
+   -  Create a rule in EventBridge.
+   -  Enable an Amazon SQS queue.
+   -  Enable an Amazon S3 bucket with Event notifications since for every Security Hub object creation event, the bucket sends notifications to the queue.
+#. Set up the Wazuh integration for Amazon Security Hub.
 
 AWS configuration
 -----------------
@@ -36,14 +38,17 @@ AWS Security Hub uses service-linked AWS Config rules to perform security checks
 You have two alternative ways to enable AWS Security Hub:
 
 -  `AWS Organizations integration <https://docs.aws.amazon.com/securityhub/latest/userguide/securityhub-settingup.html#securityhub-orgs-setup-overview>`_: Recommended for multi-account and multi-region environments.
--  `Manually <https://docs.aws.amazon.com/securityhub/latest/userguide/securityhub-settingup.html#securityhub-manual-setup-overview>`__: Recommended for standalone accounts, or if the integration with AWS Organizations is unnecessary.
+-  `Manually <https://docs.aws.amazon.com/securityhub/latest/userguide/securityhub-settingup.html#securityhub-manual-setup-overview>`__: Recommended for standalone accounts and when the integration with AWS Organizations is unnecessary.
 
    .. thumbnail:: /images/aws/security-hub-set-up.png
       :align: center
       :width: 70%
 
 
-You must attach the AWS managed policy called `AWSSecurityHubFullAccess <https://docs.aws.amazon.com/securityhub/latest/userguide/security-iam-awsmanpol.html#security-iam-awsmanpol-awssecurityhubfullaccess>`__ to the IAM identity to access the Security Hub console and API operations. You must also attach the policy called `AWSSecurityHubOrganizationsAccess <https://docs.aws.amazon.com/securityhub/latest/userguide/security-iam-awsmanpol.html#security-iam-awsmanpol-awssecurityhuborganizationsaccess>`__ to enable and manage the Security Hub through the Organizations integration.
+You must attach the following AWS managed policies to the IAM identity.
+
+-  `AWSSecurityHubFullAccess <https://docs.aws.amazon.com/securityhub/latest/userguide/security-iam-awsmanpol.html#security-iam-awsmanpol-awssecurityhubfullaccess>`__ to access the Security Hub console and API operations.
+-  `AWSSecurityHubOrganizationsAccess <https://docs.aws.amazon.com/securityhub/latest/userguide/security-iam-awsmanpol.html#security-iam-awsmanpol-awssecurityhuborganizationsaccess>`__ to enable and manage the Security Hub through the Organizations integration.
 
 .. thumbnail:: /images/aws/security-hub-policies.png
    :align: center
@@ -54,17 +59,18 @@ We recommend using `central configuration <https://docs.aws.amazon.com/securityh
 Types of Security Hub integration with EventBridge
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-Integrating Security Hub with EventBridge allows storing Security Hub events and insights in S3 buckets. For example, this is the case for the :ref:`Amazon WAF integration <amazon_waf>`.
+Integrating Security Hub with EventBridge allows storing Security Hub events and insights in S3 buckets. The AWS documentation describes the necessary steps on how to create an event rule in EventBridge both for `automatically sent findings <https://docs.aws.amazon.com/securityhub/latest/userguide/securityhub-cwe-all-findings.html#securityhub-cwe-all-findings-predefined-pattern>`__ and for `custom actions to send findings and insight results <https://docs.aws.amazon.com/securityhub/latest/userguide/securityhub-cwe-custom-actions.html#securityhub-cwe-define-rule>`__. EventBridge needs a target triggered when an event is received that matches the event pattern defined in the rule. Therefore, as a required previous step, it is necessary to create a Firehose stream in Amazon Data Firehose. For example, this is the case for the :ref:`Amazon WAF integration <amazon_waf>`.
+
 The three available types of events are:
 
--  **Security Hub Findings - Imported**: Security Hub automatically sends this type of event to EventBridge. It includes all new findings and updates to existing findings. Each event contains a single finding.
--  **Security Hub Findings - Custom Action**: Security Hub sends this type of event to EventBridge when custom actions are triggered. The events are associated with the findings of the custom actions.
+-  **Security Hub Findings - Imported**: Security Hub automatically sends events of this type to EventBridge. It includes all new findings as well as updates to existing findings. Each event contains a single finding.
+-  **Security Hub Findings - Custom Action**: Security Hub sends events of this type to EventBridge when custom actions are triggered. The events are associated with the findings of the custom actions.
 -  **Security Hub Insight Results**: This type of event is used to process the Security Hub Insights. You can use custom actions to send sets of insight results to EventBridge. Insight results are the resources that match an insight.
 
-.. note::
-   To send the last two types of events to EventBridge, you need to create a custom action in Security Hub. Please refer to the `Security Hub documentation <https://docs.aws.amazon.com/securityhub/latest/userguide/securityhub-cwe-custom-actions.html>`__ to achieve this.
 
-Each type of event contains a `specific format <https://docs.aws.amazon.com/securityhub/latest/userguide/securityhub-cwe-event-formats.html>`_ from which the Wazuh integration takes every relevant ``detail`` field and value along with the ``detail-type`` value.
+To send the last two types of events to EventBridge, you need to create a custom action in Security Hub. Please refer to the `Security Hub documentation <https://docs.aws.amazon.com/securityhub/latest/userguide/securityhub-cwe-custom-actions.html>`__ to achieve this.
+
+Each type of event contains a `specific EventBridge event format <https://docs.aws.amazon.com/securityhub/latest/userguide/securityhub-cwe-event-formats.html>`_ from which the Wazuh integration takes every relevant ``detail`` field and value along with the ``detail-type`` value.
 
 Find more information on how to configure each type in the `AWS Security Hub related section <https://docs.aws.amazon.com/securityhub/latest/userguide/securityhub-cwe-integration-types.html>`_.
 
@@ -109,10 +115,8 @@ To configure an S3 bucket that reports creation events, do the following.
 #. Configure an S3 bucket as defined in the :doc:`Configuring an S3 Bucket <../prerequisites/S3-bucket>` section. Provide the name you decided in the previous section.
 #. Once created, go to **Event notifications** inside the **Properties** tab. Select **Create event notification**. 
 #. In **Event Types**, select **All object create events**. This generates notifications for any type of event that results in the creation of an object in the bucket.
-#. In the **Destination** section, select the following options:
-
-   -  **SQS queue**
-   -  **Choose from your SQS queues**
+#. In the Destination section, select SQS queue.
+#. Select Choose from your SQS queues. Then, choose the queue you created previously.
 #. Choose the queue you created previously.
 
 Wazuh Configuration
@@ -122,7 +126,7 @@ Wazuh Configuration
       
    Every message sent to the queue is read and deleted. Make sure you only use the queue for bucket notifications.
 
-#. Edit the ``/var/ossec/etc/ossec.conf`` file. Add the SQS name and your `Configuration parameters`_ for the buckets service. Set this inside ``<subscriber type="security_hub">``. For example:
+#. Edit the ``/var/ossec/etc/ossec.conf`` file. Add the SQS name and your `Configuration parameters`_ for the buckets service. Set them within the ``<subscriber type="security_hub">`` block. For example:
 
    .. code-block:: xml
       :emphasize-lines: 6,7
@@ -137,11 +141,11 @@ Wazuh Configuration
           </subscriber>
       </wodle>
 
-   Check the :doc:`AWS S3 module </user-manual/reference/ossec-conf/wodle-s3>` reference manual to learn more about the available settings.
+   Check the :doc:`AWS S3 module </user-manual/reference/ossec-conf/wodle-s3>` reference to learn more about the available settings.
 
    .. note::
       
-      The amount of notifications present in the queue affects the execution time of the AWS S3 module. If the ``<interval>`` value for the waiting time between executions is too short, the :ref:`Interval overtaken <interval_overtaken_message>` warning is logged into the ``ossec.log`` file.
+      The amount of notifications present in the queue affects the execution time of the AWS S3 module. If the ``<interval>`` value for the waiting time between executions is too short, Wazuh logs the :ref:`Interval overtaken <interval_overtaken_message>` warning into the ``ossec.log`` file.
 
 #. Restart the Wazuh manager to apply the changes.
 
@@ -170,7 +174,7 @@ These authentication methods require using the ``/root/.aws/credentials`` file t
 
 The available authentication configuration parameters are the following:
 
--  ``<aws_profile>``: A valid profile name from a :ref:`Shared Credential File <aws_profile>` or :ref:`AWS Config File <aws_config_file>` with `permission to read logs from the bucket <https://docs.aws.amazon.com/AmazonS3/latest/userguide/using-with-s3-actions.html>`__.
+-  ``<aws_profile>``: A valid profile name from a :ref:`Shared Credential File <aws_profile>` or `AWS Config File <https://boto3.amazonaws.com/v1/documentation/api/latest/guide/configuration.html#using-a-configuration-file>`__ with `permission to read logs from the bucket <https://docs.aws.amazon.com/AmazonS3/latest/userguide/using-with-s3-actions.html>`__.
 -  ``<iam_role_arn>``: ARN for the corresponding IAM role to assume.
 -  ``<iam_role_duration>`` – *Optional*: The session duration in seconds.
 -  ``<sts_endpoint>`` – *Optional*: The URL of the VPC endpoint of the AWS Security Token Service.

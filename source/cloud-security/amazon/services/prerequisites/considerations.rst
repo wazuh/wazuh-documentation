@@ -51,8 +51,6 @@ Find an example of running the module on a manager using the ``--reparse`` optio
 
 The ``--debug 2`` parameter gets a verbose output. This is useful to show the script is working, specially when handling a large amount of data.
 
-.. _aws_config_file:
-
 Connection configuration for retries
 ------------------------------------
 

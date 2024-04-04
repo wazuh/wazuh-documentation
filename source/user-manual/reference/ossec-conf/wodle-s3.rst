@@ -752,6 +752,7 @@ It is necessary to specify the type as an attribute of the ``subscriber`` tag to
 		</subscriber>
 
 The currently available types are:
+
 -  ``security_lake``
 -  ``buckets``
 -  ``security_hub``
@@ -767,7 +768,7 @@ The currently available types are:
 | :ref:`subscriber_external_id`          | Valid external ID                                           | Mandatory for Amazon Security Lake            |
 |                                        |                                                             | Subscription                                  |
 |                                        |                                                             | (not available for Custom Logs Buckets        |
-|                                        |                                                             | or Amazon Security Hub)                       |
+|                                        |                                                             | and Amazon Security Hub)                      |
 +----------------------------------------+-------------------------------------------------------------+-----------------------------------------------+
 | :ref:`subscriber_aws_profile`          | Valid profile name                                          | Optional                                      |
 +----------------------------------------+-------------------------------------------------------------+-----------------------------------------------+
