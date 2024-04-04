@@ -1,7 +1,9 @@
 .. Copyright (C) 2015, Wazuh, Inc.
 
 .. meta::
-  :description: 
+  :description:
+
+.. _reference_ossec_indexer:
 
 indexer
 =======
