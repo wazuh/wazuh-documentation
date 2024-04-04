@@ -8,7 +8,7 @@ AWS Security Hub
 
 .. versionadded:: 4.9.0
 
-`AWS Security Hub <https://aws.amazon.com/security-hub/>`_ is a cloud security posture management (CSPM) service that automates security best practice checks, aggregates security alerts into a determined format, and helps the user understand the overall security posture across all of the AWS accounts.
+`AWS Security Hub <https://aws.amazon.com/security-hub/>`_ is a cloud security posture management (CSPM) service that automates security best practice checks, aggregates security alerts into a unified format, and helps the user understand the overall security posture across all of the AWS accounts.
 
 Security Hub helps users assess their compliance against security best practices as follows:
 
@@ -18,13 +18,12 @@ Security Hub helps users assess their compliance against security best practices
 
 Wazuh integrates with `Amazon SQS <https://aws.amazon.com/sqs>`_ and `EventBridge <https://aws.amazon.com/eventbridge>`_ to centralize Security Hub findings and insights in a single place. To set up the integration, you need to:
 
-#. Configure AWS:
+#. Configure AWS. This involves the following.
 
-   -  Enable Amazon Security Hub.
-   -  Create a Firehose stream in Amazon Data Firehose.
-   -  Create a rule in EventBridge.
-   -  Enable an Amazon SQS queue.
-   -  Enable an Amazon S3 bucket with Event notifications since for every Security Hub object creation event, the bucket sends notifications to the queue.
+   #. Enabling Amazon Security Hub.
+   #. Integrating Security Hub with EventBridge.
+   #. Enabling an Amazon SQS queue.
+   #. Enabling an Amazon S3 bucket including Event notifications. The bucket sends notifications to the queue for every Security Hub object creation event.
 #. Set up the Wazuh integration for Amazon Security Hub.
 
 AWS configuration
@@ -56,23 +55,33 @@ You must attach the following AWS managed policies to the IAM identity.
 
 We recommend using `central configuration <https://docs.aws.amazon.com/securityhub/latest/userguide/central-configuration-intro.html>`__ to set up and manage Security Hub for the organization. Central configuration lets the administrator customize security coverage for the organization.
 
-Types of Security Hub integration with EventBridge
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+Integrating Security Hub with EventBridge
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-Integrating Security Hub with EventBridge allows storing Security Hub events and insights in S3 buckets. The AWS documentation describes the necessary steps on how to create an event rule in EventBridge both for `automatically sent findings <https://docs.aws.amazon.com/securityhub/latest/userguide/securityhub-cwe-all-findings.html#securityhub-cwe-all-findings-predefined-pattern>`__ and for `custom actions to send findings and insight results <https://docs.aws.amazon.com/securityhub/latest/userguide/securityhub-cwe-custom-actions.html#securityhub-cwe-define-rule>`__. EventBridge needs a target triggered when an event is received that matches the event pattern defined in the rule. Therefore, as a required previous step, it is necessary to create a Firehose stream in Amazon Data Firehose. For example, this is the case for the :ref:`Amazon WAF integration <amazon_waf>`.
+Integrating Security Hub with EventBridge allows storing Security Hub findings and insights in S3 buckets.
 
-The three available types of events are:
+There are three types of events available as follows. Each type of event uses a specific `EventBridge event format <https://docs.aws.amazon.com/securityhub/latest/userguide/securityhub-cwe-event-formats.html>`__. The Wazuh integration takes from the events every relevant ``detail`` field and value along with the ``detail-type`` value.
 
 -  **Security Hub Findings - Imported**: Security Hub automatically sends events of this type to EventBridge. It includes all new findings as well as updates to existing findings. Each event contains a single finding.
 -  **Security Hub Findings - Custom Action**: Security Hub sends events of this type to EventBridge when custom actions are triggered. The events are associated with the findings of the custom actions.
 -  **Security Hub Insight Results**: This type of event is used to process the Security Hub Insights. You can use custom actions to send sets of insight results to EventBridge. Insight results are the resources that match an insight.
 
+To send the last two types of events to EventBridge, you need to create a `custom action in Security Hub <https://docs.aws.amazon.com/securityhub/latest/userguide/securityhub-cwe-custom-actions.html>`__. Please refer to the Security Hub documentation to achieve this.
 
-To send the last two types of events to EventBridge, you need to create a custom action in Security Hub. Please refer to the `Security Hub documentation <https://docs.aws.amazon.com/securityhub/latest/userguide/securityhub-cwe-custom-actions.html>`__ to achieve this.
+Find more information about each type of event in `Types of Security Hub integration with EventBridge <https://docs.aws.amazon.com/securityhub/latest/userguide/securityhub-cwe-integration-types.html>`__.
 
-Each type of event contains a `specific EventBridge event format <https://docs.aws.amazon.com/securityhub/latest/userguide/securityhub-cwe-event-formats.html>`_ from which the Wazuh integration takes every relevant ``detail`` field and value along with the ``detail-type`` value.
+To integrate Security Hub with EventBridge, you need to create the following:
 
-Find more information on how to configure each type in the `AWS Security Hub related section <https://docs.aws.amazon.com/securityhub/latest/userguide/securityhub-cwe-integration-types.html>`_.
+-  A Firehose stream in Amazon Data Firehose
+-  An event rule in EventBridge
+
+EventBridge needs a target such as the Firehose stream. It triggers the target when it receives an event matching an event pattern. The event pattern is defined in the rule.
+The AWS documentation provides steps on how to configure the rule.
+
+-  `Creating an event rule for automatically sent findings <https://docs.aws.amazon.com/securityhub/latest/userguide/securityhub-cwe-all-findings.html#securityhub-cwe-all-findings-predefined-pattern>`__
+-  `Defining a rule for using custom actions to send findings and insight results <https://docs.aws.amazon.com/securityhub/latest/userguide/securityhub-cwe-custom-actions.html#securityhub-cwe-define-rule>`__
+
+Check the :ref:`Amazon WAF integration <amazon_waf>` for a configuration example.
 
 Amazon Simple Queue Service
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^
@@ -115,9 +124,8 @@ To configure an S3 bucket that reports creation events, do the following.
 #. Configure an S3 bucket as defined in the :doc:`Configuring an S3 Bucket <../prerequisites/S3-bucket>` section. Provide the name you decided in the previous section.
 #. Once created, go to **Event notifications** inside the **Properties** tab. Select **Create event notification**. 
 #. In **Event Types**, select **All object create events**. This generates notifications for any type of event that results in the creation of an object in the bucket.
-#. In the Destination section, select SQS queue.
-#. Select Choose from your SQS queues. Then, choose the queue you created previously.
-#. Choose the queue you created previously.
+#. In the **Destination** section, select **SQS queue**.
+#. Select **Choose from your SQS queues**. Then, choose the queue you created previously.
 
 Wazuh Configuration
 -------------------
