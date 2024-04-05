@@ -4,8 +4,8 @@
   :description: Tenants are useful for safely sharing your work with other users. Learn how to enable multi-tenancy in the Wazuh dashboard. 
   
 
-How to enable multi-tenancy
-===========================
+Enabling multi-tenancy
+======================
         
 Tenants in the Wazuh dashboard are spaces for saving index patterns, visualizations, dashboards, and other objects. Tenants are useful for safely sharing your work with other users. You can control which roles have access to a tenant and whether those roles have read or write access. By default, all the Wazuh dashboard users have access to two independent tenants:
 
