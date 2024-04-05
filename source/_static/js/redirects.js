@@ -331,6 +331,291 @@ redirections.push(
     '4.6': '/user-manual/certificates.html',
     '4.7': '/user-manual/wazuh-dashboard/certificates.html',
   },
+  {
+    'target': ['4.6=>4.7', '4.7=>4.6'],
+    '4.6': '/user-manual/manager/manual-backup-restore.html',
+    '4.7': '/upgrade-guide/manual-backup-restore.html',
+  },
+  {
+    'target': ['4.6=>4.7', '4.7=>4.6'],
+    '4.6': '/user-manual/files-backup/index.html',
+    '4.7': '/migration-guide/files-backup/index.html',
+  },
+  {
+    'target': ['4.6=>4.7', '4.7=>4.6'],
+    '4.6': '/user-manual/files-backup/creating/index.html',
+    '4.7': '/migration-guide/files-backup/creating/index.html',
+  },
+  {
+    'target': ['4.6=>4.7', '4.7=>4.6'],
+    '4.6': '/user-manual/files-backup/creating/wazuh-agent.html',
+    '4.7': '/migration-guide/files-backup/creating/wazuh-agent.html',
+  },
+  {
+    'target': ['4.6=>4.7', '4.7=>4.6'],
+    '4.6': '/user-manual/files-backup/creating/wazuh-central-components.html',
+    '4.7': '/migration-guide/files-backup/creating/wazuh-central-components.html',
+  },
+  {
+    'target': ['4.6=>4.7', '4.7=>4.6'],
+    '4.6': '/user-manual/files-backup/restoring/index.html',
+    '4.7': '/migration-guide/files-backup/restoring/index.html',
+  },
+  {
+    'target': ['4.6=>4.7', '4.7=>4.6'],
+    '4.6': '/user-manual/files-backup/restoring/wazuh-agent.html',
+    '4.7': '/migration-guide/files-backup/restoring/wazuh-agent.html',
+  },
+  {
+    'target': ['4.6=>4.7', '4.7=>4.6'],
+    '4.6': '/user-manual/files-backup/restoring/wazuh-central-components.html',
+    '4.7': '/migration-guide/files-backup/restoring/wazuh-central-components.html',
+  },
+  {
+    'target': ['4.6=>4.7', '4.7=>4.6'],
+    '4.6': '/user-manual/agent-enrollment/via-agent-configuration/index.html',
+    '4.7': '/user-manual/agent/agent-enrollment/enrollment-methods/via-agent-configuration/index.html',
+  },
+  {
+    'target': ['4.6=>4.7', '4.7=>4.6'],
+    '4.6': '/user-manual/agent-enrollment/via-agent-configuration/linux-endpoint.html',
+    '4.7': '/user-manual/agent/agent-enrollment/enrollment-methods/via-agent-configuration/linux-endpoint.html',
+  },
+  {
+    'target': ['4.6=>4.7', '4.7=>4.6'],
+    '4.6':   '/user-manual/agent-enrollment/via-agent-configuration/macos-endpoint.html',
+    '4.7': '/user-manual/agent/agent-enrollment/enrollment-methods/via-agent-configuration/macos-endpoint.html',
+  },
+  {
+    'target': ['4.6=>4.7', '4.7=>4.6'],
+    '4.6': '/user-manual/agent-enrollment/via-agent-configuration/windows-endpoint.html',
+    '4.7': '/user-manual/agent/agent-enrollment/enrollment-methods/via-agent-configuration/windows-endpoint.html',
+  },
+  {
+    'target': ['4.6=>4.7', '4.7=>4.6'],
+    '4.6': '/user-manual/agent-enrollment/via-manager-API/importing-the-key.html',
+    '4.7': '/user-manual/agent/agent-enrollment/enrollment-methods/via-manager-API/importing-the-key.html',
+  },
+  {
+    'target': ['4.6=>4.7', '4.7=>4.6'],
+    '4.6': '/user-manual/agent-enrollment/via-manager-API/index.html',
+    '4.7': '/user-manual/agent/agent-enrollment/enrollment-methods/via-manager-API/index.html',
+  },
+  {
+    'target': ['4.6=>4.7', '4.7=>4.6'],
+    '4.6': '/user-manual/agent-enrollment/via-manager-API/requesting-the-key.html',
+    '4.7': '/user-manual/agent/agent-enrollment/enrollment-methods/via-manager-API/requesting-the-key.html',
+  },
+  {
+    'target': ['4.6=>4.7', '4.7=>4.6'],
+    '4.6': '/user-manual/agent-enrollment/index.html',
+    '4.7': '/user-manual/agent/agent-enrollment/index.html',
+  },
+  {
+    'target': ['4.6=>4.7', '4.7=>4.6'],
+    '4.6': '/user-manual/agent-enrollment/security-options/agent-identity-verification.html',
+    '4.7': '/user-manual/agent/agent-enrollment/security-options/agent-identity-verification.html',
+  },
+  {
+    'target': ['4.6=>4.7', '4.7=>4.6'],
+    '4.6': '/user-manual/agent-enrollment/security-options/index.html',
+    '4.7': '/user-manual/agent/agent-enrollment/security-options/index.html',
+  },
+  {
+    'target': ['4.6=>4.7', '4.7=>4.6'],
+    '4.6': '/user-manual/agent-enrollment/security-options/manager-identity-verification.html',
+    '4.7': '/user-manual/agent/agent-enrollment/security-options/manager-identity-verification.html',
+  },
+  {
+    'target': ['4.6=>4.7', '4.7=>4.6'],
+    '4.6':   '/user-manual/agent-enrollment/security-options/using-password-authentication.html',
+    '4.7': '/user-manual/agent/agent-enrollment/security-options/using-password-authentication.html',
+  },
+  {
+    'target': ['4.6=>4.7', '4.7=>4.6'],
+    '4.6': '/user-manual/agent-enrollment/troubleshooting.html',
+    '4.7': '/user-manual/agent/agent-enrollment/troubleshooting.html',
+  },
+  {
+    'target': ['4.6=>4.7', '4.7=>4.6'],
+    '4.6': '/user-manual/agents/agent-connection.html',
+    '4.7': '/user-manual/agent/agent-management/agent-connection.html',
+  },
+  {
+    'target': ['4.6=>4.7', '4.7=>4.6'],
+    '4.6': '/user-manual/agents/agent-life-cycle.html',
+    '4.7': '/user-manual/agent/agent-management/agent-life-cycle.html',
+  },
+  {
+    'target': ['4.6=>4.7', '4.7=>4.6'],
+    '4.6': '/user-manual/agents/antiflooding.html',
+    '4.7': '/user-manual/agent/agent-management/antiflooding.html',
+  },
+  {
+    'target': ['4.6=>4.7', '4.7=>4.6'],
+    '4.6': '/user-manual/agents/grouping-agents.html',
+    '4.7': '/user-manual/agent/agent-management/grouping-agents.html',
+  },
+  {
+    'target': ['4.6=>4.7', '4.7=>4.6'],
+    '4.6': '/user-manual/agents/index.html',
+    '4.7': '/user-manual/agent/agent-management/index.html',
+  },
+  {
+    'target': ['4.6=>4.7', '4.7=>4.6'],
+    '4.6': '/user-manual/agents/key-request.html',
+    '4.7': '/user-manual/agent/agent-management/key-request.html',
+  },
+  {
+    'target': ['4.6=>4.7', '4.7=>4.6'],
+    '4.6': '/user-manual/agents/labels.html',
+    '4.7': '/user-manual/agent/agent-management/labels.html',
+  },
+  {
+    'target': ['4.6=>4.7', '4.7=>4.6'],
+    '4.6': '/user-manual/agents/listing/index.html',
+    '4.7': '/user-manual/agent/agent-management/listing/index.html',
+  },
+  {
+    'target': ['4.6=>4.7', '4.7=>4.6'],
+    '4.6': '/user-manual/agents/listing/listing.html',
+    '4.7': '/user-manual/agent/agent-management/listing/listing.html',
+  },
+  {
+    'target': ['4.6=>4.7', '4.7=>4.6'],
+    '4.6': '/user-manual/agents/listing/using-command-line.html',
+    '4.7': '/user-manual/agent/agent-management/listing/using-command-line.html',
+  },
+  {
+    'target': ['4.6=>4.7', '4.7=>4.6'],
+    '4.6': '/user-manual/agents/listing/wazuh-dashboard.html',
+    '4.7': '/user-manual/agent/agent-management/listing/wazuh-dashboard.html',
+  },
+  {
+    'target': ['4.6=>4.7', '4.7=>4.6'],
+    '4.6': '/user-manual/agents/query-configuration.html',
+    '4.7': '/user-manual/agent/agent-management/query-configuration.html',
+  },
+  {
+    'target': ['4.6=>4.7', '4.7=>4.6'],
+    '4.6': '/user-manual/agents/remote-upgrading/agent-upgrade-module.html',
+    '4.7': '/user-manual/agent/agent-management/remote-upgrading/agent-upgrade-module.html',
+  },
+  {
+    'target': ['4.6=>4.7', '4.7=>4.6'],
+    '4.6': '/user-manual/agents/remote-upgrading/create-custom-wpk/create-wpk-key.html',
+    '4.7': '/user-manual/agent/agent-management/remote-upgrading/create-custom-wpk/create-wpk-key.html',
+  },
+  {
+    'target': ['4.6=>4.7', '4.7=>4.6'],
+    '4.6': '/user-manual/agents/remote-upgrading/create-custom-wpk/generate-wpk-package-manually.html',
+    '4.7': '/user-manual/agent/agent-management/remote-upgrading/create-custom-wpk/generate-wpk-package-manually.html',
+  },
+  {
+    'target': ['4.6=>4.7', '4.7=>4.6'],
+    '4.6': '/user-manual/agents/remote-upgrading/custom-repository.html',
+    '4.7': '/user-manual/agent/agent-management/remote-upgrading/custom-repository.html',
+  },
+  {
+    'target': ['4.6=>4.7', '4.7=>4.6'],
+    '4.6': '/user-manual/agents/remote-upgrading/index.html',
+    '4.7': '/user-manual/agent/agent-management/remote-upgrading/index.html',
+  },
+  {
+    'target': ['4.6=>4.7', '4.7=>4.6'],
+    '4.6': '/user-manual/agents/remote-upgrading/install-custom-wpk.html',
+    '4.7': '/user-manual/agent/agent-management/remote-upgrading/install-custom-wpk.html',
+  },
+  {
+    'target': ['4.6=>4.7', '4.7=>4.6'],
+    '4.6': '/user-manual/agent/agent-management/remote-upgrading/upgrading-agent.html',
+    '4.7': '/user-manual/agent/agent-management/remote-upgrading/upgrading-agent.html',
+  },
+  {
+    'target': ['4.6=>4.7', '4.7=>4.6'],
+    '4.6': '/user-manual/agents/remote-upgrading/wpk-list.html',
+    '4.7': '/user-manual/agent/agent-management/remote-upgrading/wpk-list.html',
+  },
+  {
+    'target': ['4.6=>4.7', '4.7=>4.6'],
+    '4.6': '/user-manual/agents/remove-agents/index.html',
+    '4.7': '/user-manual/agent/agent-management/remove-agents/index.html',
+  },
+  {
+    'target': ['4.6=>4.7', '4.7=>4.6'],
+    '4.6': '/user-manual/agents/remove-agents/remove.html',
+    '4.7': '/user-manual/agent/agent-management/remove-agents/remove.html',
+  },
+  {
+    'target': ['4.6=>4.7', '4.7=>4.6'],
+    '4.6': '/user-manual/agents/remove-agents/restful-api-remove.html',
+    '4.7': '/user-manual/agent/agent-management/remove-agents/restful-api-remove.html',
+  },
+  {
+    'target': ['4.6=>4.7', '4.7=>4.6'],
+    '4.6': '/user-manual/deployment-variables/deployment-variables-aix.html',
+    '4.7': '/user-manual/agent/deployment-variables/deployment-variables-aix.html',
+  },
+  {
+    'target': ['4.6=>4.7', '4.7=>4.6'],
+    '4.6': '/user-manual/deployment-variables/deployment-variables-linux.html',
+    '4.7': '/user-manual/agent/deployment-variables/deployment-variables-linux.html',
+  },
+  {
+    'target': ['4.6=>4.7', '4.7=>4.6'],
+    '4.6': '/user-manual/deployment-variables/deployment-variables-macos.html',
+    '4.7': '/user-manual/agent/deployment-variables/deployment-variables-macos.html',
+  },
+  {
+    'target': ['4.6=>4.7', '4.7=>4.6'],
+    '4.6': '/user-manual/deployment-variables/deployment-variables-windows.html',
+    '4.7': '/user-manual/agent/deployment-variables/deployment-variables-windows.html',
+  },
+  {
+    'target': ['4.6=>4.7', '4.7=>4.6'],
+    '4.6': '/user-manual/deployment-variables/deployment-variables.html',
+    '4.7': '/user-manual/agent/deployment-variables/deployment-variables.html',
+  },
+  {
+    'target': ['4.6=>4.7', '4.7=>4.6'],
+    '4.6': '/user-manual/api/examples.html',
+    '4.7': '/user-manual/api/getting-started.html#usage-in-scripts',
+  },
+  {
+    'target': ['4.6=>4.7', '4.7=>4.6'],
+    '4.6': '/user-manual/configuring-cluster/advanced-settings.html',
+    '4.7': '/user-manual/manager/configuring-cluster/advanced-settings.html',
+  },
+  {
+    'target': ['4.6=>4.7', '4.7=>4.6'],
+    '4.6': '/user-manual/configuring-cluster/basics.html',
+    '4.7': '/user-manual/manager/configuring-cluster/basics.html',
+  },
+  {
+    'target': ['4.6=>4.7', '4.7=>4.6'],
+    '4.6': '/user-manual/configuring-cluster/cluster-management.html',
+    '4.7': '/user-manual/manager/configuring-cluster/cluster-management.html',
+  },
+  {
+    'target': ['4.6=>4.7', '4.7=>4.6'],
+    '4.6': '/user-manual/configuring-cluster/index.html',
+    '4.7': '/user-manual/manager/configuring-cluster/index.html',
+  },
+  {
+    'target': ['4.6=>4.7', '4.7=>4.6'],
+    '4.6': '/user-manual/ruleset/dynamic-fields.html',
+    '4.7': '/user-manual/ruleset/decoders/dynamic-fields.html',
+  },
+  {
+    'target': ['4.6=>4.7', '4.7=>4.6'],
+    '4.6': '/user-manual/ruleset/json-decoder.html',
+    '4.7': '/user-manual/ruleset/decoders/json-decoder.html',
+  },
+  {
+    'target': ['4.6=>4.7', '4.7=>4.6'],
+    '4.6': '/user-manual/ruleset/ruleset-xml-syntax/sibling-decoders.html',
+    '4.7': '/user-manual/ruleset/decoders/sibling-decoders.html',
+  },
 );
 
 /* *** RELEASE 4.6 ****/
