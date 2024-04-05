@@ -152,6 +152,8 @@ Packages
 - `#2798 <https://github.com/wazuh/wazuh-packages/pull/2798>`_ Add compression for the Wazuh manager due to inclusion of Vulnerability Detection databases.
 - `#2796 <https://github.com/wazuh/wazuh-packages/pull/2796>`_ Simplified the Wazuh dashboard help menu entries.
 - `#2792 <https://github.com/wazuh/wazuh-packages/pull/2792>`_ Improved certificates generation output when using the Wazuh Installation Assistant and the Wazuh Certs Tool.
+- `#2891 <https://github.com/wazuh/wazuh-packages/pull/2891>`_ Skipped certificate validation for CentOS 5 package generation.
+- `#2890 <https://github.com/wazuh/wazuh-packages/pull/2890>`_ Updated the file permissions of vulnerability detection-related directories.
 
 Resolved issues
 ---------------
