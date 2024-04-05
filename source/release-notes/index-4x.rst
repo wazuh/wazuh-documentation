@@ -67,8 +67,6 @@ Wazuh version                                  Release date
    .. toctree::
 
       4.9.0 Release notes <release-4-9-0>
-      4.8.2 Release notes <release-4-8-2>
-      4.8.1 Release notes <release-4-8-1>
       4.8.0 Release notes <release-4-8-0>
       4.7.3 Release notes <release-4-7-3>
       4.7.2 Release notes <release-4-7-2>
