@@ -24,28 +24,6 @@ All notable changes to this project will be documented in this file.
 
 - Removed the ``logs.level`` app setting and the references to the plugin log files and *App logs* application. ([#6810](https://github.com/wazuh/wazuh-documentation/pull/6810))
 
-## [v4.8.2]
-
-### Added
-
-- Added considerations for max_size API options. ([#7063](https://github.com/wazuh/wazuh-documentation/pull/7063))
-
-### Fixed
-
-- Fixed Puppet deployment config steps. ([#7120](https://github.com/wazuh/wazuh-documentation/pull/7120))
-
-## [v4.8.1]
-
-### Added
-
-- Added reference to AWS Cloudtrail policies in Monitoring AWS infrastructure PoC guide. ([#6785](https://github.com/wazuh/wazuh-documentation/pull/6785))
-- Added ``procps`` as Wazuh manager and Wazuh agent source install dependency ([#7003](https://github.com/wazuh/wazuh-documentation/pull/7003))
-
-### Changed
-
-- Updated ``SQLAlchemy`` and ``urllib3`` in dependencies Azure cloud security section. ([#6842](https://github.com/wazuh/wazuh-documentation/pull/6842))
-- Changed all references to HP-UX package to tar.gz. ([#7107](https://github.com/wazuh/wazuh-documentation/pull/7107))
-
 ## [v4.8.0]
 
 ### Added
