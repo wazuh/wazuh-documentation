@@ -109,7 +109,7 @@ The **Rules** module on the Wazuh dashboard presents both default and custom rul
    :align: center
    :width: 80%
 
-Wazuh allows you to customize and :doc:`create your own rules and decoders </user-manual/ruleset/custom>`, tailored to your specific environment and threat landscape. This enables you to fine-tune detection, address unique requirements, and minimize blind spots.
+Wazuh allows you to customize and :doc:`create your own rules and decoders </user-manual/ruleset/index>`, tailored to your specific environment and threat landscape. This enables you to fine-tune detection, address unique requirements, and minimize blind spots.
 
 Wazuh decoders play a vital role in normalizing and parsing diverse log formats and data sources. They ensure that collected information is presented in a standardized manner, facilitating effective analysis and correlation of data from various sources.
 
