@@ -76,6 +76,7 @@ removedUrls['4.8'] = [
   '/user-manual/capabilities/vulnerability-detection/cpe-helper.html',
   '/user-manual/capabilities/vulnerability-detection/querying-the-vulnerability-database.html',
   '/user-manual/capabilities/vulnerability-detection/scan-types.html',
+  '/user-manual/capabilities/vulnerability-detection/allow-os.html'
 ];
 
 /* Redirections from 4.7 to 4.8  */
