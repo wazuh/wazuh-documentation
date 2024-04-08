@@ -40,15 +40,19 @@ Wazuh dashboard
 ^^^^^^^^^^^^^^^
 
 - `#6145 <https://github.com/wazuh/wazuh-dashboard-plugins/pull/6145>`__ Added AngularJS dependencies.
-- `#6120 <https://github.com/wazuh/wazuh-dashboard-plugins/issues/6120>`__ Removed embedded discover component. `#6235 <https://github.com/wazuh/wazuh-dashboard-plugins/pull/6235>`__ `#6254 <https://github.com/wazuh/wazuh-dashboard-plugins/pull/6254>`__ `#6285 <https://github.com/wazuh/wazuh-dashboard-plugins/pull/6285>`__ `#6288 <https://github.com/wazuh/wazuh-dashboard-plugins/pull/6288>`__ `#6286 <https://github.com/wazuh/wazuh-dashboard-plugins/pull/6286>`__ `#6459 <https://github.com/wazuh/wazuh-dashboard-plugins/pull/6459>`__ `#6438 <https://github.com/wazuh/wazuh-dashboard-plugins/pull/6438>`__
+- `#6120 <https://github.com/wazuh/wazuh-dashboard-plugins/issues/6120>`__ Removed embedded discover component. `#6235 <https://github.com/wazuh/wazuh-dashboard-plugins/pull/6235>`__ `#6254 <https://github.com/wazuh/wazuh-dashboard-plugins/pull/6254>`__ `#6285 <https://github.com/wazuh/wazuh-dashboard-plugins/pull/6285>`__ `#6288 <https://github.com/wazuh/wazuh-dashboard-plugins/pull/6288>`__ `#6286 <https://github.com/wazuh/wazuh-dashboard-plugins/pull/6286>`__ `#6459 <https://github.com/wazuh/wazuh-dashboard-plugins/pull/6459>`__ `#6438 <https://github.com/wazuh/wazuh-dashboard-plugins/pull/6438>`__ `#6434 <https://github.com/wazuh/wazuh-dashboard-plugins/pull/6434>`__
 - `#6227 <https://github.com/wazuh/wazuh-dashboard-plugins/pull/6227>`__ Added support for a new index for the FIM module.
 - `#6268 <https://github.com/wazuh/wazuh-dashboard-plugins/pull/6268>`__ Refactored the **Endpoints Summary** charts.
 - `#6250 <https://github.com/wazuh/wazuh-dashboard-plugins/pull/6250>`__ Added agent groups edition to **Endpoints Summary**. `#6274 <https://github.com/wazuh/wazuh-dashboard-plugins/pull/6274>`__
-- `#6476 <https://github.com/wazuh/wazuh-dashboard-plugins/pull/6476>`__ Added the **Upgrade** agent action to **Endpoints Summary**. `#6501 <https://github.com/wazuh/wazuh-dashboard-plugins/pull/6501>`__
+- `#6476 <https://github.com/wazuh/wazuh-dashboard-plugins/pull/6476>`__ Added a filter to select outdated agents and the **Upgrade** agent action to **Endpoints Summary**. `#6501 <https://github.com/wazuh/wazuh-dashboard-plugins/pull/6501>`__ `#6529 <https://github.com/wazuh/wazuh-dashboard-plugins/pull/6529>`__
 - `#6337 <https://github.com/wazuh/wazuh-dashboard-plugins/pull/6337>`__ Changed the way the configuration is defined and stored.
 - `#6337 <https://github.com/wazuh/wazuh-dashboard-plugins/pull/6337>`__ Added a migration task to setup the configuration using a configuration file.
 - `#6337 <https://github.com/wazuh/wazuh-dashboard-plugins/pull/6337>`__ Added the ability to manage the API hosts from the Server APIs. `#6519 <https://github.com/wazuh/wazuh-dashboard-plugins/pull/6519>`__
 - `#6337 <https://github.com/wazuh/wazuh-dashboard-plugins/pull/6337>`__ Moved the content of the **API is down** and **Check connection** views to the **Server APIs** view.
+- `#6545 <https://github.com/wazuh/wazuh-dashboard-plugins/pull/6545>`__ Added macOS log collection tab.
+- `#6481 <https://github.com/wazuh/wazuh-dashboard-plugins/pull/6481>`__ Removed the ``GET /api/timestamp`` API endpoint.
+- `#6481 <https://github.com/wazuh/wazuh-dashboard-plugins/pull/6481>`__ Removed the ``PUT /api/update-hostname/{id}`` API endpoint.
+- `#6481 <https://github.com/wazuh/wazuh-dashboard-plugins/pull/6481>`__ Removed the ``DELETE /hosts/remove-orphan-entries`` API endpoint.
 
 Resolved issues
 ---------------
@@ -71,7 +75,23 @@ Wazuh agent
 Reference                                                          Description
 ==============================================================     =============
 `#19146 <https://github.com/wazuh/wazuh/pull/19146>`__             Fixed command monitoring on Windows to support UTF-8 characters.
+`#21455 <https://github.com/wazuh/wazuh/pull/21455>`__             Fixed an error in Windows agents preventing whodata policies loading.
+`#21595 <https://github.com/wazuh/wazuh/pull/21595>`__             Fixed an unexpected error where the manager received messages with a reported size not corresponding to the bytes received.
+`#21729 <https://github.com/wazuh/wazuh/pull/21729>`__             Prevented backup failures during WPK upgrades. A dependency check for the tar package was added.
+`#22210 <https://github.com/wazuh/wazuh/pull/22210>`__             Fixed a crash of the agent due to a library incompatibility.
+`#21728 <https://github.com/wazuh/wazuh/pull/21728>`__             Fixed an error of the Osquery integration on Windows that prevented loading ``osquery.conf``.
+`#22588 <https://github.com/wazuh/wazuh/pull/22588>`__             Fixed a crash in the agent Rootcheck component when using ``<ignore>``.
+`#20425 <https://github.com/wazuh/wazuh/pull/20425>`__             Fixed the agent not deleting the ``wazuh-agent.state`` file in Windows when stopped.
 ==============================================================     =============
+
+Ruleset
+^^^^^^^
+
+==============================================================    =============
+Reference                                                         Description
+==============================================================    =============
+`#22178 <https://github.com/wazuh/wazuh/pull/22178>`__            Added parsing of the optional ``node=`` log heading field to Audit decoders.
+==============================================================    =============
 
 Other
 ^^^^^
