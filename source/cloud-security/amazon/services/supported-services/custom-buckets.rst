@@ -1,7 +1,7 @@
 .. Copyright (C) 2015, Wazuh, Inc.
 
 .. meta::
-  :description: Learn how to configure Amazon Custom Logs Buckets fetching.
+   :description: Learn how to configure Amazon Custom Logs Buckets fetching.
 
 .. _amazon_custom_logs:
 
@@ -22,6 +22,8 @@ To set up the Wazuh integration for Custom Logs Buckets, you need to do the foll
 
    #. Create an AWS SQS Queue.
    #. Configure an S3 bucket. For every object creation event, the bucket sends notifications to the queue.
+
+.. _amazon_custom_logs_configuration:
 
 AWS configuration
 -----------------
@@ -114,7 +116,7 @@ Queue
 ~~~~~
 
 -  ``<sqs_name>``: The name of the queue.
--  Optional – ``<service_endpoint>``: The AWS S3 endpoint URL for data downloading from the bucket. Check :ref:`using_non-default_aws_endpoints` for more information about VPC and FIPS endpoints.
+-  ``<service_endpoint>`` – *Optional*: The AWS S3 endpoint URL for data downloading from the bucket. Check :ref:`using_non-default_aws_endpoints` for more information about VPC and FIPS endpoints.
 
 Authentication
 ~~~~~~~~~~~~~~
@@ -128,8 +130,8 @@ These authentication methods require using the ``/root/.aws/credentials`` file t
 
 The available authentication configuration parameters are the following:
 
--  ``<aws_profile>``: A valid profile name from a Shared Credential File or AWS Config File with the permission to read logs from the bucket.
+-  ``<aws_profile>``: A valid profile name from a :ref:`Shared Credential File <aws_profile>` or `AWS Config File <https://boto3.amazonaws.com/v1/documentation/api/latest/guide/configuration.html#using-a-configuration-file>`__ with `permission to read logs from the bucket <https://docs.aws.amazon.com/AmazonS3/latest/userguide/using-with-s3-actions.html>`__.
 -  ``<iam_role_arn>``: ARN for the corresponding IAM role to assume.
--  Optional – ``<iam_role_duration>``: The session duration in seconds.
--  Optional – ``<sts_endpoint>``: The URL of the VPC endpoint of the AWS Security Token Service.
+-  ``<iam_role_duration>`` – *Optional*: The session duration in seconds.
+-  ``<sts_endpoint>`` – *Optional*: The URL of the VPC endpoint of the AWS Security Token Service.
 
