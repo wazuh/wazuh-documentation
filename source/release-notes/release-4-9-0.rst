@@ -44,15 +44,15 @@ Wazuh dashboard
 - `#6227 <https://github.com/wazuh/wazuh-dashboard-plugins/pull/6227>`__ Added support for a new index for the FIM module.
 - `#6268 <https://github.com/wazuh/wazuh-dashboard-plugins/pull/6268>`__ Refactored the **Endpoints Summary** charts.
 - `#6250 <https://github.com/wazuh/wazuh-dashboard-plugins/pull/6250>`__ Added agent groups edition to **Endpoints Summary**. `#6274 <https://github.com/wazuh/wazuh-dashboard-plugins/pull/6274>`__
-- `#6476 <https://github.com/wazuh/wazuh-dashboard-plugins/pull/6476>`__ Added filter for outdated agents and the **Upgrade** agent action to **Endpoints Summary**. `#6501 <https://github.com/wazuh/wazuh-dashboard-plugins/pull/6501>`__ `#6529 <https://github.com/wazuh/wazuh-dashboard-plugins/pull/6529>`__
+- `#6476 <https://github.com/wazuh/wazuh-dashboard-plugins/pull/6476>`__ Added a filter to select outdated agents and the **Upgrade** agent action to **Endpoints Summary**. `#6501 <https://github.com/wazuh/wazuh-dashboard-plugins/pull/6501>`__ `#6529 <https://github.com/wazuh/wazuh-dashboard-plugins/pull/6529>`__
 - `#6337 <https://github.com/wazuh/wazuh-dashboard-plugins/pull/6337>`__ Changed the way the configuration is defined and stored.
 - `#6337 <https://github.com/wazuh/wazuh-dashboard-plugins/pull/6337>`__ Added a migration task to setup the configuration using a configuration file.
 - `#6337 <https://github.com/wazuh/wazuh-dashboard-plugins/pull/6337>`__ Added the ability to manage the API hosts from the Server APIs. `#6519 <https://github.com/wazuh/wazuh-dashboard-plugins/pull/6519>`__
 - `#6337 <https://github.com/wazuh/wazuh-dashboard-plugins/pull/6337>`__ Moved the content of the **API is down** and **Check connection** views to the **Server APIs** view.
 - `#6545 <https://github.com/wazuh/wazuh-dashboard-plugins/pull/6545>`__ Added macOS log collection tab.
-- `#6481 <https://github.com/wazuh/wazuh-dashboard-plugins/pull/6481>`__ Removed the API endpoint ``GET /api/timestamp``.
-- `#6481 <https://github.com/wazuh/wazuh-dashboard-plugins/pull/6481>`__ Removed the API endpoint ``PUT /api/update-hostname/{id}``.
-- `#6481 <https://github.com/wazuh/wazuh-dashboard-plugins/pull/6481>`__ Removed the API endpoint ``DELETE /hosts/remove-orphan-entries``.
+- `#6481 <https://github.com/wazuh/wazuh-dashboard-plugins/pull/6481>`__ Removed the ``GET /api/timestamp`` API endpoint.
+- `#6481 <https://github.com/wazuh/wazuh-dashboard-plugins/pull/6481>`__ Removed the ``PUT /api/update-hostname/{id}`` API endpoint.
+- `#6481 <https://github.com/wazuh/wazuh-dashboard-plugins/pull/6481>`__ Removed the ``DELETE /hosts/remove-orphan-entries`` API endpoint.
 
 Resolved issues
 ---------------
@@ -75,7 +75,7 @@ Wazuh agent
 Reference                                                          Description
 ==============================================================     =============
 `#19146 <https://github.com/wazuh/wazuh/pull/19146>`__             Fixed command monitoring on Windows to support UTF-8 characters.
-`#21455 <https://github.com/wazuh/wazuh/pull/21455>`__             Fixed an error in Windows agents preventing loading whodata policies.
+`#21455 <https://github.com/wazuh/wazuh/pull/21455>`__             Fixed an error in Windows agents preventing whodata policies loading.
 `#21595 <https://github.com/wazuh/wazuh/pull/21595>`__             Fixed an unexpected error where the manager received messages with a reported size not corresponding to the bytes received.
 `#21729 <https://github.com/wazuh/wazuh/pull/21729>`__             Prevented backup failures during WPK upgrades. A dependency check for the tar package was added.
 `#22210 <https://github.com/wazuh/wazuh/pull/22210>`__             Fixed a crash of the agent due to a library incompatibility.
