@@ -100,6 +100,7 @@ Below, we show how to use the Activity API to list available content and retriev
    #. Use the PowerShell script below to generate an access token. Create a file ``AccessToken.ps1``, then copy and paste the contents below into the file created. Replace ``<YOUR_APPLICATION_ID>``, ``<YOUR_CLIENT_SECRET>``, and ``<YOUR_TENANT_ID>`` with the correct values collected during the application registration:
 
       .. code-block:: pwsh-session
+         :emphasize-lines: 1-3
 
          $clientId = "<YOUR_APPLICATION_ID>"
          $clientSecret = "<YOUR_CLIENT_SECRET>"
