@@ -317,7 +317,7 @@ redirections.push(
     '4.7': '/cloud-security/gcp/supported-services/pubsub.html#configuring-google-cloud-pub-sub',
   },
   {
-    'target': ['4.7=>4.6'],
+    'target': ['4.6=>4.7', '4.7=>4.6'],
     '4.6': '/user-manual/certificates.html',
     '4.7': '/user-manual/manager/certificates.html',
   },
