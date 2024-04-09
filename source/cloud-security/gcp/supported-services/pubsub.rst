@@ -165,3 +165,9 @@ Once the configuration is complete, you can visualize the logs on the Google Clo
    :alt: Visualize logs in the Google Cloud module
    :align: center
    :width: 80%
+
+.. toctree::
+   :maxdepth: 1
+   :hidden:
+
+   use-cases
