@@ -3,8 +3,6 @@
 .. meta::
   :description:
 
-.. _reference_ossec_indexer:
-
 indexer
 =======
 
