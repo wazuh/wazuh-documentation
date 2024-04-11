@@ -35,11 +35,11 @@ From Linux/Unix and macOS
    
         eyJhbGciOiJFUzUxMiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJ3YXp1aCIsImF1ZCI6IldhenVoIEFQSSBSRVNUIiwibmJmIjoxNjQzMDExMjQ0LCJleHAiOjE2NDMwMTIxNDQsInN1YiI6IndhenVoIiwicnVuX2FzIjpmYWxzZSwicmJhY19yb2xlcyI6WzFdLCJyYmFjX21vZGUiOiJ3aGl0ZSJ9.Ad6zOZvx0BEV7K0J6s3pIXAXTWB-zdVfxaX2fotLfZMQkiYPMkwDaQHUFiOInsWJ_7KZV3y2BbhEs9-kBqlJAMvMAD0NDBPhEQ2qBd_iutZ7QWZECd6eYfIP83xGqH9iqS7uMI6fXOKr3w4aFV13Q6qsHSUQ1A-1LgDnnDGGaqF5ITYo
 
-#. Request the key and agent ID. Replace ``<agent_name>`` with the desired agent name.
+#. Request the key and agent ID. Replace ``<AGENT_NAME>`` with the desired agent name.
 
    .. code-block:: console
 
-     # curl -k -X POST -d '{"name":"<agent_name>"}' "https://<MANAGER_IP>:55000/agents?pretty=true" -H "Content-Type:application/json" -H "Authorization: Bearer $TOKEN" 
+     # curl -k -X POST -d '{"name":"<AGENT_NAME>"}' "https://<MANAGER_IP>:55000/agents?pretty=true" -H "Content-Type:application/json" -H "Authorization: Bearer $TOKEN" 
 
    The output with the key looks like this:
 
@@ -111,17 +111,17 @@ The following steps serve as a guide on how to send agent enrollment requests fr
 
 #. Create environment variables to hold the generated token and the agent variable.
 
-    - Replace ``<token_generated>`` with the token generated in step 2.
+    - Replace ``<TOKEN_GENERATED>`` with the token generated in step 2.
 
       .. code-block:: console
  
-        # $TOKEN = “<token_generated>”  
+        # $TOKEN = “<TOKEN_GENERATED>”  
 
-    - Replace ``<agent_name>`` with the desired agent name.
+    - Replace ``<AGENT_NAME>`` with the desired agent name.
 
       .. code-block:: console
 
-        # $AgentName = @{"name"="<agent_name>"} | ConvertTo-Json
+        # $AgentName = @{"name"="<AGENT_NAME>"} | ConvertTo-Json
    
    These environment variables will be used in subsequent requests made to the manager.
 

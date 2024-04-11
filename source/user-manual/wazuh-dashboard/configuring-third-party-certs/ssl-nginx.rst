@@ -150,7 +150,7 @@ Configure the proxy and the certificates
          server_name <YOUR_DOMAIN_NAME>;
 
          location / {
-            proxy_pass https://<WAZUH_DASHBOARD_IP>:<PORT_NUMBER>;
+            proxy_pass https://<WAZUH_DASHBOARD_IP_ADDRESS>:<PORT_NUMBER>;
             proxy_set_header Host $host;
          }
       }
@@ -158,7 +158,7 @@ Configure the proxy and the certificates
    Replace the following:
 
    - ``<YOUR_DOMAIN_NAME>`` with your domain name.
-   - ``<WAZUH_DASHBOARD_IP>`` with your Wazuh dashboard IP address.
+   - ``<WAZUH_DASHBOARD_IP_ADDRESS>`` with your Wazuh dashboard IP address.
    - ``<PORT_NUMBER>`` with your new port number.
 
 #. Restart the Wazuh dashboard and the Wazuh server
@@ -184,7 +184,7 @@ Configure the proxy and the certificates
          server_name <YOUR_DOMAIN_NAME>;
 
          location / {
-            proxy_pass https://<WAZUH_DASHBOARD_IP>:<PORT_NUMBER>;
+            proxy_pass https://<WAZUH_DASHBOARD_IP_ADDRESS>:<PORT_NUMBER>;
             proxy_set_header Host $host;
          }
 

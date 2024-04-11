@@ -51,11 +51,11 @@ Wazuh email alerts does not support SMTP servers with authentication such as Gma
             smtp_use_tls = yes
             smtpd_relay_restrictions = permit_mynetworks, permit_sasl_authenticated, defer_unauth_destination
 
-#. Set the sender email address and password. Replace *USERNAME* and *PASSWORD* with your own data.
+#. Set the sender email address and password. Replace ``<USERNAME>`` and ``<PASSWORD>`` with your own data.
 
    .. code-block:: console
 
-      # echo [smtp.gmail.com]:587 USERNAME@gmail.com:PASSWORD > /etc/postfix/sasl_passwd
+      # echo [smtp.gmail.com]:587 <USERNAME>@gmail.com:<PASSWORD> > /etc/postfix/sasl_passwd
       # postmap /etc/postfix/sasl_passwd
       # chmod 400 /etc/postfix/sasl_passwd
 
@@ -100,7 +100,7 @@ Wazuh email alerts does not support SMTP servers with authentication such as Gma
       <global>
         <email_notification>yes</email_notification>
         <smtp_server>localhost</smtp_server>
-        <email_from>USERNAME@gmail.com</email_from>
+        <email_from><USERNAME>@gmail.com</email_from>
         <email_to>you@example.com</email_to>
       </global>
 
