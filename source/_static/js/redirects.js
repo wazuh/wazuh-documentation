@@ -616,6 +616,36 @@ redirections.push(
     '4.6': '/user-manual/ruleset/ruleset-xml-syntax/sibling-decoders.html',
     '4.7': '/user-manual/ruleset/decoders/sibling-decoders.html',
   },
+  {
+    'target': ['4.6=>4.7', '4.7=>4.6'],
+    '4.6': '/user-manual/capabilities/osquery.html',
+    '4.7': '/user-manual/capabilities/malware-detection/osquery.html',
+  },
+  {
+    'target': ['4.6=>4.7', '4.7=>4.6'],
+    '4.6': '/cloud-service/cold-storage/index.html',
+    '4.7': '/cloud-service/archive-data/index.html',
+  },
+  {
+    'target': ['4.6=>4.7', '4.7=>4.6'],
+    '4.6': '/cloud-service/cold-storage/access.html',
+    '4.7': '/cloud-service/archive-data/access.html',
+  },
+  {
+    'target': ['4.6=>4.7', '4.7=>4.6'],
+    '4.6': '/cloud-service/cold-storage/configuration.html',
+    '4.7': '/cloud-service/archive-data/configuration.html',
+  },
+  {
+    'target': ['4.6=>4.7', '4.7=>4.6'],
+    '4.6': '/cloud-service/cold-storage/filename-format.html',
+    '4.7': '/cloud-service/archive-data/filename-format.html',
+  },
+  {
+    'target': ['4.6=>4.7', '4.7=>4.6'],
+    '4.6': '/cloud-service/getting-started/register-agents.html',
+    '4.7': '/cloud-service/getting-started/enroll-agents.html',
+  },
 );
 
 /* *** RELEASE 4.6 ****/
@@ -627,6 +657,26 @@ redirections.push(
     'target': ['4.5=>4.6'],
     '4.5': '/user-manual/uninstall/central-components.html',
     '4.6': '/user-manual/uninstall/index.html',
+  },
+  {
+    'target': ['4.5=>4.6', '4.6=>4.5'],
+    '4.5': '/cloud-security/azure/activity-services/active-directory/index.html',
+    '4.6': '/cloud-security/azure/activity-services/entra/index.html',
+  },
+  {
+    'target': ['4.5=>4.6', '4.6=>4.5'],
+    '4.5': '/cloud-security/azure/activity-services/active-directory/graph.html',
+    '4.6': '/cloud-security/azure/activity-services/entra/graph.html',
+  },
+  {
+    'target': ['4.5=>4.6', '4.6=>4.5'],
+    '4.5': '/user-manual/user-administration/single-sign-on/administrator/azure-active-directory.html',
+    '4.6': '/user-manual/user-administration/single-sign-on/administrator/microsoft-entra-id.html',
+  },
+  {
+    'target': ['4.5=>4.6', '4.6=>4.5'],
+    '4.5': '/user-manual/user-administration/single-sign-on/read-only/azure-active-directory.html',
+    '4.6': '/user-manual/user-administration/single-sign-on/read-only/microsoft-entra-id.html',
   },
 );
 
