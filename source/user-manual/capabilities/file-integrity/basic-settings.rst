@@ -21,7 +21,7 @@ The ``realtime`` attribute enables real-time/continuous monitoring of directorie
 
 To monitor files in real time, configure the FIM module with the ``realtime`` attribute of the :ref:`directories <reference_ossec_syscheck_directories>` option. The allowed values for the ``realtime`` attribute are ``yes`` and ``no``, and it only works with directories, not individual files. Real-time change detection is paused during scheduled FIM module scans and reactivates as soon as these scans are complete.
 
-Below, you can see how to configure the FIM module to monitor a directory in real time. Replace ``FILEPATH/OF/MONITORED/DIRECTORY`` with your own filepath. 
+Below, you can see how to configure the FIM module to monitor a directory in real time. Replace ``＜FILEPATH/OF/MONITORED/DIRECTORY＞`` with your own filepath. 
 
 .. note::
 
@@ -36,7 +36,7 @@ Below, you can see how to configure the FIM module to monitor a directory in rea
       :emphasize-lines: 2
       
          <syscheck>
-            <directories realtime="yes">FILEPATH/OF/MONITORED/DIRECTORY</directories>
+            <directories realtime="yes">＜FILEPATH/OF/MONITORED/DIRECTORY＞</directories>
          </syscheck>
 
 
@@ -94,7 +94,7 @@ While the following configuration disables recording of all attributes including
    
    <directories check_mtime="yes" check_all="no">/etc</directories>
 
-You can see below an example configuration of how to disable the recording of SHA-1 hash of a monitored file. Replace ``FILEPATH/OF/MONITORED/FILE`` with your own filepath.
+You can see below an example configuration of how to disable the recording of SHA-1 hash of a monitored file. Replace ``＜FILEPATH/OF/MONITORED/FILE＞`` with your own filepath.
 
 #. Add the following settings to the Wazuh agent configuration file:
 
@@ -106,7 +106,7 @@ You can see below an example configuration of how to disable the recording of SH
       :emphasize-lines: 2
 
          <syscheck>
-            <directories check_sha1sum="no">FILEPATH/OF/MONITORED/FILE</directories>
+            <directories check_sha1sum="no">＜FILEPATH/OF/MONITORED/FILE＞</directories>
          </syscheck>
 
 #. Restart the Wazuh agent with administrator privilege to apply any configuration change:
@@ -182,7 +182,7 @@ You must use the ``report_changes`` attribute with caution when you enable this 
 - ``Library/Ossec/queue/diff/local/`` on macOS.
 - ``C:\Program Files (x86)\ossec-agent\queue\diff\local\`` on Windows.
 
-Below, you can see how to configure the FIM module to report file changes. Replace ``FILEPATH/OF/MONITORED/FILE`` with your own filepath.
+Below, you can see how to configure the FIM module to report file changes. Replace ``＜FILEPATH/OF/MONITORED/FILE＞`` with your own filepath.
 
 #. Add the following settings to the Wazuh agent configuration file:
 
@@ -194,7 +194,7 @@ Below, you can see how to configure the FIM module to report file changes. Repla
       :emphasize-lines: 2
 
       <syscheck>
-         <directories check_all="yes" report_changes="yes">FILEPATH/OF/MONITORED/FILE</directories>
+         <directories check_all="yes" report_changes="yes">＜FILEPATH/OF/MONITORED/FILE＞</directories>
       </syscheck>
 
 #. Restart the Wazuh agent with administrator privilege to apply the configuration changes:
@@ -203,7 +203,7 @@ Below, you can see how to configure the FIM module to report file changes. Repla
    - Windows: ``Restart-Service -Name wazuh``
    - macOS: ``/Library/Ossec/bin/wazuh-control restart``
 
-   In the configuration example below, you can see how to use the ``report_changes`` attribute for all files in the ``FILEPATH/OF/MONITORED/DIRECTORY`` directory. You can see how to prevent the FIM module from reporting the exact content changes to the ``FILEPATH/OF/MONITORED/DIRECTORY/private.txt`` file. Replace ``FILEPATH/OF/MONITORED/DIRECTORY`` with your own filepath.
+   In the configuration example below, you can see how to use the ``report_changes`` attribute for all files in the ``＜FILEPATH/OF/MONITORED/DIRECTORY＞`` directory. You can see how to prevent the FIM module from reporting the exact content changes to the ``＜FILEPATH/OF/MONITORED/DIRECTORY＞/private.txt`` file. Replace ``＜FILEPATH/OF/MONITORED/DIRECTORY＞`` with your own filepath.
 
    When using the ``report_changes`` option, you can use the :ref:`nodiff <reference_ossec_syscheck_nodiff>` option to create an exception. This option alerts modifications of the file  but it prevents the Wazuh FIM module from reporting the exact content changed in a text file. Using the nodiff option avoids data leakage that might occur by sending the file content changes through alerts.
 
@@ -217,8 +217,8 @@ Below, you can see how to configure the FIM module to report file changes. Repla
       :emphasize-lines: 2,3
 
       <syscheck>
-         <directories check_all="yes" report_changes="yes">FILEPATH/OF/MONITORED/DIRECTORY</directories>
-         <nodiff>FILEPATH/OF/MONITORED/DIRECTORY/private.txt</nodiff>
+         <directories check_all="yes" report_changes="yes">＜FILEPATH/OF/MONITORED/DIRECTORY＞</directories>
+         <nodiff>＜FILEPATH/OF/MONITORED/DIRECTORY＞/private.txt</nodiff>
       </syscheck>
 
 #. Restart the Wazuh agent with administrator privilege to apply the configuration changes:
@@ -237,7 +237,7 @@ Using the ignore option
 
 You can use the :ref:`ignore <reference_ossec_syscheck_ignore>` option to ignore a path. It allows one entry of either file or directory per line. However, you can use multiple lines to add exclusions for multiple paths. 
 
-In this example, you can see how to configure the FIM module to ignore a filepath. This also ignores the regex match for the file extensions ``.log`` and ``.tmp``. Replace ``FILEPATH/OF/MONITORED/FILE`` with your own filepaths. 
+In this example, you can see how to configure the FIM module to ignore a filepath. This also ignores the regex match for the file extensions ``.log`` and ``.tmp``. Replace ``＜FILEPATH/OF/MONITORED/FILE＞`` with your own filepaths. 
 
 #. Add the following settings to the Wazuh agent configuration file:
 
@@ -249,7 +249,7 @@ In this example, you can see how to configure the FIM module to ignore a filepat
       :emphasize-lines: 2
 
       <syscheck>
-         <ignore>FILEPATH/OF/MONITORED/FILE</ignore>
+         <ignore>＜FILEPATH/OF/MONITORED/FILE＞</ignore>
          <ignore type="sregex">.log$|.tmp$</ignore>
       </syscheck>
 
