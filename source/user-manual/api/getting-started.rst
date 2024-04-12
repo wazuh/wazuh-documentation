@@ -41,13 +41,13 @@ Logging into the Wazuh API
 
 Wazuh API endpoints require authentication in order to be used. Therefore, all calls must include a JSON Web Token. JWT is an open standard (RFC 7519) that defines a compact and self-contained way for securely transmitting information between parties as a JSON object. Follow the steps below to log in using :api-ref:`POST /security/user/authenticate <operation/api.controllers.security_controller.login_user>` and obtain a token in order to run any endpoint:
 
-#. Use the cURL command to log in. The Wazuh API will provide a JWT token upon success. Replace <user> and <password> with yours. By default, the user is ``wazuh``, and the password is ``wazuh``. If ``SSL`` (HTTPS) is enabled in the API and it is using the default **self-signed certificates**, it will be necessary to add the parameter ``-k``. Use the ``raw`` option to get the token in a plain text format. Querying the login endpoint with ``raw=true`` is recommended when using cURL commands as tokens could be long and difficult to handle. Exporting the token to an environment variable will ease the use of API requests after login.
+#. Use the cURL command to log in. The Wazuh API will provide a JWT token upon success. Replace <USER> and <PASSWORD> with yours. By default, the user is ``wazuh``, and the password is ``wazuh``. If ``SSL`` (HTTPS) is enabled in the API and it is using the default **self-signed certificates**, it will be necessary to add the parameter ``-k``. Use the ``raw`` option to get the token in a plain text format. Querying the login endpoint with ``raw=true`` is recommended when using cURL commands as tokens could be long and difficult to handle. Exporting the token to an environment variable will ease the use of API requests after login.
 
     Export the token to an environment variable to use it in authorization header of future API requests:
 
     .. code-block:: console
 
-        # TOKEN=$(curl -u <user>:<password> -k -X POST "https://localhost:55000/security/user/authenticate?raw=true")
+        # TOKEN=$(curl -u <USER>:<PASSWORD> -k -X POST "https://localhost:55000/security/user/authenticate?raw=true")
 
     By default (``raw=false``), the token is obtained in an ``application/json`` format. If using this option, copy the token found in ``<YOUR_JWT_TOKEN>`` without the quotes.
 
@@ -84,7 +84,7 @@ Wazuh API endpoints require authentication in order to be used. Therefore, all c
         }
 
 
-Once logged in, it is possible to run any API endpoint following the structure below. Please, do not forget to replace <endpoint> with the string corresponding to the chosen endpoint. If the environment variable is not going to be used, replace $TOKEN with the JWT token obtained.
+Once logged in, it is possible to run any API endpoint following the structure below. Please, do not forget to replace <ENDPOINT> with the string corresponding to the chosen endpoint. If the environment variable is not going to be used, replace $TOKEN with the JWT token obtained.
 
 .. code-block:: console
 

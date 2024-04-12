@@ -200,12 +200,12 @@ Follow the instructions below to change the passwords for all the Wazuh indexer 
       INFO: The password for user snapshotrestore is Mb2EHw8SIc1d.oz.nM?dHiPBGk7s?UZB
       WARNING: Wazuh indexer passwords changed. Remember to update the password in the Wazuh dashboard and Filebeat nodes if necessary, and restart the services.
 
-#. On your `Wazuh server master node`, download the Wazuh passwords tool and use it to change the passwords of the Wazuh API users. Replace ``<wazuh-password>`` with the *wazuh* user password. 
+#. On your `Wazuh server master node`, download the Wazuh passwords tool and use it to change the passwords of the Wazuh API users. Replace ``<WAZUH_PASSWORD>`` with the *wazuh* user password. 
 
    .. code-block:: console
   
       # curl -sO https://packages.wazuh.com/|WAZUH_CURRENT_MINOR|/wazuh-passwords-tool.sh
-      # bash wazuh-passwords-tool.sh --change-all --admin-user wazuh --admin-password <wazuh-password>
+      # bash wazuh-passwords-tool.sh --change-all --admin-user wazuh --admin-password <WAZUH_PASSWORD>
   
    .. code-block:: console
       :class: output
@@ -213,11 +213,11 @@ Follow the instructions below to change the passwords for all the Wazuh indexer 
       INFO: The password for Wazuh API user wazuh is ivLOfmj7.jL6*7Ev?UJoFjrkGy9t6Je.
       INFO: The password for Wazuh API user wazuh-wui is fL+f?sFRPEv5pYRE559rqy9b6G4Z5pVi
 
-#. On `all your Wazuh server nodes`, run the following command to update the `admin` password in the Filebeat keystore. Replace ``<admin-password>`` with the random password generated in the first step.
+#. On `all your Wazuh server nodes`, run the following command to update the `admin` password in the Filebeat keystore. Replace ``<ADMIN_PASSWORD>`` with the random password generated in the first step.
       
    .. code-block:: console
 
-      # echo <admin-password> | filebeat keystore add password --stdin --force
+      # echo <ADMIN_PASSWORD> | filebeat keystore add password --stdin --force
 
 #. Restart Filebeat to apply the change.
 
@@ -225,11 +225,11 @@ Follow the instructions below to change the passwords for all the Wazuh indexer 
 
    .. note:: Repeat steps 3 and 4 on `every Wazuh server node`.
        
-#. On your `Wazuh dashboard node`, run the following command to update the `kibanaserver` password in the Wazuh dashboard keystore. Replace ``<kibanaserver-password>`` with the random password generated in the first step.
+#. On your `Wazuh dashboard node`, run the following command to update the `kibanaserver` password in the Wazuh dashboard keystore. Replace ``<KIBANASERVER_PASSWORD>`` with the random password generated in the first step.
 
    .. code-block:: console
 
-      # echo <kibanaserver-password> | /usr/share/wazuh-dashboard/bin/opensearch-dashboards-keystore --allow-root add -f --stdin opensearch.password
+      # echo <KIBANASERVER_PASSWORD> | /usr/share/wazuh-dashboard/bin/opensearch-dashboards-keystore --allow-root add -f --stdin opensearch.password
 
 #. Update the ``/usr/share/wazuh-dashboard/data/wazuh/config/wazuh.yml`` configuration file with the new `wazuh-wui` password generated in the second step.
 

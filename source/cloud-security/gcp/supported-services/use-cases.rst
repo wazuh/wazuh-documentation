@@ -211,9 +211,9 @@ Visualizing the events on the Wazuh dashboard
 
 Once you configure the sink, apply the filter below on the Google Cloud module of the Wazuh dashboard to filter for DNS queries logs.
 
-Set the value of ``data.gcp.logName`` field to ``projects/<YOUR-PROJECT-ID>/logs/compute.googleapis.com%2Fdns_queries``.
+Set the value of ``data.gcp.logName`` field to ``projects/<YOUR_PROJECT_ID>/logs/compute.googleapis.com%2Fdns_queries``.
 
-Replace ``<YOUR-PROJECT-ID>`` with your project ID on Google Cloud.
+Replace ``<YOUR_PROJECT_ID>`` with your project ID on Google Cloud.
 
 .. thumbnail:: /images/cloud-security/gcp/filter-dns-query-logs.png
    :title: Filter DNS query logs
@@ -253,9 +253,9 @@ The :ref:`Export logs via sink <export_logs_via_sink>` section explains how to c
 .. code-block:: none
 
    resource.type="gce_subnetwork"
-   log_name="projects/<YOUR-PROJECT-ID>/logs/compute.googleapis.com%2Fvpc_flows"
+   log_name="projects/<YOUR_PROJECT_ID>/logs/compute.googleapis.com%2Fvpc_flows"
 
-Replace ``<YOUR-PROJECT-ID>`` with your project ID on Google Cloud.
+Replace ``<YOUR_PROJECT_ID>`` with your project ID on Google Cloud.
 
 .. thumbnail:: /images/cloud-security/gcp/gcp-create-logs-routing-sink-vpc-flow.png
    :title: Create logs routing sink
@@ -276,7 +276,7 @@ Visualizing the events on Wazuh dashboard
 
 Once you configure the sink, apply the filter below on the Google Cloud module of the Wazuh dashboard to filter for VPC Flow Logs.
 
-Set the value of ``data.gcp.logName`` field to ``projects/<YOUR-PROJECT-ID>/logs/compute.googleapis.com%2Fvpc_flows``. Replace ``<YOUR-PROJECT-ID>`` with your Google Cloud project ID.
+Set the value of ``data.gcp.logName`` field to ``projects/<YOUR_PROJECT_ID>/logs/compute.googleapis.com%2Fvpc_flows``. Replace ``<YOUR_PROJECT_ID>`` with your Google Cloud project ID.
 
 .. thumbnail:: /images/cloud-security/gcp/filter-vpc-flow-logs.png
    :title: Filter VPC flow logs
@@ -316,9 +316,9 @@ The :ref:`Export logs via sink <export_logs_via_sink>` section explains how to c
 .. code-block:: none
 
    (resource.type="gce_subnetwork"
-   log_name="projects/<YOUR-PROJECT-ID>/logs/compute.googleapis.com%2Ffirewall")
+   log_name="projects/<YOUR_PROJECT_ID>/logs/compute.googleapis.com%2Ffirewall")
 
-Replace ``<YOUR-PROJECT-ID>`` with your project ID on Google Cloud.
+Replace ``<YOUR_PROJECT_ID>`` with your project ID on Google Cloud.
 
 .. thumbnail:: /images/cloud-security/gcp/gpc-export-fw-rules.png
    :title: Export firewall rules
@@ -339,7 +339,7 @@ Visualizing the events on the Wazuh dashboard
 
 Once you configure the sink, apply the filter below on the Google Cloud module of the Wazuh dashboard to filter for Firewall Rules logs.
 
-Set the value of ``data.gcp.logName`` field to ``projects/<YOUR-PROJECT-ID>/logs/compute.googleapis.com%2Ffirewall``. Replace ``<YOUR-PROJECT-ID>`` with your own project ID on Google Cloud.
+Set the value of ``data.gcp.logName`` field to ``projects/<YOUR_PROJECT_ID>/logs/compute.googleapis.com%2Ffirewall``. Replace ``<YOUR_PROJECT_ID>`` with your own project ID on Google Cloud.
 
 .. thumbnail:: /images/cloud-security/gcp/filter-fw-logs.png
    :title: Filter firewall logs

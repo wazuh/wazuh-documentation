@@ -60,12 +60,12 @@ Pointing agents to the cluster with a load balancer
                 stream {
                     upstream cluster {
                         hash $remote_addr consistent;
-                        server <WAZUH-MASTER-IP>:1514;
-                        server <WAZUH-WORKER1-IP>:1514;
-                        server <WAZUH-WORKER2-IP>:1514;
+                        server <WAZUH_MASTER_IP_ADDRESS>:1514;
+                        server <WAZUH_WORKER1_IP_ADDRESS>:1514;
+                        server <WAZUH_WORKER2_IP_ADDRESS>:1514;
                     }
                     upstream master {
-                        server <WAZUH-MASTER-IP>:1515;
+                        server <WAZUH_MASTER_IP_ADDRESS>:1515;
                     }
                     server {
                         listen 1514;

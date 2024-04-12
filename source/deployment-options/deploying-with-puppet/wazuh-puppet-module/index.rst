@@ -115,14 +115,14 @@ Install Wazuh agent via Puppet
 
 The agent is configured by installing the ``wazuh::agent`` class.
 
-Here is an example of a manifest ``wazuh-agent.pp`` (please replace  ``MANAGER_IP`` with your manager IP address).
+Here is an example of a manifest ``wazuh-agent.pp`` (please replace  ``<MANAGER_IP_ADDRESS>`` with your manager IP address).
 
   .. code-block:: puppet
 
    node "puppet-agent.com" {
      class { "wazuh::agent":
-       wazuh_register_endpoint => "<MANAGER_IP>",
-       wazuh_reporting_endpoint => "<MANAGER_IP>"
+       wazuh_register_endpoint => "<MANAGER_IP_ADDRESS>",
+       wazuh_reporting_endpoint => "<MANAGER_IP_ADDRESS>"
      }
    }
 

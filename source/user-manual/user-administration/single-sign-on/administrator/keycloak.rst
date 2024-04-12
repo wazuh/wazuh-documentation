@@ -54,7 +54,7 @@ KeyCloak configuration
       - **Canonicalization method**: ``EXCLUSIVE``
       - **Front channel logout**: ``ON``
 
-      Replace the ``WAZUH_DASHBOARD_URL`` field with the corresponding URL of your Wazuh dashboard instance.
+      Replace the ``<WAZUH_DASHBOARD_URL>`` field with the corresponding URL of your Wazuh dashboard instance.
 
       The configuration must be similar to the highlighted blue rectangles:   
 

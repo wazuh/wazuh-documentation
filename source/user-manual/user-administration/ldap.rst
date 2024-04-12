@@ -53,11 +53,11 @@ Authentication and authorization configuration
 
 The ``auhtc`` section of the Wazuh indexer security configuration file handles authentication, while the ``authz`` section handles authorization. We recommend that you back up the ``/etc/wazuh-indexer/opensearch-security/config.yml`` file before you carry out this configuration.
 
-#. Save the LDAP server certificate. If you don’t have access to the root CA file of the LDAP server, run the following command on the Wazuh indexer node to retrieve the certificate. Replace ``<FQDN-LDAP-SERVER>`` with the Fully Qualified Domain Name of your LDAP server:
+#. Save the LDAP server certificate. If you don’t have access to the root CA file of the LDAP server, run the following command on the Wazuh indexer node to retrieve the certificate. Replace ``<FQDN_LDAP_SERVER>`` with the Fully Qualified Domain Name of your LDAP server:
 
    .. code-block:: console
 
-      $ echo -n | openssl s_client -connect <FQDN-LDAP-SERVER>:636 | sed -ne '/-BEGIN CERTIFICATE-/,/-END CERTIFICATE-/p' > ldapcacert.pem
+      $ echo -n | openssl s_client -connect <FQDN_LDAP_SERVER>:636 | sed -ne '/-BEGIN CERTIFICATE-/,/-END CERTIFICATE-/p' > ldapcacert.pem
 
    The command copies everything between ``-----BEGIN CERTIFICATE-----`` and ``-----END CERTIFICATE-----`` (including these delimiters) and saves it in a new text file.
 
@@ -93,7 +93,7 @@ The ``auhtc`` section of the Wazuh indexer security configuration file handles a
                  enable_ssl_client_auth: false
                  verify_hostnames: true
                  hosts:
-                 - <FQDN-LDAP-SERVER>:636 #Port 389 for LDAP, 636 for LDAPS
+                 - <FQDN_LDAP_SERVER>:636 #Port 389 for LDAP, 636 for LDAPS
                  bind_dn: cn=admin,dc=example,dc=org
                  password: <PASSWORD>
                  userbase: 'ou=people,dc=example,dc=org'
@@ -119,7 +119,7 @@ The ``auhtc`` section of the Wazuh indexer security configuration file handles a
                  enable_ssl_client_auth: false
                  verify_hostnames: true
                  hosts:
-                 - <FQDN-LDAP-SERVER>:636 #Port 389 for LDAP, 636 for LDAPS
+                 - <FQDN_LDAP_SERVER>:636 #Port 389 for LDAP, 636 for LDAPS
                  bind_dn: cn=admin,dc=example,dc=org
                  password: <PASSWORD>
                  userbase: 'ou=people,dc=example,dc=org'

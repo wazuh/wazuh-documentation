@@ -66,13 +66,13 @@ In the case of having a Wazuh indexer cluster with multiple nodes, the cluster w
 
 .. note::
 
-   -  Replace ``<WAZUH_INDEXER_IP>``, ``<username>``, and ``<password>`` before running the commands below.
+   -  Replace ``<WAZUH_INDEXER_IP_ADDRESS>``, ``<USERNAME>``, and ``<PASSWORD>`` before running the commands below.
 
 #. Disable shard allocation.
 
    .. code-block:: bash
 
-      curl -X PUT "https://<WAZUH_INDEXER_IP>:9200/_cluster/settings"  -u <username>:<password> -k -H 'Content-Type: application/json' -d'
+      curl -X PUT "https://<WAZUH_INDEXER_IP_ADDRESS>:9200/_cluster/settings"  -u <USERNAME>:<PASSWORD> -k -H 'Content-Type: application/json' -d'
       {
         "persistent": {
           "cluster.routing.allocation.enable": "primaries"
@@ -84,7 +84,7 @@ In the case of having a Wazuh indexer cluster with multiple nodes, the cluster w
 
    .. code-block:: console
 
-      # curl -X POST "https://<WAZUH_INDEXER_IP>:9200/_flush/synced" -u <username>:<password> -k
+      # curl -X POST "https://<WAZUH_INDEXER_IP_ADDRESS>:9200/_flush/synced" -u <USERNAME>:<PASSWORD> -k
 
 #. Shut down the Wazuh indexer in the node.
 
@@ -126,13 +126,13 @@ In the case of having a Wazuh indexer cluster with multiple nodes, the cluster w
 
    .. code-block:: console
 
-      # curl -k -u <username>:<password> https://<WAZUH_INDEXER_IP>:9200/_cat/nodes?v
+      # curl -k -u <USERNAME>:<PASSWORD> https://<WAZUH_INDEXER_IP_ADDRESS>:9200/_cat/nodes?v
 
 #. Re-enable shard allocation.
 
    .. code-block:: bash
 
-      curl -X PUT "https://<WAZUH_INDEXER_IP>:9200/_cluster/settings" -u <username>:<password> -k -H 'Content-Type: application/json' -d'
+      curl -X PUT "https://<WAZUH_INDEXER_IP_ADDRESS>:9200/_cluster/settings" -u <USERNAME>:<PASSWORD> -k -H 'Content-Type: application/json' -d'
       {
         "persistent": {
           "cluster.routing.allocation.enable": "all"
@@ -144,7 +144,7 @@ In the case of having a Wazuh indexer cluster with multiple nodes, the cluster w
 
    .. code-block:: console
 
-      # curl -k -u <username>:<password> https://<WAZUH_INDEXER_IP>:9200/_cat/nodes?v
+      # curl -k -u <USERNAME>:<PASSWORD> https://<WAZUH_INDEXER_IP_ADDRESS>:9200/_cat/nodes?v
 
 .. _upgrading_wazuh_server:
 

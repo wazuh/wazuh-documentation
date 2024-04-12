@@ -158,9 +158,9 @@ Below, we show how to use the Activity API to list available content and retriev
 
    .. code-block:: none
       
-      GET <contentUri>
+      GET <CONTENT_URI>
 
-   Replace the ``<contentUri>`` variable with the value of a content URI that is included in the list of available content.
+   Replace the ``<CONTENT_URI>`` variable with the value of a content URI that is included in the list of available content.
 
    The `Office 365 Management API documentation <https://docs.microsoft.com/en-us/office/office-365-management-api/office-365-management-activity-api-reference>`__ provides details on the available endpoints and response formats. You can refer to the documentation for more information.
 
