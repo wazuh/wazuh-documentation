@@ -14,7 +14,7 @@ You have to set the files and directories to monitor with the :ref:`directories 
 
 Any time the FIM module runs a scan, it triggers alerts if it finds modified files and depending on the changed file attributes. You can view these alerts in the Wazuh dashboard. 
 
-Following, you can see how to configure the FIM module to monitor a file and directory. Replace ``＜FILEPATH/OF/MONITORED/FILE＞`` and ``＜FILEPATH/OF/MONITORED/DIRECTORY＞`` with your own filepaths. 
+Following, you can see how to configure the FIM module to monitor a file and directory. Replace ``<FILEPATH_OF_MONITORED_FILE>`` and ``<FILEPATH_OF_MONITORED_DIRECTORY>`` with your own filepaths. 
 
 #. Add the following settings to the Wazuh agent configuration file, replacing the directories values with your own filepaths:
    
@@ -26,8 +26,8 @@ Following, you can see how to configure the FIM module to monitor a file and dir
       :emphasize-lines: 2,3
 
       <syscheck>
-         <directories>＜FILEPATH/OF/MONITORED/FILE＞</directories>
-         <directories>＜FILEPATH/OF/MONITORED/DIRECTORY＞</directories>
+         <directories><FILEPATH_OF_MONITORED_FILE></directories>
+         <directories><FILEPATH_OF_MONITORED_DIRECTORY></directories>
       </syscheck>
 
 #. Restart the Wazuh agent with administrator privilege to apply any configuration change:

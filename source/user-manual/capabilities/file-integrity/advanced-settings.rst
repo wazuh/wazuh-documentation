@@ -694,7 +694,7 @@ Recursion level
 
 You can configure the maximum recursion level allowed for a specific directory by using the ``recursion_level`` attribute of the :ref:`directories <reference_ossec_syscheck_directories>`   option. The ``recursion_level`` value must be an integer between 0 and 320.
 
-In the configuration example below, you can see how to set the ``recursion_level`` of the ``folder_test``  directory to 3. Replace ``＜FILEPATH/OF/MONITORED/DIRECTORY＞`` with your own file paths.
+In the configuration example below, you can see how to set the ``recursion_level`` of the ``folder_test``  directory to 3. Replace ``<FILEPATH_OF_MONITORED_DIRECTORY>`` with your own file paths.
 
 #. Add the following settings to the Wazuh agent configuration file:
 
@@ -706,7 +706,7 @@ In the configuration example below, you can see how to set the ``recursion_level
       :emphasize-lines: 2
 
       <syscheck>
-         <directories check_all="yes" recursion_level="3">＜FILEPATH/OF/MONITORED/DIRECTORY＞</directories>
+         <directories check_all="yes" recursion_level="3"><FILEPATH_OF_MONITORED_DIRECTORY></directories>
       </syscheck>
 
 #. Restart the Wazuh agent with administrator privilege to apply any configuration change:
@@ -715,11 +715,11 @@ In the configuration example below, you can see how to set the ``recursion_level
    - Windows: ``Restart-Service -Name wazuh``
    - macOS: ``/Library/Ossec/bin/wazuh-control restart``
 
-If you have the following directory structure and the above setting with ``recursion_level="3"``, FIM then generates alerts for ``file_3.txt`` and all files up to ``＜FILEPATH/OF/MONITORED/DIRECTORY＞/level_1/level_2/level_3/`` but not for any files in the directory deeper than ``level_3``.
+If you have the following directory structure and the above setting with ``recursion_level="3"``, FIM then generates alerts for ``file_3.txt`` and all files up to ``<FILEPATH_OF_MONITORED_DIRECTORY>/level_1/level_2/level_3/`` but not for any files in the directory deeper than ``level_3``.
 
    .. code-block:: console
   
-      ＜FILEPATH/OF/MONITORED/DIRECTORY＞
+      <FILEPATH_OF_MONITORED_DIRECTORY>
       ├── file_0.txt
       └── level_1
           ├── file_1.txt
