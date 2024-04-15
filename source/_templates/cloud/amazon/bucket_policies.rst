@@ -16,8 +16,8 @@
 		    "s3:ListBucket"
 		],
 		"Resource": [
-		    "arn:aws:s3:::<bucket-name>/*",
-		    "arn:aws:s3:::<bucket-name>"
+		    "arn:aws:s3:::<BUCKET_NAME>/*",
+		    "arn:aws:s3:::<BUCKET_NAME>"
 		]
 	    }
 	]
@@ -40,13 +40,13 @@
 		    "s3:DeleteObject"
 		],
 		"Resource": [
-		    "arn:aws:s3:::<bucket-name>/*",
-		    "arn:aws:s3:::<bucket-name>"
+		    "arn:aws:s3:::<BUCKET_NAME>/*",
+		    "arn:aws:s3:::<BUCKET_NAME>"
 		]
 	    }
 	]
     }
 
-.. note:: ``<bucket-name>`` is a placeholder. Replace it with the actual name of the bucket from which you want to retrieve logs.
+.. note:: ``<BUCKET_NAME>`` is a placeholder. Replace it with the actual name of the bucket from which you want to retrieve logs.
 
 .. End of include file

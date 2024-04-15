@@ -12,11 +12,11 @@ Follow this guide to migrate from Open Distro for Elasticsearch 1.13 to the Wazu
 
 .. note:: You need root user privileges to run all the commands described below.
 
-#. Disable shard allocation to prevent Elasticsearch from replicating shards as you shut down nodes. Replace ``<elasticsearch_IP>`` with your Elasticsearch IP address or hostname, and ``<username>:<password>`` with your Elasticsearch username and password.  
+#. Disable shard allocation to prevent Elasticsearch from replicating shards as you shut down nodes. Replace ``<ELASTICSEARCH_IP_ADDRESS>`` with your Elasticsearch IP address or hostname, and ``<USERNAME>:<PASSWORD>`` with your Elasticsearch username and password.  
 
    .. code-block:: console
 
-     curl -X PUT "https://<elasticsearch_IP>:9200/_cluster/settings" -u <username>:<password> -k -H 'Content-Type: application/json' -d'
+     curl -X PUT "https://<ELASTICSEARCH_IP_ADDRESS>:9200/_cluster/settings" -u <USERNAME>:<PASSWORD> -k -H 'Content-Type: application/json' -d'
      {
        "persistent": {
          "cluster.routing.allocation.enable": "primaries"
@@ -28,7 +28,7 @@ Follow this guide to migrate from Open Distro for Elasticsearch 1.13 to the Wazu
 
    .. code-block:: console
 
-        curl -X POST "https://<elasticsearch_IP>:9200/_flush/synced" -u <username>:<password> -k
+        curl -X POST "https://<ELASTICSEARCH_IP_ADDRESS>:9200/_flush/synced" -u <USERNAME>:<PASSWORD> -k
 
 #. Stop Filebeat.
 
@@ -163,18 +163,18 @@ Follow this guide to migrate from Open Distro for Elasticsearch 1.13 to the Wazu
             talk to server... OK
             version: 7.10.2
 
-#. Monitor the health of the cluster as follows. Replace ``<Wazuh_indexer_IP>`` with your Wazuh indexer IP address or hostname, and ``<username>:<password>`` with your Elasticsearch username and password.  
+#. Monitor the health of the cluster as follows. Replace ``<WAZUH_INDEXER_IP_ADDRESS>`` with your Wazuh indexer IP address or hostname, and ``<USERNAME>:<PASSWORD>`` with your Elasticsearch username and password.  
 
 
    .. code-block:: console
 
-     curl -X GET "https://<Wazuh_indexer_IP>:9200/_cluster/health?pretty" -u <username>:<password> -k
+     curl -X GET "https://<WAZUH_INDEXER_IP_ADDRESS>:9200/_cluster/health?pretty" -u <USERNAME>:<PASSWORD> -k
 
 #. Re-enable shard allocation.
 
    .. code-block:: console
 
-      curl -X PUT "https://<Wazuh_indexer_IP>:9200/_cluster/settings" -u <username>:<password> -k -H 'Content-Type: application/json' -d'
+      curl -X PUT "https://<WAZUH_INDEXER_IP_ADDRESS>:9200/_cluster/settings" -u <USERNAME>:<PASSWORD> -k -H 'Content-Type: application/json' -d'
       {
         "persistent": {
           "cluster.routing.allocation.enable": null
