@@ -103,7 +103,7 @@ The Wazuh dashboard can be installed on a dedicated node or along with the Wazuh
 Firewall configuration
 ^^^^^^^^^^^^^^^^^^^^^^
 
-Configure the host and network firewalls to allow ports mentioned in :doc:`Architecture <getting-started/architecture>`. Disabling the host firewall is not recommended for use in production. It is advised to check the firewall configuration after eac service installation to prevent possible cluster problems.
+Configure the host and network firewalls to allow ports mentioned in :doc:`Architecture <getting-started/architecture>`. Disabling the host firewall is not recommended for use in production. It is advised to check the firewall configuration after each service installation to prevent possible cluster problems.
 
 
 

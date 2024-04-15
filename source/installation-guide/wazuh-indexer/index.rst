@@ -120,7 +120,7 @@ The Wazuh indexer can be installed as a single-node or as a multi-node cluster.
 Firewall configuration
 ^^^^^^^^^^^^^^^^^^^^^^
 
-Configure the host and network firewalls to allow ports mentioned in :doc:`Architecture <getting-started/architecture>`. Disabling the host firewall is not recommended for use in production. It is advised to check the firewall configuration after eac service installation to prevent possible cluster problems.
+Configure the host and network firewalls to allow ports mentioned in :doc:`Architecture <getting-started/architecture>`. Disabling the host firewall is not recommended for use in production. It is advised to check the firewall configuration after each service installation to prevent possible cluster problems.
 
 
 
