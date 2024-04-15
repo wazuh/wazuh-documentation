@@ -57,7 +57,7 @@ We recommend creating entirely new certificates for your Wazuh server nodes. Per
         # Wazuh server nodes
         server:
           - name: <EXISTING_WAZUH_SERVER_NODE_NAME>
-            ip: <EXISTING_WAZUH_SERVER_IP>
+            ip: <EXISTING_WAZUH_SERVER_IP_ADDRESS>
             node_type: master
           - name: <NEW_WAZUH_SERVER_NODE_NAME>
             ip: <NEW_WAZUH_SERVER_IP>
@@ -105,7 +105,7 @@ We recommend you utilize pre-existing root-ca keys to generate certificates for 
         # Wazuh server nodes
         server:
           - name: <EXISTING_WAZUH_SERVER_NODE_NAME>
-            ip: <EXISTING_WAZUH_SERVER_IP>
+            ip: <EXISTING_WAZUH_SERVER_IP_ADDRESS>
             node_type: master
           - name: <NEW_WAZUH_SERVER_NODE_NAME>
             ip: <NEW_WAZUH_SERVER_IP>
@@ -153,7 +153,7 @@ We recommend you utilize pre-existing root-ca keys to generate certificates for 
               # Wazuh server nodes
               server:
                 - name: <EXISTING_WAZUH_SERVER_NODE_NAME>
-                  ip: <EXISTING_WAZUH_SERVER_IP>
+                  ip: <EXISTING_WAZUH_SERVER_IP_ADDRESS>
                   node_type: master
                 - name: <NEW_WAZUH_SERVER_NODE_NAME>
                   ip: <NEW_WAZUH_SERVER_IP>
@@ -296,10 +296,10 @@ All-in-one deployment
 
       hosts:
         - default:
-            url: https://<EXISTING_WAZUH_SERVER_IP>
+            url: https://<EXISTING_WAZUH_SERVER_IP_ADDRESS>
             port: 55000
             username: wazuh-wui
-            password: <WAZUH-WUI-PASSWORD>
+            password: <WAZUH_WUI_PASSWORD>
             run_as: false
 
 #. Edit the Wazuh server configuration file at ``/var/ossec/etc/ossec.conf`` to enable cluster mode:
@@ -311,11 +311,11 @@ All-in-one deployment
           <name>wazuh</name>
           <node_name><EXISTING_WAZUH_SERVER_NODE_NAME></node_name>
           <node_type>master</node_type>
-          <key><ENCRYPTION-KEY></key>
+          <key><ENCRYPTION_KEY></key>
           <port>1516</port>
           <bind_addr>0.0.0.0</bind_addr>
           <nodes>
-              <node><MASTER_NODE_IP></node>
+              <node><MASTER_NODE_IP_ADDRESS></node>
           </nodes>
           <hidden>no</hidden>
           <disabled>no</disabled>
@@ -329,7 +329,7 @@ All-in-one deployment
    -  :ref:`key <cluster_key>` represents a :ref:`key <generate_encryption_key>` used to encrypt communication between cluster nodes. It should be the same on all the server nodes. To generate a unique key you can use the command ``openssl rand -hex 16``.
    -  :ref:`port <cluster_port>` indicates the destination port for cluster communication. Leave the default as ``1516``.
    -  :ref:`bind_addr <cluster_bind_addr>` is the network IP to which the node is bound to listen for incoming requests (0.0.0.0 means the node will use any IP).
-   -  :ref:`nodes <cluster_nodes>` is the address of the master node and can be either an IP or a DNS hostname. This parameter must be specified in all nodes, including the master itself. Replace ``<MASTER_NODE_IP>`` with the IP address of your master node.
+   -  :ref:`nodes <cluster_nodes>` is the address of the master node and can be either an IP or a DNS hostname. This parameter must be specified in all nodes, including the master itself. Replace ``<MASTER_NODE_IP_ADDRESS>`` with the IP address of your master node.
    -  :ref:`hidden <cluster_hidden>` shows or hides the cluster information in the generated alerts.
    -  :ref:`disabled <cluster_disabled>` indicates whether the node is enabled or disabled in the cluster. This option must be set to ``no``.
 
@@ -465,10 +465,10 @@ Distributed deployment
 
       hosts:
         - default:
-            url: https://<EXISTING_WAZUH_SERVER_IP>
+            url: https://<EXISTING_WAZUH_SERVER_IP_ADDRESS>
             port: 55000
             username: wazuh-wui
-            password: <WAZUH-WUI-PASSWORD>
+            password: <WAZUH_WUI_PASSWORD>
             run_as: false
 
 #. Edit the Wazuh server configuration file at ``/var/ossec/etc/ossec.conf`` to enable cluster mode:
@@ -480,11 +480,11 @@ Distributed deployment
           <name>wazuh</name>
           <node_name><EXISTING_WAZUH_SERVER_NODE_NAME></node_name>
           <node_type>master</node_type>
-          <key><ENCRYPTION-KEY></key>
+          <key><ENCRYPTION_KEY></key>
           <port>1516</port>
           <bind_addr>0.0.0.0</bind_addr>
           <nodes>
-              <node><MASTER_NODE_IP></node>
+              <node><MASTER_NODE_IP_ADDRESS></node>
           </nodes>
           <hidden>no</hidden>
           <disabled>no</disabled>
@@ -498,7 +498,7 @@ Distributed deployment
    -  :ref:`key <cluster_key>` represents a :ref:`key <distributed_generate_encryption_key>` used to encrypt communication between cluster nodes. It should be the same on all the server nodes. To generate a unique key you can use the command ``openssl rand -hex 16``.
    -  :ref:`port <cluster_port>` indicates the destination port for cluster communication. Leave the default as ``1516``.
    -  :ref:`bind_addr <cluster_bind_addr>` is the network IP to which the node is bound to listen for incoming requests (0.0.0.0 means the node will use any IP).
-   -  :ref:`nodes <cluster_nodes>` is the address of the master node and can be either an IP or a DNS hostname. This parameter must be specified in all nodes, including the master itself. Replace ``<MASTER_NODE_IP>`` with the IP address of your master node.
+   -  :ref:`nodes <cluster_nodes>` is the address of the master node and can be either an IP or a DNS hostname. This parameter must be specified in all nodes, including the master itself. Replace ``<MASTER_NODE_IP_ADDRESS>`` with the IP address of your master node.
    -  :ref:`hidden <cluster_hidden>` shows or hides the cluster information in the generated alerts.
    -  :ref:`disabled <cluster_disabled>` indicates whether the node is enabled or disabled in the cluster. This option must be set to ``no``.
 
@@ -733,11 +733,11 @@ Configuring the Wazuh server worker nodes
           <name>wazuh</name>
           <node_name><NEW_WAZUH_SERVER_NODE_NAME></node_name>
           <node_type>worker</node_type>
-          <key><ENCRYPTION-KEY></key>
+          <key><ENCRYPTION_KEY></key>
           <port>1516</port>
           <bind_addr>0.0.0.0</bind_addr>
           <nodes>
-              <node><MASTER_NODE_IP></node>
+              <node><MASTER_NODE_IP_ADDRESS></node>
           </nodes>
           <hidden>no</hidden>
           <disabled>no</disabled>
@@ -751,7 +751,7 @@ Configuring the Wazuh server worker nodes
    -  :ref:`key <cluster_key>` represents a :ref:`key <distributed_generate_encryption_key>` used to encrypt communication between cluster nodes. It should be the same on all the server nodes. To generate a unique key you can use the command ``openssl rand -hex 16``.
    -  :ref:`port <cluster_port>` indicates the destination port for cluster communication. Leave the default as ``1516``.
    -  :ref:`bind_addr <cluster_bind_addr>` is the network IP to which the node is bound to listen for incoming requests (0.0.0.0 means the node will use any IP).
-   -  :ref:`nodes <cluster_nodes>` is the address of the master node and can be either an IP or a DNS hostname. This parameter must be specified in all nodes, including the master itself. Replace ``<MASTER_NODE_IP>`` with the IP address of your master node.
+   -  :ref:`nodes <cluster_nodes>` is the address of the master node and can be either an IP or a DNS hostname. This parameter must be specified in all nodes, including the master itself. Replace ``<MASTER_NODE_IP_ADDRESS>`` with the IP address of your master node.
    -  :ref:`hidden <cluster_hidden>` shows or hides the cluster information in the generated alerts.
    -  :ref:`disabled <cluster_disabled>` indicates whether the node is enabled or disabled in the cluster. This option must be set to ``no``.
 

@@ -2,7 +2,7 @@
 
 .. code-block:: console
 
-  # NODE_NAME=<server-node-name>
+  # NODE_NAME=<SERVER_NODE_NAME>
 
 .. code-block:: console
   

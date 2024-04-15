@@ -54,7 +54,7 @@ Manager configuration
 
 #. Generate an SSL certificate on the Wazuh manager signed by the certificate authority. The steps to generate an SSL certificate for the manager are as follows:
 
-    #. Create a certificate request configuration file ``req.conf`` on the manager. Replace ``<manager_IP>`` with the hostname or the IP address of the Wazuh manager where the Wazuh agents are going to be enrolled. The contents of the file can be as follows:
+    #. Create a certificate request configuration file ``req.conf`` on the manager. Replace ``<MANAGER_IP_ADDRESS>`` with the hostname or the IP address of the Wazuh manager where the Wazuh agents are going to be enrolled. The contents of the file can be as follows:
 
          .. code-block:: xml
             :class: output
@@ -65,7 +65,7 @@ Manager configuration
                   prompt = no
                   [req_distinguished_name]
                   C = US
-                  CN = <manager_IP>
+                  CN = <MANAGER_IP_ADDRESS>
                   [req_ext]
                   subjectAltName = @alt_names
                   [alt_names]
