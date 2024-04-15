@@ -1,155 +1,281 @@
+.. Copyright (C) 2015, Wazuh, Inc.
 
 .. meta::
-  :description: In this PoC, you identify the monitored Windows endpoint IP address as a bad reputation one. Learn more about it in our documentation.
+   :description: In this PoC, you learn how to block malicious IP addresses from accessing web resources on a web server. Learn more about this in our documentation.
 
-.. _poc_block_actor_IP_reputation:
+Blocking a known malicious actor
+================================
 
-Blocking a malicious actor
-==========================
+In this use case, we demonstrate how to block malicious IP addresses from accessing web resources on a web server. You set up Apache web servers on Ubuntu and Windows endpoints, and try to access them from an RHEL endpoint.
 
-In this PoC, you are able to identify the monitored Windows endpoint IP address as a bad reputation one. To do this, you need to log into the Windows endpoint as the attacker and try connecting to the victim's Apache server running on a Ubuntu 20 system.
+This case uses a public IP reputation database that contains the IP addresses of some malicious actors. An IP reputation database is a collection of IP addresses that have been flagged as malicious. The RHEL endpoint plays the role of the malicious actor here, therefore you add its IP address to the reputation database. Then, configure Wazuh to block the RHEL endpoint from accessing web resources on the Apache web servers for 60 seconds. It’s a way of discouraging attackers from continuing to carry out their malicious activities.
 
-Prerequisites
+In this use case, you use the Wazuh :doc:`CDB list </user-manual/ruleset/cdb-list>` and :doc:`active response </getting-started/use-cases/incident-response>` capabilities.
+
+Infrastructure
+--------------
+
++---------------+---------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| Endpoint      | Description                                                                                                                                                         |
++===============+=====================================================================================================================================================================+
+| RHEL 9.0      | Attacker endpoint connecting to the victim's web server on which you use Wazuh CDB list capability to flag its IP address as malicious.                             |
++---------------+---------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| Ubuntu 22.04  | Victim endpoint running an Apache 2.4.54 web server. Here, you use the Wazuh active response module to automatically block connections from the attacker endpoint.  |
++---------------+---------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| Windows 11    | Victim endpoint running an Apache 2.4.54 web server. Here, you use the Wazuh active response module to automatically block connections from the attacker endpoint.  |
++---------------+---------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+
+Configuration
 -------------
 
-- You need an Apache server running on the monitored Ubuntu 20 system.
+Ubuntu endpoint
+^^^^^^^^^^^^^^^
 
+Perform the following steps to install an Apache web server and monitor its logs with the Wazuh agent.
 
-Wazuh agent configuration
--------------------------
+#. Update local packages and install the Apache web server:
 
-#. Configure the Wazuh Ubuntu 20 host to monitor the Apache access logs in the ``/var/ossec/etc/ossec.conf`` configuration file.
+   .. code-block:: console
 
-    .. code-block:: XML
+      $ sudo apt update
+      $ sudo apt install apache2
 
-        <localfile>
-            <log_format>apache</log_format>
-            <location>/var/log/apache2/access.log</location>
-        </localfile>
+#. If the firewall is enabled, modify the firewall to allow external access to web ports. Skip this step if the firewall is disabled:
 
-#. Restart the Wazuh agent to apply the changes.
+   .. code-block:: console
 
-    .. code-block:: console
+      $ sudo ufw status
+      $ sudo ufw app list
+      $ sudo ufw allow 'Apache'
 
-        # systemctl restart wazuh-agent
+#. Check the status of the Apache service to verify that the web server is running:
 
-Wazuh manager configuration
----------------------------
+   .. code-block:: console
 
-Configure your environment as follows to test the PoC.
+      $ sudo systemctl status apache2
 
-#. Download the Alienvault IP reputation database to your Wazuh manager.
+#. Use the ``curl`` command or open ``http://<UBUNTU_IP>`` in a browser to view the Apache landing page and verify the installation:
 
-    .. code-block:: console
+   .. code-block:: console
+   
+      $ curl http://<UBUNTU_IP>
 
-        # wget https://raw.githubusercontent.com/firehol/blocklist-ipsets/master/alienvault_reputation.ipset -O /var/ossec/etc/lists/alienvault_reputation.ipset
+#. Add the following to ``/var/ossec/etc/ossec.conf`` file to configure the Wazuh agent and monitor the Apache access logs:
 
-#. Run the following command at the Wazuh manager, replacing ``<your_windows_ip_address>`` with the monitored Windows endpoint's IP address.
+   .. code-block:: xml
 
-    .. code-block:: console
+      <localfile>
+        <log_format>syslog</log_format>
+        <location>/var/log/apache2/access.log</location>
+      </localfile>
 
-        # echo "<your_windows_ip_address>" >> /var/ossec/etc/lists/alienvault_reputation.ipset
+#. Restart the Wazuh agent to apply the changes:
 
-#. Download the script to convert from the ipset format to the cdb list format.
+   .. code-block:: console
 
-    .. code-block:: console
+      $ sudo systemctl restart wazuh-agent
 
-        # wget https://wazuh.com/resources/iplist-to-cdblist.py -O /tmp/iplist-to-cdblist.py
+Windows endpoint
+^^^^^^^^^^^^^^^^
 
-#. Convert the ``alienvault_reputation.ipset`` file to a .cdb format using the previously downloaded script.
+Install the Apache web server
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-    .. code-block:: console
+Perform the following steps to install and configure an Apache web server.
 
-        # python /tmp/iplist-to-cdblist.py /var/ossec/etc/lists/alienvault_reputation.ipset /var/ossec/etc/lists/blacklist-alienvault
+#. Install the latest `Visual C++ Redistributable package <https://aka.ms/vs/17/release/vc_redist.x64.exe>`__.
 
-#. Optionally, remove the ``alienvault_reputation.ipset`` file and the ``iplist-to-cdblist.py`` script, as they are no longer needed.
+#. Download the `Apache web server <https://www.apachelounge.com/download/>`__ Win64 ZIP installation file. This is an already compiled binary for Windows operating systems.
 
-    .. code-block:: console
+#. Unzip the contents of the Apache web server zip file and copy the extracted ``Apache24`` folder to the ``C:`` directory.
 
-        # rm -rf /var/ossec/etc/lists/alienvault_reputation.ipset
-        # rm -rf /var/ossec/etc/lists/iplist-to-cdblist.py
+#. Navigate to the ``C:\Apache24\bin\`` folder and run the following command in a PowerShell terminal with administrator privileges:
 
-#. Assign the right permissions and ownership to the generated file.
+   .. code-block:: powershell
 
-    .. code-block:: console
+      > .\httpd.exe
 
-        # chown wazuh:wazuh /var/ossec/etc/lists/blacklist-alienvault
-        # chmod 660 /var/ossec/etc/lists/blacklist-alienvault
+   The first time you run the Apache binary a Windows Defender Firewall pops up.
 
-#. Add a custom rule to trigger the active response. This can be done in the ``/var/ossec/etc/rules/local_rules.xml`` file at the Wazuh manager.
+#. Click on **Allow Access**. This allows the Apache HTTP server to communicate on your private or public networks depending on your network setting. It creates an inbound rule in your firewall to allow incoming traffic on port 80.
 
-    .. code-block:: XML
+#. Open ``http://<WINDOWS_IP>`` in a browser to view the Apache landing page and verify the installation. Also, verify that this URL can be reached from the attacker endpoint.
 
-        <group name="attack,">
-            <rule id="100100" level="10">
-                <if_group>web|attack|attacks</if_group>
-                <list field="srcip" lookup="address_match_key">etc/lists/blacklist-alienvault</list>
-                <description>IP address found in AlienVault reputation database.</description>
-            </rule>
-        </group>
+Configure the Wazuh agent
+~~~~~~~~~~~~~~~~~~~~~~~~~
 
+Perform the steps below to configure the Wazuh agent to monitor Apache web server logs.
 
-#. Add the ``etc/lists/blacklist-alienvault`` list to the ``ruleset`` section of the  ``/var/ossec/etc/ossec.conf`` file at the Wazuh manager, and configure the active response stanza as shown. 
+#. Add the following to ``C:\Program Files (x86)\ossec-agent\ossec.conf`` to configure the Wazuh agent and monitor the Apache access logs:
 
-    .. code-block:: XML
-      :emphasize-lines: 8
+   .. code-block:: xml
 
-        <ossec_config>
-            <ruleset>
-                <!-- Default ruleset -->
-                <decoder_dir>ruleset/decoders</decoder_dir>
-                <rule_dir>ruleset/rules</rule_dir>
-                <rule_exclude>0215-policy_rules.xml</rule_exclude>
-                <list>etc/lists/audit-keys</list>
-                <list>etc/lists/blacklist-alienvault</list>
-                <!-- User-defined ruleset -->
-                <decoder_dir>etc/decoders</decoder_dir>
-                <rule_dir>etc/rules</rule_dir>
-            </ruleset>
+      <localfile>
+        <log_format>syslog</log_format>
+        <location>C:\Apache24\logs\access.log</location>
+      </localfile>
 
-            <active-response>
-                <command>firewall-drop</command>
-                <location>local</location>
-                <rules_id>100100</rules_id>
-                <timeout>60</timeout>
-            </active-response>
-        </ossec_config>
+#. Restart the Wazuh agent in a PowerShell terminal with administrator privileges to apply the changes:
 
-#. Restart the Wazuh Manager.
+   .. code-block:: powershell
 
-    .. code-block:: console
+      > Restart-Service -Name wazuh
 
-        # systemctl restart wazuh-manager
+Wazuh server
+^^^^^^^^^^^^
 
+You need to perform the following steps on the Wazuh server to add the IP address of the RHEL endpoint to a CDB list, and then configure rules and active response.
 
-Steps to generate the alerts
-----------------------------
+Download the utilities and configure the CDB list
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-#. Log into the attacker's system (the monitored Windows endpoint).
+#. Install the ``wget`` utility to download the necessary artifacts using the command line interface:
 
-#. Connect to the victim's system (the Apache server in the monitored Ubuntu 20 endpoint) from a web browser.
+   .. code-block:: console
 
-    The custom firewall rule will temporarily block any connection from the attacker system for 60 seconds.
+      $ sudo yum update && sudo yum install -y wget
 
-Query the alerts
+#. Download the Alienvault IP reputation database:
+
+   .. code-block:: console
+
+      $ sudo wget https://raw.githubusercontent.com/firehol/blocklist-ipsets/master/alienvault_reputation.ipset -O /var/ossec/etc/lists/alienvault_reputation.ipset
+
+#. Append the IP address of the attacker endpoint to the IP reputation database. Replace ``<ATTACKER_IP>`` with the RHEL IP address in the command below:
+
+   .. code-block:: console
+
+      $ sudo echo "<ATTACKER_IP>" >> /var/ossec/etc/lists/alienvault_reputation.ipset
+
+#. Download a script to convert from the ``.ipset`` format to the ``.cdb`` list format:
+
+   .. code-block:: console
+
+      $ sudo wget https://wazuh.com/resources/iplist-to-cdblist.py -O /tmp/iplist-to-cdblist.py
+
+#. Convert the ``alienvault_reputation.ipset`` file to a ``.cdb`` format using the previously downloaded script:
+
+   .. code-block:: console
+
+      $ sudo /var/ossec/framework/python/bin/python3 /tmp/iplist-to-cdblist.py /var/ossec/etc/lists/alienvault_reputation.ipset /var/ossec/etc/lists/blacklist-alienvault
+
+#. Optional: Remove the ``alienvault_reputation.ipset`` file and the ``iplist-to-cdblist.py`` script, as they are no longer needed:
+
+   .. code-block:: console
+
+      $ sudo rm -rf /var/ossec/etc/lists/alienvault_reputation.ipset
+      $ sudo rm -rf /tmp/iplist-to-cdblist.py
+
+#. Assign the right permissions and ownership to the generated file:
+
+   .. code-block:: console
+
+      $ sudo chown wazuh:wazuh /var/ossec/etc/lists/blacklist-alienvault
+
+Configure the active response module to block the malicious IP address
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+#. Add a custom rule to trigger a Wazuh :doc:`active response </user-manual/capabilities/active-response/index>` script. Do this in the Wazuh server ``/var/ossec/etc/rules/local_rules.xml`` custom ruleset file:
+
+   .. code-block:: xml
+
+      <group name="attack,">
+        <rule id="100100" level="10">
+          <if_group>web|attack|attacks</if_group>
+          <list field="srcip" lookup="address_match_key">etc/lists/blacklist-alienvault</list>
+          <description>IP address found in AlienVault reputation database.</description>
+        </rule>
+      </group>
+
+#. Edit the Wazuh server ``/var/ossec/etc/ossec.conf`` configuration file and add the ``etc/lists/blacklist-alienvault`` list to the ``<ruleset>`` section:
+
+   .. code-block:: xml
+      :emphasize-lines: 10
+
+      <ossec_config>
+        <ruleset>
+          <!-- Default ruleset -->
+          <decoder_dir>ruleset/decoders</decoder_dir>
+          <rule_dir>ruleset/rules</rule_dir>
+          <rule_exclude>0215-policy_rules.xml</rule_exclude>
+          <list>etc/lists/audit-keys</list>
+          <list>etc/lists/amazon/aws-eventnames</list>
+          <list>etc/lists/security-eventchannel</list>
+          <list>etc/lists/blacklist-alienvault</list>
+ 
+          <!-- User-defined ruleset -->
+          <decoder_dir>etc/decoders</decoder_dir>
+          <rule_dir>etc/rules</rule_dir>
+        </ruleset>
+
+      </ossec_config>
+
+#. Add the active response block to the Wazuh server ``/var/ossec/etc/ossec.conf`` file:
+
+   **For the Ubuntu endpoint**
+
+   The ``firewall-drop`` command integrates with the Ubuntu local iptables firewall and drops incoming network connection from the attacker endpoint for 60 seconds:
+
+      .. code-block:: xml
+         :emphasize-lines: 3
+
+         <ossec_config>
+           <active-response>
+             <command>firewall-drop</command>
+             <location>local</location>
+             <rules_id>100100</rules_id>
+             <timeout>60</timeout>
+           </active-response>
+         </ossec_config>
+
+   **For the Windows endpoint**
+
+   The active response script uses the ``netsh`` command to block the attacker's IP address on the Windows endpoint. It runs for 60 seconds:
+
+      .. code-block:: xml
+         :emphasize-lines: 3
+
+         <ossec_config>
+           <active-response>
+             <command>netsh</command>
+             <location>local</location>
+             <rules_id>100100</rules_id>
+             <timeout>60</timeout>
+           </active-response>
+         </ossec_config>
+
+#. Restart the Wazuh manager to apply the changes:
+
+   .. code-block:: console
+
+      $ sudo systemctl restart wazuh-manager
+
+Attack emulation
 ----------------
 
-You can visualize the alert data in the Wazuh dashboard. To do this, go to the **Security events** module and add the filters in the search bar to query the alerts.
+#. Access any of the web servers from the RHEL endpoint using the corresponding IP address. Replace ``<WEBSERVER_IP>`` with the appropriate value and execute the following command from the attacker endpoint:
 
-* ``rule.id:(651 OR 100100)``
+   .. code-block:: console
 
-.. thumbnail:: ../images/poc/Blocking-a-malicious-actor.png
-          :title: Blocking a malicious actor - IP Reputation
-          :align: center
-          :wrap_image: No
+      $ curl http://<WEBSERVER_IP>
 
-Troubleshooting
-----------------
+The attacker endpoint connects to the victim's web servers the first time. After the first connection, the Wazuh active response module temporarily blocks any successive connection to the web servers for 60 seconds.
 
-* Python command not working during step 4.
+Visualize the alerts
+--------------------
 
-This can be solved by creating a symbolic link.
+You can visualize the alert data in the Wazuh dashboard. To do this, go to the **Threat Hunting** module and add the filters in the search bar to query the alerts.
 
-    .. code-block:: console
+-  Ubuntu - ``rule.id:(651 OR 100100)``
 
-        # ln -s /usr/bin/python3 /usr/bin/python
+   .. thumbnail:: /images/poc/block-malicious-actor-ubuntu-alerts.png
+         :title: Visualize block malicious actor Ubuntu alerts 
+         :align: center
+         :width: 80%
+
+-  Windows - ``rule.id:(657 OR 100100)``
+
+   .. thumbnail:: /images/poc/block-malicious-actor-windows-alerts.png
+         :title: Visualize block malicious actor Windows alerts 
+         :align: center
+         :width: 80%

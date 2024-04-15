@@ -11,7 +11,7 @@ from sphinx.util.osutil import copyfile
 from sphinx.util.docutils import SphinxDirective
 
 try:
-    from sphinx.util import status_iterator
+    from sphinx.util.display import status_iterator
 except ImportError:
     pass
 
@@ -157,8 +157,8 @@ def depart_wazuh_image_node_html(self, node):
 class WazuhLightBox(nodes.General, nodes.Element):
     
     STATIC_FILES = (
-        'wazuh-light-box.css',
-        'wazuh-light-box.js',
+        'min/wazuh-light-box.min.css',
+        'min/wazuh-light-box.min.js',
         'img/close.png',
         'img/next.png',
         'img/prev.png',
@@ -272,7 +272,7 @@ def setup(app):
     app.connect('env-updated', manage_static_files)
 
     return {
-        'version': '0.2',
+        'version': '0.3',
         'parallel_read_safe': True,
         'parallel_write_safe': True,
     }

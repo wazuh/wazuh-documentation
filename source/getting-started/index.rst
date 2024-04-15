@@ -28,7 +28,7 @@ The Wazuh solution is composed of three :doc:`central platform components <compo
 Wazuh Cloud
 -----------
 
-The `Wazuh Cloud <https://wazuh.com/cloud/>`_ is our software as a service (SaaS) solution. We provide a `14-day free trial <https://console.cloud.wazuh.com/sign-up?landing=trial>`_ for you to create a cloud environment and get the best out of our SaaS solution. Check the :ref:`Cloud service <cloud_service>` documentation for more information.
+The `Wazuh Cloud <https://wazuh.com/cloud/>`_ is our software as a service (SaaS) solution. We provide a `14-day free trial <https://console.cloud.wazuh.com/sign-up?landing=trial>`_ for you to create a cloud environment and get the best out of our SaaS solution. Check the :doc:`Cloud service </cloud-service/index>` documentation for more information.
 
 Screenshots
 -----------
@@ -37,26 +37,36 @@ Screenshots
    :width: 100%
    :widths: 50 50
 
-   * - .. thumbnail:: ../images/getting-started/screenshot-01-Wazuh-Security-Analytics.png
-          :title: Security analytics
-     - .. thumbnail:: ../images/getting-started/screenshot-02-Wazuh-Intrusion-Detection.png
-          :title: Intrusion detection
-   * - .. thumbnail:: ../images/getting-started/screenshot-03-Wazuh-Log-Data-Analysis.png
+   * - .. thumbnail:: ../images/getting-started/security-events.png
+          :title: Threat Hunting 
+          :alt: Threat Hunting 
+     - .. thumbnail:: ../images/getting-started/malware-detection.png
+          :title: Malware detection
+          :alt: Malware detection 
+   * - .. thumbnail:: ../images/getting-started/log-data-analysis.png
           :title: Log data analysis
-     - .. thumbnail:: ../images/getting-started/screenshot-04-Wazuh-File-Integrity-Monitoring.png
-          :title: File integrity monitoring
-   * - .. thumbnail:: ../images/getting-started/screenshot-05-Wazuh-Vulnerability-Detection.png
-          :title: Vulnerability detection
-     - .. thumbnail:: ../images/getting-started/screenshot-06-Wazuh-Configuration-Assessment.png
-          :title: Configuration assessment
-   * - .. thumbnail:: ../images/getting-started/screenshot-07-Wazuh-Incident-Response.png
-          :title: Incident response
-     - .. thumbnail:: ../images/getting-started/screenshot-08-Wazuh-Regulatory-Compliance.png
-          :title: Regulatory compliance
-   * - .. thumbnail:: ../images/getting-started/screenshot-09-Wazuh-Cloud-Security.png
-          :title: Cloud security
-     - .. thumbnail:: ../images/getting-started/screenshot-10-Wazuh-Containers-Security.png
-          :title: Container security
+          :alt: Log data analysis
+     - .. thumbnail:: ../images/getting-started/file-integrity-monitoring.png
+          :title: File Integrity Monitoring
+          :alt: File Integrity Monitoring 
+   * - .. thumbnail:: ../images/getting-started/vulnerability-detection.png
+          :title: Vulnerability Detection  
+          :alt: Vulnerability Detection  
+     - .. thumbnail:: ../images/getting-started/security-configuration-assessment.png
+          :title: Security configuration assessment   
+          :alt: Security configuration assessment   
+   * - .. thumbnail:: ../images/getting-started/incident-response.png
+          :title: Incident response 
+          :alt: Incident response 
+     - .. thumbnail:: ../images/getting-started/regulatory-compliance.png
+          :title: Regulatory compliance 
+          :alt: Regulatory compliance 
+   * - .. thumbnail:: ../images/getting-started/cloud-security.png
+          :title: Cloud security  
+          :alt: Cloud security  
+     - .. thumbnail:: ../images/getting-started/containers-security.png
+          :title: Containers security 
+          :alt: Containers security 
 
 .. toctree::
    :hidden:

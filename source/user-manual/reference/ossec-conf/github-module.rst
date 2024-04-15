@@ -1,11 +1,12 @@
 .. Copyright (C) 2015, Wazuh, Inc.
 
+.. meta::
+  :description: Find out how to configure the Wazuh GitHub module. Learn more about it in this section of the Wazuh documentation.
+
 .. _github-module:
 
 github
 =======
-
-.. versionadded:: 4.3.0
 
 .. note::
 

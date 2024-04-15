@@ -1,4 +1,5 @@
 .. Copyright (C) 2015, Wazuh, Inc.
+
 .. meta::
   :description: Check out this section of the Wazuh documentation to learn about Docker installation: how to install the Docker engine and the Docker compose. 
   
@@ -9,155 +10,136 @@ Docker installation
 
 The first thing you need to do is to set up a system with the requirements needed to run Docker and Docker compose. Then install Docker and Docker compose if you don’t have them already.
 
-- `Requirements`_
-- `Docker engine`_
-- `Docker compose`_
+.. 
+   .. contents::
+      :local:
+      :depth: 1
+      :backlinks: none
 
-.. note::
-   
-   Root user privileges are required to execute all the commands described below.
+.. note:: You need root user privileges to run all the commands described below.
 
 Requirements
 ------------
 
-- `Container memory`_
-- `Increase max_map_count on your host (Linux)`_
-
+.. 
+   .. contents::
+      :local:
+      :depth: 1
+      :backlinks: none
 
 Container memory
-----------------
+^^^^^^^^^^^^^^^^
 
-It is recommended to configure the Docker host preferences to give at least 6GB of memory for the host that creates the containers. This is because, depending on the deployment and usage, Wazuh indexer memory consumption can vary. Therefore, allocate the recommended memory for a complete stack deployment to work properly.
+We recommend configuring the Docker host with at least 6 GB of memory. Depending on the deployment and usage, Wazuh indexer memory consumption varies. Therefore, allocate the recommended memory for a complete stack deployment to work properly.
 
 
 Increase max_map_count on your host (Linux)
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-Wazuh Indexer needs to be able to create many memory-mapped areas. So the kernel has to be set to give a process of at least 262,144 memory-mapped areas.
+Wazuh indexer creates many memory-mapped areas. So you need to set the kernel to give a process at least 262,144 memory-mapped areas.
 
-1. You need to increase ``max_map_count`` on your Docker host:
+#. Increase ``max_map_count`` on your Docker host:
 
-.. code-block:: console
+   .. code-block:: console
 
-   $ sysctl -w vm.max_map_count=262144
+      # sysctl -w vm.max_map_count=262144
 
-
-2. To set this value permanently, update the ``vm.max_map_count`` setting in ``/etc/sysctl.conf``. To verify after rebooting, run ``“sysctl vm.max_map_count”``.
-
+#. Update the ``vm.max_map_count`` setting in ``/etc/sysctl.conf`` to set this value permanently. To verify after rebooting, run “``sysctl vm.max_map_count``”.
 
    .. warning::
 
       If you don’t set the ``max_map_count`` on your host, the Wazuh indexer will NOT work properly.
 
-
 Docker engine
 -------------
 
-For Linux/Unix machines, Docker requires an amd64 architecture system running kernel version 3.10 or higher.
+For Linux/Unix machines, Docker requires an amd64 architecture system running kernel version 3.10 or later.
 
-1. Check your current kernel version. Open a terminal and use ``uname -r`` to display your kernel version:
+#. Open a terminal and use ``uname -r`` to display and check your kernel version:
 
-    .. code-block:: console
+   .. code-block:: console
 
       # uname -r
 
-    .. code-block:: none
+   .. code-block:: none
       :class: output
 
       3.10.0-229.el7.x86_64
 
-2. Run the Docker installation script:
+#. Run the Docker installation script:
 
-    .. tabs::
+   .. tabs::
 
       .. group-tab:: On Ubuntu/Debian machines
 
-        .. code-block:: console  
+         .. code-block:: console  
 
-          # curl -sSL https://get.docker.com/ | sh
+            # curl -sSL https://get.docker.com/ | sh
 
 
       .. group-tab:: On CentOS machines
 
-        .. code-block:: console  
+         .. code-block:: console  
 
-          # yum install -y yum-utils
-          # yum-config-manager --add-repo https://download.docker.com/linux/centos/docker-ce.repo
-          # yum install docker-ce docker-ce-cli containerd.io docker-compose-plugin
-
+            # yum install -y yum-utils
+            # yum-config-manager --add-repo https://download.docker.com/linux/centos/docker-ce.repo
+            # yum install docker-ce docker-ce-cli containerd.io docker-compose-plugin
 
       .. group-tab:: On Amazon Linux 2 machines
         
-        .. code-block:: console
+         .. code-block:: console
 
-          # yum update -y
-          # yum install docker
+            # yum update -y
+            # yum install docker
 
-
-3. Start the Docker service:
+#. Start the Docker service:
 
     .. tabs::
 
-
       .. group-tab:: Systemd
 
+         .. code-block:: console
 
-        .. code-block:: console
+            # systemctl start docker
 
-          # systemctl start docker
+      .. group-tab:: SysV init
 
+         .. code-block:: console
 
-      .. group-tab:: SysV Init
+            # service docker start
 
-        .. code-block:: console
+.. note::
 
-          # service docker start
-
-
-  .. note::
-     If you would like to use Docker as a non-root user, you should now consider adding your user to the ``docker`` group with something like the following command (remember that you’ll have to log out and log back in for this to take effect):
-
-
-      .. code-block:: console
-
-        # usermod -aG docker your-user
-
+   If you would like to use Docker as a non-root user, you should add your user to the ``docker`` group with something like the following command: ``usermod -aG docker your-user``. Log out and log back in for this to take effect.
 
 Docker compose
 --------------
 
-Docker Compose 1.29 or newer is required. Follow these steps to install it:
+The Wazuh Docker deployment requires Docker Compose 1.29 or later. Follow these steps to install it:
 
-1. Download the Docker Compose binary:
+#. Download the Docker Compose binary:
 
-    .. code-block:: console
+   .. code-block:: console
 
-      # curl -L "https://github.com/docker/compose/releases/download/1.29.2/docker-compose-$(uname -s)-$(uname -m)" -o /usr/local/bin/docker-compose
+      # curl -L "https://github.com/docker/compose/releases/download/v2.12.2/docker-compose-$(uname -s)-$(uname -m)" -o /usr/local/bin/docker-compose
 
-2. Grant execution permissions:
+#. Grant execution permissions:
 
-    .. code-block:: console
+   .. code-block:: console
 
       # chmod +x /usr/local/bin/docker-compose
 
+#. Test the installation to ensure everything is fine:
 
-    .. note::
-      If the command ``docker-compose`` fails after installation, check your path. You can also create a symbolic link to ``/usr/bin`` or any other directory in your path.
+   .. code-block:: console
 
-    For example:
+      # docker-compose --version
 
-    .. code-block:: console
-
-       # ln -s /usr/local/bin/docker-compose /usr/bin/docker-compose
-
-
-3. Test the installation to ensure everything went properly:
-
-    .. code-block:: console
-
-      $ docker-compose --version
-
-    .. code-block:: none
+   .. code-block:: none
       :class: output
 
-      docker-compose version 1.29.2, build 5becea4c
+      Docker Compose version v2.12.2
+
+   .. note::
+
+      If the command ``docker-compose`` fails after installation. Create a symbolic link to ``/usr/bin`` or any other directory in your path: ``ln -s /usr/local/bin/docker-compose /usr/bin/docker-compose``

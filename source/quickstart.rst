@@ -56,6 +56,20 @@ Wazuh central components can be installed on a 64-bit Linux operating system. Wa
     * - Red Hat Enterprise Linux 7, 8, 9
       - Ubuntu 16.04, 18.04, 20.04, 22.04
 
+
+Browser compatibility
+^^^^^^^^^^^^^^^^^^^^^
+
+Wazuh dashboard supports the following web browsers:
+
+- Chrome 95 or later
+- Firefox 93 or later
+- Safari 13.7 or later
+
+Other Chromium-based browsers might also work. Internet Explorer 11 is not supported.
+
+.. _quickstart_installing_wazuh:
+
 Installing Wazuh
 ----------------
 
@@ -86,12 +100,14 @@ Installing Wazuh
 
 When you access the Wazuh dashboard for the first time, the browser shows a warning message stating that the certificate was not issued by a trusted authority. This is expected and the user has the option to accept the certificate as an exception or, alternatively, configure the system to use a certificate from a trusted authority.
 
-You can find the passwords for all the Wazuh indexer and Wazuh API users in the ``wazuh-passwords.txt`` file inside ``wazuh-install-files.tar``. To print them, run the following command:
+.. note::
+   :class: not-long
+  
+   You can find the passwords for all the Wazuh indexer and Wazuh API users in the ``wazuh-passwords.txt`` file inside ``wazuh-install-files.tar``. To print them, run the following command:
 
-
-   .. code-block:: console
-   
-      # tar -O -xvf wazuh-install-files.tar wazuh-install-files/wazuh-passwords.txt
+      .. code-block:: console
+      
+         $ sudo tar -O -xvf wazuh-install-files.tar wazuh-install-files/wazuh-passwords.txt
 
 If you want to uninstall the Wazuh central components, run the Wazuh installation assistant using the option ``-u`` or ``–-uninstall``.
 

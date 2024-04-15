@@ -2,21 +2,18 @@
 
 .. tabs::
 
+   .. group-tab:: Systemd
 
-  .. tab:: Systemd
+      .. code-block:: console
 
+         # systemctl stop filebeat
+         # systemctl stop kibana
 
-    .. code-block:: console
+   .. group-tab:: SysV init
 
-      # systemctl stop filebeat
-      # systemctl stop kibana
+      .. code-block:: console
 
-
-  .. tab:: SysV Init
-
-    .. code-block:: console
-
-      # service filebeat stop
-      # service kibana stop
+         # service filebeat stop
+         # service kibana stop
 
 .. End of include file

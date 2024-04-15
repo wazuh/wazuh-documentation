@@ -1,7 +1,7 @@
 .. Copyright (C) 2015, Wazuh, Inc.
 
 
-#. Run the following commands replacing ``<indexer-node-name>`` with the name of the Wazuh indexer node you are configuring as defined in ``config.yml``. For example ``node-1``. This is to deploy  the SSL certificates to encrypt communications between the Wazuh central components.
+#. Run the following commands replacing ``<indexer-node-name>`` with the name of the Wazuh indexer node you are configuring as defined in ``config.yml``. For example, ``node-1``. This deploys the SSL certificates to encrypt communications between the Wazuh central components.
 
    .. code-block:: console
 
@@ -17,6 +17,6 @@
      # chmod 400 /etc/wazuh-indexer/certs/*
      # chown -R wazuh-indexer:wazuh-indexer /etc/wazuh-indexer/certs
     
-#. **Recommended action** - If no other Wazuh components are going to be installed on this node, remove ``wazuh-certificates.tar`` running ``rm -f ./wazuh-certificates.tar`` to increase security.
+#. **Recommended action**: If no other Wazuh components are going to be installed on this node, remove the ``wazuh-certificates.tar`` file by running ``rm -f ./wazuh-certificates.tar`` to increase security.
 
 .. End of include file

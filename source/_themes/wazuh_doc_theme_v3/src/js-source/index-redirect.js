@@ -7,4 +7,5 @@ switch (document.location.protocol) {
   default:
     url = 'https://documentation.wazuh.com';
 }
-document.location = url + '/current/index.html';
+
+document.location = url + '/' + DOCUMENTATION_OPTIONS.VERSION + '/getting-started/index.html';

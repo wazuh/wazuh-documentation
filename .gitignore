@@ -8,6 +8,8 @@ __pycache__
 .eslintrc
 package.json
 package-lock.json
+!source/_exts/wazuh-doc-images/package.json
+!source/_exts/wazuh-doc-images/package-lock.json
 !source/_themes/wazuh_doc_theme_v3/package.json
 !source/_themes/wazuh_doc_theme_v3/package-lock.json
 !source/_themes/wazuh_doc_theme_v3/src/js-source/libs/bootstrap/package.json

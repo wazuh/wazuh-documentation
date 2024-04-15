@@ -1,55 +1,57 @@
 .. Copyright (C) 2015, Wazuh, Inc.
 
 .. meta::
-
-   :description: In this section of the Wazuh documentation on how to configure email alerts, we show you the minimum configuration needed to use Postfix to send emails.  
-.. _smtp_authentication:
+   :description: Learn how to use Postfix to send email alerts using Gmail.
 
 SMTP server with authentication
 ===============================
 
-If your SMTP server uses authentication (like Gmail, for instance), a server relay will need to be configured as Wazuh does not support this. **Postfix** can be configured to provide this capability. The following guide describes the minimal configuration needed to use Postfix to send emails:
+Wazuh email alerts does not support SMTP servers with authentication such as Gmail. However, you can use a server relay, like Postfix, to send these emails. Follow this guide for instructions on configuring Postfix with Gmail.
 
-#. Install the needed packages:
+#. Run this command to install the required packages. If prompted about the **Mail server configuration type**, select **No configuration**.
 
-   Ubuntu
+   .. tabs::
 
-   .. code-block:: console
+      .. group-tab:: CentOS
 
-      # apt-get install postfix mailutils libsasl2-2 ca-certificates libsasl2-modules
+         .. code-block:: console
 
-   CentOS
+            # yum update && yum install postfix mailx cyrus-sasl cyrus-sasl-plain
 
-   .. code-block:: console
+      .. group-tab:: Ubuntu
 
-      # yum update && yum install postfix mailx cyrus-sasl cyrus-sasl-plain
+         .. code-block:: console
 
+            # apt-get update && apt-get install postfix mailutils libsasl2-2 ca-certificates libsasl2-modules
 
-#. Configure Postfix in the ``/etc/postfix/main.cf`` file adding these lines to the end of the file:
+#. Append these lines to ``/etc/postfix/main.cf`` to configure Postfix. Create the file if missing.
 
-   Ubuntu
+   .. tabs::
 
-   .. code-block:: cfg
+      .. group-tab:: CentOS
 
-      relayhost = [smtp.gmail.com]:587
-      smtp_sasl_auth_enable = yes
-      smtp_sasl_password_maps = hash:/etc/postfix/sasl_passwd
-      smtp_sasl_security_options = noanonymous
-      smtp_tls_CAfile = /etc/ssl/certs/ca-certificates.crt
-      smtp_use_tls = yes
+         .. code-block:: cfg
 
-   CentOS
+            relayhost = [smtp.gmail.com]:587
+            smtp_sasl_auth_enable = yes
+            smtp_sasl_password_maps = hash:/etc/postfix/sasl_passwd
+            smtp_sasl_security_options = noanonymous
+            smtp_tls_CAfile = /etc/ssl/certs/ca-bundle.crt
+            smtp_use_tls = yes
 
-   .. code-block:: cfg
+      .. group-tab:: Ubuntu
 
-      relayhost = [smtp.gmail.com]:587
-      smtp_sasl_auth_enable = yes
-      smtp_sasl_password_maps = hash:/etc/postfix/sasl_passwd
-      smtp_sasl_security_options = noanonymous
-      smtp_tls_CAfile = /etc/ssl/certs/ca-bundle.crt
-      smtp_use_tls = yes
+         .. code-block:: cfg
 
-#. Configure the email address and password:
+            relayhost = [smtp.gmail.com]:587
+            smtp_sasl_auth_enable = yes
+            smtp_sasl_password_maps = hash:/etc/postfix/sasl_passwd
+            smtp_sasl_security_options = noanonymous
+            smtp_tls_CAfile = /etc/ssl/certs/ca-certificates.crt
+            smtp_use_tls = yes
+            smtpd_relay_restrictions = permit_mynetworks, permit_sasl_authenticated, defer_unauth_destination
+
+#. Set the sender email address and password. Replace *USERNAME* and *PASSWORD* with your own data.
 
    .. code-block:: console
 
@@ -61,28 +63,37 @@ If your SMTP server uses authentication (like Gmail, for instance), a server rel
 
       The password must be an `App Password <https://security.google.com/settings/security/apppasswords>`__. App Passwords can only be used with accounts that have `2-Step Verification <https://myaccount.google.com/signinoptions/two-step-verification>`__ turned on.
 
-#. Secure the DB password:
+#. Secure your password DB file.
 
    .. code-block:: console
 
       # chown root:root /etc/postfix/sasl_passwd /etc/postfix/sasl_passwd.db
       # chmod 0600 /etc/postfix/sasl_passwd /etc/postfix/sasl_passwd.db
 
-#. Restart Postfix:
+#. Restart Postfix.
 
-   .. code-block:: console
 
-      # systemctl reload postfix
+   .. tabs::
 
-#. Test the configuration with:
+      .. group-tab:: Systemd
+
+         .. code-block:: console
+
+            # systemctl restart postfix
+
+      .. group-tab:: SysV init
+
+         .. code-block:: console
+
+            # service postfix restart
+
+#. Run the following command to test the configuration. Replace ``you@example.com`` with your email address. Check, then, that you receive this test email.
 
    .. code-block:: console
 
       # echo "Test mail from postfix" | mail -s "Test Postfix" -r "you@example.com" you@example.com
 
-   You should receive an email at ``you@example.com``.
-
-#. Configure Wazuh in the ``/var/ossec/etc/ossec.conf`` as follows:
+#. Configure email notifications in the Wazuh server ``/var/ossec/etc/ossec.conf`` file as follows:
 
    .. code-block:: xml
 
@@ -92,3 +103,7 @@ If your SMTP server uses authentication (like Gmail, for instance), a server rel
         <email_from>USERNAME@gmail.com</email_from>
         <email_to>you@example.com</email_to>
       </global>
+
+#. Restart the Wazuh manager to apply the changes. 
+
+   .. include:: /_templates/common/restart_manager.rst

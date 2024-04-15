@@ -1,5 +1,8 @@
 .. Copyright (C) 2015, Wazuh, Inc.
 
+.. meta::
+   :description: Learn about the Wazuh agent class and its variables to configure the Wazuh agent in this section of the Wazuh documentation. 
+
 .. _reference_wazuh_agent_class:
 
 Wazuh agent class
@@ -904,7 +907,7 @@ $agent_package_name
 $agent_package_version
   Define package version
 
-  `Default 4.3.6-1`
+  `Default |WAZUH_CURRENT_PUPPET|-1`
 
   `Type String`
 

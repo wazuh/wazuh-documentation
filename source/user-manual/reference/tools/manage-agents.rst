@@ -1,11 +1,14 @@
 .. Copyright (C) 2015, Wazuh, Inc.
 
+.. meta::
+  :description: The manage_agents program is available in both versions for server and agent installations. Learn more about it in this section of the Wazuh documentation.
+
 .. _manage_agents:
 
 manage_agents
 =============
 
-The manage_agents program is available in both a version for server and agent installations.
+The manage_agents program is available in both versions for server and agent installations.
 
 The purpose of manage_agents is to provide an easy-to-use interface to handle authentication
 keys for Wazuh agents. These authentication keys are required for secure (encrypted and

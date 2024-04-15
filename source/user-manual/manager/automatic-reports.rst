@@ -7,7 +7,10 @@
 
 Generating automatic reports
 -----------------------------
-Daily reports are summaries of the alerts that were triggered each day. You can configure your own customized report by using the ``report`` option in the ``ossec.conf`` file. More information on this can be found at :ref:`Report <reference_ossec_reports>`. For information on configuring email alerts, see the :ref:`Configuring email alerts <manual_email_report>` and :ref:`SMTP server with authentication <smtp_authentication>` sections for reference.
+
+Daily reports are summaries of the alerts that were triggered each day. You can configure your own customized report by using the ``report`` option in the ``ossec.conf`` file. See the :ref:`report <reference_ossec_reports>` documentation to learn more. 
+
+For information on configuring email alerts, see the :ref:`Configuring email alerts <manual_email_report>` and :doc:`SMTP server with authentication <manual-email-report/smtp-authentication>` sections. 
 
 .. code-block:: xml
 

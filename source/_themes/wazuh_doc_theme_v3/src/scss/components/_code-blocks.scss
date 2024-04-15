@@ -27,23 +27,6 @@ main {
     margin-top: 1rem;
     border-radius: $rounded-corners $rounded-corners 0 0;
 
-    .headerlink {
-      line-height: 1;
-      text-decoration: none;
-
-      &::after {
-        display: inline-block;
-        width: 1rem;
-        height: 1rem;
-        font: 400 .95rem/1 FontAwesome, sans-serif;
-        text-align: right;
-        vertical-align: middle;
-        content: "\f0c1";
-        opacity: 0;
-        transition: opacity ease-in .1s;
-      }
-    }
-
     &:hover {
       .headerlink::after {
         opacity: 1;
@@ -94,9 +77,7 @@ main {
         transition: transform .1s;
       }
     }
-    .linenodiv {
-      top: 60px;
-    }
+
     &.collapsed {
       max-height: 40px;
       transition: max-height .2s;
@@ -115,25 +96,6 @@ main {
     }
   }
 
-  .highlighttable {
-    width: 100%;
-    margin-top: 0;
-    margin-bottom: 0;
-    table-layout: fixed;
-
-    .highlight {
-      position: unset;
-      max-width: 100%;
-      padding-right: 0;
-      padding-bottom: 20px;
-      padding-left: 0;
-      overflow: auto; /* Fix to remove occasional vertical scroll in Safari */
-    }
-    .code {
-      background-color: transparent;
-    }
-  }
-
   &:hover {
     .copy-to-clipboard {
       opacity: 1;
@@ -146,7 +108,9 @@ main {
     right: 7px;
     z-index: 10;
     padding: 8px;
-    font: 400 14px/1 FontAwesome, sans-serif;
+    min-width: 28.25px;
+    height: 30px;
+    display: flex;
     cursor: pointer;
     border: 0;
     border-radius: $rounded-corners;
@@ -165,6 +129,11 @@ main {
       display: none;
       font-family: Manrope, sans-serif;
       font-size: .9rem;
+      line-height: 1;
+    }
+    svg {
+      width: 12.25px;
+      height: 14px;
     }
   }
 
@@ -180,29 +149,24 @@ main {
       overflow: visible;
     }
   }
-
-  .linenodiv {
-    position: absolute;
-    top: 20px;
-    z-index: 30;
-    display: inline-flex;
-    justify-content: center;
-    width: 50px;
-    line-height: 24px;
+  
+  .linenos {
+    display: inline-block;
+    height: 24px;
+    text-align: right;
+    padding-right: 20px;
+    margin-right: 20px;
+    width: 40px;
+    background-color: transparent;
     user-select: none;
     border-right: 1px solid;
-  }
-
-  .linenos {
-    width: 48px;
-    background-color: transparent;
   }
 
   .highlight {
     position: relative;
     z-index: 0;
     display: flex;
-    padding: 20px 0 0;
+    padding: 0;
     overflow-x: auto;
     font-family: "Fira Mono", monospace;
     line-height: 24px;
@@ -211,10 +175,16 @@ main {
       position: unset;
       padding: 0 20px 20px;
       margin: 0;
+      line-height: 24px;
+    }
+
+    & > pre {
+      padding-top: 20px;
     }
 
     .hll {
       display: block;
+      background-color: transparent;
 
       &::before {
         position: absolute;
@@ -234,17 +204,24 @@ main {
     }
 
     /*
-    .gp,
     .o,
-    .ow,
     .p,
     .p.p-Indicator,
-    .nn,
     .l.l-Scalar.l-Scalar-Plain {}
     */
     .k,
     .kn {
       font-weight: 500;
+    }
+
+    .gp,
+    .nc,
+    .ni,
+    .nn,
+    .nt,
+    .ow,
+    .se {
+      font-weight: 400;
     }
   }
 }
@@ -276,22 +253,29 @@ main {
         }
       }
     }
-    .highlighttable {
-      background-color: $light-color-code-block-background;
-      .linenos {
-        background-color: transparent;
-      }
+    .linenos {
+      background-color: transparent;
+      border-right-color: $light-color-table-border;  
     }
     .copy-to-clipboard {
       color: $light-color-main-text;
       background-color: $light-color-sidebar-space;
+      svg {
+        fill: $light-color-main-text;
+      }
       &:hover {
         color: $light-color-base-space;
         background-color: $light-color-primary-lighter;
+        svg {
+          fill: $light-color-base-space;
+        }
       }
       &.copied {
         color: $light-color-base-space;
         background-color: $light-color-primary;
+        svg {
+          fill: $light-color-base-space;
+        }
       }
     }
     .linenodiv {
@@ -306,15 +290,28 @@ main {
       .hll::before {
         background-color: $light-color-highlight-background;
       }
+      .no-select,
+      .gp {
+        color: rgba($light-color-code-default, .54)
+      }
+      .mo,
+      .nc,
+      .nn,
+      .ni,
+      .ow {
+        color: $light-color-code-default;
+      }
       .k,
       .kn {
         color: $light-color-code-keyword;
       }
       .c,
+      .cm,
       .c1,
       .cp,
       .ch,
-      .go {
+      .go,
+      .sd {
         color: $light-color-code-comment;
       }
 
@@ -345,8 +342,16 @@ main {
 
       .nt,
       .na,
-      .no {
+      .no,
+      .nv {
         color: $light-color-code-variable;
+      }
+    }
+  }
+  .highlight-console {
+    .highlight {
+      pre .nb {
+        color: $light-color-code-default;
       }
     }
   }
@@ -380,22 +385,29 @@ main {
         }
       }
     }
-    .highlighttable {
-      background-color: $dark-color-code-block-background;
-      .linenos {
-        background-color: transparent;
-      }
+    .linenos {
+      background-color: transparent;
+      border-right-color: $dark-color-table-border;      
     }
     .copy-to-clipboard {
       color: $dark-color-main-text;
       background-color: $dark-color-sidebar-space;
+      svg {
+        fill: $dark-color-main-text;
+      }
       &:hover {
         color: $dark-color-base-space;
         background-color: $dark-color-primary-lighter;
+        svg {
+          fill: $dark-color-base-space;
+        }
       }
       &.copied {
         color: $dark-color-base-space;
         background-color: $dark-color-primary;
+        svg {
+          fill: $dark-color-base-space;
+        }
       }
     }
     .linenodiv {
@@ -414,15 +426,28 @@ main {
           background-color: $dark-color-output-title-background;
         }
       }
+      .no-select,
+      .gp {
+        color: rgba($dark-color-code-default, .54)
+      }
+      .mo,
+      .nc,
+      .nn,
+      .ni,
+      .ow {
+        color: $dark-color-code-default;
+      }
       .k,
       .kn {
         color: $dark-color-code-keyword;
       }
       .c,
+      .cm,
       .c1,
       .cp,
       .ch,
-      .go {
+      .go,
+      .sd {
         color: $dark-color-code-comment;
       }
 
@@ -453,8 +478,16 @@ main {
 
       .nt,
       .na,
-      .no {
+      .no,
+      .nv {
         color: $dark-color-code-variable;
+      }
+    }
+  }
+  .highlight-console {
+    .highlight {
+      pre .nb {
+        color: $dark-color-code-default;
       }
     }
   }

@@ -1,11 +1,12 @@
 .. Copyright (C) 2015, Wazuh, Inc.
 
+.. meta::
+  :description: The Wazuh Ruleset is used to analyze incoming events and generate alerts when appropriate. Learn more about Perl-compatible regular expressions here.
+
 .. _regex_pcre2:
 
 Perl-compatible Regular Expressions
 ***********************************
-
-.. versionadded:: 4.1.0
 
 Log collecting and processing is one of the most important features in Wazuh,
 allowing users to know the status in real-time of the Wazuh agent operating system and
@@ -42,7 +43,7 @@ Example: ``(\d{1,3}\.?){4}`` it is shorter and equivalent to ``\d{1,3}\.?\d{1,3}
 Case sensitivity
 ----------------
 
-Compared to `OSRegex <regex.html#regex-os-regex-syntax>`_ and `OSMatch <regex.html#regex-os-regex-syntax>`_, which are case insensitive, PCRE regex are case sensitive by default. This can be changed by using ``(?i)``.
+Compared to :ref:`OSRegex <os_regex_syntax>` and :ref:`OSMatch <sregex_os_match_syntax>`, which are case insensitive, PCRE regex are case sensitive by default. This can be changed by using ``(?i)``.
 Example: `post` will match ``(?i)POST|GET|PUT`` regex but not ``POST|GET|PUT``.
 
 Groups within groups
@@ -85,14 +86,14 @@ Configuring PCRE
 
 PCRE can be enabled in rules and decodes using the ``type="pcre2"`` attribute,
 which also will allow to set other regex like ``type="osregex"`` and ``type="osmatch"`` for
-`OSRegex <regex.html#regex-os-regex-syntax>`_ and `OSMatch <regex.html#regex-os-regex-syntax>`_, respectively, depending on the case.
+:ref:`OSRegex <os_regex_syntax>` and :ref:`OSMatch <sregex_os_match_syntax>`, respectively, depending on the case.
 
 Decoders
 --------
 
-- `program_name <decoders.html#program-name>`__
-- `prematch <decoders.html#prematch>`_
-- `regex <decoders.html#regex>`_
+-  :ref:`program_name <decoders_program_name>`
+-  :ref:`prematch <decoders_prematch>`
+-  :ref:`regex <decoders_regex>`
 
 A simple example of data extraction with PCRE. Here is a log of a program called example_pcre2:
 
@@ -118,15 +119,15 @@ Using PCRE in a decoder it is possible to extract the user, email and email doma
 Rules
 -----
 
-- **Options**: `OSRegex <regex.html#regex-os-regex-syntax>`_, `OSMatch <regex.html#regex-os-regex-syntax>`_
+- **Options**: :ref:`OSRegex <os_regex_syntax>`, :ref:`OSMatch <sregex_os_match_syntax>`
 - **Static fields**:
-  `action <rules.html#action>`_,
-  `extra_data <rules.html#extra-data>`_, `hostname <rules.html#hostname>`_, `id <rules.html#id>`_,
-  `location <rules.html#location>`_, `match <rules.html#match>`_, `program_name <rules.html#program-name>`_,
-  `protocol <rules.html#protocol>`_, `user <rules.html#user>`_, `url <rules.html#url>`_,
-  `srcport <rules.html#srcport>`_, `dstport <rules.html#dstport>`_, `status <rules.html#status>`_,
-  `system_name <rules.html#system-name>`_, `dstgeoip <rules.html#dstgeoip>`_,
-  `srcgeoip <rules.html#srcgeoip>`_
+  :ref:`action <rules_action>`,
+  :ref:`extra_data <rules_extra_data>`, :ref:`hostname <rules_hostname>`, :ref:`id <rules_id>`,
+  :ref:`location <rules_location>`, :ref:`match <rules_match>`, :ref:`program_name <rules_prog_name>`,
+  :ref:`protocol <rules_protocol>`, :ref:`user <rules_user>`, :ref:`url <rules_url>`,
+  :ref:`srcport <rules_srcport>`, :ref:`dstport <rules_dstport>`, :ref:`status <rules_status>`,
+  :ref:`system_name <rules_sys_name>`, :ref:`dstgeoip <rules_dstgeoip>`,
+  :ref:`srcgeoip <rules_srcgeoip>`
 - **Dynamic fields**: field
 
 Use case: Accurate PAM user alerts

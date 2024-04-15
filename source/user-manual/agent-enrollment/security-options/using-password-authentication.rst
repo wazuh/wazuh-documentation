@@ -52,7 +52,7 @@ Before an agent can be enrolled to the Wazuh manager using the password authenti
 
          .. code-block:: console
 
-            # chmod 644 /var/ossec/etc/authd.pass
+            # chmod 640 /var/ossec/etc/authd.pass
             # chown root:wazuh /var/ossec/etc/authd.pass
 
       #. Restart the Wazuh service for the changes to take effect.
@@ -102,11 +102,11 @@ The following steps serve as a guide on how to enroll a Linux/Unix endpoint with
 
 
    #. You have to replace ``<CUSTOM_PASSWORD>`` with the agents enrollment password created on the manager.
-   #. File permissions for the ``authd.pass`` file should be set to 644 and the owner should be ``root``. The permissions and ownership can be configured by running the commands below:
+   #. File permissions for the ``authd.pass`` file should be set to 640 and the owner should be ``root``. The permissions and ownership can be configured by running the commands below:
 
       .. code-block:: console
 
-         # chmod 644 /var/ossec/etc/authd.pass
+         # chmod 640 /var/ossec/etc/authd.pass
          # chown root:wazuh /var/ossec/etc/authd.pass
 
 
@@ -159,7 +159,7 @@ The following steps serve as a guide on how to enroll a Linux/Unix endpoint with
              # /var/ossec/bin/wazuh-control restart
 
 
-#. Select the “agents” tab to check for the newly enrolled agent and its connection status in the Wazuh dashboard to confirm that enrollment was successful.
+#. Select the **Server management** > **Endpoints Summary** module to check for the newly enrolled agent and its connection status in the Wazuh dashboard to confirm that enrollment was successful.
 
 
 .. _password-authentication-windows-endpoint:
@@ -219,7 +219,7 @@ The Wazuh agent installation directory depends on the architecture of the host.
                # net start wazuh
 
 
-#. Select the “agents” tab to check for the newly enrolled agent and its connection status in the Wazuh dashboard to confirm that enrollment was successful.
+#. Select the **Server management** > **Endpoints Summary** module to check for the newly enrolled agent and its connection status in the Wazuh dashboard to confirm that enrollment was successful.
 
 
 .. _password-authentication-macos-endpoint:
@@ -239,11 +239,11 @@ The following steps serve as a guide on how to enroll a macOS endpoint with pass
       # echo "<CUSTOM_PASSWORD>" > /Library/Ossec/etc/authd.pass
 
    #. You have to replace ``<CUSTOM_PASSWORD>`` with the agents enrollment password created on the manager.
-   #. File permissions for the ``authd.pass`` file should be set to 644 and the owner should be root. The permissions and ownership can be configured by running the commands below:
+   #. File permissions for the ``authd.pass`` file should be set to 640 and the owner should be root. The permissions and ownership can be configured by running the commands below:
 
       .. code-block:: console 
 
-         # chmod 644 /Library/Ossec/etc/authd.pass
+         # chmod 640 /Library/Ossec/etc/authd.pass
          # chown root:wazuh /Library/Ossec/etc/authd.pass
 
       The output below shows the recommended file owner and permissions:
@@ -274,5 +274,5 @@ The following steps serve as a guide on how to enroll a macOS endpoint with pass
 
         # /Library/Ossec/bin/wazuh-control restart
 
-#. Select the “agents” tab to check for the newly enrolled agent and its connection status in the Wazuh dashboard to confirm that enrollment was successful.
+#. Select the **Server management** > **Endpoints Summary** module to check for the newly enrolled agent and its connection status in the Wazuh dashboard to confirm that enrollment was successful.
 

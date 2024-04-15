@@ -2,6 +2,7 @@
 
 .. meta::
   :description: Wazuh 3.4.0 has been released. Check out our release notes to discover the changes and additions of this release.
+  
 .. _release_3_4_0:
 
 3.4.0 Release notes - 24 July 2018
@@ -22,7 +23,7 @@ Wazuh core
 The main feature introduced in this version is the ability to monitor the information relative to the user who
 makes changes to any file monitored with FIM. This information (who-data) contains the user who makes the changes
 and also the process used. This new functionality is available in Syscheck on Linux and Windows.
-See the :ref:`Auditing who-data <auditing-whodata>` section for further information.
+See the :ref:`Auditing who-data <who-data-monitoring>` section for further information.
 
 
 Many others improvements and fixes have been included in Syscheck in this new version:

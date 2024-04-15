@@ -1,5 +1,8 @@
 .. Copyright (C) 2015, Wazuh, Inc.
 
+.. meta::
+   :description: Learn how to install a Puppet agent in this section of the Wazuh documentation. 
+
 .. _setup_puppet_agent:
 
 Installing Puppet agent
@@ -65,7 +68,7 @@ Install the appropriate Puppet apt repository, and then the “puppet-agent” p
 
     # wget https://apt.puppet.com/puppet7-release-focal.deb
     # dpkg -i puppet7-release-focal.deb
-    # apt update
+    # apt-get update
     # apt-get install -y puppet-agent
 
 
@@ -109,10 +112,17 @@ Installation on Windows
 Agent Configuration
 ^^^^^^^^^^^^^^^^^^^
 
-Add the server value to the ``[main]`` section of the node ``/etc/puppetlabs/puppet/puppet.conf`` (Linux) or  ``C:\ProgramData\PuppetLabs\puppet\etc\puppet.conf`` (Windows) file, replacing ``puppet.example.com`` with your Puppet server FQDN::
+To configure the Puppet agent, edit the configuration file in the node.
 
-   [main]
-   server = puppet-master.com
+-  ``/etc/puppetlabs/puppet/puppet.conf`` for Linux systems
+-  ``C:\ProgramData\PuppetLabs\puppet\etc\puppet.conf`` for Windows systems
+
+Add the ``server`` setting to the ``[main]`` section of the file.  If you have set up your own DNS, replace ``puppet-master`` with the Fully Qualified Domain Name (FQDN) of your Puppet server.
+
+   .. code-block:: none
+
+      [main]
+      server = puppet-master
    
 
 .. note:: The Puppet server FQDN should be resolved by the Puppet agent host.

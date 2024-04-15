@@ -13,22 +13,32 @@
       # systemctl start wazuh-agent
 
 
-  .. group-tab:: SysV Init
+  .. group-tab:: SysV init
 
     Choose one option according to your operating system.
 
-    a) RPM based operating systems:
+    a) RPM-based operating systems:
 
       .. code-block:: console
 
         # chkconfig --add wazuh-agent
         # service wazuh-agent start
 
-    b) Debian based operating systems:
+    b) Debian-based operating systems:
 
       .. code-block:: console
 
         # update-rc.d wazuh-agent defaults 95 10
         # service wazuh-agent start
+
+
+
+  .. group-tab:: No service manager
+
+     On some systems, like Alpine Linux, you need to start the agent manually: 
+
+     .. code-block:: console
+
+       # /var/ossec/bin/wazuh-control start
 
 .. End of include file

@@ -27,17 +27,20 @@ This wodle is executed on the agent, so each agent must meet the following requi
     OpenSCAP
     In order to perform SCAP evaluations, we need the scanner. As we mentioned above, we use OpenSCAP. You can install it with this command:
 
-      a) For RPM-based distributions:
+      .. tabs::
 
-        .. code-block:: console
+        .. group-tab:: Yum
 
-          # yum install openscap-scanner
+            .. code-block:: console
 
-      b) For Debian-based distributions:
+              # yum install openscap-scanner
 
-        .. code-block:: console
+        .. group-tab:: APT
 
-          # apt-get install libopenscap8 xsltproc
+            .. code-block:: console
+
+              # apt-get install libopenscap8 xsltproc
+
 
     Python 2.6+
     Python is a core part of this wodle. Currently, all Linux distributions come with python, so it should not be an inconvenience.
@@ -79,7 +82,8 @@ Wodle flow
 ------------
 
 .. thumbnail:: ../../../../images/manual/policy-compliance/openscap-flow.png
-  :title: OpenSCAP
+  :title: OpenSCAP workflow
+  :alt: OpenSCAP workflow
   :align: center
   :width: 100%
 

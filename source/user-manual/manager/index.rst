@@ -12,14 +12,16 @@ The Wazuh manager is the system that analyzes the data received from all registe
 
 .. topic:: Contents
 
-    .. toctree::
-        :maxdepth: 2
+   .. toctree::
+      :maxdepth: 2
 
-        remote-service
-        alert-threshold
-        manual-integration
-        manual-syslog-output
-        manual-database-output
-        automatic-reports
-        manual-email-report/index
-        manual-backup-restore
+      remote-service
+      alert-threshold
+      manual-integration
+      manual-syslog-output
+      manual-database-output
+      automatic-reports
+      manual-email-report/index
+      manual-backup-restore
+      fluent-forwarder
+      wazuh-archives

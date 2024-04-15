@@ -1,5 +1,8 @@
 .. Copyright (C) 2015, Wazuh, Inc.
 
+.. meta::
+   :description: Learn how to install the Puppet server in this section of the Wazuh documentation. 
+
 .. _setup_puppet_master:
 
 Installing Puppet master
@@ -32,7 +35,7 @@ Create a symbolic link between the installed binary file and your default binary
   .. code-block:: console
 
     # ln -s /opt/puppetlabs/bin/puppet /bin
-
+    # ln -s /opt/puppetlabs/server/bin/puppetserver /bin
 
 Installation on Debian/Ubuntu
 -----------------------------
@@ -63,7 +66,7 @@ Install the appropriate Puppet apt repository, and then the “puppetserver” p
 
     # wget https://apt.puppet.com/puppet7-release-focal.deb
     # dpkg -i puppet7-release-focal.deb
-    # apt update
+    # apt-get update
     # apt-get install -y puppetserver
 
 
@@ -88,19 +91,13 @@ Replace 2g in the ``JAVA_ARGS`` variable with the amount of memory you want to a
 Configuration
 -------------
 
-Edit the ``/etc/puppetlabs/puppet/puppet.conf`` file, adding this line to the ``[main]`` section (create the section if it does not exist), and replacing ``puppet,puppet-master`` with your own FQDN:
+Edit the ``/etc/puppetlabs/puppet/puppet.conf`` file to configure the Puppet server. Add the following settings to the ``[main]`` section. You need to create the section if it doesn't exist. If you have set up your own DNS, replace ``puppet`` and ``puppet-master`` with your Fully Qualified Domain Names (FQDNs).
 
-  ::
+   .. code-block:: none
 
-    dns_alt_names = puppet,puppet-master
-
-Also add the [server] section with the following content in the ``/etc/puppetlabs/puppet/puppet.conf`` file replacing ``puppet-master`` with your own FQDN:
-
-  ::
-
-    [main]
-    server = puppet-master
-
+      [main]
+      server = puppet-master
+      dns_alt_names = puppet, puppet-master
 
 .. note:: If you find ``templatedir=$confdir/templates`` in the config file, delete that line.  It has been deprecated.
 
@@ -114,17 +111,19 @@ For Ubuntu/Debian machines, in case puppetserver does not start. Edit the puppet
 
 Then, start your Puppet Server:
 
-  a) For Systemd:
+   .. tabs::
 
-    .. code-block:: console
+         .. group-tab:: Systemd 
 
-      # systemctl start puppetserver
-      # systemctl enable puppetserver
-      # systemctl status puppetserver
+            .. code-block:: console
 
-  b) For SysV Init:
+               # systemctl start puppetserver
+               # systemctl enable puppetserver
+               # systemctl status puppetserver
 
-    .. code-block:: console
+         .. group-tab:: SysV init
 
-      # service puppetserver start
-      # update-rc.d puppetserver
+            .. code-block:: console
+
+               # service puppetserver start
+               # update-rc.d puppetserver

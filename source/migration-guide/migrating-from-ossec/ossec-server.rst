@@ -84,7 +84,25 @@ Now we will restore the following files:
    $ cp -p /var/ossec_backup/rules/local_rules.xml /var/ossec/etc/rules/local_rules.xml
    $ cp -p /var/ossec_backup/queue/rids/sender_counter /var/ossec/queue/rids/sender_counter
 
-There have been some syntax changes, and new settings, incorporated to ``ossec.conf`` file. Please review this file manually in order to import your previous configuration. In addition, note note that ``agent.conf`` file directory has now changed to ``/var/ossec/etc/shared/default``.
+There have been some syntax changes, and new settings, incorporated to ``ossec.conf`` file. Please review this file manually in order to import parts of your previous configuration from ``ossec.conf.orig``. In addition, if you have existing ossec clients, then you may need to enable receiving UDP on port 1514 by changing the following block in ``ossec.conf``:
+
+.. code-block:: xml
+
+  <remote>
+    <connection>secure</connection>
+    <port>1514</port>
+    <protocol>tcp</protocol>
+
+To:
+
+.. code-block:: xml
+
+  <remote>
+    <connection>secure</connection>
+    <port>1514</port>
+    <protocol>tcp,udp</protocol>
+
+Also note that the ``agent.conf`` file directory has now changed to ``/var/ossec/etc/shared/default``.
 
 Optionally the following files can be restored to preserve alert log files and syscheck/rootcheck databases:
 

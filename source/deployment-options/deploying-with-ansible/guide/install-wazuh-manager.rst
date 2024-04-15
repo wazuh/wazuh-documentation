@@ -157,13 +157,13 @@ Now, we are ready to run the playbook and start the installation. However, some 
 
 #. We can check the status of the new services on our Wazuh server.
 
-	-  Wazuh manager.
+	-  **Wazuh manager**
 
 		.. code-block:: console
 
 			# systemctl status wazuh-manager
 
-	-  Filebeat.
+	-  **Filebeat**
 
 		.. code-block:: console
 
@@ -171,7 +171,7 @@ Now, we are ready to run the playbook and start the installation. However, some 
 
 .. note::
 	
-	- 	The Wazuh dashboard can be accessed by visiting ``https://<wazuh_server_IP>:5601``
+	- 	The Wazuh dashboard can be accessed by visiting ``https://<wazuh_server_IP>``
 
 	- 	The default credentials for Wazuh deployed using ansible is:
 		

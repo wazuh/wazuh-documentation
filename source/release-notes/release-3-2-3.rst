@@ -2,6 +2,7 @@
 
 .. meta::
   :description: Wazuh 3.2.3 has been released. Check out our release notes to discover the changes and additions of this release.
+  
 .. _release_3_2_3:
 
 3.2.3 Release notes - 28 May 2018
@@ -20,7 +21,7 @@ GDPR Support
 
 The `General Data Protection Regulation <https://www.eugdpr.org/>`_ took effect on 25th May 2018. Wazuh helps with most technical requirements, taking advantage of features such as File Integrity or Policy monitoring. In addition, the entire Ruleset has been mapped following the GDPR regulation, enriching all the alerts related to this purpose.
 
-You can read more information about the GDPR regulation and how Wazuh faces it on the this section: :ref:`gdpr`.
+You can read more information about the GDPR regulation and how Wazuh faces it on the this section: :doc:`/compliance/gdpr/index`.
 
 Wazuh cluster
 -------------
@@ -38,7 +39,7 @@ Core improvements
 
 These are the most relevant changes in the Wazuh core:
 
-- :ref:`Vulnerability-detector <vulnerability-detection>` continues to expand its scope, now adding support for Amazon Linux. A bug when comparing epoch versions has also been fixed.
+- :doc:`Vulnerability-detector </user-manual/capabilities/vulnerability-detection/index>` continues to expand its scope, now adding support for Amazon Linux. A bug when comparing epoch versions has also been fixed.
 - The agent limit has been increased to ``14000`` by default, improving the manager availability in large environments.
 - More internal bugs reported by the community have been fixed for this version.
 

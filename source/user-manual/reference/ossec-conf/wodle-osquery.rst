@@ -1,5 +1,8 @@
 .. Copyright (C) 2015, Wazuh, Inc.
 
+.. meta::
+  :description: Find out the configuration options of the osquery wodle. Learn more about it in this section of the Wazuh documentation.
+
 .. _wodle-osquery:
 
 wodle name="osquery"

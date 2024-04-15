@@ -2,6 +2,7 @@
 
 .. meta::
   :description: Wazuh 3.0.0 has been released. Check out our release notes to discover the changes and additions of this release.
+  
 .. _release_3_0_0:
 
 3.0.0 Release notes - 3 December 2017
@@ -145,7 +146,7 @@ Below is an example of an alert triggered from a positive result:
    virustotal.scan_date: 2017-11-14 17:24:37
    integration: virustotal
 
-The complete documentation of this integration is located at :doc:`VirusTotal integration section <../user-manual/capabilities/virustotal-scan/index>`.
+The complete documentation of this integration is located at :doc:`VirusTotal integration section </user-manual/capabilities/malware-detection/virus-total-integration>`.
 
 MSI Windows installer for agents
 --------------------------------
@@ -154,7 +155,7 @@ A new digitally signed MSI Windows installer has been developed in order to impr
 
 This installer can be launched in unattended mode from the command line and combines the agent installation, configuration, registration and connection into a single step.
 
-The procedure for using the MSI installer can be found at: :ref:`Install Wazuh agent on Windows <wazuh_agent_package_windows>`
+The procedure for using the MSI installer can be found at: :doc:`Install Wazuh agent on Windows </installation-guide/wazuh-agent/wazuh-agent-package-windows>`
 
 
 Wazuh API

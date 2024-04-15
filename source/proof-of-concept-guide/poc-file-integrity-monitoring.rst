@@ -1,72 +1,98 @@
+.. Copyright (C) 2015, Wazuh, Inc.
+
 .. meta::
-  :description: The Wazuh File Integrity Monitoring system watches for modification of files in selected directories and triggers alerts when these files are modified. Learn more about it in this PoC.
-
-
-.. _poc_fim:
+   :description: The Wazuh File Integrity Monitoring system watches for modification of files in selected directories and triggers alerts when these files are modified. Learn more about it in this PoC.
 
 File integrity monitoring
 =========================
 
-In this PoC, the Wazuh File Integrity Monitoring (FIM) system watches for modifying files in the monitored directories. Then FIM triggers alerts when these files are modified. Additionally, it enriches alert data by fetching information about the user who made the changes and the process at play.
+File Integrity Monitoring (FIM) helps in auditing sensitive files and meeting regulatory compliance requirements. Wazuh has an inbuilt :doc:`FIM </user-manual/capabilities/file-integrity/index>` module that monitors file system changes to detect the creation, modification, and deletion of files.
 
-See the :ref:`File integrity monitoring <manual_file_integrity>` section of our documentation for more information about FIM functionality and configuration.
+This use case uses the Wazuh FIM module to detect changes in monitored directories on Ubuntu and Windows endpoints. The Wazuh FIM module enriches alert data by fetching information about the user and process that made the changes using :ref:`who-data audit <who-data-monitoring>`.
 
+Infrastructure 
+--------------
+
++---------------+-----------------------------------------------------------------------------------------------------------------+
+| Endpoint      | Description                                                                                                     |
++===============+=================================================================================================================+
+| Ubuntu 22.04  | The Wazuh FIM module monitors a directory on this endpoint to detect file creation, changes, and deletion.      |
++---------------+-----------------------------------------------------------------------------------------------------------------+
+| Windows 11    | The Wazuh FIM module monitors a directory on this endpoint to detect file creation, changes, and deletion.      |
++---------------+-----------------------------------------------------------------------------------------------------------------+
 
 Configuration
 -------------
 
-Configure your environment as follows to test the PoC.
+Ubuntu endpoint
+^^^^^^^^^^^^^^^
 
-#. Edit ``/var/ossec/etc/ossec.conf`` in the monitored Ubuntu 20 endpoint and enable whodata by adding ``whodata="yes"`` to the monitored directories.
+Perform the following steps to configure the Wazuh agent to monitor filesystem changes in the ``/root`` directory.
 
-    .. code-block:: XML
+#. Edit the Wazuh agent ``/var/ossec/etc/ossec.conf`` configuration file. Add the directories for monitoring within the ``<syscheck>`` block. For this use case, you configure Wazuh to monitor the ``/root`` directory. To get additional information about the user and process that made the changes, enable :ref:`who-data audit <who-data-monitoring-linux>`:
 
-        <syscheck>
-            <directories check_all="yes" whodata="yes">/usr/bin,/usr/sbin</directories>
-            <directories check_all="yes" whodata="yes">/bin,/sbin,/boot</directories>
-            <directories check_all="yes" report_changes="yes" whodata="yes" tags="cron">/etc/cron*</directories>
-            <directories check_all="yes" report_changes="yes" whodata="yes" recursion_level="2">/home,/root</directories>
-        </syscheck>
+   .. code-block:: xml
 
-#. Restart the Linux Wazuh agent to apply the configuration changes.
+      <directories check_all="yes" report_changes="yes" realtime="yes">/root</directories>
 
-    .. code-block:: console
+   .. note::
+   
+      You can also configure any path of your choice in the ``<directories>`` block.
 
-        # systemctl restart wazuh-agent
+#. Restart the Wazuh agent to apply the configuration changes:
 
-#. Edit ``C:\Program Files (x86)\ossec-agent\ossec.conf`` in the monitored Windows endpoint and add directories for monitoring including the ``whodata="yes"`` switch.
+   .. code-block:: console
 
-    .. code-block:: XML
-
-        <syscheck>
-            <scan_on_start>yes</scan_on_start>
-            <directories check_all="yes" report_changes="yes" whodata="yes">C:\\Users\\Administrator\\Desktop</directories>
-            <directories check_all="yes" report_changes="yes" whodata="yes">C:\\Wazuh</directories>
-        </syscheck>
-
-#. Restart the Windows Wazuh agent to apply the configuration changes using the UI.
+      $ sudo systemctl restart wazuh-agent
 
 
-As an alternative to local configurations, you can :ref:`centrally configure groups of agents <reference_agent_conf>`.
+Windows endpoint
+^^^^^^^^^^^^^^^^
 
-Steps to generate the alerts
-----------------------------
+Take the following steps to configure the Wazuh agent to monitor filesystem changes in the ``C:\Users\Administrator\Desktop`` directory.
 
-#. Create, remove, or modify a file in the monitored directories.
+#. Edit the ``C:\Program Files (x86)\ossec-agent\ossec.conf`` configuration file on the monitored Windows endpoint. Add the directories for monitoring within the ``<syscheck>`` block. For this use case, you  configure Wazuh to monitor the ``C:\Users\Administrator\Desktop`` directory. To get additional information about the user and process that made the changes, enable :ref:`who-data audit <who-data-monitoring-windows>`:
 
-Query the alerts
-----------------
+   .. code-block:: xml
 
-You can visualize the alert data in the Wazuh dashboard. To do this, go to the **Security events** module and add the filters in the search bar to query the alerts.
+      <directories check_all="yes" report_changes="yes" realtime="yes">C:\Users\<USER_NAME>\Desktop</directories>
 
-- ``syscheck.path: "{path_to_the_modified_file}"``
+   .. note::
+   
+      You can also configure any path of your choice in the ``<directories>`` block.
 
-.. thumbnail:: ../images/poc/File-integrity-monitoring-1.png
-          :title: File integrity monitoring Linux
-          :align: center
-          :wrap_image: No
+#. Restart the Wazuh agent using Powershell with administrator privileges to apply the changes:
 
-.. thumbnail:: ../images/poc/File-integrity-monitoring-2.png
-          :title: File integrity monitoring Windows
-          :align: center
-          :wrap_image: No
+   .. code-block:: powershell
+
+      > Restart-Service -Name wazuh
+
+As an alternative to local configurations on the Wazuh agents, you can :doc:`centrally configure groups of agents </user-manual/reference/centralized-configuration>`.
+
+Test the configuration
+----------------------
+
+#. Create a text file in the monitored directory then wait for 5 seconds.
+
+#. Add content to the text file and save it. Wait for 5 seconds.
+
+#. Delete the text file from the monitored directory.
+
+Visualize the alerts
+--------------------
+
+You can visualize the alert data in the Wazuh dashboard. To do this, go to the **Threat Hunting** module and add the filters in the search bar to query the alerts:
+
+-  Ubuntu - ``rule.id: is one of 550,553,554``
+
+   .. thumbnail:: /images/poc/fim-alerts-ubuntu.png
+         :title: Visualize FIM alerts from Ubuntu system
+         :align: center
+         :width: 80%
+
+-  Windows - ``rule.id: is one of 550,553,554``
+
+   .. thumbnail:: /images/poc/fim-alerts-windows.png
+         :title: Visualize FIM alerts from Ubuntu system
+         :align: center
+         :width: 80%

@@ -1,5 +1,8 @@
 .. Copyright (C) 2015, Wazuh, Inc.
 
+.. meta::
+  :description: Wazuh provides an automated way of building macOS packages. Learn how to build your own Wazuh macOS packages in this section of our documentation.
+
 .. _create-osx:
 
 macOS
@@ -36,6 +39,7 @@ Execute the ``generate_wazuh_packages.sh`` script, with the different options yo
   Usage: ./generate_wazuh_packages.sh [OPTIONS]
 
     Build options:
+      -a, --architecture <arch>     [Optional] Select architecture to build (intel64 or arm64). Default: intel64
       -b, --branch <branch>         [Required] Select Git branch or tag.
       -s, --store-path <path>       [Optional] Set the destination absolute path of package.
       -j, --jobs <number>           [Optional] Number of parallel jobs when compiling.

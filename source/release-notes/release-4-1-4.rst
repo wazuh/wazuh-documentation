@@ -2,6 +2,7 @@
 
 .. meta::
   :description: Wazuh 4.1.4 has been released. Check out our release notes to discover the changes and additions of this release.
+  
 .. _release_4_1_4:
 
 4.1.4 Release notes - 25 March 2021

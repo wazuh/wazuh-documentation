@@ -1,5 +1,8 @@
 .. Copyright (C) 2015, Wazuh, Inc.
 
+.. meta::
+  :description: List outdated agents and upgrade them using the agent_upgrade program. Learn more about it in this section of the Wazuh documentation.
+  
 .. _agent_upgrade:
 
 agent_upgrade
@@ -21,7 +24,7 @@ The agent_upgrade program allows you to list outdated agents and upgrade them.
 +--------------------------------------------+--------------------------------------------------------------------------------+
 | -a AGENT_IDs, --agents AGENT_IDs           | Agent IDs to upgrade. When upgrading multiple agents, separate IDs with spaces.|
 +--------------------------------------------+--------------------------------------------------------------------------------+
-| -F, --force                                | Allows reinstall same version and downgrade version.                           |
+| -F, --force                                | Forces the agents to upgrade, ignoring version validations.                    |
 +--------------------------------------------+--------------------------------------------------------------------------------+
 | -s, --silent                               | Do not show output.                                                            |
 +--------------------------------------------+--------------------------------------------------------------------------------+

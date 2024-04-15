@@ -2,6 +2,7 @@
 
 .. meta::
   :description: Wazuh 2.1 has been released. Check out our release notes to discover the changes and additions of this release.
+  
 .. _release_2_1:
 
 2.1 Release notes - 17 August 2017
@@ -24,14 +25,14 @@ Anti-flooding mechanism
 
 The Anti-flooding mechanism is designed to prevent large bursts of events on an agent from negatively impacting the network or the manager. It uses a leaky bucket queue that collects all generated events and sends them to the manager at a rate below a specified events per second threshold.
 
-Learn more about this new mechanism at :doc:`Anti-flooding mechanism <../user-manual/capabilities/antiflooding>`.
+Learn more about this new mechanism at :doc:`Anti-flooding mechanism <../user-manual/agents/antiflooding>`.
 
 Labels for agent alerts
 -----------------------
 
 This feature allows agent-specific attributes to be included in each alert. These labels provide a simple way of adding valuable metadata to alert records and can include data points like who is in charge of a particular agent or the agent's installation date and .
 
-For more details about this new feature see our :doc:`Labels section <../user-manual/capabilities/labels>`.
+For more details about this new feature see our :doc:`Labels section <../user-manual/agents/labels>`.
 
 Improved Authd performance
 --------------------------

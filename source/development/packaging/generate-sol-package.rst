@@ -1,11 +1,14 @@
 .. Copyright (C) 2015, Wazuh, Inc.
 
+.. meta::
+  :description: Wazuh provides an automated way of building Solaris 10 and 11 packages. Learn how to build your own Wazuh Solaris 10 and 11 packages in this section.
+
 .. _create-sol:
 
 Solaris
 =======
 
-Wazuh provides an automated way of building a solaris 10 and 11, keep in mind that to build these packages you must use the corresponding system.
+Wazuh provides an automated way of building Solaris 10 and 11 packages, keep in mind that to build these packages you must use the corresponding system.
 
 To create an Solaris package follow these steps:
 

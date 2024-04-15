@@ -42,9 +42,10 @@ An installation assistant ``wazuh-install.sh`` is available to users, allowing a
 
 Now, the agent is able to collect the installed packages inventory on Amazon Linux and Arch Linux, giving support to Vulnerability Detector for reporting vulnerability exposures. In addition, the Vulnerability Detector now manages a vulnerability inventory and produces alerts during the first agents scan and when a new vulnerability is either found or solved.
 
-.. thumbnail::  ../images/release-notes/4.3.0/packages-inventory.png
-      :title: Packages inventory
-      :align: center
+.. thumbnail:: /images/release-notes/4.3.0/vulnerability-detection.png
+      :title: vulnerability detection inventory
+      :alt: vulnerability detection inventory
+      :align: center      
 
 New integrations to collect auditing logs from Office 365 and GitHub are added to the agent in this new version. A side panel component that displays information about the active module of the Office 365 setup is introduced, and the Wazuh dashboard now includes events from Office 365. Moreover, Wazuh now supports Logcollector with native macOS logs (Unified Logging System), AWS S3 Server Access logs, and Google Cloud Storage buckets and access logs.
 
@@ -710,7 +711,7 @@ Changelogs
 
 More details about these changes are provided in the changelog of each component:
 
-- `wazuh/wazuh <https://github.com/wazuh/wazuh/blob/v4.3.0-rc7/CHANGELOG.md>`_
-- `wazuh/wazuh-kibana-app <https://github.com/wazuh/wazuh-kibana-app/blob/v4.3.0-7.17.3-rc8/CHANGELOG.md>`_
+- `wazuh/wazuh <https://github.com/wazuh/wazuh/blob/v4.3.0/CHANGELOG.md>`_
+- `wazuh/wazuh-kibana-app <https://github.com/wazuh/wazuh-kibana-app/blob/v4.3.0-7.17.3/CHANGELOG.md>`_
 - `wazuh/wazuh-splunk <https://github.com/wazuh/wazuh-splunk/blob/v4.3.0-8.2.6/CHANGELOG.md>`_
 - `wazuh/wazuh-packages <https://github.com/wazuh/wazuh-packages/blob/4.3/CHANGELOG.md>`_

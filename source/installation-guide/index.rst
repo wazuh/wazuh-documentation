@@ -13,15 +13,17 @@ Wazuh is a security platform that provides unified XDR and SIEM protection for e
 
 Wazuh is free and open source. Its components abide by the `GNU General Public License, version 2 <https://www.gnu.org/licenses/old-licenses/gpl-2.0.en.html>`_, and the `Apache License, Version 2.0 <https://www.apache.org/licenses/LICENSE-2.0>`_ (ALv2). 
 
-In this installation guide, you will learn how to install Wazuh in your infrastructure. We also offer `Wazuh Cloud <https://wazuh.com/cloud/>`_, our software as a service (SaaS) solution. Check the :ref:`Cloud service <cloud_service>` documentation for more information.
+In this installation guide, you will learn how to install Wazuh in your infrastructure. We also offer `Wazuh Cloud <https://wazuh.com/cloud/>`_, our software as a service (SaaS) solution. Wazuh cloud is ready to use, with no additional hardware or software required, driving down the cost and complexity. Check the :doc:`Cloud service </cloud-service/index>` documentation for more information and take advantage of the `Cloud trial <https://console.cloud.wazuh.com/sign-up?landing=trial>`_ to explore this service.
 
 
 Installing the Wazuh central components
 ---------------------------------------
 
-You can choose between two installation methods for each Wazuh central component. Both options provide you with instructions to install the central components on a single host or on separate hosts. You can also check our :doc:`Quickstart </quickstart>` to get started with Wazuh in just a few minutes.
+The Wazuh indexer and Wazuh server can be installed on a single host or be distributed in cluster configurations. You can choose between two installation methods for each Wazuh central component. Both options provide instructions to install the central components on a single host or on separate hosts.
 
-The Wazuh indexer and Wazuh server can be installed on a single host or be distributed in cluster configurations. To check the requirements and start installing the first of the Wazuh central components, go to the :doc:`Wazuh indexer <wazuh-indexer/index>` section.
+You can check our :doc:`Quickstart </quickstart>` documentation to perform an all-in-one installation. This is the fastest way to get the Wazuh central components up and running.
+
+For more deployment flexibility and customization, install the Wazuh central components by starting with the :doc:`Wazuh indexer <wazuh-indexer/index>` deployment. This deployment method allows the all-in-one installation, and the installation of the components on separate servers.
 
 This is the installation workflow you will follow:
 
@@ -77,7 +79,7 @@ This is the installation workflow you will follow:
 Installing the Wazuh agent
 --------------------------
 
-The Wazuh agent is a single and lightweight monitoring software. It is a multi-platform component that can be deployed to laptops, desktops, servers, cloud instances, containers, or virtual machines. It provides visibility into the endpoint's security by collecting critical system and application records, inventory data, and detecting potential anomalies. 
+The Wazuh agent is a single and lightweight monitoring software. It is a multi-platform component that can be deployed to laptops, desktops, servers, cloud instances, containers, or virtual machines. It provides visibility into the endpoint's security by collecting critical system and application records, inventory data, and detecting anomalies. 
 
 If the Wazuh central components are already installed in your environment, select your operating system below and follow the installation steps to deploy the agent on the endpoints. 
 
@@ -164,15 +166,16 @@ In the :doc:`Packages list </installation-guide/packages-list>` section, you wil
 Other installation alternatives
 -------------------------------
 
-Wazuh provides other :ref:`installation alternatives <deployment>`. These are complementary to the installation methods of this installation guide. You will find instructions on how to deploy Wazuh using ready-to-use machines, containers, and orchestration tools. There is also information on how to install the solution offline, from sources, and with commercial options.
+Wazuh provides other :doc:`installation alternatives </deployment-options/index>`. These are complementary to the installation methods of this installation guide. You will find instructions on how to deploy Wazuh using ready-to-use machines, containers, and orchestration tools. There is also information on how to install the solution offline, from sources, and with commercial options.
 
 
 .. toctree::
-    :hidden:
-    :maxdepth: 1
+   :hidden:
+   :maxdepth: 1
 
-    wazuh-indexer/index
-    wazuh-server/index
-    wazuh-dashboard/index
-    wazuh-agent/index
-    packages-list
+   wazuh-indexer/index
+   wazuh-server/index
+   wazuh-dashboard/index
+   wazuh-agent/index
+   packages-list
+   uninstalling-wazuh/index

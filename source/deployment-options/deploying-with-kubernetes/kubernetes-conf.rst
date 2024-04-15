@@ -1,7 +1,7 @@
 .. Copyright (C) 2015, Wazuh, Inc.
 
 .. meta::
-  :description: Learn more about Kubernetes configuration for Wazuh: prerequisites, overview, how to verify the deployment, and more. 
+   :description: Learn more about Kubernetes configuration for Wazuh: prerequisites, overview, how to verify the deployment, and more. 
 
 .. _kubernetes_conf:
 
@@ -11,8 +11,8 @@ Kubernetes configuration
 Pre-requisites
 --------------
 
-    - Kubernetes cluster already deployed.
-
+-  A Kubernetes cluster already deployed.
+-  For Amazon EKS deployments using Kubernetes version 1.23 and later, an Amazon EBS CSI driver IAM role. The CSI driver requires that you assign an IAM role to work properly. Read AWS documentation to find instructions on `Creating the Amazon EBS CSI driver IAM role <https://docs.aws.amazon.com/eks/latest/userguide/csi-iam-role.html>`__. You need to install the CSI driver for both, new and old deployments. The CSI driver is an essential Kubernetes feature.
    
 Resource Requirement
 --------------------
@@ -28,7 +28,7 @@ Overview
 --------
 
 StatefulSet and deployment controllers
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 As a *Deployment*, a *StatefulSet* manages Pods that are based on an identical container specification, but it maintains an identity attached to each of its pods. These pods are created from the same specification, but they are not interchangeable: each one has a persistent identifier maintained across any rescheduling.
 
@@ -40,7 +40,7 @@ Persistent volumes (PV) are pieces of storage in the provisioned cluster. It is 
 
 Here, we use persistent volumes to store data from both the Wazuh manager and the Wazuh indexer.
 
-Read more about persistent volumes `here <https://kubernetes.io/docs/concepts/storage/persistent-volumes/>`_.
+Refer to the `persistent volumes <https://kubernetes.io/docs/concepts/storage/persistent-volumes/>`_ page for more information.
 
 Pods
 ^^^^

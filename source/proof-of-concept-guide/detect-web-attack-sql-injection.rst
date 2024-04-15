@@ -1,68 +1,106 @@
+.. Copyright (C) 2015, Wazuh, Inc.
+
 .. meta::
-  :description: Wazuh is capable of detecting an SQL Injection attack from web server logs showing common SQL patterns of attack in a monitored endpoint. Learn more about this in this PoC.
+   :description: Wazuh is capable of detecting an SQL Injection attack from web server logs showing common SQL patterns of attack in a monitored endpoint. Learn more about this in this PoC.
 
-.. _poc_detect_web_attack_sql_injection:
-
-Detecting an SQL Injection attack
+Detecting an SQL injection attack
 =================================
 
-Wazuh is able to detect an `SQL Injection attack <https://portswigger.net/web-security/sql-injection>`_ from web server logs showing patterns like ``select``, ``union``, and other common SQL patterns of attack in a monitored endpoint. The attack can also be detected at a network level if you configure a :ref:`Suricata integration <learning_wazuh_suricata>` to monitor the endpoint's network traffic.
+You can use Wazuh to detect SQL injection attacks from web server logs that contain patterns like ``select``, ``union``, and other common SQL injection patterns.
 
+SQL injection is an attack in which a threat actor inserts malicious code into strings transmitted to a database server for parsing and execution. A successful SQL injection attack gives unauthorized access to confidential information contained in the database.
 
-Prerequisites
--------------
+In this use case, you simulate an SQL injection attack against an Ubuntu endpoint and detect it with Wazuh.
 
-- You need an Apache server running on the monitored Ubuntu 20 system.
+Infrastructure
+--------------
+
++---------------+-------------------------------------------------------------+
+| Endpoint      | Description                                                 |
++===============+=============================================================+
+| Ubuntu 22.04  | Victim endpoint running an Apache 2.4.54 web server.        |
++---------------+-------------------------------------------------------------+
+| RHEL 9.0      | Attacker endpoint that launches the SQL injection attack.   |
++---------------+-------------------------------------------------------------+
 
 Configuration
 -------------
 
-#. Add the following lines to ``/var/ossec/etc/ossec.conf`` at the Wazuh Ubuntu 20 host. This sets the Linux agent to monitor the access logs of your Apache server.
+Ubuntu endpoint
+^^^^^^^^^^^^^^^
 
-    .. code-block:: XML
+Perform the following steps to install Apache and configure the Wazuh agent to monitor the Apache logs.
 
-      <localfile>
-        <log_format>apache</log_format>
-        <location>/var/log/apache2/access.log</location>
-      </localfile>
+#. Update the local packages and install the Apache web server:
 
-    Optionally, you can install Suricata in the Ubuntu 20 endpoint and configure it to monitor the endpoint's network traffic.
-  
+   .. code-block:: console
 
-#. Restart the Wazuh agent to apply the configuration changes.
+      $ sudo apt update
+      $ sudo apt install apache2
 
-    .. code-block:: console
+#. If the firewall is enabled, modify it to allow external access to web ports. Skip this step if the firewall is disabled.
 
-        # systemctl restart wazuh-agent
+   .. code-block:: console
 
-  
-#. Modify the FilesMatch directive at ``/etc/apache2/apache2.conf`` as follow:
+      $ sudo ufw app list
+      $ sudo ufw allow 'Apache'
+      $ sudo ufw status
 
-    .. code-block:: none
+#. Check the status of the Apache service to verify that the web server is running:
 
-      <FilesMatch ".ht*">
-        Require all denied
-      </FilesMatch>
+   .. code-block:: console
 
+      $ sudo systemctl status apache2
 
-Steps to generate the alerts
-----------------------------
+#. Use the ``curl`` command or open ``http://<UBUNTU_IP>`` in a browser to view the Apache landing page and verify the installation:
 
-#. Replace ``<your_web_server_address>`` with the appropriate value and execute the following command from a system external to your Ubuntu 20 endpoint (the attacker).
+   .. code-block:: console
 
-    .. code-block:: console
+      $ curl http://<UBUNTU_IP>
 
-      # curl -XGET "http://replace_by_your_ubuntu_web_server_address/?id=SELECT+*+FROM+users";
+#. Add the following lines to the Wazuh agent ``/var/ossec/etc/ossec.conf`` file. This allows the Wazuh agent to monitor the access logs of your Apache server:
 
-Query the alerts
+   .. code-block:: xml
+
+      <ossec_config>
+        <localfile>
+          <log_format>apache</log_format>
+          <location>/var/log/apache2/access.log</location>
+        </localfile>
+      </ossec_config>
+
+#. Restart the Wazuh agent to apply the configuration changes:
+
+   .. code-block:: console
+
+      $ sudo systemctl restart wazuh-agent
+
+Attack emulation
 ----------------
 
-You can visualize the alert data in the Wazuh dashboard. To do this, go to the **Security events** module and add the filters in the search bar to query the alerts.
+Replace ``<UBUNTU_IP>`` with the appropriate IP address and execute the following command from the attacker endpoint:
 
-* ``rule.id:31103``
+.. code-block:: console
 
+   $ curl -XGET "http://<UBUNTU_IP>/users/?id=SELECT+*+FROM+users";
 
-.. thumbnail:: ../images/poc/Detecting-an-SQL-Injection-attack.png
-          :title: Detecting an SQL Injection attack
-          :align: center
-          :wrap_image: No
+The expected result here is an alert with rule ID 31103 but a successful SQL injection attempt generates an alert with rule ID 31106.
+
+Visualize the alerts
+--------------------
+
+You can visualize the alert data in the Wazuh dashboard. To do this, go to the Threat Hunting module and add the filters in the search bar to query the alerts.
+
+-  ``rule.id:31103``
+
+   .. thumbnail:: /images/poc/SQL-injection-rule-31103.png
+      :title: SQL injection rule 31103 alert
+      :align: center
+      :width: 80%
+
+-  ``rule.id:31106``
+
+   .. thumbnail:: /images/poc/SQL-injection-rule-31106.png
+      :title: SQL injection rule 31106 alert
+      :align: center
+      :width: 80%

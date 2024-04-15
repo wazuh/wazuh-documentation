@@ -36,7 +36,8 @@ Architecture overview
 The following diagram shows a typical Wazuh cluster architecture:
 
 .. thumbnail:: ../images/manual/cluster/cluster-infrastructure.png
-    :title: Wazuh cluster infrastructure
+    :title: Wazuh cluster architecture
+    :alt: Wazuh cluster architecture
     :align: center
     :width: 80%
 
@@ -83,6 +84,7 @@ The image below shows a schema of how a master node and a worker node interact w
 
 .. thumbnail:: ../images/manual/cluster/cluster-flow.png
     :title: Wazuh cluster workflow
+    :alt: Wazuh cluster workflow
     :align: center
     :width: 80%
 
@@ -99,8 +101,6 @@ The following tasks can be found in the cluster, depending on the type of node t
 | Integrity sync                 |        |
 +--------------------------------+        |
 | Agent info sync                |        |
-+--------------------------------+        |
-| Agent groups sync              |        |
 +--------------------------------+--------+
 | Keep alive - Check workers     | Master |
 +--------------------------------+        |
@@ -120,7 +120,7 @@ Keep alive thread
 
 The worker nodes send a keep-alive message to the master every so often. The master keeps the date of the last received keep alive and knows the interval the worker is using to send its keepalives. If the last keep alive received by a worker is older than a determined amount of time, the master considers the worker is disconnected and immediately closes the connection. When a worker realizes the connection has been closed, it automatically tries to reconnect again.
 
-This feature is very useful to drop nodes that are facing a network issue or aren't available at the moment.  It was implemented  `here <https://github.com/wazuh/wazuh/issues/1355>`_.
+This feature is very useful to drop nodes that are facing a network issue or aren't available at the moment.
 
 
 Integrity thread
@@ -128,7 +128,7 @@ Integrity thread
 
 This thread is in charge of synchronizing master's integrity information among all worker nodes. The communication is started by the worker node and it has the following stages:
 
-1. The worker asks the master for permission. The permission will be granted only after any previous synchronization process is finished. This is important to prevent overlapping, where a new synchronization process starts while another one is still running. Synchronization processes taking too long are considered locked due to errors. Once the process is flagged as locked, new integrity synchronization permissions can be granted. The maximum time a synchronization process is allowed to run is 1000 seconds by default. This can be modified with the ``max_locked_integrity_time`` variable in the `cluster.json <https://github.com/wazuh/wazuh/blob/|WAZUH_CURRENT_MINOR|/framework/wazuh/core/cluster/cluster.json>`_ file.
+1. The worker asks the master for permission. The permission will be granted only after any previous synchronization process is finished. This is important to prevent overlapping, where a new synchronization process starts while another one is still running. Synchronization processes taking too long are considered locked due to errors. Once the process is flagged as locked, new integrity synchronization permissions can be granted. The maximum time a synchronization process is allowed to run is 1000 seconds by default. This can be modified with the ``max_locked_integrity_time`` variable in the `cluster.json <https://github.com/wazuh/wazuh/blob/v|WAZUH_CURRENT|/framework/wazuh/core/cluster/cluster.json>`__ file.
 2. The worker sends the master a JSON file containing the following information:
 
     * Path
@@ -145,7 +145,7 @@ This thread is in charge of synchronizing master's integrity information among a
     * Extra: Files that are present in the worker node but missing in the master. They must be removed in the worker node as well.
     * Shared: Files that are present in both master and worker but have a different checksum. They must be updated in the worker node.
 
-   Then the master prepares a zip package with a JSON containing all this information and the required files the worker needs to update. The maximum zip size is specified in the ``max_zip_size`` variable of the `cluster.json <https://github.com/wazuh/wazuh/blob/|WAZUH_CURRENT_MINOR|/framework/wazuh/core/cluster/cluster.json>`_ file. In case it is exceeded, the remaining files will be synced in the next iteration of Integrity.
+   Then the master prepares a zip package with a JSON containing all this information and the required files the worker needs to update. The maximum zip size is specified in the ``max_zip_size`` variable of the `cluster.json <https://github.com/wazuh/wazuh/blob/v|WAZUH_CURRENT|/framework/wazuh/core/cluster/cluster.json>`__ file. In case it is exceeded, the remaining files will be synced in the next iteration of Integrity.
 
 4. Once the worker receives the package, it updates the necessary files.
 
@@ -167,13 +167,6 @@ If there is an error during the update process of one of the chunks in the maste
 
 .. _agent-groups-sync:
 
-Agent groups sync thread
-~~~~~~~~~~~~~~~~~~~~~~~~
-
-This thread is in charge of sending information about agents' groups assignment (abbr. agent-groups) from each worker to the master. The communication is started by the worker and it follows the exact same stages as :ref:`agent-info <agent-info>`.
-
-However, unlike in :ref:`agent-info <agent-info>`, the same information is sent over and over again to the master. This happens until the master node stores it in its database and sends it back to all workers (including the worker it came from). This prevents losing any agent-group if an unsuccessful communication occurs. Once the worker receives the agent-groups information from the master, it will never send it to the master again.
-
 Agent groups send thread
 ~~~~~~~~~~~~~~~~~~~~~~~~
 
@@ -181,11 +174,10 @@ This thread is in charge of synchronizing information of agents' groups assignme
 
 1. When there is new agent-groups information, the master sends a JSON string with it to each worker. This is done only once per node.
 2. The workers send the received information to their local :ref:`wazuh-db <wazuh-db>` service, where it is updated.
-3. Workers stop sending information to the master (:ref:`Agent groups sync <agent-groups-sync>`) about any agent-group they have received in this task.
-4. The worker compares the checksum of its database with the checksum of the master's.
-5. If the checksum has been different for 10 consecutive times, the worker notifies the master.
-6. When notified, the master sends to the worker all the agent-groups information.
-7. The worker overwrites its database with the agent-groups information it has received from the master.
+3. The worker compares the checksum of its database with the checksum of the master.
+4. If the checksum has been different for 10 consecutive times, the worker notifies the master.
+5. When notified, the master sends to the worker all the agent-groups information.
+6. The worker overwrites its database with the agent-groups information it has received from the master.
 
 Local agent-groups thread
 ~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -258,7 +250,7 @@ The protocol message has two parts: a header and a payload. The payload will be 
 
 The header has four subparts:
 
-* **Counter**: It specifies the message ID. It's randomly initialized and then increased with every new sent request. It's very useful when receiving a response, so it indicates which sent request it is replying to.
+* **Counter**: It specifies the message ID. It's randomly generated for every new sent request. It's very useful when receiving a response, so it indicates which sent request it is replying to.
 * **Payload length**: Specifies the amount of data contained in the message payload. Used to know how much data to expect to receive.
 * **Command**: Specifies protocol message. This string will always be 11 characters long. If the command is not 11 characters long, a padding of ``-`` is added until the string reaches the expected length. All available commands in the protocol are shown below.
 * **Flag message divided**: Specifies whether the message has been divided because its initial payload length was more than 5242880 bytes or not. The flag value can be ``d`` if the message is a divided one, or nothing (it will be ``-`` due to the padding mentioned above) if the message is the end of a divided message or a single message.
@@ -278,13 +270,13 @@ This communication protocol is used by all cluster nodes to synchronize the nece
 |                   |             | - Wazuh version<str>  |                                                                                                 |
 +-------------------+-------------+-----------------------+-------------------------------------------------------------------------------------------------+
 | ``syn_i_w_m_p``   | Master      | None                  | Ask permission to start synchronization protocol. Message characters define the action to do:   |
-| ``syn_g_w_m_p``   |             |                       |                                                                                                 |
-| ``syn_a_w_m_p``   |             |                       | - I (integrity), G (agent-groups sync), A (agent-info).                                         |
+| ``syn_a_w_m_p``   |             |                       |                                                                                                 |
+|                   |             |                       | - I (integrity), A (agent-info).                                                                |
 |                   |             |                       | - W (worker), M (master), P (permission).                                                       |
 +-------------------+-------------+-----------------------+-------------------------------------------------------------------------------------------------+
 | ``syn_i_w_m``     | Master      | None or String ID<str>| Start synchronization protocol. Message characters define the action to do:                     |
-| ``syn_g_w_m``     |             |                       |                                                                                                 |
-| ``syn_a_w_m``     |             |                       | - I (integrity), G (agent-groups sync), A (agent-info).                                         |
+| ``syn_a_w_m``     |             |                       |                                                                                                 |
+|                   |             |                       | - I (integrity), A (agent-info).                                                                |
 |                   |             |                       | - W (worker), M (master).                                                                       |
 +-------------------+-------------+-----------------------+-------------------------------------------------------------------------------------------------+
 | ``syn_i_w_m_e``   | Master      | None or String ID<str>| End synchronization protocol. Message characters define the action to do:                       |
@@ -301,8 +293,6 @@ This communication protocol is used by all cluster nodes to synchronize the nece
 | ``syn_w_g_err``   |             |                       |                                                                                                 |
 | ``syn_wgc_err``   |             |                       | - I (integrity), G (agent-groups send), C (agent-groups send full).                             |
 |                   |             |                       | - W (worker), M (master), R/ERR (error).                                                        |
-+-------------------+-------------+-----------------------+-------------------------------------------------------------------------------------------------+
-| ``syn_m_g_err``   | Worker      | Error msg<str>        | Notify an error during agent-groups recv synchronization.                                       |
 +-------------------+-------------+-----------------------+-------------------------------------------------------------------------------------------------+
 | ``sendsync``      | Master      | Arguments<Dict>       | Receive a message from a worker node destined for the specified daemon of the master node.      |
 |                   |             |                       |                                                                                                 |
@@ -357,6 +347,8 @@ This communication protocol is used by the API to forward requests to other clus
 | ``get_nodes``     | Both        | Arguments<Dict>       | Request sent from ``cluster_control -l``.                                                       |
 +-------------------+-------------+-----------------------+-------------------------------------------------------------------------------------------------+
 | ``get_health``    | Both        | Arguments<Dict>       | Request sent from ``cluster_control -i``.                                                       |
++-------------------+-------------+-----------------------+-------------------------------------------------------------------------------------------------+
+| ``get_hash``      | Both        | None                  | Receive a request to obtain custom ruleset files and their hashes.                              |
 +-------------------+-------------+-----------------------+-------------------------------------------------------------------------------------------------+
 | ``send_file``     | Both        | Filepath<str>,        | Request used to test send file protocol.                                                        |
 |                   |             | Node name<str>        | Node name parameter is ignored in worker nodes (it's always sent to the master node).           |
@@ -426,7 +418,6 @@ One of those tasks, which is defined as a class, is the task created to receive 
 
 Multiprocessing
 ~~~~~~~~~~~~~~~
-.. versionadded:: 4.3.0
 
 While the use of asynchronous tasks is a good solution to optimize work and avoid waiting times for I/O, it is not a good solution to execute multiple tasks that require intensive use of CPU. The reason is the way in which Python works. Python allows a single thread to take control over the Python interpreter through the Global Interpreter Lock (GIL). Therefore, asynchronous tasks run concurrently and not in parallel. Following the analogy of the previous section, it is as if there is effectively only one chef who has to do all the tasks. The chef can only do one at a time so if one task requires all his/her attention, the other ones are delayed.
 
@@ -434,7 +425,7 @@ The master node in the cluster is under a heavy workload, especially in large en
 
 Multiprocessing is implemented in the cluster process of both the master node and the worker nodes, and `concurrent.futures.ProcessPoolExecutor <https://docs.python.org/3/library/concurrent.futures.html#concurrent.futures.ProcessPoolExecutor>`_ is used for this purpose. Cluster tasks can use any free process in the process pool to delegate and execute in parallel those parts of their logic that are more CPU intensive. With this, it is possible to take advantage of more CPU cores and increase the overall performance of the cluster process. When combined with asyncio, best results are obtained.
 
-Child processes are created when the parent `wazuh-clusterd` starts. They stay in the process pool waiting for new jobs to be assigned to them. There are two child processes by default within the master node pool. This value can be changed in the `process_pool_size` variable in the `cluster.json <https://github.com/wazuh/wazuh/blob/|WAZUH_CURRENT_MINOR|/framework/wazuh/core/cluster/cluster.json>`_ file. The worker nodes, on the other hand, create a single child process and this number is not modifiable. The tasks that use multiprocessing in the cluster are the following.
+Child processes are created when the parent `wazuh-clusterd` starts. They stay in the process pool waiting for new jobs to be assigned to them. There are two child processes by default within the master node pool. This value can be changed in the `process_pool_size` variable in the `cluster.json <https://github.com/wazuh/wazuh/blob/v|WAZUH_CURRENT|/framework/wazuh/core/cluster/cluster.json>`__ file. The worker nodes, on the other hand, create a single child process and this number is not modifiable. The tasks that use multiprocessing in the cluster are the following.
 
 Master node
 ###########
@@ -469,7 +460,7 @@ Let's review the integrity synchronization process to see how asyncio tasks are 
     :width: 80%
 
 
-* **1**: The worker's ``sync_integrity`` task wakes up after sleeping during *interval* seconds (which is defined in the `cluster.json <https://github.com/wazuh/wazuh/blob/|WAZUH_CURRENT_MINOR|/framework/wazuh/core/cluster/cluster.json>`_ file). The first thing it does is checking whether the previous synchronization process is finished or not using the ``syn_i_w_m_p`` command. The master replies with a boolean value specifying that the previous synchronization process is finished and, therefore, the worker can start a new one.
+* **1**: The worker's ``sync_integrity`` task wakes up after sleeping during *interval* seconds (which is defined in the `cluster.json <https://github.com/wazuh/wazuh/blob/v|WAZUH_CURRENT|/framework/wazuh/core/cluster/cluster.json>`__ file). The first thing it does is checking whether the previous synchronization process is finished or not using the ``syn_i_w_m_p`` command. The master replies with a boolean value specifying that the previous synchronization process is finished and, therefore, the worker can start a new one.
 * **2**: The worker starts the synchronization process using ``syn_i_w_m`` command. When the master receives the command, it creates an asyncio task to process the received integrity from the worker node. But since no file has been received yet, the task keeps waiting until the worker sends the file. The master sends the worker the task ID so the worker can notify the master to wake it up once the file has been sent.
 * **3**: The worker starts the sending file process. Which has three steps: ``new_file``, ``file_upd`` and ``file_end``.
 * **4**: The worker notifies the master that the integrity file has already been sent. In that moment, the master wakes the previously created task up and compares the worker files with its own. In this example the master finds out the worker integrity is outdated.
@@ -488,9 +479,9 @@ Another example that can show how asynchronous tasks are used is Distributed API
 * ``local_master``: The request can be solved by the master node. These requests are usually information about the global status/management of the cluster such as agent information/status/management, agent groups management, cluster information, etc.
 * ``distributed_master``: The master must forward the request to the most suitable node to solve it.
 
-The type association with every endpoint can be found here: `API controllers <https://github.com/wazuh/wazuh/tree/|WAZUH_CURRENT_MINOR|/api/api/controllers>`_.
+The type association with every endpoint can be found here: `API controllers <https://github.com/wazuh/wazuh/tree/v|WAZUH_CURRENT|/api/api/controllers>`__.
 
-Imagine a cluster with two nodes, where there is an agent reporting to the worker node with id *020*. The following diagram shows the process of requesting ``GET/syscollector/020/os`` API endpoint:
+Imagine a cluster with two nodes, where there is an agent reporting to the worker node with id *020*. The following diagram shows the process of running a distributed API request by requesting the ``GET/sca/020`` API endpoint:
 
 .. thumbnail:: ../images/development/distributed-dapi-worker.png
     :title: Distributed API requests

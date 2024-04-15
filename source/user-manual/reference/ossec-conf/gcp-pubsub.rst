@@ -1,8 +1,7 @@
 .. Copyright (C) 2015, Wazuh, Inc.
+
 .. meta::
   :description: The Wazuh GCP Pub/Sub module allows you to pull log data from Google Pub/Sub. Learn more about how to configure the module in this section.
-
-.. _gcp-pubsub:
 
 gcp-pubsub
 ==========
@@ -16,31 +15,34 @@ gcp-pubsub
 
 This configuration section is used to configure the Google Cloud Pub/Sub module.
 
-Options
--------
+.. note::
+
+   The Wazuh GCP module supports only one ``gcp-pubsub`` section per :ref:`Wazuh configuration file <reference_ossec_conf>`. To configure more than one service, you need to deploy multiple agents.
+
+.. topic:: Main options:
+
+   - `enabled`_
+   - `project_id`_
+   - `subscription_name`_
+   - `credentials_file`_
+   - `max_messages`_
+   - `num_threads`_
+
+.. topic:: Scheduling options:
+
+   - `pull_on_start`_
+   - `interval`_
+   - `day`_
+   - `wday`_
+   - `time`_
 
 Main options
-^^^^^^^^^^^^
-
-- `enabled`_
-- `project_id`_
-- `subscription_name`_
-- `credentials_file`_
-- `max_messages`_
-- `num_threads`_
-
-Scheduling options
-^^^^^^^^^^^^^^^^^^
-- `pull_on_start`_
-- `interval`_
-- `day`_
-- `wday`_
-- `time`_
+------------
 
 enabled
 ^^^^^^^
 
-This indicates if the module is enabled or disabled.
+Enables or disables the module.
 
 +--------------------+--------------+
 | **Default value**  | n/a          |
@@ -51,7 +53,7 @@ This indicates if the module is enabled or disabled.
 project_id
 ^^^^^^^^^^^
 
-This tag indicates the Google Cloud project ID.
+Google Cloud project ID.
 
 +--------------------+--------------------------------------------------+
 | **Default value**  | n/a                                              |
@@ -64,7 +66,7 @@ For example ``<project_id>wazuh-dev</project_id>``.
 subscription_name
 ^^^^^^^^^^^^^^^^^
 
-This string specifies the name of the subscription to read from.
+Name of the subscription to read from.
 
 +--------------------+------------+
 | **Default value**  | n/a        |
@@ -77,7 +79,7 @@ For example ``<subscription_name>wazuh-name</subscription_name>``.
 credentials_file
 ^^^^^^^^^^^^^^^^
 
-This setting specifies the path to the Google Cloud credentials file in JW Tokens. It allows both relative (to $HOME_INSTALLATION) and absolute paths.
+Path to the Google Cloud credentials file. It can be absolute path or relative to ``WAZUH_HOME``.
 
 +--------------------+--------------------------------+
 | **Default value**  | n/a                            |
@@ -89,7 +91,8 @@ For example, ``<credentials_file>wodles/gcp-pubsub/credentials.json</credentials
 
 max_messages
 ^^^^^^^^^^^^
-Number of maximum messages pulled in each iteration. This value does not depend on the number of threads used.
+
+Maximum number of messages pulled in each iteration. This value does not depend on the number of threads used.
 
 +--------------------+-------------+
 | **Default value**  | 100         |
@@ -101,9 +104,8 @@ Number of maximum messages pulled in each iteration. This value does not depend 
 
 num_threads
 ^^^^^^^^^^^^
-.. versionadded:: 4.2.2
 
-Number of threads used to pull in each iteration. The number of maximum messages will be divided between all the configured threads.
+Number of threads used to pull in each iteration. The maximum number of messages is divided between all the configured threads.
 
 +--------------------+-------------+
 | **Default value**  | 1           |
@@ -122,10 +124,13 @@ logging
 
 This option has no effect. The module now uses the :ref:`wazuh_modules.debug <wazuh_modules_options>` level to set its logging level.
 
+Scheduling options
+------------------
+
 pull_on_start
 ^^^^^^^^^^^^^
 
-Trigger the pulling in case of an agent start or restart.
+Pull logs on Wazuh agent start or restart.
 
 +--------------------+---------+
 | **Default value**  | yes     |
@@ -136,7 +141,7 @@ Trigger the pulling in case of an agent start or restart.
 interval
 ^^^^^^^^
 
-The interval between module executions.
+Time interval between module executions.
 
 +--------------------+----------------------------------------------------------------------------------------------------------------------------------------------------------------+
 | **Default value**  | 1h                                                                                                                                                             |
@@ -147,7 +152,7 @@ The interval between module executions.
 day
 ^^^
 
-Day of the month to run the script to fetch logs from GCP.
+Day of the month to retrieve logs from GCP.
 
 +--------------------+--------------------------+
 | **Default value**  | n/a                      |
@@ -162,7 +167,7 @@ Day of the month to run the script to fetch logs from GCP.
 wday
 ^^^^
 
-Day of the week to run the script to fetch logs. This option is **not compatible** with the ``day`` option.
+Day of the week to retrieve logs from GCP. This option is **not compatible** with the ``day`` option.
 
 +--------------------+--------------------------+
 | **Default value**  | n/a                      |

@@ -1,89 +1,149 @@
+.. Copyright (C) 2015, Wazuh, Inc.
+
 .. meta::
-  :description: In this proof of concept, you create specific rules to alert about commands run by the user. Learn more about it in our documentation.
+   :description: In this proof of concept, you create specific rules to alert about commands run by the user. Learn more about it in our documentation.
 
-.. _poc_audit_commands:
+Monitoring execution of malicious commands
+==========================================
 
-Auditing commands run by a user
-===============================
+Auditd is an auditing utility native to Linux systems. It’s used for accounting actions and changes in a Linux endpoint.
 
-With this PoC, you can create specific rules to alert about commands run by the user. To do this, you must first enable Audit logging to capture and log execve system calls so the Wazuh agent can read these logs.
+In this use case, you configure Auditd on an Ubuntu endpoint to account for all commands executed by a given user. This includes commands run by a user in ``sudo`` mode or after changing to the root user. You configure a custom Wazuh rule to alert for suspicious commands.
 
-Check our documentation to learn more about the :ref:`Linux auditd system <learning_wazuh_audit_commands>`. 
+Consider reading the :doc:`Monitoring system calls </user-manual/capabilities/system-calls-monitoring/index>` section to get a broader picture of the ways to take advantage of it.
+
+Infrastructure
+--------------
+
++---------------+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| Endpoint      | Description                                                                                                                                                                                                            |
++===============+========================================================================================================================================================================================================================+
+| Ubuntu 22.04  | On this endpoint, you configure Auditd to monitor the execution of malicious commands. Then, make use of the Wazuh CDB list lookup capability to create a list of potential malicious commands that can be run on it.  |
++---------------+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
 
 Configuration
 -------------
 
-Configure your environment as follows to test the PoC.
+Ubuntu endpoint
+^^^^^^^^^^^^^^^
 
-#. Run the following command to check that the Linux Auditing System is installed and running on your Ubuntu 20 endpoint.
+Perform the following steps to install Auditd and create the necessary audit rules to query all commands run by a privileged user.
 
-    .. code-block:: console
+#. Install, start and enable Auditd if it’s not present on the endpoint:
 
-      # systemctl status auditd.service
+   .. code-block:: console
 
-#. If auditd is not installed, you can install it with the following command:
+      $ sudo apt -y install auditd
+      $ sudo systemctl start auditd
+      $ sudo systemctl enable auditd
 
-    .. code-block:: console
+#. As the root user, execute the following commands to append audit rules to ``/etc/audit/audit.rules`` file:
 
-      # apt-get install -y auditd
+   .. code-block:: console
 
-#. Check that ``/var/ossec/etc/ossec.conf`` in your Ubuntu 20 endpoint is configured for the agent to read the ``audit.log`` file.
+      # echo "-a exit,always -F auid=1000 -F egid!=994 -F auid!=-1 -F arch=b32 -S execve -k audit-wazuh-c" >> /etc/audit/audit.rules
+      # echo "-a exit,always -F auid=1000 -F egid!=994 -F auid!=-1 -F arch=b64 -S execve -k audit-wazuh-c" >> /etc/audit/audit.rules
 
-    .. code-block:: XML
+#. Reload the rules and confirm that they are in place:
+
+   .. code-block:: console
+
+      # sudo auditctl -R /etc/audit/audit.rules
+      # sudo auditctl -l
+
+   .. code-block:: none
+      :class: output
+
+      -a always,exit -F arch=b32 -S execve -F auid=1000 -F egid!=994 -F auid!=-1 -F key=audit-wazuh-c
+      -a always,exit -F arch=b64 -S execve -F auid=1000 -F egid!=994 -F auid!=-1 -F key=audit-wazuh-c
+
+#. Add the following configuration to the Wazuh agent ``/var/ossec/etc/ossec.conf`` file. This allows the Wazuh agent to read the auditd logs file:
+
+   .. code-block:: xml
 
       <localfile>
         <log_format>audit</log_format>
         <location>/var/log/audit/audit.log</location>
-      </localfile>
+      </localfile>      
 
-#. Restart the Wazuh agent to apply the changes.
+#. Restart the Wazuh agent:
 
-    .. code-block:: console
+   .. code-block:: console
 
-        # systemctl restart wazuh-agent      
+      $ sudo systemctl restart wazuh-agent
 
-#. Get your current euid in the Ubuntu 20 endpoint. This is needed to monitor the actions of your user. Root user monitoring is not recommended for this test, as it can be quite noisy.
+Wazuh server
+^^^^^^^^^^^^
 
-    .. code-block:: console
+Perform the following steps to create a CDB list of malicious programs and rules to detect the execution of the programs in the list.
 
-      # echo $EUID
+#. Look over the key-value pairs in the lookup file ``/var/ossec/etc/lists/audit-keys``.
 
-#. Create the rules for your user at ``/etc/audit/rules.d/wazuh.rules``. Make sure to replace ``<your_user_id>`` with your current ``euid``.
+   .. code-block:: none
 
-    .. code-block:: XML
+      audit-wazuh-w:write
+      audit-wazuh-r:read
+      audit-wazuh-a:attribute
+      audit-wazuh-x:execute
+      audit-wazuh-c:command
 
-       -a exit,always -F euid=<your_user_id> -F arch=b32 -S execve -k audit-wazuh-c
-       -a exit,always -F euid=<your_user_id> -F arch=b64 -S execve -k audit-wazuh-c
+   This CDB list contains keys and values separated by colons. 
 
-#. Optionally, you can delete old rules.
+   .. note::
 
-    .. code-block:: console
+      Wazuh allows you to maintain flat file CDB lists which must be ``key`` only or ``key:value`` pairs. These are compiled into a special binary format to facilitate high-performance lookups in Wazuh rules. Such lists must be created as files, added to the Wazuh configuration, and then compiled. After that, rules can be built to look up decoded fields in those CDB lists as part of their match criteria. For example, in addition to the text file ``/var/ossec/etc/lists/audit-keys``, there is also a binary ``/var/ossec/etc/lists/audit-keys.cdb`` file that Wazuh uses for actual lookups.
 
-        # auditctl -D
+#. Create a CDB list ``/var/ossec/etc/lists/suspicious-programs`` and fill its content with the following:
 
-#. Load rules from file.
+   .. code-block:: none
 
-    .. code-block:: console
+      ncat:yellow
+      nc:red
+      tcpdump:orange
 
-        # auditctl -R /etc/audit/rules.d/wazuh.rules
+#. Add the list  to the ``<ruleset>`` section of the Wazuh server ``/var/ossec/etc/ossec.conf`` file:
 
+   .. code-block:: xml
 
-Steps to generate the alerts
-----------------------------
+      <list>etc/lists/suspicious-programs</list>
 
-#. Log into the Ubuntu 20 endpoint as the monitored user.
+#. Create a high severity rule to fire when a "red" program is executed. Add this new rule to the ``/var/ossec/etc/rules/local_rules.xml`` file on the Wazuh server.
 
-#. Execute a ping to *www.google.com*
+   .. code-block:: xml
 
-Query the alerts
+      <group name="audit">
+        <rule id="100210" level="12">
+            <if_sid>80792</if_sid>
+        <list field="audit.command" lookup="match_key_value" check_value="red">etc/lists/suspicious-programs</list>
+          <description>Audit: Highly Suspicious Command executed: $(audit.exe)</description>
+            <group>audit_command,</group>
+        </rule>
+      </group>
+
+#. Restart the Wazuh manager:
+
+   .. code-block:: console
+
+      $ sudo systemctl restart wazuh-manager
+
+Attack emulation
 ----------------
 
-You can visualize the alert data in the Wazuh dashboard. To do this, go to the **Security events** module and add the filters in the search bar to query the alerts.
+#. On the Ubuntu endpoint, install and run a "**red**" program ``netcat``:
 
-* ``data.audit.exe: "/usr/bin/ping"``
+   .. code-block:: console
 
+      $ sudo apt -y install netcat
+      # nc -v
 
-.. thumbnail:: ../images/poc/Auditing-commands-run-by-a-user.png
-          :title: Auditing commands run by a user
-          :align: center
-          :wrap_image: No
+Visualize the alerts
+--------------------
+
+You can visualize the alert data in the Wazuh dashboard. To do this, go to the **Threat Hunting** module and add the filters in the search bar to query the alerts.
+
+-  ``data.audit.command:nc``
+
+   .. thumbnail:: /images/poc/audit-commands-alerts.png
+      :title: Suspicious binary alerts
+      :align: center
+      :width: 80%

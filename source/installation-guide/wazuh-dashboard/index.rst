@@ -1,19 +1,18 @@
 .. Copyright (C) 2015, Wazuh, Inc.
 
 .. meta::
-  :description: Wazuh is a free, open source, and enterprise-ready security monitoring solution for threat detection, integrity monitoring, incident response and compliance.
-
+  :description: Wazuh is a free, open source, and enterprise-ready security monitoring solution for threat detection, file integrity monitoring, incident response and compliance.
 
 Wazuh dashboard
 ===============
 
-This central component is a flexible and intuitive web interface for mining, analyzing, and visualizing data. It provides out-of-the-box dashboards, allowing you to seamlessly navigate through the user interface. 
+This central component is a flexible and intuitive web interface for mining, analyzing, and visualizing security data. It provides out-of-the-box dashboards, allowing you to seamlessly navigate through the user interface. 
 
-Users can quickly visualize security events, detect vulnerable applications, file integrity monitoring data, configuration assessment results, cloud infrastructure monitoring events, and regulatory compliance, such as PCI DSS, GDPR, CIS, HIPAA, and NIST 800-53 standards. If you want to learn more about Wazuh components, see the :doc:`Getting started <../../getting-started/components/index>` section.
+With the Wazuh dashboard, users can visualize security events, detected vulnerabilities, file integrity monitoring data, configuration assessment results, cloud infrastructure monitoring events, and regulatory compliance standards. If you want to learn more about the Wazuh components, see the :doc:`Getting started <../../getting-started/components/index>` section.
 
 Check the requirements below and choose an installation method to start installing the Wazuh dashboard.
 
-- :doc:`Wazuh installation assistant <installation-assistant>`: Install this component by running an assistant that automates the installation and configuration process. 
+- :doc:`Assisted installation <installation-assistant>`: Install this component by running an assistant that automates the installation and configuration process. 
 
 - :doc:`Step-by-step installation <step-by-step>`: Install this component following detailed step-by-step instructions.
 
@@ -105,11 +104,22 @@ Firewall configuration
 
 Configure the host and network firewalls to allow ports mentioned in :doc:`Architecture <getting-started/architecture>`. Disabling the host firewall is not recommended for use in production. It is advised to check the firewall configuration after each service installation to prevent possible cluster problems.
 
+Browser compatibility
+^^^^^^^^^^^^^^^^^^^^^
+
+Wazuh dashboard supports the following web browsers:
+
+- Chrome 95 or later
+- Firefox 93 or later
+- Safari 13.7 or later
+
+
+Other Chromium-based browsers might also work. Internet Explorer 11 is not supported.
 
 
 .. toctree::
     :hidden:
     :maxdepth: 1
 
-    Wazuh installation assistant <installation-assistant>
+    Assisted installation <installation-assistant>
     Step-by-step installation <step-by-step>

@@ -10,7 +10,7 @@ Migrating to the Wazuh indexer
 
 Follow this guide to migrate from Open Distro for Elasticsearch 1.13 to the Wazuh indexer. These instructions are intended for a standard Wazuh installation, you may need to make some changes to adapt them to your environment.
 
-.. note:: Root user privileges are required to execute all the commands described below.
+.. note:: You need root user privileges to run all the commands described below.
 
 #. Disable shard allocation to prevent Elasticsearch from replicating shards as you shut down nodes. Replace ``<elasticsearch_IP>`` with your Elasticsearch IP address or hostname, and ``<username>:<password>`` with your Elasticsearch username and password.  
 
@@ -26,43 +26,17 @@ Follow this guide to migrate from Open Distro for Elasticsearch 1.13 to the Wazu
 
 #. Stop indexing, and perform a flush: indexing/searching should be stopped and _flush can be used to permanently store information into the index which will prevent any data loss during the upgrade.
 
-
    .. code-block:: console
 
         curl -X POST "https://<elasticsearch_IP>:9200/_flush/synced" -u <username>:<password> -k
 
-
 #. Stop Filebeat.
 
-   .. tabs::
-   
-    .. group-tab:: Systemd
-   
-     .. code-block:: console
-   
-      # systemctl stop filebeat
-   
-    .. group-tab:: SysV init
-   
-     .. code-block:: console
-   
-      # service filebeat stop          
+      .. include:: /_templates/installations/basic/elastic/common/stop_filebeat.rst
 
 #. Shutdown Elasticsearch. For distributed deployments, you can shut down a single node at a time: first data nodes and later master nodes.
 
-   .. tabs::
-   
-    .. group-tab:: Systemd
-   
-     .. code-block:: console
-   
-      # systemctl stop elasticsearch
-   
-    .. group-tab:: SysV init
-   
-     .. code-block:: console
-   
-      # service elasticsearch stop 
+      .. include:: /_templates/installations/basic/elastic/common/stop_elasticsearch.rst
 
 #. Add the Wazuh repository. You can skip this step if the repository is already present and enabled on your server. 
 
@@ -86,22 +60,19 @@ Follow this guide to migrate from Open Distro for Elasticsearch 1.13 to the Wazu
 
 #. Install the Wazuh indexer. 
 
-    .. tabs::
+   .. tabs::
 
       .. group-tab:: Yum
 
-          .. code-block:: console
+         .. code-block:: console
 
-            # yum -y install wazuh-indexer
-
-
+            # yum -y install wazuh-indexer|WAZUH_INDEXER_RPM_PKG_INSTALL|
 
       .. group-tab:: APT
 
-          .. code-block:: console
+         .. code-block:: console
 
-            # apt -y install wazuh-indexer
-
+            # apt-get -y install wazuh-indexer|WAZUH_INDEXER_DEB_PKG_INSTALL|
 
 #. Create the ``/etc/wazuh-indexer/certs`` directory, copy your old certificates to the new location and change ownership and permissions. Note that the ``admin.pem`` and ``admin-key.pem`` certificates do not exist on every Elasticsearch node.
 
@@ -127,6 +98,10 @@ Follow this guide to migrate from Open Distro for Elasticsearch 1.13 to the Wazu
       # mv /var/log/elasticsearch/ /var/log/wazuh-indexer/
       # chown wazuh-indexer:wazuh-indexer -R /var/log/wazuh-indexer/
       # chown wazuh-indexer:wazuh-indexer -R /var/lib/wazuh-indexer/
+
+   .. note::
+
+      If you have the Open Distro for Elasticsearch performance analyzer plugin installed, change the ownership of the ``/dev/shm/performanceanalyzer/`` directory by running the following command: ``chown wazuh-indexer:wazuh-indexer -R /dev/shm/performanceanalyzer/``.
 
 #. Port your settings from ``/etc/elasticsearch/elasticsearch.yml`` to ``/etc/wazuh-indexer/opensearch.yml``. Most settings use the same names.
 
@@ -160,22 +135,9 @@ Follow this guide to migrate from Open Distro for Elasticsearch 1.13 to the Wazu
 
 #. For multi-node deployments, repeat steps 4–10 until the upgrade is performed on all the nodes. 
 
-#. Once all the nodes have been been upgraded, restart Filebeat.   
+#. Once all the nodes have been upgraded, restart Filebeat.   
 
-   .. tabs::
-   
-    .. group-tab:: Systemd
-   
-     .. code-block:: console
-   
-      # systemctl restart filebeat
-   
-    .. group-tab:: SysV init
-   
-     .. code-block:: console
-   
-      # service filebeat restart  
-
+   .. include:: /_templates/common/restart_filebeat.rst
 
 #. Run the following command to verify that the communication between Filebeat and the Wazuh indexer is working as expected. 
 

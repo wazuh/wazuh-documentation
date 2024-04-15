@@ -1,0 +1,80 @@
+{
+  "name": "wazuh-doc-images",
+  "version": "0.0.3",
+  "description": "Extension that creates a light box to show a bigger version of the thumbnail images.",
+  "main": "index.html",
+  "watch": {
+    "build": {
+      "patterns": [
+        "src"
+      ],
+      "extensions": "js,scss"
+    },
+    "css:build": {
+      "patterns": [
+        "src"
+      ],
+      "extensions": "scss"
+    },
+    "js:build": {
+      "patterns": [
+        "src"
+      ],
+      "extensions": "js"
+    }
+  },
+  "scripts": {
+    "preinstall": "npm install --package-lock-only --ignore-scripts && npx npm-force-resolutions",
+    "css:lint": "stylelint --config config/.stylelintrc \"src/*.scss\" --cache --cache-location \"build/.stylelintcache/\"",
+    "css:lint:fix": "stylelint --config config/.stylelintrc \"src/*.scss\" --fix --cache --cache-location \"build/.stylelintcache/\"",
+    "css:compile": "sass --source-map --embed-sources src/wazuh-light-box.scss build/wazuh-light-box.css",
+    "css:prefix": "postcss --config config/postcss.config.js --replace \"build/*.css\"",
+    "css:minify": "cd build && cleancss -O1 --source-map --source-map-inline-sources --output ../min/wazuh-light-box.min.css wazuh-light-box.css",
+    "css:build": "run-s css:compile css:prefix css:minify eol:lf",
+    "eol:lf": "eolConverter lf \"min/**/*.{css,js}\"",
+    "css:clean": "rimraf \"build/**/*.css\" && rimraf \"build/**/*.css.map\"",
+    "js:lint": "eslint --config config/.eslintrc.json \"src/**/*.js\" --color --cache --cache-location \"build/.eslintcache/\"",
+    "js:lint:fix": "eslint --config config/.eslintrc.json \"src/**/*.js\" --fix --cache --cache-location \"build/.eslintcache/\"",
+    "js:minify": "uglifyjs --compress typeofs=false --mangle --comments \"/^!/\" --source-map \"filename=min/wazuh-light-box.min.js.map,includeSources,url=wazuh-light-box.min.js.map\" --output min/wazuh-light-box.min.js src/wazuh-light-box.js",
+    "js:build": "npm run js:minify",
+    "build": "run-s js:build css:build",
+    "clean": "run-p css:clean",
+    "watch": "npm-watch build",
+    "watch:style": "npm-watch css:build",
+    "watch:scripts": "npm-watch js:build"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/wazuh/wazuh-documentation.git"
+  },
+  "keywords": [
+    "Wazuh",
+    "documentation"
+  ],
+  "author": "Wazuh, Inc.",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/wazuh/wazuh-documentation/issues"
+  },
+  "homepage": "https://github.com/wazuh/wazuh-documentation#readme",
+  "devDependencies": {
+    "autoprefixer": "^10.4.11",
+    "clean-css-cli": "^5.6.1",
+    "eol-converter-cli": "^1.0.8",
+    "eslint-config-google": "^0.14.0",
+    "npm-force-resolutions": "0.0.10",
+    "npm-run-all": "^4.1.5",
+    "npm-watch": "^0.11.0",
+    "postcss": "^8.4.31",
+    "postcss-cli": "^10.0.0",
+    "sass": "^1.54.9",
+    "stylelint": "^15.10.1",
+    "stylelint-config-recommended-scss": "^7.0.0",
+    "stylelint-config-standard-scss": "^5.0.0",
+    "stylelint-order": "^5.0.0",
+    "uglify-js": "^3.17.0"
+  },
+  "resolutions": {
+    "semver": "^7.5.2"
+  }
+}

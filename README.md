@@ -22,13 +22,18 @@ You can also join our [users mailing list](https://groups.google.com/d/forum/waz
 
 ## Software and libraries used
 
-- [Python](https://www.python.org/) 3.6+
-- [Sphinx](http://www.sphinx-doc.org/) 3.2.0
-- [sphinx-tabs](https://github.com/djungelorm/sphinx-tabs) 1.2.1
+- [Python](https://www.python.org/) 3.8+
+- [Sphinx](http://www.sphinx-doc.org/) 7.0.1
+- [sphinx-tabs](https://github.com/djungelorm/sphinx-tabs) 3.4.1
 - [jsmin](https://github.com/tikitu/jsmin) 3.0.1
+- [sphinx-reredirects](https://gitlab.com/documatt/sphinx-reredirects) 0.1.2
+
+### Optional software to run the alternative Pagefind search engine
+
+- [NodeJS](https://nodejs.org/) 16+
 
 ## Copyright & License
 
-Copyright © 2022 Wazuh, Inc.
+Copyright © 2023 Wazuh, Inc.
 
 Wazuh is free software; you can redistribute it and/or modify it under the terms of the GNU General Public License as published by the Free Software Foundation; either version 2 of the License, or (at your option) any later version.

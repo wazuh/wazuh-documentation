@@ -1,5 +1,8 @@
 .. Copyright (C) 2015, Wazuh, Inc.
 
+.. meta::
+  :description: Wazuh provides an automated way of building AIX packages. Learn how to build your own Wazuh AIX packages in this section of our documentation.
+  
 .. _create-aix:
 
 AIX

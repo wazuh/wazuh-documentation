@@ -8,9 +8,9 @@
 Wazuh agent
 ===========
 
-The Wazuh agent is multi-platform and runs on the hosts that the user wants to monitor. It communicates with the Wazuh manager, sending data in near real time through an encrypted and authenticated channel.
+The Wazuh agent is multi-platform and runs on the endpoints that the user wants to monitor. It communicates with the Wazuh server, sending data in near real-time through an encrypted and authenticated channel.
 
-The agent was developed considering the need to monitor a wide variety of different endpoints without impacting their performance. It requires 35 MB of RAM on average. Therefore, it is supported on the most popular operating systems.
+The agent was developed considering the need to monitor a wide variety of different endpoints without impacting their performance. It is supported on the most popular operating systems, and it requires 35 MB of RAM on average.
 
 The Wazuh agent provides :ref:`key features <agents_modules>` to enhance your system’s security. 
 
@@ -21,7 +21,7 @@ The Wazuh agent provides :ref:`key features <agents_modules>` to enhance your sy
    * - Log collector
      - Command execution
    * - File integrity monitoring (FIM) 
-     - Security configuration assessment (SCA) 
+     - Security configuration assessment (SCA)
    * - System inventory 
      - Malware detection
    * - Active response
@@ -104,9 +104,25 @@ To install a Wazuh agent, select your operating system and follow the instructio
   </div>
 
 
-If you are deploying Wazuh in a large environment, with a high number of servers or endpoints, keep in mind that this deployment might be easier using automation tools such as :ref:`Puppet <wazuh_puppet>`, `Chef <https://github.com/wazuh/wazuh-chef>`_, SCCM, or :ref:`Ansible <wazuh_ansible_guide>`.
+If you are deploying Wazuh in a large environment, with a high number of servers or endpoints, keep in mind that this deployment might be easier using automation tools such as :doc:`Puppet </deployment-options/deploying-with-puppet/index>`, `Chef <https://github.com/wazuh/wazuh-chef>`_, SCCM, or :doc:`Ansible </deployment-options/deploying-with-ansible/installation-guide>`.
 
 .. note:: Compatibility between the Wazuh agent and the Wazuh manager is guaranteed when the Wazuh manager version is later than or equal to that of the Wazuh agent.
+
+You can also deploy a new agent following the instructions in the Wazuh dashboard. Go to **Endpoints Summary**, and click on **Deploy new agent**.
+ 
+  .. thumbnail::  /images/installation/deploy-new-agent-from-ui.png
+    :align: center
+    :width: 80%
+    :title: Deploy new agent button
+    :alt: Deploy new agent button
+
+Then the Wazuh dashboard will show you the steps to deploy a new agent.
+
+  .. thumbnail::  /images/installation/deploy-new-agent-from-ui-options.png
+    :align: center
+    :width: 80%
+    :title: Deploy a new agent instructions
+    :alt: Deploy a new agent instructions
 
 .. rst-class:: d-none
 

@@ -1,5 +1,8 @@
 .. Copyright (C) 2015, Wazuh, Inc.
 
+.. meta::
+  :description: Wazuh provides an automated way of building Windows packages. Learn how to build your own Wazuh Windows packages in this section of our documentation.
+
 .. _create-windows:
 
 Windows
@@ -47,6 +50,8 @@ image with all the necessary tools to compile and obtain the Windows agent compi
       -r, --revision <rev>      [Optional] Package revision. By default: 1.
       -s, --store <path>        [Optional] Set the directory where the package will be stored. By default the current path.
       -d, --debug               [Optional] Build the binaries with debug symbols. By default: no.
+      -t, --trust_verification  [Optional] Build the binaries with trust load images verification. By default: 1 (only warnings).
+      -c, --ca_name <CA name>   [Optional] CA name to be used to verify the trust of the agent. By default: DigiCert Assured ID Root CA.
       -h, --help                Show this help.
 
 Below, you will find an example of how to build a compiled Windows agent.

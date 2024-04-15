@@ -1,60 +1,86 @@
-.. meta::
-  :description: Wazuh is capable of detecting a Shellshock attack by analyzing web server logs collected from a monitored endpoint. Learn more about this in this PoC.
+.. Copyright (C) 2015, Wazuh, Inc.
 
-.. _poc_detect_web_attack_shellshock:
+.. meta::
+   :description: Wazuh detects Shellshock attacks. It analyzes web server logs collected from a monitored endpoint. Learn more about this in this PoC.
 
 Detecting a Shellshock attack
 =============================
 
-Wazuh is capable of detecting a Shellshock attack by analyzing web server logs collected from a monitored endpoint. In addition, the attack can also be identified at a network level by configuring a Suricata integration.
+Wazuh is capable of detecting a Shellshock attack by analyzing web server logs collected from a monitored endpoint. In this use case, you set up an Apache web server on the Ubuntu endpoint and simulate a shellshock attack.
 
-Check the :ref:`Shellshock attack <learning_wazuh_shellshock>` section of our documentation for further information. Additionally, the :ref:`Catch suspicious network traffic <learning_wazuh_suricata>` section provides information on how to configure a Suricata integration.
+Infrastructure
+--------------
 
-
-Prerequisites
--------------
-
-- You need an Apache server running on the monitored Ubuntu 20 system.
++---------------+--------------------------------------------------------------------------------------+
+| Endpoint      | Description                                                                          |
++===============+======================================================================================+
+| Ubuntu 22.04  | Victim endpoint running an Apache 2.4.54 web server.                                 |
++---------------+--------------------------------------------------------------------------------------+
+| RHEL 9.0      | This attacker endpoint sends a malicious HTTP request to the victim’s web server.    |
++---------------+--------------------------------------------------------------------------------------+
 
 Configuration
 -------------
 
-#. Add the following lines to the ``/var/ossec/etc/ossec.conf`` configuration file at the Wazuh Ubuntu 20 host. This sets the Linux agent to monitor the access logs of your Apache server.
+Ubuntu endpoint
+^^^^^^^^^^^^^^^
 
-    .. code-block:: XML
+Perform the following steps to install an Apache web server and monitor its logs with the Wazuh agent.
 
-        <localfile>
-            <log_format>apache</log_format>
-            <location>/var/log/apache2/access.log</location>
-        </localfile>
+#. Update local packages and install the Apache web server:
 
-#. Restart the Wazuh agent to apply the configuration changes.
+   .. code-block:: console
 
-    .. code-block:: console
+      $ sudo apt update
+      $ sudo apt install apache2
 
-        # systemctl restart wazuh-agent
+#. If a firewall is enabled, modify it to allow external access to web ports. Skip this step if the firewall is disabled:
 
-Optionally, you can install Suricata on the Ubuntu 20 endpoint and configure it to monitor the endpoint's network traffic.
+   .. code-block:: console
 
-Steps to generate the alerts
-----------------------------
+      $ sudo ufw app list
+      $ sudo ufw allow 'Apache'
+      $ sudo ufw status
 
-#. Replace ``<your_web_server_address>`` with the appropriate value and execute the following command from a system external to your Ubuntu 20 endpoint (the attacker).
+#. Check that the Apache web server is running:
 
-    .. code-block:: console
+   .. code-block:: console
 
-        # curl -H "User-Agent: () { :; }; /bin/cat /etc/passwd" <your_web_server_address>
+      $ sudo systemctl status apache2
 
-Query the alerts
+#. Add the following lines to the Wazuh agent ``/var/ossec/etc/ossec.conf`` configuration file. This sets the Wazuh agent to monitor the access logs of your Apache server:
+
+   .. code-block:: xml
+
+      <localfile>
+          <log_format>syslog</log_format>
+          <location>/var/log/apache2/access.log</location>
+      </localfile>
+
+#. Restart the Wazuh agent to apply the configuration changes:
+
+   .. code-block:: console
+
+      $ sudo systemctl restart wazuh-agent
+
+Attack emulation
 ----------------
 
-You can visualize the alert data in the Wazuh dashboard. To do this, go to the **Security events** module and add the filters in the search bar to query the alerts.
+#. Replace ``<WEBSERVER_IP>`` with the Ubuntu IP address and execute the following command from the attacker endpoint:
 
-- ``rule.description:Shellshock attack detected``
+   .. code-block:: console
 
-- If you have Suricata monitoring the endpoint's traffic, you can also query ``rule.description:*CVE-2014-6271*`` for the related Suricata's alerts.
+      $ sudo curl -H "User-Agent: () { :; }; /bin/cat /etc/passwd" <WEBSERVER-IP>
 
-.. thumbnail:: ../images/poc/Detecting-Shellshock-Attack.png
-          :title: Detecting a Shellshock attack
-          :align: center
-          :wrap_image: No
+Visualize the alerts
+--------------------
+
+You can visualize the alert data in the Wazuh dashboard. To do this, go to the **Threat Hunting** module and add the filters in the search bar to query the alerts.
+
+-  ``rule.description:Shellshock attack detected``
+-  If you have Suricata monitoring the endpoint traffic, you can also query ``rule.description:*CVE-2014-6271*`` for the related Suricata alerts.
+
+   .. thumbnail:: /images/poc/shellshock-alerts.png
+      :title: Shellshock alerts
+      :align: center
+      :width: 80%

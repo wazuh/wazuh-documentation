@@ -31,8 +31,8 @@ To enable multi-tenancy, follow the instructions below.
     .. code-block:: yaml
       :emphasize-lines: 2,3
 
-       opensearch.requestHeadersWhitelist: ["securitytenant","Authorization"]
-       opensearch_security.multitenancy.enabled: false
+       opensearch.requestHeadersAllowlist: ["securitytenant","Authorization"]
+       opensearch_security.multitenancy.enabled: true
        opensearch_security.multitenancy.tenants.preferred: ["Global", "Private"]
        opensearch_security.readonly_mode.roles: ["kibana_read_only"]
 
@@ -41,20 +41,8 @@ To enable multi-tenancy, follow the instructions below.
     .. code-block:: yaml
       :emphasize-lines: 1
 
-        uiSettings.overrides.defaultRoute: /app/wazuh?security_tenant=global
+        uiSettings.overrides.defaultRoute: /app/wz-home?security_tenant=global
 
 #. Restart the Wazuh dashboard so changes can take effect. 
 
-   .. tabs::
-   
-    .. group-tab:: Systemd
-   
-     .. code-block:: console
-   
-      # systemctl restart wazuh-dashboard
-   
-    .. group-tab:: SysV init
-   
-     .. code-block:: console
-   
-      # service wazuh-dashboard restart
+   .. include:: /_templates/common/restart_dashboard.rst

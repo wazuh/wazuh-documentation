@@ -1,8 +1,8 @@
 .. Copyright (C) 2015, Wazuh, Inc.
 
 .. meta::
-  :description: This guide provides the basic information needed to get started with the Wazuh API, including some practical use cases. 
-  
+  :description: This guide provides the basic information needed to get started with the Wazuh API, including some practical use cases.
+
 .. _api_getting-started:
 
 Getting started
@@ -15,17 +15,20 @@ Starting and stopping the Wazuh API
 
 The Wazuh API will be installed along with the Wazuh manager by default. To control or check the **wazuh-api**, use the **wazuh-manager** service with the ``systemctl`` or ``service`` command:
 
-**Systemd systems**
+.. tabs::
 
-.. code-block:: console
+   .. group-tab:: Systemd
 
-    # systemctl start/status/stop/restart wazuh-manager
+      .. code-block:: console
 
-**SysVinit systems**
+         # systemctl start/status/stop/restart wazuh-manager
 
-.. code-block:: console
+   .. group-tab:: SysV init
 
-    # service wazuh-manager start/status/stop/restart
+      .. code-block:: console
+
+         # service wazuh-manager start/status/stop/restart
+
 
 .. note::
     The -k parameter applied to API requests is used to avoid the server connection verification by using server certificates. If these are valid, this parameter can be removed.
@@ -339,10 +342,10 @@ Here are some of the basic concepts related to making API requests and understan
                 "error": {
                   "code": 1707,
                   "message": "Cannot send request, agent is not active",
-                  "remediation": "Please, check non-active agents connection and try again. Visit 
-                  https://documentation.wazuh.com/current/user-manual/registering/index.html and 
-                  https://documentation.wazuh.com/current/user-manual/agents/agent-connection.html 
-                  to obtain more information on registering and connecting agents" 
+                  "remediation": "Please, check non-active agents connection and try again. Visit
+                  https://documentation.wazuh.com/current/user-manual/registering/index.html and
+                  https://documentation.wazuh.com/current/user-manual/agents/agent-connection.html
+                  to obtain more information on registering and connecting agents"
                 },
                 "id": [
                   "001",
@@ -424,7 +427,8 @@ Here are some of the basic concepts related to making API requests and understan
 - Responses containing collections of data will return a maximum of 500 elements by default. The *offset* and *limit* parameters may be used to iterate through large collections. The *limit* parameter accepts up to 100000 items, although it is recommended not to exceed the default value (500 items). Doing so can lead to unexpected behaviors (timeouts, large responses, etc.). Use with caution.
 - All responses have an HTTP status code: 2xx (success), 4xx (client error), 5xx (server error), etc.
 - All requests (except ``POST /security/user/authenticate`` and ``POST /security/user/authenticate/run_as``) accept the parameter ``pretty`` to convert the JSON response to a more human-readable format.
-- The Wazuh API log is stored on the manager at ``WAZUH_PATH/logs`` directory as ``api.log`` or ``api.json`` depending on the chosen log format (the verbosity level can be changed in the Wazuh API configuration file). The Wazuh API logs are rotated daily. Rotated logs are stored in ``WAZUH_PATH/logs/api/<year>/<month>`` and compressed using ``gzip``.
+- The Wazuh API stores logs in the ``api.log`` or ``api.json`` files, depending on the chosen log format. These log files are located at ``WAZUH_PATH/logs/`` on the Wazuh server. You can change the verbosity level in the :ref:`Wazuh API configuration file <api_configuration_file>`.
+- The Wazuh API logs are rotated based on time by default. Rotation only occurs after adding a new entry to the log. For instance, time-based rotation triggers when a new entry is added on a different day, not necessarily every midnight. Rotated logs are stored in ``WAZUH_PATH/logs/api/<year>/<month>/`` and compressed using ``gzip``.
 - All Wazuh API requests will be aborted if no response is received after a certain amount of time. The parameter ``wait_for_complete`` can be used to disable this timeout. This is useful for calls that could take more time than expected, such as :api-ref:`PUT /agents/upgrade <operation/api.controllers.agent_controller.put_upgrade_agents>`.
 
 .. note:: The maximum API response time can be modified in the :ref:`API configuration <api_configuration_options>`.
@@ -464,7 +468,7 @@ Often when an alert fires, it is helpful to know details about the rule itself. 
                 },
                 "pci_dss": [],
                 "gpg13": [
-                   "4.3"
+                   "4.4"
                 ],
                 "gdpr": [],
                 "hipaa": [],
@@ -619,6 +623,8 @@ With the Wazuh API, it is possible to start a **wazuh-logtest** session or use a
 
 Mining the file integrity monitoring database of an agent
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+.. deprecated:: 4.9
 
 The API can be used to show information about all monitored files by syscheck. The following example shows all events related with *.py* files in agent *000* (the manager):
 
@@ -812,9 +818,9 @@ You can even dump the manager current configuration with the request below (resp
               "logall": "no",
               "logall_json": "no",
               "email_notification": "yes",
-              "email_to": "me@test.com",
-              "smtp_server": "mail.test.com",
-              "email_from": "wazuh@test.com",
+              "email_to": "me@test.example",
+              "smtp_server": "mail.test.example",
+              "email_from": "wazuh@test.example",
               "email_maxperhour": "12",
               "email_log_source": "alerts.log",
               "white_list": [
@@ -895,6 +901,34 @@ Adding an agent is now easier than ever. Simply send a request with the agent na
       "error": 0
     }
 
+Ingest security events
+^^^^^^^^^^^^^^^^^^^^^^
+
+.. versionadded:: 4.6.0
+
+You can send security events for analysis using the Wazuh API.
+
+There's a limit of ``30`` requests per minute and 100 events per request. This limit prevents endpoints to ingest large amounts of data too fast. Check :ref:`max_request_per_minute <api_configuration_access>` to lower this limit even further or disable the feature.
+
+.. code-block:: console
+
+    # curl -k -X POST "https://localhost:55000/events" -H  "Authorization: Bearer $TOKEN" -H  "Content-Type: application/json" -d '{"events": ["Event value 1", "{\"someKey\": \"Event value 2\"}"]}'
+
+.. code-block:: json
+    :class: output
+
+    {
+      "data": {
+        "affected_items": [
+
+        ],
+        "total_affected_items": 2,
+        "total_failed_items": 0,
+        "failed_items": []
+      },
+      "message": "All events were forwarded to analisysd",
+      "error": 0
+    }
 
 Conclusion
 ^^^^^^^^^^

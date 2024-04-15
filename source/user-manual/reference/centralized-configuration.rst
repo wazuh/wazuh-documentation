@@ -14,13 +14,13 @@ Introduction
 Agents can be configured remotely by using the ``agent.conf`` file. The following capabilities can be configured remotely:
 
 - :doc:`File Integrity monitoring <../capabilities/file-integrity/index>` (**syscheck**)
-- :doc:`Rootkit detection <../capabilities/anomalies-detection/index>` (**rootcheck**)
+- :doc:`Rootkit detection <../capabilities/malware-detection/index>` (**rootcheck**)
 - :doc:`Log data collection <../capabilities/log-data-collection/index>` (**localfile**)
 - :doc:`Security policy monitoring <../capabilities/policy-monitoring/index>` (**wodle name="open-scap"**, **wodle name="cis-cat"**)
 - :doc:`Remote commands <ossec-conf/wodle-command>` (**wodle name="command"**)
-- :doc:`Labels for agent alerts <../capabilities/labels>` (**labels**)
+- :doc:`Labels for agent alerts <../agents/labels>` (**labels**)
 - :doc:`Security Configuration Assessment <../capabilities/sec-config-assessment/index>` (**sca**)
-- :doc:`System inventory <../capabilities/syscollector>` (**syscollector**)
+- :doc:`System inventory <../capabilities/system-inventory/index>` (**syscollector**)
 - :doc:`Avoid events flooding <ossec-conf/client-buffer>` (**client_buffer**)
 - :doc:`Configure osquery wodle <ossec-conf/wodle-osquery>` (**wodle name="osquery"**)
 - :doc:`force_reconnect_interval setting <ossec-conf/client>` (**client**)
@@ -118,28 +118,54 @@ Options
 -------
 
 +-------------+-------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-| **name**    | Allows assignment of the block to one particular agent.                                                                                                           |
+| **name**    | Assigns the block to agents with specific names.                                                                                                                  |
 +             +-------------------------------------------------------+-----------------------------------------------------------------------------------------------------------+
-|             | Allowed values                                        | Any agent name                                                                                            |
+|             | Allowed values                                        | Any regular expression that matches the agent name.                                                       |
 +-------------+-------------------------------------------------------+-----------------------------------------------------------------------------------------------------------+
-| **os**      | Allows assignment of the block to an operating system.                                                                                                            |
+| **os**      | Assigns the block to agents on specific operating systems.                                                                                                        |
 +             +-------------------------------------------------------+-----------------------------------------------------------------------------------------------------------+
-|             | Allowed values                                        | Any OS family                                                                                             |
+|             | Allowed values                                        | Any regular expression that matches the agent OS information.                                             |
 +-------------+-------------------------------------------------------+-----------------------------------------------------------------------------------------------------------+
-| **profile** | Allows assignment of a profile name to a block. Any agent configured to use the defined :ref:`profile <reference_ossec_client_config_profile>` may use the block. |
+| **profile** | Assigns the block to agents with specific profiles as defined in :ref:`client configuration <reference_ossec_client_config_profile>`.                             |
 +             +-------------------------------------------------------+-----------------------------------------------------------------------------------------------------------+
-|             | Allowed values                                        | Any defined profile                                                                                       |
+|             | Allowed values                                        | Any regular expression that matches the agent profile.                                                    |
 +-------------+-------------------------------------------------------+-----------------------------------------------------------------------------------------------------------+
 
-Examples
+.. topic:: Example
 
 	.. code-block:: xml
 
-		<agent_config name=”agent01”>
+		<agent_config name=”^agent01|^agent02”>
 		...
-		<agent_config os="Linux">
+		<agent_config os="^Linux">
 		...
-		<agent_config profile="UnixHost">
+		<agent_config profile="^UnixHost">
+
+   To get the agent name and operating system information, you can run the ``agent_control`` utility.
+
+    .. code-block:: console
+
+        agent_control -i <AGENT_ID>
+
+    Where ``<AGENT_ID>`` corresponds to the agent ID of the endpoint.
+
+    .. code-block:: none
+        :class: output
+
+        Wazuh agent_control. Agent information:
+        Agent ID:   001
+        Agent Name: agent01
+        IP address: any
+        Status:     Active
+
+        Operating system:    Linux |centos9 |5.14.0-366.el9.x86_64 |#1 SMP PREEMPT_DYNAMIC Thu Sep 14 23:37:14 UTC 2023 |x86_64
+        Client version:      Wazuh v4.5.2
+        Configuration hash:  ab73af41699f13fdd81903b5f23d8d00
+        Shared file hash:    4a8724b20dee0124ff9656783c490c4e
+        Last keep alive:     1696963366
+
+        Syscheck last started at:  Tue Oct 10 12:37:43 2023
+        Syscheck last ended at:    Tue Oct 10 12:37:46 2023
 
 Centralized configuration process
 ---------------------------------
@@ -154,7 +180,7 @@ The following is an example of how a centralized configuration can be done.
 
         # touch /var/ossec/etc/shared/default/agent.conf
         # chown wazuh:wazuh /var/ossec/etc/shared/default/agent.conf
-        # chmod 640 /var/ossec/etc/shared/default/agent.conf
+        # chmod 660 /var/ossec/etc/shared/default/agent.conf
 
     Several configurations may be created based on the ``name``, ``OS`` or ``profile`` of an agent.
 
@@ -248,7 +274,7 @@ The following is an example of how a centralized configuration can be done.
 Precedence
 ----------
 
-It's important to understand which configuration file takes precedence between ``ossec.conf`` and ``agent.conf`` when central configuration is used. When central configuration is utilized, the local and the shared configuration are merged, however, the ``ossec.conf`` file is read before the shared ``agent.conf`` and the last configuration of any setting will overwrite the previous. Also, if a file path for a particular setting is set in both of the configuration files, both paths will be included in the final configuration.
+It's important to understand which configuration file takes precedence between ``ossec.conf`` and ``agent.conf`` when the central configuration is used. When this configuration is utilized, the local and the shared configuration are merged, however, the ``ossec.conf`` file is read before the shared ``agent.conf`` and the last configuration of any setting will overwrite the previous. Also, if a file path for a particular setting is set in both of the configuration files, both paths will be included in the final configuration.
 
 For example:
 
@@ -296,7 +322,7 @@ Whether for any reason you don't want to apply the shared configuration in a spe
 Download configuration files from remote location
 -------------------------------------------------
 
-The Wazuh manager has the capability to download configuration files like ``merged.mg`` as well as other files to be merged for the groups that you want to.
+The Wazuh manager has the capability to download configuration files like ``merged.mg`` as well as other files to be merged for the groups that you want.
 
 To use this feature, we need to put a yaml file named ``files.yml`` under the directory ``/var/ossec/etc/shared/``. When the **manager** starts, it will read and parse the file.
 
@@ -317,7 +343,15 @@ The ``files.yml`` has the following structure as shown in the following example:
                 agent.conf: https://example.com/agent.conf
             poll: 200
 
-The ``groups`` block is used to define the group name from which we want to download the files.
+    agents:
+        001: my_group_1
+        002: my_group_2
+        003: another_group
+
+Here we can distinguish the two main blocks: ``groups`` and ``agents``.
+
+
+1. In the ``groups`` block we define the group name from which we want to download the files.
 
     - If the group doesn't exist, it will be created.
     - If a file has the name ``merged.mg``, only this file will be downloaded. Then it will be validated.

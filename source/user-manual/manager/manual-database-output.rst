@@ -23,31 +23,37 @@ Prerequisites
 
   a) For MySQL:
 
-    RPM:
+   .. tabs::
 
-    .. code-block:: console
+      .. group-tab:: Yum
 
-      # yum install mysql-devel
+         .. code-block:: console
 
-    Debian:
+            # yum install mysql-devel
 
-    .. code-block:: console
+      .. group-tab:: APT
 
-      # apt-get install libmysqlclient-dev
+         .. code-block:: console
+
+            # apt-get install libmysqlclient-dev
+
 
   b) For PostgreSQL:
 
-    RPM:
+   .. tabs::
 
-    .. code-block:: console
+      .. group-tab:: Yum
 
-      # yum install postgresql-devel
+         .. code-block:: console
 
-    Debian:
+            # yum install postgresql-devel
 
-    .. code-block:: console
+      .. group-tab:: APT
 
-      # apt-get install libpq-dev
+         .. code-block:: console
+
+            # apt-get install libpq-dev
+
 
 Installation
 ------------
@@ -142,16 +148,6 @@ Last steps
 
 The setup process for the database output is finished. Now the only thing left is to restart the Wazuh manager:
 
-  a. For Systemd:
-
-  .. code-block:: console
-
-    # systemctl restart wazuh-manager
-
-  b. For SysV Init:
-
-  .. code-block:: console
-
-    # service wazuh-manager restart
+  .. include:: /_templates/common/restart_manager.rst
 
 Now the database will start being filled with data provided by the manager.

@@ -25,6 +25,7 @@ Options
 - `mode`_
 - `prefix`_
 
+.. _reference_ossec_socket_name:
 
 name
 ^^^^^^^^^^

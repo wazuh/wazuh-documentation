@@ -1,5 +1,8 @@
 .. Copyright (C) 2015, Wazuh, Inc.
 
+.. meta::
+    :description: You can install Wazuh using different deployment options. Learn more about Wazuh installation alternatives in this section of the Wazuh documentation.
+
 .. _deployment:
 
 Installation alternatives
@@ -35,7 +38,7 @@ All the alternatives include instructions on how to install the :doc:`Wazuh cent
 
     <h3>Offline</h3>
     
-- :doc:`offline-installation`: Installing the solution offline involves downloading the Wazuh components to later install them on a system with no internet connection. 
+- :doc:`offline-installation/index`: Installing the solution offline involves downloading the Wazuh components to later install them on a system with no internet connection. 
 
 
 .. raw:: html
@@ -44,16 +47,9 @@ All the alternatives include instructions on how to install the :doc:`Wazuh cent
 
 - :doc:`Installing the Wazuh server from sources <wazuh-from-sources/index>`: Installing Wazuh from sources means installing the Wazuh manager without using a package manager. You compile the source code and copy the binaries to your computer instead.
 
+.. note::
 
-
-.. raw:: html
-
-    <h3>Commercial options</h3>
-
-- :doc:`Installation with Elastic Stack basic license <elastic-stack/index>`: As an alternative to the Wazuh indexer, you can install Wazuh using the Elastic Stack basic license option. It contains everything included in the open source version under the `Apache License, Version 2.0 <https://www.apache.org/licenses/LICENSE-2.0>`_, plus additional capabilities such as Elastic Stack Security features, Kibana alerting, and others. According to your chosen configuration, Wazuh and Elastic Stack are installed on the same host, as an all-in-one deployment, on a separate host as a single-node or multi-node cluster.
-
-- :doc:`Installation with Splunk <splunk/index>`: You install Wazuh along with Splunk Enterprise, including the Splunk forwarder and the Wazuh Splunk app. This can be done as a single instance or as a multi-instance cluster.
-
+   Since Wazuh v4.6.0, we don't provide the Kibana plugin and Splunk app anymore. To integrate Wazuh with Elastic or Splunk, refer to our :doc:`/integrations-guide/index`.
 
 Installing the Wazuh agent
 --------------------------
@@ -162,9 +158,7 @@ These alternatives guide you to install the Wazuh central components along with 
     amazon-machine-images/amazon-machine-images
     docker/index 
     deploying-with-kubernetes/index
-    offline-installation
+    offline-installation/index
     wazuh-from-sources/index
-    elastic-stack/index
-    splunk/index
     deploying-with-ansible/index
     deploying-with-puppet/index

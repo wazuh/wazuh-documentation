@@ -1,84 +1,101 @@
+.. Copyright (C) 2015, Wazuh, Inc.
 
 .. meta::
-  :description: This PoC shows how Wazuh is capable of detecting if Netcat is running on a monitored host. Learn more about this in this section of the documentation.
-
-.. _poc_detect_unauthorized_process_netcat:
+   :description: This PoC shows how Wazuh detects if Netcat is running on a monitored host. Learn more about this in this section of the documentation.
 
 Detecting unauthorized processes
 ================================
 
-Netcat is a computer networking utility that functions as a back-end tool that allows for port scanning and port listening. This PoC shows how Wazuh is capable of detecting if Netcat is running on a monitored host.
+The Wazuh :doc:`command monitoring </user-manual/capabilities/command-monitoring/index>` capability runs commands on an endpoint and monitors the output of the commands.
 
-Check our documentation to learn more about the :ref:`command monitoring <manual_command_monitoring>` capabilities of Wazuh.
+In this use case, you use the Wazuh command monitoring capability to detect when Netcat is running on an Ubuntu endpoint. Netcat is a computer networking utility used for port scanning and port listening.
+
+Infrastructure
+--------------
+
++---------------+-------------------------------------------------------------------------------------------------------------+
+| Endpoint      | Description                                                                                                 |
++===============+=============================================================================================================+
+| Ubuntu 22.04  | You configure the Wazuh command monitoring module on this endpoint to detect a running Netcat process.      |
++---------------+-------------------------------------------------------------------------------------------------------------+
 
 Configuration
 -------------
 
-Configure your environment as follows to test the PoC.
+Ubuntu endpoint
+^^^^^^^^^^^^^^^
 
-#. Add the following configuration block under the ``<localfile>`` section of the ``/var/ossec/etc/ossec.conf`` file at the monitored Ubuntu 20 endpoint. This is to periodically get a list of running processes.
+Take the following steps to configure command monitoring and query a list of all running processes on the Ubuntu endpoint.
 
-    .. code-block:: XML
+#. Add the following configuration block to the Wazuh agent ``/var/ossec/etc/ossec.conf`` file. This allows to periodically get a list of running processes:
 
-        <ossec_config>
-            <localfile>
-                <log_format>full_command</log_format>
-                <alias>process list</alias>
-                <command>ps -e -o pid,uname,command</command>
-                <frequency>30</frequency>
-            </localfile>
-        </ossec_config>
+   .. code-block:: xml
 
-#. Restart the Wazuh agent to load the changes.
+      <ossec_config>
+        <localfile>
+          <log_format>full_command</log_format>
+          <alias>process list</alias>
+          <command>ps -e -o pid,uname,command</command>
+          <frequency>30</frequency>
+        </localfile>
+      </ossec_config>
 
-    .. code-block:: console
+#. Restart the Wazuh agent to apply the changes:
 
-        # systemctl restart wazuh-agent
+   .. code-block:: console
 
-#. Install Netcat and required dependencies on the Ubuntu 20 endpoint.
+      $ sudo systemctl restart wazuh-agent
 
-    .. code-block:: console
+#. Install Netcat and the required dependencies:
 
-        # apt install ncat nmap -y
+   .. code-block:: console
 
-#. Add following rules to ``/var/ossec/etc/rules/local_rules.xml`` at the Wazuh manager.
+      $ sudo apt install ncat nmap -y
 
-    .. code-block:: XML
+Wazuh server
+^^^^^^^^^^^^
 
-        <group name="ossec,">
-            <rule id="100050" level="0">
-                <if_sid>530</if_sid>
-                <match>^ossec: output: 'process list'</match>
-                <description>List of running processes.</description>
-                <group>process_monitor,</group>
-            </rule>
-            <rule id="100051" level="7" ignore="900">
-                <if_sid>100050</if_sid>
-                <match>nc -l</match>
-                <description>Netcat listening for incoming connections.</description>
-                <group>process_monitor,</group>
-            </rule>
-        </group>
+You have to configure the following steps on the Wazuh server to create a rule that triggers every time the Netcat program launches.
 
-#. Restart the Wazuh manager to load the changes.
+#. Add the following rules to the ``/var/ossec/etc/rules/local_rules.xml`` file on the Wazuh server:
 
-    .. code-block:: console
+   .. code-block:: xml
 
-        # systemctl restart wazuh-manager
+      <group name="ossec,">
+        <rule id="100050" level="0">
+          <if_sid>530</if_sid>
+          <match>^ossec: output: 'process list'</match>
+          <description>List of running processes.</description>
+          <group>process_monitor,</group>
+        </rule>
 
-Steps to generate alerts
-------------------------
+        <rule id="100051" level="7" ignore="900">
+          <if_sid>100050</if_sid>
+          <match>nc -l</match>
+          <description>netcat listening for incoming connections.</description>
+          <group>process_monitor,</group>
+        </rule>
+      </group>
 
-#. Log into the monitored Ubuntu 20 system and run ``nc -l 8000`` for 30 seconds.
+#. Restart the Wazuh manager to apply the changes:
 
-Query the alerts
+   .. code-block:: console
+
+      $ sudo systemctl restart wazuh-manager
+
+Attack emulation
 ----------------
 
-You can visualize the alert data in the Wazuh dashboard. To do this, go to the **Security events** module and add the filters in the search bar to query the alerts.
+On the monitored Ubuntu endpoint, run ``nc -l 8000`` for 30 seconds.
 
-- ``rule.id:(533 OR 100051)``
+Visualize the alerts
+--------------------
 
-.. thumbnail:: ../images/poc/Detecting-unauthorized-processes.png
-          :title: Detecting unauthorized processes - Netcat
-          :align: center
-          :wrap_image: No
+You can visualize the alert data in the Wazuh dashboard. To do this, go to the **Threat Hunting** module and add the filters in the search bar to query the alerts.
+
+-  ``rule.id:(100051)``
+
+.. thumbnail:: /images/poc/unauthorized-processes-alerts.png
+   :title: Unauthorized processes alerts
+   :align: center
+   :width: 80%

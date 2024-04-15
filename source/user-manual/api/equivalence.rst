@@ -1,5 +1,7 @@
 .. Copyright (C) 2015, Wazuh, Inc.
 
+.. meta::
+    :description: Wazuh API v4 introduces several new endpoints and also modifies or removes some of the old ones. Learn how to migrate from the Wazuh API 3.X in this section.
 
 .. Migrating from the Wazuh API 3.X
 

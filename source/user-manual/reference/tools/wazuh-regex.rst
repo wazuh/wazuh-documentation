@@ -8,8 +8,6 @@
 wazuh-regex
 ===========
 
-.. versionadded:: 4.2
-
 The wazuh-regex program is used to validate a regex expression.
 
 The pattern should be enclosed in single quotes to help prevent any unintended interactions with the shell.

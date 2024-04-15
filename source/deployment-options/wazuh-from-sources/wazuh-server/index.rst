@@ -19,12 +19,12 @@ Installing dependencies
     
         .. tabs::
           
-            .. tab:: CentOS 6/7
+            .. tab:: CentOS 7
             
                 .. code-block:: console
                 
                     # yum update -y
-                    # yum install make gcc gcc-c++ policycoreutils-python automake autoconf libtool centos-release-scl openssl-devel wget bzip2 devtoolset-7 -y
+                    # yum install make gcc gcc-c++ policycoreutils-python automake autoconf libtool centos-release-scl openssl-devel wget bzip2 devtoolset-7 procps -y
                     # curl -OL http://packages.wazuh.com/utils/gcc/gcc-9.4.0.tar.gz && tar xzf gcc-9.4.0.tar.gz  && cd gcc-9.4.0/ && ./contrib/download_prerequisites && ./configure --enable-languages=c,c++ --prefix=/usr --disable-multilib --disable-libsanitizer && make -j$(nproc) && make install && ln -fs /usr/bin/g++ /bin/c++ && ln -fs /usr/bin/gcc /bin/cc && cd .. && rm -rf gcc-* && scl enable devtoolset-7 bash
                 
                 CMake 3.18 installation.
@@ -38,7 +38,7 @@ Installing dependencies
             
                 .. code-block:: console
                 
-                    # yum install make cmake gcc gcc-c++ python3 python3-policycoreutils automake autoconf libtool openssl-devel yum-utils
+                    # yum install make cmake gcc gcc-c++ python3 python3-policycoreutils automake autoconf libtool openssl-devel yum-utils procps -y
                     # yum-config-manager --enable powertools
                     # yum install libstdc++-static -y
 
@@ -55,7 +55,7 @@ Installing dependencies
         .. code-block:: console
         
             # apt-get update
-            # apt-get install python gcc g++ make libc6-dev curl policycoreutils automake autoconf libtool libssl-dev
+            # apt-get install python gcc g++ make libc6-dev curl policycoreutils automake autoconf libtool libssl-dev procps
             
         CMake 3.18 installation
         
@@ -93,61 +93,65 @@ To install the required dependencies to build the python interpreter, follow the
 Installing the Wazuh manager
 ----------------------------
 
-#.  Download and extract the latest version:
+#. Download and extract the latest version:
 
-    .. code-block:: console
+   .. code-block:: console
 
-        # curl -Ls https://github.com/wazuh/wazuh/archive/v|WAZUH_CURRENT_FROM_SOURCES|.tar.gz | tar zx
+      # curl -Ls https://github.com/wazuh/wazuh/archive/v|WAZUH_CURRENT_FROM_SOURCES|.tar.gz | tar zx
+      # cd wazuh-|WAZUH_CURRENT_FROM_SOURCES|
 
-#.  Run the ``install.sh`` script. This will display a wizard to guide you through the installation process using the Wazuh sources:
+#. If you have previously compiled for another platform, clean the build using the Makefile  in ``src/``:
 
-    .. warning::
+   .. code-block:: console
+
+      # make -C src clean
+      # make -C src clean-deps
+
+#. Run the ``install.sh`` script. This will display a wizard to guide you through the installation process using the Wazuh sources:
+
+   .. warning::
       
-        If you want to enable the database output, :doc:`check out </user-manual/manager/manual-database-output>` this section before running the installation script.
+      If you want to enable the database output, :doc:`check out </user-manual/manager/manual-database-output>` this section before running the installation script.
 
-    .. code-block:: console
+   .. code-block:: console
 
-        # cd wazuh-|WAZUH_CURRENT_FROM_SOURCES|
-        # ./install.sh
+      # ./install.sh
 
-    If you have previously compiled for another platform, you must clean the build using the Makefile  in ``src``:
+   Alternatively, to download vulnerability detection content during installation, you can set ``DOWNLOAD_CONTENT_AND_DECOMPRESS=y``. The initial run might be time-consuming due to the initial process of  downloading and processing :doc:`vulnerability detection </user-manual/capabilities/vulnerability-detection/index>` content. You can download a pre-prepared database during installation to bypass this initial step.
 
-    .. code-block:: console
+   .. code-block:: console
 
-        # cd wazuh-|WAZUH_CURRENT_FROM_SOURCES|
-        # make -C src clean
-        # make -C src clean-deps
+      # DOWNLOAD_CONTENT_AND_DECOMPRESS=y ./install.sh
 
-#.  When the script asks what kind of installation you want, type ``manager`` to install the Wazuh manager:
+#. When the script asks what kind of installation you want, type ``manager`` to install the Wazuh manager:
 
-    .. code-block:: none
+   .. code-block:: none
 
-        1- What kind of installation do you want (manager, agent, local, hybrid, or help)? manager
+      1- What kind of installation do you want (manager, agent, local, hybrid, or help)? manager
 
-    .. note::
+   .. note::
       
-        During the installation, users can decide the installation path. Execute the ``./install.sh`` and select the language, set the installation mode to ``manager``, then set the installation path (``Choose where to install Wazuh [/var/ossec]``). The default path of installation is ``/var/ossec``. A commonly used custom path might be ``/opt``. 
+      During the installation, users can decide the installation path. Execute the ``./install.sh`` and select the language, set the installation mode to ``manager``, then set the installation path (``Choose where to install Wazuh [/var/ossec]``). The default path of installation is ``/var/ossec``. A commonly used custom path might be ``/opt``. 
 
-    .. warning::
+   .. warning::
       
-        Be extremely careful not to select a critical installation directory if you choose a different path than the default. If the directory already exists, the installer will ask to delete the directory or proceed by installing Wazuh inside it.
+      Be extremely careful not to select a critical installation directory if you choose a different path than the default. If the directory already exists, the installer will ask to delete the directory or proceed by installing Wazuh inside it.
 
-#.  The installer asks if you want to start Wazuh at the end of the installation. If you choose not to, you can start it later with:
+#. The installer asks if you want to start Wazuh at the end of the installation. If you choose not to, you can start it later with:
 
-    .. tabs::
+   .. tabs::
 
-        .. group-tab:: Systemd
+      .. group-tab:: Systemd
 
+         .. code-block:: console
 
-            .. code-block:: console
+            # systemctl start wazuh-manager
 
-                # systemctl start wazuh-manager
+      .. group-tab:: SysV init
 
-        .. group-tab:: SysV Init
+         .. code-block:: console
 
-            .. code-block:: console
-
-                # service wazuh-manager start
+            # service wazuh-manager start
 
 Installing other Wazuh components
 ---------------------------------
@@ -185,7 +189,7 @@ Uninstall
 
    .. tabs::
      
-       .. group-tab:: SysV Init
+       .. group-tab:: SysV init
    
            .. code-block:: console
    

@@ -1,11 +1,12 @@
 .. Copyright (C) 2015, Wazuh, Inc.
 
+.. meta::
+  :description: Test and verify rules providing log examples in a sandbox using the wazuh-logtest tool. Learn more about it in this section.
+  
 .. _wazuh-logtest:
 
 wazuh-logtest
 =============
-
-.. versionadded:: 4.1.0
 
 `wazuh-logtest` tool allows the testing and verification of rules against provided log examples inside a sandbox in `wazuh-analysisd`. Helpful when writing and debugging custom rules and decoders, troubleshooting false positives and negatives.
 

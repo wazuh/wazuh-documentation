@@ -1,7 +1,7 @@
 .. Copyright (C) 2015, Wazuh, Inc.
 
 .. meta::
-  :description: Learn about the ``wazuh-integratord``, a daemon that allows Wazuh to connect to external APIs and alerting tools such as Slack, VirusTotal and PagerDuty.
+  :description: Learn about the ``wazuh-integratord``, a daemon that allows Wazuh to connect to external APIs and alerting tools such as Slack, VirusTotal, and PagerDuty.
 
 
 .. _wazuh-integratord:
@@ -9,9 +9,7 @@
 wazuh-integratord
 =================
 
-.. versionadded:: 4.2
-
-The ``wazuh-integratord`` is a daemon that allows Wazuh to connect to external APIs and alerting tools such as Slack, VirusTotal and PagerDuty.
+The ``wazuh-integratord`` is a daemon that allows Wazuh to connect to external APIs and alerting tools such as Slack, VirusTotal, and PagerDuty.
 
 For further details please refer to the following :ref:`page <manual_integration>`.
 

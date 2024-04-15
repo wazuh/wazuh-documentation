@@ -1,5 +1,8 @@
 .. Copyright (C) 2015, Wazuh, Inc.
 
+.. meta::
+  :description: The decoders extract the information from the received events. Learn more about Decoders Syntax in this section of our documentation.
+
 .. _decoders_syntax:
 
 Decoders Syntax
@@ -13,44 +16,44 @@ Overview
 
 There are many options to configure in decoders:
 
-+------------------------+---------------------------------------------------------------+-------------------------------------------------------------------------------------------------+
-| Option                 | Values                                                        | Description                                                                                     |
-+========================+===============================================================+=================================================================================================+
-| `decoder`_             | Name of the decoder                                           | This attribute defines the decoder.                                                             |
-+------------------------+---------------------------------------------------------------+-------------------------------------------------------------------------------------------------+
-| `parent`_              | Any decoder's name                                            | It will reference a parent decoder and the current one will become a child decoder.             |
-+------------------------+---------------------------------------------------------------+-------------------------------------------------------------------------------------------------+
-| `accumulate`_          | None                                                          | It allows tracking events over multiple log messages.                                           |
-+------------------------+---------------------------------------------------------------+-------------------------------------------------------------------------------------------------+
-| `program_name`_        | Any `regex <regex.html#regex-os-regex-syntax>`_,              | It defines the name of the program associated with the decoder.                                 |
-|                        | `sregex <regex.html#sregex-os-match-syntax>`_ or              |                                                                                                 |
-|                        | `pcre2 <regex.html#pcre2-syntax>`_ expression.                |                                                                                                 |
-+------------------------+---------------------------------------------------------------+-------------------------------------------------------------------------------------------------+
-| `prematch`_            | Any `regex <regex.html#regex-os-regex-syntax>`_ or            | It will look for a match in the log. In case it does, the decoder will be used.                 |
-|                        | `pcre2 <regex.html#pcre2-syntax>`_ expression.                |                                                                                                 |
-+------------------------+---------------------------------------------------------------+-------------------------------------------------------------------------------------------------+
-| :ref:`regex_decoders`  | Any `regex <regex.html#regex-os-regex-syntax>`_ or            | The decoder will use this option to find fields of interest and extract them.                   |
-|                        | `pcre2 <regex.html#pcre2-syntax>`_ expression.                |                                                                                                 |
-+------------------------+---------------------------------------------------------------+-------------------------------------------------------------------------------------------------+
-| `order`_               | See `order table <decoders.html#order>`_                      | The values that :ref:`regex_decoders` will extract will be stored in these groups.              |
-+------------------------+---------------------------------------------------------------+-------------------------------------------------------------------------------------------------+
-| `fts`_                 | See `fts table <decoders.html#fts>`_                          | First time seen.                                                                                |
-+------------------------+---------------------------------------------------------------+-------------------------------------------------------------------------------------------------+
-| `ftscomment`_          | Any String                                                    | Adds a comment to fts.                                                                          |
-+------------------------+---------------------------------------------------------------+-------------------------------------------------------------------------------------------------+
-| `plugin_decoder`_      | See `below <decoders.html#plugin-decoder>`_                   | Specifies a plugin that will do the decoding. Useful when extraction with regex is not          |
-|                        |                                                               | feasible.                                                                                       |
-+------------------------+---------------------------------------------------------------+-------------------------------------------------------------------------------------------------+
-| `use_own_name`_        | True                                                          | Only for child decoders.                                                                        |
-+------------------------+---------------------------------------------------------------+-------------------------------------------------------------------------------------------------+
-| `json_null_field`_     | String                                                        | Adds the option of deciding how a null value from a JSON will be stored.                        |
-+------------------------+---------------------------------------------------------------+-------------------------------------------------------------------------------------------------+
-| `json_array_structure`_| String                                                        | Adds the option of deciding how an array structure from a JSON will be stored.                  |
-+------------------------+---------------------------------------------------------------+-------------------------------------------------------------------------------------------------+
-| `var`_                 | Name for the variable.                                        | Defines variables that can be reused inside the same file.                                      |
-+------------------------+---------------------------------------------------------------+-------------------------------------------------------------------------------------------------+
-| `type`_                | See `type table <decoders.html#type>`_                        | It will set the type of log that the decoder is going to match.                                 |
-+------------------------+---------------------------------------------------------------+-------------------------------------------------------------------------------------------------+
++------------------------------+---------------------------------------------------------------+-------------------------------------------------------------------------------------------------+
+| Option                       | Values                                                        | Description                                                                                     |
++==============================+===============================================================+=================================================================================================+
+| `decoder`_                   | Name of the decoder                                           | This attribute defines the decoder.                                                             |
++------------------------------+---------------------------------------------------------------+-------------------------------------------------------------------------------------------------+
+| `parent`_                    | Any decoder's name                                            | It will reference a parent decoder and the current one will become a child decoder.             |
++------------------------------+---------------------------------------------------------------+-------------------------------------------------------------------------------------------------+
+| `accumulate`_                | None                                                          | It allows tracking events over multiple log messages.                                           |
++------------------------------+---------------------------------------------------------------+-------------------------------------------------------------------------------------------------+
+| :ref:`decoders_program_name` | Any :ref:`regex <os_regex_syntax>`,                           | Sets a program name as a condition for applying the decoder. The log header must have a program |
+|                              | :ref:`sregex <sregex_os_match_syntax>` or                     | name matching the regular expression.                                                           |
+|                              | :ref:`pcre2 <pcre2_syntax>` expression.                       |                                                                                                 |
++------------------------------+---------------------------------------------------------------+-------------------------------------------------------------------------------------------------+
+| :ref:`decoders_prematch`     | Any :ref:`regex <os_regex_syntax>` or                         | Sets a regular expression as a condition for applying the decoder. The log must match the       |
+|                              | :ref:`pcre2 <pcre2_syntax>` expression.                       | regular expression without considering any Syslog-like header.                                  |
++------------------------------+---------------------------------------------------------------+-------------------------------------------------------------------------------------------------+
+| :ref:`decoders_regex`        | Any :ref:`regex <os_regex_syntax>` or                         | The decoder will use this option to find fields of interest and extract them.                   |
+|                              | :ref:`pcre2 <pcre2_syntax>` expression.                       |                                                                                                 |
++------------------------------+---------------------------------------------------------------+-------------------------------------------------------------------------------------------------+
+| :ref:`decoders_order`        | See :ref:`order table <decoders_order>`                       | The values that :ref:`decoders_regex` will extract will be stored in these groups.              |
++------------------------------+---------------------------------------------------------------+-------------------------------------------------------------------------------------------------+
+| :ref:`decoders_fts`          | See :ref:`fts table <decoders_fts>`                           | First time seen.                                                                                |
++------------------------------+---------------------------------------------------------------+-------------------------------------------------------------------------------------------------+
+| `ftscomment`_                | Any String                                                    | Adds a comment to fts.                                                                          |
++------------------------------+---------------------------------------------------------------+-------------------------------------------------------------------------------------------------+
+| :ref:`plugin_decoder`        | See :ref:`below <plugin_decoder>`                             | Specifies a plugin that will do the decoding. Useful when extraction with regex is not          |
+|                              |                                                               | feasible.                                                                                       |
++------------------------------+---------------------------------------------------------------+-------------------------------------------------------------------------------------------------+
+| `use_own_name`_              | True                                                          | Only for child decoders.                                                                        |
++------------------------------+---------------------------------------------------------------+-------------------------------------------------------------------------------------------------+
+| `json_null_field`_           | String                                                        | Adds the option of deciding how a null value from a JSON will be stored.                        |
++------------------------------+---------------------------------------------------------------+-------------------------------------------------------------------------------------------------+
+| `json_array_structure`_      | String                                                        | Adds the option of deciding how an array structure from a JSON will be stored.                  |
++------------------------------+---------------------------------------------------------------+-------------------------------------------------------------------------------------------------+
+| `var`_                       | Name for the variable.                                        | Defines variables that can be reused inside the same file.                                      |
++------------------------------+---------------------------------------------------------------+-------------------------------------------------------------------------------------------------+
+| :ref:`decoders_type`         | See :ref:`type table <decoders_type>`                         | It will set the type of log that the decoder is going to match.                                 |
++------------------------------+---------------------------------------------------------------+-------------------------------------------------------------------------------------------------+
 
 How it works
 ------------
@@ -79,9 +82,11 @@ To understand the inner workings of a decoder, it will be easier through example
           parent: 'sshd'
           srcip: '192.168.1.33'
 
-At the beginning of the example is the full log of an event. The log firstly goes through a pre-decoding phase, where general information will be extracted if possible.
+At the beginning of the example, you can see the full log of an event. This input log first goes through the pre-decoding phase. In this phase, general information, such as a timestamp, a hostname, and a program name, is extracted when a Syslog-like header is present.
 
-Afterward, the decoder will begin extracting information from the log that is left. In this example, the decoder only analyzes: ``Connection closed by 192.168.1.33``.
+
+In the next stage, the decoder extracts information from the remaining log. In this example, the decoder only analyzes: ``Connection closed by 192.168.1.33``.
+
 
 Before making a custom decoder, the first step should always be running the event log through :ref:`wazuh-logtest <wazuh-logtest>` to know where to start.
 
@@ -94,9 +99,9 @@ There are many options to configure the decoders:
 - `decoder`_
 - `parent`_
 - `accumulate`_
-- `program_name`_
-- `prematch`_
-- :ref:`regex_decoders`
+- :ref:`decoders_program_name`
+- :ref:`decoders_prematch`
+- :ref:`decoders_regex`
 - `order`_
 - `fts`_
 - `ftscomment`_
@@ -133,7 +138,7 @@ parent
 ^^^^^^
 
 It is used to link a subordinate decoder to its parent. A parent decoder can have many child decoders but take into account that a child decoder cannot be a parent.
-It is possible to create what we call `sibling decoders <sibling-decoders.html>`_, which is a handy decoding strategy to handle dynamic logs.
+It is possible to create what we call :doc:`sibling decoders <sibling-decoders>`, which is a handy decoding strategy to handle dynamic logs.
 
 
 +--------------------+------------------+
@@ -166,17 +171,19 @@ Allows Wazuh to track events over multiple log messages based on a decoded id.
 | **Example of use** | <accumulate />     |
 +--------------------+--------------------+
 
-program_name
-^^^^^^^^^^^^^
+.. _decoders_program_name:
 
-It defines the name of the program which the decoder is associated with. The program name of a log will be obtained, if possible, in the pre-decoding phase.
+program_name
+^^^^^^^^^^^^
+
+It defines the program name that must be found in the log header to apply the decoder. The pre-decoding phase extracts the program name from input logs with Syslog-like headers.
 
 +--------------------+--------------------------------------------------------------------+
 | **Default Value**  | n/a                                                                |
 +--------------------+--------------------------------------------------------------------+
-| **Allowed values** | Any `regex <regex.html#regex-os-regex-syntax>`_,                   |
-|                    | `sregex <regex.html#sregex-os-match-syntax>`_ or                   |
-|                    | `pcre2 <regex.html#pcre2-syntax>`_ expression.                     |
+| **Allowed values** | Any :ref:`regex <os_regex_syntax>`,                                |
+|                    | :ref:`sregex <sregex_os_match_syntax>` or                          |
+|                    | :ref:`pcre2 <pcre2_syntax>` expression.                            |
 +--------------------+--------------------------------------------------------------------+
 
 The attributes below are optional.
@@ -207,16 +214,18 @@ Define that the decoder is related with the ``test``, ``TEST`` or equivalent (ca
     ...
   </decoder>
 
-prematch
-^^^^^^^^^
+.. _decoders_prematch:
 
-It attempts to find a match within the log for the string defined; if it finds a match, the current decoder will be used, the search for a decoder will stop, and only its child decoders will be able to match. It is important to be as specific as possible to avoid matching with wrong events.
+prematch
+^^^^^^^^
+
+Defines a regular expression that the log must match to apply the decoder.  It's important to be as specific as possible to avoid matching unwanted events. Note that if the log is Syslog-like, then ``prematch`` only analyzes the log after the Syslog-like header. If the log is not Syslog-like, then it analyzes the entire log.
 
 +--------------------+--------------------------------------------------------------------+
 | **Default Value**  | n/a                                                                |
 +--------------------+--------------------------------------------------------------------+
-| **Allowed values** | Any `regex <regex.html#regex-os-regex-syntax>`_ or                 |
-|                    | `pcre2 <regex.html#pcre2-syntax>`_ expression.                     |
+| **Allowed values** | Any :ref:`regex <os_regex_syntax>` or                              |
+|                    | :ref:`pcre2 <pcre2_syntax>` expression.                            |
 +--------------------+--------------------------------------------------------------------+
 
 The attributes below are optional.
@@ -239,7 +248,7 @@ If ``prematch`` label is declared multiple times within the decoder, the followi
 - The resulting value of ``type`` attribute corresponds to the one specified in the last label. If it is not specified, the default value will be used.
 
 
-.. _regex_decoders:
+.. _decoders_regex:
 
 regex
 ^^^^^
@@ -257,8 +266,8 @@ An example is this regex that matches any numeral:
 +--------------------+--------------------------------------------------------------------+
 | **Default Value**  | n/a                                                                |
 +--------------------+--------------------------------------------------------------------+
-| **Allowed values** | Any `regex <regex.html#regex-os-regex-syntax>`_ or                 |
-|                    | `pcre2 <regex.html#pcre2-syntax>`_ expression.                     |
+| **Allowed values** | Any :ref:`regex <os_regex_syntax>` or                              |
+|                    | :ref:`pcre2 <pcre2_syntax>` expression.                            |
 +--------------------+--------------------------------------------------------------------+
 
 When using the ``regex`` label, it is mandatory to define an ``order`` label as well. Besides, ``regex`` label requires a ``prematch`` or a ``program_name`` label defined on the same decoder or a ``parent`` with a ``prematch`` or a ``program_name defined`` label defined on it.
@@ -301,8 +310,10 @@ Show when a user executed the sudo command for the first time:
 
 
 
+.. _decoders_order:
+
 order
-^^^^^^
+^^^^^
 
 It defines what the parenthesis groups contain and the order in which they were received. It requires a ``regex`` label defined on the same decoder.
 
@@ -341,6 +352,8 @@ It defines what the parenthesis groups contain and the order in which they were 
 +--------------------+------------+-------------------------------------------------------+
 | **Dynamic fields** | Any string not included in the previous list                       |
 +--------------------+------------+-------------------------------------------------------+
+
+.. _decoders_fts:
 
 fts
 ^^^^
@@ -394,7 +407,7 @@ The following decoder will extract the user who generated the alert and the loca
     ...
   </decoder>
 
-The decoder will consider this option if the decoded event triggers a rule that uses `if_fts <rules.html#if-fts>`_.
+The decoder will consider this option if the decoded event triggers a rule that uses :ref:`if_fts <rules_if_fts>`.
 
 ftscomment
 ^^^^^^^^^^^
@@ -406,6 +419,8 @@ It adds a comment to a decoder when `<fts>` tag is used.
 +--------------------+------------+
 | **Allowed values** | Any string |
 +--------------------+------------+
+
+.. _plugin_decoder:
 
 plugin_decoder
 ^^^^^^^^^^^^^^^
@@ -505,7 +520,7 @@ Example:
       <order>syscall</order>
     </decoder>
 
-.. _type:
+.. _decoders_type:
 
 type
 ^^^^

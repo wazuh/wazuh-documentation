@@ -1,142 +1,102 @@
 .. Copyright (C) 2015, Wazuh, Inc.
 
 .. meta::
-  :description: Wazuh is used to monitor container security and protect containers workloads at both the infrastructure and container level. Learn more here. 
+   :description: Wazuh integrates with container platforms like Docker and Kubernetes. It actively monitors container runtime events, application logs, and overall container health. Learn more in this use case.
   
 Container security
 ==================
 
-Wazuh is used to monitor for signs of security incidents across containers, alerting in real time. Wazuh protects container workloads at two different levels: infrastructure and container level.
+Container security is an IT practice that is focused on safeguarding containers and their applications against security threats. Organizations can gain visibility into the usage of both containers and the applications they contain by implementing robust security measures in such an environment.
 
-Infrastructure level
---------------------
+Containers offer lightweight, isolated environments with application code, runtime, and dependencies. They are widely used to deploy and scale applications both on-premises and in the cloud. As container applications and infrastructure become more popular, it becomes essential to protect them from potential threats. 
 
-Wazuh provides the following mechanisms to monitor Docker hosts or Kubernetes nodes:
+Wazuh for container security
+----------------------------
 
--  **Integration with Docker engine and Kubernetes APIs:** In this scenario, the Wazuh module for Docker acts as a subscriber. It listens for Docker or Kubernetes events, alerting when an anomaly or security incident is detected.
+Wazuh integrates with container platforms like Docker and Kubernetes and actively monitors container runtime events, application logs, and overall container health. Wazuh identifies anomalies by evaluating container logs against predefined rules. Additionally, it maintains a record of container engine actions to detect unauthorized activities in a containerized environment. It also monitors health metrics to prevent performance bottlenecks in an organization.
 
--  **Wazuh agent deployment to Docker hosts and Kubernetes nodes:** For a self-managed infrastructure, the deployment of the :doc:`Wazuh agent <../components/wazuh-agent>` provides a comprehensive set of security capabilities, such as malware detection, file integrity monitoring, configuration assessment, log data analysis, vulnerability detection, and active responses.
+Wazuh container security features comprise monitoring container runtimes, tracking containerized application logs, monitoring container resource utilization, centralized logging, and container alert notifications. This comprehensive set of capabilities enhances security and streamlines incident response.
 
--  **Integration with hosted infrastructure providers:** In this case, the Wazuh modules for cloud security monitoring download the managed service audit logs for security analysis. Wazuh integrates with hosted infrastructure providers such as Google GKE, Amazon EKS, etc.
- 
-Example of security alerts at an infrastructure level:
+Container runtime monitoring
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-.. list-table::
-   :width: 100%
-   :widths: 50 50
+Organizations can enhance the security of their containerized applications by monitoring container events. They can proactively address unexpected behavior by promptly responding to alerts triggered by predefined rules. Wazuh also provides insight into container engine interactions and detects irregularities in containerized applications. 
 
-   * - A Docker image is downloaded or updated
-     - A container is running in privileged mode
-   * - Kubernetes configuration is changed
-     - Hardening checks fail for the Docker host
-   * - A new container or Pod is created
-     - A user runs a command or a shell inside a container
-   * - A new application is installed on the Docker host
-     - Vulnerabilities are detected on the Docker host
+Monitoring the container engine 
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-Example of an alert generated when a Docker container is created:
+Wazuh captures real-time events performed by the Docker engine via its :doc:`Docker listener </user-manual/capabilities/container-security/monitoring-docker>` module. This ensures that no crucial Docker event or operation goes undetected.
 
-.. code-block:: json
-   :emphasize-lines: 9,12,14
-   :class: output
+:ref:`monitoring_user_interaction_with_docker_resources` demonstrates how Wazuh enhances visibility into the interactions of the container engine with the containers and the images.
 
-   {
-     "agent": {
-         "id": "006",
-         "ip": "10.0.1.214",
-         "name": "RHEL7"
-     },
-     "data": {
-         "docker": {
-             "Action": "create",
-             "Actor": {
-                 "Attributes": {
-                    "image": "nginx",
-                    "maintainer": "NGINX Docker Maintainers <docker-maint@nginx.com>",
-                    "name": "nginx_container"
-                 },
-                 "ID": "e9730949586a38d8ab25990234fb8ccba428e3ec1c8bfbf12fe08ed279aaf11d"
-             },
-             "Type": "container",
-             "from": "nginx",
-             "id": "e9730949586a38d8ab25990234fb8ccba428e3ec1c8bfbf12fe08ed279aaf11d",
-             "scope": "local",
-             "status": "create",
-             "time": "1599186260",
-             "timeNano": "1599186260265422592.000000"
-         }
-     },
-     "rule": {
-         "description": "Docker: Container nginx_container created",
-         "level": 3,
-         "id": "87901"
-     },
-     "timestamp": "2020-09-04T02:24:20.266+0000"
-   }
-
-Example of an alert generated when a command is executed inside a container:
-
-.. code-block:: json
-   :emphasize-lines: 9,15
-   :class: output
-
-   {
-     "agent": {
-         "id": "006",
-         "ip": "10.0.1.214",
-         "name": "RHEL7"
-     },
-     "data": {
-         "docker": {
-             "Action": "exec_start: cat /etc/passwd",
-             "Actor": {
-                 "Attributes": {
-                     "execID": "363d220ce7a34c521707477d14b7700e4fb26987f9f4e27bc558788ce66570b4",
-                     "image": "nginx",
-                     "maintainer": "NGINX Docker Maintainers <docker-maint@nginx.com>",
-                     "name": "nginx_container"
-                 },
-                 "ID": "e9730949586a38d8ab25990234fb8ccba428e3ec1c8bfbf12fe08ed279aaf11d"
-             },
-             "Type": "container",
-             "from": "nginx",
-             "id": "e9730949586a38d8ab25990234fb8ccba428e3ec1c8bfbf12fe08ed279aaf11d",
-             "scope": "local",
-             "status": "exec_start: cat /etc/passwd",
-             "time": "1599186799",
-             "timeNano": "1599186799425748992.000000"
-         }
-     },
-     "rule": {
-         "description": "Docker: Command launched in container nginx_container",
-         "level": 3,
-         "id": "87907"
-     },
-     "timestamp": "2020-09-04T02:33:19.431+0000"
-   }
-
-Example of Docker alerts in the web user interface:
-
-.. thumbnail:: /images/getting-started/use-cases/wazuh-use-cases-docker.png
-   :title: Docker events
+.. thumbnail:: /images/getting-started/use-cases/container-security/docker-container-interaction-alerts.png
+   :title: Docker container user interaction alerts
+   :alt: Docker container user interaction alerts
    :align: center
    :width: 80%
-   :wrap_image: No
 
-Container level
----------------
-  
-In order to get visibility at a container level, you can deploy the :doc:`Wazuh agent <../components/wazuh-agent>` to a Kubernetes DaemonSet container. This kind of deployment ensures that the Wazuh agent runs in all nodes of your Kubernetes cluster. Besides, other Kubernetes Pods are able to send data, like application log messages, to the DaemonSet container, so the agent can read it and forward it to the :doc:`Wazuh server <../components/wazuh-server>` for security analysis.
-  
-Example of security alerts at a container level:
+Wazuh also monitors the creation and destruction of resources in Kubernetes clusters to help identify unauthorized actions and potential security breaches.
 
-.. list-table::
-   :width: 100%
-   :widths: 50 50
+The blog post on `Auditing Kubernetes with Wazuh <https://wazuh.com/blog/auditing-kubernetes-with-wazuh/>`__ demonstrates how to monitor Kubernetes resource interactions with Wazuh.
 
-   * - New process created in a container
-     - File integrity monitoring alerts
-   * - New application installed in a container
-     - Vulnerability detected in a container
-   * - Log analysis alert (for example, Nginx event)
-     - Hardening check failed in a container
+.. thumbnail:: /images/getting-started/use-cases/container-security/kubernetes-resource-interaction-alerts.png
+   :title: Kubernetes resource interaction alerts
+   :alt: Kubernetes resource interaction alerts
+   :align: center
+   :width: 80%
+
+Monitoring containerized application logs
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+Wazuh allows organizations to monitor containerized applications. It provides visibility into the applications that are resident in the container. When the application events are forwarded to the Wazuh manager, Security engineers can create :doc:`custom rules </user-manual/ruleset/custom>` that align with the unique requirements of their organization. This facilitates a highly personalized approach that improves overall visibility into the containers and the applications they host.
+
+The :ref:`Monitoring container runtime <monitoring_container_runtime>` documentation has more information about monitoring containerized application logs.
+
+.. thumbnail:: /images/getting-started/use-cases/container-security/monitoring-containerized-application-logs.png
+   :title: Monitoring containerized application logs
+   :alt: Monitoring containerized application logs
+   :align: center
+   :width: 80%
+
+Monitor container resource utilization with Wazuh
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Wazuh tracks and analyzes the resource consumption of containerized applications. It provides insights into the CPU, memory, and network usage statistics of containers, assisting in identifying performance bottlenecks.
+
+Wazuh provides customizable alerts and notifications, enabling organizations to detect and proactively respond to unusual resource spikes or consumption patterns.
+
+The blog post on `Docker container security monitoring with Wazuh <https://wazuh.com/blog/docker-container-security-monitoring-with-wazuh/>`__ demonstrates how Wazuh monitors network utilization in a containerized environment.
+
+.. thumbnail:: /images/getting-started/use-cases/container-security/monitoring-network-utilization.png
+   :title: Monitoring network utilization in a containerized environment
+   :alt: Monitoring network utilization in a containerized environment
+   :align: center
+   :width: 80%
+
+Centralized logging and visualization of containers event
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Wazuh centralizes container event logging and visualization. Its scalable indexer aggregates logs into a powerful search and analytics engine, providing real-time insights. This indexer handles event influx while also supporting compliance needs such as log retention policies.
+
+Wazuh enables organizations to view container logs from a customized dashboard. Security professionals can track and analyze unfolding activities, swiftly identifying threats and unauthorized actions. This early detection enables security professionals to respond to security incidents as they arise swiftly, establishing an active approach to minimizing risks.
+
+The image below displays the customized container dashboard of Wazuh, where events from all containers are showcased.
+
+.. thumbnail:: /images/getting-started/use-cases/container-security/customized-container-dashboard.png
+   :title: Customized container dashboard
+   :alt: Customized container dashboard
+   :align: center
+   :width: 80%
+
+Container alert notification with Wazuh
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Wazuh integrates with messaging platforms like :doc:`email </user-manual/manager/manual-email-report/index>` and :ref:`Slack <slack_manual_integration>`. It also integrates with case management solutions, like `Jira <https://wazuh.com/blog/how-to-integrate-external-software-using-integrator/>`__ , for incident response and real-time alerting. This ensures that security teams are promptly notified whenever potential threats or unauthorized actions occur in containerized environments.
+
+The documentation on :doc:`/user-manual/manager/manual-integration` explains how the Integrator daemon allows Wazuh to connect to external APIs and case management systems tools like :ref:`PagerDuty <pagerduty_manual_integration>`.
+
+.. thumbnail:: /images/getting-started/use-cases/container-security/connect-external-API.png
+   :title: Connect to external APIs and case management systems
+   :alt: Connect to external APIs and case management systems
+   :align: center
+   :width: 80%

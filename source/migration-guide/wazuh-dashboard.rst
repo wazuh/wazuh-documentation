@@ -12,9 +12,7 @@ Follow this guide to migrate from Open Distro for Elasticsearch Kibana 1.13 to t
 
 To guarantee a correct operation of Wazuh, make sure to also migrate from Open Distro for Elasticsearch to the Wazuh indexer. To learn more, see the :doc:`Migrating to the Wazuh indexer </migration-guide/wazuh-indexer>` documentation. 
 
-
-.. note:: Root user privileges are required to execute all the commands described below.
-
+.. note:: You need root user privileges to run all the commands described below.
 
 #. Stop the Kibana service. 
 
@@ -53,20 +51,19 @@ To guarantee a correct operation of Wazuh, make sure to also migrate from Open D
 
 #. Install the Wazuh dashboard package.
 
-      .. tabs::
+   .. tabs::
 
-          .. group-tab:: Yum
+      .. group-tab:: Yum
 
+         .. code-block:: console
 
-              .. include:: /_templates/installations/dashboard/yum/install_dashboard.rst
+            # yum -y install wazuh-dashboard|WAZUH_DASHBOARD_RPM_PKG_INSTALL|
 
+      .. group-tab:: APT
 
-
-          .. group-tab:: APT
-
-
-              .. include:: /_templates/installations/dashboard/apt/install_dashboard.rst
-
+         .. code-block:: console
+              
+            # apt-get -y install wazuh-dashboard|WAZUH_DASHBOARD_DEB_PKG_INSTALL|
 
    .. note::
 
@@ -95,14 +92,14 @@ To guarantee a correct operation of Wazuh, make sure to also migrate from Open D
       opensearch.ssl.verificationMode: certificate
       #opensearch.username:
       #opensearch.password:
-      opensearch.requestHeadersWhitelist: ["securitytenant","Authorization"]
+      opensearch.requestHeadersAllowlist: ["securitytenant","Authorization"]
       opensearch_security.multitenancy.enabled: false
       opensearch_security.readonly_mode.roles: ["kibana_read_only"]
       server.ssl.enabled: true
       server.ssl.key: "/etc/wazuh-dashboard/certs/dashboard-key.pem"
       server.ssl.certificate: "/etc/wazuh-dashboard/certs/dashboard.pem"
       opensearch.ssl.certificateAuthorities: ["/etc/wazuh-dashboard/certs/root-ca.pem"]
-      uiSettings.overrides.defaultRoute: /app/wazuh
+      uiSettings.overrides.defaultRoute: /app/wz-home
 
 #. Add the password of the ``kibanaserver`` user to the Wazuh dashboard keystore.  Execute the command below and follow the instructions. You may find your old password in the ``/etc/kibana/kibana.yml`` configuration file. 
 

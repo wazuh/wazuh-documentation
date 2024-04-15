@@ -29,8 +29,9 @@ Wazuh uses four different indices to store different event types:
 | **wazuh** |--| **statistics**   | Stores data related to the :doc:`/getting-started/components/wazuh-server` performance. It is used by the web interface to represent the performance statistics.                                                                         |
 +---------------------------------+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+ 
 
-.. thumbnail:: /images/getting-started/Wazuh-indexer.png
-   :title: Wazuh indexer cluster and alert document extract
+.. thumbnail:: /images/getting-started/wazuh-indexer.png
+   :title: Wazuh indexer
+   :alt: Wazuh indexer
    :align: center
    :width: 80%
 

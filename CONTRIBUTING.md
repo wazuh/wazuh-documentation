@@ -16,7 +16,7 @@ Keep in mind that this repository is for the Wazuh documentation. There are some
 - If you have **problems, bugs or unexpected results** when using any of the Wazuh components, create the issue in its respective repository:
   - [Wazuh Core](https://github.com/wazuh/wazuh/issues)
   - [Wazuh API](https://github.com/wazuh/wazuh-api/issues)
-  - [Wazuh Kibana app](https://github.com/wazuh/wazuh-kibana-app/issues)
+  - [Wazuh App](https://github.com/wazuh/wazuh-dashboard-plugins/issues)
   - [Wazuh Splunk app](https://github.com/wazuh/wazuh-splunk/issues)
   - [All Wazuh repositories](https://github.com/wazuh)
 
@@ -66,6 +66,10 @@ The documentation will be available at `/wazuh-documentation/build/html/index.ht
 (wazuh_venv) $ make clean
 ```
 This will delete the contents from `/wazuh-documentation/build/html`.
+
+## Alternative Pagefind search engine
+
+To compile the documentation with the alternative Pagefind search engine, install NodeJS 16+. Then, follow the steps from the previous section replacing with `make html-search` the command in step 3.
 
 ## How the branches work
 

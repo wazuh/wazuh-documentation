@@ -1,0 +1,27 @@
+{
+    "env": {
+        "browser": true,
+        "es2021": true
+    },
+    "extends": [
+        "google"
+    ],
+    "parserOptions": {
+        "ecmaVersion": 12,
+        "sourceType": "module"
+    },
+    "ignorePatterns": [ 
+      "src/js/",
+      "src/js-source/libs/bootstrap/",
+      "src/js-source/common/doctools.js"
+    ],
+    "rules": {
+        "max-len": [
+            "error", {
+                "code": 120,
+                "ignoreUrls": true,
+                "ignoreStrings": true
+            }
+        ]
+    }
+}

@@ -1,76 +1,72 @@
+.. Copyright (C) 2015, Wazuh, Inc.
 
 .. meta::
-  :description: This PoC shows how Wazuh provides out-of-the-box rules capable of identifying brute-force attacks. Learn more about it in this section of the documentation.
-
-.. _poc_detect_bruteforce:
+   :description: This PoC shows how Wazuh provides out-of-the-box rules capable of identifying brute-force attacks. Learn more about it in this section of the documentation.
 
 Detecting a brute-force attack
 ==============================
 
-Brute forcing SSH (on Linux) or RDP (on Windows) are common attack vectors. Wazuh provides out-of-the-box rules capable of identifying brute-force attacks by correlating multiple authentication failure events.
+Brute-forcing is a common attack vector that threat actors use to gain unauthorized access to endpoints and services. Services like SSH on Linux endpoints and RDP on Windows endpoints are usually prone to brute-force attacks. Wazuh identifies brute-force attacks by correlating multiple authentication failure events. 
 
-To see an example use case where you configure an active response to block the IP of an attacker, check the :ref:`Blocking attacks with Active Response <blocking_attacks_active_response>` section of the documentation.
+The section on :doc:`Blocking attacks with Active Response </user-manual/capabilities/active-response/ar-use-cases/blocking-ssh-brute-force>` describes how to configure an active response to block the IP address of an attacker. In this use case, we show how Wazuh detects brute-force attacks on RHEL and Windows endpoints.
 
+Infrastructure
+--------------
+
++---------------+-----------------------------------------------------------------------------------------------------------------------------+
+| Endpoint      | Description                                                                                                                 |
++===============+=============================================================================================================================+
+| Ubuntu 22.04  | Attacker endpoint that performs brute-force attacks. It’s required to have an SSH client installed on this endpoint.        |
++---------------+-----------------------------------------------------------------------------------------------------------------------------+
+| RHEL 9.0      | Victim endpoint of SSH brute-force attacks. It’s required to have an SSH server installed and enabled on this endpoint.     |
++---------------+-----------------------------------------------------------------------------------------------------------------------------+
+| Windows 11    | Victim endpoint of RDP brute-force attacks. It’s required to enable RDP on this endpoint.                                   |
++---------------+-----------------------------------------------------------------------------------------------------------------------------+
 
 Configuration
 -------------
 
-Configure your environment as follows to test the PoC.
+Perform the following steps to configure the Ubuntu endpoint. This allows performing authentication failure attempts on the monitored RHEL and Windows endpoints.
 
-- Make sure you have SSH installed and enabled in a system chosen to play as an attacker.
+#. On the attacker endpoint, install Hydra and use it to execute the brute-force attack:
 
-- Install Hydra on an external Linux system to execute brute-force attacks.
+   .. code-block:: console
 
-    .. tabs::
+      $ sudo apt update 
+      $ sudo apt install -y hydra
 
-      .. group-tab:: Yum
-
-        .. code-block:: XML
-
-            # yum install -y hydra
-
-      .. group-tab:: Apt
-
-        .. code-block:: XML
-
-            # apt install -y hydra
-
-
-Steps to generate the alerts
-----------------------------
-
-#. Replace ``<ubuntu.agent.endpoint>`` for Linux and ``<win.agent.endpoint>`` for Windows with the appropriate destination in the following commands and run multiple failed authentication failure attempts against the monitored endpoints.
-
-    - For the monitored Linux endpoint:
-
-        .. code-block:: console
-
-            # hydra -l badguy -p wrong_password <ubuntu.agent.endpoint> ssh
-
-    - For the monitored Windows endpoint:
-
-        .. code-block:: console
-
-            # hydra -l Administrator -p wrong_password <win.agent.endpoint> rdp
-
-
-Query the alerts
+Attack emulation
 ----------------
 
-You can visualize the alert data in the Wazuh dashboard. To do this, go to the **Security events** module and add the filters in the search bar to query the alerts.
+#. Create a text file with 10 random passwords.
 
-- Linux: ``rule.id:(5710 OR 5712)``. Other related rules are ``5711``, ``5716``, ``5720``, ``5503``, ``5504``.
+#. Run Hydra from the attacker endpoint to execute brute-force attacks against the  RHEL endpoint. To do this, replace ``<RHEL_IP>`` with the IP address of the RHEL endpoint and run the command below:
 
+   .. code-block:: console
 
-.. thumbnail:: ../images/poc/Detecting-a-brute-force-attack-1.png
-          :title: Detecting a brute-force attack on Linux
-          :align: center
-          :wrap_image: No
+      $ sudo hydra -l badguy -P <PASSWD_LIST.txt> <RHEL_IP> ssh
 
+#. Run Hydra from the attacker endpoint to execute brute-force attacks against the  Windows endpoint. To do this, replace ``<WINDOWS_IP>`` with the IP address of the Windows endpoint and run the command below:
 
-- Windows: ``rule.id:(60122 OR 60137 OR 60204)``
+   .. code-block:: console
 
-.. thumbnail:: ../images/poc/Detecting-a-brute-force-attack-2.png
-          :title: Detecting a brute-force attack on Windows
-          :align: center
-          :wrap_image: No
+      $ sudo hydra -l badguy -P <PASSWD_LIST.txt> rdp://<WINDOWS_IP>
+
+Visualize the alerts
+--------------------
+
+You can visualize the alert data in the Wazuh dashboard. To do this, go to the **Threat Hunting** module and add the filters in the search bar to query the alerts.
+
+-  Linux - ``rule.id:(5551 OR 5712)``. Other related rules are ``5710``, ``5711``, ``5716``, ``5720``, ``5503``, ``5504``.
+
+   .. thumbnail:: /images/poc/brute-force-attack-alerts-ubuntu.png
+         :title: Visualize Brute force attack to Ubuntu system alerts
+         :align: center
+         :width: 80%
+
+-  Windows - ``rule.id:(60122 OR 60204)``
+
+   .. thumbnail:: /images/poc/brute-force-attack-alerts-windows.png
+         :title: Visualize Brute force attack to Windows system alerts
+         :align: center
+         :width: 80%

@@ -1,5 +1,8 @@
 .. Copyright (C) 2015, Wazuh, Inc.
 
+.. meta::
+  :description: Find out how to configure the Fluentd forwarder module. Learn more about it in this section of the Wazuh documentation.
+
 .. _reference_ossec_fluent_forward:
 
 fluent-forward
@@ -45,7 +48,7 @@ This indicates if the module is enabled or disabled.
 socket_path
 ^^^^^^^^^^^
 
-This indicates the path of the UDP socket to be listen. The socket will be created at runtime in the designated path.
+This indicates the path of the UDP socket to be listened. The socket will be created at runtime in the designated path.
 
 +--------------------+--------------------------------------------------+
 | **Default value**  | n/a                                              |
@@ -124,7 +127,7 @@ For example ``<shared_key>secret_string</shared_key>``.
 ca_file
 ^^^^^^^
 
-This indicates path to a CA certificate file to validate the Fluentd server in TLS (secure mode only).
+This indicates the path to a CA certificate file to validate the Fluentd server in TLS (secure mode only).
 
 +--------------------+-----------------------------------------------------+
 | **Default value**  | n/a                                                 |
@@ -197,9 +200,9 @@ For instance: ``<poll_interval>60</poll_interval>``
 keepalive
 ^^^^^^^^^
 
-Enables TCP keepalive on the connection with the Fluent server. With the default configuration, the agent will wait indefinitely for the server to confirm a delivery. If ``<timeout>`` is disabled, or no data is available to send, the agent is unable to detect a broken connection.
+Enables TCP keepalive on the connection with the Fluent server. With the default configuration, the agent will wait indefinitely for the server to confirm delivery. If ``<timeout>`` is disabled, or no data is available to send, the agent is unable to detect a broken connection.
 
-This option allows enabling TCP keepalive and tune its options. When the connection becomes idle during ``<idle>`` seconds, the agent will start delivering one keepalive probe every ``<interval>`` seconds. If no response is received after ``<count>`` attempts, the agent will reset the connection.
+This option allows enabling TCP keepalive and tunes its options. When the connection becomes idle during ``<idle>`` seconds, the agent will start delivering one keepalive probe every ``<interval>`` seconds. If no response is received after ``<count>`` attempts, the agent will reset the connection.
 
 Attributes
 ~~~~~~~~~~

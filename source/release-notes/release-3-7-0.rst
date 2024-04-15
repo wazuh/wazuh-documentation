@@ -2,6 +2,7 @@
 
 .. meta::
   :description: Wazuh 3.7.0 has been released. Check out our release notes to discover the changes and additions of this release.
+  
 .. _release_3_7_0:
 
 3.7.0 Release notes - 10 November 2018
@@ -93,7 +94,7 @@ There are several ways to monitor the Azure instances:
   :align: center
   :width: 80%
 
-To learn more about this new module and how to configure it, check out the section :ref:`azure`.
+To learn more about this new module and how to configure it, check out the section :doc:`/cloud-security/azure/index`.
 
 New module to monitor Docker
 ----------------------------
@@ -109,7 +110,7 @@ In this example, the Docker command ``docker pause apache`` will stop the contai
     :align: center
     :width: 100%
 
-To learn more about this new module and how to configure it, check out the section :ref:`docker-monitor-index`.
+To learn more about this new module and how to configure it, check out the section :doc:`/user-manual/capabilities/container-security/monitoring-docker`.
 
 Query remote configuration
 --------------------------
@@ -154,7 +155,7 @@ The Wazuh app for Kibana includes new features and interface redesigns to make u
 
   - Get the current manager/agent configuration on the redesigned tabs.
   - Added support for multiple groups feature.
-  - The :doc:`Amazon AWS </amazon/index>` tab has been redesigned to include better visualizations and the module configuration.
+  - The :doc:`Amazon AWS </cloud-security/amazon/index>` tab has been redesigned to include better visualizations and the module configuration.
   - The new :ref:`Osquery <osquery>` extension shows scans results from this Wazuh module.
   - Added a new selector to check the cluster nodes’ status and logs on the *Management > Status/Logs* tabs.
   - Several bugfixes, performance improvements, and compatibility with the latest Elastic Stack version.

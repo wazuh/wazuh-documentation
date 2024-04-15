@@ -1,4 +1,5 @@
 .. Copyright (C) 2015, Wazuh, Inc.
+
 .. meta::
   :description: Learn more about client configuration, connection to the manager, and its configuring options in this section of the Wazuh documentation.
 
@@ -17,7 +18,7 @@ client
 This section explains how to configure the connection to the manager.
 
 .. note::
-  To avoid a permanent lost of communication with the manager, the only setting included in the shared configuration of this section is **force_reconnect_interval**.
+  To avoid a permanent loss of communication with the manager, the only setting included in the shared configuration of this section is **force_reconnect_interval**.
 
 Subsections
 -----------
@@ -36,6 +37,7 @@ Server subsection options
 - `address`_
 - :ref:`port <server_port>`
 - :ref:`protocol <server_protocol>`
+- `interface_index`_
 - `max_retries`_
 - `retry_interval`_
 
@@ -57,7 +59,7 @@ Specifies the IP address or the hostname of the Wazuh manager.
 port
 ^^^^
 
-Specifies the port to send events to on the manager.  This must match the associated listening port configured on the Wazuh manager.
+Specifies the port to send events to the manager.  This must match the associated listening port configured on the Wazuh manager.
 
 +--------------------+---------------------------------------------+
 | **Default value**  | 1514                                        |
@@ -77,6 +79,21 @@ Specifies the protocol to use when connecting to the manager.
 +--------------------+----------+
 | **Allowed values** | udp, tcp |
 +--------------------+----------+
+
+.. _interface_index:
+
+interface_index
+^^^^^^^^^^^^^^^
+
+The index by which the agent must try to connect to the server when setting link-local IPv6 addresses. If the configured IP address is not link-local IPv6 the ``interface_index`` option has no effect.
+
++--------------------+--------------------+
+| **Default value**  | n/a                |
++--------------------+--------------------+
+| **Allowed values** | A positive number. |
++--------------------+--------------------+
+
+.. note:: In the case that the interface number changes, you must change this setting mannually.
 
 .. _server_max_retries:
 
@@ -168,8 +185,6 @@ For example, a ``notify_time`` setting of 60 combined with a time-reconnect of 3
 force_reconnect_interval
 ^^^^^^^^^^^^^^^^^^^^^^^^
 
-.. versionadded:: 4.3.0
-
 Specifies the time after which the agent is forced to be reconnected to the manager. The reconnection is forced to be done even if the agent is having a successful two-way communication with the manager.
 
 +--------------------+--------------------------------------------------------------------------------------------------------------------------------------------------+
@@ -182,8 +197,6 @@ Specifies the time after which the agent is forced to be reconnected to the mana
 
 ip_update_interval
 ^^^^^^^^^^^^^^^^^^
-
-.. versionadded:: 4.2.0
 
 Specifies how often an agent will query the control module for its main IP address.
 
@@ -243,11 +256,29 @@ Sample configuration
       <auto_restart>yes</auto_restart>
     </client>
 
+Sample link-local IPv6 configuration
+------------------------------------
+
+.. code-block:: xml
+
+   <client>
+     <server>
+       <address>fe80:0000:0000:0000:a00:27ff:feff:6b0b</address>
+       <interface_index>3</interface_index>
+       <port>1514</port>
+       <protocol>tcp</protocol>
+     </server>
+     <config-profile>ubuntu, ubuntu22, ubuntu22.04</config-profile>
+     <notify_time>10</notify_time>
+     <time-reconnect>60</time-reconnect>
+     <auto_restart>yes</auto_restart>
+     <crypto_method>aes</crypto_method>
+   </client>
+
 .. _enrollment:
 
 enrollment
 ^^^^^^^^^^
-.. versionadded:: 4.0
 
 Configures the connection parameters for the agent enrollment.
 
@@ -257,6 +288,7 @@ Options
 - `enabled`_
 - `manager_address`_
 - :ref:`port <enrollment_manager_port>`
+- :ref:`interface_index <enrollment_interface_index>`
 - `agent_name`_
 - `groups`_
 - `agent_address`_
@@ -306,6 +338,21 @@ Specifies the port on the manager to send enrollment request.  This must match t
 | **Allowed values** | Any port number from 0 to 65535 is allowed. |
 +--------------------+---------------------------------------------+
 
+.. _enrollment_interface_index:
+
+interface_index
+^^^^^^^^^^^^^^^
+
+The index by which the agent must send enrollment requests to the server when setting link-local IPv6 addresses. If the configured IP address is not link-local IPv6 the ``interface_index`` option has no effect.
+
++--------------------+--------------------+
+| **Default value**  | n/a                |
++--------------------+--------------------+
+| **Allowed values** | A positive number. |
++--------------------+--------------------+
+
+ .. note:: In the case that the interface number changes, you must change this setting mannually.
+
 .. _enrollment_agent_name:
 
 agent_name
@@ -337,7 +384,7 @@ Groups name to which the agent belongs.
 agent_address
 ^^^^^^^^^^^^^
 
-Force IP address from the agent. If this is not set manager will extract source IP address from enrollment message.
+Force IP address from the agent. If this is not set manager will extract the source IP address from the enrollment message.
 
 +--------------------+---------------------------------------------+
 | **Default value**  | src                                         |
@@ -372,7 +419,7 @@ Used for manager verification. If no CA certificate is set server will not be ve
 +--------------------+---------------------------------------------+
 
 .. note::
-  Paths can be referred to relative paths under the Wazuh installation directory, or full paths.
+  Paths can be referred to as relative paths under the Wazuh installation directory or full paths.
 
 .. _enrollment_agent_certificate_path:
 
@@ -476,3 +523,18 @@ Sample configuration
         <use_source_ip>no</use_source_ip>
       </enrollment>
     </client>
+
+
+Sample link-local IPv6 enrollment configuration
+-----------------------------------------------
+
+.. code-block:: xml
+
+   <client>
+     <enrollment>
+       <enabled>yes</enabled>
+       <manager_address>fe80:0000:0000:0000:a00:27ff:feff:6b0b</manager_address>
+       <interface_index>7</interface_index>
+       <port>1515</port>
+     </enrollment>
+   </client>

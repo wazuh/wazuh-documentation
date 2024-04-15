@@ -1,74 +1,73 @@
+.. Copyright (C) 2015, Wazuh, Inc.
 
 .. meta::
-  :description: The Proof of Concept guide explains how to set up the Wazuh environment to test the different product capabilities. Learn more about it in our documentation.
-
-.. _poc_guide:
+   :description: The Proof of Concept guide explains how to set up the Wazuh environment to test the different product capabilities. Learn more about it in our documentation.
 
 Proof of Concept guide
 ======================
 
-The Proof of Concept (PoC) guide explores how to set up the Wazuh environment to test or demo the different product capabilities. Each PoC represents real-world scenarios that users can deploy using specific configurations. In addition, further information is provided to verify the feasibility of the product on how to generate and query the alerts, and the affected endpoints resulting from each PoC.
+In this section of the documentation, we provide a set of use cases to explore different Wazuh capabilities. We describe how Wazuh can be configured for threat prevention, detection, and response. Each use case represents a real-world scenario that users can deploy using specific configurations.
 
+Preparing your lab environment
+------------------------------
 
-Prerequisites
--------------
+The Wazuh solution consists of security agents, which are deployed on monitored endpoints, and the Wazuh central components, which collect and analyze data gathered by the agents.
 
-You need to have these components already installed and running to test the PoCs.
+We recommend that you use virtual machines and take snapshots immediately after setting up the infrastructure. Doing this you can get a clean environment whenever you want to test a new use case. A clean environment is important because it prevents the different tests from interfering with each other.
 
-  * The Wazuh central components: server, indexer, and dashboard
-  * A Wazuh agent running on a Ubuntu 20 LTS system
-  * A Wazuh agent running on a Windows system
+The diagram below illustrates the architecture of the Wazuh lab environment that is required to test the use cases described in this document.
 
+.. thumbnail:: /images/poc/poc-lab-env-arch.png
+   :title: Wazuh lab environment architecture
+   :align: center
+   :width: 80%
 
-For an easy installation and setup of the Wazuh central components, we recommend downloading our ready-to-use :ref:`OVA <virtual_machine>`, launching an EC2 Instance with our :doc:`AMI </deployment-options/amazon-machine-images/amazon-machine-images>`, or using the :doc:`Wazuh installation assistant </quickstart>`.
+Wazuh central components
+^^^^^^^^^^^^^^^^^^^^^^^^
 
-For more information on how to install the Wazuh components, see the :ref:`Installation guide <installation_guide>`. Note that a Wazuh agent cannot be installed on the same machine as the Wazuh manager.
+In these use cases, the Wazuh central components (server, indexer, and dashboard) run on one system. This is because you’re monitoring a small scale environment and there’s no need for a distributed architecture.
 
+To install the Wazuh central components on a single system, it’s recommended to use one of the following options:
 
-Proofs of concept
------------------
+-  The :doc:`Quickstart guide </quickstart>`: Using this guide, you can install all the components on the same system in approximately 5 minutes.
+-  Our preconfigured :doc:`Virtual Machine </deployment-options/virtual-machine/virtual-machine>`: Wazuh provides a pre-built virtual machine image in Open Virtual Appliance (OVA) format. It can be imported to VirtualBox or other OVA-compatible virtualization systems.
 
+Monitored endpoints
+^^^^^^^^^^^^^^^^^^^
 
-.. list-table::
-   :width: 100%
-   :widths: 50 50
+The Wazuh agent monitors the following endpoints. Depending on the use case, the endpoints act as victims of an attack, or as malicious actors (attackers).
 
-   * - :doc:`audit-commands-run-by-user`
-     - :doc:`aws-infrastructure-monitoring`
-   * - :doc:`detect-brute-force-attack`
-     - :doc:`monitoring-docker`
-   * - :doc:`poc-file-integrity-monitoring`
-     - :doc:`block-malicious-actor-ip-reputation`
-   * - :doc:`detect-unauthorized-processes-netcat`
-     - :doc:`integrate-osquery`
-   * - :doc:`integrate-network-ids-suricata`
-     - :doc:`detect-web-attack-shellshock`
-   * - :doc:`detect-web-attack-sql-injection`
-     - :doc:`poc-integrate-slack`
-   * - :doc:`poc-detect-trojan`
-     - :doc:`detect-remove-malware-virustotal`
-   * - :doc:`poc-vulnerability-detection`
-     - :doc:`detect-malware-yara-integration`
++-----------+--------------------------------+-------------+--------+--------+
+| Endpoint  | Operating system (64-bits)     | CPU cores   | RAM    | Disk   |
++===========+================================+=============+========+========+
+| Ubuntu    | Ubuntu 22.04 LTS               | 1 vCPU      | 2 GB   | 10 GB  |
++-----------+--------------------------------+-------------+--------+--------+
+| RHEL      | Red Hat Enterprise Linux 9.0   | 1 vCPU      | 2 GB   | 10 GB  |
++-----------+--------------------------------+-------------+--------+--------+
+| Windows   | Windows 11                     | 2 vCPU      | 4 GB   | 25 GB  |
++-----------+--------------------------------+-------------+--------+--------+
 
+You can see our :doc:`installation guide </installation-guide/wazuh-agent/index>` for information on how to install the Wazuh agent on these endpoints. You need Internet access to perform some integrations and download the software used in these use cases.
+
+Use cases
+---------
 
 .. toctree::
-    :hidden:
-    :maxdepth: 1
+   :maxdepth: 1
 
-    audit-commands-run-by-user
-    aws-infrastructure-monitoring
-    detect-brute-force-attack
-    monitoring-docker
-    poc-file-integrity-monitoring
-    block-malicious-actor-ip-reputation
-    detect-unauthorized-processes-netcat
-    integrate-osquery
-    integrate-network-ids-suricata
-    detect-web-attack-shellshock
-    detect-web-attack-sql-injection
-    poc-integrate-slack
-    poc-detect-trojan
-    detect-remove-malware-virustotal
-    poc-vulnerability-detection
-    detect-malware-yara-integration
+   block-malicious-actor-ip-reputation
+   poc-file-integrity-monitoring
+   detect-brute-force-attack
+   monitoring-docker
+   aws-infrastructure-monitoring
+   detect-unauthorized-processes-netcat
+   integrate-network-ids-suricata
+   detect-web-attack-sql-injection
+   poc-detect-trojan
+   detect-remove-malware-virustotal
+   poc-vulnerability-detection
+   detect-malware-yara-integration
+   poc-detect-hidden-process
+   audit-commands-run-by-user
+   detect-web-attack-shellshock
 

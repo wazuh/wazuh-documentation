@@ -1,5 +1,8 @@
 .. Copyright (C) 2015, Wazuh, Inc.
 
+.. meta::
+  :description: Find out the configuration options of the docker wodle. Learn more about it in this section of the Wazuh documentation.
+
 .. _wodle_docker:
 
 wodle name="docker-listener"

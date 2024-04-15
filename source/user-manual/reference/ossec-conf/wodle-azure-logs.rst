@@ -1,5 +1,8 @@
 .. Copyright (C) 2015, Wazuh, Inc.
 
+.. meta::
+  :description: Find out the configuration options of the azure-logs wodle. Learn more about it in this section of the Wazuh documentation.
+
 .. _wodle_azure_logs:
 
 wodle name="azure-logs"
@@ -26,8 +29,6 @@ Options
 - `time`_
 - `timeout`_
 - `log_analytics`_
-- `log_analytics\\application_id`_
-- `log_analytics\\application_key`_
 - `log_analytics\\auth_path`_
 - `log_analytics\\tenantdomain`_
 - `log_analytics\\request`_
@@ -36,8 +37,6 @@ Options
 - `log_analytics\\request\\workspace`_
 - `log_analytics\\request\\timeout`_
 - `log_analytics\\request\\time_offset`_
-- `graph\\application_id`_
-- `graph\\application_key`_
 - `graph\\auth_path`_
 - `graph\\tenantdomain`_
 - `graph\\request`_
@@ -45,8 +44,6 @@ Options
 - `graph\\request\\query`_
 - `graph\\request\\timeout`_
 - `graph\\request\\time_offset`_
-- `storage\\account_name`_
-- `storage\\account_key`_
 - `storage\\auth_path`_
 - `storage\\tag`_
 - `storage\\container`_
@@ -73,10 +70,6 @@ Options
 +----------------------------------------+----------------------------------------------+
 | `log_analytics`_                       | N/A                                          |
 +----------------------------------------+----------------------------------------------+
-| `log_analytics\\application_id`_       | Any string                                   |
-+----------------------------------------+----------------------------------------------+
-| `log_analytics\\application_key`_      | Any string                                   |
-+----------------------------------------+----------------------------------------------+
 | `log_analytics\\auth_path`_            | File path                                    |
 +----------------------------------------+----------------------------------------------+
 | `log_analytics\\tenantdomain`_         | Any string                                   |
@@ -95,10 +88,6 @@ Options
 +----------------------------------------+----------------------------------------------+
 | `graph`_                               | N/A                                          |
 +----------------------------------------+----------------------------------------------+
-| `graph\\application_id`_               | Any string                                   |
-+----------------------------------------+----------------------------------------------+
-| `graph\\application_key`_              | Any string                                   |
-+----------------------------------------+----------------------------------------------+
 | `graph\\auth_path`_                    | File path                                    |
 +----------------------------------------+----------------------------------------------+
 | `graph\\tenantdomain`_                 | Any string                                   |
@@ -115,10 +104,6 @@ Options
 +----------------------------------------+----------------------------------------------+
 | `storage`_                             | N/A                                          |
 +----------------------------------------+----------------------------------------------+
-| `storage\\account_name`_               | Any string                                   |
-+----------------------------------------+----------------------------------------------+
-| `storage\\account_key`_                | Any string                                   |
-+----------------------------------------+----------------------------------------------+
 | `storage\\auth_path`_                  | File path                                    |
 +----------------------------------------+----------------------------------------------+
 | `storage\\tag`_                        | Any string                                   |
@@ -134,6 +119,8 @@ Options
 | `storage\\container\\timeout`_         | A positive number (seconds)                  |
 +----------------------------------------+----------------------------------------------+
 | `storage\\container\\time_offset`_     | A positive number + suffix                   |
++----------------------------------------+----------------------------------------------+
+| `storage\\container\\path`_            | Any string                                   |
 +----------------------------------------+----------------------------------------------+
 
 
@@ -164,7 +151,7 @@ The interval option is conditioned by the following described options ``day``, `
 run_on_start
 ^^^^^^^^^^^^^
 
-Run evaluation immediately when service is started.
+Run evaluation immediately when the service is started.
 
 +--------------------+---------+
 | **Default value**  | yes     |
@@ -228,7 +215,7 @@ Time of the day to run the Azure-Logs. It has to be represented in the format *h
 timeout
 ^^^^^^^
 
-Timeout for each evaluation. In case the execution takes longer that the specified timeout, it stops.
+Timeout for each evaluation. In case the execution takes longer than the specified timeout, it stops.
 
 +--------------------+-----------------------------+
 | **Default value**  | 0                           |
@@ -243,8 +230,6 @@ Defines the use of the Azure Log Analytics REST API to get the desired logs.
 
 This block configures the integration with Azure Log Analytics REST API.
 
-- `log_analytics\\application_id`_
-- `log_analytics\\application_key`_
 - `log_analytics\\auth_path`_
 - `log_analytics\\tenantdomain`_
 - `log_analytics\\request`_
@@ -252,10 +237,6 @@ This block configures the integration with Azure Log Analytics REST API.
 +----------------------------------------+----------------------------------------------+
 | Options                                | Allowed values                               |
 +========================================+==============================================+
-| `log_analytics\\application_id`_       | Any string                                   |
-+----------------------------------------+----------------------------------------------+
-| `log_analytics\\application_key`_      | Any string                                   |
-+----------------------------------------+----------------------------------------------+
 | `log_analytics\\auth_path`_            | File path                                    |
 +----------------------------------------+----------------------------------------------+
 | `log_analytics\\tenantdomain`_         | Any string                                   |
@@ -263,32 +244,10 @@ This block configures the integration with Azure Log Analytics REST API.
 | `log_analytics\\request`_              | N/A                                          |
 +----------------------------------------+----------------------------------------------+
 
-log_analytics\\application_id
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-
-Identifier of the application that we will use for the authentication and to be able to make use of the Azure Log Analytics API. It must be used next to the ``application_key`` option obligatorily. Incompatible with ``auth_path`` option.
-
-+--------------------+--------------------+
-| **Default value**  | N/A                |
-+--------------------+--------------------+
-| **Allowed values** | Any string         |
-+--------------------+--------------------+
-
-log_analytics\\application_key
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-
-Key to the application we will use for authentication and to be able to make use of the Azure Log Analytics API. It must be used next to the ``application_id`` option obligatorily. Incompatible with ``auth_path`` option.
-
-+--------------------+--------------------+
-| **Default value**  | N/A                |
-+--------------------+--------------------+
-| **Allowed values** | Any string         |
-+--------------------+--------------------+
-
 log_analytics\\auth_path
 ^^^^^^^^^^^^^^^^^^^^^^^^
 
-Path of the file that contains the application identifier and the application key for authentication in order to use the Azure Log Analytics API. Incompatible with ``application_id`` and ``application_key`` options.
+File path containing the application identifier and key for authentication. This is necessary to use the Azure Log Analytics API.
 
 +--------------------+--------------------+
 | **Default value**  | N/A                |
@@ -306,7 +265,7 @@ File example:
 log_analytics\\tenantdomain
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-A tenant is simply a dedicated instance of Azure Active Directory (Azure AD). The Azure Log Analytics API uses the Azure Active Directory authentication scheme.
+A tenant is simply a dedicated instance of Microsoft Entra ID (ME-ID). The Azure Log Analytics API uses the Microsoft Entra ID authentication scheme.
 
 +--------------------+--------------------+
 | **Default value**  | N/A                |
@@ -382,7 +341,7 @@ Defines the workspace where we will perform the queries.
 log_analytics\\request\\timeout
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-Timeout for each request evaluation. This option overwrites the general `timeout`_ option. In case the execution takes longer that the specified timeout, it stops.
+Timeout for each request evaluation. This option overwrites the general `timeout`_ option. In case the execution takes longer than the specified timeout, it stops.
 
 +--------------------+-----------------------------+
 | **Default value**  | 0                           |
@@ -415,8 +374,7 @@ Example of log_analytics configuration
 
         <log_analytics>
 
-            <application_id>8b7...c14</application_id>
-            <application_key>w22...91x</application_key>
+            <auth_path>/var/ossec/wodles/credentials/log_analytics_credentials</auth_path>
             <tenantdomain>wazuh.onmicrosoft.com</tenantdomain>
 
             <request>
@@ -436,8 +394,6 @@ graph
 
 This block configures the integration with Azure Active Directory Graph REST API.
 
-- `graph\\application_id`_
-- `graph\\application_key`_
 - `graph\\auth_path`_
 - `graph\\tenantdomain`_
 - `graph\\request`_
@@ -445,10 +401,6 @@ This block configures the integration with Azure Active Directory Graph REST API
 +----------------------------------+----------------------------------------------+
 | Options                          | Allowed values                               |
 +==================================+==============================================+
-| `graph\\application_id`_         | Any string                                   |
-+----------------------------------+----------------------------------------------+
-| `graph\\application_key`_        | Any string                                   |
-+----------------------------------+----------------------------------------------+
 | `graph\\auth_path`_              | File path                                    |
 +----------------------------------+----------------------------------------------+
 | `graph\\tenantdomain`_           | Any string                                   |
@@ -456,32 +408,10 @@ This block configures the integration with Azure Active Directory Graph REST API
 | `graph\\request`_                | N/A                                          |
 +----------------------------------+----------------------------------------------+
 
-graph\\application_id
-^^^^^^^^^^^^^^^^^^^^^
-
-Identifier of the application that we will use for the authentication and to be able to make use of the AAD Graph API. It must be used next to the ``application_key`` option obligatorily. Incompatible with ``auth_path`` option.
-
-+--------------------+--------------------+
-| **Default value**  | N/A                |
-+--------------------+--------------------+
-| **Allowed values** | Any string         |
-+--------------------+--------------------+
-
-graph\\application_key
-^^^^^^^^^^^^^^^^^^^^^^
-
-Key to the application we will use for authentication and to be able to make use of the AAD Graph API. It must be used next to the ``application_id`` option obligatorily. Incompatible with ``auth_path`` option.
-
-+--------------------+--------------------+
-| **Default value**  | N/A                |
-+--------------------+--------------------+
-| **Allowed values** | Any string         |
-+--------------------+--------------------+
-
 graph\\auth_path
 ^^^^^^^^^^^^^^^^
 
-Path of the file that contains the application identifier and the application key for authentication in order to use the AAD Graph API. Incompatible with the ``application_id`` and ``application_key`` options. Check the :doc:`credentials </azure/activity-services/prerequisites/credentials>` reference for more information about this topic.
+File path containing the application identifier and key for authentication. This is necessary to use the AAD Graph API.
 
 +--------------------+--------------------+
 | **Default value**  | N/A                |
@@ -493,7 +423,7 @@ Path of the file that contains the application identifier and the application ke
 graph\\tenantdomain
 ^^^^^^^^^^^^^^^^^^^
 
-A tenant is simply a dedicated instance of Azure Active Directory (Azure AD) because it uses the Azure Active Directory authentication scheme.
+A tenant is simply a dedicated instance of Microsoft Entra ID (ME-ID) because it uses the Microsoft Entra ID authentication scheme.
 
 +--------------------+--------------------+
 | **Default value**  | N/A                |
@@ -546,7 +476,7 @@ The query used to obtain the logs from the Microsoft Graph API. The query value 
 graph\\request\\timeout
 ^^^^^^^^^^^^^^^^^^^^^^^
 
-Timeout for each request evaluation. This option overwrites the general `timeout`_ option. In case the execution takes longer that the specified timeout, it stops.
+Timeout for each request evaluation. This option overwrites the general `timeout`_ option. In case the execution takes longer than the specified timeout, it stops.
 
 +--------------------+-----------------------------+
 | **Default value**  | 0                           |
@@ -581,11 +511,11 @@ Example of graph configuration
 
 	    <graph>
 
-	        <auth_path>/Azure/graph_auth.txt</auth_path>
+                <auth_path>/var/ossec/wodles/credentials/graph_credentials</auth_path>
 	        <tenantdomain>wazuh.onmicrosoft.com</tenantdomain>
 
 	        <request>
-	            <tag>azure-active_directory</tag>
+	            <tag>microsoft-entra_id</tag>
 	            <query>activities/audit?api-version=beta</query>
 	            <time_offset>1d</time_offset>
 	        </request>
@@ -599,8 +529,6 @@ storage
 
 This block configures the integration with Azure Storage.
 
-- `storage\\account_name`_
-- `storage\\account_key`_
 - `storage\\auth_path`_
 - `storage\\tag`_
 - `storage\\container`_
@@ -608,10 +536,6 @@ This block configures the integration with Azure Storage.
 +----------------------------------+----------------------------------------------+
 | Options                          | Allowed values                               |
 +==================================+==============================================+
-| `storage\\account_name`_         | Any string                                   |
-+----------------------------------+----------------------------------------------+
-| `storage\\account_key`_          | Any string                                   |
-+----------------------------------+----------------------------------------------+
 | `storage\\auth_path`_            | File path                                    |
 +----------------------------------+----------------------------------------------+
 | `storage\\tag`_                  | Any string                                   |
@@ -619,32 +543,10 @@ This block configures the integration with Azure Storage.
 | `storage\\container`_            | N/A                                          |
 +----------------------------------+----------------------------------------------+
 
-storage\\account_name
-^^^^^^^^^^^^^^^^^^^^^
-
-Identifier of the account name that we will use for the authentication- It must be used next to the ``account_key`` option obligatorily. Incompatible with ``auth_path`` option.
-
-+--------------------+--------------------+
-| **Default value**  | N/A                |
-+--------------------+--------------------+
-| **Allowed values** | Any string         |
-+--------------------+--------------------+
-
-storage\\account_key
-^^^^^^^^^^^^^^^^^^^^
-
-Identifier of the account key that we will use for the authentication- It must be used next to the ``account_name`` option obligatorily. Incompatible with ``auth_path`` option.
-
-+--------------------+--------------------+
-| **Default value**  | N/A                |
-+--------------------+--------------------+
-| **Allowed values** | Any string         |
-+--------------------+--------------------+
-
 storage\\auth_path
 ^^^^^^^^^^^^^^^^^^
 
-Path of the file that contains the account name and the account key for authentication. Incompatible with ``account_name`` and ``account_key`` options.
+File path containing the account name and key for authentication.
 
 +--------------------+--------------------+
 | **Default value**  | N/A                |
@@ -679,6 +581,8 @@ storage\\container
 +-----------------------------------------+----------------------------------------------+
 | `storage\\container\\time_offset`_      | A positive number + suffix                   |
 +-----------------------------------------+----------------------------------------------+
+| `storage\\container\\path`_             | Any string                                   |
++-----------------------------------------+----------------------------------------------+
 
 storage\\container name
 ^^^^^^^^^^^^^^^^^^^^^^^
@@ -694,7 +598,7 @@ Specifies the name of the container. Enter ``*`` to access all account container
 storage\\container\\blobs
 ^^^^^^^^^^^^^^^^^^^^^^^^^
 
-Specifies the extension of the blobs like ``.json``. Enter "*" to access all the containers' blobs. 
+Specifies the extension of the blobs like ``.json``. Enter ``*`` to access all the containers blobs.
 
 .. note::
 
@@ -712,11 +616,11 @@ storage\\container\\content_type
 This parameter indicates the format of the blobs' content. The available values are:
 
 - **text**. Plain text. Each line is a log.
-- **json_file**. The blob contain records of logs in standard json format.
+- **json_file**. The blob contains records of logs in standard json format.
 - **json_inline**. Each line is a log in json format.
 
 The format of logs stored in Azure accounts is **inline JSON**.
-	
+
 .. note::
 
 	When the ``day`` option is set, the interval value must be a multiple of months. By default, the interval is set to a month.
@@ -730,7 +634,7 @@ The format of logs stored in Azure accounts is **inline JSON**.
 storage\\container\\timeout
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-Timeout for each request evaluation. This option overwrites the general `timeout`_ option. In case the execution takes longer that the specified timeout, it stops.
+Timeout for each request evaluation. This option overwrites the general `timeout`_ option. In case the execution takes longer than the specified timeout, it stops.
 
 +--------------------+-----------------------------+
 | **Default value**  | 0                           |
@@ -750,6 +654,18 @@ This option sets the time delay in which we will perform the query. For example,
 | **Allowed values** | A positive number that should contain a suffix character indicating a time unit, such as, m (minutes), h (hours), d (days) |
 +--------------------+----------------------------------------------------------------------------------------------------------------------------+
 
+
+storage\\container\\path
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Defines, for the container, a path to search for logs. If it isn't present, the module retrieves all the blobs starting from the root level.
+
++--------------------+----------------------------------------------------------------------------------------------------------------------------+
+| **Default value**  | N/A                                                                                                                        |
++--------------------+----------------------------------------------------------------------------------------------------------------------------+
+| **Allowed values** | Valid path                                                                                                                 |
++--------------------+----------------------------------------------------------------------------------------------------------------------------+
+
 Example of storage configuration
 --------------------------------
 
@@ -763,13 +679,14 @@ Example of storage configuration
 
         <storage>
 
-            <auth_path>/home/manager/Azure/storage_auth.txt</auth_path>
+            <auth_path>/var/ossec/wodles/credentials/storage_credentials</auth_path>
             <tag>azure-activity</tag>
 
             <container name="insights-operational-logs">
                 <blobs>.json</blobs>
                 <content_type>json_inline</content_type>
                 <time_offset>24h</time_offset>
+                <path>info-logs</path>
             </container>
 
 	    <container name="audit-logs"/>
@@ -793,8 +710,7 @@ Example of all integration
 
         <log_analytics>
 
-            <application_id>8b7...c14</application_id>
-            <application_key>w22...91x</application_key>
+            <auth_path>/var/ossec/wodles/credentials/log_analytics_credentials</auth_path>
             <tenantdomain>wazuh.onmicrosoft.com</tenantdomain>
 
             <request>
@@ -808,11 +724,11 @@ Example of all integration
 
         <graph>
 
-            <auth_path>/Azure/graph_auth.txt</auth_path>
+            <auth_path>/var/ossec/wodles/credentials/graph_credentials</auth_path>
             <tenantdomain>wazuh.onmicrosoft.com</tenantdomain>
 
             <request>
-                <tag>azure-active_directory</tag>
+                <tag>microsoft-entra_id</tag>
                 <query>activities/audit?api-version=beta</query>
                 <timeout>7200</timeout>
                 <time_offset>1d</time_offset>
@@ -822,13 +738,14 @@ Example of all integration
 
         <storage>
 
-            <auth_path>/home/manager/Azure/storage_auth.txt</auth_path>
+            <auth_path>/var/ossec/wodles/credentials/storage_credentials</auth_path>
             <tag>azure-activity</tag>
 
             <container name="insights-operational-logs">
                 <blobs>.json</blobs>
                 <content_type>json_inline</content_type>
                 <time_offset>24h</time_offset>
+                <path>info-logs</path>
             </container>
 
 	    <container name="audit-logs"/>

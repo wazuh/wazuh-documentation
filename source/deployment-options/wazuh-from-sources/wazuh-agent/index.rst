@@ -14,7 +14,7 @@ The Wazuh agent is a single and lightweight monitoring software. It is a multi-p
 
         .. note::
         
-            All the commands described below need to be executed with root user privileges. Since Wazuh 3.5, it is necessary to have an Internet connection when following this process.
+           You need root user privileges to run all the commands described below. Since Wazuh 3.5, it is necessary to have an Internet connection when following this process.
 
         .. note::
         
@@ -33,7 +33,7 @@ The Wazuh agent is a single and lightweight monitoring software. It is a multi-p
                             .. code-block:: console
 
                                 # yum update -y
-                                # yum install make gcc gcc-c++ policycoreutils-python automake autoconf libtool centos-release-scl openssl-devel wget bzip2 -y
+                                # yum install make gcc gcc-c++ policycoreutils-python automake autoconf libtool centos-release-scl openssl-devel wget bzip2 procps -y
                                 # curl -OL http://packages.wazuh.com/utils/gcc/gcc-9.4.0.tar.gz && tar xzf gcc-9.4.0.tar.gz  && cd gcc-9.4.0/ && ./contrib/download_prerequisites && ./configure --enable-languages=c,c++ --prefix=/usr --disable-multilib --disable-libsanitizer && make -j$(nproc) && make install && ln -fs /bin/g++ /usr/bin/c++ && ln -fs /bin/gcc /usr/bin/cc && cd .. && rm -rf gcc-*
 
                             CMake 3.18 installation
@@ -49,7 +49,7 @@ The Wazuh agent is a single and lightweight monitoring software. It is a multi-p
 
                             .. code-block:: console
 
-                                # yum install make gcc gcc-c++ python3 python3-policycoreutils automake autoconf libtool openssl-devel cmake
+                                # yum install make gcc gcc-c++ python3 python3-policycoreutils automake autoconf libtool openssl-devel cmake procps -y
                                 # yum-config-manager --enable powertools
                                 # yum install libstdc++-static -y
 
@@ -65,7 +65,7 @@ The Wazuh agent is a single and lightweight monitoring software. It is a multi-p
 
                     .. code-block:: console
 
-                        # apt-get install python gcc g++ make libc6-dev curl policycoreutils automake autoconf libtool libssl-dev
+                        # apt-get install python gcc g++ make libc6-dev curl policycoreutils automake autoconf libtool libssl-dev procps
 
                     CMake 3.18 installation
 
@@ -103,6 +103,13 @@ The Wazuh agent is a single and lightweight monitoring software. It is a multi-p
 
                         # pacman --noconfirm -Syu curl gcc make sudo wget expect gnupg perl-base perl fakeroot python brotli automake autoconf libtool gawk libsigsegv nodejs base-devel inetutils cmake
 
+                .. group-tab:: APK
+
+                    Alpine Package Keeper is the default package manager that Alpine Linux uses to manage its packages.
+
+                    .. code-block:: console
+
+                        # apk --update add automake autoconf cmake curl gcc gettext-dev g++ linux-headers libgcc libtool make procps python3 openssl-dev 
 
         #.  Download and extract the latest version:
 
@@ -174,7 +181,7 @@ The Wazuh agent is a single and lightweight monitoring software. It is a multi-p
         
         .. tabs::
           
-            .. tab:: SysV Init:
+            .. tab:: SysV init
 
                 .. code-block:: console
 
@@ -199,7 +206,7 @@ The Wazuh agent is a single and lightweight monitoring software. It is a multi-p
 
         .. note::
         
-            The following procedure has been tested on Ubuntu 20.04 and may work with other Debian/Ubuntu versions as well. It is recommended to use MinGW 9.
+            The following procedure has been tested on Ubuntu 22.04 and may work with other Debian/Ubuntu versions as well. It is required to use MinGW 10.
 
         #.  Set up the Ubuntu build environment. Install these dependencies to build the Windows Wazuh agent installer on Ubuntu:
 
@@ -251,7 +258,7 @@ The Wazuh agent is a single and lightweight monitoring software. It is a multi-p
 
             .. code-block:: doscon
 
-                :: signtool sign /a /tr http://rfc3161timestamp.globalsign.com/advanced /d "%MSI_NAME%" /td SHA256 "%MSI_NAME%"
+                :: signtool sign /a /tr http://timestamp.digicert.com /d "%MSI_NAME%" /fd SHA256 /td SHA256 "%MSI_NAME%"
                 
         #.  Specify the version and the revision number when prompted. This will also generate the Windows installer file. In the following output, the version is set as |WAZUH_CURRENT_WIN_FROM_SOURCES| and the revision is set as |WAZUH_CURRENT_WIN_FROM_SOURCES_REV|. This generates the Windows installer ``wazuh-agent-|WAZUH_CURRENT_WIN_FROM_SOURCES|-|WAZUH_CURRENT_WIN_FROM_SOURCES_REV|.msi``
         
@@ -389,7 +396,7 @@ The Wazuh agent is a single and lightweight monitoring software. It is a multi-p
 
         .. code-block:: console
 
-            # rm -rf /Library/StartupItems/OSSEC
+            # rm -rf /Library/StartupItems/WAZUH
 
         Remove Wazuh user and group:
 
@@ -400,7 +407,7 @@ The Wazuh agent is a single and lightweight monitoring software. It is a multi-p
 
     .. group-tab:: AIX
 
-        AIX 6.1 TL4 or greater is the supported version for the following installation procedure. 
+        AIX 6.1 TL9 or greater is the supported version for the following installation procedure. 
 
         .. note::
 
@@ -461,7 +468,7 @@ The Wazuh agent is a single and lightweight monitoring software. It is a multi-p
                 # cd src
                 # gmake clean-deps
                 # gmake clean
-                # gmake deps TARGET=agent RESOURCES_URL=http://packages.wazuh.com/deps/15
+                # gmake deps TARGET=agent RESOURCES_URL=http://packages.wazuh.com/deps/27
                 # gmake TARGET=agent USE_SELINUX=no PREFIX=/var/ossec
 
         #.  Run the ``install.sh`` script. This will run a wizard that will guide you through the installation process using the Wazuh sources:
@@ -605,7 +612,7 @@ The Wazuh agent is a single and lightweight monitoring software. It is a multi-p
             .. code-block:: console
 
                 # cd wazuh-|WAZUH_CURRENT_FROM_SOURCES|
-                # /usr/local/bin/gmake -C src deps RESOURCES_URL=http://packages.wazuh.com/deps/14 TARGET=agent
+                # /usr/local/bin/gmake -C src deps RESOURCES_URL=http://packages.wazuh.com/deps/27 TARGET=agent
                 # /usr/local/bin/gmake -C src TARGET=agent USE_SELINUX=no
 
         #.  Run the ``install.sh`` script. This will run a wizard that will guide you through the installation process using the Wazuh sources:
@@ -792,7 +799,7 @@ The Wazuh agent is a single and lightweight monitoring software. It is a multi-p
                             # export LD_LIBRARY_PATH=/usr/local/gcc-5.5.0/lib
                             # cd wazuh/src
                             # gmake clean
-                            # gmake deps TARGET=agent RESOURCES_URL=http://packages.wazuh.com/deps/15
+                            # gmake deps TARGET=agent RESOURCES_URL=http://packages.wazuh.com/deps/27
                             # gmake -j 4 TARGET=agent PREFIX=/var/ossec USE_SELINUX=no
                             USE_BIG_ENDIAN=yes
                             # cd ..
@@ -903,7 +910,7 @@ The Wazuh agent is a single and lightweight monitoring software. It is a multi-p
 
                         .. code-block:: console
 
-                            # pkgutil -y -i git gmake cmake gcc5core gcc5g++
+                            # /opt/csw/bin/pkgutil -y -i git gmake cmake gcc5core gcc5g++
 
                     #.  Install a gcc version to include all files needed in the next step:
 

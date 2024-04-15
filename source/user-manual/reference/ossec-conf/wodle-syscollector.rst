@@ -2,7 +2,6 @@
 
 .. meta::
 	:description: Check out this section about the local configuration of Wazuh and learn about the configuration options of the syscollector wodle.
-
 	
 .. _wodle-syscollector:
 
@@ -16,7 +15,7 @@ wodle name="syscollector"
 		<wodle name="syscollector">
 		</wodle>
 
-Configuration options of the Syscollector wodle for :ref:`system inventory <syscollector>`.
+Configuration options of the Syscollector wodle for :ref:`system inventory <system_inventory>`.
 
 Options
 -------
@@ -84,7 +83,7 @@ Time between system scans.
 scan_on_start
 ^^^^^^^^^^^^^
 
-Run a system scan immediately when service is started.
+Run a system scan immediately when the service is started.
 
 +--------------------+---------+
 | **Default value**  | yes     |
@@ -166,6 +165,8 @@ Enables the scan of the processes.
 | **Allowed values** | yes, no |
 +--------------------+---------+
 
+.. _wodle_syscollector_hotfixes:
+
 hotfixes
 ^^^^^^^^
 
@@ -178,13 +179,11 @@ Enables the hotfixes scan. It reports the Windows updates installed.
 +--------------------+---------+
 
 .. note::
-  This option is enabled by default but no included in the initial configuration.
+  This option is enabled by default but not included in the initial configuration.
 
 
 synchronization
 ^^^^^^^^^^^^^^^
-
-.. versionadded:: 4.2.0
 
 The database synchronization settings are configured inside this tag.
 
@@ -198,8 +197,6 @@ The database synchronization settings are configured inside this tag.
 
 max_eps
 ^^^^^^^
-
-.. versionadded:: 4.2.0
 
 Sets the maximum event reporting throughput.
 

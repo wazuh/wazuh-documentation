@@ -13,6 +13,18 @@ Wazuh provides a pre-built Amazon Machine Image (AMI). An AMI is a pre-configure
 - Wazuh indexer |WAZUH_CURRENT_AMI|
 - Wazuh dashboard |WAZUH_CURRENT_AMI|
 
+Packages list
+-------------
+
+.. |AMI_PRODUCT_PAGE| replace:: `Wazuh All-In-One Deployment <https://aws.amazon.com/marketplace/pp/prodview-eju4flv5eqmgq>`__
+
+.. |var_WAZUH_CURRENT_AMI| replace:: |WAZUH_CURRENT_AMI|
+
++------------------+--------------+-------------+-------------------------+---------------------+
+| Distribution     | Architecture | VM Format   | Latest version          | Product page        |
++==================+==============+=============+=========================+=====================+
+| Amazon Linux 2   | 64-bit       | AWS AMI     | |var_WAZUH_CURRENT_AMI| | |AMI_PRODUCT_PAGE|  |
++------------------+--------------+-------------+-------------------------+---------------------+
 
 Deployment alternatives
 -----------------------
@@ -104,7 +116,7 @@ Once the instance is running and the process to initialize passwords is complete
 
 .. warning::
    
-   It is highly recommended to change the default users passwords in the first SSH access. To perform this action, see the :doc:`/user-manual/securing-wazuh/wazuh-indexer` section.
+   It is highly recommended to change the default users passwords in the first SSH access. To perform this action, see the :doc:`/user-manual/user-administration/password-management` section.
 
 
 Security considerations about SSH
@@ -125,9 +137,9 @@ Next steps
 
 The Wazuh AMI is now ready and you can proceed with :doc:`deploying the Wazuh agents </installation-guide/wazuh-agent/index>` on the systems to be monitored.
 
-Upgrading the Wazuh server
---------------------------
+Upgrading the AMI
+-----------------
 
-The Wazuh server in the instance can be upgraded as a traditional installation.
+Follow the instructions on how to upgrade the Wazuh central components. 
 
-  - :ref:`Upgrading the Wazuh manager <upgrading_wazuh_server>`
+  - :doc:`Upgrading the Wazuh central components </upgrade-guide/upgrading-central-components>`

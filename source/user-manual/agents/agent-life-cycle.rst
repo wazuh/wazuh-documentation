@@ -1,4 +1,5 @@
 .. Copyright (C) 2015, Wazuh, Inc.
+
 .. meta::
   :description: Learn more about the Wazuh agent lifecycle here: registered agents, the status of the agents, and removed agents.
 
@@ -16,6 +17,7 @@ A registered agent will remain in the manager until it is removed by the user. T
 
 .. thumbnail:: ../../images/manual/managing-agents/agent-status.png
     :title: Agent life cycle
+    :alt: Agent life cycle
     :align: center
     :width: 80%
 
