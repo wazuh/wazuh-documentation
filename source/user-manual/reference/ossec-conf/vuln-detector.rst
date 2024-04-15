@@ -32,6 +32,10 @@ Options
 +---------------------------+------------------------------------+
 | `index-status`_           | ``yes``, ``no``                    |
 +---------------------------+------------------------------------+
+| `offline-url`_            | ``<path>`` (starting with file://) |
+|                           | or ``<URL>``                       |
+|                           | (starting with http:// or https://)|
++---------------------------+------------------------------------+
 
 enabled
 ^^^^^^^
@@ -65,6 +69,20 @@ Enables indexing of vulnerability inventory data.
 +--------------------+-----------------------------+
 | **Allowed values** | ``yes``, ``no``             |
 +--------------------+-----------------------------+
+
+offline-url
+^^^^^^^^^^^
+Allows to specify a path or URL for offline content access.
+
++--------------------+-----------------------------+
+| **Default**        | Empty                       |
++--------------------+-----------------------------+
+| **Allowed values** | ``<path>``, ``<URL>``       |
++--------------------+-----------------------------+
+
+``<path>``: A local file path starting with file://, pointing to offline content stored on the device.
+
+``<URL>``: A URL starting with either http:// or https://, pointing to online content accessible via the internet or local network.
 
 interval
 ^^^^^^^^
