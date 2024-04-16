@@ -23,19 +23,19 @@ Options
    :depth: 1
    :backlinks: none
 
-+---------------------------+------------------------------------+
-| Options                   | Allowed values                     |
-+===========================+====================================+
-| `enabled`_                | ``yes``, ``no``                    |
-+---------------------------+------------------------------------+
-| `feed-update-interval`_   | Positive number + Time unit suffix |
-+---------------------------+------------------------------------+
-| `index-status`_           | ``yes``, ``no``                    |
-+---------------------------+------------------------------------+
-| `offline-url`_            | ``<path>`` (starting with file://) |
-|                           | or ``<URL>``                       |
-|                           | (starting with http:// or https://)|
-+---------------------------+------------------------------------+
++---------------------------+--------------------------------------+
+| Options                   | Allowed values                       |
++===========================+======================================+
+| `enabled`_                | ``yes``, ``no``                      |
++---------------------------+--------------------------------------+
+| `feed-update-interval`_   | Positive number + Time unit suffix   |
++---------------------------+--------------------------------------+
+| `index-status`_           | ``yes``, ``no``                      |
++---------------------------+--------------------------------------+
+| `offline-url`_            | ``<path>`` (starting with \file://)  |
+|                           | or ``<URL>``                         |
+|                           | (starting with \http:// or \https://)|
++---------------------------+--------------------------------------+
 
 enabled
 ^^^^^^^
@@ -80,9 +80,9 @@ Allows to specify a path or URL for offline content access.
 | **Allowed values** | ``<path>``, ``<URL>``       |
 +--------------------+-----------------------------+
 
-``<path>``: A local file path starting with file://, pointing to offline content stored on the device.
+``<path>``: A local file path starting with \file://, pointing to offline content stored on the device.
 
-``<URL>``: A URL starting with either http:// or https://, pointing to online content accessible via the internet or local network.
+``<URL>``: A URL starting with either \http:// or \https://, pointing to online content accessible via the internet or local network.
 
 interval
 ^^^^^^^^
