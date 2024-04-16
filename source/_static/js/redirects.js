@@ -90,7 +90,6 @@ newUrls['4.7'] = [
   '/user-manual/capabilities/malware-detection/osquery.html',
   '/user-manual/upscaling/index.html',
   '/user-manual/upscaling/adding-indexer-node.html',
-  '/user-manual/upscaling/adding-server-node.html',
   '/installation-guide/uninstalling-wazuh/index.html',
   '/installation-guide/uninstalling-wazuh/agent.html',
   '/installation-guide/uninstalling-wazuh/central-components.html',

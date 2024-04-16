@@ -16,4 +16,3 @@ This guide covers the following:
    :maxdepth: 1
 
    adding-indexer-node
-   adding-server-node
