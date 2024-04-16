@@ -37,10 +37,13 @@ Options
 - `multiline_regex`_
 - `ignore`_
 - `restrict`_
+- `filter`_
 
 
 location
 ^^^^^^^^
+
+The location field specifies where the log data comes from. This can be a path to a log file, a Windows event channel, macos, or a journald system.
 
 Option to get the location of a log or a group of logs. ``strftime`` format strings may be used for log file names.
 
@@ -95,9 +98,8 @@ Below we have some Windows wildcard examples.
 
   * On Windows systems, only character ``*`` is supported as a wildcard. For instance ``*ANY_STRING*``, will match all files that have ``ANY_STRING`` inside its name, another example is ``*.log`` this will match any log file.
   * The maximum amount of files monitored at same time is limited to 1000.
-
-.. warning::
-  * If using ``macos`` as ``log_format``, then ``location`` must be set to ``macos`` as well.
+  * When setting ``log_format`` to ``macos``, ``location`` should also be set to ``macos``.
+  * When setting ``log_format`` to ``journald``, ``location`` should also be set to ``journald``.
 
 .. _command:
 
@@ -334,6 +336,10 @@ Set the format of the log to be read. **field is required**
 |                    |                    |                                                                                                  |
 |                    |                    | Monitors all the logs that match the query filter.                                               |
 |                    |                    | See :ref:`How to collect macOS ULS logs <how-to-collect-macoslogs>`.                             |
++                    +--------------------+--------------------------------------------------------------------------------------------------+
+|                    | journald           | Used to monitor all systemd-journal events, collecting them in syslog format.                    |
+|                    |                    |                                                                                                  |
+|                    |                    | See `How to collect systemd-joyrnald logs <how-to-collect-journald>`.                            |
 +                    +--------------------+--------------------------------------------------------------------------------------------------+
 |                    | audit              | Used for events from Auditd.                                                                     |
 |                    |                    |                                                                                                  |
@@ -670,6 +676,46 @@ For example, to restrict syslog events related to a particular user name:
 
 .. note::
   The `eventchannel` format already provides a way to filter logs through queries. Therefore, `ignore` and `restrict` settings don't apply to this format.
+
+
+filter
+^^^^^^
+
+The `filter` tag is used to include PCRE2 regex filters for selectively collecting logs based on specific fields within `journald`.
+Each filter must specify a field and a regex pattern. The `ignore_if_missing` attribute can be used to indicate whether to ignore logs where the specified field is missing.
+
+
++--------------------+---------------------------------------------------------------+
+| **Default Value**  | n/a                                                           |
++--------------------+---------------------------------------------------------------+
+| **Allowed values** | Any `PCRE2 <regex.html#pcre2-syntax>`_ expression.            |
++--------------------+---------------------------------------------------------------+
+
+Use the `field` attribute to define in which journald field to apply the regex (Mandatory).
+
++-----------------------+--------------------------------------------------------------------------------------------------------------+
+| **ignore_if_missing** | When the attribute `ignore_if_missing` is set to `yes` it ignores the filter if the field does not exist.    |
++                       +------------------+-------------------------------------------------------------------------------------------+
+|                       | Default value    | no                                                                                        |
+|                       +------------------+-------------------------------------------------------------------------------------------+
+|                       | Allowed values   | no, yes                                                                                   |
++-----------------------+------------------+-------------------------------------------------------------------------------------------+
+
+
+Configuration example:
+
+.. code-block:: xml
+
+    <!-- For monitoring log files -->
+    <localfile>
+      <location>journald</location>
+      <log_format>journald</log_format>
+      <filter field="_SYSTEMD_UNIT">^cron.service$</filter>
+      <filter field="PRIORITY" ignore_if_missing="yes">[0-3]</filter>
+    <localfile>
+
+.. note::
+    Filters within the same `<localfile>` block follow an AND logic, while multiple blocks are evaluated in OR logic regarding log collection.
 
 
 Configuration examples
