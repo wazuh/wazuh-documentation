@@ -23,19 +23,17 @@ Options
    :depth: 1
    :backlinks: none
 
-+---------------------------+--------------------------------------+
-| Options                   | Allowed values                       |
-+===========================+======================================+
-| `enabled`_                | ``yes``, ``no``                      |
-+---------------------------+--------------------------------------+
-| `feed-update-interval`_   | Positive number + Time unit suffix   |
-+---------------------------+--------------------------------------+
-| `index-status`_           | ``yes``, ``no``                      |
-+---------------------------+--------------------------------------+
-| `offline-url`_            | ``<path>`` (starting with \file://)  |
-|                           | or ``<URL>``                         |
-|                           | (starting with \http:// or \https://)|
-+---------------------------+--------------------------------------+
++---------------------------+------------------------------------------------------------+
+| Options                   | Allowed values                                             |
++===========================+============================================================+
+| `enabled`_                | ``yes``, ``no``                                            |
++---------------------------+------------------------------------------------------------+
+| `feed-update-interval`_   | Positive number + Time unit suffix                         |
++---------------------------+------------------------------------------------------------+
+| `index-status`_           | ``yes``, ``no``                                            |
++---------------------------+------------------------------------------------------------+
+| `offline-url`_            | ``file://<LOCAL_FILE_PATH>``, ``http[s]://<CONTENT_URL>``  |
++---------------------------+------------------------------------------------------------+
 
 enabled
 ^^^^^^^
@@ -72,17 +70,19 @@ Enables indexing of vulnerability inventory data.
 
 offline-url
 ^^^^^^^^^^^
-Allows to specify a path or URL for offline content access.
+.. versionadded:: 4.8.0
 
-+--------------------+-----------------------------+
-| **Default**        | Empty                       |
-+--------------------+-----------------------------+
-| **Allowed values** | ``<path>``, ``<URL>``       |
-+--------------------+-----------------------------+
+File path or URL for offline content access.
 
-``<path>``: A local file path starting with \file://, pointing to offline content stored on the device.
++--------------------+---------------------------------------------------------+
+| **Default**        | Empty                                                   |
++--------------------+---------------------------------------------------------+
+| **Allowed values** |``file://<LOCAL_FILE_PATH>``, ``http[s]://<CONTENT_URL>``|
++--------------------+---------------------------------------------------------+
 
-``<URL>``: A URL starting with either \http:// or \https://, pointing to online content accessible via the internet or local network.
+``<LOCAL_FILE_PATH>``: A local file path starting with \file://, pointing to offline content stored on the device.
+
+``<CONTENT_URL>``: A URL starting with either \http:// or \https://, pointing to local network content or online content accessible via the internet.
 
 interval
 ^^^^^^^^
@@ -113,4 +113,5 @@ Example of configuration
       <enabled>yes</enabled>
       <index-status>yes</index-status>
       <feed-update-interval>60m</feed-update-interval>
+      <offline-url> file://<LOCAL_FILE_PATH>, http[s]://<CONTENT_URL> </offline-url> <!-- Optional -->
    </vulnerability-detection>
