@@ -27,11 +27,11 @@ To be able to generate the windows msi package, it is necessary to perform two s
 Compiling windows agent
 ^^^^^^^^^^^^^^^^^^^^^^^
 
-Download our wazuh-packages repository from GitHub and go to the ``windows`` directory.
+Download our wazuh repository from GitHub and go to the ``windows`` directory.
 
 .. code-block:: console
 
-    $ git clone https://github.com/wazuh/wazuh-packages && cd wazuh-packages/windows && git checkout v|WAZUH_CURRENT_WINDOWS|
+    $ git clone https://github.com/wazuh/wazuh && cd wazuh/packages/windows && git checkout v|WAZUH_CURRENT_WINDOWS|
 
 Execute the ``generate_compiled_windows_agent.sh`` script, with the different options you desire. This script will build a Docker
 image with all the necessary tools to compile and obtain the Windows agent compiled in a zip file :
@@ -45,20 +45,23 @@ image with all the necessary tools to compile and obtain the Windows agent compi
 
   Usage: ./generate_compiled_windows_agent.sh [OPTIONS]
 
-      -b, --branch <branch>     [Required] Select Git branch.
+      -b, --branch <branch>     [Optional] Select Git branch to compile Wazuh code.
+      --sources <path>          [Optional] Absolute path containing wazuh source code. This option will use local source code instead of downloading it from GitHub. By default: ../../src
+      -o, --output <rev>        [Required] Name to the output package
       -j, --jobs <number>       [Optional] Change number of parallel jobs when compiling the Windows agent. By default: 4.
-      -r, --revision <rev>      [Optional] Package revision. By default: 1.
       -s, --store <path>        [Optional] Set the directory where the package will be stored. By default the current path.
-      -d, --debug               [Optional] Build the binaries with debug symbols. By default: no.
+      -d, --debug               [Optional] Build the binaries with debug symbols. By default: false.
       -t, --trust_verification  [Optional] Build the binaries with trust load images verification. By default: 1 (only warnings).
       -c, --ca_name <CA name>   [Optional] CA name to be used to verify the trust of the agent. By default: DigiCert Assured ID Root CA.
+      --dont-build-docker       [Optional] Locally built docker image will be used instead of generating a new one.
+      --tag                     [Optional] Tag to use with the docker image.
       -h, --help                Show this help.
 
 Below, you will find an example of how to build a compiled Windows agent.
 
 .. code-block:: console
 
-  # ./generate_compiled_windows_agent.sh -b v|WAZUH_CURRENT_WINDOWS| -s /tmp -r myrevision
+  # ./generate_compiled_windows_agent.sh -s /tmp -r myrevision
 
 .. note::
     The ``-s`` parameter needs an absolute path. In this path you will get the zip with the compiled agent
