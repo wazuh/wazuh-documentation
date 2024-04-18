@@ -15,14 +15,13 @@ This part of the documentation explains how to install, update, and contribute t
     .. toctree::
        :maxdepth: 2
 
-       getting-started
-       update
-       json-decoder
-       custom
-       dynamic-fields
-       ruleset-xml-syntax/index.rst
+       decoders/index
+       rules/index
+       ruleset-xml-syntax/index
        testing
        cdb-list
        mitre
+       getting-started
+       update
        contribute
        rules-classification

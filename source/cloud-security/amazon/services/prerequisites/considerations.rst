@@ -135,9 +135,9 @@ The following example of a ``~/.aws/config`` file sets the supported configurati
    signature_version = s3v4
 
 .. note::
-   All ``s3`` and ``proxy`` configuration sections must start with ``[profile <PROFILE-NAME>]``.
+   All ``s3`` and ``proxy`` configuration sections must start with ``[profile <PROFILE_NAME>]``.
 
-To configure multiple profiles for the integration, declare each profile section in ``~/.aws/config`` with ``[profile <PROFILE-NAME>]``. If you don't declare a profile section in this configuration file, Wazuh uses the ``default`` profile.
+To configure multiple profiles for the integration, declare each profile section in ``~/.aws/config`` with ``[profile <PROFILE_NAME>]``. If you don't declare a profile section in this configuration file, Wazuh uses the ``default`` profile.
 
 Configuring multiple services
 -----------------------------

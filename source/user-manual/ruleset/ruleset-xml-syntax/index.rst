@@ -18,4 +18,3 @@ Ruleset XML syntax
        rules
        regex
        pcre2
-       sibling-decoders

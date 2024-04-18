@@ -147,7 +147,7 @@ The Wazuh agent is a single and lightweight monitoring software. It is a multi-p
         .. rubric:: Next steps
            :class: h2
            
-        Now that the agent is installed, the next step is to enroll the agent with the Wazuh server. For more information about this process, please check the :doc:`/user-manual/agent-enrollment/index` section.
+        Now that the agent is installed, the next step is to enroll the agent with the Wazuh server. For more information about this process, please check the :doc:`/user-manual/agent/agent-enrollment/index` section.
 
         .. raw:: html
 
@@ -279,7 +279,7 @@ The Wazuh agent is a single and lightweight monitoring software. It is a multi-p
         .. rubric:: Next steps
            :class: h2
            
-        Now that the agent is installed, the next step is to enroll the agent with the Wazuh server. For more information about this process, please check the :doc:`/user-manual/agent-enrollment/index` section.
+        Now that the agent is installed, the next step is to enroll the agent with the Wazuh server. For more information about this process, please check the :doc:`/user-manual/agent/agent-enrollment/index` section.
 
         .. raw:: html
 
@@ -362,7 +362,7 @@ The Wazuh agent is a single and lightweight monitoring software. It is a multi-p
         .. rubric:: Next steps
            :class: h2
           
-        Now that the agent is installed, the next step is to enroll the agent with the Wazuh server. For more information about this process, please check the :doc:`/user-manual/agent-enrollment/index` section.
+        Now that the agent is installed, the next step is to enroll the agent with the Wazuh server. For more information about this process, please check the :doc:`/user-manual/agent/agent-enrollment/index` section.
 
         .. raw:: html
 
@@ -503,7 +503,7 @@ The Wazuh agent is a single and lightweight monitoring software. It is a multi-p
         .. rubric:: Next steps
            :class: h2
           
-        Now that the agent is installed, the next step is to enroll the agent with the Wazuh server. For more information about this process, please check the :doc:`/user-manual/agent-enrollment/index` section.
+        Now that the agent is installed, the next step is to enroll the agent with the Wazuh server. For more information about this process, please check the :doc:`/user-manual/agent/agent-enrollment/index` section.
 
         .. raw:: html
 
@@ -635,7 +635,7 @@ The Wazuh agent is a single and lightweight monitoring software. It is a multi-p
         .. rubric:: Next steps
            :class: h2
           
-        Now that the agent is installed, the next step is to enroll the agent with the Wazuh server. For more information about this process, please check the :doc:`/user-manual/agent-enrollment/index` section.
+        Now that the agent is installed, the next step is to enroll the agent with the Wazuh server. For more information about this process, please check the :doc:`/user-manual/agent/agent-enrollment/index` section.
 
         .. raw:: html
 
@@ -840,7 +840,7 @@ The Wazuh agent is a single and lightweight monitoring software. It is a multi-p
                 .. rubric:: Next steps
                    :class: h2
                   
-                Now that the agent is installed, the next step is to enroll the agent with the Wazuh server. For more information about this process, please check the :doc:`/user-manual/agent-enrollment/index` section.
+                Now that the agent is installed, the next step is to enroll the agent with the Wazuh server. For more information about this process, please check the :doc:`/user-manual/agent/agent-enrollment/index` section.
 
                 .. raw:: html
 
@@ -987,7 +987,7 @@ The Wazuh agent is a single and lightweight monitoring software. It is a multi-p
                 .. rubric:: Next steps
                    :class: h2
                   
-                Now that the agent is installed, the next step is to enroll the agent with the Wazuh server. For more information about this process, please check the :doc:`/user-manual/agent-enrollment/index` section.
+                Now that the agent is installed, the next step is to enroll the agent with the Wazuh server. For more information about this process, please check the :doc:`/user-manual/agent/agent-enrollment/index` section.
 
                 .. raw:: html
 

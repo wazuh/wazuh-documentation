@@ -1,44 +1,15 @@
 .. Copyright (C) 2015, Wazuh, Inc.
 
 .. meta::
-  :description: The Wazuh GCP module allows you to collect and process logs from several Google service. Learn more about the supported services in this section.
+   :description: Learn how to use the Wazuh module for Google Cloud to monitor and secure your Google Cloud environment in this section of the documentation.
 
+Configuring the supported services
+==================================
 
-.. _gcp_supported_services:
-
-Supported services
-==================
-
-.. meta::
-  :description: Supported services
-
-The Wazuh GCP module is able to retrieve logs from Google Cloud Pub/Sub and from Google Cloud Storage buckets.
-
-Supported services using Google Cloud Pub/Sub
----------------------------------------------
-
-The following GCP services are supported by the Wazuh GCP module by pulling the data from Google Cloud Pub/Sub:
+You can use the Wazuh module for Google Cloud Pub/Sub and the Wazuh module for Google Cloud Storage to monitor and secure your Google Cloud environment. These modules integrate with the :doc:`Google Cloud Pub/Sub <pubsub>` and :doc:`Google Cloud Storage buckets <cloud-storage-buckets>` services. Using the Wazuh module for Google Cloud Pub/Sub, for example, you can collect and analyze log data from various Google Cloud services, such as Compute Engine, Cloud Firewall, VPC Flow Logs, and more.
 
 .. toctree::
-   :maxdepth: 2
+   :maxdepth: 1
 
-   cloud_audit_logs
-   dns_queries
-   vpc_flow
-   firewall
-   load_balancing
-
-To check the ``gcp-pubsub`` configuration used to pull data from Google Cloud Pub/Sub, see the :doc:`gcp-pubsub </user-manual/reference/ossec-conf/gcp-pubsub>` section.
-
-Supported services using Google Cloud Storage buckets
------------------------------------------------------
-
-The following GCP services are supported by the Wazuh GCP module by pulling the data from Google Cloud Storage buckets:
-
-.. toctree::
-   :maxdepth: 2
-
-   access_logs
-
-To check the `gcp-bucket` configuration used to pull data from Google Cloud Storage buckets, see the :doc:`gcp-bucket </user-manual/reference/ossec-conf/gcp-bucket>` section.
-
+   pubsub
+   cloud-storage-buckets

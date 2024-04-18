@@ -118,7 +118,7 @@ Wazuh dashboard
 - `#6361 <https://github.com/wazuh/wazuh-dashboard-plugins/pull/6361>`__ Removed ``WAZUH_REGISTRATION_SERVER`` variable from Windows agent deployment command.
 - `#6354 <https://github.com/wazuh/wazuh-dashboard-plugins/pull/6354>`__ Added a dash character and a tooltip element to **Run as** in the API configuration table to indicate it's been disabled.
 - `#6364 <https://github.com/wazuh/wazuh-dashboard-plugins/pull/6364>`__ Added tooltip element to **Most active agent** in **Details** in the **Endpoint summary** view and renamed a label element. `#6421 <https://github.com/wazuh/wazuh-dashboard-plugins/pull/6421>`__
-- `#6379 <https://github.com/wazuh/wazuh-dashboard-plugins/pull/6379>`__ Changed overview home top KPIs. `#6408 <https://github.com/wazuh/wazuh-dashboard-plugins/pull/6408>`__
+- `#6379 <https://github.com/wazuh/wazuh-dashboard-plugins/pull/6379>`__ Changed overview home top KPIs. `#6408 <https://github.com/wazuh/wazuh-dashboard-plugins/pull/6408>`__ `#6569 <https://github.com/wazuh/wazuh-dashboard-plugins/pull/6569>`__
 - `#6341 <https://github.com/wazuh/wazuh-dashboard-plugins/pull/6341>`__ Removed notice of old **Discover** deprecation.
 - `#6492 <https://github.com/wazuh/wazuh-dashboard-plugins/pull/6492>`__ Updated the PDF report year number to 2024.
 
@@ -152,6 +152,8 @@ Packages
 - `#2798 <https://github.com/wazuh/wazuh-packages/pull/2798>`_ Add compression for the Wazuh manager due to inclusion of Vulnerability Detection databases.
 - `#2796 <https://github.com/wazuh/wazuh-packages/pull/2796>`_ Simplified the Wazuh dashboard help menu entries.
 - `#2792 <https://github.com/wazuh/wazuh-packages/pull/2792>`_ Improved certificates generation output when using the Wazuh Installation Assistant and the Wazuh Certs Tool.
+- `#2891 <https://github.com/wazuh/wazuh-packages/pull/2891>`_ Skipped certificate validation for CentOS 5 package generation.
+- `#2890 <https://github.com/wazuh/wazuh-packages/pull/2890>`_ Updated the file permissions of vulnerability detection-related directories.
 
 Resolved issues
 ---------------
