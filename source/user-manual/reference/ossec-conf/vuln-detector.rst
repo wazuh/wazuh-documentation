@@ -113,5 +113,5 @@ Example of configuration
       <enabled>yes</enabled>
       <index-status>yes</index-status>
       <feed-update-interval>60m</feed-update-interval>
-      <offline-url> file://path/to/content/file.tar.xz </offline-url> <!-- Optional -->
+      <offline-url>file://path/to/content/file.tar.xz</offline-url> <!-- Optional -->
    </vulnerability-detection>
