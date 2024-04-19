@@ -517,6 +517,20 @@ Set the footer of the PDF reports. To use an empty footer, type a space " " in t
 | **Allowed values** | Any string                 |
 +--------------------+----------------------------+
 
+Configuration
+-------------
+
+configuration.ui_api_editable
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Define the ability to edit the configuration from UI or API endpoints. When disabled, this can only be edited from the configuration file, the related API endpoints are disabled, and the UI is inaccesible.
+
++--------------------+----------------------------+
+| **Default value**  | true                       |
++--------------------+----------------------------+
+| **Allowed values** | true,false                 |
++--------------------+----------------------------+
+
 
 Example
 -------
@@ -589,3 +603,6 @@ This is an example of the wazuh.yml configuration:
     # Enrollment DNS
     enrollment.dns: ''
     enrollment.password: ''
+
+    # Configuration
+    configuration.ui_api_editable: true
