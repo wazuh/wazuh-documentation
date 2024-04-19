@@ -53,7 +53,7 @@ Where:
 - ``<processes>`` enables or disables the scanning for running processes on a monitored endpoint. The default value is ``yes``. The allowed values are ``yes`` and ``no``.
 - ``<max_eps>`` allows you to set the maximum event reporting throughput. The default value is 10, which signifies 10 events per second. The allowed value is an Integer number between 0 and 1000000.
 
-For Windows systems there is also a :ref:`wodle_syscollector_hotfixes` option available.
+In Windows systems, you can use the ``<hotfixes>`` option. Check :ref:`wodle_syscollector_hotfixes` for the details.
 
 .. note::
 
