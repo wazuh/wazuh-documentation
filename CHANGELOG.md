@@ -56,7 +56,7 @@ All notable changes to this project will be documented in this file.
 - Removed implicit ``id!=000`` WQL filter in the search bar. ([#6815](https://github.com/wazuh/wazuh-documentation/pull/6815))
 - Removed launchtl unload step from macOS uninstalling manual. ([#7123](https://github.com/wazuh/wazuh-documentation/pull/7123))
 - Removed Wazuh_rules.pdf references. ([#7142](https://github.com/wazuh/wazuh-documentation/pull/7142))
-- Removed documentation for the vulnerability detection ``allow-os`` option. ([#7177](https://github.com/wazuh/wazuh-documentation/pull/7177))
+- Removed documentation for the ``allow-os`` vulnerability detection option. ([#7177](https://github.com/wazuh/wazuh-documentation/pull/7177))
 
 ## [v4.7.3]
 
