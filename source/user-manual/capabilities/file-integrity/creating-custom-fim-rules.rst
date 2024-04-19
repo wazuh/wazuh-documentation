@@ -325,7 +325,7 @@ Perform the following steps on the Wazuh server.
 
       # touch /var/ossec/etc/rules/fim_win_test.xml
 
-#. Add the following rule definition to the ``/var/ossec/etc/rules/fim_win_test.xml`` file. This rule triggers alerts when a user deletes files with File Explorer. Replace ``USER`` with the username of your Windows endpoint:
+#. Add the following rule definition to the ``/var/ossec/etc/rules/fim_win_test.xml`` file. This rule triggers alerts when a user deletes files with File Explorer. Replace ``<USER>`` with the username of your Windows endpoint:
 
    .. code-block:: xml
       :emphasize-lines: 4,5
@@ -334,7 +334,7 @@ Perform the following steps on the Wazuh server.
         <rule id="100003" level="8">
           <if_sid>553</if_sid>
           <field name="process_name">explorer.exe$</field>
-          <field name="uname">USER$</field>
+          <field name="uname"><USER>$</field>
           <match>deleted</match>
           <description>The user "$(uname)" deleted a monitored file with  File Explorer</description>
           <mitre>
