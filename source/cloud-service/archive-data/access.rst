@@ -14,18 +14,22 @@ To access your archive data, you need an AWS token that grants permission on the
       See the :doc:`Wazuh Cloud CLI </cloud-service/cli/index>` section to learn how to list and download your archive data automatically.
 
 
-The following example describes the steps to follow to list the files of your archive data:
+Generate your API key
+---------------------
+
+To obtain the api key token it is necessary to execute this step described in the `Wazuh Cloud CLI </cloud-service/cli/index>` section.
 
 
-1. Before your start using the Wazuh Cloud API, you need an API key. To generate your API key, see the :ref:`Authentication <cloud_apis_auth>` section.
+Get the AWS token
+------------------
 
-2. Use the ``POST /storage/token`` endpoint of the :cloud-api-ref:`Wazuh Cloud API <tag/storage>` to get the AWS token and access the archive data of a specific environment. In this example, we generate an AWS token valid for 3600 seconds for environment `0123456789ab`.
+Use the ``POST /storage/token`` endpoint of the :cloud-api-ref:`Wazuh Cloud API <tag/storage>` to get the AWS token and access the archive data of a specific environment. In this example, we generate an AWS token valid for 3600 seconds for environment `012345678ab`.
 
    .. code-block::
 
       curl -XPOST https://api.cloud.wazuh.com/v2/storage/token -H "x-api-key: <YOUR_API_KEY>" -H "Content-Type: application/json" --data '
       {
-         "environment_cloud_id": "0123456789ab",
+         "environment_cloud_id": "012345678ab",
          "token_expiration": "3600"
       }'
 
@@ -33,9 +37,9 @@ The following example describes the steps to follow to list the files of your ar
       :class: output
 
       {
-         "environment_cloud_id": "0123456789ab",
+         "environment_cloud_id": "012345678ab",
          "aws": {
-            "s3_path": "wazuh-cloud-cold-us-east-1/0123456789ab",
+            "s3_path": "wazuh-cloud-cold-us-east-1/012345678ab",
             "region": "us-east-1",
             "credentials": {
                "access_key_id": "mUdT2dBjlHd...Gh7Ni1yZKR5If",
@@ -46,7 +50,12 @@ The following example describes the steps to follow to list the files of your ar
          }
       }
 
-3. Using the AWS-CLI tool to list the files, add the token to the AWS credentials file ``~/.aws/credentials``.
+
+
+Generate AWS `wazuh_cloud_storage` profile
+----------------------------------------
+
+Add the token to the AWS credentials file ``~/.aws/credentials``.
 
    .. code-block:: console
       
@@ -55,10 +64,36 @@ The following example describes the steps to follow to list the files of your ar
       aws_secret_access_key = qEzCk63a224...5aB+e4fC1BR0G
       aws_session_token = MRg3t7HIuoA...4o4BXSAcPfUD8
 
-4. Run the following command to list your files.
 
-   .. code-block:: console
-      
-      $ aws --profile wazuh_cloud_storage --region us-east-1 s3 ls wazuh-cloud-cold-us-east-1/0123456789ab
+Listing archive data
+---------------------
 
-You now have access to your archive data.
+This command lists the archive data files of the environment `012345678ab`.
+
+.. code-block:: console
+
+  # aws --profile wazuh_cloud_storage --region us-east-1 s3 ls --recursive s3://wazuh-cloud-cold-us-east-1/012345678ab/
+
+.. code-block:: none
+  :class: output
+
+  2024-04-19 17:50:06        493 012345678ab/output/alerts/2024/04/19/012345678ab_output_alerts_20240419T2050_VqaWCpX9oPfDkRpD.json.gz
+  2024-04-19 18:00:05      77759 012345678ab/output/alerts/2024/04/19/012345678ab_output_alerts_20240419T2100_kdBY42OvE9QJuiia.json.gz
+
+Examples
+--------
+
+Downloading archive data
+^^^^^^^^^^^^^^^^^^^^^^^^^
+
+This command downloads in the `/home/test` directory the archive data files of the environment `012345678ab` between the specified dates.
+
+.. code-block:: console
+
+  # aws --profile wazuh_cloud_storage --region us-east-1 s3 cp --recursive s3://wazuh-cloud-cold-us-east-1/012345678ab/ /home/test/
+
+.. code-block:: none
+  :class: output
+
+  download: s3://wazuh-cloud-cold-us-east-1/012345678ab/output/alerts/2024/04/19/012345678ab_output_alerts_20240419T2050_VqaWCpX9oPfDkRpD.json.gz to output/alerts/2024/04/19/012345678ab_output_alerts_20240419T2050_VqaWCpX9oPfDkRpD.json.gz
+  download: s3://wazuh-cloud-cold-us-east-1/012345678ab/output/alerts/2024/04/19/012345678ab_output_alerts_20240419T2100_kdBY42OvE9QJuiia.json.gz to output/alerts/2024/04/19/012345678ab_output_alerts_20240419T2100_kdBY42OvE9QJuiia.json.gz
