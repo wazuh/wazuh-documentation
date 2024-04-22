@@ -83,10 +83,10 @@ This command lists the archive data files of the environment `012345678ab`.
 Examples
 --------
 
-Downloading archive data
-^^^^^^^^^^^^^^^^^^^^^^^^^
+Downloading archive data (multiple files)
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-This command downloads in the `/home/test` directory the archive data files of the environment `012345678ab` between the specified dates.
+This command downloads in the `/home/test` directory the archive data files of the environment `012345678ab`.
 
 .. code-block:: console
 
@@ -97,3 +97,17 @@ This command downloads in the `/home/test` directory the archive data files of t
 
   download: s3://wazuh-cloud-cold-us-east-1/012345678ab/output/alerts/2024/04/19/012345678ab_output_alerts_20240419T2050_VqaWCpX9oPfDkRpD.json.gz to output/alerts/2024/04/19/012345678ab_output_alerts_20240419T2050_VqaWCpX9oPfDkRpD.json.gz
   download: s3://wazuh-cloud-cold-us-east-1/012345678ab/output/alerts/2024/04/19/012345678ab_output_alerts_20240419T2100_kdBY42OvE9QJuiia.json.gz to output/alerts/2024/04/19/012345678ab_output_alerts_20240419T2100_kdBY42OvE9QJuiia.json.gz
+
+
+Downloading archive data (single file)
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+This command downloads in the directory `/home/test` the file `012345678ab_output_alerts_20240419T2050_VqaWCpX9oPfDkRpD.json.gz` from the environment `012345678ab`.
+
+.. code-block:: console
+
+  # aws --profile wazuh_cloud_storage --region us-east-1 s3 cp --recursive s3://wazuh-cloud-cold-us-east-1/012345678ab/012345678ab_output_alerts_20240419T2050_VqaWCpX9oPfDkRpD.json.gz /home/test/
+
+.. code-block:: none
+  :class: output
+
+  download: s3://wazuh-cloud-cold-us-east-1/012345678ab/output/alerts/2024/04/19/012345678ab_output_alerts_20240419T2050_VqaWCpX9oPfDkRpD.json.gz to ./012345678ab_output_alerts_20240419T2050_VqaWCpX9oPfDkRpD.json.gz
