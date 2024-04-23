@@ -45,14 +45,14 @@ Wazuh dashboard
 - `#6268 <https://github.com/wazuh/wazuh-dashboard-plugins/pull/6268>`__ Refactored the **Endpoints Summary** charts.
 - `#6250 <https://github.com/wazuh/wazuh-dashboard-plugins/pull/6250>`__ Added agent groups edition to **Endpoints Summary**. `#6274 <https://github.com/wazuh/wazuh-dashboard-plugins/pull/6274>`__
 - `#6476 <https://github.com/wazuh/wazuh-dashboard-plugins/pull/6476>`__ Added a filter to select outdated agents and the **Upgrade** agent action to **Endpoints Summary**. `#6501 <https://github.com/wazuh/wazuh-dashboard-plugins/pull/6501>`__ `#6529 <https://github.com/wazuh/wazuh-dashboard-plugins/pull/6529>`__
-- `#6337 <https://github.com/wazuh/wazuh-dashboard-plugins/pull/6337>`__ Changed the way the configuration is defined and stored.
+- `#6337 <https://github.com/wazuh/wazuh-dashboard-plugins/pull/6337>`__ Changed the way the configuration is managed in the backend side. `#6519 <https://github.com/wazuh/wazuh-dashboard-plugins/pull/6519>`__ `#6573 <https://github.com/wazuh/wazuh-dashboard-plugins/pull/6573>`__
 - `#6337 <https://github.com/wazuh/wazuh-dashboard-plugins/pull/6337>`__ Added a migration task to setup the configuration using a configuration file.
-- `#6337 <https://github.com/wazuh/wazuh-dashboard-plugins/pull/6337>`__ Added the ability to manage the API hosts from the Server APIs. `#6519 <https://github.com/wazuh/wazuh-dashboard-plugins/pull/6519>`__
 - `#6337 <https://github.com/wazuh/wazuh-dashboard-plugins/pull/6337>`__ Moved the content of the **API is down** and **Check connection** views to the **Server APIs** view.
 - `#6545 <https://github.com/wazuh/wazuh-dashboard-plugins/pull/6545>`__ Added macOS log collection tab.
 - `#6481 <https://github.com/wazuh/wazuh-dashboard-plugins/pull/6481>`__ Removed the ``GET /api/timestamp`` API endpoint.
 - `#6481 <https://github.com/wazuh/wazuh-dashboard-plugins/pull/6481>`__ Removed the ``PUT /api/update-hostname/{id}`` API endpoint.
 - `#6481 <https://github.com/wazuh/wazuh-dashboard-plugins/pull/6481>`__ Removed the ``DELETE /hosts/remove-orphan-entries`` API endpoint.
+- `#6573 <https://github.com/wazuh/wazuh-dashboard-plugins/pull/6573>`__ Enhanced the validation for ``enrollment.dns`` on App Settings application.
 
 Resolved issues
 ---------------
@@ -109,6 +109,7 @@ Wazuh dashboard
 Reference                                                                    Description
 =========================================================================    =============
 `#6237 <https://github.com/wazuh/wazuh-dashboard-plugins/pull/6237>`__       Fixed disappearing scripted fields when index pattern fields refreshed.
+`#6573 <https://github.com/wazuh/wazuh-dashboard-plugins/pull/6573>`__       
 =========================================================================    =============
 
 Changelogs
