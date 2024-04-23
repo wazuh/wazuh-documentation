@@ -8,6 +8,21 @@
 
 This section lists the changes in version 4.7.4. Every update of the Wazuh solution is cumulative and includes all enhancements and fixes from previous releases.
 
+Resolved issues
+---------------
+
+This release resolves known issues as the following: 
+
+Wazuh manager
+^^^^^^^^^^^^^
+
+==============================================================     =============
+Reference                                                          Description
+==============================================================     =============
+`#22933 <https://github.com/wazuh/wazuh/pull/22933>`__             Fixed wazuh-db not clearing labels from deleted agents.
+`#22994 <https://github.com/wazuh/wazuh/pull/22994>`__             Improved stability by ensuring workers resume normal operations even during master node downtime.
+==============================================================     =============
+
 Changelogs
 ----------
 
