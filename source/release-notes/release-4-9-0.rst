@@ -109,7 +109,6 @@ Wazuh dashboard
 Reference                                                                    Description
 =========================================================================    =============
 `#6237 <https://github.com/wazuh/wazuh-dashboard-plugins/pull/6237>`__       Fixed disappearing scripted fields when index pattern fields refreshed.
-`#6573 <https://github.com/wazuh/wazuh-dashboard-plugins/pull/6573>`__       
 =========================================================================    =============
 
 Changelogs
