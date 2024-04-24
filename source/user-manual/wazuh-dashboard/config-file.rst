@@ -523,7 +523,7 @@ Configuration
 configuration.ui_api_editable
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-Define the ability to edit the configuration from UI or API endpoints. When disabled, this can only be edited from the configuration file, the related API endpoints are disabled, and the UI is inaccesible.
+Define the ability to edit the configuration from UI or API endpoints. When disabled, this can only be edited from the configuration file, the related API endpoints are disabled, and the UI is inaccessible.
 
 +--------------------+----------------------------+
 | **Default value**  | true                       |
