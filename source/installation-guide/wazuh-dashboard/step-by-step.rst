@@ -99,20 +99,20 @@ Starting the Wazuh dashboard service
       .. include:: /_templates/installations/dashboard/enable_dashboard.rst
 
       
-      **Only for distributed deployments**  
+       
       
-          Edit the ``/usr/share/wazuh-dashboard/data/wazuh/config/wazuh.yml`` file and replace the ``url`` value with the IP address or hostname of the Wazuh server master node.
-          
-            .. code-block:: yaml
-               :emphasize-lines: 3
-            
-               hosts:
-                 - default:
-                     url: https://localhost
-                     port: 55000
-                     username: wazuh-wui
-                     password: wazuh-wui
-                     run_as: false
+  #. Edit the ``/usr/share/wazuh-dashboard/data/wazuh/config/wazuh.yml`` file and replace the ``url`` value with the IP address or hostname of the Wazuh server master node.
+   
+      .. code-block:: yaml
+         :emphasize-lines: 3
+      
+         hosts:
+            - default:
+               url: https://<wazuh_server_ip>
+               port: 55000
+               username: wazuh-wui
+               password: wazuh-wui
+               run_as: false
 
 
   #. Access the Wazuh web interface with your credentials.
