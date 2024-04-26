@@ -43,11 +43,26 @@ Options
 location
 ^^^^^^^^
 
-The location field specifies where the log data comes from. This can be a path to a log file, a Windows event channel, macos, or a journald system.
+The ``location`` field specifies where the log data comes from. It includes the following options.
 
-Option to get the location of a log or a group of logs. ``strftime`` format strings may be used for log file names.
+-  A path to a log file
+-  A Windows event channel
+-  The macOS ULS
+-  The ``journald`` system
 
-For instance, a log file named ``file.log-2019-07-30`` can be referenced with ``file.log-%Y-%m-%d`` (assuming today is July 30th, 2019).
++--------------------+----------------------------------------------------------+
+| **Default value**  | n/a                                                      |
++--------------------+----------------------------------------------------------+
+| **Allowed values** | File path, Event channel, ``macos``, ``journald``        |
++--------------------+----------------------------------------------------------+
+
+.. note::
+
+   -  To collect logs from the macOS ULS, you must set both ``location`` and ``log_format`` to ``macos``.
+   -  To collect logs from the ``journald`` system, you must set both ``location`` and ``log_format`` to ``journald``.
+
+For log file names, you can use ``strftime`` format strings. For example, you can reference a log file named ``file.log-2024-04-26`` by ``file.log-%Y-%m-%d``.
+
 
 Wildcards can be used on Linux and Windows systems, if the log file doesn't exist at ``wazuh-logcollector`` start time, such log will be re-scanned after ``logcollector.vcheck_files`` seconds.
 
@@ -98,8 +113,6 @@ Below we have some Windows wildcard examples.
 
   * On Windows systems, only character ``*`` is supported as a wildcard. For instance ``*ANY_STRING*``, will match all files that have ``ANY_STRING`` inside its name, another example is ``*.log`` this will match any log file.
   * The maximum amount of files monitored at same time is limited to 1000.
-  * When setting ``log_format`` to ``macos``, ``location`` should also be set to ``macos``.
-  * When setting ``log_format`` to ``journald``, ``location`` should also be set to ``journald``.
 
 .. _command:
 
@@ -337,9 +350,7 @@ Set the format of the log to be read. **field is required**
 |                    |                    | Monitors all the logs that match the query filter.                                               |
 |                    |                    | See :ref:`How to collect macOS ULS logs <how-to-collect-macoslogs>`.                             |
 +                    +--------------------+--------------------------------------------------------------------------------------------------+
-|                    | journald           | Used to monitor all systemd-journal events, collecting them in syslog format.                    |
-|                    |                    |                                                                                                  |
-|                    |                    | See `How to collect systemd-joyrnald logs <how-to-collect-journald>`.                            |
+|                    | journald           | Required to monitor systemd-journal events. Events are collected in syslog format.               |
 +                    +--------------------+--------------------------------------------------------------------------------------------------+
 |                    | audit              | Used for events from Auditd.                                                                     |
 |                    |                    |                                                                                                  |
@@ -681,17 +692,18 @@ For example, to restrict syslog events related to a particular user name:
 filter
 ^^^^^^
 
-The `filter` tag is used to include PCRE2 regex filters for selectively collecting logs based on specific fields within `journald`.
-Each filter must specify a field and a regex pattern. The `ignore_if_missing` attribute can be used to indicate whether to ignore logs where the specified field is missing.
+Collects ``journald`` logs selectively by filtering specific fields.
+
+You must specify a PCRE2 regex pattern as your filter. Use the ``field`` attribute to define the journald field where to apply the regular expression.
 
 
 +--------------------+---------------------------------------------------------------+
 | **Default Value**  | n/a                                                           |
 +--------------------+---------------------------------------------------------------+
-| **Allowed values** | Any `PCRE2 <regex.html#pcre2-syntax>`_ expression.            |
+| **Allowed values** | Any :ref:`PCRE2 <pcre2_syntax>` expression.                   |
 +--------------------+---------------------------------------------------------------+
 
-Use the `field` attribute to define in which journald field to apply the regex (Mandatory).
+You can use the ``ignore_if_missing`` attribute to ignore logs without the specified field.
 
 +-----------------------+--------------------------------------------------------------------------------------------------------------+
 | **ignore_if_missing** | When the attribute `ignore_if_missing` is set to `yes` it ignores the filter if the field does not exist.    |
