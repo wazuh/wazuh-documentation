@@ -102,11 +102,6 @@ Below we have some Windows wildcard examples.
       <log_format>syslog</log_format>
   </localfile>
 
-+--------------------+--------------------------+
-| **Default value**  | n/a                      |
-+--------------------+--------------------------+
-| **Allowed values** | Any log file or wildcard |
-+--------------------+--------------------------+
 
 .. note::
   * ``strftime`` format strings and wildcards cannot be used on the same entry.
@@ -707,6 +702,7 @@ You can use the ``ignore_if_missing`` attribute to ignore logs without the speci
 
 +-----------------------+--------------------------------------------------------------------------------------------------------------+
 | **ignore_if_missing** | When the attribute `ignore_if_missing` is set to `yes` it ignores the filter if the field does not exist.    |
+|                       | If is set to `no` and the field does not exist, the filter will fail and the log will be ignored.            |
 +                       +------------------+-------------------------------------------------------------------------------------------+
 |                       | Default value    | no                                                                                        |
 |                       +------------------+-------------------------------------------------------------------------------------------+
@@ -714,11 +710,19 @@ You can use the ``ignore_if_missing`` attribute to ignore logs without the speci
 +-----------------------+------------------+-------------------------------------------------------------------------------------------+
 
 
-Configuration example:
+In the following example configuration the journald logs will be collected if any of the following conditions are met:
+  - Field `_SYSTEMD_UNIT` exists and its value is `ssh.service`.
+  - Field `_SYSTEMD_UNIT` exists and its value is `cron.service` and if the field `PRIORITY` exists, it has the value 0,1,2 or 3.
 
 .. code-block:: xml
 
     <!-- For monitoring log files -->
+    <localfile>
+      <location>journald</location>
+      <log_format>journald</log_format>
+      <filter field="_SYSTEMD_UNIT">^ssh.service$</filter>
+    <localfile>
+
     <localfile>
       <location>journald</location>
       <log_format>journald</log_format>
