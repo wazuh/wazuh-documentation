@@ -114,6 +114,300 @@ HAProxy Installation
 
 .. How to install HAProxy? configurations, packages, docker images
 
+The recommended version, that we currently test, is the 2.8 LTS.
+
+There are two main ways to install HAProxy, using `packages <https://github.com/haproxy/wiki/wiki/Packages>`_ or docker `images <https://hub.docker.com/_/haproxy/tags>`_.
+
+Once installed, regardless of the method, it is needed to do some configurations to get the proxy working with the expectations of the helper.
+
+1. HAProxy configuration
+
+The HAProxy configuration, present in the ``<HAPROXY_INSTALLATION_PATH>/haproxy.cfg`` must at least have some sections covered:
+
+    - Wazuh agents registration front and backend:
+
+    .. code-block:: console
+
+        frontend wazuh_register
+            mode tcp
+            bind :1515
+            default_backend wazuh_register
+
+        backend wazuh_register
+            mode tcp
+            balance leastconn
+            server master_register <WAZUH_REGISTRY_HOST>:1515 check
+
+    - Consistent HAProxy Dataplane API credentials:
+
+    .. code-block:: console
+
+        userlist haproxy-dataplaneapi
+            user <DATAPLANE_USER> insecure-password <DATAPLANE_PASSWORD>
+
+    - Configured PID file and stats socket (with ``level admin``):
+
+    .. code-block:: console
+
+        global
+            pidfile     /var/run/haproxy.pid
+            stats socket /var/lib/haproxy/stats level admin
+
+    - Accessible stats page (optional):
+
+    .. code-block:: console
+
+        frontend stats
+            bind *:9000
+            stats enable
+            stats uri /stats
+            stats refresh 5s
+            stats admin if TRUE
+            option httplog
+
+Also, it will be needed an init script to manage the HAProxy service. Below we provide an example that can be used.
+
+.. code-block:: bash
+
+    #!/bin/sh
+    ### BEGIN INIT INFO
+    # Provides:          haproxy
+    # Required-Start:    $local_fs $network $remote_fs $syslog $named
+    # Required-Stop:     $local_fs $remote_fs $syslog $named
+    # Default-Start:     2 3 4 5
+    # Default-Stop:      0 1 6
+    # Short-Description: fast and reliable load balancing reverse proxy
+    # Description:       This file should be used to start and stop haproxy.
+    ### END INIT INFO
+
+    # Author: Arnaud Cornet <acornet@debian.org>
+
+    PATH=/sbin:/usr/sbin:/bin:/usr/bin
+    BASENAME=haproxy
+    PIDFILE=/var/run/${BASENAME}.pid
+    CONFIG=/etc/${BASENAME}/conf.d/
+    HAPROXY=/usr/sbin/haproxy
+    RUNDIR=/run/${BASENAME}
+    EXTRAOPTS=
+
+    # Load env vars
+    export $(grep -v '^#' .env-file | xargs)
+
+    test -x $HAPROXY || exit 0
+
+    if [ -e /etc/default/${BASENAME} ]; then
+        . /etc/default/${BASENAME}
+    fi
+
+    test -d "$CONFIG" || exit 0
+
+    [ -f /etc/default/rcS ] && . /etc/default/rcS
+    . /lib/lsb/init-functions
+
+
+    check_haproxy_config()
+    {
+        $HAPROXY -c -f "$CONFIG" $EXTRAOPTS >/dev/null
+        if [ $? -eq 1 ]; then
+            log_end_msg 1
+            exit 1
+        fi
+    }
+
+    haproxy_start()
+    {
+        [ -d "$RUNDIR" ] || mkdir "$RUNDIR"
+        chown haproxy:haproxy "$RUNDIR"
+        chmod 2775 "$RUNDIR"
+
+        check_haproxy_config
+
+        start-stop-daemon --quiet --oknodo --start --pidfile "$PIDFILE" \
+            --exec $HAPROXY -- -f "$CONFIG" -D -p "$PIDFILE" \
+            $EXTRAOPTS || return 2
+        return 0
+    }
+
+    haproxy_stop()
+    {
+        if [ ! -f $PIDFILE ] ; then
+            # This is a success according to LSB
+            return 0
+        fi
+
+        ret=0
+        tmppid="$(mktemp)"
+
+        # HAProxy's pidfile may contain multiple PIDs, if nbproc > 1, so loop
+        # over each PID. Note that start-stop-daemon has a --pid option, but it
+        # was introduced in dpkg 1.17.6, post wheezy, so we use a temporary
+        # pidfile instead to ease backports.
+        for pid in $(cat $PIDFILE); do
+            echo "$pid" > "$tmppid"
+            start-stop-daemon --quiet --oknodo --stop \
+                --retry 5 --pidfile "$tmppid" --exec $HAPROXY || ret=$?
+        done
+
+        rm -f "$tmppid"
+        [ $ret -eq 0 ] && rm -f $PIDFILE
+
+        return $ret
+    }
+
+    haproxy_reload()
+    {
+        check_haproxy_config
+
+        $HAPROXY -f "$CONFIG" -p $PIDFILE -sf $(cat $PIDFILE) -D $EXTRAOPTS \
+            || return 2
+        return 0
+    }
+
+    haproxy_status()
+    {
+        if [ ! -f $PIDFILE ] ; then
+            # program not running
+            return 3
+        fi
+
+        for pid in $(cat $PIDFILE) ; do
+            if ! ps --no-headers p "$pid" | grep haproxy > /dev/null ; then
+                # program running, bogus pidfile
+                return 1
+            fi
+        done
+
+        return 0
+    }
+
+
+    case "$1" in
+    start)
+        log_daemon_msg "Starting haproxy" "${BASENAME}"
+        haproxy_start
+        ret=$?
+        case "$ret" in
+        0)
+            log_end_msg 0
+            ;;
+        1)
+            log_end_msg 1
+            echo "pid file '$PIDFILE' found, ${BASENAME} not started."
+            ;;
+        2)
+            log_end_msg 1
+            ;;
+        esac
+        exit $ret
+        ;;
+    stop)
+        log_daemon_msg "Stopping haproxy" "${BASENAME}"
+        haproxy_stop
+        ret=$?
+        case "$ret" in
+        0|1)
+            log_end_msg 0
+            ;;
+        2)
+            log_end_msg 1
+            ;;
+        esac
+        exit $ret
+        ;;
+    reload|force-reload)
+        log_daemon_msg "Reloading haproxy" "${BASENAME}"
+        haproxy_reload
+        ret=$?
+        case "$ret" in
+        0|1)
+            log_end_msg 0
+            ;;
+        2)
+            log_end_msg 1
+            ;;
+        esac
+        exit $ret
+        ;;
+    restart)
+        log_daemon_msg "Restarting haproxy" "${BASENAME}"
+        haproxy_stop
+        haproxy_start
+        ret=$?
+        case "$ret" in
+        0)
+            log_end_msg 0
+            ;;
+        1)
+            log_end_msg 1
+            ;;
+        2)
+            log_end_msg 1
+            ;;
+        esac
+        exit $ret
+        ;;
+    status)
+        haproxy_status
+        ret=$?
+        case "$ret" in
+        0)
+            echo "${BASENAME} is running."
+            ;;
+        1)
+            echo "${BASENAME} dead, but $PIDFILE exists."
+            ;;
+        *)
+            echo "${BASENAME} not running."
+            ;;
+        esac
+        exit $ret
+        ;;
+    *)
+        echo "Usage: /etc/init.d/${BASENAME} {start|stop|reload|restart|status}"
+        exit 2
+        ;;
+    esac
+
+    :
+
+Start the HAProxy service.
+
+.. code-block:: console
+
+    service haproxy start
+
+2. Dataplane API configuration
+
+The Dataplane API is used by the helper to communicate with HAProxy and update the configuration according to the changes in the Wazuh cluster.
+
+This is the basic configuration (``<HAPROXY_INSTALLATION_PATH/dataplaneapi.yml>``) to enable it:
+
+.. code-block:: yaml
+
+    dataplaneapi:
+        host: 0.0.0.0
+        port: 5555
+        transaction:
+            transaction_dir: /tmp/haproxy
+        user:
+          - insecure: true
+            password: <DATAPLANE_PASSWORD>
+            name: <DATAPLANE_USER>
+    haproxy:
+        config_file: /etc/haproxy/conf.d/haproxy.cfg
+        haproxy_bin: /usr/sbin/haproxy
+        reload:
+            reload_delay: 5
+            reload_cmd: service haproxy reload
+            restart_cmd: service haproxy restart
+
+And start the process with:
+
+.. code-block:: console
+
+    dataplaneapi -f <HAPROXY_INSTALLATION_PATH/dataplaneapi.yml>
+
+
 .. _cluster_agents_connections:
 
 Agents connections
