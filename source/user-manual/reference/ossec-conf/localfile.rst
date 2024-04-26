@@ -63,7 +63,6 @@ The ``location`` field specifies where the log data comes from. It includes the 
 
 For log file names, you can use ``strftime`` format strings. For example, you can reference a log file named ``file.log-2024-04-26`` by ``file.log-%Y-%m-%d``.
 
-
 Wildcards can be used on Linux and Windows systems, if the log file doesn't exist at ``wazuh-logcollector`` start time, such log will be re-scanned after ``logcollector.vcheck_files`` seconds.
 
 The location field is also valid to filter by channel in case of using an ``eventchannel`` supporting Windows.
@@ -101,7 +100,6 @@ Below we have some Windows wildcard examples.
       <location>C:\logs\file-%Y-%m-%d.log</location>
       <log_format>syslog</log_format>
   </localfile>
-
 
 .. note::
   * ``strftime`` format strings and wildcards cannot be used on the same entry.
@@ -691,28 +689,27 @@ Collects ``journald`` logs selectively by filtering specific fields.
 
 You must specify a PCRE2 regex pattern as your filter. Use the ``field`` attribute to define the journald field where to apply the regular expression.
 
-
 +--------------------+---------------------------------------------------------------+
 | **Default Value**  | n/a                                                           |
 +--------------------+---------------------------------------------------------------+
 | **Allowed values** | Any :ref:`PCRE2 <pcre2_syntax>` expression.                   |
 +--------------------+---------------------------------------------------------------+
 
-You can use the ``ignore_if_missing`` attribute to ignore logs without the specified field.
+You can use the ``ignore_if_missing`` attribute to ignore the filtering condition for logs without the specified field.
 
 +-----------------------+--------------------------------------------------------------------------------------------------------------+
-| **ignore_if_missing** | When the attribute `ignore_if_missing` is set to `yes` it ignores the filter if the field does not exist.    |
-|                       | If is set to `no` and the field does not exist, the filter will fail and the log will be ignored.            |
+| **ignore_if_missing** | When set to ``yes``, it accepts logs without the specified field. Conversely, when set to ``no``,            |
+|                       | logs without the specified field fail to meet the filtering criteria and are disregarded.                    |
 +                       +------------------+-------------------------------------------------------------------------------------------+
 |                       | Default value    | no                                                                                        |
 |                       +------------------+-------------------------------------------------------------------------------------------+
 |                       | Allowed values   | no, yes                                                                                   |
 +-----------------------+------------------+-------------------------------------------------------------------------------------------+
 
+In the following configuration example Wazuh collects the ``journald`` logs if any of the following conditions are met.
 
-In the following example configuration the journald logs will be collected if any of the following conditions are met:
-  - Field `_SYSTEMD_UNIT` exists and its value is `ssh.service`.
-  - Field `_SYSTEMD_UNIT` exists and its value is `cron.service` and if the field `PRIORITY` exists, it has the value 0,1,2 or 3.
+-  The field ``_SYSTEMD_UNIT`` is present with the value ``ssh.service``.
+-  The field ``_SYSTEMD_UNIT`` is present with the value ``cron.service`` and the field ``PRIORITY`` is present with the value ``0``, ``1``, ``2``, or ``3``.
 
 .. code-block:: xml
 
@@ -731,7 +728,8 @@ In the following example configuration the journald logs will be collected if an
     <localfile>
 
 .. note::
-    Filters within the same `<localfile>` block follow an AND logic, while multiple blocks are evaluated in OR logic regarding log collection.
+
+   Filters within the same ``<localfile>`` block follow an AND logic, while multiple blocks are evaluated in OR logic regarding log collection.
 
 
 Configuration examples
