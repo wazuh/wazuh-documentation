@@ -3,8 +3,8 @@
 .. meta::
   :description: Wazuh 4.7.4 has been released. Check out our release notes to discover the changes and additions of this release.
 
-4.7.4 Release notes - TBD
-==================================
+4.7.4 Release notes - 29 April 2024
+===================================
 
 This section lists the changes in version 4.7.4. Every update of the Wazuh solution is cumulative and includes all enhancements and fixes from previous releases.
 
