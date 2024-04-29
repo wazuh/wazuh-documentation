@@ -2,7 +2,7 @@
 
 .. meta::
   :description: Learn more about the agent upgrade module of Wazuh, responsible for carrying out the entire agent upgrade process remotely. 
-  
+
 .. _agent-upgrade-module:
 
 Agent upgrade module
@@ -48,7 +48,9 @@ The module expects 3 parameters:
     |                 +-------------------+---------------+----------+------------------------------+----------------------------------------------------------------------------------+
     |                 | **use_http**      | true, false   | no       | false                        | Whether retrieve the WPK file over http or https                                 |
     |                 +-------------------+---------------+----------+------------------------------+----------------------------------------------------------------------------------+
-    |                 | **force_upgrade** | true, false   | no       | false                        | Forces the agents to upgrade, ignoring version validations                       |
+    |                 | **force_upgrade** | true, false   | no       | false                        | Forces the agents to upgrade, ignoring version and package type validations      |
+    |                 +-------------------+---------------+----------+------------------------------+----------------------------------------------------------------------------------+
+    |                 | **package_type**  | string        | no       | Inferred by the manager      | Specify the type of package to use to upgrade the agents (rpm, deb)              |
     +-----------------+-------------------+---------------+----------+------------------------------+----------------------------------------------------------------------------------+
 
     Example message:
@@ -66,7 +68,8 @@ The module expects 3 parameters:
                 "wpk_repo": "packages.wazuh.com/wpk/",
                 "version": "v4.2.1",
                 "use_http": false,
-                "force_upgrade": false
+                "force_upgrade": false,
+                "package_type": "rpm"
             }
         }
 
