@@ -2,7 +2,7 @@
 
 .. meta::
 	:description: Check out this section about the local configuration of Wazuh and learn about the configuration options of the syscollector wodle.
-	
+
 .. _wodle-syscollector:
 
 wodle name="syscollector"
@@ -78,6 +78,7 @@ Time between system scans.
 | **Default value**  | 1h                                                                                                                                       |
 +--------------------+------------------------------------------------------------------------------------------------------------------------------------------+
 | **Allowed values** | A positive number that should contain a suffix character indicating a time unit, such as, s (seconds), m (minutes), h (hours), d (days). |
+|                    | If a value lower than 60 seconds is configured, it will be automatically adjusted to 60 seconds.                                         |
 +--------------------+------------------------------------------------------------------------------------------------------------------------------------------+
 
 scan_on_start
