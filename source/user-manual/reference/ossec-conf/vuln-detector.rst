@@ -8,7 +8,7 @@ vulnerability-detection
 
 .. note::
 
-   This section applies for 4.8.0 and later versions of the Wazuh. If you are using an older version, this section is called `vulnerability-detector`.
+   This section applies to 4.8.0 and later versions of Wazuh. If you use an older version, this section is called `vulnerability-detector`.
 
 This section covers the configuration for the :doc:`/user-manual/capabilities/vulnerability-detection/index` module.
 
