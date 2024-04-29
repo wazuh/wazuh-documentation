@@ -58,6 +58,10 @@ All notable changes to this project will be documented in this file.
 - Removed Wazuh_rules.pdf references. ([#7142](https://github.com/wazuh/wazuh-documentation/pull/7142))
 - Removed documentation for the ``allow-os`` vulnerability detection option. ([#7177](https://github.com/wazuh/wazuh-documentation/pull/7177))
 
+## [v4.7.4]
+
+- Support for Wazuh 4.7.4
+
 ## [v4.7.3]
 
 - Support for Wazuh 4.7.3
