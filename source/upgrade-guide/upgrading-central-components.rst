@@ -225,7 +225,7 @@ Upgrading the Wazuh dashboard
    To ensure compatibility with the latest Wazuh indexer and Wazuh dashboard, please update manually installed plugins accordingly. For additional information, check the `distribution matrix <https://github.com/wazuh/wazuh-packages/tree/v|WAZUH_CURRENT|#distribution-version-matrix>`__.
 
 #. Upgrade the Wazuh dashboard.
-   
+
    .. tabs::
 
       .. group-tab:: Yum
