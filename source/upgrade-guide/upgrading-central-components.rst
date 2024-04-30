@@ -226,7 +226,6 @@ Upgrading the Wazuh dashboard
 
 
 #. Upgrade the Wazuh dashboard.
-
    
    .. tabs::
 
