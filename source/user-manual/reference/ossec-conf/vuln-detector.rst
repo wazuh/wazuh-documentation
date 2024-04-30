@@ -6,18 +6,18 @@
 vulnerability-detection
 =======================
 
-.. note::
-
-   This section applies to 4.8.0 and later versions of Wazuh. If you use an older version, this section is called `vulnerability-detector`.
-
 This section covers the configuration for the :doc:`/user-manual/capabilities/vulnerability-detection/index` module.
 
 .. topic:: XML section name
 
-	.. code-block:: xml
+   .. note::
 
-		<vulnerability-detection>
-		</vulnerability-detection>
+      In Wazuh 4.8.0, we rename the previous ``<vulnerability-detector>`` tag to ``<vulnerability-detection>``.
+
+   .. code-block:: xml
+
+      <vulnerability-detection>
+      </vulnerability-detection>
 
 Options
 -------
