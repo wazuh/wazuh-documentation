@@ -183,6 +183,13 @@ When upgrading a multi-node Wazuh manager cluster, run the upgrade in every node
 
    .. include:: /_templates/installations/manager/configure_indexer_connection.rst
 
+#. Save the Wazuh indexer username and password into the Wazuh manager keystore using the Wazuh-keystore tool.
+
+   .. code-block:: console
+  
+      # /var/ossec/bin/wazuh-keystore -f indexer -k username -v <INDEXER_USERNAME>
+      # /var/ossec/bin/wazuh-keystore -f indexer -k username -v <INDEXER_PASSWORD>
+
 #. Download the Wazuh module for Filebeat:
 
     .. code-block:: console
