@@ -16,8 +16,8 @@ Keep in mind that this repository is for the Wazuh documentation. There are some
 - If you have **problems, bugs or unexpected results** when using any of the Wazuh components, create the issue in its respective repository:
   - [Wazuh Core](https://github.com/wazuh/wazuh/issues)
   - [Wazuh API](https://github.com/wazuh/wazuh-api/issues)
-  - [Wazuh App](https://github.com/wazuh/wazuh-dashboard-plugins/issues)
-  - [Wazuh Splunk app](https://github.com/wazuh/wazuh-splunk/issues)
+  - [Wazuh Indexer](https://github.com/wazuh/wazuh-indexer/issues)
+  - [Wazuh Dashboard](https://github.com/wazuh/wazuh-dashboard/issues)
   - [All Wazuh repositories](https://github.com/wazuh)
 
 In any case, **don't worry if you create an issue here**, we'll assist you with your problem.
