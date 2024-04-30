@@ -307,7 +307,7 @@ Specifies the cluster nodes to exclude from the agent distribution.
 +--------------------+----------------------------------------------------------------------+
 | **Default value**  | n/a                                                                  |
 +--------------------+----------------------------------------------------------------------+
-| **Allowed values** | Any valid address (IP or DNS) of a cluster node separated by a comma.|
+| **Allowed values** | Any valid name of a cluster node separated by a comma.               |
 +--------------------+----------------------------------------------------------------------+
 
 .. _frequency:
