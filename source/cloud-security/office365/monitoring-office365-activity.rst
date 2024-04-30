@@ -471,11 +471,6 @@ You can expand each alert entry to view additional information about the event t
    :align: center
    :width: 80%
 
-.. thumbnail:: /images/cloud-security/office365/events-visualization-option-expand-alert3.png
-   :title: Office 365 events visualization option – Expand alert
-   :alt: Office 365 events visualization option – Expand alert
-   :align: center
-   :width: 80%
 
 Use cases
 ---------
