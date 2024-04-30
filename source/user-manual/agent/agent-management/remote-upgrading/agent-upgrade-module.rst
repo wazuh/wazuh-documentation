@@ -48,9 +48,10 @@ The module expects 3 parameters:
     |                 +-------------------+---------------+----------+------------------------------+----------------------------------------------------------------------------------+
     |                 | **use_http**      | true, false   | no       | false                        | Whether retrieve the WPK file over http or https                                 |
     |                 +-------------------+---------------+----------+------------------------------+----------------------------------------------------------------------------------+
-    |                 | **force_upgrade** | true, false   | no       | false                        | Forces the agents to upgrade, ignoring version and package type validations      |
+    |                 | **force_upgrade** | true, false   | no       | false                        | Forces the agents to upgrade, ignoring package type and version validations      |
     |                 +-------------------+---------------+----------+------------------------------+----------------------------------------------------------------------------------+
-    |                 | **package_type**  | string        | no       | Inferred by the manager      | Specify the type of package to use to upgrade the agents (rpm, deb)              |
+    |                 | **package_type**  | string        | no       | Manager-inferred             | Specify the type of package to use to upgrade the agents (rpm, deb),             |
+    |                 |                   |               |          |                              | especially useful for upgrading unrecognized system platforms                    |
     +-----------------+-------------------+---------------+----------+------------------------------+----------------------------------------------------------------------------------+
 
     Example message:

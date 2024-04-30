@@ -14,10 +14,10 @@ WPK files must be named using the following pattern:
     wazuh_agent_W_X_Y.Z.wpk
 
 Where:
-    - W is the version of the release,
-    - X is the name of the operating system,
-    - Y is the machine's architecture, and
-    - Z is the type of package included in the WPK file.
+    - ``W`` represents the release version.
+    - ``X`` denotes the target operating system.
+    - ``Y`` indicates the machine architecture. Empty for Windows.
+    - ``Z`` represents the package type included in the WPK file. Empty for Windows.
 
 For instance:
 
@@ -52,4 +52,4 @@ Every folder must contain a file named ``versions`` that lists each version repr
     v4.9.0 df5397c8c4a1b29c42726dfa821330fa1bac7058
 
 
-This repository structure is necessary for the manager to check the agent OS, version, architecture, and type of package and look for the correct upgrade package. For example, for an agent installed on Centos 7 x86_64, the manager will look for the latest package in *our_wpk_repo/linux/rpm/x86_64/*.
+The Wazuh manager checks the agent OS, architecture, and package type. This repository structure helps the manager look for the correct upgrade package. For example, for an agent installed on Centos 7 x86_64, the manager looks for the latest package in ``our_wpk_repo/linux/rpm/x86_64/``.
