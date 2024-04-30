@@ -69,6 +69,8 @@ Disable the Syscollector wodle.
 | **Allowed values** | yes, no                     |
 +--------------------+-----------------------------+
 
+.. _syscollector_interval:
+
 interval
 ^^^^^^^^
 
