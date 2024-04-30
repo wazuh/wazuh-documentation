@@ -54,9 +54,9 @@ We recommend creating entirely new certificates for your Wazuh indexer nodes. Pe
       # Wazuh indexer nodes
         indexer:
           - name: <EXISTING_WAZUH_INDEXER_NODE_NAME>
-            ip: <EXISTING_WAZUH_INDEXER_IP>
+            ip: <EXISTING_WAZUH_INDEXER_IP_ADDRESS>
           - name: <NEW_WAZUH_INDEXER_NODE_NAME>
-            ip: <NEW_WAZUH_INDEXER_IP>
+            ip: <NEW_WAZUH_INDEXER_IP_ADDRESS>
 
       # Wazuh server nodes
         server:
@@ -104,7 +104,7 @@ Perform the steps below on one indexer node only.
         # Wazuh indexer nodes
         indexer:
           - name: <NEW_WAZUH_INDEXER_NODE_NAME>
-            ip: <NEW_WAZUH_INDEXER_IP>
+            ip: <NEW_WAZUH_INDEXER_IP_ADDRESS>
 
    Replace the values with your node names and their corresponding IP addresses.
 
@@ -141,9 +141,9 @@ Perform the steps below on one indexer node only.
             # Wazuh indexer nodes
               indexer:
                 - name: <EXISTING_WAZUH_INDEXER_NODE_NAME>
-                  ip: <EXISTING_WAZUH_INDEXER_IP>
+                  ip: <EXISTING_WAZUH_INDEXER_IP_ADDRESS>
                 - name: <NEW_WAZUH_INDEXER_NODE_NAME>
-                  ip: <NEW_WAZUH_INDEXER_IP>
+                  ip: <NEW_WAZUH_INDEXER_IP_ADDRESS>
 
             # Wazuh server nodes
               server:
@@ -248,18 +248,18 @@ All-in-one deployment
    .. code-block:: yaml
       :emphasize-lines: 5, 9, 12
 
-      network.host: "<EXISTING_WAZUH_INDEXER_IP>"
+      network.host: "<EXISTING_WAZUH_INDEXER_IP_ADDRESS>"
       node.name: "<EXISTING_WAZUH_INDEXER_NODE_NAME>"
       cluster.initial_master_nodes:
       - "<EXISTING_WAZUH_INDEXER_NODE_NAME>"
-      - "<NEW-WAZUH-INDEXER-NODE-NAME>"
+      - "<NEW_WAZUH_INDEXER_NODE_NAME>"
       cluster.name: "wazuh-cluster"
       discovery.seed_hosts:
-        - "<EXISTING_WAZUH_INDEXER_IP>"
-        - "<NEW_WAZUH_INDEXER_IP>"
+        - "<EXISTING_WAZUH_INDEXER_IP_ADDRESS>"
+        - "<NEW_WAZUH_INDEXER_IP_ADDRESS>"
       plugins.security.nodes_dn:
-      - "CN=<EXISTING-WAZUH-INDEXER-NODE-NAME>,OU=Wazuh,O=Wazuh,L=California,C=US"
-      - "CN=<NEW-WAZUH-INDEXER-NODE-NAME>,OU=Wazuh,O=Wazuh,L=California,C=US"
+      - "CN=<EXISTING_WAZUH_INDEXER_NODE_NAME>,OU=Wazuh,O=Wazuh,L=California,C=US"
+      - "CN=<NEW_WAZUH_INDEXER_NODE_NAME>,OU=Wazuh,O=Wazuh,L=California,C=US"
 
 #. Edit the filebeat configuration file ``/etc/filebeat/filebeat.yml`` (In case you are running a distributed deployment, the file is located in the Wazuh server) to add the new Wazuh indexer node(s). Uncomment or add more lines, according to your ``/root/config.yml`` definitions.
 
@@ -267,8 +267,8 @@ All-in-one deployment
       :emphasize-lines: 3
 
       output.elasticsearch.hosts:
-              - <EXISTING_WAZUH_INDEXER_IP>:9200
-              - <NEW_WAZUH_INDEXER_IP>:9200
+              - <EXISTING_WAZUH_INDEXER_IP_ADDRESS>:9200
+              - <NEW_WAZUH_INDEXER_IP_ADDRESS>:9200
       output.elasticsearch:
         protocol: https
         username: ${username}
@@ -278,7 +278,7 @@ All-in-one deployment
 
    .. code-block:: yaml
 
-      opensearch.hosts: ["https://<EXISTING_WAZUH_INDEXER_IP>:9200", "https://<NEW_WAZUH_INDEXER_IP>:9200"]
+      opensearch.hosts: ["https://<EXISTING_WAZUH_INDEXER_IP_ADDRESS>:9200", "https://<NEW_WAZUH_INDEXER_IP_ADDRESS>:9200"]
 
 #. Restart the Wazuh services to apply the changes.
 
@@ -310,18 +310,18 @@ Distributed deployment
    .. code-block:: yaml
       :emphasize-lines: 5, 9, 12
 
-      network.host: "<EXISTING_WAZUH_INDEXER_IP>"
+      network.host: "<EXISTING_WAZUH_INDEXER_IP_ADDRESS>"
       node.name: "<EXISTING_WAZUH_INDEXER_NODE_NAME>"
       cluster.initial_master_nodes:
       - "<EXISTING_WAZUH_INDEXER_NODE_NAME>"
-      - "<NEW-WAZUH-INDEXER-NODE-NAME>"
+      - "<NEW_WAZUH_INDEXER_NODE_NAME>"
       cluster.name: "wazuh-cluster"
       discovery.seed_hosts:
-        - "<EXISTING_WAZUH_INDEXER_IP>"
-        - "<NEW_WAZUH_INDEXER_IP>"
+        - "<EXISTING_WAZUH_INDEXER_IP_ADDRESS>"
+        - "<NEW_WAZUH_INDEXER_IP_ADDRESS>"
       plugins.security.nodes_dn:
       - "CN=indexer,OU=Wazuh,O=Wazuh,L=California,C=US"
-      - "CN=<WAZUH-INDEXER2-NODE-NAME>,OU=Wazuh,O=Wazuh,L=California,C=US"
+      - "CN=<WAZUH_INDEXER2_NODE_NAME>,OU=Wazuh,O=Wazuh,L=California,C=US"
 
 #. Edit the filebeat configuration file ``/etc/filebeat/filebeat.yml`` (the file is located in the Wazuh server) to add the new Wazuh indexer node(s). Uncomment or add more lines, according to your ``/root/config.yml`` definitions.
 
@@ -329,8 +329,8 @@ Distributed deployment
       :emphasize-lines: 3
 
       output.elasticsearch.hosts:
-              - <EXISTING_WAZUH_INDEXER_IP>:9200
-              - <NEW_WAZUH_INDEXER_IP>:9200
+              - <EXISTING_WAZUH_INDEXER_IP_ADDRESS>:9200
+              - <NEW_WAZUH_INDEXER_IP_ADDRESS>:9200
       output.elasticsearch:
         protocol: https
         username: ${username}
@@ -340,7 +340,7 @@ Distributed deployment
 
    .. code-block:: yaml
 
-      opensearch.hosts: ["https://<EXISTING_WAZUH_INDEXER_IP>:9200", "https://<NEW_WAZUH_INDEXER_IP>:9200"]
+      opensearch.hosts: ["https://<EXISTING_WAZUH_INDEXER_IP_ADDRESS>:9200", "https://<NEW_WAZUH_INDEXER_IP_ADDRESS>:9200"]
 
    .. note::
 
@@ -518,8 +518,8 @@ Edit the ``/etc/wazuh-indexer/opensearch.yml`` configuration file and replace th
    .. code-block:: yaml
 
       discovery.seed_hosts:
-        - "<EXISTING_WAZUH_INDEXER_IP>"
-        - "<NEW_WAZUH_INDEXER_IP>"
+        - "<EXISTING_WAZUH_INDEXER_IP_ADDRESS>"
+        - "<NEW_WAZUH_INDEXER_IP_ADDRESS>"
 
 #. ``plugins.security.nodes_dn``: List of the Distinguished Names of the certificates of all the Wazuh indexer cluster nodes. Uncomment the line for ``node-2`` and change the common names (CN) and values according to your settings and your ``/root/config.yml`` definitions:
 
@@ -690,9 +690,9 @@ Run the command below on any of Wazuh indexer nodes and check the output for the
 
    .. code-block:: console
 
-      # curl -XGET https:/<EXISTING_WAZUH_INDEXER_IP>:9200/_cluster/health?pretty -u admin:<admin-password> -k
+      # curl -XGET https:/<EXISTING_WAZUH_INDEXER_IP_ADDRESS>:9200/_cluster/health?pretty -u admin:<ADMIN_PASSWORD> -k
 
-Replace ``<EXISTING_WAZUH_INDEXER_IP>`` by the IP address of any of your indexer nodes and ``<admin-password>`` with your administrator password. The output of the command should be similar to the following:
+Replace ``<EXISTING_WAZUH_INDEXER_IP_ADDRESS>`` by the IP address of any of your indexer nodes and ``<ADMIN_PASSWORD>`` with your administrator password. The output of the command should be similar to the following:
 
    .. code-block:: none
       :class: output

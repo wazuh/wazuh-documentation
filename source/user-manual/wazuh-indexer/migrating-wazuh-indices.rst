@@ -95,11 +95,11 @@ Perform the following steps on the Wazuh indexer node (s) to complete the shared
 
             # apt -y install nfs-common
 
-#. Mount the shared directory ``/mnt/snapshots`` on the Wazuh indexer node(s). Replace the ``<SERVER_IP>`` variable with the IP address of the NFS server:
+#. Mount the shared directory ``/mnt/snapshots`` on the Wazuh indexer node(s). Replace the ``<SERVER_IP_ADDRESS>`` variable with the IP address of the NFS server:
 
    .. code-block:: console
 
-      # mount -t nfs <SERVER_IP>:/mnt/snapshots /mnt/snapshots
+      # mount -t nfs <SERVER_IP_ADDRESS>:/mnt/snapshots /mnt/snapshots
 
 #. Grant the ``wazuh-indexer`` user ownership of the ``/mnt/snapshots`` directory:
 

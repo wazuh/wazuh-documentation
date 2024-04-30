@@ -37,14 +37,31 @@ Options
 - `multiline_regex`_
 - `ignore`_
 - `restrict`_
+- `filter`_
 
 
 location
 ^^^^^^^^
 
-Option to get the location of a log or a group of logs. ``strftime`` format strings may be used for log file names.
+The ``location`` field specifies where the log data comes from. It includes the following options.
 
-For instance, a log file named ``file.log-2019-07-30`` can be referenced with ``file.log-%Y-%m-%d`` (assuming today is July 30th, 2019).
+-  A path to a log file
+-  A Windows event channel
+-  The macOS ULS
+-  The ``journald`` system
+
++--------------------+----------------------------------------------------------+
+| **Default value**  | n/a                                                      |
++--------------------+----------------------------------------------------------+
+| **Allowed values** | File path, Event channel, ``macos``, ``journald``        |
++--------------------+----------------------------------------------------------+
+
+.. note::
+
+   -  To collect logs from the macOS ULS, you must set both ``location`` and ``log_format`` to ``macos``.
+   -  To collect logs from the ``journald`` system, you must set both ``location`` and ``log_format`` to ``journald``.
+
+For log file names, you can use ``strftime`` format strings. For example, you can reference a log file named ``file.log-2024-04-26`` by ``file.log-%Y-%m-%d``.
 
 Wildcards can be used on Linux and Windows systems, if the log file doesn't exist at ``wazuh-logcollector`` start time, such log will be re-scanned after ``logcollector.vcheck_files`` seconds.
 
@@ -84,20 +101,11 @@ Below we have some Windows wildcard examples.
       <log_format>syslog</log_format>
   </localfile>
 
-+--------------------+--------------------------+
-| **Default value**  | n/a                      |
-+--------------------+--------------------------+
-| **Allowed values** | Any log file or wildcard |
-+--------------------+--------------------------+
-
 .. note::
   * ``strftime`` format strings and wildcards cannot be used on the same entry.
 
   * On Windows systems, only character ``*`` is supported as a wildcard. For instance ``*ANY_STRING*``, will match all files that have ``ANY_STRING`` inside its name, another example is ``*.log`` this will match any log file.
   * The maximum amount of files monitored at same time is limited to 1000.
-
-.. warning::
-  * If using ``macos`` as ``log_format``, then ``location`` must be set to ``macos`` as well.
 
 .. _command:
 
@@ -334,6 +342,8 @@ Set the format of the log to be read. **field is required**
 |                    |                    |                                                                                                  |
 |                    |                    | Monitors all the logs that match the query filter.                                               |
 |                    |                    | See :ref:`How to collect macOS ULS logs <how-to-collect-macoslogs>`.                             |
++                    +--------------------+--------------------------------------------------------------------------------------------------+
+|                    | journald           | Required to monitor systemd-journal events. Events are collected in syslog format.               |
 +                    +--------------------+--------------------------------------------------------------------------------------------------+
 |                    | audit              | Used for events from Auditd.                                                                     |
 |                    |                    |                                                                                                  |
@@ -670,6 +680,56 @@ For example, to restrict syslog events related to a particular user name:
 
 .. note::
   The `eventchannel` format already provides a way to filter logs through queries. Therefore, `ignore` and `restrict` settings don't apply to this format.
+
+
+filter
+^^^^^^
+
+Collects ``journald`` logs selectively by filtering specific fields.
+
+You must specify a PCRE2 regex pattern as your filter. Use the ``field`` attribute to define the journald field where to apply the regular expression.
+
++--------------------+---------------------------------------------------------------+
+| **Default Value**  | n/a                                                           |
++--------------------+---------------------------------------------------------------+
+| **Allowed values** | Any :ref:`PCRE2 <pcre2_syntax>` expression.                   |
++--------------------+---------------------------------------------------------------+
+
+You can use the ``ignore_if_missing`` attribute to ignore the filtering condition for logs without the specified field.
+
++-----------------------+--------------------------------------------------------------------------------------------------------------+
+| **ignore_if_missing** | When set to ``yes``, it accepts logs without the specified field. Conversely, when set to ``no``,            |
+|                       | logs without the specified field fail to meet the filtering criteria and are disregarded.                    |
++                       +------------------+-------------------------------------------------------------------------------------------+
+|                       | Default value    | no                                                                                        |
+|                       +------------------+-------------------------------------------------------------------------------------------+
+|                       | Allowed values   | no, yes                                                                                   |
++-----------------------+------------------+-------------------------------------------------------------------------------------------+
+
+In the following configuration example Wazuh collects the ``journald`` logs if any of the following conditions are met.
+
+-  The field ``_SYSTEMD_UNIT`` is present with the value ``ssh.service``.
+-  The field ``_SYSTEMD_UNIT`` is present with the value ``cron.service`` and the field ``PRIORITY`` is present with the value ``0``, ``1``, ``2``, or ``3``.
+
+.. code-block:: xml
+
+    <!-- For monitoring log files -->
+    <localfile>
+      <location>journald</location>
+      <log_format>journald</log_format>
+      <filter field="_SYSTEMD_UNIT">^ssh.service$</filter>
+    <localfile>
+
+    <localfile>
+      <location>journald</location>
+      <log_format>journald</log_format>
+      <filter field="_SYSTEMD_UNIT">^cron.service$</filter>
+      <filter field="PRIORITY" ignore_if_missing="yes">[0-3]</filter>
+    <localfile>
+
+.. note::
+
+   Filters within the same ``<localfile>`` block follow an AND logic, while multiple blocks are evaluated in OR logic regarding log collection.
 
 
 Configuration examples

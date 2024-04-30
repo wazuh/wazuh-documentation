@@ -3,8 +3,8 @@
 .. meta::
    :description: Discover how to customize the appearance of your Wazuh dashboard and PDF reports.
 
-How to set up custom branding
-=============================
+Setting up custom branding
+==========================
         
 The Wazuh dashboard white-labeling feature allows you to replace the following elements with custom ones.
 

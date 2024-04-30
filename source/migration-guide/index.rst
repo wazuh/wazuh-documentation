@@ -3,8 +3,6 @@
 .. meta::
   :description: Learn how to migrate from Open Distro for Elasticsearch or from OSSEC to Wazuh. This guide gives instructions to make these migration actions.
 
-.. _migration_guide:
-
 Migration guide
 ================
 
@@ -22,3 +20,4 @@ This guide also includes a :doc:`Migrating from OSSEC </migration-guide/migratin
    wazuh-indexer
    wazuh-dashboard
    migrating-from-ossec/index
+   files-backup/index

@@ -48,7 +48,7 @@ The blog post on `Auditing Kubernetes with Wazuh <https://wazuh.com/blog/auditin
 Monitoring containerized application logs
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-Wazuh allows organizations to monitor containerized applications. It provides visibility into the applications that are resident in the container. When the application events are forwarded to the Wazuh manager, Security engineers can create :doc:`custom rules </user-manual/ruleset/custom>` that align with the unique requirements of their organization. This facilitates a highly personalized approach that improves overall visibility into the containers and the applications they host.
+Wazuh allows organizations to monitor containerized applications. It provides visibility into the applications that are resident in the container. When the application events are forwarded to the Wazuh manager, Security engineers can create :doc:`custom rules </user-manual/ruleset/rules/custom>` that align with the unique requirements of their organization. This facilitates a highly personalized approach that improves overall visibility into the containers and the applications they host.
 
 The :ref:`Monitoring container runtime <monitoring_container_runtime>` documentation has more information about monitoring containerized application logs.
 

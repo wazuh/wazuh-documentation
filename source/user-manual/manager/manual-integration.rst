@@ -5,8 +5,8 @@
 
 .. _manual_integration:
 
-Integration with external APIs
-==============================
+Integration with third-party APIs
+=================================
 
 The *Integrator* daemon allows Wazuh to connect to external APIs and alerting tools such as Slack, PagerDuty, VirusTotal, Shuffle, and Maltiverse.
 
@@ -76,13 +76,13 @@ To set up this integration, follow these steps.
 
 #. Enable Incoming Webhooks and create one for your Slack channel. Follow the Slack guide on `Incoming Webhooks <https://api.slack.com/messaging/webhooks>`__ for this.
 
-#. Edit ``/var/ossec/etc/ossec.conf`` in the Wazuh server and include a configuration block such as the following. Replace ``WEBHOOK_URL`` with your Incoming Webhook URL.
+#. Edit ``/var/ossec/etc/ossec.conf`` in the Wazuh server and include a configuration block such as the following. Replace ``<WEBHOOK_URL>`` with your Incoming Webhook URL.
 
    .. code-block:: xml
 
      <integration>
        <name>slack</name>
-       <hook_url>WEBHOOK_URL</hook_url> <!-- Replace with your Slack hook URL -->
+       <hook_url><WEBHOOK_URL></hook_url> <!-- Replace with your Slack hook URL -->
        <alert_format>json</alert_format>
      </integration>
 
@@ -113,14 +113,14 @@ To set up this integration, do the following.
 
 #. Get your own *Events API v2* integration key by creating a `Pagerduty new service <https://support.pagerduty.com/docs/services-and-integrations#create-a-service>`__.
 
-#. Edit ``/var/ossec/etc/ossec.conf`` in the Wazuh server and include a configuration block such as the following. Replace ``API_KEY`` with your Pagerduty integration key. The rule level filter is optional and you can remove it or set another level value for the integration.
+#. Edit ``/var/ossec/etc/ossec.conf`` in the Wazuh server and include a configuration block such as the following. Replace ``<API_KEY>`` with your Pagerduty integration key. The rule level filter is optional and you can remove it or set another level value for the integration.
 
    .. code-block:: xml
       :emphasize-lines: 3
 
       <integration>
         <name>pagerduty</name>
-        <api_key>API_KEY</api_key> <!-- Replace with your PagerDuty API key -->
+        <api_key><API_KEY></api_key> <!-- Replace with your PagerDuty API key -->
         <level>10</level>
         <alert_format>json</alert_format> <!-- New mandatory parameter since v4.7.0 -->
       </integration>
@@ -150,14 +150,14 @@ To set up this integration, follow these steps.
 
 #. Get your API key from the `Virustotal API key <https://www.virustotal.com/gui/my-apikey>`__ page.
 
-#. Edit ``/var/ossec/etc/ossec.conf`` in the Wazuh server and include a configuration block such as the following. Replace ``API_KEY`` with your Virustotal API key.
+#. Edit ``/var/ossec/etc/ossec.conf`` in the Wazuh server and include a configuration block such as the following. Replace ``<API_KEY>`` with your Virustotal API key.
 
    .. code-block:: xml
       :emphasize-lines: 3
 
       <integration>
         <name>virustotal</name>
-        <api_key>API_KEY</api_key> <!-- Replace with your VirusTotal API key -->
+        <api_key><API_KEY></api_key> <!-- Replace with your VirusTotal API key -->
         <group>syscheck</group>
         <alert_format>json</alert_format>
       </integration>
@@ -220,7 +220,7 @@ To set up this integration, do the following.
 
 #. Get your API key from the `Maltiverse <https://www.maltiverse.com>`__ page.
 
-#. Edit ``/var/ossec/etc/ossec.conf`` in the Wazuh server and include a configuration block such as the following. Replace ``API_KEY`` with your Maltiverse API key. The rule level filter is optional. You can remove it or set another level value for the integration.
+#. Edit ``/var/ossec/etc/ossec.conf`` in the Wazuh server and include a configuration block such as the following. Replace ``<API_KEY>`` with your Maltiverse API key. The rule level filter is optional. You can remove it or set another level value for the integration.
 
    .. code-block:: xml
       :emphasize-lines: 5
@@ -229,7 +229,7 @@ To set up this integration, do the following.
          <name>maltiverse</name>
          <hook_url>https://api.maltiverse.com</hook_url>
          <level>3</level>
-         <api_key>API_KEY</api_key> <!-- Replace with your Maltiverse API key -->
+         <api_key><API_KEY></api_key> <!-- Replace with your Maltiverse API key -->
          <alert_format>json</alert_format>
       </integration>
 

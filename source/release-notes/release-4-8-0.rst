@@ -26,6 +26,7 @@ Manager
 - `#17015 <https://github.com/wazuh/wazuh/pull/17015>`__ Refactored how cluster status dates are treated in the cluster.
 - `#21602 <https://github.com/wazuh/wazuh/pull/21602>`__ The log message about file rotation and signature from wazuh-monitord has been updated.
 - `#21670 <https://github.com/wazuh/wazuh/pull/21670>`__ Implemented a dedicated keystore for indexer configuration to improve management of sensitive information.
+- `#22774 <https://github.com/wazuh/wazuh/pull/22774>`__ Improved Wazuh-DB performance by adjusting SQLite synchronization policy.
 
 Agent
 ^^^^^
@@ -103,9 +104,9 @@ Wazuh dashboard
 - `#5791 <https://github.com/wazuh/wazuh-dashboard-plugins/pull/5791>`__ Added remember server address check.
 - `#6093 <https://github.com/wazuh/wazuh-dashboard-plugins/pull/6093>`__ Added a notification about new Wazuh updates and a button to check their availability. `#6256 <https://github.com/wazuh/wazuh-dashboard-plugins/pull/6256>`__ `#6328 <https://github.com/wazuh/wazuh-dashboard-plugins/pull/6328>`__
 - `#6083 <https://github.com/wazuh/wazuh-dashboard-plugins/pull/6083>`__ Added the ``ssl_agent_ca`` configuration to the **SSL Settings** form.
-- `#5896 <https://github.com/wazuh/wazuh-dashboard-plugins/pull/5896>`__ Added global vulnerability dashboards. `#6179 <https://github.com/wazuh/wazuh-dashboard-plugins/pull/6179>`__ `#6173 <https://github.com/wazuh/wazuh-dashboard-plugins/pull/6173>`__ `#6147 <https://github.com/wazuh/wazuh-dashboard-plugins/pull/6147>`__ `#6231 <https://github.com/wazuh/wazuh-dashboard-plugins/pull/6231>`__ `#6246 <https://github.com/wazuh/wazuh-dashboard-plugins/pull/6246>`__ `#6321 <https://github.com/wazuh/wazuh-dashboard-plugins/pull/6321>`__ `#6338 <https://github.com/wazuh/wazuh-dashboard-plugins/pull/6338>`__ `#6356 <https://github.com/wazuh/wazuh-dashboard-plugins/pull/6356>`__ `#6410 <https://github.com/wazuh/wazuh-dashboard-plugins/pull/6410>`__ `#6429 <https://github.com/wazuh/wazuh-dashboard-plugins/pull/6429>`__ `#6448 <https://github.com/wazuh/wazuh-dashboard-plugins/pull/6448>`__ `#6488 <https://github.com/wazuh/wazuh-dashboard-plugins/pull/6488>`__
+- `#5896 <https://github.com/wazuh/wazuh-dashboard-plugins/pull/5896>`__ Added global vulnerability dashboards. `#6179 <https://github.com/wazuh/wazuh-dashboard-plugins/pull/6179>`__ `#6173 <https://github.com/wazuh/wazuh-dashboard-plugins/pull/6173>`__ `#6147 <https://github.com/wazuh/wazuh-dashboard-plugins/pull/6147>`__ `#6231 <https://github.com/wazuh/wazuh-dashboard-plugins/pull/6231>`__ `#6246 <https://github.com/wazuh/wazuh-dashboard-plugins/pull/6246>`__ `#6321 <https://github.com/wazuh/wazuh-dashboard-plugins/pull/6321>`__ `#6338 <https://github.com/wazuh/wazuh-dashboard-plugins/pull/6338>`__ `#6356 <https://github.com/wazuh/wazuh-dashboard-plugins/pull/6356>`__ `#6410 <https://github.com/wazuh/wazuh-dashboard-plugins/pull/6410>`__ `#6429 <https://github.com/wazuh/wazuh-dashboard-plugins/pull/6429>`__ `#6448 <https://github.com/wazuh/wazuh-dashboard-plugins/pull/6448>`__ `#6488 <https://github.com/wazuh/wazuh-dashboard-plugins/pull/6488>`__ `#6590 <https://github.com/wazuh/wazuh-dashboard-plugins/pull/6590>`__
 - `#5840 <https://github.com/wazuh/wazuh-dashboard-plugins/pull/5840>`__ Added an agent selector to the IT Hygiene module.
-- `#5840 <https://github.com/wazuh/wazuh-dashboard-plugins/pull/5840>`__ Moved the Wazuh menu into the side menu. `#6226 <https://github.com/wazuh/wazuh-dashboard-plugins/pull/6226>`__ `#6176 <https://github.com/wazuh/wazuh-dashboard-plugins/pull/6176>`__ `#6423 <https://github.com/wazuh/wazuh-dashboard-plugins/pull/6423>`__  `#6510 <https://github.com/wazuh/wazuh-dashboard-plugins/pull/6510>`__
+- `#5840 <https://github.com/wazuh/wazuh-dashboard-plugins/pull/5840>`__ Moved the Wazuh menu into the side menu. `#6226 <https://github.com/wazuh/wazuh-dashboard-plugins/pull/6226>`__ `#6176 <https://github.com/wazuh/wazuh-dashboard-plugins/pull/6176>`__ `#6423 <https://github.com/wazuh/wazuh-dashboard-plugins/pull/6423>`__  `#6510 <https://github.com/wazuh/wazuh-dashboard-plugins/pull/6510>`__ `#6591 <https://github.com/wazuh/wazuh-dashboard-plugins/pull/6591>`__
 - `#5840 <https://github.com/wazuh/wazuh-dashboard-plugins/pull/5840>`__ Removed the ``disabled_roles`` and ``customization.logo.sidebar`` settings.
 - `#5840 <https://github.com/wazuh/wazuh-dashboard-plugins/pull/5840>`__ Removed module visibility configuration and removed the ``extensions.*`` settings.
 - `#6106 <https://github.com/wazuh/wazuh-dashboard-plugins/pull/6106>`__ Added query results limit of 10000 hits.
@@ -118,7 +119,7 @@ Wazuh dashboard
 - `#6361 <https://github.com/wazuh/wazuh-dashboard-plugins/pull/6361>`__ Removed ``WAZUH_REGISTRATION_SERVER`` variable from Windows agent deployment command.
 - `#6354 <https://github.com/wazuh/wazuh-dashboard-plugins/pull/6354>`__ Added a dash character and a tooltip element to **Run as** in the API configuration table to indicate it's been disabled.
 - `#6364 <https://github.com/wazuh/wazuh-dashboard-plugins/pull/6364>`__ Added tooltip element to **Most active agent** in **Details** in the **Endpoint summary** view and renamed a label element. `#6421 <https://github.com/wazuh/wazuh-dashboard-plugins/pull/6421>`__
-- `#6379 <https://github.com/wazuh/wazuh-dashboard-plugins/pull/6379>`__ Changed overview home top KPIs. `#6408 <https://github.com/wazuh/wazuh-dashboard-plugins/pull/6408>`__
+- `#6379 <https://github.com/wazuh/wazuh-dashboard-plugins/pull/6379>`__ Changed overview home top KPIs. `#6408 <https://github.com/wazuh/wazuh-dashboard-plugins/pull/6408>`__ `#6569 <https://github.com/wazuh/wazuh-dashboard-plugins/pull/6569>`__
 - `#6341 <https://github.com/wazuh/wazuh-dashboard-plugins/pull/6341>`__ Removed notice of old **Discover** deprecation.
 - `#6492 <https://github.com/wazuh/wazuh-dashboard-plugins/pull/6492>`__ Updated the PDF report year number to 2024.
 
@@ -152,6 +153,8 @@ Packages
 - `#2798 <https://github.com/wazuh/wazuh-packages/pull/2798>`_ Add compression for the Wazuh manager due to inclusion of Vulnerability Detection databases.
 - `#2796 <https://github.com/wazuh/wazuh-packages/pull/2796>`_ Simplified the Wazuh dashboard help menu entries.
 - `#2792 <https://github.com/wazuh/wazuh-packages/pull/2792>`_ Improved certificates generation output when using the Wazuh Installation Assistant and the Wazuh Certs Tool.
+- `#2891 <https://github.com/wazuh/wazuh-packages/pull/2891>`_ Skipped certificate validation for CentOS 5 package generation.
+- `#2890 <https://github.com/wazuh/wazuh-packages/pull/2890>`_ Updated the file permissions of vulnerability detection-related directories.
 
 Resolved issues
 ---------------
@@ -219,9 +222,10 @@ Packages
 =====================================================================     =============
 Reference                                                                 Description
 =====================================================================     =============
-`#2381 <https://github.com/wazuh/wazuh-packages/pull/2381>`_              Fixed DNS validation in the Installation Assistant.
-`#2401 <https://github.com/wazuh/wazuh-packages/pull/2401>`_              Fixed debug redirection in Installation Assistant.
+`#2381 <https://github.com/wazuh/wazuh-packages/pull/2381>`_              Fixed DNS validation in the installation assistant.
+`#2401 <https://github.com/wazuh/wazuh-packages/pull/2401>`_              Fixed debug redirection in the installation assistant.
 `#2850 <https://github.com/wazuh/wazuh-packages/pull/2850>`_              Fixed certificates generation output for certificates not created.
+`#2906 <https://github.com/wazuh/wazuh-packages/pull/2906>`_              Moved up the hardware check of the installation assistant. Now dependencies don't get installed if it fails.
 =====================================================================     =============
 
 Changelogs

@@ -68,10 +68,10 @@ Perform the following steps on your Logstash server to set up your forwarder.
 
    .. code-block:: console
 
-      $ sudo chmod -R 755 </PATH/TO/LOCAL/WAZUH-INDEXER/CERTIFICATE>/root-ca.pem
+      $ sudo chmod -R 755 </PATH/TO/LOCAL/WAZUH_INDEXER/CERTIFICATE>/root-ca.pem
       $ sudo chmod -R 755 </PATH/TO/LOCAL/SPLUNK/CERTIFICATE>/ca.pem
 
-   Replace ``</PATH/TO/LOCAL/WAZUH-INDEXER/CERTIFICATE>/root-ca.pem`` and ``</PATH/TO/LOCAL/SPLUNK/CERTIFICATE>/ca.pem`` with your Wazuh indexer and Splunk certificate local paths on the Logstash endpoint respectively.
+   Replace ``</PATH/TO/LOCAL/WAZUH_INDEXER/CERTIFICATE>/root-ca.pem`` and ``</PATH/TO/LOCAL/SPLUNK/CERTIFICATE>/ca.pem`` with your Wazuh indexer and Splunk certificate local paths on the Logstash endpoint respectively.
 
 Configuring a pipeline
 ^^^^^^^^^^^^^^^^^^^^^^
@@ -138,7 +138,7 @@ Perform the following steps to configure the Logstash pipeline.
          password  =>  "${WAZUH_INDEXER_PASSWORD}"
          index =>  "wazuh-alerts-4.x-*"
          ssl => true
-         ca_file => "</PATH/TO/LOCAL/WAZUH-INDEXER/CERTIFICATE>/root-ca.pem"
+         ca_file => "</PATH/TO/LOCAL/WAZUH_INDEXER/CERTIFICATE>/root-ca.pem"
          query =>  '{
              "query": {
                 "range": {
@@ -165,7 +165,7 @@ Perform the following steps to configure the Logstash pipeline.
 
    -  ``<WAZUH_INDEXER_ADDRESS>`` is your Wazuh indexer address or addresses in case of cluster deployment.
    -  ``<SPLUNK_URL>`` is your Splunk URL.
-   -  ``</PATH/TO/LOCAL/WAZUH-INDEXER/CERTIFICATE>/root-ca.pem`` is your Wazuh indexer certificate local path on the Logstash server. In our case we used ``/etc/logstash/wazuh-indexer-certs/root-ca.pem``.
+   -  ``</PATH/TO/LOCAL/WAZUH_INDEXER/CERTIFICATE>/root-ca.pem`` is your Wazuh indexer certificate local path on the Logstash server. In our case we used ``/etc/logstash/wazuh-indexer-certs/root-ca.pem``.
    -  ``</PATH/TO/LOCAL/SPLUNK/CERTIFICATE>/ca.pem`` is your Splunk certificate local path  on the Logstash server. In our case, we used ``/etc/logstash/splunk-certs/ca.pem``.
 
    .. note::

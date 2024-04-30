@@ -34,28 +34,6 @@ All notable changes to this project will be documented in this file.
 
 - Removed the ``logs.level`` app setting and the references to the plugin log files and *App logs* application. ([#6810](https://github.com/wazuh/wazuh-documentation/pull/6810))
 
-## [v4.8.2]
-
-### Added
-
-- Added considerations for max_size API options. ([#7063](https://github.com/wazuh/wazuh-documentation/pull/7063))
-
-### Fixed
-
-- Fixed Puppet deployment config steps. ([#7120](https://github.com/wazuh/wazuh-documentation/pull/7120))
-
-## [v4.8.1]
-
-### Added
-
-- Added reference to AWS Cloudtrail policies in Monitoring AWS infrastructure PoC guide. ([#6785](https://github.com/wazuh/wazuh-documentation/pull/6785))
-- Added ``procps`` as Wazuh manager and Wazuh agent source install dependency ([#7003](https://github.com/wazuh/wazuh-documentation/pull/7003))
-
-### Changed
-
-- Updated ``SQLAlchemy`` and ``urllib3`` in dependencies Azure cloud security section. ([#6842](https://github.com/wazuh/wazuh-documentation/pull/6842))
-- Changed all references to HP-UX package to tar.gz. ([#7107](https://github.com/wazuh/wazuh-documentation/pull/7107))
-
 ## [v4.8.0]
 
 ### Added
@@ -71,6 +49,8 @@ All notable changes to this project will be documented in this file.
 - Added step to remove the *ss4o* index templates from the Wazuh indexer upgrade guide. ([#7093](https://github.com/wazuh/wazuh-documentation/pull/7093))
 - Added deprecation notice for the ``cache`` Wazuh API configuration option. ([#7106](https://github.com/wazuh/wazuh-documentation/pull/7106))
 - Added warning about 4.8.0 upgrade. ([#7135](https://github.com/wazuh/wazuh-documentation/pull/7135))
+- Added the ``indexer`` configuration option to the Wazuh API documentation. ([#7164](https://github.com/wazuh/wazuh-documentation/pull/7164))
+- Added the ``offline-url`` vulnerability detection option to the Reference guide. ([#7193](https://github.com/wazuh/wazuh-documentation/pull/7193))
 
 ### Changed
 
@@ -91,6 +71,9 @@ All notable changes to this project will be documented in this file.
 - Improved steps in the Google Cloud Platform prerequisites section. ([#6964](https://github.com/wazuh/wazuh-documentation/pull/6964))
 - Updated Azure Diagnostics images. ([#6987](https://github.com/wazuh/wazuh-documentation/pull/6987))
 - Updated Azure Log Analytics images. ([#7002](https://github.com/wazuh/wazuh-documentation/pull/7002))
+- Updated ``installation-guide/wazuh-server/step-by-step`` considering configuration requirements for vulnerability detection. ([#7149](https://github.com/wazuh/wazuh-documentation/pull/7149))
+- Updated the ``user-manual/reference/unattended-installation`` section. ([#7162](https://github.com/wazuh/wazuh-documentation/pull/7162))
+- Changed Docker version requirement to ``6.0.0``. ([#7133](https://github.com/wazuh/wazuh-documentation/pull/7133))
 
 ### Fixed
 
@@ -104,8 +87,13 @@ All notable changes to this project will be documented in this file.
 
 - Deprecated ``/vulnerability`` API endpoints. ([#6738](https://github.com/wazuh/wazuh-documentation/pull/6738))
 - Removed implicit ``id!=000`` WQL filter in the search bar. ([#6815](https://github.com/wazuh/wazuh-documentation/pull/6815))
-- Removed launchctl unload step from macOS uninstalling manual. ([#7123](https://github.com/wazuh/wazuh-documentation/pull/7123))
-- Removed Wazuh_Ruleset.pdf references. ([#7142](https://github.com/wazuh/wazuh-documentation/pull/7142))
+- Removed ``launchctl`` unload step from macOS uninstalling manual. ([#7123](https://github.com/wazuh/wazuh-documentation/pull/7123))
+- Removed ``Wazuh_Ruleset.pdf`` references. ([#7142](https://github.com/wazuh/wazuh-documentation/pull/7142))
+- Removed documentation for the ``allow-os`` vulnerability detection option. ([#7177](https://github.com/wazuh/wazuh-documentation/pull/7177))
+
+## [v4.7.4]
+
+- Support for Wazuh 4.7.4
 
 ## [v4.7.3]
 
