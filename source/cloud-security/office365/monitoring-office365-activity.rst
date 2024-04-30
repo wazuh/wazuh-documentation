@@ -413,30 +413,10 @@ For example, the following configuration pulls only the ``Audit.AzureActiveDirec
 
 Replace ``<YOUR_TENANT_ID>``, ``<YOUR_CLIENT_ID>``, and ``<YOUR_CLIENT_SECRET>`` with the organization's credentials for the tenant.
 
-Enabling dashboard visualization for the Office 365 module
+Visualizing the Office 365 activity
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-The Wazuh dashboard has an Office 365 module that provides detailed information and insights about the events that occur in Office 365. The module is disabled by default. You have to enable the module explicitly to make use of the tailored visualization.
-
-Perform the following steps to enable the Wazuh module for Office 365 on the Wazuh dashboard.
-
-#. Navigate to the Wazuh dashboard and click on **Wazuh** > **Settings** > **Modules**.
-
-   .. thumbnail:: /images/cloud-security/office365/wazuh-settings-module.png
-      :title: Wazuh settings module
-      :alt: Wazuh settings module
-      :align: center
-      :width: 80%
-
-#. Enable the Wazuh module for Office 365 in the **Security Information Management** section.
-
-   .. thumbnail:: /images/cloud-security/office365/enable-office365-module.png
-      :title: Enable Office 365 module
-      :alt: Enable Office 365 module
-      :align: center
-      :width: 80%
-
-The Wazuh module for Office 365 provides three visualization options to gain better insight into the events that occur in Office 365. These visualization options are the **Panel**, **Dashboard**, and **Events**. Navigate to the **Modules** > **Office 365** tab on the Wazuh dashboard to view this information.
+The Wazuh module for Office 365 provides three visualization options to gain better insight into the events that occur in Office 365. These visualization options are the **Panel**, **Dashboard**, and **Events**. Navigate to the  **Office 365** tab on the **Cloud security** section of the Wazuh dashboard to view this information.
 
 Panel
 ~~~~~
