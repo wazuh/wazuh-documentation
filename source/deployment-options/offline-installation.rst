@@ -166,11 +166,11 @@ Installing the Wazuh indexer
 
         # /usr/share/wazuh-indexer/bin/indexer-security-init.sh
   
-#. Run the following command to check that the installation is successful. Note that this command uses localhost, set your Wazuh indexer address if necessary. 
+#. Run the following command to check that the installation is successful. Note that this command uses ``127.0.0.1``, set your Wazuh indexer address if necessary. 
 
    .. code-block:: console
 
-      # curl -XGET https://localhost:9200 -u admin:admin -k
+      # curl -XGET https://127.0.0.1:9200 -u admin:admin -k
 
    Expand the output to see an example response.
 
@@ -437,21 +437,21 @@ Installing the Wazuh dashboard
 
              server.host: 0.0.0.0
              server.port: 443
-             opensearch.hosts: https://localhost:9200
+             opensearch.hosts: https://127.0.0.1:9200
              opensearch.ssl.verificationMode: certificate
 
 #.  Enable and start the Wazuh dashboard.
 
     .. include:: /_templates/installations/dashboard/enable_dashboard.rst
 
-#.  Edit the file ``/usr/share/wazuh-dashboard/data/wazuh/config/wazuh.yml`` and replace the ``url`` value with the IP address or hostname of the Wazuh server master node.
+#. Edit the file ``/usr/share/wazuh-dashboard/data/wazuh/config/wazuh.yml`` and replace the ``url`` value with the IP address or hostname of the Wazuh server master node.
 
             .. code-block:: yaml
                :emphasize-lines: 3
 
                hosts:
                  - default:
-                     url: https://<wazuh_server_ip>
+                     url: https://<WAZUH_SERVER_IP_ADDRESS>
                      port: 55000
                      username: wazuh-wui
                      password: wazuh-wui
@@ -463,7 +463,7 @@ Installing the Wazuh dashboard
 
 #.  Access the web interface.
 
-    -   URL: *https://<wazuh_dashboard_ip>*
+    -   URL: *https://<WAZUH_DASHBOARD_IP_ADDRESS>*
     -   **Username**: admin
     -   **Password**: admin
 
@@ -525,19 +525,19 @@ Select your deployment type and follow the instructions to change the default pa
 
 
 
-      #. On your `Wazuh server master node`, change the default password of the admin users: `wazuh` and `wazuh-wui`. Note that the commands below use localhost, set your Wazuh manager IP address if necessary.
+      #. On your `Wazuh server master node`, change the default password of the admin users: `wazuh` and `wazuh-wui`. Note that the commands below use 127.0.0.1, set your Wazuh manager IP address if necessary.
 
          #. Get an authorization TOKEN.
 
             .. code-block:: console
 
-               # TOKEN=$(curl -u wazuh-wui:wazuh-wui -k -X GET "https://localhost:55000/security/user/authenticate?raw=true")
+               # TOKEN=$(curl -u wazuh-wui:wazuh-wui -k -X GET "https://127.0.0.1:55000/security/user/authenticate?raw=true")
 
          #. Change the `wazuh` user credentials (ID 1). Select a password between 8 and 64 characters long, it should contain at least one uppercase and one lowercase letter, a number, and a symbol. See :api-ref:`PUT /security/users/{user_id} <operation/api.controllers.security_controller.update_user>` to learn more.
 
             .. code-block:: console
 
-               curl -k -X PUT "https://localhost:55000/security/users/1" -H "Authorization: Bearer $TOKEN" -H 'Content-Type: application/json' -d'
+               curl -k -X PUT "https://127.0.0.1:55000/security/users/1" -H "Authorization: Bearer $TOKEN" -H 'Content-Type: application/json' -d'
                {
                  "password": "SuperS3cretPassword!"
                }'
@@ -552,7 +552,7 @@ Select your deployment type and follow the instructions to change the default pa
 
             .. code-block:: console
 
-               curl -k -X PUT "https://localhost:55000/security/users/2" -H "Authorization: Bearer $TOKEN" -H 'Content-Type: application/json' -d'
+               curl -k -X PUT "https://127.0.0.1:55000/security/users/2" -H "Authorization: Bearer $TOKEN" -H 'Content-Type: application/json' -d'
                {
                  "password": "SuperS3cretPassword!"
                }'
@@ -592,7 +592,7 @@ Select your deployment type and follow the instructions to change the default pa
 
             hosts:
               - default:
-                  url: https://localhost
+                  url: https://127.0.0.1
                   port: 55000
                   username: wazuh-wui
                   password: "<wazuh-wui-password>"
