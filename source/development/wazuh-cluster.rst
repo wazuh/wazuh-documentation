@@ -430,7 +430,6 @@ Child processes are created when the parent `wazuh-clusterd` starts. They stay i
 Master node
 ###########
 * **Local integrity thread**: Calculates the hash of all the files to be synchronized. This requires high CPU usage.
-* **Agent info thread**: A section of this task sends all the agents' information to the wazuh-db. The communication is done in small chunks so as not to saturate the service socket. This turned this task into a somewhat slow process and not a good candidate for asyncio.
 * **Integrity thread**: Compressing files, which is done inside this task, is fully synchronous and can block the parent cluster process.
 
 Worker nodes

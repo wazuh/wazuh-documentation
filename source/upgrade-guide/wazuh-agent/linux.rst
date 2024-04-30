@@ -7,7 +7,7 @@
 Upgrading Wazuh agents on Linux systems
 =======================================
 
-Select your package manager and follow the instructions to upgrade the Wazuh agent locally. If you want to perform a remote upgrade, check the :doc:`Remote agent upgrade </user-manual/agents/remote-upgrading/upgrading-agent>` section to learn more. 
+Select your package manager and follow the instructions to upgrade the Wazuh agent locally. If you want to perform a remote upgrade, check the :doc:`Remote agent upgrade </user-manual/agent/agent-management/remote-upgrading/upgrading-agent>` section to learn more. 
 
 .. note:: You need root user privileges to run all the commands described below.
 

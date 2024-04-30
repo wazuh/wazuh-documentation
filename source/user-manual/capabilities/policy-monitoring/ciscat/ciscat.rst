@@ -234,7 +234,7 @@ Use case: Scheduling CIS-CAT executions
 
 New scheduling options have been added for the CIS-CAT module which allows the user to decide when to launch CIS scans in every agent.
 
-As it is described in the :doc:`CIS-CAT section <../../../reference/ossec-conf/wodle-ciscat>` of the reference documentation, there are available some new options that we could mix to reach the desired behavior.
+As it is described in the :doc:`CIS-CAT section </user-manual/reference/ossec-conf/wodle-ciscat>` of the reference documentation, there are available some new options that we could mix to reach the desired behavior.
 
 The following sample blocks of the wodle configuration show the new possibilities to schedule when the module is launched. All of these options are independent of the ``scan-on-start`` option, which runs the scan
 always when the service is started.

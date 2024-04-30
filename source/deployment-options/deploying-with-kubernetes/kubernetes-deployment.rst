@@ -378,4 +378,4 @@ Wazuh agents are designed to monitor hosts. To start using them:
 #. :doc:`Install the agent </installation-guide/wazuh-agent/index>`.
 #. Enroll the agent by modifying the file ``/var/ossec/etc/ossec.conf``. Change the “transport protocol” to TCP and replace the ``MANAGER_IP`` with the external IP address of the service pointing to port 1514 or with the hostname provided by the cloud provider
 
-To learn more about registering agents, see the :doc:`Wazuh agent enrollment </user-manual/agent-enrollment/index>` section of the documentation.
+To learn more about registering agents, see the :doc:`Wazuh agent enrollment </user-manual/agent/agent-enrollment/index>` section of the documentation.

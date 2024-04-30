@@ -64,19 +64,19 @@ Upgrading the Wazuh indexer
 
 In a Wazuh indexer cluster with multiple nodes, the cluster remains available throughout the upgrading process. This rolling upgrade allows shutting down one Wazuh indexer node at a time for minimal disruption of service.
 
-As a first step, remove the *ss4o* index templates. Replace ``<WAZUH_INDEXER_IP_ADDRESS>``, ``<username>``, and ``<password>`` before running any command below.
+As a first step, remove the *ss4o* index templates. Replace ``<WAZUH_INDEXER_IP_ADDRESS>``, ``<USERNAME>``, and ``<PASSWORD>`` before running any command below.
 
 .. code-block:: bash
 
-   curl -X DELETE "https://<WAZUH_INDEXER_IP_ADDRESS>:9200/_index_template/ss4o_*_template" -u <username>:<password> -k
+   curl -X DELETE "https://<WAZUH_INDEXER_IP_ADDRESS>:9200/_index_template/ss4o_*_template" -u <USERNAME>:<PASSWORD> -k
 
 Then, repeat the following steps for every Wazuh indexer node.
 
 #. Disable shard allocation.
 
    .. code-block:: bash
-   
-      curl -X PUT "https://<WAZUH_INDEXER_IP_ADDRESS>:9200/_cluster/settings" -u <username>:<password> -k -H 'Content-Type: application/json' -d'
+
+      curl -X PUT "https://<WAZUH_INDEXER_IP_ADDRESS>:9200/_cluster/settings"  -u <USERNAME>:<PASSWORD> -k -H 'Content-Type: application/json' -d'
       {
         "persistent": {
           "cluster.routing.allocation.enable": "primaries"
@@ -88,7 +88,7 @@ Then, repeat the following steps for every Wazuh indexer node.
 
    .. code-block:: console
 
-      # curl -X POST "https://<WAZUH_INDEXER_IP_ADDRESS>:9200/_flush/synced" -u <username>:<password> -k
+      # curl -X POST "https://<WAZUH_INDEXER_IP_ADDRESS>:9200/_flush/synced" -u <USERNAME>:<PASSWORD> -k
 
 #. Shut down the Wazuh indexer in the node.
 
@@ -130,13 +130,13 @@ Then, repeat the following steps for every Wazuh indexer node.
 
    .. code-block:: console
 
-      # curl -k -u <username>:<password> https://<WAZUH_INDEXER_IP_ADDRESS>:9200/_cat/nodes?v
+      # curl -k -u <USERNAME>:<PASSWORD> https://<WAZUH_INDEXER_IP_ADDRESS>:9200/_cat/nodes?v
 
 #. Re-enable shard allocation.
 
    .. code-block:: bash
 
-      curl -X PUT "https://<WAZUH_INDEXER_IP_ADDRESS>:9200/_cluster/settings" -u <username>:<password> -k -H 'Content-Type: application/json' -d'
+      curl -X PUT "https://<WAZUH_INDEXER_IP_ADDRESS>:9200/_cluster/settings" -u <USERNAME>:<PASSWORD> -k -H 'Content-Type: application/json' -d'
       {
         "persistent": {
           "cluster.routing.allocation.enable": "all"
@@ -148,7 +148,7 @@ Then, repeat the following steps for every Wazuh indexer node.
 
    .. code-block:: console
 
-      # curl -k -u <username>:<password> https://<WAZUH_INDEXER_IP_ADDRESS>:9200/_cat/nodes?v
+      # curl -k -u <USERNAME>:<PASSWORD> https://<WAZUH_INDEXER_IP_ADDRESS>:9200/_cat/nodes?v
 
 .. _upgrading_wazuh_server:
 
@@ -182,6 +182,13 @@ When upgrading a multi-node Wazuh manager cluster, run the upgrade in every node
 #. If upgrading from version 4.7 and earlier, edit ``/var/ossec/etc/ossec.conf`` to set the indexer connection for vulnerability detection. Make sure to configure the following settings block with your host indexer details.
 
    .. include:: /_templates/installations/manager/configure_indexer_connection.rst
+
+#. Save the Wazuh indexer username and password into the Wazuh manager keystore using the Wazuh-keystore tool.
+
+   .. code-block:: console
+  
+      # /var/ossec/bin/wazuh-keystore -f indexer -k username -v <INDEXER_USERNAME>
+      # /var/ossec/bin/wazuh-keystore -f indexer -k username -v <INDEXER_PASSWORD>
 
 #. Download the Wazuh module for Filebeat:
 

@@ -138,7 +138,7 @@ parent
 ^^^^^^
 
 It is used to link a subordinate decoder to its parent. A parent decoder can have many child decoders but take into account that a child decoder cannot be a parent.
-It is possible to create what we call :doc:`sibling decoders <sibling-decoders>`, which is a handy decoding strategy to handle dynamic logs.
+It is possible to create what we call :doc:`sibling decoders <../decoders/sibling-decoders>`, which is a handy decoding strategy to handle dynamic logs.
 
 
 +--------------------+------------------+
@@ -451,7 +451,7 @@ The attribute below is optional; it allows to start the decode process after a p
 |                    | after_prematch     |
 +--------------------+--------------------+
 
-An example of its use is described at the :doc:`JSON decoder <../json-decoder>` section.
+An example of its use is described at the :doc:`JSON decoder <../decoders/json-decoder>` section.
 
 use_own_name
 ^^^^^^^^^^^^^
