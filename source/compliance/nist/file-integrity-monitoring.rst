@@ -52,11 +52,6 @@ In this scenario, the Wazuh FIM monitors the SSH configuration file ``/etc/ssh/s
       :align: center
       :width: 80%
 
-   .. thumbnail:: /images/compliance/nist/alert-triggered-by-rule-id-550.png    
-      :title: Alert triggered by rule ID 550
-      :alt: Alert triggered by rule ID 550
-      :align: center
-      :width: 80%
 
 .. _detecting_change-actors_to_ufw_firewall_rules_using_who-data:
 
