@@ -414,9 +414,9 @@ For example, the following configuration pulls only the ``Audit.AzureActiveDirec
 Replace ``<YOUR_TENANT_ID>``, ``<YOUR_CLIENT_ID>``, and ``<YOUR_CLIENT_SECRET>`` with the organization's credentials for the tenant.
 
 Visualizing the Office 365 activity
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-The Wazuh module for Office 365 provides three visualization options to gain better insight into the events that occur in Office 365. These visualization options are the **Panel**, **Dashboard**, and **Events**. Navigate to the  **Office 365** tab on the **Cloud security** section of the Wazuh dashboard to view this information.
+The Wazuh module for Office 365 provides three visualization options to gain better insight into the events that occur in Office 365. These visualization options are the **Dashboard**, **Panel**, and **Events**. Navigate to the  **Office 365** tab on the **Cloud security** section of the Wazuh dashboard to view this information.
 
 Panel
 ~~~~~
