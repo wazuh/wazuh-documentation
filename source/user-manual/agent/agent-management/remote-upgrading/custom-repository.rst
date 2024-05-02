@@ -14,10 +14,11 @@ WPK files must be named using the following pattern:
     wazuh_agent_W_X_Y.Z.wpk
 
 Where:
-    - ``W`` represents the release version.
-    - ``X`` denotes the target operating system.
-    - ``Y`` indicates the machine architecture. Empty for Windows.
-    - ``Z`` represents the package type included in the WPK file. Empty for Windows.
+
+-  ``W`` represents the release version.
+-  ``X`` denotes the target operating system.
+-  ``Y`` indicates the machine architecture. Empty for Windows.
+-  ``Z`` represents the package type included in the WPK file. Empty for Windows.
 
 For instance:
 

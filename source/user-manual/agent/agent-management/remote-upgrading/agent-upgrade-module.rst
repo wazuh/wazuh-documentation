@@ -50,8 +50,8 @@ The module expects 3 parameters:
     |                 +-------------------+---------------+----------+------------------------------+----------------------------------------------------------------------------------+
     |                 | **force_upgrade** | true, false   | no       | false                        | Forces the agents to upgrade, ignoring package type and version validations      |
     |                 +-------------------+---------------+----------+------------------------------+----------------------------------------------------------------------------------+
-    |                 | **package_type**  | string        | no       | Manager-inferred             | Specify the type of package to use to upgrade the agents (rpm, deb),             |
-    |                 |                   |               |          |                              | especially useful for upgrading unrecognized system platforms                    |
+    |                 | **package_type**  | string        | no       | Manager-inferred             | Specifies the package type for upgrading agents. For example rpm and deb.        |
+    |                 |                   |               |          |                              | Especially useful for upgrading unrecognized system platforms                    |
     +-----------------+-------------------+---------------+----------+------------------------------+----------------------------------------------------------------------------------+
 
     Example message:
