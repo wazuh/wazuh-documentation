@@ -23,3 +23,4 @@ This section contains documentation for developers. Here developers can learn ab
         wazuh-logtest
         selinux-wazuh-context
         rbac-database-integrity
+        coredump
