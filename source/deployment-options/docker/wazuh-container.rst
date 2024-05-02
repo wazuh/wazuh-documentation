@@ -44,7 +44,7 @@ Single-node Deployment
         
       .. code-block:: yaml
         
-         # Wazuh App Copyright (C) 2021 Wazuh Inc. (License GPLv2)
+         # Wazuh dashboard Copyright (C) 2021 Wazuh Inc. (License GPLv2)
          version: '3'
 
          services:
@@ -144,7 +144,7 @@ Multi-node deployment
       
       .. code-block:: yaml
       
-         # Wazuh App Copyright (C) 2021 Wazuh Inc. (License GPLv2)
+         # Wazuh dashboard Copyright (C) 2021 Wazuh Inc. (License GPLv2)
          version: '3'
 
          services:
