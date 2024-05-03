@@ -110,7 +110,7 @@ Wazuh dashboard
 - `#5840 <https://github.com/wazuh/wazuh-dashboard-plugins/pull/5840>`__ Removed the ``disabled_roles`` and ``customization.logo.sidebar`` settings.
 - `#5840 <https://github.com/wazuh/wazuh-dashboard-plugins/pull/5840>`__ Removed module visibility configuration and removed the ``extensions.*`` settings.
 - `#6106 <https://github.com/wazuh/wazuh-dashboard-plugins/pull/6106>`__ Added query results limit of 10000 hits.
-- `#6035 <https://github.com/wazuh/wazuh-dashboard-plugins/pull/6035>`__ Improved the implementation of module dashboards.
+- `#6035 <https://github.com/wazuh/wazuh-dashboard-plugins/pull/6035>`__ Updated all dashboard visualization definitions. `#6632 <https://github.com/wazuh/wazuh-dashboard-plugins/pull/6632>`__
 - `#6067 <https://github.com/wazuh/wazuh-dashboard-plugins/pull/6067>`__ Reorganized tabs order in all modules.
 - `#6174 <https://github.com/wazuh/wazuh-dashboard-plugins/pull/6174>`__ Removed the implicit filter of WQL language of the search bar UI.
 - `#6176 <https://github.com/wazuh/wazuh-dashboard-plugins/pull/6176>`__ Added a redirection button to **Endpoint Summary** from **IT Hygiene** application.
@@ -214,6 +214,7 @@ Reference                                                                    Des
 `#6346 <https://github.com/wazuh/wazuh-dashboard-plugins/pull/6346>`__       Fixed bug related to the implicit filter close button in the search bar.
 `#6431 <https://github.com/wazuh/wazuh-dashboard-plugins/pull/6431>`__       Fixed error displaying when clicking **Refresh** in **MITRE ATT&CK** if the the Wazuh indexer service is down.
 `#6484 <https://github.com/wazuh/wazuh-dashboard-plugins/pull/6484>`__       Fixed minor style issues. `#6489 <https://github.com/wazuh/wazuh-dashboard-plugins/pull/6489>`__
+`#6617 <https://github.com/wazuh/wazuh-dashboard-plugins/pull/6617>`__       Fixed error when clicking **Log collection** in **Configuration** of a disconnected agent.
 =========================================================================    =============
 
 Packages
