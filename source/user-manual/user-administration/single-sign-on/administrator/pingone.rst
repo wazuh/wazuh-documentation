@@ -254,7 +254,7 @@ Wazuh dashboard configuration
 
       hosts:
         - default:
-            url: https://localhost
+            url: https://127.0.0.1
             port: 55000
             username: wazuh-wui
             password: "<wazuh-wui-password>"
