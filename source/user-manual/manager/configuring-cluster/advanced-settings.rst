@@ -3,6 +3,8 @@
 .. meta::
   :description: Learn more about how to deploy a Wazuh cluster. In this section of our documentation we explain more about the agents connections.
 
+.. _advanced_cluster_settings:
+
 *****************
 Advanced Settings
 *****************
@@ -23,26 +25,41 @@ As a load balancer, we recommend using `HAProxy <https://www.haproxy.org/>`_.
 
 There are two main ways to install HAProxy, using `packages <https://github.com/haproxy/wiki/wiki/Packages>`_ or docker `images <https://hub.docker.com/_/haproxy/tags>`_.
 
-Once installed, regardless of the method, it is needed to do some configurations.
+Once installed, regardless of the method, it requires some configuration changes.
 
 Configuration
 -------------
 
-    The HAProxy configuration, present in the ``<HAPROXY_INSTALLATION_PATH>/haproxy.cfg`` must at least have some sections covered:
+    The HAProxy configuration, present in the ``<HAPROXY_INSTALLATION_PATH>/haproxy.cfg`` must have some sections covered:
 
-    - Wazuh agents registration front and backend:
+    - Wazuh agents frontend and backend registration:
 
-    .. code-block:: console
+        The *backend* is a set of servers(Wazuh cluster nodes) that receive the forwarded agent connections and can be defined by:
 
-        frontend wazuh_register
-            mode tcp
-            bind :1515
-            default_backend wazuh_register
+            - the type of load balancing
+            - which load balance algorithm to use
+            - a list of servers and ports, in this case, the default one pointing to the master node of the cluster.
 
-        backend wazuh_register
-            mode tcp
-            balance leastconn
-            server master_register <WAZUH_REGISTRY_HOST>:1515 check
+        .. code-block:: console
+
+            backend wazuh_register
+                mode tcp
+                balance leastconn
+                server master_register <WAZUH_REGISTRY_HOST>:1515 check
+
+        A *frontend* defines how requests should be forwarded to backends and is composed of:
+
+            - the type of load balancing
+            - the port to bind the connections
+            - the default backend to forward requests
+
+        .. code-block:: console
+
+            frontend wazuh_register
+                mode tcp
+                bind :1515
+                default_backend wazuh_register
+
 
     - Configured PID file and stats socket (with ``level admin``):
 
@@ -52,7 +69,8 @@ Configuration
             pidfile     /var/run/haproxy.pid
             stats socket /var/lib/haproxy/stats level admin
 
-    - Accessible stats page (optional):
+
+    As an optional step, the stats page can be enabled with:
 
     .. code-block:: console
 
@@ -64,7 +82,11 @@ Configuration
             stats admin if TRUE
             option httplog
 
-Also, it will be needed an init script to manage the HAProxy service. Below we provide an example that can be used.
+
+Lifecycle script handler
+------------------------
+
+To manage the HAProxy service, we will need a script that is in charge of starting and stopping it. Below we provide a working example.
 
 .. code-block:: bash
 
@@ -281,10 +303,12 @@ Start the HAProxy service.
 Agents connections
 ==================
 
-.. _load_balancer:
+.. _point_agents_to_a_load_balancer:
 
 Pointing agents to the cluster with a load balancer
 ---------------------------------------------------
+
+    A **load balancer** is a service that distributes workloads across multiple resources.
 
     The correct way to use it is to point every agent to send the events to the *load balancer*:
 
@@ -351,7 +375,7 @@ HAProxy helper
 ==============
 
 This is an optional tool to manage HAProxy configuration depending on the Wazuh cluster status in real-time.
-Provides the manager with the ability to automatically balance the agent TCP sessions.
+It provides the manager with the ability to automatically balance the agent TCP sessions.
 
 Some of its key features are:
 
@@ -379,9 +403,9 @@ How to enable it
 ----------------
 
 .. note::
-    The recommended version of HAProxy, that we currently test, is the 2.8 LTS.
+    The recommended version of HAProxy is the 2.8 LTS.
 
-To use this feature is needed to have a :ref:`HAProxy <haproxy_installation>`  instance balancing the cluster using the **least connections** algorithm.
+To use this feature is required to have a :ref:`HAProxy <haproxy_installation>`  instance balancing the cluster using the **least connections** algorithm.
 
 Dataplane API configuration
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^
@@ -430,7 +454,7 @@ Dataplane API configuration
         service haproxy restart
 
 
-In the Wazuh side, the :ref:`configuration <haproxy_helper>` file (``/var/ossec/etc/ossec.conf``) we will include the ``<haproxy_helper>...</haproxy_helper>`` labels within the ``<cluster>...</cluster>`` section.
+On the Wazuh's side, we will include the ``<haproxy_helper>...</haproxy_helper>`` labels in the :ref:`configuration <haproxy_helper>` file (``/var/ossec/etc/ossec.conf``)  within the ``<cluster>...</cluster>`` section.
 
 We are going to configure a basic HAProxy helper within an already configured cluster master node:
 

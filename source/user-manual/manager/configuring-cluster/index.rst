@@ -1,7 +1,7 @@
 .. Copyright (C) 2015, Wazuh, Inc.
 
 .. meta::
-  :description: Learn more about the cluster node configuration in Wazuh: master and worker nodes, labels, Filebeat, Splunk forwarder installation, and more. 
+  :description: Learn more about the cluster node configuration in Wazuh: master and worker nodes, labels, Filebeat, Splunk forwarder installation, and more.
 
 .. _configuring-cluster:
 
@@ -115,7 +115,7 @@ Wazuh server cluster
     +---------------------------------------------------------------------+------------------------------------------------+
     | :ref:`Wazuh multi node cluster<wazuh_server_multi_node_filebeat>`   | Install Filebeat on Wazuh multi node cluster.  |
     +---------------------------------------------------------------------+------------------------------------------------+
-    
+
 
     **Installing Splunk forwarder:**
 
@@ -183,4 +183,4 @@ Wazuh server cluster
 
     .. note::
 
-        We recommend using a :ref:`load balancer <load_balancer>` for registering and connecting the agents. This way, the agents will be able to be registered and report to the nodes in a distributed way, and it will be the load balancer who assigns which worker they will report to. Using this option we can better distribute the load, and in case of a fall in some worker node, its agents will **reconnect** to another one.
+        We recommend using a :ref:`load balancer <advanced_cluster_settings>` for registering and connecting the agents. This way, the agents will be able to be registered and report to the nodes in a distributed way, and it will be the load balancer who assigns which worker they will report to. Using this option we can better distribute the load, and in case of a fall in some worker node, its agents will **reconnect** to another one.
