@@ -236,11 +236,23 @@ Upgrading the Wazuh dashboard
 
       .. group-tab:: APT
 
+         .. note::
+
+            Configuration options might differ across versions. If you modify ``/etc/opensearch_dashboards.yml``, running the command below prompts you to choose between two alternatives:
+            
+            -  Replace the file with the updated version.
+            -  Keep the modified file.
+            
+            To ensure a smooth update, follow these steps.
+            
+            #. Backup the file.
+            #. Run the command below, choosing to replace the file with the updated version.
+            #. Manually reapply any changes.
+         
          .. code-block:: console
 
             # apt-get install wazuh-dashboard|WAZUH_DASHBOARD_DEB_PKG_INSTALL|
 
-         .. note:: If the ``/etc/opensearch_dashboards.yml`` file was modified, a prompt will be shown asking to either replace the file with the updated version or keep the modified one. As several options may change between versions, we suggest to backup the file, replace it with the upgraded version and manually apply the  changes.
 
 #. Restart the Wazuh dashboard:
 
