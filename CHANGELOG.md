@@ -41,6 +41,7 @@ All notable changes to this project will be documented in this file.
 - Updated ``installation-guide/wazuh-server/step-by-step`` considering configuration requirements for vulnerability detection. ([#7149](https://github.com/wazuh/wazuh-documentation/pull/7149))
 - Updated the ``user-manual/reference/unattended-installation`` section. ([#7162](https://github.com/wazuh/wazuh-documentation/pull/7162))
 - Changed Docker version requirement to ``6.0.0``. ([#7133](https://github.com/wazuh/wazuh-documentation/pull/7133))
+- Changed ``localhost`` url in wazuh.yml to ``127.0.0.1``. ([#7285](https://github.com/wazuh/wazuh-documentation/pull/7285))
 
 ### Fixed
 
