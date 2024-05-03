@@ -40,6 +40,7 @@ Wazuh dashboard
 ^^^^^^^^^^^^^^^
 
 - `#6145 <https://github.com/wazuh/wazuh-dashboard-plugins/pull/6145>`__ Added AngularJS dependencies.
+- `#6580 <https://github.com/wazuh/wazuh-dashboard-plugins/pull/6580>`__ Migrated from AngularJS to ReactJS. `#6555 <https://github.com/wazuh/wazuh-dashboard-plugins/pull/6555>`__ `#6618 <https://github.com/wazuh/wazuh-dashboard-plugins/pull/6618>`__ `#6613 <https://github.com/wazuh/wazuh-dashboard-plugins/pull/6613>`__ `#6631 <https://github.com/wazuh/wazuh-dashboard-plugins/pull/6631>`__
 - `#6120 <https://github.com/wazuh/wazuh-dashboard-plugins/issues/6120>`__ Removed embedded discover component. `#6235 <https://github.com/wazuh/wazuh-dashboard-plugins/pull/6235>`__ `#6254 <https://github.com/wazuh/wazuh-dashboard-plugins/pull/6254>`__ `#6285 <https://github.com/wazuh/wazuh-dashboard-plugins/pull/6285>`__ `#6288 <https://github.com/wazuh/wazuh-dashboard-plugins/pull/6288>`__ `#6286 <https://github.com/wazuh/wazuh-dashboard-plugins/pull/6286>`__ `#6459 <https://github.com/wazuh/wazuh-dashboard-plugins/pull/6459>`__ `#6438 <https://github.com/wazuh/wazuh-dashboard-plugins/pull/6438>`__ `#6434 <https://github.com/wazuh/wazuh-dashboard-plugins/pull/6434>`__
 - `#6227 <https://github.com/wazuh/wazuh-dashboard-plugins/pull/6227>`__ Added support for a new index for the FIM module.
 - `#6268 <https://github.com/wazuh/wazuh-dashboard-plugins/pull/6268>`__ Refactored the **Endpoints Summary** charts.
@@ -53,6 +54,9 @@ Wazuh dashboard
 - `#6481 <https://github.com/wazuh/wazuh-dashboard-plugins/pull/6481>`__ Removed the ``PUT /api/update-hostname/{id}`` API endpoint.
 - `#6481 <https://github.com/wazuh/wazuh-dashboard-plugins/pull/6481>`__ Removed the ``DELETE /hosts/remove-orphan-entries`` API endpoint.
 - `#6573 <https://github.com/wazuh/wazuh-dashboard-plugins/pull/6573>`__ Enhanced the validation for ``enrollment.dns`` on App Settings application.
+- `#6607 <https://github.com/wazuh/wazuh-dashboard-plugins/pull/6607>`__ Implemented the option to control configuration editing via API endpoints and UI.
+- `#6572 <https://github.com/wazuh/wazuh-dashboard-plugins/pull/6572>`__ Added the **Journald** log collector tab.
+- `#6482 <https://github.com/wazuh/wazuh-dashboard-plugins/pull/6482>`__ Implemented new data source feature on MITRE ATT&CK module.
 
 Resolved issues
 ---------------
