@@ -226,7 +226,7 @@ Upgrading the Wazuh dashboard
 
 Configuration options might differ across versions. Follow these steps to ensure a smooth upgrade.
 
-#. Backup the ``/etc/opensearch_dashboards.yml`` file to save your settings.
+#. Backup the ``/etc/wazuh-dashboard/opensearch_dashboards.yml`` file to save your settings.
 #. Upgrade the Wazuh dashboard.
 
    .. tabs::
@@ -235,7 +235,7 @@ Configuration options might differ across versions. Follow these steps to ensure
 
          .. code-block:: console
 
-            # rm /etc/opensearch_dashboards.yml
+            # rm /etc/wazuh-dashboard/opensearch_dashboards.yml
             # yum upgrade wazuh-dashboard|WAZUH_DASHBOARD_RPM_PKG_INSTALL|
 
       .. group-tab:: APT
@@ -246,9 +246,9 @@ Configuration options might differ across versions. Follow these steps to ensure
 
          .. note::
 
-            When prompted, choose to replace the ``/etc/opensearch_dashboards.yml`` file with the updated version.
+            When prompted, choose to replace the ``/etc/wazuh-dashboard/opensearch_dashboards.yml`` file with the updated version.
          
-#. Manually reapply any settings changes to the ``/etc/opensearch_dashboards.yml`` file.
+#. Manually reapply any settings changes to the ``/etc/wazuh-dashboard/opensearch_dashboards.yml`` file.
 #. Restart the Wazuh dashboard:
 
     .. include:: /_templates/installations/dashboard/enable_dashboard.rst
