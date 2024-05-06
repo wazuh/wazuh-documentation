@@ -10,7 +10,7 @@ You need to enable the Google Cloud module on your Wazuh dashboard to visualize 
 
 Perform the next steps to enable the Google Cloud Platform module on your Wazuh dashboard:
 
-#. Navigate to your Wazuh Dashboard and click **Wazuh** > **Settings** > **Modules**.
+#. Navigate to your Wazuh dashboard and click **Wazuh** > **Settings** > **Modules**.
 #. Enable the **Google Cloud Platform** module in the **Security Information Management** section, as shown in the image below.
 
    .. thumbnail:: /images/cloud-security/gcp/gcp-module-enabling.png

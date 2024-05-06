@@ -1,7 +1,7 @@
 .. Copyright (C) 2015, Wazuh, Inc.
 
 .. meta::
-  :description: Advance filtering is possible using the Wazuh Dashboard's queries. Learn more about it in this section of the Wazuh documentation.
+  :description: Advance filtering is possible using the Wazuh dashboard's queries. Learn more about it in this section of the Wazuh documentation.
  
 .. _dashboard-queries:
 
