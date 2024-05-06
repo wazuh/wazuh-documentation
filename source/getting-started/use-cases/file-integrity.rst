@@ -62,7 +62,7 @@ The Wazuh FIM module supports various configuration options that enable effectiv
       :align: center
       :width: 80%
 
-   In alert fields, the *who-data* metadata shows that the user ``wazuh`` added the word ``Hello`` to the ``audit_docu.txt`` file using the ``Notepad.exe`` process.
+   In alert fields, the *who-data* metadata shows that the user ``wazuh`` modified the ``audit_docu.txt`` file using the ``Notepad.exe`` process.
 
    .. thumbnail:: /images/getting-started/use-cases/fim/fim-modified-file-alert-details.png
       :title: FIM modified file alert details
