@@ -252,7 +252,7 @@ Use the Wazuh archives to query and display events related to the technique bein
    Below, you can identify the initial process creation and the attributes related to the executed command:
 
    .. code-block:: console
-      :emphasize-lines: 10, 35
+      :emphasize-lines: 7, 25
 
       "data": {
          "win": {
@@ -365,7 +365,7 @@ Use the Wazuh archives to query and display events related to the technique bein
    From the below log, you can extract more structured details which makes it easier to analyze the event:
    
    .. code-block:: console
-      :emphasize-lines: 14, 26
+      :emphasize-lines: 9, 20
 
       "data": {
          "win": {
