@@ -169,23 +169,24 @@ Repeat this stage of the installation process for every Wazuh indexer node in yo
 
     <div class="accordion-section open">
 
-
-#. Run the Wazuh indexer ``indexer-security-init.sh`` script on `any` Wazuh indexer node to load the new certificates information and start the single-node or multi-node cluster. 
+#. Run the Wazuh indexer ``indexer-security-init.sh`` script on `any` Wazuh indexer node to load the new certificates information and start the single-node or multi-node cluster.
     
    .. code-block:: console
 
       # /usr/share/wazuh-indexer/bin/indexer-security-init.sh
 
-   .. note:: You only have to initialize the cluster `once`, there is no need to run this command on every node. 
+   .. note::
+      
+      You only have to initialize the cluster *once*, there is no need to run this command on every node.
       
 Testing the cluster installation
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-#. Replace ``<WAZUH_INDEXER_IP>`` and run the following commands to confirm that the installation is successful.
+#. Replace ``<WAZUH_INDEXER_IP_ADDRESS>`` and run the following commands to confirm that the installation is successful.
 
    .. code-block:: console
 
-      # curl -k -u admin:admin https://<WAZUH_INDEXER_IP>:9200
+      # curl -k -u admin:admin https://<WAZUH_INDEXER_IP_ADRESS>:9200
 
    .. code-block:: none
       :class: output accordion-output
@@ -207,11 +208,11 @@ Testing the cluster installation
         "tagline" : "The OpenSearch Project: https://opensearch.org/"
       }
 
-#. Replace ``<WAZUH_INDEXER_IP>`` and run the following command to check if the single-node or multi-node cluster is working correctly. 
+#. Replace ``<WAZUH_INDEXER_IP_ADDRESS>`` and run the following command to check if the single-node or multi-node cluster is working correctly. 
   
    .. code-block:: console
 
-      # curl -k -u admin:admin https://<WAZUH_INDEXER_IP>:9200/_cat/nodes?v
+      # curl -k -u admin:admin https://<WAZUH_INDEXER_IP_ADDRESS>:9200/_cat/nodes?v
 
 Next steps
 ----------

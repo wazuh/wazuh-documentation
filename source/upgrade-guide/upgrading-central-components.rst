@@ -62,11 +62,15 @@ Upgrading the Wazuh indexer
 
    To ensure compatibility with the latest Wazuh indexer and Wazuh dashboard, please update manually installed plugins accordingly. For additional information, check the `distribution matrix <https://github.com/wazuh/wazuh-packages/tree/v|WAZUH_CURRENT|#distribution-version-matrix>`__.
 
-In the case of having a Wazuh indexer cluster with multiple nodes, the cluster will remain available throughout the upgrading process. This rolling upgrade allows shutting down one Wazuh indexer node at a time for minimal disruption of service. Repeat these steps for every Wazuh indexer node.
+In a Wazuh indexer cluster with multiple nodes, the cluster remains available throughout the upgrading process. This rolling upgrade allows shutting down one Wazuh indexer node at a time for minimal disruption of service.
 
-.. note::
+As a first step, remove the *ss4o* index templates. Replace ``<WAZUH_INDEXER_IP_ADDRESS>``, ``<USERNAME>``, and ``<PASSWORD>`` before running any command below.
 
-   -  Replace ``<WAZUH_INDEXER_IP_ADDRESS>``, ``<USERNAME>``, and ``<PASSWORD>`` before running the commands below.
+.. code-block:: bash
+
+   curl -X DELETE "https://<WAZUH_INDEXER_IP_ADDRESS>:9200/_index_template/ss4o_*_template" -u <USERNAME>:<PASSWORD> -k
+
+Then, repeat the following steps for every Wazuh indexer node.
 
 #. Disable shard allocation.
 
@@ -175,12 +179,22 @@ When upgrading a multi-node Wazuh manager cluster, run the upgrade in every node
 
       If the ``/var/ossec/etc/ossec.conf`` configuration file was modified, it will not be replaced by the upgrade. You will therefore have to add the settings of the new capabilities manually. More information can be found in :doc:`/user-manual/index`.
 
+#. If upgrading from version 4.7 and earlier, edit ``/var/ossec/etc/ossec.conf`` to set the indexer connection for vulnerability detection. Make sure to configure the following settings block with your host indexer details.
+
+   .. include:: /_templates/installations/manager/configure_indexer_connection.rst
+
+#. Save the Wazuh indexer username and password into the Wazuh manager keystore using the Wazuh-keystore tool.
+
+   .. code-block:: console
+  
+      # /var/ossec/bin/wazuh-keystore -f indexer -k username -v <INDEXER_USERNAME>
+      # /var/ossec/bin/wazuh-keystore -f indexer -k username -v <INDEXER_PASSWORD>
 
 #. Download the Wazuh module for Filebeat:
 
     .. code-block:: console
 
-      # curl -s https://packages.wazuh.com/4.x/filebeat/wazuh-filebeat-0.3.tar.gz | sudo tar -xvz -C /usr/share/filebeat/module
+      # curl -s https://packages.wazuh.com/4.x/filebeat/wazuh-filebeat-0.4.tar.gz | sudo tar -xvz -C /usr/share/filebeat/module
 
 
 #. Download the alerts template:
@@ -194,10 +208,11 @@ When upgrading a multi-node Wazuh manager cluster, run the upgrade in every node
 
     .. include:: /_templates/installations/basic/elastic/common/enable_filebeat.rst
 
-#. Upload the new Wazuh template. This step can be omitted for Wazuh indexer single-node installations.
+#. Upload the new Wazuh template and pipelines for Filebeat.
 
    .. code-block:: console
 
+      # filebeat setup --pipelines
       # filebeat setup --index-management -E output.logstash.enabled=false
 
 Upgrading the Wazuh dashboard

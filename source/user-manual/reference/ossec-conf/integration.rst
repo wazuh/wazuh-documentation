@@ -1,7 +1,7 @@
 .. Copyright (C) 2015, Wazuh, Inc.
 
 .. meta::
-  :description: Learn how to configure the manager to connect Wazuh to external APIs. Check out the options, optional filters, and configuration examples.
+  :description: Learn how to configure the manager to connect Wazuh to external APIs. Check out the options, optional filters, optional settings, and configuration examples.
 
 .. _reference_ossec_integration:
 
@@ -56,6 +56,19 @@ This is the key that you would have retrieved from the PagerDuty, VirusTotal, or
 | **Allowed values** | PagerDuty/VirusTotal/Maltiverse Api key |
 +--------------------+-----------------------------------------+
 
+alert_format
+^^^^^^^^^^^^
+
+This writes the alert file in the JSON format, which the Integrator uses to fetch fields values.
+
++--------------------+-----------------------------------------------------------+
+| **Default value**  | n/a                                                       |
++--------------------+-----------------------------------------------------------+
+| **Allowed values** | json                                                      |
++--------------------+-----------------------------------------------------------+
+
+.. note:: Set this option as ``json`` for Slack, VirusTotal, Shuffle, and Maltiverse integrations.
+
 Optional filters
 ----------------
 
@@ -103,18 +116,8 @@ This filters alerts by where the event originated.
 | **Allowed values** | Any :ref:`sregex<sregex_os_match_syntax>` expression.        |
 +--------------------+--------------------------------------------------------------+
 
-alert_format
-^^^^^^^^^^^^
-
-This writes the alert file in the JSON format. The Integrator makes use of this file to fetch fields values.
-
-+--------------------+-----------------------------------------------------------+
-| **Default value**  | n/a                                                       |
-+--------------------+-----------------------------------------------------------+
-| **Allowed values** | json                                                      |
-+--------------------+-----------------------------------------------------------+
-
-.. note:: This option must be set to ``json`` for Slack, VirusTotal, Shuffle, and Maltiverse integrations.
+Optional settings
+-----------------
 
 max_log
 ^^^^^^^
@@ -141,6 +144,29 @@ This overwrites the previous fields or adds customization fields according to th
 | **Default value**  | n/a                                                       |
 +--------------------+-----------------------------------------------------------+
 | **Allowed values** | json                                                      |
++--------------------+-----------------------------------------------------------+
+
+
+timeout
+^^^^^^^
+
+The timeout (in seconds) to wait for a valid response from the external integration server.
+
++--------------------+-----------------------------------------------------------+
+| **Default value**  | 10                                                        |
++--------------------+-----------------------------------------------------------+
+| **Allowed values** | Any positive integer.                                     |
++--------------------+-----------------------------------------------------------+
+
+retries
+^^^^^^^
+
+On timeout, the maximum number of retry attempts for a request to the external integration server.
+
++--------------------+-----------------------------------------------------------+
+| **Default value**  | 3                                                         |
++--------------------+-----------------------------------------------------------+
+| **Allowed values** | Any positive integer.                                     |
 +--------------------+-----------------------------------------------------------+
 
 .. _integration_configuration_example:
@@ -174,6 +200,8 @@ Configuration example
     <api_key>API_KEY</api_key> <!-- Replace with your VirusTotal API key -->
     <group>syscheck</group>
     <alert_format>json</alert_format>
+    <timeout>30</timeout>
+    <retries>5</retries>
   </integration>
 
   <!-- Integration with Shuffle -->

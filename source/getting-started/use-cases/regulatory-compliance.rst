@@ -88,11 +88,11 @@ NIST 800-53 offers recommendations for managing information security and privacy
    :align: center
    :width: 80%
 
-The :doc:`Vulnerability Detector </user-manual/capabilities/vulnerability-detection/how-it-works>` module runs scans when enabled on startup or periodically as defined. You can view the vulnerability scan results on the Wazuh dashboard which includes the time and date of the scan, vulnerable applications, and packages on the monitored endpoint. You can find more information on how :doc:`Wazuh helps organizations meet the NIST 800-53 standard </compliance/nist/index>`.
+You can view the :doc:`vulnerability detection </user-manual/capabilities/vulnerability-detection/how-it-works>` module results on the Wazuh dashboard which includes vulnerable applications and packages on the monitored endpoint. You can find more information on how :doc:`Wazuh helps organizations meet the NIST 800-53 standard </compliance/nist/index>`.
 
 .. thumbnail:: /images/getting-started/use-cases/regulatory-compliance/vulnerabilities-module-inventory.png
-   :title: Vulnerabilities module inventory
-   :alt: Vulnerabilities module inventory
+   :title: Vulnerability Detection module inventory
+   :alt: Vulnerability Detection module inventory
    :align: center
    :width: 80%
 

@@ -15,6 +15,7 @@ Clone this repository to deploy the necessary services and pods.
         $ git clone https://github.com/wazuh/wazuh-kubernetes.git -b v|WAZUH_CURRENT_KUBERNETES| --depth=1
         $ cd wazuh-kubernetes
 
+.. _kubernetes_ssl_certificates:
 
 Setup SSL certificates
 ^^^^^^^^^^^^^^^^^^^^^^

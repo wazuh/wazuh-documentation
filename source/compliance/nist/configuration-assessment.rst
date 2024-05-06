@@ -29,7 +29,7 @@ This use case shows how Wazuh helps meet the **CM-6 Configuration settings** req
 
       # systemctl restart wazuh-agent
 
-#. Select the **Security configuration assessment** module on your Wazuh dashboard. SCA scans are enabled by default so you don’t require further configuration actions.
+#. Select the **Configuration Assessment** module on your Wazuh dashboard. SCA scans are enabled by default so you don’t require further configuration actions.
 
    .. thumbnail:: /images/compliance/nist/select-sca-module.png    
       :title: Select the SCA module

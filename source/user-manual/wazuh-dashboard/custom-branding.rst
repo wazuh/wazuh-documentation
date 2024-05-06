@@ -9,29 +9,68 @@ Setting up custom branding
 The Wazuh dashboard white-labeling feature allows you to replace the following elements with custom ones.
 
 -  Logos in the Wazuh dashboard.
+
+   -  App loading logo
+   -  Health check logo
+   -  Wazuh dashboard home logo
+
 -  Logo, header, and footer in PDF reports.
 
-Custom logos in the Wazuh dashboard 
+Custom logos in the Wazuh dashboard
 -----------------------------------
 
-To use your own logos in the Wazuh dashboard, click on the `App main logo` and go to **Settings** > **Configuration**. Under the **Custom branding** section, set up the following properties:
+App loading and Health check logos
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
--  ``customization.logo.app``. This property sets the `App main logo` image. It has a size limit of 1 MB. It replaces the logo image in the Wazuh main menu located top left. Recommended size: 300 pixels width, 70 pixels height. See #1 in the image below.
+To use your own App loading and Health check logos in the Wazuh dashboard, do the following.
 
--  ``customization.logo.healthcheck``. This property sets the `Health check logo` image. It has a size limit of 1 MB. It replaces the logo on top of the check list displayed during the health check routine. Recommended size: 300 pixels width, 70 pixels height. See #2 in the image below.
+#. Click on **Indexer/dashboard management** > **App Settings**.
+#. Under the **Custom branding** section, set up the following properties:
 
--  ``customization.logo.sidebar``. This property sets the `Navigation drawer logo` image. It has a size limit of 1 MB. It replaces the left navigation menu logo image. Recommended size: 80 pixels width, 80 pixels height. See #3 in the image below.
-
-.. thumbnail:: /images/kibana-app/features/white-labeling/custom-branding-settings.jpg
-   :align: center
-   :width: 80%
+   -  ``customization.logo.app``. This property sets the `App loading logo` image. It has a size limit of 1 MB. It replaces the logo image in the Wazuh loading animation when a new section initializes. Recommended size: 300 pixels width, 70 pixels height.
+   
+      .. thumbnail:: /images/kibana-app/features/white-labeling/custom-branding-settings-loading.png
+         :align: center
+         :width: 80%
+   
+   -  ``customization.logo.healthcheck``. This property sets the `Health check logo` image. It has a size limit of 1 MB. It replaces the logo on top of the check list displayed during the health check routine. Recommended size: 300 pixels width, 70 pixels height.
+   
+      .. thumbnail:: /images/kibana-app/features/white-labeling/custom-branding-settings-health-check.png
+         :align: center
+         :width: 80%
 
 Once you are done setting your custom logo images, you can find them saved in ``/usr/share/wazuh-dashboard/plugins/wazuh/public/assets/custom/images/``.
+
+Wazuh dashboard home logo
+^^^^^^^^^^^^^^^^^^^^^^^^^
+
+To customize the `Wazuh dashboard home logo` in the top header, do the following.
+
+#. Edit ``opensearch_dashboards.yml``. You can find this file in the following locations:
+
+   -  ``/etc/wazuh-dashboard/``
+   -  ``/usr/share/wazuh-dashboard/config/`` for Docker installations.
+ 
+#. Add the URL of your default and dark theme logos.
+
+   .. code-block:: yaml
+      :emphasize-lines: 3,4
+   
+      opensearchDashboards.branding:
+         mark:
+            defaultUrl: "https://domain.org/default-logo.png"
+            darkModeUrl: "https://domain.org/dark-mode-logo.png"
+
+.. thumbnail:: /images/kibana-app/features/white-labeling/custom-branding-settings-header.png
+   :align: center
+   :width: 100%
+
+Once you are done setting your custom logo image, you can find it saved in ``/usr/share/wazuh-dashboard/plugins/wazuh/public/assets/custom/images/``.
 
 Custom branding of the PDF reports
 ----------------------------------
 
-To customize the PDF reports, click on the `App main logo` and go to **Settings** > **Configuration**. Under the **Custom branding** section, set up the following properties:
+To customize the PDF reports, click **Indexer/dashboard management** > **App Settings**. Under the **Custom branding** section, set up the following properties:
 
 -  ``customization.reports.logo``. This property sets the `PDF reports logo` image. It has a size limit of 1 MB. It's printed in the top left corner of the PDF reports. Recommended size: 190 pixels width, 40 pixels height. See #1 in the image below.
 
@@ -61,7 +100,7 @@ The following settings correspond to the custom branding feature. Edit them usin
 
 **customization.logo.app**
 
-    This is the image to be used as the logo in the main menu of the app.
+    This logo is used as loading indicator while the user is logging into Wazuh API.
     It is saved as ``/usr/share/wazuh-dashboard/plugins/wazuh/public/assets/custom/images/customization.logo.app.<format>``.
 
     +--------------------+----------------------------+
@@ -76,19 +115,6 @@ The following settings correspond to the custom branding feature. Edit them usin
 
     This is the image to be used as the health check logo.
     It is saved as ``/usr/share/wazuh-dashboard/plugins/wazuh/public/assets/custom/images/customization.logo.healthcheck.<format>``.
-
-    +--------------------+----------------------------+
-    | Allowed format     | jpeg, jpg, png, svg        |
-    +--------------------+----------------------------+
-    | Default value      | ''                         |
-    +--------------------+----------------------------+
-    | Maximum file size  | 1 MB                       |
-    +--------------------+----------------------------+
-
-**customization.logo.sidebar**
-
-    This is the image to be used as the sidebar logo.
-    It is saved as ``/usr/share/wazuh-dashboard/plugins/wazuh/public/assets/custom/images/customization.logo.sidebar.<format>``.
 
     +--------------------+----------------------------+
     | Allowed format     | jpeg, jpg, png, svg        |

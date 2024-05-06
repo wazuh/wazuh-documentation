@@ -15,7 +15,7 @@ System inventory
 
 An up-to-date :doc:`system inventory </user-manual/capabilities/system-inventory/index>` helps organizations optimize asset visibility in their environment, and is essential for maintaining good IT hygiene. Wazuh collects system inventory data that includes hardware and operating system information, installed software, network interfaces, ports, and running processes. Wazuh agents use the :doc:`Syscollector </user-manual/capabilities/system-inventory/configuration>` module to collect inventory data from monitored endpoints and send them to the Wazuh server.
 
-You can generate system inventory reports from the **Inventory data** tab on the Wazuh dashboard. The information contained in the report helps identify unwanted applications, processes, services, and malicious artifacts.
+You can generate system inventory reports from the **Inventory data** module on the Wazuh dashboard. The information contained in the report helps identify unwanted applications, processes, services, and malicious artifacts.
 
 .. thumbnail:: /images/getting-started/use-cases/it-hygiene/inventory-data-dashboard.png
    :title: Inventory data on the Wazuh dashboard
@@ -31,11 +31,11 @@ You can also generate property-specific reports for a monitored endpoint. For ex
    :align: center
    :width: 80%
 
-The inventory data collected can be queried using the `Wazuh API <https://documentation.wazuh.com/|WAZUH_CURRENT_MINOR|/user-manual/api/reference.html#tag/Syscollector>`__, which retrieves nested data in JSON format. For example, you can query the package inventory to check for the ``wazuh-agent`` package on a monitored endpoint using the **API Console** on the Wazuh dashboard. Command line tools like :ref:`cURL <inventory_wazuh_api_curl>` can also be used to query the inventory database.
+The inventory data collected can be queried using the `Wazuh API <https://documentation.wazuh.com/|WAZUH_CURRENT_MINOR|/user-manual/api/reference.html#tag/Syscollector>`__, which retrieves nested data in JSON format. For example, you can query the package inventory to check for the ``wazuh-agent`` package on a monitored endpoint using the **Server management** > **Dev Tools** module on the Wazuh dashboard. Command line tools like :ref:`cURL <inventory_wazuh_api_curl>` can also be used to query the inventory database.
 
 .. thumbnail:: /images/getting-started/use-cases/it-hygiene/inventory-querying-api.png
-   :title: Querying the package inventory using the API console
-   :alt: Querying the package inventory using the API console
+   :title: Querying the package inventory using the Dev Tools
+   :alt: Querying the package inventory using the Dev Tools
    :align: center
    :width: 80%
 
@@ -44,11 +44,11 @@ Security Configuration Assessment
 
 One of the objectives of implementing good IT hygiene is to reduce the attack surface of your organization. The :doc:`Wazuh SCA </user-manual/capabilities/sec-config-assessment/index>` module periodically scans monitored endpoints against policies based on the Center for Internet Security (CIS) benchmarks to identify security misconfigurations and flaws. The CIS benchmarks are essential guidelines for establishing a secure baseline configuration for critical assets. This minimizes vulnerabilities resulting from misconfigurations and reduces the risk of security breaches.
 
-The **Security configuration assessment** module on the Wazuh dashboard provides each agent's SCA scan result. The results show the number of checks performed on the endpoint, how many failed, and the number of checks that passed. It also shows a score calculated based on the number of tests passed, giving you an overview of the level of compliance.
+The **Configuration Assessment** module on the Wazuh dashboard provides each agent's SCA scan result. The results show the number of checks performed on the endpoint, how many failed, and the number of checks that passed. It also shows a score calculated based on the number of tests passed, giving you an overview of the level of compliance.
 
 .. thumbnail:: /images/getting-started/use-cases/it-hygiene/sca-results.png
-   :title: Security configuration assessment results
-   :alt: Security configuration assessment results
+   :title: Configuration Assessment results
+   :alt: Configuration Assessment results
    :align: center
    :width: 80%
 
@@ -75,13 +75,13 @@ Vulnerability management
 
 Vulnerability management aims to identify and remediate vulnerabilities to prevent cyber attacks. By taking proactive steps to remediate vulnerabilities, your organization can significantly reduce its attack surface, thereby improving its IT hygiene.
 
-The Wazuh :doc:`Vulnerability Detector </user-manual/capabilities/vulnerability-detection/index>` module identifies vulnerable applications by using the information collected from operating system vendors and :doc:`vulnerability databases </user-manual/capabilities/vulnerability-detection/how-it-works>`. The Vulnerability Detector module scans and generates alerts for vulnerabilities discovered on monitored endpoints. This provides a comprehensive view of vulnerabilities identified across all monitored endpoints, allowing you to view, analyze, fix, and track the remediation of vulnerabilities.
+The Wazuh :doc:`vulnerability detection </user-manual/capabilities/vulnerability-detection/index>` module identifies vulnerable applications by using :doc:`vulnerability information available in our Wazuh CTI </user-manual/capabilities/vulnerability-detection/how-it-works>`. The vulnerability detection module generates alerts for vulnerabilities discovered on monitored endpoints. This provides a comprehensive view of vulnerabilities identified across all monitored endpoints, allowing you to view, analyze, fix, and track the remediation of vulnerabilities.
 
 The vulnerabilities discovered are grouped into severity levels, and a summary is provided based on the application name, CVE, and CVSS3 score on the Wazuh dashboard.
 
 .. thumbnail:: /images/getting-started/use-cases/it-hygiene/vulnerabilities-inventory-dashboard.png
-   :title: Vulnerabilities inventory dashboard
-   :alt: Vulnerabilities inventory dashboard
+   :title: Vulnerability Detection inventory dashboard
+   :alt: Vulnerability Detection inventory dashboard
    :align: center
    :width: 80%
 
@@ -93,7 +93,7 @@ You can download a report that contains security events related to discovered an
    :align: center
    :width: 80%
 
-The Wazuh Vulnerability Detector module also enables you to track remediation activities, which could serve as a progress report on improving or maintaining IT hygiene. For example, when a vulnerability is remediated, an alert is generated on the Wazuh dashboard. This feature detects when a patch or software upgrade resolves a previously detected vulnerability.
+The Wazuh vulnerability detection module also enables you to track remediation activities, which could serve as a progress report on improving or maintaining IT hygiene. For example, when a vulnerability is remediated, an alert is generated on the Wazuh dashboard. This feature detects when a patch or software upgrade resolves a previously detected vulnerability.
 
 .. thumbnail:: /images/getting-started/use-cases/it-hygiene/remediation-alerts.png
    :title: Remediation alerts
@@ -183,7 +183,7 @@ Wazuh streamlines the process of meeting :doc:`regulatory compliance </complianc
    :align: center
    :width: 80%
 
-Wazuh uses its capabilities such as the :doc:`SCA </user-manual/capabilities/sec-config-assessment/index>`, :doc:`Vulnerability Detector </user-manual/capabilities/vulnerability-detection/index>`, :doc:`FIM </user-manual/capabilities/file-integrity/index>`, and more to identify and report compliance violations. It also provides dedicated compliance dashboards to help monitor compliance status, identify improvement areas, and take appropriate remediation actions.
+Wazuh uses its capabilities such as the :doc:`SCA </user-manual/capabilities/sec-config-assessment/index>`, :doc:`vulnerability detection </user-manual/capabilities/vulnerability-detection/index>`, :doc:`FIM </user-manual/capabilities/file-integrity/index>`, and more to identify and report compliance violations. It also provides dedicated compliance dashboards to help monitor compliance status, identify improvement areas, and take appropriate remediation actions.
 
 For example, you can get a general overview of the PCI DSS requirement of a monitored endpoint on the Wazuh dashboard.
 

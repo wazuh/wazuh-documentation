@@ -138,43 +138,6 @@ Where:
 
 -  ``<API_TOKEN>`` is the GitHub personal access token created within the ``admin:org`` scope.
 
-Enabling dashboard visualization
---------------------------------
-
-You can activate the GitHub module on the Wazuh dashboard to view details about GitHub events. The GitHub Security Information Management module is optional. You can view GitHub events on the **Security Events** tab of the Wazuh dashboard without following the steps outlined in this section. However, leveraging the dashboard module is beneficial as it allows you to focus only on GitHub events while providing rapid insights through intuitive charts on the dedicated GitHub dashboard.
-
-Take the following steps to activate the GitHub module on the Wazuh dashboard:
-
-#. Navigate to your Wazuh Dashboard and click on **Wazuh** > **Settings** > **Modules**.
-
-   .. thumbnail:: /images/cloud-security/github/github-wazuh-menu-settings-module.png   
-      :title: GitHub Wazuh menu settings module
-      :alt: GitHub Wazuh menu settings module
-      :align: center
-      :width: 80%
-
-#. Enable the GitHub module in the **Security Information Management** section.
-
-   .. thumbnail:: /images/cloud-security/github/github-wazuh-security-information-management.png
-      :title: GitHub Wazuh Security information management
-      :alt: GitHub Wazuh Security information management
-      :align: center
-      :width: 80%
-
-After enabling the dashboard visualization, navigate to **Modules** > **GitHub** to view the GitHub dashboard.
-
-   .. thumbnail:: /images/cloud-security/github/github-module-dashboard1.png
-      :title: GitHub module dashboard
-      :alt: GitHub module dashboard
-      :align: center
-      :width: 80%
-
-   .. thumbnail:: /images/cloud-security/github/github-module-dashboard2.png
-      :title: GitHub module events dashboard
-      :alt: GitHub module events dashboard
-      :align: center
-      :width: 80%
-
 Use case
 --------
 

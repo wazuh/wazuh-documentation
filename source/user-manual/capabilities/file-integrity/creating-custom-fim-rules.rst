@@ -206,7 +206,7 @@ Test the configuration
 Visualize the alert
 ~~~~~~~~~~~~~~~~~~~
 
-Navigate to **Modules > Integrity monitoring** on the Wazuh dashboard to view the alert generated when the FIM module detects the addition of the execute permission.
+Navigate to **File Integrity Monitoring** on the Wazuh dashboard to view the alert generated when the FIM module detects the addition of the execute permission.
 
 .. thumbnail:: ../../../images/manual/fim/visualize-the-alert.png
   :title: Visualize the alert
@@ -385,7 +385,7 @@ Test the configuration
 Visualize the alert
 ~~~~~~~~~~~~~~~~~~~
 
-Navigate to **Modules > Integrity monitoring** on the Wazuh dashboard to view the alert generated when the FIM module detects the deletion of files in the monitored directory.
+Navigate to **File Integrity Monitoring** on the Wazuh dashboard to view the alert generated when the FIM module detects the deletion of files in the monitored directory.
 
 .. thumbnail:: ../../../images/manual/fim/deleted-file-alert.png
   :title: Deleted file alert
@@ -621,7 +621,7 @@ Test the configuration
 Visualize the alert
 ~~~~~~~~~~~~~~~~~~~
 
-Navigate to **Modules > Integrity monitoring** on the Wazuh dashboard to view the alert. In this example, you can see an alert with a severity of 12 on the Wazuh dashboard when the FIM module detects changes in the monitored file.
+Navigate to **File Integrity Monitoring** on the Wazuh dashboard to view the alert. In this example, you can see an alert with a severity of 12 on the Wazuh dashboard when the FIM module detects changes in the monitored file.
 
 .. thumbnail:: ../../../images/manual/fim/severity-of-12-alert.png
   :title: Severity of 12 alert

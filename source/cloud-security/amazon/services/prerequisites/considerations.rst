@@ -54,7 +54,7 @@ The ``--debug 2`` parameter gets a verbose output. This is useful to show the sc
 Connection configuration for retries
 ------------------------------------
 
-Some calls to AWS services may fail when made in highly congested environments. The :ref:`boto-3` client raises `ClientError` exceptions describing the errors. This kind of exception often needs repeating the call, without further handling. To help retry these calls, Boto3 provides `Retries <https://boto3.amazonaws.com/v1/documentation/api/latest/guide/retries.html>`__. This feature allows retrying client calls to AWS services when errors like ``ThrottlingException`` are experienced.
+Some calls to AWS services might fail when made in highly congested environments. The `Boto-3 <https://boto3.amazonaws.com/v1/documentation/api/latest/index.html>`__ client raises `ClientError` exceptions describing the errors. This kind of exception often needs repeating the call, without further handling. To help retry these calls, Boto3 provides `Retries <https://boto3.amazonaws.com/v1/documentation/api/latest/guide/retries.html>`__. This feature allows retrying client calls to AWS services when you experience errors like ``ThrottlingException``.
 
 Users can customize two retry configurations.
 
@@ -270,30 +270,3 @@ The following is an example of a valid configuration.
     </service>
 
   </wodle>
-
-Enabling dashboard visualization  
---------------------------------
-  
-You can activate the corresponding Security Information Management module on the Wazuh Dashboard. This module provides additional details and insights about events, as shown in the screenshots below.
-
-    .. thumbnail:: /images/aws/aws-dashboard.png
-       :title: Amazon AWS dashboard
-       :alt: Amazon AWS dashboard
-       :align: center
-       :width: 80%
-
-    .. thumbnail:: /images/aws/aws-events.png
-       :title: Amazon AWS events
-       :alt: Amazon AWS events
-       :align: center
-       :width: 80%
-
-To activate the **Amazon AWS** module, navigate to your Wazuh Dashboard and click on **Wazuh > Settings > Modules**. In the **Security Information Management** section, enable the **Amazon AWS** module as shown in the image below.
-
-    .. thumbnail:: /images/aws/aws-module.png
-       :title: Amazon AWS module
-       :alt: Amazon AWS module
-       :align: center
-       :width: 80%
-
-For further information, please refer to the `modules <https://documentation.wazuh.com/current/user-manual/wazuh-dashboard/settings.html#modules>`_ section.

@@ -156,7 +156,7 @@ Configuring Let’s Encrypt SSL certificates in the Wazuh dashboard
       server.ssl.key: "/etc/wazuh-dashboard/certs/privkey.pem"
       server.ssl.certificate: "/etc/wazuh-dashboard/certs/fullchain.pem"
       opensearch.ssl.certificateAuthorities: ["/etc/wazuh-dashboard/certs/root-ca.pem"]
-      uiSettings.overrides.defaultRoute: /app/wazuh
+      uiSettings.overrides.defaultRoute: /app/wz-home
       opensearch_security.cookie.secure: true
 
 #. Modify the permissions and ownership of the certificates:

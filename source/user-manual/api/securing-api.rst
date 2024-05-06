@@ -37,7 +37,7 @@ Recommended changes to secure the Wazuh API
         cert: "server.crt"
         use_ca: False
         ca: "ca.crt"
-        ssl_protocol: "TLSv1.2"
+        ssl_protocol: "auto"
         ssl_ciphers: ""
 
     After setting these parameters, it will be necessary to restart the Wazuh API using the ``wazuh-manager`` service:
