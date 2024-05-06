@@ -103,7 +103,7 @@ KeyCloak configuration
 
 #. Create a new role. Navigate to **Realm roles > Create role** and complete the section with these parameters:
 
-   - **Role name**: Input ``wazuh-readonly``. This will be our backend role in the Wazuh Indexer configuration.
+   - **Role name**: Input ``wazuh-readonly``. This will be our backend role in the Wazuh indexer configuration.
 
       .. thumbnail:: /images/single-sign-on/keycloak/read-only/09-create-a-new-role-RO.png
          :title: Create a new role
@@ -175,7 +175,7 @@ KeyCloak configuration
 
       - **Mapper type**: ``Role list``
       - **Name**: ``wazuhRoleKey``. You can use any name here.
-      - **Role attribute name**: ``Roles``. This will be the ``roles_key`` on the Wazuh Indexer configuration.
+      - **Role attribute name**: ``Roles``. This will be the ``roles_key`` on the Wazuh indexer configuration.
       - **SAML Attribute NameFormat**: ``Basic``  
       - **Single Role Attribute**: ``On``
 

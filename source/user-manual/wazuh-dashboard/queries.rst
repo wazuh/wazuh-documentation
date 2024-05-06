@@ -129,7 +129,7 @@ Search term mode
     linux
 
 
-Wazuh Indexer
+Wazuh indexer
 -------------
 
 In the Wazuh dashboard, there are specialized search bars for querying Wazuh indexer data. These use the same syntax as OpenSearch. To learn more, refer to `Using Dashboards Query Language <https://opensearch.org/docs/2.10/dashboards/discover/dql/>`__.
