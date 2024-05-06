@@ -34,9 +34,9 @@ Configuration
 
     - Wazuh agents frontend and backend registration:
 
-        The *backend* is a set of servers(Wazuh cluster nodes) that receive the forwarded agent connections and can be defined by:
+        The *backend* is a set of servers (Wazuh cluster nodes) that receive the forwarded agent connections, and is defined by:
 
-            - the type of load balancing
+            - the load balancing mode
             - which load balance algorithm to use
             - a list of servers and ports, in this case, the default one pointing to the master node of the cluster.
 
@@ -87,6 +87,13 @@ Lifecycle script handler
 ------------------------
 
 To manage the HAProxy service, we will need a script that is in charge of starting and stopping it. Below we provide a working example.
+
+.. raw:: html
+
+   <details>
+   <summary><b>haproxy-init</b></summary>
+
+
 
 .. code-block:: bash
 
@@ -291,6 +298,10 @@ To manage the HAProxy service, we will need a script that is in charge of starti
 
     :
 
+.. raw:: html
+
+   </details>
+
 Start the HAProxy service.
 
 .. code-block:: console
@@ -405,7 +416,7 @@ How to enable it
 .. note::
     The recommended version of HAProxy is the 2.8 LTS.
 
-To use this feature is required to have a :ref:`HAProxy <haproxy_installation>`  instance balancing the cluster using the **least connections** algorithm.
+To use this feature is required to have a :ref:`HAProxy <haproxy_installation>` instance balancing the cluster using the **least connections** algorithm.
 
 Dataplane API configuration
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^
