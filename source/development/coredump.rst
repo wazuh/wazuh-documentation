@@ -79,7 +79,7 @@ Systemd allows centralized management and configuration of core dumps across you
 Manual configuration
 ^^^^^^^^^^^^^^^^^^^^
 
-Setting up core dump generation without using systemd involves configuring the operating system's core dump settings manually. Here's how you can do it on Linux systems:
+Setting up core dump generation without using systemd involves configuring the operating system core dump settings manually.
 
 #. **Identify the Target Directory for Core Dumps**:
     Choose a directory where core dump files will be generated. This directory should have sufficient disk space and appropriate permissions for the process generating core dumps to write to it.
