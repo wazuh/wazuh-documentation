@@ -13,8 +13,8 @@ Linux endpoints
 
 In Linux version 2.41 and later, a template defines the location and name of the generated `core dump files <https://man7.org/linux/man-pages/man5/core.5.html>`__. Earlier versions generated the core dump files next to the location of the file that caused the error.
 
-Using `ulimit`, without `systemd`
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+Manual configuration
+^^^^^^^^^^^^^^^^^^^^
 
 Setting up core dump generation without using systemd involves configuring the operating system's core dump settings manually. Here's how you can do it on Linux systems:
 
