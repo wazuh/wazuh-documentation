@@ -16,7 +16,7 @@ In Linux version 2.41 and later, a template defines the location and name of the
 Using `systemd`
 ^^^^^^^^^^^^^^^
 
-To set up core dump generation using systemd, you can utilize systemd's built-in features for managing core dumps. Here's a step-by-step guide:
+Systemd allows centralized management and configuration of core dumps across your system. To set up core dump generation with systemd, use the built-in features as follows.
 
 #. **Check Core Dump Configuration**:
     First, verify the current core dump configuration:
