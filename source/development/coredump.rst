@@ -64,8 +64,7 @@ Systemd allows centralized management and configuration of core dumps across you
 
         ProcessSizeMax=2G
 
-#. **Restart systemd-coredump Service**:
-    After making changes to the configuration, restart the systemd-coredump service for the changes to take effect:
+#. Restart the ``systemd-coredump`` service to apply the changes.
 
     .. code-block:: console
 
