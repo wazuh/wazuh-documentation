@@ -3,21 +3,15 @@
 .. meta::
    :description: This section contains instructions to configure and collect core dumps for analysis.
 
-HowTo configure Wazuh agent's OS to generate `coredumps`
-========================================================
-This section contains instructions to customize the diferent OS where Wazuh agent is installed.
+Configuring core dump generation
+================================
 
-Introduction
-------------
-A **core dump** a.k.a **crash-dump** is a snapshot of the memory of a running process. The S.O. where the Wazuh agent resides, can automatically create a core dump when a serious or unhandled error occurs. Sometimes a crash dump is useful for diagnosing a process that appears to be hanging; The memory dump may reveal information about the cause of the crash.
-When collecting a core dump, be sure to collect other information about the environment so that the core file can be analyzed (for example, the agent and OS version along with any other data you consider appropriate).
+A *core dump* or *crash dump* is a snapshot of a process's memory taken when a serious or unhandled error occurs. The operating system on a monitored endpoint can automatically generate core dumps. These dumps are valuable for diagnosing hanging processes. Alongside environment information such as the operating system version, they can offer insights into the cause of a crash.
 
-Linux agent's OS
-----------------
-Since Linux version 2.41 onwards, a template is implemented to define the location and name of the coredumps that are generated in the system, here the reference_.
-Unlike the previous versions, which, if enabled, generated the core file next to the location of the file that caused the error.
+Linux endpoints
+---------------
 
-.. _reference: https://man7.org/linux/man-pages/man5/core.5.html
+In Linux version 2.41 and later, a template defines the location and name of the generated `core dump files <https://man7.org/linux/man-pages/man5/core.5.html>`__. Earlier versions generated the core dump files next to the location of the file that caused the error.
 
 Using `ulimit`, without `systemd`
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
