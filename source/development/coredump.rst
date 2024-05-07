@@ -51,7 +51,7 @@ Systemd allows centralized management and configuration of core dumps across you
 
         # systemctl edit systemd-coredump
 
-    Add the following lines to the editor that opens:
+#. Add the following lines in the editor that opens to enable core dump collection and store core dumps externally. To disable core dump generation you must set ``Storage=none``.
 
     .. code-block:: console
 
