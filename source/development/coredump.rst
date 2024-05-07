@@ -76,8 +76,6 @@ Systemd allows centralized management and configuration of core dumps across you
 
         systemctl status systemd-coredump
 
-Once you've completed these steps, core dump generation will be disabled on your system. Any attempts to generate core dumps will not result in files being stored.
-
 Manual configuration
 ^^^^^^^^^^^^^^^^^^^^
 
