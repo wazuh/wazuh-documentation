@@ -81,9 +81,6 @@ Manual configuration
 
 Setting up core dump generation without using systemd involves configuring the operating system core dump settings manually.
 
-#. **Identify the Target Directory for Core Dumps**:
-    Choose a directory where core dump files will be generated. This directory should have sufficient disk space and appropriate permissions for the process generating core dumps to write to it.
-
 #. **Set the Core Dump Size Limit**:
     If the current core dump size limit is insufficient, increase it using the ``ulimit`` command. For example, to set the core dump size limit to unlimited:
 
