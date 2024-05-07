@@ -3,8 +3,6 @@
 .. meta::
    :description: This section contains instructions to configure and collect core dumps for analysis.
 
-.. _coredumps:
-
 HowTo configure Wazuh agent's OS to generate `coredumps`
 ========================================================
 This section contains instructions to customize the diferent OS where Wazuh agent is installed.
