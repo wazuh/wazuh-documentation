@@ -58,8 +58,7 @@ Systemd allows centralized management and configuration of core dumps across you
         [Coredump]
         Storage=external
 
-#. **Set Core Dump Size Limit (Optional)**:
-    You can optionally set the maximum size of core dump files by adding the ``ProcessSizeMax=`` option in the ``coredump.conf`` file. For example:
+#. **Recommended** – Set a size limit for core dump files. For example, 2 GB.
 
     .. code-block:: console
 
