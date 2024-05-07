@@ -71,8 +71,7 @@ Systemd allows centralized management and configuration of core dumps across you
 
         systemctl restart systemd-coredump
 
-#. **Verify Configuration**:
-    Check the status of the systemd-coredump service to ensure it is running without errors:
+#. Check the status of the systemd-coredump service to ensure it is running without errors.
 
     .. code-block:: console
 
