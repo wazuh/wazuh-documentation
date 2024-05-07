@@ -8,7 +8,7 @@ Adding a Wazuh indexer node
 
 The Wazuh indexer is a highly scalable, full-text search engine that enables efficient storage and retrieval of security-related data. It is designed to handle large amounts of security events and logs, offering advanced search capabilities and various security features.
 
-Adding a new node to the Wazuh cluster can enhance the capacity and resilience of the security monitoring infrastructure.
+Adding a new node to the Wazuh indexer cluster can enhance the capacity and resilience of the security monitoring infrastructure.
 
 The upscale process involves creating certificates, configuring existing components to connect with the new Wazuh indexer node(s), and then installing and configuring the new node(s).
 
@@ -83,6 +83,8 @@ We recommend creating entirely new certificates for your Wazuh indexer nodes. Pe
 
       # tar -cvf ./wazuh-certificates.tar -C ./wazuh-certificates/ .
       # scp wazuh-certificates.tar <TARGET_USERNAME>@<TARGET_IP>:
+
+   This will copy the certificates to the home directory of the logged in user on the target system. You can change this to specify a path to your installation directory.
 
 Distributed deployment
 ^^^^^^^^^^^^^^^^^^^^^^
@@ -176,6 +178,8 @@ Perform the steps below on one indexer node only.
       # tar -cvf ./wazuh-certificates.tar -C ./wazuh-install-files/ .
       # scp wazuh-certificates.tar <TARGET_USERNAME>@<TARGET_IP>:
 
+   This will copy the certificates to the home directory of the logged in user on the target system. You can change this to specify a path to your installation directory.
+
 Configuring existing components to connect with the new node
 ------------------------------------------------------------
 
@@ -261,7 +265,7 @@ All-in-one deployment
       - "CN=<EXISTING_WAZUH_INDEXER_NODE_NAME>,OU=Wazuh,O=Wazuh,L=California,C=US"
       - "CN=<NEW_WAZUH_INDEXER_NODE_NAME>,OU=Wazuh,O=Wazuh,L=California,C=US"
 
-#. Edit the filebeat configuration file ``/etc/filebeat/filebeat.yml`` (In case you are running a distributed deployment, the file is located in the Wazuh server) to add the new Wazuh indexer node(s). Uncomment or add more lines, according to your ``/root/config.yml`` definitions.
+#. Edit the Filebeat configuration file ``/etc/filebeat/filebeat.yml`` to add the new Wazuh indexer node(s). Uncomment or add more lines, according to your ``/root/config.yml`` definitions:
 
    .. code-block:: yaml
       :emphasize-lines: 3
@@ -323,7 +327,7 @@ Distributed deployment
       - "CN=indexer,OU=Wazuh,O=Wazuh,L=California,C=US"
       - "CN=<WAZUH_INDEXER2_NODE_NAME>,OU=Wazuh,O=Wazuh,L=California,C=US"
 
-#. Edit the filebeat configuration file ``/etc/filebeat/filebeat.yml`` (the file is located in the Wazuh server) to add the new Wazuh indexer node(s). Uncomment or add more lines, according to your ``/root/config.yml`` definitions.
+#. Edit the Filebeat configuration file ``/etc/filebeat/filebeat.yml`` (the file is located in the Wazuh server) to add the new Wazuh indexer node(s). Uncomment or add more lines, according to your ``/root/config.yml`` definitions.
 
    .. code-block:: yaml
       :emphasize-lines: 3
