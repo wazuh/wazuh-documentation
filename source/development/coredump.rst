@@ -1,7 +1,7 @@
 .. Copyright (C) 2024, Wazuh, Inc.
 
 .. meta::
-  :description: This section contains instructions to configure and collect coredumps for furture analisys
+   :description: This section contains instructions to configure and collect core dumps for analysis.
 
 .. _coredumps:
 
