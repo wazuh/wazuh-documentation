@@ -171,6 +171,8 @@ Perform the steps below on one indexer node only.
             # tar -cvf ./wazuh-certificates.tar -C ./wazuh-certificates/ .
             # scp wazuh-certificates.tar <TARGET_USERNAME>@<TARGET_IP>:
 
+         This will copy the certificates to the home directory of the logged in user on the target system. You can change this to specify a path to your installation directory.
+
 #. Compress the certificates folder into a new ``wazuh-certificates.tar`` file and copy it to the new Wazuh indexer node(s). You can make use of the ``scp`` utility to securely copy the compressed file.
 
    .. code-block:: console
