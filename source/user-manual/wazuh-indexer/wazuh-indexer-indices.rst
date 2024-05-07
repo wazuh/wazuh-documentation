@@ -143,7 +143,7 @@ You can check for information about Wazuh indices in two ways.
 Using the web user interface
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-#. In the Wazuh dashboard upper left menu **☰**, go to **Indexer/dashboard management** > **Index Management**.
+#. In the Wazuh dashboard upper left menu **☰**, go to **Indexer management** > **Index Management**.
 
    .. thumbnail:: /images/manual/wazuh-indexer/opensearch-plugins-index-management-option.png
       :title: Index management menu option
@@ -169,7 +169,7 @@ You can query the indices information using the Wazuh indexer API from the Wazuh
 Wazuh dashboard
 ~~~~~~~~~~~~~~~
 
-#. Navigate to **☰** > **Indexer/dashboard management** > **Dev Tools**:
+#. Navigate to **☰** > **Indexer management** > **Dev Tools**:
 
    .. code-block:: none
 
