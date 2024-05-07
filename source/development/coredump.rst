@@ -71,34 +71,6 @@ Systemd allows centralized management and configuration of core dumps across you
 
         systemctl restart systemd-coredump
 
-By following these steps, you can set up core dump generation using systemd. This allows for centralized management and configuration of core dumps across your system.
-
-To disable core dump generation, you can modify the configuration of the systemd-coredump service. Here's how you can do it:
-
-#. **Edit systemd-coredump Configuration**:
-    Open the systemd-coredump configuration file for editing:
-
-    .. code-block:: console
-
-        systemctl edit systemd-coredump
-
-#. **Add Configuration to Disable Core Dumps**:
-    Add the following lines to the editor that opens:
-
-    .. code-block:: console
-
-        [Coredump]
-        Storage=none
-
-    This configuration sets the ``Storage`` option to ``none``, effectively disabling core dump storage.
-
-#. **Restart systemd-coredump Service**:
-    After making changes to the configuration, restart the systemd-coredump service for the changes to take effect:
-
-    .. code-block:: console
-
-        systemctl restart systemd-coredump
-
 #. **Verify Configuration**:
     Check the status of the systemd-coredump service to ensure it is running without errors:
 
