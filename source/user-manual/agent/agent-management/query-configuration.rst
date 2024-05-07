@@ -8,7 +8,7 @@
 Querying the agent configuration
 ================================
 
-The actual configuration of an agent, or the manager can be queried on demand by clicking on the **IT Hygiene** module or the **Server management** > **Settings** module. From here you will be able to fetch the active configuration in real time.
+The actual configuration of an agent, or the manager can be queried on demand by clicking on the **Endpoints summary** module or the **Server management** > **Settings** module. From here you will be able to fetch the active configuration in real time.
 
 .. thumbnail:: /images/kibana-app/features/query-configuration/configuration-section.png
   :title: Query the manager configuration in Wazuh dashboard
@@ -31,13 +31,6 @@ By clicking on the *Log collection* configuration, the active configuration is s
   :align: center
   :width: 100%
 
-It also has the capability to show the configuration in JSON or XML formats for better readability:
-
-.. thumbnail:: /images/kibana-app/features/query-configuration/logcollector-json.png
-  :title: Log collection visualization formats
-  :alt: Log collection visualization formats
-  :align: center
-  :width: 100%
 
 Now for example, if you want to know the current cluster configuration from one of your *Wazuh managers*, click on the upper-left menu icon **☰** to open the options, go to **Server management** > **Settings** module, select the desired node and then click on the **Cluster** section:
 
