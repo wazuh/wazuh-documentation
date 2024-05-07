@@ -11,7 +11,7 @@ A *core dump* or *crash dump* is a snapshot of a process's memory taken when a s
 Linux endpoints
 ---------------
 
-In Linux version 2.41 and later, a template defines the location and name of the generated `core dump files <https://man7.org/linux/man-pages/man5/core.5.html>`__. Earlier versions generated the core dump files next to the location of the file that caused the error.
+In Linux version 2.41 and later, a template defines the location and name of the generated `core dump files <https://man7.org/linux/man-pages/man5/core.5.html>`__. Earlier versions generate the core dump files next to the location of the file that caused the error.
 
 Using `systemd`
 ^^^^^^^^^^^^^^^
