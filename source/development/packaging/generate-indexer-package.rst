@@ -17,15 +17,14 @@ self-contained in the application code.
 Instructions for Act, Docker and local build environments can be found
 below:
 
-Act
----
+Act (local GitHub Actions) build environment:
+---------------------------------------------
 
--  `Install Act <https://github.com/nektos/act>`__
+-  In order to follow the next steps, you need to install
+   `Act <https://github.com/nektos/act>`__ from their repository.
 
-The names of the packages are managed by the ``baptizer.sh`` script.
-
-Build:
-~~~~~~
+Minimal Package Build stage:
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 ::
 
@@ -33,11 +32,11 @@ Build:
 
    [Build slim packages/build] 🏁  Job succeeded
 
-Assemble:
-~~~~~~~~~
+Full Package Assemble stage:
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-DEB:
-^^^^
+DEB packages:
+^^^^^^^^^^^^^
 
 ::
 
@@ -45,8 +44,8 @@ DEB:
 
    [Build slim packages/build] 🏁  Job succeeded
 
-RPM:
-^^^^
+RPM packages:
+^^^^^^^^^^^^^
 
 ::
 
@@ -54,16 +53,16 @@ RPM:
 
    [Build slim packages/build] 🏁  Job succeeded
 
-Docker
-------
+Docker build environment:
+-------------------------
 
-.. _build-1:
+.. _minimal-package-build-stage-1:
 
-Build:
-~~~~~~
+Minimal Package Build stage:
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-DEB/RPM
-^^^^^^^
+DEB/RPM:
+^^^^^^^^
 
 Using the `Docker environment <../docker>`__:
 
@@ -71,15 +70,13 @@ Using the `Docker environment <../docker>`__:
 
    docker exec -it wi-build_$(<VERSION) bash packaging_scripts/build.sh -a {x64|arm64} -d {rpm|deb|tar}
 
-.. _assemble-1:
+.. _full-package-assemble-stage-1:
 
-Assemble:
-~~~~~~~~~
+Full Package Assemble stage:
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-.. _deb-1:
-
-DEB
-^^^
+DEB:
+^^^^
 
 Pre-requisites:
 
@@ -91,8 +88,6 @@ Pre-requisites:
 ::
 
    docker exec -it wi-assemble_$(<VERSION) bash packaging_scripts/assemble.sh -a x64 -d deb
-
-.. _rpm-1:
 
 RPM
 ^^^
@@ -111,10 +106,10 @@ Pre-requisites:
 Local
 -----
 
-.. _build-2:
+.. _minimal-package-build-stage-2:
 
-Build
-~~~~~
+Minimal Package Build stage:
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 For local package generation, use the ``build.sh`` script. Take a look
 at the ``build.yml`` workflow file for an example of usage.
@@ -125,16 +120,16 @@ at the ``build.yml`` workflow file for an example of usage.
 
 The generated package is sent to the ``wazuh-indexer/artifacts`` folder.
 
-.. _assemble-2:
+.. _full-package-assemble-stage-2:
 
-Assemble
-~~~~~~~~
+Full Package Assemble stage:
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 **Note:** set the environment variable ``TEST=true`` to assemble a
 package with a minimal set of plugins, speeding up the assembly process.
 
-TAR
-~~~
+TAR:
+~~~~
 
 The assembly process for tarballs consists on:
 
@@ -147,10 +142,10 @@ The assembly process for tarballs consists on:
 
    bash packaging_scripts/assemble.sh -a x64 -d tar -r 1
 
-.. _deb-2:
+.. _deb-1:
 
-DEB
-~~~
+DEB:
+~~~~
 
 For DEB packages, the ``assemble.sh`` script will perform the following
 operations:
@@ -224,10 +219,10 @@ operations:
                   | -- prerm
                   | -- postinst
 
-.. _rpm-2:
+.. _rpm-1:
 
-RPM
-~~~
+RPM:
+~~~~
 
 The ``assemble.sh`` script will use the output from the ``build.sh``
 script and use it as a base to bundle together a final package
