@@ -43,7 +43,7 @@ All notable changes to this project will be documented in this file.
 - Updated the ``user-manual/reference/unattended-installation`` section. ([#7162](https://github.com/wazuh/wazuh-documentation/pull/7162))
 - Changed Docker version requirement to ``6.0.0``. ([#7133](https://github.com/wazuh/wazuh-documentation/pull/7133))
 - Updated the Vulnerability detection PoC. ([#7215](https://github.com/wazuh/wazuh-documentation/pull/7215))
-- Replaced ``localhost`` occurrences in the Offline installation guide and the Wazuh dashboard step-by-step installation guide. ([#7234](https://github.com/wazuh/wazuh-documentation/pull/7234))
+- Replaced ``localhost`` occurrences. ([#7234](https://github.com/wazuh/wazuh-documentation/pull/7234)) ([#7285](https://github.com/wazuh/wazuh-documentation/pull/7285))
 
 ### Fixed
 
