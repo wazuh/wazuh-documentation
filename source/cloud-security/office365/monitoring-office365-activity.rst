@@ -416,7 +416,13 @@ Replace ``<YOUR_TENANT_ID>``, ``<YOUR_CLIENT_ID>``, and ``<YOUR_CLIENT_SECRET>``
 Visualizing the Office 365 activity
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-The Wazuh module for Office 365 provides three visualization options to gain better insight into the events that occur in Office 365. These visualization options are the **Dashboard**, **Panel**, and **Events**. Navigate to the  **Office 365** tab on the **Cloud security** section of the Wazuh dashboard to view this information.
+The Wazuh dashboard has an Office 365 module that provides detailed information and insights about the events that occur in Office 365. The module provides three visualization options.
+
+-  **Dashboard**
+-  **Panel**
+-  **Events**
+
+To select any of them, navigate to the  **Office 365** tab on the **Cloud security** section of the Wazuh dashboard.
 
 Dashboard
 ~~~~~~~~~
