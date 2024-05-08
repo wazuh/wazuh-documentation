@@ -998,7 +998,7 @@ By running the command ``ps auxZ | grep wazuh`` we can see that Wazuh is running
     .. code-block:: console
 
         ps auxZ | grep wazuh
-        system_u:system_r:wazuh_t:s0   wazuh    18239  8.2 16.5 435332 82744 ?        Sl   18:50   0:09 /var/ossec/framework/python/bin/python3 /var/ossec/api/scripts/wazuh-apid.py
+        system_u:system_r:wazuh_t:s0   wazuh    18239  8.2 16.5 435332 82744 ?        Sl   18:50   0:09 /var/ossec/framework/python/bin/python3 /var/ossec/api/scripts/wazuh_apid.py
         system_u:system_r:wazuh_t:s0   root     18281  0.0  0.3 191524  1540 ?        Sl   18:50   0:00 /var/ossec/bin/wazuh-authd
         system_u:system_r:wazuh_t:s0   wazuh    18298  0.6  1.3 641364  6588 ?        Sl   18:50   0:00 /var/ossec/bin/wazuh-db
         system_u:system_r:wazuh_t:s0   root     18322  0.0  0.2  35888  1236 ?        Sl   18:50   0:00 /var/ossec/bin/wazuh-execd
