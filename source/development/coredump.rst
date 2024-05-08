@@ -18,8 +18,7 @@ Using `systemd`
 
 Systemd allows centralized management and configuration of core dumps across your system. To set up core dump generation with systemd, use the built-in features as follows.
 
-#. **Check Core Dump Configuration**:
-    First, verify the current core dump configuration:
+#. Check that the Systemd core dump unit socket is active.
 
     .. code-block:: console
 
@@ -27,25 +26,13 @@ Systemd allows centralized management and configuration of core dumps across you
 
     .. code-block:: none                                                                                                                                                                                            
         :class: output                            
+        :emphasize-lines: 3
 
         ● systemd-coredump.socket - Process Core Dump Socket
              Loaded: loaded (/lib/systemd/system/systemd-coredump.socket; static)
              Active: active (listening) ...
 
-#. **Identify Target Directory for Core Dumps**:
-    Choose a directory where core dump files will be generated. By default, systemd stores core dump files in ``/var/lib/systemd/coredump/``.
-
-    .. code-block:: console
-
-        # cat /proc/sys/kernel/core_pattern
-
-    .. code-block:: none                                                                                                                                                                                            
-        :class: output                            
-
-        │|/lib/systemd/systemd-coredump %P %u %g %s %t                                                                                                                                                                                                                            
-
-#. **Enable Core Dump Collection**:
-    Enable core dump collection by setting the ``Storage=`` option in the systemd ``coredump.conf`` file. You can set it to ``external`` to store core dumps externally, or ``none`` to disable core dump collection altogether.
+#. Edit the Systemd ``/etc/systemd/coredump.conf`` file.
 
     .. code-block:: console
 
@@ -76,20 +63,29 @@ Systemd allows centralized management and configuration of core dumps across you
 
         # systemctl status systemd-coredump
 
+#. To check the generated core dump files, take a look at the default ``/var/lib/systemd/coredump/`` directory. To find the filename pattern for these files, run the following command.
+
+      .. code-block:: console
+
+      # cat /proc/sys/kernel/core_pattern
+
+      .. code-block:: none
+        :class: output                            
+
+        │|/lib/systemd/systemd-coredump %P %u %g %s %t
+
 Manual configuration
 ^^^^^^^^^^^^^^^^^^^^
 
 Setting up core dump generation without using systemd involves configuring the operating system core dump settings manually.
 
-#. **Set the Core Dump Size Limit**:
-    If the current core dump size limit is insufficient, increase it using the ``ulimit`` command. For example, to set the core dump size limit to unlimited:
+#. Set the core dump size limit to unlimited for complete debugging information.
 
     .. code-block:: console
 
         # ulimit -c unlimited
 
-#. **Enable Core Dump Generation**:
-    Enable core dump generation by setting the ``core_pattern`` sysctl parameter to specify the core dump file pattern and location. For example, to set the core dump file pattern to ``/var/core/core.%e.%p`` (where `%e` represents the executable name and `%p` represents the process ID):
+#. Set the core dump file location and pattern to enable core dump generation. For example, to set the  the ``/var/core/`` directory and a filename pattern ``core.%e.%p``, where `%e` represents the executable name and `%p` represents the process ID, run the following command.
 
     .. code-block:: console
 
@@ -98,7 +94,7 @@ Setting up core dump generation without using systemd involves configuring the o
 #. **Automate Configuration (Optional)**:
     To preserve these changes across reboots, add the ``ulimit`` command and ``echo`` command setting ``core_pattern`` to a startup script or system initialization script (e.g., ``/etc/rc.local``).
 
-    By following these steps, you can set up core dump generation manually without relying on systemd. However, keep in mind that the process may vary slightly depending on the Linux distribution and version you are using.
+    By following these steps, you can set up core dump generation manually without relying on systemd.
 
 
 To disable core dump generation  you can directly adjust system-wide settings and configurations. Here's how you can do it:
@@ -125,30 +121,30 @@ To disable core dump generation  you can directly adjust system-wide settings an
 
 By following these steps, you can disable core dump generation without relying on systemd. This approach directly modifies system-wide settings to prevent core dumps from being generated.
 
-MacOS agent's OS
-----------------
-On macOS, core dump generation is disabled by default for most applications. However, you can enable core dump generation for specific processes using the ``ulimit`` command. Here's how you can enable core dump generation on macOS:
+MacOS endpoints
+---------------
+On macOS, most applications have core dump generation disabled by default. However, you can enable it using the ``ulimit`` command. To enable core dump generation on macOS follow these steps.
 
-#. **Check Current Core Dump Configuration**:
-    Before enabling core dump generation, check the current core dump size limit using the ``ulimit`` command:
+#. Check the current core dump size limit using the ``ulimit`` command.
 
     .. code-block:: console
 
         # ulimit -c
-        # sysctl kern.corefile
-
-#. **Identify the Target Directory for Core Dumps**:
-    On macOS, core dump files are typically stored in the current working directory of the process that crashes.
 
 #. **Enable Core Dump Generation**:
-    To enable core dump generation for a specific process, set the core dump size limit to a non-zero value using the ``ulimit`` command. For example, to set the limit to unlimited:
+    To enable core dump generation, set the core dump size limit to a non-zero value using the ``ulimit`` command. For example, to set the limit to unlimited:
 
     .. code-block:: console
 
         # ulimit -c unlimited
+
+#. **Set Core Dump Generation path**:
+
+    .. code-block:: console
+
         # sysctl -w kern.corefile=/cores/core.%P
 
-By following these steps, you can enable core dump generation for specific processes on macOS. Keep in mind that enabling core dump generation may consume additional disk space, so use it judiciously. Additionally, core dump generation may not be supported or may behave differently for all processes on macOS.
+By following these steps, you can enable core dump generation on macOS. Keep in mind that enabling core dump generation may consume additional disk space, so use it judiciously. Additionally, core dump generation may not be supported or may behave differently for all processes on macOS.
 
 To disable coredump generation, you can ensure that core dumps are not generated by setting the core dump size limit to zero. Here's how you can disable core dump generation on macOS:
 
@@ -156,5 +152,5 @@ To disable coredump generation, you can ensure that core dumps are not generated
 
         # ulimit -c 0
 
-By setting the core dump size limit to zero, you ensure that core dumps are not generated for any processes on macOS. Keep in mind that this setting affects the entire system and may impact troubleshooting capabilities in case of application crashes.
+By setting the core dump size limit to zero, you ensure that core dumps are not generated for any processes on macOS.
 
