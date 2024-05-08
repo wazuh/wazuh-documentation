@@ -1,5 +1,5 @@
-``wazuh-indexer`` packages generation guide
-===========================================
+Wazuh Indexer packages generation guide
+=======================================
 
 The packages' generation process consists on 2 steps:
 
@@ -14,15 +14,107 @@ process is designed to be independent enough for maximum portability.
 GitHub Actions provides infrastructure, while the building process is
 self-contained in the application code.
 
-Each section includes instructions to generate packages locally, using
-Act or Docker.
+Instructions for Act, Docker and local build environments can be found
+below:
+
+Act
+---
 
 -  `Install Act <https://github.com/nektos/act>`__
 
 The names of the packages are managed by the ``baptizer.sh`` script.
 
-Build
+Build:
+~~~~~~
+
+::
+
+   act -j build -W .github/workflows/build.yml --artifact-server-path ./artifacts
+
+   [Build slim packages/build] 🏁  Job succeeded
+
+Assemble:
+~~~~~~~~~
+
+DEB:
+^^^^
+
+::
+
+   act -j assemble -W .github/workflows/build.yml --artifact-server-path ./artifacts --matrix distribution:deb --matrix architecture:x64
+
+   [Build slim packages/build] 🏁  Job succeeded
+
+RPM:
+^^^^
+
+::
+
+   act -j assemble -W .github/workflows/build.yml --artifact-server-path ./artifacts --matrix distribution:rpm --matrix architecture:x64 --var OPENSEARCH_VERSION=2.11.1
+
+   [Build slim packages/build] 🏁  Job succeeded
+
+Docker
+------
+
+.. _build-1:
+
+Build:
+~~~~~~
+
+DEB/RPM
+^^^^^^^
+
+Using the `Docker environment <../docker>`__:
+
+::
+
+   docker exec -it wi-build_$(<VERSION) bash packaging_scripts/build.sh -a {x64|arm64} -d {rpm|deb|tar}
+
+.. _assemble-1:
+
+Assemble:
+~~~~~~~~~
+
+.. _deb-1:
+
+DEB
+^^^
+
+Pre-requisites:
+
+-  Current directory: ``wazuh-indexer/``
+-  Existing deb package in ``wazuh-indexer/artifacts/dist/deb``, as a
+   result of the *Build* stage.
+-  Using the `Docker environment <../docker>`__:
+
+::
+
+   docker exec -it wi-assemble_$(<VERSION) bash packaging_scripts/assemble.sh -a x64 -d deb
+
+.. _rpm-1:
+
+RPM
+^^^
+
+Pre-requisites:
+
+-  Current directory: ``wazuh-indexer/``
+-  Existing rpm package in ``wazuh-indexer/artifacts/dist/rpm``, as a
+   result of the *Build* stage.
+-  Using the `Docker environment <../docker>`__:
+
+::
+
+   docker exec -it wi-assemble_$(<VERSION) bash packaging_scripts/assemble.sh -a x64 -d rpm
+
+Local
 -----
+
+.. _build-2:
+
+Build
+~~~~~
 
 For local package generation, use the ``build.sh`` script. Take a look
 at the ``build.yml`` workflow file for an example of usage.
@@ -31,46 +123,31 @@ at the ``build.yml`` workflow file for an example of usage.
 
    bash packaging_scripts/build.sh -a x64 -d tar -n $(bash packaging_scripts/baptizer.sh -a x64 -d tar -m)
 
-Act (GitHub Workflow locally)
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-
-::
-
-   act -j build -W .github/workflows/build.yml --artifact-server-path ./artifacts
-
-   [Build slim packages/build] 🏁  Job succeeded
-
-Running in Docker
-^^^^^^^^^^^^^^^^^
-
-Using the `Docker environment <../docker>`__:
-
-::
-
-   docker exec -it wi-build_$(<VERSION) bash packaging_scripts/build.sh -a {x64|arm64} -d {rpm|deb|tar}
-
 The generated package is sent to the ``wazuh-indexer/artifacts`` folder.
 
+.. _assemble-2:
+
 Assemble
---------
+~~~~~~~~
 
 **Note:** set the environment variable ``TEST=true`` to assemble a
-package with the required plugins only, speeding up the assembly
-process.
+package with a minimal set of plugins, speeding up the assembly process.
 
 TAR
 ~~~
 
 The assembly process for tarballs consists on:
 
-#. Extract.
-#. Install plugins.
-#. Add Wazuh's configuration files and tools.
-#. Compress.
+#. Extraction of the minimal package
+#. Bundling of plugins
+#. Addition of Wazuh configuration files and tooling
+#. Compression
 
 ::
 
    bash packaging_scripts/assemble.sh -a x64 -d tar -r 1
+
+.. _deb-2:
 
 DEB
 ~~~
@@ -147,30 +224,7 @@ operations:
                   | -- prerm
                   | -- postinst
 
-Running in Act
-^^^^^^^^^^^^^^
-
-::
-
-   act -j assemble -W .github/workflows/build.yml --artifact-server-path ./artifacts --matrix distribution:deb --matrix architecture:x64
-
-   [Build slim packages/build] 🏁  Job succeeded
-
-.. _running-in-docker-1:
-
-Running in Docker
-^^^^^^^^^^^^^^^^^
-
-Pre-requisites:
-
--  Current directory: ``wazuh-indexer/``
--  Existing deb package in ``wazuh-indexer/artifacts/dist/deb``, as a
-   result of the *Build* stage.
--  Using the `Docker environment <../docker>`__:
-
-::
-
-   docker exec -it wi-assemble_$(<VERSION) bash packaging_scripts/assemble.sh -a x64 -d deb
+.. _rpm-2:
 
 RPM
 ~~~
@@ -239,38 +293,11 @@ The script will:
           wazuh-indexer-min-*.rpm
           wazuh-indexer.rpm.spec
 
-.. _running-in-act-1:
+``build.sh`` and ``assemble.sh`` reference
+------------------------------------------
 
-Running in Act
-^^^^^^^^^^^^^^
-
-::
-
-   act -j assemble -W .github/workflows/build.yml --artifact-server-path ./artifacts --matrix distribution:rpm --matrix architecture:x64 --var OPENSEARCH_VERSION=2.11.1
-
-   [Build slim packages/build] 🏁  Job succeeded
-
-.. _running-in-docker-2:
-
-Running in Docker
-^^^^^^^^^^^^^^^^^
-
-Pre-requisites:
-
--  Current directory: ``wazuh-indexer/``
--  Existing rpm package in ``wazuh-indexer/artifacts/dist/rpm``, as a
-   result of the *Build* stage.
--  Using the `Docker environment <../docker>`__:
-
-::
-
-   docker exec -it wi-assemble_$(<VERSION) bash packaging_scripts/assemble.sh -a x64 -d rpm
-
-Bash scripts reference
-----------------------
-
-The packages' generation process is guided through bash scripts. This
-section list and describes them, as well as their inputs and outputs.
+The packages' generation process is guided through bash scripts. Below
+is a reference of their inputs, outputs and code:
 
 ::
 
