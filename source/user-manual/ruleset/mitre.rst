@@ -190,11 +190,11 @@ We use filters on the **MITRE ATT&CK> Events** tab of the Wazuh dashboard to que
   :align: center
   :width: 80%
 
-Expand the rule ID ``110011`` alert to view the MITRE ID ``T1543.003`` information.
+Expand the rule ID ``92154`` alert to view the MITRE ID ``T1053.005`` information.
 
 .. thumbnail:: /images/manual/mitre/mitre-id-t1543.003-information.png
-  :title: MITRE ID T1110 information
-  :alt: MITRE ID T1110 information
+  :title: MITRE ID T1543.003 information
+  :alt: MITRE ID T1543.003 information
   :align: center
   :width: 80%
 
@@ -203,10 +203,10 @@ Click on the **JSON** tab to view the details of the alert in JSON format:
 .. code-block:: json
 
    {
-     "agent": {
+      "agent": {
       "ip": "10.0.2.15",
-      "name": "Windows_11",
-      "id": "001"
+      "name": "Windows-11",
+      "id": "003"
     },
     "manager": {
       "name": "wazuh-server"
@@ -215,11 +215,12 @@ Click on the **JSON** tab to view the details of the alert in JSON format:
       "win": {
         "eventdata": {
           "image": "C:\\\\Windows\\\\system32\\\\services.exe",
-          "targetObject": "HKLM\\\\System\\\\CurrentControlSet\\\\Services\\\\PSEXESVC\\\\Start",
-          "processGuid": "{08d76baf-2978-65a7-0b00-000000001300}",
-          "processId": "708",
-          "utcTime": "2024-01-16 15:54:26.456",
-          "details": "DWORD (0x00000004)",
+          "targetObject": "HKLM\\\\System\\\\CurrentControlSet\\\\Services\\\\PSEXESVC\\\\ObjectName",
+          "processGuid": "{ee63de90-6d6b-663a-0b00-000000000a00}",
+          "processId": "812",
+          "utcTime": "2024-05-08 03:35:13.169",
+          "ruleName": "technique_id=T1543,technique_name=Service Creation",
+          "details": "LocalSystem",
           "eventType": "SetValue",
           "user": "NT AUTHORITY\\\\SYSTEM"
         },
@@ -230,24 +231,24 @@ Click on the **JSON** tab to view the details of the alert in JSON format:
           "level": "4",
           "channel": "Microsoft-Windows-Sysmon/Operational",
           "opcode": "0",
-          "message": "\"Registry value set:\r\nRuleName: -\r\nEventType: SetValue\r\nUtcTime: 2024-01-16 15:54:26.456\r\nProcessGuid: {08d76baf-2978-65a7-0b00-000000001300}\r\nProcessId: 708\r\nImage: C:\\Windows\\system32\\services.exe\r\nTargetObject: HKLM\\System\\CurrentControlSet\\Services\\PSEXESVC\\Start\r\nDetails: DWORD (0x00000004)\r\nUser: NT AUTHORITY\\SYSTEM\"",
+          "message": "\"Registry value set:\r\nRuleName: technique_id=T1543,technique_name=Service Creation\r\nEventType: SetValue\r\nUtcTime: 2024-05-08 03:35:13.169\r\nProcessGuid: {ee63de90-6d6b-663a-0b00-000000000a00}\r\nProcessId: 812\r\nImage: C:\\Windows\\system32\\services.exe\r\nTargetObject: HKLM\\System\\CurrentControlSet\\Services\\PSEXESVC\\ObjectName\r\nDetails: LocalSystem\r\nUser: NT AUTHORITY\\SYSTEM\"",
           "version": "2",
-          "systemTime": "2024-01-16T15:54:26.4581578Z",
-          "eventRecordID": "14864",
-          "threadID": "1812",
-          "computer": "Windows-11",
+          "systemTime": "2024-05-08T03:35:13.1786313Z",
+          "eventRecordID": "13185",
+          "threadID": "4816",
+          "computer": "DESKTOP-UV1HVEI",
           "task": "13",
-          "processID": "5908",
+          "processID": "4004",
           "severityValue": "INFORMATION",
           "providerName": "Microsoft-Windows-Sysmon"
         }
       }
     },
     "rule": {
-      "firedtimes": 18,
+      "firedtimes": 7,
       "mail": false,
       "level": 10,
-      "description": "PsExec service running as NT AUTHORITY\\\\SYSTEM has been created on Windows-11",
+      "description": "PsExec service running as NT AUTHORITY\\\\SYSTEM has been created on DESKTOP-UV1HVEI",
       "groups": [
         "windows",
         "sysmon",
@@ -271,10 +272,10 @@ Click on the **JSON** tab to view the details of the alert in JSON format:
     "decoder": {
       "name": "windows_eventchannel"
     },
-    "id": "1705420467.38720948",
-    "timestamp": "2024-01-16T15:54:27.447+0000"
-   }
-
+    "id": "1715139314.3273871",
+    "timestamp": "2024-05-08T03:35:14.202+0000"
+  },
+  
 The alerts display the MITRE ATT&CK ID and its associated tactics and techniques. This helps users quickly understand the nature of the attack and take appropriate actions.
 
 
