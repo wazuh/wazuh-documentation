@@ -105,7 +105,7 @@ The above SCA scan result shows ``failed`` because the public key authentication
 Implementing SCA remediation steps
 ----------------------------------
 
-In the example in the previous section, implementing the remediation provided by the Wazuh SCA improves the security of the endpoint. This involves changing the ``PublkeyAuthentication`` option value in the ``sshd_config`` file. In the image below, you can see the status of the check ``3000`` have changed to ``passed``.
+In the example in the previous section, implementing the remediation provided by the Wazuh SCA improves the security of the endpoint. This involves changing the ``PubkeyAuthentication`` option value in the ``sshd_config`` file. In the image below, you can see the status of the check ``3003`` has changed to ``passed``.
 
 .. thumbnail:: /images/getting-started/use-cases/sca/sca-checks-status-changed.png
    :title: Status passed for the check 3003

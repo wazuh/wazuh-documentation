@@ -217,7 +217,7 @@ Identity and access management anomalous activity
 Posture management result
 -------------------------
 
-Visualize the Google Cloud posture management results by navigating to **Threat hunting**. Filter for the rule IDs ``100200`` and ``100201``.
+Visualize the Google Cloud posture management results by navigating to **Threat Hunting**. Filter for the rule IDs ``100200`` and ``100201``.
 
 .. thumbnail:: /images/cloud-security/gcp/gcp-posture-management-alerts.png
    :title: Wazuh alerts for the GCP posture management

@@ -59,14 +59,14 @@ Screenshots
           :title: VirusTotal 
           :alt: VirusTotal 
      - .. thumbnail:: ../images/getting-started/aws.png
-          :title: Amazon web services 
-          :alt: Amazon web services 
+          :title: Amazon Web Services 
+          :alt: Amazon Web Services 
    * - .. thumbnail:: ../images/getting-started/github.png
           :title: GitHub 
           :alt: GitHub 
      - .. thumbnail:: ../images/getting-started/pci-dss.png
-          :title: PCI-DSS 
-          :alt: PCI-DSS 
+          :title: PCI DSS 
+          :alt: PCI DSS 
 
 .. toctree::
    :hidden:
