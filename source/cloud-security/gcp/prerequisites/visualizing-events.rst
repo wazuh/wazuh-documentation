@@ -8,6 +8,7 @@ Visualizing Google Cloud events on the Wazuh dashboard
 
  Navigate to **Google Cloud** to view Google Cloud events and analytics on the Wazuh dashboard.
 
+
    .. thumbnail:: /images/cloud-security/gcp/gcp-dashboard.png
       :title: 
       :alt: 
