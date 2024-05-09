@@ -25,7 +25,7 @@ Wazuh server
    .. code-block:: xml
 
       <group name="pam,syslog,">
-        <rule id="100100" level="10" frequency="3" timeframe="120">
+        <rule id="120100" level="10" frequency="3" timeframe="120">
           <if_matched_sid>5503</if_matched_sid>
           <description>Possible password guess on $(dstuser): 3 failed logins in a short period of time</description>
           <mitre>
@@ -119,7 +119,7 @@ To test our use case, sign in to the ``user1`` account and attempt to switch to 
 Visualize the alerts
 --------------------
 
-You can visualize the alert data on the Wazuh dashboard. In the image below, you can see that the active response triggers just after rule ID ``100100`` fires to disable the account. Then re-enables it again after 5 minutes.
+You can visualize the alert data on the Wazuh dashboard. In the image below, you can see that the active response triggers just after rule ID ``120100`` fires to disable the account. Then re-enables it again after 5 minutes.
 
 .. thumbnail:: /images/manual/active-response/ar-alert-fired3.png
    :title: Active response alert: User account disabled
