@@ -149,7 +149,7 @@ The above SCA scan result is **Failed** because the rule did not find ``Chain IN
 
       # systemctl restart wazuh-agent
 
-The scan result for check ``2603`` changes to **Passed** as shown in the image below:
+The scan result for check ``19098`` changes to **Passed** as shown in the image below:
 
   .. thumbnail:: /images/sca/configuration-assessment-scan-result.png
      :title: SCA scan result
