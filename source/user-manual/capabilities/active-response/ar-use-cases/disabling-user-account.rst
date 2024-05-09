@@ -60,14 +60,14 @@ Wazuh server
         <active-response>
           <command>disable-account</command>
           <location>local</location>
-          <rules_id>100100</rules_id>
+          <rules_id>120100</rules_id>
           <timeout>300</timeout>
         </active-response>
       </ossec_config>
 
    -  ``<command>``: Specifies the command to configure. This is the command name ``disable-account`` defined in the previous step.
    -  ``<location>``: Specifies where the command executes. Using the ``local`` value here means that the command executes on the monitored endpoint where the trigger event occurs.
-   -  ``<rules_id>``: The active response module executes the command if rule ID ``100100``: ``Possible password guess on $(dstuser): 3 failed logins in a short period of time`` fires.
+   -  ``<rules_id>``: The active response module executes the command if rule ID ``120100``: ``Possible password guess on $(dstuser): 3 failed logins in a short period of time`` fires.
    -  ``<timeout>``: Specifies how long the active response action must last. In this use case, we configure it to last for 300 seconds. After that period, the active response reverts its action and re-enables the account.
 
 #. Restart the Wazuh manager service to apply changes:

@@ -188,7 +188,7 @@ It also involves mapping this user with the Wazuh API, creating a custom policy 
 
 As a final result, we will have a new user with permission to manage a group of agents and read the documents regarding the said group.
 
-In this example, we have an environment with five agents. Agents ``001`` and ``003`` belong to the ``Team_A`` group whereas agents ``002`` and ``003`` belong to the ``Team_B`` group. To learn more about creating agents' groups, see :ref:`Grouping agents <grouping-agents>`. We will describe how to create a new user and give it permission to manage agents from ``Team_A``.
+In this example, we have an environment with three agents. Agents ``001`` and ``003`` belong to the ``Team_A`` group whereas agents ``002`` and ``003`` belong to the ``Team_B`` group. To learn more about creating agents' groups, see :ref:`Grouping agents <grouping-agents>`. We will describe how to create a new user and give it permission to manage agents from ``Team_A``.
 
 
 .. thumbnail:: /images/manual/user-administration/rbac/environment.png
