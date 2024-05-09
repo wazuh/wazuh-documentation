@@ -117,3 +117,36 @@ On macOS, most applications have core dump generation disabled by default. Howev
       # sysctl -w kern.corefile=/cores/core.%P
 
 Enabling core dump generation might consume significant disk space, so use it judiciously. Moreover, not all processes on macOS support or behave consistently with core dump generation.
+
+Windows endpoints
+-----------------
+
+To collect user-mode dumps on Windows, you can use the built-in Windows Error Reporting (WER) feature. Here's how you can set it up:
+
+* Open Registry Editor:
+    Press Win + R to open the Run dialog.
+
+* Type regedit and press Enter to open the Registry Editor.
+    Navigate to the Registry Key:
+
+* In the Registry Editor, navigate to the following key:
+    HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\Windows Error Reporting\LocalDumps
+
+  If the LocalDumps key doesn't exist, you may need to create it.
+
+* Create Dump Settings:
+    Right-click on the LocalDumps key and choose New > Key.
+    Name the new key with the executable name of the process for which you want to collect dumps. For example, if you want to collect dumps for Notepad.exe, name the key Notepad.exe.
+    Inside the newly created key, you can set various values to configure dump collection:
+    DumpFolder: Specify the folder where you want the dump files to be saved.
+    DumpType: Set the type of dump to collect. For user-mode dumps, set the value to 2.
+    CustomDumpFlags: You can set additional flags here if needed.
+
+* Configure Dump File Settings:
+    Set the DumpFolder value to the folder path where you want to save the dump files.
+    Set the DumpType value to 2 to specify user-mode dumps.
+
+* Restart the Application:
+    Restart the application or process for which you've configured the dump settings. The changes will take effect the next time the application encounters an unhandled exception.
+
+Remember to be cautious when modifying the Windows Registry. Incorrect changes can cause system instability or other issues. Always backup the registry or create a system restore point before making changes.
