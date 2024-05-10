@@ -1,24 +1,33 @@
 Wazuh Indexer packages generation guide
 =======================================
 
-The packages' generation process consists on 2 steps:
+General Packaging pre-requisistes:
+==================================
 
--  **Build**: compiles the Java application and bundles it into a
+-  Clone the ``wazuh-indexer`` repository and switch to the ``4.9.0``
+   branch:
+
+.. code:: console
+
+   git clone https://www.github.com/wazuh/wazuh-indexer
+   git checkout 4.9.0
+
+The packages' generation process is launched from two scripts, which are
+found within the ``packaging_scripts`` folder of the repository:
+
+-  **build.sh**: compiles the Java application and bundles it into a
    package.
--  **Assembly**: uses the package from the previous step and inflates it
-   with plugins and configuration files, ready for production
+-  **assemble.sh**: uses the package from the previous step and inflates
+   it with plugins and configuration files, ready for production
    deployment.
 
-We usually generate the packages using GitHub Actions, however, the
-process is designed to be independent enough for maximum portability.
-GitHub Actions provides infrastructure, while the building process is
-self-contained in the application code.
+Official packages are built through a GitHub Actions pipeline, however,
+the process is designed to be independent enough for maximum
+portability. The building process is self-contained in the application
+code.
 
-The automated package build infrastructure is built around GitHub Action
-workflows, which can be run locally using
+The GitHub Actions pipeline can be tested locally with
 `Act <https://github.com/nektos/act>`__.
-
-Instructions for Docker and local build environments can be found below:
 
 Docker build environment:
 -------------------------
@@ -29,7 +38,8 @@ Minimal Package Build stage:
 DEB/RPM:
 ^^^^^^^^
 
-Using the `Docker environment <../docker>`__:
+Using the `Docker
+environment <https://www.github.com/wazuh/wazuh-indexer/tree/4.9.0/docker>`__:
 
 .. code:: console
 
@@ -46,7 +56,8 @@ Pre-requisites:
 -  Current directory: ``wazuh-indexer/``
 -  Existing deb package in ``wazuh-indexer/artifacts/dist/deb``, as a
    result of the *Build* stage.
--  Using the `Docker environment <../docker>`__:
+-  Using the `Docker
+   environment <https://www.github.com/wazuh/wazuh-indexer/tree/4.9.0/docker>`__:
 
 .. code:: console
 
@@ -60,7 +71,8 @@ Pre-requisites:
 -  Current directory: ``wazuh-indexer/``
 -  Existing rpm package in ``wazuh-indexer/artifacts/dist/rpm``, as a
    result of the *Build* stage.
--  Using the `Docker environment <../docker>`__:
+-  Using the `Docker
+   environment <https://www.github.com/wazuh/wazuh-indexer/tree/4.9.0/docker>`__:
 
 .. code:: console
 
@@ -257,7 +269,7 @@ The script will:
 The packages' generation process is guided through bash scripts. Below
 is a reference of their inputs, outputs and code:
 
-::
+.. code:: console
 
    scripts:
      - file: build.sh
