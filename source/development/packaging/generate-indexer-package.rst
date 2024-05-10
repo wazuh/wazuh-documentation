@@ -14,49 +14,14 @@ process is designed to be independent enough for maximum portability.
 GitHub Actions provides infrastructure, while the building process is
 self-contained in the application code.
 
-Instructions for Act, Docker and local build environments can be found
-below:
+The automated package build infrastructure is built around GitHub Action
+workflows, which can be run locally using
+`Act <https://github.com/nektos/act>`__.
 
-Act (local GitHub Actions) build environment:
----------------------------------------------
-
--  In order to follow the next steps, you need to install
-   `Act <https://github.com/nektos/act>`__ from their repository.
-
-Minimal Package Build stage:
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-
-::
-
-   act -j build -W .github/workflows/build.yml --artifact-server-path ./artifacts
-
-   [Build slim packages/build] 🏁  Job succeeded
-
-Full Package Assemble stage:
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-
-DEB packages:
-^^^^^^^^^^^^^
-
-::
-
-   act -j assemble -W .github/workflows/build.yml --artifact-server-path ./artifacts --matrix distribution:deb --matrix architecture:x64
-
-   [Build slim packages/build] 🏁  Job succeeded
-
-RPM packages:
-^^^^^^^^^^^^^
-
-::
-
-   act -j assemble -W .github/workflows/build.yml --artifact-server-path ./artifacts --matrix distribution:rpm --matrix architecture:x64 --var OPENSEARCH_VERSION=2.11.1
-
-   [Build slim packages/build] 🏁  Job succeeded
+Instructions for Docker and local build environments can be found below:
 
 Docker build environment:
 -------------------------
-
-.. _minimal-package-build-stage-1:
 
 Minimal Package Build stage:
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -66,11 +31,9 @@ DEB/RPM:
 
 Using the `Docker environment <../docker>`__:
 
-::
+.. code:: console
 
    docker exec -it wi-build_$(<VERSION) bash packaging_scripts/build.sh -a {x64|arm64} -d {rpm|deb|tar}
-
-.. _full-package-assemble-stage-1:
 
 Full Package Assemble stage:
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -85,7 +48,7 @@ Pre-requisites:
    result of the *Build* stage.
 -  Using the `Docker environment <../docker>`__:
 
-::
+.. code:: console
 
    docker exec -it wi-assemble_$(<VERSION) bash packaging_scripts/assemble.sh -a x64 -d deb
 
@@ -99,14 +62,14 @@ Pre-requisites:
    result of the *Build* stage.
 -  Using the `Docker environment <../docker>`__:
 
-::
+.. code:: console
 
    docker exec -it wi-assemble_$(<VERSION) bash packaging_scripts/assemble.sh -a x64 -d rpm
 
 Local
 -----
 
-.. _minimal-package-build-stage-2:
+.. _minimal-package-build-stage-1:
 
 Minimal Package Build stage:
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -114,13 +77,13 @@ Minimal Package Build stage:
 For local package generation, use the ``build.sh`` script. Take a look
 at the ``build.yml`` workflow file for an example of usage.
 
-::
+.. code:: bash
 
    bash packaging_scripts/build.sh -a x64 -d tar -n $(bash packaging_scripts/baptizer.sh -a x64 -d tar -m)
 
 The generated package is sent to the ``wazuh-indexer/artifacts`` folder.
 
-.. _full-package-assemble-stage-2:
+.. _full-package-assemble-stage-1:
 
 Full Package Assemble stage:
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -138,7 +101,7 @@ The assembly process for tarballs consists on:
 #. Addition of Wazuh configuration files and tooling
 #. Compression
 
-::
+.. code:: console
 
    bash packaging_scripts/assemble.sh -a x64 -d tar -r 1
 
