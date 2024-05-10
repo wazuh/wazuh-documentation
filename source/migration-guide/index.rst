@@ -1,7 +1,7 @@
 .. Copyright (C) 2015, Wazuh, Inc.
   
 .. meta::
-  :description: Learn how to migrate from Open Distro for Elasticsearch or from OSSEC to Wazuh. This guide gives instructions to make these migration actions.
+  :description: Learn how to migrate from Open Distro for Elasticsearch to the Wazuh indexer and Wazuh dashboard. This guide gives instructions to perform the migration.
 
 Migration guide
 ================
