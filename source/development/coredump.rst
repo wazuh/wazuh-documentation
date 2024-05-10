@@ -120,10 +120,11 @@ Enabling core dump generation might consume significant disk space, so use it ju
 
 Windows endpoints
 -----------------
+    .. note:: Remember to be cautious when modifying the Windows Registry. Incorrect changes can cause system instability or other issues. Always backup the registry or create a system restore point before making changes.
 
 To collect user-mode dumps on Windows, you can use the built-in Windows Error Reporting (WER) feature. Here's how you can set it up:
 
-#. Press **Windows + R** keys on your keyboard to open the run dialog box.
+#. **Windows + R** keys on your keyboard to open the run dialog box.
 
 #. Type **regedit** in the search box and click **OK** to open the registry editor.
 
@@ -135,21 +136,21 @@ To collect user-mode dumps on Windows, you can use the built-in Windows Error Re
 
    .. note:: If the ``LocalDumps`` key doesn't exist, you may need to create it.
 
-#. Press **Right-click** on the LocalDumps key and choose **New > Key**
+#. **Right-click** on the LocalDumps key and choose **New > Key**
 
-    * Name the new key how to ``wazuh-agent.exe``
+    * Name the new key ``wazuh-agent.exe``
 
    .. note:: Inside the newly created key, you will have to set some property values to configure dump collection
 
-#. Press **Right-click** inside the LocalDumps key and choose **New > Expandable String Value**
+#. **Right-click** inside the LocalDumps key and choose **New > Expandable String Value**
     
-    * Name the new key how to ``DumpFolder``
+    * Name the new key ``DumpFolder``
     * Press **Right-click** on the DumpFolder property and choose **Modify**
     * Change the added string value to ``%LOCALAPPDATA%\WazuhCrashDumps``
 
-#. Press **Right-click** inside the LocalDumps key and choose **New > DWORD (32-bit) Value**
+#. **Right-click** inside the LocalDumps key and choose **New > DWORD (32-bit) Value**
 
-    * Name the new key how to ``DumpType``
+    * Name the new key ``DumpType``
     * Press **Right-click** on the DumpType property and choose **Modify**
     * Change the added number value to ``2``
 
@@ -159,4 +160,3 @@ To collect user-mode dumps on Windows, you can use the built-in Windows Error Re
 
       > Restart-Service -Name wazuh
 
-Remember to be cautious when modifying the Windows Registry. Incorrect changes can cause system instability or other issues. Always backup the registry or create a system restore point before making changes.
