@@ -61,8 +61,8 @@ This use case shows how Wazuh helps meet the **CM-6 Configuration settings** req
 #. Navigate to ID ``28577``.
 
    .. thumbnail:: /images/compliance/nist/navigate-to-id-28577.png    
-      :title: Navigate to ID 28593
-      :alt: Navigate to ID 28593
+      :title: Navigate to ID 28577
+      :alt: Navigate to ID 28577
       :align: center
       :width: 80%
 
