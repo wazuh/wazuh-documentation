@@ -76,7 +76,10 @@ removedUrls['4.8'] = [
   '/user-manual/capabilities/vulnerability-detection/cpe-helper.html',
   '/user-manual/capabilities/vulnerability-detection/querying-the-vulnerability-database.html',
   '/user-manual/capabilities/vulnerability-detection/scan-types.html',
-  '/user-manual/capabilities/vulnerability-detection/allow-os.html'
+  '/user-manual/capabilities/vulnerability-detection/allow-os.html',
+  '/migration-guide/migrating-from-ossec/index.html',
+  '/migration-guide/migrating-from-ossec/ossec-server.html',
+  '/migration-guide/migrating-from-ossec/ossec-agent.html',
 ];
 
 /* Redirections from 4.7 to 4.8  */
