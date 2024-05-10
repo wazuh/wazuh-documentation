@@ -71,10 +71,6 @@ In most systems, auditd includes a rule to skip processing of every audit rule b
 
 #. Check the output of this command to find out if the auditd rules include the ``-a never,task`` rule.
 
-   Link to auditd Linux manual: https://man7.org/linux/man-pages/man8/auditctl.8.html#DISABLED_BY_DEFAULT
- 
-   Check auditd rules:
- 
    .. code-block:: console
  
       # auditctl -l | grep task
