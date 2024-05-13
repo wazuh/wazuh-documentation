@@ -117,3 +117,43 @@ On macOS, most applications have core dump generation disabled by default. Howev
       # sysctl -w kern.corefile=/cores/core.%P
 
 Enabling core dump generation might consume significant disk space, so use it judiciously. Moreover, not all processes on macOS support or behave consistently with core dump generation.
+
+Windows endpoints
+-----------------
+
+To collect user-mode crash dumps on Windows, you can use the Windows Error Reporting (WER) feature. You can set it to save crash dump files locally by editing the Windows Registry as follows.
+
+Accessing the Windows Registry
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+#. Press **Windows + R** keys on your keyboard to open the **Run** dialog box.
+
+#. Type ``regedit`` in the search box and click **OK** to open the Registry editor.
+
+#. `Backup the Windows Registry <https://support.microsoft.com/en-us/topic/how-to-back-up-and-restore-the-registry-in-windows-855140ad-e318-2a13-2829-d428a2ab0692>`__ or `create a system restore point <https://support.microsoft.com/en-us/windows/create-a-system-restore-point-77e02e2a-3298-c869-9974-ef5658ea3be9>`__ to safeguard your system.
+
+Configuring Windows Error Reporting
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+#. Navigate to the ``LocalDumps`` registry key or create it, as it might not exist by default.
+
+   .. code-block:: none
+
+      HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\Windows Error Reporting\LocalDumps
+
+#. Right-click on the ``LocalDumps`` key and choose **New** > **Key**. Name the new key ``wazuh-agent.exe``.
+
+#. Right-click inside the ``wazuh-agent.exe`` key and choose **New** > **Expandable String Value**. Name the new value ``DumpFolder``.
+
+#. Right-click the ``DumpFolder`` value and select **Modify**. Change it to ``%LOCALAPPDATA%\WazuhCrashDumps``.
+
+#. Right-click inside the ``wazuh-agent.exe`` key again and choose **New** > **DWORD (32-bit) Value**. Name the new value ``DumpType``.
+
+#. Right-click the ``DumpType`` value and select **Modify**. Change it to  ``2``.
+
+#. Close the regedit tool and restart the Wazuh agent using PowerShell with administrator privileges.
+
+   .. code-block:: PowerShell
+
+      > Restart-Service -Name wazuh
+
