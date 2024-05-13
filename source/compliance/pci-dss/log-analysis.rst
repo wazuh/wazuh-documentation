@@ -73,7 +73,7 @@ Use cases
 
 	#. Select **☰** > **Dashboard management** > **Dashboards Management** in the Wazuh dashboard.
 
-		.. thumbnail:: /images/compliance/pci/select-stack-management.png
+		.. thumbnail:: /images/compliance/pci/select-dashboard-management.png
 			:title: Select Dashboard Management
 			:align: center
 			:width: 80%
