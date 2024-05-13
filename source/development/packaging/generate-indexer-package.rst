@@ -2,7 +2,7 @@
 Wazuh Indexer
 =============
 
-The packages' generation process is launched from two scripts, which are
+The packages' generation process is orchestrated by two scripts, which are
 found within the ``packaging_scripts`` folder of the repository:
 
 -  ``build.sh``: compiles the Java application and bundles it into a
