@@ -120,41 +120,38 @@ Enabling core dump generation might consume significant disk space, so use it ju
 
 Windows endpoints
 -----------------
-    .. note:: Remember to be cautious when modifying the Windows Registry. Incorrect changes can cause system instability or other issues. Always backup the registry or create a system restore point before making changes.
 
-To collect user-mode dumps on Windows, you can use the built-in Windows Error Reporting (WER) feature. Here's how you can set it up:
+To collect user-mode crash dumps on Windows, you can use the Windows Error Reporting (WER) feature. You can set it to save crash dump files locally by editing the Windows Registry as follows.
 
-#. **Windows + R** keys on your keyboard to open the run dialog box.
+Accessing the Windows Registry
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-#. Type **regedit** in the search box and click **OK** to open the registry editor.
+#. Press **Windows + R** keys on your keyboard to open the **Run** dialog box.
 
-#. Navigate to the Registry Key:
+#. Type ``regedit`` in the search box and click **OK** to open the Registry editor.
+
+#. `Backup the Windows Registry <https://support.microsoft.com/en-us/topic/how-to-back-up-and-restore-the-registry-in-windows-855140ad-e318-2a13-2829-d428a2ab0692>`__ or `create a system restore point <https://support.microsoft.com/en-us/windows/create-a-system-restore-point-77e02e2a-3298-c869-9974-ef5658ea3be9>`__ to safeguard your system.
+
+Configuring Windows Error Reporting
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+#. Navigate to the ``LocalDumps`` registry key or create it, as it might not exist by default.
 
    .. code-block:: none
 
-        HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\Windows Error Reporting\LocalDumps
+      HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\Windows Error Reporting\LocalDumps
 
-   .. note:: If the ``LocalDumps`` key doesn't exist, you may need to create it.
+#. Right-click on the ``LocalDumps`` key and choose **New** > **Key**. Name the new key ``wazuh-agent.exe``.
 
-#. **Right-click** on the LocalDumps key and choose **New > Key**
+#. Right-click inside the ``wazuh-agent.exe`` key and choose **New** > **Expandable String Value**. Name the new value ``DumpFolder``.
 
-    * Name the new key ``wazuh-agent.exe``
+#. Right-click the ``DumpFolder`` value and select **Modify**. Change it to ``%LOCALAPPDATA%\WazuhCrashDumps``.
 
-   .. note:: Inside the newly created key, you will have to set some property values to configure dump collection
+#. Right-click inside the ``wazuh-agent.exe`` key again and choose **New** > **DWORD (32-bit) Value**. Name the new value ``DumpType``.
 
-#. **Right-click** inside the LocalDumps key and choose **New > Expandable String Value**
-    
-    * Name the new key ``DumpFolder``
-    * Press **Right-click** on the DumpFolder property and choose **Modify**
-    * Change the added string value to ``%LOCALAPPDATA%\WazuhCrashDumps``
+#. Right-click the ``DumpType`` value and select **Modify**. Change it to  ``2``.
 
-#. **Right-click** inside the LocalDumps key and choose **New > DWORD (32-bit) Value**
-
-    * Name the new key ``DumpType``
-    * Press **Right-click** on the DumpType property and choose **Modify**
-    * Change the added number value to ``2``
-
-#. Close the regedit tool and restart the Wazuh agent via PowerShell with administrator privileges:
+#. Close the regedit tool and restart the Wazuh agent using PowerShell with administrator privileges.
 
    .. code-block:: PowerShell
 
