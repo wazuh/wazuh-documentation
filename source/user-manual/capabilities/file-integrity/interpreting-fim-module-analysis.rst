@@ -17,7 +17,7 @@ FIM analysis results appear on the Wazuh dashboard whenever there’s an additio
 Inventory 
 ---------
 
-This section displays an inventory of all files that the FIM module has indexed. The FIM database contains the inventory information including the filename, last modification date, user, user id, group, and file size. The image below shows the file inventory of an Ubuntu 20.04 endpoint.
+This section displays an inventory of all files that the FIM module has indexed. The FIM database contains the inventory information including the filename, last modification date, user, user id, group, and file size. The image below shows the file inventory of an Ubuntu 22.04 endpoint.
 
 .. thumbnail:: /images/manual/fim/inventory.png
   :title: Inventory
