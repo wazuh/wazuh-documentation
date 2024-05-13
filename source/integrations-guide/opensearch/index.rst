@@ -47,10 +47,10 @@ Perform the following steps to install Logstash and the required plugins. Ensure
 
    .. code-block:: console
 
-      $ sudo chmod -R 755 </PATH/TO/LOCAL/WAZUH-INDEXER/CERTIFICATE>/root-ca.pem
+      $ sudo chmod -R 755 </PATH/TO/LOCAL/WAZUH_INDEXER/CERTIFICATE>/root-ca.pem
       $ sudo chmod -R 755 </PATH/TO/LOCAL/OPENSEARCH/CERTIFICATE>/root-ca.pem
 
-   Replace ``</PATH/TO/LOCAL/WAZUH-INDEXER/CERTIFICATE>/root-ca.pem`` and ``</PATH/TO/LOCAL/OPENSEARCH/CERTIFICATE>/root-ca.pem`` with your Wazuh indexer and Opensearch certificate local path on the Logstash endpoint respectively.
+   Replace ``</PATH/TO/LOCAL/WAZUH_INDEXER/CERTIFICATE>/root-ca.pem`` and ``</PATH/TO/LOCAL/OPENSEARCH/CERTIFICATE>/root-ca.pem`` with your Wazuh indexer and Opensearch certificate local path on the Logstash endpoint respectively.
 
 Configuring new indexes
 ^^^^^^^^^^^^^^^^^^^^^^^
@@ -173,7 +173,7 @@ We use the  `Logstash keystore <https://www.elastic.co/guide/en/logstash/current
             password  =>  "${WAZUH_INDEXER_PASSWORD}"
             index =>  "wazuh-alerts-4.x-*"
             ssl => true
-            ca_file => "</PATH/TO/LOCAL/WAZUH-INDEXER/CERTIFICATE>/root-ca.pem"
+            ca_file => "</PATH/TO/LOCAL/WAZUH_INDEXER/CERTIFICATE>/root-ca.pem"
             query =>  '{
                 "query": {
                    "range": {
@@ -201,6 +201,7 @@ We use the  `Logstash keystore <https://www.elastic.co/guide/en/logstash/current
                template => "/etc/logstash/templates/wazuh.json"
                template_name => "wazuh"
                template_overwrite => true
+               legacy_template => false
              }
          }
 
@@ -208,14 +209,14 @@ We use the  `Logstash keystore <https://www.elastic.co/guide/en/logstash/current
 
       -  ``<WAZUH_INDEXER_ADDRESS>`` is your Wazuh indexer address or addresses in case of cluster deployment.
       -  ``<OPENSEARCH_ADDRESS>`` is your OpenSearch address.
-      -  ``</PATH/TO/LOCAL/WAZUH-INDEXER/CERTIFICATE>/root-ca.pem`` is your Wazuh indexer certificate local path on the Wazuh server. For example,  you can use ``/etc/logstash/wazuh-indexer-certs/root-ca.pem`` which is the Wazuh indexer root certificate that was copied earlier.
+      -  ``</PATH/TO/LOCAL/WAZUH_INDEXER/CERTIFICATE>/root-ca.pem`` is your Wazuh indexer certificate local path on the Wazuh server. For example,  you can use ``/etc/logstash/wazuh-indexer-certs/root-ca.pem`` which is the Wazuh indexer root certificate that was copied earlier.
       -  ``</PATH/TO/LOCAL/OPENSEARCH/CERTIFICATE>/root-ca.pem`` is your OpenSearch certificate local path on the Wazuh server. For example, you can use ``/etc/logstash/opensearch-certs/root-ca.pem`` which is the OpenSearch certificate that was copied earlier.
 
       .. note::
          
          For testing purposes, you can avoid SSL verification by replacing ``cacert => "</PATH/TO/LOCAL/OPENSEARCH/CERTIFICATE>/root-ca.pem"`` with ``ssl_certificate_verification => false``.
 
-         If you are using composable index templates and the _index_template API, set the optional parameter `legacy_template => false <https://opensearch.org/docs/latest/tools/logstash/ship-to-opensearch/#optional-parameters>`__.
+         If you aren't using composable index templates and the _index_template API, remove the `legacy_template => false <https://opensearch.org/docs/latest/tools/logstash/ship-to-opensearch/#optional-parameters>`__ parameter.
 
 Running Logstash
 ^^^^^^^^^^^^^^^^
@@ -404,6 +405,7 @@ We use the `Logstash keystore <https://www.elastic.co/guide/en/logstash/current/
                template => "/etc/logstash/templates/wazuh.json"
                template_name => "wazuh"
                template_overwrite => true
+               legacy_template => false
              }
          }
 
@@ -416,7 +418,7 @@ We use the `Logstash keystore <https://www.elastic.co/guide/en/logstash/current/
          
          For testing purposes, you can avoid SSL verification by replacing ``cacert => "</PATH/TO/LOCAL/OPENSEARCH/CERTIFICATE>/root-ca.pem"`` with ``ssl_certificate_verification => false``.
 
-         If you are using composable index templates and the _index_template API, set the optional parameter `legacy_template => false <https://opensearch.org/docs/latest/tools/logstash/ship-to-opensearch/#optional-parameters>`__.
+         If you aren't using composable index templates and the _index_template API, remove the `legacy_template => false <https://opensearch.org/docs/latest/tools/logstash/ship-to-opensearch/#optional-parameters>`__ parameter.
 
 #. By default the ``/var/ossec/logs/alerts/alerts.json`` file is owned by the ``wazuh`` user with restrictive permissions. You must add the ``logstash`` user to the ``wazuh`` group so it can read the file when running Logstash as a service:
 

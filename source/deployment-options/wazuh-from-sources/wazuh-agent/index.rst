@@ -33,7 +33,7 @@ The Wazuh agent is a single and lightweight monitoring software. It is a multi-p
                             .. code-block:: console
 
                                 # yum update -y
-                                # yum install make gcc gcc-c++ policycoreutils-python automake autoconf libtool centos-release-scl openssl-devel wget bzip2 -y
+                                # yum install make gcc gcc-c++ policycoreutils-python automake autoconf libtool centos-release-scl openssl-devel wget bzip2 procps -y
                                 # curl -OL http://packages.wazuh.com/utils/gcc/gcc-9.4.0.tar.gz && tar xzf gcc-9.4.0.tar.gz  && cd gcc-9.4.0/ && ./contrib/download_prerequisites && ./configure --enable-languages=c,c++ --prefix=/usr --disable-multilib --disable-libsanitizer && make -j$(nproc) && make install && ln -fs /bin/g++ /usr/bin/c++ && ln -fs /bin/gcc /usr/bin/cc && cd .. && rm -rf gcc-*
 
                             CMake 3.18 installation
@@ -49,7 +49,7 @@ The Wazuh agent is a single and lightweight monitoring software. It is a multi-p
 
                             .. code-block:: console
 
-                                # yum install make gcc gcc-c++ python3 python3-policycoreutils automake autoconf libtool openssl-devel cmake
+                                # yum install make gcc gcc-c++ python3 python3-policycoreutils automake autoconf libtool openssl-devel cmake procps -y
                                 # yum-config-manager --enable powertools
                                 # yum install libstdc++-static -y
 
@@ -65,7 +65,7 @@ The Wazuh agent is a single and lightweight monitoring software. It is a multi-p
 
                     .. code-block:: console
 
-                        # apt-get install python gcc g++ make libc6-dev curl policycoreutils automake autoconf libtool libssl-dev
+                        # apt-get install python gcc g++ make libc6-dev curl policycoreutils automake autoconf libtool libssl-dev procps
 
                     CMake 3.18 installation
 
@@ -147,7 +147,7 @@ The Wazuh agent is a single and lightweight monitoring software. It is a multi-p
         .. rubric:: Next steps
            :class: h2
            
-        Now that the agent is installed, the next step is to enroll the agent with the Wazuh server. For more information about this process, please check the :doc:`/user-manual/agent-enrollment/index` section.
+        Now that the agent is installed, the next step is to enroll the agent with the Wazuh server. For more information about this process, please check the :doc:`/user-manual/agent/agent-enrollment/index` section.
 
         .. raw:: html
 
@@ -279,7 +279,7 @@ The Wazuh agent is a single and lightweight monitoring software. It is a multi-p
         .. rubric:: Next steps
            :class: h2
            
-        Now that the agent is installed, the next step is to enroll the agent with the Wazuh server. For more information about this process, please check the :doc:`/user-manual/agent-enrollment/index` section.
+        Now that the agent is installed, the next step is to enroll the agent with the Wazuh server. For more information about this process, please check the :doc:`/user-manual/agent/agent-enrollment/index` section.
 
         .. raw:: html
 
@@ -362,7 +362,7 @@ The Wazuh agent is a single and lightweight monitoring software. It is a multi-p
         .. rubric:: Next steps
            :class: h2
           
-        Now that the agent is installed, the next step is to enroll the agent with the Wazuh server. For more information about this process, please check the :doc:`/user-manual/agent-enrollment/index` section.
+        Now that the agent is installed, the next step is to enroll the agent with the Wazuh server. For more information about this process, please check the :doc:`/user-manual/agent/agent-enrollment/index` section.
 
         .. raw:: html
 
@@ -407,7 +407,7 @@ The Wazuh agent is a single and lightweight monitoring software. It is a multi-p
 
     .. group-tab:: AIX
 
-        AIX 6.1 TL4 or greater is the supported version for the following installation procedure. 
+        AIX 6.1 TL9 or greater is the supported version for the following installation procedure. 
 
         .. note::
 
@@ -468,7 +468,7 @@ The Wazuh agent is a single and lightweight monitoring software. It is a multi-p
                 # cd src
                 # gmake clean-deps
                 # gmake clean
-                # gmake deps TARGET=agent RESOURCES_URL=http://packages.wazuh.com/deps/15
+                # gmake deps TARGET=agent RESOURCES_URL=http://packages.wazuh.com/deps/27
                 # gmake TARGET=agent USE_SELINUX=no PREFIX=/var/ossec
 
         #.  Run the ``install.sh`` script. This will run a wizard that will guide you through the installation process using the Wazuh sources:
@@ -503,7 +503,7 @@ The Wazuh agent is a single and lightweight monitoring software. It is a multi-p
         .. rubric:: Next steps
            :class: h2
           
-        Now that the agent is installed, the next step is to enroll the agent with the Wazuh server. For more information about this process, please check the :doc:`/user-manual/agent-enrollment/index` section.
+        Now that the agent is installed, the next step is to enroll the agent with the Wazuh server. For more information about this process, please check the :doc:`/user-manual/agent/agent-enrollment/index` section.
 
         .. raw:: html
 
@@ -612,7 +612,7 @@ The Wazuh agent is a single and lightweight monitoring software. It is a multi-p
             .. code-block:: console
 
                 # cd wazuh-|WAZUH_CURRENT_FROM_SOURCES|
-                # /usr/local/bin/gmake -C src deps RESOURCES_URL=http://packages.wazuh.com/deps/14 TARGET=agent
+                # /usr/local/bin/gmake -C src deps RESOURCES_URL=http://packages.wazuh.com/deps/27 TARGET=agent
                 # /usr/local/bin/gmake -C src TARGET=agent USE_SELINUX=no
 
         #.  Run the ``install.sh`` script. This will run a wizard that will guide you through the installation process using the Wazuh sources:
@@ -635,7 +635,7 @@ The Wazuh agent is a single and lightweight monitoring software. It is a multi-p
         .. rubric:: Next steps
            :class: h2
           
-        Now that the agent is installed, the next step is to enroll the agent with the Wazuh server. For more information about this process, please check the :doc:`/user-manual/agent-enrollment/index` section.
+        Now that the agent is installed, the next step is to enroll the agent with the Wazuh server. For more information about this process, please check the :doc:`/user-manual/agent/agent-enrollment/index` section.
 
         .. raw:: html
 
@@ -799,7 +799,7 @@ The Wazuh agent is a single and lightweight monitoring software. It is a multi-p
                             # export LD_LIBRARY_PATH=/usr/local/gcc-5.5.0/lib
                             # cd wazuh/src
                             # gmake clean
-                            # gmake deps TARGET=agent RESOURCES_URL=http://packages.wazuh.com/deps/15
+                            # gmake deps TARGET=agent RESOURCES_URL=http://packages.wazuh.com/deps/27
                             # gmake -j 4 TARGET=agent PREFIX=/var/ossec USE_SELINUX=no
                             USE_BIG_ENDIAN=yes
                             # cd ..
@@ -840,7 +840,7 @@ The Wazuh agent is a single and lightweight monitoring software. It is a multi-p
                 .. rubric:: Next steps
                    :class: h2
                   
-                Now that the agent is installed, the next step is to enroll the agent with the Wazuh server. For more information about this process, please check the :doc:`/user-manual/agent-enrollment/index` section.
+                Now that the agent is installed, the next step is to enroll the agent with the Wazuh server. For more information about this process, please check the :doc:`/user-manual/agent/agent-enrollment/index` section.
 
                 .. raw:: html
 
@@ -910,7 +910,7 @@ The Wazuh agent is a single and lightweight monitoring software. It is a multi-p
 
                         .. code-block:: console
 
-                            # pkgutil -y -i git gmake cmake gcc5core gcc5g++
+                            # /opt/csw/bin/pkgutil -y -i git gmake cmake gcc5core gcc5g++
 
                     #.  Install a gcc version to include all files needed in the next step:
 
@@ -987,7 +987,7 @@ The Wazuh agent is a single and lightweight monitoring software. It is a multi-p
                 .. rubric:: Next steps
                    :class: h2
                   
-                Now that the agent is installed, the next step is to enroll the agent with the Wazuh server. For more information about this process, please check the :doc:`/user-manual/agent-enrollment/index` section.
+                Now that the agent is installed, the next step is to enroll the agent with the Wazuh server. For more information about this process, please check the :doc:`/user-manual/agent/agent-enrollment/index` section.
 
                 .. raw:: html
 

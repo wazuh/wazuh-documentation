@@ -26,7 +26,7 @@ Wazuh provides out-of-the-box rulesets mapped against compliance tags for PCI DS
    :align: center
    :width: 80%
 
-Wazuh allows you to create :doc:`custom rules </user-manual/ruleset/custom>` and tag them to compliance standards that suit your needs. The following section details use cases for the supported standards.
+Wazuh allows you to create :doc:`custom rules </user-manual/ruleset/rules/custom>` and tag them to compliance standards that suit your needs. The following section details use cases for the supported standards.
 
 PCI DSS
 -------
@@ -88,7 +88,7 @@ NIST 800-53 offers recommendations for managing information security and privacy
    :align: center
    :width: 80%
 
-The :doc:`Vulnerability Detector </user-manual/capabilities/vulnerability-detection/how-it-works>` module runs scans when enabled on startup or periodically as defined. You can view the vulnerability scan results on the Wazuh dashboard which includes the time and date of the scan, vulnerable applications, and packages on the monitored endpoint. You can find more information on how :doc:`Wazuh helps organizations meet the NIST 800-53 standard </compliance/nist/index>`.
+You can view the :doc:`vulnerability detection </user-manual/capabilities/vulnerability-detection/how-it-works>` module results on the Wazuh dashboard which includes vulnerable applications and packages on the monitored endpoint. You can find more information on how :doc:`Wazuh helps organizations meet the NIST 800-53 standard </compliance/nist/index>`.
 
 .. thumbnail:: /images/getting-started/use-cases/regulatory-compliance/vulnerabilities-module-inventory.png
    :title: Vulnerability Detection module inventory

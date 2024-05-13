@@ -4,6 +4,7 @@ const redirections = [];
 
 /* Note: new release versions must always be inserted in the first position of the array "versions" */
 const versions = [
+  '5.0',
   '4.9',
   '4.8',
   '4.7',
@@ -63,17 +64,87 @@ removedUrls['x.y'] = [
 ];
 */
 
+/* *** RELEASE 5.0 ****/
+
+/* Redirections from 4.9 to 5.0  */
+
+/* Pages added in 5.0 */
+
+newUrls['5.0'] = [
+  '/release-notes/release-5-0-0.html',
+  '/release-notes/index-5x.html',
+];
+
+/* Pages no longer available in 5.0 */
+
 /* *** RELEASE 4.9 ****/
+
+/* Redirections from 4.8 to 4.9  */
+
+redirections.push(
+  {
+    'target': ['4.8=>4.9', '4.9=>4.8'],
+    '4.8': '/deployment-options/offline-installation.html',
+    '4.9': '/deployment-options/offline-installation/index.html',
+  },
+  {
+    'target': ['4.9=>4.8'],
+    '4.8': '/deployment-options/offline-installation.html',
+    '4.9': '/deployment-options/offline-installation/step-by-step.html',
+  },
+);
+
+/* Pages added in 4.9 */
 
 newUrls['4.9'] = [
   '/release-notes/release-4-9-0.html',
+  '/deployment-options/offline-installation/index.html',
+  '/deployment-options/offline-installation/step-by-step.html',
+  '/deployment-options/offline-installation/installation-assistant.html',
+];
+
+/* Pages no longer available in 4.9 */
+
+removedUrls['4.9'] = [
+  '/deployment-options/offline-installation.html',
 ];
 
 /* *** RELEASE 4.8 ****/
 
+/* Pages added in 4.8 */
+
 newUrls['4.8'] = [
   '/release-notes/release-4-8-0.html',
 ];
+
+/* Pages no longer available in 4.8 */
+
+removedUrls['4.8'] = [
+  '/user-manual/capabilities/vulnerability-detection/cpe-helper.html',
+  '/user-manual/capabilities/vulnerability-detection/querying-the-vulnerability-database.html',
+  '/user-manual/capabilities/vulnerability-detection/scan-types.html',
+  '/user-manual/capabilities/vulnerability-detection/allow-os.html'
+];
+
+/* Redirections from 4.7 to 4.8  */
+
+redirections.push(
+  {
+    'target': ['4.7=>4.8'],
+    '4.7': '/user-manual/capabilities/vulnerability-detection/cpe-helper.html',
+    '4.8': '/user-manual/capabilities/vulnerability-detection/index.html',
+  },
+  {
+    'target': ['4.7=>4.8'],
+    '4.7': '/user-manual/capabilities/vulnerability-detection/querying-the-vulnerability-database.html',
+    '4.8': '/user-manual/capabilities/vulnerability-detection/index.html',
+  },
+  {
+    'target': ['4.7=>4.8'],
+    '4.7': '/user-manual/capabilities/vulnerability-detection/scan-types.html',
+    '4.8': '/user-manual/capabilities/vulnerability-detection/index.html',
+  },
+);
 
 /* *** RELEASE 4.7 ****/
 
@@ -84,9 +155,584 @@ newUrls['4.7'] = [
   '/release-notes/release-4-7-0.html',
   '/release-notes/release-4-7-1.html',
   '/release-notes/release-4-7-2.html',
+  '/release-notes/release-4-7-3.html',
+  '/release-notes/release-4-7-4.html',
   '/cloud-security/azure/posture-management.html',
   '/cloud-security/gcp/posture-management.html',
+  '/cloud-security/gcp/instances.html',
+  '/cloud-security/gcp/prerequisites/gcloud-python-script.html',
+  '/cloud-security/gcp/prerequisites/visualizing-events.html',
+  '/cloud-security/gcp/prerequisites/services.html',
+  '/cloud-security/gcp/supported-services/cloud-storage-buckets.html',
+  '/cloud-security/gcp/supported-services/pubsub.html',
+  '/cloud-security/gcp/supported-services/use-cases.html',
+  '/cloud-service/archive-data/index.html',
+  '/cloud-service/archive-data/access.html',
+  '/cloud-service/archive-data/configuration.html',
+  '/cloud-service/archive-data/filename-format.html',
+  '/cloud-service/getting-started/enroll-agents.html',
+  '/cloud-service/your-environment/limits.html',
+  '/cloud-service/your-environment/settings.html',
+  '/user-manual/capabilities/malware-detection/osquery.html',
+  '/user-manual/upscaling/index.html',
+  '/user-manual/upscaling/adding-indexer-node.html',
+  '/user-manual/upscaling/adding-server-node.html',
+  '/installation-guide/uninstalling-wazuh/index.html',
+  '/installation-guide/uninstalling-wazuh/agent.html',
+  '/installation-guide/uninstalling-wazuh/central-components.html',
+  '/upgrade-guide/manual-backup-restore.html',
+  '/migration-guide/files-backup/index.html',
+  '/migration-guide/files-backup/creating/index.html',
+  '/migration-guide/files-backup/creating/wazuh-agent.html',
+  '/migration-guide/files-backup/creating/wazuh-central-components.html',
+  '/migration-guide/files-backup/restoring/index.html',
+  '/migration-guide/files-backup/restoring/wazuh-agent.html',
+  '/migration-guide/files-backup/restoring/wazuh-central-components.html',
+  '/user-manual/agent/agent-enrollment/enrollment-methods/index.html',
+  '/user-manual/agent/agent-enrollment/enrollment-methods/via-agent-configuration/index.html',
+  '/user-manual/agent/agent-enrollment/enrollment-methods/via-agent-configuration/linux-endpoint.html',
+  '/user-manual/agent/agent-enrollment/enrollment-methods/via-agent-configuration/macos-endpoint.html',
+  '/user-manual/agent/agent-enrollment/enrollment-methods/via-agent-configuration/windows-endpoint.html',
+  '/user-manual/agent/agent-enrollment/enrollment-methods/via-manager-API/importing-the-key.html',
+  '/user-manual/agent/agent-enrollment/enrollment-methods/via-manager-API/index.html',
+  '/user-manual/agent/agent-enrollment/enrollment-methods/via-manager-API/requesting-the-key.html',
+  '/user-manual/agent/agent-enrollment/index.html',
+  '/user-manual/agent/agent-enrollment/security-options/agent-identity-verification.html',
+  '/user-manual/agent/agent-enrollment/security-options/index.html',
+  '/user-manual/agent/agent-enrollment/security-options/manager-identity-verification.html',
+  '/user-manual/agent/agent-enrollment/security-options/using-password-authentication.html',
+  '/user-manual/agent/agent-enrollment/troubleshooting.html',
+  '/user-manual/agent/agent-management/agent-connection.html',
+  '/user-manual/agent/agent-management/agent-life-cycle.html',
+  '/user-manual/agent/agent-management/antiflooding.html',
+  '/user-manual/agent/agent-management/grouping-agents.html',
+  '/user-manual/agent/agent-management/index.html',
+  '/user-manual/agent/agent-management/key-request.html',
+  '/user-manual/agent/agent-management/labels.html',
+  '/user-manual/agent/agent-management/listing/index.html',
+  '/user-manual/agent/agent-management/listing/listing.html',
+  '/user-manual/agent/agent-management/listing/using-command-line.html',
+  '/user-manual/agent/agent-management/listing/wazuh-dashboard.html',
+  '/user-manual/agent/agent-management/query-configuration.html',
+  '/user-manual/agent/agent-management/remote-upgrading/agent-upgrade-module.html',
+  '/user-manual/agent/agent-management/remote-upgrading/create-custom-wpk/create-wpk-key.html',
+  '/user-manual/agent/agent-management/remote-upgrading/create-custom-wpk/generate-wpk-package-manually.html',
+  '/user-manual/agent/agent-management/remote-upgrading/custom-repository.html',
+  '/user-manual/agent/agent-management/remote-upgrading/index.html',
+  '/user-manual/agent/agent-management/remote-upgrading/install-custom-wpk.html',
+  '/user-manual/agent/agent-management/remote-upgrading/upgrading-agent.html',
+  '/user-manual/agent/agent-management/remote-upgrading/wpk-list.html',
+  '/user-manual/agent/agent-management/remove-agents/index.html',
+  '/user-manual/agent/agent-management/remove-agents/remove.html',
+  '/user-manual/agent/agent-management/remove-agents/restful-api-remove.html',
+  '/user-manual/agent/deployment-variables/deployment-variables-aix.html',
+  '/user-manual/agent/deployment-variables/deployment-variables-linux.html',
+  '/user-manual/agent/deployment-variables/deployment-variables-macos.html',
+  '/user-manual/agent/deployment-variables/deployment-variables-windows.html',
+  '/user-manual/agent/deployment-variables/deployment-variables.html',
+  '/user-manual/agent/index.html',
+  '/user-manual/api/use-cases.html',
+  '/user-manual/manager/configuring-cluster/advanced-settings.html',
+  '/user-manual/manager/configuring-cluster/basics.html',
+  '/user-manual/manager/configuring-cluster/cluster-management.html',
+  '/user-manual/manager/configuring-cluster/index.html',
+  '/user-manual/manager/certificates.html',
+  '/user-manual/wazuh-indexer/certificates.html',
+  '/user-manual/wazuh-dashboard/certificates.html',
+  '/user-manual/ruleset/decoders/dynamic-fields.html',
+  '/user-manual/ruleset/decoders/index.html',
+  '/user-manual/ruleset/decoders/json-decoder.html',
+  '/user-manual/ruleset/decoders/sibling-decoders.html',
+  '/user-manual/ruleset/rules/custom.html',
+  '/user-manual/ruleset/rules/index.html',
 ];
+
+/* Pages no longer available in 4.7 */
+
+
+removedUrls['4.7'] = [
+  '/cloud-service/cold-storage/index.html',
+  '/cloud-service/cold-storage/access.html',
+  '/cloud-service/cold-storage/configuration.html',
+  '/cloud-service/cold-storage/filename-format.html',
+  '/cloud-service/getting-started/register-agents.html',
+  '/user-manual/capabilities/osquery.html',
+  '/user-manual/uninstall/index.html',
+  '/user-manual/manager/manual-backup-restore.html',
+  '/user-manual/files-backup/index.html',
+  '/user-manual/files-backup/creating/index.html',
+  '/user-manual/files-backup/creating/wazuh-agent.html',
+  '/user-manual/files-backup/creating/wazuh-central-components.html',
+  '/user-manual/files-backup/restoring/index.html',
+  '/user-manual/files-backup/restoring/wazuh-agent.html',
+  '/user-manual/files-backup/restoring/wazuh-central-components.html',
+  '/user-manual/agent-enrollment/via-agent-configuration/index.html',
+  '/user-manual/agent-enrollment/via-agent-configuration/linux-endpoint.html',
+  '/user-manual/agent-enrollment/via-agent-configuration/macos-endpoint.html',
+  '/user-manual/agent-enrollment/via-agent-configuration/windows-endpoint.html',
+  '/user-manual/agent-enrollment/via-manager-API/importing-the-key.html',
+  '/user-manual/agent-enrollment/via-manager-API/index.html',
+  '/user-manual/agent-enrollment/via-manager-API/requesting-the-key.html',
+  '/user-manual/agent-enrollment/index.html',
+  '/user-manual/agent-enrollment/security-options/agent-identity-verification.html',
+  '/user-manual/agent-enrollment/security-options/index.html',
+  '/user-manual/agent-enrollment/security-options/manager-identity-verification.html',
+  '/user-manual/agent-enrollment/security-options/using-password-authentication.html',
+  '/user-manual/agent-enrollment/troubleshooting.html',
+  '/user-manual/agents/agent-connection.html',
+  '/user-manual/agents/agent-life-cycle.html',
+  '/user-manual/agents/antiflooding.html',
+  '/user-manual/agents/grouping-agents.html',
+  '/user-manual/agents/index.html',
+  '/user-manual/agents/key-request.html',
+  '/user-manual/agents/labels.html',
+  '/user-manual/agents/listing/index.html',
+  '/user-manual/agents/listing/listing.html',
+  '/user-manual/agents/listing/using-command-line.html',
+  '/user-manual/agents/listing/wazuh-dashboard.html',
+  '/user-manual/agents/query-configuration.html',
+  '/user-manual/agents/remote-upgrading/agent-upgrade-module.html',
+  '/user-manual/agents/remote-upgrading/create-custom-wpk/create-wpk-key.html',
+  '/user-manual/agents/remote-upgrading/create-custom-wpk/generate-wpk-package-manually.html',
+  '/user-manual/agents/remote-upgrading/custom-repository.html',
+  '/user-manual/agents/remote-upgrading/index.html',
+  '/user-manual/agents/remote-upgrading/install-custom-wpk.html',
+  '/user-manual/agents/remote-upgrading/upgrading-agent.html',
+  '/user-manual/agents/remote-upgrading/wpk-list.html',
+  '/user-manual/agents/remove-agents/index.html',
+  '/user-manual/agents/remove-agents/remove.html',
+  '/user-manual/agents/remove-agents/restful-api-remove.html',
+  '/user-manual/deployment-variables/deployment-variables-aix.html',
+  '/user-manual/deployment-variables/deployment-variables-linux.html',
+  '/user-manual/deployment-variables/deployment-variables-macos.html',
+  '/user-manual/deployment-variables/deployment-variables-windows.html',
+  '/user-manual/deployment-variables/deployment-variables.html',
+  '/user-manual/api/examples.html',
+  '/user-manual/manager/automatic-reports.html',
+  '/user-manual/configuring-cluster/advanced-settings.html',
+  '/user-manual/configuring-cluster/basics.html',
+  '/user-manual/configuring-cluster/cluster-management.html',
+  '/user-manual/configuring-cluster/index.html',
+  '/user-manual/manager/fluent-forwarder.html',
+  '/user-manual/ruleset/custom.html',
+  '/user-manual/ruleset/dynamic-fields.html',
+  '/user-manual/ruleset/json-decoder.html',
+  '/user-manual/ruleset/ruleset-xml-syntax/sibling-decoders.html',
+  '/user-manual/certificates.html',
+  '/cloud-security/gcp/prerequisites/considerations.html',
+  '/cloud-security/gcp/prerequisites/pubsub.html',
+  '/cloud-security/gcp/supported-services/access_logs.html',
+  '/cloud-security/gcp/supported-services/cloud_audit_logs.html',
+  '/cloud-security/gcp/supported-services/dns_queries.html',
+  '/cloud-security/gcp/supported-services/firewall.html',
+  '/cloud-security/gcp/supported-services/load_balancing.html',
+  '/cloud-security/gcp/supported-services/vpc_flow.html',
+];
+
+/* Redirections from 4.6 to 4.7  */
+
+redirections.push(
+  {
+    'target': ['4.6=>4.7', '4.7=>4.6'],
+    '4.6': '/user-manual/uninstall/index.html',
+    '4.7': '/installation-guide/uninstalling-wazuh/central-components.html',
+  },
+  {
+    'target': ['4.6=>4.7', '4.7=>4.6'],
+    '4.6': '/installation-guide/wazuh-agent/wazuh-agent-package-linux.html#uninstall-a-wazuh-agent',
+    '4.7': '/installation-guide/uninstalling-wazuh/agent.html#uninstalling-a-linux-wazuh-agent',
+  },
+  {
+    'target': ['4.6=>4.7', '4.7=>4.6'],
+    '4.6': '/installation-guide/wazuh-agent/wazuh-agent-package-windows.html#uninstall-a-wazuh-agent',
+    '4.7': '/installation-guide/uninstalling-wazuh/agent.html#uninstalling-a-windows-wazuh-agent',
+  },
+  {
+    'target': ['4.6=>4.7', '4.7=>4.6'],
+    '4.6': '/installation-guide/wazuh-agent/wazuh-agent-package-macos.html#uninstall-a-wazuh-agent',
+    '4.7': '/installation-guide/uninstalling-wazuh/agent.html#uninstalling-a-macos-wazuh-agent',
+  },
+  {
+    'target': ['4.6=>4.7', '4.7=>4.6'],
+    '4.6': '/installation-guide/wazuh-agent/wazuh-agent-package-solaris.html#uninstall-a-wazuh-agent',
+    '4.7': '/installation-guide/uninstalling-wazuh/agent.html#uninstalling-a-solaris-wazuh-agent',
+  },
+  {
+    'target': ['4.6=>4.7', '4.7=>4.6'],
+    '4.6': '/installation-guide/wazuh-agent/wazuh-agent-package-aix.html#uninstall-a-wazuh-agent',
+    '4.7': '/installation-guide/uninstalling-wazuh/agent.html#uninstalling-an-aix-wazuh-agent',
+  },
+  {
+    'target': ['4.6=>4.7', '4.7=>4.6'],
+    '4.6': '/installation-guide/wazuh-agent/wazuh-agent-package-hpux.html#uninstall-a-wazuh-agent',
+    '4.7': '/installation-guide/uninstalling-wazuh/agent.html#uninstalling-an-hp-ux-wazuh-agent',
+  },
+  {
+    'target': ['4.6=>4.7', '4.7=>4.6'],
+    '4.6': '/cloud-security/gcp/supported-services/cloud_audit_logs.html',
+    '4.7': '/cloud-security/gcp/supported-services/use-cases.html#cloud-audit-logs',
+  },
+  {
+    'target': ['4.6=>4.7', '4.7=>4.6'],
+    '4.6': '/cloud-security/gcp/supported-services/dns_queries.html',
+    '4.7': '/cloud-security/gcp/supported-services/use-cases.html#dns-queries',
+  },
+  {
+    'target': ['4.6=>4.7', '4.7=>4.6'],
+    '4.6': '/cloud-security/gcp/supported-services/firewall.html',
+    '4.7': '/cloud-security/gcp/supported-services/use-cases.html#firewall-rules-logging',
+  },
+  {
+    'target': ['4.6=>4.7', '4.7=>4.6'],
+    '4.6': '/cloud-security/gcp/supported-services/load_balancing.html',
+    '4.7': '/cloud-security/gcp/supported-services/use-cases.html#http-s-load-balancing-logging',
+  },
+  {
+    'target': ['4.6=>4.7', '4.7=>4.6'],
+    '4.6': '/cloud-security/gcp/supported-services/vpc_flow.html',
+    '4.7': '/cloud-security/gcp/supported-services/use-cases.html#vpc-flow-logs',
+  },
+  {
+    'target': ['4.6=>4.7', '4.7=>4.6'],
+    '4.6': '/cloud-security/gcp/prerequisites/considerations.html',
+    '4.7': '/cloud-security/gcp/supported-services/cloud-storage-buckets.html#considerations-for-the-google-cloud-storage-buckets-integration',
+  },
+  {
+    'target': ['4.6=>4.7', '4.7=>4.6'],
+    '4.6': '/cloud-security/gcp/prerequisites/pubsub.html',
+    '4.7': '/cloud-security/gcp/supported-services/pubsub.html#configuring-google-cloud-pub-sub',
+  },
+  {
+    'target': ['4.6=>4.7', '4.7=>4.6'],
+    '4.6': '/user-manual/certificates.html',
+    '4.7': '/user-manual/manager/certificates.html',
+  },
+  {
+    'target': ['4.7=>4.6'],
+    '4.6': '/user-manual/certificates.html',
+    '4.7': '/user-manual/wazuh-indexer/certificates.html',
+  },
+  {
+    'target': ['4.7=>4.6'],
+    '4.6': '/user-manual/certificates.html',
+    '4.7': '/user-manual/wazuh-dashboard/certificates.html',
+  },
+  {
+    'target': ['4.6=>4.7', '4.7=>4.6'],
+    '4.6': '/user-manual/manager/manual-backup-restore.html',
+    '4.7': '/upgrade-guide/manual-backup-restore.html',
+  },
+  {
+    'target': ['4.6=>4.7', '4.7=>4.6'],
+    '4.6': '/user-manual/files-backup/index.html',
+    '4.7': '/migration-guide/files-backup/index.html',
+  },
+  {
+    'target': ['4.6=>4.7', '4.7=>4.6'],
+    '4.6': '/user-manual/files-backup/creating/index.html',
+    '4.7': '/migration-guide/files-backup/creating/index.html',
+  },
+  {
+    'target': ['4.6=>4.7', '4.7=>4.6'],
+    '4.6': '/user-manual/files-backup/creating/wazuh-agent.html',
+    '4.7': '/migration-guide/files-backup/creating/wazuh-agent.html',
+  },
+  {
+    'target': ['4.6=>4.7', '4.7=>4.6'],
+    '4.6': '/user-manual/files-backup/creating/wazuh-central-components.html',
+    '4.7': '/migration-guide/files-backup/creating/wazuh-central-components.html',
+  },
+  {
+    'target': ['4.6=>4.7', '4.7=>4.6'],
+    '4.6': '/user-manual/files-backup/restoring/index.html',
+    '4.7': '/migration-guide/files-backup/restoring/index.html',
+  },
+  {
+    'target': ['4.6=>4.7', '4.7=>4.6'],
+    '4.6': '/user-manual/files-backup/restoring/wazuh-agent.html',
+    '4.7': '/migration-guide/files-backup/restoring/wazuh-agent.html',
+  },
+  {
+    'target': ['4.6=>4.7', '4.7=>4.6'],
+    '4.6': '/user-manual/files-backup/restoring/wazuh-central-components.html',
+    '4.7': '/migration-guide/files-backup/restoring/wazuh-central-components.html',
+  },
+  {
+    'target': ['4.6=>4.7', '4.7=>4.6'],
+    '4.6': '/user-manual/agent-enrollment/via-agent-configuration/index.html',
+    '4.7': '/user-manual/agent/agent-enrollment/enrollment-methods/via-agent-configuration/index.html',
+  },
+  {
+    'target': ['4.6=>4.7', '4.7=>4.6'],
+    '4.6': '/user-manual/agent-enrollment/via-agent-configuration/linux-endpoint.html',
+    '4.7': '/user-manual/agent/agent-enrollment/enrollment-methods/via-agent-configuration/linux-endpoint.html',
+  },
+  {
+    'target': ['4.6=>4.7', '4.7=>4.6'],
+    '4.6':   '/user-manual/agent-enrollment/via-agent-configuration/macos-endpoint.html',
+    '4.7': '/user-manual/agent/agent-enrollment/enrollment-methods/via-agent-configuration/macos-endpoint.html',
+  },
+  {
+    'target': ['4.6=>4.7', '4.7=>4.6'],
+    '4.6': '/user-manual/agent-enrollment/via-agent-configuration/windows-endpoint.html',
+    '4.7': '/user-manual/agent/agent-enrollment/enrollment-methods/via-agent-configuration/windows-endpoint.html',
+  },
+  {
+    'target': ['4.6=>4.7', '4.7=>4.6'],
+    '4.6': '/user-manual/agent-enrollment/via-manager-API/importing-the-key.html',
+    '4.7': '/user-manual/agent/agent-enrollment/enrollment-methods/via-manager-API/importing-the-key.html',
+  },
+  {
+    'target': ['4.6=>4.7', '4.7=>4.6'],
+    '4.6': '/user-manual/agent-enrollment/via-manager-API/index.html',
+    '4.7': '/user-manual/agent/agent-enrollment/enrollment-methods/via-manager-API/index.html',
+  },
+  {
+    'target': ['4.6=>4.7', '4.7=>4.6'],
+    '4.6': '/user-manual/agent-enrollment/via-manager-API/requesting-the-key.html',
+    '4.7': '/user-manual/agent/agent-enrollment/enrollment-methods/via-manager-API/requesting-the-key.html',
+  },
+  {
+    'target': ['4.6=>4.7', '4.7=>4.6'],
+    '4.6': '/user-manual/agent-enrollment/index.html',
+    '4.7': '/user-manual/agent/agent-enrollment/index.html',
+  },
+  {
+    'target': ['4.6=>4.7', '4.7=>4.6'],
+    '4.6': '/user-manual/agent-enrollment/security-options/agent-identity-verification.html',
+    '4.7': '/user-manual/agent/agent-enrollment/security-options/agent-identity-verification.html',
+  },
+  {
+    'target': ['4.6=>4.7', '4.7=>4.6'],
+    '4.6': '/user-manual/agent-enrollment/security-options/index.html',
+    '4.7': '/user-manual/agent/agent-enrollment/security-options/index.html',
+  },
+  {
+    'target': ['4.6=>4.7', '4.7=>4.6'],
+    '4.6': '/user-manual/agent-enrollment/security-options/manager-identity-verification.html',
+    '4.7': '/user-manual/agent/agent-enrollment/security-options/manager-identity-verification.html',
+  },
+  {
+    'target': ['4.6=>4.7', '4.7=>4.6'],
+    '4.6':   '/user-manual/agent-enrollment/security-options/using-password-authentication.html',
+    '4.7': '/user-manual/agent/agent-enrollment/security-options/using-password-authentication.html',
+  },
+  {
+    'target': ['4.6=>4.7', '4.7=>4.6'],
+    '4.6': '/user-manual/agent-enrollment/troubleshooting.html',
+    '4.7': '/user-manual/agent/agent-enrollment/troubleshooting.html',
+  },
+  {
+    'target': ['4.6=>4.7', '4.7=>4.6'],
+    '4.6': '/user-manual/agents/agent-connection.html',
+    '4.7': '/user-manual/agent/agent-management/agent-connection.html',
+  },
+  {
+    'target': ['4.6=>4.7', '4.7=>4.6'],
+    '4.6': '/user-manual/agents/agent-life-cycle.html',
+    '4.7': '/user-manual/agent/agent-management/agent-life-cycle.html',
+  },
+  {
+    'target': ['4.6=>4.7', '4.7=>4.6'],
+    '4.6': '/user-manual/agents/antiflooding.html',
+    '4.7': '/user-manual/agent/agent-management/antiflooding.html',
+  },
+  {
+    'target': ['4.6=>4.7', '4.7=>4.6'],
+    '4.6': '/user-manual/agents/grouping-agents.html',
+    '4.7': '/user-manual/agent/agent-management/grouping-agents.html',
+  },
+  {
+    'target': ['4.6=>4.7', '4.7=>4.6'],
+    '4.6': '/user-manual/agents/index.html',
+    '4.7': '/user-manual/agent/agent-management/index.html',
+  },
+  {
+    'target': ['4.6=>4.7', '4.7=>4.6'],
+    '4.6': '/user-manual/agents/key-request.html',
+    '4.7': '/user-manual/agent/agent-management/key-request.html',
+  },
+  {
+    'target': ['4.6=>4.7', '4.7=>4.6'],
+    '4.6': '/user-manual/agents/labels.html',
+    '4.7': '/user-manual/agent/agent-management/labels.html',
+  },
+  {
+    'target': ['4.6=>4.7', '4.7=>4.6'],
+    '4.6': '/user-manual/agents/listing/index.html',
+    '4.7': '/user-manual/agent/agent-management/listing/index.html',
+  },
+  {
+    'target': ['4.6=>4.7', '4.7=>4.6'],
+    '4.6': '/user-manual/agents/listing/listing.html',
+    '4.7': '/user-manual/agent/agent-management/listing/listing.html',
+  },
+  {
+    'target': ['4.6=>4.7', '4.7=>4.6'],
+    '4.6': '/user-manual/agents/listing/using-command-line.html',
+    '4.7': '/user-manual/agent/agent-management/listing/using-command-line.html',
+  },
+  {
+    'target': ['4.6=>4.7', '4.7=>4.6'],
+    '4.6': '/user-manual/agents/listing/wazuh-dashboard.html',
+    '4.7': '/user-manual/agent/agent-management/listing/wazuh-dashboard.html',
+  },
+  {
+    'target': ['4.6=>4.7', '4.7=>4.6'],
+    '4.6': '/user-manual/agents/query-configuration.html',
+    '4.7': '/user-manual/agent/agent-management/query-configuration.html',
+  },
+  {
+    'target': ['4.6=>4.7', '4.7=>4.6'],
+    '4.6': '/user-manual/agents/remote-upgrading/agent-upgrade-module.html',
+    '4.7': '/user-manual/agent/agent-management/remote-upgrading/agent-upgrade-module.html',
+  },
+  {
+    'target': ['4.6=>4.7', '4.7=>4.6'],
+    '4.6': '/user-manual/agents/remote-upgrading/create-custom-wpk/create-wpk-key.html',
+    '4.7': '/user-manual/agent/agent-management/remote-upgrading/create-custom-wpk/create-wpk-key.html',
+  },
+  {
+    'target': ['4.6=>4.7', '4.7=>4.6'],
+    '4.6': '/user-manual/agents/remote-upgrading/create-custom-wpk/generate-wpk-package-manually.html',
+    '4.7': '/user-manual/agent/agent-management/remote-upgrading/create-custom-wpk/generate-wpk-package-manually.html',
+  },
+  {
+    'target': ['4.6=>4.7', '4.7=>4.6'],
+    '4.6': '/user-manual/agents/remote-upgrading/custom-repository.html',
+    '4.7': '/user-manual/agent/agent-management/remote-upgrading/custom-repository.html',
+  },
+  {
+    'target': ['4.6=>4.7', '4.7=>4.6'],
+    '4.6': '/user-manual/agents/remote-upgrading/index.html',
+    '4.7': '/user-manual/agent/agent-management/remote-upgrading/index.html',
+  },
+  {
+    'target': ['4.6=>4.7', '4.7=>4.6'],
+    '4.6': '/user-manual/agents/remote-upgrading/install-custom-wpk.html',
+    '4.7': '/user-manual/agent/agent-management/remote-upgrading/install-custom-wpk.html',
+  },
+  {
+    'target': ['4.6=>4.7', '4.7=>4.6'],
+    '4.6': '/user-manual/agent/agent-management/remote-upgrading/upgrading-agent.html',
+    '4.7': '/user-manual/agent/agent-management/remote-upgrading/upgrading-agent.html',
+  },
+  {
+    'target': ['4.6=>4.7', '4.7=>4.6'],
+    '4.6': '/user-manual/agents/remote-upgrading/wpk-list.html',
+    '4.7': '/user-manual/agent/agent-management/remote-upgrading/wpk-list.html',
+  },
+  {
+    'target': ['4.6=>4.7', '4.7=>4.6'],
+    '4.6': '/user-manual/agents/remove-agents/index.html',
+    '4.7': '/user-manual/agent/agent-management/remove-agents/index.html',
+  },
+  {
+    'target': ['4.6=>4.7', '4.7=>4.6'],
+    '4.6': '/user-manual/agents/remove-agents/remove.html',
+    '4.7': '/user-manual/agent/agent-management/remove-agents/remove.html',
+  },
+  {
+    'target': ['4.6=>4.7', '4.7=>4.6'],
+    '4.6': '/user-manual/agents/remove-agents/restful-api-remove.html',
+    '4.7': '/user-manual/agent/agent-management/remove-agents/restful-api-remove.html',
+  },
+  {
+    'target': ['4.6=>4.7', '4.7=>4.6'],
+    '4.6': '/user-manual/deployment-variables/deployment-variables-aix.html',
+    '4.7': '/user-manual/agent/deployment-variables/deployment-variables-aix.html',
+  },
+  {
+    'target': ['4.6=>4.7', '4.7=>4.6'],
+    '4.6': '/user-manual/deployment-variables/deployment-variables-linux.html',
+    '4.7': '/user-manual/agent/deployment-variables/deployment-variables-linux.html',
+  },
+  {
+    'target': ['4.6=>4.7', '4.7=>4.6'],
+    '4.6': '/user-manual/deployment-variables/deployment-variables-macos.html',
+    '4.7': '/user-manual/agent/deployment-variables/deployment-variables-macos.html',
+  },
+  {
+    'target': ['4.6=>4.7', '4.7=>4.6'],
+    '4.6': '/user-manual/deployment-variables/deployment-variables-windows.html',
+    '4.7': '/user-manual/agent/deployment-variables/deployment-variables-windows.html',
+  },
+  {
+    'target': ['4.6=>4.7', '4.7=>4.6'],
+    '4.6': '/user-manual/deployment-variables/deployment-variables.html',
+    '4.7': '/user-manual/agent/deployment-variables/deployment-variables.html',
+  },
+  {
+    'target': ['4.6=>4.7', '4.7=>4.6'],
+    '4.6': '/user-manual/api/examples.html',
+    '4.7': '/user-manual/api/getting-started.html#usage-in-scripts',
+  },
+  {
+    'target': ['4.6=>4.7', '4.7=>4.6'],
+    '4.6': '/user-manual/configuring-cluster/advanced-settings.html',
+    '4.7': '/user-manual/manager/configuring-cluster/advanced-settings.html',
+  },
+  {
+    'target': ['4.6=>4.7', '4.7=>4.6'],
+    '4.6': '/user-manual/configuring-cluster/basics.html',
+    '4.7': '/user-manual/manager/configuring-cluster/basics.html',
+  },
+  {
+    'target': ['4.6=>4.7', '4.7=>4.6'],
+    '4.6': '/user-manual/configuring-cluster/cluster-management.html',
+    '4.7': '/user-manual/manager/configuring-cluster/cluster-management.html',
+  },
+  {
+    'target': ['4.6=>4.7', '4.7=>4.6'],
+    '4.6': '/user-manual/configuring-cluster/index.html',
+    '4.7': '/user-manual/manager/configuring-cluster/index.html',
+  },
+  {
+    'target': ['4.6=>4.7', '4.7=>4.6'],
+    '4.6': '/user-manual/ruleset/dynamic-fields.html',
+    '4.7': '/user-manual/ruleset/decoders/dynamic-fields.html',
+  },
+  {
+    'target': ['4.6=>4.7', '4.7=>4.6'],
+    '4.6': '/user-manual/ruleset/json-decoder.html',
+    '4.7': '/user-manual/ruleset/decoders/json-decoder.html',
+  },
+  {
+    'target': ['4.6=>4.7', '4.7=>4.6'],
+    '4.6': '/user-manual/ruleset/ruleset-xml-syntax/sibling-decoders.html',
+    '4.7': '/user-manual/ruleset/decoders/sibling-decoders.html',
+  },
+  {
+    'target': ['4.6=>4.7', '4.7=>4.6'],
+    '4.6': '/user-manual/capabilities/osquery.html',
+    '4.7': '/user-manual/capabilities/malware-detection/osquery.html',
+  },
+  {
+    'target': ['4.6=>4.7', '4.7=>4.6'],
+    '4.6': '/cloud-service/cold-storage/index.html',
+    '4.7': '/cloud-service/archive-data/index.html',
+  },
+  {
+    'target': ['4.6=>4.7', '4.7=>4.6'],
+    '4.6': '/cloud-service/cold-storage/access.html',
+    '4.7': '/cloud-service/archive-data/access.html',
+  },
+  {
+    'target': ['4.6=>4.7', '4.7=>4.6'],
+    '4.6': '/cloud-service/cold-storage/configuration.html',
+    '4.7': '/cloud-service/archive-data/configuration.html',
+  },
+  {
+    'target': ['4.6=>4.7', '4.7=>4.6'],
+    '4.6': '/cloud-service/cold-storage/filename-format.html',
+    '4.7': '/cloud-service/archive-data/filename-format.html',
+  },
+  {
+    'target': ['4.6=>4.7', '4.7=>4.6'],
+    '4.6': '/cloud-service/getting-started/register-agents.html',
+    '4.7': '/cloud-service/getting-started/enroll-agents.html',
+  },
+);
 
 /* *** RELEASE 4.6 ****/
 
@@ -97,6 +743,26 @@ redirections.push(
     'target': ['4.5=>4.6'],
     '4.5': '/user-manual/uninstall/central-components.html',
     '4.6': '/user-manual/uninstall/index.html',
+  },
+  {
+    'target': ['4.5=>4.6', '4.6=>4.5'],
+    '4.5': '/cloud-security/azure/activity-services/active-directory/index.html',
+    '4.6': '/cloud-security/azure/activity-services/entra/index.html',
+  },
+  {
+    'target': ['4.5=>4.6', '4.6=>4.5'],
+    '4.5': '/cloud-security/azure/activity-services/active-directory/graph.html',
+    '4.6': '/cloud-security/azure/activity-services/entra/graph.html',
+  },
+  {
+    'target': ['4.5=>4.6', '4.6=>4.5'],
+    '4.5': '/user-manual/user-administration/single-sign-on/administrator/azure-active-directory.html',
+    '4.6': '/user-manual/user-administration/single-sign-on/administrator/microsoft-entra-id.html',
+  },
+  {
+    'target': ['4.5=>4.6', '4.6=>4.5'],
+    '4.5': '/user-manual/user-administration/single-sign-on/read-only/azure-active-directory.html',
+    '4.6': '/user-manual/user-administration/single-sign-on/read-only/microsoft-entra-id.html',
   },
 );
 
@@ -154,7 +820,7 @@ removedUrls['4.6'] = [
   '/user-manual/elasticsearch/configure-indices.html',
   '/user-manual/elasticsearch/elasticsearch.html',
   '/user-manual/elasticsearch/index.html',
-  '/user-manual/elasticsearch/troubleshooting.html',  
+  '/user-manual/elasticsearch/troubleshooting.html',
   '/user-manual/elasticsearch/elastic-tuning.html',
   '/user-manual/uninstall/central-components.html',
   '/user-manual/uninstall/elastic-stack.html',
@@ -251,7 +917,7 @@ newUrls['4.5'] = [
   '/integrations-guide/elastic-stack/index.html',
   '/integrations-guide/opensearch/index.html',
   '/integrations-guide/splunk/index.html',
-  '/user-manual/capabilities/log-data-collection/configuration.html', 
+  '/user-manual/capabilities/log-data-collection/configuration.html',
   '/user-manual/capabilities/log-data-collection/log-data-analysis.html',
   '/user-manual/capabilities/log-data-collection/monitoring-log-files.html',
   '/user-manual/capabilities/log-data-collection/multiple-socket-outputs.html',
@@ -296,7 +962,7 @@ removedUrls['4.5'] = [
   '/user-manual/elasticsearch/elastic-tuning.html',
   '/user-manual/elasticsearch/elasticsearch.html',
   '/user-manual/elasticsearch/index.html',
-  '/user-manual/elasticsearch/troubleshooting.html',  
+  '/user-manual/elasticsearch/troubleshooting.html',
 ];
 
 /* *** RELEASE 4.4 ****/
@@ -333,12 +999,12 @@ redirections.push(
       'target': ['4.3=>4.4', '4.4=>4.3'],
       '4.3': '/user-manual/capabilities/file-integrity/fim-configuration.html',
       '4.4': '/user-manual/capabilities/file-integrity/index.html',
-    },  
+    },
     {
       'target': ['4.3=>4.4', '4.4=>4.3'],
       '4.3': '/user-manual/capabilities/file-integrity/fim-fields-rule-mapping.html',
       '4.4': '/user-manual/capabilities/file-integrity/index.html',
-    }, 
+    },
     {
       'target': ['4.3=>4.4', '4.4=>4.3'],
       '4.3': '/user-manual/capabilities/antiflooding.html',
@@ -348,7 +1014,7 @@ redirections.push(
       'target': ['4.3=>4.4', '4.4=>4.3'],
       '4.3': '/user-manual/capabilities/labels.html',
       '4.4': '/user-manual/agents/labels.html',
-    },  
+    },
     {
       'target': ['4.3=>4.4', '4.4=>4.3'],
       '4.3': '/user-manual/capabilities/fluent-forwarder.html',
@@ -936,7 +1602,7 @@ newUrls['4.4'] = [
   '/compliance/nist/system-inventory.html',
   '/compliance/nist/vulnerability-detection.html',
   '/compliance/nist/active-response.html',
-  '/compliance/nist/threat-intelligence.html',  
+  '/compliance/nist/threat-intelligence.html',
   '/compliance/tsc/index.html',
   '/compliance/tsc/common-criteria/cc2.1.html',
   '/compliance/tsc/common-criteria/cc3.1.html',
@@ -957,7 +1623,7 @@ newUrls['4.4'] = [
   '/user-manual/capabilities/file-integrity/basic-settings.html',
   '/user-manual/capabilities/file-integrity/how-to-configure-fim.html',
   '/user-manual/capabilities/file-integrity/interpreting-fim-module-analysis.html',
-  '/user-manual/capabilities/file-integrity/creating-custom-fim-rules.html',   
+  '/user-manual/capabilities/file-integrity/creating-custom-fim-rules.html',
   '/user-manual/capabilities/file-integrity/advanced-settings.html',
   '/user-manual/capabilities/file-integrity/use-cases/index.html',
   '/user-manual/capabilities/file-integrity/use-cases/detecting-malware-persistence-technique.html',
@@ -980,7 +1646,7 @@ newUrls['4.4'] = [
   '/user-manual/capabilities/system-calls-monitoring/use-cases/privilege-abuse.html',
   '/user-manual/capabilities/agentless-monitoring/connection.html',
   '/user-manual/capabilities/agentless-monitoring/visualization.html',
-  '/user-manual/capabilities/agentless-monitoring/use-cases.html',  
+  '/user-manual/capabilities/agentless-monitoring/use-cases.html',
   '/user-manual/capabilities/vulnerability-detection/querying-the-vulnerability-database.html',
   '/user-manual/files-backup/creating/index.html',
   '/user-manual/files-backup/creating/wazuh-central-components.html',
@@ -1063,8 +1729,8 @@ removedUrls['4.4'] = [
   '/user-manual/capabilities/auditing-whodata/index.html',
   '/user-manual/capabilities/auditing-whodata/who-linux.html',
   '/user-manual/capabilities/auditing-whodata/who-windows.html',
-  '/user-manual/capabilities/auditing-whodata/who-windows-policies.html',  
-  '/user-manual/capabilities/syscollector.html',  
+  '/user-manual/capabilities/auditing-whodata/who-windows-policies.html',
+  '/user-manual/capabilities/syscollector.html',
   '/user-manual/capabilities/agentless-monitoring/agentless-faq.html',
   '/container-security/index.html',
   '/container-security/docker-monitor/index.html',
@@ -1076,7 +1742,7 @@ removedUrls['4.4'] = [
 ];
 
   /* *** RELEASE 4.3 ****/
- 
+
  /* Pages added in 4.3 */
 
 newUrls['4.3'] = [
@@ -1097,7 +1763,7 @@ newUrls['4.3'] = [
   '/user-manual/elasticsearch/configure-indices.html',
   '/user-manual/elasticsearch/elasticsearch.html',
   '/user-manual/elasticsearch/index.html',
-  '/user-manual/elasticsearch/troubleshooting.html',  
+  '/user-manual/elasticsearch/troubleshooting.html',
   '/user-manual/wazuh-dashboard/settings.html',
   '/user-manual/wazuh-dashboard/config-file.html',
   '/user-manual/wazuh-dashboard/index.html',
@@ -1252,7 +1918,7 @@ newUrls['4.3'] = [
   '/deployment-options/deploying-with-puppet/wazuh-puppet-module/reference-wazuh-puppet/wazuh-manager-class.html',
   '/deployment-options/amazon-machine-images/amazon-machine-images.html',
   '/release-notes/release-4-3-0.html',
-  '/pci-dss/configuration-assessment.html', 
+  '/pci-dss/configuration-assessment.html',
   '/pci-dss/malware-detection.html',
   '/pci-dss/vulnerability-detection.html',
   '/pci-dss/system-inventory.html',
@@ -1415,7 +2081,7 @@ removedUrls['4.3'] = [
   '/migrating-from-ossec/ossec-server.html',
   '/migrating-from-ossec/ossec-agent.html',
   '/learning-wazuh/build-lab/access-ec2-instances.html',
-  '/learning-wazuh/build-lab/build-vpc.html', 
+  '/learning-wazuh/build-lab/build-vpc.html',
   '/learning-wazuh/build-lab/launch-ec2-instances.html',
   '/learning-wazuh/build-lab/xpack-security-setup.html',
   '/learning-wazuh/build-lab/install-elastic-stack.html',
@@ -1437,7 +2103,7 @@ removedUrls['4.3'] = [
   '/pci-dss/policy-monitoring.html',
   '/pci-dss/rootkit-detection.html',
   '/pci-dss/elastic.html',
-  '/upgrade-guide/upgrading-agent.html', 
+  '/upgrade-guide/upgrading-agent.html',
   '/user-manual/capabilities/anomalies-detection/anomaly-configuration.html',
   '/user-manual/capabilities/anomalies-detection/anomaly-faq.html',
   '/user-manual/capabilities/anomalies-detection/how-it-works.html',
@@ -2422,7 +3088,7 @@ newUrls['4.2'] = [
   '/upgrade-guide/legacy/upgrading-wazuh-server/restore-alerts-from-2.x-to-3.x.html',
   '/user-manual/agent-enrollment/index.html',
   '/user-manual/agent-enrollment/via-agent-configuration/index.html',
-  '/user-manual/agent-enrollment/via-agent-configuration/linux-endpoint.html', 
+  '/user-manual/agent-enrollment/via-agent-configuration/linux-endpoint.html',
   '/user-manual/agent-enrollment/via-agent-configuration/windows-endpoint.html',
   '/user-manual/agent-enrollment/via-agent-configuration/macos-endpoint.html',
   '/user-manual/agent-enrollment/via-manager-API/index.html',
@@ -2430,9 +3096,9 @@ newUrls['4.2'] = [
   '/user-manual/agent-enrollment/via-manager-API/importing-the-key.html',
   '/user-manual/agent-enrollment/security-options/index.html',
   '/user-manual/agent-enrollment/security-options/using-password-authentication.html',
-  '/user-manual/agent-enrollment/security-options/manager-identity-verification.html', 
-  '/user-manual/agent-enrollment/security-options/agent-identity-verification.html', 
-  '/user-manual/agent-enrollment/troubleshooting.html', 
+  '/user-manual/agent-enrollment/security-options/manager-identity-verification.html',
+  '/user-manual/agent-enrollment/security-options/agent-identity-verification.html',
+  '/user-manual/agent-enrollment/troubleshooting.html',
 ];
 
 removedUrls['4.2'] = [
@@ -2583,7 +3249,7 @@ removedUrls['4.2'] = [
   '/user-manual/registering/index.html',
   '/user-manual/registering/command-line-registration.html',
   '/user-manual/registering/restful-api-registration.html',
-  '/user-manual/registering/password-authorization-registration.html', 
+  '/user-manual/registering/password-authorization-registration.html',
   '/user-manual/registering/host-verification-registration.html',
   '/user-manual/registering/registering-agents-theory.html',
   '/user-manual/registering/registering-agents-troubleshooting.html',
@@ -2603,7 +3269,7 @@ redirections.push(
     {
       'target': ['4.2=>4.1'],
       '4.2': '/getting-started/components/kibana.html',
-      '4.1': '/getting-started/components/elastic-stack.html',      
+      '4.1': '/getting-started/components/elastic-stack.html',
     },
     {
       'target': ['4.1=>4.2', '4.2=>4.1'],
@@ -2639,7 +3305,7 @@ redirections.push(
       'target': ['4.1=>4.2', '4.2=>4.1'],
       '4.1': '/user-manual/registering/registering-agents-troubleshooting.html',
       '4.2': '/user-manual/agent-enrollment/troubleshooting.html',
-    },   
+    },
     {
       'target': ['4.1=>4.2', '4.2=>4.1'],
       '4.1': '/deploying-with-ansible/roles/wazuh-elasticsearch.html',
@@ -4318,9 +4984,9 @@ redirections.push(
 );
 
 newUrls['3.13'] = [
-  '/release-notes/release-3-13-6.html', 
-  '/release-notes/release-3-13-5.html', 
-  '/release-notes/release-3-13-4.html',  
+  '/release-notes/release-3-13-6.html',
+  '/release-notes/release-3-13-5.html',
+  '/release-notes/release-3-13-4.html',
   '/release-notes/release_3_13_3.html',
   '/release-notes/release_3_13_2.html',
   '/getting-started/use_cases/index.html',

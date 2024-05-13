@@ -69,7 +69,7 @@ Generating the SSL certificates
               ip: "<dashboard-node-ip>"
 
 
-      To learn more about how to create and configure the certificates, see the :doc:`/user-manual/certificates` section.
+      To learn more about how to create and configure the certificates, see the :doc:`/user-manual/wazuh-indexer/certificates` section.
 
 #. Run ``./wazuh-certs-tool.sh`` to create the certificates. For a multi-node cluster, these certificates need to be later deployed to all Wazuh instances in your cluster.
 
@@ -169,13 +169,11 @@ Repeat this stage of the installation process for every Wazuh indexer node in yo
 
     <div class="accordion-section open">
 
-Cluster initialization involves configuring a default ISM policy, loading new certificate information, and starting the single-node or multi-node cluster. 
-
-#. Run the Wazuh indexer ``indexer-init.sh`` script on `any` Wazuh indexer node to initialize the cluster. Check :doc:`/user-manual/wazuh-indexer/index-life-management` for customization options.
+#. Run the Wazuh indexer ``indexer-security-init.sh`` script on `any` Wazuh indexer node to load the new certificates information and start the single-node or multi-node cluster.
     
    .. code-block:: console
 
-      # bash /usr/share/wazuh-indexer/bin/indexer-init.sh -i <WAZUH_INDEXER_IP_ADDRESS>
+      # /usr/share/wazuh-indexer/bin/indexer-security-init.sh
 
    .. note::
       

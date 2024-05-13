@@ -3,8 +3,6 @@
 .. meta::
   :description: The Wazuh Ruleset is used to analyze incoming events and generate alerts when appropriate. Learn more about Rules syntax in this section.
 
-.. _rules_syntax:
-
 Rules Syntax
 ============
 
@@ -182,6 +180,44 @@ The **xml labels** used to configure ``rules`` are listed here.
 +-------------------------+---------------------------------------------------------------+------------------------------------------------------------------------------------------------------+
 | `var`_                  | Name for the variable. Most used: `BAD_WORDS`_                | Defines a variable that can be used anywhere inside the same file.                                   |
 +-------------------------+---------------------------------------------------------------+------------------------------------------------------------------------------------------------------+
+
+.. _rules_group:
+
+group
+^^^^^
+
+Groups categorize alerts. They allow filtering related alerts in the Wazuh dashboard.
+
+The default Wazuh ruleset already includes rules that use groups like ``syscheck,``, ``attack,``, and ``syslog,``. As an example, you can filter alerts for these categories by querying ``rule.groups: attack`` or ``rule.groups: (syscheck OR syslog)`` in the Wazuh dashboard.
+
+Every rule must belong to at least one group. To specify one or more groups for a rule, enclose the rule definition with the ``<group name="GROUP1_NAME,GROUP2_NAME,">`` element. For example:
+
+.. code-block:: xml
+   :emphasize-lines: 1,7
+
+   <group name="wazuh,">
+     <rule id="100234" level="3">
+       <if_sid>230</if_sid>
+       <field name="alert_type">normal</field>
+       <description>The file limit set for this agent is $(file_limit). Now, $(file_count) files are being monitored.</description>
+     </rule>
+   </group>
+
+You can also specify additional groups by including the ``<group>`` element within the rule definition. For example:
+
+.. code-block:: xml
+   :emphasize-lines: 6
+
+   <group name="wazuh,">
+     <rule id="100234" level="3">
+       <if_sid>230</if_sid>
+       <field name="alert_type">normal</field>
+       <description>The file limit set for this agent is $(file_limit). Now, $(file_count) files are being monitored.</description>
+       <group>syscheck,fim_db_state,</group>
+     </rule>
+   </group>
+
+To define rules that trigger only if another rule in a specific group has triggered, check the `if_group`_ and `if_matched_group`_ options.
 
 .. _rules_rule:
 
@@ -728,7 +764,7 @@ If ``user`` label is declared multiple times within the rule, the following rule
 .. _rules_sys_name:
 
 system_name
-^^^^^^^^^^^^
+^^^^^^^^^^^
 
 Used as a requisite to trigger the rule. It will check the system name (decoded as ``system_name``).
 
@@ -2070,36 +2106,6 @@ Example:
         <description>List of logged in users. It will not be alerted by default.</description>
       </rule>
 
-.. _rules_group:
-
-group
-^^^^^
-
-Add additional groups to the alert. Groups are optional tags added to alerts.
-
-They can be used by other rules by using if_group or if_matched_group, or by alert parsing tools to categorize alerts.
-
-Groups are variables that define behavior. When an alert includes that group label, this behavior will occur.
-
-Example:
-
-  .. code-block:: xml
-
-    <rule id="3801" level="4">
-      <description>Group for rules related with spam.</description>
-      <group>spam,</group>
-    </rule>
-
-Now, every rule with the line ``<group>spam,</group>`` will be included in that group.
-
-It's a very useful label to keep the rules ordered.
-
-+--------------------+------------+
-| **Default Value**  | n/a        |
-+--------------------+------------+
-| **Allowed values** | Any String |
-+--------------------+------------+
-
 .. _rules_mitre:
 
 mitre
@@ -2138,11 +2144,12 @@ Defines a variable that can be used in any place within the same file. It must b
 
 Example:
 
-  .. code-block:: xml
+.. code-block:: xml
+   :emphasize-lines: 1,7
 
-    <var name="joe_folder">/home/joe/</var>
+   <var name="joe_folder">/home/joe/</var>
 
-    <group name="local,">
+   <group name="local,">
 
       <rule id="100001" level="5">
         <if_sid>550</if_sid>
@@ -2151,12 +2158,14 @@ Example:
         <group>ossec,pci_dss_10.6.1,gpg13_10.1,gdpr_IV_35.7.d,</group>
       </rule>
 
-    </group>
+   </group>
 
 BAD_WORDS
-^^^^^^^^^
+~~~~~~~~~
 
-<var name="BAD_WORDS">error|warning|failure</var>
+.. code-block:: xml
+
+   <var name="BAD_WORDS">error|warning|failure</var>
 
 ``BAD_WORDS`` is a very used use case of the ``<var>`` option.
 
@@ -2164,13 +2173,14 @@ It is used to include many words in the same variable. Later, this variable can 
 
 Example:
 
-  .. code-block:: xml
+.. code-block:: xml
+   :emphasize-lines: 1,5
 
-    <var name="BAD_WORDS">error|warning|failure</var>
+   <var name="BAD_WORDS">error|warning|failure</var>
 
-    <group name="syslog,errors,">
-      <rule id="XXXX" level="2">
-        <match>$BAD_WORDS</match>
-        <description>Error found.</description>
-      </rule>
-    </group>
+   <group name="syslog,errors,">
+     <rule id="XXXX" level="2">
+       <match>$BAD_WORDS</match>
+       <description>Error found.</description>
+     </rule>
+   </group>

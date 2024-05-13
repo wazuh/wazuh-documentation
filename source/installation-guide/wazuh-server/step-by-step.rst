@@ -52,32 +52,43 @@ Adding the Wazuh repository
 Installing the Wazuh manager
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-  #. Install the Wazuh manager package.
+#. Install the Wazuh manager package.
 
-     .. tabs::
+   .. tabs::
 
-        .. group-tab:: Yum
+      .. group-tab:: Yum
 
-           .. code-block:: console
+         .. code-block:: console
 
-              # yum -y install wazuh-manager|WAZUH_MANAGER_RPM_PKG_INSTALL|
+            # yum -y install wazuh-manager|WAZUH_MANAGER_RPM_PKG_INSTALL|
 
-        .. group-tab:: APT
+      .. group-tab:: APT
 
-           .. code-block:: console
+         .. code-block:: console
 
-              # apt-get -y install wazuh-manager|WAZUH_MANAGER_DEB_PKG_INSTALL|
+            # apt-get -y install wazuh-manager|WAZUH_MANAGER_DEB_PKG_INSTALL|
 
-  #. Enable and start the Wazuh manager service.
+Configuring the Wazuh indexer connection
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-      .. include:: /_templates/installations/wazuh/common/enable_wazuh_manager_service.rst
+.. note::
 
+   You can skip this step if you are not going to use the vulnerability detection capability.
 
-  #. Run the following command to verify the Wazuh manager status.
+#. Save the Wazuh indexer username and password into the Wazuh manager keystore using the wazuh-keystore tool:
 
-      .. include:: /_templates/installations/wazuh/common/check_wazuh_manager.rst
+   .. code-block:: console
 
+      # /var/ossec/bin/wazuh-keystore -f indexer -k username -v <INDEXER_USERNAME>
+      # /var/ossec/bin/wazuh-keystore -f indexer -k password -v <INDEXER_PASSWORD>
 
+   .. note::
+
+      The default step-by-step installation credentials are ``admin``:``admin``
+
+#. Edit ``/var/ossec/etc/ossec.conf`` to configure the indexer connection.
+
+   .. include:: /_templates/installations/manager/configure_indexer_connection.rst
 
 .. _wazuh_server_multi_node_filebeat:
 
@@ -149,10 +160,20 @@ Deploying certificates
   .. note::
     Make sure that a copy of the ``wazuh-certificates.tar`` file, created during the initial configuration step, is placed in your working directory.
 
-  #. Replace ``<server-node-name>`` with your Wazuh server node certificate name, the same one used in ``config.yml`` when creating the certificates. Then, move the certificates to their corresponding location.
+  #. Replace ``<SERVER_NODE_NAME>`` with your Wazuh server node certificate name, the same one used in ``config.yml`` when creating the certificates. Then, move the certificates to their corresponding location.
 
       .. include:: /_templates/installations/filebeat/opensearch/copy_certificates_filebeat_wazuh_cluster.rst
 
+Starting the Wazuh manager
+^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+#. Enable and start the Wazuh manager service.
+
+   .. include:: /_templates/installations/wazuh/common/enable_wazuh_manager_service.rst
+
+#. Run the following command to verify the Wazuh manager status.
+
+   .. include:: /_templates/installations/wazuh/common/check_wazuh_manager.rst
 
 Starting the Filebeat service
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^

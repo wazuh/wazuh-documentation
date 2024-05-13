@@ -62,17 +62,21 @@ Upgrading the Wazuh indexer
 
    To ensure compatibility with the latest Wazuh indexer and Wazuh dashboard, please update manually installed plugins accordingly. For additional information, check the `distribution matrix <https://github.com/wazuh/wazuh-packages/tree/v|WAZUH_CURRENT|#distribution-version-matrix>`__.
 
-In the case of having a Wazuh indexer cluster with multiple nodes, the cluster will remain available throughout the upgrading process. This rolling upgrade allows shutting down one Wazuh indexer node at a time for minimal disruption of service. Repeat these steps for every Wazuh indexer node.
+In a Wazuh indexer cluster with multiple nodes, the cluster remains available throughout the upgrading process. This rolling upgrade allows shutting down one Wazuh indexer node at a time for minimal disruption of service.
 
-.. note::
+As a first step, remove the *ss4o* index templates. Replace ``<WAZUH_INDEXER_IP_ADDRESS>``, ``<USERNAME>``, and ``<PASSWORD>`` before running any command below.
 
-   -  Replace ``<WAZUH_INDEXER_IP_ADDRESS>``, ``<username>``, and ``<password>`` before running the commands below.
+.. code-block:: bash
+
+   curl -X DELETE "https://<WAZUH_INDEXER_IP_ADDRESS>:9200/_index_template/ss4o_*_template" -u <USERNAME>:<PASSWORD> -k
+
+Then, repeat the following steps for every Wazuh indexer node.
 
 #. Disable shard allocation.
 
    .. code-block:: bash
-   
-      curl -X PUT "https://<WAZUH_INDEXER_IP_ADDRESS>:9200/_cluster/settings"  -u <username>:<password> -k -H 'Content-Type: application/json' -d'
+
+      curl -X PUT "https://<WAZUH_INDEXER_IP_ADDRESS>:9200/_cluster/settings"  -u <USERNAME>:<PASSWORD> -k -H 'Content-Type: application/json' -d'
       {
         "persistent": {
           "cluster.routing.allocation.enable": "primaries"
@@ -84,7 +88,7 @@ In the case of having a Wazuh indexer cluster with multiple nodes, the cluster w
 
    .. code-block:: console
 
-      # curl -X POST "https://<WAZUH_INDEXER_IP_ADDRESS>:9200/_flush/synced" -u <username>:<password> -k
+      # curl -X POST "https://<WAZUH_INDEXER_IP_ADDRESS>:9200/_flush/synced" -u <USERNAME>:<PASSWORD> -k
 
 #. Shut down the Wazuh indexer in the node.
 
@@ -126,13 +130,13 @@ In the case of having a Wazuh indexer cluster with multiple nodes, the cluster w
 
    .. code-block:: console
 
-      # curl -k -u <username>:<password> https://<WAZUH_INDEXER_IP_ADDRESS>:9200/_cat/nodes?v
+      # curl -k -u <USERNAME>:<PASSWORD> https://<WAZUH_INDEXER_IP_ADDRESS>:9200/_cat/nodes?v
 
 #. Re-enable shard allocation.
 
    .. code-block:: bash
 
-      curl -X PUT "https://<WAZUH_INDEXER_IP_ADDRESS>:9200/_cluster/settings" -u <username>:<password> -k -H 'Content-Type: application/json' -d'
+      curl -X PUT "https://<WAZUH_INDEXER_IP_ADDRESS>:9200/_cluster/settings" -u <USERNAME>:<PASSWORD> -k -H 'Content-Type: application/json' -d'
       {
         "persistent": {
           "cluster.routing.allocation.enable": "all"
@@ -144,19 +148,7 @@ In the case of having a Wazuh indexer cluster with multiple nodes, the cluster w
 
    .. code-block:: console
 
-      # curl -k -u <username>:<password> https://<WAZUH_INDEXER_IP_ADDRESS>:9200/_cat/nodes?v
-
-#. If you're upgrading from a version earlier than 4.8.0, run the Wazuh indexer ``indexer-init.sh`` script on `any` Wazuh indexer node to re-initialize the cluster. Find more information in :doc:`/user-manual/wazuh-indexer/index-life-management`.
-
-   -  If there is a rollover policy in use, your new policy needs a higher priority value to take precedence over it. Add ``-P <CUSTOM_PRIORITY_VALUE>`` into the command below to set a custom priority value.
-      
-   .. code-block:: console
-
-      # bash /usr/share/wazuh-indexer/bin/indexer-init.sh -i <WAZUH_INDEXER_IP_ADDRESS> -p <password>
-
-   .. note::
-
-      The policy will be applied only to new indices and not to existing ones. To rotate the current write index managed by the previous policy and start applying the new one, use the ``POST <alias>/_rollover`` endpoint. For example: ``POST wazuh-alerts/_rollover``
+      # curl -k -u <USERNAME>:<PASSWORD> https://<WAZUH_INDEXER_IP_ADDRESS>:9200/_cat/nodes?v
 
 .. _upgrading_wazuh_server:
 
@@ -187,6 +179,16 @@ When upgrading a multi-node Wazuh manager cluster, run the upgrade in every node
 
       If the ``/var/ossec/etc/ossec.conf`` configuration file was modified, it will not be replaced by the upgrade. You will therefore have to add the settings of the new capabilities manually. More information can be found in :doc:`/user-manual/index`.
 
+#. If upgrading from version 4.7 and earlier, edit ``/var/ossec/etc/ossec.conf`` to set the indexer connection for vulnerability detection. Make sure to configure the following settings block with your host indexer details.
+
+   .. include:: /_templates/installations/manager/configure_indexer_connection.rst
+
+#. Save the Wazuh indexer username and password into the Wazuh manager keystore using the Wazuh-keystore tool.
+
+   .. code-block:: console
+  
+      # /var/ossec/bin/wazuh-keystore -f indexer -k username -v <INDEXER_USERNAME>
+      # /var/ossec/bin/wazuh-keystore -f indexer -k username -v <INDEXER_PASSWORD>
 
 #. Download the Wazuh module for Filebeat:
 
@@ -206,10 +208,11 @@ When upgrading a multi-node Wazuh manager cluster, run the upgrade in every node
 
     .. include:: /_templates/installations/basic/elastic/common/enable_filebeat.rst
 
-#. Upload the new Wazuh template. This step can be omitted for Wazuh indexer single-node installations.
+#. Upload the new Wazuh template and pipelines for Filebeat.
 
    .. code-block:: console
 
+      # filebeat setup --pipelines
       # filebeat setup --index-management -E output.logstash.enabled=false
 
 Upgrading the Wazuh dashboard

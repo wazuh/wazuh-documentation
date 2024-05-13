@@ -46,6 +46,8 @@ The table below shows SCA policies pre-installed in Wazuh out-of-the-box. The Wa
     | cis_rhel8_linux             |  CIS Benchmark for Red Hat Enterprise Linux 8              | Red Hat Enterprise Linux 8    |
     +-----------------------------+------------------------------------------------------------+-------------------------------+
     | cis_rhel9_linux             |  CIS Benchmark for Red Hat Enterprise Linux 9              | Red Hat Enterprise Linux 9    |
+    +-----------------------------+------------------------------------------------------------+-------------------------------+
+    | cis_rocky_linux_8           |  CIS Benchmark for Rocky Linux 8                           | Rocky Linux 8                 |
     +-----------------------------+------------------------------------------------------------+-------------------------------+    
     | cis_debian7                 |  CIS Benchmark for Debian/Linux 7                          | Debian 7                      |
     +-----------------------------+------------------------------------------------------------+-------------------------------+
@@ -56,6 +58,8 @@ The table below shows SCA policies pre-installed in Wazuh out-of-the-box. The Wa
     | cis_debian10                |  CIS Benchmark for Debian/Linux 10                         | Debian 10                     |
     +-----------------------------+------------------------------------------------------------+-------------------------------+
     | cis_debian11                |  CIS Benchmark for Debian/Linux 11                         | Debian 11                     |
+    +-----------------------------+------------------------------------------------------------+-------------------------------+
+    | cis_debian12                |  CIS Benchmark for Debian/Linux 12                         | Debian 12                     |
     +-----------------------------+------------------------------------------------------------+-------------------------------+
     | cis_ubuntu14-04             |  CIS Checks for Ubuntu Linux 14.04 LTS                     | Ubuntu 14.04                  |
     +-----------------------------+------------------------------------------------------------+-------------------------------+
@@ -76,6 +80,8 @@ The table below shows SCA policies pre-installed in Wazuh out-of-the-box. The Wa
     | cis_amazon_linux_1          |  CIS Checks for Amazon Linux 1                             | Amazon Linux 1                |
     +-----------------------------+------------------------------------------------------------+-------------------------------+
     | cis_amazon_linux_2          |  CIS Checks for Amazon Linux 2                             | Amazon Linux 2                |
+    +-----------------------------+------------------------------------------------------------+-------------------------------+
+    | cis_amazon_linux_2023       |  CIS Checks for Amazon Linux 2023                          | Amazon Linux 2023             |
     +-----------------------------+------------------------------------------------------------+-------------------------------+
     | cis_solaris11               |  CIS Benchmark for Oracle Solaris 11                       | Solaris 11                    |
     +-----------------------------+------------------------------------------------------------+-------------------------------+
@@ -102,6 +108,8 @@ The table below shows SCA policies pre-installed in Wazuh out-of-the-box. The Wa
     | cis_apple_macOS_12.0        |  CIS Checks for macOS 12.x                                 | macOS 12.0 (Monterey)         |
     +-----------------------------+------------------------------------------------------------+-------------------------------+
     | cis_apple_macOS_13.x        |  CIS Checks for macOS 13.x                                 | macOS 13.x (Ventura)          |
+    +-----------------------------+------------------------------------------------------------+-------------------------------+
+    | cis_apple_macOS_14.x        |  CIS Checks for macOS 14.x                                 | macOS 14.x (Sonoma)           |
     +-----------------------------+------------------------------------------------------------+-------------------------------+
     | web_vulnerabilities         |  System audit for web-related vulnerabilities              | N/A                           |
     +-----------------------------+------------------------------------------------------------+-------------------------------+

@@ -105,17 +105,6 @@ Disable certain index pattern names from being available in the index pattern se
 | **Allowed values** | Array of strings. Eg: ["wazuh-archives-\*"] |
 +--------------------+---------------------------------------------+
 
-logs.level
-^^^^^^^^^^
-
-Set the logging level for the Wazuh dashboard log files.
-
-+--------------------+------------+
-| **Default value**  | info       |
-+--------------------+------------+
-| **Allowed values** | info,debug |
-+--------------------+------------+
-
 hideManagerAlerts
 ^^^^^^^^^^^^^^^^^
 
@@ -554,7 +543,6 @@ This is an example of the wazuh.yml configuration:
     timeout: 20000
     ip.selector: true
     ip.ignore: []
-    logs.level: info
     hideManagerAlerts: true
 
     # Monitoring

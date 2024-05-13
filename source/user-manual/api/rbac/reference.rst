@@ -442,8 +442,7 @@ group:read
 - :api-ref:`GET /groups/{group_id}/agents <operation/api.controllers.agent_controller.get_agents_in_group>` (`group:id`_)
 - :api-ref:`GET /groups/{group_id}/configuration <operation/api.controllers.agent_controller.get_group_config>` (`group:id`_)
 - :api-ref:`GET /groups/{group_id}/files <operation/api.controllers.agent_controller.get_group_files>` (`group:id`_)
-- :api-ref:`GET /groups/{group_id}/files/{file_name}/json <operation/api.controllers.agent_controller.get_group_file_json>` (`group:id`_)
-- :api-ref:`GET /groups/{group_id}/files/{file_name}/xml <operation/api.controllers.agent_controller.get_group_file_xml>` (`group:id`_)
+- :api-ref:`GET /groups/{group_id}/files/{file_name} <operation/api.controllers.agent_controller.get_group_file>` (`group:id`_)
 - :api-ref:`GET /overview/agents <operation/api.controllers.overview_controller.get_overview_agents>` (`group:id`_)
 
 group:update_config
@@ -628,11 +627,17 @@ Syscheck
 ^^^^^^^^^^^^^^^
 syscheck:clear
 ~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+.. deprecated:: 4.9
+
 - :api-ref:`DELETE /experimental/syscheck <operation/api.controllers.experimental_controller.clear_syscheck_database>` (`agent:id`_, `agent:group`_)
 - :api-ref:`DELETE /syscheck/{agent_id} <operation/api.controllers.syscheck_controller.delete_syscheck_agent>` (`agent:id`_, `agent:group`_)
 
 syscheck:read
 ~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+.. deprecated:: 4.9
+
 - :api-ref:`GET /syscheck/{agent_id} <operation/api.controllers.syscheck_controller.get_syscheck_agent>` (`agent:id`_, `agent:group`_)
 - :api-ref:`GET /syscheck/{agent_id}/last_scan <operation/api.controllers.syscheck_controller.get_last_scan_agent>` (`agent:id`_, `agent:group`_)
 
@@ -645,6 +650,9 @@ Syscollector
 ^^^^^^^^^^^^^^^
 syscollector:read
 ~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+.. deprecated:: 4.9
+  
 - :api-ref:`GET /experimental/syscollector/hardware <operation/api.controllers.experimental_controller.get_hardware_info>` (`agent:id`_, `agent:group`_)
 - :api-ref:`GET /experimental/syscollector/hotfixes <operation/api.controllers.experimental_controller.get_hotfixes_info>` (`agent:id`_, `agent:group`_)
 - :api-ref:`GET /experimental/syscollector/netaddr <operation/api.controllers.experimental_controller.get_network_address_info>` (`agent:id`_, `agent:group`_)

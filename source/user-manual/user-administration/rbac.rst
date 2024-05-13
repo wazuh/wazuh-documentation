@@ -201,7 +201,7 @@ In this example, we have an environment with five agents. Agents ``001``, ``002`
 Adding an agents group label
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-To prepare the environment, add a label in the ``Team_A`` centralized configuration ``agent.conf``. To learn more, see :doc:`Agent labels </user-manual/agents/labels>`.
+To prepare the environment, add a label in the ``Team_A`` centralized configuration ``agent.conf``. To learn more, see :doc:`Agent labels </user-manual/agent/agent-management/labels>`.
 
 #. Log into the Wazuh dashboard as administrator.
 
@@ -334,7 +334,7 @@ To map the user with Wazuh, follow these steps:
 #. Click **Create Role mapping** and complete the empty fields with the requested information.
    
       - **Role mapping name**: Assign a name to the role mapping.
-      - **Roles**: Select the role created previously and  the ``cluster_readonly`` role. This role assigns the user basic configuration reading permissions.
+      - **Roles**: Select the role created previously, for example ``Team_A_role``, and the ``cluster_readonly`` role. The latter assigns the user basic configuration reading permissions.
       - **Internal users**: Select the internal user created previously.
 
        .. thumbnail:: /images/manual/user-administration/rbac/create-new-role-mapping.png

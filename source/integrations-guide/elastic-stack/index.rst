@@ -52,10 +52,10 @@ Perform the following steps to install Logstash and the required plugin.
 
    .. code-block:: console
 
-      $ sudo chmod -R 755 </PATH/TO/LOCAL/WAZUH-INDEXER/CERTIFICATE>/root-ca.pem
+      $ sudo chmod -R 755 </PATH/TO/LOCAL/WAZUH_INDEXER/CERTIFICATE>/root-ca.pem
       $ sudo chmod -R 755 </PATH/TO/LOCAL/ELASTICSEARCH/CERTIFICATE>/root-ca.pem
 
-   Replace ``</PATH/TO/LOCAL/WAZUH-INDEXER/CERTIFICATE>/root-ca.pem`` and ``</PATH/TO/LOCAL/ELASTICSEARCH/CERTIFICATE>/root-ca.pem`` with your Wazuh indexer and Elasticsearch certificate local paths on the Logstash endpoint respectively.
+   Replace ``</PATH/TO/LOCAL/WAZUH_INDEXER/CERTIFICATE>/root-ca.pem`` and ``</PATH/TO/LOCAL/ELASTICSEARCH/CERTIFICATE>/root-ca.pem`` with your Wazuh indexer and Elasticsearch certificate local paths on the Logstash endpoint respectively.
 
 Configuring new indexes
 ^^^^^^^^^^^^^^^^^^^^^^^

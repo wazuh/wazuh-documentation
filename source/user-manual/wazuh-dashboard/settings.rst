@@ -5,8 +5,8 @@
   
 .. _wazuh_dashboard_settings:
 
-Settings
-========
+Wazuh dashboard settings
+========================
 
 The **Settings** module allows you to configure and customize your Wazuh dashboard experience.
 
@@ -25,15 +25,6 @@ Configuration
 You can take a quick look at the Wazuh dashboard configuration file here. The documentation for the ``wazuh.yml`` file can be found in the config section.
 
 .. thumbnail:: ../../images/kibana-app/features/settings/configuration.png
-  :align: center
-  :width: 100%
-
-Logs
-----
-
-The Wazuh dashboard stores log information on the ``/usr/share/wazuh-dashboard/data/wazuh/logs/wazuhapp.log`` file. These logs can be helpful for troubleshooting purposes. 
-
-.. thumbnail:: ../../images/kibana-app/features/settings/logs.png
   :align: center
   :width: 100%
 

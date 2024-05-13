@@ -75,7 +75,7 @@ Vulnerability management
 
 Vulnerability management aims to identify and remediate vulnerabilities to prevent cyber attacks. By taking proactive steps to remediate vulnerabilities, your organization can significantly reduce its attack surface, thereby improving its IT hygiene.
 
-The Wazuh :doc:`Vulnerability Detector </user-manual/capabilities/vulnerability-detection/index>` module identifies vulnerable applications by using the information collected from operating system vendors and :doc:`vulnerability databases </user-manual/capabilities/vulnerability-detection/how-it-works>`. The Vulnerability Detector module scans and generates alerts for vulnerabilities discovered on monitored endpoints. This provides a comprehensive view of vulnerabilities identified across all monitored endpoints, allowing you to view, analyze, fix, and track the remediation of vulnerabilities.
+The Wazuh :doc:`vulnerability detection </user-manual/capabilities/vulnerability-detection/index>` module identifies vulnerable applications by using :doc:`vulnerability information available in our Wazuh CTI </user-manual/capabilities/vulnerability-detection/how-it-works>`. The vulnerability detection module generates alerts for vulnerabilities discovered on monitored endpoints. This provides a comprehensive view of vulnerabilities identified across all monitored endpoints, allowing you to view, analyze, fix, and track the remediation of vulnerabilities.
 
 The vulnerabilities discovered are grouped into severity levels, and a summary is provided based on the application name, CVE, and CVSS3 score on the Wazuh dashboard.
 
@@ -93,7 +93,7 @@ You can download a report that contains security events related to discovered an
    :align: center
    :width: 80%
 
-The Wazuh Vulnerability Detector module also enables you to track remediation activities, which could serve as a progress report on improving or maintaining IT hygiene. For example, when a vulnerability is remediated, an alert is generated on the Wazuh dashboard. This feature detects when a patch or software upgrade resolves a previously detected vulnerability.
+The Wazuh vulnerability detection module also enables you to track remediation activities, which could serve as a progress report on improving or maintaining IT hygiene. For example, when a vulnerability is remediated, an alert is generated on the Wazuh dashboard. This feature detects when a patch or software upgrade resolves a previously detected vulnerability.
 
 .. thumbnail:: /images/getting-started/use-cases/it-hygiene/remediation-alerts.png
    :title: Remediation alerts
@@ -106,7 +106,7 @@ Malware detection
 
 Malware detection is essential for safeguarding computer systems and networks from cyber threats. Organizations can improve their IT hygiene by identifying and mitigating malicious software that can cause data breaches, system compromises, and financial losses.
 
-Wazuh offers an out-of-the-box ruleset designed to recognize malware patterns and trigger alerts for quick response. Wazuh also allows security analysts to create :doc:`custom rules </user-manual/ruleset/custom>` tailored to their environment, thereby optimizing their malware detection efforts. For example, we created custom rules to detect `Vidar infostealer malware using Wazuh <https://wazuh.com/blog/detecting-vidar-infostealer-with-wazuh/>`__.
+Wazuh offers an out-of-the-box ruleset designed to recognize malware patterns and trigger alerts for quick response. Wazuh also allows security analysts to create :doc:`custom rules </user-manual/ruleset/rules/custom>` tailored to their environment, thereby optimizing their malware detection efforts. For example, we created custom rules to detect `Vidar infostealer malware using Wazuh <https://wazuh.com/blog/detecting-vidar-infostealer-with-wazuh/>`__.
 
 .. code-block:: xml
 
@@ -183,7 +183,7 @@ Wazuh streamlines the process of meeting :doc:`regulatory compliance </complianc
    :align: center
    :width: 80%
 
-Wazuh uses its capabilities such as the :doc:`SCA </user-manual/capabilities/sec-config-assessment/index>`, :doc:`Vulnerability Detector </user-manual/capabilities/vulnerability-detection/index>`, :doc:`FIM </user-manual/capabilities/file-integrity/index>`, and more to identify and report compliance violations. It also provides dedicated compliance dashboards to help monitor compliance status, identify improvement areas, and take appropriate remediation actions.
+Wazuh uses its capabilities such as the :doc:`SCA </user-manual/capabilities/sec-config-assessment/index>`, :doc:`vulnerability detection </user-manual/capabilities/vulnerability-detection/index>`, :doc:`FIM </user-manual/capabilities/file-integrity/index>`, and more to identify and report compliance violations. It also provides dedicated compliance dashboards to help monitor compliance status, identify improvement areas, and take appropriate remediation actions.
 
 For example, you can get a general overview of the PCI DSS requirement of a monitored endpoint on the Wazuh dashboard.
 

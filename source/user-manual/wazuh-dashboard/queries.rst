@@ -5,8 +5,8 @@
  
 .. _dashboard-queries:
 
-Filtering data using queries
-============================
+Filtering data using the Wazuh Query Language
+=============================================
 
 The query language to use depends on where the data is coming from:
 

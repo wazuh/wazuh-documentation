@@ -157,15 +157,11 @@ The available types are:  ``cloudtrail``, ``guardduty``, ``vpcflow``, ``config``
 +----------------------------------------+-------------------------------------------------------------+-----------------------------------------------+
 | :ref:`bucket_account_alias`            | Any string                                                  | Optional                                      |
 +----------------------------------------+-------------------------------------------------------------+-----------------------------------------------+
-| :ref:`bucket_access_key`               | Alphanumerical key                                          | Optional                                      |
-+----------------------------------------+-------------------------------------------------------------+-----------------------------------------------+
-| :ref:`bucket_secret_key`               | Alphanumerical key                                          | Optional                                      |
-+----------------------------------------+-------------------------------------------------------------+-----------------------------------------------+
 | :ref:`bucket_aws_profile`              | Any string                                                  | Optional                                      |
 +----------------------------------------+-------------------------------------------------------------+-----------------------------------------------+
 | :ref:`bucket_iam_role_arn`             | IAM role ARN                                                | Optional                                      |
 +----------------------------------------+-------------------------------------------------------------+-----------------------------------------------+
-| :ref:`bucket_iam_role_duration`        | Number of seconds between 900 and 3600                      | Optional (if set, it requires an iam_role_arn |
+| :ref:`bucket_iam_role_duration`        | Number of seconds between 900 and 43200                     | Optional (if set, it requires an iam_role_arn |
 |                                        |                                                             | to be provided)                               |
 +----------------------------------------+-------------------------------------------------------------+-----------------------------------------------+
 | :ref:`bucket_path`                     | Prefix for S3 bucket key                                    | Optional                                      |
@@ -228,37 +224,6 @@ A user-friendly name for the AWS account.
 | **Allowed values** | Any string                  |
 +--------------------+-----------------------------+
 
-.. _bucket_access_key:
-
-access_key
-^^^^^^^^^^
-
-.. deprecated:: 4.4.0
-
-The access key ID for the IAM user with the permission to read logs from the bucket.
-
-+--------------------+--------------------------+
-| **Default value**  | N/A                      |
-+--------------------+--------------------------+
-| **Allowed values** | Any alphanumerical key   |
-+--------------------+--------------------------+
-
-.. _bucket_secret_key:
-
-
-secret_key
-^^^^^^^^^^
-
-.. deprecated:: 4.4.0
-
-The secret key created for the IAM user with the permission to read logs from the bucket.
-
-+--------------------+--------------------------+
-| **Default value**  | N/A                      |
-+--------------------+--------------------------+
-| **Allowed values** | Any alphanumerical key   |
-+--------------------+--------------------------+
-
 .. _bucket_aws_profile:
 
 aws_profile
@@ -295,7 +260,7 @@ A valid number of seconds that defines the duration of the session assumed when 
 +--------------------+------------------------------------------+
 | **Default value**  | N/A                                      |
 +--------------------+------------------------------------------+
-| **Allowed values** | Number of seconds between 900 and 3600   |
+| **Allowed values** | Number of seconds between 900 and 43200  |
 +--------------------+------------------------------------------+
 
 .. _bucket_path:
@@ -505,17 +470,13 @@ The available types are: ``cloudwatchlogs``, and ``inspector``.
 +----------------------------------------+-------------------------------------------------------------+-----------------------------------------------+
 | :ref:`service_aws_log_groups`          | Comma-separated list of valid log group names               | Mandatory for CloudWatch Logs                 |
 +----------------------------------------+-------------------------------------------------------------+-----------------------------------------------+
-| :ref:`service_access_key`              | Any alphanumerical key                                      | Optional                                      |
-+----------------------------------------+-------------------------------------------------------------+-----------------------------------------------+
-| :ref:`service_secret_key`              | Any alphanumerical key                                      | Optional                                      |
-+----------------------------------------+-------------------------------------------------------------+-----------------------------------------------+
 | :ref:`service_aws_profile`             | Valid profile name                                          | Optional                                      |
 +----------------------------------------+-------------------------------------------------------------+-----------------------------------------------+
 | :ref:`service_discard_regex`           | A regex to determine if an event must be discarded          | Optional                                      |
 +----------------------------------------+-------------------------------------------------------------+-----------------------------------------------+
 | :ref:`service_iam_role_arn`            | Valid role ARN                                              | Optional                                      |
 +----------------------------------------+-------------------------------------------------------------+-----------------------------------------------+
-| :ref:`service_iam_role_duration`       | Number of seconds between 900 and 3600                      | Optional (if set, it requires an iam_role_arn |
+| :ref:`service_iam_role_duration`       | Number of seconds between 900 and 43200                     | Optional (if set, it requires an iam_role_arn |
 |                                        |                                                             | to be provided)                               |
 +----------------------------------------+-------------------------------------------------------------+-----------------------------------------------+
 | :ref:`service_only_logs_after`         | Valid date in YYYY-MMM-DD format                            | Optional                                      |
@@ -555,19 +516,6 @@ A user-friendly name for the AWS account.
 | **Allowed values** | Any string                  |
 +--------------------+-----------------------------+
 
-.. _service_access_key:
-
-access_key
-^^^^^^^^^^
-
-The access key ID for the IAM user with the permission to access the service.
-
-+--------------------+--------------------------+
-| **Default value**  | N/A                      |
-+--------------------+--------------------------+
-| **Allowed values** | Any alphanumerical key   |
-+--------------------+--------------------------+
-
 .. _service_aws_log_groups:
 
 aws_log_groups
@@ -580,19 +528,6 @@ A comma-separated list of log group names from where the logs should be extracte
 +--------------------+------------------------------------------------+
 | **Allowed values** | Comma-separated list of valid log group names  |
 +--------------------+------------------------------------------------+
-
-.. _service_secret_key:
-
-secret_key
-^^^^^^^^^^
-
-The secret key created for the IAM user with the permission to access the service.
-
-+--------------------+--------------------------+
-| **Default value**  | N/A                      |
-+--------------------+--------------------------+
-| **Allowed values** | Any alphanumerical key   |
-+--------------------+--------------------------+
 
 .. _service_aws_profile:
 
@@ -668,7 +603,7 @@ A valid number of seconds that defines the duration of the session assumed when 
 +--------------------+------------------------------------------+
 | **Default value**  | N/A                                      |
 +--------------------+------------------------------------------+
-| **Allowed values** | Number of seconds between 900 and 3600   |
+| **Allowed values** | Number of seconds between 900 and 43200  |
 +--------------------+------------------------------------------+
 
 .. _service_only_logs_after:
@@ -751,7 +686,11 @@ It is necessary to specify the type as an attribute of the ``subscriber`` tag to
 
 		</subscriber>
 
-The currently available types are: ``security_lake`` and ``buckets``.
+The currently available types are:
+
+-  ``security_lake``
+-  ``buckets``
+-  ``security_hub``
 
 +----------------------------------------+-------------------------------------------------------------+-----------------------------------------------+
 | Options                                | Allowed values                                              | Mandatory/Optional                            |
@@ -763,15 +702,17 @@ The currently available types are: ``security_lake`` and ``buckets``.
 +----------------------------------------+-------------------------------------------------------------+-----------------------------------------------+
 | :ref:`subscriber_external_id`          | Valid external ID                                           | Mandatory for Amazon Security Lake            |
 |                                        |                                                             | Subscription                                  |
-|                                        |                                                             | (not available for Custom Logs Buckets)       |
+|                                        |                                                             | (not available for Custom Logs Buckets        |
+|                                        |                                                             | and Amazon Security Hub)                      |
 +----------------------------------------+-------------------------------------------------------------+-----------------------------------------------+
 | :ref:`subscriber_aws_profile`          | Valid profile name                                          | Optional                                      |
 +----------------------------------------+-------------------------------------------------------------+-----------------------------------------------+
-| :ref:`subscriber_iam_role_duration`    | Number of seconds between 900 and 3600                      | Optional (if set, it requires an iam_role_arn |
+| :ref:`subscriber_iam_role_duration`    | Number of seconds between 900 and 43200                     | Optional (if set, it requires an iam_role_arn |
 |                                        |                                                             | to be provided)                               |
 +----------------------------------------+-------------------------------------------------------------+-----------------------------------------------+
 | :ref:`subscriber_discard_regex`        | A regex value to determine if an event must be discarded    | Optional                                      |
-|                                        |                                                             | (only available for Custom Logs Buckets)      |
+|                                        |                                                             | (only available for Custom Logs Buckets       |
+|                                        |                                                             | and Amazon Security Hub)                      |
 +----------------------------------------+-------------------------------------------------------------+-----------------------------------------------+
 | :ref:`subscriber_sts_endpoint`         | Any valid VPC endpoint URL for STS                          | Optional                                      |
 +----------------------------------------+-------------------------------------------------------------+-----------------------------------------------+
@@ -827,7 +768,7 @@ A valid number of seconds that defines the duration of the session assumed when 
 +--------------------+------------------------------------------+
 | **Default value**  | N/A                                      |
 +--------------------+------------------------------------------+
-| **Allowed values** | Number of seconds between 900 and 3600   |
+| **Allowed values** | Number of seconds between 900 and 43200  |
 +--------------------+------------------------------------------+
 
 .. _subscriber_aws_profile:
@@ -1015,6 +956,10 @@ Example of configuration
         <iam_role_arn>arn:aws:iam::010203040506:role/ASL-Role</iam_role_arn>
       </subscriber>
       <subscriber type="buckets">
+        <sqs_name>sqs-custom-logs-queue</sqs_name>
+        <aws_profile>dev</aws_profile>
+      </subscriber>
+      <subscriber type="security_hub">
         <sqs_name>sqs-custom-logs-queue</sqs_name>
         <aws_profile>dev</aws_profile>
       </subscriber>

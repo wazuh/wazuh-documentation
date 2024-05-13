@@ -125,6 +125,8 @@ You must include the IP addresses of the servers where you are installing each a
    $indexer_node1_name = 'node1'
    $indexer_node2_name = 'node2'
    $indexer_node3_name = 'node3'
+   $master_name = 'master'
+   $worker_name = 'worker'
    $cluster_size = '3'
    $indexer_discovery_hosts = [$node1host, $node2host, $node3host]
    $indexer_cluster_initial_master_nodes = [$node1host, $node2host, $node3host]
@@ -143,8 +145,8 @@ You must include the IP addresses of the servers where you are installing each a
    node "puppet-server" {
    class { 'wazuh::certificates':
      indexer_certs => [["$indexer_node1_name","$node1host" ],["$indexer_node2_name","$node2host" ],["$indexer_node3_name","$node3host" ]],
-     manager_master_certs => [['master',"$masterhost"]],
-     manager_worker_certs => [['worker',"$workerhost"]],
+     manager_master_certs => [["$master_name","$masterhost"]],
+     manager_worker_certs => [["$worker_name","$workerhost"]],
      dashboard_certs => ["$dashboardhost"],
      stage => certificates
    }
@@ -214,6 +216,7 @@ You must include the IP addresses of the servers where you are installing each a
    }
    class { 'wazuh::filebeat_oss':
      filebeat_oss_indexer_ip => "$node1host",
+     wazuh_node_name => "$master_name",
      stage => manager
    }
    }
@@ -229,6 +232,11 @@ You must include the IP addresses of the servers where you are installing each a
      ossec_cluster_bind_addr => "$masterhost",
      ossec_cluster_nodes => ["$masterhost"],
      ossec_cluster_disabled => 'no',
+     stage => manager
+   }
+   class { 'wazuh::filebeat_oss':
+     filebeat_oss_indexer_ip => "$node1host",
+     wazuh_node_name => "$worker_name",
      stage => manager
    }
    }
@@ -271,19 +279,62 @@ Place the file at ``/etc/puppetlabs/code/environments/production/manifests/`` in
 
    # puppet agent -t
 
+Change Password for Wazuh users
+-------------------------------
+
+Follow the instructions in the :doc:`Password Management </user-manual/user-administration/password-management>` section to change your Wazuh user passwords. Once you change them, set the new passwords within the classes used for deploying the Wazuh Stack.
+
+Indexer users
+^^^^^^^^^^^^^
+
+-  ``admin`` user:
+
+   .. code-block:: puppet
+
+      node "puppet-agent.com" {
+        class { 'wazuh::dashboard':
+          dashboard_password => '<NEW_PASSWORD>'
+        }
+      }
+
+-  ``kibanaserver`` user:
+
+   .. code-block:: puppet
+
+      node "puppet-agent.com" {
+        class { 'wazuh::filebeat_oss':
+          filebeat_oss_elastic_password  => '<NEW_PASSWORD>'
+        }
+      }
+
+Wazuh API users
+^^^^^^^^^^^^^^^
+
+-  ``wazuh-wui`` user:
+
+   .. code-block:: puppet
+
+      node "puppet-agent.com" {
+        class { 'wazuh::dashboard':
+          dashboard_wazuh_api_credentials => '<NEW_PASSWORD>'
+        }
+      }
+
 Install Wazuh agent via Puppet
 ------------------------------
 
 The agent is configured by installing the ``wazuh::agent`` class.
 
-Here is an example of a manifest ``wazuh-agent.pp`` (please replace  ``MANAGER_IP`` with your manager IP address).
+Here is an example of a manifest ``wazuh-agent.pp`` (please replace  ``<MANAGER_IP_ADDRESS>`` with your manager IP address).
 
   .. code-block:: puppet
 
    node "puppet-agent.com" {
+     class { 'wazuh::repo':
+     }
      class { "wazuh::agent":
-       wazuh_register_endpoint => "<MANAGER_IP>",
-       wazuh_reporting_endpoint => "<MANAGER_IP>"
+       wazuh_register_endpoint => "<MANAGER_IP_ADDRESS>",
+       wazuh_reporting_endpoint => "<MANAGER_IP_ADDRESS>"
      }
    }
 
@@ -318,7 +369,7 @@ Reference Wazuh puppet
 |                                                                 |                                                                 |                                             |
 |                                                                 | :ref:`Syslog output <ref_server_vars_syslog_output>`            |                                             |
 |                                                                 |                                                                 |                                             |
-|                                                                 | :ref:`Vulnerability Detector <ref_server_vars_vuln_detector>`   |                                             |
+|                                                                 | :ref:`Vulnerability Detection <ref_server_vars_vuln_detection>` |                                             |
 |                                                                 |                                                                 |                                             |
 |                                                                 | :ref:`Wazuh API <ref_server_vars_wazuh_api>`                    |                                             |
 |                                                                 |                                                                 |                                             |
