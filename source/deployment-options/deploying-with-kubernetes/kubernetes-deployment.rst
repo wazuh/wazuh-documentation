@@ -3,8 +3,6 @@
 .. meta::
    :description: Learn more about Kubernetes deployment with Wazuh in this section of the Wazuh documentation. 
 
-.. _kubernetes_deployment:
-
 Deployment
 ==========
 
@@ -181,14 +179,15 @@ In case you created domain names for the services, you should be able to access 
          dashboard             LoadBalancer   xxx.xx.xxx.xxx   xxx.xx.xxx.xxx                   80:31831/TCP,443:30974/TCP       15m       app=wazuh-dashboard
 
 
-**Optional**: On a local cluster deployment where the external IP address is not accessible, you can use port-forward:
+**Optional**: On a local cluster deployment where the external IP address is not accessible, you can use ``port-forward``:
  
-    .. code-block:: console
+.. code-block:: console
 
-         $ kubectl -n wazuh port-forward service/dashboard 8443:443
-
+   $ kubectl -n wazuh port-forward --address <INTERFACE_IP_ADDRESS> service/dashboard 8443:443
   
-The Wazuh dashboard will be accessible on ``https://localhost:8443``.
+Where ``<INTERFACE_IP_ADDRESS>`` is the IP address of the Kubernetes host.
+
+The Wazuh dashboard is accessible on ``https://<INTERFACE_IP_ADDRESS>:8443``.
 
 The default credentials are ``admin:SecretPassword``.
 
@@ -305,9 +304,17 @@ Applying the changes
 
 #. Apply the manifest changes
 
-   .. code-block:: console
+   -  EKS cluster
 
-      # kubectl apply -k envs/eks/
+      .. code-block:: console
+
+         # kubectl apply -k envs/eks/
+
+   -  Other cluster types
+
+      .. code-block:: console
+
+         # kubectl apply -k envs/local-env/
 
 #. Start a bash shell in ``wazuh-indexer-0`` once more.
 
