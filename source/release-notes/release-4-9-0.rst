@@ -40,12 +40,12 @@ Wazuh dashboard
 ^^^^^^^^^^^^^^^
 
 - `#6145 <https://github.com/wazuh/wazuh-dashboard-plugins/pull/6145>`__ Added AngularJS dependencies.
-- `#6580 <https://github.com/wazuh/wazuh-dashboard-plugins/pull/6580>`__ Migrated from AngularJS to ReactJS. `#6555 <https://github.com/wazuh/wazuh-dashboard-plugins/pull/6555>`__ `#6618 <https://github.com/wazuh/wazuh-dashboard-plugins/pull/6618>`__ `#6613 <https://github.com/wazuh/wazuh-dashboard-plugins/pull/6613>`__ `#6631 <https://github.com/wazuh/wazuh-dashboard-plugins/pull/6631>`__
-- `#6120 <https://github.com/wazuh/wazuh-dashboard-plugins/issues/6120>`__ Removed embedded discover component. `#6235 <https://github.com/wazuh/wazuh-dashboard-plugins/pull/6235>`__ `#6254 <https://github.com/wazuh/wazuh-dashboard-plugins/pull/6254>`__ `#6285 <https://github.com/wazuh/wazuh-dashboard-plugins/pull/6285>`__ `#6288 <https://github.com/wazuh/wazuh-dashboard-plugins/pull/6288>`__ `#6286 <https://github.com/wazuh/wazuh-dashboard-plugins/pull/6286>`__ `#6459 <https://github.com/wazuh/wazuh-dashboard-plugins/pull/6459>`__ `#6438 <https://github.com/wazuh/wazuh-dashboard-plugins/pull/6438>`__ `#6434 <https://github.com/wazuh/wazuh-dashboard-plugins/pull/6434>`__
+- `#6580 <https://github.com/wazuh/wazuh-dashboard-plugins/pull/6580>`__ Migrated from AngularJS to ReactJS. `#6555 <https://github.com/wazuh/wazuh-dashboard-plugins/pull/6555>`__ `#6618 <https://github.com/wazuh/wazuh-dashboard-plugins/pull/6618>`__ `#6613 <https://github.com/wazuh/wazuh-dashboard-plugins/pull/6613>`__ `#6631 <https://github.com/wazuh/wazuh-dashboard-plugins/pull/6631>`__ `#6594 <https://github.com/wazuh/wazuh-dashboard-plugins/pull/6594>`__
+- `#6120 <https://github.com/wazuh/wazuh-dashboard-plugins/issues/6120>`__ Removed embedded discover component. `#6235 <https://github.com/wazuh/wazuh-dashboard-plugins/pull/6235>`__ `#6254 <https://github.com/wazuh/wazuh-dashboard-plugins/pull/6254>`__ `#6285 <https://github.com/wazuh/wazuh-dashboard-plugins/pull/6285>`__ `#6288 <https://github.com/wazuh/wazuh-dashboard-plugins/pull/6288>`__ `#6286 <https://github.com/wazuh/wazuh-dashboard-plugins/pull/6286>`__ `#6459 <https://github.com/wazuh/wazuh-dashboard-plugins/pull/6459>`__ `#6438 <https://github.com/wazuh/wazuh-dashboard-plugins/pull/6438>`__ `#6434 <https://github.com/wazuh/wazuh-dashboard-plugins/pull/6434>`__ `#6537 <https://github.com/wazuh/wazuh-dashboard-plugins/pull/6537>`__ `#6528 <https://github.com/wazuh/wazuh-dashboard-plugins/pull/6528>`__
 - `#6227 <https://github.com/wazuh/wazuh-dashboard-plugins/pull/6227>`__ Added support for a new index for the FIM module.
 - `#6268 <https://github.com/wazuh/wazuh-dashboard-plugins/pull/6268>`__ Refactored the **Endpoints Summary** charts.
 - `#6250 <https://github.com/wazuh/wazuh-dashboard-plugins/pull/6250>`__ Added agent groups edition to **Endpoints Summary**. `#6274 <https://github.com/wazuh/wazuh-dashboard-plugins/pull/6274>`__
-- `#6476 <https://github.com/wazuh/wazuh-dashboard-plugins/pull/6476>`__ Added a filter to select outdated agents and the **Upgrade** agent action to **Endpoints Summary**. `#6501 <https://github.com/wazuh/wazuh-dashboard-plugins/pull/6501>`__ `#6529 <https://github.com/wazuh/wazuh-dashboard-plugins/pull/6529>`__
+- `#6476 <https://github.com/wazuh/wazuh-dashboard-plugins/pull/6476>`__ Added a filter to select outdated agents and the **Upgrade** agent action to **Endpoints Summary**. `#6501 <https://github.com/wazuh/wazuh-dashboard-plugins/pull/6501>`__ `#6529 <https://github.com/wazuh/wazuh-dashboard-plugins/pull/6529>`__ `#6648 <https://github.com/wazuh/wazuh-dashboard-plugins/pull/6648>`__
 - `#6337 <https://github.com/wazuh/wazuh-dashboard-plugins/pull/6337>`__ Changed the way the configuration is managed in the backend side. `#6519 <https://github.com/wazuh/wazuh-dashboard-plugins/pull/6519>`__ `#6573 <https://github.com/wazuh/wazuh-dashboard-plugins/pull/6573>`__
 - `#6337 <https://github.com/wazuh/wazuh-dashboard-plugins/pull/6337>`__ Added a migration task to setup the configuration using a configuration file.
 - `#6337 <https://github.com/wazuh/wazuh-dashboard-plugins/pull/6337>`__ Moved the content of the **API is down** and **Check connection** views to the **Server APIs** view.
@@ -57,6 +57,8 @@ Wazuh dashboard
 - `#6607 <https://github.com/wazuh/wazuh-dashboard-plugins/pull/6607>`__ Implemented the option to control configuration editing via API endpoints and UI.
 - `#6572 <https://github.com/wazuh/wazuh-dashboard-plugins/pull/6572>`__ Added the **Journald** log collector tab.
 - `#6482 <https://github.com/wazuh/wazuh-dashboard-plugins/pull/6482>`__ Implemented new data source feature on MITRE ATT&CK module.
+- `#6653 <https://github.com/wazuh/wazuh-dashboard-plugins/pull/6653>`__ Added HAProxy helper settings to cluster configuration.
+- `#6660 <https://github.com/wazuh/wazuh-dashboard-plugins/pull/6660>`__ Changed log collector socket configuration response property.
 
 Resolved issues
 ---------------
@@ -113,6 +115,7 @@ Wazuh dashboard
 Reference                                                                    Description
 =========================================================================    =============
 `#6237 <https://github.com/wazuh/wazuh-dashboard-plugins/pull/6237>`__       Fixed disappearing scripted fields when index pattern fields refreshed.
+`#6667 <https://github.com/wazuh/wazuh-dashboard-plugins/pull/6667>`__       Fixed invalid IP address ranges and file hashes in sample alert scripts.
 =========================================================================    =============
 
 Changelogs
