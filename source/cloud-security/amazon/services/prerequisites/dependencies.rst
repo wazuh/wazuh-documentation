@@ -8,17 +8,16 @@
 Installing dependencies
 =======================
 
-.. note::
-   The integration with AWS can be configured in the Wazuh manager (which also behaves as an agent) or directly in a Wazuh agent. This choice merely depends on how you decide to access your AWS infrastructure in your environment.
+.. |service| replace:: AWS
 
-.. warning::
-   The Wazuh manager includes all dependencies installed, these steps are only necessary when configuring the integration in a Wazuh agent.
-
+.. include:: /_templates/cloud/notes.rst
 
 Python
 ------
 
-The AWS module requires `Python 3 <https://www.python.org/>`__. Specifically, it's compatible with `Python |PYTHON_CLOUD_CONTAINERS_MIN|–|PYTHON_CLOUD_CONTAINERS_MAX| <https://www.python.org/downloads/>`_. While later Python versions should work as well, we can't assure they are compatible.
+.. |service_module| replace:: ``AWS``
+.. |py_cloud_cont_min| replace:: |PYTHON_CLOUD_CONTAINERS_MIN|
+.. |py_cloud_cont_max| replace:: |PYTHON_CLOUD_CONTAINERS_MAX|
 
 .. include:: /_templates/cloud/python_installation.rst
 
