@@ -3,7 +3,7 @@
 .. meta::
   :description: Learn how to configure Amazon Security Lake.
 
-.. _amazon_security_lake:
+.. _aws_lake_subscriber:
 
 Amazon Security Lake
 =========================
