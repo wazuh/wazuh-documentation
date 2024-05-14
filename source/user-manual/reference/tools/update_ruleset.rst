@@ -5,6 +5,8 @@
 update_ruleset
 =================
 
+.. deprecated:: 4.2.0
+
 The ``update-ruleset`` script updates decoders, rules and rootchecks.
 
 +--------+-------------------------------------------------------------------------+

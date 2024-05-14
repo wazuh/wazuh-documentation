@@ -5,8 +5,6 @@
 sca
 ===
 
-.. versionadded:: 3.9.0
-
 This section covers the configuration for the :ref:`manual_sec_config_assessment` module.
 
 .. topic:: XML section name
