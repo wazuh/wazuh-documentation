@@ -5,7 +5,7 @@
 
 .. _aws_lake_subscriber:
 
-Amazon Security Lake
+Wazuh as a Subscriber
 =========================
 
 .. versionadded:: 4.4.2

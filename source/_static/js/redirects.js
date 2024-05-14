@@ -78,6 +78,21 @@ redirections.push(
     '4.8': '/deployment-options/offline-installation.html',
     '4.9': '/deployment-options/offline-installation/step-by-step.html',
   },
+  {
+    'target': ['4.8=>4.9', '4.9=>4.8'],
+    '4.8': '/cloud-security/amazon/services/supported-services/security-lake.html',
+    '4.9': '/cloud-security/amazon/services/supported-services/index.html',
+  },
+  {
+    'target': ['4.9=>4.8'],
+    '4.8': '/cloud-security/amazon/services/supported-services/security-lake.html',
+    '4.9': '/cloud-security/amazon/services/supported-services/amazon-security-lake/security-lake-source.html',
+  },
+  {
+    'target': ['4.9=>4.8'],
+    '4.8': '/cloud-security/amazon/services/supported-services/security-lake.html',
+    '4.9': '/cloud-security/amazon/services/supported-services/amazon-security-lake/security-lake-subscriber.html',
+  },
 );
 
 /* Pages added in 4.9 */
@@ -88,12 +103,16 @@ newUrls['4.9'] = [
   '/deployment-options/offline-installation/step-by-step.html',
   '/deployment-options/offline-installation/installation-assistant.html',
   '/development/coredump.html',
+  '/cloud-security/amazon/services/supported-services/amazon-security-lake/index.html',
+  '/cloud-security/amazon/services/supported-services/amazon-security-lake/security-lake-source.html',
+  '/cloud-security/amazon/services/supported-services/amazon-security-lake/security-lake-subscriber.html',
 ];
 
 /* Pages no longer available in 4.9 */
 
 removedUrls['4.9'] = [
   '/deployment-options/offline-installation.html',
+  '/cloud-security/amazon/services/supported-services/security-lake.html'
 ];
 
 /* *** RELEASE 4.8 ****/

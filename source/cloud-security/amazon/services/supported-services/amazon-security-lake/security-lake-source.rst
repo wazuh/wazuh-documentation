@@ -5,7 +5,7 @@
 
 .. _aws_lake_source:
 
-Amazon Security Lake
+Wazuh as a Custom Source
 =========================
 
 .. versionadded:: 4.9.0
