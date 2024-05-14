@@ -20,7 +20,7 @@ We will cover the practical aspect of dashboard creation by creating different t
 Creating visualizations
 ^^^^^^^^^^^^^^^^^^^^^^^
 
-To create a visualization, click the upper-left menu icon and navigate to **OpenSearch Dashboards** > **Visualize**. This action will open a page where a list of visualizations is displayed if any have already been created. If not, the page will show a **Create new visualization** button in the middle.
+To create a visualization, click the upper-left menu icon and navigate to **Explore** > **Visualize**. This action will open a page where a list of visualizations is displayed if any have already been created. If not, the page will show a **Create new visualization** button in the middle.
 
 .. thumbnail:: /images/wazuh-dashboard/custom-dashboards/create-new-visualization.png
    :align: center
@@ -1087,7 +1087,7 @@ Dashboards transform your data from one or more single visualization perspective
 
 To create a custom dashboard, do the following:
 
-#. Click on the upper-left menu icon and navigate to **OpenSearch Dashboards** > **Dashboard** > **Create new dashboard**.
+#. Click on the upper-left menu icon and navigate to **Explore** > **Dashboards** > **Create new dashboard**.
 
    .. thumbnail:: /images/wazuh-dashboard/custom-dashboards/create-new-dashboard.png
       :align: center
