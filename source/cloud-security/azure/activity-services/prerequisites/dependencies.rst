@@ -20,6 +20,8 @@ The Azure module requires `Python 3 <https://www.python.org/>`__. Specifically, 
 
 .. include:: /_templates/cloud/python_installation.rst
 
+.. |module_script| replace:: ``/var/ossec/wodles/azure/azure-logs``
+
 .. include:: /_templates/cloud/pip_installation.rst
 
 Azure Storage client library for Python

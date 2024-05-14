@@ -19,6 +19,8 @@ The GCP module requires `Python 3 <https://www.python.org/>`__. It's compatible 
 
 .. include:: /_templates/cloud/python_installation.rst
 
+.. |module_script| replace:: ``/var/ossec/wodles/gcloud/gcloud``
+
 .. include:: /_templates/cloud/pip_installation.rst
 
 Google Cloud pip dependencies

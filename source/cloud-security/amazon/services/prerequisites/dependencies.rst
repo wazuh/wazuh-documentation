@@ -22,6 +22,8 @@ The AWS module requires `Python 3 <https://www.python.org/>`__. Specifically, it
 
 .. include:: /_templates/cloud/python_installation.rst
 
+.. |module_script| replace:: ``/var/ossec/wodles/aws/aws-s3``
+
 .. include:: /_templates/cloud/pip_installation.rst
 
 .. _boto-3:

@@ -1,4 +1,4 @@
-.. Copyright (C) 2024 Wazuh, Inc.
+.. Copyright (C) 2015 Wazuh, Inc.
 
 .. tabs::
 

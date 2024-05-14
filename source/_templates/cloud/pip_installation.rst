@@ -1,6 +1,6 @@
-.. Copyright (C) 2024 Wazuh, Inc.
+.. Copyright (C) 2015 Wazuh, Inc.
 
-The required modules can be installed with pip, the Python package manager. Most UNIX distributions have this tool available in their software repositories:
+You can install the required modules with Pip, the Python package manager. Most UNIX distributions have this tool available in their software repositories.
 
 .. tabs::
 
@@ -16,7 +16,7 @@ The required modules can be installed with pip, the Python package manager. Most
 
          # apt-get update && apt-get install python3-pip
 
-It is recommended to use a pip version greater than or equal to 19.3 to ease the installation of the required dependencies.
+We recommend to use Pip 19.3 or later to ease the installation of the dependencies.
 
 .. tabs::
 
@@ -37,7 +37,7 @@ It is recommended to use a pip version greater than or equal to 19.3 to ease the
 
          This command modifies the default externally managed Python environment. See the `PEP 668 <https://peps.python.org/pep-0668/>`__ description for more information.
 
-         To prevent the modification, you can run ``pip3 install --upgrade pip`` within a virtual environment. You must update the module's script shebang with your virtual environment interpreter, for example, ``#!/path/to/your/virtual/environment/bin/python3``.
+         To prevent the modification, you can run ``pip3 install --upgrade pip`` within a virtual environment. You must update the shebang of the |module_script| Python script with the interpreter in your virtual environment. For example, ``#!/path/to/your/virtual/environment/bin/python3``.
 
 
 .. End of include file
