@@ -3,6 +3,10 @@ All notable changes to this project will be documented in this file.
 
 ## [v4.7.4]
 
+- Support for Wazuh 4.7.5
+
+## [v4.7.4]
+
 - Support for Wazuh 4.7.4
 
 ## [v4.7.3]
