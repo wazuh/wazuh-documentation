@@ -1,6 +1,6 @@
 .. Copyright (C) 2015 Wazuh, Inc.
 
-The |service_module| module requires `Python 3 <https://www.python.org/downloads/>`__. Specifically, it's compatible with Python |py_cloud_cont_min|–|py_cloud_cont_max|. While later Python versions should work as well, we can't assure they are compatible.
+The |service| module requires `Python 3 <https://www.python.org/downloads/>`__. Specifically, it's compatible with Python |py_cloud_cont_min|–|py_cloud_cont_max|. While later Python versions should work as well, we can't assure they are compatible.
 
 .. tabs::
 

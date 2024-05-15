@@ -15,7 +15,6 @@ Installing dependencies
 Python
 ------
 
-.. |service_module| replace:: ``AWS``
 .. |py_cloud_cont_min| replace:: |PYTHON_CLOUD_CONTAINERS_MIN|
 .. |py_cloud_cont_max| replace:: |PYTHON_CLOUD_CONTAINERS_MAX|
 
