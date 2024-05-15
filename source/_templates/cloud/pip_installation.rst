@@ -16,7 +16,7 @@ You can install the required modules with Pip, the Python package manager. Most 
 
          # apt-get update && apt-get install python3-pip
 
-We recommend to use Pip 19.3 or later to ease the installation of the dependencies.
+We recommend using Pip 19.3 or later to simplify the installation of the dependencies.
 
 .. tabs::
 

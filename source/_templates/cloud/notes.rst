@@ -1,7 +1,7 @@
 .. Copyright (C) 2015 Wazuh, Inc.
 
-The integration with |service| can be configured in the Wazuh manager (which also behaves as an agent) or directly in a Wazuh agent. This choice merely depends on how you decide to access your |service| infrastructure in your environment.
+You can configure the integration with |service| either in the Wazuh manager or in a Wazuh agent. This choice depends solely on how you access your |service| infrastructure in your environment.
 
-The Wazuh manager includes all dependencies installed, these steps are only necessary when configuring the integration in a Wazuh agent.
+You only need to install dependencies when configuring the integration with |service| in a Wazuh agent. The Wazuh manager already includes all the necessary dependencies.
 
 .. End of include file
