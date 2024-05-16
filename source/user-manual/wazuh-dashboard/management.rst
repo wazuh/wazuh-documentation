@@ -74,6 +74,7 @@ You can take a quick look at the Wazuh dashboard configuration file here. The do
 
 Miscellaneous
 ^^^^^^^^^^^^^
+
 You can manually execute the Health check on this section
 
 .. thumbnail:: ../../images/kibana-app/features/settings/miscellaneous.png
