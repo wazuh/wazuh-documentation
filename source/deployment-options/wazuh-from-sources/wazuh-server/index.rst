@@ -118,7 +118,7 @@ Installing the Wazuh manager
 
       # ./install.sh
 
-   The initial run might be time-consuming due to the initial process of downloading and processing the :doc:`vulnerability detection </user-manual/capabilities/vulnerability-detection/index>` content. In order to bypass this initial step, you can set ``DOWNLOAD_CONTENT=y`` and a pre-prepared database will be downloaded during the installation.
+   The initial run might take some time as it downloads and processes the :doc:`vulnerability detection </user-manual/capabilities/vulnerability-detection/index>` content. To speed up this process, you can set the ``DOWNLOAD_CONTENT`` environment variable to ``y`` beforehand. The adjusted command downloads a pre-prepared database during installation.
 
    .. code-block:: console
 
