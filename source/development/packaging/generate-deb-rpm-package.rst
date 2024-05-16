@@ -33,22 +33,22 @@ Execute the ``generate_package.sh`` script, with the different options you desir
 .. code-block:: none
   :class: output
 
-  Usage: ./generate_package.sh [OPTIONS]
+  Usage: packages/generate_package.sh [OPTIONS]
 
-    -b, --branch <branch>      [Optional] Select Git branch [].
+    -b, --branch <branch>      [Optional] Select Git branch.
     -t, --target <target>      [Required] Target package to build: manager or agent.
     -a, --architecture <arch>  [Optional] Target architecture of the package [amd64/i386/ppc64le/arm64/armhf].
     -j, --jobs <number>        [Optional] Change number of parallel jobs when compiling the manager or agent. By default: 2.
     -r, --revision <rev>       [Optional] Package revision. By default: 0.
     -s, --store <path>         [Optional] Set the destination path of package. By default, an output folder will be created.
     -p, --path <path>          [Optional] Installation path for the package. By default: /var/ossec.
-    -d, --debug                [Optional] Build the binaries with debug symbols. By default: False.
-    -c, --checksum             [Optional] Generate checksum on the same directory than the package.
+    -d, --debug                [Optional] Build the binaries with debug symbols. By default: no.
+    -c, --checksum             [Optional] Generate checksum on the same directory than the package. By default: no.
     -l, --legacy               [Optional only for RPM] Build package for CentOS 5.
     --dont-build-docker        [Optional] Locally built docker image will be used instead of generating a new one.
     --tag                      [Optional] Tag to use with the docker image.
     --sources <path>           [Optional] Absolute path containing wazuh source code. This option will use local source code instead of downloading it from GitHub. By default use the script path.
-    --is_stage                 [Optional] Use release name in package
+    --is_stage                 [Optional] Use release name in package.
     --system                   [Optional] Select Package OS [rpm, deb]. By default is 'deb'.
     --src                      [Optional] Generate the source package in the destination directory.
     --future                   [Optional] Build test future package x.30.0 Used for development purposes.

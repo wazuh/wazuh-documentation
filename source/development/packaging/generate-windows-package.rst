@@ -46,11 +46,11 @@ image with all the necessary tools to compile and obtain the Windows agent compi
   Usage: ./generate_compiled_windows_agent.sh [OPTIONS]
 
       -b, --branch <branch>     [Optional] Select Git branch to compile Wazuh code.
-      --sources <path>          [Optional] Absolute path containing wazuh source code. This option will use local source code instead of downloading it from GitHub. By default: ../../src
-      -o, --output <rev>        [Required] Name to the output package
+      --sources <path>          [Optional] Absolute path containing wazuh source code. This option will use local source code instead of downloading it from GitHub. By default: '../../src'.
+      -o, --output <rev>        [Required] Name to the output package.
       -j, --jobs <number>       [Optional] Change number of parallel jobs when compiling the Windows agent. By default: 4.
       -s, --store <path>        [Optional] Set the directory where the package will be stored. By default the current path.
-      -d, --debug               [Optional] Build the binaries with debug symbols. By default: false.
+      -d, --debug               [Optional] Build the binaries with debug symbols. By default: no.
       -t, --trust_verification  [Optional] Build the binaries with trust load images verification. By default: 1 (only warnings).
       -c, --ca_name <CA name>   [Optional] CA name to be used to verify the trust of the agent. By default: DigiCert Assured ID Root CA.
       --dont-build-docker       [Optional] Locally built docker image will be used instead of generating a new one.
