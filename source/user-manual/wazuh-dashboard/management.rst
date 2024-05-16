@@ -10,6 +10,11 @@ Dashboard management
 
 The **Dashboard management** section allows you to configure and customize your Wazuh dashboard experience, as well as seeing the generated reports and the application logs.
 
+.. contents::
+   :local:
+   :depth: 1
+   :backlinks: none
+
 Dashboards Management
 ---------------------
 
@@ -31,7 +36,7 @@ You can see the saved objects of the application here. You will find the index p
 
 Advanced settings
 ^^^^^^^^^^^^^^^^^
-In this section you can configure advanced settings of the Wazuh Dashboard. In this section, you can set the appearance to dark mode. 
+In this section you can configure advanced settings of the Wazuh Dashboard. Here, you can set the appearance to dark mode. 
 
 .. thumbnail:: ../../images/kibana-app/features/settings/advanced-settings.png
   :align: center

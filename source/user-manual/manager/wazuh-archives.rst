@@ -249,7 +249,7 @@ Use the Wazuh archives to query and display events related to the technique bein
       :width: 80%
 
    You can extract and verify specific details on the activities such as commands, services, paths, and more from the JSON log.
-   Below, you can identify the initial process creation and the attributes related to the executed command:
+   Below, you can identify the process access and the attributes related to the executed command:
 
    .. code-block:: console
       :emphasize-lines: 7, 25
@@ -338,7 +338,7 @@ Use the Wazuh archives to query and display events related to the technique bein
             }
           },
 
-#. Search ``technique_id=T1218.010,technique_name=Regsvr32`` to see the technique ID as shown below.  
+#. Apply the ``data.win.eventdata.ruleName:technique_id=T1218.010,technique_name=Regsvr32`` filter to see the technique ID as shown below.  
 
    .. thumbnail:: /images/manual/wazuh-archives/detecting-signed-binary-proxy-execution-6.png
       :title: Search for the T1218.010 technique 
@@ -365,7 +365,7 @@ Use the Wazuh archives to query and display events related to the technique bein
    From the below log, you can extract more structured details which makes it easier to analyze the event:
    
    .. code-block:: console
-      :emphasize-lines: 9, 20
+      :emphasize-lines: 14, 26
 
       "data": {
          "win": {
