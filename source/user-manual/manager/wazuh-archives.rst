@@ -368,42 +368,42 @@ Use the Wazuh archives to query and display events related to the technique bein
       :emphasize-lines: 9, 20
 
       "data": {
-      "win": {
-        "eventdata": {
-          "destinationPort": "443",
-          "image": "C:\\\\Windows\\\\System32\\\\regsvr32.exe",
-          "sourcePort": "63754",
-          "initiated": "true",
-          "destinationIp": "1.1.123.23",
-          "protocol": "tcp",
-          "processGuid": "{45cd4aff-36b5-645a-9e07-000000000e00}",
-          "sourceIp": "192.168.43.16",
-          "processId": "4704",
-          "utcTime": "2024-05-14 14:01:35.453",
-          "ruleName": "technique_id=T1218.010,technique_name=Regsvr32",
-          "destinationIsIpv6": "false",
-          "user": "Windows11\\\\Testuser",
-          "sourceIsIpv6": "false"
-        },
-        "system": {
-          "eventID": "3",
-          "keywords": "0x8000000000000000",
-          "providerGuid": "{5770385f-c22a-43e0-bf4c-06f5698ffbd9}",
-          "level": "4",
-          "channel": "Microsoft-Windows-Sysmon/Operational",
-          "opcode": "0",
-          "message": "\"Network connection detected:\r\nRuleName: technique_id=T1218.010,technique_name=Regsvr32\r\nUtcTime: 2024-05-14 14:01:35.361\r\nProcessGuid: {45cd4aff-36b5-645a-9e07-000000000e00}\r\nProcessId: 4704\r\nImage: C:\\Windows\\System32\\regsvr32.exe\r\nUser: Windows11\\Testuser\r\nProtocol: tcp\r\nInitiated: true\r\nSourceIsIpv6: false\r\nSourceIp: 192.168.43.16\r\nSourceHostname: -\r\nSourcePort: 63754\r\nSourcePortName: -\r\nDestinationIsIpv6: false\r\nDestinationIp: 185.199.108.133\r\nDestinationHostname: -\r\nDestinationPort: 443\r\nDestinationPortName: -\"",
-          "version": "5",
-          "systemTime": "2024-05-14T12:04:07.0231156Z",
-          "eventRecordID": "63350",
-          "threadID": "3096",
-          "computer": "Windows11",
-          "task": "3",
-          "processID": "3156",
-          "severityValue": "INFORMATION",
-          "providerName": "Microsoft-Windows-Sysmon"
-        }
-      }
-    },
+         "win": {
+           "eventdata": {
+             "destinationPort": "443",
+             "image": "C:\\\\Windows\\\\System32\\\\regsvr32.exe",
+             "sourcePort": "63754",
+             "initiated": "true",
+             "destinationIp": "1.1.123.23",
+             "protocol": "tcp",
+             "processGuid": "{45cd4aff-36b5-645a-9e07-000000000e00}",
+             "sourceIp": "192.168.43.16",
+             "processId": "4704",
+             "utcTime": "2024-05-14 14:01:35.453",
+             "ruleName": "technique_id=T1218.010,technique_name=Regsvr32",
+             "destinationIsIpv6": "false",
+             "user": "Windows11\\\\Testuser",
+             "sourceIsIpv6": "false"
+           },
+           "system": {
+             "eventID": "3",
+             "keywords": "0x8000000000000000",
+             "providerGuid": "{5770385f-c22a-43e0-bf4c-06f5698ffbd9}",
+             "level": "4",
+             "channel": "Microsoft-Windows-Sysmon/Operational",
+             "opcode": "0",
+             "message": "\"Network connection detected:\r\nRuleName: technique_id=T1218.010,technique_name=Regsvr32\r\nUtcTime: 2024-05-14 14:01:35.361\r\nProcessGuid: {45cd4aff-36b5-645a-9e07-000000000e00}\r\nProcessId: 4704\r\nImage: C:\\Windows\\System32\\regsvr32.exe\r\nUser: Windows11\\Testuser\r\nProtocol: tcp\r\nInitiated: true\r\nSourceIsIpv6: false\r\nSourceIp: 192.168.43.16\r\nSourceHostname: -\r\nSourcePort: 63754\r\nSourcePortName: -\r\nDestinationIsIpv6: false\r\nDestinationIp: 185.199.108.133\r\nDestinationHostname: -\r\nDestinationPort: 443\r\nDestinationPortName: -\"",
+             "version": "5",
+             "systemTime": "2024-05-14T12:04:07.0231156Z",
+             "eventRecordID": "63350",
+             "threadID": "3096",
+             "computer": "Windows11",
+             "task": "3",
+             "processID": "3156",
+             "severityValue": "INFORMATION",
+             "providerName": "Microsoft-Windows-Sysmon"
+           }
+         }
+       },
 
 You can use events from the Wazuh archives to develop detection logic and write custom decoders and rules. You can use the out-of-the-box ``wazuh-logtest`` tool to test and verify rules against provided logs. For more information, see the :doc:`Custom rules and decoders </user-manual/ruleset/index>` and the :doc:`wazuh-logtest </user-manual/reference/tools/wazuh-logtest>` documentation.
