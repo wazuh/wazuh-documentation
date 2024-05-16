@@ -10,9 +10,6 @@ Wazuh as a Subscriber
 
 .. versionadded:: 4.4.2
 
-
-Amazon Security Lake is a fully-managed security data lake service that consolidates data from multiple AWS and other services, optimizing storage costs and performance at scale.
-
 All logs in Amazon Security Lake use the Open Cybersecurity Schema Framework (OCSF) standard for formatting. You can use the Wazuh integration for Amazon Security Lake to ingest security events from AWS services.
 
 These events are available as multi-event Apache Parquet objects in an S3 bucket. Each object has a corresponding SQS message, once it's ready for download.

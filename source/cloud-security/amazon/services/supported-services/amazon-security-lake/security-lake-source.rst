@@ -11,17 +11,27 @@ Wazuh as a Custom Source
 .. versionadded:: 4.9.0
 
 
-Amazon Security Lake is a fully-managed security data lake service that consolidates data from multiple AWS and other services, optimizing storage costs and performance at scale.
+Wazuh Security Events can be converted to OCSF events and Parquet format, required by Amazon Security Lake, by using an AWS Lambda Python function, a Logstash instance and an AWS S3 bucket.
 
-All logs in Amazon Security Lake use the Open Cybersecurity Schema Framework (OCSF) standard for formatting. You can use the Wazuh integration for Amazon Security Lake to ingest security events from AWS services.
+A properly configured Logstash instance can send the Wazuh Security events to an AWS S3 bucket, automatically invoking the AWS Lambda function that will transform and send the events to the Amazon Security lake dedicated S3 bucket.
 
-These events are available as multi-event Apache Parquet objects in an S3 bucket. Each object has a corresponding SQS message, once it's ready for download.
+The diagram below illustrates the process of converting Wazuh Security Events to OCSF events and to Parquet format for Amazon Security Lake.
 
-Wazuh periodically checks for new SQS messages, downloads new objects, converts the files from Parquet to JSON, and indexes each event into the Wazuh indexer.
-To set up the Wazuh integration for Amazon Security Lake as a subscriber, you need to do the following:
+    .. thumbnail:: /images/aws/asl-overview.png
+      :align: center
+      :width: 80%
 
-    #. Create a subscriber in Amazon Security Lake.
-    #. Set up the Wazuh integration for Amazon Security Lake.
+
+Prerequisites
+--------------
+
+#. Amazon Security Lake is enabled.
+#. At least one up and running ``wazuh-indexer`` instance with populated ``wazuh-alerts-4.x-*`` indices.
+#. A Logstash instance.
+#. An S3 bucket to store raw events.
+#. An AWS Lambda function, using the Python 3.12 runtime.
+#. (Optional) An S3 bucket to store OCSF events, mapped from raw events.
+
 
 AWS configuration
 -----------------
@@ -33,194 +43,301 @@ If you haven't already, ensure that you have enabled Amazon Security Lake by fol
 
 For multiple AWS accounts, we strongly encourage you to use AWS Organizations and set up Amazon Security Lake at the Organization level.
 
-
-Creating a Subscriber in Amazon Security Lake
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-
-After completing all required AWS prerequisites, configure a subscriber for Amazon Security Lake via the AWS console. This creates the resources you need to make the Amazon Security Lake events available for consumption in your Wazuh platform deployment.
-
-Setting up a subscriber in the AWS Console
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-
-Logging in and navigating
-~~~~~~~~~~~~~~~~~~~~~~~~~
-
-#. Log into your AWS console and navigate to **Security Lake**.
-#. Navigate to Subscribers, and click **Create subscriber**.
-
-
-Creating a subscriber
-~~~~~~~~~~~~~~~~~~~~~
-
-#. Enter a descriptive name for your subscriber. For example, Wazuh.
-#. Choose to either collect all log and event sources, or only specific log and event sources.
-#. Select S3 as your data access method.
-#. Enter the *AWS account ID* for the account you are currently logged into.
-#. Enter a unique value in **External ID**. For example, *wazuh-external-id-value*.
-#. Under **Notification details** select *SQS queue*.
-#. Click the **Create** button to get to the Subscribers pages.
-
-Reviewing the subscriber
-~~~~~~~~~~~~~~~~~~~~~~~~
-
-#. Navigate to **My subscribers** section, and click on your newly created subscriber to get to the *Subscriber Details* page.
-#. Check that AWS created the subscriber with the correct parameters.
-#. Save the *SQS queue name*. You need the name of the Subscription endpoint for later on when verifying the information in the SQS queue.
-
-Verifying information in SQS Queue
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-
-Follow these steps in your Amazon deployment to verify the information for the SQS Queue that Security Lake creates.
-
-#. In your AWS console, navigate to the **Amazon Simple Queue Service**.
-#. In the **Queues** section, navigate to the queue that Security Lake created. Click on its name.
-#. In the information page for the queue, click on the **Monitoring** tab. Verify that events are flowing in by looking at the *Approximate Number Of Messages Visible* graph and confirming the number is increasing.
-
-Verifying events are flowing into S3 bucket
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-
-Follow these steps in your Amazon deployment to verify that parquet files are flowing into your configured S3 buckets.
-
-#. In your AWS console, navigate to the Amazon S3 service.
-#. Navigate to the **Buckets** section, and click on the S3 bucket name that Security Lake created for each applicable region. These bucket names start with the prefix *aws-security-data-lake* .
-#. In each applicable bucket, navigate to the **Objects** tab. Click through the directories to verify that Security Lake has available events flowing into the S3 bucket. Check that new files with the ``.gz.parquet`` extension appear.
-    
-    * If you enabled Security Lake on more than one AWS account, check if you see each applicable account number listed. Check that parquet files exist inside each account.
-#. In each applicable S3 bucket, navigate to the **Properties** tab and verify in the **Event notifications** section that the data destination is the Security Lake SQS queue.
-
-
-Configuring an IAM role
-^^^^^^^^^^^^^^^^^^^^^^^
-
-Configuring the role
-~~~~~~~~~~~~~~~~~~~~
-
-Follow these steps to modify the Security Lake subscriber role. You have to associate an existing user with the role.
-
-#. In your AWS console, navigate to the **Amazon IAM service**.
-#. In your Amazon IAM service, navigate to the **Roles** page.
-#. In the Roles page, select the Role name of the subscription role notification that was created as part of the Security Lake subscriber provisioning process.
-#. In the **Summary** page, navigate to the **Trust relationships** tab to modify the Trusted entity policy.
-#. Modify the Trusted entity policy with the following updates:
-
-    #. In the stanza containing the ARN, attach the username from your target user account to the end of the ARN. This step connects a user to the role. It lets you configure the Security Lake service with the secret access key. See the following Trusted entity example:
-
-    .. code-block:: JSON
-
-        {
-            "Version": "2012-10-17",
-            "Statement": [
-                {
-                    "Sid": "1",
-                    "Effect": "Allow",
-                    "Principal": {
-                        "AWS": "arn:aws:iam::<account-id>:user/<user-account>"
-                    },
-                    "Action": "sts:AssumeRole",
-                    "Condition": {
-                            "StringEquals": {
-                                "sts:ExternalId": [
-                                    "wazuh-external-id-value"
-                                ]
-                            }
-                    }
-                }
-            ]
-        }
-
-
-
-Granting a user permissions to switch roles
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-
-Follow these steps to configure the user permissions:
-
-#. In your Amazon IAM service, navigate to the **Users** page.
-#. In the **Users**  page, select the Username of the user you have connected to the role (``<account-id>``). 
-#. Replace ``<account-id>`` and ``<resource-role>``, and add the following permission to switch to the new role:
-
-    Note that ``<resource-role>`` is the name of the subscription role that was created as part of the Security Lake subscriber provisioning process.
-
-    .. code-block:: JSON
-
-        {
-            "Version": "2012-10-17",
-            "Statement": [
-                {
-                "Sid": "VisualEditor1",
-                "Effect": "Allow",
-                "Action": "sts:AssumeRole",
-                "Resource": "arn:aws:iam::<account-id>:role/<resource-role>"
-                }
-            ]
-        }
-
-
-
-Wazuh configuration
--------------------
-
-Security Lake section in ossec.conf 
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-
-Set the configuration inside the section ``<subscriber type="security_lake">``. You can find this tag inside the ``<wodle name="aws-s3">`` section of the ``/var/ossec/etc/ossec.conf`` file.
-
-.. code-block:: xml
-
-        <wodle name="aws-s3">
-            <disabled>no</disabled>
-            <interval>1h</interval>
-            <run_on_start>yes</run_on_start>
-            <subscriber type="security_lake">
-                <sqs_name>sqs-security-lake-main-queue</sqs_name>
-                <iam_role_arn>arn:aws:iam::xxxxxxxxxxx:role/ASL-Role</iam_role_arn>
-                <iam_role_duration>1300</iam_role_duration>
-                <external_id>wazuh-external-id-value</external_id>
-                <sts_endpoint>xxxxxx.sts.region.vpce.amazonaws.com</sts_endpoint>
-                <service_endpoint>https://bucket.xxxxxx.s3.region.vpce.amazonaws.com</service_endpoint>     
-            </subscriber>
-        </wodle>
-
-
-After setting the required parameters, restart the Wazuh manager to apply the changes:
-
-.. include:: /_templates/common/restart_manager.rst
-
-.. note::
-    
-    The module execution time varies depending on the number of notifications in the queue. This affects the time to display alerts on the Wazuh dashboard. If the ``<interval>`` value is less than the execution time, the :ref:`Interval overtaken <interval_overtaken_message>` message appears in the ``ossec.log`` file.
-
-Parameters
-^^^^^^^^^^
-
-The following fields inside the section allow you to configure the queue and authenticate:
-
-Queue configuration
-~~~~~~~~~~~~~~~~~~~
-
-*   ``<sqs_name>`` : The name of the queue.
-*   ``<service_endpoint>``- Optional: The AWS S3 endpoint URL to be used to download the data from the bucket. Check :ref:`Considerations for configuration <amazon_considerations>` for more information about VPC and FIPS endpoints.
-
-Authentication
-~~~~~~~~~~~~~~
-
-*   ``<iam_role_arn>``: ARN for the corresponding IAM role to assume.
-*   ``<external_id>``: External ID to use when assuming the role.
-*   ``<iam_role_duration>`` - Optional: The session duration in seconds.
-*   ``<sts_endpoint>`` - Optional: The URL of the VPC endpoint of the AWS Security Token Service.
-
-    .. note::
-        This authentication method requires adding credentials to the configuration using the ``/root/.aws/credentials`` file.
-
-
-
-More information about the different authentication methods can be found in the :ref:`Configuring AWS credentials <amazon_credentials>` documentation.
-
-Visualizing alerts in Wazuh dashboard 
+Creating an S3 bucket to store events
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-Once you set the configuration and restart the manager, you can visualize the Amazon Security Lake alerts in the Wazuh dashboard. To do this, go to the **Threat Hunting** module. Apply the filter ``rule.groups: amazon_security_lake`` for an easier visualization.
+Follow the `official documentation <https://docs.aws.amazon.com/AmazonS3/latest/userguide/create-bucket-overview.html>`__ to create an S3 bucket within your organization. Use a descriptive name, for example: ``wazuh-aws-security-lake-raw``.
 
-    .. thumbnail:: /images/aws/security-lake-1.png
+Creating a Custom Source in Amazon Security Lake
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Configure a custom source for Amazon Security Lake via the AWS console. Follow the `official documentation <https://docs.aws.amazon.com/security-lake/latest/userguide/custom-sources.html>`__ to register Wazuh as a custom source.
+
+To create the custom source:
+
+#. Log into your AWS console and navigate to **Security Lake**.
+#. Navigate to Custom Sources, and click **Create custom source**.
+#. Enter a descriptive name for your custom source. For example, ``wazuh``.
+#. Choose **Security Finding** as the OCSF Event class.
+#. For **AWS account with permission to write data**, enter the AWS account ID and External ID of the custom source that will write logs and events to the data lake.
+#. For **Service Access**, create and use a new service role or use an existing service role that gives Security Lake permission to invoke AWS Glue.
+
+    .. thumbnail:: /images/aws/asl-custom-source-form.png
       :align: center
       :width: 80%
+
+#. Click on **Create**. Upon creation, Amazon Security Lake automatically creates an AWS Service Role with permissions to push files into the Security Lake bucket, under the proper prefix named after the custom source name. An AWS Glue Crawler is also created to populate the AWS Glue Data Catalog automatically.
+
+    .. thumbnail:: /images/aws/asl-custom-source.png
+      :align: center
+      :width: 80%
+
+#. Finally, collect the S3 bucket details, as these will be needed in the next step. Make sure you have the following information:
+
+    * The Amazon Security Lake S3 region.
+    * The S3 bucket name (e.g, ``aws-security-data-lake-us-east-1-AAABBBCCCDDD``).
+
+
+Creating an AWS Lambda function
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Follow the `official documentation <https://docs.aws.amazon.com/lambda/latest/dg/getting-started.html>`__ to create an AWS Lambda function:
+
+#. Select Python 3.12 as the runtime.
+#. Configure the Lambda to use 512 MB of memory and 30 seconds timeout.
+#. Configure a trigger so every object with ``.txt`` extension uploaded to the S3 bucket created previously invokes the Lambda function.
+
+    .. thumbnail:: /images/aws/asl-lambda-trigger.png
+      :align: center
+      :width: 80%
+
+#. Create a zip deployment package and upload it to the S3 bucket created previously as per `these instructions <https://docs.aws.amazon.com/lambda/latest/dg/gettingstarted-package.html#gettingstarted-package-zip>`__. The code is hosted in the wazuh-indexer repository. Use the **Makefile** to generate the zip package **wazuh_to_amazon_security_lake.zip**.
+
+    .. code-block:: console
+
+        git clone https://github.com/wazuh/wazuh-indexer.git
+        cd wazuh-indexer/integrations/amazon-security-lake
+        make
+
+#. Configure the Lambda with these environment variables.
+
+    +--------------------------+--------------+----------------------------------------------------------------------------------------------------+
+    | **Environment variable** | **Required** | **Value**                                                                                          |
+    +--------------------------+--------------+----------------------------------------------------------------------------------------------------+
+    | AWS_BUCKET               | True         | The name of the Amazon S3 bucket in which Security Lake stores your custom source data             |
+    +--------------------------+--------------+----------------------------------------------------------------------------------------------------+
+    | SOURCE_LOCATION          | True         | The *Data source name* of the *Custom Source*                                                      |
+    +--------------------------+--------------+----------------------------------------------------------------------------------------------------+
+    | ACCOUNT_ID               | True         | Enter the ID that you specified when creating your Amazon Security Lake custom source              |
+    +--------------------------+--------------+----------------------------------------------------------------------------------------------------+
+    | AWS_REGION               | True         | AWS Region to which the data is written                                                            |
+    +--------------------------+--------------+----------------------------------------------------------------------------------------------------+
+    | S3_BUCKET_OCSF           | False        | S3 bucket to which the mapped events are written                                                   |
+    +--------------------------+--------------+----------------------------------------------------------------------------------------------------+
+    | OCSF_CLASS               | False        | The OCSF class to map the events into. Can be "SECURITY_FINDING" (default) or "DETECTION_FINDING". |
+    +--------------------------+--------------+----------------------------------------------------------------------------------------------------+
+
+    .. note::
+        The ``DETECTION_FINDING`` class is not supported by Amazon Security Lake yet.
+
+Validation
+^^^^^^^^^^^
+
+To validate that the Lambda function is properly configured and works as expected, add the sample events below to the ``sample.txt`` file and upload it to the S3 bucket.
+
+    .. code-block:: JSON
+
+        {"cluster":{"name":"wazuh-cluster","node":"wazuh-manager"},"timestamp":"2024-04-22T14:20:46.976+0000","rule":{"mail":false,"gdpr":["IV_30.1.g"],"groups":["audit","audit_command"],"level":3,"firedtimes":1,"id":"80791","description":"Audit: Command: /usr/sbin/crond"},"location":"","agent":{"id":"004","ip":"47.204.15.21","name":"Ubuntu"},"data":{"audit":{"type":"NORMAL","file":{"name":"/etc/sample/file"},"success":"yes","command":"cron","exe":"/usr/sbin/crond","cwd":"/home/wazuh"}},"predecoder":{},"manager":{"name":"wazuh-manager"},"id":"1580123327.49031","decoder":{},"@version":"1","@timestamp":"2024-04-22T14:20:46.976Z"}
+        {"cluster":{"name":"wazuh-cluster","node":"wazuh-manager"},"timestamp":"2024-04-22T14:22:03.034+0000","rule":{"mail":false,"gdpr":["IV_30.1.g"],"groups":["audit","audit_command"],"level":3,"firedtimes":1,"id":"80790","description":"Audit: Command: /usr/sbin/bash"},"location":"","agent":{"id":"007","ip":"24.273.97.14","name":"Debian"},"data":{"audit":{"type":"PATH","file":{"name":"/bin/bash"},"success":"yes","command":"bash","exe":"/usr/sbin/bash","cwd":"/home/wazuh"}},"predecoder":{},"manager":{"name":"wazuh-manager"},"id":"1580123327.49031","decoder":{},"@version":"1","@timestamp":"2024-04-22T14:22:03.034Z"}
+        {"cluster":{"name":"wazuh-cluster","node":"wazuh-manager"},"timestamp":"2024-04-22T14:22:08.087+0000","rule":{"id":"1740","mail":false,"description":"Sample alert 1","groups":["ciscat"],"level":9},"location":"","agent":{"id":"006","ip":"207.45.34.78","name":"Windows"},"data":{"cis":{"rule_title":"CIS-CAT 5","timestamp":"2024-04-22T14:22:08.087+0000","benchmark":"CIS Ubuntu Linux 16.04 LTS Benchmark","result":"notchecked","pass":52,"fail":0,"group":"Access, Authentication and Authorization","unknown":61,"score":79,"notchecked":1,"@timestamp":"2024-04-22T14:22:08.087+0000"}},"predecoder":{},"manager":{"name":"wazuh-manager"},"id":"1580123327.49031","decoder":{},"@version":"1","@timestamp":"2024-04-22T14:22:08.087Z"}
+
+
+A successful execution of the Lambda function will map these events into the OCSF Security Finding Class and write them to the Amazon Security Lake S3 bucket in Parquet format, properly partitioned based on the Custom Source name, Account ID, AWS Region and date, as described in the `official documentation <https://docs.aws.amazon.com/security-lake/latest/userguide/custom-sources.html#custom-sources-best-practices>`__.
+
+
+Installing and configuring Logstash
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+Install Logstash on a dedicated server or on the server hosting the ``wazuh-indexer``. Logstash forwards the data from the ``wazuh-indexer`` to the AWS S3 bucket created previously.
+
+#. Follow the `official documentation <https://www.elastic.co/guide/en/logstash/current/installing-logstash.html>`__ to install Logstash.
+#. Install the `logstash-input-opensearch <https://github.com/opensearch-project/logstash-input-opensearch>`__ plugin (this one is installed by default in most cases).
+
+    .. code-block:: console
+
+        sudo /usr/share/logstash/bin/logstash-plugin install logstash-input-opensearch
+
+
+#. Copy the ``wazuh-indexer`` root certificate on the Logstash server, to any folder of your choice (e.g, ``/usr/share/logstash/root-ca.pem``).
+#. Give the ``logstash`` user the required permissions to read the certificate.
+
+    .. code-block:: console
+
+        sudo chmod -R 755 </PATH/TO/WAZUH_INDEXER/CERTIFICATE>/root-ca.pem
+
+Configuring the Logstash pipeline
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+A `Logstash pipeline <https://www.elastic.co/guide/en/logstash/current/configuration.html>`__ allows Logstash to use plugins to read the data from the ``wazuh-indexer`` and send them to an AWS S3 bucket.
+
+The Logstash pipeline requires access to the following secrets:
+
+    * ``wazuh-indexer`` credentials: ``INDEXER_USERNAME`` and ``INDEXER_PASSWORD``.
+    * AWS credentials for the account with permissions to write to the S3 bucket: ``AWS_ACCESS_KEY_ID`` and ``AWS_SECRET_ACCESS_KEY``.
+    * AWS S3 bucket details: ``AWS_REGION`` and ``S3_BUCKET`` (the S3 bucket name for raw events).
+
+#. Use the `Logstash keystore <https://www.elastic.co/guide/en/logstash/current/keystore.html>`__ to securely store these values.
+
+#. Create the configuration file ``indexer-to-s3.conf`` in the ``/etc/logstash/conf.d/`` folder:
+
+    .. code-block:: console
+
+        sudo touch /etc/logstash/conf.d/indexer-to-s3.conf
+
+#. Add the following configuration to the ``indexer-to-s3.conf`` file.
+
+    .. code-block:: ruby
+
+        input {
+            opensearch {
+                hosts =>  ["<WAZUH_INDEXER_ADDRESS>:9200"]
+                user  =>  "${INDEXER_USERNAME}"
+                password  =>  "${INDEXER_PASSWORD}"
+                ssl => true
+                ca_file => "</PATH/TO/WAZUH_INDEXER/CERTIFICATE>/root-ca.pem"
+                index =>  "wazuh-alerts-4.x-*"
+                query =>  '{
+                    "query": {
+                        "range": {
+                            "@timestamp": {
+                            "gt": "now-5m"
+                            }
+                        }
+                    }
+                }'
+                schedule => "*/5 * * * *"
+            }
+        }
+
+        output {
+            stdout {
+                id => "output.stdout"
+                codec => json_lines
+            }
+            s3 {
+                id => "output.s3"
+                access_key_id => "${AWS_ACCESS_KEY_ID}"
+                secret_access_key => "${AWS_SECRET_ACCESS_KEY}"
+                region => "${AWS_REGION}"
+                bucket => "${S3_BUCKET}"
+                codec => "json_lines"
+                retry_count => 0
+                validate_credentials_on_root_bucket => false
+                prefix => "%{+YYYY}%{+MM}%{+dd}"
+                server_side_encryption => true
+                server_side_encryption_algorithm => "AES256"
+                additional_settings => {
+                "force_path_style" => true
+                }
+                time_file => 5
+            }
+        }
+
+Running Logstash
+^^^^^^^^^^^^^^^^^
+
+#. Once you have everything set, run Logstash from the CLI with your configuration:
+
+    .. code-block:: console
+
+        sudo systemctl stop logstash
+        sudo -E /usr/share/logstash/bin/logstash -f /etc/logstash/conf.d/indexer-to-s3.conf --path.settings /etc/logstash ----config.test_and_exit
+
+#. After confirming that the configuration loads correctly without errors, run Logstash as a service.
+
+    .. code-block:: console
+
+        sudo systemctl enable logstash
+        sudo systemctl start logstash
+
+
+OCSF Mapping
+-------------
+
+The integration maps Wazuh Security Events to the **OCSF v1.1.0** `Security Finding (2001) <https://schema.ocsf.io/classes/security_finding>`__ Class.
+The tables below represent how the Wazuh Security Events are mapped into the OCSF Security Finding Class.
+
+.. note::
+  This does not reflect any transformations or evaluations of the data. Some data evaluation and transformation will be necessary for a correct representation in OCSF that matches all requirements.
+
+Metadata
+^^^^^^^^
++------------------------------+---------------------+--------------------+
+| **OCSF Key**                 | **OCSF Value Type** | **Value**          |
++------------------------------+---------------------+--------------------+
+| category_uid                 | Integer             | 2                  |
++------------------------------+---------------------+--------------------+
+| category_name                | String              | "Findings"         |
++------------------------------+---------------------+--------------------+
+| class_uid                    | Integer             | 2001               |
++------------------------------+---------------------+--------------------+
+| class_name                   | String              | "Security Finding" |
++------------------------------+---------------------+--------------------+
+| type_uid                     | Long                | 200101             |
++------------------------------+---------------------+--------------------+
+| metadata.product.name        | String              | "Wazuh"            |
++------------------------------+---------------------+--------------------+
+| metadata.product.vendor_name | String              | "Wazuh, Inc."      |
++------------------------------+---------------------+--------------------+
+| metadata.product.version     | String              | "4.9.0"            |
++------------------------------+---------------------+--------------------+
+| metadata.product.lang        | String              | "en"               |
++------------------------------+---------------------+--------------------+
+| metadata.log_name            | String              | "Security events"  |
++------------------------------+---------------------+--------------------+
+| metadata.log_provider        | String              | "Wazuh"            |
++------------------------------+---------------------+--------------------+
+
+
+Security events
+^^^^^^^^^^^^^^^^
++------------------------+---------------------+----------------------------------------+
+| **OCSF Key**           | **OCSF Value Type** | **Wazuh Event Value**                  |
++------------------------+---------------------+----------------------------------------+
+| activity_id            | Integer             | 1                                      |
++------------------------+---------------------+----------------------------------------+
+| time                   | Timestamp           | timestamp                              |
++------------------------+---------------------+----------------------------------------+
+| message                | String              | rule.description                       |
++------------------------+---------------------+----------------------------------------+
+| count                  | Integer             | rule.firedtimes                        |
++------------------------+---------------------+----------------------------------------+
+| finding.uid            | String              | id                                     |
++------------------------+---------------------+----------------------------------------+
+| finding.title          | String              | rule.description                       |
++------------------------+---------------------+----------------------------------------+
+| finding.types          | String Array        | input.type                             |
++------------------------+---------------------+----------------------------------------+
+| analytic.category      | String              | rule.groups                            |
++------------------------+---------------------+----------------------------------------+
+| analytic.name          | String              | decoder.name                           |
++------------------------+---------------------+----------------------------------------+
+| analytic.type          | String              | "Rule"                                 |
++------------------------+---------------------+----------------------------------------+
+| analytic.type_id       | Integer             | 1                                      |
++------------------------+---------------------+----------------------------------------+
+| analytic.uid           | String              | rule.id                                |
++------------------------+---------------------+----------------------------------------+
+| risk_score             | Integer             | rule.level                             |
++------------------------+---------------------+----------------------------------------+
+| attacks.tactic.name    | String              | rule.mitre.tactic                      |
++------------------------+---------------------+----------------------------------------+
+| attacks.technique.name | String              | rule.mitre.technique                   |
++------------------------+---------------------+----------------------------------------+
+| attacks.technique.uid  | String              | rule.mitre.id                          |
++------------------------+---------------------+----------------------------------------+
+| attacks.version        | String              | "v13.1"                                |
++------------------------+---------------------+----------------------------------------+
+| nist                   | String Array        | rule.nist_800_53                       |
++------------------------+---------------------+----------------------------------------+
+| severity_id            | Integer             | convert(rule.level)                    |
++------------------------+---------------------+----------------------------------------+
+| status_id              | Integer             | 99                                     |
++------------------------+---------------------+----------------------------------------+
+| resources.name         | String              | agent.name                             |
++------------------------+---------------------+----------------------------------------+
+| resources.uid          | String              | agent.id                               |
++------------------------+---------------------+----------------------------------------+
+| data_sources           | String Array        | ['_index', 'location', 'manager.name'] |
++------------------------+---------------------+----------------------------------------+
+| raw_data               | String              | full_log                               |
++------------------------+---------------------+----------------------------------------+
+
+
+Troubleshooting
+----------------
+
++-----------------------------------------------------------------------------------------------------------------------------------------------+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| **Issue**                                                                                                                                     | **Resolution**                                                                                                                                                                                       |
++-----------------------------------------------------------------------------------------------------------------------------------------------+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| The Wazuh alert data is available in the Amazon Security Lake S3 bucket, but the Glue Crawler fails to parse the data into the Security Lake. | This issue typically occurs when the custom source that is created for the integration is using the wrong event class. Make sure you create the custom source with the Security Finding event class. |
++-----------------------------------------------------------------------------------------------------------------------------------------------+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
