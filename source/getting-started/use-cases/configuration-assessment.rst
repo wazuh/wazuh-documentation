@@ -84,7 +84,7 @@ The Wazuh dashboard has a **Configuration Assessment** module that allows you to
 
 Interpreting SCA results
 ------------------------
-The image below shows the policy based on the CIS benchmark for Ubuntu Linux 22.04. You can see that 191 checks were run against the Ubuntu 22.04 endpoint. Out of these, 56 passed, 87 failed, and 48 are not applicable to the endpoint. It also shows a score of 39% which is calculated based on the number of tests passed.  
+The image below shows the policy based on the CIS benchmark for Ubuntu Linux 22.04 LTS. You can see that 191 checks were run against the Ubuntu 22.04 endpoint. Out of these, 56 passed, 87 failed, and 48 are not applicable to the endpoint. It also shows a score of 39% which is calculated based on the number of tests passed.  
 
 .. thumbnail:: /images/getting-started/use-cases/sca/cis-benchmark-ubuntu22-results.png
    :title: Results for CIS benchmark for Ubuntu 22.04 checks
