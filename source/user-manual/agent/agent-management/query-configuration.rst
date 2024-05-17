@@ -8,7 +8,7 @@
 Querying the agent configuration
 ================================
 
-The actual configuration of an agent, or the manager can be queried on demand by clicking on the **Endpoints summary** module or the **Server management** > **Settings** module. From here you will be able to fetch the active configuration in real time.
+The actual configuration of an agent, or the manager can be queried on demand by going to **Endpoints summary**, selecting an agent and clicking on **Configuration**, or in the **Server management** > **Settings** module. From here you will be able to fetch the active configuration in real time.
 
 .. thumbnail:: /images/kibana-app/features/query-configuration/configuration-section.png
   :title: Query the manager configuration in Wazuh dashboard

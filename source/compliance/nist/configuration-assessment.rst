@@ -46,8 +46,6 @@ This use case shows how Wazuh helps meet the **CM-6 Configuration settings** req
       :align: center
       :width: 80%
 
-   This scan helps ensure that the endpoint complies with security policies and hardening configurations. **CIS Benchmark for Ubuntu Linux 22.04** shows the results of the SCA checks (passed, failed, and not applicable) and the time of the last scan, as shown above.
-
 
 #. Select **CIS benchmark for Ubuntu Linux 22.04 LTS**.
 
@@ -56,6 +54,8 @@ This use case shows how Wazuh helps meet the **CM-6 Configuration settings** req
       :alt: Select CIS benchmark
       :align: center
       :width: 80%
+
+   This scan helps ensure that the endpoint complies with security policies and hardening configurations. **CIS Benchmark for Ubuntu Linux 22.04** shows the results of the SCA checks (passed, failed, and not applicable) and the time of the last scan, as shown above.
 
 
 #. Navigate to ID ``28577``.
