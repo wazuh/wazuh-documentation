@@ -47,6 +47,7 @@ Execute the ``generate_wazuh_packages.sh`` script, with the different options yo
       -d, --debug                   [Optional] Build the binaries with debug symbols. By default: no.
       -c, --checksum <path>         [Optional] Generate checksum on the desired path (by default, if no path is specified it will be generated on the same directory than the package).
       --is_stage                    [Optional] Use release name in package
+      -nc, --not-compile            [Optional] Set whether or not to compile the code.
       -h, --help                    [  Util  ] Show this help.
       -i, --install-deps            [  Util  ] Install build dependencies (Packages).
       -x, --install-xcode           [  Util  ] Install X-Code and brew. Can't be executed as root.
