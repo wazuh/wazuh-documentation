@@ -362,52 +362,54 @@ In the case of belonging to multiple groups, the configuration files of every gr
 Assigning multiple agents to a group
 ------------------------------------
 
-It's also possible to assign multiple agents to a single group using the **Wazuh API** endpoint :api-ref:`PUT /agents/group <operation/api.controllers.agent_controller.put_multiple_agent_single_group>`:
+It's also possible to assign multiple agents to a single group using the Wazuh API endpoint :api-ref:`PUT /agents/group <operation/api.controllers.agent_controller.put_multiple_agent_single_group>`. For instance, to assign agents with IDs ``001`` and ``002`` to the ``aws_agents`` group, execute the following request.
 
-   .. code-block:: console
+.. code-block:: console
 
-      # curl -k -X PUT "https://localhost:55000/agents/group?agents_list=001,002&group_id=aws_agents" -H  "Authorization: Bearer $TOKEN"
+   # curl -k -X PUT "https://localhost:55000/agents/group?agents_list=001,002&group_id=aws_agents" -H  "Authorization: Bearer $TOKEN"
 
-   .. code-block:: json
-        :class: output
+.. code-block:: json
+   :class: output
+   :emphasize-lines: 4,5,11
 
-        {
-           "data": {
-               "affected_items": [
-                   "001",
-                   "002"
-               ],
-               "total_affected_items": 2,
-               "total_failed_items": 0,
-               "failed_items": []
-           },
-           "message": "All selected agents were assigned to aws_agents",
-           "error": 0
-        }
+   {
+      "data": {
+          "affected_items": [
+              "001",
+              "002"
+          ],
+          "total_affected_items": 2,
+          "total_failed_items": 0,
+          "failed_items": []
+      },
+      "message": "All selected agents were assigned to aws_agents",
+      "error": 0
+   }
 
-After that, we can get the agents that belong to the group using the **Wazuh API** endpoint :api-ref:`GET /groups/{group_id}/agents <operation/api.controllers.agent_controller.get_agents_in_group>`:
+Then, you can list the agents belonging to the ``aws_agents`` group using the Wazuh API endpoint :api-ref:`GET /groups/{group_id}/agents <operation/api.controllers.agent_controller.get_agents_in_group>`.
 
-    .. code-block:: console
+.. code-block:: console
 
-        # curl -k -X GET "https://localhost:55000/groups/aws_agents/agents?select=id" -H  "Authorization: Bearer $TOKEN"
+   # curl -k -X GET "https://localhost:55000/groups/aws_agents/agents?select=id" -H  "Authorization: Bearer $TOKEN"
 
-    .. code-block:: json
-        :class: output
+.. code-block:: json
+   :class: output
+   :emphasize-lines: 5,8
 
-        {
-           "data": {
-               "affected_items": [
-                   {
-                       "id": "001"
-                   },
-                   {
-                       "id": "002"
-                   }
-               ],
-               "total_affected_items": 2,
-               "total_failed_items": 0,
-               "failed_items": []
-           },
-           "message": "All selected agents information was returned",
-           "error": 0
-        }
+   {
+      "data": {
+          "affected_items": [
+              {
+                  "id": "001"
+              },
+              {
+                  "id": "002"
+              }
+          ],
+          "total_affected_items": 2,
+          "total_failed_items": 0,
+          "failed_items": []
+      },
+      "message": "All selected agents information was returned",
+      "error": 0
+   }
