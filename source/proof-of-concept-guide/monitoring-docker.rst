@@ -87,7 +87,7 @@ Perform several Docker activities like pulling a Docker image, starting an insta
 Visualize the alerts
 --------------------
 
-You can visualize the alert data in the Wazuh dashboard. To do this, navigate through **Docker** module.
+You can visualize the alert data in the Wazuh dashboard. To do this, go to **Docker**.
 
    .. thumbnail:: /images/poc/docker-alerts.png
       :title: Visualize Docker alerts 
