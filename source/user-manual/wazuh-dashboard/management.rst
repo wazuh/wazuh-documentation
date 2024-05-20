@@ -89,7 +89,7 @@ You can manually execute the Health check on this section
 App Logs
 --------
 
-The Wazuh dashboard stores log information on the ``/usr/share/wazuh-dashboard/data/wazuh/logs/wazuhapp.log`` file. These logs can be helpful for troubleshooting purposes. 
+The Wazuh dashboard stores log information in the ``/usr/share/wazuh-dashboard/data/wazuh/logs/wazuhapp.log`` file. These logs help with troubleshooting.
 
 .. thumbnail:: /images/kibana-app/features/settings/logs.png
    :align: center
