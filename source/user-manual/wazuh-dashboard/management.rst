@@ -35,9 +35,9 @@ Saved objects of the application include:
 -  Application settings
 -  Custom visualizations and dashboards
 
-.. thumbnail:: ../../images/kibana-app/features/settings/saved-objects.png
-  :align: center
-  :width: 100%
+.. thumbnail:: /images/kibana-app/features/settings/saved-objects.png
+   :align: center
+   :width: 80%
 
 Advanced settings
 ^^^^^^^^^^^^^^^^^
