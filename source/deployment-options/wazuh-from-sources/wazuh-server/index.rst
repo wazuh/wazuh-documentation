@@ -118,11 +118,11 @@ Installing the Wazuh manager
 
       # ./install.sh
 
-   Alternatively, to download vulnerability detection content during installation, you can set ``DOWNLOAD_CONTENT_AND_DECOMPRESS=y``. The initial run might be time-consuming due to the initial process of  downloading and processing :doc:`vulnerability detection </user-manual/capabilities/vulnerability-detection/index>` content. You can download a pre-prepared database during installation to bypass this initial step.
+   The initial run might take some time as it downloads and processes the :doc:`vulnerability detection </user-manual/capabilities/vulnerability-detection/index>` content. To speed up this process, you can set the ``DOWNLOAD_CONTENT`` environment variable to ``y`` beforehand. The adjusted command downloads a pre-prepared database during installation.
 
    .. code-block:: console
 
-      # DOWNLOAD_CONTENT_AND_DECOMPRESS=y ./install.sh
+      # DOWNLOAD_CONTENT=y ./install.sh
 
 #. When the script asks what kind of installation you want, type ``manager`` to install the Wazuh manager:
 
