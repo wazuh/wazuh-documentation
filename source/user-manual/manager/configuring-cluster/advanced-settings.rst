@@ -541,6 +541,10 @@ Dataplane API configuration
 
     To enable it will depend on the :ref:`installation method <haproxy_installation>`.
 
+    .. warning::
+
+        For the correct operation of the helper, there must not be a frontend, with the port **1514**, in the ``haproxy.cfg`` file beforehand.
+
     .. tabs::
         .. group-tab:: Packages
 
