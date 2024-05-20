@@ -76,7 +76,21 @@ Here, you can access the reports generated when clicked **Generate Report** in v
 Server APIs
 -----------
 
-In this section, you can see information from all the wazuh servers configured in `/usr/share/wazuh-dashboard/data/wazuh/config/wazuh.yml`. This information includes id, cluster mode, hostname, version, run as mode, as well as connection information such as server host, API port and API connection status. It can also show if there are possible updates for that server. 
+In this section, you can see information from all the Wazuh servers configured in ``/usr/share/wazuh-dashboard/data/wazuh/config/wazuh.yml``. This information includes:
+
+-  ID
+-  Cluster mode
+-  Hostname
+-  Version
+-  *Run as* mode
+
+It also includes connection information such as
+
+-  Server host
+-  API port
+-  API connection status.
+
+Additionally, it shows possible updates for each server.
 
 .. thumbnail:: /images/kibana-app/features/settings/api.png
    :align: center
