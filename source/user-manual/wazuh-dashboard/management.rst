@@ -22,9 +22,9 @@ Index patterns
 ^^^^^^^^^^^^^^
 In this section, you can see and configure the Index patterns, and creating new ones.
 
-.. thumbnail:: ../../images/kibana-app/features/settings/index-patterns.png
-  :align: center
-  :width: 100%
+.. thumbnail:: /images/kibana-app/features/settings/index-patterns.png
+   :align: center
+   :width: 80%
 
 Saved objects
 ^^^^^^^^^^^^^
