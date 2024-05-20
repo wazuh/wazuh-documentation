@@ -40,13 +40,13 @@ Create a symbolic link between the installed binary file and your default binary
 Installation on Debian/Ubuntu
 -----------------------------
 
-+----------------------------------------------------------------------------+-------------+
-| The releases supported by the manifest to install Wazuh are as follows:                  |
-+------------+---------+--------+---------+------+--------+---------+--------+-------------+
-| **Ubuntu** | precise | trusty | vivid   | wily | xenial | yakketi | bionic | Focal Fossa |
-+------------+---------+--------+---------+------+--------+---------+--------+-------------+
-| **Debian** | jessie  | wheezy | stretch | sid                                            |
-+------------+---------+--------+---------+----------------------------------+-------------+
++----------------------------------------------------------------------------+--------------------------+
+| The releases supported by the manifest to install Wazuh are as follows:                               |
++------------+---------+--------+---------+--------+----------+----------+--------+-------------+-------+
+| **Ubuntu** | precise | trusty | vivid   | wily   | xenial   | yakketi  | bionic | Focal Fossa | Jammy |
++------------+---------+--------+---------+--------+----------+----------+--------+-------------+-------+
+| **Debian** | jessie  | wheezy | stretch | buster | bullseye | bookworm |                              |
++------------+---------+--------+---------+--------+----------+----------+------------------------------+
 
 .. note::
   ``Ubuntu Focal Fossa`` is supported since version 4.0.4
