@@ -279,7 +279,7 @@ haproxy_backend
 Specifies the name of the backend that will be created in HAProxy.
 
 +--------------------+-------------------------------------+
-| **Default value**  | wazuh_cluster                       |
+| **Default value**  | wazuh_reporting                     |
 +--------------------+-------------------------------------+
 | **Allowed values** | Any valid name.                     |
 +--------------------+-------------------------------------+

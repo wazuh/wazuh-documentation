@@ -118,27 +118,6 @@ There are two main ways to install HAProxy, using packages or Docker images.
 
             #!/usr/bin/env bash
 
-            tcplog_enabled=$(echo "${TCPLOG:-true}" | tr '[:upper:]' '[:lower:]')
-            httplog_enabled=$(echo "${HTTPLOG:-true}" | tr '[:upper:]' '[:lower:]')
-            echo TCPLOG: $tcplog_enabled HTTPLOG: $httplog_enabled
-            if [ "$tcplog_enabled" = "true" ]; then
-            sed -i 's/# option tcplog/  option tcplog/' /etc/haproxy/haproxy.cfg
-            else
-            sed -i 's/  option tcplog/# option tcplog/' /etc/haproxy/haproxy.cfg
-            fi
-            if [ "$httplog_enabled" = "true" ]; then
-            sed -i 's/# option httplog/  option httplog/' /etc/haproxy/haproxy.cfg
-            else
-            sed -i 's/  option httplog/# option httplog/' /etc/haproxy/haproxy.cfg
-            fi
-            if [ "$tcplog_enabled" = "true" ] || [ "$httplog_enabled" = "true" ]; then
-            sed -i 's/#  log /  log /' /etc/haproxy/haproxy.cfg
-            else
-            sed -i 's/  log /#  log /' /etc/haproxy/haproxy.cfg
-            fi
-
-            # Set env-file
-            env > /.env-file
             # Start HAProxy service
             service haproxy start
 
@@ -381,7 +360,8 @@ There are two main ways to install HAProxy, using packages or Docker images.
 
             # docker run haproxy-deploy
             TCPLOG: true HTTPLOG: true
-            * Starting haproxy haproxy                                                                                                                                                                                          [NOTICE]   (33) : haproxy version is 2.8.9-1842fd0
+            * Starting haproxy haproxy
+            [NOTICE]   (33) : haproxy version is 2.8.9-1842fd0
             [NOTICE]   (33) : path to executable is /usr/sbin/haproxy
             [ALERT]    (33) : config : parsing [/etc/haproxy/haproxy.cfg:3] : 'pidfile' already specified. Continuing.
 
@@ -399,6 +379,7 @@ Configuration
             <summary><b>haproxy.cfg</b></summary>
 
         .. code-block:: cfg
+            :emphasize-lines: 36-47
 
             global
                 chroot      /var/lib/haproxy
@@ -434,6 +415,19 @@ Configuration
                 server master <IP_OR_DNS_OF_WAZUH_MASTER_NODE>:1515 check
                 server worker1 <IP_OR_DNS_OF_WAZUH_WORKER_NODE>:1515 check
                 server workern <IP_OR_DNS_OF_WAZUH_WORKER_NODE>:1515 check
+
+            # Do not include the following if you will enable HAProxy Helper
+            frontend wazuh_reporting_front
+                mode tcp
+                bind :1514 name wazuh_reporting_front_bind
+                default_backend wazuh_reporting
+
+            backend wazuh_reporting
+                mode tcp
+                balance leastconn
+                server master <IP_OR_DNS_OF_WAZUH_MASTER_NODE>:1514 check
+                server worker1 <IP_OR_DNS_OF_WAZUH_WORKER_NODE>:1514 check
+                server worker2 <IP_OR_DNS_OF_WAZUH_WORKER_NODE>:1514 check
 
         .. raw:: html
 
@@ -472,7 +466,8 @@ Configuration
         .. code-block:: console
 
             # service haproxy start
-            * Starting haproxy haproxy                                                                                                                                                                                          [NOTICE]   (13231) : haproxy version is 2.8.9-1ppa1~jammy
+            * Starting haproxy haproxy
+            [NOTICE]   (13231) : haproxy version is 2.8.9-1ppa1~jammy
             [NOTICE]   (13231) : path to executable is /usr/sbin/haproxy
             [ALERT]    (13231) : config : parsing [/etc/haproxy/haproxy.cfg:3] : 'pidfile' already specified. Continuing.
 
@@ -540,6 +535,10 @@ Dataplane API configuration
                 reload_cmd: service haproxy reload
                 restart_cmd: service haproxy restart
 
+    .. note::
+
+        Is needed to replace ``<DATAPLANE_USER>`` and ``<DATAPLANE_PASSWORD>`` with the chosen user and password.
+
     To enable it will depend on the :ref:`installation method <haproxy_installation>`.
 
     .. tabs::
@@ -549,7 +548,7 @@ Dataplane API configuration
 
             .. code-block:: console
 
-                # curl -sL https://github.com/haproxytech/dataplaneapi/releases/download/v2.8.X/dataplaneapi_2.8.X_linux_x86_64.tar.gz | tar xz | cp dataplaneapi /usr/local/bin/
+                # curl -sL https://github.com/haproxytech/dataplaneapi/releases/download/v2.8.X/dataplaneapi_2.8.X_linux_x86_64.tar.gz | tar xz && cp dataplaneapi /usr/local/bin/
 
             2. Put the configuration in ``/etc/haproxy/dataplaneapi.yml`` and start the process
 
@@ -598,31 +597,10 @@ Dataplane API configuration
             3. Modify the ``entrypoint.sh`` to start the dataplaneapi process
 
                 .. code-block:: bash
-                    :emphasize-lines: 27
+                    :emphasize-lines: 6
 
                     #!/usr/bin/env bash
 
-                    tcplog_enabled=$(echo "${TCPLOG:-true}" | tr '[:upper:]' '[:lower:]')
-                    httplog_enabled=$(echo "${HTTPLOG:-true}" | tr '[:upper:]' '[:lower:]')
-                    echo TCPLOG: $tcplog_enabled HTTPLOG: $httplog_enabled
-                    if [ "$tcplog_enabled" = "true" ]; then
-                    sed -i 's/# option tcplog/  option tcplog/' /etc/haproxy/haproxy.cfg
-                    else
-                    sed -i 's/  option tcplog/# option tcplog/' /etc/haproxy/haproxy.cfg
-                    fi
-                    if [ "$httplog_enabled" = "true" ]; then
-                    sed -i 's/# option httplog/  option httplog/' /etc/haproxy/haproxy.cfg
-                    else
-                    sed -i 's/  option httplog/# option httplog/' /etc/haproxy/haproxy.cfg
-                    fi
-                    if [ "$tcplog_enabled" = "true" ] || [ "$httplog_enabled" = "true" ]; then
-                    sed -i 's/#  log /  log /' /etc/haproxy/haproxy.cfg
-                    else
-                    sed -i 's/  log /#  log /' /etc/haproxy/haproxy.cfg
-                    fi
-
-                    # Set env-file
-                    env > /.env-file
                     # Start HAProxy service
                     service haproxy start
                     # Start HAProxy Data Plane API
@@ -640,7 +618,8 @@ Dataplane API configuration
 
                     # docker run -p 5555:5555 haproxy-deploy
                     TCPLOG: true HTTPLOG: true
-                    * Starting haproxy haproxy                                                                                                                                                                                          [NOTICE]   (33) : haproxy version is 2.8.9-1842fd0
+                    * Starting haproxy haproxy
+                    [NOTICE]   (33) : haproxy version is 2.8.9-1842fd0
                     [NOTICE]   (33) : path to executable is /usr/sbin/haproxy
                     [ALERT]    (33) : config : parsing [/etc/haproxy/haproxy.cfg:3] : 'pidfile' already specified. Continuing.
 
@@ -653,6 +632,11 @@ Dataplane API configuration
 
 
 On the Wazuh's side, we will include the ``<haproxy_helper>...</haproxy_helper>`` labels in the :ref:`configuration <haproxy_helper>` file (``/var/ossec/etc/ossec.conf``)  within the ``<cluster>...</cluster>`` section.
+
+.. note::
+
+    This configuration is only necessary on the master node.
+
 
 We are going to configure a basic HAProxy helper within an already configured cluster master node:
 
@@ -681,7 +665,7 @@ We are going to configure a basic HAProxy helper within an already configured cl
             <haproxy_address><HAPROXY_ADDRESS></haproxy_address>
             <haproxy_user><DATAPLANE_USER></haproxy_user>
             <haproxy_password><DATAPLANE_PASSWORD></haproxy_password>
-      </haproxy_helper>
+        </haproxy_helper>
     </cluster>
 
 Restart the master node:
