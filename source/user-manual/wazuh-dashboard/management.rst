@@ -91,9 +91,9 @@ App Logs
 
 The Wazuh dashboard stores log information on the ``/usr/share/wazuh-dashboard/data/wazuh/logs/wazuhapp.log`` file. These logs can be helpful for troubleshooting purposes. 
 
-.. thumbnail:: ../../images/kibana-app/features/settings/logs.png
-  :align: center
-  :width: 100%
+.. thumbnail:: /images/kibana-app/features/settings/logs.png
+   :align: center
+   :width: 80%
 
 About
 -----
