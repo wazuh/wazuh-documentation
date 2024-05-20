@@ -51,9 +51,9 @@ Reporting
 ---------
 Here you can see the reports generated in the different modules, with the ``Generate report`` button.
 
-.. thumbnail:: ../../images/kibana-app/features/settings/reporting.png
-  :align: center
-  :width: 100%
+.. thumbnail:: /images/kibana-app/features/settings/reporting.png
+   :align: center
+   :width: 80%
 
 Server APIs
 -----------
