@@ -8,12 +8,21 @@
 Dashboard management
 ========================
 
-The **Dashboard management** section allows you to configure and customize your Wazuh dashboard experience, as well as seeing the generated reports and the application logs.
+The **Dashboard management** section allows you to do the following:
 
-.. contents::
-   :local:
-   :depth: 1
-   :backlinks: none
+-  Configure and customize your Wazuh dashboard experience.
+
+   -  `Dashboards Management`_
+   -  `Server APIs`_
+   -  `App Settings`_
+
+-  View generated reports.
+
+   -  `Reporting`_
+
+-  Access application logs.
+
+   -  `App Logs`_
 
 Dashboards Management
 ---------------------
