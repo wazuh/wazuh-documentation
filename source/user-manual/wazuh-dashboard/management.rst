@@ -60,9 +60,9 @@ Server APIs
 
 In this section, you can list all your inserted API credentials. The star icon indicates the currently used API to show information on the app. Each entry has multiple available actions to manage it. Keep in mind that a working API is needed to add or edit an entry. Check your API connection status before adding them to the app.
 
-.. thumbnail:: ../../images/kibana-app/features/settings/api.png
-  :align: center
-  :width: 100%
+.. thumbnail:: /images/kibana-app/features/settings/api.png
+   :align: center
+   :width: 80%
 
 App Settings
 -------------
