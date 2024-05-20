@@ -80,7 +80,7 @@ You can take a quick look at the Wazuh dashboard configuration file here. The do
 Miscellaneous
 ^^^^^^^^^^^^^
 
-You can manually execute the Health check on this section
+You can manually run the Wazuh dashboard health check from this section. This health check assesses the operational status and performance of the Wazuh dashboard.
 
 .. thumbnail:: /images/kibana-app/features/settings/miscellaneous.png
    :align: center
