@@ -14,16 +14,12 @@ To access your archive data, you need an AWS token that grants permission on the
       See the :doc:`Wazuh Cloud CLI </cloud-service/cli/index>` section to learn how to list and download your archive data automatically.
 
 
-Generate your API key
----------------------
+Getting your API key and the AWS token
+--------------------------------------
 
-To obtain the api key token it is necessary to execute this step described in the `Wazuh Cloud CLI </cloud-service/cli/index>` section.
+#. Obtain your Wazuh Cloud API key by following the steps outlined in the API :doc:`Authentication </cloud-service/apis/authentication>` section.
 
-
-Get the AWS token
-------------------
-
-Use the ``POST /storage/token`` endpoint of the :cloud-api-ref:`Wazuh Cloud API <tag/storage>` to get the AWS token and access the archive data of a specific environment. In this example, we generate an AWS token valid for 3600 seconds for environment `012345678ab`.
+#. Use the :cloud-api-ref:`POST /storage/token <tag/storage>` API endpoint with your key to get a temporary AWS token. For example, the following request generates an AWS token valid for ``3600`` seconds that grants access to the environment archive data with ID ``012345678ab``.
 
    .. code-block::
 
@@ -35,6 +31,7 @@ Use the ``POST /storage/token`` endpoint of the :cloud-api-ref:`Wazuh Cloud API 
 
    .. code-block:: console
       :class: output
+      :emphasize-lines: 7-10
 
       {
          "environment_cloud_id": "012345678ab",
@@ -52,18 +49,18 @@ Use the ``POST /storage/token`` endpoint of the :cloud-api-ref:`Wazuh Cloud API 
 
 
 
-Generate AWS `wazuh_cloud_storage` profile
-----------------------------------------
+Generating the AWS `wazuh_cloud_storage` profile
+------------------------------------------------
 
 Add the token to the AWS credentials file ``~/.aws/credentials``.
 
    .. code-block:: console
+      :emphasize-lines: 4
       
       [wazuh_cloud_storage]
       aws_access_key_id = mUdT2dBjlHd...Gh7Ni1yZKR5If
       aws_secret_access_key = qEzCk63a224...5aB+e4fC1BR0G
       aws_session_token = MRg3t7HIuoA...4o4BXSAcPfUD8
-
 
 Listing archive data
 ---------------------
@@ -72,42 +69,43 @@ This command lists the archive data files of the environment `012345678ab`.
 
 .. code-block:: console
 
-  # aws --profile wazuh_cloud_storage --region us-east-1 s3 ls --recursive s3://wazuh-cloud-cold-us-east-1/012345678ab/
+   # aws --profile wazuh_cloud_storage --region us-east-1 s3 ls --recursive s3://wazuh-cloud-cold-us-east-1/012345678ab/
 
 .. code-block:: none
-  :class: output
+   :class: output
 
-  2024-04-19 17:50:06        493 012345678ab/output/alerts/2024/04/19/012345678ab_output_alerts_20240419T2050_VqaWCpX9oPfDkRpD.json.gz
-  2024-04-19 18:00:05      77759 012345678ab/output/alerts/2024/04/19/012345678ab_output_alerts_20240419T2100_kdBY42OvE9QJuiia.json.gz
+   2024-04-19 17:50:06        493 012345678ab/output/alerts/2024/04/19/012345678ab_output_alerts_20240419T2050_VqaWCpX9oPfDkRpD.json.gz
+   2024-04-19 18:00:05      77759 012345678ab/output/alerts/2024/04/19/012345678ab_output_alerts_20240419T2100_kdBY42OvE9QJuiia.json.gz
 
 Examples
 --------
 
-Downloading archive data (multiple files)
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+Downloading archive data – Multiple files
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-This command downloads in the `/home/test` directory the archive data files of the environment `012345678ab`.
-
-.. code-block:: console
-
-  # aws --profile wazuh_cloud_storage --region us-east-1 s3 cp --recursive s3://wazuh-cloud-cold-us-east-1/012345678ab/ /home/test/
-
-.. code-block:: none
-  :class: output
-
-  download: s3://wazuh-cloud-cold-us-east-1/012345678ab/output/alerts/2024/04/19/012345678ab_output_alerts_20240419T2050_VqaWCpX9oPfDkRpD.json.gz to output/alerts/2024/04/19/012345678ab_output_alerts_20240419T2050_VqaWCpX9oPfDkRpD.json.gz
-  download: s3://wazuh-cloud-cold-us-east-1/012345678ab/output/alerts/2024/04/19/012345678ab_output_alerts_20240419T2100_kdBY42OvE9QJuiia.json.gz to output/alerts/2024/04/19/012345678ab_output_alerts_20240419T2100_kdBY42OvE9QJuiia.json.gz
-
-
-Downloading archive data (single file)
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-This command downloads in the directory `/home/test` the file `012345678ab_output_alerts_20240419T2050_VqaWCpX9oPfDkRpD.json.gz` from the environment `012345678ab`.
+This command downloads the archive data files of the environment ``012345678ab`` into the ``/home/test/`` directory.
 
 .. code-block:: console
 
-  # aws --profile wazuh_cloud_storage --region us-east-1 s3 cp --recursive s3://wazuh-cloud-cold-us-east-1/012345678ab/012345678ab_output_alerts_20240419T2050_VqaWCpX9oPfDkRpD.json.gz /home/test/
+   # aws --profile wazuh_cloud_storage --region us-east-1 s3 cp --recursive s3://wazuh-cloud-cold-us-east-1/012345678ab/ /home/test/
 
 .. code-block:: none
-  :class: output
+   :class: output
 
-  download: s3://wazuh-cloud-cold-us-east-1/012345678ab/output/alerts/2024/04/19/012345678ab_output_alerts_20240419T2050_VqaWCpX9oPfDkRpD.json.gz to ./012345678ab_output_alerts_20240419T2050_VqaWCpX9oPfDkRpD.json.gz
+   download: s3://wazuh-cloud-cold-us-east-1/012345678ab/output/alerts/2024/04/19/012345678ab_output_alerts_20240419T2050_VqaWCpX9oPfDkRpD.json.gz to output/alerts/2024/04/19/012345678ab_output_alerts_20240419T2050_VqaWCpX9oPfDkRpD.json.gz
+   download: s3://wazuh-cloud-cold-us-east-1/012345678ab/output/alerts/2024/04/19/012345678ab_output_alerts_20240419T2100_kdBY42OvE9QJuiia.json.gz to output/alerts/2024/04/19/012345678ab_output_alerts_20240419T2100_kdBY42OvE9QJuiia.json.gz
+
+
+Downloading archive data – Single file
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+This command downloads the ``012345678ab_output_alerts_20240419T2050_VqaWCpX9oPfDkRpD.json.gz`` file of the environment ``012345678ab`` into the directory ``/home/test``.
+
+.. code-block:: console
+
+   # aws --profile wazuh_cloud_storage --region us-east-1 s3 cp --recursive s3://wazuh-cloud-cold-us-east-1/012345678ab/012345678ab_output_alerts_20240419T2050_VqaWCpX9oPfDkRpD.json.gz /home/test/
+
+.. code-block:: none
+   :class: output
+
+   download: s3://wazuh-cloud-cold-us-east-1/012345678ab/output/alerts/2024/04/19/012345678ab_output_alerts_20240419T2050_VqaWCpX9oPfDkRpD.json.gz to ./012345678ab_output_alerts_20240419T2050_VqaWCpX9oPfDkRpD.json.gz
