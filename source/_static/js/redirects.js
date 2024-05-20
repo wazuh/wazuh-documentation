@@ -68,6 +68,7 @@ removedUrls['x.y'] = [
 
 newUrls['4.8'] = [
   '/release-notes/release-4-8-0.html',
+  '/user-manual/wazuh-dashboard/management.html'
 ];
 
 /* Pages no longer available in 4.8 */
@@ -76,7 +77,8 @@ removedUrls['4.8'] = [
   '/user-manual/capabilities/vulnerability-detection/cpe-helper.html',
   '/user-manual/capabilities/vulnerability-detection/querying-the-vulnerability-database.html',
   '/user-manual/capabilities/vulnerability-detection/scan-types.html',
-  '/user-manual/capabilities/vulnerability-detection/allow-os.html'
+  '/user-manual/capabilities/vulnerability-detection/allow-os.html',
+  '/user-manual/wazuh-dashboard/settings.html'
 ];
 
 /* Redirections from 4.7 to 4.8  */
@@ -96,6 +98,11 @@ redirections.push(
     'target': ['4.7=>4.8'],
     '4.7': '/user-manual/capabilities/vulnerability-detection/scan-types.html',
     '4.8': '/user-manual/capabilities/vulnerability-detection/index.html',
+  },
+  {
+    'target': ['4.7=>4.8'],
+    '4.7': '/user-manual/wazuh-dashboard/settings.html',
+    '4.8': '/user-manual/wazuh-dashboard/management.html',
   },
 );
 
@@ -422,7 +429,7 @@ redirections.push(
   },
   {
     'target': ['4.6=>4.7', '4.7=>4.6'],
-    '4.6':   '/user-manual/agent-enrollment/via-agent-configuration/macos-endpoint.html',
+    '4.6': '/user-manual/agent-enrollment/via-agent-configuration/macos-endpoint.html',
     '4.7': '/user-manual/agent/agent-enrollment/enrollment-methods/via-agent-configuration/macos-endpoint.html',
   },
   {
@@ -467,7 +474,7 @@ redirections.push(
   },
   {
     'target': ['4.6=>4.7', '4.7=>4.6'],
-    '4.6':   '/user-manual/agent-enrollment/security-options/using-password-authentication.html',
+    '4.6': '/user-manual/agent-enrollment/security-options/using-password-authentication.html',
     '4.7': '/user-manual/agent/agent-enrollment/security-options/using-password-authentication.html',
   },
   {
@@ -773,7 +780,7 @@ removedUrls['4.6'] = [
   '/user-manual/elasticsearch/configure-indices.html',
   '/user-manual/elasticsearch/elasticsearch.html',
   '/user-manual/elasticsearch/index.html',
-  '/user-manual/elasticsearch/troubleshooting.html',  
+  '/user-manual/elasticsearch/troubleshooting.html',
   '/user-manual/elasticsearch/elastic-tuning.html',
   '/user-manual/uninstall/central-components.html',
   '/user-manual/uninstall/elastic-stack.html',
@@ -870,7 +877,7 @@ newUrls['4.5'] = [
   '/integrations-guide/elastic-stack/index.html',
   '/integrations-guide/opensearch/index.html',
   '/integrations-guide/splunk/index.html',
-  '/user-manual/capabilities/log-data-collection/configuration.html', 
+  '/user-manual/capabilities/log-data-collection/configuration.html',
   '/user-manual/capabilities/log-data-collection/log-data-analysis.html',
   '/user-manual/capabilities/log-data-collection/monitoring-log-files.html',
   '/user-manual/capabilities/log-data-collection/multiple-socket-outputs.html',
@@ -915,7 +922,7 @@ removedUrls['4.5'] = [
   '/user-manual/elasticsearch/elastic-tuning.html',
   '/user-manual/elasticsearch/elasticsearch.html',
   '/user-manual/elasticsearch/index.html',
-  '/user-manual/elasticsearch/troubleshooting.html',  
+  '/user-manual/elasticsearch/troubleshooting.html',
 ];
 
 /* *** RELEASE 4.4 ****/
@@ -923,556 +930,556 @@ removedUrls['4.5'] = [
 /* Redirections from 4.3 to 4.4  */
 
 redirections.push(
-    {
-      'target': ['4.3=>4.4'],
-      '4.3': '/user-manual/capabilities/agentless-monitoring/agentless-faq.html',
-      '4.4': '/user-manual/capabilities/agentless-monitoring/index.html',
-    },
-    {
-      'target': ['4.3=>4.4', '4.4=>4.3'],
-      '4.3': '/user-manual/capabilities/auditing-whodata/index.html',
-      '4.4': '/user-manual/capabilities/file-integrity/advanced-settings.html#who-data-monitoring',
-    },
-    {
-      'target': ['4.3=>4.4', '4.4=>4.3'],
-      '4.3': '/user-manual/capabilities/auditing-whodata/who-linux.html',
-      '4.4': '/user-manual/capabilities/file-integrity/advanced-settings.html#who-data-monitoring-on-linux',
-    },
-    {
-      'target': ['4.3=>4.4', '4.4=>4.3'],
-      '4.3': '/user-manual/capabilities/auditing-whodata/who-windows.html',
-      '4.4': '/user-manual/capabilities/file-integrity/advanced-settings.html#who-data-monitoring-in-windows',
-    },
-    {
-      'target': ['4.3=>4.4', '4.4=>4.3'],
-      '4.3': '/user-manual/capabilities/auditing-whodata/who-windows-policies.html',
-      '4.4': '/user-manual/capabilities/file-integrity/advanced-settings.html#manual-configuration-of-the-local-audit-policies-in-windows',
-    },
-    {
-      'target': ['4.3=>4.4', '4.4=>4.3'],
-      '4.3': '/user-manual/capabilities/file-integrity/fim-configuration.html',
-      '4.4': '/user-manual/capabilities/file-integrity/index.html',
-    },  
-    {
-      'target': ['4.3=>4.4', '4.4=>4.3'],
-      '4.3': '/user-manual/capabilities/file-integrity/fim-fields-rule-mapping.html',
-      '4.4': '/user-manual/capabilities/file-integrity/index.html',
-    }, 
-    {
-      'target': ['4.3=>4.4', '4.4=>4.3'],
-      '4.3': '/user-manual/capabilities/antiflooding.html',
-      '4.4': '/user-manual/agents/antiflooding.html',
-    },
-    {
-      'target': ['4.3=>4.4', '4.4=>4.3'],
-      '4.3': '/user-manual/capabilities/labels.html',
-      '4.4': '/user-manual/agents/labels.html',
-    },  
-    {
-      'target': ['4.3=>4.4', '4.4=>4.3'],
-      '4.3': '/user-manual/capabilities/fluent-forwarder.html',
-      '4.4': '/user-manual/manager/fluent-forwarder.html',
-    },
-    {
-      'target': ['4.3=>4.4', '4.4=>4.3'],
-      '4.3': '/amazon/services/supported-services/alb.html',
-      '4.4': '/cloud-security/amazon/services/supported-services/elastic-load-balancing/alb.html',
-    },
-    {
-      'target': ['4.3=>4.4', '4.4=>4.3'],
-      '4.3': '/amazon/services/supported-services/nlb.html',
-      '4.4': '/cloud-security/amazon/services/supported-services/elastic-load-balancing/nlb.html',
-    },
-    {
-      'target': ['4.3=>4.4', '4.4=>4.3'],
-      '4.3': '/amazon/services/supported-services/clb.html',
-      '4.4': '/cloud-security/amazon/services/supported-services/elastic-load-balancing/clb.html',
-    },
-    {
-      'target': ['4.3=>4.4', '4.4=>4.3'],
-      '4.3': '/amazon/services/supported-services/ecr-image-scanning.html',
-      '4.4': '/cloud-security/amazon/services/supported-services/ecr-image-scanning.html',
-    },
-    {
-      'target': ['4.3=>4.4', '4.4=>4.3'],
-      '4.3': '/amazon/services/supported-services/server-access.html',
-      '4.4': '/cloud-security/amazon/services/supported-services/server-access.html',
-    },
-    {
-      'target': ['4.3=>4.4', '4.4=>4.3'],
-      '4.3': '/azure/activity-services/index.html',
-      '4.4': '/cloud-security/azure/activity-services/index.html',
-    },
-    {
-      'target': ['4.3=>4.4', '4.4=>4.3'],
-      '4.3': '/azure/activity-services/active-directory/index.html',
-      '4.4': '/cloud-security/azure/activity-services/active-directory/index.html',
-    },
-    {
-      'target': ['4.3=>4.4', '4.4=>4.3'],
-      '4.3': '/azure/activity-services/active-directory/graph.html',
-      '4.4': '/cloud-security/azure/activity-services/active-directory/graph.html',
-    },
-    {
-      'target': ['4.3=>4.4', '4.4=>4.3'],
-      '4.3': '/azure/activity-services/prerequisites/considerations.html',
-      '4.4': '/cloud-security/azure/activity-services/prerequisites/considerations.html',
-    },
-    {
-      'target': ['4.3=>4.4', '4.4=>4.3'],
-      '4.3': '/azure/activity-services/prerequisites/credentials.html',
-      '4.4': '/cloud-security/azure/activity-services/prerequisites/credentials.html',
-    },
-    {
-      'target': ['4.3=>4.4', '4.4=>4.3'],
-      '4.3': '/azure/activity-services/prerequisites/index.html',
-      '4.4': '/cloud-security/azure/activity-services/prerequisites/index.html',
-    },
-    {
-      'target': ['4.3=>4.4', '4.4=>4.3'],
-      '4.3': '/azure/activity-services/services/index.html',
-      '4.4': '/cloud-security/azure/activity-services/services/index.html',
-    },
-    {
-      'target': ['4.3=>4.4', '4.4=>4.3'],
-      '4.3': '/azure/activity-services/services/log-analytics.html',
-      '4.4': '/cloud-security/azure/activity-services/services/log-analytics.html',
-    },
-    {
-      'target': ['4.3=>4.4', '4.4=>4.3'],
-      '4.3': '/azure/activity-services/services/storage.html',
-      '4.4': '/cloud-security/azure/activity-services/services/storage.html',
-    },
-    {
-      'target': ['4.3=>4.4', '4.4=>4.3'],
-      '4.3': '/gcp/supported-services/access_logs.html',
-      '4.4': '/cloud-security/gcp/supported-services/access_logs.html',
-    },
-    {
-      'target': ['4.3=>4.4', '4.4=>4.3'],
-      '4.3': '/gcp/supported-services/cloud_audit_logs.html',
-      '4.4': '/cloud-security/gcp/supported-services/cloud_audit_logs.html',
-    },
-    {
-      'target': ['4.3=>4.4', '4.4=>4.3'],
-      '4.3': '/gcp/supported-services/dns_queries.html',
-      '4.4': '/cloud-security/gcp/supported-services/dns_queries.html',
-    },
-    {
-      'target': ['4.3=>4.4', '4.4=>4.3'],
-      '4.3': '/gcp/supported-services/load_balancing.html',
-      '4.4': '/cloud-security/gcp/supported-services/load_balancing.html',
-    },
-    {
-      'target': ['4.3=>4.4', '4.4=>4.3'],
-      '4.3': '/gcp/supported-services/vpc_flow.html',
-      '4.4': '/cloud-security/gcp/supported-services/vpc_flow.html',
-    },
-    {
-      'target': ['4.3=>4.4', '4.4=>4.3'],
-      '4.3': '/gcp/supported-services/firewall.html',
-      '4.4': '/cloud-security/gcp/supported-services/firewall.html',
-    },
-    {
-      'target': ['4.3=>4.4', '4.4=>4.3'],
-      '4.3': '/github/index.html',
-      '4.4': '/cloud-security/github/index.html',
-    },
-    {
-      'target': ['4.3=>4.4', '4.4=>4.3'],
-      '4.3': '/github/monitoring-github-activity.html',
-      '4.4': '/cloud-security/github/monitoring-github-activity.html',
-    },
-    {
-      'target': ['4.3=>4.4', '4.4=>4.3'],
-      '4.3': '/office365/index.html',
-      '4.4': '/cloud-security/office365/index.html',
-    },
-    {
-      'target': ['4.3=>4.4', '4.4=>4.3'],
-      '4.3': '/office365/monitoring-office365-activity.html',
-      '4.4': '/cloud-security/office365/monitoring-office365-activity.html',
-    },
-    {
-      'target': ['4.3=>4.4', '4.4=>4.3'],
-      '4.3': '/amazon/instances.html',
-      '4.4': '/cloud-security/amazon/instances.html',
-    },
-    {
-      'target': ['4.3=>4.4', '4.4=>4.3'],
-      '4.3': '/amazon/index.html',
-      '4.4': '/cloud-security/amazon/index.html',
-    },
-    {
-      'target': ['4.3=>4.4', '4.4=>4.3'],
-      '4.3': '/amazon/services/troubleshooting.html',
-      '4.4': '/cloud-security/amazon/services/troubleshooting.html',
-    },
-    {
-      'target': ['4.3=>4.4', '4.4=>4.3'],
-      '4.3': '/amazon/services/prerequisites/dependencies.html',
-      '4.4': '/cloud-security/amazon/services/prerequisites/dependencies.html',
-    },
-    {
-      'target': ['4.3=>4.4', '4.4=>4.3'],
-      '4.3': '/amazon/services/prerequisites/considerations.html',
-      '4.4': '/cloud-security/amazon/services/prerequisites/considerations.html',
-    },
-    {
-      'target': ['4.3=>4.4', '4.4=>4.3'],
-      '4.3': '/amazon/services/prerequisites/credentials.html',
-      '4.4': '/cloud-security/amazon/services/prerequisites/credentials.html',
-    },
-    {
-      'target': ['4.3=>4.4', '4.4=>4.3'],
-      '4.3': '/amazon/services/prerequisites/index.html',
-      '4.4': '/cloud-security/amazon/services/prerequisites/index.html',
-    },
-    {
-      'target': ['4.3=>4.4', '4.4=>4.3'],
-      '4.3': '/amazon/services/prerequisites/S3-bucket.html',
-      '4.4': '/cloud-security/amazon/services/prerequisites/S3-bucket.html',
-    },
-    {
-      'target': ['4.3=>4.4', '4.4=>4.3'],
-      '4.3': '/amazon/services/index.html',
-      '4.4': '/cloud-security/amazon/services/index.html',
-    },
-    {
-      'target': ['4.3=>4.4', '4.4=>4.3'],
-      '4.3': '/amazon/services/supported-services/elastic-load-balancing/index.html',
-      '4.4': '/cloud-security/amazon/services/supported-services/elastic-load-balancing/index.html',
-    },
-    {
-      'target': ['4.3=>4.4', '4.4=>4.3'],
-      '4.3': '/amazon/services/supported-services/vpc.html',
-      '4.4': '/cloud-security/amazon/services/supported-services/vpc.html',
-    },
-    {
-      'target': ['4.3=>4.4', '4.4=>4.3'],
-      '4.3': '/amazon/services/supported-services/security-lake.html',
-      '4.4': '/cloud-security/amazon/services/supported-services/security-lake.html',
-    },
-    {
-      'target': ['4.3=>4.4', '4.4=>4.3'],
-      '4.3': '/amazon/services/supported-services/waf.html',
-      '4.4': '/cloud-security/amazon/services/supported-services/waf.html',
-    },
-    {
-      'target': ['4.3=>4.4', '4.4=>4.3'],
-      '4.3': '/amazon/services/supported-services/guardduty.html',
-      '4.4': '/cloud-security/amazon/services/supported-services/guardduty.html',
-    },
-    {
-      'target': ['4.3=>4.4', '4.4=>4.3'],
-      '4.3': '/amazon/services/supported-services/cisco-umbrella.html',
-      '4.4': '/cloud-security/amazon/services/supported-services/cisco-umbrella.html',
-    },
-    {
-      'target': ['4.3=>4.4', '4.4=>4.3'],
-      '4.3': '/amazon/services/supported-services/cloudtrail.html',
-      '4.4': '/cloud-security/amazon/services/supported-services/cloudtrail.html',
-    },
-    {
-      'target': ['4.3=>4.4', '4.4=>4.3'],
-      '4.3': '/amazon/services/supported-services/kms.html',
-      '4.4': '/cloud-security/amazon/services/supported-services/kms.html',
-    },
-    {
-      'target': ['4.3=>4.4', '4.4=>4.3'],
-      '4.3': '/amazon/services/supported-services/index.html',
-      '4.4': '/cloud-security/amazon/services/supported-services/index.html',
-    },
-    {
-      'target': ['4.3=>4.4', '4.4=>4.3'],
-      '4.3': '/amazon/services/supported-services/config.html',
-      '4.4': '/cloud-security/amazon/services/supported-services/config.html',
-    },
-    {
-      'target': ['4.3=>4.4', '4.4=>4.3'],
-      '4.3': '/amazon/services/supported-services/trusted-advisor.html',
-      '4.4': '/cloud-security/amazon/services/supported-services/trusted-advisor.html',
-    },
-    {
-      'target': ['4.3=>4.4', '4.4=>4.3'],
-      '4.3': '/amazon/services/supported-services/inspector.html',
-      '4.4': '/cloud-security/amazon/services/supported-services/inspector.html',
-    },
-    {
-      'target': ['4.3=>4.4', '4.4=>4.3'],
-      '4.3': '/amazon/services/supported-services/macie.html',
-      '4.4': '/cloud-security/amazon/services/supported-services/macie.html',
-    },
-    {
-      'target': ['4.3=>4.4', '4.4=>4.3'],
-      '4.3': '/amazon/services/supported-services/cloudwatchlogs.html',
-      '4.4': '/cloud-security/amazon/services/supported-services/cloudwatchlogs.html',
-    },
-    {
-      'target': ['4.3=>4.4', '4.4=>4.3'],
-      '4.3': '/monitoring.html',
-      '4.4': '/cloud-security/monitoring.html',
-    },
-    {
-      'target': ['4.3=>4.4', '4.4=>4.3'],
-      '4.3': '/azure/monitoring-instances.html',
-      '4.4': '/cloud-security/azure/monitoring-instances.html',
-    },
-    {
-      'target': ['4.3=>4.4', '4.4=>4.3'],
-      '4.3': '/azure/index.html',
-      '4.4': '/cloud-security/azure/index.html',
-    },
-    {
-      'target': ['4.3=>4.4', '4.4=>4.3'],
-      '4.3': '/azure/activity-services/prerequisites/dependencies.html',
-      '4.4': '/cloud-security/azure/activity-services/prerequisites/dependencies.html',
-    },
-    {
-      'target': ['4.3=>4.4', '4.4=>4.3'],
-      '4.3': '/gcp/prerequisites/pubsub.html',
-      '4.4': '/cloud-security/gcp/prerequisites/pubsub.html',
-    },
-    {
-      'target': ['4.3=>4.4', '4.4=>4.3'],
-      '4.3': '/gcp/prerequisites/dependencies.html',
-      '4.4': '/cloud-security/gcp/prerequisites/dependencies.html',
-    },
-    {
-      'target': ['4.3=>4.4', '4.4=>4.3'],
-      '4.3': '/gcp/prerequisites/considerations.html',
-      '4.4': '/cloud-security/gcp/prerequisites/considerations.html',
-    },
-    {
-      'target': ['4.3=>4.4', '4.4=>4.3'],
-      '4.3': '/gcp/prerequisites/credentials.html',
-      '4.4': '/cloud-security/gcp/prerequisites/credentials.html',
-    },
-    {
-      'target': ['4.3=>4.4', '4.4=>4.3'],
-      '4.3': '/gcp/prerequisites/index.html',
-      '4.4': '/cloud-security/gcp/prerequisites/index.html',
-    },
-    {
-      'target': ['4.3=>4.4', '4.4=>4.3'],
-      '4.3': '/gcp/index.html',
-      '4.4': '/cloud-security/gcp/index.html',
-    },
-    {
-      'target': ['4.3=>4.4', '4.4=>4.3'],
-      '4.3': '/gcp/supported-services/index.html',
-      '4.4': '/cloud-security/gcp/supported-services/index.html',
-    },
-    {
-      'target': ['4.3=>4.4', '4.4=>4.3'],
-      '4.3': '/user-manual/capabilities/agent-key-polling.html',
-      '4.4': '/user-manual/agents/key-request.html',
-    },
-    {
-      'target': ['4.3=>4.4'],
-      '4.3': '/user-manual/capabilities/wazuh-logtest/index.html',
-      '4.4': '/user-manual/ruleset/testing.html',
-    },
-    {
-      'target': ['4.3=>4.4'],
-      '4.3': '/user-manual/capabilities/wazuh-logtest/how-it-works.html',
-      '4.4': '/user-manual/ruleset/testing.html',
-    },
-    {
-      'target': ['4.3=>4.4'],
-      '4.3': '/user-manual/capabilities/wazuh-logtest/logtest-configuration.html',
-      '4.4': '/user-manual/ruleset/testing.html#configuration',
-    },
-    {
-      'target': ['4.3=>4.4'],
-      '4.3': '/user-manual/capabilities/wazuh-logtest/logtest-faq.html',
-      '4.4': '/user-manual/ruleset/testing.html',
-    },
-    {
-      'target': ['4.3=>4.4', '4.4=>4.3'],
-      '4.3': '/user-manual/capabilities/syscollector.html',
-      '4.4': '/user-manual/capabilities/system-inventory/index.html',
-    },
-    {
-      'target': ['4.3=>4.4', '4.4=>4.3'],
-      '4.3': '/user-manual/capabilities/syscollector.html#how-it-works',
-      '4.4': '/user-manual/capabilities/system-inventory/how-it-works.html',
-    },
-    {
-      'target': ['4.3=>4.4', '4.4=>4.3'],
-      '4.3': '/user-manual/capabilities/syscollector.html#available-scans',
-      '4.4': '/user-manual/capabilities/system-inventory/available-inventory-fields.html',
-    },
-    {
-      'target': ['4.3=>4.4', '4.4=>4.3'],
-      '4.3': '/user-manual/capabilities/syscollector.html#compatibility-matrix',
-      '4.4': '/user-manual/capabilities/system-inventory/compatibility-matrix.html',
-    },
-    {
-      'target': ['4.3=>4.4', '4.4=>4.3'],
-      '4.3': '/user-manual/capabilities/syscollector.html#using-syscollector-information-to-trigger-alerts',
-      '4.4': '/user-manual/capabilities/system-inventory/using-syscollector-information-to-trigger-alerts.html',
-    },
-    {
-      'target': ['4.3=>4.4', '4.4=>4.3'],
-      '4.3': '/user-manual/capabilities/syscollector.html#use-case-visualize-system-inventory-in-the-wazuh-app',
-      '4.4': '/user-manual/capabilities/system-inventory/viewing-system-inventory-data.html',
-    },
-    {
-      'target': ['4.4=>4.3'],
-      '4.3': '/user-manual/capabilities/syscollector.html#use-case-visualize-system-inventory-in-the-wazuh-app',
-      '4.4': '/user-manual/capabilities/system-inventory/configuration.html',
-    },
-    {
-      'target': ['4.3=>4.4', '4.4=>4.3'],
-      '4.3': '/compliance.html',
-      '4.4': '/compliance/index.html',
-    },
-    {
-      'target': ['4.3=>4.4', '4.4=>4.3'],
-      '4.3': '/gdpr/index.html',
-      '4.4': '/compliance/gdpr/index.html',
-    },
-    {
-      'target': ['4.3=>4.4', '4.4=>4.3'],
-      '4.3': '/gdpr/gdpr-II.html',
-      '4.4': '/compliance/gdpr/gdpr-II.html',
-    },
-    {
-      'target': ['4.3=>4.4', '4.4=>4.3'],
-      '4.3': '/gdpr/gdpr-III.html',
-      '4.4': '/compliance/gdpr/gdpr-III.html',
-    },
-    {
-      'target': ['4.3=>4.4', '4.4=>4.3'],
-      '4.3': '/gdpr/gdpr-IV.html',
-      '4.4': '/compliance/gdpr/gdpr-IV.html',
-    },
-    {
-      'target': ['4.3=>4.4', '4.4=>4.3'],
-      '4.3': '/hipaa/index.html',
-      '4.4': '/compliance/hipaa/index.html',
-    },
-    {
-      'target': ['4.3=>4.4', '4.4=>4.3'],
-      '4.3': '/hipaa/visualization-and-dashboard.html',
-      '4.4': '/compliance/hipaa/visualization-and-dashboard.html',
-    },
-    {
-      'target': ['4.3=>4.4', '4.4=>4.3'],
-      '4.3': '/hipaa/log-data-analysis.html',
-      '4.4': '/compliance/hipaa/log-data-analysis.html',
-    },
-    {
-      'target': ['4.3=>4.4', '4.4=>4.3'],
-      '4.3': '/hipaa/configuration-assessment.html',
-      '4.4': '/compliance/hipaa/configuration-assessment.html',
-    },
-    {
-      'target': ['4.3=>4.4', '4.4=>4.3'],
-      '4.3': '/hipaa/malware-detection.html',
-      '4.4': '/compliance/hipaa/malware-detection.html',
-    },
-    {
-      'target': ['4.3=>4.4', '4.4=>4.3'],
-      '4.3': '/hipaa/file-integrity-monitoring.html',
-      '4.4': '/compliance/hipaa/file-integrity-monitoring.html',
-    },
-    {
-      'target': ['4.3=>4.4', '4.4=>4.3'],
-      '4.3': '/hipaa/vulnerability-detection.html',
-      '4.4': '/compliance/hipaa/vulnerability-detection.html',
-    },
-    {
-      'target': ['4.3=>4.4', '4.4=>4.3'],
-      '4.3': '/hipaa/active-response.html',
-      '4.4': '/compliance/hipaa/active-response.html',
-    },
-    {
-      'target': ['4.3=>4.4', '4.4=>4.3'],
-      '4.3': '/pci-dss/index.html',
-      '4.4': '/compliance/pci-dss/index.html',
-    },
-    {
-      'target': ['4.3=>4.4', '4.4=>4.3'],
-      '4.3': '/pci-dss/configuration-assessment.html',
-      '4.4': '/compliance/pci-dss/configuration-assessment.html',
-    },
-    {
-      'target': ['4.3=>4.4', '4.4=>4.3'],
-      '4.3': '/pci-dss/malware-detection.html',
-      '4.4': '/compliance/pci-dss/malware-detection.html',
-    },
-    {
-      'target': ['4.3=>4.4', '4.4=>4.3'],
-      '4.3': '/pci-dss/vulnerability-detection.html',
-      '4.4': '/compliance/pci-dss/vulnerability-detection.html',
-    },
-    {
-      'target': ['4.3=>4.4', '4.4=>4.3'],
-      '4.3': '/pci-dss/system-inventory.html',
-      '4.4': '/compliance/pci-dss/system-inventory.html',
-    },
-    {
-      'target': ['4.3=>4.4', '4.4=>4.3'],
-      '4.3': '/pci-dss/dashboard.html',
-      '4.4': '/compliance/pci-dss/dashboard.html',
-    },
-    {
-      'target': ['4.3=>4.4', '4.4=>4.3'],
-      '4.3': '/pci-dss/active-response.html',
-      '4.4': '/compliance/pci-dss/active-response.html',
-    },
-    {
-      'target': ['4.3=>4.4', '4.4=>4.3'],
-      '4.3': '/pci-dss/file-integrity-monitoring.html',
-      '4.4': '/compliance/pci-dss/file-integrity-monitoring.html',
-    },
-    {
-      'target': ['4.3=>4.4', '4.4=>4.3'],
-      '4.3': '/pci-dss/log-analysis.html',
-      '4.4': '/compliance/pci-dss/log-analysis.html',
-    },
-    {
-      'target': ['4.3=>4.4', '4.4=>4.3'],
-      '4.3': '/container-security/index.html',
-      '4.4': '/user-manual/capabilities/container-security/index.html',
-    },
-    {
-      'target': ['4.3=>4.4', '4.4=>4.3'],
-      '4.3': '/container-security/docker-monitor/index.html',
-      '4.4': '/user-manual/capabilities/container-security/monitoring-docker.html',
-    },
-    {
-      'target': ['4.3=>4.4'],
-      '4.3': '/container-security/docker-monitor/dependencies.html',
-      '4.4': '/user-manual/capabilities/container-security/monitoring-docker.html#enable-the-wazuh-docker-listener',
-    },
-    {
-      'target': ['4.3=>4.4'],
-      '4.3': '/container-security/docker-monitor/monitoring-docker-server.html',
-      '4.4': '/user-manual/capabilities/container-security/use-cases.html',
-    },
-    {
-      'target': ['4.3=>4.4'],
-      '4.3': '/container-security/docker-monitor/monitoring-containers-activity.html',
-      '4.4': '/user-manual/capabilities/container-security/use-cases.html',
-    },
-    {
-      'target': ['4.4=>4.3'],
-      '4.3': '/user-manual/files-backup/index.html',
-      '4.4': '/user-manual/files-backup/creating/index.html',
-    },
-    {
-      'target': ['4.3=>4.4', '4.4=>4.3'],
-      '4.3': '/user-manual/files-backup/wazuh-central-components.html',
-      '4.4': '/user-manual/files-backup/creating/wazuh-central-components.html',
-    },
-    {
-      'target': ['4.3=>4.4', '4.4=>4.3'],
-      '4.3': '/user-manual/files-backup/wazuh-agent.html',
-      '4.4': '/user-manual/files-backup/creating/wazuh-agent.html',
-    },
+  {
+    'target': ['4.3=>4.4'],
+    '4.3': '/user-manual/capabilities/agentless-monitoring/agentless-faq.html',
+    '4.4': '/user-manual/capabilities/agentless-monitoring/index.html',
+  },
+  {
+    'target': ['4.3=>4.4', '4.4=>4.3'],
+    '4.3': '/user-manual/capabilities/auditing-whodata/index.html',
+    '4.4': '/user-manual/capabilities/file-integrity/advanced-settings.html#who-data-monitoring',
+  },
+  {
+    'target': ['4.3=>4.4', '4.4=>4.3'],
+    '4.3': '/user-manual/capabilities/auditing-whodata/who-linux.html',
+    '4.4': '/user-manual/capabilities/file-integrity/advanced-settings.html#who-data-monitoring-on-linux',
+  },
+  {
+    'target': ['4.3=>4.4', '4.4=>4.3'],
+    '4.3': '/user-manual/capabilities/auditing-whodata/who-windows.html',
+    '4.4': '/user-manual/capabilities/file-integrity/advanced-settings.html#who-data-monitoring-in-windows',
+  },
+  {
+    'target': ['4.3=>4.4', '4.4=>4.3'],
+    '4.3': '/user-manual/capabilities/auditing-whodata/who-windows-policies.html',
+    '4.4': '/user-manual/capabilities/file-integrity/advanced-settings.html#manual-configuration-of-the-local-audit-policies-in-windows',
+  },
+  {
+    'target': ['4.3=>4.4', '4.4=>4.3'],
+    '4.3': '/user-manual/capabilities/file-integrity/fim-configuration.html',
+    '4.4': '/user-manual/capabilities/file-integrity/index.html',
+  },
+  {
+    'target': ['4.3=>4.4', '4.4=>4.3'],
+    '4.3': '/user-manual/capabilities/file-integrity/fim-fields-rule-mapping.html',
+    '4.4': '/user-manual/capabilities/file-integrity/index.html',
+  },
+  {
+    'target': ['4.3=>4.4', '4.4=>4.3'],
+    '4.3': '/user-manual/capabilities/antiflooding.html',
+    '4.4': '/user-manual/agents/antiflooding.html',
+  },
+  {
+    'target': ['4.3=>4.4', '4.4=>4.3'],
+    '4.3': '/user-manual/capabilities/labels.html',
+    '4.4': '/user-manual/agents/labels.html',
+  },
+  {
+    'target': ['4.3=>4.4', '4.4=>4.3'],
+    '4.3': '/user-manual/capabilities/fluent-forwarder.html',
+    '4.4': '/user-manual/manager/fluent-forwarder.html',
+  },
+  {
+    'target': ['4.3=>4.4', '4.4=>4.3'],
+    '4.3': '/amazon/services/supported-services/alb.html',
+    '4.4': '/cloud-security/amazon/services/supported-services/elastic-load-balancing/alb.html',
+  },
+  {
+    'target': ['4.3=>4.4', '4.4=>4.3'],
+    '4.3': '/amazon/services/supported-services/nlb.html',
+    '4.4': '/cloud-security/amazon/services/supported-services/elastic-load-balancing/nlb.html',
+  },
+  {
+    'target': ['4.3=>4.4', '4.4=>4.3'],
+    '4.3': '/amazon/services/supported-services/clb.html',
+    '4.4': '/cloud-security/amazon/services/supported-services/elastic-load-balancing/clb.html',
+  },
+  {
+    'target': ['4.3=>4.4', '4.4=>4.3'],
+    '4.3': '/amazon/services/supported-services/ecr-image-scanning.html',
+    '4.4': '/cloud-security/amazon/services/supported-services/ecr-image-scanning.html',
+  },
+  {
+    'target': ['4.3=>4.4', '4.4=>4.3'],
+    '4.3': '/amazon/services/supported-services/server-access.html',
+    '4.4': '/cloud-security/amazon/services/supported-services/server-access.html',
+  },
+  {
+    'target': ['4.3=>4.4', '4.4=>4.3'],
+    '4.3': '/azure/activity-services/index.html',
+    '4.4': '/cloud-security/azure/activity-services/index.html',
+  },
+  {
+    'target': ['4.3=>4.4', '4.4=>4.3'],
+    '4.3': '/azure/activity-services/active-directory/index.html',
+    '4.4': '/cloud-security/azure/activity-services/active-directory/index.html',
+  },
+  {
+    'target': ['4.3=>4.4', '4.4=>4.3'],
+    '4.3': '/azure/activity-services/active-directory/graph.html',
+    '4.4': '/cloud-security/azure/activity-services/active-directory/graph.html',
+  },
+  {
+    'target': ['4.3=>4.4', '4.4=>4.3'],
+    '4.3': '/azure/activity-services/prerequisites/considerations.html',
+    '4.4': '/cloud-security/azure/activity-services/prerequisites/considerations.html',
+  },
+  {
+    'target': ['4.3=>4.4', '4.4=>4.3'],
+    '4.3': '/azure/activity-services/prerequisites/credentials.html',
+    '4.4': '/cloud-security/azure/activity-services/prerequisites/credentials.html',
+  },
+  {
+    'target': ['4.3=>4.4', '4.4=>4.3'],
+    '4.3': '/azure/activity-services/prerequisites/index.html',
+    '4.4': '/cloud-security/azure/activity-services/prerequisites/index.html',
+  },
+  {
+    'target': ['4.3=>4.4', '4.4=>4.3'],
+    '4.3': '/azure/activity-services/services/index.html',
+    '4.4': '/cloud-security/azure/activity-services/services/index.html',
+  },
+  {
+    'target': ['4.3=>4.4', '4.4=>4.3'],
+    '4.3': '/azure/activity-services/services/log-analytics.html',
+    '4.4': '/cloud-security/azure/activity-services/services/log-analytics.html',
+  },
+  {
+    'target': ['4.3=>4.4', '4.4=>4.3'],
+    '4.3': '/azure/activity-services/services/storage.html',
+    '4.4': '/cloud-security/azure/activity-services/services/storage.html',
+  },
+  {
+    'target': ['4.3=>4.4', '4.4=>4.3'],
+    '4.3': '/gcp/supported-services/access_logs.html',
+    '4.4': '/cloud-security/gcp/supported-services/access_logs.html',
+  },
+  {
+    'target': ['4.3=>4.4', '4.4=>4.3'],
+    '4.3': '/gcp/supported-services/cloud_audit_logs.html',
+    '4.4': '/cloud-security/gcp/supported-services/cloud_audit_logs.html',
+  },
+  {
+    'target': ['4.3=>4.4', '4.4=>4.3'],
+    '4.3': '/gcp/supported-services/dns_queries.html',
+    '4.4': '/cloud-security/gcp/supported-services/dns_queries.html',
+  },
+  {
+    'target': ['4.3=>4.4', '4.4=>4.3'],
+    '4.3': '/gcp/supported-services/load_balancing.html',
+    '4.4': '/cloud-security/gcp/supported-services/load_balancing.html',
+  },
+  {
+    'target': ['4.3=>4.4', '4.4=>4.3'],
+    '4.3': '/gcp/supported-services/vpc_flow.html',
+    '4.4': '/cloud-security/gcp/supported-services/vpc_flow.html',
+  },
+  {
+    'target': ['4.3=>4.4', '4.4=>4.3'],
+    '4.3': '/gcp/supported-services/firewall.html',
+    '4.4': '/cloud-security/gcp/supported-services/firewall.html',
+  },
+  {
+    'target': ['4.3=>4.4', '4.4=>4.3'],
+    '4.3': '/github/index.html',
+    '4.4': '/cloud-security/github/index.html',
+  },
+  {
+    'target': ['4.3=>4.4', '4.4=>4.3'],
+    '4.3': '/github/monitoring-github-activity.html',
+    '4.4': '/cloud-security/github/monitoring-github-activity.html',
+  },
+  {
+    'target': ['4.3=>4.4', '4.4=>4.3'],
+    '4.3': '/office365/index.html',
+    '4.4': '/cloud-security/office365/index.html',
+  },
+  {
+    'target': ['4.3=>4.4', '4.4=>4.3'],
+    '4.3': '/office365/monitoring-office365-activity.html',
+    '4.4': '/cloud-security/office365/monitoring-office365-activity.html',
+  },
+  {
+    'target': ['4.3=>4.4', '4.4=>4.3'],
+    '4.3': '/amazon/instances.html',
+    '4.4': '/cloud-security/amazon/instances.html',
+  },
+  {
+    'target': ['4.3=>4.4', '4.4=>4.3'],
+    '4.3': '/amazon/index.html',
+    '4.4': '/cloud-security/amazon/index.html',
+  },
+  {
+    'target': ['4.3=>4.4', '4.4=>4.3'],
+    '4.3': '/amazon/services/troubleshooting.html',
+    '4.4': '/cloud-security/amazon/services/troubleshooting.html',
+  },
+  {
+    'target': ['4.3=>4.4', '4.4=>4.3'],
+    '4.3': '/amazon/services/prerequisites/dependencies.html',
+    '4.4': '/cloud-security/amazon/services/prerequisites/dependencies.html',
+  },
+  {
+    'target': ['4.3=>4.4', '4.4=>4.3'],
+    '4.3': '/amazon/services/prerequisites/considerations.html',
+    '4.4': '/cloud-security/amazon/services/prerequisites/considerations.html',
+  },
+  {
+    'target': ['4.3=>4.4', '4.4=>4.3'],
+    '4.3': '/amazon/services/prerequisites/credentials.html',
+    '4.4': '/cloud-security/amazon/services/prerequisites/credentials.html',
+  },
+  {
+    'target': ['4.3=>4.4', '4.4=>4.3'],
+    '4.3': '/amazon/services/prerequisites/index.html',
+    '4.4': '/cloud-security/amazon/services/prerequisites/index.html',
+  },
+  {
+    'target': ['4.3=>4.4', '4.4=>4.3'],
+    '4.3': '/amazon/services/prerequisites/S3-bucket.html',
+    '4.4': '/cloud-security/amazon/services/prerequisites/S3-bucket.html',
+  },
+  {
+    'target': ['4.3=>4.4', '4.4=>4.3'],
+    '4.3': '/amazon/services/index.html',
+    '4.4': '/cloud-security/amazon/services/index.html',
+  },
+  {
+    'target': ['4.3=>4.4', '4.4=>4.3'],
+    '4.3': '/amazon/services/supported-services/elastic-load-balancing/index.html',
+    '4.4': '/cloud-security/amazon/services/supported-services/elastic-load-balancing/index.html',
+  },
+  {
+    'target': ['4.3=>4.4', '4.4=>4.3'],
+    '4.3': '/amazon/services/supported-services/vpc.html',
+    '4.4': '/cloud-security/amazon/services/supported-services/vpc.html',
+  },
+  {
+    'target': ['4.3=>4.4', '4.4=>4.3'],
+    '4.3': '/amazon/services/supported-services/security-lake.html',
+    '4.4': '/cloud-security/amazon/services/supported-services/security-lake.html',
+  },
+  {
+    'target': ['4.3=>4.4', '4.4=>4.3'],
+    '4.3': '/amazon/services/supported-services/waf.html',
+    '4.4': '/cloud-security/amazon/services/supported-services/waf.html',
+  },
+  {
+    'target': ['4.3=>4.4', '4.4=>4.3'],
+    '4.3': '/amazon/services/supported-services/guardduty.html',
+    '4.4': '/cloud-security/amazon/services/supported-services/guardduty.html',
+  },
+  {
+    'target': ['4.3=>4.4', '4.4=>4.3'],
+    '4.3': '/amazon/services/supported-services/cisco-umbrella.html',
+    '4.4': '/cloud-security/amazon/services/supported-services/cisco-umbrella.html',
+  },
+  {
+    'target': ['4.3=>4.4', '4.4=>4.3'],
+    '4.3': '/amazon/services/supported-services/cloudtrail.html',
+    '4.4': '/cloud-security/amazon/services/supported-services/cloudtrail.html',
+  },
+  {
+    'target': ['4.3=>4.4', '4.4=>4.3'],
+    '4.3': '/amazon/services/supported-services/kms.html',
+    '4.4': '/cloud-security/amazon/services/supported-services/kms.html',
+  },
+  {
+    'target': ['4.3=>4.4', '4.4=>4.3'],
+    '4.3': '/amazon/services/supported-services/index.html',
+    '4.4': '/cloud-security/amazon/services/supported-services/index.html',
+  },
+  {
+    'target': ['4.3=>4.4', '4.4=>4.3'],
+    '4.3': '/amazon/services/supported-services/config.html',
+    '4.4': '/cloud-security/amazon/services/supported-services/config.html',
+  },
+  {
+    'target': ['4.3=>4.4', '4.4=>4.3'],
+    '4.3': '/amazon/services/supported-services/trusted-advisor.html',
+    '4.4': '/cloud-security/amazon/services/supported-services/trusted-advisor.html',
+  },
+  {
+    'target': ['4.3=>4.4', '4.4=>4.3'],
+    '4.3': '/amazon/services/supported-services/inspector.html',
+    '4.4': '/cloud-security/amazon/services/supported-services/inspector.html',
+  },
+  {
+    'target': ['4.3=>4.4', '4.4=>4.3'],
+    '4.3': '/amazon/services/supported-services/macie.html',
+    '4.4': '/cloud-security/amazon/services/supported-services/macie.html',
+  },
+  {
+    'target': ['4.3=>4.4', '4.4=>4.3'],
+    '4.3': '/amazon/services/supported-services/cloudwatchlogs.html',
+    '4.4': '/cloud-security/amazon/services/supported-services/cloudwatchlogs.html',
+  },
+  {
+    'target': ['4.3=>4.4', '4.4=>4.3'],
+    '4.3': '/monitoring.html',
+    '4.4': '/cloud-security/monitoring.html',
+  },
+  {
+    'target': ['4.3=>4.4', '4.4=>4.3'],
+    '4.3': '/azure/monitoring-instances.html',
+    '4.4': '/cloud-security/azure/monitoring-instances.html',
+  },
+  {
+    'target': ['4.3=>4.4', '4.4=>4.3'],
+    '4.3': '/azure/index.html',
+    '4.4': '/cloud-security/azure/index.html',
+  },
+  {
+    'target': ['4.3=>4.4', '4.4=>4.3'],
+    '4.3': '/azure/activity-services/prerequisites/dependencies.html',
+    '4.4': '/cloud-security/azure/activity-services/prerequisites/dependencies.html',
+  },
+  {
+    'target': ['4.3=>4.4', '4.4=>4.3'],
+    '4.3': '/gcp/prerequisites/pubsub.html',
+    '4.4': '/cloud-security/gcp/prerequisites/pubsub.html',
+  },
+  {
+    'target': ['4.3=>4.4', '4.4=>4.3'],
+    '4.3': '/gcp/prerequisites/dependencies.html',
+    '4.4': '/cloud-security/gcp/prerequisites/dependencies.html',
+  },
+  {
+    'target': ['4.3=>4.4', '4.4=>4.3'],
+    '4.3': '/gcp/prerequisites/considerations.html',
+    '4.4': '/cloud-security/gcp/prerequisites/considerations.html',
+  },
+  {
+    'target': ['4.3=>4.4', '4.4=>4.3'],
+    '4.3': '/gcp/prerequisites/credentials.html',
+    '4.4': '/cloud-security/gcp/prerequisites/credentials.html',
+  },
+  {
+    'target': ['4.3=>4.4', '4.4=>4.3'],
+    '4.3': '/gcp/prerequisites/index.html',
+    '4.4': '/cloud-security/gcp/prerequisites/index.html',
+  },
+  {
+    'target': ['4.3=>4.4', '4.4=>4.3'],
+    '4.3': '/gcp/index.html',
+    '4.4': '/cloud-security/gcp/index.html',
+  },
+  {
+    'target': ['4.3=>4.4', '4.4=>4.3'],
+    '4.3': '/gcp/supported-services/index.html',
+    '4.4': '/cloud-security/gcp/supported-services/index.html',
+  },
+  {
+    'target': ['4.3=>4.4', '4.4=>4.3'],
+    '4.3': '/user-manual/capabilities/agent-key-polling.html',
+    '4.4': '/user-manual/agents/key-request.html',
+  },
+  {
+    'target': ['4.3=>4.4'],
+    '4.3': '/user-manual/capabilities/wazuh-logtest/index.html',
+    '4.4': '/user-manual/ruleset/testing.html',
+  },
+  {
+    'target': ['4.3=>4.4'],
+    '4.3': '/user-manual/capabilities/wazuh-logtest/how-it-works.html',
+    '4.4': '/user-manual/ruleset/testing.html',
+  },
+  {
+    'target': ['4.3=>4.4'],
+    '4.3': '/user-manual/capabilities/wazuh-logtest/logtest-configuration.html',
+    '4.4': '/user-manual/ruleset/testing.html#configuration',
+  },
+  {
+    'target': ['4.3=>4.4'],
+    '4.3': '/user-manual/capabilities/wazuh-logtest/logtest-faq.html',
+    '4.4': '/user-manual/ruleset/testing.html',
+  },
+  {
+    'target': ['4.3=>4.4', '4.4=>4.3'],
+    '4.3': '/user-manual/capabilities/syscollector.html',
+    '4.4': '/user-manual/capabilities/system-inventory/index.html',
+  },
+  {
+    'target': ['4.3=>4.4', '4.4=>4.3'],
+    '4.3': '/user-manual/capabilities/syscollector.html#how-it-works',
+    '4.4': '/user-manual/capabilities/system-inventory/how-it-works.html',
+  },
+  {
+    'target': ['4.3=>4.4', '4.4=>4.3'],
+    '4.3': '/user-manual/capabilities/syscollector.html#available-scans',
+    '4.4': '/user-manual/capabilities/system-inventory/available-inventory-fields.html',
+  },
+  {
+    'target': ['4.3=>4.4', '4.4=>4.3'],
+    '4.3': '/user-manual/capabilities/syscollector.html#compatibility-matrix',
+    '4.4': '/user-manual/capabilities/system-inventory/compatibility-matrix.html',
+  },
+  {
+    'target': ['4.3=>4.4', '4.4=>4.3'],
+    '4.3': '/user-manual/capabilities/syscollector.html#using-syscollector-information-to-trigger-alerts',
+    '4.4': '/user-manual/capabilities/system-inventory/using-syscollector-information-to-trigger-alerts.html',
+  },
+  {
+    'target': ['4.3=>4.4', '4.4=>4.3'],
+    '4.3': '/user-manual/capabilities/syscollector.html#use-case-visualize-system-inventory-in-the-wazuh-app',
+    '4.4': '/user-manual/capabilities/system-inventory/viewing-system-inventory-data.html',
+  },
+  {
+    'target': ['4.4=>4.3'],
+    '4.3': '/user-manual/capabilities/syscollector.html#use-case-visualize-system-inventory-in-the-wazuh-app',
+    '4.4': '/user-manual/capabilities/system-inventory/configuration.html',
+  },
+  {
+    'target': ['4.3=>4.4', '4.4=>4.3'],
+    '4.3': '/compliance.html',
+    '4.4': '/compliance/index.html',
+  },
+  {
+    'target': ['4.3=>4.4', '4.4=>4.3'],
+    '4.3': '/gdpr/index.html',
+    '4.4': '/compliance/gdpr/index.html',
+  },
+  {
+    'target': ['4.3=>4.4', '4.4=>4.3'],
+    '4.3': '/gdpr/gdpr-II.html',
+    '4.4': '/compliance/gdpr/gdpr-II.html',
+  },
+  {
+    'target': ['4.3=>4.4', '4.4=>4.3'],
+    '4.3': '/gdpr/gdpr-III.html',
+    '4.4': '/compliance/gdpr/gdpr-III.html',
+  },
+  {
+    'target': ['4.3=>4.4', '4.4=>4.3'],
+    '4.3': '/gdpr/gdpr-IV.html',
+    '4.4': '/compliance/gdpr/gdpr-IV.html',
+  },
+  {
+    'target': ['4.3=>4.4', '4.4=>4.3'],
+    '4.3': '/hipaa/index.html',
+    '4.4': '/compliance/hipaa/index.html',
+  },
+  {
+    'target': ['4.3=>4.4', '4.4=>4.3'],
+    '4.3': '/hipaa/visualization-and-dashboard.html',
+    '4.4': '/compliance/hipaa/visualization-and-dashboard.html',
+  },
+  {
+    'target': ['4.3=>4.4', '4.4=>4.3'],
+    '4.3': '/hipaa/log-data-analysis.html',
+    '4.4': '/compliance/hipaa/log-data-analysis.html',
+  },
+  {
+    'target': ['4.3=>4.4', '4.4=>4.3'],
+    '4.3': '/hipaa/configuration-assessment.html',
+    '4.4': '/compliance/hipaa/configuration-assessment.html',
+  },
+  {
+    'target': ['4.3=>4.4', '4.4=>4.3'],
+    '4.3': '/hipaa/malware-detection.html',
+    '4.4': '/compliance/hipaa/malware-detection.html',
+  },
+  {
+    'target': ['4.3=>4.4', '4.4=>4.3'],
+    '4.3': '/hipaa/file-integrity-monitoring.html',
+    '4.4': '/compliance/hipaa/file-integrity-monitoring.html',
+  },
+  {
+    'target': ['4.3=>4.4', '4.4=>4.3'],
+    '4.3': '/hipaa/vulnerability-detection.html',
+    '4.4': '/compliance/hipaa/vulnerability-detection.html',
+  },
+  {
+    'target': ['4.3=>4.4', '4.4=>4.3'],
+    '4.3': '/hipaa/active-response.html',
+    '4.4': '/compliance/hipaa/active-response.html',
+  },
+  {
+    'target': ['4.3=>4.4', '4.4=>4.3'],
+    '4.3': '/pci-dss/index.html',
+    '4.4': '/compliance/pci-dss/index.html',
+  },
+  {
+    'target': ['4.3=>4.4', '4.4=>4.3'],
+    '4.3': '/pci-dss/configuration-assessment.html',
+    '4.4': '/compliance/pci-dss/configuration-assessment.html',
+  },
+  {
+    'target': ['4.3=>4.4', '4.4=>4.3'],
+    '4.3': '/pci-dss/malware-detection.html',
+    '4.4': '/compliance/pci-dss/malware-detection.html',
+  },
+  {
+    'target': ['4.3=>4.4', '4.4=>4.3'],
+    '4.3': '/pci-dss/vulnerability-detection.html',
+    '4.4': '/compliance/pci-dss/vulnerability-detection.html',
+  },
+  {
+    'target': ['4.3=>4.4', '4.4=>4.3'],
+    '4.3': '/pci-dss/system-inventory.html',
+    '4.4': '/compliance/pci-dss/system-inventory.html',
+  },
+  {
+    'target': ['4.3=>4.4', '4.4=>4.3'],
+    '4.3': '/pci-dss/dashboard.html',
+    '4.4': '/compliance/pci-dss/dashboard.html',
+  },
+  {
+    'target': ['4.3=>4.4', '4.4=>4.3'],
+    '4.3': '/pci-dss/active-response.html',
+    '4.4': '/compliance/pci-dss/active-response.html',
+  },
+  {
+    'target': ['4.3=>4.4', '4.4=>4.3'],
+    '4.3': '/pci-dss/file-integrity-monitoring.html',
+    '4.4': '/compliance/pci-dss/file-integrity-monitoring.html',
+  },
+  {
+    'target': ['4.3=>4.4', '4.4=>4.3'],
+    '4.3': '/pci-dss/log-analysis.html',
+    '4.4': '/compliance/pci-dss/log-analysis.html',
+  },
+  {
+    'target': ['4.3=>4.4', '4.4=>4.3'],
+    '4.3': '/container-security/index.html',
+    '4.4': '/user-manual/capabilities/container-security/index.html',
+  },
+  {
+    'target': ['4.3=>4.4', '4.4=>4.3'],
+    '4.3': '/container-security/docker-monitor/index.html',
+    '4.4': '/user-manual/capabilities/container-security/monitoring-docker.html',
+  },
+  {
+    'target': ['4.3=>4.4'],
+    '4.3': '/container-security/docker-monitor/dependencies.html',
+    '4.4': '/user-manual/capabilities/container-security/monitoring-docker.html#enable-the-wazuh-docker-listener',
+  },
+  {
+    'target': ['4.3=>4.4'],
+    '4.3': '/container-security/docker-monitor/monitoring-docker-server.html',
+    '4.4': '/user-manual/capabilities/container-security/use-cases.html',
+  },
+  {
+    'target': ['4.3=>4.4'],
+    '4.3': '/container-security/docker-monitor/monitoring-containers-activity.html',
+    '4.4': '/user-manual/capabilities/container-security/use-cases.html',
+  },
+  {
+    'target': ['4.4=>4.3'],
+    '4.3': '/user-manual/files-backup/index.html',
+    '4.4': '/user-manual/files-backup/creating/index.html',
+  },
+  {
+    'target': ['4.3=>4.4', '4.4=>4.3'],
+    '4.3': '/user-manual/files-backup/wazuh-central-components.html',
+    '4.4': '/user-manual/files-backup/creating/wazuh-central-components.html',
+  },
+  {
+    'target': ['4.3=>4.4', '4.4=>4.3'],
+    '4.3': '/user-manual/files-backup/wazuh-agent.html',
+    '4.4': '/user-manual/files-backup/creating/wazuh-agent.html',
+  },
 );
 
 /* Pages added in 4.4 */
@@ -1555,7 +1562,7 @@ newUrls['4.4'] = [
   '/compliance/nist/system-inventory.html',
   '/compliance/nist/vulnerability-detection.html',
   '/compliance/nist/active-response.html',
-  '/compliance/nist/threat-intelligence.html',  
+  '/compliance/nist/threat-intelligence.html',
   '/compliance/tsc/index.html',
   '/compliance/tsc/common-criteria/cc2.1.html',
   '/compliance/tsc/common-criteria/cc3.1.html',
@@ -1576,7 +1583,7 @@ newUrls['4.4'] = [
   '/user-manual/capabilities/file-integrity/basic-settings.html',
   '/user-manual/capabilities/file-integrity/how-to-configure-fim.html',
   '/user-manual/capabilities/file-integrity/interpreting-fim-module-analysis.html',
-  '/user-manual/capabilities/file-integrity/creating-custom-fim-rules.html',   
+  '/user-manual/capabilities/file-integrity/creating-custom-fim-rules.html',
   '/user-manual/capabilities/file-integrity/advanced-settings.html',
   '/user-manual/capabilities/file-integrity/use-cases/index.html',
   '/user-manual/capabilities/file-integrity/use-cases/detecting-malware-persistence-technique.html',
@@ -1599,7 +1606,7 @@ newUrls['4.4'] = [
   '/user-manual/capabilities/system-calls-monitoring/use-cases/privilege-abuse.html',
   '/user-manual/capabilities/agentless-monitoring/connection.html',
   '/user-manual/capabilities/agentless-monitoring/visualization.html',
-  '/user-manual/capabilities/agentless-monitoring/use-cases.html',  
+  '/user-manual/capabilities/agentless-monitoring/use-cases.html',
   '/user-manual/capabilities/vulnerability-detection/querying-the-vulnerability-database.html',
   '/user-manual/files-backup/creating/index.html',
   '/user-manual/files-backup/creating/wazuh-central-components.html',
@@ -1682,8 +1689,8 @@ removedUrls['4.4'] = [
   '/user-manual/capabilities/auditing-whodata/index.html',
   '/user-manual/capabilities/auditing-whodata/who-linux.html',
   '/user-manual/capabilities/auditing-whodata/who-windows.html',
-  '/user-manual/capabilities/auditing-whodata/who-windows-policies.html',  
-  '/user-manual/capabilities/syscollector.html',  
+  '/user-manual/capabilities/auditing-whodata/who-windows-policies.html',
+  '/user-manual/capabilities/syscollector.html',
   '/user-manual/capabilities/agentless-monitoring/agentless-faq.html',
   '/container-security/index.html',
   '/container-security/docker-monitor/index.html',
@@ -1694,9 +1701,9 @@ removedUrls['4.4'] = [
   '/user-manual/files-backup/wazuh-agent.html',
 ];
 
-  /* *** RELEASE 4.3 ****/
- 
- /* Pages added in 4.3 */
+/* *** RELEASE 4.3 ****/
+
+/* Pages added in 4.3 */
 
 newUrls['4.3'] = [
   '/release-notes/release-4-3-1.html',
@@ -1716,7 +1723,7 @@ newUrls['4.3'] = [
   '/user-manual/elasticsearch/configure-indices.html',
   '/user-manual/elasticsearch/elasticsearch.html',
   '/user-manual/elasticsearch/index.html',
-  '/user-manual/elasticsearch/troubleshooting.html',  
+  '/user-manual/elasticsearch/troubleshooting.html',
   '/user-manual/wazuh-dashboard/settings.html',
   '/user-manual/wazuh-dashboard/config-file.html',
   '/user-manual/wazuh-dashboard/index.html',
@@ -1871,7 +1878,7 @@ newUrls['4.3'] = [
   '/deployment-options/deploying-with-puppet/wazuh-puppet-module/reference-wazuh-puppet/wazuh-manager-class.html',
   '/deployment-options/amazon-machine-images/amazon-machine-images.html',
   '/release-notes/release-4-3-0.html',
-  '/pci-dss/configuration-assessment.html', 
+  '/pci-dss/configuration-assessment.html',
   '/pci-dss/malware-detection.html',
   '/pci-dss/vulnerability-detection.html',
   '/pci-dss/system-inventory.html',
@@ -2034,7 +2041,7 @@ removedUrls['4.3'] = [
   '/migrating-from-ossec/ossec-server.html',
   '/migrating-from-ossec/ossec-agent.html',
   '/learning-wazuh/build-lab/access-ec2-instances.html',
-  '/learning-wazuh/build-lab/build-vpc.html', 
+  '/learning-wazuh/build-lab/build-vpc.html',
   '/learning-wazuh/build-lab/launch-ec2-instances.html',
   '/learning-wazuh/build-lab/xpack-security-setup.html',
   '/learning-wazuh/build-lab/install-elastic-stack.html',
@@ -2056,7 +2063,7 @@ removedUrls['4.3'] = [
   '/pci-dss/policy-monitoring.html',
   '/pci-dss/rootkit-detection.html',
   '/pci-dss/elastic.html',
-  '/upgrade-guide/upgrading-agent.html', 
+  '/upgrade-guide/upgrading-agent.html',
   '/user-manual/capabilities/anomalies-detection/anomaly-configuration.html',
   '/user-manual/capabilities/anomalies-detection/anomaly-faq.html',
   '/user-manual/capabilities/anomalies-detection/how-it-works.html',
@@ -2778,7 +2785,7 @@ redirections.push(
     '4.3': '/user-manual/capabilities/malware-detection/virus-total-integration.html#about-virustotal',
   },
   {
-    'target': ['4.2=>4.3','4.3=>4.2'],
+    'target': ['4.2=>4.3', '4.3=>4.2'],
     '4.2': '/user-manual/capabilities/virustotal-scan/index.html',
     '4.3': '/user-manual/capabilities/malware-detection/virus-total-integration.html',
   },
@@ -2788,7 +2795,7 @@ redirections.push(
     '4.3': '/user-manual/capabilities/malware-detection/virus-total-integration.html#how-it-works',
   },
   {
-    'target': ['4.2=>4.3','4.3=>4.2'],
+    'target': ['4.2=>4.3', '4.3=>4.2'],
     '4.2': '/user-manual/capabilities/active-response/ar-use-cases/blocking-attacks.html',
     '4.3': '/user-manual/capabilities/active-response/ar-use-cases/blocking-ssh-brute-force.html',
   },
@@ -2803,7 +2810,7 @@ redirections.push(
     '4.3': '/user-manual/capabilities/malware-detection/fim-yara.html',
   },
   {
-    'target': ['4.2=>4.3','4.3=>4.2'],
+    'target': ['4.2=>4.3', '4.3=>4.2'],
     '4.2': '/user-manual/capabilities/active-response/custom-active-response.html',
     '4.3': '/user-manual/capabilities/active-response/custom-active-response-scripts.html',
   },
@@ -2827,7 +2834,7 @@ redirections.push(
     '4.2': '/user-manual/capabilities/sec-config-assessment/what-is-it.html',
     '4.3': '/user-manual/capabilities/sec-config-assessment/how-it-works.html',
   },
-  );
+);
 
 /* *** RELEASE 4.2 ****/
 
@@ -3041,7 +3048,7 @@ newUrls['4.2'] = [
   '/upgrade-guide/legacy/upgrading-wazuh-server/restore-alerts-from-2.x-to-3.x.html',
   '/user-manual/agent-enrollment/index.html',
   '/user-manual/agent-enrollment/via-agent-configuration/index.html',
-  '/user-manual/agent-enrollment/via-agent-configuration/linux-endpoint.html', 
+  '/user-manual/agent-enrollment/via-agent-configuration/linux-endpoint.html',
   '/user-manual/agent-enrollment/via-agent-configuration/windows-endpoint.html',
   '/user-manual/agent-enrollment/via-agent-configuration/macos-endpoint.html',
   '/user-manual/agent-enrollment/via-manager-API/index.html',
@@ -3049,9 +3056,9 @@ newUrls['4.2'] = [
   '/user-manual/agent-enrollment/via-manager-API/importing-the-key.html',
   '/user-manual/agent-enrollment/security-options/index.html',
   '/user-manual/agent-enrollment/security-options/using-password-authentication.html',
-  '/user-manual/agent-enrollment/security-options/manager-identity-verification.html', 
-  '/user-manual/agent-enrollment/security-options/agent-identity-verification.html', 
-  '/user-manual/agent-enrollment/troubleshooting.html', 
+  '/user-manual/agent-enrollment/security-options/manager-identity-verification.html',
+  '/user-manual/agent-enrollment/security-options/agent-identity-verification.html',
+  '/user-manual/agent-enrollment/troubleshooting.html',
 ];
 
 removedUrls['4.2'] = [
@@ -3202,743 +3209,743 @@ removedUrls['4.2'] = [
   '/user-manual/registering/index.html',
   '/user-manual/registering/command-line-registration.html',
   '/user-manual/registering/restful-api-registration.html',
-  '/user-manual/registering/password-authorization-registration.html', 
+  '/user-manual/registering/password-authorization-registration.html',
   '/user-manual/registering/host-verification-registration.html',
   '/user-manual/registering/registering-agents-theory.html',
   '/user-manual/registering/registering-agents-troubleshooting.html',
 ];
 
 redirections.push(
-    {
+  {
     'target': ['4.1=>4.2'],
     '4.1': '/getting-started/components/elastic-stack.html',
     '4.2': '/getting-started/components/index.html',
-    },
-    {
+  },
+  {
     'target': ['4.2=>4.1'],
     '4.2': '/getting-started/components/elasticsearch.html',
     '4.1': '/getting-started/components/elastic-stack.html',
-    },
-    {
-      'target': ['4.2=>4.1'],
-      '4.2': '/getting-started/components/kibana.html',
-      '4.1': '/getting-started/components/elastic-stack.html',      
-    },
-    {
-      'target': ['4.1=>4.2', '4.2=>4.1'],
-      '4.1': '/user-manual/registering/index.html',
-      '4.2': '/user-manual/agent-enrollment/index.html',
-    },
-    {
-      'target': ['4.1=>4.2', '4.2=>4.1'],
-      '4.1': '/user-manual/registering/command-line-registration.html',
-      '4.2': '/user-manual/agent-enrollment/index.html',
-    },
-    {
-      'target': ['4.1=>4.2', '4.2=>4.1'],
-      '4.1': '/user-manual/registering/restful-api-registration.html',
-      '4.2': '/user-manual/agent-enrollment/via-manager-API/index.html',
-    },
-    {
-      'target': ['4.1=>4.2', '4.2=>4.1'],
-      '4.1': '/user-manual/registering/password-authorization-registration.html',
-      '4.2': '/user-manual/agent-enrollment/security-options/using-password-authentication.html',
-    },
-    {
-      'target': ['4.1=>4.2', '4.2=>4.1'],
-      '4.1': '/user-manual/registering/host-verification-registration.html',
-      '4.2': '/user-manual/agent-enrollment/security-options/index.html',
-    },
-    {
-      'target': ['4.1=>4.2', '4.2=>4.1'],
-      '4.1': '/user-manual/registering/registering-agents-theory.html',
-      '4.2': '/user-manual/agent-enrollment/index.html',
-    },
-    {
-      'target': ['4.1=>4.2', '4.2=>4.1'],
-      '4.1': '/user-manual/registering/registering-agents-troubleshooting.html',
-      '4.2': '/user-manual/agent-enrollment/troubleshooting.html',
-    },   
-    {
-      'target': ['4.1=>4.2', '4.2=>4.1'],
-      '4.1': '/deploying-with-ansible/roles/wazuh-elasticsearch.html',
-      '4.2': '/deploying-with-ansible/roles/wazuh-opendistro.html',
-    },
-    {
-      'target': ['4.1=>4.2', '4.2=>4.1'],
-      '4.1': '/deploying-with-ansible/guide/install-elk-server.html',
-      '4.2': '/deploying-with-ansible/guide/install-opendistro-server.html',
-    },
-    {
-      'target': ['4.1=>4.2', '4.2=>4.1'],
-      '4.1': '/user-manual/reference/daemons/ossec-agentd.html',
-      '4.2': '/user-manual/reference/daemons/wazuh-agentd.html',
-    },
-    {
-      'target': ['4.1=>4.2', '4.2=>4.1'],
-      '4.1': '/user-manual/reference/daemons/ossec-agentlessd.html',
-      '4.2': '/user-manual/reference/daemons/wazuh-agentlessd.html',
-    },
-    {
-      'target': ['4.1=>4.2', '4.2=>4.1'],
-      '4.1': '/user-manual/reference/daemons/ossec-analysisd.html',
-      '4.2': '/user-manual/reference/daemons/wazuh-analysisd.html',
-    },
-    {
-      'target': ['4.1=>4.2', '4.2=>4.1'],
-      '4.1': '/user-manual/reference/daemons/ossec-authd.html',
-      '4.2': '/user-manual/reference/daemons/wazuh-authd.html',
-    },
-    {
-      'target': ['4.1=>4.2', '4.2=>4.1'],
-      '4.1': '/user-manual/reference/daemons/ossec-csyslogd.html',
-      '4.2': '/user-manual/reference/daemons/wazuh-csyslogd.html',
-    },
-    {
-      'target': ['4.1=>4.2', '4.2=>4.1'],
-      '4.1': '/user-manual/reference/daemons/ossec-dbd.html',
-      '4.2': '/user-manual/reference/daemons/wazuh-dbd.html',
-    },
-    {
-      'target': ['4.1=>4.2', '4.2=>4.1'],
-      '4.1': '/user-manual/reference/daemons/ossec-execd.html',
-      '4.2': '/user-manual/reference/daemons/wazuh-execd.html',
-    },
-    {
-      'target': ['4.1=>4.2', '4.2=>4.1'],
-      '4.1': '/user-manual/reference/daemons/ossec-integratord.html',
-      '4.2': '/user-manual/reference/daemons/wazuh-integratord.html',
-    },
-    {
-      'target': ['4.1=>4.2', '4.2=>4.1'],
-      '4.1': '/user-manual/reference/daemons/ossec-logcollector.html',
-      '4.2': '/user-manual/reference/daemons/wazuh-logcollector.html',
-    },
-    {
-      'target': ['4.1=>4.2', '4.2=>4.1'],
-      '4.1': '/user-manual/reference/daemons/ossec-maild.html',
-      '4.2': '/user-manual/reference/daemons/wazuh-maild.html',
-    },
-    {
-      'target': ['4.1=>4.2', '4.2=>4.1'],
-      '4.1': '/user-manual/reference/daemons/ossec-monitord.html',
-      '4.2': '/user-manual/reference/daemons/wazuh-monitord.html',
-    },
-    {
-      'target': ['4.1=>4.2', '4.2=>4.1'],
-      '4.1': '/user-manual/reference/daemons/ossec-remoted.html',
-      '4.2': '/user-manual/reference/daemons/wazuh-remoted.html',
-    },
-    {
-      'target': ['4.1=>4.2', '4.2=>4.1'],
-      '4.1': '/user-manual/reference/daemons/ossec-reportd.html',
-      '4.2': '/user-manual/reference/daemons/wazuh-reportd.html',
-    },
-    {
-      'target': ['4.1=>4.2', '4.2=>4.1'],
-      '4.1': '/user-manual/reference/daemons/ossec-syscheckd.html',
-      '4.2': '/user-manual/reference/daemons/wazuh-syscheckd.html',
-    },
-    {
-      'target': ['4.1=>4.2', '4.2=>4.1'],
-      '4.1': '/user-manual/reference/statistics-files/ossec-agentd-state.html',
-      '4.2': '/user-manual/reference/statistics-files/wazuh-agentd-state.html',
-    },
-    {
-      'target': ['4.1=>4.2', '4.2=>4.1'],
-      '4.1': '/user-manual/reference/statistics-files/ossec-analysisd-state.html',
-      '4.2': '/user-manual/reference/statistics-files/wazuh-analysisd-state.html',
-    },
-    {
-      'target': ['4.1=>4.2', '4.2=>4.1'],
-      '4.1': '/user-manual/reference/statistics-files/ossec-remoted-state.html',
-      '4.2': '/user-manual/reference/statistics-files/wazuh-remoted-state.html',
-    },
-    {
-      'target': ['4.1=>4.2', '4.2=>4.1'],
-      '4.1': '/user-manual/reference/tools/ossec-control.html',
-      '4.2': '/user-manual/reference/tools/wazuh-control.html',
-    },
-    {
-      'target': ['4.1=>4.2', '4.2=>4.1'],
-      '4.1': '/user-manual/reference/tools/ossec-regex.html',
-      '4.2': '/user-manual/reference/tools/wazuh-regex.html',
-    },
-    {
-      'target': ['4.1=>4.2', '4.2=>4.1'],
-      '4.1': '/getting-started/use_cases/index.html',
-      '4.2': '/getting-started/use-cases/index.html',
-    },
-    {
-      'target': ['4.1=>4.2', '4.2=>4.1'],
-      '4.1': '/getting-started/use_cases/cloud_security.html',
-      '4.2': '/getting-started/use-cases/cloud-security.html',
-    },
-    {
-      'target': ['4.1=>4.2', '4.2=>4.1'],
-      '4.1': '/getting-started/use_cases/configuration_assessment.html',
-      '4.2': '/getting-started/use-cases/configuration-assessment.html',
-    },
-    {
-      'target': ['4.1=>4.2', '4.2=>4.1'],
-      '4.1': '/getting-started/use_cases/rootkits_detection.html',
-      '4.2': '/getting-started/use-cases/rootkits-detection.html',
-    },
-    {
-      'target': ['4.1=>4.2', '4.2=>4.1'],
-      '4.1': '/getting-started/use_cases/active_response.html',
-      '4.2': '/getting-started/use-cases/active-response.html',
-    },
-    {
-      'target': ['4.1=>4.2', '4.2=>4.1'],
-      '4.1': '/getting-started/use_cases/containers_security.html',
-      '4.2': '/getting-started/use-cases/containers-security.html',
-    },
-    {
-      'target': ['4.1=>4.2', '4.2=>4.1'],
-      '4.1': '/getting-started/use_cases/file_integrity.html',
-      '4.2': '/getting-started/use-cases/file-integrity.html',
-    },
-    {
-      'target': ['4.1=>4.2', '4.2=>4.1'],
-      '4.1': '/getting-started/use_cases/log_analysis.html',
-      '4.2': '/getting-started/use-cases/log-analysis.html',
-    },
-    {
-      'target': ['4.1=>4.2', '4.2=>4.1'],
-      '4.1': '/getting-started/use_cases/regulatory_compliance.html',
-      '4.2': '/getting-started/use-cases/regulatory-compliance.html',
-    },
-    {
-      'target': ['4.1=>4.2', '4.2=>4.1'],
-      '4.1': '/getting-started/use_cases/system_inventory.html',
-      '4.2': '/getting-started/use-cases/system-inventory.html',
-    },
-    {
-      'target': ['4.1=>4.2', '4.2=>4.1'],
-      '4.1': '/getting-started/use_cases/vulnerability_detection.html',
-      '4.2': '/getting-started/use-cases/vulnerability-detection.html',
-    },
-    {
-      'target': ['4.1=>4.2', '4.2=>4.1'],
-      '4.1': '/installation-guide/more-installation-alternatives/elastic-stack/all-in-one-deployment/all_in_one.html',
-      '4.2': '/installation-guide/more-installation-alternatives/elastic-stack/all-in-one-deployment/all-in-one.html',
-    },
-    {
-      'target': ['4.1=>4.2', '4.2=>4.1'],
-      '4.1': '/installation-guide/more-installation-alternatives/elastic-stack/distributed-deployment/step-by-step-installation/wazuh-cluster/wazuh_single_node_cluster.html',
-      '4.2': '/installation-guide/more-installation-alternatives/elastic-stack/distributed-deployment/step-by-step-installation/wazuh-cluster/wazuh-single-node-cluster.html',
-    },
-    {
-      'target': ['4.1=>4.2', '4.2=>4.1'],
-      '4.1': '/installation-guide/more-installation-alternatives/elastic-stack/distributed-deployment/step-by-step-installation/wazuh-cluster/wazuh_multi_node_cluster.html',
-      '4.2': '/installation-guide/more-installation-alternatives/elastic-stack/distributed-deployment/step-by-step-installation/wazuh-cluster/wazuh-multi-node-cluster.html',
-    },
-    {
-      'target': ['4.1=>4.2', '4.2=>4.1'],
-      '4.1': '/installation-guide/open-distro/distributed-deployment/step-by-step-installation/wazuh-cluster/wazuh_single_node_cluster.html',
-      '4.2': '/installation-guide/open-distro/distributed-deployment/step-by-step-installation/wazuh-cluster/wazuh-single-node-cluster.html',
-    },
-    {
-      'target': ['4.1=>4.2', '4.2=>4.1'],
-      '4.1': '/installation-guide/open-distro/distributed-deployment/step-by-step-installation/wazuh-cluster/wazuh_multi_node_cluster.html',
-      '4.2': '/installation-guide/open-distro/distributed-deployment/step-by-step-installation/wazuh-cluster/wazuh-multi-node-cluster.html',
-    },
-    {
-      'target': ['4.1=>4.2', '4.2=>4.1'],
-      '4.1': '/installation-guide/open-distro/all-in-one-deployment/all_in_one.html',
-      '4.2': '/installation-guide/open-distro/all-in-one-deployment/all-in-one.html',
-    },
-    {
-      'target': ['4.1=>4.2', '4.2=>4.1'],
-      '4.1': '/installation-guide/wazuh-agent/wazuh_agent_package_aix.html',
-      '4.2': '/installation-guide/wazuh-agent/wazuh-agent-package-aix.html',
-    },
-    {
-      'target': ['4.1=>4.2', '4.2=>4.1'],
-      '4.1': '/installation-guide/wazuh-agent/wazuh_agent_package_macos.html',
-      '4.2': '/installation-guide/wazuh-agent/wazuh-agent-package-macos.html',
-    },
-    {
-      'target': ['4.1=>4.2', '4.2=>4.1'],
-      '4.1': '/installation-guide/wazuh-agent/wazuh_agent_package_linux.html',
-      '4.2': '/installation-guide/wazuh-agent/wazuh-agent-package-linux.html',
-    },
-    {
-      'target': ['4.1=>4.2', '4.2=>4.1'],
-      '4.1': '/installation-guide/wazuh-agent/wazuh_agent_package_windows.html',
-      '4.2': '/installation-guide/wazuh-agent/wazuh-agent-package-windows.html',
-    },
-    {
-      'target': ['4.1=>4.2', '4.2=>4.1'],
-      '4.1': '/installation-guide/wazuh-agent/wazuh_agent_package_hpux.html',
-      '4.2': '/installation-guide/wazuh-agent/wazuh-agent-package-hpux.html',
-    },
-    {
-      'target': ['4.1=>4.2', '4.2=>4.1'],
-      '4.1': '/installation-guide/wazuh-agent/wazuh_agent_package_solaris.html',
-      '4.2': '/installation-guide/wazuh-agent/wazuh-agent-package-solaris.html',
-    },
-    {
-      'target': ['4.1=>4.2', '4.2=>4.1'],
-      '4.1': '/installation-guide/wazuh-agent/deployment_variables/deployment_variables_linux.html',
-      '4.2': '/installation-guide/wazuh-agent/deployment-variables/deployment-variables-linux.html',
-    },
-    {
-      'target': ['4.1=>4.2', '4.2=>4.1'],
-      '4.1': '/installation-guide/wazuh-agent/deployment_variables/deployment_variables_windows.html',
-      '4.2': '/installation-guide/wazuh-agent/deployment-variables/deployment-variables-windows.html',
-    },
-    {
-      'target': ['4.1=>4.2', '4.2=>4.1'],
-      '4.1': '/installation-guide/wazuh-agent/deployment_variables/deployment_variables_macos.html',
-      '4.2': '/installation-guide/wazuh-agent/deployment-variables/deployment-variables-macos.html',
-    },
-    {
-      'target': ['4.1=>4.2', '4.2=>4.1'],
-      '4.1': '/installation-guide/wazuh-agent/deployment_variables/deployment_variables_aix.html',
-      '4.2': '/installation-guide/wazuh-agent/deployment-variables/deployment-variables-aix.html',
-    },
-    {
-      'target': ['4.1=>4.2', '4.2=>4.1'],
-      '4.1': '/installation-guide/wazuh-agent/deployment_variables/deployment_variables.html',
-      '4.2': '/installation-guide/wazuh-agent/deployment-variables/deployment-variables.html',
-    },
-    {
-      'target': ['4.1=>4.2', '4.2=>4.1'],
-      '4.1': '/getting-started/components/elastic_stack.html',
-      '4.2': '/getting-started/components/elastic-stack.html',
-    },
-    {
-      'target': ['4.1=>4.2', '4.2=>4.1'],
-      '4.1': '/getting-started/components/wazuh_agent.html',
-      '4.2': '/getting-started/components/wazuh-agent.html',
-    },
-    {
-      'target': ['4.1=>4.2', '4.2=>4.1'],
-      '4.1': '/getting-started/components/wazuh_server.html',
-      '4.2': '/getting-started/components/wazuh-server.html',
-    },
-    {
-      'target': ['4.1=>4.2', '4.2=>4.1'],
-      '4.1': '/release-notes/release_2_1.html',
-      '4.2': '/release-notes/release-2-1.html',
-    },
-    {
-      'target': ['4.1=>4.2', '4.2=>4.1'],
-      '4.1': '/release-notes/release_3_0_0.html',
-      '4.2': '/release-notes/release-3-0-0.html',
-    },
-    {
-      'target': ['4.1=>4.2', '4.2=>4.1'],
-      '4.1': '/release-notes/release_3_1_0.html',
-      '4.2': '/release-notes/release-3-1-0.html',
-    },
-    {
-      'target': ['4.1=>4.2', '4.2=>4.1'],
-      '4.1': '/release-notes/release_3_2_0.html',
-      '4.2': '/release-notes/release-3-2-0.html',
-    },
-    {
-      'target': ['4.1=>4.2', '4.2=>4.1'],
-      '4.1': '/release-notes/release_3_2_1.html',
-      '4.2': '/release-notes/release-3-2-1.html',
-    },
-    {
-      'target': ['4.1=>4.2', '4.2=>4.1'],
-      '4.1': '/release-notes/release_3_2_2.html',
-      '4.2': '/release-notes/release-3-2-2.html',
-    },
-    {
-      'target': ['4.1=>4.2', '4.2=>4.1'],
-      '4.1': '/release-notes/release_3_2_3.html',
-      '4.2': '/release-notes/release-3-2-3.html',
-    },
-    {
-      'target': ['4.1=>4.2', '4.2=>4.1'],
-      '4.1': '/release-notes/release_3_2_4.html',
-      '4.2': '/release-notes/release-3-2-4.html',
-    },
-    {
-      'target': ['4.1=>4.2', '4.2=>4.1'],
-      '4.1': '/release-notes/release_3_3_0.html',
-      '4.2': '/release-notes/release-3-3-0.html',
-    },
-    {
-      'target': ['4.1=>4.2', '4.2=>4.1'],
-      '4.1': '/release-notes/release_3_3_1.html',
-      '4.2': '/release-notes/release-3-3-1.html',
-    },
-    {
-      'target': ['4.1=>4.2', '4.2=>4.1'],
-      '4.1': '/release-notes/release_3_4_0.html',
-      '4.2': '/release-notes/release-3-4-0.html',
-    },
-    {
-      'target': ['4.1=>4.2', '4.2=>4.1'],
-      '4.1': '/release-notes/release_3_5_0.html',
-      '4.2': '/release-notes/release-3-5-0.html',
-    },
-    {
-      'target': ['4.1=>4.2', '4.2=>4.1'],
-      '4.1': '/release-notes/release_3_6_0.html',
-      '4.2': '/release-notes/release-3-6-0.html',
-    },
-    {
-      'target': ['4.1=>4.2', '4.2=>4.1'],
-      '4.1': '/release-notes/release_3_6_1.html',
-      '4.2': '/release-notes/release-3-6-1.html',
-    },
-    {
-      'target': ['4.1=>4.2', '4.2=>4.1'],
-      '4.1': '/release-notes/release_3_7_0.html',
-      '4.2': '/release-notes/release-3-7-0.html',
-    },
-    {
-      'target': ['4.1=>4.2', '4.2=>4.1'],
-      '4.1': '/release-notes/release_3_7_1.html',
-      '4.2': '/release-notes/release-3-7-1.html',
-    },
-    {
-      'target': ['4.1=>4.2', '4.2=>4.1'],
-      '4.1': '/release-notes/release_3_7_2.html',
-      '4.2': '/release-notes/release-3-7-2.html',
-    },
-    {
-      'target': ['4.1=>4.2', '4.2=>4.1'],
-      '4.1': '/release-notes/release_3_8_0.html',
-      '4.2': '/release-notes/release-3-8-0.html',
-    },
-    {
-      'target': ['4.1=>4.2', '4.2=>4.1'],
-      '4.1': '/release-notes/release_3_8_1.html',
-      '4.2': '/release-notes/release-3-8-1.html',
-    },
-    {
-      'target': ['4.1=>4.2', '4.2=>4.1'],
-      '4.1': '/release-notes/release_3_8_2.html',
-      '4.2': '/release-notes/release-3-8-2.html',
-    },
-    {
-      'target': ['4.1=>4.2', '4.2=>4.1'],
-      '4.1': '/release-notes/release_3_9_0.html',
-      '4.2': '/release-notes/release-3-9-0.html',
-    },
-    {
-      'target': ['4.1=>4.2', '4.2=>4.1'],
-      '4.1': '/release-notes/release_3_9_1.html',
-      '4.2': '/release-notes/release-3-9-1.html',
-    },
-    {
-      'target': ['4.1=>4.2', '4.2=>4.1'],
-      '4.1': '/release-notes/release_3_9_2.html',
-      '4.2': '/release-notes/release-3-9-2.html',
-    },
-    {
-      'target': ['4.1=>4.2', '4.2=>4.1'],
-      '4.1': '/release-notes/release_3_9_3.html',
-      '4.2': '/release-notes/release-3-9-3.html',
-    },
-    {
-      'target': ['4.1=>4.2', '4.2=>4.1'],
-      '4.1': '/release-notes/release_3_9_4.html',
-      '4.2': '/release-notes/release-3-9-4.html',
-    },
-    {
-      'target': ['4.1=>4.2', '4.2=>4.1'],
-      '4.1': '/release-notes/release_3_9_5.html',
-      '4.2': '/release-notes/release-3-9-5.html',
-    },
-    {
-      'target': ['4.1=>4.2', '4.2=>4.1'],
-      '4.1': '/release-notes/release_3_10_0.html',
-      '4.2': '/release-notes/release-3-10-0.html',
-    },
-    {
-      'target': ['4.1=>4.2', '4.2=>4.1'],
-      '4.1': '/release-notes/release_3_10_1.html',
-      '4.2': '/release-notes/release-3-10-1.html',
-    },
-    {
-      'target': ['4.1=>4.2', '4.2=>4.1'],
-      '4.1': '/release-notes/release_3_10_2.html',
-      '4.2': '/release-notes/release-3-10-2.html',
-    },
-    {
-      'target': ['4.1=>4.2', '4.2=>4.1'],
-      '4.1': '/release-notes/release_3_11_0.html',
-      '4.2': '/release-notes/release-3-11-0.html',
-    },
-    {
-      'target': ['4.1=>4.2', '4.2=>4.1'],
-      '4.1': '/release-notes/release_3_11_1.html',
-      '4.2': '/release-notes/release-3-11-1.html',
-    },
-    {
-      'target': ['4.1=>4.2', '4.2=>4.1'],
-      '4.1': '/release-notes/release_3_11_2.html',
-      '4.2': '/release-notes/release-3-11-2.html',
-    },
-    {
-      'target': ['4.1=>4.2', '4.2=>4.1'],
-      '4.1': '/release-notes/release_3_11_3.html',
-      '4.2': '/release-notes/release-3-11-3.html',
-    },
-    {
-      'target': ['4.1=>4.2', '4.2=>4.1'],
-      '4.1': '/release-notes/release_3_11_4.html',
-      '4.2': '/release-notes/release-3-11-4.html',
-    },
-    {
-      'target': ['4.1=>4.2', '4.2=>4.1'],
-      '4.1': '/release-notes/release_3_12_0.html',
-      '4.2': '/release-notes/release-3-12-0.html',
-    },
-    {
-      'target': ['4.1=>4.2', '4.2=>4.1'],
-      '4.1': '/release-notes/release_3_12_1.html',
-      '4.2': '/release-notes/release-3-12-1.html',
-    },
-    {
-      'target': ['4.1=>4.2', '4.2=>4.1'],
-      '4.1': '/release-notes/release_3_12_2.html',
-      '4.2': '/release-notes/release-3-12-2.html',
-    },
-    {
-      'target': ['4.1=>4.2', '4.2=>4.1'],
-      '4.1': '/release-notes/release_3_12_3.html',
-      '4.2': '/release-notes/release-3-12-3.html',
-    },
-    {
-      'target': ['4.1=>4.2', '4.2=>4.1'],
-      '4.1': '/release-notes/release_3_13_0.html',
-      '4.2': '/release-notes/release-3-13-0.html',
-    },
-    {
-      'target': ['4.1=>4.2', '4.2=>4.1'],
-      '4.1': '/release-notes/release_3_13_1.html',
-      '4.2': '/release-notes/release-3-13-1.html',
-    },
-    {
-      'target': ['4.1=>4.2', '4.2=>4.1'],
-      '4.1': '/release-notes/release_3_13_2.html',
-      '4.2': '/release-notes/release-3-13-2.html',
-    },
-    {
-      'target': ['4.1=>4.2', '4.2=>4.1'],
-      '4.1': '/release-notes/release_3_13_3.html',
-      '4.2': '/release-notes/release-3-13-3.html',
-    },
-    {
-      'target': ['4.1=>4.2', '4.2=>4.1'],
-      '4.1': '/release-notes/release_4_0_0.html',
-      '4.2': '/release-notes/release-4-0-0.html',
-    },
-    {
-      'target': ['4.1=>4.2', '4.2=>4.1'],
-      '4.1': '/release-notes/release_4_0_1.html',
-      '4.2': '/release-notes/release-4-0-1.html',
-    },
-    {
-      'target': ['4.1=>4.2', '4.2=>4.1'],
-      '4.1': '/release-notes/release_4_0_2.html',
-      '4.2': '/release-notes/release-4-0-2.html',
-    },
-    {
-      'target': ['4.1=>4.2', '4.2=>4.1'],
-      '4.1': '/release-notes/release_4_0_3.html',
-      '4.2': '/release-notes/release-4-0-3.html',
-    },
-    {
-      'target': ['4.1=>4.2', '4.2=>4.1'],
-      '4.1': '/release-notes/release_4_0_4.html',
-      '4.2': '/release-notes/release-4-0-4.html',
-    },
-    {
-      'target': ['4.1=>4.2', '4.2=>4.1'],
-      '4.1': '/release-notes/release_4_1_0.html',
-      '4.2': '/release-notes/release-4-1-0.html',
-    },
-    {
-      'target': ['4.1=>4.2', '4.2=>4.1'],
-      '4.1': '/release-notes/release_4_1_1.html',
-      '4.2': '/release-notes/release-4-1-1.html',
-    },
-    {
-      'target': ['4.1=>4.2', '4.2=>4.1'],
-      '4.1': '/release-notes/release_4_1_2.html',
-      '4.2': '/release-notes/release-4-1-2.html',
-    },
-    {
-      'target': ['4.1=>4.2', '4.2=>4.1'],
-      '4.1': '/release-notes/release_4_1_3.html',
-      '4.2': '/release-notes/release-4-1-3.html',
-    },
-    {
-      'target': ['4.1=>4.2', '4.2=>4.1'],
-      '4.1': '/release-notes/release_4_1_4.html',
-      '4.2': '/release-notes/release-4-1-4.html',
-    },
-    {
-      'target': ['4.1=>4.2', '4.2=>4.1'],
-      '4.1': '/release-notes/release_4_1_5.html',
-      '4.2': '/release-notes/release-4-1-5.html',
-    },
-    {
-      'target': ['4.1=>4.2', '4.2=>4.1'],
-      '4.1': '/user-manual/api/securing_api.html',
-      '4.2': '/user-manual/api/securing-api.html',
-    },
-    {
-      'target': ['4.1=>4.2', '4.2=>4.1'],
-      '4.1': '/user-manual/configuring-cluster/cluster_management.html',
-      '4.2': '/user-manual/configuring-cluster/cluster-management.html',
-    },
-    {
-      'target': ['4.1=>4.2', '4.2=>4.1'],
-      '4.1': '/user-manual/manager/manual-email-report/smtp_authentication.html',
-      '4.2': '/user-manual/manager/manual-email-report/smtp-authentication.html',
-    },
-    {
-      'target': ['4.1=>4.2', '4.2=>4.1'],
-      '4.1': '/user-manual/capabilities/sec-config-assessment/creating_custom_policies.html',
-      '4.2': '/user-manual/capabilities/sec-config-assessment/creating-custom-policies.html',
-    },
-    {
-      'target': ['4.1=>4.2', '4.2=>4.1'],
-      '4.1': '/user-manual/capabilities/sec-config-assessment/how_to_configure.html',
-      '4.2': '/user-manual/capabilities/sec-config-assessment/how-to-configure.html',
-    },
-    {
-      'target': ['4.1=>4.2', '4.2=>4.1'],
-      '4.1': '/user-manual/capabilities/sec-config-assessment/use_case.html',
-      '4.2': '/user-manual/capabilities/sec-config-assessment/use-case.html',
-    },
-    {
-      'target': ['4.1=>4.2', '4.2=>4.1'],
-      '4.1': '/user-manual/capabilities/sec-config-assessment/how_it_works.html',
-      '4.2': '/user-manual/capabilities/sec-config-assessment/how-it-works.html',
-    },
-    {
-      'target': ['4.1=>4.2', '4.2=>4.1'],
-      '4.1': '/user-manual/capabilities/sec-config-assessment/what_is_it.html',
-      '4.2': '/user-manual/capabilities/sec-config-assessment/what-is-it.html',
-    },
-    {
-      'target': ['4.1=>4.2', '4.2=>4.1'],
-      '4.1': '/user-manual/capabilities/vulnerability-detection/running_vu_scan.html',
-      '4.2': '/user-manual/capabilities/vulnerability-detection/running-vu-scan.html',
-    },
-    {
-      'target': ['4.1=>4.2', '4.2=>4.1'],
-      '4.1': '/user-manual/capabilities/vulnerability-detection/offline_update.html',
-      '4.2': '/user-manual/capabilities/vulnerability-detection/offline-update.html',
-    },
-    {
-      'target': ['4.1=>4.2', '4.2=>4.1'],
-      '4.1': '/user-manual/capabilities/vulnerability-detection/allow_os.html',
-      '4.2': '/user-manual/capabilities/vulnerability-detection/allow-os.html',
-    },
-    {
-      'target': ['4.1=>4.2', '4.2=>4.1'],
-      '4.1': '/user-manual/capabilities/vulnerability-detection/compatibility_matrix.html',
-      '4.2': '/user-manual/capabilities/vulnerability-detection/compatibility-matrix.html',
-    },
-    {
-      'target': ['4.1=>4.2', '4.2=>4.1'],
-      '4.1': '/user-manual/capabilities/vulnerability-detection/cpe_helper.html',
-      '4.2': '/user-manual/capabilities/vulnerability-detection/cpe-helper.html',
-    },
-    {
-      'target': ['4.1=>4.2', '4.2=>4.1'],
-      '4.1': '/user-manual/capabilities/vulnerability-detection/how_it_works.html',
-      '4.2': '/user-manual/capabilities/vulnerability-detection/how-it-works.html',
-    },
-    {
-      'target': ['4.1=>4.2', '4.2=>4.1'],
-      '4.1': '/user-manual/reference/ossec-conf/rule_test.html',
-      '4.2': '/user-manual/reference/ossec-conf/rule-test.html',
-    },
-    {
-      'target': ['4.1=>4.2', '4.2=>4.1'],
-      '4.1': '/user-manual/reference/ossec-conf/client_buffer.html',
-      '4.2': '/user-manual/reference/ossec-conf/client-buffer.html',
-    },
-    {
-      'target': ['4.1=>4.2', '4.2=>4.1'],
-      '4.1': '/user-manual/reference/ossec-conf/email_alerts.html',
-      '4.2': '/user-manual/reference/ossec-conf/email-alerts.html',
-    },
-    {
-      'target': ['4.1=>4.2', '4.2=>4.1'],
-      '4.1': '/user-manual/reference/tools/agent_upgrade.html',
-      '4.2': '/user-manual/reference/tools/agent-upgrade.html',
-    },
-    {
-      'target': ['4.1=>4.2', '4.2=>4.1'],
-      '4.1': '/user-manual/reference/tools/fim_migrate.html',
-      '4.2': '/user-manual/reference/tools/fim-migrate.html',
-    },
-    {
-      'target': ['4.1=>4.2', '4.2=>4.1'],
-      '4.1': '/user-manual/reference/tools/cluster_control.html',
-      '4.2': '/user-manual/reference/tools/cluster-control.html',
-    },
-    {
-      'target': ['4.1=>4.2', '4.2=>4.1'],
-      '4.1': '/user-manual/reference/tools/manage_agents.html',
-      '4.2': '/user-manual/reference/tools/manage-agents.html',
-    },
-    {
-      'target': ['4.1=>4.2', '4.2=>4.1'],
-      '4.1': '/user-manual/reference/tools/agent_control.html',
-      '4.2': '/user-manual/reference/tools/agent-control.html',
-    },
-    {
-      'target': ['4.1=>4.2', '4.2=>4.1'],
-      '4.1': '/user-manual/reference/tools/agent_groups.html',
-      '4.2': '/user-manual/reference/tools/agent-groups.html',
-    },
-    {
-      'target': ['4.1=>4.2', '4.2=>4.1'],
-      '4.1': '/user-manual/reference/tools/clear_stats.html',
-      '4.2': '/user-manual/reference/tools/clear-stats.html',
-    },
-    {
-      'target': ['4.1=>4.2', '4.2=>4.1'],
-      '4.1': '/user-manual/reference/tools/update_ruleset.html',
-      '4.2': '/user-manual/reference/tools/update-ruleset.html',
-    },
-    {
-      'target': ['4.1=>4.2', '4.2=>4.1'],
-      '4.1': '/user-manual/elasticsearch/elastic_tuning.html',
-      '4.2': '/user-manual/elasticsearch/elastic-tuning.html',
-    },
-    {
-      'target': ['4.1=>4.2', '4.2=>4.1'],
-      '4.1': '/user-manual/api/rbac/auth_context.html',
-      '4.2': '/user-manual/api/rbac/auth-context.html',
-    },
-    {
-      'target': ['4.1=>4.2', '4.2=>4.1'],
-      '4.1': '/docker-monitor/monitoring_containers_activity.html',
-      '4.2': '/docker-monitor/monitoring-containers-activity.html',
-    },
-    {
-      'target': ['4.1=>4.2', '4.2=>4.1'],
-      '4.1': '/docker-monitor/monitoring_docker_server.html',
-      '4.2': '/docker-monitor/monitoring-docker-server.html',
-    },
-    {
-      'target': ['4.1=>4.2', '4.2=>4.1'],
-      '4.1': '/upgrade-guide/compatibility_matrix/index.html',
-      '4.2': '/upgrade-guide/compatibility-matrix/index.html',
-    },
-    {
-      'target': ['4.1=>4.2', '4.2=>4.1'],
-      '4.1': '/upgrade-guide/legacy/upgrading-wazuh-server/restore_alerts-from-2.x-to-3.x.html',
-      '4.2': '/upgrade-guide/legacy/upgrading-wazuh-server/restore-alerts-from-2.x-to-3.x.html',
-    },
+  },
+  {
+    'target': ['4.2=>4.1'],
+    '4.2': '/getting-started/components/kibana.html',
+    '4.1': '/getting-started/components/elastic-stack.html',
+  },
+  {
+    'target': ['4.1=>4.2', '4.2=>4.1'],
+    '4.1': '/user-manual/registering/index.html',
+    '4.2': '/user-manual/agent-enrollment/index.html',
+  },
+  {
+    'target': ['4.1=>4.2', '4.2=>4.1'],
+    '4.1': '/user-manual/registering/command-line-registration.html',
+    '4.2': '/user-manual/agent-enrollment/index.html',
+  },
+  {
+    'target': ['4.1=>4.2', '4.2=>4.1'],
+    '4.1': '/user-manual/registering/restful-api-registration.html',
+    '4.2': '/user-manual/agent-enrollment/via-manager-API/index.html',
+  },
+  {
+    'target': ['4.1=>4.2', '4.2=>4.1'],
+    '4.1': '/user-manual/registering/password-authorization-registration.html',
+    '4.2': '/user-manual/agent-enrollment/security-options/using-password-authentication.html',
+  },
+  {
+    'target': ['4.1=>4.2', '4.2=>4.1'],
+    '4.1': '/user-manual/registering/host-verification-registration.html',
+    '4.2': '/user-manual/agent-enrollment/security-options/index.html',
+  },
+  {
+    'target': ['4.1=>4.2', '4.2=>4.1'],
+    '4.1': '/user-manual/registering/registering-agents-theory.html',
+    '4.2': '/user-manual/agent-enrollment/index.html',
+  },
+  {
+    'target': ['4.1=>4.2', '4.2=>4.1'],
+    '4.1': '/user-manual/registering/registering-agents-troubleshooting.html',
+    '4.2': '/user-manual/agent-enrollment/troubleshooting.html',
+  },
+  {
+    'target': ['4.1=>4.2', '4.2=>4.1'],
+    '4.1': '/deploying-with-ansible/roles/wazuh-elasticsearch.html',
+    '4.2': '/deploying-with-ansible/roles/wazuh-opendistro.html',
+  },
+  {
+    'target': ['4.1=>4.2', '4.2=>4.1'],
+    '4.1': '/deploying-with-ansible/guide/install-elk-server.html',
+    '4.2': '/deploying-with-ansible/guide/install-opendistro-server.html',
+  },
+  {
+    'target': ['4.1=>4.2', '4.2=>4.1'],
+    '4.1': '/user-manual/reference/daemons/ossec-agentd.html',
+    '4.2': '/user-manual/reference/daemons/wazuh-agentd.html',
+  },
+  {
+    'target': ['4.1=>4.2', '4.2=>4.1'],
+    '4.1': '/user-manual/reference/daemons/ossec-agentlessd.html',
+    '4.2': '/user-manual/reference/daemons/wazuh-agentlessd.html',
+  },
+  {
+    'target': ['4.1=>4.2', '4.2=>4.1'],
+    '4.1': '/user-manual/reference/daemons/ossec-analysisd.html',
+    '4.2': '/user-manual/reference/daemons/wazuh-analysisd.html',
+  },
+  {
+    'target': ['4.1=>4.2', '4.2=>4.1'],
+    '4.1': '/user-manual/reference/daemons/ossec-authd.html',
+    '4.2': '/user-manual/reference/daemons/wazuh-authd.html',
+  },
+  {
+    'target': ['4.1=>4.2', '4.2=>4.1'],
+    '4.1': '/user-manual/reference/daemons/ossec-csyslogd.html',
+    '4.2': '/user-manual/reference/daemons/wazuh-csyslogd.html',
+  },
+  {
+    'target': ['4.1=>4.2', '4.2=>4.1'],
+    '4.1': '/user-manual/reference/daemons/ossec-dbd.html',
+    '4.2': '/user-manual/reference/daemons/wazuh-dbd.html',
+  },
+  {
+    'target': ['4.1=>4.2', '4.2=>4.1'],
+    '4.1': '/user-manual/reference/daemons/ossec-execd.html',
+    '4.2': '/user-manual/reference/daemons/wazuh-execd.html',
+  },
+  {
+    'target': ['4.1=>4.2', '4.2=>4.1'],
+    '4.1': '/user-manual/reference/daemons/ossec-integratord.html',
+    '4.2': '/user-manual/reference/daemons/wazuh-integratord.html',
+  },
+  {
+    'target': ['4.1=>4.2', '4.2=>4.1'],
+    '4.1': '/user-manual/reference/daemons/ossec-logcollector.html',
+    '4.2': '/user-manual/reference/daemons/wazuh-logcollector.html',
+  },
+  {
+    'target': ['4.1=>4.2', '4.2=>4.1'],
+    '4.1': '/user-manual/reference/daemons/ossec-maild.html',
+    '4.2': '/user-manual/reference/daemons/wazuh-maild.html',
+  },
+  {
+    'target': ['4.1=>4.2', '4.2=>4.1'],
+    '4.1': '/user-manual/reference/daemons/ossec-monitord.html',
+    '4.2': '/user-manual/reference/daemons/wazuh-monitord.html',
+  },
+  {
+    'target': ['4.1=>4.2', '4.2=>4.1'],
+    '4.1': '/user-manual/reference/daemons/ossec-remoted.html',
+    '4.2': '/user-manual/reference/daemons/wazuh-remoted.html',
+  },
+  {
+    'target': ['4.1=>4.2', '4.2=>4.1'],
+    '4.1': '/user-manual/reference/daemons/ossec-reportd.html',
+    '4.2': '/user-manual/reference/daemons/wazuh-reportd.html',
+  },
+  {
+    'target': ['4.1=>4.2', '4.2=>4.1'],
+    '4.1': '/user-manual/reference/daemons/ossec-syscheckd.html',
+    '4.2': '/user-manual/reference/daemons/wazuh-syscheckd.html',
+  },
+  {
+    'target': ['4.1=>4.2', '4.2=>4.1'],
+    '4.1': '/user-manual/reference/statistics-files/ossec-agentd-state.html',
+    '4.2': '/user-manual/reference/statistics-files/wazuh-agentd-state.html',
+  },
+  {
+    'target': ['4.1=>4.2', '4.2=>4.1'],
+    '4.1': '/user-manual/reference/statistics-files/ossec-analysisd-state.html',
+    '4.2': '/user-manual/reference/statistics-files/wazuh-analysisd-state.html',
+  },
+  {
+    'target': ['4.1=>4.2', '4.2=>4.1'],
+    '4.1': '/user-manual/reference/statistics-files/ossec-remoted-state.html',
+    '4.2': '/user-manual/reference/statistics-files/wazuh-remoted-state.html',
+  },
+  {
+    'target': ['4.1=>4.2', '4.2=>4.1'],
+    '4.1': '/user-manual/reference/tools/ossec-control.html',
+    '4.2': '/user-manual/reference/tools/wazuh-control.html',
+  },
+  {
+    'target': ['4.1=>4.2', '4.2=>4.1'],
+    '4.1': '/user-manual/reference/tools/ossec-regex.html',
+    '4.2': '/user-manual/reference/tools/wazuh-regex.html',
+  },
+  {
+    'target': ['4.1=>4.2', '4.2=>4.1'],
+    '4.1': '/getting-started/use_cases/index.html',
+    '4.2': '/getting-started/use-cases/index.html',
+  },
+  {
+    'target': ['4.1=>4.2', '4.2=>4.1'],
+    '4.1': '/getting-started/use_cases/cloud_security.html',
+    '4.2': '/getting-started/use-cases/cloud-security.html',
+  },
+  {
+    'target': ['4.1=>4.2', '4.2=>4.1'],
+    '4.1': '/getting-started/use_cases/configuration_assessment.html',
+    '4.2': '/getting-started/use-cases/configuration-assessment.html',
+  },
+  {
+    'target': ['4.1=>4.2', '4.2=>4.1'],
+    '4.1': '/getting-started/use_cases/rootkits_detection.html',
+    '4.2': '/getting-started/use-cases/rootkits-detection.html',
+  },
+  {
+    'target': ['4.1=>4.2', '4.2=>4.1'],
+    '4.1': '/getting-started/use_cases/active_response.html',
+    '4.2': '/getting-started/use-cases/active-response.html',
+  },
+  {
+    'target': ['4.1=>4.2', '4.2=>4.1'],
+    '4.1': '/getting-started/use_cases/containers_security.html',
+    '4.2': '/getting-started/use-cases/containers-security.html',
+  },
+  {
+    'target': ['4.1=>4.2', '4.2=>4.1'],
+    '4.1': '/getting-started/use_cases/file_integrity.html',
+    '4.2': '/getting-started/use-cases/file-integrity.html',
+  },
+  {
+    'target': ['4.1=>4.2', '4.2=>4.1'],
+    '4.1': '/getting-started/use_cases/log_analysis.html',
+    '4.2': '/getting-started/use-cases/log-analysis.html',
+  },
+  {
+    'target': ['4.1=>4.2', '4.2=>4.1'],
+    '4.1': '/getting-started/use_cases/regulatory_compliance.html',
+    '4.2': '/getting-started/use-cases/regulatory-compliance.html',
+  },
+  {
+    'target': ['4.1=>4.2', '4.2=>4.1'],
+    '4.1': '/getting-started/use_cases/system_inventory.html',
+    '4.2': '/getting-started/use-cases/system-inventory.html',
+  },
+  {
+    'target': ['4.1=>4.2', '4.2=>4.1'],
+    '4.1': '/getting-started/use_cases/vulnerability_detection.html',
+    '4.2': '/getting-started/use-cases/vulnerability-detection.html',
+  },
+  {
+    'target': ['4.1=>4.2', '4.2=>4.1'],
+    '4.1': '/installation-guide/more-installation-alternatives/elastic-stack/all-in-one-deployment/all_in_one.html',
+    '4.2': '/installation-guide/more-installation-alternatives/elastic-stack/all-in-one-deployment/all-in-one.html',
+  },
+  {
+    'target': ['4.1=>4.2', '4.2=>4.1'],
+    '4.1': '/installation-guide/more-installation-alternatives/elastic-stack/distributed-deployment/step-by-step-installation/wazuh-cluster/wazuh_single_node_cluster.html',
+    '4.2': '/installation-guide/more-installation-alternatives/elastic-stack/distributed-deployment/step-by-step-installation/wazuh-cluster/wazuh-single-node-cluster.html',
+  },
+  {
+    'target': ['4.1=>4.2', '4.2=>4.1'],
+    '4.1': '/installation-guide/more-installation-alternatives/elastic-stack/distributed-deployment/step-by-step-installation/wazuh-cluster/wazuh_multi_node_cluster.html',
+    '4.2': '/installation-guide/more-installation-alternatives/elastic-stack/distributed-deployment/step-by-step-installation/wazuh-cluster/wazuh-multi-node-cluster.html',
+  },
+  {
+    'target': ['4.1=>4.2', '4.2=>4.1'],
+    '4.1': '/installation-guide/open-distro/distributed-deployment/step-by-step-installation/wazuh-cluster/wazuh_single_node_cluster.html',
+    '4.2': '/installation-guide/open-distro/distributed-deployment/step-by-step-installation/wazuh-cluster/wazuh-single-node-cluster.html',
+  },
+  {
+    'target': ['4.1=>4.2', '4.2=>4.1'],
+    '4.1': '/installation-guide/open-distro/distributed-deployment/step-by-step-installation/wazuh-cluster/wazuh_multi_node_cluster.html',
+    '4.2': '/installation-guide/open-distro/distributed-deployment/step-by-step-installation/wazuh-cluster/wazuh-multi-node-cluster.html',
+  },
+  {
+    'target': ['4.1=>4.2', '4.2=>4.1'],
+    '4.1': '/installation-guide/open-distro/all-in-one-deployment/all_in_one.html',
+    '4.2': '/installation-guide/open-distro/all-in-one-deployment/all-in-one.html',
+  },
+  {
+    'target': ['4.1=>4.2', '4.2=>4.1'],
+    '4.1': '/installation-guide/wazuh-agent/wazuh_agent_package_aix.html',
+    '4.2': '/installation-guide/wazuh-agent/wazuh-agent-package-aix.html',
+  },
+  {
+    'target': ['4.1=>4.2', '4.2=>4.1'],
+    '4.1': '/installation-guide/wazuh-agent/wazuh_agent_package_macos.html',
+    '4.2': '/installation-guide/wazuh-agent/wazuh-agent-package-macos.html',
+  },
+  {
+    'target': ['4.1=>4.2', '4.2=>4.1'],
+    '4.1': '/installation-guide/wazuh-agent/wazuh_agent_package_linux.html',
+    '4.2': '/installation-guide/wazuh-agent/wazuh-agent-package-linux.html',
+  },
+  {
+    'target': ['4.1=>4.2', '4.2=>4.1'],
+    '4.1': '/installation-guide/wazuh-agent/wazuh_agent_package_windows.html',
+    '4.2': '/installation-guide/wazuh-agent/wazuh-agent-package-windows.html',
+  },
+  {
+    'target': ['4.1=>4.2', '4.2=>4.1'],
+    '4.1': '/installation-guide/wazuh-agent/wazuh_agent_package_hpux.html',
+    '4.2': '/installation-guide/wazuh-agent/wazuh-agent-package-hpux.html',
+  },
+  {
+    'target': ['4.1=>4.2', '4.2=>4.1'],
+    '4.1': '/installation-guide/wazuh-agent/wazuh_agent_package_solaris.html',
+    '4.2': '/installation-guide/wazuh-agent/wazuh-agent-package-solaris.html',
+  },
+  {
+    'target': ['4.1=>4.2', '4.2=>4.1'],
+    '4.1': '/installation-guide/wazuh-agent/deployment_variables/deployment_variables_linux.html',
+    '4.2': '/installation-guide/wazuh-agent/deployment-variables/deployment-variables-linux.html',
+  },
+  {
+    'target': ['4.1=>4.2', '4.2=>4.1'],
+    '4.1': '/installation-guide/wazuh-agent/deployment_variables/deployment_variables_windows.html',
+    '4.2': '/installation-guide/wazuh-agent/deployment-variables/deployment-variables-windows.html',
+  },
+  {
+    'target': ['4.1=>4.2', '4.2=>4.1'],
+    '4.1': '/installation-guide/wazuh-agent/deployment_variables/deployment_variables_macos.html',
+    '4.2': '/installation-guide/wazuh-agent/deployment-variables/deployment-variables-macos.html',
+  },
+  {
+    'target': ['4.1=>4.2', '4.2=>4.1'],
+    '4.1': '/installation-guide/wazuh-agent/deployment_variables/deployment_variables_aix.html',
+    '4.2': '/installation-guide/wazuh-agent/deployment-variables/deployment-variables-aix.html',
+  },
+  {
+    'target': ['4.1=>4.2', '4.2=>4.1'],
+    '4.1': '/installation-guide/wazuh-agent/deployment_variables/deployment_variables.html',
+    '4.2': '/installation-guide/wazuh-agent/deployment-variables/deployment-variables.html',
+  },
+  {
+    'target': ['4.1=>4.2', '4.2=>4.1'],
+    '4.1': '/getting-started/components/elastic_stack.html',
+    '4.2': '/getting-started/components/elastic-stack.html',
+  },
+  {
+    'target': ['4.1=>4.2', '4.2=>4.1'],
+    '4.1': '/getting-started/components/wazuh_agent.html',
+    '4.2': '/getting-started/components/wazuh-agent.html',
+  },
+  {
+    'target': ['4.1=>4.2', '4.2=>4.1'],
+    '4.1': '/getting-started/components/wazuh_server.html',
+    '4.2': '/getting-started/components/wazuh-server.html',
+  },
+  {
+    'target': ['4.1=>4.2', '4.2=>4.1'],
+    '4.1': '/release-notes/release_2_1.html',
+    '4.2': '/release-notes/release-2-1.html',
+  },
+  {
+    'target': ['4.1=>4.2', '4.2=>4.1'],
+    '4.1': '/release-notes/release_3_0_0.html',
+    '4.2': '/release-notes/release-3-0-0.html',
+  },
+  {
+    'target': ['4.1=>4.2', '4.2=>4.1'],
+    '4.1': '/release-notes/release_3_1_0.html',
+    '4.2': '/release-notes/release-3-1-0.html',
+  },
+  {
+    'target': ['4.1=>4.2', '4.2=>4.1'],
+    '4.1': '/release-notes/release_3_2_0.html',
+    '4.2': '/release-notes/release-3-2-0.html',
+  },
+  {
+    'target': ['4.1=>4.2', '4.2=>4.1'],
+    '4.1': '/release-notes/release_3_2_1.html',
+    '4.2': '/release-notes/release-3-2-1.html',
+  },
+  {
+    'target': ['4.1=>4.2', '4.2=>4.1'],
+    '4.1': '/release-notes/release_3_2_2.html',
+    '4.2': '/release-notes/release-3-2-2.html',
+  },
+  {
+    'target': ['4.1=>4.2', '4.2=>4.1'],
+    '4.1': '/release-notes/release_3_2_3.html',
+    '4.2': '/release-notes/release-3-2-3.html',
+  },
+  {
+    'target': ['4.1=>4.2', '4.2=>4.1'],
+    '4.1': '/release-notes/release_3_2_4.html',
+    '4.2': '/release-notes/release-3-2-4.html',
+  },
+  {
+    'target': ['4.1=>4.2', '4.2=>4.1'],
+    '4.1': '/release-notes/release_3_3_0.html',
+    '4.2': '/release-notes/release-3-3-0.html',
+  },
+  {
+    'target': ['4.1=>4.2', '4.2=>4.1'],
+    '4.1': '/release-notes/release_3_3_1.html',
+    '4.2': '/release-notes/release-3-3-1.html',
+  },
+  {
+    'target': ['4.1=>4.2', '4.2=>4.1'],
+    '4.1': '/release-notes/release_3_4_0.html',
+    '4.2': '/release-notes/release-3-4-0.html',
+  },
+  {
+    'target': ['4.1=>4.2', '4.2=>4.1'],
+    '4.1': '/release-notes/release_3_5_0.html',
+    '4.2': '/release-notes/release-3-5-0.html',
+  },
+  {
+    'target': ['4.1=>4.2', '4.2=>4.1'],
+    '4.1': '/release-notes/release_3_6_0.html',
+    '4.2': '/release-notes/release-3-6-0.html',
+  },
+  {
+    'target': ['4.1=>4.2', '4.2=>4.1'],
+    '4.1': '/release-notes/release_3_6_1.html',
+    '4.2': '/release-notes/release-3-6-1.html',
+  },
+  {
+    'target': ['4.1=>4.2', '4.2=>4.1'],
+    '4.1': '/release-notes/release_3_7_0.html',
+    '4.2': '/release-notes/release-3-7-0.html',
+  },
+  {
+    'target': ['4.1=>4.2', '4.2=>4.1'],
+    '4.1': '/release-notes/release_3_7_1.html',
+    '4.2': '/release-notes/release-3-7-1.html',
+  },
+  {
+    'target': ['4.1=>4.2', '4.2=>4.1'],
+    '4.1': '/release-notes/release_3_7_2.html',
+    '4.2': '/release-notes/release-3-7-2.html',
+  },
+  {
+    'target': ['4.1=>4.2', '4.2=>4.1'],
+    '4.1': '/release-notes/release_3_8_0.html',
+    '4.2': '/release-notes/release-3-8-0.html',
+  },
+  {
+    'target': ['4.1=>4.2', '4.2=>4.1'],
+    '4.1': '/release-notes/release_3_8_1.html',
+    '4.2': '/release-notes/release-3-8-1.html',
+  },
+  {
+    'target': ['4.1=>4.2', '4.2=>4.1'],
+    '4.1': '/release-notes/release_3_8_2.html',
+    '4.2': '/release-notes/release-3-8-2.html',
+  },
+  {
+    'target': ['4.1=>4.2', '4.2=>4.1'],
+    '4.1': '/release-notes/release_3_9_0.html',
+    '4.2': '/release-notes/release-3-9-0.html',
+  },
+  {
+    'target': ['4.1=>4.2', '4.2=>4.1'],
+    '4.1': '/release-notes/release_3_9_1.html',
+    '4.2': '/release-notes/release-3-9-1.html',
+  },
+  {
+    'target': ['4.1=>4.2', '4.2=>4.1'],
+    '4.1': '/release-notes/release_3_9_2.html',
+    '4.2': '/release-notes/release-3-9-2.html',
+  },
+  {
+    'target': ['4.1=>4.2', '4.2=>4.1'],
+    '4.1': '/release-notes/release_3_9_3.html',
+    '4.2': '/release-notes/release-3-9-3.html',
+  },
+  {
+    'target': ['4.1=>4.2', '4.2=>4.1'],
+    '4.1': '/release-notes/release_3_9_4.html',
+    '4.2': '/release-notes/release-3-9-4.html',
+  },
+  {
+    'target': ['4.1=>4.2', '4.2=>4.1'],
+    '4.1': '/release-notes/release_3_9_5.html',
+    '4.2': '/release-notes/release-3-9-5.html',
+  },
+  {
+    'target': ['4.1=>4.2', '4.2=>4.1'],
+    '4.1': '/release-notes/release_3_10_0.html',
+    '4.2': '/release-notes/release-3-10-0.html',
+  },
+  {
+    'target': ['4.1=>4.2', '4.2=>4.1'],
+    '4.1': '/release-notes/release_3_10_1.html',
+    '4.2': '/release-notes/release-3-10-1.html',
+  },
+  {
+    'target': ['4.1=>4.2', '4.2=>4.1'],
+    '4.1': '/release-notes/release_3_10_2.html',
+    '4.2': '/release-notes/release-3-10-2.html',
+  },
+  {
+    'target': ['4.1=>4.2', '4.2=>4.1'],
+    '4.1': '/release-notes/release_3_11_0.html',
+    '4.2': '/release-notes/release-3-11-0.html',
+  },
+  {
+    'target': ['4.1=>4.2', '4.2=>4.1'],
+    '4.1': '/release-notes/release_3_11_1.html',
+    '4.2': '/release-notes/release-3-11-1.html',
+  },
+  {
+    'target': ['4.1=>4.2', '4.2=>4.1'],
+    '4.1': '/release-notes/release_3_11_2.html',
+    '4.2': '/release-notes/release-3-11-2.html',
+  },
+  {
+    'target': ['4.1=>4.2', '4.2=>4.1'],
+    '4.1': '/release-notes/release_3_11_3.html',
+    '4.2': '/release-notes/release-3-11-3.html',
+  },
+  {
+    'target': ['4.1=>4.2', '4.2=>4.1'],
+    '4.1': '/release-notes/release_3_11_4.html',
+    '4.2': '/release-notes/release-3-11-4.html',
+  },
+  {
+    'target': ['4.1=>4.2', '4.2=>4.1'],
+    '4.1': '/release-notes/release_3_12_0.html',
+    '4.2': '/release-notes/release-3-12-0.html',
+  },
+  {
+    'target': ['4.1=>4.2', '4.2=>4.1'],
+    '4.1': '/release-notes/release_3_12_1.html',
+    '4.2': '/release-notes/release-3-12-1.html',
+  },
+  {
+    'target': ['4.1=>4.2', '4.2=>4.1'],
+    '4.1': '/release-notes/release_3_12_2.html',
+    '4.2': '/release-notes/release-3-12-2.html',
+  },
+  {
+    'target': ['4.1=>4.2', '4.2=>4.1'],
+    '4.1': '/release-notes/release_3_12_3.html',
+    '4.2': '/release-notes/release-3-12-3.html',
+  },
+  {
+    'target': ['4.1=>4.2', '4.2=>4.1'],
+    '4.1': '/release-notes/release_3_13_0.html',
+    '4.2': '/release-notes/release-3-13-0.html',
+  },
+  {
+    'target': ['4.1=>4.2', '4.2=>4.1'],
+    '4.1': '/release-notes/release_3_13_1.html',
+    '4.2': '/release-notes/release-3-13-1.html',
+  },
+  {
+    'target': ['4.1=>4.2', '4.2=>4.1'],
+    '4.1': '/release-notes/release_3_13_2.html',
+    '4.2': '/release-notes/release-3-13-2.html',
+  },
+  {
+    'target': ['4.1=>4.2', '4.2=>4.1'],
+    '4.1': '/release-notes/release_3_13_3.html',
+    '4.2': '/release-notes/release-3-13-3.html',
+  },
+  {
+    'target': ['4.1=>4.2', '4.2=>4.1'],
+    '4.1': '/release-notes/release_4_0_0.html',
+    '4.2': '/release-notes/release-4-0-0.html',
+  },
+  {
+    'target': ['4.1=>4.2', '4.2=>4.1'],
+    '4.1': '/release-notes/release_4_0_1.html',
+    '4.2': '/release-notes/release-4-0-1.html',
+  },
+  {
+    'target': ['4.1=>4.2', '4.2=>4.1'],
+    '4.1': '/release-notes/release_4_0_2.html',
+    '4.2': '/release-notes/release-4-0-2.html',
+  },
+  {
+    'target': ['4.1=>4.2', '4.2=>4.1'],
+    '4.1': '/release-notes/release_4_0_3.html',
+    '4.2': '/release-notes/release-4-0-3.html',
+  },
+  {
+    'target': ['4.1=>4.2', '4.2=>4.1'],
+    '4.1': '/release-notes/release_4_0_4.html',
+    '4.2': '/release-notes/release-4-0-4.html',
+  },
+  {
+    'target': ['4.1=>4.2', '4.2=>4.1'],
+    '4.1': '/release-notes/release_4_1_0.html',
+    '4.2': '/release-notes/release-4-1-0.html',
+  },
+  {
+    'target': ['4.1=>4.2', '4.2=>4.1'],
+    '4.1': '/release-notes/release_4_1_1.html',
+    '4.2': '/release-notes/release-4-1-1.html',
+  },
+  {
+    'target': ['4.1=>4.2', '4.2=>4.1'],
+    '4.1': '/release-notes/release_4_1_2.html',
+    '4.2': '/release-notes/release-4-1-2.html',
+  },
+  {
+    'target': ['4.1=>4.2', '4.2=>4.1'],
+    '4.1': '/release-notes/release_4_1_3.html',
+    '4.2': '/release-notes/release-4-1-3.html',
+  },
+  {
+    'target': ['4.1=>4.2', '4.2=>4.1'],
+    '4.1': '/release-notes/release_4_1_4.html',
+    '4.2': '/release-notes/release-4-1-4.html',
+  },
+  {
+    'target': ['4.1=>4.2', '4.2=>4.1'],
+    '4.1': '/release-notes/release_4_1_5.html',
+    '4.2': '/release-notes/release-4-1-5.html',
+  },
+  {
+    'target': ['4.1=>4.2', '4.2=>4.1'],
+    '4.1': '/user-manual/api/securing_api.html',
+    '4.2': '/user-manual/api/securing-api.html',
+  },
+  {
+    'target': ['4.1=>4.2', '4.2=>4.1'],
+    '4.1': '/user-manual/configuring-cluster/cluster_management.html',
+    '4.2': '/user-manual/configuring-cluster/cluster-management.html',
+  },
+  {
+    'target': ['4.1=>4.2', '4.2=>4.1'],
+    '4.1': '/user-manual/manager/manual-email-report/smtp_authentication.html',
+    '4.2': '/user-manual/manager/manual-email-report/smtp-authentication.html',
+  },
+  {
+    'target': ['4.1=>4.2', '4.2=>4.1'],
+    '4.1': '/user-manual/capabilities/sec-config-assessment/creating_custom_policies.html',
+    '4.2': '/user-manual/capabilities/sec-config-assessment/creating-custom-policies.html',
+  },
+  {
+    'target': ['4.1=>4.2', '4.2=>4.1'],
+    '4.1': '/user-manual/capabilities/sec-config-assessment/how_to_configure.html',
+    '4.2': '/user-manual/capabilities/sec-config-assessment/how-to-configure.html',
+  },
+  {
+    'target': ['4.1=>4.2', '4.2=>4.1'],
+    '4.1': '/user-manual/capabilities/sec-config-assessment/use_case.html',
+    '4.2': '/user-manual/capabilities/sec-config-assessment/use-case.html',
+  },
+  {
+    'target': ['4.1=>4.2', '4.2=>4.1'],
+    '4.1': '/user-manual/capabilities/sec-config-assessment/how_it_works.html',
+    '4.2': '/user-manual/capabilities/sec-config-assessment/how-it-works.html',
+  },
+  {
+    'target': ['4.1=>4.2', '4.2=>4.1'],
+    '4.1': '/user-manual/capabilities/sec-config-assessment/what_is_it.html',
+    '4.2': '/user-manual/capabilities/sec-config-assessment/what-is-it.html',
+  },
+  {
+    'target': ['4.1=>4.2', '4.2=>4.1'],
+    '4.1': '/user-manual/capabilities/vulnerability-detection/running_vu_scan.html',
+    '4.2': '/user-manual/capabilities/vulnerability-detection/running-vu-scan.html',
+  },
+  {
+    'target': ['4.1=>4.2', '4.2=>4.1'],
+    '4.1': '/user-manual/capabilities/vulnerability-detection/offline_update.html',
+    '4.2': '/user-manual/capabilities/vulnerability-detection/offline-update.html',
+  },
+  {
+    'target': ['4.1=>4.2', '4.2=>4.1'],
+    '4.1': '/user-manual/capabilities/vulnerability-detection/allow_os.html',
+    '4.2': '/user-manual/capabilities/vulnerability-detection/allow-os.html',
+  },
+  {
+    'target': ['4.1=>4.2', '4.2=>4.1'],
+    '4.1': '/user-manual/capabilities/vulnerability-detection/compatibility_matrix.html',
+    '4.2': '/user-manual/capabilities/vulnerability-detection/compatibility-matrix.html',
+  },
+  {
+    'target': ['4.1=>4.2', '4.2=>4.1'],
+    '4.1': '/user-manual/capabilities/vulnerability-detection/cpe_helper.html',
+    '4.2': '/user-manual/capabilities/vulnerability-detection/cpe-helper.html',
+  },
+  {
+    'target': ['4.1=>4.2', '4.2=>4.1'],
+    '4.1': '/user-manual/capabilities/vulnerability-detection/how_it_works.html',
+    '4.2': '/user-manual/capabilities/vulnerability-detection/how-it-works.html',
+  },
+  {
+    'target': ['4.1=>4.2', '4.2=>4.1'],
+    '4.1': '/user-manual/reference/ossec-conf/rule_test.html',
+    '4.2': '/user-manual/reference/ossec-conf/rule-test.html',
+  },
+  {
+    'target': ['4.1=>4.2', '4.2=>4.1'],
+    '4.1': '/user-manual/reference/ossec-conf/client_buffer.html',
+    '4.2': '/user-manual/reference/ossec-conf/client-buffer.html',
+  },
+  {
+    'target': ['4.1=>4.2', '4.2=>4.1'],
+    '4.1': '/user-manual/reference/ossec-conf/email_alerts.html',
+    '4.2': '/user-manual/reference/ossec-conf/email-alerts.html',
+  },
+  {
+    'target': ['4.1=>4.2', '4.2=>4.1'],
+    '4.1': '/user-manual/reference/tools/agent_upgrade.html',
+    '4.2': '/user-manual/reference/tools/agent-upgrade.html',
+  },
+  {
+    'target': ['4.1=>4.2', '4.2=>4.1'],
+    '4.1': '/user-manual/reference/tools/fim_migrate.html',
+    '4.2': '/user-manual/reference/tools/fim-migrate.html',
+  },
+  {
+    'target': ['4.1=>4.2', '4.2=>4.1'],
+    '4.1': '/user-manual/reference/tools/cluster_control.html',
+    '4.2': '/user-manual/reference/tools/cluster-control.html',
+  },
+  {
+    'target': ['4.1=>4.2', '4.2=>4.1'],
+    '4.1': '/user-manual/reference/tools/manage_agents.html',
+    '4.2': '/user-manual/reference/tools/manage-agents.html',
+  },
+  {
+    'target': ['4.1=>4.2', '4.2=>4.1'],
+    '4.1': '/user-manual/reference/tools/agent_control.html',
+    '4.2': '/user-manual/reference/tools/agent-control.html',
+  },
+  {
+    'target': ['4.1=>4.2', '4.2=>4.1'],
+    '4.1': '/user-manual/reference/tools/agent_groups.html',
+    '4.2': '/user-manual/reference/tools/agent-groups.html',
+  },
+  {
+    'target': ['4.1=>4.2', '4.2=>4.1'],
+    '4.1': '/user-manual/reference/tools/clear_stats.html',
+    '4.2': '/user-manual/reference/tools/clear-stats.html',
+  },
+  {
+    'target': ['4.1=>4.2', '4.2=>4.1'],
+    '4.1': '/user-manual/reference/tools/update_ruleset.html',
+    '4.2': '/user-manual/reference/tools/update-ruleset.html',
+  },
+  {
+    'target': ['4.1=>4.2', '4.2=>4.1'],
+    '4.1': '/user-manual/elasticsearch/elastic_tuning.html',
+    '4.2': '/user-manual/elasticsearch/elastic-tuning.html',
+  },
+  {
+    'target': ['4.1=>4.2', '4.2=>4.1'],
+    '4.1': '/user-manual/api/rbac/auth_context.html',
+    '4.2': '/user-manual/api/rbac/auth-context.html',
+  },
+  {
+    'target': ['4.1=>4.2', '4.2=>4.1'],
+    '4.1': '/docker-monitor/monitoring_containers_activity.html',
+    '4.2': '/docker-monitor/monitoring-containers-activity.html',
+  },
+  {
+    'target': ['4.1=>4.2', '4.2=>4.1'],
+    '4.1': '/docker-monitor/monitoring_docker_server.html',
+    '4.2': '/docker-monitor/monitoring-docker-server.html',
+  },
+  {
+    'target': ['4.1=>4.2', '4.2=>4.1'],
+    '4.1': '/upgrade-guide/compatibility_matrix/index.html',
+    '4.2': '/upgrade-guide/compatibility-matrix/index.html',
+  },
+  {
+    'target': ['4.1=>4.2', '4.2=>4.1'],
+    '4.1': '/upgrade-guide/legacy/upgrading-wazuh-server/restore_alerts-from-2.x-to-3.x.html',
+    '4.2': '/upgrade-guide/legacy/upgrading-wazuh-server/restore-alerts-from-2.x-to-3.x.html',
+  },
 );
 
 /* *** RELEASE 4.1 ****/
@@ -4006,37 +4013,37 @@ redirections.push(
   },
   {
     'target': ['4.1=>4.0'],
-    '4.0':  '/installation-guide/more-installation-alternatives/index.html',
+    '4.0': '/installation-guide/more-installation-alternatives/index.html',
     '4.1': '/installation-guide/more-installation-alternatives/splunk/index.html',
   },
   {
     'target': ['4.1=>4.0'],
-    '4.0':  '/installation-guide/more-installation-alternatives/index.html',
+    '4.0': '/installation-guide/more-installation-alternatives/index.html',
     '4.1': '/installation-guide/more-installation-alternatives/splunk/splunk-app.html',
   },
   {
     'target': ['4.1=>4.0'],
-    '4.0':  '/installation-guide/more-installation-alternatives/index.html',
+    '4.0': '/installation-guide/more-installation-alternatives/index.html',
     '4.1': '/installation-guide/more-installation-alternatives/splunk/splunk-basic.html',
   },
   {
     'target': ['4.1=>4.0'],
-    '4.0':  '/installation-guide/more-installation-alternatives/index.html',
+    '4.0': '/installation-guide/more-installation-alternatives/index.html',
     '4.1': '/installation-guide/more-installation-alternatives/splunk/splunk-distributed.html',
   },
   {
     'target': ['4.1=>4.0'],
-    '4.0':  '/installation-guide/more-installation-alternatives/index.html',
+    '4.0': '/installation-guide/more-installation-alternatives/index.html',
     '4.1': '/installation-guide/more-installation-alternatives/splunk/splunk-polling.html',
   },
   {
     'target': ['4.1=>4.0'],
-    '4.0':  '/installation-guide/more-installation-alternatives/index.html',
+    '4.0': '/installation-guide/more-installation-alternatives/index.html',
     '4.1': '/installation-guide/more-installation-alternatives/splunk/splunk-reverse-proxy.html',
   },
   {
     'target': ['4.1=>4.0'],
-    '4.0':  '/installation-guide/more-installation-alternatives/index.html',
+    '4.0': '/installation-guide/more-installation-alternatives/index.html',
     '4.1': '/installation-guide/more-installation-alternatives/splunk/splunk-wazuh.html',
   },
 );
@@ -4274,651 +4281,651 @@ removedUrls['4.0'] = [
 ];
 
 redirections.push(
-    {
-      'target': ['3.13=>4.0', '4.0=>3.13'],
-      '3.13': '/deploying-with-puppet/wazuh-puppet-module/reference-wazuh-puppet/ossec-scanpaths.html',
-      '4.0': '/deploying-with-puppet/wazuh-puppet-module/index.html',
-    },
-    {
-      'target': ['3.13=>4.0', '4.0=>3.13'],
-      '3.13': '/installation-guide/compatibility_matrix/index.html',
-      '4.0':  '/upgrade-guide/compatibility_matrix/index.html',
-    },
-    {
-      'target': ['3.13=>4.0', '4.0=>3.13'],
-      '3.13': '/installation-guide/installing-elastic-stack/protect-installation/index.html',
-      '4.0':  '/installation-guide/open-distro/index.html',
-    },
-    {
-      'target': ['3.13=>4.0', '4.0=>3.13'],
-      '3.13': '/installation-guide/installing-elastic-stack/protect-installation/kibana_ssl.html',
-      '4.0':  '/installation-guide/open-distro/index.html',
-    },
-    {
-      'target': ['3.13=>4.0', '4.0=>3.13'],
-      '3.13': '/installation-guide/installing-elastic-stack/protect-installation/searchguard.html',
-      '4.0':  '/installation-guide/open-distro/index.html',
-    },
-    {
-      'target': ['3.13=>4.0', '4.0=>3.13'],
-      '3.13': '/installation-guide/installing-elastic-stack/protect-installation/xpack.html',
-      '4.0':  '/installation-guide/open-distro/index.html',
-    },
-    {
-      'target': ['3.13=>4.0', '4.0=>3.13'],
-      '3.13': '/installation-guide/installing-elastic-stack/configure-elasticsearch-cluster.html',
-      '4.0':  '/installation-guide/open-distro/index.html',
-    },
-    {
-      'target': ['3.13=>4.0', '4.0=>3.13'],
-      '3.13': '/installation-guide/installing-elastic-stack/elastic_server_deb.html',
-      '4.0':  '/installation-guide/open-distro/index.html',
-    },
-    {
-      'target': ['3.13=>4.0', '4.0=>3.13'],
-      '3.13': '/installation-guide/installing-elastic-stack/elastic_server_rpm.html',
-      '4.0':  '/installation-guide/open-distro/index.html',
-    },
-    {
-      'target': ['3.13=>4.0', '4.0=>3.13'],
-      '3.13': '/installation-guide/installing-elastic-stack/elastic_tuning.html',
-      '4.0':  '/user-manual/elasticsearch/elastic_tuning.html',
-    },
-    {
-      'target': ['3.13=>4.0', '4.0=>3.13'],
-      '3.13': '/installation-guide/installing-elastic-stack/index.html',
-      '4.0':  '/installation-guide/open-distro/index.html',
-    },
-    {
-      'target': ['3.13=>4.0', '4.0=>3.13'],
-      '3.13': '/installation-guide/installing-elastic-stack/transform_logstash.html',
-      '4.0':  '/installation-guide/open-distro/index.html',
-    },
-    {
-      'target': ['3.13=>4.0'],
-      '3.13': '/installation-guide/installing-splunk/index.html',
-      '4.0':  '/installation-guide/more-installation-alternatives/index.html'
-    },
-    {
-      'target': ['3.13=>4.0'],
-      '3.13': '/installation-guide/installing-splunk/splunk-app.html',
-      '4.0':  '/installation-guide/more-installation-alternatives/index.html'
-    },
-    {
-      'target': ['3.13=>4.0'],
-      '3.13': '/installation-guide/installing-splunk/splunk-basic.html',
-      '4.0':  '/installation-guide/more-installation-alternatives/index.html'
-    },
-    {
-      'target': ['3.13=>4.0'],
-      '3.13': '/installation-guide/installing-splunk/splunk-distributed.html',
-      '4.0':  '/installation-guide/more-installation-alternatives/index.html'
-    },
-    {
-      'target': ['3.13=>4.0'],
-      '3.13': '/installation-guide/installing-splunk/splunk-forwarder.html',
-      '4.0':  '/installation-guide/more-installation-alternatives/index.html'
-    },
-    {
-      'target': ['3.13=>4.0'],
-      '3.13': '/installation-guide/installing-splunk/splunk-polling.html',
-      '4.0':  '/installation-guide/more-installation-alternatives/index.html'
-    },
-    {
-      'target': ['3.13=>4.0'],
-      '3.13': '/installation-guide/installing-splunk/splunk-reverse-proxy.html',
-      '4.0':  '/installation-guide/more-installation-alternatives/index.html'
-    },
-    {
-      'target': ['3.13=>4.0', '4.0=>3.13'],
-      '3.13': '/installation-guide/installing-wazuh-agent/aix/index.html',
-      '4.0':  '/installation-guide/wazuh-agent/wazuh_agent_package_aix.html',
-    },
-    {
-      'target': ['3.13=>4.0', '4.0=>3.13'],
-      '3.13': '/installation-guide/installing-wazuh-agent/aix/wazuh_agent_package_aix.html',
-      '4.0':  '/installation-guide/wazuh-agent/wazuh_agent_package_aix.html',
-    },
-    {
-      'target': ['3.13=>4.0', '4.0=>3.13'],
-      '3.13': '/installation-guide/installing-wazuh-agent/aix/wazuh_agent_sources_aix.html',
-      '4.0':  '/installation-guide/more-installation-alternatives/wazuh-from-sources/wazuh-agent/index.html',
-    },
-    {
-      'target': ['3.13=>4.0', '4.0=>3.13'],
-      '3.13': '/installation-guide/installing-wazuh-agent/deployment_variables/linux/deployment_variables_apt.html',
-      '4.0':  '/installation-guide/wazuh-agent/deployment_variables/linux/deployment_variables_apt.html',
-    },
-    {
-      'target': ['3.13=>4.0', '4.0=>3.13'],
-      '3.13': '/installation-guide/installing-wazuh-agent/deployment_variables/linux/deployment_variables_dnf.html',
-      '4.0':  '/installation-guide/wazuh-agent/deployment_variables/linux/deployment_variables_dnf.html',
-    },
-    {
-      'target': ['3.13=>4.0', '4.0=>3.13'],
-      '3.13': '/installation-guide/installing-wazuh-agent/deployment_variables/linux/deployment_variables_yum.html',
-      '4.0':  '/installation-guide/wazuh-agent/deployment_variables/linux/deployment_variables_yum.html',
-    },
-    {
-      'target': ['3.13=>4.0', '4.0=>3.13'],
-      '3.13': '/installation-guide/installing-wazuh-agent/deployment_variables/linux/deployment_variables_zypper.html',
-      '4.0':  '/installation-guide/wazuh-agent/deployment_variables/linux/deployment_variables_zypper.html',
-    },
-    {
-      'target': ['3.13=>4.0', '4.0=>3.13'],
-      '3.13': '/installation-guide/installing-wazuh-agent/deployment_variables/deployment_variables_aix.html',
-      '4.0':  '/installation-guide/wazuh-agent/deployment_variables/deployment_variables_aix.html',
-    },
-    {
-      'target': ['3.13=>4.0', '4.0=>3.13'],
-      '3.13': '/installation-guide/installing-wazuh-agent/deployment_variables/deployment_variables_linux.html',
-      '4.0':  '/installation-guide/wazuh-agent/deployment_variables/deployment_variables_linux.html',
-    },
-    {
-      'target': ['3.13=>4.0', '4.0=>3.13'],
-      '3.13': '/installation-guide/installing-wazuh-agent/deployment_variables/deployment_variables_macos.html',
-      '4.0':  '/installation-guide/wazuh-agent/deployment_variables/deployment_variables_macos.html',
-    },
-    {
-      'target': ['3.13=>4.0', '4.0=>3.13'],
-      '3.13': '/installation-guide/installing-wazuh-agent/deployment_variables/deployment_variables_windows.html',
-      '4.0':  '/installation-guide/wazuh-agent/deployment_variables/deployment_variables_windows.html',
-    },
-    {
-      'target': ['3.13=>4.0', '4.0=>3.13'],
-      '3.13': '/installation-guide/installing-wazuh-agent/hpux/index.html',
-      '4.0':  '/installation-guide/wazuh-agent/wazuh_agent_package_hpux.html',
-    },
-    {
-      'target': ['3.13=>4.0', '4.0=>3.13'],
-      '3.13': '/installation-guide/installing-wazuh-agent/hpux/wazuh_agent_package_hpux.html',
-      '4.0':  '/installation-guide/wazuh-agent/wazuh_agent_package_hpux.html',
-    },
-    {
-      'target': ['3.13=>4.0', '4.0=>3.13'],
-      '3.13': '/installation-guide/installing-wazuh-agent/hpux/wazuh_agent_sources_hpux.html',
-      '4.0':  '/installation-guide/more-installation-alternatives/wazuh-from-sources/wazuh-agent/index.html',
-    },
-    {
-      'target': ['3.13=>4.0', '4.0=>3.13'],
-      '3.13': '/installation-guide/installing-wazuh-agent/linux/amazon1-or-greater/index.html',
-      '4.0':  '/installation-guide/wazuh-agent/wazuh_agent_package_linux.html',
-    },
-    {
-      'target': ['3.13=>4.0', '4.0=>3.13'],
-      '3.13': '/installation-guide/installing-wazuh-agent/linux/amazon1-or-greater/wazuh_agent_package_amazon.html',
-      '4.0':  '/installation-guide/wazuh-agent/wazuh_agent_package_linux.html',
-    },
-    {
-      'target': ['3.13=>4.0', '4.0=>3.13'],
-      '3.13': '/installation-guide/installing-wazuh-agent/linux/amazon1-or-greater/wazuh_agent_sources_amazon.html',
-      '4.0':  '/installation-guide/wazuh-agent/wazuh_agent_package_linux.html',
-    },
-    {
-      'target': ['3.13=>4.0', '4.0=>3.13'],
-      '3.13': '/installation-guide/installing-wazuh-agent/linux/centos5/index.html',
-      '4.0':  '/installation-guide/wazuh-agent/wazuh_agent_package_linux.html',
-    },
-    {
-      'target': ['3.13=>4.0', '4.0=>3.13'],
-      '3.13': '/installation-guide/installing-wazuh-agent/linux/centos5/wazuh_agent_package_centos5.html',
-      '4.0':  '/installation-guide/wazuh-agent/wazuh_agent_package_linux.html',
-    },
-    {
-      'target': ['3.13=>4.0', '4.0=>3.13'],
-      '3.13': '/installation-guide/installing-wazuh-agent/linux/centos6-or-greater/index.html',
-      '4.0':  '/installation-guide/wazuh-agent/wazuh_agent_package_linux.html',
-    },
-    {
-      'target': ['3.13=>4.0', '4.0=>3.13'],
-      '3.13': '/installation-guide/installing-wazuh-agent/linux/centos6-or-greater/wazuh_agent_package_centos6_or_greater.html',
-      '4.0':  '/installation-guide/wazuh-agent/wazuh_agent_package_linux.html',
-    },
-    {
-      'target': ['3.13=>4.0', '4.0=>3.13'],
-      '3.13': '/installation-guide/installing-wazuh-agent/linux/centos6-or-greater/wazuh_agent_sources_centos6_or_greater.html',
-      '4.0':  '/installation-guide/more-installation-alternatives/wazuh-from-sources/wazuh-agent/index.html',
-    },
-    {
-      'target': ['3.13=>4.0', '4.0=>3.13'],
-      '3.13': '/installation-guide/installing-wazuh-agent/linux/debian7-or-greater/index.html',
-      '4.0':  '/installation-guide/wazuh-agent/wazuh_agent_package_linux.html',
-    },
-    {
-      'target': ['3.13=>4.0', '4.0=>3.13'],
-      '3.13': '/installation-guide/installing-wazuh-agent/linux/debian7-or-greater/wazuh_agent_package_debian7_or_greater.html',
-      '4.0':  '/installation-guide/wazuh-agent/wazuh_agent_package_linux.html',
-    },
-    {
-      'target': ['3.13=>4.0', '4.0=>3.13'],
-      '3.13': '/installation-guide/installing-wazuh-agent/linux/debian7-or-greater/wazuh_agent_sources_debian7_or_greater.html',
-      '4.0':  '/installation-guide/more-installation-alternatives/wazuh-from-sources/wazuh-agent/index.html',
-    },
-    {
-      'target': ['3.13=>4.0', '4.0=>3.13'],
-      '3.13': '/installation-guide/installing-wazuh-agent/linux/fedora22-or-greater/index.html',
-      '4.0':  '/installation-guide/wazuh-agent/wazuh_agent_package_linux.html',
-    },
-    {
-      'target': ['3.13=>4.0', '4.0=>3.13'],
-      '3.13': '/installation-guide/installing-wazuh-agent/linux/fedora22-or-greater/wazuh_agent_package_fedora22_or_greater.html',
-      '4.0':  '/installation-guide/wazuh-agent/wazuh_agent_package_linux.html',
-    },
-    {
-      'target': ['3.13=>4.0', '4.0=>3.13'],
-      '3.13': '/installation-guide/installing-wazuh-agent/linux/fedora22-or-greater/wazuh_agent_sources_fedora22_or_greater.html',
-      '4.0':  '/installation-guide/more-installation-alternatives/wazuh-from-sources/wazuh-agent/index.html',
-    },
-    {
-      'target': ['3.13=>4.0', '4.0=>3.13'],
-      '3.13': '/installation-guide/installing-wazuh-agent/linux/opensuse42-leap-and-tumbleweed/index.html',
-      '4.0':  '/installation-guide/wazuh-agent/wazuh_agent_package_linux.html',
-    },
-    {
-      'target': ['3.13=>4.0', '4.0=>3.13'],
-      '3.13': '/installation-guide/installing-wazuh-agent/linux/opensuse42-leap-and-tumbleweed/wazuh_agent_package_opensuse42_or_greater.html',
-      '4.0':  '/installation-guide/wazuh-agent/wazuh_agent_package_linux.html',
-    },
-    {
-      'target': ['3.13=>4.0', '4.0=>3.13'],
-      '3.13': '/installation-guide/installing-wazuh-agent/linux/opensuse42-leap-and-tumbleweed/wazuh_agent_sources_opensuse42_or_greater.html',
-      '4.0':  '/installation-guide/more-installation-alternatives/wazuh-from-sources/wazuh-agent/index.html',
-    },
-    {
-      'target': ['3.13=>4.0', '4.0=>3.13'],
-      '3.13': '/installation-guide/installing-wazuh-agent/linux/oracle5/index.html',
-      '4.0':  '/installation-guide/wazuh-agent/wazuh_agent_package_linux.html',
-    },
-    {
-      'target': ['3.13=>4.0', '4.0=>3.13'],
-      '3.13': '/installation-guide/installing-wazuh-agent/linux/oracle6-or-greater/index.html',
-      '4.0':  '/installation-guide/wazuh-agent/wazuh_agent_package_linux.html',
-    },
-    {
-      'target': ['3.13=>4.0', '4.0=>3.13'],
-      '3.13': '/installation-guide/installing-wazuh-agent/linux/oracle6-or-greater/wazuh_agent_package_oracle6_or_greater.html',
-      '4.0':  '/installation-guide/wazuh-agent/wazuh_agent_package_linux.html',
-    },
-    {
-      'target': ['3.13=>4.0', '4.0=>3.13'],
-      '3.13': '/installation-guide/installing-wazuh-agent/linux/oracle6-or-greater/wazuh_agent_sources_oracle6_or_greater.html',
-      '4.0':  '/installation-guide/more-installation-alternatives/wazuh-from-sources/wazuh-agent/index.html',
-    },
-    {
-      'target': ['3.13=>4.0', '4.0=>3.13'],
-      '3.13': '/installation-guide/installing-wazuh-agent/linux/rhel5/index.html',
-      '4.0':  '/installation-guide/wazuh-agent/wazuh_agent_package_linux.html',
-    },
-    {
-      'target': ['3.13=>4.0', '4.0=>3.13'],
-      '3.13': '/installation-guide/installing-wazuh-agent/linux/rhel5/wazuh_agent_package_rhel5.html',
-      '4.0':  '/installation-guide/wazuh-agent/wazuh_agent_package_linux.html',
-    },
-    {
-      'target': ['3.13=>4.0', '4.0=>3.13'],
-      '3.13': '/installation-guide/installing-wazuh-agent/linux/rhel6-or-greater/index.html',
-      '4.0':  '/installation-guide/wazuh-agent/wazuh_agent_package_linux.html',
-    },
-    {
-      'target': ['3.13=>4.0', '4.0=>3.13'],
-      '3.13': '/installation-guide/installing-wazuh-agent/linux/rhel6-or-greater/wazuh_agent_package_rhel6_or_greater.html',
-      '4.0':  '/installation-guide/wazuh-agent/wazuh_agent_package_linux.html',
-    },
-    {
-      'target': ['3.13=>4.0', '4.0=>3.13'],
-      '3.13': '/installation-guide/installing-wazuh-agent/linux/rhel6-or-greater/wazuh_agent_sources_rhel6_or_greater.html',
-      '4.0':  '/installation-guide/more-installation-alternatives/wazuh-from-sources/wazuh-agent/index.html',
-    },
-    {
-      'target': ['3.13=>4.0', '4.0=>3.13'],
-      '3.13': '/installation-guide/installing-wazuh-agent/linux/suse11/index.html',
-      '4.0':  '/installation-guide/wazuh-agent/wazuh_agent_package_linux.html',
-    },
-    {
-      'target': ['3.13=>4.0', '4.0=>3.13'],
-      '3.13': '/installation-guide/installing-wazuh-agent/linux/suse11/wazuh_agent_package_suse11.html',
-      '4.0':  '/installation-guide/wazuh-agent/wazuh_agent_package_linux.html',
-    },
-    {
-      'target': ['3.13=>4.0', '4.0=>3.13'],
-      '3.13': '/installation-guide/installing-wazuh-agent/linux/suse11/wazuh_agent_sources_suse11.html',
-      '4.0':  '/installation-guide/more-installation-alternatives/wazuh-from-sources/wazuh-agent/index.html',
-    },
-    {
-      'target': ['3.13=>4.0', '4.0=>3.13'],
-      '3.13': '/installation-guide/installing-wazuh-agent/linux/suse12/index.html',
-      '4.0':  '/installation-guide/wazuh-agent/wazuh_agent_package_linux.html',
-    },
-    {
-      'target': ['3.13=>4.0', '4.0=>3.13'],
-      '3.13': '/installation-guide/installing-wazuh-agent/linux/suse12/wazuh_agent_package_suse12.html',
-      '4.0':  '/installation-guide/wazuh-agent/wazuh_agent_package_linux.html',
-    },
-    {
-      'target': ['3.13=>4.0', '4.0=>3.13'],
-      '3.13': '/installation-guide/installing-wazuh-agent/linux/suse12/wazuh_agent_sources_suse12.html',
-      '4.0':  '/installation-guide/more-installation-alternatives/wazuh-from-sources/wazuh-agent/index.html',
-    },
-    {
-      'target': ['3.13=>4.0', '4.0=>3.13'],
-      '3.13': '/installation-guide/installing-wazuh-agent/linux/ubuntu12.04-or-greater/index.html',
-      '4.0':  '/installation-guide/wazuh-agent/wazuh_agent_package_linux.html',
-    },
-    {
-      'target': ['3.13=>4.0', '4.0=>3.13'],
-      '3.13': '/installation-guide/installing-wazuh-agent/linux/ubuntu12.04-or-greater/wazuh_agent_package_ubuntu12.04_or_greater.html',
-      '4.0':  '/installation-guide/wazuh-agent/wazuh_agent_package_linux.html',
-    },
-    {
-      'target': ['3.13=>4.0', '4.0=>3.13'],
-      '3.13': '/installation-guide/installing-wazuh-agent/linux/ubuntu12.04-or-greater/wazuh_agent_sources_ubuntu12.04_or_greater.html',
-      '4.0':  '/installation-guide/more-installation-alternatives/wazuh-from-sources/wazuh-agent/index.html',
-    },
-    {
-      'target': ['3.13=>4.0', '4.0=>3.13'],
-      '3.13': '/installation-guide/installing-wazuh-agent/linux/index.html',
-      '4.0':  '/installation-guide/wazuh-agent/wazuh_agent_package_linux.html',
-    },
-    {
-      'target': ['3.13=>4.0', '4.0=>3.13'],
-      '3.13': '/installation-guide/installing-wazuh-agent/macos/index.html',
-      '4.0':  '/installation-guide/wazuh-agent/wazuh_agent_package_macos.html',
-    },
-    {
-      'target': ['3.13=>4.0', '4.0=>3.13'],
-      '3.13': '/installation-guide/installing-wazuh-agent/macos/wazuh_agent_package_macos.html',
-      '4.0':  '/installation-guide/wazuh-agent/wazuh_agent_package_macos.html',
-    },
-    {
-      'target': ['3.13=>4.0', '4.0=>3.13'],
-      '3.13': '/installation-guide/installing-wazuh-agent/macos/wazuh_agent_sources_macos.html',
-      '4.0':  '/installation-guide/more-installation-alternatives/wazuh-from-sources/wazuh-agent/index.html',
-    },
-    {
-      'target': ['3.13=>4.0', '4.0=>3.13'],
-      '3.13': '/installation-guide/installing-wazuh-agent/solaris/solaris10/index.html',
-      '4.0':  '/installation-guide/wazuh-agent/wazuh_agent_package_solaris.html',
-    },
-    {
-      'target': ['3.13=>4.0', '4.0=>3.13'],
-      '3.13': '/installation-guide/installing-wazuh-agent/solaris/solaris10/wazuh_agent_package_solaris10.html',
-      '4.0':  '/installation-guide/wazuh-agent/wazuh_agent_package_solaris.html',
-    },
-    {
-      'target': ['3.13=>4.0', '4.0=>3.13'],
-      '3.13': '/installation-guide/installing-wazuh-agent/solaris/solaris10/wazuh_agent_sources_solaris10.html',
-      '4.0':  '/installation-guide/more-installation-alternatives/wazuh-from-sources/wazuh-agent/index.html',
-    },
-    {
-      'target': ['3.13=>4.0', '4.0=>3.13'],
-      '3.13': '/installation-guide/installing-wazuh-agent/solaris/solaris11/index.html',
-      '4.0':  '/installation-guide/wazuh-agent/wazuh_agent_package_solaris.html',
-    },
-    {
-      'target': ['3.13=>4.0', '4.0=>3.13'],
-      '3.13': '/installation-guide/installing-wazuh-agent/solaris/solaris11/wazuh_agent_package_solaris11.html',
-      '4.0':  '/installation-guide/wazuh-agent/wazuh_agent_package_solaris.html',
-    },
-    {
-      'target': ['3.13=>4.0', '4.0=>3.13'],
-      '3.13': '/installation-guide/installing-wazuh-agent/solaris/solaris11/wazuh_agent_sources_solaris11.html',
-      '4.0':  '/installation-guide/more-installation-alternatives/wazuh-from-sources/wazuh-agent/index.html',
-    },
-    {
-      'target': ['3.13=>4.0', '4.0=>3.13'],
-      '3.13': '/installation-guide/installing-wazuh-agent/solaris/index.html',
-      '4.0':  '/installation-guide/wazuh-agent/wazuh_agent_package_solaris.html',
-    },
-    {
-      'target': ['3.13=>4.0', '4.0=>3.13'],
-      '3.13': '/installation-guide/installing-wazuh-agent/windows/index.html',
-      '4.0':  '/installation-guide/wazuh-agent/wazuh_agent_package_windows.html',
-    },
-    {
-      'target': ['3.13=>4.0', '4.0=>3.13'],
-      '3.13': '/installation-guide/installing-wazuh-agent/windows/wazuh_agent_package_windows.html',
-      '4.0':  '/installation-guide/wazuh-agent/wazuh_agent_package_windows.html',
-    },
-    {
-      'target': ['3.13=>4.0', '4.0=>3.13'],
-      '3.13': '/installation-guide/installing-wazuh-agent/windows/wazuh_agent_sources_windows.html',
-      '4.0':  '/installation-guide/more-installation-alternatives/wazuh-from-sources/wazuh-agent/index.html',
-    },
-    {
-      'target': ['3.13=>4.0', '4.0=>3.13'],
-      '3.13': '/installation-guide/installing-wazuh-agent/deployment_variables.html',
-      '4.0':  '/installation-guide/wazuh-agent/deployment_variables/deployment_variables.html',
-    },
-    {
-      'target': ['3.13=>4.0', '4.0=>3.13'],
-      '3.13': '/installation-guide/installing-wazuh-agent/index.html',
-      '4.0':  '/installation-guide/wazuh-agent/index.html',
-    },
-    {
-      'target': ['3.13=>4.0', '4.0=>3.13'],
-      '3.13':  '/installation-guide/installing-wazuh-manager/linux/amazon/index.html',
-      '4.0':   '/installation-guide/open-distro/index.html'
-    },
-    {
-      'target': ['3.13=>4.0', '4.0=>3.13'],
-      '3.13':  '/installation-guide/installing-wazuh-manager/linux/amazon/wazuh_server_packages_amazon.html',
-      '4.0':   '/installation-guide/open-distro/index.html'
-    },
-    {
-      'target': ['3.13=>4.0', '4.0=>3.13'],
-      '3.13':  '/installation-guide/installing-wazuh-manager/linux/amazon/wazuh_server_sources_amazon.html',
-      '4.0':   '/installation-guide/open-distro/index.html'
-    },
-    {
-      'target': ['3.13=>4.0', '4.0=>3.13'],
-      '3.13':  '/installation-guide/installing-wazuh-manager/linux/centos/index.html',
-      '4.0':   '/installation-guide/open-distro/index.html'
-    },
-    {
-      'target': ['3.13=>4.0', '4.0=>3.13'],
-      '3.13':  '/installation-guide/installing-wazuh-manager/linux/centos/wazuh_server_packages_centos.html',
-      '4.0':   '/installation-guide/open-distro/index.html'
-    },
-    {
-      'target': ['3.13=>4.0', '4.0=>3.13'],
-      '3.13':  '/installation-guide/installing-wazuh-manager/linux/centos/wazuh_server_sources_centos.html',
-      '4.0':   '/installation-guide/open-distro/index.html'
-    },
-    {
-      'target': ['3.13=>4.0', '4.0=>3.13'],
-      '3.13':  '/installation-guide/installing-wazuh-manager/linux/debian/index.html',
-      '4.0':   '/installation-guide/open-distro/index.html'
-    },
-    {
-      'target': ['3.13=>4.0', '4.0=>3.13'],
-      '3.13':  '/installation-guide/installing-wazuh-manager/linux/debian/wazuh_server_packages_deb.html',
-      '4.0':   '/installation-guide/open-distro/index.html'
-    },
-    {
-      'target': ['3.13=>4.0', '4.0=>3.13'],
-      '3.13':  '/installation-guide/installing-wazuh-manager/linux/debian/wazuh_server_sources_deb.html',
-      '4.0':   '/installation-guide/open-distro/index.html'
-    },
-    {
-      'target': ['3.13=>4.0', '4.0=>3.13'],
-      '3.13':  '/installation-guide/installing-wazuh-manager/linux/fedora/index.html',
-      '4.0':   '/installation-guide/open-distro/index.html'
-    },
-    {
-      'target': ['3.13=>4.0', '4.0=>3.13'],
-      '3.13':  '/installation-guide/installing-wazuh-manager/linux/fedora/wazuh_server_packages_fedora.html',
-      '4.0':   '/installation-guide/open-distro/index.html'
-    },
-    {
-      'target': ['3.13=>4.0', '4.0=>3.13'],
-      '3.13':  '/installation-guide/installing-wazuh-manager/linux/fedora/wazuh_server_sources_fedora.html',
-      '4.0':   '/installation-guide/open-distro/index.html'
-    },
-    {
-      'target': ['3.13=>4.0', '4.0=>3.13'],
-      '3.13':  '/installation-guide/installing-wazuh-manager/linux/opensuse/index.html',
-      '4.0':   '/installation-guide/open-distro/index.html'
-    },
-    {
-      'target': ['3.13=>4.0', '4.0=>3.13'],
-      '3.13':  '/installation-guide/installing-wazuh-manager/linux/opensuse/wazuh_server_packages_opensuse.html',
-      '4.0':   '/installation-guide/open-distro/index.html'
-    },
-    {
-      'target': ['3.13=>4.0', '4.0=>3.13'],
-      '3.13':  '/installation-guide/installing-wazuh-manager/linux/opensuse/wazuh_server_sources_opensuse.html',
-      '4.0':   '/installation-guide/open-distro/index.html'
-    },
-    {
-      'target': ['3.13=>4.0', '4.0=>3.13'],
-      '3.13':  '/installation-guide/installing-wazuh-manager/linux/oracle/index.html',
-      '4.0':   '/installation-guide/open-distro/index.html'
-    },
-    {
-      'target': ['3.13=>4.0', '4.0=>3.13'],
-      '3.13':  '/installation-guide/installing-wazuh-manager/linux/oracle/wazuh_server_packages_oracle.html',
-      '4.0':   '/installation-guide/open-distro/index.html'
-    },
-    {
-      'target': ['3.13=>4.0', '4.0=>3.13'],
-      '3.13':  '/installation-guide/installing-wazuh-manager/linux/oracle/wazuh_server_sources_oracle.html',
-      '4.0':   '/installation-guide/open-distro/index.html'
-    },
-    {
-      'target': ['3.13=>4.0', '4.0=>3.13'],
-      '3.13':  '/installation-guide/installing-wazuh-manager/linux/rhel/index.html',
-      '4.0':   '/installation-guide/open-distro/index.html'
-    },
-    {
-      'target': ['3.13=>4.0', '4.0=>3.13'],
-      '3.13':  '/installation-guide/installing-wazuh-manager/linux/rhel/wazuh_server_packages_rhel.html',
-      '4.0':   '/installation-guide/open-distro/index.html'
-    },
-    {
-      'target': ['3.13=>4.0', '4.0=>3.13'],
-      '3.13':  '/installation-guide/installing-wazuh-manager/linux/rhel/wazuh_server_sources_rhel.html',
-      '4.0':   '/installation-guide/open-distro/index.html'
-    },
-    {
-      'target': ['3.13=>4.0', '4.0=>3.13'],
-      '3.13':  '/installation-guide/installing-wazuh-manager/linux/suse/index.html',
-      '4.0':   '/installation-guide/open-distro/index.html'
-    },
-    {
-      'target': ['3.13=>4.0', '4.0=>3.13'],
-      '3.13':  '/installation-guide/installing-wazuh-manager/linux/suse/wazuh_server_packages_suse.html',
-      '4.0':   '/installation-guide/open-distro/index.html'
-    },
-    {
-      'target': ['3.13=>4.0', '4.0=>3.13'],
-      '3.13':  '/installation-guide/installing-wazuh-manager/linux/suse/wazuh_server_sources_suse.html',
-      '4.0':   '/installation-guide/open-distro/index.html'
-    },
-    {
-      'target': ['3.13=>4.0', '4.0=>3.13'],
-      '3.13':  '/installation-guide/installing-wazuh-manager/linux/ubuntu/index.html',
-      '4.0':   '/installation-guide/open-distro/index.html'
-    },
-    {
-      'target': ['3.13=>4.0', '4.0=>3.13'],
-      '3.13':  '/installation-guide/installing-wazuh-manager/linux/ubuntu/wazuh_server_packages_ubuntu.html',
-      '4.0':   '/installation-guide/open-distro/index.html'
-    },
-    {
-      'target': ['3.13=>4.0', '4.0=>3.13'],
-      '3.13':  '/installation-guide/installing-wazuh-manager/linux/ubuntu/wazuh_server_sources_ubuntu.html',
-      '4.0':   '/installation-guide/open-distro/index.html'
-    },
-    {
-      'target': ['3.13=>4.0', '4.0=>3.13'],
-      '3.13': '/installation-guide/installing-wazuh-manager/index.html',
-      '4.0':   '/installation-guide/open-distro/index.html'
-    },
-    {
-      'target': ['3.13=>4.0', '4.0=>3.13'],
-      '3.13': '/installation-guide/packages-list/index.html',
-      '4.0':  '/installation-guide/packages-list.html',
-    },
-    {
-      'target': ['3.13=>4.0', '4.0=>3.13'],
-      '3.13': '/installation-guide/securing_api.html',
-      '4.0':  '/user-manual/api/securing_api.html',
-    },
-    {
-      'target': ['3.13=>4.0', '4.0=>3.13'],
-      '3.13': '/installation-guide/virtual-machine.html',
-      '4.0':  '/virtual-machine/virtual-machine.html',
-    },
-    {
-      'target': ['3.13=>4.0', '4.0=>3.13'],
-      '3.13': '/upgrade-guide/upgrading/legacy/index.html',
-      '4.0':  '/upgrade-guide/legacy/index.html',
-    },
-    {
-      'target': ['3.13=>4.0', '4.0=>3.13'],
-      '3.13': '/upgrade-guide/upgrading/legacy/upgrading-elastic-stack.html',
-      '4.0':  '/upgrade-guide/legacy/upgrading-elastic-stack/index.html',
-    },
-    {
-      'target': ['3.13=>4.0', '4.0=>3.13'],
-      '3.13': '/upgrade-guide/upgrading/legacy/upgrading-wazuh-agent.html',
-      '4.0':  '/upgrade-guide/legacy/upgrading-agent/index.html',
-    },
-    {
-      'target': ['3.13=>4.0', '4.0=>3.13'],
-      '3.13': '/upgrade-guide/upgrading/legacy/upgrading-wazuh-manager.html',
-      '4.0':  '/upgrade-guide/legacy/upgrading-wazuh-server/index.html',
-    },
-    {
-      'target': ['3.13=>4.0', '4.0=>3.13'],
-      '3.13': '/upgrade-guide/upgrading/different_major.html',
-      '4.0':  '/upgrade-guide/upgrading-wazuh.html',
-    },
-    {
-      'target': ['3.13=>4.0', '4.0=>3.13'],
-      '3.13': '/upgrade-guide/upgrading/index.html',
-      '4.0':  '/upgrade-guide/upgrading-wazuh.html',
-    },
-    {
-      'target': ['3.13=>4.0', '4.0=>3.13'],
-      '3.13': '/upgrade-guide/upgrading/latest_wazuh3_minor.html',
-      '4.0':  '/upgrade-guide/upgrading-wazuh.html',
-    },
-    {
-      'target': ['3.13=>4.0', '4.0=>3.13'],
-      '3.13': '/upgrade-guide/upgrading/restore_alerts.html',
-      '4.0':  '/upgrade-guide/upgrading-wazuh.html',
-    },
-    {
-      'target': ['3.13=>4.0', '4.0=>3.13'],
-      '3.13': '/upgrade-guide/upgrading/same_minor_or_major.html',
-      '4.0':  '/upgrade-guide/upgrading-wazuh.html',
-    },
-    {
-      'target': ['3.13=>4.0', '4.0=>3.13'],
-      '3.13': '/upgrade-guide/upgrading-elastic-stack/elastic_server_hard_upgrade.html',
-      '4.0':  '/upgrade-guide/elasticsearch-kibana-filebeat/upgrading-elastic-stack.html',
-    },
-    {
-      'target': ['3.13=>4.0', '4.0=>3.13'],
-      '3.13': '/upgrade-guide/upgrading-elastic-stack/elastic_server_minor_upgrade.html',
-      '4.0':  '/upgrade-guide/elasticsearch-kibana-filebeat/upgrading-elastic-stack.html',
-    },
-    {
-      'target': ['3.13=>4.0', '4.0=>3.13'],
-      '3.13': '/upgrade-guide/upgrading-elastic-stack/elastic_server_rolling_upgrade.html',
-      '4.0':  '/upgrade-guide/elasticsearch-kibana-filebeat/upgrading-elastic-stack.html',
-    },
-    {
-      'target': ['3.13=>4.0', '4.0=>3.13'],
-      '3.13': '/upgrade-guide/upgrading-elastic-stack/index.html',
-      '4.0':  '/upgrade-guide/elasticsearch-kibana-filebeat/upgrading-elastic-stack.html',
-    },
-    {
-      'target': ['3.13=>4.0'],
-      '3.13': '/installation-guide/installing-wazuh-agent/linux/oracle5/wazuh_agent_package_oracle5.html',
-      '4.0':  '/installation-guide/wazuh-agent/index.html',
-    },
+  {
+    'target': ['3.13=>4.0', '4.0=>3.13'],
+    '3.13': '/deploying-with-puppet/wazuh-puppet-module/reference-wazuh-puppet/ossec-scanpaths.html',
+    '4.0': '/deploying-with-puppet/wazuh-puppet-module/index.html',
+  },
+  {
+    'target': ['3.13=>4.0', '4.0=>3.13'],
+    '3.13': '/installation-guide/compatibility_matrix/index.html',
+    '4.0': '/upgrade-guide/compatibility_matrix/index.html',
+  },
+  {
+    'target': ['3.13=>4.0', '4.0=>3.13'],
+    '3.13': '/installation-guide/installing-elastic-stack/protect-installation/index.html',
+    '4.0': '/installation-guide/open-distro/index.html',
+  },
+  {
+    'target': ['3.13=>4.0', '4.0=>3.13'],
+    '3.13': '/installation-guide/installing-elastic-stack/protect-installation/kibana_ssl.html',
+    '4.0': '/installation-guide/open-distro/index.html',
+  },
+  {
+    'target': ['3.13=>4.0', '4.0=>3.13'],
+    '3.13': '/installation-guide/installing-elastic-stack/protect-installation/searchguard.html',
+    '4.0': '/installation-guide/open-distro/index.html',
+  },
+  {
+    'target': ['3.13=>4.0', '4.0=>3.13'],
+    '3.13': '/installation-guide/installing-elastic-stack/protect-installation/xpack.html',
+    '4.0': '/installation-guide/open-distro/index.html',
+  },
+  {
+    'target': ['3.13=>4.0', '4.0=>3.13'],
+    '3.13': '/installation-guide/installing-elastic-stack/configure-elasticsearch-cluster.html',
+    '4.0': '/installation-guide/open-distro/index.html',
+  },
+  {
+    'target': ['3.13=>4.0', '4.0=>3.13'],
+    '3.13': '/installation-guide/installing-elastic-stack/elastic_server_deb.html',
+    '4.0': '/installation-guide/open-distro/index.html',
+  },
+  {
+    'target': ['3.13=>4.0', '4.0=>3.13'],
+    '3.13': '/installation-guide/installing-elastic-stack/elastic_server_rpm.html',
+    '4.0': '/installation-guide/open-distro/index.html',
+  },
+  {
+    'target': ['3.13=>4.0', '4.0=>3.13'],
+    '3.13': '/installation-guide/installing-elastic-stack/elastic_tuning.html',
+    '4.0': '/user-manual/elasticsearch/elastic_tuning.html',
+  },
+  {
+    'target': ['3.13=>4.0', '4.0=>3.13'],
+    '3.13': '/installation-guide/installing-elastic-stack/index.html',
+    '4.0': '/installation-guide/open-distro/index.html',
+  },
+  {
+    'target': ['3.13=>4.0', '4.0=>3.13'],
+    '3.13': '/installation-guide/installing-elastic-stack/transform_logstash.html',
+    '4.0': '/installation-guide/open-distro/index.html',
+  },
+  {
+    'target': ['3.13=>4.0'],
+    '3.13': '/installation-guide/installing-splunk/index.html',
+    '4.0': '/installation-guide/more-installation-alternatives/index.html'
+  },
+  {
+    'target': ['3.13=>4.0'],
+    '3.13': '/installation-guide/installing-splunk/splunk-app.html',
+    '4.0': '/installation-guide/more-installation-alternatives/index.html'
+  },
+  {
+    'target': ['3.13=>4.0'],
+    '3.13': '/installation-guide/installing-splunk/splunk-basic.html',
+    '4.0': '/installation-guide/more-installation-alternatives/index.html'
+  },
+  {
+    'target': ['3.13=>4.0'],
+    '3.13': '/installation-guide/installing-splunk/splunk-distributed.html',
+    '4.0': '/installation-guide/more-installation-alternatives/index.html'
+  },
+  {
+    'target': ['3.13=>4.0'],
+    '3.13': '/installation-guide/installing-splunk/splunk-forwarder.html',
+    '4.0': '/installation-guide/more-installation-alternatives/index.html'
+  },
+  {
+    'target': ['3.13=>4.0'],
+    '3.13': '/installation-guide/installing-splunk/splunk-polling.html',
+    '4.0': '/installation-guide/more-installation-alternatives/index.html'
+  },
+  {
+    'target': ['3.13=>4.0'],
+    '3.13': '/installation-guide/installing-splunk/splunk-reverse-proxy.html',
+    '4.0': '/installation-guide/more-installation-alternatives/index.html'
+  },
+  {
+    'target': ['3.13=>4.0', '4.0=>3.13'],
+    '3.13': '/installation-guide/installing-wazuh-agent/aix/index.html',
+    '4.0': '/installation-guide/wazuh-agent/wazuh_agent_package_aix.html',
+  },
+  {
+    'target': ['3.13=>4.0', '4.0=>3.13'],
+    '3.13': '/installation-guide/installing-wazuh-agent/aix/wazuh_agent_package_aix.html',
+    '4.0': '/installation-guide/wazuh-agent/wazuh_agent_package_aix.html',
+  },
+  {
+    'target': ['3.13=>4.0', '4.0=>3.13'],
+    '3.13': '/installation-guide/installing-wazuh-agent/aix/wazuh_agent_sources_aix.html',
+    '4.0': '/installation-guide/more-installation-alternatives/wazuh-from-sources/wazuh-agent/index.html',
+  },
+  {
+    'target': ['3.13=>4.0', '4.0=>3.13'],
+    '3.13': '/installation-guide/installing-wazuh-agent/deployment_variables/linux/deployment_variables_apt.html',
+    '4.0': '/installation-guide/wazuh-agent/deployment_variables/linux/deployment_variables_apt.html',
+  },
+  {
+    'target': ['3.13=>4.0', '4.0=>3.13'],
+    '3.13': '/installation-guide/installing-wazuh-agent/deployment_variables/linux/deployment_variables_dnf.html',
+    '4.0': '/installation-guide/wazuh-agent/deployment_variables/linux/deployment_variables_dnf.html',
+  },
+  {
+    'target': ['3.13=>4.0', '4.0=>3.13'],
+    '3.13': '/installation-guide/installing-wazuh-agent/deployment_variables/linux/deployment_variables_yum.html',
+    '4.0': '/installation-guide/wazuh-agent/deployment_variables/linux/deployment_variables_yum.html',
+  },
+  {
+    'target': ['3.13=>4.0', '4.0=>3.13'],
+    '3.13': '/installation-guide/installing-wazuh-agent/deployment_variables/linux/deployment_variables_zypper.html',
+    '4.0': '/installation-guide/wazuh-agent/deployment_variables/linux/deployment_variables_zypper.html',
+  },
+  {
+    'target': ['3.13=>4.0', '4.0=>3.13'],
+    '3.13': '/installation-guide/installing-wazuh-agent/deployment_variables/deployment_variables_aix.html',
+    '4.0': '/installation-guide/wazuh-agent/deployment_variables/deployment_variables_aix.html',
+  },
+  {
+    'target': ['3.13=>4.0', '4.0=>3.13'],
+    '3.13': '/installation-guide/installing-wazuh-agent/deployment_variables/deployment_variables_linux.html',
+    '4.0': '/installation-guide/wazuh-agent/deployment_variables/deployment_variables_linux.html',
+  },
+  {
+    'target': ['3.13=>4.0', '4.0=>3.13'],
+    '3.13': '/installation-guide/installing-wazuh-agent/deployment_variables/deployment_variables_macos.html',
+    '4.0': '/installation-guide/wazuh-agent/deployment_variables/deployment_variables_macos.html',
+  },
+  {
+    'target': ['3.13=>4.0', '4.0=>3.13'],
+    '3.13': '/installation-guide/installing-wazuh-agent/deployment_variables/deployment_variables_windows.html',
+    '4.0': '/installation-guide/wazuh-agent/deployment_variables/deployment_variables_windows.html',
+  },
+  {
+    'target': ['3.13=>4.0', '4.0=>3.13'],
+    '3.13': '/installation-guide/installing-wazuh-agent/hpux/index.html',
+    '4.0': '/installation-guide/wazuh-agent/wazuh_agent_package_hpux.html',
+  },
+  {
+    'target': ['3.13=>4.0', '4.0=>3.13'],
+    '3.13': '/installation-guide/installing-wazuh-agent/hpux/wazuh_agent_package_hpux.html',
+    '4.0': '/installation-guide/wazuh-agent/wazuh_agent_package_hpux.html',
+  },
+  {
+    'target': ['3.13=>4.0', '4.0=>3.13'],
+    '3.13': '/installation-guide/installing-wazuh-agent/hpux/wazuh_agent_sources_hpux.html',
+    '4.0': '/installation-guide/more-installation-alternatives/wazuh-from-sources/wazuh-agent/index.html',
+  },
+  {
+    'target': ['3.13=>4.0', '4.0=>3.13'],
+    '3.13': '/installation-guide/installing-wazuh-agent/linux/amazon1-or-greater/index.html',
+    '4.0': '/installation-guide/wazuh-agent/wazuh_agent_package_linux.html',
+  },
+  {
+    'target': ['3.13=>4.0', '4.0=>3.13'],
+    '3.13': '/installation-guide/installing-wazuh-agent/linux/amazon1-or-greater/wazuh_agent_package_amazon.html',
+    '4.0': '/installation-guide/wazuh-agent/wazuh_agent_package_linux.html',
+  },
+  {
+    'target': ['3.13=>4.0', '4.0=>3.13'],
+    '3.13': '/installation-guide/installing-wazuh-agent/linux/amazon1-or-greater/wazuh_agent_sources_amazon.html',
+    '4.0': '/installation-guide/wazuh-agent/wazuh_agent_package_linux.html',
+  },
+  {
+    'target': ['3.13=>4.0', '4.0=>3.13'],
+    '3.13': '/installation-guide/installing-wazuh-agent/linux/centos5/index.html',
+    '4.0': '/installation-guide/wazuh-agent/wazuh_agent_package_linux.html',
+  },
+  {
+    'target': ['3.13=>4.0', '4.0=>3.13'],
+    '3.13': '/installation-guide/installing-wazuh-agent/linux/centos5/wazuh_agent_package_centos5.html',
+    '4.0': '/installation-guide/wazuh-agent/wazuh_agent_package_linux.html',
+  },
+  {
+    'target': ['3.13=>4.0', '4.0=>3.13'],
+    '3.13': '/installation-guide/installing-wazuh-agent/linux/centos6-or-greater/index.html',
+    '4.0': '/installation-guide/wazuh-agent/wazuh_agent_package_linux.html',
+  },
+  {
+    'target': ['3.13=>4.0', '4.0=>3.13'],
+    '3.13': '/installation-guide/installing-wazuh-agent/linux/centos6-or-greater/wazuh_agent_package_centos6_or_greater.html',
+    '4.0': '/installation-guide/wazuh-agent/wazuh_agent_package_linux.html',
+  },
+  {
+    'target': ['3.13=>4.0', '4.0=>3.13'],
+    '3.13': '/installation-guide/installing-wazuh-agent/linux/centos6-or-greater/wazuh_agent_sources_centos6_or_greater.html',
+    '4.0': '/installation-guide/more-installation-alternatives/wazuh-from-sources/wazuh-agent/index.html',
+  },
+  {
+    'target': ['3.13=>4.0', '4.0=>3.13'],
+    '3.13': '/installation-guide/installing-wazuh-agent/linux/debian7-or-greater/index.html',
+    '4.0': '/installation-guide/wazuh-agent/wazuh_agent_package_linux.html',
+  },
+  {
+    'target': ['3.13=>4.0', '4.0=>3.13'],
+    '3.13': '/installation-guide/installing-wazuh-agent/linux/debian7-or-greater/wazuh_agent_package_debian7_or_greater.html',
+    '4.0': '/installation-guide/wazuh-agent/wazuh_agent_package_linux.html',
+  },
+  {
+    'target': ['3.13=>4.0', '4.0=>3.13'],
+    '3.13': '/installation-guide/installing-wazuh-agent/linux/debian7-or-greater/wazuh_agent_sources_debian7_or_greater.html',
+    '4.0': '/installation-guide/more-installation-alternatives/wazuh-from-sources/wazuh-agent/index.html',
+  },
+  {
+    'target': ['3.13=>4.0', '4.0=>3.13'],
+    '3.13': '/installation-guide/installing-wazuh-agent/linux/fedora22-or-greater/index.html',
+    '4.0': '/installation-guide/wazuh-agent/wazuh_agent_package_linux.html',
+  },
+  {
+    'target': ['3.13=>4.0', '4.0=>3.13'],
+    '3.13': '/installation-guide/installing-wazuh-agent/linux/fedora22-or-greater/wazuh_agent_package_fedora22_or_greater.html',
+    '4.0': '/installation-guide/wazuh-agent/wazuh_agent_package_linux.html',
+  },
+  {
+    'target': ['3.13=>4.0', '4.0=>3.13'],
+    '3.13': '/installation-guide/installing-wazuh-agent/linux/fedora22-or-greater/wazuh_agent_sources_fedora22_or_greater.html',
+    '4.0': '/installation-guide/more-installation-alternatives/wazuh-from-sources/wazuh-agent/index.html',
+  },
+  {
+    'target': ['3.13=>4.0', '4.0=>3.13'],
+    '3.13': '/installation-guide/installing-wazuh-agent/linux/opensuse42-leap-and-tumbleweed/index.html',
+    '4.0': '/installation-guide/wazuh-agent/wazuh_agent_package_linux.html',
+  },
+  {
+    'target': ['3.13=>4.0', '4.0=>3.13'],
+    '3.13': '/installation-guide/installing-wazuh-agent/linux/opensuse42-leap-and-tumbleweed/wazuh_agent_package_opensuse42_or_greater.html',
+    '4.0': '/installation-guide/wazuh-agent/wazuh_agent_package_linux.html',
+  },
+  {
+    'target': ['3.13=>4.0', '4.0=>3.13'],
+    '3.13': '/installation-guide/installing-wazuh-agent/linux/opensuse42-leap-and-tumbleweed/wazuh_agent_sources_opensuse42_or_greater.html',
+    '4.0': '/installation-guide/more-installation-alternatives/wazuh-from-sources/wazuh-agent/index.html',
+  },
+  {
+    'target': ['3.13=>4.0', '4.0=>3.13'],
+    '3.13': '/installation-guide/installing-wazuh-agent/linux/oracle5/index.html',
+    '4.0': '/installation-guide/wazuh-agent/wazuh_agent_package_linux.html',
+  },
+  {
+    'target': ['3.13=>4.0', '4.0=>3.13'],
+    '3.13': '/installation-guide/installing-wazuh-agent/linux/oracle6-or-greater/index.html',
+    '4.0': '/installation-guide/wazuh-agent/wazuh_agent_package_linux.html',
+  },
+  {
+    'target': ['3.13=>4.0', '4.0=>3.13'],
+    '3.13': '/installation-guide/installing-wazuh-agent/linux/oracle6-or-greater/wazuh_agent_package_oracle6_or_greater.html',
+    '4.0': '/installation-guide/wazuh-agent/wazuh_agent_package_linux.html',
+  },
+  {
+    'target': ['3.13=>4.0', '4.0=>3.13'],
+    '3.13': '/installation-guide/installing-wazuh-agent/linux/oracle6-or-greater/wazuh_agent_sources_oracle6_or_greater.html',
+    '4.0': '/installation-guide/more-installation-alternatives/wazuh-from-sources/wazuh-agent/index.html',
+  },
+  {
+    'target': ['3.13=>4.0', '4.0=>3.13'],
+    '3.13': '/installation-guide/installing-wazuh-agent/linux/rhel5/index.html',
+    '4.0': '/installation-guide/wazuh-agent/wazuh_agent_package_linux.html',
+  },
+  {
+    'target': ['3.13=>4.0', '4.0=>3.13'],
+    '3.13': '/installation-guide/installing-wazuh-agent/linux/rhel5/wazuh_agent_package_rhel5.html',
+    '4.0': '/installation-guide/wazuh-agent/wazuh_agent_package_linux.html',
+  },
+  {
+    'target': ['3.13=>4.0', '4.0=>3.13'],
+    '3.13': '/installation-guide/installing-wazuh-agent/linux/rhel6-or-greater/index.html',
+    '4.0': '/installation-guide/wazuh-agent/wazuh_agent_package_linux.html',
+  },
+  {
+    'target': ['3.13=>4.0', '4.0=>3.13'],
+    '3.13': '/installation-guide/installing-wazuh-agent/linux/rhel6-or-greater/wazuh_agent_package_rhel6_or_greater.html',
+    '4.0': '/installation-guide/wazuh-agent/wazuh_agent_package_linux.html',
+  },
+  {
+    'target': ['3.13=>4.0', '4.0=>3.13'],
+    '3.13': '/installation-guide/installing-wazuh-agent/linux/rhel6-or-greater/wazuh_agent_sources_rhel6_or_greater.html',
+    '4.0': '/installation-guide/more-installation-alternatives/wazuh-from-sources/wazuh-agent/index.html',
+  },
+  {
+    'target': ['3.13=>4.0', '4.0=>3.13'],
+    '3.13': '/installation-guide/installing-wazuh-agent/linux/suse11/index.html',
+    '4.0': '/installation-guide/wazuh-agent/wazuh_agent_package_linux.html',
+  },
+  {
+    'target': ['3.13=>4.0', '4.0=>3.13'],
+    '3.13': '/installation-guide/installing-wazuh-agent/linux/suse11/wazuh_agent_package_suse11.html',
+    '4.0': '/installation-guide/wazuh-agent/wazuh_agent_package_linux.html',
+  },
+  {
+    'target': ['3.13=>4.0', '4.0=>3.13'],
+    '3.13': '/installation-guide/installing-wazuh-agent/linux/suse11/wazuh_agent_sources_suse11.html',
+    '4.0': '/installation-guide/more-installation-alternatives/wazuh-from-sources/wazuh-agent/index.html',
+  },
+  {
+    'target': ['3.13=>4.0', '4.0=>3.13'],
+    '3.13': '/installation-guide/installing-wazuh-agent/linux/suse12/index.html',
+    '4.0': '/installation-guide/wazuh-agent/wazuh_agent_package_linux.html',
+  },
+  {
+    'target': ['3.13=>4.0', '4.0=>3.13'],
+    '3.13': '/installation-guide/installing-wazuh-agent/linux/suse12/wazuh_agent_package_suse12.html',
+    '4.0': '/installation-guide/wazuh-agent/wazuh_agent_package_linux.html',
+  },
+  {
+    'target': ['3.13=>4.0', '4.0=>3.13'],
+    '3.13': '/installation-guide/installing-wazuh-agent/linux/suse12/wazuh_agent_sources_suse12.html',
+    '4.0': '/installation-guide/more-installation-alternatives/wazuh-from-sources/wazuh-agent/index.html',
+  },
+  {
+    'target': ['3.13=>4.0', '4.0=>3.13'],
+    '3.13': '/installation-guide/installing-wazuh-agent/linux/ubuntu12.04-or-greater/index.html',
+    '4.0': '/installation-guide/wazuh-agent/wazuh_agent_package_linux.html',
+  },
+  {
+    'target': ['3.13=>4.0', '4.0=>3.13'],
+    '3.13': '/installation-guide/installing-wazuh-agent/linux/ubuntu12.04-or-greater/wazuh_agent_package_ubuntu12.04_or_greater.html',
+    '4.0': '/installation-guide/wazuh-agent/wazuh_agent_package_linux.html',
+  },
+  {
+    'target': ['3.13=>4.0', '4.0=>3.13'],
+    '3.13': '/installation-guide/installing-wazuh-agent/linux/ubuntu12.04-or-greater/wazuh_agent_sources_ubuntu12.04_or_greater.html',
+    '4.0': '/installation-guide/more-installation-alternatives/wazuh-from-sources/wazuh-agent/index.html',
+  },
+  {
+    'target': ['3.13=>4.0', '4.0=>3.13'],
+    '3.13': '/installation-guide/installing-wazuh-agent/linux/index.html',
+    '4.0': '/installation-guide/wazuh-agent/wazuh_agent_package_linux.html',
+  },
+  {
+    'target': ['3.13=>4.0', '4.0=>3.13'],
+    '3.13': '/installation-guide/installing-wazuh-agent/macos/index.html',
+    '4.0': '/installation-guide/wazuh-agent/wazuh_agent_package_macos.html',
+  },
+  {
+    'target': ['3.13=>4.0', '4.0=>3.13'],
+    '3.13': '/installation-guide/installing-wazuh-agent/macos/wazuh_agent_package_macos.html',
+    '4.0': '/installation-guide/wazuh-agent/wazuh_agent_package_macos.html',
+  },
+  {
+    'target': ['3.13=>4.0', '4.0=>3.13'],
+    '3.13': '/installation-guide/installing-wazuh-agent/macos/wazuh_agent_sources_macos.html',
+    '4.0': '/installation-guide/more-installation-alternatives/wazuh-from-sources/wazuh-agent/index.html',
+  },
+  {
+    'target': ['3.13=>4.0', '4.0=>3.13'],
+    '3.13': '/installation-guide/installing-wazuh-agent/solaris/solaris10/index.html',
+    '4.0': '/installation-guide/wazuh-agent/wazuh_agent_package_solaris.html',
+  },
+  {
+    'target': ['3.13=>4.0', '4.0=>3.13'],
+    '3.13': '/installation-guide/installing-wazuh-agent/solaris/solaris10/wazuh_agent_package_solaris10.html',
+    '4.0': '/installation-guide/wazuh-agent/wazuh_agent_package_solaris.html',
+  },
+  {
+    'target': ['3.13=>4.0', '4.0=>3.13'],
+    '3.13': '/installation-guide/installing-wazuh-agent/solaris/solaris10/wazuh_agent_sources_solaris10.html',
+    '4.0': '/installation-guide/more-installation-alternatives/wazuh-from-sources/wazuh-agent/index.html',
+  },
+  {
+    'target': ['3.13=>4.0', '4.0=>3.13'],
+    '3.13': '/installation-guide/installing-wazuh-agent/solaris/solaris11/index.html',
+    '4.0': '/installation-guide/wazuh-agent/wazuh_agent_package_solaris.html',
+  },
+  {
+    'target': ['3.13=>4.0', '4.0=>3.13'],
+    '3.13': '/installation-guide/installing-wazuh-agent/solaris/solaris11/wazuh_agent_package_solaris11.html',
+    '4.0': '/installation-guide/wazuh-agent/wazuh_agent_package_solaris.html',
+  },
+  {
+    'target': ['3.13=>4.0', '4.0=>3.13'],
+    '3.13': '/installation-guide/installing-wazuh-agent/solaris/solaris11/wazuh_agent_sources_solaris11.html',
+    '4.0': '/installation-guide/more-installation-alternatives/wazuh-from-sources/wazuh-agent/index.html',
+  },
+  {
+    'target': ['3.13=>4.0', '4.0=>3.13'],
+    '3.13': '/installation-guide/installing-wazuh-agent/solaris/index.html',
+    '4.0': '/installation-guide/wazuh-agent/wazuh_agent_package_solaris.html',
+  },
+  {
+    'target': ['3.13=>4.0', '4.0=>3.13'],
+    '3.13': '/installation-guide/installing-wazuh-agent/windows/index.html',
+    '4.0': '/installation-guide/wazuh-agent/wazuh_agent_package_windows.html',
+  },
+  {
+    'target': ['3.13=>4.0', '4.0=>3.13'],
+    '3.13': '/installation-guide/installing-wazuh-agent/windows/wazuh_agent_package_windows.html',
+    '4.0': '/installation-guide/wazuh-agent/wazuh_agent_package_windows.html',
+  },
+  {
+    'target': ['3.13=>4.0', '4.0=>3.13'],
+    '3.13': '/installation-guide/installing-wazuh-agent/windows/wazuh_agent_sources_windows.html',
+    '4.0': '/installation-guide/more-installation-alternatives/wazuh-from-sources/wazuh-agent/index.html',
+  },
+  {
+    'target': ['3.13=>4.0', '4.0=>3.13'],
+    '3.13': '/installation-guide/installing-wazuh-agent/deployment_variables.html',
+    '4.0': '/installation-guide/wazuh-agent/deployment_variables/deployment_variables.html',
+  },
+  {
+    'target': ['3.13=>4.0', '4.0=>3.13'],
+    '3.13': '/installation-guide/installing-wazuh-agent/index.html',
+    '4.0': '/installation-guide/wazuh-agent/index.html',
+  },
+  {
+    'target': ['3.13=>4.0', '4.0=>3.13'],
+    '3.13': '/installation-guide/installing-wazuh-manager/linux/amazon/index.html',
+    '4.0': '/installation-guide/open-distro/index.html'
+  },
+  {
+    'target': ['3.13=>4.0', '4.0=>3.13'],
+    '3.13': '/installation-guide/installing-wazuh-manager/linux/amazon/wazuh_server_packages_amazon.html',
+    '4.0': '/installation-guide/open-distro/index.html'
+  },
+  {
+    'target': ['3.13=>4.0', '4.0=>3.13'],
+    '3.13': '/installation-guide/installing-wazuh-manager/linux/amazon/wazuh_server_sources_amazon.html',
+    '4.0': '/installation-guide/open-distro/index.html'
+  },
+  {
+    'target': ['3.13=>4.0', '4.0=>3.13'],
+    '3.13': '/installation-guide/installing-wazuh-manager/linux/centos/index.html',
+    '4.0': '/installation-guide/open-distro/index.html'
+  },
+  {
+    'target': ['3.13=>4.0', '4.0=>3.13'],
+    '3.13': '/installation-guide/installing-wazuh-manager/linux/centos/wazuh_server_packages_centos.html',
+    '4.0': '/installation-guide/open-distro/index.html'
+  },
+  {
+    'target': ['3.13=>4.0', '4.0=>3.13'],
+    '3.13': '/installation-guide/installing-wazuh-manager/linux/centos/wazuh_server_sources_centos.html',
+    '4.0': '/installation-guide/open-distro/index.html'
+  },
+  {
+    'target': ['3.13=>4.0', '4.0=>3.13'],
+    '3.13': '/installation-guide/installing-wazuh-manager/linux/debian/index.html',
+    '4.0': '/installation-guide/open-distro/index.html'
+  },
+  {
+    'target': ['3.13=>4.0', '4.0=>3.13'],
+    '3.13': '/installation-guide/installing-wazuh-manager/linux/debian/wazuh_server_packages_deb.html',
+    '4.0': '/installation-guide/open-distro/index.html'
+  },
+  {
+    'target': ['3.13=>4.0', '4.0=>3.13'],
+    '3.13': '/installation-guide/installing-wazuh-manager/linux/debian/wazuh_server_sources_deb.html',
+    '4.0': '/installation-guide/open-distro/index.html'
+  },
+  {
+    'target': ['3.13=>4.0', '4.0=>3.13'],
+    '3.13': '/installation-guide/installing-wazuh-manager/linux/fedora/index.html',
+    '4.0': '/installation-guide/open-distro/index.html'
+  },
+  {
+    'target': ['3.13=>4.0', '4.0=>3.13'],
+    '3.13': '/installation-guide/installing-wazuh-manager/linux/fedora/wazuh_server_packages_fedora.html',
+    '4.0': '/installation-guide/open-distro/index.html'
+  },
+  {
+    'target': ['3.13=>4.0', '4.0=>3.13'],
+    '3.13': '/installation-guide/installing-wazuh-manager/linux/fedora/wazuh_server_sources_fedora.html',
+    '4.0': '/installation-guide/open-distro/index.html'
+  },
+  {
+    'target': ['3.13=>4.0', '4.0=>3.13'],
+    '3.13': '/installation-guide/installing-wazuh-manager/linux/opensuse/index.html',
+    '4.0': '/installation-guide/open-distro/index.html'
+  },
+  {
+    'target': ['3.13=>4.0', '4.0=>3.13'],
+    '3.13': '/installation-guide/installing-wazuh-manager/linux/opensuse/wazuh_server_packages_opensuse.html',
+    '4.0': '/installation-guide/open-distro/index.html'
+  },
+  {
+    'target': ['3.13=>4.0', '4.0=>3.13'],
+    '3.13': '/installation-guide/installing-wazuh-manager/linux/opensuse/wazuh_server_sources_opensuse.html',
+    '4.0': '/installation-guide/open-distro/index.html'
+  },
+  {
+    'target': ['3.13=>4.0', '4.0=>3.13'],
+    '3.13': '/installation-guide/installing-wazuh-manager/linux/oracle/index.html',
+    '4.0': '/installation-guide/open-distro/index.html'
+  },
+  {
+    'target': ['3.13=>4.0', '4.0=>3.13'],
+    '3.13': '/installation-guide/installing-wazuh-manager/linux/oracle/wazuh_server_packages_oracle.html',
+    '4.0': '/installation-guide/open-distro/index.html'
+  },
+  {
+    'target': ['3.13=>4.0', '4.0=>3.13'],
+    '3.13': '/installation-guide/installing-wazuh-manager/linux/oracle/wazuh_server_sources_oracle.html',
+    '4.0': '/installation-guide/open-distro/index.html'
+  },
+  {
+    'target': ['3.13=>4.0', '4.0=>3.13'],
+    '3.13': '/installation-guide/installing-wazuh-manager/linux/rhel/index.html',
+    '4.0': '/installation-guide/open-distro/index.html'
+  },
+  {
+    'target': ['3.13=>4.0', '4.0=>3.13'],
+    '3.13': '/installation-guide/installing-wazuh-manager/linux/rhel/wazuh_server_packages_rhel.html',
+    '4.0': '/installation-guide/open-distro/index.html'
+  },
+  {
+    'target': ['3.13=>4.0', '4.0=>3.13'],
+    '3.13': '/installation-guide/installing-wazuh-manager/linux/rhel/wazuh_server_sources_rhel.html',
+    '4.0': '/installation-guide/open-distro/index.html'
+  },
+  {
+    'target': ['3.13=>4.0', '4.0=>3.13'],
+    '3.13': '/installation-guide/installing-wazuh-manager/linux/suse/index.html',
+    '4.0': '/installation-guide/open-distro/index.html'
+  },
+  {
+    'target': ['3.13=>4.0', '4.0=>3.13'],
+    '3.13': '/installation-guide/installing-wazuh-manager/linux/suse/wazuh_server_packages_suse.html',
+    '4.0': '/installation-guide/open-distro/index.html'
+  },
+  {
+    'target': ['3.13=>4.0', '4.0=>3.13'],
+    '3.13': '/installation-guide/installing-wazuh-manager/linux/suse/wazuh_server_sources_suse.html',
+    '4.0': '/installation-guide/open-distro/index.html'
+  },
+  {
+    'target': ['3.13=>4.0', '4.0=>3.13'],
+    '3.13': '/installation-guide/installing-wazuh-manager/linux/ubuntu/index.html',
+    '4.0': '/installation-guide/open-distro/index.html'
+  },
+  {
+    'target': ['3.13=>4.0', '4.0=>3.13'],
+    '3.13': '/installation-guide/installing-wazuh-manager/linux/ubuntu/wazuh_server_packages_ubuntu.html',
+    '4.0': '/installation-guide/open-distro/index.html'
+  },
+  {
+    'target': ['3.13=>4.0', '4.0=>3.13'],
+    '3.13': '/installation-guide/installing-wazuh-manager/linux/ubuntu/wazuh_server_sources_ubuntu.html',
+    '4.0': '/installation-guide/open-distro/index.html'
+  },
+  {
+    'target': ['3.13=>4.0', '4.0=>3.13'],
+    '3.13': '/installation-guide/installing-wazuh-manager/index.html',
+    '4.0': '/installation-guide/open-distro/index.html'
+  },
+  {
+    'target': ['3.13=>4.0', '4.0=>3.13'],
+    '3.13': '/installation-guide/packages-list/index.html',
+    '4.0': '/installation-guide/packages-list.html',
+  },
+  {
+    'target': ['3.13=>4.0', '4.0=>3.13'],
+    '3.13': '/installation-guide/securing_api.html',
+    '4.0': '/user-manual/api/securing_api.html',
+  },
+  {
+    'target': ['3.13=>4.0', '4.0=>3.13'],
+    '3.13': '/installation-guide/virtual-machine.html',
+    '4.0': '/virtual-machine/virtual-machine.html',
+  },
+  {
+    'target': ['3.13=>4.0', '4.0=>3.13'],
+    '3.13': '/upgrade-guide/upgrading/legacy/index.html',
+    '4.0': '/upgrade-guide/legacy/index.html',
+  },
+  {
+    'target': ['3.13=>4.0', '4.0=>3.13'],
+    '3.13': '/upgrade-guide/upgrading/legacy/upgrading-elastic-stack.html',
+    '4.0': '/upgrade-guide/legacy/upgrading-elastic-stack/index.html',
+  },
+  {
+    'target': ['3.13=>4.0', '4.0=>3.13'],
+    '3.13': '/upgrade-guide/upgrading/legacy/upgrading-wazuh-agent.html',
+    '4.0': '/upgrade-guide/legacy/upgrading-agent/index.html',
+  },
+  {
+    'target': ['3.13=>4.0', '4.0=>3.13'],
+    '3.13': '/upgrade-guide/upgrading/legacy/upgrading-wazuh-manager.html',
+    '4.0': '/upgrade-guide/legacy/upgrading-wazuh-server/index.html',
+  },
+  {
+    'target': ['3.13=>4.0', '4.0=>3.13'],
+    '3.13': '/upgrade-guide/upgrading/different_major.html',
+    '4.0': '/upgrade-guide/upgrading-wazuh.html',
+  },
+  {
+    'target': ['3.13=>4.0', '4.0=>3.13'],
+    '3.13': '/upgrade-guide/upgrading/index.html',
+    '4.0': '/upgrade-guide/upgrading-wazuh.html',
+  },
+  {
+    'target': ['3.13=>4.0', '4.0=>3.13'],
+    '3.13': '/upgrade-guide/upgrading/latest_wazuh3_minor.html',
+    '4.0': '/upgrade-guide/upgrading-wazuh.html',
+  },
+  {
+    'target': ['3.13=>4.0', '4.0=>3.13'],
+    '3.13': '/upgrade-guide/upgrading/restore_alerts.html',
+    '4.0': '/upgrade-guide/upgrading-wazuh.html',
+  },
+  {
+    'target': ['3.13=>4.0', '4.0=>3.13'],
+    '3.13': '/upgrade-guide/upgrading/same_minor_or_major.html',
+    '4.0': '/upgrade-guide/upgrading-wazuh.html',
+  },
+  {
+    'target': ['3.13=>4.0', '4.0=>3.13'],
+    '3.13': '/upgrade-guide/upgrading-elastic-stack/elastic_server_hard_upgrade.html',
+    '4.0': '/upgrade-guide/elasticsearch-kibana-filebeat/upgrading-elastic-stack.html',
+  },
+  {
+    'target': ['3.13=>4.0', '4.0=>3.13'],
+    '3.13': '/upgrade-guide/upgrading-elastic-stack/elastic_server_minor_upgrade.html',
+    '4.0': '/upgrade-guide/elasticsearch-kibana-filebeat/upgrading-elastic-stack.html',
+  },
+  {
+    'target': ['3.13=>4.0', '4.0=>3.13'],
+    '3.13': '/upgrade-guide/upgrading-elastic-stack/elastic_server_rolling_upgrade.html',
+    '4.0': '/upgrade-guide/elasticsearch-kibana-filebeat/upgrading-elastic-stack.html',
+  },
+  {
+    'target': ['3.13=>4.0', '4.0=>3.13'],
+    '3.13': '/upgrade-guide/upgrading-elastic-stack/index.html',
+    '4.0': '/upgrade-guide/elasticsearch-kibana-filebeat/upgrading-elastic-stack.html',
+  },
+  {
+    'target': ['3.13=>4.0'],
+    '3.13': '/installation-guide/installing-wazuh-agent/linux/oracle5/wazuh_agent_package_oracle5.html',
+    '4.0': '/installation-guide/wazuh-agent/index.html',
+  },
 );
 
 /* *** RELEASE 3.13 ****/
@@ -4937,9 +4944,9 @@ redirections.push(
 );
 
 newUrls['3.13'] = [
-  '/release-notes/release-3-13-6.html', 
-  '/release-notes/release-3-13-5.html', 
-  '/release-notes/release-3-13-4.html',  
+  '/release-notes/release-3-13-6.html',
+  '/release-notes/release-3-13-5.html',
+  '/release-notes/release-3-13-4.html',
   '/release-notes/release_3_13_3.html',
   '/release-notes/release_3_13_2.html',
   '/getting-started/use_cases/index.html',
@@ -4980,166 +4987,166 @@ removedUrls['3.13'] = [
 /* Redirections from 3.11 to 3.12  */
 
 redirections.push(
-    {
-      'target': ['3.11=>3.12', '3.12=>3.11'],
-      '3.11': '/user-manual/registering/using-command-line.html',
-      '3.12': '/user-manual/registering/command-line-registration.html',
-    },
-    {
-      'target': ['3.11=>3.12'],
-      '3.11': '/user-manual/registering/cli/using-command-line-linux.html',
-      '3.12': '/user-manual/registering/command-line-registration.html#key-insertion-to-the-wazuh-agent-and-enabling-the-communication-with-the-wazuh-manager',
-    },
-    {
-      'target': ['3.11=>3.12'],
-      '3.11': '/user-manual/registering/cli/using-command-line-macos.html',
-      '3.12': '/user-manual/registering/command-line-registration.html#key-insertion-to-the-wazuh-agent-and-enabling-the-communication-with-the-wazuh-manager',
-    },
-    {
-      'target': ['3.11=>3.12'],
-      '3.11': '/user-manual/registering/cli/using-command-line-unix.html',
-      '3.12': '/user-manual/registering/command-line-registration.html#key-insertion-to-the-wazuh-agent-and-enabling-the-communication-with-the-wazuh-manager',
-    },
-    {
-      'target': ['3.11=>3.12'],
-      '3.11': '/user-manual/registering/cli/using-command-line-windows.html',
-      '3.12': '/user-manual/registering/command-line-registration.html#key-insertion-to-the-wazuh-agent-and-enabling-the-communication-with-the-wazuh-manager',
-    },
-    {
-      'target': ['3.11=>3.12', '3.12=>3.11'],
-      '3.11': '/user-manual/registering/manager-verification/host-verification-registration.html',
-      '3.12': '/user-manual/registering/host-verification-registration.html',
-    },
-    {
-      'target': ['3.11=>3.12'],
-      '3.11': '/user-manual/registering/manager-verification/manager-verification-registration.html',
-      '3.12': '/user-manual/registering/host-verification-registration.html#available-options-to-verify-the-hosts',
-    },
-    {
-      'target': ['3.11=>3.12'],
-      '3.11': '/user-manual/registering/manager-verification/agents/linux-unix-manager-verification.html',
-      '3.12': '/user-manual/registering/host-verification-registration.html#available-options-to-verify-the-hosts',
-    },
-    {
-      'target': ['3.11=>3.12'],
-      '3.11': '/user-manual/registering/manager-verification/agents/windows-manager-verification.html',
-      '3.12': '/user-manual/registering/host-verification-registration.html#available-options-to-verify-the-hosts',
-    },
-    {
-      'target': ['3.11=>3.12'],
-      '3.11': '/user-manual/registering/manager-verification/agents/macos-manager-verification.html',
-      '3.12': '/user-manual/registering/host-verification-registration.html#available-options-to-verify-the-hosts',
-    },
-    {
-      'target': ['3.11=>3.12'],
-      '3.11': '/user-manual/registering/manager-verification/agent-verification-registration.html',
-      '3.12': '/user-manual/registering/host-verification-registration.html#available-options-to-verify-the-hosts',
-    },
-    {
-      'target': ['3.11=>3.12'],
-      '3.11': '/user-manual/registering/manager-verification/agents/linux-unix-agent-verification.html',
-      '3.12': '/user-manual/registering/host-verification-registration.html#available-options-to-verify-the-hosts',
-    },
-    {
-      'target': ['3.11=>3.12'],
-      '3.11': '/user-manual/registering/manager-verification/agents/windows-agent-verification.html',
-      '3.12': '/user-manual/registering/host-verification-registration.html#available-options-to-verify-the-hosts',
-    },
-    {
-      'target': ['3.11=>3.12'],
-      '3.11': '/user-manual/registering/manager-verification/agents/macos-agent-verification.html',
-      '3.12': '/user-manual/registering/host-verification-registration.html#available-options-to-verify-the-hosts',
-    },
-    {
-      'target': ['3.11=>3.12', '3.12=>3.11'],
-      '3.11': '/user-manual/registering/password-authorization-registration-service.html',
-      '3.12': '/user-manual/registering/password-authorization-registration.html',
-    },
-    {
-      'target': ['3.11=>3.12'],
-      '3.11': '/user-manual/registering/password/linux-unix-password-registration.html',
-      '3.12': '/user-manual/registering/password-authorization-registration.html#registering-the-wazuh-agent-and-enabling-the-communication-with-the-wazuh-manager',
-    },
-    {
-      'target': ['3.11=>3.12'],
-      '3.11': '/user-manual/registering/password/windows-password-registration.html',
-      '3.12': '/user-manual/registering/password-authorization-registration.html#registering-the-wazuh-agent-and-enabling-the-communication-with-the-wazuh-manager',
-    },
-    {
-      'target': ['3.11=>3.12'],
-      '3.11': '/user-manual/registering/password/macos-password-registration.html',
-      '3.12': '/user-manual/registering/password-authorization-registration.html#registering-the-wazuh-agent-and-enabling-the-communication-with-the-wazuh-manager',
-    },
-    {
-      'target': ['3.11=>3.12', '3.12=>3.11'],
-      '3.11': '/user-manual/registering/registration-process.html',
-      '3.12': '/user-manual/registering/registering-agents-theory.html',
-    },
-    {
-      'target': ['3.11=>3.12', '3.12=>3.11'],
-      '3.11': '/user-manual/registering/restful-api-register.html',
-      '3.12': '/user-manual/registering/restful-api-registration.html',
-    },
-    {
-      'target': ['3.11=>3.12'],
-      '3.11': '/user-manual/registering/api/api-register-linux-unix.html',
-      '3.12': '/user-manual/registering/restful-api-registration.html',
-    },
-    {
-      'target': ['3.11=>3.12'],
-      '3.11': '/user-manual/registering/api/api-register-windows.html',
-      '3.12': '/user-manual/registering/restful-api-registration.html',
-    },
-    {
-      'target': ['3.11=>3.12'],
-      '3.11': '/user-manual/registering/api/api-register-macos.html',
-      '3.12': '/user-manual/registering/restful-api-registration.html',
-    },
-    {
-      'target': ['3.11=>3.12', '3.12=>3.11'],
-      '3.11': '/user-manual/registering/simple-registration-method.html',
-      '3.12': '/user-manual/registering/index.html#registering-the-wazuh-agent-using-simple-registration-service',
-    },
-    {
-      'target': ['3.11=>3.12'],
-      '3.11': '/user-manual/registering/linux-unix-simple-registration.html',
-      '3.12': '/user-manual/registering/index.html#registering-the-wazuh-agent-using-simple-registration-service',
-    },
-    {
-      'target': ['3.11=>3.12'],
-      '3.11': '/user-manual/registering/windows-simple-registration.html',
-      '3.12': '/user-manual/registering/index.html#registering-the-wazuh-agent-using-simple-registration-service',
-    },
-    {
-      'target': ['3.11=>3.12'],
-      '3.11': '/user-manual/registering/macos-simple-registration.html',
-      '3.12': '/user-manual/registering/index.html#registering-the-wazuh-agent-using-simple-registration-service',
-    },
-    {
-      'target': ['3.11=>3.12', '3.12=>3.11'],
-      '3.11': '/azure/monitoring activity.html',
-      '3.12': '/azure/monitoring-activity.html',
-    },
-    {
-      'target': ['3.11=>3.12', '3.12=>3.11'],
-      '3.11': '/azure/monitoring instances.html',
-      '3.12': '/azure/monitoring-instances.html',
-    },
-    {
-      'target': ['3.11=>3.12', '3.12=>3.11'],
-      '3.11': '/azure/monitoring services.html',
-      '3.12': '/azure/monitoring-services.html',
-    },
-    {
-      'target': ['3.11=>3.12'],
-      '3.11': '/user-manual/capabilities/file-integrity/fim-faq.html',
-      '3.12': '/user-manual/capabilities/file-integrity/index.html',
-    },
-    {
-      'target': ['3.11=>3.12'],
-      '3.11': '/installation-guide/installing-elastic-stack/automatic_api.html',
-      '3.12': '/installation-guide/index.html',
-    }
+  {
+    'target': ['3.11=>3.12', '3.12=>3.11'],
+    '3.11': '/user-manual/registering/using-command-line.html',
+    '3.12': '/user-manual/registering/command-line-registration.html',
+  },
+  {
+    'target': ['3.11=>3.12'],
+    '3.11': '/user-manual/registering/cli/using-command-line-linux.html',
+    '3.12': '/user-manual/registering/command-line-registration.html#key-insertion-to-the-wazuh-agent-and-enabling-the-communication-with-the-wazuh-manager',
+  },
+  {
+    'target': ['3.11=>3.12'],
+    '3.11': '/user-manual/registering/cli/using-command-line-macos.html',
+    '3.12': '/user-manual/registering/command-line-registration.html#key-insertion-to-the-wazuh-agent-and-enabling-the-communication-with-the-wazuh-manager',
+  },
+  {
+    'target': ['3.11=>3.12'],
+    '3.11': '/user-manual/registering/cli/using-command-line-unix.html',
+    '3.12': '/user-manual/registering/command-line-registration.html#key-insertion-to-the-wazuh-agent-and-enabling-the-communication-with-the-wazuh-manager',
+  },
+  {
+    'target': ['3.11=>3.12'],
+    '3.11': '/user-manual/registering/cli/using-command-line-windows.html',
+    '3.12': '/user-manual/registering/command-line-registration.html#key-insertion-to-the-wazuh-agent-and-enabling-the-communication-with-the-wazuh-manager',
+  },
+  {
+    'target': ['3.11=>3.12', '3.12=>3.11'],
+    '3.11': '/user-manual/registering/manager-verification/host-verification-registration.html',
+    '3.12': '/user-manual/registering/host-verification-registration.html',
+  },
+  {
+    'target': ['3.11=>3.12'],
+    '3.11': '/user-manual/registering/manager-verification/manager-verification-registration.html',
+    '3.12': '/user-manual/registering/host-verification-registration.html#available-options-to-verify-the-hosts',
+  },
+  {
+    'target': ['3.11=>3.12'],
+    '3.11': '/user-manual/registering/manager-verification/agents/linux-unix-manager-verification.html',
+    '3.12': '/user-manual/registering/host-verification-registration.html#available-options-to-verify-the-hosts',
+  },
+  {
+    'target': ['3.11=>3.12'],
+    '3.11': '/user-manual/registering/manager-verification/agents/windows-manager-verification.html',
+    '3.12': '/user-manual/registering/host-verification-registration.html#available-options-to-verify-the-hosts',
+  },
+  {
+    'target': ['3.11=>3.12'],
+    '3.11': '/user-manual/registering/manager-verification/agents/macos-manager-verification.html',
+    '3.12': '/user-manual/registering/host-verification-registration.html#available-options-to-verify-the-hosts',
+  },
+  {
+    'target': ['3.11=>3.12'],
+    '3.11': '/user-manual/registering/manager-verification/agent-verification-registration.html',
+    '3.12': '/user-manual/registering/host-verification-registration.html#available-options-to-verify-the-hosts',
+  },
+  {
+    'target': ['3.11=>3.12'],
+    '3.11': '/user-manual/registering/manager-verification/agents/linux-unix-agent-verification.html',
+    '3.12': '/user-manual/registering/host-verification-registration.html#available-options-to-verify-the-hosts',
+  },
+  {
+    'target': ['3.11=>3.12'],
+    '3.11': '/user-manual/registering/manager-verification/agents/windows-agent-verification.html',
+    '3.12': '/user-manual/registering/host-verification-registration.html#available-options-to-verify-the-hosts',
+  },
+  {
+    'target': ['3.11=>3.12'],
+    '3.11': '/user-manual/registering/manager-verification/agents/macos-agent-verification.html',
+    '3.12': '/user-manual/registering/host-verification-registration.html#available-options-to-verify-the-hosts',
+  },
+  {
+    'target': ['3.11=>3.12', '3.12=>3.11'],
+    '3.11': '/user-manual/registering/password-authorization-registration-service.html',
+    '3.12': '/user-manual/registering/password-authorization-registration.html',
+  },
+  {
+    'target': ['3.11=>3.12'],
+    '3.11': '/user-manual/registering/password/linux-unix-password-registration.html',
+    '3.12': '/user-manual/registering/password-authorization-registration.html#registering-the-wazuh-agent-and-enabling-the-communication-with-the-wazuh-manager',
+  },
+  {
+    'target': ['3.11=>3.12'],
+    '3.11': '/user-manual/registering/password/windows-password-registration.html',
+    '3.12': '/user-manual/registering/password-authorization-registration.html#registering-the-wazuh-agent-and-enabling-the-communication-with-the-wazuh-manager',
+  },
+  {
+    'target': ['3.11=>3.12'],
+    '3.11': '/user-manual/registering/password/macos-password-registration.html',
+    '3.12': '/user-manual/registering/password-authorization-registration.html#registering-the-wazuh-agent-and-enabling-the-communication-with-the-wazuh-manager',
+  },
+  {
+    'target': ['3.11=>3.12', '3.12=>3.11'],
+    '3.11': '/user-manual/registering/registration-process.html',
+    '3.12': '/user-manual/registering/registering-agents-theory.html',
+  },
+  {
+    'target': ['3.11=>3.12', '3.12=>3.11'],
+    '3.11': '/user-manual/registering/restful-api-register.html',
+    '3.12': '/user-manual/registering/restful-api-registration.html',
+  },
+  {
+    'target': ['3.11=>3.12'],
+    '3.11': '/user-manual/registering/api/api-register-linux-unix.html',
+    '3.12': '/user-manual/registering/restful-api-registration.html',
+  },
+  {
+    'target': ['3.11=>3.12'],
+    '3.11': '/user-manual/registering/api/api-register-windows.html',
+    '3.12': '/user-manual/registering/restful-api-registration.html',
+  },
+  {
+    'target': ['3.11=>3.12'],
+    '3.11': '/user-manual/registering/api/api-register-macos.html',
+    '3.12': '/user-manual/registering/restful-api-registration.html',
+  },
+  {
+    'target': ['3.11=>3.12', '3.12=>3.11'],
+    '3.11': '/user-manual/registering/simple-registration-method.html',
+    '3.12': '/user-manual/registering/index.html#registering-the-wazuh-agent-using-simple-registration-service',
+  },
+  {
+    'target': ['3.11=>3.12'],
+    '3.11': '/user-manual/registering/linux-unix-simple-registration.html',
+    '3.12': '/user-manual/registering/index.html#registering-the-wazuh-agent-using-simple-registration-service',
+  },
+  {
+    'target': ['3.11=>3.12'],
+    '3.11': '/user-manual/registering/windows-simple-registration.html',
+    '3.12': '/user-manual/registering/index.html#registering-the-wazuh-agent-using-simple-registration-service',
+  },
+  {
+    'target': ['3.11=>3.12'],
+    '3.11': '/user-manual/registering/macos-simple-registration.html',
+    '3.12': '/user-manual/registering/index.html#registering-the-wazuh-agent-using-simple-registration-service',
+  },
+  {
+    'target': ['3.11=>3.12', '3.12=>3.11'],
+    '3.11': '/azure/monitoring activity.html',
+    '3.12': '/azure/monitoring-activity.html',
+  },
+  {
+    'target': ['3.11=>3.12', '3.12=>3.11'],
+    '3.11': '/azure/monitoring instances.html',
+    '3.12': '/azure/monitoring-instances.html',
+  },
+  {
+    'target': ['3.11=>3.12', '3.12=>3.11'],
+    '3.11': '/azure/monitoring services.html',
+    '3.12': '/azure/monitoring-services.html',
+  },
+  {
+    'target': ['3.11=>3.12'],
+    '3.11': '/user-manual/capabilities/file-integrity/fim-faq.html',
+    '3.12': '/user-manual/capabilities/file-integrity/index.html',
+  },
+  {
+    'target': ['3.11=>3.12'],
+    '3.11': '/installation-guide/installing-elastic-stack/automatic_api.html',
+    '3.12': '/installation-guide/index.html',
+  }
 );
 
 /* Pages added in 3.12 */
@@ -5204,121 +5211,121 @@ removedUrls['3.12'] = [
 /* Redirections from 3.10 to 3.11  */
 
 redirections.push(
-    {
-      'target': ['3.10=>3.11', '3.11=>3.10'],
-      '3.10': '/amazon/services/index.html',
-      '3.11': '/amazon/services/supported-services/index.html',
-    },
-    {
-      'target': ['3.10=>3.11', '3.11=>3.10'],
-      '3.10': '/amazon/configuration/considerations.html',
-      '3.11': '/amazon/services/prerequisites/considerations.html',
-    },
-    {
-      'target': ['3.10=>3.11', '3.11=>3.10'],
-      '3.10': '/amazon/configuration/credentials.html',
-      '3.11': '/amazon/services/prerequisites/credentials.html',
-    },
-    {
-      'target': ['3.10=>3.11', '3.11=>3.10'],
-      '3.10': '/amazon/configuration/dependencies.html',
-      '3.11': '/amazon/services/prerequisites/dependencies.html',
-    },
-    {
-      'target': ['3.10=>3.11', '3.11=>3.10'],
-      '3.10': '/amazon/services/S3-bucket.html',
-      '3.11': '/amazon/services/prerequisites/S3-bucket.html',
-    },
-    {
-      'target': ['3.10=>3.11', '3.11=>3.10'],
-      '3.10': '/amazon/configuration/index.html',
-      '3.11': '/amazon/services/prerequisites/index.html',
-    },
-    {
-      'target': ['3.10=>3.11', '3.11=>3.10'],
-      '3.10': '/amazon/services/cloudtrail.html',
-      '3.11': '/amazon/services/supported-services/cloudtrail.html',
-    },
-    {
-      'target': ['3.10=>3.11', '3.11=>3.10'],
-      '3.10': '/amazon/services/config.html',
-      '3.11': '/amazon/services/supported-services/config.html',
-    },
-    {
-      'target': ['3.10=>3.11', '3.11=>3.10'],
-      '3.10': '/amazon/services/guardduty.html',
-      '3.11': '/amazon/services/supported-services/guardduty.html',
-    },
-    {
-      'target': ['3.10=>3.11', '3.11=>3.10'],
-      '3.10': '/amazon/services/inspector.html',
-      '3.11': '/amazon/services/supported-services/inspector.html',
-    },
-    {
-      'target': ['3.10=>3.11', '3.11=>3.10'],
-      '3.10': '/amazon/services/kms.html',
-      '3.11': '/amazon/services/supported-services/kms.html',
-    },
-    {
-      'target': ['3.10=>3.11', '3.11=>3.10'],
-      '3.10': '/amazon/services/macie.html',
-      '3.11': '/amazon/services/supported-services/macie.html',
-    },
-    {
-      'target': ['3.10=>3.11', '3.11=>3.10'],
-      '3.10': '/amazon/services/trusted-advisor.html',
-      '3.11': '/amazon/services/supported-services/trusted-advisor.html',
-    },
-    {
-      'target': ['3.10=>3.11', '3.11=>3.10'],
-      '3.10': '/amazon/services/vpc.html',
-      '3.11': '/amazon/services/supported-services/vpc.html',
-    },
-    {
-      'target': ['3.10=>3.11', '3.11=>3.10'],
-      '3.10': '/amazon/troubleshooting.html',
-      '3.11': '/amazon/services/troubleshooting.html',
-    },
-    {
-      'target': ['3.10=>3.11', '3.11=>3.10'],
-      '3.10': '/deploying-with-puppet/wazuh-puppet-module/reference-wazuh-puppet/wazuh-server-class.html',
-      '3.11': '/deploying-with-puppet/wazuh-puppet-module/reference-wazuh-puppet/wazuh-manager-class.html',
-    },
-    {
-      'target': ['3.10=>3.11', '3.11=>3.10'],
-      '3.10': '/user-manual/agents/remote-upgrading/create-custom-wpk/create-custom-wpk-automatically.html',
-      '3.11': '/development/packaging/generate-wpk-package.html',
-    },
-    {
-      'target': ['3.10=>3.11', '3.11=>3.10'],
-      '3.10': '/user-manual/agents/remote-upgrading/create-custom-wpk/create-custom-wpk-manually.html',
-      '3.11': '/user-manual/agents/remote-upgrading/create-custom-wpk/generate-wpk-package-manually.html',
-    },
-    {
-      'target': ['3.10=>3.11', '3.11=>3.10'],
-      '3.10': '/user-manual/capabilities/vulnerability-detection.html#compatibility-matrix',
-      '3.11': '/user-manual/capabilities/vulnerability-detection/compatibility_matrix.html',
-    },
-    {
-      'target': ['3.10=>3.11', '3.11=>3.10'],
-      '3.10': '/user-manual/capabilities/vulnerability-detection.html#how-it-works',
-      '3.11': '/user-manual/capabilities/vulnerability-detection/how_it_works.html',
-    },
-    {
-      'target': ['3.10=>3.11', '3.11=>3.10'],
-      '3.10': '/user-manual/capabilities/vulnerability-detection.html',
-      '3.11': '/user-manual/capabilities/vulnerability-detection/index.html',
-    },
-    {
-      'target': ['3.10=>3.11', '3.11=>3.10'],
-      '3.10': '/user-manual/capabilities/vulnerability-detection.html#use-case-running-a-vulnerability-scan',
-      '3.11': '/user-manual/capabilities/vulnerability-detection/running_vu_scan.html',
-    },
-    {
-      'target': ['3.10=>3.11', '3.11=>3.10'],
-      '3.10': '/user-manual/reference/ossec-conf/wodle-vuln-detector.html',
-      '3.11': '/user-manual/reference/ossec-conf/vuln-detector.html',
-    }
+  {
+    'target': ['3.10=>3.11', '3.11=>3.10'],
+    '3.10': '/amazon/services/index.html',
+    '3.11': '/amazon/services/supported-services/index.html',
+  },
+  {
+    'target': ['3.10=>3.11', '3.11=>3.10'],
+    '3.10': '/amazon/configuration/considerations.html',
+    '3.11': '/amazon/services/prerequisites/considerations.html',
+  },
+  {
+    'target': ['3.10=>3.11', '3.11=>3.10'],
+    '3.10': '/amazon/configuration/credentials.html',
+    '3.11': '/amazon/services/prerequisites/credentials.html',
+  },
+  {
+    'target': ['3.10=>3.11', '3.11=>3.10'],
+    '3.10': '/amazon/configuration/dependencies.html',
+    '3.11': '/amazon/services/prerequisites/dependencies.html',
+  },
+  {
+    'target': ['3.10=>3.11', '3.11=>3.10'],
+    '3.10': '/amazon/services/S3-bucket.html',
+    '3.11': '/amazon/services/prerequisites/S3-bucket.html',
+  },
+  {
+    'target': ['3.10=>3.11', '3.11=>3.10'],
+    '3.10': '/amazon/configuration/index.html',
+    '3.11': '/amazon/services/prerequisites/index.html',
+  },
+  {
+    'target': ['3.10=>3.11', '3.11=>3.10'],
+    '3.10': '/amazon/services/cloudtrail.html',
+    '3.11': '/amazon/services/supported-services/cloudtrail.html',
+  },
+  {
+    'target': ['3.10=>3.11', '3.11=>3.10'],
+    '3.10': '/amazon/services/config.html',
+    '3.11': '/amazon/services/supported-services/config.html',
+  },
+  {
+    'target': ['3.10=>3.11', '3.11=>3.10'],
+    '3.10': '/amazon/services/guardduty.html',
+    '3.11': '/amazon/services/supported-services/guardduty.html',
+  },
+  {
+    'target': ['3.10=>3.11', '3.11=>3.10'],
+    '3.10': '/amazon/services/inspector.html',
+    '3.11': '/amazon/services/supported-services/inspector.html',
+  },
+  {
+    'target': ['3.10=>3.11', '3.11=>3.10'],
+    '3.10': '/amazon/services/kms.html',
+    '3.11': '/amazon/services/supported-services/kms.html',
+  },
+  {
+    'target': ['3.10=>3.11', '3.11=>3.10'],
+    '3.10': '/amazon/services/macie.html',
+    '3.11': '/amazon/services/supported-services/macie.html',
+  },
+  {
+    'target': ['3.10=>3.11', '3.11=>3.10'],
+    '3.10': '/amazon/services/trusted-advisor.html',
+    '3.11': '/amazon/services/supported-services/trusted-advisor.html',
+  },
+  {
+    'target': ['3.10=>3.11', '3.11=>3.10'],
+    '3.10': '/amazon/services/vpc.html',
+    '3.11': '/amazon/services/supported-services/vpc.html',
+  },
+  {
+    'target': ['3.10=>3.11', '3.11=>3.10'],
+    '3.10': '/amazon/troubleshooting.html',
+    '3.11': '/amazon/services/troubleshooting.html',
+  },
+  {
+    'target': ['3.10=>3.11', '3.11=>3.10'],
+    '3.10': '/deploying-with-puppet/wazuh-puppet-module/reference-wazuh-puppet/wazuh-server-class.html',
+    '3.11': '/deploying-with-puppet/wazuh-puppet-module/reference-wazuh-puppet/wazuh-manager-class.html',
+  },
+  {
+    'target': ['3.10=>3.11', '3.11=>3.10'],
+    '3.10': '/user-manual/agents/remote-upgrading/create-custom-wpk/create-custom-wpk-automatically.html',
+    '3.11': '/development/packaging/generate-wpk-package.html',
+  },
+  {
+    'target': ['3.10=>3.11', '3.11=>3.10'],
+    '3.10': '/user-manual/agents/remote-upgrading/create-custom-wpk/create-custom-wpk-manually.html',
+    '3.11': '/user-manual/agents/remote-upgrading/create-custom-wpk/generate-wpk-package-manually.html',
+  },
+  {
+    'target': ['3.10=>3.11', '3.11=>3.10'],
+    '3.10': '/user-manual/capabilities/vulnerability-detection.html#compatibility-matrix',
+    '3.11': '/user-manual/capabilities/vulnerability-detection/compatibility_matrix.html',
+  },
+  {
+    'target': ['3.10=>3.11', '3.11=>3.10'],
+    '3.10': '/user-manual/capabilities/vulnerability-detection.html#how-it-works',
+    '3.11': '/user-manual/capabilities/vulnerability-detection/how_it_works.html',
+  },
+  {
+    'target': ['3.10=>3.11', '3.11=>3.10'],
+    '3.10': '/user-manual/capabilities/vulnerability-detection.html',
+    '3.11': '/user-manual/capabilities/vulnerability-detection/index.html',
+  },
+  {
+    'target': ['3.10=>3.11', '3.11=>3.10'],
+    '3.10': '/user-manual/capabilities/vulnerability-detection.html#use-case-running-a-vulnerability-scan',
+    '3.11': '/user-manual/capabilities/vulnerability-detection/running_vu_scan.html',
+  },
+  {
+    'target': ['3.10=>3.11', '3.11=>3.10'],
+    '3.10': '/user-manual/reference/ossec-conf/wodle-vuln-detector.html',
+    '3.11': '/user-manual/reference/ossec-conf/vuln-detector.html',
+  }
 );
 
 /* Pages added in 3.11 */
@@ -5396,51 +5403,51 @@ newUrls['3.11'] = [
 /* Redirections from 3.9 to 3.10  */
 
 redirections.push(
-    {
-      'target': ['3.9=>3.10', '3.10=>3.9'],
-      '3.9': '/user-manual/manager/wazuh-cluster.html',
-      '3.10': '/user-manual/configuring-cluster/index.html',
-    },
-    {
-      'target': ['3.9=>3.10', '3.10=>3.9'],
-      '3.9': '/user-manual/capabilities/sec-config-assessment/how-it-works.html',
-      '3.10': '/user-manual/capabilities/sec-config-assessment/how_it_works.html',
-    },
-    {
-      'target': ['3.9=>3.10', '3.10=>3.9'],
-      '3.9': '/user-manual/capabilities/sec-config-assessment/use-case.html',
-      '3.10': '/user-manual/capabilities/sec-config-assessment/use_case.html',
-    },
-    {
-      'target': ['3.9=>3.10', '3.10=>3.9'],
-      '3.9': '/user-manual/capabilities/sec-config-assessment/security-configuration-assessment.html',
-      '3.10': '/user-manual/capabilities/sec-config-assessment/what_is_it.html',
-    },
-    {
-      'target': ['3.9=>3.10', '3.10=>3.9'],
-      '3.9': '/user-manual/capabilities/sec-config-assessment/security-configuration-assessment.html#creating-custom-sca-policies',
-      '3.10': '/user-manual/capabilities/sec-config-assessment/creating_custom_policies.html',
-    },
-    {
-      'target': ['3.9=>3.10', '3.10=>3.9'],
-      '3.9': '/user-manual/manager/wazuh-cluster.html',
-      '3.10': '/user-manual/configuring-cluster/basics.html',
-    },
-    {
-      'target': ['3.9=>3.10', '3.10=>3.9'],
-      '3.9': '/user-manual/manager/wazuh-cluster.html#getting-started',
-      '3.10': '/user-manual/configuring-cluster/index.html',
-    },
-    {
-      'target': ['3.9=>3.10', '3.10=>3.9'],
-      '3.9': '/user-manual/manager/wazuh-cluster.html#pointing-agents-to-the-cluster-with-a-load-balancer',
-      '3.10': '/user-manual/configuring-cluster/advanced-settings.html',
-    },
-    {
-      'target': ['3.9=>3.10', '3.10=>3.9'],
-      '3.9': '/user-manual/manager/wazuh-cluster.html#cluster-management',
-      '3.10': '/user-manual/configuring-cluster/cluster_management.html',
-    }
+  {
+    'target': ['3.9=>3.10', '3.10=>3.9'],
+    '3.9': '/user-manual/manager/wazuh-cluster.html',
+    '3.10': '/user-manual/configuring-cluster/index.html',
+  },
+  {
+    'target': ['3.9=>3.10', '3.10=>3.9'],
+    '3.9': '/user-manual/capabilities/sec-config-assessment/how-it-works.html',
+    '3.10': '/user-manual/capabilities/sec-config-assessment/how_it_works.html',
+  },
+  {
+    'target': ['3.9=>3.10', '3.10=>3.9'],
+    '3.9': '/user-manual/capabilities/sec-config-assessment/use-case.html',
+    '3.10': '/user-manual/capabilities/sec-config-assessment/use_case.html',
+  },
+  {
+    'target': ['3.9=>3.10', '3.10=>3.9'],
+    '3.9': '/user-manual/capabilities/sec-config-assessment/security-configuration-assessment.html',
+    '3.10': '/user-manual/capabilities/sec-config-assessment/what_is_it.html',
+  },
+  {
+    'target': ['3.9=>3.10', '3.10=>3.9'],
+    '3.9': '/user-manual/capabilities/sec-config-assessment/security-configuration-assessment.html#creating-custom-sca-policies',
+    '3.10': '/user-manual/capabilities/sec-config-assessment/creating_custom_policies.html',
+  },
+  {
+    'target': ['3.9=>3.10', '3.10=>3.9'],
+    '3.9': '/user-manual/manager/wazuh-cluster.html',
+    '3.10': '/user-manual/configuring-cluster/basics.html',
+  },
+  {
+    'target': ['3.9=>3.10', '3.10=>3.9'],
+    '3.9': '/user-manual/manager/wazuh-cluster.html#getting-started',
+    '3.10': '/user-manual/configuring-cluster/index.html',
+  },
+  {
+    'target': ['3.9=>3.10', '3.10=>3.9'],
+    '3.9': '/user-manual/manager/wazuh-cluster.html#pointing-agents-to-the-cluster-with-a-load-balancer',
+    '3.10': '/user-manual/configuring-cluster/advanced-settings.html',
+  },
+  {
+    'target': ['3.9=>3.10', '3.10=>3.9'],
+    '3.9': '/user-manual/manager/wazuh-cluster.html#cluster-management',
+    '3.10': '/user-manual/configuring-cluster/cluster_management.html',
+  }
 );
 
 /* Pages added in 3.10 */
@@ -5468,776 +5475,776 @@ newUrls['3.10'] = [
 /* Redirections from 3.8 to 3.9 */
 
 redirections.push(
-    {
-      'target': ['3.8=>3.9'],
-      '3.8': '/azure/installation.html',
-      '3.9': '/azure/index.html',
-    },
-    {
-      'target': ['3.8=>3.9'],
-      '3.8': '/user-manual/kibana-app/configure-xpack/xpack-troubleshooting.html',
-      '3.9': '/installation-guide/installing-elastic-stack/protect-installation/xpack.html',
-    },
-    {
-      'target': ['3.9=>3.8'],
-      '3.8': '/index.html',
-      '3.9': '/deployment.html',
-    },
-    {
-      'target': ['3.8=>3.9', '3.9=>3.8'],
-      '3.8': '/user-manual/kibana-app/configure-xpack/index.html',
-      '3.9': '/installation-guide/installing-elastic-stack/protect-installation/xpack.html',
-    },
-    {
-      'target': ['3.8=>3.9'],
-      '3.8': '/user-manual/kibana-app/configure-xpack/defining-xpack-users.html',
-      '3.9': '/installation-guide/installing-elastic-stack/protect-installation/xpack.html',
-    },
-    {
-      'target': ['3.8=>3.9'],
-      '3.8': '/user-manual/kibana-app/configure-xpack/configure-xpack-users.html',
-      '3.9': '/installation-guide/installing-elastic-stack/protect-installation/xpack.html',
-    },
-    {
-      'target': ['3.8=>3.9', '3.9=>3.8'],
-      '3.8': '/user-manual/agents/remote-upgrading/create-custom-wpk.html#compile-a-package',
-      '3.9': '/user-manual/agents/remote-upgrading/create-custom-wpk/create-custom-wpk-manually.html',
-    },
-    {
-      'target': ['3.8=>3.9', '3.9=>3.8'],
-      '3.8': '/user-manual/registering/use-registration-service.html#agent-verification-using-ssl',
-      '3.9': '/user-manual/registering/manager-verification/agent-verification-registration.html',
-    },
-    {
-      'target': ['3.8=>3.9', '3.9=>3.8'],
-      '3.8': '/user-manual/registering/use-registration-service.html#manager-verification-using-ssl',
-      '3.9': '/user-manual/registering/manager-verification/manager-verification-registration.html',
-    },
-    {
-      'target': ['3.8=>3.9', '3.9=>3.8'],
-      '3.8': '/user-manual/registering/use-registration-service.html#password-authorization',
-      '3.9': '/user-manual/registering/password-authorization-registration-service.html',
-    },
-    {
-      'target': ['3.8=>3.9'],
-      '3.8': '/user-manual/agents/restful-api/index.html',
-      '3.9': '/user-manual/agents/index.html',
-    },
-    {
-      'target': ['3.8=>3.9'],
-      '3.8': '/user-manual/agents/command-line/index.html',
-      '3.9': '/user-manual/agents/index.html',
-    },
-    {
-      'target': ['3.8=>3.9', '3.9=>3.8'],
-      '3.8': '/installation-guide/installing-wazuh-agent/wazuh_agent_aix.html',
-      '3.9': '/installation-guide/installing-wazuh-agent/aix/index.html',
-    },
-    {
-      'target': ['3.9=>3.8'],
-      '3.8': '/installation-guide/installing-wazuh-agent/wazuh_agent_aix.html',
-      '3.9': '/installation-guide/installing-wazuh-agent/aix/wazuh_agent_package_aix.html',
-    },
-    {
-      'target': ['3.9=>3.8'],
-      '3.8': '/installation-guide/installing-wazuh-agent/index.html',
-      '3.9': '/installation-guide/installing-wazuh-agent/windows/index.html',
-    },
-    {
-      'target': ['3.8=>3.9', '3.9=>3.8'],
-      '3.8': '/installation-guide/installing-wazuh-agent/wazuh_agent_windows.html',
-      '3.9': '/installation-guide/installing-wazuh-agent/windows/wazuh_agent_package_windows.html',
-    },
-    {
-      'target': ['3.8=>3.9', '3.9=>3.8'],
-      '3.8': '/installation-guide/installing-wazuh-agent/wazuh_agent_sources.html#installing-windows-agent',
-      '3.9': '/installation-guide/installing-wazuh-agent/windows/wazuh_agent_sources_windows.html',
-    },
-    {
-      'target': ['3.8=>3.9'],
-      '3.8': '/installation-guide/installing-wazuh-agent/wazuh_agent_sources.html#installing-linux-agent',
-      '3.9': '/installation-guide/installing-wazuh-agent/linux/index.html',
-    },
-    {
-      'target': ['3.9=>3.8'],
-      '3.8': '/installation-guide/installing-wazuh-agent/wazuh_agent_sources.html#installing-linux-agent',
-      '3.9': '/installation-guide/installing-wazuh-agent/linux/amazon1-or-greater/wazuh_agent_sources_amazon.html',
-    },
-    {
-      'target': ['3.9=>3.8'],
-      '3.8': '/installation-guide/installing-wazuh-agent/wazuh_agent_sources.html#installing-linux-agent',
-      '3.9': '/installation-guide/installing-wazuh-agent/linux/centos6-or-greater/wazuh_agent_sources_centos6_or_greater.html',
-    },
-    {
-      'target': ['3.9=>3.8'],
-      '3.8': '/installation-guide/installing-wazuh-agent/wazuh_agent_sources.html#installing-linux-agent',
-      '3.9': '/installation-guide/installing-wazuh-agent/linux/debian7-or-greater/wazuh_agent_sources_debian7_or_greater.html',
-    },
-    {
-      'target': ['3.9=>3.8'],
-      '3.8': '/installation-guide/installing-wazuh-agent/wazuh_agent_sources.html#installing-linux-agent',
-      '3.9': '/installation-guide/installing-wazuh-agent/linux/fedora22-or-greater/wazuh_agent_sources_fedora22_or_greater.html',
-    },
-    {
-      'target': ['3.9=>3.8'],
-      '3.8': '/installation-guide/installing-wazuh-agent/index.html',
-      '3.9': '/installation-guide/installing-wazuh-agent/linux/opensuse42-leap-and-tumbleweed/index.html',
-    },
-    {
-      'target': ['3.9=>3.8'],
-      '3.8': '/installation-guide/installing-wazuh-agent/wazuh_agent_rpm.html#suse-12',
-      '3.9': '/installation-guide/installing-wazuh-agent/linux/opensuse42-leap-and-tumbleweed/wazuh_agent_package_opensuse42_or_greater.html',
-    },
-    {
-      'target': ['3.9=>3.8'],
-      '3.8': '/installation-guide/installing-wazuh-agent/index.html',
-      '3.9': '/installation-guide/installing-wazuh-agent/linux/oracle5/index.html',
-    },
-    {
-      'target': ['3.9=>3.8'],
-      '3.8': '/installation-guide/installing-wazuh-agent/wazuh_agent_rpm.html#centos-5-rhel-5',
-      '3.9': '/installation-guide/installing-wazuh-agent/linux/oracle5/wazuh_agent_package_oracle5.html',
-    },
-    {
-      'target': ['3.9=>3.8'],
-      '3.8': '/installation-guide/installing-wazuh-agent/index.html',
-      '3.9': '/installation-guide/installing-wazuh-agent/linux/oracle6-or-greater/index.html',
-    },
-    {
-      'target': ['3.9=>3.8'],
-      '3.8': '/installation-guide/installing-wazuh-agent/wazuh_agent_sources.html#installing-linux-agent',
-      '3.9': '/installation-guide/installing-wazuh-agent/linux/oracle6-or-greater/wazuh_agent_sources_oracle6_or_greater.html',
-    },
-    {
-      'target': ['3.9=>3.8'],
-      '3.8': '/installation-guide/installing-wazuh-agent/wazuh_agent_rpm.html#centos-6-rhel-6-centos-7-rhel-7-fedora-22-or-greater-and-amazon-linux',
-      '3.9': '/installation-guide/installing-wazuh-agent/linux/oracle6-or-greater/wazuh_agent_package_oracle6_or_greater.html',
-    },
-    {
-      'target': ['3.9=>3.8'],
-      '3.8': '/installation-guide/installing-wazuh-agent/wazuh_agent_sources.html#installing-linux-agent',
-      '3.9': '/installation-guide/installing-wazuh-agent/linux/rhel6-or-greater/wazuh_agent_sources_rhel6_or_greater.html',
-    },
-    {
-      'target': ['3.9=>3.8'],
-      '3.8': '/installation-guide/installing-wazuh-agent/wazuh_agent_sources.html#installing-linux-agent',
-      '3.9': '/installation-guide/installing-wazuh-agent/linux/suse11/wazuh_agent_sources_suse11.html',
-    },
-    {
-      'target': ['3.9=>3.8'],
-      '3.8': '/installation-guide/installing-wazuh-agent/wazuh_agent_sources.html#installing-linux-agent',
-      '3.9': '/installation-guide/installing-wazuh-agent/linux/suse12/wazuh_agent_sources_suse12.html',
-    },
-    {
-      'target': ['3.9=>3.8'],
-      '3.8': '/installation-guide/installing-wazuh-agent/wazuh_agent_sources.html#installing-linux-agent',
-      '3.9': '/installation-guide/installing-wazuh-agent/linux/ubuntu12.04-or-greater/wazuh_agent_sources_ubuntu12.04_or_greater.html',
-    },
-    {
-      'target': ['3.9=>3.8'],
-      '3.8': '/installation-guide/installing-wazuh-agent/wazuh_agent_rpm.html#centos-5-rhel-5',
-      '3.9': '/installation-guide/installing-wazuh-agent/linux/centos5/index.html',
-    },
-    {
-      'target': ['3.8=>3.9'],
-      '3.8': '/installation-guide/installing-wazuh-agent/wazuh_agent_sources.html',
-      '3.9': '/installation-guide/installing-wazuh-agent/index.html',
-    },
-    {
-      'target': ['3.8=>3.9'],
-      '3.8': '/installation-guide/installing-wazuh-agent/wazuh_agent_rpm.html',
-      '3.9': '/installation-guide/installing-wazuh-agent/linux/index.html',
-    },
-    {
-      'target': ['3.8=>3.9'],
-      '3.8': '/installation-guide/installing-wazuh-agent/wazuh_agent_deb.html',
-      '3.9': '/installation-guide/installing-wazuh-agent/linux/index.html',
-    },
-    {
-      'target': ['3.9=>3.8'],
-      '3.8': '/installation-guide/installing-wazuh-agent/index.html',
-      '3.9': '/installation-guide/installing-wazuh-agent/linux/debian7-or-greater/index.html',
-    },
-    {
-      'target': ['3.9=>3.8'],
-      '3.8': '/installation-guide/installing-wazuh-agent/wazuh_agent_deb.html',
-      '3.9': '/installation-guide/installing-wazuh-agent/linux/debian7-or-greater/wazuh_agent_package_debian7_or_greater.html',
-    },
-    {
-      'target': ['3.9=>3.8'],
-      '3.8': '/installation-guide/installing-wazuh-agent/index.html',
-      '3.9': '/installation-guide/installing-wazuh-agent/linux/ubuntu12.04-or-greater/index.html',
-    },
-    {
-      'target': ['3.9=>3.8'],
-      '3.8': '/installation-guide/installing-wazuh-agent/wazuh_agent_deb.html',
-      '3.9': '/installation-guide/installing-wazuh-agent/linux/ubuntu12.04-or-greater/wazuh_agent_package_ubuntu12.04_or_greater.html',
-    },
-    {
-      'target': ['3.8=>3.9', '3.9=>3.8'],
-      '3.8': '/deploying-with-ansible/guide/install-wazuh-server.html',
-      '3.9': '/deploying-with-ansible/guide/install-wazuh-manager.html',
-    },
-    {
-      'target': ['3.8=>3.9', '3.9=>3.8'],
-      '3.8': '/installation-guide/installing-elastic-stack/kibana_ssl.html',
-      '3.9': '/installation-guide/installing-elastic-stack/protect-installation/kibana_ssl.html',
-    },
-    {
-      'target': ['3.8=>3.9', '3.9=>3.8'],
-      '3.8': '/installation-guide/installing-elastic-stack/searchguard.html',
-      '3.9': '/installation-guide/installing-elastic-stack/protect-installation/searchguard.html',
-    },
-    {
-      'target': ['3.8=>3.9', '3.9=>3.8'],
-      '3.8': '/installing-splunk/index.html',
-      '3.9': '/installation-guide/installing-splunk/index.html',
-    },
-    {
-      'target': ['3.8=>3.9', '3.9=>3.8'],
-      '3.8': '/installing-splunk/splunk-app.html',
-      '3.9': '/installation-guide/installing-splunk/splunk-app.html',
-    },
-    {
-      'target': ['3.8=>3.9', '3.9=>3.8'],
-      '3.8': '/installing-splunk/splunk-basic.html',
-      '3.9': '/installation-guide/installing-splunk/splunk-basic.html',
-    },
-    {
-      'target': ['3.8=>3.9', '3.9=>3.8'],
-      '3.8': '/installing-splunk/splunk-distributed.html',
-      '3.9': '/installation-guide/installing-splunk/splunk-distributed.html',
-    },
-    {
-      'target': ['3.8=>3.9', '3.9=>3.8'],
-      '3.8': '/installing-splunk/splunk-forwarder.html',
-      '3.9': '/installation-guide/installing-splunk/splunk-forwarder.html',
-    },
-    {
-      'target': ['3.8=>3.9', '3.9=>3.8'],
-      '3.8': '/installing-splunk/splunk-polling.html',
-      '3.9': '/installation-guide/installing-splunk/splunk-polling.html',
-    },
-    {
-      'target': ['3.8=>3.9', '3.9=>3.8'],
-      '3.8': '/installing-splunk/splunk-reverse-proxy.html',
-      '3.9': '/installation-guide/installing-splunk/splunk-reverse-proxy.html',
-    },
-    {
-      'target': ['3.8=>3.9', '3.9=>3.8'],
-      '3.8': '/installation-guide/installing-wazuh-agent/wazuh_agent_hpux.html',
-      '3.9': '/installation-guide/installing-wazuh-agent/hpux/index.html',
-    },
-    {
-      'target': ['3.9=>3.8'],
-      '3.8': '/installation-guide/installing-wazuh-agent/wazuh_agent_hpux.html',
-      '3.9': '/installation-guide/installing-wazuh-agent/hpux/wazuh_agent_package_hpux.html',
-    },
-    {
-      'target': ['3.9=>3.8'],
-      '3.8': '/installation-guide/installing-wazuh-agent/wazuh_agent_rpm.html#centos-6-rhel-6-centos-7-rhel-7-fedora-22-or-greater-and-amazon-linux',
-      '3.9': '/installation-guide/installing-wazuh-agent/linux/amazon1-or-greater/index.html',
-    },
-    {
-      'target': ['3.9=>3.8'],
-      '3.8': '/installation-guide/installing-wazuh-agent/wazuh_agent_rpm.html#centos-6-rhel-6-centos-7-rhel-7-fedora-22-or-greater-and-amazon-linux',
-      '3.9': '/installation-guide/installing-wazuh-agent/linux/amazon1-or-greater/wazuh_agent_package_amazon.html',
-    },
-    {
-      'target': ['3.9=>3.8'],
-      '3.8': '/installation-guide/installing-wazuh-agent/index.html',
-      '3.9': '/installation-guide/installing-wazuh-agent/linux/centos6-or-greater/index.html',
-    },
-    {
-      'target': ['3.9=>3.8'],
-      '3.8': '/installation-guide/installing-wazuh-agent/wazuh_agent_rpm.html#centos-6-rhel-6-centos-7-rhel-7-fedora-22-or-greater-and-amazon-linux',
-      '3.9': '/installation-guide/installing-wazuh-agent/linux/centos6-or-greater/wazuh_agent_package_centos6_or_greater.html',
-    },
-    {
-      'target': ['3.9=>3.8'],
-      '3.8': '/installation-guide/installing-wazuh-agent/index.html',
-      '3.9': '/installation-guide/installing-wazuh-agent/linux/fedora22-or-greater/index.html',
-    },
-    {
-      'target': ['3.9=>3.8'],
-      '3.8': '/installation-guide/installing-wazuh-agent/wazuh_agent_rpm.html#centos-6-rhel-6-centos-7-rhel-7-fedora-22-or-greater-and-amazon-linux',
-      '3.9': '/installation-guide/installing-wazuh-agent/linux/fedora22-or-greater/wazuh_agent_package_fedora22_or_greater.html',
-    },
-    {
-      'target': ['3.9=>3.8'],
-      '3.8': '/installation-guide/installing-wazuh-agent/wazuh_agent_rpm.html#centos-6-rhel-6-centos-7-rhel-7-fedora-22-or-greater-and-amazon-linux',
-      '3.9': '/installation-guide/installing-wazuh-agent/linux/rhel6-or-greater/index.html',
-    },
-    {
-      'target': ['3.9=>3.8'],
-      '3.8': '/installation-guide/installing-wazuh-agent/wazuh_agent_rpm.html#centos-6-rhel-6-centos-7-rhel-7-fedora-22-or-greater-and-amazon-linux',
-      '3.9': '/installation-guide/installing-wazuh-agent/linux/rhel6-or-greater/wazuh_agent_package_rhel6_or_greater.html',
-    },
-    {
-      'target': ['3.8=>3.9', '3.9=>3.8'],
-      '3.8': '/installation-guide/installing-wazuh-agent/wazuh_agent_linux.html',
-      '3.9': '/installation-guide/installing-wazuh-agent/linux/index.html',
-    },
-    {
-      'target': ['3.9=>3.8'],
-      '3.8': '/installation-guide/installing-wazuh-agent/wazuh_agent_rpm.html#centos-5-rhel-5',
-      '3.9': '/installation-guide/installing-wazuh-agent/linux/centos5/wazuh_agent_package_centos5.html',
-    },
-    {
-      'target': ['3.8=>3.9'],
-      '3.8': '/installation-guide/installing-wazuh-agent/wazuh_agent_rpm.html#centos-5-rhel-5',
-      '3.9': '/installation-guide/installing-wazuh-agent/linux/index.html',
-    },
-    {
-      'target': ['3.9=>3.8'],
-      '3.8': '/installation-guide/installing-wazuh-agent/wazuh_agent_rpm.html#centos-5-rhel-5',
-      '3.9': '/installation-guide/installing-wazuh-agent/linux/rhel5/index.html',
-    },
-    {
-      'target': ['3.9=>3.8'],
-      '3.8': '/installation-guide/installing-wazuh-agent/wazuh_agent_rpm.html#centos-5-rhel-5',
-      '3.9': '/installation-guide/installing-wazuh-agent/linux/rhel5/wazuh_agent_package_rhel5.html',
-    },
-    {
-      'target': ['3.8=>3.9', '3.9=>3.8'],
-      '3.8': '/installation-guide/installing-wazuh-agent/wazuh_agent_rpm.html#suse-11',
-      '3.9': '/installation-guide/installing-wazuh-agent/linux/suse11/index.html',
-    },
-    {
-      'target': ['3.9=>3.8'],
-      '3.8': '/installation-guide/installing-wazuh-agent/wazuh_agent_rpm.html#suse-11',
-      '3.9': '/installation-guide/installing-wazuh-agent/linux/suse11/wazuh_agent_package_suse11.html',
-    },
-    {
-      'target': ['3.8=>3.9'],
-      '3.8': '/installation-guide/installing-wazuh-agent/wazuh_agent_rpm.html#suse-12',
-      '3.9': '/installation-guide/installing-wazuh-agent/linux/suse12/index.html',
-    },
-    {
-      'target': ['3.9=>3.8'],
-      '3.8': '/installation-guide/installing-wazuh-agent/index.html',
-      '3.9': '/installation-guide/installing-wazuh-agent/linux/suse12/index.html',
-    },
-    {
-      'target': ['3.9=>3.8'],
-      '3.8': '/installation-guide/installing-wazuh-agent/wazuh_agent_rpm.html#suse-12',
-      '3.9': '/installation-guide/installing-wazuh-agent/linux/suse12/wazuh_agent_package_suse12.html',
-    },
-    {
-      'target': ['3.8=>3.9'],
-      '3.8': '/installation-guide/installing-wazuh-agent/wazuh_agent_macos.html',
-      '3.9': '/installation-guide/installing-wazuh-agent/macos/index.html',
-    },
-    {
-      'target': ['3.9=>3.8'],
-      '3.8': '/installation-guide/installing-wazuh-agent/wazuh_agent_macos.html',
-      '3.9': '/installation-guide/installing-wazuh-agent/macos/wazuh_agent_package_macos.html',
-    },
-    {
-      'target': ['3.8=>3.9', '3.9=>3.8'],
-      '3.8': '/installation-guide/installing-wazuh-agent/wazuh_agent_solaris.html',
-      '3.9': '/installation-guide/installing-wazuh-agent/solaris/index.html',
-    },
-    {
-      'target': ['3.9=>3.8'],
-      '3.8': '/installation-guide/installing-wazuh-agent/wazuh_agent_solaris.html',
-      '3.9': '/installation-guide/installing-wazuh-agent/solaris/solaris10/index.html',
-    },
-    {
-      'target': ['3.9=>3.8'],
-      '3.8': '/installation-guide/installing-wazuh-agent/wazuh_agent_solaris.html',
-      '3.9': '/installation-guide/installing-wazuh-agent/solaris/solaris10/wazuh_agent_package_solaris10.html',
-    },
-    {
-      'target': ['3.9=>3.8'],
-      '3.8': '/installation-guide/installing-wazuh-agent/wazuh_agent_solaris.html',
-      '3.9': '/installation-guide/installing-wazuh-agent/solaris/solaris10/wazuh_agent_sources_solaris10.html',
-    },
-    {
-      'target': ['3.9=>3.8'],
-      '3.8': '/installation-guide/installing-wazuh-agent/wazuh_agent_solaris.html',
-      '3.9': '/installation-guide/installing-wazuh-agent/solaris/solaris11/index.html',
-    },
-    {
-      'target': ['3.9=>3.8'],
-      '3.8': '/installation-guide/installing-wazuh-agent/wazuh_agent_solaris.html',
-      '3.9': '/installation-guide/installing-wazuh-agent/solaris/solaris11/wazuh_agent_package_solaris11.html',
-    },
-    {
-      'target': ['3.8=>3.9', '3.9=>3.8'],
-      '3.8': '/installation-guide/installing-wazuh-server/index.html',
-      '3.9': '/installation-guide/installing-wazuh-manager/index.html',
-    },
-    {
-      'target': ['3.8=>3.9'],
-      '3.8': '/installation-guide/installing-wazuh-server/wazuh_server_rpm.html',
-      '3.9': '/installation-guide/installing-wazuh-manager/index.html',
-    },
-    {
-      'target': ['3.8=>3.9'],
-      '3.8': '/installation-guide/installing-wazuh-server/wazuh_server_deb.html',
-      '3.9': '/installation-guide/installing-wazuh-manager/index.html',
-    },
-    {
-      'target': ['3.8=>3.9'],
-      '3.8': '/installation-guide/installing-wazuh-server/sources_installation.html',
-      '3.9': '/installation-guide/installing-wazuh-manager/index.html',
-    },
-    {
-      'target': ['3.9=>3.8'],
-      '3.8': '/installation-guide/installing-wazuh-server/index.html',
-      '3.9': '/installation-guide/installing-wazuh-manager/linux/amazon/index.html',
-    },
-    {
-      'target': ['3.9=>3.8'],
-      '3.8': '/installation-guide/installing-wazuh-server/index.html',
-      '3.9': '/installation-guide/installing-wazuh-manager/linux/centos/index.html',
-    },
-    {
-      'target': ['3.9=>3.8'],
-      '3.8': '/installation-guide/installing-wazuh-server/index.html',
-      '3.9': '/installation-guide/installing-wazuh-manager/linux/debian/index.html',
-    },
-    {
-      'target': ['3.9=>3.8'],
-      '3.8': '/installation-guide/installing-wazuh-server/index.html',
-      '3.9': '/installation-guide/installing-wazuh-manager/linux/fedora/index.html',
-    },
-    {
-      'target': ['3.9=>3.8'],
-      '3.8': '/installation-guide/installing-wazuh-server/index.html',
-      '3.9': '/installation-guide/installing-wazuh-manager/linux/opensuse/index.html',
-    },
-    {
-      'target': ['3.9=>3.8'],
-      '3.8': '/installation-guide/installing-wazuh-server/index.html',
-      '3.9': '/installation-guide/installing-wazuh-manager/linux/oracle/index.html',
-    },
-    {
-      'target': ['3.9=>3.8'],
-      '3.8': '/installation-guide/installing-wazuh-server/index.html',
-      '3.9': '/installation-guide/installing-wazuh-manager/linux/rhel/index.html',
-    },
-    {
-      'target': ['3.9=>3.8'],
-      '3.8': '/installation-guide/installing-wazuh-server/index.html',
-      '3.9': '/installation-guide/installing-wazuh-manager/linux/suse/index.html',
-    },
-    {
-      'target': ['3.9=>3.8'],
-      '3.8': '/installation-guide/installing-wazuh-server/index.html',
-      '3.9': '/installation-guide/installing-wazuh-manager/linux/ubuntu/index.html',
-    },
-    {
-      'target': ['3.9=>3.8'],
-      '3.8': '/installation-guide/installing-wazuh-server/wazuh_server_rpm.html',
-      '3.9': '/installation-guide/installing-wazuh-manager/linux/amazon/wazuh_server_packages_amazon.html',
-    },
-    {
-      'target': ['3.9=>3.8'],
-      '3.8': '/installation-guide/installing-wazuh-server/wazuh_server_rpm.html',
-      '3.9': '/installation-guide/installing-wazuh-manager/linux/centos/wazuh_server_packages_centos.html',
-    },
-    {
-      'target': ['3.9=>3.8'],
-      '3.8': '/installation-guide/installing-wazuh-server/wazuh_server_rpm.html',
-      '3.9': '/installation-guide/installing-wazuh-manager/linux/fedora/wazuh_server_packages_fedora.html',
-    },
-    {
-      'target': ['3.9=>3.8'],
-      '3.8': '/installation-guide/installing-wazuh-server/wazuh_server_rpm.html',
-      '3.9': '/installation-guide/installing-wazuh-manager/linux/oracle/wazuh_server_packages_oracle.html',
-    },
-    {
-      'target': ['3.9=>3.8'],
-      '3.8': '/installation-guide/installing-wazuh-server/wazuh_server_rpm.html',
-      '3.9': '/installation-guide/installing-wazuh-manager/linux/rhel/wazuh_server_packages_rhel.html',
-    },
-    {
-      'target': ['3.9=>3.8'],
-      '3.8': '/installation-guide/installing-wazuh-server/wazuh_server_deb.html',
-      '3.9': '/installation-guide/installing-wazuh-manager/linux/debian/wazuh_server_packages_deb.html',
-    },
-    {
-      'target': ['3.9=>3.8'],
-      '3.8': '/installation-guide/installing-wazuh-server/wazuh_server_deb.html',
-      '3.9': '/installation-guide/installing-wazuh-manager/linux/ubuntu/wazuh_server_packages_ubuntu.html',
-    },
-    {
-      'target': ['3.9=>3.8'],
-      '3.8': '/installation-guide/installing-wazuh-server/sources_installation.html',
-      '3.9': '/installation-guide/installing-wazuh-manager/linux/amazon/wazuh_server_sources_amazon.html',
-    },
-    {
-      'target': ['3.9=>3.8'],
-      '3.8': '/installation-guide/installing-wazuh-server/sources_installation.html',
-      '3.9': '/installation-guide/installing-wazuh-manager/linux/centos/wazuh_server_sources_centos.html',
-    },
-    {
-      'target': ['3.9=>3.8'],
-      '3.8': '/installation-guide/installing-wazuh-server/sources_installation.html',
-      '3.9': '/installation-guide/installing-wazuh-manager/linux/debian/wazuh_server_sources_deb.html',
-    },
-    {
-      'target': ['3.9=>3.8'],
-      '3.8': '/installation-guide/installing-wazuh-server/sources_installation.html',
-      '3.9': '/installation-guide/installing-wazuh-manager/linux/fedora/wazuh_server_sources_fedora.html',
-    },
-    {
-      'target': ['3.9=>3.8'],
-      '3.8': '/installation-guide/installing-wazuh-server/sources_installation.html',
-      '3.9': '/installation-guide/installing-wazuh-manager/linux/oracle/wazuh_server_sources_oracle.html',
-    },
-    {
-      'target': ['3.9=>3.8'],
-      '3.8': '/installation-guide/installing-wazuh-server/sources_installation.html',
-      '3.9': '/installation-guide/installing-wazuh-manager/linux/rhel/wazuh_server_sources_rhel.html',
-    },
-    {
-      'target': ['3.9=>3.8'],
-      '3.8': '/installation-guide/installing-wazuh-server/sources_installation.html',
-      '3.9': '/installation-guide/installing-wazuh-manager/linux/ubuntu/wazuh_server_sources_ubuntu.html',
-    },
-    {
-      'target': ['3.8=>3.9', '3.9=>3.8'],
-      '3.8': '/installation-guide/installing-wazuh-agent/wazuh_agent_windows.html#using-the-command-line',
-      '3.9': '/installation-guide/installing-wazuh-agent/deployment_variables/deployment_variables_windows.html',
-    },
-    {
-      'target': ['3.8=>3.9', '3.9=>3.8'],
-      '3.8': '/installation-guide/installing-wazuh-server/securing_api.html',
-      '3.9': '/installation-guide/securing_api.html',
-    },
-    {
-      'target': ['3.9=>3.8'],
-      '3.8': '/index.html',
-      '3.9': '/monitoring.html',
-    },
-    {
-      'target': ['3.9=>3.8'],
-      '3.8': '/installation-guide/upgrading/index.html',
-      '3.9': '/upgrade-guide/index.html',
-    },
-    {
-      'target': ['3.8=>3.9', '3.9=>3.8'],
-      '3.8': '/installation-guide/upgrading/index.html',
-      '3.9': '/upgrade-guide/upgrading/index.html',
-    },
-    {
-      'target': ['3.8=>3.9', '3.9=>3.8'],
-      '3.8': '/installation-guide/upgrading/different_major.html',
-      '3.9': '/upgrade-guide/upgrading/different_major.html',
-    },
-    {
-      'target': ['3.8=>3.9', '3.9=>3.8'],
-      '3.8': '/installation-guide/upgrading/latest_wazuh3_minor.html',
-      '3.9': '/upgrade-guide/upgrading/latest_wazuh3_minor.html',
-    },
-    {
-      'target': ['3.8=>3.9', '3.9=>3.8'],
-      '3.8': '/installation-guide/upgrading/legacy/index.html',
-      '3.9': '/upgrade-guide/upgrading/legacy/index.html',
-    },
-    {
-      'target': ['3.8=>3.9', '3.9=>3.8'],
-      '3.8': '/installation-guide/upgrading/legacy/upgrading-elastic-stack.html',
-      '3.9': '/upgrade-guide/upgrading/legacy/upgrading-elastic-stack.html',
-    },
-    {
-      'target': ['3.8=>3.9', '3.9=>3.8'],
-      '3.8': '/installation-guide/upgrading/legacy/upgrading-wazuh-agent.html',
-      '3.9': '/upgrade-guide/upgrading/legacy/upgrading-wazuh-agent.html',
-    },
-    {
-      'target': ['3.8=>3.9', '3.9=>3.8'],
-      '3.8': '/installation-guide/upgrading/legacy/upgrading-wazuh-server.html',
-      '3.9': '/upgrade-guide/upgrading/legacy/upgrading-wazuh-manager.html',
-    },
-    {
-      'target': ['3.8=>3.9', '3.9=>3.8'],
-      '3.8': '/installation-guide/upgrading/restore_alerts.html',
-      '3.9': '/upgrade-guide/upgrading/restore_alerts.html',
-    },
-    {
-      'target': ['3.8=>3.9', '3.9=>3.8'],
-      '3.8': '/installation-guide/upgrading/same_minor.html',
-      '3.9': '/upgrade-guide/upgrading/same_minor_or_major.html',
-    },
-    {
-      'target': ['3.9=>3.8'],
-      '3.8': '/user-manual/agents/index.html',
-      '3.9': '/user-manual/agents/listing/index.html',
-    },
-    {
-      'target': ['3.8=>3.9', '3.9=>3.8'],
-      '3.8': '/user-manual/agents/remote-upgrading/create-custom-wpk.html',
-      '3.9': '/user-manual/agents/remote-upgrading/create-custom-wpk/create-wpk-key.html',
-    },
-    {
-      'target': ['3.9=>3.8'],
-      '3.8': '/user-manual/agents/index.html',
-      '3.9': '/user-manual/agents/remove-agents/index.html',
-    },
-    {
-      'target': ['3.9=>3.8'],
-      '3.8': '/user-manual/agents/restful-api/register.html',
-      '3.9': '/user-manual/registering/api/api-register-linux-unix.html',
-    },
-    {
-      'target': ['3.9=>3.8'],
-      '3.8': '/user-manual/agents/restful-api/register.html',
-      '3.9': '/user-manual/registering/api/api-register-macos.html',
-    },
-    {
-      'target': ['3.9=>3.8'],
-      '3.8': '/user-manual/agents/restful-api/register.html',
-      '3.9': '/user-manual/registering/api/api-register-windows.html',
-    },
-    {
-      'target': ['3.8=>3.9', '3.9=>3.8'],
-      '3.8': '/user-manual/agents/command-line/register.html',
-      '3.9': '/user-manual/registering/using-command-line.html',
-    },
-    {
-      'target': ['3.9=>3.8'],
-      '3.8': '/user-manual/agents/command-line/register.html',
-      '3.9': '/user-manual/registering/cli/using-command-line-linux.html',
-    },
-    {
-      'target': ['3.9=>3.8'],
-      '3.8': '/user-manual/agents/command-line/register.html',
-      '3.9': '/user-manual/registering/cli/using-command-line-macos.html',
-    },
-    {
-      'target': ['3.9=>3.8'],
-      '3.8': '/user-manual/agents/command-line/register.html',
-      '3.9': '/user-manual/registering/cli/using-command-line-unix.html',
-    },
-    {
-      'target': ['3.9=>3.8'],
-      '3.8': '/user-manual/agents/command-line/register.html',
-      '3.9': '/user-manual/registering/cli/using-command-line-windows.html',
-    },
-    {
-      'target': ['3.8=>3.9', '3.9=>3.8'],
-      '3.8': '/user-manual/agents/command-line/listing.html',
-      '3.9': '/user-manual/agents/listing/using-command-line.html',
-    },
-    {
-      'target': ['3.8=>3.9', '3.9=>3.8'],
-      '3.8': '/user-manual/agents/command-line/remove.html',
-      '3.9': '/user-manual/agents/remove-agents/remove.html',
-    },
-    {
-      'target': ['3.8=>3.9', '3.9=>3.8'],
-      '3.8': '/user-manual/agents/restful-api/remove.html',
-      '3.9': '/user-manual/agents/remove-agents/restful-api-remove.html',
-    },
-    {
-      'target': ['3.8=>3.9', '3.9=>3.8'],
-      '3.8': '/user-manual/agents/restful-api/register.html',
-      '3.9': '/user-manual/registering/restful-api-register.html',
-    },
-    {
-      'target': ['3.8=>3.9', '3.9=>3.8'],
-      '3.8': '/user-manual/agents/restful-api/listing.html',
-      '3.9': '/user-manual/agents/listing/listing.html',
-    },
-    {
-      'target': ['3.8=>3.9', '3.9=>3.8'],
-      '3.8': '/user-manual/agents/wazuh-app.html',
-      '3.9': '/user-manual/agents/listing/wazuh-app.html',
-    },
-    {
-      'target': ['3.8=>3.9', '3.9=>3.8'],
-      '3.8': '/user-manual/registering/use-registration-service.html',
-      '3.9': '/user-manual/registering/simple-registration-method.html',
-    },
-    {
-      'target': ['3.9=>3.8'],
-      '3.8': '/user-manual/registering/use-registration-service.html#simple-method',
-      '3.9': '/user-manual/registering/linux-unix-simple-registration.html',
-    },
-    {
-      'target': ['3.9=>3.8'],
-      '3.8': '/user-manual/registering/use-registration-service.html#simple-method',
-      '3.9': '/user-manual/registering/macos-simple-registration.html',
-    },
-    {
-      'target': ['3.9=>3.8'],
-      '3.8': '/user-manual/registering/use-registration-service.html#simple-method',
-      '3.9': '/user-manual/registering/windows-simple-registration.html',
-    },
-    {
-      'target': ['3.8=>3.9', '3.9=>3.8'],
-      '3.8': '/installation-guide/installing-wazuh-server/automatic_api.html',
-      '3.9': '/installation-guide/installing-elastic-stack/automatic_api.html',
-    },
-    {
-      'target': ['3.9=>3.8'],
-      '3.8': '/user-manual/registering/use-registration-service.html#agent-verification-using-ssl',
-      '3.9': '/user-manual/registering/manager-verification/agents/linux-unix-agent-verification.html',
-    },
-    {
-      'target': ['3.9=>3.8'],
-      '3.8': '/user-manual/registering/use-registration-service.html#manager-verification-using-ssl',
-      '3.9': '/user-manual/registering/manager-verification/agents/linux-unix-manager-verification.html',
-    },
-    {
-      'target': ['3.9=>3.8'],
-      '3.8': '/user-manual/registering/use-registration-service.html#agent-verification-using-ssl',
-      '3.9': '/user-manual/registering/manager-verification/agents/macos-agent-verification.html',
-    },
-    {
-      'target': ['3.9=>3.8'],
-      '3.8': '/user-manual/registering/use-registration-service.html#manager-verification-using-ssl',
-      '3.9': '/user-manual/registering/manager-verification/agents/macos-manager-verification.html',
-    },
-    {
-      'target': ['3.9=>3.8'],
-      '3.8': '/user-manual/registering/use-registration-service.html#agent-verification-using-ssl',
-      '3.9': '/user-manual/registering/manager-verification/agents/windows-agent-verification.html',
-    },
-    {
-      'target': ['3.9=>3.8'],
-      '3.8': '/user-manual/registering/use-registration-service.html#manager-verification-using-ssl',
-      '3.9': '/user-manual/registering/manager-verification/agents/windows-manager-verification.html',
-    },
-    {
-      'target': ['3.9=>3.8'],
-      '3.8': '/user-manual/registering/use-registration-service.html#host-verification-using-ssl',
-      '3.9': '/user-manual/registering/manager-verification/host-verification-registration.html',
-    },
-    {
-      'target': ['3.9=>3.8'],
-      '3.8': '/user-manual/registering/use-registration-service.html#password-authorization',
-      '3.9': '/user-manual/registering/password/linux-unix-password-registration.html',
-    },
-    {
-      'target': ['3.9=>3.8'],
-      '3.8': '/user-manual/registering/use-registration-service.html#password-authorization',
-      '3.9': '/user-manual/registering/password/macos-password-registration.html',
-    },
-    {
-      'target': ['3.9=>3.8'],
-      '3.8': '/user-manual/registering/use-registration-service.html#password-authorization',
-      '3.9': '/user-manual/registering/password/windows-password-registration.html',
-    },
-    {
-      'target': ['3.8=>3.9'],
-      '3.8': '/installation-guide/upgrading/same_major.html',
-      '3.9': '/upgrade-guide/index.html',
-    },
-    {
-      'target': ['3.8=>3.9'],
-      '3.8': '/deploying-with-ansible/roles/wazuh-logstash.html',
-      '3.9': '/deploying-with-ansible/index.html',
-    },
-    {
-      'target': ['3.8=>3.9'],
-      '3.8': '/installation-guide/installing-elastic-stack/elastic_ssl.html',
-      '3.9': '/installation-guide/index.html',
-    },
+  {
+    'target': ['3.8=>3.9'],
+    '3.8': '/azure/installation.html',
+    '3.9': '/azure/index.html',
+  },
+  {
+    'target': ['3.8=>3.9'],
+    '3.8': '/user-manual/kibana-app/configure-xpack/xpack-troubleshooting.html',
+    '3.9': '/installation-guide/installing-elastic-stack/protect-installation/xpack.html',
+  },
+  {
+    'target': ['3.9=>3.8'],
+    '3.8': '/index.html',
+    '3.9': '/deployment.html',
+  },
+  {
+    'target': ['3.8=>3.9', '3.9=>3.8'],
+    '3.8': '/user-manual/kibana-app/configure-xpack/index.html',
+    '3.9': '/installation-guide/installing-elastic-stack/protect-installation/xpack.html',
+  },
+  {
+    'target': ['3.8=>3.9'],
+    '3.8': '/user-manual/kibana-app/configure-xpack/defining-xpack-users.html',
+    '3.9': '/installation-guide/installing-elastic-stack/protect-installation/xpack.html',
+  },
+  {
+    'target': ['3.8=>3.9'],
+    '3.8': '/user-manual/kibana-app/configure-xpack/configure-xpack-users.html',
+    '3.9': '/installation-guide/installing-elastic-stack/protect-installation/xpack.html',
+  },
+  {
+    'target': ['3.8=>3.9', '3.9=>3.8'],
+    '3.8': '/user-manual/agents/remote-upgrading/create-custom-wpk.html#compile-a-package',
+    '3.9': '/user-manual/agents/remote-upgrading/create-custom-wpk/create-custom-wpk-manually.html',
+  },
+  {
+    'target': ['3.8=>3.9', '3.9=>3.8'],
+    '3.8': '/user-manual/registering/use-registration-service.html#agent-verification-using-ssl',
+    '3.9': '/user-manual/registering/manager-verification/agent-verification-registration.html',
+  },
+  {
+    'target': ['3.8=>3.9', '3.9=>3.8'],
+    '3.8': '/user-manual/registering/use-registration-service.html#manager-verification-using-ssl',
+    '3.9': '/user-manual/registering/manager-verification/manager-verification-registration.html',
+  },
+  {
+    'target': ['3.8=>3.9', '3.9=>3.8'],
+    '3.8': '/user-manual/registering/use-registration-service.html#password-authorization',
+    '3.9': '/user-manual/registering/password-authorization-registration-service.html',
+  },
+  {
+    'target': ['3.8=>3.9'],
+    '3.8': '/user-manual/agents/restful-api/index.html',
+    '3.9': '/user-manual/agents/index.html',
+  },
+  {
+    'target': ['3.8=>3.9'],
+    '3.8': '/user-manual/agents/command-line/index.html',
+    '3.9': '/user-manual/agents/index.html',
+  },
+  {
+    'target': ['3.8=>3.9', '3.9=>3.8'],
+    '3.8': '/installation-guide/installing-wazuh-agent/wazuh_agent_aix.html',
+    '3.9': '/installation-guide/installing-wazuh-agent/aix/index.html',
+  },
+  {
+    'target': ['3.9=>3.8'],
+    '3.8': '/installation-guide/installing-wazuh-agent/wazuh_agent_aix.html',
+    '3.9': '/installation-guide/installing-wazuh-agent/aix/wazuh_agent_package_aix.html',
+  },
+  {
+    'target': ['3.9=>3.8'],
+    '3.8': '/installation-guide/installing-wazuh-agent/index.html',
+    '3.9': '/installation-guide/installing-wazuh-agent/windows/index.html',
+  },
+  {
+    'target': ['3.8=>3.9', '3.9=>3.8'],
+    '3.8': '/installation-guide/installing-wazuh-agent/wazuh_agent_windows.html',
+    '3.9': '/installation-guide/installing-wazuh-agent/windows/wazuh_agent_package_windows.html',
+  },
+  {
+    'target': ['3.8=>3.9', '3.9=>3.8'],
+    '3.8': '/installation-guide/installing-wazuh-agent/wazuh_agent_sources.html#installing-windows-agent',
+    '3.9': '/installation-guide/installing-wazuh-agent/windows/wazuh_agent_sources_windows.html',
+  },
+  {
+    'target': ['3.8=>3.9'],
+    '3.8': '/installation-guide/installing-wazuh-agent/wazuh_agent_sources.html#installing-linux-agent',
+    '3.9': '/installation-guide/installing-wazuh-agent/linux/index.html',
+  },
+  {
+    'target': ['3.9=>3.8'],
+    '3.8': '/installation-guide/installing-wazuh-agent/wazuh_agent_sources.html#installing-linux-agent',
+    '3.9': '/installation-guide/installing-wazuh-agent/linux/amazon1-or-greater/wazuh_agent_sources_amazon.html',
+  },
+  {
+    'target': ['3.9=>3.8'],
+    '3.8': '/installation-guide/installing-wazuh-agent/wazuh_agent_sources.html#installing-linux-agent',
+    '3.9': '/installation-guide/installing-wazuh-agent/linux/centos6-or-greater/wazuh_agent_sources_centos6_or_greater.html',
+  },
+  {
+    'target': ['3.9=>3.8'],
+    '3.8': '/installation-guide/installing-wazuh-agent/wazuh_agent_sources.html#installing-linux-agent',
+    '3.9': '/installation-guide/installing-wazuh-agent/linux/debian7-or-greater/wazuh_agent_sources_debian7_or_greater.html',
+  },
+  {
+    'target': ['3.9=>3.8'],
+    '3.8': '/installation-guide/installing-wazuh-agent/wazuh_agent_sources.html#installing-linux-agent',
+    '3.9': '/installation-guide/installing-wazuh-agent/linux/fedora22-or-greater/wazuh_agent_sources_fedora22_or_greater.html',
+  },
+  {
+    'target': ['3.9=>3.8'],
+    '3.8': '/installation-guide/installing-wazuh-agent/index.html',
+    '3.9': '/installation-guide/installing-wazuh-agent/linux/opensuse42-leap-and-tumbleweed/index.html',
+  },
+  {
+    'target': ['3.9=>3.8'],
+    '3.8': '/installation-guide/installing-wazuh-agent/wazuh_agent_rpm.html#suse-12',
+    '3.9': '/installation-guide/installing-wazuh-agent/linux/opensuse42-leap-and-tumbleweed/wazuh_agent_package_opensuse42_or_greater.html',
+  },
+  {
+    'target': ['3.9=>3.8'],
+    '3.8': '/installation-guide/installing-wazuh-agent/index.html',
+    '3.9': '/installation-guide/installing-wazuh-agent/linux/oracle5/index.html',
+  },
+  {
+    'target': ['3.9=>3.8'],
+    '3.8': '/installation-guide/installing-wazuh-agent/wazuh_agent_rpm.html#centos-5-rhel-5',
+    '3.9': '/installation-guide/installing-wazuh-agent/linux/oracle5/wazuh_agent_package_oracle5.html',
+  },
+  {
+    'target': ['3.9=>3.8'],
+    '3.8': '/installation-guide/installing-wazuh-agent/index.html',
+    '3.9': '/installation-guide/installing-wazuh-agent/linux/oracle6-or-greater/index.html',
+  },
+  {
+    'target': ['3.9=>3.8'],
+    '3.8': '/installation-guide/installing-wazuh-agent/wazuh_agent_sources.html#installing-linux-agent',
+    '3.9': '/installation-guide/installing-wazuh-agent/linux/oracle6-or-greater/wazuh_agent_sources_oracle6_or_greater.html',
+  },
+  {
+    'target': ['3.9=>3.8'],
+    '3.8': '/installation-guide/installing-wazuh-agent/wazuh_agent_rpm.html#centos-6-rhel-6-centos-7-rhel-7-fedora-22-or-greater-and-amazon-linux',
+    '3.9': '/installation-guide/installing-wazuh-agent/linux/oracle6-or-greater/wazuh_agent_package_oracle6_or_greater.html',
+  },
+  {
+    'target': ['3.9=>3.8'],
+    '3.8': '/installation-guide/installing-wazuh-agent/wazuh_agent_sources.html#installing-linux-agent',
+    '3.9': '/installation-guide/installing-wazuh-agent/linux/rhel6-or-greater/wazuh_agent_sources_rhel6_or_greater.html',
+  },
+  {
+    'target': ['3.9=>3.8'],
+    '3.8': '/installation-guide/installing-wazuh-agent/wazuh_agent_sources.html#installing-linux-agent',
+    '3.9': '/installation-guide/installing-wazuh-agent/linux/suse11/wazuh_agent_sources_suse11.html',
+  },
+  {
+    'target': ['3.9=>3.8'],
+    '3.8': '/installation-guide/installing-wazuh-agent/wazuh_agent_sources.html#installing-linux-agent',
+    '3.9': '/installation-guide/installing-wazuh-agent/linux/suse12/wazuh_agent_sources_suse12.html',
+  },
+  {
+    'target': ['3.9=>3.8'],
+    '3.8': '/installation-guide/installing-wazuh-agent/wazuh_agent_sources.html#installing-linux-agent',
+    '3.9': '/installation-guide/installing-wazuh-agent/linux/ubuntu12.04-or-greater/wazuh_agent_sources_ubuntu12.04_or_greater.html',
+  },
+  {
+    'target': ['3.9=>3.8'],
+    '3.8': '/installation-guide/installing-wazuh-agent/wazuh_agent_rpm.html#centos-5-rhel-5',
+    '3.9': '/installation-guide/installing-wazuh-agent/linux/centos5/index.html',
+  },
+  {
+    'target': ['3.8=>3.9'],
+    '3.8': '/installation-guide/installing-wazuh-agent/wazuh_agent_sources.html',
+    '3.9': '/installation-guide/installing-wazuh-agent/index.html',
+  },
+  {
+    'target': ['3.8=>3.9'],
+    '3.8': '/installation-guide/installing-wazuh-agent/wazuh_agent_rpm.html',
+    '3.9': '/installation-guide/installing-wazuh-agent/linux/index.html',
+  },
+  {
+    'target': ['3.8=>3.9'],
+    '3.8': '/installation-guide/installing-wazuh-agent/wazuh_agent_deb.html',
+    '3.9': '/installation-guide/installing-wazuh-agent/linux/index.html',
+  },
+  {
+    'target': ['3.9=>3.8'],
+    '3.8': '/installation-guide/installing-wazuh-agent/index.html',
+    '3.9': '/installation-guide/installing-wazuh-agent/linux/debian7-or-greater/index.html',
+  },
+  {
+    'target': ['3.9=>3.8'],
+    '3.8': '/installation-guide/installing-wazuh-agent/wazuh_agent_deb.html',
+    '3.9': '/installation-guide/installing-wazuh-agent/linux/debian7-or-greater/wazuh_agent_package_debian7_or_greater.html',
+  },
+  {
+    'target': ['3.9=>3.8'],
+    '3.8': '/installation-guide/installing-wazuh-agent/index.html',
+    '3.9': '/installation-guide/installing-wazuh-agent/linux/ubuntu12.04-or-greater/index.html',
+  },
+  {
+    'target': ['3.9=>3.8'],
+    '3.8': '/installation-guide/installing-wazuh-agent/wazuh_agent_deb.html',
+    '3.9': '/installation-guide/installing-wazuh-agent/linux/ubuntu12.04-or-greater/wazuh_agent_package_ubuntu12.04_or_greater.html',
+  },
+  {
+    'target': ['3.8=>3.9', '3.9=>3.8'],
+    '3.8': '/deploying-with-ansible/guide/install-wazuh-server.html',
+    '3.9': '/deploying-with-ansible/guide/install-wazuh-manager.html',
+  },
+  {
+    'target': ['3.8=>3.9', '3.9=>3.8'],
+    '3.8': '/installation-guide/installing-elastic-stack/kibana_ssl.html',
+    '3.9': '/installation-guide/installing-elastic-stack/protect-installation/kibana_ssl.html',
+  },
+  {
+    'target': ['3.8=>3.9', '3.9=>3.8'],
+    '3.8': '/installation-guide/installing-elastic-stack/searchguard.html',
+    '3.9': '/installation-guide/installing-elastic-stack/protect-installation/searchguard.html',
+  },
+  {
+    'target': ['3.8=>3.9', '3.9=>3.8'],
+    '3.8': '/installing-splunk/index.html',
+    '3.9': '/installation-guide/installing-splunk/index.html',
+  },
+  {
+    'target': ['3.8=>3.9', '3.9=>3.8'],
+    '3.8': '/installing-splunk/splunk-app.html',
+    '3.9': '/installation-guide/installing-splunk/splunk-app.html',
+  },
+  {
+    'target': ['3.8=>3.9', '3.9=>3.8'],
+    '3.8': '/installing-splunk/splunk-basic.html',
+    '3.9': '/installation-guide/installing-splunk/splunk-basic.html',
+  },
+  {
+    'target': ['3.8=>3.9', '3.9=>3.8'],
+    '3.8': '/installing-splunk/splunk-distributed.html',
+    '3.9': '/installation-guide/installing-splunk/splunk-distributed.html',
+  },
+  {
+    'target': ['3.8=>3.9', '3.9=>3.8'],
+    '3.8': '/installing-splunk/splunk-forwarder.html',
+    '3.9': '/installation-guide/installing-splunk/splunk-forwarder.html',
+  },
+  {
+    'target': ['3.8=>3.9', '3.9=>3.8'],
+    '3.8': '/installing-splunk/splunk-polling.html',
+    '3.9': '/installation-guide/installing-splunk/splunk-polling.html',
+  },
+  {
+    'target': ['3.8=>3.9', '3.9=>3.8'],
+    '3.8': '/installing-splunk/splunk-reverse-proxy.html',
+    '3.9': '/installation-guide/installing-splunk/splunk-reverse-proxy.html',
+  },
+  {
+    'target': ['3.8=>3.9', '3.9=>3.8'],
+    '3.8': '/installation-guide/installing-wazuh-agent/wazuh_agent_hpux.html',
+    '3.9': '/installation-guide/installing-wazuh-agent/hpux/index.html',
+  },
+  {
+    'target': ['3.9=>3.8'],
+    '3.8': '/installation-guide/installing-wazuh-agent/wazuh_agent_hpux.html',
+    '3.9': '/installation-guide/installing-wazuh-agent/hpux/wazuh_agent_package_hpux.html',
+  },
+  {
+    'target': ['3.9=>3.8'],
+    '3.8': '/installation-guide/installing-wazuh-agent/wazuh_agent_rpm.html#centos-6-rhel-6-centos-7-rhel-7-fedora-22-or-greater-and-amazon-linux',
+    '3.9': '/installation-guide/installing-wazuh-agent/linux/amazon1-or-greater/index.html',
+  },
+  {
+    'target': ['3.9=>3.8'],
+    '3.8': '/installation-guide/installing-wazuh-agent/wazuh_agent_rpm.html#centos-6-rhel-6-centos-7-rhel-7-fedora-22-or-greater-and-amazon-linux',
+    '3.9': '/installation-guide/installing-wazuh-agent/linux/amazon1-or-greater/wazuh_agent_package_amazon.html',
+  },
+  {
+    'target': ['3.9=>3.8'],
+    '3.8': '/installation-guide/installing-wazuh-agent/index.html',
+    '3.9': '/installation-guide/installing-wazuh-agent/linux/centos6-or-greater/index.html',
+  },
+  {
+    'target': ['3.9=>3.8'],
+    '3.8': '/installation-guide/installing-wazuh-agent/wazuh_agent_rpm.html#centos-6-rhel-6-centos-7-rhel-7-fedora-22-or-greater-and-amazon-linux',
+    '3.9': '/installation-guide/installing-wazuh-agent/linux/centos6-or-greater/wazuh_agent_package_centos6_or_greater.html',
+  },
+  {
+    'target': ['3.9=>3.8'],
+    '3.8': '/installation-guide/installing-wazuh-agent/index.html',
+    '3.9': '/installation-guide/installing-wazuh-agent/linux/fedora22-or-greater/index.html',
+  },
+  {
+    'target': ['3.9=>3.8'],
+    '3.8': '/installation-guide/installing-wazuh-agent/wazuh_agent_rpm.html#centos-6-rhel-6-centos-7-rhel-7-fedora-22-or-greater-and-amazon-linux',
+    '3.9': '/installation-guide/installing-wazuh-agent/linux/fedora22-or-greater/wazuh_agent_package_fedora22_or_greater.html',
+  },
+  {
+    'target': ['3.9=>3.8'],
+    '3.8': '/installation-guide/installing-wazuh-agent/wazuh_agent_rpm.html#centos-6-rhel-6-centos-7-rhel-7-fedora-22-or-greater-and-amazon-linux',
+    '3.9': '/installation-guide/installing-wazuh-agent/linux/rhel6-or-greater/index.html',
+  },
+  {
+    'target': ['3.9=>3.8'],
+    '3.8': '/installation-guide/installing-wazuh-agent/wazuh_agent_rpm.html#centos-6-rhel-6-centos-7-rhel-7-fedora-22-or-greater-and-amazon-linux',
+    '3.9': '/installation-guide/installing-wazuh-agent/linux/rhel6-or-greater/wazuh_agent_package_rhel6_or_greater.html',
+  },
+  {
+    'target': ['3.8=>3.9', '3.9=>3.8'],
+    '3.8': '/installation-guide/installing-wazuh-agent/wazuh_agent_linux.html',
+    '3.9': '/installation-guide/installing-wazuh-agent/linux/index.html',
+  },
+  {
+    'target': ['3.9=>3.8'],
+    '3.8': '/installation-guide/installing-wazuh-agent/wazuh_agent_rpm.html#centos-5-rhel-5',
+    '3.9': '/installation-guide/installing-wazuh-agent/linux/centos5/wazuh_agent_package_centos5.html',
+  },
+  {
+    'target': ['3.8=>3.9'],
+    '3.8': '/installation-guide/installing-wazuh-agent/wazuh_agent_rpm.html#centos-5-rhel-5',
+    '3.9': '/installation-guide/installing-wazuh-agent/linux/index.html',
+  },
+  {
+    'target': ['3.9=>3.8'],
+    '3.8': '/installation-guide/installing-wazuh-agent/wazuh_agent_rpm.html#centos-5-rhel-5',
+    '3.9': '/installation-guide/installing-wazuh-agent/linux/rhel5/index.html',
+  },
+  {
+    'target': ['3.9=>3.8'],
+    '3.8': '/installation-guide/installing-wazuh-agent/wazuh_agent_rpm.html#centos-5-rhel-5',
+    '3.9': '/installation-guide/installing-wazuh-agent/linux/rhel5/wazuh_agent_package_rhel5.html',
+  },
+  {
+    'target': ['3.8=>3.9', '3.9=>3.8'],
+    '3.8': '/installation-guide/installing-wazuh-agent/wazuh_agent_rpm.html#suse-11',
+    '3.9': '/installation-guide/installing-wazuh-agent/linux/suse11/index.html',
+  },
+  {
+    'target': ['3.9=>3.8'],
+    '3.8': '/installation-guide/installing-wazuh-agent/wazuh_agent_rpm.html#suse-11',
+    '3.9': '/installation-guide/installing-wazuh-agent/linux/suse11/wazuh_agent_package_suse11.html',
+  },
+  {
+    'target': ['3.8=>3.9'],
+    '3.8': '/installation-guide/installing-wazuh-agent/wazuh_agent_rpm.html#suse-12',
+    '3.9': '/installation-guide/installing-wazuh-agent/linux/suse12/index.html',
+  },
+  {
+    'target': ['3.9=>3.8'],
+    '3.8': '/installation-guide/installing-wazuh-agent/index.html',
+    '3.9': '/installation-guide/installing-wazuh-agent/linux/suse12/index.html',
+  },
+  {
+    'target': ['3.9=>3.8'],
+    '3.8': '/installation-guide/installing-wazuh-agent/wazuh_agent_rpm.html#suse-12',
+    '3.9': '/installation-guide/installing-wazuh-agent/linux/suse12/wazuh_agent_package_suse12.html',
+  },
+  {
+    'target': ['3.8=>3.9'],
+    '3.8': '/installation-guide/installing-wazuh-agent/wazuh_agent_macos.html',
+    '3.9': '/installation-guide/installing-wazuh-agent/macos/index.html',
+  },
+  {
+    'target': ['3.9=>3.8'],
+    '3.8': '/installation-guide/installing-wazuh-agent/wazuh_agent_macos.html',
+    '3.9': '/installation-guide/installing-wazuh-agent/macos/wazuh_agent_package_macos.html',
+  },
+  {
+    'target': ['3.8=>3.9', '3.9=>3.8'],
+    '3.8': '/installation-guide/installing-wazuh-agent/wazuh_agent_solaris.html',
+    '3.9': '/installation-guide/installing-wazuh-agent/solaris/index.html',
+  },
+  {
+    'target': ['3.9=>3.8'],
+    '3.8': '/installation-guide/installing-wazuh-agent/wazuh_agent_solaris.html',
+    '3.9': '/installation-guide/installing-wazuh-agent/solaris/solaris10/index.html',
+  },
+  {
+    'target': ['3.9=>3.8'],
+    '3.8': '/installation-guide/installing-wazuh-agent/wazuh_agent_solaris.html',
+    '3.9': '/installation-guide/installing-wazuh-agent/solaris/solaris10/wazuh_agent_package_solaris10.html',
+  },
+  {
+    'target': ['3.9=>3.8'],
+    '3.8': '/installation-guide/installing-wazuh-agent/wazuh_agent_solaris.html',
+    '3.9': '/installation-guide/installing-wazuh-agent/solaris/solaris10/wazuh_agent_sources_solaris10.html',
+  },
+  {
+    'target': ['3.9=>3.8'],
+    '3.8': '/installation-guide/installing-wazuh-agent/wazuh_agent_solaris.html',
+    '3.9': '/installation-guide/installing-wazuh-agent/solaris/solaris11/index.html',
+  },
+  {
+    'target': ['3.9=>3.8'],
+    '3.8': '/installation-guide/installing-wazuh-agent/wazuh_agent_solaris.html',
+    '3.9': '/installation-guide/installing-wazuh-agent/solaris/solaris11/wazuh_agent_package_solaris11.html',
+  },
+  {
+    'target': ['3.8=>3.9', '3.9=>3.8'],
+    '3.8': '/installation-guide/installing-wazuh-server/index.html',
+    '3.9': '/installation-guide/installing-wazuh-manager/index.html',
+  },
+  {
+    'target': ['3.8=>3.9'],
+    '3.8': '/installation-guide/installing-wazuh-server/wazuh_server_rpm.html',
+    '3.9': '/installation-guide/installing-wazuh-manager/index.html',
+  },
+  {
+    'target': ['3.8=>3.9'],
+    '3.8': '/installation-guide/installing-wazuh-server/wazuh_server_deb.html',
+    '3.9': '/installation-guide/installing-wazuh-manager/index.html',
+  },
+  {
+    'target': ['3.8=>3.9'],
+    '3.8': '/installation-guide/installing-wazuh-server/sources_installation.html',
+    '3.9': '/installation-guide/installing-wazuh-manager/index.html',
+  },
+  {
+    'target': ['3.9=>3.8'],
+    '3.8': '/installation-guide/installing-wazuh-server/index.html',
+    '3.9': '/installation-guide/installing-wazuh-manager/linux/amazon/index.html',
+  },
+  {
+    'target': ['3.9=>3.8'],
+    '3.8': '/installation-guide/installing-wazuh-server/index.html',
+    '3.9': '/installation-guide/installing-wazuh-manager/linux/centos/index.html',
+  },
+  {
+    'target': ['3.9=>3.8'],
+    '3.8': '/installation-guide/installing-wazuh-server/index.html',
+    '3.9': '/installation-guide/installing-wazuh-manager/linux/debian/index.html',
+  },
+  {
+    'target': ['3.9=>3.8'],
+    '3.8': '/installation-guide/installing-wazuh-server/index.html',
+    '3.9': '/installation-guide/installing-wazuh-manager/linux/fedora/index.html',
+  },
+  {
+    'target': ['3.9=>3.8'],
+    '3.8': '/installation-guide/installing-wazuh-server/index.html',
+    '3.9': '/installation-guide/installing-wazuh-manager/linux/opensuse/index.html',
+  },
+  {
+    'target': ['3.9=>3.8'],
+    '3.8': '/installation-guide/installing-wazuh-server/index.html',
+    '3.9': '/installation-guide/installing-wazuh-manager/linux/oracle/index.html',
+  },
+  {
+    'target': ['3.9=>3.8'],
+    '3.8': '/installation-guide/installing-wazuh-server/index.html',
+    '3.9': '/installation-guide/installing-wazuh-manager/linux/rhel/index.html',
+  },
+  {
+    'target': ['3.9=>3.8'],
+    '3.8': '/installation-guide/installing-wazuh-server/index.html',
+    '3.9': '/installation-guide/installing-wazuh-manager/linux/suse/index.html',
+  },
+  {
+    'target': ['3.9=>3.8'],
+    '3.8': '/installation-guide/installing-wazuh-server/index.html',
+    '3.9': '/installation-guide/installing-wazuh-manager/linux/ubuntu/index.html',
+  },
+  {
+    'target': ['3.9=>3.8'],
+    '3.8': '/installation-guide/installing-wazuh-server/wazuh_server_rpm.html',
+    '3.9': '/installation-guide/installing-wazuh-manager/linux/amazon/wazuh_server_packages_amazon.html',
+  },
+  {
+    'target': ['3.9=>3.8'],
+    '3.8': '/installation-guide/installing-wazuh-server/wazuh_server_rpm.html',
+    '3.9': '/installation-guide/installing-wazuh-manager/linux/centos/wazuh_server_packages_centos.html',
+  },
+  {
+    'target': ['3.9=>3.8'],
+    '3.8': '/installation-guide/installing-wazuh-server/wazuh_server_rpm.html',
+    '3.9': '/installation-guide/installing-wazuh-manager/linux/fedora/wazuh_server_packages_fedora.html',
+  },
+  {
+    'target': ['3.9=>3.8'],
+    '3.8': '/installation-guide/installing-wazuh-server/wazuh_server_rpm.html',
+    '3.9': '/installation-guide/installing-wazuh-manager/linux/oracle/wazuh_server_packages_oracle.html',
+  },
+  {
+    'target': ['3.9=>3.8'],
+    '3.8': '/installation-guide/installing-wazuh-server/wazuh_server_rpm.html',
+    '3.9': '/installation-guide/installing-wazuh-manager/linux/rhel/wazuh_server_packages_rhel.html',
+  },
+  {
+    'target': ['3.9=>3.8'],
+    '3.8': '/installation-guide/installing-wazuh-server/wazuh_server_deb.html',
+    '3.9': '/installation-guide/installing-wazuh-manager/linux/debian/wazuh_server_packages_deb.html',
+  },
+  {
+    'target': ['3.9=>3.8'],
+    '3.8': '/installation-guide/installing-wazuh-server/wazuh_server_deb.html',
+    '3.9': '/installation-guide/installing-wazuh-manager/linux/ubuntu/wazuh_server_packages_ubuntu.html',
+  },
+  {
+    'target': ['3.9=>3.8'],
+    '3.8': '/installation-guide/installing-wazuh-server/sources_installation.html',
+    '3.9': '/installation-guide/installing-wazuh-manager/linux/amazon/wazuh_server_sources_amazon.html',
+  },
+  {
+    'target': ['3.9=>3.8'],
+    '3.8': '/installation-guide/installing-wazuh-server/sources_installation.html',
+    '3.9': '/installation-guide/installing-wazuh-manager/linux/centos/wazuh_server_sources_centos.html',
+  },
+  {
+    'target': ['3.9=>3.8'],
+    '3.8': '/installation-guide/installing-wazuh-server/sources_installation.html',
+    '3.9': '/installation-guide/installing-wazuh-manager/linux/debian/wazuh_server_sources_deb.html',
+  },
+  {
+    'target': ['3.9=>3.8'],
+    '3.8': '/installation-guide/installing-wazuh-server/sources_installation.html',
+    '3.9': '/installation-guide/installing-wazuh-manager/linux/fedora/wazuh_server_sources_fedora.html',
+  },
+  {
+    'target': ['3.9=>3.8'],
+    '3.8': '/installation-guide/installing-wazuh-server/sources_installation.html',
+    '3.9': '/installation-guide/installing-wazuh-manager/linux/oracle/wazuh_server_sources_oracle.html',
+  },
+  {
+    'target': ['3.9=>3.8'],
+    '3.8': '/installation-guide/installing-wazuh-server/sources_installation.html',
+    '3.9': '/installation-guide/installing-wazuh-manager/linux/rhel/wazuh_server_sources_rhel.html',
+  },
+  {
+    'target': ['3.9=>3.8'],
+    '3.8': '/installation-guide/installing-wazuh-server/sources_installation.html',
+    '3.9': '/installation-guide/installing-wazuh-manager/linux/ubuntu/wazuh_server_sources_ubuntu.html',
+  },
+  {
+    'target': ['3.8=>3.9', '3.9=>3.8'],
+    '3.8': '/installation-guide/installing-wazuh-agent/wazuh_agent_windows.html#using-the-command-line',
+    '3.9': '/installation-guide/installing-wazuh-agent/deployment_variables/deployment_variables_windows.html',
+  },
+  {
+    'target': ['3.8=>3.9', '3.9=>3.8'],
+    '3.8': '/installation-guide/installing-wazuh-server/securing_api.html',
+    '3.9': '/installation-guide/securing_api.html',
+  },
+  {
+    'target': ['3.9=>3.8'],
+    '3.8': '/index.html',
+    '3.9': '/monitoring.html',
+  },
+  {
+    'target': ['3.9=>3.8'],
+    '3.8': '/installation-guide/upgrading/index.html',
+    '3.9': '/upgrade-guide/index.html',
+  },
+  {
+    'target': ['3.8=>3.9', '3.9=>3.8'],
+    '3.8': '/installation-guide/upgrading/index.html',
+    '3.9': '/upgrade-guide/upgrading/index.html',
+  },
+  {
+    'target': ['3.8=>3.9', '3.9=>3.8'],
+    '3.8': '/installation-guide/upgrading/different_major.html',
+    '3.9': '/upgrade-guide/upgrading/different_major.html',
+  },
+  {
+    'target': ['3.8=>3.9', '3.9=>3.8'],
+    '3.8': '/installation-guide/upgrading/latest_wazuh3_minor.html',
+    '3.9': '/upgrade-guide/upgrading/latest_wazuh3_minor.html',
+  },
+  {
+    'target': ['3.8=>3.9', '3.9=>3.8'],
+    '3.8': '/installation-guide/upgrading/legacy/index.html',
+    '3.9': '/upgrade-guide/upgrading/legacy/index.html',
+  },
+  {
+    'target': ['3.8=>3.9', '3.9=>3.8'],
+    '3.8': '/installation-guide/upgrading/legacy/upgrading-elastic-stack.html',
+    '3.9': '/upgrade-guide/upgrading/legacy/upgrading-elastic-stack.html',
+  },
+  {
+    'target': ['3.8=>3.9', '3.9=>3.8'],
+    '3.8': '/installation-guide/upgrading/legacy/upgrading-wazuh-agent.html',
+    '3.9': '/upgrade-guide/upgrading/legacy/upgrading-wazuh-agent.html',
+  },
+  {
+    'target': ['3.8=>3.9', '3.9=>3.8'],
+    '3.8': '/installation-guide/upgrading/legacy/upgrading-wazuh-server.html',
+    '3.9': '/upgrade-guide/upgrading/legacy/upgrading-wazuh-manager.html',
+  },
+  {
+    'target': ['3.8=>3.9', '3.9=>3.8'],
+    '3.8': '/installation-guide/upgrading/restore_alerts.html',
+    '3.9': '/upgrade-guide/upgrading/restore_alerts.html',
+  },
+  {
+    'target': ['3.8=>3.9', '3.9=>3.8'],
+    '3.8': '/installation-guide/upgrading/same_minor.html',
+    '3.9': '/upgrade-guide/upgrading/same_minor_or_major.html',
+  },
+  {
+    'target': ['3.9=>3.8'],
+    '3.8': '/user-manual/agents/index.html',
+    '3.9': '/user-manual/agents/listing/index.html',
+  },
+  {
+    'target': ['3.8=>3.9', '3.9=>3.8'],
+    '3.8': '/user-manual/agents/remote-upgrading/create-custom-wpk.html',
+    '3.9': '/user-manual/agents/remote-upgrading/create-custom-wpk/create-wpk-key.html',
+  },
+  {
+    'target': ['3.9=>3.8'],
+    '3.8': '/user-manual/agents/index.html',
+    '3.9': '/user-manual/agents/remove-agents/index.html',
+  },
+  {
+    'target': ['3.9=>3.8'],
+    '3.8': '/user-manual/agents/restful-api/register.html',
+    '3.9': '/user-manual/registering/api/api-register-linux-unix.html',
+  },
+  {
+    'target': ['3.9=>3.8'],
+    '3.8': '/user-manual/agents/restful-api/register.html',
+    '3.9': '/user-manual/registering/api/api-register-macos.html',
+  },
+  {
+    'target': ['3.9=>3.8'],
+    '3.8': '/user-manual/agents/restful-api/register.html',
+    '3.9': '/user-manual/registering/api/api-register-windows.html',
+  },
+  {
+    'target': ['3.8=>3.9', '3.9=>3.8'],
+    '3.8': '/user-manual/agents/command-line/register.html',
+    '3.9': '/user-manual/registering/using-command-line.html',
+  },
+  {
+    'target': ['3.9=>3.8'],
+    '3.8': '/user-manual/agents/command-line/register.html',
+    '3.9': '/user-manual/registering/cli/using-command-line-linux.html',
+  },
+  {
+    'target': ['3.9=>3.8'],
+    '3.8': '/user-manual/agents/command-line/register.html',
+    '3.9': '/user-manual/registering/cli/using-command-line-macos.html',
+  },
+  {
+    'target': ['3.9=>3.8'],
+    '3.8': '/user-manual/agents/command-line/register.html',
+    '3.9': '/user-manual/registering/cli/using-command-line-unix.html',
+  },
+  {
+    'target': ['3.9=>3.8'],
+    '3.8': '/user-manual/agents/command-line/register.html',
+    '3.9': '/user-manual/registering/cli/using-command-line-windows.html',
+  },
+  {
+    'target': ['3.8=>3.9', '3.9=>3.8'],
+    '3.8': '/user-manual/agents/command-line/listing.html',
+    '3.9': '/user-manual/agents/listing/using-command-line.html',
+  },
+  {
+    'target': ['3.8=>3.9', '3.9=>3.8'],
+    '3.8': '/user-manual/agents/command-line/remove.html',
+    '3.9': '/user-manual/agents/remove-agents/remove.html',
+  },
+  {
+    'target': ['3.8=>3.9', '3.9=>3.8'],
+    '3.8': '/user-manual/agents/restful-api/remove.html',
+    '3.9': '/user-manual/agents/remove-agents/restful-api-remove.html',
+  },
+  {
+    'target': ['3.8=>3.9', '3.9=>3.8'],
+    '3.8': '/user-manual/agents/restful-api/register.html',
+    '3.9': '/user-manual/registering/restful-api-register.html',
+  },
+  {
+    'target': ['3.8=>3.9', '3.9=>3.8'],
+    '3.8': '/user-manual/agents/restful-api/listing.html',
+    '3.9': '/user-manual/agents/listing/listing.html',
+  },
+  {
+    'target': ['3.8=>3.9', '3.9=>3.8'],
+    '3.8': '/user-manual/agents/wazuh-app.html',
+    '3.9': '/user-manual/agents/listing/wazuh-app.html',
+  },
+  {
+    'target': ['3.8=>3.9', '3.9=>3.8'],
+    '3.8': '/user-manual/registering/use-registration-service.html',
+    '3.9': '/user-manual/registering/simple-registration-method.html',
+  },
+  {
+    'target': ['3.9=>3.8'],
+    '3.8': '/user-manual/registering/use-registration-service.html#simple-method',
+    '3.9': '/user-manual/registering/linux-unix-simple-registration.html',
+  },
+  {
+    'target': ['3.9=>3.8'],
+    '3.8': '/user-manual/registering/use-registration-service.html#simple-method',
+    '3.9': '/user-manual/registering/macos-simple-registration.html',
+  },
+  {
+    'target': ['3.9=>3.8'],
+    '3.8': '/user-manual/registering/use-registration-service.html#simple-method',
+    '3.9': '/user-manual/registering/windows-simple-registration.html',
+  },
+  {
+    'target': ['3.8=>3.9', '3.9=>3.8'],
+    '3.8': '/installation-guide/installing-wazuh-server/automatic_api.html',
+    '3.9': '/installation-guide/installing-elastic-stack/automatic_api.html',
+  },
+  {
+    'target': ['3.9=>3.8'],
+    '3.8': '/user-manual/registering/use-registration-service.html#agent-verification-using-ssl',
+    '3.9': '/user-manual/registering/manager-verification/agents/linux-unix-agent-verification.html',
+  },
+  {
+    'target': ['3.9=>3.8'],
+    '3.8': '/user-manual/registering/use-registration-service.html#manager-verification-using-ssl',
+    '3.9': '/user-manual/registering/manager-verification/agents/linux-unix-manager-verification.html',
+  },
+  {
+    'target': ['3.9=>3.8'],
+    '3.8': '/user-manual/registering/use-registration-service.html#agent-verification-using-ssl',
+    '3.9': '/user-manual/registering/manager-verification/agents/macos-agent-verification.html',
+  },
+  {
+    'target': ['3.9=>3.8'],
+    '3.8': '/user-manual/registering/use-registration-service.html#manager-verification-using-ssl',
+    '3.9': '/user-manual/registering/manager-verification/agents/macos-manager-verification.html',
+  },
+  {
+    'target': ['3.9=>3.8'],
+    '3.8': '/user-manual/registering/use-registration-service.html#agent-verification-using-ssl',
+    '3.9': '/user-manual/registering/manager-verification/agents/windows-agent-verification.html',
+  },
+  {
+    'target': ['3.9=>3.8'],
+    '3.8': '/user-manual/registering/use-registration-service.html#manager-verification-using-ssl',
+    '3.9': '/user-manual/registering/manager-verification/agents/windows-manager-verification.html',
+  },
+  {
+    'target': ['3.9=>3.8'],
+    '3.8': '/user-manual/registering/use-registration-service.html#host-verification-using-ssl',
+    '3.9': '/user-manual/registering/manager-verification/host-verification-registration.html',
+  },
+  {
+    'target': ['3.9=>3.8'],
+    '3.8': '/user-manual/registering/use-registration-service.html#password-authorization',
+    '3.9': '/user-manual/registering/password/linux-unix-password-registration.html',
+  },
+  {
+    'target': ['3.9=>3.8'],
+    '3.8': '/user-manual/registering/use-registration-service.html#password-authorization',
+    '3.9': '/user-manual/registering/password/macos-password-registration.html',
+  },
+  {
+    'target': ['3.9=>3.8'],
+    '3.8': '/user-manual/registering/use-registration-service.html#password-authorization',
+    '3.9': '/user-manual/registering/password/windows-password-registration.html',
+  },
+  {
+    'target': ['3.8=>3.9'],
+    '3.8': '/installation-guide/upgrading/same_major.html',
+    '3.9': '/upgrade-guide/index.html',
+  },
+  {
+    'target': ['3.8=>3.9'],
+    '3.8': '/deploying-with-ansible/roles/wazuh-logstash.html',
+    '3.9': '/deploying-with-ansible/index.html',
+  },
+  {
+    'target': ['3.8=>3.9'],
+    '3.8': '/installation-guide/installing-elastic-stack/elastic_ssl.html',
+    '3.9': '/installation-guide/index.html',
+  },
 );
 
 /* Pages added in 3.9 */
@@ -6455,116 +6462,116 @@ removedUrls['3.9'] = [
 /* Redirections from 3.7 to 3.8 */
 
 redirections.push(
-    {
-      'target': ['3.7=>3.8', '3.8=>3.7'],
-      '3.7': '/amazon/use-cases/vpc.html',
-      '3.8': '/amazon/services/vpc.html',
-    },
-    {
-      'target': ['3.7=>3.8'],
-      '3.7': '/amazon/use-cases/index.html',
-      '3.8': '/amazon/services/cloudtrail.html#use-cases',
-    },
-    {
-      'target': ['3.7=>3.8'],
-      '3.7': '/amazon/use-cases/iam.html',
-      '3.8': '/amazon/services/cloudtrail.html#iam',
-    },
-    {
-      'target': ['3.7=>3.8'],
-      '3.7': '/amazon/use-cases/ec2.html',
-      '3.8': '/amazon/services/cloudtrail.html#ec2',
-    },
-    {
-      'target': ['3.7=>3.8'],
-      '3.7': '/amazon/installation.html',
-      '3.8': '/amazon/index.html',
-    },
-    {
-      'target': ['3.7=>3.8', '3.8=>3.7'],
-      '3.7': '/amazon/installation.html#cloudtrail',
-      '3.8': '/amazon/services/cloudtrail.html',
-    },
-    {
-      'target': ['3.7=>3.8', '3.8=>3.7'],
-      '3.7': '/amazon/installation.html#installing-dependencies',
-      '3.8': '/amazon/configuration/dependencies.html',
-    },
-    {
-      'target': ['3.7=>3.8', '3.8=>3.7'],
-      '3.7': '/amazon/installation.html#authenticating-options',
-      '3.8': '/amazon/configuration/credentials.html',
-    },
-    {
-      'target': ['3.7=>3.8', '3.8=>3.7'],
-      '3.7': '/amazon/installation.html#vpc-flow',
-      '3.8': '/amazon/services/vpc.html',
-    },
-    {
-      'target': ['3.8=>3.7'],
-      '3.7': '/amazon/installation.html#other-aws-services-guard-duty-macie-and-iam',
-      '3.8': '/amazon/services/config.html',
-    },
-    {
-      'target': ['3.8=>3.7'],
-      '3.7': '/amazon/installation.html#other-aws-services-guard-duty-macie-and-iam',
-      '3.8': '/amazon/services/guardduty.html',
-    },
-    {
-      'target': ['3.8=>3.7'],
-      '3.7': '/amazon/installation.html#other-aws-services-guard-duty-macie-and-iam',
-      '3.8': '/amazon/services/macie.html',
-    },
-    {
-      'target': ['3.7=>3.8', '3.8=>3.7'],
-      '3.7': '/amazon/installation.html#create-an-iam-user',
-      '3.8': '/amazon/configuration/credentials.html#create-an-iam-user',
-    },
-    {
-      'target': ['3.7=>3.8', '3.8=>3.7'],
-      '3.7': '/amazon/installation.html#considerations-for-configuration',
-      '3.8': '/amazon/configuration/considerations.html',
-    },
-    {
-      'target': ['3.7=>3.8', '3.8=>3.7'],
-      '3.7': '/installation-guide/optional-configurations/automatic-api.html',
-      '3.8': '/installation-guide/installing-wazuh-server/automatic_api.html',
-    },
-    {
-      'target': ['3.7=>3.8'],
-      '3.7': '/installation-guide/optional-configurations/index.html',
-      '3.8': '/installation-guide/index.html',
-    },
-    {
-      'target': ['3.7=>3.8', '3.8=>3.7'],
-      '3.7': '/installation-guide/optional-configurations/elastic-tuning.html',
-      '3.8': '/installation-guide/installing-elastic-stack/elastic_tuning.html',
-    },
-    {
-      'target': ['3.7=>3.8', '3.8=>3.7'],
-      '3.7': '/installation-guide/optional-configurations/elastic_ssl.html',
-      '3.8': '/installation-guide/installing-elastic-stack/elastic_ssl.html',
-    },
-    {
-      'target': ['3.7=>3.8', '3.8=>3.7'],
-      '3.7': '/installation-guide/optional-configurations/kibana_ssl.html',
-      '3.8': '/installation-guide/installing-elastic-stack/kibana_ssl.html',
-    },
-    {
-      'target': ['3.8=>3.7'],
-      '3.7': '/installation-guide/installing-wazuh-agent/index.html',
-      '3.8': '/installation-guide/installing-wazuh-agent/wazuh_agent_linux.html',
-    },
-    {
-      'target': ['3.7=>3.8', '3.8=>3.7'],
-      '3.7': '/installation-guide/optional-configurations/securing-api.html',
-      '3.8': '/installation-guide/installing-wazuh-server/securing_api.html',
-    },
-    {
-      'target': ['3.7=>3.8'],
-      '3.7': '/amazon/use-cases/s3.html',
-      '3.8': '/amazon/index.html',
-    }
+  {
+    'target': ['3.7=>3.8', '3.8=>3.7'],
+    '3.7': '/amazon/use-cases/vpc.html',
+    '3.8': '/amazon/services/vpc.html',
+  },
+  {
+    'target': ['3.7=>3.8'],
+    '3.7': '/amazon/use-cases/index.html',
+    '3.8': '/amazon/services/cloudtrail.html#use-cases',
+  },
+  {
+    'target': ['3.7=>3.8'],
+    '3.7': '/amazon/use-cases/iam.html',
+    '3.8': '/amazon/services/cloudtrail.html#iam',
+  },
+  {
+    'target': ['3.7=>3.8'],
+    '3.7': '/amazon/use-cases/ec2.html',
+    '3.8': '/amazon/services/cloudtrail.html#ec2',
+  },
+  {
+    'target': ['3.7=>3.8'],
+    '3.7': '/amazon/installation.html',
+    '3.8': '/amazon/index.html',
+  },
+  {
+    'target': ['3.7=>3.8', '3.8=>3.7'],
+    '3.7': '/amazon/installation.html#cloudtrail',
+    '3.8': '/amazon/services/cloudtrail.html',
+  },
+  {
+    'target': ['3.7=>3.8', '3.8=>3.7'],
+    '3.7': '/amazon/installation.html#installing-dependencies',
+    '3.8': '/amazon/configuration/dependencies.html',
+  },
+  {
+    'target': ['3.7=>3.8', '3.8=>3.7'],
+    '3.7': '/amazon/installation.html#authenticating-options',
+    '3.8': '/amazon/configuration/credentials.html',
+  },
+  {
+    'target': ['3.7=>3.8', '3.8=>3.7'],
+    '3.7': '/amazon/installation.html#vpc-flow',
+    '3.8': '/amazon/services/vpc.html',
+  },
+  {
+    'target': ['3.8=>3.7'],
+    '3.7': '/amazon/installation.html#other-aws-services-guard-duty-macie-and-iam',
+    '3.8': '/amazon/services/config.html',
+  },
+  {
+    'target': ['3.8=>3.7'],
+    '3.7': '/amazon/installation.html#other-aws-services-guard-duty-macie-and-iam',
+    '3.8': '/amazon/services/guardduty.html',
+  },
+  {
+    'target': ['3.8=>3.7'],
+    '3.7': '/amazon/installation.html#other-aws-services-guard-duty-macie-and-iam',
+    '3.8': '/amazon/services/macie.html',
+  },
+  {
+    'target': ['3.7=>3.8', '3.8=>3.7'],
+    '3.7': '/amazon/installation.html#create-an-iam-user',
+    '3.8': '/amazon/configuration/credentials.html#create-an-iam-user',
+  },
+  {
+    'target': ['3.7=>3.8', '3.8=>3.7'],
+    '3.7': '/amazon/installation.html#considerations-for-configuration',
+    '3.8': '/amazon/configuration/considerations.html',
+  },
+  {
+    'target': ['3.7=>3.8', '3.8=>3.7'],
+    '3.7': '/installation-guide/optional-configurations/automatic-api.html',
+    '3.8': '/installation-guide/installing-wazuh-server/automatic_api.html',
+  },
+  {
+    'target': ['3.7=>3.8'],
+    '3.7': '/installation-guide/optional-configurations/index.html',
+    '3.8': '/installation-guide/index.html',
+  },
+  {
+    'target': ['3.7=>3.8', '3.8=>3.7'],
+    '3.7': '/installation-guide/optional-configurations/elastic-tuning.html',
+    '3.8': '/installation-guide/installing-elastic-stack/elastic_tuning.html',
+  },
+  {
+    'target': ['3.7=>3.8', '3.8=>3.7'],
+    '3.7': '/installation-guide/optional-configurations/elastic_ssl.html',
+    '3.8': '/installation-guide/installing-elastic-stack/elastic_ssl.html',
+  },
+  {
+    'target': ['3.7=>3.8', '3.8=>3.7'],
+    '3.7': '/installation-guide/optional-configurations/kibana_ssl.html',
+    '3.8': '/installation-guide/installing-elastic-stack/kibana_ssl.html',
+  },
+  {
+    'target': ['3.8=>3.7'],
+    '3.7': '/installation-guide/installing-wazuh-agent/index.html',
+    '3.8': '/installation-guide/installing-wazuh-agent/wazuh_agent_linux.html',
+  },
+  {
+    'target': ['3.7=>3.8', '3.8=>3.7'],
+    '3.7': '/installation-guide/optional-configurations/securing-api.html',
+    '3.8': '/installation-guide/installing-wazuh-server/securing_api.html',
+  },
+  {
+    'target': ['3.7=>3.8'],
+    '3.7': '/amazon/use-cases/s3.html',
+    '3.8': '/amazon/index.html',
+  }
 );
 
 /* Pages added in 3.8 */
@@ -6617,86 +6624,86 @@ removedUrls['3.8'] = [
 /* Redirections from 3.6 to 3.7 */
 
 redirections.push(
-    {
-      'target': ['3.6=>3.7', '3.7=>3.6'],
-      '3.6': '/deploying-with-ansible/consider.html',
-      '3.7': '/deploying-with-ansible/installation-guide.html',
-    },
-    {
-      'target': ['3.6=>3.7', '3.7=>3.6'],
-      '3.6': '/deploying-with-ansible/install-ansible-control.html',
-      '3.7': '/deploying-with-ansible/guide/install-ansible.html',
-    },
-    {
-      'target': ['3.6=>3.7', '3.7=>3.6'],
-      '3.6': '/installing-splunk/splunk_reverse_proxy.html',
-      '3.7': '/installing-splunk/splunk-reverse-proxy.html',
-    },
-    {
-      'target': ['3.6=>3.7', '3.7=>3.6'],
-      '3.6': '/installing-splunk/splunk_forwarder.html',
-      '3.7': '/installing-splunk/splunk-forwarder.html',
-    },
-    {
-      'target': ['3.6=>3.7', '3.7=>3.6'],
-      '3.6': '/installing-splunk/splunk_wazuh.html',
-      '3.7': '/installing-splunk/splunk-app.html',
-    },
-    {
-      'target': ['3.6=>3.7', '3.7=>3.6'],
-      '3.6': '/installing-splunk/splunk_installation.html',
-      '3.7': '/installing-splunk/splunk-basic.html',
-    },
-    {
-      'target': ['3.6=>3.7', '3.7=>3.6'],
-      '3.6': '/user-manual/capabilities/virustotal-scan/what-is-virustotal.html',
-      '3.7': '/user-manual/capabilities/virustotal-scan/about.html',
-    },
-    {
-      'target': ['3.6=>3.7', '3.7=>3.6'],
-      '3.6': '/user-manual/capabilities/virustotal-scan/terms-of-service.html',
-      '3.7': '/user-manual/capabilities/virustotal-scan/about.html#terms-of-service',
-    },
-    {
-      'target': ['3.6=>3.7', '3.7=>3.6'],
-      '3.6': '/user-manual/reference/statistics-files.html',
-      '3.7': '/user-manual/reference/statistics-files/index.html',
-    },
-    {
-      'target': ['3.6=>3.7'],
-      '3.6': '/user-manual/reference/statistics-files.html#statistics-files',
-      '3.7': '/user-manual/reference/statistics-files/index.html',
-    },
-    {
-      'target': ['3.6=>3.7', '3.7=>3.6'],
-      '3.6': '/user-manual/reference/statistics-files.html#ossec-agentd-state-file',
-      '3.7': '/user-manual/reference/statistics-files/ossec-agentd-state.html',
-    },
-    {
-      'target': ['3.6=>3.7', '3.7=>3.6'],
-      '3.6': '/user-manual/reference/statistics-files.html#ossec-remoted-state-file',
-      '3.7': '/user-manual/reference/statistics-files/ossec-remoted-state.html',
-    },
-    {
-      'target': ['3.6=>3.7', '3.7=>3.6'],
-      '3.6': '/user-manual/registering/use-registration-service.html#verify-agents-via-ssl',
-      '3.7': '/user-manual/registering/use-registration-service.html#agent-verification-using-ssl',
-    },
-    {
-      'target': ['3.6=>3.7', '3.7=>3.6'],
-      '3.6': '/user-manual/registering/use-registration-service.html#verify-manager-via-ssl',
-      '3.7': '/user-manual/registering/use-registration-service.html#manager-verification-using-ssl',
-    },
-    {
-      'target': ['3.6=>3.7', '3.7=>3.6'],
-      '3.6': '/user-manual/registering/use-registration-service.html#use-ssl-to-verify-hosts',
-      '3.7': '/user-manual/registering/use-registration-service.html#host-verification-using-ssl',
-    },
-    {
-      'target': ['3.6=>3.7', '3.7=>3.6'],
-      '3.6': '/user-manual/registering/use-registration-service.html#use-a-password-to-authorize-agents',
-      '3.7': '/user-manual/registering/use-registration-service.html#password-authorization',
-    }
+  {
+    'target': ['3.6=>3.7', '3.7=>3.6'],
+    '3.6': '/deploying-with-ansible/consider.html',
+    '3.7': '/deploying-with-ansible/installation-guide.html',
+  },
+  {
+    'target': ['3.6=>3.7', '3.7=>3.6'],
+    '3.6': '/deploying-with-ansible/install-ansible-control.html',
+    '3.7': '/deploying-with-ansible/guide/install-ansible.html',
+  },
+  {
+    'target': ['3.6=>3.7', '3.7=>3.6'],
+    '3.6': '/installing-splunk/splunk_reverse_proxy.html',
+    '3.7': '/installing-splunk/splunk-reverse-proxy.html',
+  },
+  {
+    'target': ['3.6=>3.7', '3.7=>3.6'],
+    '3.6': '/installing-splunk/splunk_forwarder.html',
+    '3.7': '/installing-splunk/splunk-forwarder.html',
+  },
+  {
+    'target': ['3.6=>3.7', '3.7=>3.6'],
+    '3.6': '/installing-splunk/splunk_wazuh.html',
+    '3.7': '/installing-splunk/splunk-app.html',
+  },
+  {
+    'target': ['3.6=>3.7', '3.7=>3.6'],
+    '3.6': '/installing-splunk/splunk_installation.html',
+    '3.7': '/installing-splunk/splunk-basic.html',
+  },
+  {
+    'target': ['3.6=>3.7', '3.7=>3.6'],
+    '3.6': '/user-manual/capabilities/virustotal-scan/what-is-virustotal.html',
+    '3.7': '/user-manual/capabilities/virustotal-scan/about.html',
+  },
+  {
+    'target': ['3.6=>3.7', '3.7=>3.6'],
+    '3.6': '/user-manual/capabilities/virustotal-scan/terms-of-service.html',
+    '3.7': '/user-manual/capabilities/virustotal-scan/about.html#terms-of-service',
+  },
+  {
+    'target': ['3.6=>3.7', '3.7=>3.6'],
+    '3.6': '/user-manual/reference/statistics-files.html',
+    '3.7': '/user-manual/reference/statistics-files/index.html',
+  },
+  {
+    'target': ['3.6=>3.7'],
+    '3.6': '/user-manual/reference/statistics-files.html#statistics-files',
+    '3.7': '/user-manual/reference/statistics-files/index.html',
+  },
+  {
+    'target': ['3.6=>3.7', '3.7=>3.6'],
+    '3.6': '/user-manual/reference/statistics-files.html#ossec-agentd-state-file',
+    '3.7': '/user-manual/reference/statistics-files/ossec-agentd-state.html',
+  },
+  {
+    'target': ['3.6=>3.7', '3.7=>3.6'],
+    '3.6': '/user-manual/reference/statistics-files.html#ossec-remoted-state-file',
+    '3.7': '/user-manual/reference/statistics-files/ossec-remoted-state.html',
+  },
+  {
+    'target': ['3.6=>3.7', '3.7=>3.6'],
+    '3.6': '/user-manual/registering/use-registration-service.html#verify-agents-via-ssl',
+    '3.7': '/user-manual/registering/use-registration-service.html#agent-verification-using-ssl',
+  },
+  {
+    'target': ['3.6=>3.7', '3.7=>3.6'],
+    '3.6': '/user-manual/registering/use-registration-service.html#verify-manager-via-ssl',
+    '3.7': '/user-manual/registering/use-registration-service.html#manager-verification-using-ssl',
+  },
+  {
+    'target': ['3.6=>3.7', '3.7=>3.6'],
+    '3.6': '/user-manual/registering/use-registration-service.html#use-ssl-to-verify-hosts',
+    '3.7': '/user-manual/registering/use-registration-service.html#host-verification-using-ssl',
+  },
+  {
+    'target': ['3.6=>3.7', '3.7=>3.6'],
+    '3.6': '/user-manual/registering/use-registration-service.html#use-a-password-to-authorize-agents',
+    '3.7': '/user-manual/registering/use-registration-service.html#password-authorization',
+  }
 );
 
 /* Pages added in 3.7 */
@@ -6749,31 +6756,31 @@ newUrls['3.7'] = [
 /* Redirections from 3.5 to 3.6 */
 
 redirections.push(
-    {
-      'target': ['3.5=>3.6', '3.6=>3.5'],
-      '3.5': '/installation-guide/installing-splunk/index.html',
-      '3.6': '/installing-splunk/index.html',
-    },
-    {
-      'target': ['3.5=>3.6', '3.6=>3.5'],
-      '3.5': '/installation-guide/installing-splunk/splunk_forwarder.html',
-      '3.6': '/installing-splunk/splunk_forwarder.html',
-    },
-    {
-      'target': ['3.5=>3.6', '3.6=>3.5'],
-      '3.5': '/installation-guide/installing-splunk/splunk_installation.html',
-      '3.6': '/installing-splunk/splunk_installation.html',
-    },
-    {
-      'target': ['3.5=>3.6', '3.6=>3.5'],
-      '3.5': '/installation-guide/installing-splunk/splunk_wazuh.html',
-      '3.6': '/installing-splunk/splunk_wazuh.html',
-    },
-    {
-      'target': ['3.5=>3.6', '3.6=>3.5'],
-      '3.5': '/user-manual/reference/ossec-conf/wodle-cloudtrail.html',
-      '3.6': '/user-manual/reference/ossec-conf/wodle-s3.html',
-    }
+  {
+    'target': ['3.5=>3.6', '3.6=>3.5'],
+    '3.5': '/installation-guide/installing-splunk/index.html',
+    '3.6': '/installing-splunk/index.html',
+  },
+  {
+    'target': ['3.5=>3.6', '3.6=>3.5'],
+    '3.5': '/installation-guide/installing-splunk/splunk_forwarder.html',
+    '3.6': '/installing-splunk/splunk_forwarder.html',
+  },
+  {
+    'target': ['3.5=>3.6', '3.6=>3.5'],
+    '3.5': '/installation-guide/installing-splunk/splunk_installation.html',
+    '3.6': '/installing-splunk/splunk_installation.html',
+  },
+  {
+    'target': ['3.5=>3.6', '3.6=>3.5'],
+    '3.5': '/installation-guide/installing-splunk/splunk_wazuh.html',
+    '3.6': '/installing-splunk/splunk_wazuh.html',
+  },
+  {
+    'target': ['3.5=>3.6', '3.6=>3.5'],
+    '3.5': '/user-manual/reference/ossec-conf/wodle-cloudtrail.html',
+    '3.6': '/user-manual/reference/ossec-conf/wodle-s3.html',
+  }
 );
 
 /* Pages added in 3.6 */
@@ -6805,26 +6812,26 @@ removedUrls['3.6'] = [
 /* Redirections from 3.4 to 3.5 */
 
 redirections.push(
-    {
-      'target': ['3.4=>3.5', '3.5=>3.4'],
-      '3.4': '/installation-guide/installing-elastic-stack/connect_wazuh_app.html',
-      '3.5': '/user-manual/kibana-app/connect-kibana-app.html',
-    },
-    {
-      'target': ['3.4=>3.5', '3.5=>3.4'],
-      '3.4': '/migrating-from-ossec/ossec-packages-agent.html',
-      '3.5': '/migrating-from-ossec/ossec-agent.html',
-    },
-    {
-      'target': ['3.4=>3.5', '3.5=>3.4'],
-      '3.4': '/migrating-from-ossec/ossec-packages-manager.html',
-      '3.5': '/migrating-from-ossec/ossec-server.html',
-    },
-    {
-      'target': ['3.4=>3.5'],
-      '3.4': '/user-manual/capabilities/vuls.html',
-      '3.5': '/user-manual/capabilities/vulnerability-detection.html',
-    }
+  {
+    'target': ['3.4=>3.5', '3.5=>3.4'],
+    '3.4': '/installation-guide/installing-elastic-stack/connect_wazuh_app.html',
+    '3.5': '/user-manual/kibana-app/connect-kibana-app.html',
+  },
+  {
+    'target': ['3.4=>3.5', '3.5=>3.4'],
+    '3.4': '/migrating-from-ossec/ossec-packages-agent.html',
+    '3.5': '/migrating-from-ossec/ossec-agent.html',
+  },
+  {
+    'target': ['3.4=>3.5', '3.5=>3.4'],
+    '3.4': '/migrating-from-ossec/ossec-packages-manager.html',
+    '3.5': '/migrating-from-ossec/ossec-server.html',
+  },
+  {
+    'target': ['3.4=>3.5'],
+    '3.4': '/user-manual/capabilities/vuls.html',
+    '3.5': '/user-manual/capabilities/vulnerability-detection.html',
+  }
 );
 
 /* Pages added in 3.5 */
