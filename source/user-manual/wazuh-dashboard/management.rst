@@ -42,10 +42,11 @@ In this section you can configure advanced settings of the Wazuh Dashboard. Here
   :align: center
   :width: 100%
 
-.. thumbnail:: ../../images/kibana-app/features/settings/dark-mode.png
-  :align: center
-  :width: 100%
-
+You can also switch the appearance to dark mode within advanced settings.
+ 
+.. thumbnail:: /images/kibana-app/features/settings/dark-mode.png
+   :align: center
+   :width: 80%
 
 Reporting
 ---------
