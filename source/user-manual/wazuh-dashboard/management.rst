@@ -102,7 +102,7 @@ App Settings
 Configuration
 ^^^^^^^^^^^^^
 
-The Wazuh dashboard configuration file is located at ``/usr/share/wazuh-dashboard/data/wazuh/config/wazuh.yml``. You can take a look at the configuration parameters here under **Configuration**.
+The Wazuh dashboard configuration file is located at ``/usr/share/wazuh-dashboard/data/wazuh/config/wazuh.yml``. You can take a look at the configuration parameters in the Wazuh dashboard under **Configuration**.
 
 .. thumbnail:: /images/kibana-app/features/settings/configuration.png
    :align: center
