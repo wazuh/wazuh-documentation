@@ -28,7 +28,12 @@ In this section, you can see and configure the Index patterns, and creating new 
 
 Saved objects
 ^^^^^^^^^^^^^
-You can see the saved objects of the application here. You will find the index patterns, the application settings and the custom visualizations and dashboards.
+
+Saved objects of the application include:
+
+-  Index patterns
+-  Application settings
+-  Custom visualizations and dashboards
 
 .. thumbnail:: ../../images/kibana-app/features/settings/saved-objects.png
   :align: center
