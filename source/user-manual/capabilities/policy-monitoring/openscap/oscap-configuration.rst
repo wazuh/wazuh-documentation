@@ -109,7 +109,7 @@ When the evaluation is complete, you will see the results as OSSEC alerts:
 
 ``Wazuh dashboard``
 
-You can see the logs in the **Threat hunting** section, adding the filter ``rule.groups:oscap``. Note that each field is extracted to facilitate searches and analysis.
+You can see the logs in **Threat Hunting** by adding the filter ``rule.groups:oscap``. Note that each field is extracted to facilitate searches and analysis.
 
 .. thumbnail:: ../../../../images/wodles-oscap/pci-oscap.png
     :title: PCI OpenSCAP alert
