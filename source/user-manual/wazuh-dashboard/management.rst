@@ -82,9 +82,9 @@ Miscellaneous
 
 You can manually execute the Health check on this section
 
-.. thumbnail:: ../../images/kibana-app/features/settings/miscellaneous.png
-  :align: center
-  :width: 100%
+.. thumbnail:: /images/kibana-app/features/settings/miscellaneous.png
+   :align: center
+   :width: 80%
 
 App Logs
 --------
