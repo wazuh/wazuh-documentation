@@ -100,6 +100,6 @@ About
 
 This section provides information about your currently installed Wazuh dashboard package, such as version, revision, and installation date. If you want to discover what's new on each release, you can go to our `Changelog file <https://github.com/wazuh/wazuh-dashboard-plugins/blob/master/CHANGELOG.md>`_ to check it out.
 
-.. thumbnail:: ../../images/kibana-app/features/settings/about.png
-  :align: center
-  :width: 100%
+.. thumbnail:: /images/kibana-app/features/settings/about.png
+   :align: center
+   :width: 80%
