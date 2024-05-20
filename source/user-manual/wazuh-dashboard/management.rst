@@ -41,7 +41,8 @@ Saved objects of the application include:
 
 Advanced settings
 ^^^^^^^^^^^^^^^^^
-In this section you can configure advanced settings of the Wazuh Dashboard. Here, you can set the appearance to dark mode. 
+
+In this section, you can configure advanced settings of the Wazuh Dashboard such as the date format.
 
 .. thumbnail:: /images/kibana-app/features/settings/advanced-settings.png
    :align: center
