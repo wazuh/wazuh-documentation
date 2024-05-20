@@ -60,7 +60,7 @@ Any given check event has three possible results:
 
 This result is determined by the set of rules and the rule result aggregator of the check.
 
-Take the following SCA check from policy ``cis_ubuntu20-04.yml`` as an example. The example SCA check shown scans the Debian 10 endpoint to verify if you have implemented a “deny all” policy on your endpoint firewall:
+Take the following SCA check from policy ``cis_ubuntu20-04.yml`` as an example. The example SCA check shown scans the Ubuntu 20 endpoint to verify if you have implemented a “deny all” policy on your endpoint firewall:
 
 .. code-block:: yaml
 
