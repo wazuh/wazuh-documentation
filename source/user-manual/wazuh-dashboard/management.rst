@@ -20,7 +20,8 @@ Dashboards Management
 
 Index patterns
 ^^^^^^^^^^^^^^
-In this section, you can see and configure the Index patterns, and creating new ones.
+
+In this section, you can list, configure, and create new index patterns. Index patterns are templates defining data organization for efficient retrieval and analysis.
 
 .. thumbnail:: /images/kibana-app/features/settings/index-patterns.png
    :align: center
