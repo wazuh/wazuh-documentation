@@ -78,7 +78,7 @@ removedUrls['4.8'] = [
   '/user-manual/capabilities/vulnerability-detection/querying-the-vulnerability-database.html',
   '/user-manual/capabilities/vulnerability-detection/scan-types.html',
   '/user-manual/capabilities/vulnerability-detection/allow-os.html',
-  '/user-manual/wazuh-dashboard/settings.html'
+  '/user-manual/wazuh-dashboard/settings.html',
   '/migration-guide/migrating-from-ossec/index.html',
   '/migration-guide/migrating-from-ossec/ossec-server.html',
   '/migration-guide/migrating-from-ossec/ossec-agent.html',
