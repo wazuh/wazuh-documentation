@@ -49,7 +49,7 @@ Installation on Debian/Ubuntu
 +------------+---------+--------+---------+--------+----------+----------+------------------------------+
 
 .. note::
-  ``Ubuntu Focal Fossa`` is supported since version 4.0.4
+  ``Ubuntu focal fossa`` is supported since version 4.0.4
 
 
 Install ``curl``, ``apt-transport-https`` and ``lsb-release``:
