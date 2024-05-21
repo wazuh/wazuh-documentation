@@ -5,8 +5,9 @@
 
 .. _create-windows:
 
-Windows
-=======
+=============
+Windows agent
+=============
 
 Wazuh provides an automated way of building Windows packages.
 

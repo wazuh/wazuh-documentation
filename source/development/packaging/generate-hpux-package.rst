@@ -5,8 +5,9 @@
 
 .. _create-hpux:
 
-HPUX
-====
+==========
+HPUX agent
+==========
 
 Wazuh provides an automated way of building HPUX packages, keep in mind that to build an HPUX package you must run this tool in an HPUX system.
 

@@ -5,8 +5,9 @@
 
 .. _create-deb-rpm:
 
-Debian or RPM
-=============
+===================
+Linux manager/agent
+===================
 
 Wazuh provides an automated way of building DEB or RPM packages using docker so there is no need for any other dependency.
 
