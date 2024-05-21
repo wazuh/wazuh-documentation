@@ -43,7 +43,7 @@ Installation on Debian/Ubuntu
 +----------------------------------------------------------------------------+--------------------------+
 | The releases supported by the manifest to install Wazuh are as follows:                               |
 +------------+---------+--------+---------+--------+----------+----------+--------+-------------+-------+
-| **Ubuntu** | precise | trusty | vivid   | wily   | xenial   | yakketi  | bionic | Focal Fossa | Jammy |
+| **Ubuntu** | precise | trusty | vivid   | wily   | xenial   | yakketi  | bionic | focal fossa | jammy |
 +------------+---------+--------+---------+--------+----------+----------+--------+-------------+-------+
 | **Debian** | jessie  | wheezy | stretch | buster | bullseye | bookworm |                              |
 +------------+---------+--------+---------+--------+----------+----------+------------------------------+
