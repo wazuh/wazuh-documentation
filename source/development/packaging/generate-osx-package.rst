@@ -40,7 +40,7 @@ Execute the ``generate_wazuh_packages.sh`` script, with the different options yo
 
     Build options:
       -a, --architecture <arch>     [Optional] Target architecture of the package [intel64/arm64]. By Default: intel64.
-      -b, --branch <branch>         [Optional] Select Git branch [].
+      -b, --branch <branch>         [Optional] Select Git branch.
       -s, --store-path <path>       [Optional] Set the destination absolute path of package.
       -j, --jobs <number>           [Optional] Number of parallel jobs when compiling.
       -r, --revision <rev>          [Optional] Package revision that append to version e.g. x.x.x-rev

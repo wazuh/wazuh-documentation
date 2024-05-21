@@ -18,7 +18,7 @@ Requirements
  * Docker
  * Git
 
-Download our wazuh repository from GitHub and go to the debs directory.
+Download our wazuh repository from GitHub and go to the packages directory.
 
 .. code-block:: console
 
