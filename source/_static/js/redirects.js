@@ -103,8 +103,6 @@ redirections.push(
     '4.8': '/user-manual/capabilities/vulnerability-detection/index.html',
   },
 
-/* Redirections from 4.7 to 4.8  */
-
   {
     'target': ['4.7=>4.8', '4.8 => 4.7'],
     '4.7': '/user-manual/wazuh-dashboard/settings.html',

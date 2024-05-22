@@ -25,7 +25,7 @@ This section displays an inventory of all files that the FIM module has indexed.
   :align: center
   :width: 80%
 
-You can click a file entry to view the entry details such as the last time the FIM module analyzed the file and the file attributes. You can also view FIM alerts related to the file. The image below shows this information for the ``/etc/ld.so.preload`` file.
+You can click a file entry to view the entry details such as the last time the FIM module analyzed the file and the file attributes. You can also view FIM alerts related to the file. The image below shows this information for the ``/etc/resolv.conf`` file.
 
 .. thumbnail:: /images/manual/fim/entry-details.png
   :title: Entry details
