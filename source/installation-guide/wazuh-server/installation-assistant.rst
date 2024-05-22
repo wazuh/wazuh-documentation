@@ -28,6 +28,13 @@ Wazuh server cluster installation
 
 Your Wazuh server is now successfully installed. 
 
+.. note:: The passwords for wazuh and wazuh-wui users have been updated. To view all the passwords you can run the following command:
+   :class: not-long
+
+   .. code-block:: console
+
+      tar -O -xvf wazuh-install-files.tar wazuh-install-files/wazuh-passwords.txt
+
 - If you want a Wazuh server single-node cluster, everything is set and you can proceed directly with :doc:`../wazuh-dashboard/installation-assistant`.
       
 - If you want a Wazuh server multi-node cluster, repeat this process on every Wazuh server node.
