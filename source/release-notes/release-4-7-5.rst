@@ -1,7 +1,7 @@
 .. Copyright (C) 2015, Wazuh, Inc.
 
 .. meta::
-  :description: Wazuh 4.7.5 has been released. Check out our release notes to discover the changes and additions of this release.
+   :description: Wazuh 4.7.5 has been released. Check out our release notes to discover the changes and additions of this release.
 
 4.7.5 Release notes - TBD
 =========================
@@ -13,10 +13,40 @@ What's new
 
 This release includes new features or enhancements as the following:
 
+Wazuh manager
+^^^^^^^^^^^^^
+
+-  `#23441 <https://github.com/wazuh/wazuh/pull/23441>`__ Added a database endpoint to recalculate the hash of agent groups.
+
 Wazuh dashboard
 ^^^^^^^^^^^^^^^
 
 -  `#6687 <https://github.com/wazuh/wazuh-dashboard-plugins/pull/6687>`__ Added sanitization to custom branding SVG files.
+
+Resolved issues
+---------------
+
+This release resolves known issues as the following: 
+
+Wazuh manager
+^^^^^^^^^^^^^
+
+===========================================================  =============
+ Reference                                                   Description
+===========================================================  =============
+`#23447 <https://github.com/wazuh/wazuh/pull/23447>`__       Fixed an issue in a cluster task where full group synchronization was constantly triggered.
+`#23216 <https://github.com/wazuh/wazuh/pull/23216>`__       Fixed race condition when creating agent database files from a template.
+===========================================================  =============
+
+Wazuh agent
+^^^^^^^^^^^
+
+===========================================================  =============
+ Reference                                                   Description
+===========================================================  =============
+`#23468 <https://github.com/wazuh/wazuh/pull/23468>`__       Fixed segmentation fault in the logcollector multiline-regex configuration.
+`#23543 <https://github.com/wazuh/wazuh/pull/23543>`__       Fixed crash in FIM module when processing paths with non UTF-8 characters.
+===========================================================  =============
 
 Changelogs
 ----------
