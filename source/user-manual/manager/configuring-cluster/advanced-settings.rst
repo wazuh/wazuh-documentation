@@ -1,32 +1,31 @@
 .. Copyright (C) 2015, Wazuh, Inc.
 
 .. meta::
-  :description: Learn more about how to deploy a Wazuh cluster. In this section of our documentation, we explain more about the agents connections.
+  :description: Learn about load balancing and agent connections in this section of the documentation.
 
-.. _advanced_cluster_settings:
-
-*****************
 Advanced Settings
-*****************
+=================
 
-    In this section, we are going to explore other ways to configure our cluster. We'll see that besides the basic way described in our :ref:`Getting started <gt-cluster>`, we have more options to use:
+ Besides the basic method described in :ref:`Cluster nodes configuration <gt-cluster>` to configure a Wazuh cluster, you have additional options.
 
-    - HAProxy as a balancer
-    - HAProxy as a balancer + HAProxy helper as a real-time configuration manager.
-    - Agents directly connected to managers using failover mode
+-  Use HAProxy as a load balancer.
+-  Use HAProxy as a load balancer with HAProxy helper as a real-time configuration manager.
+-  Connect Wazuh agents directly to Wazuh managers.
 
+HAProxy
+-------
 
 .. _haproxy_installation:
 
-HAProxy Installation
-====================
+Installation
+^^^^^^^^^^^^
 
-We recommend using the **load balancer** option. This way, the agents will be able to report to the nodes in a distributed way and it will be the load balancer who assigns which worker they report to.
-Using this option, we can better distribute the load, and in case of a fall in some worker node, its agents will **reconnect** to another one.
+Using a load balancer, such as `HAProxy <https://www.haproxy.org/>`__, ensures the Wazuh agents register and report to Wazuh manager nodes in a distributed way. The load balancer assigns manager nodes to the agents improving load distribution. If a Wazuh manager node fails, the Wazuh agents reconnect to another node.
 
-As a load balancer, we suggest using `HAProxy <https://www.haproxy.org/>`_.
+There are two main ways to install HAProxy.
 
-There are two main ways to install HAProxy, using packages or Docker images.
+-  Using system and PPA packages
+-  Using Docker images
 
 .. note::
 
@@ -369,7 +368,7 @@ There are two main ways to install HAProxy, using packages or Docker images.
 .. _haproxy_configuration:
 
 Configuration
--------------
+^^^^^^^^^^^^^
 
     1. The configuration must be put into ``/etc/haproxy/haproxy.cfg``.
 
@@ -474,7 +473,7 @@ Configuration
 .. _haproxy_helper_setup:
 
 HAProxy helper
-==============
+--------------
 
 This is an optional tool to manage HAProxy configuration depending on the Wazuh cluster status in real-time.
 It provides the manager with the ability to automatically balance the agent TCP sessions.
@@ -502,7 +501,7 @@ The helper runs in an independent thread, that initiates with the ``wazuh-cluste
 
 
 How to enable it
-----------------
+^^^^^^^^^^^^^^^^
 
 .. note::
     The recommended version of HAProxy is the 2.8 LTS.
@@ -510,7 +509,7 @@ How to enable it
 To use this feature is required to have a :ref:`HAProxy <haproxy_installation>` instance balancing the cluster using the **least connections** algorithm.
 
 Dataplane API configuration
-^^^^^^^^^^^^^^^^^^^^^^^^^^^
+~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
     The Dataplane API is used by the helper to communicate with HAProxy and update the configuration according to the changes in the Wazuh cluster.
 
@@ -709,12 +708,12 @@ Now the HAProxy helper is running:
 
 
 Agents connections
-==================
+------------------
 
 .. _point_agents_to_a_load_balancer:
 
 Pointing agents to the cluster with a load balancer
----------------------------------------------------
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
     A **load balancer** is a service that distributes workloads across multiple resources.
 
@@ -739,7 +738,7 @@ Pointing agents to the cluster with a load balancer
 
 
 Pointing agents to the cluster (Failover mode)
-----------------------------------------------
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
     We can set to the agents a list of nodes of manager type (workers/master). In case of a disconnection, the agent will connect to another node to keep reporting.
     To configure this mode the first thing we must do is configure our cluster as indicated in our :ref:`getting started <gt-cluster>`, with the number of workers nodes we want. Once this is done, we will go directly to configure the agents in the following way.

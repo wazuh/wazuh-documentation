@@ -183,6 +183,4 @@ Wazuh server cluster
 
     .. note::
 
-        We recommend using a :ref:`load balancer <advanced_cluster_settings>` for registering and connecting the agents. This way, the agents will be able to be registered and report to the nodes in a distributed way, and it will be the load balancer who assigns which worker they will report to.
-
-        Using this option allows for better load distribution and increased availability. In case of a failure in some worker node, its agents will **reconnect** to another one.
+       We recommend using a :doc:`load balancer <advanced-settings>` to register and connect Wazuh agents. This ensures they register and report to Wazuh manager nodes in a distributed way. The load balancer assigns manager nodes to the agents. This improves load distribution and increases availability. If a Wazuh manager node fails, the corresponding Wazuh agents reconnect to another node.
