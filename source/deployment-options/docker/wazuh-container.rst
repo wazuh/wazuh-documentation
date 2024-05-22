@@ -320,6 +320,10 @@ Setting a new hash
 Setting the new password
 ........................
 
+.. warning::
+
+    Do not specify the ``$`` or ``&`` characters in your new passwords.
+
 #. Open  the ``docker-compose.yml`` file. Change all occurrences of the old password with the new one. For example, for a single-node deployment:
 
    -  ``admin`` user
