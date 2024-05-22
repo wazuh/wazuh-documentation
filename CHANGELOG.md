@@ -66,6 +66,10 @@ All notable changes to this project will be documented in this file.
 - Removed documentation for the ``allow-os`` vulnerability detection option. ([#7177](https://github.com/wazuh/wazuh-documentation/pull/7177))
 - Removed the *Migrating from OSSEC* section. ([#7301](https://github.com/wazuh/wazuh-documentation/pull/7301))
 
+## [v4.7.5]
+
+- Support for Wazuh 4.7.5
+
 ## [v4.7.4]
 
 - Support for Wazuh 4.7.4
