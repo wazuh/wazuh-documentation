@@ -261,6 +261,10 @@ Setting a new hash
 Setting the new password
 ........................
 
+.. warning::
+
+   Don't use the ``$`` or ``&`` characters in your new password. These characters can cause errors during deployment.
+
 #. Encode your new password in base64 format. Avoid inserting a trailing newline character to maintain the hash value. For example, use the ``-n`` option with the ``echo`` command as follows.
 
    .. code-block::
