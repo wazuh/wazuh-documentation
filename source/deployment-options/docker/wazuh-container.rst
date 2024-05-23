@@ -322,7 +322,7 @@ Setting the new password
 
 .. warning::
 
-    Do not specify the ``$`` or ``&`` characters in your new passwords.
+   Don't use the ``$`` or ``&`` characters in your new password. These characters can cause errors during deployment.
 
 #. Open  the ``docker-compose.yml`` file. Change all occurrences of the old password with the new one. For example, for a single-node deployment:
 
