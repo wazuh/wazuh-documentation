@@ -63,9 +63,6 @@ The manifest supports the following releases to install wazuh.
 -  jessie
 -  wheezy
 
-.. note::
-  ``Ubuntu focal fossa`` is supported since version 4.0.4
-
 
 Install ``curl``, ``apt-transport-https`` and ``lsb-release``:
 
