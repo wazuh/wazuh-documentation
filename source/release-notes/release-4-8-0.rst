@@ -53,6 +53,7 @@ RESTful API
 - `#21572 <https://github.com/wazuh/wazuh/pull/21572>`__ Removed the ``compilation_date`` field from ``GET /cluster/{node_id}/info`` and ``GET /manager/info`` endpoints.
 - `#22387 <https://github.com/wazuh/wazuh/pull/22387>`__ Deprecated the ``cache`` configuration option.
 - `#17048 <https://github.com/wazuh/wazuh/pull/17048>`__ Removed the ``custom`` parameter from the ``PUT /active-response`` endpoint.
+- `#22727 <https://github.com/wazuh/wazuh/pull/22727>`__ Added API configuration option to protect the Wazuh indexer configuration from updates.
 
 Ruleset
 ^^^^^^^
@@ -80,10 +81,11 @@ Other
 ^^^^^
 
 - `#20003 <https://github.com/wazuh/wazuh/pull/20003>`__ Upgraded embedded Python version to ``3.10.13``.
-- `#21856 <https://github.com/wazuh/wazuh/pull/21856>`__ Upgraded external ``aiohttp`` library dependency version to ``3.9.3``.
+- `#23112 <https://github.com/wazuh/wazuh/pull/23112>`__ Upgraded external ``aiohttp`` library dependency version to ``3.9.5``.
 - `#22221 <https://github.com/wazuh/wazuh/pull/22221>`__ Upgraded external ``cryptography`` library dependency version to ``42.0.4``.
 - `#21710 <https://github.com/wazuh/wazuh/pull/21710>`__ Upgraded external ``curl`` library dependency version to ``8.5.0``.
 - `#20003 <https://github.com/wazuh/wazuh/pull/20003>`__ Upgraded external ``grpcio`` library dependency version to ``1.58.0``.
+- `#23112 <https://github.com/wazuh/wazuh/pull/23112>`__ Upgraded external ``idna`` library dependency version to ``3.7``.
 - `#21684 <https://github.com/wazuh/wazuh/pull/21684>`__ Upgraded external ``Jinja2`` library dependency version to ``3.1.3``.
 - `#21710 <https://github.com/wazuh/wazuh/pull/21710>`__ Upgraded external ``libarchive`` library dependency version to ``3.7.2``.
 - `#20003 <https://github.com/wazuh/wazuh/pull/20003>`__ Upgraded external ``numpy`` library dependency version to ``1.26.0``.
@@ -105,11 +107,11 @@ Wazuh dashboard
 - `#6093 <https://github.com/wazuh/wazuh-dashboard-plugins/pull/6093>`__ Added a notification about new Wazuh updates and a button to check their availability. `#6256 <https://github.com/wazuh/wazuh-dashboard-plugins/pull/6256>`__ `#6328 <https://github.com/wazuh/wazuh-dashboard-plugins/pull/6328>`__
 - `#6083 <https://github.com/wazuh/wazuh-dashboard-plugins/pull/6083>`__ Added the ``ssl_agent_ca`` configuration to the **SSL Settings** form.
 - `#5896 <https://github.com/wazuh/wazuh-dashboard-plugins/pull/5896>`__ Added global vulnerabilities dashboards.
-- `#5840 <https://github.com/wazuh/wazuh-dashboard-plugins/pull/5840>`__ Added an agent selector to the IT Hygiene module.
+- `#5840 <https://github.com/wazuh/wazuh-dashboard-plugins/pull/5840>`__ Added an agent selector to the agent view.
 - `#5840 <https://github.com/wazuh/wazuh-dashboard-plugins/pull/5840>`__ Moved the Wazuh menu into the side menu. `#6226 <https://github.com/wazuh/wazuh-dashboard-plugins/pull/6226>`__ `#6423 <https://github.com/wazuh/wazuh-dashboard-plugins/pull/6423>`__  `#6510 <https://github.com/wazuh/wazuh-dashboard-plugins/pull/6510>`__ `#6591 <https://github.com/wazuh/wazuh-dashboard-plugins/pull/6591>`__
 - `#5840 <https://github.com/wazuh/wazuh-dashboard-plugins/pull/5840>`__ Removed the ``disabled_roles`` and ``customization.logo.sidebar`` settings.
 - `#5840 <https://github.com/wazuh/wazuh-dashboard-plugins/pull/5840>`__ Removed module visibility configuration and removed the ``extensions.*`` settings.
-- `#6035 <https://github.com/wazuh/wazuh-dashboard-plugins/pull/6035>`__ Updated all dashboard visualization definitions. `#6632 <https://github.com/wazuh/wazuh-dashboard-plugins/pull/6632>`__
+- `#6035 <https://github.com/wazuh/wazuh-dashboard-plugins/pull/6035>`__ Updated all dashboard visualization definitions. `#6632 <https://github.com/wazuh/wazuh-dashboard-plugins/pull/6632>`__  `#6690 <https://github.com/wazuh/wazuh-dashboard-plugins/pull/6690>`__
 - `#6067 <https://github.com/wazuh/wazuh-dashboard-plugins/pull/6067>`__ Reorganized tabs order in all modules.
 - `#6174 <https://github.com/wazuh/wazuh-dashboard-plugins/pull/6174>`__ Removed the implicit filter of WQL language of the search bar UI.
 - `#6373 <https://github.com/wazuh/wazuh-dashboard-plugins/pull/6373>`__ Changed the **API configuration** title to **API Connections**.
@@ -120,6 +122,7 @@ Wazuh dashboard
 - `#6379 <https://github.com/wazuh/wazuh-dashboard-plugins/pull/6379>`__ Changed overview home top KPIs. `#6408 <https://github.com/wazuh/wazuh-dashboard-plugins/pull/6408>`__ `#6569 <https://github.com/wazuh/wazuh-dashboard-plugins/pull/6569>`__
 - `#6341 <https://github.com/wazuh/wazuh-dashboard-plugins/pull/6341>`__ Removed notice of old **Discover** deprecation.
 - `#6492 <https://github.com/wazuh/wazuh-dashboard-plugins/pull/6492>`__ Updated the PDF report year number to 2024.
+- `#6702 <https://github.com/wazuh/wazuh-dashboard-plugins/pull/6702>`__ Adjusted font style of **Endpoints summary** KPIs, **Index pattern**, and API selectors, as well as adjusted the **Dev Tools** column widths.
 
 Packages
 ^^^^^^^^
@@ -166,6 +169,7 @@ Wazuh manager
 Reference                                                          Description
 ==============================================================     =============
 `#17886 <https://github.com/wazuh/wazuh/pull/17886>`__             Updated cluster connection cleanup to remove temporary files when the connection between a worker and a master is broken.
+`#23371 <https://github.com/wazuh/wazuh/pull/23371>`__             Added a mechanism to prevent cluster errors from an expected wazuh-db exception.
 ==============================================================     =============
 
 Agent
@@ -187,6 +191,7 @@ RESTful API
 Reference                                                          Description
 ==============================================================     =============
 `#20527 <https://github.com/wazuh/wazuh/pull/20527>`__             Fixed a warning from SQLAlchemy involving detached Roles instances in RBAC.
+`#23120 <https://github.com/wazuh/wazuh/pull/23120>`__             Fixed an issue in ``GET /manager/configuration`` where only the last of multiple ``<ignore>`` items in the configuration file was displayed.
 ==============================================================     =============
 
 Wazuh dashboard
@@ -197,7 +202,7 @@ Reference                                                                    Des
 =========================================================================    =============
 `#5840 <https://github.com/wazuh/wazuh-dashboard-plugins/pull/5840>`__       Fixed a problem with the agent menu header when the side menu is docked.
 `#6102 <https://github.com/wazuh/wazuh-dashboard-plugins/pull/6102>`__       Fixed how the query filters apply on the Security Alerts table.
-`#6177 <https://github.com/wazuh/wazuh-dashboard-plugins/pull/6177>`__       Fixed exception in **IT-Hygiene** when an agent doesn't have policies.
+`#6177 <https://github.com/wazuh/wazuh-dashboard-plugins/pull/6177>`__       Fixed exception in agent view when an agent doesn't have policies.
 `#6177 <https://github.com/wazuh/wazuh-dashboard-plugins/pull/6177>`__       Fixed exception in **Inventory** when agents don't have operating system information.
 `#6177 <https://github.com/wazuh/wazuh-dashboard-plugins/pull/6177>`__       Fixed pinned agent state in URL.
 `#6234 <https://github.com/wazuh/wazuh-dashboard-plugins/pull/6234>`__       Fixed invalid date format in **About** and **Agents** views.
