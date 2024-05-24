@@ -122,7 +122,7 @@ Wazuh dashboard
 - `#6379 <https://github.com/wazuh/wazuh-dashboard-plugins/pull/6379>`__ Changed overview home top KPIs. `#6408 <https://github.com/wazuh/wazuh-dashboard-plugins/pull/6408>`__ `#6569 <https://github.com/wazuh/wazuh-dashboard-plugins/pull/6569>`__
 - `#6341 <https://github.com/wazuh/wazuh-dashboard-plugins/pull/6341>`__ Removed notice of old **Discover** deprecation.
 - `#6492 <https://github.com/wazuh/wazuh-dashboard-plugins/pull/6492>`__ Updated the PDF report year number to 2024.
-- `#6702 <https://github.com/wazuh/wazuh-dashboard-plugins/pull/6702>`__ Adjusted style and layout of **Endpoints summary** KPIs, **Index pattern**, and API selectors, as well as the **Dev Tools** column widths.
+- `#6702 <https://github.com/wazuh/wazuh-dashboard-plugins/pull/6702>`__ Adjusted font style of **Endpoints summary** KPIs, **Index pattern**, and API selectors, as well as adjusted the **Dev Tools** column widths.
 
 Packages
 ^^^^^^^^
@@ -191,7 +191,7 @@ RESTful API
 Reference                                                          Description
 ==============================================================     =============
 `#20527 <https://github.com/wazuh/wazuh/pull/20527>`__             Fixed a warning from SQLAlchemy involving detached Roles instances in RBAC.
-`#23120 <https://github.com/wazuh/wazuh/pull/23120>`__             Fixed an issue in `GET /manager/configuration` where only the last of multiple `<ignore>` items was displayed.
+`#23120 <https://github.com/wazuh/wazuh/pull/23120>`__             Fixed an issue in ``GET /manager/configuration`` where only the last of multiple ``<ignore>`` items in the configuration file was displayed.
 ==============================================================     =============
 
 Wazuh dashboard
