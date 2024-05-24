@@ -40,13 +40,28 @@ Create a symbolic link between the installed binary file and your default binary
 Installation on Debian/Ubuntu
 -----------------------------
 
-+----------------------------------------------------------------------------+--------------------------+
-| The releases supported by the manifest to install Wazuh are as follows:                               |
-+------------+---------+--------+---------+--------+----------+----------+--------+-------------+-------+
-| **Ubuntu** | precise | trusty | vivid   | wily   | xenial   | yakketi  | bionic | focal fossa | jammy |
-+------------+---------+--------+---------+--------+----------+----------+--------+-------------+-------+
-| **Debian** | jessie  | wheezy | stretch | buster | bullseye | bookworm |                              |
-+------------+---------+--------+---------+--------+----------+----------+------------------------------+
+The manifest supports the following releases to install wazuh.
+
+**Ubuntu**
+
+-  Jammy Jellyfish
+-  Focal Fossa
+-  Bionic Beaver
+-  Yakkety Yak
+-  Xenial Xerus
+-  Wily Werewolf
+-  Vivid Vervet
+-  Trusty Tahr
+-  Precise Pangolin
+
+**Debian**
+
+-  bookworm
+-  bullseye
+-  buster
+-  stretch
+-  jessie
+-  wheezy
 
 .. note::
   ``Ubuntu focal fossa`` is supported since version 4.0.4
