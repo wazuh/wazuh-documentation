@@ -110,7 +110,7 @@ Follow the `official documentation <https://docs.aws.amazon.com/lambda/latest/dg
     +--------------------------+--------------+----------------------------------------------------------------------------------------------------+
     | ACCOUNT_ID               | True         | Enter the ID that you specified when creating your Amazon Security Lake custom source              |
     +--------------------------+--------------+----------------------------------------------------------------------------------------------------+
-    | AWS_REGION               | True         | AWS Region to which the data is written                                                            |
+    | REGION                   | True         | AWS Region to which the data is written                                                            |
     +--------------------------+--------------+----------------------------------------------------------------------------------------------------+
     | S3_BUCKET_OCSF           | False        | S3 bucket to which the mapped events are written                                                   |
     +--------------------------+--------------+----------------------------------------------------------------------------------------------------+
