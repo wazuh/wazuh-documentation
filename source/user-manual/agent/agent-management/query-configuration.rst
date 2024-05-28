@@ -32,7 +32,7 @@ By clicking on the *Log collection* configuration, the active configuration is s
   :width: 100%
 
 
-Now for example, if you want to know the current cluster configuration from one of your *Wazuh managers*, click on the upper-left menu icon **☰** to open the options, go to **Server management** > **Settings** module, select the desired node and then click on the **Cluster** section:
+Now for example, if you want to know the current cluster configuration from one of your *Wazuh managers*, click on the upper-left menu icon **☰** to open the options, go to **Server management** > **Settings** module, select the desired node and then click **Cluster**:
 
 .. thumbnail:: /images/kibana-app/features/query-configuration/cluster.png
   :title: Cluster node configuration
