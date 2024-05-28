@@ -1007,11 +1007,11 @@ Vulnerability Detection
 +                                                    +----------------+----------------------------------------------------------------------------------+
 |                                                    | Allowed values | Any integer between 1 and 100000                                                 |
 +----------------------------------------------------+----------------+----------------------------------------------------------------------------------+
-|  **vulnerability-detection.remediation_lru_size**  | description    | lru cache size assigned for remediations' os data (in number of elements).       |
+|  **vulnerability-detection.remediation_lru_size**  | Description    | LRU cache size assigned for remediations' os data (in number of elements).       |
 +                                                    +----------------+----------------------------------------------------------------------------------+
-|                                                    | default value  | 2048                                                                             |
+|                                                    | Default value  | 2048                                                                             |
 +                                                    +----------------+----------------------------------------------------------------------------------+
-|                                                    | allowed values | any integer between 1 and 100000                                                 |
+|                                                    | allowed values | Any integer between 1 and 100000                                                 |
 +----------------------------------------------------+----------------+----------------------------------------------------------------------------------+
 
 Wazuh
