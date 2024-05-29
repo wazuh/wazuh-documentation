@@ -48,6 +48,15 @@ Wazuh agent
 `#23543 <https://github.com/wazuh/wazuh/pull/23543>`__       Fixed crash in FIM module when processing paths with non UTF-8 characters.
 ===========================================================  =============
 
+Wazuh dashboard
+^^^^^^^^^^^^^^^
+
+=======================================================================    =============
+Reference                                                                  Description
+=======================================================================    =============
+`#6718 <https://github.com/wazuh/wazuh-dashboard-plugins/pull/6718>`__     Fixed a missing space in the macOS agent installation command when a password is required.
+=======================================================================    =============
+
 Changelogs
 ----------
 
