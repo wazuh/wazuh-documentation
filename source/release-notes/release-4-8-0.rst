@@ -8,6 +8,24 @@
 
 This section lists the changes in version 4.8.0. Every update of the Wazuh solution is cumulative and includes all enhancements and fixes from previous releases.
 
+Highlights
+----------
+
+This release introduces a major refactor of the Vulnerability Detector module that increases coverage and improves reliability by using a centralized feed of curated vulnerabilities maintained by Wazuh. It introduces global queries for vulnerability detection information, allowing users to search through vulnerability detection data across all endpoints.
+
+The Wazuh dashboard notifies users whenever there's a newer Wazuh version available and offers a revamped UX navigation experience by completely overhauling the menu layout.
+
+To support the centralized vulnerability feed and update check services, Wazuh has developed a new platform aimed at integrating and distributing Cyber Threat Intelligence (CTI) data.
+
+Package inventory can now collect information from expanded sources, including Snap, PYPI, and Node package managers.
+
+The release also addresses hundreds of bugs of varying impacts, further stabilizing the platform and improving the overall user experience.
+
+-  `Vulnerability Detector refactor <https://github.com/wazuh/wazuh/issues/14153>`__: Vulnerability detection uses a centralized feed maintained by Wazuh and introduces global queries, significantly improving vulnerability detection capabilities and performance.
+-  `Update check service UI <https://github.com/wazuh/wazuh-dashboard/issues/84>`__: Users can now be notified whenever there's a new Wazuh version available.
+-  `Wazuh dashboard UX redesign <https://github.com/wazuh/wazuh-dashboard/issues/90>`__: A significant overhaul aimed at enhancing the user interface and experience, making navigation and operation more intuitive.
+-  `Snap packages support <https://github.com/wazuh/wazuh/issues/15429>`__ & `PYPI and Node packages support <https://github.com/wazuh/wazuh-documentation/issues/6342>`__: Wazuh now includes support for inventorying packages installed through the snap, PYPI and Node package managers, improving visibility into software management.
+
 What's new
 ----------
 
@@ -17,7 +35,6 @@ Manager
 ^^^^^^^
 
 - `#21201 <https://github.com/wazuh/wazuh/pull/21201>`__ Refactored vulnerability detection capability.
-- `#16058 <https://github.com/wazuh/wazuh/pull/16058>`__ Added new ``rollback`` query to ``wazuh-db``.
 - `#18476 <https://github.com/wazuh/wazuh/pull/18476>`__ Improved ``wazuh-db`` detection of deleted database files.
 - `#16893 <https://github.com/wazuh/wazuh/pull/16893>`__ Added ``timeout`` and ``retry`` parameters to the VirusTotal integration.
 - `#18988 <https://github.com/wazuh/wazuh/pull/18988>`__ Extended ``wazuh-analysisd`` EPS metrics with events dropped by overload and remaining credits in the previous cycle.
@@ -182,6 +199,7 @@ Reference                                                          Description
 `#16056 <https://github.com/wazuh/wazuh/pull/16056>`__             Fixed the OS version detection on Alpine Linux.
 `#18642 <https://github.com/wazuh/wazuh/pull/18642>`__             Fixed Solaris 10 name not showing in the dashboard.
 `#21932 <https://github.com/wazuh/wazuh/pull/21932>`__             Fixed an error in macOS Ventura compilation from sources.
+`#23532 <https://github.com/wazuh/wazuh/pull/23532>`__             Fixed PyPI package gathering on macOS Sonoma.
 ==============================================================     =============
 
 RESTful API
@@ -234,6 +252,15 @@ Changelogs
 
 More details about these changes are provided in the changelog of each component:
 
-- `wazuh/wazuh <https://github.com/wazuh/wazuh/blob/v4.8.0/CHANGELOG.md>`__
-- `wazuh/wazuh-dashboard <https://github.com/wazuh/wazuh-dashboard-plugins/blob/v4.8.0-2.10.0/CHANGELOG.md>`__
-- `wazuh/wazuh-packages <https://github.com/wazuh/wazuh-packages/releases/tag/v4.8.0>`__
+-  `wazuh/wazuh <https://github.com/wazuh/wazuh/blob/v4.8.0/CHANGELOG.md>`__
+-  `wazuh/wazuh-dashboard-plugins <https://github.com/wazuh/wazuh-dashboard-plugins/blob/v4.8.0-2.10.0/CHANGELOG.md>`__
+-  `wazuh/wazuh-packages <https://github.com/wazuh/wazuh-packages/releases/tag/v4.8.0>`__
+
+-  `wazuh/wazuh-ansible <https://github.com/wazuh/wazuh-ansible/blob/v4.8.0/CHANGELOG.md>`__
+-  `wazuh/wazuh-kubernetes <https://github.com/wazuh/wazuh-kubernetes/blob/v4.8.0/CHANGELOG.md>`__
+-  `wazuh/wazuh-puppet <https://github.com/wazuh/wazuh-puppet/blob/v4.8.0/CHANGELOG.md>`__
+-  `wazuh/wazuh-docker <https://github.com/wazuh/wazuh-docker/blob/v4.8.0/CHANGELOG.md>`__
+
+-  `wazuh/wazuh-qa <https://github.com/wazuh/wazuh-qa/blob/v4.8.0/CHANGELOG.md>`__
+-  `wazuh/qa-integration-framework <https://github.com/wazuh/qa-integration-framework/blob/v4.8.0/CHANGELOG.md>`__
+-  `wazuh/wazuh-documentation <https://github.com/wazuh/wazuh-documentation/blob/v4.8.0/CHANGELOG.md>`__
