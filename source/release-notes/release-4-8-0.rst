@@ -35,7 +35,6 @@ Manager
 ^^^^^^^
 
 - `#21201 <https://github.com/wazuh/wazuh/pull/21201>`__ Refactored vulnerability detection capability.
-- `#16058 <https://github.com/wazuh/wazuh/pull/16058>`__ Added new ``rollback`` query to ``wazuh-db``.
 - `#18476 <https://github.com/wazuh/wazuh/pull/18476>`__ Improved ``wazuh-db`` detection of deleted database files.
 - `#16893 <https://github.com/wazuh/wazuh/pull/16893>`__ Added ``timeout`` and ``retry`` parameters to the VirusTotal integration.
 - `#18988 <https://github.com/wazuh/wazuh/pull/18988>`__ Extended ``wazuh-analysisd`` EPS metrics with events dropped by overload and remaining credits in the previous cycle.
@@ -200,6 +199,7 @@ Reference                                                          Description
 `#16056 <https://github.com/wazuh/wazuh/pull/16056>`__             Fixed the OS version detection on Alpine Linux.
 `#18642 <https://github.com/wazuh/wazuh/pull/18642>`__             Fixed Solaris 10 name not showing in the dashboard.
 `#21932 <https://github.com/wazuh/wazuh/pull/21932>`__             Fixed an error in macOS Ventura compilation from sources.
+`#23532 <https://github.com/wazuh/wazuh/pull/23532>`__             Fixed PyPI package gathering on macOS Sonoma.
 ==============================================================     =============
 
 RESTful API
