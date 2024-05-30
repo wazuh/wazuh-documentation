@@ -3,8 +3,8 @@
 .. meta::
    :description: Wazuh 4.7.5 has been released. Check out our release notes to discover the changes and additions of this release.
 
-4.7.5 Release notes - TBD
-=========================
+4.7.5 Release notes - 30 May 2024
+=================================
 
 This section lists the changes in version 4.7.5. Every update of the Wazuh solution is cumulative and includes all enhancements and fixes from previous releases.
 
@@ -47,6 +47,15 @@ Wazuh agent
 `#23468 <https://github.com/wazuh/wazuh/pull/23468>`__       Fixed segmentation fault in the logcollector multiline-regex configuration.
 `#23543 <https://github.com/wazuh/wazuh/pull/23543>`__       Fixed crash in FIM module when processing paths with non UTF-8 characters.
 ===========================================================  =============
+
+Wazuh dashboard
+^^^^^^^^^^^^^^^
+
+=======================================================================    =============
+Reference                                                                  Description
+=======================================================================    =============
+`#6718 <https://github.com/wazuh/wazuh-dashboard-plugins/pull/6718>`__     Fixed a missing space in the macOS agent installation command when a password is required.
+=======================================================================    =============
 
 Changelogs
 ----------
