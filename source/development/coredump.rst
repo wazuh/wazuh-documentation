@@ -26,7 +26,7 @@ Red Hat based OSs
       kernel.core_uses_pid = 1
       fs.suid_dumpable = 2
 
-#. Create directory ``/var/lib/coredumps`` and grant it permissions (773).
+#. Create directory ``/var/lib/coredumps`` and grant it permissions ``773``.
 
 #. Reboot the system
 
@@ -34,14 +34,14 @@ Red Hat based OSs
 
    .. code-block:: console
 
-      ulimit -c unlimited
-      sysctl -p
+      # ulimit -c unlimited
+      # sysctl -p
 
 #. Restart wazuh agent:
 
    .. code-block:: console
 
-      ./var/ossec/bin/wazuh-control restart
+      # ./var/ossec/bin/wazuh-control restart
       
 
 Debian based OSs
