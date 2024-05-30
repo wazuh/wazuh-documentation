@@ -35,17 +35,21 @@ There are two main ways to install HAProxy.
 
     .. group-tab:: System Package
 
-        1. Install HAProxy
+        #. Install HAProxy
 
         .. code-block:: console
 
             # apt install haproxy -y
 
-        2. Check the installation
+        #. Check the installation
 
         .. code-block:: console
 
             # haproxy -v
+
+        .. code-block:: none
+            :class: output
+
             HAProxy version 2.8.5-1ubuntu3 2024/04/01 - https://haproxy.org/
             Status: long-term supported branch - will stop receiving fixes around Q2 2028.
             Known bugs: http://www.haproxy.org/bugs/bugs-2.8.5.html
@@ -55,24 +59,28 @@ There are two main ways to install HAProxy.
 
     .. group-tab:: PPA Package
 
-        1. Add the PPA repository
+        #. Add the PPA repository
 
         .. code-block:: console
 
             # apt update && apt install software-properties-common -y
             # add-apt-repository ppa:vbernat/haproxy-2.8 -y
 
-        2. Install HAProxy
+        #. Install HAProxy
 
         .. code-block:: console
 
             # apt install haproxy -y
 
-        3. Check the installation
+        #. Check the installation
 
         .. code-block:: console
 
             # haproxy -v
+
+        .. code-block:: none
+            :class: output
+
             HAProxy version 2.8.9-1ppa1~jammy 2024/04/06 - https://haproxy.org/
             Status: long-term supported branch - will stop receiving fixes around Q2 2028.
             Known bugs: http://www.haproxy.org/bugs/bugs-2.8.9.html
@@ -338,7 +346,7 @@ There are two main ways to install HAProxy.
 
         And a :ref:`Configuration file <haproxy_configuration>` to get the service up and running.
 
-        1. It will be needed to put these files in the same directory and build the image
+        #. It will be needed to put these files in the same directory and build the image
 
         .. code-block:: console
 
@@ -353,11 +361,15 @@ There are two main ways to install HAProxy.
 
             # docker build --tag=haproxy-deploy .
 
-        2. After building the image can we run the haproxy service
+        #. After building the image can we run the haproxy service
 
         .. code-block:: console
 
             # docker run haproxy-deploy
+
+        .. code-block:: none
+            :class: output
+
             TCPLOG: true HTTPLOG: true
             * Starting haproxy haproxy
             [NOTICE]   (33) : haproxy version is 2.8.9-1842fd0
@@ -370,7 +382,7 @@ There are two main ways to install HAProxy.
 Configuration
 ^^^^^^^^^^^^^
 
-    1. The configuration must be put into ``/etc/haproxy/haproxy.cfg``.
+    #. The configuration must be put into ``/etc/haproxy/haproxy.cfg``.
 
         .. raw:: html
 
@@ -460,11 +472,15 @@ Configuration
                     bind :1515
                     default_backend wazuh_register
 
-    2. Now can we start the service with
+    #. Now can we start the service with
 
         .. code-block:: console
 
             # service haproxy start
+
+        .. code-block:: none
+            :class: output
+
             * Starting haproxy haproxy
             [NOTICE]   (13231) : haproxy version is 2.8.9-1ppa1~jammy
             [NOTICE]   (13231) : path to executable is /usr/sbin/haproxy
@@ -480,9 +496,9 @@ It provides the manager with the ability to automatically balance the agent TCP 
 
 Some of its key features are:
 
-* Add/remove new servers to the Wazuh backend (1514/tcp) when detecting changes on the Wazuh cluster (e.g. new workers connected).
-* Balance excess agents per node when adding new servers to the Wazuh backend.
-* Balance agents when detecting an imbalance that exceeds the given tolerance.
+- Add/remove new servers to the Wazuh backend (1514/tcp) when detecting changes on the Wazuh cluster (e.g. new workers connected).
+- Balance excess agents per node when adding new servers to the Wazuh backend.
+- Balance agents when detecting an imbalance that exceeds the given tolerance.
 
 .. thumbnail:: /images/manual/cluster/haproxy-helper-architecture.png
     :title: HAProxy helper architecture
@@ -547,28 +563,32 @@ Dataplane API configuration
     .. tabs::
         .. group-tab:: Packages
 
-            1. Download the binary file for the installed HAProxy version. You can find the available versions `here <https://github.com/haproxytech/dataplaneapi/releases/>`__.
+            #. Download the binary file for the installed HAProxy version. You can find the available versions `here <https://github.com/haproxytech/dataplaneapi/releases/>`__.
 
             .. code-block:: console
 
                 # curl -sL https://github.com/haproxytech/dataplaneapi/releases/download/v2.8.X/dataplaneapi_2.8.X_linux_x86_64.tar.gz | tar xz && cp dataplaneapi /usr/local/bin/
 
-            2. Put the configuration in ``/etc/haproxy/dataplaneapi.yml`` and start the process
+            #. Put the configuration in ``/etc/haproxy/dataplaneapi.yml`` and start the process
 
             .. code-block:: console
 
                 # dataplaneapi -f /etc/haproxy/dataplaneapi.yml &
 
-            3. Verify the API is running properly
+            #. Verify the API is running properly
 
             .. code-block:: console
 
                 # curl -X GET --user <DATAPLANE_USER>:<DATAPLANE_PASSWORD> http://localhost:5555/v2/info
+
+            .. code-block:: none
+                :class: output
+
                 {"api":{"build_date":"2024-05-13T12:09:33.000Z","version":"v2.8.X 13ba2b34"},"system":{}}
 
         .. group-tab:: Docker
 
-            1. Put the configuration into ``dataplaneapi.yaml``
+            #. Put the configuration into ``dataplaneapi.yaml``
 
                 .. code-block:: console
 
@@ -580,7 +600,7 @@ Dataplane API configuration
                     ├── haproxy.cfg
                     └── haproxy-service
 
-            2. Modify the Dockerfile to include ``dataplaneapi.yaml`` during the build
+            #. Modify the Dockerfile to include ``dataplaneapi.yaml`` during the build
 
                 .. code-block:: dockerfile
                     :emphasize-lines: 4
@@ -597,7 +617,7 @@ Dataplane API configuration
 
                     ENTRYPOINT [ "/entrypoint.sh" ]
 
-            3. Modify the ``entrypoint.sh`` to start the dataplaneapi process
+            #. Modify the ``entrypoint.sh`` to start the dataplaneapi process
 
                 .. code-block:: bash
                     :emphasize-lines: 6
@@ -611,7 +631,7 @@ Dataplane API configuration
 
                     tail -f /dev/null
 
-            4. Build and run the image
+            #. Build and run the image
 
                 .. code-block:: console
 
@@ -620,17 +640,25 @@ Dataplane API configuration
                 .. code-block:: console
 
                     # docker run -p 5555:5555 haproxy-deploy
+
+                .. code-block:: none
+                    :class: output
+
                     TCPLOG: true HTTPLOG: true
                     * Starting haproxy haproxy
                     [NOTICE]   (33) : haproxy version is 2.8.9-1842fd0
                     [NOTICE]   (33) : path to executable is /usr/sbin/haproxy
                     [ALERT]    (33) : config : parsing [/etc/haproxy/haproxy.cfg:3] : 'pidfile' already specified. Continuing.
 
-            5. Verify the API is running properly
+            #. Verify the API is running properly
 
                 .. code-block:: console
 
                     # curl -X GET --user haproxy:haproxy http://localhost:5555/v2/info
+
+                .. code-block:: none
+                    :class: output
+
                     {"api":{"build_date":"2024-05-13T14:06:03.000Z","version":"v2.9.3 59f34ea1"},"system":{}}
 
 
@@ -680,9 +708,13 @@ Restart the master node:
 Now the HAProxy helper is running:
 
     .. code-block:: console
-        :emphasize-lines: 12
 
         # tail /var/ossec/logs/cluster.log
+
+    .. code-block:: none
+        :class: output
+        :emphasize-lines: 11
+
         2024/04/05 19:23:06 DEBUG: [Cluster] [Main] Removing '/var/ossec/queue/cluster/'.
         2024/04/05 19:23:06 DEBUG: [Cluster] [Main] Removed '/var/ossec/queue/cluster/'.
         2024/04/05 19:23:06 INFO: [Local Server] [Main] Serving on /var/ossec/queue/cluster/c-internal.sock
@@ -719,7 +751,7 @@ Pointing agents to the cluster with a load balancer
 
     The correct way to use it is to point every agent to send the events to the *load balancer*:
 
-    1. Edit the Wazuh agent configuration in ``/var/ossec/etc/ossec.conf`` to add the **Load Balancer** IP address. In the ``<client><server>`` section, change the ``LOAD_BALANCER_IP`` value to the ``load balancer`` address and ``port``:
+    #. Edit the Wazuh agent configuration in ``/var/ossec/etc/ossec.conf`` to add the **Load Balancer** IP address. In the ``<client><server>`` section, change the ``LOAD_BALANCER_IP`` value to the ``load balancer`` address and ``port``:
 
       .. code-block:: xml
 
@@ -730,11 +762,11 @@ Pointing agents to the cluster with a load balancer
           </server>
         </client>
 
-    2. Restart the agents:
+    #. Restart the agents:
 
       .. include:: /_templates/common/restart_agent.rst
 
-    3. Include in the ``Load Balancer`` the IP address of every instance of the cluster we want to deliver events.
+    #. Include in the ``Load Balancer`` the IP address of every instance of the cluster we want to deliver events.
 
 
 Pointing agents to the cluster (Failover mode)
