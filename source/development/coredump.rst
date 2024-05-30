@@ -8,8 +8,44 @@ Configuring core dump generation
 
 A *core dump* or *crash dump* is a snapshot of a process's memory taken when a serious or unhandled error occurs. The operating system on a monitored endpoint can automatically generate core dumps. These dumps are valuable for diagnosing hanging processes. Alongside environment information, such as the operating system version, they can offer insights into the cause of a crash.
 
-Linux endpoints
----------------
+Red Hat based OSs
+-----------------
+
+#. Edit the Systemd ``/etc/systemd/system.conf`` file. Add the following lines.
+
+   .. code-block:: console
+
+      DumpCore=yes
+      DefaultLimitCORE=infinity
+
+#. Edit the Systemd ``/etc/sysctl.d/core.conf`` file. Add the following lines.
+
+   .. code-block:: console
+
+      kernel.core_pattern = /var/lib/coredumps/core-%e-pid%p-time%t
+      kernel.core_uses_pid = 1
+      fs.suid_dumpable = 2
+
+#. Create directory ``/var/lib/coredumps`` and grant it permissions ``773``.
+
+#. Reboot the system
+
+#. After system reboot set the core ``ulimit`` to ``unlimited`` in your terminal.
+
+   .. code-block:: console
+
+      # ulimit -c unlimited
+      # sysctl -p
+
+#. Restart wazuh agent:
+
+   .. code-block:: console
+
+      # ./var/ossec/bin/wazuh-control restart
+      
+
+Debian based OSs
+----------------
 
 In Linux version 2.41 and later, a template defines the location and name of the generated `core dump files <https://man7.org/linux/man-pages/man5/core.5.html>`__. Earlier versions generate the core dump files next to the location of the file that caused the error.
 
