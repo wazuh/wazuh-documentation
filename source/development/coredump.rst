@@ -30,7 +30,7 @@ Red Hat based OSs
 
 #. Reboot the system
 
-#. After system reboot set the core ulimit to unlimited in your terminal.
+#. After system reboot set the core ``ulimit`` to ``unlimited`` in your terminal.
 
    .. code-block:: console
 
