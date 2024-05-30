@@ -175,21 +175,10 @@ haproxy_helper
 
 This section explains how to configure the HAProxy helper for agent balancing.
 
-- `haproxy_disabled`_
-- `haproxy_address`_
-- `haproxy_user`_
-- `haproxy_password`_
-- `haproxy_port`_
-- `haproxy_protocol`_
-- `haproxy_backend`_
-- `haproxy_resolver`_
-- `frequency`_
-- `agent_chunk_size`_
-- `agent_reconnection_time`_
-- `agent_reconnection_stability_time`_
-- `imbalance_tolerance`_
-- `remove_disconnected_node_after`_
-- `excluded_nodes`_
+.. contents::
+   :local:
+   :depth: 1
+   :backlinks: none
 
 
 .. _haproxy_disabled:
