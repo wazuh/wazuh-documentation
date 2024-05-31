@@ -109,7 +109,7 @@ When the evaluation is complete, you will see the results as OSSEC alerts:
 
 ``Wazuh dashboard``
 
-Note that each field is extracted to facilitate searches and analysis.
+You can see the logs in **Threat Hunting** by adding the filter ``rule.groups:oscap``. Note that each field is extracted to facilitate searches and analysis.
 
 .. thumbnail:: ../../../../images/wodles-oscap/pci-oscap.png
     :title: PCI OpenSCAP alert
@@ -117,15 +117,6 @@ Note that each field is extracted to facilitate searches and analysis.
     :align: center
     :width: 100%
 
-**Step 4: Dashboards**
-
-Finally, you can explore all results using the OpenSCAP module.
-
-.. thumbnail:: ../../../../images/wodles-oscap/pci-dashboard.png
-    :title: OpenSCAP module dashboard
-    :alt: OpenSCAP module dashboard
-    :align: center
-    :width: 100%
 
 
 Auditing Security Vulnerabilities of Red Hat Products
@@ -203,7 +194,7 @@ When the evaluation is completed, you will see the results as OSSEC alerts:
 
 ``Wazuh dashboard``
 
-Note that each field is extracted to facilitate searches and analysis.
+You can see the logs in **Threat Hunting** by adding the filter ``rule.groups:oscap``. Note that each field is extracted to facilitate searches and analysis.
 
 .. thumbnail:: ../../../../images/wodles-oscap/oscap-example.png
     :title: OpenSCAP alert example
@@ -218,15 +209,6 @@ Note that each field is extracted to facilitate searches and analysis.
     :width: 100%
 
 
-**Step 4: Dashboards**
-
-Finally, you can explore all scan results using the OpenSCAP module.
-
-.. thumbnail:: ../../../../images/wodles-oscap/oscap-dashboard.png
-    :title: OpenSCAP module dashboard
-    :alt: OpenSCAP module dashboard    
-    :align: center
-    :width: 100%
 
 Overwriting the timeout
 -----------------------

@@ -249,58 +249,48 @@ Use the Wazuh archives to query and display events related to the technique bein
       :width: 80%
 
    You can extract and verify specific details on the activities such as commands, services, paths, and more from the JSON log.
-   Below, you can identify the initial process creation and the attributes related to the executed command:
+   Below, you can identify the process access and the attributes related to the executed command:
 
    .. code-block:: console
-      :emphasize-lines: 10, 35
+      :emphasize-lines: 7, 25
 
       "data": {
-            "win": {
-              "eventdata": {
-                "originalFileName": "REGSVR32.EXE",
-                "image": "C:\\\\Windows\\\\SysWOW64\\\\regsvr32.exe",
-                "product": "Microsoft® Windows® Operating System",
-                "parentProcessGuid": "{45cd4aff-35fc-6463-6903-000000001300}",
-                "description": "Microsoft(C) Register Server",
-                "logonGuid": "{45cd4aff-2ce5-6463-2543-290000000000}",
-                "parentCommandLine": "C:\\\\Windows\\\\system32\\\\regsvr32.exe  /s /i C:\\\\AtomicRedTeam\\\\atomics\\\\T1218.010\\\\bin\\\\AllTheThingsx86.dll",
-                "processGuid": "{45cd4aff-35fc-6463-6a03-000000001300}",
-                "logonId": "0x294325",
-                "parentProcessId": "7652",
-                "processId": "4064",
-                "currentDirectory": "C:\\\\Users\\\\THECOT~1\\\\AppData\\\\Local\\\\Temp\\\\",
-                "utcTime": "2023-05-16 07:51:24.512",
-                "hashes": "SHA1=8E2C6B7F92A560E0E856F8533D62A1B10797828F,MD5=5F7264BD237FAEA46FB240785B78AFAC,SHA256=D9BE711BE2BF88096BB91C25DF775D90B964264AB25EC49CF04711D8C1F089F6,IMPHASH=73F03653209E82368127EB826216A6AD",
-                "parentImage": "C:\\\\Windows\\\\System32\\\\regsvr32.exe",
-                "ruleName": "technique_id=T1117,technique_name=Regsvr32",
-                "company": "Microsoft Corporation",
-                "commandLine": "  /s /i C:\\\\AtomicRedTeam\\\\atomics\\\\T1218.010\\\\bin\\\\AllTheThingsx86.dll",
-                "integrityLevel": "High",
-                "fileVersion": "10.0.22621.1 (WinBuild.160101.0800)",
-                "user": "Windows11\\\\Testuser",
-                "terminalSessionId": "2",
-                "parentUser": "Windows11\\\\Testuser"
-              },
-              "system": {
-                "eventID": "1",
-                "keywords": "0x8000000000000000",
-                "providerGuid": "{5770385f-c22a-43e0-bf4c-06f5698ffbd9}",
-                "level": "4",
-                "channel": "Microsoft-Windows-Sysmon/Operational",
-                "opcode": "0",
-                "message": "\"Process Create:\r\nRuleName: technique_id=T1117,technique_name=Regsvr32\r\nUtcTime: 2023-05-16 07:51:24.512\r\nProcessGuid: {45cd4aff-35fc-6463-6a03-000000001300}\r\nProcessId: 4064\r\nImage: C:\\Windows\\SysWOW64\\regsvr32.exe\r\nFileVersion: 10.0.22621.1 (WinBuild.160101.0800)\r\nDescription: Microsoft(C) Register Server\r\nProduct: Microsoft® Windows® Operating System\r\nCompany: Microsoft Corporation\r\nOriginalFileName: REGSVR32.EXE\r\nCommandLine:   /s /i C:\\AtomicRedTeam\\atomics\\T1218.010\\bin\\AllTheThingsx86.dll\r\nCurrentDirectory: C:\\Users\\THECOT~1\\AppData\\Local\\Temp\\\r\nUser: Windows11\\Testuser\r\nLogonGuid: {45cd4aff-2ce5-6463-2543-290000000000}\r\nLogonId: 0x294325\r\nTerminalSessionId: 2\r\nIntegrityLevel: High\r\nHashes: SHA1=8E2C6B7F92A560E0E856F8533D62A1B10797828F,MD5=5F7264BD237FAEA46FB240785B78AFAC,SHA256=D9BE711BE2BF88096BB91C25DF775D90B964264AB25EC49CF04711D8C1F089F6,IMPHASH=73F03653209E82368127EB826216A6AD\r\nParentProcessGuid: {45cd4aff-35fc-6463-6903-000000001300}\r\nParentProcessId: 7652\r\nParentImage: C:\\Windows\\System32\\regsvr32.exe\r\nParentCommandLine: C:\\Windows\\system32\\regsvr32.exe  /s /i C:\\AtomicRedTeam\\atomics\\T1218.010\\bin\\AllTheThingsx86.dll\r\nParentUser: Windows11\\Testuser\"",
-                "version": "5",
-                "systemTime": "2023-05-16T07:51:24.5131006Z",
-                "eventRecordID": "88509",
-                "threadID": "3960",
-                "computer": "Windows11",
-                "task": "1",
-                "processID": "3156",
-                "severityValue": "INFORMATION",
-                "providerName": "Microsoft-Windows-Sysmon"
-              }
+         "win": {
+            "eventdata": {
+               "grantedAccess": "0x1410",
+               "targetProcessId": "5560",
+               "sourceUser": "DESKTOP-UV1HVEI\\\\vagrant",
+               "targetImage": "C:\\\\Windows\\\\SysWOW64\\\\regsvr32.exe",
+               "sourceProcessGUID": "{ee63de90-16c2-6639-8700-000000000900}",
+               "callTrace": "C:\\\\Windows\\\\SYSTEM32\\\\ntdll.dll+9f8b4|C:\\\\Windows\\\\System32\\\\KERNELBASE.dll+2c60e|C:\\\\Windows\\\\System32\\\\appresolver.dll+2d8f5|C:\\\\Windows\\\\System32\\\\appresolver.dll+27cd9|C:\\\\Windows\\\\system32\\\\twinui.pcshell.dll+a1c25|C:\\\\Windows\\\\system32\\\\twinui.pcshell.dll+a1a15|C:\\\\Windows\\\\system32\\\\twinui.pcshell.dll+12de18|C:\\\\Windows\\\\system32\\\\twinui.pcshell.dll+12ddb0|C:\\\\Windows\\\\System32\\\\user32.dll+26876|C:\\\\Windows\\\\SYSTEM32\\\\ntdll.dll+a3434|UNKNOWN(FFFFF80078FAE9E6)|UNKNOWN(FFFFF9D61B9B7958)|UNKNOWN(FFFFF9D61B9B7842)|UNKNOWN(FFFFF9D61B9879AB)|UNKNOWN(FFFFF9D61B9526DD)|UNKNOWN(FFFFF9D61B974E7C)|UNKNOWN(FFFFF9D61B974212)|UNKNOWN(FFFFF9D61C46773A)|UNKNOWN(FFFFF80078C274E5)|C:\\\\Windows\\\\System32\\\\win32u.dll+14d4|C:\\\\Windows\\\\System32\\\\user32.dll+21b4f|C:\\\\Windows\\\\System32\\\\user32.dll+21a1c|C:\\\\Windows\\\\System32\\\\windows.immersiveshell.serviceprovider.dll+8263|C:\\\\Windows\\\\System32\\\\windows.immersiveshell.serviceprovider.dll+5acb",
+               "sourceThreadId": "7516",
+               "targetProcessGUID": "{ee63de90-1b2b-6639-9a03-000000000900}",
+               "utcTime": "2024-05-06 18:02:31.604",
+               "ruleName": "technique_id=T1055.001,technique_name=Dynamic-link Library Injection",
+               "sourceProcessId": "5844",
+               "sourceImage": "C:\\\\Windows\\\\Explorer.EXE",
+               "targetUser": "DESKTOP-UV1HVEI\\\\vagrant"
+            },
+            "system": {
+               "eventID": "10",
+               "keywords": "0x8000000000000000",
+               "providerGuid": "{5770385f-c22a-43e0-bf4c-06f5698ffbd9}",
+               "level": "4",
+               "channel": "Microsoft-Windows-Sysmon/Operational",
+               "opcode": "0",
+               "message": "\"Process accessed:\r\nRuleName: technique_id=T1055.001,technique_name=Dynamic-link Library Injection\r\nUtcTime: 2024-05-06 18:02:31.604\r\nSourceProcessGUID: {ee63de90-16c2-6639-8700-000000000900}\r\nSourceProcessId: 5844\r\nSourceThreadId: 7516\r\nSourceImage: C:\\Windows\\Explorer.EXE\r\nTargetProcessGUID: {ee63de90-1b2b-6639-9a03-000000000900}\r\nTargetProcessId: 5560\r\nTargetImage: C:\\Windows\\SysWOW64\\regsvr32.exe\r\nGrantedAccess: 0x1410\r\nCallTrace: C:\\Windows\\SYSTEM32\\ntdll.dll+9f8b4|C:\\Windows\\System32\\KERNELBASE.dll+2c60e|C:\\Windows\\System32\\appresolver.dll+2d8f5|C:\\Windows\\System32\\appresolver.dll+27cd9|C:\\Windows\\system32\\twinui.pcshell.dll+a1c25|C:\\Windows\\system32\\twinui.pcshell.dll+a1a15|C:\\Windows\\system32\\twinui.pcshell.dll+12de18|C:\\Windows\\system32\\twinui.pcshell.dll+12ddb0|C:\\Windows\\System32\\user32.dll+26876|C:\\Windows\\SYSTEM32\\ntdll.dll+a3434|UNKNOWN(FFFFF80078FAE9E6)|UNKNOWN(FFFFF9D61B9B7958)|UNKNOWN(FFFFF9D61B9B7842)|UNKNOWN(FFFFF9D61B9879AB)|UNKNOWN(FFFFF9D61B9526DD)|UNKNOWN(FFFFF9D61B974E7C)|UNKNOWN(FFFFF9D61B974212)|UNKNOWN(FFFFF9D61C46773A)|UNKNOWN(FFFFF80078C274E5)|C:\\Windows\\System32\\win32u.dll+14d4|C:\\Windows\\System32\\user32.dll+21b4f|C:\\Windows\\System32\\user32.dll+21a1c|C:\\Windows\\System32\\windows.immersiveshell.serviceprovider.dll+8263|C:\\Windows\\System32\\windows.immersiveshell.serviceprovider.dll+5acb\r\nSourceUser: DESKTOP-UV1HVEI\\vagrant\r\nTargetUser: DESKTOP-UV1HVEI\\vagrant\"",
+               "version": "3",
+               "systemTime": "2024-05-06T18:02:31.6180627Z",
+               "eventRecordID": "4066",
+               "threadID": "2064",
+               "computer": "DESKTOP-UV1HVEI",
+               "task": "10",
+               "processID": "3944",
+               "severityValue": "INFORMATION",
+               "providerName": "Microsoft-Windows-Sysmon"
             }
-          },
+         }
+      },
       
    Carrying out further investigations on other related events, you can see a process injection event created by the ``regsvr32`` utility and the image loaded:
 
@@ -320,7 +310,7 @@ Use the Wazuh archives to query and display events related to the technique bein
                 "signatureStatus": "Valid",
                 "processGuid": "{45cd4aff-35fc-6463-6a03-000000001300}",
                 "processId": "4064",
-                "utcTime": "2023-05-16 07:51:24.774",
+                "utcTime": "2024-05-06 18:03:24.774",
                 "hashes": "SHA1=52A6AB3E468C4956C00707DF80C7609EEE74D9AD,MD5=BEE4D173DA78E4D3AC9B54A95C6A464A,SHA256=36B0BA10BBB6575CA4A4CBDE585F6E19B86B3A80014B3C3D8335F861D8AEBFAB,IMPHASH=47F306C12509ADBBC266F7DA43529A4D",
                 "ruleName": "technique_id=T1055,technique_name=Process Injection",
                 "company": "Microsoft Corporation",
@@ -336,7 +326,7 @@ Use the Wazuh archives to query and display events related to the technique bein
                 "opcode": "0",
                 "message": "\"Image loaded:\r\nRuleName: technique_id=T1055,technique_name=Process Injection\r\nUtcTime: 2023-05-16 07:51:24.774\r\nProcessGuid: {45cd4aff-35fc-6463-6a03-000000001300}\r\nProcessId: 4064\r\nImage: C:\\Windows\\SysWOW64\\regsvr32.exe\r\nImageLoaded: C:\\Windows\\SysWOW64\\mscoree.dll\r\nFileVersion: 10.0.22621.1 (WinBuild.160101.0800)\r\nDescription: Microsoft .NET Runtime Execution Engine\r\nProduct: Microsoft® Windows® Operating System\r\nCompany: Microsoft Corporation\r\nOriginalFileName: mscoree.dll\r\nHashes: SHA1=52A6AB3E468C4956C00707DF80C7609EEE74D9AD,MD5=BEE4D173DA78E4D3AC9B54A95C6A464A,SHA256=36B0BA10BBB6575CA4A4CBDE585F6E19B86B3A80014B3C3D8335F861D8AEBFAB,IMPHASH=47F306C12509ADBBC266F7DA43529A4D\r\nSigned: true\r\nSignature: Microsoft Windows\r\nSignatureStatus: Valid\r\nUser: Windows11\\Testuser\"",
                 "version": "3",
-                "systemTime": "2023-05-16T07:51:24.7768916Z",
+                "systemTime": "2024-05-06T18:03:24.7768916Z",
                 "eventRecordID": "88510",
                 "threadID": "3960",
                 "computer": "Windows11",
@@ -378,42 +368,42 @@ Use the Wazuh archives to query and display events related to the technique bein
       :emphasize-lines: 14, 26
 
       "data": {
-            "win": {
-              "eventdata": {
-                "destinationPort": "443",
-                "image": "C:\\\\Windows\\\\System32\\\\regsvr32.exe",
-                "sourcePort": "63754",
-                "initiated": "true",
-                "destinationIp": "1.1.123.23",
-                "protocol": "tcp",
-                "processGuid": "{45cd4aff-36b5-645a-9e07-000000000e00}",
-                "sourceIp": "192.168.43.16",
-                "processId": "4704",
-                "utcTime": "2023-05-09 21:19:25.361",
-                "ruleName": "technique_id=T1218.010,technique_name=Regsvr32",
-                "destinationIsIpv6": "false",
-                "user": "Windows11\\\\Testuser",
-                "sourceIsIpv6": "false"
-              },
-              "system": {
-                "eventID": "3",
-                "keywords": "0x8000000000000000",
-                "providerGuid": "{5770385f-c22a-43e0-bf4c-06f5698ffbd9}",
-                "level": "4",
-                "channel": "Microsoft-Windows-Sysmon/Operational",
-                "opcode": "0",
-                "message": "\"Network connection detected:\r\nRuleName: technique_id=T1218.010,technique_name=Regsvr32\r\nUtcTime: 2023-05-09 21:19:25.361\r\nProcessGuid: {45cd4aff-36b5-645a-9e07-000000000e00}\r\nProcessId: 4704\r\nImage: C:\\Windows\\System32\\regsvr32.exe\r\nUser: Windows11\\Testuser\r\nProtocol: tcp\r\nInitiated: true\r\nSourceIsIpv6: false\r\nSourceIp: 192.168.43.16\r\nSourceHostname: -\r\nSourcePort: 63754\r\nSourcePortName: -\r\nDestinationIsIpv6: false\r\nDestinationIp: 185.199.108.133\r\nDestinationHostname: -\r\nDestinationPort: 443\r\nDestinationPortName: -\"",
-                "version": "5",
-                "systemTime": "2023-05-09T12:04:07.0231156Z",
-                "eventRecordID": "63350",
-                "threadID": "3096",
-                "computer": "Windows11",
-                "task": "3",
-                "processID": "3156",
-                "severityValue": "INFORMATION",
-                "providerName": "Microsoft-Windows-Sysmon"
-              }
-            }
-          },
+         "win": {
+           "eventdata": {
+             "destinationPort": "443",
+             "image": "C:\\\\Windows\\\\System32\\\\regsvr32.exe",
+             "sourcePort": "63754",
+             "initiated": "true",
+             "destinationIp": "1.1.123.23",
+             "protocol": "tcp",
+             "processGuid": "{45cd4aff-36b5-645a-9e07-000000000e00}",
+             "sourceIp": "192.168.43.16",
+             "processId": "4704",
+             "utcTime": "2024-05-14 14:01:35.453",
+             "ruleName": "technique_id=T1218.010,technique_name=Regsvr32",
+             "destinationIsIpv6": "false",
+             "user": "Windows11\\\\Testuser",
+             "sourceIsIpv6": "false"
+           },
+           "system": {
+             "eventID": "3",
+             "keywords": "0x8000000000000000",
+             "providerGuid": "{5770385f-c22a-43e0-bf4c-06f5698ffbd9}",
+             "level": "4",
+             "channel": "Microsoft-Windows-Sysmon/Operational",
+             "opcode": "0",
+             "message": "\"Network connection detected:\r\nRuleName: technique_id=T1218.010,technique_name=Regsvr32\r\nUtcTime: 2024-05-14 14:01:35.361\r\nProcessGuid: {45cd4aff-36b5-645a-9e07-000000000e00}\r\nProcessId: 4704\r\nImage: C:\\Windows\\System32\\regsvr32.exe\r\nUser: Windows11\\Testuser\r\nProtocol: tcp\r\nInitiated: true\r\nSourceIsIpv6: false\r\nSourceIp: 192.168.43.16\r\nSourceHostname: -\r\nSourcePort: 63754\r\nSourcePortName: -\r\nDestinationIsIpv6: false\r\nDestinationIp: 185.199.108.133\r\nDestinationHostname: -\r\nDestinationPort: 443\r\nDestinationPortName: -\"",
+             "version": "5",
+             "systemTime": "2024-05-14T12:04:07.0231156Z",
+             "eventRecordID": "63350",
+             "threadID": "3096",
+             "computer": "Windows11",
+             "task": "3",
+             "processID": "3156",
+             "severityValue": "INFORMATION",
+             "providerName": "Microsoft-Windows-Sysmon"
+           }
+         }
+       },
 
 You can use events from the Wazuh archives to develop detection logic and write custom decoders and rules. You can use the out-of-the-box ``wazuh-logtest`` tool to test and verify rules against provided logs. For more information, see the :doc:`Custom rules and decoders </user-manual/ruleset/index>` and the :doc:`wazuh-logtest </user-manual/reference/tools/wazuh-logtest>` documentation.
