@@ -88,6 +88,7 @@ newUrls['4.9'] = [
   '/deployment-options/offline-installation/step-by-step.html',
   '/deployment-options/offline-installation/installation-assistant.html',
   '/development/coredump.html',
+  '/development/packaging/generate-indexer-package.html',
 ];
 
 /* Pages no longer available in 4.9 */
