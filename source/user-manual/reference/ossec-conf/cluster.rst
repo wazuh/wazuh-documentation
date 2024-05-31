@@ -186,7 +186,7 @@ This section explains how to configure the HAProxy helper for agent balancing.
 haproxy_disabled
 ^^^^^^^^^^^^^^^^
 
-Toggles whether the HAProxy helper is enabled or not. If this value is set to **yes**, the helper won't start.
+Toggles whether the HAProxy helper is enabled or not. If this value is set to ``yes``, the helper won't start.
 
 +--------------------+-----------------------------------------+
 | **Default value**  | yes                                     |
