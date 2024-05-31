@@ -5,7 +5,6 @@
 
 .. _create-deb-rpm:
 
-===================
 Linux manager/agent
 ===================
 

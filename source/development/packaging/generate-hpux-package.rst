@@ -5,7 +5,6 @@
 
 .. _create-hpux:
 
-==========
 HPUX agent
 ==========
 

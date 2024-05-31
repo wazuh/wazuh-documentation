@@ -5,7 +5,6 @@
 
 .. _create-osx:
 
-===========
 macOS agent
 ===========
 

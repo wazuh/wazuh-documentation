@@ -5,7 +5,6 @@
 
 .. _create-sol:
 
-=============
 Solaris agent
 =============
 

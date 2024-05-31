@@ -5,7 +5,6 @@
 
 .. _create-windows:
 
-=============
 Windows agent
 =============
 
