@@ -90,7 +90,7 @@ There are two main ways to install HAProxy.
 
    .. group-tab:: Docker
 
-      To install HAProxy with docker we provide:
+      We provide the following files for installing HAProxy with Docker.
 
       .. raw:: html
 
@@ -343,9 +343,11 @@ There are two main ways to install HAProxy.
 
          </details>
 
-      And a :ref:`Configuration file <haproxy_configuration>` to get the service up and running.
+      And a :ref:`configuration file <haproxy_configuration>` to get the service up and running.
 
-      #. It will be needed to put these files in the same directory and build the image
+      To install HAProxy with docker follow these steps.
+
+      #. Put the files in the same directory and build the image.
 
          .. code-block:: console
    
@@ -360,7 +362,7 @@ There are two main ways to install HAProxy.
    
             # docker build --tag=haproxy-deploy .
 
-      #. After building the image can we run the haproxy service
+      #. After building the image, run the haproxy service.
 
          .. code-block:: console
    
@@ -375,127 +377,129 @@ There are two main ways to install HAProxy.
             [NOTICE]   (33) : path to executable is /usr/sbin/haproxy
             [ALERT]    (33) : config : parsing [/etc/haproxy/haproxy.cfg:3] : 'pidfile' already specified. Continuing.
 
-
 .. _haproxy_configuration:
 
 Configuration
 ^^^^^^^^^^^^^
 
-   #. The configuration must be put into ``/etc/haproxy/haproxy.cfg``.
+The following setup is ready to work with a Wazuh cluster.
 
-      .. raw:: html
+.. raw:: html
 
-         <details>
-         <summary><b>haproxy.cfg</b></summary>
+   <details>
+   <summary><b>haproxy.cfg</b></summary>
 
-      .. code-block:: cfg
-         :emphasize-lines: 36-47
+.. code-block:: cfg
+   :emphasize-lines: 36-47
 
-         global
-               chroot      /var/lib/haproxy
-               pidfile     /var/run/haproxy.pid
-               maxconn     4000
-               user        haproxy
-               group       haproxy
-               stats socket /var/lib/haproxy/stats level admin
-               log 127.0.0.1 local2 info
+   global
+         chroot      /var/lib/haproxy
+         pidfile     /var/run/haproxy.pid
+         maxconn     4000
+         user        haproxy
+         group       haproxy
+         stats socket /var/lib/haproxy/stats level admin
+         log 127.0.0.1 local2 info
 
-         defaults
-               mode http
-               maxconn 4000
-               log global
-               option redispatch
-               option dontlognull
-               option tcplog
-               timeout check 10s
-               timeout connect 10s
-               timeout client 1m
-               timeout queue 1m
-               timeout server 1m
-               retries 3
+   defaults
+         mode http
+         maxconn 4000
+         log global
+         option redispatch
+         option dontlognull
+         option tcplog
+         timeout check 10s
+         timeout connect 10s
+         timeout client 1m
+         timeout queue 1m
+         timeout server 1m
+         retries 3
 
-         frontend wazuh_register
-               mode tcp
-               bind :1515
-               default_backend wazuh_register
+   frontend wazuh_register
+         mode tcp
+         bind :1515
+         default_backend wazuh_register
 
-         backend wazuh_register
-               mode tcp
-               balance leastconn
-               server master <IP_OR_DNS_OF_WAZUH_MASTER_NODE>:1515 check
-               server worker1 <IP_OR_DNS_OF_WAZUH_WORKER_NODE>:1515 check
-               server workern <IP_OR_DNS_OF_WAZUH_WORKER_NODE>:1515 check
+   backend wazuh_register
+         mode tcp
+         balance leastconn
+         server master <IP_OR_DNS_OF_WAZUH_MASTER_NODE>:1515 check
+         server worker1 <IP_OR_DNS_OF_WAZUH_WORKER_NODE>:1515 check
+         server workern <IP_OR_DNS_OF_WAZUH_WORKER_NODE>:1515 check
 
-         # Do not include the following if you will enable HAProxy Helper
-         frontend wazuh_reporting_front
-               mode tcp
-               bind :1514 name wazuh_reporting_front_bind
-               default_backend wazuh_reporting
+   # Do not include the following if you will enable HAProxy Helper
+   frontend wazuh_reporting_front
+         mode tcp
+         bind :1514 name wazuh_reporting_front_bind
+         default_backend wazuh_reporting
 
-         backend wazuh_reporting
-               mode tcp
-               balance leastconn
-               server master <IP_OR_DNS_OF_WAZUH_MASTER_NODE>:1514 check
-               server worker1 <IP_OR_DNS_OF_WAZUH_WORKER_NODE>:1514 check
-               server worker2 <IP_OR_DNS_OF_WAZUH_WORKER_NODE>:1514 check
+   backend wazuh_reporting
+         mode tcp
+         balance leastconn
+         server master <IP_OR_DNS_OF_WAZUH_MASTER_NODE>:1514 check
+         server worker1 <IP_OR_DNS_OF_WAZUH_WORKER_NODE>:1514 check
+         server worker2 <IP_OR_DNS_OF_WAZUH_WORKER_NODE>:1514 check
 
-      .. raw:: html
+.. raw:: html
 
-         </details>
+   </details>
 
-      The provided setup is ready to work with a Wazuh cluster. Some of the sections covered are:
+A *backend* section is a set of Wazuh server cluster nodes that receive forwarded agent connections. It includes the following parameters:
 
-      - The *backend* is a set of servers (Wazuh cluster nodes) that receive the forwarded agent connections, and is defined by:
+-  The load balancing mode.
+-  The load balance algorithm to use.
+-  A list of servers and ports. The example that follows has the default one pointing to the master node.
 
-         - the load balancing mode
-         - which load balance algorithm to use
-         - a list of servers and ports, in this case, the default one pointing to the master node of the cluster.
+.. code-block:: console
+   :emphasize-lines: 4
 
-         .. code-block:: console
+   backend wazuh_register
+      mode tcp
+      balance leastconn
+      server master_node <WAZUH_REGISTRY_HOST>:1515 check
 
-            backend wazuh_register
-               mode tcp
-               balance leastconn
-               server master_node <WAZUH_REGISTRY_HOST>:1515 check
+A *frontend* section defines how to forward requests to backends. It's composed of the following parameters:
 
-      - A *frontend* defines how requests should be forwarded to backends and is composed of:
+-  The type of load balancing.
+-  The port to bind the connections.
+-  The default backend to forward requests
 
-         - the type of load balancing
-         - the port to bind the connections
-         - the default backend to forward requests
+.. code-block:: console
 
-         .. code-block:: console
+   frontend wazuh_register
+      mode tcp
+      bind :1515
+      default_backend wazuh_register
 
-            frontend wazuh_register
-               mode tcp
-               bind :1515
-               default_backend wazuh_register
+To apply the configuration do the following.
 
-   #. Now can we start the service with
+#. Put the configuration into ``/etc/haproxy/haproxy.cfg``.
 
-      .. code-block:: console
+#. Start the service.
 
-         # service haproxy start
+   .. code-block:: console
 
-      .. code-block:: none
-         :class: output
+      # service haproxy start
 
-         * Starting haproxy haproxy
-         [NOTICE]   (13231) : haproxy version is 2.8.9-1ppa1~jammy
-         [NOTICE]   (13231) : path to executable is /usr/sbin/haproxy
-         [ALERT]    (13231) : config : parsing [/etc/haproxy/haproxy.cfg:3] : 'pidfile' already specified. Continuing.
+   .. code-block:: none
+      :class: output
+
+      * Starting haproxy haproxy
+      [NOTICE]   (13231) : haproxy version is 2.8.9-1ppa1~jammy
+      [NOTICE]   (13231) : path to executable is /usr/sbin/haproxy
+      [ALERT]    (13231) : config : parsing [/etc/haproxy/haproxy.cfg:3] : 'pidfile' already specified. Continuing.
 
 .. _haproxy_helper_setup:
 
 HAProxy helper
 --------------
 
-This is an optional tool to manage HAProxy configuration depending on the Wazuh cluster status in real-time.
+This is an optional tool to manage HAProxy configuration depending on the Wazuh cluster status in real time.
 It provides the manager with the ability to automatically balance the agent TCP sessions.
 
 Some of its key features are:
 
--  Add/remove new servers to the Wazuh backend (1514/tcp) when detecting changes on the Wazuh cluster (e.g. new workers connected).
+-  Add and remove servers to the Wazuh backend (1514/tcp) when detecting changes on the Wazuh cluster. For example, new workers connected.
 -  Balance excess agents per node when adding new servers to the Wazuh backend.
 -  Balance agents when detecting an imbalance that exceeds the given tolerance.
 
@@ -505,7 +509,7 @@ Some of its key features are:
    :align: center
    :width: 80%
 
-The helper runs in an independent thread, that initiates with the ``wazuh-cluster`` daemon, and completes the next flow:
+The helper runs in an independent thread that initiates with the ``wazuh-cluster`` daemon. It follows this process.
 
 .. thumbnail:: /images/manual/cluster/haproxy-helper-flow.png
    :title: HAProxy helper flow
@@ -520,16 +524,17 @@ How to enable it
 
    The recommended version of HAProxy is the 2.8 LTS.
 
-To use this feature is required to have a :ref:`HAProxy <haproxy_installation>` instance balancing the cluster using the **least connections** algorithm.
+To use this feature, you need a :ref:`HAProxy <haproxy_installation>` instance balancing the cluster using the *least connections* algorithm.
 
 Dataplane API configuration
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-The Dataplane API is used by the helper to communicate with HAProxy and update the configuration according to the changes in the Wazuh cluster.
+The helper uses the Dataplane API to communicate with HAProxy and update the configuration according to the changes in the Wazuh cluster.
 
-This is the basic configuration:
+This is the basic configuration. You need to replace ``<DATAPLANE_USER>`` and ``<DATAPLANE_PASSWORD>`` with the chosen user and password.
 
 .. code-block:: yaml
+   :emphasize-lines: 8,9
 
    dataplaneapi:
       host: 0.0.0.0
@@ -548,15 +553,11 @@ This is the basic configuration:
             reload_cmd: service haproxy reload
             restart_cmd: service haproxy restart
 
-.. note::
-
-   Is needed to replace ``<DATAPLANE_USER>`` and ``<DATAPLANE_PASSWORD>`` with the chosen user and password.
-
-To enable it will depend on the :ref:`installation method <haproxy_installation>`.
+Depending on the :ref:`HAProxy installation method <haproxy_installation>`, follow these steps to enable the helper.
 
 .. warning::
 
-   For the correct operation of the helper, there must not be a frontend, with the port **1514**, in the ``haproxy.cfg`` file beforehand.
+   For the helper to operate correctly, ensure there's no frontend with port ``1514`` in the ``haproxy.cfg`` file.
 
 .. tabs::
 
@@ -599,7 +600,7 @@ To enable it will depend on the :ref:`installation method <haproxy_installation>
             ├── haproxy.cfg
             └── haproxy-service
 
-      #. Modify the Dockerfile to include ``dataplaneapi.yaml`` during the build
+      #. Modify ``Dockerfile`` to include ``dataplaneapi.yaml`` during the build
 
          .. code-block:: dockerfile
             :emphasize-lines: 4
@@ -661,22 +662,10 @@ To enable it will depend on the :ref:`installation method <haproxy_installation>
             {"api":{"build_date":"2024-05-13T14:06:03.000Z","version":"v2.9.3 59f34ea1"},"system":{}}
 
 
-On the Wazuh's side, we will include the ``<haproxy_helper>...</haproxy_helper>`` labels in the :ref:`configuration <haproxy_helper>` file (``/var/ossec/etc/ossec.conf``)  within the ``<cluster>...</cluster>`` section.
-
-.. note::
-
-   This configuration is only necessary on the master node.
-
-
-We are going to configure a basic HAProxy helper within an already configured cluster master node:
-
--  :ref:`haproxy_disabled <haproxy_disabled>`: Indicates whether the helper will be enabled or not in the master node.
--  :ref:`haproxy_address <haproxy_address>`: Address (IP or DNS) to connect with HAProxy.
--  :ref:`haproxy_user <haproxy_user>`: Username to authenticate with HAProxy.
--  :ref:`haproxy_password <haproxy_password>`: Password to authenticate with HAProxy.
-
+As an example, you can configure a basic HAProxy helper within an already configured cluster master node. On the Wazuh server master node only, include the :ref:`haproxy_helper` configuration section in ``/var/ossec/etc/ossec.conf`` with a configuration as follows.
 
 .. code-block:: xml
+   :emphasize-lines: 13-18
 
    <cluster>
       <name>wazuh</name>
@@ -698,13 +687,20 @@ We are going to configure a basic HAProxy helper within an already configured cl
       </haproxy_helper>
    </cluster>
 
-Restart the master node:
+Where:
+
+-  :ref:`haproxy_disabled <haproxy_disabled>`: Indicates whether the helper is disabled or not in the master node.
+-  :ref:`haproxy_address <haproxy_address>`: IP or DNS address to connect with HAProxy.
+-  :ref:`haproxy_user <haproxy_user>`: Username to authenticate with HAProxy.
+-  :ref:`haproxy_password <haproxy_password>`: Password to authenticate with HAProxy.
+
+Then, restart the master node:
 
 .. code-block:: console
 
    # systemctl restart wazuh-manager
 
-Now the HAProxy helper is running:
+Now, you can check the HAProxy helper is running:
 
 .. code-block:: console
 
@@ -744,17 +740,16 @@ Agents connections
 Pointing agents to the cluster with a load balancer
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-A **load balancer** is a service that distributes workloads across multiple resources.
+A *load balancer* is a service that distributes workloads across multiple resources. To use it correctly, you must configure each agent to send events to the load balancer.
 
-The correct way to use it is to point every agent to send the events to the *load balancer*:
-
-#. Edit the Wazuh agent configuration in ``/var/ossec/etc/ossec.conf`` to add the **Load Balancer** IP address. In the ``<client><server>`` section, change the ``LOAD_BALANCER_IP`` value to the ``load balancer`` address and ``port``:
+#. Edit the Wazuh agent configuration in ``/var/ossec/etc/ossec.conf`` and replace the ``<LOAD_BALANCER_IP_ADDRESS>`` value with your load balancer address and port:
 
    .. code-block:: xml
+      :emphasize-lines: 3
 
       <client>
          <server>
-         <address>LOAD_BALANCER_IP</address>
+         <address><LOAD_BALANCER_IP_ADDRESS></address>
          ...
          </server>
       </client>
@@ -763,25 +758,18 @@ The correct way to use it is to point every agent to send the events to the *loa
 
    .. include:: /_templates/common/restart_agent.rst
 
-#. Include in the ``Load Balancer`` the IP address of every instance of the cluster we want to deliver events.
+#. Include in the load balancer the IP address of every instance of the cluster we want to deliver events.
 
-Pointing agents to the cluster (Failover mode)
+Pointing agents to the cluster - Failover mode
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-We can set to the agents a list of nodes of manager type (workers/master). In case of a disconnection, the agent will connect to another node to keep reporting.
+You can set a list of Wazuh manager worker and master nodes for the Wazuh agents. In case of a disconnection, the agent connects to another node to keep reporting.
 
-To configure this mode the first thing we must do is configure our cluster as indicated in our :ref:`getting started <gt-cluster>`, with the number of workers nodes we want. Once this is done, we will go directly to configure the agents in the following way.
+To configure this mode, configure the cluster as indicated in :ref:`Cluster nodes configuration <gt-cluster>`, setting the number of worker nodes.
 
-Suppose we have the following IPs:
+After configuring the cluster, you need to configure the agents. In the Wazuh agent ``/var/ossec/etc/ossec.conf``  configuration file, add as many ``<server>`` configuration blocks as backup nodes you need to assign to the agent.
 
-.. code-block:: none
-
-   worker01: 172.0.0.4
-   worker02: 172.0.0.5
-
-We want all our agents to report to the worker01 node, our worker02 node will be a backup node in case the worker01 node is not available.
-
-To do this we must modify the configuration file of our agents ``/var/ossec/etc/ossec.conf``. Within this, we have a block ``<server>...</server>``, we will have to create as many blocks **server** as backup nodes we have and want to assign it to the agent:
+As an example, you can set all agents to report to ``worker01`` node and set ``worker02`` node as a backup node. 
 
 .. code-block:: xml
 
@@ -803,4 +791,9 @@ To do this we must modify the configuration file of our agents ``/var/ossec/etc/
       <crypto_method>aes</crypto_method>
    </client>
 
-In this way, if the worker01 node is not available, the agents will report to the worker02 node. This process is performed cyclically between all the nodes that we place in the ``ossec.conf`` of the agents.
+Where:
+
+-  ``worker01`` IP address is ``172.0.0.4``
+-  ``worker02`` IP address is ``172.0.0.5``
+
+With this configuration, if ``worker01`` node is not available, the agents report to the ``worker02`` node. This process is performed cyclically between all the nodes configured in the agents ``ossec.conf``.
