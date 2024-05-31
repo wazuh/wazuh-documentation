@@ -8,8 +8,44 @@ Configuring core dump generation
 
 A *core dump* or *crash dump* is a snapshot of a process's memory taken when a serious or unhandled error occurs. The operating system on a monitored endpoint can automatically generate core dumps. These dumps are valuable for diagnosing hanging processes. Alongside environment information, such as the operating system version, they can offer insights into the cause of a crash.
 
-Linux endpoints
----------------
+Red Hat based OSs
+-----------------
+
+#. Edit the Systemd ``/etc/systemd/system.conf`` file. Add the following lines.
+
+   .. code-block:: console
+
+      DumpCore=yes
+      DefaultLimitCORE=infinity
+
+#. Edit the Systemd ``/etc/sysctl.d/core.conf`` file. Add the following lines.
+
+   .. code-block:: console
+
+      kernel.core_pattern = /var/lib/coredumps/core-%e-pid%p-time%t
+      kernel.core_uses_pid = 1
+      fs.suid_dumpable = 2
+
+#. Create directory ``/var/lib/coredumps`` and grant it permissions ``773``.
+
+#. Reboot the system
+
+#. After system reboot set the core ``ulimit`` to ``unlimited`` in your terminal.
+
+   .. code-block:: console
+
+      # ulimit -c unlimited
+      # sysctl -p
+
+#. Restart wazuh agent:
+
+   .. code-block:: console
+
+      # ./var/ossec/bin/wazuh-control restart
+      
+
+Debian based OSs
+----------------
 
 In Linux version 2.41 and later, a template defines the location and name of the generated `core dump files <https://man7.org/linux/man-pages/man5/core.5.html>`__. Earlier versions generate the core dump files next to the location of the file that caused the error.
 
@@ -117,3 +153,43 @@ On macOS, most applications have core dump generation disabled by default. Howev
       # sysctl -w kern.corefile=/cores/core.%P
 
 Enabling core dump generation might consume significant disk space, so use it judiciously. Moreover, not all processes on macOS support or behave consistently with core dump generation.
+
+Windows endpoints
+-----------------
+
+To collect user-mode crash dumps on Windows, you can use the Windows Error Reporting (WER) feature. You can set it to save crash dump files locally by editing the Windows Registry as follows.
+
+Accessing the Windows Registry
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+#. Press **Windows + R** keys on your keyboard to open the **Run** dialog box.
+
+#. Type ``regedit`` in the search box and click **OK** to open the Registry editor.
+
+#. `Backup the Windows Registry <https://support.microsoft.com/en-us/topic/how-to-back-up-and-restore-the-registry-in-windows-855140ad-e318-2a13-2829-d428a2ab0692>`__ or `create a system restore point <https://support.microsoft.com/en-us/windows/create-a-system-restore-point-77e02e2a-3298-c869-9974-ef5658ea3be9>`__ to safeguard your system.
+
+Configuring Windows Error Reporting
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+#. Navigate to the ``LocalDumps`` registry key or create it, as it might not exist by default.
+
+   .. code-block:: none
+
+      HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\Windows Error Reporting\LocalDumps
+
+#. Right-click on the ``LocalDumps`` key and choose **New** > **Key**. Name the new key ``wazuh-agent.exe``.
+
+#. Right-click inside the ``wazuh-agent.exe`` key and choose **New** > **Expandable String Value**. Name the new value ``DumpFolder``.
+
+#. Right-click the ``DumpFolder`` value and select **Modify**. Change it to ``%LOCALAPPDATA%\WazuhCrashDumps``.
+
+#. Right-click inside the ``wazuh-agent.exe`` key again and choose **New** > **DWORD (32-bit) Value**. Name the new value ``DumpType``.
+
+#. Right-click the ``DumpType`` value and select **Modify**. Change it to  ``2``.
+
+#. Close the regedit tool and restart the Wazuh agent using PowerShell with administrator privileges.
+
+   .. code-block:: PowerShell
+
+      > Restart-Service -Name wazuh
+

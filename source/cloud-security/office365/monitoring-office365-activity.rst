@@ -413,41 +413,16 @@ For example, the following configuration pulls only the ``Audit.AzureActiveDirec
 
 Replace ``<YOUR_TENANT_ID>``, ``<YOUR_CLIENT_ID>``, and ``<YOUR_CLIENT_SECRET>`` with the organization's credentials for the tenant.
 
-Enabling dashboard visualization for the Office 365 module
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+Visualizing the Office 365 activity
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-The Wazuh dashboard has an Office 365 module that provides detailed information and insights about the events that occur in Office 365. The module is disabled by default. You have to enable the module explicitly to make use of the tailored visualization.
+The Wazuh dashboard has an Office 365 module that provides detailed information and insights about the events that occur in Office 365. The module provides three visualization options.
 
-Perform the following steps to enable the Wazuh module for Office 365 on the Wazuh dashboard.
+-  **Dashboard**
+-  **Panel**
+-  **Events**
 
-#. Navigate to the Wazuh dashboard and click on **Wazuh** > **Settings** > **Modules**.
-
-   .. thumbnail:: /images/cloud-security/office365/wazuh-settings-module.png
-      :title: Wazuh settings module
-      :alt: Wazuh settings module
-      :align: center
-      :width: 80%
-
-#. Enable the Wazuh module for Office 365 in the **Security Information Management** section.
-
-   .. thumbnail:: /images/cloud-security/office365/enable-office365-module.png
-      :title: Enable Office 365 module
-      :alt: Enable Office 365 module
-      :align: center
-      :width: 80%
-
-The Wazuh module for Office 365 provides three visualization options to gain better insight into the events that occur in Office 365. These visualization options are the **Panel**, **Dashboard**, and **Events**. Navigate to the **Modules** > **Office 365** tab on the Wazuh dashboard to view this information.
-
-Panel
-~~~~~
-
-This visualization option provides detailed information about the event that occurred including the top users of the service, the top client IP addresses using the service, top rules that have been triggered, and the top operations performed in Office 365.
-
-.. thumbnail:: /images/cloud-security/office365/office365-module-panel.png
-   :title: Office 365 modul panel
-   :alt: Office 365 modul panel
-   :align: center
-   :width: 80%
+To select any of them, navigate to the  **Office 365** tab on the **Cloud security** section of the Wazuh dashboard.
 
 Dashboard
 ~~~~~~~~~
@@ -457,6 +432,17 @@ The dashboard visualization option provides a comprehensive view of the actions 
 .. thumbnail:: /images/cloud-security/office365/dashboard-visualization-option.png
    :title: Office 365 dashboard visualization option
    :alt: Office 365 dashboard visualization option
+   :align: center
+   :width: 80%
+
+Panel
+~~~~~
+
+This visualization option provides detailed information about the event that occurred including the top users of the service, the top client IP addresses using the service, top rules that have been triggered, and the top operations performed in Office 365.
+
+.. thumbnail:: /images/cloud-security/office365/office365-module-panel.png
+   :title: Office 365 modul panel
+   :alt: Office 365 modul panel
    :align: center
    :width: 80%
 
@@ -486,12 +472,6 @@ You can expand each alert entry to view additional information about the event t
    :width: 80%
 
 .. thumbnail:: /images/cloud-security/office365/events-visualization-option-expand-alert2.png
-   :title: Office 365 events visualization option – Expand alert
-   :alt: Office 365 events visualization option – Expand alert
-   :align: center
-   :width: 80%
-
-.. thumbnail:: /images/cloud-security/office365/events-visualization-option-expand-alert3.png
    :title: Office 365 events visualization option – Expand alert
    :alt: Office 365 events visualization option – Expand alert
    :align: center
