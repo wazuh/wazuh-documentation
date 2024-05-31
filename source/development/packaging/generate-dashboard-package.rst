@@ -27,7 +27,7 @@ To do so, follow these steps:
 
    .. code:: console
 
-      # git clone -b <branch> https://www.github.com/wazuh/wazuh-dashboard.git
+      # git clone -b <branch> https://github.com/wazuh/wazuh-dashboard.git
       # cd wazuh-dashboard/
       # yarn osd bootstrap
       # yarn build --linux --skip-os-packages --release
@@ -37,7 +37,7 @@ To do so, follow these steps:
    .. code:: console
 
       # cd plugins/
-      # git clone -b <branch> https://www.github.com/wazuh/wazuh-security-dashboards-plugin.git
+      # git clone -b <branch> https://github.com/wazuh/wazuh-security-dashboards-plugin.git
       # cd wazuh-security-dashboards-plugin/
       # yarn
       # yarn build
@@ -47,7 +47,7 @@ To do so, follow these steps:
    .. code:: console
 
       # cd ../
-      # git clone -b <branch> https://www.github.com/wazuh/wazuh-dashboard-plugins.git
+      # git clone -b <branch> https://github.com/wazuh/wazuh-dashboard-plugins.git
       # cd wazuh-dashboard-plugins/
       # cp -r plugins/* ../
       # cd ../main
@@ -105,7 +105,7 @@ and then if desired you can use the created package to generate the .deb or .rpm
 
 .. code:: console
 
-   # git clone -b <branch> https://www.github.com/wazuh/wazuh-dashboard.git
+   # git clone -b <branch> https://github.com/wazuh/wazuh-dashboard.git
    # cd wazuh-dashboard/dev-tools/build-packages/
 
 2. Build the Docker image with the following parameters:
