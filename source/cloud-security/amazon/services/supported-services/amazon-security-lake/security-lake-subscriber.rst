@@ -5,8 +5,8 @@
 
 .. _aws_lake_subscriber:
 
-Wazuh as a Subscriber
-=========================
+Wazuh as a subscriber
+=====================
 
 .. versionadded:: 4.4.2
 
