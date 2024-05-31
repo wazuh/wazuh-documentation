@@ -1,18 +1,18 @@
 .. Copyright (C) 2015, Wazuh, Inc.
 
 .. meta::
-  :description: Wazuh provides an automated way of building packages for the Wazuh components. Learn how to build your own Wazuh indeer package in this section of our documentation.
+   :description: Wazuh provides an automated way of building packages for the Wazuh components. Learn how to build your own Wazuh indexer package in this section of our documentation.
 
-=============
 Wazuh Indexer
 =============
 
 The packages' generation process is orchestrated by two scripts, which are found within the ``packaging_scripts`` folder of the repository:
 
-- ``build.sh``: compiles the Java application and bundles it into a package.
-- ``assemble.sh``: uses the package from the previous step and inflates it with plugins and configuration files, ready for production deployment.
+-  ``build.sh``: compiles the Java application and bundles it into a package.
+-  ``assemble.sh``: uses the package from the previous step and inflates it with plugins and configuration files, ready for production deployment.
 
 Official packages are built through a GitHub Actions pipeline, however, the process is designed to be independent enough for maximum portability.
+
 The building process is self-contained in the application code.
 
 The GitHub Actions pipeline can be tested locally with `Act <https://github.com/nektos/act>`__.
@@ -26,34 +26,38 @@ Pre-requisistes:
    # git clone https://github.com/wazuh/wazuh-indexer
 
 Build stage
-^^^^^^^^^^^
+----------
 
 Docker environment
--------------------
+^^^^^^^^^^^^^^^^^^
 
 Using the provided `Docker environment <https://www.github.com/wazuh/wazuh-indexer/tree/master/docker>`__:
 
 .. tabs::
 
    .. group-tab:: RPM
+
       .. code-block:: console
    
          # docker exec -it wi-build_|WAZUH_CURRENT| bash packaging_scripts/build.sh -a x64 -d rpm
    
    .. group-tab:: DEB
+
       .. code-block:: console
    
          # docker exec -it wi-build_|WAZUH_CURRENT| bash packaging_scripts/build.sh -a x64 -d deb
    
    .. group-tab:: TAR
+
       .. code-block:: console
    
          # docker exec -it wi-build_|WAZUH_CURRENT| bash packaging_scripts/build.sh -a x64 -d tar
 
 Local package generation
-------------------------
+^^^^^^^^^^^^^^^^^^^^^^^^
 
 For local package generation, use the ``build.sh`` script.
+
 Take a look at the ``build.yml`` workflow file for an example of usage.
 
 .. code:: console
@@ -65,10 +69,10 @@ The generated package is sent to the ``wazuh-indexer/artifacts`` folder.
 .. _full-package-assemble-stage-1:
 
 Assembly stage
-^^^^^^^^^^^^^^
+--------------
 
 Docker environment
--------------------
+^^^^^^^^^^^^^^^^^^
 
 Pre-requisites:
 
@@ -76,31 +80,31 @@ Pre-requisites:
 -  Existing package in ``wazuh-indexer/artifacts/dist/{rpm|deb}``, as a result of the *Build* stage.
 -  Using the `Docker environment <https://www.github.com/wazuh/wazuh-indexer/tree/master/docker>`__:
 
- .. tabs::
+   .. tabs::
 
-   .. group-tab:: RPM
+      .. group-tab:: RPM
 
-      .. code-block:: console
+         .. code-block:: console
 
-         # docker exec -it wi-assemble_|WAZUH_CURRENT| bash packaging_scripts/assemble.sh -a x64 -d rpm
+            # docker exec -it wi-assemble_|WAZUH_CURRENT| bash packaging_scripts/assemble.sh -a x64 -d rpm
 
-   .. group-tab:: DEB
+      .. group-tab:: DEB
 
-      .. code-block:: console
+         .. code-block:: console
 
-         # docker exec -it wi-assemble_|WAZUH_CURRENT| bash packaging_scripts/assemble.sh -a x64 -d deb
+            # docker exec -it wi-assemble_|WAZUH_CURRENT| bash packaging_scripts/assemble.sh -a x64 -d deb
    
-   .. group-tab:: TAR
+      .. group-tab:: TAR
 
-      .. code-block:: console
+         .. code-block:: console
 
-         # docker exec -it wi-assemble_|WAZUH_CURRENT| bash packaging_scripts/assemble.sh -a x64 -d tar
-
+            # docker exec -it wi-assemble_|WAZUH_CURRENT| bash packaging_scripts/assemble.sh -a x64 -d tar
 
 Local package generation
-------------------------
+^^^^^^^^^^^^^^^^^^^^^^^^
 
 .. note:: 
+
    Set the environment variable ``TEST=true`` to assemble a package with a minimal set of plugins, speeding up the assembly process.
 
 .. tabs::
@@ -128,8 +132,11 @@ Local package generation
                 wazuh-indexer.rpm.spec
       
          ``usr``, ``etc`` and ``var`` folders contain ``wazuh-indexer`` files, extracted from ``wazuh-indexer-min-*.rpm``.
+
          ``wazuh-indexer.rpm.spec`` is copied over from ``wazuh-indexer/distribution/packages/src/rpm/wazuh-indexer.rpm.spec``.
+
          The ``wazuh-indexer-performance-analyzer.service`` file is also copied from the same folder.
+
          It is a dependency of the SPEC file.
       
       #. Install the plugins using the ``opensearch-plugin`` CLI tool.
@@ -141,13 +148,14 @@ Local package generation
       #. Bundle an RPM file with ``rpmbuild`` and the SPEC file ``wazuh-indexer.rpm.spec``.
       
          ``rpmbuild`` is part of the ``rpm`` OS package.
-      
-         ..
-      
-            ``rpmbuild`` is invoked from ``wazuh-indexer/artifacts/tmp/rpm``.
-            It creates the ``{BUILD,RPMS,SOURCES,SRPMS,SPECS,TMP}`` folders and applies the rules in the SPEC file.
-            If successful, ``rpmbuild`` will generate the package in the ``RPMS/`` folder.
-            The script will copy it to ``wazuh-indexer/artifacts/dist`` and clean: remove the ``tmp\`` folder and its contents.
+
+         ``rpmbuild`` is invoked from ``wazuh-indexer/artifacts/tmp/rpm``.
+
+         It creates the ``{BUILD,RPMS,SOURCES,SRPMS,SPECS,TMP}`` folders and applies the rules in the SPEC file.
+
+         If successful, ``rpmbuild`` will generate the package in the ``RPMS/`` folder.
+
+         The script will copy it to ``wazuh-indexer/artifacts/dist`` and clean: remove the ``tmp\`` folder and its contents.
       
          Current folder loadout at this stage:
       
@@ -163,12 +171,12 @@ Local package generation
 
    .. group-tab:: DEB
 
-      For DEB packages, the ``assemble.sh`` script will perform the following
-      operations:
+      For DEB packages, the ``assemble.sh`` script will perform the following operations:
       
       #. Extract the deb package using ``ar`` and ``tar`` tools.
       
          By default, ``ar`` and ``tar`` tools expect the package to be in ``wazuh-indexer/artifacts/tmp/deb``.
+
          The script takes care of creating the required folder structure, copying also the min package and the Makefile.
       
          Current folder loadout at this stage:
@@ -189,8 +197,11 @@ Local package generation
                     `-- wazuh-indexer-min_|WAZUH_CURRENT|_amd64.deb
       
          ``usr``, ``etc`` and ``var`` folders contain ``wazuh-indexer`` files, extracted from ``wazuh-indexer-min-*.deb``.
+
          ``Makefile`` and the ``debmake_install`` are copied over from ``wazuh-indexer/distribution/packages/src/deb``.
+
          The ``wazuh-indexer-performance-analyzer.service`` file is also copied from the same folder.
+
          It is a dependency of the SPEC file.
       
       #. Install the plugins using the ``opensearch-plugin`` CLI tool.
@@ -244,9 +255,10 @@ Local package generation
          # bash packaging_scripts/assemble.sh -a x64 -d tar -r 1
       
 Build and assemble scripts reference
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+------------------------------------
 
 The packages' generation process is guided through bash scripts.
+
 Below is a reference of their inputs, outputs and code:
 
 .. code:: none
