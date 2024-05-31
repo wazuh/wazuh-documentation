@@ -26,7 +26,7 @@ Pre-requisistes:
    # git clone https://github.com/wazuh/wazuh-indexer
 
 Build stage
-----------
+-----------
 
 Docker environment
 ^^^^^^^^^^^^^^^^^^
