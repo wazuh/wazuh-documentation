@@ -17,14 +17,14 @@ The Wazuh dashboard notifies users whenever there's a newer Wazuh version availa
 
 To support the centralized vulnerability feed and update check services, Wazuh has developed a new platform aimed at integrating and distributing Cyber Threat Intelligence (CTI) data.
 
-Package inventory can now collect information from expanded sources, including Snap, PYPI, and Node package managers.
+Package inventory can now collect information from expanded sources, including the Snap package manager.
 
 The release also addresses hundreds of bugs of varying impacts, further stabilizing the platform and improving the overall user experience.
 
 -  `Vulnerability Detector refactor <https://github.com/wazuh/wazuh/issues/14153>`__: Vulnerability detection uses a centralized feed maintained by Wazuh and introduces global queries, significantly improving vulnerability detection capabilities and performance.
 -  `Update check service UI <https://github.com/wazuh/wazuh-dashboard/issues/84>`__: Users can now be notified whenever there's a new Wazuh version available.
 -  `Wazuh dashboard UX redesign <https://github.com/wazuh/wazuh-dashboard/issues/90>`__: A significant overhaul aimed at enhancing the user interface and experience, making navigation and operation more intuitive.
--  `Snap packages support <https://github.com/wazuh/wazuh/issues/15429>`__ & `PYPI and Node packages support <https://github.com/wazuh/wazuh-documentation/issues/6342>`__: Wazuh now includes support for inventorying packages installed through the snap, PYPI and Node package managers, improving visibility into software management.
+-  `Snap packages support <https://github.com/wazuh/wazuh/issues/15429>`__ & `PYPI and Node packages support <https://github.com/wazuh/wazuh-documentation/issues/6342>`__: Wazuh now includes support for inventorying packages installed through the Snap package manager, improving visibility into software management.
 
 What's new
 ----------
