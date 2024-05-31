@@ -40,6 +40,6 @@ To run the playbook for a specific environment, the command below is run:
 
    $ ansible-playbook wazuh-indexer.yml -e@vars-production.yml
 
-The example above will install the Wazuh Indexer and set the listening address to: ``10.1.1.10`` using ``vars-production.yml``.
+The example above will install the Wazuh indexer and set the listening address to: ``10.1.1.10`` using ``vars-production.yml``.
 
 Please review the :ref:`variables references <wazuh_ansible_reference_indexer>` section to see all variables available for this role.

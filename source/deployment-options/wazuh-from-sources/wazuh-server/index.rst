@@ -39,6 +39,7 @@ Installing dependencies
                 .. code-block:: console
                 
                     # yum install make cmake gcc gcc-c++ python3 python3-policycoreutils automake autoconf libtool openssl-devel yum-utils procps -y
+                    # curl -OL http://packages.wazuh.com/utils/gcc/gcc-9.4.0.tar.gz && tar xzf gcc-9.4.0.tar.gz  && cd gcc-9.4.0/ && ./contrib/download_prerequisites && ./configure --enable-languages=c,c++ --prefix=/usr --disable-multilib --disable-libsanitizer && make -j$(nproc) && make install && ln -fs /usr/bin/g++ /bin/c++ && ln -fs /usr/bin/gcc /bin/cc && cd .. && rm -rf gcc-* && scl enable devtoolset-7 bash
                     # yum-config-manager --enable powertools
                     # yum install libstdc++-static -y
 
@@ -117,11 +118,11 @@ Installing the Wazuh manager
 
       # ./install.sh
 
-   Alternatively, to download vulnerability detection content during installation, you can set ``DOWNLOAD_CONTENT_AND_DECOMPRESS=y``. The initial run might be time-consuming due to the initial process of  downloading and processing :doc:`vulnerability detection </user-manual/capabilities/vulnerability-detection/index>` content. You can download a pre-prepared database during installation to bypass this initial step.
+   The initial run might take some time as it downloads and processes the :doc:`vulnerability detection </user-manual/capabilities/vulnerability-detection/index>` content. To speed up this process, you can set the ``DOWNLOAD_CONTENT`` environment variable to ``y`` beforehand. The adjusted command downloads a pre-prepared database during installation.
 
    .. code-block:: console
 
-      # DOWNLOAD_CONTENT_AND_DECOMPRESS=y ./install.sh
+      # DOWNLOAD_CONTENT=y ./install.sh
 
 #. When the script asks what kind of installation you want, type ``manager`` to install the Wazuh manager:
 
