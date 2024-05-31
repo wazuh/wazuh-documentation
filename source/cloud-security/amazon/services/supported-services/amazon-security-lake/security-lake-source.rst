@@ -34,7 +34,7 @@ AWS configuration
 Enabling Amazon Security Lake
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-If you haven't already, ensure that you have enabled Amazon Security Lake by following the instructions at `Getting started - Amazon Security Lake <https://docs.aws.amazon.com/security-lake/latest/userguide/getting-started.html#enable-service>`_.
+If you haven't already, ensure that you have enabled Amazon Security Lake by following the instructions at `Getting started - Amazon Security Lake <https://docs.aws.amazon.com/security-lake/latest/userguide/getting-started.html#enable-service>`__.
 
 For multiple AWS accounts, we strongly encourage you to use AWS Organizations and set up Amazon Security Lake at the Organization level.
 
@@ -235,7 +235,7 @@ Running Logstash
 OCSF Mapping
 -------------
 
-The integration maps Wazuh Security Events to the **OCSF v1.1.0** `Security Finding (2001) <https://schema.ocsf.io/classes/security_finding>`__ Class.
+The integration maps Wazuh Security Events to the *OCSF v1.1.0* `Security Finding (2001) <https://schema.ocsf.io/classes/security_finding>`__ Class.
 
 The tables below represent how the Wazuh Security Events are mapped into the OCSF Security Finding Class.
 
