@@ -224,6 +224,9 @@ Upgrading the Wazuh dashboard
 
    To ensure compatibility with the latest Wazuh indexer and Wazuh dashboard, please update manually installed plugins accordingly. For additional information, check the `distribution matrix <https://github.com/wazuh/wazuh-packages/tree/v|WAZUH_CURRENT|#distribution-version-matrix>`__.
 
+Configuration options might differ across versions. Follow these steps to ensure a smooth upgrade.
+
+#. Backup the ``/etc/wazuh-dashboard/opensearch_dashboards.yml`` file to save your settings.
 #. Upgrade the Wazuh dashboard.
 
    .. tabs::
@@ -232,6 +235,7 @@ Upgrading the Wazuh dashboard
 
          .. code-block:: console
 
+            # rm /etc/wazuh-dashboard/opensearch_dashboards.yml
             # yum upgrade wazuh-dashboard|WAZUH_DASHBOARD_RPM_PKG_INSTALL|
 
       .. group-tab:: APT
@@ -240,11 +244,14 @@ Upgrading the Wazuh dashboard
 
             # apt-get install wazuh-dashboard|WAZUH_DASHBOARD_DEB_PKG_INSTALL|
 
+         .. note::
+
+            When prompted, choose to replace the ``/etc/wazuh-dashboard/opensearch_dashboards.yml`` file with the updated version.
+         
+#. Manually reapply any settings changes to the ``/etc/wazuh-dashboard/opensearch_dashboards.yml`` file.
 #. Restart the Wazuh dashboard:
 
     .. include:: /_templates/installations/dashboard/enable_dashboard.rst
-
-
 
 Next steps
 ----------

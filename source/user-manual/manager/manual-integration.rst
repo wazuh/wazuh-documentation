@@ -237,7 +237,7 @@ To set up this integration, do the following.
 
    .. include:: /_templates/common/restart_manager.rst
 
-Once the configuration is complete, enriched alerts start showing in the Wazuh Dashboard if applicable.
+Once the configuration is complete, enriched alerts start showing in the Wazuh dashboard if applicable.
 
 .. thumbnail:: /images/manual/integration/maltiverse.png
    :title: Maltiverse alert

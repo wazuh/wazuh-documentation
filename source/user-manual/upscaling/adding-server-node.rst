@@ -86,6 +86,8 @@ We recommend creating entirely new certificates for your Wazuh server nodes. Per
       # tar -cvf ./wazuh-certificates.tar -C ./wazuh-certificates/ .
       # scp wazuh-certificates.tar <TARGET_USERNAME>@<TARGET_IP>:
 
+   This will copy the certificates to the home directory of the logged in user on the target system. You can change this to specify a path to your installation directory.
+
 Distributed deployment
 ^^^^^^^^^^^^^^^^^^^^^^
 
@@ -138,7 +140,7 @@ We recommend you utilize pre-existing root-ca keys to generate certificates for 
 
      .. _recreate_certificates:
 
-      If the pre-existing root-ca keys have been deleted or if for some reasons you are not able to access them, you can proceed to create new certificates for all the nodes as follows:
+      If the pre-existing root-ca keys have been deleted or if for some reason you are not able to access them, you can proceed to create new certificates for all the nodes as follows:
 
       -  Create the ``/root/config.yml`` file to reference all your nodes
 
@@ -178,12 +180,16 @@ We recommend you utilize pre-existing root-ca keys to generate certificates for 
             # tar -cvf ./wazuh-certificates.tar -C ./wazuh-certificates/ .
             # scp wazuh-certificates.tar <TARGET_USERNAME>@<TARGET_IP>:
 
+         This will copy the certificates to the home directory of the logged in user on the target system. You can change this to specify a path to your installation directory.
+
 #. Compress the certificates folder into a new ``wazuh-certificates.tar`` file and copy it to the new Wazuh server node(s). You can make use of the ``scp`` utility to securely copy the compressed file:
 
    .. code-block:: console
 
       # tar -cvf ./wazuh-certificates.tar -C ./wazuh-install-files/ .
       # scp wazuh-certificates.tar <TARGET_USERNAME>@<TARGET_IP>:
+
+   This will copy the certificates to the home directory of the logged in user on the target system. You can change this to specify a path to your installation directory.
 
 Configuring existing components to connect with the new node
 ------------------------------------------------------------
@@ -262,7 +268,7 @@ All-in-one deployment
       cluster.initial_master_nodes:
       - "<WAZUH_INDEXER_NODE_NAME>"
 
-#. Edit the filebeat configuration file ``/etc/filebeat/filebeat.yml`` to specify the indexer’s IP address:
+#. Edit the Filebeat configuration file ``/etc/filebeat/filebeat.yml`` to specify the indexer’s IP address:
 
    .. code-block:: yaml
 
@@ -431,7 +437,7 @@ Distributed deployment
       cluster.initial_master_nodes:
       - "<WAZUH_INDEXER_NODE_NAME>"
 
-#. Edit the filebeat configuration file ``/etc/filebeat/filebeat.yml`` (located in the Wazuh server node) to specify the indexer’s IP address:
+#. Edit the Filebeat configuration file ``/etc/filebeat/filebeat.yml`` (located in the Wazuh server node) to specify the indexer’s IP address:
 
    .. code-block:: yaml
 
@@ -600,7 +606,7 @@ Installing the Wazuh manager
 
    .. include:: /_templates/installations/wazuh/common/check_wazuh_manager.rst
 
-Install and configure filebeat
+Install and configure Filebeat
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 #. Install the Filebeat package.
@@ -623,7 +629,7 @@ Install and configure filebeat
 
 #. Edit the ``/etc/filebeat/filebeat.yml`` configuration file and replace the following value:
 
-   -  ``hosts`` which represents the list of Wazuh indexer nodes to connect to. You can use either IP addresses or hostnames. By default, the host is set to localhost ``hosts: ["127.0.0.1:9200"]``. Replace it with your Wazuh indexer IP address accordingly.
+   -  ``hosts`` which represents the list of Wazuh indexer nodes to connect to. You can use either IP addresses or hostnames. By default, the host is set to 127.0.0.1 ``hosts: ["127.0.0.1:9200"]``. Replace it with your Wazuh indexer IP address accordingly.
 
       If you have more than one Wazuh indexer node, you can separate the addresses using commas. For example, ``hosts: ["10.0.0.1:9200", "10.0.0.2:9200", "10.0.0.3:9200"]``:
 
