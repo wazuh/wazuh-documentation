@@ -47,14 +47,14 @@ Linux WPK
 
    .. code-block:: console
 
-     # curl -Ls https://github.com/wazuh/wazuh/archive/v|WAZUH_CURRENT|.tar.gz | tar zx
-     # cd wazuh-|WAZUH_CURRENT|
+      # curl -Ls https://github.com/wazuh/wazuh/archive/v|WAZUH_CURRENT|.tar.gz | tar zx
+      # cd wazuh-|WAZUH_CURRENT|
 
-#. Download the latest version of the Wazuh DEB or RPM package (i.e., for Debian):
+#. Download the latest version of the Wazuh DEB or RPM package. For example, for Debian:
 
    .. code-block:: console
 
-     # curl -Ls |DEB_AGENT_URL|_|WAZUH_CURRENT|-|WAZUH_REVISION_DEB_AGENT_X86|_amd64.deb --output wazuh-agent-|WAZUH_CURRENT|-|WAZUH_REVISION_DEB_AGENT_X86|_amd64.deb
+      # curl -Ls |DEB_AGENT_URL|_|WAZUH_CURRENT|-|WAZUH_REVISION_DEB_AGENT_X86|_amd64.deb --output wazuh-agent-|WAZUH_CURRENT|-|WAZUH_REVISION_DEB_AGENT_X86|_amd64.deb
 
 #. Install the root CA if you want to overwrite the root CA with the file you created previously.
 
@@ -66,13 +66,13 @@ Linux WPK
 
    .. code-block:: console
 
-     # cp src/init/pkg_installer.sh .
+      # cp src/init/pkg_installer.sh .
 
-#. Compile the WPK package using the PKG package and, your SSL certificate and key.
+#. Compile the WPK package using the PKG package, along with your SSL certificate and key.
 
    .. code-block:: console
 
-     # tools/agent-upgrade/wpkpack.py output/myagent.wpk path/to/wpkcert.pem path/to/wpkcert.key wazuh-agent-|WAZUH_CURRENT|-|WAZUH_REVISION_DEB_AGENT_X86|_amd64.deb upgrade.sh pkg_installer.sh
+      # tools/agent-upgrade/wpkpack.py output/myagent.wpk path/to/wpkcert.pem path/to/wpkcert.key wazuh-agent-|WAZUH_CURRENT|-|WAZUH_REVISION_DEB_AGENT_X86|_amd64.deb upgrade.sh pkg_installer.sh
 
 
 Definitions:
@@ -108,8 +108,8 @@ Windows WPK
 
    .. code-block:: console
 
-     # curl -Ls https://github.com/wazuh/wazuh/archive/v|WAZUH_CURRENT|.tar.gz | tar zx
-     # cd wazuh-|WAZUH_CURRENT|
+      # curl -Ls https://github.com/wazuh/wazuh/archive/v|WAZUH_CURRENT|.tar.gz | tar zx
+      # cd wazuh-|WAZUH_CURRENT|
 
 #. Download the latest version of the Wazuh MSI package.
 
@@ -123,7 +123,7 @@ Windows WPK
 
      # cp path/to/wpk_root.pem etc/wpk_root.pem
 
-#. Compile the WPK package using the MSI package and, your SSL certificate and key.
+#. Compile the WPK package using the MSI package, along with your SSL certificate and key.
 
    .. code-block:: console
 
@@ -181,13 +181,13 @@ macOS WPK
 
    .. code-block:: console
 
-     # cp src/init/pkg_installer.sh .
+      # cp src/init/pkg_installer.sh .
 
 #. Compile the WPK package using the PKG package and, your SSL certificate and key.
 
    .. code-block:: console
 
-     # tools/agent-upgrade/wpkpack.py output/myagent.wpk path/to/wpkcert.pem path/to/wpkcert.key wazuh-agent-|WAZUH_CURRENT_OSX|-|WAZUH_REVISION_OSX|.pkg upgrade.sh pkg_installer.sh
+      # tools/agent-upgrade/wpkpack.py output/myagent.wpk path/to/wpkcert.pem path/to/wpkcert.key wazuh-agent-|WAZUH_CURRENT_OSX|-|WAZUH_REVISION_OSX|.pkg upgrade.sh pkg_installer.sh
 
 
 Definitions:
