@@ -84,7 +84,7 @@ Starting Wazuh 4.0 the Wazuh API username variable changed from ``user`` to ``us
    
    hosts:
     - production:
-        url: https://localhost
+        url: https://127.0.0.1
         port: 55000
         username: wazuh-wui
         password: wazuh-wui

@@ -87,6 +87,7 @@ newUrls['4.9'] = [
   '/deployment-options/offline-installation/index.html',
   '/deployment-options/offline-installation/step-by-step.html',
   '/deployment-options/offline-installation/installation-assistant.html',
+  '/development/coredump.html',
   '/development/packaging/generate-indexer-package.html',
 ];
 
@@ -110,7 +111,10 @@ removedUrls['4.8'] = [
   '/user-manual/capabilities/vulnerability-detection/cpe-helper.html',
   '/user-manual/capabilities/vulnerability-detection/querying-the-vulnerability-database.html',
   '/user-manual/capabilities/vulnerability-detection/scan-types.html',
-  '/user-manual/capabilities/vulnerability-detection/allow-os.html'
+  '/user-manual/capabilities/vulnerability-detection/allow-os.html',
+  '/migration-guide/migrating-from-ossec/index.html',
+  '/migration-guide/migrating-from-ossec/ossec-server.html',
+  '/migration-guide/migrating-from-ossec/ossec-agent.html',
 ];
 
 /* Redirections from 4.7 to 4.8  */
@@ -144,6 +148,7 @@ newUrls['4.7'] = [
   '/release-notes/release-4-7-2.html',
   '/release-notes/release-4-7-3.html',
   '/release-notes/release-4-7-4.html',
+  '/release-notes/release-4-7-5.html',
   '/cloud-security/azure/posture-management.html',
   '/cloud-security/gcp/posture-management.html',
   '/cloud-security/gcp/instances.html',

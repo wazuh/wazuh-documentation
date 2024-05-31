@@ -54,7 +54,7 @@ This is an example of a multi-host configuration:
             password: secret_password
             run_as: false
         - wazuh_test:
-            url: https://localhost
+            url: https://127.0.0.1
             port: 55000
             username: wazuh-wui
             password: wazuh-wui
@@ -517,6 +517,20 @@ Set the footer of the PDF reports. To use an empty footer, type a space " " in t
 | **Allowed values** | Any string                 |
 +--------------------+----------------------------+
 
+Configuration
+-------------
+
+configuration.ui_api_editable
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Defines whether the configuration is editable via API endpoints and the UI. When disabled, editing is limited to the configuration file, rendering both the API endpoints and the UI inaccessible.
+
++--------------------+----------------------------+
+| **Default value**  | true                       |
++--------------------+----------------------------+
+| **Allowed values** | true,false                 |
++--------------------+----------------------------+
+
 
 Example
 -------
@@ -589,3 +603,6 @@ This is an example of the wazuh.yml configuration:
     # Enrollment DNS
     enrollment.dns: ''
     enrollment.password: ''
+
+    # Configuration
+    configuration.ui_api_editable: true

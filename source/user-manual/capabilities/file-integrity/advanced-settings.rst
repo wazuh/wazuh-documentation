@@ -67,7 +67,30 @@ You need to install the audit daemon if you don’t have it already installed on
          # cp /usr/sbin/audisp-af_unix /sbin/audisp-af_unix
          # rc-service auditd restart
 
-Perform the following steps to enable who-data monitoring. In this example, you configure who-data monitoring for ``/etc`` directory.
+In most systems, auditd includes a rule to skip processing of every audit rule by default. This setting prevents the reporting of any whodata-related information. To ensure that auditd is not `DISABLED BY DEFAULT <https://man7.org/linux/man-pages/man8/auditctl.8.html#DISABLED_BY_DEFAULT>`__, follow these steps.
+
+#. Check the output of this command to find out if the auditd rules include the ``-a never,task`` rule.
+
+   .. code-block:: console
+ 
+      # auditctl -l | grep task
+ 
+#. If the output displays the ``-a never,task`` rule, add the following filter rule in ``/etc/audit/rules.d/audit.rules``. Make sure to place it before the mentioned rule.
+ 
+   .. code-block:: none
+      :emphasize-lines: 1
+ 
+      -a always,task -F exe=‘/var/ossec/bin/wazuh-syscheckd’
+      -a never,task
+ 
+#. After that, restart auditd and Wazuh agent to apply the changes:
+ 
+   .. code-block:: console
+ 
+      # systemctl restart auditd
+      # systemctl restart wazuh-agent
+ 
+Next, perform the following steps to enable who-data monitoring. In this example, you configure who-data monitoring for the ``/etc/`` directory.
 
 #. Edit the Wazuh agent ``/var/ossec/etc/ossec.conf`` configuration file and add the configuration below:
 
