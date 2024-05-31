@@ -23,7 +23,7 @@ Pre-requisistes:
 
 .. code:: console
 
-   # git clone https://www.github.com/wazuh/wazuh-indexer
+   # git clone https://github.com/wazuh/wazuh-indexer
 
 Build stage
 ^^^^^^^^^^^
@@ -31,8 +31,7 @@ Build stage
 Docker environment
 -------------------
 
-Using the provided `Docker
-environment <https://www.github.com/wazuh/wazuh-indexer/tree/master/docker>`__:
+Using the provided `Docker environment <https://www.github.com/wazuh/wazuh-indexer/tree/master/docker>`__:
 
 .. tabs::
 
