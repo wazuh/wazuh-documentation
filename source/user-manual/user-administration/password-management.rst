@@ -240,7 +240,7 @@ Follow the instructions below to change the passwords for all the Wazuh indexer 
 
       hosts:
         - default:
-            url: https://localhost
+            url: https://127.0.0.1
             port: 55000
             username: wazuh-wui
             password: "<wazuh-wui-password>"
