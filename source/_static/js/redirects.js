@@ -88,6 +88,21 @@ redirections.push(
     '4.8': '/development/packaging/generate-rpm-package.html',
     '4.9': '/development/packaging/generate-deb-rpm-package.html',
   },
+  {
+    'target': ['4.8=>4.9', '4.9=>4.8'],
+    '4.8': '/cloud-security/amazon/services/supported-services/security-lake.html',
+    '4.9': '/cloud-security/amazon/services/supported-services/index.html',
+  },
+  {
+    'target': ['4.9=>4.8'],
+    '4.8': '/cloud-security/amazon/services/supported-services/security-lake.html',
+    '4.9': '/cloud-security/amazon/services/supported-services/amazon-security-lake/security-lake-source.html',
+  },
+  {
+    'target': ['4.9=>4.8'],
+    '4.8': '/cloud-security/amazon/services/supported-services/security-lake.html',
+    '4.9': '/cloud-security/amazon/services/supported-services/amazon-security-lake/security-lake-subscriber.html',
+  },
 );
 
 /* Pages added in 4.9 */
@@ -100,6 +115,9 @@ newUrls['4.9'] = [
   '/development/coredump.html',
   '/development/packaging/generate-indexer-package.html',
   'development/packaging/generate-deb-rpm-package.html',
+  '/cloud-security/amazon/services/supported-services/amazon-security-lake/index.html',
+  '/cloud-security/amazon/services/supported-services/amazon-security-lake/security-lake-source.html',
+  '/cloud-security/amazon/services/supported-services/amazon-security-lake/security-lake-subscriber.html',
 ];
 
 /* Pages no longer available in 4.9 */
@@ -108,6 +126,7 @@ removedUrls['4.9'] = [
   '/deployment-options/offline-installation.html',
   '/development/packaging/generate-deb-package.html',
   '/development/packaging/generate-rpm-package.html',
+  '/cloud-security/amazon/services/supported-services/security-lake.html'
 ];
 
 /* *** RELEASE 4.8 ****/

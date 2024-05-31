@@ -51,7 +51,7 @@ The next table contains the most relevant information about configuring each ser
 +--------------+----------------------------------------------------------+-----------------------+----------------+------------------------------------------------------------------------------------------------------------------+
 | Amazon       | :ref:`Amazon ECR Image scanning <amazon_image_scanning>` | service               | cloudwatchlogs |                                                                                                                  |
 +--------------+----------------------------------------------------------+-----------------------+----------------+------------------------------------------------------------------------------------------------------------------+
-| Amazon       | :ref:`Amazon Security Lake <amazon_security_lake>`       | subscriber            | security_lake  |                                                                                                                  |
+| Amazon       | :ref:`Amazon Security Lake <aws_lake_subscriber>`        | subscriber            | security_lake  |                                                                                                                  |
 +--------------+----------------------------------------------------------+-----------------------+----------------+------------------------------------------------------------------------------------------------------------------+
 | Amazon       | :ref:`Custom Logs Buckets <amazon_custom_logs>`          | subscriber            | buckets        |                                                                                                                  |
 +--------------+----------------------------------------------------------+-----------------------+----------------+------------------------------------------------------------------------------------------------------------------+
@@ -78,6 +78,6 @@ The next table contains the most relevant information about configuring each ser
     ecr-image-scanning
     cisco-umbrella
     elastic-load-balancing/index
-    security-lake
+    amazon-security-lake/index
     custom-buckets
     security-hub
