@@ -2,7 +2,7 @@
 Wazuh Dashboard
 ===============
 
-The packages' generation process is orchestrated by one script, which is
+The packages generation process is orchestrated by one script, which is
 found within the ``dev-tools/build-packages/build-packages.sh`` folder of the repository:
 
 - ``build-packages.sh``: This script is responsible for bundling plugins into 1 single application in tar, rpm and/or deb distributions. With the parameters ``version``, ``revision``, ``distribution``,  package of ``wazuh-dashboard``, ``wazuh-dashboard-plugins`` and ``wazuh-security-dashboards-plugin``.
@@ -15,7 +15,7 @@ code.
 Build manually
 ^^^^^^^^^^^^^^
 
-1. To use the scrip you first need to generate the packages from the repositories:
+1. To use the script you first need to generate the packages from the repositories:
 
 - ``wazuh-dashboard``
 - ``wazuh-security-dashboards-plugin`` 
@@ -27,27 +27,70 @@ To do so, follow these steps:
 
    .. code:: console
 
-      # git clone -b <branch> https://github.com/wazuh/wazuh-dashboard.git
+      # git clone -b <branch || tag> https://github.com/wazuh/wazuh-dashboard.git
       # cd wazuh-dashboard/
       # yarn osd bootstrap
       # yarn build --linux --skip-os-packages --release
 
-   1.2. Clone the Wazuh Security Dashboards Plugin and build the plugin.
+   Example:
+
+   .. code:: console
+
+      # git clone -b 4.9.0 https://github.com/wazuh/wazuh-dashboard.git
+      # cd wazuh-dashboard/
+      # yarn osd bootstrap
+      # yarn build --linux --skip-os-packages --release
+
+   1.2. Clone the Wazuh Security Dashboards Plugin in the plugins folder and build the plugin.
 
    .. code:: console
 
       # cd plugins/
-      # git clone -b <branch> https://github.com/wazuh/wazuh-security-dashboards-plugin.git
+      # git clone -b <branch || tag> https://github.com/wazuh/wazuh-security-dashboards-plugin.git
       # cd wazuh-security-dashboards-plugin/
       # yarn
       # yarn build
 
-   1.3. Clone the Wazuh Dashboard Plugins repository and build the plugins.
+   Example:
+
+   .. code:: console
+
+      # cd plugins/
+      # git clone -b 4.9.0 https://github.com/wazuh/wazuh-security-dashboards-plugin.git
+      # cd wazuh-security-dashboards-plugin/
+      # yarn
+      # yarn build
+
+   1.3. Clone the Wazuh Dashboard Plugins repository in the plugins folder,
+   move the contents of the plugins folder to the folder where the repository was cloned and build the plugins.
+
+   .. note::
+
+      The yarn build command requires an entry specifying the OpenSearch Dashboard version. This version can be obtained from the package.json file.
+
 
    .. code:: console
 
       # cd ../
-      # git clone -b <branch> https://github.com/wazuh/wazuh-dashboard-plugins.git
+      # git clone -b <branch || tag> https://github.com/wazuh/wazuh-dashboard-plugins.git
+      # cd wazuh-dashboard-plugins/
+      # cp -r plugins/* ../
+      # cd ../main
+      # yarn
+      # yarn build
+      # cd ../wazuh-core/
+      # yarn
+      # yarn build
+      # cd ../wazuh-check-updates/
+      # yarn
+      # yarn build
+
+   Example:
+
+   .. code:: console
+
+      # cd ../
+      # git clone -b 4.9.0 https://github.com/wazuh/wazuh-dashboard-plugins.git
       # cd wazuh-dashboard-plugins/
       # cp -r plugins/* ../
       # cd ../main
@@ -67,9 +110,22 @@ To do so, follow these steps:
       # cd ../../../
       # mkdir packages
       # cd packages
-      # zip -r -j ./dashboard-package.zip ../wazuh-dashboard/target/opensearch-dashboards-<opensearch version>-linux-x64.tar.gz
+      # zip -r -j ./dashboard-package.zip ../wazuh-dashboard/target/opensearch-dashboards-2.13.0-linux-x64.tar.gz
       # zip -r -j ./security-package.zip ../wazuh-dashboard/plugins/wazuh-security-dashboards-plugin/build/security-dashboards-<opensearch version>.0.zip
       # zip -r -j ./wazuh-package.zip ../wazuh-dashboard/plugins/wazuh-check-updates/build/wazuhCheckUpdates-<opensearch version>.zip ../wazuh-dashboard/plugins/main/build/wazuh-<opensearch version>.zip ../wazuh-dashboard/plugins/wazuh-core/build/wazuhCore-<opensearch version>.zip
+
+   Example:
+
+   .. code:: console
+
+      # cd ../../../
+      # mkdir packages
+      # cd packages
+      # zip -r -j ./dashboard-package.zip ../wazuh-dashboard/target/opensearch-dashboards-2.13.0-linux-x64.tar.gz
+      # zip -r -j ./security-package.zip ../wazuh-dashboard/plugins/wazuh-security-dashboards-plugin/build/security-dashboards-2.13.0.0.zip
+      # zip -r -j ./wazuh-package.zip ../wazuh-dashboard/plugins/wazuh-check-updates/build/wazuhCheckUpdates-2.13.0.zip ../wazuh-dashboard/plugins/main/build/wazuh-2.13.0.zip ../wazuh-dashboard/plugins/wazuh-core/build/wazuhCore-2.13.0.zip
+
+
 
 At this point you must have 3 packages in the packages folder:
 
@@ -90,7 +146,15 @@ The script requires the following parameters:
 .. code:: console
 
    # cd ../wazuh-dashboard/dev-tools/build-packages/
-   # ./build-packages.sh -v <version> -r <revision> <distribution(--deb || --rpm)> -a <path to wazuh-package.zip> -s <path to security-package.zip> -b <path to dashboard-package.zip>
+   # ./build-packages.sh -v <version> -r <revision> <distribution(--deb || --rpm)> -a file:///<path to wazuh-package.zip> -s file:///<path to security-package.zip> -b file:///<path to dashboard-package.zip>
+
+Example:
+
+.. code:: console
+
+   # cd ../wazuh-dashboard/dev-tools/build-packages/
+   # ./build-packages.sh -v 4.9.0 -r 1 --deb -a file:///packages/wazuh-package.zip -s file:///packages/security-package.zip -b file:///packages/dashboard-package.zip
+
 
 The package will be generated in the ``output`` folder of the same directory where the script is located.
 
@@ -105,7 +169,14 @@ and then if desired you can use the created package to generate the .deb or .rpm
 
 .. code:: console
 
-   # git clone -b <branch> https://github.com/wazuh/wazuh-dashboard.git
+   # git clone -b <branch || tag> https://github.com/wazuh/wazuh-dashboard.git
+   # cd wazuh-dashboard/dev-tools/build-packages/
+
+Example:
+
+.. code:: console
+
+   # git clone -b 4.9.0 https://github.com/wazuh/wazuh-dashboard.git
    # cd wazuh-dashboard/dev-tools/build-packages/
 
 2. Build the Docker image with the following parameters:
