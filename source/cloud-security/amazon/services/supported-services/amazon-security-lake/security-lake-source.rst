@@ -118,12 +118,13 @@ Follow the `official documentation <https://docs.aws.amazon.com/lambda/latest/dg
 Validation
 ^^^^^^^^^^^
 
-To validate that the Lambda function is properly configured and works as expected, create a test file containing the sample events below and upload it to the S3 bucket. Create the file with the following command:
+To validate that the Lambda function is properly configured and works as expected, create a test file with the following command.
 
 .. code-block:: console
 
    $ touch "$(date +'%Y%m%d')_ls.s3.wazuh-test-events.$(date +'%Y-%m-%dT%H.%M').part00.txt"
 
+Add the sample events below to the file and upload it to the S3 bucket.
 
 .. code-block:: JSON
 
