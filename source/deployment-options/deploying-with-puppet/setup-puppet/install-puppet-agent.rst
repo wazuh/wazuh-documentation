@@ -45,27 +45,8 @@ Installation on Debian/Ubuntu
 
 The manifest supports the following releases to install wazuh.
 
-**Ubuntu**
-
--  Jammy Jellyfish
--  Focal Fossa
--  Bionic Beaver
--  Yakkety Yak
--  Xenial Xerus
--  Wily Werewolf
--  Vivid Vervet
--  Trusty Tahr
--  Precise Pangolin
-
-**Debian**
-
--  bookworm
--  bullseye
--  buster
--  stretch
--  jessie
--  wheezy
-
+-  **Debian**: 7 (wheezy), 8 (jessie), 9 (stretch), 10 (buster), 11 (bullseye), 12 (bookworm)
+-  **Ubuntu**: 12.04 (Precise Pangolin), 14.04 (Trusty Tahr), 15.04 (Vivid Vervet), 15.10 (Wily Werewolf), 16.04 (Xenial Xerus), 16.10 (Yakkety Yak), 18.04 (Bionic Beaver), 20.04 (Focal Fossa), 22.04 (Jammy Jellyfish)
 
 Install ``curl``, ``apt-transport-https`` and ``lsb-release``:
 
