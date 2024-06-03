@@ -43,16 +43,10 @@ Create a symbolic link between the installed binary file and your default binary
 Installation on Debian/Ubuntu
 -----------------------------
 
-+----------------------------------------------------------------------------+-------------+
-| The releases supported by the manifest to install Wazuh are as follows:                  |
-+------------+---------+--------+---------+------+--------+---------+--------+-------------+
-| **Ubuntu** | precise | trusty | vivid   | wily | xenial | yakketi | bionic | Focal Fossa |
-+------------+---------+--------+---------+------+--------+---------+--------+-------------+
-| **Debian** | jessie  | wheezy | stretch | sid                                            |
-+------------+---------+--------+---------+----------------------------------+-------------+
+The manifest supports the following releases to install wazuh.
 
-.. note::
-  ``Ubuntu Focal Fossa`` is supported since version 4.0.4
+-  **Debian**: 7 (wheezy), 8 (jessie), 9 (stretch), 10 (buster), 11 (bullseye), 12 (bookworm)
+-  **Ubuntu**: 12.04 (Precise Pangolin), 14.04 (Trusty Tahr), 15.04 (Vivid Vervet), 15.10 (Wily Werewolf), 16.04 (Xenial Xerus), 16.10 (Yakkety Yak), 18.04 (Bionic Beaver), 20.04 (Focal Fossa), 22.04 (Jammy Jellyfish)
 
 Install ``curl``, ``apt-transport-https`` and ``lsb-release``:
 
