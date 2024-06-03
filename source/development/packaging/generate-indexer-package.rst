@@ -3,7 +3,7 @@
 .. meta::
    :description: Wazuh provides an automated way of building packages for the Wazuh components. Learn how to build your own Wazuh indexer package in this section of our documentation.
 
-Wazuh Indexer
+Wazuh indexer
 =============
 
 The packages' generation process is orchestrated by two scripts, which are found within the ``packaging_scripts`` folder of the repository:

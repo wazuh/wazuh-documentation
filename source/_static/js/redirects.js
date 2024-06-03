@@ -113,6 +113,7 @@ newUrls['4.9'] = [
   '/deployment-options/offline-installation/step-by-step.html',
   '/deployment-options/offline-installation/installation-assistant.html',
   '/development/coredump.html',
+  '/development/packaging/generate-dashboard-package.html',
   '/development/packaging/generate-indexer-package.html',
   'development/packaging/generate-deb-rpm-package.html',
   '/cloud-security/amazon/services/supported-services/amazon-security-lake/index.html',
