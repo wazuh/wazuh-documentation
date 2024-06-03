@@ -22,7 +22,7 @@ Prerequisites
 --------------
 
 -  Amazon Security Lake is enabled.
--  At least one up and running ``wazuh-indexer`` instance with populated ``wazuh-alerts-4.x-*`` indices.
+-  At least one up and running Wazuh Indexer instance with populated ``wazuh-alerts-4.x-*`` indices.
 -  A Logstash instance.
 -  An S3 bucket to store raw events.
 -  An AWS Lambda function, using the Python 3.12 runtime.
@@ -85,13 +85,13 @@ Follow the `official documentation <https://docs.aws.amazon.com/lambda/latest/dg
       :align: center
       :width: 80%
 
-#. Create a zip deployment package and upload it to the S3 bucket created previously as per `these instructions <https://docs.aws.amazon.com/lambda/latest/dg/gettingstarted-package.html#gettingstarted-package-zip>`__. The code is hosted in the wazuh-indexer repository. Use the **Makefile** to generate the zip package **wazuh_to_amazon_security_lake.zip**.
+#. Create a zip deployment package and upload it to the S3 bucket created previously as per `these instructions <https://docs.aws.amazon.com/lambda/latest/dg/gettingstarted-package.html#gettingstarted-package-zip>`__. The code is hosted in the Wazuh Indexer repository. Use the **Makefile** to generate the zip package **wazuh_to_amazon_security_lake.zip**.
 
    .. code-block:: console
 
-      git clone https://github.com/wazuh/wazuh-indexer.git
-      cd wazuh-indexer/integrations/amazon-security-lake
-      make
+      $ git clone https://github.com/wazuh/wazuh-indexer.git
+      $ cd wazuh-indexer/integrations/amazon-security-lake
+      $ make
 
 #. Configure the Lambda with these environment variables.
 
@@ -118,7 +118,12 @@ Follow the `official documentation <https://docs.aws.amazon.com/lambda/latest/dg
 Validation
 ^^^^^^^^^^^
 
-To validate that the Lambda function is properly configured and works as expected, add the sample events below to the ``sample.txt`` file and upload it to the S3 bucket.
+To validate that the Lambda function is properly configured and works as expected, create a test file containing the sample events below and upload it to the S3 bucket. Create the file with the following command:
+
+.. code-block:: console
+
+   $ touch "$(date +'%Y%m%d')_ls.s3.wazuh-test-events.$(date +'%Y-%m-%dT%H.%M').part00.txt"
+
 
 .. code-block:: JSON
 
@@ -131,30 +136,30 @@ A successful execution of the Lambda function will map these events into the OCS
 Installing and configuring Logstash
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-Install Logstash on a dedicated server or on the server hosting the ``wazuh-indexer``. Logstash forwards the data from the ``wazuh-indexer`` to the AWS S3 bucket created previously.
+Install Logstash on a dedicated server or on the server hosting the Wazuh Indexer. Logstash forwards the data from the Wazuh Indexer to the AWS S3 bucket created previously.
 
 #. Follow the `official documentation <https://www.elastic.co/guide/en/logstash/current/installing-logstash.html>`__ to install Logstash.
 #. Install the `logstash-input-opensearch <https://github.com/opensearch-project/logstash-input-opensearch>`__ plugin (this one is installed by default in most cases).
 
    .. code-block:: console
 
-      sudo /usr/share/logstash/bin/logstash-plugin install logstash-input-opensearch
+      $ sudo /usr/share/logstash/bin/logstash-plugin install logstash-input-opensearch
 
-#. Copy the ``wazuh-indexer`` root certificate on the Logstash server, to any folder of your choice (e.g, ``/usr/share/logstash/root-ca.pem``).
+#. Copy the Wazuh Indexer root certificate on the Logstash server, to any folder of your choice (e.g, ``/usr/share/logstash/root-ca.pem``).
 #. Give the ``logstash`` user the required permissions to read the certificate.
 
    .. code-block:: console
 
-      sudo chmod -R 755 </PATH/TO/WAZUH_INDEXER/CERTIFICATE>/root-ca.pem
+      $ sudo chmod -R 755 </PATH/TO/WAZUH_INDEXER/CERTIFICATE>/root-ca.pem
 
 Configuring the Logstash pipeline
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-A `Logstash pipeline <https://www.elastic.co/guide/en/logstash/current/configuration.html>`__ allows Logstash to use plugins to read the data from the ``wazuh-indexer`` and send them to an AWS S3 bucket.
+A `Logstash pipeline <https://www.elastic.co/guide/en/logstash/current/configuration.html>`__ allows Logstash to use plugins to read the data from the Wazuh Indexer and send them to an AWS S3 bucket.
 
 The Logstash pipeline requires access to the following secrets:
 
--  ``wazuh-indexer`` credentials: ``INDEXER_USERNAME`` and ``INDEXER_PASSWORD``.
+-  Wazuh Indexer credentials: ``INDEXER_USERNAME`` and ``INDEXER_PASSWORD``.
 -  AWS credentials for the account with permissions to write to the S3 bucket: ``AWS_ACCESS_KEY_ID`` and ``AWS_SECRET_ACCESS_KEY``.
 -  AWS S3 bucket details: ``AWS_REGION`` and ``S3_BUCKET`` (the S3 bucket name for raw events).
 
@@ -164,7 +169,7 @@ The Logstash pipeline requires access to the following secrets:
 
    .. code-block:: console
 
-      sudo touch /etc/logstash/conf.d/indexer-to-s3.conf
+      $ sudo touch /etc/logstash/conf.d/indexer-to-s3.conf
 
 #. Add the following configuration to the ``indexer-to-s3.conf`` file.
 
@@ -222,15 +227,15 @@ Running Logstash
 
    .. code-block:: console
 
-      sudo systemctl stop logstash
-      sudo -E /usr/share/logstash/bin/logstash -f /etc/logstash/conf.d/indexer-to-s3.conf --path.settings /etc/logstash ----config.test_and_exit
+      $ sudo systemctl stop logstash
+      $ sudo -E /usr/share/logstash/bin/logstash -f /etc/logstash/conf.d/indexer-to-s3.conf --path.settings /etc/logstash ----config.test_and_exit
 
 #. After confirming that the configuration loads correctly without errors, run Logstash as a service.
 
    .. code-block:: console
 
-      sudo systemctl enable logstash
-      sudo systemctl start logstash
+      $ sudo systemctl enable logstash
+      $ sudo systemctl start logstash
 
 OCSF Mapping
 -------------
@@ -330,8 +335,10 @@ Security events
 Troubleshooting
 ----------------
 
-+-----------------------------------------------------------------------------------------------------------------------------------------------+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-| **Issue**                                                                                                                                     | **Resolution**                                                                                                                                                                                       |
-+-----------------------------------------------------------------------------------------------------------------------------------------------+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-| The Wazuh alert data is available in the Amazon Security Lake S3 bucket, but the Glue Crawler fails to parse the data into the Security Lake. | This issue typically occurs when the custom source that is created for the integration is using the wrong event class. Make sure you create the custom source with the Security Finding event class. |
-+-----------------------------------------------------------------------------------------------------------------------------------------------+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
++-----------------------------------------------------------------------------------------------------------------------------------------------+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| **Issue**                                                                                                                                     | **Resolution**                                                                                                                                                                                                            |
++-----------------------------------------------------------------------------------------------------------------------------------------------+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| The Wazuh alert data is available in the Amazon Security Lake S3 bucket, but the Glue Crawler fails to parse the data into the Security Lake. | This issue typically occurs when the custom source that is created for the integration is using the wrong event class. Make sure you create the custom source with the Security Finding event class.                      |
++-----------------------------------------------------------------------------------------------------------------------------------------------+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| The Wazuh alerts data is available in the Auxiliar S3 bucket, but the Lambda function does not trigger or fails.                              | This usually happens if the Lambda is not properly configured, or if the data is not in the correct format. Test the Lambda following `this guide <https://docs.aws.amazon.com/lambda/latest/dg/with-s3-example.html>`__. |
++-----------------------------------------------------------------------------------------------------------------------------------------------+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
