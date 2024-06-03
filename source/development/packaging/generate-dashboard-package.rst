@@ -15,6 +15,12 @@ code.
 Build manually
 ^^^^^^^^^^^^^^
 
+Requirements:
+
+- Docker
+
+Steps:
+
 1. To use the script you first need to generate the packages from the repositories:
 
 - ``wazuh-dashboard``
