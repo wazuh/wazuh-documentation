@@ -228,7 +228,7 @@ Running Logstash
    .. code-block:: console
 
       $ sudo systemctl stop logstash
-      $ sudo -E /usr/share/logstash/bin/logstash -f /etc/logstash/conf.d/indexer-to-s3.conf --path.settings /etc/logstash ----config.test_and_exit
+      $ sudo -E /usr/share/logstash/bin/logstash -f /etc/logstash/conf.d/indexer-to-s3.conf --path.settings /etc/logstash --config.test_and_exit
 
 #. After confirming that the configuration loads correctly without errors, run Logstash as a service.
 
