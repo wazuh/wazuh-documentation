@@ -1,14 +1,14 @@
 .. Copyright (C) 2015, Wazuh, Inc.
 
 .. meta::
-   :description: Wazuh indexer is a highly scalable full-text search engine. Install the Wazuh indexer in a single-node or multi-node configuration according to your environment needs. 
+   :description: Wazuh indexer is a highly scalable full-text search engine. Install the Wazuh indexer in a single-node or multi-node configuration according to your environment needs.
 
 Installing the Wazuh indexer step by step
 =========================================
 
 Install and configure the Wazuh indexer as a single-node or multi-node cluster following step-by-step instructions. Wazuh indexer is a highly scalable full-text search engine and offers advanced security, alerting, index management, deep performance analysis, and several other features.
 
-The installation process is divided into three stages.  
+The installation process is divided into three stages.
 
 #. Certificates creation
 
@@ -42,25 +42,25 @@ Generating the SSL certificates
         nodes:
           # Wazuh indexer nodes
           indexer:
-            - name: node-1
+            - name: indexer-1
               ip: "<indexer-node-ip>"
-            #- name: node-2
+            #- name: indexer-2
             #  ip: "<indexer-node-ip>"
-            #- name: node-3
+            #- name: indexer-3
             #  ip: "<indexer-node-ip>"
 
           # Wazuh server nodes
           # If there is more than one Wazuh server
           # node, each one must have a node_type
           server:
-            - name: wazuh-1
-              ip: "<wazuh-manager-ip>"
+            - name: server-1
+              ip: "<server-node-ip>"
             #  node_type: master
-            #- name: wazuh-2
-            #  ip: "<wazuh-manager-ip>"
+            #- name: server-2
+            #  ip: "<server-node-ip>"
             #  node_type: worker
-            #- name: wazuh-3
-            #  ip: "<wazuh-manager-ip>"
+            #- name: server-3
+            #  ip: "<server-node-ip>"
             #  node_type: worker
 
           # Wazuh dashboard nodes
@@ -159,7 +159,7 @@ Starting the service
   #. Enable and start the Wazuh indexer service.
 
       .. include:: /_templates/installations/indexer/common/enable_indexer.rst
-    
+
 Repeat this stage of the installation process for every Wazuh indexer node in your cluster. Then proceed with initializing your single-node or multi-node cluster in the next stage.
 
 
@@ -170,15 +170,15 @@ Repeat this stage of the installation process for every Wazuh indexer node in yo
     <div class="accordion-section open">
 
 #. Run the Wazuh indexer ``indexer-security-init.sh`` script on `any` Wazuh indexer node to load the new certificates information and start the single-node or multi-node cluster.
-    
+
    .. code-block:: console
 
       # /usr/share/wazuh-indexer/bin/indexer-security-init.sh
 
    .. note::
-      
+
       You only have to initialize the cluster *once*, there is no need to run this command on every node.
-      
+
 Testing the cluster installation
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
@@ -208,8 +208,8 @@ Testing the cluster installation
         "tagline" : "The OpenSearch Project: https://opensearch.org/"
       }
 
-#. Replace ``<WAZUH_INDEXER_IP_ADDRESS>`` and run the following command to check if the single-node or multi-node cluster is working correctly. 
-  
+#. Replace ``<WAZUH_INDEXER_IP_ADDRESS>`` and run the following command to check if the single-node or multi-node cluster is working correctly.
+
    .. code-block:: console
 
       # curl -k -u admin:admin https://<WAZUH_INDEXER_IP_ADDRESS>:9200/_cat/nodes?v
