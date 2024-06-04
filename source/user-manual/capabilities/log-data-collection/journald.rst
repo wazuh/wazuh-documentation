@@ -14,7 +14,7 @@ In this document, we cover the basic configuration needed to forward logs from t
 
 .. contents:: Content
    :local:
-   :depth: 1
+   :depth: 2
    :backlinks: none
 
 How this works
@@ -106,7 +106,7 @@ Perform the steps below on your monitored Ubuntu endpoint.
 
    -  The ``<filter field>`` is set to ``_SYSTEM_UNIT`` with the value ``ssh.service`` and ``cron.service`` to collect SSH and CRON logs.
    -  The ``<filter field>`` is set to ``PRIORITY`` to define a range of priority levels.
-   -  The priority level is set to ``[0-6]`` to forward logs that have a priority level within this range. Logs with a priority level higher than ``6`` will be ignored.
+   -  The priority level is set to ``[0-6]`` to forward logs that have a priority level within this range. Logs with a priority level higher than 6 will be ignored.
 
    .. note::
 
@@ -388,6 +388,7 @@ Perform the steps below on your monitored Ubuntu endpoint to forward Docker log 
 #. Modify and add the following line to the Wazuh agent configuration file ``/var/ossec/etc/ossec.conf``:
 
    .. code-block:: xml
+      :emphasize-lines: 4
 
       <localfile>
         <log_format>journald</log_format>
@@ -410,7 +411,7 @@ Perform the steps below on your Wazuh server.
 
 #. Add the following custom decoders to the local decoder ``/var/ossec/etc/decoders/local_decoder.xml`` file:
 
-   .. code-block: xml
+   .. code-block:: xml
 
       <decoder name="docker-service">
           <program_name type="pcre2">^\w{12}$</program_name>
@@ -466,3 +467,149 @@ Perform the steps below on your Wazuh server.
 Testing the configuration
 ~~~~~~~~~~~~~~~~~~~~~~~~~
 
+In this section, we proceed to install Docker on the monitored Ubuntu endpoint and execute various Docker commands to verify our configuration.
+
+#. Run the following command to install Docker packages:
+
+   .. code-block:: console
+
+      # curl -sSL https://get.docker.com/ | sh
+
+#. Start the Docker service:
+
+   .. code-block:: console
+
+      # systemctl start docker
+
+#. Pull a Docker image. In this case, we pulled the latest NGINX image:
+
+   .. code-block:: console
+
+      # docker pull nginx:latest
+
+#. Run the docker image with the following command:
+
+   .. code-block:: console
+
+      # docker run --log-driver=journald --name nginx_webserver -d -p 8080:80 nginx
+
+   Where:
+
+   -  ``--log-driver`` is set to ``journald`` to forward Docker logs to the journald service.
+   -  ``--name`` defines the Docker container name as ``nginx_werbserver``.
+
+#. Verify if the journald is configured for the NGINX Docker image:
+
+   .. code-block:: console
+
+      # docker inspect -f '{{.HostConfig.LogConfig.Type}}' nginx_webserver
+
+   .. code-block:: none
+      :class: output
+
+      journald
+
+#. Stop the Docker container:
+
+   .. code-block:: console
+
+      # docker stop nginx_webserver
+
+Visualizing the alerts
+~~~~~~~~~~~~~~~~~~~~~~
+
+The image below displays a security alert generated on the Wazuh dashboard when Docker started the container with ID ``ac64e69504d9``.
+
+.. thumbnail:: /images/manual/log-data-collection/container-started-alert.png
+   :title: Container started alert
+   :alt:  Container started alert
+   :align: center
+   :width: 80%
+
+.. code-block:: json
+
+   {
+     "timestamp": "2024-05-16T16:48:03.519+0000",
+     "rule": {
+       "level": 8,
+       "description": "Docker with container ID ac64e69504d9 just launched.",
+       "id": "111701",
+       "firedtimes": 3,
+       "mail": false,
+       "groups": [
+         "docker-service"
+       ]
+     },
+     "agent": {
+       "id": "001",
+       "name": "ubuntulab2204",
+       "ip": "172.28.8.167"
+     },
+     "manager": {
+       "name": "wazuhserver"
+     },
+     "id": "1715878083.4307",
+     "full_log": "May 16 16:48:02 ubuntulab2204 ac64e69504d9[761]: 2024/05/16 16:48:02 [notice] 1#1: start worker processes",
+     "predecoder": {
+       "program_name": "ac64e69504d9",
+       "timestamp": "May 16 16:48:02",
+       "hostname": "ubuntulab2204"
+     },
+     "decoder": {
+       "name": "docker-service"
+     },
+     "data": {
+       "log_timestamp": "2024/05/16 16:48:02",
+       "severity": "notice",
+       "message": "start worker processes"
+     },
+     "location": "journald"
+   }
+
+The image below displays a security alert generated on the Wazuh dashboard when the Docker service stops a container with container ID ``ac64e69504d9``.
+
+.. thumbnail:: /images/manual/log-data-collection/container-stopped-alert.png
+   :title: Container stopped alert
+   :alt:  Container stopped alert
+   :align: center
+   :width: 80%
+
+.. code-block:: json
+
+   {
+     "timestamp": "2024-05-16T16:50:01.574+0000",
+     "rule": {
+       "level": 12,
+       "description": "Docker with container ID ac64e69504d9 just shut down.",
+       "id": "111702",
+       "firedtimes": 3,
+       "mail": true,
+       "groups": [
+         "docker-service"
+       ]
+     },
+     "agent": {
+       "id": "001",
+       "name": "ubuntulab2204",
+       "ip": "172.28.8.167"
+     },
+     "manager": {
+       "name": "wazuhserver"
+     },
+     "id": "1715878201.4867",
+     "full_log": "May 16 16:50:01 ubuntulab2204 ac64e69504d9[761]: 2024/05/16 16:50:01 [notice] 29#29: gracefully shutting down",
+     "predecoder": {
+       "program_name": "ac64e69504d9",
+       "timestamp": "May 16 16:50:01",
+       "hostname": "ubuntulab2204"
+     },
+     "decoder": {
+       "name": "docker-service"
+     },
+     "data": {
+       "log_timestamp": "2024/05/16 16:50:01",
+       "severity": "notice",
+       "message": "gracefully shutting down"
+     },
+     "location": "journald"
+   }
