@@ -159,29 +159,35 @@ When upgrading a multi-node Wazuh manager cluster, run the upgrade in every node
 
    .. note:: Upgrading from Wazuh 4.2.x or lower creates the ``wazuh`` operating system user and group to replace ``ossec``. To avoid upgrade conflicts, make sure that the ``wazuh`` user and group are not present in your operating system.
 
-#. Upgrade the Wazuh manager to the latest version.
+Upgrading the Wazuh manager
+^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-   .. tabs::
+Upgrade the Wazuh manager to the latest version.
 
-      .. group-tab:: Yum
+.. tabs::
 
-         .. code-block:: console
+   .. group-tab:: Yum
 
-            # yum upgrade wazuh-manager|WAZUH_MANAGER_RPM_PKG_INSTALL|
+      .. code-block:: console
 
-      .. group-tab:: APT
+         # yum upgrade wazuh-manager|WAZUH_MANAGER_RPM_PKG_INSTALL|
 
-         .. code-block:: console
+   .. group-tab:: APT
 
-            # apt-get install wazuh-manager|WAZUH_MANAGER_DEB_PKG_INSTALL|
+      .. code-block:: console
 
-   .. note::
+         # apt-get install wazuh-manager|WAZUH_MANAGER_DEB_PKG_INSTALL|
 
-      If the ``/var/ossec/etc/ossec.conf`` configuration file was modified, it will not be replaced by the upgrade. You will therefore have to add the settings of the new capabilities manually. More information can be found in :doc:`/user-manual/index`.
+.. note::
 
-#. If upgrading from version 4.7 and earlier, edit ``/var/ossec/etc/ossec.conf`` to configure the new vulnerability detection module. 
+   If the ``/var/ossec/etc/ossec.conf`` configuration file was modified, it will not be replaced by the upgrade. You will therefore have to add the settings of the new capabilities manually. More information can be found in :doc:`/user-manual/index`.
 
-#. Add the new ``<vulnerability-detection>`` block and remove the old ``<vulnerability-detector>`` one if exists
+Configuring vulnerability detection
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+If upgrading from version 4.7 and earlier, edit ``/var/ossec/etc/ossec.conf`` to configure the new vulnerability detection module as follows.
+
+#. Add the new ``<vulnerability-detection>`` block and remove the old ``<vulnerability-detector>`` if it exists.
 
    .. include:: /_templates/installations/manager/configure_vulnerability_detection.rst
 
@@ -196,23 +202,25 @@ When upgrading a multi-node Wazuh manager cluster, run the upgrade in every node
       # /var/ossec/bin/wazuh-keystore -f indexer -k username -v <INDEXER_USERNAME>
       # /var/ossec/bin/wazuh-keystore -f indexer -k username -v <INDEXER_PASSWORD>
 
+Configuring Filebeat
+^^^^^^^^^^^^^^^^^^^^
+
 #. Download the Wazuh module for Filebeat:
 
-    .. code-block:: console
+   .. code-block:: console
 
       # curl -s https://packages.wazuh.com/4.x/filebeat/wazuh-filebeat-0.4.tar.gz | sudo tar -xvz -C /usr/share/filebeat/module
 
-
 #. Download the alerts template:
 
-    .. code-block:: console
+   .. code-block:: console
 
       # curl -so /etc/filebeat/wazuh-template.json https://raw.githubusercontent.com/wazuh/wazuh/v|WAZUH_CURRENT|/extensions/elasticsearch/7.x/wazuh-template.json
       # chmod go+r /etc/filebeat/wazuh-template.json
 
 #. Restart Filebeat:
 
-    .. include:: /_templates/installations/basic/elastic/common/enable_filebeat.rst
+   .. include:: /_templates/installations/basic/elastic/common/enable_filebeat.rst
 
 #. Upload the new Wazuh template and pipelines for Filebeat.
 
