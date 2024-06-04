@@ -179,7 +179,13 @@ When upgrading a multi-node Wazuh manager cluster, run the upgrade in every node
 
       If the ``/var/ossec/etc/ossec.conf`` configuration file was modified, it will not be replaced by the upgrade. You will therefore have to add the settings of the new capabilities manually. More information can be found in :doc:`/user-manual/index`.
 
-#. If upgrading from version 4.7 and earlier, edit ``/var/ossec/etc/ossec.conf`` to set the indexer connection for vulnerability detection. Make sure to configure the following settings block with your host indexer details.
+#. If upgrading from version 4.7 and earlier, edit ``/var/ossec/etc/ossec.conf`` to configure the new vulnerability detection module. 
+
+#. Add the new ``<vulnerability-detection>`` block and remove the old ``<vulnerability-detector>`` one if exists
+
+   .. include:: /_templates/installations/manager/configure_vulnerability_detection.rst
+
+#. Configure the indexer block with your host indexer details
 
    .. include:: /_templates/installations/manager/configure_indexer_connection.rst
 
