@@ -1,7 +1,7 @@
 .. Copyright (C) 2015, Wazuh, Inc.
 
 .. meta::
-  :description: The Wazuh server can collect logs via syslog from endpoints such as firewalls, switches and routers. Check out this section of the documentation to learn more.
+   :description: The Wazuh server can collect logs from the journald service. Check out this section of the documentation to learn more.
 
 Journald log collection
 =======================
