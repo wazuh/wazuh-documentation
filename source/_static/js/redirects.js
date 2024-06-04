@@ -115,10 +115,11 @@ newUrls['4.9'] = [
   '/development/coredump.html',
   '/development/packaging/generate-dashboard-package.html',
   '/development/packaging/generate-indexer-package.html',
-  'development/packaging/generate-deb-rpm-package.html',
+  '/development/packaging/generate-deb-rpm-package.html',
   '/cloud-security/amazon/services/supported-services/amazon-security-lake/index.html',
   '/cloud-security/amazon/services/supported-services/amazon-security-lake/security-lake-source.html',
   '/cloud-security/amazon/services/supported-services/amazon-security-lake/security-lake-subscriber.html',
+  '/user-manual/capabilities/log-data-collection/journald.html',
 ];
 
 /* Pages no longer available in 4.9 */
