@@ -208,13 +208,12 @@ Wazuh indexer users
 
    If you have custom users, add them to the ``internal_users.yml`` file. Otherwise, executing this procedure deletes them.
 
-Close your Wazuh dashboard session
-..................................
+Closing your Wazuh dashboard session
+....................................
 
-Before starting the password change process, it is recommended logout of your Wazuh dashboard session.
+Before starting the password change process, we recommend to log out of your Wazuh dashboard session.
 
-If you do not logout, errors may occur when accessing Wazuh after changing user passwords, as long as the cookies that keep the session open last.
-
+If you don't log out, persistent session cookies might cause errors when accessing Wazuh after changing user passwords.
 
 Setting a new hash
 ..................
@@ -350,7 +349,7 @@ Applying the changes
 
       $ bash /usr/share/wazuh-indexer/plugins/opensearch-security/tools/securityadmin.sh -cd /usr/share/wazuh-indexer/opensearch-security/ -nhnv -cacert  $CACERT -cert $CERT -key $KEY -p 9200 -icl -h $NODE_NAME
 
-#. Delete all Wazuh manager pods, so the components' credentials are updated.
+#. Delete all Wazuh manager pods to update the component credentials.
 
    .. code-block:: console
 

@@ -266,14 +266,12 @@ Wazuh indexer users
 
    If you have custom users, add them to the ``internal_users.yml`` file. Otherwise, executing this procedure deletes them.
 
+Closing your Wazuh dashboard session
+....................................
 
-Close your Wazuh dashboard session
-..................................
+Before starting the password change process, we recommend to log out of your Wazuh dashboard session.
 
-Before starting the password change process, it is recommended logout of your Wazuh dashboard session.
-
-If you do not logout, errors may occur when accessing Wazuh after changing user passwords, as long as the cookies that keep the session open last.
-
+If you don't log out, persistent session cookies might cause errors when accessing Wazuh after changing user passwords.
 
 Setting a new hash
 ..................
