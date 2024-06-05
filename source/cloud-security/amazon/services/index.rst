@@ -1,24 +1,20 @@
 .. Copyright (C) 2015, Wazuh, Inc.
 
 .. meta::
-  :description: The Wazuh for AWS module provides capabilities for monitoring AWS-based services. Learn how to install and configure it to monitor Amazon instances and services.  
+   :description: The Wazuh module for AWS enables monitoring of various AWS services by collecting logs of these services and analyzing the logs with the Wazuh ruleset. Learn more in this section of the documentation.
   
-.. _amazon_services:
-
 Monitoring AWS based services
 =============================
 
+The Wazuh module for AWS enables monitoring of various AWS services by collecting logs of these services and analyzing the logs with the Wazuh ruleset. This allows Wazuh to trigger alerts based on EC2 instance configuration, unauthorized behavior of users and systems, data stored on S3, and more. Thereby providing detailed information about activities within the AWS infrastructure. 
 
-The Wazuh module for AWS (``aws-s3``) provides capabilities to monitor AWS based services. Each of the sections below contains detailed instructions to configure and set up all of the supported services, and also the required Wazuh configuration to collect the logs.
+Each section below contains detailed instructions to configure and set up all of the supported AWS services, and also the required Wazuh configuration to collect logs from these services. It also includes steps to resolve common issues that you may encounter. 
 
-This module requires dependencies in order to work, and also the right credentials in order to access the services. Take a look at the :doc:`Amazon prerequisites </cloud-security/amazon/services/prerequisites/index>` section before proceeding.
+This module requires several dependencies to work, and also the right credentials to access the AWS services. Take a look at the :doc:`prerequisites <prerequisites/index>` section before proceeding.
 
+.. toctree::
+   :maxdepth: 1
 
-.. topic:: Contents
-
-  .. toctree::
-    :maxdepth: 1
-
-    prerequisites/index
-    supported-services/index
-    troubleshooting
+   prerequisites/index
+   supported-services/index
+   troubleshooting

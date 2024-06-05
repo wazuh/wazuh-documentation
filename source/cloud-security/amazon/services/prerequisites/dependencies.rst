@@ -1,19 +1,14 @@
 .. Copyright (C) 2015, Wazuh, Inc.
 
 .. meta::
-  :description: Learn about the required dependencies for using the AWS integration in a Wazuh agent.
-
-.. _amazon_dependencies:
+   :description: In this section, we outline the dependencies needed to configure the integration on a Wazuh agent installed on a Linux endpoint.
 
 Installing dependencies
 =======================
 
-.. note::
-  The integration with AWS S3 can be configured in the Wazuh manager (which also behaves as an agent) or directly in a Wazuh agent. This choice merely depends on how you decide to access your AWS infrastructure in your environment.
+The integration of AWS services with Wazuh can be configured on the Wazuh server or the Wazuh agent. This integration requires that certain dependencies be installed on the Wazuh agent. By default, the Wazuh server has all the dependencies installed. 
 
-.. warning::
-  The Wazuh manager includes all dependencies installed, these steps are only necessary when configuring the integration in a Wazuh agent.
-
+We outline the dependencies needed to configure the integration on a Wazuh agent installed on a Linux endpoint.
 
 Python
 ------

@@ -1,25 +1,17 @@
 .. Copyright (C) 2015, Wazuh, Inc.
 
 .. meta::
-  :description: Check out the prerequisites to monitor AWS-based services with Wazuh. See how to configure an S3 Bucket and AWS credentials, and how to install dependencies.
+   :description: In this section, we outline the requirements for setting up Wazuh to retrieve logs from various AWS services.
   
-.. _amazon_prerequisites:
-
 Prerequisites
 =============
 
-.. meta::
-  :description: Learn how to install and configure the Wazuh module to monitor Amazon instances and services.
-
-This module requires dependencies in order to work, and also the right credentials in order to access the services. Take a look at the elements of this section before proceeding.
-
-.. note::
-  Bucket encryption and all types of compression are supported, except ``Snappy``.
+In this section, we outline the requirements for setting up Wazuh to retrieve logs from various AWS services.
 
 .. toctree::
-  :maxdepth: 1
+   :maxdepth: 2
 
-  S3-bucket
-  credentials
-  dependencies
-  considerations
+   dependencies
+   S3-bucket
+   credentials
+   considerations
