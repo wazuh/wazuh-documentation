@@ -5,73 +5,21 @@
 Installing dependencies
 =======================
 
-The Wazuh module for Google Cloud Pub/Sub and the Wazuh module for Google Cloud Storage buckets can be configured on both the Wazuh server and the monitored endpoint. This choice depends on where you want to reach the Google Cloud services. Perform the steps below to install Python and Pip on the endpoint you are performing the integration.
+.. |service| replace:: GCP
 
-.. warning::
-   
-   The Wazuh server includes all dependencies installed; the following steps are only necessary when configuring the modules on a monitored endpoint.
+.. include:: /_templates/cloud/notes.rst
 
 Python
 ------
 
-The Wazuh module for Google Cloud Pub/Sub and the Wazuh module for Google Cloud Storage buckets require `Python 3 <https://www.python.org/>`__. It's compatible with
-`Python |PYTHON_CLOUD_CONTAINERS_MIN|–|PYTHON_CLOUD_CONTAINERS_MAX| <https://www.python.org/downloads/>`_. While later Python versions should work as well, we can't assure they are compatible.
+.. |py_cloud_cont_min| replace:: |PYTHON_CLOUD_CONTAINERS_MIN|
+.. |py_cloud_cont_max| replace:: |PYTHON_CLOUD_CONTAINERS_MAX|
 
-Run the following command to install Python 3 if you do not already have it installed:
+.. include:: /_templates/cloud/python_installation.rst
 
-.. tabs::
+.. |module_script| replace:: ``/var/ossec/wodles/gcloud/gcloud``
 
-   .. group-tab:: Yum
-
-      .. code-block:: console
-
-         $ sudo yum update && yum install python3
-
-   .. group-tab:: APT
-
-      .. code-block:: console
-
-         $ sudo apt-get update && apt-get install python3
-
-Run the command below to install Pip, the Python package manager. Most UNIX distributions have this tool available in their software repositories by default.
-
-Perform the next steps if you do not already have it installed.
-
-.. tabs::
-
-   .. group-tab:: Yum
-
-      .. code-block:: console
-
-         $ sudo yum update && yum install python3-pip
-
-   .. group-tab:: APT
-
-      .. code-block:: console
-
-         $ sudo apt-get update && apt-get install python3-pip
-
-If you already have Python3 and Pip installed, perform the following steps to upgrade your Pip version. We recommend using a pip version greater than or equal to 19.3 to ease the installation of the required dependencies.
-
-.. tabs::
-
-   .. group-tab:: Python 3.8–3.10
-
-      .. code-block:: console
-
-         $ sudo pip3 install --upgrade pip
-
-   .. group-tab:: Python 3.11
-
-      .. code-block:: console
-
-         $ sudo pip3 install --upgrade pip --break-system-packages
-      
-      .. note::
-
-         This command modifies the default externally managed Python environment. See the `PEP 668 <https://peps.python.org/pep-0668/>`__ description for more information.
-         
-         To prevent the modification, you can run ``pip3 install --upgrade pip`` within a virtual environment. You must update the gcloud ``var/ossec/wodles/gcloud/gcloud`` module shebang with your virtual environment interpreter. For example: ``#!</path/to/your/virtual/environment>/bin/python3``.
+.. include:: /_templates/cloud/pip_installation.rst
 
 Google Cloud pip dependencies
 -----------------------------

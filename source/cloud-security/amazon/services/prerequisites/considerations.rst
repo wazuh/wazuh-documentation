@@ -115,29 +115,26 @@ The following example of a ``~/.aws/config`` file sets the supported configurati
    max_attempts = 5
    retry_mode = standard
 
-   dev.s3.max_concurrent_requests = 10
-   dev.s3.max_queue_size = 1000
-   dev.s3.multipart_threshold = 64MB
-   dev.s3.multipart_chunksize = 16MB
-   dev.s3.max_bandwidth = 50MB/s
-   dev.s3.use_accelerate_endpoint = true
-   dev.s3.addressing_style = virtual
+   s3.max_concurrent_requests = 10
+   s3.max_queue_size = 1000
+   s3.multipart_threshold = 64MB
+   s3.multipart_chunksize = 16MB
+   s3.max_bandwidth = 50MB/s
+   s3.use_accelerate_endpoint = true
+   s3.addressing_style = virtual
 
-   dev.proxy.host = proxy.example.com
-   dev.proxy.port = 8080
-   dev.proxy.username = your-proxy-username
-   dev.proxy.password = your-proxy-password
+   proxy.host = proxy.example.com
+   proxy.port = 8080
+   proxy.username = your-proxy-username
+   proxy.password = your-proxy-password
 
-   dev.proxy.ca_bundle = /path/to/ca_bundle.pem
-   dev.proxy.client_cert = /path/to/client_cert.pem
-   dev.proxy.use_forwarding_for_https = true
+   proxy.ca_bundle = /path/to/ca_bundle.pem
+   proxy.client_cert = /path/to/client_cert.pem
+   proxy.use_forwarding_for_https = true
 
    signature_version = s3v4
 
-.. note::
-   All ``s3`` and ``proxy`` configuration sections must start with ``[profile <PROFILE_NAME>]``.
-
-To configure multiple profiles for the integration, declare each profile section in ``~/.aws/config`` with ``[profile <PROFILE_NAME>]``. If you don't declare a profile section in this configuration file, Wazuh uses the ``default`` profile.
+To configure multiple profiles for the integration, declare each profile section in ``~/.aws/config`` with ``[profile <PROFILE-NAME>]``. If you don't declare a profile section in this configuration file, Wazuh uses the ``default`` profile.
 
 Configuring multiple services
 -----------------------------

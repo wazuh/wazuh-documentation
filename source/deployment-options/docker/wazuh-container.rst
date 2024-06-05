@@ -44,7 +44,7 @@ Single-node Deployment
         
       .. code-block:: yaml
         
-         # Wazuh App Copyright (C) 2021 Wazuh Inc. (License GPLv2)
+         # Wazuh App Copyright (C) 2017 Wazuh Inc. (License GPLv2)
          version: '3'
 
          services:
@@ -144,7 +144,7 @@ Multi-node deployment
       
       .. code-block:: yaml
       
-         # Wazuh App Copyright (C) 2021 Wazuh Inc. (License GPLv2)
+         # Wazuh App Copyright (C) 2017 Wazuh Inc. (License GPLv2)
          version: '3'
 
          services:
@@ -319,6 +319,10 @@ Setting a new hash
 
 Setting the new password
 ........................
+
+.. warning::
+
+   Don't use the ``$`` or ``&`` characters in your new password. These characters can cause errors during deployment.
 
 #. Open  the ``docker-compose.yml`` file. Change all occurrences of the old password with the new one. For example, for a single-node deployment:
 

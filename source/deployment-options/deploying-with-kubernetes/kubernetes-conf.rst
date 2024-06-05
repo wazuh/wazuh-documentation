@@ -79,7 +79,7 @@ The Wazuh indexer pod ingests events received from Filebeat.
 
 **Wazuh dashboard**
 
-The Wazuh dashboard pod lets you visualize your Wazuh indexer data, along with other features such as the Wazuh app.
+The Wazuh dashboard pod lets you visualize your Wazuh indexer data, along with Wazuh agents information and server configuration.
 
 +--------------------------------------+-------------+
 | Image                                | Controller  |
