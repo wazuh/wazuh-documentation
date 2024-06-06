@@ -173,6 +173,7 @@ Packages
 - `#2792 <https://github.com/wazuh/wazuh-packages/pull/2792>`_ Improved certificates generation output when using the Wazuh Installation Assistant and the Wazuh Certs Tool.
 - `#2891 <https://github.com/wazuh/wazuh-packages/pull/2891>`_ Skipped certificate validation for CentOS 5 package generation.
 - `#2890 <https://github.com/wazuh/wazuh-packages/pull/2890>`_ Updated the file permissions of vulnerability detection-related directories.
+- `#2966 <https://github.com/wazuh/wazuh-packages/pull/2966>`_ Added Ubuntu 24 support to the Wazuh installation assistant.
 
 Resolved issues
 ---------------
@@ -187,6 +188,7 @@ Reference                                                          Description
 ==============================================================     =============
 `#17886 <https://github.com/wazuh/wazuh/pull/17886>`__             Updated cluster connection cleanup to remove temporary files when the connection between a worker and a master is broken.
 `#23371 <https://github.com/wazuh/wazuh/pull/23371>`__             Added a mechanism to prevent cluster errors from an expected wazuh-db exception.
+`#23216 <https://github.com/wazuh/wazuh/pull/23216>`__             Fixed a race condition when creating agent database files from a template.
 ==============================================================     =============
 
 Agent
