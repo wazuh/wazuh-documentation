@@ -104,123 +104,102 @@ The output of the test provide the following result:
            mail: 'False'
    **Alert to be generated.
 
-..
-   .. _json_decoder_example_3.3:
+.. _json_decoder_example_3.3:
 
-   Let's  see another example where we use the JSON decoder to extract a JSON included as a part of an incoming log. This is possible thanks to the new attribute ``offset`` introduced to the decoder options, which allows discarding some parts of the input string.
+Offset
+------
 
-   If we use this input log:
+The ``offset`` attribute in the Wazuh JSON decoder enables the extraction of JSON data included within an incoming log by discarding certain parts of the input string. This functionality proves useful when dealing with logs that contain additional metadata or formatting before the JSON payload. For instance, if we receive a log containing JSON data embedded within a larger string, we can use the ``offset`` attribute to discard the preceding text and focus solely on the JSON content.
 
-   ::
+Let’s consider the following log entry which includes player information within a string, preceded by timestamp and program name:
 
-       2018 Apr 04 13:11:52 nba_program: this_is_an_example: " player_information: "{ "name": "Stephen", "surname": "Curry", "team": "Golden State Warriors", "number": 30, "position": "point guard"}
+.. code-block:: none
 
-   The decoder declaration using that new feature would be the following:
+   2018 Apr 04 13:11:52 nba_program: this_is_an_example: " player_information: "{ "name": "Stephen", "surname": "Curry", "team": "Golden State Warriors", "number": 30, "position": "point guard"}
 
-   .. code-block:: xml
+By utilizing the JSON decoder with the ``offset`` attribute, we can efficiently extract and process the JSON data for further analysis. The decoder declaration using the ``offset`` attribute would be as follows:
 
-       <decoder name="raw_json">
-           <program_name>nba_program</program_name>
-           <prematch>player_information: "</prematch>
-           <plugin_decoder offset="after_prematch">JSON_Decoder</plugin_decoder>
-       </decoder>
+.. code-block:: xml
 
-   The JSON decoder will extract the fields contained in the JSON event as dynamic fields, taking into account from the end of the prematch text. The output of the *wazuh-logtest* is the following:
+   <decoder name="raw_json">
+       <program_name>nba_program</program_name>
+       <prematch>player_information: "</prematch>
+       <plugin_decoder offset="after_prematch">JSON_Decoder</plugin_decoder>
+   </decoder>
 
-   .. code-block:: none
-       :class: output
+The JSON decoder extracts the fields contained in the JSON event as :ref:`dynamic fields <dynamic_fields_dynamic_decoders>`, considering the end of the prematch text.
 
-       Type one log per line
+When, testing the log sample with ``/var/ossec/bin/wazuh-logtest`` we obtain the following output:
 
-       2018 Apr 04 13:11:52 nba_program: this_is_an_example: " player_information: "{ "name": "Stephen", "surname": "Curry", "team": "Golden State Warriors", "number": 30, "position": "point guard"}
+.. code-block:: none
+   
+   Type one log per line
 
-       **Phase 1: Completed pre-decoding.
-               full event: '2018 Apr 04 13:11:52 nba_program: this_is_an_example: " player_information: "{ "name": "Stephen", "surname": "Curry", "team": "Golden State Warriors", "number": 30, "position": "point guard"}'
-               timestamp: '2018 Apr 04 13:11:52'
-               program_name: 'nba_program'
+   2018 Apr 04 13:11:52 nba_program: this_is_an_example: " player_information: "{ "name": "Stephen", "surname": "Curry", "team": "Golden State Warriors", "number": 30, "position": "point guard"}
 
-       **Phase 2: Completed decoding.
-               name: 'raw_json'
-               name: 'Stephen'
-               number: '30'
-               position: 'point guard'
-               surname: 'Curry'
-               team: 'Golden State Warriors'
+   **Phase 1: Completed pre-decoding.
+           full event: '2018 Apr 04 13:11:52 nba_program: this_is_an_example: " player_information: "{ "name": "Stephen", "surname": "Curry", "team": "Golden State Warriors", "number": 30, "position": "point guard"}'
+           timestamp: '2018 Apr 04 13:11:52'
+           program_name: 'nba_program'
 
-   As we can see, the JSON decoder is not affected by any more data after a valid JSON object.
+   **Phase 2: Completed decoding.
+           name: 'raw_json'
+           name: 'Stephen'
+           number: '30'
+           position: 'point guard'
+           surname: 'Curry'
+           team: 'Golden State Warriors'
 
-   In addition, we could define a rule for these raw events decoded:
+As we can see, the JSON decoder ignores any data after a valid JSON object, ensuring accurate extraction of JSON fields.
 
-   .. code-block:: xml
+Mixing of plugin decoders with regular expressions
+--------------------------------------------------
 
-       <group name="local,">
+Another new capability is the ability to combine :ref:`plugin decoders <plugin_decoder>` with regular expressions.
 
-         <rule id="100002" level="5">
-           <decoded_as>raw_json</decoded_as>
-           <description>Raw JSON event</description>
-         </rule>
+Consider the following incoming log:
 
-       </group>
+.. code-block:: none
 
-   Finally, the result retrieved by *wazuh-logtest* would be:
+   2018 Jun 08 13:11:52 nba_email_db: json_data: { "name": "Stephen", "surname": "Curry", "email": "curry@gmail.com"}
 
-   .. code-block:: none
-       :class: output
+We can set several child decoders from a parent, specifying a plugin decoder as before, and also another one including a regular expression. For example, the following ones:
 
-       **Phase 3: Completed filtering (rules).
-               id: '100002'
-               level: '5'
-               description: 'Raw JSON event'
-               groups: '['local']'
-               firedtimes: '1'
-               mail: 'False'
-       **Alert to be generated.
+.. code-block:: xml
 
-   Another new feature is the ability of mixing plugin decoders with regex expressions, take a look in the following incoming log:
+   <decoder name="json_parent">
+       <program_name>nba_email_db</program_name>
+   </decoder>
 
-   .. code-block:: none
-       :class: output
+   <decoder name="json_child">
+       <parent>json_parent</parent>
+       <prematch>json_data: </prematch>
+       <plugin_decoder offset="after_prematch">JSON_Decoder</plugin_decoder>
+   </decoder>
 
-       2018 Jun 08 13:11:52 nba_email_db: json_data: { "name": "Stephen", "surname": "Curry", "email": "curry@gmail.com"}
+   <decoder name="json_child">
+       <parent>json_parent</parent>
+       <regex>@(\S+)"</regex>
+       <order>email_domain</order>
+   </decoder>
 
-   We can set several children decoders from a parent specifying a plugin decoder as before, and also another one including a regex expression. For example, the following ones:
+When, testing the log sample with ``/var/ossec/bin/wazuh-logtest``, we can observe the decoded fields by the JSON decoder, as well as the matched field from the regex expression:
 
-   .. code-block:: xml
+.. code-block:: none
 
-       <decoder name="json_parent">
-           <program_name>nba_email_db</program_name>
-       </decoder>
+   Type one log per line
 
-       <decoder name="json_child">
-           <parent>json_parent</parent>
-           <prematch>json_data: </prematch>
-           <plugin_decoder offset="after_prematch">JSON_Decoder</plugin_decoder>
-       </decoder>
+   2018 Jun 08 13:11:52 nba_email_db: json_data: { "name": "Stephen", "surname": "Curry", "email": "curry@gmail.com"}
 
-       <decoder name="json_child">
-           <parent>json_parent</parent>
-           <regex>@(\S+)"</regex>
-           <order>email_domain</order>
-       </decoder>
+   **Phase 1: Completed pre-decoding.
+           full event: '2018 Jun 08 13:11:52 nba_email_db: json_data: { "name": "Stephen", "surname": "Curry", "email": "curry@gmail.com"}'
+           timestamp: '2018 Jun 08 13:11:52'
+           program_name: 'nba_email_db'
 
-   The output of the *wazuh-logtest* tool shows the decoded fields by the JSON decoder, as well as the matched field from the regex expression:
-
-   .. code-block:: none
-       :class: output
-
-       Type one log per line
-
-       2018 Jun 08 13:11:52 nba_email_db: json_data: { "name": "Stephen", "surname": "Curry", "email": "curry@gmail.com"}
-
-       **Phase 1: Completed pre-decoding.
-               full event: '2018 Jun 08 13:11:52 nba_email_db: json_data: { "name": "Stephen", "surname": "Curry", "email": "curry@gmail.com"}'
-               timestamp: '2018 Jun 08 13:11:52'
-               program_name: 'nba_email_db'
-
-       **Phase 2: Completed decoding.
-               name: 'json_parent'
-               parent: 'json_parent'
-               email: 'curry@gmail.com'
-               email_domain: 'gmail.com'
-               name: 'Stephen'
-               surname: 'Curry'
+   **Phase 2: Completed decoding.
+           name: 'json_parent'
+           parent: 'json_parent'
+           email: 'curry@gmail.com'
+           email_domain: 'gmail.com'
+           name: 'Stephen'
+           surname: 'Curry'
