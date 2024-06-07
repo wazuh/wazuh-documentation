@@ -239,8 +239,8 @@ Resolved issues
 
 This release resolves known issues as the following:
 
-Wazuh manager
-^^^^^^^^^^^^^
+Manager
+^^^^^^^
 
 ==============================================================     =============
 Reference                                                          Description
