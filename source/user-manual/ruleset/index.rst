@@ -59,7 +59,6 @@ In the repository, you will find:
 
       decoders/index
       rules/index
-      rules-classification
       ruleset-xml-syntax/index
       testing
       cdb-list

@@ -115,4 +115,4 @@ The ruleset folder structure is shown below:
 
 Inside the ``ruleset/`` folder you will find all the common rules and decoders. All files inside this folder **will be overwritten** or modified in the Wazuh update process, so please do not edit files or add custom files in this folder.
 
-If we need to perform some :ref:`custom <ruleset_custom>` changes, we will use the ``etc/`` folder. You can add here your own decoders/rules files or use the default ``local_decoder.xml`` and ``local_rules.xml`` files.
+If we need to perform some :doc:`custom <rules/custom>` changes, we will use the ``etc/`` folder. You can add here your own decoders/rules files or use the default ``local_decoder.xml`` and ``local_rules.xml`` files.

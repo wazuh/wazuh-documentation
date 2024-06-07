@@ -161,6 +161,7 @@ newUrls['4.7'] = [
   '/user-manual/ruleset/decoders/sibling-decoders.html',
   '/user-manual/ruleset/rules/custom.html',
   '/user-manual/ruleset/rules/index.html',
+  '/user-manual/ruleset/rules/rules-classification.html',
 ];
 
 /* Pages no longer available in 4.7 */
@@ -234,6 +235,7 @@ removedUrls['4.7'] = [
   '/user-manual/ruleset/dynamic-fields.html',
   '/user-manual/ruleset/json-decoder.html',
   '/user-manual/ruleset/ruleset-xml-syntax/sibling-decoders.html',
+  '/user-manual/ruleset/rules-classification.html',
   '/user-manual/certificates.html',
   '/cloud-security/gcp/prerequisites/considerations.html',
   '/cloud-security/gcp/prerequisites/pubsub.html',
@@ -647,6 +649,11 @@ redirections.push(
     'target': ['4.6=>4.7', '4.7=>4.6'],
     '4.6': '/cloud-service/getting-started/register-agents.html',
     '4.7': '/cloud-service/getting-started/enroll-agents.html',
+  },
+  {
+    'target': ['4.6=>4.7', '4.7=>4.6'],
+    '4.6': '/user-manual/ruleset/rules-classification.html',
+    '4.7': '/user-manual/ruleset/rules/rules-classification.html',
   },
 );
 
