@@ -156,11 +156,6 @@ This block configures the credentials used for authenticating with the Microsoft
 
 .. warning:: In the case of an invalid configuration, a warning message will be generated in the log file.
 
-.. note::
-  
-   Multi-tenant is not supported. You can only configure one block of ``api_auth``.
-
-
 +----------------------------------------+----------------------------------------------+
 | Options                                | Allowed values                               |
 +========================================+==============================================+
