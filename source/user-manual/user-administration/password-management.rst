@@ -137,7 +137,7 @@ If you use the tool in an all-in-one deployment, it automatically updates the pa
     INFO: The password for user logstash is SUbk4KTmLl*geQbUg0c5tyfwahjDMhx5
     INFO: The password for user readall is ?w*Itj1Lgz.5w.C7vOw0Kxi7G94G8bG*
     INFO: The password for user snapshotrestore is Z6UXgM8Sr0bfV.i*6yPPEUY3H6Du2rdz
-    WARNING: Wazuh indexer passwords changed. Remember to update the password in the Wazuh dashboard, Wazuh server, and Filebeat nodes if necessary, and restart the services.
+    WARNING: Wazuh indexer passwords changed. Remember to update the password in the Wazuh dashboard, Wazuh server, and Filebeat nodes if necessary.
 
 
 If you use it in a distributed environment, you have to update the password on other components. See :ref:`Changing the passwords in a distributed environment <passwords_distributed>` for more details.
@@ -153,7 +153,7 @@ On an all-in-one deployment, use options ``-a``, ``-au`` and ``-ap`` to also cha
       :class: output
       :emphasize-lines: 1,2,3,9,10
 
-      INFO: The new password for Filebeat is kwd139yG?YoIK?lRnqcXQ4R4gJDlAqKn
+      INFO: The new password for Filebeat is Wkw+b2rM6BEOwUmGfr*m*i1ithWw.dg2
       INFO: The password for user admin is Wkw+b2rM6BEOwUmGfr*m*i1ithWw.dg2
       INFO: The password for user kibanaserver is 5Y0lIfCwmjkus9nWAAVxMInI+Eth25hr
       INFO: The password for user kibanaro is kJG7fHX18.UJIZoNip5nDo*34DN+cGBL
@@ -231,7 +231,7 @@ Follow the instructions below to change the passwords for all the Wazuh indexer 
 
       INFO: The password for Wazuh API user wazuh is ivLOfmj7.jL6*7Ev?UJoFjrkGy9t6Je.
       INFO: The password for Wazuh API user wazuh-wui is fL+f?sFRPEv5pYRE559rqy9b6G4Z5pVi
-      INFO: The new password for Filebeat is kwd139yG?YoIK?lRnqcXQ4R4gJDlAqKn
+      INFO: The new password for Filebeat is Wkw+b2rM6BEOwUmGfr*m*i1ithWw.dg2
 
    .. note:: Repeat step 2 on `every Wazuh server node`.
 
@@ -245,7 +245,7 @@ Follow the instructions below to change the passwords for all the Wazuh indexer 
    .. code-block:: console
       :class: output
 
-      INFO: The password for the kibanaserver user in the dashboard has been updated to 'EKf49pm3QtqszKgWiz.HRfEc5adN7QFY' necessary, and restart the services.
+      INFO: The password for the kibanaserver user in the dashboard has been updated to 'EKf49pm3QtqszKgWiz.HRfEc5adN7QFY' necessary.
 
 #. On your `Wazuh dashboard node`, run the following command to update the `wazuh-wui` password in the Wazuh dashboard keystore. Replace ``<WAZUH-WUI_PASSWORD>`` with the random password generated in the second step.
 
@@ -256,6 +256,6 @@ Follow the instructions below to change the passwords for all the Wazuh indexer 
    .. code-block:: console
       :class: output
 
-      INFO: Updated wazuh-wui user password in wazuh dashboard to 'r7jH.SQ4SMqbzVXcbJrkiyrwvWd+G*w8'. Remember to restart the service.
+      INFO: Updated wazuh-wui user password in wazuh dashboard to 'r7jH.SQ4SMqbzVXcbJrkiyrwvWd+G*w8'.
 
    .. note:: To change the password of the `wazuh-wui` user in the `Wazuh dashboard node` the option ``-A, --api`` option is required.
