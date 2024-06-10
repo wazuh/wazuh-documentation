@@ -2,7 +2,7 @@
 .. Original content from the OSSEC documentation, available at http://www.ossec.net/docs/manual/rules-decoders/rule-levels.html
 
 .. meta::
-   :description: 
+   :description: Wazuh ules are categorized into multiple levels. Learn more in this section of the documentation.
 
 Rules classification
 ====================

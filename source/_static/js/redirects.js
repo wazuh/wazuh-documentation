@@ -159,6 +159,7 @@ newUrls['4.7'] = [
   '/user-manual/ruleset/decoders/index.html',
   '/user-manual/ruleset/decoders/json-decoder.html',
   '/user-manual/ruleset/decoders/sibling-decoders.html',
+  '/user-manual/ruleset/rules/default.html',
   '/user-manual/ruleset/rules/custom.html',
   '/user-manual/ruleset/rules/index.html',
   '/user-manual/ruleset/rules/rules-classification.html',

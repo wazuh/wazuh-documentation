@@ -8,6 +8,8 @@ Dynamic fields
 
 Dynamic fields are additional fields extracted from log data during the decoding process. Unlike predefined fields, dynamic fields are not limited in number and can vary depending on the content of the log message. These fields capture specific information from logs, enriching the data available for analysis and detection.
 
+.. _traditional_decoders:
+
 Traditional decoders
 --------------------
 
