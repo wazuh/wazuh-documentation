@@ -75,7 +75,7 @@ In most systems, auditd includes a rule to skip processing of every audit rule b
  
       # auditctl -l | grep task
  
-#. If the output displays the ``-a never,task`` rule, remove it in the audit rules file ``/etc/audit/rules.d/audit.rules``.
+#. If the output displays the ``-a never,task`` rule, remove it from the audit rules file located at ``/etc/audit/rules.d/audit.rules``.
  
 #. After that, restart auditd and Wazuh agent to apply the changes:
  
