@@ -54,5 +54,5 @@ This guide shows how to migrate data from Opendistro to Wazuh indexer in Docker 
 
    .. code-block:: console
 
-      # docker-compose -f generate-indexer-certs.yml run --rm generator
+      # docker-compose -f generate-certs.yml run --rm generator
       # docker-compose up -d

@@ -33,7 +33,7 @@ Single-node Deployment
     
       We have created a Docker image to automate certificate generation using the Wazuh certs gen tool.
 
-      If your system uses a proxy, add the following to the ``generate-indexer-certs.yml`` file. If not, skip this particular step:
+      If your system uses a proxy, add the following to the ``generate-certs.yml`` file. If not, skip this particular step:
         
       .. code-block:: yaml
         
@@ -61,7 +61,7 @@ Single-node Deployment
       
          .. code-block:: console
          
-            # docker-compose -f generate-indexer-certs.yml run --rm generator
+            # docker-compose -f generate-certs.yml run --rm generator
 
       This saves the certificates into the ``config/wazuh_indexer_ssl_certs`` directory.
 
@@ -133,7 +133,7 @@ Multi-node deployment
 
       We have created a Docker image to automate certificate generation using the Wazuh certs gen tool.
 
-      If your system uses a proxy, add the following to the ``generate-indexer-certs.yml`` file. If not, skip this particular step:
+      If your system uses a proxy, add the following to the ``generate-certs.yml`` file. If not, skip this particular step:
       
       .. code-block:: yaml
       
@@ -161,7 +161,7 @@ Multi-node deployment
         
       .. code-block:: console
 
-         # docker-compose -f generate-indexer-certs.yml run --rm generator
+         # docker-compose -f generate-certs.yml run --rm generator
 
       This saves the certificates into the ``config/wazuh_indexer_ssl_certs`` directory.
 
