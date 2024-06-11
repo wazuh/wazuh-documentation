@@ -176,106 +176,38 @@ Packages
 -  `#2891 <https://github.com/wazuh/wazuh-packages/pull/2891>`__ Skipped certificate validation for CentOS 5 package generation.
 -  `#2890 <https://github.com/wazuh/wazuh-packages/pull/2890>`__ Updated the file permissions of vulnerability detection-related directories.
 -  `#2966 <https://github.com/wazuh/wazuh-packages/pull/2966>`__ Added Ubuntu 24 support to the Wazuh installation assistant.
-
-Testing
-^^^^^^^
-
--  `#5432 <https://github.com/wazuh/wazuh-qa/pull/5432>`__ Added functionality to obtain metrics from the dashboard.
--  `#5090 <https://github.com/wazuh/wazuh-qa/pull/5090>`__ Added functionality to obtain statistics and metrics from the indexer.
--  `#5092 <https://github.com/wazuh/wazuh-qa/pull/5092>`__ Added support for the installation/uninstallation of npm packages.
--  `#4675 <https://github.com/wazuh/wazuh-qa/pull/4675>`__ Added AWS Custom Buckets integration tests.
--  `#4878 <https://github.com/wazuh/wazuh-qa/pull/4878>`__ Added vulnerability detection end to end tests.
--  `#4868 <https://github.com/wazuh/wazuh-qa/pull/4868>`__ Refactored Syscollector message generation in Agent Simulator.
--  `#4642 <https://github.com/wazuh/wazuh-qa/pull/4642>`__ Migrated Wazuh Ansible Roles.
--  `#4015 <https://github.com/wazuh/wazuh-qa/pull/4015>`__ Added system test for global group hash.
--  `#4485 <https://github.com/wazuh/wazuh-qa/pull/4485>`__ Added tests for new FIM audit buffer option.
--  `#4146 <https://github.com/wazuh/wazuh-qa/pull/4146>`__ Added tests for checking agent status upon ungraceful closure.
--  `#4143 <https://github.com/wazuh/wazuh-qa/pull/4143>`__ Added agent synchronization testing after group deleting.
--  `#4675 <https://github.com/wazuh/wazuh-qa/pull/4675>`__ Added test for AWS Custom Logs.
--  `#5364 <https://github.com/wazuh/wazuh-qa/pull/5364>`__ Fixed workload benchmark plots.
--  `#5376 <https://github.com/wazuh/wazuh-qa/pull/5376>`__ Migrated E2E vulnerability detection test packages to S3 repository.
--  `#5350 <https://github.com/wazuh/wazuh-qa/pull/5350>`__ Included new package information from ``wdb``.
--  `#5287 <https://github.com/wazuh/wazuh-qa/pull/5287>`__ Included additional vulnerability detection E2E tests.
--  `#5174 <https://github.com/wazuh/wazuh-qa/pull/5174>`__ Changed macOS packages with new ones that generate vulnerabilities.
--  `#5081 <https://github.com/wazuh/wazuh-qa/pull/5081>`__ Refactored initial scan vulnerability E2E tests.
--  `#4780 <https://github.com/wazuh/wazuh-qa/pull/4780>`__ Fixed test cluster performance.
--  `#4775 <https://github.com/wazuh/wazuh-qa/pull/4775>`__ Updated Filebeat module to ``0.4``.
--  `#4685 <https://github.com/wazuh/wazuh-qa/pull/4685>`__ Enhanced macOS deployment ansible tasks.
--  `#4251 <https://github.com/wazuh/wazuh-qa/pull/4251>`__ Enabled Windows vulnerability detection E2E.
--  `#4252 <https://github.com/wazuh/wazuh-qa/pull/4252>`__ Enabled Ubuntu vulnerability detection E2E.
--  `#4443 <https://github.com/wazuh/wazuh-qa/pull/4443>`__ Updated framework known flaws file.
--  `#4561 <https://github.com/wazuh/wazuh-qa/pull/4561>`__ Aligned migration tool system tests to the tool's new output directory structure.
--  `#5357 <https://github.com/wazuh/wazuh-qa/pull/5357>`__ Added ``Timestamp`` field to the indexer statistics.
--  `#5265 <https://github.com/wazuh/wazuh-qa/pull/5265>`__ Added ``GeneratorVulnerabilityEvents`` in agent simulator.
--  `#5147 <https://github.com/wazuh/wazuh-qa/pull/5147>`__ Added ``alert.json`` file to vulnerability detection E2E test report.
--  `#5080 <https://github.com/wazuh/wazuh-qa/pull/5080>`__ Added documentation about markers for system tests.
--  `#4444 <https://github.com/wazuh/wazuh-qa/pull/4444>`__ Added scans environment setup documentation.
--  `#4129 <https://github.com/wazuh/wazuh-qa/pull/4129>`__ Added tests for ``merged.mg`` file generation.
--  `#4986 <https://github.com/wazuh/wazuh-qa/pull/4986>`__ Fixed ``test_shutdown_message`` runtime.
--  `#4952 <https://github.com/wazuh/wazuh-qa/pull/4952>`__ Changed E2E VD configuration keystore.
--  `#4872 <https://github.com/wazuh/wazuh-qa/pull/4872>`__ Updated tests after removing references to the legacy vulnerability detector module.
--  `#4765 <https://github.com/wazuh/wazuh-qa/pull/4765>`__ Fixed IT ``control_service`` Windows loop.
--  `#5007 <https://github.com/wazuh/wazuh-qa/pull/5007>`__ Fixed wazuhdb API statistics parsing.
--  `#4970 <https://github.com/wazuh/wazuh-qa/pull/4970>`__ Enhanced ``StatisticMonitor`` with API support.
--  `#4784 <https://github.com/wazuh/wazuh-qa/pull/4784>`__ Deactivated tests and updated vulnerability-detector configuration.
--  `#4797 <https://github.com/wazuh/wazuh-qa/pull/4797>`__ Fixed body format for ``get_api_token``.
--  `#4782 <https://github.com/wazuh/wazuh-qa/pull/4782>`__ Fixed ``one_manager_agent_env`` pytest marker for System Tests.
--  `#4761 <https://github.com/wazuh/wazuh-qa/pull/4761>`__ Included APT repository update before the installation of Ubuntu E2E agent installation.
--  `#4677 <https://github.com/wazuh/wazuh-qa/pull/4677>`__ Changed database v13 to v12.
--  `#4486 <https://github.com/wazuh/wazuh-qa/pull/4486>`__ Updated ``certifi`` library due to a vulnerability.
--  `#4353 <https://github.com/wazuh/wazuh-qa/pull/4353>`__ Updated wazuh_db schema database version.
--  `#4375 <https://github.com/wazuh/wazuh-qa/pull/4375>`__ Updated the JSON schema with the required fields for the output content of the migration tool.
--  `#5073 <https://github.com/wazuh/wazuh-qa/pull/5073>`__ Updated file descriptors threshold values used in cluster performance tests.
-
-Documentation
-^^^^^^^^^^^^^
-
--  `#6640 <https://github.com/wazuh/wazuh-documentation/pull/6640>`__ Added support for deploying with Ansible on Windows.
--  `#7000 <https://github.com/wazuh/wazuh-documentation/pull/7000>`__ Added keystore management tool section.
--  `#7049 <https://github.com/wazuh/wazuh-documentation/pull/7049>`__ Added available SCA policies in 4.8.0 version.
--  `#7164 <https://github.com/wazuh/wazuh-documentation/pull/7164>`__ Added the ``indexer`` configuration option to the Wazuh API documentation.
--  `#7193 <https://github.com/wazuh/wazuh-documentation/pull/7193>`__ Added the ``offline-url`` vulnerability detection option to the Reference guide.
--  `#7309 <https://github.com/wazuh/wazuh-documentation/pull/7309>`__ Added sub-section about assigning multiple agents to a group in *Grouping agents*.
--  `#7331 <https://github.com/wazuh/wazuh-documentation/pull/7331>`__ Updated the list of supported Debian and Ubuntu operating system versions in the Deployment with Puppet guide.
--  `#7365 <https://github.com/wazuh/wazuh-documentation/pull/7365>`__ Added steps to the password change process in the Deployment with Docker and Deployment with Kubernetes guides.
--  `#7369 <https://github.com/wazuh/wazuh-documentation/pull/7369>`__ Added vulnerability detection configurations to the Upgrade guide.
--  `#6568 <https://github.com/wazuh/wazuh-documentation/pull/6568>`__ Updated OSD version to ``2.10.0``.
--  `#6779 <https://github.com/wazuh/wazuh-documentation/pull/6779>`__ Changed custom branding configuration documents.
--  `#6811 <https://github.com/wazuh/wazuh-documentation/pull/6811>`__ Updated the minimum supported OS requirement for the Wazuh manager.
--  `#6861 <https://github.com/wazuh/wazuh-documentation/pull/6861>`__ Updated Filebeat module revision to ``0.4``.
--  `#6847 <https://github.com/wazuh/wazuh-documentation/pull/6847>`__ Updated AWS, Azure, and GCP cloud security dependency installation steps.
--  `#6792 <https://github.com/wazuh/wazuh-documentation/pull/6792>`__ Improved steps in the Google Cloud Platform prerequisites section.
--  `#7046 <https://github.com/wazuh/wazuh-documentation/pull/7046>`__ Updated the vulnerability detection sections following the module refactor.
--  `#7058 <https://github.com/wazuh/wazuh-documentation/pull/7058>`__ Updated the vulnerability detection sections following the module refactor.
--  `#6964 <https://github.com/wazuh/wazuh-documentation/pull/6964>`__ Improved steps in the Google Cloud Platform prerequisites section.
--  `#7149 <https://github.com/wazuh/wazuh-documentation/pull/7149>`__ Updated ``installation-guide/wazuh-server/step-by-step`` considering configuration requirements for vulnerability detection.
--  `#7162 <https://github.com/wazuh/wazuh-documentation/pull/7162>`__ Updated the ``user-manual/reference/unattended-installation`` section.
--  `#7215 <https://github.com/wazuh/wazuh-documentation/pull/7215>`__ Updated the Vulnerability detection PoC.
--  `#7275 <https://github.com/wazuh/wazuh-documentation/pull/7275>`__ Updated *Monitoring Office 365 audit logs* section.
--  `#7316 <https://github.com/wazuh/wazuh-documentation/pull/7316>`__ Updated *Installing the Wazuh manager from sources* with the latest vulnerability detection changes.
--  `#7280 <https://github.com/wazuh/wazuh-documentation/pull/7280>`__ Updated screenshots and references to the new 4.8.0 interface look.
--  `#7177 <https://github.com/wazuh/wazuh-documentation/pull/7177>`__ Removed documentation for the ``allow-os`` vulnerability detection option.
--  `#7301 <https://github.com/wazuh/wazuh-documentation/pull/7301>`__ Removed the *Migrating from OSSEC* section.
--  `#6442 <https://github.com/wazuh/wazuh-documentation/pull/6442>`__ Added the ``timeout`` and ``retries`` settings to the integratord configuration.
--  `#6673 <https://github.com/wazuh/wazuh-documentation/pull/6673>`__ Added the ``update_check`` configuration option.
--  `#6879 <https://github.com/wazuh/wazuh-documentation/pull/6879>`__ Updated a step in *Upgrading the Wazuh server*.
--  `#6770 <https://github.com/wazuh/wazuh-documentation/pull/6770>`__ Enhanced the description and examples of the ``discard_regex`` and ``field`` feature.
--  `#6790 <https://github.com/wazuh/wazuh-documentation/pull/6790>`__ Changed the ``ssl_protocol`` options and default value.
--  `#6814 <https://github.com/wazuh/wazuh-documentation/pull/6814>`__ Changed the AWS ``pyarrow`` PIP dependency version.
--  `#6956 <https://github.com/wazuh/wazuh-documentation/pull/6956>`__ Updated screenshot and module reference from *Security events* to *Threat Hunting* in Amazon Security Lake section.
--  `#6987 <https://github.com/wazuh/wazuh-documentation/pull/6987>`__ Updated *Azure Diagnostics* images.
--  `#7002 <https://github.com/wazuh/wazuh-documentation/pull/7002>`__ Updated *Azure Log Analytics* images.
--  `#6809 <https://github.com/wazuh/wazuh-documentation/pull/6809>`__ Changed the Wazuh dashboard home URL in single sign-on configuration to just the base path.
--  `#7359 <https://github.com/wazuh/wazuh-documentation/pull/7359>`__ Added the ``integrations`` -> ``virustotal`` -> ``public_key`` API configuration option.
--  `#6373 <https://github.com/wazuh/wazuh-documentation/pull/6373>`__ Updated the ``logcollector.ip_update_interval`` setting in the *Internal options* documentation.
--  `#6711 <https://github.com/wazuh/wazuh-documentation/pull/6711>`__ Updated dashboard settings screenshots.
--  `#7133 <https://github.com/wazuh/wazuh-documentation/pull/7133>`__ Changed Docker version requirement to ``6.0.0``.
--  `#7234 <https://github.com/wazuh/wazuh-documentation/pull/7234>`__ Replaced ``localhost`` occurrences.
--  `#7285 <https://github.com/wazuh/wazuh-documentation/pull/7285>`__ Replaced ``localhost`` occurrences.
--  `#6738 <https://github.com/wazuh/wazuh-documentation/pull/6738>`__ Deprecated /vulnerability API endpoints.
--  `#6815 <https://github.com/wazuh/wazuh-documentation/pull/6815>`__ Removed implicit ``id!=000`` WQL filter in the search bar.
--  `#7123 <https://github.com/wazuh/wazuh-documentation/pull/7123>`__ Removed ``launchctl`` unload step from macOS uninstalling manual.
--  `#7142 <https://github.com/wazuh/wazuh-documentation/pull/7142>`__ Removed ``Wazuh_Ruleset.pdf`` references.
+-  `#2422 <https://github.com/wazuh/wazuh-packages/pull/2422>`__ Added the possibility of registering the ``localhost`` domain in the installation assistant and in the cert-tool.
+-  `#2408 <https://github.com/wazuh/wazuh-packages/pull/2408>`__ Added new AWS files to Solaris SPECS.
+-  `#2553 <https://github.com/wazuh/wazuh-packages/pull/2553>`__ Added new role to grant ISM API permissions.
+-  `#2578 <https://github.com/wazuh/wazuh-packages/pull/2578>`__ Changed the order of Explore category and Indexer/dashboard management title on dashboard.
+-  `#2582 <https://github.com/wazuh/wazuh-packages/pull/2582>`__ Added the ISM init script to the Wazuh indexer package.
+-  `#2584 <https://github.com/wazuh/wazuh-packages/pull/2584>`__ Added ISM script in installation assistant.
+-  `#2586 <https://github.com/wazuh/wazuh-packages/pull/2586>`__ Moved ISM scripts from package to base.
+-  `#2590 <https://github.com/wazuh/wazuh-packages/pull/2590>`__ Extended ``indexer-init.sh`` to accept arguments.
+-  `#2592 <https://github.com/wazuh/wazuh-packages/pull/2592>`__ Updated the initialize cluster script in the offline installation workflow.
+-  `#2598 <https://github.com/wazuh/wazuh-packages/pull/2598>`__ Updated ``min_doc_count`` value.
+-  `#2606 <https://github.com/wazuh/wazuh-packages/pull/2606>`__ Improved ISM init script.
+-  `#2609 <https://github.com/wazuh/wazuh-packages/pull/2609>`__ Adapted wazuhapp and Wazuh dashboard to install the Wazuh ``CheckUpdates`` and ``Core`` plugins.
+-  `#2639 <https://github.com/wazuh/wazuh-packages/pull/2639>`__ Changed check yum lock function.
+-  `#2653 <https://github.com/wazuh/wazuh-packages/pull/2653>`__ Collapsed initially the application categories in the side menu of Wazuh dashboard.
+-  `#2687 <https://github.com/wazuh/wazuh-packages/pull/2687>`__ Added ``common_checkAptLock`` function.
+-  `#2700 <https://github.com/wazuh/wazuh-packages/pull/2700>`__ Updated ``indexer-ism-init.sh``.
+-  `#2711 <https://github.com/wazuh/wazuh-packages/pull/2711>`__ Ensured ``config`` is present in ``ossec.conf`` after upgrade via rpm.
+-  `#2712 <https://github.com/wazuh/wazuh-packages/pull/2712>`__ Added ``wazuh-filebeat`` template to Wazuh indexer.
+-  `#2713 <https://github.com/wazuh/wazuh-packages/pull/2713>`__ Removed ``wazuh-template`` json.
+-  `#2726 <https://github.com/wazuh/wazuh-packages/pull/2726>`__ Updated ``indexer-ism-init.sh``.
+-  `#2733 <https://github.com/wazuh/wazuh-packages/pull/2733>`__ Updated ``indexer-ism-init.sh``.
+-  `#2742 <https://github.com/wazuh/wazuh-packages/pull/2742>`__ Vulnerability detection refactor.
+-  `#2748 <https://github.com/wazuh/wazuh-packages/pull/2748>`__ Removed flag ``--download-content``.
+-  `#2782 <https://github.com/wazuh/wazuh-packages/pull/2782>`__ Split CentOS and RHEL check.
+-  `#2789 <https://github.com/wazuh/wazuh-packages/pull/2789>`__ Updated Wazuh favicon for Safari.
+-  `#2795 <https://github.com/wazuh/wazuh-packages/pull/2795>`__ Replaced category management description.
+-  `#2792 <https://github.com/wazuh/wazuh-packages/pull/2792>`__ Improved certificates generation output when using the Wazuh Installation Assistant and the Wazuh Certs Tool.
+-  `#2807 <https://github.com/wazuh/wazuh-packages/pull/2807>`__ Silenced sudo package check.
+-  `#2821 <https://github.com/wazuh/wazuh-packages/pull/2821>`__ Removed debug variable in Admin certificate generation.
+-  `#2822 <https://github.com/wazuh/wazuh-packages/pull/2822>`__ Do not decompress .tar.xz file, remove xz dependency.
+-  `#2827 <https://github.com/wazuh/wazuh-packages/pull/2827>`__ Added step for restore ``ossec.conf`` file in backup/restore scripts.
+-  `#2838 <https://github.com/wazuh/wazuh-packages/pull/2838>`__ Removed ``download-content.sh`` and ``download.rules`` files.
 
 Resolved issues
 ---------------
@@ -322,6 +254,8 @@ Dashboard plugin
 -  `#6431 <https://github.com/wazuh/wazuh-dashboard-plugins/pull/6431>`__ Fixed error displaying when clicking **Refresh** in **MITRE ATT&CK** if the the Wazuh indexer service is down.
 -  `#6484 <https://github.com/wazuh/wazuh-dashboard-plugins/pull/6484>`__ Fixed minor style issues. `#6489 <https://github.com/wazuh/wazuh-dashboard-plugins/pull/6489>`__ `#6587 <https://github.com/wazuh/wazuh-dashboard-plugins/pull/6587>`__
 -  `#6617 <https://github.com/wazuh/wazuh-dashboard-plugins/pull/6617>`__ Fixed error when clicking **Log collection** in **Configuration** of a disconnected agent.
+-  `#6333 <https://github.com/wazuh/wazuh-dashboard-plugins/pull/6333>`__ Fixed a typo in an abbreviation for Fully Qualified Domain Name.
+-  `#6553 <https://github.com/wazuh/wazuh-dashboard-plugins/pull/6553>`__ Fixed "*View alerts of this Rule*" link.
 
 Packages
 ^^^^^^^^
@@ -330,72 +264,18 @@ Packages
 -  `#2401 <https://github.com/wazuh/wazuh-packages/pull/2401>`__ Fixed debug redirection in the installation assistant.
 -  `#2850 <https://github.com/wazuh/wazuh-packages/pull/2850>`__ Fixed certificates generation output for certificates not created.
 -  `#2906 <https://github.com/wazuh/wazuh-packages/pull/2906>`__ Moved up the hardware check of the installation assistant. Now dependencies don't get installed if it fails.
-
-Testing
-^^^^^^^
-
--  `#5421 <https://github.com/wazuh/wazuh-qa/pull/5421>`__ Included logic to retry package installation if the lock file was currently in use.
--  `#5419 <https://github.com/wazuh/wazuh-qa/pull/5419>`__ Fixed filter vulnerabilities function in case multiple packages were used.
--  `#5369 <https://github.com/wazuh/wazuh-qa/pull/5369>`__ Removed false positive from E2E vulnerability detection tests.
--  `#5396 <https://github.com/wazuh/wazuh-qa/pull/5396>`__ Fixed multi groups guess system test.
--  `#5355 <https://github.com/wazuh/wazuh-qa/pull/5355>`__ Fixed restart agent in change manager vulnerability detection E2E test case.
--  `#5363 <https://github.com/wazuh/wazuh-qa/pull/5363>`__ Fixed E2E vulnerability detection Windows package installation error.
--  `#5298 <https://github.com/wazuh/wazuh-qa/pull/5298>`__ Fixed shutdown messages system test.
--  `#5334 <https://github.com/wazuh/wazuh-qa/pull/5334>`__ Fixed upgrade macOS package cases for vulnerability scanner E2E.
--  `#5349 <https://github.com/wazuh/wazuh-qa/pull/5349>`__ Fixed test cases in vulnerability detection E2E test by adding new packages.
--  `#5337 <https://github.com/wazuh/wazuh-qa/pull/5337>`__ Fixed macOS alert collection for E2E vulnerability detection tests.
--  `#5223 <https://github.com/wazuh/wazuh-qa/pull/5223>`__ Fixed packages in Windows and macOS upgrade cases.
--  `#5234 <https://github.com/wazuh/wazuh-qa/pull/5234>`__ Fixed vulnerabilities and added new packages to vulnerability detection E2E tests.
--  `#5158 <https://github.com/wazuh/wazuh-qa/pull/5158>`__ Fixed provision macOS endpoints with npm.
--  `#5157 <https://github.com/wazuh/wazuh-qa/pull/5157>`__ Fixed timestamps alerts and logs filter.
--  `#5178 <https://github.com/wazuh/wazuh-qa/pull/5178>`__ Fixed macOS and Windows agents timezone.
--  `#5151 <https://github.com/wazuh/wazuh-qa/pull/5151>`__ Fixed vulnerability detection E2E tests by adding description to all tests.
--  `#5146 <https://github.com/wazuh/wazuh-qa/pull/5146>`__ Fixed parser for non package vulnerabilities.
--  `#5134 <https://github.com/wazuh/wazuh-qa/pull/5134>`__ Fixed enrollment cluster system tests.
--  `#5053 <https://github.com/wazuh/wazuh-qa/pull/5053>`__ Fixed vulnerability detection mismatch in scans.
--  `#5032 <https://github.com/wazuh/wazuh-qa/pull/5032>`__ Fixed initial scans tests.
--  `#4959 <https://github.com/wazuh/wazuh-qa/pull/4959>`__ Fixed monitoring module for E2E tests.
--  `#5003 <https://github.com/wazuh/wazuh-qa/pull/5003>`__ Fixed timeout and performance issues in E2E vulnerability detection tests.
--  `#4959 <https://github.com/wazuh/wazuh-qa/pull/4959>`__ Fixed E2E vulnerability detection monitoring function.
--  `#4948 <https://github.com/wazuh/wazuh-qa/pull/4948>`__ Fixed macOS vulnerability detection handler provision in E2E tests.
--  `#4770 <https://github.com/wazuh/wazuh-qa/pull/4770/>`__ Fixed macOS agents provision to enable registration and connection with managers.
--  `#4780 <https://github.com/wazuh/wazuh-qa/pull/4780>`__ Fixed test cluster performance.
--  `#5021 <https://github.com/wazuh/wazuh-qa/pull/5021>`__ Fixed the graphic generation for the ``logcollectord`` statistics files.
--  `#5476 <https://github.com/wazuh/wazuh-qa/pull/5476>`__ Set a stable requests version.
--  `#5414 <https://github.com/wazuh/wazuh-qa/pull/5414>`__ Increase E2E Vulnerability detection change manager test timeout.
--  `#5379 <https://github.com/wazuh/wazuh-qa/pull/5379>`__ Fix hotfixes syscollector agent simulator messages.
--  `#5128 <https://github.com/wazuh/wazuh-qa/pull/5128>`__ Fix provision macOS endpoints with npm.
--  `#5155 <https://github.com/wazuh/wazuh-qa/pull/5155>`__ Fix ``remote_operations_handler`` functions to vulnerability detection E2E tests.
--  `#5089 <https://github.com/wazuh/wazuh-qa/pull/5089>`__ Fix ``test_synchronization`` system test.
--  `#5133 <https://github.com/wazuh/wazuh-qa/pull/5133>`__ Fix number of files and their size for ``test_zip_size_limit``.
--  `#5087 <https://github.com/wazuh/wazuh-qa/pull/5087>`__ Fix ``test_shutdown_message`` system test.
--  `#5083 <https://github.com/wazuh/wazuh-qa/pull/5083>`__ Include timeout to ``test_authd`` system tests.
--  `#5155 <https://github.com/wazuh/wazuh-qa/pull/5155>`__ Fix ``remote_operations_handler`` functions to vulnerability detection E2E tests.
--  `#4954 <https://github.com/wazuh/wazuh-qa/pull/4954>`__ Fix install package ``HostManager`` method.
--  `#4953 <https://github.com/wazuh/wazuh-qa/pull/4953>`__ Fix Modify file method in system module.
--  `#4949 <https://github.com/wazuh/wazuh-qa/pull/4949>`__ Migrate vulnerability detection timeouts variables to the waiters module.
--  `#4917 <https://github.com/wazuh/wazuh-qa/pull/4917>`__ Migrate ``HostMonitor`` to ``system_monitoring`` to avoid Windows import of Ansible module.
--  `#4916 <https://github.com/wazuh/wazuh-qa/pull/4916>`__ Fixed ``ansible_runner`` import conditional to avoid errors on Windows and Python 3.6.
--  `#4765 <https://github.com/wazuh/wazuh-qa/pull/4765>`__ Fixed IT ``control_service`` Windows loop.
--  `#4658 <https://github.com/wazuh/wazuh-qa/pull/4658>`__ Fix hardcoded python interpreter in ``qa_framework`` role.
--  `#4678 <https://github.com/wazuh/wazuh-qa/pull/4678>`__ Fix duplicated jq dependency.
--  `#4873 <https://github.com/wazuh/wazuh-qa/pull/4873>`__ Fix ``test_file_checker`` in ``check_mtime`` case.
-
-Documentation
-^^^^^^^^^^^^^
-
--  `#6958 <https://github.com/wazuh/wazuh-documentation/pull/6958>`__ Removed steps to modify the number of shards from the offline installation guide.
--  `#6967 <https://github.com/wazuh/wazuh-documentation/pull/6967>`__ Fixed password update step for distributed deployments.
--  `#6962 <https://github.com/wazuh/wazuh-documentation/pull/6962>`__ Added fixes and updates to the MITRE ATT&CK framework section.
--  `#7235 <https://github.com/wazuh/wazuh-documentation/pull/7235>`__ Added securing credentials steps to the *Vulnerability detection* capability section and the upgrading central components section.
--  `#7274 <https://github.com/wazuh/wazuh-documentation/pull/7274>`__ Replaced *Wazuh app* and *Wazuh plugin* references with *Wazuh dashboard* references.
--  `#6954 <https://github.com/wazuh/wazuh-documentation/pull/6954>`__ Added the ``wazuh::repo`` class in Puppet manifest example in install Wazuh agent via Puppet section.
--  `#7127 <https://github.com/wazuh/wazuh-documentation/pull/7127>`__ Modified master node address name to uppercase.
+-  `#2380 <https://github.com/wazuh/wazuh-packages/pull/2380>`__ Fixed ``source_branch`` variable in ``master`` branch.
+-  `#2535 <https://github.com/wazuh/wazuh-packages/pull/2535>`__ Fixed ``mkdir wazuh-install-files`` error.
+-  `#2560 <https://github.com/wazuh/wazuh-packages/pull/2560>`__ Fixed ``internalusers-backup`` directory owner and permissions.
+-  `#2585 <https://github.com/wazuh/wazuh-packages/pull/2585>`__ Fixed bug with ``-i`` option.
+-  `#2646 <https://github.com/wazuh/wazuh-packages/pull/2646>`__ Fixed ``wazuh-indexer.spec`` duplicated information.
+-  `#2723 <https://github.com/wazuh/wazuh-packages/pull/2723>`__ Fixed Filebeat template URL in Wazuh indexer.
+-  `#2796 <https://github.com/wazuh/wazuh-packages/pull/2796>`__ Fixed duplicated help menu.
 
 Changelogs
 ----------
 
-More details about these changes are provided in the changelog of each component:
+The repository changelogs provide more details about the changes.
 
 Product repositories
 ^^^^^^^^^^^^^^^^^^^^
