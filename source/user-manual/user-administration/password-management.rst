@@ -213,12 +213,17 @@ Follow the instructions below to change the passwords for all the Wazuh indexer 
       INFO: The password for Wazuh API user wazuh is ivLOfmj7.jL6*7Ev?UJoFjrkGy9t6Je.
       INFO: The password for Wazuh API user wazuh-wui is fL+f?sFRPEv5pYRE559rqy9b6G4Z5pVi
 
-#. On `all your Wazuh server nodes`, run the following command to update the `admin` password in the Filebeat keystore and in the ``ossec.conf`` file for the Wazuh server. Replace ``<ADMIN_PASSWORD>`` with the random password generated in the first step.
+#. On `all your Wazuh server nodes`, run the following command to update the `admin` password in the Filebeat keystore. Replace ``<ADMIN_PASSWORD>`` with the random password generated in the first step.
 
    .. code-block:: console
 
       # echo <ADMIN_PASSWORD> | filebeat keystore add password --stdin --force
-      # sed -i 's/<password>.*<\/password>/<password><ADMIN_PASSWORD><\/password>/g' /var/ossec/etc/ossec.conf
+
+   .. note:: If you set up a user other than admin for Filebeat you will have to add the user manually.
+
+      .. code-block:: console
+
+         # echo <CUSTOM_USERNAME> | filebeat keystore add username --stdin --force
 
 #. Restart Filebeat and the Wazuh server to apply the change.
 
