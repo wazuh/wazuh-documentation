@@ -324,9 +324,9 @@ regex
 Used as a requisite to trigger a rule. It will search for a match in the log event.
 
 +--------------------+---------------------------------------------------------------+
-| **Default Value**  | n/a                                                           |
+| Default Value      | n/a                                                           |
 +--------------------+---------------------------------------------------------------+
-| **Allowed values** | Any :ref:`regex <os_regex_syntax>`,                           |
+| Allowed values     | Any :ref:`regex <os_regex_syntax>`,                           |
 |                    | :ref:`sregex <sregex_os_match_syntax>`  or                    |
 |                    | :ref:`pcre2 <pcre2_syntax>` expression.                       |
 +--------------------+---------------------------------------------------------------+
@@ -664,25 +664,26 @@ If the ``data`` label is declared multiple times within the rule, the following 
 extra_data
 ^^^^^^^^^^
 
-Used as a requisite to trigger the rule. It will compare any string with the one decoded into the extra_data field.
+Used as a requirement to trigger a rule, it compares a regular expression representing a data with a value decoded as ``extra_data``.
 
 +--------------------+---------------------------------------------------------------+
-| **Default Value**  | n/a                                                           |
+| Default Value      | n/a                                                           |
 +--------------------+---------------------------------------------------------------+
-| **Allowed values** | Any :ref:`regex <os_regex_syntax>`,                           |
+| Allowed values     | Any :ref:`regex <os_regex_syntax>`,                           |
 |                    | :ref:`sregex <sregex_os_match_syntax>` or                     |
 |                    | :ref:`pcre2 <pcre2_syntax>` expression.                       |
 +--------------------+---------------------------------------------------------------+
 
 Example:
 
-  .. code-block:: xml
+.. code-block:: xml
+   :emphasize-lines: 3
 
-      <rule id="7301" level="0">
-        <category>windows</category>
-        <extra_data>^Symantec AntiVirus</extra_data>
-        <description>Grouping of Symantec AV rules from eventlog.</description>
-      </rule>
+   <rule id="7301" level="0">
+     <category>windows</category>
+     <extra_data>^Symantec AntiVirus</extra_data>
+     <description>Grouping of Symantec AV rules from eventlog.</description>
+   </rule>
 
 This rule will trigger when the log belongs to ``windows`` category and the decoded field ``extra_data`` is: ``Symantec AntiVirus``
 
@@ -691,81 +692,86 @@ The attributes below are optional.
 +-------------+-----------------------------------------+-------------+---------------+
 | Attribute   |              Description                | Value range | Default value |
 +=============+=========================================+=============+===============+
-| **negate**  | allows to negate the regular expression |     no      |       no      |
+| negate      | allows to negate the regular expression |     no      |       no      |
 |             |                                         +-------------+               |
 |             |                                         |     yes     |               |
 +-------------+-----------------------------------------+-------------+---------------+
-| **type**    | allows to set regular expression type   |   osmatch   |    osmatch    |
+| type        | allows to set regular expression type   |   osmatch   |    osmatch    |
 |             |                                         +-------------+               |
 |             |                                         |   osregex   |               |
 |             |                                         +-------------+               |
 |             |                                         |   pcre2     |               |
 +-------------+-----------------------------------------+-------------+---------------+
 
-If ``extra_data`` label is declared multiple times within the rule, the following rules apply:
+If the ``extra_data`` label is declared multiple times within the rule, the following rules apply:
 
-- The resulting value is their concatenation.
-- The resulting value of an attribute corresponds to the one specified in the last label. If it is not specified, the default value will be used.
+-  The resulting value is their concatenation.
+-  The resulting value of an attribute corresponds to the one specified in the last label. If it is not specified, the default value is used.
 
 .. _rules_user:
 
 user
 ^^^^
 
-Used as a requisite to trigger the rule. It will check the username (decoded as ``user``).
+Used as a requirement to trigger a rule, it compares a regular expression representing a user with a value decoded as ``user``.
 
 +--------------------+---------------------------------------------------------------+
-| **Default Value**  | n/a                                                           |
+| Default Value      | n/a                                                           |
 +--------------------+---------------------------------------------------------------+
-| **Allowed values** | Any :ref:`regex <os_regex_syntax>`,                           |
+| Allowed values     | Any :ref:`regex <os_regex_syntax>`,                           |
 |                    | :ref:`sregex <sregex_os_match_syntax>` or                     |
 |                    | :ref:`pcre2 <pcre2_syntax>` expression.                       |
 +--------------------+---------------------------------------------------------------+
 
 Example:
 
-  .. code-block:: xml
+.. code-block:: none
 
-    <rule id="140101" level="12">
-      <if_group>authentication_success</if_group>
-      <user negate="yes">wazuh|root</user>
-      <description>Unexpected user successfully logged to the system.</description>
-    </rule>
+   May  9 08:58:13 my-server sudo[3856]: pam_unix(sudo:session): session opened for user foo by vagrant(uid=1000)
 
-This rule will trigger when a user different from ``root`` or ``wazuh`` successfully login into the system.
+.. code-block:: xml
+   :emphasize-lines: 3
+
+   <rule id="140101" level="12">
+     <if_group>authentication_success</if_group>
+     <user negate="yes">wazuh|root</user>
+     <description>Unexpected user successfully logged to the system.</description>
+   </rule>
+
+This rule triggers when a user different from ``root`` or ``wazuh`` successfully logs in to the system.
 
 The attributes below are optional.
 
 +-------------+-----------------------------------------+-------------+---------------+
 | Attribute   |              Description                | Value range | Default value |
 +=============+=========================================+=============+===============+
-| **negate**  | allows to negate the regular expression |     no      |       no      |
+| negate      | allows to negate the regular expression |     no      |       no      |
 |             |                                         +-------------+               |
 |             |                                         |     yes     |               |
 +-------------+-----------------------------------------+-------------+---------------+
-| **type**    | allows to set regular expression type   |   osmatch   |    osmatch    |
+| type        | allows to set regular expression type   |   osmatch   |    osmatch    |
 |             |                                         +-------------+               |
 |             |                                         |   osregex   |               |
 |             |                                         +-------------+               |
 |             |                                         |   pcre2     |               |
 +-------------+-----------------------------------------+-------------+---------------+
 
-If ``user`` label is declared multiple times within the rule, the following rules apply:
+If the ``user`` label is declared multiple times within the rule, the following rules apply:
 
-- The resulting value is their concatenation.
-- The resulting value of an attribute corresponds to the one specified in the last label. If it is not specified, the default value will be used.
+-  The resulting value is their concatenation.
+-  The resulting value of an attribute corresponds to the one specified in the last label. If it is not specified, the default value is used.
 
 .. _rules_sys_name:
 
 system_name
 ^^^^^^^^^^^
 
-Used as a requisite to trigger the rule. It will check the system name (decoded as ``system_name``).
+Used as a requirement to trigger a rule, it compares a regular expression representing a system name with a value decoded as ``system_name``.
 
 +--------------------+---------------------------------------------------------------+
-| **Default Value**  | n/a                                                           |
+| Default Value      | n/a                                                           |
 +--------------------+---------------------------------------------------------------+
-| **Allowed values** | Any :ref:`regex <os_regex_syntax>`,                           |
+| Allowed values     | Any :ref:`regex <os_regex_syntax>`,                           |
 |                    | :ref:`sregex <sregex_os_match_syntax>` or                     |
 |                    | :ref:`pcre2 <pcre2_syntax>` expression.                       |
 +--------------------+---------------------------------------------------------------+
@@ -775,82 +781,83 @@ The attributes below are optional.
 +-------------+-----------------------------------------+-------------+---------------+
 | Attribute   |              Description                | Value range | Default value |
 +=============+=========================================+=============+===============+
-| **negate**  | allows to negate the regular expression |     no      |       no      |
+| negate      | allows to negate the regular expression |     no      |       no      |
 |             |                                         +-------------+               |
 |             |                                         |     yes     |               |
 +-------------+-----------------------------------------+-------------+---------------+
-| **type**    | allows to set regular expression type   |   osmatch   |    osmatch    |
+| type        | allows to set regular expression type   |   osmatch   |    osmatch    |
 |             |                                         +-------------+               |
 |             |                                         |   osregex   |               |
 |             |                                         +-------------+               |
 |             |                                         |   pcre2     |               |
 +-------------+-----------------------------------------+-------------+---------------+
 
-If ``system_name`` label is declared multiple times within the rule, the following rules apply:
+If the ``system_name`` label is declared multiple times within the rule, the following rules apply:
 
-- The resulting value is their concatenation.
-- The resulting value of an attribute corresponds to the one specified in the last label. If it is not specified, the default value will be used.
+-  The resulting value is their concatenation.
+-  The resulting value of an attribute corresponds to the one specified in the last label. If it is not specified, the default value is used.
 
 .. _rules_prog_name:
 
 program_name
 ^^^^^^^^^^^^
 
-Used as a requisite to trigger the rule. The program's name is decoded from syslog process name.
+Used as a requirement to trigger a rule, it compares a regular expression representing a program name with a value decoded as ``program_name``.
 
 +--------------------+---------------------------------------------------------------+
-| **Default Value**  | n/a                                                           |
+| Default Value      | n/a                                                           |
 +--------------------+---------------------------------------------------------------+
-| **Allowed values** | Any :ref:`regex <os_regex_syntax>`,                           |
+| Allowed values     | Any :ref:`regex <os_regex_syntax>`,                           |
 |                    | :ref:`sregex <sregex_os_match_syntax>` or                     |
 |                    | :ref:`pcre2 <pcre2_syntax>` expression.                       |
 +--------------------+---------------------------------------------------------------+
 
 Example:
 
-  .. code-block:: xml
+.. code-block:: xml
+   :emphasize-lines: 2
 
-      <rule id="1005" level="5">
-        <program_name>syslogd</program_name>
-        <match>^restart</match>
-        <description>Syslogd restarted.</description>
-        <group>pci_dss_10.6.1,gpg13_10.1,gpg13_4.14,gdpr_IV_35.7.d,hipaa_164.312.b,nist_800_53_AU.6,</group>
-      </rule>
+   <rule id="1005" level="5">
+     <program_name>syslogd</program_name>
+     <match>^restart</match>
+     <description>Syslogd restarted.</description>
+     <group>pci_dss_10.6.1,gpg13_10.1,gpg13_4.14,gdpr_IV_35.7.d,hipaa_164.312.b,nist_800_53_AU.6,</group>
+   </rule>
 
-The rule will trigger when the program Syslogd restarted.
+The rule will trigger when the program Syslogd is restarted.
 
 The attributes below are optional.
 
 +-------------+-----------------------------------------+-------------+---------------+
 | Attribute   |              Description                | Value range | Default value |
 +=============+=========================================+=============+===============+
-| **negate**  | allows to negate the regular expression |     no      |       no      |
+| negate      | allows to negate the regular expression |     no      |       no      |
 |             |                                         +-------------+               |
 |             |                                         |     yes     |               |
 +-------------+-----------------------------------------+-------------+---------------+
-| **type**    | allows to set regular expression type   |   osmatch   |    osmatch    |
+| type        | allows to set regular expression type   |   osmatch   |    osmatch    |
 |             |                                         +-------------+               |
 |             |                                         |   osregex   |               |
 |             |                                         +-------------+               |
 |             |                                         |   pcre2     |               |
 +-------------+-----------------------------------------+-------------+---------------+
 
-If ``program_name`` label is declared multiple times within the rule, the following rules apply:
+If the ``program_name`` label is declared multiple times within the rule, the following rules apply:
 
-- The resulting value is their concatenation.
-- The resulting value of an attribute corresponds to the one specified in the last label. If it is not specified, the default value will be used.
+-  The resulting value is their concatenation.
+-  The resulting value of an attribute corresponds to the one specified in the last label. If it is not specified, the default value is used.
 
 .. _rules_protocol:
 
 protocol
 ^^^^^^^^
 
-Used as a requisite to trigger the rule. It will check the protocol (decoded as ``protocol``).
+Used as a requirement to trigger a rule, it compares a regular expression representing a protocol with a value decoded as ``protocol``.
 
 +--------------------+---------------------------------------------------------------+
-| **Default Value**  | n/a                                                           |
+| Default Value      | n/a                                                           |
 +--------------------+---------------------------------------------------------------+
-| **Allowed values** | Any :ref:`regex <os_regex_syntax>`,                           |
+| Allowed values     | Any :ref:`regex <os_regex_syntax>`,                           |
 |                    | :ref:`sregex <sregex_os_match_syntax>` or                     |
 |                    | :ref:`pcre2 <pcre2_syntax>` expression.                       |
 +--------------------+---------------------------------------------------------------+
@@ -860,46 +867,47 @@ The attributes below are optional.
 +-------------+-----------------------------------------+-------------+---------------+
 | Attribute   |              Description                | Value range | Default value |
 +=============+=========================================+=============+===============+
-| **negate**  | allows to negate the regular expression |     no      |       no      |
+| negate      | allows to negate the regular expression |     no      |       no      |
 |             |                                         +-------------+               |
 |             |                                         |     yes     |               |
 +-------------+-----------------------------------------+-------------+---------------+
-| **type**    | allows to set regular expression type   |   osmatch   |    osmatch    |
+| type        | allows to set regular expression type   |   osmatch   |    osmatch    |
 |             |                                         +-------------+               |
 |             |                                         |   osregex   |               |
 |             |                                         +-------------+               |
 |             |                                         |   pcre2     |               |
 +-------------+-----------------------------------------+-------------+---------------+
 
-If ``protocol`` label is declared multiple times within the rule, the following rules apply:
+If the ``protocol`` label is declared multiple times within the rule, the following rules apply:
 
-- The resulting value is their concatenation.
-- The resulting value of an attribute corresponds to the one specified in the last label. If it is not specified, the default value will be used.
+-  The resulting value is their concatenation.
+-  The resulting value of an attribute corresponds to the one specified in the last label. If it is not specified, the default value is used.
 
 .. _rules_hostname:
 
 hostname
 ^^^^^^^^
 
-Used as a requisite to trigger the rule. Any hostname (decoded as the syslog hostname) or log file.
+Used as a requirement to trigger a rule, it compares a regular expression representing a hostname with a value decoded as ``hostname``.
 
 +--------------------+---------------------------------------------------------------+
-| **Default Value**  | n/a                                                           |
+| Default Value      | n/a                                                           |
 +--------------------+---------------------------------------------------------------+
-| **Allowed values** | Any :ref:`regex <os_regex_syntax>`,                           |
+| Allowed values     | Any :ref:`regex <os_regex_syntax>`,                           |
 |                    | :ref:`sregex <sregex_os_match_syntax>` or                     |
 |                    | :ref:`pcre2 <pcre2_syntax>` expression.                       |
 +--------------------+---------------------------------------------------------------+
 
 Example:
 
-  .. code-block:: xml
+.. code-block:: xml
+   :emphasize-lines: 2
 
-        <rule id="2931" level="0">
-          <hostname>yum.log$</hostname>
-          <match>^Installed|^Updated|^Erased</match>
-          <description>Yum logs.</description>
-        </rule>
+   <rule id="2931" level="0">
+     <hostname>yum.log$</hostname>
+     <match>^Installed|^Updated|^Erased</match>
+     <description>Yum logs.</description>
+   </rule>
 
 This rule will group rules for ``Yum logs`` when something is either being installed, updated or erased.
 
@@ -908,67 +916,69 @@ The attributes below are optional.
 +-------------+-----------------------------------------+-------------+---------------+
 | Attribute   |              Description                | Value range | Default value |
 +=============+=========================================+=============+===============+
-| **negate**  | allows to negate the regular expression |     no      |       no      |
+| negate      | allows to negate the regular expression |     no      |       no      |
 |             |                                         +-------------+               |
 |             |                                         |     yes     |               |
 +-------------+-----------------------------------------+-------------+---------------+
-| **type**    | allows to set regular expression type   |   osmatch   |    osmatch    |
+| type        | allows to set regular expression type   |   osmatch   |    osmatch    |
 |             |                                         +-------------+               |
 |             |                                         |   osregex   |               |
 |             |                                         +-------------+               |
 |             |                                         |   pcre2     |               |
 +-------------+-----------------------------------------+-------------+---------------+
 
-If ``hostname`` label is declared multiple times within the rule, the following rules apply:
+If the ``hostname`` label is declared multiple times within the rule, the following rules apply:
 
-- The resulting value is their concatenation.
-- The resulting value of an attribute corresponds to the one specified in the last label. If it is not specified, the default value will be used.
+-  The resulting value is their concatenation.
+-  The resulting value of an attribute corresponds to the one specified in the last label. If it is not specified, the default value is used.
 
 time
 ^^^^
 
-Used as a requisite to trigger the rule. Used for checking the time that the event was generated.
+Used as a requisite to trigger a rule. Used for checking the time that the event was generated.
 
 +--------------------+----------------------------------------------------------------------+
-| **Default Value**  | n/a                                                                  |
+| Default Value      | n/a                                                                  |
 +--------------------+----------------------------------------------------------------------+
-| **Allowed values** | Any time range (hh:mm-hh:mm, hh:mm am-hh:mm pm, hh-hh, hh am-hh pm)  |
+| Allowed values     | Any time range (hh:mm-hh:mm, hh:mm am-hh:mm pm, hh-hh, hh am-hh pm)  |
 +--------------------+----------------------------------------------------------------------+
 
 Example:
 
-  .. code-block:: xml
+.. code-block:: xml
+   :emphasize-lines: 3
 
-      <rule id="17101" level="9">
-        <if_group>authentication_success</if_group>
-        <time>6 pm - 8:30 am</time>
-        <description>Successful login during non-business hours.</description>
-        <group>login_time,pci_dss_10.2.5,pci_dss_10.6.1,gpg13_7.1,gpg13_7.2,gdpr_IV_35.7.d,gdpr_IV_32.2,hipaa_164.312.b,nist_800_53_AU.14,nist_800_53_AC.7,nist_800_53_AU.6,</group>
-      </rule>
+   <rule id="17101" level="9">
+     <if_group>authentication_success</if_group>
+     <time>6 pm - 8:30 am</time>
+     <description>Successful login during non-business hours.</description>
+     <group>login_time,pci_dss_10.2.5,pci_dss_10.6.1,gpg13_7.1,gpg13_7.2,gdpr_IV_35.7.d,gdpr_IV_32.2,hipaa_164.312.b,nist_800_53_AU.14,nist_800_53_AC.7,nist_800_53_AU.6,</group>
+   </rule>
 
 This rule will trigger when there is a successful login between 6 pm and 8 am.
 
 weekday
 ^^^^^^^
 
-Used as a requisite to trigger the rule. Checks the weekday that the event was generated.
+Used as a requisite to trigger a rule. Checks the weekday that the event was generated.
 
 +--------------------+-------------------------------------+
-| **Default Value**  | n/a                                 |
+| Default Value      | n/a                                 |
 +--------------------+-------------------------------------+
-| **Allowed values** | monday - sunday, weekdays, weekends |
+| Allowed values     | monday - sunday, weekdays, weekends |
 +--------------------+-------------------------------------+
 
 Example:
 
-  .. code-block:: xml
+.. code-block:: xml
+   :emphasize-lines: 3
 
-      <rule id="17102" level="9">
-        <if_group>authentication_success</if_group>
-        <weekday>weekends</weekday>
-        <description>Successful login during weekend.</description>
-        <group>login_day,pci_dss_10.2.5,pci_dss_10.6.1,gpg13_7.1,gpg13_7.2,gdpr_IV_35.7.d,gdpr_IV_32.2,hipaa_164.312.b,nist_800_53_AU.14,nist_800_53_AC.7,nist_800_53_AU.6,</group>
-      </rule>
+   <rule id="17102" level="9">
+     <if_group>authentication_success</if_group>
+     <weekday>weekends</weekday>
+     <description>Successful login during weekend.</description>
+     <group>login_day,pci_dss_10.2.5,pci_dss_10.6.1,gpg13_7.1,gpg13_7.2,gdpr_IV_35.7.d,gdpr_IV_32.2,hipaa_164.312.b,nist_800_53_AU.14,nist_800_53_AC.7,nist_800_53_AU.6,</group>
+   </rule>
 
 This rule will trigger when there is a successful login during the weekend.
 
@@ -977,120 +987,126 @@ This rule will trigger when there is a successful login during the weekend.
 id
 ^^
 
-Used as a requisite to trigger the rule. It will check any ID (decoded as the ID).
+Used as a requisite to trigger a rule. It compares a regular expression that represents an ID with a value decoded as ``id``.
 
 +--------------------+---------------------------------------------------------------+
-| **Default Value**  | n/a                                                           |
+| Default Value      | n/a                                                           |
 +--------------------+---------------------------------------------------------------+
-| **Allowed values** | Any :ref:`regex <os_regex_syntax>`,                           |
+| Allowed values     | Any :ref:`regex <os_regex_syntax>`,                           |
 |                    | :ref:`sregex <sregex_os_match_syntax>` or                     |
 |                    | :ref:`pcre2 <pcre2_syntax>` expression.                       |
 +--------------------+---------------------------------------------------------------+
 
 Example:
 
-  .. code-block:: xml
+.. code-block:: none
 
-      <rule id="81100" level="0">
-          <decoded_as>kernel</decoded_as>
-          <id>usb</id>
-          <description>USB messages grouped.</description>
-      </rule>
+   Feb  3 10:23:08 testsys kernel: usb 1-1.2: New USB device found, idVendor=0781, idProduct=5575
 
-This rule will group the logs whose decoded ID is usb.
+.. code-block:: xml
+   :emphasize-lines: 3
+
+   <rule id="81100" level="0">
+       <decoded_as>kernel</decoded_as>
+       <id>usb</id>
+       <description>USB messages grouped.</description>
+   </rule>
+
+This rule will check the content of the field ``id`` and group the logs whose decoded ID is ``usb``.
 
 The attributes below are optional.
 
 +-------------+-----------------------------------------+-------------+---------------+
 | Attribute   |              Description                | Value range | Default value |
 +=============+=========================================+=============+===============+
-| **negate**  | allows to negate the regular expression |     no      |       no      |
+| negate      | allows to negate the regular expression |     no      |       no      |
 |             |                                         +-------------+               |
 |             |                                         |     yes     |               |
 +-------------+-----------------------------------------+-------------+---------------+
-| **type**    | allows to set regular expression type   |   osmatch   |    osmatch    |
+| type        | allows to set regular expression type   |   osmatch   |    osmatch    |
 |             |                                         +-------------+               |
 |             |                                         |   osregex   |               |
 |             |                                         +-------------+               |
 |             |                                         |   pcre2     |               |
 +-------------+-----------------------------------------+-------------+---------------+
 
-If ``id`` label is declared multiple times within the rule, the following rules apply:
+If the ``id`` label is declared multiple times within the rule, the following rules apply:
 
-- The resulting value is their concatenation.
-- The resulting value of an attribute corresponds to the one specified in the last label. If it is not specified, the default value will be used.
+-  The resulting value is their concatenation.
+-  The resulting value of an attribute corresponds to the one specified in the last label. If it is not specified, the default value is used.
 
 .. _rules_url:
 
 url
 ^^^
 
-Used as a requisite to trigger the rule. It will check any URL (decoded as the URL).
+Used as a requisite to trigger a rule. It compares a regular expression representing a URL with a value decoded as ``url``.
 
 +--------------------+---------------------------------------------------------------+
-| **Default Value**  | n/a                                                           |
+| Default Value      | n/a                                                           |
 +--------------------+---------------------------------------------------------------+
-| **Allowed values** | Any :ref:`regex <os_regex_syntax>`,                           |
+| Allowed values     | Any :ref:`regex <os_regex_syntax>`,                           |
 |                    | :ref:`sregex <sregex_os_match_syntax>` or                     |
 |                    | :ref:`pcre2 <pcre2_syntax>` expression.                       |
 +--------------------+---------------------------------------------------------------+
 
 Example:
 
-  .. code-block:: xml
+.. code-block:: xml
+   :emphasize-lines: 3
 
-      <rule id="31102" level="0">
-        <if_sid>31101</if_sid>
-        <url>.jpg$|.gif$|favicon.ico$|.png$|robots.txt$|.css$|.js$|.jpeg$</url>
-        <compiled_rule>is_simple_http_request</compiled_rule>
-        <description>Ignored extensions on 400 error codes.</description>
-      </rule>
+   <rule id="31102" level="0">
+     <if_sid>31101</if_sid>
+     <url>.jpg$|.gif$|favicon.ico$|.png$|robots.txt$|.css$|.js$|.jpeg$</url>
+     <compiled_rule>is_simple_http_request</compiled_rule>
+     <description>Ignored extensions on 400 error codes.</description>
+   </rule>
 
-This rule is a child from a level 5 rule ``31101`` and becomes a level 0 rule when it confirms that the extensions are nothing to worry about.
+This rule is a child from a level 5 rule ``31101`` and becomes a level 0 rule when it confirms that the extensions are benign.
 
 The attributes below are optional.
 
 +-------------+-----------------------------------------+-------------+---------------+
 | Attribute   |              Description                | Value range | Default value |
 +=============+=========================================+=============+===============+
-| **negate**  | allows to negate the regular expression |     no      |       no      |
+| negate      | allows to negate the regular expression |     no      |       no      |
 |             |                                         +-------------+               |
 |             |                                         |     yes     |               |
 +-------------+-----------------------------------------+-------------+---------------+
-| **type**    | allows to set regular expression type   |   osmatch   |    osmatch    |
+| type        | allows to set regular expression type   |   osmatch   |    osmatch    |
 |             |                                         +-------------+               |
 |             |                                         |   osregex   |               |
 |             |                                         +-------------+               |
 |             |                                         |   pcre2     |               |
 +-------------+-----------------------------------------+-------------+---------------+
 
-If ``url`` label is declared multiple times within the rule, the following rules apply:
+If the ``url`` label is declared multiple times within the rule, the following rules apply:
 
-- The resulting value is their concatenation.
-- The resulting value of an attribute corresponds to the one specified in the last label. If it is not specified, the default value will be used.
+-  The resulting value is their concatenation.
+-  The resulting value of an attribute corresponds to the one specified in the last label. If it is not specified, the default value is used.
 
 .. _rules_location:
 
 location
 ^^^^^^^^
 
-Used as a requisite to trigger the rule. It will check the content of the field location and trying to find a match.
+Used as a requisite to trigger a rule. It will check the content of the field ``location`` and try to find a match.
 
 +--------------------+---------------------------------------------------------------+
-| **Default Value**  | n/a                                                           |
+| Default Value      | n/a                                                           |
 +--------------------+---------------------------------------------------------------+
-| **Allowed values** | Any :ref:`regex <os_regex_syntax>`,                           |
+| Allowed values     | Any :ref:`regex <os_regex_syntax>`,                           |
 |                    | :ref:`sregex <sregex_os_match_syntax>` or                     |
 |                    | :ref:`pcre2 <pcre2_syntax>` expression.                       |
 +--------------------+---------------------------------------------------------------+
 
 The location identifies the origin of the input. If the event comes from an agent, its name and registered IP address (as it was added) is appended to the location.
 
-Example of a location for a log pulled from "/var/log/syslog" in an agent with name "dbserver" and registered with IP "any":
+Example of a location for a log pulled from ``/var/log/syslog`` in an agent with name ``dbserver`` and registered with IP ``any``:
 
-::
+.. code-block:: none
 
-    (dbserver) any->/var/log/syslog
+   (dbserver) any->/var/log/syslog
 
 The following components use a static location:
 
@@ -1124,63 +1140,64 @@ The following components use a static location:
 | SCA module           | sca                    |
 +----------------------+------------------------+
 
-
 Example:
 
-  .. code-block:: xml
+.. code-block:: xml
+   :emphasize-lines: 2
 
-      <rule id="24000" level="3">
-        <location>osquery$</location>
-        <description>osquery message</description>
-      </rule>
+   <rule id="24000" level="3">
+     <location>osquery$</location>
+     <description>osquery message</description>
+   </rule>
 
-This rule, groups logs that come from ``osquery`` location. Triggering a level 3 alert for it.
+This rule groups logs that come from the ``osquery`` location.
 
 The attributes below are optional.
 
 +-------------+-----------------------------------------+-------------+---------------+
 | Attribute   |              Description                | Value range | Default value |
 +=============+=========================================+=============+===============+
-| **negate**  | allows to negate the regular expression |     no      |       no      |
+| negate      | allows to negate the regular expression |     no      |       no      |
 |             |                                         +-------------+               |
 |             |                                         |     yes     |               |
 +-------------+-----------------------------------------+-------------+---------------+
-| **type**    | allows to set regular expression type   |   osmatch   |    osmatch    |
+| type        | allows to set regular expression type   |   osmatch   |    osmatch    |
 |             |                                         +-------------+               |
 |             |                                         |   osregex   |               |
 |             |                                         +-------------+               |
 |             |                                         |   pcre2     |               |
 +-------------+-----------------------------------------+-------------+---------------+
 
-If ``location`` label is declared multiple times within the rule, the following rules apply:
+If the ``location`` label is declared multiple times within the rule, the following rules apply:
 
-- The resulting value is their concatenation.
-- The resulting value of an attribute corresponds to the one specified in the last label. If it is not specified, the default value will be used.
+-  The resulting value is their concatenation.
+-  The resulting value of an attribute corresponds to the one specified in the last label. If it is not specified, the default value is used.
 
 .. _rules_action:
 
 action
 ^^^^^^
 
-Used as a requisite to trigger the rule. It will check any action (decoded as the ACTION).
+Used as a requirement to trigger a rule, it compares a regular expression representing an action with a value decoded as ``action``.
 
 +--------------------+---------------------------------------------------------------+
-| **Default Value**  | n/a                                                           |
+| Default Value      | n/a                                                           |
 +--------------------+---------------------------------------------------------------+
-| **Allowed values** | Any :ref:`regex <os_regex_syntax>`,                           |
+| Allowed values     | Any :ref:`regex <os_regex_syntax>`,                           |
 |                    | :ref:`sregex <sregex_os_match_syntax>` or                     |
 |                    | :ref:`pcre2 <pcre2_syntax>` expression.                       |
 +--------------------+---------------------------------------------------------------+
 
 Example:
 
-  .. code-block:: xml
+.. code-block:: xml
+   :emphasize-lines: 3
 
-      <rule id="4502" level="4">
-        <if_sid>4500</if_sid>
-        <action type="osregex">warning|WARN</action>
-        <description>Netscreen warning message.</description>
-      </rule>
+   <rule id="4502" level="4">
+     <if_sid>4500</if_sid>
+     <action type="osregex">warning|WARN</action>
+     <description>Netscreen warning message.</description>
+   </rule>
 
 This rule will trigger a level 4 alert when the decoded action from Netscreen is ``warning`` or ``WARN``.
 
@@ -1189,11 +1206,11 @@ The attributes below are optional.
 +-------------+-----------------------------------------+-------------+---------------+
 | Attribute   |              Description                | Value range | Default value |
 +=============+=========================================+=============+===============+
-| **negate**  | allows to negate the regular expression |     no      |       no      |
+| negate      | allows to negate the regular expression |     no      |       no      |
 |             |                                         +-------------+               |
 |             |                                         |     yes     |               |
 +-------------+-----------------------------------------+-------------+---------------+
-| **type**    | allows to set regular expression type   |   osmatch   |    string     |
+| type        | allows to set regular expression type   |   osmatch   |    string     |
 |             |                                         +-------------+               |
 |             |                                         |   osregex   |               |
 |             |                                         +-------------+               |
@@ -1202,71 +1219,72 @@ The attributes below are optional.
 
 .. note::
 
-   Use ``type`` attribute only for regular expression match. It must be omitted if ``action`` field try to match a string.
+   Use ``type`` attribute only for regular expression match. It must be omitted if the action field tries to match a string.
 
-If ``action`` label is declared multiple times within the rule, the following rules apply:
+If the ``action`` label is declared multiple times within the rule, the following rules apply:
 
-- The resulting value is their concatenation.
-- The resulting value of an attribute corresponds to the one specified in the last label. If it is not specified, the default value will be used.
+-  The resulting value is their concatenation.
+-  The resulting value of an attribute corresponds to the one specified in the last label. If it is not specified, the default value is used.
 
 .. _rules_status:
 
 status
 ^^^^^^
 
-Checks the actual status of an event.
+Compares a regular expression representing a status with a value decoded as ``status``.
 
 +--------------------+---------------------------------------------------------------+
-| **Default Value**  | n/a                                                           |
+| Default Value      | n/a                                                           |
 +--------------------+---------------------------------------------------------------+
-| **Allowed values** | Any :ref:`regex <os_regex_syntax>`,                           |
+| Allowed values     | Any :ref:`regex <os_regex_syntax>`,                           |
 |                    | :ref:`sregex <sregex_os_match_syntax>` or                     |
 |                    | :ref:`pcre2 <pcre2_syntax>` expression.                       |
 +--------------------+---------------------------------------------------------------+
 
 Example:
 
-  .. code-block:: xml
+.. code-block:: xml
+   :emphasize-lines: 3
 
-      <rule id="213" level="7">
-        <if_sid>210</if_sid>
-        <status>aborted</status>
-        <description>Remote upgrade could not be launched. Error: $(error).</description>
-        <group>upgrade,upgrade_failure,</group>
-      </rule>
+   <rule id="213" level="7">
+     <if_sid>210</if_sid>
+     <status>aborted</status>
+     <description>Remote upgrade could not be launched. Error: $(error).</description>
+     <group>upgrade,upgrade_failure,</group>
+   </rule>
 
 The attributes below are optional.
 
 +-------------+-----------------------------------------+-------------+---------------+
 | Attribute   |              Description                | Value range | Default value |
 +=============+=========================================+=============+===============+
-| **negate**  | allows to negate the regular expression |     no      |       no      |
+| negate      | allows to negate the regular expression |     no      |       no      |
 |             |                                         +-------------+               |
 |             |                                         |     yes     |               |
 +-------------+-----------------------------------------+-------------+---------------+
-| **type**    | allows to set regular expression type   |   osmatch   |    osmatch    |
+| type        | allows to set regular expression type   |   osmatch   |    osmatch    |
 |             |                                         +-------------+               |
 |             |                                         |   osregex   |               |
 |             |                                         +-------------+               |
 |             |                                         |   pcre2     |               |
 +-------------+-----------------------------------------+-------------+---------------+
 
-If ``status`` label is declared multiple times within the rule, the following rules apply:
+If the ``status`` label is declared multiple times within the rule, the following rules apply:
 
-- The resulting value is their concatenation.
-- The resulting value of an attribute corresponds to the one specified in the last label. If it is not specified, the default value will be used.
+-  The resulting value is their concatenation.
+-  The resulting value of an attribute corresponds to the one specified in the last label. If it is not specified, the default value is used.
 
 .. _rules_srcgeoip:
 
 srcgeoip
 ^^^^^^^^
 
-Used as a requisite to trigger the rule. It will check the GeoIP source (decoded as ``srcgeoip``).
+Used as a requirement to trigger a rule, it compares a regular expression representing a source GeoIP with a value decoded as ``srcgeoip``.
 
 +--------------------+---------------------------------------------------------------+
-| **Default Value**  | n/a                                                           |
+| Default Value      | n/a                                                           |
 +--------------------+---------------------------------------------------------------+
-| **Allowed values** | Any :ref:`regex <os_regex_syntax>`,                           |
+| Allowed values     | Any :ref:`regex <os_regex_syntax>`,                           |
 |                    | :ref:`sregex <sregex_os_match_syntax>` or                     |
 |                    | :ref:`pcre2 <pcre2_syntax>` expression.                       |
 +--------------------+---------------------------------------------------------------+
@@ -1276,33 +1294,33 @@ The attributes below are optional.
 +-------------+-----------------------------------------+-------------+---------------+
 | Attribute   |              Description                | Value range | Default value |
 +=============+=========================================+=============+===============+
-| **negate**  | allows to negate the regular expression |     no      |       no      |
+| negate      | allows to negate the regular expression |     no      |       no      |
 |             |                                         +-------------+               |
 |             |                                         |     yes     |               |
 +-------------+-----------------------------------------+-------------+---------------+
-| **type**    | allows to set regular expression type   |   osmatch   |    osmatch    |
+| type        | allows to set regular expression type   |   osmatch   |    osmatch    |
 |             |                                         +-------------+               |
 |             |                                         |   osregex   |               |
 |             |                                         +-------------+               |
 |             |                                         |   pcre2     |               |
 +-------------+-----------------------------------------+-------------+---------------+
 
-If ``srcgeoip`` label is declared multiple times within the rule, the following rules apply:
+If the ``srcgeoip`` label is declared multiple times within the rule, the following rules apply:
 
-- The resulting value is their concatenation.
-- The resulting value of an attribute corresponds to the one specified in the last label. If it is not specified, the default value will be used.
+-  The resulting value is their concatenation.
+-  The resulting value of an attribute corresponds to the one specified in the last label. If it is not specified, the default value is used.
 
 .. _rules_dstgeoip:
 
 dstgeoip
 ^^^^^^^^
 
-Used as a requisite to trigger the rule. It will check the GeoIP destination (decoded as ``dstgeoip``).
+Used as a requirement to trigger a rule, it compares a regular expression representing a destination GeoIP with a value decoded as ``dstgeoip``.
 
 +--------------------+---------------------------------------------------------------+
-| **Default Value**  | n/a                                                           |
+| Default Value      | n/a                                                           |
 +--------------------+---------------------------------------------------------------+
-| **Allowed values** | Any :ref:`regex <os_regex_syntax>`,                           |
+| Allowed values     | Any :ref:`regex <os_regex_syntax>`,                           |
 |                    | :ref:`sregex <sregex_os_match_syntax>` or                     |
 |                    | :ref:`pcre2 <pcre2_syntax>` expression.                       |
 +--------------------+---------------------------------------------------------------+
@@ -1312,72 +1330,70 @@ The attributes below are optional.
 +-------------+-----------------------------------------+-------------+---------------+
 | Attribute   |              Description                | Value range | Default value |
 +=============+=========================================+=============+===============+
-| **negate**  | allows to negate the regular expression |     no      |       no      |
+| negate      | allows to negate the regular expression |     no      |       no      |
 |             |                                         +-------------+               |
 |             |                                         |     yes     |               |
 +-------------+-----------------------------------------+-------------+---------------+
-| **type**    | allows to set regular expression type   |   osmatch   |    osmatch    |
+| type        | allows to set regular expression type   |   osmatch   |    osmatch    |
 |             |                                         +-------------+               |
 |             |                                         |   osregex   |               |
 |             |                                         +-------------+               |
 |             |                                         |   pcre2     |               |
 +-------------+-----------------------------------------+-------------+---------------+
 
-If ``dstgeoip`` label is declared multiple times within the rule, the following rules apply:
+If the ``dstgeoip`` label is declared multiple times within the rule, the following rules apply:
 
-- The resulting value is their concatenation.
-- The resulting value of an attribute corresponds to the one specified in the last label. If it is not specified, the default value will be used.
+-  The resulting value is their concatenation.
+-  The resulting value of an attribute corresponds to the one specified in the last label. If it is not specified, the default value is used.
 
 if_sid
 ^^^^^^
 
-Used as a requisite to trigger the rule. Matches when an ID on the list has previously matched. It is similar to a child decoder, with the key difference that alerts can have as many descendants as necessary, whereas decoder cannot have "grandchildren".
+Used as a requisite to trigger a rule. This option matches if the log has previously matched a rule in the specified ID. It is similar to a child decoder, with the key difference that alerts can have as many descendants as necessary, whereas decoders cannot have "grandchildren".
 
 +--------------------+--------------------------------------------------------------------+
-| **Default Value**  | n/a                                                                |
+| Default Value      | n/a                                                                |
 +--------------------+--------------------------------------------------------------------+
-| **Allowed values** | Any rule ID. Multiple values must be separated by commas or spaces.|
+| Allowed values     | Any rule ID. Multiple values must be separated by commas or spaces.|
 +--------------------+--------------------------------------------------------------------+
-
-
 
 Example:
 
-  .. code-block:: xml
+.. code-block:: xml
+   :emphasize-lines: 2
 
-      <rule id="100110" level="5">
-        <if_sid>100100, 100101</if_sid>
-        <match>Error</match>
-        <description>There is an error in the log.</description>
-      </rule>
+   <rule id="100110" level="5">
+     <if_sid>100100, 100101</if_sid>
+     <match>Error</match>
+     <description>There is an error in the log.</description>
+   </rule>
 
-The rule ``100110`` is triggered when either of the parent rules has matched and the logs contain the word "Error".
-
+The rule ``100110`` is triggered when either of the parent rules has matched and the logs contain the word ``Error``.
 
 if_group
 ^^^^^^^^
 
-Used as a requisite to trigger the rule. Matches if the group has matched before.
+Used as a requisite to trigger a rule. This option matches if the log has previously matched a rule in the specified group.
 
 +--------------------+-----------+
-| **Default Value**  | n/a       |
+| Default Value      | n/a       |
 +--------------------+-----------+
-| **Allowed values** | Any Group |
+| Allowed values     | Any Group |
 +--------------------+-----------+
 
 Example:
 
-  .. code-block:: xml
+.. code-block:: xml
+   :emphasize-lines: 2
 
-      <rule id="184676" level="12">
-          <if_group>sysmon_event1</if_group>
-          <field name="sysmon.image">lsm.exe</field>
-          <description>Sysmon - Suspicious Process - lsm.exe</description>
-          <group>pci_dss_10.6.1,pci_dss_11.4,gdpr_IV_35.7.d,hipaa_164.312.b,nist_800_53_AU.6,nist_800_53_SI.4,</group>
-      </rule>
+   <rule id="184676" level="12">
+       <if_group>sysmon_event1</if_group>
+       <field name="sysmon.image">lsm.exe</field>
+       <description>Sysmon - Suspicious Process - lsm.exe</description>
+       <group>pci_dss_10.6.1,pci_dss_11.4,gdpr_IV_35.7.d,hipaa_164.312.b,nist_800_53_AU.6,nist_800_53_SI.4,</group>
+   </rule>
 
-The rule matches if the group ``sysmon_event1`` has previously matched before and if the field decoded as ``sysmon.image`` is "lsm.exe".
-
+The rule matches if the log has previously matched a rule in the ``sysmon_event1`` group and if the decoded field ``sysmon.image`` contains the value ``lsm.exe``.
 
 if_level
 ^^^^^^^^
@@ -1385,9 +1401,9 @@ if_level
 Matches if the level has matched before.
 
 +--------------------+------------------------+
-| **Default Value**  | n/a                    |
+| Default Value      | n/a                    |
 +--------------------+------------------------+
-| **Allowed values** | Any level from 1 to 16 |
+| Allowed values     | Any level from 1 to 16 |
 +--------------------+------------------------+
 
 if_matched_sid
@@ -1398,17 +1414,19 @@ Matches if an alert of the defined ID has been triggered in a set number of seco
 This option is used in conjunction with ``frequency`` and ``timeframe``.
 
 +--------------------+-------------+
-| **Default Value**  | n/a         |
+| Default Value      | n/a         |
 +--------------------+-------------+
-| **Allowed values** | Any rule id |
+| Allowed values     | Any rule id |
 +--------------------+-------------+
 
 .. note::
-  Rules at level 0 are discarded immediately and will not be used with the if_matched_rules. The level must be at least 1, but the <no_log> option can be added to the rule to make sure it does not get logged.
+
+   Rules at level 0 are discarded immediately and will not be used with ``if_matched_rules``. The level must be at least 1, but you will have to add the ``<no_log>`` option to the rule to ensure it is not logged.
 
 Example:
 
 .. code-block:: xml
+   :emphasize-lines: 2
 
    <rule id="30316" level="10" frequency="10" timeframe="120">
      <if_matched_sid>30315</if_matched_sid>
@@ -1430,20 +1448,20 @@ Matches if an alert of the defined group has been triggered in a set number of s
 This option is used in conjunction with ``frequency`` and ``timeframe``.
 
 +--------------------+-----------+
-| **Default Value**  | n/a       |
+| Default Value      | n/a       |
 +--------------------+-----------+
-| **Allowed values** | Any Group |
+| Allowed values     | Any Group |
 +--------------------+-----------+
 
 Example:
 
-  .. code-block:: xml
+.. code-block:: xml
 
-      <rule id="40113" level="12" frequency="8" timeframe="360">
-        <if_matched_group>virus</if_matched_group>
-        <description>Multiple viruses detected - Possible outbreak.</description>
-        <group>virus,pci_dss_5.1,pci_dss_5.2,pci_dss_11.4,gpg13_4.2,gdpr_IV_35.7.d,nist_800_53_SI.3,nist_800_53_SI.4,</group>
-      </rule>
+   <rule id="40113" level="12" frequency="8" timeframe="360">
+     <if_matched_group>virus</if_matched_group>
+     <description>Multiple viruses detected - Possible outbreak.</description>
+     <group>virus,pci_dss_5.1,pci_dss_5.2,pci_dss_11.4,gpg13_4.2,gdpr_IV_35.7.d,nist_800_53_SI.3,nist_800_53_SI.4,</group>
+   </rule>
 
 The rule will trigger when the group ``virus`` has been matched 8 times in the last 360 seconds.
 
@@ -1455,595 +1473,564 @@ if_fts
 Makes the decoder that processed the event to take the :ref:`fts <decoders_fts>` line into consideration.
 
 +--------------------+--------------------+
-| **Example of use** | <if_fts />         |
+| Example of use     | <if_fts />         |
 +--------------------+--------------------+
 
 .. note::
-  The dynamic filters same_field or not_same_field will not work with the static fields (user, srcip, dstip, etc.) and the specific ones have to be used instead.
+
+   The dynamic filters ``same_field`` or ``not_same_field`` will not work with the static fields (``user``, ``srcip``, ``dstip``, etc.) and the specific ones have to be used instead.
 
 same_id
 ^^^^^^^
 
-Specifies that the decoded id must be the same.
-This option is used in conjunction with ``frequency`` and ``timeframe``.
+Specifies that the decoded ID must be the same. This option is used in conjunction with ``frequency`` and ``timeframe``.
 
 +--------------------+--------------------+
-| **Example of use** | <same_id />        |
+| Example of use     | <same_id />        |
 +--------------------+--------------------+
 
 different_id
 ^^^^^^^^^^^^
 
-Specifies that the decoded id must be different.
-This option is used in conjunction with ``frequency`` and ``timeframe``.
+Specifies that the decoded id must be different. This option is used in conjunction with ``frequency`` and ``timeframe``.
 
 +--------------------+-------------------+
-| **Example of use** | <different_id />  |
+| Example of use     | <different_id />  |
 +--------------------+-------------------+
 
 same_srcip
 ^^^^^^^^^^
 
-Specifies that the decoded source IP address must be the same.
-This option is used in conjunction with ``frequency`` and ``timeframe``.
+Specifies that the decoded source IP address must be the same. This option is used in conjunction with ``frequency`` and ``timeframe``.
+
 
 +--------------------+----------------+
-| **Example of use** | <same_srcip /> |
+| Example of use     | <same_srcip /> |
 +--------------------+----------------+
 
-Deprecated label ``same_source_ip`` works like an alias for ``same_srcip``. 
+The deprecated label ``same_source_ip`` works like an alias for ``same_srcip``.
 
 different_srcip
 ^^^^^^^^^^^^^^^
 
-Specifies that the decoded source IP address must be different.
-This option is used in conjunction with ``frequency`` and ``timeframe``.
+Specifies that the decoded source IP address must be different. This option is used in conjunction with ``frequency`` and ``timeframe``.
 
 +--------------------+----------------------+
-| **Example of use** | <different_srcip />  |
+| Example of use     | <different_srcip />  |
 +--------------------+----------------------+
 
-Deprecated label ``not_same_source_ip`` works like an alias for ``different_srcip``. 
+The deprecated label ``not_same_source_ip`` works like an alias for ``different_srcip``. 
 
 same_dstip
 ^^^^^^^^^^
 
-Specifies that the decoded destination IP address must be the same.
-This option is used in conjunction with ``frequency`` and ``timeframe``.
+Specifies that the decoded destination IP address must be the same. This option is used in conjunction with ``frequency`` and ``timeframe``.
 
 +--------------------+----------------+
-| **Example of use** | <same_dstip /> |
+| Example of use     | <same_dstip /> |
 +--------------------+----------------+
 
 different_dstip
 ^^^^^^^^^^^^^^^
 
-Specifies that the decoded destination IP address must be different.
-This option is used in conjunction with ``frequency`` and ``timeframe``.
+Specifies that the decoded destination IP address must be different. This option is used in conjunction with ``frequency`` and ``timeframe``.
 
 +--------------------+----------------------+
-| **Example of use** | <different_dstip />  |
+| Example of use     | <different_dstip />  |
 +--------------------+----------------------+
 
 same_srcport
 ^^^^^^^^^^^^
 
-Specifies that the decoded source port must be the same.
-This option is used in conjunction with ``frequency`` and ``timeframe``.
+Specifies that the decoded source port must be the same. This option is used in conjunction with ``frequency`` and ``timeframe``.
 
 +--------------------+-------------------+
-| **Example of use** | <same_srcport />  |
+| Example of use     | <same_srcport />  |
 +--------------------+-------------------+
 
 different_srcport
 ^^^^^^^^^^^^^^^^^
 
-Specifies that the decoded source port must be different.
-This option is used in conjunction with ``frequency`` and ``timeframe``.
+Specifies that the decoded source port must be different. This option is used in conjunction with ``frequency`` and ``timeframe``.
 
 +--------------------+------------------------+
-| **Example of use** | <different_srcport />  |
+| Example of use     | <different_srcport />  |
 +--------------------+------------------------+
 
 same_dstport
 ^^^^^^^^^^^^
 
-Specifies that the decoded destination port must be the same.
-This option is used in conjunction with ``frequency`` and ``timeframe``.
+Specifies that the decoded destination port must be the same. This option is used in conjunction with ``frequency`` and ``timeframe``.
 
 +--------------------+-------------------+
-| **Example of use** | <same_dstport />  |
+| Example of use     | <same_dstport />  |
 +--------------------+-------------------+
 
 different_dstport
 ^^^^^^^^^^^^^^^^^
 
-Specifies that the decoded destination port must be different.
-This option is used in conjunction with ``frequency`` and ``timeframe``.
+Specifies that the decoded destination port must be different. This option is used in conjunction with ``frequency`` and ``timeframe``.
 
 +--------------------+------------------------+
-| **Example of use** | <different_dstport />  |
+| Example of use     | <different_dstport />  |
 +--------------------+------------------------+
 
 same_location
 ^^^^^^^^^^^^^
 
-Specifies that the location must be the same.
-This option is used in conjunction with ``frequency`` and ``timeframe``.
+Specifies that the location must be the same. This option is used in conjunction with ``frequency`` and ``timeframe``.
 
 +--------------------+--------------------+
-| **Example of use** | <same_location />  |
+| Example of use     | <same_location />  |
 +--------------------+--------------------+
 
 different_location
 ^^^^^^^^^^^^^^^^^^
 
-Specifies that the decoded location must be different.
-This option is used in conjunction with ``frequency`` and ``timeframe``.
+Specifies that the decoded location must be different. This option is used in conjunction with ``frequency`` and ``timeframe``.
 
 +--------------------+-------------------------+
-| **Example of use** | <different_location />  |
+| Example of use     | <different_location />  |
 +--------------------+-------------------------+
 
 same_srcuser
 ^^^^^^^^^^^^
 
-Specifies that the decoded source user must be the same.
-This option is used in conjunction with ``frequency`` and ``timeframe``.
+Specifies that the decoded source user must be the same. This option is used in conjunction with ``frequency`` and ``timeframe``.
 
 +--------------------+-------------------+
-| **Example of use** | <same_srcuser />  |
+| Example of use     | <same_srcuser />  |
 +--------------------+-------------------+
 
 different_srcuser
 ^^^^^^^^^^^^^^^^^
 
-Specifies that the decoded source user must be different.
-This option is used in conjunction with ``frequency`` and ``timeframe``.
+Specifies that the decoded source user must be different. This option is used in conjunction with ``frequency`` and ``timeframe``.
 
 +--------------------+------------------------+
-| **Example of use** | <different_srcuser />  |
+| Example of use     | <different_srcuser />  |
 +--------------------+------------------------+
 
 same_user
 ^^^^^^^^^
 
-Specifies that the decoded user must be the same.
-This option is used in conjunction with ``frequency`` and ``timeframe``.
+Specifies that the decoded user must be the same. This option is used in conjunction with ``frequency`` and ``timeframe``.
 
 +--------------------+--------------------+
-| **Example of use** | <same_user />      |
+| Example of use     | <same_user />      |
 +--------------------+--------------------+
 
 different_user
 ^^^^^^^^^^^^^^
 
-Specifies that the decoded user must be different.
-This option is used in conjunction with ``frequency`` and ``timeframe``.
+Specifies that the decoded user must be different. This option is used in conjunction with ``frequency`` and ``timeframe``.
 
 +--------------------+---------------------+
-| **Example of use** | <different_user />  |
+| Example of use     | <different_user />  |
 +--------------------+---------------------+
 
 same_field
 ^^^^^^^^^^
 
-The value of the dynamic field specified in this option must appear in previous events a ``frequency`` number of times within the required ``timeframe``.
+The value of the dynamic field specified in this option must appear a certain number of times in previous events, as defined by the ``frequency`` attribute, within a time frame specified by the ``timeframe`` attribute.
 
 +--------------------+-------------------------------+
-| **Example of use** | <same_field>key</same_field>  |
+| Example of use     | <same_field>key</same_field>  |
 +--------------------+-------------------------------+
 
 As an example of this option, check these rules:
 
 .. code-block:: xml
+   :emphasize-lines: 9
 
-  <!-- {"key":"value", "key2":"AAAA"} -->
-  <rule id="100001" level="3">
-    <decoded_as>json</decoded_as>
-    <field name="key">value</field>
-    <description>Testing JSON alert</description>
-  </rule>
+   <!-- {"key":"value", "key2":"AAAA"} -->
+   <rule id="100001" level="3">
+     <decoded_as>json</decoded_as>
+     <field name="key">value</field>
+     <description>Testing JSON alert</description>
+   </rule>
 
-  <rule id="100002" level="10" frequency="4" timeframe="300">
-    <if_matched_sid>100001</if_matched_sid>
-    <same_field>key2</same_field>
-    <description>Testing same_field option</description>
-  </rule>
+   <rule id="100002" level="10" frequency="4" timeframe="300">
+     <if_matched_sid>100001</if_matched_sid>
+     <same_field>key2</same_field>
+     <description>Testing same_field option</description>
+   </rule>
 
-Rule 100002 will fire when ``key2`` in the currently considered event is the same in four events that matched rule 100001 before within the last 300 seconds. Therefore, for the following events sequence:
-
-.. code-block:: json
-  :emphasize-lines: 7
-
-  {"key":"value", "key2":"AAAA"}
-  {"key":"value", "key2":"AAAA"}
-  {"key":"value", "key2":"BBBB"}
-  {"key":"value", "key2":"AAAA"}
-  {"key":"value", "key2":"CCCC"}
-  {"key":"value", "key2":"CCCC"}
-  {"key":"value", "key2":"AAAA"}
-
-The last event will fire rule 100002 instead of 100001 because it found the value ``AAAA`` in three of the previous events. The corresponding alert looks like this one:
+Rule 100002 will fire when ``key2`` in the currently considered event is the same in four events that matched rule 100001 within the last 300 seconds. Consider the following event logs generated in less than 300 seconds:
 
 .. code-block:: json
-  :emphasize-lines: 5
-  :class: output
 
-  {
-    "timestamp": "2020-03-04T03:00:28.973-0800",
-    "rule": {
-      "level": 10,
+   {"key":"value", "key2":"AAAA"}
+   {"key":"value", "key2":"AAAA"}
+   {"key":"value", "key2":"BBBB"}
+   {"key":"value", "key2":"AAAA"}
+   {"key":"value", "key2":"CCCC"}
+   {"key":"value", "key2":"CCCC"}
+   {"key":"value", "key2":"AAAA"}
+
+The last event will fire rule 100002 instead of 100001 because it found the value ``AAAA`` in three of the previous events. The corresponding alert looks like the following:
+
+.. code-block:: json
+   :class: output
+
+   {
+     "timestamp": "2020-03-04T03:00:28.973-0800",
+     "rule": {
+       "level": 10,
       "description": "Testing same_field option",
       "id": "100002",
-      "frequency": 4,
-      "firedtimes": 1,
-      "mail": false,
-      "groups": [
-        "local"
-      ]
-    },
-    "agent": {
-      "id": "000",
-      "name": "ubuntu"
-    },
-    "manager": {
-      "name": "ubuntu"
-    },
-    "id": "1583319628.14426",
-    "previous_output": "{\"key\":\"value\",\"key2\":\"AAAA\"}\n{\"key\":\"value\",\"key2\":\"AAAA\"}\n{\"key\":\"value\",\"key2\":\"AAAA\"}",
-    "full_log": "{\"key\":\"value\",\"key2\":\"AAAA\"}",
-    "decoder": {
-      "name": "json"
-    },
-    "data": {
-      "key": "value",
-      "key2": "AAAA"
-    },
-    "location": "/root/test.log"
-  }
+       "frequency": 4,
+       "firedtimes": 1,
+       "mail": false,
+       "groups": [
+         "local"
+       ]
+     },
+     "agent": {
+       "id": "000",
+       "name": "ubuntu"
+     },
+     "manager": {
+       "name": "ubuntu"
+     },
+     "id": "1583319628.14426",
+     "previous_output": "{\"key\":\"value\",\"key2\":\"AAAA\"}\n{\"key\":\"value\",\"key2\":\"AAAA\"}\n{\"key\":\"value\",\"key2\":\"AAAA\"}",
+     "full_log": "{\"key\":\"value\",\"key2\":\"AAAA\"}",
+     "decoder": {
+       "name": "json"
+     },
+     "data": {
+       "key": "value",
+       "key2": "AAAA"
+     },
+     "location": "/root/test.log"
+   }
 
 different_field
 ^^^^^^^^^^^^^^^
 
-It is the opposite setting of ``same_field``. The value of the dynamic field specified in this option must be different than the ones found in previous events a ``frequency`` number of times within the required ``timeframe``.
+It is the opposite setting of ``same_field``. The value of the dynamic field specified in this option must differ from those found in previous events a certain number of times. This is defined by the ``frequency`` attribute, within a time frame specified by the ``timeframe`` attribute.
 
 +--------------------+------------------------------------------+
-| **Example of use** | <different_field>key2</different_field>  |
+| Example of use     | <different_field>key2</different_field>  |
 +--------------------+------------------------------------------+
 
 global_frequency
 ^^^^^^^^^^^^^^^^
 
-Specifies that the events of all agents will be contemplated when using the
-frequency and ``timeframe`` options. By default, only the events generated by
-the same agent will be taken into account to increase the frequency counter for a rule.
+Specifies that the events of all agents will be contemplated when using the frequency and ``timeframe`` options. By default, only the events generated by the same agent will be taken into account to increase the frequency counter for a rule.
 
 +--------------------+----------------------+
-| **Example of use** | <global_frequency /> |
+| Example of use     | <global_frequency /> |
 +--------------------+----------------------+
 
 .. warning::
-  Although the label contains the word `global`, this option works at manager level, not at cluster level.
+
+   Although the label contains the word global, this option works at manager level, not at cluster level.
 
 same_protocol
 ^^^^^^^^^^^^^
 
-Specifies that the decoded protocol must be the same.
-This option is used in conjunction with ``frequency`` and ``timeframe``.
+Specifies that the decoded protocol must be the same. This option is used in conjunction with ``frequency`` and ``timeframe``.
 
 +--------------------+-------------------+
-| **Example of use** | <same_protocol /> |
+| Example of use     | <same_protocol /> |
 +--------------------+-------------------+
 
 different_protocol
 ^^^^^^^^^^^^^^^^^^
 
-Specifies that the decoded protocol must be different.
-This option is used in conjunction with ``frequency`` and ``timeframe``.
+Specifies that the decoded protocol must be different. This option is used in conjunction with ``frequency`` and ``timeframe``.
 
 +--------------------+-------------------------+
-| **Example of use** | <different_protocol />  |
+| Example of use     | <different_protocol />  |
 +--------------------+-------------------------+
 
 same_action
 ^^^^^^^^^^^
 
-Specifies that the decoded action must be the same.
-This option is used in conjunction with ``frequency`` and ``timeframe``.
+Specifies that the decoded action must be the same. This option is used in conjunction with ``frequency`` and ``timeframe``.
 
 +--------------------+-----------------+
-| **Example of use** | <same_action /> |
+| Example of use     | <same_action /> |
 +--------------------+-----------------+
 
 different_action
 ^^^^^^^^^^^^^^^^
 
-Specifies that the decoded action must be different.
-This option is used in conjunction with ``frequency`` and ``timeframe``.
+Specifies that the decoded data must be the same. This option is used in conjunction with ``frequency`` and ``timeframe``.
 
 +--------------------+-----------------------+
-| **Example of use** | <different_action />  |
+| Example of use     | <different_action />  |
 +--------------------+-----------------------+
 
 same_data
 ^^^^^^^^^
 
-Specifies that the decoded data must be the same.
-This option is used in conjunction with ``frequency`` and ``timeframe``.
+Specifies that the decoded data must be the same. This option is used in conjunction with ``frequency`` and ``timeframe``.
 
 +--------------------+---------------+
-| **Example of use** | <same_data /> |
+| Example of use     | <same_data /> |
 +--------------------+---------------+
 
 different_data
 ^^^^^^^^^^^^^^
 
-Specifies that the decoded data must be different.
-This option is used in conjunction with ``frequency`` and ``timeframe``.
+Specifies that the decoded data must be different. This option is used in conjunction with ``frequency`` and ``timeframe``.
 
 +--------------------+---------------------+
-| **Example of use** | <different_data />  |
+| Example of use     | <different_data />  |
 +--------------------+---------------------+
 
 same_extra_data
 ^^^^^^^^^^^^^^^
 
-Specifies that the decoded extra data must be the same.
-This option is used in conjunction with ``frequency`` and ``timeframe``.
+Specifies that the decoded extra data must be the same. This option is used in conjunction with ``frequency`` and ``timeframe``.
 
 +--------------------+---------------------+
-| **Example of use** | <same_extra_data /> |
+| Example of use     | <same_extra_data /> |
 +--------------------+---------------------+
 
 different_extra_data
 ^^^^^^^^^^^^^^^^^^^^
 
-Specifies that the decoded extra data must be different.
-This option is used in conjunction with ``frequency`` and ``timeframe``.
+Specifies that the decoded extra data must be different. This option is used in conjunction with ``frequency`` and ``timeframe``.
 
 +--------------------+---------------------------+
-| **Example of use** | <different_extra_data />  |
+| Example of use     | <different_extra_data />  |
 +--------------------+---------------------------+
 
 same_status
 ^^^^^^^^^^^
 
-Specifies that the decoded status must be the same.
-This option is used in conjunction with ``frequency`` and ``timeframe``.
+Specifies that the decoded status must be the same. This option is used in conjunction with ``frequency`` and ``timeframe``.
 
 +--------------------+-----------------+
-| **Example of use** | <same_status /> |
+| Example of use     | <same_status /> |
 +--------------------+-----------------+
 
 different_status
 ^^^^^^^^^^^^^^^^
 
-Specifies that the decoded status must be different.
-This option is used in conjunction with ``frequency`` and ``timeframe``.
+Specifies that the decoded status must be different. This option is used in conjunction with ``frequency`` and ``timeframe``.
 
 +--------------------+-----------------------+
-| **Example of use** | <different_status />  |
+| Example of use     | <different_status />  |
 +--------------------+-----------------------+
 
 same_system_name
 ^^^^^^^^^^^^^^^^
 
-Specifies that the decoded system name must be the same.
-This option is used in conjunction with ``frequency`` and ``timeframe``.
+Specifies that the decoded system name must be the same. This option is used in conjunction with ``frequency`` and ``timeframe``.
 
 +--------------------+----------------------+
-| **Example of use** | <same_system_name /> |
+| Example of use     | <same_system_name /> |
 +--------------------+----------------------+
 
 different_system_name
 ^^^^^^^^^^^^^^^^^^^^^
 
-Specifies that the decoded system name must be different.
-This option is used in conjunction with ``frequency`` and ``timeframe``.
+Specifies that the decoded system name must be different. This option is used in conjunction with ``frequency`` and ``timeframe``.
 
 +--------------------+---------------------------+
-| **Example of use** | <different_system_name /> |
+| Example of use     | <different_system_name /> |
 +--------------------+---------------------------+
 
 same_url
 ^^^^^^^^
 
-Specifies that the decoded url must be the same.
-This option is used in conjunction with ``frequency`` and ``timeframe``.
+Specifies that the decoded url must be the same. This option is used in conjunction with ``frequency`` and ``timeframe``.
 
 +--------------------+--------------+
-| **Example of use** | <same_url /> |
+| Example of use     | <same_url /> |
 +--------------------+--------------+
 
 different_url
 ^^^^^^^^^^^^^
 
-Specifies that the decoded url must be different.
-This option is used in conjunction with ``frequency`` and ``timeframe``.
+Specifies that the decoded url must be different. This option is used in conjunction with ``frequency`` and ``timeframe``.
 
 +--------------------+--------------------+
-| **Example of use** | <different_url />  |
+| Example of use     | <different_url />  |
 +--------------------+--------------------+
 
 same_srcgeoip
 ^^^^^^^^^^^^^
 
-Specifies that the source geoip location must be the same.
-This option is used in conjunction with ``frequency`` and ``timeframe``.
+Specifies that the source GeoIP location must be the same. This option is used in conjunction with ``frequency`` and ``timeframe``.
 
 +--------------------+-------------------+
-| **Example of use** | <same_srcgeoip /> |
+| Example of use     | <same_srcgeoip /> |
 +--------------------+-------------------+
 
 different_srcgeoip
 ^^^^^^^^^^^^^^^^^^
 
-Specifies that the source geoip location must be different.
-This option is used in conjunction with ``frequency`` and ``timeframe``.
+Specifies that the source GeoIP location must be different. This option is used in conjunction with ``frequency`` and ``timeframe``.
 
 +--------------------+------------------------+
-| **Example of use** | <different_srcgeoip /> |
+| Example of use     | <different_srcgeoip /> |
 +--------------------+------------------------+
 
 Example:
 
-  As an example of these last options, check this rule:
+As an example of these last options, check this rule:
 
-    .. code-block:: xml
+.. code-block:: xml
+   :emphasize-lines: 4
 
-      <rule id=100005 level="0">
-        <match> Could not open /home </match>
-        <same_user />
-        <different_srcgeoip />
-        <same_dstport />
-      </rule>
+   <rule id=100005 level="0">
+     <match> Could not open /home </match>
+     <same_user />
+     <different_srcgeoip />
+     <same_dstport />
+   </rule>
 
-  That rule filters when the same ``user`` tries to open file ``/home`` but returns an error, on a different ``ip`` and using the same ``port``.
+The rule filters when the same ``user`` tries to open file ``/home`` but returns an error, on a different GeoIP and using the same destination port.
 
 same_dstgeoip
 ^^^^^^^^^^^^^
 
-Specifies that the destination geoip location must be the same.
-This option is used in conjunction with ``frequency`` and ``timeframe``.
+Specifies that the destination GeoIP location must be the same. This option is used in conjunction with ``frequency`` and ``timeframe``.
 
 +--------------------+-------------------+
-| **Example of use** | <same_dstgeoip /> |
+| Example of use     | <same_dstgeoip /> |
 +--------------------+-------------------+
 
 different_dstgeoip
 ^^^^^^^^^^^^^^^^^^
 
-Specifies that the destination geoip location must be different.
-This option is used in conjunction with ``frequency`` and ``timeframe``.
+Specifies that the destination GeoIP location must be different. This option is used in conjunction with ``frequency`` and ``timeframe``.
 
 +--------------------+------------------------+
-| **Example of use** | <different_dstgeoip /> |
+| Example of use     | <different_dstgeoip /> |
 +--------------------+------------------------+
 
 description
 ^^^^^^^^^^^
 
-Specifies a human-readable description to the rule in order to provide context to each alert regarding the nature of the events matched by it.
+Specifies a human-readable description of the rule to provide context to each alert regarding the nature of the events matched by it.
 
 +--------------------+------------+
-| **Default Value**  | n/a        |
+| Default Value      | n/a        |
 +--------------------+------------+
-| **Allowed values** | Any string |
+| Allowed values     | Any string |
 +--------------------+------------+
 
 Examples:
 
-  .. code-block:: xml
+.. code-block:: xml
+   :emphasize-lines: 3
 
-    <rule id="100015" level="2">
-      ...
-      <description> A timeout occurred. </description>
-    </rule>
+   <rule id="100015" level="2">
+     ...
+     <description>A timeout occurred.</description>
+   </rule>
 
-    <rule id="100035" level="4">
-      ...
-      <description> File missing. Root access unrestricted. </description>
-    </rule>
+   <rule id="100035" level="4">
+     ...
+     <description>File missing. Root access unrestricted.</description>
+   </rule>
 
-Since Wazuh version 3.3 it is possible to include any decoded field (static or dynamic) to the description message. You can use the following syntax: ``$(field_name)`` to add a field to the description.
+Since Wazuh version 3.3, it is possible to include any decoded field (static or dynamic) to the description message. You can use the following syntax: ``$(field_name)`` to add a field to the description.
 
 Example:
 
-  .. code-block:: xml
+.. code-block:: xml
+   :emphasize-lines: 3
 
-    <rule id="100005" level="8">
-      <match>illegal user|invalid user</match>
-      <description>sshd: Attempt to login using a non-existent user from IP $(attempt_ip)</description>
-      <options>no_log</options>
-    </rule>
+   <rule id="100005" level="8">
+     <match>illegal user|invalid user</match>
+     <description>sshd: Attempt to login using a non-existent user from IP $(attempt_ip)</description>
+     <options>no_log</options>
+   </rule>
 
 If ``description`` label is declared multiple times within the rule, the following rules apply:
 
-- The resulting value is their concatenation.
+-  The resulting value is their concatenation.
 
 list
 ^^^^
 
-Perform a CDB lookup using an ossec list.  This is a fast on-disk database which will always find keys within two seeks of the file.
+Perform a :doc:`Constant DataBase </user-manual/ruleset/cdb-list>` lookup using a CDB list. This is a fast on-disk database which will always find keys within two seeks of the file.
 
-+--------------------+--------------------------------------------------------------------------------------------------------------------+
-| **Default Value**  | n/a                                                                                                                |
-+--------------------+--------------------------------------------------------------------------------------------------------------------+
-| **Allowed values** | Path to the CDB file to be used for lookup from the OSSEC directory. Must also be included in the ossec.conf file. |
-+--------------------+--------------------------------------------------------------------------------------------------------------------+
++--------------------+---------------------------------------------------------------------------------------------------------------------------------------+
+| Default Value      | n/a                                                                                                                                   |
++--------------------+---------------------------------------------------------------------------------------------------------------------------------------+
+| Allowed values     | Path to the CDB file to be used for lookup from the Wazuh directory. Must also be included in the ``/var/ossec/etc/ossec.conf`` file. |
++--------------------+---------------------------------------------------------------------------------------------------------------------------------------+
 
 +-----------------+-------------------------+---------------------------------------------------------------------------------------------------------+
 | Attribute       | Description                                                                                                                       |
 +-----------------+-------------------------+---------------------------------------------------------------------------------------------------------+
-| **field**       | key in the CDB: srcip, srcport, dstip, dstport, extra_data, user, url, id, hostname, program_name, status, action, dynamic field. |
+| field           | key in the CDB: srcip, srcport, dstip, dstport, extra_data, user, url, id, hostname, program_name, status, action, dynamic field. |
 +-----------------+-------------------------+---------------------------------------------------------------------------------------------------------+
-| **lookup**      | match_key               | key to search within the cdb and will match if they key is present. Default.                            |
+| lookup          | match_key               | Matches if the key value is present in the CDB list. Works by default.                                  |
 +-----------------+-------------------------+---------------------------------------------------------------------------------------------------------+
-|                 | not_match_key           | key to search and will match if it is not present in the database.                                      |
+|                 | not_match_key           | Matches if the key value is not present in the CDB list.                                                |
 +-----------------+-------------------------+---------------------------------------------------------------------------------------------------------+
-|                 | match_key_value         | searched for in the cdb. It will be compared with regex from attribute check_value.                     |
+|                 | match_key_value         | Searches for a key value  in the CDB list                                                               |
 +-----------------+-------------------------+---------------------------------------------------------------------------------------------------------+
-|                 | address_match_key       | IP address and the key to search within the cdb and will match if they key is present.                  |
+|                 | address_match_key       | IP address and the key to search within the CDB and will match if the key is present.                   |
 +-----------------+-------------------------+---------------------------------------------------------------------------------------------------------+
 |                 | not_address_match_key   | IP address and the key to search and will match if it IS NOT present in the database.                   |
 +-----------------+-------------------------+---------------------------------------------------------------------------------------------------------+
-|                 | address_match_key_value | IP address to search in the cdb. It will be compared with regex from attribute check_value.             |
+|                 | address_match_key_value | IP address to search in the CDB. It is compared with regex from attribute check_value.                  |
 +-----------------+-------------------------+---------------------------------------------------------------------------------------------------------+
-| **check_value** | regex for matching on the value pulled out of the cdb when using types: address_match_key_value, match_key_value                  |
+| check_value     | regex for matching on the value pulled out of the CDB when using types: address_match_key_value, match_key_value                  |
 +-----------------+-----------------------------------------------------------------------------------------------------------------------------------+
 
 
 Example:
 
-  .. code-block:: xml
+.. code-block:: xml
+   :emphasize-lines: 3
 
-      <rule id="80780" level="3">
-          <if_sid>80700</if_sid>
-          <list field="audit.key" lookup="match_key_value" check_value="write">etc/lists/audit-keys</list>
-          <description>Audit: Watch - Write access</description>
-          <group>audit_watch_write,gdpr_IV_30.1.g,</group>
-      </rule>
+   <rule id="80780" level="3">
+       <if_sid>80700</if_sid>
+       <list field="audit.key" lookup="match_key_value" check_value="write">etc/lists/audit-keys</list>
+       <description>Audit: Watch - Write access</description>
+       <group>audit_watch_write,gdpr_IV_30.1.g,</group>
+   </rule>
 
-The rule will look for "audit.key" in the CDB list. Where it will check if its equal to "write", in which case it will match and trigger a level 3 alert.
+The rule will look for ``audit.key`` in the CDB list. Where it will check if it is equal to ``write``, in which case it will match and trigger a level 3 alert.
 
 info
 ^^^^
 
-Extra information may be added through the following attributes:
+You can add extra information through the following attributes:
 
 +--------------------+------------+
-| **Default Value**  | n/a        |
+| Default Value      | n/a        |
 +--------------------+------------+
-| **Allowed values** | Any string |
+| Allowed values     | Any string |
 +--------------------+------------+
 
 +-----------+----------------+-----------------------------------------------------------------------------------------------------------+
 | Attribute | Allowed values | Description                                                                                               |
 +-----------+----------------+-----------------------------------------------------------------------------------------------------------+
-| type      | **text**       | This is the default when no type is selected. Additional information about the alert/event.               |
+| type      | text           | This is the default when no type is selected. Additional information about the alert/event.               |
 +           +----------------+-----------------------------------------------------------------------------------------------------------+
-|           | **link**       | Link to more information about the alert/event.                                                           |
+|           | link           | Link to more information about the alert/event.                                                           |
 +           +----------------+-----------------------------------------------------------------------------------------------------------+
-|           | **cve**        | The CVE Number related to this alert/event.                                                               |
+|           | cve            | The CVE Number related to this alert/event.                                                               |
 +           +----------------+-----------------------------------------------------------------------------------------------------------+
-|           | **ovsdb**      | The osvdb id related to this alert/event.                                                                 |
+|           | ovsdb          | The osvdb id related to this alert/event.                                                                 |
 +-----------+----------------+-----------------------------------------------------------------------------------------------------------+
-
-
 
 Example:
 
-  .. code-block:: xml
+.. code-block:: xml
+   :emphasize-lines: 5
 
-      <rule id="5714" level="14" timeframe="120" frequency="3">
-        <if_matched_sid>5713</if_matched_sid>
-        <match>Local: crc32 compensation attack</match>
-        <description>sshd: SSH CRC-32 Compensation attack</description>
-        <info type="cve">2001-0144</info>
-        <info type="link">http://www.securityfocus.com/bid/2347/info/</info>
-        <group>exploit_attempt,pci_dss_11.4,pci_dss_6.2,gpg13_4.12,gdpr_IV_35.7.d,nist_800_53_SI.4,nist_800_53_SI.2,</group>
-      </rule>
+   <rule id="5714" level="14" timeframe="120" frequency="3">
+     <if_matched_sid>5713</if_matched_sid>
+     <match>Local: crc32 compensation attack</match>
+     <description>sshd: SSH CRC-32 Compensation attack</description>
+     <info type="cve">2001-0144</info>
+     <info type="link">http://www.securityfocus.com/bid/2347/info/</info>
+     <group>exploit_attempt,pci_dss_11.4,pci_dss_6.2,gpg13_4.12,gdpr_IV_35.7.d,nist_800_53_SI.4,nist_800_53_SI.2,</group>
+   </rule>
 
 The rule provides additional information about the threat it detects.
 
@@ -2057,29 +2044,31 @@ Additional rule options.
 +--------------------+-----------------------------------------------------+
 | Attribute          | Description                                         |
 +====================+=====================================================+
-| **alert_by_email** | Always alert by email.                              |
+| alert_by_email     | Always alert by email.                              |
 +--------------------+-----------------------------------------------------+
-| **no_email_alert** | Never alert by email.                               |
+| no_email_alert     | Never alert by email.                               |
 +--------------------+-----------------------------------------------------+
-| **no_log**         | Do not log this alert.                              |
+| no_log             | Do not log this alert.                              |
 +--------------------+-----------------------------------------------------+
-| **no_full_log**    | Do not include the ``full_log`` field in the alert. |
+| no_full_log        | Do not include the ``full_log`` field in the alert. |
 +--------------------+-----------------------------------------------------+
-| **no_counter**     | Omit field ``rule.firedtimes`` in the JSON alert.   |
+| no_counter         | Omit field ``rule.firedtimes`` in the JSON alert.   |
 +--------------------+-----------------------------------------------------+
 
 Example:
 
-  .. code-block:: xml
+.. code-block:: xml
+   :emphasize-lines: 4
 
-    <rule id="9800" level="8">
-      <match>illegal user|invalid user</match>
-      <description>sshd: Attempt to login using a non-existent user</description>
-      <options>no_log</options>
-    </rule>
+   <rule id="9800" level="8">
+     <match>illegal user|invalid user</match>
+     <description>sshd: Attempt to login using a non-existent user</description>
+     <options>no_log</options>
+   </rule>
 
 .. note::
-  Use one ``<options>`` tag for each option you want to add.
+
+   Use one ``<options>`` tag for each option you want to add.
 
 .. _rules_check_diff:
 
@@ -2090,50 +2079,51 @@ Used to determine when the output of a command changes.
 
 Example:
 
-  .. code-block:: xml
+.. code-block:: xml
+   :emphasize-lines: 4
 
-      <rule id="534" level="1">
-        <if_sid>530</if_sid>
-        <match>ossec: output: 'w'</match>
-        <check_diff />
-        <options>no_log</options>
-        <description>List of logged in users. It will not be alerted by default.</description>
-      </rule>
+   <rule id="534" level="1">
+     <if_sid>530</if_sid>
+     <match>ossec: output: 'w'</match>
+     <check_diff />
+     <options>no_log</options>
+     <description>List of logged in users. It will not be alerted by default.</description>
+   </rule>
 
 .. _rules_mitre:
 
 mitre
 ^^^^^
 
-Specifies the `MITRE ATT&CK <https://attack.mitre.org>`_ technique ID or IDs that fit in well with the rule.
+Specifies the `MITRE ATT&CK <https://attack.mitre.org>`__ technique ID or IDs that fit in well with the rule.
 
 +----------------+----------------------------+
 | Required label | Value                      |
 +================+============================+
-| **id**         | MITRE ATT&CK technique ID. |
+| id             | MITRE ATT&CK technique ID. |
 +----------------+----------------------------+
 
 Example:
 
-  .. code-block:: xml
+.. code-block:: xml
 
-    <rule id="100002" level="10">
-      <description>Attack technique sample.</description>
-      <mitre>
-        <id>T1110</id>
-        <id>T1037</id>
-      </mitre>
-    </rule>
+   <rule id="100002" level="10">
+     <description>Attack technique sample.</description>
+     <mitre>
+       <id>T1110</id>
+       <id>T1037</id>
+     </mitre>
+   </rule>
 
 var
 ^^^
 
-Defines a variable that can be used in any place within the same file. It must be defined at the base level of the ruleset, not inside a tagged section.
+Defines a variable that can be used in any rule within the same rule file. It must be defined at the base level of the rule file, not inside a tagged section.
 
 +----------------+------------------------+
 | Attribute      | Value                  |
 +================+========================+
-| **name**       | Name for the variable. |
+| name           | Name for the variable. |
 +----------------+------------------------+
 
 Example:
@@ -2147,8 +2137,8 @@ Example:
 
       <rule id="100001" level="5">
         <if_sid>550</if_sid>
-        <field name="file">^$joe_folder</field>
-        <description>A Joe's file was modified.</description>
+       <field name="file">^$joe_folder</field>
+       <description>A Joe's file was modified.</description>
         <group>ossec,pci_dss_10.6.1,gpg13_10.1,gdpr_IV_35.7.d,</group>
       </rule>
 
@@ -2161,20 +2151,18 @@ BAD_WORDS
 
    <var name="BAD_WORDS">error|warning|failure</var>
 
-``BAD_WORDS`` is a very used use case of the ``<var>`` option.
+``BAD_WORDS`` is a commonly used case of the ``<var>`` option.
 
-It is used to include many words in the same variable. Later, this variable can be matched into the decoders to check if any of those words are in a caught event.
+It is used to include many words in the same variable. This variable can then be included into the rules to check if any of those words are in a caught event.
 
 Example:
 
 .. code-block:: xml
-   :emphasize-lines: 1,5
 
    <var name="BAD_WORDS">error|warning|failure</var>
-
    <group name="syslog,errors,">
      <rule id="XXXX" level="2">
-       <match>$BAD_WORDS</match>
-       <description>Error found.</description>
+      <match>$BAD_WORDS</match>
+      <description>Error found.</description>
      </rule>
    </group>
