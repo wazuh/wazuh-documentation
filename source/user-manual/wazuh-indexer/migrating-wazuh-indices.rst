@@ -172,7 +172,8 @@ Setup snapshot repository
 
 On the Wazuh dashboard, perform the following steps:
 
-#. Click on the upper left menu **☰**, go to **Snapshot Management** > **Repositories**, and select **Create repository** to create a new snapshot repository.
+#. Click on the upper left menu **☰**, go to **Indexer management**, and select **Snapshot Management**. 
+#. Click on **Repositories**, and select **Create repository** to create a new snapshot repository.
 #. Enter a repository name, select the repository type **Shared file system**, enter the repository location ``/mnt/snapshots``, and select **Add** to register the new repository.
 
    .. thumbnail:: /images/manual/wazuh-indexer/create-snapshot-repository.gif
@@ -186,7 +187,7 @@ Repeat the above steps on the destination Wazuh cluster to set up a similar snap
 Take snapshots
 --------------
 
-#. Click on the upper left menu **☰**, and go to **Snapshot Management** > **Snapshots**.
+#. Click on the upper left menu **☰**, and go to **Indexer management** > **Snapshot Management** > **Snapshots**.
 #. Select **Take snapshot**, and enter a Snapshot name.
 #. Select or input source index patterns.
 #. Select the earlier created repository to store the snapshots.

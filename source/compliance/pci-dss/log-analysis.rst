@@ -71,10 +71,10 @@ Use cases
 
 		.. include:: /_templates/common/restart_manager.rst
 
-	#. Select **☰** > **Indexer/dashboard management** > **Dashboards Management** in the Wazuh dashboard.
+	#. Select **☰** > **Dashboard management** > **Dashboards Management** in the Wazuh dashboard.
 
-		.. thumbnail:: /images/compliance/pci/select-stack-management.png
-			:title: Select Stack Management
+		.. thumbnail:: /images/compliance/pci/select-dashboard-management.png
+			:title: Select Dashboard Management
 			:align: center
 			:width: 80%
 		
