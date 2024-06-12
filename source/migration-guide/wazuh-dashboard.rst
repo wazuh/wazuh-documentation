@@ -99,7 +99,7 @@ To guarantee a correct operation of Wazuh, make sure to also migrate from Open D
       server.ssl.key: "/etc/wazuh-dashboard/certs/dashboard-key.pem"
       server.ssl.certificate: "/etc/wazuh-dashboard/certs/dashboard.pem"
       opensearch.ssl.certificateAuthorities: ["/etc/wazuh-dashboard/certs/root-ca.pem"]
-      uiSettings.overrides.defaultRoute: /app/wazuh
+      uiSettings.overrides.defaultRoute: /app/wz-home
 
 #. Add the password of the ``kibanaserver`` user to the Wazuh dashboard keystore.  Execute the command below and follow the instructions. You may find your old password in the ``/etc/kibana/kibana.yml`` configuration file. 
 

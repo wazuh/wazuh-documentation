@@ -24,36 +24,24 @@ Enable the Wazuh Docker listener
 
 The Docker listener allows the Wazuh agent to capture Docker events and forward them to the Wazuh server. The following sections describe how to install the Python Docker module and enable the Wazuh Docker listener.
 
-Install dependencies on the Docker server
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+Python
+^^^^^^
 
-#. Install Python3:
+The Docker container module requires `Python 3 <https://www.python.org/>`__. Specifically, it's compatible with
+`Python |PYTHON_CLOUD_CONTAINERS_MIN|–|PYTHON_CLOUD_CONTAINERS_MAX| <https://www.python.org/downloads/>`_. While later Python versions should work as well, we can't assure they are compatible.
 
-   .. tabs::
+Docker library for Python
+^^^^^^^^^^^^^^^^^^^^^^^^^
 
-      .. group-tab:: Yum
+.. warning::
 
-         .. code-block:: console
+   The Wazuh manager includes all dependencies installed. These steps are only necessary when configuring the integration in a Wazuh agent.
 
-            # yum update && yum install python3
+`Python Docker library <https://pypi.org/project/docker/>`_ is the official Python library for the Docker Engine API. The Wazuh docker integration requires ``docker 6.0.0``.
 
-      .. group-tab:: APT
+.. code-block:: console
 
-         .. code-block:: console
-
-            # apt-get update && apt-get install python3
-
-#. Install Pip on Debian-based endpoints:
-
-   .. code-block:: console
-
-      # apt-get install python3-pip
-
-#. Install the Python ``docker`` module. The Wazuh Docker listener requires ``docker 4.2.0``.
-
-   .. code-block:: console
-
-      # pip3 install docker==4.2.0 urllib3==1.26.18
+   # pip3 install docker==6.0.0 urllib3==1.26.18
 
 Configure the Wazuh agent
 ^^^^^^^^^^^^^^^^^^^^^^^^^
@@ -74,26 +62,11 @@ Perform the following steps on the Docker server to configure the Wazuh agent to
 
       # systemctl restart wazuh-agent
 
-Wazuh Docker listener dashboard
--------------------------------
+Wazuh Docker dashboard
+----------------------
 
-The Wazuh Docker listener dashboard offers a centralized and user-friendly interface that allows you to monitor the security of your Dockerized infrastructure. With real-time insights and actionable information, the Wazuh Docker listener dashboard empowers system administrators and security teams to detect and respond to potential threats, ensuring the integrity and reliability of containerized applications. From monitoring container events to analyzing logs and implementing custom rules, this dashboard streamlines the security management process, enhancing the overall protection of your Docker environment.
+The Wazuh Docker dashboard offers a centralized and user-friendly interface that allows you to monitor the security of your Dockerized infrastructure. With real-time insights and actionable information, the Wazuh Docker listener dashboard empowers system administrators and security teams to detect and respond to potential threats, ensuring the integrity and reliability of containerized applications. From monitoring container events to analyzing logs and implementing custom rules, this dashboard streamlines the security management process, enhancing the overall protection of your Docker environment.
 
-Take the following steps to enable the Wazuh Docker listener dashboard:
-
-#. Click on the **Wazuh** menu icon, and select **Settings** > **Modules**.
-
-#. Scroll down to the **Threat Detection and Response** section and enable **Docker listener**.
-
-#. Click on the **Wazuh** menu icon, and select **Modules** > **Docker listener** to view the Docker listener dashboard.
-
-The animation below is a graphical representation of the steps you need to take to enable the Wazuh Docker listener dashboard.
-
-.. thumbnail:: /images/manual/container-security/enable-wazuh-docker-listener-dashboard.gif
-   :title: Steps to enable the Wazuh Docker listener dashboard
-   :alt: Steps to enable the Wazuh Docker listener dashboard
-   :align: center
-   :width: 80% 
 
 Wazuh Docker listener configuration options
 -------------------------------------------
@@ -222,5 +195,3 @@ The example configuration below shows an enabled Docker listener. The listener a
      <run_on_start>no</run_on_start>
      <disabled>no</disabled>
    </wodle>
-
-

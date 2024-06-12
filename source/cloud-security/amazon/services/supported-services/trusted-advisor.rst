@@ -145,7 +145,7 @@ Policy configuration
 Wazuh configuration
 -------------------
 
-#. Access the Wazuh configuration in **Wazuh** > **Management** > **Configuration** using the Wazuh UI or by manually editing the ``/var/ossec/etc/ossec.conf`` file in the host:
+#. Access the Wazuh configuration in **Settings** using the Wazuh UI or by manually editing the ``/var/ossec/etc/ossec.conf`` file in the host:
 
     .. thumbnail:: /images/cloud-security/aws/trusted-ui-1.png
       :align: center
@@ -184,7 +184,7 @@ Wazuh configuration
       .. include:: /_templates/common/restart_agent.rst
 
 
-The :ref:`AWS S3 module <wodle_s3>` configuration can be reviewed from **Wazuh** > **Management** > **Configuration** > **Cloud security monitoring** once added in the :ref:`Local configuration <reference_ossec_conf>`.
+The :ref:`AWS S3 module <wodle_s3>` configuration can be reviewed from **Settings** > **Cloud security monitoring** once added in the :ref:`Local configuration <reference_ossec_conf>`.
 
     .. thumbnail:: /images/cloud-security/aws/trusted-ui-3.png
       :align: center

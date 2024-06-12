@@ -330,10 +330,10 @@ Ubuntu endpoint
 		# touch /customers/regular_data.txt
 		# echo "this is regular data" >> /customers/regular_data.txt 
 
-	You can see a level 7 alert generated in the **Integrity monitoring** section of the Wazuh dashboard to show that a file in the monitored directory was modified.
+	You can see a level 7 alert generated in the **File Integrity Monitoring** section of the Wazuh dashboard to show that a file in the monitored directory was modified.
 
 	.. thumbnail:: /images/compliance/gdpr/integrity-monitoring-level-7.png
-	   :title: Integrity monitoring level 7 alert visualization
+	   :title: File Integrity Monitoring level 7 alert visualization
 	   :align: center
 	   :width: 80%
 
@@ -347,7 +347,7 @@ Ubuntu endpoint
 	You can see a level 15 alert generated to show that a sensitive file in the monitored directory was modified.
 
 	.. thumbnail:: /images/compliance/gdpr/integrity-monitoring-level-15.png
-	   :title: Integrity monitoring level 15 alert visualization
+	   :title: File Integrity Monitoring level 15 alert visualization
 	   :align: center
 	   :width: 80%
 

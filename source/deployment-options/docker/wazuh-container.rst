@@ -44,7 +44,7 @@ Single-node Deployment
         
       .. code-block:: yaml
         
-         # Wazuh App Copyright (C) 2021 Wazuh Inc. (License GPLv2)
+         # Wazuh App Copyright (C) 2017 Wazuh Inc. (License GPLv2)
          version: '3'
 
          services:
@@ -144,7 +144,7 @@ Multi-node deployment
       
       .. code-block:: yaml
       
-         # Wazuh App Copyright (C) 2021 Wazuh Inc. (License GPLv2)
+         # Wazuh App Copyright (C) 2017 Wazuh Inc. (License GPLv2)
          version: '3'
 
          services:
@@ -266,6 +266,13 @@ Wazuh indexer users
 
    If you have custom users, add them to the ``internal_users.yml`` file. Otherwise, executing this procedure deletes them.
 
+Closing your Wazuh dashboard session
+....................................
+
+Before starting the password change process, we recommend to log out of your Wazuh dashboard session.
+
+If you don't log out, persistent session cookies might cause errors when accessing Wazuh after changing user passwords.
+
 Setting a new hash
 ..................
 
@@ -320,6 +327,10 @@ Setting a new hash
 Setting the new password
 ........................
 
+.. warning::
+
+   Don't use the ``$`` or ``&`` characters in your new password. These characters can cause errors during deployment.
+
 #. Open  the ``docker-compose.yml`` file. Change all occurrences of the old password with the new one. For example, for a single-node deployment:
 
    -  ``admin`` user
@@ -341,6 +352,11 @@ Setting the new password
                - SSL_KEY=/etc/ssl/filebeat.key
                - API_USERNAME=wazuh-wui
                - API_PASSWORD=MyS3cr37P450r.*-
+           ...
+           wazuh.indexer:
+             ...
+             environment:
+               - "OPENSEARCH_JAVA_OPTS=-Xms1024m -Xmx1024m"
            ...
            wazuh.dashboard:
              ...

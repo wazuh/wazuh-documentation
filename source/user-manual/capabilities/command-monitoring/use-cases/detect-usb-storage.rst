@@ -83,7 +83,7 @@ Trigger the alert by plugging a USB storage to the Windows endpoint.
 Visualize the alerts
 --------------------
 
-Go to **Modules > Security events** tab on the Wazuh dashboard to visualize the generated alert when a USB device is connected to the Windows endpoint.
+Go to **Threat Hunting** module on the Wazuh dashboard to visualize the generated alert when a USB device is connected to the Windows endpoint.
 
 .. thumbnail:: /images/manual/command-monitoring/new-usb-device-alert.png
   :title: New USB device connected alert

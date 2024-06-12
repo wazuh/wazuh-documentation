@@ -143,19 +143,19 @@ You can check for information about Wazuh indices in two ways.
 Using the web user interface
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-#. In the Wazuh dashboard upper left menu **☰**, go to **OpenSearch Plugins** > **Index Management**.
+#. In the Wazuh dashboard upper left menu **☰**, go to **Indexer management** > **Index Management**.
 
    .. thumbnail:: /images/manual/wazuh-indexer/opensearch-plugins-index-management-option.png
-      :title: Opensearch plugins Index management menu option
-      :alt: Opensearch plugins Index management menu option
+      :title: Index management menu option
+      :alt: Index management menu option
       :align: center
       :width: 80%
 
 #. Click on **Indices**.
 
    .. thumbnail:: /images/manual/wazuh-indexer/opensearch-plugins-index-management-indices.png
-      :title: OpenSearch plugins Index-management indices option
-      :alt: OpenSearch plugins Index-management indices option
+      :title: Index-management indices option
+      :alt: Index-management indices option
       :align: center
       :width: 80%
 
@@ -169,7 +169,7 @@ You can query the indices information using the Wazuh indexer API from the Wazuh
 Wazuh dashboard
 ~~~~~~~~~~~~~~~
 
-#. Navigate to **☰** > **Management** > **Dev Tools**:
+#. Navigate to **☰** > **Indexer management** > **Dev Tools**:
 
    .. code-block:: none
 
@@ -402,7 +402,7 @@ Enabling Wazuh archives
 Defining the index pattern
 ^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-#. Go to **Management** > **Stack Management** and click **Index Patterns** from the Wazuh dashboard upper left menu **☰**.
+#. Go to **Indexer/dashboard management** > **Dashboards Management** and click **Index Patterns** from the Wazuh dashboard upper left menu **☰**.
 
 #. Click on **Create index pattern**.
 
@@ -443,7 +443,7 @@ At any moment, the connection status of an enrolled Wazuh agent is one of the fo
 
 Wazuh stores a history of the connection status of all its agents. By default, it indexes the agent connection status using the ``wazuh‑monitoring-*`` indices. The Wazuh indexer creates one of these indices per week by default. Check the documentation on :ref:`custom creation intervals <wazuh_monitoring_creation>`. These indices store the connection status of all the agents every 15 minutes by default. Check the documentation on the :ref:`frequency of API requests <wazuh_monitoring_frequency>`.
 
-The Wazuh dashboard requires these indices to display information about agent status. For example, by clicking **Agents**, you can see information such as the Wazuh agent's connection status and historical evolution within set timeframes.
+The Wazuh dashboard requires these indices to display information about agent status. For example, by clicking **Server management** > **Endpoints Summary**, you can see information such as the Wazuh agent's connection status and historical evolution within set timeframes.
 
 .. thumbnail:: /images/manual/wazuh-indexer/status-evolution-agents-dashboard.png
    :title: Status and evolution in Agents dashboard
@@ -466,7 +466,7 @@ The Wazuh dashboard uses the ``wazuh‑statistics-*`` indices to display statist
 
 The Wazuh dashboard runs requests to the Wazuh manager API to query usage-related information. It inserts data into the ``wazuh‑statistics-*`` indices from the information collected. The Wazuh indexer creates a ``wazuh‑statistics-*`` index per week by default. Check the documentation on the :ref:`Statistics creation interval <cron_statistics_index_creation>`. These indices store Wazuh server statistics every 5 minutes by default. Check the documentation on the :ref:`Frequency of task execution <cron_statistics_interval>`.
 
-To visualize this information in the Wazuh dashboard, go to **Management** > **Statistics**.
+To visualize this information in the Wazuh dashboard, go to **Server management** > **Statistics**.
 
 .. thumbnail:: /images/manual/wazuh-indexer/statistics-analysis-engine-dashboard.png
    :title: Statistics analysis engine dashboard

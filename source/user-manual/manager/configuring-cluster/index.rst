@@ -51,7 +51,7 @@ Wazuh server cluster
                 <port>1516</port>
                 <bind_addr>0.0.0.0</bind_addr>
                 <nodes>
-                    <node>master</node>
+                    <node>WAZUH-MASTER-ADDRESS</node>
                 </nodes>
                 <hidden>no</hidden>
                 <disabled>no</disabled>
@@ -75,7 +75,7 @@ Wazuh server cluster
                 <port>1516</port>
                 <bind_addr>0.0.0.0</bind_addr>
                 <nodes>
-                    <node>master</node>
+                    <node>WAZUH-MASTER-ADDRESS</node>
                 </nodes>
                 <hidden>no</hidden>
                 <disabled>no</disabled>

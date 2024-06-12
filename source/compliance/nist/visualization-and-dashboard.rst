@@ -6,7 +6,7 @@
 Visualization and dashboard
 ===========================
 
-Wazuh offers a web dashboard for continuous data visualization and analysis. The Wazuh dashboard comes with out-of-the-box modules for: security events, regulatory compliance, detected vulnerable applications, file integrity monitoring, configuration assessment results, and cloud infrastructure monitoring. It helps perform forensic and historical alert analyses.
+Wazuh offers a web dashboard for continuous data visualization and analysis. The Wazuh dashboard comes with out-of-the-box modules for: threat hunting, regulatory compliance, detected vulnerable applications, file integrity monitoring, configuration assessment results, and cloud infrastructure monitoring. It helps perform forensic and historical alert analyses.
 
 The :doc:`Wazuh dashboard </getting-started/components/wazuh-dashboard>` assists in meeting the following NIST 800-53 controls:
 
@@ -24,7 +24,7 @@ Generate a report of successful authentications
 
 This use case shows how Wazuh helps meet the **CA-7 Continuous monitoring** NIST requirement by providing security reporting to administrators. Use the Wazuh dashboard to generate a report of all successful authentications in the last 24 hours:
 
-#. Go to the Wazuh dashboard menu and select **Discover** under **OpenSearch Dashboards**.
+#. Go to the Wazuh dashboard menu and select **Discover** under **Explore**.
 
    .. thumbnail:: /images/compliance/nist/select-discover.png    
       :title: Select Discover
@@ -73,7 +73,7 @@ In this use case, Wazuh assists security administrators in meeting the **AU-6 Au
 
 #. Select the **NIST 800-53** module from your Wazuh dashboard.
 
-   .. thumbnail:: /images/compliance/nist/select-nist-800-53-moduleg.png    
+   .. thumbnail:: /images/compliance/nist/select-nist-800-53-module.png    
       :title: Select the NIST 800-53 module
       :alt: Select the NIST 800-53 module
       :align: center

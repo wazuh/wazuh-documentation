@@ -493,7 +493,7 @@ OpenSearch dashboards
 Wazuh provides several `dashboards for OpenSearch <https://packages.wazuh.com/integrations/opensearch/4.x-2.x/dashboards/wz-os-4.x-2.x-dashboards.ndjson>`__. After finishing with the OpenSearch integration setup, these dashboards display your Wazuh alerts in OpenSearch.
 
 .. thumbnail:: /images/integrations/security-events-dashboard-for-opensearch.png
-   :title: Security events dashboard for Opensearch
+   :title: Threat Hunting dashboard for Opensearch
    :align: center
    :width: 80%
 

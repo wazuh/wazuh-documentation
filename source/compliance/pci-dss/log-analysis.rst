@@ -71,10 +71,10 @@ Use cases
 
 		.. include:: /_templates/common/restart_manager.rst
 
-	#. Select **☰** > **Management** > **Stack Management** in the Wazuh dashboard.
+	#. Select **☰** > **Dashboard management** > **Dashboards Management** in the Wazuh dashboard.
 
-		.. thumbnail:: /images/compliance/pci/select-stack-management.png
-			:title: Select Stack Management
+		.. thumbnail:: /images/compliance/pci/select-dashboard-management.png
+			:title: Select Dashboard Management
 			:align: center
 			:width: 80%
 		
@@ -97,7 +97,7 @@ Use cases
 			:align: center
 			:width: 80%
 
-	#. Open the menu and select **Discover** under **OpenSearch Dashboards**. Events should be getting reported there.
+	#. Open the menu and select **Discover** under **Explore**. Events should be getting reported there.
 
 		.. thumbnail:: /images/compliance/pci/select-discover-1.png
 			:title: Select Discover

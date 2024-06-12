@@ -46,8 +46,8 @@ Configuring the Activity log export
 
 #. Configure the following settings and click **Save**.
 
-   -  Tick **AuditLogs** checkbox.
-   -  Tick the **Archive to storage account** checkbox.
+   -  Tick **Administrative** checkbox.
+   -  Tick the **Archive to a storage account** checkbox.
    -  Select your **Subscription**.
    -  Select your **Storage account**.
 
@@ -138,7 +138,7 @@ Alert visualization
 
 Once the Wazuh configuration is set and the ``azure-logs`` module is running using the previous configuration, the event from the user creation example exported to Storage will be processed. The results can be checked in the Wazuh dashboard. 
 
-.. thumbnail:: /images/cloud-security/azure/storage-kibana.png
+.. thumbnail:: /images/cloud-security/azure/storage.png
     :title: Storage
     :align: center
     :width: 80%

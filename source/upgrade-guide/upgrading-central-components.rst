@@ -62,11 +62,15 @@ Upgrading the Wazuh indexer
 
    To ensure compatibility with the latest Wazuh indexer and Wazuh dashboard, please update manually installed plugins accordingly. For additional information, check the `distribution matrix <https://github.com/wazuh/wazuh-packages/tree/v|WAZUH_CURRENT|#distribution-version-matrix>`__.
 
-In the case of having a Wazuh indexer cluster with multiple nodes, the cluster will remain available throughout the upgrading process. This rolling upgrade allows shutting down one Wazuh indexer node at a time for minimal disruption of service. Repeat these steps for every Wazuh indexer node.
+In a Wazuh indexer cluster with multiple nodes, the cluster remains available throughout the upgrading process. This rolling upgrade allows shutting down one Wazuh indexer node at a time for minimal disruption of service.
 
-.. note::
+As a first step, remove the *ss4o* index templates. Replace ``<WAZUH_INDEXER_IP_ADDRESS>``, ``<USERNAME>``, and ``<PASSWORD>`` before running any command below.
 
-   -  Replace ``<WAZUH_INDEXER_IP_ADDRESS>``, ``<USERNAME>``, and ``<PASSWORD>`` before running the commands below.
+.. code-block:: bash
+
+   curl -X DELETE "https://<WAZUH_INDEXER_IP_ADDRESS>:9200/_index_template/ss4o_*_template" -u <USERNAME>:<PASSWORD> -k
+
+Then, repeat the following steps for every Wazuh indexer node.
 
 #. Disable shard allocation.
 
@@ -155,49 +159,74 @@ When upgrading a multi-node Wazuh manager cluster, run the upgrade in every node
 
    .. note:: Upgrading from Wazuh 4.2.x or lower creates the ``wazuh`` operating system user and group to replace ``ossec``. To avoid upgrade conflicts, make sure that the ``wazuh`` user and group are not present in your operating system.
 
-#. Upgrade the Wazuh manager to the latest version.
+Upgrading the Wazuh manager
+^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-   .. tabs::
+Upgrade the Wazuh manager to the latest version.
 
-      .. group-tab:: Yum
+.. tabs::
 
-         .. code-block:: console
+   .. group-tab:: Yum
 
-            # yum upgrade wazuh-manager|WAZUH_MANAGER_RPM_PKG_INSTALL|
+      .. code-block:: console
 
-      .. group-tab:: APT
+         # yum upgrade wazuh-manager|WAZUH_MANAGER_RPM_PKG_INSTALL|
 
-         .. code-block:: console
+   .. group-tab:: APT
 
-            # apt-get install wazuh-manager|WAZUH_MANAGER_DEB_PKG_INSTALL|
+      .. code-block:: console
 
-   .. note::
+         # apt-get install wazuh-manager|WAZUH_MANAGER_DEB_PKG_INSTALL|
 
-      If the ``/var/ossec/etc/ossec.conf`` configuration file was modified, it will not be replaced by the upgrade. You will therefore have to add the settings of the new capabilities manually. More information can be found in :doc:`/user-manual/index`.
+.. note::
 
+   If the ``/var/ossec/etc/ossec.conf`` configuration file was modified, it will not be replaced by the upgrade. You will therefore have to add the settings of the new capabilities manually. More information can be found in :doc:`/user-manual/index`.
+
+Configuring vulnerability detection
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+If upgrading from version 4.7 and earlier, edit ``/var/ossec/etc/ossec.conf`` to configure the new vulnerability detection module as follows.
+
+#. Add the new ``<vulnerability-detection>`` block and remove the old ``<vulnerability-detector>`` if it exists.
+
+   .. include:: /_templates/installations/manager/configure_vulnerability_detection.rst
+
+#. Configure the indexer block with your host indexer details
+
+   .. include:: /_templates/installations/manager/configure_indexer_connection.rst
+
+#. Save the Wazuh indexer username and password into the Wazuh manager keystore using the Wazuh-keystore tool.
+
+   .. code-block:: console
+  
+      # /var/ossec/bin/wazuh-keystore -f indexer -k username -v <INDEXER_USERNAME>
+      # /var/ossec/bin/wazuh-keystore -f indexer -k password -v <INDEXER_PASSWORD>
+
+Configuring Filebeat
+^^^^^^^^^^^^^^^^^^^^
 
 #. Download the Wazuh module for Filebeat:
 
-    .. code-block:: console
+   .. code-block:: console
 
-      # curl -s https://packages.wazuh.com/4.x/filebeat/wazuh-filebeat-0.3.tar.gz | sudo tar -xvz -C /usr/share/filebeat/module
-
+      # curl -s https://packages.wazuh.com/4.x/filebeat/wazuh-filebeat-0.4.tar.gz | sudo tar -xvz -C /usr/share/filebeat/module
 
 #. Download the alerts template:
 
-    .. code-block:: console
+   .. code-block:: console
 
       # curl -so /etc/filebeat/wazuh-template.json https://raw.githubusercontent.com/wazuh/wazuh/v|WAZUH_CURRENT|/extensions/elasticsearch/7.x/wazuh-template.json
       # chmod go+r /etc/filebeat/wazuh-template.json
 
 #. Restart Filebeat:
 
-    .. include:: /_templates/installations/basic/elastic/common/enable_filebeat.rst
+   .. include:: /_templates/installations/basic/elastic/common/enable_filebeat.rst
 
-#. Upload the new Wazuh template. This step can be omitted for Wazuh indexer single-node installations.
+#. Upload the new Wazuh template and pipelines for Filebeat.
 
    .. code-block:: console
 
+      # filebeat setup --pipelines
       # filebeat setup --index-management -E output.logstash.enabled=false
 
 Upgrading the Wazuh dashboard
@@ -209,6 +238,9 @@ Upgrading the Wazuh dashboard
 
    To ensure compatibility with the latest Wazuh indexer and Wazuh dashboard, please update manually installed plugins accordingly. For additional information, check the `distribution matrix <https://github.com/wazuh/wazuh-packages/tree/v|WAZUH_CURRENT|#distribution-version-matrix>`__.
 
+Configuration options might differ across versions. Follow these steps to ensure a smooth upgrade.
+
+#. Backup the ``/etc/wazuh-dashboard/opensearch_dashboards.yml`` file to save your settings.
 #. Upgrade the Wazuh dashboard.
 
    .. tabs::
@@ -217,6 +249,7 @@ Upgrading the Wazuh dashboard
 
          .. code-block:: console
 
+            # rm /etc/wazuh-dashboard/opensearch_dashboards.yml
             # yum upgrade wazuh-dashboard|WAZUH_DASHBOARD_RPM_PKG_INSTALL|
 
       .. group-tab:: APT
@@ -225,11 +258,14 @@ Upgrading the Wazuh dashboard
 
             # apt-get install wazuh-dashboard|WAZUH_DASHBOARD_DEB_PKG_INSTALL|
 
+         .. note::
+
+            When prompted, choose to replace the ``/etc/wazuh-dashboard/opensearch_dashboards.yml`` file with the updated version.
+         
+#. Manually reapply any settings changes to the ``/etc/wazuh-dashboard/opensearch_dashboards.yml`` file.
 #. Restart the Wazuh dashboard:
 
     .. include:: /_templates/installations/dashboard/enable_dashboard.rst
-
-
 
 Next steps
 ----------

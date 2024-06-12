@@ -13,6 +13,7 @@ Clone this repository to deploy the necessary services and pods.
         $ git clone https://github.com/wazuh/wazuh-kubernetes.git -b v|WAZUH_CURRENT_KUBERNETES| --depth=1
         $ cd wazuh-kubernetes
 
+.. _kubernetes_ssl_certificates:
 
 Setup SSL certificates
 ^^^^^^^^^^^^^^^^^^^^^^
@@ -207,6 +208,13 @@ Wazuh indexer users
 
    If you have custom users, add them to the ``internal_users.yml`` file. Otherwise, executing this procedure deletes them.
 
+Closing your Wazuh dashboard session
+....................................
+
+Before starting the password change process, we recommend to log out of your Wazuh dashboard session.
+
+If you don't log out, persistent session cookies might cause errors when accessing Wazuh after changing user passwords.
+
 Setting a new hash
 ..................
 
@@ -259,6 +267,10 @@ Setting a new hash
 
 Setting the new password
 ........................
+
+.. warning::
+
+   Don't use the ``$`` or ``&`` characters in your new password. These characters can cause errors during deployment.
 
 #. Encode your new password in base64 format. Avoid inserting a trailing newline character to maintain the hash value. For example, use the ``-n`` option with the ``echo`` command as follows.
 
@@ -336,6 +348,12 @@ Applying the changes
    .. code-block:: console
 
       $ bash /usr/share/wazuh-indexer/plugins/opensearch-security/tools/securityadmin.sh -cd /usr/share/wazuh-indexer/opensearch-security/ -nhnv -cacert  $CACERT -cert $CERT -key $KEY -p 9200 -icl -h $NODE_NAME
+
+#. Delete all Wazuh manager pods to update the component credentials.
+
+   .. code-block:: console
+
+      $ kubectl delete -n wazuh pod/wazuh-manager-master-0 pod/wazuh-manager-worker-0 pod/wazuh-manager-worker-1
 
 #. Login with the new credentials on the Wazuh dashboard.
 

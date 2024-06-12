@@ -93,45 +93,45 @@ The ``sys_osinfo`` system table in the inventory database stores information abo
 Packages
 --------
 
-The ``sys_programs`` table in the inventory database stores information about the currently installed software on an endpoint. The Vulnerability Detector module uses information from this table to scan and detect vulnerable software. On Linux systems, the Syscollector module retrieves *deb, rpm, pacman, npm, and pypi* packages. The table below describes the fields in the database.
+The ``sys_programs`` table in the inventory database stores information about the currently installed software on an endpoint. The vulnerability detection module uses information from this table to detect vulnerable software. On Linux systems, the Syscollector module retrieves *deb, rpm, pacman, npm, and pypi* packages. The table below describes the fields in the database.
 
-+------------------+-------------------------------------------+-------------------------------------------+-----------------------------------------+
-| Field            | Description                               | Example                                   | Available                               |
-+==================+===========================================+===========================================+=========================================+
-| ``scan_id``      | Identifier for the last syscollector scan | 1454946158                                | All                                     |
-+------------------+-------------------------------------------+-------------------------------------------+-----------------------------------------+
-| ``scan_time``    | Scan date                                 | 2018/07/27 07:27:14                       | All                                     |
-+------------------+-------------------------------------------+-------------------------------------------+-----------------------------------------+
-| ``format``       | Format of the package                     | deb                                       | All                                     |
-+------------------+-------------------------------------------+-------------------------------------------+-----------------------------------------+
-| ``name``         | Name of the package                       | linux-headers-generic                     | All                                     |
-+------------------+-------------------------------------------+-------------------------------------------+-----------------------------------------+
-| ``priority``     | Priority of the package                   | optional                                  | Linux (deb)                             |
-+------------------+-------------------------------------------+-------------------------------------------+-----------------------------------------+
-| ``section``      | Section of the package                    | kernel                                    | Linux (deb/rpm) and  macOS (pkg)        |
-+------------------+-------------------------------------------+-------------------------------------------+-----------------------------------------+
-| ``size``         | Size of the installed package in bytes    | 14                                        | Linux (deb/rpm/pacman)                  |
-+------------------+-------------------------------------------+-------------------------------------------+-----------------------------------------+
-| ``vendor``       | Vendor name                               | Ubuntu Kernel Team                        | All                                     |
-+------------------+-------------------------------------------+-------------------------------------------+-----------------------------------------+
-| ``install_time`` | Install date and time of the package      | 2018/02/08 18:45:48                       | Linux (rpm/pacman)  and Windows         |
-+------------------+-------------------------------------------+-------------------------------------------+-----------------------------------------+
-| ``version``      | Version of the package                    | 4.4.0.130.136                             | All                                     |
-+------------------+-------------------------------------------+-------------------------------------------+-----------------------------------------+
-| ``architecture`` | Architecture of the package               | amd64                                     | All                                     |
-+------------------+-------------------------------------------+-------------------------------------------+-----------------------------------------+
-| ``multiarch``    | Multiarchitecture support                 | same                                      | Linux (deb)                             |
-+------------------+-------------------------------------------+-------------------------------------------+-----------------------------------------+
-| ``source``       | Source of the package                     | linux-meta                                | Linux (deb) and  macOS (pkg)            |
-+------------------+-------------------------------------------+-------------------------------------------+-----------------------------------------+
-| ``description``  | Description of the package                | Generic Linux kernel headers              | Linux (deb/rpm/pacman) and macOS (pkg)  |
-+------------------+-------------------------------------------+-------------------------------------------+-----------------------------------------+
-| ``location``     | Location of the package                   | C:\\Program Files\\VMware\\VMware Tools\\ | Windows and  macOS (pkg)                |
-+------------------+-------------------------------------------+-------------------------------------------+-----------------------------------------+
-| ``checksum``     | Integrity synchronization value           | 78503709147600c8e0023cf2b9995772280eee30  | All                                     |
-+------------------+-------------------------------------------+-------------------------------------------+-----------------------------------------+
-| ``item_id``      | Unified primary key                       | 4323709147600c8e0023cf2b9995772280eef451  | All                                     |
-+------------------+-------------------------------------------+-------------------------------------------+-----------------------------------------+
++------------------+-------------------------------------------+-------------------------------------------+----------------------------------------------+
+| Field            | Description                               | Example                                   | Available                                    |
++==================+===========================================+===========================================+==============================================+
+| ``scan_id``      | Identifier for the last syscollector scan | 1454946158                                | All                                          |
++------------------+-------------------------------------------+-------------------------------------------+----------------------------------------------+
+| ``scan_time``    | Scan date                                 | 2018/07/27 07:27:14                       | All                                          |
++------------------+-------------------------------------------+-------------------------------------------+----------------------------------------------+
+| ``format``       | Format of the package                     | deb                                       | All                                          |
++------------------+-------------------------------------------+-------------------------------------------+----------------------------------------------+
+| ``name``         | Name of the package                       | linux-headers-generic                     | All                                          |
++------------------+-------------------------------------------+-------------------------------------------+----------------------------------------------+
+| ``priority``     | Priority of the package                   | optional                                  | Linux (deb)                                  |
++------------------+-------------------------------------------+-------------------------------------------+----------------------------------------------+
+| ``section``      | Section of the package                    | kernel                                    | Linux (deb/rpm) and  macOS (pkg)             |
++------------------+-------------------------------------------+-------------------------------------------+----------------------------------------------+
+| ``size``         | Size of the installed package in bytes    | 14                                        | Linux (deb/rpm/pacman/snap)                  |
++------------------+-------------------------------------------+-------------------------------------------+----------------------------------------------+
+| ``vendor``       | Vendor name                               | Ubuntu Kernel Team                        | All                                          |
++------------------+-------------------------------------------+-------------------------------------------+----------------------------------------------+
+| ``install_time`` | Install date and time of the package      | 2018/02/08 18:45:48                       | Linux (rpm/pacman/snap)  and Windows         |
++------------------+-------------------------------------------+-------------------------------------------+----------------------------------------------+
+| ``version``      | Version of the package                    | 4.4.0.130.136                             | All                                          |
++------------------+-------------------------------------------+-------------------------------------------+----------------------------------------------+
+| ``architecture`` | Architecture of the package               | amd64                                     | All                                          |
++------------------+-------------------------------------------+-------------------------------------------+----------------------------------------------+
+| ``multiarch``    | Multiarchitecture support                 | same                                      | Linux (deb)                                  |
++------------------+-------------------------------------------+-------------------------------------------+----------------------------------------------+
+| ``source``       | Source of the package                     | linux-meta                                | Linux (deb/rpm/snap) and  macOS (pkg)        |
++------------------+-------------------------------------------+-------------------------------------------+----------------------------------------------+
+| ``description``  | Description of the package                | Generic Linux kernel headers              | Linux (deb/rpm/pacman/snap) and macOS (pkg)  |
++------------------+-------------------------------------------+-------------------------------------------+----------------------------------------------+
+| ``location``     | Location of the package                   | C:\\Program Files\\VMware\\VMware Tools\\ | Linux (snap), Windows, and  macOS (pkg)      |
++------------------+-------------------------------------------+-------------------------------------------+----------------------------------------------+
+| ``checksum``     | Integrity synchronization value           | 78503709147600c8e0023cf2b9995772280eee30  | All                                          |
++------------------+-------------------------------------------+-------------------------------------------+----------------------------------------------+
+| ``item_id``      | Unified primary key                       | 4323709147600c8e0023cf2b9995772280eef451  | All                                          |
++------------------+-------------------------------------------+-------------------------------------------+----------------------------------------------+
 
 .. _syscollector_interfaces:
 
@@ -351,7 +351,7 @@ The ``sys_processes`` table in the inventory database stores basic information a
 Windows updates
 ---------------
 
-The ``sys_hotfixes`` table contains information about the updates installed on Windows endpoints. The Vulnerability Detector module uses the hotfix identifier to discover what vulnerabilities exist on Windows endpoints and the patches you have applied. The table below describes the fields in the ``sys_hotfixes`` table.
+The ``sys_hotfixes`` table contains information about the updates installed on Windows endpoints. The vulnerability detection module uses the hotfix identifier to discover what vulnerabilities exist on Windows endpoints and the patches you have applied. The table below describes the fields in the ``sys_hotfixes`` table.
 
 +------------------+-------------------------------------------+------------------------------------------+-------------------+
 | Field            | Description                               | Example                                  | Available         |

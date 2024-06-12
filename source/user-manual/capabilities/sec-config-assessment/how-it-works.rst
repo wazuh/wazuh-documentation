@@ -28,25 +28,24 @@ Checks are the core of an SCA policy, as they describe the scan to be performed 
 
 As part of the metadata, the SCA policy can contain an optional compliance field used to specify if the check is relevant to any compliance specifications. SCA checks usually indicate standards or policies that they aim to comply with. For example, we map CIS benchmark, PCI-DSS, NIST, and TSC controls to the relevant SCA checks.
 
-See below SCA policy ID ``2651`` for Debian 10 operating system as an example of a policy definition.
+See below SCA policy ID ``19115`` for Ubuntu 20.04 operating system as an example of a policy definition.
 
 .. code-block:: yaml
 
-   - id: 2651
-       title: "Ensure SSH HostbasedAuthentication is disabled"
-       description: "The HostbasedAuthentication parameter specifies if authentication is allowed through trusted hosts via the user of .rhosts, or /etc/hosts.equiv, along with successful public key client host authentication. This option only applies to SSH Protocol Version 2."
+   - id: 19115
+       title: "Ensure SSH HostbasedAuthentication is disabled."
+       description: "The HostbasedAuthentication parameter specifies if authentication is allowed through trusted hosts via the user of .rhosts, or /etc/hosts.equiv, along with successful public key client host authentication."
        rationale: "Even though the .rhosts files are ineffective if support is disabled in /etc/pam.conf, disabling the ability to use .rhosts files in SSH provides an additional layer of protection."
-       remediation: "Edit the /etc/ssh/sshd_config file to set the parameter as follows: HostbasedAuthentication no"
+       remediation: "Edit the /etc/ssh/sshd_config file to set the parameter above any Include entries as follows: HostbasedAuthentication no Note: First occurrence of a option takes precedence, Match set statements withstanding. If Include locations are enabled, used, and order of precedence is understood in your environment, the entry may be created in a file in Include location."
        compliance:
-          - cis: ["5.2.9"]
-          - cis_csc: ["16.3"]
-          - pci_dss: ["4.1"]
-          - hipaa: ["164.312.a.2.IV", "164.312.e.1", "164.312.e.2.I", "164.312.e.2.II"]
-          - nist_800_53: ["SC.8"]
-          - tsc: ["CC6.7"]
+          - cis: ["4.2.8"]
+          - mitre_mitigations: ["M1042"]
+          - mitre_tactics: ["TA0001"]
+          - mitre_techniques: ["T1078", "T1078.001", "T1078.003"]
        condition: all
        rules:
-          - 'c:sshd -T -> r:HostbasedAuthentication\s+no'
+          - 'c:sshd -T -> r:^\s*HostbasedAuthentication\s+no'
+          - 'not f:/etc/ssh/sshd_config -> r:^\s*HostbasedAuthentication\s+yes'    
 
 Scan Results
 ------------
@@ -61,20 +60,27 @@ Any given check event has three possible results:
 
 This result is determined by the set of rules and the rule result aggregator of the check.
 
-Take the following SCA check from policy ``cis_debian10.yml`` as an example. The example SCA check shown scans the Debian 10 endpoint to verify if you have implemented a “deny all” policy on your endpoint firewall:
+Take the following SCA check from policy ``cis_ubuntu20-04.yml`` as an example. The example SCA check shown scans the Ubuntu 20 endpoint to verify if you have implemented a “deny all” policy on your endpoint firewall:
 
 .. code-block:: yaml
 
-   - id: 2603
-       title: "Ensure IPv6 default deny firewall policy"
-       description: "A default deny all policy on connections ensures that any unconfigured network usage will be rejected."
-       rationale: "With a default accept policy the firewall will accept any packet that is not configured to be denied. It is easier to white list acceptable usage than to black list unacceptable usage."
-       remediation: "Run the following commands to implement a default DROP policy: # ip6tables -P INPUT DROP # ip6tables -P OUTPUT DROP # ip6tables -P FORWARD DROP. Notes: Changing firewall settings while connected over network can result in being locked out of the system. Remediation will only affect the active system firewall, be sure to configure the default policy in your firewall management to apply on boot as well."
+   - id: 19098
+       title: "Ensure ip6tables default deny firewall policy."
+       description: "A default deny all policy on connections ensures that any unconfigured network usage will be rejected. Note: - Changing firewall settings while connected over network can result in being locked out of the system - Remediation will only affect the ac$    rationale: "With a default accept policy the firewall will accept any packet that is not configured to be denied. It is easier to white list acceptable usage than to black list unacceptable usage."
+       remediation: "IF IPv6 is enabled on your system: Run the following commands to implement a default DROP policy: # ip6tables -P INPUT DROP # ip6tables -P OUTPUT DROP # ip6tables -P FORWARD DROP."
        compliance:
-         - cis: ["3.5.4.2.1"]
-         - cis_csc: ["9.4"]
-         - pci_dss: ["1.2.1"]
-         - tsc: ["CC8.1"]
+         - cis: ["3.4.3.3.1"]
+         - cis_csc_v8: ["4.4", "4.5"]
+         - cis_csc_v7: ["9.4"]
+         - cmmc_v2.0: ["AC.L1-3.1.20", "CM.L2-3.4.7", "SC.L1-3.13.1", "SC.L2-3.13.6"]
+         - iso_27001-2013: ["A.13.1.1"]
+         - mitre_mitigations: ["M1031", "M1037"]
+         - mitre_tactics: ["TA0011"]
+         - mitre_techniques: ["T1562", "T1562.004"]
+         - nist_sp_800-53: ["SC-7(5)"]
+         - pci_dss_v3.2.1: ["1.1.4", "1.3.1", "1.4"]
+         - pci_dss_v4.0: ["1.2.1", "1.4.1"]
+         - soc_2: ["CC6.6"]
        condition: all
        rules:
          - "c:ip6tables -L -> r:^Chain INPUT && r:policy DROP"
@@ -85,42 +91,58 @@ After evaluating the aforementioned check, the following event is generated:
 
 .. code-block:: json
 
-   "data": {
-     "sca": {
-       "scan_id": "1433689708",
-       "check": {
-         "result": "failed",
-         "remediation": "Run the following commands to implement a default DROP policy: # ip6tables -P INPUT DROP # ip6tables -P OUTPUT DROP # ip6tables -P FORWARD DROP. Notes: Changing firewall settings while connected over network can result in being locked out of the system. Remediation will only affect the active system firewall, be sure to configure the default policy in your firewall management to apply on boot as well.",
-         "compliance": {
-           "pci_dss": "1.2.1",
-           "tsc": "CC8.1",
-           "cis_csc": "9.4",
-           "cis": "3.5.4.2.1"
-         },
-         "description": "A default deny all policy on connections ensures that any unconfigured network usage will be rejected.",
-         "id": "2603",
-         "title": "Ensure IPv6 default deny firewall policy",
-         "rationale": "With a default accept policy the firewall will accept any packet that is not configured to be denied. It is easier to white list acceptable usage than to black list unacceptable usage.",
-         "command": [
-           "ip6tables -L"
-         ]
-       },
-       "type": "check",
-       "policy": "CIS Benchmark for Debian/Linux 10"
-     }
-   },
+    "data": {
+      "sca": {
+        "scan_id": "1023532995",
+        "check": {
+          "result": "failed",
+          "remediation": "IF IPv6 is enabled on your system: Run the following commands to implement a default DROP policy: # ip6tables -P INPUT DROP # ip6tables -P OUTPUT DROP # ip6tables -P FORWARD DROP.",
+          "compliance": {
+            "pci_dss_v4": {
+              "0": "1.2.1,1.4.1"
+            },
+            "cis_csc_v8": "4.4,4.5",
+            "soc_2": "CC6.6",
+            "pci_dss_v3": {
+              "2": {
+                "1": "1.1.4,1.3.1,1.4"
+              }
+            },
+            "nist_sp_800-53": "SC-7(5)",
+            "mitre_tactics": "TA0011",
+            "mitre_techniques": "T1562,T1562.004",
+            "cis": "3.4.3.3.1",
+            "cmmc_v2": {
+              "0": "AC.L1-3.1.20,CM.L2-3.4.7,SC.L1-3.13.1,SC.L2-3.13.6"
+            },
+            "iso_27001-2013": "A.13.1.1",
+            "cis_csc_v7": "9.4",
+            "mitre_mitigations": "M1031,M1037"
+          },
+          "description": "A default deny all policy on connections ensures that any unconfigured network usage will be rejected. Note: - Changing firewall settings while connected over network can result in being locked out of the system - Remediation will only affect the active system firewall, be sure to configure the default policy in your firewall management to apply on boot as well.",
+          "id": "19098",
+          "title": "Ensure ip6tables default deny firewall policy.",
+          "rationale": "With a default accept policy the firewall will accept any packet that is not configured to be denied. It is easier to white list acceptable usage than to black list unacceptable usage.",
+          "command": [
+            "ip6tables -L"
+          ]
+        },
+        "type": "check",
+        "policy": "CIS Ubuntu Linux 20.04 LTS Benchmark v2.0.0"
+      }
+    },
 
-You can view the scan summaries on the **Security configuration assessment** tab on the Wazuh dashboard.
+You can view the scan summaries on the **Configuration Assessment** module on the Wazuh dashboard.
 
-  .. thumbnail:: /images/sca/dashboard-sca-tab.png
-     :title: Dashboard SCA tab
-     :alt: Dashboard SCA tab
+  .. thumbnail:: /images/sca/configuration-assessment-dashboard.png
+     :title: Configuration Assessment module dashboard
+     :alt: Configuration Assessment module dashboard
      :align: center
      :width: 80%
 
 In addition, you can expand each result to display additional information.
 
-  .. thumbnail:: /images/sca/sca-additional-information.png
+  .. thumbnail:: /images/sca/configuration-assessment-additional-information.png
      :title: SCA additional information
      :alt: SCA additional information
      :align: center
@@ -149,9 +171,9 @@ The above SCA scan result is **Failed** because the rule did not find ``Chain IN
 
       # systemctl restart wazuh-agent
 
-The scan result for check ``2603`` changes to **Passed** as shown in the image below:
+The scan result for check ``19098`` changes to **Passed** as shown in the image below:
 
-  .. thumbnail:: /images/sca/sca-scan-result.png
+  .. thumbnail:: /images/sca/configuration-assessment-scan-result.png
      :title: SCA scan result
      :alt: SCA scan result
      :align: center

@@ -165,12 +165,12 @@ Installing the Wazuh indexer
     .. code-block:: console
 
         # /usr/share/wazuh-indexer/bin/indexer-security-init.sh
-
-#. Run the following command to check that the installation is successful. Note that this command uses localhost, set your Wazuh indexer address if necessary.
+  
+#. Run the following command to check that the installation is successful. Note that this command uses ``127.0.0.1``, set your Wazuh indexer address if necessary. 
 
    .. code-block:: console
 
-      # curl -XGET https://localhost:9200 -u admin:admin -k
+      # curl -XGET https://127.0.0.1:9200 -u admin:admin -k
 
    Expand the output to see an example response.
 
@@ -217,14 +217,22 @@ Installing the Wazuh manager
 
                 # dpkg -i ./wazuh-offline/wazuh-packages/wazuh-manager*.deb
 
-#.  Enable and start the Wazuh manager service.
+#. Save the Wazuh indexer username and password into the Wazuh manager keystore using the wazuh-keystore tool: 
 
-    .. include:: /_templates/installations/wazuh/common/enable_wazuh_manager_service.rst
+   .. code-block:: console
 
-#.  Run the following command to verify that the Wazuh manager status is active.
+      # /var/ossec/bin/wazuh-keystore -f indexer -k username -v <INDEXER_USERNAME>
+      # /var/ossec/bin/wazuh-keystore -f indexer -k password -v <INDEXER_PASSWORD>   
 
-    .. include:: /_templates/installations/wazuh/common/check_wazuh_manager.rst
+   .. note:: The default offline-installation credentials are ``admin``:``admin``
 
+#. Enable and start the Wazuh manager service.
+
+   .. include:: /_templates/installations/wazuh/common/enable_wazuh_manager_service.rst
+
+#. Run the following command to verify that the Wazuh manager status is active.
+
+   .. include:: /_templates/installations/wazuh/common/check_wazuh_manager.rst
 
 Installing Filebeat
 ~~~~~~~~~~~~~~~~~~~
@@ -255,21 +263,6 @@ Filebeat must be installed and configured on the same server as the Wazuh manage
         cp ./wazuh-offline/wazuh-files/wazuh-template.json /etc/filebeat/ &&\
         chmod go+r /etc/filebeat/wazuh-template.json
 
-#.  Edit ``/etc/filebeat/wazuh-template.json`` and change to ``"1"`` the value for ``"index.number_of_shards"`` for  a single-node installation. This value can be changed based on the user requirement when performing a distributed installation.
-
-    .. code-block:: none
-        :emphasize-lines: 5
-
-        {
-          ...
-          "settings": {
-            ...
-            "index.number_of_shards": "1",
-            ...
-          },
-          ...
-        }
-
 #. Edit the ``/etc/filebeat/filebeat.yml`` configuration file and replace the following value:
 
    .. include:: /_templates/installations/filebeat/opensearch/configure_filebeat.rst
@@ -291,7 +284,7 @@ Filebeat must be installed and configured on the same server as the Wazuh manage
 
     .. code-block:: console
 
-        # tar -xzf ./wazuh-offline/wazuh-files/wazuh-filebeat-0.3.tar.gz -C /usr/share/filebeat/module
+        # tar -xzf ./wazuh-offline/wazuh-files/wazuh-filebeat-0.4.tar.gz -C /usr/share/filebeat/module
 
 #.  Replace ``<SERVER_NODE_NAME>`` with your Wazuh server node certificate name, the same used in ``config.yml`` when creating the certificates. For example, ``wazuh-1``. Then, move the certificates to their corresponding location.
 
@@ -339,27 +332,6 @@ Filebeat must be installed and configured on the same server as the Wazuh manage
             dial up... OK
           talk to server... OK
           version: 7.10.2
-
-    To check the number of shards that have been configured, you can run the following command. Note that this command uses localhost, set your Wazuh indexer address if necessary.
-
-    .. code-block:: console
-
-        # curl -k -u admin:admin "https://localhost:9200/_template/wazuh?pretty&filter_path=wazuh.settings.index.number_of_shards"
-
-    Expand the output to see an example response.
-
-    .. code-block:: none
-        :class: output collapsed
-
-        {
-          "wazuh" : {
-            "settings" : {
-              "index" : {
-                "number_of_shards" : "1"
-              }
-            }
-          }
-        }
 
 
 Your Wazuh server node is now successfully installed. Repeat the steps of this installation process stage for every Wazuh server node in your cluster, expand the **Wazuh cluster configuration for multi-node deployment** section below, and carry on then with configuring the Wazuh cluster. If you want a Wazuh server single-node cluster, everything is set and you can proceed directly with the Wazuh dashboard installation.
@@ -465,21 +437,21 @@ Installing the Wazuh dashboard
 
              server.host: 0.0.0.0
              server.port: 443
-             opensearch.hosts: https://localhost:9200
+             opensearch.hosts: https://127.0.0.1:9200
              opensearch.ssl.verificationMode: certificate
 
 #.  Enable and start the Wazuh dashboard.
 
     .. include:: /_templates/installations/dashboard/enable_dashboard.rst
 
-#. **Only for distributed deployments**:  Edit the file ``/usr/share/wazuh-dashboard/data/wazuh/config/wazuh.yml`` and replace the ``url`` value with the IP address or hostname of the Wazuh server master node.
+#. Edit the file ``/usr/share/wazuh-dashboard/data/wazuh/config/wazuh.yml`` and replace the ``url`` value with the IP address or hostname of the Wazuh server master node.
 
             .. code-block:: yaml
                :emphasize-lines: 3
 
                hosts:
                  - default:
-                     url: https://localhost
+                     url: https://<WAZUH_SERVER_IP_ADDRESS>
                      port: 55000
                      username: wazuh-wui
                      password: wazuh-wui
@@ -491,7 +463,7 @@ Installing the Wazuh dashboard
 
 #.  Access the web interface.
 
-    -   URL: *https://<wazuh_server_ip>*
+    -   URL: *https://<WAZUH_DASHBOARD_IP_ADDRESS>*
     -   **Username**: admin
     -   **Password**: admin
 
@@ -553,19 +525,19 @@ Select your deployment type and follow the instructions to change the default pa
 
 
 
-      #. On your `Wazuh server master node`, change the default password of the admin users: `wazuh` and `wazuh-wui`. Note that the commands below use localhost, set your Wazuh manager IP address if necessary.
+      #. On your `Wazuh server master node`, change the default password of the admin users: `wazuh` and `wazuh-wui`. Note that the commands below use 127.0.0.1, set your Wazuh manager IP address if necessary.
 
          #. Get an authorization TOKEN.
 
             .. code-block:: console
 
-               # TOKEN=$(curl -u wazuh-wui:wazuh-wui -k -X GET "https://localhost:55000/security/user/authenticate?raw=true")
+               # TOKEN=$(curl -u wazuh-wui:wazuh-wui -k -X GET "https://127.0.0.1:55000/security/user/authenticate?raw=true")
 
          #. Change the `wazuh` user credentials (ID 1). Select a password between 8 and 64 characters long, it should contain at least one uppercase and one lowercase letter, a number, and a symbol. See :api-ref:`PUT /security/users/{user_id} <operation/api.controllers.security_controller.update_user>` to learn more.
 
             .. code-block:: console
 
-               curl -k -X PUT "https://localhost:55000/security/users/1" -H "Authorization: Bearer $TOKEN" -H 'Content-Type: application/json' -d'
+               curl -k -X PUT "https://127.0.0.1:55000/security/users/1" -H "Authorization: Bearer $TOKEN" -H 'Content-Type: application/json' -d'
                {
                  "password": "SuperS3cretPassword!"
                }'
@@ -580,7 +552,7 @@ Select your deployment type and follow the instructions to change the default pa
 
             .. code-block:: console
 
-               curl -k -X PUT "https://localhost:55000/security/users/2" -H "Authorization: Bearer $TOKEN" -H 'Content-Type: application/json' -d'
+               curl -k -X PUT "https://127.0.0.1:55000/security/users/2" -H "Authorization: Bearer $TOKEN" -H 'Content-Type: application/json' -d'
                {
                  "password": "SuperS3cretPassword!"
                }'
@@ -620,7 +592,7 @@ Select your deployment type and follow the instructions to change the default pa
 
             hosts:
               - default:
-                  url: https://localhost
+                  url: https://127.0.0.1
                   port: 55000
                   username: wazuh-wui
                   password: "<wazuh-wui-password>"

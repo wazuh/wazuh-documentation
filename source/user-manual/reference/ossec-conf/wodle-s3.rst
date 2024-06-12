@@ -368,7 +368,56 @@ Name of AWS organization. Only works with CloudTrail buckets.
 discard_regex
 ^^^^^^^^^^^^^
 
-A regular expression to determine if an event must be discarded. It requires a mandatory ``field`` attribute. The regex is applied to the event field specified with this attribute.
+A regular expression to determine if an event must be discarded. It requires a mandatory ``field`` attribute. If the field is present in the event log, the regex is applied to it. For example, ``userIdentity.principalID`` for the following AWS CloudTrail log example:
+
+.. code-block:: json
+   :emphasize-lines: 5
+
+   {
+      "eventVersion": "1.09",
+      "userIdentity": {
+          "type": "IAMUser",
+          "principalId": "EXAMPLE6E4XEGITWATV6R",
+          "arn": "arn:aws:iam::123456789012:user/Mary_Major",
+          "accountId": "123456789012",
+          "accessKeyId": "AKIAIOSFODNN7EXAMPLE",
+          "userName": "Mary_Major",
+          "sessionContext": {
+              "attributes": {
+                  "creationDate": "2023-07-19T21:11:57Z",
+                  "mfaAuthenticated": "false"
+              }
+          }
+      },
+      "eventTime": "2023-07-19T21:33:41Z",
+      "eventSource": "cloudtrail.amazonaws.com",
+      "eventName": "StartLogging",
+      "awsRegion": "us-east-1",
+      "sourceIPAddress": "192.0.2.0",
+      "userAgent": "aws-cli/2.13.5 Python/3.11.4 Linux/4.14.255-314-253.539.amzn2.x86_64 exec-env/CloudShell exe/x86_64.amzn.2 prompt/off command/cloudtrail.start-logging",
+      "requestParameters": {
+          "name": "myTrail"
+      },
+      "responseElements": null,
+      "requestID": "9d478fc1-4f10-490f-a26b-EXAMPLE0e932",
+      "eventID": "eae87c48-d421-4626-94f5-EXAMPLEac994",
+      "readOnly": false,
+      "eventType": "AwsApiCall",
+      "managementEvent": true,
+      "recipientAccountId": "123456789012",
+      "eventCategory": "Management",
+      "tlsDetails": {
+          "tlsVersion": "TLSv1.2",
+          "cipherSuite": "ECDHE-RSA-AES128-GCM-SHA256",
+          "clientProvidedHostHeader": "cloudtrail.us-east-1.amazonaws.com"
+      },
+      "sessionCredentialFromConsole": "true"
+   }
+
+
+.. note::
+    This log is the raw event log fetched from the AWS Bucket.
+
 
 +--------------------+----------------------------------------+
 | **Default value**  | N/A                                    |
@@ -378,19 +427,19 @@ A regular expression to determine if an event must be discarded. It requires a m
 
 Attributes:
 
-+-----------+------------------------------------------------------------------------------------------------------+
-| **field** | The event field where to apply the regex.                                                            |
-|           +------------------+-----------------------------------------------------------------------------------+
-|           | Default value    | N/A                                                                               |
-|           +------------------+-----------------------------------------------------------------------------------+
-|           | Allowed values   | A str containing the full field name path                                         |
-+-----------+------------------+-----------------------------------------------------------------------------------+
++-----------+------------------------------------------------------------------------+
+| **field** | The event field where to apply the regex                               |
+|           +------------------+-----------------------------------------------------+
+|           | Default value    | N/A                                                 |
+|           +------------------+-----------------------------------------------------+
+|           | Allowed values   | A str containing the full field name path           |
++-----------+------------------+-----------------------------------------------------+
 
-Usage example:
+Usage example for the ``cloudtrail`` bucket type:
 
 .. code-block:: console
 
-    <discard_regex field="data.configurationItemStatus">REJECT</discard_regex>
+    <discard_regex field="userIdentity.principalID">EXAMPLE6E4XEGITWATV6R</discard_regex>
 
 .. _bucket_remove_from_bucket:
 
@@ -565,7 +614,7 @@ discard_regex
 
 A regular expression to determine if an event must be discarded.
 
--  For ``inspector``, it requires a mandatory ``field`` attribute. The regex is applied to the event field specified with this attribute.
+-  For ``inspector``, it requires a mandatory ``field`` attribute which must be present in the fetched event. The regex is applied to the event field specified with this attribute.
 -  For ``cloudwatchlogs``, the ``field`` attribute is optional. You can omit it, for example, when monitoring Cloudwatch logs in JSON format and plain text.
 
 +--------------------+----------------------------------------+
@@ -576,19 +625,19 @@ A regular expression to determine if an event must be discarded.
 
 Attributes:
 
-+-----------+------------------------------------------------------------------------------------------------------+
-| **field** | The event field where to apply the regex                                                             |
-|           +------------------+-----------------------------------------------------------------------------------+
-|           | Default value    | N/A                                                                               |
-|           +------------------+-----------------------------------------------------------------------------------+
-|           | Allowed values   | A str containing the full field name path                                         |
-+-----------+------------------+-----------------------------------------------------------------------------------+
++-----------+-----------------------------------------------------------------------+
+| **field** | The event field where to apply the regex                              |
+|           +------------------+----------------------------------------------------+
+|           | Default value    | N/A                                                |
+|           +------------------+----------------------------------------------------+
+|           | Allowed values   | A str containing the full field name path          |
++-----------+------------------+----------------------------------------------------+
 
-Usage example:
+Usage example for the ``inspector`` service type:
 
 .. code-block:: console
 
-    <discard_regex field="data.configurationItemStatus">REJECT</discard_regex>
+    <discard_regex field="assetAttributes.agentId">i-instanceID</discard_regex>
 
 Usage example only for ``cloudwatchlogs``:
 
@@ -799,7 +848,56 @@ A valid profile name from a Shared Credential File or AWS Config File with the p
 discard_regex
 ^^^^^^^^^^^^^
 
-A regular expression to determine if an event must be discarded. JSON and CSV logs require a mandatory ``field`` attribute. The regex is applied to the event field specified with this attribute.
+A regular expression to determine if an event must be discarded. JSON and CSV logs require a mandatory ``field`` attribute. If the field is present in the event log, the regex is applied to it. For example, ``userIdentity.principalID`` for the following AWS CloudTrail log example:
+
+.. code-block:: json
+   :emphasize-lines: 5
+
+   {
+      "eventVersion": "1.09",
+      "userIdentity": {
+          "type": "IAMUser",
+          "principalId": "EXAMPLE6E4XEGITWATV6R",
+          "arn": "arn:aws:iam::123456789012:user/Mary_Major",
+          "accountId": "123456789012",
+          "accessKeyId": "AKIAIOSFODNN7EXAMPLE",
+          "userName": "Mary_Major",
+          "sessionContext": {
+              "attributes": {
+                  "creationDate": "2023-07-19T21:11:57Z",
+                  "mfaAuthenticated": "false"
+              }
+          }
+      },
+      "eventTime": "2023-07-19T21:33:41Z",
+      "eventSource": "cloudtrail.amazonaws.com",
+      "eventName": "StartLogging",
+      "awsRegion": "us-east-1",
+      "sourceIPAddress": "192.0.2.0",
+      "userAgent": "aws-cli/2.13.5 Python/3.11.4 Linux/4.14.255-314-253.539.amzn2.x86_64 exec-env/CloudShell exe/x86_64.amzn.2 prompt/off command/cloudtrail.start-logging",
+      "requestParameters": {
+          "name": "myTrail"
+      },
+      "responseElements": null,
+      "requestID": "9d478fc1-4f10-490f-a26b-EXAMPLE0e932",
+      "eventID": "eae87c48-d421-4626-94f5-EXAMPLEac994",
+      "readOnly": false,
+      "eventType": "AwsApiCall",
+      "managementEvent": true,
+      "recipientAccountId": "123456789012",
+      "eventCategory": "Management",
+      "tlsDetails": {
+          "tlsVersion": "TLSv1.2",
+          "cipherSuite": "ECDHE-RSA-AES128-GCM-SHA256",
+          "clientProvidedHostHeader": "cloudtrail.us-east-1.amazonaws.com"
+      },
+      "sessionCredentialFromConsole": "true"
+   }
+
+
+.. note::
+    This log is the raw event log fetched from the AWS Bucket.
+
 
 +--------------------+----------------------------------------+
 | **Default value**  | N/A                                    |
@@ -809,19 +907,19 @@ A regular expression to determine if an event must be discarded. JSON and CSV lo
 
 Attributes:
 
-+-----------+-----------------------------------------------------------------+
-| **field** | The event field where to apply the regex                        |
-|           +------------------+----------------------------------------------+
-|           | Default value    | N/A                                          |
-|           +------------------+----------------------------------------------+
-|           | Allowed values   | A str containing the full field name path    |
-+-----------+------------------+----------------------------------------------+
++-----------+----------------------------------------------------------------+
+| **field** | The event field where to apply the regex                       |
+|           +------------------+---------------------------------------------+
+|           | Default value    | N/A                                         |
+|           +------------------+---------------------------------------------+
+|           | Allowed values   | A str containing the full field name path   |
++-----------+------------------+---------------------------------------------+
 
-Usage examples:
+Usage example for ``Cloudtrail`` fetched events:
 
 .. code-block:: console
 
-    <discard_regex field="data.configurationItemStatus">REJECT</discard_regex>
+    <discard_regex field="userIdentity.principalID">EXAMPLE6E4XEGITWATV6R</discard_regex>
 
 Usage example only for plain text logs:
 
@@ -874,7 +972,7 @@ Example of configuration
           <path>/dev1/</path>
           <aws_account_id>123456789012</aws_account_id>
           <aws_account_alias>dev1-account</aws_account_alias>
-          <discard_regex field="data.configurationItemStatus">REJECT</discard_regex>
+          <discard_regex field="userIdentity.userName">john.doe</discard_regex>
           <remove_from_bucket>yes<remove_from_bucket>
       </bucket>
       <bucket type="cloudtrail">
@@ -885,7 +983,7 @@ Example of configuration
           <path>/dev2/</path>
           <aws_account_id>112233445566</aws_account_id>
           <aws_account_alias>dev2-account</aws_account_alias>
-          <discard_regex field="data.configurationItemStatus">REJECT</discard_regex>
+          <discard_regex field="userIdentity.userName">john.smith</discard_regex>
           <service_endpoint>https://bucket.xxxxxx.s3.us-east-2.vpce.amazonaws.com</service_endpoint>
       </bucket>
       <bucket type="custom">
@@ -893,7 +991,7 @@ Example of configuration
           <aws_profile>stage-creds</aws_profile>
           <aws_account_id>111222333444</aws_account_id>
           <aws_account_alias>stage-account</aws_account_alias>
-          <discard_regex field="data.configurationItemStatus">REJECT</discard_regex>
+          <discard_regex field="detail.check-item-detail.Status">Green</discard_regex>
       </bucket>
       <bucket type="custom">
           <name>s3-prod-bucket</name>
@@ -901,7 +999,7 @@ Example of configuration
           <iam_role_duration>1300</iam_role_duration>
           <aws_account_id>11112222333</aws_account_id>
           <aws_account_alias>prod-account</aws_account_alias>
-          <discard_regex field="data.configurationItemStatus">REJECT</discard_regex>
+          <discard_regex field="detail.status">OK</discard_regex>
           <remove_from_bucket>yes<remove_from_bucket>
       </bucket>
       <service type="cloudwatchlogs">
@@ -909,7 +1007,7 @@ Example of configuration
           <aws_log_groups>log_group1,log_group2</aws_log_groups>
           <only_logs_after>2018-JUN-01</only_logs_after>
           <regions>us-east-1,us-west-1,eu-central-1</regions>
-          <discard_regex field="data.configurationItemStatus">REJECT</discard_regex>
+          <discard_regex>.*Log Hostname1:.*</discard_regex>
       </service>
       <subscriber type="security_lake">
         <sqs_name>sqs-security-lake-main-queue</sqs_name>

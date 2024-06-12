@@ -41,7 +41,7 @@ Perform the following steps to install Docker on the Ubuntu endpoint and configu
    .. code-block:: console
 
       $ curl -sSL https://get.docker.com/ | sh
-      $ sudo pip3 install docker==4.2.0 urllib3==1.26.18
+      $ sudo pip3 install docker==6.0.0 urllib3==1.26.18
 
 #. Edit the Wazuh agent configuration file ``/var/ossec/etc/ossec.conf`` and add this block to enable the ``docker-listener`` module:
 
@@ -87,21 +87,13 @@ Perform several Docker activities like pulling a Docker image, starting an insta
 Visualize the alerts
 --------------------
 
-You can visualize the alert data in the Wazuh dashboard. To do this, go to the **Security events** module and add the filters in the search bar to query the alerts.
+You can visualize the alert data in the Wazuh dashboard. To do this, go to **Docker**.
 
--  ``rule.groups: "docker"``
-
-   .. thumbnail:: /images/poc/docker-group-alerts.png
-      :title: Docker group alerts
+   .. thumbnail:: /images/poc/docker-alerts.png
+      :title: Visualize Docker alerts 
       :align: center
       :width: 80%
 
--  Additionally, using the **Filter by type** search field, apply the ``data.docker.Action`` filter to show what actions were performed.
-
-   .. thumbnail:: /images/poc/docker-actions-alerts.png
-      :title: Docker actions alerts
-      :align: center
-      :width: 80%
 
 Troubleshooting
 ---------------

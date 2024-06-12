@@ -46,6 +46,8 @@ The table below shows SCA policies pre-installed in Wazuh out-of-the-box. The Wa
     | cis_rhel8_linux             |  CIS Benchmark for Red Hat Enterprise Linux 8              | Red Hat Enterprise Linux 8    |
     +-----------------------------+------------------------------------------------------------+-------------------------------+
     | cis_rhel9_linux             |  CIS Benchmark for Red Hat Enterprise Linux 9              | Red Hat Enterprise Linux 9    |
+    +-----------------------------+------------------------------------------------------------+-------------------------------+
+    | cis_rocky_linux_8           |  CIS Benchmark for Rocky Linux 8                           | Rocky Linux 8                 |
     +-----------------------------+------------------------------------------------------------+-------------------------------+    
     | cis_debian7                 |  CIS Benchmark for Debian/Linux 7                          | Debian 7                      |
     +-----------------------------+------------------------------------------------------------+-------------------------------+
@@ -79,6 +81,8 @@ The table below shows SCA policies pre-installed in Wazuh out-of-the-box. The Wa
     +-----------------------------+------------------------------------------------------------+-------------------------------+
     | cis_amazon_linux_2          |  CIS Checks for Amazon Linux 2                             | Amazon Linux 2                |
     +-----------------------------+------------------------------------------------------------+-------------------------------+
+    | cis_amazon_linux_2023       |  CIS Checks for Amazon Linux 2023                          | Amazon Linux 2023             |
+    +-----------------------------+------------------------------------------------------------+-------------------------------+
     | cis_solaris11               |  CIS Benchmark for Oracle Solaris 11                       | Solaris 11                    |
     +-----------------------------+------------------------------------------------------------+-------------------------------+
     | cis_solaris11.4             |  CIS Checks for Oracle Solaris 11.4                        | Solaris 11.4                  |
@@ -105,7 +109,7 @@ The table below shows SCA policies pre-installed in Wazuh out-of-the-box. The Wa
     +-----------------------------+------------------------------------------------------------+-------------------------------+
     | cis_apple_macOS_13.x        |  CIS Checks for macOS 13.x                                 | macOS 13.x (Ventura)          |
     +-----------------------------+------------------------------------------------------------+-------------------------------+
-    | cis_apple_macOS_14.0        |  CIS Checks for macOS 14.0                                 | macOS 14.0 (Sonoma)           |
+    | cis_apple_macOS_14.x        |  CIS Checks for macOS 14.x                                 | macOS 14.x (Sonoma)           |
     +-----------------------------+------------------------------------------------------------+-------------------------------+
     | web_vulnerabilities         |  System audit for web-related vulnerabilities              | N/A                           |
     +-----------------------------+------------------------------------------------------------+-------------------------------+

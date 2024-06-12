@@ -9,7 +9,7 @@ Viewing system inventory data
 Wazuh dashboard
 ---------------
 
-You can view the system inventory of each monitored endpoint from the Wazuh dashboard. To do this, select an agent from your Wazuh dashboard and navigate to the **Inventory data** tab as displayed below. The inventory data page for each monitored endpoint shows its operating system, hardware, processes, network interface, and packages.
+You can view the system inventory of each monitored endpoint from the Wazuh dashboard. To do this, select an agent from your Wazuh dashboard and navigate to the **Inventory data** module as displayed below. The inventory data page for each monitored endpoint shows its operating system, hardware, processes, network interface, and packages.
 
 .. thumbnail:: /images/manual/system-inventory/inventory-data.png
   :title: Inventory data
@@ -18,8 +18,8 @@ You can view the system inventory of each monitored endpoint from the Wazuh dash
   :width: 80%
 
 .. thumbnail:: /images/manual/system-inventory/inventory-data-tab.png
-  :title: Inventory data tab
-  :alt: Inventory data tab
+  :title: Inventory data module
+  :alt: Inventory data module
   :align: center
   :width: 80%
 
@@ -36,7 +36,7 @@ You can query the Wazuh inventory data using the `Wazuh API <https://documentati
 Wazuh API GUI
 ~~~~~~~~~~~~~
 
-On the Wazuh dashboard, navigate to **Wazuh > Tools > API Console**. On the **Console**, type the following:
+On the Wazuh dashboard, navigate to **Server management** > **Dev Tools**. On the **Console**, type the following:
 
 .. code-block:: none
 
@@ -47,8 +47,8 @@ Where ``<AGENT_ID>`` corresponds to the agent ID of the endpoint.
 The Wazuh dashboard will suggest a list of available tables that you can query via the API.
 
 .. thumbnail:: /images/manual/system-inventory/api-console.png
-  :title: API Console
-  :alt: API Console
+  :title: Server management > Dev Tools
+  :alt: Server management > Dev Tools
   :align: center
   :width: 80%
 

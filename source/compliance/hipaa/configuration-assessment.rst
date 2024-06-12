@@ -23,16 +23,16 @@ The SCA module can help to implement the following HIPAA sections:
 Use cases: SCA scan and SSH session timeout
 -------------------------------------------
 
-- In this use case, the SCA module performs periodic scans on an Ubuntu 22.04 endpoint to ensure that it complies with security policies and hardening configurations. Additionally, the SCA module on the Wazuh dashboard displays the status of the SCA checks (passed, failed, or not applicable) and the time of the last scan for a specific endpoint, as shown below:
+- In this use case, the SCA module performs periodic scans on an Ubuntu 22.04 endpoint to ensure that it complies with security policies and hardening configurations. Additionally, the **Configuration Assessment** module on the Wazuh dashboard displays the status of the SCA checks (passed, failed, or not applicable) and the time of the last scan for a specific endpoint, as shown below:
 
   .. thumbnail:: /images/compliance/hipaa/02-configuration-assessment.png    
-    :title: The SCA module on the Wazuh dashboard displays the status of the SCA checks 
+    :title: The Configuration Assessment module on the Wazuh dashboard displays the status of the SCA checks 
     :align: center
     :width: 80%
 
   The Wazuh SCA policy ``CIS benchmark for Ubuntu Linux 22.04 LTS`` is an out-of-the-box policy based on the Center for Internet Security (CIS) benchmarks, a well-established standard for host hardening.
 
-- In this use case, Wazuh runs SCA checks to determine the status of SSH session timeouts on an Ubuntu 22.04 endpoint. The ID of the check is ``28661``. When this SCA check is run, if SSH session timeout on the endpoint is not configured, its result is ``Failed``. Additionally, each SCA check contains the reason why the check is being performed, a description of the check and a remediation if the SCA check fails.
+- In this use case, Wazuh runs SCA checks to determine the status of SSH session timeouts on an Ubuntu 22.04 endpoint. The ID of the check is ``28653``. When this SCA check is run, if SSH session timeout on the endpoint is not configured, its result is ``Failed``. Additionally, each SCA check contains the reason why the check is being performed, a description of the check and a remediation if the SCA check fails.
 
   .. thumbnail:: /images/compliance/hipaa/03-configuration-assessment.png    
     :title: Each SCA check contains the reason why the check is being performed 

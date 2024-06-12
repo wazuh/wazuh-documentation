@@ -44,19 +44,14 @@ In this scenario, the Wazuh FIM monitors the SSH configuration file ``/etc/ssh/s
         
         # sed -re 's/^(PasswordAuthentication)([[:space:]]+)no/\1\2yes/' -i.`date -I` /etc/ssh/sshd_config
 
-#. Select the **Integrity monitoring** tab from the Wazuh dashboard. Find the alert triggered by rule ID ``550``. The alert details show that the content of ``/etc/ssh/sshd_config`` has changed. They include the differences in the file checksum, the modification made, the modification time, and other information.
+#. Select the **File Integrity Monitoring** module from the Wazuh dashboard. Find the alert triggered by rule ID ``550``. The alert details show that the content of ``/etc/ssh/sshd_config`` has changed. They include the differences in the file checksum, the modification time, and other information.
 
    .. thumbnail:: /images/compliance/nist/integrity-monitoring-tab.png    
-      :title: Integrity monitoring tab
-      :alt: Integrity monitoring tab
+      :title: File Integrity Monitoring module
+      :alt: File Integrity Monitoring module
       :align: center
       :width: 80%
 
-   .. thumbnail:: /images/compliance/nist/alert-triggered-by-rule-id-550.png    
-      :title: Alert triggered by rule ID 550
-      :alt: Alert triggered by rule ID 550
-      :align: center
-      :width: 80%
 
 .. _detecting_change-actors_to_ufw_firewall_rules_using_who-data:
 

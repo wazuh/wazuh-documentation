@@ -32,19 +32,19 @@ Follow these steps to create an internal user and map it to its appropriate role
 
 #. Log into your :ref:`Wazuh dashboard <cloud_wui_access>` as administrator.
 
-#. Click the upper-left menu icon **☰** to open the options, select **Security**, and then **Internal users** to open the internal users' page.
+#. Click the upper-left menu icon **☰** to open the options, go to **Indexer/dashboard management** > **Security**, and then **Internal users** to open the internal users' page.
 
 #. Click **Create internal user**, complete the empty fields with the requested information, and click **Create** to complete the action.
 
 #. Follow these steps to map the user to the appropriate role:
    
-   #. Go to **Security**, select **Roles** to open the page, and click the role name selected to open the window.
+   #. Click the upper-left menu icon **☰** to open the options, go to **Indexer/dashboard management** > **Security**, select **Roles** to open the page, and click the role name selected to open the window.
    #. Select the **Mapped users** tab and click **Manage mapping**.
    #. Add the user you created in the previous steps and click **Map** to confirm the action.
 
 #. Follow these steps to map the user with Wazuh:
    
-   #. Go to the Wazuh WUI, click **Wazuh** to open the menu, select **Security**, and then **Roles mapping** to open the page.
+   #. Click the upper-left menu icon **☰** to open the options, go to **Server management** > **Security**, and then **Roles mapping** to open the page.
    #. Click **Create Role mapping** and complete the empty fields with the following parameters:
    
       - **Role mapping name**: Assign a name to the role mapping.
@@ -61,13 +61,13 @@ Follow these steps to create an internal user, create a new role mapping, and gi
 
 #. Log into your :ref:`Wazuh dashboard <cloud_wui_access>` as administrator.
 
-#. Click the upper-left menu icon **☰** to open the options, select **Security**, and then **Internal users** to open the internal users' page.
+#. Click the upper-left menu icon **☰** to open the options, go to **Indexer/dashboard management** > **Security**, and then **Internal users** to open the internal users' page.
 
 #. Click **Create internal user**, complete the empty fields with the requested information, and click **Create** to complete the action.
 
 #. Follow these steps to map the user to the appropriate role:
 
-   #. Click the upper-left menu icon **☰** to open the options, select **Security**, and then **Roles** to open the roles page.
+   #. Click the upper-left menu icon **☰** to open the options, go to **Indexer/dashboard management** > **Security**, and then **Roles** to open the roles page.
 
    #. Search for the **all_access** role in the roles list and select it.
 
@@ -83,7 +83,7 @@ Follow these steps to create an internal user, create a new role mapping, and gi
 
 #. Follow these steps to map the user with Wazuh:
    
-   #. Go to the Wazuh WUI, click **Wazuh** to open the menu, select **Security**, and then **Roles mapping** to open the page.
+   #. Click the upper-left menu icon **☰** to open the options, go to **Server management** > **Security**, and then **Roles mapping** to open the page.
    #. Click **Create Role mapping** and complete the empty fields with the following parameters:
    
       - **Role mapping name**: Assign a name to the role mapping.
@@ -101,13 +101,13 @@ Follow these steps to create an internal user, create a new role mapping, and gi
 
 #. Log into your :ref:`WUI <cloud_wui_access>` as administrator.
 
-#. Click the upper-left menu icon **☰** to open the options, select **Security**, and then **Internal users** to open the internal users' page.
+#. Click the upper-left menu icon **☰** to open the options, go to **Indexer/dashboard management** > **Security**, and then **Internal users** to open the internal users' page.
 
 #. Click **Create internal user**, complete the empty fields with the requested information, and click **Create** to complete the action.
 
 #. Follow these steps to map the user to the appropriate role:
 
-   #. Click the upper-left menu icon **☰** to open the options, select **Security**, and then **Roles** to open the roles page.
+   #. Click the upper-left menu icon **☰** to open the options, go to **Indexer/dashboard management** > **Security**, and then **Roles** to open the roles page.
 
    #. Click **Create role**, complete the empty fields with the following parameters, and then click **Create** to complete the task. 
      
@@ -127,7 +127,7 @@ Follow these steps to create an internal user, create a new role mapping, and gi
 
 #. Follow these steps to map the user with Wazuh:
 
-   #. Go to the Wazuh WUI, click **Wazuh** to open the menu, select **Security**, and then **Roles mapping** to open the page.
+   #. Click the upper-left menu icon **☰** to open the options, go to **Server management** > **Security**, and then **Roles mapping** to open the page.
 
    #. Click **Create Role mapping** and complete the empty fields with the following parameters:
 

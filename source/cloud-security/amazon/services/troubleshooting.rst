@@ -13,7 +13,7 @@ The below information is intended to assist in troubleshooting issues.
 Checking if the module is running
 ---------------------------------
 
-When the module runs it writes its output in the ``ossec.log`` file. This log file can be found in ``WAZUH_PATH/logs/ossec.log`` or under **Wazuh** > **Management** > **Logs** if using the Wazuh UI.
+When the module runs it writes its output in the ``ossec.log`` file. This log file can be found in ``WAZUH_PATH/logs/ossec.log`` or under **App Logs** if using the Wazuh UI.
 
 It is possible to check if the module is running without issues by looking in the ``ossec.log`` file. These are the messages that are displayed in the ``ossec.log``, depending on how the module has been configured:
 
@@ -216,7 +216,7 @@ Error codes reference
     +-----------+-------------------------------------------------------------------+------------------------------------------------------------------------------------------------------------------------------------------------------+
     | 3         | Invalid credentials to access S3 bucket                           | Make sure that your credentials are OK. For more information, see the :ref:`Configuring AWS credentials <amazon_credentials>` section.               |
     +-----------+-------------------------------------------------------------------+------------------------------------------------------------------------------------------------------------------------------------------------------+
-    | 4         | boto3 module missing                                              | Install ``boto3`` library. For more information, see the :ref:`Installing dependencies <amazon_dependencies>` section.                               |
+    | 4         | boto3 module missing                                              | Install ``boto3`` library. For more information, see the :doc:`Installing dependencies <prerequisites/dependencies>` section.                        |
     +-----------+-------------------------------------------------------------------+------------------------------------------------------------------------------------------------------------------------------------------------------+
     | 5         | Unexpected error accessing SQLite DB                              | Check that no more instances of the wodle are running at the same time.                                                                              |
     +-----------+-------------------------------------------------------------------+------------------------------------------------------------------------------------------------------------------------------------------------------+
@@ -228,7 +228,7 @@ Error codes reference
     +-----------+-------------------------------------------------------------------+------------------------------------------------------------------------------------------------------------------------------------------------------+
     | 9         | Failed to parse file                                              | Ensure that the log file contents have the expected structure.                                                                                       |
     +-----------+-------------------------------------------------------------------+------------------------------------------------------------------------------------------------------------------------------------------------------+
-    | 10        | pyarrow module missing                                            | Install ``pyarrow`` library. For more information, see the :ref:`Installing dependencies <amazon_dependencies>` section.                             |
+    | 10        | pyarrow module missing                                            | Install ``pyarrow`` library. For more information, see the :doc:`Installing dependencies <prerequisites/dependencies>` section.                      |
     +-----------+-------------------------------------------------------------------+------------------------------------------------------------------------------------------------------------------------------------------------------+
     | 11        | Unable to connect to Wazuh                                        | Ensure that Wazuh is running.                                                                                                                        |
     +-----------+-------------------------------------------------------------------+------------------------------------------------------------------------------------------------------------------------------------------------------+

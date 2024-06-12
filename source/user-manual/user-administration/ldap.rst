@@ -151,16 +151,16 @@ The ``auhtc`` section of the Wazuh indexer security configuration file handles a
 
    .. code-block:: console
 
-      # export JAVA_HOME=/usr/share/wazuh-indexer/jdk/ && bash /usr/share/wazuh-indexer/plugins/opensearch-security/tools/securityadmin.sh -f /etc/wazuh-indexer/opensearch-security/config.yml -icl -key /etc/wazuh-indexer/certs/admin-key.pem -cert /etc/wazuh-indexer/certs/admin.pem -cacert /etc/wazuh-indexer/certs/root-ca.pem -h localhost -nhnv
+      # export JAVA_HOME=/usr/share/wazuh-indexer/jdk/ && bash /usr/share/wazuh-indexer/plugins/opensearch-security/tools/securityadmin.sh -f /etc/wazuh-indexer/opensearch-security/config.yml -icl -key /etc/wazuh-indexer/certs/admin-key.pem -cert /etc/wazuh-indexer/certs/admin.pem -cacert /etc/wazuh-indexer/certs/root-ca.pem -h 127.0.0.1 -nhnv
 
-   The ``-h`` flag specifies the hostname or the IP address of the Wazuh indexer node. Note that this command uses localhost, set your Wazuh indexer address if necessary.
+   The ``-h`` flag specifies the hostname or the IP address of the Wazuh indexer node. Note that this command uses 127.0.0.1, set your Wazuh indexer address if necessary.
 
    The command output must be similar to the following:
 
    .. code-block:: output
 
       Security Admin v7
-      Will connect to localhost:9200 ... done
+      Will connect to 127.0.0.1:9200 ... done
       Connected as "CN=admin,OU=Wazuh,O=Wazuh,L=California,C=US"
       OpenSearch Version: 2.6.0
       Contacting opensearch cluster 'opensearch' and wait for YELLOW clusterstate ...
@@ -209,16 +209,16 @@ Follow these steps to create a new role mapping and grant administrator permissi
 
    .. code-block:: console
 
-      # export JAVA_HOME=/usr/share/wazuh-indexer/jdk/ && bash /usr/share/wazuh-indexer/plugins/opensearch-security/tools/securityadmin.sh -f /etc/wazuh-indexer/opensearch-security/roles_mapping.yml -icl -key /etc/wazuh-indexer/certs/admin-key.pem -cert /etc/wazuh-indexer/certs/admin.pem -cacert /etc/wazuh-indexer/certs/root-ca.pem -h localhost -nhnv
+      # export JAVA_HOME=/usr/share/wazuh-indexer/jdk/ && bash /usr/share/wazuh-indexer/plugins/opensearch-security/tools/securityadmin.sh -f /etc/wazuh-indexer/opensearch-security/roles_mapping.yml -icl -key /etc/wazuh-indexer/certs/admin-key.pem -cert /etc/wazuh-indexer/certs/admin.pem -cacert /etc/wazuh-indexer/certs/root-ca.pem -h 127.0.0.1 -nhnv
 
-   The ``-h`` flag specifies the hostname or the IP address of the Wazuh indexer node. Note that this command uses localhost, set your Wazuh indexer address if necessary.
+   The ``-h`` flag specifies the hostname or the IP address of the Wazuh indexer node. Note that this command uses 127.0.0.1, set your Wazuh indexer address if necessary.
 
    The command output must be similar to the following:
 
    .. code-block:: output
 
       Security Admin v7
-      Will connect to localhost:9200 ... done
+      Will connect to 127.0.0.1:9200 ... done
       Connected as "CN=admin,OU=Wazuh,O=Wazuh,L=California,C=US"
       OpenSearch Version: 2.6.0
       Contacting opensearch cluster 'opensearch' and wait for YELLOW clusterstate ...
@@ -240,7 +240,7 @@ Follow these steps to create a new role mapping and grant administrator permissi
 
       hosts:
         - default:
-            url: https://localhost
+            url: https://127.0.0.1
             port: 55000
             username: wazuh-wui
             password: "<wazuh-wui-password>"
@@ -248,7 +248,7 @@ Follow these steps to create a new role mapping and grant administrator permissi
 
    If ``run_as`` is set to ``true``, you need to add a role mapping on the Wazuh dashboard. To map the backend role to Wazuh, follow these steps:
 
-   #. Click **Wazuh** to open the Wazuh dashboard menu, select **Security**, and then **Roles mapping** to open the page.
+   #. Click **☰** to open the menu on the Wazuh dashboard, go to **Server management** > **Security**, and then **Roles mapping** to open the page.
 
       .. thumbnail:: /images/manual/user-administration/ldap/select-roles-mapping.gif
          :title: Roles mapping selection
@@ -287,7 +287,7 @@ Setup read-only role
 #. Follow these steps to create a new role mapping and grant read-only permissions to the backend role.
 
    #. Log into the Wazuh dashboard as administrator.
-   #. Click the upper-left menu icon **☰** to open the options, select **Security**, and then **Roles** to open the roles page.
+   #. Click the upper-left menu icon **☰** to open the options, go to **Indexer/dashboard management** > **Security**, and then **Roles** to open the roles page.
    #. Click **Create role**, complete the empty fields with the following parameters, and then click **Create** to complete the task.
 
       -  **Name**: Assign a name to the role.
@@ -306,7 +306,7 @@ Setup read-only role
 
       hosts:
         - default:
-            url: https://localhost
+            url: https://127.0.0.1
             port: 55000
             username: wazuh-wui
             password: "<wazuh-wui-password>"
@@ -314,8 +314,7 @@ Setup read-only role
 
    If ``run_as`` is set to ``true``, you need to add a role mapping on the Wazuh dashboard. To map the backend role to Wazuh, follow these steps:
 
-   #. Click the upper-left menu icon **☰** to open the available options, and click **Wazuh**.
-   #. Click **Wazuh** to open the Wazuh dashboard menu, select **Security**, and then **Roles mapping** to open the page.
+   #. Click the upper-left menu icon **☰** to open the menu on the Wazuh dashboard, go to **Server management** > **Security**, and then **Roles mapping** to open the page.
 
       .. thumbnail:: /images/manual/user-administration/ldap/select-roles-mapping.gif
          :title: Roles mapping selection

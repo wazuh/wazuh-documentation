@@ -15,29 +15,29 @@ The open source FIM module performs real-time monitoring and scheduled scans dep
 Viewing File Integrity Monitoring scan results
 ----------------------------------------------
 
-You can find a dedicated **Integrity monitoring** module in the Wazuh dashboard where all file integrity events triggered from monitored endpoints are reported. This increases visibility as it provides valuable information on the status of monitored directories and their potential impact on the security posture. The :doc:`Wazuh FIM dashboard </user-manual/capabilities/file-integrity/interpreting-fim-module-analysis>` has three different sections to view FIM analysis results; **Inventory, Dashboard, and Events**.
+You can find a dedicated **File Integrity Monitoring** module in the Wazuh dashboard where all file integrity events triggered from monitored endpoints are reported. This increases visibility as it provides valuable information on the status of monitored directories and their potential impact on the security posture. The :doc:`Wazuh FIM dashboard </user-manual/capabilities/file-integrity/interpreting-fim-module-analysis>` has three different sections to view FIM analysis results; **Inventory, Dashboard, and Events**.
 
 #. The **Inventory** section displays a list of all files that the FIM module has indexed. Each file has entry information including the filename, last modification date, user, user ID, group, and file size.
 
    .. thumbnail:: /images/getting-started/use-cases/fim/fim-module-inventory.png
-      :title: File integrity monitoring module inventory
-      :alt: File integrity monitoring module inventory
+      :title: File Integrity Monitoring module inventory
+      :alt: File Integrity Monitoring module inventory
       :align: center
       :width: 80%
 
 #. The **Dashboard** section shows an overview of the events triggered by the FIM module for all monitored endpoints. You can also streamline it to show the events for a selected monitored endpoint.
 
    .. thumbnail:: /images/getting-started/use-cases/fim/fim-dashboard.png
-      :title: File integrity monitoring dashboard
-      :alt: File integrity monitoring dashboard
+      :title: File Integrity Monitoring dashboard
+      :alt: File Integrity Monitoring dashboard
       :align: center
       :width: 80%
 
 #. The **Events** section shows the alerts triggered by the FIM module. It displays details such as the agent name, the file path of the monitored file, the type of FIM event, a description of the alert, and the rule level of each alert.
 
    .. thumbnail:: /images/getting-started/use-cases/fim/fim-alerts.png
-      :title: File integrity monitoring module alerts
-      :alt: File integrity monitoring module alerts
+      :title: File Integrity Monitoring module alerts
+      :alt: File Integrity Monitoring module alerts
       :align: center
       :width: 80%
 
@@ -57,8 +57,8 @@ The Wazuh FIM module supports various configuration options that enable effectiv
    Below is an example of an alert generated when a monitored file is changed on a Windows endpoint.
 
    .. thumbnail:: /images/getting-started/use-cases/fim/fim-modified-file-alert.png
-      :title: File integrity monitoring modified file alert
-      :alt: File integrity monitoring modified file alert
+      :title: File Integrity Monitoring modified file alert
+      :alt: File Integrity Monitoring modified file alert
       :align: center
       :width: 80%
 
