@@ -12,7 +12,8 @@ This section summarizes the most important features of each Wazuh release.
 Wazuh version                                    Release date
 ==============================================   ====================
 :doc:`4.9.0 </release-notes/release-4-9-0>`      TBD
-:doc:`4.8.0 </release-notes/release-4-8-0>`      TBD
+:doc:`4.8.1 </release-notes/release-4-8-1>`      TBD
+:doc:`4.8.0 </release-notes/release-4-8-0>`      12 June 2024
 :doc:`4.7.5 </release-notes/release-4-7-5>`      30 May 2024
 :doc:`4.7.4 </release-notes/release-4-7-4>`      29 April 2024
 :doc:`4.7.3 </release-notes/release-4-7-3>`      4 March 2024

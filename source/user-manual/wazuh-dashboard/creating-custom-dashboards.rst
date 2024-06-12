@@ -20,7 +20,7 @@ We will cover the practical aspect of dashboard creation by creating different t
 Creating visualizations
 ^^^^^^^^^^^^^^^^^^^^^^^
 
-To create a visualization, click the upper-left menu icon and navigate to **OpenSearch Dashboards** > **Visualize**. This action will open a page where a list of visualizations is displayed if any have already been created. If not, the page will show a **Create new visualization** button in the middle.
+To create a visualization, click the upper-left menu icon and navigate to **Explore** > **Visualize**. This action will open a page where a list of visualizations is displayed if any have already been created. If not, the page will show a **Create new visualization** button in the middle.
 
 .. thumbnail:: /images/wazuh-dashboard/custom-dashboards/create-new-visualization.png
    :align: center
@@ -558,7 +558,7 @@ Creating a Heat Map
 #. Add a ``Y-axis`` in **Buckets** and set the following values:
 
    -  ``Aggregation`` = ``Terms``
-   -  ``Field`` = ``rule.mitre.techniques``
+   -  ``Field`` = ``rule.mitre.technique``
    -  ``Order by`` = ``Metric: Count``
    -  ``Order`` = ``Descending``
    -  ``Size`` = ``5``
@@ -726,7 +726,7 @@ Creating a map
 #. Set the following values in the New layer:
 
    -  ``Data source`` = ``wazuh-alerts-*``
-   -  ``Geospatial field`` = ``geo.coordinates``
+   -  ``Geospatial field`` = ``GeoLocation.location``
    -  ``Number of documents`` = ``1000``
 
    .. thumbnail:: /images/wazuh-dashboard/custom-dashboards/create-map-visualization-new-layer.png
@@ -775,7 +775,7 @@ Creating a Coordinate map
 #. Add a ``Geo coordinate`` in **Buckets** and set the following values:
 
    -  ``Aggregation`` = ``Geohash``
-   -  ``Field`` = ``OriginLocation``
+   -  ``Field`` = ``GeoLocation.location``
 
 #. Click the **Update** button.
 
@@ -854,7 +854,7 @@ Creating a Visualization Builder
 
 #. On the ``Y-axis`` set aggregation to count.
 #. On an ``X-axis`` ``place rule.mitre.technique``.
-#. On the split series place ``rule.mitre.tactics``.
+#. On the split series place ``rule.mitre.tactic``.
 
    .. thumbnail:: /images/wazuh-dashboard/custom-dashboards/create-visbuilder-visualization-data.png
       :align: center
@@ -1046,11 +1046,11 @@ Creating Timeline
       :title: Create timeline visualization
       :alt: Create timeline visualization
 
-#. Choose a source for the chart. In the Timeline expression windows, within ``.es(*)``. The expression ``.es(*)`` is a wildcard value that represents all the indexes currently within the Wazuh indexer, combined together. Here we selected ``wazuh-alerts-*`` as the index to use.
+#. Choose a source for the chart. In the Timeline expression windows, within ``.opensearch(*)``. The expression ``.opensearch(*)`` is a wildcard value that represents all the indexes currently within the Wazuh indexer, combined together. Here we selected ``wazuh-alerts-*`` as the index to use.
 
    .. code-block:: none
 
-      .es(index=wazuh-alerts-*)
+      .opensearch(index=wazuh-alerts-*)
 
    .. thumbnail:: /images/wazuh-dashboard/custom-dashboards/create-timeline-visualization-source.png
       :align: center
@@ -1073,7 +1073,7 @@ Creating Timeline
 
       .. code-block:: none
 
-         .es(index=wazuh-alerts-*, timefield=@timestamp, metric=count:request).aggregate(function=avg)
+         .opensearch(index=wazuh-alerts-*, timefield=@timestamp, metric=count:request).aggregate(function=avg)
 
 Vega
 ~~~~
@@ -1087,7 +1087,7 @@ Dashboards transform your data from one or more single visualization perspective
 
 To create a custom dashboard, do the following:
 
-#. Click on the upper-left menu icon and navigate to **OpenSearch Dashboards** > **Dashboard** > **Create new dashboard**.
+#. Click on the upper-left menu icon and navigate to **Explore** > **Dashboards** > **Create new dashboard**.
 
    .. thumbnail:: /images/wazuh-dashboard/custom-dashboards/create-new-dashboard.png
       :align: center

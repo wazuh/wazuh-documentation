@@ -32,7 +32,7 @@ Use cases: SCA scan and SSH session timeout
 
   The Wazuh SCA policy ``CIS benchmark for Ubuntu Linux 22.04 LTS`` is an out-of-the-box policy based on the Center for Internet Security (CIS) benchmarks, a well-established standard for host hardening.
 
-- In this use case, Wazuh runs SCA checks to determine the status of SSH session timeouts on an Ubuntu 22.04 endpoint. The ID of the check is ``28661``. When this SCA check is run, if SSH session timeout on the endpoint is not configured, its result is ``Failed``. Additionally, each SCA check contains the reason why the check is being performed, a description of the check and a remediation if the SCA check fails.
+- In this use case, Wazuh runs SCA checks to determine the status of SSH session timeouts on an Ubuntu 22.04 endpoint. The ID of the check is ``28653``. When this SCA check is run, if SSH session timeout on the endpoint is not configured, its result is ``Failed``. Additionally, each SCA check contains the reason why the check is being performed, a description of the check and a remediation if the SCA check fails.
 
   .. thumbnail:: /images/compliance/hipaa/03-configuration-assessment.png    
     :title: Each SCA check contains the reason why the check is being performed 
