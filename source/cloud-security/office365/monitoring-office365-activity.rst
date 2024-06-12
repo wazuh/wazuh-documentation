@@ -522,7 +522,7 @@ When a user logs into the Microsoft Azure AD, the action generates an event. You
 
 #. Log into your `Azure portal <https://portal.azure.com/>`__.
 
-#. Visit the Wazuh dashboard and navigate to **Modules** > **Office 365**, then click on the **Events** tab to view the generated alerts.
+#. Visit the Wazuh dashboard and navigate to **Office 365**, then click on the **Events** tab to view the generated alerts.
 
    .. thumbnail:: /images/cloud-security/office365/office-365-log-in-generated-alerts.png
       :title: Office 365 log in generated alerts

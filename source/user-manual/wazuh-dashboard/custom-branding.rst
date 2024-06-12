@@ -78,7 +78,7 @@ To customize the PDF reports, click **Indexer/dashboard management** > **App Set
 
 -  ``customization.reports.header``. This property sets the `Reports header` text block. It has a size limit of 3 lines of 40 characters each. It's printed in the top right corner of the PDF reports. See #3 in the image below.
 
-.. thumbnail:: /images/kibana-app/features/white-labeling/custom-pdf-report.jpg
+.. thumbnail:: /images/kibana-app/features/white-labeling/custom-pdf-report.png
    :title: Custom PDF report
    :align: center
    :width: 80%

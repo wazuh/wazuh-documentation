@@ -25,7 +25,7 @@ Wazuh server
    .. code-block:: xml
 
       <group name="pam,syslog,">
-        <rule id="100100" level="10" frequency="3" timeframe="120">
+        <rule id="120100" level="10" frequency="3" timeframe="120">
           <if_matched_sid>5503</if_matched_sid>
           <description>Possible password guess on $(dstuser): 3 failed logins in a short period of time</description>
           <mitre>
@@ -60,14 +60,14 @@ Wazuh server
         <active-response>
           <command>disable-account</command>
           <location>local</location>
-          <rules_id>100100</rules_id>
+          <rules_id>120100</rules_id>
           <timeout>300</timeout>
         </active-response>
       </ossec_config>
 
    -  ``<command>``: Specifies the command to configure. This is the command name ``disable-account`` defined in the previous step.
    -  ``<location>``: Specifies where the command executes. Using the ``local`` value here means that the command executes on the monitored endpoint where the trigger event occurs.
-   -  ``<rules_id>``: The active response module executes the command if rule ID ``100100``: ``Possible password guess on $(dstuser): 3 failed logins in a short period of time`` fires.
+   -  ``<rules_id>``: The active response module executes the command if rule ID ``120100``: ``Possible password guess on $(dstuser): 3 failed logins in a short period of time`` fires.
    -  ``<timeout>``: Specifies how long the active response action must last. In this use case, we configure it to last for 300 seconds. After that period, the active response reverts its action and re-enables the account.
 
 #. Restart the Wazuh manager service to apply changes:
@@ -119,7 +119,7 @@ To test our use case, sign in to the ``user1`` account and attempt to switch to 
 Visualize the alerts
 --------------------
 
-You can visualize the alert data on the Wazuh dashboard. In the image below, you can see that the active response triggers just after rule ID ``100100`` fires to disable the account. Then re-enables it again after 5 minutes.
+You can visualize the alert data on the Wazuh dashboard. In the image below, you can see that the active response triggers just after rule ID ``120100`` fires to disable the account. Then re-enables it again after 5 minutes.
 
 .. thumbnail:: /images/manual/active-response/ar-alert-fired3.png
    :title: Active response alert: User account disabled
