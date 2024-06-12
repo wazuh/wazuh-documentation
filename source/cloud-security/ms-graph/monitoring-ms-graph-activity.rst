@@ -136,8 +136,6 @@ In this case, we will search for `alerts_v2` and `incidents` type events within 
         </resource>
     </ms-graph>
 
-.. note:: Multi-tenant is not supported. You can only configure one block of ``api_auth``. To learn more about the module options, see the :doc:`ms-graph </user-manual/reference/ossec-conf/ms-graph-module>` reference.
-
 Using the configuration mentioned above, we can examine a classic example of a security event: malicious spam emails.
 
 Examining Microsoft Graph logs
