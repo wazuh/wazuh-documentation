@@ -3,8 +3,6 @@
 .. meta::
   :description: The Wazuh dashboard gives you a quick view of your agents, alerts, and cluster. Learn how to configure its features in this section. 
   
-.. _dashboard_management:
-
 Dashboard management
 ========================
 
@@ -19,10 +17,6 @@ The **Dashboard management** section allows you to do the following:
 -  View generated reports.
 
    -  `Reporting`_
-
--  Access application logs.
-
-   -  `App Logs`_
 
 Dashboards Management
 ---------------------
