@@ -48,7 +48,7 @@ In this use case, you can see how the Wazuh Vulnerability Detection module detec
 
    .. include:: /_templates/common/restart_manager.rst
 
-#. Navigate to the **Vulnerability detection** module from the Wazuh dashboard. Select the agent to view its discovered vulnerabilities.
+#. Navigate to the **Vulnerability Detection** module from the Wazuh dashboard. Select the agent to view its discovered vulnerabilities.
 
    .. thumbnail:: /images/compliance/tsc/common-criteria/agent-vulnerabilities.png
       :title: Agent vulnerabilities

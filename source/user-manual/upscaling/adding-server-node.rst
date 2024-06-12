@@ -819,7 +819,7 @@ Access the Wazuh dashboard, using the credentials as below:
 - **Username**: ``admin``
 -  **Password**: ``<ADMIN_PASSWORD>`` or ``admin`` in case you already have a distributed architecture and using the default password.
 
-Navigate to Tools and select **API Console**.  On the console, run the query below:
+Select **☰** > **Server management** > **Dev Tools**.  On the console, run the query below:
 
 .. code-block:: none
 

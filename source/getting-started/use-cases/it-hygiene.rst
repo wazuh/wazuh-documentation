@@ -46,12 +46,6 @@ One of the objectives of implementing good IT hygiene is to reduce the attack su
 
 The **Configuration Assessment** module on the Wazuh dashboard provides each agent's SCA scan result. The results show the number of checks performed on the endpoint, how many failed, and the number of checks that passed. It also shows a score calculated based on the number of tests passed, giving you an overview of the level of compliance.
 
-.. thumbnail:: /images/getting-started/use-cases/it-hygiene/sca-results.png
-   :title: Configuration Assessment results
-   :alt: Configuration Assessment results
-   :align: center
-   :width: 80%
-
 You can gain more insights from the Wazuh dashboard to view the passed and failed checks. Also, you can generate a CSV report to aid remediation activities, thereby improving the endpoint security posture.
 
 .. thumbnail:: /images/getting-started/use-cases/it-hygiene/sca-results-details.png
@@ -177,9 +171,9 @@ Regulatory standards provide a global benchmark for best business practices to h
 
 Wazuh streamlines the process of meeting :doc:`regulatory compliance </compliance/index>` obligations by offering a robust solution that addresses requirements of industry standards such as PCI DSS, HIPAA, GDPR, and others.
 
-.. thumbnail:: /images/getting-started/use-cases/it-hygiene/regulatory-compliance-module.png
-   :title: Regulatory compliance module
-   :alt: Regulatory compliance module
+.. thumbnail:: /images/getting-started/use-cases/it-hygiene/security-operations-module.png
+   :title: Security operations module
+   :alt: Security operations module
    :align: center
    :width: 80%
 

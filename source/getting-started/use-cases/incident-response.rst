@@ -67,7 +67,7 @@ In this scenario, the Wazuh Active Response module automatically removes the mal
 Responding to DoS attacks
 ^^^^^^^^^^^^^^^^^^^^^^^^^
 
-The primary goal of a DoS attack is to render the target inaccessible to legitimate users, causing a denial of service. In the image below, we show how the Wazuh Active Response module blocks malicious IP addresses performing a DoS against a web server on a CentOS endpoint.
+The primary goal of a DoS attack is to render the target inaccessible to legitimate users, causing a denial of service. In the image below, we show how the Wazuh Active Response module blocks malicious IP addresses performing a DoS against a web server on an Ubuntu endpoint.
 
 .. thumbnail:: /images/getting-started/use-cases/incident-response/ar-module-blocks-dos-attack.png
    :title: Host blocked by Active Response alerts

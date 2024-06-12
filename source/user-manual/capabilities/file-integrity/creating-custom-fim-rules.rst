@@ -336,7 +336,7 @@ Perform the following steps on the Wazuh server.
           <field name="process_name">explorer.exe$</field>
           <field name="uname"><USER>$</field>
           <match>deleted</match>
-          <description>The user "$(uname)" deleted a monitored file with  File Explorer</description>
+          <description>The user "$(uname)" deleted a monitored file with File Explorer</description>
           <mitre>
             <id>T1070.004</id>
             <id>T1485</id>

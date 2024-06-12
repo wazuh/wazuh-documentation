@@ -56,7 +56,7 @@ Use cases
    	:width: 80%
 
    .. thumbnail:: /images/compliance/pci/rule-5710-generates-an-alert-03.png
-   	:title: Rule 651 Host Blocked by firewall-drop Active Response
+   	:title: Rule 5710 Attempt to login using a non-existent user
    	:align: center
    	:width: 80%
 
