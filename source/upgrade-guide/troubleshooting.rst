@@ -12,7 +12,7 @@ This section collects common issues that might occur when upgrading central comp
 The 'vulnerability-detector' configuration is deprecated
 --------------------------------------------------------
 
-This warning appears because when upgrading the Wazuh manager, the ``/var/ossec/etc/ossec.conf`` file remains unchanged, retaining the previous configuration of the Vulnerability Detection module. In addition, invalid configuration warnings might appear for the ``interval``, ``min_full_scan_interval``, ``run_on_start`` and ``provider`` elements. To resolve this issue, update the configuration as specified in the :doc:`Vulnerability detection documentation </user-manual/capabilities/vulnerability-detection/configuring-scans>`.
+This warning appears because when upgrading the Wazuh manager, the ``/var/ossec/etc/ossec.conf`` file remains unchanged, retaining the previous configuration of the Vulnerability Detection module. In addition, invalid configuration warnings might appear for the ``interval``, ``min_full_scan_interval``, ``run_on_start`` and ``provider`` elements. To resolve this issue, update the configuration as specified in :doc:`/user-manual/capabilities/vulnerability-detection/configuring-scans`.
 
 
 No username and password found in the keystore
@@ -38,15 +38,17 @@ After fixing the error and successfully connecting the Wazuh manager to the Wazu
 
    INFO: IndexerConnector initialized successfully for index: ...
 
-If the error persists, temporarily enable ``wazuh_modules.debug=2`` in ``/var/ossec/etc/local_internal_options.conf`` to get more information on what may be causing the issue.
+To get more information if the error persists, temporarily enable ``wazuh_modules.debug=2`` in ``/var/ossec/etc/local_internal_options.conf``.
 
 
 Vulnerability detection seems to be disabled or has a problem
 -------------------------------------------------------------
 
-This warning indicates that the Vulnerability Detection module might be disabled or there could be a configuration error. To find out the issue, first ensure that ``vulnerability-detection`` is enabled in ``/var/ossec/etc/ossec.conf``. If it's enabled, verify that the vulnerability index ``wazuh-states-vulnerabilities-*`` has been correctly created. You can check this under **Indexer Management** > **Index Management** > **Indices** configuration.
+This warning indicates that the Vulnerability Detection module might be disabled or there could be a configuration error. To troubleshoot:
 
-If the index hasn't been created, check the Wazuh manager logs for any errors or warnings, as the issue might be related to errors mentioned in previous sections:
+#. Ensure that ``vulnerability-detection`` is enabled in ``/var/ossec/etc/ossec.conf``.
+#. Verify that the vulnerability index ``wazuh-states-vulnerabilities-*`` has been correctly created. You can check this under **Indexer Management** > **Index Management** > **Indices** configuration.
+#. If the index wasn't created, check the Wazuh manager logs for any errors or warnings, as the issue might be related to errors mentioned in previous sections:
 
 .. code-block:: console
 
@@ -56,7 +58,7 @@ If the index hasn't been created, check the Wazuh manager logs for any errors or
 Application Not Found
 ---------------------
 
-If you encounter the message *Application Not Found* when accessing the Wazuh dashboard after upgrading, it might be that the configuration file ``/etc/wazuh-dashboard/opensearch_dashboards.yml`` wasn't overwritten with new changes. To resolve this issue, update the ``uiSettings.overrides.defaultRoute`` setting value with ``/app/wz-home`` in the configuration file:
+If you encounter the message *Application Not Found* when accessing the Wazuh dashboard after upgrading, it might be that the configuration file ``/etc/wazuh-dashboard/opensearch_dashboards.yml`` wasn't overwritten with new changes. To resolve this issue, update the ``uiSettings.overrides.defaultRoute`` setting with the``/app/wz-home`` value in the configuration file:
 
 .. code-block:: none
 
