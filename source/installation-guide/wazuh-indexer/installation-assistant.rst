@@ -67,7 +67,7 @@ Indicate your deployment configuration, create the SSL certificates to encrypt c
               ip: "<dashboard-node-ip>"
 
 
-#. Run the Wazuh installation assistant with the option ``--generate-config-files`` to generate the  Wazuh cluster key, certificates, and passwords necessary for installation. You can find these files in ``./wazuh-install-files.tar``. If you want the Wazuh installation assistant to install the necessary dependencies automatically, add the ``--install-dependencies`` option to the command.
+#. Run the Wazuh installation assistant with the option ``--generate-config-files`` to generate the  Wazuh cluster key, certificates, and passwords necessary for installation. You can find these files in ``./wazuh-install-files.tar``. The Wazuh installation assistant may need some dependencies to work, like ``openssl`` or ``lsof``. If you want the Wazuh installation assistant to install the necessary dependencies automatically, add the ``--install-dependencies`` option to the command.
 
       .. code-block:: console
 
@@ -90,7 +90,7 @@ Install and configure the Wazuh indexer nodes.
         # curl -sO https://packages.wazuh.com/|WAZUH_CURRENT_MINOR|/wazuh-install.sh
 
 
-#. Run the Wazuh installation assistant with the option ``--wazuh-indexer`` and the node name to install and configure the Wazuh indexer. The node name must be the same one used in ``config.yml`` for the initial configuration, for example, ``node-1``. If you want the Wazuh installation assistant to install the necessary dependencies automatically, add the ``--install-dependencies`` option to the command.
+#. Run the Wazuh installation assistant with the option ``--wazuh-indexer`` and the node name to install and configure the Wazuh indexer. The node name must be the same one used in ``config.yml`` for the initial configuration, for example, ``node-1``. The Wazuh installation assistant may need some dependencies to work, like ``openssl`` or ``lsof``. If you want the Wazuh installation assistant to install the necessary dependencies automatically, add the ``--install-dependencies`` option to the command.
 
       .. note:: Make sure that a copy of ``wazuh-install-files.tar``, created during the initial configuration step, is placed in your working directory.
 
