@@ -1,8 +1,8 @@
 .. Copyright (C) 2015, Wazuh, Inc.
 
 .. meta::
-  :description: This section of the Wazuh documentation lists the common installation or usage issues with the Wazuh dashboard and how to resolve them. 
-  
+  :description: This section of the Wazuh documentation lists the common installation or usage issues with the Wazuh dashboard and how to resolve them.
+
 .. _wazuh_dashboard_troubleshooting:
 
 Troubleshooting
@@ -13,7 +13,7 @@ This section collects common installation or usage issues on the Wazuh dashboard
 Wazuh API seems to be down
 --------------------------
 
-This issue means that your Wazuh API might be unavailable. Check the status of the Wazuh manager to check if the service is active: 
+This issue means that your Wazuh API might be unavailable. Check the status of the Wazuh manager to check if the service is active:
 
 .. include:: /_templates/installations/wazuh/common/check_wazuh_manager.rst
 
@@ -78,10 +78,10 @@ To ensure that Filebeat is correctly configured, run the following command:
 Could not connect to API with id: default: 3003 - Missing param: API USERNAME
 -----------------------------------------------------------------------------
 
-Starting Wazuh 4.0 the Wazuh API username variable changed from ``user`` to ``username``. It's necessary to change the credentials (foo:bar are no longer accepted) as well as the name of the variable in the ``/usr/share/wazuh-dashboard/data/wazuh/config/wazuh.yml`` configuration file. For example, the configuration can be: 
+Starting Wazuh 4.0 the Wazuh API username variable changed from ``user`` to ``username``. It's necessary to change the credentials (foo:bar are no longer accepted) as well as the name of the variable in the ``/usr/share/wazuh-dashboard/data/wazuh/config/wazuh.yml`` configuration file. For example, the configuration can be:
 
 .. code-block:: console
-   
+
    hosts:
     - production:
         url: https://127.0.0.1
@@ -117,7 +117,7 @@ This situation can happen if the indexer is reinstalled and the previously saved
 Remediation
 ^^^^^^^^^^^
 
-The dashboard initializes the saved objects with the index definitions when it starts, so the suggested solution is to restart the service to initialize the saved objects again. 
+The dashboard initializes the saved objects with the index definitions when it starts, so the suggested solution is to restart the service to initialize the saved objects again.
 
 #. Restart the Wazuh dashboard service.
 
@@ -132,17 +132,17 @@ If the restart does not solve the problem, we can execute this process manually:
 #. Stop the Wazuh dashboard service.
 
    .. tabs::
-   
+
       .. group-tab:: Systemd
-   
+
          .. code-block:: console
-   
+
             # systemctl stop wazuh-dashboard
-   
+
       .. group-tab:: SysV
-   
+
          .. code-block:: console
-   
+
             # service wazuh-dashboard stop
 
 #. Identify the index or indices that have the wrong field mappings, this depends on the logged user that experiences the problem or the selected tenant. By default, the index name should start with ``.kibana``.
@@ -195,11 +195,11 @@ If the restart does not solve the problem, we can execute this process manually:
          }
        }
      }
-   
-   
-   In the output, we can see `type` field mapping for the ``.kibana`` and ``.kibana_92668751_admin_1`` indices.  Note that the field mapping type for the `type` field is ``text`` and that it contains a subfield called `keyword`. This is not the expected result, the `type` field should be ``keyword``, not ``text``, and it should not include the `keyword` subfield. 
-   
-   These errors happened because there was no template that specified the appropriate field mappings at the time the saved object data was indexed. To solve the errors, we need to remove the index and rebuild it. 
+
+
+   In the output, we can see `type` field mapping for the ``.kibana`` and ``.kibana_92668751_admin_1`` indices.  Note that the field mapping type for the `type` field is ``text`` and that it contains a subfield called `keyword`. This is not the expected result, the `type` field should be ``keyword``, not ``text``, and it should not include the `keyword` subfield.
+
+   These errors happened because there was no template that specified the appropriate field mappings at the time the saved object data was indexed. To solve the errors, we need to remove the index and rebuild it.
 
 #. Delete the index or indices that store the saved objects with the wrong field mapping.
 
@@ -218,6 +218,16 @@ If the restart does not solve the problem, we can execute this process manually:
    .. include:: /_templates/common/restart_dashboard.rst
 
 .. note:: These actions take into account that the index that stores the saved objects must have valid field mappings. The field mappings are defined through a template, so they should exist before the index is created. This template is added when Wazuh dashboard starts if it doesn’t exist.
+
+Application Not Found
+---------------------
+
+If after updating, when accessing the dashboard we find the message ``Application Not Found``, this may be because after the update the file ``/etc/wazuh-dashboard/opensearch_dashboards.yml`` has not been overwritten with the new changes. To fix this, please add the following line to the configuration file:
+
+.. code-block:: console
+
+    uiSettings.overrides.defaultRoute: /app/wz-home
+
 
 None of the above solutions are fixing my problem
 -------------------------------------------------
@@ -257,7 +267,3 @@ Check the following log files:
 
     .. warning::
       By default, the Wazuh dashboard doesn't store logs on a file. You can change this by configuring ``logging.dest`` setting in the ``opensearch_dashboard.yml`` configuration file.
-
-
-
-    
