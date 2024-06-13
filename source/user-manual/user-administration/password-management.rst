@@ -213,16 +213,16 @@ Follow the instructions below to change the passwords for all the Wazuh indexer 
       INFO: The password for Wazuh API user wazuh is ivLOfmj7.jL6*7Ev?UJoFjrkGy9t6Je.
       INFO: The password for Wazuh API user wazuh-wui is fL+f?sFRPEv5pYRE559rqy9b6G4Z5pVi
 
-   .. note:: If you set up a user other than admin for Filebeat you will have to add the username and password manually by running the following commands. Replace ``<CUSTOM_USERNAME>`` with your custom username and ``<CUSTOM_PASSWORD>`` with your custom password.
+#. If you've set up a user other than ``admin`` for Filebeat, manually add the username and password using the following commands. Replace ``<CUSTOM_USERNAME>`` and ``<CUSTOM_PASSWORD>`` with your custom username and password.
 
-      .. code-block:: console
+   .. code-block:: console
 
-         # echo <CUSTOM_USERNAME> | filebeat keystore add username --stdin --force
-         # echo <CUSTOM_PASSWORD> | filebeat keystore add password --stdin --force
+      # echo <CUSTOM_USERNAME> | filebeat keystore add username --stdin --force
+      # echo <CUSTOM_PASSWORD> | filebeat keystore add password --stdin --force
          
-      Then, restart Filebeat to apply the changes.
+   Restart Filebeat to apply the changes.
 
-      .. include:: /_templates/common/restart_filebeat.rst
+   .. include:: /_templates/common/restart_filebeat.rst
        
 #. On your `Wazuh dashboard node`, run the following command to update the `kibanaserver` password in the Wazuh dashboard keystore. Replace ``<KIBANASERVER_PASSWORD>`` with the random password generated in the first step.
 
