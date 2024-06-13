@@ -2,11 +2,11 @@
 
 .. meta::
    :description: Find out more about the process of upgrading the Wazuh central components, Open Distro for Elasticsearch, Elastic Stack, and Wazuh agents in this section.
-  
+
 Upgrade guide
 =============
 
-This guide includes instructions to upgrade the :doc:`Wazuh components </getting-started/components/index>`. 
+This guide includes instructions to upgrade the :doc:`Wazuh components </getting-started/components/index>`.
 
 Check the :doc:`compatibility-matrix/index` section to learn about the compatibility requirements between components.
 
@@ -16,7 +16,7 @@ Upgrade the Wazuh central components
 The :doc:`upgrading-central-components` section includes instructions to upgrade the Wazuh server, the Wazuh indexer, and the Wazuh dashboard.
 
 .. note::
-  
+
    Since Wazuh v4.6.0, we don't provide the Kibana plugin and Splunk app anymore. To integrate Wazuh with Elastic or Splunk, refer to our :doc:`/integrations-guide/index`.
 
 Upgrade the Wazuh agents
@@ -24,7 +24,7 @@ Upgrade the Wazuh agents
 
 You can upgrade the Wazuh agents either remotely from the Wazuh manager or locally. Upgrading the Wazuh agents remotely is possible by using the ``agent_upgrade`` tool and the Wazuh API. See the :doc:`Remote agent upgrade </user-manual/agent/agent-management/remote-upgrading/upgrading-agent>` section to learn more.
 
-To perform the upgrade locally, select your operating system and follow the instructions. 
+To perform the upgrade locally, select your operating system and follow the instructions.
 
 .. raw:: html
 
@@ -106,3 +106,4 @@ To perform the upgrade locally, select your operating system and follow the inst
    wazuh-agent/index
    compatibility-matrix/index
    manual-backup-restore
+   troubleshooting
