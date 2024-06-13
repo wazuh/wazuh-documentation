@@ -56,7 +56,7 @@ If the index hasn't been created, check the Wazuh manager logs for any errors or
 Application Not Found
 ---------------------
 
-If you encounter the message *Application Not Found* when accessing the Wazuh dashboard after upgrading, it might be that the configuration file ``/etc/wazuh-dashboard/opensearch_dashboards.yml`` wasn't overwritten with new changes. To resolve this issue, add the following line in the configuration file:
+If you encounter the message *Application Not Found* when accessing the Wazuh dashboard after upgrading, it might be that the configuration file ``/etc/wazuh-dashboard/opensearch_dashboards.yml`` wasn't overwritten with new changes. To resolve this issue, update the ``uiSettings.overrides.defaultRoute`` setting value with ``/app/wz-home`` in the configuration file:
 
 .. code-block:: none
 
