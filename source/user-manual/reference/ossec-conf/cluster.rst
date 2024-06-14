@@ -260,6 +260,58 @@ Specifies the protocol to use for the HAProxy communication.
 | **Allowed values** | http, https                         |
 +--------------------+-------------------------------------+
 
+.. _haproxy_cert:
+
+haproxy_cert
+^^^^^^^^^^^^
+
+Specifies the location of the used HAProxy certificate file.
+
++--------------------+-------------------------------------+
+| **Default value**  | n/a                                 |
++--------------------+-------------------------------------+
+| **Allowed values** | Path to a valid certificate file.   |
++--------------------+-------------------------------------+
+
+.. _client_cert:
+
+client_cert
+^^^^^^^^^^^^
+
+Specifies the location of the used client side certificate file.
+
++--------------------+-------------------------------------+
+| **Default value**  | n/a                                 |
++--------------------+-------------------------------------+
+| **Allowed values** | Path to a valid certificate file.   |
++--------------------+-------------------------------------+
+
+.. _client_cert_key:
+
+client_cert_key
+^^^^^^^^^^^^^^^
+
+Specifies the location of the used client side certificate key file.
+
++--------------------+-----------------------------------------+
+| **Default value**  | n/a                                     |
++--------------------+-----------------------------------------+
+| **Allowed values** | Path to a valid certificate key file.   |
++--------------------+-----------------------------------------+
+
+.. _client_cert_password:
+
+client_cert_password
+^^^^^^^^^^^^^^^^^^^^
+
+Specifies the password used for the client side certificate.
+
++--------------------+--------------------------------------------------------+
+| **Default value**  | n/a                                                    |
++--------------------+--------------------------------------------------------+
+| **Allowed values** | Password used for the Client Side Certificate files.   |
++--------------------+--------------------------------------------------------+
+
 .. _haproxy_backend:
 
 haproxy_backend
