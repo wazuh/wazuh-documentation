@@ -218,7 +218,7 @@ Perform the following steps to install YARA and configure the active response an
 
    .. note::
    
-      If the supplied ``<API_KEY>`` is invalid, Wazuh triggers an alert with the value of the ``chatgpt_response`` field set to None. Logs about the invalid API key are in the ``/var/ossec/logs/active-responses.log`` file.
+      If the supplied ``<API_KEY>`` is invalid, Wazuh triggers an alert with the value of the ``chatgpt_response`` field set to ``None``. Logs about the invalid API key are in the ``/var/ossec/logs/active-responses.log`` file.
 
 #. Change the owner of the ``yara.sh`` script to ``root:wazuh``, and the file permissions to ``750``:
 
@@ -253,21 +253,21 @@ Perform the following steps to install Python, YARA, and download YARA rules.
 #. Download and install the latest `Visual C++ Redistributable package <https://aka.ms/vs/17/release/vc_redist.x64.exe>`__.
 #. Open PowerShell with administrator privileges to download and extract YARA:
 
-   .. code-block::powershell
+   .. code-block:: powershell
 
       > Invoke-WebRequest -Uri https://github.com/VirusTotal/yara/releases/download/v4.5.1/yara-master-2298-win64.zip -OutFile yara-master-2298-win64.zip
       > Expand-Archive yara-master-2298-win64.zip; Remove-Item yara-master-2298-win64.zip
 
 #. Create a directory called ``C:\Program Files (x86)\ossec-agent\active-response\bin\yara\`` and copy the YARA executable into it:
 
-   .. code-block::powershell
+   .. code-block:: powershell
 
       > mkdir 'C:\Program Files (x86)\ossec-agent\active-response\bin\yara\'
       > cp .\yara-master-2298-win64\yara64.exe 'C:\Program Files (x86)\ossec-agent\active-response\bin\yara\'
 
 #. Download YARA rules using valhallaAPI. Valhalla is a YARA and Sigma rule `repository <https://valhalla.nextron-systems.com/>`__ provided by Nextron Systems:
 
-   .. code-block::powershell
+   .. code-block:: powershell
 
       > python -m pip install valhallaAPI
       > python -c "from valhallaAPI.valhalla import ValhallaAPI; v = ValhallaAPI(api_key='1111111111111111111111111111111111111111111111111111111111111111'); response = v.get_rules_text(); open('yara_rules.yar', 'w').write(response)"
@@ -424,3 +424,273 @@ Perform the following steps to install Python, YARA, and download YARA rules.
 
 Wazuh server
 ------------
+
+Perform the following steps on the Wazuh server to configure custom rules, decoders, and the active response module.
+
+#. Add the following decoders to the Wazuh server ``/var/ossec/etc/decoders/local_decoder.xml`` file to parse the data in YARA scan results:
+
+   .. code-block:: xml
+
+      <!--
+        YARA Decoder
+      -->
+
+      <decoder name="YARA_decoder">
+        <prematch>wazuh-YARA:</prematch>
+      </decoder>
+
+      <decoder name="YARA_child">
+        <parent>YARA_decoder</parent>
+        <regex type="pcre2">wazuh-YARA: (\S+)</regex>
+        <order>YARA.log_type</order>
+      </decoder>
+
+      <decoder name="YARA_child">
+        <parent>YARA_decoder</parent>
+        <regex type="pcre2">Scan result: (\S+)\s+</regex>
+        <order>YARA.rule_name</order>
+      </decoder>
+
+      <decoder name="YARA_child">
+        <parent>YARA_decoder</parent>
+        <regex type="pcre2">\[description="([^"]+)",</regex>
+        <order>YARA.rule_description</order>
+      </decoder>
+
+      <decoder name="YARA_child">
+        <parent>YARA_decoder</parent>
+        <regex type="pcre2">author="([^"]+)",</regex>
+        <order>YARA.rule_author</order>
+      </decoder>
+
+      <decoder name="YARA_child">
+        <parent>YARA_decoder</parent>
+        <regex type="pcre2">reference="([^"]+)",</regex>
+        <order>YARA.reference</order>
+      </decoder>
+
+      <decoder name="YARA_child">
+        <parent>YARA_decoder</parent>
+        <regex type="pcre2">date="([^"]+)",</regex>
+        <order>YARA.published_date</order>
+      </decoder>
+
+      <decoder name="YARA_child">
+        <parent>YARA_decoder</parent>
+        <regex type="pcre2">score =(\d+),</regex>
+        <order>YARA.threat_score</order>
+      </decoder>
+
+      <decoder name="YARA_child">
+        <parent>YARA_decoder</parent>
+        <regex type="pcre2">customer="([^"]+)",</regex>
+        <order>YARA.api_customer</order>
+      </decoder>
+
+      <decoder name="YARA_child">
+        <parent>YARA_decoder</parent>
+        <regex type="pcre2">hash1="([^"]+)",</regex>
+        <order>YARA.file_hash</order>
+      </decoder>
+
+      <decoder name="YARA_child">
+        <parent>YARA_decoder</parent>
+        <regex type="pcre2">tags="([^"]+)",</regex>
+        <order>YARA.tags</order>
+      </decoder>
+
+      <decoder name="YARA_child">
+        <parent>YARA_decoder</parent>
+        <regex type="pcre2">minimum_YARA="([^"]+)"\]</regex>
+        <order>YARA.minimum_YARA_version</order>
+      </decoder>
+
+      <decoder name="YARA_child">
+        <parent>YARA_decoder</parent>
+        <regex type="pcre2">\] (.*) \|</regex>
+        <order>YARA.scanned_file</order>
+      </decoder>
+
+      <decoder name="YARA_child">
+        <parent>YARA_decoder</parent>
+        <regex type="pcre2">chatgpt_response: (.*)</regex>
+        <order>YARA.chatgpt_response</order>
+      </decoder>
+
+      <decoder name="YARA_child">
+        <parent>YARA_decoder</parent>
+        <regex type="pcre2">Successfully deleted (.*)</regex>
+        <order>YARA.file_deleted</order>
+      </decoder>
+
+      <decoder name="YARA_child">
+        <parent>YARA_decoder</parent>
+        <regex type="pcre2">Unable to delete (.*)</regex>
+        <order>YARA.file_not_deleted</order>
+      </decoder>
+
+#. Add the following rules to the ``/var/ossec/etc/rules/local_rules.xml`` file. The rules detect FIM events in the monitored directory. This triggers the YARA Active response script to delete a file if identified as a malicious file. Replace ``<USER_NAME>`` with the username of the endpoint:
+
+   .. code-block:: xml
+
+      <group name="syscheck,">
+        <rule id="100300" level="5">
+          <if_sid>550</if_sid>
+          <field name="file">/home</field>
+          <description>File modified in /home directory.</description>
+        </rule>
+
+        <rule id="100301" level="5">
+          <if_sid>554</if_sid>
+          <field name="file">/home</field>
+          <description>File added to /home directory.</description>
+        </rule>
+        <rule id="100302" level="5">
+          <if_sid>550</if_sid>
+          <field name="file">C:\\Users\\</field>
+          <description>File modified in C:\Users\ directory.</description>
+        </rule>
+
+        <rule id="100303" level="5">
+          <if_sid>554</if_sid>
+          <field name="file">C:\\Users\\</field>
+          <description>File added to C:\Users\ directory.</description>
+        </rule>
+
+      </group>
+
+      <group name="yara,">
+        <rule id="108000" level="0">
+          <decoded_as>yara_decoder</decoded_as>
+          <description>Yara grouping rule</description>
+        </rule>
+        <rule id="108001" level="10">
+          <if_sid>108000</if_sid>
+          <match>wazuh-yara: INFO - Scan result: </match>
+          <description>File "$(yara.scanned_file)" is a positive match for YARA rule: $(yara.rule_name)</description>
+        </rule>
+
+        <rule id="108002" level="5">
+          <if_sid>108000</if_sid>
+          <field name="yara.file_deleted">\.</field>
+          <description>Active response successfully removed malicious file "$(yara.file_deleted)"</description>
+        </rule>
+
+        <rule id="108003" level="12">
+          <if_sid>108000</if_sid>
+          <field name="yara.file_not_deleted">\.</field>
+          <description>Active response unable to delete malicious file "$(yara.file_not_deleted)"</description>
+        </rule>
+      </group>
+
+#. Add the following configuration to the Wazuh server ``/var/ossec/etc/ossec.conf`` configuration file. This configures the active response module to trigger after the rules with ID ``100300``, ``100301``, ``100302``, and ``100303`` are fired:
+
+   .. code-block:: xml
+
+      <ossec_config>  
+        <command>
+          <name>yara_windows</name>
+          <executable>yara.exe</executable>
+          <timeout_allowed>no</timeout_allowed>
+        </command>
+
+        <command>
+          <name>yara_linux</name>
+          <executable>yara.sh</executable>
+          <extra_args>-yara_path /usr/local/bin -yara_rules /var/ossec/active-response/yara/rules/yara_rules.yar</extra_args>
+          <timeout_allowed>no</timeout_allowed>
+        </command>
+
+        <active-response>
+          <command>yara_linux</command>
+          <location>local</location>
+          <rules_id>100300,100301</rules_id>
+        </active-response>
+
+        <active-response>
+          <command>yara_windows</command>
+          <location>local</location>
+          <rules_id>100302,100303</rules_id>
+        </active-response>
+      </ossec_config>
+
+#. Restart the Wazuh manager to apply the configuration changes:
+
+   .. code-block:: console
+
+      $ sudo systemctl restart wazuh-manager
+
+Testing the configuration 
+-------------------------
+
+Ubuntu 22.04 endpoint
+^^^^^^^^^^^^^^^^^^^^^
+
+Run the following commands on the Ubuntu endpoint to download malware samples to the monitored ``/tmp`` directory:
+
+.. code-block:: console
+
+   # curl "https://wazuh-demo.s3-us-west-1.amazonaws.com/mirai" > /tmp/mirai
+   # curl "https://wazuh-demo.s3-us-west-1.amazonaws.com/xbash" > /tmp/xbash
+   # curl "https://wazuh-demo.s3-us-west-1.amazonaws.com/webshell" > /tmp/webshell
+
+You can visualize the alert data in the Wazuh dashboard. To do this, go to the **Modules** > **Security events** tab and add the ``rule.groups:yara`` filter in the search bar to query the alerts.
+
+As seen in the image, ChatGPT provides more context to the malicious file detected by YARA. Further insight such as origin, attack vectors, and impact of the malicious file can be seen in the ``yara.chatgpt_response`` field.
+
+.. thumbnail:: /images/poc/chatgpt_response-ubuntu-alert.png
+   :title: ChatGPT context in alert with YARA
+   :alt: ChatGPT context in alert with YARA
+   :align: center
+   :width: 80%
+
+.. thumbnail:: /images/poc/chatgpt-active-response-ubuntu-alert.png
+   :title: Active response
+   :alt: Active response
+   :align: center
+   :width: 80%
+
+The below image shows an example of an alert triggered when the provided ChatGPT API key is invalid or a matched YARA rule does not contain a description.
+
+.. thumbnail:: /images/poc/chatgpt_response-none-ubuntu-alert.png
+   :title: ChatGPT context none in alert with YARA
+   :alt: ChatGPT context none in alert with YARA
+   :align: center
+   :width: 80%
+
+Windows 11 endpoint
+^^^^^^^^^^^^^^^^^^^
+
+Run the following commands via PowerShell to download malware samples to the monitored ``C:\Users\<USER>\Downloads`` directory:
+
+.. code-block:: powershell
+
+   > curl "https://wazuh-demo.s3-us-west-1.amazonaws.com/mirai" -o c:\users\mirai
+   > curl "https://wazuh-demo.s3-us-west-1.amazonaws.com/xbash" -o c:\users\xbash
+   > curl "https://wazuh-demo.s3-us-west-1.amazonaws.com/webshell" -o c:\users\webshell
+
+You can visualize the alert data in the Wazuh dashboard. To do this, go to the **Security events** module and add the filter in the search bar to query the alerts.
+
+-  ``rule.groups:yara``
+
+As seen in the image, ChatGPT provides more context to the malicious file detected by YARA. Further insight, such as origin, attack vectors, and impact of the malicious file, can be seen in the ``yara.chatgpt_response`` field.
+
+.. thumbnail:: /images/poc/chatgpt_response-windows-alert.png
+   :title: ChatGPT context in alert with YARA
+   :alt: ChatGPT context in alert with YARA
+   :align: center
+   :width: 80%
+
+.. thumbnail:: /images/poc/chatgpt-active-response-windows-alert.png
+   :title: Active response
+   :alt: Active response
+   :align: center
+   :width: 80%
+
+The below image shows an example of an alert triggered when the provided ChatGPT API key is invalid or a matched YARA rule does not contain a description.
+
+.. thumbnail:: /images/poc/chatgpt_response-none-windows-alert.png
+   :title: ChatGPT context none in alert with YARA
+   :alt: ChatGPT context none in alert with YARA
+   :align: center
+   :width: 80%
