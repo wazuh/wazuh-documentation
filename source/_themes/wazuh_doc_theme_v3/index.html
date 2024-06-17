@@ -13,14 +13,14 @@
   {#- Change the header -#}
   {%- block header %}
   <header id="header" class="fixed-top">
-    <nav class="navbar">
+    <nav>
       {% include "template-parts/header.html" %}
     </nav>
   </header>
   <div id="large-search-box">
     <div class="container">
       <div class="h2 title">
-        What can we help you find?
+        Documentation <span class="wzh-remark">Index</span>
       </div>
       {% include "template-parts/search-box.html" %}
     </div>
@@ -32,14 +32,6 @@
   {{ super () }}
   </div>
   {%- endblock main_column -%}
-  
-  {%- block footer %}
-  <footer class="d-flex align-items-center">
-    <div class="container d-flex justify-content-center">
-      {% include "template-parts/footer.html" %}
-    </div>
-  </footer>
-  {%- endblock footer -%}
   
   {#- Remove blocks: left-sidebar, edit-repo and light_box_display -#}
   {%- block sidebar1 -%}{%- endblock sidebar1 -%}
