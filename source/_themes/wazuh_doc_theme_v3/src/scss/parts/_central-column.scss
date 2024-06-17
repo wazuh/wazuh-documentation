@@ -39,14 +39,9 @@
 #central-column {
   width: 100%;
   position: relative;
-  // @include media-only(xl, xxl) {
-  //   padding-right: $right-sidebar-width-narrow;
-  //   padding-left: $left-sidebar-width-narrow;
-  // }
-  // @include media-min(xxl) {
-  //   padding-right: $right-sidebar-width;
-  //   padding-left: $left-sidebar-width;
-  // }
+  @include media-min(xl){
+    max-width: calc(100% - #{$left-sidebar-width-narrow + $right-sidebar-width-narrow});
+  }
 }
 
 [role="main"] {
