@@ -38,14 +38,15 @@
 
 #central-column {
   width: 100%;
-  @include media-only(xl, xxl) {
-    padding-right: $right-sidebar-width-narrow;
-    padding-left: $left-sidebar-width-narrow;
-  }
-  @include media-min(xxl) {
-    padding-right: $right-sidebar-width;
-    padding-left: $left-sidebar-width;
-  }
+  position: relative;
+  // @include media-only(xl, xxl) {
+  //   padding-right: $right-sidebar-width-narrow;
+  //   padding-left: $left-sidebar-width-narrow;
+  // }
+  // @include media-min(xxl) {
+  //   padding-right: $right-sidebar-width;
+  //   padding-left: $left-sidebar-width;
+  // }
 }
 
 [role="main"] {

@@ -13,10 +13,18 @@ if ( $('.index') ) {
   arrowMore.setAttribute('class', 'ico-long-arrow-right');
   $('.toctree-wrapper:last-of-type .toctree-l1:last-of-type .toctree-l2:first-of-type > a').text('More').append(arrowMore);
 
+  /* Set .release-notes-card */
+  $('.index [href*="release-notes/index.html"]').closest('.toctree-l1').addClass('release-notes-card');
+
+
   /* Move Quickstart */
   const quickstart = $('[href="quickstart.html"]').parent();
   quickstart.attr('id', 'quickstart');
   quickstart.parent().prepend(quickstart);
+
+  /* Move #get-wazuh-card */
+  $("#get-wazuh-card").detach().appendTo('#index .toctree-wrapper:last-of-type > ul');
+  $('#index aside').remove();
 
   /* Hide specific subtrees from the index */
   const nodesToHide = [];
@@ -31,7 +39,6 @@ if ( $('.index') ) {
       $('.index [href="' + nodesToHide[i] + '"]').parent().remove();
     }
   }
-
   /* Disable empty TOC nodes links */
   if ( emptyTocNodes ) {
     for (let i = 0; i < emptyTocNodes.length; i++) {
