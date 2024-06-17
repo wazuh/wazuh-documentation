@@ -14,7 +14,8 @@ const FILE = parameter.split('=')[1];
 // List of javascript files that must be included in all pages
 const commonJS = [
   SRC_PATH + "utils.js",
-  SRC_PATH + "components/light-dark-mode.js"
+  SRC_PATH + "components/light-dark-mode.js",
+  SRC_PATH + "components/back-to-top.js"
 ];
 
 // List of javascript files per page
