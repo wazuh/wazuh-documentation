@@ -45,8 +45,10 @@ All the available options to run the script are:
 |                                              | Requires -u|--user, and -p|--password, -au|--admin-user and -ap|--admin-password.                           |
 +----------------------------------------------+-------------------------------------------------------------------------------------------------------------+
 | -au,--admin-user <adminUser>                 | Admin user for the Wazuh API. Required for changing the Wazuh API passwords.                                |
+|                                              | Requires -A|--api.                                                                                          |               
 +----------------------------------------------+-------------------------------------------------------------------------------------------------------------+
 | -ap, --admin-password <adminPassword>        | Password for the Wazuh API admin user. Required for changing the Wazuh API passwords.                       |
+|                                              | Requires -A|--api.                                                                                          |      
 +----------------------------------------------+-------------------------------------------------------------------------------------------------------------+
 | -u / --user <user>                           | Indicates the name of the user whose password will be changed.                                              |
 |                                              | If no password is specified, it will generate a random one.                                                 |
