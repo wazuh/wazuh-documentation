@@ -84,10 +84,14 @@ header {
     margin-right: auto;
   }
   .title {
+    font-weight: 400;
     text-align: center;
     margin-bottom: 1.5rem;
     @include media-max(sm){
       font-size: 1.5rem;
+    }
+    .wzh-remark {
+      font-weight: 600;
     }
   }
   .search-box {
@@ -483,6 +487,11 @@ main {
       align-content: flex-end;
       a {
         border-radius: 4px;
+        height: 34px;
+        width: 150px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
         &:hover {
           color: $light-color-main-text;
         }
