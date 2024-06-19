@@ -4,6 +4,7 @@ const redirections = [];
 
 /* Note: new release versions must always be inserted in the first position of the array "versions" */
 const versions = [
+  '4.10',
   '4.9',
   '4.8',
   '4.7',
@@ -104,6 +105,11 @@ redirections.push(
     '4.9': '/cloud-security/amazon/services/supported-services/amazon-security-lake/security-lake-subscriber.html',
   },
 );
+
+/* Pages added in 4.10 */
+newUrls['4.10'] = [
+  '/release-notes/release-4-10-0.html'
+]
 
 /* Pages added in 4.9 */
 
