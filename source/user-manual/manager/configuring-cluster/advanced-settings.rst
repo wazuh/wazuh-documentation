@@ -561,9 +561,9 @@ This is the basic configuration. You need to replace ``<DATAPLANE_USER>`` and ``
 
       .. note::
 
-         If you use HTTPS as the Dataplane API communication protocol, you need to add the ``tls`` field and related subfields, being ``tls_port``, ``tls_certificate`` and ``tls_key`` mandatory for the communication. The ``tls_ca`` field is only necessary when using Client Side Certificates.
+         If you use HTTPS as the Dataplane API communication protocol, it is mandatory to set the ``tls`` field and related subfields ``tls_port``, ``tls_certificate`` and ``tls_key`` in the configuration. The ``tls_ca`` field is only necessary when using Client Side Certificates.
          
-         To generate the certificate files both for the HAProxy instance and the Wazuh server, the following command should be used:
+         To generate the certificate files both for the HAProxy instance and the Wazuh server, the following command could be used:
 
          .. code-block:: console
 
@@ -574,7 +574,7 @@ This is the basic configuration. You need to replace ``<DATAPLANE_USER>`` and ``
 
          dataplaneapi:
             scheme: 
-            - https
+               - https
             host: 0.0.0.0
             port: 5555
             transaction:
@@ -585,7 +585,7 @@ This is the basic configuration. You need to replace ``<DATAPLANE_USER>`` and ``
                tls_key: /etc/haproxy/ssl/<HAPROXY_CERTIFICATE_KEY_FILE>
                tls_ca: /etc/haproxy/ssl/<CLIENT_SIDE_CERTIFICATE_FILE>
             user:
-            - insecure: true
+            -  insecure: true
                password: <DATAPLANE_PASSWORD>
                name: <DATAPLANE_USER>
          haproxy:
@@ -834,7 +834,7 @@ As an example, you can configure a basic HAProxy helper within an already config
       -  :ref:`haproxy_address <haproxy_address>`: IP or DNS address to connect with HAProxy.
       -  :ref:`haproxy_user <haproxy_user>`: Username to authenticate with HAProxy.
       -  :ref:`haproxy_password <haproxy_password>`: Password to authenticate with HAProxy.
-      -  :ref:`haproxy_protocol <haproxy_protocol>`: HTTPS protocol to use for the HAProxy Dataplane API communication.
+      -  :ref:`haproxy_protocol <haproxy_protocol>`: Protocol to use for the HAProxy Dataplane API communication. It is recommended to set it to ``https``.
       -  :ref:`haproxy_port <haproxy_port>`: Port used for the HAProxy Dataplane API communication. 
       -  :ref:`haproxy_cert` <haproxy_cert>: Certificate file used for the HTTPS communication. It must be the same as the one defined in the ``tls_certificate`` parameter in the ``dataplaneapi.yml`` file. 
       -  :ref:`client_cert` <client_cert>:  Certificate file used in the client side of the HTTPS communication. It must be the same as the one defined in the ``tls_ca`` parameter in the ``dataplaneapi.yml`` file.
