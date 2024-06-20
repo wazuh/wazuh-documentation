@@ -21,6 +21,7 @@ Wazuh manager
 
 - `#17306 <https://github.com/wazuh/wazuh/pull/17306>`__ Added alert forwarding to Fluentd.
 - `#20285 <https://github.com/wazuh/wazuh/pull/20285>`__ Changed logging level of  wazuh-db ``recv()`` messages from error to debug.
+- `#16666 <https://github.com/wazuh/wazuh/pull/16666>`__ Fixed malformed JSON error in wazuh-analysisd.
 
 Wazuh agent
 ^^^^^^^^^^^
@@ -28,6 +29,16 @@ Wazuh agent
 - `#19753 <https://github.com/wazuh/wazuh/pull/19753>`__ Removed the directory ``/boot`` from the default FIM settings for AIX.
 - `#21690 <https://github.com/wazuh/wazuh/pull/21690>`__ Improved debugging logs for Windows registry monitoring configuration. Now the ``Wrong registry value type`` warnings include the registry path to help troubleshooting. Thanks to Zafer Balkan (@zbalkan).
 - `#21287 <https://github.com/wazuh/wazuh/pull/21287>`__ Added Amazon Linux 1 and Amazon Linux 2023 support for the Wazuh installation assistant.
+- `#23137 <https://github.com/wazuh/wazuh/pull/23137>`__ Added Journald support in Logcollector.
+- `#20727 <https://github.com/wazuh/wazuh/pull/20727>`__ Fixed Windows Agent 4.8.0 permission errors on Windows 11 after upgrade.
+- `#22440 <https://github.com/wazuh/wazuh/pull/22440>`__ Fixed Syscollector not checking if there's a scan in progress before starting a new one.
+- `#16487 <https://github.com/wazuh/wazuh/pull/16487>`__ Fixed alerts are created when syscheck diff DB is full.
+- `#2195 <https://github.com/wazuh/wazuh/pull/2195>`__ Fixed Wazuh deb uninstallation to remove non-config files.
+- `#23273 <https://github.com/wazuh/wazuh/pull/23273>`__ Fixed improper Windows agent ACL on non-default installation directory.
+- `#17664 <https://github.com/wazuh/wazuh/pull/17664>`__ Fixed socket configuration of an agent is displayed.
+- `#18494 <https://github.com/wazuh/wazuh/pull/18494>`__ Fixed wazuh-modulesd printing child process not found error.
+- `#23848 <https://github.com/wazuh/wazuh/pull/23848>`__ Fixed issue with an agent starting automatically without reason.
+- `#17415 <https://github.com/wazuh/wazuh/pull/17415>`__ Fixed GET /syscheck to properly report size for files larger than 2GB.
 
 Ruleset
 ^^^^^^^
@@ -66,10 +77,27 @@ Wazuh dashboard
 - `#6716 <https://github.com/wazuh/wazuh-dashboard-plugins/pull/6716>`__ Refactored the search bar to handle fixed and user-added filters correctly.
 - `#6714 <https://github.com/wazuh/wazuh-dashboard-plugins/pull/6714>`__ Replaced the custom ``EuiSuggestItem`` component with the native component from OpenSearch UI.
 
+Packages
+^^^^^^^^
+-  `#2989 <https://github.com/wazuh/wazuh-packages/pull/2989>`__ Updated Password Tool to add default user and password to the filebeat.yml when changing passwords
+-  `#2991 <https://github.com/wazuh/wazuh-packages/pull/2991>`__ Allow installation on any OS
+-  `#2970 <https://github.com/wazuh/wazuh-packages/pull/2970>`__ Added support for Rocky Linux 9.4 in Installation assistant
+-  `#2944 <https://github.com/wazuh/wazuh-packages/pull/2944>`__ Update API script file name
+-  `#2698 <https://github.com/wazuh/wazuh-packages/pull/2698>`__ Add new Azure module files
+-  `#2945 <https://github.com/wazuh/wazuh-packages/pull/2945>`__ Added support for Ubuntu 24.04 in Installation assistant
+-  `#2922 <https://github.com/wazuh/wazuh-packages/pull/2922>`__ Changed log message when not yum nor apt-get are found. Added clearer instructions on following steps
+-  `#2911 <https://github.com/wazuh/wazuh-packages/pull/2911>`__ Cert-tool logfile added. Modified common_logger function to write on files without root permission
+-  `#2908 <https://github.com/wazuh/wazuh-packages/pull/2908>`__ Add bash dependency to Wazuh agent RPM for AIX
+-  `#2909 <https://github.com/wazuh/wazuh-packages/pull/2909>`__ Prevent failed checks related to dashboard and indexer
+-  `#2900 <https://github.com/wazuh/wazuh-packages/pull/2900>`__ Installation Assistant language agnostic
+-  `#2882 <https://github.com/wazuh/wazuh-packages/pull/2882>`__ Added rollBack to several exit points
+-  `#2753 <https://github.com/wazuh/wazuh-packages/pull/2753>`__ Adding support for Amazon Linux 1, 2, and 2023
+-  `#2790 <https://github.com/wazuh/wazuh-packages/pull/2790>`__ Added support for AL2023 in WIA
+
 Resolved issues
 ---------------
 
-This release resolves known issues as the following: 
+This release resolves known issues as the following:
 
 Wazuh manager
 ^^^^^^^^^^^^^
