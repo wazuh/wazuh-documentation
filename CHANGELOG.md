@@ -5,20 +5,20 @@ All notable changes to this project will be documented in this file.
 
 ### Added
 
-- Added custom Filebeat user information and deleted obsolete information about ossec.conf file on Wazuh server ([#7382](https://github.com/wazuh/wazuh-documentation/pull/7382))
-- Added journald log collection documentation ([#7363](https://github.com/wazuh/wazuh-documentation/pull/7363))
-- Added documentation for Wazuh dashboard Packages generation ([#7356](https://github.com/wazuh/wazuh-documentation/pull/7356))
-- Added documentation for Wazuh Indexer Packages generation ([#7355](https://github.com/wazuh/wazuh-documentation/pull/7355))
-- Added instructions to collect core dumps in Red Hat based endpoints ([#7347](https://github.com/wazuh/wazuh-documentation/pull/7347))
-- Added documentation for Wazuh as a custom source ASL integration ([#7310](https://github.com/wazuh/wazuh-documentation/pull/7310))
-- Added instructions to collect core dumps in Windows endpoints ([#7299](https://github.com/wazuh/wazuh-documentation/pull/7299))
-- Added python and pip installation templates ([#7298](https://github.com/wazuh/wazuh-documentation/pull/7298))
-- Added a note to warns of default auditd rule in some system that prevent Wazuh from working properly ([#7291](https://github.com/wazuh/wazuh-documentation/pull/7291))
-- Aded core dumps collection documentation ([#7281](https://github.com/wazuh/wazuh-documentation/pull/7281))
-- Added HAProxy helper documentation ([#7279](https://github.com/wazuh/wazuh-documentation/pull/7279))
-- Added ability to disable the edition of configuration through API endpoints and UI ([#7220](https://github.com/wazuh/wazuh-documentation/pull/7220))
-- Added journald log format to localfile reference ([#7202](https://github.com/wazuh/wazuh-documentation/pull/7202))
-- Added required dependencies for AIX agent installation ([#7196]https://github.com/wazuh/wazuh-documentation/pull/7196)
+- Added custom Filebeat user information and deleted obsolete information about ossec.conf file on Wazuh server. ([#7382](https://github.com/wazuh/wazuh-documentation/pull/7382))
+- Added journald log collection documentation. ([#7363](https://github.com/wazuh/wazuh-documentation/pull/7363))
+- Added documentation for Wazuh dashboard Packages generation. ([#7356](https://github.com/wazuh/wazuh-documentation/pull/7356))
+- Added documentation for Wazuh Indexer Packages generation. ([#7355](https://github.com/wazuh/wazuh-documentation/pull/7355))
+- Added instructions to collect core dumps in Red Hat based endpoints. ([#7347](https://github.com/wazuh/wazuh-documentation/pull/7347))
+- Added documentation for Wazuh as a custom source ASL integration. ([#7310](https://github.com/wazuh/wazuh-documentation/pull/7310))
+- Added instructions to collect core dumps in Windows endpoints. ([#7299](https://github.com/wazuh/wazuh-documentation/pull/7299))
+- Added python and pip installation templates. ([#7298](https://github.com/wazuh/wazuh-documentation/pull/7298))
+- Added a note to warns of default auditd rule in some system that prevent Wazuh from working properly. ([#7291](https://github.com/wazuh/wazuh-documentation/pull/7291))
+- Aded core dumps collection documentation. ([#7281](https://github.com/wazuh/wazuh-documentation/pull/7281))
+- Added HAProxy helper documentation. ([#7279](https://github.com/wazuh/wazuh-documentation/pull/7279))
+- Added ability to disable the edition of configuration through API endpoints and UI. ([#7220](https://github.com/wazuh/wazuh-documentation/pull/7220))
+- Added journald log format to localfile reference. ([#7202](https://github.com/wazuh/wazuh-documentation/pull/7202))
+- Added required dependencies for AIX agent installation. ([#7196]https://github.com/wazuh/wazuh-documentation/pull/7196)
 - Added functionality to forward alerts to Fluentd. ([#6691](https://github.com/wazuh/wazuh-documentation/pull/6691))
 - Added the ``<forward_to>`` global option to the ``ossec.conf`` configuration reference. ([#6974](https://github.com/wazuh/wazuh-documentation/pull/6974))
 - Added guide to install Wazuh components offline using the assistant. ([#6920](https://github.com/wazuh/wazuh-documentation/pull/6920))
@@ -26,22 +26,24 @@ All notable changes to this project will be documented in this file.
 
 ### Changed
 
-- Updated note related to 'never,task' rule in auditd ([#7381](https://github.com/wazuh/wazuh-documentation/pull/7381))
-- Update API script file name ([#7296](https://github.com/wazuh/wazuh-documentation/pull/7296))
-- Updated new WPK paths and names ([#7246](https://github.com/wazuh/wazuh-documentation/pull/7246))
-- Updated Windows agent GUI image ([#7241](https://github.com/wazuh/wazuh-documentation/pull/7241/files))
-- Updated manual package generation documentation after package migration ([#7204](https://github.com/wazuh/wazuh-documentation/pull/7204))
+- Updated note related to 'never,task' rule in auditd. ([#7381](https://github.com/wazuh/wazuh-documentation/pull/7381))
+- Update API script file name. ([#7296](https://github.com/wazuh/wazuh-documentation/pull/7296))
+- Updated syscollector scan minimun value ([#7247](https://github.com/wazuh/wazuh-documentation/pull/7247))
+- Updated new WPK paths and names. ([#7246](https://github.com/wazuh/wazuh-documentation/pull/7246))
+- Updated Windows agent GUI image. ([#7241](https://github.com/wazuh/wazuh-documentation/pull/7241/files))
+- Updated manual package generation documentation after package migration. ([#7204](https://github.com/wazuh/wazuh-documentation/pull/7204))
 - Removed the container ``path`` option and changed the container ``name`` in the Azure Storage use case to keep consistency with the values shown in the images. ([#6835](https://github.com/wazuh/wazuh-documentation/pull/6835))
 - Updated the ``/groups/{group_id}/files/{file_name}`` endpoint references. ([#7006](https://github.com/wazuh/wazuh-documentation/pull/7006))
 - Bumped cloud services Python minimum version to 3.8. ([#7130](https://github.com/wazuh/wazuh-documentation/pull/7130))
 
 ### Fixed
 
-- Fix Amazon Security Lake Source integration validation step ([#7360](https://github.com/wazuh/wazuh-documentation/pull/7360))
+- Fix Amazon Security Lake Source integration validation step. ([#7360](https://github.com/wazuh/wazuh-documentation/pull/7360))
 - Updated commands in installing the Wazuh agent from sources section. ([#6973](https://github.com/wazuh/wazuh-documentation/pull/6973))
 
 ### Removed
 
+- Remove unreferenced files. ([#7222](https://github.com/wazuh/wazuh-documentation/pull/7222))
 - Removed the agent info task from the multiprocessing task list. ([#7173](https://github.com/wazuh/wazuh-documentation/pull/7173))
 - Removed the ``logs.level`` app setting and the references to the plugin log files and *App logs* application. ([#6810](https://github.com/wazuh/wazuh-documentation/pull/6810))
 
