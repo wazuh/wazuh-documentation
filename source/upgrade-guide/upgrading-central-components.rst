@@ -200,7 +200,7 @@ If upgrading from version 4.7 and earlier, edit ``/var/ossec/etc/ossec.conf`` to
    .. code-block:: console
   
       # /var/ossec/bin/wazuh-keystore -f indexer -k username -v <INDEXER_USERNAME>
-      # /var/ossec/bin/wazuh-keystore -f indexer -k username -v <INDEXER_PASSWORD>
+      # /var/ossec/bin/wazuh-keystore -f indexer -k password -v <INDEXER_PASSWORD>
 
 Configuring Filebeat
 ^^^^^^^^^^^^^^^^^^^^

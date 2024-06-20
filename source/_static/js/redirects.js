@@ -138,7 +138,8 @@ removedUrls['4.9'] = [
 newUrls['4.8'] = [
   '/release-notes/release-4-8-0.html',
   '/release-notes/release-4-8-1.html',
-  '/user-manual/wazuh-dashboard/management.html'
+  '/user-manual/wazuh-dashboard/management.html',
+  '/upgrade-guide/troubleshooting.rst'
 ];
 
 /* Pages no longer available in 4.8 */
