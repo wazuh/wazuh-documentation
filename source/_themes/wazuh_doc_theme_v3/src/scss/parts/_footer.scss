@@ -6,30 +6,116 @@
 ----------------------------------------------------------------------------- */
 
 footer {
-  padding: 50px 15px 26px;
   @include media-min(xl){
     position: absolute;
+    z-index: 99;
     right: 0;
-    display: flex;
     align-items: center;
-    height: $footer-height;
-    padding: 15px 0 15px 30px;
   }
   @include media-only(xl, xxl) {
-    left: $left-sidebar-width-narrow;
+    left: 0;//$left-sidebar-width-narrow;
   }
   @include media-min(xxl) {
-    left: $left-sidebar-width;
+    left: 0;//$left-sidebar-width;
+  }
+  @include media-max(xl) {
+    display: flex;
+    flex-direction: column;
+  }
+  & > .navbar.dropup {
+    display: block;
+    padding: 0;
+    .website-links {
+      bottom: -2px;
+      pointer-events: all;
+      border-radius: 0;
+    }
+  }
+  .subfooter,
+  .website-links {
+    color: $light-color-base-space;
+    background: $light-color-footer;
   }
 
-  .nav-item svg {
-    height: 15px;
-    width: 17px;
-  }
-
-  & > .container {
+  .subfooter .container {
     @include media-max(xl) {
       flex-direction: column;
+    }
+  }
+  #toggle-full-footer-wrapper {
+    @include media-min(xl) {
+      pointer-events: none;
+      position: absolute;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      z-index: 1;
+    }
+  }
+  #toggle-full-footer {
+    pointer-events: auto;
+    position: relative;
+    background-color: $light-color-footer;
+    display: flex;
+    border-radius: 50px 50px 0 0;
+    height: 30px;
+    width: 60px;
+    align-items: flex-start;
+    padding: 3px;
+    justify-content: center;
+    @include media-max(xl) {
+      display: none;
+    }
+    &.btn.focus, 
+    &.btn:focus {
+      box-shadow: none;
+    }
+    &::after {
+      content: none;
+    }
+    svg {
+      fill: white;
+      transform: rotate(180deg) scale(0.7, 0.6);
+      // stroke-width: 1px;
+    }
+  }
+  .website-links {
+    padding-top: 0;
+    padding-bottom: 0;
+    background-color: $light-color-footer;
+    &.show {
+      @include media-min(xl) {
+        max-height: 467px;
+        transition: max-height ease-in .3s;
+      }
+    }
+    & > .container {
+      padding-top: 65px;
+    }
+    @include media-min(xl) {
+      height: 466px;
+      position: absolute;
+      bottom: 110px;
+      left: 0;
+      right: 0;
+      z-index: 100;
+      display: block!important;
+      max-height: 0px;
+      overflow: hidden;
+      transition: max-height ease-in .3s;
+    }
+    @include media-max(xl) {
+      position: relative;
+      display: block;
+      width: 100%;
+      z-index: 0;
+    }
+
+    a {
+      line-height: 2.11rem;
+      &:hover {
+        text-decoration: none;
+      }
     }
   }
 
@@ -38,6 +124,8 @@ footer {
       display: inline-block;
       width: 28px;
       height: 16px;
+      position: relative;
+      bottom: .2em;
       @include media-max(sm) {
         width: 46px;
         height: 24px;
@@ -45,106 +133,173 @@ footer {
       }
     }
   }
-
-  .desktop-footer {
-    @include media-min(xl){
-      width: 100%;
-    }
-    @include media-only(md,xl) {
-      padding-top: 15px;
-      padding-bottom: 15px;
-    }
-    .social-links {
-      display: flex;
-      padding: 3px 0;
-      font-size: 14px;
-      @include media-min(md){
-        justify-content: flex-end;
-      }
-      @include media-max (md) {
-        justify-content: center;
-        align-items: center;
-        padding: 40px 0;
-      }
-      i {
-        font-size: 23px;
-        @include media-min(sm){
-          font-size: 1rem;
-        }
-      }
-      svg {
-        height: 21px;
-        width: 20px;
-        @include media-min(xl){
-          height: 21px;
-          width: 15px;
-        }
-      }
-    }
-  }
-
   .subfooter {
-    font-size: 14px;
-    display: flex;
-    flex-direction: row;
-    position: relative;
-    @include media-max(sm) {
-      flex-direction: column;
-      align-items: center;
-    }
-    @include media-max (md) {
+    .container {
+      flex-direction: row;
+      justify-content: space-between;
       padding-top: 40px;
-      justify-content: center; 
+      padding-bottom: 40px;
+      @include media-min (lg) {
+        display: flex;
+      }
+      @include media-max (xl) {
+        padding-top: 43px;
+        padding-bottom: 43px;
+      }
+    }
+
+    .legal {
+      display: flex;
+      font-size: 13px;
       align-items: center;
-    }
-    &>div {
-      padding: 5px 15px;
-      line-height: 30px;
-      @include media-min(sm) {
-        border-left: 1px solid $color-subfooter-separator;
-        padding: 0 15px;
+      flex-direction: column;
+      @include media-min (md) {
+        flex-direction: row;
       }
-      a {
-        text-decoration: none;
+      @include media-only (sm, md) {
+        font-size: 16px;
       }
-      &:first-of-type,
-      &:nth-of-type(2) {
-        @include media-min(sm) {
-          border: 0;
-          padding-left: 0;
+      @include media-only (md,lg) {
+        justify-content: center;
+      }
+      .logo {
+        position: relative;
+        top: -3px;
+        svg {
+          display: inline-block;
+          height: 16px;
+          width: 28px;
+          @include media-max (md) {
+            height: 50px;
+            margin-bottom: 20px;
+            width: 180px;
+          }
         }
       }
-      &:last-of-type {
-        @include media-min(sm) {
-          padding-right: 0;
+      .sub-section {
+        width: 77%;
+        display: flex;
+        justify-content: space-between;
+        @include media-min (md) {
+          display: contents;
+        }
+        &> div {
+          line-height: 30px;
+          padding: 5px 0;
+          @include media-min (md) {
+            border-left: 1px solid $color-subfooter-separator;
+          }
+          @include media-only (md,xl) {
+            padding: 0 15px;
+          }
+          @include media-min (xl) {
+            padding: 0 30px;
+          }
+        }
+        .footer-tel svg {
+          fill: $dark-color-main-text;
+          margin-right: 8px;
+          @include media-max (md) {
+            display: none;
+          }
+        }
+        .no-border {
+          border: 0 !important;
         }
       }
     }
+
+    .social {
+      @include media-min(lg){
+        padding-right: 70px;
+      }
+      .social-links {
+        display: flex;
+        flex-wrap: nowrap;
+        padding: 3px 0;
+        font-size: 14px;
+        max-width: 336px;
+        @include media-min(md){
+          justify-content: flex-end;
+        }
+        @include media-max (md) {
+          width: 77%;
+          justify-content: space-between;
+        }
+        @include media-max (xs) {
+          min-width: 245px;
+        }
+        @include media-max (lg) {
+          padding: 40px 0;
+          margin: 0 auto;
+        }
+        .nav-item {
+          @include media-max(md){
+            align-items: center;
+            display: flex;
+            height: 40px;
+            justify-content: center;
+            margin: 2px 0;
+            width: 40px;
+          }
+          &:first-of-type {
+            a { 
+              @include media-max(sm){
+                margin-left: 15px;
+              }
+              @include media-only(sm, md){
+                margin-left: 10px;
+              }
+              @include media-only(md, lg){
+                margin-left: 50px;
+              }
+            }
+          }
+          a {
+            display: inline-flex;
+            margin: 0 14px;
+            @include media-max(md){
+              transform: scale(1.1);
+            }
+          }
+        }
+        i {
+          font-size: 23px;
+          @include media-min(sm){
+            font-size: 1rem;
+          }
+        }
+        svg {
+          height: 19px;
+          width: 19px;
+          transform: scale(1.5);
+          @include media-max(sm){
+            transform: scale(1.1);
+          }
+        }
+      }
+    }  
   }
 
   .website-links {
-    margin-bottom: .5rem;
-    position: relative;
-    &::after{
+    .mainfooter {
+      width: 100%;
+      padding-bottom: .5rem;
+    }
+    &::before{
       content: "";
       height: 0;
       width: calc(100% - 30px);
       position: absolute;
-      bottom: 0;
       left: 15px;
       right: 15px;
       border-bottom: 1px solid $color-subfooter-separator;
+      bottom: 0;
     }
     ul {
       padding-left: 0;
       margin-bottom: 0;
       list-style: none;
-    }
-    a {
-      &:hover,
-      &:focus {
-        font-weight: 500;
-      }
     }
   }
   .footer-section {
@@ -164,28 +319,7 @@ footer {
   }
 
   .nav-link {
-    padding: 0 15px;
-  }
-}
-
-.index footer {
-  & > div {
-    @include media-max(sm){
-      margin-right: auto;
-      margin-left: 0;
-    }
-  }
-  .desktop-footer.row {
-    @include media-max(md) {
-      flex-direction: column;
-    }
-  }
-  .social-links {
-    .nav-link {
-      @include media-max(sm) {
-        padding: 0 11px;
-      }
-    }
+    padding: 0;
   }
 }
 
@@ -193,12 +327,10 @@ footer {
 
 .light-theme {
   footer {
-    background: $light-color-footer;
-
     .nav-link {
-      color: $light-color-main-text;
+      color: $light-color-base-space;
       svg {
-        fill: $light-color-main-text;
+        fill: $light-color-base-space;
       }
 
       &:hover {
@@ -210,7 +342,7 @@ footer {
     }
     .website-links {
       a {
-        color: $light-color-main-text;
+        color: $light-color-base-space;
         &:hover,
         &:focus {
           color: $light-color-primary-lighter;
@@ -219,15 +351,16 @@ footer {
     }
     .logo-link {
       svg {
-        fill: $light-color-main-text-extra;
+        fill: $dark-color-main-text;
       }
     }
     .subfooter {
       &>div {
+        color: $light-color-base-space;
         a {
-            color: $light-color-main-text;
+            color: $light-color-base-space;
             &:hover, &:active {
-              color: $light-color-primary;
+              color: $light-color-primary-lighter;
             }
         }
       }
@@ -239,8 +372,6 @@ footer {
 
 .dark-theme {
   footer {
-    background: $dark-color-footer;
-
     .nav-link {
       color: $dark-color-main-text;
       svg {
