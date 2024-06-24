@@ -94,14 +94,14 @@ For the agent deployment, we are going to use the role of wazuh-agent, which con
 .. code-block:: yaml
 
 	---
-	- hosts: <your wazuh agents hosts>
+	- hosts: <WAZUH_AGENT_IP_ADDRESS>
 	  become: yes
 	  become_user: root
 	  roles:
 	    - ../roles/wazuh/ansible-wazuh-agent
 	  vars:
 	    wazuh_managers:
-	      - address: <manager IP>
+	      - address: <WAZUH_MANAGER_IP_ADDRESS>
 	        port: 1514
 	        protocol: tcp
 	        api_port: 55000
@@ -135,18 +135,18 @@ We can create a similar YAML file or modify the one we already have to adapt it 
       .. code-block:: yaml
 
          [wazuh-agents]
-         agent_1 ansible_host=<manager IP> ansible_ssh_user=<username>
+         agent_1 ansible_host=<WAZUH_MANAGER_IP_ADDRESS> ansible_ssh_user=<USERNAME>
 
    .. group-tab:: Windows
 
       .. code-block:: yaml
 
          [wazuh-agents]
-         agent_1 ansible_host=<manager IP>
+         agent_1 ansible_host=<WAZUH_MANAGER_IP_ADDRESS>
 
          [wazuh-agents:vars]
-         ansible_user=<username>
-         ansible_password=<password>
+         ansible_user=<USERNAME>
+         ansible_password=<PASSWORD>
          ansible_connection=winrm
          ansible_winrm_server_cert_validation=ignore
          ansible_ssh_port=5986
@@ -165,7 +165,7 @@ Our resulting file is:
 	    - ../roles/wazuh/ansible-wazuh-agent
 	  vars:
 	    wazuh_managers:
-	      - address: <manager IP>
+	      - address: <WAZUH_MANAGER_IP_ADDRESS>
 	        port: 1514
 	        protocol: tcp
 	        api_port: 55000
