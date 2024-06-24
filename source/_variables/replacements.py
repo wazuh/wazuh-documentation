@@ -177,7 +177,6 @@ if is_latest_release:
     custom_replacements["|WAZUH_AGENT_RPM_PKG_INSTALL|"] = ''
     custom_replacements["|WAZUH_AGENT_DEB_PKG_INSTALL|"] = ''
     custom_replacements["|WAZUH_AGENT_ZYPP_PKG_INSTALL|"] = ''
-    custom_replacements["|WAZUH_AGENT_APK_PKG_INSTALL|"] = ''
 else:
     custom_replacements["|WAZUH_INDEXER_RPM_PKG_INSTALL|"] = '-' + custom_replacements["|WAZUH_CURRENT|"] + '-' + custom_replacements["|WAZUH_INDEXER_CURRENT_REV|"]
     custom_replacements["|WAZUH_MANAGER_RPM_PKG_INSTALL|"] = '-' + custom_replacements["|WAZUH_CURRENT|"] + '-' + custom_replacements["|WAZUH_REVISION_YUM_MANAGER_X86|"]
@@ -188,4 +187,3 @@ else:
     custom_replacements["|WAZUH_AGENT_RPM_PKG_INSTALL|"] = '-' + custom_replacements["|WAZUH_CURRENT|"] + '-' + custom_replacements["|WAZUH_REVISION_YUM_AGENT_X86|"]
     custom_replacements["|WAZUH_AGENT_DEB_PKG_INSTALL|"] = '=' + custom_replacements["|WAZUH_CURRENT|"] + '-' + custom_replacements["|WAZUH_REVISION_DEB_AGENT_X86|"]
     custom_replacements["|WAZUH_AGENT_ZYPP_PKG_INSTALL|"] = '-' + custom_replacements["|WAZUH_CURRENT|"] + '-' + '1'
-    custom_replacements["|WAZUH_AGENT_APK_PKG_INSTALL|"] = '=' + custom_replacements["|WAZUH_CURRENT|"] + '-' + custom_replacements["|WAZUH_REVISION_APK_AGENT_X86_64|"]
