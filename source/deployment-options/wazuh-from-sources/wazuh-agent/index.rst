@@ -13,11 +13,11 @@ The Wazuh agent is a single and lightweight monitoring software. It is a multi-p
     .. group-tab:: Linux
 
         .. note::
-        
+
            You need root user privileges to run all the commands described below. Since Wazuh 3.5, it is necessary to have an Internet connection when following this process.
 
         .. note::
-        
+
             CMake 3.12.4 is the minimal library version required to build the Wazuh agent solution.
 
         #.  Install development tools and compilers. In Linux, this can easily be done using your distribution’s package manager:
@@ -88,7 +88,7 @@ The Wazuh agent is a single and lightweight monitoring software. It is a multi-p
                         # cd .. && rm -rf cmake-*
 
                     .. note::
-                    
+
                         For Suse 11, it is possible that some of the tools are not found in the package manager, in that case you can add the following official repository:
 
                             .. code-block:: console
@@ -96,20 +96,12 @@ The Wazuh agent is a single and lightweight monitoring software. It is a multi-p
                                 # zypper addrepo http://download.opensuse.org/distribution/11.4/repo/oss/ oss
 
                 .. group-tab:: Pacman
-                
+
                     GCC/G++ 9.4 is the recommended version to build wazuh.
 
                     .. code-block:: console
 
                         # pacman --noconfirm -Syu curl gcc make sudo wget expect gnupg perl-base perl fakeroot python brotli automake autoconf libtool gawk libsigsegv nodejs base-devel inetutils cmake
-
-                .. group-tab:: APK
-
-                    Alpine Package Keeper is the default package manager that Alpine Linux uses to manage its packages.
-
-                    .. code-block:: console
-
-                        # apk --update add automake autoconf cmake curl gcc gettext-dev g++ linux-headers libgcc libtool make procps python3 openssl-dev 
 
         #.  Download and extract the latest version:
 
@@ -133,7 +125,7 @@ The Wazuh agent is a single and lightweight monitoring software. It is a multi-p
                 # make -C src clean-deps
 
             .. note::
-            
+
                 During the installation, users can decide the installation path. Execute the ``./install.sh`` and select the language, set the installation mode to ``agent``, then set the installation path (``Choose where to install Wazuh [/var/ossec]``). The default path of installation is ``/var/ossec``. A commonly used custom path might be ``/opt``. When choosing a different path than the default, if the directory already exists, the installer will ask to delete the directory or proceed by installing Wazuh inside it. You can also run an :doc:`unattended installation </user-manual/reference/unattended-installation>`.
 
         #.  The script will ask about what kind of installation you want. Type agent in order to install a Wazuh agent:
@@ -143,10 +135,10 @@ The Wazuh agent is a single and lightweight monitoring software. It is a multi-p
 
                 1- What kind of installation do you want (manager, agent, local, hybrid or help)? agent
 
-                
+
         .. rubric:: Next steps
            :class: h2
-           
+
         Now that the agent is installed, the next step is to enroll the agent with the Wazuh server. For more information about this process, please check the :doc:`/user-manual/agent-enrollment/index` section.
 
         .. raw:: html
@@ -178,9 +170,9 @@ The Wazuh agent is a single and lightweight monitoring software. It is a multi-p
             # rm -rf $WAZUH_HOME
 
         Delete the service:
-        
+
         .. tabs::
-          
+
             .. tab:: SysV init
 
                 .. code-block:: console
@@ -205,7 +197,7 @@ The Wazuh agent is a single and lightweight monitoring software. It is a multi-p
     .. group-tab:: Windows
 
         .. note::
-        
+
             The following procedure has been tested on Ubuntu 22.04 and may work with other Debian/Ubuntu versions as well. It is required to use MinGW 10.
 
         #.  Set up the Ubuntu build environment. Install these dependencies to build the Windows Wazuh agent installer on Ubuntu:
@@ -259,11 +251,11 @@ The Wazuh agent is a single and lightweight monitoring software. It is a multi-p
             .. code-block:: doscon
 
                 :: signtool sign /a /tr http://timestamp.digicert.com /d "%MSI_NAME%" /fd SHA256 /td SHA256 "%MSI_NAME%"
-                
+
         #.  Specify the version and the revision number when prompted. This will also generate the Windows installer file. In the following output, the version is set as |WAZUH_CURRENT_WIN_FROM_SOURCES| and the revision is set as |WAZUH_CURRENT_WIN_FROM_SOURCES_REV|. This generates the Windows installer ``wazuh-agent-|WAZUH_CURRENT_WIN_FROM_SOURCES|-|WAZUH_CURRENT_WIN_FROM_SOURCES_REV|.msi``
-        
+
             .. code-block:: doscon
-            
+
                 C:\wazuh\wazuh-|WAZUH_CURRENT_FROM_SOURCES|\src\win32>REM IF VERSION or REVISION are empty, ask for their value
 
                 C:\wazuh\wazuh-|WAZUH_CURRENT_FROM_SOURCES|\src\win32>IF [] == [] set /p VERSION=Enter the version of the Wazuh agent (x.y.z):
@@ -278,7 +270,7 @@ The Wazuh agent is a single and lightweight monitoring software. It is a multi-p
 
         .. rubric:: Next steps
            :class: h2
-           
+
         Now that the agent is installed, the next step is to enroll the agent with the Wazuh server. For more information about this process, please check the :doc:`/user-manual/agent-enrollment/index` section.
 
         .. raw:: html
@@ -326,7 +318,7 @@ The Wazuh agent is a single and lightweight monitoring software. It is a multi-p
                 # curl -Ls https://github.com/wazuh/wazuh/archive/v|WAZUH_CURRENT_FROM_SOURCES|.tar.gz | tar zx
 
             .. note::
-            
+
                 All the commands described below need to be executed with root user privileges.
 
         #.  Run the ``install.sh`` script. This will run a wizard that will guide you through the installation process using the Wazuh sources:
@@ -337,7 +329,7 @@ The Wazuh agent is a single and lightweight monitoring software. It is a multi-p
                 # USER_DIR="/Library/Ossec" ./install.sh
 
             .. note::
-            
+
                 Note that with the variable ``USER_DIR``, it has been indicated that the agent installation path is ``/Library/Ossec``
 
             If you have previously compiled for another platform, you must clean the build using the Makefile in ``src``:
@@ -349,7 +341,7 @@ The Wazuh agent is a single and lightweight monitoring software. It is a multi-p
                 # make -C src clean-deps
 
             .. note::
-            
+
                 During the installation, users can decide the installation path. Execute the ``./install.sh`` and select the language, set the installation mode to ``agent``, then set the installation path (``Choose where to install Wazuh [/Library/Ossec]``). The default path of installation is ``/Library/Ossec``. When choosing a different path than the default, if the directory already exists, the installer will ask to delete the directory or proceed by installing Wazuh inside it. You can also run an :doc:`unattended installation </user-manual/reference/unattended-installation>`.
 
         #. The script will ask about what kind of installation you want. Type agent in order to install a Wazuh agent:
@@ -361,7 +353,7 @@ The Wazuh agent is a single and lightweight monitoring software. It is a multi-p
 
         .. rubric:: Next steps
            :class: h2
-          
+
         Now that the agent is installed, the next step is to enroll the agent with the Wazuh server. For more information about this process, please check the :doc:`/user-manual/agent-enrollment/index` section.
 
         .. raw:: html
@@ -407,7 +399,7 @@ The Wazuh agent is a single and lightweight monitoring software. It is a multi-p
 
     .. group-tab:: AIX
 
-        AIX 6.1 TL4 or greater is the supported version for the following installation procedure. 
+        AIX 6.1 TL4 or greater is the supported version for the following installation procedure.
 
         .. note::
 
@@ -428,13 +420,13 @@ The Wazuh agent is a single and lightweight monitoring software. It is a multi-p
                     # wget https://raw.githubusercontent.com/wazuh/wazuh-packages/|WAZUH_CURRENT_MINOR_FROM_SOURCES|/aix/generate_wazuh_packages.sh --no-check-certificate
 
                 .. note::
-                
+
                     If you can’t download the script this way, then you should download it using another machine and copy it to the AIX machine via the scp utility.
 
             #.  Download bash and libiconv.
-            
+
                 .. code-block:: console
-                
+
                     # rpm -Uvh --nodeps http://packages-dev.wazuh.com/deps/aix/bash-4.4-4.aix6.1.ppc.rpm
                     # rpm -Uvh --nodeps http://packages-dev.wazuh.com/deps/aix/libiconv-1.14-22.aix6.1.ppc.rpm
 
@@ -446,18 +438,18 @@ The Wazuh agent is a single and lightweight monitoring software. It is a multi-p
                     # ./generate_wazuh_packages.sh -e
 
             .. note::
-            
+
                 This step may take a few minutes.
 
         #.  Download the latest version.
 
             .. code-block:: console
 
-                # wget -O wazuh.tar.gz --no-check-certificate https://api.github.com/repos/wazuh/wazuh/tarball/v|WAZUH_CURRENT_FROM_SOURCES| 
+                # wget -O wazuh.tar.gz --no-check-certificate https://api.github.com/repos/wazuh/wazuh/tarball/v|WAZUH_CURRENT_FROM_SOURCES|
                 # gunzip -c wazuh.tar.gz | tar -xvf -
 
             .. note::
-            
+
                 If you can't download the repository this way, then you should copy it via the scp utility.
 
         #.  Compile the sources.
@@ -486,7 +478,7 @@ The Wazuh agent is a single and lightweight monitoring software. It is a multi-p
                 # gmake -C src clean
 
             .. note::
-            
+
                 During the installation, users can decide the installation path. Execute the ``./install.sh`` and select the language, set the installation mode to ``agent``, then set the installation path (``Choose where to install Wazuh [/var/ossec]``). The default path of installation is ``/var/ossec``. A commonly used custom path might be ``/opt``. When choosing a different path than the default, if the directory already exists, the installer will ask to delete the directory or proceed by installing Wazuh inside it. You can also run an  :doc:`unattended installation </user-manual/reference/unattended-installation>`.
 
         #.  Finally, apply the following configuration:
@@ -497,12 +489,12 @@ The Wazuh agent is a single and lightweight monitoring software. It is a multi-p
                 # mv /var/ossec/etc/ossec.conf.tmp /var/ossec/etc/ossec.conf
 
             .. note::
-            
+
                 Note that the above commands have been executed for the default installation path ``/var/ossec``. If you have installed the agent in another path, you will have to modify the path of those commands.
 
         .. rubric:: Next steps
            :class: h2
-          
+
         Now that the agent is installed, the next step is to enroll the agent with the Wazuh server. For more information about this process, please check the :doc:`/user-manual/agent-enrollment/index` section.
 
         .. raw:: html
@@ -549,7 +541,7 @@ The Wazuh agent is a single and lightweight monitoring software. It is a multi-p
     .. group-tab:: HP-UX
 
         .. note::
-        
+
             All the commands described below need to be executed with root user privileges. Since Wazuh 3.5, it is necessary to have an Internet connection when following this process.
 
         #.  Install development tools and compilers.
@@ -561,7 +553,7 @@ The Wazuh agent is a single and lightweight monitoring software. It is a multi-p
                     # /usr/local/bin/wget https://github.com/wazuh/wazuh-packages/raw/master/hp-ux/depothelper-2.10-hppa_32-11.31.depot --no-check-certificate
 
                 .. note::
-                
+
                     If you can’t download the script this way, then you should download it using another machine and copy it to the HP-UX machine via the scp utility.
 
             #.  Install the package manager. The absolute path to the depot file is used.
@@ -583,7 +575,7 @@ The Wazuh agent is a single and lightweight monitoring software. It is a multi-p
                     # /usr/local/bin/wget https://raw.githubusercontent.com/wazuh/wazuh-packages/master/hp-ux/generate_wazuh_packages.sh --no-check-certificate
 
                 .. note::
-                
+
                     If you can't download the script this way, then you should copy it via the scp utility.
 
             #.  Install the necessary dependencies using the script.
@@ -594,7 +586,7 @@ The Wazuh agent is a single and lightweight monitoring software. It is a multi-p
                     # ./generate_wazuh_packages.sh -e
 
             .. note::
-            
+
                 This step may take a long time.
 
         #.  Download the latest version.
@@ -604,7 +596,7 @@ The Wazuh agent is a single and lightweight monitoring software. It is a multi-p
                 # /usr/local/bin/curl -k -L -O https://github.com/wazuh/wazuh/archive/v|WAZUH_CURRENT_FROM_SOURCES|.zip && /usr/local/bin/unzip v|WAZUH_CURRENT_FROM_SOURCES|
 
             .. note::
-            
+
                 If you can't download the repository this way, then you should copy it via the scp utility.
 
         #.  Compile the sources.
@@ -629,12 +621,12 @@ The Wazuh agent is a single and lightweight monitoring software. It is a multi-p
                 # /usr/local/bin/gmake -C src clean
 
             .. note::
-            
+
                 During the installation, users can decide the installation path. Execute the ``./install.sh`` and select the language, set the installation mode to ``agent``, then set the installation path (``Choose where to install Wazuh [/var/ossec]``). The default path of installation is ``/var/ossec``. A commonly used custom path might be ``/opt``. When choosing a different path than the default, if the directory already exists, the installer will ask to delete the directory or proceed by installing Wazuh inside it. You can also run an  :doc:`unattended installation </user-manual/reference/unattended-installation>`.
 
         .. rubric:: Next steps
            :class: h2
-          
+
         Now that the agent is installed, the next step is to enroll the agent with the Wazuh server. For more information about this process, please check the :doc:`/user-manual/agent-enrollment/index` section.
 
         .. raw:: html
@@ -690,7 +682,7 @@ The Wazuh agent is a single and lightweight monitoring software. It is a multi-p
             .. tab:: Solaris 10
 
                 .. note::
-                
+
                     All the commands described below need to be executed with root user privileges. Since Wazuh 3.5, it is necessary to have an Internet connection when following this process.
 
                 #.  Install development tools and compilers.
@@ -734,7 +726,7 @@ The Wazuh agent is a single and lightweight monitoring software. It is a multi-p
                             # cd ..
 
                         .. note::
-                        
+
                             The ``gmake`` step will take several minutes to complete. This is normal behavior.
 
                     #.  Install cmake library:
@@ -749,9 +741,9 @@ The Wazuh agent is a single and lightweight monitoring software. It is a multi-p
                             # ln -sf /usr/local/bin/cmake /usr/bin/cmake
 
                     #.  Download and install perl 5.10.1.
-                    
+
                         .. code-block:: console
-                        
+
                             # wget http://www.cpan.org/src/5.0/perl-5.10.1.tar.gz
                             # gunzip ./perl-5.10.1.tar.gz && tar xvf perl-5.10.1.tar
                             # cd perl-5.10.1
@@ -759,11 +751,11 @@ The Wazuh agent is a single and lightweight monitoring software. It is a multi-p
                             # gmake clean && gmake -d -s
                             # gmake install -d -s
                             # cd ..
-                    
+
                     #.  Remove the old version of perl and replace it with perl 5.10.1.
-                    
+
                         .. code-block:: console
-                        
+
                             # rm /usr/bin/perl
                             # mv /opt/csw/bin/perl5.10.1 /usr/bin/
                             # mv /usr/bin/perl5.10.1 /usr/bin/perl
@@ -786,7 +778,7 @@ The Wazuh agent is a single and lightweight monitoring software. It is a multi-p
                             # export LD_LIBRARY_PATH=/usr/local/gcc-5.5.0/lib
                             # cd wazuh/src
                             # gmake clean
-                            # gmake deps TARGET=agent 
+                            # gmake deps TARGET=agent
                             # gmake -j 4 TARGET=agent PREFIX=/var/ossec USE_SELINUX=no
                             # cd ..
 
@@ -839,7 +831,7 @@ The Wazuh agent is a single and lightweight monitoring software. It is a multi-p
 
                 .. rubric:: Next steps
                    :class: h2
-                  
+
                 Now that the agent is installed, the next step is to enroll the agent with the Wazuh server. For more information about this process, please check the :doc:`/user-manual/agent-enrollment/index` section.
 
                 .. raw:: html
@@ -886,7 +878,7 @@ The Wazuh agent is a single and lightweight monitoring software. It is a multi-p
             .. tab:: Solaris 11
 
                 .. note::
-                
+
                     All the commands described below need to be executed with root user privileges. Since Wazuh 3.5, it is necessary to have an Internet connection when following this process.
 
                 #.  Install development tools and build the needed compilers.
@@ -899,7 +891,7 @@ The Wazuh agent is a single and lightweight monitoring software. It is a multi-p
                             # export PATH="${PATH}:/usr/sfw/bin:/opt/csw/bin:/opt/ccs/bin"
                             # pkgutil -y -U
 
-                    #.  Install python 2.7. 
+                    #.  Install python 2.7.
 
                         .. code-block:: console
 
@@ -935,7 +927,7 @@ The Wazuh agent is a single and lightweight monitoring software. It is a multi-p
                             # cd ..
 
                         .. note::
-                        
+
                             The ``gmake`` step will take several minutes to complete. This is normal behavior.
 
                     #.  Install cmake library:
@@ -955,7 +947,7 @@ The Wazuh agent is a single and lightweight monitoring software. It is a multi-p
                         # git clone -b v|WAZUH_CURRENT_FROM_SOURCES| https://github.com/wazuh/wazuh.git
 
                     .. note::
-                    
+
                         If you can’t download the file due to an Open SSL error, then you should copy the directory with the scp utility.
 
                 #.  Run the ``install.sh`` script. This will run a wizard that will guide you through the installation process using the Wazuh sources:
@@ -975,7 +967,7 @@ The Wazuh agent is a single and lightweight monitoring software. It is a multi-p
                     .. note::
 
                         During the installation, users can decide the installation path. Execute the ``./install.sh`` and select the language, set the installation mode to ``agent``, then set the installation path (``Choose where to install Wazuh [/var/ossec]``). The default path of installation is ``/var/ossec``. A commonly used custom path might be ``/opt``. When choosing a different path than the default, if the directory already exists, the installer will ask to delete the directory or proceed by installing Wazuh inside it. You can also run an :doc:`unattended installation </user-manual/reference/unattended-installation>`.
-                    
+
 
                 #.  The script will ask about what kind of installation you want. Type ``agent`` in order to install a Wazuh agent:
 
@@ -986,7 +978,7 @@ The Wazuh agent is a single and lightweight monitoring software. It is a multi-p
 
                 .. rubric:: Next steps
                    :class: h2
-                  
+
                 Now that the agent is installed, the next step is to enroll the agent with the Wazuh server. For more information about this process, please check the :doc:`/user-manual/agent-enrollment/index` section.
 
                 .. raw:: html
