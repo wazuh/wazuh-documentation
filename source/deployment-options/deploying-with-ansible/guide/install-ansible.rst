@@ -198,7 +198,7 @@ Our Ansible server will need to connect to the other endpoints. Let’s see how 
 
       .. code-block:: console
 
-         # cat ~/.ssh/id_rsa.pub | ssh <username>@<remote-server-ip> "cat >> ~/.ssh/authorized_keys"
+         # cat ~/.ssh/id_rsa.pub | ssh <USERNAME>@<REMOTE_SERVER_IP_ADDRESS> "cat >> ~/.ssh/authorized_keys"
 
    #. When we read the Wazuh server ``~/.ssh/authorized_keys``, we can see it contains the public key of the ansible server.
 
@@ -237,7 +237,7 @@ Our Ansible server will need to connect to the other endpoints. Let’s see how 
 
       .. code-block:: console
 
-         # ssh <username>@<remote-server-ip>
+         # ssh <USERNAME>@<REMOTE_SERVER_IP_ADDRESS>
 
       It is expected that we will gain access without having to enter a password.
 
@@ -258,9 +258,9 @@ Before deploying on your Windows endpoints, you must set Ansible to use port ``5
 .. code-block:: ini
 
    [windows_agents]
-   agent1 ansible_host=<agent-1 IP> ansible_port=5986
-   agent2 ansible_host=<agent-2 IP> ansible_port=5986
-   agent3 ansible_host=<agent-3 IP>ansible_port=5986
+   agent1 ansible_host=<WAZUH_AGENT_1_IP_ADDRESS> ansible_port=5986
+   agent2 ansible_host=<WAZUH_AGENT_2_IP_ADDRESS> ansible_port=5986
+   agent3 ansible_host=<WAZUH_AGENT_3_IP_ADDRESS>ansible_port=5986
 
 Where:
 
@@ -281,14 +281,14 @@ Testing the Ansible connection to remote endpoints
    .. code-block:: none
 
       [all_in_one]
-      <remote-server-ip> ansible_ssh_user=<username>
+      <REMOTE_SERVER_IP_ADDRESS> ansible_ssh_user=<USERNAME>
 
    .. note::
      :class: long
 
       Python 3 usage: In some systems, such as Ubuntu 18, we may have problems with the use of Python interpreter due to its version and the default path where Ansible checks for it. If this happens, we must add  the following line to the Ansible host file:
 
-      ``<endpoint_IP> ansible_ssh_user=<ssh_user>``
+      ``<ENDPOINT_IP> ansible_ssh_user=<SSH_USER>``
 
       ``ansible_python_interpreter=/usr/bin/python3``
 
@@ -303,7 +303,7 @@ Testing the Ansible connection to remote endpoints
    .. code-block:: none
       :class: output
 
-      <remote-server-ip> | SUCCESS => {
+      <REMOTE_SERVER_IP_ADDRESS> | SUCCESS => {
           "changed": false,
           "ping": "pong"
       }
