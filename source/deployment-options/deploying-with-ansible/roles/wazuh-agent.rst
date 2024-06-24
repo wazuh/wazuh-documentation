@@ -26,11 +26,11 @@ You can maintain different environments using a variable definition YAML file fo
 .. code-block:: yaml
 
    wazuh_managers:
-     - address: <manager IP>
+     - address: <WAZUH_MANAGER_IP_ADDRESS>
        port: 1514
        protocol: udp
    wazuh_agent_authd:
-     registration_address: <manager IP>
+     registration_address: <WAZUH_MANAGER_IP_ADDRESS>
      enable: true
      port: 1515
      ssl_agent_ca: null
@@ -41,11 +41,11 @@ You can maintain different environments using a variable definition YAML file fo
 .. code-block:: yaml
 
    wazuh_managers:
-     - address: <manager IP>
+     - address: <WAZUH_MANAGER_IP_ADDRESS>
        port: 1514
        protocol: udp
    wazuh_agent_authd:
-     registration_address: <manager IP>
+     registration_address: <WAZUH_MANAGER_IP_ADDRESS>
      enable: true
      port: 1515
      ssl_agent_ca: null
