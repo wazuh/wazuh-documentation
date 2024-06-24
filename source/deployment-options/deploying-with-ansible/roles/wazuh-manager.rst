@@ -28,7 +28,7 @@ Custom variable definitions for different environments can be set when configuri
 
 .. code-block:: yaml
 
-   filebeat_output_indexer_hosts: '10.1.1.11:9200'
+   filebeat_output_indexer_hosts: '<indexer IP>:9200'
 
    wazuh_manager_fqdn: "wazuh-manager"
 
@@ -98,6 +98,6 @@ To run the playbook for a specific environment, the command below is run:
 
    $ ansible-playbook wazuh-manager.yml -e@vars-production.yml
 
-The example above will install Wazuh Manager and Filebeat, Filebeat will be configured to forward data to ``10.1.1.11:9200`` as the Indexer node, also it will set various ``agentless`` hosts configurations including their credentials, the Wazuh API, and the ``authd`` will be configured as well.
+The example above will install Wazuh Manager and Filebeat, Filebeat will be configured to forward data to ``<indexer IP>:9200`` as the Indexer node, also it will set various ``agentless`` hosts configurations including their credentials, the Wazuh API, and the ``authd`` will be configured as well.
 
 Please review the :ref:`variables references <wazuh_ansible_reference_manager>` section to see all variables available for this role.

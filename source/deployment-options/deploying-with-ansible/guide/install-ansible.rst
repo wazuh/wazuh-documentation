@@ -258,15 +258,14 @@ Before deploying on your Windows endpoints, you must set Ansible to use port ``5
 .. code-block:: ini
 
    [windows_agents]
-   agent1 ansible_host=<agent-ip-1> ansible_port=5986
-   agent2 ansible_host=<agent-ip-2> ansible_port=5986
-   agent3 ansible_host=<agent-ip-3> ansible_port=5986
+   agent1 ansible_host=<agent-1 IP> ansible_port=5986
+   agent2 ansible_host=<agent-2 IP> ansible_port=5986
+   agent3 ansible_host=<agent-3 IP>ansible_port=5986
 
 Where:
 
 -  ``windows_agents`` is a host group name for the Windows agents.
 -  ``agent1``, ``agent2``, and ``agent3`` are names for each host.
--  ``<agent-ip-1>``, ``<agent-ip-2>`` and ``<agent-ip-3>`` are the respective Windows host IP addresses.
 
 Make sure to replace these values with your Windows agents actual data. Add and remove lines accordingly.
 
