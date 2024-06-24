@@ -25,6 +25,7 @@
       font-weight: 500;
       border: none;
       padding-right: 40px;
+      height: 100%;
     }
 
     .btn-search {
@@ -73,14 +74,14 @@ header .search-box {
 
 .dark-theme {
   .search-box {
-    background-color: $dark-color-base-space;
+    background-color: $light-color-base-space;
     border-color: $dark-color-border-details;
     &:focus-within {
       border-color: $dark-color-primary-lighter;
     }
     .form-control {
       color: $dark-color-main-text;
-      background-color: $dark-color-base-space;
+      background-color: $light-color-base-space;
     }
     .btn-search {
       background: url("#{$ico-path}svg-icons.svg#search-dt");
