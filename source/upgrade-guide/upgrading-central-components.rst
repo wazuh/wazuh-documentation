@@ -62,7 +62,7 @@ Upgrading the Wazuh indexer
 
    To ensure compatibility with the latest Wazuh indexer and Wazuh dashboard, please update manually installed plugins accordingly. For additional information, check the `distribution matrix <https://github.com/wazuh/wazuh-packages/tree/v|WAZUH_CURRENT|#distribution-version-matrix>`__.
 
-In a Wazuh indexer cluster with multiple nodes, the cluster remains available throughout the upgrading process. This rolling upgrade allows shutting down one Wazuh indexer node at a time for minimal disruption of service.
+The cluster remains available throughout the upgrading process in a Wazuh indexer cluster with multiple nodes. This rolling upgrade allows for the shutting down of one Wazuh indexer node at a time for minimal disruption of service.
 
 As a first step, remove the *ss4o* index templates. Replace ``<WAZUH_INDEXER_IP_ADDRESS>``, ``<USERNAME>``, and ``<PASSWORD>`` before running any command below.
 
@@ -122,11 +122,11 @@ Then, repeat the following steps for every Wazuh indexer node.
 
             # apt-get install wazuh-indexer|WAZUH_INDEXER_DEB_PKG_INSTALL|
 
-#. Restart the service.
+#. Restart the Wazuh indexer service.
 
    .. include:: /_templates/installations/indexer/common/enable_indexer.rst
 
-#. Check that the newly-upgraded node joins the cluster.
+#. Check that the newly upgraded Wazuh indexer node joins the cluster.
 
    .. code-block:: console
 
@@ -144,7 +144,7 @@ Then, repeat the following steps for every Wazuh indexer node.
       }
       '
 
-#. Check again the status of the cluster to see if shard allocation has finished.
+#. Check the status of the Wazuh indexer cluster again to see if the shard allocation has finished.
 
    .. code-block:: console
 
