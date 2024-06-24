@@ -44,14 +44,15 @@
         </main>
       </div>
       {%- endblock main_column -%}
-      {%- block footer %}
-      <footer>
-        {% include "template-parts/footer.html" %}
-      </footer>
-      {% endblock footer -%}
       
       {%- block sidebar2 -%}
       {% include "template-parts/sidebar-right.html" %}
       {% endblock sidebar2 -%}
     </div>
+    {%- block footer %}
+    <footer>
+      {% include "template-parts/footer.html" %}
+      {% include "template-parts/back-to-top.html" %}
+    </footer>
+    {% endblock footer -%}
 {%- endblock %}
