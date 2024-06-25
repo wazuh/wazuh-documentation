@@ -8,7 +8,6 @@
 @import "../components/global-toc";
 
 #left-sidebar {
-  position: fixed;
   top: $header-height-xs;
   flex-shrink: 0;
   flex-grow: 0;
@@ -23,13 +22,9 @@
     display: block;
   }
 
-  @include media-only(xl, xxl) {
+  @include media-min(xl) {
     flex-basis: $left-sidebar-width-narrow;
     width: $left-sidebar-width-narrow;
-  }
-  @include media-min(xxl) {
-    flex-basis: $left-sidebar-width;
-    width: $left-sidebar-width;
   }
 
   .sidebar-container {
@@ -43,15 +38,14 @@
       pointer-events: none;
     }
     @include media-min(xl) {
+      position: fixed;
+      position: sticky;
       top: $header-height-xl;
       height: calc(100vh - #{$header-height-xl});
       padding: 30px 0;
     }
-    @include media-only(xl, xxl) {
+    @include media-min(xl) {
       width: $left-sidebar-width-narrow;
-    }
-    @include media-min(xxl) {
-      width: $left-sidebar-width;
     }
 
     & > nav {
@@ -65,6 +59,7 @@
         z-index: 10;
         width: 100%;
         pointer-events: all;
+        padding: 35px 15px 35px 15px;
       }
       @include media-min(xl) {
         padding-top: 0;
@@ -79,7 +74,7 @@
       &.show + #global-toc,
       &.collapsing + #global-toc {
         @include media-max(xl) {
-          padding-top: 90px;
+          padding-top: 114px;
           transition: padding-top .3s;
         }
       }
@@ -91,11 +86,7 @@
 
 .light-theme {
   #left-sidebar {
-    .sidebar-container {
-      @include media-min(xl) {
-        background-color: $light-color-sidebar-space;
-      }
-    }
+    background-color: $light-color-sidebar-space;
     #global-toc,
     #search-box-wrapper {
       background-color: $light-color-sidebar-space;
@@ -107,11 +98,7 @@
 
 .dark-theme {
   #left-sidebar {
-    .sidebar-container {
-      @include media-min(xl) {
-        background-color: $dark-color-sidebar-space;
-      }
-    }
+    background-color: $dark-color-sidebar-space;
     #global-toc,
     #search-box-wrapper {
       background-color: $dark-color-sidebar-space;
