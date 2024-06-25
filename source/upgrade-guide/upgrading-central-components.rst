@@ -191,16 +191,22 @@ If upgrading from version 4.7 and earlier, edit ``/var/ossec/etc/ossec.conf`` to
 
    .. include:: /_templates/installations/manager/configure_vulnerability_detection.rst
 
-#. Configure the indexer block with your host indexer details
+#. Configure the :doc:`indexer </user-manual/reference/ossec-conf/indexer>` block with the details of your Wazuh indexer host.
+
+   During the upgrade from 4.7, if an Indexer configuration does not exist in the ``/var/ossec/etc/ossec.conf`` file, a default Indexer configuration is automatically appended to ``/var/ossec/etc/ossec.conf`` as part of a new ``<ossec_conf>`` block.
 
    .. include:: /_templates/installations/manager/configure_indexer_connection.rst
 
-#. Save the Wazuh indexer username and password into the Wazuh manager keystore using the Wazuh-keystore tool.
+#. Save the Wazuh indexer username and password into the Wazuh manager keystore using the :doc:`Wazuh-keystore </user-manual/reference/tools/wazuh-keystore>` tool.
 
    .. code-block:: console
   
       # /var/ossec/bin/wazuh-keystore -f indexer -k username -v <INDEXER_USERNAME>
       # /var/ossec/bin/wazuh-keystore -f indexer -k password -v <INDEXER_PASSWORD>
+   
+   .. note::
+
+      In case you've forgotten your Wazuh indexer password, follow the :doc:`password management </user-manual/user-administration/password-management>` guide to reset the password.
 
 Configuring Filebeat
 ^^^^^^^^^^^^^^^^^^^^
