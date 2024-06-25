@@ -4,10 +4,14 @@
     </defs>
     <view id="ico-long-arrow-right-lt" viewBox="0 0 448 512" />
     <view id="ico-long-arrow-right-dt" viewBox="0 600 448 512" />
+    <view id="ico-long-arrow-right-white" viewBox="0 1200 448 512" />
     <g>
         <use xlink:href="#long-arrow-right" fill="#256bd1"/>
     </g>
     <g transform="translate(0, 600)">
         <use xlink:href="#long-arrow-right" fill="#499cfe"/>
+    </g>
+    <g transform="translate(0, 1200)">
+        <use xlink:href="#long-arrow-right" fill="#ffffff"/>
     </g>
 </svg>
