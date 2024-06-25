@@ -19,6 +19,7 @@
 {% endblock %}
 
 {%- block header %}
+<div class="inner-body">
     <header>
       {%- block latest %}
         {% include "template-parts/no-latest-notice.html" %}
@@ -34,7 +35,7 @@
         {% include "template-parts/version-selector.html" %}
       </div>
       {% endif %}
-    </header>
+    </header></div>
 {% endblock header -%}
 
 {% block sidebar1 -%}{% endblock sidebar1 -%}

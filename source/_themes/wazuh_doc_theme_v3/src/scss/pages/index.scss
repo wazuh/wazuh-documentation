@@ -9,6 +9,7 @@
 @import "../components/brand";
 @import "../components/mode-switch";
 @import "../components/search-box";
+@import "../components/back-to-top";
 @import "../parts/header";
 @import "../parts/footer";
 
@@ -20,18 +21,50 @@
   }
 }
 
-body {
-  margin-top: $header-height-xs;
-  @include media-min(xl){
-    margin-top: $header-height-xl;
+header {
+  
+  .mobile-secondary-header {
+    .nav-item {
+      &.install,
+      &.login { 
+        a {
+          @include media-min(xl) {
+            border-radius: 8px;
+            border-width: 1.5px;
+            font-size: 15px;
+            height: 40px;
+            padding: 0 20px;
+            margin-left: 10px;
+          }
+        }
+      }
+      &.install {
+        a {
+          border: none;
+        }
+      }
+      &.login {
+        a {
+          span {
+            margin: 0 0 0 7px;
+          }
+        }
+      }
+    }
   }
-}
 
-header .navbar-nav .dropdown-menu {
-  top: 50px!important;
-  left: -35px;
-  &:before {
-    left: 49px;
+  [class*=wzh-btn-] {
+    align-items: center;
+    border: 2px solid;
+    border-radius: 10px;
+    color: #000;
+    display: flex;
+    font-weight: 500;
+    justify-content: center;
+  }
+
+  .wzh-btn-linear-alt-color {
+    min-width: 83px;
   }
 }
 
@@ -39,23 +72,30 @@ header .navbar-nav .dropdown-menu {
 
   display: flex;
   flex-direction: column;
-  justify-content: center;
+  justify-content: flex-end;
+  padding-bottom: 15px;
   height: $index-header-height-xs;
   @include media-min(xl){
     height: $index-header-height-xl;
   }
-  @include media-max(lg){
-    padding-bottom: 1.5em;
+  @include media-min(xxl){
+    max-width: $outer-container-xxl;
+    margin-left: auto;
+    margin-right: auto;
   }
   .title {
+    font-weight: 400;
     text-align: center;
     margin-bottom: 1.5rem;
     @include media-max(sm){
       font-size: 1.5rem;
     }
+    .wzh-remark {
+      font-weight: 600;
+    }
   }
   .search-box {
-    max-width: 850px;
+    // max-width: 850px;
     margin-right: auto;
     margin-left: auto;
     .form-control {
@@ -72,12 +112,19 @@ header .navbar-nav .dropdown-menu {
   }
 }
 
+#large-search-box .container,
+.inner-body .container {
+  @include media-min(xl){
+    max-width: calc(100% - #{$left-sidebar-width-narrow - 15px} * 2);
+  }
+}
+
 main {
   min-height: calc(100vh - #{$index-header-height-xl} - #{$footer-height});
-  padding-top: 50px;
+  padding-top: 20px;
   padding-right: 0;
   padding-left: 0;
-
+  padding-bottom: 80px;
   h1 {
     width: 0;
     height: 0;
@@ -94,28 +141,45 @@ main {
       display: flex;
       flex-wrap: wrap;
       align-items: flex-start;
-
+      justify-content: space-between;
+      margin-bottom: 0;
       .toctree-l1 {
         position: relative;
-        width: calc(33.333% - #{$index-icon-size + 10 + 15});
-        min-height: 133px;
-        margin-bottom: 60px;
-        margin-left: #{$index-icon-size + 10};
-        margin-right: 15px;
-        @include media-max(lg){
-          margin-left: #{$index-icon-size - 10};
-        }
+        min-height: 237px;
+        margin-bottom: 20px;
+        border-radius: 14px;
+        border: 1px solid;
+        padding: 20px;
         @include media-max(md) {
           width: 100%;
-          margin-right: 0;
         }
-        @include media-only(md, xl) {
-          width: calc(50% - #{$index-icon-size + 10 + 15});
+        @include media-only(md, xxl) {
+          width: calc(50% - 10px);
+        }
+        @include media-min(xxl) {
+          width: calc(33.33% - 20px);
+        }
+        & > a.reference {
+          display: block;
+          width: 100%;
+          padding-top: 5px;
+          padding-bottom: 10px;
+          border-bottom: 1px solid;
+          margin-bottom: 5px;
+          @include media-min(md) {
+            overflow: hidden;
+            padding-bottom: 37px;
+            display: -webkit-box;
+            -webkit-line-clamp: 1;
+            -webkit-box-orient: vertical;
+            text-overflow: ellipsis;
+            line-height: 1.5;
+            height: 1.8em;
+          }
         }
 
         &.collapsible {
           .toggle {
-            left: -3px;
             display: inline-block;
             padding: 10px 0;
             font-size: 18px;
@@ -164,15 +228,31 @@ main {
           }
         }
 
+        a {
+          &.reference {
+            &:hover {
+              @include media-min(xxl) {
+                text-decoration: underline;
+              }
+            }
+          }
+          &.toggle {
+            &:hover {
+              @include media-min(xxl) {
+                &::before {
+                  text-decoration: underline;
+                }
+              }
+            }
+          }
+        }
+
         a,
         .section-title {
           position: relative;
-          left: -3px;
           display: inline-block;
-          padding-left: 15px;
           font-weight: 500;
-          line-height: 32px;
-          border-left: 3px solid;
+          line-height: 28px;
 
           &:hover {
             text-decoration: none;
@@ -197,25 +277,40 @@ main {
       #quickstart {
         margin-left: 0;
         margin-right: 0;
-        border: 1px solid;
-        @include media-only(md, lg){
-          margin-right: #{$index-icon-size - 10 + 15};
+        overflow: hidden;
+        position: relative;
+        a.reference {
+          &:hover {
+            @include media-min(xxl) {
+              text-decoration: underline;
+            }
+          }
         }
-        @include media-min(lg){
-          margin-right: #{$index-icon-size + 10 + 15};
+      }
+      .toctree-l2 {
+        & > a.reference {
+          @include media-min(md) {
+            overflow: hidden;
+            display: -webkit-box;
+            -webkit-line-clamp: 1;
+            -webkit-box-orient: vertical;
+            text-overflow: ellipsis;
+          }
         }
       }
       .toctree-l2,
       .toctree-l3 {
+        padding-top: 3px;
+        padding-bottom: 4px;
         position: relative;
       }
     }
     
     &:last-of-type {
       .toctree-l1 {
-        
-        
-        &:last-of-type {
+
+        &.release-notes-card {
+          padding-bottom: 50px;
           .toctree-l2 {
             position: relative;
             > a {
@@ -226,11 +321,9 @@ main {
               line-height: 1.5em;
               border-left: none;
               padding: 0;
-              left: -3px;
               font-size: 18px;
               font-weight: 600;
               i {
-                margin-left: 12px;
                 font-size: 1.1rem;
                 position: relative;
                 bottom: -1px;
@@ -288,66 +381,122 @@ main {
 }
 
 .index {
-  .container {
-    @include media-min(xxl){
-      max-width: 1400px;
-    }
+  & > aside {
+    display: none;
   }
-
   #quickstart {
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    justify-content: center;
-    height: 133px;
-    border-radius: $rounded-corners;
+    padding: 0;
     & > a {
-      display: inline-flex;
+      position: absolute;
+      top: 0;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      display: flex;
+      background-color: $light-color-primary-lighter;
+      border-color: $light-color-primary-lighter;
+      flex-direction: column;
       align-items: center;
-      border: none;
-      padding: 0;
+      justify-content: center;
+      height: 100%;
+      color: $dark-color-main-text;
+      padding: 10px;
+      margin-bottom: 0;
       &:hover {
         text-decoration: none;
       }
       &::before {
         position: static;
-        margin-right: 15px;
-      }
-      &::after {
-        content: '';
-        display: inline-block;
-        width: 18px;
-        height: 19px;
-        background-position: center;
+        margin-bottom: 15px;
+        content: "";
+        display: block;
+        width: 70px;
+        height: 70px;
         background-repeat: no-repeat;
-        margin-left: 15px;
+        background-position: right center;
+        background-size: 70px 70px;
       }
     }
   }
-  .toctree-l1 > a.reference::before,
-  .toctree-l1 > .section-title::before {
-    position: absolute;
-    top: -7px;
-    left: -75px;
-    display: block;
-    width: 70px;
-    height: 70px;
-    pointer-events: none;
-    content: "";
-    background-repeat: no-repeat;
-    background-position: right center;
-    background-size: 70px 70px;
-    @include media-max(lg){
-      left: -55px;
-      width: 50px;
-      height: 50px;
-      background-size: 50px 50px;
+  footer {  
+    position: relative;
+    #toggle-full-footer {
+      display: none;
+    }
+    .website-links.dropdown-menu {
+      position: relative;
+      max-height: unset;
+      width: 100%;
+    }
+    #toggle-full-footer-wrapper {
+      position: relative;
+      width: 100%;
+    } 
+  }
+  .wzh-btn-bg-gradient-yellow {
+    background: #fce765 linear-gradient(90deg, $light-color-accent 26.79%, #f6b71b 124.27%);
+    color: $light-color-main-text;
+    &:hover {
+      color: $light-color-main-text;
+      background: #fce765;
     }
   }
-  footer {
-    position: static;
-    padding-right: 0;
-    padding-left: 0;
+  #get-wazuh-card {
+    background-color: $light-color-primary-lighter;
+    border-color: $light-color-primary-lighter;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    &:hover {
+      a {
+        color: $light-color-main-text;
+      }
+    }
+    .index-card-header {
+      display: flex;
+      flex-direction: row;
+      border-color: rgba($light-color-base-space,.2);
+      font-size: 22px;
+      color: $light-color-base-space;
+      font-weight: 600;
+      .icon {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        width: 37px;
+        height: 37px;
+        background-color: $light-color-base-space;
+        border-radius: 25px;
+        margin-right: 15px;
+        svg {
+          width: 17px;
+          height: 17px;
+        }
+      }
+    }
+    .index-card-body {
+      color: $light-color-base-space;
+      font-size: 16px;
+      font-weight: 400;
+      line-height: 28px;
+    }
+    .index-card-footer {
+      padding: 0;
+      display: flex;
+      justify-content: flex-end;
+      align-content: flex-end;
+      a {
+        border-radius: 4px;
+        height: 34px;
+        width: 150px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        &:hover {
+          color: $light-color-main-text;
+        }
+      }
+    }
   }
 }
 
@@ -355,10 +504,41 @@ main {
 
 .light-theme body { /* stylelint-disable-line  no-duplicate-selectors */
   color: $light-color-main-text;
-  background: $light-color-code-block-background;
   .toctree-wrapper {
     > ul {
       .toctree-l1 {
+        border-color: $light-color-border-details;
+        &:hover {
+          @include media-min(xxl) {
+            background-color: $light-color-primary-lighter;
+            border-color: $light-color-primary-lighter;
+            a {
+              color: $light-color-base-space;
+              &:hover {
+                color: $light-color-base-space;
+              }
+              &.reference {
+                border-color: rgba($light-color-base-space,.2);
+              }
+              &.toggle {
+                color: $light-color-base-space;
+                &::after {
+                  background-image: url("#{$ico-path}svg-icons.svg#chevron-white");
+                }
+              }
+            }
+            &.release-notes-card {
+              .toctree-l2 {
+                & > a.reference {
+                  color: $light-color-base-space;
+                }
+              }
+            }
+            .ico-long-arrow-right {
+              background-image: url("#{$ico-path}arrows.svg#ico-long-arrow-right-white");
+            }
+          }
+        }
         &.collapsible {
           .toggle {
             color: $light-color-primary;
@@ -370,13 +550,6 @@ main {
             }
             &::after {
               background-image: url("#{$ico-path}svg-icons.svg#chevron-blue-lt");
-            }
-          }
-        }
-        &:last-of-type {
-          .toctree-l2 {
-            > a {
-              color: $light-color-primary;
             }
           }
         }
@@ -392,10 +565,57 @@ main {
           color: $light-color-main-text;
           border-left-color: $light-color-primary;
         }
+        & > a.reference {
+          border-color: rgba($light-color-main-text, .2);
+        }
+        &.release-notes-card {
+          .toctree-l2 {
+            & > a.reference {
+              color: $light-color-primary;
+            }
+          }
+        }
+        .ico-long-arrow-right {
+          background-image: url("#{$ico-path}arrows.svg#ico-long-arrow-right-lt");
+        }
+      }
+      #quickstart {
+        border-color: $light-color-primary-lighter;
       }
     }
-    .ico-long-arrow-right {
-      background-image: url("#{$ico-path}arrows.svg#ico-long-arrow-right-lt");
+  }
+
+  header {
+    .mobile-secondary-header {
+      .nav-item {
+        &.install {  
+          .wzh-btn-bg-gradient-yellow {
+            background: #fce765 linear-gradient(90deg, $light-color-accent 26.79%, #f6b71b 124.27%);
+            color: $light-color-main-text;
+            &:hover {
+              color: $light-color-main-text;
+              background: #fce765;
+            }
+          }
+        }
+        &.login {
+          .wzh-btn-linear-alt-color {
+            color: $light-color-main-text;
+            background: $light-color-base-space;
+            border-color: $light-color-primary-lighter;
+            &:hover {
+              color: $dark-color-main-text;
+              background-color: $light-color-primary-lighter;
+              svg {
+                fill: $dark-color-main-text;
+              }
+            }
+            svg {
+              fill: $light-color-main-text;
+            }
+          }
+        }
+      }
     }
   }
 
@@ -404,120 +624,14 @@ main {
     .search-box {
       background: $light-color-index-header-background;
     }
-    .form-control {
-      background: $light-color-index-header-background;
-    }
   }
   #large-search-box {
     background: $light-color-index-header-background;
   }
 
-  /* Getting started */
-  [href$="getting-started/index.html"]::before,
-  [data-href$="getting-started/index.html"]::before
-   {
-    background-image: url("#{$ico-path}index-icons.svg#getting-started-lt");
-  }
-
   /* Quickstart */
   [href="quickstart.html"]::before {
-    background-image: url("#{$ico-path}index-icons.svg#quickstart-lt");
-  }
-
-  /* Installation guide */
-  [href$="installation-guide/index.html"]::before,
-  [data-href$="installation-guide/index.html"]::before {
-    background-image: url("#{$ico-path}index-icons.svg#installation-guide-lt");
-  }
-
-  /* Installation alternatives */
-  [href$="deployment-options/index.html"]::before,
-  [data-href$="deployment-options/index.html"]::before {
-    background-image: url("#{$ico-path}index-icons.svg#installation-alternatives-lt");
-  }
-
-  /* Upgrade guide */
-  [href$="upgrade-guide/index.html"]::before,
-  [data-href$="upgrade-guide/index.html"]::before {
-    background-image: url("#{$ico-path}index-icons.svg#upgrade-guide-lt");
-  }
-
-  /* User manual */
-  [href$="user-manual/index.html"]::before,
-  [data-href$="user-manual/index.html"]::before {
-    background-image: url("#{$ico-path}index-icons.svg#user-manual-lt");
-  }
-
-  /* Cloud service */
-  [href$="cloud-service/index.html"]::before,
-  [data-href$="cloud-service/index.html"]::before {
-    background-image: url("#{$ico-path}index-icons.svg#cloud-service-lt");
-  }
-
-  /* Containers */
-  [href$="containers.html"]::before,
-  [data-href$="containers.html"]::before {
-    background-image: url("#{$ico-path}index-icons.svg#containers-lt");
-  }
-
-  /* Container security */
-  [href$="container-security/index.html"]::before,
-  [data-href$="container-security/index.html"]::before {
-    background-image: url("#{$ico-path}index-icons.svg#containers-lt");
-  }
-  
-  /* Development */
-  [href$="development/index.html"]::before,
-  [data-href$="development/index.html"]::before {
-    background-image: url("#{$ico-path}index-icons.svg#development-lt");
-  }
-
-  /* Deployment */
-  [href$="deployment.html"]::before,
-  [data-href$="deployment.html"]::before {
-    background-image: url("#{$ico-path}index-icons.svg#deployment-lt");
-  }
-
-  /* Integrations guide */
-  [href$="integrations-guide/index.html"]::before,
-  [data-href$="integrations-guide/index.html"]::before {
-    background-image: url("#{$ico-path}index-icons.svg#integrations-guide-lt");
-  }
-
-  /* Compliance */
-  [href$="compliance/index.html"]::before,
-  [data-href$="compliance/index.html"]::before {
-    background-image: url("#{$ico-path}index-icons.svg#compliance-lt");
-  }
-
-  /* Learning Wazuh */
-  [href$="learning-wazuh/index.html"]::before,
-  [data-href$="learning-wazuh/index.html"]::before {
-    background-image: url("#{$ico-path}index-icons.svg#learning-lt");
-  }
-
-  /* Cloud security */
-  [href$="monitoring.html"]::before,
-  [data-href$="monitoring.html"]::before {
-    background-image: url("#{$ico-path}index-icons.svg#cloud-security-lt");
-  }
-
-  /* Proof of Concept guide */
-  [href$="proof-of-concept-guide/index.html"]::before,
-  [data-href$="proof-of-concept-guide/index.html"]::before {
-    background-image: url("#{$ico-path}index-icons.svg#poc-guide-lt");
-  }
-
-  /* Release notes */
-  [href$="release-notes/index.html"]::before,
-  [data-href$="release-notes/index.html"]::before {
-    background-image: url("#{$ico-path}index-icons.svg#release-notes-lt");
-  }
-
-  /* Migration guide */
-  [href$="migration-guide/index.html"]::before,
-  [data-href$="migration-guide/index.html"]::before {
-    background-image: url("#{$ico-path}index-icons.svg#migration-guide-lt");
+    background-image: url("#{$ico-path}index-icons.svg#quickstart");
   }
 }
 .light-theme {
@@ -534,13 +648,48 @@ main {
 
 .dark-theme body {
   color: $dark-color-main-text;
-  background: $dark-color-base-space;
+  background-color: $dark-color-index-header-background;
   .toctree-wrapper {
     > ul {
       .toctree-l1 {
+        border-color: $dark-color-primary-lighter;
+        &:hover {
+          @include media-min(xxl) {
+            background-color: $light-color-primary-lighter;
+            border-color: $light-color-primary-lighter;
+            a {
+              color: $dark-color-main-text;
+              &:hover {
+                color: $dark-color-main-text;
+              }
+              &.reference {
+                border-color: rgba($dark-color-main-text,.2);
+              }
+              &.toggle {
+                color: $dark-color-main-text;
+                &::after {
+                  background-image: url("#{$ico-path}svg-icons.svg#chevron-white");
+                }
+              }
+            }
+            &.release-notes-card {
+              a.reference {
+                color: $dark-color-main-text;
+              }
+              .toctree-l2 {
+                > a {
+                  color: $dark-color-main-text;
+                }
+              }
+            }
+            .ico-long-arrow-right {
+              background-image: url("#{$ico-path}arrows.svg#ico-long-arrow-right-white");
+            }
+          }
+        }
         &.collapsible {
           .toggle {
-            color: $dark-color-primary;
+            color: $dark-color-primary-lighter;
             border-left-color: $dark-color-base-space;
             &:focus-visible {
               &::after {
@@ -552,10 +701,10 @@ main {
             }
           }
         }
-        &:last-of-type {
+        &.release-notes-card {
           .toctree-l2 {
             > a {
-              color: $dark-color-primary;
+              color: $dark-color-primary-lighter;
             }
           }
         }
@@ -567,14 +716,55 @@ main {
             color: $dark-color-primary-lighter;
           }
         }
+        & > a.reference {
+          border-color: rgba($dark-color-main-text, .2);
+        }
         .section-title {
           color: $dark-color-main-text;
           border-left-color: $dark-color-highlight-inline-text;
         }
       }
+      #quickstart {
+        border-color: $dark-color-primary-lighter;
+      }
     }
     .ico-long-arrow-right {
       background-image: url("#{$ico-path}arrows.svg#ico-long-arrow-right-dt");
+    }
+  }
+
+  header {
+    .mobile-secondary-header {
+      .nav-item {
+        &.install {  
+          .wzh-btn-bg-gradient-yellow {
+            background: $light-color-accent;
+            color: $light-color-main-text;
+            &:hover {
+              color: $light-color-main-text;
+              background: #fce765;
+            }
+          }
+        }
+        &.login {
+          .wzh-btn-linear-alt-color {
+            color: $dark-color-main-text;
+            background: $dark-color-base-space;
+            border-color: $dark-color-main-text;
+            &:hover {
+              color: $dark-color-main-text;
+              background-color: $light-color-primary-lighter;
+              border-color: $light-color-primary-lighter;
+              svg {
+                fill: $dark-color-main-text;
+              }
+            }
+            svg {
+              fill: $dark-color-main-text;
+            }
+          }
+        }
+      }
     }
   }
 
@@ -583,129 +773,21 @@ main {
     .search-box {
       background: $dark-color-index-header-background;
     }
-    .form-control {
-      background: $dark-color-index-header-background;
-    }
-  }
-  #large-search-box {
-    background: $dark-color-sidebar-space;
-    .form-control {
-      background: $dark-color-sidebar-space;
-    }
-  }
-
-  /* Getting started */
-  [href$="getting-started/index.html"]::before,
-  [data-href$="getting-started/index.html"]::before {
-    background-image: url("#{$ico-path}index-icons.svg#getting-started-dt");
   }
 
   /* Quickstart */
   [href="quickstart.html"]::before {
-    background-image: url("#{$ico-path}index-icons.svg#quickstart-dt");
-  }
-
-  /* Installation guide */
-  [href$="installation-guide/index.html"]::before,
-  [data-href$="installation-guide/index.html"]::before {
-    background-image: url("#{$ico-path}index-icons.svg#installation-guide-dt");
-  }
-
-  /* Installation alternatives */
-  [href$="deployment-options/index.html"]::before,
-  [data-href$="deployment-options/index.html"]::before {
-    background-image: url("#{$ico-path}index-icons.svg#installation-alternatives-dt");
-  }
-
-  /* Upgrade guide */
-  [href$="upgrade-guide/index.html"]::before,
-  [data-href$="upgrade-guide/index.html"]::before {
-    background-image: url("#{$ico-path}index-icons.svg#upgrade-guide-dt");
-  }
-
-  /* User manual */
-  [href$="user-manual/index.html"]::before,
-  [data-href$="user-manual/index.html"]::before {
-    background-image: url("#{$ico-path}index-icons.svg#user-manual-dt");
-  }
-
-  /* Cloud service */
-  [href$="cloud-service/index.html"]::before,
-  [data-href$="cloud-service/index.html"]::before {
-    background-image: url("#{$ico-path}index-icons.svg#cloud-service-dt");
-  }
-
-  /* Containers */
-  [href$="containers.html"]::before,
-  [data-href$="containers.html"]::before {
-    background-image: url("#{$ico-path}index-icons.svg#containers-dt");
-  }
-
-  /* Container security */
-  [href$="container-security/index.html"]::before,
-  [data-href$="container-security/index.html"]::before {
-    background-image: url("#{$ico-path}index-icons.svg#containers-dt");
-  }
-
-  /* Development */
-  [href$="development/index.html"]::before,
-  [data-href$="development/index.html"]::before {
-    background-image: url("#{$ico-path}index-icons.svg#development-dt");
-  }
-
-  /* Deployment */
-  [href$="deployment.html"]::before,
-  [data-href$="deployment.html"]::before {
-    background-image: url("#{$ico-path}index-icons.svg#deployment-dt");
-  }
-
-    /* Integrations guide */
-    [href$="integrations-guide/index.html"]::before,
-    [data-href$="integrations-guide/index.html"]::before {
-      background-image: url("#{$ico-path}index-icons.svg#integrations-guide-dt");
-    }
-
-  /* Compliance */
-  [href$="compliance/index.html"]::before,
-  [data-href$="compliance/index.html"]::before {
-    background-image: url("#{$ico-path}index-icons.svg#compliance-dt");
-  }
-
-  /* Learning Wazuh */
-  [href$="learning-wazuh/index.html"]::before,
-  [data-href$="learning-wazuh/index.html"]::before {
-    background-image: url("#{$ico-path}index-icons.svg#learning-dt");
-  }
-
-  /* Cloud security */
-  [href$="monitoring.html"]::before,
-  [data-href$="monitoring.html"]::before {
-    background-image: url("#{$ico-path}index-icons.svg#cloud-security-dt");
-  }
-
-  /* Proof of Concept guide */
-  [href$="proof-of-concept-guide/index.html"]::before,
-  [data-href$="proof-of-concept-guide/index.html"]::before {
-    background-image: url("#{$ico-path}index-icons.svg#poc-guide-dt");
-  }
-
-  /* Release notes */
-  [href$="release-notes/index.html"]::before,
-  [data-href$="release-notes/index.html"]::before {
-    background-image: url("#{$ico-path}index-icons.svg#release-notes-dt");
-  }
-  
-  /* Migration guide */
-  [href$="migration-guide/index.html"]::before,
-  [data-href$="migration-guide/index.html"]::before {
-    background-image: url("#{$ico-path}index-icons.svg#migration-guide-dt");
+    background-image: url("#{$ico-path}index-icons.svg#quickstart");
   }
 
   &.index #quickstart {
-    border-color: $dark-color-primary;
-    background-color: $dark-color-sidebar-space;
     > a::after {
       background-image: url("#{$ico-path}svg-icons.svg#right-arrow-dt");
+    }
+  }
+  #get-wazuh-card {
+    a {
+      color: $light-color-main-text;
     }
   }
 }
