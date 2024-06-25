@@ -55,6 +55,93 @@ if ( typeof(versions) === 'undefined' ) {
 })(jQuery);
 
 
+/* Footer hover =========================================================== */
+(function($) {
+  if(window.matchMedia("(hover: hover)").matches) {
+    $('#toggle-full-footer').on('mouseenter', function(e) {
+      if (!$('.website-links').hasClass('show')) {
+        e.stopPropagation();
+        $('#toggle-full-footer').trigger('click');
+      }
+    });
+    $('#toggle-full-footer-wrapper').on('mouseleave', function(e) {
+      let toElement = e.toElement || e.relatedTarget;
+      if ($('.website-links').hasClass('show')
+        && toElement !== $(this).siblings()[0]) {
+        e.stopPropagation();
+        $('#toggle-full-footer').trigger('click');
+      }
+    });
+  }
+})(jQuery);
+
+/* Desktop top-nav (gray header) ============================================================== */
+
+/* Desktop search bar elements */
+let searchbar = $('.nav-top .desktop-search-form .header-search');
+let mainmenu = $('.nav-top .main-menu');
+let querystr = $('.desktop-search-form .header-search .form-control');
+let nav = $('.nav-top nav');
+
+/* Avoid searching when input field is empty or contains only the placeholder text */
+$('.desktop-search-form .header-search form').on('submit', function(e){
+  if (querystr.val() === '' || querystr.val() === 'Search') {
+    e.preventDefault();
+  }
+});
+
+$('.desktop-search-form .header-search .form-control').on('focus', function(e){  /* Search button clicked */
+
+  if (!searchbar.hasClass('expanded')) {
+      /* Hide top navigation */
+      $('.nav-top nav').addClass('d-none');
+
+        /* Change icon */
+      $('.desktop-search-form .header-search svg').addClass('d-none');
+      $('.desktop-search-form .header-search .btn-close').removeClass('d-none');
+
+      /* Expand search bar */
+      searchbar.addClass('expanded').removeClass('collapsed');
+      mainmenu.addClass('collapsed').removeClass('expanded');
+
+      /* Allow autocomplete when animation finish */
+      setTimeout(() => {
+        $(this).attr('autocomplete', 'on');
+      }, 500);
+
+    }
+
+});
+
+$('.desktop-search-form .header-search .btn-close').on('click', function(e){  /* Search bar close button clicked */
+    $('.desktop-search-form .header-search .btn-close').addClass('d-none');
+    $('.desktop-search-form .header-search svg').removeClass('d-none');
+    searchbar.removeClass('expanded').addClass('collapsed');
+    mainmenu.removeClass('collapsed').addClass('expanded');
+    nav.removeClass('d-none');
+    querystr.val('');
+    $('.desktop-search-form .header-search .form-control').attr('autocomplete', 'off');  
+});
+
+checkScroll();
+
+/* Hide top nav when scroll */
+$(window).on('scroll', function(){
+  checkScroll();
+});
+
+function checkScroll() {
+  if($(document).scrollTop() > 60) {
+    $('.nav-top').addClass('d-none');
+    $('.inner-body').addClass('not-top');
+    // $('header').addClass('shadow');
+  } else {
+    $('.nav-top').removeClass('d-none');
+    $('.inner-body').removeClass('not-top');
+    // $('header').removeClass('shadow');
+  }
+}
+
 /* Using ReDoc ============================================================== */
 const minVersionRedoc = '4.0';
 const useApiRedoc = (compareVersion(DOCUMENTATION_OPTIONS.VERSION, minVersionRedoc) >= 0);
