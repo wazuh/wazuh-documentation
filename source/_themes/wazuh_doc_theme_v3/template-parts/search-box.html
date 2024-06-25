@@ -1,7 +1,11 @@
 <div class="search-box" role="search">
   <form method="get" class="search-form" action="{{ pathto('search') }}" id="search-form">
     <label class="sr-only" for="search-input">Search term</label>
+    {% if  pagename == 'index' %}
+    <input id="search-input" type="text" class="form-control" name="q" placeholder="What can we help you find?"></input>
+    {% else %}
     <input id="search-input" type="text" class="form-control" name="q" placeholder="Search"></input>
+    {% endif %}
     <span id="search-btn-label" class="sr-only">Search now!</span>
     <button aria-labelledby="search-btn-label" type="submit" class="btn-search"></button>
     <input type="hidden" name="check_keywords" value="yes" />
