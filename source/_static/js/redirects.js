@@ -69,7 +69,8 @@ removedUrls['x.y'] = [
 newUrls['4.8'] = [
   '/release-notes/release-4-8-0.html',
   '/user-manual/wazuh-dashboard/management.html',
-  '/upgrade-guide/troubleshooting.rst'
+  '/upgrade-guide/troubleshooting.html',
+  '/proof-of-concept-guide/leveraging-llms-for-alert-enrichment.html',
 ];
 
 /* Pages no longer available in 4.8 */
