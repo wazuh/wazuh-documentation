@@ -10,9 +10,6 @@ body {
   font-weight: 400;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  @include media-min(xl){
-    margin-top: $header-height-xl;
-  }
 }
 
 .icon-assets {
@@ -29,6 +26,15 @@ body {
 .inner-body {
   position: relative;
   width: 100%;
+  @include media-min(xxl){
+    max-width: $outer-container-xxl;
+    margin-left: auto;
+    margin-right: auto;
+  }
+  @include media-min (xl) {
+    display: flex;
+    flex-direction: row;
+  }
 }
 
 h1,
@@ -150,6 +156,7 @@ main {
 
 .sidebar {
   flex-shrink: 0;
+  position: sticky;
 
   .sidebar-container {
     top: 0;
@@ -176,6 +183,33 @@ cite {
   }
 }
 
+/* Bootstrap */
+
+.container {
+  @include media-min(sm) {
+      max-width: 90%;
+  }
+  @include media-min(md) {
+      max-width: 90%;
+  }
+  @include media-min(lg) {
+      max-width: 97%;
+  }
+  @include media-min(xl) {
+      max-width: 1180px;
+  }
+  @include media-min(wzh-xl) {
+      max-width: 1250px;
+  }
+  @include media-min(xxl) {
+      max-width: 1400px;
+  }
+}
+
+.wzh-remark {
+  @include underline-gradient();
+}
+
 /* Light theme -------------------------------------------------------------- */
 
 body {
@@ -186,6 +220,14 @@ body {
 .light-theme body { /* stylelint-disable-line no-duplicate-selectors */
   color: $light-color-main-text;
   background-color: $light-color-base-space;
+  &.document,
+  &.search,
+  &.not_found {
+    background: linear-gradient(90deg,$light-color-sidebar-space 50%, $light-color-base-space 50%)
+  }
+  #central-column {
+    background-color: $light-color-base-space;
+  }
   a {
     color: $light-color-primary;
 
@@ -212,6 +254,14 @@ body {
 .dark-theme body {
   color: $dark-color-main-text;
   background-color: $dark-color-base-space;
+  &.document,
+  &.search,
+  &.not_found {
+    background: linear-gradient(90deg,$dark-color-sidebar-space 50%, $dark-color-base-space 50%)
+  }
+  #central-column {
+    background-color: $dark-color-base-space;
+  }
   a {
     color: $dark-color-primary;
 
