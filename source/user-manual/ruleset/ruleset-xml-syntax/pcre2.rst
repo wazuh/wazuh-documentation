@@ -95,7 +95,7 @@ In rules, you can enable and use PCRE along with :ref:`OSRegex <os_regex_syntax>
 The following rules options are compatible with PCRE:
 
 -  For matching static fields: :ref:`action <rules_action>`, :ref:`extra_data <rules_extra_data>`, :ref:`hostname <rules_hostname>`, :ref:`id <rules_id>`, :ref:`location <rules_location>`, :ref:`match <rules_match>`, :ref:`program_name <rules_prog_name>`, :ref:`protocol <rules_protocol>`, :ref:`user <rules_user>`, :ref:`url <rules_url>`, :ref:`srcport <rules_srcport>`, :ref:`dstport <rules_dstport>`, :ref:`status <rules_status>`, :ref:`system_name <rules_sys_name>`, :ref:`dstgeoip <rules_dstgeoip>`, :ref:`srcgeoip <rules_srcgeoip>`.
--  For matching dynamic fields: :ref:`field <rules_>`.
+-  For matching dynamic fields: :ref:`field <rules_field>`.
 
 Below is an example of data extraction with PCRE regex in a rule:
 
