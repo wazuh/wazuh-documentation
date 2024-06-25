@@ -10,12 +10,13 @@
 @import "../components/brand";
 @import "../components/version-selector";
 @import "../components/mode-switch";
+@import "../components/back-to-top";
 
 // Variables used only for ReDoc
 $light-color-redoc-type: #757575 !default;
 $light-color-redoc-type-border: #b4b4b4 !default;
 $light-color-redoc-code-background: #f6f6f6 !default;
-$dark-color-redoc-base-space: #2b303a !default;
+$dark-color-redoc-base-space: $dark-color-base-space;
 $dark-color-redoc-table-heading: #292929 !default;
 $dark-color-redoc-table-background: #2a2d34 !default;
 $dark-color-redoc-danger: #e31b0f !default;
@@ -30,13 +31,67 @@ $dark-color-redoc-danger: #e31b0f !default;
 
 body {
   position: relative;
-  padding-top: $redoc-header-height;
   margin-top: 0;
   font-family: Manrope, sans-serif;
   font-size: 16px;
   font-weight: 400;
   line-height: 32px;
+  & > div:first-of-type {
+    padding-top: $redoc-header-height;
+  }
+
+  &.no-latest-docs {
+    & > div:first-of-type {
+      @media screen and (max-width: 576px){
+        padding-top: #{$redoc-header-height * 2.3};
+      }
+      @media screen and (min-width: 576px) and (max-width: 50rem){
+        padding-top: #{$redoc-header-height * 2};
+      }
+      @media screen and (min-width: 50rem) and (max-width: 75rem){
+        padding-top: #{$redoc-header-height * 1.7};
+      }
+      @include media-min (xl) {
+        padding-top: #{$redoc-header-height + 50px};
+      }
+      redoc[spec-url] .beRszf .menu-content {
+        @media screen and (min-width: 50rem) and (max-width: 75rem){
+          top: #{$redoc-header-height + $header-height-xl} !important;
+        }
+        @include media-min (xl) {
+          top: #{$redoc-header-height + 50px} !important;
+        }
+      }
+    }
+    header {
+      @media screen and (max-width: 75rem){
+        padding-top: $header-height-xl;
+        width: 100%;
+        height: #{$redoc-header-height + $header-height-xl};
+      }
+      @media screen and (max-width: 50rem){
+        padding-top: 0;
+        height: #{$redoc-header-height};
+      }
+      @include media-min (xl) {
+        padding-top: 50px;
+        height: #{$redoc-header-height + 50px};
+      }
+      .no-latest-notice-wrapper {
+        @include media-min (xxl) {
+          display: flex;
+          align-items: center;
+        }
+      }
+    }
+  }
 }
+
+.inner-body {
+  display: block;
+}
+
+
 main {
   padding: 0;
   strong {
@@ -46,6 +101,10 @@ main {
 #light-dark-switch {
   padding: 0;
 }
+#central-column {
+  margin-left: auto;
+  margin-right: auto;
+}
 header {
   position: fixed;
   top: 0;
@@ -54,13 +113,21 @@ header {
   flex-direction: row;
   width: calc(#{$left-redoc-sidebar-width} + (100% - #{$left-redoc-sidebar-width}) * .6);
   height: $redoc-header-height;
-  @media screen and (min-width: 50rem) and (max-width: 75rem){
+  @media screen and (max-width: 75rem){
+    padding-top: 0;
     width: 100%;
+    height: #{$redoc-header-height};
   }
   @media screen and (max-width: 50rem){
+    padding-top: 0;
     flex-direction: column;
     width: 100%;
     height: $redoc-header-height;
+  }
+  @include media-min (xxl) {
+    max-width: calc(#{($outer-container-xxl - $left-redoc-sidebar-width)* 0.6} + #{$left-redoc-sidebar-width - .6});
+    margin-left: auto;
+    margin-right: auto;
   }
   #version-selector {
     .dropdown-btn {
@@ -83,6 +150,7 @@ header {
     padding: 7px 40px;
     pointer-events: all;
     display: flex;
+    flex-shrink: 0;
     justify-content: center;
     flex-direction: column;
     @media screen and (min-width: 50rem){
@@ -167,25 +235,46 @@ header {
   padding-right: 0;
   padding-left: 0;
   margin: 0;
+  @media screen and (max-width: 50rem){
+    top: $redoc-header-height;
+  }
 
   .no-latest-notice {
-    padding: 0 40px;
-    margin-left: $left-redoc-sidebar-width;
+    padding: 3px 40px 5px;
+    display: inline-flex;
+    width: 100%;
+    min-height: $header-height-xl;
+    @media screen and (max-width: 50rem){
+      display: inline-block;
+      padding: 0 20px 5px;
+      line-height: 26px;
+    }
+    @include media-min (xl){
+      min-height: 50px;
+      height: 50px;
+      justify-content: center;
+      align-items: center;
+    }
 
     .no-latest-title {
       position: relative;
-      display: inline-block;
-      padding: 4px 10px 4px 38px;
+      display: inline;
+      padding: 0 20px 0 38px;
       font-weight: 600;
       line-height: 32px;
+      
+      @media screen and (max-width: 50rem){
+        display: inline-block;
+        padding: 4px 10px 4px 38px;
+      }
 
       &::after {
         position: absolute;
-        top: 6px;
+        top: 3px;
         left: 0;
         display: inline-block;
-        width: 1.75rem;
-        height: 1.75rem;
+        width: 1.5rem;
+        height: 1.5rem;
         vertical-align: middle;
         content: "";
         background: url("#{$ico-path}svg-icons.svg#circle-exclamation-orange");
@@ -193,8 +282,12 @@ header {
     }
 
     .no-latest-text-wrapper {
-      display: inline-block;
+      display: inline;
       padding: 0 .5em 0 0;
+    
+      @media screen and (max-width: 50rem){
+        display: inline-block;
+      }
     }
   }
 }
@@ -543,9 +636,10 @@ redoc[spec-url] .beRszf {
   // Left sidebar
   .menu-content {
     position: fixed;
-    top: 110px !important;
+    top: $redoc-header-height !important;
     width: $left-redoc-sidebar-width;
     height: calc(100vh - 110px) !important;
+    z-index: 100;
     @media screen and (max-width: 50rem){
       width: 100%;
     }
@@ -691,6 +785,11 @@ redoc[spec-url] .beRszf {
 
 .light-theme body {
   color: $light-color-main-text;
+  & > div:not(.loading):first-of-type {
+    @include  media-min (xl) {
+      background: linear-gradient(90deg,$light-color-sidebar-space 50%, $dark-color-index-toc-background 50%)
+    }
+  }
   .no-latest-notice-wrapper {
     background-color: $light-color-base-space;
     .no-latest-notice {
@@ -716,7 +815,7 @@ redoc[spec-url] .beRszf {
       background-color: $light-color-admonition-background;
     }
     .header-left {
-      background-color: $light-color-admonition-background;
+      background-color: $light-color-sidebar-space;
       #light-dark-switch {
         border-top-color: $light-color-border-deeper;
       }
@@ -1048,6 +1147,10 @@ redoc[spec-url] .beRszf {
         }
         &.active {
           background-color: $light-color-global-toc-highlight;
+          color: $light-color-base-space;
+          svg polygon {
+            fill: $light-color-base-space;
+          }
         }
       }
       .kwnyAC {
@@ -1062,7 +1165,7 @@ redoc[spec-url] .beRszf {
     // Search box
     .cziLoD {
       input {
-        color: $light-color-focus-shade;
+        color: rgba($light-color-main-text, .8);
         background-image: url("#{$ico-path}svg-icons.svg#search-lt");
         border-bottom-color: $light-color-border-deeper;
       }
@@ -1095,12 +1198,29 @@ redoc[spec-url] .beRszf {
     }
 
   }
+  #version-selector {
+    .dropdown-btn {
+      @media screen and (min-width: 50.01rem) and (max-width: 75rem) {
+        border-color: $light-color-accent;
+      }
+    }
+    .dropdown-menu {
+      @media screen and (min-width: 50.01rem) and (max-width: 75rem) {
+        border-color: $light-color-accent;
+      }
+    }
+  }
 }
 
 /* Dark- theme -------------------------------------------------------------- */
 
 .dark-theme body {
   color: $dark-color-main-text;
+  & > div:not(.loading):first-of-type {
+    @include  media-min (xl) {
+      background: linear-gradient(90deg,$dark-color-sidebar-space 50%, $dark-color-index-toc-background 50%)
+    }
+  }
   .no-latest-notice-wrapper {
     background-color: $dark-color-base-space;
     .no-latest-notice {
@@ -1133,7 +1253,7 @@ redoc[spec-url] .beRszf {
       }
     }
     .header-right {
-      border-bottom-color: $light-color-global-toc-highlight;
+      border-bottom-color: $dark-color-global-toc-highlight;
     }
   }
   redoc[spec-url] .beRszf {
@@ -1462,13 +1582,20 @@ redoc[spec-url] .beRszf {
             color: $dark-color-primary;
           }
         }
+        
+        // color: $light-color-base-space;
+
         svg polygon {
           fill: $dark-color-primary;
         }
         &.active {
-          color: $dark-color-primary;
-          background-color: $dark-color-base-space;
+          background-color: $light-color-global-toc-highlight;
+          color: $light-color-base-space;
+          svg polygon {
+            fill: $light-color-base-space;
+          }
         }
+        
       }
       .kwnyAC {
         label[role="menuitem"] {
@@ -1482,12 +1609,12 @@ redoc[spec-url] .beRszf {
     // Search box
     .cziLoD {
       input {
-        color: $light-color-focus-shade;
+        color: rgba($dark-color-main-text, .8);
         background-image: url("#{$ico-path}svg-icons.svg#search-dt");
         border-bottom-color: $light-color-border-deeper;
       }
       ::placeholder {
-        color: $light-color-focus-shade;
+        color: $dark-color-focus-shade;
       }
     }
     .kwnyAC {
@@ -1523,6 +1650,18 @@ redoc[spec-url] .beRszf {
             color: $dark-color-main-text;
           }
         }
+      }
+    }
+  }
+  #version-selector {
+    .dropdown-btn {
+      @media screen and (min-width: 50.01rem) and (max-width: 75rem) {
+        border-color: $dark-color-accent;
+      }
+    }
+    .dropdown-menu {
+      @media screen and (min-width: 50.01rem) and (max-width: 75rem) {
+        border-color: $dark-color-accent;
       }
     }
   }

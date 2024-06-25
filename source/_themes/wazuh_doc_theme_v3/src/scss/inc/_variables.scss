@@ -22,8 +22,8 @@ $light-color-primary-alt: #1561D0 !default;
 $light-color-primary-lighter: #3585f9 !default;
 $light-color-border-details: #c1ccd9 !default; // search-box and navigation borders
 $light-color-border-deeper: #b7c6d7 !default;
-$light-color-sidebar-space: #ebf2fb !default;
-$light-color-footer: #f5f6f7 !default;
+$light-color-sidebar-space: #f7f7f7 !default;
+$light-color-footer: #000 !default;
 $light-color-main-text-extra: #000 !default;
 $light-color-main-text: #292929 !default;
 $light-color-input-placeholder: #a6b5c8 !default;
@@ -42,7 +42,7 @@ $light-color-index-toc-background: #f8fafd !default;
 $light-color-accent: #fedd0b !default;
 $light-color-focus-shade: #657c97 !default;
 $light-color-shadow: #000 !default;
-$light-color-global-toc-highlight: #dcebff !default;
+$light-color-global-toc-highlight: #3585F9 !default;
 $light-color-danger: #bd271e !default;
 $light-color-danger-dark: #bd271e !default;
 $light-color-warning: #ff7a2f !default;
@@ -64,10 +64,10 @@ $light-color-code-variable: #7c3db2 !default;
 $dark-color-base-space: #2a2d34 !default;
 $dark-color-primary: #499cfe !default;
 $dark-color-primary-lighter: #6ca2f0 !default;
-$dark-color-border-details: #fff !default; // search-box and navigation borders
+$dark-color-border-details: #ffffff !default; // search-box and navigation borders
 $dark-color-border-deeper: #e1e1e5 !default;
 $dark-color-sidebar-space: #343741 !default;
-$dark-color-footer: #242424 !default;
+$dark-color-footer: #000000 !default;
 $dark-color-main-text: #fff !default;
 $dark-color-input-placeholder: #a6b5c8 !default;
 $dark-color-shaded-text: #9298ab !default; // header-links
@@ -81,7 +81,7 @@ $dark-color-code-block-border: transparent !default;
 $dark-color-output-title-background: #191919 !default;
 $dark-color-step-card-background: #1d2025 !default;
 $dark-color-tab-background: #14161a !default;
-$dark-color-index-header-background: #212121 !default;
+$dark-color-index-header-background: #2B2D34 !default;
 $dark-color-index-toc-background: #2a2d34 !default;
 $dark-color-accent: #ffe853 !default;
 $dark-color-focus-shade: #98a2b3 !default;
@@ -114,12 +114,12 @@ $color-subfooter-separator: #7a7a7a !default;
 /* -- Theme elements fixed dimensions ------------------------------------------------------------------------------------ */
 
 // Fixed dimensions
-$index-header-height-xs: 215px !default;
-$index-header-height-xl: 215px !default;
+$index-header-height-xs: 160px !default;
+$index-header-height-xl: 180px !default;
 $index-icon-size: 60px !default;
 $index-max-show-items: 3 !default;
-$header-height-xs: 70px !default;
-$header-height-xl: 77px !default;
+$header-height-xs: 80px !default;
+$header-height-xl: 80px !default;
 $breadcrumbs-height-xs: 70px !default;
 $breadcrumbs-height-xl: 60px !default;
 $footer-height: 70px !default;
@@ -133,6 +133,7 @@ $redoc-header-height: 110px !default;
 $rounded-corners: 10px !default;
 $no-latest-notice-height-xl: 60px !default;
 $secondary-mobile-bar: 54px !default;
+$outer-container-xxl: 1600px !default;
 
 /* -- Others ------------------------------------------------------------------------------------ */
 $img-path: "../../images/" !default;
