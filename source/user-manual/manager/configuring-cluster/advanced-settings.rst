@@ -533,25 +533,69 @@ The helper uses the Dataplane API to communicate with HAProxy and update the con
 
 This is the basic configuration. You need to replace ``<DATAPLANE_USER>`` and ``<DATAPLANE_PASSWORD>`` with the chosen user and password.
 
-.. code-block:: yaml
-   :emphasize-lines: 8,9
+.. tabs::
 
-   dataplaneapi:
-      host: 0.0.0.0
-      port: 5555
-      transaction:
-            transaction_dir: /tmp/haproxy
-      user:
-      - insecure: true
-         password: <DATAPLANE_PASSWORD>
-         name: <DATAPLANE_USER>
-   haproxy:
-      config_file: /etc/haproxy/haproxy.cfg
-      haproxy_bin: /usr/sbin/haproxy
-      reload:
-            reload_delay: 5
-            reload_cmd: service haproxy reload
-            restart_cmd: service haproxy restart
+   .. group-tab:: HTTP
+
+      .. code-block:: yaml
+         :emphasize-lines: 8,9
+
+         dataplaneapi:
+            host: 0.0.0.0
+            port: 5555
+            transaction:
+                transaction_dir: /tmp/haproxy
+            user:
+            - insecure: true
+               password: <DATAPLANE_PASSWORD>
+               name: <DATAPLANE_USER>
+         haproxy:
+            config_file: /etc/haproxy/haproxy.cfg
+            haproxy_bin: /usr/sbin/haproxy
+            reload:
+               reload_delay: 5
+               reload_cmd: service haproxy reload
+               restart_cmd: service haproxy restart
+
+   .. group-tab:: HTTPS
+
+      .. note::
+
+         If you use HTTPS as the Dataplane API communication protocol, you must set the ``tls`` field and related subfields: ``tls_port``, ``tls_certificate`` and ``tls_key`` in the configuration. The ``tls_ca`` field is only necessary when using client-side certificates.
+         
+         To generate the certificate files for both the HAProxy instance and the Wazuh server, use the following command.
+
+         .. code-block:: console
+
+            # openssl req -x509 -newkey rsa:4096 -keyout <KEY_FILE_NAME> -out <CERTIFICATE_FILE_NAME> -sha256 -nodes -addext "subjectAltName=DNS:<FQDN>" -subj "/C=US/ST=CA/O=Wazuh>/CN=<CommonName>"
+
+      .. code-block:: yaml
+         :emphasize-lines: 2,3,8,9,10,11,12,15,16
+
+         dataplaneapi:
+            scheme: 
+               - https
+            host: 0.0.0.0
+            port: 5555
+            transaction:
+               transaction_dir: /tmp/haproxy
+            tls:
+               tls_port: 6443
+               tls_certificate: /etc/haproxy/ssl/<HAPROXY_CERTIFICATE_FILE>
+               tls_key: /etc/haproxy/ssl/<HAPROXY_CERTIFICATE_KEY_FILE>
+               tls_ca: /etc/haproxy/ssl/<CLIENT_SIDE_CERTIFICATE_FILE>
+            user:
+            -  insecure: true
+               password: <DATAPLANE_PASSWORD>
+               name: <DATAPLANE_USER>
+         haproxy:
+            config_file: /etc/haproxy/haproxy.cfg
+            haproxy_bin: /usr/sbin/haproxy
+            reload:
+               reload_delay: 5
+               reload_cmd: service haproxy reload
+               restart_cmd: service haproxy restart
+      .. note
 
 Depending on the :ref:`HAProxy installation method <haproxy_installation>`, follow these steps to enable the helper.
 
@@ -577,9 +621,19 @@ Depending on the :ref:`HAProxy installation method <haproxy_installation>`, foll
 
       #. Verify the API is running properly
 
-         .. code-block:: console
+         .. tabs::
 
-            # curl -X GET --user <DATAPLANE_USER>:<DATAPLANE_PASSWORD> http://localhost:5555/v2/info
+            .. group-tab:: HTTP
+
+               .. code-block:: console
+
+                  # curl -X GET --user <DATAPLANE_USER>:<DATAPLANE_PASSWORD> http://localhost:5555/v2/info
+
+            .. group-tab:: HTTPS
+
+               .. code-block:: console
+
+                  # curl -k -X GET --user <DATAPLANE_USER>:<DATAPLANE_PASSWORD> https://localhost:6443/v2/info
 
          .. code-block:: none
             :class: output
@@ -602,20 +656,45 @@ Depending on the :ref:`HAProxy installation method <haproxy_installation>`, foll
 
       #. Modify ``Dockerfile`` to include ``dataplaneapi.yaml`` during the build
 
-         .. code-block:: dockerfile
-            :emphasize-lines: 4
+         .. tabs::
 
-            FROM haproxytech/haproxy-ubuntu:2.8
+            .. group-tab:: HTTP
 
-            COPY haproxy.cfg /etc/haproxy/haproxy.cfg
-            COPY dataplaneapi.yml /etc/haproxy/dataplaneapi.yml
-            COPY haproxy-service /etc/init.d/haproxy
-            COPY entrypoint.sh /entrypoint.sh
+               .. code-block:: dockerfile
+                  :emphasize-lines: 4
 
-            RUN chmod +x /etc/init.d/haproxy
-            RUN chmod +x /entrypoint.sh
+                  FROM haproxytech/haproxy-ubuntu:2.8
 
-            ENTRYPOINT [ "/entrypoint.sh" ]
+                  COPY haproxy.cfg /etc/haproxy/haproxy.cfg
+                  COPY dataplaneapi.yml /etc/haproxy/dataplaneapi.yml
+                  COPY haproxy-service /etc/init.d/haproxy
+                  COPY entrypoint.sh /entrypoint.sh
+
+                  RUN chmod +x /etc/init.d/haproxy
+                  RUN chmod +x /entrypoint.sh
+
+                  ENTRYPOINT [ "/entrypoint.sh" ]
+
+            .. group-tab:: HTTPS
+
+               .. code-block:: dockerfile
+                  :emphasize-lines: 4,8,9,10
+
+                  FROM haproxytech/haproxy-ubuntu:2.8
+
+                  COPY haproxy.cfg /etc/haproxy/haproxy.cfg
+                  COPY dataplaneapi.yml /etc/haproxy/dataplaneapi.yml
+                  COPY haproxy-service /etc/init.d/haproxy
+                  COPY entrypoint.sh /entrypoint.sh
+
+                  COPY <HAPROXY_CERTIFICATE_FILE> /etc/haproxy/ssl/<HAPROXY_CERTIFICATE_FILE>
+                  COPY <HAPROXY_CERTIFICATE_KEY_FILE> /etc/haproxy/ssl/<HAPROXY_CERTIFICATE_KEY_FILE>
+                  COPY <CLIENT_SIDE_CERTIFICATE_FILE> /etc/haproxy/ssl/<CLIENT_SIDE_CERTIFICATE_FILE> 
+
+                  RUN chmod +x /etc/init.d/haproxy
+                  RUN chmod +x /entrypoint.sh
+
+                  ENTRYPOINT [ "/entrypoint.sh" ]
 
       #. Modify the ``entrypoint.sh`` to start the dataplaneapi process
 
@@ -637,9 +716,19 @@ Depending on the :ref:`HAProxy installation method <haproxy_installation>`, foll
 
             # docker build --tag=haproxy-deploy .
 
-         .. code-block:: console
+         .. tabs::
 
-            # docker run -p 5555:5555 haproxy-deploy
+            .. group-tab:: HTTP
+               
+               .. code-block:: console
+
+                  # docker run -p 5555:5555 haproxy-deploy
+            
+            .. group-tab:: HTTPS
+               
+               .. code-block:: console
+
+                  # docker run -p 6443:6443 haproxy-deploy
 
          .. code-block:: none
             :class: output
@@ -652,9 +741,19 @@ Depending on the :ref:`HAProxy installation method <haproxy_installation>`, foll
 
       #. Verify the API is running properly
 
-         .. code-block:: console
+         .. tabs::
 
-            # curl -X GET --user haproxy:haproxy http://localhost:5555/v2/info
+            .. group-tab:: HTTP
+
+               .. code-block:: console
+
+                  # curl -X GET --user <DATAPLANE_USER>:<DATAPLANE_PASSWORD> http://localhost:5555/v2/info
+
+            .. group-tab:: HTTPS
+
+               .. code-block:: console
+
+                  # curl -k -X GET --user <DATAPLANE_USER>:<DATAPLANE_PASSWORD> https://localhost:6443/v2/info
 
          .. code-block:: none
             :class: output
@@ -664,35 +763,81 @@ Depending on the :ref:`HAProxy installation method <haproxy_installation>`, foll
 
 As an example, you can configure a basic HAProxy helper within an already configured cluster master node. On the Wazuh server master node only, include the :ref:`haproxy_helper` configuration section in ``/var/ossec/etc/ossec.conf`` with a configuration as follows.
 
-.. code-block:: xml
-   :emphasize-lines: 13-18
+.. tabs::
 
-   <cluster>
-      <name>wazuh</name>
-      <node_name>master-node</node_name>
-      <key>c98b62a9b6169ac5f67dae55ae4a9088</key>
-      <node_type>master</node_type>
-      <port>1516</port>
-      <bind_addr>0.0.0.0</bind_addr>
-      <nodes>
-         <node>WAZUH-MASTER-ADDRESS</node>
-      </nodes>
-      <hidden>no</hidden>
-      <disabled>no</disabled>
-      <haproxy_helper>
-         <haproxy_disabled>no</haproxy_disabled>
-         <haproxy_address><HAPROXY_ADDRESS></haproxy_address>
-         <haproxy_user><DATAPLANE_USER></haproxy_user>
-         <haproxy_password><DATAPLANE_PASSWORD></haproxy_password>
-      </haproxy_helper>
-   </cluster>
+   .. group-tab:: HTTP
 
-Where:
+      .. code-block:: xml
+         :emphasize-lines: 13-18
 
--  :ref:`haproxy_disabled <haproxy_disabled>`: Indicates whether the helper is disabled or not in the master node.
--  :ref:`haproxy_address <haproxy_address>`: IP or DNS address to connect with HAProxy.
--  :ref:`haproxy_user <haproxy_user>`: Username to authenticate with HAProxy.
--  :ref:`haproxy_password <haproxy_password>`: Password to authenticate with HAProxy.
+         <cluster>
+            <name>wazuh</name>
+            <node_name>master-node</node_name>
+            <key>c98b62a9b6169ac5f67dae55ae4a9088</key>
+            <node_type>master</node_type>
+            <port>1516</port>
+            <bind_addr>0.0.0.0</bind_addr>
+            <nodes>
+               <node>WAZUH-MASTER-ADDRESS</node>
+            </nodes>
+            <hidden>no</hidden>
+            <disabled>no</disabled>
+            <haproxy_helper>
+               <haproxy_disabled>no</haproxy_disabled>
+               <haproxy_address><HAPROXY_ADDRESS></haproxy_address>
+               <haproxy_user><DATAPLANE_USER></haproxy_user>
+               <haproxy_password><DATAPLANE_PASSWORD></haproxy_password>
+            </haproxy_helper>
+         </cluster>
+
+      Where:
+
+      -  :ref:`haproxy_disabled <haproxy_disabled>`: Indicates whether the helper is disabled or not in the master node.
+      -  :ref:`haproxy_address <haproxy_address>`: IP or DNS address to connect with HAProxy.
+      -  :ref:`haproxy_user <haproxy_user>`: Username to authenticate with HAProxy.
+      -  :ref:`haproxy_password <haproxy_password>`: Password to authenticate with HAProxy.
+
+   .. group-tab:: HTTPS
+
+      .. code-block:: xml
+         :emphasize-lines: 13-23
+
+         <cluster>
+            <name>wazuh</name>
+            <node_name>master-node</node_name>
+            <key>c98b62a9b6169ac5f67dae55ae4a9088</key>
+            <node_type>master</node_type>
+            <port>1516</port>
+            <bind_addr>0.0.0.0</bind_addr>
+            <nodes>
+               <node>WAZUH-MASTER-ADDRESS</node>
+            </nodes>
+            <hidden>no</hidden>
+            <disabled>no</disabled>
+            <haproxy_helper>
+               <haproxy_disabled>no</haproxy_disabled>
+               <haproxy_address><HAPROXY_ADDRESS></haproxy_address>
+               <haproxy_user><DATAPLANE_USER></haproxy_user>
+               <haproxy_password><DATAPLANE_PASSWORD></haproxy_password>
+               <haproxy_protocol>https</haproxy_protocol>
+               <haproxy_port>6443</haproxy_port>
+               <haproxy_cert><HAPROXY_CERTIFICATE_FILE></haproxy_cert>
+               <client_cert><CLIENT_SIDE_CERTIFICATE_FILE></client_cert>
+               <client_cert_key><CLIENT_SIDE_CERTIFICATE_KEY_FILE></client_cert_key>
+            </haproxy_helper>
+         </cluster>
+
+      Where:
+
+      -  :ref:`haproxy_disabled <haproxy_disabled>`: Indicates whether the helper is disabled or not in the master node.
+      -  :ref:`haproxy_address <haproxy_address>`: IP or DNS address to connect with HAProxy.
+      -  :ref:`haproxy_user <haproxy_user>`: Username to authenticate with HAProxy.
+      -  :ref:`haproxy_password <haproxy_password>`: Password to authenticate with HAProxy.
+      -  :ref:`haproxy_protocol <haproxy_protocol>`: Protocol to use for the HAProxy Dataplane API communication. It is recommended to set it to ``https``.
+      -  :ref:`haproxy_port <haproxy_port>`: Port used for the HAProxy Dataplane API communication. 
+      -  :ref:`haproxy_cert` <haproxy_cert>: Certificate file used for the HTTPS communication. It must be the same as the one defined in the ``tls_certificate`` parameter in the ``dataplaneapi.yml`` file. 
+      -  :ref:`client_cert` <client_cert>:  Certificate file used in the client side of the HTTPS communication. It must be the same as the one defined in the ``tls_ca`` parameter in the ``dataplaneapi.yml`` file.
+      -  :ref:`client_cert_key` <client_cert_key>: Certificate key file used in the client side of the HTTPS communication.
 
 Then, restart the master node:
 
