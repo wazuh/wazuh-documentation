@@ -114,7 +114,7 @@ header {
 
 #large-search-box .container,
 .inner-body .container {
-  @include media-min(xl){
+  @include media-min(xxl){
     max-width: calc(100% - #{$left-sidebar-width-narrow - 15px} * 2);
   }
 }
@@ -153,10 +153,10 @@ main {
         @include media-max(md) {
           width: 100%;
         }
-        @include media-only(md, xxl) {
+        @include media-only(md, xl) {
           width: calc(50% - 10px);
         }
-        @include media-min(xxl) {
+        @include media-min(xl) {
           width: calc(33.33% - 20px);
         }
         & > a.reference {
@@ -648,7 +648,7 @@ main {
 
 .dark-theme body {
   color: $dark-color-main-text;
-  background-color: $dark-color-index-header-background;
+  background-color: $dark-color-index-toc-background;
   .toctree-wrapper {
     > ul {
       .toctree-l1 {
@@ -769,7 +769,7 @@ main {
   }
 
   #header {
-    background: $dark-color-index-header-background;
+
     .search-box {
       background: $dark-color-index-header-background;
     }
