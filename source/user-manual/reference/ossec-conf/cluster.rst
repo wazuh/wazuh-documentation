@@ -265,7 +265,7 @@ Specifies the protocol to use for the HAProxy communication.
 haproxy_cert
 ^^^^^^^^^^^^
 
-Specifies the location of the used HAProxy certificate file.
+Specifies the location of the HAProxy certificate file.
 
 +--------------------+-------------------------------------+
 | **Default value**  | n/a                                 |
@@ -278,7 +278,7 @@ Specifies the location of the used HAProxy certificate file.
 client_cert
 ^^^^^^^^^^^^
 
-Specifies the location of the used client side certificate file.
+Specifies the location of the client-side certificate file.
 
 +--------------------+-------------------------------------+
 | **Default value**  | n/a                                 |
@@ -291,7 +291,7 @@ Specifies the location of the used client side certificate file.
 client_cert_key
 ^^^^^^^^^^^^^^^
 
-Specifies the location of the used client side certificate key file.
+Specifies the location of the client-side certificate key file.
 
 +--------------------+-----------------------------------------+
 | **Default value**  | n/a                                     |
@@ -304,7 +304,7 @@ Specifies the location of the used client side certificate key file.
 client_cert_password
 ^^^^^^^^^^^^^^^^^^^^
 
-Specifies the password used for the client side certificate.
+Specifies the password for the client-side certificate.
 
 +--------------------+--------------------------------------------------------+
 | **Default value**  | n/a                                                    |
