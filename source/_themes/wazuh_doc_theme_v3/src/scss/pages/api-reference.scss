@@ -36,12 +36,12 @@ body {
   font-size: 16px;
   font-weight: 400;
   line-height: 32px;
-  & > div:first-child {
+  & > div:first-of-type {
     padding-top: $redoc-header-height;
   }
 
   &.no-latest-docs {
-    & > div:first-child {
+    & > div:first-of-type {
       @media screen and (max-width: 576px){
         padding-top: #{$redoc-header-height * 2.3};
       }
@@ -785,7 +785,7 @@ redoc[spec-url] .beRszf {
 
 .light-theme body {
   color: $light-color-main-text;
-  & > div:not(.loading):first-child {
+  & > div:not(.loading):first-of-type {
     @include  media-min (xl) {
       background: linear-gradient(90deg,$light-color-sidebar-space 50%, $dark-color-index-toc-background 50%)
     }
@@ -1165,7 +1165,7 @@ redoc[spec-url] .beRszf {
     // Search box
     .cziLoD {
       input {
-        color: $light-color-focus-shade;
+        color: rgba($light-color-main-text, .8);
         background-image: url("#{$ico-path}svg-icons.svg#search-lt");
         border-bottom-color: $light-color-border-deeper;
       }
@@ -1216,7 +1216,7 @@ redoc[spec-url] .beRszf {
 
 .dark-theme body {
   color: $dark-color-main-text;
-  & > div:not(.loading):first-child {
+  & > div:not(.loading):first-of-type {
     @include  media-min (xl) {
       background: linear-gradient(90deg,$dark-color-sidebar-space 50%, $dark-color-index-toc-background 50%)
     }
@@ -1253,7 +1253,7 @@ redoc[spec-url] .beRszf {
       }
     }
     .header-right {
-      border-bottom-color: $light-color-global-toc-highlight;
+      border-bottom-color: $dark-color-global-toc-highlight;
     }
   }
   redoc[spec-url] .beRszf {
@@ -1609,12 +1609,12 @@ redoc[spec-url] .beRszf {
     // Search box
     .cziLoD {
       input {
-        color: $light-color-focus-shade;
+        color: rgba($dark-color-main-text, .8);
         background-image: url("#{$ico-path}svg-icons.svg#search-dt");
         border-bottom-color: $light-color-border-deeper;
       }
       ::placeholder {
-        color: $light-color-focus-shade;
+        color: $dark-color-focus-shade;
       }
     }
     .kwnyAC {
