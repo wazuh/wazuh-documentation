@@ -210,7 +210,6 @@ header {
 
 /* Top bar from the website */
 .nav-top {
-  background-color: #f5f6f7;
   height: 50px;
   @include media-max(xl){
     display: none;
@@ -237,14 +236,10 @@ header {
           }
           a {
             align-items: center;
-            color: $light-color-main-text;
             display: flex;
             font-size: 14px;
             font-weight: 500;
             line-height: 20px;
-            &:hover {
-              color: $light-color-primary-lighter;
-            }
           }
         }
         &.social-links {
@@ -259,7 +254,6 @@ header {
             width: 24px;
           }
           svg {
-            fill: $light-color-main-text;
             height: 19px;
             width: 19px;
             flex-shrink: 0;
@@ -267,48 +261,6 @@ header {
         }
       }
     }
-    // .header-search {
-    //   margin-left: 10px;
-    //   position: relative;
-    //   width: 100%;      
-    //   &.collapsed {     
-    //     .form-control {
-    //         transition: width ease .5s;
-    //     }
-    //   }   
-    //   &.expanded {
-    //     .form-control {
-    //         transition: width ease .5s;
-    //     }
-    //     label {
-    //         width: 380px;
-    //         cursor: auto;
-    //         transition: width ease .5s;
-    //     }
-    //   }
-    //   .search-input-wrapper {
-    //     display: flex;
-    //     justify-content: flex-start;
-    //   }
-    //   label {
-    //     align-items: center;
-    //     background-color: $light-color-base-space;
-    //     border-radius: 10px;
-    //     cursor: pointer;
-    //     display: flex;
-    //     height: 26px;
-    //     margin: 0;
-    //     padding: 5px 10px;
-    //     transition: width .5s ease;
-    //     width: 268px;
-    //     @include media-only(xl,wzh-xl) {
-    //       width: 263px;
-    //     }
-    //     input::placeholder {
-    //       font-size: 14px;
-    //     }
-    //   }
-    // }
 
     .header-search {
       width: 100%;
@@ -319,9 +271,7 @@ header {
         justify-content: flex-start;
         svg {
           stroke-width: 0.3px;
-          stroke: $light-color-primary;
           transform: scale(.6);
-          fill: $light-color-primary;
         }
       }
       label {
@@ -329,7 +279,6 @@ header {
         align-items: center;
         height: 26px;
         width: 268px;
-        background-color: $light-color-base-space;
         border-radius: 10px;
         padding: 5px 10px;
         margin: 0;
@@ -354,9 +303,6 @@ header {
           line-height: 1.2;
           padding: 0 0 0 5px;
           background-color: transparent;
-          &:-webkit-autofill {
-            -webkit-box-shadow: 0 0 0 1000px rgb(233, 233, 233) inset !important;
-          }
           &:focus {
             box-shadow: none;
             border: none;
@@ -378,7 +324,6 @@ header {
           content: '';
           height: 1.5px;
           width: 18px;
-          background-color: $light-color-primary;
           position: absolute;
           right: 0;
           top: 9px;
@@ -452,6 +397,65 @@ header {
       fill: $light-color-main-text-extra;
     }
   }
+  /* Top bar from the website */
+  .nav-top {
+    background-color: #f5f6f7;
+    > .container {
+      nav {
+        ul {
+          li {
+            a {
+              color: $light-color-main-text;
+              &:hover {
+                color: $light-color-primary-lighter;
+              }
+            }
+          }
+          &.social-links {
+            a {
+              color: $light-color-main-text;
+              &:hover {
+                color: $light-color-primary-lighter;
+                svg {
+                  fill: $light-color-primary-lighter;
+                }
+              }
+            }
+            svg {
+              fill: $light-color-main-text;
+            }
+          }
+        }
+      }
+
+      .header-search {     
+        .search-input-wrapper {
+          svg {
+            stroke: $light-color-primary;
+            fill: $light-color-primary;
+          }
+        }
+        label {
+          background-color: $light-color-base-space;
+          .form-control {
+            background-color: transparent;
+            &:-webkit-autofill {
+              -webkit-box-shadow: 0 0 0 1000px rgb(233, 233, 233) inset !important;
+            }
+          }
+          button {
+            background-color: transparent;
+          }
+        }
+        .btn-close {
+          background: transparent;
+          &::before, &::after {
+            background-color: $light-color-primary;
+          }
+        }
+      }
+    }
+  }
 }
 
 /* Dark- theme -------------------------------------------------------------- */
@@ -481,6 +485,65 @@ header {
     .search-toggler {
       .search-toggler-icon {
         background: url("#{$ico-path}svg-icons.svg#search-dt");
+      }
+    }
+  }
+  /* Top bar from the website */
+  .nav-top {
+    background-color: #121214;
+    > .container {
+      nav {
+        ul {
+          li {
+            a {
+              color: $dark-color-main-text;
+              &:hover {
+                color: $dark-color-primary-lighter;
+              }
+            }
+          }
+          &.social-links {
+            a {
+              color: $dark-color-main-text;
+              &:hover {
+                color: $dark-color-primary-lighter;
+                svg {
+                  fill: $dark-color-primary-lighter;
+                }
+              }
+            }
+            svg {
+              fill: $dark-color-main-text;
+            }
+          }
+        }
+      }
+
+      .header-search {     
+        .search-input-wrapper {
+          svg {
+            stroke: $light-color-primary;
+            fill: $light-color-primary;
+          }
+        }
+        label {
+          background-color: $light-color-base-space;
+          .form-control {
+            background-color: transparent;
+            &:-webkit-autofill {
+              -webkit-box-shadow: 0 0 0 1000px rgb(233, 233, 233) inset !important;
+            }
+          }
+          button {
+            background-color: transparent;
+          }
+        }
+        .btn-close {
+          background: transparent;
+          &::before, &::after {
+            background-color: $light-color-primary;
+          }
+        }
       }
     }
   }
