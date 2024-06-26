@@ -57,6 +57,7 @@ const pageSpecificJS = {
   ],
   "api-reference": [
     SRC_PATH + "components/version-selector.js",
+    SRC_PATH + "components/doctools.js",
     SRC_PATH + "components/sphinx-search/sphinx_highlight.js",
     SRC_PATH + "custom-redoc.js"
   ],
