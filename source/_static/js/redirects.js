@@ -71,6 +71,8 @@ newUrls['4.8'] = [
   '/user-manual/wazuh-dashboard/management.html',
   '/upgrade-guide/troubleshooting.html',
   '/proof-of-concept-guide/leveraging-llms-for-alert-enrichment.html',
+  '/user-manual/ruleset/rules/default.html',
+  '/user-manual/ruleset/rules/rules-classification.html',
 ];
 
 /* Pages no longer available in 4.8 */
@@ -81,6 +83,10 @@ removedUrls['4.8'] = [
   '/user-manual/capabilities/vulnerability-detection/scan-types.html',
   '/user-manual/capabilities/vulnerability-detection/allow-os.html',
   '/user-manual/wazuh-dashboard/settings.html',
+  '/user-manual/ruleset/contribute.html',
+  '/user-manual/ruleset/getting-started.html',
+  '/user-manual/ruleset/update.html',
+  '/user-manual/ruleset/rules-classification.html',
   '/migration-guide/migrating-from-ossec/index.html',
   '/migration-guide/migrating-from-ossec/ossec-server.html',
   '/migration-guide/migrating-from-ossec/ossec-agent.html',
@@ -109,6 +115,11 @@ redirections.push(
     'target': ['4.7=>4.8', '4.8 => 4.7'],
     '4.7': '/user-manual/wazuh-dashboard/settings.html',
     '4.8': '/user-manual/wazuh-dashboard/management.html',
+  },
+  {
+    'target': ['4.7=>4.8', '4.8=>4.7'],
+    '4.7': '/user-manual/ruleset/rules-classification.html',
+    '4.8': '/user-manual/ruleset/rules/rules-classification.html',
   },
 );
 
