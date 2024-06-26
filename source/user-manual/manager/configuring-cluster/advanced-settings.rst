@@ -531,7 +531,7 @@ Dataplane API configuration
 
 The helper uses the Dataplane API to communicate with HAProxy and update the configuration according to the changes in the Wazuh cluster.
 
-This is the basic configuration. You need to replace ``<DATAPLANE_USER>`` and ``<DATAPLANE_PASSWORD>`` with the chosen user and password. 
+This is the basic configuration. You need to replace ``<DATAPLANE_USER>`` and ``<DATAPLANE_PASSWORD>`` with the chosen user and password.
 
 .. tabs::
 
@@ -561,9 +561,9 @@ This is the basic configuration. You need to replace ``<DATAPLANE_USER>`` and ``
 
       .. note::
 
-         If you use HTTPS as the Dataplane API communication protocol, it is mandatory to set the ``tls`` field and related subfields ``tls_port``, ``tls_certificate`` and ``tls_key`` in the configuration. The ``tls_ca`` field is only necessary when using Client Side Certificates.
+         If you use HTTPS as the Dataplane API communication protocol, you must set the ``tls`` field and related subfields: ``tls_port``, ``tls_certificate`` and ``tls_key`` in the configuration. The ``tls_ca`` field is only necessary when using client-side certificates.
          
-         To generate the certificate files both for the HAProxy instance and the Wazuh server, the following command could be used:
+         To generate the certificate files for both the HAProxy instance and the Wazuh server, use the following command.
 
          .. code-block:: console
 
@@ -596,7 +596,6 @@ This is the basic configuration. You need to replace ``<DATAPLANE_USER>`` and ``
                reload_cmd: service haproxy reload
                restart_cmd: service haproxy restart
       .. note
-
 
 Depending on the :ref:`HAProxy installation method <haproxy_installation>`, follow these steps to enable the helper.
 
@@ -657,7 +656,7 @@ Depending on the :ref:`HAProxy installation method <haproxy_installation>`, foll
 
       #. Modify ``Dockerfile`` to include ``dataplaneapi.yaml`` during the build
 
-      .. tabs::
+         .. tabs::
 
             .. group-tab:: HTTP
 
