@@ -63,6 +63,3 @@ In the repository, you will find:
       testing
       cdb-list
       mitre
-      getting-started
-      update
-      contribute
