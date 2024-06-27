@@ -77,6 +77,10 @@ Generating the SSL certificates
 
      #  bash ./wazuh-certs-tool.sh -A
 
+   .. note::
+
+      To use the Wazuh certificates tool in macOS or Windows, you need to have Docker installed. For more information, see :ref:`wazuh_cert_tool_docker`.
+
 #. Compress all the necessary files.
 
    .. code-block:: console
