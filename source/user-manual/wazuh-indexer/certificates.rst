@@ -124,7 +124,7 @@ The Docker container must have access to the ``config.yml`` file and the directo
 
       The ``/path/to/config.yml`` and ``/path/to/wazuh-certificates/`` directories must be replaced with the actual paths in the host machine. We recommend using absolute paths and the certificates directories must be named ``wazuh-certificates``.
 
-After running the command, the container will be created and the certificates will be stored in the directory specified.
+After running the command, the container will be created and the certificates will be stored in the specified directory.
 
   .. note::
 
