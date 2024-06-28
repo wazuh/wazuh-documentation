@@ -3,8 +3,6 @@
 .. meta::
   :description: Frequently asked questions about the Wazuh module for Amazon. Learn more about it in this section of the documentation.
 
-.. _amazon_troubleshooting:
-
 Troubleshooting
 ===============
 

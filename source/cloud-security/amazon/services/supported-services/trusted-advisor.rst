@@ -3,8 +3,6 @@
 .. meta::
   :description: AWS Trusted Advisor is a service that helps users reduce cost by optimizing their AWS environment. Learn how to configure and monitor it with Wazuh.
 
-.. _amazon_trusted_advisor:
-
 AWS Trusted Advisor
 ===================
 
