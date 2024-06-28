@@ -1,16 +1,16 @@
 .. Copyright (C) 2015, Wazuh, Inc.
 
 .. meta::
-   :description: Learn how to integrate YARA with ChatGPT to detect when a malicious file is downloaded to a monitored endpoint in this proof of concept.
+   :description: Learn how to integrate Wazuh with YARA to detect the addition of malicious files, and use ChatGPT queries to enrich the YARA scan results with additional insights.
 
 Leveraging LLMs for alert enrichment
 ====================================
 
-**Large Language Model** is a type of artificial intelligence (AI) model designed to understand, generate, and manipulate human language. These models are typically built using machine learning techniques, particularly those involving deep learning and neural networks. LLMs can add human-like intelligence to process data, enhancing the efficiency of various business and personal operations. LLMs such as ChatGPT have gained massive popularity and are widely used in various industries including security operations.
+**Large Language Model** is a type of artificial intelligence (AI) model designed to understand, generate, and manipulate human language. These models are typically built using machine learning techniques, particularly those involving deep learning and neural networks. LLMs can add human-like intelligence to process data, enhancing the efficiency of various business and personal operations. *LLMs* such as the ones adopted by ChatGPT have gained massive popularity and are widely used in various industries including security operations.
 
 YARA is a tool that detects and classifies malware artifacts. While YARA can identify known patterns and signatures of malicious activity, human intervention is often required to interpret and contextualize the output of YARA scans. ChatGPT is a generative AI chatbot developed by OpenAI. It provides users with various LLMs to process data. These LLMs can analyze and enrich YARA alerts with additional context, providing security teams with deeper insights into the nature and severity of detected threats.
 
-In this use case, we integrate YARA with ChatGPT to detect when a malicious file is downloaded to a monitored endpoint. The integration enriches YARA alerts with insights from ChatGPT about the potential incident. It also automatically responds by deleting the malicious file.
+In this use case, we integrate Wazuh with YARA to detect when a malicious file is added to a monitored endpoint. The integration utilizes the Wazuh :doc:`FIM </user-manual/capabilities/file-integrity/index>` module to monitor a directory for new or modified files. When a file modification or addition is detected, the Wazuh :doc:`active response </user-manual/capabilities/active-response/index>` module triggers a YARA scan on the file. The Active response module automatically deletes the malicious file from the endpoint if it has a positive match with a malicious signature. The active response module then queries ChatGPT to enrich the YARA scan result with additional insight into the malicious file that helps security teams understand its nature, potential impact, and remediation.
 
 Infrastructure
 --------------
