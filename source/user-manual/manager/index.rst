@@ -1,20 +1,23 @@
 .. Copyright (C) 2015, Wazuh, Inc.
 
 .. meta::
-  :description: Find out more about Wazuh server administration and its configurations in this section of our documentation.
-
-.. _user_manual_manager:
+  :description: The Wazuh server is the Wazuh central component that analyzes data it receives from agents, external APIs, and network devices. Learn more in this section of the documentation.
 
 Wazuh server
 ============
 
-The Wazuh manager is the system that analyzes the data received from all registered agents and triggers alerts when an event coincides with a rule. For example, intrusion detected, file modified, configuration not in accordance with the policy, possible rootkit, among others. The manager also works as an agent on the local machine, which means that it has all the features that an agent has. In addition, the manager can forward the alerts that it triggers through Syslog, emails, or integrated external APIs.
+The Wazuh server is the Wazuh central component that analyzes data it receives from agents, external APIs, and network devices. It analyzes the received data by correlating and matching it against a predefined ruleset to generate alerts for security monitoring and management.
+
+The Wazuh server comprises two main components; the :doc:`Wazuh manager <>` and :doc:`Filebeat <>`. The Wazuh manager is responsible for data analysis and alerting, while the indexer integration forwards the analyzed data to the Wazuh indexer. Refer to the :doc:`Wazuh server installation </installation-guide/wazuh-server/index>` documentation for information on how to install and set it up.
 
 .. topic:: Contents
 
    .. toctree::
       :maxdepth: 2
 
+      wazuh-manager
+
+..
       alert-threshold
       wazuh-archives
       manual-integration
