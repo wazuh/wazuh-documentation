@@ -92,6 +92,13 @@ Wazuh dashboard
       :align: center
       :width: 80%
 
+#. Alternatively, the ``wazuh-archives-*`` index can be created via the command line using curl with the admin password:
+
+   .. code-block:: bash
+
+     $ curl -k -u admin:"$ADMIN_PASS" -X PUT "https://127.0.0.1:9200/_index_pattern/wazuh-archives-" -H 'Content-Type: application/json' -d '{"index_pattern":"wazuh-archives-*","priority":100,"time_field":"timestamp","fields":[{"name":"@timestamp","type":"date","format":"date_time"}]}'
+
+
 Use case: Detecting signed binary proxy execution
 -------------------------------------------------
 
