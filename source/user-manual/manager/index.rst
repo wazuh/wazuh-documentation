@@ -16,9 +16,10 @@ The Wazuh server comprises two main components; the :doc:`Wazuh manager <>` and 
       :maxdepth: 2
 
       wazuh-manager
+      wazuh-indexer-integration
+      alert-management
 
 ..
-      alert-threshold
       wazuh-archives
       manual-integration
       manual-syslog-output

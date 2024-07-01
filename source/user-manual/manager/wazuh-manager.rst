@@ -1,7 +1,7 @@
 .. Copyright (C) 2015, Wazuh, Inc.
 
 .. meta::
-  :description: The Wazuh manager is responsible for data analysis and alerting. Learn more in this section of the documentation.
+   :description: The Wazuh manager is responsible for data analysis and alerting. Learn more in this section of the documentation.
 
 Wazuh manager
 =============
@@ -231,7 +231,7 @@ Decoding is the process of analyzing structured or unstructured data, such as lo
    The extracted information after the decoding phase is shown below:
 
    .. code-block:: none
-      :emphasize-lines: 13-18
+      :emphasize-lines: 13-17
 
       Starting wazuh-logtest v4.7.5
       Type one log per line
@@ -253,3 +253,26 @@ Decoding is the process of analyzing structured or unstructured data, such as lo
 
 Rule evaluation and alerting
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Once the log is decoded, the Wazuh manager compares it against a ruleset. Wazuh rulesets are defined in XML files and can be customized to suit different monitoring needs. These rules specify conditions that, when met, trigger alerts. Rule ``5715`` below matches the sample log from the earlier section. This rule is in the ``/var/ossec/ruleset/rules/0095-sshd_rules.xml`` file on the Wazuh server.
+
+.. code-block:: xml
+
+   <rule id="5715" level="3">
+     <if_sid>5700</if_sid>
+     <match>^Accepted|authenticated.$</match>
+     <description>sshd: authentication success.</description>
+     <group>authentication_success,pci_dss_10.2.5,</group>
+   </rule>
+
+Where:
+
+-  ``<rule id="5715" level="3">`` specifies the rule ID as ``5715`` and rule level as ``3``. The rule ID is a unique identifier for the rule, while the level represents the severity level of the event when the rule matches.
+-  ``<if_sid>5700</if_sid>`` specifies a dependency on another rule with ID ``5700``. The rule will only be evaluated if rule ``5700`` has matched previously.
+-  ``<match>^Accepted|authenticated.$</match>`` matches any log entry that starts with ``Accepted`` or ends with ``authenticated.``.
+-  ``<description>sshd: authentication success.</description>`` describes what the rule detects. In this case, it indicates a successful SSH authentication.
+-  ``<group>authentication_success,pci_dss_10.2.5,</group>`` assigns the rule to the ``authentication_success`` and ``pci_dss_10.2.5``  groups.
+
+By default, the Wazuh server generates alerts for any rule with a level above 2. In this scenario, the log triggers an alert because the rule level is 3 and this will be visible on the Wazuh dashboard.
+
+You can create custom decoders and rules to analyze logs not supported by default. To learn how to create custom rules and decoders, refer to :doc:`custom rules </user-manual/ruleset/rules/custom>` and :doc:`custom decoders </user-manual/ruleset/decoders/custom>` documentation.
