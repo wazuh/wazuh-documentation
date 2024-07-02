@@ -3,8 +3,6 @@
 .. meta::
   :description: AWS KMS is a key management service that allows creating and controlling the keys used to encrypt and sign data. Learn how to configure and monitor it with Wazuh.
 
-.. _amazon_kms:
-
 AWS Key Management Service (KMS)
 ================================
 

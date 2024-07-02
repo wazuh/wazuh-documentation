@@ -3,8 +3,6 @@
 .. meta::
   :description: AWS CloudWatch Logs is a service that allows users to centralize the logs from all their systems. Learn how to use CloudWatch Logs with Wazuh here.
 
-.. _aws_cloudwatchlogs:
-
 Amazon CloudWatch Logs
 ======================
 
