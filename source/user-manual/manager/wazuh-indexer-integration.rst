@@ -8,6 +8,8 @@ Wazuh indexer integration
 
 This integration provides a bridge between the Wazuh manager and the Wazuh indexer. It forwards data from the Wazuh manager to the Wazuh indexer for indexing. The Wazuh indexer integration consists of two forwarders: `Filebeat`_ and `Wazuh indexer connector`_.
 
+.. _indexer_integration_filebeat:
+
 Filebeat
 --------
 

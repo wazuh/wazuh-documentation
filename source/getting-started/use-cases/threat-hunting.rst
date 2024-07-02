@@ -33,7 +33,7 @@ Wazuh uses decoders to extract meaningful information from log data obtained fro
    :align: center
    :width: 80%
 
-Wazuh offers :doc:`agentless monitoring </user-manual/capabilities/agentless-monitoring/index>` and :doc:`syslog log collection </user-manual/manager/manual-syslog-output>` for efficient log data handling. It ensures consistency and compatibility across various log formats. Wazuh indexing and querying capabilities facilitate quick search and access to specific log data, streamlining analysis and investigation. Wazuh uses its advanced parsing and real-time analysis to enhance threat hunting by proactively identifying and mitigating risks thereby enhancing security.
+Wazuh offers :doc:`agentless monitoring </user-manual/capabilities/agentless-monitoring/index>` and :ref:`syslog log collection <manual_syslog_output>` for efficient log data handling. It ensures consistency and compatibility across various log formats. Wazuh indexing and querying capabilities facilitate quick search and access to specific log data, streamlining analysis and investigation. Wazuh uses its advanced parsing and real-time analysis to enhance threat hunting by proactively identifying and mitigating risks thereby enhancing security.
 
 Wazuh archives
 --------------

@@ -10,6 +10,8 @@ The Wazuh server collects and analyzes data received from deployed agents. It ru
 
 The Wazuh manager package and compatible agent packages can be checked or downloaded from the :doc:`/installation-guide/packages-list` section.
 
+.. _installing_manager_from_sources_dependencies:
+
 Installing dependencies
 -----------------------
 
@@ -112,7 +114,7 @@ Installing the Wazuh manager
 
    .. warning::
       
-      If you want to enable the database output, :doc:`check out </user-manual/manager/manual-database-output>` this section before running the installation script.
+      If you want to enable the database output, :ref:`check out <manual_database_output>` this section before running the installation script.
 
    .. code-block:: console
 
