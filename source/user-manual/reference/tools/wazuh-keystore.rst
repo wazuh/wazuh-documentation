@@ -1,7 +1,7 @@
 .. Copyright (C) 2015, Wazuh, Inc.
 
 .. meta::
-  :description: Tool where sensitive configuration data can be securely stored, including any information that the Wazuh manager daemons/tools need for their work. 
+  :description: Tool where sensitive configuration data can be securely stored, including any information that the Wazuh manager daemons/tools need for their work.
 
 .. _wazuh-keystore:
 
@@ -22,6 +22,12 @@ wazuh-keystore options
 +------------------------+---------------------------------------------------------+
 | **-v <VALUE>**         | Specifies the value associated with the key.            |
 +------------------------+---------------------------------------------------------+
+| **-vp <VALUE>**        | Specifies the path to a file with the value.            |
++------------------------+---------------------------------------------------------+
+
+Only one of the options **-v** or **-vp** can be used at a time.
+If none of them are present, the tool will read the value from the standard input.
+
 
 Example
 -------
@@ -31,3 +37,10 @@ Example
 
     # /var/ossec/bin/wazuh-keystore -f indexer -k username -v admin
     # /var/ossec/bin/wazuh-keystore -f indexer -k password -v admin
+
+* Alternate ways to set the password:
+
+.. code-block:: console
+
+    # /var/ossec/bin/wazuh-keystore -f indexer -k username -vp /file/with/password
+    # echo "SecretPassword" | /var/ossec/bin/wazuh-keystore -f indexer -k password
