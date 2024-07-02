@@ -1,164 +1,159 @@
 .. Copyright (C) 2015, Wazuh, Inc.
 
 .. meta::
-  :description: Sibling Decoders can be considered a decoder building strategy for those looking to build their own custom decoders. Learn more about it in this section.
-
-.. _sibling_decoders:
+   :description: Sibling decoders refer to a decoder building strategy where multiple decoders operate at the same hierarchical level without a parent-child relationship. Learn more about it in this section.
 
 Sibling Decoders
 ================
 
-Our development team and the Wazuh community at large are constantly :doc:`contributing to the ruleset <../contribute>` but at the same time, new security-relevant devices and software programs are being created constantly all around the globe.
-Even more, depending on each environment, users will have different needs and preferences. For these reasons and more it is key that the security software you use is as flexible and easy to configure as possible.
+Sibling decoders refer to a decoder building strategy where multiple decoders operate at the same hierarchical level without a parent-child relationship. Unlike traditional parent-child decoder relationships, where a parent decoder triggers its child decoders based on specific conditions, sibling decoders are independent of each other and function in parallel. This approach is particularly useful when dealing with logs that require multiple decoding strategies or when different parts of a log entry need to be processed separately. Sibling decoders offer greater flexibility in decoding complex log structures and allow for more nuanced analysis of log data.
 
-Sibling Decoders can be considered a decoder building strategy that can be of great help for those looking into building their own custom decoders. As different logs come with different needs and sometimes extracting all the information can be challenging, especially when dealing with dynamically structured logs.
-The main purpose is to provide tools capable of decoding as much information as possible in the easiest way possible.
+Traditional log decoding
+------------------------
 
-Wazuh's log analysis
-^^^^^^^^^^^^^^^^^^^^
+Wazuh collects log messages from numerous sources relevant to an environment's security. Subsequently, each ingested message undergoes analysis based on a simple and resource-efficient logic, enabling the Wazuh manager to handle large volumes of log data with minimal resources. 
 
-Firstly, it is of the utmost importance to understand how logs are analyzed by Wazuh's ``analysisd``. Wazuh collects log messages from a vast amount of sources relevant to an environment's security. Then, for every message ingested, the ruleset is analyzed using a very simple and resource-efficient logic that allows the Wazuh manager to handle large amounts of log data requiring few resources.
+The analysis process involves sequentially examining each log message using decoders without a parent.  Once a matching condition is met, the process repeats with decoders that have this decoder as a parent. It is important to note that once a decoder is matched, it stops searching through other decoders and focuses solely on its children, if any. Therefore, when constructing decoders, it is essential to avoid overly generic matching conditions to prevent false positives and ensure that the appropriate decoders are triggered effectively.
 
+.. thumbnail:: /images/manual/ruleset/traditional-log-decoding.png
+   :title: Traditional log decoding
+   :alt: Traditional log decoding
+   :align: center
+   :width: 80%
 
-The log will be sequentially checked one by one by the decoders that don't have a parent. When it meets the condition of any one of them the process is repeated with the decoders that have this decoder as a ``<parent>``. It is important to understand, that once a decoder is matched, it will stop looking through the ruleset and will only focus on its children if it has any.
-Because of this, it is an essential practice when building decoders to avoid being too generic in the matching conditions as it could result in false positives and the right decoders not being triggered at all.
-
-.. thumbnail:: ../../../images/manual/ruleset/ruleset-xml-syntax/decoders-tree.png
-    :title: Log analysis
-    :align: center
-    :width: 100%
-
-Remember that unlike rules, decoders cannot have "grandchildren". A child decoder is not able to be a parent.
+As a reminder, decoders, unlike rules, cannot have "grandchildren". In other words, a child decoder cannot act as a parent.
 
 Dealing with dynamically structured logs
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+----------------------------------------
 
 The process of matching at decoder level uses :ref:`regular expressions <os_regex_syntax>`, which require the matching string to have a specific structure. However, this can be a nuisance when logs do not follow a specific structure. They will often provide information omitting parts of the log or changing the order, which would make it impractical if not impossible to create all the necessary decoders to match each one of the possible combinations in which security-relevant data may be received.
 
-This is where sibling decoders come in. Taking advantage of the simple parent-children matching logic, one can create a set of decoders that are together "parent" of themselves. As a result, when one of these decoders is matched it will also check the "sibling" decoders whilst extracting one piece of information at a time.
+Sibling decoders take advantage of the simple parent-children matching logic, enabling the creation of a set of decoders that are 'parents' of each other. As a result, when one of these decoders is matched, it will also check the "sibling" decoders, while extracting one piece of information at a time.
 
+.. thumbnail:: /images/manual/ruleset/dynamically-structured-decoding.png
+   :title: 
+   :alt: 
+   :align: center
+   :width: 80%
 
+As a result, even if the ordering of the information varies, additional information is present, or some information is missing, the Wazuh analysis engine can still extract as much information as possible from the message.
 
-.. thumbnail:: ../../../images/manual/ruleset/ruleset-xml-syntax/sibling-decoders-tree.png
-    :title: Log analysis
-    :align: center
-    :width: 100%
-
-As a consequence, if the ordering of the information varies, there is additional information or some is missing, the analysisd module will still be able to extract as much information as possible from the message.
-
-A welcome side effect of extracting information in this modular way is that decoders become much more readable than one long regular expression string.
-
+Extracting information in this modular way through sibling decoders significantly improves their readability. This is achieved by breaking down lengthy regular expression strings into smaller, more manageable pieces.
 
 Practical example
-^^^^^^^^^^^^^^^^^
+-----------------
 
-Say we have a log source that provides the following log message:
+We have a log source that provides the following log message:
 
-``2019/01/02 13:16:35 securityapp: INFO: srcuser="Bob" action="called" dstusr="Alice"``
+.. code-block:: none
+
+   2019/01/02 13:16:35 securityapp: INFO: srcuser="Bob" action="called" dstusr="Alice"
 
 A simple decoder may be:
 
 .. code-block:: xml
 
-  <decoder name="securityapp">
-    <program_name>securityapp</program_name>
-    <regex>(\w+): srcuser="(\.+)" action="(\.+)" dstusr="(\.+)"</regex>
-    <order>type,srcuser,action,dstuser</order>
-  </decoder>
+   <decoder name="securityapp">
+     <program_name>securityapp</program_name>
+     <regex>(\w+): srcuser="(\.+)" action="(\.+)" dstusr="(\.+)"</regex>
+     <order>type,srcuser,action,dstuser</order>
+   </decoder>
 
-Using `/var/ossec/bin/wazuh-logtest` we get:
+We run the ``/var/ossec/bin/wazuh-logtest`` utility on the Wazuh server to test the decoder and obtain the following result:
 
 .. code-block:: none
-  :class: output
 
-  Type one log per line
+   Type one log per line
 
-  Apr 12 14:31:38 hostname1 securityapp: INFO: srcuser="Bob" action="called" dstusr="Alice"
+   Apr 12 14:31:38 hostname1 securityapp: INFO: srcuser="Bob" action="called" dstusr="Alice"
 
-  **Phase 1: Completed pre-decoding.
-          full event: 'Apr 12 14:31:38 hostname1 securityapp: INFO: srcuser="Bob" action="called" dstusr="Alice"'
-          timestamp: 'Apr 12 14:31:38'
-          hostname: 'hostname1'
-          program_name: 'securityapp'
+   **Phase 1: Completed pre-decoding.
+           full event: 'Apr 12 14:31:38 hostname1 securityapp: INFO: srcuser="Bob" action="called" dstusr="Alice"'
+           timestamp: 'Apr 12 14:31:38'
+           hostname: 'hostname1'
+           program_name: 'securityapp'
 
-  **Phase 2: Completed decoding.
-          name: 'securityapp'
-          action: 'called'
-          dstuser: 'Alice'
-          srcuser: 'Bob'
-          type: 'INFO'
+   **Phase 2: Completed decoding.
+           name: 'securityapp'
+           action: 'called'
+           dstuser: 'Alice'
+           srcuser: 'Bob'
+           type: 'INFO'
 
 However, if the log source then provides this message:
 
-``Apr 01 19:21:24 hostname2 securityapp: INFO: action="logged on" srcuser="Bob"``
+.. code-block:: none
+
+   Apr 01 19:21:24 hostname2 securityapp: INFO: action="logged on" srcuser="Bob"
 
 No information is extracted.
 
-But using modular logic with sibling decoders:
+We can use modular logic with sibling decoders to decode the log message:
 
 .. code-block:: xml
 
-  <decoder name="securityapp">
-    <program_name>securityapp</program_name>
-  </decoder>
+   <decoder name="securityapp">
+     <program_name>securityapp</program_name>
+   </decoder>
 
-  <decoder name="securityapp">
-    <parent>securityapp</parent>
-    <regex>^(\w+):</regex>
-    <order>type</order>
-  </decoder>
+   <decoder name="securityapp">
+     <parent>securityapp</parent>
+     <regex>^(\w+):</regex>
+     <order>type</order>
+   </decoder>
 
-  <decoder name="securityapp">
-    <parent>securityapp</parent>
-    <regex>srcuser="(\.+)"</regex>
-    <order>srcuser</order>
-  </decoder>
+   <decoder name="securityapp">
+     <parent>securityapp</parent>
+     <regex>srcuser="(\.+)"</regex>
+     <order>srcuser</order>
+   </decoder>
 
-  <decoder name="securityapp">
-    <parent>securityapp</parent>
-    <regex>action="(\.+)"</regex>
-    <order>action</order>
-  </decoder>
+   <decoder name="securityapp">
+     <parent>securityapp</parent>
+     <regex>action="(\.+)"</regex>
+     <order>action</order>
+   </decoder>
 
-  <decoder name="securityapp">
-    <parent>securityapp</parent>
-    <regex>dstusr="(\.+)"</regex>
-    <order>dstuser</order>
-  </decoder>
+   <decoder name="securityapp">
+     <parent>securityapp</parent>
+     <regex>dstusr="(\.+)"</regex>
+     <order>dstuser</order>
+   </decoder>
 
 Both messages are now correctly decoded.
 
+Output
+
 .. code-block:: none
-  :class: output
 
-  Type one log per line
+   Type one log per line
 
-  Dec 28 01:35:18 hostname1 securityapp: INFO: srcuser="Bob" action="called" dstusr="Alice"
+   Dec 28 01:35:18 hostname1 securityapp: INFO: srcuser="Bob" action="called" dstusr="Alice"
 
-  **Phase 1: Completed pre-decoding.
-          full event: 'Dec 28 01:35:18 hostname1 securityapp: INFO: srcuser="Bob" action="called" dstusr="Alice"'
-          timestamp: 'Dec 28 01:35:18'
-          hostname: 'hostname1'
-          program_name: 'securityapp'
+   **Phase 1: Completed pre-decoding.
+           full event: 'Dec 28 01:35:18 hostname1 securityapp: INFO: srcuser="Bob" action="called" dstusr="Alice"'
+           timestamp: 'Dec 28 01:35:18'
+           hostname: 'hostname1'
+           program_name: 'securityapp'
 
-  **Phase 2: Completed decoding.
-          name: 'securityapp'
-          action: 'called'
-          dstuser: 'Alice'
-          srcuser: 'Bob'
-          type: 'INFO'
+   **Phase 2: Completed decoding.
+           name: 'securityapp'
+           action: 'called'
+           dstuser: 'Alice'
+           srcuser: 'Bob'
+           type: 'INFO'
 
 
-  Apr 01 19:21:24 hostname2 securityapp: INFO: action="logged on" srcuser="Bob"
+   Apr 01 19:21:24 hostname2 securityapp: INFO: action="logged on" srcuser="Bob"
 
-  **Phase 1: Completed pre-decoding.
-          full event: 'Apr 01 19:21:24 hostname2 securityapp: INFO: action="logged on" srcuser="Bob"'
-          timestamp: 'Apr 01 19:21:24'
-          hostname: 'hostname2'
-          program_name: 'securityapp'
+   **Phase 1: Completed pre-decoding.
+           full event: 'Apr 01 19:21:24 hostname2 securityapp: INFO: action="logged on" srcuser="Bob"'
+           timestamp: 'Apr 01 19:21:24'
+           hostname: 'hostname2'
+           program_name: 'securityapp'
 
-  **Phase 2: Completed decoding.
-          name: 'securityapp'
-          action: 'logged on'
-          srcuser: 'Bob'
-          type: 'INFO'
+   **Phase 2: Completed decoding.
+           name: 'securityapp'
+           action: 'logged on'
+           srcuser: 'Bob'
+           type: 'INFO'

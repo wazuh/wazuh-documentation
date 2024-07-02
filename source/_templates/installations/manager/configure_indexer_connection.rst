@@ -1,6 +1,6 @@
 .. Copyright (C) 2015, Wazuh, Inc.
 
-By default, the indexer settings have one host configured. It's set to localhost as highlighted below. Replace ``0.0.0.0`` with your Wazuh indexer node IP address or hostname.
+By default, the indexer settings have one host configured. It's set to ``0.0.0.0`` as highlighted below.
 
 .. code-block:: xml
    :emphasize-lines: 4
@@ -18,6 +18,10 @@ By default, the indexer settings have one host configured. It's set to localhost
        <key>/etc/filebeat/certs/filebeat-key.pem</key>
      </ssl>
    </indexer>
+
+Replace ``0.0.0.0`` with your Wazuh indexer node IP address or hostname. You can find this value in the Filebeat config file ``/etc/filebeat/filebeat.yml``.
+
+Ensure the Filebeat certificate and key name match the certificate files in ``/etc/filebeat/certs``.
 
 If you have a Wazuh indexer cluster, add a ``<host>`` entry for each one of your nodes. For example, in a two-nodes configuration:
 
