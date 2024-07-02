@@ -6,7 +6,7 @@
 AWS Trusted Advisor
 ===================
 
-`AWS Trusted Advisor <https://aws.amazon.com/premiumsupport/trustedadvisor/>`_ provides real-time guidance to help users reduce cost, increase performance, and improve security by optimizing their AWS environment following AWS best practices. Trusted Advisor logs can be stored into an S3 bucket thanks to `Amazon EventBridge <https://aws.amazon.com/eventbridge/>`_ and `Amazon Kinesis Data Firehose <https://aws.amazon.com/kinesis/data-firehose/>`_, allowing Wazuh to process them and generate alerts using the built-in rules Wazuh provides, as well as any :ref:`custom rules <ruleset_custom>` available.
+`AWS Trusted Advisor <https://aws.amazon.com/premiumsupport/trustedadvisor/>`_ provides real-time guidance to help users reduce cost, increase performance, and improve security by optimizing their AWS environment following AWS best practices. Trusted Advisor logs can be stored into an S3 bucket thanks to `Amazon EventBridge <https://aws.amazon.com/eventbridge/>`_ and `Amazon Kinesis Data Firehose <https://aws.amazon.com/kinesis/data-firehose/>`_, allowing Wazuh to process them and generate alerts using the built-in rules Wazuh provides, as well as any :doc:`custom rules </user-manual/ruleset/rules/custom>` available.
 
 Amazon configuration
 --------------------

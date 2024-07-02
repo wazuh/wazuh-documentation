@@ -182,7 +182,7 @@ The module is running without any error or warning messages, but no alerts from 
 
 A common scenario is that no alerts are being generated because the events are not matching any of the available rules. Take a look to the :ref:`aws_events_processed` section to learn how to check if the AWS logs are being sent to the analysis engine.
 
-Take into account that Wazuh does not provide default rules for the different logs that can be found in CloudWatch Logs, since they can have any type of format and come from any source. Because of this, if a user wants to make use of this integration to process any custom log they will most likely have to configure their own rules for them. Take a look at the :ref:`ruleset_custom` section to learn more about this topic.
+Take into account that Wazuh does not provide default rules for the different logs that can be found in CloudWatch Logs, since they can have any type of format and come from any source. Because of this, if a user wants to make use of this integration to process any custom log they will most likely have to configure their own rules for them. Take a look at the :doc:`/user-manual/ruleset/rules/custom` section to learn more about this topic.
 
 
 .. _interval_overtaken_message:

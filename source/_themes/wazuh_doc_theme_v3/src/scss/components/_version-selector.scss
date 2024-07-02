@@ -11,7 +11,9 @@ header {
 }
 
 #version-selector {
-
+  @include media-min(xl){
+    margin-left: 10px;
+  }
   &.show {
     .dropdown-toggle::after {
       transform: rotate(180deg);
@@ -33,7 +35,7 @@ header {
     }
     @include media-max(xl) {
       width: auto;
-      padding: 0;
+      padding: 0 5px;
       border: none;
     }
     &:focus  {
@@ -53,6 +55,10 @@ header {
     border-radius: 10px;
     @include media-max(sm) {
       font-size: 14px;
+    }
+    @include media-min (xl) {
+      max-height: 60vh;
+      overflow-y: auto;
     }
 
     @include media-max(xl) {
@@ -105,9 +111,9 @@ header {
   #version-selector {
     .dropdown-btn {
       color: $light-color-main-text;
+      border-color: $light-color-accent;
       @include media-min(xl) {
         background-color: $light-color-base-space;
-        border-color: $light-color-accent;
       }
       &[aria-expanded="false"]:focus {
         box-shadow: inset 0 0 2px 2px rgba($light-color-focus-shade, .2);
