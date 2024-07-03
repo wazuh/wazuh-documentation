@@ -18,6 +18,7 @@ The Wazuh server comprises two main components; the :doc:`Wazuh manager <wazuh-m
       wazuh-manager
       wazuh-indexer-integration
       alert-management
+      event-logging
 
 ..
       wazuh-archives
