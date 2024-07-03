@@ -198,9 +198,9 @@ If upgrading from version 4.7 and earlier, edit ``/var/ossec/etc/ossec.conf`` to
 #. Save the Wazuh indexer username and password into the Wazuh manager keystore using the Wazuh-keystore tool.
 
    .. code-block:: console
-
+  
       # /var/ossec/bin/wazuh-keystore -f indexer -k username -v <INDEXER_USERNAME>
-      # echo '<INDEXER_PASSWORD>' | /var/ossec/bin/wazuh-keystore -f indexer -k password
+      # /var/ossec/bin/wazuh-keystore -f indexer -k username -v <INDEXER_PASSWORD>
 
 Configuring Filebeat
 ^^^^^^^^^^^^^^^^^^^^
@@ -261,7 +261,7 @@ Configuration options might differ across versions. Follow these steps to ensure
          .. note::
 
             When prompted, choose to replace the ``/etc/wazuh-dashboard/opensearch_dashboards.yml`` file with the updated version.
-
+         
 #. Manually reapply any settings changes to the ``/etc/wazuh-dashboard/opensearch_dashboards.yml`` file.
 #. Restart the Wazuh dashboard:
 
