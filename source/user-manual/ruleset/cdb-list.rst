@@ -62,20 +62,33 @@ CDB lists are built and loaded automatically when the Wazuh analysis engine star
 Adding the list in the Wazuh server configuration file
 ------------------------------------------------------
 
-Each list must be defined in the ``<ruleset>`` block of the ``/var/ossec/etc/ossec.conf`` file using the following syntax:
+Perform the following steps to add a CDB list to the Wazuh server configuration file.
 
-.. code-block:: xml
+#. Define the CDB list within the ``<ruleset>`` block of the ``/var/ossec/etc/ossec.conf`` file. For example, to define the CDB list ``/var/ossec/etc/lists/list-IP``, add the relative path ``etc/lists/list-IP`` as highlighted below:
 
-   <ossec_config>
-     <ruleset>
-       <list>/var/ossec/etc/lists/list-IP</list>
-       <list>/var/ossec/etc/lists/list-URL</list>
-     </ruleset>
-   </ossec_config>
+   .. code-block:: xml
+      :emphasize-lines: 10
 
-Restart the Wazuh manager service to apply the changes:
+      ...  
+        <ruleset>
+          <!-- Default ruleset -->
+          <decoder_dir>ruleset/decoders</decoder_dir>
+          <rule_dir>ruleset/rules</rule_dir>
+          <rule_exclude>0215-policy_rules.xml</rule_exclude>
+          <list>etc/lists/audit-keys</list>
+          <list>etc/lists/amazon/aws-eventnames</list>
+          <list>etc/lists/security-eventchannel</list>
+          <list>etc/lists/list-IP</list>
 
-  .. include:: /_templates/common/restart_manager.rst
+          <!-- User-defined ruleset -->
+          <decoder_dir>etc/decoders</decoder_dir>
+          <rule_dir>etc/rules</rule_dir>
+        </ruleset>
+      ...
+
+#. Restart the Wazuh manager via the CLI to apply the changes:
+
+   .. include:: /_templates/common/restart_manager.rst
 
 Using the CDB list in the rules
 -------------------------------
@@ -136,29 +149,27 @@ In case the field is an IP address, you must use ``address_match_key_value``:
 CDB lists examples
 ^^^^^^^^^^^^^^^^^^
 
-In this example, the described rules check if an IP address is in ``/var/ossec/etc/lists/List-one``, in ``/var/ossec/etc/lists/List-two`` or in both.
+The following rules below are triggered if an IP address is in ``/var/ossec/etc/lists/List-one``, in ``/var/ossec/etc/lists/List-two`` or in both:
 
 .. code-block:: xml
 
    <rule id="110700" level="10">
      <if_group>json</if_group>
-     <list field="srcip" lookup="address_match_key">/var/ossec/etc/lists/List-one</list>
+     <list field="srcip" lookup="address_match_key">etc/lists/List-one</list>
      <description>IP blacklisted in LIST ONE</description>
      <group>list1,</group>
    </rule>
-   
-   
+
    <rule id="110701" level="10">
      <if_group>json</if_group>
-     <list field="srcip" lookup="address_match_key">/var/ossec/etc/lists/List-two</list>
+     <list field="srcip" lookup="address_match_key">etc/lists/List-two</list>
      <description>IP blacklisted in LIST TWO</description>
      <group>list2,</group>
    </rule>
-   
-   
+
    <rule id="110710" level="10">
      <if_sid>110700</if_sid>
-     <list field="srcip" lookup="address_match_key">/var/ossec/etc/lists/List-two</list>
+     <list field="srcip" lookup="address_match_key">etc/lists/List-two</list>
      <description>IP blacklisted in LIST ONE and LIST TWO</description>
      <group>list1,list2,</group>
    </rule>
