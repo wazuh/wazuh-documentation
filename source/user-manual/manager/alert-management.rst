@@ -516,13 +516,13 @@ You need to install the development libraries for the database system you want t
 
    .. code-block:: console
 
-      # curl -Ls https://github.com/wazuh/wazuh/archive/v4.8.0.tar.gz | tar zx
+      # curl -Ls https://github.com/wazuh/wazuh/archive/v|WAZUH_CURRENT|.tar.gz | tar zx
 
 #. Execute the following commands to switch to the Wazuh directory and specify the database type to use, replacing the ``<DATABASE_TYPE>`` variable with either ``mysql`` or ``pgsql``:
 
    .. code-block:: console
 
-      # cd wazuh-4.8.0/src
+      # cd wazuh-|WAZUH_CURRENT|/src
       # make deps && make TARGET=server DATABASE=<DATABASE_TYPE>
 
    .. note::
