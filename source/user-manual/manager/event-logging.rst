@@ -63,6 +63,8 @@ As seen in the output above, the string ``ossec`` and suffix ``day of the curren
 
 Based on your needs, you might configure the compressed files for removal after a specified period. Additionally, you can move them to log management systems, backup servers, or cloud-based storage devices for longer-term retention.
 
+.. _archiving_event_logs:
+
 Archiving event logs
 --------------------
 

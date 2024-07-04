@@ -40,7 +40,7 @@ Wazuh archives
 
 Wazuh provides a centralized storage location for archiving all collected logs from monitored endpoints. The Wazuh archives logs include those that do not trigger alerts on the Wazuh dashboard. Wazuh archives are disabled by default and can be easily enabled. The availability of detailed logs is crucial for effective threat hunting, providing comprehensive visibility into your environment.
 
-:doc:`Wazuh archives </user-manual/manager/wazuh-archives>` provide log retention, indexing, and querying capabilities that give concrete visibility to analyze events within specific monitored endpoints in your environment. This facilitates uncovering event causes, event locations, event communications, event timestamps, and related parent-child processes. The image below shows the archived logs in the **Discover** section on the Wazuh dashboard.
+:ref:`Wazuh archives <archiving_event_logs>` provide log retention, indexing, and querying capabilities that give concrete visibility to analyze events within specific monitored endpoints in your environment. This facilitates uncovering event causes, event locations, event communications, event timestamps, and related parent-child processes. The image below shows the archived logs in the **Discover** section on the Wazuh dashboard.
 
 .. thumbnail:: /images/getting-started/use-cases/threat-hunting/discover-archives-logs.png
    :title: wazuh-archives logs in the Discover section
@@ -74,7 +74,7 @@ You can proactively protect your systems and data by leveraging insights from th
 Third-party integration
 -----------------------
 
-Wazuh integrates with :doc:`third-party solutions </user-manual/manager/manual-integration>` that enhance threat hunting capabilities. These integrations enable users to consolidate data from diverse sources and automate threat detection and response. Wazuh seamlessly integrates with popular open source platforms like VirusTotal, AlienVault, URLHaus, MISP, and many others. This integration allows users to cross-reference telemetry with threat intelligence feeds, improving detection and response to threats.
+Wazuh integrates with :doc:`third-party solutions </user-manual/manager/integration-with-external-apis>` that enhance threat hunting capabilities. These integrations enable users to consolidate data from diverse sources and automate threat detection and response. Wazuh seamlessly integrates with popular open source platforms like VirusTotal, AlienVault, URLHaus, MISP, and many others. This integration allows users to cross-reference telemetry with threat intelligence feeds, improving detection and response to threats.
 
 Third-party integrations play a crucial role in proactive threat hunting, encompassing threat intelligence and a range of collaborative tools. These integrations provide essential insights into both established and emerging threats, enabling a comprehensive and forward-looking approach to threat detection. By promoting the exchange of information among seasoned security teams, these integrations foster a collective defense strategy, enhancing the effectiveness of the overall threat hunting process.
 

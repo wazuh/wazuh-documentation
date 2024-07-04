@@ -19,13 +19,10 @@ The Wazuh server comprises two main components; the :doc:`Wazuh manager <wazuh-m
       wazuh-indexer-integration
       alert-management
       event-logging
+      integration-with-external-apis
 
 ..
-      wazuh-archives
-      manual-integration
       manual-syslog-output
-      manual-database-output
-      manual-email-report/index
       configuring-cluster/index
       remote-service
       certificates
