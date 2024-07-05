@@ -154,7 +154,7 @@ Configuring the Wazuh indexer connection
 
    .. code-block:: console
 
-      # /var/ossec/bin/wazuh-keystore -f indexer -k username -v <INDEXER_USERNAME>
+      # echo '<INDEXER_USERNAME>' | /var/ossec/bin/wazuh-keystore -f indexer -k username
       # echo '<INDEXER_PASSWORD>' | /var/ossec/bin/wazuh-keystore -f indexer -k password
 
    .. note::
