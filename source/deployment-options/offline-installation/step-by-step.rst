@@ -154,7 +154,7 @@ Installing the Wazuh manager
 
    .. code-block:: console
 
-      # /var/ossec/bin/wazuh-keystore -f indexer -k username -v <INDEXER_USERNAME>
+      # echo '<INDEXER_USERNAME>' | /var/ossec/bin/wazuh-keystore -f indexer -k username
       # echo '<INDEXER_PASSWORD>' | /var/ossec/bin/wazuh-keystore -f indexer -k password   
 
    .. note:: The default offline-installation credentials are ``admin``:``admin``

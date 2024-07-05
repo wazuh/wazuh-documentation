@@ -35,11 +35,11 @@ Example
 
 .. code-block:: console
 
-    # /var/ossec/bin/wazuh-keystore -f indexer -k username -v admin
+    # echo 'admin' | /var/ossec/bin/wazuh-keystore -f indexer -k username
     # echo 'admin' | /var/ossec/bin/wazuh-keystore -f indexer -k password
 
 
-* Alternate ways to set the password:
+* Alternate ways to set values:
 
 .. code-block:: console
 
