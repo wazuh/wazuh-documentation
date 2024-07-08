@@ -53,7 +53,7 @@ Forwarding alerts
 
 The Wazuh manager forwards alerts to the Wazuh indexer by default for indexing and analytics capabilities. Additionally, the Wazuh manager provides the capability of configuring and forwarding alerts to other systems for analysis and backup.
 
-.. _manual_syslog_output:
+.. _configuring_syslog_output:
 
 Configuring syslog output
 ^^^^^^^^^^^^^^^^^^^^^^^^^
@@ -107,7 +107,7 @@ In the configuration above,
 -  The first ``<syslog_output>`` block sends all alerts without filtering to the syslog server with IP address ``192.168.1.240``.
 -  The second ``<syslog_output>`` block sends alerts to the syslog server ``192.168.1.241`` only if the alert level is higher than ``9``.
 
-.. _manual_email_report:
+.. _configuring_email_alerts:
 
 Configuring email alerts
 ^^^^^^^^^^^^^^^^^^^^^^^^^
@@ -460,7 +460,7 @@ Perform the steps below on your relay server to configure Postfix with Gmail.
 
    .. include:: /_templates/common/restart_manager.rst
 
-.. _manual_database_output:
+.. _configuring_database_output:
 
 Configuring database output
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^

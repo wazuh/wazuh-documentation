@@ -163,7 +163,7 @@ Worker node
 
 #. Execute the following command to check that everything worked as expected:
 
-   .. code-block: console
+   .. code-block:: console
 
       # /var/ossec/bin/cluster_control -l
 

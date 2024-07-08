@@ -66,7 +66,7 @@ The following considerations must be taken into account when the filters are set
 
 You can find the full configuration options for the Integrator module in the :doc:`integration </user-manual/reference/ossec-conf/integration>` section of the reference guide.
 
-.. _slack_manual_integration:
+.. _slack_integration:
 
 Slack
 -----
@@ -106,7 +106,7 @@ Once the configuration is complete, alerts start showing in the selected channel
    :align: center
    :width: 80%
 
-.. _pagerduty_manual_integration:
+.. _pagerduty_integration:
 
 PagerDuty
 ---------
