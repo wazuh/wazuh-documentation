@@ -6,18 +6,17 @@
 Troubleshooting
 ===============
 
-This section collects common issues that might occur when upgrading central components and provides steps to resolve them.
+This section collects common issues that might occur when upgrading the Wazuh central components and provides steps to resolve them.
 
 The 'vulnerability-detector' configuration is deprecated
 --------------------------------------------------------
 
-This warning appears because when upgrading the Wazuh manager, the ``/var/ossec/etc/ossec.conf`` file remains unchanged, retaining the previous configuration of the Vulnerability Detection module. In addition, invalid configuration warnings might appear for the ``interval``, ``min_full_scan_interval``, ``run_on_start`` and ``provider`` elements. To resolve this issue, update the configuration as specified in :doc:`/user-manual/capabilities/vulnerability-detection/configuring-scans`.
+This warning appears because when upgrading the Wazuh manager, the ``/var/ossec/etc/ossec.conf`` file remains unchanged, retaining the previous configuration of the Wazuh Vulnerability Detection module. In addition, invalid configuration warnings might appear for the ``interval``, ``min_full_scan_interval``, ``run_on_start`` and ``provider`` elements. To resolve this issue, update the configuration as specified in :doc:`/user-manual/capabilities/vulnerability-detection/configuring-scans`.
 
 No username and password found in the keystore
 ----------------------------------------------
 
-To ensure that alerts and vulnerabilities detected by the Vulnerability Detection module are indexed and displayed on the Wazuh dashboard, you need to add the credentials of the Wazuh indexer to the Wazuh manager keystore.
-
+To ensure that alerts and vulnerabilities detected by the Wazuh Vulnerability Detection module are indexed and displayed on the Wazuh dashboard, you need to add the credentials of the Wazuh indexer to the Wazuh manager keystore. In case you've forgotten your Wazuh indexer password, follow the :doc:`password management </user-manual/user-administration/password-management>` guide to reset the password.
 
 .. code-block:: console
 
@@ -43,6 +42,7 @@ Vulnerability detection seems to be disabled or has a problem
 This warning indicates that the Vulnerability Detection module might be disabled or there could be a configuration error. To troubleshoot:
 
 #. Ensure that ``vulnerability-detection`` is enabled in ``/var/ossec/etc/ossec.conf``.
+#. Search for ``<indexer>`` block in ``/var/ossec/etc/ossec.conf`` and ensure there are no misconfigurations or multiple blocks of the :doc:`indexer </user-manual/reference/ossec-conf/indexer>` section.
 #. Verify that the vulnerability index ``wazuh-states-vulnerabilities-*`` has been correctly created. You can check this under **Indexer Management** > **Index Management** > **Indices** configuration.
 #. If the index wasn't created, check the Wazuh manager logs for any errors or warnings, as the issue might be related to errors mentioned in previous sections:
 
