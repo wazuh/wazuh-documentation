@@ -1,14 +1,16 @@
 .. Copyright (C) 2015, Wazuh, Inc.
 
 .. meta::
-   :description: Learn how to integrate YARA with ChatGPT to detect when a malicious file is downloaded to a monitored endpoint in this proof of concept.
+   :description: Learn how to integrate Wazuh with YARA to detect the addition of malicious files, and use ChatGPT queries to enrich the YARA scan results with additional insights.
 
-YARA and ChatGPT integration for alert enrichment
-=================================================
+Leveraging LLMs for alert enrichment
+====================================
 
-YARA is a tool that detects and classifies malware artifacts. While YARA can identify known patterns and signatures of malicious activity, human intervention is often required to interpret and contextualize the output of YARA scans. ChatGPT is a generative AI chatbot developed by OpenAI. It can analyze and enrich YARA alerts with additional context, providing security teams with deeper insights into the nature and severity of detected threats.
+**Large Language Model** is a type of artificial intelligence (AI) model designed to understand, generate, and manipulate human language. These models are typically built using machine learning techniques, particularly those involving deep learning and neural networks. LLMs can add human-like intelligence to process data, enhancing the efficiency of various business and personal operations. *LLMs* such as the ones adopted by ChatGPT have gained massive popularity and are widely used in various industries including security operations.
 
-In this use case, we integrate YARA with ChatGPT to detect when a malicious file is downloaded to a monitored endpoint. The integration enriches YARA alerts with insights from ChatGPT about the potential incident. It also automatically responds by deleting the malicious file.
+YARA is a tool that detects and classifies malware artifacts. While YARA can identify known patterns and signatures of malicious activity, human intervention is often required to interpret and contextualize the output of YARA scans. ChatGPT is a generative AI chatbot developed by OpenAI. It provides users with various LLMs to process data. These LLMs can analyze and enrich YARA alerts with additional context, providing security teams with deeper insights into the nature and severity of detected threats.
+
+In this use case, we integrate Wazuh with YARA to detect when a malicious file is added to a monitored endpoint. The integration utilizes the Wazuh :doc:`FIM </user-manual/capabilities/file-integrity/index>` module to monitor a directory for new or modified files. When a file modification or addition is detected, the Wazuh :doc:`active response </user-manual/capabilities/active-response/index>` module triggers a YARA scan on the file. The Active response module automatically deletes the malicious file from the endpoint if it has a positive match with a malicious signature. The active response module then queries ChatGPT to enrich the YARA scan result with additional insight into the malicious file that helps security teams understand its nature, potential impact, and remediation.
 
 Infrastructure
 --------------
@@ -227,11 +229,11 @@ Perform the following steps to install YARA and configure the active response an
       $ sudo chown root:wazuh /var/ossec/active-response/bin/yara.sh
       $ sudo chmod 750 /var/ossec/active-response/bin/yara.sh
 
-#. Add the following within the ``<syscheck>`` block of the Wazuh agent ``/var/ossec/etc/ossec.conf`` configuration file to monitor the ``/tmp/yara/malware`` directory:
+#. Add the following within the ``<syscheck>`` block of the Wazuh agent ``/var/ossec/etc/ossec.conf`` configuration file to monitor the ``/home`` directory:
 
    .. code-block:: xml
 
-      <directories realtime="yes">/tmp</directories>
+      <directories realtime="yes">/home</directories>
 
 #. Restart the Wazuh agent to apply the configuration changes:
 
@@ -626,13 +628,13 @@ Testing the configuration
 Ubuntu 22.04 endpoint
 ^^^^^^^^^^^^^^^^^^^^^
 
-Run the following commands on the Ubuntu endpoint to download malware samples to the monitored ``/tmp`` directory:
+Run the following commands on the Ubuntu endpoint to download malware samples to the monitored ``/home`` directory:
 
 .. code-block:: console
 
-   # curl "https://wazuh-demo.s3-us-west-1.amazonaws.com/mirai" > /tmp/mirai
-   # curl "https://wazuh-demo.s3-us-west-1.amazonaws.com/xbash" > /tmp/xbash
-   # curl "https://wazuh-demo.s3-us-west-1.amazonaws.com/webshell" > /tmp/webshell
+   # curl "https://wazuh-demo.s3-us-west-1.amazonaws.com/mirai" > /home/mirai
+   # curl "https://wazuh-demo.s3-us-west-1.amazonaws.com/xbash" > /home/xbash
+   # curl "https://wazuh-demo.s3-us-west-1.amazonaws.com/webshell" > /home/webshell
 
 You can visualize the alert data in the Wazuh dashboard. To do this, go to the **Modules** > **Security events** tab and add the ``rule.groups:yara`` filter in the search bar to query the alerts.
 
@@ -661,7 +663,7 @@ The below image shows an example of an alert triggered when the provided ChatGPT
 Windows 11 endpoint
 ^^^^^^^^^^^^^^^^^^^
 
-Run the following commands via PowerShell to download malware samples to the monitored ``C:\Users\<USER>\Downloads`` directory:
+Run the following commands via PowerShell to download malware samples to the monitored ``C:\Users\`` directory:
 
 .. code-block:: powershell
 

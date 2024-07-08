@@ -76,7 +76,7 @@ We recommend creating entirely new certificates for your Wazuh server nodes. Per
 
    .. code-block:: console
 
-      # curl -sO https://packages.wazuh.com/4.7/wazuh-certs-tool.sh
+      # curl -sO https://packages.wazuh.com/|WAZUH_CURRENT_MINOR|/wazuh-certs-tool.sh
       # bash wazuh-certs-tool.sh -A
 
 #. Compress the certificates folder and copy it to the new Wazuh server node(s). You can make use of the ``scp`` utility to securely copy the compressed file:
@@ -125,7 +125,7 @@ We recommend you utilize pre-existing root-ca keys to generate certificates for 
 
    .. code-block:: console
 
-      # curl -sO https://packages.wazuh.com/4.7/wazuh-certs-tool.sh
+      # curl -sO https://packages.wazuh.com/|WAZUH_CURRENT_MINOR|/wazuh-certs-tool.sh
       # bash wazuh-certs-tool.sh -A wazuh-install-files/root-ca.pem wazuh-install-files/root-ca.key
 
 #. Copy the newly created certificates to the ``wazuh-install-files`` folder making sure not to replace the admin certificates:
@@ -170,7 +170,7 @@ We recommend you utilize pre-existing root-ca keys to generate certificates for 
 
          .. code-block:: console
 
-            # curl -sO https://packages.wazuh.com/4.7/wazuh-certs-tool.sh
+            # curl -sO https://packages.wazuh.com/|WAZUH_CURRENT_MINOR|/wazuh-certs-tool.sh
             # bash wazuh-certs-tool.sh -A
 
       -  Compress the certificates folder and copy it to the new Wazuh indexer node(s). You can make use of the ``scp`` utility to securely copy the compressed file:
@@ -664,7 +664,7 @@ Install and configure Filebeat
 
    .. code-block:: console
 
-      # curl -so /etc/filebeat/wazuh-template.json https://raw.githubusercontent.com/wazuh/wazuh/4.7/extensions/elasticsearch/7.x/wazuh-template.json
+      # curl -so /etc/filebeat/wazuh-template.json https://raw.githubusercontent.com/wazuh/wazuh/|WAZUH_CURRENT_MINOR|/extensions/elasticsearch/7.x/wazuh-template.json
       # chmod go+r /etc/filebeat/wazuh-template.json
 
 #. Install the Wazuh module for Filebeat:
@@ -803,8 +803,8 @@ A sample output of the command:
 
    Output
    NAME             TYPE    VERSION  ADDRESS
-   wazuh-server-1   master  4.7.2    10.0.0.1
-   wazuh-server-2   worker  4.7.2    10.0.0.2
+   wazuh-server-1   master  4.8.0    10.0.0.1
+   wazuh-server-2   worker  4.8.0    10.0.0.2
 
 Note that ``10.0.0.1``, ``10.0.0.2`` are example IP addresses.
 

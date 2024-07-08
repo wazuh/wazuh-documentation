@@ -70,4 +70,4 @@ Use cases
    poc-detect-hidden-process
    audit-commands-run-by-user
    detect-web-attack-shellshock
-   yara-and-chatgpt-integration
+   leveraging-llms-for-alert-enrichment

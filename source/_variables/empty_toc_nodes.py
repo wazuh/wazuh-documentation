@@ -21,7 +21,6 @@ emptyTocNodes = [
     'user-manual/agent/remove-agents/index',
     'user-manual/agent/listing/index',
     'user-manual/kibana-app/reference/index',
-    'user-manual/ruleset/ruleset-xml-syntax/index',
     'installation-guide/distributed-deployment/step-by-step-installation/elasticsearch-cluster/index',
     'installation-guide/distributed-deployment/step-by-step-installation/wazuh-cluster/index',
     'installation-guide/uninstalling-wazuh/index',

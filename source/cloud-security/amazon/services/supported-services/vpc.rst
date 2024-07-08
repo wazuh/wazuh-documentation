@@ -3,8 +3,6 @@
 .. meta::
   :description: Amazon VPC is a service that allows users to launch AWS resources in a logically isolated section of the AWS Cloud. Learn how to configure and monitor its changes with Wazuh.
 
-.. _amazon_vpc:
-
 Amazon Virtual Private Cloud (VPC)
 ==================================
 
