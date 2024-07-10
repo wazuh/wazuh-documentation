@@ -292,7 +292,7 @@ Wazuh also gives the ability to create and sign the admin and node(s) certificat
 
    You need to use a pre-existing root CA to create Wazuh server certificates:
 
-   -  If you already have a root CA after generating certificates for the Wazuh indexer or Wazuh dashboard nodes.
+   -  If you already have a root CA after generating certificates for the :doc:`Wazuh indexer <>` or :doc:`Wazuh dashboard <>` nodes.
    -  If you need to re-install a Wazuh server node or add a new node to your Wazuh server cluster.
 
 #. Create a ``config.yml`` file. You must specify the details for only the Wazuh server node(s) you want to create certificates for, depending on the cases described in the note above.
