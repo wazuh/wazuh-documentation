@@ -154,7 +154,7 @@ VirusTotal
 
 To set up this integration, follow these steps:
 
-#. Get your API key from the `VirusTotal API key <https://www.virustotal.com/gui/my-apikey>` page.
+#. Get your API key from the `VirusTotal API key <https://www.virustotal.com/gui/my-apikey>`__ page.
 
 #. Edit ``/var/ossec/etc/ossec.conf`` in the Wazuh server and include a configuration block such as the following. Replace ``<VIRUSTOTAL_API_KEY>`` with your VirusTotal API key.
 

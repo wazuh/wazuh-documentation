@@ -20,7 +20,7 @@ An alert threshold is the minimum severity level that must be exceeded for an al
 Configuration
 ^^^^^^^^^^^^^
 
-The alert threshold is configured in the ``/var/ossec/etc/ossec.conf`` configuration file on the Wazuh server within the ``<alerts>`` XML tag. 
+The alert threshold is configured in the ``/var/ossec/etc/ossec.conf`` configuration file on the Wazuh server within the ``<alerts>`` XML tag.
 
 The code block below shows the default alert threshold configuration for events and forwarding alerts via email:
 
@@ -36,7 +36,7 @@ The code block below shows the default alert threshold configuration for events 
 Where:
 
 -  The ``<log_alert_level>`` tag sets the minimum severity level to trigger alerts stored in the ``/var/ossec/logs/alerts/alerts.log`` and/or the ``/var/ossec/logs/alerts/alerts.json`` file. The default value is ``3``. The allowed value is any integer from ``1`` to ``16`` as referenced in the :doc:`rules classification </user-manual/ruleset/rules/rules-classification>` guide.
--  The ``<email_alert_level>`` tag sets the minimum severity level for an alert to generate an email notification. The default value is ``12``. The allowed value is any integer from ``1`` to ``16``. This setting overrides `granular email alert <granular_email_options>`_ configuration. However, the ``alert_by_email`` :ref:`option <rules_options>` within individual rules can override both global and granular alert level thresholds to trigger an email alert.
+-  The ``<email_alert_level>`` tag sets the minimum severity level for an alert to generate an email notification. The default value is ``12``. The allowed value is any integer from ``1`` to ``16``. This setting overrides :ref:`granular email alert <granular_email_options>` configuration. However, the ``alert_by_email`` :ref:`option <rules_options>` within individual rules can override both global and granular alert level thresholds to trigger an email alert.
 
 For details on configuring an alert threshold, refer to the :ref:`alerts reference <reference_ossec_alerts>` guide.
 
@@ -58,7 +58,7 @@ The Wazuh manager forwards alerts to the Wazuh indexer by default for indexing a
 Configuring syslog output
 ^^^^^^^^^^^^^^^^^^^^^^^^^
 
-You can configure the Wazuh server to send alerts to a syslog server using the syslog_output option. Forwarding alerts to a syslog server can be useful for centralized monitoring and custom reporting.
+You can configure the Wazuh server to send alerts to a syslog server using the :ref:`syslog_output <reference_ossec_syslog_output>` option. Forwarding alerts to a syslog server can be useful for centralized monitoring and custom reporting.
 
 Configuration
 ~~~~~~~~~~~~~
@@ -183,7 +183,9 @@ Restart the Wazuh manager service to apply the changes after every configuration
 
 .. warning::
 
-   Wazuh doesn't handle SMTP authentication. If your email service uses this, you need to `configure a server relay <smtp_server_with_authentication>`_.
+   Wazuh doesn't handle SMTP authentication. If your email service uses this, you need to :ref:`configure a server relay <smtp_server_with_authentication>`.
+
+.. _granular_email_options:
 
 Granular email options
 ~~~~~~~~~~~~~~~~~~~~~~
@@ -332,6 +334,8 @@ For example, the rule definition below sends an email every time rule ``502`` is
      <match>Ossec started</match>
      <description>Ossec server started.</description>
    </rule>
+
+.. _smtp_server_with_authentication:
 
 SMTP server with authentication
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -646,7 +650,7 @@ Perform the following steps to configure the Wazuh manager to send alerts and ot
    -  ``<database>`` specifies the name of the database in which to store the alerts. For example, ``Alerts_DB`` as specified in the configuration above.
    -  ``<type>`` specifies the type of database (MySQL or PostgreSQL). The allowed values are  ``mysql`` or ``pgsql``.
 
-   For more information on the database_output option, see the database_output section of the reference guide.
+   For more information on the database_output option, see the :ref:`database_output <reference_ossec_database_output>` section of the reference guide.
 
 #. Restart the Wazuh manager service to apply the changes:
 

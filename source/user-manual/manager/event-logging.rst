@@ -480,4 +480,4 @@ Use the Wazuh archives to query and display events related to the technique bein
             }
           },
 
-You can use events from the Wazuh archives to develop detection logic and write custom decoders and rules. You can also use the out-of-the-box ``wazuh-logtest`` tool to test and verify rules against provided logs. For more information, see the :doc:`Custom rules and decoders </user-manual/ruleset/rules/custom>` and the :doc:`wazuh-logtest </user-manual/reference/tools/wazuh-logtest>` documentation.
+You can use events from the Wazuh archives to develop detection logic and write custom decoders and rules. You can also use the out-of-the-box ``wazuh-logtest`` tool to test and verify rules against provided logs. For more information, see the :doc:`Custom rules </user-manual/ruleset/rules/custom>`, :doc:`Custom decoders </user-manual/ruleset/decoders/custom>`, and :doc:`wazuh-logtest </user-manual/reference/tools/wazuh-logtest>` documentation.

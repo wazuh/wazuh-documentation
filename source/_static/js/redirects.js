@@ -76,7 +76,7 @@ newUrls['4.8'] = [
   '/user-manual/manager/alert-management.html',
   '/user-manual/manager/event-logging.html',
   '/user-manual/manager/integration-with-external-apis.html',
-  '/user-manual/manager/wazuh-indexer-integration.html',
+  '/user-manual/manager/indexer-integration.html',
   '/user-manual/manager/wazuh-manager.html',
   '/user-manual/manager/wazuh-server-cluster.html',
 ];
