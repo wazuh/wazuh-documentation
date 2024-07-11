@@ -79,7 +79,7 @@ newUrls['4.8'] = [
   '/user-manual/manager/indexer-integration.html',
   '/user-manual/manager/wazuh-manager.html',
   '/user-manual/manager/wazuh-server-cluster.html',
-  '/user-manual/manager/wazuh-queue.html',
+  '/user-manual/manager/wazuh-server-queue.html',
 ];
 
 /* Pages no longer available in 4.8 */

@@ -385,7 +385,7 @@ Below is an example of the content of the wazuh-remoted.state file:
 Wazuh agent queue (queue_ad)
 ----------------------------
 
-The ``queue_ad`` queue resides in the agent-side :doc:`agent connection service </user-manual/reference/daemons/wazuh-agentd>` and manages event forwarding from the Wazuh agent to the Wazuh server. The queue collects logs like system events and security configuration assessment outputs before forwarding them to the Wazuh server. It also includes an anti-flooding mechanism that throttles event forwarding based on configurable parameters, mitigating the risk of overwhelming the processing capacity of the Wazuh server. See the :doc:`Wazuh agent queue <>` for more information about the Wazuh agent queue
+The ``queue_ad`` queue resides in the agent-side :doc:`agent connection service </user-manual/reference/daemons/wazuh-agentd>` and manages event forwarding from the Wazuh agent to the Wazuh server. The queue collects logs like system events and security configuration assessment outputs before forwarding them to the Wazuh server. It also includes an anti-flooding mechanism that throttles event forwarding based on configurable parameters, mitigating the risk of overwhelming the processing capacity of the Wazuh server.
 
 Wazuh queue decoder and rules
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^

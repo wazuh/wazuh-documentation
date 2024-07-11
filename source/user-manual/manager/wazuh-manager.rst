@@ -99,7 +99,7 @@ Where:
 -  ``<connection>`` specifies the type of incoming connection to accept. The default value is secure. The allowed values are ``secure`` and ``syslog``.
 -  ``<port>`` specifies the port to use to listen for events. The default port value is ``1514`` for secure connection and ``514`` for syslog connection. The allowed value is any port number between ``1`` and ``65535``.
 -  ``<protocol>`` specifies the protocol to use for the connection. The default value is ``tcp``. The allowed values are ``tcp`` and ``udp``.
--  ``<queue_size>`` allows you to set the capacity of the remote daemon queue in the number of Wazuh agent events. The default value is ``131072``. The allowed value is an integer number between ``1`` and ``262144``. The remote queue is only available for Wazuh agent events, not syslog events. This option only works when the connection is set to secure. To learn more about this configuration setting, check our documentation on the :doc:`Wazuh queue <wazuh-queue>`.
+-  ``<queue_size>`` allows you to set the capacity of the remote daemon queue in the number of Wazuh agent events. The default value is ``131072``. The allowed value is an integer number between ``1`` and ``262144``. The remote queue is only available for Wazuh agent events, not syslog events. This option only works when the connection is set to secure. To learn more about this configuration setting, check our documentation on the :doc:`Wazuh queue <wazuh-server-queue>`.
 
 More options can be found in the :ref:`remote <reference_ossec_remote>` section of the Wazuh documentation.
 
