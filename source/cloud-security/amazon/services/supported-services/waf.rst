@@ -8,8 +8,57 @@ Amazon Web Application Firewall (WAF)
 
 `Amazon WAF <https://aws.amazon.com/waf/>`_ is a web application firewall that helps protect your web applications from common web exploits that could affect application availability, compromise security, or consume excessive resources. ``AWS WAF`` gives you control over which traffic to allow or block to your web applications by defining customizable web security rules. 
 
-Amazon configuration
+Amazon configuration native integration
+---------------------------------------
+
+#. :doc:`Create a new </cloud-security/amazon/services/prerequisites/S3-bucket>` S3 bucket. (If you want to use an already created one, skip this step).
+
+#. Go to Services > Security, Identity, & Compliance > WAF & Shield
+
+    .. thumbnail::  /images/aws/waf-native-1.png
+      :align: center
+      :width: 70%
+
+#. Click *Create web ACL*
+
+    .. thumbnail::  /images/aws/waf-native-2.png
+      :align: center
+      :width: 70%
+
+#. Put a name to your web ACL and click on the *Next* button at the bottom of the page:
+
+    .. thumbnail::  /images/aws/waf-native-3.png
+      :align: center
+      :width: 70%
+
+#. Click *Add rules* to *add managed rule groups* or *add my own rules and groups* and click on the *Next* button at the bottom of the page.:
+
+    .. thumbnail::  /images/aws/waf-native-4.png
+      :align: center
+      :width: 70%
+
+#. Set rule priority and click on the *Next* button at the bottom of the page:
+
+    .. thumbnail::  /images/aws/waf-native-5.png
+      :align: center
+      :width: 70%
+
+#. Put a name to your CloudWatch metric and click on the *Next* button at the bottom of the page:
+
+    .. thumbnail::  /images/aws/waf-native-6.png
+      :align: center
+      :width: 70%
+
+#. Review the ACL web and click on the *Create web ACL* button at the bottom of the page to create it
+
+    .. thumbnail::  /images/aws/waf-native-7.png
+      :align: center
+      :width: 70%  
+
+Amazon configuration with Kinesis
 --------------------
+
+.. deprecated:: 5.0
 
 #. :doc:`Create a new </cloud-security/amazon/services/prerequisites/S3-bucket>` S3 bucket. (If you want to use an already created one, skip this step).
 
