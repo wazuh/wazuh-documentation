@@ -73,6 +73,13 @@ newUrls['4.8'] = [
   '/proof-of-concept-guide/leveraging-llms-for-alert-enrichment.html',
   '/user-manual/ruleset/rules/default.html',
   '/user-manual/ruleset/rules/rules-classification.html',
+  '/user-manual/manager/alert-management.html',
+  '/user-manual/manager/event-logging.html',
+  '/user-manual/manager/integration-with-external-apis.html',
+  '/user-manual/manager/indexer-integration.html',
+  '/user-manual/manager/wazuh-manager.html',
+  '/user-manual/manager/wazuh-server-cluster.html',
+  '/user-manual/manager/wazuh-server-queue.html',
 ];
 
 /* Pages no longer available in 4.8 */
@@ -87,6 +94,15 @@ removedUrls['4.8'] = [
   '/user-manual/ruleset/getting-started.html',
   '/user-manual/ruleset/update.html',
   '/user-manual/ruleset/rules-classification.html',
+  '/user-manual/manager/alert-threshold.html',
+  '/user-manual/manager/manual-database-output.html',
+  '/user-manual/manager/manual-email-report/index.html',
+  '/user-manual/manager/manual-email-report/smtp-authentication.html',
+  '/user-manual/manager/manual-integration.html',
+  '/user-manual/manager/manual-syslog-output.html',
+  '/user-manual/manager/certificates.html',
+  '/user-manual/manager/remote-service.html',
+  '/user-manual/manager/wazuh-archives.html',
   '/migration-guide/migrating-from-ossec/index.html',
   '/migration-guide/migrating-from-ossec/ossec-server.html',
   '/migration-guide/migrating-from-ossec/ossec-agent.html',
@@ -120,6 +136,66 @@ redirections.push(
     'target': ['4.7=>4.8', '4.8=>4.7'],
     '4.7': '/user-manual/ruleset/rules-classification.html',
     '4.8': '/user-manual/ruleset/rules/rules-classification.html',
+  },
+  {
+    'target': ['4.7=>4.8', '4.8=>4.7'],
+    '4.7': '/user-manual/manager/alert-threshold.html',
+    '4.8': '/user-manual/manager/alert-management.html#alert-threshold',
+  },
+  {
+    'target': ['4.7=>4.8', '4.8=>4.7'],
+    '4.7': '/user-manual/manager/manual-database-output.html',
+    '4.8': '/user-manual/manager/alert-management.html#configuring-database-output',
+  },
+  {
+    'target': ['4.7=>4.8', '4.8=>4.7'],
+    '4.7': '/user-manual/manager/manual-email-report/index.html',
+    '4.8': '/user-manual/manager/alert-management.html#configuring-email-alerts',
+  },
+  {
+    'target': ['4.7=>4.8', '4.8=>4.7'],
+    '4.7': '/user-manual/manager/manual-email-report/smtp-authentication.html',
+    '4.8': '/user-manual/manager/alert-management.html#smtp-server-with-authentication',
+  },
+  {
+    'target': ['4.7=>4.8', '4.8=>4.7'],
+    '4.7': '/user-manual/manager/manual-integration.html',
+    '4.8': '/user-manual/manager/integration-with-external-apis.html',
+  },
+  {
+    'target': ['4.7=>4.8', '4.8=>4.7'],
+    '4.7': '/user-manual/manager/manual-syslog-output.html',
+    '4.8': '/user-manual/manager/alert-management.html#configuring-syslog-output',
+  },
+  {
+    'target': ['4.7=>4.8', '4.8=>4.7'],
+    '4.7': '/user-manual/manager/wazuh-archives.html',
+    '4.8': '/user-manual/manager/event-logging.html#archiving-event-logs',
+  },
+  {
+    'target': ['4.7=>4.8', '4.8=>4.7'],
+    '4.7': '/user-manual/manager/configuring-cluster/index.html',
+    '4.8': '/user-manual/manager/wazuh-server-cluster.html#wazuh-cluster-nodes-configuration',
+  },
+  {
+    'target': ['4.7=>4.8', '4.8=>4.7'],
+    '4.7': '/user-manual/manager/configuring-cluster/basics.html',
+    '4.8': '/user-manual/manager/wazuh-server-cluster.html',
+  },
+  {
+    'target': ['4.7=>4.8', '4.8=>4.7'],
+    '4.7': '/user-manual/manager/configuring-cluster/advanced-settings.html',
+    '4.8': '/user-manual/manager/wazuh-server-cluster.html#agent-connections',
+  },
+  {
+    'target': ['4.7=>4.8', '4.8=>4.7'],
+    '4.7': '/user-manual/manager/certificates.html',
+    '4.8': '/user-manual/manager/wazuh-server-cluster.html#certificates-deployment',
+  },
+  {
+    'target': ['4.7=>4.8', '4.8=>4.7'],
+    '4.7': '/user-manual/manager/remote-service.html',
+    '4.8': 'user-manual/manager/wazuh-manager.html#agent-connection-service-configuration',
   },
 );
 

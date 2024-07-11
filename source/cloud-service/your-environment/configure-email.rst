@@ -8,7 +8,7 @@
 SMTP configuration
 ==================
 
-Wazuh can be :ref:`configured to send email alerts <manual_email_report>` to one or more email addresses when certain rules are triggered or for daily event reports.
+Wazuh can be :ref:`configured to send email alerts <configuring_email_alerts>` to one or more email addresses when certain rules are triggered or for daily event reports.
 
 This configuration requires an SMTP and you can use your own SMTP or the Wazuh Cloud SMTP.
 

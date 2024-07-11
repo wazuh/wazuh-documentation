@@ -91,6 +91,7 @@ Installing Filebeat
           .. include:: /_templates/installations/filebeat/common/apt/install_filebeat.rst
 
 
+.. _installation_configuring_filebeat:
 
 Configuring Filebeat
 ^^^^^^^^^^^^^^^^^^^^
