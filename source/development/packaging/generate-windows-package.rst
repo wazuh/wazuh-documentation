@@ -106,27 +106,22 @@ Execute the ``generate_wazuh_msi.ps1`` script, with the different options you de
       USAGE:
           ./generate_wazuh_msi.ps1  -MSI_NAME {{ NAME }} -SIGN {{ yes|no }} -WIX_TOOLS_PATH {{ PATH }} -SIGN_TOOLS_PATH {{ PATH }} -CERTIFICATE_PATH {{ PFX_CERT_PATH }} -CERTIFICATE_PASSWORD {{ PFX_CERT_PASSWORD }}
 
-Below, you will find an example of how to build a Windows msi package.
+Below is an example of how to build a Windows MSI package.
 
 .. code-block:: console
 
-  # ./generate_wazuh_msi.ps1 -MSI_NAME mypackage.msi -SIGN no
+   # ./generate_wazuh_msi.ps1 -MSI_NAME mypackage.msi -SIGN no
 
-.. note::
+Here is an example of using a specific certificate and password.
 
-  If the ``WIX_TOOLS`` and/or ``SIGN_TOOLS`` binaries are not added to the environment PATH, it will be necessary to specify the path,
-  as shown in the following example:
+.. code-block:: console
 
-  .. code-block:: console
+   # ./generate_wazuh_msi.ps1 -MSI_NAME mypackage.msi -SIGN yes -CERTIFICATE_PATH .\certificate.pfx -CERTIFICATE_PASSWORD mypassword
 
-    # ./generate_wazuh_msi.ps1 -MSI_NAME mypackage.msi -SIGN yes -WIX_TOOLS_PATH C:\path_to_wix_tools_binary_files -SIGN_TOOLS_PATH C:\path_to_sign_tools_binary_files
+If you don't specify the ``CERTIFICATE_PATH`` and ``CERTIFICATE_PASSWORD`` parameters, the best matching certificate from the Certificate Store is selected for signing the package. For more details, check the `/a option of the sign command in SignTool <https://learn.microsoft.com/en-us/windows/win32/seccrypto/signtool#sign-command-options>`__ .
 
-.. note::
+If the ``WIX_TOOLS`` and/or ``SIGN_TOOLS`` binaries are not added to the environment PATH, specify the path as shown in the following example:
 
-  If the ``CERTIFICATE_PATH`` and ``CERTIFICATE_PASSWORD`` parameters are not indicated, the certificate to be used for signing the package will be chosen as the best match
-  from the Certificate Store, using the ``/a`` `parameter of the signtool <https://learn.microsoft.com/es-es/windows/win32/seccrypto/signtool#sign-command-options>`__.
-  If not, the indicated certificate together with the password will be used:
+.. code-block:: console
 
-  .. code-block:: console
-
-    # ./generate_wazuh_msi.ps1 -MSI_NAME mypackage.msi -SIGN yes -CERTIFICATE_PATH .\certificate.pfx -CERTIFICATE_PASSWORD mypassword
+   # ./generate_wazuh_msi.ps1 -MSI_NAME mypackage.msi -SIGN yes -WIX_TOOLS_PATH C:\path_to_wix_tools_binary_files -SIGN_TOOLS_PATH C:\path_to_sign_tools_binary_files
