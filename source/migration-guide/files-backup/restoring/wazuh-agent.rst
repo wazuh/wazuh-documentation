@@ -178,7 +178,7 @@ Perform the steps below to restore Wazuh agent files on a macOS endpoint.
 
    .. code-block:: console
 
-      # sudo launchctl unload /Library/LaunchDaemons/com.wazuh.agent.plist
+      # launchctl unload /Library/LaunchDaemons/com.wazuh.agent.plist
 
 #. Restore Wazuh agent data, certificates, and configuration files:
 
@@ -204,7 +204,7 @@ Perform the steps below to restore Wazuh agent files on a macOS endpoint.
 
    .. code-block:: console
 
-      # sudo launchctl load /Library/LaunchDaemons/com.wazuh.agent.plist
+      # launchctl load /Library/LaunchDaemons/com.wazuh.agent.plist
 
 Verifying data restoration
 ^^^^^^^^^^^^^^^^^^^^^^^^^^
