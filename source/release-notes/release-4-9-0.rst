@@ -40,7 +40,7 @@ Wazuh agent
 ^^^^^^^^^^^
 
 -  `#19753 <https://github.com/wazuh/wazuh/pull/19753>`__ Removed the directory ``/boot`` from the default FIM settings for AIX.
--  `#21690 <https://github.com/wazuh/wazuh/pull/21690>`__ Improved debugging logs for Windows registry monitoring configuration. Now the ``Wrong registry value type`` warnings include the registry path to help troubleshooting. Thanks to Zafer Balkan (@zbalkan).
+-  `#21690 <https://github.com/wazuh/wazuh/pull/21690>`__ Improved debugging logs for Windows registry monitoring configuration. Now the ``Wrong registry value type`` warnings include the registry path to help troubleshooting. Thanks to Zafer Balkan (`@zbalkan <https://github.com/zbalkan>`__).
 -  `#21287 <https://github.com/wazuh/wazuh/pull/21287>`__ Added Amazon Linux 1 and Amazon Linux 2023 support for the Wazuh installation assistant.
 -  `#23137 <https://github.com/wazuh/wazuh/pull/23137>`__ Added Journald support in Logcollector.
 -  `#20727 <https://github.com/wazuh/wazuh/pull/20727>`__ Fixed Windows Agent 4.8.0 permission errors on Windows 11 after upgrade.
