@@ -116,7 +116,7 @@ Wazuh uses four indices to store several event types:
       :align: center
       :width: 80%
 
--  **wazuh-archives** index stores all events received from the Wazuh server regardless of whether they trigger an alert. The :doc:`Wazuh archives </user-manual/manager/wazuh-archives>` use this index to enable log retention and querying capabilities that offer deeper insight into events happening within monitored endpoints. Wazuh archives are disabled by default because of the huge storage requirements needed to store all the logs. The image below shows archived events in the **Discover** section of Wazuh dashboard with the index pattern set to ``wazuh-archives-*``.
+-  **wazuh-archives** index stores all events received from the Wazuh server regardless of whether they trigger an alert. The :ref:`Wazuh archives <archiving_event_logs>` use this index to enable log retention and querying capabilities that offer deeper insight into events happening within monitored endpoints. Wazuh archives are disabled by default because of the huge storage requirements needed to store all the logs. The image below shows archived events in the **Discover** section of Wazuh dashboard with the index pattern set to ``wazuh-archives-*``.
 
    .. thumbnail:: /images/getting-started/use-cases/log-data-analysis/events-in-index-pattern.png
       :title: Events in wazuh-archives-* index pattern
