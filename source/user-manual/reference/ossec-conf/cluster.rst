@@ -82,7 +82,7 @@ Specifies the role of the node.
 key
 ^^^
 
-Defines the key used to encrypt the communication between the nodes. This key must be 32 characters long. Refer to the :ref:`configuring-cluster` for information on how to generate a key.
+Defines the key used to encrypt the communication between the nodes. This key must be 32 characters long. Refer to the :ref:`configuring-cluster <wazuh_cluster_nodes_configuration>` for information on how to generate a key.
 
 .. note::
 	This key must be the same for all of the cluster nodes.
