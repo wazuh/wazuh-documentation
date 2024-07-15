@@ -86,15 +86,13 @@ And we can see the preconfigured playbooks we have by running the command below.
 
 Using the wazuh-production-ready playbook, we will deploy a Wazuh manager and indexer cluster using Ansible.
 
+If you are running Ansible on macOS, ensure Docker is installed on your system. Modify the ``macos_localhost`` variable in ``wazuh-production-ready.yml`` from ``false`` to ``true`` to ensure the certificates are created correctly.
+
 Let’s see below, the content of the YAML file ``/etc/ansible/roles/wazuh-ansible/playbooks/wazuh-production-ready.yml`` that we are going to run for a complete installation of the server.
 
 .. code-block:: console
 
    # cat wazuh-production-ready.yml
-
-.. warning::
-
-   In case you are running ansible on macOS, for the certificates to be created correctly you must have Docker installed on your system and you must change the "macos_localhost" variable from "false" to "true" for the certificates to be created correctly.
 
 .. code-block:: yaml
    :class: output
