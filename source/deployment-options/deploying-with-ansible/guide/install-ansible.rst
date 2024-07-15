@@ -260,7 +260,7 @@ Before deploying on your Windows endpoints, you must set Ansible to use port ``5
    [windows_agents]
    agent1 ansible_host=<WAZUH_AGENT_1_IP_ADDRESS> ansible_port=5986
    agent2 ansible_host=<WAZUH_AGENT_2_IP_ADDRESS> ansible_port=5986
-   agent3 ansible_host=<WAZUH_AGENT_3_IP_ADDRESS>ansible_port=5986
+   agent3 ansible_host=<WAZUH_AGENT_3_IP_ADDRESS> ansible_port=5986
 
 Where:
 
