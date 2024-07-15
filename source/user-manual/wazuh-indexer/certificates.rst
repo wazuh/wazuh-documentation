@@ -112,20 +112,19 @@ After running the script, the directory ``wazuh-certificates`` will be created a
 Wazuh certificates tool in Docker
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-The Wazuh certificates tool can also be used in a Docker container. To do so, run the following command:
+You can use the Wazuh certificates tool in a Docker container. Ensure the Docker container has access to:
 
-    .. code-block:: console
+-  The ``config.yml`` file
+-  The directory where the certificates will be stored
 
-        # docker run -v /path/to/config.yml:/config/certs.yml -v /path/to/wazuh-certificates/:/certificates/ -itd wazuh/wazuh-cert-tool
+Run the following command. Replace ``/path/to/config.yml`` and ``/path/to/wazuh-certificates/`` with the actual paths on the host machine. We recommend using absolute paths. Name the certificates directory ``wazuh-certificates``.
 
-The Docker container must have access to the ``config.yml`` file and the directory where the certificates will be stored. To achieve this, the ``-v`` option is used to mount the directories.
+.. code-block:: console
 
-  .. warning::
+   # docker run -v /path/to/config.yml:/config/certs.yml -v /path/to/wazuh-certificates/:/certificates/ -itd wazuh/wazuh-cert-tool
 
-      The ``/path/to/config.yml`` and ``/path/to/wazuh-certificates/`` directories must be replaced with the actual paths in the host machine. We recommend using absolute paths and the certificates directories must be named ``wazuh-certificates``.
+After running the command, the container is created and the certificates are stored in the specified directory.
 
-After running the command, the container will be created and the certificates will be stored in the specified directory.
+.. note::
 
-  .. note::
-
-      This option can be used to create the certificates in macOS or Windows hosts, and then copy them to the Wazuh installation.
+   You can use this option to create certificates on macOS and Windows hosts and then copy them to the Wazuh installation.
