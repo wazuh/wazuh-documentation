@@ -19,7 +19,7 @@ Amazon configuration native integration
       :align: center
       :width: 70%
 
-#. Click *Create web ACL*
+#. Click on *Create web ACL*:
 
     .. thumbnail::  /images/aws/waf-native-2.png
       :align: center
@@ -31,7 +31,7 @@ Amazon configuration native integration
       :align: center
       :width: 70%
 
-#. Click *Add rules* to *add managed rule groups* or *add my own rules and groups* and click on the *Next* button at the bottom of the page.:
+#. Click *Add rules* to *add managed rule groups* or *add my own rules and groups*:
 
     .. thumbnail::  /images/aws/waf-native-4.png
       :align: center
@@ -43,7 +43,7 @@ Amazon configuration native integration
       :align: center
       :width: 70%
 
-#. Put a name to your CloudWatch metric and click on the *Next* button at the bottom of the page:
+#. Put a name to your CloudWatch metric:
 
     .. thumbnail::  /images/aws/waf-native-6.png
       :align: center
