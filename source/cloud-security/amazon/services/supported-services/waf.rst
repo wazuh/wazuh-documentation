@@ -13,7 +13,7 @@ Amazon configuration native integration
 
 #. :doc:`Create a new </cloud-security/amazon/services/prerequisites/S3-bucket>` S3 bucket. (If you want to use an already created one, skip this step).
 
-#. Go to Services > Security, Identity, & Compliance > WAF & Shield
+#. Go to Services > Security, Identity, & Compliance > WAF & Shield:
 
     .. thumbnail::  /images/aws/waf-native-1.png
       :align: center
@@ -25,25 +25,25 @@ Amazon configuration native integration
       :align: center
       :width: 70%
 
-#. Put a name to your web ACL and click on the *Next* button at the bottom of the page:
+#. Choose a name for your Web ACL and click on *Next*:
 
     .. thumbnail::  /images/aws/waf-native-3.png
       :align: center
       :width: 70%
 
-#. Click *Add rules* to *add managed rule groups* or *add my own rules and groups*:
+#. Click on *Add rules* and select which type of rule to add, then click on *Next*:
 
     .. thumbnail::  /images/aws/waf-native-4.png
       :align: center
       :width: 70%
 
-#. Set rule priority and click on the *Next* button at the bottom of the page:
+#. Set the rules priority and click on *Next*:
 
     .. thumbnail::  /images/aws/waf-native-5.png
       :align: center
       :width: 70%
 
-#. Put a name to your CloudWatch metric:
+#. Choose a name for your CloudWatch metric and click on *Next*:
 
     .. thumbnail::  /images/aws/waf-native-6.png
       :align: center
