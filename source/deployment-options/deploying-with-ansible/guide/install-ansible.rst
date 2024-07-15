@@ -288,7 +288,7 @@ Testing the Ansible connection to remote endpoints
 
       Python 3 usage: In some systems, such as Ubuntu 18, we may have problems with the use of Python interpreter due to its version and the default path where Ansible checks for it. If this happens, we must add  the following line to the Ansible host file:
 
-      ``<ENDPOINT_IP> ansible_ssh_user=<SSH_USER>``
+      ``<ENDPOINT_IP_ADDRESS> ansible_ssh_user=<SSH_USER>``
 
       ``ansible_python_interpreter=/usr/bin/python3``
 
