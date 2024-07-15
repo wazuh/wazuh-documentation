@@ -3,7 +3,9 @@ All notable changes to this project will be documented in this file.
 
 ## [v4.8.1]
 
-- Support for Wazuh 4.8.1
+### Adeed
+
+- Added behavior of the ruleset occurs when several conditionals are used. ([#7506](https://github.com/wazuh/wazuh-documentation/pull/7506))
 
 ## [v4.8.0]
 
