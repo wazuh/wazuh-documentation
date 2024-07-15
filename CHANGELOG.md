@@ -5,7 +5,18 @@ All notable changes to this project will be documented in this file.
 
 ### Added
 
-- Added behavior of the ruleset occurs when several conditionals are used. ([#7506](https://github.com/wazuh/wazuh-documentation/pull/7506))
+- Added clarification about the conditions to trigger an alert. ([#7506](https://github.com/wazuh/wazuh-documentation/pull/7506))
+
+### Changed
+
+- Updated the available options table for `wazuh-passwords-tool.sh`. ([#7412](https://github.com/wazuh/wazuh-documentation/pull/7412))
+- Updated the `azure-storage-blob` dependency version reference to `12.19.1`. ([#7450](https://github.com/wazuh/wazuh-documentation/pull/7450))
+- Updated `docker` and `urllib3` package version references. ([#7483](https://github.com/wazuh/wazuh-documentation/pull/7483))
+- Replaced `:ref:` with `:doc:` in AWS documentation. ([#7487](https://github.com/wazuh/wazuh-documentation/pull/7487))
+
+### Fixed
+
+- Fixed MS Graph module configuration example. ([#7378] (https://github.com/wazuh/wazuh-documentation/pull/7378))
 
 ## [v4.8.0]
 
