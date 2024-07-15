@@ -86,6 +86,8 @@ And we can see the preconfigured playbooks we have by running the command below.
 
 Using the wazuh-production-ready playbook, we will deploy a Wazuh manager and indexer cluster using Ansible.
 
+If you are running Ansible on macOS, ensure Docker is installed on your system. Modify the ``macos_localhost`` variable in ``wazuh-production-ready.yml`` from ``false`` to ``true`` to ensure the certificates are created correctly.
+
 Let’s see below, the content of the YAML file ``/etc/ansible/roles/wazuh-ansible/playbooks/wazuh-production-ready.yml`` that we are going to run for a complete installation of the server.
 
 .. code-block:: console
@@ -139,6 +141,7 @@ Let’s see below, the content of the YAML file ``/etc/ansible/roles/wazuh-ansib
              name: node-6
              ip: "{{ hostvars.dashboard.private_ip }}"
              role: dashboard
+         macos_localhost: false
        tags:
          - generate-certs
 
@@ -302,7 +305,7 @@ The contents of the host file is:
    ansible_ssh_user=centos
    ansible_ssh_private_key_file=/path/to/ssh/key.pem
    ansible_ssh_extra_args='-o StrictHostKeyChecking=no'
- 
+
 Let’s take a closer look at the content.
 
 -  The ``ansible_host`` variable should contain the public IP address/FQDN for each node.
@@ -332,7 +335,7 @@ Now, we are ready to run the playbook and start the installation. However, some 
          # systemctl status wazuh-indexer
 
    -  Wazuh dashboard
-    
+
       .. code-block:: console
 
          # systemctl status wazuh-dashboard
@@ -344,13 +347,13 @@ Now, we are ready to run the playbook and start the installation. However, some 
          # systemctl status wazuh-manager
 
    -  Filebeat.
-    
+
       .. code-block:: console
 
          # systemctl status filebeat
 
 .. note::
-	
+
 	- 	The Wazuh dashboard can be accessed by visiting ``https://<dashboard_server_IP>``
 
 	- 	The default credentials for Wazuh deployed using ansible is:
