@@ -13,5 +13,6 @@ In this section, we outline the requirements for setting up Wazuh to retrieve lo
 
    dependencies
    S3-bucket
+   iam-identities
    credentials
    considerations
