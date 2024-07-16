@@ -29,7 +29,6 @@ Other
 -  `#24292 <https://github.com/wazuh/wazuh/pull/24292>`__ Added external ``azure-core`` and ``isodate`` library dependencies.
 -  `#24108 <https://github.com/wazuh/wazuh/pull/24108>`__ Upgraded external ``Jinja2`` library dependency version to ``3.1.4``.
 -  `#23925 <https://github.com/wazuh/wazuh/pull/23925>`__ Upgraded external ``requests`` library dependency version to ``2.32.2``.
--  `#24292 <https://github.com/wazuh/wazuh/pull/24292>`__ Upgraded external ``azure-storage-blob`` library dependency version to ``12.19.1``.
 -  `#24292 <https://github.com/wazuh/wazuh/pull/24292>`__ Upgraded external ``typing-extensions`` library dependency version to ``4.12.2``.
 
 Packages
