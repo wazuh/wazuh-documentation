@@ -100,4 +100,38 @@ Wazuh requires an AWS IAM user with the necessary permissions to collect log dat
          :align: center
          :width: 80%
 
-#. 
+#. Obtain the necessary access credentials for the IAM user.
+
+   #. Click on the created IAM user, go to **Security credentials**, scroll down to **Access keys**, and click **Create access key**.
+
+      .. thumbnail:: /images/cloud-security/aws/config-iam-identities/security-credentials.png
+         :title: Create access key
+         :alt: Create access key
+         :align: center
+         :width: 80%
+
+   #. Select and confirm the **Command Line Interface (CLI)** use case and click **Next**.
+
+      .. thumbnail:: /images/cloud-security/aws/config-iam-identities/command-line-interface.png
+         :title: Command Line Interface selection
+         :alt: Command Line Interface selection
+         :align: center
+         :width: 80%
+
+   #. Assign a description tag value and click **Create access key**.
+
+      .. thumbnail:: /images/cloud-security/aws/config-iam-identities/create-access-key.png
+         :title: Create access key
+         :alt: Create access key
+         :align: center
+         :width: 80%
+
+   #. Save the access credentials, you will use them later to configure the Wazuh module for AWS. If you don't copy the credentials before you click **Done**, you cannot recover it later. However, you can create a new secret access key.
+
+      .. thumbnail:: /images/cloud-security/aws/config-iam-identities/save-access-keys.png
+         :title: Save access keys
+         :alt: Save access keys
+         :align: center
+         :width: 80%
+
+Depending on the service that will be monitored, the AWS IAM user will need a different set of permissions. The permissions required for each service are explained on each page of the supported services listed in the :doc:`supported services </cloud-security/amazon/services/supported-services/index>` section.
