@@ -6,9 +6,11 @@
 Configuring AWS IAM Identities
 ==============================
 
-In AWS Identity and Access Management (IAM), an identity represents a human user or programmatic workload that can be authenticated and authorized to perform actions in AWS. The Wazuh module for AWS requires authentication and authorization through an IAM identity to integrate with :doc:`supported </cloud-security/amazon/services/supported-services/index>` AWS services.
+In AWS Identity and Access Management (IAM), an identity represents a human user or programmatic workload that can be authenticated and authorized to perform actions in AWS. The Wazuh module for AWS requires authentication and authorization through an IAM identity to integrate with :doc:`supported <../supported-services/index>` AWS services.
 
 In the following sections, we describe how to create an IAM user group, how to create an AWS IAM user with access credentials, and how to add the user to the group.
+
+.. _iam_identities_create_iam_user_group:
 
 Creating an IAM user group
 --------------------------
