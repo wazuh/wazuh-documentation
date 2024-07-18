@@ -55,6 +55,8 @@ Creating an IAM user group
          :align: center
          :width: 80%
 
+.. _iam_identities_create_iam_user:
+
 Creating an IAM user
 --------------------
 
