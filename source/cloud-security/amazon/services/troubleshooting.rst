@@ -107,7 +107,7 @@ The module does not work and the following error messages appear in the ``ossec.
 
 **Solution**
 
-No authentication method was provided within the configuration of the module. Check the :ref:`Configuring AWS credentials <amazon_credentials>` section to learn more about the different options available and how to configure them.
+No authentication method was provided within the configuration of the module. Check the :doc:`Configuring AWS credentials <prerequisites/credentials>` section to learn more about the different options available and how to configure them.
 
 
 Invalid credentials to access S3 Bucket
@@ -154,7 +154,7 @@ The module does not work and the following error messages appear in the ``ossec.
 
 **Solution**
 
-No credentials were provided to attempt to access to CloudWatch Logs or that the credentials provided don't grant access to CloudWatch Logs. Check the :ref:`Configuring AWS credentials <amazon_credentials>` section to learn more about the different options available and how to configure them.
+No credentials were provided to attempt to access to CloudWatch Logs or that the credentials provided don't grant access to CloudWatch Logs. Check the :doc:`Configuring AWS credentials <prerequisites/credentials>` section to learn more about the different options available and how to configure them.
 
 
 There are no AWS alerts present in the Wazuh UI
@@ -214,7 +214,7 @@ Error codes reference
     +-----------+-------------------------------------------------------------------+------------------------------------------------------------------------------------------------------------------------------------------------------+
     | 2         | SIGINT                                                            | The module stopped due to an interrupt signal.                                                                                                       |
     +-----------+-------------------------------------------------------------------+------------------------------------------------------------------------------------------------------------------------------------------------------+
-    | 3         | Invalid credentials to access S3 bucket                           | Make sure that your credentials are OK. For more information, see the :ref:`Configuring AWS credentials <amazon_credentials>` section.               |
+    | 3         | Invalid credentials to access S3 bucket                           | Make sure that your credentials are OK. For more information, see the :doc:`Configuring AWS credentials <prerequisites/credentials>` section.        |
     +-----------+-------------------------------------------------------------------+------------------------------------------------------------------------------------------------------------------------------------------------------+
     | 4         | boto3 module missing                                              | Install ``boto3`` library. For more information, see the :doc:`Installing dependencies <prerequisites/dependencies>` section.                        |
     +-----------+-------------------------------------------------------------------+------------------------------------------------------------------------------------------------------------------------------------------------------+

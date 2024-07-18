@@ -171,7 +171,7 @@ Wazuh configuration
       </wodle>
 
     .. note::
-      In this example, the ``aws_profile`` authentication parameter was used. Check the :ref:`credentials <amazon_credentials>` section to learn more about the different authentication options and how to use them.
+      In this example, the ``aws_profile`` authentication parameter was used. Check the :doc:`credentials <../prerequisites/credentials>` section to learn more about the different authentication options and how to use them.
 
 #. Save the changes and restart Wazuh to apply the changes. The service can be manually restarted using the following command outside the Wazuh UI:
 

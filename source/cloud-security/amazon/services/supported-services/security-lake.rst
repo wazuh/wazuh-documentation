@@ -214,7 +214,7 @@ Authentication
 
 
 
-More information about the different authentication methods can be found in the :ref:`Configuring AWS credentials <amazon_credentials>` documentation.
+More information about the different authentication methods can be found in the :doc:`Configuring AWS credentials <../prerequisites/credentials>` documentation.
 
 Visualizing alerts in Wazuh dashboard 
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
