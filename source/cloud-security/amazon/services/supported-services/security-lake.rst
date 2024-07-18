@@ -199,7 +199,7 @@ Queue configuration
 ~~~~~~~~~~~~~~~~~~~
 
 *   ``<sqs_name>`` : The name of the queue.
-*   ``<service_endpoint>``- Optional: The AWS S3 endpoint URL to be used to download the data from the bucket. Check :ref:`Considerations for configuration <amazon_considerations>` for more information about VPC and FIPS endpoints.
+*   ``<service_endpoint>``- Optional: The AWS S3 endpoint URL to be used to download the data from the bucket. Check :doc:`Considerations for configuration <../prerequisites/considerations>` for more information about VPC and FIPS endpoints.
 
 Authentication
 ~~~~~~~~~~~~~~
@@ -214,7 +214,7 @@ Authentication
 
 
 
-More information about the different authentication methods can be found in the :ref:`Configuring AWS credentials <amazon_credentials>` documentation.
+More information about the different authentication methods can be found in the :doc:`Configuring AWS credentials <../prerequisites/credentials>` documentation.
 
 Visualizing alerts in Wazuh dashboard 
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^

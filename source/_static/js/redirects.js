@@ -80,6 +80,8 @@ newUrls['4.8'] = [
   '/user-manual/manager/wazuh-manager.html',
   '/user-manual/manager/wazuh-server-cluster.html',
   '/user-manual/manager/wazuh-server-queue.html',
+  '/cloud-security/amazon/services/prerequisites/aws-policy.html',
+  '/cloud-security/amazon/services/prerequisites/iam-identities.html',
 ];
 
 /* Pages no longer available in 4.8 */
