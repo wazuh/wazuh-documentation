@@ -1,12 +1,12 @@
 .. Copyright (C) 2015, Wazuh, Inc.
 
 .. meta::
-   :description: Wazuh rules analyze decoded events and generate alerts once a matching condition is met. Learn more about rules syntax in this section.
+   :description: The Wazuh Ruleset analyzes incoming events and generates alerts. Learn more about Rules syntax in this section.
 
 Rules Syntax
 ============
 
-Wazuh rules analyze decoded events and generate alerts once a matching condition is met.
+The Wazuh ruleset, combined with any custom rules, analyzes incoming events. It generates alerts when all specified conditions within a rule are met. The ruleset is constantly expanding and improving thanks to the collaborative efforts of our developers and growing community.
 
 Options
 -------

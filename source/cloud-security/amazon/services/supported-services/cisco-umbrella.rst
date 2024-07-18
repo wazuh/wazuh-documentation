@@ -3,8 +3,6 @@
 .. meta::
   :description: Cisco Umbrella is a cloud-based Secure Internet Gateway platform that provides you with multiple levels of defense against internet-based threats. Learn how to configure and monitor it with Wazuh.
 
-.. _cisco_umbrella:
-
 Cisco Umbrella
 ==============
 

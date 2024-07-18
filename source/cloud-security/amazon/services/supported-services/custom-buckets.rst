@@ -3,8 +3,6 @@
 .. meta::
   :description: Learn how to configure Amazon Custom Logs Buckets fetching.
 
-.. _amazon_custom_logs:
-
 Custom Logs Buckets
 ===================
 
