@@ -81,7 +81,7 @@ The easiest way to check if the logs are being processed, regardless of the type
 
 To understand how the :ref:`reference_ossec_global_logall_json` parameter works it is necessary to learn about the flow that is followed when processing a log until the corresponding alert is displayed in the Wazuh UI. It is as follows:
 
-#. The module downloads the logs available in AWS for the requested date and path. Check the :ref:`amazon_considerations` page to learn more about how to properly filter the logs.
+#. The module downloads the logs available in AWS for the requested date and path. Check the :doc:`prerequisites/considerations` page to learn more about how to properly filter the logs.
 #. The content of these logs is sent to the analysis engine in the form of an ``Event``.
 #. The analysis engine evaluates these events and compares them with the different rules available. If the event matches any of the rules an alert is generated, which is what ultimately is shown in the Wazuh UI.
 
@@ -168,7 +168,7 @@ First of all, review ``ERROR`` or ``WARNING`` messages in the ``ossec.log`` file
 
 - **Make sure there is data available for the given date**.
 
-        When running, the module requests AWS for the logs corresponding to the date indicated using the :ref:`only_logs_aws_buckets` parameter. If this parameter is not specified, it will try to obtain the logs corresponding to the day of execution. Make sure you are specifying a value for :ref:`only_logs_aws_buckets` and that there is data available for that particular date. Check the :ref:`amazon_considerations` page to learn more about how to properly filter the logs using the ``only_logs_after`` parameter.
+        When running, the module requests AWS for the logs corresponding to the date indicated using the :ref:`only_logs_aws_buckets` parameter. If this parameter is not specified, it will try to obtain the logs corresponding to the day of execution. Make sure you are specifying a value for :ref:`only_logs_aws_buckets` and that there is data available for that particular date. Check the :doc:`prerequisites/considerations` page to learn more about how to properly filter the logs using the ``only_logs_after`` parameter.
 
 - **Check if the events are being sent to the analysis engine**.
 
