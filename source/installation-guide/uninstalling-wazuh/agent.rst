@@ -73,7 +73,7 @@ Follow these steps to uninstall the Wazuh agent from your macOS endpoint.
 
     .. code-block:: console
 
-      # /Library/Ossec/bin/wazuh-control stop
+      # launchctl unload /Library/LaunchDaemons/com.wazuh.agent.plist
 
 #. Remove the ``/Library/Ossec/`` folder.
 

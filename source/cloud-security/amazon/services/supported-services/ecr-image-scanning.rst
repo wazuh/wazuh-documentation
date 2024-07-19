@@ -3,8 +3,6 @@
 .. meta::
   :description: Learn how to configure Amazon ECR Image scanning to export the scan results to CloudWatch Logs.
 
-.. _amazon_image_scanning:
-
 Amazon ECR Image scanning
 =========================
 

@@ -194,8 +194,6 @@ With the Wazuh API, it is possible to start a **wazuh-logtest** session or use a
 Mining the file integrity monitoring database of an agent
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-.. deprecated:: 4.9
-
 The API can be used to show information about all monitored files by syscheck. The following example shows all events related with *.py* files in agent *000* (the manager):
 
 .. code-block:: console

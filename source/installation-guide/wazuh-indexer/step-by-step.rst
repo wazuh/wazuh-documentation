@@ -19,6 +19,8 @@ The installation process is divided into three stages.
 
 .. note:: You need root user privileges to run all the commands described below.
 
+.. _certificates_creation:
+
 1. Certificates creation
 ------------------------
 .. raw:: html

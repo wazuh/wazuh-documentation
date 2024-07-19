@@ -45,8 +45,10 @@ All the available options to run the script are:
 |                                              | Requires -u|--user, and -p|--password, -au|--admin-user and -ap|--admin-password.                           |
 +----------------------------------------------+-------------------------------------------------------------------------------------------------------------+
 | -au,--admin-user <adminUser>                 | Admin user for the Wazuh API. Required for changing the Wazuh API passwords.                                |
+|                                              | Requires -A|--api.                                                                                          |               
 +----------------------------------------------+-------------------------------------------------------------------------------------------------------------+
 | -ap, --admin-password <adminPassword>        | Password for the Wazuh API admin user. Required for changing the Wazuh API passwords.                       |
+|                                              | Requires -A|--api.                                                                                          |      
 +----------------------------------------------+-------------------------------------------------------------------------------------------------------------+
 | -u / --user <user>                           | Indicates the name of the user whose password will be changed.                                              |
 |                                              | If no password is specified, it will generate a random one.                                                 |
@@ -237,6 +239,18 @@ Follow the instructions below to change the passwords for all Wazuh indexer user
       
       You must perform this step on *every Wazuh server node*.
 
+
+#. If you've set up a user other than ``admin`` for Filebeat, manually add the username and password using the following commands. Replace ``<CUSTOM_USERNAME>`` and ``<CUSTOM_PASSWORD>`` with your custom username and password.
+
+   .. code-block:: console
+
+      # echo <CUSTOM_USERNAME> | filebeat keystore add username --stdin --force
+      # echo <CUSTOM_PASSWORD> | filebeat keystore add password --stdin --force
+         
+   Restart Filebeat to apply the changes.
+
+   .. include:: /_templates/common/restart_filebeat.rst
+       
 #. On your `Wazuh dashboard node`, run the following command to update the `kibanaserver` password in the Wazuh dashboard keystore. Replace ``<KIBANASERVER_PASSWORD>`` with the random password generated in the first step.
 
    .. code-block:: console

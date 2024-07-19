@@ -81,7 +81,7 @@ The AWS documentation provides steps on how to configure the rule.
 -  `Creating an event rule for automatically sent findings <https://docs.aws.amazon.com/securityhub/latest/userguide/securityhub-cwe-all-findings.html#securityhub-cwe-all-findings-predefined-pattern>`__
 -  `Defining a rule for using custom actions to send findings and insight results <https://docs.aws.amazon.com/securityhub/latest/userguide/securityhub-cwe-custom-actions.html#securityhub-cwe-define-rule>`__
 
-Check the :ref:`Amazon WAF integration <amazon_waf>` for a configuration example.
+Check the :doc:`Amazon WAF integration <waf>` for a configuration example.
 
 Amazon Simple Queue Service
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^

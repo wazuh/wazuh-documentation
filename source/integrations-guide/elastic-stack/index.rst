@@ -250,6 +250,8 @@ Check Elastic documentation for more details on `setting up and running Logstash
 
 After Logstash is successfully running, check how to :ref:`configure the Wazuh alert index pattern <configuring_wazuh_alerts_index_pattern_in_elastic>` and :ref:`verify the integration <verifying_elastic_integration>`.
 
+.. _elastic_stack_wazuh_server_integration_using_logstash:
+
 Wazuh server integration using Logstash
 ---------------------------------------
 

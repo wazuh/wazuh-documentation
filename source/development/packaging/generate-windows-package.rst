@@ -95,26 +95,33 @@ Execute the ``generate_wazuh_msi.ps1`` script, with the different options you de
 
   This tool can be used to generate the Windows Wazuh agent msi package.
       PARAMETERS TO BUILD WAZUH-AGENT MSI:
-          1. OPTIONAL_REVISION: 1 or different
-          2. SIGN: yes or no.
+          1. MSI_NAME: MSI package name output.
+          2. SIGN: yes or no. By default 'no'.
       OPTIONAL PARAMETERS:
-          3. WIX_TOOLS_PATH: Wix tools path
-          4. SIGN_TOOLS_PATH: sign tools path
+          3. WIX_TOOLS_PATH: Wix tools path.
+          4. SIGN_TOOLS_PATH: sign tools path.
+          5. CERTIFICATE_PATH: Path to the .pfx certificate file.
+          6. CERTIFICATE_PASSWORD: Password for the .pfx certificate file.
 
       USAGE:
-          ./generate_wazuh_msi.ps1  -OPTIONAL_REVISION {{ REVISION }} -SIGN {{ yes|no }} -WIX_TOOLS_PATH {{ PATH }} -SIGN_TOOLS_PATH {{ PATH }}
+          ./generate_wazuh_msi.ps1  -MSI_NAME {{ NAME }} -SIGN {{ yes|no }} -WIX_TOOLS_PATH {{ PATH }} -SIGN_TOOLS_PATH {{ PATH }} -CERTIFICATE_PATH {{ PFX_CERT_PATH }} -CERTIFICATE_PASSWORD {{ PFX_CERT_PASSWORD }}
 
-Below, you will find an example of how to build a Windows msi package.
+Below is an example of how to build a Windows MSI package.
 
 .. code-block:: console
 
-  # ./generate_wazuh_msi.ps1 -OPTIONAL_REVISION my.revision -SIGN no
+   # ./generate_wazuh_msi.ps1 -MSI_NAME mypackage.msi -SIGN no
 
-.. note::
+Here is an example of using a specific certificate and password.
 
-  If the ``WIX_TOOLS`` and/or ``SIGN_TOOLS`` binaries are not added to the environment PATH, it will be necessary to specify the path,
-  as shown in the following example:
+.. code-block:: console
 
-  .. code-block:: console
+   # ./generate_wazuh_msi.ps1 -MSI_NAME mypackage.msi -SIGN yes -CERTIFICATE_PATH .\certificate.pfx -CERTIFICATE_PASSWORD mypassword
 
-    # ./generate_wazuh_msi.ps1 -OPTIONAL_REVISION my.revision -SIGN yes -WIX_TOOLS_PATH C:\path_to_wix_tools_binary_files -SIGN_TOOLS_PATH C:\path_to_sign_tools_binary_files
+If you don't specify the ``CERTIFICATE_PATH`` and ``CERTIFICATE_PASSWORD`` parameters, the best matching certificate from the Certificate Store is selected for signing the package. For more details, check the `/a option of the sign command in SignTool <https://learn.microsoft.com/en-us/windows/win32/seccrypto/signtool#sign-command-options>`__ .
+
+If the ``WIX_TOOLS`` and/or ``SIGN_TOOLS`` binaries are not added to the environment PATH, specify the path as shown in the following example:
+
+.. code-block:: console
+
+   # ./generate_wazuh_msi.ps1 -MSI_NAME mypackage.msi -SIGN yes -WIX_TOOLS_PATH C:\path_to_wix_tools_binary_files -SIGN_TOOLS_PATH C:\path_to_sign_tools_binary_files
