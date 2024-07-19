@@ -3,8 +3,6 @@
 .. meta::
   :description: AWS Classic Load Balancer is a service that distributes incoming application traffic across multiple targets. Learn how to configure and monitor it with Wazuh.
 
-.. _amazon_clb:
-
 Amazon CLB
 ==========
 

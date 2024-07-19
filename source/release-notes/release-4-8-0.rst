@@ -26,6 +26,24 @@ The release also addresses hundreds of bugs of varying impacts, further stabiliz
 -  `Wazuh dashboard UX redesign <https://github.com/wazuh/wazuh-dashboard/issues/90>`__: A significant overhaul aimed at enhancing the user interface and experience, making navigation and operation more intuitive.
 -  `Snap packages support <https://github.com/wazuh/wazuh/issues/15429>`__ & `PYPI and Node packages support <https://github.com/wazuh/wazuh-documentation/issues/6342>`__: Wazuh now includes support for inventorying packages installed through the Snap package manager, improving visibility into software management.
 
+Breaking changes
+----------------
+
+Manager
+^^^^^^^
+
+-  The Vulnerability Detection module no longer downloads external vulnerability feeds indexed by Canonical, Debian, Red Hat, Arch Linux, Amazon Linux Advisories Security (ALAS), Microsoft, and the National Vulnerability Database (NVD). Instead, the vulnerability detection capability now uses the new Wazuh CTI platform. `wazuh #14153 <https://github.com/wazuh/wazuh/issues/14153>`__
+-  The Vulnerability Detection module requires setting up communication with the Wazuh indexer. `wazuh #14153 <https://github.com/wazuh/wazuh/issues/14153>`__
+-  The Vulnerability Detector module has been renamed to Vulnerability Detection. The ``vulnerability-detector`` configuration option has been renamed to ``vulnerability-detection``. `wazuh #19781 <https://github.com/wazuh/wazuh/issues/19781>`__
+
+Dashboard plugin
+^^^^^^^^^^^^^^^^
+
+-  The  Wazuh dashboard ``disabled_roles`` setting has been removed. Now, the Wazuh dashboard is visible to every Wazuh indexer role. `wazuh-dashboard-plugins #5841 <https://github.com/wazuh/wazuh-dashboard-plugins/issues/5841>`__
+-  The  Wazuh dashboard ``customization.logo.sidebar`` setting has been removed, and the sidebar logo is no longer customizable. `wazuh-dashboard-plugins #5841 <https://github.com/wazuh/wazuh-dashboard-plugins/issues/5841>`__
+-  The ``extensions.*`` settings have been removed. Now, all Wazuh modules are visible in the main menu. `wazuh-dashboard-plugins #5841 <https://github.com/wazuh/wazuh-dashboard-plugins/issues/5841>`__
+-  The default Wazuh dashboard home URL has changed from ``https://<WAZUH_DASHBOARD_URL>/app/wazuh``  to ``https://<WAZUH_DASHBOARD_URL>/app/wz-home``. You can check the ``/etc/wazuh-dashboard/opensearch_dashboard.yml`` configuration file and replace the ``uiSettings.overrides.defaultRoute: /app/wazuh`` setting with ``uiSettings.overrides.defaultRoute: /app/wz-home`` if needed. An ``app not found`` error will appear if this value is incorrect. `wazuh-packages #2497 <https://github.com/wazuh/wazuh-packages/pull/2497>`__
+
 What's new
 ----------
 

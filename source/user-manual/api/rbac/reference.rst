@@ -628,15 +628,11 @@ Syscheck
 syscheck:clear
 ~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-.. deprecated:: 4.9
-
 - :api-ref:`DELETE /experimental/syscheck <operation/api.controllers.experimental_controller.clear_syscheck_database>` (`agent:id`_, `agent:group`_)
 - :api-ref:`DELETE /syscheck/{agent_id} <operation/api.controllers.syscheck_controller.delete_syscheck_agent>` (`agent:id`_, `agent:group`_)
 
 syscheck:read
 ~~~~~~~~~~~~~~~~~~~~~~~~~~
-
-.. deprecated:: 4.9
 
 - :api-ref:`GET /syscheck/{agent_id} <operation/api.controllers.syscheck_controller.get_syscheck_agent>` (`agent:id`_, `agent:group`_)
 - :api-ref:`GET /syscheck/{agent_id}/last_scan <operation/api.controllers.syscheck_controller.get_last_scan_agent>` (`agent:id`_, `agent:group`_)
@@ -650,8 +646,6 @@ Syscollector
 ^^^^^^^^^^^^^^^
 syscollector:read
 ~~~~~~~~~~~~~~~~~~~~~~~~~~
-
-.. deprecated:: 4.9
   
 - :api-ref:`GET /experimental/syscollector/hardware <operation/api.controllers.experimental_controller.get_hardware_info>` (`agent:id`_, `agent:group`_)
 - :api-ref:`GET /experimental/syscollector/hotfixes <operation/api.controllers.experimental_controller.get_hotfixes_info>` (`agent:id`_, `agent:group`_)

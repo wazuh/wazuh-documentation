@@ -4,8 +4,6 @@
 .. meta::
   :description: AWS Server Access Logging is a service that provides detailed records for the requests made to a bucket. Learn how to configure and monitor it with Wazuh.
 
-.. _amazon_server_access:
-
 Amazon S3 Server Access
 =======================
 

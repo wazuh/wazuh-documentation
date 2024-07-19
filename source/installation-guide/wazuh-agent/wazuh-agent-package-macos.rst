@@ -54,7 +54,7 @@ The agent runs on the endpoint you want to monitor and communicates with the Waz
 
             .. code-block:: console
 
-               # /Library/Ossec/bin/wazuh-control start
+               # launchctl load /Library/LaunchDaemons/com.wazuh.agent.plist
 
 
          The installation process is now complete, and the Wazuh agent is successfully deployed and running on your macOS endpoint.
@@ -73,7 +73,7 @@ The agent runs on the endpoint you want to monitor and communicates with the Waz
 
             .. code-block:: console
 
-               # sudo /Library/Ossec/bin/wazuh-control start
+               # launchctl load /Library/LaunchDaemons/com.wazuh.agent.plist
 
          The installation process is now complete, and the Wazuh agent is successfully installed on your macOS endpoint. The next step is to register and configure the agent to communicate with the Wazuh server. To perform this action, see the :doc:`Wazuh agent enrollment </user-manual/agent/agent-enrollment/index>` section.  
 
