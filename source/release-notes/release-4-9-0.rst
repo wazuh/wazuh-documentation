@@ -35,6 +35,10 @@ Wazuh manager
 -  `#24536 <https://github.com/wazuh/wazuh/pull/24536>`__ Enhanced vulnerability scanner logging to be more expressive.
 -  `#17306 <https://github.com/wazuh/wazuh/pull/17306>`__ The manager now supports alert forwarding to Fluentd.
 -  `#23513 <https://github.com/wazuh/wazuh/pull/23513>`__ Added the HAProxy helper to manage load balancer configuration and automatically balance agents.
+-  `#23222 <https://github.com/wazuh/wazuh/pull/23222>`__ Added a validation to avoid killing processes from external services.
+-  `#23996 <https://github.com/wazuh/wazuh/pull/23996>`__ Enabled certificates validation in the requests to the HAProxy helper using the default CA bundle.
+-  `#21195 <https://github.com/wazuh/wazuh/pull/21195>`__ Sanitized the integrations directory code.
+-  `#22640 <https://github.com/wazuh/wazuh/pull/22640>`__ Modified multiple cluster commands to be asynchronous.
 
 Wazuh agent
 ^^^^^^^^^^^
@@ -53,6 +57,9 @@ Wazuh agent
 -  `#23848 <https://github.com/wazuh/wazuh/pull/23848>`__ Fixed issue with an agent starting automatically without reason.
 -  `#17415 <https://github.com/wazuh/wazuh/pull/17415>`__ Fixed GET /syscheck to properly report size for files larger than 2GB.
 -  `#23203 <https://github.com/wazuh/wazuh/pull/23203>`__ Added support for Amazon Security Hub via AWS SQS.
+-  `#20624 <https://github.com/wazuh/wazuh/pull/20624>`__ Refactored and modularized the Azure integration code.
+-  `#23790 <https://github.com/wazuh/wazuh/pull/23790>`__ Improved logging of errors in Azure and AWS modules.
+-  `#22583 <https://github.com/wazuh/wazuh/pull/22583>`__ Dropped support for Python 3.7 in cloud integrations.
 
 RESTful API
 ^^^^^^^^^^^
@@ -61,6 +68,17 @@ RESTful API
 -  `#23199 <https://github.com/wazuh/wazuh/pull/23199>`__ Changed the ``PUT /groups/{group_id}/configuration`` endpoint response error code when uploading an empty file.
 -  `#23199 <https://github.com/wazuh/wazuh/pull/23199>`__ Changed the ``GET``, ``PUT`` and ``DELETE /lists/files/{filename}`` endpoints response status code when an invalid file is used.
 -  `#23199 <https://github.com/wazuh/wazuh/pull/23199>`__ Changed the ``PUT /manager/configuration`` endpoint response status code when uploading a file with invalid content-type.
+-  `#23094 <https://github.com/wazuh/wazuh/pull/23094>`__ Added support in the Wazuh API to parse journald configurations from the ``ossec.conf`` file.
+-  `#24360 <https://github.com/wazuh/wazuh/pull/24360>`__ Added ``user-agent`` to the CTI service request.
+-  `#21653 <https://github.com/wazuh/wazuh/pull/21653>`__ Merged group files endpoints (``GET /groups/{group_id}/files/{filename}``) into one that uses the ``raw`` parameter to receive plain text data.
+-  `#22388 <https://github.com/wazuh/wazuh/pull/22388>`__ Removed the hardcoded fields returned by the ``GET /agents/outdated`` endpoint and added the ``select`` parameter to the specification.
+-  `#22423 <https://github.com/wazuh/wazuh/pull/22423>`__ Updated the regex used to validate CDB lists.
+-  `#22413 <https://github.com/wazuh/wazuh/pull/22413>`__ Changed the default value for empty fields in the ``GET /agents/stats/distinct`` endpoint response.
+-  `#22380 <https://github.com/wazuh/wazuh/pull/22380>`__ Changed the Wazuh API endpoint responses when receiving the ``Expect`` header.
+-  `#22745 <https://github.com/wazuh/wazuh/pull/22745>`__ Enhanced ``Authorization`` header values decoding errors to avoid showing the stack trace and fail gracefully.
+-  `#22908 <https://github.com/wazuh/wazuh/pull/22908>`__ Updated the format of the fields that can be ``N/A`` in the API specification.
+-  `#22954 <https://github.com/wazuh/wazuh/pull/22954>`__ Updated the Wazuh API specification to conform with the current endpoint requests and responses.
+-  `#22416 <https://github.com/wazuh/wazuh/pull/22416>`__ Removed the ``cache`` configuration option from the Wazuh API.
 
 Ruleset
 ^^^^^^^
@@ -71,7 +89,7 @@ Other
 ^^^^^
 
 -  `#20778 <https://github.com/wazuh/wazuh/pull/20778>`__ Upgraded external OpenSSL library dependency version used by Wazuh from ``V1`` to ``V3``.
--  `#23199 <https://github.com/wazuh/wazuh/pull/23199>`__ Upgraded external ``connexion`` library dependency version to ``3.0.5`` and its related interdependencies.
+-  `#22680 <https://github.com/wazuh/wazuh/pull/22680>`__ Upgraded external ``connexion`` library dependency version to ``3.0.5`` and its related interdependencies.
 
 Wazuh dashboard
 ^^^^^^^^^^^^^^^
@@ -146,6 +164,13 @@ Wazuh agent
 -  `#20425 <https://github.com/wazuh/wazuh/pull/20425>`__ Fixed the agent not deleting the ``wazuh-agent.state`` file in Windows when stopped.
 -  `#24412 <https://github.com/wazuh/wazuh/pull/24412>`__ Fixed error in packages generation for CentOS 7.
 -  `#22392 <https://github.com/wazuh/wazuh/pull/22392>`__ Fixed Azure auditLogs/signIns status parsing (thanks to `@Jmnis <https://github.com/jmnis>`__ for the contribution).
+-  `#22621 <https://github.com/wazuh/wazuh/pull/22621>`__ Fixed how the S3 object keys with special characters are handled in the Custom Logs Buckets integration.
+
+RESTful API
+^^^^^^^^^^^
+
+-  `#20507 <https://github.com/wazuh/wazuh/pull/20507>`__ Improved XML validation to match the Wazuh internal XML validator.
+-  `#22428 <https://github.com/wazuh/wazuh/pull/22428>`__ Fixed bug in ``GET /groups``.
 
 Ruleset
 ^^^^^^^
