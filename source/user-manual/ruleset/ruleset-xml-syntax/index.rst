@@ -1,20 +1,17 @@
 .. Copyright (C) 2015, Wazuh, Inc.
 
 .. meta::
-  :description: The Wazuh Ruleset is used to analyze incoming events and generate alerts when appropriate. Learn more about the XML syntax of the ruleset in this section.
-
-
-.. _reference_ruleset:
+   :description: This section provides detailed information on how the rules and decoders syntax function.
 
 Ruleset XML syntax
 ==================
 
-.. topic:: Sections
+This section provides detailed information on how the rules and decoders syntax function.
 
-    .. toctree::
-       :maxdepth: 1
+.. toctree::
+   :maxdepth: 1
 
-       decoders
-       rules
-       regex
-       pcre2
+   decoders
+   rules
+   regex
+   pcre2
