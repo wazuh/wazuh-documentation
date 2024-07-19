@@ -49,7 +49,7 @@ Single-node Deployment
 
          services:
            generator:
-             image: wazuh/wazuh-certs-generator:0.0.1
+             image: wazuh/wazuh-certs-generator:0.0.2
              hostname: wazuh-certs-generator
              volumes:
                - ./config/wazuh_indexer_ssl_certs/:/certificates/
@@ -149,7 +149,7 @@ Multi-node deployment
 
          services:
            generator:
-             image: wazuh/wazuh-certs-generator:0.0.1
+             image: wazuh/wazuh-certs-generator:0.0.2
              hostname: wazuh-certs-generator
              volumes:
                - ./config/wazuh_indexer_ssl_certs/:/certificates/
