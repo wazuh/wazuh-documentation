@@ -91,9 +91,9 @@ The image below displays the customized container dashboard of Wazuh, where even
 Container alert notification with Wazuh
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-Wazuh integrates with messaging platforms like :doc:`email </user-manual/manager/manual-email-report/index>` and :ref:`Slack <slack_manual_integration>`. It also integrates with case management solutions, like `Jira <https://wazuh.com/blog/how-to-integrate-external-software-using-integrator/>`__ , for incident response and real-time alerting. This ensures that security teams are promptly notified whenever potential threats or unauthorized actions occur in containerized environments.
+Wazuh integrates with messaging platforms like :ref:`email <configuring_email_alerts>` and :ref:`Slack <slack_integration>`. It also integrates with case management solutions, like `Jira <https://wazuh.com/blog/how-to-integrate-external-software-using-integrator/>`__ , for incident response and real-time alerting. This ensures that security teams are promptly notified whenever potential threats or unauthorized actions occur in containerized environments.
 
-The documentation on :doc:`/user-manual/manager/manual-integration` explains how the Integrator daemon allows Wazuh to connect to external APIs and case management systems tools like :ref:`PagerDuty <pagerduty_manual_integration>`.
+The documentation on :doc:`/user-manual/manager/integration-with-external-apis` explains how the Integrator daemon allows Wazuh to connect to external APIs and case management systems tools like :ref:`PagerDuty <pagerduty_integration>`.
 
 .. thumbnail:: /images/getting-started/use-cases/container-security/connect-external-API.png
    :title: Connect to external APIs and case management systems

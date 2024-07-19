@@ -3,8 +3,6 @@
 .. meta::
   :description: Learn how to configure Amazon Security Lake.
 
-.. _aws_lake_subscriber:
-
 Wazuh as a subscriber
 =====================
 
