@@ -1,58 +1,68 @@
 .. Copyright (C) 2015, Wazuh, Inc.
 
 .. meta::
-  :description: Learn how to manage access to your Wazuh WUI: authentication and authorization, how to create and set a Wazuh admin user, and more. 
-
-.. _cloud_your_environment_manage_wui_access:
+   :description: You can use the native support for managing and authenticating users or integrate with external user management systems.
 
 Authentication and authorization
 ================================
 
 You can use the native support for managing and authenticating users or integrate with external user management systems.
 
-   .. note::
-      
-      You cannot log in to the Wazuh WUI of your environment with your Wazuh Cloud account credentials. To log in to Wazuh WUI, use the default credentials from the Wazuh Cloud Console page or the credentials of any user you already created in Wazuh WUI.
-  
+.. note::
+
+   You cannot log in to the Wazuh dashboard of your environment with your Wazuh Cloud account credentials. To log in to the Wazuh dashboard, use the default credentials from the Wazuh Cloud Console page or the credentials of any user you already created in the Wazuh dashboard.
 
 Native support for users and roles
 ----------------------------------
 
-The Wazuh WUI allows you to add users, create roles, and map roles to users. The following sections highlight more on this.
+The Wazuh dashboard allows you to add users, create roles, and map roles to users. The following sections highlight more on this.
 
-- `Creating an internal user and mapping it to Wazuh`_
-- `Creating and setting a Wazuh admin user`_
-- `Creating and setting a Wazuh read-only user`_
-
+-  `Creating an internal user and mapping it to Wazuh`_
+-  `Creating and setting a Wazuh admin user`_
+-  `Creating and setting a Wazuh read-only user`_
 
 Creating an internal user and mapping it to Wazuh
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 Follow these steps to create an internal user and map it to its appropriate role.
 
-#. Log into your :ref:`Wazuh dashboard <cloud_wui_access>` as administrator.
+#. Log into your :doc:`Wazuh dashboard <../getting-started/access-wazuh-wui>` as administrator.
+#. Click the upper-left menu icon **☰** to open the options, click on **Security**, and then **Internal users** to open the internal users' page.
+#. Click **Create internal user**, complete the empty fields with the requested information, and click Create to complete the action.
 
-#. Click the upper-left menu icon **☰** to open the options, go to **Indexer/dashboard management** > **Security**, and then **Internal users** to open the internal users' page.
-
-#. Click **Create internal user**, complete the empty fields with the requested information, and click **Create** to complete the action.
+   .. thumbnail:: /images/cloud-service/create-internal-user.gif
+      :title: Create internal user
+      :alt: Create internal user
+      :align: center
+      :width: 80%
 
 #. Follow these steps to map the user to the appropriate role:
-   
-   #. Click the upper-left menu icon **☰** to open the options, go to **Indexer/dashboard management** > **Security**, select **Roles** to open the page, and click the role name selected to open the window.
+
+   #. Click the upper-left menu icon **☰** to open the options, click on **Security**, select **Roles** to open the page, and click the role name selected to open the window.
    #. Select the **Mapped users** tab and click **Manage mapping**.
    #. Add the user you created in the previous steps and click **Map** to confirm the action.
 
+      .. thumbnail:: /images/cloud-service/map-user-to-role.gif
+         :title: Map user to role
+         :alt: Map user to role
+         :align: center
+         :width: 80%
+
 #. Follow these steps to map the user with Wazuh:
-   
-   #. Click the upper-left menu icon **☰** to open the options, go to **Server management** > **Security**, and then **Roles mapping** to open the page.
+
+   #. Click the upper-left Wazuh icon, click on **Security**, and then **Roles mapping** to open the page.
    #. Click **Create Role mapping** and complete the empty fields with the following parameters:
-   
-      - **Role mapping name**: Assign a name to the role mapping.
-      - **Roles**: Select the Wazuh roles that you want to map the user with.
-      - **Internal users**: Select the internal user created previously.
-  
+
+      -  **Role mapping name**: Assign a name to the role mapping.
+      -  **Roles**: Select the Wazuh roles that you want to map the user with.
+      -  **Internal users**: Select the internal user created previously.
    #. Click **Save role mapping** to save and map the user with Wazuh.
 
+   .. thumbnail:: /images/cloud-service/map-user.gif
+      :title: Map user
+      :alt: Map user
+      :align: center
+      :width: 80%
 
 Creating and setting a Wazuh admin user
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
