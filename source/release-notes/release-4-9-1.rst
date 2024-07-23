@@ -8,6 +8,16 @@
 
 This section lists the changes in version 4.9.1. Every update of the Wazuh solution is cumulative and includes all enhancements and fixes from previous releases.
 
+What's new
+----------
+
+This release includes new features or enhancements as the following:
+
+Resolved issues
+---------------
+
+This release resolves known issues as the following:
+
 Changelogs
 ----------
 
