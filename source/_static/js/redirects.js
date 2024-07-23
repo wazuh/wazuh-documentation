@@ -91,7 +91,7 @@ redirections.push(
   {
     'target': ['4.8=>4.9', '4.9=>4.8'],
     '4.8': '/cloud-security/amazon/services/supported-services/security-lake.html',
-    '4.9': '/cloud-security/amazon/services/supported-services/index.html',
+    '4.9': '/cloud-security/amazon/services/supported-services/amazon-security-lake/index.html',
   },
   {
     'target': ['4.9=>4.8'],
