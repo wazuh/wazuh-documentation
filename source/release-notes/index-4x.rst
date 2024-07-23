@@ -69,7 +69,7 @@ Wazuh version                                  Release date
 .. rst-class:: d-none
 
    .. toctree::
-      4.9.1 Release notes <release-4-9-0>
+      4.9.1 Release notes <release-4-9-1>
       4.9.0 Release notes <release-4-9-0>
       4.8.1 Release notes <release-4-8-1>
       4.8.0 Release notes <release-4-8-0>
