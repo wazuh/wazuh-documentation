@@ -12,6 +12,8 @@ if ( $('.search') ) {
   const urlParams = new URLSearchParams(window.location.search);
   const resultsContainer = "#search-results";
   const debug = false;
+  const boostThreshold = 6; // Boost for the results within this threshold
+  const boostMultiplier = 2;
 
   /* If searh option A, PageFind, is available */
   if ( pagefindUrl.length ) {
@@ -24,7 +26,6 @@ if ( $('.search') ) {
         loadSphinxSearch();
       } else {  
         window.pagefind = import(pagefindUrl);
-        // pagefind.options = options;
         let resultsFound = 0;
         let excludedResultsCount = 0;
 
@@ -34,7 +35,7 @@ if ( $('.search') ) {
               ranking: {
                 termFrequency: 0, // 0 - 1
                 pageLength: 1, // 0 - 1
-                termSaturation: 0 // 0 - 2
+                termSaturation: 0.2 // 0 - 2
               }
             };
             data.options(options);
@@ -64,7 +65,6 @@ if ( $('.search') ) {
               $('<span class="query-term"></span>').appendTo(pageTitle).text(query);
               elementObj.append(pageTitle);
               const status = $('<p class="search-summary" style="display: none;">&nbsp;</p>').appendTo(elementObj);
-              // const resultList = $('<ul class="search-ul"/>').appendTo(elementObj);
               elementObj.append('<ul class="search-ul"/>');
               let resultList = elementObj.children('.search-ul');
               
@@ -72,17 +72,33 @@ if ( $('.search') ) {
               let dataPromises = [];
               const origin = location.href.split("search.html")[0];
               const folder = origin.split(location.host)[1];
+              let i, counter, matches, passedMatches;
+
+              /* Apply boost for the results within the boost threshold */
+              for ( i = 0; i < resultsFound; i++ ) {
+                matches = results[i].words.length;
+                passedMatches = 0;
+                for (counter = 0; counter < matches; counter++ ) {
+                  if ( results[i].words[counter] < boostThreshold ) {
+                    passedMatches++;
+                  } else {
+                    break;
+                  }
+                }
+                results[i].score = results[i].score + (passedMatches * boostMultiplier);
+              }
+
+              /* Reorder results */
+              results.sort((a,b) => b.score - a.score);
 
               /* Display results */              
               for ( let i = 0; i < resultsFound; i++ ) {
-                // TODO: append the ordered results, then add the context as the promises are fullfilled
                 let listItem = $('<li id="' + results[i].id + '" style="display:none"></li>');
                 
                 resultList.append(listItem);
                 
                 dataPromises.push(results[i].data()
                 .then((singleResult) => {
-                  console.log(singleResult);
                   let linkUrl = "";
                   let titleText, titleLink, breadcrumb;
                   let context;
