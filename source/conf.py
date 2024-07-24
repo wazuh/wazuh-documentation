@@ -465,6 +465,15 @@ def setup(app):
         app.connect('html-page-context', manage_assets)
     app.connect('build-finished', finish_and_clean)
 
+    app.connect('html-page-context', pagefind_custom_weights)
+
+def pagefind_custom_weights(app, pagename, templatename, context, doctree):
+    ''' Runs once per page, inserting attributes to customize the weights of certain elements in the Pagefind search index '''
+    if 'body' in context:
+        # Increase weight for the h1 titles
+        context['body'] = context['body'].replace('<h1>', '<h1 data-pagefind-weight="10">')
+        # Decrease weight for hits inside code blocks
+        context['body'] = context['body'].replace('<div class="highlight">', '<div class="highlight" data-pagefind-weight="0.5">')
 
 def insert_inline_style(app, pagename, templatename, context, doctree):
     ''' Runs once per page, inserting the content of the compiled style for Google Fonts into the context '''
