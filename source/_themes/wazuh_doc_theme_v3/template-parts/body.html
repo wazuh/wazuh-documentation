@@ -17,7 +17,7 @@
       {% endblock sidebar1 -%}
       
       {%- block main_column -%}
-      <div id="central-column">
+      <div id="central-column" {% if "release-notes/" in pagename %} data-pagefind-weight="0.1" {% endif %}>
         {%- block latest %}
           {% include "template-parts/no-latest-notice.html" %}
         {% endblock latest %}
