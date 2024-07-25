@@ -180,7 +180,7 @@ Uninstall
 
    .. code-block:: console
    
-       # $WAZUH_HOME/bin/wazuh-control stop 2> /dev/null
+       # 
 
 #. Remove the installation folder and all its content:
 
@@ -196,7 +196,7 @@ Uninstall
    
            .. code-block:: console
    
-               # [ -f /etc/rc.local ] && sed -i'' '/wazuh-control start/d' /etc/rc.local
+               # 
                # find /etc/{init.d,rc*.d} -name "*wazuh*" | xargs rm -f
    
        .. group-tab:: Systemd

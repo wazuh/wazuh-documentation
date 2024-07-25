@@ -79,4 +79,4 @@ Registration with protocol::
     wazuh-agent-|WAZUH_CURRENT_WINDOWS|-|WAZUH_REVISION_WINDOWS|.msi /q WAZUH_MANAGER="10.0.0.2" WAZUH_REGISTRATION_SERVER="10.0.0.2" WAZUH_AGENT_NAME="W2016" WAZUH_PROTOCOL="udp"
 
 .. warning::
-    In Windows versions older than Windows Server 2008 or Windows 7, it's necessary to run the ``wazuh-authd`` program on the Wazuh manager with the ``-a`` flag or set the ``<ssl_auto_negotiate>`` option to ``yes`` on the :ref:`auth configuration <reference_ossec_auth>` to avoid compatibility errors.
+    In Windows versions older than Windows Server 2008 or Windows 7, it's necessary to run the ```` program on the Wazuh manager with the ``-a`` flag or set the ``<ssl_auto_negotiate>`` option to ``yes`` on the :ref:`auth configuration <reference_ossec_auth>` to avoid compatibility errors.

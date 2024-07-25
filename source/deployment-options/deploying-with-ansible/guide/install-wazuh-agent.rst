@@ -197,7 +197,7 @@ Now, we are ready to run the playbook and start the installation. However, some 
 
 	.. code-block:: console
 
-		# /var/ossec/bin/agent_control -l
+		# 
 
 ..
 		We can see the agent connection in the Wazuh dashboard.

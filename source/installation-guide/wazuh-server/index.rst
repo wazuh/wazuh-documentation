@@ -124,8 +124,8 @@ Scaling
 
 To determine if a Wazuh server requires more resources, monitor these files: 
 
-- ``/var/ossec/var/run/wazuh-analysisd.state``: the variable ``events_dropped`` indicates whether events are being dropped due to lack of resources. 
-- ``/var/ossec/var/run/wazuh-remoted.state``: the variable ``discarded_count`` indicates if messages from the agents were discarded.
+- ````: the variable ``events_dropped`` indicates whether events are being dropped due to lack of resources. 
+- ````: the variable ``discarded_count`` indicates if messages from the agents were discarded.
 
 
 These two variables should be zero if the environment is working properly. If it is not the case, additional nodes can be added to the cluster. 

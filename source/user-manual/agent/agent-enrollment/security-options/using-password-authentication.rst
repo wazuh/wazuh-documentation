@@ -76,7 +76,7 @@ Before an agent can be enrolled to the Wazuh manager using the password authenti
          .. code-block:: xml
             :class: output   
 
-            2022/01/11 12:41:35 wazuh-authd: INFO: Accepting connections on port 1515. Random password chosen for agent authentication: 6258b4eb21550e4f182a08c10d94585e
+            2022/01/11 12:41:35 : INFO: Accepting connections on port 1515. Random password chosen for agent authentication: 6258b4eb21550e4f182a08c10d94585e
 
 
 .. note::

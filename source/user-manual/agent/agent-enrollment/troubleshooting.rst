@@ -109,10 +109,6 @@ Invalid agent name for enrollment
 .. code-block:: xml
     :class: output
 
-    2022/01/26 08:59:10 wazuh-agentd: INFO: Using agent name as: localhost.localdomain
-    2022/01/26 08:59:10 wazuh-agentd: INFO: Waiting for server reply
-    2022/01/26 08:59:10 wazuh-agentd: ERROR: Invalid agent name: localhost.localdomain (from manager)
-    2022/01/26 08:59:10 wazuh-agentd: ERROR: Unable to add agent (from manager)
 
 
 **Resolution:** 
@@ -143,8 +139,8 @@ Unable to read CA certificate file
 .. code-block:: xml
     :class: output
 
-    2022/01/26 08:25:01 wazuh-authd: ERROR: Unable to read CA certificate file "/var/ossec/etc/rootCA.pem"
-    2022/01/26 08:25:01 wazuh-authd: ERROR: SSL error. Exiting.
+    2022/01/26 08:25:01 : ERROR: Unable to read CA certificate file "/var/ossec/etc/rootCA.pem"
+    2022/01/26 08:25:01 : ERROR: SSL error. Exiting.
 
 **Resolution:**  
 Ensure the certificate authority file is in the location specified in the ``<ssl_agent_ca>`` section of the manager ossec.conf file.
@@ -158,8 +154,8 @@ Ensure the certificate authority file is in the location specified in the ``<ssl
 .. code-block:: xml
     :class: output
 
-    2022/01/26 08:25:01 wazuh-authd: ERROR: Unable to read CA certificate file "/var/ossec/etc/rootCA.pem"
-    2022/01/26 08:25:01 wazuh-authd: ERROR: SSL error. Exiting.
+    2022/01/26 08:25:01 : ERROR: Unable to read CA certificate file "/var/ossec/etc/rootCA.pem"
+    2022/01/26 08:25:01 : ERROR: SSL error. Exiting.
 
 **Location:** Agent log
 
@@ -180,8 +176,6 @@ Unable to read private key file
 .. code-block:: xml
     :class: output
 
-    2022/01/26 08:57:18 wazuh-agentd: ERROR: Unable to read private key file: /var/ossec/etc/sslagent.key
-    2022/01/26 08:57:18 wazuh-agentd: ERROR: Could not set up SSL connection! Check certification configuration.
 
 
 **Resolution:** 
@@ -203,8 +197,6 @@ Unable to read certificate file
 .. code-block:: xml
     :class: output
 
-    2022/01/26 08:54:55 wazuh-agentd: ERROR: Unable to read certificate file (not found): /var/ossec/etc/sslagent.cert
-    2022/01/26 08:54:55 wazuh-agentd: ERROR: Could not set up SSL connection! Check certification configuration.
 
 
 **Resolution:**  
@@ -226,12 +218,6 @@ Invalid password
 .. code-block:: xml
     :class: output
 
-    2022/01/26 12:28:10 wazuh-agentd: INFO: Requesting a key from server: X.X.X.X
-    2022/01/26 12:28:10 wazuh-agentd: INFO: No authentication password provided
-    2022/01/26 12:28:10 wazuh-agentd: INFO: Using agent name as: random
-    2022/01/26 12:28:10 wazuh-agentd: INFO: Waiting for server reply
-    2022/01/26 12:28:10 wazuh-agentd: ERROR: Invalid password (from manager)
-    2022/01/26 12:28:10 wazuh-agentd: ERROR: Unable to add agent (from manager)
 
 
 **Resolution:** 

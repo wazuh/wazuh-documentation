@@ -126,7 +126,7 @@ Use case: Accurate PAM user alerts
       <user type="pcre2">foo</user>
    </rule>
 
-The ``/var/ossec/bin/wazuh-logtest`` output shows the triggered alert.
+The ```` output shows the triggered alert.
 
 .. code-block:: none
    :class: output

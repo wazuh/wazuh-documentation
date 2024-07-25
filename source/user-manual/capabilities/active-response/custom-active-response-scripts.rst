@@ -21,7 +21,7 @@ This is an example of a message. It includes a full alert for the ``firewall-dro
        "version":1,
        "origin":{
            "name":"worker01",
-           "module":"wazuh-execd"
+           "module":""
        },
        "command":"add",
        "parameters":{
@@ -150,7 +150,7 @@ A stateful active response reverts or stops its action after a specified period 
         "version":1,
         "origin":{
             "name":"node01",
-            "module":"wazuh-execd"
+            "module":""
         },
         "command":"continue",
         "parameters":{}

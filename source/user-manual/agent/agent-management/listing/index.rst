@@ -9,6 +9,5 @@ Listing agents
     .. toctree::
         :maxdepth: 2
 
-        using-command-line
         listing
         wazuh-dashboard

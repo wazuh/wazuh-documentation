@@ -8,7 +8,7 @@
 Agent management
 ================
 
-This section describes how to manage the agents using the command line (CLI), the Wazuh API, and the ``wazuh-authd`` daemon.
+This section describes how to manage the agents using the command line (CLI), the Wazuh API, and the ```` daemon.
 
 .. topic:: Contents
 

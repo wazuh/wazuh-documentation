@@ -527,7 +527,7 @@ Wazuh Manager
 
 |
 | **Variable**: ``wazuh_manager_authd``
-| **Description**: Configures the :doc:`auth </user-manual/reference/ossec-conf/auth>` section from ``ossec.conf``.
+| **Description**: Configures the :doc:`auth <>` section from ``ossec.conf``.
 | **Default values**:
 
 .. code-block:: yaml
@@ -1035,8 +1035,8 @@ Wazuh Agent
       download_dir: C:\
       install_dir: C:\Program Files\ossec-agent\
       install_dir_x86: C:\Program Files (x86)\ossec-agent\
-      auth_path: C:\Program Files\ossec-agent\agent-auth.exe
-      auth_path_x86: C:\'Program Files (x86)'\ossec-agent\agent-auth.exe
+      auth_path: 
+      auth_path_x86: 
       check_sha512: True
 
 |
