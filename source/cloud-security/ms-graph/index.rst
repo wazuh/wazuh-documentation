@@ -2,7 +2,7 @@
 
 .. meta::
   :description: Discover how Wazuh helps you monitor the Microsoft Graph API for your organization. Learn more about it in this section of our documentation.
-  
+
 .. _ms-graph:
 
 Using Wazuh to monitor Microsoft Graph
@@ -22,10 +22,11 @@ Currently, the module allows you to monitor the following with Wazuh:
 - Microsoft Defender for Office 365
 - Microsoft Purview eDiscovery
 - Microsoft Purview Data Loss Prevention (DLP)
+- Microsoft MDM Intune
 
 While these are centric to the security resource, the Microsoft Graph REST API contains a large number of additional resources that can be monitored. See the `Overview of Microsoft Graph <https://learn.microsoft.com/en-us/graph/overview?view=graph-rest-1.0>`_ documentation to learn more.
 
-.. note:: Currently, only the `security` resource can be considered mature as it's the only one tested and with pre-made rules. However, the logs of other resources can still be ingested at your organization's discretion.
+.. note:: Currently, only the `security` and `deviceManagement` resources can be considered mature as they're the only ones tested and with pre-made rules. However, the logs of other resources can still be ingested at your organization's discretion.
 
 .. topic:: Contents
 
