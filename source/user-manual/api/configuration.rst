@@ -21,80 +21,68 @@ Here are all the available settings for the ``/var/ossec/api/configuration/api.y
 
 .. code-block:: yaml
 
-   # USE THIS FILE AS A TEMPLATE. UNCOMMENT LINES TO APPLY CUSTOM CONFIGURATION
+   host: 0.0.0.0
+   port: 55000
 
-   # host: 0.0.0.0
-   # port: 55000
+   drop_privileges: yes
+   experimental_features: no
+   max_upload_size: 10485760
 
-   # Advanced configuration
+   intervals:
+      request_timeout: 10
 
-   # https:
-   #  enabled: yes
-   #  key: "server.key"
-   #  cert: "server.crt"
-   #  use_ca: False
-   #  ca: "ca.crt"
-   #  ssl_protocol: "TLSv1.2"
-   #  ssl_ciphers: ""
+   https:
+      enabled: yes
+      key: "server.key"
+      cert: "server.crt"
+      use_ca: False
+      ca: "ca.crt"
+      ssl_protocol: "auto"
+      ssl_ciphers: ""
 
-   # Modify API's intervals (time in seconds)
-   # intervals:
-   #   request_timeout: 10
+   logs:
+      level: "info"
+      format: "plain"
+      max_size:
+       enabled: false
 
-   # Logging configuration
-   # Values for API log level: disabled, info, warning, error, debug, debug2 (each level includes the previous level).
-   # Values for API log max_size: <value><unit>. Valid units: K (kilobytes), M (megabytes)
-   # Enabling the API log max_size will disable the time based rotation (on midnight)
-   # logs:
-   #  level: "info"
-   #  format: "plain"
-   #  max_size:
-   #    enabled: False
-   #    size: "1M"
+   cors:
+      enabled: no
+      source_route: "*"
+      expose_headers: "*"
+      allow_headers: "*"
+      allow_credentials: no
 
-   # Cross-origin resource sharing: https://github.com/aio-libs/aiohttp-cors#usage
-   # cors:
-   #  enabled: no
-   #  source_route: "*"
-   #  expose_headers: "*"
-   #  allow_headers: "*"
-   #  allow_credentials: no
+   cache:
+      enabled: yes
+      time: 0.750
 
-   # Cache (time in seconds)
-   # cache:
-   #  enabled: yes
-   #  time: 0.750
+   access:
+      max_login_attempts: 50
+      block_time: 300
+      max_request_per_minute: 300
 
-   # Access parameters
-   # access:
-   #  max_login_attempts: 50
-   #  block_time: 300
-   #  max_request_per_minute: 300
-
-   # Drop privileges (Run as wazuh user)
-   # drop_privileges: yes
-
-   # Enable features under development
-   # experimental_features: no
-
-   # Maximum body size that the API can accept, in bytes (0 -> limitless)
-   # max_upload_size: 10485760
-
-   # Uploadable Wazuh configuration sections
-   # upload_configuration:
-   #   remote_commands:
-   #     localfile:
-   #       allow: yes
-   #       exceptions: []
-   #     wodle_command:
-   #       allow: yes
-   #       exceptions: []
-   #   limits:
-   #     eps:
-   #       allow: yes
-   #   agents:
-   #     allow_higher_versions:
-   #       allow: yes
+   upload_configuration:
+      remote_commands:
+         localfile:
+            allow: yes
+            exceptions: []
+         wodle_command:
+            allow: yes
+            exceptions: []
+      limits:
+         eps:
+            allow: yes
+       agents:
+         allow_higher_versions:
+            allow: yes
+       indexer:
+         allow: yes
+       integrations:
+         virustotal:
+            public_key:
+             allow: yes
+             minimum_quota: 240
 
 .. warning::
 
@@ -325,7 +313,7 @@ indexer
 +------------+----------------------+---------------+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
 | Sub-fields | Allowed values       | Default value | Description                                                                                                                                                                                                                                                                                                                                 |
 +============+======================+===============+=============================================================================================================================================================================================================================================================================================================================================+
-| allow      | yes, true, no, false | true          | Allows uploading an updated :doc:`indexer configuration section </user-manual/reference/ossec-conf/indexer>` through the Wazuh API. Setting this option to ``false`` prevents updating the indexer configuration when uploading ``ossec.conf``.                                                                                             |
+| allow      | yes, true, no, false | true          | Allows uploading an updated :doc:`indexer configuration section </user-manual/reference/ossec-conf/indexer>` through the Wazuh server API. Setting this option to ``false`` prevents updating the indexer configuration when uploading ``ossec.conf``.                                                                                      |
 +------------+----------------------+---------------+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
 
 integrations
@@ -339,7 +327,7 @@ integrations
 +-----------------+----------------------+---------------+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
 | Sub-fields      | Allowed values       | Default value | Description                                                                                                                                                                                                                                                                                                                                 |
 +=================+======================+===============+=============================================================================================================================================================================================================================================================================================================================================+
-| allow           | yes, true, no, false | true          | Allows uploading an updated :doc:`Virus Total integration configuration section </user-manual/reference/ossec-conf/integration>` using a public API key through the Wazuh API. Setting this option to ``false`` prevents updating the integrations Virus Total configuration when uploading ``ossec.conf``.                                 |
+| allow           | yes, true, no, false | true          | Allows uploading an updated :doc:`Virus Total integration configuration section </user-manual/reference/ossec-conf/integration>` using a public API key through the Wazuh server API. Setting this option to ``false`` prevents updating the integrations Virus Total configuration when uploading ``ossec.conf``.                          |
 +-----------------+----------------------+---------------+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
 | minimum_quota   | Any positive integer | 240           | Minimum quota value for Virus Total public API key.                                                                                                                                                                                                                                                                                         |
 +-----------------+----------------------+---------------+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
