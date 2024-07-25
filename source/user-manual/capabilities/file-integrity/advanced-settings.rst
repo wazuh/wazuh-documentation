@@ -730,7 +730,7 @@ In the configuration example below, you can see how to set the ``recursion_level
  
    - Linux: ``systemctl restart wazuh-agent``
    - Windows: ``Restart-Service -Name wazuh``
-   - macOS: ``/Library/Ossec/bin/wazuh-control restart``
+   - macOS: `` ``
 
 If you have the following directory structure and the above setting with ``recursion_level="3"``, FIM then generates alerts for ``file_3.txt`` and all files up to ``<FILEPATH_OF_MONITORED_DIRECTORY>/level_1/level_2/level_3/`` but not for any files in the directory deeper than ``level_3``.
 
@@ -781,7 +781,7 @@ In the configuration example below the FIM module of the agent gets the minimum 
 
    - Linux: ``systemctl restart wazuh-agent``
    - Windows: ``Restart-Service -Name wazuh``
-   - macOS: ``/Library/Ossec/bin/wazuh-control restart``
+   - macOS: `` ``
 
 Setting the ``process_priority`` value lower than the default gives the FIM module higher priority, more CPU resources, and makes it run faster. In the configuration example below the  FIM module has the maximum process priority.
 
@@ -801,7 +801,7 @@ Setting the ``process_priority`` value lower than the default gives the FIM modu
  
    - Linux: ``systemctl restart wazuh-agent``
    - Windows: ``Restart-Service -Name wazuh``
-   - macOS: ``/Library/Ossec/bin/wazuh-control restart``
+   - macOS: `` ``
 
 Database storage
 ----------------
@@ -828,7 +828,7 @@ In the configuration example below, we set the database location to memory.
 
    - Linux: ``systemctl restart wazuh-agent``
    - Windows: ``Restart-Service -Name wazuh``
-   - macOS: ``/Library/Ossec/bin/wazuh-control restart``
+   - macOS: `` ``
 
 In the configuration example below, we set the database location to disk.
 
@@ -848,7 +848,7 @@ In the configuration example below, we set the database location to disk.
 
    - Linux: ``systemctl restart wazuh-agent``
    - Windows: ``Restart-Service -Name wazuh``
-   - macOS: ``/Library/Ossec/bin/wazuh-control restart``
+   - macOS: `` ``
 
 The main advantage of using an in-memory database is the performance, as reading and writing operations are faster than performing them on disk. The corresponding disadvantage is that the memory must be sufficient to store the data.
 

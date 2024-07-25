@@ -20,7 +20,3 @@ To perform the upgrade locally, select your operating system and follow the inst
     Linux <linux>
     Windows <windows>
     macOS <macos>
-    Solaris <solaris>
-    AIX <aix>
-    HP-UX <hp-ux>
-

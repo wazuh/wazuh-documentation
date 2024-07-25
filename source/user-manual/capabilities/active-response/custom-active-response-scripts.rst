@@ -455,7 +455,7 @@ macOS custom active response configuration
 
    .. code-block:: console
 
-      $ sudo /Library/Ossec/bin/wazuh-control restart
+      $ 
 
 #. Add the ``<command>`` and ``<active-response>`` blocks below to the Wazuh server ``/Library/Ossec/etc/ossec.conf`` file to use this active response Python script:
 

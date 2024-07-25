@@ -118,7 +118,13 @@ removedUrls['5.0'] = [
   '/user-manual/reference/tools/update-ruleset.rst',
   '/user-manual/reference/tools/verify-agent-conf.rst',
   '/user-manual/reference/tools/wazuh-logtest.rst',
-  '/user-manual/reference/tools/wazuh-regex.rst'
+  '/user-manual/reference/tools/wazuh-regex.rst',
+  '/upgrade-guide/wazuh-agent/aix.rst',
+  '/upgrade-guide/wazuh-agent/hp-ux.rst',
+  '/upgrade-guide/wazuh-agent/solaris.rst',
+  '/installation-guide/wazuh-agent/wazuh-agent-package-aix.rst',
+  '/installation-guide/wazuh-agent/wazuh-agent-package-hpux.rst',
+  '/installation-guide/wazuh-agent/wazuh-agent-package-solaris.rst'
 ];
 
 /* *** RELEASE 4.9 ****/
