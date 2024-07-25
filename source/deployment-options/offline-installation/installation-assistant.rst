@@ -13,11 +13,11 @@ Installing the Wazuh indexer
 Install and configure the Wazuh indexer nodes. 
 
 
-#. Run the assistant with the ``--offline-install`` to perform an offline installation. Use the option ``--wazuh-indexer`` and the node name to install and configure the Wazuh indexer. The node name must be the same one used in ``config.yml`` for the initial configuration, for example, ``node-1``.
+#. Run the assistant with the ``--offline-installation`` to perform an offline installation. Use the option ``--wazuh-indexer`` and the node name to install and configure the Wazuh indexer. The node name must be the same one used in ``config.yml`` for the initial configuration, for example, ``node-1``.
       
    .. code-block:: console
 
-      # bash wazuh-install.sh --offline-install --wazuh-indexer node-1 
+      # bash wazuh-install.sh --offline-installation --wazuh-indexer node-1 
 
    Repeat this step for every Wazuh indexer node in your cluster. Then proceed with initializing your single-node or multi-node cluster in the next step.
 
@@ -73,11 +73,11 @@ Testing the cluster installation
 Installing the Wazuh server
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-#. Run the assistant with the ``--offline-install`` to perform an offline installation. Use the option ``--wazuh-server`` followed by the node name to install the Wazuh server. The node name must be the same one used in ``config.yml`` for the initial configuration, for example, ``wazuh-1``.
+#. Run the assistant with the ``--offline-installation`` to perform an offline installation. Use the option ``--wazuh-server`` followed by the node name to install the Wazuh server. The node name must be the same one used in ``config.yml`` for the initial configuration, for example, ``wazuh-1``.
  
    .. code-block:: console
   
-      # bash wazuh-install.sh --offline-install --wazuh-server wazuh-1
+      # bash wazuh-install.sh --offline-installation --wazuh-server wazuh-1
 
 Your Wazuh server is now successfully installed. 
 
@@ -87,11 +87,11 @@ Your Wazuh server is now successfully installed.
 Installing the Wazuh dashboard
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-#. Run the assistant with the ``--offline-install`` to perform an offline installation. Use the option ``--wazuh-dashboard`` and the node name to install and configure the Wazuh dashboard. The node name must be the same one used in ``config.yml`` for the initial configuration, for example, ``dashboard``.
+#. Run the assistant with the ``--offline-installation`` to perform an offline installation. Use the option ``--wazuh-dashboard`` and the node name to install and configure the Wazuh dashboard. The node name must be the same one used in ``config.yml`` for the initial configuration, for example, ``dashboard``.
    
    .. code-block:: console
 
-      # bash wazuh-install.sh --wazuh-dashboard dashboard
+      # bash wazuh-install.sh --offline-installation --wazuh-dashboard dashboard
 
    The default Wazuh web user interface port is 443, used by the Wazuh dashboard. You can change this port using the optional parameter ``-p|--port <port_number>``. Some recommended ports are 8443, 8444, 8080, 8888, and 9000.
 
