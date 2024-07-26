@@ -47,7 +47,7 @@ You can change these HTTPS options, including their status or the path to the ce
      cert: "server.crt"
      use_ca: False
      ca: "ca.crt"
-     ssl_protocol: "TLSv1.2"
+     ssl_protocol: "auto"
      ssl_ciphers: ""
 
 Restart the Wazuh server API using the Wazuh manager service to apply the changes:
