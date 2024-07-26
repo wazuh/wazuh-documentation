@@ -360,7 +360,7 @@ Run the following command to create the rule:
       "error": 0
    }
 
-Refer to the :ref:`Wazuh server API RBAC rules <>` section for more information about creating rules.
+Refer to the :ref:`Wazuh server API RBAC rules <auth_context_rules_and_roles>` section for more information about creating rules.
 
 Assign rules to roles
 ---------------------

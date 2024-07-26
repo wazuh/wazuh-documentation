@@ -25,7 +25,7 @@ The image below outlines the decision process for granting permissions through a
 
 The command below demonstrates how to authenticate a user using the authorization context feature. Replace ``<WAZUH_API_USER>`` and ``<WAZUH_API_PASSWORD>`` with your credentials:
 
-.. code-block:: console
+.. code-block:: none
 
    # curl -k -u <WAZUH_API_USER>:<WAZUH_API_PASSWORD> -X POST https://localhost:55000/security/user/authenticate/run_as -H 'content-type: application/json' -d '{
            "name": "Initial_auth",
@@ -120,6 +120,8 @@ If JSON log format is enabled, logs for the authorization context login method w
        }
      }
    }
+
+.. _auth_context_rules_and_roles:
 
 Rules and roles
 ---------------
