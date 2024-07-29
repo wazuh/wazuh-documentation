@@ -180,7 +180,7 @@ Select your deployment type and follow the instructions to change the default pa
          .. code-block:: console
   
             # curl -sO https://packages.wazuh.com/|WAZUH_CURRENT_MINOR|/wazuh-passwords-tool.sh
-            # bash wazuh-passwords-tool.sh --change-all --admin-user wazuh --admin-password wazuh
+            # bash wazuh-passwords-tool.sh --api --change-all --admin-user wazuh --admin-password wazuh
   
          .. code-block:: console
             :class: output
