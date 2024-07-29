@@ -184,7 +184,7 @@ Perform the following steps to restore Wazuh reports and custom images on the ne
       # sudo cp -r usr/share/wazuh-dashboard/data/wazuh/downloads/reports/* /usr/share/wazuh-dashboard/data/wazuh/downloads/reports/ 
       # chown -R wazuh-dashboard:wazuh-dashboard /usr/share/wazuh-dashboard/data/wazuh/downloads/
 
-#. Navigate to **Indexer/dashboard management** > **App Settings** > **Custom branding** from the Wazuh dashboard and upload your custom images.
+#. Navigate to **Dashboard management** > **App Settings** > **Custom branding** from the Wazuh dashboard and upload your custom images.
 
 Restoring old logs
 ^^^^^^^^^^^^^^^^^^
@@ -601,7 +601,7 @@ Perform the following steps to restore Wazuh reports and custom images on the ne
       # sudo cp -r usr/share/wazuh-dashboard/data/wazuh/downloads/reports/* /usr/share/wazuh-dashboard/data/wazuh/downloads/reports/ 
       # chown -R wazuh-dashboard:wazuh-dashboard /usr/share/wazuh-dashboard/data/wazuh/downloads/
 
-#. Navigate to **Indexer/dashboard management** > **App Settings** > **Custom branding** from the Wazuh dashboard and upload your custom images.
+#. Navigate to **Dashboard management** > **App Settings** > **Custom branding** from the Wazuh dashboard and upload your custom images.
 
 Restoring old logs
 ^^^^^^^^^^^^^^^^^^
