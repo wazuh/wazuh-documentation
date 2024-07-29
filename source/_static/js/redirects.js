@@ -117,7 +117,6 @@ newUrls['4.9'] = [
   '/development/packaging/generate-indexer-package.html',
   '/development/packaging/generate-deb-rpm-package.html',
   '/cloud-security/amazon/services/supported-services/amazon-security-lake/index.html',
-  '/cloud-security/amazon/services/supported-services/amazon-security-lake/security-lake-source.html',
   '/cloud-security/amazon/services/supported-services/amazon-security-lake/security-lake-subscriber.html',
   '/user-manual/capabilities/log-data-collection/journald.html',
 ];
@@ -128,7 +127,8 @@ removedUrls['4.9'] = [
   '/deployment-options/offline-installation.html',
   '/development/packaging/generate-deb-package.html',
   '/development/packaging/generate-rpm-package.html',
-  '/cloud-security/amazon/services/supported-services/security-lake.html'
+  '/cloud-security/amazon/services/supported-services/security-lake.html',
+  '/integrations-guide/amazon-security-lake/index.html'
 ];
 
 /* *** RELEASE 4.8 ****/
