@@ -16,10 +16,17 @@ Creating a service account
 #. Add a name and description and click on **CREATE AND CONTINUE**.
 #. Add roles to the service account:
 
-   -  For the Wazuh module for Google Cloud Pub/Sub, add two roles with *Pub/Sub* permissions: **Pub/Sub Publisher** and **Pub/Sub Subscriber**.
-   -  For the Wazuh module for Google Cloud Storage buckets, add the following roles with *Google Cloud Storage bucket* permissions: **Storage Object User** and **Storage Insights Collector Service**.
+   -  For the Wazuh module for Google Cloud Pub/Sub, add two roles with *Pub/Sub* permissions:
 
-      Depending on your requirement, the service account can have the roles for authenticating to both Google Cloud Pub/Sub and Storage services.
+      -  **Pub/Sub Publisher**
+      -  **Pub/Sub Subscriber**
+
+   -  For the Wazuh module for Google Cloud Storage buckets, add the following roles with *Google Cloud Storage bucket* permissions:
+
+      -  **Storage Object User**
+      -  **Storage Insights Collector Service**
+
+   Depending on your requirement, the service account can have the roles for authenticating to both Google Cloud Pub/Sub and Storage services.
 
 #. Click **Done** to complete the creation of the service account.
 
