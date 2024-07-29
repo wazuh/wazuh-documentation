@@ -77,11 +77,32 @@ For Debian and Ubuntu, we will use the Ansible PPA repository. The steps are as 
 
       .. tab:: Debian
 
+         While Ansible is available from the main Debian repository, it can be out of date.
+
+         To get a more recent version, Debian users can use the Ubuntu PPA according to the following table:
+
+         +----------------------+-----------------------+-----------------+
+         | Debian               | Ubuntu                | UBUNTU_CODENAME |
+         +======================+=======================+=================+
+         | Debian 12 (Bookworm) | Ubuntu 22.04 (Jammy)  | jammy           |
+         +----------------------+-----------------------+-----------------+
+         | Debian 11 (Bullseye) | Ubuntu 20.04 (Focal)  | focal           |
+         +----------------------+-----------------------+-----------------+
+         | Debian 10 (Buster)   | Ubuntu 18.04 (Bionic) | bionic          |
+         +----------------------+-----------------------+-----------------+
+
+         In the following example, we assume that you have wget and gpg already installed (sudo apt install wget gpg).
+
+         Set UBUNTU_CODENAME=... based on the table above (we use jammy in this example)
+
          .. code-block:: console
 
-            # echo "deb http://ppa.launchpad.net/ansible/ansible/ubuntu trusty main" | sudo tee -a /etc/apt/sources.list.d/ansible-debian.list
+            # UBUNTU_CODENAME=jammy
+            # echo "deb http://ppa.launchpad.net/ansible/ansible/ubuntu $UBUNTU_CODENAME main" | sudo tee -a /etc/apt/sources.list.d/ansible-debian.list
             # apt-key adv --keyserver keyserver.ubuntu.com --recv-keys 93C4A3FD7BB9C367
             # apt-get update
+
+In Debian installation, Previously, you may have used apt-key add. This is now deprecated for security reasons (on Debian, Ubuntu, and elsewhere). Also note that, for security reasons, we do NOT add the key to /etc/apt/trusted.gpg.d/ nor to /etc/apt/trusted.gpg where it would be allowed to sign releases from ANY repository
 
 #. Finally, install ansible:
 
@@ -194,7 +215,7 @@ Our Ansible server will need to connect to the other endpoints. Let’s see how 
 #. Return to the Ansible server and add the public key (``id_rsa.pub``) of the Ansible server to the ``~/.ssh/authorized_keys`` file in the $HOME directory of the Wazuh server using SSH.
 
 
-   #. From the Ansible server, run the following command:
+   #. From the Ansible server, run the following command. Using this command will prompt you for the password of the user you are connecting with:
 
       .. code-block:: console
 
