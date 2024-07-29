@@ -3,8 +3,8 @@
 .. meta::
    :description: Learn how to configure Amazon Security Lake.
 
-Wazuh as a custom source
-========================
+Amazon Security Lake integration
+================================
 
 .. versionadded:: 4.9.0
 
@@ -17,6 +17,14 @@ The diagram below illustrates the process of converting Wazuh Security Events to
 .. thumbnail:: /images/aws/asl-overview.png
    :align: center
    :width: 80%
+
+.. note::
+   :class: not-long
+
+   This document guides you through setting up Wazuh as a data source to AWS Security Lake.
+   In order to configure Wazuh as a subscriber to Amazon Security Lake, head to: :doc:`Wazuh as a subscriber </cloud-security/amazon/services/supported-services/amazon-security-lake/index>`
+
+
 
 Prerequisites
 --------------

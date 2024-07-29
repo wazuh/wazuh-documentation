@@ -18,6 +18,13 @@ To set up the Wazuh integration for Amazon Security Lake as a subscriber, you ne
     #. Create a subscriber in Amazon Security Lake.
     #. Set up the Wazuh integration for Amazon Security Lake.
 
+.. note::
+   :class: not-long
+
+   This document guides you through setting up Wazuh as a subscriber to AWS Security Lake data.
+   In order to configure Wazuh as a source to Amazon Security Lake, head to: :doc:`Amazon Security Lake integration </integrations-guide/amazon-security-lake/index>`
+
+
 AWS configuration
 -----------------
 

@@ -11,5 +11,4 @@ Amazon Security Lake is a fully-managed security data lake service that consolid
 .. toctree::
    :maxdepth: 1
 
-   security-lake-source
    security-lake-subscriber

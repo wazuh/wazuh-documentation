@@ -150,3 +150,4 @@ After the integration, you might have the same data in both Wazuh and third-part
    elastic-stack/index
    opensearch/index
    splunk/index
+   amazon-security-lake/index
