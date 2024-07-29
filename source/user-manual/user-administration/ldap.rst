@@ -287,7 +287,7 @@ Setup read-only role
 #. Follow these steps to create a new role mapping and grant read-only permissions to the backend role.
 
    #. Log into the Wazuh dashboard as administrator.
-   #. Click the upper-left menu icon **☰** to open the options, go to **Indexer/dashboard management** > **Security**, and then **Roles** to open the roles page.
+   #. Click the upper-left menu icon **☰** to open the options, go to **Indexer management** > **Security**, and then **Roles** to open the roles page.
    #. Click **Create role**, complete the empty fields with the following parameters, and then click **Create** to complete the task.
 
       -  **Name**: Assign a name to the role.

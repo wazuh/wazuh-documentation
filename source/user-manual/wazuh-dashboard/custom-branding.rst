@@ -24,7 +24,7 @@ App loading and Health check logos
 
 To use your own App loading and Health check logos in the Wazuh dashboard, do the following.
 
-#. Click on **Indexer/dashboard management** > **App Settings**.
+#. Click on **Dashboard management** > **App Settings**.
 #. Under the **Custom branding** section, set up the following properties:
 
    -  ``customization.logo.app``. This property sets the `App loading logo` image. It has a size limit of 1 MB. It replaces the logo image in the Wazuh loading animation when a new section initializes. Recommended size: 300 pixels width, 70 pixels height.
@@ -70,7 +70,7 @@ Once you are done setting your custom logo image, you can find it saved in ``/us
 Custom branding of the PDF reports
 ----------------------------------
 
-To customize the PDF reports, click **Indexer/dashboard management** > **App Settings**. Under the **Custom branding** section, set up the following properties:
+To customize the PDF reports, click **Dashboard management** > **App Settings**. Under the **Custom branding** section, set up the following properties:
 
 -  ``customization.reports.logo``. This property sets the `PDF reports logo` image. It has a size limit of 1 MB. It's printed in the top left corner of the PDF reports. Recommended size: 190 pixels width, 40 pixels height. See #1 in the image below.
 
