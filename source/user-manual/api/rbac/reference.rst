@@ -1043,109 +1043,127 @@ Allow running a vulnerability detector scan.
 
 Default roles
 -------------
+
 administrator
 ^^^^^^^^^^^^^
-Administrator role of the system, this role have full access to the system.
 
-Policies
-    - `agents_all`_
-    - `agents_commands`_
-    - `ciscat_read`_
-    - `cluster_all`_
-    - `decoders_all`_
-    - `lists_all`_
-    - `logtest_all`_
-    - `mitre_read`_
-    - `rootcheck_all`_
-    - `rules_all`_
-    - `sca_read`_
-    - `security_all`_
-    - `syscheck_all`_
-    - `syscollector_read`_
-    - `task_status`_
-    - `vulnerability_read`_
-    - `vulnerability_run`_
+The administrator role has full access to all endpoints in the Wazuh server API.
 
-Rules
-    - `wui_elastic_admin`_
-    - `wui_opendistro_admin`_
+**Policies**
+
+   -  `agents_all`_
+   -  `agents_commands`_
+   -  `ciscat_read`_
+   -  `cluster_all`_
+   -  `decoders_all`_
+   -  `lists_all`_
+   -  `logtest_all`_
+   -  `mitre_read`_
+   -  `rootcheck_all`_
+   -  `rules_all`_
+   -  `sca_read`_
+   -  `security_all`_
+   -  `syscheck_all`_
+   -  `syscollector_read`_
+   -  `task_status`_
+   -  `vulnerability_read`_
+   -  `vulnerability_run`_
+
+**Rules**
+
+   -  `wui_elastic_admin`_
+   -  `wui_opendistro_admin`_
 
 agents_admin
 ^^^^^^^^^^^^
-Agents administrator of the system, this role have full access to all agents related functionalities.
 
-Policies
-    - `agents_all`_
+The agent administrator role has full access to all agents related functionalities.
+
+**Policies**
+
+   -  `agents_all`_
 
 agents_readonly
-^^^^^^^^^^^^^^^^
+^^^^^^^^^^^^^^^
+
 Read only role for agents related functionalities.
 
-Policies
-    - `agents_read`_
+**Policies**
+
+   -  `agents_read`_
 
 cluster_admin
 ^^^^^^^^^^^^^
-Manager administrator of the system, this role have full access to all manager related functionalities.
 
-Policies
-    - `cluster_all`_
+Manager administrator of the Wazuh server cluster, this role has full access to all manager related functionalities.
+
+**Policies**
+
+   -  `cluster_all`_
 
 cluster_readonly
 ^^^^^^^^^^^^^^^^
+
 Read only role for manager related functionalities.
 
-Policies
-    - `cluster_read`_
+**Policies**
+
+   -  `cluster_read`_
 
 readonly
-^^^^^^^^^^^^
+^^^^^^^^
+
 Read only role, this role can read all the information of the system.
 
-Policies
-    - `agents_read`_
-    - `ciscat_read`_
-    - `cluster_read`_
-    - `decoders_read`_
-    - `lists_read`_
-    - `mitre_read`_
-    - `rootcheck_read`_
-    - `rules_read`_
-    - `sca_read`_
-    - `syscheck_read`_
-    - `syscollector_read`_
-    - `vulnerability_read`_
+**Policies**
 
+   -  `agents_read`_
+   -  `ciscat_read`_
+   -  `cluster_read`_
+   -  `decoders_read`_
+   -  `lists_read`_
+   -  `mitre_read`_
+   -  `rootcheck_read`_
+   -  `rules_read`_
+   -  `sca_read`_
+   -  `syscheck_read`_
+   -  `syscollector_read`_
+   -  `vulnerability_read`_
 
 users_admin
-^^^^^^^^^^^^
+^^^^^^^^^^^
+
 Users administrator of the system, this role provides full access to all users related functionalities.
 
-Policies
-    - `users_all`_
+**Policies**
+
+   -  `users_all`_
 
 Default rules
 -------------
+
 .. warning::
 
-    Run_as permissions through these mapping rules can only be obtained with ``wazuh-wui`` user. These rules will never match an authorization context for any other Wazuh API user.
+   run_as permissions through these mapping rules can only be obtained with ``wazuh-wui`` user. These rules will never match an authorization context for any other Wazuh server API user.
 
 wui_elastic_admin
-^^^^^^^^^^^^^^^^^^^^^
-Administrator permissions for WUI's elastic users.
+^^^^^^^^^^^^^^^^^
+
+Administrator permissions for the elastic users of the Wazuh dashboard.
 
 .. code-block:: yaml
 
-    rule:
-        FIND:
-            username: "elastic"
+   rule:
+       FIND:
+           username: "elastic"
 
 wui_opendistro_admin
-^^^^^^^^^^^^^^^^^^^^^
-Administrator permissions for WUI's opendistro users.
+^^^^^^^^^^^^^^^^^^^^
+
+Administrator permissions for the opendistro users of the Wazuh dashboard.
 
 .. code-block:: yaml
 
-    rule:
-        FIND:
-            user_name: "admin"
+   rule:
+       FIND:
+           user_name: "admin"
