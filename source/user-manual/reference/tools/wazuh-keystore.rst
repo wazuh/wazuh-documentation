@@ -3,6 +3,8 @@
 .. meta::
   :description: Tool where sensitive configuration data can be securely stored, including any information that the Wazuh manager daemons/tools need for their work.
 
+.. _wazuh-keystore:
+
 wazuh-keystore
 ==============
 
@@ -29,10 +31,9 @@ When using ``-vp``, the file must contain a single line with the value.
 
 Example
 -------
+* Set indexer's username and password:
 
--  Set the indexer username and password:
-
-   .. code-block:: console
+.. code-block:: console
 
       # echo 'admin' | /var/ossec/bin/wazuh-keystore -f indexer -k username
       # echo 'admin' | /var/ossec/bin/wazuh-keystore -f indexer -k password
