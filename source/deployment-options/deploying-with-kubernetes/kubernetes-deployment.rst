@@ -403,3 +403,18 @@ Wazuh agents are designed to monitor hosts. To start using them:
 #. Enroll the agent by modifying the file ``/var/ossec/etc/ossec.conf``. Change the “transport protocol” to TCP and replace the ``MANAGER_IP`` with the external IP address of the service pointing to port 1514 or with the hostname provided by the cloud provider
 
 To learn more about registering agents, see the :doc:`Wazuh agent enrollment </user-manual/agent/agent-enrollment/index>` section of the documentation.
+
+.. note:: Quick Tip for Minikube Users
+
+   Before deploying Wazuh in a production Kubernetes cluster, you may want to deploy it on Minikube for testing purposes. If you are using Minikube and need to connect Wazuh agents, you must also expose the following services using port-forwarding to avoid connection errors such as ``'[10.10.5.45]:1514/tcp': 'Connection refused'``.
+
+   Use the following commands to port-forward the necessary services:
+
+   .. code-block:: shell
+
+      kubectl port-forward svc/wazuh-workers --address <address> 1514:1514 -n wazuh
+      kubectl port-forward svc/wazuh --address <address> 1515:1515 55000:55000 -n wazuh
+
+   Replace ``<address>`` with the appropriate IP address or hostname.
+
+This addition will help Minikube users to correctly map the necessary ports for connecting Wazuh agents and prevent connection issues.
