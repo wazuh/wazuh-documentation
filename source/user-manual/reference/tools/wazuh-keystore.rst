@@ -31,9 +31,10 @@ When using ``-vp``, the file must contain a single line with the value.
 
 Example
 -------
-* Set indexer's username and password:
 
-.. code-block:: console
+-  Set indexer's username and password:
+
+   .. code-block:: console
 
       # echo 'admin' | /var/ossec/bin/wazuh-keystore -f indexer -k username
       # echo 'admin' | /var/ossec/bin/wazuh-keystore -f indexer -k password
