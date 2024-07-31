@@ -57,7 +57,7 @@ Restart the Wazuh server API using the Wazuh manager service to apply the change
 2. Change the default password for the administrative users
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-You can change the default password for the administrative users  ``wazuh`` and ``wazuh-wui`` using the following Wazuh server API request: `PUT /security/users/{user_id} <https://documentation.wazuh.com/current/user-manual/api/reference.html#operation/api.controllers.security_controller.update_user>`__.
+You can change the default password for the administrative users  ``wazuh`` and ``wazuh-wui`` using the following Wazuh server API request: :api-ref:`PUT /security/users/{user_id} <operation/api.controllers.security_controller.update_user>`.
 
 .. note::
 

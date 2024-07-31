@@ -335,9 +335,9 @@ integrations
 Wazuh server API security configuration
 ---------------------------------------
 
-You can query and modify the security configuration, including ``auth_token_exp_timeout`` and ``rbac_mode`` settings, exclusively through the Wazuh server API endpoints: `GET /security/config <https://documentation.wazuh.com/current/user-manual/api/reference.html#operation/api.controllers.security_controller.get_security_config>`__, `PUT /security/config <https://documentation.wazuh.com/current/user-manual/api/reference.html#operation/api.controllers.security_controller.put_security_config>`__, and `DELETE /security/config <https://documentation.wazuh.com/current/user-manual/api/reference.html#operation/api.controllers.security_controller.delete_security_config>`__. The ``auth_token_exp_timeout`` defines the duration in seconds before an authentication token expires and requires renewal. The ``rbac_mode`` determines the overall behavior of the Role-Based Access Control system, which can be configured to either broadly permit or restrict access to resources and endpoints based on user roles and permissions. Refer to the :doc:`Role-Based Access Control <rbac/index>` documentation for more details. The configuration is applied to every Wazuh server API in a cluster if applicable.
+You can query and modify the security configuration, including ``auth_token_exp_timeout`` and ``rbac_mode`` settings, exclusively through the Wazuh server API endpoints: :api-ref:`GET /security/config <operation/api.controllers.security_controller.get_security_config>`, :api-ref:`PUT /security/config <operation/api.controllers.security_controller.put_security_config>`, and :api-ref:`DELETE /security/config <operation/api.controllers.security_controller.delete_security_config>`. The ``auth_token_exp_timeout`` defines the duration in seconds before an authentication token expires and requires renewal. The ``rbac_mode`` determines the overall behavior of the Role-Based Access Control system, which can be configured to either broadly permit or restrict access to resources and endpoints based on user roles and permissions. Refer to the :doc:`Role-Based Access Control <rbac/index>` documentation for more details. The configuration is applied to every Wazuh server API in a cluster if applicable.
 
-For more information on each of the settings, please check the `security configuration <api_security_configuration_options>` options.
+For more information on each of the settings, please check the :ref:`security configuration options <api_security_configuration_options>`.
 
 .. code-block:: none
 
@@ -377,19 +377,19 @@ The Wazuh server API has several endpoints that allow querying its current confi
 Get configuration
 ^^^^^^^^^^^^^^^^^
 
--  `GET /manager/api/config <https://documentation.wazuh.com/current/user-manual/api/reference.html#operation/api.controllers.manager_controller.get_api_config>`__: Get the complete local Wazuh server API configuration.
--  `GET /cluster/api/config <https://documentation.wazuh.com/current/user-manual/api/reference.html#operation/api.controllers.cluster_controller.get_api_config>`__: Get the complete Wazuh server API configuration of all (or a list) of the cluster nodes.
--  `GET /security/config <https://documentation.wazuh.com/current/user-manual/api/reference.html#operation/api.controllers.security_controller.get_security_config>`__: Get the current security configuration.
+-  :api-ref:`GET /manager/api/config <operation/api.controllers.manager_controller.get_api_config>`: Get the complete local Wazuh server API configuration.
+-  :api-ref:`GET /cluster/api/config <operation/api.controllers.cluster_controller.get_api_config>`: Get the complete Wazuh server API configuration of all (or a list) of the cluster nodes.
+-  :api-ref:`GET /security/config <operation/api.controllers.security_controller.get_security_config>`: Get the current security configuration.
 
 Modify configuration
 ^^^^^^^^^^^^^^^^^^^^
 
--  `PUT /security/config <https://documentation.wazuh.com/current/user-manual/api/reference.html#operation/api.controllers.security_controller.put_security_config>`__: Modify the security configuration.
+-  :api-ref:`PUT /security/config <operation/api.controllers.security_controller.put_security_config>`: Modify the security configuration.
 
 Restore configuration
 ^^^^^^^^^^^^^^^^^^^^^
 
--  `DELETE /security/config <https://documentation.wazuh.com/current/user-manual/api/reference.html#operation/api.controllers.security_controller.delete_security_config>`__: Restore the default security configuration.
+-  :api-ref:`DELETE /security/config <operation/api.controllers.security_controller.delete_security_config>`: Restore the default security configuration.
 
 SSL certificate
 ---------------

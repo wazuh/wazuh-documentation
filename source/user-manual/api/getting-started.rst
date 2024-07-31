@@ -51,7 +51,7 @@ In the **API Console**, input the method, request endpoint, and any query parame
 Logging into the Wazuh server API via command line
 --------------------------------------------------
 
-To ensure secure access, all Wazuh server API endpoints require authentication. Users must include a JSON Web Token (JWT) in every request. JWT is an open standard (RFC 7519) that defines a compact and self-contained method for securely transmitting information between parties as a JSON object. Follow the steps below to log into the Wazuh server API using `POST /security/user/authenticate <https://documentation.wazuh.com/current/user-manual/api/reference.html#operation/api.controllers.security_controller.login_user>`__ and obtain a token necessary for accessing the API endpoints:
+To ensure secure access, all Wazuh server API endpoints require authentication. Users must include a JSON Web Token (JWT) in every request. JWT is an open standard (RFC 7519) that defines a compact and self-contained method for securely transmitting information between parties as a JSON object. Follow the steps below to log into the Wazuh server API using :api-ref:`POST /security/user/authenticate <operation/api.controllers.security_controller.login_user>` and obtain a token necessary for accessing the API endpoints:
 
 #. Run the following command to send a user authentication POST request to the Wazuh server API  and store the returned JWT in the ``TOKEN`` variable. Replace ``<WAZUH_API_USER>`` and ``<WAZUH_API_PASSWORD>`` with your credentials.
 
@@ -118,6 +118,7 @@ Logging in with a Python script
 You can authenticate to the Wazuh server API using a Python script. The following script ``wazuh_api_authenticator.py`` authenticates with the Wazuh server API to obtain a JWT. It then uses the token within the request header to retrieve a summary of the statuses of Wazuh agents.
 
 .. code-block:: python3
+   :emphasize-lines: 15,16
 
    #!/usr/bin/env python3
 
@@ -233,6 +234,7 @@ Logging in with a Bash script
 You can also authenticate to the Wazuh server API using a Bash script. The following script ``wazuh_api_authenticator.sh`` authenticates with the Wazuh server API to obtain a JWT. It then uses the token within the request header to retrieve a summary of operating systems used by Wazuh agents.
 
 .. code-block:: bash
+   :emphasize-lines: 5
 
    #!/bin/bash
 
@@ -343,7 +345,7 @@ All responses are in JSON format, and most of them follow this structure:
 -  All responses include an HTTP status code: 2xx (success), 4xx (client error), 5xx (server error), etc.
 -  All requests (except ``POST /security/user/authenticate`` and ``POST /security/user/authenticate/run_as``) accept the ``pretty`` parameter to convert the JSON response to a more human-readable format.
 -  The Wazuh server API log is stored on the Wazuh server at ``/var/ossec/logs`` directory as ``api.log`` or ``api.json``, depending on the chosen log format (you can change the verbosity level in the Wazuh server API configuration file ``/var/ossec/api/configuration/api.yaml``). The Wazuh server API logs are rotated daily, compressed using Gzip, and stored in ``/var/ossec/logs/api/<YEAR>/<MONTH>``.
--  All Wazuh server API requests will be aborted if no response is received after the time duration defined in the ``request_timeout`` field of the server API configuration file ``/var/ossec/api/configuration/api.yaml``. You can use the ``wait_for_complete`` parameter to disable this timeout, which is particularly useful for calls that might exceed the expected duration, such as `PUT /agents/upgrade <https://documentation.wazuh.com/current/user-manual/api/reference.html#operation/api.controllers.agent_controller.put_upgrade_agents>`__.
+-  All Wazuh server API requests will be aborted if no response is received after the time duration defined in the ``request_timeout`` field of the server API configuration file ``/var/ossec/api/configuration/api.yaml``. You can use the ``wait_for_complete`` parameter to disable this timeout, which is particularly useful for calls that might exceed the expected duration, such as :api-ref:`PUT /agents/upgrade <operation/api.controllers.agent_controller.put_upgrade_agents>`.
 
 .. note::
 
@@ -752,7 +754,7 @@ Replace the following variables below:
 
 Run the PowerShell script on a Windows endpoint to  retrieve information about the disconnected agents:
 
-.. code-block:: console
+.. code-block:: doscon
 
    # powershell .\get_agent_keep_alive.py
 

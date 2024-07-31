@@ -63,7 +63,7 @@ Configuration
 Set RBAC mode
 -------------
 
-As explained in the :doc:`how it works <how-it-works>` section, you can modify the RBAC mode and change it to ``white`` or ``black`` using the `PUT /security/config <https://documentation.wazuh.com/current/user-manual/api/reference.html#operation/api.controllers.security_controller.put_security_config>`__ endpoint. You can also restore it to default with the `DELETE /security/config <https://documentation.wazuh.com/current/user-manual/api/reference.html#operation/api.controllers.security_controller.delete_security_config>`__ endpoint.
+As explained in the :doc:`how it works <how-it-works>` section, you can modify the RBAC mode and change it to ``white`` or ``black`` using the :api-ref:`PUT /security/config <operation/api.controllers.security_controller.put_security_config>` endpoint. You can also restore it to default with the :api-ref:`DELETE /security/config <operation/api.controllers.security_controller.delete_security_config>` endpoint.
 
 Here is an example of how to change RBAC mode using a cURL command. We recommend that you export the authentication token to an environment variable as explained in the :ref:`getting started <api_log_in>` section. Replace ``<DESIRED_RBAC_MODE>`` with the mode to enable (``white`` or ``black``):
 
@@ -86,7 +86,7 @@ Here is an example of how to change RBAC mode using a cURL command. We recommend
 Create a new policy
 -------------------
 
-Policies specify which actions you can take on given resources. You can use the `POST /security/policies <https://documentation.wazuh.com/current/user-manual/api/reference.html#operation/api.controllers.security_controller.add_policy>`__ endpoint to create a new policy.
+Policies specify which actions you can take on given resources. You can use the :api-ref:`POST /security/policies <operation/api.controllers.security_controller.add_policy>` endpoint to create a new policy.
 
 For example, a Managed Security Service Provider (MSSP) can grant a group of analysts in “Team Alpha” access to Wazuh agents in a specific customer’s environment. To do this, you must create a policy outlining permissible actions on those agents. Define the necessary policy as follows:
 
@@ -151,12 +151,12 @@ The Wazuh server API response will be something similar to this. Note the highli
 
 This policy grants read access to Wazuh agents with IDs ``001``, ``002``, ``003``, and ``004``. You can create additional policies as needed and modify any policy, for example, to add new agents.
 
-To retrieve the policy ID and other information, use the `GET /security/policies <https://documentation.wazuh.com/current/user-manual/api/reference.html#operation/api.controllers.security_controller.get_policies>`__ endpoint. For a comprehensive list of resources and actions, refer to the :doc:`RBAC reference <reference>` page.
+To retrieve the policy ID and other information, use the :api-ref:`GET /security/policies <operation/api.controllers.security_controller.get_policies>` endpoint. For a comprehensive list of resources and actions, refer to the :doc:`RBAC reference <reference>` page.
 
 Create a new role
 -----------------
 
-Roles are links between users and policies. You can assign multiple users to the same role and link multiple policies to a role. Create roles using the `POST /security/roles <https://documentation.wazuh.com/current/user-manual/api/reference.html#operation/api.controllers.security_controller.add_role>`__ endpoint.
+Roles are links between users and policies. You can assign multiple users to the same role and link multiple policies to a role. Create roles using the :api-ref:`POST /security/roles <operation/api.controllers.security_controller.add_role>` endpoint.
 
 Building on the previous example of "Team Alpha" in an MSSP, we will create the role described below to assign "Team Alpha" to it later:
 
@@ -202,7 +202,7 @@ The Wazuh server API response will be something similar to this. Note the highli
 Create a new user
 -----------------
 
-Create a new user by sending a request to the `POST /security/users <https://documentation.wazuh.com/current/user-manual/api/reference.html#operation/api.controllers.security_controller.create_user>`__ endpoint. Specify the following information, using "alpha-member-1" as an example username:
+Create a new user by sending a request to the :api-ref:`POST /security/users <operation/api.controllers.security_controller.create_user>` endpoint. Specify the following information, using "alpha-member-1" as an example username:
 
 .. code-block:: json
 
@@ -245,7 +245,7 @@ The ``allow_run_as`` parameter on the highlighted line, when set to true, enable
 Edit allow_run_as
 -----------------
 
-By default, new users cannot authenticate using an authorization context. To enable this option, activate the ``allow_run_as`` parameter for the user by sending a request to `PUT /security/users/{user_id}/run_as <https://documentation.wazuh.com/current/user-manual/api/reference.html#operation/api.controllers.security_controller.edit_run_as>`__ endpoint.
+By default, new users cannot authenticate using an authorization context. To enable this option, activate the ``allow_run_as`` parameter for the user by sending a request to :api-ref:`PUT /security/users/{user_id}/run_as <operation/api.controllers.security_controller.edit_run_as>` endpoint.
 
 .. code-block:: console
 
@@ -277,9 +277,9 @@ The output should look like this:
 Assign policies to roles
 ------------------------
 
-Use the `POST /security/roles/{role_id}/policies <https://documentation.wazuh.com/current/user-manual/api/reference.html#operation/api.controllers.security_controller.set_role_policy>`__ endpoint to assign policies to a specific role by specifying the role's ID and the IDs of the policies. A role can have multiple policies, and a policy can link to multiple roles.
+Use the :api-ref:`POST /security/roles/{role_id}/policies <operation/api.controllers.security_controller.set_role_policy>` endpoint to assign policies to a specific role by specifying the role's ID and the IDs of the policies. A role can have multiple policies, and a policy can link to multiple roles.
 
-The `POST /security/roles/{role_id}/policies <https://documentation.wazuh.com/current/user-manual/api/reference.html#operation/api.controllers.security_controller.set_role_policy>`__ endpoint includes a position parameter that determines the order of policy application, as some policies may conflict. For details on managing these conflicts, see the :ref:`rbac_priority` section.
+The :api-ref:`POST /security/roles/{role_id}/policies <operation/api.controllers.security_controller.set_role_policy>` endpoint includes a position parameter that determines the order of policy application, as some policies may conflict. For details on managing these conflicts, see the :ref:`rbac_priority` section.
 
 For example, to assign the ``customer_x_agents`` policy to the ``team-alpha`` role with *role_id* ``100`` and *policy_id* ``100``, use the following request:
 
@@ -316,7 +316,7 @@ This approach simplifies permission management for all members of "team-alpha" b
 Create a new rule
 -----------------
 
-To create a new rule, make a request to the `POST /security/rules <https://documentation.wazuh.com/current/user-manual/api/reference.html#operation/api.controllers.security_controller.add_rule>`__ endpoint. Security rules are used to check if their content is inside an ``auth_context``. If so, they assign the roles whose rule is met to the user who entered the ``auth_context``. Only users whose ``allow_run_as`` is true can use authorization context based login. Find more information in the :doc:`authorization context <auth-context>` section. For example, consider the following rule ``alpha_rule`` to match the ``alpha-member-1`` user:
+To create a new rule, make a request to the :api-ref:`POST /security/rules <operation/api.controllers.security_controller.add_rule>` endpoint. Security rules are used to check if their content is inside an ``auth_context``. If so, they assign the roles whose rule is met to the user who entered the ``auth_context``. Only users whose ``allow_run_as`` is true can use authorization context based login. Find more information in the :doc:`authorization context <auth-context>` section. For example, consider the following rule ``alpha_rule`` to match the ``alpha-member-1`` user:
 
 .. code-block:: json
 
@@ -365,7 +365,7 @@ Refer to the :ref:`Wazuh server API RBAC rules <auth_context_rules_and_roles>` s
 Assign rules to roles
 ---------------------
 
-Use the `POST /security/roles/{role_id}/rules <https://documentation.wazuh.com/current/user-manual/api/reference.html#operation/api.controllers.security_controller.set_role_rule>`__ endpoint to assign rules directly to a specific role by specifying the role ID and the IDs of the rules. A role can have multiple rules, and you can assign a single rule to multiple roles.
+Use the :api-ref:`POST /security/roles/{role_id}/rules <operation/api.controllers.security_controller.set_role_rule>` endpoint to assign rules directly to a specific role by specifying the role ID and the IDs of the rules. A role can have multiple rules, and you can assign a single rule to multiple roles.
 
 To assign rules, you need to specify both the rule ID and the role ID. For example, to add ``alpha_rule`` with ID ``100`` to the ``team-alpha`` role with *role_id* ``100``, use this request:
 
@@ -404,9 +404,9 @@ To assign rules, you need to specify both the rule ID and the role ID. For examp
 Assign roles to a user
 ----------------------
 
-Use the `POST /security/users/{username}/roles <https://documentation.wazuh.com/current/user-manual/api/reference.html#operation/api.controllers.security_controller.set_user_role>`__ endpoint to assign users to one or more roles. You can add existing users to a role by specifying the user ID and role ID.
+Use the :api-ref:`POST /security/users/{username}/roles <operation/api.controllers.security_controller.set_user_role>` endpoint to assign users to one or more roles. You can add existing users to a role by specifying the user ID and role ID.
 
-The `POST /security/users/{username}/roles <https://documentation.wazuh.com/current/user-manual/api/reference.html#operation/api.controllers.security_controller.set_user_role>`__ endpoint features a position parameter to set the order of role application, which is crucial when roles contain conflicting policies. For more details, see :ref:`rbac_priority`.
+The :api-ref:`POST /security/users/{username}/roles <operation/api.controllers.security_controller.set_user_role>` endpoint features a position parameter to set the order of role application, which is crucial when roles contain conflicting policies. For more details, see :ref:`rbac_priority`.
 
 Following the previous example, you can assign the user ``alpha-member-1`` to the ``team-alpha`` role, with *role_id* ``100``, use this request:
 
@@ -463,7 +463,7 @@ When a role has two or more conflicting policies assigned or a user belongs to c
                agent:id:001
            effect: deny
 
-In this scenario, ``example_role`` links to both ``policy0``, allowing reading of agent ``001``, and ``policy1``, denying it. The system applies the most recently added policy to the role. Thus, the policy listed last when viewing the role's policies with the `GET /security/roles <https://documentation.wazuh.com/current/user-manual/api/reference.html#operation/api.controllers.security_controller.get_roles>`__ endpoint takes precedence. Here, the user would not have permission to read agent ``001``. The same principle applies when a user has multiple roles; the last applied role dictates behavior in conflicts.
+In this scenario, ``example_role`` links to both ``policy0``, allowing reading of agent ``001``, and ``policy1``, denying it. The system applies the most recently added policy to the role. Thus, the policy listed last when viewing the role's policies with the :api-ref:`GET /security/roles <operation/api.controllers.security_controller.get_roles>` endpoint takes precedence. Here, the user would not have permission to read agent ``001``. The same principle applies when a user has multiple roles; the last applied role dictates behavior in conflicts.
 
 You can specify a policy or the position of the role in the list (starting at 0) using the ``position`` parameter when creating a new policy-role or role-user relationship. This allows placing a new, conflicting policy in a different list position to override a subsequent policy. For instance, setting ``policy1`` to position ``0`` in ``example_role`` would move it to the first position in the list, making ``policy0`` apply last and grant the user read access to agent ``001``:
 
@@ -484,7 +484,7 @@ You can specify a policy or the position of the role in the list (starting at 0)
                agent:id:001
            effect: allow
 
-To see the final policies applied to the current user, use the `GET /security/users/me/policies <https://documentation.wazuh.com/current/user-manual/api/reference.html#operation/api.controllers.security_controller.get_user_me_policies>` endpoint:
+To see the final policies applied to the current user, use the :api-ref:`GET /security/users/me/policies <operation/api.controllers.security_controller.get_user_me_policies>` endpoint:
 
 .. code-block:: console
 

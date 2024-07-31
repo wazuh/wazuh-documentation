@@ -11,7 +11,7 @@ This guide outlines how to start using the authorization context login method.
 Authorization context login method
 ----------------------------------
 
-The authorization context login method (`POST /security/user/authenticate/run_as <https://documentation.wazuh.com/current/user-manual/api/reference.html#operation/api.controllers.security_controller.run_as_login>`__) dynamically obtains permissions. It enables any authorized user to acquire any desired permissions without assignment to a specific role, bypassing the usual user-role relationships. This requires a precise formalization of the authorization context.
+The authorization context login method (:api-ref:`POST /security/user/authenticate/run_as <operation/api.controllers.security_controller.run_as_login>`) dynamically obtains permissions. It enables any authorized user to acquire any desired permissions without assignment to a specific role, bypassing the usual user-role relationships. This requires a precise formalization of the authorization context.
 
 To employ this method, you must first allow a user to use the authorization context (details on creating and enabling a user for authorization context is available in the :ref:`RESTful API RBAC configuration <api_rbac_user>` section). Once you have established the necessary security rules, you must send an authorization context containing all the required information. The system will verify this against the security rules and grant the associated permissions.
 
