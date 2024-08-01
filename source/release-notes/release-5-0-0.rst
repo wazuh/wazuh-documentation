@@ -3,8 +3,12 @@
 .. meta::
   :description: Wazuh 5.0.0 has been released. Check out our release notes to discover the changes and additions of this release.
 
+
+Release notes practice page
+===========================
+
 5.0.0 Release notes - TBD
-=========================
+-------------------------
 
 This section lists the changes in version 5.0.0. Every update of the Wazuh solution is cumulative and includes all enhancements and fixes from previous releases.
 
