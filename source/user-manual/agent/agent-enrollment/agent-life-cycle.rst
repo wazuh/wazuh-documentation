@@ -26,8 +26,8 @@ After successful enrollment, the Wazuh manager stores information about the Wazu
 In this phase, there are four different connection states that a Wazuh agent may be in at any given time, as shown in the image below:
 
 .. thumbnail:: /images/manual/agent/agent-connection-states.png
-  :title: Agent connections tates
-  :alt: Agent connections tates
+  :title: Agent connections states
+  :alt: Agent connections states
   :align: center
   :width: 80%
 
