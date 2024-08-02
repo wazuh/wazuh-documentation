@@ -95,8 +95,8 @@ Wazuh dashboard
 ^^^^^^^^^^^^^^^
 
 -  `#6145 <https://github.com/wazuh/wazuh-dashboard-plugins/pull/6145>`__ Added AngularJS dependencies.
--  `#6580 <https://github.com/wazuh/wazuh-dashboard-plugins/pull/6580>`__ Migrated from AngularJS to ReactJS. `#6555 <https://github.com/wazuh/wazuh-dashboard-plugins/pull/6555>`__ `#6618 <https://github.com/wazuh/wazuh-dashboard-plugins/pull/6618>`__ `#6613 <https://github.com/wazuh/wazuh-dashboard-plugins/pull/6613>`__ `#6631 <https://github.com/wazuh/wazuh-dashboard-plugins/pull/6631>`__ `#6594 <https://github.com/wazuh/wazuh-dashboard-plugins/pull/6594>`__
--  `#6120 <https://github.com/wazuh/wazuh-dashboard-plugins/issues/6120>`__ Removed embedded discover component. `#6235 <https://github.com/wazuh/wazuh-dashboard-plugins/pull/6235>`__ `#6254 <https://github.com/wazuh/wazuh-dashboard-plugins/pull/6254>`__ `#6285 <https://github.com/wazuh/wazuh-dashboard-plugins/pull/6285>`__ `#6288 <https://github.com/wazuh/wazuh-dashboard-plugins/pull/6288>`__ `#6286 <https://github.com/wazuh/wazuh-dashboard-plugins/pull/6286>`__ `#6459 <https://github.com/wazuh/wazuh-dashboard-plugins/pull/6459>`__ `#6438 <https://github.com/wazuh/wazuh-dashboard-plugins/pull/6438>`__ `#6434 <https://github.com/wazuh/wazuh-dashboard-plugins/pull/6434>`__ `#6537 <https://github.com/wazuh/wazuh-dashboard-plugins/pull/6537>`__ `#6528 <https://github.com/wazuh/wazuh-dashboard-plugins/pull/6528>`__ `#6558 <https://github.com/wazuh/wazuh-dashboard-plugins/pull/6558>`__ `#6734 <https://github.com/wazuh/wazuh-dashboard-plugins/pull/6734>`__ `#6771 <https://github.com/wazuh/wazuh-dashboard-plugins/pull/6771>`__ `#6756 <https://github.com/wazuh/wazuh-dashboard-plugins/pull/6756>`__
+-  `#6580 <https://github.com/wazuh/wazuh-dashboard-plugins/pull/6580>`__ Migrated from AngularJS to ReactJS. `#6555 <https://github.com/wazuh/wazuh-dashboard-plugins/pull/6555>`__ `#6618 <https://github.com/wazuh/wazuh-dashboard-plugins/pull/6618>`__ `#6613 <https://github.com/wazuh/wazuh-dashboard-plugins/pull/6613>`__ `#6631 <https://github.com/wazuh/wazuh-dashboard-plugins/pull/6631>`__ `#6594 <https://github.com/wazuh/wazuh-dashboard-plugins/pull/6594>`__ `#6893 <https://github.com/wazuh/wazuh-dashboard-plugins/pull/6893>`__
+-  `#6120 <https://github.com/wazuh/wazuh-dashboard-plugins/issues/6120>`__ Removed embedded discover component. `#6235 <https://github.com/wazuh/wazuh-dashboard-plugins/pull/6235>`__ `#6254 <https://github.com/wazuh/wazuh-dashboard-plugins/pull/6254>`__ `#6285 <https://github.com/wazuh/wazuh-dashboard-plugins/pull/6285>`__ `#6288 <https://github.com/wazuh/wazuh-dashboard-plugins/pull/6288>`__ `#6286 <https://github.com/wazuh/wazuh-dashboard-plugins/pull/6286>`__ `#6459 <https://github.com/wazuh/wazuh-dashboard-plugins/pull/6459>`__ `#6438 <https://github.com/wazuh/wazuh-dashboard-plugins/pull/6438>`__ `#6434 <https://github.com/wazuh/wazuh-dashboard-plugins/pull/6434>`__ `#6537 <https://github.com/wazuh/wazuh-dashboard-plugins/pull/6537>`__ `#6528 <https://github.com/wazuh/wazuh-dashboard-plugins/pull/6528>`__ `#6558 <https://github.com/wazuh/wazuh-dashboard-plugins/pull/6558>`__ `#6734 <https://github.com/wazuh/wazuh-dashboard-plugins/pull/6734>`__ `#6771 <https://github.com/wazuh/wazuh-dashboard-plugins/pull/6771>`__ `#6756 <https://github.com/wazuh/wazuh-dashboard-plugins/pull/6756>`__ `#6848 <https://github.com/wazuh/wazuh-dashboard-plugins/pull/6848>`__ `#6889 <https://github.com/wazuh/wazuh-dashboard-plugins/pull/6889>`__
 -  `#6268 <https://github.com/wazuh/wazuh-dashboard-plugins/pull/6268>`__ Refactored the **Endpoints Summary** charts.
 -  `#6250 <https://github.com/wazuh/wazuh-dashboard-plugins/pull/6250>`__ Added agent groups edition to **Endpoints Summary**. `#6274 <https://github.com/wazuh/wazuh-dashboard-plugins/pull/6274>`__
 -  `#6476 <https://github.com/wazuh/wazuh-dashboard-plugins/pull/6476>`__ Added a filter to select outdated agents and the **Upgrade** agent action to **Endpoints Summary**. `#6501 <https://github.com/wazuh/wazuh-dashboard-plugins/pull/6501>`__ `#6529 <https://github.com/wazuh/wazuh-dashboard-plugins/pull/6529>`__ `#6648 <https://github.com/wazuh/wazuh-dashboard-plugins/pull/6648>`__
@@ -118,9 +118,20 @@ Wazuh dashboard
 -  `#6716 <https://github.com/wazuh/wazuh-dashboard-plugins/pull/6716>`__ Refactored the search bar to handle fixed and user-added filters correctly. `#6755 <https://github.com/wazuh/wazuh-dashboard-plugins/pull/6755>`__
 -  `#6714 <https://github.com/wazuh/wazuh-dashboard-plugins/pull/6714>`__ Replaced the custom ``EuiSuggestItem`` component with the native component from OpenSearch UI.
 -  `#6800 <https://github.com/wazuh/wazuh-dashboard-plugins/pull/6800>`__ Added pinned agent data validation when rendering the **Inventory data**, **Stats**, and **Configuration** tabs in Agent preview of **Endpoints Summary**.
--  `#6534 <https://github.com/wazuh/wazuh-dashboard-plugins/pull/6534>`__ Improvement of the filter management system by implementing new standard modules. `#6772 <https://github.com/wazuh/wazuh-dashboard-plugins/pull/6772>`__
+-  `#6534 <https://github.com/wazuh/wazuh-dashboard-plugins/pull/6534>`__ Improvement of the filter management system by implementing new standard modules. `#6772 <https://github.com/wazuh/wazuh-dashboard-plugins/pull/6772>`__ `#6873 <https://github.com/wazuh/wazuh-dashboard-plugins/pull/6873>`__
 -  `#6745 <https://github.com/wazuh/wazuh-dashboard-plugins/pull/6745>`__ Generate URL with predefined filters.
 -  `#6782 <https://github.com/wazuh/wazuh-dashboard-plugins/pull/6782>`__ Removed unused API endpoints from creation of old visualizations: ``GET /elastic/visualizations/{tab}/{pattern}``.
+-  `#6839 <https://github.com/wazuh/wazuh-dashboard-plugins/pull/6839>`__ Changed permalink field in the **Events** tab table in **VirusTotal** to show an external link.
+-  `#6890 <https://github.com/wazuh/wazuh-dashboard-plugins/pull/6890>`__ Changed the internal control from **Endpoint** **Groups** to a control via URL.
+-  `#6882 <https://github.com/wazuh/wazuh-dashboard-plugins/pull/6882>`__ Changed the internal control from **Mitre** > **Intelligence** > **Table** to a control via URL.
+-  `#6886 <https://github.com/wazuh/wazuh-dashboard-plugins/pull/6886>`__ Changed the display of rule details flyout to be based on URL.
+-  `#6161 <https://github.com/wazuh/wazuh-dashboard-plugins/pull/6161>`__ Changed the logging system to use the one provided by the platform.
+-  `#6161 <https://github.com/wazuh/wazuh-dashboard-plugins/pull/6161>`__ Removed ``logs.level`` setting.
+-  `#6161 <https://github.com/wazuh/wazuh-dashboard-plugins/pull/6161>`__ Removed the usage of ``wazuhapp-plain.log``, ``wazuhapp.log``, ``wazuh-ui-plain.log``, and ``wazuh-ui.log`` files.
+-  `#6161 <https://github.com/wazuh/wazuh-dashboard-plugins/pull/6161>`__ Removed the *App logs* application.
+-  `#6161 <https://github.com/wazuh/wazuh-dashboard-plugins/pull/6161>`__ Removed API endpoint ``GET /utils/logs/ui``.
+-  `#6161 <https://github.com/wazuh/wazuh-dashboard-plugins/pull/6161>`__ Removed API endpoint ``GET /utils/logs``.
+-  `#6848 <https://github.com/wazuh/wazuh-dashboard-plugins/pull/6848>`__ Added wz-link component to handle redirections.
 
 Packages
 ^^^^^^^^
@@ -191,6 +202,14 @@ Wazuh dashboard
 -  `#6730 <https://github.com/wazuh/wazuh-dashboard-plugins/pull/6730>`__ Fixed the validation of the maximum allowed time interval for cron jobs.
 -  `#6747 <https://github.com/wazuh/wazuh-dashboard-plugins/pull/6747>`__ Fixed styles in small height viewports.
 -  `#6770 <https://github.com/wazuh/wazuh-dashboard-plugins/pull/6770>`__ Fixed behavior in **Configuration Assessment** when changing API.
+-  `#6871 <https://github.com/wazuh/wazuh-dashboard-plugins/pull/6871>`__ Fixed the maximum width of the clear session button in the ruleset test view.
+-  `#6876 <https://github.com/wazuh/wazuh-dashboard-plugins/pull/6876>`__ Fixed the width of the last modification column of the table in **Windows Registry**.
+-  `#6880 <https://github.com/wazuh/wazuh-dashboard-plugins/pull/6880>`__ Fixed redirection to **FIM** > **Inventory** > **Files** from **FIM** > **Inventory** > **Windows Registry** when switching to a non-Windows agent.
+
+Packages
+^^^^^^^^
+
+-  `#3063 <https://github.com/wazuh/wazuh-dashboard-plugins/pull/3063>`__ Fixed Kibana server change password.
 
 Changelogs
 ----------
