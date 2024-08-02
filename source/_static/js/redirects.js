@@ -158,6 +158,8 @@ removedUrls['4.8'] = [
   '/migration-guide/migrating-from-ossec/index.html',
   '/migration-guide/migrating-from-ossec/ossec-server.html',
   '/migration-guide/migrating-from-ossec/ossec-agent.html',
+  '/user-manual/api/equivalence.html',
+  '/user-manual/api/rbac/configuration.html',
 ];
 
 /* Redirections from 4.7 to 4.8  */
@@ -247,7 +249,12 @@ redirections.push(
   {
     'target': ['4.7=>4.8', '4.8=>4.7'],
     '4.7': '/user-manual/manager/remote-service.html',
-    '4.8': 'user-manual/manager/wazuh-manager.html#agent-connection-service-configuration',
+    '4.8': '/user-manual/manager/wazuh-manager.html#agent-connection-service-configuration',
+  },
+  {
+    'target': ['4.7=>4.8'],
+    '4.7': '/user-manual/api/rbac/configuration.html',
+    '4.8': '/user-manual/api/rbac/how-it-works.html',
   },
 );
 
