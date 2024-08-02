@@ -418,9 +418,9 @@ Select your deployment type and follow the instructions to change the default pa
       #. Use the Wazuh passwords tool to change all the internal users passwords.
       
          .. code-block:: console
-         
-            # /usr/share/wazuh-indexer/plugins/opensearch-security/tools/wazuh-passwords-tool.sh --change-all --admin-user wazuh --admin-password wazuh
-         
+
+            # /usr/share/wazuh-indexer/plugins/opensearch-security/tools/wazuh-passwords-tool.sh --api --change-all --admin-user wazuh --admin-password wazuh
+
          .. code-block:: console
             :class: output
        
