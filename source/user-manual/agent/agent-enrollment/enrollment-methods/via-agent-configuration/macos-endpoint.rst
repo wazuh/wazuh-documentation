@@ -58,7 +58,7 @@ Follow these steps to configure a macOS endpoint for enrollment via the Wazuh ag
 #. Click on the upper-left menu icon and navigate to **Server management** > **Endpoints Summary** on the Wazuh dashboard to check for the newly enrolled Wazuh agent and its connection status. If the enrollment was successful, you will have an interface similar to the image below.
 
    .. thumbnail:: /images/manual/agent/macOS-check-newly-enrolled.png
-     :title: Check newly enrolled Wazuh agent - macOS
-     :alt: Check newly enrolled Wazuh agent - macOS
-     :align: center
-     :width: 80%
+      :title: Check newly enrolled Wazuh agent - macOS
+      :alt: Check newly enrolled Wazuh agent - macOS
+      :align: center
+      :width: 80%

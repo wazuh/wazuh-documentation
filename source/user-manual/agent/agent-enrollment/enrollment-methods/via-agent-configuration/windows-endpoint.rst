@@ -74,7 +74,7 @@ The Wazuh agent installation directory depends on the architecture of the endpoi
 #. Click on the upper-left menu icon and navigate to **Server management** > **Endpoints Summary** on the Wazuh dashboard to check for the newly enrolled Wazuh agent and its connection status. If the enrollment was successful, you will have an interface similar to the image below.
 
    .. thumbnail:: /images/manual/agent/windows-check-newly-enrolled.png
-     :title: Check newly enrolled Wazuh agent - Windows
-     :alt: Check newly enrolled Wazuh agent - Windows
-     :align: center
-     :width: 80%
+      :title: Check newly enrolled Wazuh agent - Windows
+      :alt: Check newly enrolled Wazuh agent - Windows
+      :align: center
+      :width: 80%
