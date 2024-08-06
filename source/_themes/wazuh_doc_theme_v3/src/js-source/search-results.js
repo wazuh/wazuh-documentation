@@ -3,13 +3,17 @@
 ----------------------------------------------------------------------------- */
 
 const excludedSearchFolders = ['release-notes'];
-const pagefindUrl = location.protocol === "file:" ? "" : location.href.split("search.html")[0] + "_pagefind/pagefind.js";
+const pagefindUrl = location.protocol === "file:" ? "" : location.href.split("search.html")[0] + "pagefind/pagefind.js";
 
+$(function() {
 if ( $('.search') ) {
   /* List of folders that will be excluded from search */
 
   const urlParams = new URLSearchParams(window.location.search);
   const resultsContainer = "#search-results";
+  const debug = false;
+  const boostThreshold = 6; // Boost for the results within this threshold
+  const boostMultiplier = 2;
 
   /* If searh option A, PageFind, is available */
   if ( pagefindUrl.length ) {
@@ -20,13 +24,21 @@ if ( $('.search') ) {
       if ( response.status !== 200 || response.redirected === true ) {
         /* Fallback to Sphinx search */
         loadSphinxSearch();
-      } else {      
+      } else {  
         window.pagefind = import(pagefindUrl);
         let resultsFound = 0;
         let excludedResultsCount = 0;
-        
+
         pagefind.then(
-          function(data) {
+          function(data) {    
+            const options = {
+              ranking: {
+                termFrequency: 0, // 0 - 1
+                pageLength: 1, // 0 - 1
+                termSaturation: 0.2 // 0 - 2
+              }
+            };
+            data.options(options);
             const search = data.search;
             const queryTerm = urlParams.get('q');
             if ( typeof(queryTerm) !== 'string' ) {
@@ -40,33 +52,57 @@ if ( $('.search') ) {
                 updateUI([], resultsContainer, query);
                 return;
               }
-              search(query)
+              search(query, options)
               .then((res) => res.results)
               .then((allresults) => updateUI(allresults, resultsContainer, query));
             }
             
             function updateUI(results, element, query) {
               resultsFound = results.length;
-              
               const elementObj = $(resultsContainer);
               const pageTitle = document.createElement('h1');
               $(pageTitle).text('Search results for: ');
-              $('<span class="query-term"></span>').appendTo(pageTitle).text(queryTerm);
+              $('<span class="query-term"></span>').appendTo(pageTitle).text(query);
               elementObj.append(pageTitle);
               const status = $('<p class="search-summary" style="display: none;">&nbsp;</p>').appendTo(elementObj);
-              const resultList = $('<ul class="search-ul"/>').appendTo(elementObj);
+              elementObj.append('<ul class="search-ul"/>');
+              let resultList = elementObj.children('.search-ul');
               
               status.fadeIn(500);
               let dataPromises = [];
               const origin = location.href.split("search.html")[0];
               const folder = origin.split(location.host)[1];
-              
+              let i, counter, matches, passedMatches;
+
+              /* Apply boost for the results within the boost threshold */
+              for ( i = 0; i < resultsFound; i++ ) {
+                matches = results[i].words.length;
+                passedMatches = 0;
+                for (counter = 0; counter < matches; counter++ ) {
+                  if ( results[i].words[counter] < boostThreshold ) {
+                    passedMatches++;
+                  } else {
+                    break;
+                  }
+                }
+                results[i].score = results[i].score + (passedMatches * boostMultiplier);
+              }
+
+              /* Reorder results */
+              results.sort((a,b) => b.score - a.score);
+
+              /* Display results */              
               for ( let i = 0; i < resultsFound; i++ ) {
+                let listItem = $('<li id="' + results[i].id + '" style="display:none"></li>');
+                
+                resultList.append(listItem);
+                
                 dataPromises.push(results[i].data()
                 .then((singleResult) => {
-                  let listItem = $('<li style="display:none"></li>');
                   let linkUrl = "";
-                  let titleText, titleLink, breadcrumb, context;
+                  let titleText, titleLink, breadcrumb;
+                  let context;
+                  let listItem = $('#'+results[i].id);
                   
                   /* Display result [i] */
                   path = (folder == "" || folder == "/") ? singleResult.url.substring(1) : singleResult.url.split(folder)[1];
@@ -79,31 +115,22 @@ if ( $('.search') ) {
                   }
                   
                   // Title
+                  titleText = singleResult.meta.title;
+                  if (debug) {
+                    titleText += " ("+results[i].score+")";
+                  }
                   titleLink = $('<a/>').attr('href', linkUrl)
-                  .text(singleResult.meta.title).addClass('result-link');
+                  .text(titleText).addClass('result-link');
                   listItem.append(titleLink);
-                  
+
                   // Breadcrumb
                   breadcrumb = createResultBreadcrumb(titleLink);
                   listItem.append(breadcrumb);
                   
                   // Context
-                  let excerptRange = results[i].excerpt_range;
-                  let higlightedWords = results[i].words;
-                  let escapedContent = singleResult.content.split(" ");
+                  let excerpt = singleResult.excerpt;
                   
-                  for (var wordIndex = 0; wordIndex < higlightedWords.length; wordIndex++) {
-                    /* Extract found terms */
-                    highlighedWordstSet.add(escapedContent[higlightedWords[wordIndex]]);
-                    /* Wrap the terms in marks */
-                    escapedContent[higlightedWords[wordIndex]] = "<mark>" + escapedContent[higlightedWords[wordIndex]] + "</mark>";
-                  }
-                  
-                  let excerpt = (excerptRange[0] > 0) ? "..." : "";
-                  excerpt = excerpt + escapedContent.slice(results[i].excerpt_range[0], results[i].excerpt_range[0]+results[i].excerpt_range[1]).join(" ");
-                  excerpt = excerpt + ((excerptRange[0]+excerptRange[1]-1 < escapedContent.length) ? "..." : "");
-                  
-                  context = $('<div/>').addClass('context').html(excerpt.replace('¶', ''));
+                  context = $('<div/>').addClass('context').html('... ' + excerpt.replace('¶', '') + ' ...');
                   
                   listItem.append(context);
                   
@@ -116,7 +143,6 @@ if ( $('.search') ) {
                     }
                   });
                   
-                  resultList.append(listItem);
                   if ( !listItem.hasClass('hidden-result') ) {
                     listItem.fadeIn(100);
                   }
@@ -125,7 +151,7 @@ if ( $('.search') ) {
               }
 
               Promise.allSettled(dataPromises).then(([result]) => {
-                updateSearchStatus(status, resultsFound, excludedResultsCount)
+                updateSearchStatus(status, resultsFound, excludedResultsCount);
                 if (SPHINX_HIGHLIGHT_ENABLED) {  // set in sphinx_highlight.js
                   highlighedWordstSet = Array.from(highlighedWordstSet);
                   localStorage.setItem("sphinx_highlight_terms", [...highlighedWordstSet].join(" "))
@@ -157,6 +183,7 @@ if ( $('.search') ) {
     document.getElementsByTagName("head")[0].appendChild(loadScript);
   }
 }
+});
 
 /* Shows excluded results */
 $(document).delegate('#search-results #toggle-results.include', 'click', function() {

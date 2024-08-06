@@ -22,7 +22,7 @@ The table below shows SCA policies pre-installed in Wazuh out-of-the-box. The Wa
     | cis_win10_enterprise        |  CIS Benchmark for Windows 10 Enterprise                   | Windows 10                    |
     +-----------------------------+------------------------------------------------------------+-------------------------------+
     | cis_win11_enterprise        |  CIS Benchmark for Windows 11 Enterprise                   | Windows 11                    |
-    +-----------------------------+------------------------------------------------------------+-------------------------------+    
+    +-----------------------------+------------------------------------------------------------+-------------------------------+
     | cis_win2016                 |  CIS Benchmark for Windows Server 2016                     | Windows Server 2016           |
     +-----------------------------+------------------------------------------------------------+-------------------------------+
     | cis_win2019                 |  CIS Benchmark for Windows Server 2019 RTM                 | Windows Server 2019           |
@@ -47,8 +47,6 @@ The table below shows SCA policies pre-installed in Wazuh out-of-the-box. The Wa
     +-----------------------------+------------------------------------------------------------+-------------------------------+
     | cis_rhel9_linux             |  CIS Benchmark for Red Hat Enterprise Linux 9              | Red Hat Enterprise Linux 9    |
     +-----------------------------+------------------------------------------------------------+-------------------------------+
-    | cis_rocky_linux_8           |  CIS Benchmark for Rocky Linux 8                           | Rocky Linux 8                 |
-    +-----------------------------+------------------------------------------------------------+-------------------------------+    
     | cis_debian7                 |  CIS Benchmark for Debian/Linux 7                          | Debian 7                      |
     +-----------------------------+------------------------------------------------------------+-------------------------------+
     | cis_debian8                 |  CIS Benchmark for Debian/Linux 8                          | Debian 8                      |
