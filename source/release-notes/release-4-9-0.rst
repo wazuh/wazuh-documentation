@@ -84,6 +84,7 @@ Ruleset
 ^^^^^^^
 
 -  `#19754 <https://github.com/wazuh/wazuh/pull/19754>`__ Clarified the description for rule ID ``23502`` about solved vulnerabilities.
+-  `#17784 <https://github.com/wazuh/wazuh/pull/17784>`__ Added new SCA policy for Rocky Linux 8.
 
 Other
 ^^^^^
@@ -149,6 +150,7 @@ Packages
 -  `#2882 <https://github.com/wazuh/wazuh-packages/pull/2882>`__ Added rollBack to several exit points
 -  `#2753 <https://github.com/wazuh/wazuh-packages/pull/2753>`__ Adding support for Amazon Linux 1, 2, and 2023
 -  `#2790 <https://github.com/wazuh/wazuh-packages/pull/2790>`__ Added support for AL2023 in WIA
+-  `#2300 <https://github.com/wazuh/wazuh-packages/pull/2300>`__ Added SCA policy for Rocky Linux 8 in SPECS.
 
 Resolved issues
 ---------------

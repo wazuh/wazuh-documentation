@@ -47,6 +47,8 @@ The table below shows SCA policies pre-installed in Wazuh out-of-the-box. The Wa
     +-----------------------------+------------------------------------------------------------+-------------------------------+
     | cis_rhel9_linux             |  CIS Benchmark for Red Hat Enterprise Linux 9              | Red Hat Enterprise Linux 9    |
     +-----------------------------+------------------------------------------------------------+-------------------------------+
+    | cis_rocky_linux_8           |  CIS Benchmark for Rocky Linux 8                           | Rocky Linux 8                 |
+    +-----------------------------+------------------------------------------------------------+-------------------------------+
     | cis_debian7                 |  CIS Benchmark for Debian/Linux 7                          | Debian 7                      |
     +-----------------------------+------------------------------------------------------------+-------------------------------+
     | cis_debian8                 |  CIS Benchmark for Debian/Linux 8                          | Debian 8                      |
