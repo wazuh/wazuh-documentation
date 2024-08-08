@@ -1,27 +1,15 @@
 .. Copyright (C) 2015, Wazuh, Inc.
 
 .. meta::
-  :description: Find out how to manage the agents using the command line (CLI). Learn more about it in this section of the Wazuh documentation.
+   :description: This section describes managing the Wazuh agent using the command line (CLI), the Wazuh dashboard, and the Wazuh server API.
 
-.. _agent-management:
+Wazuh agent management
+======================
 
-Agent management
-================
+This section describes managing the Wazuh agent using the command line (CLI), the Wazuh dashboard, and the Wazuh server API. This includes the following management actions:
 
-This section describes how to manage the agents using the command line (CLI), the Wazuh API, and the ``wazuh-authd`` daemon.
+.. toctree::
+   :maxdepth: 2
 
-.. topic:: Contents
-
-    .. toctree::
-        :maxdepth: 2
-
-        agent-connection
-        listing/index
-        grouping-agents
-        remove-agents/index
-        query-configuration
-        remote-upgrading/index
-        key-request
-        labels
-        antiflooding
-        agent-life-cycle
+   agent-connection
+   agent-administration
