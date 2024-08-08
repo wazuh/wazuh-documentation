@@ -256,7 +256,7 @@ For the deviceManagement resource, this includes the following relationships:
 
 - auditEvents: Audit logs include a record of activities that generate a change in Microsoft Intune.
 - managedDevices: List of devices managed by Microsoft Intune.
-- detectedApps: List of applications managed by Microsoft Intune.
+- detectedApps: List of applications managed by Microsoft Intune. The results will also include a list of devices where each app is installed.
 
 +--------------------+--------------+
 | **Default value**  | N/A          |
