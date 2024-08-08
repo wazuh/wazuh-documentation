@@ -68,8 +68,8 @@ The Wazuh agent installation directory depends on the architecture of the endpoi
 
          .. code-block:: doscon
 
-            # net start wazuh
             # net stop wazuh
+            # net start wazuh
 
 #. Click on the upper-left menu icon and navigate to **Server management** > **Endpoints Summary** on the Wazuh dashboard to check for the newly enrolled Wazuh agent and its connection status. If the enrollment was successful, you will have an interface similar to the image below.
 
