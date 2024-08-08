@@ -25,7 +25,7 @@ Wazuh integrates with `Amazon SQS <https://aws.amazon.com/sqs>`_ and `EventBridg
 
       EventBridge allows storing Security Hub findings and insights in S3 buckets.
 
-      There are three types of events available as follows. Each type of event uses a specific `EventBridge event format <https://docs.aws.amazon.com/securityhub/latest/userguide/securityhub-cwe-event-formats.html>`__. The Wazuh integration takes from the events every relevant ``detail`` field and value along with the ``detail-type`` value.
+      There are three types of events available, each type uses a specific `EventBridge event format <https://docs.aws.amazon.com/securityhub/latest/userguide/securityhub-cwe-event-formats.html>`__. The Wazuh integration takes every relevant ``detail`` and ``detail-type`` values from them.
 
       -  **Security Hub Findings - Imported**: Security Hub automatically sends events of this type to EventBridge. It includes all new findings as well as updates to existing findings. Each event contains a single finding.
       -  **Security Hub Findings - Custom Action**: Security Hub sends events of this type to EventBridge when custom actions are triggered. The events are associated with the findings of the custom actions.
@@ -37,7 +37,7 @@ Wazuh integrates with `Amazon SQS <https://aws.amazon.com/sqs>`_ and `EventBridg
 
       Amazon Simple Queue Service is a fully managed message queuing service that makes it easy to decouple and scale microservices, distributed systems, and serverless applications.
 
-      In this case will be used to acknowledge any new event to pull from the S3 bucket.
+      In this case, it is used to acknowledge new events to pull from the S3 bucket.
 
    #. Enabling an Amazon S3 bucket including Event notifications. The bucket sends notifications to the queue for every Security Hub object creation event.
 #. Set up the Wazuh integration for Amazon Security Hub.
@@ -70,32 +70,32 @@ If you have chosen the **Organization integration**, you must attach the followi
          "Version": "2012-10-17",
          "Statement": [
             {
-                  "Sid": "SecurityHubAllowAll",
-                  "Effect": "Allow",
-                  "Action": "securityhub:*",
-                  "Resource": "*"
+               "Sid": "SecurityHubAllowAll",
+               "Effect": "Allow",
+               "Action": "securityhub:*",
+               "Resource": "*"
             },
             {
-                  "Sid": "SecurityHubServiceLinkedRole",
-                  "Effect": "Allow",
-                  "Action": "iam:CreateServiceLinkedRole",
-                  "Resource": "*",
-                  "Condition": {
-                     "StringLike": {
-                        "iam:AWSServiceName": "securityhub.amazonaws.com"
-                     }
+               "Sid": "SecurityHubServiceLinkedRole",
+               "Effect": "Allow",
+               "Action": "iam:CreateServiceLinkedRole",
+               "Resource": "*",
+               "Condition": {
+                  "StringLike": {
+                     "iam:AWSServiceName": "securityhub.amazonaws.com"
                   }
+               }
             },
             {
-                  "Sid": "OtherServicePermission",
-                  "Effect": "Allow",
-                  "Action": [
-                     "guardduty:GetDetector",
-                     "guardduty:ListDetectors",
-                     "inspector2:BatchGetAccountStatus",
-                     "pricing:GetProducts"
-                  ],
-                  "Resource": "*"
+               "Sid": "OtherServicePermission",
+               "Effect": "Allow",
+               "Action": [
+                  "guardduty:GetDetector",
+                  "guardduty:ListDetectors",
+                  "inspector2:BatchGetAccountStatus",
+                  "pricing:GetProducts"
+               ],
+               "Resource": "*"
             }
          ]
       }
@@ -108,45 +108,45 @@ If you have chosen the **Organization integration**, you must attach the followi
          "Version": "2012-10-17",
          "Statement": [
             {
-                  "Sid": "OrganizationPermissions",
-                  "Effect": "Allow",
-                  "Action": [
-                     "organizations:ListAccounts",
-                     "organizations:DescribeOrganization",
-                     "organizations:ListRoots",
-                     "organizations:ListDelegatedAdministrators",
-                     "organizations:ListAWSServiceAccessForOrganization",
-                     "organizations:ListOrganizationalUnitsForParent",
-                     "organizations:ListAccountsForParent",
-                     "organizations:DescribeAccount",
-                     "organizations:DescribeOrganizationalUnit"
-                  ],
-                  "Resource": "*"
+               "Sid": "OrganizationPermissions",
+               "Effect": "Allow",
+               "Action": [
+                  "organizations:ListAccounts",
+                  "organizations:DescribeOrganization",
+                  "organizations:ListRoots",
+                  "organizations:ListDelegatedAdministrators",
+                  "organizations:ListAWSServiceAccessForOrganization",
+                  "organizations:ListOrganizationalUnitsForParent",
+                  "organizations:ListAccountsForParent",
+                  "organizations:DescribeAccount",
+                  "organizations:DescribeOrganizationalUnit"
+               ],
+               "Resource": "*"
             },
             {
-                  "Sid": "OrganizationPermissionsEnable",
-                  "Effect": "Allow",
-                  "Action": "organizations:EnableAWSServiceAccess",
-                  "Resource": "*",
-                  "Condition": {
-                     "StringEquals": {
-                        "organizations:ServicePrincipal": "securityhub.amazonaws.com"
-                     }
-                  }
-            },
-            {
-                  "Sid": "OrganizationPermissionsDelegatedAdmin",
-                  "Effect": "Allow",
-                  "Action": [
-                     "organizations:RegisterDelegatedAdministrator",
-                     "organizations:DeregisterDelegatedAdministrator"
-                  ],
-                  "Resource": "arn:aws:organizations::*:account/o-*/*",
-                  "Condition": {
+               "Sid": "OrganizationPermissionsEnable",
+               "Effect": "Allow",
+               "Action": "organizations:EnableAWSServiceAccess",
+               "Resource": "*",
+               "Condition": {
                   "StringEquals": {
                      "organizations:ServicePrincipal": "securityhub.amazonaws.com"
-                     }
                   }
+               }
+            },
+            {
+               "Sid": "OrganizationPermissionsDelegatedAdmin",
+               "Effect": "Allow",
+               "Action": [
+                  "organizations:RegisterDelegatedAdministrator",
+                  "organizations:DeregisterDelegatedAdministrator"
+               ],
+               "Resource": "arn:aws:organizations::*:account/o-*/*",
+               "Condition": {
+                  "StringEquals": {
+                     "organizations:ServicePrincipal": "securityhub.amazonaws.com"
+                  }
+               }
             }
          ]
       }
@@ -161,7 +161,7 @@ We recommend using `central configuration <https://docs.aws.amazon.com/securityh
 Integrating Security Hub with EventBridge
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-To integrate Security Hub with EventBridge, you need to create the following:
+To integrate Security Hub with EventBridge, you need to create the following resources:
 
 -  A Firehose stream in Amazon Data Firehose
 -  An event rule in EventBridge
@@ -174,7 +174,7 @@ The AWS documentation provides steps on how to configure the rule.
 -  `Creating an event rule for automatically sent findings <https://docs.aws.amazon.com/securityhub/latest/userguide/securityhub-cwe-all-findings.html#securityhub-cwe-all-findings-predefined-pattern>`__
 -  `Defining a rule for using custom actions to send findings and insight results <https://docs.aws.amazon.com/securityhub/latest/userguide/securityhub-cwe-custom-actions.html#securityhub-cwe-define-rule>`__
 
-Check the :doc:`Amazon WAF integration <waf>` for a configuration example of Firehose.
+Check the :doc:`Amazon WAF integration <waf>` for a Firehose configuration example.
 
 Amazon Simple Queue Service
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^
@@ -220,7 +220,7 @@ Amazon Simple Queue Service
       :width: 70%
 
 
-   You can make your access policy to accept S3 notifications from different account IDs and to apply different conditions. More information in `Managing access in Amazon SQS <https://docs.aws.amazon.com/AWSSimpleQueueService/latest/SQSDeveloperGuide/sqs-overview-of-managing-access.html>`_.
+You can make your access policy to accept S3 notifications from different account IDs and to apply different conditions. More information in `Managing access in Amazon SQS <https://docs.aws.amazon.com/AWSSimpleQueueService/latest/SQSDeveloperGuide/sqs-overview-of-managing-access.html>`_.
 
 Amazon S3 and Event Notifications
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
