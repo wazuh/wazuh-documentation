@@ -72,7 +72,7 @@ Custom branding of the PDF reports
 
 To customize the PDF reports, click **Dashboard management** > **App Settings**. Under the **Custom branding** section, set up the following properties:
 
--  ``customization.reports.logo``. This property sets the `PDF reports logo` image. It has a size limit of 1 MB. It's printed in the top left corner of the PDF reports. Recommended size: 190 pixels width, 40 pixels height. See #1 in the image below.
+-  ``customization.logo.reports``. This property sets the `PDF reports logo` image. It has a size limit of 1 MB. It's printed in the top left corner of the PDF reports. Recommended size: 190 pixels width, 40 pixels height. See #1 in the image below.
 
 -  ``customization.reports.footer``. This property sets the `Reports footer` text block. It has a size limit of 2 lines of 50 characters each. It's printed in the bottom left corner of the PDF reports. See #2 in the image below.
 

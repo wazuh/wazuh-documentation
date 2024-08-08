@@ -43,6 +43,7 @@ All notable changes to this project will be documented in this file.
 - Fix Amazon Security Lake Source integration validation step. ([#7360](https://github.com/wazuh/wazuh-documentation/pull/7360))
 - Updated commands in installing the Wazuh agent from sources section. ([#6973](https://github.com/wazuh/wazuh-documentation/pull/6973))
 - Fixed **Indexer management** and **Dashboard management** references. ([#7583](https://github.com/wazuh/wazuh-documentation/pull/7583))
+- Fixed the name of the property **customization.logo.reports** ([#7646](https://github.com/wazuh/wazuh-documentation/pull/7646))
 
 ### Removed
 
