@@ -37,9 +37,9 @@ The Wazuh messages protocol uses AES encryption by default, with 128 bits per bl
 Wazuh server - Wazuh indexer communication
 ------------------------------------------
 
-The Wazuh server utilizes Filebeat to securely transmit alert and event data to the Wazuh indexer via TLS encryption. Filebeat monitors the output data from the Wazuh server and forwards it to the Wazuh indexer, which, by default, listens on port 9200/TCP. After the data is indexed, it can be analyzed and visualized using the Wazuh dashboard.
+The Wazuh server uses Filebeat to securely transmit alert and event data to the Wazuh indexer via TLS encryption. Filebeat monitors output data from the Wazuh server and forwards it to the Wazuh indexer, which listens on port 9200/TCP by default. Once indexed, you can analyze and visualize the data through the Wazuh dashboard.
 
-Similarly, the Vulnerability Detector module generates alerts and updates the vulnerability inventory, providing ongoing insights into system vulnerabilities.
+The Vulnerability Detection module updates the vulnerability inventory. It also generates alerts, providing insights into system vulnerabilities.
 
 The Wazuh dashboard queries the Wazuh RESTful API (by default listening on port 55000/TCP on the Wazuh server) to display configuration and status-related information of the :doc:`Wazuh server <components/wazuh-server>` and :doc:`agents <components/wazuh-agent>`. It can also modify agents or server configuration settings through API calls. This communication is encrypted with TLS and authenticated with a username and password.
 
