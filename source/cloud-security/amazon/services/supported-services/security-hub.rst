@@ -16,29 +16,29 @@ Security Hub helps users assess their compliance against security best practices
 -  Generates control `findings <https://docs.aws.amazon.com/securityhub/latest/userguide/securityhub-findings.html>`__.
 -  Groups related findings into collections called `insights <https://docs.aws.amazon.com/securityhub/latest/userguide/securityhub-insights.html>`__.
 
-Wazuh integrates with `Amazon SQS <https://aws.amazon.com/sqs>`_ and `EventBridge <https://aws.amazon.com/eventbridge>`_ to centralize Security Hub findings and insights in a single place. To set up the integration, you need to:
+Wazuh integrates with `Amazon SQS <https://aws.amazon.com/sqs>`_ and `EventBridge <https://aws.amazon.com/eventbridge>`_ to centralize Security Hub findings and insights in a single place.
+
+EventBridge allows storing Security Hub findings and insights in S3 buckets.
+
+There are three types of events available, each type uses a specific `EventBridge event format <https://docs.aws.amazon.com/securityhub/latest/userguide/securityhub-cwe-event-formats.html>`__. The Wazuh integration takes every relevant ``detail`` and ``detail-type`` values from them.
+
+-  **Security Hub Findings - Imported**: Security Hub automatically sends events of this type to EventBridge. It includes all new findings as well as updates to existing findings. Each event contains a single finding.
+-  **Security Hub Findings - Custom Action**: Security Hub sends events of this type to EventBridge when custom actions are triggered. The events are associated with the findings of the custom actions.
+-  **Security Hub Insight Results**: This type of event is used to process the Security Hub Insights. You can use custom actions to send sets of insight results to EventBridge. Insight results are the resources that match an insight.
+
+Find more information about each type of event in `Types of Security Hub integration with EventBridge <https://docs.aws.amazon.com/securityhub/latest/userguide/securityhub-cwe-integration-types.html>`__.
+
+Amazon Simple Queue Service is a fully managed message queuing service that makes it easy to decouple and scale microservices, distributed systems, and serverless applications.
+
+In this case, it is used to acknowledge new events to pull from the S3 bucket.
+
+To set up the integration, you need to:
 
 #. Configure AWS. This involves the following.
 
    #. Enabling Amazon Security Hub.
    #. Integrating Security Hub with EventBridge.
-
-      EventBridge allows storing Security Hub findings and insights in S3 buckets.
-
-      There are three types of events available, each type uses a specific `EventBridge event format <https://docs.aws.amazon.com/securityhub/latest/userguide/securityhub-cwe-event-formats.html>`__. The Wazuh integration takes every relevant ``detail`` and ``detail-type`` values from them.
-
-      -  **Security Hub Findings - Imported**: Security Hub automatically sends events of this type to EventBridge. It includes all new findings as well as updates to existing findings. Each event contains a single finding.
-      -  **Security Hub Findings - Custom Action**: Security Hub sends events of this type to EventBridge when custom actions are triggered. The events are associated with the findings of the custom actions.
-      -  **Security Hub Insight Results**: This type of event is used to process the Security Hub Insights. You can use custom actions to send sets of insight results to EventBridge. Insight results are the resources that match an insight.
-
-      Find more information about each type of event in `Types of Security Hub integration with EventBridge <https://docs.aws.amazon.com/securityhub/latest/userguide/securityhub-cwe-integration-types.html>`__.
-
    #. Enabling an Amazon SQS queue.
-
-      Amazon Simple Queue Service is a fully managed message queuing service that makes it easy to decouple and scale microservices, distributed systems, and serverless applications.
-
-      In this case, it is used to acknowledge new events to pull from the S3 bucket.
-
    #. Enabling an Amazon S3 bucket including Event notifications. The bucket sends notifications to the queue for every Security Hub object creation event.
 #. Set up the Wazuh integration for Amazon Security Hub.
 
@@ -50,17 +50,22 @@ Enabling Security Hub
 
 AWS Security Hub uses service-linked AWS Config rules to perform security checks for most controls. We advise to `configure AWS Config <https://docs.aws.amazon.com/securityhub/latest/userguide/securityhub-setup-prereqs.html#securityhub-prereq-config>`_ as a prerequisite.
 
+.. thumbnail:: /images/aws/security-hub-set-up.png
+   :title: Enable AWS Security Hub
+   :alt: Enable AWS Security Hub
+   :align: center
+   :width: 80%
+
 You have two alternative ways to enable AWS Security Hub:
 
 -  `AWS Organizations integration <https://docs.aws.amazon.com/securityhub/latest/userguide/securityhub-settingup.html#securityhub-orgs-setup-overview>`_: Recommended for multi-account and multi-region environments.
--  `Manually <https://docs.aws.amazon.com/securityhub/latest/userguide/securityhub-settingup.html#securityhub-manual-setup-overview>`__: Recommended for standalone accounts and when the integration with AWS Organizations is unnecessary.
+-  `Manual <https://docs.aws.amazon.com/securityhub/latest/userguide/securityhub-settingup.html#securityhub-manual-setup-overview>`__: Recommended for standalone accounts and when the integration with AWS Organizations is unnecessary.
 
-   .. thumbnail:: /images/aws/security-hub-set-up.png
-      :align: center
-      :width: 70%
+If you choose the Organizations integration, you must attach the following AWS managed policies to the IAM identity.
 
-
-If you have chosen the **Organization integration**, you must attach the following AWS managed policies to the IAM identity.
+.. thumbnail:: /images/aws/security-hub-policies.png
+   :align: center
+   :width: 70%
 
 -  `AWSSecurityHubFullAccess <https://docs.aws.amazon.com/securityhub/latest/userguide/security-iam-awsmanpol.html#security-iam-awsmanpol-awssecurityhubfullaccess>`__ to access the Security Hub console and API operations.
 
@@ -151,11 +156,6 @@ If you have chosen the **Organization integration**, you must attach the followi
          ]
       }
 
-
-.. thumbnail:: /images/aws/security-hub-policies.png
-   :align: center
-   :width: 70%
-
 We recommend using `central configuration <https://docs.aws.amazon.com/securityhub/latest/userguide/central-configuration-intro.html>`__ to set up and manage Security Hub for the organization. Central configuration lets the administrator customize security coverage for the organization.
 
 Integrating Security Hub with EventBridge
@@ -166,7 +166,7 @@ To integrate Security Hub with EventBridge, you need to create the following res
 -  A Firehose stream in Amazon Data Firehose
 -  An event rule in EventBridge
 
-To send **Security Hub Findings - Custom Action** and **Security Hub Insight Results** events to EventBridge, you need to create a `custom action in Security Hub <https://docs.aws.amazon.com/securityhub/latest/userguide/securityhub-cwe-custom-actions.html>`__. Please refer to the Security Hub documentation to achieve this.
+To send *Security Hub Findings - Custom Action* and *Security Hub Insight Results* events to EventBridge, create a `custom action in Security Hub <https://docs.aws.amazon.com/securityhub/latest/userguide/securityhub-cwe-custom-actions.html>`__.
 
 EventBridge needs a target such as the Firehose stream. It triggers the target when it receives an event matching an event pattern. The event pattern is defined in the rule.
 The AWS documentation provides steps on how to configure the rule.
@@ -182,45 +182,51 @@ Amazon Simple Queue Service
 #. Set up a *Standard* type SQS Queue with the default configurations.  You can apply an Access Policy similar to the following example, where ``<region>``, ``<account-id>``, and ``<s3-bucket>`` are the region, account ID, and the name you are going to provide to the S3 bucket.
 
    .. code-block:: json
+      :emphasize-lines: 12
 
-     {
-     "Version": "2012-10-17",
-     "Id": "example-ID",
-     "Statement": [
-       {
-         "Sid": "example-access-policy",
-         "Effect": "Allow",
-         "Principal": {
-           "Service": "s3.amazonaws.com"
-         },
-         "Action": "SQS:SendMessage",
-         "Resource": "arn:aws:sqs:<region>:<account-id>:<s3-bucket>",
-         "Condition": {
-           "StringEquals": {
-             "aws:SourceAccount": "<account-id>"
-           },
-           "ArnLike": {
-             "aws:SourceArn": "arn:aws:s3:*:*:<s3-bucket>"
-           }
-         }
-       }
-     ]
-     }
+      {
+      "Version": "2012-10-17",
+      "Id": "example-ID",
+      "Statement": [
+        {
+          "Sid": "example-access-policy",
+          "Effect": "Allow",
+          "Principal": {
+            "Service": "s3.amazonaws.com"
+          },
+          "Action": "SQS:SendMessage",
+          "Resource": "arn:aws:sqs:<region>:<account-id>:<s3-bucket>",
+          "Condition": {
+            "StringEquals": {
+              "aws:SourceAccount": "<account-id>"
+            },
+            "ArnLike": {
+              "aws:SourceArn": "arn:aws:s3:*:*:<s3-bucket>"
+            }
+          }
+        }
+      ]
+      }
 
    .. thumbnail:: /images/aws/security-hub-sqs-1.png
+      :title: Create queue
+      :alt: Create queue
       :align: center
-      :width: 70%
+      :width: 80%
 
    .. thumbnail:: /images/aws/security-hub-sqs-2.png
+      :title: Create queue
+      :alt: Create queue
       :align: center
-      :width: 70%
+      :width: 80%
 
    .. thumbnail:: /images/aws/security-hub-sqs-3.png
+      :title: Create queue
+      :alt: Create queue
       :align: center
-      :width: 70%
+      :width: 80%
 
-
-You can make your access policy to accept S3 notifications from different account IDs and to apply different conditions. More information in `Managing access in Amazon SQS <https://docs.aws.amazon.com/AWSSimpleQueueService/latest/SQSDeveloperGuide/sqs-overview-of-managing-access.html>`_.
+You can make your access policy to accept S3 notifications from different account IDs and to apply different conditions. More information in `Managing access in Amazon SQS <https://docs.aws.amazon.com/AWSSimpleQueueService/latest/SQSDeveloperGuide/sqs-overview-of-managing-access.html>`__.
 
 Amazon S3 and Event Notifications
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
