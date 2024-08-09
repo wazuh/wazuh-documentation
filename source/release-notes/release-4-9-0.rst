@@ -184,6 +184,7 @@ RESTful API
 
 -  `#20507 <https://github.com/wazuh/wazuh/pull/20507>`__ Improved XML validation to match the Wazuh internal XML validator.
 -  `#22428 <https://github.com/wazuh/wazuh/pull/22428>`__ Fixed bug in ``GET /groups``.
+-  `#24946 <https://github.com/wazuh/wazuh/pull/24946>`__ Fixed the ``GET /agents/outdated`` endpoint query.
 
 Ruleset
 ^^^^^^^
