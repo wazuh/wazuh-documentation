@@ -1,3 +1,7 @@
+.no-scroll {
+  overflow: hidden;
+}
+
 .wazuh-light-box-overlay {
   position: fixed;
   top: 0;
@@ -43,6 +47,7 @@
     align-items: center;
     justify-content: center;
     pointer-events: all;
+    padding: 60px 60px 20px;
   }
   .wazuh-light-box-slide {
     position: fixed;
@@ -57,21 +62,54 @@
       pointer-events: auto;
       opacity: 1;
       transition: opacity .3s;
-      .wlb-prev-button,
-      .wlb-next-button {
-        display: block;
+    }
+    &.resized {
+      .wlb-image {
+        cursor: -moz-zoom-in; 
+        cursor: -webkit-zoom-in; 
+        cursor: zoom-in;
+      }
+    }
+    &.zoomed {
+      position: absolute;
+      display: flex;
+      padding: 50px 60px 20px;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      top: 0;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      @media (max-width:991px) {
+        padding: 50px 40px 10px;
+      }
+      .wlb-image-wrapper {
+        overflow: auto;
+        max-width: 100%;
+        max-height: 100%;
+        border-radius: 0;
+        .wlb-image {
+          max-width: unset;
+          max-height: unset;
+        }
+      }
+      .wlb-data-container > div {
+        text-align: center;
       }
     }
   }
   .wlb-loading {
     min-width: 50px;
     min-height: 50px;
-    margin-bottom: 40px;
     background-color: #fff;
     background-image: url("../img/loading.gif");
     background-repeat: no-repeat;
     background-position: center center;
     border-radius: 4px;
+    &.zoomed {
+      display: none;
+    }
   }
   .wlb-image-wrapper {
     position: relative;
@@ -102,20 +140,17 @@
     font-size: 12px;
     color: #999;
   }
+  .wlb-zoom-out-button,
   .wlb-close-button {
     position: fixed;
     top: 15px;
-    right: 15px;
     z-index: 110;
     width: 30px;
     height: 30px;
-    padding-right: 0;
-    padding-left: 30px;
     overflow: hidden;
     text-align: right;
     pointer-events: all;
     cursor: pointer;
-    background: url("../img/close.png") top right no-repeat;
     border: none;
     outline: none;
     opacity: .7;
@@ -126,51 +161,56 @@
       transition: opacity .2s;
     }
   }
-  .wlb-prev-button {
-    position: absolute;
-    top: 0;
-    left: 0;
-    z-index: 110;
-    width: 34%;
-    height: 100%;
-    pointer-events: all;
-    cursor: pointer;
-    background: url("../img/prev.png") top right no-repeat;
-    background-position: left center;
-    border: none;
-    outline: none;
-    opacity: 0;
-    transition: opacity .6s;
-    &:hover,
-    &:focus {
-      opacity: .7;
-      transition: opacity .6s;
+  .wlb-zoom-out-button {
+    right: 60px;
+    color: white;
+    display: none;
+    background: url("../img/zoom-out.png") top right no-repeat;
+    &.zoomed {
+      display: block;
     }
   }
+  .wlb-close-button {
+    right: 15px;
+    padding-right: 0;
+    padding-left: 0;
+    background: url("../img/close.png") top right no-repeat;
+  }
+  .wlb-prev-button {
+    left: 0;
+    background: url("../img/prev.png") top right no-repeat;
+    background-position: left center;
+  }
   .wlb-next-button {
-    position: absolute;
-    top: 0;
     right: 0;
-    z-index: 110;
-    width: 66%;
-    height: 100%;
-    pointer-events: all;
-    cursor: pointer;
     background: url("../img/next.png") top right no-repeat;
     background-position: right center;
-    border: none;
-    outline: none;
-    opacity: 0;
-    transition: opacity .6s;
-    &:hover,
-    &:focus {
-      opacity: .7;
-      transition: opacity .6s;
-    }
   }
   .wlb-prev-button,
   .wlb-next-button {
-    display: none;
+    width: 60px;
+    position: absolute;
+    top: 60px;
+    height: calc(100% - 120px);
+    z-index: 110;
+    pointer-events: all;
+    cursor: pointer;
+    border: none;
+    outline: none;
+    opacity: 0;
+    transition: opacity .6s;
+    &:hover,
+    &:focus {
+      opacity: .7;
+      transition: opacity .6s;
+    }
+    @media (hover: none) {
+      opacity: 1;
+    }
+    @media (max-width:991px) {
+      width: 40px;
+      background-size: 30px;
+    }
   }
 }
 
