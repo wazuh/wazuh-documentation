@@ -1,247 +1,233 @@
 .. Copyright (C) 2015, Wazuh, Inc.
 
 .. meta::
-  :description: Learn more about how to register Wazuh agents on Linux, Windows, or macOS X in this section of our documentation.
-  
-.. _troubleshooting:
+   :description: Learn about the logs on the Wazuh manager and Wazuh agent.
 
 Troubleshooting
 ===============
 
-As a general rule, it is recommended that the logs on the manager and agent are checked for errors when an agent fails to enroll.
+We recommend checking the logs on the Wazuh manager and Wazuh agent for errors when a Wazuh agent fails to enroll. The location of the Wazuh manager log file is ``/var/ossec/logs/ossec.log``. The location of the Wazuh agent log file is dependent on the operating system:
 
-The location of the agent log file is dependent on the operating system:
-
-- For Linux-based systems, the log file is located at ``/var/ossec/logs/ossec.log``
-- For Windows endpoints, the location of the log file is dependent on its architecture:
-     - For a 64-bit endpoint, it is located at ``C:\Program Files (x86)\ossec-agent\ossec.log``
-     - For a 32-bit endpoint, it is located at ``C:\Program Files\ossec-agent\ossec.logs``
-- For a macOS endpoint, the log file is located at ``/Library/Ossec/logs/ossec.log``
-
+================ =================================================
+Operating system Wazuh agent log file
+================ =================================================
+Linux/Unix       ``/var/ossec/logs/ossec.log``
+macOS            ``/Library/Ossec/logs/ossec.log``
+Windows 64-bit   ``C:\Program Files (x86)\ossec-agent\ossec.log``
+Windows 32-bit   ``C:\Program Files\ossec-agent\ossec.log``
+================ =================================================
 
 In the list below, you can access the different cases included in this troubleshooting section:
 
-- :ref:`troubleshooting-testing-communication`
-- :ref:`troubleshooting-authentication-error`
-- :ref:`troubleshooting-invalid-agent-name`
-- :ref:`troubleshooting-unable-to-read-ca-certificate-file`
-- :ref:`troubleshooting-unable-to-read-private-key-file`
-- :ref:`troubleshooting-unable-to-read-certificate-file`
-- :ref:`troubleshooting-invalid-password`
+.. contents::
+   :local:
+   :depth: 1
+   :backlinks: none
 
+Verifying communication with the Wazuh manager
+----------------------------------------------
 
-.. _troubleshooting-testing-communication:
+In some scenarios, the Wazuh agent may be unable to enroll or establish a connection with the Wazuh manager because the necessary ports on the Wazuh manager are unreachable.
 
+The following default ports on the Wazuh manager should be opened:
 
-Testing communication with the Wazuh manager
---------------------------------------------
+-  1514/TCP for agent communication.
+-  1515/TCP for enrollment via agent configuration.
+-  55000/TCP for enrollment via Wazuh server API.
 
-There are situations where the agents cannot be enrolled nor connection established to the manager because the necessary ports on the manager are not reachable.
+On Linux and macOS systems (with netcat installed), open a terminal and run the following command. Replace ``<WAZUH_MANAGER_IP>`` with your Wazuh manager IP address or FQDN (Fully Qualified Domain Name).
 
-The following default ports on the manager should be opened: 
+.. code-block:: console
 
-- 1514/TCP for agent communication.
-- 1515/TCP for enrollment via agent configuration.
-- 55000/TCP for enrollment via manager API.
-- Replace ``<MANAGER_IP>`` with your Wazuh Manager IP address or DNS name.
-- On Linux and macOS systems (with netcat installed), open a terminal and run the following command:
+   # nc -zv <WAZUH_MANAGER_IP> 1514 1515 55000
 
-    .. code-block:: console
+If there is connectivity, the output should be a connection success message:
 
-        # nc -zv <MANAGER_IP> 1514 1515 55000
+.. code-block:: none
 
-            
-    If there is connectivity, the output should be a connection success message:
+   Connection to <WAZUH_MANAGER_IP> port 1514 [tcp] succeeded!
+   Connection to <WAZUH_MANAGER_IP> port 1515 [tcp] succeeded!
+   Connection to <WAZUH_MANAGER_IP> port 55000 [tcp] succeeded!
 
-    .. code-block:: xml
-      :class: output
+On Windows, open a PowerShell terminal and run the following command:
 
-        Connection to <MANAGER_IP> port 1514 [tcp] succeeded!
-        Connection to <MANAGER_IP> port 1515 [tcp] succeeded!
-        Connection to <MANAGER_IP> port 55000 [tcp] succeeded!
+.. code-block:: pwsh-session
 
-- On Windows, open a PowerShell terminal and run the following command:
+   # (new-object Net.Sockets.TcpClient).Connect("<WAZUH_MANAGER_IP>", 1514)
+   # (new-object Net.Sockets.TcpClient).Connect("<WAZUH_MANAGER_IP>", 1515)
+   # (new-object Net.Sockets.TcpClient).Connect("<WAZUH_MANAGER_IP>", 55000)
 
-    .. code-block:: console
+If there is connectivity, there is no output. Otherwise, an error is shown:
 
-        # (new-object Net.Sockets.TcpClient).Connect("<MANAGER_IP>", 1514)
-        # (new-object Net.Sockets.TcpClient).Connect("<MANAGER_IP>", 1515)
-        # (new-object Net.Sockets.TcpClient).Connect("<MANAGER_IP>", 55000)
+.. code-block:: none
 
-    If there is connectivity, there is no output, otherwise, an error is shown:
-
-    .. code-block:: xml
-      :class: output
-
-      A connection attempt failed because the connected party did not properly respond after a period of time (...)
-
-
-.. _troubleshooting-authentication-error:
-
+   A connection attempt failed because the connected party did not properly respond after a period of time (...)
 
 Authentication error
 --------------------
 
-**Location:** Manager log.
+The ``client.keys`` file stores the data used to authenticate the Wazuh agent and the Wazuh manager. The Wazuh agent may be unable to authenticate with the Wazuh manager if the ``client.keys`` on the Wazuh manager and the Wazuh agent are different.
 
-**Error log:**
+**Location**: Wazuh manager log file at ``/var/ossec/logs/ossec.log``.
 
-.. code-block:: xml
-    :class: output
+**Error log**:
 
-    2022/02/03 10:07:32 wazuh-remoted: WARNING: (1404): Authentication error. Wrong key or corrupt payload. Message received from agent '001' at 'any'.
+.. code-block:: none
 
+   2022/02/03 10:07:32 wazuh-remoted: WARNING: (1404): Authentication error. Wrong key or corrupt payload. Message received from agent '001' at 'any'.
 
-**Resolution:** 
-Ensure that the client key on the agent matches the key in the manager client.keys file. The key file can be found at ``/var/ossec/etc/client.keys`` on both the manager and the agent.
+**Resolution**: Ensure that the client key on the Wazuh agent matches the key in the Wazuh manager ``client.keys`` file. You can find the ``client.keys`` key file at the following locations:
 
+============= ====================================================
+Endpoint      Location
+============= ====================================================
+Wazuh manager ``/var/ossec/etc/client.keys``
+Linux/Unix    ``/var/ossec/etc/client.keys``
+macOS         ``/Library/Ossec/etc/client.keys``
+Windows       ``"C:\Program Files (x86)\ossec-agent\client.keys"``
+============= ====================================================
 
-.. _troubleshooting-invalid-agent-name:
+Also, verify that each agent has a unique agent key stored in the Wazuh manager ``/var/ossec/etc/client.keys`` file. Duplicate keys can arise if you previously deleted agents with the highest IDs or copied the ``client.keys`` file between agents.
 
 
 Invalid agent name for enrollment
 ---------------------------------
 
-**Location:** Agent log.
+Each Wazuh agent must have a unique name before successfully enrolling in the Wazuh manager. If you do not specify a Wazuh agent name during the deployment process, Wazuh will use the endpoint's hostname. If two or more endpoints have the same hostname, the Wazuh agent enrollment will not be successful.
 
-**Error log:**
+**Location**: Wazuh agent log file
+
+Refer to the table in the :doc:`Troubleshooting <troubleshooting>` section for the Wazuh agent log file location.
+
+**Error log**:
+
+.. code-block:: none
+
+   2022/01/26 08:59:10 wazuh-agentd: INFO: Using agent name as: localhost.localdomain
+   2022/01/26 08:59:10 wazuh-agentd: INFO: Waiting for server reply
+   2022/01/26 08:59:10 wazuh-agentd: ERROR: Invalid agent name: localhost.localdomain (from manager)
+   2022/01/26 08:59:10 wazuh-agentd: ERROR: Unable to add agent (from manager)
+
+**Resolution**: Ensure the Wazuh agent hostname is unique and does not match an already enrolled agent. Alternatively, specify a unique agent name in the ``<client><enrollment><agent_name>`` section of the Wazuh agent ``ossec.conf`` file. You can find the ``ossec.conf`` file at the following locations:
+
+-  Linux/Unix endpoints - ``/var/ossec/etc/ossec.conf``
+-  macOS endpoint - ``/Library/Ossec/etc/ossec.conf``
+-  Windows endpoints - ``C:\Program Files (x86)\ossec-agent\ossec.conf``
 
 .. code-block:: xml
-    :class: output
+   :emphasize-lines: 4
 
-    2022/01/26 08:59:10 wazuh-agentd: INFO: Using agent name as: localhost.localdomain
-    2022/01/26 08:59:10 wazuh-agentd: INFO: Waiting for server reply
-    2022/01/26 08:59:10 wazuh-agentd: ERROR: Invalid agent name: localhost.localdomain (from manager)
-    2022/01/26 08:59:10 wazuh-agentd: ERROR: Unable to add agent (from manager)
-
-
-**Resolution:** 
-Ensure the agent hostname is unique and does not match an already enrolled agent. Alternatively, specify a unique agent name in the ``<client><enrollment><agent_name>`` section of the agent ossec.conf file.
-
-.. code-block:: xml
-    :emphasize-lines: 4
-
-        <client>
+   <client>
+        ...
+        <enrollment>
+            <agent_name>EXAMPLE_NAME</agent_name>
             ...
-            <enrollment>
-                <agent_name>EXAMPLE_NAME</agent_name>
-                ...
-            </enrollment>
-        </client>
-
-
-.. _troubleshooting-unable-to-read-ca-certificate-file:
-
+        </enrollment>
+    </client>
 
 Unable to read CA certificate file
 ----------------------------------
 
-**Location:** Manager log
+The Wazuh agent may not be able to authenticate with the Wazuh manager if the root certificate authority is missing on either the Wazuh manager or the Wazuh agent. This applies when additional security options such as :doc:`Wazuh manager identity verification <security-options/manager-identity-verification>` and :doc:`Wazuh agent identity verification <security-options/agent-identity-verification>` are used.
 
-**Error log:**
+**Location**: Wazuh manager log file at ``/var/ossec/logs/ossec.log``.
 
-.. code-block:: xml
-    :class: output
+**Error log**:
 
-    2022/01/26 08:25:01 wazuh-authd: ERROR: Unable to read CA certificate file "/var/ossec/etc/rootCA.pem"
-    2022/01/26 08:25:01 wazuh-authd: ERROR: SSL error. Exiting.
+.. code-block:: none
 
-**Resolution:**  
-Ensure the certificate authority file is in the location specified in the ``<ssl_agent_ca>`` section of the manager ossec.conf file.
+   2022/01/26 08:25:01 wazuh-authd: ERROR: Unable to read CA certificate file "/var/ossec/etc/rootCA.pem"
+   2022/01/26 08:25:01 wazuh-authd: ERROR: SSL error. Exiting.
 
+**Resolution**: Ensure the certificate authority file is in the location specified in the ``<ssl_agent_ca>`` section of the Wazuh manager ``/var/ossec/etc/ossec.conf`` file.
 
+**Location**: Wazuh agent log file
 
-**Location:** Agent log
+Refer to the table in the :doc:`Troubleshooting <troubleshooting>` section for the Wazuh agent log file location.
 
-**Error log:**
+**Error log**:
 
-.. code-block:: xml
-    :class: output
+.. code-block:: none
 
-    2022/01/26 08:25:01 wazuh-authd: ERROR: Unable to read CA certificate file "/var/ossec/etc/rootCA.pem"
-    2022/01/26 08:25:01 wazuh-authd: ERROR: SSL error. Exiting.
+   2022/01/26 08:25:01 wazuh-authd: ERROR: Unable to read CA certificate file "/var/ossec/etc/rootCA.pem"
+   2022/01/26 08:25:01 wazuh-authd: ERROR: SSL error. Exiting.
 
-**Location:** Agent log
+**Resolution**: Ensure the certificate authority file is in the location specified in the ``<server_ca_path>`` section of the Wazuh agent configuration file (``ossec.conf``). You can find the ``ossec.conf`` file at the following locations:
 
-**Resolution:** 
-Ensure the certificate authority file is in the location specified in the ``<server_ca_path>`` section of the agent ``ossec.conf`` file.
-
-
-.. _troubleshooting-unable-to-read-private-key-file:
-
+-  Linux/Unix endpoints - ``/var/ossec/etc/ossec.conf``
+-  macOS endpoint - ``/Library/Ossec/etc/ossec.conf``
+-  Windows endpoints - ``C:\Program Files (x86)\ossec-agent\ossec.conf``
 
 Unable to read private key file
 -------------------------------
 
-**Location:** Agent log
+The Wazuh agent may not be able to authenticate with the Wazuh manager if the private key file is missing on the Wazuh agent. This applies when :doc:`Wazuh agent identity verification <security-options/agent-identity-verification>` is used for the Wazuh agent enrollment.
 
-**Error log:**
+**Location**: Wazuh agent log file
 
-.. code-block:: xml
-    :class: output
+Refer to the table in the :doc:`Troubleshooting <troubleshooting>` section for the Wazuh agent log file location.
 
-    2022/01/26 08:57:18 wazuh-agentd: ERROR: Unable to read private key file: /var/ossec/etc/sslagent.key
-    2022/01/26 08:57:18 wazuh-agentd: ERROR: Could not set up SSL connection! Check certification configuration.
+**Error log**:
 
+.. code-block:: none
 
-**Resolution:** 
-Ensure the agent private key file is in the location specified in the ``<agent_key_path>`` section of the agent ``ossec.conf`` file.
+   2022/01/26 08:57:18 wazuh-agentd: ERROR: Unable to read private key file: /var/ossec/etc/sslagent.key
+   2022/01/26 08:57:18 wazuh-agentd: ERROR: Could not set up SSL connection! Check certification configuration.
 
+**Resolution**: Ensure the agent private key file is in the location specified in the ``<agent_key_path>`` section of the Wazuh agent ``ossec.conf`` file. You can find the ossec.conf file at the following locations:
 
-.. _troubleshooting-unable-to-read-certificate-file:
-
+-  Linux/Unix endpoints - ``/var/ossec/etc/ossec.conf``
+-  macOS endpoint - ``/Library/Ossec/etc/ossec.conf``
+-  Windows endpoints - ``C:\Program Files (x86)\ossec-agent\ossec.conf``
 
 Unable to read certificate file
 -------------------------------
 
+The Wazuh agent may not be able to authenticate with the Wazuh manager if the signed SSL certificate is missing on the Wazuh agent. This applies when :doc:`Wazuh agent identity verification <security-options/agent-identity-verification>` is used for the Wazuh agent enrollment.
 
-**Location:** Agent log
+**Location**: Wazuh agent log file
 
+Refer to the table in the :doc:`Troubleshooting <troubleshooting>` section for the Wazuh agent log file location.
 
-**Error log:**
+**Error log**:
 
-.. code-block:: xml
-    :class: output
+.. code-block:: none
 
-    2022/01/26 08:54:55 wazuh-agentd: ERROR: Unable to read certificate file (not found): /var/ossec/etc/sslagent.cert
-    2022/01/26 08:54:55 wazuh-agentd: ERROR: Could not set up SSL connection! Check certification configuration.
+   2022/01/26 08:54:55 wazuh-agentd: ERROR: Unable to read certificate file (not found): /var/ossec/etc/sslagent.cert
+   2022/01/26 08:54:55 wazuh-agentd: ERROR: Could not set up SSL connection! Check certification configuration.
 
+**Resolution**: Ensure the agent certificate file is in the location specified in the ``<agent_certificate_path>`` section of the Wazuh agent ``ossec.conf`` file. You can find the ``ossec.conf`` file at the following locations:
 
-**Resolution:**  
-Ensure the agent certificate file is in the location specified in the ``<agent_certificate_path>`` section of the agent ``ossec.conf`` file.
-
-
-.. _troubleshooting-invalid-password:
-
+-  Linux/Unix endpoints - ``/var/ossec/etc/ossec.conf``
+-  macOS endpoint - ``/Library/Ossec/etc/ossec.conf``
+-  Windows endpoints - ``C:\Program Files (x86)\ossec-agent\ossec.conf``
 
 Invalid password
 ----------------
 
-**Location:** Agent log
+If you enable :doc:`password authentication <security-options/using-password-authentication>` for agent enrollment, the Wazuh agent may not be able to authenticate with the Wazuh manager if there's an invalid or missing password.
 
+**Location**: Wazuh agent log file
 
+Refer to the table in the :doc:`Troubleshooting <troubleshooting>` section for the Wazuh agent log file location.
 
-**Error log:**
+**Error log**:
 
-.. code-block:: xml
-    :class: output
+.. code-block:: none
 
-    2022/01/26 12:28:10 wazuh-agentd: INFO: Requesting a key from server: X.X.X.X
-    2022/01/26 12:28:10 wazuh-agentd: INFO: No authentication password provided
-    2022/01/26 12:28:10 wazuh-agentd: INFO: Using agent name as: random
-    2022/01/26 12:28:10 wazuh-agentd: INFO: Waiting for server reply
-    2022/01/26 12:28:10 wazuh-agentd: ERROR: Invalid password (from manager)
-    2022/01/26 12:28:10 wazuh-agentd: ERROR: Unable to add agent (from manager)
+   2022/01/26 12:28:10 wazuh-agentd: INFO: Requesting a key from server: X.X.X.X
+   2022/01/26 12:28:10 wazuh-agentd: INFO: No authentication password provided
+   2022/01/26 12:28:10 wazuh-agentd: INFO: Using agent name as: random
+   2022/01/26 12:28:10 wazuh-agentd: INFO: Waiting for server reply
+   2022/01/26 12:28:10 wazuh-agentd: ERROR: Invalid password (from manager)
+   2022/01/26 12:28:10 wazuh-agentd: ERROR: Unable to add agent (from manager)
 
+**Resolution**:
 
-**Resolution:** 
+#. Ensure the same password is used by the Wazuh manager and the Wazuh agent
+#. Ensure that the ``authd.pass`` password file is in the ``/var/ossec/etc/`` directory and has the right permission. The file permissions should be set to 640, and the owner should be ``root``.
+#. If password authentication is not needed, it should be disabled in the ``<auth>`` section of the Wazuh manager ``/var/ossec/etc/ossec.conf`` file. You can find the ``ossec.conf`` file at the following locations:
 
-#. Ensure the same password is used by the manager and the agent
-#. Ensure the ``“authd.pass”`` password file is in the right location and has the right permission
-#. If password authentication is not needed, it should be disabled in the ``<auth>`` section of the manager ``ossec.conf`` file.
-
-
-
-
-
-    
+   -  Linux/Unix endpoints - ``/var/ossec/etc/ossec.conf``
+   -  macOS endpoint - ``/Library/Ossec/etc/ossec.conf``
+   -  Windows endpoints - ``C:\Program Files (x86)\ossec-agent\ossec.conf``

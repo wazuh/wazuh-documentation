@@ -75,6 +75,7 @@ This is the installation workflow you will follow:
     </div>
   </div>
 
+.. _installing_the_wazuh_agent:
 
 Installing the Wazuh agent
 --------------------------
