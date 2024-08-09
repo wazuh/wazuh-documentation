@@ -132,4 +132,8 @@ Then the Wazuh dashboard will show you the steps to deploy a new agent.
 
     Linux <wazuh-agent-package-linux>
     Windows <wazuh-agent-package-windows>
-    macOS <wazuh-agent-package-macos>   
+    macOS <wazuh-agent-package-macos>
+    Solaris <wazuh-agent-package-solaris>
+    AIX <wazuh-agent-package-aix>
+    HP-UX <wazuh-agent-package-hpux>
+       

@@ -102,3 +102,66 @@ Follow these steps to uninstall the Wazuh agent from your macOS endpoint.
       # /usr/sbin/pkgutil --forget com.wazuh.pkg.wazuh-agent
 
 The Wazuh agent is now completely removed from your macOS endpoint.
+
+.. _uninstalling_solaris_agent:
+
+Uninstalling a Solaris Wazuh agent
+----------------------------------
+
+Select the Solaris version you want to uninstall.
+
+.. tabs::
+
+  .. group-tab:: Solaris 10
+
+    .. include:: ../../_templates/installations/wazuh/solaris/uninstall_wazuh_agent_s10.rst
+
+  .. group-tab:: Solaris 11
+
+    .. include:: ../../_templates/installations/wazuh/solaris/uninstall_wazuh_agent_s11.rst
+
+The Wazuh agent is now completely removed from your Solaris endpoint.
+
+.. _uninstalling_aix_agent:
+
+Uninstalling an AIX Wazuh agent
+-------------------------------
+
+Follow the steps below to uninstall the Wazuh agent from the AIX endpoint.
+
+.. code-block:: console
+
+   # rpm -e wazuh-agent
+
+Some files are not removed from the filesystem by the package manager. Delete the ``/var/ossec/`` folder if you want to remove all files completely. 
+
+The Wazuh agent is now completely removed from your AIX system
+
+.. _uninstalling_hpux_agent:
+
+Uninstalling an HP-UX Wazuh agent
+---------------------------------
+
+Follow the steps below to uninstall the Wazuh agent from the HP-UX endpoint.
+
+#. Stop the Wazuh agent service.
+
+
+   .. code-block:: console
+
+      # /var/ossec/bin/wazuh-control stop
+
+#. Delete ``wazuh`` user and group:
+
+   .. code-block:: console
+
+      # groupdel wazuh
+      # userdel wazuh
+
+#. Remove Wazuh files.
+
+   .. code-block:: console
+
+      # rm -rf /var/ossec
+
+The Wazuh agent is now completely removed from your HP-UX endpoint.

@@ -131,7 +131,7 @@ It can also be helpful to know which rules matching a specific criteria are avai
 Testing rules and decoders
 ^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-With the Wazuh API, it is possible to start a **** session or use an already started session to test and verify custom or default rules and decoders. With the following request, a logtest session is created and the rules and decoders that match with the given log are shown. The predecoding phase is also shown, among other information.
+With the Wazuh API, it is possible to start a **wazuh-logtest** session or use an already started session to test and verify custom or default rules and decoders. With the following request, a logtest session is created and the rules and decoders that match with the given log are shown. The predecoding phase is also shown, among other information.
 
 .. code-block:: console
 
@@ -339,7 +339,22 @@ Some information about the manager can be retrieved using the Wazuh API. Configu
       "data": {
         "affected_items": [
           {
+            "wazuh-agentlessd": "running",
+            "wazuh-analysisd": "running",
+            "wazuh-authd": "running",
+            "wazuh-csyslogd": "running",
+            "wazuh-dbd": "stopped",
+            "wazuh-monitord": "running",
+            "wazuh-execd": "running",
+            "wazuh-integratord": "running",
+            "wazuh-logcollector": "running",
+            "wazuh-maild": "running",
+            "wazuh-remoted": "running",
+            "wazuh-reportd": "stopped",
+            "wazuh-syscheckd": "running",
             "wazuh-clusterd": "running",
+            "wazuh-modulesd": "running",
+            "wazuh-db": "running",
             "wazuh-apid": "stopped"
           }
         ],

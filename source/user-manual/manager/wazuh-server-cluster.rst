@@ -165,7 +165,7 @@ Worker node
 
    .. code-block:: console
 
-      # 
+      # /var/ossec/bin/cluster_control -l
 
    .. note::
 
@@ -1239,7 +1239,7 @@ Verify that the Wazuh server cluster is enabled and all the nodes are connected 
 
 .. code-block:: console
 
-   # 
+   # /var/ossec/bin/cluster_control -l
 
 A sample output of the command:
 

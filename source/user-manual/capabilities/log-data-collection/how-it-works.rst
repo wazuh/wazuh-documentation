@@ -6,7 +6,7 @@
 How it works
 ============
 
-Wazuh uses the Logcollector module to collect logs from monitored endpoints, applications, and network devices. The Wazuh server then analyzes the collected logs in real-time using decoders and rules. Wazuh extracts relevant information from the logs and maps them to appropriate fields using decoders. The  module in the Wazuh server evaluates the decoded logs against rules and records all alerts in ``/var/ossec/logs/alerts/alerts.log`` and ``/var/ossec/logs/alerts/alerts.json`` files.
+Wazuh uses the Logcollector module to collect logs from monitored endpoints, applications, and network devices. The Wazuh server then analyzes the collected logs in real-time using decoders and rules. Wazuh extracts relevant information from the logs and maps them to appropriate fields using decoders. The Analysisd module in the Wazuh server evaluates the decoded logs against rules and records all alerts in ``/var/ossec/logs/alerts/alerts.log`` and ``/var/ossec/logs/alerts/alerts.json`` files.
 
 In addition to alert logs, Wazuh stores all collected logs in dedicated archive log files, specifically ``/var/ossec/logs/archives/archives.log`` and ``/var/ossec/logs/archives/archives.json``. These archive log files comprehensively capture all logs, including those that do not trigger any alerts. This feature ensures a comprehensive record of all system activities for future reference and analysis. 
 

@@ -369,7 +369,7 @@ cluster:read
 - :api-ref:`GET /cluster/{node_id}/logs <operation/api.controllers.cluster_controller.get_log_node>` (`node:id`_)
 - :api-ref:`GET /cluster/{node_id}/logs/summary <operation/api.controllers.cluster_controller.get_log_summary_node>` (`node:id`_)
 - :api-ref:`GET /cluster/{node_id}/stats <operation/api.controllers.cluster_controller.get_stats_node>` (`node:id`_)
-- :api-ref:`GET /cluster/{node_id}/stats/ <operation/api.controllers.cluster_controller.>` (`node:id`_)
+- :api-ref:`GET /cluster/{node_id}/stats/analysisd <operation/api.controllers.cluster_controller.get_stats_analysisd_node>` (`node:id`_)
 - :api-ref:`GET /cluster/{node_id}/stats/hourly <operation/api.controllers.cluster_controller.get_stats_hourly_node>` (`node:id`_)
 - :api-ref:`GET /cluster/{node_id}/stats/remoted <operation/api.controllers.cluster_controller.get_stats_remoted_node>` (`node:id`_)
 - :api-ref:`GET /cluster/{node_id}/stats/weekly <operation/api.controllers.cluster_controller.get_stats_weekly_node>` (`node:id`_)
@@ -491,7 +491,7 @@ manager:read
 - :api-ref:`GET /manager/logs <operation/api.controllers.manager_controller.get_log>` (`*:*`_)
 - :api-ref:`GET /manager/logs/summary <operation/api.controllers.manager_controller.get_log_summary>` (`*:*`_)
 - :api-ref:`GET /manager/stats <operation/api.controllers.manager_controller.get_stats>` (`*:*`_)
-- :api-ref:`GET /manager/stats/ <operation/api.controllers.manager_controller.>` (`*:*`_)
+- :api-ref:`GET /manager/stats/analysisd <operation/api.controllers.manager_controller.get_stats_analysisd>` (`*:*`_)
 - :api-ref:`GET /manager/stats/hourly <operation/api.controllers.manager_controller.get_stats_hourly>` (`*:*`_)
 - :api-ref:`GET /manager/stats/remoted <operation/api.controllers.manager_controller.get_stats_remoted>` (`*:*`_)
 - :api-ref:`GET /manager/stats/weekly <operation/api.controllers.manager_controller.get_stats_weekly>` (`*:*`_)
@@ -851,7 +851,7 @@ Allow reading all decoder files in the system.
 
 events_ingest
 ^^^^^^^^^^^^^
-Allow sending events.
+Allow sending events to analysisd.
 
 .. code-block:: yaml
 

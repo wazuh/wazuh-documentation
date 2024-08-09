@@ -79,6 +79,8 @@ Wazuh can be installed in two ways: as a manager by using the "server/manager" i
 +---------------------------------------------------------------------+------------------------+
 | :doc:`rootcheck <rootcheck>`                                        | manager, agent         |
 +---------------------------------------------------------------------+------------------------+
+| :doc:`rule_test <rule-test>`                                        | manager                |
++---------------------------------------------------------------------+------------------------+
 | :doc:`ruleset <ruleset>`                                            | manager                |
 +---------------------------------------------------------------------+------------------------+
 | :doc:`sca <sca>`                                                    | manager, agent         |
@@ -92,6 +94,8 @@ Wazuh can be installed in two ways: as a manager by using the "server/manager" i
 | :doc:`task-manager <task-manager>`                                  | manager                |
 +---------------------------------------------------------------------+------------------------+
 | :doc:`vulnerability-detection <vuln-detector>`                      | manager                |
++---------------------------------------------------------------------+------------------------+
+| :doc:`wazuh_db <wazuh-db-config>`                                   | manager                |
 +---------------------------------------------------------------------+------------------------+
 | :doc:`wodle name="agent-key-polling" <wodle-agent-key-polling>`     | manager                |
 +---------------------------------------------------------------------+------------------------+
@@ -148,6 +152,7 @@ All of the above sections must be located within the top-level ``<ossec_config>`
    reports
    rootcheck
    sca
+   rule-test
    ruleset
    socket
    syscheck
@@ -162,7 +167,9 @@ All of the above sections must be located within the top-level ``<ossec_config>`
    wodle-ciscat
    wodle-s3
    wodle-syscollector
+   wazuh-db-config
    wodle-osquery
    wodle-docker
    wodle-azure-logs
    wodle-agent-key-polling
+   verifying-configuration

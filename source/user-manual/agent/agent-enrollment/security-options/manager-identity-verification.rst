@@ -175,7 +175,7 @@ The following steps serve as a guide on how to enroll a Linux/Unix endpoint by u
 
          .. code-block:: console
 
-             # 
+             # /var/ossec/bin/wazuh-control restart
 
 
 #. Select the **Endpoints Summary** module to check for the newly enrolled agent and its connection status in the Wazuh dashboard to confirm that enrollment was successful.
@@ -278,7 +278,7 @@ The following steps serve as a guide on how to enroll a macOS endpoint by using 
 
       .. code-block:: console
 
-         # 
+         # /Library/Ossec/bin/wazuh-control restart
 
 
 #. Select the **Endpoints Summary** module to check for the newly enrolled agent and its connection status in the Wazuh dashboard to confirm that enrollment was successful.
