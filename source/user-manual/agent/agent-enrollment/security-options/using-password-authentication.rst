@@ -76,7 +76,7 @@ Before an agent can be enrolled to the Wazuh manager using the password authenti
          .. code-block:: xml
             :class: output   
 
-            2022/01/11 12:41:35 wazuh-authd: INFO: Accepting connections on port 1515. Random password chosen for agent authentication: 6258b4eb21550e4f182a08c10d94585e
+            2022/01/11 12:41:35 : INFO: Accepting connections on port 1515. Random password chosen for agent authentication: 6258b4eb21550e4f182a08c10d94585e
 
 
 .. note::
@@ -156,8 +156,7 @@ The following steps serve as a guide on how to enroll a Linux/Unix endpoint with
 
          .. code-block:: console
 
-             # /var/ossec/bin/wazuh-control restart
-
+             # 
 
 #. Select the **Server management** > **Endpoints Summary** module to check for the newly enrolled agent and its connection status in the Wazuh dashboard to confirm that enrollment was successful.
 
@@ -272,7 +271,6 @@ The following steps serve as a guide on how to enroll a macOS endpoint with pass
 
        .. code-block:: console
 
-        # /Library/Ossec/bin/wazuh-control restart
-
+        # 
 #. Select the **Server management** > **Endpoints Summary** module to check for the newly enrolled agent and its connection status in the Wazuh dashboard to confirm that enrollment was successful.
 

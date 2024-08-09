@@ -16,7 +16,7 @@ The Wazuh FIM module uses two databases to collect FIM event data, such as file 
 - ``/var/ossec/queue/fim/db`` on Linux.
 - ``/Library/Ossec/queue/fim/db`` on macOS. 
 
-The other is an agent database on the Wazuh server. The :doc:`wazuh-db </user-manual/reference/daemons/wazuh-db>`. daemon creates and manages a database for each agent on the Wazuh server. It uses the ID of the agent to identify the database. This service stores the databases at ``/var/ossec/queue/db``.
+The other is an agent database on the Wazuh server. The :doc:` <>`. daemon creates and manages a database for each agent on the Wazuh server. It uses the ID of the agent to identify the database. This service stores the databases at ``/var/ossec/queue/db``.
 
 .. thumbnail:: ../../../images/manual/fim/fim-flow.png
   :title: File Integrity Monitoring

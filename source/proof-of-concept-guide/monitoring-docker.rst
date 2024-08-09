@@ -119,7 +119,7 @@ Troubleshooting
 
    .. code-block:: none
 
-      wazuh-modulesd:docker-listener: ERROR: /usr/bin/env: ‘python’: No such file or directory
+      :docker-listener: ERROR: /usr/bin/env: ‘python’: No such file or directory
    
    **Location**: Wazuh agent log - ``/var/ossec/logs/ossec.log``
 

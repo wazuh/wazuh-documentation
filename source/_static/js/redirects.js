@@ -78,6 +78,55 @@ newUrls['5.0'] = [
 
 /* Pages no longer available in 5.0 */
 
+removedUrls['5.0'] = [
+  '/development/wazuh-logtest.rst',
+  '/user-manual/agent/agent-management/listing/using-command-line.rst',
+  '/user-manual/agent/agent-management/remote-upgrading/install-custom-wpk.rst',
+  '/user-manual/capabilities/command-monitoring/command-output-analysis.rst',
+  '/user-manual/manager/wazuh-server-queue.rst',
+  '/user-manual/reference/daemons/wazuh-agentd.rst',
+  '/user-manual/reference/daemons/wazuh-agentlessd.rst',
+  '/user-manual/reference/daemons/wazuh-analysisd.rst',
+  '/user-manual/reference/daemons/wazuh-authd.rst',
+  '/user-manual/reference/daemons/wazuh-csyslogd.rst',
+  '/user-manual/reference/daemons/wazuh-db.rst',
+  '/user-manual/reference/daemons/wazuh-dbd.rst',
+  '/user-manual/reference/daemons/wazuh-execd.rst',
+  '/user-manual/reference/daemons/wazuh-logcollector.rst',
+  '/user-manual/reference/daemons/wazuh-integratord.rst',
+  '/user-manual/reference/daemons/wazuh-maild.rst',
+  '/user-manual/reference/daemons/wazuh-modulesd.rst',
+  '/user-manual/reference/daemons/wazuh-monitord.rst',
+  '/user-manual/reference/daemons/wazuh-remoted.rst',
+  '/user-manual/reference/daemons/wazuh-reportd.rst',
+  '/user-manual/reference/daemons/wazuh-syscheckd.rst',
+  '/user-manual/reference/internal-options.rst',
+  '/user-manual/reference/ossec-conf/rule-test.rst',
+  '/user-manual/reference/ossec-conf/verifying-configuration.rst',
+  '/user-manual/reference/ossec-conf/wazuh-db-config.rst',
+  '/user-manual/reference/statistics-files/wazuh-agentd-state.rst',
+  '/user-manual/reference/statistics-files/wazuh-analysisd-state.rst',
+  '/user-manual/reference/statistics-files/wazuh-logcollector-state.rst',
+  '/user-manual/reference/statistics-files/wazuh-remoted-state.rst',
+  '/user-manual/reference/tools/agent-auth.rst',
+  '/user-manual/reference/tools/agent-control.rst',
+  '/user-manual/reference/tools/agent-groups.rst',
+  '/user-manual/reference/tools/agent-upgrade.rst',
+  '/user-manual/reference/tools/clear-stats.rst',
+  '/user-manual/reference/tools/cluster-control.rst',
+  '/user-manual/reference/tools/manage-agents.rst',
+  '/user-manual/reference/tools/update-ruleset.rst',
+  '/user-manual/reference/tools/verify-agent-conf.rst',
+  '/user-manual/reference/tools/wazuh-logtest.rst',
+  '/user-manual/reference/tools/wazuh-regex.rst',
+  '/upgrade-guide/wazuh-agent/aix.rst',
+  '/upgrade-guide/wazuh-agent/hp-ux.rst',
+  '/upgrade-guide/wazuh-agent/solaris.rst',
+  '/installation-guide/wazuh-agent/wazuh-agent-package-aix.rst',
+  '/installation-guide/wazuh-agent/wazuh-agent-package-hpux.rst',
+  '/installation-guide/wazuh-agent/wazuh-agent-package-solaris.rst'
+];
+
 /* *** RELEASE 4.9 ****/
 
 /* Redirections from 4.8 to 4.9  */

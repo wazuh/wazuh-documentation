@@ -39,6 +39,6 @@
 
      .. code-block:: console
 
-       # /var/ossec/bin/wazuh-control start
+       # 
 
 .. End of include file

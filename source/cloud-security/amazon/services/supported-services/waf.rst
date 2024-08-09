@@ -136,7 +136,7 @@ Wazuh configuration
 HTTP Request headers
 --------------------
 
-The Wazuh AWS WAF implementation parses the header information present in the ``httpRequest`` field, allowing filtering by these headers and their values in the Wazuh UI. During this parsing, any non-standard header will be extracted and removed from the event before sending it to ``Analysisd``. Here is the complete list of the allowed standard header fields:
+The Wazuh AWS WAF implementation parses the header information present in the ``httpRequest`` field, allowing filtering by these headers and their values in the Wazuh UI. During this parsing, any non-standard header will be extracted and removed from the event before sending it to ````. Here is the complete list of the allowed standard header fields:
 
 .. code-block:: console
 

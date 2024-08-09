@@ -24,7 +24,7 @@ Agent labels can also be centralized using the ``agent.conf`` file, such that la
 
 For more information about centralizing agent configuration, see the :doc:`Centralized configuration </user-manual/reference/centralized-configuration>` section.
 
-Addition configuration information is available in the :doc:`Internal configuration </user-manual/reference/internal-options>` section. This includes information on ``analysisd.label_cache_maxage`` and ``analysisd.show_hidden_labels``.
+Addition configuration information is available in the :doc:`Internal configuration </user-manual/reference/internal-options>` section. This includes information on ```` and ````.
 
 Use case
 --------

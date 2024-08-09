@@ -1,33 +1,33 @@
 .. Copyright (C) 2015, Wazuh, Inc.
 
 .. meta::
-   :description: wazuh-logtest tool allows the testing and verification of decoders and rules against provided log samples on the Wazuh server. Learn more in this section of the documentation.
+   :description: tool allows the testing and verification of decoders and rules against provided log samples on the Wazuh server. Learn more in this section of the documentation.
     
 Testing decoders and rules
 ==========================
 
-``/var/ossec/bin/wazuh-logtest`` tool allows the testing and verification of decoders and rules against provided log samples on the Wazuh server. You can utilize it through any of the following options:
+```` tool allows the testing and verification of decoders and rules against provided log samples on the Wazuh server. You can utilize it through any of the following options:
 
 -  Wazuh dashboard
 -  Command line tool
 -  Wazuh server API
 
-With ``/var/ossec/bin/wazuh-logtest``, you can:
+With ````, you can:
 
 #. Input event logs. 
 #. Verify which decoders match them and identify the associated fields.
 #. Check which alerts match the event logs.
 
-``/var/ossec/bin/wazuh-logtest`` shares the same rules with the Wazuh analysis engine. It operates based on unique sessions, each loading its own set of rules and decoders.
+```` shares the same rules with the Wazuh analysis engine. It operates based on unique sessions, each loading its own set of rules and decoders.
 
 It also has a ``firedtimes`` counter which keeps track of all the matching occurrences of the rules and maintains these counters throughout the duration of the session.
 
 Configuration
 -------------
 
-``/var/ossec/bin/wazuh-logtest`` comes out-of-the-box in the Wazuh server. In a Wazuh cluster, the master node processes the event logs. You can change its configuration parameters in the :doc:`\<rule_test\> </user-manual/reference/ossec-conf/rule-test>` section of the :doc:`/var/ossec/etc/ossec.conf </user-manual/reference/ossec-conf/index>` file of the Wazuh server.
+```` comes out-of-the-box in the Wazuh server. In a Wazuh cluster, the master node processes the event logs. You can change its configuration parameters in the :doc:`\<rule_test\> </user-manual/reference/ossec-conf/rule-test>` section of the :doc:`/var/ossec/etc/ossec.conf </user-manual/reference/ossec-conf/index>` file of the Wazuh server.
 
-By default, the ``/var/ossec/bin/wazuh-logtest`` configuration is set as follows:
+By default, the ```` configuration is set as follows:
 
 .. code-block:: xml
 
@@ -62,12 +62,12 @@ If the number of open sessions reaches ``max_sessions``, opening a new session r
 Using the Wazuh dashboard and the command line tool
 ---------------------------------------------------
 
-Follow the following steps to try ``/var/ossec/bin/wazuh-logtest`` using the Wazuh dashboard or the command line tool:
+Follow the following steps to try ```` using the Wazuh dashboard or the command line tool:
 
 #. Run the tool.
 
 	-  Go to **Tools** > **Ruleset test** in the Wazuh dashboard.
-	-  Run ``/var/ossec/bin/wazuh-logtest`` from the command line.
+	-  Run ```` from the command line.
 
 #. Paste the following log:
 
@@ -154,7 +154,7 @@ Using the Wazuh server API
 
 The `logtest API  endpoint <https://documentation.wazuh.com/|WAZUH_CURRENT_MINOR|/user-manual/api/reference.html#tag/Logtest>`__ is part of the Wazuh server APIs which you can use to interact with Wazuh from the Wazuh server or an authorized endpoint.
 
-You can use the Wazuh server API to interact with the ``/var/ossec/bin/wazuh-logtest`` utility via the two endpoints below.
+You can use the Wazuh server API to interact with the ```` utility via the two endpoints below.
 
 .. |logtest| replace:: `/logtest <https://documentation.wazuh.com/|WAZUH_CURRENT_MINOR|/user-manual/api/reference.html#operation/api.controllers.logtest_controller.run_logtest_tool>`__
 

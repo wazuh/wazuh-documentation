@@ -61,7 +61,7 @@ After this, restart the agents to apply the configuration.
 
 .. code-block:: console
 
-    # /var/ossec/bin/agent_control -R -a
+    # 
 
 If you prefer, you can restart a specific agent with option ``-u <id>``.
 
@@ -144,7 +144,7 @@ After this, restart the agents to apply the configuration.
 
 .. code-block:: console
 
-  # /var/ossec/bin/agent_control -R -a
+  # 
 
 If you prefer, you can restart a specific agent with option ``-u <id>``.
 

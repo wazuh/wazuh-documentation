@@ -113,7 +113,7 @@ You can see below an example configuration of how to disable the recording of SH
 
    - Linux: ``systemctl restart wazuh-agent``
    - Windows: ``Restart-Service -Name wazuh``
-   - macOS: ``/Library/Ossec/bin/wazuh-control Restart`` 
+   - macOS: ```` 
 
 .. note::
 
@@ -144,7 +144,7 @@ The FIM module runs scans every 12 hours *(43200 seconds)* by default. In the fo
 
    - Linux: ``systemctl restart wazuh-agent``
    - Windows: ``Restart-Service -Name wazuh``
-   - macOS: ``/Library/Ossec/bin/wazuh-control restart``
+   - macOS: ````
 
    Alternatively, you can schedule the scans using the :ref:`scan_time <reference_ossec_syscheck_scan_time>` and the :ref:`scan_day <reference_ossec_syscheck_scan_day>` options. Configuring FIM using these options helps to set up FIM  scans outside business hours. 
 
@@ -167,7 +167,7 @@ The FIM module runs scans every 12 hours *(43200 seconds)* by default. In the fo
 
    - Linux: ``systemctl restart wazuh-agent``
    - Windows: ``Restart-Service -Name wazuh``
-   - macOS: ``/Library/Ossec/bin/wazuh-control restart``
+   - macOS: ````
 
 .. _report_changes_in_file_values:
 
@@ -201,7 +201,7 @@ Below, you can see how to configure the FIM module to report file changes. Repla
 
    - Linux: ``systemctl restart wazuh-agent``
    - Windows: ``Restart-Service -Name wazuh``
-   - macOS: ``/Library/Ossec/bin/wazuh-control restart``
+   - macOS: ````
 
    In the configuration example below, you can see how to use the ``report_changes`` attribute for all files in the ``<FILEPATH_OF_MONITORED_DIRECTORY>`` directory. You can see how to prevent the FIM module from reporting the exact content changes to the ``<FILEPATH_OF_MONITORED_DIRECTORY>/private.txt`` file. Replace ``<FILEPATH_OF_MONITORED_DIRECTORY>`` with your own filepath.
 
@@ -225,7 +225,7 @@ Below, you can see how to configure the FIM module to report file changes. Repla
 
    - Linux: ``systemctl restart wazuh-agent``
    - Windows: ``Restart-Service -Name wazuh``
-   - macOS: ``/Library/Ossec/bin/wazuh-control restart``
+   - macOS: ````
 
 Adding exclusions
 -----------------
@@ -257,7 +257,7 @@ In this example, you can see how to configure the FIM module to ignore a filepat
 
    - Linux: ``systemctl restart wazuh-agent``
    - Windows: ``Restart-Service -Name wazuh``
-   - macOS: ``/Library/Ossec/bin/wazuh-control restart``
+   - macOS: ````
 
 Using custom rules
 ^^^^^^^^^^^^^^^^^^

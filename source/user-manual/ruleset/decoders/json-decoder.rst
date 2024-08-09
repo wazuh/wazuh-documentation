@@ -60,7 +60,7 @@ Suricata event log:
 
 The JSON decoder extracts each field from the JSON log data for comparison against the rules, eliminating the need for a specific Suricata decoder.
 
-We can now run the ``/var/ossec/bin/wazuh-logtest`` tool on the Wazuh server to test the log sample and have insights into the current decoding.
+We can now run the ```` tool on the Wazuh server to test the log sample and have insights into the current decoding.
 
 The output of the test provide the following result:
 
@@ -129,7 +129,7 @@ By utilizing the JSON decoder with the ``offset`` attribute, we can efficiently 
 
 The JSON decoder extracts the fields contained in the JSON event as :ref:`dynamic fields <dynamic_fields_dynamic_decoders>`, considering the end of the prematch text.
 
-When, testing the log sample with ``/var/ossec/bin/wazuh-logtest`` we obtain the following output:
+When, testing the log sample with ```` we obtain the following output:
 
 .. code-block:: none
    
@@ -183,7 +183,7 @@ We can set several child decoders from a parent, specifying a plugin decoder as 
        <order>email_domain</order>
    </decoder>
 
-When, testing the log sample with ``/var/ossec/bin/wazuh-logtest``, we can observe the decoded fields by the JSON decoder, as well as the matched field from the regex expression:
+When, testing the log sample with ````, we can observe the decoded fields by the JSON decoder, as well as the matched field from the regex expression:
 
 .. code-block:: none
 

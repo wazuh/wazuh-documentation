@@ -29,7 +29,7 @@ The following steps serve as a guide on how to import the key to a Linux/Unix ag
 
       .. code-block:: console
 
-        #/var/ossec/bin/manage_agents -i <key>
+        # <key>
 
    The output should look like this:
 
@@ -80,7 +80,7 @@ The following steps serve as a guide on how to import the key to a Linux/Unix ag
 
         .. code-block:: console
 
-         # /var/ossec/bin/wazuh-control restart
+         # 
 
 
 #. Select the **Server management** > **Endpoints Summary** module to check for the newly enrolled agent and its connection status in the Wazuh dashboard to confirm that enrollment was successful.
@@ -102,7 +102,7 @@ The Wazuh agent installation directory depends on the architecture of the host:
 
    .. code-block:: console
 
-    # & "C:\Program Files (x86)\ossec-agent\manage_agents.exe" -i <key>
+    #  <key>
 
    The output should look like this:
 
@@ -166,7 +166,7 @@ The following steps serve as a guide on how to import the key to a macOS agent:
 
    .. code-block:: console
 
-        # /Library/Ossec/bin/manage_agents -i <key>
+        #  <key>
       
    The output should look like this:
 
@@ -198,7 +198,6 @@ The following steps serve as a guide on how to import the key to a macOS agent:
 
    .. code-block:: console
 
-    # /Library/Ossec/bin/wazuh-control restart
-
+    # 
 
 #. Select the **Server management** > **Endpoints Summary** module to check for the newly enrolled agent and its connection status in the Wazuh dashboard to confirm that enrollment was successful.

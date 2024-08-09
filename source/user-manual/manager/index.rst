@@ -21,4 +21,3 @@ The Wazuh server comprises two main components; the :doc:`Wazuh manager <wazuh-m
       event-logging
       integration-with-external-apis
       wazuh-server-cluster
-      wazuh-server-queue

@@ -53,7 +53,7 @@ You can configure the Wazuh agent ``ossec.conf`` file on Windows, Linux, and mac
 
    - Linux: ``systemctl restart wazuh-agent``
    - Windows (PowerShell): ``Restart-Service -Name wazuh``
-   - macOS: ``/Library/Ossec/bin/wazuh-control restart``
+   - macOS: ````
 
 
 Monitoring date-based log files   
@@ -80,7 +80,7 @@ You can configure Wazuh to  dynamically monitor log files on endpoints, adapting
 
    - Linux: ``systemctl restart wazuh-agent``
    - Windows (PowerShell): ``Restart-Service -Name wazuh``
-   - macOS: ``/Library/Ossec/bin/wazuh-control restart``
+   - macOS: ````
 
 Monitoring log files using wildcard patterns
 --------------------------------------------
@@ -104,7 +104,7 @@ Wazuh offers support for wildcard patterns when monitoring log files, allowing f
 
    - Linux: ``systemctl restart wazuh-agent``
    - Windows (PowerShell): ``Restart-Service -Name wazuh``
-   - macOS: ``/Library/Ossec/bin/wazuh-control restart``
+   - macOS: ````
 
 Monitoring log files with environment variables
 -----------------------------------------------

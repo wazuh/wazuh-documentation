@@ -59,7 +59,7 @@ A simple decoder may be:
      <order>type,srcuser,action,dstuser</order>
    </decoder>
 
-We run the ``/var/ossec/bin/wazuh-logtest`` utility on the Wazuh server to test the decoder and obtain the following result:
+We run the ```` utility on the Wazuh server to test the decoder and obtain the following result:
 
 .. code-block:: none
 

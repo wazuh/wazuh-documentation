@@ -660,11 +660,11 @@ Perform the following steps to configure the Wazuh manager to send alerts and ot
 
    .. code-block:: console
 
-      # grep wazuh-dbd /var/ossec/logs/ossec.log
+      # grep  /var/ossec/logs/ossec.log
 
    .. code-block:: none
       :class: output
 
-      2024/06/24 14:49:11 wazuh-dbd: INFO: Connected to database 'Alerts_DB' at '127.0.0.1'.
+      2024/06/24 14:49:11 : INFO: Connected to database 'Alerts_DB' at '127.0.0.1'.
 
 The database will now start receiving data from the Wazuh manager.

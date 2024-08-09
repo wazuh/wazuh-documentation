@@ -19,5 +19,4 @@ Command monitoring can be used to detect a variety of anomalies and threats. For
 
         how-it-works
         configuration
-        command-output-analysis
         use-cases/index   
