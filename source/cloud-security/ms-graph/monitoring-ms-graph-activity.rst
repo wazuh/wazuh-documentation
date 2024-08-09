@@ -60,44 +60,56 @@ Registering your app
 Certificates & secrets
 ^^^^^^^^^^^^^^^^^^^^^^
 #. Generate a secret to be used during the authentication process. Go to **Certificates & secrets** and click on **New client secret**, which will then generate the secret and its ID:
-   
+
    .. thumbnail:: /images/cloud-security/ms-graph/3-azure-wazuh-app-create-secret.png
        :title: Certificates & secrets
        :alt: Certificates & secrets
        :align: center
        :width: 100%
-   
+
 #. Ensure that the ``secret_value`` information is copied down and saved:
-   
+
     .. thumbnail:: /images/cloud-security/ms-graph/3-azure-wazuh-app-create-secret-copy-value.png
         :title: Copy secrets value
         :alt: Copy secrets value
         :align: center
         :width: 100%
-   
+
     .. note:: Make sure you write down the secret's value section, because the UI won't let you copy it afterward.
 
 API permissions
 ^^^^^^^^^^^^^^^
 
-The application needs specific API permissions to be able to retrieve logs and events from the Microsoft Graph API. In this case, you are looking for permissions related to the `security` resource.
-   
+The application needs specific API permissions to be able to retrieve logs and events from the Microsoft Graph API. In this case, you are looking for permissions related to the `security` and `deviceManagement` resources.
+
 #. To configure the application permissions, go to the **API permissions** page and choose **Add a permission**. Select **Microsoft Graph API** and click on **Application permissions**.
-   
+
 #. Add the following relationships' permissions under the **SecurityAlert** and **SecurityIncident** sections:
-   
+
    - ``SecurityAlert.Read.All``. Read `alerts` & `alerts_v2` relationship data from your tenant.
 
    - ``SecurityIncident.Read.All``. Read `incident` relationship data, including associated events/alerts, from your tenant.
-   
+
    .. thumbnail:: /images/cloud-security/ms-graph/4-azure-wazuh-app-configure-permissions.png
        :title: API permissions
        :alt: API permissions
        :align: center
        :width: 100%
-      
+
+#. Add the following relationships' permissions under the **DeviceManagementApps** and **DeviceManagementManagedDevices** sections:
+
+   - ``DeviceManagementApps.Read.All``. Read `auditEvents` & `detectedApps` relationship data from your tenant.
+
+   - ``DeviceManagementManagedDevices.Read.All``. Read `auditEvents` & `managedDevices` relationship data from your tenant.
+
+   .. thumbnail:: /images/cloud-security/ms-graph/4-azure-wazuh-app-configure-permissions-intune.png
+       :title: API permissions Intune
+       :alt: API permissions Intune
+       :align: center
+       :width: 100%
+
 .. note:: Admin consent is required for API permission changes.
-   
+
 .. thumbnail:: /images/cloud-security/ms-graph/4-azure-wazuh-app-configure-permissions-admin-consent.png
     :title: API permissions admin consent
     :alt: API permissions admin consent
@@ -112,7 +124,7 @@ Next, we will see the options we have to configure to allow the integration to s
 
 Configure the ``ms-graph`` module in the Wazuh manager or in the Wazuh agent :doc:`configuration file </user-manual/reference/ossec-conf/index>`. Through the following configuration, Wazuh is ready to search for logs created by Microsoft Graph resources and relationships.
 
-In this case, we will search for `alerts_v2` and `incidents` type events within the `security` resource at an interval of ``5m``. The logs will only be those that were created after the module was started:
+In this case, we will search for `alerts_v2` and `incidents` type events within the `security` resource and `auditEvents` type events within the `deviceManagement` resource at an interval of ``5m``. The logs will only be those that were created after the module was started:
 
 .. code-block:: xml
 
@@ -133,6 +145,10 @@ In this case, we will search for `alerts_v2` and `incidents` type events within 
           <name>security</name>
           <relationship>alerts_v2</relationship>
           <relationship>incidents</relationship>
+        </resource>
+        <resource>
+            <name>deviceManagement</name>
+            <relationship>auditEvents</relationship>
         </resource>
     </ms-graph>
 
@@ -179,7 +195,7 @@ Imagine that we have set up the Microsoft Graph module to monitor the `security`
         "firstActivityDateTime":"2022-11-13T23:45:41.0593397Z",
         "lastActivityDateTime":"2022-11-13T23:47:41.0593397Z",
         "comments":[
-            
+
         ],
         "evidence":[
             {
@@ -191,7 +207,7 @@ Imagine that we have set up the Microsoft Graph module to monitor the `security`
 Wazuh Rules
 -----------
 
-The Wazuh manager includes a set of pre-made rules that aid in classifying the importance and context of different events. 
+The Wazuh manager includes a set of pre-made rules that aid in classifying the importance and context of different events.
 
 In this example, we can take a look at the rule id ``99506``, which corresponds to ``MS Graph message: The alert is true positive and detected malicious activity.``, per the `Microsoft Graph documentation <https://learn.microsoft.com/en-us/graph/api/resources/security-alert?view=graph-rest-1.0#alertclassification-values>`_.
 
