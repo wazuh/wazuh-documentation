@@ -165,7 +165,7 @@ In the following example, we set the number of shards for a single-node Wazuh in
 
    .. code-block:: console
 
-      # curl https://raw.githubusercontent.com/wazuh/wazuh/|WAZUH_CURRENT_MINOR|/extensions/elasticsearch/7.x/wazuh-template.json -o w-indexer-template.json
+      # curl https://raw.githubusercontent.com/wazuh/wazuh/v|WAZUH_CURRENT|/extensions/elasticsearch/7.x/wazuh-template.json -o w-indexer-template.json
 
 #. Edit ``w-indexer-template.json`` to set ``index.number_of_shards`` to ``1``. To avoid Filebeat overwriting the existing template, set the ``order`` to ``1``. Multiple matching templates in the same order result in a non-deterministic merging order.
 

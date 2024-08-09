@@ -30,7 +30,7 @@ This section describes creating a custom index pattern, ``my-custom-alerts-*``, 
 
    .. code-block:: console
 
-      # curl -so template.json https://raw.githubusercontent.com/wazuh/wazuh/|WAZUH_CURRENT_MINOR|/extensions/elasticsearch/7.x/wazuh-template.json
+      # curl -so template.json https://raw.githubusercontent.com/wazuh/wazuh/v|WAZUH_CURRENT|/extensions/elasticsearch/7.x/wazuh-template.json
 
 #. Open the template file and locate this line at the beginning of the file:
 
