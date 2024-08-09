@@ -152,10 +152,16 @@ In this case, we will search for `alerts_v2` and `incidents` type events within 
         </resource>
     </ms-graph>
 
-Using the configuration mentioned above, we can examine a classic example of a security event: malicious spam emails.
+Using the configuration mentioned above, we can examine two examples:
+
+- Security event: malicious spam emails.
+- Intune event: change enrollment configuration.
 
 Examining Microsoft Graph logs
 ------------------------------
+
+Security event
+^^^^^^^^^^^^^^
 
 One of the more ubiquitous alerts that an organization of any size receive is spam emails. In this case, we can specifically look at an example where the spam email contains malicious content, and examine how Microsoft Graph & Wazuh report on this information.
 
@@ -204,10 +210,107 @@ Imagine that we have set up the Microsoft Graph module to monitor the `security`
         ]
     }
 
+Intune event
+^^^^^^^^^^^^
+
+On the other hand, an organization may want to monitor different devices within their organization, for which sometimes an MDM tool is the right choice. By using this integration to collect logs from Microsoft Intune, this can be achieved using Wazuh.
+
+Let's say a user updates the enrollment settings. If we configure the Microsoft Graph module to monitor the `deviceManagement` resource and the `auditEvents` relationship within it, we would expect a JSON similar to the following to be generated:
+
+.. code-block:: json
+    :class: output
+
+    {
+        "id":"xxxx-xxxx-xxxx-xxxx-xxxx",
+        "displayName": "Create DeviceEnrollmentConfiguration",
+        "componentName": "Enrollment",
+        "activity": null,
+        "activityDateTime": "2024-08-09T18:29:00.7023255Z",
+        "activityType": "Create DeviceEnrollmentConfiguration",
+        "activityOperationType": "Create",
+        "activityResult": "Success",
+        "correlationId":"xxxx-xxxx-xxxx-xxxx-xxxx",
+        "category": "Enrollment",
+        "actor": {
+            "auditActorType": "ItPro",
+            "userPermissions": [
+                "*"
+            ],
+            "applicationId":"xxxx-xxxx-xxxx-xxxx-xxxx",
+            "applicationDisplayName": "Microsoft Intune portal extension",
+            "userPrincipalName": "xxx@xxx.com",
+            "servicePrincipalName": null,
+            "ipAddress": null,
+            "userId":"xxxx-xxxx-xxxx-xxxx-xxxx"
+        },
+        "resources": [
+            {
+                "displayName": "Test restriction",
+                "auditResourceType": "DeviceEnrollmentLimitConfiguration",
+                "resourceId":"xxxx-xxxx-xxxx-xxxx-xxxx",
+                "modifiedProperties": [
+                    {
+                        "displayName": "Id",
+                        "oldValue": null,
+                        "newValue":"xxxx-xxxx-xxxx-xxxx-xxxx_Limit"
+                    },
+                    {
+                        "displayName": "Limit",
+                        "oldValue": null,
+                        "newValue": "5"
+                    },
+                    {
+                        "displayName": "Description",
+                        "oldValue": null,
+                        "newValue": ""
+                    },
+                    {
+                        "displayName": "Priority",
+                        "oldValue": null,
+                        "newValue": "1"
+                    },
+                    {
+                        "displayName": "CreatedDateTime",
+                        "oldValue": null,
+                        "newValue": "8/9/2024 6:29:00 PM"
+                    },
+                    {
+                        "displayName": "LastModifiedDateTime",
+                        "oldValue": null,
+                        "newValue": "8/9/2024 6:29:00 PM"
+                    },
+                    {
+                        "displayName": "Version",
+                        "oldValue": null,
+                        "newValue": "1"
+                    },
+                    {
+                        "displayName": "DeviceEnrollmentConfigurationType",
+                        "oldValue": null,
+                        "newValue": "Limit"
+                    },
+                    {
+                        "displayName": "DeviceManagementAPIVersion",
+                        "oldValue": null,
+                        "newValue": "5023-03-29"
+                    },
+                    {
+                        "displayName": "$Collection.RoleScopeTagIds[0]",
+                        "oldValue": null,
+                        "newValue": "Default"
+                    }
+                ]
+            }
+        ]
+    }
+
 Wazuh Rules
 -----------
 
 The Wazuh manager includes a set of pre-made rules that aid in classifying the importance and context of different events.
+
+Security event
+^^^^^^^^^^^^^^
 
 In this example, we can take a look at the rule id ``99506``, which corresponds to ``MS Graph message: The alert is true positive and detected malicious activity.``, per the `Microsoft Graph documentation <https://learn.microsoft.com/en-us/graph/api/resources/security-alert?view=graph-rest-1.0#alertclassification-values>`_.
 
@@ -291,4 +394,138 @@ Once Wazuh connects with the Microsoft Graph API, the previous log triggers the 
                 ]
             }
         }
+    }
+
+Intune event
+^^^^^^^^^^^^
+
+In this example, we can take a look at the rule id ``99652``, which corresponds to ``MS Graph message: MDM Intune audit event.``.
+
+.. code-block:: xml
+
+    <rule id="99652" level="3">
+        <if_sid>99651</if_sid>
+        <options>no_full_log</options>
+        <field name="ms-graph.relationship">auditEvents</field>
+        <description>MS Graph message: MDM Intune audit event.</description>
+    </rule>
+
+Once Wazuh connects with the Microsoft Graph API, the previous log triggers the rule and raises the following alert:
+
+.. code-block:: json
+    :emphasize-lines: 5
+    :class: output
+
+    {
+        "timestamp": "2024-08-09T18:29:03.362+0000",
+        "rule": {
+            "id": "99652",
+            "level": 3,
+            "description": "MS Graph message: MDM Intune audit event.",
+            "firedtimes": 1,
+            "mail": false,
+            "groups": [
+                "ms-graph"
+            ]
+        },
+        "agent": {
+            "id": "001",
+            "name":"ubuntu-bionic"
+        },
+        "manager": {
+            "name":"ubuntu-bionic"
+        },
+        "id": "1723228143.38630",
+        "decoder": {
+            "name": "json"
+        },
+        "data": {
+            "integration": "ms-graph",
+            "ms-graph": {
+                "id": "xxxx-xxxx-xxxx-xxxx-xxxx",
+                "displayName": "Create DeviceEnrollmentConfiguration",
+                "componentName": "Enrollment",
+                "activity": null,
+                "activityDateTime": "2024-08-09T18:29:00.7023255Z",
+                "activityType": "Create DeviceEnrollmentConfiguration",
+                "activityOperationType": "Create",
+                "activityResult": "Success",
+                "correlationId": "xxxx-xxxx-xxxx-xxxx-xxxx",
+                "category": "Enrollment",
+                "actor": {
+                    "auditActorType": "ItPro",
+                    "userPermissions": [
+                        "*"
+                    ],
+                    "applicationId": "xxxx-xxxx-xxxx-xxxx-xxxx",
+                    "applicationDisplayName": "Microsoft Intune portal extension",
+                    "userPrincipalName": "xxx@xxx.com",
+                    "servicePrincipalName": null,
+                    "ipAddress": null,
+                    "userId": "xxxx-xxxx-xxxx-xxxx-xxxx"
+                },
+                "resources": [
+                    {
+                        "displayName": "Test restriction",
+                        "auditResourceType": "DeviceEnrollmentLimitConfiguration",
+                        "resourceId": "xxxx-xxxx-xxxx-xxxx-xxxx",
+                        "modifiedProperties": [
+                            {
+                                "displayName": "Id",
+                                "oldValue": null,
+                                "newValue": "xxxx-xxxx-xxxx-xxxx-xxxx_Limit"
+                            },
+                            {
+                                "displayName": "Limit",
+                                "oldValue": null,
+                                "newValue": "5"
+                            },
+                            {
+                                "displayName": "Description",
+                                "oldValue": null,
+                                "newValue": ""
+                            },
+                            {
+                                "displayName": "Priority",
+                                "oldValue": null,
+                                "newValue": "1"
+                            },
+                            {
+                                "displayName": "CreatedDateTime",
+                                "oldValue": null,
+                                "newValue": "8/9/2024 6:29:00 PM"
+                            },
+                            {
+                                "displayName": "LastModifiedDateTime",
+                                "oldValue": null,
+                                "newValue": "8/9/2024 6:29:00 PM"
+                            },
+                            {
+                                "displayName": "Version",
+                                "oldValue": null,
+                                "newValue": "1"
+                            },
+                            {
+                                "displayName": "DeviceEnrollmentConfigurationType",
+                                "oldValue": null,
+                                "newValue": "Limit"
+                            },
+                            {
+                                "displayName": "DeviceManagementAPIVersion",
+                                "oldValue": null,
+                                "newValue": "5023-03-29"
+                            },
+                            {
+                                "displayName": "$Collection.RoleScopeTagIds[0]",
+                                "oldValue": null,
+                                "newValue": "Default"
+                            }
+                        ]
+                    }
+                ],
+                "resource": "deviceManagement",
+                "relationship": "auditEvents"
+            }
+        },
+        "location": "ms-graph"
     }
