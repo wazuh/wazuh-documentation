@@ -141,11 +141,11 @@ Options
 		...
 		<agent_config profile="^UnixHost">
 
-   To get the agent name and operating system information, you can run the ```` utility.
+   To get the agent name and operating system information, you can run the ``agent_control`` utility.
 
     .. code-block:: console
 
-        
+        agent_control -i <AGENT_ID>
 
     Where ``<AGENT_ID>`` corresponds to the agent ID of the endpoint.
 
@@ -210,7 +210,7 @@ The following is an example of how a centralized configuration can be done.
     .. note::
         The ``profile`` option uses the values defined on the ``<config-profile>`` setting from the :ref:`client configuration <reference_ossec_client_config_profile>`.
 
-2. Run ````:
+2. Run ``/var/ossec/bin/verify-agent-conf``:
 
     Each time you make a change to the ``agent.conf`` file, it is important to check for configuration errors. If any errors are reported by this check, they must be fixed before the next step.  Failure to perform this step may allow errors to be pushed to agents which may prevent the agents from running.  At that point, it is very likely that you will be forced to visit each agent manually to recover them.
 
@@ -222,7 +222,7 @@ The following is an example of how a centralized configuration can be done.
 
 4. Confirm that the agent received the configuration:
 
-    The Wazuh API endpoint :api-ref:`GET /agents <operation/api.controllers.agent_controller.get_agents>` can show whether the group configuration is synchronized in the agent or not:
+    The ``agent_groups`` tool or the Wazuh API endpoint :api-ref:`GET /agents <operation/api.controllers.agent_controller.get_agents>` can show whether the group configuration is synchronized in the agent or not:
 
     .. code-block:: console
 
@@ -247,6 +247,14 @@ The following is an example of how a centralized configuration can be done.
            "error": 0
         }
 
+    .. code-block:: console
+
+        # /var/ossec/bin/agent_groups -S -i 001
+
+    .. code-block:: none
+        :class: output
+
+        Agent '001' is synchronized.
 
 5. Restart the agent:
 
@@ -256,12 +264,12 @@ The following is an example of how a centralized configuration can be done.
 
     .. code-block:: console
 
-        # 
+        # /var/ossec/bin/agent_control -R -u 1032
 
     .. code-block:: none
         :class: output
 
-        Wazuh: Restarting agent: 1032
+        Wazuh agent_control: Restarting agent: 1032
 
 Precedence
 ----------

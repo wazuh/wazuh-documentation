@@ -52,4 +52,4 @@ You can use the ``<socket>`` tag to add new output sockets and then configure th
 #. Restart the Wazuh agent with administrator privileges to apply the configuration change:
 
    - Linux: ``systemctl restart wazuh-agent``
-   - macOS: ````
+   - macOS: ``/Library/Ossec/bin/wazuh-control restart``

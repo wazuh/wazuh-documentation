@@ -17,8 +17,21 @@ Unless otherwise assigned, all new connected agents automatically belong to the 
 
 Below are the steps to assign agents to a group with a specific configuration:
 
-1. Once an agent has been added and connected to the manager, assign it to a group using the :doc:` <>` tool or the
+1. Once an agent has been added and connected to the manager, assign it to a group using the :doc:`agent_groups </user-manual/reference/tools/agent-groups>` tool or the
    Wazuh API. Below are examples of how to assign an agent with ID 002 to the group *'dbms'* using these methods:
+
+   Using **agent_groups**:
+
+   .. note:: The group must be created and configured before assigning agents.
+
+   .. note:: This behavior corresponds to ``v3.7.0`` and later.
+
+   .. note :: The group name can only contain upper/lower case letters, numbers, dots, underscores, and hyphens.
+
+
+   .. code-block:: console
+
+      # /var/ossec/bin/agent_groups -a -i 002 -g dbms
 
    Using the **Wazuh API** endpoint :api-ref:`PUT /agents/{agent_id}/group/{group_id} <operation/api.controllers.agent_controller.put_agent_single_group>`:
 
@@ -41,6 +54,22 @@ Below are the steps to assign agents to a group with a specific configuration:
         }
 
    An agent's group assignment can be checked using one of the following commands:
+
+   Using **agent_groups**:
+
+   .. code-block:: console
+
+      # /var/ossec/bin/agent_groups -l -g dbms
+
+   .. code-block:: none
+        :class: output
+
+        5 agent(s) in group 'dbms':
+          ID: 002  Name: agent-dbms-e1.
+          ID: 003  Name: agent-dbms-e2.
+          ID: 004  Name: agent-dbms-a1.
+          ID: 005  Name: agent-dbms-a2.
+          ID: 006  Name: agent-dbms-a3.
 
    Using the **Wazuh API** endpoint :api-ref:`GET /groups/{group_id}/agents <operation/api.controllers.agent_controller.get_agents_in_group>`:
 
@@ -159,11 +188,64 @@ After that, we can ask about groups to which an agent belongs using the **Wazuh 
 
 In this case, the remote configuration for the group `apache` is the most priority of the three groups when there exist conflicts on any configuration parameter.
 
+With the **agent_groups** CLI, agents can be registered to groups on the same way:
+
+    .. code-block:: console
+
+        $ /var/ossec/bin/agent_groups -a -i 001 -g webserver
+
+    .. code-block:: none
+        :class: output
+
+        Do you want to add the group 'webserver' to the agent '001'? [y/N]: y
+        Group 'webserver' added to agent '001'.
+
+    .. code-block:: console
+
+        $ /var/ossec/bin/agent_groups -a -i 001 -g apache
+
+    .. code-block:: none
+        :class: output
+
+        Do you want to add the group 'apache' to the agent '001'? [y/N]: y
+        Group 'apache' added to agent '001'.
+
+To assign the agent to one or more groups during the registration process, register the agent by setting the groups where the agent will be included with the -G option:
+
+    .. code-block:: console
+
+        # /var/ossec/bin/agent-auth -m MANAGER_IP -G webserver,apache
+
+
 Listing groups and configuration
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 It is possible to know agents belonging to groups in real-time, as well as the configuration and shared files applied to each one depending on which groups it belongs.
 
+For example, to list the groups available for now, we could run the following query to **agent_groups**:
+
+    .. code-block:: console
+
+        # /var/ossec/bin/agent_groups -l -g webserver
+
+    .. code-block:: none
+        :class: output
+
+        3 agent(s) in group 'webserver':
+          ID: 001 Name: ag-windows-12.
+          ID: 003 Name: ag-windows-east.
+          ID: 004 Name: centos-7-apache
+
+Same easy to query which groups are assigned to the agent 001:
+
+    .. code-block:: console
+
+        # /var/ossec/bin/agent_groups -s -i 001
+
+    .. code-block:: none
+        :class: output
+
+        The agent 'ag-windows-12' with ID '001' has the group: '[u'webserver', u'apache']'.
 
 The priority of the groups increases from the left to the right, being the last one the highest priority one.
 
@@ -176,7 +258,8 @@ group `apache` for the agent 001:
 
     .. code-block:: console
 
-        # 
+        # /var/ossec/bin/agent_groups -r -i 001 -g apache -q
+
     .. code-block:: none
         :class: output
 
@@ -184,7 +267,7 @@ group `apache` for the agent 001:
 
     .. code-block:: console
 
-        # 
+        # /var/ossec/bin/agent_groups -s -i 001
 
     .. code-block:: none
         :class: output
@@ -195,7 +278,7 @@ It is also possible to switch between groups overwriting the existing assignment
 
     .. code-block:: console
 
-        # 
+        # /var/ossec/bin/agent_groups -s -i 001
 
     .. code-block:: none
         :class: output
@@ -204,7 +287,7 @@ It is also possible to switch between groups overwriting the existing assignment
 
     .. code-block:: console
 
-        # 
+        # /var/ossec/bin/agent_groups -a -f -i 001 -g apache
 
     .. code-block:: none
         :class: output
@@ -213,7 +296,7 @@ It is also possible to switch between groups overwriting the existing assignment
 
     .. code-block:: console
 
-        # 
+        # /var/ossec/bin/agent_groups -s -i 001
 
     .. code-block:: none
         :class: output
@@ -226,7 +309,7 @@ Finally, to check the synchronization status of the group configuration for agen
 
     .. code-block:: console
 
-        # 
+        # /var/ossec/bin/agent_groups -S -i 001
 
     .. code-block:: none
         :class: output

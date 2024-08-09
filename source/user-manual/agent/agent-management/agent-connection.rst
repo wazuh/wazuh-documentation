@@ -34,18 +34,18 @@ This option shows the **Endpoints Summary** dashboard with a list of all registe
 Using the `agent_control` utility from the server
 -------------------------------------------------
 
-You can check the :ref:`status <agent-status-cycle>` of any agent remotely by using the :doc:` <>` utility found with the Wazuh server. To get the status of an agent, run the following command replacing the ``-i`` parameter with your agent ID, for example, `001`. 
+You can check the :ref:`status <agent-status-cycle>` of any agent remotely by using the :doc:`agent_control </user-manual/reference/tools/agent-control>` utility found with the Wazuh server. To get the status of an agent, run the following command replacing the ``-i`` parameter with your agent ID, for example, `001`. 
 
 .. code-block:: console
 
-   # 
+   # /var/ossec/bin/agent_control -i <YOUR_AGENT_ID> | grep Status
 
 .. code-block:: console
    :class: output
 
       Status:     Active
 
-To list all the available agents and their status, use ````.       
+To list all the available agents and their status, use ``/var/ossec/bin/agent_control -l``.       
 
 
 Using the Wazuh API
@@ -143,7 +143,7 @@ Use the following commands to verify if a connection to the Wazuh manager is est
 
       .. code-block:: console
 
-         # netstat -vatunp|grep 
+         # netstat -vatunp|grep wazuh-agentd
 
       .. code-block:: console
          :class: output

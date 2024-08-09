@@ -787,6 +787,27 @@ Now that the installation and configuration is completed, you can proceed with t
    :depth: 1
    :backlinks: none
 
+Using the cluster control tool
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Verify that the Wazuh cluster is enabled and all the nodes are connected by executing the following command on any of the Wazuh server nodes:
+
+.. code-block:: console
+
+   # /var/ossec/bin/cluster_control -l
+
+A sample output of the command:
+
+.. code-block:: none
+   :class: output
+
+   Output
+   NAME             TYPE    VERSION  ADDRESS
+   wazuh-server-1   master  4.8.0    10.0.0.1
+   wazuh-server-2   worker  4.8.0    10.0.0.2
+
+Note that ``10.0.0.1``, ``10.0.0.2`` are example IP addresses.
+
 Using the Wazuh API console
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^
 

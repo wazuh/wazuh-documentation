@@ -611,7 +611,7 @@ macOS endpoint
 
    .. code-block:: console
 
-      
+      /Library/Ossec/bin/wazuh-control restart
 
 Test the configuration
 ~~~~~~~~~~~~~~~~~~~~~~

@@ -159,9 +159,9 @@ Agent info thread
 This thread is in charge of synchronizing the agent's last keepalives and operating system information with the master. The communication here is also started by the worker and it has the following stages:
 
 1. The worker asks the master for permission. This is important to prevent a new synchronization process to start if there is already one synchronization process at the moment.
-2. The worker asks to its local :ref:` <>` service for the information of agents marked as not synchronized.
-3. The worker sends the master a JSON string containing the information retrieved from .
-4. The master sends the received information to its local service, where it is updated.
+2. The worker asks to its local :ref:`wazuh-db <wazuh-db>` service for the information of agents marked as not synchronized.
+3. The worker sends the master a JSON string containing the information retrieved from wazuh-db.
+4. The master sends the received information to its local wazuh-db service, where it is updated.
 
 If there is an error during the update process of one of the chunks in the master's database, the worker is notified.
 
@@ -173,7 +173,7 @@ Agent groups send thread
 This thread is in charge of synchronizing information of agents' groups assignment (abbr. agent-groups) in the master to all the workers. The aim is that every agent-group received in the master ends up in the database of all the worker nodes. The communication is started by the master node (behaving like a broadcast) and it follows these stages:
 
 1. When there is new agent-groups information, the master sends a JSON string with it to each worker. This is done only once per node.
-2. The workers send the received information to their local :ref:` <>` service, where it is updated.
+2. The workers send the received information to their local :ref:`wazuh-db <wazuh-db>` service, where it is updated.
 3. The worker compares the checksum of its database with the checksum of the master.
 4. If the checksum has been different for 10 consecutive times, the worker notifies the master.
 5. When notified, the master sends to the worker all the agent-groups information.
@@ -182,7 +182,7 @@ This thread is in charge of synchronizing information of agents' groups assignme
 Local agent-groups thread
 ~~~~~~~~~~~~~~~~~~~~~~~~~
 
-This thread is only executed by the master. It periodically asks to its local :ref:` <>` service new information (since the last time this task was run) of agent-groups. The task is not repeated until such information is sent to all worker nodes.
+This thread is only executed by the master. It periodically asks to its local :ref:`wazuh-db <wazuh-db>` service new information (since the last time this task was run) of agent-groups. The task is not repeated until such information is sent to all worker nodes.
 
 Local integrity thread
 ~~~~~~~~~~~~~~~~~~~~~~

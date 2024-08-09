@@ -34,7 +34,7 @@ Following, you can see how to configure the FIM module to monitor a file and dir
 
    - Linux: ``systemctl restart wazuh-agent``
    - Windows: ``Restart-Service -Name wazuh``
-   - macOS: ````
+   - macOS: ``/Library/Ossec/bin/wazuh-control restart``
 
    .. note::
 

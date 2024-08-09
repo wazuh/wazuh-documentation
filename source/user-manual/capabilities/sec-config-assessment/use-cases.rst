@@ -297,7 +297,7 @@ Take the following steps on your macOS endpoint to create the file ``/usr/local/
 
    .. code-block:: console
    
-      # 
+      # /Library/Ossec/bin/wazuh-control restart
 
 #. On your Wazuh dashboard, navigate to the **Configuration Assessment** module and select the macOS endpoint to view the results of the custom SCA check you have created.
 
@@ -556,7 +556,7 @@ Netcat is a utility that uses TCP and UDP to read and write data on an IP networ
 
    .. code-block:: console
    
-      # 
+      # /Library/Ossec/bin/wazuh-control restart
 
 #. On your Wazuh dashboard, navigate to the **Configuration Assessment** module and select the macOS endpoint to view the results of the custom SCA check you have created.
 

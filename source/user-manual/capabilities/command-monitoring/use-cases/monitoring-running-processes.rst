@@ -240,7 +240,7 @@ Perform the following steps to configure the Wazuh Logcollector module to check 
 
    .. code-block:: console
 
-      # 
+      # /Library/Ossec/bin/wazuh-control restart
 
 Wazuh server
 ~~~~~~~~~~~~

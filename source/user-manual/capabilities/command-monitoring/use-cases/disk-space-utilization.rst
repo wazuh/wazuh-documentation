@@ -225,7 +225,7 @@ Perform the following steps on the macOS endpoint.
 
    .. code-block:: console
 
-      # 
+      # /Library/Ossec/bin/wazuh-control restart
 
 Wazuh server
 ~~~~~~~~~~~~

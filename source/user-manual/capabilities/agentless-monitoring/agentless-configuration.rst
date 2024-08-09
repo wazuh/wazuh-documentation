@@ -166,6 +166,11 @@ When the ``expect`` package is present, and Wazuh is restarted, you should see a
 
 .. code-block:: console
 
+   wazuh-agentlessd: INFO: Test passed for 'ssh_integrity_check_linux'.
+
 When Wazuh has connected to the monitored endpoint, you should see a message similar to the following in the same log file:
 
 .. code-block:: console
+
+   wazuh-agentlessd: INFO: ssh_integrity_check_linux: user@example_adress.com: Starting.
+   wazuh-agentlessd: INFO: ssh_integrity_check_linux: user@example_adress.com: Finished.
