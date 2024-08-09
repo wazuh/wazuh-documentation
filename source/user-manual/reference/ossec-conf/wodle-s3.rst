@@ -460,7 +460,7 @@ A value to determine if each log file is deleted once it has been collected by t
 sts_endpoint
 ^^^^^^^^^^^^
 
-The AWS Security Token Service VPC endpoint URL to be used when an IAM role is provided as the authentication method. Check the :ref:`Considerations for configuration <amazon_considerations>` page to learn more about VPC endpoints.
+The AWS Security Token Service VPC endpoint URL to be used when an IAM role is provided as the authentication method. Check the :doc:`Considerations for configuration </cloud-security/amazon/services/prerequisites/considerations>` page to learn more about VPC endpoints.
 
 +--------------------+----------------------------------------+
 | **Default value**  | N/A                                    |
@@ -473,7 +473,7 @@ The AWS Security Token Service VPC endpoint URL to be used when an IAM role is p
 service_endpoint
 ^^^^^^^^^^^^^^^^
 
-The AWS S3 endpoint URL to be used to download the data from the bucket. Check the :ref:`Considerations for configuration <amazon_considerations>` page to learn more about VPC and FIPS endpoints.
+The AWS S3 endpoint URL to be used to download the data from the bucket. Check the :doc:`Considerations for configuration </cloud-security/amazon/services/prerequisites/considerations>` page to learn more about VPC and FIPS endpoints.
 
 +--------------------+----------------------------------------+
 | **Default value**  | N/A                                    |
@@ -715,7 +715,7 @@ Define whether or not to remove the log streams from the log groups after they a
 sts_endpoint
 ^^^^^^^^^^^^
 
-The AWS Security Token Service VPC endpoint URL to be used when an IAM role is provided as the authentication method. Check the :ref:`Considerations for configuration <amazon_considerations>` page to learn more about VPC endpoints.
+The AWS Security Token Service VPC endpoint URL to be used when an IAM role is provided as the authentication method. Check the :doc:`Considerations for configuration </cloud-security/amazon/services/prerequisites/considerations>` page to learn more about VPC endpoints.
 
 +--------------------+----------------------------------------+
 | **Default value**  | N/A                                    |
@@ -728,7 +728,7 @@ The AWS Security Token Service VPC endpoint URL to be used when an IAM role is p
 service_endpoint
 ^^^^^^^^^^^^^^^^
 
-The endpoint URL for the required AWS Service to be used to download the data from it. Check the :ref:`Considerations for configuration <amazon_considerations>` page to learn more about VPC and FIPS endpoints.
+The endpoint URL for the required AWS Service to be used to download the data from it. Check the :doc:`Considerations for configuration </cloud-security/amazon/services/prerequisites/considerations>` page to learn more about VPC and FIPS endpoints.
 
 +--------------------+------------------------------------------------+
 | **Default value**  | N/A                                            |
@@ -932,7 +932,7 @@ Usage example only for plain text logs:
 sts_endpoint
 ^^^^^^^^^^^^
 
-The AWS Security Token Service VPC endpoint URL to be used when an IAM role is provided as the authentication method. Check the :ref:`Considerations for configuration <amazon_considerations>` page to learn more about VPC endpoints.
+The AWS Security Token Service VPC endpoint URL to be used when an IAM role is provided as the authentication method. Check the :doc:`Considerations for configuration </cloud-security/amazon/services/prerequisites/considerations>` page to learn more about VPC endpoints.
 
 +--------------------+----------------------------------------+
 | **Default value**  | N/A                                    |
@@ -945,7 +945,7 @@ The AWS Security Token Service VPC endpoint URL to be used when an IAM role is p
 service_endpoint
 ^^^^^^^^^^^^^^^^
 
-The AWS S3 endpoint URL to be used to download the data from the bucket. Check the :ref:`Considerations for configuration <amazon_considerations>` page to learn more about VPC and FIPS endpoints.
+The AWS S3 endpoint URL to be used to download the data from the bucket. Check the :doc:`Considerations for configuration </cloud-security/amazon/services/prerequisites/considerations>` page to learn more about VPC and FIPS endpoints.
 
 +--------------------+------------------------------------------------+
 | **Default value**  | N/A                                            |
