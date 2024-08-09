@@ -50,7 +50,7 @@ In the repository, you will find:
 
 -  **Tools**
 
-   We provide useful tools such as the ` <>`__, which allows for testing rules and decoders before using them. This tool processes only log per line and is available in ```` on the Wazuh server, along with various other binaries which help in managing the Wazuh server and agents. For more information you can take a look at `Wazuh tools </user-manual/reference/tools/index>`__ documentation.
+   We provide useful tools such as the `wazuh-logtest </user-manual/reference/tools/wazuh-logtest>`__, which allows for testing rules and decoders before using them. This tool processes only log per line and is available in ``/var/ossec/bin/wazuh-logtest`` on the Wazuh server, along with various other binaries which help in managing the Wazuh server and agents. For more information you can take a look at `Wazuh tools </user-manual/reference/tools/index>`__ documentation.
 
 .. topic:: Content
 

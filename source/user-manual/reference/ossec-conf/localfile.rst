@@ -63,7 +63,7 @@ The ``location`` field specifies where the log data comes from. It includes the 
 
 For log file names, you can use ``strftime`` format strings. For example, you can reference a log file named ``file.log-2024-04-26`` by ``file.log-%Y-%m-%d``.
 
-Wildcards can be used on Linux and Windows systems, if the log file doesn't exist at ```` start time, such log will be re-scanned after ``logcollector.vcheck_files`` seconds.
+Wildcards can be used on Linux and Windows systems, if the log file doesn't exist at ``wazuh-logcollector`` start time, such log will be re-scanned after ``logcollector.vcheck_files`` seconds.
 
 The location field is also valid to filter by channel in case of using an ``eventchannel`` supporting Windows.
 
@@ -158,10 +158,10 @@ Prevents a command from being executed in less time than the specified time (in 
 only-future-events
 ^^^^^^^^^^^^^^^^^^
 
-It allows to read new log content since ```` was stopped.
+It allows to read new log content since ``wazuh-logcollector`` was stopped.
 
-By default, when ```` is started it reads the logs generated since that moment.
-Set it to ``no`` to collect events generated since ```` was stopped.
+By default, when ``wazuh-logcollector`` is started it reads the logs generated since that moment.
+Set it to ``no`` to collect events generated since ``wazuh-logcollector`` was stopped.
 
 +--------------------+-----------+
 | **Default value**  | yes       |
@@ -186,7 +186,7 @@ The attributes below are optional.
   If collecting logs with ``<log_format>`` set as ``macos``, then ``max-size`` is ignored.
 
 .. note::
-  If the log rotates while ```` is stopped and ``only-future-events`` is set to ``no``, it will start reading from the beginning of the log.
+  If the log rotates while ``wazuh-logcollector`` is stopped and ``only-future-events`` is set to ``no``, it will start reading from the beginning of the log.
 
 .. _query:
 
@@ -406,7 +406,7 @@ Sample of Multi-line log message in original log file:
     Aug 9 14:22:47 hostname log line three
     Aug 9 14:22:47 hostname log line five
 
-Sample Log message as analyzed by :
+Sample Log message as analyzed by wazuh-analysisd:
 
 .. code-block:: none
     :class: output

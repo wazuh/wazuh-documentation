@@ -46,7 +46,7 @@ Perform the following steps to configure the FIM module to monitor a ``user_deta
 
    .. code-block:: console
 
-      
+      /Library/Ossec/bin/wazuh-control restart
 
 Test the configuration
 ----------------------

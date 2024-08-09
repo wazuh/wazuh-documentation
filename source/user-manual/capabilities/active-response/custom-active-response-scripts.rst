@@ -21,7 +21,7 @@ This is an example of a message. It includes a full alert for the ``firewall-dro
        "version":1,
        "origin":{
            "name":"worker01",
-           "module":""
+           "module":"wazuh-execd"
        },
        "command":"add",
        "parameters":{
@@ -150,7 +150,7 @@ A stateful active response reverts or stops its action after a specified period 
         "version":1,
         "origin":{
             "name":"node01",
-            "module":""
+            "module":"wazuh-execd"
         },
         "command":"continue",
         "parameters":{}
@@ -455,7 +455,7 @@ macOS custom active response configuration
 
    .. code-block:: console
 
-      $ 
+      $ sudo /Library/Ossec/bin/wazuh-control restart
 
 #. Add the ``<command>`` and ``<active-response>`` blocks below to the Wazuh server ``/Library/Ossec/etc/ossec.conf`` file to use this active response Python script:
 

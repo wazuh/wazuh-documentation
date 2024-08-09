@@ -187,7 +187,7 @@ Decoding is the process of analyzing structured or unstructured data, such as lo
 
    We use the Wazuh Logtest tool to demonstrate the pre-decoding phase. Perform the steps below on the Wazuh server:
 
-   #. Run the ```` from command line on the Wazuh server
+   #. Run the ``/var/ossec/bin/wazuh-logtest`` from command line on the Wazuh server
    #. Copy and paste the sample log above and click enter.
 
    The extracted information after the pre-decoding phase is shown below:
@@ -226,7 +226,7 @@ Decoding is the process of analyzing structured or unstructured data, such as lo
 
    We use the Wazuh Logtest tool to demonstrate the decoding phase. Perform the steps below on the Wazuh server:
 
-   #. Run the ```` from command line on the Wazuh server.
+   #. Run the ``/var/ossec/bin/wazuh-logtest`` from command line on the Wazuh server.
    #. Copy and paste the sample log above and click enter.
 
    The extracted information after the decoding phase is shown below:

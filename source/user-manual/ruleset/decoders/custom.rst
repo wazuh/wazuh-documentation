@@ -40,7 +40,7 @@ Check out this example on how to create new decoders and rules. The following lo
         <order>user, srcip</order>
       </decoder>
 
-#. Run ```` utility on the Wazuh server and enter the example log above to test the decoder and rule:
+#. Run ``/var/ossec/bin/wazuh-logtest`` utility on the Wazuh server and enter the example log above to test the decoder and rule:
 
    .. code-block:: none
 
@@ -59,7 +59,7 @@ Check out this example on how to create new decoders and rules. The following lo
               dstuser: 'admin'
               srcip: '192.168.1.100'
 
-   To test your rules and decoders using the ```` utility, simply save the changes made to the decoder and rule files. However, you need to restart the Wazuh manager to generate alerts based on these modifications.
+   To test your rules and decoders using the ``/var/ossec/bin/wazuh-logtest`` utility, simply save the changes made to the decoder and rule files. However, you need to restart the Wazuh manager to generate alerts based on these modifications.
 
 #. Restart the Wazuh manager to apply the changes:
 

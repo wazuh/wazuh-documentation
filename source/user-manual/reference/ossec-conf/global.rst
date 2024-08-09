@@ -411,7 +411,7 @@ This option sets the interval between file rotation. The range of possible value
 
 .. note::
 
-  The default minimum value ``10m`` is set in the :ref:` <>` option found in the internal configuration file ``/var/ossec/etc/internal_options.conf``.
+  The default minimum value ``10m`` is set in the :ref:`analysisd.min_rotate_interval <ossec_internal_analysisd>` option found in the internal configuration file ``/var/ossec/etc/internal_options.conf``.
 
 Example:
 

@@ -19,7 +19,7 @@ Let’s consider the following log sample:
 
    Apr 14 19:28:21 gorilla sshd[31274]: Connection closed by 192.168.1.33
 
-The first step should always be to run the ```` utility and  input the event log to test the current decoder and rule before creating your own decoder.
+The first step should always be to run the ``/var/ossec/bin/wazuh-logtest`` utility and  input the event log to test the current decoder and rule before creating your own decoder.
 
 With the event log above, we obtain the following result:
 
