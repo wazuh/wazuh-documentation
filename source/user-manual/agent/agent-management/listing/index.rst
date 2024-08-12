@@ -1,14 +1,16 @@
 .. Copyright (C) 2015, Wazuh, Inc.
 
 .. meta::
-   :description: Learn how to list agents in this section of our documentation.  
- 
+   :description: There are different ways to list the Wazuh agents enrolled in the Wazuh manager. Learn more in this section of the documentation.
+
 Listing agents
-==================
+==============
 
-    .. toctree::
-        :maxdepth: 2
+There are different ways to list the Wazuh agents enrolled in the Wazuh manager. These include using the CLI, querying the Wazuh server API, and using the Wazuh dashboard.
 
-        using-command-line
-        listing
-        wazuh-dashboard
+.. toctree::
+   :maxdepth: 1
+
+   using-command-line
+   listing
+   wazuh-dashboard
