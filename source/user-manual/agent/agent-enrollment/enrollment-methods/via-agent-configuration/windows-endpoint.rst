@@ -50,7 +50,7 @@ The Wazuh agent installation directory depends on the architecture of the endpoi
       These agent enrollment parameters are optional, and they provide the Wazuh agent with specific information that should be used during enrollment. Some common enrollment parameters are below:
 
       -  ``<agent_name>EXAMPLE_NAME</agent_name>``: This specifies the name the endpoint should be enrolled as. When this is not specified, it defaults to the endpoint hostname.
-      -  ``<groups>GROUP1,GROUP2,GROUP3</groups>``: This specifies the group(s) in which the Wazuh agent should be added. An agent group is a collection of agents that would share the same configuration. This allows the Wazuh manager to push configuration settings to a set of Wazuh agents that belong to the same group. The Wazuh agent enrollment will fail if a non-existent group is specified. Therefore, creating the desired group on the Wazuh manager is necessary before using the group parameter. Additional information on agent groups can be found :ref:`here <>`.
+      -  ``<groups>GROUP1,GROUP2,GROUP3</groups>``: This specifies the group(s) in which the Wazuh agent should be added. An agent group is a collection of agents that would share the same configuration. This allows the Wazuh manager to push configuration settings to a set of Wazuh agents that belong to the same group. The Wazuh agent enrollment will fail if a non-existent group is specified. Therefore, creating the desired group on the Wazuh manager is necessary before using the group parameter. Additional information on agent groups can be found :doc:`here </user-manual/agent/agent-management/grouping-agents>`.
 
       More optional enrollment parameters and their usage are provided :ref:`here <enrollment>`.
 
