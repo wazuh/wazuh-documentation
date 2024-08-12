@@ -19,19 +19,13 @@ The Wazuh dashboard white-labeling feature allows you to replace the following e
 Custom logos in the Wazuh dashboard
 -----------------------------------
 
-App loading and Health check logos
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+Health check logos
+^^^^^^^^^^^^^^^^^^
 
-To use your own App loading and Health check logos in the Wazuh dashboard, do the following.
+To use your own Health check logos in the Wazuh dashboard, do the following.
 
 #. Click on **Dashboard management** > **App Settings**.
 #. Under the **Custom branding** section, set up the following properties:
-
-   -  ``customization.logo.app``. This property sets the `App loading logo` image. It has a size limit of 1 MB. It replaces the logo image in the Wazuh loading animation when a new section initializes. Recommended size: 300 pixels width, 70 pixels height.
-   
-      .. thumbnail:: /images/kibana-app/features/white-labeling/custom-branding-settings-loading.png
-         :align: center
-         :width: 80%
    
    -  ``customization.logo.healthcheck``. This property sets the `Health check logo` image. It has a size limit of 1 MB. It replaces the logo on top of the check list displayed during the health check routine. Recommended size: 300 pixels width, 70 pixels height.
    
@@ -40,6 +34,41 @@ To use your own App loading and Health check logos in the Wazuh dashboard, do th
          :width: 80%
 
 Once you are done setting your custom logo images, you can find them saved in ``/usr/share/wazuh-dashboard/plugins/wazuh/public/assets/custom/images/``.
+
+Wazuh dashboard App loading logo
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+To customize the `global App loading logo`, do the following.
+
+#. Edit ``opensearch_dashboards.yml``. You can find this file in the following locations:
+
+   -  ``/etc/wazuh-dashboard/``
+   -  ``/usr/share/wazuh-dashboard/config/`` for Docker installations.
+
+#. Add the URL of your default and dark theme logos.
+
+   .. code-block:: yaml
+      :emphasize-lines: 2,3,4
+   
+      opensearchDashboards.branding:
+         loadingLogo:
+            defaultUrl: "https://domain.org/default-logo.png"
+            darkModeUrl: "https://domain.org/dark-mode-logo.png"
+
+   .. thumbnail:: /images/kibana-app/features/white-labeling/custom-branding-settings-loading-page.png
+      :align: center
+      :width: 75%   
+
+To customize the `Wazuh plugins loading logo`, do the following.
+
+#. Click on **Dashboard management** > **App Settings**.
+#. Under the **Custom branding** section, set up the following properties:
+
+   -  ``customization.logo.app``. This property sets the `App loading logo` image when the user is logging in to the Wazuh server. It has a size limit of 1 MB. It replaces the logo image in the Wazuh loading animation when a new section initializes. Recommended size: 300 pixels width, 70 pixels height.
+   
+      .. thumbnail:: /images/kibana-app/features/white-labeling/custom-branding-settings-loading.png
+         :align: center
+         :width: 80%
 
 Wazuh dashboard home logo
 ^^^^^^^^^^^^^^^^^^^^^^^^^
@@ -54,16 +83,16 @@ To customize the `Wazuh dashboard home logo` in the top header, do the following
 #. Add the URL of your default and dark theme logos.
 
    .. code-block:: yaml
-      :emphasize-lines: 3,4
+      :emphasize-lines: 2,3,4
    
       opensearchDashboards.branding:
          mark:
             defaultUrl: "https://domain.org/default-logo.png"
             darkModeUrl: "https://domain.org/dark-mode-logo.png"
 
-.. thumbnail:: /images/kibana-app/features/white-labeling/custom-branding-settings-header.png
-   :align: center
-   :width: 100%
+   .. thumbnail:: /images/kibana-app/features/white-labeling/custom-branding-settings-header.png
+      :align: center
+      :width: 100%
 
 Once you are done setting your custom logo image, you can find it saved in ``/usr/share/wazuh-dashboard/plugins/wazuh/public/assets/custom/images/``.
 
