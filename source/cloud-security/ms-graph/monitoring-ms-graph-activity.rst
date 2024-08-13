@@ -80,7 +80,7 @@ Certificates & secrets
 API permissions
 ^^^^^^^^^^^^^^^
 
-The application needs specific API permissions to be able to retrieve logs and events from the Microsoft Graph API. In this case, you are looking for permissions related to the `security` and `deviceManagement` resources.
+To retrieve logs and events from the Microsoft Graph API, the application requires specific API permissions, such as permissions related to the ``security`` and ``deviceManagement`` resources.
 
 #. To configure the application permissions, go to the **API permissions** page and choose **Add a permission**. Select **Microsoft Graph API** and click on **Application permissions**.
 
@@ -124,38 +124,44 @@ Next, we will see the options we have to configure to allow the integration to s
 
 Configure the ``ms-graph`` module in the Wazuh manager or in the Wazuh agent :doc:`configuration file </user-manual/reference/ossec-conf/index>`. Through the following configuration, Wazuh is ready to search for logs created by Microsoft Graph resources and relationships.
 
-In this case, we will search for `alerts_v2` and `incidents` type events within the `security` resource and `auditEvents` type events within the `deviceManagement` resource at an interval of ``5m``. The logs will only be those that were created after the module was started:
+The following configuration monitors specific event types at an interval of ``5m``.
+
+-  ``alerts_v2`` and ``incidents`` events within the ``security`` resource.
+-  ``auditEvents`` events within the ``deviceManagement`` resource.
+
+Keep in mind that only logs created after the module was started are monitored.
 
 .. code-block:: xml
+   :emphasize-lines: 15-17,20,21
 
-    <ms-graph>
-        <enabled>yes</enabled>
-        <only_future_events>yes</only_future_events>
-        <curl_max_size>10M</curl_max_size>
-        <run_on_start>yes</run_on_start>
-        <interval>5m</interval>
-        <version>v1.0</version>
-        <api_auth>
-          <client_id>your_client_id</client_id>
-          <tenant_id>your_tenant_id</tenant_id>
-          <secret_value>your_secret_value</secret_value>
-          <api_type>global</api_type>
-        </api_auth>
-        <resource>
-          <name>security</name>
-          <relationship>alerts_v2</relationship>
-          <relationship>incidents</relationship>
-        </resource>
-        <resource>
-            <name>deviceManagement</name>
-            <relationship>auditEvents</relationship>
-        </resource>
-    </ms-graph>
+   <ms-graph>
+       <enabled>yes</enabled>
+       <only_future_events>yes</only_future_events>
+       <curl_max_size>10M</curl_max_size>
+       <run_on_start>yes</run_on_start>
+       <interval>5m</interval>
+       <version>v1.0</version>
+       <api_auth>
+         <client_id>your_client_id</client_id>
+         <tenant_id>your_tenant_id</tenant_id>
+         <secret_value>your_secret_value</secret_value>
+         <api_type>global</api_type>
+       </api_auth>
+       <resource>
+         <name>security</name>
+         <relationship>alerts_v2</relationship>
+         <relationship>incidents</relationship>
+       </resource>
+       <resource>
+         <name>deviceManagement</name>
+         <relationship>auditEvents</relationship>
+       </resource>
+   </ms-graph>
 
-Using the configuration mentioned above, we can examine two examples:
+In the `Examining Microsoft Graph logs`_ section that follows, you can check two examples using this configuration:
 
-- Security event: malicious spam emails.
-- Intune event: change enrollment configuration.
+-  **Security event**: Malicious spam emails.
+-  **Intune event**: Change enrollment configuration.
 
 Examining Microsoft Graph logs
 ------------------------------
@@ -213,9 +219,9 @@ Imagine that we have set up the Microsoft Graph module to monitor the `security`
 Intune event
 ^^^^^^^^^^^^
 
-On the other hand, an organization may want to monitor different devices within their organization, for which sometimes an MDM tool is the right choice. By using this integration to collect logs from Microsoft Intune, this can be achieved using Wazuh.
+Mobile Device Management (MDM) tools like Microsoft Intune enable organizations to manage devices. By integrating Microsoft Graph with Wazuh, organizations can monitor Microsoft Intune logs.
 
-Let's say a user updates the enrollment settings. If we configure the Microsoft Graph module to monitor the `deviceManagement` resource and the `auditEvents` relationship within it, we would expect a JSON similar to the following to be generated:
+For instance, if a user updates the enrollment settings, configuring the module to monitor the ``deviceManagement`` resource and the ``auditEvents`` relationship might generate a JSON like the following one:
 
 .. code-block:: json
     :class: output

@@ -26,7 +26,9 @@ Currently, the module allows you to monitor the following with Wazuh:
 
 While these are centric to the security resource, the Microsoft Graph REST API contains a large number of additional resources that can be monitored. See the `Overview of Microsoft Graph <https://learn.microsoft.com/en-us/graph/overview?view=graph-rest-1.0>`_ documentation to learn more.
 
-.. note:: Currently, only the `security` and `deviceManagement` resources can be considered mature as they're the only ones tested, and that have pre-made rules. However, the logs of other resources can still be ingested at your organization's discretion.
+.. note::
+
+   We've only developed Wazuh rules and conducted tests for the ``security`` and ``deviceManagement`` resources. However, you can still ingest logs from other resources at your organization's discretion.
 
 .. topic:: Contents
 

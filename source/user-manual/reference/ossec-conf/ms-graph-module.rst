@@ -242,9 +242,9 @@ The name of the resource (i.e., specific API endpoint) to query for logs. Additi
 resource\\relationship
 ^^^^^^^^^^^^^^^^^^^^^^
 
-This section configures the types of content (`relationships`) to obtain logs of.
+This section configures the `relationships` content type from which to obtain logs.
 
-For the security resource, this includes the following relationships:
+For the ``security`` resource, the configuration includes the following relationships:
 
 - alerts: Legacy alert from supported Azure and Microsoft 365 Defender security providers.
 - alerts_v2: An enriched version of alerts that contains additional information on suspicious activities and related collections of alerts.
@@ -252,7 +252,7 @@ For the security resource, this includes the following relationships:
 - secureScores: The tenant's security score per day, at the tenant and control level.
 - cases/eDiscoveryCases: Contains custodians, searches, and review sets from Microsoft Purview eDiscovery Premium.
 
-For the deviceManagement resource, this includes the following relationships:
+For the ``deviceManagement`` resource, the configuration includes the following relationships:
 
 - auditEvents: Audit logs include a record of activities that generate a change in Microsoft Intune.
 - managedDevices: List of devices managed by Microsoft Intune.
