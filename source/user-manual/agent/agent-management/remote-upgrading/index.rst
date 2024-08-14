@@ -17,12 +17,10 @@ Wazuh provides access to an updated WPK repository for each new release. All ava
 Learn more about remote upgrading of the Wazuh agents in the following sections:
 
 .. toctree::
-   :maxdepth: 2
+   :maxdepth: 1
 
    upgrading-agent
+   wpk-files
    agent-upgrade-module
    custom-repository
-   create-custom-wpk/create-wpk-key
-   install-custom-wpk
-   wpk-list
 
