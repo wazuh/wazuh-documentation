@@ -61,8 +61,11 @@ Download the packages and configuration files
     
         # ./wazuh-install.sh -g            
 
-#. Copy or move the ``wazuh-install.sh``, ``wazuh-offline.tar.gz`` and ``wazuh-install-files.tar`` files to a directory of the host(s) from where the offline installation will be carried out. This can be done by using ``scp``.
+#. Copy or move the following files to a directory on the host(s) from where the offline installation will be carried out. You can use ``scp`` for this.
 
+   -  ``wazuh-install.sh``
+   -  ``wazuh-offline.tar.gz``
+   -  ``wazuh-install-files.tar``
 
 Next steps
 ----------
