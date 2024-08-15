@@ -25,7 +25,7 @@ Install and configure the Wazuh indexer nodes.
 
    .. code-block:: console
  
-      # bash wazuh-install.sh --start-cluster
+      # bash wazuh-install.sh --offline-installation --start-cluster
  
    .. note:: You only have to initialize the cluster `once`, there is no need to run this command on every node. 
 
