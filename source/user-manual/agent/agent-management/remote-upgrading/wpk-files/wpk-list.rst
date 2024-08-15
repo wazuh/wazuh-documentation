@@ -1,6 +1,7 @@
 .. Copyright (C) 2015, Wazuh, Inc.
 
-.. _wpk-list:
+.. meta::
+   :description: WPK List.
 
 WPK List
 ========

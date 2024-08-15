@@ -24,9 +24,8 @@ Custom agent upgrade packages are created by generating a repository on the Wazu
    In case of having a multi-node Wazuh server cluster, the custom WPK file has to exist on all Wazuh server nodes in the specified path.
 
 .. toctree::
-   :maxdepth: 2
-   :hidden:
+   :maxdepth: 3
 
-   create-custom-wpk/create-wpk-key
+   create-custom-wpk
    install-custom-wpk
    wpk-list
