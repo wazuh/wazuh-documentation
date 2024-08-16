@@ -19,4 +19,3 @@ Wazuh agent administration involves the management of the enrolled Wazuh agents.
    antiflooding
    labels
    key-request
-   agent-life-cycle
