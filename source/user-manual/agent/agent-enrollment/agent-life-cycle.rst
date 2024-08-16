@@ -39,4 +39,4 @@ In this phase, there are four different connection states that a Wazuh agent may
 Removal
 -------
 
-The life cycle of the Wazuh agent comes to an end when it is removed from the Wazuh manager. This can be done through the :ref:`Wazuh server API <>` or :ref:`command line <>`. 
+The life cycle of the Wazuh agent comes to an end when it is removed from the Wazuh manager. This can be done through the :doc:`Wazuh server API <../agent-management/remove-agents/restful-api-remove>` or :doc:`command line <../agent-management/remove-agents/remove>`. 
