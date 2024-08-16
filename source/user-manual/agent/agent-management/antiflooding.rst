@@ -6,7 +6,7 @@
 Wazuh agent queue
 =================
 
-The Wazuh agent includes a queue mechanism ``queue_ad`` to prevent large bursts of events on a Wazuh agent from negatively impacting the network or the Wazuh manager. It uses a leaky bucket queue that collects all generated events and sends them to the Wazuh manager at a rate below the specified :ref:`events per second <>` threshold. This helps to avoid the loss of events or unexpected behavior from the Wazuh components.
+The Wazuh agent includes a queue mechanism ``queue_ad`` to prevent large bursts of events on a Wazuh agent from negatively impacting the network or the Wazuh manager. It uses a leaky bucket queue that collects all generated events and sends them to the Wazuh manager at a rate below the specified :ref:`events per second <wazuh_agent_queue_throughput_configuration>` threshold. This helps to avoid the loss of events or unexpected behavior from the Wazuh components.
 
 Additionally, Wazuh agent modules such as Log collector, File Integrity Monitoring (FIM), Security configuration assessment (SCA), can be configured to limit their event production rate, reducing the risk of saturating the leaky bucket's buffer.
 
@@ -73,6 +73,8 @@ The leaky bucket can be configured to adapt to any environment with the use of t
    :local:
    :depth: 1
    :backlinks: none
+
+.. _wazuh_agent_queue_throughput_configuration:
 
 Throughput configuration
 ~~~~~~~~~~~~~~~~~~~~~~~~
