@@ -44,6 +44,12 @@ To customize the *global App loading* logo, do the following.
          loadingLogo:
             defaultUrl: "https://domain.org/default-logo.png"
             darkModeUrl: "https://domain.org/dark-mode-logo.png"
+   
+#. Restart the Wazuh dashboard service using this command:
+
+   .. code-block:: console
+
+      # systemctl restart wazuh-dashboard
 
 To customize the *Wazuh plugins loading* logo, do the following.
 
@@ -103,6 +109,12 @@ To customize the *Wazuh dashboard home* logo in the top header, do the following
          mark:
             defaultUrl: "https://domain.org/default-logo.png"
             darkModeUrl: "https://domain.org/dark-mode-logo.png"
+
+#. Restart the Wazuh dashboard service using this command:
+
+   .. code-block:: console
+
+      # systemctl restart wazuh-dashboard
 
 Once you are done setting your custom logo image, you can find it saved in ``/usr/share/wazuh-dashboard/plugins/wazuh/public/assets/custom/images/``.
 
