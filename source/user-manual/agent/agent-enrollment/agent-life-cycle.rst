@@ -18,6 +18,8 @@ Installation and enrollment
 
 The first step involves installing the Wazuh agent on the endpoint to be monitored. Once the Wazuh agent is installed, it must be enrolled in the Wazuh manager to establish communication. Refer to :doc:`Wazuh agent enrollment <index>`.
 
+.. _agent-status-cycle:
+
 Agent connection states
 -----------------------
 
