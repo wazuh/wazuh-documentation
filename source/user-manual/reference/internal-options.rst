@@ -37,6 +37,7 @@ Generally, this file is reserved for debugging issues and for troubleshooting. *
 - `Wazuh-download`_
 - `Windows`_
 
+.. _internal_options_agent:
 
 Agent
 -----
