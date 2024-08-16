@@ -20,6 +20,10 @@ The Wazuh agent is a single and lightweight monitoring software. It is a multi-p
         
             CMake 3.12.4 is the minimal library version required to build the Wazuh agent solution.
 
+        .. note::
+        
+            GCC 9.4 is the minimal compiler version required to build the Wazuh agent solution.
+
         #.  Install development tools and compilers. In Linux, this can easily be done using your distribution’s package manager:
 
             .. tabs::
