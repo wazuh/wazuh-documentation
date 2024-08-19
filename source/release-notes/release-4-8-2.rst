@@ -8,6 +8,16 @@
 
 This section lists the changes in version 4.8.2. Every update of the Wazuh solution is cumulative and includes all enhancements and fixes from previous releases.
 
+Resolved issues
+---------------
+
+This release resolves known issues as the following:
+
+Manager
+^^^^^^^
+
+-  `#25225 <https://github.com/wazuh/wazuh/issues/25225>`__ Added a fix for when remoted fails to read a message.
+
 Changelogs
 ----------
 
