@@ -88,6 +88,72 @@ redirections.push(
     '4.8': '/development/packaging/generate-rpm-package.html',
     '4.9': '/development/packaging/generate-deb-rpm-package.html',
   },
+  {
+    'target': ['4.8=>4.9', '4.9=>4.8'],
+    '4.8': '/user-manual/agent/agent-management/agent-life-cycle.html',
+    '4.9': '/user-manual/agent/agent-enrollment/agent-life-cycle.html',
+  },
+  {
+    'target': ['4.8=>4.9', '4.9=>4.8'],
+    '4.8': '/user-manual/agent/deployment-variables/deployment-variables-aix.html',
+    '4.9': '/user-manual/agent/agent-enrollment/deployment-variables/deployment-variables-aix.html',
+  },
+  {
+    'target': ['4.8=>4.9', '4.9=>4.8'],
+    '4.8': '/user-manual/agent/deployment-variables/deployment-variables-linux.html',
+    '4.9': '/user-manual/agent/agent-enrollment/deployment-variables/deployment-variables-linux.html',
+  },
+  {
+    'target': ['4.8=>4.9', '4.9=>4.8'],
+    '4.8': '/user-manual/agent/deployment-variables/deployment-variables-macos.html',
+    '4.9': '/user-manual/agent/agent-enrollment/deployment-variables/deployment-variables-macos.html',
+  },
+  {
+    'target': ['4.8=>4.9', '4.9=>4.8'],
+    '4.8': '/user-manual/agent/deployment-variables/deployment-variables-windows.html',
+    '4.9': '/user-manual/agent/agent-enrollment/deployment-variables/deployment-variables-windows.html',
+  },
+  {
+    'target': ['4.8=>4.9', '4.9=>4.8'],
+    '4.8': '/user-manual/agent/deployment-variables/deployment-variables.html',
+    '4.9': '/user-manual/agent/agent-enrollment/deployment-variables/index.html',
+  },
+  {
+    'target': ['4.8=>4.9', '4.9=>4.8'],
+    '4.8': '/user-manual/agent/agent-enrollment/index.html#requirements',
+    '4.9': '/user-manual/agent/agent-enrollment/requirements.html',
+  },
+  {
+    'target': ['4.8=>4.9', '4.9=>4.8'],
+    '4.8': '/user-manual/agent/agent-management/remote-upgrading/create-custom-wpk/create-wpk-key.html',
+    '4.9': '/user-manual/agent/agent-management/remote-upgrading/wpk-files/create-custom-wpk.html',
+  },
+  {
+    'target': ['4.8=>4.9'],
+    '4.8': '/user-manual/agent/agent-management/remote-upgrading/custom-repository.html',
+    '4.9': '/user-manual/agent/agent-management/remote-upgrading/wpk-files/index.html',
+  },
+  {
+    'target': ['4.9=>4.8'],
+    '4.8': '/user-manual/agent/agent-management/remote-upgrading/index.html',
+    '4.9': '/user-manual/agent/agent-management/remote-upgrading/wpk-files/index.html',
+  },
+  {
+    'target': ['4.8=>4.9', '4.9=>4.8'],
+    '4.8': '/user-manual/agent/agent-management/remote-upgrading/install-custom-wpk.html',
+    '4.9': '/user-manual/agent/agent-management/remote-upgrading/wpk-files/install-custom-wpk.html',
+  },
+  {
+    'target': ['4.8=>4.9', '4.9=>4.8'],
+    '4.8': '/user-manual/agent/agent-management/remote-upgrading/wpk-list.html',
+    '4.9': '/user-manual/agent/agent-management/remote-upgrading/wpk-files/wpk-list.html',
+  },
+  {
+    'target': ['4.8=>4.9', '4.9=>4.8'],
+    '4.8': '/user-manual/agent/agent-management/remote-upgrading/create-custom-wpk/generate-wpk-package-manually.html',
+    '4.9': '/user-manual/agent/agent-management/remote-upgrading/wpk-files/create-custom-wpk.html#generating-wpk-packages-manually',
+  },
+  {
 );
 
 /* Pages added in 4.9 */
@@ -102,7 +168,19 @@ newUrls['4.9'] = [
   '/development/packaging/generate-indexer-package.html',
   '/development/packaging/generate-deb-rpm-package.html',
   '/user-manual/capabilities/log-data-collection/journald.html',
-  '/integrations-guide/amazon-security-lake/index.html'
+  '/integrations-guide/amazon-security-lake/index.html',
+  '/user-manual/agent/agent-enrollment/agent-life-cycle.html',
+  '/user-manual/agent/agent-enrollment/deployment-variables/deployment-variables-aix.html',
+  '/user-manual/agent/agent-enrollment/deployment-variables/deployment-variables-linux.html',
+  '/user-manual/agent/agent-enrollment/deployment-variables/deployment-variables-macos.html',
+  '/user-manual/agent/agent-enrollment/deployment-variables/deployment-variables-windows.html',
+  '/user-manual/agent/agent-enrollment/deployment-variables/index.html',
+  '/user-manual/agent/agent-enrollment/requirements.html',
+  '/user-manual/agent/agent-management/agent-administration.html',
+  '/user-manual/agent/agent-management/remote-upgrading/wpk-files/create-custom-wpk.html',
+  '/user-manual/agent/agent-management/remote-upgrading/wpk-files/index.html',
+  '/user-manual/agent/agent-management/remote-upgrading/wpk-files/install-custom-wpk.html',
+  '/user-manual/agent/agent-management/remote-upgrading/wpk-files/wpk-list.html',
 ];
 
 /* Pages no longer available in 4.9 */
@@ -111,6 +189,17 @@ removedUrls['4.9'] = [
   '/deployment-options/offline-installation.html',
   '/development/packaging/generate-deb-package.html',
   '/development/packaging/generate-rpm-package.html',
+  '/user-manual/agent/deployment-variables/deployment-variables-macos.html',
+  '/user-manual/agent/deployment-variables/deployment-variables-windows.html',
+  '/user-manual/agent/deployment-variables/deployment-variables-aix.html',
+  '/user-manual/agent/deployment-variables/deployment-variables-linux.html',
+  '/user-manual/agent/deployment-variables/deployment-variables.html',
+  '/user-manual/agent/agent-management/agent-life-cycle.html',
+  '/user-manual/agent/agent-management/remote-upgrading/create-custom-wpk/create-wpk-key.html',
+  '/user-manual/agent/agent-management/remote-upgrading/create-custom-wpk/generate-wpk-package-manually.html',
+  '/user-manual/agent/agent-management/remote-upgrading/install-custom-wpk.html',
+  '/user-manual/agent/agent-management/remote-upgrading/custom-repository.html',
+  '/user-manual/agent/agent-management/remote-upgrading/wpk-list.html',
 ];
 
 /* *** RELEASE 4.8 ****/

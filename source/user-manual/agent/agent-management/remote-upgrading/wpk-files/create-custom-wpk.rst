@@ -117,17 +117,17 @@ To build a WPK for Windows, you need to first download an MSI package of the des
 
 .. code-block:: console
 
-   # curl -O https://packages.wazuh.com/4.x/windows/wazuh-agent-|WAZUH_CURRENT|-|WAZUH_REVISION_WINDOWS|.msi
+   # curl -O https://packages.wazuh.com/4.x/windows/wazuh-agent-|WAZUH_CURRENT_WINDOWS|-|WAZUH_REVISION_WINDOWS|.msi
 
 Run the command below to build a Windows WPK:
 
 .. code-block:: console
 
-   # ./generate_wpk_package.sh -t windows -b v|WAZUH_CURRENT| -d /<DESTINATION_PATH> -k /<PATH_TO_GENERATED_WPK_KEYS> -o wazuh-agent_v|WAZUH_CURRENT|_windows.wpk -pn /<PATH_TO>/wazuh-agent-|WAZUH_CURRENT|-|WAZUH_REVISION_WINDOWS|.msi
+   # ./generate_wpk_package.sh -t windows -b v|WAZUH_CURRENT_WINDOWS| -d /<DESTINATION_PATH> -k /<PATH_TO_GENERATED_WPK_KEYS> -o wazuh-agent_v|WAZUH_CURRENT_WINDOWS|_windows.wpk -pn /<PATH_TO>/wazuh-agent-|WAZUH_CURRENT_WINDOWS|-|WAZUH_REVISION_WINDOWS|.msi
 
-This script builds a Wazuh |WAZUH_CURRENT| Windows WPK package named ``wazuh-agent_v|WAZUH_CURRENT|_windows.wpk`` and stores it in ``/<DESTINATION_PATH>``. (You can use a destination path of your choice). It does this using the previously generated keys saved in ``/<PATH_TO_GENERATED_WPK_KEYS>`` and the downloaded MSI package in ``/<PATH_TO>/wazuh-agent-|WAZUH_CURRENT|-|WAZUH_REVISION_WINDOWS|.msi``.
+This script builds a Wazuh |WAZUH_CURRENT_WINDOWS| Windows WPK package named ``wazuh-agent_v|WAZUH_CURRENT_WINDOWS|_windows.wpk`` and stores it in ``/<DESTINATION_PATH>``. (You can use a destination path of your choice). It does this using the previously generated keys saved in ``/<PATH_TO_GENERATED_WPK_KEYS>`` and the downloaded MSI package in ``/<PATH_TO>/wazuh-agent-|WAZUH_CURRENT_WINDOWS|-|WAZUH_REVISION_WINDOWS|.msi``.
 
-Replace ``/<PATH_TO_GENERATED_WPK_KEYS>`` with the directory path of the previously generated keys and ``<PATH_TO>/wazuh-agent-|WAZUH_CURRENT|-|WAZUH_REVISION_WINDOWS|.msi`` with the directory path to the downloaded MSI package.
+Replace ``/<PATH_TO_GENERATED_WPK_KEYS>`` with the directory path of the previously generated keys and ``<PATH_TO>/wazuh-agent-|WAZUH_CURRENT_WINDOWS|-|WAZUH_REVISION_WINDOWS|.msi`` with the directory path to the downloaded MSI package.
 
 If the ``-c`` or ``--checksum`` option is used, a file is created containing the SHA512 checksum in the same output path. The location of this file is configurable, and you can indicate where you want to store it.
 
@@ -138,15 +138,15 @@ To build a WPK for macOS, you need to first download a PKG package of the desire
 
 .. code-block:: console
 
-   # curl -O https://packages.wazuh.com/4.x/macos/wazuh-agent-|WAZUH_CURRENT|-|WAZUH_REVISION_OSX|.pkg
+   # curl -O https://packages.wazuh.com/4.x/macos/wazuh-agent-|WAZUH_CURRENT_OSX|-|WAZUH_REVISION_OSX|.pkg
 
 Run the command below to build a macOS WPK:
 
 .. code-block:: console
 
-   # ./generate_wpk_package.sh -t macos -b v|WAZUH_CURRENT| -d /<DESTINATION_PATH> -k /<PATH_TO_GENERATED_WPK_KEYS> -o wazuh-agent_v|WAZUH_CURRENT|_macOS.wpk -pn /tmp/wazuh-agent-|WAZUH_CURRENT|-|WAZUH_REVISION_OSX|.pkg
+   # ./generate_wpk_package.sh -t macos -b v|WAZUH_CURRENT_OSX| -d /<DESTINATION_PATH> -k /<PATH_TO_GENERATED_WPK_KEYS> -o wazuh-agent_v|WAZUH_CURRENT_OSX|_macOS.wpk -pn /tmp/wazuh-agent-|WAZUH_CURRENT_OSX|-|WAZUH_REVISION_OSX|.pkg
 
-This script builds a Wazuh |WAZUH_CURRENT| macOS WPK package named ``wazuh-agent_v|WAZUH_CURRENT|_macOS.wpk`` and stores it in ``/<DESTINATION_PATH>``. (You can use a destination path of your choice). It does this using the previously generated keys saved in ``/<PATH_TO_GENERATED_WPK_KEYS>``.
+This script builds a Wazuh |WAZUH_CURRENT_OSX| macOS WPK package named ``wazuh-agent_v|WAZUH_CURRENT_OSX|_macOS.wpk`` and stores it in ``/<DESTINATION_PATH>``. (You can use a destination path of your choice). It does this using the previously generated keys saved in ``/<PATH_TO_GENERATED_WPK_KEYS>``.
 
 Replace ``/<PATH_TO_GENERATED_WPK_KEYS>`` with the directory path of the previously generated keys.
 
@@ -156,7 +156,7 @@ Below is an example of how to build a WPK generation with checksum:
 
 .. code-block:: console
 
-   # ./generate_wpk_package.sh -t linux -b v|WAZUH_CURRENT| -d /<DESTINATION_PATH> -k /<PATH_TO_GENERATED_WPK_KEYS> -o LinuxAgent.wpk -c /tmp/wpk_checksum
+   # ./generate_wpk_package.sh -t linux -b v|WAZUH_CURRENT_OSX| -d /<DESTINATION_PATH> -k /<PATH_TO_GENERATED_WPK_KEYS> -o LinuxAgent.wpk -c /tmp/wpk_checksum
 
 Generating WPK packages manually
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
@@ -254,14 +254,14 @@ Windows WPK
 
    .. code-block:: console
 
-      # curl -Ls https://github.com/wazuh/wazuh/archive/v|WAZUH_CURRENT|.tar.gz | tar zx
-      # cd wazuh-|WAZUH_CURRENT|
+      # curl -Ls https://github.com/wazuh/wazuh/archive/v|WAZUH_CURRENT_WINDOWS|.tar.gz | tar zx
+      # cd wazuh-|WAZUH_CURRENT_WINDOWS|
 
 #. Download the latest version of the Wazuh MSI package:
 
    .. code-block:: console
 
-      # curl -Ls https://packages.wazuh.com/4.x/windows/wazuh-agent-|WAZUH_CURRENT|-|WAZUH_REVISION_WINDOWS|.msi --output wazuh-agent-|WAZUH_CURRENT|-|WAZUH_REVISION_WINDOWS|.msi
+      # curl -Ls https://packages.wazuh.com/4.x/windows/wazuh-agent-|WAZUH_CURRENT_WINDOWS|-|WAZUH_REVISION_WINDOWS|.msi --output wazuh-agent-|WAZUH_CURRENT_WINDOWS|-|WAZUH_REVISION_WINDOWS|.msi
 
 #. Install the root CA if you want to overwrite the root CA with the file you created previously:
 
@@ -307,14 +307,14 @@ macOS WPK
 
    .. code-block:: console
 
-      # curl -Ls https://github.com/wazuh/wazuh/archive/v|WAZUH_CURRENT|.tar.gz | tar zx
-      # cd wazuh-|WAZUH_CURRENT|
+      # curl -Ls https://github.com/wazuh/wazuh/archive/v|WAZUH_CURRENT_OSX|.tar.gz | tar zx
+      # cd wazuh-|WAZUH_CURRENT_OSX|
 
 #. Download the latest version of the Wazuh PKG package:
 
    .. code-block:: console
 
-      # curl -Ls https://packages.wazuh.com/4.x/macos/wazuh-agent-|WAZUH_CURRENT|-1.pkg --output wazuh-agent-|WAZUH_CURRENT|-|WAZUH_REVISION_OSX|.pkg
+      # curl -Ls https://packages.wazuh.com/4.x/macos/wazuh-agent-|WAZUH_CURRENT_OSX|-|WAZUH_REVISION_OSX|.pkg --output wazuh-agent-|WAZUH_CURRENT_OSX|-|WAZUH_REVISION_OSX|.pkg
 
 #. Install the root CA if you want to overwrite the root CA with the file you created previously:
 
@@ -332,14 +332,14 @@ macOS WPK
 
    .. code-block:: console
 
-      # tools/agent-upgrade/wpkpack.py <PATH_TO>/myagent.wpk <PATH_TO>/wpkcert.pem <PATH_TO>/wpkcert.key wazuh-agent-|WAZUH_CURRENT|-|WAZUH_REVISION_OSX|.pkg upgrade.sh pkg_installer.sh
+      # tools/agent-upgrade/wpkpack.py <PATH_TO>/myagent.wpk <PATH_TO>/wpkcert.pem <PATH_TO>/wpkcert.key wazuh-agent-|WAZUH_CURRENT_OSX|-|WAZUH_REVISION_OSX|.pkg upgrade.sh pkg_installer.sh
 
 Where:
 
 -  ``<PATH_TO>/myagent.wpk`` is the name of the output WPK package.
 -  ``<PATH_TO>/wpkcert.pem`` is the path to the SSL certificate.
 -  ``<PATH_TO>/wpkcert.key`` is the path to the SSL certificate's key.
--  ``wazuh-agent-4.8.0-1.pkg`` is the PKG file downloaded in step 3.
+-  ``wazuh-agent-|WAZUH_CURRENT_OSX|-|WAZUH_REVISION_OSX|.pkg`` is the PKG file downloaded in step 3.
 -  ``upgrade.sh`` is the script that runs first when the WPK is deployed in the target agent. Find an example in the base directory in the Wazuh repository.
 -  ``pkg_installer.sh`` is the script that manages the WPK upgrade procedure. Find an example in ``src/init`` in the Wazuh repository.
 

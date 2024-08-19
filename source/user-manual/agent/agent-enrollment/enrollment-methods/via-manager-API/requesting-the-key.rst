@@ -12,13 +12,11 @@ The host making the enrollment request must have connectivity to the Wazuh manag
 
 The steps below show how to request the Wazuh agent key for different operating systems.
 
--  :ref:`from-linux-unix-and-macos`
--  :ref:`from-windows`
+-  `Linux/Unix and macOS`_
+-  `From Windows`_
 
-.. _from-linux-unix-and-macos:
-
-From Linux/Unix and macOS
-^^^^^^^^^^^^^^^^^^^^^^^^^
+Linux/Unix and macOS
+^^^^^^^^^^^^^^^^^^^^
 
 #. Generate a JWT for authenticating to the Wazuh server API by making a curl request. The default Wazuh server API credentials are ``wazuh:wazuh``. Replace ``<WAZUH_MANAGER_IP>`` with the Wazuh manager IP address or FQDN (Fully Qualified Domain Name):
 
@@ -60,8 +58,6 @@ From Linux/Unix and macOS
               "key": "MDAxIE5ld0FnZW50IDEwLjAuMC44IDM0MGQ1NjNkODQyNjcxMWIyYzUzZTE1MGIzYjEyYWVlMTU1ODgxMzVhNDE3MWQ1Y2IzZDY4M2Y0YjA0ZWVjYzM=",
           },
       }
-
-.. _from-windows:
 
 From Windows
 ^^^^^^^^^^^^

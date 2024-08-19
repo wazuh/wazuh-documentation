@@ -76,6 +76,9 @@ An **empty input** must be allowed. The key request feature performs a socket he
 
    If the socket option is specified and the socket is unavailable, the program to be turned on will be called if it has been specified.
 
+Output
+------
+
 The output of your script must be a JSON object, which is the standard output.
 
 On success example:

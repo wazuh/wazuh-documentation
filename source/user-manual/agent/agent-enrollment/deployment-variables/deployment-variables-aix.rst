@@ -54,42 +54,42 @@ Examples:
    .. code-block:: console
 
       # WAZUH_MANAGER="10.0.0.2" WAZUH_REGISTRATION_PASSWORD="TopSecret" \
-           WAZUH_AGENT_NAME="aix-agent" rpm -i wazuh-agent-4.8.0-1.aix.ppc.rpm
+           WAZUH_AGENT_NAME="aix-agent" rpm -i wazuh-agent-|WAZUH_CURRENT_AIX|-|WAZUH_REVISION_AIX|.aix.ppc.rpm
 
 -  Enrollment with password and assigning a group:
 
    .. code-block:: console
 
       # WAZUH_MANAGER="10.0.0.2" WAZUH_REGISTRATION_SERVER="10.0.0.2" WAZUH_REGISTRATION_PASSWORD="TopSecret" \
-           WAZUH_AGENT_GROUP="my-group" rpm -i wazuh-agent-4.8.0-1.aix.ppc.rpm
+           WAZUH_AGENT_GROUP="my-group" rpm -i wazuh-agent-|WAZUH_CURRENT_AIX|-|WAZUH_REVISION_AIX|.aix.ppc.rpm
 
 -  Enrollment with relative path to CA. It will be searched at your Wazuh installation folder:
 
    .. code-block:: console
 
       # WAZUH_MANAGER="10.0.0.2" WAZUH_REGISTRATION_SERVER="10.0.0.2" WAZUH_AGENT_NAME="aix-agent" \
-           WAZUH_REGISTRATION_CA="rootCA.pem" rpm -i wazuh-agent-4.8.0-1.aix.ppc.rpm
+           WAZUH_REGISTRATION_CA="rootCA.pem" rpm -i wazuh-agent-|WAZUH_CURRENT_AIX|-|WAZUH_REVISION_AIX|.aix.ppc.rpm
 
 -  Enrollment with protocol:
 
    .. code-block:: console
 
       # WAZUH_MANAGER="10.0.0.2" WAZUH_REGISTRATION_SERVER="10.0.0.2" WAZUH_AGENT_NAME="aix-agent" \
-           WAZUH_PROTOCOL="tcp" rpm -i wazuh-agent-4.8.0-1.aix.ppc.rpm
+           WAZUH_PROTOCOL="tcp" rpm -i wazuh-agent-|WAZUH_CURRENT_AIX|-|WAZUH_REVISION_AIX|.aix.ppc.rpm
 
 -  Enrollment and adding multiple address:
 
    .. code-block:: console
 
       # WAZUH_MANAGER="10.0.0.2,10.0.0.3" WAZUH_REGISTRATION_SERVER="10.0.0.2" \
-           WAZUH_AGENT_NAME="aix-agent" rpm -i wazuh-agent-4.8.0-1.aix.ppc.rpm
+           WAZUH_AGENT_NAME="aix-agent" rpm -i wazuh-agent-|WAZUH_CURRENT_AIX|-|WAZUH_REVISION_AIX|.aix.ppc.rpm
 
 -  Absolute paths to CA, certificate or key that contain spaces can be written as shown below:
 
    .. code-block:: console
 
       # WAZUH_MANAGER "10.0.0.2" WAZUH_REGISTRATION_SERVER "10.0.0.2" WAZUH_REGISTRATION_KEY "/var/ossec/etc/sslagent.key" \
-           WAZUH_REGISTRATION_CERTIFICATE "/var/ossec/etc/sslagent.cert" rpm -i wazuh-agent-4.8.0-1.aix.ppc.rpm
+           WAZUH_REGISTRATION_CERTIFICATE "/var/ossec/etc/sslagent.cert" rpm -i wazuh-agent-|WAZUH_CURRENT_AIX|-|WAZUH_REVISION_AIX|.aix.ppc.rpm
 
 .. note::
 

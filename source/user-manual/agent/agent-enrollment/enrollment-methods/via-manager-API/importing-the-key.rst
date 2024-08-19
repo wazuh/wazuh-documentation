@@ -112,18 +112,20 @@ Follow the steps below to import the client key to a Windows endpoint.
 
 #. Restart the Wazuh agent to make the changes effective.
 
-   PowerShell (as an administrator):
+   .. tabs::
 
-   .. code-block:: pwsh-session
+      .. group-tab:: PowerShell (as an administrator):
 
-      # Restart-Service -Name wazuh
+         .. code-block:: pwsh-session
 
-   CMD (as an administrator):
+            # Restart-Service -Name wazuh
 
-   .. code-block:: doscon
+      .. group-tab:: CMD (as an administrator):
 
-      # net stop wazuh
-      # net start wazuh
+         .. code-block:: doscon
+
+            # net stop wazuh
+            # net start wazuh
 
 #. Click on the upper-left menu icon and navigate to **Server management** > **Endpoints Summary** on the Wazuh dashboard to check for the newly enrolled Wazuh agent and its connection status. If the enrollment was successful, you will have an interface similar to the image below.
 

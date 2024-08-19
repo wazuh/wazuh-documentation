@@ -57,25 +57,25 @@ Enrollment with password:
 
 .. code-block:: doscon
 
-   wazuh-agent-4.8.0-1.msi /q WAZUH_MANAGER="10.0.0.2" WAZUH_REGISTRATION_SERVER="10.0.0.2" WAZUH_REGISTRATION_PASSWORD="TopSecret" WAZUH_AGENT_NAME="W2012"
+   wazuh-agent-|WAZUH_CURRENT_WINDOWS|-|WAZUH_REVISION_WINDOWS|.msi /q WAZUH_MANAGER="10.0.0.2" WAZUH_REGISTRATION_SERVER="10.0.0.2" WAZUH_REGISTRATION_PASSWORD="TopSecret" WAZUH_AGENT_NAME="W2012"
 
 Enrollment with password and assigning a group:
 
 .. code-block:: doscon
 
-   wazuh-agent-4.8.0-1.msi /q WAZUH_MANAGER="10.0.0.2" WAZUH_REGISTRATION_SERVER="10.0.0.2" WAZUH_REGISTRATION_PASSWORD="TopSecret" WAZUH_AGENT_GROUP="my-group"
+   wazuh-agent-|WAZUH_CURRENT_WINDOWS|-|WAZUH_REVISION_WINDOWS|.msi /q WAZUH_MANAGER="10.0.0.2" WAZUH_REGISTRATION_SERVER="10.0.0.2" WAZUH_REGISTRATION_PASSWORD="TopSecret" WAZUH_AGENT_GROUP="my-group"
 
 Enrollment with relative path to CA. It will be searched at your Wazuh installation folder:
 
 .. code-block:: doscon
 
-   wazuh-agent-4.8.0-1.msi /q WAZUH_MANAGER="10.0.0.2" WAZUH_REGISTRATION_SERVER="10.0.0.2" WAZUH_AGENT_NAME="W2019" WAZUH_REGISTRATION_CA="rootCA.pem"
+   wazuh-agent-|WAZUH_CURRENT_WINDOWS|-|WAZUH_REVISION_WINDOWS|.msi /q WAZUH_MANAGER="10.0.0.2" WAZUH_REGISTRATION_SERVER="10.0.0.2" WAZUH_AGENT_NAME="W2019" WAZUH_REGISTRATION_CA="rootCA.pem"
 
 Absolute paths to CA, certificate or key that contain spaces can be written as shown below:
 
 .. code-block:: doscon
 
-   wazuh-agent-4.8.0-1.msi /q WAZUH_MANAGER="10.0.0.2" WAZUH_REGISTRATION_SERVER="10.0.0.2" WAZUH_REGISTRATION_KEY="C:\Program Files (x86)\ossec-agent\sslagent.key" WAZUH_REGISTRATION_CERTIFICATE="C:\Program Files (x86)\ossec-agent\sslagent.cert"
+   wazuh-agent-|WAZUH_CURRENT_WINDOWS|-|WAZUH_REVISION_WINDOWS|.msi /q WAZUH_MANAGER="10.0.0.2" WAZUH_REGISTRATION_SERVER="10.0.0.2" WAZUH_REGISTRATION_KEY="C:\Program Files (x86)\ossec-agent\sslagent.key" WAZUH_REGISTRATION_CERTIFICATE="C:\Program Files (x86)\ossec-agent\sslagent.cert"
 
 .. note::
 
@@ -85,13 +85,13 @@ Enrollment with protocol:
 
 .. code-block:: doscon
 
-   Wazuh-agent-4.8.0-1.msi /q WAZUH_MANAGER="10.0.0.2" WAZUH_REGISTRATION_SERVER="10.0.0.2" WAZUH_AGENT_NAME="W2016" WAZUH_PROTOCOL="udp"
+   Wazuh-agent-|WAZUH_CURRENT_WINDOWS|-|WAZUH_REVISION_WINDOWS|.msi /q WAZUH_MANAGER="10.0.0.2" WAZUH_REGISTRATION_SERVER="10.0.0.2" WAZUH_AGENT_NAME="W2016" WAZUH_PROTOCOL="udp"
 
 Enrollment and adding multiple addresses:
 
 .. code-block:: doscon
 
-   wazuh-agent-4.8.0-1.msi /q WAZUH_MANAGER="10.0.0.2,10.0.0.3" WAZUH_REGISTRATION_SERVER="10.0.0.2" WAZUH_AGENT_NAME="W2016"
+   wazuh-agent-|WAZUH_CURRENT_WINDOWS|-|WAZUH_REVISION_WINDOWS|.msi /q WAZUH_MANAGER="10.0.0.2,10.0.0.3" WAZUH_REGISTRATION_SERVER="10.0.0.2" WAZUH_AGENT_NAME="W2016"
 
 .. warning::
 

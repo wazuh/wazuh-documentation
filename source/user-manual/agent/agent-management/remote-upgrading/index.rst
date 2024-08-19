@@ -22,5 +22,4 @@ Learn more about remote upgrading of the Wazuh agents in the following sections:
    upgrading-agent
    wpk-files/index
    agent-upgrade-module
-   custom-repository
 

@@ -87,7 +87,7 @@ Wazuh server configuration
    -  ``sslmanager.csr`` is the CSR to be submitted to the certificate authority.
    -  ``sslmanager.cert`` is the SSL certificate signed by the CSR.
    -  ``rootCA.pem`` is the root certificate for the CA.
-   -  The -extfile and -extensions options are required to copy the subject and the extensions from ``sslmanager.csr`` to ``sslmanager.cert``.
+   -  The ``-extfile`` and ``-extensions`` options are required to copy the subject and the extensions from ``sslmanager.csr`` to ``sslmanager.cert``.
 
 #. Copy the newly signed certificate and key files to ``/var/ossec/etc`` on the Wazuh manager:
 

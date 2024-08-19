@@ -113,7 +113,7 @@ You can check the :ref:`status <agent-status-cycle>` of a Wazuh agent by sending
 Reading the local wazuh-agentd.state file
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-You can read the :doc:`wazuh-agentd.state </user-manual/reference/statistics-files/wazuh-agentd-state>` file found in the endpoint to check the status of the connection. The Wazuh agent keeps reporting its connection status in this file as follows:
+You can read the :doc:`/var/ossec/var/run/wazuh-agentd.state </user-manual/reference/statistics-files/wazuh-agentd-state>` file found in the endpoint to check the status of the connection. The Wazuh agent keeps reporting its connection status in this file as follows:
 
 -  ``pending``: Waiting for acknowledgment from the Wazuh manager about the connection established.
 -  ``disconnected``: No acknowledgment signal received in the last 60 seconds or lost connection.
