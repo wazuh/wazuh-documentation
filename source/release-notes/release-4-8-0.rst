@@ -97,7 +97,6 @@ Ruleset
 
 -  `#19528 <https://github.com/wazuh/wazuh/pull/19528>`__ Added rules to detect IcedID attacks.
 -  `#17780 <https://github.com/wazuh/wazuh/pull/17780>`__ Added new SCA policy for Amazon Linux 2023.
--  `#17784 <https://github.com/wazuh/wazuh/pull/17784>`__ Added new SCA policy for Rocky Linux 8.
 -  `#18721 <https://github.com/wazuh/wazuh/pull/18721>`__ Revised SCA policy for Ubuntu Linux 18.04.
 -  `#17515 <https://github.com/wazuh/wazuh/pull/17515>`__ Revised SCA policy for Ubuntu Linux 22.04.
 -  `#18440 <https://github.com/wazuh/wazuh/pull/18440>`__ Revised SCA policy for Red Hat Enterprise Linux 7.
@@ -168,7 +167,6 @@ Packages
 -  `#2365 <https://github.com/wazuh/wazuh-packages/pull/2365>`__ Removed the ``postProvision.sh`` script. It's no longer used in OVA generation.
 -  `#2364 <https://github.com/wazuh/wazuh-packages/pull/2364>`__ Added ``curl`` error messages in downloads.
 -  `#2469 <https://github.com/wazuh/wazuh-packages/pull/2469>`__ Improved debug output in the installation assistant.
--  `#2300 <https://github.com/wazuh/wazuh-packages/pull/2300>`__ Added SCA policy for Rocky Linux 8 in SPECS.
 -  `#2557 <https://github.com/wazuh/wazuh-packages/pull/2557>`__ Added SCA policy for Amazon Linux 2023 in SPECS.
 -  `#2558 <https://github.com/wazuh/wazuh-packages/pull/2558>`__ Wazuh password tool now recognizes UI created users.
 -  `#2562 <https://github.com/wazuh/wazuh-packages/pull/2562>`__ Bumped Wazuh indexer to OpenSearch 2.10.0.
