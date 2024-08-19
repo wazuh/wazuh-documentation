@@ -45,7 +45,7 @@ To customize the *global App loading* logo, do the following.
             defaultUrl: "https://domain.org/default-logo.png"
             darkModeUrl: "https://domain.org/dark-mode-logo.png"
    
-#. Restart the Wazuh dashboard service using this command:
+#. Restart the Wazuh dashboard service:
 
    .. code-block:: console
 
@@ -110,7 +110,7 @@ To customize the *Wazuh dashboard home* logo in the top header, do the following
             defaultUrl: "https://domain.org/default-logo.png"
             darkModeUrl: "https://domain.org/dark-mode-logo.png"
 
-#. Restart the Wazuh dashboard service using this command:
+#. Restart the Wazuh dashboard service:
 
    .. code-block:: console
 
