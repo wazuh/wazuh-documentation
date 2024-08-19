@@ -76,7 +76,7 @@ And on the API, it's possible to check all the groups the agent is added:
 
 The agent will receive the configuration of all the groups where it has been added.
 
-Learn more about this feature in the :ref:`multiple groups' <grouping-agents>` documentation.
+Learn more about this feature in the :doc:`multiple groups' </user-manual/agent/agent-management/grouping-agents>` documentation.
 
 New module to monitor Microsoft Azure
 -------------------------------------

@@ -1,284 +1,240 @@
 .. Copyright (C) 2015, Wazuh, Inc.
 
 .. meta::
-  :description: Learn more about how to register Wazuh agents on Linux, Windows, or macOS X in this section of our documentation.
-  
-.. _manager-identity-verification:
+   :description: This method uses SSL certificates to verify the identity of the Wazuh manager before a Wazuh agent sends the enrollment request. Learn more in this section of the documentation.
 
+Wazuh manager identity verification
+===================================
 
-Manager identity verification
-=============================
+This method uses SSL certificates to verify the identity of the Wazuh manager before a Wazuh agent sends the enrollment request. The Wazuh manager verification and the :ref:`Wazuh agent verification <manager-identity-validation>` are independent. However, it is possible to use a combination of both.
 
-This method uses SSL certificates to verify the identity of the Wazuh manager before an agent sends the enrollment request. The manager verification and the agent verification are independent of each other. However, it is possible to use a combination of both.
+Learn about Wazuh manager identity verification steps in the sections below:
 
-In this document, you will find the following information:
-
-- :ref:`manager-identity-prerequisites`
-- :ref:`manager-identity-validation`
-    - :ref:`manager-identity-manager-configuration`
-    - :ref:`manager-identity-linux-unix-endpoint`
-    - :ref:`manager-identity-this-windows-endpoint`
-    - :ref:`manager-identity-macos-endpoint`
-
-
-.. _manager-identity-prerequisites:
-
+.. contents::
+   :local:
+   :depth: 3
+   :backlinks: none
 
 Prerequisites
 -------------
 
-A certificate authority to sign certificates for the Wazuh manager and agents is needed. In the absence of an already configured certificate authority, the Wazuh manager can be used as the certificate authority by running the below command:
+You need a certificate authority to sign certificates for the Wazuh manager and Wazuh agents. In the absence of an already configured certificate authority, run the following command on the Wazuh server to use it as the certificate authority:
 
 .. code-block:: console
-     
-    # openssl req -x509 -new -nodes -newkey rsa:4096 -keyout rootCA.key -out rootCA.pem -batch -subj "/C=US/ST=CA/O=Wazuh"
 
+   # openssl req -x509 -new -nodes -newkey rsa:4096 -keyout rootCA.key -out rootCA.pem -batch -subj "/C=US/ST=CA/O=Wazuh"
 
 The root certificate is created and saved as the ``rootCA.pem`` file.
 
-
 .. _manager-identity-validation:
 
+Wazuh manager identity validation
+---------------------------------
 
-Manager identity validation
----------------------------
+In this process, the Wazuh manager generates an SSL certificate using the Certificate Authority (CA). Subsequently, during the agent enrollment, the Wazuh agent verifies the Wazuh manager certificate using the root certificate of the CA.
 
-Here the Wazuh manager has issued an SSL certificate using the certificate authority. Then, during enrollment, the agent verifies the Wazuh manager certificate using the root certificate of the CA.
+Wazuh server configuration
+^^^^^^^^^^^^^^^^^^^^^^^^^^
 
+#. Generate an SSL certificate on the Wazuh server signed by the certificate authority. The steps to generate an SSL certificate for the Wazuh manager are as follows:
 
-.. _manager-identity-manager-configuration:
+   Create a certificate request configuration file ``req.conf`` on the Wazuh server. Replace ``<WAZUH_MANAGER_IP>`` with the IP address or FQDN (Fully Qualified Domain Name) of the Wazuh manager where the Wazuh agents will be enrolled. The contents of the file can be as follows:
 
+   .. code-block:: ini
+      :emphasize-lines: 7
 
-Manager configuration
-^^^^^^^^^^^^^^^^^^^^^
+      [req]
+      distinguished_name = req_distinguished_name
+      req_extensions = req_ext
+      prompt = no
+      [req_distinguished_name]
+      C = US
+      CN = <WAZUH_MANAGER_IP>
+      [req_ext]
+      subjectAltName = @alt_names
+      [alt_names]
+      DNS.1 = wazuh
+      DNS.2 = wazuh.com
 
-#. Generate an SSL certificate on the Wazuh manager signed by the certificate authority. The steps to generate an SSL certificate for the manager are as follows:
+   Where:
 
-    #. Create a certificate request configuration file ``req.conf`` on the manager. Replace ``<MANAGER_IP_ADDRESS>`` with the hostname or the IP address of the Wazuh manager where the Wazuh agents are going to be enrolled. The contents of the file can be as follows:
+   -  ``C`` is the country where the organization making this request is domiciled.
+   -  ``CN`` is the common name on the certificate. This should be the IP address or  FQDN of the Wazuh manager. This field is not optional.
+   -  ``subjectAltName`` is optional and specifies the alternate subject names that can be used for the server. It should be included to allow the enrollment of the Wazuh agents with a SAN certificate.
+   -  ``DNS.1`` and ``DNS.2`` refer to the additional identities that the certificate should be valid for. In this case, the Wazuh manager DNS are wazuh and wazuh.com.
 
-         .. code-block:: xml
-            :class: output
+#. Create a certificate signing request (CSR) on the Wazuh server with the following command. The CSR will be used to request a digital certificate from a Certificate Authority (CA):
 
-                  [req]
-                  distinguished_name = req_distinguished_name
-                  req_extensions = req_ext
-                  prompt = no
-                  [req_distinguished_name]
-                  C = US
-                  CN = <MANAGER_IP_ADDRESS>
-                  [req_ext]
-                  subjectAltName = @alt_names
-                  [alt_names]
-                  DNS.1 = wazuh
-                  DNS.2 = wazuh.com
+   .. code-block:: console
 
+      # openssl req -new -nodes -newkey rsa:4096 -keyout sslmanager.key -out sslmanager.csr -config req.conf
 
-         Where: 
+   Where:
 
-            - ``C`` is the country where the organization making this request is domiciled.
-            - ``CN`` is the common name on the certificate. This should be the Wazuh manager IP address or its DNS name. This field is not optional. In this case, the Wazuh manager DNS are wazuh and wazuh.com.
-            - ``subjectAltName`` is optional and specifies the alternate subject names that can be used for the server. Note that to allow the enrollment of the Wazuh agents with a SAN certificate, this should be included.
+   -  ``req.conf`` is the certificate request configuration file.
+   -  ``sslmanager.key`` is the private key for the certificate request.
+   -  ``sslmanager.csr`` is the CSR to be submitted to the certificate authority.
 
-    #. Create a certificate signing request (CSR) on the Wazuh manager with the following command:
-    
-         .. code-block:: console
+#. Issue and sign the certificate for the Wazuh manager CSR with the following command:
 
-            # openssl req -new -nodes -newkey rsa:4096 -keyout sslmanager.key -out sslmanager.csr -config req.conf
-   
-   
-         Where:
+   .. code-block:: console
 
-            - ``req.conf`` is the certificate request configuration file.
-            - ``sslmanager.key`` is the private key for the certificate request.
-            - ``sslmanager.csr`` is the CSR to be submitted to the certificate authority.
+      # openssl x509 -req -days 365 -in sslmanager.csr -CA rootCA.pem -CAkey rootCA.key -out sslmanager.cert -CAcreateserial -extfile req.conf -extensions req_ext
 
-    #. Issue and sign the certificate for the manager CSR with the following command:
+   Where:
 
-         .. code-block:: console
+   -  ``req.conf`` is the certificate request configuration file.
+   -  ``sslmanager.csr`` is the CSR to be submitted to the certificate authority.
+   -  ``sslmanager.cert`` is the SSL certificate signed by the CSR.
+   -  ``rootCA.pem`` is the root certificate for the CA.
+   -  The -extfile and -extensions options are required to copy the subject and the extensions from ``sslmanager.csr`` to ``sslmanager.cert``.
 
-            # openssl x509 -req -days 365 -in sslmanager.csr -CA rootCA.pem -CAkey rootCA.key -out sslmanager.cert -CAcreateserial -extfile req.conf -extensions req_ext
+#. Copy the newly signed certificate and key files to ``/var/ossec/etc`` on the Wazuh manager:
 
-         Where:
+   .. code-block:: console
 
-            - ``req.conf`` is the certificate request configuration file.
-            - ``sslmanager.csr`` is the CSR to be submitted to the certificate authority.
-            - ``sslmanager.cert`` is the signed SSL certificate from the CSR.
-            - ``rootCA.pem`` is the root certificate for the CA.
-            - The -extfile and -extensions options are required to copy the subject and the extensions from sslmanager.csr to sslmanager.cert.
+      # cp sslmanager.cert sslmanager.key /var/ossec/etc
 
-    #. Copy the newly signed certificate and key files to ``/var/ossec/etc`` on the Wazuh manager:
+#. Restart the Wazuh manager to apply the changes made:
 
-         .. code-block:: console
+   .. code-block:: console
 
-            # cp sslmanager.cert sslmanager.key /var/ossec/etc
+      # systemctl restart wazuh-manager
 
+Linux/Unix
+^^^^^^^^^^
 
-    #. Restart the Wazuh manager to apply the changes made.
-
-         .. code-block:: console
-
-            # systemctl restart wazuh-manager
-
-
-.. _manager-identity-linux-unix-endpoint:
-
-Linux/Unix endpoint
-^^^^^^^^^^^^^^^^^^^
-
-The following steps serve as a guide on how to enroll a Linux/Unix endpoint by using certificates to verify the manager identity:
+Follow the steps below to enroll a Linux/Unix endpoint by using certificates to verify the identity of the Wazuh manager:
 
 #. Ensure that the root certificate authority ``rootCA.pem`` file has been copied to the endpoint.
-#. As a root user, modify the Wazuh agent configuration file located at ``/var/ossec/etc/ossec.conf`` and include the following:
 
-    #. Wazuh manager IP address or DNS name in the ``<client><server><address>`` section.
-    #. Local path to root certificate in the ``<client><enrollment>`` section.
-   
-    .. code-block:: xml
-        :emphasize-lines: 3 
+#. Obtain root access, modify the Wazuh agent configuration file located at ``/var/ossec/etc/ossec.conf``, and include the following:
 
-         <client>
-            <server>
-               <address>MANAGER_IP</address>
+   -  Wazuh manager IP address or FQDN (Fully Qualified Domain Name) in the ``<client><server><address>`` section.
+   -  Local path to the root certificate in the ``<client><enrollment>`` section:
+
+   .. code-block:: xml
+      :emphasize-lines: 3, 8
+
+      <client>
+         <server>
+            <address><WAZUH_MANAGER_IP></address>
+            ...
+         </server>
+            ...
+            <enrollment>
+               <server_ca_path>/<PATH_TO>/rootCA.pem</server_ca_path>
                ...
-            </server>
-               ...
-               <enrollment>
-                  <server_ca_path>/path/to/rootCA.pem</server_ca_path>
-                  ...
-               </enrollment>
-               ...
-         </client>
+            </enrollment>
+            ...
+      </client>
 
+#. Restart the Wazuh agent to make the changes effective:
 
+   .. code-block:: console
 
-   
-#. Restart the agent to make the changes effective.
+      # systemctl restart wazuh-agent
 
+#. Click on the upper-left menu icon and navigate to **Server management** > **Endpoints Summary** on the Wazuh dashboard to check for the newly enrolled Wazuh agent and its connection status. If the enrollment was successful, you will have an interface similar to the image below.
 
-   .. tabs::   
-   
-      .. group-tab:: Systemd
-   
-         .. code-block:: console
-      
-             # systemctl restart wazuh-agent
-   
-   
-      .. group-tab:: SysV init
-   
-         .. code-block:: console
-      
-             # service wazuh-agent restart
+   .. thumbnail:: /images/manual/agent/linux-check-newly-enrolled.png
+      :title: Check newly enrolled Wazuh agent - Linux
+      :alt: Check newly enrolled Wazuh agent - Linux
+      :align: center
+      :width: 80%
 
+Windows
+^^^^^^^
 
-      .. group-tab:: Other Unix based OS
-
-         .. code-block:: console
-
-             # /var/ossec/bin/wazuh-control restart
-
-
-#. Select the **Endpoints Summary** module to check for the newly enrolled agent and its connection status in the Wazuh dashboard to confirm that enrollment was successful.
-
-
-.. _manager-identity-this-windows-endpoint:
-
-
-Windows endpoint
-^^^^^^^^^^^^^^^^
-
-The following steps serve as a guide on how to enroll a Windows endpoint by using certificates to verify the manager identity:
+Follow these steps to enroll a Windows endpoint by using certificates to verify the Wazuh manager identity:
 
 The Wazuh agent installation directory depends on the architecture of the host.
 
-- ``C:\Program Files (x86)\ossec-agent`` for 64-bit systems.
-- ``C:\Program Files\ossec-agent`` for 32-bit systems.
+-  ``C:\Program Files (x86)\ossec-agent`` for 64-bit systems.
+-  ``C:\Program Files\ossec-agent`` for 32-bit systems.
 
 #. Ensure that the root certificate authority ``rootCA.pem`` file has been copied to the endpoint.
-#. As a root user, modify the Wazuh agent configuration file located at ``“C:\Program Files (x86)\ossec-agent\ossec.conf”`` and include the following:
 
-    #. Wazuh manager IP address or DNS name in the ``<client><server><address>`` section.
-    #. Local path to root certificate in the ``<client><enrollment><server_ca_path>`` section.
+#. Using an administrator account, modify the Wazuh agent configuration file located at ``C:\Program Files (x86)\ossec-agent\ossec.conf`` and include the following:
 
-    .. code-block:: xml
-        :emphasize-lines: 3  
+   -  Wazuh manager IP address or FQDN (Fully Qualified Domain Name) in the ``<client><server><address>`` section.
+   -  Local path to the root certificate in the ``<client><enrollment><server_ca_path>`` section.
 
-         <client>
-            <server>
-               <address>MANAGER_IP</address>
-               ...
-            </server>
-               ...
-               <enrollment>
-                  <server_ca_path>/path/to/rootCA.pem</server_ca_path>
-                  ...
-               </enrollment>
-               ...
-         </client>
+   .. code-block:: xml
+      :emphasize-lines: 3, 6
 
+      <client>
+          <server>
+             <address><WAZUH_MANAGER_IP></address>
+          </server>
+             <enrollment>
+                <server_ca_path>/<PATH_TO>/rootCA.pem</server_ca_path>
+             </enrollment>
+       </client>
 
-#. Restart the agent to make the changes effective. 
+#. Restart the Wazuh agent to make the changes effective.
 
    .. tabs::
-      
-      
-         .. group-tab:: PowerShell (as an administrator)
-      
-            .. code-block:: console
-         
-               # Restart-Service -Name wazuh
-      
-      
-         .. group-tab:: CMD (as an administrator)
-      
-            .. code-block:: console
-         
-               # net stop wazuh
-               # net start wazuh
 
+      .. group-tab:: PowerShell (as an administrator):
 
-#. Select the **Endpoints Summary** module to check for the newly enrolled agent and its connection status in the Wazuh dashboard to confirm that enrollment was successful.
+         .. code-block:: pwsh-session
 
+            # Restart-Service -Name wazuh
 
-.. _manager-identity-macos-endpoint:
+      .. group-tab:: CMD (as an administrator):
 
+         .. code-block:: doscon
 
-macOS endpoint
-^^^^^^^^^^^^^^
+            # net stop wazuh
+            # net start wazuh
 
-The following steps serve as a guide on how to enroll a macOS endpoint by using certificates to verify the manager identity:
+#. Click on the upper-left menu icon and navigate to **Server management** > **Endpoints Summary** on the Wazuh dashboard to check for the newly enrolled Wazuh agent and its connection status. If the enrollment was successful, you will have an interface similar to the image below.
+
+   .. thumbnail:: /images/manual/agent/windows-check-newly-enrolled.png
+      :title: Check newly enrolled Wazuh agent - Windows
+      :alt: Check newly enrolled Wazuh agent - Windows
+      :align: center
+      :width: 80%
+
+macOS
+^^^^^
+
+Follow the steps below to enroll a macOS endpoint by using certificates to verify the Wazuh manager identity:
 
 #. Ensure that the root certificate authority ``rootCA.pem`` file has been copied to the endpoint.
 
-#. As a root user, modify the Wazuh agent configuration file located at ``/Library/Ossec/etc/ossec.conf`` and include the following:
+#. Modify the Wazuh agent configuration file located at ``/Library/Ossec/etc/ossec.conf`` with root access and include the following:
 
-    #. Wazuh manager IP address or DNS name in the ``<client><server><address>`` section.
+   -  Wazuh manager IP address or FQDN (Fully Qualified Domain Name) in the ``<client><server><address>`` section.
+   -  Local path to the root certificate in the ``<client><enrollment>`` section.
 
-    #. Local path to root certificate in the ``<client><enrollment>`` section.
+   .. code-block:: xml
+      :emphasize-lines: 3, 8
 
-    .. code-block:: xml
-        :emphasize-lines: 3
+      <client>
+         <server>
+            <address><WAZUH_MANAGER_IP></address>
+            ...
+         </server>
+            ...
+            <enrollment>
+               <server_ca_path>/<PATH_TO>/rootCA.pem</server_ca_path>
+               ...
+            </enrollment>
+            ...
+      </client>
 
-        <client>
-           <server>
-              <address>MANAGER_IP</address>
-              ...
-           </server>
-              ...
-              <enrollment>
-                 <server_ca_path>/path/to/rootCA.pem</server_ca_path>
-                 ...
-              </enrollment>
-              ...
-        </client>
+#. Restart the Wazuh agent to make the changes effective.
 
+   .. code-block:: console
 
+      # /Library/Ossec/bin/wazuh-control restart
 
-#. Restart the agent to make the changes effective.
+#. Click on the upper-left menu icon and navigate to **Server management** > **Endpoints Summary** on the Wazuh dashboard to check for the newly enrolled Wazuh agent and its connection status. If the enrollment was successful, you will have an interface similar to the image below.
 
-      .. code-block:: console
-
-         # /Library/Ossec/bin/wazuh-control restart
-
-
-#. Select the **Endpoints Summary** module to check for the newly enrolled agent and its connection status in the Wazuh dashboard to confirm that enrollment was successful.
+   .. thumbnail:: /images/manual/agent/macOS-check-newly-enrolled.png
+      :title: Check newly enrolled Wazuh agent - macOS
+      :alt: Check newly enrolled Wazuh agent - macOS
+      :align: center
+      :width: 80%
