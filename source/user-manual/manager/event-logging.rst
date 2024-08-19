@@ -131,7 +131,7 @@ Visualizing the events on the dashboard
 Wazuh dashboard
 ^^^^^^^^^^^^^^^
 
-#. Click the upper-left menu icon and navigate to **Dashboards management** > **Index patterns** > **Create index pattern**. Use ``wazuh-archives-*`` as the index pattern name, and set ``timestamp`` in the **Time field** drop-down list.
+#. Click the upper-left menu icon to open the main menu. Expand **Dashboard management** and navigate to **Dashboards management** > **Index patterns**. Next, click **Create index pattern**. Use ``wazuh-archives-*`` as the index pattern name, and set ``timestamp`` in the **Time field** drop-down list.
 
    The GIF below shows how to create the index pattern.
 
