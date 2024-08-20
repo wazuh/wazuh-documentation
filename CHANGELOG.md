@@ -54,6 +54,10 @@ All notable changes to this project will be documented in this file.
 - Removed the agent info task from the multiprocessing task list. ([#7173](https://github.com/wazuh/wazuh-documentation/pull/7173))
 - Removed the ``logs.level`` app setting and the references to the plugin log files and *App logs* application. ([#6810](https://github.com/wazuh/wazuh-documentation/pull/6810))
 
+## [v4.8.2]
+
+- Support for Wazuh 4.8.2
+
 ## [v4.8.1]
 
 ### Added
