@@ -130,20 +130,25 @@ Jumpcloud Configuration
 
 #. Note the necessary parameters from the SAML settings of the new app.
 
-   #. Open the recently created application, go to the **SSO** tab and select **Export Metadata**. This will be our ``metadata_file``. Place the metadata file in the configuration directory of the Wazuh indexer. The path to the directory is ``/etc/wazuh-indexer/opensearch-security/``.
+   Open the recently created application and go to the **SSO** tab, select **Export Metadata**. This will be our ``metadata_file``. Place the metadata file in the configuration directory of the Wazuh indexer. The path to the directory is ``/etc/wazuh-indexer/opensearch-security/``.
 
-   #. Extract the ``exchange_key`` from the ``metadata_file`` under the ``ds:X509Certificate`` tag.
-
-      .. thumbnail:: /images/single-sign-on/jumpcloud/15-go-to-the-sso-tab.png
-          :title: Go to the SSO tab and select Export Metadata
-          :align: center
-          :width: 80% 
-
+   .. thumbnail:: /images/single-sign-on/jumpcloud/15-go-to-the-sso-tab.png
+      :title: Go to the SSO tab and select Export Metadata
+      :align: center
+      :width: 80%
 
 Wazuh indexer configuration
 ---------------------------
 
-Edit the Wazuh indexer security configuration files. We recommend that you back up these files before you carry out the configuration. 
+Edit the Wazuh indexer security configuration files. We recommend that you back up these files before you carry out the configuration.
+
+#. Generate a 64-character long random key using the following command.
+
+   .. code-block:: console
+
+      openssl rand -hex 32
+
+   The output will be used as the ``exchange_key`` in the ``/etc/wazuh-indexer/opensearch-security/config.yml`` file.
 
 #. Place the ``metadata_jumpcloud.xml`` file within the ``/etc/wazuh-indexer/opensearch-security/`` directory. Set the file ownership to ``wazuh-indexer`` using the following command:
 
@@ -188,7 +193,7 @@ Edit the Wazuh indexer security configuration files. We recommend that you back 
                     forceAuthn: true
                   kibana_url: https://<WAZUH_DASHBOARD_URL>
                   roles_key: Roles
-                  exchange_key: 'MIIBkTCB+wIBADBSMQs......'
+                  exchange_key: 'b1d6dd32753374557dcf92e241.......'
               authentication_backend:
                 type: noop
 
@@ -238,7 +243,7 @@ Wazuh dashboard configuration
 #. Create a new role mapping for the backend role. Follow these steps to create a new role mapping, and grant read-only permissions to the backend role.
 
    #. Log into the Wazuh dashboard as administrator.
-   #. Click the upper-left menu icon **☰** to open the options, go to **Indexer/dashboard management** > **Security**, and then **Roles** to open the roles page.
+   #. Click the upper-left menu icon **☰** to open the options, go to **Indexer management** > **Security**, and then **Roles** to open the roles page.
    #. Click **Create role**, complete the empty fields with the following parameters, and then click **Create** to complete the task.
 
       -  **Name**: Assign a name to the role.

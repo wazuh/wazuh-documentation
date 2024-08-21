@@ -130,20 +130,25 @@ Jumpcloud Configuration
 
 #. Note the necessary parameters from the SAML settings of the new app.
 
-   #. Open the recently created application, go to the **SSO** tab and select **Export Metadata**. This will be our ``metadata_file``. Place the metadata file in the configuration directory of the Wazuh indexer. The path to the directory is ``/etc/wazuh-indexer/opensearch-security/``.
+   Open the recently created application and go to the **SSO** tab, select **Export Metadata**. This will be our ``metadata_file``. Place the metadata file in the configuration directory of the Wazuh indexer. The path to the directory is ``/etc/wazuh-indexer/opensearch-security/``.
 
-   #. Extract the ``exchange_key`` from the ``metadata_file`` under the ``ds:X509Certificate`` tag.
-
-      .. thumbnail:: /images/single-sign-on/jumpcloud/15-go-to-the-sso-tab.png
-          :title: Go to the SSO tab and select Export Metadata
-          :align: center
-          :width: 80% 
-
+   .. thumbnail:: /images/single-sign-on/jumpcloud/15-go-to-the-sso-tab.png
+       :title: Go to the SSO tab and select Export Metadata
+       :align: center
+       :width: 80%
 
 Wazuh indexer configuration
 ---------------------------
 
-Edit the Wazuh indexer security configuration files. We recommend that you back up these files before you carry out the configuration. 
+Edit the Wazuh indexer security configuration files. We recommend that you back up these files before you carry out the configuration.
+
+#. Generate a 64-character long random key using the following command.
+
+   .. code-block:: console
+
+      openssl rand -hex 32
+
+   The output will be used as the ``exchange_key`` in the ``/etc/wazuh-indexer/opensearch-security/config.yml`` file.
 
 #. Place the ``metadata_jumpcloud.xml`` file within the ``/etc/wazuh-indexer/opensearch-security/`` directory. Set the file ownership to ``wazuh-indexer`` using the following command:
 
@@ -153,7 +158,7 @@ Edit the Wazuh indexer security configuration files. We recommend that you back 
 
 #. Edit the ``/etc/wazuh-indexer/opensearch-security/config.yml`` file and change the following values:
 
-   - Set the ``order`` in ``basic_internal_auth_domain`` to ``0`` and the ``challenge`` flag to ``false``. 
+   - Set the ``order`` in ``basic_internal_auth_domain`` to ``0`` and the ``challenge`` flag to ``false``.
 
    - Include a ``saml_auth_domain`` configuration under the ``authc`` section similar to the following:
 
@@ -188,11 +193,9 @@ Edit the Wazuh indexer security configuration files. We recommend that you back 
                     forceAuthn: true
                   kibana_url: https://<WAZUH_DASHBOARD_URL>
                   roles_key: Roles
-                  exchange_key: 'MIIBkTCB+wIBADBSMQs......'
+                  exchange_key: 'b1d6dd32753374557dcf92e241.......'
               authentication_backend:
                 type: noop
-
-
 
    Ensure to change the following parameters to their corresponding value:
 

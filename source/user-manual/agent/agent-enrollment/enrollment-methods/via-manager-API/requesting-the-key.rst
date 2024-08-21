@@ -1,157 +1,161 @@
 .. Copyright (C) 2015, Wazuh, Inc.
 
 .. meta::
-  :description: Learn more about how to register Wazuh agents on Linux, Windows, or macOS X in this section of our documentation.
-  
-.. _requesting-the-key:
+   :description: Learn how to request the Wazuh agent key from the API service for different operating systems in this section of the documentation.
 
-Requesting the key
-==================
+Requesting the client key
+=========================
 
-The agent key can be requested from any system that has connectivity with the manager API. It can also be done from the Wazuh web user interface or from a browser by connecting directly to the API service. The default API port is 55000/TCP. The host making the enrollment request must have connectivity to the manager via this port or any other port that the API has been configured to listen on.
+You can request the Wazuh agent key from any endpoint connected with the Wazuh server API. Alternatively, you can obtain it directly from the Wazuh dashboard or by connecting to the API service from a browser. The default API port is 55000/TCP.
 
-In this document, you will find the following information:
+The host making the enrollment request must have connectivity to the Wazuh manager via this or any other port on which the API has been configured to listen.
 
-- :ref:`from-linux-unix-and-macos`
-- :ref:`from-windows`
+The steps below show how to request the Wazuh agent key for different operating systems.
 
+-  `Linux/Unix and macOS`_
+-  `From Windows`_
 
-.. _from-linux-unix-and-macos:
+Linux/Unix and macOS
+^^^^^^^^^^^^^^^^^^^^
 
-
-From Linux/Unix and macOS
-^^^^^^^^^^^^^^^^^^^^^^^^^
-
-#. Proceed to generate a JWT for authenticating to the manager API by making a curl request. The default manager API credentials are ``wazuh:wazuh``.
+#. Generate a JWT for authenticating to the Wazuh server API by making a curl request. The default Wazuh server API credentials are ``wazuh:wazuh``. Replace ``<WAZUH_MANAGER_IP>`` with the Wazuh manager IP address or FQDN (Fully Qualified Domain Name):
 
    .. code-block:: console
 
-     # TOKEN=$(curl -u <user>:<password> -k -X POST "https://<MANAGER_IP>:55000/security/user/authenticate?raw=true")
+      # TOKEN=$(curl -u <USER>:<PASSWORD> -k -X POST "https://<WAZUH_MANAGER_IP>:55000/security/user/authenticate?raw=true")
 
-   Run the command ``echo $TOKEN`` to confirm that the token was successfully generated. You should get an output like this:
+   Run the command ``echo $TOKEN`` to confirm that the token was successfully generated:
 
-   .. code-block:: xml
+   .. code-block:: console
+
+      # echo $TOKEN
+
+   You should get an output like this:
+
+   .. code-block:: none
       :class: output
-   
-        eyJhbGciOiJFUzUxMiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJ3YXp1aCIsImF1ZCI6IldhenVoIEFQSSBSRVNUIiwibmJmIjoxNjQzMDExMjQ0LCJleHAiOjE2NDMwMTIxNDQsInN1YiI6IndhenVoIiwicnVuX2FzIjpmYWxzZSwicmJhY19yb2xlcyI6WzFdLCJyYmFjX21vZGUiOiJ3aGl0ZSJ9.Ad6zOZvx0BEV7K0J6s3pIXAXTWB-zdVfxaX2fotLfZMQkiYPMkwDaQHUFiOInsWJ_7KZV3y2BbhEs9-kBqlJAMvMAD0NDBPhEQ2qBd_iutZ7QWZECd6eYfIP83xGqH9iqS7uMI6fXOKr3w4aFV13Q6qsHSUQ1A-1LgDnnDGGaqF5ITYo
 
-#. Request the key and agent ID. Replace ``<AGENT_NAME>`` with the desired agent name.
+      eyJhbGciOiJFUzUxMiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJ3YXp1aCIsImF1ZCI6IldhenVoIEFQSSBSRVNUIiwibmJmIjoxNjQzMDExMjQ0LCJleHAiOjE2NDMwMTIxNDQsInN1YiI6IndhenVoIiwicnVuX2FzIjpmYWxzZSwicmJhY19yb2xlcyI6WzFdLCJyYmFjX21vZGUiOiJ3aGl0ZSJ9.Ad6zOZvx0BEV7K0J6s3pIXAXTWB-zdVfxaX2fotLfZMQkiYPMkwDaQHUFiOInsWJ_7KZV3y2BbhEs9-kBqlJAMvMAD0NDBPhEQ2qBd_iutZ7QWZECd6eYfIP83xGqH9iqS7uMI6fXOKr3w4aFV13Q6qsHSUQ1A-1LgDnnDGGaqF5ITYo
+
+   .. note::
+
+      You can locate your Wazuh server API user password in the ``wazuh-install-files.tar`` file generated during the installation process of the Wazuh server. You can also :doc:`reset the password </user-manual/user-administration/password-management>` for the Wazuh server API user if you have forgotten it.
+
+#. Request the client key and agent ID. Replace ``<WAZUH_AGENT_NAME>`` with the corresponding agent name:
 
    .. code-block:: console
 
-     # curl -k -X POST -d '{"name":"<AGENT_NAME>"}' "https://<MANAGER_IP>:55000/agents?pretty=true" -H "Content-Type:application/json" -H "Authorization: Bearer $TOKEN" 
+      # curl -k -X POST -d '{"name":"<WAZUH_AGENT_NAME>"}' "https://<WAZUH_MANAGER_IP>:55000/agents?pretty=true" -H "Content-Type:application/json" -H "Authorization: Bearer $TOKEN"
 
    The output with the key looks like this:
 
-   .. code-block:: xml
-      :class: output
+   .. code-block:: none
 
-          {
-              "error": 0,
-              "data": {
-                  "id": "001",
-                  "key": "MDAxIE5ld0FnZW50IDEwLjAuMC44IDM0MGQ1NjNkODQyNjcxMWIyYzUzZTE1MGIzYjEyYWVlMTU1ODgxMzVhNDE3MWQ1Y2IzZDY4M2Y0YjA0ZWVjYzM=",
-              },
-          }
-
-
-.. _from-windows:
-
+      {
+          "error": 0,
+          "data": {
+              "id": "001",
+              "key": "MDAxIE5ld0FnZW50IDEwLjAuMC44IDM0MGQ1NjNkODQyNjcxMWIyYzUzZTE1MGIzYjEyYWVlMTU1ODgxMzVhNDE3MWQ1Y2IzZDY4M2Y0YjA0ZWVjYzM=",
+          },
+      }
 
 From Windows
 ^^^^^^^^^^^^
 
-The following steps serve as a guide on how to send agent enrollment requests from a Windows system via the Wazuh manager API:
+Follow these steps to send Wazuh agent enrollment requests from a Windows endpoint via the Wazuh server API:
 
-#. Open PowerShell with administrative privileges. If the manager API is running over HTTPS and it is using a self-signed certificate, the function below has to be executed in PowerShell.
+#. Open PowerShell with administrative privileges. If the Wazuh server API is using a  publicly trusted certificates, move to step 2. If the Wazuh server API is running over HTTPS and it is using a self-signed certificate, execute the function below in PowerShell. The function will ignore the certificate validation errors due to the self-signed SSL/TLS certificates. 
 
-   .. code-block:: xml
-      
-     function Ignore-SelfSignedCerts {
-         add-type @"
-             using System.Net;
-             using System.Security.Cryptography.X509Certificates;
-             public class PolicyCert : ICertificatePolicy {
-                 public PolicyCert() {}
-                 public bool CheckValidationResult(
-                     ServicePoint sPoint, X509Certificate cert,
-                     WebRequest wRequest, int certProb) {
-                     return true;
-                 }
-             }
-     "@
-         [System.Net.ServicePointManager]::CertificatePolicy = new-object PolicyCert
-         [System.Net.ServicePointManager]::SecurityProtocol = [System.Net.SecurityProtocolType]::Tls12;
-     }
-     
-     Ignore-SelfSignedCerts
+   .. code-block:: powershell
 
-   Note that the function above exists only in the PowerShell instance it is executed in.
+      function Ignore-SelfSignedCerts {
+          add-type @"
+              using System.Net;
+              using System.Security.Cryptography.X509Certificates;
+              public class PolicyCert : ICertificatePolicy {
+                  public PolicyCert() {}
+                  public bool CheckValidationResult(
+                      ServicePoint sPoint, X509Certificate cert,
+                      WebRequest wRequest, int certProb) {
+                      return true;
+                  }
+              }
+      "@
+          [System.Net.ServicePointManager]::CertificatePolicy = new-object PolicyCert
+          [System.Net.ServicePointManager]::SecurityProtocol = [System.Net.SecurityProtocolType]::Tls12;
+      }
 
-#. To generate the JWT, the default credentials are ``wazuh:wazuh``
+      Ignore-SelfSignedCerts
 
-   First, encode the credentials as base64 and assign it to the variable ``$base64AuthInfo``.
+   .. note::
 
-   .. code-block:: console
+      The function above exists only in the PowerShell instance in which it is executed.
 
-    # $base64AuthInfo=[Convert]::ToBase64String([Text.Encoding]::ASCII.GetBytes(("{0}:{1}" -f “<API_username>”, “<API_password>”)))
+#. To generate the JWT, the default credentials are ``wazuh:wazuh``.
 
-   Then, make a request for the JWT.
+   First, encode the credentials as base64 and assign it to the ``$base64AuthInfo`` variable. Replace ``<WAZUH_SERVER_API_USERNAME>`` and ``<WAZUH_SERVER_API_PASSWORD>`` with the Wazuh server API credentials:
 
-   .. code-block:: console
+   .. code-block:: pwsh-session
 
-    # Invoke-WebRequest -UseBasicParsing -Headers @{Authorization=("Basic {0}" -f $base64AuthInfo)} -Method POST -Uri https://<MANAGER_IP>:55000/security/user/authenticate | Select-Object -Expand Content
-   
-   The output looks like this: 
- 
-   .. code-block:: xml
+      # $base64AuthInfo=[Convert]::ToBase64String([Text.Encoding]::ASCII.GetBytes(("{0}:{1}" -f “<WAZUH_SERVER_API_USERNAME>”, “<WAZUH_SERVER_API_PASSWORD>”)))
+
+   Then, request the JWT. Replace ``<WAZUH_MANAGER_IP>`` with the IP address or FQDN (Fully Qualified Domain Name) of the Wazuh manager:
+
+   .. code-block:: pwsh-session
+
+      # Invoke-WebRequest -UseBasicParsing -Headers @{Authorization=("Basic {0}" -f $base64AuthInfo)} -Method POST -Uri https://<WAZUH_MANAGER_IP>:55000/security/user/authenticate | Select-Object -Expand Content
+
+   .. code-block:: none
       :class: output
 
-      {"data":{"token": "eyJhbGciOiJFUzUxMiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJ3YXp1aCIsImF1ZCI6IldhenVoIEFQSSBSRVNUIiwibmJmIjoxNjM5NjQ2Nzg0LCJleHAiOjE2Mzk2NDc2ODQsInN1YiI6IndhenVoIiwicnVuX2FzIjpmYWxzZSwicmJhY19yb2xlcyI6WzFdLCJyYmFjX21vZGUiOiJ3aGl0ZSJ9.ASonc7xinw6u4JUoUlkJ_52FvJz8ECPiI3ObDr-SOO0fWRfWq-uTnA432UnCDK86ypRG5fAY6paQkX3vjrXrvBFvADyCnNNCZ-eNzaUoEq5f38wCfbC1bZhRsz61s2PRRt3YD2rfzRASbSJk140Vx-XP-IDnqlgMgmIyJxb2iU1ZL8R7"}, "error": 0}
+      {"data": {"token": "eyJhbGciOiJFUzUxMiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJ3YXp1aCIsImF1ZCI6IldhenVoIEFQSSBSRVNUIiwibmJmIjoxNzE1NzgwNzgzLCJleHAiOjE3MTU3ODE2ODMsInN1YiI6IndhenVoIiwicnVuX2FzIjpmYWxzZSwicmJhY19yb2xlcyI6WzFdLCJyYmFjX21vZGUiOiJ3aGl0ZSJ9.AIS9VKaVpXpA5RZDTTnaiuDnv474puoM3FViy54CZjctpkoZ2xO9SpLEMjdraGlCIIgLx-YSIe4jdQiKQlDZCg8QASSrrKg1K_-OpFKvsX_smIfrGE3NuzhkIvBN-_KUexAsi0Dc4peGN144gIOTMmgbv-ZqVRq4aV0P3uhYBLFoXJwl"}, "error": 0}
 
-#. Create environment variables to hold the generated token and the agent variable.
+   .. note::
 
-    - Replace ``<TOKEN_GENERATED>`` with the token generated in step 2.
+      You can locate your Wazuh server API user password in the ``wazuh-install-files.tar`` file  generated during the installation process of the Wazuh server. You can also :doc:`reset the password </user-manual/user-administration/password-management>` for the Wazuh server API user if you have forgotten it.
 
-      .. code-block:: console
- 
-        # $TOKEN = “<TOKEN_GENERATED>”  
+#. Run the following commands to create environment variables to hold the generated token and the Wazuh agent variable.
 
-    - Replace ``<AGENT_NAME>`` with the desired agent name.
+   -  Replace ``<TOKEN_GENERATED>`` with the token generated in step 2:
 
-      .. code-block:: console
+      .. code-block:: pwsh-session
 
-        # $AgentName = @{"name"="<AGENT_NAME>"} | ConvertTo-Json
-   
-   These environment variables will be used in subsequent requests made to the manager.
+         # $TOKEN = “<TOKEN_GENERATED>”
 
-#. To request the key and agent ID, proceed to make a web request with the environment variables created. Replace ``<MANAGER_IP>`` with the Wazuh manager IP address or DNS name.
+   -  Replace ``<WAZUH_AGENT_NAME>`` with the desired agent name:
 
-   .. code-block:: console
- 
-       # Invoke-WebRequest -UseBasicParsing -Headers @{Authorization=("Bearer {0}" -f $TOKEN)} -Method POST -ContentType "application/json" -Uri https://<MANAGER_IP>:55000/agents -Body $AgentName
+      .. code-block:: pwsh-session
+
+         # $AgentName = @{"name"="<WAZUH_AGENT_NAME>"} | ConvertTo-Json
+
+   These environment variables will be used in subsequent requests made to the Wazuh manager.
+
+#. To request the client key and agent ID, make a web request with the environment variables created. Replace ``<WAZUH_MANAGER_IP>`` with the IP address or FQDN (Fully Qualified Domain Name) of the Wazuh manager.
+
+   .. code-block:: pwsh-session
+
+      # Invoke-WebRequest -UseBasicParsing -Headers @{Authorization=("Bearer {0}" -f $TOKEN)} -Method POST -ContentType "application/json" -Uri https://<WAZUH_MANAGER_IP>:55000/agents -Body $AgentName
 
    The output should look like this:
 
-   .. code-block:: xml 
-      :class: output     
+   .. code-block:: none
+      :class: output
 
-        StatusCode        : 200
-        StatusDescription : OK
-        Content           : {"data": {"id": "020", "key": "MDIwIGFwaS13aW5kb3dzIGFueSA3OTJmZTcwZDJiYzNhYzRiY2ZjOTc0MzAyNGZmMTc0ODA3ZGE5YjJjZjViZGQ4OGI3MjkxMTEzMmEwZGU3OGQ2"},
-                            "error": 0}
-        RawContent        : HTTP/1.1 200 OK
-                            Strict-Transport-Security: max-age=63072000; includeSubdomains
-                            X-Frame-Options: DENY
-                            X-XSS-Protection: 1; mode=block
-                            X-Content-Type-Options: nosniff
-                            Content-Security-Policy: none...
-        Forms             : {}
-        Headers           : {[Strict-Transport-Security, max-age=63072000; includeSubdomains], [X-Frame-Options, DENY], [X-XSS-Protection, 1;
-                            mode=block], [X-Content-Type-Options, nosniff]...}
-        Images            : {}
-        InputFields       : {}
-        Links             : {}
-        ParsedHtml        : System.__ComObject
-        RawContentLength  : 158
-         
+      StatusCode        : 200
+      StatusDescription : OK
+      Content           : {"data": {"id": "020", "key": "MDIwIGFwaS13aW5kb3dzIGFueSA3OTJmZTcwZDJiYzNhYzRiY2ZjOTc0MzAyNGZmMTc0ODA3ZGE5YjJjZjViZGQ4OGI3MjkxMTEzMmEwZGU3OGQ2"},
+                          "error": 0}
+      RawContent        : HTTP/1.1 200 OK
+                          Strict-Transport-Security: max-age=63072000; includeSubdomains
+                          X-Frame-Options: DENY
+                          X-XSS-Protection: 1; mode=block
+                          X-Content-Type-Options: nosniff
+                          Content-Security-Policy: none...
+      Forms             : {}
+      Headers           : {[Strict-Transport-Security, max-age=63072000; includeSubdomains], [X-Frame-Options, DENY], [X-XSS-Protection, 1;
+                          mode=block], [X-Content-Type-Options, nosniff]...}
+      Images            : {}
+      InputFields       : {}
+      Links             : {}
+      ParsedHtml        : System.__ComObject
+      RawContentLength  : 158
