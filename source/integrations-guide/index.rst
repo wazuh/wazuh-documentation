@@ -3,12 +3,14 @@
 .. meta::
    :description: In this integration guide, you can find how to integrate your Wazuh deployment with Elastic Stack, OpenSearch, and Splunk.
 
-Integrations guide: Elastic, OpenSearch, and Splunk
-===================================================
+Integrations guide: Elastic, OpenSearch, Splunk, Amazon Security Lake
+=====================================================================
 
 Wazuh offers extensive compatibility and robust integration features that allow users to connect it with other security solutions and platforms. Integrating Wazuh with other security solutions enables users to manage Wazuh data in diverse ways.
 
 Elastic, OpenSearch, and Splunk are software platforms designed for search, analytics, and data management. They are used to collect, index, search, and analyze large volumes of data in real-time and historical contexts.
+
+Amazon Security Lake is a service designed to help organizations collect, manage, and analyze security data from various sources. Its primary purpose is to centralize security data, making it easier to detect, investigate, and respond to security threats.
 
 Up to Wazuh v4.5, the following integrated applications allow users to manage Wazuh and its security data using third-party platforms:
 
@@ -20,6 +22,7 @@ However, from version 4.6, we will not develop these integrated applications any
 -  :doc:`Elastic Stack <elastic-stack/index>`
 -  :doc:`OpenSearch <opensearch/index>`
 -  :doc:`Splunk <splunk/index>`
+-  :doc:`Amazon Security Lake <amazon-security-lake/index>`
 
 Integration methods
 -------------------
@@ -150,3 +153,4 @@ After the integration, you might have the same data in both Wazuh and third-part
    elastic-stack/index
    opensearch/index
    splunk/index
+   amazon-security-lake/index

@@ -3,10 +3,14 @@
 .. meta::
    :description: Learn how to configure Amazon Security Lake.
 
-Wazuh as a custom source
-========================
+Amazon Security Lake integration
+================================
 
 .. versionadded:: 4.9.0
+
+.. note::
+
+   This document guides you through setting up Wazuh as a data source for AWS Security Lake. To configure Wazuh as a subscriber to Amazon Security Lake, refer to :doc:`Wazuh as a subscriber </cloud-security/amazon/services/supported-services/security-lake>`.
 
 Wazuh Security Events can be converted to OCSF events and Parquet format, required by Amazon Security Lake, by using an AWS Lambda Python function, a Logstash instance and an AWS S3 bucket.
 

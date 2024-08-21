@@ -60,44 +60,56 @@ Registering your app
 Certificates & secrets
 ^^^^^^^^^^^^^^^^^^^^^^
 #. Generate a secret to be used during the authentication process. Go to **Certificates & secrets** and click on **New client secret**, which will then generate the secret and its ID:
-   
+
    .. thumbnail:: /images/cloud-security/ms-graph/3-azure-wazuh-app-create-secret.png
        :title: Certificates & secrets
        :alt: Certificates & secrets
        :align: center
        :width: 100%
-   
+
 #. Ensure that the ``secret_value`` information is copied down and saved:
-   
+
     .. thumbnail:: /images/cloud-security/ms-graph/3-azure-wazuh-app-create-secret-copy-value.png
         :title: Copy secrets value
         :alt: Copy secrets value
         :align: center
         :width: 100%
-   
+
     .. note:: Make sure you write down the secret's value section, because the UI won't let you copy it afterward.
 
 API permissions
 ^^^^^^^^^^^^^^^
 
-The application needs specific API permissions to be able to retrieve logs and events from the Microsoft Graph API. In this case, you are looking for permissions related to the `security` resource.
-   
+To retrieve logs and events from the Microsoft Graph API, the application requires specific API permissions, such as permissions related to the ``security`` and ``deviceManagement`` resources.
+
 #. To configure the application permissions, go to the **API permissions** page and choose **Add a permission**. Select **Microsoft Graph API** and click on **Application permissions**.
-   
+
 #. Add the following relationships' permissions under the **SecurityAlert** and **SecurityIncident** sections:
-   
+
    - ``SecurityAlert.Read.All``. Read `alerts` & `alerts_v2` relationship data from your tenant.
 
    - ``SecurityIncident.Read.All``. Read `incident` relationship data, including associated events/alerts, from your tenant.
-   
+
    .. thumbnail:: /images/cloud-security/ms-graph/4-azure-wazuh-app-configure-permissions.png
        :title: API permissions
        :alt: API permissions
        :align: center
        :width: 100%
-      
+
+#. Add the following relationships' permissions under the **DeviceManagementApps** and **DeviceManagementManagedDevices** sections:
+
+   - ``DeviceManagementApps.Read.All``. Read `auditEvents` & `detectedApps` relationship data from your tenant.
+
+   - ``DeviceManagementManagedDevices.Read.All``. Read `auditEvents` & `managedDevices` relationship data from your tenant.
+
+   .. thumbnail:: /images/cloud-security/ms-graph/4-azure-wazuh-app-configure-permissions-intune.png
+       :title: API permissions Intune
+       :alt: API permissions Intune
+       :align: center
+       :width: 100%
+
 .. note:: Admin consent is required for API permission changes.
-   
+
 .. thumbnail:: /images/cloud-security/ms-graph/4-azure-wazuh-app-configure-permissions-admin-consent.png
     :title: API permissions admin consent
     :alt: API permissions admin consent
@@ -112,34 +124,50 @@ Next, we will see the options we have to configure to allow the integration to s
 
 Configure the ``ms-graph`` module in the Wazuh manager or in the Wazuh agent :doc:`configuration file </user-manual/reference/ossec-conf/index>`. Through the following configuration, Wazuh is ready to search for logs created by Microsoft Graph resources and relationships.
 
-In this case, we will search for `alerts_v2` and `incidents` type events within the `security` resource at an interval of ``5m``. The logs will only be those that were created after the module was started:
+The following configuration monitors specific event types at an interval of ``5m``.
+
+-  ``alerts_v2`` and ``incidents`` events within the ``security`` resource.
+-  ``auditEvents`` events within the ``deviceManagement`` resource.
+
+Keep in mind that only logs created after the module was started are monitored.
 
 .. code-block:: xml
+   :emphasize-lines: 15-17,20,21
 
-    <ms-graph>
-        <enabled>yes</enabled>
-        <only_future_events>yes</only_future_events>
-        <curl_max_size>10M</curl_max_size>
-        <run_on_start>yes</run_on_start>
-        <interval>5m</interval>
-        <version>v1.0</version>
-        <api_auth>
-          <client_id>your_client_id</client_id>
-          <tenant_id>your_tenant_id</tenant_id>
-          <secret_value>your_secret_value</secret_value>
-          <api_type>global</api_type>
-        </api_auth>
-        <resource>
-          <name>security</name>
-          <relationship>alerts_v2</relationship>
-          <relationship>incidents</relationship>
-        </resource>
-    </ms-graph>
+   <ms-graph>
+       <enabled>yes</enabled>
+       <only_future_events>yes</only_future_events>
+       <curl_max_size>10M</curl_max_size>
+       <run_on_start>yes</run_on_start>
+       <interval>5m</interval>
+       <version>v1.0</version>
+       <api_auth>
+         <client_id>your_client_id</client_id>
+         <tenant_id>your_tenant_id</tenant_id>
+         <secret_value>your_secret_value</secret_value>
+         <api_type>global</api_type>
+       </api_auth>
+       <resource>
+         <name>security</name>
+         <relationship>alerts_v2</relationship>
+         <relationship>incidents</relationship>
+       </resource>
+       <resource>
+         <name>deviceManagement</name>
+         <relationship>auditEvents</relationship>
+       </resource>
+   </ms-graph>
 
-Using the configuration mentioned above, we can examine a classic example of a security event: malicious spam emails.
+In the `Examining Microsoft Graph logs`_ section that follows, you can check two examples using this configuration:
+
+-  **Security event**: Malicious spam emails.
+-  **Intune event**: Change enrollment configuration.
 
 Examining Microsoft Graph logs
 ------------------------------
+
+Security event
+^^^^^^^^^^^^^^
 
 One of the more ubiquitous alerts that an organization of any size receive is spam emails. In this case, we can specifically look at an example where the spam email contains malicious content, and examine how Microsoft Graph & Wazuh report on this information.
 
@@ -179,7 +207,7 @@ Imagine that we have set up the Microsoft Graph module to monitor the `security`
         "firstActivityDateTime":"2022-11-13T23:45:41.0593397Z",
         "lastActivityDateTime":"2022-11-13T23:47:41.0593397Z",
         "comments":[
-            
+
         ],
         "evidence":[
             {
@@ -188,10 +216,107 @@ Imagine that we have set up the Microsoft Graph module to monitor the `security`
         ]
     }
 
+Intune event
+^^^^^^^^^^^^
+
+Mobile Device Management (MDM) tools like Microsoft Intune enable organizations to manage devices. By integrating Microsoft Graph with Wazuh, organizations can monitor Microsoft Intune logs.
+
+For instance, if a user updates the enrollment settings, configuring the module to monitor the ``deviceManagement`` resource and the ``auditEvents`` relationship might generate a JSON like the following one:
+
+.. code-block:: json
+    :class: output
+
+    {
+        "id":"xxxx-xxxx-xxxx-xxxx-xxxx",
+        "displayName": "Create DeviceEnrollmentConfiguration",
+        "componentName": "Enrollment",
+        "activity": null,
+        "activityDateTime": "2024-08-09T18:29:00.7023255Z",
+        "activityType": "Create DeviceEnrollmentConfiguration",
+        "activityOperationType": "Create",
+        "activityResult": "Success",
+        "correlationId":"xxxx-xxxx-xxxx-xxxx-xxxx",
+        "category": "Enrollment",
+        "actor": {
+            "auditActorType": "ItPro",
+            "userPermissions": [
+                "*"
+            ],
+            "applicationId":"xxxx-xxxx-xxxx-xxxx-xxxx",
+            "applicationDisplayName": "Microsoft Intune portal extension",
+            "userPrincipalName": "xxx@xxx.com",
+            "servicePrincipalName": null,
+            "ipAddress": null,
+            "userId":"xxxx-xxxx-xxxx-xxxx-xxxx"
+        },
+        "resources": [
+            {
+                "displayName": "Test restriction",
+                "auditResourceType": "DeviceEnrollmentLimitConfiguration",
+                "resourceId":"xxxx-xxxx-xxxx-xxxx-xxxx",
+                "modifiedProperties": [
+                    {
+                        "displayName": "Id",
+                        "oldValue": null,
+                        "newValue":"xxxx-xxxx-xxxx-xxxx-xxxx_Limit"
+                    },
+                    {
+                        "displayName": "Limit",
+                        "oldValue": null,
+                        "newValue": "5"
+                    },
+                    {
+                        "displayName": "Description",
+                        "oldValue": null,
+                        "newValue": ""
+                    },
+                    {
+                        "displayName": "Priority",
+                        "oldValue": null,
+                        "newValue": "1"
+                    },
+                    {
+                        "displayName": "CreatedDateTime",
+                        "oldValue": null,
+                        "newValue": "8/9/2024 6:29:00 PM"
+                    },
+                    {
+                        "displayName": "LastModifiedDateTime",
+                        "oldValue": null,
+                        "newValue": "8/9/2024 6:29:00 PM"
+                    },
+                    {
+                        "displayName": "Version",
+                        "oldValue": null,
+                        "newValue": "1"
+                    },
+                    {
+                        "displayName": "DeviceEnrollmentConfigurationType",
+                        "oldValue": null,
+                        "newValue": "Limit"
+                    },
+                    {
+                        "displayName": "DeviceManagementAPIVersion",
+                        "oldValue": null,
+                        "newValue": "5023-03-29"
+                    },
+                    {
+                        "displayName": "$Collection.RoleScopeTagIds[0]",
+                        "oldValue": null,
+                        "newValue": "Default"
+                    }
+                ]
+            }
+        ]
+    }
+
 Wazuh Rules
 -----------
 
-The Wazuh manager includes a set of pre-made rules that aid in classifying the importance and context of different events. 
+The Wazuh manager includes a set of pre-made rules that aid in classifying the importance and context of different events.
+
+Security event
+^^^^^^^^^^^^^^
 
 In this example, we can take a look at the rule id ``99506``, which corresponds to ``MS Graph message: The alert is true positive and detected malicious activity.``, per the `Microsoft Graph documentation <https://learn.microsoft.com/en-us/graph/api/resources/security-alert?view=graph-rest-1.0#alertclassification-values>`_.
 
@@ -275,4 +400,138 @@ Once Wazuh connects with the Microsoft Graph API, the previous log triggers the 
                 ]
             }
         }
+    }
+
+Intune event
+^^^^^^^^^^^^
+
+In this example, we can take a look at the rule id ``99652``, which corresponds to ``MS Graph message: MDM Intune audit event.``.
+
+.. code-block:: xml
+
+    <rule id="99652" level="3">
+        <if_sid>99651</if_sid>
+        <options>no_full_log</options>
+        <field name="ms-graph.relationship">auditEvents</field>
+        <description>MS Graph message: MDM Intune audit event.</description>
+    </rule>
+
+Once Wazuh connects with the Microsoft Graph API, the previous log triggers the rule and raises the following alert:
+
+.. code-block:: json
+    :emphasize-lines: 5
+    :class: output
+
+    {
+        "timestamp": "2024-08-09T18:29:03.362+0000",
+        "rule": {
+            "id": "99652",
+            "level": 3,
+            "description": "MS Graph message: MDM Intune audit event.",
+            "firedtimes": 1,
+            "mail": false,
+            "groups": [
+                "ms-graph"
+            ]
+        },
+        "agent": {
+            "id": "001",
+            "name":"ubuntu-bionic"
+        },
+        "manager": {
+            "name":"ubuntu-bionic"
+        },
+        "id": "1723228143.38630",
+        "decoder": {
+            "name": "json"
+        },
+        "data": {
+            "integration": "ms-graph",
+            "ms-graph": {
+                "id": "xxxx-xxxx-xxxx-xxxx-xxxx",
+                "displayName": "Create DeviceEnrollmentConfiguration",
+                "componentName": "Enrollment",
+                "activity": null,
+                "activityDateTime": "2024-08-09T18:29:00.7023255Z",
+                "activityType": "Create DeviceEnrollmentConfiguration",
+                "activityOperationType": "Create",
+                "activityResult": "Success",
+                "correlationId": "xxxx-xxxx-xxxx-xxxx-xxxx",
+                "category": "Enrollment",
+                "actor": {
+                    "auditActorType": "ItPro",
+                    "userPermissions": [
+                        "*"
+                    ],
+                    "applicationId": "xxxx-xxxx-xxxx-xxxx-xxxx",
+                    "applicationDisplayName": "Microsoft Intune portal extension",
+                    "userPrincipalName": "xxx@xxx.com",
+                    "servicePrincipalName": null,
+                    "ipAddress": null,
+                    "userId": "xxxx-xxxx-xxxx-xxxx-xxxx"
+                },
+                "resources": [
+                    {
+                        "displayName": "Test restriction",
+                        "auditResourceType": "DeviceEnrollmentLimitConfiguration",
+                        "resourceId": "xxxx-xxxx-xxxx-xxxx-xxxx",
+                        "modifiedProperties": [
+                            {
+                                "displayName": "Id",
+                                "oldValue": null,
+                                "newValue": "xxxx-xxxx-xxxx-xxxx-xxxx_Limit"
+                            },
+                            {
+                                "displayName": "Limit",
+                                "oldValue": null,
+                                "newValue": "5"
+                            },
+                            {
+                                "displayName": "Description",
+                                "oldValue": null,
+                                "newValue": ""
+                            },
+                            {
+                                "displayName": "Priority",
+                                "oldValue": null,
+                                "newValue": "1"
+                            },
+                            {
+                                "displayName": "CreatedDateTime",
+                                "oldValue": null,
+                                "newValue": "8/9/2024 6:29:00 PM"
+                            },
+                            {
+                                "displayName": "LastModifiedDateTime",
+                                "oldValue": null,
+                                "newValue": "8/9/2024 6:29:00 PM"
+                            },
+                            {
+                                "displayName": "Version",
+                                "oldValue": null,
+                                "newValue": "1"
+                            },
+                            {
+                                "displayName": "DeviceEnrollmentConfigurationType",
+                                "oldValue": null,
+                                "newValue": "Limit"
+                            },
+                            {
+                                "displayName": "DeviceManagementAPIVersion",
+                                "oldValue": null,
+                                "newValue": "5023-03-29"
+                            },
+                            {
+                                "displayName": "$Collection.RoleScopeTagIds[0]",
+                                "oldValue": null,
+                                "newValue": "Default"
+                            }
+                        ]
+                    }
+                ],
+                "resource": "deviceManagement",
+                "relationship": "auditEvents"
+            }
+        },
+        "location": "ms-graph"
     }

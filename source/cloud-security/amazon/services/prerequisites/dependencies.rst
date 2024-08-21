@@ -39,13 +39,13 @@ To install the dependencies, execute the following command:
 
       .. code-block:: console
 
-         # pip3 install boto3==1.17.85 pyarrow==14.0.1
+         # pip3 install boto3==1.17.85 pyarrow==14.0.1 numpy==1.26.0
 
    .. group-tab:: Python 3.11
 
       .. code-block:: console
 
-         # pip3 install --break-system-packages boto3==1.17.85 pyarrow==14.0.1
+         # pip3 install --break-system-packages boto3==1.17.85 pyarrow==14.0.1 numpy==1.26.0
 
       .. note::
 
