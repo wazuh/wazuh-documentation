@@ -120,19 +120,20 @@ Microsoft Entra ID Configuration
 
    - In option 3 **SAML Certificate**, the **App Federation Metadata Url** will be the ``idp.metadata_url`` in the Wazuh indexer configuration file.
 
-   - Go to the metadata URL using your web browser. Copy the value of the ``<X509Certificate>`` field. It’s your ``exchange_key`` parameter:
-
-   .. thumbnail:: /images/single-sign-on/azure-active-directory/13-go-to-the-metadata-url.png
-      :title: Go to the metadata URL
-      :align: center
-      :width: 80%
-
    - In option 4 **Set up <YOUR APPLICATION>**, the **Microsoft Entra ID Identifier** will be our ``idp.entity_id``.
 
 Wazuh indexer configuration
 ---------------------------
 
 Edit the Wazuh indexer security configuration files. We recommend that you back up these files before you carry out the configuration.
+
+#. Generate a 64-character long random key using the following command.
+
+   .. code-block:: console
+
+      openssl rand -hex 32
+
+   The output will be used as the ``exchange_key`` in the ``/etc/wazuh-indexer/opensearch-security/config.yml`` file.
 
 #. Edit the ``/etc/wazuh-indexer/opensearch-security/config.yml`` file and change the following values:
 
@@ -170,14 +171,14 @@ Edit the Wazuh indexer security configuration files. We recommend that you back 
                     entity_id: wazuh-saml
                   kibana_url: https://<WAZUH_DASHBOARD_URL>
                   roles_key: Roles
-                  exchange_key: 'MIIC8DCCAdigAwIBAgIQXzg.........'
+                  exchange_key: 'b1d6dd32753374557dcf92e241.......'
               authentication_backend:
                 type: noop
 
 
-   Ensure to change the following parameters to their corresponding value: 
+   Ensure to change the following parameters to their corresponding value:
 
-   - ``idp.metadata_url`` 
+   - ``idp.metadata_url``
    - ``idp.entity_id``
    - ``sp.entity_id``
    - ``kibana_url``
@@ -219,7 +220,7 @@ Wazuh dashboard configuration
 #. Create a new role mapping for the backend role. Follow these steps to create a new role mapping, and grant read-only permissions to the backend role.
 
    #. Log into the Wazuh dashboard as administrator.
-   #. Click the upper-left menu icon **☰** to open the options, go to **Indexer/dashboard management** > **Security**, and then **Roles** to open the roles page.
+   #. Click the upper-left menu icon **☰** to open the options, go to **Indexer management** > **Security**, and then **Roles** to open the roles page.
    #. Click **Create role**, complete the empty fields with the following parameters, and then click **Create** to complete the task.
 
       -  **Name**: Assign a name to the role.
