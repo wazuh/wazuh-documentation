@@ -9,17 +9,12 @@ The Wazuh dashboard has a flexible and intuitive web interface. Through this das
 Follow these steps to access the Wazuh dashboard:
 
 #. Log in to the `Wazuh Cloud Console <https://console.cloud.wazuh.com/>`__.
-
 #. Select the environment you want to access from the **Environments** page.
-
 #. Click **Open Wazuh** to open the Wazuh dashboard.
-
 #. Choose from one of these methods to log in:
 
    -  Log in with the default credentials. You can view them by clicking the **Manage** button and selecting **Default credentials** on the environments page. These credentials will grant you access to the Wazuh dashboard.
-
    -  If Single sign-on (SSO) is enabled, use your own account.
-
    -  You can also log in with any user you created in the Wazuh dashboard.
 
 It is highly recommended for security reasons to change the default password and create your own users.
@@ -27,13 +22,9 @@ It is highly recommended for security reasons to change the default password and
 Follow these steps to reset the default credentials to connect to the Wazuh dashboard:
 
 #. Log in to the Wazuh dashboard with the default credentials.
-
 #. Click the wazuh_admin user on the top right corner.
-
 #. Click **Reset password**.
-
 #. On the Reset password page, fill in the current password and new password.
-
 #. Click **Reset**.
 
 .. note::
