@@ -14,9 +14,8 @@ To manage devices within your environment more efficiently, you can create group
 Follow these steps to create groups on your dashboard:
 
 #. Log in to the Wazuh dashboard.
-#. Click the upper-left **Wazuh** icon and then **Management**.
-#. From the **Management** pane, select **Groups** under **Administration**.
-#. On the **Groups** page, click **Add new group** on the upper right corner.
+#. Click the upper-left menu icon **☰** and expand **Server management** then select **Endpoint Groups**.
+#. Click **Add new group** on the upper right corner on the **Endpoint Groups** page.
 #. Specify the group name and click **Save new group**.
 
 .. thumbnail:: /images/cloud-service/create-agent-group.gif
