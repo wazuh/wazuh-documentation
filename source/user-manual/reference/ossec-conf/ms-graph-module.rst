@@ -2,7 +2,7 @@
 
 .. meta::
   :description: Find out how to configure the Wazuh Microsoft Graph module. Learn more about it in this section of the Wazuh documentation.
-  
+
 .. _ms-graph-module:
 
 ms-graph
@@ -242,13 +242,21 @@ The name of the resource (i.e., specific API endpoint) to query for logs. Additi
 resource\\relationship
 ^^^^^^^^^^^^^^^^^^^^^^
 
-This section configures the types of content (`relationships`) to obtain logs of. For the security resource, this includes the following relationships:
+This section configures the `relationships` content type from which to obtain logs.
+
+For the ``security`` resource, the configuration includes the following relationships:
 
 - alerts: Legacy alert from supported Azure and Microsoft 365 Defender security providers.
 - alerts_v2: An enriched version of alerts that contains additional information on suspicious activities and related collections of alerts.
 - incidents: Correlated alerts and associated data that make up the story of an attack (part of Microsoft 365 Defender).
 - secureScores: The tenant's security score per day, at the tenant and control level.
 - cases/eDiscoveryCases: Contains custodians, searches, and review sets from Microsoft Purview eDiscovery Premium.
+
+For the ``deviceManagement`` resource, the configuration includes the following relationships:
+
+- auditEvents: Audit logs include a record of activities that generate a change in Microsoft Intune.
+- managedDevices: List of devices managed by Microsoft Intune.
+- detectedApps: List of applications managed by Microsoft Intune. The results will also include a list of devices where each app is installed.
 
 +--------------------+--------------+
 | **Default value**  | N/A          |
@@ -284,5 +292,9 @@ Example of configuration
         <resource>
           <name>auditLogs</name>
           <relationship>signIns</relationship>
+        </resource>
+        <resource>
+          <name>deviceManagement</name>
+          <relationship>auditEvents</relationship>
         </resource>
     </ms-graph>

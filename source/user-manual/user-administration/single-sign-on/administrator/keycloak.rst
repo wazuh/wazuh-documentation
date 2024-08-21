@@ -206,20 +206,26 @@ KeyCloak configuration
          :width: 80% 
 
    #. The downloaded files contain the ``idp.metadata.xml`` file and the ``sp.metadata.xml`` file.
-   
-      - The ``idp.entityID`` parameter is in the ``idp.metadata.xml`` file.
-      - The ``exchange_key`` parameter is found in the ``ds:X509Certificate`` field in the ``idp.metadata.xml`` file.
+
+      -  The ``idp.entityID`` parameter is in the ``idp.metadata.xml`` file.
 
       .. thumbnail:: /images/single-sign-on/keycloak/19-the-exchange_key-parameter.png
          :title: The exchange_key parameter
          :align: center
-         :width: 80% 
-
+         :width: 80%
 
 Wazuh indexer configuration
 ---------------------------
 
 Edit the Wazuh indexer security configuration files. We recommend that you back up these files before you carry out the configuration.
+
+#. Generate a 64-character long random key using the following command.
+
+   .. code-block:: console
+
+      openssl rand -hex 32
+
+   The output will be used as the ``exchange_key`` in the ``/etc/wazuh-indexer/opensearch-security/config.yml`` file.
 
 #. Place the ``idp.metadata.xml`` and ``sp.metadata.xml`` files within the ``/etc/wazuh-indexer/opensearch-security/`` directory. Set the file ownership to wazuh-indexer using the following command:
 
@@ -264,7 +270,7 @@ Edit the Wazuh indexer security configuration files. We recommend that you back 
                     metadata_file: /etc/wazuh-indexer/opensearch-security/sp.metadata.xml
                   kibana_url: https://<WAZUH_DASHBOARD_ADDRESS>
                   roles_key: Roles
-                  exchange_key: 'MIICajCCAdOgAwIBAgIBAD.........'
+                  exchange_key: 'b1d6dd32753374557dcf92e241.......'
               authentication_backend:
                 type: noop
       

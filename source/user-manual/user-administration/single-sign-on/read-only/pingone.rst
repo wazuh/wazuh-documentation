@@ -94,23 +94,29 @@ PingOne Configuration
           :title: Navigate to Connections
           :align: center
           :width: 80%
-    
+
    #. Take note of the following parameters from the configuration page of the application. This information will be used in the next step. 
 
-      - **ISSUER ID**: It'll be in the form \https://auth.pingone.com/...
-      - **IDP METADATA URL**: It’ll be in the form \https://auth.pingone.com/...
-      - ``exchange_key``: If you open the **IDP METADATA URL** you'll find the X509 Certificate  section, this will be used as the ``exchange_key``.
+      -  **ISSUER ID**: It'll be in the form \https://auth.pingone.com/...
+      -  **IDP METADATA URL**: It’ll be in the form \https://auth.pingone.com/...
 
       .. thumbnail:: /images/single-sign-on/pingone/read-only/09-take-note-of-parameters-RO.png
-          :title: Take note of parameters from the configuration page
-          :align: center
-          :width: 80%
-
+         :title: Take note of parameters from the configuration page
+         :align: center
+         :width: 80%
 
 Wazuh indexer configuration
 ---------------------------
 
 Edit the Wazuh indexer security configuration files. We recommend that you back up these files before you carry out the configuration.
+
+#. Generate a 64-character long random key using the following command.
+
+   .. code-block:: console
+
+      openssl rand -hex 32
+
+   The output will be used as the ``exchange_key`` in the ``/etc/wazuh-indexer/opensearch-security/config.yml`` file.
 
 #. Place the private key file within the ``/etc/wazuh-indexer/opensearch-security/`` directory. Set the file ownership to ``wazuh-indexer`` using the following command:
 
@@ -156,7 +162,7 @@ Edit the Wazuh indexer security configuration files. We recommend that you back 
                     forceAuthn: true
                   kibana_url: https://<WAZUH_DASHBOARD_URL>
                   roles_key: Roles
-                  exchange_key: 'MIIJ6DLSAAbAmAJHSgIWYia.........'
+                  exchange_key: 'b1d6dd32753374557dcf92e241.......'
               authentication_backend:
                 type: noop
 
@@ -205,7 +211,7 @@ Wazuh dashboard configuration
 #. Create a new role mapping for the backend role. Follow these steps to create a new role mapping, and grant read-only permissions to the backend role.
 
    #. Log into the Wazuh dashboard as administrator.
-   #. Click the upper-left menu icon **☰** to open the options, go to **Indexer/dashboard management** > **Security**, and then **Roles** to open the roles page.
+   #. Click the upper-left menu icon **☰** to open the options, go to **Indexer management** > **Security**, and then **Roles** to open the roles page.
    #. Click **Create role**, complete the empty fields with the following parameters, and then click **Create** to complete the task.
 
       -  **Name**: Assign a name to the role.

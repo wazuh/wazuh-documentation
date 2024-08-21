@@ -79,7 +79,7 @@ Managing your environment settings is crucial to meeting your evolving needs and
 
 Advanced settings might be more challenging to determine in advance. While the interface provides recommendations based on our experience, your specific workload might differ. Hence, we recommend deploying, monitoring, and adjusting the settings as needed to align with your evolving requirements.
 
-To effectively monitor and adapt your environment, you have the option to modify your settings by opening a support ticket. Here's how the process works:
+You can update your environment settings directly in the Wazuh Cloud Console under the environment details page. Here's how the process works:
 
 -  **Upgrading a setting**: If you need to raise a setting, you will be charged a prorated amount based on the remaining time in your billing cycle. The change will be implemented immediately after the payment is made. Please note that your next billing cycle will reflect the increased cost of the enhancement.
 
