@@ -5,16 +5,21 @@ All notable changes to this project will be documented in this file.
 
 - Support for Wazuh 4.10.0
 
+## [v4.9.1]
+
+- Support for Wazuh 4.9.1
+
 ## [v4.9.0]
 
 ### Added
 
+- Added AWS Security Hub section to the monitoring AWS based services documentation. ([#7111](https://github.com/wazuh/wazuh-documentation/pull/7111)) ([#7649](https://github.com/wazuh/wazuh-documentation/pull/7649))
 - Added custom Filebeat user information and deleted obsolete information about ossec.conf file on Wazuh server. ([#7382](https://github.com/wazuh/wazuh-documentation/pull/7382))
 - Added journald log collection documentation. ([#7363](https://github.com/wazuh/wazuh-documentation/pull/7363))
 - Added documentation for Wazuh dashboard Packages generation. ([#7356](https://github.com/wazuh/wazuh-documentation/pull/7356))
 - Added documentation for Wazuh Indexer Packages generation. ([#7355](https://github.com/wazuh/wazuh-documentation/pull/7355))
 - Added instructions to collect core dumps in Red Hat based endpoints. ([#7347](https://github.com/wazuh/wazuh-documentation/pull/7347))
-- Added documentation for Wazuh as a custom source ASL integration. ([#7310](https://github.com/wazuh/wazuh-documentation/pull/7310))
+- Added documentation for Wazuh as a custom source for the Amazon Security Lake integration. ([#7310](https://github.com/wazuh/wazuh-documentation/pull/7310)) ([#7586](https://github.com/wazuh/wazuh-documentation/pull/7586))
 - Added instructions to collect core dumps in Windows endpoints. ([#7299](https://github.com/wazuh/wazuh-documentation/pull/7299))
 - Added python and pip installation templates. ([#7298](https://github.com/wazuh/wazuh-documentation/pull/7298))
 - Added a note to warns of default auditd rule in some system that prevent Wazuh from working properly. ([#7291](https://github.com/wazuh/wazuh-documentation/pull/7291))
@@ -25,7 +30,11 @@ All notable changes to this project will be documented in this file.
 - Added required dependencies for AIX agent installation. ([#7196]https://github.com/wazuh/wazuh-documentation/pull/7196)
 - Added functionality to forward alerts to Fluentd. ([#6691](https://github.com/wazuh/wazuh-documentation/pull/6691))
 - Added the ``<forward_to>`` global option to the ``ossec.conf`` configuration reference. ([#6974](https://github.com/wazuh/wazuh-documentation/pull/6974))
-- Added guide to install Wazuh components offline using the assistant. ([#6920](https://github.com/wazuh/wazuh-documentation/pull/6920))
+- Added guide to install Wazuh components offline using the assistant. ([#6920](https://github.com/wazuh/wazuh-documentation/pull/6920)) ([#7571](https://github.com/wazuh/wazuh-documentation/pull/7571)) ([#7672](https://github.com/wazuh/wazuh-documentation/pull/7672))
+- Added storage roles to the *Creating Google Cloud credentials* steps. ([#7577](https://github.com/wazuh/wazuh-documentation/pull/7577))
+- Added the *NumPy* dependency to the AWS prerequisites. ([#7589](https://github.com/wazuh/wazuh-documentation/pull/7589))
+- Added Rocky Linux 8 SCA policy to the Available SCA policies table. ([#7644](https://github.com/wazuh/wazuh-documentation/pull/7644))
+- Added a note advising on the minimum GCC compiler version required to build the Wazuh agent from source. ([#7648](https://github.com/wazuh/wazuh-documentation/pull/7648))
 
 ### Changed
 
@@ -39,17 +48,30 @@ All notable changes to this project will be documented in this file.
 - Updated the ``/groups/{group_id}/files/{file_name}`` endpoint references. ([#7006](https://github.com/wazuh/wazuh-documentation/pull/7006))
 - Bumped cloud services Python minimum version to 3.8. ([#7130](https://github.com/wazuh/wazuh-documentation/pull/7130))
 - Changed the ``azure-storage-blob`` dependency version. ([#7443](https://github.com/wazuh/wazuh-documentation/pull/7443))
+- Updated single sign-on user administration section in the User manual to address OpenSearch changes. ([#7630](https://github.com/wazuh/wazuh-documentation/pull/7630)) ([#7635](https://github.com/wazuh/wazuh-documentation/pull/7635))
+- Updated the Google Cloud Platform posture management documentation. ([#7668](https://github.com/wazuh/wazuh-documentation/pull/7668))
+- Updated the Custom logos in the Wazuh dashboard documentation. ([#7665](https://github.com/wazuh/wazuh-documentation/pull/7665)) ([#7678](https://github.com/wazuh/wazuh-documentation/pull/7678))
+- Updated the Creating the ``wazuh-archives-*`` index pattern GIF image in the Event logging section of the Wazuh server documentation. ([#7669](https://github.com/wazuh/wazuh-documentation/pull/7669)).
+- Updated the Wazuh agent documentation in User manual. ([#7637](https://github.com/wazuh/wazuh-documentation/pull/7637))
 
 ### Fixed
 
 - Fix Amazon Security Lake Source integration validation step. ([#7360](https://github.com/wazuh/wazuh-documentation/pull/7360))
 - Updated commands in installing the Wazuh agent from sources section. ([#6973](https://github.com/wazuh/wazuh-documentation/pull/6973))
+- Fixed **Indexer management** and **Dashboard management** references. ([#7583](https://github.com/wazuh/wazuh-documentation/pull/7583))
+- Fixed the name of the property **customization.logo.reports**. ([#7646](https://github.com/wazuh/wazuh-documentation/pull/7646))
+- Fixed ``wazuh-template.json`` links. ([#7652](https://github.com/wazuh/wazuh-documentation/pull/7652))
 
 ### Removed
 
 - Remove unreferenced files. ([#7222](https://github.com/wazuh/wazuh-documentation/pull/7222))
 - Removed the agent info task from the multiprocessing task list. ([#7173](https://github.com/wazuh/wazuh-documentation/pull/7173))
 - Removed the ``logs.level`` app setting and the references to the plugin log files and *App logs* application. ([#6810](https://github.com/wazuh/wazuh-documentation/pull/6810))
+- Removed PowerPC package references from the packages list. ([#7684](https://github.com/wazuh/wazuh-documentation/pull/7684))
+
+## [v4.8.2]
+
+- Support for Wazuh 4.8.2
 
 ## [v4.8.1]
 

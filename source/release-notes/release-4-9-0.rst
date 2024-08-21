@@ -35,6 +35,10 @@ Wazuh manager
 -  `#24536 <https://github.com/wazuh/wazuh/pull/24536>`__ Enhanced vulnerability scanner logging to be more expressive.
 -  `#17306 <https://github.com/wazuh/wazuh/pull/17306>`__ The manager now supports alert forwarding to Fluentd.
 -  `#23513 <https://github.com/wazuh/wazuh/pull/23513>`__ Added the HAProxy helper to manage load balancer configuration and automatically balance agents.
+-  `#23222 <https://github.com/wazuh/wazuh/pull/23222>`__ Added a validation to avoid killing processes from external services.
+-  `#23996 <https://github.com/wazuh/wazuh/pull/23996>`__ Enabled certificates validation in the requests to the HAProxy helper using the default CA bundle.
+-  `#21195 <https://github.com/wazuh/wazuh/pull/21195>`__ Sanitized the integrations directory code.
+-  `#22640 <https://github.com/wazuh/wazuh/pull/22640>`__ Modified multiple cluster commands to be asynchronous.
 
 Wazuh agent
 ^^^^^^^^^^^
@@ -53,6 +57,9 @@ Wazuh agent
 -  `#23848 <https://github.com/wazuh/wazuh/pull/23848>`__ Fixed issue with an agent starting automatically without reason.
 -  `#17415 <https://github.com/wazuh/wazuh/pull/17415>`__ Fixed GET /syscheck to properly report size for files larger than 2GB.
 -  `#23203 <https://github.com/wazuh/wazuh/pull/23203>`__ Added support for Amazon Security Hub via AWS SQS.
+-  `#20624 <https://github.com/wazuh/wazuh/pull/20624>`__ Refactored and modularized the Azure integration code.
+-  `#23790 <https://github.com/wazuh/wazuh/pull/23790>`__ Improved logging of errors in Azure and AWS modules.
+-  `#22583 <https://github.com/wazuh/wazuh/pull/22583>`__ Dropped support for Python 3.7 in cloud integrations.
 
 RESTful API
 ^^^^^^^^^^^
@@ -61,29 +68,40 @@ RESTful API
 -  `#23199 <https://github.com/wazuh/wazuh/pull/23199>`__ Changed the ``PUT /groups/{group_id}/configuration`` endpoint response error code when uploading an empty file.
 -  `#23199 <https://github.com/wazuh/wazuh/pull/23199>`__ Changed the ``GET``, ``PUT`` and ``DELETE /lists/files/{filename}`` endpoints response status code when an invalid file is used.
 -  `#23199 <https://github.com/wazuh/wazuh/pull/23199>`__ Changed the ``PUT /manager/configuration`` endpoint response status code when uploading a file with invalid content-type.
+-  `#23094 <https://github.com/wazuh/wazuh/pull/23094>`__ Added support in the Wazuh API to parse journald configurations from the ``ossec.conf`` file.
+-  `#24360 <https://github.com/wazuh/wazuh/pull/24360>`__ Added ``user-agent`` to the CTI service request.
+-  `#21653 <https://github.com/wazuh/wazuh/pull/21653>`__ Merged group files endpoints (``GET /groups/{group_id}/files/{filename}``) into one that uses the ``raw`` parameter to receive plain text data.
+-  `#22388 <https://github.com/wazuh/wazuh/pull/22388>`__ Removed the hardcoded fields returned by the ``GET /agents/outdated`` endpoint and added the ``select`` parameter to the specification.
+-  `#22423 <https://github.com/wazuh/wazuh/pull/22423>`__ Updated the regex used to validate CDB lists.
+-  `#22413 <https://github.com/wazuh/wazuh/pull/22413>`__ Changed the default value for empty fields in the ``GET /agents/stats/distinct`` endpoint response.
+-  `#22380 <https://github.com/wazuh/wazuh/pull/22380>`__ Changed the Wazuh API endpoint responses when receiving the ``Expect`` header.
+-  `#22745 <https://github.com/wazuh/wazuh/pull/22745>`__ Enhanced ``Authorization`` header values decoding errors to avoid showing the stack trace and fail gracefully.
+-  `#22908 <https://github.com/wazuh/wazuh/pull/22908>`__ Updated the format of the fields that can be ``N/A`` in the API specification.
+-  `#22954 <https://github.com/wazuh/wazuh/pull/22954>`__ Updated the Wazuh API specification to conform with the current endpoint requests and responses.
+-  `#22416 <https://github.com/wazuh/wazuh/pull/22416>`__ Removed the ``cache`` configuration option from the Wazuh API.
 
 Ruleset
 ^^^^^^^
 
 -  `#19754 <https://github.com/wazuh/wazuh/pull/19754>`__ Clarified the description for rule ID ``23502`` about solved vulnerabilities.
+-  `#17784 <https://github.com/wazuh/wazuh/pull/17784>`__ Added new SCA policy for Rocky Linux 8.
 
 Other
 ^^^^^
 
 -  `#20778 <https://github.com/wazuh/wazuh/pull/20778>`__ Upgraded external OpenSSL library dependency version used by Wazuh from ``V1`` to ``V3``.
--  `#23199 <https://github.com/wazuh/wazuh/pull/23199>`__ Upgraded external ``connexion`` library dependency version to ``3.0.5`` and its related interdependencies.
+-  `#22680 <https://github.com/wazuh/wazuh/pull/22680>`__ Upgraded external ``connexion`` library dependency version to ``3.0.5`` and its related interdependencies.
 
 Wazuh dashboard
 ^^^^^^^^^^^^^^^
 
 -  `#6145 <https://github.com/wazuh/wazuh-dashboard-plugins/pull/6145>`__ Added AngularJS dependencies.
--  `#6580 <https://github.com/wazuh/wazuh-dashboard-plugins/pull/6580>`__ Migrated from AngularJS to ReactJS. `#6555 <https://github.com/wazuh/wazuh-dashboard-plugins/pull/6555>`__ `#6618 <https://github.com/wazuh/wazuh-dashboard-plugins/pull/6618>`__ `#6613 <https://github.com/wazuh/wazuh-dashboard-plugins/pull/6613>`__ `#6631 <https://github.com/wazuh/wazuh-dashboard-plugins/pull/6631>`__ `#6594 <https://github.com/wazuh/wazuh-dashboard-plugins/pull/6594>`__
--  `#6120 <https://github.com/wazuh/wazuh-dashboard-plugins/issues/6120>`__ Removed embedded discover component. `#6235 <https://github.com/wazuh/wazuh-dashboard-plugins/pull/6235>`__ `#6254 <https://github.com/wazuh/wazuh-dashboard-plugins/pull/6254>`__ `#6285 <https://github.com/wazuh/wazuh-dashboard-plugins/pull/6285>`__ `#6288 <https://github.com/wazuh/wazuh-dashboard-plugins/pull/6288>`__ `#6286 <https://github.com/wazuh/wazuh-dashboard-plugins/pull/6286>`__ `#6459 <https://github.com/wazuh/wazuh-dashboard-plugins/pull/6459>`__ `#6438 <https://github.com/wazuh/wazuh-dashboard-plugins/pull/6438>`__ `#6434 <https://github.com/wazuh/wazuh-dashboard-plugins/pull/6434>`__ `#6537 <https://github.com/wazuh/wazuh-dashboard-plugins/pull/6537>`__ `#6528 <https://github.com/wazuh/wazuh-dashboard-plugins/pull/6528>`__ `#6558 <https://github.com/wazuh/wazuh-dashboard-plugins/pull/6558>`__ `#6734 <https://github.com/wazuh/wazuh-dashboard-plugins/pull/6734>`__ `#6771 <https://github.com/wazuh/wazuh-dashboard-plugins/pull/6771>`__ `#6756 <https://github.com/wazuh/wazuh-dashboard-plugins/pull/6756>`__
+-  `#6580 <https://github.com/wazuh/wazuh-dashboard-plugins/pull/6580>`__ Migrated from AngularJS to ReactJS. `#6555 <https://github.com/wazuh/wazuh-dashboard-plugins/pull/6555>`__ `#6618 <https://github.com/wazuh/wazuh-dashboard-plugins/pull/6618>`__ `#6613 <https://github.com/wazuh/wazuh-dashboard-plugins/pull/6613>`__ `#6631 <https://github.com/wazuh/wazuh-dashboard-plugins/pull/6631>`__ `#6594 <https://github.com/wazuh/wazuh-dashboard-plugins/pull/6594>`__ `#6893 <https://github.com/wazuh/wazuh-dashboard-plugins/pull/6893>`__
+-  `#6120 <https://github.com/wazuh/wazuh-dashboard-plugins/issues/6120>`__ Removed legacy embedded discover component.
 -  `#6268 <https://github.com/wazuh/wazuh-dashboard-plugins/pull/6268>`__ Refactored the **Endpoints Summary** charts.
 -  `#6250 <https://github.com/wazuh/wazuh-dashboard-plugins/pull/6250>`__ Added agent groups edition to **Endpoints Summary**. `#6274 <https://github.com/wazuh/wazuh-dashboard-plugins/pull/6274>`__
 -  `#6476 <https://github.com/wazuh/wazuh-dashboard-plugins/pull/6476>`__ Added a filter to select outdated agents and the **Upgrade** agent action to **Endpoints Summary**. `#6501 <https://github.com/wazuh/wazuh-dashboard-plugins/pull/6501>`__ `#6529 <https://github.com/wazuh/wazuh-dashboard-plugins/pull/6529>`__ `#6648 <https://github.com/wazuh/wazuh-dashboard-plugins/pull/6648>`__
--  `#6337 <https://github.com/wazuh/wazuh-dashboard-plugins/pull/6337>`__ Changed the way the configuration is managed in the backend side. `#6519 <https://github.com/wazuh/wazuh-dashboard-plugins/pull/6519>`__ `#6573 <https://github.com/wazuh/wazuh-dashboard-plugins/pull/6573>`__
--  `#6337 <https://github.com/wazuh/wazuh-dashboard-plugins/pull/6337>`__ Added a migration task to setup the configuration using a configuration file.
+-  `#6337 <https://github.com/wazuh/wazuh-dashboard-plugins/pull/6337>`__ Changed the way the configuration is managed in the backend side. `#6573 <https://github.com/wazuh/wazuh-dashboard-plugins/pull/6573>`__
 -  `#6337 <https://github.com/wazuh/wazuh-dashboard-plugins/pull/6337>`__ Moved the content of the **API is down** and **Check connection** views to the **Server APIs** view.
 -  `#6545 <https://github.com/wazuh/wazuh-dashboard-plugins/pull/6545>`__ Added macOS log collection tab.
 -  `#6481 <https://github.com/wazuh/wazuh-dashboard-plugins/pull/6481>`__ Removed the ``GET /api/timestamp`` API endpoint.
@@ -100,9 +118,22 @@ Wazuh dashboard
 -  `#6716 <https://github.com/wazuh/wazuh-dashboard-plugins/pull/6716>`__ Refactored the search bar to handle fixed and user-added filters correctly. `#6755 <https://github.com/wazuh/wazuh-dashboard-plugins/pull/6755>`__
 -  `#6714 <https://github.com/wazuh/wazuh-dashboard-plugins/pull/6714>`__ Replaced the custom ``EuiSuggestItem`` component with the native component from OpenSearch UI.
 -  `#6800 <https://github.com/wazuh/wazuh-dashboard-plugins/pull/6800>`__ Added pinned agent data validation when rendering the **Inventory data**, **Stats**, and **Configuration** tabs in Agent preview of **Endpoints Summary**.
--  `#6534 <https://github.com/wazuh/wazuh-dashboard-plugins/pull/6534>`__ Improvement of the filter management system by implementing new standard modules. `#6772 <https://github.com/wazuh/wazuh-dashboard-plugins/pull/6772>`__
+-  `#6534 <https://github.com/wazuh/wazuh-dashboard-plugins/pull/6534>`__ Improvement of the filter management system by implementing new standard modules. `#6772 <https://github.com/wazuh/wazuh-dashboard-plugins/pull/6772>`__ `#6873 <https://github.com/wazuh/wazuh-dashboard-plugins/pull/6873>`__
 -  `#6745 <https://github.com/wazuh/wazuh-dashboard-plugins/pull/6745>`__ Generate URL with predefined filters.
 -  `#6782 <https://github.com/wazuh/wazuh-dashboard-plugins/pull/6782>`__ Removed unused API endpoints from creation of old visualizations: ``GET /elastic/visualizations/{tab}/{pattern}``.
+-  `#6839 <https://github.com/wazuh/wazuh-dashboard-plugins/pull/6839>`__ Changed permalink field in the **Events** tab table in **VirusTotal** to show an external link.
+-  `#6890 <https://github.com/wazuh/wazuh-dashboard-plugins/pull/6890>`__ Changed the internal control from **Endpoint** **Groups** to a control via URL.
+-  `#6882 <https://github.com/wazuh/wazuh-dashboard-plugins/pull/6882>`__ Changed the internal control from **MITRE ATT&CK** > **Intelligence** > **Table** to a control via URL.
+-  `#6886 <https://github.com/wazuh/wazuh-dashboard-plugins/pull/6886>`__ Changed the display of rule details flyout to be based on URL.
+-  `#6161 <https://github.com/wazuh/wazuh-dashboard-plugins/pull/6161>`__ Changed the logging system to use the one provided by the platform.
+-  `#6161 <https://github.com/wazuh/wazuh-dashboard-plugins/pull/6161>`__ Removed ``logs.level`` setting.
+-  `#6161 <https://github.com/wazuh/wazuh-dashboard-plugins/pull/6161>`__ Removed the usage of ``wazuhapp-plain.log``, ``wazuhapp.log``, ``wazuh-ui-plain.log``, and ``wazuh-ui.log`` files.
+-  `#6161 <https://github.com/wazuh/wazuh-dashboard-plugins/pull/6161>`__ Removed the *App logs* application.
+-  `#6161 <https://github.com/wazuh/wazuh-dashboard-plugins/pull/6161>`__ Removed API endpoint ``GET /utils/logs/ui``.
+-  `#6161 <https://github.com/wazuh/wazuh-dashboard-plugins/pull/6161>`__ Removed API endpoint ``GET /utils/logs``.
+-  `#6848 <https://github.com/wazuh/wazuh-dashboard-plugins/pull/6848>`__ Added wz-link component to handle redirections.
+-  `#6902 <https://github.com/wazuh/wazuh-dashboard-plugins/pull/6902>`__ Removed embedded ``dom-to-image`` dependency.
+-  `#6902 <https://github.com/wazuh/wazuh-dashboard-plugins/pull/6902>`__ Added embedded and customized ``dom-to-image-more`` dependency.
 
 Packages
 ^^^^^^^^
@@ -110,16 +141,18 @@ Packages
 -  `#2991 <https://github.com/wazuh/wazuh-packages/pull/2991>`__ Allow installation on any OS
 -  `#2970 <https://github.com/wazuh/wazuh-packages/pull/2970>`__ Added support for Rocky Linux 9.4 in Installation assistant
 -  `#2944 <https://github.com/wazuh/wazuh-packages/pull/2944>`__ Update API script file name
--  `#2698 <https://github.com/wazuh/wazuh-packages/pull/2698>`__ Add new Azure module files
+-  `#2698 <https://github.com/wazuh/wazuh-packages/pull/2698>`__ Added new Azure module files
 -  `#2945 <https://github.com/wazuh/wazuh-packages/pull/2945>`__ Added support for Ubuntu 24.04 in Installation assistant
 -  `#2922 <https://github.com/wazuh/wazuh-packages/pull/2922>`__ Changed log message when not yum nor apt-get are found. Added clearer instructions on following steps
 -  `#2911 <https://github.com/wazuh/wazuh-packages/pull/2911>`__ Cert-tool logfile added. Modified common_logger function to write on files without root permission
--  `#2908 <https://github.com/wazuh/wazuh-packages/pull/2908>`__ Add bash dependency to Wazuh agent RPM for AIX
+-  `#2908 <https://github.com/wazuh/wazuh-packages/pull/2908>`__ Added bash dependency to Wazuh agent RPM for AIX
 -  `#2909 <https://github.com/wazuh/wazuh-packages/pull/2909>`__ Prevent failed checks related to dashboard and indexer
 -  `#2900 <https://github.com/wazuh/wazuh-packages/pull/2900>`__ Installation Assistant language agnostic
 -  `#2882 <https://github.com/wazuh/wazuh-packages/pull/2882>`__ Added rollBack to several exit points
 -  `#2753 <https://github.com/wazuh/wazuh-packages/pull/2753>`__ Adding support for Amazon Linux 1, 2, and 2023
 -  `#2790 <https://github.com/wazuh/wazuh-packages/pull/2790>`__ Added support for AL2023 in WIA
+-  `#2300 <https://github.com/wazuh/wazuh-packages/pull/2300>`__ Added SCA policy for Rocky Linux 8 in SPECS.
+-  `#3070 <https://github.com/wazuh/wazuh-packages/pull/3070>`__ Removed migrated and unsupported code.
 
 Resolved issues
 ---------------
@@ -146,6 +179,14 @@ Wazuh agent
 -  `#20425 <https://github.com/wazuh/wazuh/pull/20425>`__ Fixed the agent not deleting the ``wazuh-agent.state`` file in Windows when stopped.
 -  `#24412 <https://github.com/wazuh/wazuh/pull/24412>`__ Fixed error in packages generation for CentOS 7.
 -  `#22392 <https://github.com/wazuh/wazuh/pull/22392>`__ Fixed Azure auditLogs/signIns status parsing (thanks to `@Jmnis <https://github.com/jmnis>`__ for the contribution).
+-  `#22621 <https://github.com/wazuh/wazuh/pull/22621>`__ Fixed how the S3 object keys with special characters are handled in the Custom Logs Buckets integration.
+
+RESTful API
+^^^^^^^^^^^
+
+-  `#20507 <https://github.com/wazuh/wazuh/pull/20507>`__ Improved XML validation to match the Wazuh internal XML validator.
+-  `#22428 <https://github.com/wazuh/wazuh/pull/22428>`__ Fixed bug in ``GET /groups``.
+-  `#24946 <https://github.com/wazuh/wazuh/pull/24946>`__ Fixed the ``GET /agents/outdated`` endpoint query.
 
 Ruleset
 ^^^^^^^
@@ -166,6 +207,16 @@ Wazuh dashboard
 -  `#6730 <https://github.com/wazuh/wazuh-dashboard-plugins/pull/6730>`__ Fixed the validation of the maximum allowed time interval for cron jobs.
 -  `#6747 <https://github.com/wazuh/wazuh-dashboard-plugins/pull/6747>`__ Fixed styles in small height viewports.
 -  `#6770 <https://github.com/wazuh/wazuh-dashboard-plugins/pull/6770>`__ Fixed behavior in **Configuration Assessment** when changing API.
+-  `#6871 <https://github.com/wazuh/wazuh-dashboard-plugins/pull/6871>`__ Fixed the maximum width of the clear session button in the ruleset test view.
+-  `#6876 <https://github.com/wazuh/wazuh-dashboard-plugins/pull/6876>`__ Fixed the width of the ``last modified`` column of the table in **Windows Registry**.
+-  `#6880 <https://github.com/wazuh/wazuh-dashboard-plugins/pull/6880>`__ Fixed redirection to **FIM** > **Inventory** > **Files** from **FIM** > **Inventory** > **Windows Registry** when switching to a non-Windows agent.
+
+Packages
+^^^^^^^^
+
+-  `#3063 <https://github.com/wazuh/wazuh-dashboard-plugins/pull/3063>`__ Fixed Kibana server change password.
+-  `#3074 <https://github.com/wazuh/wazuh-packages/pull/3074>`__ Fixed bugs in the offline installation using the installation assistant.
+-  `#3082 <https://github.com/wazuh/wazuh-packages/pull/3082>`__ Fixed bug when inserting Filebeat template.
 
 Changelogs
 ----------
