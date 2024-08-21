@@ -1,15 +1,15 @@
 .. Copyright (C) 2015, Wazuh, Inc.
 
 .. meta::
-  :description: Learn how to remove agents in this section of the Wazuh documentation.
-  
-.. _remove_agents:
+   :description: There are different ways to remove a Wazuh agent that is enrolled in the Wazuh manager. Learn more in this section of the documentation.
 
 Removing agents
 ===============
 
-    .. toctree::
-        :maxdepth: 2
+There are different ways to remove a Wazuh agent that is enrolled in the Wazuh manager. This includes using the CLI or querying the Wazuh server API.
 
-        remove
-        restful-api-remove
+.. toctree::
+   :maxdepth: 2
+
+   remove
+   restful-api-remove
