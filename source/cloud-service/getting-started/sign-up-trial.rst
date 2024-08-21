@@ -21,7 +21,7 @@ To sign up for a free trial, do the following.
 
 #. Verify your email address.
 
-Now you are ready to create your first :ref:`environment <>`.
+Now you are ready to create your first :ref:`environment <cloud_glossary_environment>`.
 
 Create environment
 ------------------
@@ -34,7 +34,7 @@ Follow these steps to quickly set up and run your environment:
 
    #. Give your environment a name.
 
-   #. Select the :ref:`region <>` to host your environment. If you are not sure what to pick, select a region that is the closest to your location since this typically reduces latency for indexing and search requests.
+   #. Select the :ref:`region <cloud_glossary_region>` to host your environment. If you are not sure what to pick, select a region that is the closest to your location since this typically reduces latency for indexing and search requests.
 
    #. Fill in the use case. This information helps us understand why our users utilize our service, allowing us to improve it accordingly.
 

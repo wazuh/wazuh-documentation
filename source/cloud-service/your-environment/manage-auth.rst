@@ -115,7 +115,7 @@ Creating and setting a Wazuh read-only user
 
 Follow these steps to create an internal user, create a new role mapping, and give read-only permissions to the user.
 
-#. Log into your :ref:`Wazuh dashboard </cloud-service/getting-started/access-wazuh-wui>` as administrator.
+#. Log into your :doc:`Wazuh dashboard </cloud-service/getting-started/access-wazuh-wui>` as administrator.
 
 #. Click the upper-left menu icon **☰** and expand **Indexer management** then click on **Security**, and then **Internal users** to open the internal users' page.
 

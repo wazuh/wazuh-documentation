@@ -37,6 +37,7 @@ Two settings define the behavior of the indexed data:
 
 Data remains indexed until either the indexed data retention or the indexed data capacity is reached. In other words, once either of the settings' values is reached, data rotation will occur (removing the oldest data) until the settings' conditions are met.
 
+To configure index management policies, see :doc:`Index life management </user-manual/wazuh-indexer/index-life-management>` documentation.
 
 .. _cloud_settings_archive_data:
 
