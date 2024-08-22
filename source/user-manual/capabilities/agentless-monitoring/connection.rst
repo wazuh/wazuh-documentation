@@ -18,13 +18,11 @@ Endpoints with public key authentication
 
 To add agentless endpoints that use public key authentication, perform the following steps on the Wazuh server.
 
-#. Generate a public key with the following command:
+#. Generate a public key with the following command. It saves the public key in ``/var/ossec/.ssh/id_rsa.pub`` by default.
 
    .. code-block:: console
 
       sudo -u wazuh ssh-keygen
-
-   By default, the public key will be saved to ``/var/ossec/.ssh/id_rsa.pub`` because ``/var/ossec/`` is the home directory of the Wazuh user.
 
 #. Run the following command to copy the public key to the monitored endpoint. Replace ``user@test.com`` with the username and the hostname or IP address of the agentless endpoint.
 
