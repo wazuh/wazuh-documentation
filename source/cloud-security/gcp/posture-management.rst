@@ -29,7 +29,7 @@ Google Cloud
 Configuring the Google Cloud account
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-Create a new Google Cloud project and a service account that enables the Wazuh Google Cloud module to pull log data from the Google Pub/Sub service. Once this is done, configure the Pub/Sub and the Sink services. The Sink service routes cloud security posture logs from the central Google Cloud Cloud Logging service to the Pub/Sub service.
+Create a new Google Cloud project and a service account that enables the Wazuh Google Cloud module to pull log data from the Google Pub/Sub service. Once this is done, configure the Pub/Sub and the Sink services. The Sink service routes cloud security posture logs from the central Google Cloud Logging service to the Pub/Sub service.
 
 Follow the steps below to perform the configuration.
 
@@ -226,3 +226,7 @@ Visualize the Google Cloud posture management results by navigating to **Threat 
    :width: 80%
 
 The image above shows misconfiguration and threats discovered in the Google Cloud environment.
+
+.. note::
+
+    The alerts may not appear on the Wazuh dashboard immediately the first time you activate Google Cloud's security command center. This is due to the latency caused by the activation process.

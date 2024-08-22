@@ -2,7 +2,7 @@
 #
 # Empty TOC nodes
 #
-# This is a list of paths (without file extension) of documents considered 
+# This is a list of paths (without file extension) of documents considered
 # "empty" since they don't have much content or it is not relevant
 # Usually, the document should not be linked in the left menu.
 #
@@ -17,9 +17,6 @@ emptyTocNodes = [
     'installation-guide/upgrading/legacy/index',
     'installation-guide/packages-list/linux/linux-index',
     'installation-guide/packages-list/solaris/solaris-index',
-    'user-manual/agent/index',
-    'user-manual/agent/remove-agents/index',
-    'user-manual/agent/listing/index',
     'user-manual/kibana-app/reference/index',
     'installation-guide/distributed-deployment/step-by-step-installation/elasticsearch-cluster/index',
     'installation-guide/distributed-deployment/step-by-step-installation/wazuh-cluster/index',
