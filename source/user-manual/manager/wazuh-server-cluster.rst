@@ -1972,7 +1972,7 @@ The HAProxy helper runs in an independent thread that initiates with the ``wazuh
 Enabling the HAProxy helper
 '''''''''''''''''''''''''''
 
-To use this feature, you need a :ref:`HAProxy instance <lb_haproxy>` balancing the Wazuh server cluster using the least connections algorithm.
+To use this feature, you need a :ref:`HAProxy <lb_haproxy>` instance balancing the Wazuh server cluster using the least connections algorithm.
 
 .. note::
 
