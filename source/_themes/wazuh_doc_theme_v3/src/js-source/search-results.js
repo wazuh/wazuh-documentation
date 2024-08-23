@@ -93,7 +93,10 @@ if ( $('.search') ) {
 
               /* Display results */              
               for ( let i = 0; i < resultsFound; i++ ) {
-                let listItem = $('<li id="' + results[i].id + '" style="display:none"></li>');
+                // let listItem = $('<li id="' + results[i].id + '" style="display:none"></li>');
+                let listItem = $(document.createElement('li'));
+                listItem.attr('id', results[i].id);
+                listItem.attr('style', 'display:none');
                 
                 resultList.append(listItem);
                 
@@ -130,7 +133,8 @@ if ( $('.search') ) {
                   // Context
                   let excerpt = singleResult.excerpt;
                   
-                  context = $('<div/>').addClass('context').html('... ' + excerpt.replace('¶', '') + ' ...');
+                  context = $('<div/>').addClass('context').text('... ' + excerpt.replace('¶', '') + ' ...');
+                  context.html(context.text().replace(/<mark>/g, '<mark>').replace(/<\/mark>/g, '</mark>'));
                   
                   listItem.append(context);
                   
