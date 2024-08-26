@@ -47,17 +47,17 @@ Perform the following steps to install Docker on the Ubuntu endpoint and configu
             $ curl -sSL https://get.docker.com/ | sh
             $ sudo pip3 install docker==7.1.0 urllib3==2.2.2 requests==2.32.2
 
-      .. group-tab:: Python 3.11
+      .. group-tab:: Python 3.11-3.12
 
          .. code-block:: console
 
             $ curl -sSL https://get.docker.com/ | sh
             $ sudo pip3 install docker==7.1.0 urllib3==2.2.2 requests==2.32.2 --break-system-packages
-      
+
          .. note::
 
             This command modifies the default externally managed Python environment. See the `PEP 668 <https://peps.python.org/pep-0668/>`__ description for more information.
-         
+
             To prevent the modification, you can run ``pip3 install --upgrade pip`` within a virtual environment. You must update the docker ``/var/ossec/wodles/docker/DockerListener`` script shebang with your virtual environment interpreter. For example: ``#!</path/to/your/virtual/environment>/bin/python3``.
 
 #. Edit the Wazuh agent configuration file ``/var/ossec/etc/ossec.conf`` and add this block to enable the ``docker-listener`` module:
@@ -107,7 +107,7 @@ Visualize the alerts
 You can visualize the alert data in the Wazuh dashboard. To do this, go to **Docker**.
 
    .. thumbnail:: /images/poc/docker-alerts.png
-      :title: Visualize Docker alerts 
+      :title: Visualize Docker alerts
       :align: center
       :width: 80%
 
@@ -120,7 +120,7 @@ Troubleshooting
    .. code-block:: none
 
       wazuh-modulesd:docker-listener: ERROR: /usr/bin/env: ‘python’: No such file or directory
-   
+
    **Location**: Wazuh agent log - ``/var/ossec/logs/ossec.log``
 
    **Resolution**: You can create a symbolic link to solve this:

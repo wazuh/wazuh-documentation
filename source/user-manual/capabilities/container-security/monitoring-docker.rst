@@ -47,16 +47,16 @@ Docker library for Python
 
          $ pip3 install docker==7.1.0 urllib3==2.2.2 requests==2.32.2
 
-   .. group-tab:: Python 3.11
+   .. group-tab:: Python 3.11-3.12
 
       .. code-block:: console
 
          $ pip3 install docker==7.1.0 urllib3==2.2.2 requests==2.32.2 --break-system-packages
-      
+
       .. note::
 
          This command modifies the default externally managed Python environment. See the `PEP 668 <https://peps.python.org/pep-0668/>`__ description for more information.
-         
+
          To prevent the modification, you can run ``pip3 install --upgrade pip`` within a virtual environment. You must update the docker ``/var/ossec/wodles/docker/DockerListener`` script shebang with your virtual environment interpreter. For example: ``#!</path/to/your/virtual/environment>/bin/python3``.
 
 Configure the Wazuh agent
