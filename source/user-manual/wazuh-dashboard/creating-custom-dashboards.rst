@@ -207,29 +207,25 @@ Basic charts
 
 The following is a list of the basic charts for visualization:
 
--  **Bar, area, and line charts**: These charts are used for comparing different series in x and y axis.
--  **Pie charts**: These charts are used when all of the fields are related to each other; for example, the voting percentage for different parties in an election.
+-  **Bar, area, and line charts**: These charts are used for comparing different series in x-axis and y-axis.
+-  **Pie charts**: These charts are used when all of the fields are related to each other.
 -  **Heat maps**: These are used to shade the cells within a matrix.
 
 Bar charts
 ~~~~~~~~~~
 
-Bar charts are a type of visualization that are used to compare specific measures for different data categories. These are the most common type of visualization, and are easy to create and interpret. Bar charts are used to present categorical data in the form of rectangular bars with heights/lengths that are proportional to the given values.
+Bar charts are a type of visualization that is used to compare specific measures for different data categories. These are the most common types of visualization and are easy to create and interpret. Bar charts are used to present categorical data in the form of rectangular bars with heights/lengths that are proportional to the given values.
 
 Creating a Bar chart
 ''''''''''''''''''''
 
 **Horizontal Bar**: This is a type of bar chart where rectangular bars are displayed horizontally. The length or width of each bar corresponds to a particular value. This allows an easy comparison between different data points. Horizontal bar charts are often used to visualize data that has distinct categories or to show rankings.
 
-#. From the **Visualize** tab, click **Create Visualization**, select the ``Horizontal bar`` visualization format and use ``wazuh-alerts-*`` as the index pattern name.
+The steps below show how to create a horizontal bar visualization that shows varying numbers of :doc:`MITRE </user-manual/ruleset/mitre>` tactics detected within a set timeframe.
 
-   .. thumbnail:: /images/wazuh-dashboard/custom-dashboards/create-horizontal-bar-visualization.png
-      :align: center
-      :width: 80%
-      :title: Create horizontal bar visualization
-      :alt: Create horizontal bar visualization
+#. Click **Create new visualization** from the **Visualize** tab, select the **Horizontal Bar** visualization format and use ``wazuh-alerts-*`` as the index pattern name.
 
-#. In the ``Data`` section, on the ``Y-axis`` of **Metrics**, set the following value:
+#. Set the following value in the **Data** section, on the ``Y-axis``, in **Metrics**:
 
    -  ``Aggregation`` = ``Count``
 
@@ -249,19 +245,15 @@ Creating a Bar chart
       :title: Create horizontal bar visualization – Update button
       :alt: Create horizontal bar visualization – Update button
 
-#. Click the upper-right **Save** button and assign a title to save the visualization.
+#. Click the **Save** button in the top right corner and assign a title to save the visualization.
 
-**Vertical Bar**: This is a type of bar chart where the bars are displayed vertically, with the length or height of each bar representing a particular value. Vertical bar charts are suitable for comparing data across different categories. They are commonly used to display rankings, comparisons, or distribution of values.
+**Vertical Bar**: This is a type of bar chart where the bars are displayed vertically, with the length or height of each bar representing a particular value. Vertical bar charts are suitable for comparing data across different categories. They are commonly used to display rankings, comparisons, or the distribution of values.
 
-#. From the **Visualize** tab, select the ``Vertical Bar`` visualization format and use ``wazuh-alerts-*`` as the index pattern name.
+The steps below detail how to create a vertical bar visualization that shows varying numbers of :doc:`MITRE </user-manual/ruleset/mitre>` tactics detected within a set timeframe.
 
-   .. thumbnail:: /images/wazuh-dashboard/custom-dashboards/create-vertical-bar-visualization.png
-      :align: center
-      :width: 80%
-      :title: Create vertical bar visualization
-      :alt: Create vertical bar visualization
+#. Click **Create new visualization** from the **Visualize** tab, select the **Vertical Bar** visualization format and use ``wazuh-alerts-*`` as the index pattern name.
 
-#. In the ``Data`` section, on the ``Y-axis`` of **Metrics**, set the following value:
+#. Set the following value in the **Data** section, on the Y-axis, in **Metrics**:
 
    -  ``Aggregation`` = ``Count``
 
@@ -281,39 +273,33 @@ Creating a Bar chart
       :title: Create vertical bar visualization – Update button
       :alt: Create vertical bar visualization – Update button
 
-#. Click the upper-right **Save** button and assign a title to save the visualization.
+#. Click the **Save** button in the top right corner and assign a title to save the visualization.
 
 Pie charts
 ~~~~~~~~~~
 
-This is a circular chart that is divided into sectors, with each sector representing a percentage of a whole data set. They are commonly used to show market share, composition of data, or distribution of categories.
+This is a circular chart that is divided into sectors, with each sector representing a percentage of a whole data set. They are commonly used to show market share, composition of data, or distribution of categories. The total slice size of a pie chart is calculated by the metrics aggregation. In the case of a pie chart, we use the count, sum, and unique count.
 
-The total slice size of a pie chart is calculated by the metrics aggregation. In the case of a pie chart, we use the count, sum, unique count.
+The steps below show how to create a Pie chart visualization that shows :doc:`MITRE </user-manual/ruleset/mitre>` tactics count within a timeframe.
 
 Creating a Pie chart
 ''''''''''''''''''''
 
-#. From the **Visualize** tab, click **Create Visualization**, select the ``Pie`` visualization format and use ``wazuh-alerts-*`` as the index pattern name.
+#. Click **Create new visualization** from the **Visualize** tab, select the **Pie** visualization format and use ``wazuh-alerts-*`` as the index pattern name.
 
-   .. thumbnail:: /images/wazuh-dashboard/custom-dashboards/create-pie-visualization.png
-      :align: center
-      :width: 80%
-      :title: Create pie visualization
-      :alt: Create pie visualization
-
-#. In the ``Data`` section, on the ``Slice size`` of **Metrics**, set the following value:
+#. Set the following value in the **Data** section, on the Slice size, in **Metrics**:
 
    -  ``Aggregation`` = ``Count``
 
 #. Add a ``Split slices`` in **Bucket** and set the following values:
 
    -  ``Aggregation`` = ``Terms``
-   - ``Field`` = ``rule.mitre.tactic``
+   -  ``Field`` = ``rule.mitre.tactic``
    -  ``Order by`` = ``Metric: Count``
    -  ``Order`` = ``Descending``
    -  ``Size`` = ``10``
 
-#. In the ``Options`` section, customize the Pie chart by toggling on ``show label``.
+#. Customize the Pie chart by toggling on ``show label`` in the **Options** section.
 
 #. Click the **Update** button.
 
@@ -323,35 +309,29 @@ Creating a Pie chart
       :title: Create pie visualization – Update button
       :alt: Create pie visualization – Update button
 
-#. Click the upper-right **Save** button and assign a title to save the visualization.
+#. Click the **Save** button in the top right corner and assign a title to save the visualization.
 
 Area charts
 ~~~~~~~~~~~
 
-This is used to display graphically quantitative data using filled-in areas. The areas between axes and lines are typically filled with colors or patterns to differentiate between different categories or data points. This emphasizes the quantity beneath a line chart.
+This is used to display graphically quantitative data using filled-in areas. The areas between axes and lines are typically filled with colors or patterns to differentiate between different categories or data points. This emphasizes the quantity beneath a line chart. Area charts are useful for showing the magnitude and distribution of data over time or categories. They are often used to display trends, comparisons, or cumulative values.
 
-Area charts are useful for showing the magnitude and distribution of data over time or categories. They are often used to display trends, comparisons, or cumulative values.
+The steps below show how to create an Area chart that visualizes a histogram of Wazuh rule levels and their maximum fired times.
 
-Creating a Area chart
-'''''''''''''''''''''
+Creating an Area chart
+''''''''''''''''''''''
 
-#. From the **Visualize** tab, click **Create Visualization**, select the ``area`` visualization format, and use ``wazuh-alerts-*`` as the index pattern name.
+#. Click **Create new visualization** from the **Visualize** tab, select the **Area** visualization format, and use ``wazuh-alerts-*`` as the index pattern name.
 
-   .. thumbnail:: /images/wazuh-dashboard/custom-dashboards/create-area-visualization.png
-      :align: center
-      :width: 80%
-      :title: Create area visualization
-      :alt: Create area visualization
-
-#. On the ``Y-axis`` of **Metrics**, set the following values:
+#. Set the following value in the **Data** section, on the ``Y-axis``, in **Metrics**:
 
    -  ``Aggregation`` = ``Max``
-   -  ``Field`` = ``data.memory.used_bytes``
+   -  ``Field`` = ``rule.level``
 
 #. Add another ``Y-axis`` in **Metric** and set the following values:
 
    -  ``Aggregation`` = ``Max``
-   -  ``Field`` = ``data.memory.available_bytes``
+   -  ``Field`` = ``rule.firedtimes``
 
 #. Add an ``X-axis`` in **Bucket** and set the following values:
 
@@ -366,22 +346,24 @@ Creating a Area chart
       :title: Create area visualization – Update button
       :alt: Create area visualization – Update button
 
-#. Click the upper-right **Save** button and assign a title to save the visualization.
+#. Click the **Save** button in the top right corner and assign a title to save the visualization.
 
 Line charts
 ~~~~~~~~~~~
 
 This visualization represents data points connected by straight lines. It is commonly used to display trends, patterns, relationships over time or a continuous range. By plotting data along a Cartesian coordinate system, lines are drawn to connect the data points. This provides a clear depiction of how the values change.
 
+The steps below show how to create a Line chart that visualizes the Wazuh rule levels triggered maximum times within a timeframe.
+
 Creating a Line chart
 '''''''''''''''''''''
 
-#. From the **Visualize** tab, click **Create Visualization**, select the ``Line`` visualization format and use ``wazuh-alerts-*`` as the index pattern name. 
+#. Click **Create new visualization** from the **Visualize** tab, select the **Line** visualization format, and use ``wazuh-alerts-*`` as the index pattern name.
 
-#. On the ``Y-axis``, in **Metrics**, set the following values:
+#. Set the following value in the **Data** section, on the ``Y-axis``, in **Metrics**:
 
    -  ``Aggregation`` = ``Max``
-   -  ``Field`` = ``data.memory.usage_%``
+   -  ``Field`` = ``rule.level``
 
 #. Add an ``X-axis`` in **Buckets** and set the following values:
 
@@ -397,27 +379,21 @@ Creating a Line chart
       :title: Create line visualization – Update button
       :alt: Create line visualization – Update button
 
-#. Click the upper-right **Save** button and assign a title to save the visualization.
+#. Click the **Save** button in the top right corner and assign a title to save the visualization.
 
 Heat maps
 ~~~~~~~~~
 
-This is a graphical representation that uses colors to visualize the density of certain variables. Heat maps display data points as colored cells, with each color representing a different value or level of intensity.
+This is a graphical representation that uses colors to visualize the density of certain variables. Heat maps display data points as colored cells, with each color representing a different value or level of intensity. Heat maps are useful for identifying patterns, trends, or variations within a dataset.
 
-Heat maps are useful for identifying patterns, trends, or variations within a dataset.
+The steps below show how to create a Heat map that visualizes the mapping of MITRE tactics and techniques.
 
 Creating a Heat Map
 '''''''''''''''''''
 
-#. From the **Visualize** tab, click **Create Visualization**, select the ``Heat Map`` visualization format and use ``wazuh-alerts-*`` as the index pattern name.
+#. Click **Create new visualization** from the **Visualize** tab, select the **Heat Map** visualization format, and use ``wazuh-alerts-*`` as the index pattern name.
 
-   .. thumbnail:: /images/wazuh-dashboard/custom-dashboards/create-heat-map-visualization.png
-      :align: center
-      :width: 80%
-      :title: Create heat map visualization
-      :alt: Create heat map visualization
-
-#. On the ``Y-axis``, in **Metrics**, set the following value:
+#. Set the following value in the **Data** section, on the ``Y-axis``, in **Metrics**:
 
    -  ``Aggregation`` = ``Count``
 
@@ -432,7 +408,7 @@ Creating a Heat Map
 #. Add a ``Y-axis`` in **Buckets** and set the following values:
 
    -  ``Aggregation`` = ``Terms``
-   -  ``Field`` = ``rule.mitre.technique``
+   -  ``Field`` = ``rule.mitre.techniques``
    -  ``Order by`` = ``Metric: Count``
    -  ``Order`` = ``Descending``
    -  ``Size`` = ``5``
@@ -444,6 +420,8 @@ Creating a Heat Map
       :width: 80%
       :title: Create heat map visualization – Update button
       :alt: Create heat map visualization – Update button
+
+#. Click the **Save** button in the top right corner and assign a title to save the visualization.
 
 Data
 ^^^^
@@ -461,19 +439,22 @@ Data table
 
 This is a tabular representation of data that is organized into rows and columns. It provides a structured format to display and analyze data. Each row represents a specific entry, and each column represents a different variable. Data tables are widely used for data analysis, reporting, and providing a clear overview of multiple variables.
 
+The following steps show how to create a Data table to visualize the maximum count of Wazuh rule levels that were triggered.
+
 Creating a Data table
 '''''''''''''''''''''
 
-#. From the **Visualize** tab, click **Create Visualization**, select the ``Data Table`` visualization format and use ``wazuh-alerts-*`` as the index pattern name. 
-#. On the **Metric** in **Metrics** data, set the following values:
+#. Click **Create new visualization** from the **Visualize** tab, select the **Data Table** visualization format and use ``wazuh-alerts-*`` as the index pattern name.
+
+#. Set the following metrics in the **Data** section:
 
    -  ``Aggregation`` = ``Max``
-   -  ``Field`` = ``data.disk_used_bytes``
+   -  ``Field`` = ``rule.level``
 
 #. Add an additional metric
 
    -  ``Aggregation`` = ``Max``
-   -  ``Field`` = ``data.disk_free_bytes``
+   -  ``Field`` = ``rule.firedtimes``
 
 #. Click the **Update** button.
 
@@ -483,21 +464,23 @@ Creating a Data table
       :title: Create data table visualization – Update button
       :alt: Create data table visualization – Update button
 
-#. Click the upper-right **Save** button and assign a title to save the visualization.
+#. Click the **Save** button in the top right corner and assign a title to save the visualization.
 
 Metric
 ~~~~~~
 
 This is a quantifiable measurement that is used to evaluate performance, progress, or specific characteristics. Metric represents a calculation as a single numerical value. They are applicable in various domains, including business analytics, key performance indicators (KPIs), and performance monitoring.
 
+The following steps show how to create a Metric to visualize the maximum number of rule levels that triggered alerts.
+
 Creating a Metric
 '''''''''''''''''
 
-#. From the **Visualize** tab, click **Create Visualization**, select the ``Metric`` visualization format and use ``wazuh-alerts-*`` as the index pattern name.
-#. On the **Metric** in **Metrics** data, set the following values:
+#. Click **Create new visualization** from the **Visualize** tab, select the **Metric** visualization format and use ``wazuh-alerts-*`` as the index pattern name.
+#. Set the following metrics in the **Data** section:
 
    -  ``Aggregation`` = ``Max``
-   -  ``Field`` = ``data.memory_usage_%``
+   -  ``Field`` = ``rule.level``
 
 #. Click the **Update** button.
 
@@ -507,18 +490,20 @@ Creating a Metric
       :title: Create metric visualization – Update button
       :alt: Create metric visualization – Update button
 
-#. Click the upper-right **Save** button and assign a title to save the visualization.
+#. Click the **Save** button in the top right corner and assign a title to save the visualization.
 
 Goal
 ~~~~
 
 This refers to the desired target that an individual or organization aims to achieve. It represents a specific purpose and serves as a benchmark for measuring progress and achieving a final goal.
 
+The steps below show how to create Goals to visualize the :doc:`Security Configuration Assessment </user-manual/capabilities/sec-config-assessment/index>` (SCA) policy status in percentage and counts.
+
 Creating a Goal
 '''''''''''''''
 
-#. From the **Visualize** tab, click **Create Visualization**, select the ``Goal`` visualization format and use ``wazuh-alerts-*`` as the index pattern name.
-#. On the **Metric** in **Data**, set the following values:
+#. Click **Create new visualization** from the **Visualize** tab, select the **Goal** visualization format and use ``wazuh-alerts-*`` as the index pattern name.
+#. Set the following metrics in the **Data** section:
 
    -  ``Aggregation`` = ``Max``
    -  ``Field`` = ``data.sca.passed``
@@ -528,7 +513,7 @@ Creating a Goal
    -  ``Aggregation`` = ``Terms``
    -  ``Field`` = ``data.sca.total_checks``
 
-#. In the ``Options`` section, customize the ``Ranges`` to match the range of existing sca rules.
+#. Customize the ``Ranges`` to match the range of existing SCA rules in the **Options** section.
 
    .. thumbnail:: /images/wazuh-dashboard/custom-dashboards/create-goal-visualization.png
       :align: center
@@ -544,23 +529,23 @@ Creating a Goal
       :title: Create goal visualization – Update button
       :alt: Create goal visualization – Update button
 
-#. Click the upper-right **Save** button and assign a title to save the visualization.
+#. Click the **Save** button in the top right corner and assign a title to save the visualization.
 
 Gauge
 ~~~~~
 
-This is a visualization that is represented as a meter. It is commonly used to display a single value within a specific range. The gauge consists of a pointer that shows the current value. This is displayed as a position along a circular or linear scale.
+This is a visualization that is represented as a meter. It is commonly used to display a single value within a specific range. The gauge consists of a pointer that shows the current value. This is displayed as a position along a circular or linear scale. Gauges are used to indicate progress, performance metrics, or levels of achievement. It shows how a metric’s value relates to reference threshold values.
 
-Gauges are used to indicate progress, performance metrics, or levels of achievement. It shows how a metric’s value relates to reference threshold values.
+The steps below show how to create a Gauge to visualize the SCA failed counts.
 
 Creating a Gauge
 ''''''''''''''''
 
-#. From the **Visualize** tab, click **Create Visualization**, select the ``Gauge`` visualization format and use ``wazuh-alerts-*`` as the index pattern name.
-#. On the **Metric** in **Metrics** data, set the following values:
+#. Click **Create new visualization** from the **Visualize** tab, select the **Gauge** visualization format, and use ``wazuh-alerts-*`` as the index pattern name.
+#. Set the following metrics in the **Data** section:
 
-   -  ``Aggregation`` = ``Max``
-   -  ``Field`` = ``data.disk_usage_%``
+   -  ``Aggregation`` = ``unique_count``
+   -  ``Field`` = ``data.sca.failed``
 
 #. Click the Update button.
 
@@ -570,7 +555,7 @@ Creating a Gauge
       :title: Create gauge visualization – Update button
       :alt: Create gauge visualization – Update button
 
-#. Click the upper-right **Save** button and assign a title to save the visualization.
+#. Click the **Save** button in the top right corner and assign a title to save the visualization.
 
 Maps
 ^^^^
