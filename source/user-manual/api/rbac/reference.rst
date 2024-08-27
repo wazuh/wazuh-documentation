@@ -129,6 +129,11 @@ agent:upgrade
 -  :api-ref:`PUT /agents/upgrade <operation/api.controllers.agent_controller.put_upgrade_agents>` (:ref:`agent:id <api_rbac_reference_resources>`, :ref:`agent:group <api_rbac_reference_resources>`)
 -  :api-ref:`PUT /agents/upgrade_custom <operation/api.controllers.agent_controller.put_upgrade_custom_agents>` (:ref:`agent:id <api_rbac_reference_resources>`, :ref:`agent:group <api_rbac_reference_resources>`)
 
+agent:uninstall
+~~~~~~~~~~~~~~~
+
+-  :api-ref:`GET /agents/uninstall <operation/api.controllers.agent_controller.get_agent_uninstall_permission>` (:ref:`*:* <api_rbac_reference_resources>`)
+
 CIS-CAT
 ^^^^^^^
 
@@ -568,6 +573,7 @@ Grant full access to all agents related functionalities.
      actions:
        - agent:create
        - group:create
+       - agent:uninstall
      resources:
        - '*:*:*'
      effect: allow
