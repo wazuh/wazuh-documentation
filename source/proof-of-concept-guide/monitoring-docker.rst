@@ -47,7 +47,7 @@ Perform the following steps to install Docker on the Ubuntu endpoint and configu
             $ curl -sSL https://get.docker.com/ | sh
             $ sudo pip3 install docker==7.1.0 urllib3==2.2.2 requests==2.32.2
 
-      .. group-tab:: Python 3.11-3.12
+      .. group-tab:: Python 3.11–3.12
 
          .. code-block:: console
 

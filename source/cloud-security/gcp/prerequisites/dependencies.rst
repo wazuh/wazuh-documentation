@@ -38,7 +38,7 @@ Run the following command to install the dependencies depending on your Python v
 
          $ sudo pip3 install google-cloud-core==1.7.1 google-cloud-pubsub==2.7.1 google-cloud-storage==1.39.0 pytz==2020.1 setuptools==68.0.0
 
-   .. group-tab:: Python 3.11-3.12
+   .. group-tab:: Python 3.11–3.12
 
       .. code-block:: console
 

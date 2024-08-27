@@ -47,7 +47,7 @@ Docker library for Python
 
          $ pip3 install docker==7.1.0 urllib3==2.2.2 requests==2.32.2
 
-   .. group-tab:: Python 3.11-3.12
+   .. group-tab:: Python 3.11–3.12
 
       .. code-block:: console
 

@@ -41,7 +41,7 @@ To install the dependencies, execute the following command:
 
          # pip3 install boto3==1.34.135 pyarrow==14.0.1 numpy==1.26.0
 
-   .. group-tab:: Python 3.11-3.12
+   .. group-tab:: Python 3.11–3.12
 
       .. code-block:: console
 

@@ -26,7 +26,7 @@ We recommend using Pip 19.3 or later to simplify the installation of the depende
 
          # pip3 install --upgrade pip
 
-   .. group-tab:: Python 3.11-3.12
+   .. group-tab:: Python 3.11–3.12
 
       .. code-block:: console
 
