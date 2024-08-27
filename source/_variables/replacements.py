@@ -2,8 +2,8 @@
 #
 # Custom replacements
 #
-# This file contains the dictionary of custom replacements. Requires the 
-# variables 'version', 'release' and 'is_latest_release' from 
+# This file contains the dictionary of custom replacements. Requires the
+# variables 'version', 'release' and 'is_latest_release' from
 # source/_variables/settings.py
 #
 
@@ -40,7 +40,7 @@ custom_replacements = {
     "|WAZUH_CURRENT_MINOR|" : version,
     "|WAZUH_CURRENT|" : release,
     "|PYTHON_CLOUD_CONTAINERS_MIN|": "3.8",
-    "|PYTHON_CLOUD_CONTAINERS_MAX|": "3.11",
+    "|PYTHON_CLOUD_CONTAINERS_MAX|": "3.12",
 
     # --- Revision numbers for Wazuh agent and manager packages versions
     # Alpine APK packages revisions
@@ -75,7 +75,7 @@ custom_replacements = {
     "|WAZUH_REVISION_DEB_AGENT_ARMHF|" : "1",
     "|WAZUH_REVISION_DEB_MANAGER_ARMHF|" : "1",
     "|WAZUH_REVISION_DEB_AGENT_PPC|" : "1",
-    #"|WAZUH_REVISION_DEB_MANAGER_PPC|" : 
+    #"|WAZUH_REVISION_DEB_MANAGER_PPC|" :
     #
     # === Wazuh indexer version revisions
     "|WAZUH_INDEXER_CURRENT_REV|" : "1", # RPM and Deb
