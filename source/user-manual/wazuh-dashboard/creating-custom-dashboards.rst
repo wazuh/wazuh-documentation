@@ -702,12 +702,14 @@ VisBuilder
 
 Visualization Builder is an intuitive tool that allows users to create customized visualizations without programming knowledge. It is beneficial for users who want to quickly generate visual representations of their data without extensive technical knowledge.
 
-As at the time of writing this document, this visualization is experimental. The design and implementation are less mature than stable visualizations and might be subject to change.
+As of the time of writing this document, this visualization is experimental. The design and implementation are less mature than stable visualizations and might be subject to change.
+
+The steps below show how to use Visualization Builder to present :doc:`MITRE </user-manual/ruleset/mitre>` technique and tactics.
 
 Creating a Visualization Builder
 ''''''''''''''''''''''''''''''''
 
-#. From the **Visualize** tab, click **Create Visualization**, select the ``VisBuilder`` visualization format and use ``wazuh-alerts-*`` as the index pattern name.
+#. Click **Create new visualization** from the **Visualize** tab, select the **VisBuilder** visualization format and use ``wazuh-alerts-*`` as the index pattern name.
 
    .. thumbnail:: /images/wazuh-dashboard/custom-dashboards/create-visbuilder-visualization.png
       :align: center
@@ -715,11 +717,10 @@ Creating a Visualization Builder
       :title: Create VisBuilder visualization
       :alt: Create VisBuilder visualization
 
-   Drag a field to the configuration panel to generate a visualization.
-
-#. On the ``Y-axis`` set aggregation to count.
-#. On an ``X-axis`` ``place rule.mitre.technique``.
-#. On the split series place ``rule.mitre.tactic``.
+#. Drag a field to the configuration panel to generate a visualization.
+#. Set aggregation to count on the ``Y-axis``.
+#. Set ``rule.mitre.technique`` on an ``X-axis``.
+#. Set ``rule.mitre.tactics`` on the split series.
 
    .. thumbnail:: /images/wazuh-dashboard/custom-dashboards/create-visbuilder-visualization-data.png
       :align: center
@@ -727,15 +728,19 @@ Creating a Visualization Builder
       :title: Create VisBuilder visualization – Data
       :alt: Create VisBuilder visualization – Data
 
+#. Click the **Save** button in the top right corner and assign a title to save the visualization.
+
 TSVB
 ~~~~
 
 Time Series Visual Builder (TSVB) is a component of the Wazuh dashboard that allows users to create visualizations and analyze time series data using a visual pipeline interface. It provides features such as aggregations, filters, and metrics specifically tailored for time-based analysis.
 
+The steps below show how to use Time Series Visual Builder to visualize :doc:`MITRE </user-manual/ruleset/mitre>` tactics count within a timeframe.
+
 Creating a TSVB
 '''''''''''''''
 
-#. From the **Visualize** tab, select the ``TSVB`` visualization format.
+#. Select the **TSVB** visualization format from the **Visualize** tab.
 
    .. thumbnail:: /images/wazuh-dashboard/custom-dashboards/create-tsvb-visualization.png
       :align: center
@@ -743,7 +748,7 @@ Creating a TSVB
       :title: Create TSVB visualization
       :alt: Create TSVB visualization
 
-#. On the **Metric** in **Data**, set the following values:
+#. Set the following values on the **Metric** in **Data**:
 
    -  ``Aggregation`` = ``Count``
    -  ``Group by`` = ``Terms``
@@ -754,6 +759,8 @@ Creating a TSVB
       :width: 80%
       :title: Create TSVB visualization – Data
       :alt: Create TSVB visualization – Data
+
+#. Click the **Save** button in the top right corner and assign a title to save the visualization.
 
 Others
 ^^^^^^
