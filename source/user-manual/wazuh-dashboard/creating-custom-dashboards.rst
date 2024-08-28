@@ -778,7 +778,7 @@ This is a visual representation of text data where words are displayed in varyin
 Creating a tag cloud
 ''''''''''''''''''''
 
-#. From the **Visualize** tab, click **Create Visualization**, select the ``Tag cloud`` visualization format and use ``wazuh-alerts-*`` as the index pattern name.
+#. Click **Create new visualization** from the **Visualize** tab, select the **Tag cloud** visualization format, and use ``wazuh-alerts-*`` as the index pattern name.
 
    .. thumbnail:: /images/wazuh-dashboard/custom-dashboards/create-tag-cloud-visualization.png
       :align: center
@@ -786,14 +786,14 @@ Creating a tag cloud
       :title: Create tag cloud visualization
       :alt: Create tag cloud visualization
 
-#. On the **Metric** in **Metrics** data, set the following value:
+#. Set the following value on the **Metric** in **Metrics** data:
 
    -  ``Tag size`` = ``Count``
 
 #. Add a new **Tag** in **Bucket** data and set the following values:
 
    -  ``Aggregation`` = ``Terms``
-   -  ``Field`` = ``rule.mitre.tactic`` 
+   -  ``Field`` = ``rule.mitre.tactic``
    -  ``Order by`` = ``Metric: Count``
 
 #. Click the **Update** button.
@@ -804,7 +804,7 @@ Creating a tag cloud
       :title: Create tag cloud visualization – Update button
       :alt: Create tag cloud visualization – Update button
 
-#. Click the upper-right **Save** button and assign a title to save the visualization.
+#. Click the **Save** button in the top right corner and assign a title to save the visualization.
 
 Markdown
 ~~~~~~~~
@@ -814,7 +814,7 @@ Markdown is a lightweight markup language that is used for formatting text. It a
 Creating a markdown
 '''''''''''''''''''
 
-From the **Visualize** tab, click **Create Visualization**, select the ``Markdown`` visualization format and use ``wazuh-alerts-*`` as the index pattern name.
+#. Click **Create new visualization** from the **Visualize** tab, select the **Markdown** visualization format, and use ``wazuh-alerts-*`` as the index pattern name.
 
 .. thumbnail:: /images/wazuh-dashboard/custom-dashboards/create-markdown-visualization.png
    :align: center
@@ -822,12 +822,9 @@ From the **Visualize** tab, click **Create Visualization**, select the ``Markdow
    :title: Create markdown visualization
    :alt: Create markdown visualization
 
-After that, we need to do the following:
-
-#. On the **Data** tab, add the text content in the given text-area.
-#. On the **Options** tab, Increase or decrease the font using the controller.
+#. Add the text content in the given text-area on the **Data** tab.
+#. Increase or decrease the font using the controller on the **Options** tab.
 #. Click on the **Update** button to show the markdown:
-
 
    .. thumbnail:: /images/wazuh-dashboard/custom-dashboards/create-markdown-visualization-update-button.png
       :align: center
@@ -835,7 +832,7 @@ After that, we need to do the following:
       :title: Create markdown visualization – Update button
       :alt: Create markdown visualization – Update button
 
-#. Click the upper-right **Save** button and assign a title to save the visualization.
+#. Click the **Save** button in the top right corner and assign a title to save the visualization.
 
 Controls
 ~~~~~~~~
@@ -847,7 +844,7 @@ As at the time of writing this document, this visualization is experimental. The
 Creating controls
 '''''''''''''''''
 
-#. From the **Visualize** tab, click **Create Visualization**, select the ``Controls`` visualization format.
+#. Click **Create new visualization** from the **Visualize** tab, select the **Controls** visualization format.
 
    .. thumbnail:: /images/wazuh-dashboard/custom-dashboards/create-controls-visualization.png
       :align: center
@@ -855,7 +852,7 @@ Creating controls
       :title: Create controls visualization
       :alt: Create controls visualization
 
-#. Add a new ``Options list`` and set the control Label as Mitre tactic.
+#. Add a new ``Options list`` and set the control Label as :doc:`MITRE </user-manual/ruleset/mitre>` tactic.
 #. Choose a source for the chart. Here we selected ``wazuh-alerts-*`` as the index to use.
 #. Select the field ``rule.mitre.tactic``.
 #. Add a new ``Range slider`` and set the control Label as Quantity.
@@ -881,7 +878,7 @@ Gantt charts are valuable for project management or scheduling tasks over time. 
 Creating a Gantt chart
 ''''''''''''''''''''''
 
-#. From the **Visualize** tab, click **Create Visualization**, select the ``Gantt Chart`` visualization format and use ``wazuh-alerts-*`` as the index pattern name.
+#. Click **Create new visualization** from the **Visualize** tab, select the **Gantt Chart** visualization format and use ``wazuh-alerts-*`` as the index pattern name.
 
    .. thumbnail:: /images/wazuh-dashboard/custom-dashboards/create-gantt-chart-visualization.png
       :align: center
@@ -890,12 +887,12 @@ Creating a Gantt chart
       :alt: Create Gantt chart visualization
 
 #. Choose a source for the chart. Here we selected ``wazuh-alerts-*`` as the index to use.
-#. On the **Metric** in **Metrics** data, under **Event**, select a log data.
-#. On the **Start time** field for the Event, select a ``timestamp`` field for the start of a schedule. This is the timestamp used for the beginning of the selected Event.
-#. On the **Duration** field for the Event, select a time interval field for the Event duration. This is the amount of time that is added to the start time.
-#. On the **Results** field, select the number of events that will be shown on the chart. The events will be sequenced based on the **Start time**, from the earliest to the latest.
-#. To adjust the colors, axis labels and time format, navigate to the Panel settings.
-#. Click the **Update** button. 
+#. Select a log data on the **Metric** in **Metrics** data, under Event.
+#. Select a ``timestamp`` field for the start of a schedule on the **Start time** field for the Event. This is the timestamp used for the beginning of the selected Event.
+#. Select a time interval field for the Event duration on the **Duration** field for the Event. This is the amount of time that is added to the start time.
+#. Select the number of events that will be shown on the chart on the **Results** field. The events will be sequenced based on the **Start time**, from the earliest to the latest.
+#. Navigate to the Panel settings to adjust the colors, axis labels and time format.
+#. Click the **Update** button.
 #. Click the upper-right **Save** button and assign a title to save the visualization.
 
 Hover over a bar to see the duration of that event.
@@ -910,7 +907,7 @@ They are commonly used in historical analysis, project planning, or storytelling
 Creating Timeline
 '''''''''''''''''
 
-#. From the **Visualize** tab, click **Create Visualization**, select the ``Timeline`` visualization format.
+#. Click **Create new visualization** from the **Visualize** tab, and select the **Timeline** visualization format.
 
    .. thumbnail:: /images/wazuh-dashboard/custom-dashboards/create-timeline-visualization.png
       :align: center
@@ -918,11 +915,11 @@ Creating Timeline
       :title: Create timeline visualization
       :alt: Create timeline visualization
 
-#. Choose a source for the chart. In the Timeline expression windows, within ``.opensearch(*)``. The expression ``.opensearch(*)`` is a wildcard value that represents all the indexes currently within the Wazuh indexer, combined together. Here we selected ``wazuh-alerts-*`` as the index to use.
+#. Choose a source for the chart. In the Timeline expression windows, within ``.es(*)``. The expression ``.es(*)`` is a wildcard value that represents all the indexes currently within the Wazuh indexer, combined together. Here we selected ``wazuh-alerts-*`` as the index to use.
 
    .. code-block:: none
 
-      .opensearch(index=wazuh-alerts-*)
+      .es(index=wazuh-alerts-*)
 
    .. thumbnail:: /images/wazuh-dashboard/custom-dashboards/create-timeline-visualization-source.png
       :align: center
