@@ -560,12 +560,14 @@ Creating a Gauge
 Maps
 ^^^^
 
-**Maps**: These are visual representations of geographical regions. Maps display spatial data, such as locations, boundaries, or distributions, on a graphical interface. They provide a means to explore and analyze geographic information, making them valuable for various applications, including navigation, data visualization, and spatial analysis.
+These are visual representations of geographical regions. Maps display spatial data, such as locations, boundaries, or distributions, on a graphical interface. They provide a means to explore and analyze geographic information, making them valuable for various applications, including navigation, data visualization, and spatial analysis.
+
+The steps below show how to create a geographic map.
 
 Creating a map
 ~~~~~~~~~~~~~~
 
-#. From the **Visualize** tab, click **Create Visualization**, select the ``Maps`` visualization format and use ``wazuh-alerts-*`` as the index pattern name.
+#. Click **Create new visualization** from the **Visualize** tab, select the **Maps** visualization format, and use ``wazuh-alerts-*`` as the index pattern name.
 
    .. thumbnail:: /images/wazuh-dashboard/custom-dashboards/create-map-visualization.png
       :align: center
@@ -585,7 +587,7 @@ Creating a map
 #. Set the following values in the New layer:
 
    -  ``Data source`` = ``wazuh-alerts-*``
-   -  ``Geospatial field`` = ``GeoLocation.location``
+   -  ``Geospatial field`` = ``geo.coordinates``
    -  ``Number of documents`` = ``1000``
 
    .. thumbnail:: /images/wazuh-dashboard/custom-dashboards/create-map-visualization-new-layer.png
@@ -602,7 +604,7 @@ Creating a map
       :title: Create map visualization – Update button
       :alt: Create map visualization – Update button
 
-#. Click the upper-right **Save** button and assign a title to save the visualization.
+#. Click the **Save** button in the top right corner and assign a title to save the visualization.
 
 The following is a list of maps used in visualization:
 
@@ -616,10 +618,12 @@ This uses geographic coordinates to display data points or regions on a map. Coo
 
 Coordinate maps are ideal for plotting latitude and longitude coordinates. This allows the visualization of spatial data, such as locations, regions, or density. They are commonly used in geographical analysis, tracking data by location, or displaying demographic information.
 
+The steps below show how to create a coordinate map based on the origin location.
+
 Creating a Coordinate map
 '''''''''''''''''''''''''
 
-#. From the **Visualize** tab, click **Create Visualization**, select the ``Coordinate Map`` visualization format and use ``wazuh-alerts-*`` as the index pattern name.
+#. Click **Create new visualization** from the **Visualize** tab, select the **Coordinate Map** visualization format, and use ``wazuh-alerts-*`` as the index pattern name.
 
    .. thumbnail:: /images/wazuh-dashboard/custom-dashboards/create-coordinate-map-visualization.png
       :align: center
@@ -627,14 +631,14 @@ Creating a Coordinate map
       :title: Create coordinate map visualization
       :alt: Create coordinate map visualization
 
-#. On the **Metric** in **Data**, set the following values:
+#. Set the following values on the **Metric** in **Data**:
 
    -  ``Aggregation`` = ``Count``
 
 #. Add a ``Geo coordinate`` in **Buckets** and set the following values:
 
    -  ``Aggregation`` = ``Geohash``
-   -  ``Field`` = ``GeoLocation.location``
+   -  ``Field`` = ``OriginLocation``
 
 #. Click the **Update** button.
 
@@ -644,17 +648,19 @@ Creating a Coordinate map
       :title: Create coordinate map visualization – Update button
       :alt: Create coordinate map visualization – Update button
 
-#. Click the upper-right **Save** button and assign a title to save the visualization.
+#. Click the **Save** button in the top right corner and assign a title to save the visualization.
 
 Region Map
 ~~~~~~~~~~
 
 This is a map-based visualization that displays data by dividing regions into distinct boundaries. Region maps are suitable for displaying data at a territorial level. They are often used in geopolitical analysis, demographic comparisons, or election results.
 
+The steps below show how to create a region map based on the destination country.
+
 Create region map
 '''''''''''''''''
 
-#. From the **Visualize** tab, click **Create Visualization**, select the ``Region Map`` visualization format and use ``wazuh-alerts-*`` as the index pattern name.
+#. Click **Create new visualization** from the **Visualize** tab, select the **Region Map** visualization format and use ``wazuh-alerts-*`` as the index pattern name.
 
    .. thumbnail:: /images/wazuh-dashboard/custom-dashboards/create-region-map-visualization.png
       :align: center
@@ -662,7 +668,7 @@ Create region map
       :title: Create region map visualization
       :alt: Create region map visualization
 
-#. On the **Metric** in **Data**, set the following values:
+#. Set the following values on the **Metric** in **Data**:
 
    -  ``Aggregation`` = ``Count``
 
@@ -681,7 +687,7 @@ Create region map
       :title: Create region map visualization – Update button
       :alt: Create region map visualization – Update button
 
-#. Click the upper-right **Save** button and assign a title to save the visualization.
+#. Click the **Save** button in the top right corner and assign a title to save the visualization.
 
 Time series
 ^^^^^^^^^^^
