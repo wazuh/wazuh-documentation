@@ -56,7 +56,7 @@ Amazon configuration native integration
       :width: 70%  
 
 Amazon configuration with Kinesis
---------------------
+---------------------------------
 
 .. deprecated:: 5.0
 
