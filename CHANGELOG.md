@@ -57,7 +57,6 @@ All notable changes to this project will be documented in this file.
 ### Removed
 
 - Remove unreferenced files. ([#7222](https://github.com/wazuh/wazuh-documentation/pull/7222))
-- Removed the agent info task from the multiprocessing task list. ([#7173](https://github.com/wazuh/wazuh-documentation/pull/7173))
 - Removed the ``logs.level`` app setting and the references to the plugin log files and *App logs* application. ([#6810](https://github.com/wazuh/wazuh-documentation/pull/6810))
 - Removed PowerPC package references from the packages list. ([#7684](https://github.com/wazuh/wazuh-documentation/pull/7684))
 
