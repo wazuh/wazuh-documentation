@@ -129,7 +129,7 @@ The Rules section allows users to query existing rules using Wazuh Query Languag
 Decoders
 ^^^^^^^^
 
-The Decoders section allows users to query existing decoders using :ref:`Wazuh Query Language <>` and manage custom decoders.
+The Decoders section allows users to query existing decoders using :doc:`Wazuh Query Language <../wazuh-dashboard/queries>` and manage custom decoders.
 
 .. thumbnail:: /images/wazuh-dashboard/navigating/decoders.png
    :align: center
