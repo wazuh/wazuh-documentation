@@ -52,9 +52,9 @@ chunk_size
 Size in KB of the chunk that will be used to send the WPK file.
 
 +--------------------+----------------------------------+
-| **Default value**  | 512                              |
+| **Default value**  | 32768                            |
 +--------------------+----------------------------------+
-| **Allowed values** | Any number between 64 and 32768  |
+| **Allowed values** | Any number between 64 and 60000  |
 +--------------------+----------------------------------+
 | **Required**       | no                               |
 +--------------------+----------------------------------+
