@@ -356,7 +356,7 @@ Users can also receive notifications when a new Wazuh update is available, with 
 App Settings
 ^^^^^^^^^^^^
 
-The **Configuration** tab gives a quick look at the Wazuh dashboard configuration file. It also allows the user to modify the Wazuh dashboard settings. The documentation for the ``/usr/share/wazuh-dashboard/data/wazuh/config/wazuh.yml`` file can be found in the :ref:`Wazuh dashboard settings <>` section.
+The **Configuration** tab gives a quick look at the Wazuh dashboard configuration file. It also allows the user to modify the Wazuh dashboard settings. The documentation for the ``/usr/share/wazuh-dashboard/data/wazuh/config/wazuh.yml`` file can be found in the :doc:`Wazuh dashboard settings <settings>` section.
 
 .. thumbnail:: /images/wazuh-dashboard/navigating/app-settings.png
    :align: center
