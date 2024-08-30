@@ -55,6 +55,10 @@ Amazon configuration native integration
       :align: center
       :width: 70%  
 
+.. note::
+    
+    Specify the name with :ref:`waf_acls <bucket_waf_acls>` to iterate over a specific WAF ACL. By default, it iterates over all WAF ACLs.
+
 Amazon configuration with Kinesis
 ---------------------------------
 
