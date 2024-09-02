@@ -855,9 +855,16 @@ Creating controls
 #. Add a new ``Options list`` and set the control Label as :doc:`MITRE </user-manual/ruleset/mitre>` tactic.
 #. Choose a source for the chart. Here we selected ``wazuh-alerts-*`` as the index to use.
 #. Select the field ``rule.mitre.tactic``.
+
+   .. thumbnail:: /images/wazuh-dashboard/custom-dashboards/select-rule-mitre-tactic.png
+      :align: center
+      :width: 80%
+      :title: Select field ``rule.mitre.tactic``
+      :alt: Select field ``rule.mitre.tactic``
+
 #. Add a new ``Range slider`` and set the control Label as Quantity.
 #. Select ``wazuh-alerts-*`` as the index to use.
-#. Select the field ``rule.level``.
+#. Select ``rule.level`` as the **Field**.
 #. Click the **Update** button.
 
    .. thumbnail:: /images/wazuh-dashboard/custom-dashboards/create-controls-visualization-update-button.png
@@ -915,11 +922,11 @@ Creating Timeline
       :title: Create timeline visualization
       :alt: Create timeline visualization
 
-#. Choose a source for the chart. In the Timeline expression windows, within ``.es(*)``. The expression ``.es(*)`` is a wildcard value that represents all the indexes currently within the Wazuh indexer, combined together. Here we selected ``wazuh-alerts-*`` as the index to use.
+#. Choose a source for the chart. In the Timeline expression windows, within ``.opensearch(*)``. The expression .opensearch(*) is a wildcard value that represents all the indexes currently within the Wazuh indexer, combined together. Here we selected ``wazuh-alerts-*`` as the index to use.
 
    .. code-block:: none
 
-      .es(index=wazuh-alerts-*)
+      .opensearch(index=wazuh-alerts-*)
 
    .. thumbnail:: /images/wazuh-dashboard/custom-dashboards/create-timeline-visualization-source.png
       :align: center
