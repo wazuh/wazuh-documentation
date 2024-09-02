@@ -567,7 +567,7 @@ The steps below show how to create a geographic map.
 Creating a map
 ~~~~~~~~~~~~~~
 
-#. Click **Create new visualization** from the **Visualize** tab, select the **Maps** visualization format, and use ``wazuh-alerts-*`` as the index pattern name.
+#. Click **Create new visualization** from the **Visualize** tab, select the **Maps** visualization format.
 
    .. thumbnail:: /images/wazuh-dashboard/custom-dashboards/create-map-visualization.png
       :align: center
@@ -587,7 +587,7 @@ Creating a map
 #. Set the following values in the New layer:
 
    -  ``Data source`` = ``wazuh-alerts-*``
-   -  ``Geospatial field`` = ``geo.coordinates``
+   -  ``Geospatial field`` = ``GeoLocation.location``
    -  ``Number of documents`` = ``1000``
 
    .. thumbnail:: /images/wazuh-dashboard/custom-dashboards/create-map-visualization-new-layer.png
@@ -638,7 +638,7 @@ Creating a Coordinate map
 #. Add a ``Geo coordinate`` in **Buckets** and set the following values:
 
    -  ``Aggregation`` = ``Geohash``
-   -  ``Field`` = ``OriginLocation``
+   -  ``Field`` = ``GeoLocation.location``
 
 #. Click the **Update** button.
 
@@ -675,9 +675,11 @@ Create region map
 #. Add a ``Shape field`` in **Buckets** and set the following values:
 
    -  ``Aggregation`` = ``Terms``
-   -  ``Field`` = ``DestCountry``
+   -  ``Field`` = ``GeoLocation.country_name``
    -  ``Order by`` = ``Metric: Count``
    -  ``Order`` = ``Descending``
+
+#. Select ``Name`` as **Join field** under the **Layer Options** tab.
 
 #. Click the **Update** button.
 
@@ -959,7 +961,7 @@ This is a versatile declarative language for creating interactive visualizations
 Creating dashboards
 -------------------
 
-Dashboards transform your data from one or more single visualization perspectives into a group of visualizations that provide a clear representation of your data. This allows you to concentrate solely on the data that matters to you by presenting a dynamic representation for your data.
+Dashboards transform your data from one or more single visualization perspectives into a group of visualizations that provide a clear representation of your data. This allows you to concentrate solely on the data that matters to you by presenting a dynamic representation of your data.
 
 To create a custom dashboard, do the following:
 
