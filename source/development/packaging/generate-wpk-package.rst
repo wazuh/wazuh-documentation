@@ -41,7 +41,7 @@ Execute the ``generate_wpk_package.sh`` script, with the different options you d
      -t,   --target-system <target> [Required] Select target wpk to build [linux/windows/macos].
      -b,   --branch <branch>        [Required] Select Git branch.
      -d,   --destination <path>     [Required] Set the destination path of package.
-     -pn,  --package-name <name>    [Required] Path to package file (rpm, deb, apk, msi, pkg) to pack in wpk.
+     -pn,  --package-name <name>    [Required] Path to package file (rpm, deb, msi, pkg) to pack in wpk.
      -o,   --output <name>          [Required] Name to the output package.
      -k,   --key-dir <path>         [Optional] Set the WPK key path to sign package.
      --aws-wpk-key                  [Optional] AWS Secrets manager Name/ARN to get WPK private key.
