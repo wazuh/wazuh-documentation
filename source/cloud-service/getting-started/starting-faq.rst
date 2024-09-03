@@ -93,7 +93,7 @@ Data rotation is determined by two conditions: the indexed data retention and th
 What happens if the average/peak EPS is exceeded?
 ----------------------------------------------------
 
-If you send more events per second than allowed by the average/peak EPS setting, events start queuing, and if the queue becomes full, the incoming events will be discarded, which may lead to potential event loss.
+If you send more events per second than allowed by the average/peak EPS setting, events start queuing, and if the queue becomes full, the incoming events will be discarded, which may lead to potential event loss. Wazuh managers use default queue and buffer values to handle event processing. These default settings are located within the :ref:`internal options </user-manual/reference/internal-options.html#analysisd>` section for analysisd. Please note that Wazuh reserves the right to change these default values without prior notice to ensure optimal performance and service improvement in client environments.
 
 Can I increase the average/peak EPS
 -----------------------------------
