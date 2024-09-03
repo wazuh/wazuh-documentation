@@ -154,6 +154,15 @@ redirections.push(
     '4.9': '/user-manual/agent/agent-management/remote-upgrading/wpk-files/create-custom-wpk.html#generating-wpk-packages-manually',
   },
   {
+    'target': ['4.8=>4.9', '4.9=>4.8'],
+    '4.8': '/user-manual/wazuh-dashboard/config-file.html',
+    '4.9': '/user-manual/wazuh-dashboard/settings.html',
+  },
+  {
+    'target': ['4.8=>4.9', '4.9=>4.8'],
+    '4.8': '/user-manual/wazuh-dashboard/management.html',
+    '4.9': '/user-manual/wazuh-dashboard/navigating-the-wazuh-dashboard.html#dashboard-management',
+  },
 );
 
 /* Pages added in 4.9 */
@@ -181,6 +190,8 @@ newUrls['4.9'] = [
   '/user-manual/agent/agent-management/remote-upgrading/wpk-files/index.html',
   '/user-manual/agent/agent-management/remote-upgrading/wpk-files/install-custom-wpk.html',
   '/user-manual/agent/agent-management/remote-upgrading/wpk-files/wpk-list.html',
+  '/user-manual/wazuh-dashboard/navigating-the-wazuh-dashboard.html',
+  '/user-manual/wazuh-dashboard/settings.html',
 ];
 
 /* Pages no longer available in 4.9 */
@@ -200,6 +211,8 @@ removedUrls['4.9'] = [
   '/user-manual/agent/agent-management/remote-upgrading/install-custom-wpk.html',
   '/user-manual/agent/agent-management/remote-upgrading/custom-repository.html',
   '/user-manual/agent/agent-management/remote-upgrading/wpk-list.html',
+  '/user-manual/wazuh-dashboard/config-file.html',
+  '/user-manual/wazuh-dashboard/management.html',
 ];
 
 /* *** RELEASE 4.8 ****/
