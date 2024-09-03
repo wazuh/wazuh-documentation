@@ -412,6 +412,16 @@ Solaris
 |         |     SPARC    | |Solaris11_SPARC|       |
 +---------+--------------+-------------------------+
 
+AIX
+^^^
+
+.. |AIX_powerpc| replace:: `wazuh-agent-|WAZUH_CURRENT_AIX|-|WAZUH_REVISION_AIX|.aix.ppc.rpm <https://packages.wazuh.com/|WAZUH_CURRENT_MAJOR_AIX|/aix/wazuh-agent-|WAZUH_CURRENT_AIX|-|WAZUH_REVISION_AIX|.aix.ppc.rpm>`__ (`sha512 <https://packages.wazuh.com/|WAZUH_CURRENT_MAJOR_AIX|/checksums/wazuh/|WAZUH_CURRENT_AIX|/wazuh-agent-|WAZUH_CURRENT_AIX|-|WAZUH_REVISION_AIX|.aix.ppc.rpm.sha512>`__)
+
++-----------------+--------------+----------------------------------------+
+| Version         | Architecture | Package                                |
++=================+==============+========================================+
+| 6.1 or greater  |    PowerPC   | |AIX_powerpc|                          |
++-----------------+--------------+----------------------------------------+
 
 HP-UX
 ^^^^^
