@@ -23,5 +23,4 @@ The following section provides an overview of the Wazuh dashboard, covering topi
    custom-branding
    settings
    troubleshooting
-   management
    certificates

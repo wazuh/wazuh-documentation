@@ -234,6 +234,15 @@ If the restart does not solve the problem, we can execute this process manually:
 
    These actions take into account that the index that stores the saved objects must have valid field mappings. The field mappings are defined through a template, so they should exist before the index is created. This template is added when the Wazuh dashboard starts if it doesn’t exist.
 
+Application not found
+---------------------
+
+If you encounter the message *Application Not Found* when accessing the Wazuh dashboard after upgrading, it might be that the configuration file ``/etc/wazuh-dashboard/opensearch_dashboards.yml`` wasn't overwritten with new changes. To resolve this issue, update the ``uiSettings.overrides.defaultRoute`` setting with the ``/app/wz-home`` value in the configuration file:
+
+.. code-block:: yaml
+
+   uiSettings.overrides.defaultRoute: /app/wz-home
+
 None of the above solutions are fixing my problem
 -------------------------------------------------
 

@@ -12,10 +12,51 @@ The configuration file shows the default values for all of the possible options.
 
 The configuration file reference is organized into sections:
 
-.. contents::
-   :local:
-   :depth: 2
-   :backlinks: none
+-  General options
+
+   -  pattern
+   -  timeout
+   -  ip.selector
+   -  ip.ignore
+   -  logs.level
+   -  hideManagerAlerts
+   -  alerts.sample.prefix
+   -  enrollment.dns
+   -  enrollment.password
+   -  cron.prefix
+
+-  Monitoring
+
+   -  wazuh.monitoring.enabled
+   -  wazuh.monitoring.frequency
+   -  wazuh.monitoring.pattern
+   -  wazuh.monitoring.creation
+
+-  Health check
+
+   -  checks.pattern
+   -  checks.template
+   -  checks.api
+   -  checks.setup
+   -  checks.fields
+   -  checks.metaFields
+   -  checks.timeFilter
+   -  checks.maxBuckets
+
+-  Advanced index options
+
+   -  wazuh.monitoring.shards
+   -  wazuh.monitoring.replicas
+
+-  Cron statistics
+
+   -  cron.statistics.status
+   -  cron.statistics.apis
+   -  cron.statistics.interval
+   -  cron.statistics.index.name
+   -  cron.statistics.index.creation
+   -  cron.statistics.shards
+   -  cron.statistics.index.replicas
 
 General
 -------

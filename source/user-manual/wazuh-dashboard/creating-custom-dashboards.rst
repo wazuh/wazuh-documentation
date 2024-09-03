@@ -207,7 +207,7 @@ Basic charts
 
 The following is a list of the basic charts for visualization:
 
--  **Bar, area, and line charts**: These charts are used for comparing different series in x-axis and y-axis.
+-  **Bar, area, and line charts**: These charts are used for comparing different series in ``x-axis`` and ``y-axis``.
 -  **Pie charts**: These charts are used when all of the fields are related to each other.
 -  **Heat maps**: These are used to shade the cells within a matrix.
 
@@ -253,7 +253,7 @@ The steps below detail how to create a vertical bar visualization that shows var
 
 #. Click **Create new visualization** from the **Visualize** tab, select the **Vertical Bar** visualization format and use ``wazuh-alerts-*`` as the index pattern name.
 
-#. Set the following value in the **Data** section, on the Y-axis, in **Metrics**:
+#. Set the following value in the **Data** section, on the ``Y-axis``, in **Metrics**:
 
    -  ``Aggregation`` = ``Count``
 
@@ -287,7 +287,7 @@ Creating a Pie chart
 
 #. Click **Create new visualization** from the **Visualize** tab, select the **Pie** visualization format and use ``wazuh-alerts-*`` as the index pattern name.
 
-#. Set the following value in the **Data** section, on the Slice size, in **Metrics**:
+#. Set the following value in the **Data** section, on the ``Slice size``, in **Metrics**:
 
    -  ``Aggregation`` = ``Count``
 
@@ -755,6 +755,9 @@ Creating a TSVB
    -  ``Aggregation`` = ``Count``
    -  ``Group by`` = ``Terms``
    -  ``By`` = ``rule.mitre.tactic``
+   -  ``Top`` = ``10``
+   -  ``Order by`` = ``Doc Count (default)``
+   -  ``Direction`` = ``Descending``
 
    .. thumbnail:: /images/wazuh-dashboard/custom-dashboards/create-tsvb-visualization-data.png
       :align: center
@@ -818,11 +821,11 @@ Creating a markdown
 
 #. Click **Create new visualization** from the **Visualize** tab, select the **Markdown** visualization format, and use ``wazuh-alerts-*`` as the index pattern name.
 
-.. thumbnail:: /images/wazuh-dashboard/custom-dashboards/create-markdown-visualization.png
-   :align: center
-   :width: 80%
-   :title: Create markdown visualization
-   :alt: Create markdown visualization
+   .. thumbnail:: /images/wazuh-dashboard/custom-dashboards/create-markdown-visualization.png
+      :align: center
+      :width: 80%
+      :title: Create markdown visualization
+      :alt: Create markdown visualization
 
 #. Add the text content in the given text-area on the **Data** tab.
 #. Increase or decrease the font using the controller on the **Options** tab.
@@ -895,7 +898,6 @@ Creating a Gantt chart
       :title: Create Gantt chart visualization
       :alt: Create Gantt chart visualization
 
-#. Choose a source for the chart. Here we selected ``wazuh-alerts-*`` as the index to use.
 #. Select a log data on the **Metric** in **Metrics** data, under Event.
 #. Select a ``timestamp`` field for the start of a schedule on the **Start time** field for the Event. This is the timestamp used for the beginning of the selected Event.
 #. Select a time interval field for the Event duration on the **Duration** field for the Event. This is the amount of time that is added to the start time.
@@ -924,7 +926,7 @@ Creating Timeline
       :title: Create timeline visualization
       :alt: Create timeline visualization
 
-#. Choose a source for the chart. In the Timeline expression windows, within ``.opensearch(*)``. The expression .opensearch(*) is a wildcard value that represents all the indexes currently within the Wazuh indexer, combined together. Here we selected ``wazuh-alerts-*`` as the index to use.
+#. Choose a source for the chart. In the Timeline expression windows, within ``.opensearch(*)``. The expression ``.opensearch(*)`` is a wildcard value that represents all the indexes currently within the Wazuh indexer, combined together. Here we selected ``wazuh-alerts-*`` as the index to use.
 
    .. code-block:: none
 
@@ -958,8 +960,8 @@ Vega
 
 This is a versatile declarative language for creating interactive visualizations. It allows users to define visualizations using JSON syntax. It allows users to define complex visualizations using JSON syntax and is suitable for advanced data visualization needs.
 
-Creating dashboards
--------------------
+Creating a dashboard
+--------------------
 
 Dashboards transform your data from one or more single visualization perspectives into a group of visualizations that provide a clear representation of your data. This allows you to concentrate solely on the data that matters to you by presenting a dynamic representation of your data.
 
