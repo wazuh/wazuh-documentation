@@ -23,7 +23,7 @@ The wazuh-modulesd program manages the Wazuh modules described below.
 
 .. topic:: CIS-CAT wodle
 
-  The CIS-CAT wodle allows you to run CIS policy scans visualizing the results of assessments in the Wazuh dashboard. See the :doc:`CIS-CAT integration <../../capabilities/policy-monitoring/ciscat/ciscat>` for more information on this functionality.
+  The CIS-CAT wodle allows you to run CIS policy scans visualizing the results of assessments in the Wazuh dashboard.
 
 .. topic:: Command wodle
 
