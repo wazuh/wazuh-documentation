@@ -1,135 +1,536 @@
 .. Copyright (C) 2015, Wazuh, Inc.
 
 .. meta::
-  :description: Advance filtering is possible using the Wazuh dashboard's queries. Learn more about it in this section of the Wazuh documentation.
- 
-.. _dashboard-queries:
+  :description: Wazuh Query Language (WQL) is a text-based language designed to allow users to perform advanced data filtering in the Wazuh dashboard. Learn more in this section of the documentation.
 
-Filtering data using the Wazuh Query Language
-=============================================
+Filtering data using Wazuh Query Language (WQL)
+===============================================
 
-The query language to use depends on where the data is coming from:
+Wazuh Query Language (WQL) is a text-based language designed to allow users to perform advanced data filtering in the Wazuh dashboard. WQL stands out with its user-friendly syntax which leverages the Wazuh server API to facilitate advanced data analysis to gain security insights.
 
-- Wazuh API
-- Wazuh indexer
+Beyond basic data retrieval, WQL extends the functionality of the Wazuh dashboard search bars, particularly within specialized tabs. This provides a seamless user experience, allowing for intuitive navigation and data manipulation on the Wazuh dashboard.
 
-Wazuh API queries
------------------
+This guide shows the specifics of operators, values, separators, and the unique syntax of WQL. With WQL, you can filter for specific threat group names or conduct a broad search for related terms. WQL is case-sensitive, meaning it differentiates between uppercase and lowercase letters. Therefore, when writing queries, it is important to use the correct case for identifiers, keywords, and other elements to ensure accurate and effective query execution.
 
-The WQL search bars found in various sections of the Wazuh dashboard, use the Wazuh Query Language to query the API. This language is based on the :ref:`Wazuh API query language <queries>`.
+The WQL expands the search bar functionality to specialized tabs on the Wazuh dashboard. These tabs include the following:
 
-.. thumbnail:: ../../images/wazuh-dashboard/queries/search-bar-wql.png
-    :title: Search bar using WQL with implicit filter
-    :alt: Search bar using WQL with implicit filter
-    :align: left
-    :width: 100%
+-  Security Configuration Assessment
+-  Endpoint summary
+-  MITRE ATT&CK Intelligence
+-  Agent Inventory data
+-  Rule management
+-  Decoder management
+-  CDB list management
+-  Group management
 
+WQL queries
+-----------
 
-There are two query modes:
+WQL enables precise data retrieval by defining detailed criteria. This approach requires defining the field, operator, and value, ensuring the return of accurate and relevant data. The structure of these queries follows a simple pattern: ``fieldname operator value``.
 
-- :ref:`explicit <explicit_queries>`: The search contains a field, an operator, and a value.
+Field name
+^^^^^^^^^^
 
-- :ref:`search term <search_term_queries>`: Uses a term to search in the available fields.
+In WQL, "Field name" indicates the particular data type you want to filter, serving as the starting point in a query. It precedes the operator, pinpointing the exact data segment for targeted text searches. The image below demonstrates the WQL search bar in action on the **MITRE ATT&CK** > **Intelligence** tab. A click on the search bar reveals all available field names, enhancing user guidance and intuition.
 
-.. _explicit_queries:
+.. thumbnail:: /images/wazuh-dashboard/queries/intelligence-field-names.png
+   :align: center
+   :width: 80%
+   :title: Intelligence - Field names
+   :alt: Intelligence - Field names
 
-Explicit queries
-^^^^^^^^^^^^^^^^
+The Wazuh dashboard displays a validation error if you use an incorrect field name.
 
-These queries include a field, an operator and a value. This mode is activated when both a field value and an operator are present.
+.. thumbnail:: /images/wazuh-dashboard/queries/intelligence-validation-error.png
+   :align: center
+   :width: 80%
+   :title: Intelligence - Field names validation error
+   :alt: Intelligence - Field names validation error
 
-   - **Field name**: Field name to filter by. If an incorrect field name is used, a validation error is displayed.
+Operators
+^^^^^^^^^
 
-   - **Operator**: Operator to filter by. The available operators are:
+In the Wazuh Query Language, operators enable precise data filtering and guide the flow of operations to generate desired outcomes. The key operators in WQL are:
 
-      - ``=``: equality.
-      - ``!=``: not equality.
-      - ``<``: smaller.
-      - ``>``: bigger.
-      - ``~``: like as.
-      - ``()``: grouping operators. Group queries.
+-  ``=`` for equality
+-  ``!=`` for inequality
+-  ``>`` for greater than
+-  ``<`` for less than
+-  ``~`` for like as
 
-   - **Value**: Value to filter by.
+Equality (=)
+~~~~~~~~~~~~
 
-      - For values without spaces, no additional formatting is necessary.
-      - Values with spaces or containing the double quote character ``"`` must be wrapped by a pair of double quotes ``""``. The double quote ``"`` can be escaped using ``\"``. For example, ``"value with whitespaces and escaped \"quotes\""``.
+This filter operator is used to find exact matches within a dataset. It is also known as equals to and is denoted by the symbol ``=``. For example, you can filter by entities whose ``os.name`` is equal to a specific value such as “Debian”.
 
-   - **Separator**: Operator to join multiple "queries".
+.. thumbnail:: /images/wazuh-dashboard/queries/os_name-debian.png
+   :align: center
+   :width: 80%
+   :title: os.name equals to Debian
+   :alt: os.name equals to Debian
 
-      - ``or``: represents an ``OR``.
-      - ``and``: represents an ``AND``.
-    
-    .. note::
+Inequality (!=)
+~~~~~~~~~~~~~~~
 
-        The tokens can be separated by whitespaces.
+This filter operator finds all data that do not match the specified value within a dataset. It is also known as *not equal to* and denoted by the symbol ``!=``. For example, you can filter by entities whose network protocol does not equal a specific value, such as *ipv6*.
 
-.. _search_term_queries:
+.. thumbnail:: /images/wazuh-dashboard/queries/protocol-not-ipv6.png
+   :align: center
+   :width: 80%
+   :title: Protocol not equal to ipv6
+   :alt: Protocol not equal to ipv6
 
-Search term queries
-^^^^^^^^^^^^^^^^^^^
+Greater than ( > )
+~~~~~~~~~~~~~~~~~~
 
-Use a term to search in the available fields. Under the hood, this search is translated to query in each field supported by the explicit mode using the like as operator ``~``.
+This *greater than* (``>``) operator filters values exceeding a specified threshold in a dataset. For example, you can filter by entities whose local port number is greater than a specific value such as *5353* with the query ``local.port>5353``.
 
-.. warning::
+.. thumbnail:: /images/wazuh-dashboard/queries/port-greater-than-value.png
+   :align: center
+   :width: 80%
+   :title: Port greater than value
+   :alt: Port greater than value
 
-    The explicit and search term modes can't be combined.
-
-
-Query examples
-^^^^^^^^^^^^^^
-
-Explicit mode
+Less than (<)
 ~~~~~~~~~~~~~
 
-- Filter by entities whose ``id`` is equal to a specific value:
+This *less than* (``<``) operator filters values below a specified limit in a dataset. For example, you can filter by entities whose local port number is less than a specific value such as *546* with the query ``local.port<546``.
 
-   .. code-block:: none
+.. thumbnail:: /images/wazuh-dashboard/queries/port-less-than-value.png
+   :align: center
+   :width: 80%
+   :title: Port less than value
+   :alt: Port less than value
 
-      id=001
+Like as (~)
+~~~~~~~~~~~
 
-   .. note::
-      :class: not-long
+The *like as* operator (``~``) enables pattern matching, allowing data retrieval when a specified field matches a given pattern. It offers flexibility by finding records with partial matches. For example, the image below shows how to filter threat groups with names similar to “APT1”:
 
-      It is possible to use whitespaces between the tokens.
+.. thumbnail:: /images/wazuh-dashboard/queries/filter-similar-name-groups.png
+   :align: center
+   :width: 80%
+   :title: Filter similar name groups
+   :alt: Filter similar name groups
 
-      .. code-block:: none
+Consider a query aimed at finding descriptions that include the terms "threat group" shown below:
 
-         id = 001
+.. thumbnail:: /images/wazuh-dashboard/queries/filter-similar-description-groups.png
+   :align: center
+   :width: 80%
+   :title: Filter similar description groups
+   :alt: Filter similar description groups
 
-To get more precise results, use a query with multiple statements using the logical operators ``and`` or ``or`` and grouping operators ``()``.
+The query matches documents containing any search terms, irrespective of their order. By default, the query logic treats multiple search terms inclusively, using an *or* combination.
 
+Value
+^^^^^
 
-- Filter active agents whose ``os.platform`` contains Linux:
-
-   .. code-block:: none
-
-      status=active and os.platform~linux
-
-
-- Filter agents whose status is not ``Never connected``, whose IP address contains ``240``, and whose operating system is Linux:
-
-   .. code-block:: none
-
-      status!=never_connected and ip~240 and os.platform~linux
-
-- Filter agents whose status is not ``Never connected`` and whose IP address contains ``240``, or agents whose ``id`` is equal to ``001``:
-
-   .. code-block:: none
-
-      ( status!=never_connected and ip~240 ) or id=001
-
-
-Search term mode
-~~~~~~~~~~~~~~~~
-
-- Search the term ``linux`` in the available fields:
+*Value* is the specific data that is being filtered for. It represents the condition used to narrow down the results of a query. For instance, to display an entity named ``wazuh-agent``, the query would be structured accordingly:
 
 .. code-block:: none
 
-    linux
+   name=wazuh-agent
 
+.. thumbnail:: /images/wazuh-dashboard/queries/filter-value.png
+   :align: center
+   :width: 80%
+   :title: Filter value
+   :alt: Filter value
 
-Wazuh indexer
--------------
+As shown in the example above, no additional formatting is necessary when filtering for values without spaces. You must wrap the value with a pair of double quotes ``" "`` if it contains spaces or the double quote character (").
 
-In the Wazuh dashboard, there are specialized search bars for querying Wazuh indexer data. These use the same syntax as OpenSearch. To learn more, refer to `Using Dashboards Query Language <https://opensearch.org/docs/2.10/dashboards/discover/dql/>`__.
+.. code-block:: none
+
+   name="Agent Tesla"
+
+.. thumbnail:: /images/wazuh-dashboard/queries/filter-value-spaces.png
+   :align: center
+   :width: 80%
+   :title: Filter value with spaces
+   :alt: Filter value with spaces
+
+.. note::
+
+   The double quote ``"`` can be escaped using ``\``. For example: ``"value with whitespaces and escaped \"quotes\""`` represents ``value with whitespaces and escaped "quotes"``.
+
+Separators
+^^^^^^^^^^
+
+*Separators* are operators that combine multiple queries for complex filtering. WQL supports the use of the ``and`` and ``or`` boolean operators.
+
+.. note::
+
+   WQL is case sensitive and supports only lowercase separators, hence ``AND`` & ``OR`` are invalid.
+
+or separator
+~~~~~~~~~~~~
+
+The *or* logical operator, denoted as a comma (``,``), merges various conditions within a query, requiring at least one condition to be true for the query to succeed. For example, we show the query to filter software named “Bumblebee” or “Avenger” below:
+
+.. code-block:: none
+
+   name=Bazar or name=Avenger
+
+.. thumbnail:: /images/wazuh-dashboard/queries/or-filter-names.png
+   :align: center
+   :width: 80%
+   :title: OR filter names
+   :alt: OR filter names
+
+and separator
+~~~~~~~~~~~~~
+
+The *and* logical operator, denoted as a semicolon (``;``), links several conditions in a query, requiring all conditions to be met for the overall query to succeed. For example, run the following query to filter agents whose status is “disconnected”, and whose operating system platform is “debian”:
+
+.. code-block:: none
+
+   status=disconnected and os.platform=debian
+
+.. thumbnail:: /images/wazuh-dashboard/queries/and-filter.png
+   :align: center
+   :width: 80%
+   :title: AND filter
+   :alt: AND filter
+
+Grouping operators
+^^^^^^^^^^^^^^^^^^
+
+WQL utilizes parentheses ``()`` to prioritize expressions, ensuring those within are assessed first. This approach structures the enclosed expressions as singular units within broader queries, guiding the order of evaluation.
+
+.. code-block:: none
+
+   ( status=active and ip!=192.168.56.195 ) or id=001
+
+.. thumbnail:: /images/wazuh-dashboard/queries/grouping-operators.png
+   :align: center
+   :width: 80%
+   :title: Grouping operators
+   :alt: Grouping operators
+
+Wildcards
+---------
+
+WQL does not support the use of wildcards represented as ``*``.
+
+.. thumbnail:: /images/wazuh-dashboard/queries/wildcards-not-supported.png
+   :align: center
+   :width: 80%
+   :title: Wildcards not supported
+   :alt: Wildcards not supported
+
+Whitespaces
+-----------
+
+WQL supports the use of whitespaces between data tokens.
+
+.. code-block:: none
+
+   status = disconnected and os.name = debian
+
+.. thumbnail:: /images/wazuh-dashboard/queries/whitespaces-supported.png
+   :align: center
+   :width: 80%
+   :title: Whitespaces are supported
+   :alt: Whitespaces are supported
+
+Ranges
+------
+
+WQL supports numeric inequalities using the ``>``, and ``<`` operators. For example:
+
+.. code-block:: none
+
+   local.port>53 and local.port<631
+
+.. thumbnail:: /images/wazuh-dashboard/queries/port-ranges.png
+   :align: center
+   :width: 80%
+   :title: Port ranges
+   :alt: Port ranges
+
+Example: Sending WQL queries with cURL
+--------------------------------------
+
+For example, the following query would be used to filter Ubuntu endpoints with a version higher than 18. We encode the value of the parameter ``q`` with the ``--data-urlencode`` flag:
+
+.. code-block:: console
+
+   # curl -G --data-urlencode "q=os.name=ubuntu;os.version>18" -k -X GET "https://localhost:55000/agents?limit=500&pretty=true&select=id,name,os.name,os.version,os.codename,os.major" -H  "Authorization: Bearer $TOKEN"
+
+.. code-block:: none
+   :class: output
+
+   {
+      "data": {
+         "affected_items": [
+            {
+               "os": {
+                  "codename": "Bionic Beaver",
+                  "major": "18",
+                  "name": "Ubuntu",
+                  "version": "18.04.4 LTS"
+               },
+               "name": "wazuh-master",
+               "id": "000"
+            },
+            {
+               "os": {
+                  "codename": "Bionic Beaver",
+                  "major": "18",
+                  "name": "Ubuntu",
+                  "version": "18.04.4 LTS"
+               },
+               "name": "wazuh-agent4",
+               "id": "004"
+            },
+            {
+               "os": {
+                  "codename": "Bionic Beaver",
+                  "major": "18",
+                  "name": "Ubuntu",
+                  "version": "18.04.4 LTS"
+               },
+               "name": "wazuh-agent5",
+               "id": "005"
+            },
+            {
+               "os": {
+                  "codename": "Bionic Beaver",
+                  "major": "18",
+                  "name": "Ubuntu",
+                  "version": "18.04.4 LTS"
+               },
+               "name": "wazuh-agent6",
+               "id": "006"
+            },
+            {
+               "os": {
+                  "codename": "Bionic Beaver",
+                  "major": "18",
+                  "name": "Ubuntu",
+                  "version": "18.04.4 LTS"
+               },
+               "name": "wazuh-agent7",
+               "id": "007"
+            },
+            {
+               "os": {
+                  "codename": "Bionic Beaver",
+                  "major": "18",
+                  "name": "Ubuntu",
+                  "version": "18.04.4 LTS"
+               },
+               "name": "wazuh-agent8",
+               "id": "008"
+            },
+            {
+               "os": {
+                  "codename": "Bionic Beaver",
+                  "major": "18",
+                  "name": "Ubuntu",
+                  "version": "18.04.2 LTS"
+               },
+               "name": "wazuh-agent9",
+               "id": "009"
+            },
+            {
+               "os": {
+                  "codename": "Bionic Beaver",
+                  "major": "18",
+                  "name": "Ubuntu",
+                  "version": "18.04.2 LTS"
+               },
+               "name": "wazuh-agent10",
+               "id": "010"
+            }
+         ],
+         "total_affected_items": 8,
+         "total_failed_items": 0,
+         "failed_items": []
+      },
+      "message": "All selected agents information was returned",
+      "error": 0
+   }
+
+You can use the same field multiple times for more accurate results. For example, filtering Wazuh agents running on a Ubuntu endpoint with a version higher than 18 but lower than 18.04.4:
+
+.. code-block:: console
+
+   # curl -G --data-urlencode "q=os.name=ubuntu;os.version>18;os.version<18.04.4" -k -X GET "https://localhost:55000/agents?limit=500&pretty=true&select=id,name,os.name,os.version,os.codename,os.major" -H  "Authorization: Bearer $TOKEN"
+
+.. code-block:: none
+   :class: output
+
+   {
+      "data": {
+         "affected_items": [
+            {
+               "os": {
+                  "codename": "Bionic Beaver",
+                  "major": "18",
+                  "name": "Ubuntu",
+                  "version": "18.04.2 LTS"
+               },
+               "name": "wazuh-agent9",
+               "id": "009"
+            },
+            {
+               "os": {
+                  "codename": "Bionic Beaver",
+                  "major": "18",
+                  "name": "Ubuntu",
+                  "version": "18.04.2 LTS"
+               },
+               "name": "wazuh-agent10",
+               "id": "010"
+            }
+         ],
+         "total_affected_items": 2,
+         "total_failed_items": 0,
+         "failed_items": []
+      },
+      "message": "All selected agents information was returned",
+      "error": 0
+   }
+
+An example of using the *or* (``,``) separator and *like as* (``~``) operator can be filtering Wazuh agents whose operating system name contains ``windows`` or ``centos``.
+
+.. code-block:: console
+
+   # curl -G --data-urlencode "q=os.name~centos,os.name~windows" -k -X GET "https://localhost:55000/agents?limit=500&pretty=true&select=id,name,os.name,os.version,os.codename,os.major" -H  "Authorization: Bearer $TOKEN"
+
+.. code-block:: none
+   :class: output
+
+   {
+      "data": {
+         "affected_items": [
+            {
+               "os": {
+                  "major": "6",
+                  "name": "Microsoft Windows 7 Ultimate Edition Professional Service Pack 1",
+                  "version": "6.1.7601"
+               },
+               "name": "jmv74211-PC",
+               "id": "013"
+            }
+         ],
+         "total_affected_items": 1,
+         "total_failed_items": 0,
+         "failed_items": []
+      },
+      "message": "All selected agents information was returned",
+      "error": 0
+   }
+
+Getting Wazuh agents installed on Ubuntu  endpoints with ID greater than 0 and lower than 4, whose name contains the substring ``waz`` and whose major version is 16 or 18:
+
+.. code-block:: console
+
+   # curl -G --data-urlencode "q=id!=0;id<4;name~waz;(os.major=16,os.major=18)" -k -X GET "https://localhost:55000/agents?limit=500&pretty=true&select=id,name,os.name,os.version,os.codename,os.major" -H  "Authorization: Bearer $TOKEN"
+
+.. code-block:: none
+   :class: output
+
+   {
+      "data": {
+         "affected_items": [
+            {
+               "os": {
+                  "codename": "Xenial Xerus",
+                  "major": "16",
+                  "name": "Ubuntu",
+                  "version": "16.04.6 LTS"
+               },
+               "name": "wazuh-agent1",
+               "id": "001"
+            },
+            {
+               "os": {
+                  "codename": "Xenial Xerus",
+                  "major": "16",
+                  "name": "Ubuntu",
+                  "version": "16.04.6 LTS"
+               },
+               "name": "wazuh-agent2",
+               "id": "002"
+            },
+            {
+               "os": {
+                  "codename": "Xenial Xerus",
+                  "major": "16",
+                  "name": "Ubuntu",
+                  "version": "16.04.6 LTS"
+               },
+               "name": "wazuh-agent3",
+               "id": "003"
+            }
+         ],
+         "total_affected_items": 3,
+         "total_failed_items": 0,
+         "failed_items": []
+      },
+      "message": "All selected agents information was returned",
+      "error": 0
+   }
+
+Getting Wazuh agents with an ID higher than ``007`` that run on Windows or whose operating system major version is either 14 or 18:
+
+.. code-block:: console
+
+   # curl -G --data-urlencode "q=id>007;(os.name~windows,(os.major=14,os.major=18))" -k -X 500GET "https://localhost:55000/agents?limit=500&pretty=true&select=id,name,os.name,os.version,os.codename,os.major" -H  "Authorization: Bearer $TOKEN"
+
+.. code-block:: none
+   :class: output
+
+   {
+      "data": {
+         "affected_items": [
+            {
+               "os": {
+                  "codename": "Bionic Beaver",
+                  "major": "18",
+                  "name": "Ubuntu",
+                  "version": "18.04.4 LTS"
+               },
+               "name": "wazuh-agent8",
+               "id": "008"
+            },
+            {
+               "os": {
+                  "codename": "Bionic Beaver",
+                  "major": "18",
+                  "name": "Ubuntu",
+                  "version": "18.04.2 LTS"
+               },
+               "name": "wazuh-agent9",
+               "id": "009"
+            },
+            {
+               "os": {
+                  "codename": "Bionic Beaver",
+                  "major": "18",
+                  "name": "Ubuntu",
+                  "version": "18.04.2 LTS"
+               },
+               "name": "wazuh-agent10",
+               "id": "010"
+            },
+            {
+               "os": {
+                  "major": "6",
+                  "name": "Microsoft Windows 7 Ultimate Edition Professional Service Pack 1",
+                  "version": "6.1.7601"
+               },
+               "name": "jmv74211-PC",
+               "id": "013"
+            }
+         ],
+         "total_affected_items": 4,
+         "total_failed_items": 0,
+         "failed_items": []
+      },
+      "message": "All selected agents information was returned",
+      "error": 0
+   }
