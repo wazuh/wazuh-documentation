@@ -154,6 +154,10 @@ redirections.push(
     '4.9': '/user-manual/agent/agent-management/remote-upgrading/wpk-files/create-custom-wpk.html#generating-wpk-packages-manually',
   },
   {
+    'target': ['4.8=>4.9', '4.9=>4.8'],
+    '4.8': '/user-manual/capabilities/policy-monitoring/rootcheck/index.html',
+    '4.9': '/user-manual/capabilities/malware-detection/rootkits-behavior-detection.html',
+  },
 );
 
 /* Pages added in 4.9 */
@@ -200,6 +204,16 @@ removedUrls['4.9'] = [
   '/user-manual/agent/agent-management/remote-upgrading/install-custom-wpk.html',
   '/user-manual/agent/agent-management/remote-upgrading/custom-repository.html',
   '/user-manual/agent/agent-management/remote-upgrading/wpk-list.html',
+  '/user-manual/capabilities/policy-monitoring/index.html',
+  '/user-manual/capabilities/policy-monitoring/openscap/index.html',
+  '/user-manual/capabilities/policy-monitoring/openscap/how-it-works.html',
+  '/user-manual/capabilities/policy-monitoring/openscap/oscap-configuration.html',
+  '/user-manual/capabilities/policy-monitoring/openscap/oscap-faq.html',
+  '/user-manual/capabilities/policy-monitoring/rootcheck/how-it-works.html',
+  '/user-manual/capabilities/policy-monitoring/rootcheck/index.html',
+  '/user-manual/capabilities/policy-monitoring/rootcheck/rootcheck-configuration.html',
+  '/user-manual/capabilities/policy-monitoring/rootcheck/rootcheck-faq.html',
+  '/user-manual/capabilities/policy-monitoring/ciscat/ciscat.html',
 ];
 
 /* *** RELEASE 4.8 ****/
