@@ -39,7 +39,7 @@ Wazuh can be installed in two ways: as a manager by using the "server/manager" i
 +---------------------------------------------------------------------+------------------------+
 | :doc:`alerts <alerts>`                                              | manager                |
 +---------------------------------------------------------------------+------------------------+
-| :doc:`anti_tampering <anti_tampering>`                              | agent                  |
+| :doc:`anti_tampering <anti-tampering>`                              | agent                  |
 +---------------------------------------------------------------------+------------------------+
 | :doc:`auth <auth>`                                                  | manager                |
 +---------------------------------------------------------------------+------------------------+
@@ -134,7 +134,7 @@ All of the above sections must be located within the top-level ``<ossec_config>`
    agentless
    agent-upgrade
    alerts
-   anti_tampering
+   anti-tampering
    auth
    client
    client-buffer
