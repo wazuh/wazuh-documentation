@@ -192,7 +192,7 @@ Take the following steps on your Ubuntu endpoint to create the file ``C:\Program
    - We create a requirement to ensure that the policy runs only if the file ``C:\Program Files\testfile.txt`` exists on the endpoint.
    - Check ID ``10001`` scans the file ``C:\Program Files\testfile.txt`` to find any line that contains the string ``password_enabled: yes``. The ``none`` condition ensures that the check fails if a match is found.
 
-#. Enable the policy file by adding the following lines to the ``<ossec_config>`` block of the Wazuh agent configuration file at ``/var/ossec/etc/ossec.conf``:
+#. Enable the policy file by adding the following lines to the ``<ossec_config>`` block of the Wazuh agent configuration file at ``C:\Program Files (x86)\ossec-agent\ossec.conf``:
 
      .. code-block:: xml
 
@@ -455,7 +455,7 @@ System administrators use PowerShell to configure systems. Standard users utiliz
    - We create a requirement to ensure that the policy runs only on Windows 10 endpoints. The requirement checks the registry key ``HKLM\SOFTWARE\Microsoft\Windows NT\CurrentVersion`` for the value ``Windows 10``.
    - Check ID ``10004`` scans the endpoint for processes named ``powershell.exe``. The ``none`` condition ensures that the check fails if a match is found.
 
-#. Enable the policy file by adding the following lines to the ``<ossec_config>`` block of the Wazuh agent configuration file at ``/var/ossec/etc/ossec.conf``:
+#. Enable the policy file by adding the following lines to the ``<ossec_config>`` block of the Wazuh agent configuration file at ``C:\Program Files (x86)\ossec-agent\ossec.conf``:
 
      .. code-block:: xml
 

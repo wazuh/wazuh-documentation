@@ -81,7 +81,7 @@ You can change the default password for the administrative users  ``wazuh`` and 
 
    .. warning::
 
-      Changing the ``wazuh-wui`` user password will affect the Wazuh dashboard. You will have to update the ``/usr/share/wazuh-dashboard/data/wazuh/config/wazuh.yml`` configuration file accordingly with the new credentials. To learn more, see the :doc:`Wazuh dashboard configuration file </user-manual/wazuh-dashboard/config-file>` document.
+      Changing the ``wazuh-wui`` user password will affect the Wazuh dashboard. You will have to update the ``/usr/share/wazuh-dashboard/data/wazuh/config/wazuh.yml`` configuration file accordingly with the new credentials. To learn more, see the :doc:`Wazuh dashboard configuration file </user-manual/wazuh-dashboard/settings>` document.
 
 3. Change the default host and port
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^

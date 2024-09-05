@@ -3,8 +3,8 @@
 .. meta::
    :description: Wazuh 4.9.0 has been released. Check out our release notes to discover the changes and additions of this release.
 
-4.9.0 Release notes - TBD
-=========================
+4.9.0 Release notes - 5 September 2024
+======================================
 
 This section lists the changes in version 4.9.0. Every update of the Wazuh solution is cumulative and includes all enhancements and fixes from previous releases.
 
@@ -38,7 +38,6 @@ Wazuh manager
 -  `#23222 <https://github.com/wazuh/wazuh/pull/23222>`__ Added a validation to avoid killing processes from external services.
 -  `#23996 <https://github.com/wazuh/wazuh/pull/23996>`__ Enabled certificates validation in the requests to the HAProxy helper using the default CA bundle.
 -  `#21195 <https://github.com/wazuh/wazuh/pull/21195>`__ Sanitized the integrations directory code.
--  `#22640 <https://github.com/wazuh/wazuh/pull/22640>`__ Modified multiple cluster commands to be asynchronous.
 
 Wazuh agent
 ^^^^^^^^^^^
@@ -134,6 +133,7 @@ Wazuh dashboard
 -  `#6848 <https://github.com/wazuh/wazuh-dashboard-plugins/pull/6848>`__ Added wz-link component to handle redirections.
 -  `#6902 <https://github.com/wazuh/wazuh-dashboard-plugins/pull/6902>`__ Removed embedded ``dom-to-image`` dependency.
 -  `#6902 <https://github.com/wazuh/wazuh-dashboard-plugins/pull/6902>`__ Added embedded and customized ``dom-to-image-more`` dependency.
+-  `#6949 <https://github.com/wazuh/wazuh-dashboard-plugins/pull/6949>`__ Changed the order of columns in **Vulnerabilities Detection** > **Events** table.
 
 Packages
 ^^^^^^^^
@@ -227,7 +227,7 @@ Product repositories
 ^^^^^^^^^^^^^^^^^^^^
 
 -  `wazuh/wazuh <https://github.com/wazuh/wazuh/blob/v4.9.0/CHANGELOG.md>`__
--  `wazuh/wazuh-dashboard-plugins <https://github.com/wazuh/wazuh-dashboard-plugins/blob/v4.9.0-2.11.0/CHANGELOG.md>`__
+-  `wazuh/wazuh-dashboard-plugins <https://github.com/wazuh/wazuh-dashboard-plugins/blob/v4.9.0/CHANGELOG.md>`__
 -  `wazuh/wazuh-packages <https://github.com/wazuh/wazuh-packages/blob/v4.9.0/CHANGELOG.md>`__
 
 Auxiliary repositories
