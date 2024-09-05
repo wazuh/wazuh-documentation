@@ -16,18 +16,6 @@ from settings import version, is_latest_release, release
 custom_replacements = {
     # === URLs and base URLs
     "|CHECKSUMS_URL|" : "https://packages.wazuh.com/4.x/checksums/wazuh/",
-    "|APK_CHECKSUMS_I386_URL|" : "alpine/x86",
-    "|APK_CHECKSUMS_X86_64_URL|" : "alpine/x86_64",
-    "|APK_CHECKSUMS_AARCH64_URL|" : "alpine/aarch64",
-    "|APK_CHECKSUMS_ARMV7_URL|" : "alpine/armv7",
-    "|APK_CHECKSUMS_ARMHF_URL|" : "alpine/armhf",
-    "|APK_CHECKSUMS_PPC_URL|" : "alpine/ppc64le",
-    "|APK_AGENT_I386_URL|" : "https://packages.wazuh.com/4.x/alpine/v3.12/main/x86/wazuh-agent",
-    "|APK_AGENT_X86_64_URL|" : "https://packages.wazuh.com/4.x/alpine/v3.12/main/x86_64/wazuh-agent",
-    "|APK_AGENT_AARCH64_URL|" : "https://packages.wazuh.com/4.x/alpine/v3.12/main/aarch64/wazuh-agent",
-    "|APK_AGENT_ARMV7_URL|" : "https://packages.wazuh.com/4.x/alpine/v3.12/main/armv7/wazuh-agent",
-    "|APK_AGENT_ARMHF_URL|" : "https://packages.wazuh.com/4.x/alpine/v3.12/main/armhf/wazuh-agent",
-    "|APK_AGENT_PPC_URL|" : "https://packages.wazuh.com/4.x/alpine/v3.12/main/ppc64le/wazuh-agent",
     "|RPM_AGENT_URL|" : "https://packages.wazuh.com/4.x/yum/wazuh-agent",
     "|RPM_MANAGER_URL|" : "https://packages.wazuh.com/4.x/yum/wazuh-manager",
     "|DEB_AGENT_URL|" : "https://packages.wazuh.com/4.x/apt/pool/main/w/wazuh-agent/wazuh-agent",
@@ -43,13 +31,6 @@ custom_replacements = {
     "|PYTHON_CLOUD_CONTAINERS_MAX|": "3.12",
 
     # --- Revision numbers for Wazuh agent and manager packages versions
-    # Alpine APK packages revisions
-    "|WAZUH_REVISION_APK_AGENT_I386|" : "r1",
-    "|WAZUH_REVISION_APK_AGENT_X86_64|" : "r1",
-    "|WAZUH_REVISION_APK_AGENT_AARCH64|" : "r1",
-    "|WAZUH_REVISION_APK_AGENT_ARMV7|" : "r1",
-    "|WAZUH_REVISION_APK_AGENT_ARMHF|" : "r1",
-    "|WAZUH_REVISION_APK_AGENT_PPC|" : "r1",
     # Yum packages revisions
     "|WAZUH_REVISION_YUM_AGENT_I386|" : "1",
     "|WAZUH_REVISION_YUM_MANAGER_I386|" : "1",
@@ -196,7 +177,6 @@ if is_latest_release:
     custom_replacements["|WAZUH_AGENT_RPM_PKG_INSTALL|"] = ''
     custom_replacements["|WAZUH_AGENT_DEB_PKG_INSTALL|"] = ''
     custom_replacements["|WAZUH_AGENT_ZYPP_PKG_INSTALL|"] = ''
-    custom_replacements["|WAZUH_AGENT_APK_PKG_INSTALL|"] = ''
 else:
     custom_replacements["|WAZUH_INDEXER_RPM_PKG_INSTALL|"] = '-' + custom_replacements["|WAZUH_CURRENT|"] + '-' + custom_replacements["|WAZUH_INDEXER_CURRENT_REV|"]
     custom_replacements["|WAZUH_MANAGER_RPM_PKG_INSTALL|"] = '-' + custom_replacements["|WAZUH_CURRENT|"] + '-' + custom_replacements["|WAZUH_REVISION_YUM_MANAGER_X86|"]
@@ -207,4 +187,3 @@ else:
     custom_replacements["|WAZUH_AGENT_RPM_PKG_INSTALL|"] = '-' + custom_replacements["|WAZUH_CURRENT|"] + '-' + custom_replacements["|WAZUH_REVISION_YUM_AGENT_X86|"]
     custom_replacements["|WAZUH_AGENT_DEB_PKG_INSTALL|"] = '=' + custom_replacements["|WAZUH_CURRENT|"] + '-' + custom_replacements["|WAZUH_REVISION_DEB_AGENT_X86|"]
     custom_replacements["|WAZUH_AGENT_ZYPP_PKG_INSTALL|"] = '-' + custom_replacements["|WAZUH_CURRENT|"] + '-' + '1'
-    custom_replacements["|WAZUH_AGENT_APK_PKG_INSTALL|"] = '=' + custom_replacements["|WAZUH_CURRENT|"] + '-' + custom_replacements["|WAZUH_REVISION_APK_AGENT_X86_64|"]
