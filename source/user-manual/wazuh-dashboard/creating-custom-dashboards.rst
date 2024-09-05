@@ -1,26 +1,26 @@
 .. Copyright (C) 2015, Wazuh, Inc.
 
 .. meta::
-   :description: Find out how to create a set of custom visualizations and add them together to create a custom dashboard.
+   :description: This section describes the process of creating a set of custom visualizations using the Wazuh dashboard component.
 
 Creating custom dashboards
 ==========================
-        
+
 This section describes the process of creating a set of custom visualizations using the Wazuh dashboard component. We also show how to add individually created visualizations together to create a custom dashboard.
 
 Visualizing the data
 --------------------
 
-Data visualization enhances the ability to comprehend complex security data by providing a visual representation. This representation can reveal patterns, trends, anomalies, and insights more effectively than raw data alone. This simplifies the interpretation of large datasets and makes it easier to identify security threats, assess the overall state of security, and make informed decisions.
+Data visualization enhances the ability to comprehend complex security data by providing a visual representation. This representation reveals patterns, trends, anomalies, and insights. This simplifies the interpretation of large datasets and makes it easier to identify security threats, assess the overall state of security, and make informed decisions.
 
-There are different visualization techniques that can help make data clear and appealing. The Wazuh **Visualize** page takes data from the **Discover** page and turns it into various visual types like Bar, Area, Line Charts, Pie Charts, Maps, and Tables. These visuals can be saved, combined for dashboards, and shared with others using the Wazuh dashboard.
+There are different visualization techniques that can help make data clear and appealing. These visuals can be saved, combined for dashboards, and shared with others using the Wazuh dashboard.
 
-We will cover the practical aspect of dashboard creation by creating different types of visualizations in the Wazuh dashboard and then integrate the visualizations to create a custom dashboard.
+We will cover the practical aspect of dashboard creation by creating different types of visualizations in the Wazuh dashboard and then integrating the visualizations to create a custom dashboard.
 
 Creating visualizations
 ^^^^^^^^^^^^^^^^^^^^^^^
 
-To create a visualization, click the upper-left menu icon and navigate to **Explore** > **Visualize**. This action will open a page where a list of visualizations is displayed if any have already been created. If not, the page will show a **Create new visualization** button in the middle.
+To create a visualization, click the upper-left menu icon and navigate to **Explore** > **Visualize**. This action will open a page where a list of visualizations is displayed if any have already been created. If not, the page will display a **Create new visualization** button.
 
 .. thumbnail:: /images/wazuh-dashboard/custom-dashboards/create-new-visualization.png
    :align: center
@@ -28,7 +28,7 @@ To create a visualization, click the upper-left menu icon and navigate to **Expl
    :title: Create new visualization
    :alt: Create new visualization
 
-Next, we must select the visualization type from the **New Visualization** screen. This screen presents various visualization types, as shown below:
+Click on **Create new visualization**, and then select the visualization type from the **New Visualization** screen. This screen presents various visualization types, as shown below:
 
 .. thumbnail:: /images/wazuh-dashboard/custom-dashboards/select-visualization-type.png
    :align: center
@@ -36,7 +36,7 @@ Next, we must select the visualization type from the **New Visualization** scree
    :title: Select visualization type
    :alt: Select visualization type
 
-Choose the visualization option that best suits your data by clicking on the visualization type box. Here, we selected the Area chart visualization.
+Choose the visualization option that best suits your data by clicking on the visualization type box. Here, we selected the **Area** chart visualization.
 
 After selecting the visualization type, for most of the visualization types, the next step is to choose the desired index to work with. This will be the data source that the visualization will be built on. The visualization type selected will redirect you to the screen displayed below.
 
@@ -49,9 +49,9 @@ After selecting the visualization type, for most of the visualization types, the
 Wazuh dashboard aggregation
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-The Wazuh dashboard visualization contains two main aggregation objects;
+The Wazuh dashboard visualization contains two main aggregation objects:
 
--  Metric aggregation.
+-  Metrics aggregation.
 -  Bucket aggregation.
 
 Metric aggregation
@@ -61,7 +61,9 @@ Metric aggregation calculates metrics by aggregating data values. This contains 
 
 There are different types of metric aggregations as shown below:
 
-#. **Average**: This is the average of a numeric field. It calculates the arithmetic mean of an existing set of data values. The Average is obtained by adding up all the data values and dividing its sum by the total count.
+-  **Average**: This is the average of a numeric field. It calculates the arithmetic mean of an existing set of data values. The average is obtained by adding up all the data values and dividing their sum by the total count.
+
+   Average aggregation helps in calculating the average duration of security incidents, average severity score of alerts, average response time to resolve incidents, and more.
 
    .. thumbnail:: /images/wazuh-dashboard/custom-dashboards/average-metric-aggregation.png
       :align: center
@@ -69,19 +71,13 @@ There are different types of metric aggregations as shown below:
       :title: Average metrics aggregation
       :alt: Average metrics aggregation
 
-   Average aggregation helps in calculating the average duration of security incidents, average severity score of alerts, average response time to resolve incidents and more.
+-  **Count**: This is the number of data values that match a query within the selected index pattern. It counts the number of data points in a set and provides the total count of a queried event.
 
-#. **Count**: This is the number of data values that match a query within the selected index pattern. It counts the number of data points in a set and provides the total count of a queried event.
+   Count aggregation helps determine the total number of security events, the number of alerts triggered by a specific rule, the number of failed login attempts, and more.
 
-   .. thumbnail:: /images/wazuh-dashboard/custom-dashboards/count-metric-aggregation.png
-      :align: center
-      :width: 80%
-      :title: Count metrics aggregation
-      :alt: Count metrics aggregation
+-  **Max**: This is the maximum value of a numeric field within a selected index pattern. Max identifies the highest value among a group of values.
 
-   Count aggregation helps in determining the total number of security events, number of alerts triggered by a specific rule, the number of failed login attempts and more.
-
-#. **Max**: This is the maximum value of a numeric field within a selected index pattern. Max identifies the highest value among a group of values.
+   Max aggregation helps identify the maximum severity level of alerts, maximum CPU usage, and more.
 
    .. thumbnail:: /images/wazuh-dashboard/custom-dashboards/max-metric-aggregation.png
       :align: center
@@ -89,19 +85,13 @@ There are different types of metric aggregations as shown below:
       :title: Max metrics aggregation
       :alt: Max metrics aggregation
 
-   Max aggregation helps in identifying the maximum severity level of alerts, maximum CPU usage, the maximum number of failed login attempts within a given timeframe and more.
-
-#. **Median**: This is the median value in a numeric field. Median determines the middle value in a sorted set of values within a selected index pattern by separating the higher half from the lower half of the data.
-
-   .. thumbnail:: /images/wazuh-dashboard/custom-dashboards/median-metric-aggregation.png
-      :align: center
-      :width: 80%
-      :title: Median metrics aggregation
-      :alt: Median metrics aggregation
+-  **Median**: This is the median value in a numeric field. Median determines the middle value in a sorted set of values within a selected index pattern by separating the higher half from the lower half of the data.
 
    Median aggregation helps to provide the middle value of event durations, helping to identify the typical or median response time.
 
-#. **Min**: This is the minimum value in a numeric field set. Min identifies the lowest value among a group of values.
+-  **Min**: This is the minimum value in a numeric field set. Min identifies the lowest value among a group of values.
+
+   Min aggregation helps determine the minimum severity level of alerts, minimum disk space usage, minimum number of successful logins, and more.
 
    .. thumbnail:: /images/wazuh-dashboard/custom-dashboards/min-metric-aggregation.png
       :align: center
@@ -109,19 +99,11 @@ There are different types of metric aggregations as shown below:
       :title: Min metrics aggregation
       :alt: Min metrics aggregation
 
-   Min aggregation helps in determining the minimum severity level of alerts, minimum disk space usage, the minimum number of successful logins and more.
-
-#. **Percentile Ranks**: This is the ranking for values within a given numeric field in percentile. Percentile rank calculates the percentage of values below a specific value in a set and expresses how a given value compares to the distribution of the data.
-
-   .. thumbnail:: /images/wazuh-dashboard/custom-dashboards/percentile-ranks-metric-aggregation.png
-      :align: center
-      :width: 80%
-      :title: Percentile ranks metrics aggregation
-      :alt: Percentile ranks metrics aggregation
+-  **Percentile Ranks**: This is the ranking for values within a given numeric field in percentile. Percentile rank calculates the percentage of values below a specific value in a set and expresses how a given value compares to the distribution of the data.
 
    Percentile rank aggregation helps in assessing the relative severity of alerts in comparison to the entire dataset. This determines the percentile rank of a specific severity score.
 
-#. **Percentile**: This aggregation changes numeric field values into percentile bands. Percentile identifies specific data values that correspond to specific percentiles. For example, the 90th percentile represents the value below which 90% of the data falls.
+-  **Percentile**: This aggregation changes numeric field values into percentile bands. Percentile identifies specific data values that correspond to specific percentiles. For example, the 90th percentile represents the value below which 90% of the data falls.
 
    .. thumbnail:: /images/wazuh-dashboard/custom-dashboards/percentiles-metric-aggregation.png
       :align: center
@@ -129,27 +111,17 @@ There are different types of metric aggregations as shown below:
       :title: Percentiles metrics aggregation
       :alt: Percentiles metrics aggregation
 
-#. **Standard Deviation**: This measures the amount of variation in a set of numeric field values. It evaluates the average distance between each value and the mean value.
-
-   .. thumbnail:: /images/wazuh-dashboard/custom-dashboards/standard-deviation-aggregation.png
-      :align: center
-      :width: 80%
-      :title: Standard deviation metrics aggregation
-      :alt: Standard deviation metrics aggregation
+-  **Standard Deviation**: This measures the amount of variation in a set of numeric field values. It evaluates the average distance between each value and the mean value.
 
    Standard deviation aggregation can help identify changes in event durations. This provides insights into the volatility or stability of security events.
 
-#. **Sum**: This is the total sum of a numeric field. Sum calculates the total sum of a set of values by adding up all the values in the dataset within a selected index pattern.
+-  **Sum**: This is the total sum of a numeric field. Sum calculates the total sum of a set of values by adding up all the values in the dataset within a selected index pattern.
 
-   .. thumbnail:: /images/wazuh-dashboard/custom-dashboards/sum-aggregation.png
-      :align: center
-      :width: 80%
-      :title: Sum metrics aggregation
-      :alt: Sum metrics aggregation
+   Sum aggregation helps in determining the total count of specific event types, the total number of successful logins, the total disk space used, and more.
 
-   Sum aggregation helps in determining the total count of specific event types, the total number of successful logins, the total disk space used and more.
+-  **Top Hit**: This aggregation identifies the top data point based on a specified criteria or sort order. Top hit is commonly used to extract specific information from the dataset based on the top metric.
 
-#. **Top Hit**: This aggregation identifies the top data point based on a specified criteria or sort order. Top hit is commonly used to extract specific information from the dataset based on the top metric.
+   Top hit aggregation helps in extracting key information from security events, such as retrieving the most recent log entry for a particular host or user.
 
    .. thumbnail:: /images/wazuh-dashboard/custom-dashboards/top-hit-aggregation.png
       :align: center
@@ -157,174 +129,76 @@ There are different types of metric aggregations as shown below:
       :title: Top Hit metrics aggregation
       :alt: Top Hit metrics aggregation
 
-   Top hit aggregation helps in extracting key information from security events, such as retrieving the most recent log entry for a particular host or user.
+-  **Unique Count**: This is the count of unique values within a designated field. It counts the number of unique or distinct values in a set. Unique count disregards any duplicate event and provides the count of unique values.
 
-#. **Unique Count**: This is the count of unique values within a designated field. It counts the number of unique or distinct values in a set. Unique count disregards any duplicate event and provides the count of unique values.
+   Unique count aggregation helps in determining the number of distinct IP addresses accessing a system, the number of unique users triggering alerts, the count of unique event types, and more.
 
-   .. thumbnail:: /images/wazuh-dashboard/custom-dashboards/unique-count-aggregation.png
-      :align: center
-      :width: 80%
-      :title: Unique Count metrics aggregation
-      :alt: Unique Count metrics aggregation
-
-   Unique count aggregation helps in determining the number of distinct IP addresses accessing a system, the number of unique users triggering alerts, the count of unique event types and more.
-
-Parent Pipeline Aggregations
+Parent pipeline aggregations
 ............................
 
-#. **Cumulative Sum**: This is the calculation of the running sum of a metric across a specified set of data points. It shows the progressive total as each data point is added.
+This category of pipeline aggregations is able to compute new buckets based of other parent aggregations.
 
-   .. thumbnail:: /images/wazuh-dashboard/custom-dashboards/cumulative-sum-aggregation.png
-      :align: center
-      :width: 80%
-      :title: Cumulative Sum metrics aggregation
-      :alt: Cumulative Sum metrics aggregation
+.. thumbnail:: /images/wazuh-dashboard/custom-dashboards/parent-pipelines-aggregations.png
+   :align: center
+   :width: 80%
+   :title: Parent pipelines aggregation
+   :alt: Parent pipelines aggregation
 
-   Cumulative sum aggregation can be used to track the total count of security events over time, providing insights into the cumulative impact of incidents.
+-  **Cumulative Sum**: This is the calculation of the running sum of a metric across a specified set of data points. It shows the progressive total as each data point is added. Cumulative sum aggregation can be used to track the total count of security events over time, providing insights into the cumulative impact of incidents.
 
-#. **Derivative**: This is the calculation of the rate of change of values over time. Derivative is the difference between consecutive values in a time series or dataset.
+-  **Derivative**: This is the calculation of the rate of change of values over time. Derivative is the difference between consecutive values in a time series or dataset. Derivative aggregation helps in calculating the rate of change in event counts or severity scores. This enables the detection of sudden spikes or anomalies.
 
-   .. thumbnail:: /images/wazuh-dashboard/custom-dashboards/derivative-aggregation.png
-      :align: center
-      :width: 80%
-      :title: Derivative metrics aggregation
-      :alt: Derivative metrics aggregation
-   
-   Derivative aggregation helps in calculating the rate of change in event counts or severity scores. This enables the detection of sudden spikes or anomalies.
+-  **Moving Avg**: This is the calculation of the average of a metric over a moving window of data points. It provides a neat representation of the data, hence reducing noise or fluctuations. Moving average aggregation helps in smoothing out fluctuations in event counts or resource usage, enabling trend analysis or anomaly detection.
 
-#. **Moving Avg**: This is the calculation of the average of a metric over a moving window of data points. It provides a neat representation of the data, hence reducing noise or fluctuations.
+-  **Serial Diff**: This is the difference between consecutive values in a time series or ordered dataset. It measures the absolute change from one data point to the next. Serial diff aggregation helps in identifying the difference in event counts or resource usage between consecutive data points, showing changes or trends.
 
-   .. thumbnail:: /images/wazuh-dashboard/custom-dashboards/moving-avg-aggregation.png
-      :align: center
-      :width: 80%
-      :title: Moving Avg metrics aggregation
-      :alt: Moving Avg metrics aggregation
-
-   Moving average aggregation helps in smoothing out fluctuations in event counts or resource usage, enabling trend analysis or anomaly detection.
-
-#. **Serial Diff**: This is the difference between consecutive values in a time series or ordered dataset. It measures the absolute change from one data point to the next.
-
-   .. thumbnail:: /images/wazuh-dashboard/custom-dashboards/serial-diff-aggregation.png
-      :align: center
-      :width: 80%
-      :title: Serial Diff metrics aggregation
-      :alt: Serial Diff metrics aggregation
-
-   Serial diff aggregation helps in identifying the difference in event counts or resource usage between consecutive data points, showing changes or trends.
-
-Sibling Pipeline Aggregations
+Sibling pipeline aggregations
 .............................
 
-#. **Average Bucket**: This is the average value of a metric within each bucket of a specified aggregation. Average bucket provides the average value per group or category.
+This category of aggregations computes new aggregations which will be at the same level as the sibling aggregation from which its input was provided from.
 
-   .. thumbnail:: /images/wazuh-dashboard/custom-dashboards/average-bucket-aggregation.png
-      :align: center
-      :width: 80%
-      :title: Average Bucket metrics aggregation
-      :alt: Average Bucket metrics aggregation
+.. thumbnail:: /images/wazuh-dashboard/custom-dashboards/sibling-pipeline-aggregations.png
+   :align: center
+   :width: 80%
+   :title: Sibling pipeline aggregations
+   :alt: Sibling pipeline aggregations
 
-   Average bucket aggregation helps in calculating the average severity score or event count within specific time intervals or categories.
+-  **Average Bucket**: This is the average value of a metric within each bucket of a specified aggregation. Average bucket provides the average value per group or category. Average bucket aggregation helps in calculating the average severity score or event count within specific time intervals or categories.
 
-#. **Max Bucket**: This is the maximum value of a metric within each bucket of a specified aggregation. It identifies the highest value per group.
+-  **Max Bucket**: This is the maximum value of a metric within each bucket of a specified aggregation. It identifies the highest value per group. Max bucket aggregation enables the identification of the maximum severity level or event count within specific time intervals or categories.
 
-   .. thumbnail:: /images/wazuh-dashboard/custom-dashboards/max-bucket-aggregation.png
-      :align: center
-      :width: 80%
-      :title: Max Bucket metrics aggregation
-      :alt: Max Bucket metrics aggregation
+-  **Min Bucket**: This is the minimum value of a metric within each bucket of a specified aggregation. It identifies the lowest value per group or category. Min bucket aggregation helps identify the minimum severity level or event count within specific time intervals or categories.
 
-   Max bucket aggregation enables the identification of the maximum severity level or event count within specific time intervals or categories.
-
-#. **Min Bucket**: This is the minimum value of a metric within each bucket of a specified aggregation. It identifies the lowest value per group or category.
-
-   .. thumbnail:: /images/wazuh-dashboard/custom-dashboards/min-bucket-aggregation.png
-      :align: center
-      :width: 80%
-      :title: Min Bucket metrics aggregation
-      :alt: Min Bucket metrics aggregation
-   
-   Min bucket aggregation helps identify the minimum severity level or event count within specific time intervals or categories.
-
-#. **Sum Bucket**: This is the total sum of a metric within each bucket of a specified aggregation. It adds up the values per group.
-
-   .. thumbnail:: /images/wazuh-dashboard/custom-dashboards/sum-bucket-aggregation.png
-      :align: center
-      :width: 80%
-      :title: Sum Bucket metrics aggregation
-      :alt: Sum Bucket metrics aggregation
-
-   Sum bucket aggregation helps in calculating the total count or severity score within specific time intervals or categories.
+-  **Sum Bucket**: This is the total sum of a metric within each bucket of a specified aggregation. It adds up the values per group. Sum bucket aggregation helps in calculating the total count or severity score within specific time intervals or categories.
 
 Bucket aggregation
 ''''''''''''''''''
 
 This is used to determine the type of information we are trying to get from the dataset. The bucket aggregation determines how the data is segmented or grouped such as by date. It is typically represented on the X-axis.
 
-These are the following types of bucket aggregations for a pie chart:
+.. thumbnail:: /images/wazuh-dashboard/custom-dashboards/bucket-aggregation.png
+   :align: center
+   :width: 80%
+   :title: Bucket aggregation
+   :alt: Bucket aggregation
 
-#. **Date Histogram**: This aggregation is used to display a numeric field and organize that using the date.
+The following are the types of bucket aggregations:
 
-   .. thumbnail:: /images/wazuh-dashboard/custom-dashboards/date-histogram-aggregation.png
-      :align: center
-      :width: 80%
-      :title: Date Histogram buckets aggregation
-      :alt: Date Histogram buckets aggregation
+-  **Date Histogram**: This aggregation is used to display data organized by a date.
 
-#. **Date Range**: This aggregation is used to report the values within a date range which we can specify.
+-  **Date Range**: This aggregation is used to report the values within a date range which we can specify.
 
-   .. thumbnail:: /images/wazuh-dashboard/custom-dashboards/date-range-aggregation.png
-      :align: center
-      :width: 80%
-      :title: Date Range buckets aggregation
-      :alt: Date Range buckets aggregation
+-  **Filters**: This aggregation is used to apply filters on data.
 
-#. **Filters**: This aggregation is used to apply filters on data.
+-  **Histogram**: This aggregation is used for numeric fields, where we can provide the integer interval for the selected field.
 
-   .. thumbnail:: /images/wazuh-dashboard/custom-dashboards/filters-aggregation.png
-      :align: center
-      :width: 80%
-      :title: Filters buckets aggregation
-      :alt: Filters buckets aggregation
+-  **IPv4 Range**: This aggregation provides us with the option to set the range using IPv4 addresses.
 
-#. **Histogram**: This aggregation is used for numeric fields, where we can provide the integer interval for the selected field.
+-  **Range**: This aggregation is used to provide the range of numeric field values.
 
-   .. thumbnail:: /images/wazuh-dashboard/custom-dashboards/histogram-aggregation.png
-      :align: center
-      :width: 80%
-      :title: Histogram buckets aggregation
-      :alt: Histogram buckets aggregation
+-  **Significant Terms**: This aggregation returns interesting or unusual occurrences of terms in a set.
 
-#. **IPv4 Range**: This aggregation provides us with the option to set the range using IPv4 addresses.
-
-   .. thumbnail:: /images/wazuh-dashboard/custom-dashboards/ipv4-range-aggregation.png
-      :align: center
-      :width: 80%
-      :title: IPv4 Range buckets aggregation
-      :alt: IPv4 Range buckets aggregation
-
-#. **Range**: This aggregation is used to provide the range of numeric field values.
-
-   .. thumbnail:: /images/wazuh-dashboard/custom-dashboards/range-aggregation.png
-      :align: center
-      :width: 80%
-      :title: Range buckets aggregation
-      :alt: Range buckets aggregation
-
-#. **Significant Terms**: This aggregation returns interesting or unusual occurrences of terms in a set.
-
-   .. thumbnail:: /images/wazuh-dashboard/custom-dashboards/significant-terms-aggregation.png
-      :align: center
-      :width: 80%
-      :title: Significant Terms buckets aggregation
-      :alt: Significant Terms buckets aggregation
-
-#. **Terms**: This aggregation enables us to pick the top or bottom n elements of the selected field.
-
-   .. thumbnail:: /images/wazuh-dashboard/custom-dashboards/terms-aggregation.png
-      :align: center
-      :width: 80%
-      :title: Terms buckets aggregation
-      :alt: Terms buckets aggregation
+-  **Terms**: This aggregation enables us to pick the top or bottom n elements of the selected field.
 
 Both the Y-axis and the X-axis are used to plot the data points on a visualization chart.
 
@@ -333,29 +207,25 @@ Basic charts
 
 The following is a list of the basic charts for visualization:
 
--  **Bar, area, and line charts**: These charts are used for comparing different series in x and y axis.
--  **Pie charts**: These charts are used when all of the fields are related to each other; for example, the voting percentage for different parties in an election.
+-  **Bar, area, and line charts**: These charts are used for comparing different series in ``x-axis`` and ``y-axis``.
+-  **Pie charts**: These charts are used when all of the fields are related to each other.
 -  **Heat maps**: These are used to shade the cells within a matrix.
 
 Bar charts
 ~~~~~~~~~~
 
-Bar charts are a type of visualization that are used to compare specific measures for different data categories. These are the most common type of visualization, and are easy to create and interpret. Bar charts are used to present categorical data in the form of rectangular bars with heights/lengths that are proportional to the given values.
+Bar charts are a type of visualization that is used to compare specific measures for different data categories. These are the most common types of visualization and are easy to create and interpret. Bar charts are used to present categorical data in the form of rectangular bars with heights/lengths that are proportional to the given values.
 
 Creating a Bar chart
 ''''''''''''''''''''
 
 **Horizontal Bar**: This is a type of bar chart where rectangular bars are displayed horizontally. The length or width of each bar corresponds to a particular value. This allows an easy comparison between different data points. Horizontal bar charts are often used to visualize data that has distinct categories or to show rankings.
 
-#. From the **Visualize** tab, click **Create Visualization**, select the ``Horizontal bar`` visualization format and use ``wazuh-alerts-*`` as the index pattern name.
+The steps below show how to create a horizontal bar visualization that shows varying numbers of :doc:`MITRE </user-manual/ruleset/mitre>` tactics detected within a set timeframe.
 
-   .. thumbnail:: /images/wazuh-dashboard/custom-dashboards/create-horizontal-bar-visualization.png
-      :align: center
-      :width: 80%
-      :title: Create horizontal bar visualization
-      :alt: Create horizontal bar visualization
+#. Click **Create new visualization** from the **Visualize** tab, select the **Horizontal Bar** visualization format and use ``wazuh-alerts-*`` as the index pattern name.
 
-#. In the ``Data`` section, on the ``Y-axis`` of **Metrics**, set the following value:
+#. Set the following value in the **Data** section, on the ``Y-axis``, in **Metrics**:
 
    -  ``Aggregation`` = ``Count``
 
@@ -375,19 +245,15 @@ Creating a Bar chart
       :title: Create horizontal bar visualization – Update button
       :alt: Create horizontal bar visualization – Update button
 
-#. Click the upper-right **Save** button and assign a title to save the visualization.
+#. Click the **Save** button in the top right corner and assign a title to save the visualization.
 
-**Vertical Bar**: This is a type of bar chart where the bars are displayed vertically, with the length or height of each bar representing a particular value. Vertical bar charts are suitable for comparing data across different categories. They are commonly used to display rankings, comparisons, or distribution of values.
+**Vertical Bar**: This is a type of bar chart where the bars are displayed vertically, with the length or height of each bar representing a particular value. Vertical bar charts are suitable for comparing data across different categories. They are commonly used to display rankings, comparisons, or the distribution of values.
 
-#. From the **Visualize** tab, select the ``Vertical Bar`` visualization format and use ``wazuh-alerts-*`` as the index pattern name.
+The steps below detail how to create a vertical bar visualization that shows varying numbers of :doc:`MITRE </user-manual/ruleset/mitre>` tactics detected within a set timeframe.
 
-   .. thumbnail:: /images/wazuh-dashboard/custom-dashboards/create-vertical-bar-visualization.png
-      :align: center
-      :width: 80%
-      :title: Create vertical bar visualization
-      :alt: Create vertical bar visualization
+#. Click **Create new visualization** from the **Visualize** tab, select the **Vertical Bar** visualization format and use ``wazuh-alerts-*`` as the index pattern name.
 
-#. In the ``Data`` section, on the ``Y-axis`` of **Metrics**, set the following value:
+#. Set the following value in the **Data** section, on the ``Y-axis``, in **Metrics**:
 
    -  ``Aggregation`` = ``Count``
 
@@ -407,39 +273,33 @@ Creating a Bar chart
       :title: Create vertical bar visualization – Update button
       :alt: Create vertical bar visualization – Update button
 
-#. Click the upper-right **Save** button and assign a title to save the visualization.
+#. Click the **Save** button in the top right corner and assign a title to save the visualization.
 
 Pie charts
 ~~~~~~~~~~
 
-This is a circular chart that is divided into sectors, with each sector representing a percentage of a whole data set. They are commonly used to show market share, composition of data, or distribution of categories.
+This is a circular chart that is divided into sectors, with each sector representing a percentage of a whole data set. They are commonly used to show market share, composition of data, or distribution of categories. The total slice size of a pie chart is calculated by the metrics aggregation. In the case of a pie chart, we use the count, sum, and unique count.
 
-The total slice size of a pie chart is calculated by the metrics aggregation. In the case of a pie chart, we use the count, sum, unique count.
+The steps below show how to create a Pie chart visualization that shows :doc:`MITRE </user-manual/ruleset/mitre>` tactics count within a timeframe.
 
 Creating a Pie chart
 ''''''''''''''''''''
 
-#. From the **Visualize** tab, click **Create Visualization**, select the ``Pie`` visualization format and use ``wazuh-alerts-*`` as the index pattern name.
+#. Click **Create new visualization** from the **Visualize** tab, select the **Pie** visualization format and use ``wazuh-alerts-*`` as the index pattern name.
 
-   .. thumbnail:: /images/wazuh-dashboard/custom-dashboards/create-pie-visualization.png
-      :align: center
-      :width: 80%
-      :title: Create pie visualization
-      :alt: Create pie visualization
-
-#. In the ``Data`` section, on the ``Slice size`` of **Metrics**, set the following value:
+#. Set the following value in the **Data** section, on the ``Slice size``, in **Metrics**:
 
    -  ``Aggregation`` = ``Count``
 
 #. Add a ``Split slices`` in **Bucket** and set the following values:
 
    -  ``Aggregation`` = ``Terms``
-   - ``Field`` = ``rule.mitre.tactic``
+   -  ``Field`` = ``rule.mitre.tactic``
    -  ``Order by`` = ``Metric: Count``
    -  ``Order`` = ``Descending``
    -  ``Size`` = ``10``
 
-#. In the ``Options`` section, customize the Pie chart by toggling on ``show label``.
+#. Customize the Pie chart by toggling on ``show label`` in the **Options** section.
 
 #. Click the **Update** button.
 
@@ -449,35 +309,29 @@ Creating a Pie chart
       :title: Create pie visualization – Update button
       :alt: Create pie visualization – Update button
 
-#. Click the upper-right **Save** button and assign a title to save the visualization.
+#. Click the **Save** button in the top right corner and assign a title to save the visualization.
 
 Area charts
 ~~~~~~~~~~~
 
-This is used to display graphically quantitative data using filled-in areas. The areas between axes and lines are typically filled with colors or patterns to differentiate between different categories or data points. This emphasizes the quantity beneath a line chart.
+This is used to display graphically quantitative data using filled-in areas. The areas between axes and lines are typically filled with colors or patterns to differentiate between different categories or data points. This emphasizes the quantity beneath a line chart. Area charts are useful for showing the magnitude and distribution of data over time or categories. They are often used to display trends, comparisons, or cumulative values.
 
-Area charts are useful for showing the magnitude and distribution of data over time or categories. They are often used to display trends, comparisons, or cumulative values.
+The steps below show how to create an Area chart that visualizes a histogram of Wazuh rule levels and their maximum fired times.
 
-Creating a Area chart
-'''''''''''''''''''''
+Creating an Area chart
+''''''''''''''''''''''
 
-#. From the **Visualize** tab, click **Create Visualization**, select the ``area`` visualization format, and use ``wazuh-alerts-*`` as the index pattern name.
+#. Click **Create new visualization** from the **Visualize** tab, select the **Area** visualization format, and use ``wazuh-alerts-*`` as the index pattern name.
 
-   .. thumbnail:: /images/wazuh-dashboard/custom-dashboards/create-area-visualization.png
-      :align: center
-      :width: 80%
-      :title: Create area visualization
-      :alt: Create area visualization
-
-#. On the ``Y-axis`` of **Metrics**, set the following values:
+#. Set the following value in the **Data** section, on the ``Y-axis``, in **Metrics**:
 
    -  ``Aggregation`` = ``Max``
-   -  ``Field`` = ``data.memory.used_bytes``
+   -  ``Field`` = ``rule.level``
 
 #. Add another ``Y-axis`` in **Metric** and set the following values:
 
    -  ``Aggregation`` = ``Max``
-   -  ``Field`` = ``data.memory.available_bytes``
+   -  ``Field`` = ``rule.firedtimes``
 
 #. Add an ``X-axis`` in **Bucket** and set the following values:
 
@@ -492,22 +346,24 @@ Creating a Area chart
       :title: Create area visualization – Update button
       :alt: Create area visualization – Update button
 
-#. Click the upper-right **Save** button and assign a title to save the visualization.
+#. Click the **Save** button in the top right corner and assign a title to save the visualization.
 
 Line charts
 ~~~~~~~~~~~
 
 This visualization represents data points connected by straight lines. It is commonly used to display trends, patterns, relationships over time or a continuous range. By plotting data along a Cartesian coordinate system, lines are drawn to connect the data points. This provides a clear depiction of how the values change.
 
+The steps below show how to create a Line chart that visualizes the Wazuh rule levels triggered maximum times within a timeframe.
+
 Creating a Line chart
 '''''''''''''''''''''
 
-#. From the **Visualize** tab, click **Create Visualization**, select the ``Line`` visualization format and use ``wazuh-alerts-*`` as the index pattern name. 
+#. Click **Create new visualization** from the **Visualize** tab, select the **Line** visualization format, and use ``wazuh-alerts-*`` as the index pattern name.
 
-#. On the ``Y-axis``, in **Metrics**, set the following values:
+#. Set the following value in the **Data** section, on the ``Y-axis``, in **Metrics**:
 
    -  ``Aggregation`` = ``Max``
-   -  ``Field`` = ``data.memory.usage_%``
+   -  ``Field`` = ``rule.level``
 
 #. Add an ``X-axis`` in **Buckets** and set the following values:
 
@@ -523,27 +379,21 @@ Creating a Line chart
       :title: Create line visualization – Update button
       :alt: Create line visualization – Update button
 
-#. Click the upper-right **Save** button and assign a title to save the visualization.
+#. Click the **Save** button in the top right corner and assign a title to save the visualization.
 
 Heat maps
 ~~~~~~~~~
 
-This is a graphical representation that uses colors to visualize the density of certain variables. Heat maps display data points as colored cells, with each color representing a different value or level of intensity.
+This is a graphical representation that uses colors to visualize the density of certain variables. Heat maps display data points as colored cells, with each color representing a different value or level of intensity. Heat maps are useful for identifying patterns, trends, or variations within a dataset.
 
-Heat maps are useful for identifying patterns, trends, or variations within a dataset.
+The steps below show how to create a Heat map that visualizes the mapping of MITRE tactics and techniques.
 
 Creating a Heat Map
 '''''''''''''''''''
 
-#. From the **Visualize** tab, click **Create Visualization**, select the ``Heat Map`` visualization format and use ``wazuh-alerts-*`` as the index pattern name.
+#. Click **Create new visualization** from the **Visualize** tab, select the **Heat Map** visualization format, and use ``wazuh-alerts-*`` as the index pattern name.
 
-   .. thumbnail:: /images/wazuh-dashboard/custom-dashboards/create-heat-map-visualization.png
-      :align: center
-      :width: 80%
-      :title: Create heat map visualization
-      :alt: Create heat map visualization
-
-#. On the ``Y-axis``, in **Metrics**, set the following value:
+#. Set the following value in the **Data** section, on the ``Y-axis``, in **Metrics**:
 
    -  ``Aggregation`` = ``Count``
 
@@ -558,7 +408,7 @@ Creating a Heat Map
 #. Add a ``Y-axis`` in **Buckets** and set the following values:
 
    -  ``Aggregation`` = ``Terms``
-   -  ``Field`` = ``rule.mitre.technique``
+   -  ``Field`` = ``rule.mitre.techniques``
    -  ``Order by`` = ``Metric: Count``
    -  ``Order`` = ``Descending``
    -  ``Size`` = ``5``
@@ -570,6 +420,8 @@ Creating a Heat Map
       :width: 80%
       :title: Create heat map visualization – Update button
       :alt: Create heat map visualization – Update button
+
+#. Click the **Save** button in the top right corner and assign a title to save the visualization.
 
 Data
 ^^^^
@@ -587,19 +439,22 @@ Data table
 
 This is a tabular representation of data that is organized into rows and columns. It provides a structured format to display and analyze data. Each row represents a specific entry, and each column represents a different variable. Data tables are widely used for data analysis, reporting, and providing a clear overview of multiple variables.
 
+The following steps show how to create a Data table to visualize the maximum count of Wazuh rule levels that were triggered.
+
 Creating a Data table
 '''''''''''''''''''''
 
-#. From the **Visualize** tab, click **Create Visualization**, select the ``Data Table`` visualization format and use ``wazuh-alerts-*`` as the index pattern name. 
-#. On the **Metric** in **Metrics** data, set the following values:
+#. Click **Create new visualization** from the **Visualize** tab, select the **Data Table** visualization format and use ``wazuh-alerts-*`` as the index pattern name.
+
+#. Set the following metrics in the **Data** section:
 
    -  ``Aggregation`` = ``Max``
-   -  ``Field`` = ``data.disk_used_bytes``
+   -  ``Field`` = ``rule.level``
 
 #. Add an additional metric
 
    -  ``Aggregation`` = ``Max``
-   -  ``Field`` = ``data.disk_free_bytes``
+   -  ``Field`` = ``rule.firedtimes``
 
 #. Click the **Update** button.
 
@@ -609,21 +464,23 @@ Creating a Data table
       :title: Create data table visualization – Update button
       :alt: Create data table visualization – Update button
 
-#. Click the upper-right **Save** button and assign a title to save the visualization.
+#. Click the **Save** button in the top right corner and assign a title to save the visualization.
 
 Metric
 ~~~~~~
 
 This is a quantifiable measurement that is used to evaluate performance, progress, or specific characteristics. Metric represents a calculation as a single numerical value. They are applicable in various domains, including business analytics, key performance indicators (KPIs), and performance monitoring.
 
+The following steps show how to create a Metric to visualize the maximum number of rule levels that triggered alerts.
+
 Creating a Metric
 '''''''''''''''''
 
-#. From the **Visualize** tab, click **Create Visualization**, select the ``Metric`` visualization format and use ``wazuh-alerts-*`` as the index pattern name.
-#. On the **Metric** in **Metrics** data, set the following values:
+#. Click **Create new visualization** from the **Visualize** tab, select the **Metric** visualization format and use ``wazuh-alerts-*`` as the index pattern name.
+#. Set the following metrics in the **Data** section:
 
    -  ``Aggregation`` = ``Max``
-   -  ``Field`` = ``data.memory_usage_%``
+   -  ``Field`` = ``rule.level``
 
 #. Click the **Update** button.
 
@@ -633,18 +490,20 @@ Creating a Metric
       :title: Create metric visualization – Update button
       :alt: Create metric visualization – Update button
 
-#. Click the upper-right **Save** button and assign a title to save the visualization.
+#. Click the **Save** button in the top right corner and assign a title to save the visualization.
 
 Goal
 ~~~~
 
 This refers to the desired target that an individual or organization aims to achieve. It represents a specific purpose and serves as a benchmark for measuring progress and achieving a final goal.
 
+The steps below show how to create Goals to visualize the :doc:`Security Configuration Assessment </user-manual/capabilities/sec-config-assessment/index>` (SCA) policy status in percentage and counts.
+
 Creating a Goal
 '''''''''''''''
 
-#. From the **Visualize** tab, click **Create Visualization**, select the ``Goal`` visualization format and use ``wazuh-alerts-*`` as the index pattern name.
-#. On the **Metric** in **Data**, set the following values:
+#. Click **Create new visualization** from the **Visualize** tab, select the **Goal** visualization format and use ``wazuh-alerts-*`` as the index pattern name.
+#. Set the following metrics in the **Data** section:
 
    -  ``Aggregation`` = ``Max``
    -  ``Field`` = ``data.sca.passed``
@@ -654,7 +513,7 @@ Creating a Goal
    -  ``Aggregation`` = ``Terms``
    -  ``Field`` = ``data.sca.total_checks``
 
-#. In the ``Options`` section, customize the ``Ranges`` to match the range of existing sca rules.
+#. Customize the ``Ranges`` to match the range of existing SCA rules in the **Options** section.
 
    .. thumbnail:: /images/wazuh-dashboard/custom-dashboards/create-goal-visualization.png
       :align: center
@@ -670,23 +529,23 @@ Creating a Goal
       :title: Create goal visualization – Update button
       :alt: Create goal visualization – Update button
 
-#. Click the upper-right **Save** button and assign a title to save the visualization.
+#. Click the **Save** button in the top right corner and assign a title to save the visualization.
 
 Gauge
 ~~~~~
 
-This is a visualization that is represented as a meter. It is commonly used to display a single value within a specific range. The gauge consists of a pointer that shows the current value. This is displayed as a position along a circular or linear scale.
+This is a visualization that is represented as a meter. It is commonly used to display a single value within a specific range. The gauge consists of a pointer that shows the current value. This is displayed as a position along a circular or linear scale. Gauges are used to indicate progress, performance metrics, or levels of achievement. It shows how a metric’s value relates to reference threshold values.
 
-Gauges are used to indicate progress, performance metrics, or levels of achievement. It shows how a metric’s value relates to reference threshold values.
+The steps below show how to create a Gauge to visualize the SCA failed counts.
 
 Creating a Gauge
 ''''''''''''''''
 
-#. From the **Visualize** tab, click **Create Visualization**, select the ``Gauge`` visualization format and use ``wazuh-alerts-*`` as the index pattern name.
-#. On the **Metric** in **Metrics** data, set the following values:
+#. Click **Create new visualization** from the **Visualize** tab, select the **Gauge** visualization format, and use ``wazuh-alerts-*`` as the index pattern name.
+#. Set the following metrics in the **Data** section:
 
-   -  ``Aggregation`` = ``Max``
-   -  ``Field`` = ``data.disk_usage_%``
+   -  ``Aggregation`` = ``unique_count``
+   -  ``Field`` = ``data.sca.failed``
 
 #. Click the Update button.
 
@@ -696,17 +555,19 @@ Creating a Gauge
       :title: Create gauge visualization – Update button
       :alt: Create gauge visualization – Update button
 
-#. Click the upper-right **Save** button and assign a title to save the visualization.
+#. Click the **Save** button in the top right corner and assign a title to save the visualization.
 
 Maps
 ^^^^
 
-**Maps**: These are visual representations of geographical regions. Maps display spatial data, such as locations, boundaries, or distributions, on a graphical interface. They provide a means to explore and analyze geographic information, making them valuable for various applications, including navigation, data visualization, and spatial analysis.
+These are visual representations of geographical regions. Maps display spatial data, such as locations, boundaries, or distributions, on a graphical interface. They provide a means to explore and analyze geographic information, making them valuable for various applications, including navigation, data visualization, and spatial analysis.
+
+The steps below show how to create a geographic map.
 
 Creating a map
 ~~~~~~~~~~~~~~
 
-#. From the **Visualize** tab, click **Create Visualization**, select the ``Maps`` visualization format and use ``wazuh-alerts-*`` as the index pattern name.
+#. Click **Create new visualization** from the **Visualize** tab, select the **Maps** visualization format.
 
    .. thumbnail:: /images/wazuh-dashboard/custom-dashboards/create-map-visualization.png
       :align: center
@@ -743,7 +604,7 @@ Creating a map
       :title: Create map visualization – Update button
       :alt: Create map visualization – Update button
 
-#. Click the upper-right **Save** button and assign a title to save the visualization.
+#. Click the **Save** button in the top right corner and assign a title to save the visualization.
 
 The following is a list of maps used in visualization:
 
@@ -757,10 +618,12 @@ This uses geographic coordinates to display data points or regions on a map. Coo
 
 Coordinate maps are ideal for plotting latitude and longitude coordinates. This allows the visualization of spatial data, such as locations, regions, or density. They are commonly used in geographical analysis, tracking data by location, or displaying demographic information.
 
+The steps below show how to create a coordinate map based on the origin location.
+
 Creating a Coordinate map
 '''''''''''''''''''''''''
 
-#. From the **Visualize** tab, click **Create Visualization**, select the ``Coordinate Map`` visualization format and use ``wazuh-alerts-*`` as the index pattern name.
+#. Click **Create new visualization** from the **Visualize** tab, select the **Coordinate Map** visualization format, and use ``wazuh-alerts-*`` as the index pattern name.
 
    .. thumbnail:: /images/wazuh-dashboard/custom-dashboards/create-coordinate-map-visualization.png
       :align: center
@@ -768,7 +631,7 @@ Creating a Coordinate map
       :title: Create coordinate map visualization
       :alt: Create coordinate map visualization
 
-#. On the **Metric** in **Data**, set the following values:
+#. Set the following values on the **Metric** in **Data**:
 
    -  ``Aggregation`` = ``Count``
 
@@ -785,17 +648,19 @@ Creating a Coordinate map
       :title: Create coordinate map visualization – Update button
       :alt: Create coordinate map visualization – Update button
 
-#. Click the upper-right **Save** button and assign a title to save the visualization.
+#. Click the **Save** button in the top right corner and assign a title to save the visualization.
 
 Region Map
 ~~~~~~~~~~
 
 This is a map-based visualization that displays data by dividing regions into distinct boundaries. Region maps are suitable for displaying data at a territorial level. They are often used in geopolitical analysis, demographic comparisons, or election results.
 
+The steps below show how to create a region map based on the destination country.
+
 Create region map
 '''''''''''''''''
 
-#. From the **Visualize** tab, click **Create Visualization**, select the ``Region Map`` visualization format and use ``wazuh-alerts-*`` as the index pattern name.
+#. Click **Create new visualization** from the **Visualize** tab, select the **Region Map** visualization format and use ``wazuh-alerts-*`` as the index pattern name.
 
    .. thumbnail:: /images/wazuh-dashboard/custom-dashboards/create-region-map-visualization.png
       :align: center
@@ -803,16 +668,18 @@ Create region map
       :title: Create region map visualization
       :alt: Create region map visualization
 
-#. On the **Metric** in **Data**, set the following values:
+#. Set the following values on the **Metric** in **Data**:
 
    -  ``Aggregation`` = ``Count``
 
 #. Add a ``Shape field`` in **Buckets** and set the following values:
 
    -  ``Aggregation`` = ``Terms``
-   -  ``Field`` = ``DestCountry``
+   -  ``Field`` = ``GeoLocation.country_name``
    -  ``Order by`` = ``Metric: Count``
    -  ``Order`` = ``Descending``
+
+#. Select ``Name`` as **Join field** under the **Layer Options** tab.
 
 #. Click the **Update** button.
 
@@ -822,7 +689,7 @@ Create region map
       :title: Create region map visualization – Update button
       :alt: Create region map visualization – Update button
 
-#. Click the upper-right **Save** button and assign a title to save the visualization.
+#. Click the **Save** button in the top right corner and assign a title to save the visualization.
 
 Time series
 ^^^^^^^^^^^
@@ -837,12 +704,14 @@ VisBuilder
 
 Visualization Builder is an intuitive tool that allows users to create customized visualizations without programming knowledge. It is beneficial for users who want to quickly generate visual representations of their data without extensive technical knowledge.
 
-As at the time of writing this document, this visualization is experimental. The design and implementation are less mature than stable visualizations and might be subject to change.
+As of the time of writing this document, this visualization is experimental. The design and implementation are less mature than stable visualizations and might be subject to change.
+
+The steps below show how to use Visualization Builder to present :doc:`MITRE </user-manual/ruleset/mitre>` technique and tactics.
 
 Creating a Visualization Builder
 ''''''''''''''''''''''''''''''''
 
-#. From the **Visualize** tab, click **Create Visualization**, select the ``VisBuilder`` visualization format and use ``wazuh-alerts-*`` as the index pattern name.
+#. Click **Create new visualization** from the **Visualize** tab, select the **VisBuilder** visualization format and use ``wazuh-alerts-*`` as the index pattern name.
 
    .. thumbnail:: /images/wazuh-dashboard/custom-dashboards/create-visbuilder-visualization.png
       :align: center
@@ -850,11 +719,10 @@ Creating a Visualization Builder
       :title: Create VisBuilder visualization
       :alt: Create VisBuilder visualization
 
-   Drag a field to the configuration panel to generate a visualization.
-
-#. On the ``Y-axis`` set aggregation to count.
-#. On an ``X-axis`` ``place rule.mitre.technique``.
-#. On the split series place ``rule.mitre.tactic``.
+#. Drag a field to the configuration panel to generate a visualization.
+#. Set aggregation to count on the ``Y-axis``.
+#. Set ``rule.mitre.technique`` on an ``X-axis``.
+#. Set ``rule.mitre.tactics`` on the split series.
 
    .. thumbnail:: /images/wazuh-dashboard/custom-dashboards/create-visbuilder-visualization-data.png
       :align: center
@@ -862,15 +730,19 @@ Creating a Visualization Builder
       :title: Create VisBuilder visualization – Data
       :alt: Create VisBuilder visualization – Data
 
+#. Click the **Save** button in the top right corner and assign a title to save the visualization.
+
 TSVB
 ~~~~
 
 Time Series Visual Builder (TSVB) is a component of the Wazuh dashboard that allows users to create visualizations and analyze time series data using a visual pipeline interface. It provides features such as aggregations, filters, and metrics specifically tailored for time-based analysis.
 
+The steps below show how to use Time Series Visual Builder to visualize :doc:`MITRE </user-manual/ruleset/mitre>` tactics count within a timeframe.
+
 Creating a TSVB
 '''''''''''''''
 
-#. From the **Visualize** tab, select the ``TSVB`` visualization format.
+#. Select the **TSVB** visualization format from the **Visualize** tab.
 
    .. thumbnail:: /images/wazuh-dashboard/custom-dashboards/create-tsvb-visualization.png
       :align: center
@@ -878,17 +750,22 @@ Creating a TSVB
       :title: Create TSVB visualization
       :alt: Create TSVB visualization
 
-#. On the **Metric** in **Data**, set the following values:
+#. Set the following values on the **Metric** in **Data**:
 
    -  ``Aggregation`` = ``Count``
    -  ``Group by`` = ``Terms``
    -  ``By`` = ``rule.mitre.tactic``
+   -  ``Top`` = ``10``
+   -  ``Order by`` = ``Doc Count (default)``
+   -  ``Direction`` = ``Descending``
 
    .. thumbnail:: /images/wazuh-dashboard/custom-dashboards/create-tsvb-visualization-data.png
       :align: center
       :width: 80%
       :title: Create TSVB visualization – Data
       :alt: Create TSVB visualization – Data
+
+#. Click the **Save** button in the top right corner and assign a title to save the visualization.
 
 Others
 ^^^^^^
@@ -906,7 +783,7 @@ This is a visual representation of text data where words are displayed in varyin
 Creating a tag cloud
 ''''''''''''''''''''
 
-#. From the **Visualize** tab, click **Create Visualization**, select the ``Tag cloud`` visualization format and use ``wazuh-alerts-*`` as the index pattern name.
+#. Click **Create new visualization** from the **Visualize** tab, select the **Tag cloud** visualization format, and use ``wazuh-alerts-*`` as the index pattern name.
 
    .. thumbnail:: /images/wazuh-dashboard/custom-dashboards/create-tag-cloud-visualization.png
       :align: center
@@ -914,14 +791,14 @@ Creating a tag cloud
       :title: Create tag cloud visualization
       :alt: Create tag cloud visualization
 
-#. On the **Metric** in **Metrics** data, set the following value:
+#. Set the following value on the **Metric** in **Metrics** data:
 
    -  ``Tag size`` = ``Count``
 
 #. Add a new **Tag** in **Bucket** data and set the following values:
 
    -  ``Aggregation`` = ``Terms``
-   -  ``Field`` = ``rule.mitre.tactic`` 
+   -  ``Field`` = ``rule.mitre.tactic``
    -  ``Order by`` = ``Metric: Count``
 
 #. Click the **Update** button.
@@ -932,7 +809,7 @@ Creating a tag cloud
       :title: Create tag cloud visualization – Update button
       :alt: Create tag cloud visualization – Update button
 
-#. Click the upper-right **Save** button and assign a title to save the visualization.
+#. Click the **Save** button in the top right corner and assign a title to save the visualization.
 
 Markdown
 ~~~~~~~~
@@ -942,20 +819,17 @@ Markdown is a lightweight markup language that is used for formatting text. It a
 Creating a markdown
 '''''''''''''''''''
 
-From the **Visualize** tab, click **Create Visualization**, select the ``Markdown`` visualization format and use ``wazuh-alerts-*`` as the index pattern name.
+#. Click **Create new visualization** from the **Visualize** tab, select the **Markdown** visualization format, and use ``wazuh-alerts-*`` as the index pattern name.
 
-.. thumbnail:: /images/wazuh-dashboard/custom-dashboards/create-markdown-visualization.png
-   :align: center
-   :width: 80%
-   :title: Create markdown visualization
-   :alt: Create markdown visualization
+   .. thumbnail:: /images/wazuh-dashboard/custom-dashboards/create-markdown-visualization.png
+      :align: center
+      :width: 80%
+      :title: Create markdown visualization
+      :alt: Create markdown visualization
 
-After that, we need to do the following:
-
-#. On the **Data** tab, add the text content in the given text-area.
-#. On the **Options** tab, Increase or decrease the font using the controller.
+#. Add the text content in the given text-area on the **Data** tab.
+#. Increase or decrease the font using the controller on the **Options** tab.
 #. Click on the **Update** button to show the markdown:
-
 
    .. thumbnail:: /images/wazuh-dashboard/custom-dashboards/create-markdown-visualization-update-button.png
       :align: center
@@ -963,7 +837,7 @@ After that, we need to do the following:
       :title: Create markdown visualization – Update button
       :alt: Create markdown visualization – Update button
 
-#. Click the upper-right **Save** button and assign a title to save the visualization.
+#. Click the **Save** button in the top right corner and assign a title to save the visualization.
 
 Controls
 ~~~~~~~~
@@ -975,7 +849,7 @@ As at the time of writing this document, this visualization is experimental. The
 Creating controls
 '''''''''''''''''
 
-#. From the **Visualize** tab, click **Create Visualization**, select the ``Controls`` visualization format.
+#. Click **Create new visualization** from the **Visualize** tab, select the **Controls** visualization format.
 
    .. thumbnail:: /images/wazuh-dashboard/custom-dashboards/create-controls-visualization.png
       :align: center
@@ -983,12 +857,19 @@ Creating controls
       :title: Create controls visualization
       :alt: Create controls visualization
 
-#. Add a new ``Options list`` and set the control Label as Mitre tactic.
+#. Add a new ``Options list`` and set the control Label as :doc:`MITRE </user-manual/ruleset/mitre>` tactic.
 #. Choose a source for the chart. Here we selected ``wazuh-alerts-*`` as the index to use.
 #. Select the field ``rule.mitre.tactic``.
+
+   .. thumbnail:: /images/wazuh-dashboard/custom-dashboards/select-rule-mitre-tactic.png
+      :align: center
+      :width: 80%
+      :title: Select field ``rule.mitre.tactic``
+      :alt: Select field ``rule.mitre.tactic``
+
 #. Add a new ``Range slider`` and set the control Label as Quantity.
 #. Select ``wazuh-alerts-*`` as the index to use.
-#. Select the field ``rule.level``.
+#. Select ``rule.level`` as the **Field**.
 #. Click the **Update** button.
 
    .. thumbnail:: /images/wazuh-dashboard/custom-dashboards/create-controls-visualization-update-button.png
@@ -1009,7 +890,7 @@ Gantt charts are valuable for project management or scheduling tasks over time. 
 Creating a Gantt chart
 ''''''''''''''''''''''
 
-#. From the **Visualize** tab, click **Create Visualization**, select the ``Gantt Chart`` visualization format and use ``wazuh-alerts-*`` as the index pattern name.
+#. Click **Create new visualization** from the **Visualize** tab, select the **Gantt Chart** visualization format and use ``wazuh-alerts-*`` as the index pattern name.
 
    .. thumbnail:: /images/wazuh-dashboard/custom-dashboards/create-gantt-chart-visualization.png
       :align: center
@@ -1017,13 +898,12 @@ Creating a Gantt chart
       :title: Create Gantt chart visualization
       :alt: Create Gantt chart visualization
 
-#. Choose a source for the chart. Here we selected ``wazuh-alerts-*`` as the index to use.
-#. On the **Metric** in **Metrics** data, under **Event**, select a log data.
-#. On the **Start time** field for the Event, select a ``timestamp`` field for the start of a schedule. This is the timestamp used for the beginning of the selected Event.
-#. On the **Duration** field for the Event, select a time interval field for the Event duration. This is the amount of time that is added to the start time.
-#. On the **Results** field, select the number of events that will be shown on the chart. The events will be sequenced based on the **Start time**, from the earliest to the latest.
-#. To adjust the colors, axis labels and time format, navigate to the Panel settings.
-#. Click the **Update** button. 
+#. Select a log data on the **Metric** in **Metrics** data, under Event.
+#. Select a ``timestamp`` field for the start of a schedule on the **Start time** field for the Event. This is the timestamp used for the beginning of the selected Event.
+#. Select a time interval field for the Event duration on the **Duration** field for the Event. This is the amount of time that is added to the start time.
+#. Select the number of events that will be shown on the chart on the **Results** field. The events will be sequenced based on the **Start time**, from the earliest to the latest.
+#. Navigate to the Panel settings to adjust the colors, axis labels and time format.
+#. Click the **Update** button.
 #. Click the upper-right **Save** button and assign a title to save the visualization.
 
 Hover over a bar to see the duration of that event.
@@ -1038,7 +918,7 @@ They are commonly used in historical analysis, project planning, or storytelling
 Creating Timeline
 '''''''''''''''''
 
-#. From the **Visualize** tab, click **Create Visualization**, select the ``Timeline`` visualization format.
+#. Click **Create new visualization** from the **Visualize** tab, and select the **Timeline** visualization format.
 
    .. thumbnail:: /images/wazuh-dashboard/custom-dashboards/create-timeline-visualization.png
       :align: center
@@ -1080,10 +960,10 @@ Vega
 
 This is a versatile declarative language for creating interactive visualizations. It allows users to define visualizations using JSON syntax. It allows users to define complex visualizations using JSON syntax and is suitable for advanced data visualization needs.
 
-Creating dashboards
--------------------
+Creating a dashboard
+--------------------
 
-Dashboards transform your data from one or more single visualization perspectives into a group of visualizations that provide a clear representation of your data. This allows you to concentrate solely on the data that matters to you by presenting a dynamic representation for your data.
+Dashboards transform your data from one or more single visualization perspectives into a group of visualizations that provide a clear representation of your data. This allows you to concentrate solely on the data that matters to you by presenting a dynamic representation of your data.
 
 To create a custom dashboard, do the following:
 
