@@ -175,6 +175,7 @@ redirections.push(
 newUrls['4.9'] = [
   '/release-notes/release-4-9-0.html',
   '/release-notes/release-4-9-1.html',
+  '/release-notes/release-4-9-2.html',
   '/deployment-options/offline-installation/index.html',
   '/deployment-options/offline-installation/step-by-step.html',
   '/deployment-options/offline-installation/installation-assistant.html',
