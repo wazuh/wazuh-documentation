@@ -16,7 +16,7 @@
 
 # The short X.Y version
 version = '4.8'
-is_latest_release = False
+is_latest_release = True
 
 # The full version, including alpha/beta/rc tags
 # Important: use a valid branch (4.0) or, preferably, tag name (v4.0.0)
