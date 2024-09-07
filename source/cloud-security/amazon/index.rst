@@ -1,24 +1,19 @@
 .. Copyright (C) 2015, Wazuh, Inc.
 
 .. meta::
-  :description: Learn how Wazuh helps to increase the security of AWS infrastructure, monitoring AWS instances and AWS services, in this section of our documentation. 
-  
-.. _amazon:
+   :description: Wazuh provides a comprehensive suite of features to monitor and improve the security of your AWS infrastructure. Learn more in this section of our documentation.
 
-Using Wazuh to monitor AWS
-==========================
+Monitoring Amazon Web Services (AWS)
+====================================
 
-Wazuh helps to increase the security of an AWS infrastructure in two different, complementary ways:
+Amazon Web Services (AWS) is a widely used cloud computing platform provided by Amazon. It offers a broad set of services, including computing power, storage, databases, machine learning, analytics, security, and more. AWS enables individuals, businesses, and organizations to access and utilize computing resources without the need to invest in and maintain physical infrastructure.
 
-- **Installing the Wazuh agent on the instances** to monitor the activity inside them. It collects different types of system and application data and forwards it to the Wazuh manager. Different agent tasks or processes are used to monitor the system in different ways (e.g., monitoring file integrity, reading system log messages, and scanning system configurations).
-- **Monitoring AWS services** to collect and analyze log data about the infrastructure. Thanks to the module for AWS, Wazuh can trigger alerts based on the events obtained from these services, which provide rich and complete information about the infrastructure, such as the instances configuration, unauthorized behavior, data stored on S3, and more.
+Wazuh, an open source security platform, provides a comprehensive suite of features to monitor and improve the security of your AWS infrastructure. You can install Wazuh agents on your EC2 instances or integrate the Wazuh module for AWS with supported AWS services. This allows you to analyze events and receive near real-time alerts for anomalies within your AWS infrastructure.
 
-In this section, you can learn about these two methods, what they do and how to configure and set them up.
+You can learn how to monitor your AWS infrastructure in the following sections:
 
-.. topic:: Contents
+.. toctree::
+   :maxdepth: 1
 
-  .. toctree::
-    :maxdepth: 1
-
-    instances
-    services/index
+   instances
+   services/index
