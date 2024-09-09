@@ -1,44 +1,66 @@
 .. Copyright (C) 2015, Wazuh, Inc.
 
 .. meta::
-  :description: AWS CloudTrail is a service supported by Wazuh that enables auditing AWS accounts. Check out this section of our documentation to learn more about it. 
-  
-.. _amazon_cloudtrail:
+   :description: AWS CloudTrail is a service that enables auditing of your AWS account. Learn more in this section of the documentation.
 
 AWS CloudTrail
 ==============
 
-`AWS CloudTrail <https://aws.amazon.com/cloudtrail/>`_ is a service that enables auditing of your AWS account. With CloudTrail, you can log, monitor, and retain account activity related to actions across your AWS infrastructure. This service provides the event history of your AWS account activity, such as actions taken through the AWS Management Console, AWS SDKs, command line tools, and other AWS services.
+`AWS CloudTrail <https://aws.amazon.com/cloudtrail/>`__ is a service that enables auditing of your AWS account. With CloudTrail, you can log, monitor, and retain account activity related to actions across your AWS infrastructure. This service provides the event history of your AWS account activity, such as actions taken through the AWS Management Console, AWS SDKs, command line tools, and other AWS services.
 
-Amazon configuration
---------------------
+AWS configuration
+-----------------
 
-#. From your AWS console, choose “CloudTrail” from the Deployment & Management section:
+The following sections cover how to configure the Amazon CloudTrail service to integrate with Wazuh.
 
-    .. thumbnail:: /images/cloud-security/aws/aws-cloudtrail-1.png
+Amazon CloudTrail configuration
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+#. :doc:`Create a new S3 bucket <../prerequisites/S3-bucket>`. If you want to use an already existing one, skip this step.
+
+#. On your AWS console, search for *“cloudtrail”* in the search bar at the top of the page or go to **Management & Governance** > **CloudTrail**.
+
+   .. thumbnail:: /images/cloud-security/aws/01-search-for-cloudtrail.png
       :align: center
-      :width: 70%
+      :width: 80%
 
-#. Create a new trail:
+#. Click **Create trail** to create a new trail.
 
-    .. thumbnail:: /images/cloud-security/aws/aws-cloudtrail-2.png
+   .. thumbnail:: /images/cloud-security/aws/02-create-trail.png
       :align: center
-      :width: 70%
+      :width: 80%
 
-#. Provide a name for the new S3 bucket that will be used to store the CloudTrail logs (remember the name you provide here, you’ll need to reference it during plugin setup):
+#. Assign a **Trail Name** and choose the S3 bucket that will store the CloudTrail logs (remember the name you provide here, you’ll need to reference it the Wazuh module for AWS configuration). If **Log file SSE-KMS encryption** is enabled, assign a name for a new AWS KMS alias or choose an existing one:
 
-    .. thumbnail:: /images/cloud-security/aws/aws-cloudtrail-3.png
+   .. thumbnail:: /images/cloud-security/aws/03-assign-trail-name-1.png
       :align: center
-      :width: 70%
+      :width: 80%
 
-    .. note::
+   .. thumbnail:: /images/cloud-security/aws/03-assign-trail-name-2.png
+      :align: center
+      :width: 80%
+
+   .. note::
+
       The standard file system AWS CloudTrail will create has this structure:
 
       .. code-block:: xml
 
-        <bucket_name>/<prefix>/AWSLogs/<account_id>/CloudTrail/<region>/<year>/<month>/<day>
+         <WAZUH_AWS_BUCKET>/<prefix>/AWSLogs/<ACCOUNT_ID>/CloudTrail/<REGION>/<year>/<month>/<day>
 
-      The structure may change depending on the different configurations of the services, and the user may only change the **bucket_name** & **prefix** values.
+      The structure may change depending on the different configurations of the services, or changing of the ``<WAZUH_AWS_BUCKET>`` & ``<prefix>`` values by the user.
+
+#. Choose log events to be recorded and click **Next**.
+
+   .. thumbnail:: /images/cloud-security/aws/04-choose-log-events.png
+      :align: center
+      :width: 80%
+
+#. Review the configuration and click **Create trail**.
+
+   .. thumbnail:: /images/cloud-security/aws/05-review-and-create-trail.png
+      :align: center
+      :width: 80%
 
 Policy configuration
 ^^^^^^^^^^^^^^^^^^^^
