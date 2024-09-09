@@ -1,39 +1,45 @@
-# Wazuh documentation
+# Wazuh Open Source Project Security Policy
 
-[![Slack](https://img.shields.io/badge/slack-join-blue.svg)](https://wazuh.com/community/join-us-on-slack/)
-[![Mailing list](https://img.shields.io/badge/email-join-blue.svg)](https://groups.google.com/forum/#!forum/wazuh)
-[![Documentation](https://img.shields.io/badge/docs-view-green.svg)](https://documentation.wazuh.com/)
-[![Website](https://img.shields.io/badge/web-view-green.svg)](https://wazuh.com/)
+Version: 2023-06-12
 
-Wazuh is a free, open source and enterprise-ready security monitoring solution for threat detection, integrity monitoring, incident response and compliance.
+## Introduction
+This document outlines the Security Policy for Wazuh's open source projects. It emphasizes our commitment to maintain a secure environment for our users and contributors, and reflects our belief in the power of collaboration to identify and resolve security vulnerabilities.
 
-The online documentation for this project is available in this repository. Members of the Wazuh team and community users contribute to its development and daily improvement.
+## Scope
+This policy applies to all open source projects developed, maintained, or hosted by Wazuh.
 
-## Online documentation
+## Reporting Security Vulnerabilities
+If you believe you've discovered a potential security vulnerability in one of our open source projects, we strongly encourage you to report it to us responsibly.
 
-- [Current version (4.x)](https://documentation.wazuh.com/current/)
-- [Legacy version (2.1)](https://documentation.wazuh.com/2.1/)
+Please submit your findings as security advisories under the "Security" tab in the relevant GitHub repository. Alternatively, you may send the details of your findings to [security@wazuh.com](mailto:security@wazuh.com).
 
-## Contribute to this project
+## Vulnerability Disclosure Policy
+Upon receiving a report of a potential vulnerability, our team will initiate an investigation. If the reported issue is confirmed as a vulnerability, we will take the following steps:
 
-If you want to contribute to this documentation, please read our [CONTRIBUTING](CONTRIBUTING.md) file to learn more about how to deploy a development environment and submit a pull request.
+- Acknowledgment: We will acknowledge the receipt of your vulnerability report and begin our investigation.
+- Validation: We will validate the issue and work on reproducing it in our environment.
+- Remediation: We will work on a fix and thoroughly test it
+- Release & Disclosure: After 90 days from the discovery of the vulnerability, or as soon as a fix is ready and thoroughly tested (whichever comes first), we will release a security update for the affected project. We will also publicly disclose the vulnerability by publishing a CVE (Common Vulnerabilities and Exposures) and acknowledging the discovering party.
+- Exceptions: In order to preserve the security of the Wazuh community at large, we might extend the disclosure period to allow users to patch their deployments.
 
-You can also join our [users mailing list](https://groups.google.com/d/forum/wazuh), by sending an email to `wazuh+subscribe@googlegroups.com`, to ask questions and participate in discussions.
+This 90-day period allows for end-users to update their systems and minimizes the risk of widespread exploitation of the vulnerability.
 
-## Software and libraries used
+## Automatic Scanning
+We leverage GitHub Actions to perform automated scans of our supply chain. These scans assist us in identifying vulnerabilities and outdated dependencies in a proactive and timely manner.
 
-- [Python](https://www.python.org/) 3.8+
-- [Sphinx](http://www.sphinx-doc.org/) 7.0.1
-- [sphinx-tabs](https://github.com/djungelorm/sphinx-tabs) 3.4.1
-- [jsmin](https://github.com/tikitu/jsmin) 3.0.1
-- [sphinx-reredirects](https://gitlab.com/documatt/sphinx-reredirects) 0.1.2
+## Credit
+We believe in giving credit where credit is due. If you report a security vulnerability to us, and we determine that it is a valid vulnerability, we will publicly credit you for the discovery when we disclose the vulnerability. If you wish to remain anonymous, please indicate so in your initial report.
 
-### Optional software to run the alternative Pagefind search engine
+We do appreciate and encourage feedback from our community, but currently we do not have a bounty program. We might start bounty programs in the future.
 
-- [NodeJS](https://nodejs.org/) 16+
+## Compliance with this Policy
+We consider the discovery and reporting of security vulnerabilities an important public service. We encourage responsible reporting of any vulnerabilities that may be found in our site or applications.
 
-## Copyright & License
+Furthermore, we will not take legal action against or suspend or terminate access to the site or services of those who discover and report security vulnerabilities in accordance with this policy because of the fact.
 
-Copyright © 2023 Wazuh, Inc.
+We ask that all users and contributors respect this policy and the security of our community's users by disclosing vulnerabilities to us in accordance with this policy.
 
-Wazuh is free software; you can redistribute it and/or modify it under the terms of the GNU General Public License as published by the Free Software Foundation; either version 2 of the License, or (at your option) any later version.
+## Changes to this Security Policy
+This policy may be revised from time to time. Each version of the policy will be identified at the top of the page by its effective date.
+
+If you have any questions about this Security Policy, please contact us at [security@wazuh.com](mailto:security@wazuh.com).
