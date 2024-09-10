@@ -29,7 +29,7 @@ AWS configuration
 Amazon Simple Queue Service
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-#. Set up a *Standard* type SQS Queue with the default configurations.  You can apply an Access Policy similar to the following example, where ``<region>``, ``<account-id>``, and ``<s3-bucket>`` are the region, account ID, and the name you are going to provide to the S3 bucket.
+#. Set up a *Standard* type SQS Queue with the default configurations.  You can apply an Access Policy similar to the following example, where ``<REGION>``, ``<ACCOUNT_ID>``, and ``<SQS-NAME>`` are the region, account ID, and the SQS Queue name.
 
    .. code-block:: json
 
@@ -44,7 +44,7 @@ Amazon Simple Queue Service
            "Service": "s3.amazonaws.com"
          },
          "Action": "SQS:SendMessage",
-         "Resource": "arn:aws:sqs:<region>:<account-id>:<s3-bucket>",
+         "Resource": "arn:aws:sqs:<region>:<account-id>:<SQS-NAME>",
          "Condition": {
            "StringEquals": {
              "aws:SourceAccount": "<account-id>"
