@@ -718,7 +718,7 @@ In the following configuration example Wazuh collects the ``journald`` logs if a
       <location>journald</location>
       <log_format>journald</log_format>
       <filter field="_SYSTEMD_UNIT">^ssh.service$</filter>
-    <localfile>
+    </localfile>
 
     <localfile>
       <location>journald</location>
