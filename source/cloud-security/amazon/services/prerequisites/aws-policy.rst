@@ -10,6 +10,8 @@ In AWS, a policy is an entity that links permissions with an identity or resourc
 
 In this section, we describe how to create an AWS policy and how to attach the policy to a group.
 
+.. _creating_an_AWS_policy:
+
 Creating an AWS policy
 ----------------------
 
@@ -78,6 +80,8 @@ Follow the steps below on your AWS console to create an AWS policy that collects
          :alt: Confirm policy creation
          :align: center
          :width: 80%
+
+.. _attaching_policy_to_IAM_user_group:
 
 Attaching a policy to an IAM user group
 ---------------------------------------
