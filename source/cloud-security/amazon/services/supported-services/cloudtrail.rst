@@ -120,98 +120,131 @@ Configure Wazuh to process AWS CloudTrail logs
 CloudTrail use cases
 --------------------
 
-`EC2`_
-  - `Run a new instance in EC2`_
-  - `Start instances in EC2`_
-  - `Stop instances in EC2`_
-  - `Create Security Groups in EC2`_
-  - `Allocate a new Elastic IP address`_
-  - `Associate a new Elastic IP address`_
-`IAM`_
-  - `Create a user account`_
-  - `Create a user account without permissions`_
-  - `User login failed`_
-  - `Possible break-in attempt`_
-  - `Login success`_
+Below you find examples of some of how Wazuh integrates with CloudTrail to monitor EC2 and IAM events. This enhances the security monitoring capabilities of AWS environments by providing near real-time detection of security incidents and compliance violations.
 
 EC2
 ^^^
 
 Amazon EC2 (Elastic Compute Cloud) provides scalable computing capacity in the cloud. When using this service, it is highly recommended to monitor it for intrusion attempts or other unauthorized actions performed against your cloud infrastructure.
 
-Below are some use cases for Wazuh rules built for EC2.
+Below are some use cases for EC2 monitoring.
+
+.. contents::
+   :local:
+   :depth: 2
+   :backlinks: none
 
 Run a new instance in EC2
-+++++++++++++++++++++++++
+~~~~~~~~~~~~~~~~~~~~~~~~~
 
-When a user runs a new instance in EC2 an AWS event is generated. As previously mentioned, the log message is collected by the Wazuh agent, and forwarded to the manager for analysis. The following alert will be shown in the Wazuh dashboard, it shows data such as instance type, the user who created it, or creation date:
+When a user creates a new instance in EC2, a CloudTrail event is generated. As previously mentioned, the log message is collected by the Wazuh agent, and forwarded to the Wazuh manager for analysis. The following alerts with rule ID *80202* will be shown on the Wazuh dashboard, it shows data such as instance type, the user who created it, or the creation date.
 
-.. thumbnail:: /images/cloud-security/aws/aws-ec2-1.png
-  :align: center
-  :width: 70%
+.. thumbnail:: /images/cloud-security/aws/ec2/1.run-a-new-instance-in-ec2.png
+   :align: center
+   :width: 80%
 
-When a user tries to run an instance **without relevant permissions**, then the following alert will be shown in Kibana:
+.. thumbnail:: /images/cloud-security/aws/ec2/
+   :align: center
+   :width: 80%
 
-.. thumbnail:: /images/cloud-security/aws/aws-ec2-2.png
-  :align: center
-  :width: 70%
+.. thumbnail:: /images/cloud-security/aws/ec2/1.2.run-a new-instance-in-ec2.png
+   :align: center
+   :width: 80%
+
+When a user tries to run an instance without relevant permissions, then the following alert with rule ID *80203* will be shown on the Wazuh dashboard.
+
+.. thumbnail:: /images/cloud-security/aws/ec2/3.run-instance-without-permissions-1.png
+   :align: center
+   :width: 80%
+
+.. thumbnail:: /images/cloud-security/aws/ec2/3.run-instance-without-permissions-2.png
+   :align: center
+   :width: 80%
 
 Start instances in EC2
-++++++++++++++++++++++
+~~~~~~~~~~~~~~~~~~~~~~
 
-When an instance in EC2 is started, the following alert will be shown on the Wazuh dashboard, it shows information such as the instance id and the user who started it:
+When an EC2 instance is started, the following alerts with rule ID *80202* will be shown on the Wazuh dashboard. It shows information such as the instance ID and the user who started it.
 
-.. thumbnail:: /images/cloud-security/aws/aws-ec2-3.png
-  :align: center
-  :width: 70%
+.. thumbnail:: /images/cloud-security/aws/ec2/1-start-instance-in-ec2.png
+   :align: center
+   :width: 80%
 
-If a user tries to start instances **without relevant permissions** the following alert will be shown on Kibana:
+.. thumbnail:: /images/cloud-security/aws/ec2/2-start-instance-in-ec2.png
+   :align: center
+   :width: 80%
 
-.. thumbnail:: /images/cloud-security/aws/aws-ec2-4.png
-  :align: center
-  :width: 70%
+If a user tries to start instances without relevant permissions the following alert will be shown on the Wazuh dashboard.
+
+.. thumbnail:: /images/cloud-security/aws/ec2/3-start-instance-without-permission.png
+   :align: center
+   :width: 80%
+
+.. thumbnail:: /images/cloud-security/aws/ec2/4-start-instance-without-permission.png
+   :align: center
+   :width: 80%
 
 Stop instances in EC2
-+++++++++++++++++++++
+~~~~~~~~~~~~~~~~~~~~~
 
-When an instance in EC2 is stopped, the following alert will be shown on Kibana:
+When an EC2 instance is stopped, the following alerts with rule ID *80202* will be shown on the Wazuh dashboard.
 
-.. thumbnail:: /images/cloud-security/aws/aws-ec2-5.png
-  :align: center
-  :width: 70%
+.. thumbnail:: /images/cloud-security/aws/ec2/1-stop-instance.png
+   :align: center
+   :width: 80%
 
-If a user tries to stop instances **without relevant permissions**, the following alert will be shown on Kibana:
+.. thumbnail:: /images/cloud-security/aws/ec2/2-stop-instance.png
+   :align: center
+   :width: 80%
 
-.. thumbnail:: /images/cloud-security/aws/aws-ec2-6.png
-  :align: center
-  :width: 70%
+If a user tries to stop instances without relevant permissions, the following alert with rule ID *80203* will be shown on the Wazuh dashboard.
 
-Create Security Groups in EC2
-+++++++++++++++++++++++++++++
+.. thumbnail:: /images/cloud-security/aws/ec2/3-stop-instance-without-permission.png
+   :align: center
+   :width: 80%
 
-When a new security group is created, the following alert is shown on the Wazuh dashboard. It shows information such as the user who created it and information about the security group:
+.. thumbnail:: /images/cloud-security/aws/ec2/4-stop-instance-without-permission.png
+   :align: center
+   :width: 80%
 
-.. thumbnail:: /images/cloud-security/aws/aws-ec2-7.png
-  :align: center
-  :width: 70%
+Create security groups in EC2
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+When a new EC2 security group is created, the following alerts with rule ID *80202* is shown on the Wazuh dashboard. It shows information such as the user who created it and information about the security group.
+
+.. thumbnail:: /images/cloud-security/aws/ec2/1-create-security-groups-in-ec2.png
+   :align: center
+   :width: 80%
+
+.. thumbnail:: /images/cloud-security/aws/ec2/2-create-security-groups-in-ec2.png
+   :align: center
+   :width: 80%
 
 Allocate a new Elastic IP address
-+++++++++++++++++++++++++++++++++
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-If a new Elastic IP address is allocated, the following alert will be shown on Kibana:
+If a new Elastic IP address is allocated, the following with rule ID *80202* alerts will be shown on  the Wazuh dashboard.
 
-.. thumbnail:: /images/cloud-security/aws/aws-ec2-8.png
-  :align: center
-  :width: 70%
+.. thumbnail:: /images/cloud-security/aws/ec2/1-allocate-a-new-elastic-ip-address.png
+   :align: center
+   :width: 80%
+
+.. thumbnail:: /images/cloud-security/aws/ec2/2-allocate-a-new-elastic-ip-address.png
+   :align: center
+   :width: 80%
 
 Associate a new Elastic IP address
-++++++++++++++++++++++++++++++++++
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-If an Elastic IP address is associated, then rule ``80446`` will apply, generating the corresponding alert:
+If an Elastic IP address is associated, the following alert with rule ID *80202* will be shown on the Wazuh dashboard.
 
-.. thumbnail:: /images/cloud-security/aws/aws-ec2-9.png
-  :align: center
-  :width: 70%
+.. thumbnail:: /images/cloud-security/aws/ec2/1-associate-a-new-elastic-ip-address.png
+   :align: center
+   :width: 80%
+
+.. thumbnail:: /images/cloud-security/aws/ec2/2-associate-a-new-elastic-ip-address.png
+   :align: center
+   :width: 80%
 
 IAM
 ^^^
@@ -221,7 +254,7 @@ AWS Identity and Access Management (IAM) log data can be used to monitor user ac
 Below are some use cases for Wazuh alerts built and used for IAM events.
 
 Create a user account
-+++++++++++++++++++++
+~~~~~~~~~~~~~~~~~~~~~
 
 When we create a new user account in IAM an AWS event is generated. As previously mentioned, the log message is collected by the Wazuh agent, and forwarded to the manager for analysis. When a user account is created, the following alert will appear on the Wazuh dashboard. You can see the username of the created user and who created it:
 
@@ -230,7 +263,7 @@ When we create a new user account in IAM an AWS event is generated. As previousl
   :width: 70%
 
 Create a user account without permissions
-+++++++++++++++++++++++++++++++++++++++++
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 If an unauthorized user attempts to create new users, the following alert will be shown in the Wazuh dashboard. It will show you which user has tried to create a user account and the username it tried to create:
 
@@ -239,7 +272,7 @@ If an unauthorized user attempts to create new users, the following alert will b
   :width: 70%
 
 User login failed
-+++++++++++++++++
+~~~~~~~~~~~~~~~~~
 
 When a user tries to log in with an invalid password, the following alert will be shown in the Wazuh dashboard. There will be shown data such as the user who tried to log in or the browser it was using:
 
@@ -248,7 +281,7 @@ When a user tries to log in with an invalid password, the following alert will b
   :width: 70%
 
 Possible break-in attempt
-+++++++++++++++++++++++++
+~~~~~~~~~~~~~~~~~~~~~~~~~
 
 When more than 4 authentication failures occur in a **360** second time window, Wazuh raises this alert:
 
@@ -257,7 +290,7 @@ When more than 4 authentication failures occur in a **360** second time window, 
   :width: 70%
 
 Login success
-+++++++++++++
+~~~~~~~~~~~~~
 
 After a successful login, the following event will be shown in the Wazuh dashboard. It shows the user who logged in, the browser it used, and other useful information:
 
