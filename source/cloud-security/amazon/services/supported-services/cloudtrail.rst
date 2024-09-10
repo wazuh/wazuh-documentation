@@ -249,61 +249,86 @@ If an Elastic IP address is associated, the following alert with rule ID *80202*
 IAM
 ^^^
 
-AWS Identity and Access Management (IAM) log data can be used to monitor user access to AWS services and resources. Using IAM, you can create and manage AWS users and groups, and manage permissions to allow and deny their access to AWS resources.
+Identity and Access Management (IAM) allows you to create and manage AWS users and groups, and manage permissions to allow and deny their access to AWS resources. You can use the AWS IAM log data to monitor user access to AWS services and resources.
 
-Below are some use cases for Wazuh alerts built and used for IAM events.
+Below are some use cases for IAM events.
+
+.. contents::
+   :local:
+   :depth: 2
+   :backlinks: none
 
 Create a user account
 ~~~~~~~~~~~~~~~~~~~~~
 
-When we create a new user account in IAM an AWS event is generated. As previously mentioned, the log message is collected by the Wazuh agent, and forwarded to the manager for analysis. When a user account is created, the following alert will appear on the Wazuh dashboard. You can see the username of the created user and who created it:
+When we create a new user account in IAM, a CloudTrail event is generated. As previously mentioned, the log message is collected by the Wazuh agent, and forwarded to the Wazuh server for analysis. When a user account is created, the following alerts with rule ID *80202* will appear on the Wazuh dashboard. You can see the username of the created user, the time it was created, and who created it.
 
-.. thumbnail:: /images/cloud-security/aws/aws-login-1.png
-  :align: center
-  :width: 70%
+.. thumbnail:: /images/cloud-security/aws/iam/1-create-a-user-account.png
+   :align: center
+   :width: 80%
+
+.. thumbnail:: /images/cloud-security/aws/iam/2-create-a-user-account.png
+   :align: center
+   :width: 80%
 
 Create a user account without permissions
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-If an unauthorized user attempts to create new users, the following alert will be shown in the Wazuh dashboard. It will show you which user has tried to create a user account and the username it tried to create:
+If an unauthorized user attempts to create new users, the following alert with rule ID *80250* will be shown on the Wazuh dashboard. It will show you which user has tried to create a user account and the username it tried to create.
 
-.. thumbnail:: /images/cloud-security/aws/aws-login-2.png
-  :align: center
-  :width: 70%
+.. thumbnail:: /images/cloud-security/aws/iam/1-create-a-user-account-without-permissions.png
+   :align: center
+   :width: 80%
+
+.. thumbnail:: /images/cloud-security/aws/iam/2-create-a-user-account-without-permissions.png
+   :align: center
+   :width: 80%
 
 User login failed
 ~~~~~~~~~~~~~~~~~
 
-When a user tries to log in with an invalid password, the following alert will be shown in the Wazuh dashboard. There will be shown data such as the user who tried to log in or the browser it was using:
+When a user tries to log in with an invalid password, the following alerts with rule ID *80254* will be shown on the Wazuh dashboard. There will be shown data such as the user who tried to log in and the browser it was using.
 
-.. thumbnail:: /images/cloud-security/aws/aws-login-3.png
-  :align: center
-  :width: 70%
+.. thumbnail:: /images/cloud-security/aws/iam/1-user-login-failed.png
+   :align: center
+   :width: 80%
+
+.. thumbnail:: /images/cloud-security/aws/iam/2-user-login-failed.png
+   :align: center
+   :width: 80%
 
 Possible break-in attempt
 ~~~~~~~~~~~~~~~~~~~~~~~~~
 
-When more than 4 authentication failures occur in a **360** second time window, Wazuh raises this alert:
+When more than four consecutive unsuccessful login attempts to the AWS console occur in a 360-second time window, the following alert with rule ID *80255* will be shown on the Wazuh dashboard.
 
-.. thumbnail:: /images/cloud-security/aws/aws-login-4.png
-  :align: center
-  :width: 70%
+.. thumbnail:: /images/cloud-security/aws/iam/1-possible-break-in-attempt.png
+   :align: center
+   :width: 80%
+
+.. thumbnail:: /images/cloud-security/aws/iam/2-possible-break-in-attempt.png
+   :align: center
+   :width: 80%
 
 Login success
 ~~~~~~~~~~~~~
 
-After a successful login, the following event will be shown in the Wazuh dashboard. It shows the user who logged in, the browser it used, and other useful information:
+After a successful login, the following alerts with rule ID *80253* will be shown on the Wazuh dashboard. It shows the user who logged in, the browser it used, and other useful information.
 
-.. thumbnail:: /images/cloud-security/aws/aws-login-5.png
-  :align: center
-  :width: 70%
+.. thumbnail:: /images/cloud-security/aws/iam/1-login-success.png
+   :align: center
+   :width: 80%
 
-Here are the Wazuh dashboard charts for IAM events:
+.. thumbnail:: /images/cloud-security/aws/iam/2-login-success.png
+   :align: center
+   :width: 80%
 
-+-----------------------------------------------------------------+-------------------------------------------------------------------+
-| Pie Chart                                                       | Stacked Groups                                                    |
-+=================================================================+===================================================================+
-| .. thumbnail:: /images/cloud-security/aws/aws-iam-pannels-1.png | .. thumbnail:: /images/cloud-security/aws/aws-iam-pannels-2.png   |
-|    :align: center                                               |    :align: center                                                 |
-|    :width: 70%                                                  |    :width: 70%                                                    |
-+-----------------------------------------------------------------+-------------------------------------------------------------------+
+You can create visualizations like this on the Wazuh dashboard for IAM events by following the :doc:`custom dashboard </user-manual/wazuh-dashboard/creating-custom-dashboards>` guide:
+
++-------------------------------------------------------------------+-------------------------------------------------------------------+
+| Pie Chart                                                         | Stacked Groups                                                    |
++===================================================================+===================================================================+
+| .. thumbnail:: /images/cloud-security/aws/iam/1-visualization.png | .. thumbnail:: /images/cloud-security/aws/iam/2-visualization.png |
+|    :align: center                                                 |    :align: center                                                 |
+|    :width: 60%                                                    |    :width: 100%                                                   |
++-------------------------------------------------------------------+-------------------------------------------------------------------+
