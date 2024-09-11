@@ -62,9 +62,19 @@ To allow an AWS user to execute the VPC integration, it must also have a policy 
 Configure Wazuh to process Amazon VPC logs
 ------------------------------------------
 
-#. Open the Wazuh configuration file (``/var/ossec/etc/ossec.conf``) and add the following block:
+#. Access the Wazuh configuration in **Server management** > **Settings** using the Wazuh dashboard or by manually editing the ``/var/ossec/etc/ossec.conf`` file in the Wazuh server or agent.
 
-    .. code-block:: xml
+   .. thumbnail:: /images/cloud-security/aws/vpc/01-wazuh-configuration.png
+      :align: center
+      :width: 80%
+
+   .. thumbnail:: /images/cloud-security/aws/vpc/02-wazuh-configuration.png
+      :align: center
+      :width: 80%
+
+#. Add the following :doc:`Wazuh module for AWS configuration </user-manual/reference/ossec-conf/wodle-s3>` to the file, replacing ``<WAZUH_AWS_BUCKET>`` with the name of the S3 bucket:
+
+   .. code-block:: xml
 
       <wodle name="aws-s3">
         <disabled>no</disabled>
@@ -72,24 +82,28 @@ Configure Wazuh to process Amazon VPC logs
         <run_on_start>yes</run_on_start>
         <skip_on_error>yes</skip_on_error>
         <bucket type="vpcflow">
-          <name>wazuh-aws-wodle</name>
+          <name><WAZUH_AWS_BUCKET></name>
           <aws_profile>default</aws_profile>
         </bucket>
       </wodle>
 
-    .. note::
-      Check the :doc:`AWS S3 module </user-manual/reference/ossec-conf/wodle-s3>` reference manual to learn more about each setting.
+   .. note::
 
-#. Restart Wazuh in order to apply the changes:
+      In this example, the ``aws_profile`` authentication parameter was used. Check the :doc:`credentials <../prerequisites/credentials>` section to learn more about the different authentication options and how to use them.
 
-    * If you're configuring a Wazuh manager:
+#. Save the changes and restart Wazuh to apply the changes. The service can be manually restarted using the following command outside the Wazuh dashboard:
 
-      .. include:: /_templates/common/restart_manager.rst
+   -  Wazuh manager:
 
-    * If you're configuring a Wazuh agent:
+      .. code-block:: console
 
-      .. include:: /_templates/common/restart_agent.rst
-        
+         # systemctl restart wazuh-manager
+
+   -  Wazuh agent:
+
+      .. code-block:: console
+
+         # systemctl restart wazuh-agent
 
 Use cases
 ---------
