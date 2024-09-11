@@ -39,10 +39,10 @@ Index
   <span class="title">Get Wazuh</span>
   </div>
   <div class="index-card-body">
-  Learn how to install Docker for Mac, Windows, or Linux and explore our developer tools.
+  Install Wazuh on Windows, Linux, macOS, and more.
   </div>
   <div class="index-card-footer">
-  <a class="nav-link wzh-btn-bg-gradient-yellow" href="https://wazuh.com/install/" target="_blank" rel="noreferrer noopener">Install Wazuh</a>
+  <a class="nav-link wzh-btn-bg-gradient-yellow" href="https://wazuh.com/install/" target="_blank" rel="noreferrer noopener">Install</a>
   </div>
   </div>
   </aside>
