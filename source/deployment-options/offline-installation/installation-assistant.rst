@@ -18,15 +18,17 @@ Install and configure the Wazuh indexer nodes.
 
         .. group-tab:: RPM
 
-            .. code-block:: console
+            .. code-block:: none
 
                # coreutils
 
         .. group-tab:: DEB
 
-            .. code-block:: console
+            .. code-block:: none
 
-                # debconf adduser procps
+                # debconf
+                # adduser
+                # procps
 
 #. Run the assistant with the ``--offline-installation`` to perform an offline installation. Use the option ``--wazuh-indexer`` and the node name to install and configure the Wazuh indexer. The node name must be the same one used in ``config.yml`` for the initial configuration, for example, ``node-1``.
 
@@ -96,9 +98,10 @@ Installing the Wazuh server
 
        .. group-tab:: DEB
 
-          .. code-block:: console
+          .. code-block:: none
 
-             # gnupg apt-transport-https
+             # gnupg
+             # apt-transport-https
 
 #. Run the assistant with the ``--offline-installation`` to perform an offline installation. Use the option ``--wazuh-server`` followed by the node name to install the Wazuh server. The node name must be the same one used in ``config.yml`` for the initial configuration, for example, ``wazuh-1``.
 
@@ -120,15 +123,18 @@ Installing the Wazuh dashboard
 
         .. group-tab:: RPM
 
-            .. code-block:: console
+            .. code-block:: none
 
                # libcap
 
         .. group-tab:: DEB
 
-            .. code-block:: console
+            .. code-block:: none
 
-                # debhelper tar curl libcap2-bin #debhelper version 9 or later
+                # debhelper version 9 or later
+                # tar
+                # curl
+                # libcap2-bin
 
 #. Run the assistant with the ``--offline-installation`` to perform an offline installation. Use the option ``--wazuh-dashboard`` and the node name to install and configure the Wazuh dashboard. The node name must be the same one used in ``config.yml`` for the initial configuration, for example, ``dashboard``.
 

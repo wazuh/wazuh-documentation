@@ -19,15 +19,17 @@ Installing the Wazuh indexer
 
         .. group-tab:: RPM
 
-            .. code-block:: console
+            .. code-block:: none
 
                # coreutils
 
         .. group-tab:: DEB
 
-            .. code-block:: console
+            .. code-block:: none
 
-                # debconf adduser procps
+                # debconf
+                # adduser
+                # procps
 
 #.  Run the following commands to install the Wazuh indexer.
 
@@ -154,9 +156,10 @@ Installing the Wazuh server
 
        .. group-tab:: DEB
 
-          .. code-block:: console
+          .. code-block:: none
 
-             # gnupg apt-transport-https
+             # gnupg
+             # apt-transport-https
 
 #.  Run the following commands to import the Wazuh key and install the Wazuh manager.
 
@@ -357,15 +360,18 @@ Installing the Wazuh dashboard
 
         .. group-tab:: RPM
 
-            .. code-block:: console
+            .. code-block:: none
 
                # libcap
 
         .. group-tab:: DEB
 
-            .. code-block:: console
+            .. code-block:: none
 
-                # debhelper tar curl libcap2-bin #debhelper version 9 or later
+                # debhelper version 9 or later
+                # tar
+                # curl
+                # libcap2-bin
 
 #.  Run the following commands to install the Wazuh dashboard.
 
