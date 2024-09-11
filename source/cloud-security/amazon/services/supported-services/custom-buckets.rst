@@ -29,34 +29,34 @@ AWS configuration
 Amazon Simple Queue Service
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-#. Set up a *Standard* type SQS Queue with the default configurations.  You can apply an Access Policy similar to the following example, where ``<REGION>``, ``<ACCOUNT_ID>``, and ``<SQS-NAME>`` are the region, account ID, and the SQS Queue name.
+#. Set up a *Standard* type SQS Queue with the default configurations.  You can apply an Access Policy similar to the following example, where ``<REGION>``, ``<ACCOUNT_ID>``, ``<SQS-NAME>``, and ``<S3-BUCKET>`` are the region, account ID, the SQS Queue name, and the name you are going to provide to the S3 bucket.
 
    .. code-block:: json
 
-     {
-     "Version": "2012-10-17",
-     "Id": "example-ID",
-     "Statement": [
-       {
-         "Sid": "example-access-policy",
-         "Effect": "Allow",
-         "Principal": {
-           "Service": "s3.amazonaws.com"
-         },
-         "Action": "SQS:SendMessage",
-         "Resource": "arn:aws:sqs:<region>:<account-id>:<SQS-NAME>",
-         "Condition": {
-           "StringEquals": {
-             "aws:SourceAccount": "<account-id>"
-           },
-           "ArnLike": {
-             "aws:SourceArn": "arn:aws:s3:*:*:<s3-bucket>"
-           }
-         }
-       }
-     ]
-     }
-  
+      {
+      "Version": "2012-10-17",
+      "Id": "example-ID",
+      "Statement": [
+        {
+          "Sid": "example-access-policy",
+          "Effect": "Allow",
+          "Principal": {
+            "Service": "s3.amazonaws.com"
+          },
+          "Action": "SQS:SendMessage",
+          "Resource": "arn:aws:sqs:<REGION>:<ACCOUNT_ID>:<SQS-NAME>",
+          "Condition": {
+            "StringEquals": {
+              "aws:SourceAccount": "<ACCOUNT_ID>"
+            },
+            "ArnLike": {
+              "aws:SourceArn": "arn:aws:s3:*:*:<S3-BUCKET>"
+            }
+          }
+        }
+      ]
+      }
+
    You can make your access policy to accept S3 notifications from different account IDs and to apply different conditions. More information in `Managing access in Amazon SQS <https://docs.aws.amazon.com/AWSSimpleQueueService/latest/SQSDeveloperGuide/sqs-overview-of-managing-access.html>`_. 
 
 Amazon S3 and Event Notifications
