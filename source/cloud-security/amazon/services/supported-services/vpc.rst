@@ -1,37 +1,45 @@
 .. Copyright (C) 2015, Wazuh, Inc.
 
 .. meta::
-  :description: Amazon VPC is a service that allows users to launch AWS resources in a logically isolated section of the AWS Cloud. Learn how to configure and monitor its changes with Wazuh.
-
-.. _amazon_vpc:
+   :description: Amazon VPC lets users provision a logically isolated section of the AWS Cloud where they can launch AWS resources in a virtual network that they define.
 
 Amazon Virtual Private Cloud (VPC)
 ==================================
 
-`Amazon Virtual Private Cloud <https://aws.amazon.com/vpc/?nc1=h_ls>`_ (Amazon VPC) lets users provision a logically isolated section of the AWS Cloud where they can launch AWS resources in a virtual network that they define. Users have complete control over their virtual networking environment, including the selection of their own IP address range, creation of subnets, and configuration of route tables and network gateways. Users can use both IPv4 and IPv6 in their VPC for secure and easy access to resources and applications.
+`Amazon Virtual Private Cloud <https://aws.amazon.com/vpc/?nc1=h_ls>`__ (Amazon VPC) lets users provision a logically isolated section of the AWS Cloud where they can launch AWS resources in a virtual network that they define. Users have complete control over their virtual networking environment, including the selection of their IP address range, creation of subnets, and configuration of route tables and network gateways. Users can use both IPv4 and IPv6 in their VPC for secure and easy access to resources and applications.
 
 Amazon configuration
 --------------------
 
-#. Select an existing S3 Bucket or :doc:`create a new one </cloud-security/amazon/services/prerequisites/S3-bucket>`.
+The following sections cover how to configure the Amazon VPC service to integrate with Wazuh.
 
-#. Go to Services > Compute > EC2:
+#. Go to `S3 buckets <https://s3.console.aws.amazon.com/>`__, select an existing S3 bucket or create a new one, then copy the Amazon Resource Name (ARN) of the S3 bucket.
 
-    .. thumbnail:: /images/cloud-security/aws/aws-create-vpc-1.png
+   .. thumbnail:: /images/cloud-security/aws/vpc/01-go-to-s3-bucket.png
       :align: center
-      :width: 70%
+      :width: 80%
 
-#. Go to Network & Security > Network Interfaces on the left menu. Select a network interface and select *Create a flow log* on the *Actions* menu:
+#. On your AWS console, go to **Services** > **Compute** > **EC2**.
 
-    .. thumbnail:: /images/cloud-security/aws/aws-create-vpc-2.png
+   .. thumbnail:: /images/cloud-security/aws/vpc/02-go-to-ec2.png
       :align: center
-      :width: 70%
+      :width: 80%
 
-#. Change all fields to look like the following screenshot and paste the ARN of the previously created bucket:
+#. Go to **Network & Security** > **Network Interfaces** on the left menu. Select a network interface and select **Create flow log** on the **Actions** menu.
 
-    .. thumbnail:: /images/cloud-security/aws/aws-create-vpc-3.png
+   .. thumbnail:: /images/cloud-security/aws/vpc/03-create-flow-logs.png
       :align: center
-      :width: 70%
+      :width: 80%
+
+#. Change all fields to look like the following screenshot and paste the Amazon Resource Name (ARN) of the previously created bucket.
+
+   .. thumbnail:: /images/cloud-security/aws/vpc/04-flow-log-settings-1.png
+      :align: center
+      :width: 80%
+
+   .. thumbnail:: /images/cloud-security/aws/vpc/04-flow-log-settings-2.png
+      :align: center
+      :width: 80%
 
 Policy configuration
 ^^^^^^^^^^^^^^^^^^^^
@@ -39,21 +47,20 @@ Policy configuration
 .. include:: /_templates/cloud/amazon/create_policy.rst
 .. include:: /_templates/cloud/amazon/bucket_policies.rst
 .. include:: /_templates/cloud/amazon/attach_policy.rst
-    
+
 To allow an AWS user to execute the VPC integration, it must also have a policy like the following attached:
 
-    .. code-block:: json
+.. code-block:: json
 
-      {
-        "Sid": "VisualEditor0",
-        "Effect": "Allow",
-        "Action": "ec2:DescribeFlowLogs",
-        "Resource": "*"
-      }
+   {
+     "Sid": "VisualEditor0",
+     "Effect": "Allow",
+     "Action": "ec2:DescribeFlowLogs",
+     "Resource": "*"
+   }
 
-
-Wazuh configuration
--------------------
+Configure Wazuh to process Amazon VPC logs
+------------------------------------------
 
 #. Open the Wazuh configuration file (``/var/ossec/etc/ossec.conf``) and add the following block:
 
