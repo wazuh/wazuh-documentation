@@ -66,8 +66,8 @@ custom_replacements = {
     "|WAZUH_INDEXER_x64_DEB|" : "amd64",
     #
     # === Wazuh dashboard version revisions
-    "|WAZUH_DASHBOARD_CURRENT_REV_RPM|" : "1",
-    "|WAZUH_DASHBOARD_CURRENT_REV_DEB|" : "1",
+    "|WAZUH_DASHBOARD_CURRENT_REV_RPM|" : "2",
+    "|WAZUH_DASHBOARD_CURRENT_REV_DEB|" : "2",
     # --- Architectures for Wazuh dashboard packages
     "|WAZUH_DASHBOARD_x64_RPM|" : "x86_64",
     "|WAZUH_DASHBOARD_x64_DEB|" : "amd64",
