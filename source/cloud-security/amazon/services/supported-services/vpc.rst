@@ -141,16 +141,16 @@ If a user without proper permissions attempts to create a VPC, the following ale
 Working with VPC Data
 ^^^^^^^^^^^^^^^^^^^^^
 
-A VPC alert contains data such as dest and source IP address, dst and source port, and how many bytes were sent:
+A VPC alert contains data such as destination and source IP address, destination and source port, and how many bytes were sent.
 
-.. thumbnail:: /images/cloud-security/aws/aws-vpc-3.png
-  :align: center
-  :width: 70%
+.. thumbnail:: /images/cloud-security/aws/vpc/1-working-with-vpc-data.png
+   :align: center
+   :width: 80%
 
-These alerts can be easily analyzed using visualizations like the following one:
+These alerts can be easily analyzed by creating visualizations like the following one following the :doc:`custom dashboard </user-manual/wazuh-dashboard/creating-custom-dashboards>` guide.
 
-.. thumbnail:: /images/cloud-security/aws/vpc-flow-data-visualization.png
-  :align: center
-  :width: 70%
+.. thumbnail:: /images/cloud-security/aws/vpc/2-vpc-dashboard.png
+   :align: center
+   :width: 80%
 
-On that visualization users can look for peaks in their network, once they found a peak they can filter, the alerts generated on that time and check which IP addresses were communicating. Since IP address is a field used in many AWS alerts, they'll probably found other alerts and find out what happened.
+You can monitor your network with this visualization to identify peaks. Once a peak is identified, apply filters to view the alerts generated during that time and examine the communication between IP addresses. Since the IP address is a field in numerous AWS alerts, you may discover additional alerts and gain insights into the events that occurred.
