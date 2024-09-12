@@ -36,7 +36,8 @@ if ( $('.search') ) {
                 termFrequency: 0, // 0 - 1
                 pageLength: 1, // 0 - 1
                 termSaturation: 0.2 // 0 - 2
-              }
+              },
+              highlightParam: "highlight"
             };
             data.options(options);
             const search = data.search;
@@ -95,7 +96,7 @@ if ( $('.search') ) {
               for ( let i = 0; i < resultsFound; i++ ) {
                 // let listItem = $('<li id="' + results[i].id + '" style="display:none"></li>');
                 let listItem = $(document.createElement('li'));
-                listItem.attr('id', results[i].id);
+                listItem.attr('id', sanitizeHTML(results[i].id));
                 listItem.attr('style', 'display:none');
                 
                 resultList.append(listItem);
@@ -133,10 +134,10 @@ if ( $('.search') ) {
                   // Context
                   let excerpt = singleResult.excerpt;
                   
-                  context = $('<div/>').addClass('context').text('... ' + excerpt.replace('¶', '') + ' ...');
-                  context.html(context.text().replace(/<mark>/g, '<mark>').replace(/<\/mark>/g, '</mark>'));
+                  context = $('<div>', {class: 'context'});
                   
                   listItem.append(context);
+                  processExcerpt(excerpt, context); 
                   
                   $.each(excludedSearchFolders, function(index, value) {
                     if ( path.includes(value+"/") ) {
@@ -171,23 +172,23 @@ if ( $('.search') ) {
     /* Otherwise, load search option B, Sphinx search */
     loadSphinxSearch();
   }
-
-  function loadSphinxSearch() {
-    getScript(DOCUMENTATION_OPTIONS.URL_ROOT + "_static/js/min/sphinx-search-ui.min.js");
-    getScript(DOCUMENTATION_OPTIONS.URL_ROOT + "searchindex.js");
-  }
-
-  function getScript(scriptFile) {
-    loadScript = document.createElement('SCRIPT');
-    
-    loadScript.setAttribute("charset", "utf-8");
-    loadScript.setAttribute("type", "text/javascript");
-    
-    loadScript.setAttribute("src", scriptFile);
-    document.getElementsByTagName("head")[0].appendChild(loadScript);
-  }
 }
 });
+
+function loadSphinxSearch() {
+  getScript(DOCUMENTATION_OPTIONS.URL_ROOT + "_static/js/min/sphinx-search-ui.min.js");
+  getScript(DOCUMENTATION_OPTIONS.URL_ROOT + "searchindex.js");
+}
+
+function getScript(scriptFile) {
+  loadScript = document.createElement('SCRIPT');
+  
+  loadScript.setAttribute("charset", "utf-8");
+  loadScript.setAttribute("type", "text/javascript");
+  
+  loadScript.setAttribute("src", scriptFile);
+  document.getElementsByTagName("head")[0].appendChild(loadScript);
+}
 
 /* Shows excluded results */
 $(document).delegate('#search-results #toggle-results.include', 'click', function() {
@@ -289,4 +290,48 @@ function updateSearchStatus(statusElement, totalResults, excludedResults) {
     resultText = 'Found <span id="n-results">' + totalResults + '</span> page(s) matching the search query.';
   }
   statusElement.html(resultText);
+}
+
+function sanitizeHTML(str) {
+  return str.replace(/[^\w. ]/gi, function (c) {
+      return '&#' + c.charCodeAt(0) + ';';
+  });
+};
+
+function processExcerpt(excerpt, context) {
+  excerpt = '... ' + htmlDec(excerpt.replace('¶', '')) + ' ...';
+
+  /* Split by opening tag <mark> */
+  excerptArray = excerpt.split('<mark>');
+
+  /* Append to the context the text content before the first <mark> */
+  context.text(excerptArray.shift());
+  
+  /* Separate marked words */
+  for (let i = 0; i < excerptArray.length; i++) {
+    let marked =document.createElement('mark');
+    
+    /* Split by closing tag </mark> 
+       This should create pairs where the first element being the marked term(s)
+       and the second element is the remaining (not marked) part of the string */ 
+    excerptArray[i] = excerptArray[i].split('</mark>');
+    marked.textContent = excerptArray[i][0];
+    context.get(0).appendChild(marked);
+    context.get(0).appendChild(document.createTextNode(excerptArray[i][1]));
+  }
+}
+
+function htmlEnc(s) {
+  return s.replace(/&/g, '&amp;')
+    .replace(/</g, '&lt;')
+    .replace(/>/g, '&gt;')
+    .replace(/'/g, '&#39;')
+    .replace(/"/g, '&#34;');
+}
+
+function htmlDec(s) {
+  return s.replace(/&lt;/g, '<')
+    .replace(/&gt;/g, '>')
+    .replace(/&#39;/g, '\'')
+    .replace(/&#34;/g, '"');
 }
