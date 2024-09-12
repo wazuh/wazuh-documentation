@@ -108,25 +108,35 @@ Configure Wazuh to process Amazon VPC logs
 Use cases
 ---------
 
-- `Create a VPC`_
-- `Working with VPC Data`_
+.. contents::
+   :local:
+   :depth: 2
+   :backlinks: none
 
-Using an Amazon VPC (Virtual Private Cloud), users can logically isolate some of their AWS assets from the rest of their cloud infrastructure. Users can actually set up their own networks in the cloud. This is why it is usually important to monitor changes to their VPCs.
+Using an Amazon VPC (Virtual Private Cloud), users can logically isolate some of their AWS assets from the rest of their cloud infrastructure. Users can set up their networks in the cloud. This is why it is usually important to monitor changes to their VPCs.
 
 Create a VPC
 ^^^^^^^^^^^^
 
-If a VPC is created, the following alert will be shown on Kibana:
+If a VPC is created, the following alerts with rule ID *80202* will be shown on the Wazuh dashboard.
 
-.. thumbnail:: /images/cloud-security/aws/aws-vpc-1.png
-  :align: center
-  :width: 70%
+.. thumbnail:: /images/cloud-security/aws/vpc/1-create-a-vpc.png
+   :align: center
+   :width: 80%
 
-If a user without proper permissions attempts to create a VPC, the following alert will be shown on Kibana:
+.. thumbnail:: /images/cloud-security/aws/vpc/2-create-a-vpc.png
+   :align: center
+   :width: 80%
 
-.. thumbnail:: /images/cloud-security/aws/aws-vpc-2.png
-  :align: center
-  :width: 70%
+If a user without proper permissions attempts to create a VPC, the following alerts with rule ID *80203* will be shown on the Wazuh dashboard.
+
+.. thumbnail:: /images/cloud-security/aws/vpc/3-create-a-vpc-without-permission.png
+   :align: center
+   :width: 80%
+
+.. thumbnail:: /images/cloud-security/aws/vpc/4-create-a-vpc-without-permission.png
+   :align: center
+   :width: 80%
 
 Working with VPC Data
 ^^^^^^^^^^^^^^^^^^^^^
