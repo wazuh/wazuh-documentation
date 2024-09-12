@@ -13,23 +13,21 @@ Install Wazuh components step by step
 Installing the Wazuh indexer
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-#.  Wazuh indexer dependencies must be installed on the Wazuh indexer nodes.
+.. tabs::
 
-    .. tabs::
+   .. group-tab:: RPM
 
-        .. group-tab:: RPM
+      The following dependencies must be installed on the Wazuh indexer nodes.
 
-            .. code-block:: none
+      -  coreutils
 
-               # coreutils
+   .. group-tab:: DEB
 
-        .. group-tab:: DEB
+      The following dependencies must be installed on the Wazuh indexer nodes.
 
-            .. code-block:: none
-
-                # debconf
-                # adduser
-                # procps
+      -  debconf
+      -  adduser
+      -  procps
 
 #.  Run the following commands to install the Wazuh indexer.
 
@@ -148,18 +146,14 @@ Installing the Wazuh indexer
 Installing the Wazuh server
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-#.  Wazuh server dependencies must be installed on the Wazuh server nodes.
+.. tabs::
 
-    .. note:: These dependencies are required for systems with apt as package manager.
+   .. group-tab:: DEB
 
-    .. tabs::
+      On systems with *apt* as package manager, the following dependencies must be installed on the Wazuh server nodes.
 
-       .. group-tab:: DEB
-
-          .. code-block:: none
-
-             # gnupg
-             # apt-transport-https
+      -  gnupg
+      -  apt-transport-https
 
 #.  Run the following commands to import the Wazuh key and install the Wazuh manager.
 
@@ -354,24 +348,22 @@ Note that ``10.0.0.3``, ``10.0.0.4``, ``10.0.0.5`` are example IPs.
 Installing the Wazuh dashboard
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-#.  Wazuh dashboard dependencies must be installed on the Wazuh dashboard nodes.
+.. tabs::
 
-    .. tabs::
+   .. group-tab:: RPM
 
-        .. group-tab:: RPM
+      The following dependencies must be installed on the Wazuh dashboard node.
 
-            .. code-block:: none
+      -  libcap
 
-               # libcap
+   .. group-tab:: DEB
 
-        .. group-tab:: DEB
+      The following dependencies must be installed on the Wazuh dashboard node.
 
-            .. code-block:: none
-
-                # debhelper version 9 or later
-                # tar
-                # curl
-                # libcap2-bin
+      -  debhelper version 9 or later
+      -  tar
+      -  curl
+      -  libcap2-bin
 
 #.  Run the following commands to install the Wazuh dashboard.
 

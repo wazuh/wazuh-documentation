@@ -12,23 +12,21 @@ Installing the Wazuh indexer
 
 Install and configure the Wazuh indexer nodes.
 
-#.  Wazuh indexer dependencies must be installed on the Wazuh indexer nodes.
+.. tabs::
 
-    .. tabs::
+   .. group-tab:: RPM
 
-        .. group-tab:: RPM
+      The following dependencies must be installed on the Wazuh indexer nodes.
 
-            .. code-block:: none
+      -  coreutils
 
-               # coreutils
+   .. group-tab:: DEB
 
-        .. group-tab:: DEB
+      The following dependencies must be installed on the Wazuh indexer nodes.
 
-            .. code-block:: none
-
-                # debconf
-                # adduser
-                # procps
+      -  debconf
+      -  adduser
+      -  procps
 
 #. Run the assistant with the ``--offline-installation`` to perform an offline installation. Use the option ``--wazuh-indexer`` and the node name to install and configure the Wazuh indexer. The node name must be the same one used in ``config.yml`` for the initial configuration, for example, ``node-1``.
 
@@ -90,18 +88,14 @@ Testing the cluster installation
 Installing the Wazuh server
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-#.  Wazuh server dependencies must be installed on the Wazuh server nodes.
+.. tabs::
 
-    .. note:: These dependencies are required for systems with apt as package manager.
+   .. group-tab:: DEB
 
-    .. tabs::
+      On systems with *apt* as package manager, the following dependencies must be installed on the Wazuh server nodes.
 
-       .. group-tab:: DEB
-
-          .. code-block:: none
-
-             # gnupg
-             # apt-transport-https
+      -  gnupg
+      -  apt-transport-https
 
 #. Run the assistant with the ``--offline-installation`` to perform an offline installation. Use the option ``--wazuh-server`` followed by the node name to install the Wazuh server. The node name must be the same one used in ``config.yml`` for the initial configuration, for example, ``wazuh-1``.
 
@@ -117,24 +111,22 @@ Your Wazuh server is now successfully installed.
 Installing the Wazuh dashboard
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-#.  Wazuh dashboard dependencies must be installed on the Wazuh dashboard nodes.
+.. tabs::
 
-    .. tabs::
+   .. group-tab:: RPM
 
-        .. group-tab:: RPM
+      The following dependencies must be installed on the Wazuh dashboard node.
 
-            .. code-block:: none
+      -  libcap
 
-               # libcap
+   .. group-tab:: DEB
 
-        .. group-tab:: DEB
+      The following dependencies must be installed on the Wazuh dashboard node.
 
-            .. code-block:: none
-
-                # debhelper version 9 or later
-                # tar
-                # curl
-                # libcap2-bin
+      -  debhelper version 9 or later
+      -  tar
+      -  curl
+      -  libcap2-bin
 
 #. Run the assistant with the ``--offline-installation`` to perform an offline installation. Use the option ``--wazuh-dashboard`` and the node name to install and configure the Wazuh dashboard. The node name must be the same one used in ``config.yml`` for the initial configuration, for example, ``dashboard``.
 
