@@ -330,8 +330,7 @@ function htmlEnc(s) {
 }
 
 function htmlDec(s) {
-  return s.replace(/&amp;/g, '&')
-    .replace(/&lt;/g, '<')
+  return s.replace(/&lt;/g, '<')
     .replace(/&gt;/g, '>')
     .replace(/&#39;/g, '\'')
     .replace(/&#34;/g, '"');
