@@ -69,27 +69,44 @@ Create an Amazon Data Firehose delivery stream to store the AWS Config events in
 AWS Config configuration
 ^^^^^^^^^^^^^^^^^^^^^^^^
 
+#. On the `AWS Config <https://console.aws.amazon.com/config/>`__ page, go to **Set up AWS Config**.
 
+#. Under **Recording strategy**, specify the AWS resource types you want AWS Config to record:
 
+   -  All resource types with customizable overrides
+   -  Specific resource types
 
+   .. note::
 
-#. On the `AWS Config page, <https://console.aws.amazon.com/config/>`_ go to *Settings*.
+      For more information about these options, see `selecting which resources AWS Config records <https://docs.aws.amazon.com/config/latest/developerguide/select-resources.html>`__.
 
-#. Here, choose the **Resource types to record** (specify the AWS resource types you want AWS Config to record):
-
-    - All resources
-    - Specific types
-
-    .. note::
-      For more information about these options, see `Selecting Which Resources AWS Config Records. <https://docs.aws.amazon.com/config/latest/developerguide/select-resources.html>`_
-
-#. Select an existing S3 Bucket or :doc:`create a new one </cloud-security/amazon/services/prerequisites/S3-bucket>`.
-
-    .. thumbnail:: /images/cloud-security/aws/aws-create-config-1.png
+   .. thumbnail:: /images/cloud-security/aws/config/01-recording-strategy.png
       :align: center
-      :width: 100%
+      :width: 80%
 
-    After these steps, it is necessary to configure the rules.
+#. Create or select an existing IAM role for AWS Config.
+
+   .. thumbnail:: /images/cloud-security/aws/config/.png
+      :align: center
+      :width: 80%
+
+#. Select an existing **S3** bucket and prefix or :doc:`create a new one <../prerequisites/S3-bucket>` then save your configuration.
+
+   .. thumbnail:: /images/cloud-security/aws/config/02-s3-and-prefix.png
+      :align: center
+      :width: 80%
+
+After these steps, it is necessary to configure an Amazon EventBridge rule to send AWS config events to the Amazon Data Firehose delivery stream created in the previous step.
+
+Amazon EventBridge configuration
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+
+
+
+
+
+
 
 #. Go to Services > Management Tools > CloudWatch:
 
