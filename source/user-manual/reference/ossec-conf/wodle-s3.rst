@@ -183,7 +183,7 @@ The available types are:  ``cloudtrail``, ``guardduty``, ``vpcflow``, ``config``
 +----------------------------------------+-------------------------------------------------------------+-----------------------------------------------+
 | :ref:`bucket_service_endpoint`         | The AWS S3 endpoint URL                                     | Optional                                      |
 +----------------------------------------+-------------------------------------------------------------+-----------------------------------------------+
-| :ref:`bucket_waf_acls`                 | Name of ACL WAF                                             | Optional (only works with WAF buckets)        |
+| :ref:`bucket_waf_acls`                 | Comma-separated list of ACLs AWS WAF                        | Optional (only works with WAF v2 buckets)     |
 +----------------------------------------+-------------------------------------------------------------+-----------------------------------------------+
 
 .. _bucket_name:
@@ -453,12 +453,12 @@ The AWS S3 endpoint URL to be used to download the data from the bucket. Check t
 waf_acls
 ^^^^^^^^
 
-Name of a specific ACL WAF. Only works with WAF buckets.
+A comma-separated list of ACLs to limit parsing of logs. Only works with WAF v2 buckets.
 
 +--------------------+----------------------------------------+
-| **Default value**  | All ACL WAF names                      |
+| **Default value**  | N/A                                    |
 +--------------------+----------------------------------------+
-| **Allowed values** | Name of determined ACL WAF             |
+| **Allowed values** | Comma-separated list of valid ACLs     |
 +--------------------+----------------------------------------+
 
 .. _services:

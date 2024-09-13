@@ -57,7 +57,7 @@ Amazon configuration native integration
 
 .. note::
     
-    Specify the name with :ref:`waf_acls <bucket_waf_acls>` to iterate over a specific WAF ACL. By default, it iterates over all WAF ACLs.
+    A comma-separated list of ACLs with :ref:`waf_acls <bucket_waf_acls>` to iterate over the WAF v2 ACLs. By default, Not Applicable.
 
 Amazon configuration with Kinesis
 ---------------------------------
