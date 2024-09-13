@@ -1,7 +1,7 @@
 .. Copyright (C) 2015, Wazuh, Inc.
 
 .. meta::
-   :description: Amazon VPC lets users provision a logically isolated section of the AWS Cloud where they can launch AWS resources in a virtual network that they define.
+   :description: The following sections cover how to configure the Amazon VPC service to integrate with Wazuh.
 
 Amazon Virtual Private Cloud (VPC)
 ==================================

@@ -1,17 +1,77 @@
 .. Copyright (C) 2015, Wazuh, Inc.
 
 .. meta::
-  :description: AWS Config is a service that records the configuration of AWS resources easing auditing tasks. Learn how to configure and monitor it with Wazuh.
+   :description: The following sections cover how to configure different services required to integrate AWS config service with Wazuh.
 
-.. _amazon_config:
+AWS configuration
+=================
 
-AWS Config
-==========
-
-`AWS Config <https://aws.amazon.com/config/>`_ is a service that enables you to assess, audit, and evaluate the configurations of your AWS resources. Config continuously monitors and records your AWS resource configurations and allows you to automate the evaluation of recorded configurations against desired configurations. With Config, you can review changes in configurations and relationships between AWS resources, dive into detailed resource configuration histories, and determine your overall compliance against the configurations specified in your internal guidelines. This enables you to simplify compliance auditing, security analysis, change management, and operational troubleshooting.
+`AWS Config <https://aws.amazon.com/config/>`__ is a service that enables you to assess, audit, and evaluate the configurations of your AWS resources. AWS Config continuously monitors and records your AWS resource configurations and allows you to automate the evaluation of recorded configurations against desired configurations. With AWS Config, you can review changes in configurations and relationships between AWS resources, dive into detailed resource configuration histories, and determine your overall compliance against the configurations specified in your internal guidelines. This enables you to simplify compliance auditing, security analysis, change management, and operational troubleshooting.
 
 Amazon configuration
 --------------------
+
+The following sections cover how to configure different services required to integrate AWS config service with Wazuh.
+
+.. thumbnail:: /images/cloud-security/aws/config/config.png
+   :align: center
+   :width: 80%
+
+Amazon Data Firehose configuration
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Create an Amazon Data Firehose delivery stream to store the AWS Config events into the desired S3 bucket so Wazuh can process them.
+
+#. :doc:`Create a new S3 bucket <../prerequisites/S3-bucket>`. If you want to use an already existing one, skip this step.
+
+#. On your AWS console, search for "*amazon data firehose*" in the search bar at the top of the page or go to **Services** > **Analytics** > **Amazon Data Firehose**.
+
+   .. thumbnail:: /images/cloud-security/aws/config/01-data-firehose.png
+      :align: center
+      :width: 80%
+
+#. Click **Create Firehose stream**.
+
+   .. thumbnail:: /images/cloud-security/aws/config/02-create-firehose-stream.png
+      :align: center
+      :width: 80%
+
+#. Select **Direct PUT** and **Amazon S3** as the desired Source and Destination, respectively.
+
+   .. thumbnail:: /images/cloud-security/aws/config/03-select-direct-put.png
+      :align: center
+      :width: 80%
+
+#. Choose an appropriate **Firehose stream name**.
+
+   .. thumbnail:: /images/cloud-security/aws/config/04-firehose-stream-name.png
+      :align: center
+      :width: 80%
+
+#. Select the desired S3 bucket as the destination. It is possible to specify a custom prefix to alter the path where AWS stores the logs. AWS Firehose creates a file structure ``YYYY/MM/DD/HH``, if a prefix is used the created file structure would be ``prefix-name/YYYY/MM/DD/HH``. If a prefix is used it must be specified under the Wazuh bucket configuration. Select your preferred compression, Wazuh supports any kind of compression but Snappy.
+
+   .. thumbnail:: /images/cloud-security/aws/config/05-select-desired-bucket.png
+      :align: center
+      :width: 80%
+
+#. Create or choose an existing IAM role to be used by Amazon Data Firehose in the **Advanced settings** section.
+
+   .. thumbnail:: /images/cloud-security/aws/config/06-choose-iam-role.png
+      :align: center
+      :width: 80%
+
+#. Click **Create Firehose stream** at the end of the page. The new delivery stream will be created and its details will be shown as follows.
+
+   .. thumbnail:: /images/cloud-security/aws/config/07-create-firehose-stream.png
+      :align: center
+      :width: 80%
+
+AWS Config configuration
+^^^^^^^^^^^^^^^^^^^^^^^^
+
+
+
+
 
 #. On the `AWS Config page, <https://console.aws.amazon.com/config/>`_ go to *Settings*.
 
