@@ -155,6 +155,8 @@ Linux
 
 .. |Amazon_armhf_agent| replace:: `wazuh-agent-|WAZUH_CURRENT|-|WAZUH_REVISION_YUM_AGENT_ARMHF|.armv7hl.rpm <|RPM_AGENT_URL|-|WAZUH_CURRENT|-|WAZUH_REVISION_YUM_AGENT_ARMHF|.armv7hl.rpm>`__ (`sha512 <|CHECKSUMS_URL||WAZUH_CURRENT|/wazuh-agent-|WAZUH_CURRENT|-|WAZUH_REVISION_YUM_AGENT_ARMHF|.armv7hl.rpm.sha512>`__)
 
+.. |CentOS7_powerpc_agent| replace:: `wazuh-agent-|WAZUH_CURRENT|-|WAZUH_REVISION_YUM_AGENT_PPC|.ppc64le.rpm <|RPM_AGENT_URL|-|WAZUH_CURRENT|-|WAZUH_REVISION_YUM_AGENT_PPC|.ppc64le.rpm>`__ (`sha512 <|CHECKSUMS_URL||WAZUH_CURRENT|/wazuh-agent-|WAZUH_CURRENT|-|WAZUH_REVISION_YUM_AGENT_PPC|.ppc64le.rpm.sha512>`__)
+
 .. |CentOS6_i386_agent| replace:: `wazuh-agent-|WAZUH_CURRENT|-|WAZUH_REVISION_YUM_AGENT_I386|.i386.rpm <|RPM_AGENT_URL|-|WAZUH_CURRENT|-|WAZUH_REVISION_YUM_AGENT_I386|.i386.rpm>`__ (`sha512 <|CHECKSUMS_URL||WAZUH_CURRENT|/wazuh-agent-|WAZUH_CURRENT|-|WAZUH_REVISION_YUM_AGENT_I386|.i386.rpm.sha512>`__)
 
 .. |CentOS6_x86_64_agent| replace:: `wazuh-agent-|WAZUH_CURRENT|-|WAZUH_REVISION_YUM_AGENT_X86|.x86_64.rpm <|RPM_AGENT_URL|-|WAZUH_CURRENT|-|WAZUH_REVISION_YUM_AGENT_X86|.x86_64.rpm>`__ (`sha512 <|CHECKSUMS_URL||WAZUH_CURRENT|/wazuh-agent-|WAZUH_CURRENT|-|WAZUH_REVISION_YUM_AGENT_X86|.x86_64.rpm.sha512>`__)
@@ -166,6 +168,8 @@ Linux
 .. |CentOS5_i386_agent| replace:: `wazuh-agent-|WAZUH_CURRENT|-|WAZUH_REVISION_YUM_AGENT_I386_EL5|.el5.i386.rpm <https://packages.wazuh.com/|WAZUH_CURRENT_MAJOR|/yum5/i386/wazuh-agent-|WAZUH_CURRENT|-|WAZUH_REVISION_YUM_AGENT_I386_EL5|.el5.i386.rpm>`__ (`sha512 <|CHECKSUMS_URL||WAZUH_CURRENT|/wazuh-agent-|WAZUH_CURRENT|-|WAZUH_REVISION_YUM_AGENT_I386_EL5|.el5.i386.rpm.sha512>`__)
 
 .. |CentOS5_x86_64_agent| replace:: `wazuh-agent-|WAZUH_CURRENT|-|WAZUH_REVISION_YUM_AGENT_X86_EL5|.el5.x86_64.rpm <https://packages.wazuh.com/|WAZUH_CURRENT_MAJOR|/yum5/x86_64/wazuh-agent-|WAZUH_CURRENT|-|WAZUH_REVISION_YUM_AGENT_X86_EL5|.el5.x86_64.rpm>`__ (`sha512 <|CHECKSUMS_URL||WAZUH_CURRENT|/wazuh-agent-|WAZUH_CURRENT|-|WAZUH_REVISION_YUM_AGENT_X86_EL5|.el5.x86_64.rpm.sha512>`__)
+
+.. |Debian9_powerpc_agent| replace:: `wazuh-agent_|WAZUH_CURRENT|-|WAZUH_REVISION_DEB_AGENT_PPC|_ppc64el.deb <|DEB_AGENT_URL|_|WAZUH_CURRENT|-|WAZUH_REVISION_DEB_AGENT_PPC|_ppc64el.deb>`__ (`sha512 <|CHECKSUMS_URL||WAZUH_CURRENT|/wazuh-agent_|WAZUH_CURRENT|-|WAZUH_REVISION_DEB_AGENT_PPC|_ppc64el.deb.sha512>`__)
 
 .. |Debian7_i386_agent| replace:: `wazuh-agent_|WAZUH_CURRENT|-|WAZUH_REVISION_DEB_AGENT_I386|_i386.deb <|DEB_AGENT_URL|_|WAZUH_CURRENT|-|WAZUH_REVISION_DEB_AGENT_I386|_i386.deb>`__ (`sha512 <|CHECKSUMS_URL||WAZUH_CURRENT|/wazuh-agent_|WAZUH_CURRENT|-|WAZUH_REVISION_DEB_AGENT_I386|_i386.deb.sha512>`__)
 
@@ -244,15 +248,19 @@ Linux
 +-----------------------+-------------------+--------------+------------------------------------------+
 | Distribution          | Version           | Architecture | Package                                  |
 +=======================+===================+==============+==========================================+
+|                       | 2                 |    powerpc   | |CentOS7_powerpc_agent|                  |
++ Amazon Linux          +-------------------+--------------+------------------------------------------+
 |                       |                   |    i386      | |Amazon_i386_agent|                      |
 +                       +                   +--------------+------------------------------------------+
-| Amazon Linux          |                   |    x86_64    | |Amazon_x86_64_agent|                    |
+|                       |                   |    x86_64    | |Amazon_x86_64_agent|                    |
 +                       + 1 and later       +--------------+------------------------------------------+
 |                       |                   |    aarch64   | |Amazon_aarch64_agent|                   |
 +                       +                   +--------------+------------------------------------------+
 |                       |                   |    armhf     | |Amazon_armhf_agent|                     |
 +-----------------------+-------------------+--------------+------------------------------------------+
-| CentOS                |                   |    i386      | |CentOS6_i386_agent|                     |
+| CentOS                |  7 and later      |    powerpc   | |CentOS7_powerpc_agent|                  |
++                       +-------------------+--------------+------------------------------------------+
+|                       |                   |    i386      | |CentOS6_i386_agent|                     |
 +                       +  6 and later      +--------------+------------------------------------------+
 |                       |                   |    x86_64    | |CentOS6_x86_64_agent|                   |
 +                       +                   +--------------+------------------------------------------+
@@ -264,7 +272,9 @@ Linux
 +                       +  5                +--------------+------------------------------------------+
 |                       |                   |    x86_64    | |CentOS5_x86_64_agent|                   |
 +-----------------------+-------------------+--------------+------------------------------------------+
-| Debian                |                   |    i386      | |Debian7_i386_agent|                     |
+|                       |  9 and later      |    powerpc   | |Debian9_powerpc_agent|                  |
++ Debian                +-------------------+--------------+------------------------------------------+
+|                       |                   |    i386      | |Debian7_i386_agent|                     |
 +                       +  7 and later      +--------------+------------------------------------------+
 |                       |                   |    x86_64    | |Debian7_x86_64_agent|                   |
 +                       +                   +--------------+------------------------------------------+
@@ -272,7 +282,9 @@ Linux
 +                       +                   +--------------+------------------------------------------+
 |                       |                   |    armhf     | |Debian7_armhf_agent|                    |
 +-----------------------+-------------------+--------------+------------------------------------------+
-| Fedora                | 22 and later      |    i386      | |Fedora22_i386_agent|                    |
+|                       |                   |    powerpc   | |CentOS7_powerpc_agent|                  |
++ Fedora                + 22 and later      +--------------+------------------------------------------+
+|                       |                   |    i386      | |Fedora22_i386_agent|                    |
 +                       +                   +--------------+------------------------------------------+
 |                       |                   |    x86_64    | |Fedora22_x86_64_agent|                  |
 +                       +                   +--------------+------------------------------------------+
@@ -332,7 +344,9 @@ Linux
 +                       +                   +--------------+------------------------------------------+
 |                       |                   |    armhf     | |Ubuntu12_armhf_agent|                   |
 +-----------------------+-------------------+--------------+------------------------------------------+
-| Raspbian OS           | Buster and later  |    i386      | |Debian7_i386_agent|                     |
+|                       | Buster and later  |    powerpc   | |Debian9_powerpc_agent|                  |
++ Raspbian OS           +                   +--------------+------------------------------------------+
+|                       |                   |    i386      | |Debian7_i386_agent|                     |
 +                       +                   +--------------+------------------------------------------+
 |                       |                   |    x86_64    | |Raspbian_x86_64_agent|                  |
 +                       |                   +--------------+------------------------------------------+
