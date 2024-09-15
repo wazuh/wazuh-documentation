@@ -185,6 +185,7 @@ Our resulting file is:
 	      enable: true
 	      port: 1515
 	      ssl_agent_ca: null
+	      ssl_agent_cert: null
 	      ssl_auto_negotiate: 'no'
 
 
