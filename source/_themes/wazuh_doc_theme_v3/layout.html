@@ -68,7 +68,11 @@
 {%- set temp_script_files = []  -%}
 {%- for scriptfile in script_files -%}
   {%- if scriptfile not in unwanted_js -%}
-    {{- temp_script_files.append(scriptfile)|default("", True) -}}
+    {%- if scriptfile.filename -%}
+      {{- temp_script_files.append(scriptfile.filename)|default("", True) -}}
+    {%- else -%}
+      {{- temp_script_files.append(scriptfile)|default("", True) -}}
+    {%- endif -%}
   {%- endif -%}
 {% endfor -%}
 {%- set script_files = temp_script_files -%}
