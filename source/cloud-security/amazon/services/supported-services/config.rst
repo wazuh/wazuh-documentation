@@ -258,3 +258,20 @@ Configure Wazuh to process Amazon Config logs
 
 Use cases
 ---------
+
+AWS Config allows you to review changes in configuration and relationships between AWS resources. Below is an example of a use case for AWS Config.
+
+Monitoring configuration changes
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Multiple alerts with rule ID *80454* will be seen on the Wazuh dashboard when there are changes in the configuration of the resources monitored by AWS config. Some examples are shown in the image below.
+
+.. thumbnail:: /images/cloud-security/aws/config/1-monitor-configuration-changes.png
+   :align: center
+   :width: 80%
+
+You can expand an alert to see more information such as the resource name, resource type, and configuration state.
+
+.. thumbnail:: /images/cloud-security/aws/config/2-monitor-configuration-changes.png
+   :align: center
+   :width: 80%
