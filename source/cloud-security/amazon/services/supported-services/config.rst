@@ -99,77 +99,57 @@ AWS Config configuration
 After these steps, it is necessary to configure an Amazon EventBridge rule to send AWS config events to the Amazon Data Firehose delivery stream created in the previous step.
 
 Amazon EventBridge configuration
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
+Configure an Amazon EventBridge rule to send Config events to the Amazon Data Firehose delivery stream created in the previous step.
 
+#. On your AWS console, search for "*eventbridge*" in the search bar at the top of the page or go to **Services** > **Application Integration** > **EventBridge**.
 
-
-
-
-
-
-#. Go to Services > Management Tools > CloudWatch:
-
-    .. thumbnail:: /images/cloud-security/aws/aws-create-firehose-12.png
+   .. thumbnail:: /images/cloud-security/aws/config/01-search-for-eventbridge.png
       :align: center
-      :width: 100%
+      :width: 80%
 
-#. Select Rules on the left menu and click on the *Create* rule button:
+#. Select **EventBridge Rule**  and click **Create rule**.
 
-    .. thumbnail:: /images/cloud-security/aws/aws-create-firehose-13.png
+   .. thumbnail:: /images/cloud-security/aws/config/02-create-rule.png
       :align: center
-      :width: 100%
+      :width: 80%
 
-#. Select the services you want to get logs from using the Service name slider, then, click on the Add target button and add the previously created Firehose delivery stream there. Also, create a new role to access the delivery stream:
+#. Assign a name to the EventBridge rule and select the **Rule with an event pattern** option.
 
-    .. thumbnail:: /images/cloud-security/aws/aws-create-firehose-14.png
+   .. thumbnail:: /images/cloud-security/aws/config/03-assign-name-to-eventbridge.png
       :align: center
-      :width: 100%
+      :width: 80%
 
-#. Give the rule some name and click on the *Create* rule button:
+#. In the **Build event pattern** section, choose **AWS events or EventBridge partner events** as **Event source**.
 
-    .. thumbnail:: /images/cloud-security/aws/aws-create-firehose-15.png
+   .. thumbnail:: /images/cloud-security/aws/config/04-build-event-pattern.png
       :align: center
-      :width: 100%
+      :width: 80%
 
-#. Once the rule is created, data will start to be sent to the previously created S3 bucket. Remember to first enable the service you want to monitor, otherwise, you won't get any data.
+#. In the **Event pattern** section choose **AWS services** as **Event source**, **Config** as **AWS service**, and **All Events** as **Event type**. Click **Next** to apply the configuration.
+
+   .. thumbnail:: /images/cloud-security/aws/config/05-config-as-aws-service.png
+      :align: center
+      :width: 80%
+
+#. Under **Select a target**, choose **Firehose delivery stream** and select the stream created previously. Also, create a new role to access the delivery stream. Click **Next** to apply the configuration.
+
+   .. thumbnail:: /images/cloud-security/aws/config/06-choose-firehose-delivery-stream.png
+      :align: center
+      :width: 80%
+
+#. Review the configuration and click **Create rule**.
+
+   .. thumbnail:: /images/cloud-security/aws/config/07-review-config-1.png
+      :align: center
+      :width: 80%
+
+   .. thumbnail:: /images/cloud-security/aws/config/07-review-config-2.png
+      :align: center
+      :width: 80%
+
+Once the rule is created, every time an AWS Config event is sent, it will be stored in the specified S3 bucket. Remember to first enable the AWS Config service, otherwise, you won't get any data.
 
 Policy configuration
-++++++++++++++++++++
-
-.. include:: /_templates/cloud/amazon/create_policy.rst
-.. include:: /_templates/cloud/amazon/bucket_policies.rst
-.. include:: /_templates/cloud/amazon/attach_policy.rst
-
-Wazuh configuration
--------------------
-
-#. Open the Wazuh configuration file (``/var/ossec/etc/ossec.conf``) and add the following block:
-
-    .. code-block:: xml
-
-      <wodle name="aws-s3">
-        <disabled>no</disabled>
-        <interval>10m</interval>
-        <run_on_start>yes</run_on_start>
-        <skip_on_error>yes</skip_on_error>
-        <bucket type="config">
-          <name>wazuh-aws-wodle</name>
-          <path>config</path>
-          <aws_profile>default</aws_profile>
-        </bucket>
-      </wodle>
-
-    .. note::
-      Check the :doc:`AWS S3 module </user-manual/reference/ossec-conf/wodle-s3>` reference manual to learn more about each setting.
-
-#. Restart Wazuh in order to apply the changes:
-
-    * If you're configuring a Wazuh manager:
-
-      .. include:: /_templates/common/restart_manager.rst
-
-    * If you're configuring a Wazuh agent:
-
-      .. include:: /_templates/common/restart_agent.rst
-
+^^^^^^^^^^^^^^^^^^^^
