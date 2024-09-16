@@ -153,3 +153,61 @@ Once the rule is created, every time an AWS Config event is sent, it will be sto
 
 Policy configuration
 ^^^^^^^^^^^^^^^^^^^^
+
+Follow the :ref:`creating an AWS policy <creating_an_AWS_policy>` guide to create a policy using the Amazon Web Services console.
+
+Take into account that the policies below follow the principle of least privilege to ensure that only the minimum permissions are provided to the AWS IAM user.
+
+To allow an AWS user to use the Wazuh module for AWS with read-only permissions, it must have a policy like the following attached:
+
+.. code-block:: json
+
+   {
+       "Version": "2012-10-17",
+       "Statement": [
+           {
+               "Sid": "VisualEditor0",
+               "Effect": "Allow",
+               "Action": [
+                   "s3:GetObject",
+                   "s3:ListBucket"
+               ],
+               "Resource": [
+                   "arn:aws:s3:::<WAZUH_AWS_BUCKET>/*",
+                   "arn:aws:s3:::<WAZUH_AWS_BUCKET>"
+               ]
+           }
+       ]
+   }
+
+If it is necessary to delete the log files once they have been collected, the associated policy would be as follows:
+
+.. code-block:: json
+
+   {
+        "Version": "2012-10-17",
+        "Statement": [
+            {
+                "Sid": "VisualEditor0",
+                "Effect": "Allow",
+                "Action": [
+                    "s3:GetObject",
+                    "s3:ListBucket",
+                    "s3:DeleteObject"
+                ],
+                "Resource": [
+                    "arn:aws:s3:::<WAZUH_AWS_BUCKET>/*",
+                    "arn:aws:s3:::<WAZUH_AWS_BUCKET>"
+                ]
+            }
+        ]
+    }
+
+.. note::
+
+   ``<WAZUH_AWS_BUCKET>`` is a placeholder. Replace it with the actual name of the bucket from which you want to retrieve logs.
+
+After creating a policy, you can attach it directly to a user or to a group to which the user belongs. In :ref:`attaching a policy to an IAM user group <attaching_policy_to_IAM_user_group>`, you see how to attach a policy to a group. More information on how to use other methods is available in the `AWS documentation <https://docs.aws.amazon.com/IAM/latest/UserGuide/id_users_change-permissions.html#users_change_permissions-add-console>`__.
+
+Configure Wazuh to process Amazon Config logs
+---------------------------------------------
