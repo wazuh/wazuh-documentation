@@ -1,99 +1,83 @@
 .. Copyright (C) 2015, Wazuh, Inc.
 
 .. meta::
-  :description: Amazon Macie is a service that uses machine learning and pattern matching to protect sensitive data. Learn how to configure and monitor it with Wazuh.
-
-.. _amazon_macie:
+   :description: The following sections cover how to configure different services required to integrate AWS Macie service with Wazuh.
 
 Amazon Macie
 ============
 
-`Amazon Macie <https://aws.amazon.com/macie/>`_ is a security service that uses machine learning to automatically discover, classify, and protect sensitive data in AWS. Macie recognizes sensitive data such as personally identifiable information (PII) or intellectual property and provides you with dashboards and alerts that give visibility into how this data is being accessed or moved. The fully managed service continuously monitors data access activity for anomalies and generates detailed alerts when it detects risk of unauthorized access or inadvertent data leaks.
+`Amazon Macie <https://aws.amazon.com/macie/>`__ is a security service that uses machine learning to automatically discover, classify, and protect sensitive data in AWS. Macie recognizes sensitive data such as personally identifiable information (PII) or intellectual property and provides you with dashboards and alerts that give visibility into how this data is being accessed or moved. The fully managed service continuously monitors data access activity for anomalies and generates detailed alerts when it detects the risk of unauthorized access or inadvertent data leaks.
 
-Amazon configuration
---------------------
+AWS configuration
+-----------------
 
-#. :doc:`Create a new </cloud-security/amazon/services/prerequisites/S3-bucket>` S3 bucket. (If you want to use an already created one, skip this step).
+The following sections cover how to configure different services required to integrate AWS Macie service with Wazuh.
 
-#. Go to Services > Analytics > Kinesis:
+.. thumbnail:: /images/cloud-security/aws/macie/macie.png
+   :align: center
+   :width: 80%
 
-    .. thumbnail:: /images/cloud-security/aws/aws-create-firehose-4.png
+Amazon Data Firehose configuration
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Create an Amazon Data Firehose delivery stream to store the Amazon Macie events into the desired S3 bucket so Wazuh can process them.
+
+#. :doc:`Create a new S3 bucket <../prerequisites/S3-bucket>`. (If you want to use an already created one, skip this step).
+
+#. On your AWS console, Search for "*amazon data firehose*" in the search bar at the top of the page or go to **Services** > **Analytics** > **Amazon Data Firehose**.
+
+   .. thumbnail:: /images/cloud-security/aws/macie/01-data-firehose.png
       :align: center
-      :width: 70%
+      :width: 80%
 
-    #. If it's the first time you're using this service, you'll see the following screen. Just click on *Get started*:
+#. Click **Create Firehose stream**.
 
-    .. thumbnail:: /images/cloud-security/aws/aws-create-firehose-4.1.png
+   .. thumbnail:: /images/cloud-security/aws/macie/02-create-firehose-stream.png
       :align: center
-      :width: 70%
+      :width: 80%
 
-#. Click on *Create delivery stream* button:
+#. Select **Direct PUT** and **Amazon S3** as the desired **Source** and **Destination**, respectively.
 
-    .. thumbnail:: /images/cloud-security/aws/aws-create-firehose-5.png
+   .. thumbnail:: /images/cloud-security/aws/macie/03-select-direct-put.png
       :align: center
-      :width: 70%
+      :width: 80%
 
-#. Put a name to your delivery stream and click on the *Next* button at the bottom of the page:
+#. Choose an appropriate **Firehose stream name**.
 
-    .. thumbnail:: /images/cloud-security/aws/aws-create-firehose-6.png
+   .. thumbnail:: /images/cloud-security/aws/macie/04-firehose-stream-name.png
       :align: center
-      :width: 70%
+      :width: 80%
 
-#. On the next page, leave both options as *Disabled* and click on *Next*:
+#. Select the desired S3 bucket as the destination. It is possible to specify a custom prefix to alter the path where AWS stores the logs. AWS Firehose creates a file structure ``YYYY/MM/DD/HH``, if a prefix is used the created file structure would be ``prefix-name/YYYY/MM/DD/HH``. If a prefix is used it must be specified under the Wazuh bucket configuration. In our case, the prefix is ``macie/``.
 
-    .. thumbnail:: /images/cloud-security/aws/aws-create-firehose-7.png
+   .. thumbnail:: /images/cloud-security/aws/macie/05-select-desired-bucket.png
       :align: center
-      :width: 70%
+      :width: 80%
 
-#. Select *Amazon S3* as the destination, then select the previously created S3 bucket and add a prefix where logs will be stored. AWS Firehose creates a file structure *YYYY/MM/DD/HH*, if a prefix is used the created file structure would be *firehose/YYYY/MM/DD/HH*. If a prefix is used it must be specified under the Wazuh Bucket configuration:
+#. Create or choose an existing IAM role to be used by Amazon Data Firehose in the **Advanced settings** section.
 
-    .. thumbnail:: /images/cloud-security/aws/aws-create-firehose-8.png
+   .. thumbnail:: /images/cloud-security/aws/macie/06-choose-iam-role.png
       :align: center
-      :width: 70%
+      :width: 80%
 
-#. You can select the compression you prefer. Wazuh supports any kind of compression but Snappy. After that, click on **Create new or choose**:
+#. Click **Create Firehose stream** at the end of the page. The new delivery stream will be created and its details will be shown as follows.
 
-    .. thumbnail:: /images/cloud-security/aws/aws-create-firehose-9.png
+   .. thumbnail:: /images/cloud-security/aws/macie/07-create-firehose-stream.png
       :align: center
-      :width: 70%
+      :width: 80%
 
-#. Give a proper name to the role and click on the *Allow* button:
+Amazon EventBridge configuration
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-    .. thumbnail:: /images/cloud-security/aws/aws-create-firehose-10.png
-      :align: center
-      :width: 70%
 
-#. The following page is just a summary of the Firehose stream created, go to the bottom of the page and click on the **Create delivery stream** button:
 
-    .. thumbnail:: /images/cloud-security/aws/aws-create-firehose-11.png
-      :align: center
-      :width: 70%
 
-#. Go to Services > Management Tools > CloudWatch:
 
-    .. thumbnail:: /images/cloud-security/aws/aws-create-firehose-12.png
-      :align: center
-      :width: 70%
 
-#. Select *Rules* on the left menu and click on the *Create rule* button:
 
-    .. thumbnail:: /images/cloud-security/aws/aws-create-firehose-13.png
-      :align: center
-      :width: 70%
 
-#. Select the services you want to get logs from using the **Service name** slider, then, click on the **Add target** button and add the previously created Firehose delivery stream there. Also, create a new role to access the delivery stream.
 
-    .. thumbnail:: /images/cloud-security/aws/aws-create-firehose-14.png
-      :align: center
-      :width: 70%
 
-#. Give the rule some name and click on the *Create rule* button:
-
-    .. thumbnail:: /images/cloud-security/aws/aws-create-firehose-15.png
-      :align: center
-      :width: 70%
-
-#. Once the rule is created, data will start to be sent to the previously created S3 bucket. Remember to first enable the service you want to monitor, otherwise, you won't get any data.
 
 Policy configuration
 ^^^^^^^^^^^^^^^^^^^^
