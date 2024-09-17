@@ -99,6 +99,11 @@ The Wazuh dashboard can be installed on a dedicated node or along with the Wazuh
   | Wazuh dashboard         |     4    |     2        |     8        |       4        |
   +-------------------------+----------+--------------+--------------+----------------+
 
+Firewall configuration
+^^^^^^^^^^^^^^^^^^^^^^
+
+Configure the host and network firewalls to allow ports mentioned in :doc:`Architecture <getting-started/architecture>`. Disabling the host firewall is not recommended for use in production. It is advised to check the firewall configuration after each service installation to prevent possible cluster problems.
+
 Browser compatibility
 ^^^^^^^^^^^^^^^^^^^^^
 
@@ -107,6 +112,7 @@ Wazuh dashboard supports the following web browsers:
 - Chrome 95 or later
 - Firefox 93 or later
 - Safari 13.7 or later
+
 
 Other Chromium-based browsers might also work. Internet Explorer 11 is not supported.
 
