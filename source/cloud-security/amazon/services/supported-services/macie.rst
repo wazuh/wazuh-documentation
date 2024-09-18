@@ -69,15 +69,78 @@ Create an Amazon Data Firehose delivery stream to store the Amazon Macie events 
 Amazon EventBridge configuration
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
+Configure an Amazon EventBridge rule to send Macie events to the Amazon Data Firehose delivery stream created in the previous step.
 
+#. On your AWS console, search for "*eventbridge*" in the search bar at the top of the page or navigate to **Services** > **Application Integration** > **EventBridge**.
 
+   .. thumbnail:: /images/cloud-security/aws/macie/01-search-for-eventbridge.png
+      :align: center
+      :width: 80%
 
+#. Click **Create rule**.
 
+   .. thumbnail:: /images/cloud-security/aws/macie/02-create-rule.png
+      :align: center
+      :width: 80%
 
+#. Assign a name to the rule and select the **Rule with an event pattern** option.
 
+   .. thumbnail:: /images/cloud-security/aws/macie/03-assign-name-to-eventbridge.png
+      :align: center
+      :width: 80%
 
+#. In the **Build event pattern** section, choose **AWS events or EventBridge partner events** as **Event source**.
 
+   .. thumbnail:: /images/cloud-security/aws/macie/04-build-event-pattern.png
+      :align: center
+      :width: 80%
 
+#. In the **Event pattern** section, choose **AWS services** as **Event source**, **Macie** as **AWS service**, and **All Events** as **Event type**. Click **Next** to apply the configuration.
+
+   .. thumbnail:: /images/cloud-security/aws/macie/05-macie-as-event-type.png
+      :align: center
+      :width: 80%
+
+#. Under **Select a target**, choose **Firehose delivery stream** and select the stream created previously. Also, create a new role to access the delivery stream. Click **Next** to apply the configuration.
+
+   .. thumbnail:: /images/cloud-security/aws/macie/06-choose-firehose-delivery-stream.png
+      :align: center
+      :width: 80%
+
+#. Review the configuration and click **Create rule**.
+
+   .. thumbnail:: /images/cloud-security/aws/macie/07-review-macie-1.png
+      :align: center
+      :width: 80%
+
+   .. thumbnail:: /images/cloud-security/aws/macie/07-review-macie-2.png
+      :align: center
+      :width: 80%
+
+Once the rule is created, every time a *Macie* event is sent, it will be stored in the specified S3 bucket. Remember to first enable the *Macie* service, otherwise, you won't get any data.
+
+Amazon Macie configuration
+^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+#. On your AWS console, search for "*Amazon Macie*" in the search bar and click **Amazon Macie** from the results.
+
+   .. thumbnail:: /images/cloud-security/aws/macie/01-search-for-macie.png
+      :align: center
+      :width: 80%
+
+#. You'll have this interface if this is the first time of setting up the service, click **Get started** to proceed.
+
+   .. thumbnail:: /images/cloud-security/aws/macie/02-click-get-started.png
+      :align: center
+      :width: 80%
+
+#. Click **Enable Macie** to enable the service.
+
+   .. thumbnail:: /images/cloud-security/aws/macie/03-enable-macie.png
+      :align: center
+      :width: 80%
+
+Once enabled, Macie provides visibility into data security risks and enables automated protection against those risks. Check the `official AWS documentation <https://aws.amazon.com/macie/>`__ to learn more about the service.
 
 Policy configuration
 ^^^^^^^^^^^^^^^^^^^^
@@ -86,8 +149,8 @@ Policy configuration
 .. include:: /_templates/cloud/amazon/bucket_policies.rst
 .. include:: /_templates/cloud/amazon/attach_policy.rst
 
-Wazuh configuration
--------------------
+Configure Wazuh to process Amazon Macie logs
+--------------------------------------------
 
 #. Open the Wazuh configuration file (``/var/ossec/etc/ossec.conf``) and add the following block:
 
