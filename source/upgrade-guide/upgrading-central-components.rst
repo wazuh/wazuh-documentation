@@ -255,7 +255,6 @@ Configuration options might differ across versions. Follow these steps to ensure
 
          .. code-block:: console
 
-            # rm /etc/wazuh-dashboard/opensearch_dashboards.yml
             # yum upgrade wazuh-dashboard|WAZUH_DASHBOARD_RPM_PKG_INSTALL|
 
       .. group-tab:: APT
