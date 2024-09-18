@@ -152,9 +152,19 @@ Policy configuration
 Configure Wazuh to process Amazon Macie logs
 --------------------------------------------
 
-#. Open the Wazuh configuration file (``/var/ossec/etc/ossec.conf``) and add the following block:
+#. Access the Wazuh configuration in **Server management** > **Settings** using the Wazuh dashboard or by manually editing the ``/var/ossec/etc/ossec.conf`` file in the Wazuh server or agent.
 
-    .. code-block:: xml
+   .. thumbnail:: /images/cloud-security/aws/macie/01-wazuh-configuration.png
+      :align: center
+      :width: 80%
+
+   .. thumbnail:: /images/cloud-security/aws/macie/02-wazuh-configuration.png
+      :align: center
+      :width: 80%
+
+#. Add the following :doc:`Wazuh module for AWS configuration </user-manual/reference/ossec-conf/wodle-s3>` to the file, replacing ``<WAZUH_AWS_BUCKET>`` with the name of the S3 bucket:
+
+   .. code-block:: xml
 
       <wodle name="aws-s3">
         <disabled>no</disabled>
@@ -162,38 +172,48 @@ Configure Wazuh to process Amazon Macie logs
         <run_on_start>yes</run_on_start>
         <skip_on_error>yes</skip_on_error>
         <bucket type="custom">
-          <name>wazuh-aws-wodle</name>
+          <name><WAZUH_AWS_BUCKET></name>
           <path>macie</path>
           <aws_profile>default</aws_profile>
         </bucket>
       </wodle>
 
-    .. note::
-      Check the :doc:`AWS S3 module </user-manual/reference/ossec-conf/wodle-s3>` reference manual to learn more about each setting.
+   .. note::
+
+      Check the :doc:`Wazuh module for AWS </user-manual/reference/ossec-conf/wodle-s3>` reference manual to learn more about each setting.
 
 #. Restart Wazuh in order to apply the changes:
 
-    * If you're configuring a Wazuh manager:
+   -  Wazuh manager:
 
-      .. include:: /_templates/common/restart_manager.rst
+      .. code-block:: console
 
-    * If you're configuring a Wazuh agent:
+         # systemctl restart wazuh-manager
 
-      .. include:: /_templates/common/restart_agent.rst
+   -  Wazuh agent:
 
+      .. code-block:: console
 
-Use cases
----------
+         # systemctl restart wazuh-agent
 
-Amazon S3 (Simple Storage Service) provides secure and reliable storage capacity in the cloud. When using this service, it is highly recommended to monitor it to detect data loss attacks.
+Use case
+--------
 
-Below are some use cases for Wazuh alerts built for S3.
+Amazon S3 (Simple Storage Service) provides secure and reliable storage capacity in the cloud. When using this service, it is highly recommended to monitor it to detect misconfigurations and sensitive data leakage.
 
-Bucket removal
-^^^^^^^^^^^^^^
+Below is a use case for Wazuh alerts built for S3.
 
-Multiple alerts will be raised when a Bucket has been removed. Some examples are shown below:
+Sensitive data disclosure in S3 bucket
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-.. thumbnail:: /images/cloud-security/aws/aws-s3-1.png
-  :align: center
-  :width: 70%
+When sensitive data such as financial information, credentials, and personal information are found in an S3 bucket, the following alerts with rule ID *80352* and *80354* will be displayed on the Wazuh dashboard.
+
+.. thumbnail:: /images/cloud-security/aws/macie/1-sensitive-data-disclosure-in-s3-bucket.png
+   :align: center
+   :width: 80%
+
+You can expand the alert to see more information such as the description of the alert, and details about the affected S3 bucket.
+
+.. thumbnail:: /images/cloud-security/aws/macie/2-sensitive-data-disclosure-in-s3-bucket.png
+   :align: center
+   :width: 80%
