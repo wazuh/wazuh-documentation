@@ -1,14 +1,44 @@
 .. Copyright (C) 2015, Wazuh, Inc.
 
 .. meta::
-  :description: AWS Trusted Advisor is a service that helps users reduce cost by optimizing their AWS environment. Learn how to configure and monitor it with Wazuh.
-
-.. _amazon_trusted_advisor:
+  :description: The following sections cover how to configure the different services required to integrate Trusted Advisor into Wazuh.
 
 AWS Trusted Advisor
 ===================
 
-`AWS Trusted Advisor <https://aws.amazon.com/premiumsupport/trustedadvisor/>`_ provides real-time guidance to help users reduce cost, increase performance, and improve security by optimizing their AWS environment following AWS best practices. Trusted Advisor logs can be stored into an S3 bucket thanks to `Amazon EventBridge <https://aws.amazon.com/eventbridge/>`_ and `Amazon Kinesis Data Firehose <https://aws.amazon.com/kinesis/data-firehose/>`_, allowing Wazuh to process them and generate alerts using the built-in rules Wazuh provides, as well as any :doc:`custom rules </user-manual/ruleset/rules/custom>` available.
+`AWS Trusted Advisor <https://aws.amazon.com/premiumsupport/trustedadvisor/>`__ helps users optimize their AWS environment by following AWS best practices to provide real-time guidance that aims to reduce cost, increase performance, and improve security. Trusted Advisor logs can be stored in an S3 bucket thanks to `Amazon EventBridge <https://aws.amazon.com/eventbridge/>`__ and `Amazon Data Firehose <https://aws.amazon.com/kinesis/data-firehose/>`__, allowing Wazuh to process them and generate alerts using the built-in rules Wazuh provides, as well as any :doc:`custom rules <>` available.
+
+.. note::
+
+  You must have a Business, Enterprise On-Ramp, or Enterprise AWS Support plan to create an EventBridge rule for Trusted Advisor checks. For more information, see `changing AWS support plans <https://docs.aws.amazon.com/awssupport/latest/user/changing-support-plans.html>`__.
+
+AWS configuration
+-----------------
+
+The following sections cover how to configure the different services required to integrate Trusted Advisor into Wazuh.
+
+.. thumbnail:: /images/cloud-security/aws/trusted-advisor/trusted.png
+   :align: center
+   :width: 80%
+
+Amazon Data Firehose configuration
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Create an Amazon Data Firehose delivery stream to store the Trusted Advisor logs into the desired S3 bucket so Wazuh can process them.
+
+#. :doc:`Create a new S3 bucket <../prerequisites/S3-bucket>`. If you want to use an already existing one, skip this step.
+
+#. On your AWS console, Search for "*amazon data firehose*" in the search bar at the top of the page or go to **Services** > **Analytics** > **Amazon Data Firehose**.
+
+   .. thumbnail:: /images/cloud-security/aws/trusted-advisor/01-data-firehose.png
+      :align: center
+      :width: 80%
+
+#. 
+
+
+
+
 
 Amazon configuration
 --------------------
