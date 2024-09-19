@@ -7,7 +7,7 @@ All notable changes to this project will be documented in this file.
 
 ### Removed
 
-- Removed the command to delete opensearch_dashboard.yml([#7773](https://github.com/wazuh/wazuh-documentation/pull/7773)) 
+- Removed the command to delete opensearch_dashboard.yml([#7777](https://github.com/wazuh/wazuh-documentation/pull/7777)) 
 
 ## [v4.9.0]
 
