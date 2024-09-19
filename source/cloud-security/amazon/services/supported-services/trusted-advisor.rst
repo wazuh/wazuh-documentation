@@ -73,19 +73,72 @@ Create an Amazon Data Firehose delivery stream to store the Trusted Advisor logs
 Amazon EventBridge configuration
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
+Configure an Amazon EventBridge rule to send Trusted Advisor events to the Amazon Data Firehose delivery stream created in the previous step.
 
+#. On your AWS console, search for "*eventbridge*" in the search bar at the top of the page or navigate to **Services** > **Application Integration** > **EventBridge**.
 
+   .. thumbnail:: /images/cloud-security/aws/trusted-advisor/01-search-for-eventbridge.png
+      :align: center
+      :width: 80%
 
+#. Click **Create rule**.
 
+   .. thumbnail:: /images/cloud-security/aws/trusted-advisor/02-create-rule.png
+      :align: center
+      :width: 80%
 
+#. Give a name to the EventBridge rule and select the **Rule with an event pattern** option.
 
+   .. thumbnail:: /images/cloud-security/aws/trusted-advisor/03-assign-name-to-eventbridge.png
+      :align: center
+      :width: 80%
 
+#. In the **Build event pattern** section, choose **AWS events or EventBridge partner events** as **Event source**.
 
+   .. thumbnail:: /images/cloud-security/aws/trusted-advisor/04-build-event-pattern.png
+      :align: center
+      :width: 80%
 
+#. In the **Event pattern** section, choose **AWS services** as **Event source**, **Trusted Advisor** as **AWS service**, and **All Events** as **Event type**. Click **Next** to apply the configuration.
 
+   .. thumbnail:: /images/cloud-security/aws/trusted-advisor/05-trusted-advisor-as-event-type.png
+      :align: center
+      :width: 80%
 
+#. Under **Select a target**, choose **Firehose stream** and select the stream created previously. Also, create a new role to access the delivery stream. Click **Next** to apply the configuration.
 
+   .. thumbnail:: /images/cloud-security/aws/trusted-advisor/06-choose-firehose-delivery-stream.png
+      :align: center
+      :width: 80%
 
+#. Review the configuration and click **Create rule**.
+
+   .. thumbnail:: /images/cloud-security/aws/trusted-advisor/07-review-trusted-advisor-1.png
+      :align: center
+      :width: 80%
+
+   .. thumbnail:: /images/cloud-security/aws/trusted-advisor/07-review-trusted-advisor-2.png
+      :align: center
+      :width: 80%
+
+Once the rule is created, every time a *Trusted Advisor* event is sent, it will be stored in the specified S3 bucket. Remember to first enable the *Trusted Advisor* service, otherwise, you won't get any data.
+
+AWS Trusted Advisor configuration
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+#. On your AWS console, search for "*Trusted Advisor*" in the search bar at the top of the page or navigate to **Services** > **Management & Governance** > **Trusted Advisor**.
+
+   .. thumbnail:: /images/cloud-security/aws/trusted-advisor/01-search-for-trusted-advisor.png
+      :align: center
+      :width: 80%
+
+#. Go to **Manage Trusted Advisor** in the left menu and click on the **Enabled** button.
+
+   .. thumbnail:: /images/cloud-security/aws/trusted-advisor/02-enable-trusted-advisor.png
+      :align: center
+      :width: 80%
+
+Once enabled, Trusted Advisor reviews the different checks for the AWS account. Check the `official AWS documentation <https://docs.aws.amazon.com/awssupport/latest/user/get-started-with-aws-trusted-advisor.html>`__ to learn more about the different Trusted Advisor checks available.
 
 Policy configuration
 ^^^^^^^^^^^^^^^^^^^^
@@ -94,8 +147,19 @@ Policy configuration
 .. include:: /_templates/cloud/amazon/bucket_policies.rst
 .. include:: /_templates/cloud/amazon/attach_policy.rst
 
-Wazuh configuration
--------------------
+Configure Wazuh to process Amazon Trusted Advisor logs
+------------------------------------------------------
+
+
+
+
+
+
+
+
+
+
+
 
 #. Access the Wazuh configuration in **Settings** using the Wazuh UI or by manually editing the ``/var/ossec/etc/ossec.conf`` file in the host:
 
