@@ -150,30 +150,19 @@ Policy configuration
 Configure Wazuh to process Amazon Trusted Advisor logs
 ------------------------------------------------------
 
+#. Access the Wazuh configuration in **Server management** > **Settings** using the Wazuh dashboard or by manually editing the ``/var/ossec/etc/ossec.conf`` file in the Wazuh server or agent.
 
-
-
-
-
-
-
-
-
-
-
-#. Access the Wazuh configuration in **Settings** using the Wazuh UI or by manually editing the ``/var/ossec/etc/ossec.conf`` file in the host:
-
-    .. thumbnail:: /images/cloud-security/aws/trusted-ui-1.png
+   .. thumbnail:: /images/cloud-security/aws/trusted-advisor/01-wazuh-configuration.png
       :align: center
       :width: 80%
 
-    .. thumbnail:: /images/cloud-security/aws/trusted-ui-2.png
+   .. thumbnail:: /images/cloud-security/aws/trusted-advisor/02-wazuh-configuration.png
       :align: center
       :width: 80%
 
-#. Add the following :doc:`AWS S3 module </user-manual/reference/ossec-conf/wodle-s3>` configuration to the file, replacing ``wazuh-aws-wodle`` with the name of the S3 bucket:
+#. Add the following :doc:`Wazuh module for AWS </user-manual/reference/ossec-conf/wodle-s3>` configuration to the file, replacing ``<WAZUH_AWS_BUCKET>`` with the name of the S3 bucket:
 
-    .. code-block:: xml
+   .. code-block:: xml
 
       <wodle name="aws-s3">
         <disabled>no</disabled>
@@ -181,27 +170,26 @@ Configure Wazuh to process Amazon Trusted Advisor logs
         <run_on_start>yes</run_on_start>
         <skip_on_error>yes</skip_on_error>
         <bucket type="custom">
-          <name>wazuh-aws-wodle</name>
+          <name><WAZUH_AWS_BUCKET></name>
+          <path>trusted-advisor</path>
           <aws_profile>default</aws_profile>
         </bucket>
       </wodle>
 
-    .. note::
+   .. note::
+
       In this example, the ``aws_profile`` authentication parameter was used. Check the :doc:`credentials <../prerequisites/credentials>` section to learn more about the different authentication options and how to use them.
 
-#. Save the changes and restart Wazuh to apply the changes. The service can be manually restarted using the following command outside the Wazuh UI:
+#. Save the changes and restart Wazuh to apply the changes. The service can be manually restarted using the following command outside the Wazuh dashboard:
 
-    * If you're configuring a Wazuh manager:
+   -  Wazuh manager:
 
-      .. include:: /_templates/common/restart_manager.rst
+      .. code-block:: console
 
-    * If you're configuring a Wazuh agent:
+         systemctl restart wazuh-manager
 
-      .. include:: /_templates/common/restart_agent.rst
+   -  Wazuh agent:
 
+      .. code-block:: console
 
-The :ref:`AWS S3 module <wodle_s3>` configuration can be reviewed from **Settings** > **Cloud security monitoring** once added in the :ref:`Local configuration <reference_ossec_conf>`.
-
-    .. thumbnail:: /images/cloud-security/aws/trusted-ui-3.png
-      :align: center
-      :width: 80%
+         systemctl restart wazuh-agent
