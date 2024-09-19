@@ -3,7 +3,9 @@ All notable changes to this project will be documented in this file.
 
 ## [v4.9.1]
 
-- Support for Wazuh 4.9.1
+### Removed
+
+- Removed the command to delete `opensearch_dashboards.yml` in the *Upgrading the Wazuh dashboard* section. ([#7777](https://github.com/wazuh/wazuh-documentation/pull/7777)) 
 
 ## [v4.9.0]
 
