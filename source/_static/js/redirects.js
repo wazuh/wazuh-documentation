@@ -197,6 +197,7 @@ newUrls['4.9'] = [
   '/user-manual/agent/agent-management/remote-upgrading/wpk-files/wpk-list.html',
   '/user-manual/wazuh-dashboard/navigating-the-wazuh-dashboard.html',
   '/user-manual/wazuh-dashboard/settings.html',
+  '/cloud-service/your-environment/custom-dns.html'
 ];
 
 /* Pages no longer available in 4.9 */

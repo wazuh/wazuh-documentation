@@ -21,4 +21,5 @@ Learn more about your environment in the sections below.
    send-syslog-data
    agents-without-internet
    configure-email
+   custom-dns
    technical-faq
