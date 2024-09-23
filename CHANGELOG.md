@@ -3,7 +3,19 @@ All notable changes to this project will be documented in this file.
 
 ## [v4.10.0]
 
-- Support for Wazuh 4.10.0
+### Added
+
+- Added documentation for the MDM Intune integration. ([#7661](https://github.com/wazuh/wazuh-documentation/pull/7661))
+- Added the agent uninstall RBAC action. ([#7708](https://github.com/wazuh/wazuh-documentation/pull/7708))
+- Added the ``anti_tampering`` configuration block documentation. ([#7580](https://github.com/wazuh/wazuh-documentation/pull/7580))
+- Added PowerPC package references back to the packages list. ([#7724](https://github.com/wazuh/wazuh-documentation/pull/7724))
+
+### Changed
+
+- Replaced the commands to start and stop the Wazuh agent on macOS systems. ([#7498](https://github.com/wazuh/wazuh-documentation/pull/7498))
+- Updated the available options and examples for the MSI package generation command. ([#7501](https://github.com/wazuh/wazuh-documentation/pull/7501))
+- Updated the available SCA policies table. ([#7698](https://github.com/wazuh/wazuh-documentation/pull/7698))
+- Updated default and allowed ``chunk_size`` values for upgrading agents using wpk files. ([#7717](https://github.com/wazuh/wazuh-documentation/pull/7717))
 
 ## [v4.9.1]
 
