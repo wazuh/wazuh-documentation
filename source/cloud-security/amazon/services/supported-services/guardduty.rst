@@ -1,158 +1,67 @@
 .. Copyright (C) 2015, Wazuh, Inc.
 
 .. meta::
-  :description: Amazon GuardDuty is a threat detection service that continuously monitors for malicious behavior. Learn how to use GuardDuty with Wazuh in this section.
-
-.. _amazon_guardduty_native:
+   :description: The following sections cover how to configure the different services required to integrate GuardDuty into Wazuh.
 
 Amazon GuardDuty
 ================
 
-`Amazon GuardDuty <https://aws.amazon.com/guardduty/?nc1=h_ls>`_ is a threat detection service that continuously monitors for malicious or unauthorized behavior to help you protect your AWS accounts and workloads. It monitors for activity such as unusual API calls or potentially unauthorized deployments that indicate a possible account compromise. GuardDuty also detects potentially compromised instances or reconnaissance by attackers.
+`Amazon GuardDuty <https://aws.amazon.com/guardduty/?nc1=h_ls>`__ is a threat detection service that continuously monitors for malicious or unauthorized behavior to help you protect your AWS accounts and workloads. It monitors for activity such as unusual API calls or potentially unauthorized deployments that indicate a possible account compromise. GuardDuty also detects potentially compromised instances or reconnaissance by attackers.
 
-Amazon S3 Protection
---------------------
+AWS configuration
+-----------------
 
-`S3 Protection <https://docs.aws.amazon.com/guardduty/latest/ug/s3-protection.html>`_ enables Amazon GuardDuty to monitor object-level API operations to identify potential security risks for data within your S3 buckets.
+The following sections cover how to configure the different services required to integrate Guard Duty into Wazuh.
 
-Amazon configuration native integration
----------------------------------------
+Amazon GuardDuty configuration
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-#. :doc:`Create a new S3 bucket </cloud-security/amazon/services/prerequisites/S3-bucket>`. If you want to use an existing bucket, skip this step.
+#. :doc:`Create a new S3 bucket <../prerequisites/S3-bucket>`. If you want to use an existing bucket, skip this step.
+#. On your AWS console, search for "*guardduty*" in the search bar at the top of the page or navigate to **Services** > **Security, Identity, & Compliance** > **GuardDuty**.
 
-#. Go to **Services** > **Security, Identity, & Compliance** > **GuardDuty**: 
-
-    .. thumbnail:: /images/aws/guardduty-native-1.png
+   .. thumbnail:: /images/cloud-security/aws/guardduty/01-search-for-guardduty.png
       :align: center
-      :width: 70%
+      :width: 80%
 
-#. In the navigation pane, under **Settings**, click **S3 Protection**:
+#. `S3 Protection <https://docs.aws.amazon.com/guardduty/latest/ug/s3-protection.html>`__ enables Amazon GuardDuty to monitor object-level API operations to identify potential security risks for data within your S3 buckets. In the navigation pane, under **Protection plans**, click **S3 Protection** and enable S3 protection.
 
-    .. thumbnail:: /images/aws/guardduty-native-2.png
+   .. thumbnail:: /images/cloud-security/aws/guardduty/02-enable-S3-protection.png
       :align: center
-      :width: 70%
+      :width: 80%
 
-#. The S3 Protection Pane lists the current status of S3 protection for your account, you may enable or disable it at any time by selecting **Enable** or **Disable**:
+#. Confirm your selection.
 
-    .. thumbnail:: /images/aws/guardduty-native-3.png
+   .. thumbnail:: /images/cloud-security/aws/guardduty/03-confirm-selection.png
       :align: center
-      :width: 70%
+      :width: 80%
 
-#. Confirm your selection:
+#. In the navigation pane, go to **Settings**, scroll to **Findings export options**, and click **Configure now** to configure GuardDuty to export findings to an S3 bucket.
 
-    .. thumbnail:: /images/aws/guardduty-native-4.png
+   .. thumbnail:: /images/cloud-security/aws/guardduty/04-click-configure-now.png
       :align: center
-      :width: 70%
+      :width: 80%
 
-.. _amazon_kinesis_guardduty:
-   
-Amazon configuration with Kinesis, Firehose, CloudWatch integration
--------------------------------------------------------------------
+#. See the :doc:`configuring an S3 bucket <../prerequisites/S3-bucket>` and `creating symmetric encryption KMS keys <https://docs.aws.amazon.com/kms/latest/developerguide/create-keys.html#create-symmetric-cmk>`__ guides on how to create an S3 bucket and KMS key. Copy and paste the appropriate values into the **S3 bucket ARN** and **KMS key ARN** fields.
 
-.. deprecated:: 4.6
-
-#. :doc:`Create a new S3 bucket </cloud-security/amazon/services/prerequisites/S3-bucket>`. If you want to use an existing bucket, skip this step.
-
-#. Go to **Services** > **Analytics** > **Kinesis**:
-
-    .. thumbnail:: /images/aws/guardduty-firehose-1.png
+   .. thumbnail:: /images/cloud-security/aws/guardduty/05-s3-and-kms-arn.png
       :align: center
-      :width: 70%
+      :width: 80%
 
-#. Click **Create delivery stream**:
+#. In the **Attach policy** section, click on **View Policy for S3 bucket** and **View Policy for KMS key**. Copy and attach the corresponding policy to the selected S3 bucket and the KMS key. Click **Save** to apply the configuration.
 
-    .. thumbnail:: /images/aws/guardduty-firehose-2.png
+   .. note::
+
+      For more information on how to change the S3 and KMS policies, see the `adding a bucket policy by using the Amazon S3 console <https://docs.aws.amazon.com/AmazonS3/latest/userguide/add-bucket-policy.html>`__ and `changing a key policy <https://docs.aws.amazon.com/kms/latest/developerguide/key-policy-modifying.html#key-policy-modifying-how-to-console-policy-view>`__ guides.
+
+   .. thumbnail:: /images/cloud-security/aws/guardduty/06-view-policy-for-s3-and-kms.png
       :align: center
-      :width: 70%
+      :width: 80%
 
-#. Choose a **Source** and select *Amazon S3* as the **Destination**:
+#. You'll have an interface similar to this, you can also set the frequency for updating the S3 bucket with the GuardDuty findings. In our case, the frequency is set to 15 minutes.
 
-    .. thumbnail:: /images/aws/guardduty-firehose-3.png
+   .. thumbnail:: /images/cloud-security/aws/guardduty/07-guardduty-frequency.png
       :align: center
-      :width: 70%
-
-#. Choose a name for your delivery stream. Leave the **Transform and convert records** options *disabled*:
-
-    .. thumbnail:: /images/aws/guardduty-firehose-4.png
-      :align: center
-      :width: 70%
-
-#. On the **Destination settings** select the previously created S3 bucket and add a prefix where logs will be stored. 
-   
-   AWS Firehose creates the following file structure: *YYYY/MM/DD/HH*.  If a prefix is used, for example *firehose/*,  the created file structure would be *firehose/YYYY/MM/DD/HH*. 
-   If a prefix is used it must be specified under the Wazuh Bucket configuration. 
-
-    .. thumbnail:: /images/aws/guardduty-firehose-5.png
-      :align: center
-      :width: 70%
-
-#. Select the **Compression for data records** you prefer. Wazuh supports any kind of compression but *Snappy*:
-
-    .. thumbnail:: /images/aws/guardduty-firehose-6.png
-      :align: center
-      :width: 70%
-
-#. Under the **Advanced settings** section you can set the **Permissions**.  By default. a new IAM role will be created. If you choose an existing IAM role, remember to include the permissions that the *Kinesis Data Firehose* needs. Finally, click **Create delivery stream**:
-
-    .. thumbnail:: /images/aws/guardduty-firehose-7.png
-      :align: center
-      :width: 70%
-   
-#. Go to **Services** > **Management & Governance** > **CloudWatch**:
-
-    .. thumbnail:: /images/aws/guardduty-firehose-8.png
-      :align: center
-      :width: 70%
-
-#. In the **Cloudwatch** pane under **Events**, click **Rules**:
-
-    .. thumbnail:: /images/aws/guardduty-firehose-9.png
-      :align: center
-      :width: 70%
-
-#. On the **Amazon EventBridge** pane, click **Create rule**:
-
-    .. thumbnail:: /images/aws/guardduty-firehose-10.png
-      :align: center
-      :width: 70%
-
-#. Under the **Define rule detail** section, name the rule and click **Next**:
-
-    .. thumbnail:: /images/aws/guardduty-firehose-11.png
-      :align: center
-      :width: 70%
-
-#. Under the **Build event pattern** section, choose **AWS events** as your event source:
-
-    .. thumbnail:: /images/aws/guardduty-firehose-12.png
-      :align: center
-      :width: 70%
-
-#. Under the **Event pattern** section, choose *GuardDuty* as your **AWS service** and *All Events* as your **Event type**, then click **Next**:
-
-    .. thumbnail:: /images/aws/guardduty-firehose-13.png
-        :align: center
-        :width: 70%
-
-#. On the **Select target(s)** section, choose **AWS service** as your **Target types**. Select **Firehose delivery stream** as your target type and add the previously created Firehose delivery stream as your **Stream**, and click **Next**:
-
-    .. thumbnail:: /images/aws/guardduty-firehose-14.png
-      :align: center
-      :width: 70%
-
-#. On the **Configure tags** section, you can configure a tag to search and filter resources. Click **Next**:
-
-    .. thumbnail:: /images/aws/guardduty-firehose-15.png
-      :align: center
-      :width: 70%
-
-#. The last section is a summary of the created rule, confirm that the selection is correct and click **Create Rule**:
-
-    .. thumbnail:: /images/aws/guardduty-firehose-16.png
-      :align: center
-      :width: 70%
-
-#. Once the rule is created, data will start to be sent to the previously created S3 bucket. Remember to first enable the service you want to monitor, otherwise, you won't get any data.
+      :width: 80%
 
 Policy configuration
 ^^^^^^^^^^^^^^^^^^^^
@@ -160,6 +69,24 @@ Policy configuration
 .. include:: /_templates/cloud/amazon/create_policy.rst
 .. include:: /_templates/cloud/amazon/bucket_policies.rst
 .. include:: /_templates/cloud/amazon/attach_policy.rst
+
+Configure Wazuh to process Amazon GuardDuty logs
+------------------------------------------------
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 Wazuh configuration
 -------------------
