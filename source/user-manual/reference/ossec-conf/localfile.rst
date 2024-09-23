@@ -718,14 +718,14 @@ In the following configuration example Wazuh collects the ``journald`` logs if a
       <location>journald</location>
       <log_format>journald</log_format>
       <filter field="_SYSTEMD_UNIT">^ssh.service$</filter>
-    <localfile>
+    </localfile>
 
     <localfile>
       <location>journald</location>
       <log_format>journald</log_format>
       <filter field="_SYSTEMD_UNIT">^cron.service$</filter>
       <filter field="PRIORITY" ignore_if_missing="yes">[0-3]</filter>
-    <localfile>
+    </localfile>
 
 .. note::
 
