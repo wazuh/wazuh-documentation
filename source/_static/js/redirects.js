@@ -174,6 +174,7 @@ redirections.push(
 /* Pages added in 4.10 */
 newUrls['4.10'] = [
   '/release-notes/release-4-10-0.html',
+  '/release-notes/release-4-10-1.html',
   '/user-manual/reference/ossec-conf/anti-tampering.html'
 ]
 
