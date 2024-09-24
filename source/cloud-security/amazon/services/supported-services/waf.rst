@@ -15,43 +15,43 @@ Amazon configuration native integration
 
 #. Go to Services > Security, Identity, & Compliance > WAF & Shield:
 
-    .. thumbnail::  /images/aws/waf-native-1.png
+    .. thumbnail::  /images/cloud-security/aws/waf-native-1.png
       :align: center
       :width: 70%
 
 #. Click on *Create web ACL*:
 
-    .. thumbnail::  /images/aws/waf-native-2.png
+    .. thumbnail::  /images/cloud-security/aws/waf-native-2.png
       :align: center
       :width: 70%
 
 #. Choose a name for your Web ACL and click on *Next*:
 
-    .. thumbnail::  /images/aws/waf-native-3.png
+    .. thumbnail::  /images/cloud-security/aws/waf-native-3.png
       :align: center
       :width: 70%
 
 #. Click on *Add rules* and select which type of rule to add, then click on *Next*:
 
-    .. thumbnail::  /images/aws/waf-native-4.png
+    .. thumbnail::  /images/cloud-security/aws/waf-native-4.png
       :align: center
       :width: 70%
 
 #. Set the rules priority and click on *Next*:
 
-    .. thumbnail::  /images/aws/waf-native-5.png
+    .. thumbnail::  /images/cloud-security/aws/waf-native-5.png
       :align: center
       :width: 70%
 
 #. Choose a name for your CloudWatch metric and click on *Next*:
 
-    .. thumbnail::  /images/aws/waf-native-6.png
+    .. thumbnail::  /images/cloud-security/aws/waf-native-6.png
       :align: center
       :width: 70%
 
 #. Review the ACL web and click on the *Create web ACL* button at the bottom of the page to create it
 
-    .. thumbnail::  /images/aws/waf-native-7.png
+    .. thumbnail::  /images/cloud-security/aws/waf-native-7.png
       :align: center
       :width: 70%  
 
