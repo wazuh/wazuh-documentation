@@ -99,18 +99,6 @@ The Wazuh dashboard can be installed on a dedicated node or along with the Wazuh
   | Wazuh dashboard         |     4    |     2        |     8        |       4        |
   +-------------------------+----------+--------------+--------------+----------------+
 
-Browser compatibility
-^^^^^^^^^^^^^^^^^^^^^
-
-Wazuh dashboard supports the following web browsers:
-
-- Chrome 95 or later
-- Firefox 93 or later
-- Safari 13.7 or later
-
-Other Chromium-based browsers might also work. Internet Explorer 11 is not supported.
-
-
 .. toctree::
     :hidden:
     :maxdepth: 1
