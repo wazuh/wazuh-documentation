@@ -73,28 +73,17 @@ Policy configuration
 Configure Wazuh to process Amazon GuardDuty logs
 ------------------------------------------------
 
+#. Access the Wazuh configuration in **Server management** > **Settings** using the Wazuh dashboard or by manually editing the ``/var/ossec/etc/ossec.conf`` file in the Wazuh server or agent.
 
+   .. thumbnail:: /images/cloud-security/aws/guardduty/01-wazuh-configuration.png
+      :align: center
+      :width: 80%
 
+   .. thumbnail:: /images/cloud-security/aws/guardduty/02-wazuh-configuration.png
+      :align: center
+      :width: 80%
 
-
-
-
-
-
-
-
-
-
-
-
-
-Wazuh configuration
--------------------
-
-#. Open the Wazuh configuration file ``/var/ossec/etc/ossec.conf`` and add the following block:
-
-Native Integration
-^^^^^^^^^^^^^^^^^^^
+#. Add the following :doc:`Wazuh module for AWS </user-manual/reference/ossec-conf/wodle-s3>` configuration to the file, replacing ``<WAZUH_AWS_BUCKET>`` with the name of the S3 bucket:
 
    .. code-block:: xml
 
@@ -104,100 +93,90 @@ Native Integration
         <run_on_start>yes</run_on_start>
         <skip_on_error>yes</skip_on_error>
         <bucket type="guardduty">
-          <name>wazuh-aws-wodle</name>
+          <name><WAZUH_AWS_BUCKET></name>
           <aws_profile>default</aws_profile>
         </bucket>
       </wodle>
 
-Firehose, Kinesis, CloudWatch Integration
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+#. Save the changes and restart Wazuh to apply the changes. The service can be manually restarted using the following command outside the Wazuh dashboard:
 
-   .. code-block:: xml
+   -  Wazuh manager:
 
-      <wodle name="aws-s3">
-        <disabled>no</disabled>
-        <interval>10m</interval>
-        <run_on_start>yes</run_on_start>
-        <skip_on_error>yes</skip_on_error>
-        <bucket type="guardduty">
-          <name>wazuh-aws-wodle</name>
-          <path>firehose/</path>
-          <aws_profile>default</aws_profile>
-        </bucket>
-      </wodle>
+      .. code-block:: console
 
+         # systemctl restart wazuh-manager
 
-   .. note::
-      Check the :doc:`AWS S3 module </user-manual/reference/ossec-conf/wodle-s3>` reference manual to learn more about each setting.
+   -  Wazuh agent:
 
-#. Restart Wazuh in order to apply the changes:
+      .. code-block:: console
 
-    * If you're configuring a Wazuh manager:
-
-      .. include:: /_templates/common/restart_manager.rst
-
-    * If you're configuring a Wazuh agent:
-
-      .. include:: /_templates/common/restart_agent.rst        
+         # systemctl restart wazuh-agent
 
 GuardDuty use cases
 -------------------
-
-- `Brute force attacks`_
-- `EC2 API Calls made from unusual network`_
-- `Compromised EC2 instance`_
 
 Amazon EC2 (Elastic Compute Cloud) provides scalable computing capacity in the cloud. When using this service, it is highly recommended to monitor it for intrusion attempts or other unauthorized actions performed against your cloud infrastructure.
 
 Below are some use cases for Wazuh rules built for EC2.
 
+.. contents::
+   :local:
+   :depth: 2
+   :backlinks: none
+
 Brute force attacks
 ^^^^^^^^^^^^^^^^^^^
 
-If an instance has an open port that is receiving a brute force attack, the following alert will be shown on the Wazuh dashboard. It shows information about the attacked host, the attacker, and which port is being attacked:
+If an instance has an open port that is receiving a brute force attack, the following alerts with rule ID *80301* will be shown on the Wazuh dashboard.
 
-.. thumbnail:: /images/cloud-security/aws/aws-ec2-guardduty.png
-  :align: center
-  :width: 70%
+.. thumbnail:: /images/cloud-security/aws/guardduty/1-brute-force-attacks.png
+   :align: center
+   :width: 80%
+
+It shows information about the attacked host, the attacker, and which port is being attacked.
+
+.. thumbnail:: /images/cloud-security/aws/guardduty/2-brute-force-attacks.png
+   :align: center
+   :width: 80%
+
+.. thumbnail:: /images/cloud-security/aws/guardduty/3-brute-force-attacks.png
+   :align: center
+   :width: 80%
 
 EC2 API Calls made from unusual network
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-If an API call is made from an unusual network, the following alert will be shown on the Wazuh dashboard. It shows the location of the unusual network, the user who did the API calls, and which API calls it did:
+If an API call is made from an unusual network, the following alerts with rule ID *80301*, *80302*, and *80303* will be shown on the Wazuh dashboard.
 
-.. thumbnail:: /images/cloud-security/aws/aws-ec2-guardduty2.png
-  :align: center
-  :width: 70%
+.. thumbnail:: /images/cloud-security/aws/guardduty/1-ec2-api-calls-made-from-unusual-network.png
+   :align: center
+   :width: 80%
+
+It shows the location of the unusual network, the user who made the API calls, and which API calls it made.
+
+.. thumbnail:: /images/cloud-security/aws/guardduty/2-ec2-api-calls-made-from-unusual-network.png
+   :align: center
+   :width: 80%
 
 Compromised EC2 instance
 ^^^^^^^^^^^^^^^^^^^^^^^^
 
-If there is any indicator of a compromised EC2 instance, an alert will be shown on the Wazuh dashboard explaining what's happening. Some examples of alerts are shown below:
+If there is any indicator of a compromised EC2 instance, an alert with rule ID *80303* will be shown on the Wazuh dashboard explaining what's happening. Some examples of alerts are shown below.
 
-.. thumbnail:: /images/cloud-security/aws/aws-ec2-guardduty3.png
-  :align: center
-  :width: 70%
+.. thumbnail:: /images/cloud-security/aws/guardduty/1-compromised-ec2-instance.png
+   :align: center
+   :width: 80%
 
-.. thumbnail:: /images/cloud-security/aws/aws-ec2-guardduty4.png
-  :align: center
-  :width: 70%
+.. thumbnail:: /images/cloud-security/aws/guardduty/2-compromised-ec2-instance.png
+   :align: center
+   :width: 80%
 
-.. thumbnail:: /images/cloud-security/aws/aws-ec2-guardduty5.png
-  :align: center
-  :width: 70%
+.. thumbnail:: /images/cloud-security/aws/guardduty/3-compromised-ec2-instance.png
+   :align: center
+   :width: 80%
 
-To sum up, the following screenshot shows some alerts generated for a compromised EC2 instance:
+To sum up, the following screenshot shows some alerts generated for a compromised EC2 instance.
 
-.. thumbnail:: /images/cloud-security/aws/aws-ec2-guardduty6.png
-  :align: center
-  :width: 70%
-
-And here are the Wazuh dashboard charts for EC2 events:
-
-+-----------------------------------------------------------------+-------------------------------------------------------------------+
-| Pie Chart                                                       | Stacked Groups                                                    |
-+=================================================================+===================================================================+
-| .. thumbnail:: /images/cloud-security/aws/aws-ec2-pannels-1.png | .. thumbnail:: /images/cloud-security/aws/aws-ec2-pannels-2.png   |
-|    :align: center                                               |    :align: center                                                 |
-|    :width: 70%                                                  |    :width: 70%                                                    |
-+-----------------------------------------------------------------+-------------------------------------------------------------------+
+.. thumbnail:: /images/cloud-security/aws/guardduty/4-compromised-ec2-instance.png
+   :align: center
+   :width: 80%
