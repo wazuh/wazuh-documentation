@@ -64,13 +64,7 @@ Upgrading the Wazuh indexer
 
 The cluster remains available throughout the upgrading process in a Wazuh indexer cluster with multiple nodes. This rolling upgrade allows for the shutting down of one Wazuh indexer node at a time for minimal disruption of service.
 
-As a first step, remove the *ss4o* index templates. Replace ``<WAZUH_INDEXER_IP_ADDRESS>``, ``<USERNAME>``, and ``<PASSWORD>`` before running any command below.
-
-.. code-block:: bash
-
-   curl -X DELETE "https://<WAZUH_INDEXER_IP_ADDRESS>:9200/_index_template/ss4o_*_template" -u <USERNAME>:<PASSWORD> -k
-
-Then, repeat the following steps for every Wazuh indexer node.
+Repeat the following steps for every Wazuh indexer node.
 
 #. Disable shard allocation.
 
