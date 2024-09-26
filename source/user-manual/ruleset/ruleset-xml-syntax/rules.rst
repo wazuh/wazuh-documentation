@@ -28,8 +28,8 @@ The **xml labels** used to configure ``rules`` are listed here.
 +-------------------------+---------------------------------------------------------------+------------------------------------------------------------------------------------------------------+
 | `category`_             | ossec, ids, syslog, firewall, web-log, squid or windows.      | It will match with logs whose decoder's `type <decoders.html#decoder>`_ concur.                      |
 +-------------------------+---------------------------------------------------------------+------------------------------------------------------------------------------------------------------+
-| `field`_                | Name and `sregex <regex.html#sregex-os-match-syntax>`_        | It will compare a field extracted by the decoder in `order <decoders.html#order>`_ with a specific   |
-|                         |                                                               | value.                                                                                               |
+| `field`_                | Name and `regular expression <regex.html>`_                   | It will compare a field extracted by the decoder in `order <decoders.html#order>`_ with a regular    |
+|                         |                                                               | expression.                                                                                          |
 +-------------------------+---------------------------------------------------------------+------------------------------------------------------------------------------------------------------+
 | `srcip`_                | Any IP address.                                               | It will compare the IP address with the IP decoded as ``srcip``. Use "!" to negate it.               |
 +-------------------------+---------------------------------------------------------------+------------------------------------------------------------------------------------------------------+
