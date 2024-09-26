@@ -49,29 +49,68 @@ Wazuh manager
 
 .. |Raspbian_x86_64_manager| replace:: `wazuh-manager_|WAZUH_CURRENT|-|WAZUH_REVISION_DEB_MANAGER_X86|_amd64.deb <|DEB_MANAGER_URL|_|WAZUH_CURRENT|-|WAZUH_REVISION_DEB_MANAGER_X86|_amd64.deb>`__ (`sha512 <|CHECKSUMS_URL||WAZUH_CURRENT|/wazuh-manager_|WAZUH_CURRENT|-|WAZUH_REVISION_DEB_MANAGER_X86|_amd64.deb.sha512>`__)
 
+.. |Amazon_aarch64_manager| replace:: `wazuh-manager-|WAZUH_CURRENT|-|WAZUH_REVISION_YUM_MANAGER_X86|.aarch64.rpm <|RPM_MANAGER_URL|-|WAZUH_CURRENT|-|WAZUH_REVISION_YUM_MANAGER_X86|.aarch64.rpm>`__ (`sha512 <|CHECKSUMS_URL||WAZUH_CURRENT|/wazuh-manager-|WAZUH_CURRENT|-|WAZUH_REVISION_YUM_MANAGER_X86|.aarch64.rpm.sha512>`__)
+
+.. |CentOS7_aarch64_manager| replace:: `wazuh-manager-|WAZUH_CURRENT|-|WAZUH_REVISION_YUM_MANAGER_X86|.aarch64.rpm <|RPM_MANAGER_URL|-|WAZUH_CURRENT|-|WAZUH_REVISION_YUM_MANAGER_X86|.aarch64.rpm>`__ (`sha512 <|CHECKSUMS_URL||WAZUH_CURRENT|/wazuh-manager-|WAZUH_CURRENT|-|WAZUH_REVISION_YUM_MANAGER_X86|.aarch64.rpm.sha512>`__)
+
+.. |Debian8_aarch64_manager| replace:: `wazuh-manager_|WAZUH_CURRENT|-|WAZUH_REVISION_DEB_MANAGER_X86|_arm64.deb <|DEB_MANAGER_URL|_|WAZUH_CURRENT|-|WAZUH_REVISION_DEB_MANAGER_X86|_arm64.deb>`__ (`sha512 <|CHECKSUMS_URL||WAZUH_CURRENT|/wazuh-manager_|WAZUH_CURRENT|-|WAZUH_REVISION_DEB_MANAGER_X86|_arm64.deb.sha512>`__)
+
+.. |Fedora22_aarch64_manager| replace:: `wazuh-manager-|WAZUH_CURRENT|-|WAZUH_REVISION_YUM_MANAGER_X86|.aarch64.rpm <|RPM_MANAGER_URL|-|WAZUH_CURRENT|-|WAZUH_REVISION_YUM_MANAGER_X86|.aarch64.rpm>`__ (`sha512 <|CHECKSUMS_URL||WAZUH_CURRENT|/wazuh-manager-|WAZUH_CURRENT|-|WAZUH_REVISION_YUM_MANAGER_X86|.aarch64.rpm.sha512>`__)
+
+.. |OpenSUSE_aarch64_manager| replace:: `wazuh-manager-|WAZUH_CURRENT|-|WAZUH_REVISION_YUM_MANAGER_X86|.aarch64.rpm <|RPM_MANAGER_URL|-|WAZUH_CURRENT|-|WAZUH_REVISION_YUM_MANAGER_X86|.aarch64.rpm>`__ (`sha512 <|CHECKSUMS_URL||WAZUH_CURRENT|/wazuh-manager-|WAZUH_CURRENT|-|WAZUH_REVISION_YUM_MANAGER_X86|.aarch64.rpm.sha512>`__)
+
+.. |Oracle7_aarch64_manager| replace:: `wazuh-manager-|WAZUH_CURRENT|-|WAZUH_REVISION_YUM_MANAGER_X86|.aarch64.rpm <|RPM_MANAGER_URL|-|WAZUH_CURRENT|-|WAZUH_REVISION_YUM_MANAGER_X86|.aarch64.rpm>`__ (`sha512 <|CHECKSUMS_URL||WAZUH_CURRENT|/wazuh-manager-|WAZUH_CURRENT|-|WAZUH_REVISION_YUM_MANAGER_X86|.aarch64.rpm.sha512>`__)
+
+.. |RHEL7_aarch64_manager| replace:: `wazuh-manager-|WAZUH_CURRENT|-|WAZUH_REVISION_YUM_MANAGER_X86|.aarch64.rpm <|RPM_MANAGER_URL|-|WAZUH_CURRENT|-|WAZUH_REVISION_YUM_MANAGER_X86|.aarch64.rpm>`__ (`sha512 <|CHECKSUMS_URL||WAZUH_CURRENT|/wazuh-manager-|WAZUH_CURRENT|-|WAZUH_REVISION_YUM_MANAGER_X86|.aarch64.rpm.sha512>`__)
+
+.. |SUSE12_aarch64_manager| replace:: `wazuh-manager-|WAZUH_CURRENT|-|WAZUH_REVISION_YUM_MANAGER_X86|.aarch64.rpm <|RPM_MANAGER_URL|-|WAZUH_CURRENT|-|WAZUH_REVISION_YUM_MANAGER_X86|.aarch64.rpm>`__ (`sha512 <|CHECKSUMS_URL||WAZUH_CURRENT|/wazuh-manager-|WAZUH_CURRENT|-|WAZUH_REVISION_YUM_MANAGER_X86|.aarch64.rpm.sha512>`__)
+
+.. |Ubuntu13_aarch64_manager| replace:: `wazuh-manager_|WAZUH_CURRENT|-|WAZUH_REVISION_DEB_MANAGER_X86|_arm64.deb <|DEB_MANAGER_URL|_|WAZUH_CURRENT|-|WAZUH_REVISION_DEB_MANAGER_X86|_arm64.deb>`__ (`sha512 <|CHECKSUMS_URL||WAZUH_CURRENT|/wazuh-manager_|WAZUH_CURRENT|-|WAZUH_REVISION_DEB_MANAGER_X86|_arm64.deb.sha512>`__)
+
+.. |Raspbian_aarch64_manager| replace:: `wazuh-manager_|WAZUH_CURRENT|-|WAZUH_REVISION_DEB_MANAGER_X86|_arm64.deb <|DEB_MANAGER_URL|_|WAZUH_CURRENT|-|WAZUH_REVISION_DEB_MANAGER_X86|_arm64.deb>`__ (`sha512 <|CHECKSUMS_URL||WAZUH_CURRENT|/wazuh-manager_|WAZUH_CURRENT|-|WAZUH_REVISION_DEB_MANAGER_X86|_arm64.deb.sha512>`__)
+
 +-----------------------+-------------------+--------------+------------------------------------------+
 | Distribution          | Version           | Architecture | Package                                  |
 +=======================+===================+==============+==========================================+
-| Amazon Linux          |  1 and later      |    x86_64    | |Amazon_x86_64_manager|                  |
+|                       |                   |    x86_64    | |Amazon_x86_64_manager|                  |
++ Amazon Linux          +  1 and later      +--------------+------------------------------------------+
+|                       |                   |    aarch64   | |Amazon_aarch64_manager|                 |
 +-----------------------+-------------------+--------------+------------------------------------------+
-| CentOS                |  7 and later      |    x86_64    | |CentOS7_x86_64_manager|                 |
+|                       |                   |    x86_64    | |CentOS7_x86_64_manager|                 |
++ CentOS                +  7 and later      +--------------+------------------------------------------+
+|                       |                   |    aarch64   | |CentOS7_aarch64_manager|                |
 +-----------------------+-------------------+--------------+------------------------------------------+
-| Debian                |  8 and later      |    x86_64    | |Debian8_x86_64_manager|                 |
+|                       |                   |    x86_64    | |Debian8_x86_64_manager|                 |
++ Debian                +  8 and later      +--------------+------------------------------------------+
+|                       |                   |    aarch64   | |Debian8_aarch64_manager|                |
 +-----------------------+-------------------+--------------+------------------------------------------+
-| Fedora                |  22 and later     |    x86_64    | |Fedora22_x86_64_manager|                |
+|                       |                   |    x86_64    | |Fedora22_x86_64_manager|                |
++ Fedora                +  22 and later     +--------------+------------------------------------------+
+|                       |                   |    aarch64   | |Fedora22_aarch64_manager|               |
 +-----------------------+-------------------+--------------+------------------------------------------+
-| OpenSUSE              |  42 and later     |    x86_64    | |OpenSUSE_x86_64_manager|                |
+|                       |                   |    x86_64    | |OpenSUSE_x86_64_manager|                |
++ OpenSUSE              +  42 and later     +--------------+------------------------------------------+
+|                       |                   |    aarch64   | |OpenSUSE_aarch64_manager|               |
 +-----------------------+-------------------+--------------+------------------------------------------+
-| Oracle Linux          |  7 and later      |    x86_64    | |Oracle7_x86_64_manager|                 |
+|                       |                   |    x86_64    | |Oracle7_x86_64_manager|                 |
++ Oracle Linux          +  7 and later      +--------------+------------------------------------------+
+|                       |                   |    aarch64   | |Oracle7_aarch64_manager|                |
 +-----------------------+-------------------+--------------+------------------------------------------+
-| Red Hat               |  7 and later      |    x86_64    | |RHEL7_x86_64_manager|                   |
-| Enterprise Linux      |                   |              |                                          |
+| Red Hat               |                   |    x86_64    | |RHEL7_x86_64_manager|                   |
++ Enterprise Linux      +  7 and later      +--------------+------------------------------------------+
+|                       |                   |    aarch64   | |RHEL7_aarch64_manager|                  |
 +-----------------------+-------------------+--------------+------------------------------------------+
-| SUSE                  |  12               |    x86_64    | |SUSE12_x86_64_manager|                  |
+|                       |                   |    x86_64    | |SUSE12_x86_64_manager|                  |
++ SUSE                  +  12               +--------------+------------------------------------------+
+|                       |                   |    aarch64   | |SUSE12_aarch64_manager|                 |
 +-----------------------+-------------------+--------------+------------------------------------------+
-| Ubuntu                |  13 and later     |    x86_64    | |Ubuntu13_x86_64_manager|                |
+|                       |                   |    x86_64    | |Ubuntu13_x86_64_manager|                |
++ Ubuntu                +  13 and later     +--------------+------------------------------------------+
+|                       |                   |    aarch64   | |Ubuntu13_aarch64_manager|               |
 +-----------------------+-------------------+--------------+------------------------------------------+
-| Raspbian OS           | Buster and later  |    x86_64    | |Raspbian_x86_64_manager|                |
+|                       |                   |    x86_64    | |Raspbian_x86_64_manager|                |
++ Raspbian OS           + Buster and later  +--------------+------------------------------------------+
+|                       |                   |    aarch64   | |Raspbian_aarch64_manager|               |
 +-----------------------+-------------------+--------------+------------------------------------------+
 
 Filebeat
