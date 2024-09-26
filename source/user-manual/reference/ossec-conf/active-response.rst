@@ -14,6 +14,12 @@ active-response
 
 In the active response configuration section, an existing command is bound to one or more rules or rule types along with additional criteria for when to execute the command. There is no limit to the number of active responses that can be used, however, each active response must be configured in its own separate ``<active-response>`` section.
 
+.. note::
+
+    Execution of active response is globally prevented for IP addresses specified in :doc:`global <white_list>`
+    directive. If your active response is not executed as expected, make sure the ``white_list`` setting is
+    not set too broadly.
+
 Options
 -------
 
