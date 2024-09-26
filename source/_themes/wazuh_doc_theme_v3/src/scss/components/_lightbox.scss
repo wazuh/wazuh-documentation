@@ -11,13 +11,7 @@
 #wazuh-light-box {
   z-index: 2100;
 
-  .wazuh-light-box-slides-container {
-    padding: 60px;
-    margin: 60px
-  }
-
   .wlb-image {
-    max-height: calc(100vh - 8rem - 40px);
     border: 10px solid $color-img-border;
   }
 }
