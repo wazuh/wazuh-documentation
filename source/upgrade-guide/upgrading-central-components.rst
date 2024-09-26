@@ -64,6 +64,8 @@ Upgrading the Wazuh indexer
 
 The cluster remains available throughout the upgrading process in a Wazuh indexer cluster with multiple nodes. This rolling upgrade allows for the shutting down of one Wazuh indexer node at a time for minimal disruption of service.
 
+Replace ``<WAZUH_INDEXER_IP_ADDRESS>``, ``<USERNAME>``, and ``<PASSWORD>`` before running any command below.
+
 Repeat the following steps for every Wazuh indexer node.
 
 #. Disable shard allocation.
