@@ -147,7 +147,7 @@ Amazon configuration with Kinesis
 #. Once the rule is created, data will start to be sent to the previously created S3 bucket. Remember to first enable the service you want to monitor, otherwise, you won't get any data.
 
 Policy configuration
-++++++++++++++++++++
+^^^^^^^^^^^^^^^^^^^^
 
 .. include:: /_templates/cloud/amazon/create_policy.rst
 .. include:: /_templates/cloud/amazon/bucket_policies.rst
@@ -157,6 +157,26 @@ Wazuh configuration
 -------------------
 
 #. Open the Wazuh configuration file (``/var/ossec/etc/ossec.conf``) and add the following block:
+
+Native Integration
+^^^^^^^^^^^^^^^^^^
+
+    .. code-block:: xml
+
+      <wodle name="aws-s3">
+        <disabled>no</disabled>
+        <interval>10m</interval>
+        <run_on_start>yes</run_on_start>
+        <skip_on_error>yes</skip_on_error>
+        <bucket type="waf">
+          <name>wazuh-aws-wodle</name>
+          <waf_acls>acls</waf_acls>
+          <aws_profile>default</aws_profile>
+        </bucket>
+      </wodle>
+
+Kinesis Integration
+^^^^^^^^^^^^^^^^^^^
 
     .. code-block:: xml
 
