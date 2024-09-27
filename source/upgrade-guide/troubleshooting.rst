@@ -59,6 +59,17 @@ If you encounter the message *Application Not Found* when accessing the Wazuh da
 
    uiSettings.overrides.defaultRoute: /app/wz-home
 
+SSO when upgrading from Wazuh v4.8.2 and earlier
+------------------------------------------------
+
+If you are upgrading from Wazuh v4.8.2 or earlier to v4.9.0 or later, the value of the ``exchange_key`` in the ``/etc/wazuh-indexer/opensearch-security/config.yml`` file may need to be updated.
+
+In previous versions (v4.8.0 and earlier), the ``exchange_key`` was set by copying the X.509 Certificate blob, excluding the ``-----BEGIN CERTIFICATE-----`` and ``-----END CERTIFICATE-----`` lines.
+
+Starting with v4.9.0, the ``exchange_key`` must be a 64-character random alphanumeric string.
+
+Please review the relevant documentation, as our SSO guides have been updated. Particularly the first step of the wazuh-indexer configuration. (:doc:`Okta </user-manual/user-administration/single-sign-on/administrator/okta>`, :doc:`Microsoft Entra ID </user-manual/user-administration/single-sign-on/administrator/microsoft-entra-id>`, :doc:`PingOne </user-manual/user-administration/single-sign-on/administrator/pingone>`, :doc:`Google </user-manual/user-administration/single-sign-on/administrator/google>`, :doc:`Jumpcloud </user-manual/user-administration/single-sign-on/administrator/jumpcloud>`, :doc:`OneLogin </user-manual/user-administration/single-sign-on/administrator/onelogin>`, :doc:`Keycloack </user-manual/user-administration/single-sign-on/administrator/keycloak>`)
+
 None of the above solutions are fixing my problem
 -------------------------------------------------
 
