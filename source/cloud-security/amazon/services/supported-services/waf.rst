@@ -122,9 +122,19 @@ Policy configuration
 Configure Wazuh to process Amazon WAF logs
 ------------------------------------------
 
-#. Open the Wazuh configuration file (``/var/ossec/etc/ossec.conf``) and add the following block:
+#. Access the Wazuh configuration in **Server management** > **Settings** using the Wazuh dashboard or by manually editing the ``/var/ossec/etc/ossec.conf`` file in the Wazuh server or agent.
 
-    .. code-block:: xml
+   .. thumbnail:: /images/cloud-security/aws/waf/01-wazuh-configuration.png
+      :align: center
+      :width: 80%
+
+   .. thumbnail:: /images/cloud-security/aws/waf/02-wazuh-configuration.png
+      :align: center
+      :width: 80%
+
+#. Add the following :doc:`Wazuh module for AWS </user-manual/reference/ossec-conf/wodle-s3>` configuration to the file, replacing ``<WAZUH_AWS_BUCKET>`` with the name of the S3 bucket:
+
+   .. code-block:: xml
 
       <wodle name="aws-s3">
         <disabled>no</disabled>
@@ -132,74 +142,93 @@ Configure Wazuh to process Amazon WAF logs
         <run_on_start>yes</run_on_start>
         <skip_on_error>yes</skip_on_error>
         <bucket type="waf">
-          <name>wazuh-aws-wodle</name>       <!-- PUT HERE THE S3 BUCKET CHOSEN IN STEP 7 -->
-          <path>waf</path>                   <!-- PUT HERE THE PREFIX CHOSEN IN STEP 7 -->
+          <name><WAZUH_AWS_BUCKET></name>
+          <path>waf</path>                   <!-- PUT THE S3 BUCKET PREFIX IF THE LOGS ARE NOT STORED IN THE BUCKET'S ROOT PATH -->
           <aws_profile>default</aws_profile>
         </bucket>
       </wodle>
 
-    .. note::
-      Check the :doc:`AWS S3 module </user-manual/reference/ossec-conf/wodle-s3>` reference manual to learn more about each setting.
+#. Save the changes and restart Wazuh to apply the changes. The service can be manually restarted using the following command outside the Wazuh dashboard:
 
-#. Restart Wazuh in order to apply the changes:
+   -  Wazuh manager:
 
-    * If you're configuring a Wazuh manager:
+      .. code-blocK:: console
 
-      .. include:: /_templates/common/restart_manager.rst
+         # systemctl restart wazuh-manager
 
-    * If you're configuring a Wazuh agent:
+   -  Wazuh agent:
 
-      .. include:: /_templates/common/restart_agent.rst
+      .. code-block:: console
 
+         # systemctl restart wazuh-agent
 
 HTTP Request headers
 --------------------
 
-The Wazuh AWS WAF implementation parses the header information present in the ``httpRequest`` field, allowing filtering by these headers and their values in the Wazuh UI. During this parsing, any non-standard header will be extracted and removed from the event before sending it to ``Analysisd``. Here is the complete list of the allowed standard header fields:
+The Wazuh AWS WAF implementation parses the header information present in the ``httpRequest`` field, allowing filtering by these headers and their values on the Wazuh dashboard. During this parsing, any non-standard header will be extracted and removed from the event before sending it to :doc:`analysisd </user-manual/reference/daemons/wazuh-analysisd>`. Here is the complete list of the allowed standard header fields:
 
-.. code-block:: console
+.. code-block:: none
 
-  a-im
-  accept
-  accept-charset
-  accept-encoding
-  accept-language
-  access-control-request-method
-  access-control-request-headers
-  authorization
-  cache-control
-  connection
-  content-encoding
-  content-length
-  content-type
-  cookie
-  date
-  expect
-  forwarded
-  from
-  host
-  http2-settings
-  if-match
-  if-modified-since
-  if-none-match
-  if-range
-  if-unmodified-since
-  max-forwards
-  origin
-  pragma
-  prefer
-  proxy-authorization
-  range
-  referer
-  te
-  trailer
-  transfer-encoding
-  user-agent
-  upgrade
-  via
-  warning
-  x-requested-with
-  x-forwarded-for
-  x-forwarded-host
-  x-forwarded-proto
+   a-im
+   accept
+   accept-charset
+   accept-encoding
+   accept-language
+   access-control-request-method
+   access-control-request-headers
+   authorization
+   cache-control
+   connection
+   content-encoding
+   content-length
+   content-type
+   cookie
+   date
+   expect
+   forwarded
+   from
+   host
+   http2-settings
+   if-match
+   if-modified-since
+   if-none-match
+   if-range
+   if-unmodified-since
+   max-forwards
+   origin
+   pragma
+   prefer
+   proxy-authorization
+   range
+   referer
+   te
+   trailer
+   transfer-encoding
+   user-agent
+   upgrade
+   via
+   warning
+   x-requested-with
+   x-forwarded-for
+   x-forwarded-host
+   x-forwarded-proto
 
+Use case
+--------
+
+AWS WAF is a security service that helps protect your web applications or APIs from threats. By monitoring blocked requests, you can identify the types of threats your application is facing. This can help you understand the security landscape and adjust your defenses accordingly.
+
+Monitoring blocked web application requests
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+If web requests are blocked by the rules of the Amazon Web ACL, the following alerts with rule ID *80442* and *80443* will be shown on the Wazuh dashboard.
+
+.. thumbnail:: /images/cloud-security/aws/waf/1-monitoring-blocked-web-application-requests.png
+   :align: center
+   :width: 80%
+
+Expand an alert to find more information such as the Request-URI, the method, and the Web ACL rule label that blocked the request.
+
+.. thumbnail:: /images/cloud-security/aws/waf/2-monitoring-blocked-web-application-requests.png
+   :align: center
+   :width: 80%
