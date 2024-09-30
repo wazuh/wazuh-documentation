@@ -1,109 +1,126 @@
 .. Copyright (C) 2015, Wazuh, Inc.
 
 .. meta::
-  :description: Amazon WAF is web application firewall that helps protecting web applications from common web exploits. Learn how to configure and monitor it with Wazuh.
-
-.. _amazon_waf:
+   :description: The following sections cover how to configure different services required to integrate AWS WAF with Wazuh.
 
 Amazon Web Application Firewall (WAF)
 =====================================
 
-`Amazon WAF <https://aws.amazon.com/waf/>`_ is a web application firewall that helps protect your web applications from common web exploits that could affect application availability, compromise security, or consume excessive resources. ``AWS WAF`` gives you control over which traffic to allow or block to your web applications by defining customizable web security rules. 
+`Amazon WAF <https://aws.amazon.com/waf/>`__ is a web application firewall that helps protect your web applications from common web exploits that could affect application availability, compromise security, or consume excessive resources. AWS WAF gives you control over which traffic to allow or block to your web applications by defining customizable web security rules.
 
-Amazon configuration
---------------------
+AWS configuration
+-----------------
 
-#. :doc:`Create a new </cloud-security/amazon/services/prerequisites/S3-bucket>` S3 bucket. (If you want to use an already created one, skip this step).
+The following sections cover how to configure different services required to integrate AWS WAF with Wazuh.
 
-#. Go to Services > Analytics > Kinesis:
+.. thumbnail:: /images/cloud-security/aws/waf/firewall.png
+   :align: center
+   :width: 80%
 
-    .. thumbnail::  /images/cloud-security/aws/aws-create-firehose-4.png
+Amazon Data Firehose configuration
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Create an Amazon Data Firehose delivery stream to store the Amazon WAF logs into the desired S3 bucket so Wazuh can process them.
+
+#. :doc:`Create a new S3 bucket <../prerequisites/S3-bucket>`. If you want to use an already existing one, skip this step.
+#. On your AWS console, Search for "*amazon data firehose*" in the search bar at the top of the page or go to **Services** > **Analytics** > **Amazon Data Firehose**.
+
+   .. thumbnail:: /images/cloud-security/aws/waf/01-data-firehose.png
       :align: center
-      :width: 70%
+      :width: 80%
 
-#. If it's the first time you're using this service, you'll see the following screen. Just click on *Get started*:
+#. Click **Create Firehose stream**.
 
-    .. thumbnail::  /images/cloud-security/aws/aws-create-firehose-4.1.png
+   .. thumbnail:: /images/cloud-security/aws/waf/02-create-firehose-stream.png
       :align: center
-      :width: 70%
+      :width: 80%
 
-#. Click on *Create delivery stream* button:
+#. Select **Direct PUT** and **Amazon S3** as the desired *Source* and *Destination*, respectively.
 
-    .. thumbnail::  /images/cloud-security/aws/aws-create-firehose-5.png
+   .. thumbnail:: /images/cloud-security/aws/waf/03-select-direct-put.png
       :align: center
-      :width: 70%
+      :width: 80%
 
-#. Put a name to your delivery stream and click on the *Next* button at the bottom of the page:
+#. Under **Firehose stream name**, give the data firehose a name that starts with the prefix ``aws-waf-logs-``.
 
-    .. thumbnail::  /images/cloud-security/aws/aws-create-firehose-6.png
+   .. thumbnail:: /images/cloud-security/aws/waf/04-firehose-stream-name.png
       :align: center
-      :width: 70%
+      :width: 80%
 
-#. On the next page, leave both options as *Disabled* and click on *Next*:
+#. Select the desired S3 bucket as the destination. It is possible to specify a custom prefix to alter the path where AWS stores the logs. AWS Firehose creates a file structure ``YYYY/MM/DD/HH``, if a prefix is used the created file structure would be ``prefix-name/YYYY/MM/DD/HH``. If a prefix is used it must be specified under the Wazuh bucket configuration. In our case, the prefix is ``waf/``.
 
-    .. thumbnail::  /images/cloud-security/aws/aws-create-firehose-7.png
+   .. thumbnail:: /images/cloud-security/aws/waf/05-select-s3-bucket-and-path.png
       :align: center
-      :width: 70%
+      :width: 80%
 
-#. Select *Amazon S3* as the destination, then select the previously created S3 bucket and add a prefix where logs will be stored. AWS Firehose creates a file structure *YYYY/MM/DD/HH*, if a prefix is used the created file structure would be *firehose/YYYY/MM/DD/HH*. If a prefix is used it must be specified under the Wazuh Bucket configuration:
+#. Create or choose an existing IAM role to be used by Amazon Data Firehose in the **Advanced settings** section.
 
-    .. thumbnail::  /images/cloud-security/aws/aws-create-firehose-8.png
+   .. thumbnail:: /images/cloud-security/aws/waf/06-choose-iam-role.png
       :align: center
-      :width: 70%
+      :width: 80%
 
-#. Users can select the compression they prefer. Wazuh supports any kind of compression but Snappy. After that, click on **Create new or choose**:
+#. Click **Create Firehose stream** at the end of the page. The new delivery stream will be created and its details will be shown as follows.
 
-    .. thumbnail::  /images/cloud-security/aws/aws-create-firehose-9.png
+   .. thumbnail:: /images/cloud-security/aws/waf/07-create-firehose-stream.png
       :align: center
-      :width: 70%
+      :width: 80%
 
-#. Give a proper name to the role and click on the *Allow* button:
+AWS WAF configuration
+^^^^^^^^^^^^^^^^^^^^^
 
-    .. thumbnail::   /images/cloud-security/aws/aws-create-firehose-10.png
+Send logs from your Web Access Control Lists (web ACLs) to the previously created Amazon Data Firehose with a configured S3 storage destination. After you enable logging, AWS WAF delivers logs to your S3 bucket through the HTTPS endpoint of Firehose.
+
+#. On the AWS console, search for "*waf*" or go to **Services** > **Security, Identity, & Compliance** > **WAF & Shield**.
+
+   .. thumbnail:: /images/cloud-security/aws/waf/01-search-for-waf.png
       :align: center
-      :width: 70%
+      :width: 80%
 
-#. The following page is just a summary of the Firehose stream created, go to the bottom of the page and click on the *Create delivery stream* button:
+#. Click **Go to AWS WAF**.
 
-    .. thumbnail::  /images/cloud-security/aws/aws-create-firehose-11.png
+   .. thumbnail:: /images/cloud-security/aws/waf/02-go-to-aws-waf.png
       :align: center
-      :width: 70%
+      :width: 80%
 
-#. Go to Services > Management Tools > CloudWatch:
+#. Go to **Web ACLs** and click the name of the Web ACL attached to your web application. If you have not configured the Web ACL, follow the `set up AWS WAF <https://docs.aws.amazon.com/waf/latest/developerguide/getting-started.html#getting-started-aws-account>`__ guide.
 
-    .. thumbnail::  /images/cloud-security/aws/aws-create-firehose-12.png
+   .. thumbnail:: /images/cloud-security/aws/waf/03-go-to-web-acl.png
       :align: center
-      :width: 70%
+      :width: 80%
 
-#. Select *Rules* on the left menu and click on the *Create rule* button:
+#. Go to **Logging and metrics**, under **Logging**, click **Enable**.
 
-    .. thumbnail::  /images/cloud-security/aws/aws-create-firehose-13.png
+   .. thumbnail:: /images/cloud-security/aws/waf/04-enable-logging.png
       :align: center
-      :width: 70%
+      :width: 80%
 
-#. Select the services you want to get logs from using the **Service name** slider, then, click on the **Add target** button and add the previously created Firehose delivery stream there. Also, create a new role to access the delivery stream.
+#. Select **Amazon Data Firehose stream** as **Logging destination**, and select the previously created firehose stream under **Amazon Data Firehose stream**.
 
-    .. thumbnail:: /images/cloud-security/aws/aws-create-firehose-14.png
+   .. thumbnail:: /images/cloud-security/aws/waf/05-select-logging-destination.png
       :align: center
-      :width: 70%
+      :width: 80%
 
-#. Give the rule some name and click on the *Create rule* button:
+#. Under **Filter logs**, apply your preferred filtering requirements and click **Save**. In our case, we set up the filter to log blocked web requests only.
 
-    .. thumbnail::  /images/cloud-security/aws/aws-create-firehose-15.png
+   .. thumbnail:: /images/cloud-security/aws/waf/06-filter-logs.png
       :align: center
-      :width: 70%
+      :width: 80%
 
-#. Once the rule is created, data will start to be sent to the previously created S3 bucket. Remember to first enable the service you want to monitor, otherwise, you won't get any data.
+#. Confirm that logging is enabled.
+
+   .. thumbnail:: /images/cloud-security/aws/waf/07-confirm-logging-is-enabled.png
+      :align: center
+      :width: 80%
 
 Policy configuration
-++++++++++++++++++++
+^^^^^^^^^^^^^^^^^^^^
 
 .. include:: /_templates/cloud/amazon/create_policy.rst
 .. include:: /_templates/cloud/amazon/bucket_policies.rst
 .. include:: /_templates/cloud/amazon/attach_policy.rst
 
-Wazuh configuration
--------------------
+Configure Wazuh to process Amazon WAF logs
+------------------------------------------
 
 #. Open the Wazuh configuration file (``/var/ossec/etc/ossec.conf``) and add the following block:
 
