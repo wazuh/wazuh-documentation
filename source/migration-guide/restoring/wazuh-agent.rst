@@ -20,7 +20,7 @@ You need to have a new installation of the Wazuh agent on a Linux endpoint. Foll
 Preparing the data restoration
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-#. Compress the files generated after performing the :doc:`Wazuh files backup </migration-guide/files-backup/creating/wazuh-agent>` and transfer them to the respective monitored endpoints.
+#. Compress the files generated after performing the :doc:`Wazuh files backup </migration-guide/creating/wazuh-agent>` and transfer them to the respective monitored endpoints.
 
    .. code-block:: console
 
