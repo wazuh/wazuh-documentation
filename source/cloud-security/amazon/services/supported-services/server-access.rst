@@ -1,65 +1,66 @@
-
 .. Copyright (C) 2015, Wazuh, Inc.
 
 .. meta::
-  :description: AWS Server Access Logging is a service that provides detailed records for the requests made to a bucket. Learn how to configure and monitor it with Wazuh.
-
-.. _amazon_server_access:
+   :description: The following sections cover how to configure the Amazon S3 Server Access service to integrate with Wazuh.
 
 Amazon S3 Server Access
 =======================
 
-`Amazon S3 Server Access Logging <https://docs.aws.amazon.com/AmazonS3/latest/userguide/ServerLogs.html>`_ provides detailed records for the requests that are made to a bucket. Server access logs are useful for many applications. For example, access log information can be useful in security and access audits. It can also help you learn about your customer base and understand your Amazon S3 bill.
+`Amazon S3 server access logging <https://docs.aws.amazon.com/AmazonS3/latest/userguide/ServerLogs.html>`__ provides detailed records for the requests that are made to a bucket. Server access logs are useful for many applications. For example, access log information can be useful in security and access audits. It can also help you learn about your customer base and understand your Amazon S3 bill.
 
-Amazon configuration
---------------------
+AWS configuration
+-----------------
 
-#. :doc:`Create a new </cloud-security/amazon/services/prerequisites/S3-bucket>` S3 bucket to store the access logs in it. If you want to use an existing one, skip this step.
+The following sections cover how to configure the Amazon S3 Server Access service to integrate with Wazuh.
 
-#. Go to Services > Storage > S3:
+Amazon S3 server access configuration
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-    .. thumbnail::  /images/cloud-security/aws/aws-server-access-1.png
+#. :doc:`Create a new S3 bucket <../prerequisites/S3-bucket>` to store the access logs in it. If you want to use an existing one, skip this step.
+
+#. On your AWS console search for "*S3*" or go to **Services** > **Storage** > **S3**.
+
+   .. thumbnail:: /images/cloud-security/aws/s3-server-access/01-search-for-s3.png
       :align: center
-      :width: 70%
+      :width: 80%
 
-#. Look for the S3 bucket you want to monitor and click on its name:
+#. Look for the S3 bucket you want to monitor and click on its name.
 
-    .. thumbnail::  /images/cloud-security/aws/aws-server-access-2.png
+   .. thumbnail:: /images/cloud-security/aws/s3-server-access/02-click-s3-bucket-to-be-monitored.png
       :align: center
-      :width: 70%
+      :width: 80%
 
-#. Go to the **Properties** tab, scroll down until you find the **Server access logging**, and click on the **Edit** button:
+#. Go to the **Properties** tab, scroll down until you find the **Server access logging**, and click **Edit**.
 
-    .. thumbnail::  /images/cloud-security/aws/aws-server-access-3.png
+   .. thumbnail:: /images/cloud-security/aws/s3-server-access/03-go-to-properties-1.png
       :align: center
-      :width: 70%
+      :width: 80%
 
-    .. thumbnail::  /images/cloud-security/aws/aws-server-access-4.png
+   .. thumbnail:: /images/cloud-security/aws/s3-server-access/03-go-to-properties-2.png
       :align: center
-      :width: 70%
+      :width: 80%
 
-#. Check the **Enable** option, and click on the **Browse S3** button to look for the bucket in which you want S3 Server Access logs to be stored:
+#. Check the **Enable** option, and click **Browse S3** to look for the bucket in which you want S3 Server Access logs to be stored. In our case, the logs are stored in the ``s3-server-logs/`` path of the monitored S3 bucket.
 
-    .. thumbnail::  /images/cloud-security/aws/aws-server-access-5.png
+   .. thumbnail:: /images/cloud-security/aws/s3-server-access/04-enable -and-store-s3-access-logs.png
       :align: center
-      :width: 70%
+      :width: 80%
 
-    .. note::
+   .. note::
+
       It is possible to store the S3 Server Access logs in the same bucket to be monitored. It is also possible to specify a custom path inside the bucket to store the logs in it.
-
 
 #. Finally, click on the **Save changes**. S3 Server Access logs will start to be stored in the specified path.
 
-
 Policy configuration
-++++++++++++++++++++
+^^^^^^^^^^^^^^^^^^^^
 
 .. include:: /_templates/cloud/amazon/create_policy.rst
 .. include:: /_templates/cloud/amazon/bucket_policies.rst
 .. include:: /_templates/cloud/amazon/attach_policy.rst
 
-Wazuh configuration
--------------------
+Configure Wazuh to process Amazon S3 Server Access logs
+-------------------------------------------------------
 
 #. Open the Wazuh configuration file (``/var/ossec/etc/ossec.conf``) and add the following block:
 
