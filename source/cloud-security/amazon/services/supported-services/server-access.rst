@@ -62,9 +62,19 @@ Policy configuration
 Configure Wazuh to process Amazon S3 Server Access logs
 -------------------------------------------------------
 
-#. Open the Wazuh configuration file (``/var/ossec/etc/ossec.conf``) and add the following block:
+#. Access the Wazuh configuration in **Server management** > **Settings** using the Wazuh dashboard or by manually editing the ``/var/ossec/etc/ossec.conf`` file in the Wazuh server or agent.
 
-    .. code-block:: xml
+   .. thumbnail:: /images/cloud-security/aws/s3-server-access/01-wazuh-configuration.png
+      :align: center
+      :width: 80%
+
+   .. thumbnail:: /images/cloud-security/aws/s3-server-access/02-wazuh-configuration.png
+      :align: center
+      :width: 80%
+
+#. Add the following :doc:`Wazuh module for AWS </user-manual/reference/ossec-conf/wodle-s3>` configuration to the file, replacing ``<WAZUH_AWS_BUCKET>`` with the name of the S3 bucket:
+
+   .. code-block:: xml
 
       <wodle name="aws-s3">
         <disabled>no</disabled>
@@ -72,22 +82,44 @@ Configure Wazuh to process Amazon S3 Server Access logs
         <run_on_start>yes</run_on_start>
         <skip_on_error>yes</skip_on_error>
         <bucket type="server_access">
-          <name>wazuh-aws-wodle</name>       <!-- PUT HERE THE S3 BUCKET CHOSEN IN STEP 5 -->
-          <path>waf</path>                   <!-- PUT HERE THE PATH TO THE LOGS CHOSEN IN STEP 5 IF THE LOGS ARE NOT STORED IN THE BUCKET'S ROOT PATH -->
+          <name><WAZUH_AWS_BUCKET></name>       <!-- PUT THE S3 BUCKET CHOSEN IN STEP 5 HERE -->
+          <path>s3-server-logs</path>                   <!-- IF THE LOGS ARE NOT STORED IN THE BUCKET'S ROOT PATH, PUT  THE PATH TO THE LOGS CHOSEN IN STEP 5 HERE -->
           <aws_profile>default</aws_profile>
         </bucket>
       </wodle>
 
-    .. note::
-      Check the :doc:`AWS S3 module </user-manual/reference/ossec-conf/wodle-s3>` reference manual to learn more about each setting.
+#. Save the changes and restart Wazuh to apply the changes. The service can be manually restarted using the following command outside the Wazuh dashboard:
 
-#. Restart Wazuh in order to apply the changes:
+   -  Wazuh manager:
 
-    * If you're configuring a Wazuh manager:
+      .. code-block:: console
 
-      .. include:: /_templates/common/restart_manager.rst
+         # systemctl restart wazuh-manager
 
-    * If you're configuring a Wazuh agent:
+   -  Wazuh agent:
 
-      .. include:: /_templates/common/restart_agent.rst
+      .. code-block:: console
 
+         # systemctl restart wazuh-agent
+
+Use case
+--------
+
+Amazon S3 Server Access logs provide detailed records for the requests that were made to a bucket.
+
+Below is a use case for Wazuh alerts built for Amazon S3 Server Access logs.
+
+Monitoring server access logs
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+The following screenshots shows some alerts with rule ID *80364* and *80367* generated for requests made to a monitored S3 bucket.
+
+.. thumbnail:: /images/cloud-security/aws/s3-server-access/1-monitoring-server-access-logs.png
+   :align: center
+   :width: 80%
+
+Expand an alert to find more information about the monitored S3 bucket, the operation being performed, and the request URI.
+
+.. thumbnail:: /images/cloud-security/aws/s3-server-access/2-monitoring-server-access-logs.png
+   :align: center
+   :width: 80%
