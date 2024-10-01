@@ -8,59 +8,62 @@ Amazon Web Application Firewall (WAF)
 
 `Amazon WAF <https://aws.amazon.com/waf/>`_ is a web application firewall that helps protect your web applications from common web exploits that could affect application availability, compromise security, or consume excessive resources. ``AWS WAF`` gives you control over which traffic to allow or block to your web applications by defining customizable web security rules. 
 
-Amazon configuration native integration
----------------------------------------
+Amazon configuration
+--------------------
 
-#. :doc:`Create a new </cloud-security/amazon/services/prerequisites/S3-bucket>` S3 bucket. (If you want to use an already created one, skip this step).
+Native integration
+^^^^^^^^^^^^^^^^^^
 
-#. Go to Services > Security, Identity, & Compliance > WAF & Shield:
+#. :doc:`Create a new S3 bucket </cloud-security/amazon/services/prerequisites/S3-bucket>`. If you want to use an already created one, skip this step.
 
-    .. thumbnail::  /images/cloud-security/aws/waf-native-1.png
+#. Go to **Services** > **Security, Identity, & Compliance** > **WAF & Shield**.
+
+   .. thumbnail::  /images/cloud-security/aws/waf-native-1.png
       :align: center
       :width: 70%
 
-#. Click on *Create web ACL*:
+#. Click **Create web ACL**:
 
-    .. thumbnail::  /images/cloud-security/aws/waf-native-2.png
+   .. thumbnail::  /images/cloud-security/aws/waf-native-2.png
       :align: center
       :width: 70%
 
-#. Choose a name for your Web ACL and click on *Next*:
+#. Choose a name for your web ACL and click **Next**:
 
-    .. thumbnail::  /images/cloud-security/aws/waf-native-3.png
+   .. thumbnail::  /images/cloud-security/aws/waf-native-3.png
       :align: center
       :width: 70%
 
-#. Click on *Add rules* and select which type of rule to add, then click on *Next*:
+#. Click **Add rules** and select which type of rule to add. Then, click **Next**:
 
-    .. thumbnail::  /images/cloud-security/aws/waf-native-4.png
+   .. thumbnail::  /images/cloud-security/aws/waf-native-4.png
       :align: center
       :width: 70%
 
-#. Set the rules priority and click on *Next*:
+#. Set the rules priority and click **Next**:
 
-    .. thumbnail::  /images/cloud-security/aws/waf-native-5.png
+   .. thumbnail::  /images/cloud-security/aws/waf-native-5.png
       :align: center
       :width: 70%
 
-#. Choose a name for your CloudWatch metric and click on *Next*:
+#. Choose a name for your CloudWatch metric and click **Next**:
 
-    .. thumbnail::  /images/cloud-security/aws/waf-native-6.png
+   .. thumbnail::  /images/cloud-security/aws/waf-native-6.png
       :align: center
       :width: 70%
 
-#. Review the ACL web and click on the *Create web ACL* button at the bottom of the page to create it
+#. Review the web ACL. Click the **Create web ACL** button at the bottom of the page to create it.
 
-    .. thumbnail::  /images/cloud-security/aws/waf-native-7.png
+   .. thumbnail::  /images/cloud-security/aws/waf-native-7.png
       :align: center
-      :width: 70%  
+      :width: 70%
 
 .. note::
-    
-    A comma-separated list of ACLs with :ref:`waf_acls <bucket_waf_acls>` to iterate over the WAF v2 ACLs. By default, Not Applicable.
 
-Amazon configuration with Kinesis
----------------------------------
+   Check :ref:`waf_acls <bucket_waf_acls>` for a comma-separated list of ACLs to iterate over the WAF v2 ACLs.
+
+Integration using Kinesis
+^^^^^^^^^^^^^^^^^^^^^^^^^
 
 .. deprecated:: 5.0
 
@@ -156,12 +159,12 @@ Policy configuration
 Wazuh configuration
 -------------------
 
-#. Open the Wazuh configuration file (``/var/ossec/etc/ossec.conf``) and add the following block:
-
 Native Integration
 ^^^^^^^^^^^^^^^^^^
 
-    .. code-block:: xml
+#. Open the Wazuh configuration file (``/var/ossec/etc/ossec.conf``) and add the following block:
+
+   .. code-block:: xml
 
       <wodle name="aws-s3">
         <disabled>no</disabled>
@@ -175,10 +178,22 @@ Native Integration
         </bucket>
       </wodle>
 
-Kinesis Integration
-^^^^^^^^^^^^^^^^^^^
+#. Restart Wazuh in order to apply the changes:
 
-    .. code-block:: xml
+   -  If you're configuring a Wazuh manager:
+
+      .. include:: /_templates/common/restart_manager.rst
+
+   -  If you're configuring a Wazuh agent:
+
+      .. include:: /_templates/common/restart_agent.rst
+
+Integration using Kinesis
+^^^^^^^^^^^^^^^^^^^^^^^^^
+
+#. Open the Wazuh configuration file (``/var/ossec/etc/ossec.conf``) and add the following block:
+
+   .. code-block:: xml
 
       <wodle name="aws-s3">
         <disabled>no</disabled>
@@ -192,19 +207,19 @@ Kinesis Integration
         </bucket>
       </wodle>
 
-    .. note::
+   .. note::
+
       Check the :doc:`AWS S3 module </user-manual/reference/ossec-conf/wodle-s3>` reference manual to learn more about each setting.
 
 #. Restart Wazuh in order to apply the changes:
 
-    * If you're configuring a Wazuh manager:
+   -  If you're configuring a Wazuh manager:
 
       .. include:: /_templates/common/restart_manager.rst
 
-    * If you're configuring a Wazuh agent:
+   -  If you're configuring a Wazuh agent:
 
       .. include:: /_templates/common/restart_agent.rst
-
 
 HTTP Request headers
 --------------------
