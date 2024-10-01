@@ -80,29 +80,39 @@ Policy configuration
 
 .. code-block:: json
 
-    {
-	"Version": "2012-10-17",
-	"Statement": [
-	    {
-		"Sid": "VisualEditor0",
-		"Effect": "Allow",
-		"Action": [
-		    "inspector:ListFindings",
-		    "inspector:DescribeFindings"
-		],
-		"Resource": "*"
-	    }
-	]
-    }
+   {
+       "Version": "2012-10-17",
+       "Statement": [
+           {
+               "Sid": "VisualEditor0",
+               "Effect": "Allow",
+               "Action": [
+                   "inspector:ListFindings",
+                   "inspector:DescribeFindings"
+               ],
+               "Resource": "*"
+           }
+       ]
+   }
 
 .. include:: /_templates/cloud/amazon/attach_policy.rst
 
-Wazuh configuration
--------------------
+Configure Wazuh to process Amazon Inspector Classic logs
+--------------------------------------------------------
 
-#. Open the Wazuh configuration file (``/var/ossec/etc/ossec.conf``) and add the following configuration block to enable the integration with Inspector Classic:
+#. Access the Wazuh configuration in **Server management** > **Settings** using the Wazuh dashboard or by manually editing the ``/var/ossec/etc/ossec.conf`` file in the Wazuh server or agent.
 
-    .. code-block:: xml
+   .. thumbnail:: /images/cloud-security/aws/inspector/01-wazuh-configuration.png
+      :align: center
+      :width: 80%
+
+   .. thumbnail:: /images/cloud-security/aws/inspector/02-wazuh-configuration.png
+      :align: center
+      :width: 80%
+
+#. Add the following :doc:`Wazuh module for AWS </user-manual/reference/ossec-conf/wodle-s3>` configuration block to enable the integration with Inspector Classic:
+
+   .. code-block:: xml
 
       <wodle name="aws-s3">
         <disabled>no</disabled>
@@ -111,21 +121,22 @@ Wazuh configuration
         <skip_on_error>no</skip_on_error>
         <service type="inspector">
           <aws_profile>default</aws_profile>
+          <regions>us-east-1,us-east-2</regions>
         </service>
       </wodle>
 
-    Users must specify at least a region. Multiple regions can be added separated by commas.
+   You must specify at least a region. You can add multiple comma-separated regions.
 
-    .. note::
-      Check the :doc:`AWS S3 module </user-manual/reference/ossec-conf/wodle-s3>` reference manual to learn more about each setting.
+#. Save the changes and restart Wazuh to apply the changes. The service can be manually restarted using the following command outside the Wazuh dashboard:
 
-#. Restart Wazuh in order to apply the changes:
+   -  Wazuh manager:
 
-    * If you're configuring a Wazuh manager:
+      .. code-block:: console
 
-      .. include:: /_templates/common/restart_manager.rst
+         # systemctl restart wazuh-manager
 
-    * If you're configuring a Wazuh agent:
+   -  Wazuh agent:
 
-      .. include:: /_templates/common/restart_agent.rst
+      .. code-block:: console
 
+         # systemctl restart wazuh-agent
