@@ -6,7 +6,7 @@
 Amazon ECR Image scanning
 =========================
 
-`Amazon ECR image scanning <https://docs.aws.amazon.com/AmazonECR/latest/userguide/image-scanning.html>`__ uses the Common Vulnerabilities and Exposures (CVEs) database from the open source `clair project <https://github.com/quay/clair>`__ to detect software vulnerabilities in container images and provide a list of scan findings, which can be easily integrated into Wazuh thanks to the :doc:`Amazon CloudWatch Logs <cloudwatchlogs>`  integration.
+`Amazon ECR image scanning <https://docs.aws.amazon.com/AmazonECR/latest/userguide/image-scanning.html>`__ uses the Common Vulnerabilities and Exposures (CVEs) database from the open source `Clair project <https://github.com/quay/clair>`__ to detect software vulnerabilities in container images and provide a list of scan findings, which can be easily integrated into Wazuh thanks to the :doc:`Amazon CloudWatch Logs <cloudwatchlogs>`  integration.
 
 Amazon ECR sends an event to Amazon EventBridge when an image scan is completed. The event itself is only a summary and does not contain the details of the scan findings. However, it is possible to configure a Lambda function to request the scan findings details and store them in CloudWatch Logs. Here is a quick summary of what the workflow looks like:
 
@@ -210,61 +210,19 @@ Once the stack configuration is completed, the Lambda can be tested by manually 
 Configure Wazuh to process Amazon ECR image scanning logs
 ---------------------------------------------------------
 
+#. Access the Wazuh configuration in **Server management** > **Settings** using the Wazuh dashboard or by manually editing the ``/var/ossec/etc/ossec.conf`` file in the Wazuh server or agent.
 
+   .. thumbnail:: /images/cloud-security/aws/ecr-image-scanning/01-wazuh-configuration.png
+      :align: center
+      :width: 80%
 
+   .. thumbnail:: /images/cloud-security/aws/ecr-image-scanning/02-wazuh-configuration.png
+      :align: center
+      :width: 80%
 
+#. Add the following :doc:`Wazuh module for AWS </user-manual/reference/ossec-conf/wodle-s3>` configuration block to enable the integration with Amazon ECR Image scanning. Replace ``<NAME_OF_ECR_REPOSITORY>`` with the name of the Amazon ECR repository:
 
-
-
-
-
-
-
-
-
-How to create the CloudFormation Stack
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-
-1. Download the ECR Image Scan findings logger `template <https://github.com/aws-samples/ecr-image-scan-findings-logger/blob/main/Template-ECR-SFL.yml>`_ from the official `aws-samples <https://github.com/aws-samples/>`_ GitHub repository.
-
-2. Access `CloudFormation <https://console.aws.amazon.com/cloudformation/home>`_ and click on **Create stack**.
-
-3. Create a new stack using the template from step 1.
-
-.. thumbnail:: /images/cloud-security/aws/aws-create-stack.png
-    :title: Create new stack
-    :align: center
-    :width: 100%
-
-4. Choose a name for the stack and finish the creation process. No additional configuration is required.
-
-5. Wait until "CREATE_COMPLETE" status is reached. The stack containing the AWS Lambda is now ready to be used.
-
-.. thumbnail:: /images/cloud-security/aws/aws-create-completed.png
-    :title: Stack creation completed
-    :align: center
-    :width: 100%
-
-
-Once the stack configuration is completed, the Lambda can be tested by manually triggering an image scan. The scan results in the creation of a CloudWatch log group called ``/aws/ecr/image-scan-findings/<name of the ECR repository>`` containing the scan results. For every new scan, the corresponding log streams are created inside the log group.
-
-.. thumbnail:: /images/cloud-security/aws/aws-findings-1.png
-    :title: Stack creation completed
-    :align: center
-    :width: 100%
-
-.. thumbnail:: /images/cloud-security/aws/aws-findings-2.png
-    :title: Stack creation completed
-    :align: center
-    :width: 100%
-
-
-Wazuh configuration
--------------------
-
-#. Open the Wazuh configuration file (``/var/ossec/etc/ossec.conf``) and add the following configuration block:
-
-    .. code-block:: xml
+   .. code-block:: xml
 
       <wodle name="aws-s3">
         <disabled>no</disabled>
@@ -272,20 +230,34 @@ Wazuh configuration
         <run_on_start>yes</run_on_start>
         <service type="cloudwatchlogs">
           <aws_profile>default</aws_profile>
-          <aws_log_groups>/aws/ecr/image-scan-findings/name_of_the_ECR_repository</aws_log_groups>
+          <aws_log_groups>/aws/ecr/<NAME_OF_ECR_REPOSITORY></aws_log_groups>
         </service>
       </wodle>
 
-    .. note::
+   .. note::
+
       Check the :doc:`AWS CloudWatch Logs integration </cloud-security/amazon/services/supported-services/cloudwatchlogs>` to learn more about how the CloudWatch Logs integration works.
 
-#. Restart Wazuh to apply the configuration changes.
+#. Save the changes and restart Wazuh to apply the changes. The service can be manually restarted using the following command outside the Wazuh dashboard:
 
-    * If you are configuring a Wazuh manager:
+   -  Wazuh manager:
 
-      .. include:: /_templates/common/restart_manager.rst
+      .. code-block:: console
 
-    * If you are configuring a Wazuh agent:
+         # systemctl restart wazuh-manager
 
-      .. include:: /_templates/common/restart_agent.rst
+   -  Wazuh agent:
 
+      .. code-block:: console
+
+         # systemctl restart wazuh-agent
+
+Use case
+--------
+
+Amazon ECR provides an image scanning feature that uses the Common Vulnerabilities and Exposure (CVEs) database from the open source Clair project to detect vulnerabilities in container images. Wazuh polls and detects these vulnerabilities from AWS CloudWatch.
+
+Detecting vulnerabilities in container images
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Check the `Detecting vulnerabilities in container images using Amazon ECR <https://wazuh.com/blog/detecting-vulnerabilities-in-container-images-using-amazon-ecr/>`__ blog to learn how to detect vulnerabilities in container images using Wazuh and Amazon ECR integration.
