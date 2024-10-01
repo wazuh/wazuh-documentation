@@ -11,6 +11,62 @@ Amazon Web Application Firewall (WAF)
 Amazon configuration
 --------------------
 
+Native integration
+^^^^^^^^^^^^^^^^^^
+
+#. :doc:`Create a new S3 bucket </cloud-security/amazon/services/prerequisites/S3-bucket>`. If you want to use an already created one, skip this step.
+
+#. Go to **Services** > **Security, Identity, & Compliance** > **WAF & Shield**.
+
+   .. thumbnail::  /images/cloud-security/aws/waf-native-1.png
+      :align: center
+      :width: 70%
+
+#. Click **Create web ACL**:
+
+   .. thumbnail::  /images/cloud-security/aws/waf-native-2.png
+      :align: center
+      :width: 70%
+
+#. Choose a name for your web ACL and click **Next**:
+
+   .. thumbnail::  /images/cloud-security/aws/waf-native-3.png
+      :align: center
+      :width: 70%
+
+#. Click **Add rules** and select which type of rule to add. Then, click **Next**:
+
+   .. thumbnail::  /images/cloud-security/aws/waf-native-4.png
+      :align: center
+      :width: 70%
+
+#. Set the rules priority and click **Next**:
+
+   .. thumbnail::  /images/cloud-security/aws/waf-native-5.png
+      :align: center
+      :width: 70%
+
+#. Choose a name for your CloudWatch metric and click **Next**:
+
+   .. thumbnail::  /images/cloud-security/aws/waf-native-6.png
+      :align: center
+      :width: 70%
+
+#. Review the web ACL. Click the **Create web ACL** button at the bottom of the page to create it.
+
+   .. thumbnail::  /images/cloud-security/aws/waf-native-7.png
+      :align: center
+      :width: 70%
+
+.. note::
+
+   Check :ref:`waf_acls <bucket_waf_acls>` for a comma-separated list of ACLs to iterate over the WAF v2 ACLs.
+
+Integration using Kinesis
+^^^^^^^^^^^^^^^^^^^^^^^^^
+
+.. deprecated:: 5.0
+
 #. :doc:`Create a new </cloud-security/amazon/services/prerequisites/S3-bucket>` S3 bucket. (If you want to use an already created one, skip this step).
 
 #. Go to Services > Analytics > Kinesis:
@@ -94,7 +150,7 @@ Amazon configuration
 #. Once the rule is created, data will start to be sent to the previously created S3 bucket. Remember to first enable the service you want to monitor, otherwise, you won't get any data.
 
 Policy configuration
-++++++++++++++++++++
+^^^^^^^^^^^^^^^^^^^^
 
 .. include:: /_templates/cloud/amazon/create_policy.rst
 .. include:: /_templates/cloud/amazon/bucket_policies.rst
@@ -103,9 +159,41 @@ Policy configuration
 Wazuh configuration
 -------------------
 
+Native Integration
+^^^^^^^^^^^^^^^^^^
+
 #. Open the Wazuh configuration file (``/var/ossec/etc/ossec.conf``) and add the following block:
 
-    .. code-block:: xml
+   .. code-block:: xml
+
+      <wodle name="aws-s3">
+        <disabled>no</disabled>
+        <interval>10m</interval>
+        <run_on_start>yes</run_on_start>
+        <skip_on_error>yes</skip_on_error>
+        <bucket type="waf">
+          <name>wazuh-aws-wodle</name>
+          <waf_acls>acls</waf_acls>
+          <aws_profile>default</aws_profile>
+        </bucket>
+      </wodle>
+
+#. Restart Wazuh in order to apply the changes:
+
+   -  If you're configuring a Wazuh manager:
+
+      .. include:: /_templates/common/restart_manager.rst
+
+   -  If you're configuring a Wazuh agent:
+
+      .. include:: /_templates/common/restart_agent.rst
+
+Integration using Kinesis
+^^^^^^^^^^^^^^^^^^^^^^^^^
+
+#. Open the Wazuh configuration file (``/var/ossec/etc/ossec.conf``) and add the following block:
+
+   .. code-block:: xml
 
       <wodle name="aws-s3">
         <disabled>no</disabled>
@@ -119,19 +207,19 @@ Wazuh configuration
         </bucket>
       </wodle>
 
-    .. note::
+   .. note::
+
       Check the :doc:`AWS S3 module </user-manual/reference/ossec-conf/wodle-s3>` reference manual to learn more about each setting.
 
 #. Restart Wazuh in order to apply the changes:
 
-    * If you're configuring a Wazuh manager:
+   -  If you're configuring a Wazuh manager:
 
       .. include:: /_templates/common/restart_manager.rst
 
-    * If you're configuring a Wazuh agent:
+   -  If you're configuring a Wazuh agent:
 
       .. include:: /_templates/common/restart_agent.rst
-
 
 HTTP Request headers
 --------------------
