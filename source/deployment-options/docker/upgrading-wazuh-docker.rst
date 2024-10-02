@@ -65,7 +65,7 @@ To upgrade your deployment keeping your custom docker-compose files, do the foll
 
                uiSettings.overrides.defaultRoute: /app/wz-home
 
-      .. group-tab:: On Amazon Linux 2 machines
+      .. group-tab:: Multi node deployment
 
          -  ``multi-node/config/wazuh_dashboard/opensearch_dashboards.yml``
 
@@ -86,7 +86,7 @@ It is also necessary to modify the OPENSEARCH JAVA_OPTS environment variable to 
             environment:
               - "OPENSEARCH_JAVA_OPTS=-Xms1g -Xmx1g"
 
-      .. group-tab:: On Amazon Linux 2 machines
+      .. group-tab:: Multi node deployment
 
          -  ``multi-node/docker-compose.yml``
 
