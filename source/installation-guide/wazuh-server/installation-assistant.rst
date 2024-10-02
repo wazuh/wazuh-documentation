@@ -1,7 +1,7 @@
 .. Copyright (C) 2015, Wazuh, Inc.
 
 .. meta:: 
-   :description: Learn how to install the Wazuh server using the assisted installation method. The Wazuh server analyzes the data received from the agents triggering alerts when it detects threats and anomalies. This central component includes the Wazuh manager and Filebeat. 
+   :description: Learn how to install the Wazuh server using the assisted installation method. The Wazuh server analyzes the data received from the agents triggering alerts when it detects threats and anomalies. This central component includes the Wazuh manager and Filebeat. The supported architecture is 64-bit (x86_64/AMD64).
 
 Installing the Wazuh server using the assisted installation method
 ==================================================================

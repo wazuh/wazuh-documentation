@@ -6,7 +6,7 @@
 Installing the Wazuh indexer using the assisted installation method
 ===================================================================
 
-Install and configure the Wazuh indexer as a single-node or multi-node cluster using the assisted installation method. The Wazuh indexer is a highly scalable full-text search engine. It offers advanced security, alerting, index management, deep performance analysis, and several other features.
+Install and configure the Wazuh indexer as a single-node or multi-node cluster using the assisted installation method. The Wazuh indexer is a highly scalable full-text search engine. It offers advanced security, alerting, index management, deep performance analysis, and several other features. The supported architecture is 64-bit (x86_64/AMD64).
 
 Wazuh indexer cluster installation
 ----------------------------------
