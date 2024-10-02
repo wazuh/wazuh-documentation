@@ -5,6 +5,10 @@ All notable changes to this project will be documented in this file.
 
 - Support for Wazuh 4.10.1
 
+### Fixed
+
+- Added architecture information to assistant pages. ([#7830](https://github.com/wazuh/wazuh-documentation/pull/7830))
+
 ## [v4.10.0]
 
 ### Added
