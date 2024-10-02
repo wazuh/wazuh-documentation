@@ -23,12 +23,19 @@ Policy configuration
 Configure Wazuh to process Cisco Umbrella logs
 ----------------------------------------------
 
-.. note::
-  It is required to append the type of logs inside the ``path`` tag as in the next example. `dnslogs`, `proxylogs`, and `iplogs` are currently supported. Each one requires to be defined in an independent ``bucket`` tag.
+#. Access the Wazuh configuration in **Server management** > **Settings** using the Wazuh dashboard or by manually editing the ``/var/ossec/etc/ossec.conf`` file in the Wazuh server or agent.
 
-#. Open the Wazuh configuration file (``/var/ossec/etc/ossec.conf``) and add the following block (this example is for `dnslogs` and `proxylogs`, it is not required to add both):
+   .. thumbnail:: /images/cloud-security/aws/cisco-umbrella/01-wazuh-configuration.png
+      :align: center
+      :width: 80%
 
-    .. code-block:: xml
+   .. thumbnail:: /images/cloud-security/aws/cisco-umbrella/02-wazuh-configuration.png
+      :align: center
+      :width: 80%
+
+#. Add the following :doc:`Wazuh module for AWS </user-manual/reference/ossec-conf/wodle-s3>` configuration to the file, replacing ``<WAZUH_AWS_BUCKET>`` with the name of the S3 bucket:
+
+   .. code-block:: xml
 
       <wodle name="aws-s3">
 
@@ -38,30 +45,29 @@ Configure Wazuh to process Cisco Umbrella logs
         <skip_on_error>yes</skip_on_error>
 
         <bucket type="cisco_umbrella">
-          <name>cisco-managed-us-east-1</name>
-          <path>123456_abcdef0123456789/dnslogs</path>
+          <name><WAZUH_AWS_BUCKET></name>
+          <path>dnslogs</path>
           <aws_profile>default</aws_profile>
         </bucket>
 
         <bucket type="cisco_umbrella">
-          <name>cisco-managed-us-east-1</name>
-          <path>123456_abcdef0123456789/proxylogs</path>
+          <name><WAZUH_AWS_BUCKET></name>
+          <path>proxylogs</path>
           <aws_profile>default</aws_profile>
         </bucket>
 
       </wodle>
 
-    .. note::
-      Check the :doc:`AWS S3 module </user-manual/reference/ossec-conf/wodle-s3>` reference manual to learn more about each setting.
+#. Save the changes and restart Wazuh to apply the changes. The service can be manually restarted using the following command outside the Wazuh dashboard:
 
-#. Restart Wazuh in order to apply the changes:
+   -  Wazuh manager:
 
-    * If you're configuring a Wazuh manager:
+      .. code-block:: console
 
-      .. include:: /_templates/common/restart_manager.rst
+         # systemctl restart wazuh-manager
 
-    * If you're configuring a Wazuh agent:
-  
-      .. include:: /_templates/common/restart_agent.rst
+   -  Wazuh agent:
 
-      
+      .. code-block:: console
+
+         # systemctl restart wazuh-agent
