@@ -1,56 +1,69 @@
 .. Copyright (C) 2015, Wazuh, Inc.
 
 .. meta::
-  :description: Amazon NLB automatically distributes the incoming traffic across multiple targets. Learn how to use Amazon NLB with Wazuh in this section.
-
-.. _amazon_nlb:
+   :description: The following sections cover how to configure the Amazon NLB service to integrate with Wazuh.
 
 Amazon NLB
 ==========
 
-`Network Load Balancers <https://docs.aws.amazon.com/elasticloadbalancing/latest/network/introduction.html>`_ (Amazon NLB) Elastic Load Balancing automatically distributes the incoming traffic across multiple targets, such as EC2 instances, containers, and IP addresses, in one or more Availability Zones. It monitors the health of its registered targets and routes traffic only to the healthy targets. Users can select the type of load balancer that best suits their needs. A Network Load Balancer functions at the fourth layer of the Open Systems Interconnection (OSI) model. It can handle millions of requests per second. After the load balancer receives a connection request, it selects a target from the target group for the default rule. It attempts to open a TCP connection to the selected target on the port specified in the listener configuration.
+`Network Load Balancers <https://docs.aws.amazon.com/elasticloadbalancing/latest/network/introduction.html>`__ (Amazon NLB) Elastic Load Balancing automatically distributes the incoming traffic across multiple targets, such as EC2 instances, containers, and IP addresses, in one or more Availability Zones. It monitors the health of its registered targets and routes traffic only to the healthy targets. Users can select the type of load balancer that best suits their needs. A Network Load Balancer functions at the fourth layer of the Open Systems Interconnection (OSI) model. It can handle millions of requests per second. After the load balancer receives a connection request, it selects a target from the target group for the default rule. It attempts to open a TCP connection to the selected target on the port specified in the listener configuration.
 
-Amazon configuration
---------------------
+AWS configuration
+-----------------
 
-#. Select an existing S3 Bucket or :doc:`create a new one </cloud-security/amazon/services/prerequisites/S3-bucket>`.
+The following sections cover how to configure the Amazon NLB service to integrate with Wazuh.
 
-#. Go to Services > Compute > EC2:
+Amazon NLB configuration
+^^^^^^^^^^^^^^^^^^^^^^^^
 
-    .. thumbnail:: /images/cloud-security/aws/aws-create-vpc-1.png
+#. Go to `S3 buckets <https://s3.console.aws.amazon.com/>`__, copy the name of an existing S3 bucket or :doc:`create a new one <../../prerequisites/S3-bucket>`.
+#. On your AWS console, search for "*EC2*" or go to **Services** > **Compute** > **EC2**.
+
+   .. thumbnail:: /images/cloud-security/aws/elastic-load-balancers/nlb/01-search-for-ec2.png
       :align: center
-      :width: 70%
+      :width: 80%
 
-#. Go to Load Balancing > Load Balancers on the left menu. Create a new load balancer or select one or more load balancers and select *Edit attributes* on the *Actions* menu:
+#. Go to **Load Balancing** > **Load Balancers** on the left menu. Create a new load balancer or select one or more load balancers and select **Edit load balancer attributes** on the **Actions** menu.
 
-    .. thumbnail:: /images/cloud-security/aws/aws-create-elb-1.png
+   .. thumbnail:: /images/cloud-security/aws/elastic-load-balancers/nlb/02-edit-load-balancer-attributes.png
       :align: center
-      :width: 70%
+      :width: 80%
 
-#. In this tab we will define our S3 and the path where the logs will be stored:
+#. In the **Monitoring** tab define the S3 bucket and the path where the logs will be stored.
 
-    .. thumbnail:: /images/cloud-security/aws/aws-create-elb-2.png
+   .. thumbnail:: /images/cloud-security/aws/elastic-load-balancers/nlb/03-enable-access-logs.png
       :align: center
-      :width: 70%
+      :width: 80%
 
-    .. note::
+   .. note::
+
       To enable access logs for NLB (Network Load Balancers), check the following link:
 
-        * `Network Load Balancer. <https://docs.aws.amazon.com/elasticloadbalancing/latest/network/load-balancer-access-logs.html>`_
+      -  `Network Load Balancer <https://docs.aws.amazon.com/elasticloadbalancing/latest/network/load-balancer-access-logs.html>`__.
 
 Policy configuration
-++++++++++++++++++++
+^^^^^^^^^^^^^^^^^^^^
 
 .. include:: /_templates/cloud/amazon/create_policy.rst
 .. include:: /_templates/cloud/amazon/bucket_policies.rst
 .. include:: /_templates/cloud/amazon/attach_policy.rst
 
-Wazuh configuration
--------------------
+Configure Wazuh to process Amazon NLB logs
+------------------------------------------
 
-#. Open the Wazuh configuration file (``/var/ossec/etc/ossec.conf``) and add the following block for NLB:
+#. Access the Wazuh configuration in **Server management** > **Settings** using the Wazuh dashboard or by manually editing the ``/var/ossec/etc/ossec.conf`` file in the Wazuh server or agent.
 
-    .. code-block:: xml
+   .. thumbnail:: /images/cloud-security/aws/elastic-load-balancers/nlb/01-wazuh-configuration.png
+      :align: center
+      :width: 80%
+
+   .. thumbnail:: /images/cloud-security/aws/elastic-load-balancers/nlb/02-wazuh-configuration.png
+      :align: center
+      :width: 80%
+
+#. Add the following :doc:`Wazuh module for AWS </user-manual/reference/ossec-conf/wodle-s3>` configuration to the file, replacing ``<WAZUH_AWS_BUCKET>`` with the name of the S3 bucket:
+
+   .. code-block:: xml
 
       <wodle name="aws-s3">
         <disabled>no</disabled>
@@ -58,22 +71,22 @@ Wazuh configuration
         <run_on_start>yes</run_on_start>
         <skip_on_error>yes</skip_on_error>
         <bucket type="nlb">
-          <name>wazuh-aws-wodle</name>
+          <name><WAZUH_AWS_BUCKET></name>
           <path>NLB</path>
           <aws_profile>default</aws_profile>
         </bucket>
       </wodle>
 
-    .. note::
-      Check the :doc:`AWS S3 module </user-manual/reference/ossec-conf/wodle-s3>` reference manual to learn more about each setting.
+#. Save the changes and restart Wazuh to apply the changes. The service can be manually restarted using the following command outside the Wazuh dashboard:
 
-#. Restart Wazuh in order to apply the changes:
+   -  Wazuh manager:
 
-    * If you're configuring a Wazuh manager:
+      .. code-block:: console
 
-      .. include:: /_templates/common/restart_manager.rst
+         # systemctl restart wazuh-manager
 
-    * If you're configuring a Wazuh agent:
+   -  Wazuh agent:
 
-      .. include:: /_templates/common/restart_agent.rst
+      .. code-block:: console
 
+         # systemctl restart wazuh-agent

@@ -16,7 +16,7 @@ The following sections cover how to configure the Amazon CLB service to integrat
 Amazon CLB configuration
 ^^^^^^^^^^^^^^^^^^^^^^^^
 
-#. Go to `S3 buckets <https://s3.console.aws.amazon.com/>`__, copy the name of an existing S3 bucket or :doc:`create a new one </cloud-security/amazon/services/prerequisites/S3-bucket>`.
+#. Go to `S3 buckets <https://s3.console.aws.amazon.com/>`__, copy the name of an existing S3 bucket or :doc:`create a new one <../../prerequisites/S3-bucket>`.
 #. On your AWS console, search for "*EC2*" or go to **Services** > **Compute** > **EC2**.
 
    .. thumbnail:: /images/cloud-security/aws/elastic-load-balancers/clb/01-search-for-ec2.png
