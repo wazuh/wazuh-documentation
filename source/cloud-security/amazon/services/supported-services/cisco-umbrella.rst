@@ -1,12 +1,12 @@
 .. Copyright (C) 2015, Wazuh, Inc.
 
 .. meta::
-   :description: Cisco Umbrella uses the internet infrastructure to block malicious destinations before a connection is ever established. Learn how to configure and monitor it with Wazuh.
+   :description: Cisco Umbrella is a cloud-based Secure Internet Gateway (SIG) platform that provides you with multiple levels of defense against internet-based threats. Learn how to configure and monitor it with Wazuh.
 
 Cisco Umbrella
 ==============
 
-`Cisco Umbrella <https://umbrella.cisco.com/>`__ is a cloud-based Secure Internet Gateway (SIG) platform that provides you with multiple levels of defense against internet-based threats
+`Cisco Umbrella <https://umbrella.cisco.com/>`__ is a cloud-based Secure Internet Gateway (SIG) platform that provides you with multiple levels of defense against internet-based threats.
 
 Cisco Umbrella configuration
 ----------------------------
