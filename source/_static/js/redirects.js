@@ -64,6 +64,16 @@ removedUrls['x.y'] = [
 ];
 */
 
+/* *** RELEASE 4.10 ****/
+
+/* Pages added in 4.10 */
+newUrls['4.10'] = [
+  '/release-notes/release-4-10-0.html',
+  '/release-notes/release-4-10-1.html',
+  '/release-notes/release-4-10-2.html',
+  '/user-manual/reference/ossec-conf/anti-tampering.html'
+]
+
 /* *** RELEASE 4.9 ****/
 
 /* Redirections from 4.8 to 4.9  */
@@ -170,13 +180,6 @@ redirections.push(
     '4.9': '/user-manual/capabilities/malware-detection/rootkits-behavior-detection.html',
   },
 );
-
-/* Pages added in 4.10 */
-newUrls['4.10'] = [
-  '/release-notes/release-4-10-0.html',
-  '/release-notes/release-4-10-1.html',
-  '/user-manual/reference/ossec-conf/anti-tampering.html'
-]
 
 /* Pages added in 4.9 */
 
