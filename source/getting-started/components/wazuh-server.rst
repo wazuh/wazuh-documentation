@@ -15,7 +15,7 @@ Additionally, the Wazuh server can be integrated with external software, includi
 Server architecture
 -------------------
 
-The Wazuh server runs the analysis engine, the Wazuh RESTful API, the agent enrollment service, the agent connection service, the Wazuh cluster daemon, and Filebeat. The server is installed on a Linux operating system and usually runs on a stand-alone physical machine, virtual machine, docker container, or cloud instance.
+The Wazuh server runs the analysis engine, the Wazuh RESTful API, the agent ``enrollment`` service, the agent connection service, the Wazuh cluster daemon, and Filebeat. The server is installed on a Linux operating system and usually runs on a stand-alone physical machine, virtual machine, docker container, or cloud instance.
 
 The diagram below represents the server architecture and components:
 
