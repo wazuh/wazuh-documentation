@@ -1,18 +1,14 @@
 .. Copyright (C) 2015, Wazuh, Inc.
 
 .. meta::
-  :description: Learn how to configure Amazon Custom Logs Buckets fetching.
-
-.. _amazon_custom_logs:
+   :description: The following sections cover how to configure Custom Logs Buckets to integrate with Wazuh.
 
 Custom Logs Buckets
 ===================
 
-.. versionadded:: 4.7.0
+`Amazon Simple Queue Service (Amazon SQS) <https://aws.amazon.com/sqs/>`__ is a fully managed message queuing service. It offers secure, durable, and available hosted queues to decouple and scale software systems and components. It allows sending, storing, and receiving messages between software components at any volume, without losing messages or requiring other services to be available. These features make it an optimal component to associate with Amazon S3 buckets to consume any type of log.
 
-`Amazon Simple Queue Service (Amazon SQS)  <https://aws.amazon.com/sqs/>`_ is a fully managed message queuing service. It offers secure, durable, and available hosted queues to decouple and scale software systems and components. It allows sending, storing, and receiving messages between software components at any volume, without losing messages or requiring other services to be available. These features make it an optimal component to associate with Amazon S3 buckets to consume any type of log.
-
-Combining Amazon SQS with Amazon S3 buckets allows Wazuh to fetch JSON, CSV, and plain text logs from any custom path. The origin of these logs don't even need to be AWS.
+Combining Amazon SQS with Amazon S3 buckets allows Wazuh to collect JSON, CSV, and plain text logs from any custom path. The origin of these logs don't even need to be AWS.
 
 .. note::
 
@@ -20,58 +16,73 @@ Combining Amazon SQS with Amazon S3 buckets allows Wazuh to fetch JSON, CSV, and
 
 To set up the Wazuh integration for Custom Logs Buckets, you need to do the following:
 
-   #. Create an AWS SQS Queue.
-   #. Configure an S3 bucket. For every object creation event, the bucket sends notifications to the queue.
+#. Create an AWS SQS Queue.
+#. Configure an S3 bucket. For every object creation event, the bucket sends notifications to the queue.
 
 AWS configuration
 -----------------
 
+The following sections cover how to configure Custom Logs Buckets to integrate with Wazuh.
+
 Amazon Simple Queue Service
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-#. Set up a *Standard* type SQS Queue with the default configurations.  You can apply an Access Policy similar to the following example, where ``<region>``, ``<account-id>``, and ``<s3-bucket>`` are the region, account ID, and the name you are going to provide to the S3 bucket.
+#. Set up a *Standard* type SQS Queue with the default configurations. You can apply an Access Policy similar to the following example, where ``<REGION>``, ``<ACCOUNT_ID>``, ``<SQS-NAME>``, and ``<S3-BUCKET>`` are the region, account ID, the SQS Queue name and the name you are going to provide to the S3 bucket.
 
    .. code-block:: json
 
-     {
-     "Version": "2012-10-17",
-     "Id": "example-ID",
-     "Statement": [
-       {
-         "Sid": "example-access-policy",
-         "Effect": "Allow",
-         "Principal": {
-           "Service": "s3.amazonaws.com"
-         },
-         "Action": "SQS:SendMessage",
-         "Resource": "arn:aws:sqs:<region>:<account-id>:<s3-bucket>",
-         "Condition": {
-           "StringEquals": {
-             "aws:SourceAccount": "<account-id>"
-           },
-           "ArnLike": {
-             "aws:SourceArn": "arn:aws:s3:*:*:<s3-bucket>"
-           }
-         }
-       }
-     ]
-     }
-  
-   You can make your access policy to accept S3 notifications from different account IDs and to apply different conditions. More information in `Managing access in Amazon SQS <https://docs.aws.amazon.com/AWSSimpleQueueService/latest/SQSDeveloperGuide/sqs-overview-of-managing-access.html>`_. 
+      {
+      "Version": "2012-10-17",
+      "Id": "example-ID",
+      "Statement": [
+        {
+          "Sid": "example-access-policy",
+          "Effect": "Allow",
+          "Principal": {
+            "Service": "s3.amazonaws.com"
+          },
+          "Action": "SQS:SendMessage",
+          "Resource": "arn:aws:sqs:<REGION>:<ACCOUNT_ID>:<SQS-NAME>",
+          "Condition": {
+            "StringEquals": {
+              "aws:SourceAccount": "<ACCOUNT_ID>"
+            },
+            "ArnLike": {
+              "aws:SourceArn": "arn:aws:s3:*:*:<S3-BUCKET>"
+            }
+          }
+        }
+      ]
+      }
+
+You can make your access policy to accept S3 notifications from different account IDs and to apply different conditions. More information in `managing access in Amazon SQS <https://docs.aws.amazon.com/AWSSimpleQueueService/latest/SQSDeveloperGuide/sqs-overview-of-managing-access.html>`__.
 
 Amazon S3 and Event Notifications
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 To configure an S3 bucket that reports creation events, do the following.
 
-#. Configure an S3 bucket as defined in the :doc:`Configuring an S3 Bucket <../prerequisites/S3-bucket>` section. Provide the name you decided in the previous section.
-#. Once created, go to **Event notifications** inside the **Properties** tab. Select **Create event notification**. 
+#. Configure an S3 bucket as defined in the :doc:`configuring an S3 bucket <../prerequisites/S3-bucket>` section. Provide the name you decided in the previous section.
+#. Once created, go to **Event notifications** inside the **Properties** tab. Select **Create event notification**.
 #. In **Event Types**, select **All object create events**. This generates notifications for any type of event that results in the creation of an object in the bucket.
-#. In the **Destination** section, select the following options:
+#. In the **Destination section**, select the following options:
 
-   -  **SQS queue**
-   -  **Choose from your SQS queues**
+   -  SQS queue
+   -  Choose from your SQS queues
+
 #. Choose the queue you created previously.
+
+Configuration parameters
+------------------------
+
+
+
+
+
+
+
+
+
 
 Wazuh Configuration
 -------------------
