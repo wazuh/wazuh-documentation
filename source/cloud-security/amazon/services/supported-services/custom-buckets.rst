@@ -67,80 +67,38 @@ To configure an S3 bucket that reports creation events, do the following.
 #. In **Event Types**, select **All object create events**. This generates notifications for any type of event that results in the creation of an object in the bucket.
 #. In the **Destination section**, select the following options:
 
-   -  SQS queue
-   -  Choose from your SQS queues
+   -  **SQS queue**
+   -  **Choose from your SQS queues**
 
 #. Choose the queue you created previously.
 
 Configuration parameters
 ------------------------
 
-
-
-
-
-
-
-
-
-
-Wazuh Configuration
--------------------
-
-.. warning::
-      
-   Every message sent to the queue is read and deleted. Make sure you only use the queue for bucket notifications.
-
-#. Edit the ``/var/ossec/etc/ossec.conf`` file. Add the SQS name and your `Configuration parameters`_ for the buckets service. Set this inside ``<subscriber type="buckets">``. For example:
-
-   .. code-block:: xml
-      :emphasize-lines: 6,7
-
-      <wodle name="aws-s3">
-          <disabled>no</disabled>
-          <interval>1h</interval>
-          <run_on_start>yes</run_on_start>
-          <subscriber type="buckets">
-              <sqs_name>sqs-queue</sqs_name>
-              <aws_profile>default</aws_profile>
-          </subscriber>
-      </wodle>
-
-   Check the :doc:`AWS S3 module </user-manual/reference/ossec-conf/wodle-s3>` reference manual to learn more about the available settings.
-
-   .. note::
-      
-      The amount of notifications present in the queue affects the execution time of the AWS S3 module. If the ``<interval>`` value for the waiting time between executions is too short, the :ref:`Interval overtaken <interval_overtaken_message>` warning is logged into the ``ossec.log`` file.
-
-#. Restart the Wazuh manager to apply the changes.
-
-   .. include:: /_templates/common/restart_manager.rst
-
-Configuration parameters
-^^^^^^^^^^^^^^^^^^^^^^^^
-
-Configure the following fields to set the queue and authentication configuration. For more information, check the :ref:`subscribers` reference.
+Configure the following fields to set the queue and authentication configuration. For more information, check the :ref:`subscribers <subscribers>` reference.
 
 Queue
-~~~~~
+^^^^^
 
 -  ``<sqs_name>``: The name of the queue.
--  Optional – ``<service_endpoint>``: The AWS S3 endpoint URL for data downloading from the bucket. Check :ref:`using_non-default_aws_endpoints` for more information about VPC and FIPS endpoints.
+-  Optional – ``<service_endpoint>``: The AWS S3 endpoint URL for data downloading from the bucket. Check :ref:`using non-default AWS endpoints <using_non-default_aws_endpoints>` for more information about VPC and FIPS endpoints.
 
 Authentication
-~~~~~~~~~~~~~~
+^^^^^^^^^^^^^^
 
 The available authentication methods are the following:
 
--  :ref:`IAM Roles <iam_roles>`
+-  :ref:`IAM roles <iam_roles>`
 -  :ref:`Profiles <aws_profile>`
 
-These authentication methods require using the ``/root/.aws/credentials`` file to provide credentials. You can find more information in :doc:`Configuring AWS credentials <../prerequisites/credentials>`.
+These authentication methods require using the ``/root/.aws/credentials`` file to provide credentials. You can find more information in :doc:`configuring AWS credentials <../prerequisites/credentials>`.
 
 The available authentication configuration parameters are the following:
 
--  ``<aws_profile>``: A valid profile name from a Shared Credential File or AWS Config File with the permission to read logs from the bucket.
--  ``<iam_role_arn>``: ARN for the corresponding IAM role to assume.
+-  ``<aws_profile>``: A valid profile name from a Shared Credential File or AWS Config File with permission to read logs from the bucket.
+-  ``<iam_role_arn>``: Amazon Resource Name (ARN) for the corresponding IAM role to assume.
 -  Optional – ``<iam_role_duration>``: The session duration in seconds.
 -  Optional – ``<sts_endpoint>``: The URL of the VPC endpoint of the AWS Security Token Service.
 
+Configure Wazuh to process logs from Custom Logs Buckets
+--------------------------------------------------------
