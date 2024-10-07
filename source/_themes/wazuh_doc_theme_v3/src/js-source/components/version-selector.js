@@ -87,7 +87,7 @@ jQuery(function($) {
   }
 
   /* Initialize the tooltip of bootstrap */
-  $('#version-selector [data-toggle="tooltip"]').tooltip({container: 'header'});
+  $('#version-selector [data-toggle="tooltip"]').tooltip({container: 'header', placement: 'left', boundary: 'window'});
 
   /**
    * Add the current version to the version selector
@@ -202,9 +202,11 @@ jQuery(function($) {
 
     /* Print the correct links in the selector */
     for (let i = 0; i < listOfVersions.length; i++) {
+      ele = null;
       href = '';
-      tooltip = '';
+      tooltip = false;
       ver = versionsCopy[i];
+      
       if ( redirHistory[ver] != null && redirHistory[ver].length ) {
         if ( i == 0 ) { // the latest release version
           href = '/current'+redirHistory[ver]+param;
@@ -212,17 +214,26 @@ jQuery(function($) {
           href = '/'+ver+redirHistory[ver]+param;
         }
       } else {
-        tooltip = 'class="disabled" data-toggle="tooltip" data-placement="left" title="This page is not available in version ' + listOfVersions[i] + ((i == 0) ? ' (current)' : '') +'"';
+        tooltip = true;
       }
       if ( !hasHttpProtocol && href.length > 0 ) {
         href = 'https://documentation.wazuh.com' + href;
       }
-      ele += '<li><a href="' + href + '" '+ tooltip +'> Version '+listOfVersions[i] + ((i == 0) ? ' (current)' : '') +'</a></li>';
+      aEle = $(document.createElement('a'));
+      aEle.attr('href', href).text(listOfVersions[i] + ((i == 0) ? ' (current)' : ''));
+      if ( tooltip !== false ){
+        aEle.addClass('disabled')
+        .attr('data-toggle', 'tooltip')
+        .attr('data-placement', 'right')
+        .attr('title', 'This page is not available in version ' + listOfVersions[i] + ((i == 0) ? ' (current)' : ''));
+      }
+      ele = $(document.createElement('li'));
+      ele.append(aEle);
       if (ver == listOfVersions[0]) {
         $('.no-latest-notice .link-latest').attr('href', href);
       }
+      selectVersionUl.append(ele);
     }
-    selectVersionUl.html(ele);
     return redirHistory;
   }
 
