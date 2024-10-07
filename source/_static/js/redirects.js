@@ -260,6 +260,7 @@ removedUrls['4.9'] = [
   '/user-manual/agent/agent-management/remote-upgrading/wpk-list.html',
   '/user-manual/wazuh-dashboard/config-file.html',
   '/user-manual/wazuh-dashboard/management.html',
+  '/user-manual/wazuh-indexer/certificates.html',
   '/user-manual/capabilities/policy-monitoring/index.html',
   '/user-manual/capabilities/policy-monitoring/openscap/index.html',
   '/user-manual/capabilities/policy-monitoring/openscap/how-it-works.html',
