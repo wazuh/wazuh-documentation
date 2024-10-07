@@ -22,11 +22,11 @@ You can also join our [users mailing list](https://groups.google.com/d/forum/waz
 
 ## Software and libraries used
 
-- [Python](https://www.python.org/) 3.8+
-- [Sphinx](http://www.sphinx-doc.org/) 7.0.1
-- [sphinx-tabs](https://github.com/djungelorm/sphinx-tabs) 3.4.1
+- [Python](https://www.python.org/) 3.9+
+- [Sphinx](http://www.sphinx-doc.org/) 7.2.6
+- [sphinx-tabs](https://github.com/djungelorm/sphinx-tabs) 3.4.5
 - [jsmin](https://github.com/tikitu/jsmin) 3.0.1
-- [sphinx-reredirects](https://gitlab.com/documatt/sphinx-reredirects) 0.1.2
+- [sphinx-reredirects](https://gitlab.com/documatt/sphinx-reredirects) 0.1.5
 
 ## Alternative Pagefind search engine
 
