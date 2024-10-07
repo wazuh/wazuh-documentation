@@ -430,7 +430,7 @@ def setup(app):
     current_path = os.path.join(os.path.dirname(os.path.realpath(__file__)), theme_assets_path)
     static_path_str = os.path.join(os.path.dirname(os.path.realpath(__file__)), html_static_path[0])
 
-    if not os.path.exists(app.srcdir + '/' + html_static_path[0] + '/'):
+    if not os.path.exists(os.fspath(os.path.join(app.srcdir, html_static_path[0]))):
         os.mkdir(app.srcdir + '/' + html_static_path[0] + '/')
 
     if html_theme == 'wazuh_doc_theme_v3':
@@ -465,6 +465,15 @@ def setup(app):
         app.connect('html-page-context', manage_assets)
     app.connect('build-finished', finish_and_clean)
 
+    app.connect('html-page-context', pagefind_custom_weights)
+
+def pagefind_custom_weights(app, pagename, templatename, context, doctree):
+    ''' Runs once per page, inserting attributes to customize the weights of certain elements in the Pagefind search index '''
+    if 'body' in context:
+        # Increase weight for the h1 titles
+        context['body'] = context['body'].replace('<h1>', '<h1 data-pagefind-weight="10">')
+        # Decrease weight for hits inside code blocks
+        context['body'] = context['body'].replace('<div class="highlight">', '<div class="highlight" data-pagefind-weight="0.5">')
 
 def insert_inline_style(app, pagename, templatename, context, doctree):
     ''' Runs once per page, inserting the content of the compiled style for Google Fonts into the context '''
@@ -650,12 +659,12 @@ def creating_file_list(app, exception):
         sitemap += '</urlset>'
 
         # Create .doclist file
-        with open(build_path+'/.doclist', 'w') as doclist_file:
+        with open(os.fspath(os.path.join(build_path,'.doclist')), 'w') as doclist_file:
             list_text = separator.join(list_compiled_html)
             doclist_file.write(list_text)
 
         # Create release sitemap file
-        with open(build_path+'/'+sitemap_version+'-sitemap.xml', 'w') as sitemap_file:
+        with open(os.fspath(os.path.join(build_path,sitemap_version+'-sitemap.xml')), 'w') as sitemap_file:
             sitemap_file.write(sitemap)
 
 # -- Additional configuration ------------------------------------------------
