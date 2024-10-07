@@ -72,6 +72,8 @@ To configure an S3 bucket that reports creation events, do the following.
 
 #. Choose the queue you created previously.
 
+.. _custom_logs_buckets_configuration_parameters::
+
 Configuration parameters
 ------------------------
 
@@ -102,3 +104,52 @@ The available authentication configuration parameters are the following:
 
 Configure Wazuh to process logs from Custom Logs Buckets
 --------------------------------------------------------
+
+.. warning::
+
+   Every message sent to the queue is read and deleted. Make sure you only use the queue for bucket notifications.
+
+#. Access the Wazuh configuration in **Server management** > **Settings** using the Wazuh dashboard or by manually editing the ``/var/ossec/etc/ossec.conf`` file in the Wazuh server or agent.
+
+   .. thumbnail:: /images/cloud-security/aws/custom-logs-buckets/01-wazuh-configuration.png
+      :align: center
+      :width: 80%
+
+   .. thumbnail:: /images/cloud-security/aws/custom-logs-buckets/02-wazuh-configuration.png
+      :align: center
+      :width: 80%
+
+#. Add the SQS name and your :ref:`configuration parameters <custom_logs_buckets_configuration_parameters>` for the buckets service. Set this inside ``<subscriber type="buckets">``. For example:
+
+   .. code-block:: xml
+      :emphasize-lines: 6, 7
+
+      <wodle name="aws-s3">
+          <disabled>no</disabled>
+          <interval>1h</interval>
+          <run_on_start>yes</run_on_start>
+          <subscriber type="buckets">
+              <sqs_name>sqs-queue</sqs_name>
+              <aws_profile>default</aws_profile>
+          </subscriber>
+      </wodle>
+
+   Check the :doc:`Wazuh module for AWS </user-manual/reference/ossec-conf/wodle-s3>` reference manual to learn more about the available settings.
+
+.. note::
+
+   The amount of notifications present in the queue affects the execution time of the Wazuh module for AWS. If the ``<interval>`` value for the waiting time between executions is too short, the :ref:`interval overtaken <interval_overtaken_message>` warning is logged into the ``/var/ossec/logs/ossec.log`` file.
+
+#. Save the changes and restart Wazuh to apply the changes. The service can be manually restarted using the following command outside the Wazuh dashboard:
+
+   -  Wazuh manager:
+
+      .. code-block:: console
+
+         # systemctl restart wazuh-manager
+
+   -  Wazuh agent:
+
+      .. code-block:: console
+
+         # systemctl restart wazuh-agent
