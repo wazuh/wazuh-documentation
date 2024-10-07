@@ -7,7 +7,7 @@ const UglifyJS = require("uglify-js");
 const SRC_PATH = "src/js-source/";
 const END_PATH = "static/js/";
 
-const parameter = process.argv[2].replace('..',''); 
+const parameter = process.argv[2].replace(/\.\./g, ''); 
 const FILE = parameter.split('=')[1];
 // const cacheFileName = path.resolve(__dirname, "../build/cache.json");
 
