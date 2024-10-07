@@ -86,12 +86,19 @@
   }
   &.search {
     .no-latest-notice-wrapper {
-      top: calc(#{$header-height-xl});
+      top: calc(#{$header-height-xl} + #{$secondary-mobile-bar});
       @include media-max(sm){
         top: calc(#{$header-height-xs} + #{$secondary-mobile-bar});
       }
       @include media-only(sm, xl){
         top: calc(#{$header-height-xs} + #{$secondary-mobile-bar});
+      }
+    }
+    .not-top {
+      .no-latest-notice-wrapper {
+        @include media-min(xl){
+          top: calc(#{$header-height-xs});
+        }
       }
     }
     #central-column {
