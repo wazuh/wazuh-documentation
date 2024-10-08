@@ -1,7 +1,7 @@
 Install Wazuh components using the assistant
 --------------------------------------------
 
-Install and configure the different Wazuh components with the aid of the Wazuh installation assistant. The supported architecture is 64-bit (x86_64/AMD64).
+Install and configure the different Wazuh components on a 64-bit (x86_64/AMD64) architecture with the aid of the Wazuh installation assistant.
 
 .. note:: You need root user privileges to run all the commands described below.
 

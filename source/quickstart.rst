@@ -45,7 +45,7 @@ For larger environments we recommend a distributed deployment. Multi-node cluste
 Operating system
 ^^^^^^^^^^^^^^^^
 
-Wazuh central components can be installed on a 64-bit (x86_64/AMD64) Linux operating system. Wazuh recommends any of the following operating system versions:
+You can install the Wazuh central components on a 64-bit (x86_64/AMD64) Linux system. Wazuh recommends any of the following operating system versions:
 
 
 .. list-table::

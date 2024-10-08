@@ -6,7 +6,7 @@
 Installing the Wazuh dashboard using the assisted installation method
 =====================================================================
 
-Install and configure the Wazuh dashboard using the assisted installation method. Wazuh dashboard is a flexible and intuitive web interface for mining and visualizing security events and archives. The supported architecture is 64-bit (x86_64/AMD64).
+Install and configure the Wazuh dashboard on a 64-bit (x86_64/AMD64) architecture using the assisted installation method. Wazuh dashboard is a flexible and intuitive web interface for mining and visualizing security events and archives.
 
 Wazuh dashboard installation
 -----------------------------
