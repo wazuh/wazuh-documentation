@@ -65,6 +65,8 @@ Using default manifests
 Keeping custom manifests
 ^^^^^^^^^^^^^^^^^^^^^^^^
 
+To upgrade your deployment keeping your custom manifests, do the following.
+
 #. If you are updating from 4.3, edit the following files and update them with the new paths in 4.4. You can see the new paths next to each file in the samples below.
 
    -  ``wazuh/indexer_stack/wazuh-dashboard/dashboard-deploy.yaml``
@@ -122,17 +124,15 @@ Keeping custom manifests
 
          image: 'wazuh/wazuh-manager:|WAZUH_CURRENT_KUBERNETES|'
 
-In Wazuh 4.4, some paths are different to those in earlier versions. You have to update the old paths with the new ones if you are keeping your custom manifests.
+#. In Wazuh 4.4, some paths are different to those in earlier versions. You have to update the old paths with the new ones if you are keeping your custom manifests.
 
-``old-path`` -> ``new-path``
+   ``old-path`` -> ``new-path``
 
--  ``/usr/share/wazuh-dashboard/config/certs/`` -> ``/usr/share/wazuh-dashboard/certs/``
--  ``/usr/share/wazuh-indexer/config/certs/`` -> ``/usr/share/wazuh-indexer/certs/``
--  ``/usr/share/wazuh-indexer/plugins/opensearch-security/securityconfig/`` -> ``/usr/share/wazuh-indexer/opensearch-security/``
+      -  ``/usr/share/wazuh-dashboard/config/certs/`` -> ``/usr/share/wazuh-dashboard/certs/``
+      -  ``/usr/share/wazuh-indexer/config/certs/`` -> ``/usr/share/wazuh-indexer/certs/``
+      -  ``/usr/share/wazuh-indexer/plugins/opensearch-security/securityconfig/`` -> ``/usr/share/wazuh-indexer/opensearch-security/``
 
-To upgrade your deployment keeping your custom manifests, do the following.
-
-In Wazuh 4.8 the defaultRoute parameter into Wazuh dashboard configuration was changed.
+#. In Wazuh 4.8 the defaultRoute parameter into Wazuh dashboard configuration was changed.
 
    -  ``wazuh/indexer_stack/wazuh-dashboard/dashboard_conf/opensearch_dashboards.yml``
 
@@ -140,7 +140,7 @@ In Wazuh 4.8 the defaultRoute parameter into Wazuh dashboard configuration was c
 
          uiSettings.overrides.defaultRoute: /app/wz-home
 
-Requires modifying the CN in the opensearch.yml file for Wazuh indexer and modifying all Wazuh indexer URLs in the deployment:
+   Requires modifying the CN in the opensearch.yml file for Wazuh indexer and modifying all Wazuh indexer URLs in the deployment:
 
    -  ``wazuh/indexer_stack/wazuh-indexer/indexer_conf/opensearch.yml``
 
@@ -173,7 +173,8 @@ Requires modifying the CN in the opensearch.yml file for Wazuh indexer and modif
            - name: INDEXER_URL
              value: 'https://indexer:9200'
 
-In addition, several parameters were modified within the Wazuh manager ossec.conf file, so it is recommended to use the files configured in ``wazuh/wazuh_managers/wazuh_conf/master.conf`` and ``wazuh/wazuh_managers/wazuh_conf/worker.conf``, subsequently applying all the customizations made.
+
+   In addition for older versions, several parameters were modified within the Wazuh manager ossec.conf file, so it is recommended to use the files stored in ``wazuh/wazuh_managers/wazuh_conf/master.conf`` and ``wazuh/wazuh_managers/wazuh_conf/worker.conf`` of the v|WAZUH_CURRENT_KUBERNETES| tag, subsequently applying all the customizations made.
 
 #. `Apply the new configuration`_
 
