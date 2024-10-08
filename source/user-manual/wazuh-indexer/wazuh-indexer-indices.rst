@@ -12,13 +12,14 @@ An index is a collection of documents that relate to each other. The Wazuh index
 -  :ref:`wazuh‑archives-* <wazuh_archives_indices>`: This is the index pattern for all events sent to the Wazuh server.
 -  :ref:`wazuh‑monitoring-* <wazuh_monitoring_indices>`: This is the index pattern for the status of the Wazuh agents.
 -  :ref:`wazuh‑statistics-* <wazuh_statistics_indices>`: This is the index pattern for statistical information of the Wazuh server.
+-  :ref:`wazuh-states-vulnerabilities-* <>`: - This is the index pattern for information about vulnerabilities detected in the endpoints being monitored.
 
-You can create a custom index pattern or modify the default index pattern.
+To further customize the index pattern for alerts, you can create a custom index pattern.
 
 Creating custom index pattern
 -----------------------------
 
-This section describes creating a custom index pattern, ``my-custom-alerts-*``, alongside the default pattern, ``wazuh-alerts-*``. Switch to the root user and perform the steps below.
+This section describes how to create a custom index pattern, for example, ``my-custom-alerts-*``, alongside the default pattern, ``wazuh-alerts-*``. Switch to the root user and perform the steps below.
 
 #. Stop the Filebeat service:
 
@@ -60,10 +61,13 @@ This section describes creating a custom index pattern, ``my-custom-alerts-*``, 
 
       # curl -XPUT -k -u <INDEXER_USERNAME>:<INDEXER_PASSWORD> 'https://<INDEXER_IP_ADDRESS>:9200/_template/wazuh' -H 'Content-Type: application/json' -d @template.json
 
-   Replace ``<INDEXER_USERNAME>`` and ``<INDEXER_PASSWORD>`` with the Wazuh indexer username and password. You can obtain the Wazuh indexer credentials for fresh deployments using the command:
+   Replace:
+
+   -  ``<INDEXER_IP_ADDRESS>`` with the IP address of your Wazuh indexer
+   -  ``<INDEXER_USERNAME>`` and ``<INDEXER_PASSWORD>`` with the Wazuh indexer username and password. You can obtain the Wazuh indexer credentials for fresh deployments using the command:
 
    .. note::
-      
+
       If using the Wazuh OVA, use the default credentials ``admin:admin`` or refer to the :doc:`password management </user-manual/user-administration/password-management>` section.
 
    .. code-block:: console
@@ -77,12 +81,12 @@ This section describes creating a custom index pattern, ``my-custom-alerts-*``, 
 
 
    .. note::
-      
+
       ``{"acknowledged":true}`` indicates that the template was inserted correctly.
 
 
    .. warning::
-      
+
       Perform step 5 only if you want to replace the default alert index pattern ``wazuh-alerts-*`` and/or the default archive index pattern ``wazuh‑archives-*`` with ``my-custom-alerts-*``.
 
 #. Open the Wazuh alerts configuration file ``/usr/share/filebeat/module/wazuh/alerts/manifest.yml`` and optionally the archives file ``/usr/share/filebeat/module/wazuh/archives/manifest.yml`` and replace the index name.
@@ -123,14 +127,8 @@ This section describes creating a custom index pattern, ``my-custom-alerts-*``, 
       # systemctl restart wazuh-dashboard
 
 .. warning::
-   
-   If you already have indices created with the previous name, they won't be changed. You can still change to the previous index pattern to see them, or you can perform :doc:`reindexing <re-indexing>` to rename the existing indices.
 
-.. thumbnail:: /images/manual/wazuh-indexer/create-custom-alerts-index-pattern.gif
-   :title: Creating custom alerts index pattern
-   :alt: Creating custom alerts index pattern
-   :align: center
-   :width: 80%
+   If you already have indices created with the previous name, they won't be changed. You can still change to the previous index pattern to see them, or you can perform :doc:`reindexing <re-indexing>` to rename the existing indices.
 
 Checking indices information
 ----------------------------
@@ -160,6 +158,12 @@ Using the web user interface
       :width: 80%
 
    If the pattern is not present in the Wazuh dashboard, create a new one using the index pattern used in the template ``my-custom-alerts-*``, and make sure to use ``timestamp`` as the **Time Filter** field name.
+
+   .. thumbnail:: /images/manual/wazuh-indexer/create-custom-alerts-index-pattern.gif
+      :title: Creating custom alerts index pattern
+      :alt: Creating custom alerts index pattern
+      :align: center
+      :width: 80%
 
 Using the Wazuh indexer API
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^
@@ -191,7 +195,7 @@ Command line interface
       # tar -axf wazuh-install-files.tar wazuh-install-files/wazuh-passwords.txt -O | grep -P "\'admin\'" -A 1
 
    .. note::
-      
+
       If using the Wazuh OVA, use the default credentials admin:admin or refer to the :doc:`password management </user-manual/user-administration/password-management>` section.
 
 #. Run the following command to query your index status. Replace ``<INDEXER_USERNAME>`` and ``<INDEXER_PASSWORD>`` with the username and password obtained. Replace ``<INDEXER_IP_ADDRESS>`` with your Wazuh indexer IP address or FQDN. You can replace ``wazuh-*`` with a more specific pattern for your query, such as ``wazuh-alerts-*``.
@@ -332,7 +336,10 @@ In addition to logging alerts to the ``/var/ossec/logs/alerts/alerts.json`` and 
 
 Storing and indexing all events might be useful for later analysis and compliance requirements. However, you must consider that enabling logging and indexing of all events will increase the storage requirement on the Wazuh server.
 
-By default, the Wazuh indexer creates event indices for each unique day. You can modify the default index name in the ``/usr/share/filebeat/module/wazuh/archives/ingest/pipeline.json`` file of the Wazuh server. To do this, navigate to the ``date_index_name`` field and ``date_rounding`` key to change the default index name formatting in the ``/usr/share/filebeat/module/wazuh/archives/ingest/pipeline.json`` file.
+By default, the Wazuh indexer creates event indices for each unique day. You can modify the default index name in the ``/usr/share/filebeat/module/wazuh/archives/ingest/pipeline.json`` file of the Wazuh server. To do this:
+
+#. Navigate to the ``date_index_name`` field.
+#. Locate the ``date_rounding`` key and change the default index name formatting in the ``/usr/share/filebeat/module/wazuh/archives/ingest/pipeline.json`` file.
 
 The sections below provide details on how to enable the wazuh archives and set up the ``wazuh-archives-*`` indices.
 
@@ -380,7 +387,7 @@ Enabling Wazuh archives
    .. code-block:: console
 
       # filebeat test output
-    
+
    .. code-block:: output
       :class: output
 
@@ -402,16 +409,13 @@ Enabling Wazuh archives
 Defining the index pattern
 ^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-#. Go to **Dashboard management** > **Dashboards Management** and click **Index Patterns** from the Wazuh dashboard upper left menu **☰**.
-
+#. In the Wazuh dashboard upper left menu **☰**, go to **Dashboard management** > **Dashboard Management** and click **Index Patterns**.
 #. Click on **Create index pattern**.
-
 #. Set ``wazuh-archives-*`` as the **Index pattern name**. This defines the index pattern to match the events being forwarded and indexed. Click on **Next step**.
-
 #. Select **timestamp** for the **Time** field.
 
    .. note::
-      
+
       Be careful to choose *timestamp* instead of *@timestamp*.
 
 #. Click on **Create index pattern**.
@@ -419,8 +423,7 @@ Defining the index pattern
 Viewing the index pattern
 ^^^^^^^^^^^^^^^^^^^^^^^^^
 
-#. Click **Discover** on the upper left menu **☰**.
-
+#. Click **Explore** on the upper left menu **☰**, and then click **Discover**.
 #. Select **wazuh-archives-*** to view the events.
 
    .. thumbnail:: /images/manual/wazuh-indexer/wazuh-archives-events.png
@@ -434,7 +437,7 @@ Viewing the index pattern
 The wazuh-monitoring-* indices
 ------------------------------
 
-At any moment, the connection status of an enrolled Wazuh agent is one of the following:
+The connection status of an enrolled Wazuh agent at any moment is one of the following:
 
 -  **Active**
 -  **Disconnected**
@@ -443,7 +446,7 @@ At any moment, the connection status of an enrolled Wazuh agent is one of the fo
 
 Wazuh stores a history of the connection status of all its agents. By default, it indexes the agent connection status using the ``wazuh‑monitoring-*`` indices. The Wazuh indexer creates one of these indices per week by default. Check the documentation on :doc:`custom creation intervals </user-manual/wazuh-dashboard/settings>`. These indices store the connection status of all the agents every 15 minutes by default. Check the documentation on the :doc:`frequency of API requests </user-manual/wazuh-dashboard/settings>`.
 
-The Wazuh dashboard requires these indices to display information about agent status. For example, by clicking **Server management** > **Endpoints Summary**, you can see information such as the Wazuh agent's connection status and historical evolution within set timeframes.
+The Wazuh dashboard requires these indices to display information about agent status. For example, by clicking **☰** > **Server management** > **Endpoints Summary**, you can see information such as the Wazuh agent's connection status and historical evolution within set timeframes.
 
 .. thumbnail:: /images/manual/wazuh-indexer/status-evolution-agents-dashboard.png
    :title: Status and evolution in Agents dashboard
@@ -471,5 +474,24 @@ To visualize this information in the Wazuh dashboard, go to **Server management*
 .. thumbnail:: /images/manual/wazuh-indexer/statistics-analysis-engine-dashboard.png
    :title: Statistics analysis engine dashboard
    :alt: Statistics analysis engine dashboard
+   :align: center
+   :width: 80%
+
+The wazuh-states-vulnerabilities-* indices
+------------------------------------------
+
+The index pattern ``wazuh-states-vulnerabilities-*`` is used in Wazuh for storing data related to the vulnerability state of monitored assets. This index typically contains information about vulnerabilities detected in the systems being monitored, including details such as the severity, status, affected software, and vulnerability reference. The ``*`` at the end of the index pattern allows for the creation of multiple indices with similar names, segmented by time or other factors. This enables efficient storage and retrieval of vulnerability data over time.
+
+To visualize this information in the Wazuh dashboard, click on **Vulnerability Detection** from the Wazuh dashboard home page.
+
+.. thumbnail:: /images/manual/wazuh-indexer/wazuh-states-vulnerabilities-indices-1.png
+   :title: Wazuh states vulnerabilities indices
+   :alt: Wazuh states vulnerabilities indices
+   :align: center
+   :width: 80%
+
+.. thumbnail:: /images/manual/wazuh-indexer/wazuh-states-vulnerabilities-indices-2.png
+   :title: Wazuh states vulnerabilities indices
+   :alt: Wazuh states vulnerabilities indices
    :align: center
    :width: 80%
