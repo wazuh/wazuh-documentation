@@ -30,6 +30,7 @@ All notable changes to this project will be documented in this file.
 
 ### Changed
 
+- Updated documentation on AMI passwords. ([#7860](https://github.com/wazuh/wazuh-documentation/pull/7860))
 - Updated note related to 'never,task' rule in auditd. ([#7381](https://github.com/wazuh/wazuh-documentation/pull/7381))
 - Update API script file name. ([#7296](https://github.com/wazuh/wazuh-documentation/pull/7296))
 - Updated syscollector scan minimum value ([#7247](https://github.com/wazuh/wazuh-documentation/pull/7247))
