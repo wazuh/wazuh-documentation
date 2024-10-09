@@ -53,10 +53,52 @@ To upgrade your deployment keeping your custom docker-compose files, do the foll
 
       # docker-compose down
 
+#. If tiy are updating from a version below of 4.8, you need yo change the defaultRoute parameter into Wazuh dashboard configuration.
+
+   .. tabs::
+
+      .. group-tab:: Single node deployment
+
+         -  ``single-node/config/wazuh_dashboard/opensearch_dashboards.yml``
+
+            .. code-block:: yaml
+
+               uiSettings.overrides.defaultRoute: /app/wz-home
+
+      .. group-tab:: Multi node deployment
+
+         -  ``multi-node/config/wazuh_dashboard/opensearch_dashboards.yml``
+
+            .. code-block:: yaml
+
+               uiSettings.overrides.defaultRoute: /app/wz-home
+
+It is also necessary to modify the OPENSEARCH JAVA_OPTS environment variable to allocate more RAM to the Wazuh indexer container:
+
+   .. tabs::
+
+      .. group-tab:: Single node deployment
+
+         -  ``single-node/docker-compose.yml``
+
+            .. code-block:: yaml
+
+               environment:
+               - "OPENSEARCH_JAVA_OPTS=-Xms1g -Xmx1g"
+
+      .. group-tab:: Multi node deployment
+
+         -  ``multi-node/docker-compose.yml``
+
+            .. code-block:: yaml
+
+               environment:
+               - "OPENSEARCH_JAVA_OPTS=-Xms1g -Xmx1g"
+
 #. If you are updating from 4.3, edit ``docker-compose.yml`` and update it with the new paths in 4.4. You can see the new paths for single node docker compose files, such as  ``single-node/docker-compose.yml`` below. For multi node docker compose files, such as  ``multi-node/docker-compose.yml``, you need to do similar changes in the corresponding files.
 
    .. code-block:: yaml
-      :emphasize-lines: 8-12, 14, 19-21
+      :emphasize-lines: 8-14, 22-23, 25-27
 
       wazuh.manager:
          image: wazuh/wazuh-manager:|WAZUH_CURRENT_KUBERNETES|
@@ -75,6 +117,12 @@ To upgrade your deployment keeping your custom docker-compose files, do the foll
       ...
       wazuh.dashboard:
          image: wazuh/wazuh-dashboard:|WAZUH_CURRENT_KUBERNETES|
+         environment:
+            - INDEXER_USERNAME=admin
+            - INDEXER_PASSWORD=SecretPassword
+            - WAZUH_API_URL=https://wazuh.manager
+            - DASHBOARD_USERNAME=kibanaserver
+            - DASHBOARD_PASSWORD=kibanaserver
          volumes:
             - ./config/wazuh_indexer_ssl_certs/wazuh.dashboard.pem:/usr/share/wazuh-dashboard/certs/wazuh-dashboard.pem
             - ./config/wazuh_indexer_ssl_certs/wazuh.dashboard-key.pem:/usr/share/wazuh-dashboard/certs/wazuh-dashboard-key.pem
