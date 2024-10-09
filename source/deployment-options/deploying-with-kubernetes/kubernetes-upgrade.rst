@@ -79,25 +79,25 @@ Updating old paths
 
 **Wazuh dashboard**
 
-#. Edit the following manifests and replace ``/usr/share/wazuh-dashboard/config/certs/`` with ``/usr/share/wazuh-dashboard/certs/``.
+#. Edit ``wazuh/indexer_stack/wazuh-dashboard/dashboard-deploy.yaml`` and do the following replacements.
 
-   -  ``wazuh/indexer_stack/wazuh-dashboard/dashboard-deploy.yaml``
-   -  ``wazuh/indexer_stack/wazuh-dashboard/dashboard_conf/opensearch_dashboards.yml``
+   -  Replace ``/usr/share/wazuh-dashboard/config/certs/`` with ``/usr/share/wazuh-dashboard/certs/``.
+
+#. Edit ``wazuh/indexer_stack/wazuh-dashboard/dashboard_conf/opensearch_dashboards.yml`` and do the following replacements.
+
+   -  Replace ``/usr/share/wazuh-dashboard/config/certs/`` with ``/usr/share/wazuh-dashboard/certs/``.
 
 **Wazuh indexer**
 
-#. Edit the following manifests and replace ``/usr/share/wazuh-indexer/config/certs/`` with ``/usr/share/wazuh-indexer/certs/``.
+#. Edit ``wazuh/indexer_stack/wazuh-indexer/cluster/indexer-sts.yaml`` and do the following replacements.
 
-   -  ``wazuh/indexer_stack/wazuh-indexer/cluster/indexer-sts.yaml``
-   -  ``wazuh/indexer_stack/wazuh-indexer/indexer_conf/opensearch.yml``
+   -  Replace ``/usr/share/wazuh-indexer/config/certs/`` with ``/usr/share/wazuh-indexer/certs/``.
+   -  Replace ``/usr/share/wazuh-indexer/config/opensearch.yml`` with ``/usr/share/wazuh-indexer/opensearch.yml``.
+   -  Replace ``/usr/share/wazuh-indexer/plugins/opensearch-security/securityconfig/`` with ``/usr/share/wazuh-indexer/opensearch-security/``.
 
-#. Edit the following manifest and replace ``/usr/share/wazuh-indexer/config/opensearch.yml`` with ``/usr/share/wazuh-indexer/opensearch.yml``.
+#. Edit ``wazuh/indexer_stack/wazuh-indexer/indexer_conf/opensearch.yml`` and do the following replacements.
 
-   -  ``wazuh/indexer_stack/wazuh-indexer/cluster/indexer-sts.yaml``
-
-#. Edit the following manifest and replace ``/usr/share/wazuh-indexer/plugins/opensearch-security/securityconfig/`` with ``/usr/share/wazuh-indexer/opensearch-security/``.
-
-   -  ``wazuh/indexer_stack/wazuh-indexer/cluster/indexer-sts.yaml``
+   -  Replace ``/usr/share/wazuh-indexer/config/certs/`` with ``/usr/share/wazuh-indexer/certs/``.
 
 .. _updating_configuraton_parameters:
 
