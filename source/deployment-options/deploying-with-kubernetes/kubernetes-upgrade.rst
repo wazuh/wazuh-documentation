@@ -40,8 +40,7 @@ Any modification related to these files will also be made in the associated volu
 Recreating certificates
 -----------------------
 
-Upgrading from a version earlier than v4.8.0 requires that you recreate the SSL certificates. Follow instructions in :ref:`kubernetes_ssl_certificates` using the v|WAZUH_CURRENT_KUBERNETES| tag.
-
+Upgrading from a version earlier than v4.8.0 requires you to recreate the SSL certificates. Clone the  *wazuh-kubernetes* repository and check out the v|WAZUH_CURRENT_KUBERNETES| tag. Then, follow the instructions in :ref:`kubernetes_ssl_certificates`.
 
 Configuring the upgrade
 -----------------------
@@ -60,55 +59,60 @@ Using default manifests
 
       # git checkout v|WAZUH_CURRENT_DOCKER|
 
-#. `Apply the new configuration`_
+Next, :ref:`apply the new configuration <apply_the_new_configuration>`.
 
 Keeping custom manifests
 ^^^^^^^^^^^^^^^^^^^^^^^^
 
 To upgrade your deployment keeping your custom manifests, do the following.
 
-#. If you are upgrading from 4.3, some paths are different. You have to update the old paths with the new ones in the following manifests:
+#. If you are upgrading from 4.3, :ref:`update old paths <updating_old_paths>` with the new ones.
+#. If you are upgrading from a version earlier than 4.8, :ref:`update configuration parameters <updating_configuraton_parameters>`.
+#. :ref:`Modify tags of Wazuh images <modifying_tags>`.
 
+Next, :ref:`apply the new configuration <apply_the_new_configuration>`.
 
-   ``Wazuh dashboard``
+.. _updating_old_paths:
 
-      -  ``/usr/share/wazuh-dashboard/config/certs/`` -> ``/usr/share/wazuh-dashboard/certs/``
+Updating old paths
+~~~~~~~~~~~~~~~~~~
 
-         .. code-block::  bash
+**Wazuh dashboard**
 
-            wazuh/indexer_stack/wazuh-dashboard/dashboard-deploy.yaml
-            wazuh/indexer_stack/wazuh-dashboard/dashboard_conf/opensearch_dashboards.yml
+#. Edit the following manifests and replace ``/usr/share/wazuh-dashboard/config/certs/`` with ``/usr/share/wazuh-dashboard/certs/``.
 
-   ``Wazuh indexer``
-
-      -  ``/usr/share/wazuh-indexer/config/certs/`` -> ``/usr/share/wazuh-indexer/certs/``
-
-         .. code-block::  bash
-
-            wazuh/indexer_stack/wazuh-indexer/cluster/indexer-sts.yaml
-            wazuh/indexer_stack/wazuh-indexer/indexer_conf/opensearch.yml
-
-      -  ``/usr/share/wazuh-indexer/config/opensearch.yml`` -> ``/usr/share/wazuh-indexer/opensearch.yml``
-
-         .. code-block::  bash
-
-            wazuh/indexer_stack/wazuh-indexer/cluster/indexer-sts.yaml
-
-      -  ``/usr/share/wazuh-indexer/plugins/opensearch-security/securityconfig/`` -> ``/usr/share/wazuh-indexer/opensearch-security/``
-
-         .. code-block::  bash
-
-            wazuh/indexer_stack/wazuh-indexer/cluster/indexer-sts.yaml
-
-#. If you are upgrading from a version earlier than 4.8, the defaultRoute parameter into Wazuh dashboard configuration was changed.
-
+   -  ``wazuh/indexer_stack/wazuh-dashboard/dashboard-deploy.yaml``
    -  ``wazuh/indexer_stack/wazuh-dashboard/dashboard_conf/opensearch_dashboards.yml``
+
+**Wazuh indexer**
+
+#. Edit the following manifests and replace ``/usr/share/wazuh-indexer/config/certs/`` with ``/usr/share/wazuh-indexer/certs/``.
+
+   -  ``wazuh/indexer_stack/wazuh-indexer/cluster/indexer-sts.yaml``
+   -  ``wazuh/indexer_stack/wazuh-indexer/indexer_conf/opensearch.yml``
+
+#. Edit the following manifest and replace ``/usr/share/wazuh-indexer/config/opensearch.yml`` with ``/usr/share/wazuh-indexer/opensearch.yml``.
+
+   -  ``wazuh/indexer_stack/wazuh-indexer/cluster/indexer-sts.yaml``
+
+#. Edit the following manifest and replace ``/usr/share/wazuh-indexer/plugins/opensearch-security/securityconfig/`` with ``/usr/share/wazuh-indexer/opensearch-security/``.
+
+   -  ``wazuh/indexer_stack/wazuh-indexer/cluster/indexer-sts.yaml``
+
+.. _updating_configuraton_parameters:
+
+Updating configuration parameters
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+#. Update the ``defaultRoute`` parameter in the Wazuh dashboard configuration.
+
+   -  ``wazuh/indexer_stack/wazuh-dashboard/dashboard_conf/opensearch_dashboards.yml``.
 
       .. code-block:: yaml
 
          uiSettings.overrides.defaultRoute: /app/wz-home
 
-   It also requires modifying the CN in the opensearch.yml file for Wazuh indexer and modifying all Wazuh indexer URLs in the deployment:
+#. Edit ``opensearch.yml`` and modify ``CN`` for Wazuh indexer.
 
    -  ``wazuh/indexer_stack/wazuh-indexer/indexer_conf/opensearch.yml``
 
@@ -117,42 +121,54 @@ To upgrade your deployment keeping your custom manifests, do the following.
          plugins.security.nodes_dn:
            - CN=indexer,O=Company,L=California,C=US
 
+#. Edit the following files and modify all Wazuh indexer URLs in the deployment.
+
    -  ``wazuh/indexer_stack/wazuh-dashboard/dashboard-deploy.yaml``
 
       .. code-block:: yaml
+         :emphasize-lines: 3
 
          env:
            - name: INDEXER_URL
-             value: 'https://indexer:9200'
+             value: 'https://<YOUR_WAZUH_INDEXER_URL>:9200'
 
    -  ``wazuh/wazuh_managers/wazuh-master-sts.yaml``
 
       .. code-block:: yaml
+         :emphasize-lines: 3
 
          env:
            - name: INDEXER_URL
-             value: 'https://indexer:9200'
+             value: 'https://<YOUR_WAZUH_INDEXER_URL>:9200'
 
    -  ``wazuh/wazuh_managers/wazuh-worker-sts.yaml``
 
       .. code-block:: yaml
+         :emphasize-lines: 3
 
          env:
            - name: INDEXER_URL
-             value: 'https://indexer:9200'
+             value: 'https://<YOUR_WAZUH_INDEXER_URL>:9200'
 
+#. Edit the following files of the ``v|WAZUH_CURRENT_KUBERNETES|`` tag and apply all the customizations from your Wazuh manager ``ossec.conf`` file.
 
-   In addition for older versions, several parameters were modified within the Wazuh manager ``ossec.conf`` file, so it is mandatory to use the files stored in ``wazuh/wazuh_managers/wazuh_conf/master.conf`` and ``wazuh/wazuh_managers/wazuh_conf/worker.conf`` of the v|WAZUH_CURRENT_KUBERNETES| tag, subsequently applying all the customizations made.
+   -  ``wazuh/wazuh_managers/wazuh_conf/master.conf``
+   -  ``wazuh/wazuh_managers/wazuh_conf/worker.conf``
 
-#. Modify the tag of Wazuh images in the different statefulsets and deployments.
+.. _modifying_tags:
 
-   .. code-block:: yaml
+Modifying tags of Wazuh images
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-         image: 'wazuh/wazuh-dashboard:|WAZUH_CURRENT_KUBERNETES|'
-         image: 'wazuh/wazuh-manager:|WAZUH_CURRENT_KUBERNETES|'
-         image: 'wazuh/wazuh-indexer:|WAZUH_CURRENT_KUBERNETES|'
+Modify the tag of Wazuh images in the different *statefulsets* and deployments.
 
-#. `Apply the new configuration`_
+.. code-block:: yaml
+
+   image: 'wazuh/wazuh-dashboard:|WAZUH_CURRENT_KUBERNETES|'
+   image: 'wazuh/wazuh-manager:|WAZUH_CURRENT_KUBERNETES|'
+   image: 'wazuh/wazuh-indexer:|WAZUH_CURRENT_KUBERNETES|'
+
+.. _apply_the_new_configuration:
 
 Apply the new configuration
 ---------------------------

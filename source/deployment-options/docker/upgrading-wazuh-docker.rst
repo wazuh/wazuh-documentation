@@ -45,7 +45,7 @@ To upgrade your deployment keeping your custom docker-compose files, do the foll
 
       # docker-compose down
 
-#. If you are upgrading from a version earlier than 4.8, the defaultRoute parameter into Wazuh dashboard configuration was changed.
+#. If you are upgrading from a version earlier than 4.8, update the ``defaultRoute`` parameter in the Wazuh dashboard configuration.
 
    .. tabs::
 
@@ -65,139 +65,130 @@ To upgrade your deployment keeping your custom docker-compose files, do the foll
 
                uiSettings.overrides.defaultRoute: /app/wz-home
 
-   It is also necessary to modify the OPENSEARCH_JAVA_OPTS environment variable value to allocate more RAM to the Wazuh indexer container and the tag of image generator. The variable name in v4.3.0 is ES_JAVA_OPTS, it must also be updated to OPENSEARCH_JAVA_OPTS:
+#. Modify the ``OPENSEARCH_JAVA_OPTS`` environment variable to allocate more RAM to the Wazuh indexer container. If you are upgrading from 4.3, you must replace ``ES_JAVA_OPTS`` with ``OPENSEARCH_JAVA_OPTS`` and modify the value.
 
-      .. tabs::
+   .. tabs::
 
-         .. group-tab:: Single node deployment
+      .. group-tab:: Single node deployment
 
-            -  ``single-node/docker-compose.yml``
+         -  ``single-node/docker-compose.yml``
 
-               .. code-block:: yaml
+            .. code-block:: yaml
 
-                  environment:
-                  - "OPENSEARCH_JAVA_OPTS=-Xms1g -Xmx1g"
+               environment:
+               - "OPENSEARCH_JAVA_OPTS=-Xms1g -Xmx1g"
 
-            -  ``single-node/generate-indexer-certs.yml``
+      .. group-tab:: Multi node deployment
 
-               .. code-block:: yaml
+         -  ``multi-node/docker-compose.yml``
 
-                  services:
-                     generator:
-                        image: wazuh/wazuh-certs-generator:0.0.2
+            .. code-block:: yaml
 
-         .. group-tab:: Multi node deployment
+               environment:
+               - "OPENSEARCH_JAVA_OPTS=-Xms1g -Xmx1g"
 
-            -  ``multi-node/docker-compose.yml``
+#. Modify the the tag of image generator.
 
-               .. code-block:: yaml
+   .. tabs::
 
-                  environment:
-                  - "OPENSEARCH_JAVA_OPTS=-Xms1g -Xmx1g"
+      .. group-tab:: Single node deployment
 
-            -  ``single-node/generate-indexer-certs.yml``
+         -  ``single-node/generate-indexer-certs.yml``
 
-               .. code-block:: yaml
+            .. code-block:: yaml
+               :emphasize-lines: 3
 
-                  services:
-                     generator:
-                        image: wazuh/wazuh-certs-generator:0.0.2
+               services:
+                  generator:
+                     image: wazuh/wazuh-certs-generator:0.0.2
 
-   After these changes it is necessary to recreate the certificates:
+      .. group-tab:: Multi node deployment
+
+         -  ``multi-node/generate-indexer-certs.yml``
+
+            .. code-block:: yaml
+               :emphasize-lines: 3
+
+               services:
+                  generator:
+                     image: wazuh/wazuh-certs-generator:0.0.2
+
+#. After these changes, recreate the certificates.
 
    .. code-block:: bash
 
       docker-compose -f generate-indexer-certs.yml run --rm generator
 
-#. If you are upgrading from 4.3, some paths are different. You have to update the old paths with the new ones in the following manifests:
+#. If you are upgrading from 4.3, update old paths with the new ones.
 
    .. tabs::
 
       .. group-tab:: Single node deployment
 
-         ``Wazuh dashboard``
+         **Wazuh dashboard**
 
-            -  ``/usr/share/wazuh-dashboard/config/certs/`` -> ``/usr/share/wazuh-dashboard/certs/``
+         #. Edit the following manifests and replace ``/usr/share/wazuh-dashboard/config/certs/`` with ``/usr/share/wazuh-dashboard/certs/``.
 
-               .. code-block::  bash
+            -  ``single-node/config/wazuh_dashboard/opensearch_dashboards.yml``
+            -  ``single-node/docker-compose.yml``
 
-                  single-node/config/wazuh_dashboard/opensearch_dashboards.yml
-                  single-node/docker-compose.yml
+         **Wazuh indexer**
 
-         ``Wazuh indexer``
+         #. Edit the following manifest and replace ``/usr/share/wazuh-indexer/config/certs/`` with ``/usr/share/wazuh-indexer/certs/``.
 
-            -  ``/usr/share/wazuh-indexer/config/certs/`` -> ``/usr/share/wazuh-indexer/certs/``
+            -  ``single-node/config/wazuh_indexer/wazuh.indexer.yml``
+            -  ``single-node/docker-compose.yml``
 
-               .. code-block::  bash
+         #. Edit the following manifest and replace ``${OPENSEARCH_PATH_CONF}/certs/`` with ``/usr/share/wazuh-indexer/certs/``.
 
-                  single-node/config/wazuh_indexer/wazuh.indexer.yml
-                  single-node/docker-compose.yml
+            -  ``single-node/config/wazuh_indexer/wazuh.indexer.yml``
 
-            -  ``${OPENSEARCH_PATH_CONF}/certs/`` -> ``/usr/share/wazuh-indexer/certs/``
+         #. Edit the following manifest and replace ``/usr/share/wazuh-indexer/config/opensearch.yml`` with ``/usr/share/wazuh-indexer/opensearch.yml``.
 
-               .. code-block::  bash
+            -  ``single-node/docker-compose.yml``
 
-                  single-node/config/wazuh_indexer/wazuh.indexer.yml
+         #. Edit the following manifest and replace ``/usr/share/wazuh-indexer/plugins/opensearch-security/securityconfig/`` with ``/usr/share/wazuh-indexer/opensearch-security/``
 
-            -  ``/usr/share/wazuh-indexer/config/opensearch.yml`` -> ``/usr/share/wazuh-indexer/opensearch.yml``
-
-               .. code-block::  bash
-
-                  single-node/docker-compose.yml
-
-            -  ``/usr/share/wazuh-indexer/plugins/opensearch-security/securityconfig/`` -> ``/usr/share/wazuh-indexer/opensearch-security/``
-
-               .. code-block::  bash
-
-                  single-node/docker-compose.yml
+            -  ``single-node/docker-compose.yml``
 
       .. group-tab:: Multi node deployment
 
-         ``Wazuh dashboard``
+         **Wazuh dashboard**
 
-            -  ``/usr/share/wazuh-dashboard/config/certs/`` -> ``/usr/share/wazuh-dashboard/certs/``
+         #. Edit the following manifests and replace ``/usr/share/wazuh-dashboard/config/certs/`` with ``/usr/share/wazuh-dashboard/certs/``.
 
-               .. code-block::  bash
+            -  ``multi-node/config/wazuh_dashboard/opensearch_dashboards.yml``
+            -  ``multi-node/docker-compose.yml``
 
-                  multi-node/config/wazuh_dashboard/opensearch_dashboards.yml
-                  multi-node/docker-compose.yml
+         **Wazuh indexer**
 
-         ``Wazuh indexer``
+         #. Edit the following manifests and replace ``/usr/share/wazuh-indexer/config/certs/`` with ``/usr/share/wazuh-indexer/certs/``.
 
-            -  ``/usr/share/wazuh-indexer/config/certs/`` -> ``/usr/share/wazuh-indexer/certs/``
+            -  ``multi-node/config/wazuh_indexer/wazuh1.indexer.yml``
+            -  ``multi-node/config/wazuh_indexer/wazuh2.indexer.yml``
+            -  ``multi-node/config/wazuh_indexer/wazuh3.indexer.yml``
+            -  ``multi-node/docker-compose.yml``
 
-               .. code-block::  bash
+         #. Edit the following manifests and replace ``${OPENSEARCH_PATH_CONF}/certs/`` with ``/usr/share/wazuh-indexer/certs/``.
 
-                  multi-node/config/wazuh_indexer/wazuh1.indexer.yml
-                  multi-node/config/wazuh_indexer/wazuh2.indexer.yml
-                  multi-node/config/wazuh_indexer/wazuh3.indexer.yml
-                  multi-node/docker-compose.yml
+            -  ``multi-node/config/wazuh_indexer/wazuh1.indexer.yml``
+            -  ``multi-node/config/wazuh_indexer/wazuh2.indexer.yml``
+            -  ``multi-node/config/wazuh_indexer/wazuh3.indexer.yml``
 
-            -  ``${OPENSEARCH_PATH_CONF}/certs/`` -> ``/usr/share/wazuh-indexer/certs/``
+         #. Edit the following manifest and replace ``/usr/share/wazuh-indexer/config/opensearch.yml`` with ``/usr/share/wazuh-indexer/opensearch.yml``.
 
-               .. code-block::  bash
+            -  ``multi-node/docker-compose.yml``
 
-                  multi-node/config/wazuh_indexer/wazuh1.indexer.yml
-                  multi-node/config/wazuh_indexer/wazuh2.indexer.yml
-                  multi-node/config/wazuh_indexer/wazuh3.indexer.yml
+         #. Edit the following manifest and replace ``/usr/share/wazuh-indexer/plugins/opensearch-security/securityconfig/`` with ``/usr/share/wazuh-indexer/opensearch-security/``.
 
-            -  ``/usr/share/wazuh-indexer/config/opensearch.yml`` -> ``/usr/share/wazuh-indexer/opensearch.yml``
+            -  ``multi-node/docker-compose.yml``
 
-               .. code-block::  bash
-
-                  multi-node/docker-compose.yml
-
-            -  ``/usr/share/wazuh-indexer/plugins/opensearch-security/securityconfig/`` -> ``/usr/share/wazuh-indexer/opensearch-security/``
-
-               .. code-block::  bash
-
-                  multi-node/docker-compose.yml
-
-   You will also need to make some changes to the docker-compose.yml file corresponding to your deployment type. The highlighted lines must be modified and the variable related to the ``kibanaserver`` user must be added with the corresponded value:
+#. If you are upgrading from 4.3, edit the ``docker-compose.yml`` file corresponding to your deployment type. Modify the highlighted lines and add the variable related to the ``kibanaserver`` user with the corresponding value.
 
    .. tabs::
 
       .. group-tab:: Single node deployment
+
          .. code-block:: yaml
             :emphasize-lines: 2, 5, 8, 13-14
 
@@ -217,6 +208,7 @@ To upgrade your deployment keeping your custom docker-compose files, do the foll
                   - DASHBOARD_PASSWORD=kibanaserver
 
       .. group-tab:: Single node deployment
+
          .. code-block:: yaml
             :emphasize-lines:  2, 5, 8, 11, 14, 17, 23-24
 
@@ -245,9 +237,8 @@ To upgrade your deployment keeping your custom docker-compose files, do the foll
                   - DASHBOARD_USERNAME=kibanaserver
                   - DASHBOARD_PASSWORD=kibanaserver
 
-#. Start the new version of Wazuh using ``docker-compose``:
+#. Start the new version of Wazuh using ``docker-compose``.
 
    .. code-block::
 
       # docker-compose up -d
-
