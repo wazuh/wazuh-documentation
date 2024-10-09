@@ -106,7 +106,7 @@ To learn more about configuring Wazuh, see the :doc:`User manual </user-manual/i
 Access the Wazuh dashboard
 --------------------------
 
-When the instance is launched, the passwords of the users are automatically changed to the ID of the instance. In this way, access to the interface is guaranteed only to the creator of it. This process can take an average of five minutes, depending on the type of instance. Both the SSH access and the Wazuh dashboard access are disabled during this process.
+When the instance is launched, the user passwords are automatically changed to the instance ID with the first letter capitalized. For example: ``I-07f25f6afe4789342``. This ensures that only the creator has access to the interface. This process can take an average of five minutes, depending on the type of instance. During this time, both SSH access and access to the Wazuh dashboard are disabled.
 
 Once the instance is running and the process to initialize passwords is complete, you can access the Wazuh dashboard with your credentials.
 
@@ -117,12 +117,11 @@ Once the instance is running and the process to initialize passwords is complete
 .. note::
    :class: not-long
 
-   The password is the instance ID with the first letter capitalized, example: I-07f25f6afe4789342
+   The password is the instance ID with the first letter capitalized. For example: ``I-07f25f6afe4789342``.
 
 .. warning::
 
-   It is highly recommended to change the default users passwords in the first SSH access. The API password for the wazuh and wazuh-wui user matches the admin user password, this is important to change the Wazuh API passwords. To perform this action, see the :doc:`/user-manual/user-administration/password-management` section.
-
+   The password for the server API users ``wazuh`` and ``wazuh-wui`` is the same  as the ``admin`` user's password. It is highly recommended to change the default passwords in the first SSH access. To perform this action, refer to the :doc:`/user-manual/user-administration/password-management` section.
 
 Security considerations about SSH
 ---------------------------------
