@@ -108,7 +108,7 @@ To upgrade your deployment keeping your custom manifests, do the following.
 
          uiSettings.overrides.defaultRoute: /app/wz-home
 
-   Requires modifying the CN in the opensearch.yml file for Wazuh indexer and modifying all Wazuh indexer URLs in the deployment:
+   It also requires modifying the CN in the opensearch.yml file for Wazuh indexer and modifying all Wazuh indexer URLs in the deployment:
 
    -  ``wazuh/indexer_stack/wazuh-indexer/indexer_conf/opensearch.yml``
 
@@ -142,9 +142,9 @@ To upgrade your deployment keeping your custom manifests, do the following.
              value: 'https://indexer:9200'
 
 
-   In addition for older versions, several parameters were modified within the Wazuh manager ossec.conf file, so it is recommended to use the files stored in ``wazuh/wazuh_managers/wazuh_conf/master.conf`` and ``wazuh/wazuh_managers/wazuh_conf/worker.conf`` of the v|WAZUH_CURRENT_KUBERNETES| tag, subsequently applying all the customizations made.
+   In addition for older versions, several parameters were modified within the Wazuh manager ``ossec.conf`` file, so it is mandatory to use the files stored in ``wazuh/wazuh_managers/wazuh_conf/master.conf`` and ``wazuh/wazuh_managers/wazuh_conf/worker.conf`` of the v|WAZUH_CURRENT_KUBERNETES| tag, subsequently applying all the customizations made.
 
-#. Modify the tag of Wazuh images in the different sttefulsets and deployments.
+#. Modify the tag of Wazuh images in the different statefulsets and deployments.
 
    .. code-block:: yaml
 
