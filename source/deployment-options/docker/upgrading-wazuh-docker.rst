@@ -103,6 +103,12 @@ To upgrade your deployment keeping your custom docker-compose files, do the foll
                      generator:
                         image: wazuh/wazuh-certs-generator:0.0.2
 
+   After these changes it is necessary to recreate the certificates
+
+   .. code-block:: bash
+
+      docker-compose -f generate-indexer-certs.yml run --rm generator
+
 #. If you are upgrading from 4.3, some paths are different. You have to update the old paths with the new ones in the following manifests:
 
    .. tabs::
