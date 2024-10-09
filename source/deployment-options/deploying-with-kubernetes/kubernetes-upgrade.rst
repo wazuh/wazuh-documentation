@@ -67,72 +67,40 @@ Keeping custom manifests
 
 To upgrade your deployment keeping your custom manifests, do the following.
 
-#. If you are updating from 4.3, edit the following files and update them with the new paths in 4.4. You can see the new paths next to each file in the samples below.
+#. If you are upgrading from 4.3, some paths are different. You have to update the old paths with the new ones in the following manifests:
 
-   -  ``wazuh/indexer_stack/wazuh-dashboard/dashboard-deploy.yaml``
 
-      .. code-block:: yaml
-
-         image: 'wazuh/wazuh-dashboard:|WAZUH_CURRENT_KUBERNETES|'
-         mountPath: /usr/share/wazuh-dashboard/certs/cert.pem
-         mountPath: /usr/share/wazuh-dashboard/certs/key.pem
-         mountPath: /usr/share/wazuh-dashboard/certs/root-ca.pem
-         value: /usr/share/wazuh-dashboard/certs/cert.pem
-         value: /usr/share/wazuh-dashboard/certs/key.pem
-
-   -  ``wazuh/indexer_stack/wazuh-dashboard/dashboard_conf/opensearch_dashboards.yml``
-
-      .. code-block:: yaml
-
-         server.ssl.key: "/usr/share/wazuh-dashboard/certs/key.pem"
-         server.ssl.certificate: "/usr/share/wazuh-dashboard/certs/cert.pem"
-         opensearch.ssl.certificateAuthorities: ["/usr/share/wazuh-dashboard/certs/root-ca.pem"]
-
-   -  ``wazuh/indexer_stack/wazuh-indexer/cluster/indexer-sts.yaml``
-
-      .. code-block:: yaml
-
-         image: 'wazuh/wazuh-indexer:|WAZUH_CURRENT_KUBERNETES|'
-         mountPath: /usr/share/wazuh-indexer/certs/node-key.pem
-         mountPath: /usr/share/wazuh-indexer/certs/node.pem
-         mountPath: /usr/share/wazuh-indexer/certs/root-ca.pem
-         mountPath: /usr/share/wazuh-indexer/certs/admin.pem
-         mountPath: /usr/share/wazuh-indexer/certs/admin-key.pem
-         mountPath: /usr/share/wazuh-indexer/opensearch.yml
-         mountPath: /usr/share/wazuh-indexer/opensearch-security/internal_users.yml
-
-   -  ``wazuh/indexer_stack/wazuh-indexer/indexer_conf/opensearch.yml``
-
-      .. code-block:: yaml
-
-         plugins.security.ssl.http.pemcert_filepath: /usr/share/wazuh-indexer/certs/node.pem
-         plugins.security.ssl.http.pemkey_filepath: /usr/share/wazuh-indexer/certs/node-key.pem
-         plugins.security.ssl.http.pemtrustedcas_filepath: /usr/share/wazuh-indexer/certs/root-ca.pem
-         plugins.security.ssl.transport.pemcert_filepath: /usr/share/wazuh-indexer/certs/node.pem
-         plugins.security.ssl.transport.pemkey_filepath: /usr/share/wazuh-indexer/certs/node-key.pem
-         plugins.security.ssl.transport.pemtrustedcas_filepath: /usr/share/wazuh-indexer/certs/root-ca.pem
-
-   -  ``wazuh/wazuh_managers/wazuh-master-sts.yaml``
-
-      .. code-block:: yaml
-
-         image: 'wazuh/wazuh-manager:|WAZUH_CURRENT_KUBERNETES|'
-
-   -  ``wazuh/wazuh_managers/wazuh-worker-sts.yaml``
-
-      .. code-block:: yaml
-
-         image: 'wazuh/wazuh-manager:|WAZUH_CURRENT_KUBERNETES|'
-
-#. In Wazuh 4.4, some paths are different to those in earlier versions. You have to update the old paths with the new ones if you are keeping your custom manifests.
-
-   ``old-path`` -> ``new-path``
+   ``Wazuh dashboard``
 
       -  ``/usr/share/wazuh-dashboard/config/certs/`` -> ``/usr/share/wazuh-dashboard/certs/``
+
+         .. code-block::  bash
+
+            wazuh/indexer_stack/wazuh-dashboard/dashboard-deploy.yaml
+            wazuh/indexer_stack/wazuh-dashboard/dashboard_conf/opensearch_dashboards.yml
+
+   ``Wazuh indexer``
+
       -  ``/usr/share/wazuh-indexer/config/certs/`` -> ``/usr/share/wazuh-indexer/certs/``
+
+         .. code-block::  bash
+
+            wazuh/indexer_stack/wazuh-indexer/cluster/indexer-sts.yaml
+            wazuh/indexer_stack/wazuh-indexer/indexer_conf/opensearch.yml
+
+      -  ``/usr/share/wazuh-indexer/config/opensearch.yml`` -> ``/usr/share/wazuh-indexer/opensearch.yml``
+
+         .. code-block::  bash
+
+            wazuh/indexer_stack/wazuh-indexer/cluster/indexer-sts.yaml
+
       -  ``/usr/share/wazuh-indexer/plugins/opensearch-security/securityconfig/`` -> ``/usr/share/wazuh-indexer/opensearch-security/``
 
-#. In Wazuh 4.8 the defaultRoute parameter into Wazuh dashboard configuration was changed.
+         .. code-block::  bash
+
+            wazuh/indexer_stack/wazuh-indexer/cluster/indexer-sts.yaml
+
+#. If you are upgrading from a version earlier than 4.8, the defaultRoute parameter into Wazuh dashboard configuration was changed.
 
    -  ``wazuh/indexer_stack/wazuh-dashboard/dashboard_conf/opensearch_dashboards.yml``
 
@@ -175,6 +143,14 @@ To upgrade your deployment keeping your custom manifests, do the following.
 
 
    In addition for older versions, several parameters were modified within the Wazuh manager ossec.conf file, so it is recommended to use the files stored in ``wazuh/wazuh_managers/wazuh_conf/master.conf`` and ``wazuh/wazuh_managers/wazuh_conf/worker.conf`` of the v|WAZUH_CURRENT_KUBERNETES| tag, subsequently applying all the customizations made.
+
+#. Modify the tag of Wazuh images in the different sttefulsets and deployments.
+
+   .. code-block:: yaml
+
+         image: 'wazuh/wazuh-dashboard:|WAZUH_CURRENT_KUBERNETES|'
+         image: 'wazuh/wazuh-manager:|WAZUH_CURRENT_KUBERNETES|'
+         image: 'wazuh/wazuh-indexer:|WAZUH_CURRENT_KUBERNETES|'
 
 #. `Apply the new configuration`_
 
