@@ -45,7 +45,7 @@ To upgrade your deployment keeping your custom docker-compose files, do the foll
 
       # docker-compose down
 
-#. If tiy are upgrading from a version below of 4.8, you need yo change the defaultRoute parameter into Wazuh dashboard configuration.
+#. If you are upgrading from a version earlier than 4.8, the defaultRoute parameter into Wazuh dashboard configuration was changed.
 
    .. tabs::
 
@@ -65,7 +65,7 @@ To upgrade your deployment keeping your custom docker-compose files, do the foll
 
                uiSettings.overrides.defaultRoute: /app/wz-home
 
-   It is also necessary to modify the OPENSEARCH JAVA_OPTS environment variable to allocate more RAM to the Wazuh indexer container and the tag of image generator:
+   It is also necessary to modify the OPENSEARCH_JAVA_OPTS environment variable value to allocate more RAM to the Wazuh indexer container and the tag of image generator. The variable name in v4.3.0 is ES_JAVA_OPTS, it must also be updated to OPENSEARCH_JAVA_OPTS:
 
       .. tabs::
 
@@ -103,7 +103,7 @@ To upgrade your deployment keeping your custom docker-compose files, do the foll
                      generator:
                         image: wazuh/wazuh-certs-generator:0.0.2
 
-   After these changes it is necessary to recreate the certificates
+   After these changes it is necessary to recreate the certificates:
 
    .. code-block:: bash
 
@@ -173,6 +173,14 @@ To upgrade your deployment keeping your custom docker-compose files, do the foll
                   multi-node/config/wazuh_indexer/wazuh3.indexer.yml
                   multi-node/docker-compose.yml
 
+            -  ``${OPENSEARCH_PATH_CONF}/certs/`` -> ``/usr/share/wazuh-indexer/certs/``
+
+               .. code-block::  bash
+
+                  multi-node/config/wazuh_indexer/wazuh1.indexer.yml
+                  multi-node/config/wazuh_indexer/wazuh2.indexer.yml
+                  multi-node/config/wazuh_indexer/wazuh3.indexer.yml
+
             -  ``/usr/share/wazuh-indexer/config/opensearch.yml`` -> ``/usr/share/wazuh-indexer/opensearch.yml``
 
                .. code-block::  bash
@@ -185,7 +193,7 @@ To upgrade your deployment keeping your custom docker-compose files, do the foll
 
                   multi-node/docker-compose.yml
 
-   You will also need to make some changes to the docker-compose.yml file corresponding to your deployment type.
+   You will also need to make some changes to the docker-compose.yml file corresponding to your deployment type. The highlighted lines must be modified and the variable related to the ``kibanaserver`` user must be added with the corresponded value:
 
    .. tabs::
 
@@ -241,5 +249,5 @@ To upgrade your deployment keeping your custom docker-compose files, do the foll
 
    .. code-block::
 
-      # docker-compose up -d            
+      # docker-compose up -d
 
