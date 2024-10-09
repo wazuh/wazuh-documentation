@@ -65,7 +65,7 @@ To upgrade your deployment keeping your custom docker-compose files, do the foll
 
                uiSettings.overrides.defaultRoute: /app/wz-home
 
-   It is also necessary to modify the OPENSEARCH JAVA_OPTS environment variable to allocate more RAM to the Wazuh indexer container:
+   It is also necessary to modify the OPENSEARCH JAVA_OPTS environment variable to allocate more RAM to the Wazuh indexer container and the tag of image generator:
 
       .. tabs::
 
@@ -78,6 +78,14 @@ To upgrade your deployment keeping your custom docker-compose files, do the foll
                   environment:
                   - "OPENSEARCH_JAVA_OPTS=-Xms1g -Xmx1g"
 
+            -  ``single-node/generate-indexer-certs.yml``
+
+               .. code-block:: yaml
+
+                  services:
+                     generator:
+                        image: wazuh/wazuh-certs-generator:0.0.2
+
          .. group-tab:: Multi node deployment
 
             -  ``multi-node/docker-compose.yml``
@@ -86,6 +94,14 @@ To upgrade your deployment keeping your custom docker-compose files, do the foll
 
                   environment:
                   - "OPENSEARCH_JAVA_OPTS=-Xms1g -Xmx1g"
+
+            -  ``single-node/generate-indexer-certs.yml``
+
+               .. code-block:: yaml
+
+                  services:
+                     generator:
+                        image: wazuh/wazuh-certs-generator:0.0.2
 
 #. If you are upgrading from 4.3, some paths are different. You have to update the old paths with the new ones in the following manifests:
 
