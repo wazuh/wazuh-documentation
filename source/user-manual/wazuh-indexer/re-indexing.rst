@@ -71,7 +71,7 @@ Command line interface
 
 Run the following command on any Wazuh central component that is allowed to authenticate to the Wazuh API. Replace ``<INDEXER_USERNAME>`` and ``<INDEXER_PASSWORD>`` with the indexer username and password:
 
-.. code-block:: bash
+.. code-block:: console
    :emphasize-lines: 4, 7
 
    curl -k -u "<INDEXER_USERNAME>:<INDEXER_PASSWORD>" -XPOST "https://<INDEXER_IP_ADDRESS>:9200/_reindex" -H 'Content-Type: application/json' -d'
@@ -98,7 +98,7 @@ For example:
       }
    }'
 
-.. code-block:: none
+.. code-block:: output
    :class: output
 
    {"took":18025,"timed_out":false,"total":26854,"updated":26854,"created":0,"deleted":0,"batches":27,"version_conflicts":0,"noops":0,"retries":{"bulk":0,"search":0},"throttled_millis":0,"requests_per_second":-1.0,"throttled_until_millis":0,"failures":[]}
