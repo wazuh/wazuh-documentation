@@ -65,7 +65,7 @@ To upgrade your deployment keeping your custom docker-compose files, do the foll
 
                uiSettings.overrides.defaultRoute: /app/wz-home
 
-#. Modify the ``OPENSEARCH_JAVA_OPTS`` environment variable to allocate more RAM to the Wazuh indexer container. If you are upgrading from 4.3, you must replace ``ES_JAVA_OPTS`` with ``OPENSEARCH_JAVA_OPTS`` and modify the value.
+#. Modify the ``OPENSEARCH_JAVA_OPTS`` environment variable to allocate more RAM to the Wazuh indexer container.
 
    .. tabs::
 
@@ -197,7 +197,7 @@ To upgrade your deployment keeping your custom docker-compose files, do the foll
                   - DASHBOARD_USERNAME=kibanaserver
                   - DASHBOARD_PASSWORD=kibanaserver
 
-      .. group-tab:: Single node deployment
+      .. group-tab:: Multi node deployment
 
          .. code-block:: yaml
             :emphasize-lines:  2, 5, 8, 11, 14, 17, 23-24

@@ -66,11 +66,28 @@ Keeping custom manifests
 
 To upgrade your deployment keeping your custom manifests, do the following.
 
+#. If you are upgrading from v4.3.0, :ref:`update the Java Opts variable name <updating_java_opts>` with the new one.
 #. If you are upgrading from 4.3, :ref:`update old paths <updating_old_paths>` with the new ones.
 #. If you are upgrading from a version earlier than 4.8, :ref:`update configuration parameters <updating_configuraton_parameters>`.
 #. :ref:`Modify tags of Wazuh images <modifying_tags>`.
 
 Next, :ref:`apply the new configuration <apply_the_new_configuration>`.
+
+.. _updating_java_opts:
+
+Updating Java Opts variable name
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+#. If you are upgrading from v4.3.0, you must replace ``ES_JAVA_OPTS`` with ``OPENSEARCH_JAVA_OPTS`` and modify the value.
+
+   -  ``wazuh/wazuh_managers/wazuh-master-sts.yaml``
+
+      .. code-block:: yaml
+         :emphasize-lines: 2
+
+         env:
+           - name: OPENSEARCH_JAVA_OPTS
+             value: '-Xms1g -Xmx1g -Dlog4j2.formatMsgNoLookups=true'
 
 .. _updating_old_paths:
 
@@ -130,7 +147,7 @@ Updating configuration parameters
 
          env:
            - name: INDEXER_URL
-             value: 'https://<YOUR_WAZUH_INDEXER_URL>:9200'
+             value: 'https://indexer:9200'
 
    -  ``wazuh/wazuh_managers/wazuh-master-sts.yaml``
 
@@ -139,7 +156,7 @@ Updating configuration parameters
 
          env:
            - name: INDEXER_URL
-             value: 'https://<YOUR_WAZUH_INDEXER_URL>:9200'
+             value: 'https://indexer:9200'
 
    -  ``wazuh/wazuh_managers/wazuh-worker-sts.yaml``
 
@@ -148,7 +165,7 @@ Updating configuration parameters
 
          env:
            - name: INDEXER_URL
-             value: 'https://<YOUR_WAZUH_INDEXER_URL>:9200'
+             value: 'https://indexer:9200'
 
 #. Edit the following files of the ``v|WAZUH_CURRENT_KUBERNETES|`` tag and apply all the customizations from your Wazuh manager ``ossec.conf`` file.
 
