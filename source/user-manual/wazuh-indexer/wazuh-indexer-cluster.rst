@@ -250,7 +250,7 @@ Perform the steps below on one indexer node only.
 
       # touch /root/config.yml
 
-#. Edit the ``/root/config.yml`` file to include the node name and IP of the new node. Replace the values with your node names and their corresponding IP addresses:
+   Edit the ``/root/config.yml`` file to include the node name and IP of the new node. Replace the values with your node names and their corresponding IP addresses:
 
    .. code-block:: yaml
       :emphasize-lines: 4, 5
@@ -281,6 +281,8 @@ Perform the steps below on one indexer node only.
       # cp wazuh-certificates/<NEW_WAZUH_INDEXER_NODE_NAME>* wazuh-install-files
 
    .. note::
+
+      .. _certificates_note:
 
       If the pre-existing root CA keys have been deleted or if you are not able to access them, you can proceed with creating new certificates for all the nodes as follows:
 
@@ -334,3 +336,446 @@ Perform the steps below on one indexer node only.
 
 Configuring existing components to connect with the new node
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+In this section, we configure the Wazuh components of your existing deployment to connect and communicate with the new Wazuh indexer node.
+
+All-in-one deployment
+~~~~~~~~~~~~~~~~~~~~~
+
+#. Create a file, ``env_variables.sh``, in the ``/root`` directory of the existing node where you define your environment variables as follows:
+
+   .. code-block:: bash
+
+      export NODE_NAME1=<EXISTING_WAZUH_INDEXER_NODE_NAME>
+      export NODE_NAME2=<WAZUH_SERVER_NODE_NAME>
+      export NODE_NAME3=<WAZUH_DASHBOARD_NODE_NAME>
+
+   Replace:
+
+   -  ``<EXISTING_WAZUH_INDEXER_NODE_NAME>``, ``<WAZUH_SERVER_NODE_NAME>``, ``<WAZUH_DASHBOARD_NODE_NAME>`` respectively with the names of the Wazuh indexer, Wazuh server, and Wazuh dashboard nodes as defined in ``/root/config.yml``.
+
+#. Create a ``deploy-certificates.sh`` script in the ``/root`` directory and add the following content:
+
+   .. code-block:: bash
+
+      #!/bin/bash
+
+      # Source the environmental variables from the external file
+      source ~/env_variables.sh
+
+      rm -rf /etc/wazuh-indexer/certs
+      mkdir /etc/wazuh-indexer/certs
+      tar -xf ./wazuh-certificates.tar -C /etc/wazuh-indexer/certs/ ./$NODE_NAME1.pem ./$NODE_NAME1-key.pem ./admin.pem ./admin-key.pem ./root-ca.pem
+      mv -n /etc/wazuh-indexer/certs/$NODE_NAME1.pem /etc/wazuh-indexer/certs/wazuh-indexer.pem
+      mv -n /etc/wazuh-indexer/certs/$NODE_NAME1-key.pem /etc/wazuh-indexer/certs/wazuh-indexer-key.pem
+      chmod 500 /etc/wazuh-indexer/certs
+      chmod 400 /etc/wazuh-indexer/certs/*
+      chown -R wazuh-indexer:wazuh-indexer /etc/wazuh-indexer/certs
+
+      rm -rf /etc/filebeat/certs
+      mkdir /etc/filebeat/certs
+      tar -xf ./wazuh-certificates.tar -C /etc/filebeat/certs/ ./$NODE_NAME2.pem ./$NODE_NAME2-key.pem ./root-ca.pem
+      mv -n /etc/filebeat/certs/$NODE_NAME2.pem /etc/filebeat/certs/wazuh-server.pem
+      mv -n /etc/filebeat/certs/$NODE_NAME2-key.pem /etc/filebeat/certs/wazuh-server-key.pem
+      chmod 500 /etc/filebeat/certs
+      chmod 400 /etc/filebeat/certs/*
+      chown -R root:root /etc/filebeat/certs
+
+      rm -rf /etc/wazuh-dashboard/certs
+      mkdir /etc/wazuh-dashboard/certs
+      tar -xf ./wazuh-certificates.tar -C /etc/wazuh-dashboard/certs/ ./$NODE_NAME3.pem ./$NODE_NAME3-key.pem ./root-ca.pem
+      mv -n /etc/wazuh-dashboard/certs/$NODE_NAME3.pem /etc/wazuh-dashboard/certs/wazuh-dashboard.pem
+      mv -n /etc/wazuh-dashboard/certs/$NODE_NAME3-key.pem /etc/wazuh-dashboard/certs/wazuh-dashboard-key.pem
+      chmod 500 /etc/wazuh-dashboard/certs
+      chmod 400 /etc/wazuh-dashboard/certs/*
+      chown -R wazuh-dashboard:wazuh-dashboard /etc/wazuh-dashboard/certs
+
+#. Deploy the certificates by executing the following command:
+
+   .. code-block:: console
+
+      # bash /root/deploy-certificates.sh
+
+   This deploys the SSL certificates to encrypt communications between the Wazuh central components.
+
+   **Recommended action**: If no other Wazuh components are going to be installed on this node, remove the ``wazuh-certificates.tar`` file by running the command below to increase security. Alternatively, save a copy offline for potential future use and scalability:
+
+   .. code-block:: console
+
+      # rm -rf ./wazuh-certificates
+      # rm -f ./wazuh-certificates.tar
+
+#. Edit the indexer configuration file at ``/etc/wazuh-indexer/opensearch.yml`` to include the new node(s) as follows. Uncomment or add more lines, according to your ``/root/config.yml`` definitions. Create the ``discovery.seed_hosts`` section if it doesn’t exist:
+
+   .. code-block:: yaml
+
+      network.host: "<EXISTING_WAZUH_INDEXER_IP>"
+      node.name: "<EXISTING_WAZUH_INDEXER_NODE_NAME>"
+      cluster.initial_master_nodes:
+      - "<EXISTING_WAZUH_INDEXER_NODE_NAME>"
+      - "<NEW-WAZUH-INDEXER-NODE-NAME>"
+      cluster.name: "wazuh-cluster"
+      discovery.seed_hosts:
+        - "<EXISTING_WAZUH_INDEXER_IP>"
+        - "<NEW_WAZUH_INDEXER_IP>"
+      plugins.security.nodes_dn:
+      - "CN=<EXISTING-WAZUH-INDEXER-NODE-NAME>,OU=Wazuh,O=Wazuh,L=California,C=US"
+      - "CN=<NEW-WAZUH-INDEXER-NODE-NAME>,OU=Wazuh,O=Wazuh,L=California,C=US"
+
+#. Edit the Filebeat configuration file ``/etc/filebeat/filebeat.yml`` to add the new Wazuh indexer node(s). Uncomment or add more lines, according to your ``/root/config.yml`` definitions:
+
+   .. code-block:: yaml
+
+      output.elasticsearch.hosts:
+              - <EXISTING_WAZUH_INDEXER_IP>:9200
+              - <NEW_WAZUH_INDEXER_IP>:9200
+      output.elasticsearch:
+        protocol: https
+        username: ${username}
+        password: ${password}
+
+#. Edit the Wazuh dashboard configuration file ``/etc/wazuh-dashboard/opensearch_dashboards.yml`` to include the new Wazuh indexer node(s):
+
+   .. code-block:: yaml
+
+      opensearch.hosts: ["https://<EXISTING_WAZUH_INDEXER_IP>:9200", "https://<NEW_WAZUH_INDEXER_IP>:9200"]
+
+#. Restart the following services to apply the changes:
+
+   .. tabs::
+
+      .. group-tab:: SystemD
+
+         .. code-block:: console
+
+            # systemctl restart wazuh-indexer
+            # systemctl restart filebeat
+            # systemctl restart wazuh-manager
+            # systemctl restart wazuh-dashboard
+
+      .. group-tab:: SysV init
+
+         .. code-block:: console
+
+            # service wazuh-indexer restart
+            # service filebeat restart
+            # service wazuh-manager restart
+            # service wazuh-dashboard restart
+
+Distributed deployment
+~~~~~~~~~~~~~~~~~~~~~~
+
+#. Edit the indexer configuration file at ``/etc/wazuh-indexer/opensearch.yml`` to include the new node(s) as follows. Uncomment or add more lines, according to your ``/root/config.yml`` definitions. Create the ``discovery.seed_hosts`` section if it doesn’t exist:
+
+   .. code-block:: yaml
+      :emphasize-lines: 5, 9, 12
+
+      network.host: "<EXISTING_WAZUH_INDEXER_IP>"
+      node.name: "<EXISTING_WAZUH_INDEXER_NODE_NAME>"
+      cluster.initial_master_nodes:
+      - "<EXISTING_WAZUH_INDEXER_NODE_NAME>"
+      - "<NEW-WAZUH-INDEXER-NODE-NAME>"
+      cluster.name: "wazuh-cluster"
+      discovery.seed_hosts:
+        - "<EXISTING_WAZUH_INDEXER_IP>"
+        - "<NEW_WAZUH_INDEXER_IP>"
+      plugins.security.nodes_dn:
+      - "CN=indexer,OU=Wazuh,O=Wazuh,L=California,C=US"
+      - "CN=<WAZUH-INDEXER2-NODE-NAME>,OU=Wazuh,O=Wazuh,L=California,C=US"
+
+#. Edit the Filebeat configuration file ``/etc/filebeat/filebeat.yml`` (the file is located in the Wazuh server) to add the new Wazuh indexer node(s). Uncomment or add more lines, according to your ``/root/config.yml`` definitions:
+
+   .. code-block:: yaml
+      :emphasize-lines: 3
+
+      output.elasticsearch.hosts:
+              - <EXISTING_WAZUH_INDEXER_IP>:9200
+              - <NEW_WAZUH_INDEXER_IP>:9200
+      output.elasticsearch:
+        protocol: https
+        username: ${username}
+        password: ${password}
+
+#. Edit the Wazuh dashboard configuration file ``/etc/wazuh-dashboard/opensearch_dashboards.yml`` to include the new Wazuh indexer node(s):
+
+   .. code-block:: yaml
+
+      opensearch.hosts: ["https://<EXISTING_WAZUH_INDEXER_IP>:9200", "https://<NEW_WAZUH_INDEXER_IP>:9200"]
+
+   .. note::
+
+      You’ll have to re-deploy certificates on your existing Wazuh node(s) if they were recreated as recommended in the :ref:`note <certificates_note>` above.
+
+      Run the following commands on each of your nodes to deploy the certificates:
+
+      #. On Wazuh indexer node(s):
+
+         .. code-block:: console
+
+            # NODE_NAME=<EXISTING_WAZUH_INDEXER_NODE_NAME>
+
+            # rm -rf /etc/wazuh-indexer/certs
+            # mkdir /etc/wazuh-indexer/certs
+            # tar -xf ./wazuh-certificates.tar -C /etc/wazuh-indexer/certs/ ./$NODE_NAME.pem ./$NODE_NAME-key.pem ./admin.pem ./admin-key.pem ./root-ca.pem
+            # mv -n /etc/wazuh-indexer/certs/$NODE_NAME.pem /etc/wazuh-indexer/certs/indexer.pem
+            # mv -n /etc/wazuh-indexer/certs/$NODE_NAME-key.pem /etc/wazuh-indexer/certs/indexer-key.pem
+            # chmod 500 /etc/wazuh-indexer/certs
+            # chmod 400 /etc/wazuh-indexer/certs/*
+            # chown -R wazuh-indexer:wazuh-indexer /etc/wazuh-indexer/certs
+
+      #. On Wazuh server node(s):
+
+         .. code-block:: console
+
+            # NODE_NAME=<WAZUH_SERVER_NODE_NAME>
+
+            # rm -rf /etc/filebeat/certs
+            # mkdir /etc/filebeat/certs
+            # tar -xf ./wazuh-certificates.tar -C /etc/filebeat/certs/ ./$NODE_NAME.pem ./$NODE_NAME-key.pem ./root-ca.pem
+            # mv -n /etc/filebeat/certs/$NODE_NAME.pem /etc/filebeat/certs/wazuh-server.pem
+            # mv -n /etc/filebeat/certs/$NODE_NAME-key.pem /etc/filebeat/certs/wazuh-server-key.pem
+            # chmod 500 /etc/filebeat/certs
+            # chmod 400 /etc/filebeat/certs/*
+            # chown -R root:root /etc/filebeat/certs
+
+      #. On Wazuh dashboard node:
+
+         .. code-block:: console
+
+            # NODE_NAME=<WAZUH_DASHBOARD_NODE_NAME>
+
+            # rm -rf /etc/wazuh-dashboard/certs
+            # mkdir /etc/wazuh-dashboard/certs
+            # tar -xf ./wazuh-certificates.tar -C /etc/wazuh-dashboard/certs/ ./$NODE_NAME.pem ./$NODE_NAME-key.pem ./root-ca.pem
+            # mv -n /etc/wazuh-dashboard/certs/$NODE_NAME.pem /etc/wazuh-dashboard/certs/wazuh-dashboard.pem
+            # mv -n /etc/wazuh-dashboard/certs/$NODE_NAME-key.pem /etc/wazuh-dashboard/certs/wazuh-dashboard-key.pem
+            # chmod 500 /etc/wazuh-dashboard/certs
+            # chmod 400 /etc/wazuh-dashboard/certs/*
+            # chown -R wazuh-dashboard:wazuh-dashboard /etc/wazuh-dashboard/certs
+
+#. Run the following commands on your respective nodes to apply the changes:
+
+   -  **Wazuh indexer node**
+
+      .. tabs::
+
+         .. group-tab:: SystemD
+
+            .. code-block:: console
+
+               # systemctl restart wazuh-indexer
+
+         .. group-tab:: SysV init
+
+            .. code-block:: console
+
+               # service wazuh-indexer restart
+
+   -  **Wazuh server node**
+
+      .. tabs::
+
+         .. group-tab:: SystemD
+
+            .. code-block:: console
+
+               # systemctl restart filebeat
+               # systemctl restart wazuh-manager
+
+         .. group-tab:: SysV init
+
+            .. code-block:: console
+
+               # service filebeat restart
+               # service wazuh-manager restart
+
+   -  **Wazuh dashboard node**
+
+      .. tabs::
+
+         .. group-tab:: SystemD
+
+            .. code-block:: console
+
+               # systemctl restart wazuh-dashboard
+
+         .. group-tab:: SysV init
+
+            .. code-block:: console
+
+               # service wazuh-dashboard restart
+
+Wazuh indexer node(s) installation
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Once the certificates have been created and copied to the new node(s), you can now proceed with installing the Wazuh indexer node. Follow the steps below to install the new Wazuh indexer node(s).
+
+#. Install package dependencies:
+
+   .. tabs::
+
+      .. group-tab:: YUM
+
+         .. code-block:: console
+
+            # yum install coreutils
+
+
+      .. group-tab:: APT
+
+         .. code-block:: console
+
+            # apt-get install debconf adduser procps
+
+#. Add the Wazuh repository:
+
+   .. tabs::
+
+      .. group-tab:: YUM
+
+         -  Import the GPG key:
+
+            .. code-block:: console
+
+               # rpm --import https://packages.wazuh.com/key/GPG-KEY-WAZUH
+
+         -  Add the repository:
+
+            .. code-block:: console
+
+               # echo -e '[wazuh]\ngpgcheck=1\ngpgkey=https://packages.wazuh.com/key/GPG-KEY-WAZUH\nenabled=1\nname=EL-$releasever - Wazuh\nbaseurl=https://packages.wazuh.com/4.x/yum/\nprotect=1' | tee /etc/yum.repos.d/wazuh.repo
+
+      .. group-tab:: APT
+
+         -  Install the following packages:
+
+            .. code-block:: console
+
+               # apt-get install gnupg apt-transport-https
+
+         -  Install the GPG key:
+
+            .. code-block:: console
+
+               # curl -s https://packages.wazuh.com/key/GPG-KEY-WAZUH | gpg --no-default-keyring --keyring gnupg-ring:/usr/share/keyrings/wazuh.gpg --import && chmod 644 /usr/share/keyrings/wazuh.gpg
+
+         -  Add the repository:
+
+            .. code-block:: console
+
+               # echo "deb [signed-by=/usr/share/keyrings/wazuh.gpg] https://packages.wazuh.com/4.x/apt/ stable main" | tee -a /etc/apt/sources.list.d/wazuh.list
+
+         -  Update the packages information:
+
+            .. code-block:: console
+
+               # apt-get update
+
+#. Install the Wazuh indexer:
+
+   .. tabs::
+
+      .. group-tab:: YUM
+
+         .. code-block:: console
+
+            # yum -y install wazuh-indexer
+
+      .. group-tab:: APT
+
+         .. code-block:: console
+
+            # apt-get -y install wazuh-indexer
+
+Configuring the Wazuh indexer
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+Edit the ``/etc/wazuh-indexer/opensearch.yml`` configuration file and replace the following values:
+
+-  ``network.host``: Sets the address of this node for both HTTP and HTTPS traffic. The node will bind to this address and use it as its publish address. This field accepts an IP address or a hostname.
+
+   Use the same node address set in ``/root/config.yml`` to create the SSL certificates.
+
+-  ``node.name``: Name of the Wazuh indexer node as defined in the ``/root/config.yml`` file. For example, ``node-1``.
+-  ``cluster.initial_master_nodes``: List of the names of the master-eligible nodes. These names are defined in the ``/root/config.yml`` file. Uncomment the ``node-2`` line or add more lines, and change the node names according to your ``/root/config.yml`` definitions:
+
+   .. code-block:: yaml
+
+      cluster.initial_master_nodes:
+      - "<EXISTING_WAZUH_INDEXER_NODE_NAME>"
+      - "<NEW_WAZUH_INDEXER_NODE_NAME>"
+
+-  ``discovery.seed_hosts``: List of the addresses of the master-eligible nodes. Each element can be either an IP address or a hostname. Uncomment this setting and set the IP addresses of each master-eligible node:
+
+   .. code-block:: yaml
+
+      discovery.seed_hosts:
+        - "<EXISTING_WAZUH_INDEXER_IP>"
+        - "<NEW_WAZUH_INDEXER_IP>"
+
+-  ``plugins.security.nodes_dn``: List of the distinguished names of the certificates of all the Wazuh indexer cluster nodes. Uncomment the line for ``node-2`` and change the common names (CN) and values according to your settings and your ``/root/config.yml`` definitions:
+
+   .. code-block:: yaml
+
+      plugins.security.nodes_dn:
+      - "CN=<EXISTING_WAZUH_INDEXER_NODE_NAME>,OU=Wazuh,O=Wazuh,L=California,C=US"
+      - "CN=<NEW_WAZUH_INDEXER_NODE_NAME>,OU=Wazuh,O=Wazuh,L=California,C=US"
+
+Deploying certificates
+~~~~~~~~~~~~~~~~~~~~~~
+
+Execute the following commands in the directory where the ``wazuh-certificates.tar`` file was copied to, replacing ``<NEW_WAZUH_INDEXER_NODE_NAME>`` with the name of the Wazuh indexer node you are configuring as defined in ``/root/config``.yml. For example, ``node-1``. This deploys the SSL certificates to encrypt communications between the Wazuh central components:
+
+.. code-block:: console
+
+   NODE_NAME=<NEW_WAZUH_INDEXER_NODE_NAME>
+
+.. code-block:: console
+
+   # mkdir /etc/wazuh-indexer/certs
+   # tar -xf ./wazuh-certificates.tar -C /etc/wazuh-indexer/certs/ ./$NODE_NAME.pem ./$NODE_NAME-key.pem ./admin.pem ./admin-key.pem ./root-ca.pem
+   # mv -n /etc/wazuh-indexer/certs/$NODE_NAME.pem /etc/wazuh-indexer/certs/indexer.pem
+   # mv -n /etc/wazuh-indexer/certs/$NODE_NAME-key.pem /etc/wazuh-indexer/certs/indexer-key.pem
+   # chmod 500 /etc/wazuh-indexer/certs
+   # chmod 400 /etc/wazuh-indexer/certs/*
+   # chown -R wazuh-indexer:wazuh-indexer /etc/wazuh-indexer/certs
+
+**Recommended action**: If no other Wazuh components are going to be installed on this node, remove the ``wazuh-certificates.tar`` file by running the command below to increase security. Alternatively, save a copy offline for potential future use and scalability:
+
+.. code-block:: console
+
+   # rm -f ./wazuh-certificates.tar
+
+Starting the service
+~~~~~~~~~~~~~~~~~~~~
+
+Run the following commands to start the Wazuh indexer service:
+
+      .. tabs::
+
+         .. group-tab:: SystemD
+
+            .. code-block:: console
+
+               # systemctl daemon-reload
+               # systemctl enable wazuh-indexer
+               # systemctl start wazuh-indexer
+
+         .. group-tab:: SysV init
+
+            -  RPM-based operating system
+
+               .. code-block:: console
+
+                  # chkconfig --add wazuh-indexer
+                  # service wazuh-indexer start
+
+            -  Debian-based operating system
+
+               .. code-block:: console
+
+                  # update-rc.d wazuh-indexer defaults 95 10
+                  # service wazuh-indexer start
+
+Cluster initialization
+^^^^^^^^^^^^^^^^^^^^^^
