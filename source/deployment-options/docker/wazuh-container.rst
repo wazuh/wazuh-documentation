@@ -336,7 +336,7 @@ Setting the new password
    -  ``admin`` user
 
       .. code-block:: YAML
-         :emphasize-lines: 8, 20
+         :emphasize-lines: 8, 25
 
          ...
          services:
