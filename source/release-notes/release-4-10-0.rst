@@ -46,6 +46,11 @@ Wazuh dashboard
 -  `#6964 <https://github.com/wazuh/wazuh-dashboard-plugins/issues/6964>`__ Changed Malware detection dashboard visualizations.
 -  `#6945 <https://github.com/wazuh/wazuh-dashboard-plugins/pull/6945>`__ Removed agent RBAC filters from dashboard queries.
 -  `#7001 <https://github.com/wazuh/wazuh-dashboard-plugins/pull/7001>`__ Removed ``GET /elastic/statistics`` API endpoint.
+-  `#6968 <https://github.com/wazuh/wazuh-dashboard-plugins/issues/6968>`__ Added a custom filter and visualization for ``vulnerability.under_evaluation`` field. `#7044 <https://github.com/wazuh/wazuh-dashboard-plugins/pull/7044>`__ `#7046 <https://github.com/wazuh/wazuh-dashboard-plugins/issues/7046>`__
+-  `#7032 <https://github.com/wazuh/wazuh-dashboard-plugins/pull/7032>`__ Changed MITRE ATT&CK overview description.
+-  `#7041 <https://github.com/wazuh/wazuh-dashboard-plugins/pull/7041>`__ Changed the agents summary in overview with no results to an agent deployment help message.
+-  `#7036 <https://github.com/wazuh/wazuh-dashboard-plugins/pull/7036>`__ Changed malware feature description.
+-  `#7033 <https://github.com/wazuh/wazuh-dashboard-plugins/pull/7033>`__ Changed the font size of the KPI subtitles and the features descriptions.
 
 Packages
 ^^^^^^^^
@@ -70,7 +75,11 @@ Wazuh manager
 Wazuh dashboard
 ^^^^^^^^^^^^^^^
 
--  `#7001 <https://github.com/wazuh/wazuh-dashboard-plugins/pull/7001>`__  Fixed issue where read-only users could not access the Statistics application.
+-  `#7001 <https://github.com/wazuh/wazuh-dashboard-plugins/pull/7001>`__ Fixed issue where read-only users could not access the Statistics application.
+-  `#7047 <https://github.com/wazuh/wazuh-dashboard-plugins/pull/7047>`__ Fixed the filter being displayed cropped on screens of 575px to 767px in the vulnerability detection module.
+-  `#7029 <https://github.com/wazuh/wazuh-dashboard-plugins/pull/7029>`__ Fixed no-agent alert appearing with a selected agent in the agent-welcome view.
+-  `#7042 <https://github.com/wazuh/wazuh-dashboard-plugins/pull/7042>`__ Fixed security policy exception when it contained deprecated actions.
+-  `#7048 <https://github.com/wazuh/wazuh-dashboard-plugins/pull/7048>`__ Fixed export of formatted CSV data with special characters from tables.
 
 Changelogs
 ----------
