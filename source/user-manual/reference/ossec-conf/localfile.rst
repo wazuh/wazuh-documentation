@@ -142,7 +142,7 @@ frequency
 Prevents a command from being executed in less time than the specified time (in seconds). This options can be used with *command* and *full_command*.
 
 +--------------------+--------------------------------+
-| **Default value**  | n/a                            |
+| **Default value**  | 360                            |
 +--------------------+--------------------------------+
 | **Allowed values** | any positive number of seconds |
 +--------------------+--------------------------------+
