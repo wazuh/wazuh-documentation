@@ -209,6 +209,10 @@ redirections.push(
 
 newUrls['4.9'] = [
   '/release-notes/release-4-9-0.html',
+  '/deployment-options/helm/index.html',
+  '/deployment-options/helm/chart-usage.html',
+  '/deployment-options/helm/wazuh-chart-values.html',
+  '/deployment-options/helm/upgrading-wazuh-helm.html',
   '/deployment-options/offline-installation/index.html',
   '/deployment-options/offline-installation/step-by-step.html',
   '/deployment-options/offline-installation/installation-assistant.html',
