@@ -41,7 +41,7 @@ To upgrade your deployment keeping your custom docker-compose files, do the foll
 
 #. Run the following command from your wazuh-docker directory, such as ``wazuh-docker/single-node/`` or ``wazuh-docker/multi-node/``, to stop the outdated environment:
 
-   .. code-block::
+   .. code-block:: console
 
       # docker-compose down
 
@@ -229,6 +229,6 @@ To upgrade your deployment keeping your custom docker-compose files, do the foll
 
 #. Start the new version of Wazuh using ``docker-compose``.
 
-   .. code-block::
+   .. code-block:: console
 
       # docker-compose up -d

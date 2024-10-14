@@ -66,8 +66,8 @@ Keeping custom manifests
 
 To upgrade your deployment keeping your custom manifests, do the following.
 
-#. If you are upgrading from v4.3.0, :ref:`update the Java Opts variable name <updating_java_opts>` with the new one.
-#. If you are upgrading from 4.3, :ref:`update old paths <updating_old_paths>` with the new ones.
+#. If you are upgrading from version 4.3, :ref:`update the Java Opts variable name <updating_java_opts>` with the new one.
+#. If you are upgrading from version 4.3, :ref:`update old paths <updating_old_paths>` with the new ones.
 #. If you are upgrading from a version earlier than 4.8, :ref:`update configuration parameters <updating_configuraton_parameters>`.
 #. :ref:`Modify tags of Wazuh images <modifying_tags>`.
 
@@ -78,7 +78,7 @@ Next, :ref:`apply the new configuration <apply_the_new_configuration>`.
 Updating Java Opts variable name
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-#. If you are upgrading from v4.3.0, you must replace ``ES_JAVA_OPTS`` with ``OPENSEARCH_JAVA_OPTS`` and modify the value.
+#. If you are upgrading from version 4.3, you must replace ``ES_JAVA_OPTS`` with ``OPENSEARCH_JAVA_OPTS`` and modify the value.
 
    -  ``wazuh/wazuh_managers/wazuh-master-sts.yaml``
 
