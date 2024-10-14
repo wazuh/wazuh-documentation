@@ -121,7 +121,7 @@ Once the instance is running and the process to initialize passwords is complete
 
 .. warning::
 
-   The password for the server API users ``wazuh`` and ``wazuh-wui`` is the same  as the ``admin`` user's password. It is highly recommended to change the default passwords in the first SSH access. To perform this action, refer to the :doc:`/user-manual/user-administration/password-management` section.
+   The password for the server API users ``wazuh`` and ``wazuh-wui`` is the same  as the ``admin`` user's password. We highly recommend to change the default passwords in the first SSH access. To perform this action, refer to the :doc:`/user-manual/user-administration/password-management` section.
 
 Security considerations about SSH
 ---------------------------------
