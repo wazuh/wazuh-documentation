@@ -86,7 +86,7 @@ Run the following command on any Wazuh central component that is allowed to auth
 
 For example:
 
-.. code-block:: console
+.. code-block:: none
 
    root@wazuh-server:~$ curl -k -u "INDEXER_USERNAME:INDEXER_PASSWORD" -XPOST "https://<INDEXER_IP_ADDRESS>:9200/_reindex" -H 'Content-Type: application/json' -d'
    {

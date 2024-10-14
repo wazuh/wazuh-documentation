@@ -13,6 +13,8 @@ This section provides the following information about the Wazuh indexer cluster:
    :depth: 1
    :backlinks: none
 
+.. _certificates_deployment:
+
 Certificates deployment
 -----------------------
 

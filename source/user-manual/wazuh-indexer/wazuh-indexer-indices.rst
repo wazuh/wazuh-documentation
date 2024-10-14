@@ -12,7 +12,7 @@ An index is a collection of documents that relate to each other. The Wazuh index
 -  :ref:`wazuh‑archives-* <wazuh_archives_indices>`: This is the index pattern for all events sent to the Wazuh server.
 -  :ref:`wazuh‑monitoring-* <wazuh_monitoring_indices>`: This is the index pattern for the status of the Wazuh agents.
 -  :ref:`wazuh‑statistics-* <wazuh_statistics_indices>`: This is the index pattern for statistical information of the Wazuh server.
--  :ref:`wazuh-states-vulnerabilities-* <>`: - This is the index pattern for information about vulnerabilities detected in the endpoints being monitored.
+-  :ref:`wazuh-states-vulnerabilities-* <wazuh_states_vulnerabilities_indices>`: - This is the index pattern for information about vulnerabilities detected in the endpoints being monitored.
 
 To further customize the index pattern for alerts, you can create a custom index pattern.
 
@@ -476,6 +476,8 @@ To visualize this information in the Wazuh dashboard, go to **Server management*
    :alt: Statistics analysis engine dashboard
    :align: center
    :width: 80%
+
+.. _wazuh_states_vulnerabilities_indices:
 
 The wazuh-states-vulnerabilities-* indices
 ------------------------------------------
