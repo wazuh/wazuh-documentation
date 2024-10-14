@@ -779,3 +779,232 @@ Run the following commands to start the Wazuh indexer service:
 
 Cluster initialization
 ^^^^^^^^^^^^^^^^^^^^^^
+
+#. Run the Wazuh indexer ``indexer-security-init.sh`` script on any Wazuh indexer node to load the new certificate information and start the cluster:
+
+   .. code-block:: console
+
+      # /usr/share/wazuh-indexer/bin/indexer-security-init.sh
+
+   .. note::
+
+      You only have to initialize the cluster once, there is no need to run this command on every node.
+
+#. Confirm the configurations work by running the command below on your Wazuh server node:
+
+   .. code-block:: console
+
+      # filebeat test output
+
+   An example output is shown below:
+
+   .. code-block:: none
+      :class: output
+      :emphasize-lines: 1, 10, 13, 15, 24, 27
+
+      elasticsearch: https://10.0.0.1:9200...
+        parse url... OK
+        connection...
+          parse host... OK
+          dns lookup... OK
+          addresses: 10.0.0.1
+          dial up... OK
+        TLS...
+          security: server's certificate chain verification is enabled
+          handshake... OK
+          TLS version: TLSv1.3
+          dial up... OK
+        talk to server... OK
+        version: 7.10.2
+      elasticsearch: https://10.0.0.2:9200...
+        parse url... OK
+        connection...
+          parse host... OK
+          dns lookup... OK
+          addresses: 10.0.0.2
+          dial up... OK
+        TLS...
+          security: server's certificate chain verification is enabled
+          handshake... OK
+          TLS version: TLSv1.3
+          dial up... OK
+        talk to server... OK
+        version: 7.10.2
+
+Testing the cluster
+^^^^^^^^^^^^^^^^^^^
+
+After completing the above steps, you can proceed to test your cluster and ensure that the indexer node has been successfully added. There are two possible methods to do this:
+
+.. contents::
+   :local:
+   :depth: 1
+   :backlinks: none
+
+Using the securityadmin script
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+The ``securityadmin`` script helps configure and manage the security settings of OpenSearch. The script lets you load, backup, restore, and migrate the security configuration files to the Wazuh indexer cluster.
+
+Run  the command below on any of the Wazuh indexer nodes to execute the ``securityadmin`` script and initialize the cluster:
+
+.. code-block:: console
+
+   # /usr/share/wazuh-indexer/bin/indexer-security-init.sh
+
+The output should be similar to the one below. It should show the number of Wazuh indexer nodes in the cluster:
+
+.. code-block:: none
+   :class: output
+   :emphasize-lines: 11-13
+
+   **************************************************************************
+   ** This tool will be deprecated in the next major release of OpenSearch **
+   ** https://github.com/opensearch-project/security/issues/1755           **
+   **************************************************************************
+   Security Admin v7
+   Will connect to 192.168.21.152:9200 ... done
+   Connected as "CN=admin,OU=Wazuh,O=Wazuh,L=California,C=US"
+   OpenSearch Version: 2.6.0
+   Contacting opensearch cluster 'opensearch' and wait for YELLOW clusterstate ...
+   Clustername: wazuh-cluster
+   Clusterstate: GREEN
+   Number of nodes: 2
+   Number of data nodes: 2
+   .opendistro_security index already exists, so we do not need to create one.
+   Populate config from /etc/wazuh-indexer/opensearch-security/
+   Will update '/config' with /etc/wazuh-indexer/opensearch-security/config.yml
+      SUCC: Configuration for 'config' created or updated
+   Will update '/roles' with /etc/wazuh-indexer/opensearch-security/roles.yml
+      SUCC: Configuration for 'roles' created or updated
+   Will update '/rolesmapping' with /etc/wazuh-indexer/opensearch-security/roles_mapping.yml
+      SUCC: Configuration for 'rolesmapping' created or updated
+   Will update '/internalusers' with /etc/wazuh-indexer/opensearch-security/internal_users.yml
+      SUCC: Configuration for 'internalusers' created or updated
+   Will update '/actiongroups' with /etc/wazuh-indexer/opensearch-security/action_groups.yml
+      SUCC: Configuration for 'actiongroups' created or updated
+   Will update '/tenants' with /etc/wazuh-indexer/opensearch-security/tenants.yml
+      SUCC: Configuration for 'tenants' created or updated
+   Will update '/nodesdn' with /etc/wazuh-indexer/opensearch-security/nodes_dn.yml
+      SUCC: Configuration for 'nodesdn' created or updated
+   Will update '/whitelist' with /etc/wazuh-indexer/opensearch-security/whitelist.yml
+      SUCC: Configuration for 'whitelist' created or updated
+   Will update '/audit' with /etc/wazuh-indexer/opensearch-security/audit.yml
+      SUCC: Configuration for 'audit' created or updated
+   Will update '/allowlist' with /etc/wazuh-indexer/opensearch-security/allowlist.yml
+      SUCC: Configuration for 'allowlist' created or updated
+   SUCC: Expected 10 config types for node {"updated_config_types":["allowlist","tenants","rolesmapping","nodesdn","audit","roles","whitelist","internalusers","actiongroups","config"],"updated_config_size":10,"message":null} is 10 (["allowlist","tenants","rolesmapping","nodesdn","audit","roles","whitelist","internalusers","actiongroups","config"]) due to: null
+   SUCC: Expected 10 config types for node {"updated_config_types":["allowlist","tenants","rolesmapping","nodesdn","audit","roles","whitelist","internalusers","actiongroups","config"],"updated_config_size":10,"message":null} is 10 (["allowlist","tenants","rolesmapping","nodesdn","audit","roles","whitelist","internalusers","actiongroups","config"]) due to: null
+   Done with success
+
+Using the Wazuh indexer API
+~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+You can also get information about the number of nodes in the cluster by using the Wazuh indexer API.
+
+Run the command below on any of the Wazuh indexer nodes and check the output for the field ``number_of_nodes`` to ensure it corresponds to the expected number of Wazuh indexer nodes:
+
+.. code-block:: console
+
+   # curl -XGET https:/<EXISTING_WAZUH_INDEXER_IP>:9200/_cluster/health?pretty -u admin:<ADMIN-PASSWORD> -k
+
+Replace:
+
+-  ``<EXISTING_WAZUH_INDEXER_IP>`` with the IP address of any of your indexer nodes.
+-  ``<ADMIN-PASSWORD>`` with your administrator password.
+
+The output of the command should be similar to the following:
+
+.. code-block:: none
+   :class: output
+   :emphasize-lines: 5-6
+
+   {
+     "cluster_name" : "wazuh-cluster",
+     "status" : "green",
+     "timed_out" : false,
+     "number_of_nodes" : 2,
+     "number_of_data_nodes" : 2,
+     "discovered_master" : true,
+     "discovered_cluster_manager" : true,
+     "active_primary_shards" : 11,
+     "active_shards" : 20,
+     "relocating_shards" : 0,
+     "initializing_shards" : 0,
+     "unassigned_shards" : 0,
+     "delayed_unassigned_shards" : 0,
+     "number_of_pending_tasks" : 0,
+     "number_of_in_flight_fetch" : 0,
+     "task_max_waiting_in_queue_millis" : 0,
+     "active_shards_percent_as_number" : 100.0
+   }
+
+You can access the Wazuh dashboard with your credentials.
+
+-  URL: ``https://<WAZUH_DASHBOARD_IP>``
+-  Username: ``admin``
+-  Password: ``<ADMIN_PASSWORD>`` or ``admin`` in case you already have a distributed architecture and using the default password.
+
+After the above steps are completed, your new node(s) will now be part of your cluster and your infrastructure distributed.
+
+Cluster management
+------------------
+
+Using the Wazuh indexer API
+^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Perform the following cluster management queries on the Wazuh dashboard console by navigating to **Indexer management** > **Dev Tools**.
+
+-  Check the general Wazuh indexer cluster health:
+
+   .. code-block:: none
+
+      GET _cluster/health
+
+-  To check cluster health based on awareness attribute, use the following:
+
+   .. code-block:: none
+
+      GET _cluster/health?level=awareness_attributes
+
+-  To check the cluster health based on a specific index, use the following:
+
+   .. code-block:: none
+
+      GET _cluster/health/<INDEX-PATTERN>
+
+-  List all Wazuh indexer nodes and their roles:
+
+   .. code-block:: none
+
+      GET _cat/nodes
+
+-  Check the Wazuh indexer node where an index is stored:
+
+   .. code-block:: none
+
+      GET _cat/shards/wazuh-alerts-*?v
+
+-  Check ISM policy for an index pattern:
+
+   .. code-block:: none
+
+      GET _opendistro/_ism/explain/wazuh-alerts-*
+
+-  Check statistics about the Wazuh indexer cluster:
+
+   .. code-block:: none
+
+      GET _cluster/stats/nodes/*
+
+-  Check storage allocation. This can be used to determine if the Wazuh indexer node is full. If the indexer node is full, implement the :doc:`index lifecycle management <index-life-management>` to free up old indices.
+
+   .. code-block:: none
+
+      GET _cat/allocation?v&s=node
+
+-  Check Wazuh indexer node attributes:
+
+   .. code-block:: none
+
+      GET _cat/nodeattrs?v&h=node,attr,value
