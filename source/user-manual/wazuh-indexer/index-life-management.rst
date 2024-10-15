@@ -285,7 +285,7 @@ Apply the ISM policy to existing indices
 #. Select the ``hot-warm``  policy in Policy ID.
 #. Click **Apply** to add the policy to the selected indices.
 
-   .. thumbnail:: /images/manual/wazuh-indexer/apply-ism-policy-to-indices.png
+   .. thumbnail:: /images/manual/wazuh-indexer/apply-ism-policy-to-indices.gif
       :title: Apply the ISM policy to indices
       :alt: Apply the ISM policy to indices
       :align: center

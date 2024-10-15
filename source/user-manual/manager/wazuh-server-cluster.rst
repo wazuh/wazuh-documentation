@@ -354,6 +354,8 @@ Ensure you select the appropriate sub-section based on your existing deployment.
 
    You need root user privileges to execute the commands below.
 
+.. _server_cluster_certificates_creation:
+
 Certificates creation
 ^^^^^^^^^^^^^^^^^^^^^
 

@@ -225,7 +225,7 @@ The wazuh‑alerts-* indices
 
 The Wazuh server analyzes events received from monitored endpoints and generates alerts when the events match a detection rule. These alerts are saved using the ``wazuh-alerts-*`` indices.
 
-The Wazuh server logs the alert data into the ``/var/ossec/logs/alerts/alerts.json`` and ``/var/ossec/logs/alerts/alerts.log`` files by default. Once saved in the ``/var/ossec/logs/alerts/alerts.json`` file, it forwards the JSON alert document to the ``/var/lib/wazuh-indexer/`` directory of the Wazuh indexer for indexing.
+The Wazuh server logs the alert data into the ``/var/ossec/logs/alerts/alerts.json`` and ``/var/ossec/logs/alerts/alerts.log`` files by default. Once saved in the ``/var/ossec/logs/alerts/alerts.json`` file, it forwards the JSON alert document to the Wazuh indexer API for indexing. The indexed files are stored in the ``/var/lib/wazuh-indexer/nodes/0/indices`` directory of the Wazuh indexer.
 
 When forwarding alerts to the Wazuh indexer, the Wazuh server formats the current date into an index name. For example, the Wazuh server will define the index names ``wazuh-alerts-4.x-2023.03.17`` and ``wazuh-alerts-4.x-2023.03.18`` for March 17th and 18th alerts, respectively. The Wazuh indexer then creates alert indices using the defined ``wazuh‑alerts-*`` index names.
 
