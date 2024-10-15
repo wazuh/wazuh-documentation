@@ -175,6 +175,16 @@ redirections.push(
   },
   {
     'target': ['4.8=>4.9', '4.9=>4.8'],
+    '4.8': '/user-manual/upscaling/adding-indexer-node.html',
+    '4.9': '/user-manual/wazuh-indexer/wazuh-indexer-cluster.html#adding-wazuh-indexer-nodes',
+  },
+  {
+    'target': ['4.8=>4.9', '4.9=>4.8'],
+    '4.8': '/user-manual/upscaling/adding-server-node.html',
+    '4.9': '/user-manual/manager/wazuh-server-cluster.html#adding-new-wazuh-server-nodes',
+  },
+  {
+    'target': ['4.8=>4.9', '4.9=>4.8'],
     '4.8': '/migration-guide/files-backup/index.html',
     '4.9': '/migration-guide/index.html',
   },
@@ -277,6 +287,9 @@ removedUrls['4.9'] = [
   '/user-manual/capabilities/policy-monitoring/rootcheck/rootcheck-configuration.html',
   '/user-manual/capabilities/policy-monitoring/rootcheck/rootcheck-faq.html',
   '/user-manual/capabilities/policy-monitoring/ciscat/ciscat.html',
+  '/user-manual/upscaling/index.html',
+  '/user-manual/upscaling/adding-indexer-node.html',
+  '/user-manual/upscaling/adding-server-node.html',
   '/migration-guide/wazuh-indexer.html',
   '/migration-guide/wazuh-dashboard.html',
   '/migration-guide/files-backup/index.html',
