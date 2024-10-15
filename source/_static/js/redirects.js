@@ -165,6 +165,11 @@ redirections.push(
   },
   {
     'target': ['4.8=>4.9', '4.9=>4.8'],
+    '4.8': '/user-manual/wazuh-indexer/certificates.html',
+    '4.9': '/user-manual/wazuh-indexer/wazuh-indexer-cluster.html#certificates-deployment',
+  },
+  {
+    'target': ['4.8=>4.9', '4.9=>4.8'],
     '4.8': '/user-manual/capabilities/policy-monitoring/rootcheck/index.html',
     '4.9': '/user-manual/capabilities/malware-detection/rootkits-behavior-detection.html',
   },
@@ -232,6 +237,7 @@ newUrls['4.9'] = [
   '/user-manual/agent/agent-management/remote-upgrading/wpk-files/wpk-list.html',
   '/user-manual/wazuh-dashboard/navigating-the-wazuh-dashboard.html',
   '/user-manual/wazuh-dashboard/settings.html',
+  '/user-manual/wazuh-indexer/wazuh-indexer-cluster.html',
   '/cloud-service/your-environment/custom-dns.html',
   '/migration-guide/creating/index.html',
   '/migration-guide/creating/wazuh-agent.html',
@@ -260,6 +266,7 @@ removedUrls['4.9'] = [
   '/user-manual/agent/agent-management/remote-upgrading/wpk-list.html',
   '/user-manual/wazuh-dashboard/config-file.html',
   '/user-manual/wazuh-dashboard/management.html',
+  '/user-manual/wazuh-indexer/certificates.html',
   '/user-manual/capabilities/policy-monitoring/index.html',
   '/user-manual/capabilities/policy-monitoring/openscap/index.html',
   '/user-manual/capabilities/policy-monitoring/openscap/how-it-works.html',
