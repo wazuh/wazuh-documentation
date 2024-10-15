@@ -252,7 +252,7 @@ Perform the steps below on one indexer node only.
 
       # touch /root/config.yml
 
-   Edit the ``/root/config.yml`` file to include the node name and IP of the new node. Replace the values with your node names and their corresponding IP addresses:
+#. Edit the ``/root/config.yml`` file to include the node name and IP of the new node. Replace the values with your node names and their corresponding IP addresses:
 
    .. code-block:: yaml
       :emphasize-lines: 4, 5
