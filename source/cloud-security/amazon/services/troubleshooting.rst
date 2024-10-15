@@ -1,76 +1,79 @@
 .. Copyright (C) 2015, Wazuh, Inc.
 
 .. meta::
-  :description: Frequently asked questions about the Wazuh module for Amazon. Learn more about it in this section of the documentation.
-
-.. _amazon_troubleshooting:
+   :description: This section is intended to assist in troubleshooting issues.
 
 Troubleshooting
 ===============
 
 The below information is intended to assist in troubleshooting issues.
 
-Checking if the module is running
----------------------------------
+Checking if the Wazuh module for AWS is running
+-----------------------------------------------
 
-When the module runs it writes its output in the ``ossec.log`` file. This log file can be found in ``WAZUH_PATH/logs/ossec.log`` or under **App Logs** if using the Wazuh UI.
+When the Wazuh module for AWS runs it writes its output in the ``ossec.log`` file. This log file can be found in ``/var/ossec/logs/ossec.log`` or under **Wazuh** > **Management** > **Logs** if you use the Wazuh dashboard. It is possible to check if the Wazuh module for AWS is running without issues by looking in the ``/var/ossec/logs/ossec.log`` file. These are the messages that are displayed in the file depending on how the Wazuh module for AWS has been configured:
 
-It is possible to check if the module is running without issues by looking in the ``ossec.log`` file. These are the messages that are displayed in the ``ossec.log``, depending on how the module has been configured:
+-  When the Wazuh module for AWS is starting:
 
-- When the module is starting:
+   .. code-block:: none
+      :class: output
 
-    .. code-block:: none
-        :class: output
+      2022/03/04 00:00:00 wazuh-modulesd:aws-s3: INFO: Module AWS started
+      2022/03/04 00:00:00 wazuh-modulesd:aws-s3: INFO: Starting fetching of logs.
 
-        2022/03/04 00:00:00 wazuh-modulesd:aws-s3: INFO: Module AWS started
-        2022/03/04 00:00:00 wazuh-modulesd:aws-s3: INFO: Starting fetching of logs.
+-  When Scheduled scan is set:
 
+   .. code-block:: none
+      :class: output
 
-- When Scheduled scan is set:
+      2022/03/04 00:00:00 wazuh-modulesd:aws-s3: INFO: Starting fetching of logs.
+      2022/03/04 00:00:00 wazuh-modulesd:aws-s3: INFO: Fetching logs finished.
 
-    .. code-block:: none
-        :class: output
+-  When the Wazuh module for AWS has finished its execution and is waiting until the :ref:`aws_interval` condition is met:
 
-        2022/03/04 00:00:00 wazuh-modulesd:aws-s3: INFO: Starting fetching of logs.
-        2022/03/04 00:00:00 wazuh-modulesd:aws-s3: INFO: Fetching logs finished.
+   .. code-block:: none
+      :class: output
 
-
-- When the module has finished its execution and is waiting until the :ref:`aws_interval` condition is met:
-
-    .. code-block:: none
-        :class: output
-
-        2022/03/04 00:00:00 wazuh-modulesd:aws-s3: INFO: Fetching logs finished.
+      2022/03/04 00:00:00 wazuh-modulesd:aws-s3: INFO: Fetching logs finished.
 
 .. _aws_debug_mode:
 
 Enabling debug mode
 -------------------
 
-It is possible to obtain additional information about the module's execution by enabling the debug mode. This is used to see ``INFO`` or ``DEBUG`` messages. There are three different debug levels available:
+It is possible to obtain additional information about the Wazuh module for AWS execution by enabling the debug mode. This is used to see ``INFO`` or ``DEBUG`` messages. There are three different debug levels available:
 
-- **Debug level 0**: Only ``ERROR`` and ``WARNING`` messages are written in the ``ossec.log`` file. This is the default value.
+- **Debug level 0**: Only ``ERROR`` and ``WARNING`` messages are written in the ``/var/ossec/logs/ossec.log`` file. This is the default value.
 
-- **Debug level 1**: In addition to ``ERROR`` and ``WARNING`` messages, ``INFO`` messages are written in the ``ossec.log`` file too. They are useful to check the execution of the module without having to manage large amounts of ``DEBUG`` messages.
+- **Debug level 1**: In addition to ``ERROR`` and ``WARNING`` messages, ``INFO`` messages are written in the ``/var/ossec/logs/ossec.log`` file too. They are useful to check the execution of the module without having to manage large amounts of ``DEBUG`` messages.
 
-- **Debug level 2**: This is the highest level of verbosity. Every message type is dump into the ``ossec.log`` file, including ``DEBUG`` messages which contain the details of the different operations performed by the module. This is the recommended mode when troubleshooting the module.
-
+- **Debug level 2**: This is the highest level of verbosity. Every message type is dump into the ``/var/ossec/logs/ossec.log`` file, including ``DEBUG`` messages which contain the details of the different operations performed by the Wazuh module. This is the recommended mode when troubleshooting the Wazuh module for AWS.
 
 Follow these steps to enable debug mode:
 
-#. Add the following line to the ``WAZUH_PATH/etc/local_internal_options.conf`` file, specifying the desired debug level:
+#. Add the following line to the ``/var/ossec/etc/local_internal_options.conf`` file of the Wazuh server or agent, specifying the desired debug level:
 
-    .. code-block:: none
+   .. code-block:: none
 
-        wazuh_modules.debug=2
-
+      wazuh_modules.debug=2
 
 #. Restart the Wazuh service.
 
-.. include:: /_templates/common/restart_manager_or_agent.rst
+   Wazuh manager
 
-.. Note::
-        Don't forget to disable debug mode once the troubleshooting has finished. Leaving debug mode enabled could result in the addition of large amounts of logs in the ``ossec.log`` file.
+   .. code-block:: console
+
+      # systemctl restart wazuh-manager
+
+   Wazuh agent
+
+   .. code-block:: console
+
+      # systemctl restart wazuh-agent
+
+.. note::
+
+   Don't forget to disable debug mode once the troubleshooting has finished. Leaving debug mode enabled could result in the addition of large amounts of logs in the ``/var/ossec/logs/ossec.log`` file.
 
 .. _aws_events_processed:
 
@@ -79,17 +82,17 @@ Checking if logs are being processed
 
 The easiest way to check if the logs are being processed, regardless of the type of bucket or service configured and regardless of whether alerts are being generated or not is by using the :ref:`reference_ossec_global_logall_json` parameter.
 
-To understand how the :ref:`reference_ossec_global_logall_json` parameter works it is necessary to learn about the flow that is followed when processing a log until the corresponding alert is displayed in the Wazuh UI. It is as follows:
+To understand how the :ref:`reference_ossec_global_logall_json` parameter works it is necessary to learn about the flow that is followed when processing a log until the corresponding alert is displayed on the Wazuh dashboard. It is as follows:
 
-#. The module downloads the logs available in AWS for the requested date and path. Check the :doc:`prerequisites/considerations` page to learn more about how to properly filter the logs.
+#. The Wazuh module for AWS downloads the logs available in AWS for the requested date and path. Check the :doc:`prerequisites/considerations` page to learn more about how to properly filter the logs.
 #. The content of these logs is sent to the analysis engine in the form of an ``Event``.
-#. The analysis engine evaluates these events and compares them with the different rules available. If the event matches any of the rules an alert is generated, which is what ultimately is shown in the Wazuh UI.
+#. The analysis engine evaluates these events and compares them with the different rules available. If the event matches any of the rules an alert is generated, which is what ultimately is shown on the Wazuh dashboard.
 
-With this in mind, it is possible to make use of the :ref:`reference_ossec_global_logall_json` option. When this option is activated, Wazuh stores into the ``WAZUH_PATH/logs/archives/archives.json`` file every event sent to the analysis engine whether they tripped a rule or not. By checking this file, it is possible to determine if the AWS events are being sent to the analysis engine and therefore the module is working as expected.
+With this in mind, it is possible to enable the :ref:`Wazuh archives <archiving_event_logs>` using the :ref:`logall_json <reference_ossec_global_logall_json>` option. When this option is activated, Wazuh stores into the ``/var/ossec/logs/archives/archives.json`` file every event sent to the analysis engine whether they tripped a rule or not. By checking this file, it is possible to determine if the AWS events are being sent to the analysis engine and therefore the Wazuh module for AWS is working as expected.
 
-.. Note::
-        Don't forget to disable the :ref:`reference_ossec_global_logall_json` parameter once the troubleshooting has finished. Leaving it enabled could result in high disk space consumption.
+.. note::
 
+   Don't forget to disable the :ref:`reference_ossec_global_logall_json` parameter once the troubleshooting has finished. Leaving it enabled could result in high disk space consumption.
 
 Common problems and solutions
 -----------------------------
