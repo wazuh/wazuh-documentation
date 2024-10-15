@@ -572,7 +572,7 @@ You need to have a new installation of a Wazuh server. Follow the :doc:`Wazuh se
    .. code-block:: console
 
       # sudo cp var/ossec/queue/db/* /var/ossec/queue/db/ 
-      # chown -R root:wazuh /var/ossec/queue/db/
+      # chown -R wazuh:wazuh /var/ossec/queue/db/
 
 #. Start the Filebeat service:
 
