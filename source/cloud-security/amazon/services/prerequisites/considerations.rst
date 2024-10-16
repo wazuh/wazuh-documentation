@@ -110,6 +110,8 @@ To collect and process older logs loaded into the S3 bucket, you need to run the
 
 The ``--debug 2`` parameter produces verbose output. This is useful to show the script is working, especially when handling a large amount of data.
 
+.. _connection_configuration_for_retries:
+
 Connection configuration for retries
 ------------------------------------
 
