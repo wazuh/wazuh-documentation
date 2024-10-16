@@ -24,6 +24,8 @@ AWS configuration
 
 The following sections cover how to configure Custom Logs Buckets to integrate with Wazuh.
 
+.. _sqs_custom_configuration:
+
 Amazon Simple Queue Service
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
@@ -72,7 +74,7 @@ To configure an S3 bucket that reports creation events, do the following.
 
 #. Choose the queue you created previously.
 
-.. _custom_logs_buckets_configuration_parameters::
+.. _custom_logs_buckets_configuration_parameters:
 
 Configuration parameters
 ------------------------

@@ -71,6 +71,8 @@ Amazon Inspector Classic configuration
       :align: center
       :width: 80%
 
+.. _inspector_policy_configuration:
+
 Policy configuration
 ^^^^^^^^^^^^^^^^^^^^
 

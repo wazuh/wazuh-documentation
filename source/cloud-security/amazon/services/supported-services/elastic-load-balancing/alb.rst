@@ -41,6 +41,8 @@ Amazon ALB configuration
 
       -  `Application Load Balancer <https://docs.aws.amazon.com/elasticloadbalancing/latest/application/load-balancer-access-logs.html>`__.
 
+.. _alb_policy_configuration:
+
 Policy configuration
 ^^^^^^^^^^^^^^^^^^^^
 

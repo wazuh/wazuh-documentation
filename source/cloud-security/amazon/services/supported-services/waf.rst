@@ -112,6 +112,8 @@ Send logs from your Web Access Control Lists (web ACLs) to the previously create
       :align: center
       :width: 80%
 
+.. _waf_policy_configuration:
+
 Policy configuration
 ^^^^^^^^^^^^^^^^^^^^
 

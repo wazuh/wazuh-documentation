@@ -52,6 +52,8 @@ Amazon S3 server access configuration
 
 #. Finally, click on the **Save changes**. S3 Server Access logs will start to be stored in the specified path.
 
+.. _server_access_policy_configuration:
+
 Policy configuration
 ^^^^^^^^^^^^^^^^^^^^
 

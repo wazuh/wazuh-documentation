@@ -83,6 +83,8 @@ Follow these steps in your Amazon deployment to verify that parquet files are fl
 
 #. In each applicable S3 bucket, navigate to the **Properties** tab and verify in the **Event notifications** section that the data destination is the Security Lake SQS queue.
 
+.. _security_lake_policy_configuration:
+
 Policy configuration
 ^^^^^^^^^^^^^^^^^^^^
 

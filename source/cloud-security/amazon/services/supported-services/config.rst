@@ -86,7 +86,7 @@ AWS Config configuration
 
 #. Create or select an existing IAM role for AWS Config.
 
-   .. thumbnail:: /images/cloud-security/aws/config/.png
+   .. thumbnail:: /images/cloud-security/aws/config/get-iam-role-for-aws-config.png
       :align: center
       :width: 80%
 
@@ -150,6 +150,8 @@ Configure an Amazon EventBridge rule to send Config events to the Amazon Data Fi
       :width: 80%
 
 Once the rule is created, every time an AWS Config event is sent, it will be stored in the specified S3 bucket. Remember to first enable the AWS Config service, otherwise, you won't get any data.
+
+.. _config_policy_configuration:
 
 Policy configuration
 ^^^^^^^^^^^^^^^^^^^^

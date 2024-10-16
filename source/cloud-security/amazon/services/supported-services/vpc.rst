@@ -41,6 +41,8 @@ The following sections cover how to configure the Amazon VPC service to integrat
       :align: center
       :width: 80%
 
+.. _vpc_policy_configuration:
+
 Policy configuration
 ^^^^^^^^^^^^^^^^^^^^
 

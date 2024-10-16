@@ -22,6 +22,8 @@ Amazon CloudWatch configuration
 
 AWS CloudWatch logs can be accessed by using the Wazuh CloudWatch Logs integration. The AWS API allows Wazuh to retrieve those logs, analyze them, and raise alerts if applicable.
 
+.. _cloudwatch_policy_configuration:
+
 Policy configuration
 ^^^^^^^^^^^^^^^^^^^^
 

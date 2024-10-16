@@ -41,6 +41,8 @@ Amazon CLB configuration
 
       -  `Classic Load Balancer <https://docs.aws.amazon.com/elasticloadbalancing/latest/classic/enable-access-logs.html>`__.
 
+.. _clb_policy_configuration:
+
 Policy configuration
 ^^^^^^^^^^^^^^^^^^^^
 

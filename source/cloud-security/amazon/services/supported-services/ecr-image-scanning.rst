@@ -35,6 +35,8 @@ Uploading the template and creating a stack, uploading the images to Amazon ECR,
 
 Take into account that the policies below follow the principle of least privilege to ensure that only the minimum permissions are provided to the AWS IAM user.
 
+.. _ecr_policy_configuration:
+
 Policy configuration
 ^^^^^^^^^^^^^^^^^^^^
 

@@ -62,6 +62,8 @@ Amazon CloudTrail configuration
       :align: center
       :width: 80%
 
+.. _cloudtrail_policy_configuration:
+
 Policy configuration
 ^^^^^^^^^^^^^^^^^^^^
 
@@ -143,7 +145,7 @@ When a user creates a new instance in EC2, a CloudTrail event is generated. As p
    :align: center
    :width: 80%
 
-.. thumbnail:: /images/cloud-security/aws/ec2/
+.. thumbnail:: /images/cloud-security/aws/ec2/1.1.run-a-new-instance-in-ec2.png
    :align: center
    :width: 80%
 

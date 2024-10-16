@@ -118,6 +118,8 @@ Configure an Amazon EventBridge rule to send KMS events to the Amazon Data Fireh
 
 Once the rule is created, data will start to be sent to the previously created S3 bucket. Remember to first enable the service you want to monitor, otherwise, you won't get any data.
 
+.. _kms_policy_configuration:
+
 Policy configuration
 ^^^^^^^^^^^^^^^^^^^^
 

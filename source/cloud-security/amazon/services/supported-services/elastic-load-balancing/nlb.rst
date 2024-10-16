@@ -41,6 +41,8 @@ Amazon NLB configuration
 
       -  `Network Load Balancer <https://docs.aws.amazon.com/elasticloadbalancing/latest/network/load-balancer-access-logs.html>`__.
 
+.. _nlb_policy_configuration:
+
 Policy configuration
 ^^^^^^^^^^^^^^^^^^^^
 

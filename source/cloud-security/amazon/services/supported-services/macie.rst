@@ -142,6 +142,8 @@ Amazon Macie configuration
 
 Once enabled, Macie provides visibility into data security risks and enables automated protection against those risks. Check the `official AWS documentation <https://aws.amazon.com/macie/>`__ to learn more about the service.
 
+.. _macie_policy_configuration:
+
 Policy configuration
 ^^^^^^^^^^^^^^^^^^^^
 

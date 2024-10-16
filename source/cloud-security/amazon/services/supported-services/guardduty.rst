@@ -63,6 +63,8 @@ Amazon GuardDuty configuration
       :align: center
       :width: 80%
 
+.. _guardduty_policy_configuration:
+
 Policy configuration
 ^^^^^^^^^^^^^^^^^^^^
 
