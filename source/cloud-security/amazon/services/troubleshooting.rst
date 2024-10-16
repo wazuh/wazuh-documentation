@@ -100,162 +100,165 @@ Common problems and solutions
 Unable to locate credentials
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-The module does not work and the following error messages appear in the ``ossec.log``:
+The Wazuh module for AWS does not work and the following error messages appear in the ``/var/ossec/logs/ossec.log`` file:
 
-    .. code-block:: none
-        :class: output
+.. code-block:: none
+   :class: output
 
-        2022/03/03 16:01:48 wazuh-modulesd:aws-s3: WARNING: Bucket:  -  Returned exit code 12
-        2022/03/03 16:01:48 wazuh-modulesd:aws-s3: WARNING: Bucket:  -  Unable to locate credentials
+   2022/03/03 16:01:48 wazuh-modulesd:aws-s3: WARNING: Bucket:  -  Returned exit code 12
+   2022/03/03 16:01:48 wazuh-modulesd:aws-s3: WARNING: Bucket:  -  Unable to locate credentials
 
-**Solution**
+Solution
+~~~~~~~~
 
-No authentication method was provided within the configuration of the module. Check the :doc:`Configuring AWS credentials <prerequisites/credentials>` section to learn more about the different options available and how to configure them.
+No authentication method was provided within the configuration of the Wazuh module for AWS. Check the :doc:`prerequisites/credentials` section to learn more about the different options available and how to configure them.
 
 
 Invalid credentials to access S3 Bucket
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-The module does not work and the following error messages appear in the ``ossec.log``:
+The Wazuh module for AWS does not work and the following error messages appear in the ``/var/ossec/logs/ossec.log`` file:
 
-    .. code-block:: none
-        :class: output
+.. code-block:: none
+   :class: output
 
-        2022/03/03 16:06:56 wazuh-modulesd:aws-s3: WARNING: Bucket:  -  Returned exit code 3
-        2022/03/03 16:06:56 wazuh-modulesd:aws-s3: WARNING: Bucket:  -  Invalid credentials to access S3 Bucket
+   2022/03/03 16:06:56 wazuh-modulesd:aws-s3: WARNING: Bucket:  -  Returned exit code 3
+   2022/03/03 16:06:56 wazuh-modulesd:aws-s3: WARNING: Bucket:  -  Invalid credentials to access S3 Bucket
 
-**Solution**
+Solution
+~~~~~~~~
 
 Make sure the credentials provided grant access to the requested S3 bucket and the bucket itself exists.
-
 
 The config profile could not be found
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-The module does not work and the following error messages appear in the ``ossec.log``:
+The Wazuh module for AWS does not work and the following error messages appear in the ``/var/ossec/logs/ossec.log`` file:
 
-    .. code-block:: none
-        :class: output
+.. code-block:: none
+   :class: output
 
-        2022/03/03 15:49:34 wazuh-modulesd:aws-s3: WARNING: Bucket:  -  Returned exit code 12
-        2022/03/03 15:49:34 wazuh-modulesd:aws-s3: WARNING: Bucket:  -  The config profile (default) could not be found
+   2022/03/03 15:49:34 wazuh-modulesd:aws-s3: WARNING: Bucket:  -  Returned exit code 12
+   2022/03/03 15:49:34 wazuh-modulesd:aws-s3: WARNING: Bucket:  -  The config profile (default) could not be found
 
-**Solution**
+Solution
+~~~~~~~~
 
-Ensure the profile value specified in the configuration matches an existing one placed in ``/root/.aws/credentials``. Check the :ref:`Configuring AWS credentials <aws_profile>` section to learn more about configuring a profile for authentication.
+Ensure the profile value specified in the configuration matches an existing one placed in ``/root/.aws/credentials``. Check the :ref:`aws_profile` section to learn more about configuring a profile for authentication.
 
 The security token included in the request is invalid
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-The module does not work and the following error messages appear in the ``ossec.log``:
+The Wazuh module for AWS does not work and the following error messages appear in the ``/var/ossec/logs/ossec.log`` file:
 
-    .. code-block:: none
-        :class: output
+.. code-block:: none
+   :class: output
 
-        2022/03/03 16:16:18 wazuh-modulesd:aws-s3: WARNING: Service: cloudwatchlogs  -  Returned exit code 12
-        2022/03/03 16:16:18 wazuh-modulesd:aws-s3: WARNING: Service: cloudwatchlogs  -  An error occurred (InvalidClientTokenId) when calling the GetCallerIdentity operation: The security token included in the request is invalid.
+   2022/03/03 16:16:18 wazuh-modulesd:aws-s3: WARNING: Service: cloudwatchlogs  -  Returned exit code 12
+   2022/03/03 16:16:18 wazuh-modulesd:aws-s3: WARNING: Service: cloudwatchlogs  -  An error occurred (InvalidClientTokenId) when calling the GetCallerIdentity operation: The security token included in the request is invalid.
 
-**Solution**
+Solution
+~~~~~~~~
 
-No credentials were provided to attempt to access to CloudWatch Logs or that the credentials provided don't grant access to CloudWatch Logs. Check the :doc:`Configuring AWS credentials <prerequisites/credentials>` section to learn more about the different options available and how to configure them.
+No credentials were provided to attempt to access to CloudWatch Logs or that the credentials provided don't grant access to CloudWatch Logs. Check the :doc:`prerequisites/credentials` section to learn more about the different options available and how to configure them.
 
+There are no AWS alerts present on the Wazuh dashboard
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-There are no AWS alerts present in the Wazuh UI
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+The Wazuh module for AWS is running but no alerts are displayed on the Wazuh dashboard.
 
-The module is running but no alerts are displayed in the Wazuh UI.
+Solution
+~~~~~~~~
 
-**Solution**
+First of all, review ``ERROR`` or ``WARNING`` messages in the ``/var/ossec/logs/ossec.log`` file by :ref:`enabling debug mode <aws_debug_mode>`. If the Wazuh module for AWS is running as expected but no alerts are being generated it could mean there is no reason for alerts to be raised in first place. Check the following to verify this:
 
-First of all, review ``ERROR`` or ``WARNING`` messages in the ``ossec.log`` file by :ref:`enabling debug mode <aws_debug_mode>`. If the module is running as expected but no alerts are being generated it could mean there is no reason for alerts to be raised in first place. Check the following to verify this:
+-  Make sure there is data available for the given date.
 
-- **Make sure there is data available for the given date**.
+   When running, the Wazuh module for AWS requests AWS for the logs corresponding to the date indicated using the :ref:`only_logs_aws_buckets` parameter. If this parameter is not specified, it will try to obtain the logs corresponding to the day of execution. Make sure you are specifying a value for :ref:`only_logs_aws_buckets` and that there is data available for that particular date. Check the :doc:`prerequisites/considerations` page to learn more about how to properly filter the logs using the ``only_logs_after`` parameter.
 
-        When running, the module requests AWS for the logs corresponding to the date indicated using the :ref:`only_logs_aws_buckets` parameter. If this parameter is not specified, it will try to obtain the logs corresponding to the day of execution. Make sure you are specifying a value for :ref:`only_logs_aws_buckets` and that there is data available for that particular date. Check the :doc:`prerequisites/considerations` page to learn more about how to properly filter the logs using the ``only_logs_after`` parameter.
+- Check if the events are being sent to the analysis engine.
 
-- **Check if the events are being sent to the analysis engine**.
+   A common scenario is that no alerts are being generated because the events do not match any of the available rules. Take a look at the :ref:`aws_events_processed` section to learn how to check if the AWS logs are being sent to the analysis engine.
 
-        A common scenario is that no alerts are being generated because the events are not matching any of the available rules. Take a look to the :ref:`aws_events_processed` section to learn how to check if the AWS logs are being sent to the analysis engine.
+CloudWatch Logs integration is running but no alert is shown on the Wazuh dashboard
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
+The Wazuh module for AWS is running without any error or warning messages, but no alerts from CloudWatch Logs are displayed on the Wazuh dashboard.
 
-CloudWatch Logs integration is running but no alert is shown in the Wazuh UI
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+Solution
+~~~~~~~~
 
-The module is running without any error or warning messages, but no alerts from CloudWatch Logs are displayed in the Wazuh UI.
-
-**Solution**
-
-A common scenario is that no alerts are being generated because the events are not matching any of the available rules. Take a look to the :ref:`aws_events_processed` section to learn how to check if the AWS logs are being sent to the analysis engine.
+A common scenario is that no alerts are being generated because the events do not match any of the available rules. Take a look at the :ref:`aws_events_processed` section to learn how to check if the AWS logs are being sent to the analysis engine.
 
 Take into account that Wazuh does not provide default rules for the different logs that can be found in CloudWatch Logs, since they can have any type of format and come from any source. Because of this, if a user wants to make use of this integration to process any custom log they will most likely have to configure their own rules for them. Take a look at the :doc:`/user-manual/ruleset/rules/custom` section to learn more about this topic.
 
-
 .. _interval_overtaken_message:
 
-Interval overtaken message is present in the ossec.log
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+Interval overtaken message is present in the log file
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-The ``Interval overtaken`` message is present in the ``ossec.log`` file.
+The ``Interval overtaken`` message is present in the ``/var/ossec/logs/ossec.log`` file.
 
-**Solution**
+Solution
+~~~~~~~~
 
-Not an issue but a warning. This means the time the module required to finished the last execution was greater than the interval value defined. It is important to note that the next run will not start until the previous one is finished.
-
+Not an issue but a warning. This means the time the Wazuh module for AWS required to finish the last execution was greater than the interval value defined. It is important to note that the next run will not start until the previous one is finished.
 
 Error codes reference
 ---------------------
 
-#. Errors in ``ossec.log``
+#. Errors in the ``/var/ossec/logs/ossec.log`` file of the Wazuh server or agent.
 
-    The exit codes and their possible remediation are as follows:
+   The exit codes and their possible remediation are as follows:
 
-    +-----------+-------------------------------------------------------------------+------------------------------------------------------------------------------------------------------------------------------------------------------+
-    | **Code**  | **Description**                                                   | **Possible remediation**                                                                                                                             |
-    +-----------+-------------------------------------------------------------------+------------------------------------------------------------------------------------------------------------------------------------------------------+
-    | 1         | Unknown error                                                     | Programming error. Please, open an issue in the `Wazuh GitHub repository <https://github.com/wazuh/wazuh/issues/new/choose>`_ with the trace of the  |
-    |           |                                                                   | error.                                                                                                                                               |
-    +-----------+-------------------------------------------------------------------+------------------------------------------------------------------------------------------------------------------------------------------------------+
-    | 2         | SIGINT                                                            | The module stopped due to an interrupt signal.                                                                                                       |
-    +-----------+-------------------------------------------------------------------+------------------------------------------------------------------------------------------------------------------------------------------------------+
-    | 3         | Invalid credentials to access S3 bucket                           | Make sure that your credentials are OK. For more information, see the :doc:`Configuring AWS credentials <prerequisites/credentials>` section.        |
-    +-----------+-------------------------------------------------------------------+------------------------------------------------------------------------------------------------------------------------------------------------------+
-    | 4         | boto3 module missing                                              | Install ``boto3`` library. For more information, see the :doc:`Installing dependencies <prerequisites/dependencies>` section.                        |
-    +-----------+-------------------------------------------------------------------+------------------------------------------------------------------------------------------------------------------------------------------------------+
-    | 5         | Unexpected error accessing SQLite DB                              | Check that no more instances of the wodle are running at the same time.                                                                              |
-    +-----------+-------------------------------------------------------------------+------------------------------------------------------------------------------------------------------------------------------------------------------+
-    | 6         | Unable to create SQLite DB                                        | Make sure that the wodle has the right permissions in its directory.                                                                                 |
-    +-----------+-------------------------------------------------------------------+------------------------------------------------------------------------------------------------------------------------------------------------------+
-    | 7         | Unexpected error querying/working with objects in S3              | Check that no more instances of the wodle are running at the same time.                                                                              |
-    +-----------+-------------------------------------------------------------------+------------------------------------------------------------------------------------------------------------------------------------------------------+
-    | 8         | Failed to decompress file                                         | Only ``.gz`` and ``.zip`` compression formats are supported.                                                                                         |
-    +-----------+-------------------------------------------------------------------+------------------------------------------------------------------------------------------------------------------------------------------------------+
-    | 9         | Failed to parse file                                              | Ensure that the log file contents have the expected structure.                                                                                       |
-    +-----------+-------------------------------------------------------------------+------------------------------------------------------------------------------------------------------------------------------------------------------+
-    | 10        | pyarrow module missing                                            | Install ``pyarrow`` library. For more information, see the :doc:`Installing dependencies <prerequisites/dependencies>` section.                      |
-    +-----------+-------------------------------------------------------------------+------------------------------------------------------------------------------------------------------------------------------------------------------+
-    | 11        | Unable to connect to Wazuh                                        | Ensure that Wazuh is running.                                                                                                                        |
-    +-----------+-------------------------------------------------------------------+------------------------------------------------------------------------------------------------------------------------------------------------------+
-    | 12        | Invalid type of bucket                                            | Check if the type of bucket is one of the :ref:`supported <amazon_supported_services>`.                                                              |
-    +-----------+-------------------------------------------------------------------+------------------------------------------------------------------------------------------------------------------------------------------------------+
-    | 13        | Error sending message to Wazuh                                    | Make sure that Wazuh is running.                                                                                                                     |
-    +-----------+-------------------------------------------------------------------+------------------------------------------------------------------------------------------------------------------------------------------------------+
-    | 14        | Empty bucket                                                      | Make sure that the path to the log files is correct.                                                                                                 |
-    +-----------+-------------------------------------------------------------------+------------------------------------------------------------------------------------------------------------------------------------------------------+
-    | 15        | Invalid VPC endpoint URL                                          | Ensure that the VPC endpoint URL provided is correct.                                                                                                |
-    +-----------+-------------------------------------------------------------------+------------------------------------------------------------------------------------------------------------------------------------------------------+
-    | 16        | Throttling error                                                  | AWS is receiving more than 10 requests per second. Try to run the module again when the number of requests to AWS has decreased.                     |
-    +-----------+-------------------------------------------------------------------+------------------------------------------------------------------------------------------------------------------------------------------------------+
-    | 17        | Invalid file key format                                           | Ensure that the file path follows the format specified in the :doc:`Wazuh documentation </cloud-security/amazon/services/supported-services/index>`  |
-    +-----------+-------------------------------------------------------------------+------------------------------------------------------------------------------------------------------------------------------------------------------+
-    | 18        | Invalid prefix                                                    | Make sure that the indicated path exists in the S3 bucket.                                                                                           |
-    +-----------+-------------------------------------------------------------------+------------------------------------------------------------------------------------------------------------------------------------------------------+
-    | 19        | The server datetime and datetime of the AWS environment differ    | Make sure that the server datetime is correctly set.                                                                                                 |
-    +-----------+-------------------------------------------------------------------+------------------------------------------------------------------------------------------------------------------------------------------------------+
-    | 20        | Unable to find SQS                                                | Make sure that the ``sqs_name`` value in the wodle configuration in the ``ossec.conf`` file is correct.                                              |
-    +-----------+-------------------------------------------------------------------+------------------------------------------------------------------------------------------------------------------------------------------------------+
-    | 21        | Failed fetch/delete from SQS                                      | Check that no more instances of the wodle are running at the same time.                                                                              |
-    +-----------+-------------------------------------------------------------------+------------------------------------------------------------------------------------------------------------------------------------------------------+
-    | 22        | Invalid region                                                    | Check the provided ``region`` in the ``ossec.conf`` file.                                                                                            |
-    +-----------+-------------------------------------------------------------------+------------------------------------------------------------------------------------------------------------------------------------------------------+
-    | 23        | Profile not found                                                 | Check the provided ``aws_profile`` in the ``ossec.conf`` file.                                                                                       |
-    +-----------+-------------------------------------------------------------------+------------------------------------------------------------------------------------------------------------------------------------------------------+
+   +-----------+-------------------------------------------------------------------+------------------------------------------------------------------------------------------------------------------------------------------------------+
+   | **Code**  | **Description**                                                   | **Possible remediation**                                                                                                                             |
+   +-----------+-------------------------------------------------------------------+------------------------------------------------------------------------------------------------------------------------------------------------------+
+   | 1         | Unknown error                                                     | Programming error. Please, open an issue in the `Wazuh GitHub repository <https://github.com/wazuh/wazuh/issues/new/choose>`_ with the trace of the  |
+   |           |                                                                   | error.                                                                                                                                               |
+   +-----------+-------------------------------------------------------------------+------------------------------------------------------------------------------------------------------------------------------------------------------+
+   | 2         | SIGINT                                                            | The module stopped due to an interrupt signal.                                                                                                       |
+   +-----------+-------------------------------------------------------------------+------------------------------------------------------------------------------------------------------------------------------------------------------+
+   | 3         | Invalid credentials to access S3 bucket                           | Make sure that your credentials are correct. For more information, see the :doc:`Configuring AWS credentials <prerequisites/credentials>` section.   |
+   +-----------+-------------------------------------------------------------------+------------------------------------------------------------------------------------------------------------------------------------------------------+
+   | 4         | boto3 module missing                                              | Install ``boto3`` library. For more information, see the :doc:`Installing dependencies <prerequisites/dependencies>` section.                        |
+   +-----------+-------------------------------------------------------------------+------------------------------------------------------------------------------------------------------------------------------------------------------+
+   | 5         | Unexpected error accessing SQLite DB                              | Check that no more instances of the Wazuh module for AWS are running at the same time.                                                               |
+   +-----------+-------------------------------------------------------------------+------------------------------------------------------------------------------------------------------------------------------------------------------+
+   | 6         | Unable to create SQLite DB                                        | Make sure that the wodle has the right permissions in its directory.                                                                                 |
+   +-----------+-------------------------------------------------------------------+------------------------------------------------------------------------------------------------------------------------------------------------------+
+   | 7         | Unexpected error querying/working with objects in S3              | Check that no more instances of the Wazuh module for AWS are running at the same time.                                                               |
+   +-----------+-------------------------------------------------------------------+------------------------------------------------------------------------------------------------------------------------------------------------------+
+   | 8         | Failed to decompress file                                         | Only ``.gz`` and ``.zip`` compression formats are supported.                                                                                         |
+   +-----------+-------------------------------------------------------------------+------------------------------------------------------------------------------------------------------------------------------------------------------+
+   | 9         | Failed to parse file                                              | Ensure that the log file contents have the expected structure.                                                                                       |
+   +-----------+-------------------------------------------------------------------+------------------------------------------------------------------------------------------------------------------------------------------------------+
+   | 10        | pyarrow module missing                                            | Install ``pyarrow`` library. For more information, see the :doc:`Installing dependencies <prerequisites/dependencies>` section.                      |
+   +-----------+-------------------------------------------------------------------+------------------------------------------------------------------------------------------------------------------------------------------------------+
+   | 11        | Unable to connect to Wazuh                                        | Ensure that Wazuh is running.                                                                                                                        |
+   +-----------+-------------------------------------------------------------------+------------------------------------------------------------------------------------------------------------------------------------------------------+
+   | 12        | Invalid type of bucket                                            | Check if the type of bucket is one of the :ref:`supported <amazon_supported_services>`.                                                              |
+   +-----------+-------------------------------------------------------------------+------------------------------------------------------------------------------------------------------------------------------------------------------+
+   | 13        | Error sending message to Wazuh                                    | Make sure that Wazuh is running.                                                                                                                     |
+   +-----------+-------------------------------------------------------------------+------------------------------------------------------------------------------------------------------------------------------------------------------+
+   | 14        | Empty bucket                                                      | Make sure that the path to the log files is correct.                                                                                                 |
+   +-----------+-------------------------------------------------------------------+------------------------------------------------------------------------------------------------------------------------------------------------------+
+   | 15        | Invalid VPC endpoint URL                                          | Ensure that the VPC endpoint URL provided is correct.                                                                                                |
+   +-----------+-------------------------------------------------------------------+------------------------------------------------------------------------------------------------------------------------------------------------------+
+   | 16        | Throttling error                                                  | AWS is receiving more than 10 requests per second. Try to run the module again when the number of requests to AWS has decreased. For more            |
+   |           |                                                                   | information see the :ref:`connection_configuration_for_retries` section.                                                                             |
+   +-----------+-------------------------------------------------------------------+------------------------------------------------------------------------------------------------------------------------------------------------------+
+   | 17        | Invalid file key format                                           | Ensure that the file path follows the format specified in the :doc:`supported services </cloud-security/amazon/services/supported-services/index>`   |
+   +-----------+-------------------------------------------------------------------+------------------------------------------------------------------------------------------------------------------------------------------------------+
+   | 18        | Invalid prefix                                                    | Make sure that the indicated path exists in the S3 bucket.                                                                                           |
+   +-----------+-------------------------------------------------------------------+------------------------------------------------------------------------------------------------------------------------------------------------------+
+   | 19        | The server datetime and datetime of the AWS environment differ    | Make sure that the server datetime is correctly set.                                                                                                 |
+   +-----------+-------------------------------------------------------------------+------------------------------------------------------------------------------------------------------------------------------------------------------+
+   | 20        | Unable to find SQS                                                | Make sure that the ``sqs_name`` value in the Wazuh module for AWS configuration in the ``ossec.conf`` file is correct.                               |
+   +-----------+-------------------------------------------------------------------+------------------------------------------------------------------------------------------------------------------------------------------------------+
+   | 21        | Failed fetch/delete from SQS                                      | Check that no more instances of the Wazuh module for AWS are running at the same time.                                                               |
+   +-----------+-------------------------------------------------------------------+------------------------------------------------------------------------------------------------------------------------------------------------------+
+   | 22        | Invalid region                                                    | Check the provided ``region`` in the ``ossec.conf`` file.                                                                                            |
+   +-----------+-------------------------------------------------------------------+------------------------------------------------------------------------------------------------------------------------------------------------------+
+   | 23        | Profile not found                                                 | Check the provided ``aws_profile`` in the ``ossec.conf`` file.                                                                                       |
+   +-----------+-------------------------------------------------------------------+------------------------------------------------------------------------------------------------------------------------------------------------------+
