@@ -6,14 +6,14 @@
 Re-indexing
 ===========
 
-When changes are made to the data schema, it becomes necessary to re-index data to reflect these changes. Existing data may not match the updated schema without re-indexing, leading to data inconsistencies or errors during queries. Re-indexing lets you copy all or a subset of your data from a source index into a destination index.
+When changes are made to the index’s data schema, it becomes necessary to re-index data to reflect these changes. Existing data may not match the updated schema without re-indexing, leading to data inconsistencies or errors during queries. Re-indexing lets you copy all or a subset of your data from a source index into a destination index.
 
 To re-index an existing index, perform the following steps on either the Wazuh dashboard or the Wazuh server.
 
 Wazuh dashboard
 ---------------
 
-#. Click on the upper left menu **☰** and go to **Indexer management** > **Dev Tools**.
+#. Click on the **upper left menu ☰** and go to **Server management** then **Dev Tools**.
 #. Enter the following API call, replacing ``my-source-index`` with the source index pattern and ``my-destination-index`` with the destination index pattern.
 
    .. code-block:: none
@@ -86,9 +86,9 @@ Run the following command on any Wazuh central component that is allowed to auth
 
 For example:
 
-.. code-block:: console
+.. code-block:: none
 
-   curl -k -u "INDEXER_USERNAME:INDEXER_PASSWORD" -XPOST "https://<INDEXER_IP_ADDRESS>:9200/_reindex" -H 'Content-Type: application/json' -d'
+   root@wazuh-server:~$ curl -k -u "INDEXER_USERNAME:INDEXER_PASSWORD" -XPOST "https://<INDEXER_IP_ADDRESS>:9200/_reindex" -H 'Content-Type: application/json' -d'
    {
       "source":{
          "index":"wazuh-alerts-*"
