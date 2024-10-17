@@ -95,11 +95,11 @@ Perform the following steps on the Wazuh indexer node (s) to complete the shared
 
             # apt -y install nfs-common
 
-#. Mount the shared directory ``/mnt/snapshots`` on the Wazuh indexer node(s). Replace the ``<SERVER_IP_ADDRESS>`` variable with the IP address of the NFS server:
+#. Mount the shared directory ``/mnt/snapshots`` on the Wazuh indexer node(s). Replace the ``<NFS_SERVER_IP>`` variable with the IP address of the NFS server:
 
    .. code-block:: console
 
-      # mount -t nfs <SERVER_IP_ADDRESS>:/mnt/snapshots /mnt/snapshots
+      # mount -t nfs <NFS_SERVER_IP>:/mnt/snapshots /mnt/snapshots
 
 #. Grant the ``wazuh-indexer`` user ownership of the ``/mnt/snapshots`` directory:
 
@@ -160,7 +160,7 @@ Perform the following steps on the Wazuh indexer node (s) to complete the shared
       # systemctl restart wazuh-indexer
 
 .. warning::
-   
+
    Make sure to confirm that the ``/mnt/snapshots`` directory has the ``wazuh-indexer:wazuh-indexer`` ownership on the Wazuh indexer nodes using the ``ll`` utility.
 
 Repeat the :ref:`Setup shared file system > Wazuh indexer <migrating_indices_wazuh_indexer>` steps on the destination Wazuh indexer(s) to use the NFS share directory, ``/mnt/snapshots``, as its snapshot repository.
@@ -172,8 +172,7 @@ Setup snapshot repository
 
 On the Wazuh dashboard, perform the following steps:
 
-#. Click on the upper left menu **☰**, go to **Indexer management**, and select **Snapshot Management**. 
-#. Click on **Repositories**, and select **Create repository** to create a new snapshot repository.
+#. Click on the **upper left menu ☰**, go to **Indexer management** > **Snapshot Management** > **Repositories**, and select **Create repository** to create a new snapshot repository.
 #. Enter a repository name, select the repository type **Shared file system**, enter the repository location ``/mnt/snapshots``, and select **Add** to register the new repository.
 
    .. thumbnail:: /images/manual/wazuh-indexer/create-snapshot-repository.gif
@@ -187,7 +186,7 @@ Repeat the above steps on the destination Wazuh cluster to set up a similar snap
 Take snapshots
 --------------
 
-#. Click on the upper left menu **☰**, and go to **Indexer management** > **Snapshot Management** > **Snapshots**.
+#. Click on the **upper left menu ☰**, and go to **Indexer management** > **Snapshot Management** > **Snapshots**.
 #. Select **Take snapshot**, and enter a Snapshot name.
 #. Select or input source index patterns.
 #. Select the earlier created repository to store the snapshots.
@@ -215,8 +214,8 @@ Restore snapshots
 To complete the Wazuh indices migration steps, restore the snapshots taken from the old Wazuh indexers to the destination Wazuh indexers. Perform the following steps on the destination Wazuh indexer.
 
 .. note::
-   
-   It is necessary to have performed the steps in the :ref:`Setup shared file system <migrating_indices_setup_shared_file_system>` and :ref:`Setup snapshot repository <migrating_indices_setup_snapshot_repository>` sections on the destination Wazuh cluster before proceeding.
+
+   It is necessary to have performed the steps in the :ref:`Setup shared file system <migrating_indices_setup_shared_file_system>` and :ref:`Setup snapshot repository <migrating_indices_setup_snapshot_repository>` sections on the destination Wazuh cluster before proceeding to **Restore snapshots**.
 
 #. Restart the Wazuh indexer nodes in the destination Wazuh cluster to load the snapshot files using the command:
 
@@ -224,7 +223,7 @@ To complete the Wazuh indices migration steps, restore the snapshots taken from 
 
       # systemctl restart wazuh-indexer
 
-#. Click on the upper left menu **☰**, go to **Snapshot Management** > **Snapshots**, and refresh the Snapshots page. The snapshots in the repository location ``/mnt/snapshots`` will show on the destination Wazuh cluster’s dashboard.
+#. Click on the **upper left menu ☰**, go to **Indexer management** > **Snapshot Management** > **Snapshots**, and refresh the Snapshots page. The snapshots in the repository location ``/mnt/snapshots`` will show on the destination Wazuh cluster’s dashboard.
 
 #. Select the snapshot and click on **Restore**. Delete the ``restored_`` prefix to restore the indices to their original names. The ``restored_`` prefix exists to avoid conflicting index names.
 
