@@ -161,6 +161,28 @@ Using custom certificates
 
 Custom certificates can be created using tools like OpenSSL. You must create the root CA, node, and admin certificates described above.
 
+.. _wazuh_cert_tool_docker:
+
+Wazuh certificates tool in Docker
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+You can use the Wazuh certificates tool in a Docker container. Ensure the Docker container has access to:
+
+-  The ``config.yml`` file
+-  The directory where the certificates will be stored
+
+Run the following command. Replace ``/path/to/config.yml`` and ``/path/to/wazuh-certificates/`` with the actual paths on the host machine. We recommend using absolute paths. Name the certificates directory ``wazuh-certificates``.
+
+.. code-block:: console
+
+   # docker run -v /path/to/config.yml:/config/certs.yml -v /path/to/wazuh-certificates/:/certificates/ -itd wazuh/wazuh-cert-tool
+
+After running the command, the container is created and the certificates are stored in the specified directory.
+
+.. note::
+
+   You can use this option to create certificates on macOS and Windows hosts and then copy them to the Wazuh installation.
+
 Adding Wazuh indexer nodes
 --------------------------
 
