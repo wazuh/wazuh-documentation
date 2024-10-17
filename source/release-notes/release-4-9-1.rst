@@ -48,7 +48,6 @@ Packages
 
 -  `#3111 <https://github.com/wazuh/wazuh-packages/pull/3111>`__ Added offline installation assistant import for the downloaded GPG Wazuh key.
 -  `#3098 <https://github.com/wazuh/wazuh-packages/pull/3098>`__ Changed version to tag reference in ``source_branch`` references.
--  `#3134 <https://github.com/wazuh/wazuh-packages/pull/3134>`__ Revert update source branch in unattended installer.
 -  `#3118 <https://github.com/wazuh/wazuh-packages/pull/3118>`__ Changed Filebeat passwords only when installing Wazuh Server or changing passwords.
 -  `#3119 <https://github.com/wazuh/wazuh-packages/pull/3119>`__ Updated ``SECURITY.md`` format.
 -  `#3121 <https://github.com/wazuh/wazuh-packages/pull/3121>`__ Added stage parameter in ``bump_version`` script.
