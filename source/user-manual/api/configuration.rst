@@ -53,10 +53,6 @@ Here are all the available settings for the ``/var/ossec/api/configuration/api.y
       allow_headers: "*"
       allow_credentials: no
 
-   cache:
-      enabled: yes
-      time: 0.750
-
    access:
       max_login_attempts: 50
       block_time: 300
@@ -81,8 +77,8 @@ Here are all the available settings for the ``/var/ossec/api/configuration/api.y
        integrations:
          virustotal:
             public_key:
-             allow: yes
-             minimum_quota: 240
+               allow: yes
+               minimum_quota: 240
 
 .. warning::
 
@@ -234,19 +230,6 @@ cors
 +-------------------+----------------------+---------------+-----------------------------------------------------------------------------------------------+
 | allow_credentials | yes, true, no, false | false         | Tell browsers whether to expose the response to frontend JavaScript or not.                   |
 +-------------------+----------------------+---------------+-----------------------------------------------------------------------------------------------+
-
-cache
-^^^^^
-
-.. deprecated:: 4.8.0
-
-+------------+--------------------------------------+---------------+-----------------------------------------------------------------------------------------------------------------------------+
-| Sub-fields | Allowed values                       | Default value | Description                                                                                                                 |
-+============+======================================+===============+=============================================================================================================================+
-| enabled    | yes, true, no, false                 | true          | Enable or disable caching for certain Wazuh server API responses (currently, all :api-ref:`rules endpoints <tag/Rules>` )   |
-+------------+--------------------------------------+---------------+-----------------------------------------------------------------------------------------------------------------------------+
-| time       | Any positive integer or real number  | 0.75          | Time in seconds that the cache lasts before expiring.                                                                       |
-+------------+--------------------------------------+---------------+-----------------------------------------------------------------------------------------------------------------------------+
 
 .. _api_configuration_access:
 

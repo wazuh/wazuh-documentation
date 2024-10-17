@@ -31,7 +31,7 @@ Build stage
 Docker environment
 ^^^^^^^^^^^^^^^^^^
 
-Using the provided `Docker environment <https://www.github.com/wazuh/wazuh-indexer/tree/master/docker>`__:
+Using the provided `Docker environment <https://www.github.com/wazuh/wazuh-indexer/tree/v|WAZUH_CURRENT|/docker>`__:
 
 .. tabs::
 
@@ -78,7 +78,7 @@ Pre-requisites:
 
 -  Current directory: ``wazuh-indexer/``
 -  Existing package in ``wazuh-indexer/artifacts/dist/{rpm|deb}``, as a result of the *Build* stage.
--  Using the `Docker environment <https://www.github.com/wazuh/wazuh-indexer/tree/master/docker>`__:
+-  Using the `Docker environment <https://www.github.com/wazuh/wazuh-indexer/tree/v|WAZUH_CURRENT|/docker>`__:
 
    .. tabs::
 

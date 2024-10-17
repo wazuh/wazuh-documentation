@@ -11,13 +11,64 @@ All notable changes to this project will be documented in this file.
 
 - Removed the option to store authentication credentials as plain text in ``ossec.conf``. ([#6405](https://github.com/wazuh/wazuh-documentation/pull/6405))
 
+## [v4.10.2]
+
+- Support for Wazuh 4.10.2
+
+## [v4.10.1]
+
+- Support for Wazuh 4.10.1
+
+### Added
+
+- Added architecture information to assistant pages. ([#7830](https://github.com/wazuh/wazuh-documentation/pull/7830))
+
 ## [v4.10.0]
 
-- Support for Wazuh 4.10.0
+### Added
+
+- Added documentation for the MDM Intune integration. ([#7661](https://github.com/wazuh/wazuh-documentation/pull/7661))
+- Added the agent uninstall RBAC action. ([#7708](https://github.com/wazuh/wazuh-documentation/pull/7708))
+- Added the ``anti_tampering`` configuration block documentation. ([#7580](https://github.com/wazuh/wazuh-documentation/pull/7580))
+- Added PowerPC package references back to the packages list. ([#7724](https://github.com/wazuh/wazuh-documentation/pull/7724))
+
+### Changed
+
+- Replaced the commands to start and stop the Wazuh agent on macOS systems. ([#7498](https://github.com/wazuh/wazuh-documentation/pull/7498))
+- Updated the available options and examples for the MSI package generation command. ([#7501](https://github.com/wazuh/wazuh-documentation/pull/7501))
+- Updated the available SCA policies table. ([#7698](https://github.com/wazuh/wazuh-documentation/pull/7698))
+- Updated default and allowed ``chunk_size`` values for upgrading agents using wpk files. ([#7717](https://github.com/wazuh/wazuh-documentation/pull/7717))
+
+### Removed
+
+- Removed the step to disable the Wazuh manager service from the *Uninstalling the Wazuh central components* guide. ([#7814](https://github.com/wazuh/wazuh-documentation/pull/7814))
 
 ## [v4.9.1]
 
-- Support for Wazuh 4.9.1
+### Added
+
+- Added dependency requirements to the offline installation guide. ([#7755](https://github.com/wazuh/wazuh-documentation/pull/7755))
+- Added `SECURITY.md` to the Wazuh documentation repository. ([#7764](https://github.com/wazuh/wazuh-documentation/pull/7764))
+- Added support for Python 3.12 in configuration steps. ([#7673](https://github.com/wazuh/wazuh-documentation/pull/7673))
+- Added ARM64 Wazuh manager package references to Packages list. ([#7806](https://github.com/wazuh/wazuh-documentation/pull/7806))
+- Added *macOS Sequoia 15* to the Available SCA policies list. ([#7864](https://github.com/wazuh/wazuh-documentation/pull/7864))
+
+### Changed
+
+- Replaced  Wazuh keystore password insertion commands with a safer method and added a new parameter to the list of available options. ([#7593](https://github.com/wazuh/wazuh-documentation/pull/7593))
+- Restored Wazuh dashboard package revision number. ([#7762](https://github.com/wazuh/wazuh-documentation/pull/7762))
+
+### Fixed
+
+- Added a step for creating a retention policy using the Visual editor in the *Index life management* section. ([#7685](https://github.com/wazuh/wazuh-documentation/pull/7685))
+- Fixed debugging command for the Wazuh dashboard. ([#7769](https://github.com/wazuh/wazuh-documentation/pull/7769))
+- Fixed Wazuh indexer repository reference in the Wazuh indexer package generation guide. ([#7779](https://github.com/wazuh/wazuh-documentation/pull/7779))
+- Fixed highlighting in Docker compose configuration file example. ([#7867](https://github.com/wazuh/wazuh-documentation/pull/7867))
+
+### Removed
+
+- Removed the command to delete `opensearch_dashboards.yml` in the *Upgrading the Wazuh dashboard* section. ([#7777](https://github.com/wazuh/wazuh-documentation/pull/7777))
+- Removed the step to delete ss4o index templates in *Upgrading the Wazuh indexer*. ([#7810](https://github.com/wazuh/wazuh-documentation/pull/7810))
 
 ## [v4.9.0]
 
