@@ -136,13 +136,6 @@ Okta Configuration
 
    Now, on the same page, click on  **View SAML setup instructions**. Copy the **Identity Provider Issuer URL**, it will be the ``idp.entity_id``.
 
-   Copy the blob of the **X.509 Certificate** excluding the ``-----BEGIN CERTIFICATE-----`` and ``-----END CERTIFICATE-----`` lines. This will be used as the ``exchange_key``:
-
-     .. thumbnail:: /images/single-sign-on/okta/14-navigate-to-applications.png
-        :title: Navigate to Applications - Applications - <YOUR_APP> - Sign On
-        :align: center
-        :width: 80%
-
    This information can also be found in the metadata XML file.
 
 Wazuh indexer configuration
