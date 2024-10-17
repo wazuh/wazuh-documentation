@@ -3,7 +3,7 @@
 .. meta::
    :description: The Wazuh server includes a queue mechanism that streamlines the collection of events from monitored endpoints. Learn more in this section of the documentation.
 
-Wazuh server queue
+Queuing mechanisms
 ==================
 
 The Wazuh server includes a queue mechanism that streamlines the collection of events from monitored endpoints. It ensures continuous data flow from the Wazuh agents, syslog endpoints, and agentless devices to the Wazuh server thereby preventing event flooding. The Wazuh server queue utilizes the First In, First Out (FIFO) methodology; therefore, the first queued event is the first to be removed from the queue and processed. It is based on distributed processing, allowing for the parallelization of log analysis tasks. This improves the scalability and performance of the log processing pipeline enabling Wazuh to handle large volumes of log data effectively.

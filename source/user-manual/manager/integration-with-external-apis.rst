@@ -3,8 +3,8 @@
 .. meta::
    :description: The Wazuh Integrator module allows Wazuh to connect to external APIs and alerting tools. Learn more in this section of the documentation.
 
-Integration with external APIs
-==============================
+External API integration
+========================
 
 The Wazuh Integrator module allows Wazuh to connect to external APIs and alerting tools such as `Slack`_, `PagerDuty`_, `VirusTotal`_, `Shuffle`_, and `Maltiverse`_. You can also configure the Integrator module to connect to other software. These integrations empower security administrators to enhance orchestration, automate responses, and fortify their defenses against cyber threats.
 

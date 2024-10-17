@@ -3,8 +3,8 @@
 .. meta::
    :description: Wazuh 4.9.1 has been released. Check out our release notes to discover the changes and additions of this release.
 
-4.9.1 Release notes - TBD
-=========================
+4.9.1 Release notes - 17 October 2024
+=====================================
 
 This section lists the changes in version 4.9.1. Every update of the Wazuh solution is cumulative and includes all enhancements and fixes from previous releases.
 
@@ -12,6 +12,21 @@ What's new
 ----------
 
 This release includes new features or enhancements as the following:
+
+Wazuh manager
+^^^^^^^^^^^^^
+
+-  `#24110 <https://github.com/wazuh/wazuh/issues/24110>`__ Improved provisioning method for *wazuh-keystore* to enhance security.
+
+Wazuh agent
+^^^^^^^^^^^
+
+-  `#25652 <https://github.com/wazuh/wazuh/issues/25652>`__ Added support for macOS 15 "Sequoia" in Wazuh Agent.
+
+RESTful API
+^^^^^^^^^^^
+
+-  `#26103 <https://github.com/wazuh/wazuh/pull/26103>`__ Changed the error status code thrown when basic services are down to 500.
 
 Wazuh dashboard
 ^^^^^^^^^^^^^^^
@@ -25,21 +40,52 @@ Wazuh dashboard
 -  `#6982 <https://github.com/wazuh/wazuh-dashboard-plugins/pull/6982>`__ Upgraded the ``follow-redirects`` dependency to ``1.15.6``.
 -  `#6956 <https://github.com/wazuh/wazuh-dashboard-plugins/pull/6956>`__ Changed many loading spinners in some views to loading search progress.
 -  `#6999 <https://github.com/wazuh/wazuh-dashboard-plugins/pull/6999>`__ Removed the XML autoformat function group configuration due to performance issues.
+-  `#7023 <https://github.com/wazuh/wazuh-dashboard-plugins/pull/7023>`__ Removed the PDF report footer year.
+-  `#7086 <https://github.com/wazuh/wazuh-dashboard-plugins/pull/7086>`__ Removed data grid tables from **Threat Hunting** dashboard, **GitHub** panel, and **Office365** panel.
 
 Packages
 ^^^^^^^^
 
 -  `#3111 <https://github.com/wazuh/wazuh-packages/pull/3111>`__ Added offline installation assistant import for the downloaded GPG Wazuh key.
 -  `#3098 <https://github.com/wazuh/wazuh-packages/pull/3098>`__ Changed version to tag reference in ``source_branch`` references.
+-  `#3134 <https://github.com/wazuh/wazuh-packages/pull/3134>`__ Revert update source branch in unattended installer.
 -  `#3118 <https://github.com/wazuh/wazuh-packages/pull/3118>`__ Changed Filebeat passwords only when installing Wazuh Server or changing passwords.
 -  `#3119 <https://github.com/wazuh/wazuh-packages/pull/3119>`__ Updated ``SECURITY.md`` format.
 -  `#3121 <https://github.com/wazuh/wazuh-packages/pull/3121>`__ Added stage parameter in ``bump_version`` script.
--  `#3124 <https://github.com/wazuh/wazuh-packages/pull/3124>`__ Replaced source branch in Installation Assistant.
 
 Resolved issues
 ---------------
 
 This release resolves known issues as the following:
+
+Wazuh manager
+^^^^^^^^^^^^^
+
+-  `#24909 <https://github.com/wazuh/wazuh/pull/24909>`__ Fixed vulnerability detector issue where RPM upgrade wouldn't download new content.
+-  `#25667 <https://github.com/wazuh/wazuh/pull/25667>`__ Fixed uncaught exception at Keystore test tool.
+-  `#25705 <https://github.com/wazuh/wazuh/pull/25705>`__ Replaced ``eval`` calls with ``ast.literal_eval``.
+-  `#26277 <https://github.com/wazuh/wazuh/pull/26277>`__ Fixed the cluster being disabled by default when loading configurations.
+-  `#25945 <https://github.com/wazuh/wazuh/pull/25945>`__ Added support for ARM packages for ``wazuh-manager``.
+
+Wazuh agent
+^^^^^^^^^^^
+
+-  `#24910 <https://github.com/wazuh/wazuh/pull/24910>`__ Fixed agent crash on Windows version 4.8.0.
+-  `#25209 <https://github.com/wazuh/wazuh/pull/25209>`__ Fixed data race conditions at FIM's ``run_check``.
+-  `#24376 <https://github.com/wazuh/wazuh/issues/24376>`__ Fixed Windows agent crashes related to ``syscollector.dll``.
+-  `#25445 <https://github.com/wazuh/wazuh/pull/25445>`__ Fixed errors related to the ``libatomic.a`` library on AIX 7.X.
+-  `#24932 <https://github.com/wazuh/wazuh/pull/24932>`__ Fixed errors in Windows Agent where ``EvtFormatMessage`` returned errors 15027 and 15033.
+-  `#25459 <https://github.com/wazuh/wazuh/pull/25459>`__ Fixed FIM issue where it couldn't fetch group entries longer than 1024 bytes.
+-  `#25469 <https://github.com/wazuh/wazuh/pull/25469>`__ Fixed Wazuh Agent crash at ``syscollector``.
+-  `#23528 <https://github.com/wazuh/wazuh/pull/23528>`__ Fixed a bug in the processed dates in the AWS module related to the AWS Config type.
+-  `#24694 <https://github.com/wazuh/wazuh/pull/24694>`__ Fixed an error in Custom Logs Buckets when parsing a CSV file that exceeds a certain size.
+-  `#26108 <https://github.com/wazuh/wazuh/issues/26108>`__ Fixed macOS syslog and ULS not configured out-of-the-box.
+
+RESTful API
+^^^^^^^^^^^
+
+-  `#25764 <https://github.com/wazuh/wazuh/pull/25764>`__ Fixed requests logging to obtain the ``hash_auth_context`` from JWT tokens.
+-  `#25216 <https://github.com/wazuh/wazuh/pull/25216>`__ Enabled API to listen to both IPv4 and IPv6 stacks.
 
 Wazuh dashboard
 ^^^^^^^^^^^^^^^
@@ -54,6 +100,11 @@ Wazuh dashboard
 -  `#6983 <https://github.com/wazuh/wazuh-dashboard-plugins/pull/6983>`__ Fixed missing options depending on agent operating system in the agent configuration report.
 -  `#6989 <https://github.com/wazuh/wazuh-dashboard-plugins/pull/6989>`__ Fixed a style issue that affected the **Discover** plugin.
 -  `#6995 <https://github.com/wazuh/wazuh-dashboard-plugins/pull/6995>`__ Fixed a problem updating the API host registry in the ``GET /api/check-stored-api``.
+-  `#7019 <https://github.com/wazuh/wazuh-dashboard-plugins/pull/7019>`__ Fixed the **Open report** button on the toast and the **Download report** icon in the reporting table in Safari.
+-  `#7015 <https://github.com/wazuh/wazuh-dashboard-plugins/pull/7015>`__ Fixed style issue when unpinning an agent in the endpoint summary section.
+-  `#7021 <https://github.com/wazuh/wazuh-dashboard-plugins/pull/7021>`__ Fixed overflow style on a long value filter.
+-  `#7056 <https://github.com/wazuh/wazuh-dashboard-plugins/pull/7056>`__ Fixed buttons enabled for a read-only user in **Endpoint groups** section.
+-  `#7090 <https://github.com/wazuh/wazuh-dashboard-plugins/pull/7090>`__ Fixed the automatic page refresh in dashboards and prevented duplicate requests.
 
 Packages
 ^^^^^^^^
