@@ -50,7 +50,7 @@ Launch an instance from the AWS Marketplace
 #. Review your configuration, making sure that all settings are correct before launching the software. Adapt the default configuration values to your needs.
 
     #. When selecting the **EC2 Instance Type**, we recommend that you use an instance type ``c5a.xlarge``.
-  
+
     #. When selecting the **Security Group**, it must be one with the appropriate :ref:`settings for your Wazuh instance <default_ports>` to guarantee the correct operation. You can create a new security group by choosing **Create new based on seller settings**. This new group will have the appropriate settings by default.
 
 #. Click **Launch** to generate the instance.
@@ -80,7 +80,7 @@ Deploy an instance using the AWS Management Console
 #. Review the instance configuration and click **Launch**.
 
 #. Select one of three configuration alternatives available regarding the key pair settings: **Choose an existing key pair**, **Create a new key pair**, **Proceed without a key pair**. You need to choose an existing key pair or create a new one to access the instance with SSH.
-    
+
 #. Click **Launch instances** to complete the process and deploy your instance.
 
 Once your instance is fully configured and ready after a few minutes since launch, you can :ref:`access the Wazuh dashboard <ami_wazuh_ui>`.
@@ -106,7 +106,7 @@ To learn more about configuring Wazuh, see the :doc:`User manual </user-manual/i
 Access the Wazuh dashboard
 --------------------------
 
-When the instance is launched, the passwords of the users are automatically changed to the ID of the instance. In this way, access to the interface is guaranteed only to the creator of it. This process can take an average of five minutes, depending on the type of instance. Both the SSH access and the Wazuh dashboard access are disabled during this process.
+When the instance is launched, the user passwords are automatically changed to the instance ID with the first letter capitalized. For example: ``I-07f25f6afe4789342``. This ensures that only the creator has access to the interface. This process can take an average of five minutes, depending on the type of instance. During this time, both SSH access and access to the Wazuh dashboard are disabled.
 
 Once the instance is running and the process to initialize passwords is complete, you can access the Wazuh dashboard with your credentials.
 
@@ -114,10 +114,14 @@ Once the instance is running and the process to initialize passwords is complete
 - **Username**: *admin*
 - **Password**: *<YOUR_INSTANCE_ID>*
 
-.. warning::
-   
-   It is highly recommended to change the default users passwords in the first SSH access. To perform this action, see the :doc:`/user-manual/user-administration/password-management` section.
+.. note::
+   :class: not-long
 
+   The password is the instance ID with the first letter capitalized. For example: ``I-07f25f6afe4789342``.
+
+.. warning::
+
+   The password for the server API users ``wazuh`` and ``wazuh-wui`` is the same  as the ``admin`` user's password. We highly recommend to change the default passwords in the first SSH access. To perform this action, refer to the :doc:`/user-manual/user-administration/password-management` section.
 
 Security considerations about SSH
 ---------------------------------
@@ -140,6 +144,6 @@ The Wazuh AMI is now ready and you can proceed with :doc:`deploying the Wazuh ag
 Upgrading the AMI
 -----------------
 
-Follow the instructions on how to upgrade the Wazuh central components. 
+Follow the instructions on how to upgrade the Wazuh central components.
 
   - :doc:`Upgrading the Wazuh central components </upgrade-guide/upgrading-central-components>`

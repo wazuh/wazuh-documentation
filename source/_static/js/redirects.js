@@ -166,8 +166,58 @@ redirections.push(
   },
   {
     'target': ['4.8=>4.9', '4.9=>4.8'],
+    '4.8': '/user-manual/wazuh-indexer/certificates.html',
+    '4.9': '/user-manual/wazuh-indexer/wazuh-indexer-cluster.html#certificates-deployment',
+  },
+  {
+    'target': ['4.8=>4.9', '4.9=>4.8'],
     '4.8': '/user-manual/capabilities/policy-monitoring/rootcheck/index.html',
     '4.9': '/user-manual/capabilities/malware-detection/rootkits-behavior-detection.html',
+  },
+  {
+    'target': ['4.8=>4.9', '4.9=>4.8'],
+    '4.8': '/user-manual/upscaling/adding-indexer-node.html',
+    '4.9': '/user-manual/wazuh-indexer/wazuh-indexer-cluster.html#adding-wazuh-indexer-nodes',
+  },
+  {
+    'target': ['4.8=>4.9', '4.9=>4.8'],
+    '4.8': '/user-manual/upscaling/adding-server-node.html',
+    '4.9': '/user-manual/manager/wazuh-server-cluster.html#adding-new-wazuh-server-nodes',
+  },
+  {
+    'target': ['4.8=>4.9', '4.9=>4.8'],
+    '4.8': '/migration-guide/files-backup/index.html',
+    '4.9': '/migration-guide/index.html',
+  },
+  {
+    'target': ['4.8=>4.9', '4.9=>4.8'],
+    '4.8': '/migration-guide/files-backup/creating/index.html',
+    '4.9': '/migration-guide/creating/index.html',
+  },
+  {
+    'target': ['4.8=>4.9', '4.9=>4.8'],
+    '4.8': '/migration-guide/files-backup/creating/wazuh-agent.html',
+    '4.9': '/migration-guide/creating/wazuh-agent.html',
+  },
+  {
+    'target': ['4.8=>4.9', '4.9=>4.8'],
+    '4.8': '/migration-guide/files-backup/creating/wazuh-central-components.html',
+    '4.9': '/migration-guide/creating/wazuh-central-components.html',
+  },
+  {
+    'target': ['4.8=>4.9', '4.9=>4.8'],
+    '4.8': '/migration-guide/files-backup/restoring/index.html',
+    '4.9': '/migration-guide/restoring/index.html',
+  },
+  {
+    'target': ['4.8=>4.9', '4.9=>4.8'],
+    '4.8': '/migration-guide/files-backup/restoring/wazuh-agent.html',
+    '4.9': '/migration-guide/restoring/wazuh-agent.html',
+  },
+  {
+    'target': ['4.8=>4.9', '4.9=>4.8'],
+    '4.8': '/migration-guide/files-backup/restoring/wazuh-central-components.html',
+    '4.9': '/migration-guide/restoring/wazuh-central-components.html',
   },
 );
 
@@ -206,6 +256,14 @@ newUrls['4.9'] = [
   '/user-manual/agent/agent-management/remote-upgrading/wpk-files/wpk-list.html',
   '/user-manual/wazuh-dashboard/navigating-the-wazuh-dashboard.html',
   '/user-manual/wazuh-dashboard/settings.html',
+  '/user-manual/wazuh-indexer/wazuh-indexer-cluster.html',
+  '/cloud-service/your-environment/custom-dns.html',
+  '/migration-guide/creating/index.html',
+  '/migration-guide/creating/wazuh-agent.html',
+  '/migration-guide/creating/wazuh-central-components.html',
+  '/migration-guide/restoring/index.html',
+  '/migration-guide/restoring/wazuh-agent.html',
+  '/migration-guide/restoring/wazuh-central-components.html',
 ];
 
 /* Pages no longer available in 4.9 */
@@ -227,6 +285,7 @@ removedUrls['4.9'] = [
   '/user-manual/agent/agent-management/remote-upgrading/wpk-list.html',
   '/user-manual/wazuh-dashboard/config-file.html',
   '/user-manual/wazuh-dashboard/management.html',
+  '/user-manual/wazuh-indexer/certificates.html',
   '/user-manual/capabilities/policy-monitoring/index.html',
   '/user-manual/capabilities/policy-monitoring/openscap/index.html',
   '/user-manual/capabilities/policy-monitoring/openscap/how-it-works.html',
@@ -237,6 +296,18 @@ removedUrls['4.9'] = [
   '/user-manual/capabilities/policy-monitoring/rootcheck/rootcheck-configuration.html',
   '/user-manual/capabilities/policy-monitoring/rootcheck/rootcheck-faq.html',
   '/user-manual/capabilities/policy-monitoring/ciscat/ciscat.html',
+  '/user-manual/upscaling/index.html',
+  '/user-manual/upscaling/adding-indexer-node.html',
+  '/user-manual/upscaling/adding-server-node.html',
+  '/migration-guide/wazuh-indexer.html',
+  '/migration-guide/wazuh-dashboard.html',
+  '/migration-guide/files-backup/index.html',
+  '/migration-guide/files-backup/creating/index.html',
+  '/migration-guide/files-backup/creating/wazuh-agent.html',
+  '/migration-guide/files-backup/creating/wazuh-central-components.html',
+  '/migration-guide/files-backup/restoring/index.html',
+  '/migration-guide/files-backup/restoring/wazuh-agent.html',
+  '/migration-guide/files-backup/restoring/wazuh-central-components.html',
 ];
 
 /* *** RELEASE 4.8 ****/
