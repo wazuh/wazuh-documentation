@@ -3,8 +3,8 @@
 .. meta::
    :description: Wazuh 4.9.1 has been released. Check out our release notes to discover the changes and additions of this release.
 
-4.9.1 Release notes - TBD
-=========================
+4.9.1 Release notes - 17 October 2024
+=====================================
 
 This section lists the changes in version 4.9.1. Every update of the Wazuh solution is cumulative and includes all enhancements and fixes from previous releases.
 
@@ -41,6 +41,7 @@ Wazuh dashboard
 -  `#6956 <https://github.com/wazuh/wazuh-dashboard-plugins/pull/6956>`__ Changed many loading spinners in some views to loading search progress.
 -  `#6999 <https://github.com/wazuh/wazuh-dashboard-plugins/pull/6999>`__ Removed the XML autoformat function group configuration due to performance issues.
 -  `#7023 <https://github.com/wazuh/wazuh-dashboard-plugins/pull/7023>`__ Removed the PDF report footer year.
+-  `#7086 <https://github.com/wazuh/wazuh-dashboard-plugins/pull/7086>`__ Removed data grid tables from **Threat Hunting** dashboard, **GitHub** panel, and **Office365** panel.
 
 Packages
 ^^^^^^^^
@@ -63,6 +64,8 @@ Wazuh manager
 -  `#24909 <https://github.com/wazuh/wazuh/pull/24909>`__ Fixed vulnerability detector issue where RPM upgrade wouldn't download new content.
 -  `#25667 <https://github.com/wazuh/wazuh/pull/25667>`__ Fixed uncaught exception at Keystore test tool.
 -  `#25705 <https://github.com/wazuh/wazuh/pull/25705>`__ Replaced ``eval`` calls with ``ast.literal_eval``.
+-  `#26277 <https://github.com/wazuh/wazuh/pull/26277>`__ Fixed the cluster being disabled by default when loading configurations.
+-  `#25945 <https://github.com/wazuh/wazuh/pull/25945>`__ Added support for ARM packages for ``wazuh-manager``.
 
 Wazuh agent
 ^^^^^^^^^^^
@@ -101,6 +104,7 @@ Wazuh dashboard
 -  `#7015 <https://github.com/wazuh/wazuh-dashboard-plugins/pull/7015>`__ Fixed style issue when unpinning an agent in the endpoint summary section.
 -  `#7021 <https://github.com/wazuh/wazuh-dashboard-plugins/pull/7021>`__ Fixed overflow style on a long value filter.
 -  `#7056 <https://github.com/wazuh/wazuh-dashboard-plugins/pull/7056>`__ Fixed buttons enabled for a read-only user in **Endpoint groups** section.
+-  `#7090 <https://github.com/wazuh/wazuh-dashboard-plugins/pull/7090>`__ Fixed the automatic page refresh in dashboards and prevented duplicate requests.
 
 Packages
 ^^^^^^^^

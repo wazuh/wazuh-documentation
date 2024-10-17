@@ -29,6 +29,7 @@ All notable changes to this project will be documented in this file.
 - Added `SECURITY.md` to the Wazuh documentation repository. ([#7764](https://github.com/wazuh/wazuh-documentation/pull/7764))
 - Added support for Python 3.12 in configuration steps. ([#7673](https://github.com/wazuh/wazuh-documentation/pull/7673))
 - Added ARM64 Wazuh manager package references to Packages list. ([#7806](https://github.com/wazuh/wazuh-documentation/pull/7806))
+- Added *macOS Sequoia 15* to the Available SCA policies list. ([#7864](https://github.com/wazuh/wazuh-documentation/pull/7864))
 
 ### Changed
 
@@ -40,6 +41,7 @@ All notable changes to this project will be documented in this file.
 - Added a step for creating a retention policy using the Visual editor in the *Index life management* section. ([#7685](https://github.com/wazuh/wazuh-documentation/pull/7685))
 - Fixed debugging command for the Wazuh dashboard. ([#7769](https://github.com/wazuh/wazuh-documentation/pull/7769))
 - Fixed Wazuh indexer repository reference in the Wazuh indexer package generation guide. ([#7779](https://github.com/wazuh/wazuh-documentation/pull/7779))
+- Fixed highlighting in Docker compose configuration file example. ([#7867](https://github.com/wazuh/wazuh-documentation/pull/7867))
 
 ### Removed
 
