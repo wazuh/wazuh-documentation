@@ -26,7 +26,7 @@ Using default docker-compose files
 
       .. code-block::
 
-         # git checkout v|WAZUH_CURRENT_DOCKER|
+         # git fetch && git checkout v|WAZUH_CURRENT_DOCKER|
 
 #. Start the new version of Wazuh using ``docker-compose``:
 
