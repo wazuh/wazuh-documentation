@@ -40,7 +40,7 @@ Any modification related to these files will also be made in the associated volu
 Recreating certificates
 -----------------------
 
-Upgrading from a version earlier than v4.8.0 requires that you recreate the SSL certificates. Follow instructions in :ref:`kubernetes_ssl_certificates` for this.
+Upgrading from a version earlier than v4.8.0 requires you to recreate the SSL certificates. Clone the  *wazuh-kubernetes* repository and check out the v|WAZUH_CURRENT_KUBERNETES| tag. Then, follow the instructions in :ref:`kubernetes_ssl_certificates`.
 
 Configuring the upgrade
 -----------------------
@@ -59,79 +59,133 @@ Using default manifests
 
       # git checkout v|WAZUH_CURRENT_DOCKER|
 
-#. `Apply the new configuration`_
+Next, :ref:`apply the new configuration <apply_the_new_configuration>`.
 
 Keeping custom manifests
 ^^^^^^^^^^^^^^^^^^^^^^^^
 
-In Wazuh 4.4, some paths are different to those in earlier versions. You have to update the old paths with the new ones if you are keeping your custom manifests.
-
-``old-path`` -> ``new-path``
-
--  ``/usr/share/wazuh-dashboard/config/certs/`` -> ``/usr/share/wazuh-dashboard/certs/``
--  ``/usr/share/wazuh-indexer/config/certs/`` -> ``/usr/share/wazuh-indexer/certs/``
--  ``/usr/share/wazuh-indexer/plugins/opensearch-security/securityconfig/`` -> ``/usr/share/wazuh-indexer/opensearch-security/``
-
 To upgrade your deployment keeping your custom manifests, do the following.
 
-#. If you are updating from 4.3, edit the following files and update them with the new paths in 4.4. You can see the new paths next to each file in the samples below.
+#. If you are upgrading from version 4.3, :ref:`update the Java Opts variable name <updating_java_opts>` with the new one.
+#. If you are upgrading from version 4.3, :ref:`update old paths <updating_old_paths>` with the new ones.
+#. If you are upgrading from a version earlier than 4.8, :ref:`update configuration parameters <updating_configuraton_parameters>`.
+#. :ref:`Modify tags of Wazuh images <modifying_tags>`.
 
-   -  ``wazuh/indexer_stack/wazuh-dashboard/dashboard-deploy.yaml``
+Next, :ref:`apply the new configuration <apply_the_new_configuration>`.
+
+.. _updating_java_opts:
+
+Updating Java Opts variable name
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+#. If you are upgrading from version 4.3, you must replace ``ES_JAVA_OPTS`` with ``OPENSEARCH_JAVA_OPTS`` and modify the value.
+
+   -  ``wazuh/wazuh_managers/wazuh-master-sts.yaml``
+
+      .. code-block:: yaml
+         :emphasize-lines: 2
+
+         env:
+           - name: OPENSEARCH_JAVA_OPTS
+             value: '-Xms1g -Xmx1g -Dlog4j2.formatMsgNoLookups=true'
+
+.. _updating_old_paths:
+
+Updating old paths
+~~~~~~~~~~~~~~~~~~
+
+**Wazuh dashboard**
+
+#. Edit ``wazuh/indexer_stack/wazuh-dashboard/dashboard-deploy.yaml`` and do the following replacements.
+
+   -  Replace ``/usr/share/wazuh-dashboard/config/certs/`` with ``/usr/share/wazuh-dashboard/certs/``.
+
+#. Edit ``wazuh/indexer_stack/wazuh-dashboard/dashboard_conf/opensearch_dashboards.yml`` and do the following replacements.
+
+   -  Replace ``/usr/share/wazuh-dashboard/config/certs/`` with ``/usr/share/wazuh-dashboard/certs/``.
+
+**Wazuh indexer**
+
+#. Edit ``wazuh/indexer_stack/wazuh-indexer/cluster/indexer-sts.yaml`` and do the following replacements.
+
+   -  Replace ``/usr/share/wazuh-indexer/config/certs/`` with ``/usr/share/wazuh-indexer/certs/``.
+   -  Replace ``/usr/share/wazuh-indexer/config/opensearch.yml`` with ``/usr/share/wazuh-indexer/opensearch.yml``.
+   -  Replace ``/usr/share/wazuh-indexer/plugins/opensearch-security/securityconfig/`` with ``/usr/share/wazuh-indexer/opensearch-security/``.
+
+#. Edit ``wazuh/indexer_stack/wazuh-indexer/indexer_conf/opensearch.yml`` and do the following replacements.
+
+   -  Replace ``/usr/share/wazuh-indexer/config/certs/`` with ``/usr/share/wazuh-indexer/certs/``.
+
+.. _updating_configuraton_parameters:
+
+Updating configuration parameters
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+#. Update the ``defaultRoute`` parameter in the Wazuh dashboard configuration.
+
+   -  ``wazuh/indexer_stack/wazuh-dashboard/dashboard_conf/opensearch_dashboards.yml``.
 
       .. code-block:: yaml
 
-         image: 'wazuh/wazuh-dashboard:|WAZUH_CURRENT_KUBERNETES|'
-         mountPath: /usr/share/wazuh-dashboard/certs/cert.pem
-         mountPath: /usr/share/wazuh-dashboard/certs/key.pem
-         mountPath: /usr/share/wazuh-dashboard/certs/root-ca.pem
-         value: /usr/share/wazuh-dashboard/certs/cert.pem
-         value: /usr/share/wazuh-dashboard/certs/key.pem
+         uiSettings.overrides.defaultRoute: /app/wz-home
 
-   -  ``wazuh/indexer_stack/wazuh-dashboard/dashboard_conf/opensearch_dashboards.yml``
-
-      .. code-block:: yaml
-
-         server.ssl.key: "/usr/share/wazuh-dashboard/certs/key.pem"
-         server.ssl.certificate: "/usr/share/wazuh-dashboard/certs/cert.pem"
-         opensearch.ssl.certificateAuthorities: ["/usr/share/wazuh-dashboard/certs/root-ca.pem"]
-
-   -  ``wazuh/indexer_stack/wazuh-indexer/cluster/indexer-sts.yaml``
-
-      .. code-block:: yaml
-
-         image: 'wazuh/wazuh-indexer:|WAZUH_CURRENT_KUBERNETES|'
-         mountPath: /usr/share/wazuh-indexer/certs/node-key.pem
-         mountPath: /usr/share/wazuh-indexer/certs/node.pem
-         mountPath: /usr/share/wazuh-indexer/certs/root-ca.pem
-         mountPath: /usr/share/wazuh-indexer/certs/admin.pem
-         mountPath: /usr/share/wazuh-indexer/certs/admin-key.pem
-         mountPath: /usr/share/wazuh-indexer/opensearch.yml
-         mountPath: /usr/share/wazuh-indexer/opensearch-security/internal_users.yml
+#. Edit ``opensearch.yml`` and modify ``CN`` for Wazuh indexer.
 
    -  ``wazuh/indexer_stack/wazuh-indexer/indexer_conf/opensearch.yml``
 
       .. code-block:: yaml
 
-         plugins.security.ssl.http.pemcert_filepath: /usr/share/wazuh-indexer/certs/node.pem
-         plugins.security.ssl.http.pemkey_filepath: /usr/share/wazuh-indexer/certs/node-key.pem
-         plugins.security.ssl.http.pemtrustedcas_filepath: /usr/share/wazuh-indexer/certs/root-ca.pem
-         plugins.security.ssl.transport.pemcert_filepath: /usr/share/wazuh-indexer/certs/node.pem
-         plugins.security.ssl.transport.pemkey_filepath: /usr/share/wazuh-indexer/certs/node-key.pem
-         plugins.security.ssl.transport.pemtrustedcas_filepath: /usr/share/wazuh-indexer/certs/root-ca.pem
+         plugins.security.nodes_dn:
+           - CN=indexer,O=Company,L=California,C=US
+
+#. Edit the following files and modify all Wazuh indexer URLs in the deployment.
+
+   -  ``wazuh/indexer_stack/wazuh-dashboard/dashboard-deploy.yaml``
+
+      .. code-block:: yaml
+         :emphasize-lines: 3
+
+         env:
+           - name: INDEXER_URL
+             value: 'https://indexer:9200'
 
    -  ``wazuh/wazuh_managers/wazuh-master-sts.yaml``
 
       .. code-block:: yaml
+         :emphasize-lines: 3
 
-         image: 'wazuh/wazuh-manager:|WAZUH_CURRENT_KUBERNETES|'
+         env:
+           - name: INDEXER_URL
+             value: 'https://indexer:9200'
 
    -  ``wazuh/wazuh_managers/wazuh-worker-sts.yaml``
 
       .. code-block:: yaml
+         :emphasize-lines: 3
 
-         image: 'wazuh/wazuh-manager:|WAZUH_CURRENT_KUBERNETES|'
+         env:
+           - name: INDEXER_URL
+             value: 'https://indexer:9200'
 
-#. `Apply the new configuration`_
+#. Edit the following files of the ``v|WAZUH_CURRENT_KUBERNETES|`` tag and apply all the customizations from your Wazuh manager ``ossec.conf`` file.
+
+   -  ``wazuh/wazuh_managers/wazuh_conf/master.conf``
+   -  ``wazuh/wazuh_managers/wazuh_conf/worker.conf``
+
+.. _modifying_tags:
+
+Modifying tags of Wazuh images
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+Modify the tag of Wazuh images in the different *statefulsets* and deployments.
+
+.. code-block:: yaml
+
+   image: 'wazuh/wazuh-dashboard:|WAZUH_CURRENT_KUBERNETES|'
+   image: 'wazuh/wazuh-manager:|WAZUH_CURRENT_KUBERNETES|'
+   image: 'wazuh/wazuh-indexer:|WAZUH_CURRENT_KUBERNETES|'
+
+.. _apply_the_new_configuration:
 
 Apply the new configuration
 ---------------------------
