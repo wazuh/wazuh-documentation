@@ -271,8 +271,7 @@ Check the following log files:
 
    .. code-block:: console
 
-      # journalctl -u wazuh-dashboard
-      # cat /usr/share/wazuh-dashboard/data/wazuh/logs/wazuhapp.log | grep -i -E "error|warn"
+      # journalctl -u wazuh-dashboard | grep -i -E "error|warn"
 
 .. note::
 

@@ -55,6 +55,13 @@ Using the Visual editor
 #. Click **Add transition** and select **delete_alerts** as the **Destination state**.
 #. Select **Minimum Index Age** in **Condition**. Input the retention value, for example, **90d** for 90 days, in the **Minimum Index Age**.
 #. Click **Add transition**. Click **Save state**. Click **Create**.
+#. Change the **Initial State** to **Initial**.
+
+   .. thumbnail:: /images/manual/wazuh-indexer/ism-policy-states.png
+         :title: ISM Policy States
+         :alt: ISM Policy States
+         :align: center
+         :width: 80%
 
 Using the JSON editor
 ~~~~~~~~~~~~~~~~~~~~~

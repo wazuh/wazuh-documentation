@@ -28,7 +28,7 @@ custom_replacements = {
     "|WAZUH_CURRENT_MINOR|" : version,
     "|WAZUH_CURRENT|" : release,
     "|PYTHON_CLOUD_CONTAINERS_MIN|": "3.8",
-    "|PYTHON_CLOUD_CONTAINERS_MAX|": "3.11",
+    "|PYTHON_CLOUD_CONTAINERS_MAX|": "3.12",
 
     # --- Revision numbers for Wazuh agent and manager packages versions
     # Yum packages revisions
@@ -64,8 +64,8 @@ custom_replacements = {
     "|WAZUH_INDEXER_x64_DEB|" : "amd64",
     #
     # === Wazuh dashboard version revisions
-    "|WAZUH_DASHBOARD_CURRENT_REV_RPM|" : "2",
-    "|WAZUH_DASHBOARD_CURRENT_REV_DEB|" : "2",
+    "|WAZUH_DASHBOARD_CURRENT_REV_RPM|" : "1",
+    "|WAZUH_DASHBOARD_CURRENT_REV_DEB|" : "1",
     # --- Architectures for Wazuh dashboard packages
     "|WAZUH_DASHBOARD_x64_RPM|" : "x86_64",
     "|WAZUH_DASHBOARD_x64_DEB|" : "amd64",
