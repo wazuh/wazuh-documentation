@@ -34,6 +34,7 @@ Options
 - `title`_
 - `email_to`_
 - `showlogs`_
+- `report_log_source`_
 
 group
 ^^^^^
@@ -146,6 +147,17 @@ Enable or disable the inclusion of logs when creating the report.
 | **Allowed values** | yes, no |
 +--------------------+---------+
 
+report_log_source
+^^^^^^^^^^^^^^^^^
+
+Select to read alerts from ``alerts.log`` or ``alerts.json``.
+
++--------------------+---------------------------+
+| **Default value**  | alerts.log                |
++--------------------+---------------------------+
+| **Allowed values** | alerts.log, alerts.json   |
++--------------------+---------------------------+
+
 
 Example of configuration
 ------------------------
@@ -158,6 +170,7 @@ Example of configuration
     <srcip>192.168.1.10</srcip>
     <email_to>recipient@example.wazuh.com</email_to>
     <showlogs>yes</showlogs>
+    <report_log_source>alerts.json</report_log_source>
   </reports>
 
   <reports>
@@ -166,4 +179,5 @@ Example of configuration
     <email_to>recipient@example.wazuh.com</email_to>
     <srcip>192.168.1.10</srcip>
     <showlogs>yes</showlogs>
+    <report_log_source>alerts.log</report_log_source>
   </reports>
