@@ -196,10 +196,10 @@ Let’s see below, the content of the YAML file ``/etc/ansible/roles/wazuh-ansib
        roles:
          - role: "../roles/wazuh/ansible-wazuh-manager"
          - role: "../roles/wazuh/ansible-filebeat-oss"
-           filebeat_node_name: node-4
        become: yes
        become_user: root
        vars:
+         filebeat_node_name: node-4
          wazuh_manager_config:
            connection:
                - type: 'secure'
@@ -228,10 +228,10 @@ Let’s see below, the content of the YAML file ``/etc/ansible/roles/wazuh-ansib
        roles:
          - role: "../roles/wazuh/ansible-wazuh-manager"
          - role: "../roles/wazuh/ansible-filebeat-oss"
-           filebeat_node_name: node-5
        become: yes
        become_user: root
        vars:
+         filebeat_node_name: node-5
          wazuh_manager_config:
            connection:
                - type: 'secure'
