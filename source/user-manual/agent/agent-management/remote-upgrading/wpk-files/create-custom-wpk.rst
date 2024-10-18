@@ -134,17 +134,17 @@ If the ``-c`` or ``--checksum`` option is used, a file is created containing the
 macOS WPK
 ~~~~~~~~~
 
-To build a WPK for macOS, you need to first download a PKG package of the desired version:
+To build a WPK for macOS, you need to first download a PKG package of the desired version, for the intel64 package case:
 
 .. code-block:: console
 
-   # curl -O https://packages.wazuh.com/4.x/macos/wazuh-agent-|WAZUH_CURRENT_OSX|-|WAZUH_REVISION_OSX|.pkg
+   # curl -O https://packages.wazuh.com/4.x/macos/wazuh-agent-|WAZUH_CURRENT_OSX|-|WAZUH_REVISION_OSX|.intel64.pkg
 
 Run the command below to build a macOS WPK:
 
 .. code-block:: console
 
-   # ./generate_wpk_package.sh -t macos -b v|WAZUH_CURRENT_OSX| -d /<DESTINATION_PATH> -k /<PATH_TO_GENERATED_WPK_KEYS> -o wazuh-agent_v|WAZUH_CURRENT_OSX|_macOS.wpk -pn /tmp/wazuh-agent-|WAZUH_CURRENT_OSX|-|WAZUH_REVISION_OSX|.pkg
+   # ./generate_wpk_package.sh -t macos -b v|WAZUH_CURRENT_OSX| -d /<DESTINATION_PATH> -k /<PATH_TO_GENERATED_WPK_KEYS> -o wazuh-agent_v|WAZUH_CURRENT_OSX|_macOS.wpk -pn /tmp/wazuh-agent-|WAZUH_CURRENT_OSX|-|WAZUH_REVISION_OSX|.intel64.pkg
 
 This script builds a Wazuh |WAZUH_CURRENT_OSX| macOS WPK package named ``wazuh-agent_v|WAZUH_CURRENT_OSX|_macOS.wpk`` and stores it in ``/<DESTINATION_PATH>``. (You can use a destination path of your choice). It does this using the previously generated keys saved in ``/<PATH_TO_GENERATED_WPK_KEYS>``.
 
