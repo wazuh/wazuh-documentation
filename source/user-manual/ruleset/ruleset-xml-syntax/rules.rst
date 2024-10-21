@@ -957,6 +957,11 @@ Example:
 
 This rule will trigger when there is a successful login between 6 pm and 8 am.
 
+.. note::
+   
+   The `time` used for matching the rule is based on the manager's time, not the timestamp of the event itself. 
+   Ensure that the local time settings are correctly configured to avoid unexpected rule triggers.
+
 weekday
 ^^^^^^^
 
@@ -981,6 +986,11 @@ Example:
    </rule>
 
 This rule will trigger when there is a successful login during the weekend.
+
+.. note::
+
+   The `weekday` used for matching the rule is based on the manager's time, not the timestamp of the event itself. 
+   Ensure that the local time settings are correctly configured to avoid unexpected rule triggers.
 
 .. _rules_id:
 
