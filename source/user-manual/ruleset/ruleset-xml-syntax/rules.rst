@@ -955,7 +955,7 @@ Example:
      <group>login_time,pci_dss_10.2.5,pci_dss_10.6.1,gpg13_7.1,gpg13_7.2,gdpr_IV_35.7.d,gdpr_IV_32.2,hipaa_164.312.b,nist_800_53_AU.14,nist_800_53_AC.7,nist_800_53_AU.6,</group>
    </rule>
 
-This rule will trigger when there is a successful login between 6 pm and 8 am.
+This rule triggers on successful logins between 6 pm and 8 am. The time is based on the Wazuh server time, not the event timestamp. You must configure local time settings correctly to prevent unexpected triggers.
 
 weekday
 ^^^^^^^
@@ -980,7 +980,7 @@ Example:
      <group>login_day,pci_dss_10.2.5,pci_dss_10.6.1,gpg13_7.1,gpg13_7.2,gdpr_IV_35.7.d,gdpr_IV_32.2,hipaa_164.312.b,nist_800_53_AU.14,nist_800_53_AC.7,nist_800_53_AU.6,</group>
    </rule>
 
-This rule will trigger when there is a successful login during the weekend.
+This rule triggers on successful logins during the weekend. The week day is based on the Wazuh server time, not the event timestamp. You must configure local time settings correctly to prevent unexpected triggers.
 
 .. _rules_id:
 
