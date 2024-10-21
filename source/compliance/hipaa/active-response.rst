@@ -3,7 +3,7 @@
 .. meta::
   :description: The Active Response module assists in meeting HIPAA compliance. Learn more about it in this section of the Wazuh documentation.
 
-Active response
+Active Response
 ===============
 
 The Wazuh Active Response module is configured to automatically execute scripts when events match specified rules in the Wazuh ruleset. These scripts may perform a firewall block or drop, traffic shaping or throttling, account lockout, or any other user defined action.

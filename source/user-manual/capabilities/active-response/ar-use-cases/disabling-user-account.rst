@@ -122,7 +122,7 @@ Visualize the alerts
 You can visualize the alert data on the Wazuh dashboard. In the image below, you can see that the active response triggers just after rule ID ``120100`` fires to disable the account. Then re-enables it again after 5 minutes.
 
 .. thumbnail:: /images/manual/active-response/ar-alert-fired3.png
-   :title: Active response alert: User account disabled
-   :alt: Active response alert: User account disabled
+   :title: Active Response alert: User account disabled
+   :alt: Active Response alert: User account disabled
    :align: center
    :width: 80%
