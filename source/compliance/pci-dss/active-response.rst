@@ -10,11 +10,11 @@ Active response
 
 Active response allows the execution of scripts whenever an event matches certain rules in your Wazuh ruleset. The actions executed could be a firewall block or drop, traffic shaping or throttling, or account lockout, among others.
 
-The active response module helps to meet the following PCI DSS requirement:
+The Active Response module helps to meet the following PCI DSS requirement:
 
 -  **Requirement 11 - Test Security of Systems and Networks Regularly**: Vulnerabilities are being discovered continually by malicious individuals and researchers, and being introduced by new software. System components, processes, and bespoke and custom software should be tested frequently to ensure security controls continue to reflect a changing environment. 
 
-This requirement aims to ensure that you test your systems and networks regularly. Testing allows you to detect and respond to security status and possible intrusions. With the active response module, you can respond to intrusions and unauthorized file changes. You can find more details on configuring the active response module in the :doc:`active response </user-manual/capabilities/active-response/index>` documentation section.
+This requirement aims to ensure that you test your systems and networks regularly. Testing allows you to detect and respond to security status and possible intrusions. With the Active Response module, you can respond to intrusions and unauthorized file changes. You can find more details on configuring the Active Response module in the :doc:`Active Response </user-manual/capabilities/active-response/index>` documentation section.
 
 
 Use cases
@@ -22,9 +22,9 @@ Use cases
 
 -  PCI DSS 11.5 requires that you detect and respond to network intrusions and unexpected file changes. You can configure scripts to run when specific actions occur to respond to these intrusions. Wazuh comes with preconfigured active response scripts. Refer to the :doc:`Default Active response scripts section </user-manual/capabilities/active-response/default-active-response-scripts>` to access these scripts.
 
-   Using the steps below, we configure the active response module to execute an IP block when an attempt to log in with a non-existent user via SSH occurs.
+   Using the steps below, we configure the Active Response module to execute an IP block when an attempt to log in with a non-existent user via SSH occurs.
 
-   #. Configure the active response to execute the ``firewall-drop`` command when the rule for attempts to log in to a non-existent user is triggered (rule 5710) by adding the following block in the manager configuration file (``/var/ossec/etc/ossec.conf``):
+   #. Configure the Active Response to execute the ``firewall-drop`` command when the rule for attempts to log in to a non-existent user is triggered (rule 5710) by adding the following block in the manager configuration file (``/var/ossec/etc/ossec.conf``):
 
       .. code-block:: xml
          :emphasize-lines: 4
