@@ -646,8 +646,8 @@ As seen in the image, ChatGPT provides more context to the malicious file detect
    :width: 80%
 
 .. thumbnail:: /images/poc/chatgpt-active-response-ubuntu-alert.png
-   :title: Active response
-   :alt: Active response
+   :title: Active Response
+   :alt: Active Response
    :align: center
    :width: 80%
 
@@ -683,8 +683,8 @@ As seen in the image, ChatGPT provides more context to the malicious file detect
    :width: 80%
 
 .. thumbnail:: /images/poc/chatgpt-active-response-windows-alert.png
-   :title: Active response
-   :alt: Active response
+   :title: Active Response
+   :alt: Active Response
    :align: center
    :width: 80%
 

@@ -136,8 +136,8 @@ Monitored Linux/Unix endpoints have a log file at ``/var/ossec/logs/active-respo
 When the active response triggers, a corresponding alert appears on the Wazuh dashboard.
 
 .. thumbnail:: /images/manual/active-response/ar-alert-fired.png
-   :title: Active response alert: Host Blocked by firewall-drop
-   :alt: Active response alert: Host Blocked by firewall-drop
+   :title: Active Response alert: Host Blocked by firewall-drop
+   :alt: Active Response alert: Host Blocked by firewall-drop
    :align: center
    :width: 80%
 

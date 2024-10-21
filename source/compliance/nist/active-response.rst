@@ -3,7 +3,7 @@
 .. meta::
   :description: The Active Response module performs autonomous actions on endpoints to mitigate security threats. Learn more about it in this section of the documentation.
 
-Active response
+Active Response
 ===============
 
 The Wazuh Active Response module performs autonomous actions on endpoints to mitigate security threats. You can  configure the module to automatically execute scripts when specific alerts trigger. These scripts execute actions, such as a firewall block or drop, traffic shaping or throttling, and account lockout.

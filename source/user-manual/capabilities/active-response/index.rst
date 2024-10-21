@@ -1,9 +1,9 @@
 .. Copyright (C) 2015, Wazuh, Inc.
 
 .. meta::
-  :description: Active response executes scripts in response to specific alerts. Learn more about it here.
+  :description: Active Response executes scripts in response to specific alerts. Learn more about it here.
 
-Active response
+Active Response
 ===============
 
 Security teams often encounter problems in incident response such as addressing high severity events in a timely manner or providing complete mitigation actions. They might struggle to collect relevant information in real time, which makes it difficult to understand the full scope of an incident. These problems increase the difficulty to contain and mitigate the impact of a cyberattack.

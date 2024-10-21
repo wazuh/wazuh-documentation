@@ -109,7 +109,7 @@ Visualize the alerts
 You can visualize the alert data on the Wazuh dashboard.
 
 .. thumbnail:: /images/manual/active-response/ar-alert-fired2.png
-   :title: Active response alert: The Wazuh agent was restarted
-   :alt: Active response alert: The Wazuh agent was restarted
+   :title: Active Response alert: The Wazuh agent was restarted
+   :alt: Active Response alert: The Wazuh agent was restarted
    :align: center
    :width: 80%
