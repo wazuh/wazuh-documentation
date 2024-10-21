@@ -10,7 +10,7 @@ Leveraging LLMs for alert enrichment
 
 YARA is a tool that detects and classifies malware artifacts. While YARA can identify known patterns and signatures of malicious activity, human intervention is often required to interpret and contextualize the output of YARA scans. ChatGPT is a generative AI chatbot developed by OpenAI. It provides users with various LLMs to process data. These LLMs can analyze and enrich YARA alerts with additional context, providing security teams with deeper insights into the nature and severity of detected threats.
 
-In this use case, we integrate Wazuh with YARA to detect when a malicious file is added to a monitored endpoint. The integration utilizes the Wazuh :doc:`FIM </user-manual/capabilities/file-integrity/index>` module to monitor a directory for new or modified files. When a file modification or addition is detected, the Wazuh :doc:`active response </user-manual/capabilities/active-response/index>` module triggers a YARA scan on the file. The Active response module automatically deletes the malicious file from the endpoint if it has a positive match with a malicious signature. The active response module then queries ChatGPT to enrich the YARA scan result with additional insight into the malicious file that helps security teams understand its nature, potential impact, and remediation.
+In this use case, we integrate Wazuh with YARA to detect when a malicious file is added to a monitored endpoint. The integration utilizes the Wazuh :doc:`FIM </user-manual/capabilities/file-integrity/index>` module to monitor a directory for new or modified files. When a file modification or addition is detected, the Wazuh :doc:`Active Response </user-manual/capabilities/active-response/index>` module triggers a YARA scan on the file. The Active Response module automatically deletes the malicious file from the endpoint if it has a positive match with a malicious signature. The Active Response module then queries ChatGPT to enrich the YARA scan result with additional insight into the malicious file that helps security teams understand its nature, potential impact, and remediation.
 
 Infrastructure
 --------------
@@ -30,7 +30,7 @@ Perform the following steps to set up the YARA and ChatGPT integration. Choose e
 Ubuntu 22.04 endpoint
 ^^^^^^^^^^^^^^^^^^^^^
 
-Perform the following steps to install YARA and configure the active response and FIM modules.
+Perform the following steps to install YARA and configure the Active Response and FIM modules.
 
 #. Download, compile, and install YARA:
 
@@ -427,7 +427,7 @@ Perform the following steps to install Python, YARA, and download YARA rules.
 Wazuh server
 ------------
 
-Perform the following steps on the Wazuh server to configure custom rules, decoders, and the active response module.
+Perform the following steps on the Wazuh server to configure custom rules, decoders, and the Active Response module.
 
 #. Add the following decoders to the Wazuh server ``/var/ossec/etc/decoders/local_decoder.xml`` file to parse the data in YARA scan results:
 
@@ -584,7 +584,7 @@ Perform the following steps on the Wazuh server to configure custom rules, decod
         </rule>
       </group>
 
-#. Add the following configuration to the Wazuh server ``/var/ossec/etc/ossec.conf`` configuration file. This configures the active response module to trigger after the rules with ID ``100300``, ``100301``, ``100302``, and ``100303`` are fired:
+#. Add the following configuration to the Wazuh server ``/var/ossec/etc/ossec.conf`` configuration file. This configures the Active Response module to trigger after the rules with ID ``100300``, ``100301``, ``100302``, and ``100303`` are fired:
 
    .. code-block:: xml
 

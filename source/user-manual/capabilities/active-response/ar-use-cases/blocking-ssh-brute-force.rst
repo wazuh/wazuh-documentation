@@ -1,12 +1,12 @@
 .. Copyright (C) 2015, Wazuh, Inc.
 
 .. meta::
-   :description: Learn how to use active response to block an SSH brute-force attack in this use case.
+   :description: Learn how to use Active Response to block an SSH brute-force attack in this use case.
 
-Blocking SSH brute-force attack with active response
+Blocking SSH brute-force attack with Active Response
 ====================================================
 
-Wazuh uses the active response module to run scripts or executables on a monitored endpoint, taking action on certain triggers. In this use case, we simulate an SSH brute-force attack against a RHEL endpoint and configure the active response module to block the IP address of the attacker endpoint. The goal is to prevent SSH brute force attacks. The active response module executes a script to block the IP address of the attacker when rule ``5763 - SSHD brute force trying to get access to the system`` triggers.
+Wazuh uses the Active Response module to run scripts or executables on a monitored endpoint, taking action on certain triggers. In this use case, we simulate an SSH brute-force attack against a RHEL endpoint and configure the Active Response module to block the IP address of the attacker endpoint. The goal is to prevent SSH brute force attacks. The Active Response module executes a script to block the IP address of the attacker when rule ``5763 - SSHD brute force trying to get access to the system`` triggers.
 
 Infrastructure
 --------------
@@ -21,7 +21,7 @@ Endpoint         Description
 Wazuh server
 ------------
 
-Wazuh comes with a set of default scripts used in active response. These scripts are located in the ``/var/ossec/active-response/bin/`` directory on Linux/Unix endpoints. The ``firewall-drop`` active response script works with Linux/Unix operating systems. It uses iptables to block malicious IP addresses.
+Wazuh comes with a set of default scripts used in Active Response. These scripts are located in the ``/var/ossec/active-response/bin/`` directory on Linux/Unix endpoints. The ``firewall-drop`` active response script works with Linux/Unix operating systems. It uses iptables to block malicious IP addresses.
 
 #. Open the Wazuh server ``/var/ossec/etc/ossec.conf`` file and verify that a ``<command>`` block called ``firewall-drop`` with the following configuration is present within the ``<ossec_config>`` block:
 
@@ -58,7 +58,7 @@ Wazuh comes with a set of default scripts used in active response. These scripts
 
    -  ``<command>``: Specifies the command to configure. This is the command name ``firewall-drop`` defined in the previous step.
    -  ``<location>``: Specifies where the command executes. Using the ``local`` value means that the command executes on the monitored endpoint where the trigger event occurs.
-   -  ``<rules_id>``: The active response module executes the command if rule ID ``5763 - SSHD brute force trying to get access to the system`` fires.
+   -  ``<rules_id>``: The Active Response module executes the command if rule ID ``5763 - SSHD brute force trying to get access to the system`` fires.
    -  ``<timeout>``: Specifies how long the active response action must last. In this use case, the module blocks for 180 seconds the IP address of the endpoint carrying out the brute-force attack.
 
 #. Restart the Wazuh manager service to apply the changes:
@@ -106,7 +106,7 @@ Perform the steps below to perform an SSH brute-force attack against the RHEL en
       :align: center
       :width: 80%
 
-#. Ping the victim endpoint from the attacker within 3 minutes of the attack execution to verify that the active response module has blocked the attacker's IP address:
+#. Ping the victim endpoint from the attacker within 3 minutes of the attack execution to verify that the Active Response module has blocked the attacker's IP address:
 
    .. code-block:: console
 
@@ -124,7 +124,7 @@ Perform the steps below to perform an SSH brute-force attack against the RHEL en
 Generating an alert when an active response is fired
 ----------------------------------------------------
 
-Monitored Linux/Unix endpoints have a log file at ``/var/ossec/logs/active-responses.log`` where Wazuh registers the active response activities. By default, the Wazuh server monitors the active response log file. You can find the relevant section in the Wazuh server ``/var/ossec/etc/ossec.conf`` configuration file as shown below:
+Monitored Linux/Unix endpoints have a log file at ``/var/ossec/logs/active-responses.log`` where Wazuh registers the active response activities. By default, the Wazuh server monitors the Active Response log file. You can find the relevant section in the Wazuh server ``/var/ossec/etc/ossec.conf`` configuration file as shown below:
 
 .. code-block:: xml
 
@@ -141,4 +141,4 @@ When the active response triggers, a corresponding alert appears on the Wazuh da
    :align: center
    :width: 80%
 
-The alert appears because rule ID ``651`` is part of the default ``/var/ossec/ruleset/rules/0015-ossec_rules.xml`` rule file on the Wazuh server. If you create a custom active response script, you must add a proper custom rule to analyze the active response logs that are generated.
+The alert appears because rule ID ``651`` is part of the default ``/var/ossec/ruleset/rules/0015-ossec_rules.xml`` rule file on the Wazuh server. If you create a custom active response script, you must add a proper custom rule to analyze the Active Response logs that are generated.

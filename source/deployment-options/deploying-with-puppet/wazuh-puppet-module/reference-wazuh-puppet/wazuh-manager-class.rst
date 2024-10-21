@@ -1230,7 +1230,7 @@ $active_response_rules_id
   `Default []`
 
 $active_response_timeout
-  Usually active response blocks for a certain amount of time.
+  Usually Active Response blocks for a certain amount of time.
 
   `Default undef`
 
