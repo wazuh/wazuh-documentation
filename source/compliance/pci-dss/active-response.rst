@@ -1,14 +1,14 @@
 .. Copyright (C) 2015, Wazuh, Inc.
 
 .. meta::
-  :description: Active response allows the execution of scripts when an event matches certain rules in the Wazuh ruleset. Learn more about it in this section.
+  :description: Active Response allows the execution of scripts when an event matches certain rules in the Wazuh ruleset. Learn more about it in this section.
 
 .. _pci_dss_active_response:
 
-Active response
+Active Response
 ===============
 
-Active response allows the execution of scripts whenever an event matches certain rules in your Wazuh ruleset. The actions executed could be a firewall block or drop, traffic shaping or throttling, or account lockout, among others.
+Active Response allows the execution of scripts whenever an event matches certain rules in your Wazuh ruleset. The actions executed could be a firewall block or drop, traffic shaping or throttling, or account lockout, among others.
 
 The Active Response module helps to meet the following PCI DSS requirement:
 

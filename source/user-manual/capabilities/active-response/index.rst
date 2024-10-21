@@ -26,7 +26,7 @@ The Wazuh Active Response module executes these scripts on monitored endpoints w
 The image below shows the Active Response workflow.
 
 .. thumbnail:: /images/manual/active-response/active-response-workflow.png
-   :title: Active response workflow
+   :title: Active Response workflow
    :align: center
    :width: 100%
 
