@@ -2,11 +2,11 @@
 
 .. meta::
   :description: Wazuh provides an automated way of building AIX packages. Learn how to build your own Wazuh AIX packages in this section of our documentation.
-  
+
 .. _create-aix:
 
-AIX
-===
+AIX agent
+=========
 
 Wazuh provides an automated way of building AIX packages, keep in mind that to build an AIX package you must run this tool in an AIX system.
 

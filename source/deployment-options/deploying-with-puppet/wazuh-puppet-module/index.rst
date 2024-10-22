@@ -383,7 +383,7 @@ Reference Wazuh puppet
 |                                                                 |                                                                 |                                             |
 |                                                                 | :ref:`Misc <ref_server_vars_misc>`                              |                                             |
 +-----------------------------------------------------------------+-----------------------------------------------------------------+---------------------------------------------+
-| :ref:`Wazuh agent class <reference_wazuh_agent_class>`          | :ref:`Active response <ref_agent_vars_ar>`                      |                                             |
+| :ref:`Wazuh agent class <reference_wazuh_agent_class>`          | :ref:`Active Response <ref_agent_vars_ar>`                      |                                             |
 |                                                                 |                                                                 |                                             |
 |                                                                 | :ref:`Agent enrollment <ref_agent_vars_enroll>`                 |                                             |
 |                                                                 |                                                                 |                                             |

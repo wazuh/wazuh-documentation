@@ -1,27 +1,37 @@
 .. Copyright (C) 2015, Wazuh, Inc.
 
 .. meta::
-   :description: Wazuh is a comprehensive open source cybersecurity platform. Check out the user manual to find out how to configure and get the most out of the solution. 
-
-.. wazuh_dashboard:
+   :description: The Wazuh dashboard is a central component for analyzing and visualizing security data. Learn more in this section of the documentation.
 
 Wazuh dashboard
 ===============
 
-The Wazuh dashboard is a powerful web user interface for data visualization and analysis. It includes out-of-the-box dashboards for security events, regulatory compliance (e.g., PCI DSS, GDPR, CIS, HIPAA, NIST 800-53), detected vulnerable applications, file integrity monitoring data, configuration assessment results, cloud infrastructure monitoring events, and others. It is also used to manage the Wazuh configuration and to monitor its status.
+The Wazuh dashboard is a central component for analyzing and visualizing security data. It allows users to oversee and interpret security information generated from various sources. With its intuitive interface, users can create dynamic visualizations, customize views, and delve into detailed investigations of security incidents.
 
-.. topic:: Contents
+The Wazuh dashboard facilitates real-time monitoring of system health and security events. It also aids in compliance management and threat detection, making it a useful for security professionals aiming to fortify their organization's cybersecurity posture.
 
-    .. toctree::
-        :maxdepth: 1
+Browser compatibility
+^^^^^^^^^^^^^^^^^^^^^
 
-        creating-custom-dashboards
-        queries
-        multi-tenancy
-        configuring-third-party-certs/index
-        custom-branding
-        management
-        certificates
-        troubleshooting
-        config-file
-        
+The Wazuh dashboard supports the following web browsers:
+
+-  Chrome 95 or later
+-  Firefox 93 or later
+-  Safari 13.7 or later
+
+Other Chromium-based browsers might also work. Internet Explorer 11 is not supported.
+
+The following section provides an overview of the Wazuh dashboard, covering topics from navigating the user interface to troubleshooting.
+
+.. toctree::
+   :maxdepth: 1
+
+   navigating-the-wazuh-dashboard
+   creating-custom-dashboards
+   queries
+   multi-tenancy
+   configuring-third-party-certs/index
+   custom-branding
+   settings
+   troubleshooting
+   certificates

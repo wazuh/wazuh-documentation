@@ -49,7 +49,7 @@ The next table contains the most relevant information about configuring each ser
 +--------------+----------------------------------------------------------+-----------------------+----------------+----------------------------------------------------------------------------------------------------------------------+------------------------------------------------------------------+
 | Amazon       | :doc:`Custom Logs Buckets <custom-buckets>`              | subscriber            | buckets        |                                                                                                                      | :ref:`Amazon Simple Queue Service <sqs_custom_configuration>`    |
 +--------------+----------------------------------------------------------+-----------------------+----------------+----------------------------------------------------------------------------------------------------------------------+------------------------------------------------------------------+
-| Amazon       | Security Hub                                             | subscriber            | security_hub   |                                                                                                                      | :ref:`Policy configuration <security_hub_policy_configuration>`  |
+| Amazon       | :doc:`Security Hub <security-hub>`                       | subscriber            | security_hub   |                                                                                                                      | :ref:`Policy configuration <security_hub_policy_configuration>`  |
 +--------------+----------------------------------------------------------+-----------------------+----------------+----------------------------------------------------------------------------------------------------------------------+------------------------------------------------------------------+
 
 .. toctree::
@@ -72,3 +72,4 @@ The next table contains the most relevant information about configuring each ser
    elastic-load-balancing/index
    security-lake
    custom-buckets
+   security-hub

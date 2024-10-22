@@ -118,7 +118,7 @@ Microsoft Entra ID Configuration
          :align: center
          :width: 80%
 
-   #. In option 1, under  **Basic SAML Configuration**, click **edit** and set ``wazuh-saml`` as **Identifier (Entity ID)** and ``https://<WAZUH_DASHBOARD_URL>/_opendistro/_security/saml/acs`` as **Reply URL (Assertion Consumer Service URL)**, and ``https://<WAZUH_DASHBOARD_URL>/app/wazuh`` as **Sign on URL (Optional)**. Replace ``<WAZUH_DASHBOARD_URL>`` with the corresponding value. Save and proceed to the next step.
+   #. In option 1, under  **Basic SAML Configuration**, click **edit** and set ``wazuh-saml`` as **Identifier (Entity ID)** and ``https://<WAZUH_DASHBOARD_URL>/_opendistro/_security/saml/acs`` as **Reply URL (Assertion Consumer Service URL)**, and ``https://<WAZUH_DASHBOARD_URL>`` as **Sign on URL (Optional)**. Replace ``<WAZUH_DASHBOARD_URL>`` with the corresponding value. Save and proceed to the next step.
 
       .. thumbnail:: /images/single-sign-on/azure-active-directory/11-click-edit-and-set-wazuh-saml.png
          :title: Click edit and set wazuh-saml
@@ -134,25 +134,25 @@ Microsoft Entra ID Configuration
 
 #. Note the necessary parameters. In the **Enterprise applications** menu, select your application and then click on **Single sign-on**. Note some parameters that will be used in the Wazuh indexer configuration.
 
-   - In option 3 **SAML Certificate**, the **App Federation Metadata Url** will be the ``idp.metadata_url`` in the Wazuh indexer configuration file.
-
-   - Go to the metadata URL using your web browser. Copy the value of the ``<X509Certificate>`` field. It’s your ``exchange_key`` parameter:
-
-   .. thumbnail:: /images/single-sign-on/azure-active-directory/13-go-to-the-metadata-url.png
-      :title: Go to the metadata URL
-      :align: center
-      :width: 80%
-
-   - In option 4 **Set up <YOUR APPLICATION>**, the **Microsoft Entra ID Identifier** will be our ``idp.entity_id``.
+   -  In option 3 **SAML Certificate**, the **App Federation Metadata Url** will be the ``idp.metadata_url`` in the Wazuh indexer configuration file.
+   -  In option 4 **Set up <YOUR APPLICATION>**, the **Microsoft Entra ID Identifier** will be our ``idp.entity_id``.
 
 Wazuh indexer configuration
 ---------------------------
 
 Edit the Wazuh indexer security configuration files. We recommend that you back up these files before you carry out the configuration.
 
+#. Generate a 64-character long random key using the following command.
+
+   .. code-block:: console
+
+      openssl rand -hex 32
+
+   The output will be used as the ``exchange_key`` in the ``/etc/wazuh-indexer/opensearch-security/config.yml`` file.
+
 #. Edit the ``/etc/wazuh-indexer/opensearch-security/config.yml`` file and change the following values:
 
-   - Set the ``order`` in ``basic_internal_auth_domain`` to ``0`` and the ``challenge`` flag to ``false``. 
+   - Set the ``order`` in ``basic_internal_auth_domain`` to ``0`` and the ``challenge`` flag to ``false``.
 
    - Include a ``saml_auth_domain`` configuration under the ``authc`` section similar to the following:
 
@@ -186,14 +186,14 @@ Edit the Wazuh indexer security configuration files. We recommend that you back 
                     entity_id: wazuh-saml
                   kibana_url: https://<WAZUH_DASHBOARD_URL>
                   roles_key: Roles
-                  exchange_key: 'MIIC8DCCAdigAwIBAgIQXzg.........'
+                  exchange_key: 'b1d6dd32753374557dcf92e241.......'
               authentication_backend:
                 type: noop
 
 
-   Ensure to change the following parameters to their corresponding value: 
+   Ensure to change the following parameters to their corresponding value:
 
-   - ``idp.metadata_url`` 
+   - ``idp.metadata_url``
    - ``idp.entity_id``
    - ``sp.entity_id``
    - ``kibana_url``

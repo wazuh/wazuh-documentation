@@ -20,8 +20,8 @@ To ensure that alerts and vulnerabilities detected by the Wazuh Vulnerability De
 
 .. code-block:: console
 
-   # /var/ossec/bin/wazuh-keystore -f indexer -k username -v <INDEXER_USERNAME>
-   # /var/ossec/bin/wazuh-keystore -f indexer -k password -v <INDEXER_PASSWORD>
+   # echo '<INDEXER_USERNAME>' | /var/ossec/bin/wazuh-keystore -f indexer -k username
+   # echo '<INDEXER_PASSWORD>' | /var/ossec/bin/wazuh-keystore -f indexer -k password
 
 IndexerConnector initialization failed
 --------------------------------------
@@ -58,6 +58,15 @@ If you encounter the message *Application Not Found* when accessing the Wazuh da
 .. code-block:: none
 
    uiSettings.overrides.defaultRoute: /app/wz-home
+
+SSO issue when upgrading from Wazuh 4.8 and earlier
+------------------------------------------------------
+
+If you are upgrading from Wazuh 4.8 and earlier, you must update the value of ``exchange_key`` in the ``/etc/wazuh-indexer/opensearch-security/config.yml`` file.
+
+In previous versions, ``exchange_key`` was set by copying the X.509 Certificate blob, excluding the ``-----BEGIN CERTIFICATE-----`` and ``-----END CERTIFICATE-----`` lines.
+
+Starting with Wazuh 4.9.0, ``exchange_key`` must be a 64-character random alphanumeric string. Refer to the the first step of the *Wazuh indexer configuration* in the :doc:`Single sign-on </user-manual/user-administration/single-sign-on/index>` guides, such as :doc:`Okta </user-manual/user-administration/single-sign-on/administrator/okta>`, :doc:`Microsoft Entra ID </user-manual/user-administration/single-sign-on/administrator/microsoft-entra-id>`, :doc:`PingOne </user-manual/user-administration/single-sign-on/administrator/pingone>`, :doc:`Google </user-manual/user-administration/single-sign-on/administrator/google>`, :doc:`Jumpcloud </user-manual/user-administration/single-sign-on/administrator/jumpcloud>`, :doc:`OneLogin </user-manual/user-administration/single-sign-on/administrator/onelogin>`, and :doc:`Keycloack </user-manual/user-administration/single-sign-on/administrator/keycloak>`.
 
 None of the above solutions are fixing my problem
 -------------------------------------------------

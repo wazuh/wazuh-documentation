@@ -11,7 +11,7 @@ The below information is intended to assist in troubleshooting issues.
 Checking if the Wazuh module for AWS is running
 -----------------------------------------------
 
-When the Wazuh module for AWS runs it writes its output in the ``ossec.log`` file. This log file can be found in ``/var/ossec/logs/ossec.log`` or under **Wazuh** > **Management** > **Logs** if you use the Wazuh dashboard. It is possible to check if the Wazuh module for AWS is running without issues by looking in the ``/var/ossec/logs/ossec.log`` file. These are the messages that are displayed in the file depending on how the Wazuh module for AWS has been configured:
+When the Wazuh module for AWS runs it writes its output in the ``ossec.log`` file. This log file can be found in ``/var/ossec/logs/ossec.log`` and under **Server Management** > **Logs** if you use the Wazuh dashboard. It is possible to check if the Wazuh module for AWS is running without issues by looking in the ``/var/ossec/logs/ossec.log`` file. These are the messages that are displayed in the file depending on how the Wazuh module for AWS has been configured:
 
 -  When the Wazuh module for AWS is starting:
 

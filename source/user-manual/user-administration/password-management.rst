@@ -45,8 +45,10 @@ All the available options to run the script are:
 |                                              | Requires -u|--user, and -p|--password, -au|--admin-user and -ap|--admin-password.                           |
 +----------------------------------------------+-------------------------------------------------------------------------------------------------------------+
 | -au,--admin-user <adminUser>                 | Admin user for the Wazuh API. Required for changing the Wazuh API passwords.                                |
+|                                              | Requires -A|--api.                                                                                          |               
 +----------------------------------------------+-------------------------------------------------------------------------------------------------------------+
 | -ap, --admin-password <adminPassword>        | Password for the Wazuh API admin user. Required for changing the Wazuh API passwords.                       |
+|                                              | Requires -A|--api.                                                                                          |      
 +----------------------------------------------+-------------------------------------------------------------------------------------------------------------+
 | -u / --user <user>                           | Indicates the name of the user whose password will be changed.                                              |
 |                                              | If no password is specified, it will generate a random one.                                                 |
@@ -205,7 +207,7 @@ Follow the instructions below to change the passwords for all the Wazuh indexer 
    .. code-block:: console
 
       # curl -sO https://packages.wazuh.com/|WAZUH_CURRENT_MINOR|/wazuh-passwords-tool.sh
-      # bash wazuh-passwords-tool.sh --change-all --admin-user wazuh --admin-password <WAZUH_PASSWORD>
+      # bash wazuh-passwords-tool.sh --api --change-all --admin-user wazuh --admin-password <WAZUH_PASSWORD>
   
    .. code-block:: console
       :class: output
@@ -213,19 +215,16 @@ Follow the instructions below to change the passwords for all the Wazuh indexer 
       INFO: The password for Wazuh API user wazuh is ivLOfmj7.jL6*7Ev?UJoFjrkGy9t6Je.
       INFO: The password for Wazuh API user wazuh-wui is fL+f?sFRPEv5pYRE559rqy9b6G4Z5pVi
 
-#. On `all your Wazuh server nodes`, run the following command to update the `admin` password in the Filebeat keystore and in the ``ossec.conf`` file for the Wazuh server. Replace ``<ADMIN_PASSWORD>`` with the random password generated in the first step.
+#. If you've set up a user other than ``admin`` for Filebeat, manually add the username and password using the following commands. Replace ``<CUSTOM_USERNAME>`` and ``<CUSTOM_PASSWORD>`` with your custom username and password.
 
    .. code-block:: console
 
-      # echo <ADMIN_PASSWORD> | filebeat keystore add password --stdin --force
-      # sed -i 's/<password>.*<\/password>/<password><ADMIN_PASSWORD><\/password>/g' /var/ossec/etc/ossec.conf
-
-#. Restart Filebeat and the Wazuh server to apply the change.
+      # echo <CUSTOM_USERNAME> | filebeat keystore add username --stdin --force
+      # echo <CUSTOM_PASSWORD> | filebeat keystore add password --stdin --force
+         
+   Restart Filebeat to apply the changes.
 
    .. include:: /_templates/common/restart_filebeat.rst
-   .. include:: /_templates/common/restart_manager.rst
-
-   .. note:: Repeat steps 3 and 4 on `every Wazuh server node`.
        
 #. On your `Wazuh dashboard node`, run the following command to update the `kibanaserver` password in the Wazuh dashboard keystore. Replace ``<KIBANASERVER_PASSWORD>`` with the random password generated in the first step.
 

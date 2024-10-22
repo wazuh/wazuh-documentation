@@ -1,8 +1,8 @@
 .. Copyright (C) 2015, Wazuh, Inc.
 
 .. meta::
-  :description: Check out this section to learn about different advanced settings that can provide greater control and flexibility over how the FIM module works. 
-  
+  :description: Check out this section to learn about different advanced settings that can provide greater control and flexibility over how the FIM module works.
+
 Advanced settings
 =================
 
@@ -23,7 +23,7 @@ Who-data monitoring on Linux
 How it works
 ~~~~~~~~~~~~
 
-The who-data monitoring functionality uses the Linux Audit subsystem to get information about who makes the changes in a monitored directory. These changes produce audit events. The FIM module processes the audit events and reports them to the Wazuh server. This functionality expands on the ``realtime`` attribute replacing it. This means that ``whodata`` is real-time monitoring with the who-data information added. 
+The who-data monitoring functionality uses the Linux Audit subsystem to get information about who makes the changes in a monitored directory. These changes produce audit events. The FIM module processes the audit events and reports them to the Wazuh server. This functionality expands on the ``realtime`` attribute replacing it. This means that ``whodata`` is real-time monitoring with the who-data information added.
 
 Configuration
 ~~~~~~~~~~~~~
@@ -37,7 +37,7 @@ You need to install the audit daemon if you don’t have it already installed on
       .. code-block:: console
 
          # yum install audit
-      
+
       For Audit 3.1.1 and later, install the audispd af_unix plugin and restart the Audit service.
 
       .. code-block:: console
@@ -58,20 +58,28 @@ You need to install the audit daemon if you don’t have it already installed on
          # apt-get install audispd-plugins
          # systemctl restart auditd
 
-   .. group-tab:: Alpine Linux
+In most systems, auditd includes a rule to skip processing of every audit rule by default. This setting prevents the reporting of any whodata-related information. To ensure that auditd is not `DISABLED BY DEFAULT <https://man7.org/linux/man-pages/man8/auditctl.8.html#DISABLED_BY_DEFAULT>`__, follow these steps.
 
-      .. code-block:: console
+#. Check the output of this command to find out if the auditd rules include the ``-a never,task`` rule.
 
-         # apk add audit=3.1.1-r0
-         # rc-update add auditd default
-         # cp /usr/sbin/audisp-af_unix /sbin/audisp-af_unix
-         # rc-service auditd restart
+   .. code-block:: console
 
-Perform the following steps to enable who-data monitoring. In this example, you configure who-data monitoring for ``/etc`` directory.
+      # auditctl -l | grep task
+
+#. If the output displays the ``-a never,task`` rule, remove it from the audit rules file located at ``/etc/audit/rules.d/audit.rules``.
+
+#. After that, restart auditd and Wazuh agent to apply the changes:
+
+   .. code-block:: console
+
+      # systemctl restart auditd
+      # systemctl restart wazuh-agent
+
+Next, perform the following steps to enable who-data monitoring. In this example, you configure who-data monitoring for the ``/etc/`` directory.
 
 #. Edit the Wazuh agent ``/var/ossec/etc/ossec.conf`` configuration file and add the configuration below:
 
-   .. code-block:: xml 
+   .. code-block:: xml
 
       <syscheck>
          <directories check_all="yes" whodata="yes">/etc</directories>
@@ -98,7 +106,7 @@ Perform the following steps to enable who-data monitoring. In this example, you 
 
    .. note::
 
-      When the Wazuh agent service stops, it removes the rule. You can use the same command to check that it removed the rule successfully. 
+      When the Wazuh agent service stops, it removes the rule. You can use the same command to check that it removed the rule successfully.
 
 Alert fields
 ~~~~~~~~~~~~
@@ -106,29 +114,29 @@ Alert fields
 The following table establishes a correspondence between audit fields and their equivalent fields in an alert when who-data is enabled.
 
   +----------------+---------------------------+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-  | Audit field    | Alert field               | Fields description                                                                                                                                                                                                                            |                                                                                                                                                                         
+  | Audit field    | Alert field               | Fields description                                                                                                                                                                                                                            |
   +================+===========================+===============================================================================================================================================================================================================================================+
-  | User           | audit.user.id             | Contain information about who started the process that modified the monitored file.                                                                                                                                                           |                                                                                                                                      
-  |                |                           |                                                                                                                                                                                                                                               |                                                                                                                                      
-  |                | audit.user.name           |                                                                                                                                                                                                                                               |                                                                                                                                      
+  | User           | audit.user.id             | Contain information about who started the process that modified the monitored file.                                                                                                                                                           |
+  |                |                           |                                                                                                                                                                                                                                               |
+  |                | audit.user.name           |                                                                                                                                                                                                                                               |
   +----------------+---------------------------+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-  | Login user     | audit.login_user.id       | Contain information about the user who started the session. They correspond respectively to the login UID and login name. Upon login, this ID is assigned to a user and is inherited by every process, even when the user's identity changes. |                                                                                                                                      
-  |                |                           |                                                                                                                                                                                                                                               |                                                                                                                                      
-  |                | audit.login_user.name     |                                                                                                                                                                                                                                               |                                                                                                                                      
+  | Login user     | audit.login_user.id       | Contain information about the user who started the session. They correspond respectively to the login UID and login name. Upon login, this ID is assigned to a user and is inherited by every process, even when the user's identity changes. |
+  |                |                           |                                                                                                                                                                                                                                               |
+  |                | audit.login_user.name     |                                                                                                                                                                                                                                               |
   +----------------+---------------------------+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-  | Effective user | audit.effective_user.id   | Contain the effective ID and name of the user who started the process that modified the monitored file. When a user executes a command using sudo, the effective user ID changes to 0 and the effective user name becomes root.               |                                                                                                                                      
-  |                |                           |                                                                                                                                                                                                                                               |                                                                                                                                      
-  |                | audit.effective_user.name |                                                                                                                                                                                                                                               |                                                                                                                                      
+  | Effective user | audit.effective_user.id   | Contain the effective ID and name of the user who started the process that modified the monitored file. When a user executes a command using sudo, the effective user ID changes to 0 and the effective user name becomes root.               |
+  |                |                           |                                                                                                                                                                                                                                               |
+  |                | audit.effective_user.name |                                                                                                                                                                                                                                               |
   +----------------+---------------------------+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-  | Group          | audit.group.id            | Contain the group ID and group name of the user who started the process that modified the monitored file.                                                                                                                                     |                                                                                                                                      
-  |                |                           |                                                                                                                                                                                                                                               |                                                                                                                                      
-  |                | audit.group.name          |                                                                                                                                                                                                                                               |                                                                                                                                      
+  | Group          | audit.group.id            | Contain the group ID and group name of the user who started the process that modified the monitored file.                                                                                                                                     |
+  |                |                           |                                                                                                                                                                                                                                               |
+  |                | audit.group.name          |                                                                                                                                                                                                                                               |
   +----------------+---------------------------+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-  | Process ID     | audit.process.id          | Contains the ID of the process used to modify the monitored file.                                                                                                                                                                             |                                                                                                                                      
+  | Process ID     | audit.process.id          | Contains the ID of the process used to modify the monitored file.                                                                                                                                                                             |
   +----------------+---------------------------+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-  | Process name   | audit.process.name        | Contains the name of the process used to modify the monitored file.                                                                                                                                                                           |                                                                                                                                      
+  | Process name   | audit.process.name        | Contains the name of the process used to modify the monitored file.                                                                                                                                                                           |
   +----------------+---------------------------+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-  | Process ppid   | audit.process.ppid        | Contains the parent process ID of the process used to modify the monitored file.                                                                                                                                                              |                                                                                                                                      
+  | Process ppid   | audit.process.ppid        | Contains the parent process ID of the process used to modify the monitored file.                                                                                                                                                              |
   +----------------+---------------------------+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
 
 Example: Monitor changes in the ``/etc/hosts.allow`` file on Linux
@@ -193,7 +201,7 @@ Expand the alert to view more information. In the alert fields below, you can se
 Alert in JSON:
 
    .. code-block:: json
-      :emphasize-lines: 9,28,32,33,36,37,40,41        
+      :emphasize-lines: 9,28,32,33,36,37,40,41
 
       {
         "syscheck": {
@@ -330,19 +338,19 @@ The FIM module configures the required Local Audit Policies and SACLs when launc
 
 #. Periodically, Wazuh checks that the Audit Policies and the SACLs are configured as expected. You can modify the frequency of this verification with :ref:`windows_audit_interval <reference_ossec_syscheck_windows_audit_interval>`.
 
-If your Windows OS version is later than Windows Vista but the system didn’t automatically configure the audit policies, see the :ref:`manual_configuration_of_the_local_audit_policies_in_windows` guide. 
+If your Windows OS version is later than Windows Vista but the system didn’t automatically configure the audit policies, see the :ref:`manual_configuration_of_the_local_audit_policies_in_windows` guide.
 
 The following table establishes a correspondence between audit fields and their equivalent fields in an alert when who-data is enabled:
 
   +---------------------+------------------------+--------------------------------------------------------------------------------------------------+
-  | Audit field         | Alert field            | Fields description                                                                               |                                                                                                                                                                                                                                                                                                                                     
+  | Audit field         | Alert field            | Fields description                                                                               |
   +=====================+========================+==================================================================================================+
-  | User                | audit.user.id          | Contain the ID and name of the user who started the process that modified the monitored file.    |                                                                                                                                                                                                                                                                                                 
-  |                     | audit.user.name        |                                                                                                  |                                                                                                                                      
+  | User                | audit.user.id          | Contain the ID and name of the user who started the process that modified the monitored file.    |
+  |                     | audit.user.name        |                                                                                                  |
   +---------------------+------------------------+--------------------------------------------------------------------------------------------------+
-  | Process id          | audit.process.id       | Contain the ID of the process used to modify the monitored file.                                 |                                                                                                                                                                                                                                                                                                 
+  | Process id          | audit.process.id       | Contain the ID of the process used to modify the monitored file.                                 |
   +---------------------+------------------------+--------------------------------------------------------------------------------------------------+
-  | Process name        | audit.process.name     | Contain the name of the process used to modify the monitored file.                               |                                                                                                                                                                                                                                                                                                 
+  | Process name        | audit.process.name     | Contain the name of the process used to modify the monitored file.                               |
   +---------------------+------------------------+--------------------------------------------------------------------------------------------------+
 
 Example: Monitor changes in a text file on Windows
@@ -367,7 +375,7 @@ Perform the following steps to configure the FIM module. This configuration gets
 Test the configuration
 ~~~~~~~~~~~~~~~~~~~~~~
 
-#. Create a text file ``audit_docu.txt`` in the ``Documents`` folder using Notepad. 
+#. Create a text file ``audit_docu.txt`` in the ``Documents`` folder using Notepad.
 
 #. Add the text *“Hello”* and save the changes.
 
@@ -393,7 +401,7 @@ Expand the alert with ``rule.id:550`` to view all the information. In the alert 
 Alert in JSON:
 
    .. code-block:: json
-      :emphasize-lines: 13,73,83,84,87,88        
+      :emphasize-lines: 13,73,83,84,87,88
 
       {
         "_index": "wazuh-alerts-4.x-2023.04.18",
@@ -586,7 +594,7 @@ For Windows versions later than Windows Vista and Windows Server 2008, when you 
 Local Audit Policies in Windows
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-To manually configure the audit policies needed to run FIM in who-data mode, you need to activate the logging of successful events. 
+To manually configure the audit policies needed to run FIM in who-data mode, you need to activate the logging of successful events.
 
 On the Run dialog box (**win** + **R**), open the *Local Group Policy Editor* using the following command:
 
@@ -656,7 +664,7 @@ In 64-bit architecture systems, you can locate 32-bit and 64-bit DLLs in a speci
 - ``System32`` is reserved for 64-bit DLLs.
 - ``SysWOW64`` is reserved for all 32-bit DLLs.
 
-Furthermore, 32-bit processes running in 64-bit environments access ``System32`` through a virtual folder called ``Sysnative``. 
+Furthermore, 32-bit processes running in 64-bit environments access ``System32`` through a virtual folder called ``Sysnative``.
 
 We disabled this redirection and you can access ``System32`` directly. Monitoring ``%WINDIR%/System32`` and ``%WINDIR%/Sysnative`` directories is equivalent and Wazuh shows the path ``%WINDIR%/System32`` in the alerts. ``SysWOW64`` is a different directory. To monitor ``%WINDIR%/SysWOW64``, you must add it to the ``C:\Program Files (x86)\ossec-agent\ossec.conf`` configuration file.
 
@@ -710,7 +718,7 @@ In the configuration example below, you can see how to set the ``recursion_level
       </syscheck>
 
 #. Restart the Wazuh agent with administrator privilege to apply any configuration change:
- 
+
    - Linux: ``systemctl restart wazuh-agent``
    - Windows: ``Restart-Service -Name wazuh``
    - macOS: ``/Library/Ossec/bin/wazuh-control restart``
@@ -718,7 +726,7 @@ In the configuration example below, you can see how to set the ``recursion_level
 If you have the following directory structure and the above setting with ``recursion_level="3"``, FIM then generates alerts for ``file_3.txt`` and all files up to ``<FILEPATH_OF_MONITORED_DIRECTORY>/level_1/level_2/level_3/`` but not for any files in the directory deeper than ``level_3``.
 
    .. code-block:: console
-  
+
       <FILEPATH_OF_MONITORED_DIRECTORY>
       ├── file_0.txt
       └── level_1
@@ -740,11 +748,11 @@ If you don’t specify ``recursion_level``, it’s set to 256. This is the defau
 Process priority
 ----------------
 
-To adjust the CPU usage of the FIM module on the monitored endpoint, use the :ref:`process_priority <reference_ossec_syscheck_process_priority>` option in the agent configuration. You can configure process priority on Windows, Linux, and macOS operating systems. 
+To adjust the CPU usage of the FIM module on the monitored endpoint, use the :ref:`process_priority <reference_ossec_syscheck_process_priority>` option in the agent configuration. You can configure process priority on Windows, Linux, and macOS operating systems.
 
-The process priority scale for the Wazuh FIM module ranges from -20 to 19 for each agent. The default ``process_priority`` value is set to 10. Setting the ``process_priority`` value in an agent higher than the default, gives its FIM module lower priority, fewer CPU resources, and makes it run slower. 
+The process priority scale for the Wazuh FIM module ranges from -20 to 19 for each agent. The default ``process_priority`` value is set to 10. Setting the ``process_priority`` value in an agent higher than the default, gives its FIM module lower priority, fewer CPU resources, and makes it run slower.
 
-You need to edit the Wazuh agent ``/var/ossec/etc/ossec.conf`` configuration file to configure the process priority of the Wazuh FIM module. 
+You need to edit the Wazuh agent ``/var/ossec/etc/ossec.conf`` configuration file to configure the process priority of the Wazuh FIM module.
 
 In the configuration example below the FIM module of the agent gets the minimum process priority:
 
@@ -781,7 +789,7 @@ Setting the ``process_priority`` value lower than the default gives the FIM modu
       </syscheck>
 
 #. Restart the Wazuh agent with administrator privilege to apply any configuration change:
- 
+
    - Linux: ``systemctl restart wazuh-agent``
    - Windows: ``Restart-Service -Name wazuh``
    - macOS: ``/Library/Ossec/bin/wazuh-control restart``
@@ -789,14 +797,14 @@ Setting the ``process_priority`` value lower than the default gives the FIM modu
 Database storage
 ----------------
 
-Wazuh uses a SQLite database to store information related to FIM events such as information about creation, modification, and deletion of regular files. When the Wazuh agent starts, the FIM module performs a first scan and generates the database for the agent. By default, the database on the agent is saved on disk to the file ``/var/ossec/queue/fim/db``. 
+Wazuh uses a SQLite database to store information related to FIM events such as information about creation, modification, and deletion of regular files. When the Wazuh agent starts, the FIM module performs a first scan and generates the database for the agent. By default, the database on the agent is saved on disk to the file ``/var/ossec/queue/fim/db``.
 
-You can configure the database storage options by using the :ref:`database <reference_ossec_syscheck_database>` attribute. The allowed values for the database attribute are ``disk`` and ``memory``. These storage options are available on Windows, macOS, and Linux operating systems. 
+You can configure the database storage options by using the :ref:`database <reference_ossec_syscheck_database>` attribute. The allowed values for the database attribute are ``disk`` and ``memory``. These storage options are available on Windows, macOS, and Linux operating systems.
 
 In the configuration example below, we set the database location to memory.
 
 #. Add the following settings to the Wazuh agent configuration file:
-      
+
    - Linux: ``/var/ossec/etc/ossec.conf``
    - Windows: ``C:\Program Files (x86)\ossec-agent\ossec.conf``
    - macOS: ``/Library/Ossec/etc/ossec.conf``
@@ -860,17 +868,17 @@ You can see below the default :ref:`synchronization <reference_ossec_syscheck_sy
 The table below explains the supported attributes of the synchronization option:
 
   +---------------------+----------------------+---------------------------------------------------------------------------------------------+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-  | Attribute           | Default value        | Allowed values                                                                              | Description                                                                                                                                                                                             |                                                                                                                                                                                                                                                                                                                                     
+  | Attribute           | Default value        | Allowed values                                                                              | Description                                                                                                                                                                                             |
   +=====================+======================+=============================================================================================+=========================================================================================================================================================================================================+
-  | enabled             | yes                  | yes, no                                                                                     | Enables FIM database synchronizations.                                                                                                                                                                  |                                                                                                                                                                                                                                                                                                                                     
+  | enabled             | yes                  | yes, no                                                                                     | Enables FIM database synchronizations.                                                                                                                                                                  |
   +---------------------+----------------------+---------------------------------------------------------------------------------------------+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-  | interval            | 5m                   | Any number greater than or equal to 0. Allowed suffixes (s, m, h, d)                        | Sets the starting number of seconds to wait for a new database synchronization attempt. If synchronization fails the value gets duplicated up to the ``max_interval`` value.                            |                                                                                                                                                                                                                                                                                                                                     
+  | interval            | 5m                   | Any number greater than or equal to 0. Allowed suffixes (s, m, h, d)                        | Sets the starting number of seconds to wait for a new database synchronization attempt. If synchronization fails the value gets duplicated up to the ``max_interval`` value.                            |
   +---------------------+----------------------+---------------------------------------------------------------------------------------------+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-  | max_interval        | 1h                   | Any number greater than or equal to the interval. Allowed suffixes (s, m, h, d).            | Specifies the maximum number of seconds to wait between every inventory synchronization attempt.                                                                                                        |                                                                                                                                                                                                                                                                                                                                     
+  | max_interval        | 1h                   | Any number greater than or equal to the interval. Allowed suffixes (s, m, h, d).            | Specifies the maximum number of seconds to wait between every inventory synchronization attempt.                                                                                                        |
   +---------------------+----------------------+---------------------------------------------------------------------------------------------+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-  | response_timeout    | 30                   | Any number greater than or equal to 0.                                                      | Specifies the minimum time in seconds that must elapse before considering a message sent to the manager as timed-out. If the agent message times out, the module starts a new synchronization session.  |                                                                                                                                                                                                                                                                                                                                     
+  | response_timeout    | 30                   | Any number greater than or equal to 0.                                                      | Specifies the minimum time in seconds that must elapse before considering a message sent to the manager as timed-out. If the agent message times out, the module starts a new synchronization session.  |
   +---------------------+----------------------+---------------------------------------------------------------------------------------------+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-  | queue_size          | 16384                | Integer number between 2 and 1000000.                                                       | Specifies the queue size of the manager synchronization responses.                                                                                                                                      |                                                                                                                                                                                                                                                                                                                                     
+  | queue_size          | 16384                | Integer number between 2 and 1000000.                                                       | Specifies the queue size of the manager synchronization responses.                                                                                                                                      |
   +---------------------+----------------------+---------------------------------------------------------------------------------------------+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-  | response_timeout    | 10                   | Integer number between 0 and 1000000. 0 means disabled.                                     | Sets the maximum synchronization message throughput.                                                                                                                                                    |                                                                                                                                                                                                                                                                                                                                     
+  | response_timeout    | 10                   | Integer number between 0 and 1000000. 0 means disabled.                                     | Sets the maximum synchronization message throughput.                                                                                                                                                    |
   +---------------------+----------------------+---------------------------------------------------------------------------------------------+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+

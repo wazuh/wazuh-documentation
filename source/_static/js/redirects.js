@@ -4,6 +4,7 @@ const redirections = [];
 
 /* Note: new release versions must always be inserted in the first position of the array "versions" */
 const versions = [
+  '4.9',
   '4.8',
   '4.7',
   '4.6',
@@ -62,12 +63,253 @@ removedUrls['x.y'] = [
 ];
 */
 
+/* *** RELEASE 4.9 ****/
+
+/* Redirections from 4.8 to 4.9  */
+
+redirections.push(
+  {
+    'target': ['4.8=>4.9', '4.9=>4.8'],
+    '4.8': '/deployment-options/offline-installation.html',
+    '4.9': '/deployment-options/offline-installation/index.html',
+  },
+  {
+    'target': ['4.9=>4.8'],
+    '4.8': '/deployment-options/offline-installation.html',
+    '4.9': '/deployment-options/offline-installation/step-by-step.html',
+  },
+  {
+    'target': ['4.8=>4.9'],
+    '4.8': '/development/packaging/generate-deb-package.html',
+    '4.9': '/development/packaging/generate-deb-rpm-package.html',
+  },
+  {
+    'target': ['4.8=>4.9'],
+    '4.8': '/development/packaging/generate-rpm-package.html',
+    '4.9': '/development/packaging/generate-deb-rpm-package.html',
+  },
+  {
+    'target': ['4.8=>4.9', '4.9=>4.8'],
+    '4.8': '/user-manual/agent/agent-management/agent-life-cycle.html',
+    '4.9': '/user-manual/agent/agent-enrollment/agent-life-cycle.html',
+  },
+  {
+    'target': ['4.8=>4.9', '4.9=>4.8'],
+    '4.8': '/user-manual/agent/deployment-variables/deployment-variables-aix.html',
+    '4.9': '/user-manual/agent/agent-enrollment/deployment-variables/deployment-variables-aix.html',
+  },
+  {
+    'target': ['4.8=>4.9', '4.9=>4.8'],
+    '4.8': '/user-manual/agent/deployment-variables/deployment-variables-linux.html',
+    '4.9': '/user-manual/agent/agent-enrollment/deployment-variables/deployment-variables-linux.html',
+  },
+  {
+    'target': ['4.8=>4.9', '4.9=>4.8'],
+    '4.8': '/user-manual/agent/deployment-variables/deployment-variables-macos.html',
+    '4.9': '/user-manual/agent/agent-enrollment/deployment-variables/deployment-variables-macos.html',
+  },
+  {
+    'target': ['4.8=>4.9', '4.9=>4.8'],
+    '4.8': '/user-manual/agent/deployment-variables/deployment-variables-windows.html',
+    '4.9': '/user-manual/agent/agent-enrollment/deployment-variables/deployment-variables-windows.html',
+  },
+  {
+    'target': ['4.8=>4.9', '4.9=>4.8'],
+    '4.8': '/user-manual/agent/deployment-variables/deployment-variables.html',
+    '4.9': '/user-manual/agent/agent-enrollment/deployment-variables/index.html',
+  },
+  {
+    'target': ['4.8=>4.9', '4.9=>4.8'],
+    '4.8': '/user-manual/agent/agent-enrollment/index.html#requirements',
+    '4.9': '/user-manual/agent/agent-enrollment/requirements.html',
+  },
+  {
+    'target': ['4.8=>4.9', '4.9=>4.8'],
+    '4.8': '/user-manual/agent/agent-management/remote-upgrading/create-custom-wpk/create-wpk-key.html',
+    '4.9': '/user-manual/agent/agent-management/remote-upgrading/wpk-files/create-custom-wpk.html',
+  },
+  {
+    'target': ['4.8=>4.9'],
+    '4.8': '/user-manual/agent/agent-management/remote-upgrading/custom-repository.html',
+    '4.9': '/user-manual/agent/agent-management/remote-upgrading/wpk-files/index.html',
+  },
+  {
+    'target': ['4.9=>4.8'],
+    '4.8': '/user-manual/agent/agent-management/remote-upgrading/index.html',
+    '4.9': '/user-manual/agent/agent-management/remote-upgrading/wpk-files/index.html',
+  },
+  {
+    'target': ['4.8=>4.9', '4.9=>4.8'],
+    '4.8': '/user-manual/agent/agent-management/remote-upgrading/install-custom-wpk.html',
+    '4.9': '/user-manual/agent/agent-management/remote-upgrading/wpk-files/install-custom-wpk.html',
+  },
+  {
+    'target': ['4.8=>4.9', '4.9=>4.8'],
+    '4.8': '/user-manual/agent/agent-management/remote-upgrading/wpk-list.html',
+    '4.9': '/user-manual/agent/agent-management/remote-upgrading/wpk-files/wpk-list.html',
+  },
+  {
+    'target': ['4.8=>4.9', '4.9=>4.8'],
+    '4.8': '/user-manual/agent/agent-management/remote-upgrading/create-custom-wpk/generate-wpk-package-manually.html',
+    '4.9': '/user-manual/agent/agent-management/remote-upgrading/wpk-files/create-custom-wpk.html#generating-wpk-packages-manually',
+  },
+  {
+    'target': ['4.8=>4.9', '4.9=>4.8'],
+    '4.8': '/user-manual/wazuh-dashboard/config-file.html',
+    '4.9': '/user-manual/wazuh-dashboard/settings.html',
+  },
+  {
+    'target': ['4.8=>4.9', '4.9=>4.8'],
+    '4.8': '/user-manual/wazuh-dashboard/management.html',
+    '4.9': '/user-manual/wazuh-dashboard/navigating-the-wazuh-dashboard.html#dashboard-management',
+  },
+  {
+    'target': ['4.8=>4.9', '4.9=>4.8'],
+    '4.8': '/user-manual/wazuh-indexer/certificates.html',
+    '4.9': '/user-manual/wazuh-indexer/wazuh-indexer-cluster.html#certificates-deployment',
+  },
+  {
+    'target': ['4.8=>4.9', '4.9=>4.8'],
+    '4.8': '/user-manual/capabilities/policy-monitoring/rootcheck/index.html',
+    '4.9': '/user-manual/capabilities/malware-detection/rootkits-behavior-detection.html',
+  },
+  {
+    'target': ['4.8=>4.9', '4.9=>4.8'],
+    '4.8': '/user-manual/upscaling/adding-indexer-node.html',
+    '4.9': '/user-manual/wazuh-indexer/wazuh-indexer-cluster.html#adding-wazuh-indexer-nodes',
+  },
+  {
+    'target': ['4.8=>4.9', '4.9=>4.8'],
+    '4.8': '/user-manual/upscaling/adding-server-node.html',
+    '4.9': '/user-manual/manager/wazuh-server-cluster.html#adding-new-wazuh-server-nodes',
+  },
+  {
+    'target': ['4.8=>4.9', '4.9=>4.8'],
+    '4.8': '/migration-guide/files-backup/index.html',
+    '4.9': '/migration-guide/index.html',
+  },
+  {
+    'target': ['4.8=>4.9', '4.9=>4.8'],
+    '4.8': '/migration-guide/files-backup/creating/index.html',
+    '4.9': '/migration-guide/creating/index.html',
+  },
+  {
+    'target': ['4.8=>4.9', '4.9=>4.8'],
+    '4.8': '/migration-guide/files-backup/creating/wazuh-agent.html',
+    '4.9': '/migration-guide/creating/wazuh-agent.html',
+  },
+  {
+    'target': ['4.8=>4.9', '4.9=>4.8'],
+    '4.8': '/migration-guide/files-backup/creating/wazuh-central-components.html',
+    '4.9': '/migration-guide/creating/wazuh-central-components.html',
+  },
+  {
+    'target': ['4.8=>4.9', '4.9=>4.8'],
+    '4.8': '/migration-guide/files-backup/restoring/index.html',
+    '4.9': '/migration-guide/restoring/index.html',
+  },
+  {
+    'target': ['4.8=>4.9', '4.9=>4.8'],
+    '4.8': '/migration-guide/files-backup/restoring/wazuh-agent.html',
+    '4.9': '/migration-guide/restoring/wazuh-agent.html',
+  },
+  {
+    'target': ['4.8=>4.9', '4.9=>4.8'],
+    '4.8': '/migration-guide/files-backup/restoring/wazuh-central-components.html',
+    '4.9': '/migration-guide/restoring/wazuh-central-components.html',
+  },
+);
+
+/* Pages added in 4.9 */
+
+newUrls['4.9'] = [
+  '/release-notes/release-4-9-0.html',
+  '/release-notes/release-4-9-1.html',
+  '/deployment-options/offline-installation/index.html',
+  '/deployment-options/offline-installation/step-by-step.html',
+  '/deployment-options/offline-installation/installation-assistant.html',
+  '/development/coredump.html',
+  '/development/packaging/generate-dashboard-package.html',
+  '/development/packaging/generate-indexer-package.html',
+  '/development/packaging/generate-deb-rpm-package.html',
+  '/user-manual/capabilities/log-data-collection/journald.html',
+  '/integrations-guide/amazon-security-lake/index.html',
+  '/user-manual/agent/agent-enrollment/agent-life-cycle.html',
+  '/user-manual/agent/agent-enrollment/deployment-variables/deployment-variables-aix.html',
+  '/user-manual/agent/agent-enrollment/deployment-variables/deployment-variables-linux.html',
+  '/user-manual/agent/agent-enrollment/deployment-variables/deployment-variables-macos.html',
+  '/user-manual/agent/agent-enrollment/deployment-variables/deployment-variables-windows.html',
+  '/user-manual/agent/agent-enrollment/deployment-variables/index.html',
+  '/user-manual/agent/agent-enrollment/requirements.html',
+  '/user-manual/agent/agent-management/agent-administration.html',
+  '/user-manual/agent/agent-management/remote-upgrading/wpk-files/create-custom-wpk.html',
+  '/user-manual/agent/agent-management/remote-upgrading/wpk-files/index.html',
+  '/user-manual/agent/agent-management/remote-upgrading/wpk-files/install-custom-wpk.html',
+  '/user-manual/agent/agent-management/remote-upgrading/wpk-files/wpk-list.html',
+  '/user-manual/wazuh-dashboard/navigating-the-wazuh-dashboard.html',
+  '/user-manual/wazuh-dashboard/settings.html',
+  '/user-manual/wazuh-indexer/wazuh-indexer-cluster.html',
+  '/cloud-service/your-environment/custom-dns.html',
+  '/migration-guide/creating/index.html',
+  '/migration-guide/creating/wazuh-agent.html',
+  '/migration-guide/creating/wazuh-central-components.html',
+  '/migration-guide/restoring/index.html',
+  '/migration-guide/restoring/wazuh-agent.html',
+  '/migration-guide/restoring/wazuh-central-components.html',
+];
+
+/* Pages no longer available in 4.9 */
+
+removedUrls['4.9'] = [
+  '/deployment-options/offline-installation.html',
+  '/development/packaging/generate-deb-package.html',
+  '/development/packaging/generate-rpm-package.html',
+  '/user-manual/agent/deployment-variables/deployment-variables-macos.html',
+  '/user-manual/agent/deployment-variables/deployment-variables-windows.html',
+  '/user-manual/agent/deployment-variables/deployment-variables-aix.html',
+  '/user-manual/agent/deployment-variables/deployment-variables-linux.html',
+  '/user-manual/agent/deployment-variables/deployment-variables.html',
+  '/user-manual/agent/agent-management/agent-life-cycle.html',
+  '/user-manual/agent/agent-management/remote-upgrading/create-custom-wpk/create-wpk-key.html',
+  '/user-manual/agent/agent-management/remote-upgrading/create-custom-wpk/generate-wpk-package-manually.html',
+  '/user-manual/agent/agent-management/remote-upgrading/install-custom-wpk.html',
+  '/user-manual/agent/agent-management/remote-upgrading/custom-repository.html',
+  '/user-manual/agent/agent-management/remote-upgrading/wpk-list.html',
+  '/user-manual/wazuh-dashboard/config-file.html',
+  '/user-manual/wazuh-dashboard/management.html',
+  '/user-manual/wazuh-indexer/certificates.html',
+  '/user-manual/capabilities/policy-monitoring/index.html',
+  '/user-manual/capabilities/policy-monitoring/openscap/index.html',
+  '/user-manual/capabilities/policy-monitoring/openscap/how-it-works.html',
+  '/user-manual/capabilities/policy-monitoring/openscap/oscap-configuration.html',
+  '/user-manual/capabilities/policy-monitoring/openscap/oscap-faq.html',
+  '/user-manual/capabilities/policy-monitoring/rootcheck/how-it-works.html',
+  '/user-manual/capabilities/policy-monitoring/rootcheck/index.html',
+  '/user-manual/capabilities/policy-monitoring/rootcheck/rootcheck-configuration.html',
+  '/user-manual/capabilities/policy-monitoring/rootcheck/rootcheck-faq.html',
+  '/user-manual/capabilities/policy-monitoring/ciscat/ciscat.html',
+  '/user-manual/upscaling/index.html',
+  '/user-manual/upscaling/adding-indexer-node.html',
+  '/user-manual/upscaling/adding-server-node.html',
+  '/migration-guide/wazuh-indexer.html',
+  '/migration-guide/wazuh-dashboard.html',
+  '/migration-guide/files-backup/index.html',
+  '/migration-guide/files-backup/creating/index.html',
+  '/migration-guide/files-backup/creating/wazuh-agent.html',
+  '/migration-guide/files-backup/creating/wazuh-central-components.html',
+  '/migration-guide/files-backup/restoring/index.html',
+  '/migration-guide/files-backup/restoring/wazuh-agent.html',
+  '/migration-guide/files-backup/restoring/wazuh-central-components.html',
+];
+
 /* *** RELEASE 4.8 ****/
 
 /* Pages added in 4.8 */
 
 newUrls['4.8'] = [
   '/release-notes/release-4-8-0.html',
+  '/release-notes/release-4-8-1.html',
+  '/release-notes/release-4-8-2.html',
   '/user-manual/wazuh-dashboard/management.html',
   '/upgrade-guide/troubleshooting.html',
   '/proof-of-concept-guide/leveraging-llms-for-alert-enrichment.html',
@@ -108,6 +350,8 @@ removedUrls['4.8'] = [
   '/migration-guide/migrating-from-ossec/index.html',
   '/migration-guide/migrating-from-ossec/ossec-server.html',
   '/migration-guide/migrating-from-ossec/ossec-agent.html',
+  '/user-manual/api/equivalence.html',
+  '/user-manual/api/rbac/configuration.html',
 ];
 
 /* Redirections from 4.7 to 4.8  */
@@ -197,7 +441,12 @@ redirections.push(
   {
     'target': ['4.7=>4.8', '4.8=>4.7'],
     '4.7': '/user-manual/manager/remote-service.html',
-    '4.8': 'user-manual/manager/wazuh-manager.html#agent-connection-service-configuration',
+    '4.8': '/user-manual/manager/wazuh-manager.html#agent-connection-service-configuration',
+  },
+  {
+    'target': ['4.7=>4.8'],
+    '4.7': '/user-manual/api/rbac/configuration.html',
+    '4.8': '/user-manual/api/rbac/how-it-works.html',
   },
 );
 

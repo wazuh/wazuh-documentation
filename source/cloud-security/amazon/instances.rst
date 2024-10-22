@@ -15,7 +15,7 @@ To install the Wazuh agent on an EC2 instance, follow the instructions available
 -  :doc:`/user-manual/capabilities/log-data-collection/index`
 -  :doc:`/user-manual/capabilities/file-integrity/index`
 -  :doc:`/user-manual/capabilities/malware-detection/index`
--  :doc:`/user-manual/capabilities/policy-monitoring/index`
+-  Security policy monitoring
 -  :doc:`/user-manual/capabilities/system-inventory/index`
 -  :doc:`/user-manual/capabilities/vulnerability-detection/index`
 

@@ -10,7 +10,7 @@ Leveraging LLMs for alert enrichment
 
 YARA is a tool that detects and classifies malware artifacts. While YARA can identify known patterns and signatures of malicious activity, human intervention is often required to interpret and contextualize the output of YARA scans. ChatGPT is a generative AI chatbot developed by OpenAI. It provides users with various LLMs to process data. These LLMs can analyze and enrich YARA alerts with additional context, providing security teams with deeper insights into the nature and severity of detected threats.
 
-In this use case, we integrate Wazuh with YARA to detect when a malicious file is added to a monitored endpoint. The integration utilizes the Wazuh :doc:`FIM </user-manual/capabilities/file-integrity/index>` module to monitor a directory for new or modified files. When a file modification or addition is detected, the Wazuh :doc:`active response </user-manual/capabilities/active-response/index>` module triggers a YARA scan on the file. The Active response module automatically deletes the malicious file from the endpoint if it has a positive match with a malicious signature. The active response module then queries ChatGPT to enrich the YARA scan result with additional insight into the malicious file that helps security teams understand its nature, potential impact, and remediation.
+In this use case, we integrate Wazuh with YARA to detect when a malicious file is added to a monitored endpoint. The integration utilizes the Wazuh :doc:`FIM </user-manual/capabilities/file-integrity/index>` module to monitor a directory for new or modified files. When a file modification or addition is detected, the Wazuh :doc:`Active Response </user-manual/capabilities/active-response/index>` module triggers a YARA scan on the file. The Active Response module automatically deletes the malicious file from the endpoint if it has a positive match with a malicious signature. The Active Response module then queries ChatGPT to enrich the YARA scan result with additional insight into the malicious file that helps security teams understand its nature, potential impact, and remediation.
 
 Infrastructure
 --------------
@@ -30,7 +30,7 @@ Perform the following steps to set up the YARA and ChatGPT integration. Choose e
 Ubuntu 22.04 endpoint
 ^^^^^^^^^^^^^^^^^^^^^
 
-Perform the following steps to install YARA and configure the active response and FIM modules.
+Perform the following steps to install YARA and configure the Active Response and FIM modules.
 
 #. Download, compile, and install YARA:
 
@@ -345,7 +345,7 @@ Perform the following steps to install Python, YARA, and download YARA rules.
           if response.status_code == 200:
               return response.json()['choices'][0]['message']['content']
           elif response.status_code == 401:  # Unauthorized (invalid API key)
-              log_message("wazuh-yara: ERROR - Invalid ChatGPT API key")
+              log_message("wazuh-YARA: ERROR - Invalid ChatGPT API key")
               return None
           else:
               log_message(f"Error querying ChatGPT: {response.status_code} {response.text}")
@@ -370,19 +370,19 @@ Perform the following steps to install Python, YARA, and download YARA rules.
               if description:
                   chatgpt_response = query_chatgpt(description)
                   if chatgpt_response:
-                      combined_output = f"wazuh-yara: INFO - Scan result: {yara_output} | chatgpt_response: {chatgpt_response}"
+                      combined_output = f"wazuh-YARA: INFO - Scan result: {yara_output} | chatgpt_response: {chatgpt_response}"
                       log_message(combined_output)
                   else:
                       # Log the Yara scan result without the ChatGPT response
-                      log_message(f"wazuh-yara: INFO - Scan result: {yara_output} | chatgpt_response: None")
+                      log_message(f"wazuh-YARA: INFO - Scan result: {yara_output} | chatgpt_response: None")
 
                   # Delete the scanned file if a description is found
                   try:
                       os.remove(syscheck_file_path)
                       if not os.path.exists(syscheck_file_path):
-                          log_message(f"wazuh-yara: INFO - Successfully deleted {syscheck_file_path}")
+                          log_message(f"wazuh-YARA: INFO - Successfully deleted {syscheck_file_path}")
                       else:
-                          log_message(f"wazuh-yara: INFO - Unable to delete {syscheck_file_path}")
+                          log_message(f"wazuh-YARA: INFO - Unable to delete {syscheck_file_path}")
                   except Exception as e:
                       log_message(f"Error deleting file: {str(e)}")
               else:
@@ -416,7 +416,7 @@ Perform the following steps to install Python, YARA, and download YARA rules.
 
    .. code-block:: xml
 
-      <directories realtime="yes">C:\users</directories>
+      <directories realtime="yes">C:\Users\*\Downloads</directories>
 
 #. Restart the Wazuh agent to apply the configuration changes:
 
@@ -427,7 +427,7 @@ Perform the following steps to install Python, YARA, and download YARA rules.
 Wazuh server
 ------------
 
-Perform the following steps on the Wazuh server to configure custom rules, decoders, and the active response module.
+Perform the following steps on the Wazuh server to configure custom rules, decoders, and the Active Response module.
 
 #. Add the following decoders to the Wazuh server ``/var/ossec/etc/decoders/local_decoder.xml`` file to parse the data in YARA scan results:
 
@@ -531,7 +531,7 @@ Perform the following steps on the Wazuh server to configure custom rules, decod
         <order>YARA.file_not_deleted</order>
       </decoder>
 
-#. Add the following rules to the ``/var/ossec/etc/rules/local_rules.xml`` file. The rules detect FIM events in the monitored directory. This triggers the YARA Active response script to delete a file if identified as a malicious file. Replace ``<USER_NAME>`` with the username of the endpoint:
+#. Add the following rules to the ``/var/ossec/etc/rules/local_rules.xml`` file. The rules detect FIM events in the monitored directory. This triggers the YARA Active response script to delete a file if identified as a malicious file.
 
    .. code-block:: xml
 
@@ -549,43 +549,42 @@ Perform the following steps on the Wazuh server to configure custom rules, decod
         </rule>
         <rule id="100302" level="5">
           <if_sid>550</if_sid>
-          <field name="file">C:\\Users\\</field>
-          <description>File modified in C:\Users\ directory.</description>
+          <field name="file" type="pcre2">(?i)C:\\Users.+Downloads</field>
+          <description>File modified in the downloads directory.</description>
         </rule>
 
         <rule id="100303" level="5">
           <if_sid>554</if_sid>
-          <field name="file">C:\\Users\\</field>
-          <description>File added to C:\Users\ directory.</description>
+          <field name="file" type="pcre2">(?i)C:\\Users.+Downloads</field>
+          <description>File added to the downloads directory.</description>
         </rule>
-
       </group>
 
       <group name="yara,">
         <rule id="108000" level="0">
-          <decoded_as>yara_decoder</decoded_as>
-          <description>Yara grouping rule</description>
+          <decoded_as>YARA_decoder</decoded_as>
+          <description>YARA grouping rule</description>
         </rule>
         <rule id="108001" level="10">
           <if_sid>108000</if_sid>
-          <match>wazuh-yara: INFO - Scan result: </match>
-          <description>File "$(yara.scanned_file)" is a positive match for YARA rule: $(yara.rule_name)</description>
+          <match>wazuh-YARA: INFO - Scan result: </match>
+          <description>File "$(YARA.scanned_file)" is a positive match for YARA rule: $(YARA.rule_name)</description>
         </rule>
 
         <rule id="108002" level="5">
           <if_sid>108000</if_sid>
           <field name="yara.file_deleted">\.</field>
-          <description>Active response successfully removed malicious file "$(yara.file_deleted)"</description>
+          <description>Active response successfully removed malicious file "$(YARA.file_deleted)"</description>
         </rule>
 
         <rule id="108003" level="12">
           <if_sid>108000</if_sid>
-          <field name="yara.file_not_deleted">\.</field>
-          <description>Active response unable to delete malicious file "$(yara.file_not_deleted)"</description>
+          <field name="YARA.file_not_deleted">\.</field>
+          <description>Active response unable to delete malicious file "$(YARA.file_not_deleted)"</description>
         </rule>
       </group>
 
-#. Add the following configuration to the Wazuh server ``/var/ossec/etc/ossec.conf`` configuration file. This configures the active response module to trigger after the rules with ID ``100300``, ``100301``, ``100302``, and ``100303`` are fired:
+#. Add the following configuration to the Wazuh server ``/var/ossec/etc/ossec.conf`` configuration file. This configures the Active Response module to trigger after the rules with ID ``100300``, ``100301``, ``100302``, and ``100303`` are fired:
 
    .. code-block:: xml
 
@@ -647,8 +646,8 @@ As seen in the image, ChatGPT provides more context to the malicious file detect
    :width: 80%
 
 .. thumbnail:: /images/poc/chatgpt-active-response-ubuntu-alert.png
-   :title: Active response
-   :alt: Active response
+   :title: Active Response
+   :alt: Active Response
    :align: center
    :width: 80%
 
@@ -663,13 +662,13 @@ The below image shows an example of an alert triggered when the provided ChatGPT
 Windows 11 endpoint
 ^^^^^^^^^^^^^^^^^^^
 
-Run the following commands via PowerShell to download malware samples to the monitored ``C:\Users\`` directory:
+Run the following commands via PowerShell to download malware samples to the monitored ``C:\Users\*\Downloads`` directory:
 
 .. code-block:: powershell
 
-   > curl "https://wazuh-demo.s3-us-west-1.amazonaws.com/mirai" -o c:\users\mirai
-   > curl "https://wazuh-demo.s3-us-west-1.amazonaws.com/xbash" -o c:\users\xbash
-   > curl "https://wazuh-demo.s3-us-west-1.amazonaws.com/webshell" -o c:\users\webshell
+   > curl "https://wazuh-demo.s3-us-west-1.amazonaws.com/mirai" -o   $env:USERPROFILE\Downloads\mirai
+   > curl "https://wazuh-demo.s3-us-west-1.amazonaws.com/xbash" -o   $env:USERPROFILE\Downloads\xbash
+   > curl "https://wazuh-demo.s3-us-west-1.amazonaws.com/webshell" -o $env:USERPROFILE\Downloads\webshell
 
 You can visualize the alert data in the Wazuh dashboard. To do this, go to the **Security events** module and add the filter in the search bar to query the alerts.
 
@@ -684,8 +683,8 @@ As seen in the image, ChatGPT provides more context to the malicious file detect
    :width: 80%
 
 .. thumbnail:: /images/poc/chatgpt-active-response-windows-alert.png
-   :title: Active response
-   :alt: Active response
+   :title: Active Response
+   :alt: Active Response
    :align: center
    :width: 80%
 

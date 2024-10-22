@@ -102,7 +102,7 @@ OneLogin Configuration
          :align: center
          :width: 80%    
 
-#. Get the ``metadata_onelogin.xml`` file and ``X.509 certificate`` from the application.
+#. Get the ``metadata_onelogin.xml`` file from the application.
 
    #. Go to **Applications** >  **Applications** then select the **Wazuh** app. Click on **More Actions** and then select **SAML Metadata**.
 
@@ -128,19 +128,20 @@ OneLogin Configuration
          :width: 80%
 
 
-   #. The ``roles_key`` is the name of the parameter added in the **Wazuh** app. In our example, this is ``Roles``. 
-
-   #. Finally, to obtain the ``exchange_key``, go to the **SSO** tab of the **Wazuh** app and select **View Details** in **X.509 Certificate**. Copy the blob of the certificate excluding the ``-----BEGIN CERTIFICATE-----`` and ``-----END CERTIFICATE-----`` lines:
-
-      .. thumbnail:: /images/single-sign-on/onelogin/13-go-to-the-sso-tab.png
-         :title: Go to the SSO tab of the Wazuh app and select View Details in X.509 Certificate
-         :align: center
-         :width: 80%
+   #. The ``roles_key`` is the name of the parameter added in the **Wazuh** app. In our example, this is ``Roles``.
 
 Wazuh indexer configuration
 ---------------------------
 
 Edit the Wazuh indexer security configuration files. We recommend that you back up these files before you carry out the configuration.
+
+#. Generate a 64-character long random key using the following command.
+
+   .. code-block:: console
+
+      openssl rand -hex 32
+
+   The output will be used as the ``exchange_key`` in the ``/etc/wazuh-indexer/opensearch-security/config.yml`` file.
 
 #. Place the ``metadata_onelogin.xml`` file within the ``/etc/wazuh-indexer/opensearch-security/`` directory. Set the file ownership to ``wazuh-indexer`` using the following command:
 
@@ -184,7 +185,7 @@ Edit the Wazuh indexer security configuration files. We recommend that you back 
                     entity_id: wazuh-saml
                   kibana_url: https://<WAZUH_DASHBOARD_URL>
                   roles_key: Roles
-                  exchange_key: 'MIIBkjCB/AIBADBTMQswCQ......'
+                  exchange_key: 'b1d6dd32753374557dcf92e241.......'
               authentication_backend:
                 type: noop
       ...

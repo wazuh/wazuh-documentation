@@ -1,9 +1,7 @@
 .. Copyright (C) 2015, Wazuh, Inc.
 
 .. meta::
-   :description: You can use third-party certificates, instead of self-signed, in the Wazuh dashboard. Learn more about it in this section of the Wazuh documentation. 
-
-.. _ssl-nginx:
+   :description: Install and configure the Let’s Encrypt SSL certificate using NGINX on a Wazuh dashboard by following step-by-step instructions.
 
 Configuring SSL certificates on the Wazuh dashboard using NGINX
 ===============================================================
@@ -12,7 +10,7 @@ NGINX is an open source software for web serving, reverse proxying, caching, loa
 
 Install and configure the Let’s Encrypt SSL certificate using NGINX on a Wazuh dashboard by following the step-by-step instructions below.
 
-Setting up NGINX as Reverse proxy 
+Setting up NGINX as Reverse proxy
 ---------------------------------
 
 Installing the NGINX software on the Wazuh dashboard
@@ -60,12 +58,12 @@ Installing the NGINX software on the Wazuh dashboard
          .. code-block:: console
 
             # ufw allow 443
-            # ufw allow 80 
+            # ufw allow 80
 
 Configure the proxy and the certificates
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-#. Install snap: 
+#. Install snap:
 
    .. tabs::
 
@@ -102,7 +100,7 @@ Configure the proxy and the certificates
 
          .. code-block:: console
 
-            # apt remove certbot 
+            # apt remove certbot
             # snap install --classic certbot
 
 #. Configure a symbolic link to the certbot directory:
@@ -112,7 +110,7 @@ Configure the proxy and the certificates
       # ln -s /snap/bin/certbot /usr/bin/certbot
 
 #. Edit the ``/etc/wazuh-dashboard/opensearch_dashboards.yml`` file and change the default dashboard port from ``443`` to another available port number:
-      
+
    .. code-block:: yaml
       :emphasize-lines: 3
 
@@ -129,7 +127,7 @@ Configure the proxy and the certificates
       server.ssl.key: "/etc/wazuh-dashboard/certs/wazuh-dashboard-key.pem"
       server.ssl.certificate: "/etc/wazuh-dashboard/certs/wazuh-dashboard.pem"
       opensearch.ssl.certificateAuthorities: ["/etc/wazuh-dashboard/certs/root-ca.pem"]
-      uiSettings.overrides.defaultRoute: /app/wz-home
+      uiSettings.overrides.defaultRoute: /app/wazuh
       opensearch_security.cookie.secure: true
 
 #. Navigate to the ``/etc/nginx/conf.d`` directory and create a ``wazuh.conf`` file for the certificate installation:
@@ -142,7 +140,8 @@ Configure the proxy and the certificates
 
 #. Edit ``wazuh.conf`` and add the following configuration.
 
-   .. code-block:: console
+   .. code-block:: nginx
+      :emphasize-lines: 4,7
 
       server {
          listen 80 default_server;
@@ -157,12 +156,12 @@ Configure the proxy and the certificates
 
    Replace the following:
 
-   - ``<YOUR_DOMAIN_NAME>`` with your domain name.
-   - ``<WAZUH_DASHBOARD_IP_ADDRESS>`` with your Wazuh dashboard IP address.
-   - ``<PORT_NUMBER>`` with your new port number.
+   -  ``<YOUR_DOMAIN_NAME>`` with your domain name.
+   -  ``<WAZUH_DASHBOARD_IP_ADDRESS>`` with your Wazuh dashboard IP address.
+   -  ``<PORT_NUMBER>`` with your new port number.
 
 #. Restart the Wazuh dashboard and the Wazuh server
- 
+
    .. code-block:: console
 
       # systemctl restart wazuh-dashboard
@@ -175,9 +174,9 @@ Configure the proxy and the certificates
       # certbot --nginx -d <YOUR_DOMAIN_NAME>
 
 
-#. Check that NGINX is properly configured and verify that you have the same configuration in the ``/etc/nginx/conf.d/wazuh.conf`` file with the sample below: 
+#. Check that NGINX is properly configured and verify that you have the same configuration in the ``/etc/nginx/conf.d/wazuh.conf`` file with the sample below:
 
-   .. code-block:: console
+   .. code-block:: nginx
 
       server {
 
@@ -209,16 +208,15 @@ Configure the proxy and the certificates
 
       }
 
-
 #. Restart the NGINX service:
 
    .. include:: /_templates/common/restart_nginx.rst
 
 #. Access the Wazuh dashboard via the configured domain name.
 
-      .. thumbnail:: /images/configuring-third-party-certs/wazuh-dashboard.png
-         :title: Wazuh dashboard
-         :align: center
-         :width: 80%
+   .. thumbnail:: /images/configuring-third-party-certs/wazuh-dashboard.jpg
+      :title: Wazuh dashboard
+      :align: center
+      :width: 80%
 
 The NGINX server has been configured and the Let’s Encrypt certificate installation is active on the Wazuh dashboard. You can proceed to access it by using the configured domain name.

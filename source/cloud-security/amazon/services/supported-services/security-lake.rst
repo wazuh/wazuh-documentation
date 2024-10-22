@@ -6,6 +6,10 @@
 Amazon Security Lake
 ====================
 
+.. note::
+
+   This document guides you through setting up Wazuh as a subscriber to AWS Security Lake data. To configure Wazuh as a source for Amazon Security Lake, refer to :doc:`Amazon Security Lake integration </integrations-guide/amazon-security-lake/index>`
+
 `Amazon Security Lake <https://aws.amazon.com/security-lake/>`__ is a fully-managed security data lake service that consolidates data from multiple AWS and other services, optimizing storage costs and performance at scale.
 
 All logs in Amazon Security Lake use the Open Cybersecurity Schema Framework (OCSF) standard for formatting. You can use the Wazuh integration for Amazon Security Lake to ingest security events from AWS services.

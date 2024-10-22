@@ -1,91 +1,123 @@
 .. Copyright (C) 2015, Wazuh, Inc.
 
 .. meta::
-  :description: Securing the Wazuh API is crucial. In this section we show you how to do it.
+   :description: The communication between the Wazuh dashboard and the Wazuh server API is encrypted with HTTPS by default. learn more in this section of the documentation.
 
-.. _securing_api:
+Securing the Wazuh server API
+=============================
 
-Securing the Wazuh API
-======================
+The communication between the Wazuh dashboard and the Wazuh server API is encrypted with HTTPS by default. The Wazuh server API will generate its own private key and certificate during the first run if users do not supply them. Additionally, the Wazuh server API automatically creates the following username-password pair when installed with the OVA installation:
 
-The communication between the Wazuh UI and the Wazuh API is encrypted with HTTPS by default, which means that if the users do not provide their own private key and certificate then the Wazuh API will generate its own during the first run. Additionally, the Wazuh API users ``wazuh`` and ``wazuh-wui`` are created by default, with ``wazuh`` and ``wazuh-wui`` as their passwords, respectively. Because of that, it is very important to secure the Wazuh API once the Wazuh Manager has been installed.
+-  ``wazuh:wazuh``
+-  ``wazuh-wui:wazuh-wui``
+
+If the Wazuh deployment was performed using the installation assistant script, the Wazuh API username is ``wazuh`` and you can extract the password by running the following command:
+
+.. code-block:: console
+
+   # tar -axf wazuh-install-files.tar wazuh-install-files/wazuh-passwords.txt -O | grep -P "\'wazuh\'" -A 1
+
+Therefore, securing the Wazuh server API is crucial after installing the Wazuh manager.
 
 .. warning::
-  It is highly recommended to change the default passwords and to use your own certificate since the one created by the Wazuh API is self-signed.
 
+   We highly recommend changing the default passwords and to use your own certificate since the one created by the Wazuh server API is self-signed.
 
-Recommended changes to secure the Wazuh API
--------------------------------------------
+Recommended changes to secure the Wazuh server API
+--------------------------------------------------
 
-#. Modify HTTPS parameters:
+1. Modify HTTPS parameters
+^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-    The Wazuh API has HTTPS enabled by default. In case there is no available certificate in ``WAZUH_PATH/api/configuration/ssl``, the Wazuh API will generate the private key and a self-signed certificate. If that is the case and the API log format is set as ``plain``, the following lines will appear in ``WAZUH_PATH/logs/api.log``:
+The Wazuh server API has HTTPS enabled by default. If there is no available certificate in ``/var/ossec/api/configuration/ssl/``, the Wazuh server will generate the private key and a self-signed certificate when it is started. If that is the case and the API log format is set as ``plain``, the following lines will appear in ``/var/ossec/logs/api.log``:
 
-    .. code-block:: console
+.. code-block:: none
 
-      INFO: HTTPS is enabled but cannot find the private key and/or certificate. Attempting to generate them.
-      INFO: Generated private key file in WAZUH_PATH/api/configuration/ssl/server.key.
-      INFO: Generated certificate file in WAZUH_PATH/api/configuration/ssl/server.crt.
+   INFO: HTTPS is enabled but cannot find the private key and/or certificate. Attempting to generate them.
+   INFO: Generated private key file in WAZUH_PATH/api/configuration/ssl/server.key.
+   INFO: Generated certificate file in WAZUH_PATH/api/configuration/ssl/server.crt.
 
-    These HTTPS options can be changed, including its status or the path to the certificate, by editing the Wazuh API configuration file located in ``WAZUH_PATH/api/configuration/api.yaml``:
+You can change these HTTPS options, including their status or the path to the certificate, by editing the Wazuh server API configuration file located at ``/var/ossec/api/configuration/api.yaml``:
 
-    .. code-block:: yaml
+.. code-block:: yaml
 
-      https:
-        enabled: yes
-        key: "server.key"
-        cert: "server.crt"
-        use_ca: False
-        ca: "ca.crt"
-        ssl_protocol: "auto"
-        ssl_ciphers: ""
+   https:
+     enabled: yes
+     key: "server.key"
+     cert: "server.crt"
+     use_ca: False
+     ca: "ca.crt"
+     ssl_protocol: "auto"
+     ssl_ciphers: ""
 
-    After setting these parameters, it will be necessary to restart the Wazuh API using the ``wazuh-manager`` service:
+Restart the Wazuh server API using the Wazuh manager service to apply the changes:
 
-      .. include:: /_templates/common/restart_manager.rst
+.. include:: /_templates/common/restart_manager.rst
 
-#. Change the default password of the admin users (**wazuh** and **wazuh-wui**): 
+2. Change the default password for the administrative users
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-    The default password can be changed using the following Wazuh API request: :api-ref:`PUT /security/users/{user_id} <operation/api.controllers.security_controller.update_user>`
+You can change the default password for the administrative users  ``wazuh`` and ``wazuh-wui`` using the following Wazuh server API request: :api-ref:`PUT /security/users/{user_id} <operation/api.controllers.security_controller.update_user>`.
 
-    .. note::
-      The password for users must be between 8 and 64 characters long. It should contain at least one uppercase and one lowercase letter, a number, and a symbol.
+.. note::
 
-    After changing the password, there is no need to restart the Wazuh API but a new :api-ref:`authentication <operation/api.controllers.security_controller.login_user>` will be required for the affected users.
+   The password for users must be between 8 and 64 characters long. It should contain at least one uppercase, lowercase letter, number, and symbol.
 
-    .. warning::
-      Changing the **wazuh-wui** user password will affect the Wazuh UI. You will have to update the ``/usr/share/wazuh-dashboard/data/wazuh/config/wazuh.yml`` configuration file accordingly with the new credentials. To learn more, see the :doc:`Wazuh dashboard configuration file </user-manual/wazuh-dashboard/config-file>` document.
+**We show an example of changing the password  using curl below**:
 
-#. Change the default host and port:
+#. Get a list of users along with their user IDs:
 
-    The *host* is set to ``0.0.0.0`` by default, which means the Wazuh API will accept any incoming connection. It is possible to restrict it by editing the Wazuh API configuration in ``WAZUH_PATH/api/configuration/api.yaml``:
+   .. code-block:: console
 
-    .. code-block:: console
+      # curl -k -X GET "https://localhost:55000/security/users?pretty=true" -H  "Authorization: Bearer $TOKEN"
 
-      host: 0.0.0.0
+#. Change the password of the desired user:
 
-    The default port can be changed as well:
+   .. code-block:: console
 
-    .. code-block:: console
+      # curl -k -X PUT "https://localhost:55000/security/users/<USER_ID>" -H "Authorization: Bearer $TOKEN" -H "Content-Type: application/json" -d '{"password": "<NEW_PASSWORD>"}'
 
-      port: 55000
+   Replace ``<USER_ID>`` with the user’s ID and ``<NEW_PASSWORD>`` with the new password.
 
-    After configuring these parameters, it will be necessary to restart the Wazuh API using the ``wazuh-manager`` service.
+   .. warning::
 
-      .. include:: /_templates/common/restart_manager.rst
+      Changing the ``wazuh-wui`` user password will affect the Wazuh dashboard. You will have to update the ``/usr/share/wazuh-dashboard/data/wazuh/config/wazuh.yml`` configuration file accordingly with the new credentials. To learn more, see the :doc:`Wazuh dashboard configuration file </user-manual/wazuh-dashboard/settings>` document.
 
-#. Set maximum number of requests per minute:
+3. Change the default host and port
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-    In order to avoid overloading the Wazuh API, it is possible to use rate limiting to establish the maximum number of requests the Wazuh API can handle per minute. Once exceeded, all other requests (from any user) will be rejected for the remaining period of time.
+By default, the ``host`` is set to ``0.0.0.0``, allowing the Wazuh server API to accept incoming connections on all available network interfaces. To restrict access, edit the Wazuh server API configuration in ``/var/ossec/api/configuration/api.yaml``:
 
-    The default number of requests per minute is *300*. To change it, modify the ``max_request_per_minute`` setting in ``WAZUH_PATH/api/configuration/api.yaml``.
+.. code-block:: yaml
 
-    .. note:: To disable this feature, set its value to 0.
+   host: 0.0.0.0
 
-#. Set maximum number of login attempts:
+You can also change the default port:
 
-    To avoid brute force attacks, it is possible to set the number of times that a login attempt can occur from the same IP address during a certain period of time. Once the said number is exceeded, the IP address will be blocked for that period of time.
+.. code-block:: yaml
 
-    The default number of login attempts allowed is *50* for each period of time, which by default is *300* seconds. To change these values, modify the ``max_login_attempts`` and/or the ``block_time`` settings in ``WAZUH_PATH/api/configuration/api.yaml``.
+   port: 55000
 
-A complete Wazuh API configuration guide can be found :ref:`here <api_configuration>`.
+After configuring these parameters, restart the Wazuh server API using the Wazuh manager service with Systemd or SysV init:
+
+.. include:: /_templates/common/restart_manager.rst
+
+4. Set maximum number of requests per minute
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+To prevent overloading the Wazuh server API, you can implement rate limiting to establish the maximum number of requests the API can handle per minute. If this limit is exceeded, the API will reject further requests from any user for the rest of the period.
+
+The default limit is 300 requests per minute. Adjust this by changing the ``max_request_per_minute`` setting in ``/var/ossec/api/configuration/api.yaml``.
+
+.. note::
+
+   To disable rate limiting, set its value to 0.
+
+5. Set maximum number of login attempts
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+To protect against brute force attacks, you can limit login attempts from the same IP address within a specific timeframe. Exceeding this limit blocks the IP address for the duration of that period.
+
+By default, you're allowed 50 login attempts per 300-second period. To adjust these limits, edit the ``max_login_attempts`` and/or ``block_time`` settings in ``/var/ossec/api/configuration/api.yaml``.
+
+You can find a complete Wazuh server API configuration guide :doc:`here <configuration>`.

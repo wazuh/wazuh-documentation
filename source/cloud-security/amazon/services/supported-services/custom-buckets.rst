@@ -19,6 +19,8 @@ To set up the Wazuh integration for Custom Logs Buckets, you need to do the foll
 #. Create an AWS SQS Queue.
 #. Configure an S3 bucket. For every object creation event, the bucket sends notifications to the queue.
 
+.. _amazon_custom_logs_configuration:
+
 AWS configuration
 -----------------
 
@@ -29,7 +31,7 @@ The following sections cover how to configure Custom Logs Buckets to integrate w
 Amazon Simple Queue Service
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-#. Set up a *Standard* type SQS Queue with the default configurations. You can apply an Access Policy similar to the following example, where ``<REGION>``, ``<ACCOUNT_ID>``, ``<SQS-NAME>``, and ``<S3-BUCKET>`` are the region, account ID, the SQS Queue name and the name you are going to provide to the S3 bucket.
+#. Set up a *Standard* type SQS Queue with the default configurations. You can apply an Access Policy similar to the following example, where ``<REGION>``, ``<ACCOUNT_ID>``, ``<SQS-NAME>``, and ``<S3-BUCKET>`` are the region, account ID, the SQS Queue name, and the name you are going to provide to the S3 bucket.
 
    .. code-block:: json
 
@@ -57,7 +59,7 @@ Amazon Simple Queue Service
       ]
       }
 
-You can make your access policy to accept S3 notifications from different account IDs and to apply different conditions. More information in `managing access in Amazon SQS <https://docs.aws.amazon.com/AWSSimpleQueueService/latest/SQSDeveloperGuide/sqs-overview-of-managing-access.html>`__.
+You can make your access policy to accept S3 notifications from different account IDs and to apply different conditions. More information in `Managing access in Amazon SQS <https://docs.aws.amazon.com/AWSSimpleQueueService/latest/SQSDeveloperGuide/sqs-overview-of-managing-access.html>`__.
 
 Amazon S3 and Event Notifications
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
@@ -85,7 +87,7 @@ Queue
 ^^^^^
 
 -  ``<sqs_name>``: The name of the queue.
--  Optional – ``<service_endpoint>``: The AWS S3 endpoint URL for data downloading from the bucket. Check :ref:`using non-default AWS endpoints <using_non-default_aws_endpoints>` for more information about VPC and FIPS endpoints.
+-  ``<service_endpoint>`` – *Optional*: The AWS S3 endpoint URL for data downloading from the bucket. Check :ref:`using_non-default_aws_endpoints` for more information about VPC and FIPS endpoints.
 
 Authentication
 ^^^^^^^^^^^^^^
@@ -99,10 +101,10 @@ These authentication methods require using the ``/root/.aws/credentials`` file t
 
 The available authentication configuration parameters are the following:
 
--  ``<aws_profile>``: A valid profile name from a Shared Credential File or AWS Config File with permission to read logs from the bucket.
+-  ``<aws_profile>``: A valid profile name from a :ref:`Shared Credential File <aws_profile>` or `AWS Config File <https://boto3.amazonaws.com/v1/documentation/api/latest/guide/configuration.html#using-a-configuration-file>`__ with `permission to read logs from the bucket <https://docs.aws.amazon.com/AmazonS3/latest/userguide/using-with-s3-actions.html>`__.
 -  ``<iam_role_arn>``: Amazon Resource Name (ARN) for the corresponding IAM role to assume.
--  Optional – ``<iam_role_duration>``: The session duration in seconds.
--  Optional – ``<sts_endpoint>``: The URL of the VPC endpoint of the AWS Security Token Service.
+-  ``<iam_role_duration>`` – *Optional*: The session duration in seconds.
+-  ``<sts_endpoint>`` – *Optional*: The URL of the VPC endpoint of the AWS Security Token Service.
 
 Configure Wazuh to process logs from Custom Logs Buckets
 --------------------------------------------------------

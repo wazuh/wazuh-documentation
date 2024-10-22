@@ -1,12 +1,12 @@
 .. Copyright (C) 2015, Wazuh, Inc.
 
 .. meta::
-   :description: Wazuh rules analyze decoded events and generate alerts once a matching condition is met. Learn more about rules syntax in this section.
+   :description: The Wazuh Ruleset analyzes incoming events and generates alerts. Learn more about Rules syntax in this section.
 
 Rules Syntax
 ============
 
-Wazuh rules analyze decoded events and generate alerts once a matching condition is met.
+The Wazuh ruleset, combined with any custom rules, analyzes incoming events. It generates alerts when all specified conditions within a rule are met. The ruleset is constantly expanding and improving thanks to the collaborative efforts of our developers and growing community.
 
 Options
 -------
@@ -935,7 +935,7 @@ If the ``hostname`` label is declared multiple times within the rule, the follow
 time
 ^^^^
 
-Used as a requisite to trigger a rule. Used for checking the time that the event was generated.
+Used as a requisite to trigger a rule. It checks the event time based on the Wazuh server time, not the event timestamp. You must configure local time settings correctly to prevent unexpected triggers.
 
 +--------------------+----------------------------------------------------------------------+
 | Default Value      | n/a                                                                  |
@@ -955,12 +955,12 @@ Example:
      <group>login_time,pci_dss_10.2.5,pci_dss_10.6.1,gpg13_7.1,gpg13_7.2,gdpr_IV_35.7.d,gdpr_IV_32.2,hipaa_164.312.b,nist_800_53_AU.14,nist_800_53_AC.7,nist_800_53_AU.6,</group>
    </rule>
 
-This rule will trigger when there is a successful login between 6 pm and 8 am.
+This rule triggers on successful logins occurring between 6 PM and 8 AM Wazuh server time.
 
 weekday
 ^^^^^^^
 
-Used as a requisite to trigger a rule. Checks the weekday that the event was generated.
+Used as a requisite to trigger a rule. It checks the event weekday based on the Wazuh server time, not the event timestamp. You must configure local time settings correctly to prevent unexpected triggers.
 
 +--------------------+-------------------------------------+
 | Default Value      | n/a                                 |
@@ -980,7 +980,7 @@ Example:
      <group>login_day,pci_dss_10.2.5,pci_dss_10.6.1,gpg13_7.1,gpg13_7.2,gdpr_IV_35.7.d,gdpr_IV_32.2,hipaa_164.312.b,nist_800_53_AU.14,nist_800_53_AC.7,nist_800_53_AU.6,</group>
    </rule>
 
-This rule will trigger when there is a successful login during the weekend.
+This rule triggers on successful logins during the weekend.
 
 .. _rules_id:
 

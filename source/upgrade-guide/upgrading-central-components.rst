@@ -6,7 +6,7 @@
 Wazuh central components
 ========================
 
-This section guides you through the upgrade process of the Wazuh indexer, the Wazuh server, and the Wazuh dashboard. To migrate from Open Distro for Elasticsearch 1.13 to the Wazuh indexer and dashboard components, read the corresponding :doc:`/migration-guide/wazuh-indexer` and :doc:`/migration-guide/wazuh-dashboard` sections.
+This section guides you through the upgrade process of the Wazuh indexer, the Wazuh server, and the Wazuh dashboard.
 
 .. note:: You need root user privileges to run all the commands described below.
 
@@ -64,13 +64,7 @@ Upgrading the Wazuh indexer
 
 The cluster remains available throughout the upgrading process in a Wazuh indexer cluster with multiple nodes. This rolling upgrade allows for the shutting down of one Wazuh indexer node at a time for minimal disruption of service.
 
-As a first step, remove the *ss4o* index templates. Replace ``<WAZUH_INDEXER_IP_ADDRESS>``, ``<USERNAME>``, and ``<PASSWORD>`` before running any command below.
-
-.. code-block:: bash
-
-   curl -X DELETE "https://<WAZUH_INDEXER_IP_ADDRESS>:9200/_index_template/ss4o_*_template" -u <USERNAME>:<PASSWORD> -k
-
-Then, repeat the following steps for every Wazuh indexer node.
+Repeat the following steps for every Wazuh indexer node replacing ``<WAZUH_INDEXER_IP_ADDRESS>``, ``<USERNAME>``, and ``<PASSWORD>``.
 
 #. Disable shard allocation.
 
@@ -200,10 +194,10 @@ If upgrading from version 4.7 and earlier, edit ``/var/ossec/etc/ossec.conf`` to
 #. Save the Wazuh indexer username and password into the Wazuh manager keystore using the :doc:`Wazuh-keystore </user-manual/reference/tools/wazuh-keystore>` tool.
 
    .. code-block:: console
-  
-      # /var/ossec/bin/wazuh-keystore -f indexer -k username -v <INDEXER_USERNAME>
-      # /var/ossec/bin/wazuh-keystore -f indexer -k password -v <INDEXER_PASSWORD>
-   
+
+      # echo '<INDEXER_USERNAME>' | /var/ossec/bin/wazuh-keystore -f indexer -k username
+      # echo '<INDEXER_PASSWORD>' | /var/ossec/bin/wazuh-keystore -f indexer -k password
+
    .. note::
 
       In case you've forgotten your Wazuh indexer password, follow the :doc:`password management </user-manual/user-administration/password-management>` guide to reset the password.
@@ -255,7 +249,6 @@ Configuration options might differ across versions. Follow these steps to ensure
 
          .. code-block:: console
 
-            # rm /etc/wazuh-dashboard/opensearch_dashboards.yml
             # yum upgrade wazuh-dashboard|WAZUH_DASHBOARD_RPM_PKG_INSTALL|
 
       .. group-tab:: APT
@@ -267,7 +260,7 @@ Configuration options might differ across versions. Follow these steps to ensure
          .. note::
 
             When prompted, choose to replace the ``/etc/wazuh-dashboard/opensearch_dashboards.yml`` file with the updated version.
-         
+
 #. Manually reapply any settings changes to the ``/etc/wazuh-dashboard/opensearch_dashboards.yml`` file.
 #. Restart the Wazuh dashboard:
 
