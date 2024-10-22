@@ -141,3 +141,20 @@ Troubleshooting
    **Location**: Suricata log -  ``/var/log/suricata/suricata.log``
 
    **Resolution**: To solve this issue, check the name of your network interface and configure it accordingly in the ``/etc/sysconfig/suricata`` and ``/etc/suricata/suricata.yaml`` files.
+
+-  **Too many fields for JSON decoder**:
+
+   .. code-block:: none
+      :emphasize-lines: 1
+
+      2024/07/21 09:05:47 wazuh-analysisd: ERROR: Too many fields for JSON decoder.
+
+   **Location**: Ossec manager log -  ``/var/ossec/logs/ossec.log``
+
+   **Resolution**: To solve this issue, modify the "maximum number of fields in a decoder" in file ``/var/ossec/etc/internal_options.conf`` on the wazuh manager side and set the following variable:
+
+   .. code-block:: yaml
+      :emphasize-lines: 1
+      
+      # Maximum number of fields in a decoder
+      analysisd.decoder_order_size:1024
