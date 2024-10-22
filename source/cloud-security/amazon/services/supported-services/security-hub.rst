@@ -8,53 +8,122 @@ AWS Security Hub
 
 .. versionadded:: 4.9.0
 
-`AWS Security Hub <https://aws.amazon.com/security-hub/>`_ is a cloud security posture management (CSPM) service that automates security best practice checks, aggregates security alerts into a unified format, and helps the user understand the overall security posture across all of the AWS accounts.
+`AWS Security Hub <https://aws.amazon.com/security-hub/>`_ automates security best practice checks and aggregates insights to help users understand their overall security posture across multiple AWS accounts. Security Hub helps users assess their compliance against security best practices. It achieves this by:
 
-Security Hub helps users assess their compliance against security best practices as follows:
+-  Running checks against security controls.
+-  Generating control `findings <https://docs.aws.amazon.com/securityhub/latest/userguide/securityhub-findings.html>`__.
+-  Grouping related findings into collections called `insights <https://docs.aws.amazon.com/securityhub/latest/userguide/securityhub-insights.html>`__.
 
--  Runs checks against security controls.
--  Generates control `findings <https://docs.aws.amazon.com/securityhub/latest/userguide/securityhub-findings.html>`__.
--  Groups related findings into collections called `insights <https://docs.aws.amazon.com/securityhub/latest/userguide/securityhub-insights.html>`__.
+You need to perform the following to set up the integration that allows you to receive Security Hub events on your Wazuh environment:
 
-Wazuh integrates with `Amazon SQS <https://aws.amazon.com/sqs>`_ and `EventBridge <https://aws.amazon.com/eventbridge>`_ to centralize Security Hub findings and insights in a single place.
+#. Configure your AWS environment. This involves:
 
-EventBridge allows storing Security Hub findings and insights in S3 buckets.
+   -  :ref:`Enabling Amazon Security Hub <enabling_security_hub>`. There are two methods to enable Amazon Security Hub in your environment. Please see the :ref:`enabling Security Hub <enabling_security_hub>` section.
+   -  :ref:`Creating a Firehose stream <creating_firehose_stream>`: The Amazon EventBridge is a serverless event bus service that makes it easy to connect applications using events from AWS services, integrated SaaS applications, and custom sources in real-time. EventBridge needs a target such as the Firehose stream. It triggers the target when it receives an event matching an event pattern defined in the rule.
+   -  :ref:`Integrating Security Hub with EventBridge <integrating_security_hub_with_eventbridge>`: EventBridge allows storing Security Hub findings and insights in S3 buckets.
+   -  :ref:`Enabling an Amazon S3 bucket to include event notifications <>`: The bucket sends notifications to the queue for every Security Hub object creation event.
+   -  :ref:`Enabling an Amazon SQS queue <>`: The Amazon Simple Queue Service (SQS) is a message queuing service that enables decoupled communication between AWS components. The Wazuh module for AWS will query the SQS for notifications of created logs in S3 and generate alerts from Security Hub logs.
 
-There are three types of events available, each type uses a specific `EventBridge event format <https://docs.aws.amazon.com/securityhub/latest/userguide/securityhub-cwe-event-formats.html>`__. The Wazuh integration takes every relevant ``detail`` and ``detail-type`` values from them.
+#. Configure the Wazuh module for AWS to receive Amazon Security Hub events.
 
--  **Security Hub Findings - Imported**: Security Hub automatically sends events of this type to EventBridge. It includes all new findings as well as updates to existing findings. Each event contains a single finding.
--  **Security Hub Findings - Custom Action**: Security Hub sends events of this type to EventBridge when custom actions are triggered. The events are associated with the findings of the custom actions.
--  **Security Hub Insight Results**: This type of event is used to process the Security Hub Insights. You can use custom actions to send sets of insight results to EventBridge. Insight results are the resources that match an insight.
+.. contents::
+   :local:
+   :depth: 2
+   :backlinks: none
 
-Find more information about each type of event in `Types of Security Hub integration with EventBridge <https://docs.aws.amazon.com/securityhub/latest/userguide/securityhub-cwe-integration-types.html>`__.
+Amazon configuration
+--------------------
 
-Amazon Simple Queue Service is a fully managed message queuing service that makes it easy to decouple and scale microservices, distributed systems, and serverless applications.
-
-In this case, it is used to acknowledge new events to pull from the S3 bucket.
-
-To set up the integration, you need to:
-
-#. Configure AWS. This involves the following.
-
-   #. Enabling Amazon Security Hub.
-   #. Integrating Security Hub with EventBridge.
-   #. Enabling an Amazon SQS queue.
-   #. Enabling an Amazon S3 bucket including Event notifications. The bucket sends notifications to the queue for every Security Hub object creation event.
-#. Set up the Wazuh integration for Amazon Security Hub.
-
-AWS configuration
------------------
+.. _enabling_security_hub:
 
 Enabling Security Hub
 ^^^^^^^^^^^^^^^^^^^^^
 
-AWS Security Hub uses service-linked AWS Config rules to perform security checks for most controls. We advise to `configure AWS Config <https://docs.aws.amazon.com/securityhub/latest/userguide/securityhub-setup-prereqs.html#securityhub-prereq-config>`_ as a prerequisite.
+Search for the “Security Hub” using the AWS console search bar to determine the best method that suits your environment. There are two ways to enable AWS Security Hub:
 
-.. thumbnail:: /images/aws/security-hub-set-up.png
-   :title: Enable AWS Security Hub
-   :alt: Enable AWS Security Hub
-   :align: center
-   :width: 80%
+-  **Manual Integration**: We recommend this method for standalone accounts with a single organization. The screenshot below shows how to enable AWS Security Hub using the AWS Security Hub console. Please follow the `enabling Security Hub manually <https://docs.aws.amazon.com/securityhub/latest/userguide/securityhub-settingup.html#securityhub-manual-setup-overview>`__ guideline to find other methods to enable the AWS Security Hub.
+
+   .. thumbnail:: /images/cloud-security/aws/security-hub/security-hub-set-up.png
+      :title: Enable AWS Security Hub
+      :alt: Enable AWS Security Hub
+      :align: center
+      :width: 80%
+
+-  **Organizations integration**: We recommend this method for multi-account and multi-region environments. Your organization must have a delegated administrator account. Please follow the `enabling Security Hub with organizations integration <https://docs.aws.amazon.com/securityhub/latest/userguide/securityhub-settingup.html#securityhub-orgs-setup-overview>`__ guidelines to set your AWS Security Hub using this method.
+
+.. _creating_firehose_stream:
+
+Creating a Firehose stream
+^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+The Amazon Firehose stream serves as the channel for sending the AWS Security Hub logs to the S3 bucket. Follow the steps below to :ref:`create an Amazon Firehose stream <>` for your Amazon Security Hub logs.
+
+#. Go to the Amazon Data Firehose service and click **Create Firehose stream**.
+
+   .. thumbnail:: /images/cloud-security/aws/security-hub/create-firehose-stream.png
+      :title: Create Firehose stream
+      :alt: Create Firehose stream
+      :align: center
+      :width: 80%
+
+#. Select **Direct PUT** as the source and **Amazon S3** as the destination.
+
+   .. thumbnail:: /images/cloud-security/aws/security-hub/create-firehose-stream2.png
+      :title: Create Firehose stream
+      :alt: Create Firehose stream
+      :align: center
+      :width: 80%
+
+#. Choose or create your proposed Amazon S3 bucket. You can use an Amazon S3 bucket prefix, but this is optional.
+
+   .. thumbnail:: /images/cloud-security/aws/security-hub/create-firehose-stream3.png
+      :title: Create Firehose stream
+      :alt: Create Firehose stream
+      :align: center
+      :width: 80%
+
+#. Click **Create Firehose stream**.
+
+.. _integrating_security_hub_with_eventbridge:
+
+Integrating Security Hub with EventBridge
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Integrating Security Hub with EventBridge enables the storage of Security Hub events in S3 buckets.
+
+There are three types of events available, each using a specific `Eventbridge event format <https://docs.aws.amazon.com/securityhub/latest/userguide/securityhub-cwe-event-formats.html>`__. The Wazuh integration takes every relevant ``detail`` and ``detail-type`` value from them.
+
+-  **Security Hub Findings - Imported**: Security Hub automatically sends events of this type to EventBridge. They include new findings and updates to existing findings, each containing a single finding.
+-  **Security Hub Findings - Custom Action**: When you trigger custom actions, Security Hub sends these events to EventBridge. The custom actions associate the events with their findings.
+-  **Security Hub Insight Results**: This event processes the Security Hub Insights. You can use custom actions to send sets of insight results to EventBridge. Insight results are the resources that match an insight.
+
+To send the last two types of events to EventBridge, you need to create a `custom action in Security Hub <https://docs.aws.amazon.com/securityhub/latest/userguide/securityhub-cwe-custom-actions.html>`__. Please refer to the Amazon Security Hub documentation to achieve this. Find more information about the `types of Security Hub integration with EventBridge <https://docs.aws.amazon.com/securityhub/latest/userguide/securityhub-cwe-integration-types.html>`__.
+
+To integrate Security Hub with EventBridge, you must create an event rule in EventBridge.
+
+#. Go to the Amazon EventBridge and create a new EventBridge rule.
+
+   .. thumbnail:: /images/cloud-security/aws/security-hub/create-eventbridge-rule.png
+      :title: Create Firehose stream
+      :alt: Create Firehose stream
+      :align: center
+      :width: 80%
+
+#. Enter a name for the rule and select **Rule with an event pattern**. Then click on **Next**.
+
+   .. thumbnail:: /images/cloud-security/aws/security-hub/create-eventbridge-rule2.png
+      :title: Create Firehose stream
+      :alt: Create Firehose stream
+      :align: center
+      :width: 80%
+
+#. 
+
+
+
+
+
+
 
 You have two alternative ways to enable AWS Security Hub:
 
