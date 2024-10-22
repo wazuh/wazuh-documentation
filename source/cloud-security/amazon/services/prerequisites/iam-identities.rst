@@ -19,7 +19,7 @@ Creating an IAM user group
 
    #. On the AWS console, search for ``iam`` and click **IAM** from the results.
 
-      .. thumbnail:: /images/cloud-security/aws/config-iam-identities/search-for-iam.png
+      .. thumbnail:: /images/cloud-security/aws/config-iam-identities/search-for-IAM.png
          :title: Find IAM
          :alt: Find IAM
          :align: center

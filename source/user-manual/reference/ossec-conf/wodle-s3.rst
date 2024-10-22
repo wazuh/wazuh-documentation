@@ -138,7 +138,7 @@ Time of the day to run the scan. It has to be in the hh:mm format.
 Buckets
 ~~~~~~~
 
-It is necessary to specify the type as an attribute of the ``bucket`` tag to indicate the service configured. More information about the supported services and their associated types on :ref:`AWS supported services <amazon_supported_services>`.
+It is necessary to specify the type as an attribute of the ``bucket`` tag to indicate the service configured. More information about the supported services and their associated types on :doc:`AWS supported services </cloud-security/amazon/services/supported-services/index>`.
 
 	.. code-block:: xml
 
@@ -486,7 +486,7 @@ The AWS S3 endpoint URL to be used to download the data from the bucket. Check t
 Services
 ~~~~~~~~
 
-It is necessary to specify the type as an attribute of the ``service`` tag to indicate the service configured. More information about the supported services and their associated types on :ref:`AWS supported services <amazon_supported_services>`.
+It is necessary to specify the type as an attribute of the ``service`` tag to indicate the service configured. More information about the supported services and their associated types on :doc:`AWS supported services </cloud-security/amazon/services/supported-services/index>`.
 
 	.. code-block:: xml
 
@@ -743,7 +743,7 @@ Subscribers
 
 .. versionadded:: 4.4.2
 
-It is necessary to specify the type as an attribute of the ``subscriber`` tag to indicate the service configured. More information about the supported services and their associated types on :ref:`AWS supported services <amazon_supported_services>`.
+It is necessary to specify the type as an attribute of the ``subscriber`` tag to indicate the service configured. More information about the supported services and their associated types on :doc:`AWS supported services </cloud-security/amazon/services/supported-services/index>`.
 
 	.. code-block:: xml
 

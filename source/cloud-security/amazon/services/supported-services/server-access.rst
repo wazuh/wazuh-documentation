@@ -42,7 +42,7 @@ Amazon S3 server access configuration
 
 #. Check the **Enable** option, and click **Browse S3** to look for the bucket in which you want S3 Server Access logs to be stored. In our case, the logs are stored in the ``s3-server-logs/`` path of the monitored S3 bucket.
 
-   .. thumbnail:: /images/cloud-security/aws/s3-server-access/04-enable -and-store-s3-access-logs.png
+   .. thumbnail:: /images/cloud-security/aws/s3-server-access/04-enable-and-store-s3-access-logs.png
       :align: center
       :width: 80%
 
