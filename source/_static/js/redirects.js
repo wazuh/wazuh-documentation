@@ -256,6 +256,8 @@ newUrls['4.9'] = [
   '/migration-guide/restoring/index.html',
   '/migration-guide/restoring/wazuh-agent.html',
   '/migration-guide/restoring/wazuh-central-components.html',
+  '/cloud-security/amazon/services/prerequisites/aws-policy.html',
+  '/cloud-security/amazon/services/prerequisites/iam-identities.html',
 ];
 
 /* Pages no longer available in 4.9 */

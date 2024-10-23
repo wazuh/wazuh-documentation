@@ -299,7 +299,7 @@ The available authentication methods are the following:
 -  :ref:`IAM Roles <iam_roles>`
 -  :ref:`Profiles <aws_profile>`
 
-These authentication methods require using the ``/root/.aws/credentials`` file to provide credentials. You can find more information in :ref:`Configuring AWS credentials <amazon_credentials>`.
+These authentication methods require using the ``/root/.aws/credentials`` file to provide credentials. You can find more information in :doc:`Configuring AWS credentials <../prerequisites/credentials>`.
 
 The available authentication configuration parameters are the following:
 
