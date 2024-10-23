@@ -14,23 +14,22 @@ The configuration file reference is organized into sections:
 
 -  General options
 
-   -  pattern
-   -  timeout
-   -  ip.selector
-   -  ip.ignore
-   -  logs.level
-   -  hideManagerAlerts
-   -  alerts.sample.prefix
-   -  enrollment.dns
-   -  enrollment.password
-   -  cron.prefix
+   -  `pattern`_
+   -  `timeout`_
+   -  `ip.selector`_
+   -  `ip.ignore`_
+   -  `hideManagerAlerts`_
+   -  `alerts.sample.prefix`_
+   -  `enrollment.dns`_
+   -  `enrollment.password`_
+   -  `cron.prefix`_
 
 -  Monitoring
 
-   -  wazuh.monitoring.enabled
-   -  wazuh.monitoring.frequency
-   -  wazuh.monitoring.pattern
-   -  wazuh.monitoring.creation
+   -  `wazuh.monitoring.enabled`_
+   -  `wazuh.monitoring.frequency`_
+   -  `wazuh.monitoring.pattern`_
+   -  `wazuh.monitoring.creation`_
 
 -  Health check
 
@@ -105,39 +104,55 @@ The following table shows the configuration options for the Wazuh dashboard:
 +=================================+=========================================================+=====================================================+=========================+
 | **General options**                                                                                                                                                       |
 +---------------------------------+---------------------------------------------------------+-----------------------------------------------------+-------------------------+
+|                                 | .. _pattern:                                            |                                                     |                         |
+|                                 |                                                         |                                                     |                         |
 | pattern                         | The property defines the default index pattern to use   | ``wazuh-alerts-*``                                  | Any valid index pattern |
 |                                 | on the Wazuh dashboard. If there is no valid index      |                                                     |                         |
 |                                 | pattern specified, the Wazuh dashboard automatically    |                                                     |                         |
 |                                 | creates one with the name indicated in this option.     |                                                     |                         |
 +---------------------------------+---------------------------------------------------------+-----------------------------------------------------+-------------------------+
+|                                 | .. _timeout:                                            |                                                     |                         |
+|                                 |                                                         |                                                     |                         |
 | timeout                         | This property defines the maximum time (in              | ``20000``                                           | Any number starting     |
 |                                 | milliseconds) the Wazuh dashboard will wait for an API  |                                                     | from 1500               |
 |                                 | response when making requests to it. Setting a value    |                                                     |                         |
 |                                 | under ``1500`` milliseconds will be ignored and the     |                                                     |                         |
 |                                 | dashboard will use the default value instead.           |                                                     |                         |
 +---------------------------------+---------------------------------------------------------+-----------------------------------------------------+-------------------------+
+|                                 | .. _ip.selector:                                        |                                                     |                         |
+|                                 |                                                         |                                                     |                         |
 | ip.selector                     | This property defines if a user can change the          | ``true``                                            | true, false             |
 |                                 | selected index pattern directly from the top menu       |                                                     |                         |
 |                                 | bar on the Wazuh dashboard WUI.                         |                                                     |                         |
 +---------------------------------+---------------------------------------------------------+-----------------------------------------------------+-------------------------+
+|                                 | .. _ip.ignore:                                          |                                                     |                         |
+|                                 |                                                         |                                                     |                         |
 | ip.ignore                       | This property is used to disable certain index          | ``[]``                                              | Array of strings. Eg:   |
 |                                 | pattern names from being available in the index         |                                                     | ``["wazuh-archives-*"]``|
 |                                 | pattern selector on the Wazuh dashboard. An empty       |                                                     |                         |
 |                                 | list (the default value) won't ignore any valid         |                                                     |                         |
 |                                 | index pattern.                                          |                                                     |                         |
 +---------------------------------+---------------------------------------------------------+-----------------------------------------------------+-------------------------+
+|                                 | .. _hideManagerAlerts:                                  |                                                     |                         |
+|                                 |                                                         |                                                     |                         |
 | hideManagerAlerts               | This property controls if the Wazuh manager alerts      | ``false``                                           | true, false             |
 |                                 | in the dashboard visualizations are visible or not.     |                                                     |                         |
 |                                 | A value of false displays the Wazuh manager alerts      |                                                     |                         |
 |                                 | on dashboard visualizations.                            |                                                     |                         |
 +---------------------------------+---------------------------------------------------------+-----------------------------------------------------+-------------------------+
+|                                 | .. _alerts.sample.prefix:                               |                                                     |                         |
+|                                 |                                                         |                                                     |                         |
 | alerts.sample.prefix            | This property defines the index name prefix of sample   | ``wazuh-alerts-4.x-``                               | Any valid index pattern |
 |                                 | alerts. It must match the template used by the index    |                                                     |                         |
 |                                 | pattern to avoid unknown fields in dashboards.          |                                                     |                         |
 +---------------------------------+---------------------------------------------------------+-----------------------------------------------------+-------------------------+
+|                                 | .. _enrollment.dns:                                     |                                                     |                         |
+|                                 |                                                         |                                                     |                         |
 | enrollment.dns                  | This property specifies the Wazuh registration server   | ``' '``                                             | Any string              |
 |                                 | used for Wazuh agent enrollment.                        |                                                     |                         |
 +---------------------------------+---------------------------------------------------------+-----------------------------------------------------+-------------------------+
+|                                 | .. _enrollment.password:                                |                                                     |                         |
+|                                 |                                                         |                                                     |                         |
 | enrollment.password             | This property specifies the password used to            | ``' '``                                             | Any string              |
 |                                 | authenticate during the agent enrollment.               |                                                     |                         |
 |                                 | ``enrollment.password`` takes a higher precedence over  |                                                     |                         |
@@ -145,12 +160,16 @@ The following table shows the configuration options for the Wazuh dashboard:
 |                                 | Wazuh manager. When both values are set, the value of   |                                                     |                         |
 |                                 | ``enrollment.password`` will be used instead.           |                                                     |                         |
 +---------------------------------+---------------------------------------------------------+-----------------------------------------------------+-------------------------+
+|                                 | .. _cron.prefix:                                        |                                                     |                         |
+|                                 |                                                         |                                                     |                         |
 | cron.prefix                     | This property defines the index prefix of predefined    | ``wazuh``                                           | Any string              |
 |                                 | cron jobs. The predefined jobs are the statistics       |                                                     |                         |
 |                                 | monitoring jobs.                                        |                                                     |                         |
 +---------------------------------+---------------------------------------------------------+-----------------------------------------------------+-------------------------+
 | **Monitoring**                                                                                                                                                            |
 +---------------------------------+---------------------------------------------------------+-----------------------------------------------------+-------------------------+
+|                                 | .. _wazuh.monitoring.enabled:                           |                                                     |                         |
+|                                 |                                                         |                                                     |                         |
 | wazuh.monitoring.enabled        | Enables or disables the ``wazuh-monitoring`` index      | ``True``                                            | true,false              |
 |                                 | creation and/or visualization:                          |                                                     |                         |
 |                                 |                                                         |                                                     |                         |
@@ -161,6 +180,8 @@ The following table shows the configuration options for the Wazuh dashboard:
 |                                 |   won't show the visualization and won't insert         |                                                     |                         |
 |                                 |   monitoring-related data.                              |                                                     |                         |
 +---------------------------------+---------------------------------------------------------+-----------------------------------------------------+-------------------------+
+|                                 | .. _wazuh.monitoring.frequency:                         |                                                     |                         |
+|                                 |                                                         |                                                     |                         |
 | wazuh.monitoring.frequency      | This property defines the frequency (in seconds) of     | ``900``                                             | Any number starting     |
 |                                 | API requests to get the state of the agents to create   |                                                     | from 60                 |
 |                                 | a new document in the wazuh-monitoring-* index with     | .. warning:: Although the minimum value can be      |                         |
@@ -170,11 +191,15 @@ The following table shows the configuration options for the Wazuh dashboard:
 |                                 | avoid overloading resources due to the excessive        |    into the index.                                  |                         |
 |                                 | creation of documents into the index.                   |                                                     |                         |
 +---------------------------------+---------------------------------------------------------+-----------------------------------------------------+-------------------------+
+|                                 | .. _wazuh.monitoring.pattern:                           |                                                     |                         |
+|                                 |                                                         |                                                     |                         |
 | wazuh.monitoring.pattern        | This property defines the index pattern to use for      | ``wazuh-monitoring-*``                              | Any valid index pattern |
 |                                 | Wazuh dashboard monitoring tasks. This setting does     |                                                     |                         |
 |                                 | not remove any existing patterns or templates, it       |                                                     |                         |
 |                                 | only updates the Wazuh dashboard to add new ones.       |                                                     |                         |
 +---------------------------------+---------------------------------------------------------+-----------------------------------------------------+-------------------------+
+|                                 | .. _wazuh.monitoring.creation:                          |                                                     |                         |
+|                                 |                                                         |                                                     |                         |
 | wazuh.monitoring.creation       | This property configures ``wazuh-monitoring-*`` indices | ``w``                                               | h (hourly), d (daily),  |
 |                                 | custom creation interval.                               |                                                     | w (weekly), m (monthly) |
 +---------------------------------+---------------------------------------------------------+-----------------------------------------------------+-------------------------+
