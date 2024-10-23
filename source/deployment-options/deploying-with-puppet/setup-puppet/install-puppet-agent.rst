@@ -29,7 +29,7 @@ Install the Puppet yum repository and then the "puppet-agent" package. See this 
 
 .. code-block:: console
 
-    # sudo rpm -Uvh https://yum.puppet.com/puppet7-release-el-8.noarch.rpm
+    # sudo rpm -Uvh https://yum.puppetlabs.com/puppet7-release-el-8.noarch.rpm
     # yum -y install puppet-agent
 
 
