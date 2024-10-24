@@ -12,7 +12,7 @@ The configuration file shows the default values for all of the possible options.
 
 The configuration file reference is organized into sections:
 
--  General options
+-  :ref:`General options <dashboard_general_options>`
 
    -  `pattern`_
    -  `timeout`_
@@ -24,38 +24,38 @@ The configuration file reference is organized into sections:
    -  `enrollment.password`_
    -  `cron.prefix`_
 
--  Monitoring
+-  :ref:`Monitoring <dashboard_monitoring>`
 
    -  `wazuh.monitoring.enabled`_
    -  `wazuh.monitoring.frequency`_
    -  `wazuh.monitoring.pattern`_
    -  `wazuh.monitoring.creation`_
 
--  Health check
+-  :ref:`Health check <dashboard_health_checks>`
 
-   -  checks.pattern
-   -  checks.template
-   -  checks.api
-   -  checks.setup
-   -  checks.fields
-   -  checks.metaFields
-   -  checks.timeFilter
-   -  checks.maxBuckets
+   -  `checks.pattern`_
+   -  `checks.template`_
+   -  `checks.api`_
+   -  `checks.setup`_
+   -  `checks.fields`_
+   -  `checks.metaFields`_
+   -  `checks.timeFilter`_
+   -  `checks.maxBuckets`_
 
--  Advanced index options
+-  :ref:`Advanced index options <dashboard_advanced_index_options>`
 
-   -  wazuh.monitoring.shards
-   -  wazuh.monitoring.replicas
+   -  `wazuh.monitoring.shards`_
+   -  `wazuh.monitoring.replicas`_
 
--  Cron statistics
+-  :ref:`Cron statistics <dashboard_cron_statistics>`
 
-   -  cron.statistics.status
-   -  cron.statistics.apis
-   -  cron.statistics.interval
-   -  cron.statistics.index.name
-   -  cron.statistics.index.creation
-   -  cron.statistics.shards
-   -  cron.statistics.index.replicas
+   -  `cron.statistics.status`_
+   -  `cron.statistics.apis`_
+   -  `cron.statistics.interval`_
+   -  `cron.statistics.index.name`_
+   -  `cron.statistics.index.creation`_
+   -  `cron.statistics.shards`_
+   -  `cron.statistics.index.replicas`_
 
 General
 -------
@@ -102,6 +102,8 @@ The following table shows the configuration options for the Wazuh dashboard:
 | Configuration name              | Description                                             | Default value                                       | Allowed values          |
 |                                 |                                                         |                                                     |                         |
 +=================================+=========================================================+=====================================================+=========================+
+| .. _dashboard_general_options:                                                                                                                                            |
+|                                                                                                                                                                           |
 | **General options**                                                                                                                                                       |
 +---------------------------------+---------------------------------------------------------+-----------------------------------------------------+-------------------------+
 |                                 | .. _pattern:                                            |                                                     |                         |
@@ -166,6 +168,8 @@ The following table shows the configuration options for the Wazuh dashboard:
 |                                 | cron jobs. The predefined jobs are the statistics       |                                                     |                         |
 |                                 | monitoring jobs.                                        |                                                     |                         |
 +---------------------------------+---------------------------------------------------------+-----------------------------------------------------+-------------------------+
+| .. _dashboard_monitoring:                                                                                                                                                 |
+|                                                                                                                                                                           |
 | **Monitoring**                                                                                                                                                            |
 +---------------------------------+---------------------------------------------------------+-----------------------------------------------------+-------------------------+
 |                                 | .. _wazuh.monitoring.enabled:                           |                                                     |                         |
@@ -176,20 +180,20 @@ The following table shows the configuration options for the Wazuh dashboard:
 |                                 | - When the value is set to ``true``, the Wazuh          | .. warning:: The Wazuh dashboard user interface     |                         |
 |                                 |   dashboard will show the *Agents connection states*    |     allows selecting either ``true`` or             |                         |
 |                                 |   visualization and will insert monitoring-related data.|     ``false`` option.                               |                         |
-|                                 | - When the value is set to false, the Wazuh dashboard   |                                                     |                         |
-|                                 |   won't show the visualization and won't insert         |                                                     |                         |
-|                                 |   monitoring-related data.                              |                                                     |                         |
+|                                 | - When the value is set to ``false``, the Wazuh         |                                                     |                         |
+|                                 |   dashboard won't show the visualization and won't      |                                                     |                         |
+|                                 |   insert monitoring-related data.                       |                                                     |                         |
 +---------------------------------+---------------------------------------------------------+-----------------------------------------------------+-------------------------+
 |                                 | .. _wazuh.monitoring.frequency:                         |                                                     |                         |
 |                                 |                                                         |                                                     |                         |
 | wazuh.monitoring.frequency      | This property defines the frequency (in seconds) of     | ``900``                                             | Any number starting     |
 |                                 | API requests to get the state of the agents to create   |                                                     | from 60                 |
-|                                 | a new document in the wazuh-monitoring-* index with     | .. warning:: Although the minimum value can be      |                         |
+|                                 | a new document in the ``wazuh-monitoring-*`` index with | .. warning:: Although the minimum value can be      |                         |
 |                                 | the returned data.                                      |    ``60``, we recommend adjusting it to at least    |                         |
-|                                 | Warning: Although the minimum value can be 60, we       |    ``300`` seconds to avoid overloading resources   |                         |
-|                                 | recommend adjusting it to at least 300 seconds to       |    due to the excessive creation of documents       |                         |
-|                                 | avoid overloading resources due to the excessive        |    into the index.                                  |                         |
-|                                 | creation of documents into the index.                   |                                                     |                         |
+|                                 |                                                         |    ``300`` seconds to avoid overloading resources   |                         |
+|                                 |                                                         |    due to the excessive creation of documents       |                         |
+|                                 |                                                         |    into the index.                                  |                         |
+|                                 |                                                         |                                                     |                         |
 +---------------------------------+---------------------------------------------------------+-----------------------------------------------------+-------------------------+
 |                                 | .. _wazuh.monitoring.pattern:                           |                                                     |                         |
 |                                 |                                                         |                                                     |                         |
@@ -203,13 +207,19 @@ The following table shows the configuration options for the Wazuh dashboard:
 | wazuh.monitoring.creation       | This property configures ``wazuh-monitoring-*`` indices | ``w``                                               | h (hourly), d (daily),  |
 |                                 | custom creation interval.                               |                                                     | w (weekly), m (monthly) |
 +---------------------------------+---------------------------------------------------------+-----------------------------------------------------+-------------------------+
+| .. _dashboard_health_checks:                                                                                                                                              |
+|                                                                                                                                                                           |
 | **Health checks**                                                                                                                                                         |
 +---------------------------------+---------------------------------------------------------+-----------------------------------------------------+-------------------------+
+|                                 | .. _checks.pattern:                                     |                                                     |                         |
+|                                 |                                                         |                                                     |                         |
 | checks.pattern                  | This property enables or disables the index pattern     | ``true``                                            | true, false             |
 |                                 | health check when opening the Wazuh dashboard. If       |                                                     |                         |
 |                                 | set to false, index patterns will not be checked        |                                                     |                         |
 |                                 | during the Wazuh healthcheck.                           |                                                     |                         |
 +---------------------------------+---------------------------------------------------------+-----------------------------------------------------+-------------------------+
+|                                 | .. _checks.template:                                    |                                                     |                         |
+|                                 |                                                         |                                                     |                         |
 | checks.template                 | This property enables or disables the template health   | ``true``                                            | true, false             |
 |                                 | check when opening the Wazuh dashboard. It checks to    |                                                     |                         |
 |                                 | see if the defined index has a valid template. Set      |                                                     |                         |
@@ -217,11 +227,15 @@ The following table shows the configuration options for the Wazuh dashboard:
 |                                 | template to be validated when opening the Wazuh         |                                                     |                         |
 |                                 | dashboard.                                              |                                                     |                         |
 +---------------------------------+---------------------------------------------------------+-----------------------------------------------------+-------------------------+
+|                                 | .. _checks.api:                                         |                                                     |                         |
+|                                 |                                                         |                                                     |                         |
 | checks.api                      | This property enables or disables the Wazuh server API  | ``true``                                            | true, false             |
 |                                 | health check when opening the Wazuh dashboard. Set      |                                                     |                         |
 |                                 | the value of this property to ``false`` if you do not   |                                                     |                         |
 |                                 | require this check when opening the dashboard.          |                                                     |                         |
 +---------------------------------+---------------------------------------------------------+-----------------------------------------------------+-------------------------+
+|                                 | .. _checks.setup:                                       |                                                     |                         |
+|                                 |                                                         |                                                     |                         |
 | checks.setup                    | This property enables or disables the setup health      | ``true``                                            | true, false             |
 |                                 | check when opening the Wazuh dashboard. It checks       |                                                     |                         |
 |                                 | that the Wazuh server version is compatible with        |                                                     |                         |
@@ -230,24 +244,32 @@ The following table shows the configuration options for the Wazuh dashboard:
 |                                 | compatibility issue between the dashboard plugins and   |                                                     |                         |
 |                                 | Wazuh server.                                           |                                                     |                         |
 +---------------------------------+---------------------------------------------------------+-----------------------------------------------------+-------------------------+
+|                                 | .. _checks.fields:                                      |                                                     |                         |
+|                                 |                                                         |                                                     |                         |
 | checks.fields                   | This property enables or disables the known fields      | ``true``                                            | true, false             |
 |                                 | health check when opening the Wazuh dashboard. Known    |                                                     |                         |
 |                                 | fields refer to the fields in your indexed documents    |                                                     |                         |
 |                                 | that the indexer has identified, mapped, and available  |                                                     |                         |
 |                                 | for querying.                                           |                                                     |                         |
 +---------------------------------+---------------------------------------------------------+-----------------------------------------------------+-------------------------+
+|                                 | .. _checks.metaFields:                                  |                                                     |                         |
+|                                 |                                                         |                                                     |                         |
 | checks.metaFields               | Meta fields are special fields that provide additional  | ``true``                                            | true, false             |
 |                                 | metadata about indexed documents such as the ``_index`` |                                                     |                         |
 |                                 | and ``_id``. This property enables or disables the      |                                                     |                         |
 |                                 | metaFields health check when opening the Wazuh          |                                                     |                         |
 |                                 | dashboard.                                              |                                                     |                         |
 +---------------------------------+---------------------------------------------------------+-----------------------------------------------------+-------------------------+
+|                                 | .. _checks.timeFilter:                                  |                                                     |                         |
+|                                 |                                                         |                                                     |                         |
 | checks.timeFilter               | This property enables or disables the timeFilter        | ``true``                                            | true, false             |
 |                                 | health check when opening the Wazuh dashboard. It       |                                                     |                         |
 |                                 | checks to ensure a value is set for the dashboard       |                                                     |                         |
 |                                 | time filter. The time filter is used to set the time    |                                                     |                         |
 |                                 | range of data displayed on the dashboard.               |                                                     |                         |
 +---------------------------------+---------------------------------------------------------+-----------------------------------------------------+-------------------------+
+|                                 | .. _checks.maxBuckets:                                  |                                                     |                         |
+|                                 |                                                         |                                                     |                         |
 | checks.maxBuckets               | This property enables or disables the maxBuckets        | ``true``                                            | true, false             |
 |                                 | health check when opening the Wazuh dashboard. It       |                                                     |                         |
 |                                 | checks to ensure that the maximum number of buckets     |                                                     |                         |
@@ -255,6 +277,8 @@ The following table shows the configuration options for the Wazuh dashboard:
 |                                 | optimal levels. This helps to prevent excessive memory  |                                                     |                         |
 |                                 | usage and potential out-of-memory errors.               |                                                     |                         |
 +---------------------------------+---------------------------------------------------------+-----------------------------------------------------+-------------------------+
+| .. _dashboard_advanced_index_options:                                                                                                                                     |
+|                                                                                                                                                                           |
 | **Advanced index options**                                                                                                                                                |
 |                                                                                                                                                                           |
 | .. warning::                                                                                                                                                              |
@@ -263,38 +287,58 @@ The following table shows the configuration options for the Wazuh dashboard:
 |                                                                                                                                                                           |
 |    You can read more about configuring the shards and replicas in :doc:`Wazuh indexer tuning </user-manual/wazuh-indexer/wazuh-indexer-tuning>`.                          |
 +---------------------------------+---------------------------------------------------------+-----------------------------------------------------+-------------------------+
+|                                 | .. _wazuh.monitoring.shards:                            |                                                     |                         |
+|                                 |                                                         |                                                     |                         |
 | wazuh.monitoring.shards         | This defines the number of shards to use for the        | ``1``                                               | Any number starting     |
 |                                 | ``wazuh-monitoring-*`` indices.                         |                                                     | from 1                  |
 +---------------------------------+---------------------------------------------------------+-----------------------------------------------------+-------------------------+
+|                                 | .. _wazuh.monitoring.replicas:                          |                                                     |                         |
+|                                 |                                                         |                                                     |                         |
 | wazuh.monitoring.replicas       | This property defines the number of replicas to use     | ``0``                                               | Any number starting     |
 |                                 | for the ``wazuh-monitoring-*`` indices.                 |                                                     | from 0                  |
 +---------------------------------+---------------------------------------------------------+-----------------------------------------------------+-------------------------+
+| .. _dashboard_cron_statistics:                                                                                                                                            |
+|                                                                                                                                                                           |
 | **Cron statistics**                                                                                                                                                       |
 +---------------------------------+---------------------------------------------------------+-----------------------------------------------------+-------------------------+
+|                                 | .. _cron.statistics.status:                             |                                                     |                         |
+|                                 |                                                         |                                                     |                         |
 | cron.statistics.status          | This property enables or disables the statistics        | ``true``                                            | true, false             |
 |                                 | tasks. If enabled, it allows the statistics task to     |                                                     |                         |
 |                                 | run, which is to fetch statistics information from      |                                                     |                         |
 |                                 | the Wazuh server and index it in indexes.               |                                                     |                         |
 +---------------------------------+---------------------------------------------------------+-----------------------------------------------------+-------------------------+
+|                                 | .. _cron.statistics.apis:                               |                                                     |                         |
+|                                 |                                                         |                                                     |                         |
 | cron.statistics.apis            | Use this property to configure the IP of the hosts you  | ``[ ]``                                             | Array of APIs           |
 |                                 | want to save statistical data from and leave this       |                                                     |                         |
 |                                 | empty to run the task on every host.                    |                                                     |                         |
 +---------------------------------+---------------------------------------------------------+-----------------------------------------------------+-------------------------+
+|                                 | .. _cron.statistics.interval:                           |                                                     |                         |
+|                                 |                                                         |                                                     |                         |
 | cron.statistics.interval        | This defines the frequency of task execution using      | ``0 */5 * * * *``                                   | Any cron expressions    |
 |                                 | cron schedule expressions.                              |                                                     |                         |
 +---------------------------------+---------------------------------------------------------+-----------------------------------------------------+-------------------------+
+|                                 | .. _cron.statistics.index.name:                         |                                                     |                         |
+|                                 |                                                         |                                                     |                         |
 | cron.statistics.index.name      | This defines the name of the index in which the         | ``statistics``                                      | Any valid index pattern |
 |                                 | statistics documents will be saved.                     |                                                     |                         |
 +---------------------------------+---------------------------------------------------------+-----------------------------------------------------+-------------------------+
+|                                 | .. _cron.statistics.index.creation:                     |                                                     |                         |
+|                                 |                                                         |                                                     |                         |
 | cron.statistics.index.creation  | This property defines the interval in which a new       | ``w``                                               | h (hourly), d (daily),  |
 |                                 | index (as specified in the                              |                                                     | w (weekly), m (monthly) |
 |                                 | ``cron.statistics.index.name`` property) will be        |                                                     |                         |
 |                                 | created. More frequent index creation can quickly fill  |                                                     |                         |
 |                                 | up storage.                                             |                                                     |                         |
 +---------------------------------+---------------------------------------------------------+-----------------------------------------------------+-------------------------+
+|                                 | .. _cron.statistics.shards:                             |                                                     |                         |
+|                                 |                                                         |                                                     |                         |
 | cron.statistics.shards          | This property defines the number of shards to use for   | ``1``                                               | Any number starting     |
 |                                 | the statistics indices.                                 |                                                     | from 1                  |
 +---------------------------------+---------------------------------------------------------+-----------------------------------------------------+-------------------------+
+|                                 | .. _cron.statistics.index.replicas:                     |                                                     |                         |
+|                                 |                                                         |                                                     |                         |
 | cron.statistics.index.replicas  | This property is used to define the number of replicas  | ``0``                                               | Any number starting     |
 |                                 | to use for the statistics indices. On default, no       |                                                     | from 0                  |
 |                                 | replicas are created for the statistics indices.        |                                                     |                         |
